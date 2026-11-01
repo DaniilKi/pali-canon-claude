@@ -7,6 +7,12 @@ const ALLOWED = [
   { host: 'cdn.jsdelivr.net', prefixes: ['/gh/bcbsit/ati@'] },
   // Ānandajoti Bhikkhu's text-and-translation pages only (CC BY-SA); nothing else on the site is fetched.
   { host: 'ancient-buddhist-texts.net', prefixes: ['/Texts-and-Translations/'] },
+  // This project's own pinned data release assets (post-canonical books loaded on demand, src/postcanonical.mjs),
+  // and the hosts GitHub redirects their downloads to, narrowed to this repository's id (1441390002).
+  // Every download is checked against a SHA-256 pinned in the code before use.
+  { host: 'github.com', prefixes: ['/DaniilKi/pali-canon-claude/releases/download/'] },
+  { host: 'release-assets.githubusercontent.com', prefixes: ['/github-production-release-asset/1441390002/'] },
+  { host: 'objects.githubusercontent.com', prefixes: ['/github-production-release-asset-2e65be/1441390002/'] },
 ];
 /** Every host the server may contact (used by scripts/outage.mjs to simulate a total outage). */
 export const ALLOWED_HOSTS = ALLOWED.map((r) => r.host);
@@ -29,7 +35,7 @@ class HttpError extends Error {
 // Test hook: PALI_CANON_SIMULATE_OUTAGE=accesstoinsight.org,www.dhammatalks.org makes those hosts fail like an outage.
 const SIMULATED_OUTAGE = new Set(String(process.env.PALI_CANON_SIMULATE_OUTAGE || '').split(',').map((h) => h.trim()).filter(Boolean));
 
-async function fetchOnce(url, { json, timeout }) {
+async function fetchOnce(url, { json, timeout, binary = false, maxBytes = MAX_BYTES }) {
   let target = new URL(url);
   if (SIMULATED_OUTAGE.has(target.hostname)) throw new HttpError(`${target.hostname} unreachable (simulated outage)`, 503, true);
   const signal = AbortSignal.timeout(timeout);
@@ -37,7 +43,7 @@ async function fetchOnce(url, { json, timeout }) {
     if (!allowed(target)) throw new HttpError('Provider URL is outside the supported public sources.', 0, false);
     let response;
     try {
-      response = await fetch(target, { redirect: 'manual', signal, headers: { 'User-Agent': USER_AGENT, Accept: json ? 'application/json' : 'text/html,text/plain' } });
+      response = await fetch(target, { redirect: 'manual', signal, headers: { 'User-Agent': USER_AGENT, Accept: binary ? 'application/octet-stream' : json ? 'application/json' : 'text/html,text/plain' } });
     } catch (error) {
       throw new HttpError(`${target.hostname} unreachable (${error.cause?.code || error.name || 'network error'})`, 0, true);
     }
@@ -53,7 +59,7 @@ async function fetchOnce(url, { json, timeout }) {
       const retryable = response.status >= 500 || response.status === 429;
       throw new HttpError(`${target.hostname} returned HTTP ${response.status}`, response.status, retryable);
     }
-    if (Number(response.headers.get('content-length')) > MAX_BYTES) {
+    if (Number(response.headers.get('content-length')) > maxBytes) {
       await response.body?.cancel();
       throw new HttpError('Response too large.', response.status, false);
     }
@@ -65,10 +71,11 @@ async function fetchOnce(url, { json, timeout }) {
         const { done, value } = await reader.read();
         if (done) break;
         bytes += value.byteLength;
-        if (bytes > MAX_BYTES) throw new HttpError('Response exceeded the 6 MB limit.', 200, false);
+        if (bytes > maxBytes) throw new HttpError(`Response exceeded the ${Math.round(maxBytes / 1048576)} MB limit.`, 200, false);
         chunks.push(value);
       }
     } finally { reader.releaseLock(); }
+    if (binary) return Buffer.concat(chunks);
     const body = Buffer.concat(chunks).toString('utf8');
     if (!json) return body;
     try { return JSON.parse(body); } catch { throw new HttpError(`${target.hostname} returned invalid JSON.`, 200, true); }
@@ -81,6 +88,23 @@ export async function fetchPublic(url, { json = true, retries = 2, timeout = 200
   let last;
   for (let attempt = 0; attempt <= retries; attempt += 1) {
     try { return await fetchOnce(url, { json, timeout }); } catch (error) {
+      last = error;
+      if (!error.retryable || attempt === retries) break;
+      await wait(400 * 3 ** attempt);
+    }
+  }
+  throw last;
+}
+
+/**
+ * Download a binary file (a pinned data release asset) as a Buffer, through the same allowlist, redirect
+ * checks and retries. maxBytes is capped at 32 MB. Callers must verify a pinned checksum before use.
+ */
+export async function fetchBinary(url, { retries = 2, timeout = 60000, maxBytes = MAX_BYTES } = {}) {
+  const cap = Math.min(maxBytes, 32 * 1024 * 1024);
+  let last;
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try { return await fetchOnce(url, { json: false, binary: true, timeout, maxBytes: cap }); } catch (error) {
       last = error;
       if (!error.retryable || attempt === retries) break;
       await wait(400 * 3 ** attempt);
