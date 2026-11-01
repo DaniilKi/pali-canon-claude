@@ -1,0 +1,52 @@
+name: Docs site
+# Builds the documentation site from docs/, llms.txt and the citation index export, and deploys it to GitHub Pages.
+# scripts/build-site.mjs prepares the source (no dependencies); GitHub's own Jekyll renders it.
+# One-time setup by a maintainer (GITHUB_TOKEN cannot do it): Settings -> Pages -> Source: GitHub Actions.
+# Until then configure-pages fails. Site: https://daniilki.github.io/pali-canon-claude/
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'site/**'
+      - 'llms.txt'
+      - 'scripts/build-site.mjs'
+      - 'scripts/export-index.mjs'
+      - 'src/canon.mjs'
+      - 'src/citations.mjs'
+      - 'server/data/**'
+      - 'package.json'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Prepare the site source (docs, llms.txt, citation index export)
+        run: node scripts/build-site.mjs --out dist/site
+      - uses: actions/configure-pages@v5
+      - uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./dist/site
+          destination: ./_site
+      - uses: actions/upload-pages-artifact@v3
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

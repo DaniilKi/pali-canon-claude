@@ -57,6 +57,9 @@ The astronomical formulas follow Jean Meeus, *Astronomical Algorithms* (2nd ed.,
 ## Dictionary of Pāli Proper Names (DPPN)
 
 G. P. Malalasekera's DPPN (1937–38) is linked only. Its copyright or licence status is unconfirmed (see "DPPN licence research" in [docs/sources.md](docs/sources.md)), so no entries are bundled: `server/data/dppn.json` holds source details and an empty entry list. `lookup_name` links to the online editions ([revised edition by Ānandajoti Bhikkhu](https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm), palikanon.com) and lists texts of the bundled VRI canon where a name appears.
+## Citation index export
+
+`scripts/export-index.mjs` writes the citation index (`citation-index.json`, `citation-index.csv`) that is attached to each release and served on the documentation site ([docs/export.md](docs/export.md)). It holds IDs, Pāli titles, VRI paragraph numbers, PTS page references, translator names, licence labels and URLs, and no scripture or translation text. The VRI-derived parts carry VRI's non-commercial terms and attribution; each linked translation keeps its publisher's licence. A licence notice (`citation-index-LICENSE.md`) travels with the files.
 
 ## Runtime dependencies
 
