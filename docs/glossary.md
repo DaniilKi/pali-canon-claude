@@ -55,6 +55,14 @@ Terms used in this project, explained for newcomers. Pāli words are given with 
 | **Vassa** | The three-month rains retreat |
 | **Paritta** | Protective chants, such as the Maṅgala, Ratana and Karaṇīyamettā Suttas |
 | **Vesak** | The festival marking the Buddha's birth, awakening and passing |
+| **Poya** | Sri Lankan name for an uposatha day; the full-moon poya is a public holiday |
+| **Māgha Pūjā, Āsāḷha Pūjā** | Full-moon festivals of the Māgha and Āsāḷha months; tradition links them to the Ovāda-pāṭimokkha and the first discourse ([calendar](calendar.md)) |
+| **Pavāraṇā** | The "invitation" ceremony that ends the rains retreat |
+| **Kaṭhina** | Offering of cloth to monks in the month after the rains retreat |
+| **Adhikamāsa / adhikavāra** | In the Thai lunar calendar, a year with an extra month (a second Āsāḷha) / with an extra day |
+| **Watat** | In the Burmese calendar, a year with an extra month (a First Waso) |
+| **Pakkhagaṇanā** | The fortnight reckoning kept by the Thai Dhammayut order, whose uposatha day can differ from the civil calendar's by one day, earlier or later |
+| **Tithi** | A lunar day: the time for the moon to move 12° further from the sun; Sri Lankan poya days follow it |
 
 ## Technical terms
 

@@ -30,6 +30,7 @@ try {
   await client.connect(transport);
   const { tools } = await client.listTools();
   assert.ok(tools.length >= 11, `${tools.length} tools`); // core tools plus optional features (src/features)
+  assert.ok(tools.length >= 11); // core tools; optional features (src/features) add more
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint));
   assert.ok((await client.listResources()).resources.length >= 2);
   assert.ok((await client.listPrompts()).prompts.length >= 3);
@@ -56,6 +57,8 @@ try {
   const dhp5 = await call('get_text', { uid: 'Dhp 5' });
   const quote = dhp5.segments.find((s) => s.type !== 'heading').text.normalize('NFD').replace(/\p{M}/gu, '');
   await call('verify_quote', { text: quote }, (d) => { assert.equal(d.verdict, 'found'); assert.ok(d.matches.some((m) => m.text_id === 'dhp5')); });
+  await call('uposatha', { from: '2025-07-01', to: '2025-07-31', tradition: 'thai-mahanikaya' }, (d) => assert.ok(d.days.some((x) => x.date === '2025-07-10' && x.phase === 'full' && x.status === 'computed')));
+  await call('festivals', { year: 2025, tradition: 'sri-lanka' }, (d) => assert.equal(d.festivals.find((f) => f.id === 'asalha-puja').texts[0].id, 'sn56.11'));
   await fails('get_text', { uid: '../private' });
   await fails('resolve_reference', { reference: 'MN 153' }, /not in the canon index/);
   await fails('resolve_reference', { reference: 'Ja i 1' }, /no PTS page numbers/);

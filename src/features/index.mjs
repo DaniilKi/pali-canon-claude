@@ -4,3 +4,4 @@
 // export * as calendar from '../calendar.mjs';
 export * as verify from '../verify.mjs';
 export * as findCitations from '../find-citations.mjs';
+export * as calendar from '../calendar.mjs';
