@@ -1,6 +1,6 @@
 # Install in Gemini CLI or Antigravity CLI
 
-Pali Canon works as an **extension** for Google's Gemini CLI. An extension is an add-on package: one command installs the Pali Canon tools, a short set of citation rules for Gemini, and three study commands.
+Pali Canon works as an **extension** for Google's Gemini CLI. An extension is an add-on package: one command installs the Pali Canon tools, a short set of citation rules for Gemini, and four study commands.
 
 Google is moving many users from Gemini CLI to its newer **Antigravity CLI** (the `agy` command). Which one you have depends on your Google account. Both are covered below.
 
@@ -23,12 +23,13 @@ No account or key is needed for Pali Canon itself.
 
    Gemini shows what the extension contains and asks you to confirm. To pin one version, add `--ref v2.0.0`. To get updates automatically, add `--auto-update`.
 2. Start Gemini with `gemini` and type `/mcp`. You should see the `pali-canon` server with its tools, such as `resolve_reference` and `get_text`.
-3. Try the three study commands:
+3. Try the four study commands:
 
    ```text
    /study MN 10
    /compare AN 3.65
    /pali-word anicca in SN 22.59
+   /method Kv 1
    ```
 
    If another extension already has a command with the same name, Gemini renames ours with the extension's name in front, for example `/pali-canon.study`.
@@ -71,7 +72,7 @@ If you do not have Gemini CLI, add the server by hand instead (next section).
    On macOS or Linux the path looks like `/Users/you/pali-canon-claude/server/index.cjs`. Use forward slashes on Windows too.
 3. For the same citation rules Gemini gets from the extension, copy [GEMINI.md](../../GEMINI.md) into your project or into `~/.gemini/GEMINI.md`.
 
-The manual setup gives you the tools but not the `/study`, `/compare` and `/pali-word` commands. You can ask for the same things in plain words.
+The manual setup gives you the tools but not the `/study`, `/compare`, `/pali-word` and `/method` commands. You can ask for the same things in plain words.
 
 ## What the extension contains
 
@@ -79,7 +80,7 @@ The manual setup gives you the tools but not the `/study`, `/compare` and `/pali
 |---|---|
 | [`gemini-extension.json`](../../gemini-extension.json) | Names the extension and tells Gemini how to start the Pali Canon server. |
 | [`GEMINI.md`](../../GEMINI.md) | Citation rules Gemini reads at the start of every session: quote only retrieved text, cite precisely, name translators, report numbering differences. |
-| [`commands/`](../../commands) | The `/study`, `/compare` and `/pali-word` commands. They follow the same steps as the Claude Code skills in [`skills/`](../../skills). |
+| [`commands/`](../../commands) | The `/study`, `/compare`, `/pali-word` and `/method` commands. They follow the same steps as the Claude Code skills in [`skills/`](../../skills). |
 
 The texts keep their own licences: VRI, dhammatalks.org, Access to Insight and the Digital Pāḷi Dictionary are for non-commercial use. See [THIRD_PARTY.md](../../THIRD_PARTY.md).
 

@@ -22,7 +22,7 @@ Give AI assistants the complete Theravāda scripture (the Pāli Tipiṭaka) so t
 
 - 8,544 citable texts across 61 VRI books; 1,259 grouped members; 266 approximate; 11,964 PTS page markers; about 2.8 million words.
 - 2,295 English links (1,242 dhammatalks.org, 1,053 Access to Insight), covering 1,350 texts directly and 1,773 including inherited verse links. No English for Vinaya or Abhidhamma.
-- 11 MCP tools, 2 resources, 3 prompts; 3 skills (`study`, `compare`, `pali-word`).
+- 11 MCP tools, 2 resources, 3 prompts; 4 skills (`study`, `compare`, `pali-word`, `method`).
 - Packaged as a Claude Code plugin (`.claude-plugin/`, `.mcp.json`), a Claude Desktop extension (`manifest.json` → `.mcpb`), a Codex plugin (`.codex-plugin/`, `.mcp.codex.json`, `skills/*/agents/openai.yaml`, `.agents/plugins/marketplace.json`) and a Gemini CLI extension (`gemini-extension.json`, `GEMINI.md`, `commands/`). Codex and Gemini have not yet been tested by hand in the real apps.
 - npm package name: **`pali-canon-mcp`** (bin `pali-canon-mcp`, `mcpName` `io.github.DaniilKi/pali-canon`, no runtime dependencies). **Not published yet**: it needs the `NPM_TOKEN` secret. Until then, docs give `node /path/to/server/index.cjs` as the fallback for every `npx -y pali-canon-mcp` example. The GitHub repository keeps its name.
 - Hosted HTTP endpoint and Docker image (`Dockerfile`, `fly.toml`, `render.yaml`) are built but **not deployed**: there is no hosting account or `FLY_API_TOKEN` yet. MCP Registry entry: `server.json` (stdio package only, no remote until the endpoint is live).
