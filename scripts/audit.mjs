@@ -1,5 +1,6 @@
 // Exhaustive offline audit of the bundled canon: every text, every citation form, every PTS start page, every translation link.
 import * as canon from '../src/canon.mjs';
+import { textSegments, SIGLA } from '../src/variants.mjs';
 
 const d = canon.load();
 const failures = [];
@@ -24,6 +25,19 @@ for (const u of d.canon.units) {
   const segs = canon.segments(u);
   if (!segs.some((s) => s.type !== 'heading' && s.text)) fail('text', `${u.id} has no body text`);
   else count('text');
+  // 3b. Structured variants (#28): same text as plain mode; every reading and remark is verbatim from its note; known sigla only.
+  {
+    const { segments: vs } = textSegments(u, { variants: 'structured' });
+    if (vs.length !== segs.length || vs.some((s, i) => s.text !== segs[i].text)) fail('variants', `${u.id} structured text differs from plain text`);
+    for (const s of vs) for (const v of s.variants || []) {
+      for (const r of v.readings) {
+        if (!v.raw.includes(r.reading)) fail('variants', `${s.ref}: reading "${r.reading}" not in note`);
+        for (const e of r.editions) if (!SIGLA[e.siglum]) fail('variants', `${s.ref}: unknown siglum ${e.siglum}`);
+        count('variant-reading');
+      }
+      for (const x of v.remarks) if (!v.raw.includes(x)) fail('variants', `${s.ref}: remark "${x}" not in note`);
+    }
+  }
   // 4. Range members resolve inside the range.
   for (const m of u.members || []) {
     try {
