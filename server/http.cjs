@@ -29369,6 +29369,34 @@ function register12({ prompt }) {
 }
 
 // src/server.mjs
+var TOOL_TITLES = {
+  resolve_reference: "Resolve citation",
+  get_metadata: "Text details",
+  get_text: "Read P\u0101li text",
+  get_translation: "Read English translation",
+  compare_translations: "Compare translations",
+  search_texts: "Search the Tipi\u1E6Daka",
+  browse_canon: "Browse the canon",
+  lookup_pali: "P\u0101li dictionary lookup",
+  search_access_to_insight: "Search Access to Insight",
+  get_access_to_insight_text: "Read Access to Insight page",
+  list_sources: "List sources and licences",
+  abhidhamma_matika: "Abhidhamma m\u0101tik\u0101",
+  patthana_condition: "Pa\u1E6D\u1E6Dh\u0101na condition",
+  uposatha: "Uposatha days",
+  festivals: "Festival dates",
+  daily_text: "Text of the day",
+  reading_plan: "Reading plans",
+  lookup_name: "Proper name lookup",
+  find_citations: "Find citations in text",
+  paritta: "Paritta chants",
+  find_talks: "Find Dhamma talks",
+  topic: "Texts on a topic",
+  list_topics: "Browse topics",
+  dhamma_list: "Numbered teaching lists",
+  verify_quote: "Verify a quotation",
+  vinaya_rule: "P\u0101timokkha rule"
+};
 var VERSION = "2.0.0";
 function createServer2() {
   const server = new McpServer({ name: "pali-canon", version: VERSION }, {
@@ -29383,7 +29411,8 @@ function createServer2() {
   const annotations = { readOnlyHint: true, destructiveHint: false, idempotentHint: true };
   const citation = external_exports.string().min(1).max(300).describe("Any citation: MN 10, SN 56.11, SN 56:11, AN 3.65, Dhp 183, Dhp 1-20, Snp 1.8 (or Sn 1.8), Ud 1.10, Iti 27, Thag 1.1, Ja 1, Pj 1, Bi Pc 5, Kd 1, Mv 1, Pvr 1.1, Kv 1.1, a PTS page such as M i 55, or a suttacentral.net / accesstoinsight.org / dhammatalks.org link.");
   function tool(name, description, inputSchema, fn, { network = false } = {}) {
-    server.registerTool(name, { description, inputSchema, annotations: { ...annotations, openWorldHint: network } }, async (args) => {
+    const title = TOOL_TITLES[name];
+    server.registerTool(name, { title, description, inputSchema, annotations: { ...annotations, ...title ? { title } : {}, openWorldHint: network } }, async (args) => {
       try {
         const result = await fn(args);
         return { content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result };
