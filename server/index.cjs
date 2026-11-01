@@ -22182,8 +22182,8 @@ function buildSearch() {
 }
 function terms(query) {
   const phrases = [...query.matchAll(/"([^"]+)"/g)].map((m) => fold2(m[1]).trim()).filter(Boolean);
-  const words = fold2(query.replace(/"[^"]+"/g, " ")).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
-  return [...phrases, ...words];
+  const words2 = fold2(query.replace(/"[^"]+"/g, " ")).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
+  return [...phrases, ...words2];
 }
 function search(query, { collection, limit = 10, offset = 0 } = {}) {
   const d = load();
@@ -22857,11 +22857,13 @@ __export(features_exports, {
 // src/dppn.mjs
 var dppn_exports = {};
 __export(dppn_exports, {
+  MIN_STEM: () => MIN_STEM,
   appearsIn: () => appearsIn,
   loadDppn: () => loadDppn,
   lookupName: () => lookupName,
   matchEntries: () => matchEntries,
   nameStem: () => nameStem,
+  nameStems: () => nameStems,
   register: () => register
 });
 var import_node_fs2 = require("node:fs");
@@ -22885,14 +22887,41 @@ function loadDppn() {
   return cached2;
 }
 var key = (value) => fold2(value).replace(/[^a-z0-9]+/g, "");
+var words = (value) => fold2(value).split(/[^a-z0-9]+/).filter(Boolean);
+var MIN_STEM = 5;
+function wordStem(word) {
+  return word.length > MIN_STEM ? word.replace(/[aiu]$/, "") : word;
+}
+function nameStems(name) {
+  return words(name).map(wordStem);
+}
 function nameStem(name) {
-  const k = key(name);
-  return k.length >= 5 ? k.replace(/[aiu]$/, "") : k;
+  return nameStems(name).join(" ");
+}
+var ENDINGS = {
+  a: ["a", "am", "o", "e", "ena", "assa", "aya", "ato", "asma", "amha", "asmim", "amhi", "ehi", "ebhi", "anam", "ani", "esu", "esam"],
+  i: ["i", "im", "ina", "ino", "inam", "issa", "ismim", "ihi", "isu", "iyo", "iya", "iyam", "iyo"],
+  u: ["u", "um", "una", "uno", "ussa", "usmim", "uhi", "unam", "usu", "avo"]
+};
+var escape2 = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+function matchers(name, exactWord) {
+  return words(name).map((word) => {
+    if (!exactWord) {
+      const stem = wordStem(word);
+      return { stem, test: (text) => text.includes(stem) };
+    }
+    const vowel = word.length > 2 && /[aiu]$/.test(word) ? word.slice(-1) : null;
+    const base = vowel ? word.slice(0, -1) : word;
+    const endings = vowel ? ENDINGS[vowel] : [""];
+    const re = new RegExp(`(?:^|[^a-z0-9])${escape2(base)}(?:${endings.join("|")})(?![a-z0-9])`);
+    return { stem: base, test: (text) => re.test(text) };
+  });
 }
 function validateName(name) {
   const value = String(name ?? "").trim();
   if (!value || value.length > 100) throw new Error("Give one proper name (1\u2013100 characters), for example S\u0101riputta, An\u0101thapi\u1E47\u1E0Dika or S\u0101vatth\u012B.");
   if (key(value).length < 2) throw new Error("The name needs at least two letters.");
+  if (words(value).length > 4) throw new Error("Give one proper name of at most four words, for example Aj\u0101tasattu Vedehiputta.");
   return value;
 }
 function matchEntries(entries, name, limit = 5) {
@@ -22921,21 +22950,73 @@ function describeEntry(entry) {
     references
   };
 }
-function appearsIn(name, limit = 10) {
-  const stem = nameStem(name);
-  if (stem.length < 2) return null;
-  const found = search(stem, { limit });
+var HEADINGS = /* @__PURE__ */ new Set(["nikaya", "book", "chapter", "title", "subhead", "subsubhead", "centre", "hangnum"]);
+var OPENING_PARAGRAPHS = 2;
+var WHY = [
+  "The name is in the title.",
+  "The name is in the opening paragraphs (the nid\u0101na or first lines).",
+  "The name is in the body of the text."
+];
+function searchIndex() {
+  const d = load();
+  if (!d.search) search("evam", { limit: 1 });
+  return { d, s: d.search };
+}
+function appearsIn(name, limit = 10, { exactWord } = {}) {
+  const ws = words(name);
+  if (!ws.length || key(name).length < 2) return null;
+  const shortName = ws.length === 1 && ws[0].length <= MIN_STEM;
+  const whole = exactWord ?? shortName;
+  const ms = matchers(name, whole);
+  const matches = (text) => ms.every((m) => m.test(text));
+  const { d, s } = searchIndex();
+  const hits = /* @__PURE__ */ new Map();
+  for (let bi = 0; bi < s.folded.length; bi += 1) {
+    const blocks = s.folded[bi];
+    const raw = d.canon.books[bi].blocks;
+    for (let k = 0; k < blocks.length; k += 1) {
+      if (!matches(blocks[k])) continue;
+      const u = s.owner[bi][k];
+      if (!u) continue;
+      let hit = hits.get(u.id);
+      if (!hit) {
+        hit = { u, order: hits.size, paragraphs: 0, first: raw[k][1] || void 0, opening: false };
+        hits.set(u.id, hit);
+      }
+      hit.paragraphs += 1;
+      if (!hit.opening && !HEADINGS.has(raw[k][0])) {
+        let n = 0;
+        for (let i = u.start; i <= k; i += 1) if (!HEADINGS.has(raw[i][0])) n += 1;
+        if (n <= OPENING_PARAGRAPHS) hit.opening = true;
+      }
+    }
+  }
+  const titleMatches = s.titles.filter(({ u }) => matches(fold2([u.title, ...(d.translations[u.id] || []).map((t) => t.reference)].filter(Boolean).join(" ")))).map(({ u }) => u);
+  for (const u of titleMatches) if (!hits.has(u.id)) hits.set(u.id, { u, order: hits.size, paragraphs: 0, opening: false });
+  const inTitle = new Set(titleMatches.map((u) => u.id));
+  const tier = (h) => inTitle.has(h.u.id) ? 0 : h.opening ? 1 : 2;
+  const ranked = [...hits.values()].map((h) => ({ ...h, tier: tier(h) })).sort((a, b) => a.tier - b.tier || b.paragraphs - a.paragraphs || a.order - b.order);
   return {
-    searched: "P\u0101li text of the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition, for the name's stem (inflected forms included).",
-    stem,
-    caution: "A word search, not a dictionary: it can include other people or places with the same name and miss irregular forms.",
-    title_matches: found.title_matches.slice(0, limit).map(({ id, citation, title }) => ({ text_id: id, citation, title })),
-    texts: found.results.map(({ id, citation, title, match_vri_paragraph }) => ({ text_id: id, citation, title, vri_paragraph: match_vri_paragraph })),
-    total_texts_matched: found.total_texts_matched,
+    searched: "P\u0101li text of the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition, for every word of the name in the same paragraph.",
+    stems: ms.map((m) => m.stem),
+    match: whole ? "whole word with a case ending" : "stem (inflected forms and compounds included)",
+    ...shortName && exactWord === void 0 ? { note: `One-word names of ${MIN_STEM} letters or fewer are matched as whole words; pass exactWord: false to match inside longer words.` } : {},
+    order: "Ranked: name in the title first, then in the opening paragraphs (nid\u0101na), then elsewhere; within each group, texts naming it in more paragraphs first.",
+    caution: "A word search, not a dictionary: it can include other people or places with the same name, or ordinary words spelt the same (\u0101nanda also means joy), and miss irregular forms.",
+    title_matches: titleMatches.slice(0, limit).map((u) => ({ text_id: u.id, citation: u.acronym, title: u.title })),
+    texts: ranked.slice(0, limit).map((h) => ({
+      text_id: h.u.id,
+      citation: h.u.acronym,
+      title: h.u.title,
+      why: WHY[h.tier],
+      ...h.paragraphs ? { paragraphs_naming_it: h.paragraphs } : {},
+      ...h.first ? { vri_paragraph: h.first } : {}
+    })),
+    total_texts_matched: hits.size,
     attribution: source().attribution
   };
 }
-function lookupName({ name, limit = 5, textLimit = 10 }, data2 = loadDppn()) {
+function lookupName({ name, limit = 5, textLimit = 10, exactWord }, data2 = loadDppn()) {
   const value = validateName(name);
   const { source: source2, entries = [] } = data2;
   const dictionary = {
@@ -22954,14 +23035,15 @@ function lookupName({ name, limit = 5, textLimit = 10 }, data2 = loadDppn()) {
     result.note = `No entry for "${value}" in the ${source2.name}. Check the spelling (diacritics are optional) or try another form of the name.`;
   }
   if (source2.read_online?.length) result.read_online = source2.read_online;
-  result.appears_in = appearsIn(value, textLimit);
+  result.appears_in = appearsIn(value, textLimit, { exactWord });
   return result;
 }
 function register({ tool, z }) {
   tool("lookup_name", "Who or what is a name in the P\u0101li Canon (a person such as S\u0101riputta or An\u0101thapi\u1E47\u1E0Dika, a place such as S\u0101vatth\u012B)? Returns the Dictionary of P\u0101li Proper Names entry when bundled (with attribution and licence), links to the online editions, and the texts of the bundled canon where the name appears. Works offline.", {
     name: z.string().min(1).max(100).describe("A proper name in P\u0101li, diacritics optional: S\u0101riputta, Anathapindika, Savatthi."),
     limit: z.number().int().min(1).max(20).default(5).describe("Maximum dictionary entries."),
-    textLimit: z.number().int().min(1).max(50).default(10).describe("Maximum canon texts listed where the name appears.")
+    textLimit: z.number().int().min(1).max(50).default(10).describe("Maximum canon texts listed where the name appears."),
+    exactWord: z.boolean().optional().describe("Match each word of the name as a whole word with a case ending. Default: only for one-word names of 5 letters or fewer. Use it to stop \u0100nanda matching inside compounds such as \u0101nandaj\u0101ta.")
   }, (args) => lookupName(args));
 }
 

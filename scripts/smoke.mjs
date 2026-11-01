@@ -1,6 +1,7 @@
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import assert from 'node:assert/strict';
+import { expectedToolNames } from './expected-tools.mjs';
 
 const live = process.argv.includes('--live');
 const serverFlag = process.argv.indexOf('--server');
@@ -29,7 +30,7 @@ async function fails(name, args, pattern) {
 try {
   await client.connect(transport);
   const { tools } = await client.listTools();
-  assert.ok(tools.length >= 11);
+  assert.deepEqual(tools.map((tool) => tool.name).sort(), expectedToolNames());
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint));
   assert.equal((await client.listResources()).resources.length, 2);
   assert.equal((await client.listPrompts()).prompts.length, 3);

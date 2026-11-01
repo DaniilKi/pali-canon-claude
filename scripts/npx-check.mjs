@@ -3,13 +3,14 @@
 // from any directory. Usage: node scripts/npx-check.mjs <command> [args...]
 // Example: node scripts/npx-check.mjs npx --offline --no pali-canon-mcp
 import { spawn } from 'node:child_process';
+import { expectedToolNames } from './expected-tools.mjs';
 
 const [command, ...args] = process.argv.slice(2);
 if (!command) {
   console.error('Usage: node scripts/npx-check.mjs <command> [args...]');
   process.exit(2);
 }
-const EXPECTED_TOOLS = 11;
+const EXPECTED_TOOLS = expectedToolNames();
 const TIMEOUT_MS = 120000;
 
 // npx and .bin shims are .cmd files on Windows, which need a shell to start.
@@ -60,7 +61,8 @@ child.stdin.write(`${JSON.stringify({ jsonrpc: '2.0', method: 'notifications/ini
 const list = await request('tools/list', {});
 if (list.error) fail(`tools/list: ${JSON.stringify(list.error)}`);
 const tools = list.result?.tools ?? [];
-if (tools.length < EXPECTED_TOOLS) fail(`expected at least ${EXPECTED_TOOLS} tools, got ${tools.length}`);
+const names = tools.map((tool) => tool.name).sort().join(', ');
+if (names !== EXPECTED_TOOLS.join(', ')) fail(`expected tools ${EXPECTED_TOOLS.join(', ')}; got ${names}`);
 if (!tools.every((tool) => tool.annotations?.readOnlyHint)) fail('every tool must be annotated read-only');
 console.log(`PASS tools/list: ${tools.length} tools`);
 

@@ -32,20 +32,58 @@ export function loadDppn() {
 }
 
 const key = (value) => canon.fold(value).replace(/[^a-z0-9]+/g, '');
+/** The name's words, folded (diacritics dropped), e.g. 'Ajātasattu Vedehiputta' → ['ajatasattu', 'vedehiputta']. */
+const words = (value) => canon.fold(value).split(/[^a-z0-9]+/).filter(Boolean);
+
+/** One-word names of this many letters or fewer are matched as whole words (Uda, Nanda would otherwise match inside ānanda, udaka). */
+export const MIN_STEM = 5;
 
 /**
- * Stem used to find the name in the Pāli text: drop a final vowel so inflected forms match
- * (Sāriputta → sariputt matches Sāriputto, Sāriputtassa). Short names are kept whole.
+ * Stem of one word, used to find it in the Pāli text: drop a final vowel so inflected forms match
+ * (Sāriputta → sariputt matches Sāriputto, Sāriputtassa). Short words are kept whole.
  */
+function wordStem(word) {
+  return word.length > MIN_STEM ? word.replace(/[aiu]$/, '') : word;
+}
+
+/** Stems of every word of the name, each searched separately (all must occur in the same paragraph). */
+export function nameStems(name) {
+  return words(name).map(wordStem);
+}
+
+/** The stems as one label, separated by spaces. */
 export function nameStem(name) {
-  const k = key(name);
-  return k.length >= 5 ? k.replace(/[aiu]$/, '') : k;
+  return nameStems(name).join(' ');
+}
+
+// Case endings accepted after a word's base in whole-word mode, by the word's final vowel (folded: long vowels become short).
+const ENDINGS = {
+  a: ['a', 'am', 'o', 'e', 'ena', 'assa', 'aya', 'ato', 'asma', 'amha', 'asmim', 'amhi', 'ehi', 'ebhi', 'anam', 'ani', 'esu', 'esam'],
+  i: ['i', 'im', 'ina', 'ino', 'inam', 'issa', 'ismim', 'ihi', 'isu', 'iyo', 'iya', 'iyam', 'iyo'],
+  u: ['u', 'um', 'una', 'uno', 'ussa', 'usmim', 'uhi', 'unam', 'usu', 'avo'],
+};
+const escape = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/** One matcher per word: the stem as a substring, or (whole-word mode) the word's base plus a case ending. */
+function matchers(name, exactWord) {
+  return words(name).map((word) => {
+    if (!exactWord) {
+      const stem = wordStem(word);
+      return { stem, test: (text) => text.includes(stem) };
+    }
+    const vowel = word.length > 2 && /[aiu]$/.test(word) ? word.slice(-1) : null;
+    const base = vowel ? word.slice(0, -1) : word;
+    const endings = vowel ? ENDINGS[vowel] : [''];
+    const re = new RegExp(`(?:^|[^a-z0-9])${escape(base)}(?:${endings.join('|')})(?![a-z0-9])`);
+    return { stem: base, test: (text) => re.test(text) };
+  });
 }
 
 function validateName(name) {
   const value = String(name ?? '').trim();
   if (!value || value.length > 100) throw new Error('Give one proper name (1–100 characters), for example Sāriputta, Anāthapiṇḍika or Sāvatthī.');
   if (key(value).length < 2) throw new Error('The name needs at least two letters.');
+  if (words(value).length > 4) throw new Error('Give one proper name of at most four words, for example Ajātasattu Vedehiputta.');
   return value;
 }
 
@@ -74,24 +112,84 @@ function describeEntry(entry) {
   };
 }
 
-/** Texts in the bundled VRI canon whose Pāli contains the name's stem. */
-export function appearsIn(name, limit = 10) {
-  const stem = nameStem(name);
-  if (stem.length < 2) return null;
-  const found = canon.search(stem, { limit });
+const HEADINGS = new Set(['nikaya', 'book', 'chapter', 'title', 'subhead', 'subsubhead', 'centre', 'hangnum']);
+const OPENING_PARAGRAPHS = 2;
+const WHY = [
+  'The name is in the title.',
+  'The name is in the opening paragraphs (the nidāna or first lines).',
+  'The name is in the body of the text.',
+];
+
+/** The canon's search index (owner text and folded Pāli per paragraph), built once by canon.search. */
+function searchIndex() {
+  const d = canon.load();
+  if (!d.search) canon.search('evam', { limit: 1 });
+  return { d, s: d.search };
+}
+
+/**
+ * Texts in the bundled VRI canon whose Pāli contains every word of the name in one paragraph, ranked:
+ * name in the title first, then in the opening paragraphs (nidāna), then elsewhere; within each group,
+ * texts that name it in more paragraphs first, then canon order.
+ * A one-word name of MIN_STEM letters or fewer is matched as a whole word (with case
+ * endings) unless `exactWord` is false; `exactWord: true` forces whole-word matching for every word.
+ */
+export function appearsIn(name, limit = 10, { exactWord } = {}) {
+  const ws = words(name);
+  if (!ws.length || key(name).length < 2) return null;
+  const shortName = ws.length === 1 && ws[0].length <= MIN_STEM;
+  const whole = exactWord ?? shortName;
+  const ms = matchers(name, whole);
+  const matches = (text) => ms.every((m) => m.test(text));
+  const { d, s } = searchIndex();
+  const hits = new Map();
+  for (let bi = 0; bi < s.folded.length; bi += 1) {
+    const blocks = s.folded[bi];
+    const raw = d.canon.books[bi].blocks;
+    for (let k = 0; k < blocks.length; k += 1) {
+      if (!matches(blocks[k])) continue;
+      const u = s.owner[bi][k];
+      if (!u) continue;
+      let hit = hits.get(u.id);
+      if (!hit) {
+        hit = { u, order: hits.size, paragraphs: 0, first: raw[k][1] || undefined, opening: false };
+        hits.set(u.id, hit);
+      }
+      hit.paragraphs += 1;
+      if (!hit.opening && !HEADINGS.has(raw[k][0])) {
+        let n = 0;
+        for (let i = u.start; i <= k; i += 1) if (!HEADINGS.has(raw[i][0])) n += 1;
+        if (n <= OPENING_PARAGRAPHS) hit.opening = true;
+      }
+    }
+  }
+  // Titles: the Pāli title and English translation titles, not the citation (Ud 1.1 is not the name Uda).
+  const titleMatches = s.titles.filter(({ u }) => matches(canon.fold([u.title, ...(d.translations[u.id] || []).map((t) => t.reference)].filter(Boolean).join(' '))))
+    .map(({ u }) => u);
+  for (const u of titleMatches) if (!hits.has(u.id)) hits.set(u.id, { u, order: hits.size, paragraphs: 0, opening: false });
+  const inTitle = new Set(titleMatches.map((u) => u.id));
+  const tier = (h) => (inTitle.has(h.u.id) ? 0 : h.opening ? 1 : 2);
+  const ranked = [...hits.values()].map((h) => ({ ...h, tier: tier(h) }))
+    .sort((a, b) => a.tier - b.tier || b.paragraphs - a.paragraphs || a.order - b.order);
   return {
-    searched: 'Pāli text of the VRI Chaṭṭha Saṅgāyana edition, for the name\'s stem (inflected forms included).',
-    stem,
-    caution: 'A word search, not a dictionary: it can include other people or places with the same name and miss irregular forms.',
-    title_matches: found.title_matches.slice(0, limit).map(({ id, citation, title }) => ({ text_id: id, citation, title })),
-    texts: found.results.map(({ id, citation, title, match_vri_paragraph }) => ({ text_id: id, citation, title, vri_paragraph: match_vri_paragraph })),
-    total_texts_matched: found.total_texts_matched,
+    searched: 'Pāli text of the VRI Chaṭṭha Saṅgāyana edition, for every word of the name in the same paragraph.',
+    stems: ms.map((m) => m.stem),
+    match: whole ? 'whole word with a case ending' : 'stem (inflected forms and compounds included)',
+    ...(shortName && exactWord === undefined ? { note: `One-word names of ${MIN_STEM} letters or fewer are matched as whole words; pass exactWord: false to match inside longer words.` } : {}),
+    order: 'Ranked: name in the title first, then in the opening paragraphs (nidāna), then elsewhere; within each group, texts naming it in more paragraphs first.',
+    caution: 'A word search, not a dictionary: it can include other people or places with the same name, or ordinary words spelt the same (ānanda also means joy), and miss irregular forms.',
+    title_matches: titleMatches.slice(0, limit).map((u) => ({ text_id: u.id, citation: u.acronym, title: u.title })),
+    texts: ranked.slice(0, limit).map((h) => ({
+      text_id: h.u.id, citation: h.u.acronym, title: h.u.title, why: WHY[h.tier],
+      ...(h.paragraphs ? { paragraphs_naming_it: h.paragraphs } : {}), ...(h.first ? { vri_paragraph: h.first } : {}),
+    })),
+    total_texts_matched: hits.size,
     attribution: canon.source().attribution,
   };
 }
 
 /** Look up a proper name. `data` defaults to the bundled dppn.json (tests pass a fixture). */
-export function lookupName({ name, limit = 5, textLimit = 10 }, data = loadDppn()) {
+export function lookupName({ name, limit = 5, textLimit = 10, exactWord }, data = loadDppn()) {
   const value = validateName(name);
   const { source, entries = [] } = data;
   const dictionary = {
@@ -107,7 +205,7 @@ export function lookupName({ name, limit = 5, textLimit = 10 }, data = loadDppn(
     result.note = `No entry for "${value}" in the ${source.name}. Check the spelling (diacritics are optional) or try another form of the name.`;
   }
   if (source.read_online?.length) result.read_online = source.read_online;
-  result.appears_in = appearsIn(value, textLimit);
+  result.appears_in = appearsIn(value, textLimit, { exactWord });
   return result;
 }
 
@@ -116,5 +214,6 @@ export function register({ tool, z }) {
     name: z.string().min(1).max(100).describe('A proper name in Pāli, diacritics optional: Sāriputta, Anathapindika, Savatthi.'),
     limit: z.number().int().min(1).max(20).default(5).describe('Maximum dictionary entries.'),
     textLimit: z.number().int().min(1).max(50).default(10).describe('Maximum canon texts listed where the name appears.'),
+    exactWord: z.boolean().optional().describe('Match each word of the name as a whole word with a case ending. Default: only for one-word names of 5 letters or fewer. Use it to stop Ānanda matching inside compounds such as ānandajāta.'),
   }, (args) => lookupName(args));
 }
