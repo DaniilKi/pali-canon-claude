@@ -13,3 +13,4 @@ export * as abhidhamma from '../abhidhamma.mjs';
 export * as pronunciation from '../pronunciation.mjs';
 export * as paritta from '../paritta.mjs';
 export * as talks from '../talks.mjs';
+export * as memorise from '../memorise.mjs';

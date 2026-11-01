@@ -81,6 +81,7 @@ The manual setup gives you the tools but not the `/study`, `/compare`, `/pali-wo
 | [`gemini-extension.json`](../../gemini-extension.json) | Names the extension and tells Gemini how to start the Pali Canon server. |
 | [`GEMINI.md`](../../GEMINI.md) | Citation rules Gemini reads at the start of every session: quote only retrieved text, cite precisely, name translators, report numbering differences. |
 | [`commands/`](../../commands) | The `/study`, `/compare`, `/pali-word` and `/method` commands. They follow the same steps as the Claude Code skills in [`skills/`](../../skills). |
+| [`commands/`](../../commands) | The `/study`, `/compare`, `/pali-word` and `/memorise` commands. They follow the same steps as the Claude Code skills in [`skills/`](../../skills). |
 
 The texts keep their own licences: VRI, dhammatalks.org, Access to Insight and the Digital Pāḷi Dictionary are for non-commercial use. See [THIRD_PARTY.md](../../THIRD_PARTY.md).
 

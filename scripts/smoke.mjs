@@ -42,9 +42,13 @@ try {
   const { resources } = await client.listResources();
   for (const uri of ['pali://sources', 'pali://canon-guide', 'pali://pronunciation']) assert.ok(resources.some((r) => r.uri === uri), uri);
   assert.equal((await client.listPrompts()).prompts.length, 3);
+  assert.equal((await client.listResources()).resources.length, 2);
+  const { prompts } = await client.listPrompts();
+  assert.ok(prompts.length >= 4 && prompts.some((p) => p.name === 'memorise_passage'));
   await client.readResource({ uri: 'pali://canon-guide' });
   assert.match((await client.readResource({ uri: 'pali://pronunciation' })).contents[0].text, /Niggahīta/);
   await client.getPrompt({ name: 'study_passage', arguments: { reference: 'MN 10' } });
+  assert.match((await client.getPrompt({ name: 'memorise_passage', arguments: { reference: 'Dhp 1' } })).messages[0].content.text, /Dhp 1[\s\S]*get_text/);
 
   // Offline: resolution, text, search, browse.
   await call('resolve_reference', { reference: 'SN 56:11' }, (d) => { assert.equal(d.id, 'sn56.11'); assert.match(d.pts, /^S v 420/); });

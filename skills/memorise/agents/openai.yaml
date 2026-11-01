@@ -1,0 +1,12 @@
+interface:
+  display_name: "Memorise a passage"
+  short_description: "Learn Pali verses by heart from the retrieved text, with cloze and spaced review"
+  brand_color: "#C77018"
+  default_prompt: "Use $memorise to help me learn Dhp 1 by heart with cloze practice and a review schedule."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "pali-canon"
+      description: "Pali Canon MCP server (read-only): Tipitaka texts, citations, translations and Pali dictionary"
+      transport: "stdio"
+      command: "node"
