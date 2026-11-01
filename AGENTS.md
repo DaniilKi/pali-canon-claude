@@ -143,6 +143,7 @@ Human documentation is for **non-technical readers first**: plain English, short
 | [docs/glossary.md](docs/glossary.md) | Terms |
 | [docs/development.md](docs/development.md) | Build, test, tools, clients, release, troubleshooting |
 | [docs/hosting.md](docs/hosting.md) | Hosted /mcp endpoint: Docker, Fly.io, Render, privacy, load test |
+| [docs/install/codex.md](docs/install/codex.md) | Installing in Codex (plugin or plain MCP server), plain English |
 | [scripts/canon/README.md](scripts/canon/README.md) | Data pipeline commands |
 | [docs/archive/v1-research.md](docs/archive/v1-research.md) | Superseded v1 research (historical) |
 | [THIRD_PARTY.md](THIRD_PARTY.md), [CONTRIBUTING.md](CONTRIBUTING.md) | Licences; contribution guide |

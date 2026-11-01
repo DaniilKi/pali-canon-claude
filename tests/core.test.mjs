@@ -466,4 +466,46 @@ test('Claude Code plugin and marketplace manifests follow the documented schema'
   }
   // A top-level bin/ folder stops claude.ai and Cowork from installing the plugin.
   assert.ok(!existsSync(new URL('bin', root)), 'no top-level bin/ directory');
+test('Codex plugin packaging is consistent with the Claude plugin', async () => {
+  const { readFileSync, existsSync } = await import('node:fs');
+  const root = new URL('../', import.meta.url);
+  const json = (path) => JSON.parse(readFileSync(new URL(path, root), 'utf8'));
+  const pkg = json('package.json');
+  const codex = json('.codex-plugin/plugin.json');
+  const claude = json('.claude-plugin/plugin.json');
+  assert.equal(codex.name, claude.name);
+  assert.equal(codex.version, pkg.version, 'Codex plugin version must match package.json');
+  assert.equal(codex.skills, './skills/');
+  assert.equal(codex.mcpServers, './.mcp.codex.json');
+  assert.equal(codex.interface.displayName, 'Pali Canon');
+  assert.ok(codex.interface.category && codex.interface.defaultPrompt.length >= 1);
+  assert.deepEqual(codex.interface.capabilities, ['Read'], 'the plugin is read-only');
+  for (const asset of [codex.interface.logo, codex.interface.composerIcon]) {
+    assert.match(asset, /^\.\//);
+    assert.ok(existsSync(new URL(asset, root)), asset);
+  }
+  // Server map keyed by name (Codex accepts this or an mcpServers wrapper).
+  const servers = json('.mcp.codex.json');
+  assert.deepEqual(Object.keys(servers), ['pali-canon']);
+  // Runs the bundled server, never an npm name that is not yet published (supply-chain risk via npx -y).
+  assert.equal(servers['pali-canon'].command, 'node');
+  assert.deepEqual(servers['pali-canon'].args, ['./server/index.cjs']);
+  // Codex's local host does not default a plugin server's cwd to the plugin root; a relative cwd is resolved against it.
+  assert.equal(servers['pali-canon'].cwd, '.');
+  assert.ok(existsSync(new URL('server/index.cjs', root)), 'bundled server must exist');
+  assert.ok(!JSON.stringify(servers).includes('npx'), 'no npx in the plugin server until the npm name is published');
+  const market = json('.agents/plugins/marketplace.json');
+  const entry = market.plugins.find((p) => p.name === codex.name);
+  assert.deepEqual(entry.source, { source: 'local', path: './' });
+  assert.ok(entry.policy.installation && entry.policy.authentication && entry.category);
+  for (const skill of ['study', 'compare', 'pali-word']) {
+    assert.ok(existsSync(new URL(`skills/${skill}/SKILL.md`, root)), skill);
+    const yaml = readFileSync(new URL(`skills/${skill}/agents/openai.yaml`, root), 'utf8');
+    assert.match(yaml, /type: "mcp"/, skill);
+    assert.match(yaml, /value: "pali-canon"/, skill);
+    // A stdio dependency must name the same command as the plugin's server, or Codex treats it as missing.
+    assert.match(yaml, /transport: "stdio"/, skill);
+    assert.match(yaml, new RegExp(`command: "${servers['pali-canon'].command}"`), skill);
+    assert.match(yaml, /command: "node"/, skill);
+  }
 });

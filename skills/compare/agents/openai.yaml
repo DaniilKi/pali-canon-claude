@@ -1,0 +1,12 @@
+interface:
+  display_name: "Compare translations"
+  short_description: "Compare English translations against the Pali text"
+  brand_color: "#C77018"
+  default_prompt: "Use $compare to compare the English translations of SN 56.11 against the Pali."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "pali-canon"
+      description: "Pali Canon MCP server (read-only): Tipitaka texts, citations, translations and Pali dictionary"
+      transport: "stdio"
+      command: "node"
