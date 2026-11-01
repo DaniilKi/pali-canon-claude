@@ -1,0 +1,67 @@
+name: Docker image
+# Builds the HTTP server image for linux/amd64 and linux/arm64 and publishes it to
+# ghcr.io/daniilki/pali-canon-mcp on release tags (v*) or when run by hand. Pull requests that touch
+# the image only build and smoke-test it (amd64, nothing pushed).
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+  pull_request:
+    paths: ['Dockerfile', '.dockerignore', 'src/**', 'scripts/build.mjs', 'package*.json', '.github/workflows/docker.yml']
+permissions:
+  contents: read
+  packages: write
+jobs:
+  pr-build:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t pali-canon-mcp:pr .
+      - name: Smoke test the image
+        run: |
+          docker run -d --name pcm -p 8080:8080 pali-canon-mcp:pr
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8080/healthz && break; sleep 1; done
+          curl -fsS -X POST http://127.0.0.1:8080/mcp -H 'content-type: application/json' -H 'accept: application/json, text/event-stream' \
+            -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"resolve_reference","arguments":{"reference":"MN 10"}}}' | grep -q mn10
+          docker rm -f pcm
+  image:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/daniilki/pali-canon-mcp
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=latest,enable=${{ startsWith(github.ref, 'refs/tags/v') }}
+            type=sha,format=short
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Smoke test the published image
+        run: |
+          image="ghcr.io/daniilki/pali-canon-mcp:sha-${GITHUB_SHA::7}"
+          docker run -d --name pcm -p 8080:8080 "$image"
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8080/healthz && break; sleep 1; done
+          curl -fsS -X POST http://127.0.0.1:8080/mcp -H 'content-type: application/json' -H 'accept: application/json, text/event-stream' \
+            -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"resolve_reference","arguments":{"reference":"MN 10"}}}' | grep -q mn10
+          docker rm -f pcm

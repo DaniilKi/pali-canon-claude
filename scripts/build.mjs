@@ -3,16 +3,24 @@ import { chmod, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 
 await mkdir('server', { recursive: true });
-const result = await build({
-  entryPoints: ['src/index.mjs'], outfile: 'server/index.cjs', bundle: true,
-  platform: 'node', target: 'node20', format: 'cjs', minify: false,
+const common = {
+  bundle: true, platform: 'node', target: 'node20', format: 'cjs', minify: false,
   banner: { js: '#!/usr/bin/env node' }, legalComments: 'eof',
   // CJS output avoids import-meta/dynamic-require issues in bundled SDK dependencies.
   supported: { 'top-level-await': false }, metafile: true,
-});
+};
+// server/index.cjs: stdio transport (Claude Desktop, Claude Code). server/http.cjs: Streamable HTTP (hosted /mcp).
+const results = [
+  await build({ ...common, entryPoints: ['src/index.mjs'], outfile: 'server/index.cjs' }),
+  await build({
+    ...common, outfile: 'server/http.cjs',
+    stdin: { contents: "import { startHttpServer } from './src/http-server.mjs';\nstartHttpServer();\n", resolveDir: process.cwd(), sourcefile: 'http-entry.mjs', loader: 'js' },
+  }),
+];
 await chmod('server/index.cjs', 0o755);
+await chmod('server/http.cjs', 0o755);
 const packageRoots = new Set();
-for (const input of Object.keys(result.metafile.inputs)) {
+for (const input of results.flatMap((result) => Object.keys(result.metafile.inputs))) {
   if (!input.includes('node_modules/')) continue;
   let directory = dirname(resolve(input));
   while (relative(process.cwd(), directory).includes('node_modules')) {
@@ -23,7 +31,7 @@ for (const input of Object.keys(result.metafile.inputs)) {
     directory = dirname(directory);
   }
 }
-const notices = ['Third-party packages included in server/index.cjs. Their licenses apply to their code.'];
+const notices = ['Third-party packages included in server/index.cjs and server/http.cjs. Their licenses apply to their code.'];
 for (const directory of [...packageRoots].sort()) {
   const metadata = JSON.parse(await readFile(resolve(directory, 'package.json'), 'utf8'));
   notices.push(`\n--- ${metadata.name} ${metadata.version} (${metadata.license || 'see license'}) ---`);
@@ -32,4 +40,4 @@ for (const directory of [...packageRoots].sort()) {
   }
 }
 await writeFile('server/THIRD_PARTY_LICENSES.txt', notices.join('\n\n'));
-console.error('Built self-contained server/index.cjs');
+console.error('Built self-contained server/index.cjs (stdio) and server/http.cjs (HTTP)');

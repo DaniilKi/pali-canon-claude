@@ -1,0 +1,15 @@
+.git
+.github
+node_modules
+dist
+docs
+skills
+tests
+scripts/canon
+**/__pycache__
+*.log
+*.tgz
+*.mcpb
+*.report.json
+.claude
+.claude-plugin

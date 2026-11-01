@@ -32,8 +32,12 @@ Regenerate the numbers with `npm run coverage`.
 ## Architecture
 
 ```text
-Claude ⇄ MCP (stdio) ⇄ server/index.cjs  (esbuild bundle of src/)
-                         ├─ src/index.mjs       tools, prompts, resources, server instructions, VERSION
+Claude ⇄ MCP (stdio) ⇄ server/index.cjs  (esbuild bundle of src/index.mjs)
+web/mobile ⇄ MCP (Streamable HTTP, /mcp) ⇄ server/http.cjs  (bundle of src/http-server.mjs)
+                         ├─ src/index.mjs       stdio entry: createServer() + StdioServerTransport
+                         ├─ src/http-server.mjs HTTP entry: stateless /mcp, /healthz, CORS, per-IP rate limit, aggregate counters
+                         ├─ src/server.mjs      createServer(): tools, prompts, resources, server instructions, VERSION
+                         ├─ src/cache.mjs       in-memory LRU for live English/ATI/DPD responses (never SuttaCentral)
                          ├─ src/citations.mjs   parseCitation(): id | pts | uid | url
                          ├─ src/canon.mjs       load(), resolve(), segments(), describe(), search(), browse(), linksFor()
                          ├─ src/english.mjs     translation(), available(), atiMirrors(), fallback logic
@@ -80,6 +84,8 @@ npm run check          # build + unit tests + full audit — required for every 
 npm run smoke          # MCP protocol over stdio
 npm run smoke -- --live   # live sources (needs network; behind a proxy set NODE_USE_ENV_PROXY=1 and NODE_EXTRA_CA_CERTS)
 npm run outage         # mirror failover drill
+node server/http.cjs   # hosted HTTP endpoint on $PORT (default 8080), see docs/hosting.md
+node scripts/loadtest.mjs   # 50 concurrent HTTP sessions, p50/p95 and errors
 npm run coverage       # numbers for docs
 npm run pack:desktop   # dist/*.mcpb + SHA256SUMS.txt
 ```
@@ -95,10 +101,10 @@ A change is done when:
 
 - **Fix a wrong citation.** Write a failing test, fix `citations.mjs` or `canon.mjs` (or the build in `scripts/canon/` if the mapping is wrong), then run `npm run check`. If the data changed, also run `validate.py` (0 problems) and update coverage.
 - **Rebuild data.** Follow [scripts/canon/README.md](scripts/canon/README.md) exactly. Upstream commits must be recorded; pin, never float.
-- **Add a tool.** Register it in `src/index.mjs` via `tool()` with read-only annotations and `network` set correctly. Add it to the tools tables in `docs/development.md` and, if user-visible, to the README. Add a smoke check.
+- **Add a tool.** Register it in `src/server.mjs` via `tool()` with read-only annotations and `network` set correctly. Add it to the tools tables in `docs/development.md` and, if user-visible, to the README. Add a smoke check.
 - **Add a source.** See [docs/development.md](docs/development.md#adding-a-source).
 - **Package for another client** (Codex, Gemini, ChatGPT…). Reuse `server/index.cjs` and `skills/` unchanged; add only the client's manifest. Keep versions in step (see Releasing in [docs/development.md](docs/development.md#releasing)).
-- **Release.** Bump versions in `package.json`, `package-lock.json`, `manifest.json`, `.claude-plugin/plugin.json` and `src/index.mjs`. Then run every check, pack, tag and create the release with the `.mcpb` and checksums.
+- **Release.** Bump versions in `package.json`, `package-lock.json`, `manifest.json`, `.claude-plugin/plugin.json` and `src/server.mjs`. Then run every check, pack, tag and create the release with the `.mcpb` and checksums.
 
 ## Lessons learned (do not repeat)
 
@@ -136,6 +142,7 @@ Human documentation is for **non-technical readers first**: plain English, short
 | [docs/roadmap.md](docs/roadmap.md) | Comparison with other traditions' tools; plan with issue links |
 | [docs/glossary.md](docs/glossary.md) | Terms |
 | [docs/development.md](docs/development.md) | Build, test, tools, clients, release, troubleshooting |
+| [docs/hosting.md](docs/hosting.md) | Hosted /mcp endpoint: Docker, Fly.io, Render, privacy, load test |
 | [scripts/canon/README.md](scripts/canon/README.md) | Data pipeline commands |
 | [docs/archive/v1-research.md](docs/archive/v1-research.md) | Superseded v1 research (historical) |
 | [THIRD_PARTY.md](THIRD_PARTY.md), [CONTRIBUTING.md](CONTRIBUTING.md) | Licences; contribution guide |

@@ -1,0 +1,16 @@
+# Render Blueprint for the hosted endpoint (https://<service>.onrender.com/mcp). See docs/hosting.md.
+services:
+  - type: web
+    name: pali-canon-mcp
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    healthCheckPath: /healthz
+    autoDeploy: false
+    envVars:
+      - key: TRUST_PROXY
+        value: "1"
+      - key: RATE_LIMIT_PER_MINUTE
+        value: "120"
+      - key: PALI_CANON_CACHE_MB
+        value: "64"

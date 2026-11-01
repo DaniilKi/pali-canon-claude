@@ -2,6 +2,7 @@
 import { fetchPublic, fetchMirrors, decodeHtml, plainText, shortText } from './http.mjs';
 import { atiMirrors, atiContent, atiNotice } from './english.mjs';
 import { load, fold as foldPali, source as canonSource } from './canon.mjs';
+import { liveCache } from './cache.mjs';
 
 const DPD = 'https://www.dpdict.net';
 const ATI = 'https://accesstoinsight.org';
@@ -24,7 +25,7 @@ export async function lookupPali({ word, limit = 5 }) {
   const url = `${DPD}/search_json?q=${encodeURIComponent(word)}`;
   let data;
   try {
-    data = await fetchPublic(url, { retries: 2 });
+    data = await liveCache.wrap(`dpd:${word}`, () => fetchPublic(url, { retries: 2 }));
   } catch (error) {
     throw new Error(`Digital Pāḷi Dictionary is unavailable right now (${error.message}). Open ${DPD}/?q=${encodeURIComponent(word)} directly or try again shortly.`);
   }
@@ -112,7 +113,7 @@ export async function searchAti({ query, limit = 10 }) {
 export async function getAtiText({ path, offset = 0, limit = 12000 }) {
   path = atiPath(path);
   let result;
-  try { result = await fetchMirrors(atiMirrors(path)); } catch (error) { throw new Error(`Could not read ${path} from Access to Insight or its mirrors (${error.message}).`); }
+  try { result = await liveCache.wrap(`ati-page:${path}`, () => fetchMirrors(atiMirrors(path))); } catch (error) { throw new Error(`Could not read ${path} from Access to Insight or its mirrors (${error.message}).`); }
   const text = plainText(atiContent(result.body));
   const notice = atiNotice(result.body);
   const textId = load().urlIndex.get(`accesstoinsight.org${path}`);
