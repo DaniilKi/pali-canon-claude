@@ -11,6 +11,7 @@ Start with the [project README](../README.md). Then:
 - [Roadmap](roadmap.md): how we compare with Bible, Quran and Sefaria tools, and the plan
 - [Directory listings](listings/README.md): the MCP Registry entry and the packets for community directories
 - [Install in editors and agent apps](install/ide.md): Cursor, VS Code, Windsurf, Zed, Cline and Goose
+- [Local AI models](install/local-clients.md): use it with LM Studio, Open WebUI, Ollama and other apps that run on your own computer
 
 **For the curious and for contributors**
 

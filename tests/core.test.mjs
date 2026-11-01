@@ -568,4 +568,27 @@ test('editor install guide: one-click links and configs all start npx -y pali-ca
     else assert.equal(server.command, 'node');
   }
   assert.match(doc, /```yaml\nextensions:\n  pali-canon:\n[\s\S]*?cmd: npx\n    args: \["-y", "pali-canon-mcp"\]/);
+test('local-clients guide lists every tool, with offline tools marked correctly', async () => {
+  const { readFileSync } = await import('node:fs');
+  const read = (p) => readFileSync(new URL(p, import.meta.url), 'utf8').replace(/\r\n/g, '\n');
+  const source = read('../src/index.mjs');
+  const guide = read('../docs/install/local-clients.md');
+  const starts = [...source.matchAll(/^tool\('([a-z_]+)', '([^']*)'/gm)];
+  const tools = starts.map((m, i) => ({
+    name: m[1],
+    description: m[2],
+    network: /network: true/.test(source.slice(m.index, starts[i + 1]?.index ?? source.length)),
+  }));
+  assert.ok(tools.length >= 11);
+  for (const { name, description, network } of tools) {
+    const row = guide.split('\n').find((line) => line.startsWith(`| \`${name}\` |`));
+    assert.ok(row, `${name} missing from docs/install/local-clients.md`);
+    const internet = row.split('|').at(-2).trim();
+    if (!network) assert.equal(internet, 'No', name);
+    else if (/works offline/i.test(description)) assert.match(internet, /^No, unless/, name);
+    else assert.equal(internet, 'Yes', name);
+  }
+  const jsonBlocks = [...guide.matchAll(/```json\n([\s\S]*?)```/g)].map((m) => m[1]);
+  assert.ok(jsonBlocks.length >= 2, 'expected JSON examples for LM Studio and oterm');
+  for (const block of jsonBlocks) assert.doesNotThrow(() => JSON.parse(block));
 });
