@@ -6,8 +6,11 @@
  *   { kind: 'pts', collection, volume, page, raw }          e.g. M i 55, S v 420, A I 188, D ii 72, Vin i 1
  *   { kind: 'uid', uid, raw }                               e.g. pli-tv-bu-vb-pj1, tha-ap12, ds1.1
  *   { kind: 'url', host, path, raw }                        SuttaCentral, Access to Insight or dhammatalks.org links
+ *   { kind: 'edition', edition, scope, volume, page, book?, raw }  Thai/Myanmar/VRI page: Thai MN 1.103, Myanmar Dhp 15
  * The parser never guesses a title; canon lookup decides whether the text exists.
  */
+
+import { EDITION_WORDS, VINAYA_SCOPES } from './editions.mjs';
 
 const fold = (value) => value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
 
@@ -92,6 +95,36 @@ function parseUrl(raw) {
   return { kind: 'url', host, path: url.pathname.replace(/\.html?$/, ''), raw };
 }
 
+/**
+ * Thai, Myanmar and VRI edition pages: "<edition> <collection> <volume>.<page>", page only for single-volume
+ * collections, and an optional book name in brackets where VRI repeats volume numbers (VRI SN and AN).
+ * Accepted: "Thai MN 1.103", "Thai ed. MN vol. 1 p. 103", "Myanmar Dhp 15", "VRI SN 1.20 (Nidānavaggo)", "Thai Mv 1.10".
+ */
+function parseEditionPage(raw, text) {
+  const head = text.match(/^([A-Za-z]+)(?:\.?\s*(ed(?:ition)?)\.?)?[\s.:,]+(.*)$/);
+  if (!head) return null;
+  const edition = EDITION_WORDS[fold(head[1] + (head[2] || ''))] || EDITION_WORDS[fold(head[1])];
+  if (!edition) return null;
+  let rest = head[3];
+  let book = null;
+  rest = rest.replace(/\(([^)]*)\)/, (_, b) => { book = b.trim(); return ' '; });
+  // "vol." and "p." come after the collection (never strip the start: "Pp" is the Puggalapaññatti).
+  rest = rest.replace(/\s(?:volume|vol|pages|page|pp|p)\.?\s*(?=\d)/gi, ' ').replace(/\s+/g, ' ').trim();
+  const example = 'Thai MN 1.103 (collection, volume.page), or Thai Dhp 15 for a single-volume collection';
+  const m = rest.match(/^([A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ][A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ .-]*?)[\s.,]*(\d+)(?:\s*[.:,]\s*|\s+)?(\d+)?(?:[\s,]+([A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ][^\d]*))?$/);
+  if (!m) {
+    if (/^\d/.test(rest)) throw new CitationError(`"${raw}" needs a collection: VRI records ${head[1]} pages by volume within each collection. Write it as ${example}.`);
+    throw new CitationError(`Could not read the edition page in "${raw}". Write it as ${example}.`);
+  }
+  if (m[4] && !book) book = m[4].trim();
+  const key = fold(m[1]).replace(/[\s.-]+/g, '');
+  const scope = VINAYA_SCOPES[key] || COLLECTIONS[key] || (m[1].trim() === 'Sn' ? 'snp' : null);
+  if (!scope) throw new CitationError(`Unknown collection "${m[1].trim()}" in "${raw}". Use DN, MN, SN, AN, Dhp, Ud, Iti, Snp, Thag, Thig, Ja… or for the Vinaya the book: Pj, Pc, Mv, Cv, Pvr.`);
+  const volume = m[3] === undefined ? 0 : Number(m[2]);
+  const page = Number(m[3] === undefined ? m[2] : m[3]);
+  return { kind: 'edition', edition, scope, volume, page, ...(book ? { book } : {}), raw };
+}
+
 /** Parse one citation. Throws CitationError with a helpful message when it cannot. */
 export function parseCitation(input) {
   if (typeof input !== 'string' || !input.trim()) throw new CitationError('Give a citation such as MN 10, SN 56.11, Dhp 183 or M i 55.');
@@ -100,6 +133,9 @@ export function parseCitation(input) {
   if (/^https?:\/\//i.test(raw)) return parseUrl(raw);
   let text = raw.replace(/[‐‑–—−]/g, '-').replace(/\s+/g, ' ');
   text = text.replace(/^PTS[:\s]+/i, '');
+
+  const edition = parseEditionPage(raw, text);
+  if (edition) return edition;
 
   // Bilara-style segment reference "mn10:12.3" / "sn56.11:5.1": the part after ":" is a passage anchor.
   const seg = text.match(/^([a-z][a-z-]*\d+(?:\.\d+)*(?:-\d+)?):([\d.]+)$/);
