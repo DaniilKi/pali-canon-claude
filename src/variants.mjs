@@ -96,41 +96,117 @@ export function parseSigla(group) {
   return out;
 }
 
+// Editorial phrases (in Pāli) that mark a piece as a comment by the editors, not a reading:
+// "na dissati" (is not found), "idaṃ padaṃ" (this word), "potthakesu" (in the books),
+// "passitabbaṃ / oloketabbā / gavesitabbaṃ / saṃsandetabbaṃ" (see / consult / to be examined /
+// to be compared), "pāṭhanānattaṃ" (difference of reading), "aṭṭhakathā" (the commentary),
+// "imissā gāthāya" (in this verse), "evamīdisesu" (likewise in such places). A piece whose
+// reading text contains one is kept verbatim as a remark. This may also catch a genuine reading
+// such as "passitabbā (ka.)": a missed attribution, never a wrong one.
+const EDITORIAL = /na dissati|vipariyāyena dissati|idaṃ padaṃ|imissā gāthāya|evamīdisesu|potthakesu|passitabb|oloketabb|gavesitabb|saṃsandetabb|pāṭhanānatt|aṭṭhakath/;
+// "( ) natthi (sī. pī.)": the passage printed in parentheses in the text is absent (natthi) from
+// those editions. "idaṃ padaṃ natthi (…)": this word is absent from them.
+const OMISSION_AFTER_EMPTY = /^(?:sabbattha\s+)?natthi$/;
+const OMISSION_WORD = /^idaṃ padaṃ natthi$/;
+
+const trimSep = (x) => x.replace(/^[\s,;]+|[\s,;]+$/g, '');
+
+/** True when every parenthesis is closed and none is nested. */
+function flatBalanced(raw) {
+  let depth = 0;
+  for (const c of raw) {
+    if (c === '(') { depth += 1; if (depth > 1) return false; }
+    else if (c === ')') { depth -= 1; if (depth < 0) return false; }
+  }
+  return depth === 0;
+}
+
 /**
- * Parse one VRI note into { raw, readings[], remarks[] }.
- * readings: { reading, editions: [{ siglum, edition, part? }], scope?, remark? }, where `reading` is
- * the verbatim text that precedes the parenthesis. remarks: verbatim leftovers (cross-references,
- * editorial comments, "(?)" queries) that are not readings attributed to an edition.
+ * Parse one VRI note, also returning the [start, end) span of the raw note each output item was
+ * taken from. The spans tile the note: anything outside them is only separators (spaces, commas,
+ * semicolons). Used by parseNote and by the coverage checks in the tests and the audit.
  */
-export function parseNote(raw) {
+export function parseNoteSpans(raw) {
   const readings = [];
+  const omissions = [];
   const remarks = [];
-  const re = /([^()]*)\(([^()]*)\)/g;
-  let last = 0;
+  const spans = [];
+  const remark = (a, b) => {
+    const x = raw.slice(a, b);
+    const t = trimSep(x);
+    if (!t) return;
+    const at = a + x.indexOf(t);
+    remarks.push(t);
+    spans.push([at, at + t.length]);
+  };
+  // Nested or unbalanced parentheses cannot be split safely: the whole note is one remark.
+  if (!flatBalanced(raw)) {
+    remark(0, raw.length);
+    return { result: { raw, readings, omissions, remarks }, spans };
+  }
+  const re = /([^()]*)\(([^()]*)\)/y;
+  let last = 0; // end of the last match
+  let start = 0; // start of the piece being built ("( )" joins the piece that follows it)
+  let empty = false; // the piece so far opens with "( )"
   let m;
   while ((m = re.exec(raw))) {
     last = re.lastIndex;
-    const before = m[1].replace(/^[\s,;]+|[\s,;]+$/g, '');
+    const before = trimSep(m[1]);
+    if (!before && !m[2].trim()) { empty = true; continue; } // "( )": keep it with the next piece
     const sig = parseSigla(m[2]);
-    // Pāli readings carry no digits; a digit means a cross-reference ("a. ni. 9.38") is mixed in,
-    // so the piece is kept as a remark rather than risk attributing a reference as a reading.
-    if (sig && before && !/\d/.test(before)) {
+    const pieceStart = start;
+    start = last;
+    const wasEmpty = empty;
+    empty = false;
+    if (sig && ((wasEmpty && OMISSION_AFTER_EMPTY.test(before)) || (!wasEmpty && OMISSION_WORD.test(before)))) {
+      const t = trimSep(raw.slice(pieceStart, last));
+      const at = pieceStart + raw.slice(pieceStart, last).indexOf(t);
+      const { remark: rm, ...rest } = sig;
+      const o = { text: t, absent: OMISSION_WORD.test(before) ? 'this word' : 'the passage printed in parentheses', ...rest };
+      if (rm) o.remark = rm;
+      omissions.push(o);
+      spans.push([at, at + t.length]);
+      continue;
+    }
+    // Pāli readings carry no digits; a digit means a cross-reference ("a. ni. 9.38") is mixed in.
+    // Editorial phrases, a bare "natthi" and anything after "( )" are not readings either.
+    if (sig && before && !wasEmpty && !/\d/.test(before) && !EDITORIAL.test(before) && !/^(?:sabbattha\s+)?natthi$/.test(before)) {
+      const at = m.index + m[1].indexOf(before);
       readings.push({ reading: before, ...sig });
+      spans.push([at, last]);
     } else {
-      // Not a reading we can attribute: keep the whole piece verbatim.
-      const piece = m[0].replace(/^[\s,;]+|[\s,;]+$/g, '');
-      if (piece) remarks.push(piece);
+      remark(pieceStart, last); // not a reading we can attribute: keep the whole piece verbatim
     }
   }
-  const tail = raw.slice(last).replace(/^[\s,;]+|[\s,;]+$/g, '');
-  if (tail) remarks.push(tail);
-  return { raw, readings, remarks };
+  remark(start, raw.length); // the tail, with any pending "( )"
+  return { result: { raw, readings, omissions, remarks }, spans };
+}
+
+/**
+ * Parse one VRI note into { raw, readings[], omissions[], remarks[] }.
+ * readings: { reading, editions: [{ siglum, edition, part? }], scope?, remark? }, where `reading` is
+ * the verbatim text that precedes the parenthesis.
+ * omissions: { text, absent, editions, scope?, remark? } for "( ) natthi (sī. pī.)" (the passage
+ * printed in parentheses in the text is absent from those editions) and "idaṃ padaṃ natthi (…)"
+ * (this word is absent from them); `text` is verbatim.
+ * remarks: verbatim leftovers (cross-references, editorial comments, "(?)" queries, notes with
+ * nested or unbalanced parentheses) that are not attributed to an edition.
+ */
+export function parseNote(raw) {
+  return parseNoteSpans(raw).result;
+}
+
+/** Text of a note that no output item covers, ignoring separators. Empty when the note is fully accounted for. */
+export function uncovered(raw, spans) {
+  const mask = new Array(raw.length).fill(false);
+  for (const [a, b] of spans) for (let i = a; i < b; i += 1) mask[i] = true;
+  return raw.split('').filter((c, i) => !mask[i] && !/[\s,;]/.test(c)).join('');
 }
 
 /** Legend for the sigla that appear in a list of parsed notes. */
 export function legend(parsed) {
   const used = new Set();
-  for (const p of parsed) for (const r of p.readings) for (const e of r.editions) used.add(e.siglum);
+  for (const p of parsed) for (const r of [...p.readings, ...(p.omissions || [])]) for (const e of r.editions) used.add(e.siglum);
   return Object.fromEntries([...used].map((s) => [s, SIGLA[s]]));
 }
 
@@ -160,6 +236,6 @@ export function structuredInfo(page) {
   const parsed = page.flatMap((s) => s.variants || []);
   return {
     variant_sigla: legend(parsed),
-    variant_note: 'Each variant gives a reading found in other printed editions (by siglum) where they differ from this Chaṭṭha Saṅgāyana text; "raw" is VRI\'s note verbatim. The word replaced is not identified; locate it in the paragraph. Remarks are cross-references or editorial comments kept verbatim. Source: VRI notes (attribution as for the text).',
+    variant_note: 'Each variant gives a reading found in other printed editions (by siglum) where they differ from this Chaṭṭha Saṅgāyana text; "raw" is VRI\'s note verbatim. The word replaced is not identified; locate it in the paragraph. Omissions ("( ) natthi (sī.)") mean the passage printed in parentheses in the text is absent from those editions; they are not readings. Remarks are cross-references, editorial comments and notes with nested or unbalanced parentheses, kept verbatim and not attributed. Source: VRI notes (attribution as for the text).',
   };
 }
