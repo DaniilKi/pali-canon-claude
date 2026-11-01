@@ -372,7 +372,8 @@ export function browse(node = 'canon', { offset = 0, limit = 60 } = {}) {
   if (!members.length) members = units.filter((u) => u.id.startsWith(key) && u.kind !== 'range');
   if (!members.length) throw new Error(`Unknown browse node "${node}". Start with "canon", "sutta", "vinaya", "abhidhamma" or a collection such as mn, sn, sn56, an4, dhp.`);
   members.sort((a, b) => a.book - b.book || a.start - b.start);
-  return { node: key, name: COLLECTION_NAMES[key] || members[0].collection, ...page(members.map((u) => unitSummary(u))) };
+  const collection = members[0].collection;
+  return { node: key, name: COLLECTION_NAMES[key] || COLLECTION_NAMES[collection] || collection, ...(key !== collection ? { collection } : {}), ...page(members.map((u) => unitSummary(u))) };
 }
 
 export const _test = { lookupId, rangeContaining, ptsLookup };

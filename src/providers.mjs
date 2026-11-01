@@ -8,9 +8,35 @@ const ATI = 'https://accesstoinsight.org';
 
 const DPD_CHROME = /^(?:did you spot a mistake(?: in the declension table)?\??|spot a mistake\??|something(?: out of place\??| missing\??)?|missing\??|correct it here\.?|fix it here\.?|add it here\.?|report it here\.?|log it here\.?|here\.?|can you think of a better example\??|please add more idioms|if something looks out of place,?|feedback|[✔✘◑►])$/i;
 
-/** Remove DPD website feedback prompts and the corpus-frequency table from a plain-text entry. */
+// DPD sections that are tables or site chrome rather than dictionary prose: inflection tables
+// (declension for nouns, conjugation for verbs), corpus frequency, feedback forms and the tab buttons.
+const DPD_NOISE_DIV = /<div\b[^>]*(?:\bid\s*=\s*["'](?:declension|conjugation|inflection|frequency|feedback)_[^"']*["']|\bclass\s*=\s*["'](?:button-box|dpd-footer)["'])[^>]*>/gi;
+
+/** Remove whole <div> elements (with nested divs) whose opening tag matches DPD_NOISE_DIV. */
+function dropDpdNoise(html) {
+  let out = '';
+  let pos = 0;
+  DPD_NOISE_DIV.lastIndex = 0;
+  for (let m = DPD_NOISE_DIV.exec(html); m; m = DPD_NOISE_DIV.exec(html)) {
+    if (m.index < pos) continue;
+    out += html.slice(pos, m.index);
+    const tags = /<div\b[^>]*>|<\/div\s*>/gi;
+    tags.lastIndex = m.index + m[0].length;
+    let depth = 1;
+    let end = html.length;
+    for (let t = tags.exec(html); t; t = tags.exec(html)) {
+      depth += t[0][1] === '/' ? -1 : 1;
+      if (depth === 0) { end = t.index + t[0].length; break; }
+    }
+    pos = end;
+    DPD_NOISE_DIV.lastIndex = end;
+  }
+  return out + html.slice(pos);
+}
+
+/** Remove DPD inflection tables, tab buttons, website feedback prompts and the corpus-frequency table from an entry. */
 export function cleanDpdText(html) {
-  let text = plainText(html);
+  let text = plainText(dropDpdNoise(String(html ?? '')));
   const footer = text.search(/\n\s*Frequency of\s*\n/);
   if (footer >= 0) text = text.slice(0, footer);
   const end = text.search(/Digital Pāḷi Dictionary is a work in progress/);
@@ -38,7 +64,7 @@ export async function lookupPali({ word, limit = 5 }) {
     word, source: 'Digital Pāḷi Dictionary', url: `${DPD}/?q=${encodeURIComponent(word)}`,
     entries: entries.slice(0, limit), total_summary_entries: entries.length, omitted: Math.max(0, entries.length - limit),
     detail_excerpt: shortText(cleanDpdText(data.dpd_html ?? ''), 8000),
-    detail_note: 'Plain-text excerpt of the live dictionary entry (grammar, roots, examples, compounds). Dictionary glosses are reference material, not scripture.',
+    detail_note: 'Plain-text excerpt of the live dictionary entry (grammar, roots, examples, compounds). Declension and conjugation tables are left out; open the url to see them. Dictionary glosses are reference material, not scripture.',
     attribution: license.attribution, license,
   };
 }
