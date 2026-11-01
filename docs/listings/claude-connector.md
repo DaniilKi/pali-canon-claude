@@ -25,11 +25,11 @@ The docs also say that when a plugin points at a server, the server should be su
 | # | Item | Severity | What to do |
 |---|---|---|---|
 | 1 | **Hosted endpoint not live.** | **Blocker** | Deploy (#5), add it in Claude → Settings → Connectors → Add custom connector, and call every tool from a conversation. Also run every tool through the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector). The portal's *Test & launch* step asks you to confirm both. |
-| 2 | **Tools have no `title`.** The directory requires "a `title` and the applicable `readOnlyHint` or `destructiveHint`" on every tool, and the portal flags tools without them. Our tools set the hints but not titles. | **Blocker** | Add the titles from the [review table](#tool-annotations-review) in `src/server.mjs` (a maintainer change; the exact code is in the pull request for #7). `tests/connector-listing.test.mjs` then checks that the live titles match this table. |
-| 3 | **Third-party content.** The policy says developers "must own or control any API endpoint, domain, user interface, or external resource the software connects to". The Pāli text is bundled (our own copy of the VRI edition), but English translations and dictionary entries are fetched live from dhammatalks.org, Access to Insight (and its GitHub/jsDelivr mirrors) and the Digital Pāḷi Dictionary, which we do not control. The portal's *Data handling* step does offer "a third party's API you don't control" as an answer. | **Risk: maintainer decision** | Answer that step truthfully (see [Data handling](#7-data-handling)). If a reviewer objects, the answers are the permission letters in [docs/outreach/](../outreach/README.md) or listing an offline-only variant. Do not hide the live fetches. |
+| 2 | **Tools have no `title`.** The directory requires "a `title` and the applicable `readOnlyHint` or `destructiveHint`" on every tool, and the portal flags tools without them. Our tools set the hints but not titles. | **Blocker** until done | Give every tool the `title` from the [review table](#tool-annotations-review) in `src/server.mjs` (a maintainer change, because that file is shared by every feature; a ready-made snippet is in the description of [PR #82](https://github.com/DaniilKi/pali-canon-claude/pull/82)). **Done when** `tools/list` (or the MCP Inspector) shows a title on every tool. From then on `tests/connector-listing.test.mjs` fails if a live title differs from this table. |
+| 3 | **Third-party content.** The [Software Directory Policy](https://support.claude.com/en/articles/13145358-anthropic-software-directory-policy) says (read 1 November 2026): "Developers must verify that they own or control any API endpoint, domain, or user interface their Software connects to, as well as any external resources it retrieves or renders." The review criteria add: "Your server must call your own first-party APIs, or APIs you legitimately proxy." The translations and dictionary entries this server retrieves and renders are exactly such external resources. The Pāli text is bundled (our own copy of the VRI edition), but English translations and dictionary entries are fetched live from dhammatalks.org, Access to Insight (and its GitHub/jsDelivr mirrors) and the Digital Pāḷi Dictionary, which we do not control. The portal's *Data handling* step does offer "a third party's API you don't control" as an answer. | **Risk: maintainer decision** | Answer that step truthfully (see [Data handling](#7-data-handling)). If a reviewer objects, the answers are the permission letters in [docs/outreach/](../outreach/README.md) or listing an offline-only variant. Do not hide the live fetches. |
 | 4 | **Domain should match the service.** The review criteria say "the MCP server domain should match your service". A `*.fly.dev` or `*.onrender.com` address is weak evidence of that. | Recommended | Prefer a project domain if one is ever registered; otherwise make sure the documentation URL (the GitHub repository) names the exact hosted address so it can be checked. |
 | 5 | **Origin header.** The hosted server answers every origin (`Access-Control-Allow-Origin: *`). The MCP transport specification asks Streamable HTTP servers to validate the `Origin` header against DNS-rebinding attacks. The risk is low for a public, read-only, no-sign-in server, but reviewers check server security. | Check before submitting | Decide whether to reject browser requests from unexpected origins in `src/http-server.mjs`; record the decision in `docs/decisions.md`. |
-| 6 | **Privacy policy completeness.** "Missing or incomplete privacy policies result in immediate rejection." The policy must cover collection, use and storage, third-party sharing, retention and contact. [PRIVACY.md](../../PRIVACY.md) covers all of these. Its hosted section says what is kept (aggregate counts only) but not how long. | Recommended | Add one sentence on retention to the hosted section (proposed in the pull request for #7): the counts live in memory and reset when the server restarts, as [docs/hosting.md](../hosting.md) says. |
+| 6 | **Privacy policy completeness.** "Missing or incomplete privacy policies result in immediate rejection." The policy must cover collection, use and storage, third-party sharing, retention and contact. [PRIVACY.md](../../PRIVACY.md) covers all of these. Its hosted section says what is kept (aggregate counts) but not how long, and it does not mention that the server holds each visitor's IP address in memory for one minute for the rate limit, as [docs/hosting.md](../hosting.md) says. | Recommended | **Done when** the hosted section of PRIVACY.md states both points: each visitor's internet address is held in memory for one minute to enforce the rate limit and then forgotten, and the counts live only in memory and reset when the server restarts; nothing is written to disk. Suggested wording is in the description of [PR #82](https://github.com/DaniilKi/pali-canon-claude/pull/82). |
 
 Already satisfied, with evidence in the repository:
 
@@ -39,7 +39,7 @@ Already satisfied, with evidence in the repository:
 - **Errors** are specific and actionable (for example a missing translation lists what is available, and an unknown citation suggests `browse_canon`), never a bare "Bad Request".
 - **Response size.** `get_text` is paginated (`offset`, `limit`), search results are limited, and variant readings and translations are opt-in.
 - **No conversation data.** The server receives only the arguments of each call and does not log them (see [docs/hosting.md](../hosting.md)).
-- **Authentication:** none. All content is public, so no OAuth and no reviewer test account are needed.
+- **Authentication:** none. All content is public, so there is no OAuth and no account to create. Note the conflict: the review criteria list "Test credentials" as required (for "a fully populated account"). That requirement assumes a server with sign-in; this one has none. In the portal, enter **"Not applicable: no authentication. The server is public and read-only; every tool works without credentials."** and point to the test steps in [section 8](#8-test--launch).
 - **Transport:** Streamable HTTP, stateless, at `/mcp`.
 - **Not an unsupported use case**: no payments, no AI media generation, no advertising.
 
@@ -56,7 +56,7 @@ Field limits are from the submission docs: name up to 100 characters, one-liner 
 
 ### 2. Tools
 
-Synced from the server. Expect 11 tools, all under **read-only**, plus 3 prompts (`study_passage`, `compare_translations`, `topic_research`) and 2 resources. If any tool is flagged, fix it on the server first (item 2 above).
+Synced from the server. Expect one tool per row of the [review table](#tool-annotations-review) (the test keeps the two in step), all under **read-only**, plus the server's prompts and resources. If any tool is flagged, fix it on the server first (item 2 above).
 
 ### 3. Listing
 
@@ -118,6 +118,7 @@ Every citation below is checked against the bundled canon by `tests/connector-li
 |---|---|
 | Authentication requirement | **None** (the server never asks users to sign in) |
 | Authentication methods | Not applicable |
+| Test credentials (if asked) | "Not applicable: no authentication." The review criteria call test credentials required, but they exist only for servers with sign-in; this server has none (see the note under *Already satisfied*). |
 
 ### 7. Data handling
 
@@ -129,7 +130,7 @@ Every citation below is checked against the bundled canon by `tests/connector-li
 
 ### 8. Test & launch
 
-> No account or sign-in is needed. Add `<hosted address>/mcp` as a custom connector (or open it in the MCP Inspector with the Streamable HTTP transport) and try: `resolve_reference` with "S v 420"; `get_text` with "MN 10" and translation "default"; `compare_translations` with "Dhp 183"; `search_texts` with "mettā karuṇā"; `lookup_pali` with "sati"; `browse_canon` with "sn56"; `list_sources`. `GET <hosted address>/healthz` reports status. Live tools depend on the source sites; they fall back to mirrors and say so.
+> No account or sign-in is needed, so there are no test credentials (if the form insists, enter "Not applicable: no authentication"). Add `<hosted address>/mcp` as a custom connector (or open it in the MCP Inspector with the Streamable HTTP transport) and try: `resolve_reference` with "S v 420"; `get_text` with "MN 10" and translation "default"; `compare_translations` with "Dhp 183"; `search_texts` with "mettā karuṇā"; `lookup_pali` with "sati"; `browse_canon` with "sn56"; `list_sources`. `GET <hosted address>/healthz` reports status. Live tools depend on the source sites; they fall back to mirrors and say so.
 
 Then tick the confirmation that every tool was run (MCP Inspector or custom connector).
 
@@ -159,7 +160,7 @@ What every tool declares, and the proposed `title`. "Open-world" (`openWorldHint
 | `get_access_to_insight_text` | Read Access to Insight page | yes | no | yes | Fetches one Access to Insight page by path. |
 | `list_sources` | List sources and licences | yes | no | no | Static list. |
 
-No tool writes, deletes, sends or stores anything, so none needs `destructiveHint: true`. Any tool added later (through `src/features/`) must be added to this table with its own row before the listing is updated; the directory re-reviews material changes to tools.
+No tool writes, deletes, sends or stores anything, so none needs `destructiveHint: true`. The table must list exactly the live tools: `tests/connector-listing.test.mjs` fails when a tool (for example one added through `src/features/`) has no row here, or a row names a tool that no longer exists. Add the row in the same change that adds the tool; the directory re-reviews material changes to tools.
 
 ## Screenshots plan
 

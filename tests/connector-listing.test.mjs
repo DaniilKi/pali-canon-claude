@@ -44,7 +44,6 @@ test('every tool meets the directory rules: read-only, not destructive, name at 
 test('the annotations review table matches the live tools', async () => {
   const live = new Map((await listTools()).map((t) => [t.name, t]));
   const rows = reviewRows();
-  assert.ok(rows.length >= 11, 'table lists every core tool');
   for (const row of rows) {
     const t = live.get(row.name);
     assert.ok(t, `${row.name} is a real tool`);
@@ -55,10 +54,21 @@ test('the annotations review table matches the live tools', async () => {
     const liveTitle = t.title ?? t.annotations.title;
     if (liveTitle) assert.equal(liveTitle, row.title, `${row.name} title`);
   }
+  // Both directions: a tool added later (for example through src/features/) needs its own row.
+  const tableNames = rows.map((r) => r.name).sort();
+  assert.equal(new Set(tableNames).size, tableNames.length, 'no tool is listed twice');
+  const missing = [...live.keys()].filter((name) => !tableNames.includes(name));
+  assert.deepEqual(missing, [], 'add a row to "Tool annotations review" in docs/listings/claude-connector.md for each of these tools');
+  assert.deepEqual(tableNames, [...live.keys()].sort(), 'the table lists exactly the live tools');
   for (const core of ['resolve_reference', 'get_metadata', 'get_text', 'get_translation', 'compare_translations', 'search_texts',
     'browse_canon', 'lookup_pali', 'search_access_to_insight', 'get_access_to_insight_text', 'list_sources']) {
     assert.ok(rows.some((r) => r.name === core), `${core} reviewed`);
   }
+});
+
+test('the packet does not hard-code a tool count that can go stale', () => {
+  const portalTools = packet.split('### 2. Tools')[1].split('\n### ')[0];
+  assert.doesNotMatch(portalTools, /\b\d+ tools\b/, 'refer to the review table instead of a number');
 });
 
 test('proposed titles are short and unique', () => {
