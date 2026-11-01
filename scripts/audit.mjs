@@ -1,5 +1,6 @@
 // Exhaustive offline audit of the bundled canon: every text, every citation form, every PTS start page, every translation link.
 import * as canon from '../src/canon.mjs';
+import { EDITIONS, editionLabel, editionIndex, nextUnit } from '../src/editions.mjs';
 
 const d = canon.load();
 const failures = [];
@@ -24,6 +25,20 @@ for (const u of d.canon.units) {
   const segs = canon.segments(u);
   if (!segs.some((s) => s.type !== 'heading' && s.text)) fail('text', `${u.id} has no body text`);
   else count('text');
+  // 3b. Every Thai/Myanmar/VRI page break inside the text is shown in its segments.
+  const shown = new Set(segs.flatMap((s) => Object.values(EDITIONS).flatMap((e) => s[`${e.key}_page_begins`] || [])));
+  const blocks = d.canon.books[u.book].blocks;
+  let lastText = u.end - 1;
+  while (lastText >= u.start && !blocks[lastText][2]) lastText -= 1;
+  for (let i = u.start; i <= lastText; i += 1) {
+    for (const ed of Object.keys(EDITIONS)) {
+      for (const at of blocks[i][4]?.[ed] || []) {
+        const label = editionLabel(d, ed, u.book, at);
+        if (!shown.has(label)) fail('edition-segment', `${label} (block ${i}) missing from get_text of ${u.id}`);
+        else count('edition-segment');
+      }
+    }
+  }
   // 4. Range members resolve inside the range.
   for (const m of u.members || []) {
     try {
@@ -43,6 +58,28 @@ for (const u of d.canon.units) {
       count('pts');
     } catch (e) { fail('pts', `${ref} (${u.id}): ${e.message}`); }
   }
+}
+// 5b. Every Thai, Myanmar and VRI page marker resolves back to a text containing it (round trip, like PTS).
+{
+  const idx = editionIndex(d);
+  const contains = (u, book, block) => u && u.book === book && u.start <= block && block < u.end;
+  d.canon.books.forEach((book, bi) => {
+    book.blocks.forEach((blk, k) => {
+      for (const ed of Object.keys(EDITIONS)) {
+        for (const at of blk[4]?.[ed] || []) {
+          const label = editionLabel(d, ed, bi, at);
+          let r;
+          try { r = canon.resolve(label); } catch (e) { fail('edition', `${label}: ${e.message}`); continue; }
+          if (contains(r.unit, bi, k)) { count('edition'); continue; }
+          const occurrences = idx.markers.get(`${ed}|${book.collection}|${at}`);
+          if (!idx.owner[bi][k] && r.unit === nextUnit(d, bi, k)) { count('edition-between-texts'); continue; }
+          if (occurrences.length > 1 && occurrences[0].block !== k
+            && [r.unit.id, ...r.alternatives.map((a) => a.id)].includes(idx.owner[bi][k]?.id)) { count('edition-duplicate-marker'); continue; }
+          fail('edition', `${label} (${book.file} block ${k}) -> ${r.unit.id}, which does not contain it`);
+        }
+      }
+    });
+  });
 }
 // 6. No two distinct texts claim the same passage (ranges and abbreviated members excepted).
 const spans = d.canon.units.filter((u) => u.kind !== 'range' && !u.approximate).sort((a, b) => a.book - b.book || a.start - b.start);
