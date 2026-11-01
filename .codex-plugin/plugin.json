@@ -1,0 +1,41 @@
+{
+  "name": "pali-canon",
+  "version": "2.0.0",
+  "description": "Study the Tipitaka offline: the whole Pali Canon, any citation or PTS page, English translations with mirrors, and Pali dictionary lookup.",
+  "author": {
+    "name": "DaniilKi and contributors",
+    "url": "https://github.com/DaniilKi"
+  },
+  "homepage": "https://github.com/DaniilKi/pali-canon-claude#readme",
+  "repository": "https://github.com/DaniilKi/pali-canon-claude",
+  "license": "MIT",
+  "keywords": [
+    "pali",
+    "tipitaka",
+    "buddhism",
+    "theravada",
+    "sutta",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.codex.json",
+  "interface": {
+    "displayName": "Pali Canon",
+    "shortDescription": "Read and cite the Pali Canon from real sources",
+    "longDescription": "The whole Pali Tipitaka (VRI Chattha Sangayana edition) offline, with citation and PTS page lookup, English translations from dhammatalks.org and Access to Insight (with mirrors), and Digital Pali Dictionary lookup. Every result carries its source, attribution and licence. Three skills: $study for passages and topics, $compare for translations, $pali-word for vocabulary. Read-only; it never fetches SuttaCentral content. If Codex does not start the server after install, run `codex mcp add pali-canon -- npx -y pali-canon-mcp`.",
+    "developerName": "DaniilKi and contributors",
+    "category": "Education",
+    "capabilities": [
+      "Read"
+    ],
+    "websiteURL": "https://github.com/DaniilKi/pali-canon-claude#readme",
+    "defaultPrompt": [
+      "Use $study to explain the Satipatthana Sutta (MN 10) with exact citations.",
+      "Use $compare to compare English translations of Dhammapada 183.",
+      "Use $pali-word to explain the Pali word dukkha with passages from the suttas."
+    ],
+    "brandColor": "#C77018",
+    "composerIcon": "./assets/logo.png",
+    "logo": "./assets/logo.png"
+  }
+}

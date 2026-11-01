@@ -36,7 +36,7 @@ Christians and Muslims already have many AI study tools, from Bible and Quran se
 - confuse the different numbering systems that translators use;
 - repeat popular quotes that are not in the texts at all.
 
-**Our mission** is to bring the rigour of traditional and academic Buddhist scholarship together with the best openly available Pāli and Theravāda resources, in one modern tool built for AI. We start with Claude and will bring the same tool to other AI apps (Codex, ChatGPT, Gemini, code editors) while building a **proven, verifiable repository of knowledge**: every passage comes from a named source and every claim can be checked.
+**Our mission** is to bring the rigour of traditional and academic Buddhist scholarship together with the best openly available Pāli and Theravāda resources, in one modern tool built for AI. We started with Claude. The same tool now also works in Codex, Gemini CLI and code editors, with ChatGPT and a hosted web version next. All the while we are building a **proven, verifiable repository of knowledge**: every passage comes from a named source and every claim can be checked.
 
 ## What it does
 
@@ -106,7 +106,7 @@ Details: [docs/how-it-works.md](docs/how-it-works.md).
 
 ## Install
 
-You need the free [Claude Desktop](https://claude.ai/download) app or Claude Code.
+Pick the app you use. Every option runs the same server, with the same 11 tools.
 
 ### Claude Desktop (easiest)
 
@@ -134,9 +134,55 @@ Start a new session and try the three built-in study skills:
 /pali-canon:pali-word anicca in SN 22.59
 ```
 
-### Other AI apps
+Full guide, updating and troubleshooting: [docs/install/claude-code.md](docs/install/claude-code.md).
 
-Codex, ChatGPT, Gemini, Cursor, VS Code and a hosted version for Claude on the web and phone are on the [roadmap](#roadmap). Technical users can already connect any MCP-compatible app; see [docs/development.md](docs/development.md#connect-any-mcp-client).
+The three skills also work in other AI apps that read `SKILL.md` files (`npx skills add DaniilKi/pali-canon-claude`), but they need the Pali Canon server installed too.
+
+### Codex (CLI and app)
+
+Pali Canon works in OpenAI's Codex as a plugin (tools plus the `$study`, `$compare` and `$pali-word` skills) or as a plain MCP server (tools only). You need [Node.js 20 or newer](https://nodejs.org/en/download).
+
+```sh
+# Plugin: add this repository as a marketplace, then run /plugins inside Codex and install "Pali Canon"
+codex plugin marketplace add DaniilKi/pali-canon-claude
+
+# Or just the server, from a downloaded copy of this repository
+codex mcp add pali-canon -- node /absolute/path/pali-canon-claude/server/index.cjs
+```
+
+Full steps and troubleshooting: [docs/install/codex.md](docs/install/codex.md). This setup has not yet been tried in a real Codex install; please tell us how it goes.
+
+### Gemini CLI and Antigravity CLI
+
+Install [Node.js 20 or newer](https://nodejs.org/en/download), then run:
+
+```sh
+gemini extensions install https://github.com/DaniilKi/pali-canon-claude
+```
+
+Antigravity CLI users can then import it with `agy plugin import gemini`. Full steps: [docs/install/gemini.md](docs/install/gemini.md).
+
+### Code editors and agent apps
+
+[![Add Pali Canon to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=pali-canon&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsInBhbGktY2Fub24tbWNwIl19) [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_Pali_Canon-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://vscode.dev/redirect?url=vscode%3Amcp%2Finstall%3F%257B%2522name%2522%253A%2522pali-canon%2522%252C%2522type%2522%253A%2522stdio%2522%252C%2522command%2522%253A%2522npx%2522%252C%2522args%2522%253A%255B%2522-y%2522%252C%2522pali-canon-mcp%2522%255D%257D) [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install_Pali_Canon-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://vscode.dev/redirect?url=vscode-insiders%3Amcp%2Finstall%3F%257B%2522name%2522%253A%2522pali-canon%2522%252C%2522type%2522%253A%2522stdio%2522%252C%2522command%2522%253A%2522npx%2522%252C%2522args%2522%253A%255B%2522-y%2522%252C%2522pali-canon-mcp%2522%255D%257D)
+
+Cursor, VS Code, Windsurf, Zed, Cline and Goose: step-by-step setup (needs Node.js 20 or newer) is in [docs/install/ide.md](docs/install/ide.md).
+
+> **Note.** The buttons above, and every `npx -y pali-canon-mcp` command, will work once the npm package is published. That has not happened yet. Until then, download this repository and use `node` with the full path to the server instead: `node /path/to/pali-canon-claude/server/index.cjs`. The [editor guide](docs/install/ide.md#without-npm-any-app-today) shows how.
+
+### Local AI models
+
+Running a model on your own computer (LM Studio, Open WebUI, Ollama)? See [Use it with local AI models](docs/install/local-clients.md). The Pāli text, search and citation lookup work fully offline.
+
+### Hosted version and Docker
+
+A web version lets Claude on the web and on phones connect by address, with nothing to install. **It is not online yet:** the code is ready, but it has not been deployed to a hosting service. This section will give the address once it is live.
+
+You can already run your own copy with Docker or Node.js; see [docs/hosting.md](docs/hosting.md). It needs no sign-in and logs no request content.
+
+### Other MCP apps
+
+Technical users can connect any app that supports MCP (the Model Context Protocol). Use the command `npx` with the arguments `-y pali-canon-mcp` once the npm package is published, or today `node /path/to/pali-canon-claude/server/index.cjs`. See [docs/development.md](docs/development.md#connect-any-mcp-client). ChatGPT support is on the [roadmap](#roadmap).
 
 ## Using it well
 
@@ -153,13 +199,13 @@ New to the terms? See the [glossary](docs/glossary.md).
 - The commentaries (Aṭṭhakathā) and sub-commentaries (Ṭīkā) are not included yet.
 - The Pāli is shown in Roman script only. Sinhala, Thai, Myanmar, Khmer and other scripts are planned.
 - Translations and the dictionary need internet; the Pāli does not.
-- It runs on your own computer. A hosted version for Claude on the web and phone is planned.
+- It runs on your own computer. A hosted version for Claude on the web and phone is built but not online yet.
 
 ## Roadmap
 
 Fifty issues are planned, under one tracking issue: [Roadmap: parity with Bible and Quran AI tools (#52)](https://github.com/DaniilKi/pali-canon-claude/issues/52). In short:
 
-- **Reach:** a hosted version, Claude's connector directory, Codex, ChatGPT, Gemini, code editors, the MCP Registry, and support in many languages.
+- **Reach:** putting the hosted version online, Claude's connector directory, ChatGPT, the MCP Registry and community directories, and support in many languages. The Codex, Gemini CLI and code editor packages are done and waiting for hands-on testing.
 - **Study:** commentaries, word-by-word analysis, quote checking, other scripts, parallels between texts, topics, and people and places.
 - **Practice:** Uposatha (observance day) calendar, festivals, chanting texts, daily readings.
 
@@ -176,14 +222,21 @@ How we compare with Bible, Quran and Sefaria tools, and why each item matters: [
 | [Roadmap](docs/roadmap.md) | everyone | Comparison with other traditions' tools, and the plan |
 | [How it works](docs/how-it-works.md) | curious readers | How the data was built and checked |
 | [Decisions](docs/decisions.md) | contributors | Each major decision and its reasoning |
+| Install guides | everyone | Step-by-step setup for [Claude Code](docs/install/claude-code.md), [Codex](docs/install/codex.md), [Gemini](docs/install/gemini.md), [code editors](docs/install/ide.md) and [local models](docs/install/local-clients.md) |
+| [Hosting](docs/hosting.md) | self-hosters | Running the web version with Docker, Fly.io or Render |
+| [Directory listings](docs/listings/README.md) | maintainers | The MCP Registry entry and the packets for community directories, including the [Claude plugin directory](docs/listings/claude-code-marketplace.md) |
 | [Development](docs/development.md) | developers | Building, testing, releasing, connecting other clients |
 | [AGENTS.md](AGENTS.md) | AI agents | Full working context for agents working on this repository |
 | [THIRD_PARTY.md](THIRD_PARTY.md) | everyone | Licences of the texts and dependencies |
+| [PRIVACY.md](PRIVACY.md), [TERMS.md](TERMS.md) | everyone | Privacy policy and terms of use |
+| [SECURITY.md](SECURITY.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | contributors | Reporting security problems; community standards |
+| [HANDOFF.md](HANDOFF.md) | maintainers | Every task left for a person to do |
 
 ## Contributing, privacy and licence
 
 - **Found a wrong citation or a broken link?** Please [open an issue](https://github.com/DaniilKi/pali-canon-claude/issues) with the citation you used, what you expected (ideally with a PTS page) and what you got. Translators, scholars, monastics and native speakers of Sinhala, Thai, Burmese, Khmer and Lao are especially welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
-- **Privacy:** there are no accounts, analytics or stored questions. The Pāli is read on your computer. Translation and dictionary requests go to those public sites or their mirrors, which may keep ordinary web logs.
+- **Privacy:** there are no accounts, analytics or stored questions. The Pāli is read on your computer. Translation and dictionary requests go to those public sites or their mirrors, which may keep ordinary web logs. See the [privacy policy](PRIVACY.md) and [terms of use](TERMS.md).
+- **Security problems:** please report them privately; see [SECURITY.md](SECURITY.md). Everyone taking part follows our [code of conduct](CODE_OF_CONDUCT.md).
 - **Licence:** the software is [MIT](LICENSE). **The texts are not:** each keeps its own terms, which are mostly non-commercial. Do not sell content retrieved with this tool. See [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ### Acknowledgements

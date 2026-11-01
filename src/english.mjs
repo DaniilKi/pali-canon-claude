@@ -1,6 +1,7 @@
 /** English translations: Ṭhānissaro Bhikkhu (dhammatalks.org) and Access to Insight, with mirrors. */
 import { fetchMirrors, plainText, decodeHtml } from './http.mjs';
 import { load, linksFor } from './canon.mjs';
+import { liveCache } from './cache.mjs';
 
 const ATI_MIRRORS = [
   (p) => `https://accesstoinsight.org${p}.html`,
@@ -32,7 +33,11 @@ export function atiNotice(html) {
   return { licensing, citation };
 }
 
-async function fetchAti(path) {
+// Successful page fetches are kept briefly in memory (see cache.mjs) with their notices; failures never are.
+const fetchAti = (path) => liveCache.wrap(`ati:${path}`, () => fetchAtiLive(path));
+const fetchDhammatalks = (url) => liveCache.wrap(`dt:${url}`, () => fetchDhammatalksLive(url));
+
+async function fetchAtiLive(path) {
   const { body, url, mirror } = await fetchMirrors(atiMirrors(path));
   const notice = atiNotice(body);
   return {
@@ -44,7 +49,7 @@ async function fetchAti(path) {
   };
 }
 
-async function fetchDhammatalks(url) {
+async function fetchDhammatalksLive(url) {
   const { body } = await fetchMirrors([url]);
   const start = body.search(/<div\b[^>]*id=["']sutta["']/i);
   const end = body.search(/<div\b[^>]*class=["'][^"']*footer/i);

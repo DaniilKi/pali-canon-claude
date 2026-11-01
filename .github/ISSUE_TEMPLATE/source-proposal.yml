@@ -1,0 +1,60 @@
+name: Suggest a source
+description: Propose an edition, translation, dictionary or reference work to add.
+title: "Source: "
+labels: ["enhancement", "area: data"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. Every source must pass the five tests in [docs/sources.md](https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/sources.md#how-we-choose-sources).
+        Answer what you can; "I don't know" is a fine answer, and we will check.
+        Note: we do not add content from SuttaCentral, because its translators ask that their work not be used in AI tools. We link to it instead.
+  - type: input
+    id: source
+    attributes:
+      label: Source name and link
+      placeholder: "Name of the edition or translation, and its web address"
+    validations:
+      required: true
+  - type: textarea
+    id: adds
+    attributes:
+      label: What would it add?
+      description: Which texts, languages or features it would cover that we do not have now.
+    validations:
+      required: true
+  - type: textarea
+    id: standing
+    attributes:
+      label: "1. Standing: is it recognised?"
+      description: Is it an edition or translation that the tradition or the scholarly community recognises? Who made or published it?
+    validations:
+      required: true
+  - type: textarea
+    id: permission
+    attributes:
+      label: "2. Permission: what is its licence or terms?"
+      description: Link to the licence or terms of use. Do they allow this use (and on what conditions, such as attribution or non-commercial use)?
+    validations:
+      required: true
+  - type: textarea
+    id: respect
+    attributes:
+      label: "3. Respect: have its authors asked to stay out of AI tools?"
+      description: Have the authors or publishers said their work should not be used in AI tools? Link to anything relevant. If they have, we will link to it instead of using it.
+    validations:
+      required: true
+  - type: textarea
+    id: durability
+    attributes:
+      label: "4. Durability: where is it published?"
+      description: Is it somewhere stable, such as a versioned repository or an official mirror, so citations keep working?
+    validations:
+      required: true
+  - type: textarea
+    id: verifiability
+    attributes:
+      label: "5. Verifiability: does it have stable identifiers?"
+      description: Does it use paragraph numbers, page numbers or stable web addresses, so every passage can be checked?
+    validations:
+      required: true

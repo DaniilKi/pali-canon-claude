@@ -34,4 +34,4 @@ npm run outage           # mirror failover
 
 ## Releases
 
-Keep the versions in `package.json`, `package-lock.json`, `manifest.json`, `.claude-plugin/plugin.json` and `src/index.mjs` in step, run every check, package the desktop extension and attach the `.mcpb` with checksums to the tagged GitHub release. Details: [docs/development.md](docs/development.md#releasing).
+Keep the versions in `package.json`, `package-lock.json`, `manifest.json`, `.claude-plugin/plugin.json` and `src/server.mjs` in step, run every check, package the desktop extension and attach the `.mcpb` with checksums to the tagged GitHub release. Details: [docs/development.md](docs/development.md#releasing).

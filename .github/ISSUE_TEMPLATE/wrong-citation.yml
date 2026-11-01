@@ -1,0 +1,55 @@
+name: Wrong citation or link
+description: A citation opened the wrong text, a PTS page was wrong, or a translation link points to the wrong sutta.
+title: "Wrong citation: "
+labels: ["bug", "area: quality"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. Getting citations exactly right is the heart of this project, and no link is better than a wrong link.
+        Please give as much as you can; a PTS page (such as "M i 55") helps us check against the printed edition.
+  - type: input
+    id: citation
+    attributes:
+      label: Citation you used
+      description: Exactly what you typed or asked for.
+      placeholder: "MN 10, SN 56:11, Dhp 183, M i 55, or a link"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      description: The text, title or translation you expected to get, and how you know (edition, book, translator).
+      placeholder: "Satipaṭṭhāna Sutta, the Foundations of Mindfulness"
+    validations:
+      required: true
+  - type: input
+    id: pts-page
+    attributes:
+      label: PTS page (if you know it)
+      description: Pali Text Society volume and page, for example "M i 55" or "S v 420". Leave blank if unsure.
+      placeholder: "M i 55"
+  - type: textarea
+    id: actual
+    attributes:
+      label: What you actually got
+      description: The text id, title or link the tool returned. Copy it if you can.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of problem is it?
+      options:
+        - The citation opened the wrong Pāli text
+        - The PTS page is wrong
+        - The English translation link is wrong
+        - A translation is missing that should be there
+        - The numbering note is wrong or missing
+        - Other or not sure
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else (optional)
+      description: Which app you used, other editions you compared with, or any other detail.
