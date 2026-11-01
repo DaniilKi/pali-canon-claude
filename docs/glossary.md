@@ -21,6 +21,8 @@ Terms used in this project, explained for newcomers. Pāli words are given with 
 | **Nipāta** | A numbered book of the Aṅguttara Nikāya (AN 3 is "the threes") |
 | **Peyyāla** | An abbreviation of repeated text, marked "…pe…" in the Pāli. Texts the edition only abbreviates are marked *approximate* |
 | **Gāthā** | A verse |
+| **Mātikā** | The "matrix" of headings at the start of the Dhammasaṅgaṇī, the first Abhidhamma book: 22 triads (*tika*, three-way divisions such as wholesome, unwholesome, indeterminate) and 142 dyads (*duka*, two-way divisions), 100 Abhidhamma dyads and 42 Suttanta dyads. The `abhidhamma_matika` tool lists them |
+| **Paccaya** | A condition: one of the 24 ways one thing supports another, set out in the Paṭṭhāna, the last Abhidhamma book. The `patthana_condition` tool gives each one's Pāli definition and where it is in the text; for an English meaning, look the Pāli term up with `lookup_pali` |
 
 ## Commentaries and later works
 
