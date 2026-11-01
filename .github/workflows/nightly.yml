@@ -1,0 +1,76 @@
+name: Nightly source health
+# Checks the live online sources (translations, mirrors, dictionary) and the failover design every night.
+# When anything fails it opens an issue titled "Source health", or comments on it if one is already open.
+on:
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: nightly-source-health
+  cancel-in-progress: false
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Live smoke test
+        id: smoke
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          npm run smoke -- --live 2>&1 | tee smoke.log
+      - name: Outage and mirror test
+        id: outage
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          npm run outage 2>&1 | tee outage.log
+      - name: Open or update the "Source health" issue
+        if: steps.smoke.outcome != 'success' || steps.outage.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          SMOKE: ${{ steps.smoke.outcome }}
+          OUTAGE: ${{ steps.outage.outcome }}
+        run: |
+          {
+            echo "Nightly source check failed on $(date -u +%Y-%m-%d). Run: $RUN_URL"
+            echo
+            echo "- Live smoke test (\`npm run smoke -- --live\`): **$SMOKE**"
+            echo "- Outage and mirror test (\`npm run outage\`): **$OUTAGE**"
+            echo
+            echo "<details><summary>Live smoke log (last 60 lines)</summary>"
+            echo
+            echo '```'
+            tail -n 60 smoke.log 2>/dev/null || echo "(no log)"
+            echo '```'
+            echo "</details>"
+            echo
+            echo "<details><summary>Outage log (last 60 lines)</summary>"
+            echo
+            echo '```'
+            tail -n 60 outage.log 2>/dev/null || echo "(no log)"
+            echo '```'
+            echo "</details>"
+          } > body.md
+          number=$(gh api "repos/$REPO/issues?state=open&per_page=100" \
+            --jq '[.[] | select(.pull_request == null and .title == "Source health")][0].number // empty')
+          if [ -n "$number" ]; then
+            gh api "repos/$REPO/issues/$number/comments" -F body=@body.md --silent
+            echo "Commented on issue #$number"
+          else
+            gh api "repos/$REPO/issues" -f title="Source health" -F body=@body.md --jq '"Opened issue #\(.number)"'
+          fi
+      - name: Fail the run when a check failed
+        if: steps.smoke.outcome != 'success' || steps.outage.outcome != 'success'
+        run: exit 1

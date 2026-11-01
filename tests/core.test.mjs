@@ -150,3 +150,17 @@ test('a verse inherits its chapter translations, with a note', () => {
   assert.ok(desc.english.length > 0);
   assert.ok(desc.notes.some((n) => /whole Dhp 179/.test(n)));
 });
+
+test('CI runs the full matrix and the nightly job reports source health', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const check = await readFile(new URL('../.github/workflows/check.yml', import.meta.url), 'utf8');
+  assert.match(check, /os: \[ubuntu-latest, macos-latest, windows-latest\]/);
+  assert.match(check, /node: \[20, 22\]/);
+  assert.match(check, /git diff --exit-code -- server\//);
+  const nightly = await readFile(new URL('../.github/workflows/nightly.yml', import.meta.url), 'utf8');
+  for (const needle of ['schedule:', 'workflow_dispatch:', 'issues: write', 'npm run smoke -- --live', 'npm run outage', 'title == "Source health"', 'title="Source health"']) {
+    assert.ok(nightly.includes(needle), needle);
+  }
+  const outage = await readFile(new URL('../scripts/outage.mjs', import.meta.url), 'utf8');
+  assert.match(outage, /process\.exitCode = 1/, 'outage script must fail the nightly run on unexpected results');
+});
