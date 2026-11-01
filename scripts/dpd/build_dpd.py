@@ -8,8 +8,9 @@ Kept:
   - every root (meaning, root sign);
   - the inflection -> headword map ("lookup" rows with headwords and their grammar tags) and the
     deconstructor (compound and sandhi splits), restricted to the word forms that occur in the bundled
-    VRI root texts (server/data/canon.json.gz), the variants the tokeniser tries (quotation sandhi
-    "-’nti" = "-ṃ ti", a vowel lengthened before "ti") and the parts of every kept split.
+    VRI root texts (server/data/canon.json.gz) as the tokeniser reads them (quotation sandhi
+    "-’nti" = "-ṃ ti", a vowel lengthened before "ti", each undone only where DPD knows the result)
+    and the parts of every kept split.
 
 Usage:
   python scripts/dpd/build_dpd.py DPD_DB CANON_JSON_GZ OUT_JSON_GZ --archive-sha256 HEX
@@ -37,19 +38,24 @@ def tokens(text):
 
 
 def parts(token, known):
-    """Lookup forms for one token, following src/analyse.mjs wordParts(): [(form, note)]."""
+    """Lookup forms for one token, following src/analyse.mjs wordParts(): [(form, note)].
+
+    "-’’nti" becomes "-ṃ" + "ti" only when DPD knows both results; a long final vowel is shortened only
+    directly before the particle "ti" and only when DPD knows the short form.
+    """
     pieces = [p for p in QUOTES.split(token.lower().replace("ṁ", "ṃ")) if p]
     out = []
     for i, piece in enumerate(pieces):
-        note = None
-        if i > 0 and piece.startswith("n") and len(piece) > 1 and not known(piece) and known(piece[1:]) and out and not out[-1][0].endswith("ṃ"):
+        if (i > 0 and piece.startswith("n") and len(piece) > 1 and out and not out[-1][0].endswith("ṃ")
+                and not known(piece) and known(piece[1:]) and known(out[-1][0] + "ṃ")):
             prev, prev_note = out[-1]
             out[-1] = (prev + "ṃ", prev_note or "quotation sandhi: final -ṃ written as n before ti")
             piece = piece[1:]
-        out.append((piece, note))
+        out.append((piece, None))
     fixed = []
-    for form, note in out:
-        if not known(form) and form[-1:] in LONG_TO_SHORT and known(form[:-1] + LONG_TO_SHORT[form[-1]]):
+    for i, (form, note) in enumerate(out):
+        nxt = out[i + 1][0] if i + 1 < len(out) else None
+        if nxt == "ti" and form[-1:] in LONG_TO_SHORT and not known(form) and known(form[:-1] + LONG_TO_SHORT[form[-1]]):
             form, note = form[:-1] + LONG_TO_SHORT[form[-1]], note or "final vowel lengthened before ti (sandhi)"
         fixed.append((form, note))
     return fixed
@@ -74,14 +80,21 @@ def main():
     if info.get("license") != "CC BY-NC-SA 4.0":
         sys.exit(f"Unexpected DPD licence {info.get('license')!r}; stop and review.")
 
-    lookup = {}
-    for key, hw, decon, gram in con.execute("select lookup_key, headwords, deconstructor, grammar from lookup"):
-        h = json.loads(hw) if hw else []
-        d = json.loads(decon) if decon else []
-        g = json.loads(gram) if gram else []
-        if h or d:
-            lookup[key] = (h, g, d)
-    known = lambda form: form in lookup
+    # Keys only first (the full lookup table does not fit comfortably in memory); rows are read per wanted form.
+    keys = set()
+    for key, hw, decon in con.execute("select lookup_key, headwords, deconstructor from lookup"):
+        if (hw or "[]").strip() != "[]" or (decon or "[]").strip() != "[]":
+            keys.add(key)
+    known = lambda form: form in keys
+    rows = {}
+
+    def lookup(form):
+        if form not in keys:
+            return None
+        if form not in rows:
+            hw, decon, gram = con.execute("select headwords, deconstructor, grammar from lookup where lookup_key = ?", (form,)).fetchone()
+            rows[form] = (json.loads(hw) if hw else [], json.loads(gram) if gram else [], json.loads(decon) if decon else [])
+        return rows[form]
 
     canon = json.load(gzip.open(args.canon, "rt", encoding="utf-8"))
     wanted = set()
@@ -90,12 +103,14 @@ def main():
             for tok in tokens(block[2]):
                 for form, _ in parts(tok, known):
                     wanted.add(form)
+    canon_source = canon["source"]
+    del canon
     # Parts of every kept split (two levels), so components can be glossed too.
     frontier = set(wanted)
     for _ in range(2):
         nxt = set()
         for form in frontier:
-            for split in (lookup.get(form, ((), (), ()))[2])[:MAX_SPLITS]:
+            for split in (lookup(form) or ((), (), ()))[2][:MAX_SPLITS]:
                 for piece in split.split(" + "):
                     piece = piece.strip()
                     if piece and piece not in wanted:
@@ -105,13 +120,16 @@ def main():
 
     forms = {}
     for form in sorted(wanted):
-        if form not in lookup:
+        found = lookup(form)
+        if not found:
             continue
-        h, g, d = lookup[form]
+        h, g, d = found
         row = [h, g, d[:MAX_SPLITS]]
         while row and not row[-1]:
             row.pop()
         forms[form] = row
+    rows.clear()
+    keys.clear()
 
     headwords = []
     for row in con.execute("select id, lemma_1, pos, grammar, meaning_1, meaning_2, root_key, construction, plus_case from dpd_headwords order by id"):
@@ -145,7 +163,7 @@ def main():
             "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
             "attribution": f"Digital Pāḷi Dictionary by Bodhirasa Bhikkhu, {version}, CC BY-NC-SA 4.0 (https://www.dpdict.net/)",
             "subset": "All headwords and roots; inflection -> headword map and deconstructor splits for the word forms of the bundled VRI root texts. Derived file, same licence (CC BY-NC-SA 4.0).",
-            "canon_commit": canon["source"].get("commit", ""),
+            "canon_commit": canon_source.get("commit", ""),
         },
         "roots": roots,
         "headwords": headwords,

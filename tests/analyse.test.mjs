@@ -66,6 +66,71 @@ test('quotation sandhi is undone only where DPD knows the result', () => {
   assert.deepEqual(tokenize('‘‘Bhadante’’ti te bhikkhū – etadavoca.'), ['Bhadante’’ti', 'te', 'bhikkhū', 'etadavoca']);
 });
 
+test('homonyms are kept apart: each grammar tag is paired only with senses of its own part of speech', () => {
+  const { headwords } = loadDpd();
+  const posOf = new Map([...headwords.values()].map((h) => [h.lemma, h.pos]));
+  const fits = (label, pos) => {
+    const [cls, gender] = label.split(' ');
+    if (label.includes(',')) return true; // DPD headword grammar of an uninflected sense ("ind, conj")
+    if (cls === 'noun') return ['masc', 'nt', 'fem'].includes(pos) && (!['masc', 'nt', 'fem'].includes(gender) || gender === pos);
+    if (cls === 'verb') return ['pr', 'aor', 'imp', 'opt', 'fut', 'cond', 'imperf', 'perf'].includes(pos);
+    return cls === pos;
+  };
+  const check = (form) => {
+    const { analyses } = analyseToken(form)[0];
+    for (const a of analyses) {
+      for (const m of a.meanings) assert.equal(posOf.get(m.lemma), a.pos, `${form}: ${m.lemma} listed under ${a.headword} (${a.pos})`);
+      for (const g of a.grammar) if (a.meanings.length) assert.ok(fits(g, a.pos), `${form}: "${g}" paired with ${a.pos} senses`);
+    }
+    return analyses;
+  };
+  // ca: the conjunction ("and") is indeclinable; the vocative belongs to the letter ca.
+  const ca = check('ca');
+  const caInd = ca.find((a) => a.pos === 'ind');
+  assert.match(caInd.meanings[0].meaning, /^and/);
+  assert.ok(caInd.grammar.every((g) => !/voc/.test(g)), 'no case on the indeclinable');
+  const caLetter = ca.find((a) => a.pos === 'letter');
+  assert.deepEqual(caLetter.grammar, ['letter masc voc sg']);
+  assert.match(caLetter.meanings[0].meaning, /letter c/);
+  // nāma: "certainly; truly" (ind) is not a vocative noun; "name" (nt) is.
+  const nama = check('nāma');
+  assert.match(nama.find((a) => a.pos === 'ind').meanings[0].meaning, /certainly/);
+  const namaNt = nama.find((a) => a.pos === 'nt');
+  assert.deepEqual(namaNt.grammar, ['noun nt voc sg']);
+  assert.ok(namaNt.meanings.some((m) => m.meaning === 'name'));
+  assert.ok(nama.find((a) => a.pos === 'adj').grammar.includes('adj masc voc sg'));
+  // so: "that" (ta, pron) and "own" (sa, pron) are separate from the letter sa.
+  const so = check('so');
+  const ta = so.find((a) => a.headword === 'ta');
+  assert.deepEqual(ta.grammar, ['pron masc nom sg']);
+  assert.equal(ta.meanings[0].meaning, 'that');
+  const saLetter = so.find((a) => a.headword === 'sa' && a.pos === 'letter');
+  assert.deepEqual(saLetter.grammar, ['letter masc nom sg']);
+  assert.match(saLetter.meanings[0].meaning, /letter s/);
+  assert.ok(so.filter((a) => a.headword === 'sa' && a.pos === 'pron').every((a) => !a.grammar.some((g) => g.startsWith('letter'))));
+  // tato and ka: no letter or vocative grammar next to "that" or "who?".
+  assert.ok(check('tato').filter((a) => a.meanings.some((m) => m.meaning === 'that')).every((a) => a.grammar.every((g) => g.startsWith('pron'))));
+  const ka = check('ka');
+  assert.ok(ka.filter((a) => a.meanings.some((m) => /who\?/.test(m.meaning))).every((a) => a.grammar.every((g) => !/voc/.test(g))));
+  // A broad sample: the same invariant over the first words of MN 1.
+  for (const w of analysePassage({ uid: 'MN 1', segment: 3, limit: 80 }).words) if (w.status === 'found') check(w.form ?? w.surface.toLowerCase());
+});
+
+test('sandhi rules apply only where DPD has the result and the ti that triggers them', () => {
+  // -’’nti is read as -ṃ ti only when DPD has the -ṃ form; otherwise the text is left as written.
+  assert.deepEqual(wordParts('pācattiya’’nti').map((p) => p.form), ['pācattiya', 'nti']);
+  assert.deepEqual(wordParts('āyāmaha’’nti').map((p) => p.form), ['āyāmaha', 'nti']);
+  assert.ok(wordParts('pācattiya’’nti').every((p) => !p.note));
+  // A long final vowel is shortened only right before ti.
+  assert.deepEqual(wordParts('hotī').map((p) => p.form), ['hotī']);
+  assert.deepEqual(wordParts('anā').map((p) => p.form), ['anā']);
+  assert.deepEqual(wordParts('dukkaṭassā').map((p) => p.form), ['dukkaṭassā']);
+  assert.deepEqual(wordParts('paṭibhāseyyā’’si').map((p) => p.form), ['paṭibhāseyyā', 'si']);
+  const [hoti] = wordParts('hotī’’ti');
+  assert.equal(hoti.form, 'hoti');
+  assert.match(hoti.note, /before ti/);
+});
+
 test('compound and sandhi splits come from the DPD deconstructor with glossed components', () => {
   const [w] = analyseToken('atthipaccayena');
   assert.equal(w.status, 'split-only');
@@ -134,7 +199,7 @@ test('offline lookup: inflected form, headword and headword without diacritics',
 test('#23 lookup_pali falls back to the bundled DPD subset when dpdict.net is down, labelled', async () => {
   const r = await providers.lookupPali({ word: 'dhammo', limit: 3 });
   assert.equal(r.offline, true);
-  assert.match(r.note, /dpdict\.net is unreachable/);
+  assert.match(r.note, /dpdict\.net is unreachable right now/);
   assert.match(r.note, /bundled offline DPD subset/);
   assert.equal(r.entries.length, 3);
   assert.ok(r.omitted > 0);

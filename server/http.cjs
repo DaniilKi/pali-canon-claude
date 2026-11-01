@@ -25270,50 +25270,47 @@ function dpdNotice() {
 }
 var LETTERS = "a-zA-Z\u0101\u012B\u016B\u1E45\xF1\u1E6D\u1E0D\u1E47\u1E37\u1E43\u1E41\u0100\u012A\u016A\u1E44\xD1\u1E6C\u1E0C\u1E46\u1E36\u1E42\u1E40";
 var TOKEN = new RegExp(`[${LETTERS}]+(?:[\u2019\u2018'\`]+[${LETTERS}]+)*`, "g");
-function rootInfo(key3) {
-  if (!key3) return void 0;
-  const root = loadDpd().roots[key3];
-  return root ? { root: key3, meaning: root[0], ...root[1] ? { sign: root[1] } : {} } : { root: key3 };
+var GENDERS = /* @__PURE__ */ new Set(["masc", "nt", "fem"]);
+var VERB_POS = /* @__PURE__ */ new Set(["pr", "aor", "imp", "opt", "fut", "cond", "imperf", "perf"]);
+function tagFits(pos, tag, hwPos) {
+  if (pos === "noun") {
+    if (!GENDERS.has(hwPos)) return false;
+    const gender = String(tag).split(" ")[0];
+    return !GENDERS.has(gender) || gender === hwPos;
+  }
+  if (pos === "verb") return VERB_POS.has(hwPos);
+  return pos === hwPos;
 }
-var MAX_SENSES = 3;
-function analyseForm(form, { maxHeadwords = 6 } = {}) {
+function formEntries(form) {
   const dpd = loadDpd();
   const entry2 = dpd.forms[form];
   if (!entry2) return null;
   const [ids = [], grammar = [], splits = []] = entry2;
-  const groups = /* @__PURE__ */ new Map();
-  const group = (lemma) => {
-    if (!groups.has(lemma)) groups.set(lemma, { headword: lemma, senses: [], grammar: [] });
-    return groups.get(lemma);
-  };
-  for (const id of ids) {
-    const hw = dpd.headwords.get(id);
-    if (hw) group(hw.clean).senses.push(hw);
-  }
+  const senses = ids.map((id) => dpd.headwords.get(id)).filter(Boolean);
+  const entries = /* @__PURE__ */ new Map();
+  const tagged = /* @__PURE__ */ new Set();
   for (const [lemma, pos, tag] of grammar) {
     const label = `${pos} ${tag}`.trim();
-    const g = group(lemma);
-    if (!g.grammar.includes(label)) g.grammar.push(label);
+    let fits = senses.filter((s) => s.clean === lemma && tagFits(pos, tag, s.pos));
+    if (!fits.length) fits = (dpd.lemmas.get(lemma) ?? []).map((id) => dpd.headwords.get(id)).filter((s) => s && tagFits(pos, tag, s.pos));
+    const key3 = fits.length ? `${lemma}|${fits.map((s) => s.id).join(",")}` : `${lemma}|tag:${pos}`;
+    if (!entries.has(key3)) entries.set(key3, { headword: lemma, pos: fits[0]?.pos ?? pos, grammar: [], senses: fits });
+    const e = entries.get(key3);
+    if (!e.grammar.includes(label)) e.grammar.push(label);
+    for (const s of fits) tagged.add(s.id);
   }
-  const all = [...groups.values()].map((g) => {
-    const first = g.senses[0];
-    const withRoot = g.senses.find((s) => s.root);
-    const withConstruction = g.senses.find((s) => s.construction);
-    return {
-      headword: g.headword,
-      ...first ? { pos: first.pos } : {},
-      grammar: g.grammar.length ? g.grammar : first ? [first.grammar] : [],
-      ...withRoot ? { root: rootInfo(withRoot.root) } : {},
-      ...withConstruction ? { construction: withConstruction.construction } : {},
-      meanings: g.senses.slice(0, MAX_SENSES).map((s) => ({ lemma: s.lemma, meaning: s.meaning || "(no meaning given)" })),
-      senses_total: g.senses.length
-    };
-  });
-  return {
-    analyses: all.slice(0, maxHeadwords),
-    ...all.length > maxHeadwords ? { more_headwords: all.length - maxHeadwords } : {},
-    splits
-  };
+  for (const s of senses) {
+    if (tagged.has(s.id)) continue;
+    const key3 = `${s.clean}|pos:${s.pos}`;
+    if (!entries.has(key3)) entries.set(key3, { headword: s.clean, pos: s.pos, grammar: [], senses: [] });
+    const e = entries.get(key3);
+    e.senses.push(s);
+    if (s.grammar && !e.grammar.includes(s.grammar)) e.grammar.push(s.grammar);
+  }
+  const rank = new Map(ids.map((id, i) => [id, i]));
+  const order = (e) => Math.min(...e.senses.map((s) => rank.get(s.id) ?? ids.length), ids.length + 1);
+  const list = [...entries.values()].map((e, i) => ({ e, i })).sort((a, b) => order(a.e) - order(b.e) || a.i - b.i).map(({ e }) => e);
+  return { entries: list, splits };
 }
 function lookupOffline({ word, limit = 5 } = {}) {
   const dpd = loadDpd();
@@ -25328,15 +25325,13 @@ function lookupOffline({ word, limit = 5 } = {}) {
     lines.push(`${hw.lemma}: ${hw.pos}. ${hw.meaning || "(no meaning given)"}${root}${grammar ? ` \u2014 this form: ${grammar}` : ""}`);
   };
   const detail = [];
-  const found = analyseForm(query, { maxHeadwords: 50 });
+  const found = formEntries(query);
   let matched = "form";
   if (found) {
-    for (const a of found.analyses) {
-      detail.push(`${a.headword}: ${a.grammar.join("; ")}${a.construction ? ` | construction: ${a.construction}` : ""}`);
-      for (const id of dpd.forms[query][0] ?? []) {
-        const hw = dpd.headwords.get(id);
-        if (hw?.clean === a.headword) addSense(hw, a.grammar.join("; "));
-      }
+    for (const e of found.entries) {
+      const construction = e.senses.find((s) => s.construction)?.construction;
+      detail.push(`${e.headword} (${e.pos}): ${e.grammar.join("; ")}${construction ? ` | construction: ${construction}` : ""}`);
+      for (const hw of e.senses) addSense(hw, e.grammar.join("; "));
     }
     if (found.splits.length) detail.push(`split (DPD deconstructor): ${found.splits.join(" | ")}`);
   }
@@ -25415,8 +25410,10 @@ async function lookupPali({ word, limit = 5 }) {
       offline = lookupOffline({ word, limit });
     } catch {
     }
-    if (offline) return { ...offline, note: `dpdict.net is unreachable right now (${error2.message}); this answer comes from the bundled offline DPD subset (${offline.dictionary.version}), not the live site.` };
-    throw new Error(`Digital P\u0101\u1E37i Dictionary is unavailable right now (${error2.message}) and "${word}" is not in the bundled offline subset. Open ${DPD}/?q=${encodeURIComponent(word)} directly or try again shortly.`);
+    const outage = error2?.retryable !== false;
+    const what = outage ? `dpdict.net is unreachable right now (${error2.message})` : `dpdict.net did not answer this lookup (${error2.message})`;
+    if (offline) return { ...offline, note: `${what}; this answer comes from the bundled offline DPD subset (${offline.dictionary.version}), not the live site.` };
+    throw new Error(`${outage ? "Digital P\u0101\u1E37i Dictionary is unavailable right now" : "Digital P\u0101\u1E37i Dictionary did not answer this lookup"} (${error2.message}) and "${word}" is not in the bundled offline subset. Open ${DPD}/?q=${encodeURIComponent(word)} directly${outage ? " or try again shortly" : ""}.`);
   }
   const summary = String(data2.summary_html ?? "");
   const entries = [...summary.matchAll(/<p\b[^>]*class=["'][^"']*summary[^"']*["'][^>]*>([^]*?)<\/p>/gi)].map((m) => plainText(m[1]));

@@ -57,8 +57,11 @@ export async function lookupPali({ word, limit = 5 }) {
     // Outage fallback (#23): answer from the bundled DPD subset, labelled as such.
     let offline = null;
     try { offline = lookupOffline({ word, limit }); } catch { /* bundled data missing: report the outage below */ }
-    if (offline) return { ...offline, note: `dpdict.net is unreachable right now (${error.message}); this answer comes from the bundled offline DPD subset (${offline.dictionary.version}), not the live site.` };
-    throw new Error(`Digital Pāḷi Dictionary is unavailable right now (${error.message}) and "${word}" is not in the bundled offline subset. Open ${DPD}/?q=${encodeURIComponent(word)} directly or try again shortly.`);
+    // Say what actually failed: an outage (network error, timeout, 5xx, 429, broken JSON) or a refused request (other 4xx).
+    const outage = error?.retryable !== false;
+    const what = outage ? `dpdict.net is unreachable right now (${error.message})` : `dpdict.net did not answer this lookup (${error.message})`;
+    if (offline) return { ...offline, note: `${what}; this answer comes from the bundled offline DPD subset (${offline.dictionary.version}), not the live site.` };
+    throw new Error(`${outage ? 'Digital Pāḷi Dictionary is unavailable right now' : 'Digital Pāḷi Dictionary did not answer this lookup'} (${error.message}) and "${word}" is not in the bundled offline subset. Open ${DPD}/?q=${encodeURIComponent(word)} directly${outage ? ' or try again shortly' : ''}.`);
   }
   const summary = String(data.summary_html ?? '');
   const entries = [...summary.matchAll(/<p\b[^>]*class=["'][^"']*summary[^"']*["'][^>]*>([^]*?)<\/p>/gi)].map((m) => plainText(m[1]));

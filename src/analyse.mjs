@@ -89,28 +89,31 @@ export function tokenize(text) {
 
 /**
  * Lookup forms of one token: [{ form, note? }]. Quotation sandhi is undone only where DPD knows the
- * result: "abhinandu’’nti" → abhinanduṃ + ti, "hotī’’ti" → hoti + ti.
+ * result: "abhinandu’’nti" → abhinanduṃ + ti (only if DPD has "abhinanduṃ"), "hotī’’ti" → hoti + ti
+ * (a long final vowel is shortened only directly before the particle ti, and only if DPD has the short form).
  */
 export function wordParts(token) {
   const known = (form) => Object.hasOwn(loadDpd().forms, form);
   const pieces = String(token).toLowerCase().replace(/ṁ/g, 'ṃ').split(QUOTES).filter(Boolean);
   const out = [];
   pieces.forEach((piece, i) => {
-    if (i > 0 && piece.length > 1 && piece[0] === 'n' && !known(piece) && known(piece.slice(1)) && out.length && !out.at(-1).form.endsWith('ṃ')) {
-      const prev = out.at(-1);
+    const prev = out.at(-1);
+    if (i > 0 && piece.length > 1 && piece[0] === 'n' && prev && !prev.form.endsWith('ṃ')
+      && !known(piece) && known(piece.slice(1)) && known(prev.form + 'ṃ')) {
       prev.form += 'ṃ';
       prev.note ||= 'quotation sandhi: final -ṃ written as n before ti';
       piece = piece.slice(1);
     }
     out.push({ form: piece, note: null });
   });
-  for (const part of out) {
+  out.forEach((part, i) => {
     const last = part.form.slice(-1);
-    if (!known(part.form) && LONG_TO_SHORT[last] && known(part.form.slice(0, -1) + LONG_TO_SHORT[last])) {
-      part.form = part.form.slice(0, -1) + LONG_TO_SHORT[last];
+    const short = part.form.slice(0, -1) + (LONG_TO_SHORT[last] ?? '');
+    if (out[i + 1]?.form === 'ti' && LONG_TO_SHORT[last] && !known(part.form) && known(short)) {
+      part.form = short;
       part.note ||= 'final vowel lengthened before ti (sandhi)';
     }
-  }
+  });
   return out;
 }
 
@@ -121,45 +124,87 @@ function rootInfo(key) {
 }
 
 const MAX_SENSES = 3;
+const GENDERS = new Set(['masc', 'nt', 'fem']);
+const VERB_POS = new Set(['pr', 'aor', 'imp', 'opt', 'fut', 'cond', 'imperf', 'perf']);
 
-/** Every DPD analysis of one exact form, grouped by headword. Returns null when DPD does not know the form. */
-export function analyseForm(form, { maxHeadwords = 6 } = {}) {
+/**
+ * Does a grammar tag from DPD's inflection lookup ("noun", "nt voc sg") belong to a headword sense of
+ * part of speech hwPos? Lookup "noun" pairs with masc/nt/fem senses of the same gender, "verb" with
+ * finite-verb senses, and every other lookup class (adj, pp, pron, letter, ...) only with the same pos.
+ * Inflection classes that are not a part of speech (prep, root, ve, cs, interr, adv) match nothing, so
+ * their tags are shown on their own rather than paired with a guessed sense.
+ */
+function tagFits(pos, tag, hwPos) {
+  if (pos === 'noun') {
+    if (!GENDERS.has(hwPos)) return false;
+    const gender = String(tag).split(' ')[0];
+    return !GENDERS.has(gender) || gender === hwPos;
+  }
+  if (pos === 'verb') return VERB_POS.has(hwPos);
+  return pos === hwPos;
+}
+
+/**
+ * DPD analyses of one exact form, one entry per homonym and part of speech: each grammar tag is tied to
+ * the senses whose pos it fits, and senses no tag fits (indeclinables, bases, irregular forms) get their own
+ * entry with DPD's headword grammar. Returns null when DPD does not know the form.
+ */
+function formEntries(form) {
   const dpd = loadDpd();
   const entry = dpd.forms[form];
   if (!entry) return null;
   const [ids = [], grammar = [], splits = []] = entry;
-  const groups = new Map();
-  const group = (lemma) => {
-    if (!groups.has(lemma)) groups.set(lemma, { headword: lemma, senses: [], grammar: [] });
-    return groups.get(lemma);
-  };
-  for (const id of ids) {
-    const hw = dpd.headwords.get(id);
-    if (hw) group(hw.clean).senses.push(hw);
-  }
+  const senses = ids.map((id) => dpd.headwords.get(id)).filter(Boolean);
+  const entries = new Map();
+  const tagged = new Set();
   for (const [lemma, pos, tag] of grammar) {
     const label = `${pos} ${tag}`.trim();
-    const g = group(lemma);
-    if (!g.grammar.includes(label)) g.grammar.push(label);
+    let fits = senses.filter((s) => s.clean === lemma && tagFits(pos, tag, s.pos));
+    // The lookup names a headword that is not among this form's ids: use that headword's own senses of the same pos.
+    if (!fits.length) fits = (dpd.lemmas.get(lemma) ?? []).map((id) => dpd.headwords.get(id)).filter((s) => s && tagFits(pos, tag, s.pos));
+    const key = fits.length ? `${lemma}|${fits.map((s) => s.id).join(',')}` : `${lemma}|tag:${pos}`;
+    if (!entries.has(key)) entries.set(key, { headword: lemma, pos: fits[0]?.pos ?? pos, grammar: [], senses: fits });
+    const e = entries.get(key);
+    if (!e.grammar.includes(label)) e.grammar.push(label);
+    for (const s of fits) tagged.add(s.id);
   }
-  const all = [...groups.values()].map((g) => {
-    const first = g.senses[0];
+  for (const s of senses) {
+    if (tagged.has(s.id)) continue;
+    const key = `${s.clean}|pos:${s.pos}`;
+    if (!entries.has(key)) entries.set(key, { headword: s.clean, pos: s.pos, grammar: [], senses: [] });
+    const e = entries.get(key);
+    e.senses.push(s);
+    if (s.grammar && !e.grammar.includes(s.grammar)) e.grammar.push(s.grammar);
+  }
+  // DPD's own order: by the first sense's position among the form's headwords; tag-only entries last.
+  const rank = new Map(ids.map((id, i) => [id, i]));
+  const order = (e) => Math.min(...e.senses.map((s) => rank.get(s.id) ?? ids.length), ids.length + 1);
+  const list = [...entries.values()].map((e, i) => ({ e, i })).sort((a, b) => order(a.e) - order(b.e) || a.i - b.i).map(({ e }) => e);
+  return { entries: list, splits };
+}
+
+/** Every DPD analysis of one exact form, one entry per homonym and part of speech. Returns null when DPD does not know the form. */
+export function analyseForm(form, { maxHeadwords = 8 } = {}) {
+  const found = formEntries(form);
+  if (!found) return null;
+  const all = found.entries.map((g) => {
     const withRoot = g.senses.find((s) => s.root);
     const withConstruction = g.senses.find((s) => s.construction);
     return {
       headword: g.headword,
-      ...(first ? { pos: first.pos } : {}),
-      grammar: g.grammar.length ? g.grammar : (first ? [first.grammar] : []),
+      pos: g.pos,
+      grammar: g.grammar,
       ...(withRoot ? { root: rootInfo(withRoot.root) } : {}),
       ...(withConstruction ? { construction: withConstruction.construction } : {}),
       meanings: g.senses.slice(0, MAX_SENSES).map((s) => ({ lemma: s.lemma, meaning: s.meaning || '(no meaning given)' })),
       senses_total: g.senses.length,
+      ...(g.senses.length ? {} : { note: 'DPD gives this grammar for the form but no matching headword sense in the bundled subset.' }),
     };
   });
   return {
     analyses: all.slice(0, maxHeadwords),
     ...(all.length > maxHeadwords ? { more_headwords: all.length - maxHeadwords } : {}),
-    splits,
+    splits: found.splits,
   };
 }
 
@@ -262,15 +307,13 @@ export function lookupOffline({ word, limit = 5 } = {}) {
     lines.push(`${hw.lemma}: ${hw.pos}. ${hw.meaning || '(no meaning given)'}${root}${grammar ? ` — this form: ${grammar}` : ''}`);
   };
   const detail = [];
-  const found = analyseForm(query, { maxHeadwords: 50 });
+  const found = formEntries(query);
   let matched = 'form';
   if (found) {
-    for (const a of found.analyses) {
-      detail.push(`${a.headword}: ${a.grammar.join('; ')}${a.construction ? ` | construction: ${a.construction}` : ''}`);
-      for (const id of dpd.forms[query][0] ?? []) {
-        const hw = dpd.headwords.get(id);
-        if (hw?.clean === a.headword) addSense(hw, a.grammar.join('; '));
-      }
+    for (const e of found.entries) {
+      const construction = e.senses.find((s) => s.construction)?.construction;
+      detail.push(`${e.headword} (${e.pos}): ${e.grammar.join('; ')}${construction ? ` | construction: ${construction}` : ''}`);
+      for (const hw of e.senses) addSense(hw, e.grammar.join('; '));
     }
     if (found.splits.length) detail.push(`split (DPD deconstructor): ${found.splits.join(' | ')}`);
   }
