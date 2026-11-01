@@ -23,6 +23,7 @@ The server has 11 tools. Six of them work without internet (`get_text` needs it 
 | `get_text` | Reads the Pāli text (VRI edition) | No, unless you also ask for an English translation |
 | `search_texts` | Searches the full Pāli text and titles | No |
 | `browse_canon` | Lists the books, collections and sections | No |
+| `vinaya_rule` | A monk's Pātimokkha rule (Pj 1, Pc 5, Sk 26…): its Pāli text and a link to the section of the *Buddhist Monastic Code* that explains it | No |
 | `list_sources` | Sources, editions and licences | No |
 | `get_translation` | Reads an English translation from dhammatalks.org or Access to Insight | Yes |
 | `compare_translations` | Shows two to four English translations side by side | Yes |

@@ -1,0 +1,1133 @@
+{
+ "source": {
+  "title": "The Buddhist Monastic Code, Volume I: The Pāṭimokkha Rules",
+  "author": "Ṭhānissaro Bhikkhu",
+  "edition": "third edition, revised: 2025",
+  "publisher": "dhammatalks.org",
+  "url": "https://www.dhammatalks.org/vinaya/bmc/Section0000.html",
+  "license": "CC BY-NC 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "retrieved": "2026-11-01",
+  "method": "URLs and anchors read from the book's table of contents and checked against each section page. Link only; no BMC text is stored."
+ },
+ "rules": {
+  "pj1": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0010.html#Pr1",
+   "chapter": "Chapter Four: Pārājika"
+  },
+  "pj2": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0010.html#Pr2",
+   "chapter": "Chapter Four: Pārājika"
+  },
+  "pj3": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0010.html#Pr3",
+   "chapter": "Chapter Four: Pārājika"
+  },
+  "pj4": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0010.html#Pr4",
+   "chapter": "Chapter Four: Pārājika"
+  },
+  "ss1": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0011.html#Sg1",
+   "chapter": "Chapter Five: Saṅghādisesa"
+  },
+  "ss2": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0011.html#Sg2",
+   "chapter": "Chapter Five: Saṅghādisesa"
+  },
+  "ss3": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0011.html#Sg3",
+   "chapter": "Chapter Five: Saṅghādisesa"
+  },
+  "ss4": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0011.html#Sg4",
+   "chapter": "Chapter Five: Saṅghādisesa"
+  },
+  "ss5": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0011.html#Sg5",
+   "chapter": "Chapter Five: Saṅghādisesa"
+  },
+  "ss6": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0011.html#Sg6",
+   "chapter": "Chapter Five: Saṅghādisesa"
+  },
+  "ss7": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0011.html#Sg7",
+   "chapter": "Chapter Five: Saṅghādisesa"
+  },
+  "ss8": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0011.html#Sg8",
+   "chapter": "Chapter Five: Saṅghādisesa"
+  },
+  "ss9": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0011.html#Sg9",
+   "chapter": "Chapter Five: Saṅghādisesa"
+  },
+  "ss10": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0011.html#Sg10",
+   "chapter": "Chapter Five: Saṅghādisesa"
+  },
+  "ss11": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0011.html#Sg11",
+   "chapter": "Chapter Five: Saṅghādisesa"
+  },
+  "ss12": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0011.html#Sg12",
+   "chapter": "Chapter Five: Saṅghādisesa"
+  },
+  "ss13": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0011.html#Sg13",
+   "chapter": "Chapter Five: Saṅghādisesa"
+  },
+  "ay1": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0012.html#Ay1",
+   "chapter": "Chapter Six: Aniyata"
+  },
+  "ay2": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0012.html#Ay2",
+   "chapter": "Chapter Six: Aniyata"
+  },
+  "np1": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0013.html#NP1",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "One: The Robe-cloth Chapter"
+  },
+  "np2": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0013.html#NP2",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "One: The Robe-cloth Chapter"
+  },
+  "np3": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0013.html#NP3",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "One: The Robe-cloth Chapter"
+  },
+  "np4": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0013.html#NP4",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "One: The Robe-cloth Chapter"
+  },
+  "np5": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0013.html#NP5",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "One: The Robe-cloth Chapter"
+  },
+  "np6": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0013.html#NP6",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "One: The Robe-cloth Chapter"
+  },
+  "np7": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0013.html#NP7",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "One: The Robe-cloth Chapter"
+  },
+  "np8": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0013.html#NP8",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "One: The Robe-cloth Chapter"
+  },
+  "np9": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0013.html#NP9",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "One: The Robe-cloth Chapter"
+  },
+  "np10": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0013.html#NP10",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "One: The Robe-cloth Chapter"
+  },
+  "np11": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0014.html#NP11",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Two: The Silk Chapter"
+  },
+  "np12": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0014.html#NP12",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Two: The Silk Chapter"
+  },
+  "np13": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0014.html#NP13",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Two: The Silk Chapter"
+  },
+  "np14": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0014.html#NP14",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Two: The Silk Chapter"
+  },
+  "np15": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0014.html#NP15",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Two: The Silk Chapter"
+  },
+  "np16": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0014.html#NP16",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Two: The Silk Chapter"
+  },
+  "np17": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0014.html#NP17",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Two: The Silk Chapter"
+  },
+  "np18": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0014.html#NP18",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Two: The Silk Chapter"
+  },
+  "np19": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0014.html#NP19",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Two: The Silk Chapter"
+  },
+  "np20": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0014.html#NP20",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Two: The Silk Chapter"
+  },
+  "np21": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0015.html#NP21",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Three: The Bowl Chapter"
+  },
+  "np22": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0015.html#NP22",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Three: The Bowl Chapter"
+  },
+  "np23": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0015.html#NP23",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Three: The Bowl Chapter"
+  },
+  "np24": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0015.html#NP24",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Three: The Bowl Chapter"
+  },
+  "np25": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0015.html#NP25",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Three: The Bowl Chapter"
+  },
+  "np26": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0015.html#NP26",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Three: The Bowl Chapter"
+  },
+  "np27": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0015.html#NP27",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Three: The Bowl Chapter"
+  },
+  "np28": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0015.html#NP28",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Three: The Bowl Chapter"
+  },
+  "np29": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0015.html#NP29",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Three: The Bowl Chapter"
+  },
+  "np30": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0015.html#NP30",
+   "chapter": "Chapter Seven: Nissaggiya Pācittiya",
+   "section": "Three: The Bowl Chapter"
+  },
+  "pc1": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0016.html#Pc1",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "One: The Lie Chapter"
+  },
+  "pc2": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0016.html#Pc2",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "One: The Lie Chapter"
+  },
+  "pc3": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0016.html#Pc3",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "One: The Lie Chapter"
+  },
+  "pc4": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0016.html#Pc4",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "One: The Lie Chapter"
+  },
+  "pc5": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0016.html#Pc5",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "One: The Lie Chapter"
+  },
+  "pc6": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0016.html#Pc6",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "One: The Lie Chapter"
+  },
+  "pc7": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0016.html#Pc7",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "One: The Lie Chapter"
+  },
+  "pc8": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0016.html#Pc8",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "One: The Lie Chapter"
+  },
+  "pc9": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0016.html#Pc9",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "One: The Lie Chapter"
+  },
+  "pc10": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0016.html#Pc10",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "One: The Lie Chapter"
+  },
+  "pc11": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0017.html#Pc11",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Two: The Living Plant Chapter"
+  },
+  "pc12": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0017.html#Pc12",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Two: The Living Plant Chapter"
+  },
+  "pc13": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0017.html#Pc13",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Two: The Living Plant Chapter"
+  },
+  "pc14": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0017.html#Pc14",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Two: The Living Plant Chapter"
+  },
+  "pc15": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0017.html#Pc15",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Two: The Living Plant Chapter"
+  },
+  "pc16": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0017.html#Pc16",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Two: The Living Plant Chapter"
+  },
+  "pc17": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0017.html#Pc17",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Two: The Living Plant Chapter"
+  },
+  "pc18": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0017.html#Pc18",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Two: The Living Plant Chapter"
+  },
+  "pc19": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0017.html#Pc19",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Two: The Living Plant Chapter"
+  },
+  "pc20": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0017.html#Pc20",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Two: The Living Plant Chapter"
+  },
+  "pc21": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0018.html#Pc21",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Three: The Exhortation Chapter"
+  },
+  "pc22": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0018.html#Pc22",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Three: The Exhortation Chapter"
+  },
+  "pc23": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0018.html#Pc23",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Three: The Exhortation Chapter"
+  },
+  "pc24": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0018.html#Pc24",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Three: The Exhortation Chapter"
+  },
+  "pc25": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0018.html#Pc25",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Three: The Exhortation Chapter"
+  },
+  "pc26": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0018.html#Pc26",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Three: The Exhortation Chapter"
+  },
+  "pc27": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0018.html#Pc27",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Three: The Exhortation Chapter"
+  },
+  "pc28": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0018.html#Pc28",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Three: The Exhortation Chapter"
+  },
+  "pc29": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0018.html#Pc29",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Three: The Exhortation Chapter"
+  },
+  "pc30": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0018.html#Pc30",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Three: The Exhortation Chapter"
+  },
+  "pc31": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0019.html#Pc31",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Four: The Food Chapter"
+  },
+  "pc32": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0019.html#Pc32",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Four: The Food Chapter"
+  },
+  "pc33": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0019.html#Pc33",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Four: The Food Chapter"
+  },
+  "pc34": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0019.html#Pc34",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Four: The Food Chapter"
+  },
+  "pc35": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0019.html#Pc35",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Four: The Food Chapter"
+  },
+  "pc36": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0019.html#Pc36",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Four: The Food Chapter"
+  },
+  "pc37": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0019.html#Pc37",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Four: The Food Chapter"
+  },
+  "pc38": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0019.html#Pc38",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Four: The Food Chapter"
+  },
+  "pc39": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0019.html#Pc39",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Four: The Food Chapter"
+  },
+  "pc40": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0019.html#Pc40",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Four: The Food Chapter"
+  },
+  "pc41": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0020.html#Pc41",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Five: The Naked Ascetic Chapter"
+  },
+  "pc42": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0020.html#Pc42",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Five: The Naked Ascetic Chapter"
+  },
+  "pc43": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0020.html#Pc43",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Five: The Naked Ascetic Chapter"
+  },
+  "pc44": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0020.html#Pc44",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Five: The Naked Ascetic Chapter"
+  },
+  "pc45": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0020.html#Pc45",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Five: The Naked Ascetic Chapter"
+  },
+  "pc46": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0020.html#Pc46",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Five: The Naked Ascetic Chapter"
+  },
+  "pc47": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0020.html#Pc47",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Five: The Naked Ascetic Chapter"
+  },
+  "pc48": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0020.html#Pc48",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Five: The Naked Ascetic Chapter"
+  },
+  "pc49": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0020.html#Pc49",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Five: The Naked Ascetic Chapter"
+  },
+  "pc50": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0020.html#Pc50",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Five: The Naked Ascetic Chapter"
+  },
+  "pc51": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0021.html#Pc51",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Six: The Alcoholic Drink Chapter"
+  },
+  "pc52": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0021.html#Pc52",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Six: The Alcoholic Drink Chapter"
+  },
+  "pc53": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0021.html#Pc53",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Six: The Alcoholic Drink Chapter"
+  },
+  "pc54": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0021.html#Pc54",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Six: The Alcoholic Drink Chapter"
+  },
+  "pc55": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0021.html#Pc55",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Six: The Alcoholic Drink Chapter"
+  },
+  "pc56": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0021.html#Pc56",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Six: The Alcoholic Drink Chapter"
+  },
+  "pc57": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0021.html#Pc57",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Six: The Alcoholic Drink Chapter"
+  },
+  "pc58": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0021.html#Pc58",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Six: The Alcoholic Drink Chapter"
+  },
+  "pc59": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0021.html#Pc59",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Six: The Alcoholic Drink Chapter"
+  },
+  "pc60": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0021.html#Pc60",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Six: The Alcoholic Drink Chapter"
+  },
+  "pc61": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0022.html#Pc61",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Seven: The Animal Chapter"
+  },
+  "pc62": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0022.html#Pc62",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Seven: The Animal Chapter"
+  },
+  "pc63": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0022.html#Pc63",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Seven: The Animal Chapter"
+  },
+  "pc64": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0022.html#Pc64",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Seven: The Animal Chapter"
+  },
+  "pc65": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0022.html#Pc65",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Seven: The Animal Chapter"
+  },
+  "pc66": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0022.html#Pc66",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Seven: The Animal Chapter"
+  },
+  "pc67": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0022.html#Pc67",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Seven: The Animal Chapter"
+  },
+  "pc68": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0022.html#Pc68",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Seven: The Animal Chapter"
+  },
+  "pc69": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0022.html#Pc69",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Seven: The Animal Chapter"
+  },
+  "pc70": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0022.html#Pc70",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Seven: The Animal Chapter"
+  },
+  "pc71": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0023.html#Pc71",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Eight: The In-accordance-with-the-Rule Chapter"
+  },
+  "pc72": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0023.html#Pc72",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Eight: The In-accordance-with-the-Rule Chapter"
+  },
+  "pc73": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0023.html#Pc73",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Eight: The In-accordance-with-the-Rule Chapter"
+  },
+  "pc74": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0023.html#Pc74",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Eight: The In-accordance-with-the-Rule Chapter"
+  },
+  "pc75": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0023.html#Pc75",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Eight: The In-accordance-with-the-Rule Chapter"
+  },
+  "pc76": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0023.html#Pc76",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Eight: The In-accordance-with-the-Rule Chapter"
+  },
+  "pc77": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0023.html#Pc77",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Eight: The In-accordance-with-the-Rule Chapter"
+  },
+  "pc78": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0023.html#Pc78",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Eight: The In-accordance-with-the-Rule Chapter"
+  },
+  "pc79": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0023.html#Pc79",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Eight: The In-accordance-with-the-Rule Chapter"
+  },
+  "pc80": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0023.html#Pc80",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Eight: The In-accordance-with-the-Rule Chapter"
+  },
+  "pc81": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0023.html#Pc81",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Eight: The In-accordance-with-the-Rule Chapter"
+  },
+  "pc82": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0023.html#Pc82",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Eight: The In-accordance-with-the-Rule Chapter"
+  },
+  "pc83": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0024.html#Pc83",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Nine: The Valuable Chapter"
+  },
+  "pc84": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0024.html#Pc84",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Nine: The Valuable Chapter"
+  },
+  "pc85": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0024.html#Pc85",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Nine: The Valuable Chapter"
+  },
+  "pc86": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0024.html#Pc86",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Nine: The Valuable Chapter"
+  },
+  "pc87": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0024.html#Pc87",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Nine: The Valuable Chapter"
+  },
+  "pc88": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0024.html#Pc88",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Nine: The Valuable Chapter"
+  },
+  "pc89": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0024.html#Pc89",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Nine: The Valuable Chapter"
+  },
+  "pc90": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0024.html#Pc90",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Nine: The Valuable Chapter"
+  },
+  "pc91": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0024.html#Pc91",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Nine: The Valuable Chapter"
+  },
+  "pc92": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0024.html#Pc92",
+   "chapter": "Chapter Eight: Pācittiya",
+   "section": "Nine: The Valuable Chapter"
+  },
+  "pd1": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0025.html#Pd1",
+   "chapter": "Chapter Nine: Pāṭidesanīya"
+  },
+  "pd2": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0025.html#Pd2",
+   "chapter": "Chapter Nine: Pāṭidesanīya"
+  },
+  "pd3": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0025.html#Pd3",
+   "chapter": "Chapter Nine: Pāṭidesanīya"
+  },
+  "pd4": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0025.html#Pd4",
+   "chapter": "Chapter Nine: Pāṭidesanīya"
+  },
+  "sk1": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk1",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior"
+  },
+  "sk2": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk1",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior",
+   "discussed_with": "sk1"
+  },
+  "sk3": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk3",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior"
+  },
+  "sk4": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk3",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior",
+   "discussed_with": "sk3"
+  },
+  "sk5": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk5",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior"
+  },
+  "sk6": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk5",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior",
+   "discussed_with": "sk5"
+  },
+  "sk7": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk7",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior"
+  },
+  "sk8": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk7",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior",
+   "discussed_with": "sk7"
+  },
+  "sk9": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk9",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior"
+  },
+  "sk10": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk9",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior",
+   "discussed_with": "sk9"
+  },
+  "sk11": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk11",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior"
+  },
+  "sk12": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk11",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior",
+   "discussed_with": "sk11"
+  },
+  "sk13": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk13",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior"
+  },
+  "sk14": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk13",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior",
+   "discussed_with": "sk13"
+  },
+  "sk15": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk15",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior"
+  },
+  "sk16": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk15",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior",
+   "discussed_with": "sk15"
+  },
+  "sk17": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk17",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior"
+  },
+  "sk18": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk17",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior",
+   "discussed_with": "sk17"
+  },
+  "sk19": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk19",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior"
+  },
+  "sk20": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk19",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior",
+   "discussed_with": "sk19"
+  },
+  "sk21": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk21",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior"
+  },
+  "sk22": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk21",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior",
+   "discussed_with": "sk21"
+  },
+  "sk23": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk23",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior"
+  },
+  "sk24": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk23",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior",
+   "discussed_with": "sk23"
+  },
+  "sk25": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk25",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior"
+  },
+  "sk26": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk26",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "One: The 26 Dealing with Proper Behavior"
+  },
+  "sk27": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk27",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk28": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk28",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk29": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk29",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk30": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk30",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk31": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk31",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk32": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk32",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk33": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk33",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk34": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk34",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk35": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk35",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk36": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk36",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk37": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk37",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk38": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk38",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk39": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk39",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk40": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk40",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk41": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk41",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk42": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk42",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk43": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk43",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk44": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk44",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk45": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk45",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk46": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk46",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk47": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk47",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk48": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk48",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk49": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk49",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk50": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk50",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk51": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk51",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk52": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk52",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk53": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk53",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk54": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk54",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk55": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk55",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk56": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk56",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Two: The 30 Dealing with Food"
+  },
+  "sk57": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk57",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk58": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk58",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk59": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk59",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk60": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk60",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk61": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk61",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk62": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk61",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma",
+   "discussed_with": "sk61"
+  },
+  "sk63": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk63",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk64": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk64",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk65": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk65",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk66": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk66",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk67": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk67",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk68": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk68",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk69": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk69",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk70": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk70",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk71": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk71",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk72": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk72",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Three: The 16 Dealing with Teaching Dhamma"
+  },
+  "sk73": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk73",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Four: The 3 Miscellaneous Rules"
+  },
+  "sk74": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk74",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Four: The 3 Miscellaneous Rules"
+  },
+  "sk75": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0026.html#Sk75",
+   "chapter": "Chapter Ten: Sekhiya",
+   "section": "Four: The 3 Miscellaneous Rules"
+  },
+  "as1": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0027.html#As1",
+   "chapter": "Chapter Eleven: Adhikaraṇa-samatha"
+  },
+  "as2": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0027.html#As2",
+   "chapter": "Chapter Eleven: Adhikaraṇa-samatha"
+  },
+  "as3": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0027.html#As3",
+   "chapter": "Chapter Eleven: Adhikaraṇa-samatha"
+  },
+  "as4": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0027.html#As4",
+   "chapter": "Chapter Eleven: Adhikaraṇa-samatha"
+  },
+  "as5": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0027.html#As5",
+   "chapter": "Chapter Eleven: Adhikaraṇa-samatha"
+  },
+  "as6": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0027.html#As6",
+   "chapter": "Chapter Eleven: Adhikaraṇa-samatha"
+  },
+  "as7": {
+   "url": "https://www.dhammatalks.org/vinaya/bmc/Section0027.html#As7",
+   "chapter": "Chapter Eleven: Adhikaraṇa-samatha"
+  }
+ }
+}
