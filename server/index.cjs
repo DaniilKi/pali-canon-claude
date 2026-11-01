@@ -22853,10 +22853,10 @@ var LruCache = class {
   /** Return the cached value for `key`, or run `load()` once (even if called concurrently) and cache its result. */
   async wrap(key3, load2) {
     if (!this.enabled) return load2();
-    const cached3 = this.get(key3);
-    if (cached3 !== void 0) {
+    const cached4 = this.get(key3);
+    if (cached4 !== void 0) {
       this.hits += 1;
-      return cached3;
+      return cached4;
     }
     if (this.pending.has(key3)) {
       this.hits += 1;
@@ -23077,6 +23077,174 @@ __export(providers_exports, {
   lookupPali: () => lookupPali,
   searchAti: () => searchAti
 });
+
+// src/analyse.mjs
+var import_node_fs2 = require("node:fs");
+var import_node_zlib2 = require("node:zlib");
+var import_node_path2 = require("node:path");
+var import_node_url2 = require("node:url");
+var import_meta2 = {};
+var here2;
+try {
+  here2 = __dirname;
+} catch {
+  here2 = (0, import_node_path2.dirname)((0, import_node_url2.fileURLToPath)(import_meta2.url));
+}
+var DPD_LICENSE = {
+  name: "CC BY-NC-SA 4.0",
+  url: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  note: "Non-commercial use only. Derivatives must be shared alike under the same licence, crediting Bodhirasa Bhikkhu and the Digital P\u0101\u1E37i Dictionary."
+};
+var DPD_PIN = {
+  version: "v0.4.20261026",
+  release: "https://github.com/digitalpalidictionary/dpd-db/releases/tag/v0.4.20261026",
+  asset: "https://github.com/digitalpalidictionary/dpd-db/releases/download/v0.4.20261026/dpd.db.tar.xz",
+  asset_sha256: "62a3f55d285ae27f5e1d15492cd7bfa92e9e66a0b6bfed9ea97b58a28e346f49",
+  doi: "10.5281/zenodo.22979413",
+  attribution: "Digital P\u0101\u1E37i Dictionary by Bodhirasa Bhikkhu, v0.4.20261026, CC BY-NC-SA 4.0 (https://www.dpdict.net/)"
+};
+var cached2 = null;
+function loadDpd() {
+  if (cached2) return cached2;
+  const name = "dpd.json.gz";
+  const candidates = [(0, import_node_path2.join)(here2, "data", name), (0, import_node_path2.join)(here2, "..", "server", "data", name), (0, import_node_path2.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => (0, import_node_fs2.existsSync)(p));
+  if (!found) throw new Error("Bundled dictionary data (dpd.json.gz) is missing. Reinstall the extension.");
+  const data2 = JSON.parse((0, import_node_zlib2.gunzipSync)((0, import_node_fs2.readFileSync)(found)).toString("utf8"));
+  const headwords = /* @__PURE__ */ new Map();
+  const lemmas = /* @__PURE__ */ new Map();
+  const folded = /* @__PURE__ */ new Map();
+  const add = (map, key3, id) => {
+    const list = map.get(key3);
+    if (list) list.push(id);
+    else map.set(key3, [id]);
+  };
+  for (const [id, lemma, pos, grammar, meaning, root, construction, plusCase] of data2.headwords) {
+    const clean = cleanLemma(lemma);
+    headwords.set(id, { id, lemma, clean, pos, grammar, meaning, root, construction, plusCase });
+    add(lemmas, clean, id);
+    add(folded, fold3(clean), id);
+  }
+  cached2 = { source: data2.source, roots: data2.roots, forms: data2.forms, headwords, lemmas, folded };
+  return cached2;
+}
+var cleanLemma = (lemma) => String(lemma ?? "").replace(/\s+\d+(?:\.\d+)?$/, "");
+function dpdNotice() {
+  const { source: source4 } = loadDpd();
+  return {
+    dictionary: {
+      name: source4.name,
+      version: source4.version,
+      release: source4.release,
+      asset_sha256: source4.asset_sha256,
+      doi: source4.doi,
+      citation: source4.citation,
+      website: source4.website,
+      subset: source4.subset
+    },
+    attribution: source4.attribution,
+    license: { ...DPD_LICENSE, attribution: source4.attribution }
+  };
+}
+var LETTERS = "a-zA-Z\u0101\u012B\u016B\u1E45\xF1\u1E6D\u1E0D\u1E47\u1E37\u1E43\u1E41\u0100\u012A\u016A\u1E44\xD1\u1E6C\u1E0C\u1E46\u1E36\u1E42\u1E40";
+var TOKEN = new RegExp(`[${LETTERS}]+(?:[\u2019\u2018'\`]+[${LETTERS}]+)*`, "g");
+function rootInfo(key3) {
+  if (!key3) return void 0;
+  const root = loadDpd().roots[key3];
+  return root ? { root: key3, meaning: root[0], ...root[1] ? { sign: root[1] } : {} } : { root: key3 };
+}
+var MAX_SENSES = 3;
+function analyseForm(form, { maxHeadwords = 6 } = {}) {
+  const dpd = loadDpd();
+  const entry2 = dpd.forms[form];
+  if (!entry2) return null;
+  const [ids = [], grammar = [], splits = []] = entry2;
+  const groups = /* @__PURE__ */ new Map();
+  const group = (lemma) => {
+    if (!groups.has(lemma)) groups.set(lemma, { headword: lemma, senses: [], grammar: [] });
+    return groups.get(lemma);
+  };
+  for (const id of ids) {
+    const hw = dpd.headwords.get(id);
+    if (hw) group(hw.clean).senses.push(hw);
+  }
+  for (const [lemma, pos, tag] of grammar) {
+    const label = `${pos} ${tag}`.trim();
+    const g = group(lemma);
+    if (!g.grammar.includes(label)) g.grammar.push(label);
+  }
+  const all = [...groups.values()].map((g) => {
+    const first = g.senses[0];
+    const withRoot = g.senses.find((s) => s.root);
+    const withConstruction = g.senses.find((s) => s.construction);
+    return {
+      headword: g.headword,
+      ...first ? { pos: first.pos } : {},
+      grammar: g.grammar.length ? g.grammar : first ? [first.grammar] : [],
+      ...withRoot ? { root: rootInfo(withRoot.root) } : {},
+      ...withConstruction ? { construction: withConstruction.construction } : {},
+      meanings: g.senses.slice(0, MAX_SENSES).map((s) => ({ lemma: s.lemma, meaning: s.meaning || "(no meaning given)" })),
+      senses_total: g.senses.length
+    };
+  });
+  return {
+    analyses: all.slice(0, maxHeadwords),
+    ...all.length > maxHeadwords ? { more_headwords: all.length - maxHeadwords } : {},
+    splits
+  };
+}
+function lookupOffline({ word, limit = 5 } = {}) {
+  const dpd = loadDpd();
+  const query = String(word ?? "").trim().toLowerCase().replace(/ṁ/g, "\u1E43");
+  if (!query) return null;
+  const lines = [];
+  const seen = /* @__PURE__ */ new Set();
+  const addSense = (hw, grammar) => {
+    if (seen.has(hw.id)) return;
+    seen.add(hw.id);
+    const root = hw.root ? ` [${hw.root}${dpd.roots[hw.root] ? ` (${dpd.roots[hw.root][0]})` : ""}]` : "";
+    lines.push(`${hw.lemma}: ${hw.pos}. ${hw.meaning || "(no meaning given)"}${root}${grammar ? ` \u2014 this form: ${grammar}` : ""}`);
+  };
+  const detail = [];
+  const found = analyseForm(query, { maxHeadwords: 50 });
+  let matched = "form";
+  if (found) {
+    for (const a of found.analyses) {
+      detail.push(`${a.headword}: ${a.grammar.join("; ")}${a.construction ? ` | construction: ${a.construction}` : ""}`);
+      for (const id of dpd.forms[query][0] ?? []) {
+        const hw = dpd.headwords.get(id);
+        if (hw?.clean === a.headword) addSense(hw, a.grammar.join("; "));
+      }
+    }
+    if (found.splits.length) detail.push(`split (DPD deconstructor): ${found.splits.join(" | ")}`);
+  }
+  if (!lines.length) {
+    const ids = dpd.lemmas.get(query) ?? dpd.folded.get(fold3(query));
+    matched = dpd.lemmas.has(query) ? "headword" : "headword without diacritics";
+    for (const id of ids ?? []) {
+      const hw = dpd.headwords.get(id);
+      addSense(hw);
+      if (hw.construction) detail.push(`${hw.lemma}: ${hw.grammar}${hw.construction ? ` | construction: ${hw.construction}` : ""}`);
+    }
+  }
+  if (!lines.length && !detail.length) return null;
+  const notice = dpdNotice();
+  return {
+    word: String(word).trim(),
+    source: "Digital P\u0101\u1E37i Dictionary (bundled offline subset)",
+    offline: true,
+    matched,
+    url: `https://www.dpdict.net/?q=${encodeURIComponent(String(word).trim())}`,
+    entries: lines.slice(0, limit),
+    total_summary_entries: lines.length,
+    omitted: Math.max(0, lines.length - limit),
+    detail_excerpt: [...new Set(detail)].join("\n").slice(0, 8e3),
+    detail_note: `Answered offline from the bundled DPD subset (${notice.dictionary.version}): headwords, grammar, roots, short meanings and compound/sandhi splits, without examples or inflection tables. Dictionary glosses are reference material, not scripture.`,
+    ...notice
+  };
+}
+
+// src/providers.mjs
 var DPD = "https://www.dpdict.net";
 var ATI = "https://accesstoinsight.org";
 var DPD_CHROME = /^(?:did you spot a mistake(?: in the declension table)?\??|spot a mistake\??|something(?: out of place\??| missing\??)?|missing\??|correct it here\.?|fix it here\.?|add it here\.?|report it here\.?|log it here\.?|here\.?|can you think of a better example\??|please add more idioms|if something looks out of place,?|feedback|[✔✘◑►])$/i;
@@ -23120,7 +23288,13 @@ async function lookupPali({ word, limit = 5 }) {
   try {
     data2 = await liveCache.wrap(`dpd:${word}`, () => fetchPublic(url, { retries: 2 }));
   } catch (error2) {
-    throw new Error(`Digital P\u0101\u1E37i Dictionary is unavailable right now (${error2.message}). Open ${DPD}/?q=${encodeURIComponent(word)} directly or try again shortly.`);
+    let offline = null;
+    try {
+      offline = lookupOffline({ word, limit });
+    } catch {
+    }
+    if (offline) return { ...offline, note: `dpdict.net is unreachable right now (${error2.message}); this answer comes from the bundled offline DPD subset (${offline.dictionary.version}), not the live site.` };
+    throw new Error(`Digital P\u0101\u1E37i Dictionary is unavailable right now (${error2.message}) and "${word}" is not in the bundled offline subset. Open ${DPD}/?q=${encodeURIComponent(word)} directly or try again shortly.`);
   }
   const summary = String(data2.summary_html ?? "");
   const entries = [...summary.matchAll(/<p\b[^>]*class=["'][^"']*summary[^"']*["'][^>]*>([^]*?)<\/p>/gi)].map((m) => plainText(m[1]));
@@ -23306,11 +23480,18 @@ function listSources() {
         docs: "https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/calendar.md"
       },
       { id: "grammars", name: "Public-domain P\u0101li grammars (Duroiselle 1921, Frankfurter 1883, M\xFCller 1884, Geiger 1916)", role: "Linked only from pali://pronunciation; not bundled.", url: "https://archive.org/details/in.ernet.dli.2015.61817", license: "Public domain (verified per item; see docs/sources.md)" },
-      { id: "dpd", name: "Digital P\u0101\u1E37i Dictionary", role: "Word lookup (live).", url: DPD, license: "CC BY-NC-SA 4.0" },
+      {
+        id: "dpd",
+        name: "Digital P\u0101\u1E37i Dictionary",
+        role: "Word lookup (live), with a bundled offline subset (headwords, grammar, roots, meanings, compound and sandhi splits) used for word-by-word passage analysis and when dpdict.net is unreachable.",
+        url: DPD,
+        license: "CC BY-NC-SA 4.0",
+        bundled: { ...DPD_PIN, subset: "All headwords and roots; inflection map and deconstructor splits for the word forms of the bundled VRI root texts (server/data/dpd.json.gz)." }
+      },
       { id: "suttacentral", name: "SuttaCentral", role: "Linked only (parallels, other translations). Its content is not fetched or bundled, respecting its request that its work not be used in AI tools.", url: "https://suttacentral.net" }
     ],
     evidence_rule: "Quote only retrieved text. Cite the text ID, VRI paragraph or PTS page, and the translator. Distinguish P\u0101li, translation, dictionary gloss and your own explanation. Numbering schemes differ (standard/Bodhi vs PTS); this tool reports both where they differ.",
-    offline: "All P\u0101li text, citation resolution, PTS lookup and P\u0101li search work without internet, and so do topics, numbered lists, proper-name occurrences, paritta, Abhidhamma and Vinaya-rule lookups, daily texts, reading plans, citation finding, P\u0101li quotation checks and the uposatha and festival calendar. English translations, Dhamma talks and the dictionary need internet."
+    offline: "All P\u0101li text, citation resolution, PTS lookup and P\u0101li search work without internet, and so do topics, numbered lists, proper-name occurrences, paritta, Abhidhamma and Vinaya-rule lookups, daily texts, reading plans, citation finding, P\u0101li quotation checks and the uposatha and festival calendar. English translations and Dhamma talks need internet; the full dictionary is live, with a bundled DPD subset used offline."
   };
 }
 
@@ -23428,7 +23609,7 @@ function findWindows(corpus, qwords, { keep = KEEP_WINDOWS } = {}) {
   return picked;
 }
 function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.length } = {}) {
-  const join4 = corpus.compounds ? "" : " ";
+  const join5 = corpus.compounds ? "" : " ";
   const Q = trigrams(corpus.compounds ? query.replace(/ /g, "") : query);
   const qlen = qwords.length;
   const variantSets = qwords.map((w) => new Set(corpus.variants(w).map((v) => v.id)));
@@ -23446,7 +23627,7 @@ function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.len
       const b = a + len;
       if (b > max) continue;
       const ids = corpus.tokens.subarray(a, b);
-      const dice = similarity(Q, Array.from(ids, (id) => corpus.vocab[id]).join(join4));
+      const dice = similarity(Q, Array.from(ids, (id) => corpus.vocab[id]).join(join5));
       if (dice <= best.sim) continue;
       const present = new Set(ids);
       const joined = corpus.compounds ? Array.from(ids, (id) => corpus.vocab[id]).join("") : "";
@@ -25088,21 +25269,21 @@ __export(topics_exports, {
   topic: () => topic,
   topicsIndex: () => topicsIndex
 });
-var import_node_fs2 = require("node:fs");
-var import_node_path2 = require("node:path");
-var import_node_url2 = require("node:url");
-var import_meta2 = {};
-var here2;
+var import_node_fs3 = require("node:fs");
+var import_node_path3 = require("node:path");
+var import_node_url3 = require("node:url");
+var import_meta3 = {};
+var here3;
 try {
-  here2 = __dirname;
+  here3 = __dirname;
 } catch {
-  here2 = (0, import_node_path2.dirname)((0, import_node_url2.fileURLToPath)(import_meta2.url));
+  here3 = (0, import_node_path3.dirname)((0, import_node_url3.fileURLToPath)(import_meta3.url));
 }
 function readData(name) {
-  const candidates = [(0, import_node_path2.join)(here2, "data", name), (0, import_node_path2.join)(here2, "..", "server", "data", name), (0, import_node_path2.join)(process.cwd(), "server", "data", name)];
-  const found = candidates.find((p) => (0, import_node_fs2.existsSync)(p));
+  const candidates = [(0, import_node_path3.join)(here3, "data", name), (0, import_node_path3.join)(here3, "..", "server", "data", name), (0, import_node_path3.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => (0, import_node_fs3.existsSync)(p));
   if (!found) throw new Error(`Bundled data (${name}) is missing. Reinstall the extension or rebuild.`);
-  return JSON.parse((0, import_node_fs2.readFileSync)(found, "utf8"));
+  return JSON.parse((0, import_node_fs3.readFileSync)(found, "utf8"));
 }
 var topicsData = null;
 var listsData = null;
@@ -25258,25 +25439,25 @@ __export(dppn_exports, {
   nameStems: () => nameStems,
   register: () => register6
 });
-var import_node_fs3 = require("node:fs");
-var import_node_path3 = require("node:path");
-var import_node_url3 = require("node:url");
-var import_meta3 = {};
-var here3;
+var import_node_fs4 = require("node:fs");
+var import_node_path4 = require("node:path");
+var import_node_url4 = require("node:url");
+var import_meta4 = {};
+var here4;
 try {
-  here3 = __dirname;
+  here4 = __dirname;
 } catch {
-  here3 = (0, import_node_path3.dirname)((0, import_node_url3.fileURLToPath)(import_meta3.url));
+  here4 = (0, import_node_path4.dirname)((0, import_node_url4.fileURLToPath)(import_meta4.url));
 }
-var cached2 = null;
+var cached3 = null;
 function loadDppn() {
-  if (cached2) return cached2;
+  if (cached3) return cached3;
   const name = "dppn.json";
-  const candidates = [(0, import_node_path3.join)(here3, "data", name), (0, import_node_path3.join)(here3, "..", "server", "data", name), (0, import_node_path3.join)(process.cwd(), "server", "data", name)];
-  const found = candidates.find((p) => (0, import_node_fs3.existsSync)(p));
+  const candidates = [(0, import_node_path4.join)(here4, "data", name), (0, import_node_path4.join)(here4, "..", "server", "data", name), (0, import_node_path4.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => (0, import_node_fs4.existsSync)(p));
   if (!found) throw new Error("Bundled proper-names data (dppn.json) is missing. Reinstall the extension.");
-  cached2 = JSON.parse((0, import_node_fs3.readFileSync)(found, "utf8"));
-  return cached2;
+  cached3 = JSON.parse((0, import_node_fs4.readFileSync)(found, "utf8"));
+  return cached3;
 }
 var key2 = (value) => fold3(value).replace(/[^a-z0-9]+/g, "");
 var words2 = (value) => fold3(value).split(/[^a-z0-9]+/).filter(Boolean);

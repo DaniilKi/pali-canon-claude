@@ -2,6 +2,7 @@
 import * as canon from '../src/canon.mjs';
 import { EDITIONS, editionLabel, editionIndex, nextUnit } from '../src/editions.mjs';
 import { textSegments, parseNoteSpans, uncovered, SIGLA } from '../src/variants.mjs';
+import { loadDpd, DPD_PIN, tokenize, wordParts } from '../src/analyse.mjs';
 
 const d = canon.load();
 const failures = [];
@@ -121,6 +122,40 @@ for (const [id, links] of Object.entries(d.translations)) {
       count('link');
     } catch (e) { fail('link', `${l.url}: ${e.message}`); }
   }
+}
+// 8. Bundled DPD subset (#22, #23): pinned to the recorded release, licensed, internally consistent, and covering
+// the words of every text (analyse_passage must have something to say for any segment of any text).
+{
+  const dpd = loadDpd();
+  const src = dpd.source;
+  for (const key of ['version', 'asset_sha256', 'doi']) if (src[key] !== DPD_PIN[key]) fail('dpd-pin', `dpd.json.gz ${key} ${src[key]} != DPD_PIN ${DPD_PIN[key]}`);
+  if (!/^[0-9a-f]{64}$/.test(src.asset_sha256 || '') || !/^[0-9a-f]{64}$/.test(src.db_sha256 || '')) fail('dpd-pin', 'missing SHA-256 checksums');
+  if (src.license !== 'CC BY-NC-SA 4.0' || !/Bodhirasa/.test(src.attribution || '')) fail('dpd-licence', `${src.license} / ${src.attribution}`);
+  if (src.canon_commit !== d.canon.source.commit) fail('dpd-canon', `built from canon ${src.canon_commit}, bundled canon is ${d.canon.source.commit}`);
+  for (const [form, [ids = [], , splits = []]] of Object.entries(dpd.forms)) {
+    for (const id of ids) if (!dpd.headwords.has(id)) fail('dpd-headword', `${form} -> missing headword ${id}`);
+    if (!ids.length && !splits.length) fail('dpd-form', `${form} has neither headwords nor splits`);
+  }
+  for (const hw of dpd.headwords.values()) if (hw.root && !dpd.roots[hw.root]) count('dpd-root-unlisted');
+  let tokens = 0;
+  let known = 0;
+  for (const u of d.canon.units) {
+    if (u.kind === 'range') continue;
+    let unitKnown = 0;
+    for (const seg of canon.segments(u)) {
+      for (const tok of tokenize(seg.text)) {
+        for (const { form } of wordParts(tok)) {
+          tokens += 1;
+          if (Object.hasOwn(dpd.forms, form)) { known += 1; unitKnown += 1; }
+        }
+      }
+    }
+    if (!unitKnown) fail('dpd-text', `${u.id}: no word found in the DPD subset`);
+    else count('dpd-text');
+  }
+  const coverage = known / tokens;
+  counts['dpd-word-coverage-%'] = Number((coverage * 100).toFixed(2));
+  if (coverage < 0.985) fail('dpd-coverage', `only ${(coverage * 100).toFixed(2)}% of ${tokens} words are in the DPD subset (need 98.5%)`);
 }
 console.log(JSON.stringify(counts));
 console.log(`texts: ${d.canon.units.length}; failures: ${failures.length}`);

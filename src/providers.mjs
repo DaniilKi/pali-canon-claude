@@ -3,6 +3,7 @@ import { fetchPublic, fetchMirrors, decodeHtml, plainText, shortText } from './h
 import { atiMirrors, atiContent, atiNotice } from './english.mjs';
 import { load, fold as foldPali, source as canonSource } from './canon.mjs';
 import { liveCache } from './cache.mjs';
+import { lookupOffline, DPD_PIN } from './analyse.mjs';
 
 const DPD = 'https://www.dpdict.net';
 const ATI = 'https://accesstoinsight.org';
@@ -53,7 +54,11 @@ export async function lookupPali({ word, limit = 5 }) {
   try {
     data = await liveCache.wrap(`dpd:${word}`, () => fetchPublic(url, { retries: 2 }));
   } catch (error) {
-    throw new Error(`Digital Pāḷi Dictionary is unavailable right now (${error.message}). Open ${DPD}/?q=${encodeURIComponent(word)} directly or try again shortly.`);
+    // Outage fallback (#23): answer from the bundled DPD subset, labelled as such.
+    let offline = null;
+    try { offline = lookupOffline({ word, limit }); } catch { /* bundled data missing: report the outage below */ }
+    if (offline) return { ...offline, note: `dpdict.net is unreachable right now (${error.message}); this answer comes from the bundled offline DPD subset (${offline.dictionary.version}), not the live site.` };
+    throw new Error(`Digital Pāḷi Dictionary is unavailable right now (${error.message}) and "${word}" is not in the bundled offline subset. Open ${DPD}/?q=${encodeURIComponent(word)} directly or try again shortly.`);
   }
   const summary = String(data.summary_html ?? '');
   const entries = [...summary.matchAll(/<p\b[^>]*class=["'][^"']*summary[^"']*["'][^>]*>([^]*?)<\/p>/gi)].map((m) => plainText(m[1]));
@@ -179,10 +184,11 @@ export function listSources() {
       { id: 'calendar', name: 'Uposatha and festival calendar (computed)', role: 'Offline uposatha and festival dates for Thai Mahānikāya, Thai Dhammayut, Myanmar and Sri Lanka, computed from published rules; not official announcements.',
         code: ['splendidmoons (MIT, © 2023 Gambhiro Bhikkhu)', 'pythaidate (MIT, © 2023 Mark Hollow)', 'mmcal ceMmDateTime.js (MIT, © 2018 Yan Naing Aye)', 'Meeus, Astronomical Algorithms (2nd ed.)'], docs: 'https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/calendar.md' },
       { id: 'grammars', name: 'Public-domain Pāli grammars (Duroiselle 1921, Frankfurter 1883, Müller 1884, Geiger 1916)', role: 'Linked only from pali://pronunciation; not bundled.', url: 'https://archive.org/details/in.ernet.dli.2015.61817', license: 'Public domain (verified per item; see docs/sources.md)' },
-      { id: 'dpd', name: 'Digital Pāḷi Dictionary', role: 'Word lookup (live).', url: DPD, license: 'CC BY-NC-SA 4.0' },
+      { id: 'dpd', name: 'Digital Pāḷi Dictionary', role: 'Word lookup (live), with a bundled offline subset (headwords, grammar, roots, meanings, compound and sandhi splits) used for word-by-word passage analysis and when dpdict.net is unreachable.', url: DPD, license: 'CC BY-NC-SA 4.0',
+        bundled: { ...DPD_PIN, subset: 'All headwords and roots; inflection map and deconstructor splits for the word forms of the bundled VRI root texts (server/data/dpd.json.gz).' } },
       { id: 'suttacentral', name: 'SuttaCentral', role: 'Linked only (parallels, other translations). Its content is not fetched or bundled, respecting its request that its work not be used in AI tools.', url: 'https://suttacentral.net' },
     ],
     evidence_rule: 'Quote only retrieved text. Cite the text ID, VRI paragraph or PTS page, and the translator. Distinguish Pāli, translation, dictionary gloss and your own explanation. Numbering schemes differ (standard/Bodhi vs PTS); this tool reports both where they differ.',
-    offline: 'All Pāli text, citation resolution, PTS lookup and Pāli search work without internet, and so do topics, numbered lists, proper-name occurrences, paritta, Abhidhamma and Vinaya-rule lookups, daily texts, reading plans, citation finding, Pāli quotation checks and the uposatha and festival calendar. English translations, Dhamma talks and the dictionary need internet.',
+    offline: 'All Pāli text, citation resolution, PTS lookup and Pāli search work without internet, and so do topics, numbered lists, proper-name occurrences, paritta, Abhidhamma and Vinaya-rule lookups, daily texts, reading plans, citation finding, Pāli quotation checks and the uposatha and festival calendar. English translations and Dhamma talks need internet; the full dictionary is live, with a bundled DPD subset used offline.',
   };
 }
