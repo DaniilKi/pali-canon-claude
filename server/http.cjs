@@ -25019,7 +25019,7 @@ var TRADITIONS = {
     name: "Thai Dhammayut",
     time_zone: "Asia/Bangkok (UTC+7)",
     utcOffsetMinutes: 420,
-    rule: "Pakkhaga\u1E47an\u0101 (\u0E1B\u0E31\u0E01\u0E02\u0E04\u0E13\u0E19\u0E32), the fortnight reckoning kept by the Dhammayut order, which follows the real moon more closely than the civil calendar, so some uposatha days fall one day later than the Mah\u0101nik\u0101ya ones. Fortnights of 14 or 15 days are counted on the Pakkhaga\u1E47an\u0101 board from its epoch (1736-01-28); uposatha falls on the 8th and the last day of each fortnight. Festival months follow the Thai lunar calendar.",
+    rule: "Pakkhaga\u1E47an\u0101 (\u0E1B\u0E31\u0E01\u0E02\u0E04\u0E13\u0E19\u0E32), the fortnight reckoning kept by the Dhammayut order, which follows the real moon more closely than the civil calendar, so some uposatha days differ from the Mah\u0101nik\u0101ya ones by one day (earlier or later). Fortnights of 14 or 15 days are counted on the Pakkhaga\u1E47an\u0101 board from its epoch (1736-01-28); uposatha falls on the 8th and the last day of each fortnight. Festival months follow the Thai lunar calendar.",
     rule_source: "docs/calendar.md",
     code_source: "https://github.com/hmmbug/pythaidate (MIT, \xA9 2023 Mark Hollow)"
   },
@@ -25442,7 +25442,7 @@ var FESTIVALS = {
   },
   "vassa-start": {
     name: "Start of the Rains Retreat (Vassa)",
-    texts: [{ citation: "Kd 3", role: 'Vass\u016Bpan\u0101yikakkhandhaka (Mah\u0101vagga 3): the earlier rains residence begins the day after the \u0100s\u0101\u1E37ha full moon ("aparajjugat\u0101ya \u0101s\u0101\u1E37hiy\u0101 purimik\u0101 upagantabb\u0101"), the later one a month after.', basis: "canonical" }]
+    texts: [{ citation: "Kd 3", role: "Vass\u016Bpan\u0101yikakkhandhaka (Mah\u0101vagga 3): the rule that the earlier rains residence is entered on the day after the \u0100s\u0101\u1E37ha full moon, and the later one a month after (paraphrased in English).", basis: "canonical" }]
   },
   "vassa-end": {
     name: "End of the Rains Retreat (Vassa)",
@@ -25478,10 +25478,22 @@ function thaiFestivalDates(year, t) {
     };
   }
   const res = { "magha-puja": pick2(base["magha-puja"]), vesak: pick2(base.vesak), "asalha-puja": pick2(base["asalha-puja"]), pavarana: pick2(base.pavarana) };
-  res["vassa-start"] = { date: addDays(res["asalha-puja"].date, 1), lunar_date: "waning 1 of the \u0100s\u0101\u1E37ha month (the day after \u0100s\u0101\u1E37ha P\u016Bj\u0101)" };
-  res["vassa-end"] = { date: res.pavarana.date, lunar_date: "Pav\u0101ra\u1E47\u0101 day: full moon of month 11 (Assayuja)" };
-  res["kathina-season"] = { start: addDays(res.pavarana.date, 1), end: pick2(base.kattika).date, lunar_date: "waning 1 of month 11 to the full moon of month 12 (Kattika)" };
+  const mn = (x, n) => x.mahanikaya_date ? { mahanikaya_date: addDays(x.mahanikaya_date, n) } : {};
+  res["vassa-start"] = { date: addDays(res["asalha-puja"].date, 1), lunar_date: "waning 1 of the \u0100s\u0101\u1E37ha month (the day after \u0100s\u0101\u1E37ha P\u016Bj\u0101)", ...mn(res["asalha-puja"], 1) };
+  res["vassa-end"] = { date: res.pavarana.date, lunar_date: "Pav\u0101ra\u1E47\u0101 day: full moon of month 11 (Assayuja)", ...mn(res.pavarana, 0) };
+  const kattika2 = pick2(base.kattika);
+  res["kathina-season"] = {
+    start: addDays(res.pavarana.date, 1),
+    end: kattika2.date,
+    lunar_date: "waning 1 of month 11 to the full moon of month 12 (Kattika)",
+    ...res.pavarana.mahanikaya_date || kattika2.mahanikaya_date ? { mahanikaya_start: addDays(base.pavarana.date, 1), mahanikaya_end: base.kattika.date } : {}
+  };
   const notes = [`Thai lunar year ${year} is ${thaiYearType(year)}${adhikamasa ? ": M\u0101gha and Vis\u0101kha P\u016Bj\u0101 move to months 4 and 7, and \u0100s\u0101\u1E37ha P\u016Bj\u0101 to the second month 8" : ""}.`];
+  if (t === "thai-dhammayut") {
+    const differ = Object.entries(res).filter(([, x]) => x.mahanikaya_date || x.mahanikaya_start).map(([id]) => FESTIVALS[id].name);
+    if (differ.length) notes.push(`This year the Pakkhaga\u1E47an\u0101 date differs from the Thai Mah\u0101nik\u0101ya (civil calendar) date for: ${differ.join(", ")}. The Mah\u0101nik\u0101ya date is given as mahanikaya_date (mahanikaya_start and mahanikaya_end for the Ka\u1E6Dhina season).`);
+    notes.push(DHAMMAYUT_PUBLISHED_NOTE);
+  }
   return { res, notes };
 }
 function myanmarFestivalDates(year) {
@@ -25489,7 +25501,7 @@ function myanmarFestivalDates(year) {
   const fm = (m) => days.find((d) => d.phase === "full" && (+d.lunar_month >= 13 ? +d.lunar_month - 12 : +d.lunar_month) === m);
   const kason = fm(2), waso = fm(4), thadingyut = fm(7), tazaungmon = fm(8);
   const res = {
-    "magha-puja": { date: null, note: "Not computed for the Burmese calendar." },
+    "magha-puja": { date: null, note: "Not given: M\u0101gha P\u016Bj\u0101 is not among the full-moon public holidays in the official Myanmar lists for 2024\u20132026, and no published source was found that names the Burmese full moon on which it is kept." },
     vesak: kason && { date: kason.date, lunar_date: `full moon of ${kason.lunar_month_name}` },
     "asalha-puja": waso && { date: waso.date, lunar_date: "full moon of (2nd) Waso" },
     "vassa-start": waso && { date: addDays(waso.date, 1), lunar_date: "waning 1 of (2nd) Waso" },
@@ -25516,6 +25528,7 @@ function sriLankaFestivalDates(year) {
   const notes = all.filter((d) => d.lunar_month_name.startsWith("Adhi ")).map((d) => `${d.date} is ${d.lunar_month_name} poya, an extra (adhi) month; festivals are kept in the regular month.`);
   return { res, notes };
 }
+var DHAMMAYUT_PUBLISHED_NOTE = 'The Dhammayut lists published by Wat Metta follow the Pakkhaga\u1E47an\u0101 reckoning through April 2025 but give the Mah\u0101nik\u0101ya dates from May 2025 on (its 2026 list is "for both the Dhammayut Order and the Mah\u0101nik\u0101ya Order in Thailand"). Where the two differ from May 2025, that published list has the mahanikaya_date. Check the list your monastery publishes.';
 var DISCLAIMER = "Computed from the stated rule; not an official announcement. National authorities, Sangha bodies and individual monasteries publish the dates they keep, and these can differ, usually by one day.";
 var TRADITION_IDS = Object.keys(TRADITIONS);
 function traditionInfo(t) {
@@ -25546,7 +25559,7 @@ function uposatha(from, to, t) {
   if (t === "thai-dhammayut") {
     const differ = days.filter((d) => d.mahanikaya_date && d.mahanikaya_date !== d.date).length;
     notes.push(`${differ} of these ${days.length} days differ from the Thai Mah\u0101nik\u0101ya (civil calendar) day, which is given as mahanikaya_date.`);
-    notes.push('The Dhammayut lists published by Wat Metta follow this reckoning through April 2025 but give the Mah\u0101nik\u0101ya dates from May 2025 on (its 2026 list is "for both the Dhammayut Order and the Mah\u0101nik\u0101ya Order in Thailand"). Check the list your monastery publishes.');
+    notes.push(DHAMMAYUT_PUBLISHED_NOTE);
   }
   if (t === "sri-lanka") notes.push("Only full-moon poya days are public holidays in Sri Lanka, and only they were checked against the government gazettes (2024\u20132026). New-moon and quarter-moon days use the same tithi rule but have not been checked against a published list.");
   return { tradition, from, to, status: "computed", disclaimer: DISCLAIMER, days, notes, texts: UPOSATHA_TEXTS };

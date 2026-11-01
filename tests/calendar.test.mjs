@@ -67,6 +67,44 @@ test('Thai Dhammayut: Pakkhagaṇanā matches Wat Metta 2024 – April 2025 exac
   assert.deepEqual([may.date, may.mahanikaya_date], ['2025-05-12', '2025-05-11']);
 });
 
+// Wat Metta festival lines that differ from the Pakkhagaṇanā festival date: all from May 2025 on, all the Mahānikāya date.
+const DHAMMAYUT_FESTIVALS_EXPLAINED = ['2025 vassa-end', '2025 vesak', '2026 vassa-end'];
+
+test('Thai Dhammayut: festivals 2024–2026 against the Wat Metta Dhammayut lists; every difference is flagged with mahanikaya_date and a note', () => {
+  const differing = [];
+  for (const y of YEARS) {
+    const out = cal.festivals(+y, 'thai-dhammayut');
+    const got = Object.fromEntries(out.festivals.map((f) => [f.id, f]));
+    for (const [id, published] of Object.entries(ref['thai-dhammayut'].years[y].festivals)) {
+      const f = got[id];
+      if (f.date === published) { assert.equal(f.mahanikaya_date, undefined, `${y} ${id}: no Mahānikāya date when they agree`); continue; }
+      assert.ok(published >= '2025-05-01', `unexplained Dhammayut festival difference before May 2025: ${y} ${id}`);
+      assert.equal(f.mahanikaya_date, published, `${y} ${id}: the published date is reported as mahanikaya_date`);
+      differing.push(`${y} ${id}`);
+    }
+    // Any festival whose date differs from the Mahānikāya one is named in a note, with the published-list caveat.
+    const flagged = out.festivals.filter((f) => f.mahanikaya_date || f.mahanikaya_start);
+    if (flagged.length) assert.ok(out.notes.some((n) => flagged.every((f) => n.includes(f.name))), `${y}: note names ${flagged.map((f) => f.id)}`);
+    assert.ok(out.notes.some((n) => /Wat Metta/.test(n) && /May 2025/.test(n)), `${y}: Wat Metta caveat`);
+    const mn = Object.fromEntries(cal.festivals(+y, 'thai-mahanikaya').festivals.map((f) => [f.id, f]));
+    for (const f of out.festivals) {
+      if (f.date) assert.equal(f.mahanikaya_date ?? f.date, mn[f.id].date, `${y} ${f.id}: mahanikaya_date is the Mahānikāya date`);
+      else assert.deepEqual([f.mahanikaya_start ?? f.start, f.mahanikaya_end ?? f.end], [mn[f.id].start, mn[f.id].end], `${y} ${f.id}`);
+    }
+  }
+  assert.deepEqual(differing.sort(), DHAMMAYUT_FESTIVALS_EXPLAINED);
+  const v = cal.festivals(2025, 'thai-dhammayut').festivals.find((f) => f.id === 'vesak');
+  assert.deepEqual([v.date, v.mahanikaya_date], ['2025-05-12', '2025-05-11']);
+});
+
+test('Thai Dhammayut: Pakkhagaṇanā days can fall one day earlier or one day later than the Mahānikāya day', () => {
+  const days = [...cal.uposatha('2024-01-01', '2025-12-31', 'thai-dhammayut').days, ...cal.uposatha('2026-01-01', '2026-12-31', 'thai-dhammayut').days];
+  const diff = days.filter((d) => d.mahanikaya_date && d.mahanikaya_date !== d.date);
+  assert.ok(diff.every((d) => Math.abs(Date.parse(d.date) - Date.parse(d.mahanikaya_date)) === 86_400_000));
+  assert.ok(diff.some((d) => d.date < d.mahanikaya_date) && diff.some((d) => d.date > d.mahanikaya_date));
+  assert.match(cal.TRADITIONS['thai-dhammayut'].rule, /differ from the Mahānikāya ones by one day \(earlier or later\)/);
+});
+
 test('Sri Lanka: every full-moon poya day 2024–2026 matches the government gazettes, including Adhi Poson 2026', () => {
   for (const y of YEARS) {
     const mine = cal.uposatha(`${y}-01-01`, `${y}-12-31`, 'sri-lanka').days.filter((d) => d.phase === 'full');
@@ -79,15 +117,32 @@ test('Sri Lanka: every full-moon poya day 2024–2026 matches the government gaz
   assert.equal(f['asalha-puja'].date, '2026-07-29');
 });
 
-test('Myanmar: the full moon of each month falls inside the published holiday dates (2025, 2026)', () => {
+test('Myanmar: full moons 2024–2026 equal the official one-day holidays and fall inside the multi-day ones (DCA AIC lists)', () => {
   const NUM = { Tagu: 1, Kason: 2, Waso: 4, Thadingyut: 7, Tazaungmon: 8, Tabaung: 12 };
-  for (const [y, block] of Object.entries(ref.myanmar.years)) {
+  const check = (y, holidays, label) => {
     const fulls = cal.uposatha(`${y}-01-01`, `${y}-12-31`, 'myanmar').days.filter((d) => d.phase === 'full');
-    for (const h of block.holidays) {
+    let exact = 0;
+    for (const h of holidays) {
       const fm = fulls.find((d) => (+d.lunar_month >= 13 ? +d.lunar_month - 12 : +d.lunar_month) === NUM[h.month]);
-      assert.ok(fm && fm.date >= h.from && fm.date <= h.to, `${y} ${h.holiday}: computed ${fm?.date}, published ${h.from}–${h.to}`);
+      if (h.from === h.to) { assert.equal(fm?.date, h.from, `${label} ${y} ${h.holiday}`); exact++; }
+      else assert.ok(fm && fm.date >= h.from && fm.date <= h.to, `${label} ${y} ${h.holiday}: computed ${fm?.date}, published ${h.from}–${h.to}`);
     }
+    return exact;
+  };
+  let exact = 0, total = 0;
+  for (const y of YEARS) {
+    const block = ref.myanmar.years[y];
+    assert.match(block.url, /^https:\/\/ais\.gov\.mm\//);
+    assert.match(block.sha256, /^[0-9a-f]{64}$/);
+    exact += check(y, block.holidays, 'AIC');
+    total += block.holidays.length;
   }
+  assert.deepEqual([exact, total], [11, 15]);
+  for (const [y, block] of Object.entries(ref.myanmar.secondary.years)) check(y, block.holidays, 'Krungsri');
+  // Māgha Pūjā is not in the official lists; the tool gives no date rather than guess one.
+  const m = cal.festivals(2026, 'myanmar').festivals.find((f) => f.id === 'magha-puja');
+  assert.deepEqual([m.date, m.status], [null, 'not computed']);
+  assert.match(m.note, /official Myanmar lists/);
   // 2026 (1388 ME) is a big watat year: a First Waso precedes Waso, and the Rains Retreat follows the second.
   const w = cal.uposatha('2026-06-01', '2026-08-31', 'myanmar').days.filter((d) => d.phase === 'full').map((d) => `${d.date} ${d.lunar_month_name}`);
   assert.deepEqual(w, ['2026-06-29 First Waso', '2026-07-29 Waso', '2026-08-28 Wagaung']);

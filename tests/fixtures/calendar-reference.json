@@ -1547,74 +1547,157 @@
   }
  },
  "myanmar": {
-  "source": "Bank of Ayudhya (Krungsri), Yangon Representative Office: Public Holidays in Myanmar (bank holiday list)",
-  "note": "Multi-day public holidays are given as ranges; the full moon day must fall inside the range. No 2024 list could be retrieved (see docs/calendar.md).",
+  "source": "Department of Civil Aviation, Myanmar (Aeronautical Information Services): AIC \"Myanmar Public Holidays for Year <year>\". Dates transcribed from the PDFs; sha256 of the file as retrieved on 2026-11-01 is given so the copy can be checked. No web-archive copy exists.",
+  "note": "A one-day holiday must equal the computed full moon. Multi-day holidays (Lighting Festival, some Tazaungmon holidays) are ranges that must contain it. Māgha Pūjā is not in these lists.",
   "years": {
-   "2025": {
-    "url": "https://www.krungsri.com/en/international-banking/myanmar/about-us/bank-holiday",
-    "archived": "https://web.archive.org/web/20250620012051/https://www.krungsri.com/en/international-banking/myanmar/about-us/bank-holiday",
+   "2024": {
+    "url": "https://ais.gov.mm/wp-content/uploads/2024/01/AIC-03-2024.pdf",
+    "document": "AIC A 03/2024, published as of 15 Feb 2024",
+    "sha256": "dde6f4b3734be981b51dbbd2bd8fcc194563972d633e6fd8ce7c06f74aa74e73",
+    "retrieved": "2026-11-01",
     "holidays": [
      {
       "holiday": "Full Moon Day of Tabaung",
       "month": "Tabaung",
-      "from": "2025-03-12",
-      "to": "2025-03-14"
+      "from": "2024-03-24",
+      "to": "2024-03-24"
      },
      {
-      "holiday": "Full Moon Day of Waso",
+      "holiday": "Full Moon Day of Kasong",
+      "month": "Kason",
+      "from": "2024-05-22",
+      "to": "2024-05-22"
+     },
+     {
+      "holiday": "Beginning of Buddhist [Lent] (the line is printed \"Beginning of Buddhist\")",
+      "month": "Waso",
+      "from": "2024-07-20",
+      "to": "2024-07-20"
+     },
+     {
+      "holiday": "Lighting Festival",
+      "month": "Thadingyut",
+      "from": "2024-10-16",
+      "to": "2024-10-18"
+     },
+     {
+      "holiday": "Full Moon Day of Tasaungmone",
+      "month": "Tazaungmon",
+      "from": "2024-11-15",
+      "to": "2024-11-15"
+     }
+    ]
+   },
+   "2025": {
+    "url": "https://ais.gov.mm/wp-content/uploads/2025/01/AIC-03-2025.pdf",
+    "document": "AIC A 03/2025, published as of 07 Jan 2025",
+    "sha256": "09ba8749a755dc8192662b71f848d440b709c6c9700aa4481e2d0dd1e892f3a0",
+    "retrieved": "2026-11-01",
+    "holidays": [
+     {
+      "holiday": "Full Moon Day of Tabaung",
+      "month": "Tabaung",
+      "from": "2025-03-13",
+      "to": "2025-03-13"
+     },
+     {
+      "holiday": "Full Moon Day of Kasong",
+      "month": "Kason",
+      "from": "2025-05-11",
+      "to": "2025-05-11"
+     },
+     {
+      "holiday": "Full Moon Day of Warso",
       "month": "Waso",
       "from": "2025-07-09",
       "to": "2025-07-09"
      },
      {
-      "holiday": "Full Moon Day of Thadingyut",
+      "holiday": "Lighting Festival",
       "month": "Thadingyut",
-      "from": "2025-10-06",
+      "from": "2025-10-05",
       "to": "2025-10-07"
      },
      {
-      "holiday": "Full Moon Day of Tazaungmone",
+      "holiday": "Full Moon Day of Tasaungmone",
       "month": "Tazaungmon",
-      "from": "2025-11-03",
+      "from": "2025-11-04",
       "to": "2025-11-04"
      }
     ]
    },
    "2026": {
-    "url": "https://www.krungsri.com/en/international-banking/myanmar/about-us/bank-holiday",
+    "url": "https://ais.gov.mm/wp-content/uploads/2025/12/AIC-03-2026.pdf",
+    "document": "AIC A 03/2026, published on 01 Jan 2026",
+    "sha256": "7bbb97b88ad2ede434fc662cf6c765d8127dcbb7cba1b32d0a0c449c866d157c",
     "retrieved": "2026-11-01",
     "holidays": [
      {
-      "holiday": "National Farmer Day / Full Moon Day of Tabaung",
+      "holiday": "Full Moon Day of Tabaung",
       "month": "Tabaung",
       "from": "2026-03-02",
       "to": "2026-03-02"
      },
      {
-      "holiday": "Full Moon Day of Kason",
+      "holiday": "Full Moon Day of Kasong",
       "month": "Kason",
       "from": "2026-04-30",
       "to": "2026-04-30"
      },
      {
-      "holiday": "Full Moon Day of Waso",
+      "holiday": "Full Moon Day of Warso",
       "month": "Waso",
       "from": "2026-07-29",
       "to": "2026-07-29"
      },
      {
-      "holiday": "Full Moon Day of Thadingyut",
+      "holiday": "Lighting Festival",
       "month": "Thadingyut",
-      "from": "2026-10-25",
+      "from": "2026-10-26",
       "to": "2026-10-27"
      },
      {
-      "holiday": "Full Moon Day of Tazaungdaing",
+      "holiday": "Full Moon Day of Tasaungmone",
       "month": "Tazaungmon",
       "from": "2026-11-23",
       "to": "2026-11-24"
      }
     ]
+   }
+  },
+  "secondary": {
+   "source": "Bank of Ayudhya (Krungsri), Yangon Representative Office: Public Holidays in Myanmar 2025 (bank holiday list). Kept as a second, archived check of 2025.",
+   "url": "https://www.krungsri.com/en/international-banking/myanmar/about-us/bank-holiday",
+   "archived": "https://web.archive.org/web/20250620012051/https://www.krungsri.com/en/international-banking/myanmar/about-us/bank-holiday",
+   "years": {
+    "2025": {
+     "holidays": [
+      {
+       "holiday": "Full Moon Day of Tabaung",
+       "month": "Tabaung",
+       "from": "2025-03-12",
+       "to": "2025-03-14"
+      },
+      {
+       "holiday": "Full Moon Day of Waso",
+       "month": "Waso",
+       "from": "2025-07-09",
+       "to": "2025-07-09"
+      },
+      {
+       "holiday": "Full Moon Day of Thadingyut",
+       "month": "Thadingyut",
+       "from": "2025-10-06",
+       "to": "2025-10-07"
+      },
+      {
+       "holiday": "Full Moon Day of Tazaungmone",
+       "month": "Tazaungmon",
+       "from": "2025-11-03",
+       "to": "2025-11-04"
+      }
+     ]
+    }
    }
   }
  }

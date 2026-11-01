@@ -30,9 +30,9 @@ The code is a JavaScript port of [splendidmoons](https://github.com/splendidmoon
 
 ### Thai Dhammayut: Pakkhagaṇanā
 
-The Dhammayut order counts fortnights with **Pakkhagaṇanā** (ปักขคณนา), a reckoning designed to stay closer to the real moon than the civil calendar. Fortnights of 14 or 15 days are laid out on a counting board in nested cycles (of 16,168, 1,447, 251, 59 and 15 days) from an epoch of 28 January 1736. Uposatha falls on the 8th and the last day of each fortnight. As a result, some Dhammayut uposatha days fall one day after the Mahānikāya ones.
+The Dhammayut order counts fortnights with **Pakkhagaṇanā** (ปักขคณนา), a reckoning designed to stay closer to the real moon than the civil calendar. Fortnights of 14 or 15 days are laid out on a counting board in nested cycles (of 16,168, 1,447, 251, 59 and 15 days) from an epoch of 28 January 1736. Uposatha falls on the 8th and the last day of each fortnight. As a result, some Dhammayut uposatha days differ from the Mahānikāya ones by one day, earlier or later. In 2024–2026 there are 40 such days: on 14 the Pakkhagaṇanā day is one day earlier (for example 8 August 2025, against 9 August), on 26 one day later.
 
-The code is a port of `PakDate` in [pythaidate](https://github.com/hmmbug/pythaidate) by Mark Hollow (MIT). Every Dhammayut day also gives `mahanikaya_date`, the matching Mahānikāya day, so you can see where the two differ. Festival months follow the Thai lunar calendar; each festival takes the Dhammayut full moon nearest the Mahānikāya one.
+The code is a port of `PakDate` in [pythaidate](https://github.com/hmmbug/pythaidate) by Mark Hollow (MIT). Every Dhammayut day also gives `mahanikaya_date`, the matching Mahānikāya day, so you can see where the two differ. Festival months follow the Thai lunar calendar; each festival takes the Dhammayut full moon nearest the Mahānikāya one. Where the two differ, `festivals` also gives `mahanikaya_date` (`mahanikaya_start` and `mahanikaya_end` for the Kaṭhina season), names those festivals in a note, and repeats the caveat about Wat Metta's lists (below).
 
 ### Myanmar: the Burmese calendar
 
@@ -67,12 +67,14 @@ The astronomy follows Jean Meeus, *Astronomical Algorithms* (2nd edition, 1998):
 
 | Festival | Thai (both orders) | Myanmar | Sri Lanka |
 |---|---|---|---|
-| Māgha Pūjā | Full moon of month 3 (month 4 in an adhikamāsa year) | Not computed | Navam poya |
+| Māgha Pūjā | Full moon of month 3 (month 4 in an adhikamāsa year) | Not given (see below) | Navam poya |
 | Vesak / Visākha Pūjā | Full moon of month 6 (7 in an adhikamāsa year) | Full moon of Kason | Vesak poya |
 | Āsāḷha Pūjā | Full moon of month 8 (the second 8 in an adhikamāsa year) | Full moon of (second) Waso | Esala poya |
 | Vassa begins | The next day | The next day | The next day |
 | Pavāraṇā / Vassa ends | Full moon of month 11 | Full moon of Thadingyut | Vap poya |
 | Kaṭhina season | From the day after Pavāraṇā to the full moon of month 12 | To the full moon of Tazaungmon | To Il poya |
+
+**Myanmar and Māgha Pūjā.** Māgha Pūjā is not among the full-moon public holidays in the official Myanmar lists for 2024–2026, and no published source was found that names the Burmese full moon on which it is kept. The tool returns `date: null` with that reason rather than guess a month.
 
 The traditions do not always agree on the month. In 2026 Sri Lanka keeps Vesak on 1 May, Myanmar on 30 April and Thailand on 31 May. Thailand has a second Āsāḷha month that year, and Sri Lanka an Adhi Poson.
 
@@ -86,7 +88,7 @@ Each festival returns the texts associated with it, resolved to the bundled Pāl
 | Māgha Pūjā | DN 14 (contains the Ovāda-pāṭimokkha), Dhp 183–185 |
 | Vesak | MN 123, Ud 1.1, Kd 1, DN 16 |
 | Āsāḷha Pūjā | SN 56.11 (Dhammacakkappavattanasutta), SN 22.59 (Anattalakkhaṇasutta), Kd 1 |
-| Vassa begins | Kd 3: the earlier rains residence begins "aparajjugatāya āsāḷhiyā", the day after the Āsāḷha full moon |
+| Vassa begins | Kd 3, which rules that the earlier rains residence is entered on the day after the Āsāḷha full moon (paraphrase; a test checks the passage is in the bundled Kd 3) |
 | Vassa ends, Pavāraṇā | Kd 3, Kd 4 (Pavāraṇākkhandhaka), SN 8.7 (Pavāraṇāsutta) |
 | Kaṭhina | Kd 7 (Kaṭhinakkhandhaka) |
 
@@ -100,9 +102,10 @@ The reference dates are in [`tests/fixtures/calendar-reference.json`](../tests/f
 |---|---|---|
 | Thai Mahānikāya | [splendidmoons Mahānikāya calendar](https://splendidmoons.github.io/calendars/mahanikaya.csv): 148 uposatha days and 18 festival days | All match |
 | Thai Mahānikāya festivals | Festival lines of the Wat Metta lists (below) | All 15 match |
+| Thai Dhammayut festivals | The same 15 Wat Metta festival lines | 12 match. The other 3 (Vesak 2025, Vassa end 2025, Vassa end 2026) are from May 2025 on; the published date is the one the tool returns as `mahanikaya_date`, and the output says so |
 | Thai Dhammayut | Metta Forest Monastery (Wat Metta), "Uposatha dates for the Dhammayut Order in Thailand": [2024](https://web.archive.org/web/20240705131558/https://www.watmetta.org/news/Uposatha2024.pdf), [2025](https://web.archive.org/web/20250826150659/https://www.watmetta.org/news/Uposatha2025.pdf), [2026](https://web.archive.org/web/20250826191237/https://www.watmetta.org/news/Uposatha2026.pdf); 148 days | 131 match; 17 explained below |
 | Sri Lanka | Government gazettes under the Holidays Act: [No. 2341/46](https://web.archive.org/web/20251016125151/https://documents.gov.lk/view/extra-gazettes/2023/7/2341-46_E.pdf) (2024), [No. 2395/33](https://web.archive.org/web/20251212082428/https://documents.gov.lk/view/extra-gazettes/2024/7/2395-33_E.pdf) (2025), [No. 2438/22](https://web.archive.org/web/20251030070904/https://documents.gov.lk/view/extra-gazettes/2025/5/2438-22_E.pdf) (2026); 37 full-moon poya days with their names | All match, including Adhi Poson 2026 |
-| Myanmar | Bank of Ayudhya (Krungsri), Yangon office, [public holidays in Myanmar](https://www.krungsri.com/en/international-banking/myanmar/about-us/bank-holiday) for [2025](https://web.archive.org/web/20250620012051/https://www.krungsri.com/en/international-banking/myanmar/about-us/bank-holiday) and 2026: full moons of Tabaung, Kason, Waso, Thadingyut and Tazaungmon (9 holidays) | All 9 full moons fall on or inside the published holiday dates |
+| Myanmar | Department of Civil Aviation, Aeronautical Information Services, "Myanmar Public Holidays for Year …": [AIC A 03/2024](https://ais.gov.mm/wp-content/uploads/2024/01/AIC-03-2024.pdf), [AIC A 03/2025](https://ais.gov.mm/wp-content/uploads/2025/01/AIC-03-2025.pdf), [AIC A 03/2026](https://ais.gov.mm/wp-content/uploads/2025/12/AIC-03-2026.pdf); full moons of Tabaung, Kason, Waso, Thadingyut (Lighting Festival) and Tazaungmon, 15 holidays. Second check for 2025: Bank of Ayudhya (Krungsri), Yangon office, [public holidays in Myanmar 2025](https://web.archive.org/web/20250620012051/https://www.krungsri.com/en/international-banking/myanmar/about-us/bank-holiday) | All 11 one-day holidays equal the computed full moon; the 4 multi-day holidays contain it. The Krungsri 2025 list agrees |
 
 ### The 17 Dhammayut differences
 
@@ -117,11 +120,19 @@ Its 2026 list says the dates are "for both the Dhammayut Order and the Mahānik�
 
 The tool keeps the Pakkhagaṇanā day and reports the Mahānikāya day next to it, because the reason for the change was not found in any source. The test lists the 17 days. It fails if any other difference appears, or if any of the 17 is not the Mahānikāya date.
 
-### Myanmar 2024
+### Myanmar reference
 
-No published list of Myanmar's 2024 full-moon holidays could be retrieved. Government notices, the Myanmar eVisa site and embassy closure lists were all tried, and none could be reached or none had the dates. The 2024 Myanmar dates are computed but not checked.
+The official lists are circulars of the Department of Civil Aviation, the only government lists of Myanmar public holidays for 2024–2026 that could be retrieved. They are plain PDFs. No web-archive copy of them exists, so the fixture records each file's SHA-256 as retrieved on 2026-11-01; anyone can download the PDF and compare. The 2024 list prints the Waso holiday as "Beginning of Buddhist" (the word after it is cut off); its date is the Waso full moon.
 
-The 2025 and 2026 bank lists give multi-day holidays as ranges, for example "October 6–7" for Thadingyut. The test therefore checks that the computed full moon falls inside each range.
+One-day holidays must equal the computed full moon. The Lighting Festival (Thadingyut) and, in 2026, Tazaungmon are given as two- or three-day ranges, so for those the test checks only that the full moon falls inside the range.
+
+An earlier version of the fixture used the Krungsri bank-holiday page for 2026. That page is now behind a bot check and was never archived, so it has been replaced by the government list.
+
+### Not checked
+
+- **Myanmar new-moon and half-moon days** are not public holidays and have no published list here; they come from the same ported calendar as the full moons.
+- **Sri Lankan new-moon and half-moon days** are not public holidays and have not been checked against a published list.
+- **Myanmar Māgha Pūjā** has no date (above).
 
 ## Limits
 
