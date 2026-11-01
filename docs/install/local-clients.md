@@ -14,7 +14,7 @@ Please read [what to expect from small models](#what-to-expect-from-small-models
 
 ## What works offline
 
-The server has 11 tools. Six of them work without internet (`get_text` needs it only when you ask for an English translation):
+The server has 12 tools. Seven of them work without internet (`get_text` needs it only when you ask for an English translation):
 
 | Tool | What it does | Internet? |
 |---|---|---|
@@ -23,6 +23,7 @@ The server has 11 tools. Six of them work without internet (`get_text` needs it 
 | `get_text` | Reads the Pāli text (VRI edition) | No, unless you also ask for an English translation |
 | `search_texts` | Searches the full Pāli text and titles | No |
 | `browse_canon` | Lists the books, collections and sections | No |
+| `vinaya_rule` | A monk's Pātimokkha rule (Pj 1, Pc 5, Sk 26…): its Pāli text and a link to the section of the *Buddhist Monastic Code* that explains it | No |
 | `list_sources` | Sources, editions and licences | No |
 | `get_translation` | Reads an English translation from dhammatalks.org or Access to Insight | Yes |
 | `compare_translations` | Shows two to four English translations side by side | Yes |
@@ -91,7 +92,7 @@ Once the npm package is available, this shorter form works too:
 uvx mcpo --host 127.0.0.1 --port 8000 -- npx -y pali-canon-mcp
 ```
 
-Leave the terminal open. To check it, open [http://localhost:8000/docs](http://localhost:8000/docs) in a browser: you should see the 11 tools, and you can try `resolve_reference` with `{"reference": "MN 10"}`.
+Leave the terminal open. To check it, open [http://localhost:8000/docs](http://localhost:8000/docs) in a browser: you should see the 12 tools, and you can try `resolve_reference` with `{"reference": "MN 10"}`.
 
 Notes:
 

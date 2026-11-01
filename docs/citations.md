@@ -56,6 +56,8 @@ Full names work too: "Majjhima Nikāya 10", "Dhammapada 183", "Theragāthā 1.1"
 | Pvr 1.1 | Parivāra section |
 | Vin i 1 … Vin v | PTS volume and page |
 
+For any of the 227 monks' rules, the `vinaya_rule` tool also links the section of Ṭhānissaro Bhikkhu's *Buddhist Monastic Code* that explains it. The book discusses Sekhiya 1–24 in pairs (1 and 2, 3 and 4, …) and Sk 61 with Sk 62, so those rules share a link. The VRI edition gives the seven adhikaraṇa-samathas (As 1–7) as one paragraph, so all seven point to that paragraph (`get_text("pli-tv-bu-vb-as2")`).
+
 Khandhakas are cited by chapter only. Read the chapter to reach a section inside it.
 
 ## PTS volume and page

@@ -8,3 +8,4 @@ export * as calendar from '../calendar.mjs';
 export * as daily from '../daily.mjs';
 export * as topics from '../topics.mjs';
 export * as dppn from '../dppn.mjs';
+export * as vinayaBmc from '../vinaya-bmc.mjs';

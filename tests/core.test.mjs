@@ -356,6 +356,7 @@ test('HTTP transport: /mcp serves the same read-only tools, with CORS, health, l
     const { expectedToolNames, coreToolNames } = await import('../scripts/expected-tools.mjs');
     assert.equal(coreToolNames().length, 11, 'core tools: removing or adding one must be deliberate');
     assert.deepEqual(tools.map((t) => t.name).sort(), expectedToolNames(), 'exactly the core tools plus those the feature modules register');
+    assert.ok(tools.length >= 11);
     assert.ok(tools.every((t) => t.annotations.readOnlyHint && t.annotations.destructiveHint === false));
     assert.equal(tools.find((t) => t.name === 'get_translation').annotations.openWorldHint, true);
     const call = await (await rpc('tools/call', { name: 'resolve_reference', arguments: { reference: 'SN 56:11' } }, 3)).json();

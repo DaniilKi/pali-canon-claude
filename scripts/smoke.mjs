@@ -72,6 +72,7 @@ try {
     await call('topic', { name: 'emptiness' }, (d) => assert.ok(d.texts.some((t) => t.id === 'mn121')));
     await call('list_topics', { limit: 3 }, (d) => assert.ok(d.total >= 300));
   }
+  await call('vinaya_rule', { rule: 'Pc 5' }, (d) => { assert.equal(d.canonical_text.id, 'pli-tv-bu-vb-pc5'); assert.match(d.buddhist_monastic_code.url, /dhammatalks\.org\/vinaya\/bmc\/Section0016\.html#Pc5$/); });
   await fails('get_text', { uid: '../private' });
   await fails('resolve_reference', { reference: 'MN 153' }, /not in the canon index/);
   await fails('resolve_reference', { reference: 'Ja i 1' }, /no PTS page numbers/);
