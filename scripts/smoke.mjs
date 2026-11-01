@@ -31,9 +31,11 @@ try {
   const { tools } = await client.listTools();
   assert.equal(tools.length, 11);
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint));
-  assert.equal((await client.listResources()).resources.length, 2);
+  const { resources } = await client.listResources();
+  for (const uri of ['pali://sources', 'pali://canon-guide', 'pali://pronunciation']) assert.ok(resources.some((r) => r.uri === uri), uri);
   assert.equal((await client.listPrompts()).prompts.length, 3);
   await client.readResource({ uri: 'pali://canon-guide' });
+  assert.match((await client.readResource({ uri: 'pali://pronunciation' })).contents[0].text, /Niggahīta/);
   await client.getPrompt({ name: 'study_passage', arguments: { reference: 'MN 10' } });
 
   // Offline: resolution, text, search, browse.

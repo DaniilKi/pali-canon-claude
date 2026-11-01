@@ -7107,9 +7107,9 @@ var require_formats = __commonJS({
       return res || compareTime(t1, t2);
     }
     var NOT_URI_FRAGMENT = /\/|:/;
-    var URI = /^(?:[a-z][a-z0-9+\-.]*:)(?:\/?\/(?:(?:[a-z0-9\-._~!$&'()*+,;=:]|%[0-9a-f]{2})*@)?(?:\[(?:(?:(?:(?:[0-9a-f]{1,4}:){6}|::(?:[0-9a-f]{1,4}:){5}|(?:[0-9a-f]{1,4})?::(?:[0-9a-f]{1,4}:){4}|(?:(?:[0-9a-f]{1,4}:){0,1}[0-9a-f]{1,4})?::(?:[0-9a-f]{1,4}:){3}|(?:(?:[0-9a-f]{1,4}:){0,2}[0-9a-f]{1,4})?::(?:[0-9a-f]{1,4}:){2}|(?:(?:[0-9a-f]{1,4}:){0,3}[0-9a-f]{1,4})?::[0-9a-f]{1,4}:|(?:(?:[0-9a-f]{1,4}:){0,4}[0-9a-f]{1,4})?::)(?:[0-9a-f]{1,4}:[0-9a-f]{1,4}|(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?))|(?:(?:[0-9a-f]{1,4}:){0,5}[0-9a-f]{1,4})?::[0-9a-f]{1,4}|(?:(?:[0-9a-f]{1,4}:){0,6}[0-9a-f]{1,4})?::)|[Vv][0-9a-f]+\.[a-z0-9\-._~!$&'()*+,;=:]+)\]|(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)|(?:[a-z0-9\-._~!$&'()*+,;=]|%[0-9a-f]{2})*)(?::\d*)?(?:\/(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})*)*|\/(?:(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})+(?:\/(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})*)*)?|(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})+(?:\/(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})*)*)(?:\?(?:[a-z0-9\-._~!$&'()*+,;=:@/?]|%[0-9a-f]{2})*)?(?:#(?:[a-z0-9\-._~!$&'()*+,;=:@/?]|%[0-9a-f]{2})*)?$/i;
+    var URI2 = /^(?:[a-z][a-z0-9+\-.]*:)(?:\/?\/(?:(?:[a-z0-9\-._~!$&'()*+,;=:]|%[0-9a-f]{2})*@)?(?:\[(?:(?:(?:(?:[0-9a-f]{1,4}:){6}|::(?:[0-9a-f]{1,4}:){5}|(?:[0-9a-f]{1,4})?::(?:[0-9a-f]{1,4}:){4}|(?:(?:[0-9a-f]{1,4}:){0,1}[0-9a-f]{1,4})?::(?:[0-9a-f]{1,4}:){3}|(?:(?:[0-9a-f]{1,4}:){0,2}[0-9a-f]{1,4})?::(?:[0-9a-f]{1,4}:){2}|(?:(?:[0-9a-f]{1,4}:){0,3}[0-9a-f]{1,4})?::[0-9a-f]{1,4}:|(?:(?:[0-9a-f]{1,4}:){0,4}[0-9a-f]{1,4})?::)(?:[0-9a-f]{1,4}:[0-9a-f]{1,4}|(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?))|(?:(?:[0-9a-f]{1,4}:){0,5}[0-9a-f]{1,4})?::[0-9a-f]{1,4}|(?:(?:[0-9a-f]{1,4}:){0,6}[0-9a-f]{1,4})?::)|[Vv][0-9a-f]+\.[a-z0-9\-._~!$&'()*+,;=:]+)\]|(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)|(?:[a-z0-9\-._~!$&'()*+,;=]|%[0-9a-f]{2})*)(?::\d*)?(?:\/(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})*)*|\/(?:(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})+(?:\/(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})*)*)?|(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})+(?:\/(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})*)*)(?:\?(?:[a-z0-9\-._~!$&'()*+,;=:@/?]|%[0-9a-f]{2})*)?(?:#(?:[a-z0-9\-._~!$&'()*+,;=:@/?]|%[0-9a-f]{2})*)?$/i;
     function uri(str) {
-      return NOT_URI_FRAGMENT.test(str) && URI.test(str);
+      return NOT_URI_FRAGMENT.test(str) && URI2.test(str);
     }
     var BYTE = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/gm;
     function byte(str) {
@@ -22850,6 +22850,189 @@ function listSources() {
 
 // src/features/index.mjs
 var features_exports = {};
+__export(features_exports, {
+  pronunciation: () => pronunciation_exports
+});
+
+// src/pronunciation.mjs
+var pronunciation_exports = {};
+__export(pronunciation_exports, {
+  EXAMPLES: () => EXAMPLES,
+  GRAMMARS: () => GRAMMARS,
+  GUIDE: () => GUIDE,
+  NOT_LINKED: () => NOT_LINKED,
+  URI: () => URI,
+  register: () => register
+});
+var URI = "pali://pronunciation";
+var EXAMPLES = [
+  { word: "dhammo", say: "dhum-moh", shows: 'short a (like "u" in "but"), aspirated dh, double mm' },
+  { word: "bhagav\u0101", say: "bhu-guh-vaa", shows: "aspirated bh, short a, long \u0101" },
+  { word: "\u0101nando", say: "aa-nun-doh", shows: "long \u0101, long o" },
+  { word: "sati", say: "suh-ti", shows: 'short a, short i; s is always as in "sun"' },
+  { word: "s\u012Bla\u1E43", say: "see-lung", shows: "long \u012B, niggah\u012Bta \u1E43" },
+  { word: "r\u016Bpa\u1E43", say: "roo-pung", shows: "long \u016B, niggah\u012Bta \u1E43" },
+  { word: "mett\u0101", say: "met-taa", shows: "e is short before a double consonant" },
+  { word: "sotthi", say: "sot-thi", shows: "o is short before a double consonant; tth = t + aspirated th" },
+  { word: "bhikkhu", say: "bhik-khu", shows: "kkh = k + aspirated kh; both are heard" },
+  { word: "buddho", say: "bud-dhoh", shows: "ddh = d + aspirated dh" },
+  { word: "sukha\u1E43", say: "su-khung", shows: "kh is ONE letter, so the first syllable stays light" },
+  { word: "citta\u1E43", say: "chit-tung", shows: 'c sounds like "ch" in "church"' },
+  { word: "chanda\u1E43", say: "chhun-dung", shows: "ch is c with a puff of breath" },
+  { word: "jh\u0101na\u1E43", say: "jhaa-nung", shows: "aspirated jh, long \u0101" },
+  { word: "\xF1\u0101\u1E47a\u1E43", say: "nyaa-nung", shows: '\xF1 = "ny" in "canyon"; \u1E47 is retroflex' },
+  { word: "sa\u1E45gho", say: "sung-ghoh", shows: '\u1E45 = "ng" in "sing"; aspirated gh' },
+  { word: "a\u1E6D\u1E6Dha", say: "ut-thuh", shows: "retroflex \u1E6D\u1E6Dh (tongue tip curled back)" },
+  { word: "di\u1E6D\u1E6Dhi", say: "dit-thi", shows: "retroflex \u1E6D\u1E6Dh against dental d" },
+  { word: "ta\u1E47h\u0101", say: "tun-haa", shows: "retroflex \u1E47 followed by h" },
+  { word: "phala\u1E43", say: "phuh-lung", shows: 'ph = p + breath, as in "uphill", never "f"' },
+  { word: "thero", say: "thay-roh", shows: 'th = t + breath, as in "hothouse", never as in "thin"' },
+  { word: "majjhim\u0101", say: "muj-jhi-maa", shows: "jjh = j + aspirated jh" },
+  { word: "pa\xF1\xF1\u0101", say: "pun-nyaa", shows: "double \xF1\xF1" },
+  { word: "nibb\u0101na\u1E43", say: "nib-baa-nung", shows: "double bb, long \u0101, niggah\u012Bta \u1E43" },
+  { word: "eva\u1E43", say: "ay-vung", shows: "e is long when no double consonant follows" }
+];
+var GRAMMARS = [
+  {
+    title: "A Practical Grammar of the P\u0101li Language",
+    author: "Charles Duroiselle (1871\u20131951)",
+    edition: "3rd edition, Rangoon, 1921 (first published 1906)",
+    language: "English",
+    url: "https://archive.org/details/in.ernet.dli.2015.61817",
+    licence: "Public domain",
+    licence_basis: "Published 1921, before 1931, so public domain in the United States; the author died in 1951, so the copyright term of life plus 70 years ended on 1 January 2022.",
+    verified: ["https://archive.org/metadata/in.ernet.dli.2015.61817", "https://whowaswho-indology.info/?p=1673"],
+    note: 'The most widely used free beginner grammar. A re-typeset "free distribution" edition (1997) also circulates; we link the original 1921 scan instead.'
+  },
+  {
+    title: "Handbook of P\u0101li: being an elementary grammar, a chrestomathy, and a glossary",
+    author: "Oscar Frankfurter",
+    edition: "London, 1883",
+    language: "English",
+    url: "https://archive.org/details/handbookofpalibe00franuoft",
+    licence: "Public domain",
+    licence_basis: "Published 1883. The Internet Archive record (University of Toronto scan) marks it NOT_IN_COPYRIGHT.",
+    verified: ["https://archive.org/metadata/handbookofpalibe00franuoft"]
+  },
+  {
+    title: "A Simplified Grammar of the P\u0101li Language",
+    author: "Edward M\xFCller (b. 1853)",
+    edition: "London: Tr\xFCbner, 1884",
+    language: "English",
+    url: "https://archive.org/details/simplifiedgramma00mulliala",
+    licence: "Public domain",
+    licence_basis: "Published 1884. The Internet Archive record (University of California Libraries scan) marks it NOT_IN_COPYRIGHT.",
+    verified: ["https://archive.org/metadata/simplifiedgramma00mulliala"]
+  },
+  {
+    title: "P\u0101li Literatur und Sprache",
+    author: "Wilhelm Geiger (1856\u20131943)",
+    edition: "Strassburg: K. J. Tr\xFCbner, 1916",
+    language: "German",
+    url: "https://archive.org/details/paliliteraturund00geiguoft",
+    licence: "Public domain",
+    licence_basis: "Published 1916; the author died in 1943. The Internet Archive record (University of Toronto scan) marks it NOT_IN_COPYRIGHT. The later English translation is not linked because its copyright status was not verified.",
+    verified: ["https://archive.org/metadata/paliliteraturund00geiguoft"],
+    note: "A scholarly reference grammar, including sound changes and phonology."
+  }
+];
+var NOT_LINKED = [
+  { title: "Introduction to Pali", author: "A. K. Warder", reason: "In copyright and sold by the Pali Text Society; no open licence, so not linked." },
+  { title: "A Pali Grammar for Students", author: "Steven Collins", reason: "In copyright; no open licence, so not linked." }
+];
+var exampleTable = EXAMPLES.map((e) => `| ${e.word} | ${e.say} | ${e.shows} |`).join("\n");
+var grammarList = GRAMMARS.map((g) => `- **${g.title}**, ${g.author}. ${g.edition}. ${g.language}. ${g.url}
+  Licence: ${g.licence}. ${g.licence_basis} Checked at: ${g.verified.join(" ; ")}${g.note ? `
+  ${g.note}` : ""}`).join("\n");
+var notLinked = NOT_LINKED.map((g) => `- ${g.title} (${g.author}): ${g.reason}`).join("\n");
+var GUIDE = `# How to pronounce P\u0101li
+
+This is a plain-English reading guide written for this project. It is reference material, not scripture and not a ruling. Monastic communities in Sri Lanka, Myanmar, Thailand and elsewhere chant P\u0101li with their own, long-established pronunciations; none of them is "wrong", and this guide does not choose between them. It describes the sounds that the Roman letters of the VRI edition (the text bundled with this server) stand for. Use lookup_pali (Digital P\u0101\u1E37i Dictionary) for the grammar of a particular word.
+
+## The alphabet
+
+P\u0101li has no script of its own: it is written in Sinhala, Burmese, Thai, Devan\u0101gar\u012B and other scripts, and in Roman letters with diacritics. The traditional grammar of Kacc\u0101yana counts 41 letters: 8 vowels and 33 consonants.
+
+- Vowels: a \u0101 i \u012B u \u016B e o
+- Velar (back of the tongue): k kh g gh \u1E45
+- Palatal (tongue against the hard palate): c ch j jh \xF1
+- Retroflex (tongue tip curled back): \u1E6D \u1E6Dh \u1E0D \u1E0Dh \u1E47
+- Dental (tongue tip against the teeth): t th d dh n
+- Labial (lips): p ph b bh m
+- Others: y r l v s h \u1E37
+- Niggah\u012Bta: \u1E43
+
+A letter with h after it (kh, gh, ch, jh, \u1E6Dh, \u1E0Dh, th, dh, ph, bh) is ONE letter, not two.
+
+## Vowels: long and short
+
+- a: short, like "u" in "but" (not "a" in "cat").
+- \u0101: long, like "a" in "father".
+- i: short, like "i" in "pin". \u012B: long, like "ee" in "see".
+- u: short, like "u" in "put". \u016B: long, like "oo" in "pool".
+- e: long, like "ay" in "day" (without the glide); short, like "e" in "get", when two consonants follow (mett\u0101).
+- o: long, like "o" in "go"; short, like "o" in "hot", when two consonants follow (sotthi).
+
+The macron (\u0101 \u012B \u016B) marks length, not a different vowel colour. Length matters: it can change the meaning of a word, and verse metre depends on it.
+
+## Aspirated consonants
+
+kh, gh, ch, jh, \u1E6Dh, \u1E0Dh, th, dh, ph, bh are the plain consonant followed by a clear puff of breath, as in "backhand", "doghouse", "hothouse", "uphill", "clubhouse".
+
+- th is never the "th" of "thin" or "this".
+- ph is never "f".
+- kh is never the throaty "ch" of German "Bach".
+
+## Retroflex consonants
+
+\u1E6D \u1E6Dh \u1E0D \u1E0Dh \u1E47 (and \u1E37) are said with the tip of the tongue curled up and back to touch the roof of the mouth. The dental row t th d dh n is said with the tongue tip against the back of the upper teeth. English "t" and "d" fall between the two; aim for a clear difference.
+
+## Other consonants
+
+- c: like "ch" in "church" (never "k" or "s"). ch: the same with a puff of breath.
+- j: like "j" in "jug". \xF1: like "ny" in "canyon". \u1E45: like "ng" in "sing".
+- g: always hard, as in "go". s: always as in "sun", never "z".
+- y: as in "yes". r: a light tap of the tongue. v: between English "v" and "w"; traditions differ.
+- \u1E37: an "l" made with the tongue curled back (retroflex).
+
+## Niggah\u012Bta \u1E43
+
+\u1E43 (niggah\u012Bta) is a nasal sound after a vowel. It is often pronounced like "ng" in "sing" (eva\u1E43, roughly "ay-vung"); some readers nasalise the vowel instead, or let it take the place of the following consonant. The VRI text writes \u1E43; other editions write \u1E41. Before a consonant of the same group many words are written with that group's nasal instead: the VRI text has sa\u1E45gho, not "sa\u1E43gho".
+
+## Double consonants
+
+Both letters of a double consonant are pronounced: hold the first and release it into the second, as in "hot tea" or "book-keeper" (mett\u0101 = met-t\u0101, buddho = bud-dho). With an aspirate, only the second is aspirated: kkh, ggh, cch, jjh, \u1E6D\u1E6Dh, \u1E0D\u1E0Dh, tth, ddh, pph, bbh (bhikkhu = bhik-khu, a\u1E6D\u1E6Dha = a\u1E6D-\u1E6Dha). Shortening a double to a single consonant changes the word.
+
+## Syllable length and stress
+
+A syllable is heavy (long) if it has a long vowel (\u0101 \u012B \u016B, and e o when no double consonant follows), or if its vowel is followed by two consonants or by \u1E43. Otherwise it is light. Remember that kh, th and the other aspirates are single letters: in sukha\u1E43 the first syllable su- is light.
+
+P\u0101li verse is measured by syllable weight, not by stress. The Roman text marks no stress, and pronunciation traditions differ in where they place it. English speakers most often go wrong by stressing one syllable heavily and swallowing the others; giving every long vowel and every double consonant its full length matters more than where the stress falls.
+
+## Examples
+
+Each word below is spelled exactly as it appears in the bundled VRI text. The respellings are rough English approximations ("u" as in "but", "aa" as in "father", "ay" as in "day", "oh" as in "go").
+
+| P\u0101li | Say roughly | Shows |
+|---|---|---|
+${exampleTable}
+
+## Free P\u0101li grammars
+
+Each link below is openly available, and its licence was checked against the record named after it.
+
+${grammarList}
+
+Not linked (not freely licensed):
+
+${notLinked}
+`;
+function register({ resource }) {
+  resource("pronunciation", URI, {
+    mimeType: "text/markdown",
+    description: "Plain-English P\u0101li pronunciation guide (alphabet, long and short vowels, aspirates, retroflexes, niggah\u012Bta \u1E43, double consonants, stress) with links to free public-domain grammars. Reference material, not scripture."
+  }, async (uri) => ({ contents: [{ uri: uri.href, mimeType: "text/markdown", text: GUIDE }] }));
+}
 
 // src/server.mjs
 var VERSION = "2.0.0";
