@@ -14,7 +14,7 @@ Please read [what to expect from small models](#what-to-expect-from-small-models
 
 ## What works offline
 
-The server has 12 tools. Seven of them work without internet (`get_text` needs it only when you ask for an English translation):
+The server has 26 tools. Nineteen of them work without internet (`get_text` needs it only when you ask for an English translation, and `verify_quote` checks Pāli quotations offline but English ones online):
 
 | Tool | What it does | Internet? |
 |---|---|---|
@@ -105,7 +105,7 @@ Once the npm package is available, this shorter form works too:
 uvx mcpo --host 127.0.0.1 --port 8000 -- npx -y pali-canon-mcp
 ```
 
-Leave the terminal open. To check it, open [http://localhost:8000/docs](http://localhost:8000/docs) in a browser: you should see the 12 tools, and you can try `resolve_reference` with `{"reference": "MN 10"}`.
+Leave the terminal open. To check it, open [http://localhost:8000/docs](http://localhost:8000/docs) in a browser: you should see the 26 tools, and you can try `resolve_reference` with `{"reference": "MN 10"}`.
 
 Notes:
 

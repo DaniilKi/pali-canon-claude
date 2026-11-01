@@ -22956,13 +22956,42 @@ function listSources() {
         role: "English translations, study guides and indexes (live).",
         url: ATI,
         mirrors: ["raw.githubusercontent.com/bcbsit/ati (official)", "cdn.jsdelivr.net/gh/bcbsit/ati (official, CDN)", "raw.githubusercontent.com/digitalpalireader/accesstoinsight"],
-        license: "Per page (CC BY-NC 4.0, BPS free-distribution, public domain\u2026); notices are returned with each text."
+        license: "Per page (CC BY-NC 4.0, BPS free-distribution, public domain\u2026); notices are returned with each text.",
+        note: "Study-guide reading plans (reading_plan) store only the guides\u2019 citations and links."
       },
+      {
+        id: "anandajoti",
+        name: "Ancient Buddhist Texts \u2014 \u0100nandajoti Bhikkhu",
+        role: "English (line-by-line P\u0101li/English) translations (live), 153 audited links; translation_id prefix aj:.",
+        url: "https://ancient-buddhist-texts.net/Texts-and-Translations/index.htm",
+        license: "CC BY-SA 3.0 Unported (site Copyright Notice, 2013; page footers link CC BY-SA 4.0). Attribute \u0100nandajoti Bhikkhu.",
+        notice: "https://ancient-buddhist-texts.net/Miscellaneous/Copyright-Notice.htm"
+      },
+      {
+        id: "ati-indexes",
+        name: "Access to Insight General Index and Numerical Index (BCBS)",
+        role: "Topic names and links for topic and list_topics, bundled offline (server/data/topics.json).",
+        url: "https://www.accesstoinsight.org/index-subject.html",
+        version: "45fedca341497120651efa20e756b04a13e61089",
+        license: "CC BY 4.0",
+        attribution: "\u201CGeneral Index\u201D and \u201CNumerical Index\u201D, by Access to Insight (BCBS Edition)."
+      },
+      { id: "dhamma-lists", name: "Numbered lists (pali-canon-mcp curation)", role: "dhamma_list: standard lists with defining passages; P\u0101li from the bundled VRI text, English glosses written for the index (not translations).", license: "MIT (curation); P\u0101li under VRI terms" },
+      { id: "bmc", name: "The Buddhist Monastic Code, Vol. I \u2014 \u1E6Ch\u0101nissaro Bhikkhu (dhammatalks.org)", role: "Linked only: vinaya_rule links each bhikkhu P\u0101timokkha rule to the section that explains it (commentary). Section URLs bundled; no text fetched or stored.", url: "https://www.dhammatalks.org/vinaya/bmc/Section0000.html", license: "CC BY-NC 4.0" },
+      { id: "dppn", name: "Dictionary of P\u0101li Proper Names (G. P. Malalasekera, 1937\u201338)", role: "Proper-name lookup (lookup_name). Linked only: entries not bundled while the licence is unconfirmed (#32).", url: "https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm", license: "Unconfirmed; probably in copyright. Nothing bundled." },
+      {
+        id: "calendar",
+        name: "Uposatha and festival calendar (computed)",
+        role: "Offline uposatha and festival dates for Thai Mah\u0101nik\u0101ya, Thai Dhammayut, Myanmar and Sri Lanka, computed from published rules; not official announcements.",
+        code: ["splendidmoons (MIT, \xA9 2023 Gambhiro Bhikkhu)", "pythaidate (MIT, \xA9 2023 Mark Hollow)", "mmcal ceMmDateTime.js (MIT, \xA9 2018 Yan Naing Aye)", "Meeus, Astronomical Algorithms (2nd ed.)"],
+        docs: "https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/calendar.md"
+      },
+      { id: "grammars", name: "Public-domain P\u0101li grammars (Duroiselle 1921, Frankfurter 1883, M\xFCller 1884, Geiger 1916)", role: "Linked only from pali://pronunciation; not bundled.", url: "https://archive.org/details/in.ernet.dli.2015.61817", license: "Public domain (verified per item; see docs/sources.md)" },
       { id: "dpd", name: "Digital P\u0101\u1E37i Dictionary", role: "Word lookup (live).", url: DPD, license: "CC BY-NC-SA 4.0" },
       { id: "suttacentral", name: "SuttaCentral", role: "Linked only (parallels, other translations). Its content is not fetched or bundled, respecting its request that its work not be used in AI tools.", url: "https://suttacentral.net" }
     ],
     evidence_rule: "Quote only retrieved text. Cite the text ID, VRI paragraph or PTS page, and the translator. Distinguish P\u0101li, translation, dictionary gloss and your own explanation. Numbering schemes differ (standard/Bodhi vs PTS); this tool reports both where they differ.",
-    offline: "All P\u0101li text, citation resolution, PTS lookup and P\u0101li search work without internet. English translations and the dictionary need internet."
+    offline: "All P\u0101li text, citation resolution, PTS lookup and P\u0101li search work without internet, and so do topics, numbered lists, proper-name occurrences, paritta, Abhidhamma and Vinaya-rule lookups, daily texts, reading plans, citation finding, P\u0101li quotation checks and the uposatha and festival calendar. English translations, Dhamma talks and the dictionary need internet."
   };
 }
 
@@ -27290,9 +27319,9 @@ function createServer() {
     }
     return result;
   }, { network: true });
-  tool("get_translation", "Read an English translation of a text (\u1E6Ch\u0101nissaro Bhikkhu on dhammatalks.org, or Access to Insight translators), with attribution, license and numbering notes. Falls back to official mirrors if a site is down.", {
+  tool("get_translation", "Read an English translation of a text (\u1E6Ch\u0101nissaro Bhikkhu on dhammatalks.org, Access to Insight translators, or \u0100nandajoti Bhikkhu on Ancient Buddhist Texts), with attribution, license and numbering notes. Falls back to official mirrors if a site is down.", {
     uid: citation,
-    translation: external_exports.string().max(200).optional().describe('translation_id from get_metadata (e.g. "dt:MN/MN10" or "ati:/tipitaka/mn/mn.010.nysa"), a translator name, or omit for the default.'),
+    translation: external_exports.string().max(200).optional().describe('translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), a translator name, or omit for the default.'),
     offset: external_exports.number().int().min(0).max(2e6).default(0),
     limit: external_exports.number().int().min(500).max(3e4).default(12e3).describe("Characters per page.")
   }, async ({ uid, translation: translation2, offset, limit }) => {

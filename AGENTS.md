@@ -21,8 +21,11 @@ Give AI assistants the complete Theravāda scripture (the Pāli Tipiṭaka) so t
 ## Current state (v2.0.0, November 2026)
 
 - 8,544 citable texts across 61 VRI books; 1,259 grouped members; 266 approximate; 11,964 PTS page markers; about 2.8 million words.
-- 2,295 English links (1,242 dhammatalks.org, 1,053 Access to Insight), covering 1,350 texts directly and 1,773 including inherited verse links. No English for Vinaya or Abhidhamma.
-- 11 MCP tools, 2 resources, 3 prompts; 4 skills (`study`, `compare`, `pali-word`, `method`).
+- 2,448 English links (1,242 dhammatalks.org, 1,053 Access to Insight, 153 Ancient Buddhist Texts by Ānandajoti Bhikkhu), covering 1,359 texts directly and 1,782 including inherited verse links. No English for the Vinaya; the Abhidhamma has four texts (Ds 1.1, Ds 1.3, Vb 6, Vb 7).
+- 26 MCP tools (11 core in `src/server.mjs` + 15 from feature modules), 3 resources (`pali://sources`, `pali://canon-guide`, `pali://pronunciation`), 4 prompts (`study_passage`, `compare_translations`, `topic_research`, `memorise_passage`); 5 skills (`study`, `compare`, `pali-word`, `method`, `memorise`). The hosted HTTP server adds a 27th tool, `read_passage_widget`, when `CHATGPT_WIDGET=1` (on in `fly.toml` and `render.yaml`). `npm run smoke` prints the live counts.
+- Feature registry (`src/features/index.mjs`, one line per module): `verify` (verify_quote), `findCitations` (find_citations), `calendar` (uposatha, festivals), `daily` (daily_text, reading_plan), `topics` (topic, list_topics, dhamma_list), `dppn` (lookup_name), `vinayaBmc` (vinaya_rule), `abhidhamma` (abhidhamma_matika, patthana_condition), `pronunciation` (pali://pronunciation resource), `paritta` (paritta), `talks` (find_talks), `memorise` (memorise_passage prompt). `scripts/expected-tools.mjs` derives the exact tool names from these files; tests and smoke compare against it, never a hard-coded count.
+- Data files besides the canon: `server/data/anandajoti.json` (153 links, merged by `canon.load()`), `topics.json` (472 Access to Insight topics, CC BY 4.0), `dhamma_lists.json` (37 curated lists), `bmc.json` (227 rules → *Buddhist Monastic Code* sections, link only), `dppn.json` (source record only: no entries until the licence is confirmed, #32).
+- Docs site (`site/`, `scripts/build-site.mjs`, `.github/workflows/pages.yml`) and citation index export (`scripts/export-index.mjs`, attached to releases) are built; the site goes live once GitHub Pages is switched on. Machine-drafted guidance in 8 languages is in `docs/i18n/`, awaiting native review.
 - Packaged as a Claude Code plugin (`.claude-plugin/`, `.mcp.json`), a Claude Desktop extension (`manifest.json` → `.mcpb`), a Codex plugin (`.codex-plugin/`, `.mcp.codex.json`, `skills/*/agents/openai.yaml`, `.agents/plugins/marketplace.json`) and a Gemini CLI extension (`gemini-extension.json`, `GEMINI.md`, `commands/`). Codex and Gemini have not yet been tested by hand in the real apps.
 - npm package name: **`pali-canon-mcp`** (bin `pali-canon-mcp`, `mcpName` `io.github.DaniilKi/pali-canon`, no runtime dependencies). **Not published yet**: it needs the `NPM_TOKEN` secret. Until then, docs give `node /path/to/server/index.cjs` as the fallback for every `npx -y pali-canon-mcp` example. The GitHub repository keeps its name.
 - Hosted HTTP endpoint and Docker image (`Dockerfile`, `fly.toml`, `render.yaml`) are built but **not deployed**: there is no hosting account or `FLY_API_TOKEN` yet. MCP Registry entry: `server.json` (stdio package only, no remote until the endpoint is live).
@@ -43,11 +46,20 @@ web/mobile ⇄ MCP (Streamable HTTP, /mcp) ⇄ server/http.cjs  (bundle of src/h
                          ├─ src/cache.mjs       in-memory LRU for live English/ATI/DPD responses (never SuttaCentral)
                          ├─ src/citations.mjs   parseCitation(): id | pts | uid | url
                          ├─ src/canon.mjs       load(), resolve(), segments(), describe(), search(), browse(), linksFor()
-                         ├─ src/english.mjs     translation(), available(), atiMirrors(), fallback logic
+                         ├─ src/english.mjs     translation(), available(), atiMirrors(), fallback logic; also serves aj: (Ancient Buddhist Texts)
                          ├─ src/providers.mjs   lookupPali() (DPD), searchAti(), getAtiText(), listSources()
-                         └─ src/http.mjs        ALLOWED hosts, redirects re-checked, retries, fetchMirrors(), outage simulation
+                         ├─ src/http.mjs        ALLOWED hosts, redirects re-checked, retries, fetchMirrors(), outage simulation
+                         ├─ src/features/index.mjs  feature registry; each module exports register({ tool, prompt, resource, ... })
+                         │    verify.mjs, find-citations.mjs, calendar.mjs, daily.mjs, topics.mjs, dppn.mjs, vinaya-bmc.mjs,
+                         │    abhidhamma.mjs, pronunciation.mjs, paritta.mjs, talks.mjs, memorise.mjs
+                         └─ src/chatgpt-widget.mjs  read_passage_widget + UI templates, registered only by http-server.mjs (CHATGPT_WIDGET=1)
                        server/data/canon.json.gz     generated by scripts/canon/*.py
                        server/data/translations.json generated by scripts/canon/build_translations.py
+                       server/data/anandajoti.json   scripts/anandajoti/build.mjs; canon.load() merges it into the translations
+                       server/data/topics.json       scripts/build_topics.mjs   (ATI General + Numerical index)
+                       server/data/dhamma_lists.json curated by hand; tests/topics.test.mjs checks each member against the Pāli
+                       server/data/bmc.json          scripts/build-bmc.mjs      (rule → BMC section URL)
+                       server/data/dppn.json         source record only (no entries yet)
 ```
 
 Packaging around the same bundle (none of it changes `server/`):
@@ -58,7 +70,10 @@ Packaging around the same bundle (none of it changes `server/`):
 - **Gemini CLI**: `gemini-extension.json` runs `node ${extensionPath}${/}server${/}index.cjs`; `GEMINI.md` context; `commands/*.toml`.
 - **npm**: package `pali-canon-mcp`, `files` = `server/` plus README, LICENSE, THIRD_PARTY.md, PRIVACY.md; checked by `.github/workflows/npx.yml` and `scripts/npx-check.mjs`.
 - **Docker / hosting**: `Dockerfile` (node:20-slim, serves `server/http.cjs`) → `ghcr.io/daniilki/pali-canon-mcp` (`docker.yml`); `fly.toml` + `deploy.yml` (needs `FLY_API_TOKEN`); `render.yaml`.
-- **MCP Registry**: `server.json` (`scripts/check-server-json.mjs`); directory packets in `docs/listings/`.
+- **MCP Registry**: `server.json` (`scripts/check-server-json.mjs`); directory packets in `docs/listings/` (the connector packet's annotations table must list exactly the live tools).
+- **ChatGPT**: the hosted server with `CHATGPT_WIDGET=1` adds the reading-view widget (`src/chatgpt-widget.mjs`); packet in `docs/listings/chatgpt.md`.
+- **Docs site**: `site/` (Jekyll layout) and `llms.txt`; `scripts/build-site.mjs` prepares `dist/site`, `pages.yml` deploys it. `scripts/export-index.mjs` writes the citation index (JSON, CSV, licence notice).
+- **Icon**: `assets/icon.svg` → `assets/icon.png` and `.claude-plugin/icon.png` (`python scripts/render-icon.py`).
 
 ### Data model
 
@@ -69,7 +84,7 @@ Packaging around the same bundle (none of it changes `server/`):
 - `books[i]`: `{ file, collection, pitaka, title, blocks }`. Each block is `[rend, paragraphNumber, text, variantNotes[], pageMarkers]`, where `pageMarkers` is `{ P: ["vol.page"], T, M, V }` (PTS, Thai, Myanmar, VRI). `rend` values include `bodytext`, `hangnum`, `gatha1..3`, `gathalast`, `centre`, `chapter`, `title`, `subhead`, `book`, `nikaya`.
 - `units[]`: `{ id, book, start, end, title, collection, acronym, vri, pts: { volume, page, end_page }, approximate?, shares_passage_with?, members?, kind? }`. `start` and `end` index into `books[book].blocks` (end exclusive). `kind: 'range'` marks grouped texts like `an1.296-305` or `dhp1-20`.
 
-`translations.json` maps unit id → array of links: `{ source: 'dhammatalks'|'ati', url, translator, reference, match, english?, path?, license? }`. `reference` is the translator's own citation (for example `AN 7:64`), used to report numbering differences.
+`translations.json` maps unit id → array of links: `{ source: 'dhammatalks'|'ati', url, translator, reference, match, english?, path?, license? }`. `canon.load()` merges `anandajoti.json` into the same map as `source: 'anandajoti'` links (`license: 'CC BY-SA 3.0'`, optional `parts` for multi-page works). Use `canon.translationId(link)` for `dt:`, `ati:` and `aj:` ids; never rebuild them by hand. `reference` is the translator's own citation (for example `AN 7:64`), used to report numbering differences.
 
 ### Key behaviours
 
@@ -83,7 +98,7 @@ Packaging around the same bundle (none of it changes `server/`):
   - Ranges must not be reversed; Bilara segment references ("mn10:1.2") set `segment`.
 - **Segments** (`canon.segments`) group blocks into headings, prose and whole stanzas with `vri_paragraph`, `pts_page_begins` and optional `variant_readings`. `centre` blocks count as headings only for colophons and invocations.
 - **Search** folds diacritics, needs all terms, supports quoted phrases, and lets specific texts take precedence over ranges that contain them.
-- **Translations** default to dhammatalks.org, then the first link. `translation_id` is `dt:<path>` or `ati:<path>`. A verse inherits its chapter's links (`linksFor`). ATI mirrors, in order: live site → raw.githubusercontent `bcbsit/ati` → jsDelivr `bcbsit/ati` → `digitalpalireader/accesstoinsight`.
+- **Translations** default to dhammatalks.org, then the first link. `translation_id` is `dt:<path>`, `ati:<path>` or `aj:<path>`. A verse inherits its chapter's links (`linksFor`). ATI mirrors, in order: live site → raw.githubusercontent `bcbsit/ati` → jsDelivr `bcbsit/ati` → `digitalpalireader/accesstoinsight`.
 
 ### Translation links (build_translations.py `conservative()`)
 
@@ -116,7 +131,7 @@ A change is done when:
 
 - **Fix a wrong citation.** Write a failing test, fix `citations.mjs` or `canon.mjs` (or the build in `scripts/canon/` if the mapping is wrong), then run `npm run check`. If the data changed, also run `validate.py` (0 problems) and update coverage.
 - **Rebuild data.** Follow [scripts/canon/README.md](scripts/canon/README.md) exactly. Upstream commits must be recorded; pin, never float.
-- **Add a tool.** Put it in its own module `src/<feature>.mjs` exporting `register({ tool, prompt, resource, z, citation, canon, english, providers })`, add one line to `src/features/index.mjs`, and test it in `tests/<feature>.test.mjs`. Core tools stay in `src/server.mjs`. Use read-only annotations and set `network` correctly. Add it to the tools tables in `docs/development.md` and, if user-visible, to the README. Add a smoke check.
+- **Add a tool.** Put it in its own module `src/<feature>.mjs` exporting `register({ tool, prompt, resource, z, citation, canon, english, providers })`, add one line to `src/features/index.mjs`, and test it in `tests/<feature>.test.mjs`. Core tools stay in `src/server.mjs`. Use read-only annotations and set `network` correctly. Do not edit tool counts anywhere in tests: `scripts/expected-tools.mjs` picks the tool up. Add a row to the annotations table in `docs/listings/claude-connector.md` and to the table in `docs/install/local-clients.md` (both are tested), to the tools table in `docs/development.md` and, if user-visible, to "What you can ask it" in the README. Add a smoke check.
 - **Add a source.** See [docs/development.md](docs/development.md#adding-a-source).
 - **Package for another client** (ChatGPT next). Reuse `server/index.cjs` and `skills/` unchanged; add only the client's manifest, as was done for Codex and Gemini. Keep versions in step (see Releasing in [docs/development.md](docs/development.md#releasing)).
 - **Release.** Bump versions in `package.json`, `package-lock.json`, `manifest.json`, `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json`, `gemini-extension.json`, `server.json` (`version` and `packages[0].version`) and `VERSION` in `src/server.mjs`; tests fail if they drift. Then run every check and push the `v*` tag: `release.yml` builds the `.mcpb`, npm tarball and checksums (and publishes to npm when `NPM_TOKEN` is set), `docker.yml` publishes the image and `deploy.yml` deploys when `FLY_API_TOKEN` is set.
@@ -134,6 +149,9 @@ A change is done when:
 - Node's `fetch` ignores `HTTPS_PROXY` unless `NODE_USE_ENV_PROXY=1` is set; the smoke test must pass the environment to its child process.
 - Do not commit `__pycache__` or `*.report.json` (both are in `.gitignore`).
 - Parallel PRs that all append to `tests/core.test.mjs` conflict with each other (Wave 1 had to merge many such conflicts by hand). Prefer a separate `tests/<feature>.test.mjs` file per feature. `npm test` (`scripts/test.mjs`) runs every `tests/*.test.mjs` file.
+- Wave 3 merged 19 branches. The feature registry (one line per module in `src/features/index.mjs`) and separate test files avoided most conflicts. What still broke came from features interacting, not from the merge itself: hard-coded tool counts ("exactly 11"), docs tables that must list every tool, and a new translation source (`aj:`) reaching code that assumed only `dt:` and `ati:` links. Derive lists from the code (`scripts/expected-tools.mjs`, `canon.translationId()`) instead of repeating them.
+- Resolving merge conflicts by "keep both sides" can silently drop or duplicate repeated lines such as `});` or the same assertion from two branches. After such a merge, read the whole conflicted block, and run `npm run check` and `npm run smoke` before committing.
+- A test that pins the hosts of English links (export, paritta) must be widened deliberately when a source is added, never loosened to "any host": SuttaCentral must stay excluded.
 
 ## Environment notes for agent sessions
 
@@ -154,6 +172,11 @@ Human documentation is for **non-technical readers first**: plain English, short
 | [docs/sources.md](docs/sources.md) | Source library: used, linked, planned, declined, peers, mirrors, licences |
 | [docs/citations.md](docs/citations.md) | Every accepted citation form; numbering schemes |
 | [docs/how-it-works.md](docs/how-it-works.md) | Data build and verification, plainly explained |
+| [docs/examples.md](docs/examples.md) | Example requests and the tools that answer them |
+| [docs/verify-quote.md](docs/verify-quote.md), [docs/calendar.md](docs/calendar.md), [docs/topics.md](docs/topics.md) | Feature guides: quote checking, uposatha and festival calendar, topics and lists |
+| [docs/semantic-search.md](docs/semantic-search.md) | Search-by-meaning evaluation and why it was deferred |
+| [docs/export.md](docs/export.md) | Citation index export: fields, licence codes, licence |
+| [docs/i18n/](docs/i18n/README.md) | Machine-drafted localised skill and server guidance (8 languages), awaiting native review |
 | [docs/decisions.md](docs/decisions.md) | Decision log (append-only) |
 | [docs/roadmap.md](docs/roadmap.md) | Comparison with other traditions' tools; plan with issue links |
 | [docs/glossary.md](docs/glossary.md) | Terms |

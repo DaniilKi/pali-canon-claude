@@ -331,7 +331,7 @@ test('rate limiter: per-IP fixed window', async () => {
 
 test('HTTP transport: /mcp serves the same read-only tools, with CORS, health, limits and no sessions', async () => {
   const { createHttpServer } = await import('../src/http-server.mjs');
-  const http = createHttpServer({ rateLimitPerMinute: 5, trustProxy: false });
+  const http = createHttpServer({ rateLimitPerMinute: 5, trustProxy: false, chatgptWidget: false });
   await new Promise((r) => http.listen(0, '127.0.0.1', r));
   const base = `http://127.0.0.1:${http.address().port}`;
   const headers = { 'content-type': 'application/json', accept: 'application/json, text/event-stream' };
@@ -349,7 +349,8 @@ test('HTTP transport: /mcp serves the same read-only tools, with CORS, health, l
     assert.equal(init.headers.get('mcp-session-id'), null, 'stateless: no session id');
     assert.equal((await init.json()).result.serverInfo.name, 'pali-canon');
     const tools = (await (await rpc('tools/list', {}, 2)).json()).result.tools;
-    assert.ok(tools.length >= 11, `${tools.length} tools`); // core tools plus optional features (src/features)
+    const { expectedToolNames } = await import('../scripts/expected-tools.mjs');
+    assert.deepEqual(tools.map((t) => t.name).sort(), expectedToolNames(), 'core tools plus every feature module (src/features)');
     assert.ok(tools.every((t) => t.annotations.readOnlyHint && t.annotations.destructiveHint === false));
     assert.equal(tools.find((t) => t.name === 'get_translation').annotations.openWorldHint, true);
     const call = await (await rpc('tools/call', { name: 'resolve_reference', arguments: { reference: 'SN 56:11' } }, 3)).json();

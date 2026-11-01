@@ -151,7 +151,7 @@ What every tool declares, and the proposed `title`. "Open-world" (`openWorldHint
 | `resolve_reference` | Resolve citation | yes | no | no | Parses a citation and looks it up in the bundled canon. |
 | `get_metadata` | Text details | yes | no | no | Bundled metadata and stored translation links; nothing is fetched. |
 | `get_text` | Read Pāli text | yes | no | yes | The Pāli is offline, but the optional `translation` argument fetches English live. |
-| `get_translation` | Read English translation | yes | no | yes | Fetches dhammatalks.org or Access to Insight (with mirrors). |
+| `get_translation` | Read English translation | yes | no | yes | Fetches dhammatalks.org, Access to Insight (with mirrors) or Ancient Buddhist Texts. |
 | `compare_translations` | Compare translations | yes | no | yes | Fetches two to four translations live. |
 | `search_texts` | Search the Tipiṭaka | yes | no | no | Searches the bundled text and stored titles only. |
 | `browse_canon` | Browse the canon | yes | no | no | Bundled table of contents. |
