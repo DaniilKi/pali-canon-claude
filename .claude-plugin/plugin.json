@@ -1,10 +1,21 @@
 {
   "name": "pali-canon",
-  "version": "1.0.0",
-  "description": "Study the Tipitaka through cited passages, Pali text, translations, parallels, dictionaries, and Access to Insight.",
-  "author": { "name": "DaniilKi and contributors", "url": "https://github.com/DaniilKi" },
+  "version": "2.0.0",
+  "description": "Study the Tipitaka offline: the whole Pali Canon, any citation or PTS page, English translations with mirrors, and Pali dictionary lookup.",
+  "author": {
+    "name": "DaniilKi and contributors",
+    "url": "https://github.com/DaniilKi"
+  },
   "homepage": "https://github.com/DaniilKi/pali-canon-claude#readme",
   "repository": "https://github.com/DaniilKi/pali-canon-claude",
   "license": "MIT",
-  "keywords": ["pali", "tipitaka", "buddhism", "suttacentral", "access-to-insight", "mcp"]
+  "keywords": [
+    "pali",
+    "tipitaka",
+    "buddhism",
+    "theravada",
+    "access-to-insight",
+    "dhammatalks",
+    "mcp"
+  ]
 }

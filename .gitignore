@@ -4,3 +4,6 @@ dist/
 *.mcpb
 .DS_Store
 *.log
+__pycache__/
+*.pyc
+*.report.json

@@ -1,23 +1,53 @@
 {
   "name": "pali-canon-claude",
-  "version": "1.0.0",
-  "description": "Source-grounded Pali Canon study tools for Claude: SuttaCentral, Access to Insight and Pali dictionary lookup.",
+  "version": "2.0.0",
+  "description": "The Pāli Canon for Claude: whole Tipiṭaka offline (VRI), citation and PTS resolution, English translations with mirrors, Pāli dictionary.",
   "type": "module",
   "license": "MIT",
-  "engines": { "node": ">=20" },
-  "bin": { "pali-canon-mcp": "server/index.cjs" },
-  "files": ["server", "README.md", "LICENSE", "THIRD_PARTY.md"],
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "pali-canon-mcp": "server/index.cjs"
+  },
+  "files": [
+    "server",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY.md"
+  ],
   "scripts": {
     "build": "node scripts/build.mjs",
     "start": "node server/index.cjs",
     "test": "node --test tests/core.test.mjs",
     "smoke": "node scripts/smoke.mjs",
-    "check": "npm run build && npm test",
-    "pack:desktop": "node scripts/pack-desktop.mjs"
+    "check": "npm run build && npm test && npm run audit",
+    "pack:desktop": "node scripts/pack-desktop.mjs",
+    "audit": "node scripts/audit.mjs",
+    "outage": "node scripts/outage.mjs"
   },
-  "dependencies": { "@modelcontextprotocol/sdk": "1.32.2", "zod": "^3.25.76" },
-  "devDependencies": { "@anthropic-ai/mcpb": "2.1.2", "esbuild": "0.28.2" },
-  "repository": { "type": "git", "url": "https://github.com/DaniilKi/pali-canon-claude.git" },
-  "bugs": { "url": "https://github.com/DaniilKi/pali-canon-claude/issues" },
-  "keywords": ["claude", "claude-code", "mcp", "pali", "tipitaka", "buddhism", "suttacentral"]
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@anthropic-ai/mcpb": "2.1.2",
+    "esbuild": "0.28.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DaniilKi/pali-canon-claude.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DaniilKi/pali-canon-claude/issues"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "mcp",
+    "pali",
+    "tipitaka",
+    "buddhism",
+    "theravada"
+  ]
 }
