@@ -10,3 +10,4 @@ export * as topics from '../topics.mjs';
 export * as dppn from '../dppn.mjs';
 export * as vinayaBmc from '../vinaya-bmc.mjs';
 export * as abhidhamma from '../abhidhamma.mjs';
+export * as pronunciation from '../pronunciation.mjs';
