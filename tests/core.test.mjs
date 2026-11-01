@@ -150,3 +150,26 @@ test('a verse inherits its chapter translations, with a note', () => {
   assert.ok(desc.english.length > 0);
   assert.ok(desc.notes.some((n) => /whole Dhp 179/.test(n)));
 });
+
+test('local-clients guide lists every tool, with offline tools marked correctly', async () => {
+  const { readFileSync } = await import('node:fs');
+  const read = (p) => readFileSync(new URL(p, import.meta.url), 'utf8');
+  const source = read('../src/index.mjs');
+  const guide = read('../docs/install/local-clients.md');
+  const starts = [...source.matchAll(/^tool\('([a-z_]+)', '([^']*)'/gm)];
+  const tools = starts.map((m, i) => ({
+    name: m[1],
+    description: m[2],
+    network: /network: true/.test(source.slice(m.index, starts[i + 1]?.index ?? source.length)),
+  }));
+  assert.ok(tools.length >= 11);
+  for (const { name, description, network } of tools) {
+    const row = guide.split('\n').find((line) => line.startsWith(`| \`${name}\` |`));
+    assert.ok(row, `${name} missing from docs/install/local-clients.md`);
+    const internet = row.split('|').at(-2).trim();
+    if (!network) assert.equal(internet, 'No', name);
+    else if (/works offline/i.test(description)) assert.match(internet, /^No, unless/, name);
+    else assert.equal(internet, 'Yes', name);
+  }
+  for (const [, block] of guide.matchAll(/```json\n([\s\S]*?)```/g)) assert.doesNotThrow(() => JSON.parse(block));
+});
