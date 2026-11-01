@@ -21562,6 +21562,19 @@ var EMPTY_COMPLETION_RESULT = {
 };
 
 // src/canon.mjs
+var canon_exports = {};
+__export(canon_exports, {
+  _test: () => _test,
+  browse: () => browse,
+  describe: () => describe,
+  fold: () => fold2,
+  linksFor: () => linksFor,
+  load: () => load,
+  resolve: () => resolve,
+  search: () => search,
+  segments: () => segments,
+  source: () => source
+});
 var import_node_fs = require("node:fs");
 var import_node_zlib = require("node:zlib");
 var import_node_path = require("node:path");
@@ -22243,6 +22256,17 @@ function browse(node = "canon", { offset = 0, limit = 60 } = {}) {
   const collection = members[0].collection;
   return { node: key, name: COLLECTION_NAMES[key] || COLLECTION_NAMES[collection] || collection, ...key !== collection ? { collection } : {}, ...page(members.map((u) => unitSummary(u))) };
 }
+var _test = { lookupId, rangeContaining, ptsLookup };
+
+// src/english.mjs
+var english_exports = {};
+__export(english_exports, {
+  atiContent: () => atiContent,
+  atiMirrors: () => atiMirrors,
+  atiNotice: () => atiNotice,
+  available: () => available,
+  translation: () => translation
+});
 
 // src/http.mjs
 var ALLOWED = [
@@ -22616,6 +22640,14 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
 }
 
 // src/providers.mjs
+var providers_exports = {};
+__export(providers_exports, {
+  cleanDpdText: () => cleanDpdText,
+  getAtiText: () => getAtiText,
+  listSources: () => listSources,
+  lookupPali: () => lookupPali,
+  searchAti: () => searchAti
+});
 var DPD = "https://www.dpdict.net";
 var ATI = "https://accesstoinsight.org";
 var DPD_CHROME = /^(?:did you spot a mistake(?: in the declension table)?\??|spot a mistake\??|something(?: out of place\??| missing\??)?|missing\??|correct it here\.?|fix it here\.?|add it here\.?|report it here\.?|log it here\.?|here\.?|can you think of a better example\??|please add more idioms|if something looks out of place,?|feedback|[✔✘◑►])$/i;
@@ -22816,6 +22848,9 @@ function listSources() {
   };
 }
 
+// src/features/index.mjs
+var features_exports = {};
+
 // src/server.mjs
 var VERSION = "2.0.0";
 function createServer() {
@@ -22974,6 +23009,8 @@ function createServer() {
   prompt("study_passage", "Read and explain a passage with cited P\u0101li and translation.", "reference", (ref) => `Study ${ref}. Call resolve_reference, then get_text (P\u0101li, with translation "default" if one is available). Summarise the setting and teaching plainly. Quote only retrieved text; cite the text ID with VRI paragraph or PTS page, and name the translator. Mention numbering notes the tool returns. Separate scripture, translation choices and your interpretation. Point to SuttaCentral for parallels.`);
   prompt("compare_translations", "Compare available English translations against the P\u0101li.", "reference", (ref) => `Compare translations of ${ref}. Call compare_translations, then examine a short passage against the P\u0101li segments from get_text. Keep each translator's exact wording attributed; explain differences as translation choices unless the P\u0101li shows a textual variant. State which translations were unavailable.`);
   prompt("topic_research", "Research a topic through canonical passages.", "topic", (topic) => `Research ${topic} in the P\u0101li Canon. Use search_texts with P\u0101li terms (lookup_pali helps find them) and English title words, and search_access_to_insight for study guides. Read the most relevant passages with get_text before quoting. Ground every claim in a cited passage; separate canonical text, dictionary glosses, translators' notes and your synthesis. State search limits.`);
+  const resource = server.registerResource.bind(server);
+  for (const feature of Object.values(features_exports)) feature.register?.({ tool, prompt, resource, z: external_exports, citation, canon: canon_exports, english: english_exports, providers: providers_exports });
   return server;
 }
 
