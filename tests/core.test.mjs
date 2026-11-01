@@ -664,6 +664,8 @@ test('expected tool list matches what the feature modules register', async () =>
   for (const feature of Object.values(features)) feature.register?.(stub);
   assert.equal(featureFiles().length, Object.keys(features).length, 'every feature line is read');
   assert.deepEqual([...coreToolNames(), ...registered].sort(), expectedToolNames());
+});
+
 test('edition page citations keep "Sn" (Sutta Nipāta) apart from "SN" (Saṃyutta)', () => {
   assert.equal(parseCitation('Thai Sn 330').scope, 'snp');
   assert.equal(parseCitation('Thai SN 1.5').scope, 'sn');

@@ -22,6 +22,7 @@ Give AI assistants the complete Theravāda scripture (the Pāli Tipiṭaka) so t
 
 - 8,544 citable texts across 61 VRI books; 1,259 grouped members; 266 approximate; 11,964 PTS page markers; about 2.8 million words.
 - 2,448 English links (1,242 dhammatalks.org, 1,053 Access to Insight, 153 Ancient Buddhist Texts by Ānandajoti Bhikkhu), covering 1,359 texts directly and 1,782 including inherited verse links. No English for the Vinaya; the Abhidhamma has four texts (Ds 1.1, Ds 1.3, Vb 6, Vb 7).
+- Data-lane features in the core tools: Thai/Myanmar/VRI edition pages (56,050 markers) in `get_text` segments and `describe`, and accepted as citations such as "Thai MN 1.103" (`src/editions.mjs`, D51); structured variant readings with `get_text` `variants: "structured"` (`src/variants.mjs`, D52; `includeVariants` still means raw); a `script` option on `get_text`, `search_texts` and `resolve_reference` for Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao and Lanna, with input in any of them accepted (`src/script.mjs`, D50). Lao and Lanna have no VRI edition to test against and await a native-reader check (HANDOFF).
 - 26 MCP tools (11 core in `src/server.mjs` + 15 from feature modules), 3 resources (`pali://sources`, `pali://canon-guide`, `pali://pronunciation`), 4 prompts (`study_passage`, `compare_translations`, `topic_research`, `memorise_passage`); 5 skills (`study`, `compare`, `pali-word`, `method`, `memorise`). The hosted HTTP server adds a 27th tool, `read_passage_widget`, when `CHATGPT_WIDGET=1` (on in `fly.toml` and `render.yaml`). `npm run smoke` prints the live counts.
 - Feature registry (`src/features/index.mjs`, one line per module): `verify` (verify_quote), `findCitations` (find_citations), `calendar` (uposatha, festivals), `daily` (daily_text, reading_plan), `topics` (topic, list_topics, dhamma_list), `dppn` (lookup_name), `vinayaBmc` (vinaya_rule), `abhidhamma` (abhidhamma_matika, patthana_condition), `pronunciation` (pali://pronunciation resource), `paritta` (paritta), `talks` (find_talks), `memorise` (memorise_passage prompt). `scripts/expected-tools.mjs` derives the exact tool names from these files; tests and smoke compare against it, never a hard-coded count.
 - Data files besides the canon: `server/data/anandajoti.json` (153 links, merged by `canon.load()`), `topics.json` (472 Access to Insight topics, CC BY 4.0), `dhamma_lists.json` (37 curated lists), `bmc.json` (227 rules → *Buddhist Monastic Code* sections, link only), `dppn.json` (source record only: no entries until the licence is confirmed, #32).
@@ -44,7 +45,10 @@ web/mobile ⇄ MCP (Streamable HTTP, /mcp) ⇄ server/http.cjs  (bundle of src/h
                          ├─ src/http-server.mjs HTTP entry: stateless /mcp, /healthz, CORS, per-IP rate limit, aggregate counters
                          ├─ src/server.mjs      createServer(): tools, prompts, resources, server instructions, VERSION
                          ├─ src/cache.mjs       in-memory LRU for live English/ATI/DPD responses (never SuttaCentral)
-                         ├─ src/citations.mjs   parseCitation(): id | pts | uid | url
+                         ├─ src/citations.mjs   parseCitation(): id | pts | edition | uid | url
+                         ├─ src/editions.mjs    Thai/Myanmar/VRI page markers: index, labels, edition-page lookup
+                         ├─ src/variants.mjs    VRI variant notes → readings / omissions / remarks with sigla
+                         ├─ src/script.mjs      Roman ⇄ Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao, Lanna; romanizeInput, localize*
                          ├─ src/canon.mjs       load(), resolve(), segments(), describe(), search(), browse(), linksFor()
                          ├─ src/english.mjs     translation(), available(), atiMirrors(), fallback logic; also serves aj: (Ancient Buddhist Texts)
                          ├─ src/providers.mjs   lookupPali() (DPD), searchAti(), getAtiText(), listSources()

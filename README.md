@@ -61,6 +61,9 @@ Pali Canon gives the AI **26 tools**, 4 prompts, 3 reference resources and 5 ski
 ### Study
 
 - **Find and read any text.** Give a citation, a PTS page or a link and get the Pāli with its references (`resolve_reference`, `get_metadata`, `get_text`). Browse the canon book by book (`browse_canon`) or search the whole Pāli text (`search_texts`).
+- **Read the Pāli in your own script.** Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao or Lanna (Tai Tham), transliterated from the VRI edition; you can also type citations and search words in those scripts (`script` on `get_text`, `search_texts` and `resolve_reference`). Lao and Lanna have no VRI script edition to test against yet.
+- **Cite the Thai, Myanmar or VRI printed edition.** "Thai MN 1.103", "Myanmar Dhp 15" or "VRI SN 1.20 (Nidānavaggo)" finds the text on that page, and `get_text` marks where each edition's pages begin. See [citation formats](docs/citations.md).
+- **See where the printed editions differ.** VRI's variant notes, split into readings with the editions (Sinhala, Thai, PTS and others) that carry them (`get_text` with `variants: "structured"`).
 - **Read and compare translations** *(internet)*. Ṭhānissaro Bhikkhu, the translators on Access to Insight and Ānandajoti Bhikkhu, always named and attributed (`get_translation`, `compare_translations`, `search_access_to_insight`, `get_access_to_insight_text`).
 - **Look up a Pāli word** *(internet)* in the Digital Pāḷi Dictionary (`lookup_pali`). A pronunciation guide explains how to read Pāli aloud (`pali://pronunciation`).
 - **Ask who or where.** "Who was Anāthapiṇḍika?" lists the texts that name a person or place and links to the Dictionary of Pāli Proper Names (`lookup_name`).
@@ -93,7 +96,7 @@ Every tool only reads; none can change anything. The full technical list is in [
 | **Total** | | **8,544** | |
 
 - **The Pāli is complete**, from the Vipassana Research Institute's Chaṭṭha Saṅgāyana edition (the text of the Sixth Council, Yangon, 1954–56): 61 books, bundled and available offline.
-- **Page references for the PTS edition** are included: 11,964 page markers, so scholarly citations such as "M i 55" work. Thai, Myanmar and VRI page markers are in the data too.
+- **Page references for the PTS edition** are included: 11,964 page markers, so scholarly citations such as "M i 55" work. Thai, Myanmar and VRI page markers (56,050) are shown and can be cited too.
 - **English translations** by Ṭhānissaro Bhikkhu (dhammatalks.org), the many translators on Access to Insight and Ānandajoti Bhikkhu (Ancient Buddhist Texts) are fetched live, with backup copies if a site is down.
 - **A Pāli dictionary**: the Digital Pāḷi Dictionary, live.
 
@@ -236,7 +239,7 @@ New to the terms? See the [glossary](docs/glossary.md).
 
 - English is linked for 1,782 texts, about a fifth of the canon. The Vinaya, nearly all of the Abhidhamma and much of the Khuddaka Nikāya have no English yet.
 - The commentaries (Aṭṭhakathā) and sub-commentaries (Ṭīkā) are not included yet.
-- The Pāli is shown in Roman script only. Sinhala, Thai, Myanmar, Khmer and other scripts are planned.
+- Other scripts are transliterated by this server from the Roman edition, not taken from printed script editions. Lao and Lanna have not yet been checked against a printed edition or by native readers.
 - Translations and the dictionary need internet; the Pāli does not.
 - It runs on your own computer. A hosted version for Claude on the web and phone is built but not online yet.
 
@@ -245,7 +248,7 @@ New to the terms? See the [glossary](docs/glossary.md).
 Fifty issues are planned, under one tracking issue: [Roadmap: parity with Bible and Quran AI tools (#52)](https://github.com/DaniilKi/pali-canon-claude/issues/52). In short:
 
 - **Reach:** putting the hosted version online, Claude's connector directory, ChatGPT, the MCP Registry and community directories, and support in many languages. The Codex, Gemini CLI and code editor packages are done and waiting for hands-on testing.
-- **Study:** commentaries, word-by-word analysis, other scripts, parallels between texts, more translators and other languages. Quote checking, citation finding, topics, numbered lists and people and places are done. Search by meaning was tested and deferred ([why](docs/semantic-search.md)).
+- **Study:** commentaries, word-by-word analysis, parallels between texts, more translators and other languages. Quote checking, citation finding, topics, numbered lists, people and places, other scripts, edition page citations and structured variants are done. Search by meaning was tested and deferred ([why](docs/semantic-search.md)).
 - **Practice:** the uposatha calendar, festivals, chanting texts, daily readings and memorisation are done. Chanting-book layouts and recordings wait on publishers' permission.
 
 How we compare with Bible, Quran and Sefaria tools, and why each item matters: [docs/roadmap.md](docs/roadmap.md).

@@ -48,6 +48,7 @@ Before sending, fill in the maintainer's name and reply-to address in each lette
 ## Native-speaker reviews
 
 - [ ] **Localised guidance** — for each of Sinhala (`si`), Thai (`th`), Burmese (`my`), Khmer (`km`), Lao (`lo`), Vietnamese (`vi`), Simplified Chinese (`zh-Hans`) and Spanish (`es`), a native speaker who knows Theravāda terms reviews `docs/i18n/<lang>/` against the English sources, following "How to review a language". #19 closes once at least Sinhala, Thai and Burmese are reviewed — [docs/i18n/README.md](docs/i18n/README.md) — https://github.com/DaniilKi/pali-canon-claude/issues/19
+- [ ] **Pāli in other scripts** — for each script a reader of that script checks `get_text` output for MN 10 and Dhp 1–20 (for example `script: "sinhala"`) and a search typed in that script: Sinhala, Thai, Myanmar, Devanagari and Khmer (already matched to VRI's own editions; check that it reads naturally), and especially Lao and Lanna (Tai Tham), which VRI does not publish, so they are tested by round trip only. Report anything odd on #26, which closes once Lao and Lanna are confirmed — [docs/decisions.md](docs/decisions.md#d50-other-scripts-by-our-own-transliterator-matched-to-vris-script-editions) — https://github.com/DaniilKi/pali-canon-claude/issues/26
 
 ## Manual client tests
 
@@ -74,6 +75,7 @@ Before sending, fill in the maintainer's name and reply-to address in each lette
 
 ## Other
 
+- [ ] **What the variant siglum *ka.* means** — check the front matter of a printed Chaṭṭha Saṅgāyana volume (or ask VRI) whether *ka.* and *kaṃ.* are the same Cambodian edition; the tool keeps them apart until then — [docs/glossary.md](docs/glossary.md#variant-readings) — https://github.com/DaniilKi/pali-canon-claude/issues/28
 - [ ] **Split the canon data** — open a data issue to split `server/data/canon.json.gz` (5.3 MiB) into files under 5 MiB, because Anthropic's directory blocks larger files — [docs/listings/claude-code-marketplace.md](docs/listings/claude-code-marketplace.md#before-submitting-open-items)
 - [x] **Add our own icon** — done: `assets/icon.png` and `.claude-plugin/icon.png` are rendered from `assets/icon.svg` by `python scripts/render-icon.py` (#7). Originally: a square PNG (512–2048 px, under 2 MB) at `.claude-plugin/icon.png` before the first directory submission (the directory reads it only once); also export `assets/icon.svg` to a 512×512 PNG for directories that do not accept SVG — https://claude.com/docs/plugins/pre-submission-checklist
 - [ ] **Link the privacy policy and terms from the plugin** — add `privacyPolicyUrl` and `termsOfServiceUrl` to `.claude-plugin/plugin.json`, pointing at [PRIVACY.md](PRIVACY.md) and [TERMS.md](TERMS.md) — https://github.com/DaniilKi/pali-canon-claude/issues/6

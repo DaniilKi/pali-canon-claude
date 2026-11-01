@@ -57,6 +57,10 @@ try {
   const first = await call('get_text', { uid: 'MN 10', limit: 5 }, (d) => { assert.equal(d.text_id, 'mn10'); assert.equal(d.returned, 5); assert.ok(d.segments.some((s) => /Evaṃ me sutaṃ/.test(s.text))); });
   await call('get_text', { uid: 'mn10', limit: 3, offset: first.next_offset }, (d) => assert.notEqual(d.segments[0].ref, first.segments.at(-1).ref));
   await call('get_text', { uid: 'Dhp 183', includeVariants: true }, (d) => assert.ok(d.segments.some((s) => /Sabbapāpassa akaraṇaṃ/.test(s.text))));
+  await call('get_text', { uid: 'MN 10', limit: 5, script: 'sinh' }, (d) => { assert.equal(d.script, 'sinhala'); assert.equal(d.text_id, 'mn10'); assert.ok(d.segments.some((s) => /[඀-෿]/.test(s.text) && !/[ā]/.test(s.text))); });
+  await call('get_text', { uid: 'MN 10', variants: 'structured' }, (d) => { const v = d.segments.flatMap((s) => s.variants || []); assert.ok(v.some((x) => x.raw && x.readings.some((r) => r.editions.length))); assert.ok(Object.keys(d.variant_sigla).length); });
+  await call('resolve_reference', { reference: 'Thai MN 1.103' }, (d) => assert.equal(d.id, 'mn10'));
+  await call('search_texts', { query: 'सतिपट्ठान', limit: 3, script: 'thai' }, (d) => { assert.ok(d.results.length); assert.equal(d.input_script, 'devanagari'); assert.match(d.results[0].title, /[฀-๿]/); });
   await call('search_texts', { query: 'anapanassati', limit: 3 }, (d) => assert.ok(d.results.length));
   await call('search_texts', { query: '"sabbe sankhara anicca"', collection: 'dhp' }, (d) => assert.ok(d.results.some((r) => r.id === 'dhp277')));
   for (const node of ['canon', 'vinaya', 'sn', 'sn56', 'abhidhamma']) await call('browse_canon', { node, limit: 3 });

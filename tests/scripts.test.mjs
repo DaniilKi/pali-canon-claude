@@ -154,3 +154,18 @@ test('results in a script keep IDs, citations and English in Roman', () => {
   assert.deepEqual(localizeDescribe(plain, undefined), plain);
   assert.deepEqual(localizeDescribe(plain, 'roman'), plain);
 });
+
+test('get_text in a script also writes structured variants in that script, keeping sigla as legend keys', async () => {
+  const canon = await import('../src/canon.mjs');
+  const { textSegments } = await import('../src/variants.mjs');
+  const { localizeText } = await import('../src/script.mjs');
+  const { unit } = canon.resolve('MN 10');
+  const { segments } = textSegments(unit, { variants: 'structured' });
+  const out = localizeText({ title: unit.title, segments }, 'sinh', { text: 'MN 10', script: 'roman' });
+  const v = out.segments.flatMap((s) => s.variants || []);
+  assert.ok(v.length);
+  for (const x of v) {
+    assert.doesNotMatch(x.raw, /[āīūṃṅñṭḍṇḷ]/);
+    for (const r of x.readings) { assert.doesNotMatch(r.reading, /[a-zāīū]/); for (const e of r.editions) assert.match(e.siglum, /[a-z]/); }
+  }
+});

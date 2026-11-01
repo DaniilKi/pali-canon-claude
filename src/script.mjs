@@ -386,6 +386,14 @@ export function localizeText(result, script, input) {
     const x = { ...seg };
     if (typeof x.text === 'string') x.text = x.type === 'verse' ? verse(x.text, s) : pali(x.text, s);
     if (Array.isArray(x.variant_readings)) x.variant_readings = x.variant_readings.map((v) => pali(v, s));
+    // Structured variants (get_text variants: "structured"): the Pāli of each note in `script`; sigla stay as legend keys.
+    if (Array.isArray(x.variants)) x.variants = x.variants.map((v) => ({
+      ...v,
+      raw: pali(v.raw, s),
+      readings: (v.readings ?? []).map((r) => ({ ...r, reading: pali(r.reading, s) })),
+      omissions: (v.omissions ?? []).map((o) => ({ ...o, text: pali(o.text, s) })),
+      remarks: (v.remarks ?? []).map((r) => pali(r, s)),
+    }));
     return x;
   });
   if (Array.isArray(result.pali_opening)) out.pali_opening = result.pali_opening;

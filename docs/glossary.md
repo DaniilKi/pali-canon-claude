@@ -43,6 +43,7 @@ Terms used in this project, explained for newcomers. Pāli words are given with 
 | **Standard numbering** | The sutta numbering used by Bhikkhu Bodhi's translations and SuttaCentral; this tool's citations use it |
 | **PTS-based numbering** | The older numbering used for parts of SN and AN by Ṭhānissaro Bhikkhu and Access to Insight |
 | **VRI paragraph** | The paragraph numbers printed in the VRI edition, used to locate passages precisely |
+| **Thai / Myanmar / VRI edition page** | Page breaks of three printed editions recorded in the VRI files: the Thai (Siam Raṭṭha) edition, the Myanmar (Chaṭṭha Saṅgāyana) edition and VRI's own printed edition. Cited with the edition name and collection, "Thai MN 1.103" (volume.page), "Myanmar Dhp 15", "VRI SN 1.20 (Nidānavaggo)"; see [citation formats](citations.md#thai-myanmar-and-vri-edition-pages). They are not variant sigla: *syā.* in a variant note is the Thai edition's reading, not its page |
 | **Variant reading** | A place where editions (Sinhala, Thai, PTS and others) differ; VRI records these in notes |
 | **Mahāsaṅgīti** | SuttaCentral's Pāli edition, derived from VRI; public domain |
 

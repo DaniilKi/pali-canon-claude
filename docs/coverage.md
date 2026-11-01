@@ -13,9 +13,12 @@ What Pali Canon for Claude contains in version 2.0.0, computed directly from the
 | Citable texts | **8,544**, each with a standard citation ID |
 | Grouped texts | 1,259 texts printed together with others (AN 1.296–305, Dhp 1–20…) answer to their own number too |
 | Abbreviated texts | 266 texts that the edition abbreviates (*peyyāla*) are marked approximate |
-| PTS page markers | 11,964 (also Thai, Myanmar and VRI edition markers) |
+| PTS page markers | 11,964 |
+| Thai, Myanmar and VRI page markers | 56,050 (21,781 Thai, 16,687 Myanmar, 17,582 VRI), shown in `get_text` and accepted as citations such as "Thai MN 1.103"; 56,048 resolve back to a text containing the marker |
+| Variant readings | 18,725 VRI notes; 16,632 (88.8%) give at least one reading attributed to editions by siglum (`get_text` `variants: "structured"`) |
+| Scripts | Roman, plus Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao and Lanna by transliteration. The first five are tested against VRI's own script editions; Lao and Lanna have no VRI edition and are tested by round trip only |
 | English translation links | 2,448 links covering 1,359 texts directly, 1,782 including verses that share their chapter's translation |
-| Works offline | All Pāli reading, citation lookup, PTS page lookup and Pāli search |
+| Works offline | All Pāli reading, citation lookup, PTS and edition page lookup, Pāli search and script conversion |
 
 "Texts" here means the units people cite: a sutta, a verse, a rule, a Khandhaka chapter, an Abhidhamma section. Some collections are counted by verse (Dhammapada) and some by chapter or story.
 
@@ -88,8 +91,7 @@ A translation is linked only on strong evidence: a matching number and title, a 
 |---|---|
 | Commentaries (Aṭṭhakathā), sub-commentaries (Ṭīkā) | [#20](https://github.com/DaniilKi/pali-canon-claude/issues/20), [#21](https://github.com/DaniilKi/pali-canon-claude/issues/21) |
 | Post-canonical classics: Visuddhimagga, Abhidhammatthasaṅgaha | [#21](https://github.com/DaniilKi/pali-canon-claude/issues/21) |
-| Scripts other than Roman | [#26](https://github.com/DaniilKi/pali-canon-claude/issues/26) |
-| Thai, Myanmar and VRI page citations (data present, not yet exposed) | [#27](https://github.com/DaniilKi/pali-canon-claude/issues/27) |
+| Lao and Lanna checked against a printed edition (VRI publishes none at the pinned commit) and by native readers | [#26](https://github.com/DaniilKi/pali-canon-claude/issues/26) |
 | English for Vinaya, Abhidhamma and most of the Khuddaka Nikāya | [#34](https://github.com/DaniilKi/pali-canon-claude/issues/34) |
 | Translations in other languages | [#35](https://github.com/DaniilKi/pali-canon-claude/issues/35) |
 
