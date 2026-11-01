@@ -104,6 +104,37 @@ test('dictionary and HTML cleaning', () => {
   assert.equal(plainText('<i>dhamma</i>s'), 'dhammas');
 });
 
+test('#49 DPD declension and conjugation tables, tab buttons and frequency are stripped', () => {
+  const html = `<div class="dpd"><p class="dpd summary">sati 1.1 fem. memory</p></div>
+    <div class="button-box"><a class="dpd-button" data-target="grammar_sati_1_1">grammar</a><a class="dpd-button">declension</a></div>
+    <div id="grammar_sati_1_1" class="dpd content hidden"><table class="grammar"><tr><th>Grammar</th><td>fem, abstr</td></tr></table></div>
+    <div id="declension_sati_1_1" class="dpd content hidden"><p class='heading'><b>sati</b> is <b>i fem</b> declension</p>
+      <table class='inflection'><tr><th>nom</th><td>sat<b>i</b></td></tr></table>
+      <div><p>Inflections not found in any Pāḷi corpus are grayed out.</p></div></div>
+    <div id="conjugation_gacchati_1" class="dpd content hidden"><table class='inflection'><tr><th>pr</th><td>gacchāmi</td></tr></table></div>
+    <div id="family_root_sati_1_1" class="dpd content hidden"><p>words in the root family √sar</p></div>
+    <div id="frequency_sati_1_1" class="dpd content hidden"><table class="freq"><tr><td>1644</td></tr></table></div>
+    <div class="dpd"><p class="dpd summary">sati 1.2 fem. mindfulness</p></div>`;
+  const cleaned = cleanDpdText(html);
+  for (const noise of ['declension', 'conjugation', 'sati\nnom', 'gacchāmi', 'grayed out', '1644', 'grammar\n']) {
+    assert.equal(cleaned.includes(noise), false, noise);
+  }
+  for (const kept of ['sati 1.1 fem. memory', 'fem, abstr', 'root family √sar', 'sati 1.2 fem. mindfulness']) {
+    assert.ok(cleaned.includes(kept), kept);
+  }
+});
+
+test('#49 browse_canon labels sections with the collection name, not its key', () => {
+  for (const [node, name, collection] of [['sn56', 'Saṃyutta Nikāya', 'sn'], ['an4', 'Aṅguttara Nikāya', 'an'], ['kv1', 'Kathāvatthu', 'kv']]) {
+    const r = canon.browse(node, { limit: 1 });
+    assert.equal(r.name, name, node);
+    assert.equal(r.collection, collection, node);
+  }
+  assert.equal(canon.browse('sn', { limit: 1 }).name, 'Saṃyutta Nikāya');
+  assert.equal(canon.browse('mn', { limit: 1 }).collection, undefined);
+  for (const c of canon.browse('canon', { limit: 100 }).items) assert.notEqual(c.name, undefined, c.id);
+});
+
 test('regressions from independent review: no silent wrong answers', () => {
   assert.equal(id('Bhikkhuni Ss 1'), 'pli-tv-bi-vb-ss1');
   assert.equal(id('bhikkhunī ss 1'), 'pli-tv-bi-vb-ss1');

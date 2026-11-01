@@ -22240,7 +22240,8 @@ function browse(node = "canon", { offset = 0, limit = 60 } = {}) {
   if (!members.length) members = units.filter((u) => u.id.startsWith(key) && u.kind !== "range");
   if (!members.length) throw new Error(`Unknown browse node "${node}". Start with "canon", "sutta", "vinaya", "abhidhamma" or a collection such as mn, sn, sn56, an4, dhp.`);
   members.sort((a, b) => a.book - b.book || a.start - b.start);
-  return { node: key, name: COLLECTION_NAMES[key] || members[0].collection, ...page(members.map((u) => unitSummary(u))) };
+  const collection = members[0].collection;
+  return { node: key, name: COLLECTION_NAMES[key] || COLLECTION_NAMES[collection] || collection, ...key !== collection ? { collection } : {}, ...page(members.map((u) => unitSummary(u))) };
 }
 
 // src/http.mjs
@@ -22521,8 +22522,32 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
 var DPD = "https://www.dpdict.net";
 var ATI = "https://accesstoinsight.org";
 var DPD_CHROME = /^(?:did you spot a mistake(?: in the declension table)?\??|spot a mistake\??|something(?: out of place\??| missing\??)?|missing\??|correct it here\.?|fix it here\.?|add it here\.?|report it here\.?|log it here\.?|here\.?|can you think of a better example\??|please add more idioms|if something looks out of place,?|feedback|[✔✘◑►])$/i;
+var DPD_NOISE_DIV = /<div\b[^>]*(?:\bid\s*=\s*["'](?:declension|conjugation|inflection|frequency|feedback)_[^"']*["']|\bclass\s*=\s*["'](?:button-box|dpd-footer)["'])[^>]*>/gi;
+function dropDpdNoise(html) {
+  let out = "";
+  let pos = 0;
+  DPD_NOISE_DIV.lastIndex = 0;
+  for (let m = DPD_NOISE_DIV.exec(html); m; m = DPD_NOISE_DIV.exec(html)) {
+    if (m.index < pos) continue;
+    out += html.slice(pos, m.index);
+    const tags = /<div\b[^>]*>|<\/div\s*>/gi;
+    tags.lastIndex = m.index + m[0].length;
+    let depth = 1;
+    let end = html.length;
+    for (let t = tags.exec(html); t; t = tags.exec(html)) {
+      depth += t[0][1] === "/" ? -1 : 1;
+      if (depth === 0) {
+        end = t.index + t[0].length;
+        break;
+      }
+    }
+    pos = end;
+    DPD_NOISE_DIV.lastIndex = end;
+  }
+  return out + html.slice(pos);
+}
 function cleanDpdText(html) {
-  let text = plainText(html);
+  let text = plainText(dropDpdNoise(String(html ?? "")));
   const footer = text.search(/\n\s*Frequency of\s*\n/);
   if (footer >= 0) text = text.slice(0, footer);
   const end = text.search(/Digital Pāḷi Dictionary is a work in progress/);
@@ -22555,7 +22580,7 @@ async function lookupPali({ word, limit = 5 }) {
     total_summary_entries: entries.length,
     omitted: Math.max(0, entries.length - limit),
     detail_excerpt: shortText(cleanDpdText(data2.dpd_html ?? ""), 8e3),
-    detail_note: "Plain-text excerpt of the live dictionary entry (grammar, roots, examples, compounds). Dictionary glosses are reference material, not scripture.",
+    detail_note: "Plain-text excerpt of the live dictionary entry (grammar, roots, examples, compounds). Declension and conjugation tables are left out; open the url to see them. Dictionary glosses are reference material, not scripture.",
     attribution: license.attribution,
     license
   };
