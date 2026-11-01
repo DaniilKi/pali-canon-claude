@@ -68,7 +68,7 @@ These run before every release, and the build, tests and audit also run on every
 
 | Part | File |
 |---|---|
-| Tools, prompts and resources Claude sees | [`src/index.mjs`](../src/index.mjs) |
+| Tools, prompts and resources Claude sees | [`src/server.mjs`](../src/server.mjs) |
 | Reading citations ("MN 10", "M i 55", links) | [`src/citations.mjs`](../src/citations.mjs) |
 | The bundled canon: lookup, text, search, browse | [`src/canon.mjs`](../src/canon.mjs) |
 | English translations and fallbacks | [`src/english.mjs`](../src/english.mjs) |

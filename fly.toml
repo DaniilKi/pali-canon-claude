@@ -1,0 +1,35 @@
+# Fly.io configuration for the hosted endpoint (https://<app>.fly.dev/mcp). See docs/hosting.md.
+# Change `app` to the name you create with `fly apps create`.
+app = "pali-canon-mcp"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+  TRUST_PROXY = "1"
+  RATE_LIMIT_PER_MINUTE = "120"
+  PALI_CANON_CACHE_MB = "64"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 1
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 100
+    hard_limit = 200
+
+[[http_service.checks]]
+  interval = "30s"
+  timeout = "5s"
+  grace_period = "20s"
+  method = "GET"
+  path = "/healthz"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"

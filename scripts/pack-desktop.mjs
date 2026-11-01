@@ -10,7 +10,8 @@ if (!staging.startsWith(dist + sep)) throw new Error('Invalid bundle staging pat
 await rm(staging, { recursive: true, force: true });
 await mkdir(staging, { recursive: true });
 for (const name of ['manifest.json', 'server', 'README.md', 'LICENSE', 'THIRD_PARTY.md', 'PRIVACY.md']) {
-  await cp(resolve(root, name), resolve(staging, name), { recursive: true });
+  // The desktop extension runs over stdio; the hosted HTTP bundle (server/http.cjs) is left out.
+  await cp(resolve(root, name), resolve(staging, name), { recursive: true, filter: (source) => !/[\/]server[\/]http\.cjs$/.test(source) });
 }
 const { version } = JSON.parse(await readFile(resolve(root, 'package.json'), 'utf8'));
 const cli = resolve(root, 'node_modules/@anthropic-ai/mcpb/dist/cli/cli.js');

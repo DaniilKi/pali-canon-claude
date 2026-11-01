@@ -284,4 +284,128 @@ test('version is the same in package.json, manifest.json, plugin.json and the se
   assert.equal(JSON.parse(read('manifest.json')).version, version, 'manifest.json');
   assert.equal(JSON.parse(read('.claude-plugin/plugin.json')).version, version, '.claude-plugin/plugin.json');
   assert.ok(read('src/index.mjs').includes(`const VERSION = '${version}'`), 'src/index.mjs VERSION');
+test('live-response cache: LRU order, TTL, byte budget, shared in-flight fetch, failures not cached', async () => {
+  const { LruCache } = await import('../src/cache.mjs');
+  let clock = 0;
+  const cache = new LruCache({ maxBytes: 250, ttlMs: 1000, now: () => clock });
+  cache.set('a', 'x'.repeat(30)); cache.set('b', 'y'.repeat(30));
+  assert.equal(cache.get('a'), 'x'.repeat(30));
+  cache.set('c', 'z'.repeat(30));
+  cache.set('d', 'w'.repeat(30));
+  cache.set('e', 'v'.repeat(30));
+  assert.ok(cache.bytes <= 250);
+  assert.equal(cache.get('b'), undefined, 'least recently used entry is evicted first');
+  assert.ok(cache.get('a'));
+  clock = 2000;
+  assert.equal(cache.get('a'), undefined, 'entries expire');
+  let calls = 0;
+  const load = async () => { calls += 1; await new Promise((r) => setTimeout(r, 10)); return 'page'; };
+  const [x, y] = await Promise.all([cache.wrap('k', load), cache.wrap('k', load)]);
+  assert.equal(x, 'page'); assert.equal(y, 'page'); assert.equal(calls, 1, 'concurrent requests share one fetch');
+  await assert.rejects(cache.wrap('bad', async () => { throw new Error('down'); }));
+  assert.equal(await cache.wrap('bad', async () => 'ok'), 'ok', 'a failure is never cached');
+  const off = new LruCache({ maxBytes: 0 });
+  let n = 0;
+  await off.wrap('k', async () => { n += 1; }); await off.wrap('k', async () => { n += 1; });
+  assert.equal(n, 2, 'cache can be switched off');
+});
+
+test('rate limiter: per-IP fixed window', async () => {
+  const { RateLimiter } = await import('../src/http-server.mjs');
+  let clock = 0;
+  const limiter = new RateLimiter({ perMinute: 2, now: () => clock });
+  assert.equal(limiter.take('1.1.1.1'), 0);
+  assert.equal(limiter.take('1.1.1.1'), 0);
+  assert.ok(limiter.take('1.1.1.1') > 0);
+  assert.equal(limiter.take('2.2.2.2'), 0, 'other clients are unaffected');
+  clock = 60000;
+  assert.equal(limiter.take('1.1.1.1'), 0, 'window resets');
+  assert.equal(new RateLimiter({ perMinute: 0 }).take('x'), 0, '0 disables the limit');
+});
+
+test('HTTP transport: /mcp serves the same read-only tools, with CORS, health, limits and no sessions', async () => {
+  const { createHttpServer } = await import('../src/http-server.mjs');
+  const http = createHttpServer({ rateLimitPerMinute: 5, trustProxy: false });
+  await new Promise((r) => http.listen(0, '127.0.0.1', r));
+  const base = `http://127.0.0.1:${http.address().port}`;
+  const headers = { 'content-type': 'application/json', accept: 'application/json, text/event-stream' };
+  const rpc = (method, params, id = 1) => fetch(`${base}/mcp`, { method: 'POST', headers, body: JSON.stringify({ jsonrpc: '2.0', id, method, params }) });
+  try {
+    const health = await (await fetch(`${base}/healthz`)).json();
+    assert.equal(health.status, 'ok');
+    assert.match(health.privacy, /No request content/);
+    const pre = await fetch(`${base}/mcp`, { method: 'OPTIONS' });
+    assert.equal(pre.status, 204);
+    assert.equal(pre.headers.get('access-control-allow-origin'), '*');
+    assert.match(pre.headers.get('access-control-allow-headers'), /Mcp-Protocol-Version/);
+    const init = await rpc('initialize', { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 't', version: '1' } });
+    assert.equal(init.status, 200);
+    assert.equal(init.headers.get('mcp-session-id'), null, 'stateless: no session id');
+    assert.equal((await init.json()).result.serverInfo.name, 'pali-canon');
+    const tools = (await (await rpc('tools/list', {}, 2)).json()).result.tools;
+    assert.equal(tools.length, 11);
+    assert.ok(tools.every((t) => t.annotations.readOnlyHint && t.annotations.destructiveHint === false));
+    assert.equal(tools.find((t) => t.name === 'get_translation').annotations.openWorldHint, true);
+    const call = await (await rpc('tools/call', { name: 'resolve_reference', arguments: { reference: 'SN 56:11' } }, 3)).json();
+    assert.equal(JSON.parse(call.result.content[0].text).id, 'sn56.11');
+    assert.equal((await fetch(`${base}/mcp`)).status, 405, 'GET (SSE) is not offered by a stateless server');
+    assert.equal((await fetch(`${base}/mcp`, { method: 'POST', headers, body: '{not json' })).status, 400);
+    const limited = await rpc('tools/list', {}, 4);
+    assert.equal(limited.status, 429, 'sixth request in a minute is rate limited');
+    assert.ok(Number(limited.headers.get('retry-after')) > 0);
+    assert.equal((await fetch(`${base}/nope`)).status, 404);
+    const after = await (await fetch(`${base}/healthz`)).json();
+    assert.equal(after.counters.tool_calls.resolve_reference, 1);
+    assert.equal(after.counters.rate_limited, 1);
+    assert.ok(!JSON.stringify(after).includes('SN 56:11'), 'counters never contain request content');
+  } finally {
+    http.closeAllConnections?.();
+    await new Promise((r) => http.close(r));
+  }
+});
+
+test('HTTP transport rejects oversized bodies', async () => {
+  const { createHttpServer } = await import('../src/http-server.mjs');
+  const http = createHttpServer({ rateLimitPerMinute: 0 });
+  await new Promise((r) => http.listen(0, '127.0.0.1', r));
+  try {
+    const url = `http://127.0.0.1:${http.address().port}/mcp`;
+    const res = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: 'x'.repeat(1024 * 1024 + 10) });
+    assert.equal(res.status, 413, 'declared oversized body gets a 413, not a reset');
+    assert.match((await res.json()).error.message, /too large/);
+    // Chunked body with no Content-Length: the limit is enforced while reading.
+    const big = new Uint8Array(1024 * 1024 + 10).fill(120);
+    const stream = new ReadableStream({ start(c) { for (let i = 0; i < big.length; i += 65536) c.enqueue(big.slice(i, i + 65536)); c.close(); } });
+    const chunked = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: stream, duplex: 'half' });
+    assert.equal(chunked.status, 413, 'streamed oversized body gets a 413');
+    await chunked.text();
+  } finally {
+    http.closeAllConnections?.();
+    await new Promise((r) => http.close(r));
+  }
+});
+
+test('rate limit: client IP comes from the trusted proxy hop, not a forged X-Forwarded-For', async () => {
+  const { clientIp, parseTrustProxy, createHttpServer } = await import('../src/http-server.mjs');
+  const req = (xff, remote = '10.0.0.1') => ({ headers: xff === undefined ? {} : { 'x-forwarded-for': xff }, socket: { remoteAddress: remote } });
+  assert.equal(clientIp(req('6.6.6.6, 1.2.3.4'), 0), '10.0.0.1', 'proxy headers ignored unless trusted');
+  assert.equal(clientIp(req('6.6.6.6, 1.2.3.4'), 1), '1.2.3.4', 'one hop: rightmost entry (added by the proxy)');
+  assert.equal(clientIp(req('6.6.6.6, 1.2.3.4, 10.1.1.1'), 2), '1.2.3.4', 'two hops');
+  assert.equal(clientIp(req('1.2.3.4'), 3), '1.2.3.4', 'fewer entries than hops: leftmost');
+  assert.equal(clientIp(req(undefined), 1), '10.0.0.1');
+  assert.equal(parseTrustProxy('1'), 1); assert.equal(parseTrustProxy('true'), 1); assert.equal(parseTrustProxy('2'), 2);
+  assert.equal(parseTrustProxy(''), 0); assert.equal(parseTrustProxy('0'), 0); assert.equal(parseTrustProxy(undefined), 0);
+
+  const http = createHttpServer({ rateLimitPerMinute: 2, trustProxy: 1 });
+  await new Promise((r) => http.listen(0, '127.0.0.1', r));
+  try {
+    const url = `http://127.0.0.1:${http.address().port}/mcp`;
+    const hit = (spoof) => fetch(url, { method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream', 'x-forwarded-for': `${spoof}, 203.0.113.7` }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'ping' }) });
+    assert.equal((await hit('1.1.1.1')).status, 200);
+    assert.equal((await hit('2.2.2.2')).status, 200);
+    assert.equal((await hit('3.3.3.3')).status, 429, 'a new forged leftmost entry does not reset the limit');
+  } finally {
+    http.closeAllConnections?.();
+    await new Promise((r) => http.close(r));
+  }
 });
