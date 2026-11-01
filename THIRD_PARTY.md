@@ -18,6 +18,10 @@ Translations are fetched live from [dhammatalks.org](https://www.dhammatalks.org
 
 Pages are fetched live from [accesstoinsight.org](https://accesstoinsight.org/). If it is unavailable, they come from the official Barre Center for Buddhist Studies repository [bcbsit/ati](https://github.com/bcbsit/ati) (via raw.githubusercontent.com or jsDelivr), or from the [Digital Pali Reader mirror](https://github.com/digitalpalireader/accesstoinsight). Licences vary by page (CC BY-NC 4.0, BPS free-distribution terms, public domain and others), and each page's own notice is returned with its text. Do not sell ATI content. The bundled index stores PTS references, titles, translators and licence labels only.
 
+## Ancient Buddhist Texts (Ānandajoti Bhikkhu)
+
+Text-and-translation pages are fetched live from the "Texts and Translations" section of [ancient-buddhist-texts.net](https://ancient-buddhist-texts.net/Texts-and-Translations/index.htm), edited and translated by Ānandajoti Bhikkhu. The site's [Copyright Notice](https://ancient-buddhist-texts.net/Miscellaneous/Copyright-Notice.htm) (May 2013) places the introductions, translations, studies and notes under the [Creative Commons Attribution-ShareAlike 3.0 Unported](https://creativecommons.org/licenses/by-sa/3.0/) licence, attribution to Ānandajoti Bhikkhu; the site's page footers now link [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The same notice says the Pāli of several of these editions derives from the Sri Lanka Tripitaka Project's Buddha Jayanti databases, which it describes as public domain. Works the notice lists as copyright of others (for example PTS editions used by permission) are not fetched. The bundled index `server/data/anandajoti.json` stores page paths, the site's references, English titles and match scores only.
+
 ## Digital Pāḷi Dictionary
 
 Lookups go live to [dpdict.net](https://www.dpdict.net/). DPD is [CC BY-NC-SA 4.0](https://docs.dpdict.net/license/), by Bodhirasa Bhikkhu. No DPD data is bundled.

@@ -14,6 +14,7 @@ Pj 1       Bu Pj 1       Bi Pc 5       Kd 1         Mv 1       Cv 4         Pvr 
 M i 55     S v 420       A i 188       D ii 72      Vin iii 1
 https://suttacentral.net/mn10   https://www.accesstoinsight.org/tipitaka/mn/mn.010.than.html
 https://www.dhammatalks.org/suttas/MN/MN10.html
+https://ancient-buddhist-texts.net/Texts-and-Translations/Udana/1-Bodhivaggo-10.htm
 ```
 
 Full names work too: "Majjhima Nikāya 10", "Dhammapada 183", "Theragāthā 1.1". Diacritics are optional, and dots, colons and spaces are interchangeable.
@@ -77,6 +78,8 @@ There is no single universal numbering. In parts of the Saṃyutta and Aṅgutta
 | **PTS-based** | Ṭhānissaro Bhikkhu (dhammatalks.org), Access to Insight | the same text is AN 7.64 |
 
 Another example: the Kālāma Sutta is AN 3.65 in the standard numbering and AN 3.66 on dhammatalks.org.
+
+Ancient Buddhist Texts (Ānandajoti Bhikkhu) mostly uses the standard numbers, but not always: its Titthāyatanasutta is headed "AN 3.62", which is AN 3.61 in the standard numbering (AN 3.62 is the Bhayasutta). Because its Pāli did not match AN 3.62, that page is not linked.
 
 What the tool does:
 

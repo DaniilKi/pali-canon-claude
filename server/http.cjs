@@ -23686,7 +23686,10 @@ var EMPTY_COMPLETION_RESULT = {
 // src/canon.mjs
 var canon_exports = {};
 __export(canon_exports, {
+  ANANDAJOTI_BASE: () => ANANDAJOTI_BASE,
+  ANANDAJOTI_LICENSE: () => ANANDAJOTI_LICENSE,
   _test: () => _test,
+  anandajotiInfo: () => anandajotiInfo,
   browse: () => browse,
   describe: () => describe,
   fold: () => fold2,
@@ -23695,7 +23698,9 @@ __export(canon_exports, {
   resolve: () => resolve,
   search: () => search,
   segments: () => segments,
-  source: () => source
+  source: () => source,
+  sourceName: () => sourceName,
+  translationId: () => translationId
 });
 var import_node_fs = require("node:fs");
 var import_node_zlib = require("node:zlib");
@@ -23895,9 +23900,10 @@ function parseUrl(raw) {
     throw new CitationError("That link is not a valid URL.");
   }
   const host = url.hostname.replace(/^www\./, "");
-  if (!["suttacentral.net", "accesstoinsight.org", "dhammatalks.org"].includes(host) || !/^https?:$/.test(url.protocol)) {
-    throw new CitationError("Links are understood for suttacentral.net, accesstoinsight.org and dhammatalks.org only.");
+  if (!["suttacentral.net", "accesstoinsight.org", "dhammatalks.org", "ancient-buddhist-texts.net"].includes(host) || !/^https?:$/.test(url.protocol)) {
+    throw new CitationError("Links are understood for suttacentral.net, accesstoinsight.org, dhammatalks.org and ancient-buddhist-texts.net only.");
   }
+  if (host === "ancient-buddhist-texts.net") return { kind: "url", host, path: url.pathname.replace(/\.htm$/, ""), raw };
   if (host === "suttacentral.net") {
     const first = url.pathname.split("/").filter(Boolean)[0] || "";
     if (!/^[a-z][a-z0-9.-]*$/.test(first)) throw new CitationError("Unrecognised SuttaCentral link.");
@@ -24059,6 +24065,44 @@ var PTS_ABBR = {
 };
 var fold2 = (value) => String(value ?? "").normalize("NFD").replace(new RegExp("\\p{M}", "gu"), "").toLowerCase().replace(/ṁ|ṃ/g, "m");
 var data = null;
+var ANANDAJOTI_BASE = "https://ancient-buddhist-texts.net";
+var ANANDAJOTI_LICENSE = "CC BY-SA 3.0 \u2014 \u0100nandajoti Bhikkhu, Ancient Buddhist Texts (ancient-buddhist-texts.net). The site\u2019s Copyright Notice (2013) gives CC BY-SA 3.0 Unported; its page footers link CC BY-SA 4.0. Share-alike: reuse must keep the same licence and credit \u0100nandajoti Bhikkhu.";
+var anandajotiSource = null;
+function mergeAnandajoti(translations) {
+  let file;
+  try {
+    file = dataPath("anandajoti.json");
+  } catch {
+    return;
+  }
+  const aj = JSON.parse((0, import_node_fs.readFileSync)(file, "utf8"));
+  anandajotiSource = aj.source;
+  for (const [id, l] of Object.entries(aj.links)) {
+    (translations[id] ||= []).push({
+      source: "anandajoti",
+      url: ANANDAJOTI_BASE + l.path,
+      path: l.path,
+      ...l.parts ? { parts: l.parts } : {},
+      translator: "\u0100nandajoti Bhikkhu",
+      english: l.title || void 0,
+      reference: l.reference,
+      license: "CC BY-SA 3.0",
+      match: l.match,
+      ...l.commentary ? { commentary: true } : {}
+    });
+  }
+}
+function anandajotiInfo() {
+  load();
+  return anandajotiSource;
+}
+var SOURCE_NAMES = { dhammatalks: "dhammatalks.org", ati: "Access to Insight", anandajoti: "Ancient Buddhist Texts (\u0100nandajoti Bhikkhu)" };
+var sourceName = (t) => SOURCE_NAMES[t.source] || t.source;
+function translationId(t) {
+  if (t.source === "ati") return `ati:${t.path}`;
+  if (t.source === "anandajoti") return `aj:${t.path.replace(/^\/Texts-and-Translations\//, "").replace(/\.htm$/, "")}`;
+  return `dt:${t.url.split("/suttas/")[1].replace(/\.html$/, "")}`;
+}
 function dataPath(name) {
   const candidates = [(0, import_node_path.join)(here, "data", name), (0, import_node_path.join)(here, "..", "server", "data", name), (0, import_node_path.join)(process.cwd(), "server", "data", name)];
   const found = candidates.find((p) => (0, import_node_fs.existsSync)(p));
@@ -24069,6 +24113,7 @@ function load() {
   if (data) return data;
   const canon = JSON.parse((0, import_node_zlib.gunzipSync)((0, import_node_fs.readFileSync)(dataPath("canon.json.gz"))).toString("utf8"));
   const translations = JSON.parse((0, import_node_fs.readFileSync)(dataPath("translations.json"), "utf8"));
+  mergeAnandajoti(translations);
   const byId = /* @__PURE__ */ new Map();
   for (const u of canon.units) if (!byId.has(u.id)) byId.set(u.id, u);
   const ranges = [];
@@ -24173,7 +24218,7 @@ function resolve(reference) {
     const key = `${c.host}${c.path}`;
     const id2 = d.urlIndex.get(key) || d.urlIndex.get(key.replace(/^accesstoinsight\.org/, "accesstoinsight.org"));
     if (!id2) throw new CitationError("That page is not linked to a canon text in the bundled index. Give the sutta citation instead.");
-    notes.push(`Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id2}.`);
+    notes.push(c.host === "ancient-buddhist-texts.net" ? `Linked from ${c.host}: \u0100nandajoti Bhikkhu's text and translation of ${id2}.` : `Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id2}.`);
     return { unit: d.byId.get(id2), notes, alternatives: [] };
   }
   const id = c.kind === "uid" ? c.uid : citationId(c);
@@ -24262,13 +24307,14 @@ function describe(u, notes = []) {
   const { links: own, via } = linksFor(u);
   if (via) notes = [...notes, `English translations are of the whole ${via.acronym} (${via.title}); this text is part of it.`];
   const english = own.map((t) => ({
-    source: t.source === "ati" ? "Access to Insight" : "dhammatalks.org",
+    source: sourceName(t),
     translator: t.translator,
     reference: t.reference || void 0,
     url: t.url,
     ...t.license ? { license: t.license } : {},
-    translation_id: t.source === "ati" ? `ati:${t.path}` : `dt:${t.url.split("/suttas/")[1].replace(/\.html$/, "")}`,
-    match: t.match
+    translation_id: translationId(t),
+    match: t.match,
+    ...t.commentary ? { includes_commentary: true } : {}
   }));
   const blocks = bookBlocks(u);
   const book = d.canon.books[u.book];
@@ -24383,6 +24429,8 @@ var _test = { lookupId, rangeContaining, ptsLookup };
 // src/english.mjs
 var english_exports = {};
 __export(english_exports, {
+  anandajotiContent: () => anandajotiContent,
+  anandajotiUrl: () => anandajotiUrl,
   atiContent: () => atiContent,
   atiMirrors: () => atiMirrors,
   atiNotice: () => atiNotice,
@@ -24399,7 +24447,9 @@ var ALLOWED = [
   { host: "www.dpdict.net" },
   { host: "dpdict.net" },
   { host: "raw.githubusercontent.com", prefixes: ["/bcbsit/ati/", "/digitalpalireader/accesstoinsight/"] },
-  { host: "cdn.jsdelivr.net", prefixes: ["/gh/bcbsit/ati@"] }
+  { host: "cdn.jsdelivr.net", prefixes: ["/gh/bcbsit/ati@"] },
+  // Ānandajoti Bhikkhu's text-and-translation pages only (CC BY-SA); nothing else on the site is fetched.
+  { host: "ancient-buddhist-texts.net", prefixes: ["/Texts-and-Translations/"] }
 ];
 var ALLOWED_HOSTS = ALLOWED.map((r) => r.host);
 var MAX_BYTES = 6 * 1024 * 1024;
@@ -24666,6 +24716,49 @@ function atiNotice(html) {
 }
 var fetchAti = (path) => liveCache.wrap(`ati:${path}`, () => fetchAtiLive(path));
 var fetchDhammatalks = (url) => liveCache.wrap(`dt:${url}`, () => fetchDhammatalksLive(url));
+var fetchAnandajotiPage = (path) => liveCache.wrap(`aj:${path}`, () => fetchAnandajotiPageLive(path));
+function anandajotiUrl(path) {
+  if (/\.\./.test(path) || !/^\/Texts-and-Translations\/[A-Za-z0-9 _.-]+(\/[A-Za-z0-9 _.-]+)*\.htm$/.test(path)) {
+    throw new Error("Unsupported Ancient Buddhist Texts path.");
+  }
+  return ANANDAJOTI_BASE + encodeURI(path);
+}
+function anandajotiContent(html) {
+  let body = html.match(/<body\b[^>]*>([^]*)<\/body>/i)?.[1] ?? html;
+  const cut = body.search(/<div\b[^>]*id=["']infowrapper["']|<footer\b|<p\b[^>]*class=["']NavBar3["'][^>]*>\s*<a\b[^>]*History\.htm/i);
+  if (cut > 0) body = body.slice(0, cut);
+  body = body.replace(/<p\b[^>]*class=["']NavBar\d["'][^>]*>[^]*?<\/p>/gi, "").replace(/<span\b[^>]*class=["']TT["'][^>]*>\s*<span\b[^>]*>([^]*?)<\/span>\s*<sup\b[^>]*><\/sup>\s*<\/span>/gi, " [Note: $1] ").replace(/<div\b[^>]*class=["']vannana["'][^>]*>([^]*?)<\/div>/gi, "<p>[Commentary (A\u1E6D\u1E6Dhakath\u0101) begins]</p>$1<p>[Commentary ends]</p>");
+  return plainText(body);
+}
+async function fetchAnandajotiPageLive(path) {
+  const { body } = await fetchMirrors([anandajotiUrl(path)]);
+  return { title: decodeHtml(body.match(/<title\b[^>]*>([^]*?)<\/title>/i)?.[1] ?? "").trim(), text: anandajotiContent(body) };
+}
+async function fetchAnandajoti(link, need) {
+  const parts = link.parts || [link.path];
+  let text = "";
+  let title = "";
+  let read = 0;
+  for (const part of parts) {
+    const page = await fetchAnandajotiPage(part);
+    if (!title) title = page.title;
+    text += (text ? "\n\n" : "") + page.text;
+    read += 1;
+    if (text.length >= need) break;
+  }
+  return {
+    source: "Ancient Buddhist Texts",
+    url: link.url,
+    fetched_from: "ancient-buddhist-texts.net",
+    fetched_url: ANANDAJOTI_BASE + encodeURI(parts[0]),
+    title: link.english || title,
+    text,
+    parts_read: read,
+    parts_total: parts.length,
+    attribution: "Edited and translated from the P\u0101li by \u0100nandajoti Bhikkhu (Ancient Buddhist Texts, ancient-buddhist-texts.net).",
+    license: ANANDAJOTI_LICENSE
+  };
+}
 async function fetchAtiLive(path) {
   const { body, url, mirror } = await fetchMirrors(atiMirrors(path));
   const notice = atiNotice(body);
@@ -24698,12 +24791,13 @@ async function fetchDhammatalksLive(url) {
 }
 function available(unit) {
   return linksFor(unit).links.map((t) => ({
-    translation_id: t.source === "ati" ? `ati:${t.path}` : `dt:${t.url.split("/suttas/")[1].replace(/\.html$/, "")}`,
-    source: t.source === "ati" ? "Access to Insight" : "dhammatalks.org",
+    translation_id: translationId(t),
+    source: sourceName(t),
     translator: t.translator,
     reference: t.reference || void 0,
     ...t.license ? { license: t.license } : {},
-    match: t.match
+    match: t.match,
+    ...t.commentary ? { includes_commentary: true } : {}
   }));
 }
 async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
@@ -24714,17 +24808,18 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
   let link;
   if (!which) {
     link = links.find((l) => l.source === "dhammatalks") || links[0];
-  } else if (/^(ati|dt):/.test(which)) {
-    link = links.find((l) => (l.source === "ati" ? `ati:${l.path}` : `dt:${l.url.split("/suttas/")[1].replace(/\.html$/, "")}`) === which);
+  } else if (/^(ati|dt|aj):/.test(which)) {
+    link = links.find((l) => translationId(l) === which);
   } else {
-    const w = which.toLowerCase();
-    link = links.find((l) => (l.translator || "").toLowerCase().includes(w) || l.source.includes(w));
+    const plain = (v) => String(v || "").normalize("NFD").replace(new RegExp("\\p{M}", "gu"), "").toLowerCase();
+    const w = plain(which);
+    link = links.find((l) => plain(l.translator).includes(w) || l.source.includes(w));
   }
   if (!link) throw new Error(`Translation "${which}" is not linked for ${unit.acronym}. Available: ${available(unit).map((a) => `${a.translation_id} (${a.translator})`).join(", ")}.`);
   let result;
   const notes = via ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   try {
-    result = link.source === "ati" ? await fetchAti(link.path) : await fetchDhammatalks(link.url);
+    result = link.source === "ati" ? await fetchAti(link.path) : link.source === "anandajoti" ? await fetchAnandajoti(link, offset + limit + 1) : await fetchDhammatalks(link.url);
   } catch (error2) {
     const outage = !error2.failures || error2.failures.some((f) => !/HTTP 404/.test(f));
     const sameTranslator = outage && link.source === "dhammatalks" && links.find((l) => l.source === "ati" && /thanissaro/i.test(l.translator || ""));
@@ -24737,24 +24832,31 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
     notes.push(`dhammatalks.org could not be reached (${error2.message}); showing \u1E6Ch\u0101nissaro Bhikkhu's earlier version from Access to Insight instead.`);
     link = sameTranslator;
   }
-  if (result.fetched_from !== result.source && result.fetched_from !== "dhammatalks.org" && result.fetched_from !== "accesstoinsight.org") {
+  if (link.source === "anandajoti") {
+    notes.push("A line-by-line edition: each P\u0101li line is followed by its English translation. [Note: \u2026] marks are the translator's notes, not scripture.");
+    if (link.commentary) notes.push('This page also translates the commentary (A\u1E6D\u1E6Dhakath\u0101); those passages are marked "[Commentary (A\u1E6D\u1E6Dhakath\u0101) begins]" and are commentary, not the canonical text.');
+  }
+  if (result.fetched_from !== result.source && !["dhammatalks.org", "accesstoinsight.org", "ancient-buddhist-texts.net"].includes(result.fetched_from)) {
     notes.push(`The primary site was unavailable; text served from ${result.fetched_from}, an identical copy of the archive.`);
   }
   const theirs = (link.reference || "").match(/^(AN|SN) (\d+):(\d+)/);
   if (theirs && `${theirs[1].toLowerCase()}${theirs[2]}.${theirs[3]}` !== unit.id) {
     notes.push(`This translation numbers the text ${theirs[1]} ${theirs[2]}:${theirs[3]} (PTS-based numbering); it is the same text as ${unit.acronym}.`);
   }
-  const text = result.text;
+  const { parts_read: partsRead, parts_total: partsTotal, ...rest } = result;
+  const text = rest.text;
+  const complete = partsRead === void 0 || partsRead === partsTotal;
+  if (!complete) notes.push(`This translation is spread over ${partsTotal} pages; ${partsRead} of them ${partsRead === 1 ? "was" : "were"} read for this request. Ask again with next_offset to continue.`);
   return {
     text_id: unit.id,
     citation: unit.acronym,
     translator: link.translator,
-    translation_id: link.source === "ati" ? `ati:${link.path}` : `dt:${link.url.split("/suttas/")[1].replace(/\.html$/, "")}`,
-    ...result,
+    translation_id: translationId(link),
+    ...rest,
     text: text.slice(offset, offset + limit),
     offset,
     limit,
-    total_characters: text.length,
+    total_characters: complete ? text.length : null,
     next_offset: offset + limit < text.length ? offset + limit : null,
     match: link.match,
     notes

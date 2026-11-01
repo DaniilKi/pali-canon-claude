@@ -81,9 +81,11 @@ function parseUrl(raw) {
   let url;
   try { url = new URL(raw); } catch { throw new CitationError('That link is not a valid URL.'); }
   const host = url.hostname.replace(/^www\./, '');
-  if (!['suttacentral.net', 'accesstoinsight.org', 'dhammatalks.org'].includes(host) || !/^https?:$/.test(url.protocol)) {
-    throw new CitationError('Links are understood for suttacentral.net, accesstoinsight.org and dhammatalks.org only.');
+  if (!['suttacentral.net', 'accesstoinsight.org', 'dhammatalks.org', 'ancient-buddhist-texts.net'].includes(host) || !/^https?:$/.test(url.protocol)) {
+    throw new CitationError('Links are understood for suttacentral.net, accesstoinsight.org, dhammatalks.org and ancient-buddhist-texts.net only.');
   }
+  // Ancient Buddhist Texts paths are case-sensitive and end in .htm; keep the extension so they match the link index.
+  if (host === 'ancient-buddhist-texts.net') return { kind: 'url', host, path: url.pathname.replace(/\.htm$/, ''), raw };
   if (host === 'suttacentral.net') {
     const first = url.pathname.split('/').filter(Boolean)[0] || '';
     if (!/^[a-z][a-z0-9.-]*$/.test(first)) throw new CitationError('Unrecognised SuttaCentral link.');

@@ -5,6 +5,8 @@ const ALLOWED = [
   { host: 'www.dpdict.net' }, { host: 'dpdict.net' },
   { host: 'raw.githubusercontent.com', prefixes: ['/bcbsit/ati/', '/digitalpalireader/accesstoinsight/'] },
   { host: 'cdn.jsdelivr.net', prefixes: ['/gh/bcbsit/ati@'] },
+  // Ānandajoti Bhikkhu's text-and-translation pages only (CC BY-SA); nothing else on the site is fetched.
+  { host: 'ancient-buddhist-texts.net', prefixes: ['/Texts-and-Translations/'] },
 ];
 /** Every host the server may contact (used by scripts/outage.mjs to simulate a total outage). */
 export const ALLOWED_HOSTS = ALLOWED.map((r) => r.host);
