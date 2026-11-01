@@ -108,3 +108,17 @@ Keep the Pāli, the translation, any dictionary gloss and your own interpretatio
 ## When a citation does not resolve
 
 The tool explains why: an unknown abbreviation, a number past the end of a collection, a reversed range, or a PTS page for a collection that is not cited by page. Use the browse tool ("browse sn56") to see what exists. If you believe the tool is wrong, please [open an issue](https://github.com/DaniilKi/pali-canon-claude/issues) with the citation, what you expected and, ideally, the PTS page.
+
+## Checking every citation in a piece of text
+
+The `find_citations` tool reads a whole essay, talk transcript or reference list, finds every citation in it and checks each one, all offline. For each citation it returns where it is in the text (character offsets), the text it names (ID and title) or, if it does not resolve, the reason (for example "MN 999 is not in the canon index" or "Sn 1032 looks like a verse number"). It never corrects a citation for you.
+
+Running text is read more strictly than a single citation typed into `resolve_reference`, so that ordinary sentences are not mistaken for citations:
+
+- Abbreviations are case-sensitive: "MN 10" is a citation, "mn 10" and "Mn 10" are not. Lower-case IDs written without a space ("mn10", "sn56.11:5.1") are read.
+- Abbreviations that look like English or other books before a bare number are skipped: single letters (D, M, S, A, J), Dh, It, Th, Thī, Ne, Pe, Peṭ, Ps (often Psalms), Pp, Ya, Dt and As. Use MN, SN, Iti, Thag, Paṭis and so on, or full names. Single letters still work for PTS pages ("M i 55", "S v 420").
+- Mahāvagga and Cūḷavagga are read as Vinaya chapters only after "Vinaya" ("Vinaya Mahāvagga 1"), or as Mv and Cv.
+- Links count only for suttacentral.net, accesstoinsight.org and dhammatalks.org.
+- A number glued to letters ("MN 10th") or written with thousands separators ("MN 10,000") is not a citation.
+
+A citation written in a form the scanner does not recognise is not checked, so check doubtful ones with `resolve_reference`.

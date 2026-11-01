@@ -22850,6 +22850,226 @@ function listSources() {
 
 // src/features/index.mjs
 var features_exports = {};
+__export(features_exports, {
+  findCitations: () => find_citations_exports
+});
+
+// src/find-citations.mjs
+var find_citations_exports = {};
+__export(find_citations_exports, {
+  MAX_RESULTS: () => MAX_RESULTS,
+  MAX_TEXT: () => MAX_TEXT,
+  findCitations: () => findCitations,
+  foldWithOffsets: () => foldWithOffsets,
+  register: () => register,
+  scan: () => scan
+});
+var BOUND_BEFORE = "(?<![\\p{L}\\p{N}_@])";
+var BOUND_AFTER = "(?![\\p{L}\\p{N}_@]|,\\d)";
+var NUM = "\\d+(?:[.:]\\d+)*(?:(?:-|\\s?[\u2013\u2014]\\s?)\\d+(?:[.:]\\d+)*)?";
+var ABBREVIATIONS = [
+  "DN",
+  "MN",
+  "SN",
+  "AN",
+  "Kp",
+  "Khp",
+  "Dhp",
+  "Ud",
+  "Iti",
+  "Snp",
+  "Sn",
+  "Stnp",
+  "Vv",
+  "Pv",
+  "Thag",
+  "Thig",
+  "Tha[ -]?Ap",
+  "Thi[ -]?Ap",
+  "Ap",
+  "Bv",
+  "Cp",
+  "Ja",
+  "Mnd",
+  "Cnd",
+  "Patis",
+  "Mil",
+  "Nett",
+  "Ds",
+  "Dhs",
+  "Vb",
+  "Vibh",
+  "Dhatuk",
+  "Pug",
+  "Kv",
+  "Yam",
+  "Patthana",
+  "Patth"
+];
+var FULL_NAMES = [
+  "(?:Digha|Majjhima|Samyutta|Anguttara)(?:[ -]?Nikay[ao])?",
+  "Khuddakapatha",
+  "Dhammapada",
+  "Udana",
+  "Itivuttaka",
+  "Sutta[ -]?Nipata",
+  "Vimanavatthu",
+  "Petavatthu",
+  "Theragatha",
+  "Therigatha",
+  "Thera[ -]?apadana",
+  "Theri[ -]?apadana",
+  "Apadana",
+  "Buddhavamsa",
+  "Cariyapitaka",
+  "Jataka",
+  "Mahaniddesa",
+  "Cul?laniddesa",
+  "Patisambhidamagga",
+  "Milindapanha",
+  "Nettippakarana",
+  "Petakopadesa",
+  "Dhammasangani",
+  "Vibhanga",
+  "Dhatukatha",
+  "Puggalapannatti",
+  "Kathavatthu",
+  "Yamaka"
+];
+var PTS_ABBREVIATIONS = [
+  "DN",
+  "MN",
+  "SN",
+  "AN",
+  "D",
+  "M",
+  "S",
+  "A",
+  "Vin",
+  "Vv",
+  "Pv",
+  "Ap",
+  "Bv",
+  "Cp",
+  "Ja",
+  "J",
+  "Nidd",
+  "Patis",
+  "Ps",
+  "Mil",
+  "Nett",
+  "Pet",
+  "Dhs",
+  "Vibh",
+  "Kv",
+  "Pp",
+  "Pug",
+  "Dhatuk",
+  "Yam",
+  "Khp"
+];
+var ROMAN3 = "(?:I{1,3}|IV|VI{0,2}|i{1,3}|iv|vi{0,2})";
+var VINAYA = "(?:Pj|Ss|Ay|Np|Pc|Pd|Sk|Kd|Mv|Cv|Pvr|Parajika|Sanghadisesa|Aniyata|Nissaggiya|Pacittiya|Patidesaniya|Sekhiya|Adhikaranasamatha|Khandhaka)";
+var LOWER_IDS = ["dn", "mn", "sn", "an", "kp", "dhp", "ud", "iti", "snp", "vv", "pv", "thag", "thig", "bv", "mnd", "cnd", "mil", "kv", "ds", "vb", "patthana"];
+var LINK_HOSTS = /^(?:www\.)?(?:suttacentral\.net|accesstoinsight\.org|dhammatalks\.org)$/i;
+var PATTERNS = [
+  { scheme: "link", rank: 0, re: /https?:\/\/[^\s<>"'()[\]{}]+/giu },
+  { scheme: "pts", rank: 1, re: new RegExp(`${BOUND_BEFORE}(?:PTS[: ]\\s?)?(?:${PTS_ABBREVIATIONS.join("|")})(?:\\.\\s?|\\s)${ROMAN3}(?:\\.\\s?|\\s)\\d+${BOUND_AFTER}`, "gu") },
+  { scheme: "vinaya", rank: 2, re: new RegExp(`${BOUND_BEFORE}(?:Vinaya\\s)?(?:(?:Bu|Bi|Bhikkhu|Bhikkhuni)\\s?)?${VINAYA}\\s?${NUM}${BOUND_AFTER}`, "gu") },
+  { scheme: "vinaya", rank: 2, re: new RegExp(`${BOUND_BEFORE}Vinaya\\s(?:Mahavagga|Cul?lavagga)\\s?${NUM}${BOUND_AFTER}`, "giu") },
+  { scheme: "number", rank: 3, re: new RegExp(`${BOUND_BEFORE}(?:${ABBREVIATIONS.join("|")})\\.?\\s?${NUM}${BOUND_AFTER}`, "gu") },
+  { scheme: "number", rank: 3, re: new RegExp(`${BOUND_BEFORE}(?:${FULL_NAMES.join("|")})\\s${NUM}${BOUND_AFTER}`, "giu") },
+  { scheme: "id", rank: 4, re: new RegExp(`(?<![\\p{L}\\p{N}_/.-])(?:(?:${LOWER_IDS.join("|")})\\d+(?:\\.\\d+)*(?:-\\d+)?(?::\\d+(?:\\.\\d+)*)?|pli-tv-[a-z-]+?\\d+(?:\\.\\d+)*(?:-\\d+)?|th[ai]-ap\\d+)${BOUND_AFTER}`, "gu") }
+];
+function foldWithOffsets(text) {
+  let folded = "";
+  const offsets = [];
+  for (let i = 0; i < text.length; i += 1) {
+    const ch = text[i];
+    const code = ch.charCodeAt(0);
+    if (code >= 128 && new RegExp("\\p{M}", "u").test(ch)) continue;
+    folded += code < 128 || code >= 55296 && code <= 57343 ? ch : ch.normalize("NFD")[0];
+    offsets.push(i);
+  }
+  offsets.push(text.length);
+  return { folded, offsets };
+}
+function trimLink(raw) {
+  return raw.replace(/[.,;:!?]+$/, "");
+}
+function scan(text) {
+  const { folded, offsets } = foldWithOffsets(text);
+  const span = (start, end) => {
+    let to = offsets[end - 1] + 1;
+    while (to < text.length && new RegExp("\\p{M}", "u").test(text[to])) to += 1;
+    return [offsets[start], to];
+  };
+  const found = [];
+  for (const { scheme, rank, re } of PATTERNS) {
+    re.lastIndex = 0;
+    for (const m of folded.matchAll(re)) {
+      const length = scheme === "link" ? trimLink(m[0]).length : m[0].length;
+      const [start, end] = span(m.index, m.index + length);
+      if (scheme === "link") {
+        let host = "";
+        try {
+          host = new URL(text.slice(start, end)).hostname;
+        } catch {
+        }
+        if (!LINK_HOSTS.test(host)) continue;
+      }
+      found.push({ start, end, scheme, rank });
+    }
+  }
+  found.sort((a, b) => a.start - b.start || b.end - b.start - (a.end - a.start) || a.rank - b.rank);
+  const kept = [];
+  let until = -1;
+  for (const c of found) {
+    if (c.start < until) continue;
+    kept.push({ start: c.start, end: c.end, text: text.slice(c.start, c.end), scheme: c.scheme });
+    until = c.end;
+  }
+  return kept;
+}
+var MAX_TEXT = 2e5;
+var MAX_RESULTS = 500;
+function findCitations(text, canon, { limit = MAX_RESULTS } = {}) {
+  const spans = scan(text);
+  const citations = spans.slice(0, limit).map((span) => {
+    try {
+      const { unit, notes, alternatives } = canon.resolve(span.text.normalize("NFC"));
+      return {
+        ...span,
+        status: "resolved",
+        text_id: unit.id,
+        citation: unit.acronym,
+        title: unit.title || null,
+        ...notes.length ? { notes } : {},
+        ...alternatives.length ? { also_on_that_page: alternatives.map((a) => a.id) } : {}
+      };
+    } catch (error2) {
+      return { ...span, status: "unresolved", reason: error2.message || "Could not resolve." };
+    }
+  });
+  const resolved = citations.filter((c) => c.status === "resolved").length;
+  const source2 = canon.source();
+  return {
+    found: spans.length,
+    returned: citations.length,
+    resolved,
+    unresolved: citations.length - resolved,
+    ...spans.length > citations.length ? { truncated: true } : {},
+    offsets: "start and end are UTF-16 code-unit offsets into the input, end exclusive (JavaScript String.slice).",
+    citations,
+    scope: "Citations are found by pattern; a citation the scanner did not recognise is not checked. Unresolved citations are reported, never corrected. Abbreviations that read as English in prose (single letters before a bare number, It, Ps, Pe, Ne, Pp, Ya, Dt, As) are skipped; write MN, SN, Iti, Pa\u1E6Dis and so on, or check one citation with resolve_reference.",
+    source: { name: source2.name, attribution: source2.attribution, terms: source2.terms }
+  };
+}
+function register({ tool, z, canon }) {
+  tool("find_citations", "Find every P\u0101li Canon citation in a piece of free text (an essay, a talk transcript, a paper's references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, PTS pages like M i 55 or S v 420, Bilara IDs like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org links. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Works offline.", {
+    text: z.string().min(1).max(MAX_TEXT).describe("The free text to scan, up to 200,000 characters.")
+  }, ({ text }) => findCitations(text, canon));
+}
 
 // src/server.mjs
 var VERSION = "2.0.0";
