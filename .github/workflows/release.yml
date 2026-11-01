@@ -36,10 +36,12 @@ jobs:
       - run: npm run pack:desktop
       - name: npm tarball
         run: npm pack --pack-destination dist
+      - name: Citation index export (JSON and CSV, no scripture text)
+        run: node scripts/export-index.mjs --out dist/export
       - name: Checksums and release notes
         working-directory: dist
         run: |
-          sha256sum *.mcpb *.tgz | tee SHA256SUMS.txt
+          { sha256sum *.mcpb *.tgz; (cd export && sha256sum *); } | tee SHA256SUMS.txt
           { echo '## SHA-256'; echo; echo '```'; cat SHA256SUMS.txt; echo '```'; } > "$RUNNER_TEMP/notes.md"
       - name: Create or update the GitHub release
         env:

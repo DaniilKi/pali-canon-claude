@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title and page.title != site.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
+  <link rel="alternate" type="text/plain" title="llms.txt" href="{{ '/llms.txt' | relative_url }}">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="{{ '/' | relative_url }}">Pali Canon for Claude</a>
+    <nav>
+      <a href="{{ '/install/' | relative_url }}">Install</a>
+      <a href="{{ '/examples.html' | relative_url }}">Examples</a>
+      <a href="{{ '/citations.html' | relative_url }}">Citations</a>
+      <a href="{{ '/sources.html' | relative_url }}">Sources</a>
+      <a href="{{ '/export.html' | relative_url }}">Data</a>
+      <a href="{{ '/llms.txt' | relative_url }}">llms.txt</a>
+      <a href="https://github.com/{{ site.repository }}">GitHub</a>
+    </nav>
+  </header>
+  <main>
+{{ content }}
+  </main>
+  <footer>
+    <p>The software is MIT-licensed. The Pāli text is the Chaṭṭha Saṅgāyana Tipiṭaka of the Vipassana Research Institute, for non-commercial use with attribution; translations and the dictionary keep their own licences (<a href="https://github.com/{{ site.repository }}/blob/main/THIRD_PARTY.md">details</a>).
+    <a href="https://github.com/{{ site.repository }}/edit/main/docs/{{ page.source_path }}">Suggest a change to this page</a>.</p>
+  </footer>
+</body>
+</html>

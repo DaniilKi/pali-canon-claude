@@ -10,12 +10,15 @@ Start with the [project README](../README.md). Then:
 - [Glossary](glossary.md): Pāli and technical terms
 - [Roadmap](roadmap.md): how we compare with Bible, Quran and Sefaria tools, and the plan
 - [Directory listings](listings/README.md): the MCP Registry entry and the packets for community directories
-- [Install in Claude Code](install/claude-code.md), [Codex](install/codex.md) or [Gemini CLI](install/gemini.md)
+- [Install guides](install/README.md): [Claude Desktop](install/claude-desktop.md), [Claude Code](install/claude-code.md), [Codex](install/codex.md) or [Gemini CLI](install/gemini.md)
+- [Examples](examples.md): things to ask, and which tools answer them
 - [Install in editors and agent apps](install/ide.md): Cursor, VS Code, Windsurf, Zed, Cline and Goose
 - [Local AI models](install/local-clients.md): use it with LM Studio, Open WebUI, Ollama and other apps that run on your own computer
 
 **For the curious and for contributors**
 
+- [Citation index export](export.md): every text's VRI paragraphs, PTS page and translation links as JSON and CSV
+- [llms.txt](../llms.txt): a short description of the tools and data for AI agents
 - [How it works](how-it-works.md): how the data was built and checked
 - [Decisions](decisions.md): each major decision and its reasoning
 - [Development](development.md): build, test, connect clients, release

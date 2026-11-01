@@ -22,6 +22,10 @@ Pages are fetched live from [accesstoinsight.org](https://accesstoinsight.org/).
 
 Lookups go live to [dpdict.net](https://www.dpdict.net/). DPD is [CC BY-NC-SA 4.0](https://docs.dpdict.net/license/), by Bodhirasa Bhikkhu. No DPD data is bundled.
 
+## Citation index export
+
+`scripts/export-index.mjs` writes the citation index (`citation-index.json`, `citation-index.csv`) that is attached to each release and served on the documentation site ([docs/export.md](docs/export.md)). It holds IDs, Pāli titles, VRI paragraph numbers, PTS page references, translator names, licence labels and URLs, and no scripture or translation text. The VRI-derived parts carry VRI's non-commercial terms and attribution; each linked translation keeps its publisher's licence. A licence notice (`citation-index-LICENSE.md`) travels with the files.
+
 ## Runtime dependencies
 
 The bundled server includes the Model Context Protocol TypeScript SDK and its dependencies. Their licence notices are in `server/THIRD_PARTY_LICENSES.txt`.

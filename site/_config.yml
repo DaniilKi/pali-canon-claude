@@ -1,0 +1,21 @@
+# Jekyll settings for the documentation site. scripts/build-site.mjs copies this folder, docs/ and llms.txt
+# into dist/site, and .github/workflows/pages.yml builds it with GitHub's own Jekyll (no extra dependencies).
+title: Pali Canon for Claude
+description: The whole Pāli Tipiṭaka for AI assistants, with exact citations. Documentation, install guides and the citation index.
+url: https://daniilki.github.io
+baseurl: /pali-canon-claude
+repository: DaniilKi/pali-canon-claude
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: false
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
