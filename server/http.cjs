@@ -25017,7 +25017,10 @@ function similarity(a, b) {
   }
   return na + nb ? 2 * inter / (na + nb) : 0;
 }
-function findWindows(corpus, qwords, { keep = 12 } = {}) {
+var TOP_CANDIDATES = 12;
+var KEEP_WINDOWS = 400;
+var TIE_REFINE = 200;
+function findWindows(corpus, qwords, { keep = KEEP_WINDOWS } = {}) {
   const n = qwords.length;
   const variantIds = qwords.map((w) => corpus.variants(w));
   const weight = variantIds.map((vs) => {
@@ -25109,6 +25112,22 @@ function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.len
     }
   }
   return best;
+}
+function rankWindows(windows, refineOne) {
+  const top = windows[0]?.score ?? 0;
+  const topCount = windows.filter((w) => w.score >= top - 1e-9).length;
+  const chosen = windows.filter((w, i) => i < TOP_CANDIDATES || i < TIE_REFINE && w.score >= top - 1e-9);
+  const ranked = chosen.map((c) => ({ c, ...refineOne(c) })).sort((a, b) => b.r.sim - a.r.sim || a.r.a - b.r.a);
+  return { ranked, truncated: topCount > TIE_REFINE || topCount === windows.length && windows.length >= KEEP_WINDOWS };
+}
+function countTies(ranked, truncated, keyOf) {
+  const best = Math.round((ranked[0]?.r.sim ?? 0) * 100);
+  const keys = /* @__PURE__ */ new Set();
+  for (const x of ranked) if (Math.round(x.r.sim * 100) >= best) {
+    const k = keyOf(x);
+    if (k) keys.add(k);
+  }
+  return { texts: keys.size, at_least: truncated };
 }
 var pali = null;
 function trigramKeys(w) {
@@ -25277,8 +25296,12 @@ function verifyPali(text, limit) {
   const query = q.join(" ");
   const out = [];
   const seen = /* @__PURE__ */ new Set();
-  const cands = findWindows(corpus, q).map((c) => ({ c, r: refine2(corpus, query, q, c) })).sort((a, b) => b.r.sim - a.r.sim || a.r.a - b.r.a);
-  for (const { c, r } of cands) {
+  const { ranked, truncated } = rankWindows(findWindows(corpus, q), (c) => ({ r: refine2(corpus, query, q, c) }));
+  const ties = countTies(ranked, truncated, ({ r }) => {
+    const b = blockAt(r.a);
+    return ownerOf(b.book, b.index)?.id;
+  });
+  for (const { c, r } of ranked) {
     const m = paliMatch(c, r);
     if (!m) continue;
     const key = `${m.text_id}/${m.segment_ref}`;
@@ -25289,6 +25312,7 @@ function verifyPali(text, limit) {
   }
   return {
     matches: out,
+    ties,
     scope: {
       language: "pali",
       searched: "The whole P\u0101li Tipi\u1E6Daka as bundled: VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition, 8,544 texts (Vinaya, Sutta and Abhidhamma Pi\u1E6Dakas). Commentaries (a\u1E6D\u1E6Dhakath\u0101), sub-commentaries and later P\u0101li literature are not included.",
@@ -25399,13 +25423,14 @@ async function verifyEnglish(text, texts, limit, fetchTranslation) {
   const corpus = englishCorpus(pages);
   const query = q.join(" ");
   const matches = [];
-  const cands = findWindows(corpus, q).map((c) => {
+  const { ranked, truncated } = rankWindows(findWindows(corpus, q), (c) => {
     let page = 0;
     while (corpus.starts[page + 1] <= c.start) page += 1;
-    return { c, page, r: refine2(corpus, query, q, c, { min: corpus.starts[page], max: corpus.starts[page + 1] }) };
-  }).sort((a, b) => b.r.sim - a.r.sim || a.r.a - b.r.a);
+    return { page, r: refine2(corpus, query, q, c, { min: corpus.starts[page], max: corpus.starts[page + 1] }) };
+  });
+  const ties = countTies(ranked, truncated, ({ page }) => pages[page].unit.id);
   const seen = /* @__PURE__ */ new Set();
-  for (const { page, r } of cands) {
+  for (const { page, r } of ranked) {
     const p = pages[page];
     const key = `${p.translation_id}:${Math.round(r.a / 20)}`;
     if (seen.has(key)) continue;
@@ -25428,20 +25453,23 @@ async function verifyEnglish(text, texts, limit, fetchTranslation) {
   }
   return {
     matches,
+    ties,
     scope: {
       language: "english",
       searched: `English translations linked to ${plan.label}: ${pages.length} page(s).`,
       translations_checked: pages.map((p) => ({ citation: p.unit.acronym, translator: p.translator, translation_id: p.translation_id, url: p.url })),
       ...failed.length ? { not_retrieved: failed.map((p) => ({ citation: p.unit.acronym, translator: p.translator, url: p.url, error: p.error })) } : {},
       ...plan.withoutEnglish.length ? { no_english_linked: plan.withoutEnglish } : {},
-      note: "Only these translations were compared. A different translation of the same passage may word it differently; check the P\u0101li as well."
+      note: 'Only these translations were compared. Popular English wordings are often older or freer translations, and two translations of the same verse can share few words: check the P\u0101li as well (verify_quote with language "pali").'
     }
   };
 }
+var ENGLISH_WORDS = new Set("the and is are was were be been of to you your a an not with in into that this these those it its what which who by for from will would shall should can cannot could all we our us they them their there than as at do does did have has had my if but or when where only his her he she i nothing everything one own every how why more most never always".split(" "));
 function detectLanguage(text) {
   if (PALI_HINT.test(text)) return "pali";
   const q = words(fold2(text));
   if (!q.length) return "english";
+  if (q.length >= 3 && q.filter((w) => ENGLISH_WORDS.has(w)).length / q.length >= 0.2) return "english";
   const ix = buildPaliIndex();
   const known = q.filter((w) => ix.ids.has(w) || w.length >= 5 && paliVariants(w).some((v) => v.sim >= 0.75)).length;
   return known / q.length >= 0.75 ? "pali" : "english";
@@ -25454,8 +25482,14 @@ function verdictFor(best) {
 var EXPLAIN = {
   found: "The quotation matches the text cited below.",
   close_paraphrase: "Similar wording was found, but not an exact match: compare the quotation with the passage cited below.",
-  not_found_in_scope: "No matching passage was found in the texts searched (see scope). This only describes those texts: the saying may come from a commentary, a later work, another translation, or a modern author."
+  not_found_in_scope: "No matching passage was found in the texts searched (see scope). This only describes those texts: the saying may come from a commentary, a later work, another translation, or a modern author.",
+  not_found_in_scope_english: "No translation searched has this wording (see scope). This is not a finding about the saying itself. Popular English wordings are often older or freer translations of a real verse, which can share few words with the translations searched: check the P\u0101li of the passage (see next_step), or name other texts in `texts`. A saying may also come from a commentary, a later work or a modern author."
 };
+var NEXT_STEP_ENGLISH = 'To check whether this is a translation of a real passage, find the P\u0101li (for example with search_texts or get_text) and run verify_quote on it with language "pali": the P\u0101li check covers the whole bundled Tipi\u1E6Daka, offline.';
+function tieNote(ties) {
+  if (!ties || ties.texts < 2) return void 0;
+  return `This wording matches ${ties.at_least ? "at least " : ""}${ties.texts} texts equally well (a stock or repeated passage). The matches listed are the first in canon order, not a unique source: quote more of the passage, or check the text you have in mind.`;
+}
 async function verifyQuote({ text, language = "auto", texts, limit = 5 }, { fetchTranslation = translation } = {}) {
   const quote = String(text ?? "").trim();
   if (quote.length < 8) throw new Error("Give at least a few words of the quotation.");
@@ -25463,12 +25497,16 @@ async function verifyQuote({ text, language = "auto", texts, limit = 5 }, { fetc
   const result = lang === "pali" ? verifyPali(quote, limit) : await verifyEnglish(quote, texts, limit, fetchTranslation);
   const best = result.matches[0]?.similarity ?? 0;
   const verdict = verdictFor(best);
+  const notFoundEnglish = verdict === "not_found_in_scope" && lang === "english";
+  const note = verdict === "not_found_in_scope" ? void 0 : tieNote(result.ties);
   return {
     quote,
     language: lang,
     verdict,
-    explanation: EXPLAIN[verdict],
+    explanation: EXPLAIN[notFoundEnglish ? "not_found_in_scope_english" : verdict],
     best_similarity: best,
+    ...note ? { equally_similar_texts: result.ties.texts, equally_similar_at_least: result.ties.at_least, citation_note: note } : {},
+    ...notFoundEnglish ? { next_step: NEXT_STEP_ENGLISH } : {},
     matches: verdict === "not_found_in_scope" ? result.matches.slice(0, 3) : result.matches,
     scope: result.scope,
     thresholds: { ...THRESHOLDS, measure: "Dice coefficient of character trigrams (diacritics and punctuation removed), weighted by the share of the quotation\u2019s distinctive words the passage contains; see docs/verify-quote.md" },

@@ -17,37 +17,60 @@ const fromFixture = async (unit, id) => {
 };
 const english = (text, texts = FIXTURE_TEXTS) => verifyQuote({ text, language: 'english', texts }, { fetchTranslation: fromFixture });
 
-/** A passage copied from the bundled text itself: words `from`..`from+count` of a text's longest segment. */
-function bundledPassage(ref, count = 14, from = 0) {
-  const unit = canon.resolve(ref).unit;
-  const seg = canon.segments(unit).filter((s) => s.type !== 'heading').sort((a, b) => b.text.length - a.text.length)[0];
-  return seg.text.split(/\s+/).slice(from, from + count).join(' ');
+// No scripture is typed into this file: every genuine quotation is built from the bundled VRI text
+// (canon.segments) or sliced from the fixture pages, then folded or misspelt the way people write it.
+
+/** Non-heading segments of a text, in order. */
+const body = (ref) => canon.segments(canon.resolve(ref).unit).filter((s) => s.type !== 'heading');
+/** Words `from`..`from+count` of a text's segment `seg` (an index into body(), or 'longest'). */
+function bundledPassage(ref, count = 14, from = 0, seg = 'longest') {
+  const segs = body(ref);
+  const s = seg === 'longest' ? [...segs].sort((a, b) => b.text.length - a.text.length)[0] : segs[seg];
+  return s.text.split(/\s+/).filter((w) => /\p{L}/u.test(w)).slice(from, from + count).join(' ');
 }
+/** As often written online: diacritics and punctuation dropped. */
+const plain = (s) => canon.fold(s).replace(/[^a-z ]/g, '').replace(/ +/g, ' ').trim();
+/** Misspelt: plain, then one letter dropped from every other long word. */
+const misspell = (s) => plain(s).split(' ').map((w, i) => (i % 2 === 0 && w.length > 6 ? w.slice(0, 3) + w.slice(4) : w)).join(' ');
+const asIs = (s) => s;
+
+/** Lines of a fixture page (whitespace normalised). */
+const fixtureLines = (id) => fixture.pages.find((p) => p.text_id === id).text.split(/\n\n/).map((l) => l.trim().replace(/\s+/g, ' '));
+/** The lines of a fixture page that end at the verse-number line `label` (e.g. '223'). */
+function fixtureVerse(id, label) {
+  const lines = fixtureLines(id);
+  const end = lines.findIndex((l) => l.replace('*', '') === label);
+  assert.ok(end > 0, `${id}: no verse ${label}`);
+  let start = end - 1;
+  while (start >= 0 && !/^\d+(-\d+)?\*?$/.test(lines[start]) && !/^Dhp /.test(lines[start])) start -= 1;
+  return lines.slice(start + 1, end).join(' ');
+}
+const fixtureSpan = (id, from, to) => fixtureLines(id).slice(from, to).join(' ');
 
 // ---- 20 genuine quotations --------------------------------------------------
 
+// [text, segment (index into body() or 'longest'), first word, word count, how it is written]
 const PALI_GENUINE = [
-  // [quotation as people write it (often without diacritics), a text that must be among the matches]
-  ['Manopubbaṅgamā dhammā, manoseṭṭhā manomayā; manasā ce paduṭṭhena, bhāsati vā karoti vā', 'Dhp 1'],
-  ['Na hi verena verani sammantidha kudacanam, averena ca sammanti, esa dhammo sanantano', 'Dhp 5'],
-  ['Sabbapāpassa akaraṇaṃ, kusalassa upasampadā; sacittapariyodapanaṃ, etaṃ buddhāna sāsanaṃ', 'Dhp 183'],
-  ['atta hi attano natho, ko hi natho paro siya', 'Dhp 160'],
-  ['vayadhamma sankhara, appamadena sampadetha', 'DN 16'],
-  ['Dveme, bhikkhave, antā pabbajitena na sevitabbā', 'SN 56.11'],
-  ['Ekāyano ayaṃ, bhikkhave, maggo sattānaṃ visuddhiyā', 'MN 10'],
-  ['Mata yatha niyam puttam ayusa ekaputtamanurakkhe', 'Snp 1.8'],
-  ['ma anussavena, ma paramparaya, ma itikiraya, ma pitakasampadanena', 'AN 3.65'],
-  ['diṭṭhe diṭṭhamattaṃ bhavissati, sute sutamattaṃ bhavissati', 'Ud 1.10'],
-  ['Sabbe sankhara aniccati, yada pannaya passati', 'Dhp 277'],
-  // Slightly misspelt (dropped letters, ṃ/m, v/b): still the same passage.
-  ['Manopubangama dhamma manosetha manomaya', 'Dhp 1'],
-];
+  ['Dhp 1', 0, 0, 12, asIs],
+  ['Dhp 5', 0, 0, 6, plain],
+  ['Dhp 183', 0, 0, 12, asIs],
+  ['Dhp 160', 0, 0, 8, plain],
+  ['DN 16', 'longest', 10, 12, plain],
+  ['SN 56.11', 1, 0, 10, asIs],
+  ['MN 10', 1, 0, 8, asIs],
+  ['Snp 1.8', 6, 0, 8, plain],
+  ['AN 3.65', 3, 0, 12, plain],
+  ['Ud 1.10', 'longest', 0, 12, plain],
+  ['Dhp 277', 0, 0, 8, plain],
+  ['Dhp 1', 0, 0, 6, misspell], // slightly misspelt: still the same passage
+].map(([ref, seg, from, count, write]) => [write(bundledPassage(ref, count, from, seg)), ref]);
 const BUNDLED_GENUINE = ['SN 22.59', 'MN 21', 'Iti 27', 'Thig 5.4'];
+// [a passage sliced from the fixture page, the text it translates]; the last one lower-cased without punctuation.
 const ENGLISH_GENUINE = [
-  ['Conquer anger with lack of anger; bad with good; stinginess with a gift; a liar with truth.', 'Dhp 221-234'],
-  ['Hostilities aren’t stilled through hostility, regardless. Hostilities are stilled through non-hostility: this, an unending truth.', 'Dhp 1-20'],
-  ['When you see with discernment, all fabrications are inconstant, you grow disenchanted with stress. This is the path to purity.', 'Dhp 273-289'],
-  ['As a mother would risk her life to protect her child, her only child, even so should one cultivate the heart limitlessly with regard to all beings.', 'Snp 1.8'],
+  [fixtureVerse('dhp221-234', '223'), 'Dhp 221-234'],
+  [fixtureSpan('dhp1-20', 33, 39), 'Dhp 1-20'],
+  [fixtureVerse('dhp273-289', '277-279').split(' ').slice(0, 20).join(' '), 'Dhp 273-289'],
+  [fixtureSpan('snp1.8', 27, 30).toLowerCase().replace(/[^a-z ]/g, ''), 'Snp 1.8'],
 ];
 
 test('genuine Pāli quotations are found, with a citation that resolves', async () => {
@@ -119,20 +142,61 @@ test('known misattributions are not found, and the scope searched is stated', as
     assert.equal(r.verdict, 'not_found_in_scope', `${quote} → ${r.best_similarity} ${JSON.stringify(r.matches[0])}`);
     assert.equal(r.scope.translations_checked.length, fixture.pages.length);
     assert.match(r.scope.searched, /English translations linked to/);
-    assert.match(r.explanation, /texts searched/);
+    assert.match(r.explanation, /translation searched has this wording/);
+    assert.match(r.next_step, /language "pali"/);
     assert.doesNotMatch(JSON.stringify(r), /not by the Buddha|did not say|didn't say|never said|fake/i);
   }
 });
 
 test('auto-detection picks English for misattributions and Pāli for Pāli', () => {
   for (const q of MISATTRIBUTED) assert.equal(detectLanguage(q), 'english', q);
+  for (const [q] of ENGLISH_GENUINE) assert.equal(detectLanguage(q), 'english', q);
   for (const [q] of PALI_GENUINE) assert.equal(detectLanguage(q), 'pali', q);
+  for (const ref of BUNDLED_GENUINE) assert.equal(detectLanguage(plain(bundledPassage(ref))), 'pali', ref);
 });
 
 test('a reworded quotation is a close paraphrase, not a match', async () => {
-  const r = await english('Conquer anger with non-anger; conquer bad with good; conquer the stingy with a gift.');
+  // A fixture passage with every fourth word replaced.
+  const reworded = fixtureSpan('dhp1-20', 33, 39).split(' ').map((w, i) => (i % 4 === 3 ? 'indeed' : w)).join(' ');
+  const r = await english(reworded);
   assert.equal(r.verdict, 'close_paraphrase', `${r.best_similarity}`);
-  assert.equal(r.matches[0].text_id, 'dhp221-234');
+  assert.equal(r.matches[0].text_id, 'dhp1-20');
+});
+
+test('a popular wording that is in no translation searched points to the Pāli check, not to a misattribution', async () => {
+  // A widely shared older rendering of Dhp 5, as people quote it. It is the input under test (a quotation as
+  // circulated), not a source text: the verse itself is taken from the bundle below.
+  const popular = 'Hatred does not cease by hatred, but only by love; this is the eternal rule.';
+  const r = await english(popular);
+  assert.equal(r.verdict, 'not_found_in_scope');
+  assert.match(r.explanation, /not a finding about the saying itself/);
+  assert.match(r.explanation, /older or freer translations/);
+  assert.match(r.next_step, /language "pali"/);
+  assert.match(r.scope.note, /check the Pāli/);
+  assert.doesNotMatch(JSON.stringify(r), /misattribut|not by the Buddha|did not say|never said|fake/i);
+  // The Pāli check the result points to finds the verse, with its citation.
+  const pali = await verifyQuote({ text: plain(bundledPassage('Dhp 5', 12, 0, 0)) });
+  assert.equal(pali.verdict, 'found');
+  assert.ok(pali.matches.some((m) => m.text_id === canon.resolve('Dhp 5').unit.id));
+});
+
+test('stock passages report how many texts match equally, instead of one arbitrary source', async () => {
+  // The opening formula of MN 38, folded: it opens hundreds of suttas.
+  const stock = await verifyQuote({ text: plain(bundledPassage('MN 38', 8, 0, 0)) });
+  assert.equal(stock.verdict, 'found');
+  assert.ok(stock.equally_similar_texts >= 100, `${stock.equally_similar_texts}`);
+  assert.equal(stock.equally_similar_at_least, true);
+  assert.match(stock.citation_note, /at least \d+ texts equally well/);
+  assert.match(stock.citation_note, /not a unique source/);
+  // A verse repeated word for word in another text (Dhp 21 in the Nettippakaraṇa): the tie is stated.
+  const verse = await verifyQuote({ text: bundledPassage('Dhp 21', 20, 0, 0) });
+  assert.ok(verse.equally_similar_texts >= 2, `${verse.equally_similar_texts}`);
+  assert.ok(verse.matches.some((m) => m.text_id === 'dhp21'));
+  for (const m of verse.matches) assert.equal(canon.resolve(m.text_id).unit.id, m.text_id);
+  // A passage found in one text only carries no tie note.
+  const unique = await verifyQuote({ text: plain(bundledPassage('Ud 1.10', 12, 0, 'longest')), language: 'pali' });
+  assert.equal(unique.verdict, 'found');
+  assert.equal(unique.equally_similar_texts, undefined);
 });
 
 test('English scope: default is the Dhammapada, one page per translator; untranslated texts are listed', () => {
@@ -148,7 +212,7 @@ test('English scope: default is the Dhammapada, one page per translator; untrans
 });
 
 test('pages that cannot be fetched are reported, never silently dropped', async () => {
-  const r = await verifyQuote({ text: 'Conquer anger with lack of anger', language: 'english', texts: ['AN 3.65', 'Pj 1'] }, { fetchTranslation: fromFixture });
+  const r = await verifyQuote({ text: fixtureVerse('dhp221-234', '223'), language: 'english', texts: ['AN 3.65', 'Pj 1'] }, { fetchTranslation: fromFixture });
   assert.ok(r.scope.translations_checked.length >= 1);
   assert.ok(r.scope.not_retrieved?.every((p) => /not in the offline fixture/.test(p.error)));
   assert.deepEqual(r.scope.no_english_linked, [canon.resolve('Pj 1').unit.acronym]);
@@ -158,7 +222,8 @@ test('pages that cannot be fetched are reported, never silently dropped', async 
 test('similarity measure', () => {
   assert.equal(similarity('abc def', 'abc def'), 1);
   assert.equal(similarity('abc', 'xyz'), 0);
-  assert.ok(similarity('manopubbangama dhamma', 'manopubangama dhamma') > 0.8);
+  const words = plain(bundledPassage('Dhp 1', 2, 0, 0));
+  assert.ok(similarity(words, misspell(words)) > 0.8);
 });
 
 test('live: a genuine quote is found on dhammatalks.org (skipped offline)', async (t) => {
@@ -167,7 +232,7 @@ test('live: a genuine quote is found on dhammatalks.org (skipped offline)', asyn
     const res = await fetch('https://www.dhammatalks.org/suttas/KN/Dhp/Ch17.html', { method: 'HEAD', signal: AbortSignal.timeout(5000) });
     if (!res.ok) return t.skip(`dhammatalks.org answered ${res.status}`);
   } catch { return t.skip('network unavailable'); }
-  const r = await verifyQuote({ text: 'Conquer anger with lack of anger; bad with good; stinginess with a gift; a liar with truth.', texts: ['Dhp 223'] });
+  const r = await verifyQuote({ text: fixtureVerse('dhp221-234', '223'), texts: ['Dhp 223'] });
   if (!r.scope.translations_checked.length) return t.skip('translation pages unavailable');
   assert.equal(r.verdict, 'found');
   assert.equal(r.matches[0].text_id, 'dhp221-234');

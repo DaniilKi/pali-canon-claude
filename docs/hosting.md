@@ -87,6 +87,13 @@ a fair amount of memory. Measured on 1 November 2026 (Windows 11, Node.js 26, `s
 290 MB right after start-up and about 345 MB at the peak of the 50-session load test below. Give it at
 least 512 MB, as `fly.toml` does.
 
+The optional `verify_quote` tool builds a Pāli word index the first time a Pāli quotation is checked, and
+keeps it. This adds roughly 50 to 80 MB of resident memory for as long as the server runs, and during the
+build (about 4 seconds) memory can briefly be 100 MB or more above that starting point. With the 64 MB
+translation cache full as well, a server near the 345 MB load-test peak comes close to 512 MB on that first
+check. If the host restarts for lack of memory, give it 768 MB or set a smaller `PALI_CANON_CACHE_MB`.
+See [verify-quote.md](verify-quote.md#memory).
+
 ## Deploy on Fly.io
 
 [Fly.io](https://fly.io) runs Docker images close to users. The repository includes `fly.toml`.

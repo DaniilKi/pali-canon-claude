@@ -51,7 +51,10 @@ try {
   await call('search_texts', { query: '"sabbe sankhara anicca"', collection: 'dhp' }, (d) => assert.ok(d.results.some((r) => r.id === 'dhp277')));
   for (const node of ['canon', 'vinaya', 'sn', 'sn56', 'abhidhamma']) await call('browse_canon', { node, limit: 3 });
   await call('list_sources', {});
-  await call('verify_quote', { text: 'Na hi verena verani sammantidha kudacanam' }, (d) => { assert.equal(d.verdict, 'found'); assert.ok(d.matches.some((m) => m.text_id === 'dhp5')); });
+  // verify_quote on Dhp 5 as returned by get_text (no scripture typed here), without diacritics.
+  const dhp5 = await call('get_text', { uid: 'Dhp 5' });
+  const quote = dhp5.segments.find((s) => s.type !== 'heading').text.normalize('NFD').replace(/\p{M}/gu, '');
+  await call('verify_quote', { text: quote }, (d) => { assert.equal(d.verdict, 'found'); assert.ok(d.matches.some((m) => m.text_id === 'dhp5')); });
   await fails('get_text', { uid: '../private' });
   await fails('resolve_reference', { reference: 'MN 153' }, /not in the canon index/);
   await fails('resolve_reference', { reference: 'Ja i 1' }, /no PTS page numbers/);
