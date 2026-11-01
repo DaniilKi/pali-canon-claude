@@ -29,7 +29,7 @@ async function fails(name, args, pattern) {
 try {
   await client.connect(transport);
   const { tools } = await client.listTools();
-  assert.equal(tools.length, 11);
+  assert.ok(tools.length >= 11);
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint));
   assert.equal((await client.listResources()).resources.length, 2);
   assert.equal((await client.listPrompts()).prompts.length, 3);
@@ -51,6 +51,7 @@ try {
   await call('search_texts', { query: '"sabbe sankhara anicca"', collection: 'dhp' }, (d) => assert.ok(d.results.some((r) => r.id === 'dhp277')));
   for (const node of ['canon', 'vinaya', 'sn', 'sn56', 'abhidhamma']) await call('browse_canon', { node, limit: 3 });
   await call('list_sources', {});
+  if (tools.some((t) => t.name === 'paritta')) await call('paritta', { name: 'Ratana' }, (d) => { assert.equal(d.text_id, 'kp6'); assert.ok(d.segments.length); });
   await fails('get_text', { uid: '../private' });
   await fails('resolve_reference', { reference: 'MN 153' }, /not in the canon index/);
   await fails('resolve_reference', { reference: 'Ja i 1' }, /no PTS page numbers/);

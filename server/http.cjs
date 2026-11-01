@@ -24972,6 +24972,202 @@ function listSources() {
 
 // src/features/index.mjs
 var features_exports = {};
+__export(features_exports, {
+  paritta: () => paritta_exports
+});
+
+// src/paritta.mjs
+var paritta_exports = {};
+__export(paritta_exports, {
+  CHANTING_BOOKS: () => CHANTING_BOOKS,
+  PARITTA: () => PARITTA,
+  chantingBooks: () => chantingBooks,
+  find: () => find,
+  paritta: () => paritta,
+  register: () => register
+});
+var PARITTA = [
+  {
+    key: "mangala",
+    name: "Ma\u1E45gala Sutta",
+    aliases: ["mangala sutta", "mahamangala", "blessings", "protection"],
+    texts: ["Kp 5", "Snp 2.4"],
+    note: "The same sutta appears in the Khuddakap\u0101\u1E6Dha (Kp 5) and the Sutta Nip\u0101ta (Snp 2.4)."
+  },
+  {
+    key: "ratana",
+    name: "Ratana Sutta",
+    aliases: ["ratana sutta", "jewel", "treasures"],
+    texts: ["Kp 6", "Snp 2.1"],
+    note: "The same sutta appears in the Khuddakap\u0101\u1E6Dha (Kp 6) and the Sutta Nip\u0101ta (Snp 2.1)."
+  },
+  {
+    key: "karaniya-metta",
+    name: "Kara\u1E47\u012Byamett\u0101 Sutta",
+    aliases: ["metta sutta", "karaniya metta", "karaniyametta", "goodwill", "loving kindness", "loving-kindness"],
+    texts: ["Kp 9", "Snp 1.8"],
+    note: "The same sutta appears in the Khuddakap\u0101\u1E6Dha (Kp 9) and the Sutta Nip\u0101ta (Snp 1.8). VRI titles it Mettasutta\u1E43."
+  },
+  {
+    key: "khandha",
+    name: "Khandha Paritta",
+    aliases: ["khandha", "ahiraja", "ahiraja sutta", "snakes"],
+    texts: ["AN 4.67"],
+    note: "Canonical source: the Ahir\u0101jasutta (AN 4.67)."
+  },
+  {
+    key: "metta-nisamsa",
+    name: "Mett\u0101nisa\u1E43sa Sutta",
+    aliases: ["mettanisamsa", "benefits of metta", "metta benefits"],
+    texts: ["AN 11.15"],
+    note: "Canonical source: AN 11.15 (Mett\u0101sutta\u1E43), the eleven benefits of mett\u0101."
+  },
+  {
+    key: "mora",
+    name: "Mora Paritta",
+    aliases: ["mora", "peacock", "mora jataka"],
+    texts: ["Ja 159"],
+    note: "Canonical source: the verses of the Mora J\u0101taka (Ja 159). The bundled J\u0101taka holds the verses only; the prose story belongs to the commentary."
+  },
+  {
+    key: "vatta",
+    name: "Va\u1E6D\u1E6Da Paritta",
+    aliases: ["vatta", "vattaka", "quail", "vattaka jataka"],
+    texts: ["Ja 35"],
+    note: "Canonical source: the verse of the Va\u1E6D\u1E6Daka J\u0101taka (Ja 35)."
+  },
+  {
+    key: "dhajagga",
+    name: "Dhajagga Sutta",
+    aliases: ["dhajagga", "banner", "top of the standard", "crest of the banner"],
+    texts: ["SN 11.3"],
+    note: "Canonical source: SN 11.3 (Dhajaggasutta\u1E43)."
+  },
+  {
+    key: "atanatiya",
+    name: "\u0100\u1E6D\u0101n\u0101\u1E6Diya Sutta",
+    aliases: ["atanatiya", "atanatiya paritta"],
+    texts: ["DN 32"],
+    note: "The \u0100\u1E6D\u0101n\u0101\u1E6Diya Paritta in chanting books is not identical to DN 32; this entry returns the canonical DN 32 text only (long: use offset and limit)."
+  },
+  {
+    key: "angulimala",
+    name: "A\u1E45gulim\u0101la Paritta",
+    aliases: ["angulimala", "safe childbirth"],
+    texts: ["MN 86"],
+    passage: "ariyaya jatiya jato",
+    note: 'The protective declaration is a passage in MN 86 (A\u1E45gulim\u0101lasutta\u1E43). Only the segments containing it are returned; read the whole sutta with get_text("MN 86").'
+  },
+  {
+    key: "bojjhanga",
+    name: "Bojjha\u1E45ga Sutta",
+    aliases: ["bojjhanga", "bojjhanga paritta", "factors of awakening", "gilana"],
+    texts: ["SN 46.14", "SN 46.15", "SN 46.16"],
+    note: "The Bojjha\u1E45ga Paritta of chanting books is a later verse composition, not canonical text. The canonical sources are the three Gil\u0101na suttas (SN 46.14\u201316); pass text to choose one."
+  },
+  { key: "girimananda", name: "Girim\u0101nanda Sutta", aliases: ["girimananda", "ten perceptions"], texts: ["AN 10.60"] },
+  { key: "isigili", name: "Isigili Sutta", aliases: ["isigili"], texts: ["MN 116"] },
+  { key: "dhammacakka", name: "Dhammacakkappavattana Sutta", aliases: ["dhammacakka", "dhammacakkappavattana", "first sermon", "wheel of dhamma"], texts: ["SN 56.11"] },
+  { key: "anattalakkhana", name: "Anattalakkha\u1E47a Sutta", aliases: ["anattalakkhana", "anatta lakkhana", "not-self"], texts: ["SN 22.59"] },
+  { key: "aditta", name: "\u0100dittapariy\u0101ya Sutta", aliases: ["aditta", "adittapariyaya", "fire sermon"], texts: ["SN 35.28"], note: "VRI titles it \u0100dittasutta\u1E43." },
+  { key: "mahasamaya", name: "Mah\u0101samaya Sutta", aliases: ["mahasamaya", "great meeting"], texts: ["DN 20"], note: "Long: use offset and limit." },
+  { key: "saranagamana", name: "Sara\u1E47agamana", aliases: ["saranagamana", "saranattaya", "refuges", "three refuges", "going for refuge"], texts: ["Kp 1"] },
+  { key: "dasasikkhapada", name: "Dasasikkh\u0101pada", aliases: ["dasasikkhapada", "ten precepts", "ten training rules"], texts: ["Kp 2"] },
+  { key: "dvattimsakara", name: "Dvatti\u1E43s\u0101k\u0101ra", aliases: ["dvattimsakara", "32 parts", "thirty-two parts", "parts of the body"], texts: ["Kp 3"] },
+  { key: "kumarapanha", name: "Kum\u0101rapa\xF1h\u0101", aliases: ["kumarapanha", "samanera panha", "novice questions"], texts: ["Kp 4"] },
+  { key: "tirokutta", name: "Tiroku\u1E6D\u1E6Da Sutta", aliases: ["tirokutta", "tirokudda", "outside the walls", "hungry ghosts"], texts: ["Kp 7"] },
+  { key: "nidhikanda", name: "Nidhika\u1E47\u1E0Da Sutta", aliases: ["nidhikanda", "reserve fund", "treasure"], texts: ["Kp 8"] }
+];
+var CHANTING_BOOKS = [
+  { id: "amaravati", publisher: "Amaravati Publications", granted: false, letter: "docs/outreach/amaravati.md" },
+  { id: "abhayagiri", publisher: "Abhayagiri Buddhist Monastery", granted: false, letter: "docs/outreach/abhayagiri.md" }
+];
+function chantingBooks() {
+  return CHANTING_BOOKS.map((b) => ({
+    publisher: b.publisher,
+    available: b.granted,
+    ...b.granted ? {} : { reason: "Permission to reproduce this chanting book's layout and English has been requested but not granted, so none of it is included." }
+  }));
+}
+var keyOf = (s) => fold2(s).replace(/[^a-z0-9]+/g, " ").trim();
+function find(name) {
+  const q = keyOf(name).replace(/\b(sutta|suttam|paritta)\b/g, "").trim();
+  if (!q) return null;
+  const labels = (e) => [e.key, e.name, ...e.aliases].map(keyOf).map((l) => [l, l.replace(/\b(sutta|suttam|paritta)\b/g, "").trim()]).flat();
+  return PARITTA.find((e) => labels(e).includes(q)) || PARITTA.find((e) => labels(e).some((l) => l && (l.includes(q) || q.includes(l)))) || null;
+}
+function englishLinks(described) {
+  return described.english.map(({ source: source2, translator, reference, url, license, translation_id }) => ({
+    source: source2,
+    translator,
+    reference,
+    url,
+    ...license ? { license } : {},
+    translation_id
+  }));
+}
+function paritta(canon, { name, text, offset = 0, limit = 60 } = {}) {
+  if (!name) {
+    return {
+      paritta: PARITTA.map((e) => {
+        const units = e.texts.map((t) => canon.resolve(t).unit);
+        return { key: e.key, name: e.name, texts: units.map((u) => ({ citation: u.acronym, text_id: u.id, title: u.title })) };
+      }),
+      note: 'Pass name (e.g. "ratana", "Kara\u1E47\u012Byamett\u0101") to read the P\u0101li. Texts are the canonical sources as printed in the VRI edition; chanting books may arrange or extend them.',
+      chanting_books: chantingBooks()
+    };
+  }
+  const entry = find(name);
+  if (!entry) throw new Error(`No paritta named "${name}". Available: ${PARITTA.map((e) => e.key).join(", ")}.`);
+  let ref = entry.texts[0];
+  if (text) {
+    const want = canon.resolve(text).unit.id;
+    ref = entry.texts.find((t) => canon.resolve(t).unit.id === want);
+    if (!ref) throw new Error(`${text} is not a source of ${entry.name}. Its sources: ${entry.texts.join(", ")}.`);
+  }
+  const { unit, notes } = canon.resolve(ref);
+  const described = canon.describe(unit, notes);
+  let all = canon.segments(unit);
+  let passageNote;
+  if (entry.passage) {
+    const needle = keyOf(entry.passage);
+    const hits = all.filter((s) => keyOf(s.text).includes(needle));
+    if (!hits.length) throw new Error(`The passage for ${entry.name} was not found in ${unit.acronym}. Read it with get_text("${unit.acronym}").`);
+    all = [...all.filter((s) => s.type === "heading").slice(0, 1), ...hits];
+    passageNote = `Selected ${hits.length} of ${canon.segments(unit).length} segments of ${unit.acronym}.`;
+  }
+  const page = all.slice(offset, offset + limit);
+  return {
+    key: entry.key,
+    name: entry.name,
+    text_id: unit.id,
+    citation: unit.acronym,
+    title: unit.title,
+    pts: described.pts,
+    ...entry.texts.length > 1 ? { other_sources: entry.texts.filter((t) => t !== ref) } : {},
+    edition: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), P\u0101li",
+    attribution: canon.source().attribution,
+    terms: canon.source().terms,
+    total_segments: all.length,
+    offset,
+    limit,
+    returned: page.length,
+    next_offset: offset + page.length < all.length ? offset + page.length : null,
+    segments: page,
+    notes: [...entry.note ? [entry.note] : [], ...passageNote ? [passageNote] : [], ...described.notes],
+    english: englishLinks(described),
+    english_note: described.english.length ? "Links only. Read one with get_translation (uid and translation_id); it returns the translator, licence and notice." : `No English translation is linked for ${unit.acronym} in this tool. See https://suttacentral.net/${unit.id} for other translations.`,
+    chanting_books: chantingBooks()
+  };
+}
+function register({ tool, z, canon }) {
+  tool("paritta", "Paritta and other commonly recited texts (Ma\u1E45gala, Ratana, Kara\u1E47\u012Byamett\u0101, Khandha, Mora, Dhajagga, Bojjha\u1E45ga, Khuddakap\u0101\u1E6Dha chants and more) in P\u0101li from the bundled VRI edition, with their canonical citations and links to English translations. Call with no name to list the set. Works offline.", {
+    name: z.string().max(100).optional().describe('Paritta name, e.g. "Ratana", "Kara\u1E47\u012Byamett\u0101", "Khandha", "Mora" (diacritics optional). Omit to list all.'),
+    text: z.string().max(100).optional().describe(`Choose one of the entry's canonical sources, e.g. "Snp 2.1" instead of the default "Kp 6", or "SN 46.16" for Bojjha\u1E45ga.`),
+    offset: z.number().int().min(0).max(1e5).default(0).describe("Segment offset for continuation."),
+    limit: z.number().int().min(1).max(200).default(60).describe("Segments per page.")
+  }, (args) => paritta(canon, args));
+}
 
 // src/server.mjs
 var VERSION = "2.0.0";
