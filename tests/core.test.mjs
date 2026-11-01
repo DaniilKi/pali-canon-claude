@@ -408,4 +408,15 @@ test('rate limit: client IP comes from the trusted proxy hop, not a forged X-For
     http.closeAllConnections?.();
     await new Promise((r) => http.close(r));
   }
+test('server.json for the MCP Registry is consistent and refuses placeholders at publish time', async () => {
+  const { checkServerJson, REGISTRY_NAME, NPM_PACKAGE, PLACEHOLDER } = await import('../scripts/check-server-json.mjs');
+  assert.deepEqual(checkServerJson(), []);
+  // Registry namespaces are compared case-sensitively against the GitHub login (registry#689).
+  assert.equal(REGISTRY_NAME, 'io.github.DaniilKi/pali-canon');
+  assert.equal(NPM_PACKAGE, 'pali-canon-mcp');
+  // The hosted endpoint is not live yet (#5): server.json must not carry a placeholder remote,
+  // so publish mode reports no placeholder problem (it may still report mcpName/name until #4).
+  assert.ok(!checkServerJson({ publish: true }).some((p) => /placeholder/i.test(p)));
+  // The guard itself still recognises the placeholder address.
+  assert.ok(PLACEHOLDER.test('https://PLACEHOLDER-hosted-endpoint-issue-5.invalid/mcp'));
 });
