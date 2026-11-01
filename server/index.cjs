@@ -6515,11 +6515,11 @@ var require_format = __commonJS({
           }
           function getFormat(fmtDef) {
             const code = fmtDef instanceof RegExp ? (0, codegen_1.regexpCode)(fmtDef) : opts.code.formats ? (0, codegen_1._)`${opts.code.formats}${(0, codegen_1.getProperty)(schema)}` : void 0;
-            const fmt = gen.scopeValue("formats", { key: schema, ref: fmtDef, code });
+            const fmt2 = gen.scopeValue("formats", { key: schema, ref: fmtDef, code });
             if (typeof fmtDef == "object" && !(fmtDef instanceof RegExp)) {
-              return [fmtDef.type || "string", fmtDef.validate, (0, codegen_1._)`${fmt}.validate`];
+              return [fmtDef.type || "string", fmtDef.validate, (0, codegen_1._)`${fmt2}.validate`];
             }
-            return ["string", fmtDef, fmt];
+            return ["string", fmtDef, fmt2];
           }
           function validCondition() {
             if (typeof formatDef == "object" && !(formatDef instanceof RegExp) && formatDef.async) {
@@ -7181,8 +7181,8 @@ var require_limit = __commonJS({
             ref: self.formats,
             code: opts.code.formats
           });
-          const fmt = gen.const("fmt", (0, codegen_1._)`${fmts}[${fCxt.schemaCode}]`);
-          cxt.fail$data((0, codegen_1.or)((0, codegen_1._)`typeof ${fmt} != "object"`, (0, codegen_1._)`${fmt} instanceof RegExp`, (0, codegen_1._)`typeof ${fmt}.compare != "function"`, compareCode(fmt)));
+          const fmt2 = gen.const("fmt", (0, codegen_1._)`${fmts}[${fCxt.schemaCode}]`);
+          cxt.fail$data((0, codegen_1.or)((0, codegen_1._)`typeof ${fmt2} != "object"`, (0, codegen_1._)`${fmt2} instanceof RegExp`, (0, codegen_1._)`typeof ${fmt2}.compare != "function"`, compareCode(fmt2)));
         }
         function validateFormat() {
           const format = fCxt.schema;
@@ -7192,15 +7192,15 @@ var require_limit = __commonJS({
           if (typeof fmtDef != "object" || fmtDef instanceof RegExp || typeof fmtDef.compare != "function") {
             throw new Error(`"${keyword}": format "${format}" does not define "compare" function`);
           }
-          const fmt = gen.scopeValue("formats", {
+          const fmt2 = gen.scopeValue("formats", {
             key: format,
             ref: fmtDef,
             code: opts.code.formats ? (0, codegen_1._)`${opts.code.formats}${(0, codegen_1.getProperty)(format)}` : void 0
           });
-          cxt.fail$data(compareCode(fmt));
+          cxt.fail$data(compareCode(fmt2));
         }
-        function compareCode(fmt) {
-          return (0, codegen_1._)`${fmt}.compare(${data2}, ${schemaCode}) ${KWDs[keyword].fail} 0`;
+        function compareCode(fmt2) {
+          return (0, codegen_1._)`${fmt2}.compare(${data2}, ${schemaCode}) ${KWDs[keyword].fail} 0`;
         }
       },
       dependencies: ["format"]
@@ -22850,6 +22850,620 @@ function listSources() {
 
 // src/features/index.mjs
 var features_exports = {};
+__export(features_exports, {
+  calendar: () => calendar_exports
+});
+
+// src/calendar.mjs
+var calendar_exports = {};
+__export(calendar_exports, {
+  DISCLAIMER: () => DISCLAIMER,
+  FESTIVALS: () => FESTIVALS,
+  MYANMAR_MONTHS: () => MYANMAR_MONTHS,
+  SRI_LANKA_MONTHS: () => SRI_LANKA_MONTHS,
+  THAI_MONTHS: () => THAI_MONTHS,
+  TRADITIONS: () => TRADITIONS,
+  TRADITION_IDS: () => TRADITION_IDS,
+  UPOSATHA_TEXTS: () => UPOSATHA_TEXTS,
+  deltaT: () => deltaT,
+  elongation: () => elongation,
+  festivals: () => festivals,
+  lahiriAyanamsa: () => lahiriAyanamsa,
+  localDate: () => localDate,
+  moonLongitude: () => moonLongitude,
+  moonPhases: () => moonPhases,
+  myanmarDate: () => myanmarDate,
+  pakkhaDay: () => pakkhaDay,
+  phaseInstant: () => phaseInstant,
+  register: () => register,
+  resolveTexts: () => resolveTexts,
+  sunLongitude: () => sunLongitude,
+  thaiMonths: () => thaiMonths,
+  thaiYearType: () => thaiYearType,
+  uposatha: () => uposatha
+});
+var DAY_MS = 864e5;
+var rad = Math.PI / 180;
+var TRADITIONS = {
+  "thai-mahanikaya": {
+    name: "Thai Mah\u0101nik\u0101ya",
+    time_zone: "Asia/Bangkok (UTC+7)",
+    utcOffsetMinutes: 420,
+    rule: 'Thai lunisolar calendar (the civil "wan phra" calendar). Months alternate 29 days (odd months) and 30 days (even months). A year is common (354 days), adhikav\u0101ra (355: month 7 gets a 30th day) or adhikam\u0101sa (384: a second month 8, "2nd \u0100s\u0101\u1E37ha"), decided by the Suriyayatra / Chulasakarat rules (horakhun, kammacubala, avoman and tithi of the year) as implemented by splendidmoons. Uposatha falls on the 8th and 15th (full moon) of the waxing fortnight and the 8th and last day (14th or 15th, new moon) of the waning fortnight.',
+    rule_source: "https://splendidmoons.github.io/how-to-calculate-uposathas",
+    code_source: "https://github.com/splendidmoons/splendidmoons (MIT, \xA9 2023 Gambhiro Bhikkhu)"
+  },
+  "thai-dhammayut": {
+    name: "Thai Dhammayut",
+    time_zone: "Asia/Bangkok (UTC+7)",
+    utcOffsetMinutes: 420,
+    rule: "Pakkhaga\u1E47an\u0101 (\u0E1B\u0E31\u0E01\u0E02\u0E04\u0E13\u0E19\u0E32), the fortnight reckoning kept by the Dhammayut order, which follows the real moon more closely than the civil calendar, so some uposatha days fall one day later than the Mah\u0101nik\u0101ya ones. Fortnights of 14 or 15 days are counted on the Pakkhaga\u1E47an\u0101 board from its epoch (1736-01-28); uposatha falls on the 8th and the last day of each fortnight. Festival months follow the Thai lunar calendar.",
+    rule_source: "docs/calendar.md",
+    code_source: "https://github.com/hmmbug/pythaidate (MIT, \xA9 2023 Mark Hollow)"
+  },
+  myanmar: {
+    name: "Myanmar (Burmese calendar)",
+    time_zone: "Asia/Yangon (UTC+6:30)",
+    utcOffsetMinutes: 390,
+    rule: "Burmese lunisolar calendar, third era (1312 ME = 1950 CE onwards): the mean full moon of (2nd) Waso fixes the year; watat years insert a 30-day 1st Waso, big-watat years also give Nayon 30 days; months alternate 29 and 30 days. Uposatha (\u1025\u1015\u102F\u101E\u103A) falls on the 8th, 15th (full moon), 23rd and last day (new moon) of each month.",
+    rule_source: "https://cool-emerald.blogspot.com/2013/06/algorithm-program-and-calculation-of.html",
+    code_source: "https://github.com/yan9a/mmcal (MIT, \xA9 2018 Yan Naing Aye)"
+  },
+  "sri-lanka": {
+    name: "Sri Lanka (poya days)",
+    time_zone: "Asia/Colombo (UTC+5:30)",
+    utcOffsetMinutes: 330,
+    rule: "A poya day is the day on whose evening (18:00 Sri Lanka time) the lunar day (tithi) of the full moon is current: the sun\u2013moon elongation is between 168\xB0 and 180\xB0. If no 18:00 falls inside that tithi, the day of the full moon itself. New-moon and quarter-moon days use the same rule with tithis 30, 8 and 23. Months are named by the sidereal (Lahiri ayan\u0101\u1E43sa) sign of the sun at the new moon that opens them (am\u0101nta reckoning); a month in which the sun does not change sign is an adhi (extra) month and takes the name of the next month.",
+    rule_source: "docs/calendar.md",
+    code_source: "Meeus, Astronomical Algorithms (2nd ed., 1998), chapters 25, 47 and 49"
+  }
+};
+function deltaT(year) {
+  if (year < 1961) {
+    const t = year - 1950;
+    return 29.07 + 0.407 * t - t * t / 233 + t ** 3 / 2547;
+  }
+  if (year < 1986) {
+    const t = year - 1975;
+    return 45.45 + 1.067 * t - t * t / 260 - t ** 3 / 718;
+  }
+  if (year < 2005) {
+    const t = year - 2e3;
+    return 63.86 + 0.3345 * t - 0.060374 * t ** 2 + 17275e-7 * t ** 3 + 651814e-9 * t ** 4 + 2373599e-11 * t ** 5;
+  }
+  if (year < 2050) {
+    const t = year - 2e3;
+    return 62.92 + 0.32217 * t + 5589e-6 * t * t;
+  }
+  const u = (year - 1820) / 100;
+  return -20 + 32 * u * u - 0.5628 * (2150 - year);
+}
+var jdToMs = (jd) => (jd - 24405875e-1) * DAY_MS;
+var msToJd = (ms) => ms / DAY_MS + 24405875e-1;
+function phaseInstant(k, phase) {
+  k += phase;
+  const T = k / 1236.85;
+  let jde = 245155009766e-5 + 29.530588861 * k + 15437e-8 * T * T - 15e-8 * T ** 3 + 73e-11 * T ** 4;
+  const E = 1 - 2516e-6 * T - 74e-7 * T * T;
+  const M = (2.5534 + 29.1053567 * k - 14e-7 * T * T - 11e-8 * T ** 3) * rad;
+  const Mp = (201.5643 + 385.81693528 * k + 0.0107582 * T * T + 1238e-8 * T ** 3 - 58e-9 * T ** 4) * rad;
+  const F = (160.7108 + 390.67050284 * k - 16118e-7 * T * T - 227e-8 * T ** 3 + 11e-9 * T ** 4) * rad;
+  const O = (124.7746 - 1.56375588 * k + 20672e-7 * T * T + 215e-8 * T ** 3) * rad;
+  const s = Math.sin;
+  let c;
+  if (phase === 0 || phase === 0.5) {
+    const n = phase === 0;
+    c = (n ? -0.4072 : -0.40614) * s(Mp) + (n ? 0.17241 : 0.17302) * E * s(M) + (n ? 0.01608 : 0.01614) * s(2 * Mp) + (n ? 0.01039 : 0.01043) * s(2 * F) + (n ? 739e-5 : 734e-5) * E * s(Mp - M) - (n ? 514e-5 : 515e-5) * E * s(Mp + M) + (n ? 208e-5 : 209e-5) * E * E * s(2 * M) - 111e-5 * s(Mp - 2 * F) - 57e-5 * s(Mp + 2 * F) + 56e-5 * E * s(2 * Mp + M) - 42e-5 * s(3 * Mp) + 42e-5 * E * s(M + 2 * F) + 38e-5 * E * s(M - 2 * F) - 24e-5 * E * s(2 * Mp - M) - 17e-5 * s(O) - 7e-5 * s(Mp + 2 * M) + 4e-5 * s(2 * Mp - 2 * F) + 4e-5 * s(3 * M) + 3e-5 * s(Mp + M - 2 * F) + 3e-5 * s(2 * Mp + 2 * F) - 3e-5 * s(Mp + M + 2 * F) + 3e-5 * s(Mp - M + 2 * F) - 2e-5 * s(Mp - M - 2 * F) - 2e-5 * s(3 * Mp + M) + 2e-5 * s(4 * Mp);
+  } else {
+    c = -0.62801 * s(Mp) + 0.17172 * E * s(M) - 0.01183 * E * s(Mp + M) + 862e-5 * s(2 * Mp) + 804e-5 * s(2 * F) + 454e-5 * E * s(Mp - M) + 204e-5 * E * E * s(2 * M) - 18e-4 * s(Mp - 2 * F) - 7e-4 * s(Mp + 2 * F) - 4e-4 * s(3 * Mp) - 34e-5 * E * s(2 * Mp - M) + 32e-5 * E * s(M + 2 * F) + 32e-5 * E * s(M - 2 * F) - 28e-5 * E * E * s(Mp + 2 * M) + 27e-5 * E * s(2 * Mp + M) - 17e-5 * s(O) - 5e-5 * s(Mp - M - 2 * F) + 4e-5 * s(2 * Mp + 2 * F) - 4e-5 * s(Mp + M + 2 * F) + 4e-5 * s(Mp - 2 * M) + 3e-5 * s(Mp + M - 2 * F) + 3e-5 * s(3 * M) + 2e-5 * s(2 * Mp - 2 * F) + 2e-5 * s(Mp - M + 2 * F) - 2e-5 * s(3 * Mp + M);
+    const W = 306e-5 - 38e-5 * E * Math.cos(M) + 26e-5 * Math.cos(Mp) - 2e-5 * Math.cos(Mp - M) + 2e-5 * Math.cos(Mp + M) + 2e-5 * Math.cos(2 * F);
+    c += phase === 0.25 ? W : -W;
+  }
+  const A = [
+    [325, 299.77 + 0.107408 * k - 9173e-6 * T * T],
+    [165, 251.88 + 0.016321 * k],
+    [164, 251.83 + 26.651886 * k],
+    [126, 349.42 + 36.412478 * k],
+    [110, 84.66 + 18.206239 * k],
+    [62, 141.74 + 53.303771 * k],
+    [60, 207.14 + 2.453732 * k],
+    [56, 154.84 + 7.30686 * k],
+    [47, 34.52 + 27.261239 * k],
+    [42, 207.19 + 0.121824 * k],
+    [40, 291.34 + 1.844379 * k],
+    [37, 161.72 + 24.198154 * k],
+    [35, 239.56 + 25.513099 * k],
+    [23, 331.55 + 3.592518 * k]
+  ];
+  for (const [coef, deg] of A) c += coef * 1e-6 * s(deg * rad);
+  jde += c;
+  const year = 2e3 + k / 12.3685;
+  return jdToMs(jde) - deltaT(year) * 1e3;
+}
+var PHASES = [["new", 0], ["first-quarter", 0.25], ["full", 0.5], ["last-quarter", 0.75]];
+function moonPhases(fromMs, toMs) {
+  const out = [];
+  let k = Math.floor((fromMs - jdToMs(245155009766e-5)) / (29.530588861 * DAY_MS)) - 1;
+  for (; ; k++) {
+    for (const [name, p] of PHASES) {
+      const t = phaseInstant(k, p);
+      if (t >= toMs) return out;
+      if (t >= fromMs) out.push({ phase: name, instant: t, k });
+    }
+  }
+}
+function sunLongitude(ms) {
+  const T = (msToJd(ms) - 2451545) / 36525;
+  const L0 = 280.46646 + 36000.76983 * T + 3032e-7 * T * T;
+  const M = (357.52911 + 35999.05029 * T - 1537e-7 * T * T) * rad;
+  const C = (1.914602 - 4817e-6 * T - 14e-6 * T * T) * Math.sin(M) + (0.019993 - 101e-6 * T) * Math.sin(2 * M) + 289e-6 * Math.sin(3 * M);
+  const omega = (125.04 - 1934.136 * T) * rad;
+  return ((L0 + C - 569e-5 - 478e-5 * Math.sin(omega)) % 360 + 360) % 360;
+}
+function lahiriAyanamsa(ms) {
+  const years = (msToJd(ms) - 2451545) / 365.25;
+  return 23.853 + 50.29 / 3600 * years;
+}
+var parseDate = (iso) => {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  if (!m) throw new Error(`Dates must be YYYY-MM-DD (got "${iso}").`);
+  const ms = Date.UTC(+m[1], +m[2] - 1, +m[3]);
+  if (new Date(ms).toISOString().slice(0, 10) !== iso) throw new Error(`Not a calendar date: ${iso}.`);
+  return ms;
+};
+var fmt = (ms) => new Date(ms).toISOString().slice(0, 10);
+var addDays = (iso, n) => fmt(parseDate(iso) + n * DAY_MS);
+var localDate = (ms, offsetMinutes) => fmt(Math.floor((ms + offsetMinutes * 6e4) / DAY_MS) * DAY_MS);
+var ERA_DAYS = 292207;
+var ERA_HORAKHUN = 373;
+var KAMMACUBALA_DAILY = 800;
+var ERA_AVOMAN = 650;
+var CYCLE_SOLAR = 692;
+var CYCLE_DAILY = 11;
+function suriya(ceYear) {
+  const cs = ceYear - 638;
+  const a = cs * ERA_DAYS + ERA_HORAKHUN;
+  const horakhun = Math.floor(a / KAMMACUBALA_DAILY + 1);
+  const kammacubala = KAMMACUBALA_DAILY - a % KAMMACUBALA_DAILY;
+  const b = horakhun * CYCLE_DAILY + ERA_AVOMAN;
+  const avoman = b % CYCLE_SOLAR;
+  const tithi = (Math.floor(b / CYCLE_SOLAR) + horakhun) % 30;
+  return { kammacubala, avoman, tithi };
+}
+var wouldBeAdhikamasa = (y) => {
+  const t = suriya(y).tithi;
+  return t >= 24 && t <= 29 || t >= 0 && t <= 5;
+};
+var isAdhikamasa = (y) => wouldBeAdhikamasa(y) && !wouldBeAdhikamasa(y + 1);
+var wouldBeAdhikavara = (y) => {
+  const s = suriya(y);
+  return s.kammacubala <= 207 ? s.avoman <= 126 : s.avoman < 137;
+};
+var isAdhikavara = (y) => !isAdhikamasa(y) && (isAdhikamasa(y - 1) && wouldBeAdhikavara(y - 1) || wouldBeAdhikavara(y));
+function thaiYearType(y) {
+  return isAdhikamasa(y) ? "adhikamasa" : isAdhikavara(y) ? "adhikavara" : "common";
+}
+var thaiYearLength = (y) => 354 + (isAdhikamasa(y) ? 30 : isAdhikavara(y) ? 1 : 0);
+var KATTIKA_EPOCH = { year: 2015, date: "2015-11-25" };
+var kattikaCache = /* @__PURE__ */ new Map();
+function kattika(y) {
+  if (kattikaCache.has(y)) return kattikaCache.get(y);
+  let date3 = KATTIKA_EPOCH.date;
+  if (y >= KATTIKA_EPOCH.year) for (let i = KATTIKA_EPOCH.year + 1; i <= y; i++) date3 = addDays(date3, thaiYearLength(i));
+  else for (let i = KATTIKA_EPOCH.year; i > y; i--) date3 = addDays(date3, -thaiYearLength(i));
+  kattikaCache.set(y, date3);
+  return date3;
+}
+var THAI_MONTHS = { 1: "Magasira", 2: "Phussa", 3: "M\u0101gha", 4: "Phaggu\u1E47a", 5: "Citta", 6: "Vis\u0101kha", 7: "Je\u1E6D\u1E6Dha", 8: "\u0100s\u0101\u1E37ha", 9: "Sava\u1E47a", 10: "Bhaddap\u0101da", 11: "Assayuja", 12: "Kattika" };
+function thaiMonths(y) {
+  const adhikamasa = isAdhikamasa(y), adhikavara = isAdhikavara(y);
+  const months = [];
+  let day = addDays(kattika(y - 1), 16);
+  for (const m of [1, 2, 3, 4, 5, 6, 7, 8, ...adhikamasa ? ["8b"] : [], 9, 10, 11, 12]) {
+    let length = m === "8b" ? 30 : m % 2 ? 29 : 30;
+    if (m === 7 && adhikavara) length = 30;
+    months.push({ year: y, month: m === "8b" ? 8 : m, second: m === "8b", name: m === "8b" ? "2nd \u0100s\u0101\u1E37ha" : THAI_MONTHS[m], start: day, length });
+    day = addDays(day, length);
+  }
+  return months;
+}
+function thaiYearOf(iso) {
+  const y = +iso.slice(0, 4);
+  return iso > addDays(kattika(y), 15) ? y + 1 : y;
+}
+var MM_SY = 1577917828 / 432e4;
+var MM_LM = 1577917828 / 53433336;
+var MM_MO = 1954168050623e-6;
+var MYANMAR_MONTHS = { 0: "First Waso", 1: "Tagu", 2: "Kason", 3: "Nayon", 4: "Waso", 5: "Wagaung", 6: "Tawthalin", 7: "Thadingyut", 8: "Tazaungmon", 9: "Nadaw", 10: "Pyatho", 11: "Tabodwe", 12: "Tabaung", 13: "Late Tagu", 14: "Late Kason" };
+function mmConst(my) {
+  if (my < 1217) throw new Error("The Burmese calendar is computed only from 1312 ME (1950 CE).");
+  const third = my >= 1312;
+  let WO = third ? -0.5 : -1, EW = 0;
+  const fme = third ? [[1377, 1]] : [[1234, 1], [1261, -1]];
+  const wte = third ? [1344, 1345] : [1263, 1264];
+  for (const [y, o] of fme) if (y === my) WO += o;
+  if (wte.includes(my)) EW = 1;
+  return { WO, NM: third ? 8 : 4, EW };
+}
+function mmWatat(my) {
+  const c = mmConst(my);
+  const TA = (MM_SY / 12 - MM_LM) * (12 - c.NM);
+  let ed = MM_SY * (my + 3739) % MM_LM;
+  if (ed < TA) ed += MM_LM;
+  const fm = Math.round(MM_SY * my + MM_MO - ed + 4.5 * MM_LM + c.WO);
+  const TW = MM_LM - (MM_SY / 12 - MM_LM) * c.NM;
+  return { fm, watat: (ed >= TW ? 1 : 0) ^ c.EW };
+}
+function mmYear(my) {
+  const y2 = mmWatat(my);
+  let myt = y2.watat, yd = 0, y1;
+  do {
+    yd++;
+    y1 = mmWatat(my - yd);
+  } while (y1.watat === 0 && yd < 3);
+  if (myt) myt = Math.floor((y2.fm - y1.fm) % 354 / 31) + 1;
+  return { myt, tg1: y1.fm + 354 * yd - 102 };
+}
+function myanmarDate(jdn) {
+  const my = Math.floor((jdn - 0.5 - MM_MO) / MM_SY);
+  const yo = mmYear(my);
+  let dd = jdn - yo.tg1 + 1;
+  const b = Math.floor(yo.myt / 2), c = Math.floor(1 / (yo.myt + 1));
+  const myl = 354 + (1 - c) * 30 + b;
+  const mmt = Math.floor((dd - 1) / myl);
+  dd -= mmt * myl;
+  const a = Math.floor((dd + 423) / 512);
+  let mm = Math.floor((dd - b * a + c * a * 30 + 29.26) / 29.544);
+  const e = Math.floor((mm + 12) / 16), f = Math.floor((mm + 11) / 16);
+  const md = dd - Math.floor(29.544 * mm - 29.26) - b * e + c * f * 30;
+  mm += f * 3 - e * 4 + 12 * mmt;
+  return { my, mm, md, myt: yo.myt };
+}
+var mmMonthLength = (mm, myt) => 30 - mm % 2 + (mm === 3 ? Math.floor(myt / 2) : 0);
+var isoToJdn = (iso) => Math.round(msToJd(parseDate(iso)) + 0.5);
+function myanmarDay(iso) {
+  const d = myanmarDate(isoToJdn(iso));
+  const len = mmMonthLength(d.mm, d.myt);
+  const base = d.mm >= 13 ? d.mm - 12 : d.mm;
+  return { ...d, length: len, name: MYANMAR_MONTHS[d.mm], base };
+}
+var PAK_JDN_OFFSET = 2355147;
+var PAK_DAYS_IN_CYCLE = 289577;
+var PAK_LAYOUT = [
+  [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]],
+  [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]],
+  [[1, 1, 1, 1, 1, 1, 0], [1, 1, 1, 1, 1, 0]],
+  [[0, 0, 0, 1], [0, 0, 1]],
+  [[1, 1, 1, 1, 0], [1, 1, 1, 0]]
+];
+function pakkhaDay(jdn) {
+  const horakhun = jdn - PAK_JDN_OFFSET;
+  if (horakhun <= 0) throw new Error("Before the Pakkhaga\u1E47an\u0101 epoch (1736).");
+  let days = horakhun % PAK_DAYS_IN_CYCLE;
+  if (days === 0) days = PAK_DAYS_IN_CYCLE;
+  const cycle = Math.ceil(horakhun / PAK_DAYS_IN_CYCLE);
+  const div = (a, b) => {
+    let c = 0;
+    while (b < a) {
+      a -= b;
+      c++;
+    }
+    return [c + 1, a];
+  };
+  const data2 = [];
+  let rem;
+  [data2[0], rem] = div(days, 16168);
+  let maha = PAK_LAYOUT[0][0][data2[0] - 1];
+  for (const [row, divisor] of [[1, 1447], [2, 251], [3, 59], [4, 15]]) {
+    [data2[row], rem] = div(rem, divisor);
+    let next = PAK_LAYOUT[row][1 - maha][data2[row] - 1];
+    if (next === void 0) {
+      data2[row] -= 1;
+      rem += divisor;
+      next = PAK_LAYOUT[row][1 - maha][data2[row] - 1];
+    }
+    maha = next;
+  }
+  const pakkhagen = (cycle - 1) * 19612 + (data2[0] - 1) * 1095 + (data2[1] - 1) * 98 + (data2[2] - 1) * 17 + (data2[3] - 1) * 4 + data2[4];
+  return { day: rem, fortnightLength: maha ? 15 : 14, waxing: pakkhagen % 2 === 0 };
+}
+function moonLongitude(ms) {
+  const T = (msToJd(ms) + deltaT(1970 + ms / (365.2425 * DAY_MS)) / 86400 - 2451545) / 36525;
+  const Lp = 218.3164477 + 481267.88123421 * T - 15786e-7 * T * T;
+  const D = (297.8501921 + 445267.1114034 * T - 18819e-7 * T * T) * rad;
+  const M = (357.5291092 + 35999.0502909 * T - 1536e-7 * T * T) * rad;
+  const Mp = (134.9633964 + 477198.8675055 * T + 87414e-7 * T * T) * rad;
+  const F = (93.272095 + 483202.0175233 * T - 36539e-7 * T * T) * rad;
+  const E = 1 - 2516e-6 * T - 74e-7 * T * T;
+  const s = Math.sin;
+  const sum = 6.288774 * s(Mp) + 1.274027 * s(2 * D - Mp) + 0.658314 * s(2 * D) + 0.213618 * s(2 * Mp) - 0.185116 * E * s(M) - 0.114332 * s(2 * F) + 0.058793 * s(2 * D - 2 * Mp) + 0.057066 * E * s(2 * D - M - Mp) + 0.053322 * s(2 * D + Mp) + 0.045758 * E * s(2 * D - M) - 0.040923 * E * s(M - Mp) - 0.03472 * s(D) - 0.030383 * E * s(M + Mp) + 0.015327 * s(2 * D - 2 * F) - 0.012528 * s(Mp + 2 * F) + 0.01098 * s(Mp - 2 * F) + 0.010675 * s(4 * D - Mp) + 0.010034 * s(3 * Mp) + 8548e-6 * s(4 * D - 2 * Mp) - 7888e-6 * E * s(2 * D + M - Mp) - 6766e-6 * E * s(2 * D + M) - 5163e-6 * s(D - Mp) + 4987e-6 * E * s(D + M) + 4036e-6 * E * s(2 * D - M + Mp) + 3958e-6 * s((119.75 + 131.849 * T) * rad) + 1962e-6 * s(Lp * rad - F) + 318e-6 * s((53.09 + 479264.29 * T) * rad);
+  return ((Lp + sum) % 360 + 360) % 360;
+}
+var elongation = (ms) => ((moonLongitude(ms) - sunLongitude(ms)) % 360 + 360) % 360;
+function elongationCrossing(deg, approxMs) {
+  let t = approxMs;
+  for (let i = 0; i < 12; i++) {
+    let e = elongation(t) - deg;
+    e = (e % 360 + 540) % 360 - 180;
+    if (Math.abs(e) < 1e-6) break;
+    t -= e / 12.190749 * DAY_MS;
+  }
+  return t;
+}
+var SL_EVENING_HOUR = 18;
+var SL_TITHI_END = { "waxing-half": 96, full: 180, "waning-half": 276, new: 360 };
+var SL_TITHI_NAME = { "waxing-half": "\u015Bukla a\u1E63\u1E6Dam\u012B (8)", full: "p\u016Br\u1E47im\u0101 (15)", "waning-half": "k\u1E5B\u1E63\u1E47a a\u1E63\u1E6Dam\u012B (23)", new: "am\u0101v\u0101sy\u0101 (30)" };
+function sriLankaDay(phase, approxMs) {
+  const end = elongationCrossing(SL_TITHI_END[phase] % 360, approxMs);
+  const start = elongationCrossing(SL_TITHI_END[phase] - 12, end - 0.95 * DAY_MS);
+  const off = TRADITIONS["sri-lanka"].utcOffsetMinutes * 6e4;
+  const endDay = Math.floor((end + off) / DAY_MS);
+  for (let day = endDay; day >= endDay - 1; day--) {
+    const evening = day * DAY_MS + SL_EVENING_HOUR * 36e5 - off;
+    if (evening >= start && evening < end) return { date: fmt(day * DAY_MS), start, end };
+  }
+  return { date: fmt(endDay * DAY_MS), start, end };
+}
+var SRI_LANKA_MONTHS = ["Bak", "Vesak", "Poson", "Esala", "Nikini", "Binara", "Vap", "Il", "Unduvap", "Duruthu", "Navam", "Medin"];
+var SANSKRIT_MONTHS = ["Caitra", "Vai\u015B\u0101kha", "Jye\u1E63\u1E6Dha", "\u0100\u1E63\u0101\u1E0Dha", "\u015Ar\u0101va\u1E47a", "Bh\u0101drapada", "\u0100\u015Bvina", "K\u0101rttika", "M\u0101rga\u015B\u012Br\u1E63a", "Pau\u1E63a", "M\u0101gha", "Ph\u0101lguna"];
+var siderealSign = (ms) => Math.floor(((sunLongitude(ms) - lahiriAyanamsa(ms)) % 360 + 360) % 360 / 30);
+function sriLankaDays(fromMs, toMs) {
+  const phases = moonPhases(fromMs - 40 * DAY_MS, toMs + 40 * DAY_MS);
+  const news = phases.filter((p) => p.phase === "new");
+  const map = { new: "new", "first-quarter": "waxing-half", full: "full", "last-quarter": "waning-half" };
+  const out = [];
+  for (const p of phases) {
+    if (p.instant < fromMs - 2 * DAY_MS || p.instant >= toMs + 2 * DAY_MS) continue;
+    const phase = map[p.phase];
+    const opening = news.filter((n) => n.instant < p.instant - (p.phase === "new" ? DAY_MS : 0)).at(-1);
+    const closing = opening && news.find((n) => n.instant > opening.instant + DAY_MS);
+    if (!opening || !closing) continue;
+    const s1 = siderealSign(opening.instant), s2 = siderealSign(closing.instant);
+    const idx = (s1 + 1) % 12;
+    const adhi = s1 === s2;
+    const day = sriLankaDay(phase, p.instant);
+    out.push({
+      date: day.date,
+      phase,
+      lunar_day: SL_TITHI_NAME[phase],
+      lunar_month_name: `${adhi ? "Adhi " : ""}${SRI_LANKA_MONTHS[idx]}`,
+      lunar_month_sanskrit: `${adhi ? "Adhika " : ""}${SANSKRIT_MONTHS[idx]}`,
+      tithi_utc: { start: new Date(day.start).toISOString().slice(0, 16) + "Z", end: new Date(day.end).toISOString().slice(0, 16) + "Z" }
+    });
+  }
+  return out;
+}
+var PHASE_LABEL = { "waxing-half": "Waxing half moon (8th)", full: "Full moon", "waning-half": "Waning half moon (8th)", new: "New moon" };
+var WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+function mahanikayaDays(from, to) {
+  const out = [];
+  for (let y = thaiYearOf(from); y <= thaiYearOf(to); y++) {
+    for (const mo of thaiMonths(y)) {
+      const month = { lunar_month: mo.second ? "8 (second \u0100s\u0101\u1E37ha)" : String(mo.month), lunar_month_name: mo.name, lunar_year_type: thaiYearType(y) };
+      out.push({ date: addDays(mo.start, 7), phase: "waxing-half", lunar_day: "waxing 8", ...month });
+      out.push({ date: addDays(mo.start, 14), phase: "full", lunar_day: "waxing 15", ...month });
+      out.push({ date: addDays(mo.start, 22), phase: "waning-half", lunar_day: "waning 8", ...month });
+      out.push({ date: addDays(mo.start, mo.length - 1), phase: "new", lunar_day: `waning ${mo.length - 15}`, ...month });
+    }
+  }
+  return out.filter((d) => d.date >= from && d.date <= to);
+}
+var closest = (days, phase, ms) => days.filter((d) => d.phase === phase).sort((a, b) => Math.abs(parseDate(a.date) - ms) - Math.abs(parseDate(b.date) - ms))[0];
+function dhammayutDays(from, to) {
+  const mn = mahanikayaDays(addDays(from, -3), addDays(to, 3));
+  const out = [];
+  for (let ms = parseDate(from); ms <= parseDate(to); ms += DAY_MS) {
+    const p = pakkhaDay(Math.round(msToJd(ms) + 0.5));
+    if (p.day !== 8 && p.day !== p.fortnightLength) continue;
+    const phase = p.day === 8 ? p.waxing ? "waxing-half" : "waning-half" : p.waxing ? "full" : "new";
+    const day = { date: fmt(ms), phase, lunar_day: `${p.waxing ? "waxing" : "waning"} ${p.day}`, fortnight_days: p.fortnightLength };
+    const twin = closest(mn, phase, ms);
+    if (twin) Object.assign(day, { lunar_month: twin.lunar_month, lunar_month_name: twin.lunar_month_name, mahanikaya_date: twin.date });
+    out.push(day);
+  }
+  return out;
+}
+function myanmarDays(from, to) {
+  const out = [];
+  for (let ms = parseDate(from); ms <= parseDate(to); ms += DAY_MS) {
+    const d = myanmarDay(fmt(ms));
+    const phase = d.md === 8 ? "waxing-half" : d.md === 15 ? "full" : d.md === 23 ? "waning-half" : d.md === d.length ? "new" : null;
+    if (!phase) continue;
+    out.push({
+      date: fmt(ms),
+      phase,
+      lunar_day: d.md <= 15 ? `waxing ${d.md}` : `waning ${d.md - 15}`,
+      lunar_month: String(d.mm),
+      lunar_month_name: d.name,
+      myanmar_year: d.my,
+      myanmar_year_type: ["common", "little watat", "big watat"][d.myt]
+    });
+  }
+  return out;
+}
+var sriLankaDaysIn = (from, to) => sriLankaDays(parseDate(from), parseDate(to) + DAY_MS).filter((d) => d.date >= from && d.date <= to);
+var GENERATORS = { "thai-mahanikaya": mahanikayaDays, "thai-dhammayut": dhammayutDays, myanmar: myanmarDays, "sri-lanka": sriLankaDaysIn };
+var UPOSATHA_TEXTS = [
+  { citation: "Kd 2", role: "Uposathakkhandhaka (Mah\u0101vagga 2): the Vinaya rules for the monastic uposatha and the recitation of the P\u0101\u1E6Dimokkha.", basis: "canonical" },
+  { citation: "AN 3.70", role: "Uposathasutta: the Buddha to Vis\u0101kh\u0101 on kinds of uposatha observance.", basis: "canonical" },
+  { citation: "AN 8.41", role: "Sa\u1E45khitt\u016Bposathasutta: the uposatha with eight factors kept by lay followers.", basis: "canonical" }
+];
+var FESTIVALS = {
+  "magha-puja": {
+    name: "M\u0101gha P\u016Bj\u0101",
+    texts: [
+      { citation: "DN 14", role: "Mah\u0101pad\u0101nasutta, which contains the Ov\u0101da-p\u0101\u1E6Dimokkha verses.", basis: "canonical" },
+      { citation: "Dhp 183", role: "Ov\u0101da-p\u0101\u1E6Dimokkha verse.", basis: "canonical" },
+      { citation: "Dhp 184", role: "Ov\u0101da-p\u0101\u1E6Dimokkha verse.", basis: "canonical" },
+      { citation: "Dhp 185", role: "Ov\u0101da-p\u0101\u1E6Dimokkha verse.", basis: "canonical" }
+    ],
+    association: "Tradition (the commentaries) places the Buddha's teaching of the Ov\u0101da-p\u0101\u1E6Dimokkha to 1,250 arahants on the M\u0101gha full moon; the canonical texts do not give the date."
+  },
+  vesak: {
+    name: "Vesak (Vis\u0101kha P\u016Bj\u0101)",
+    texts: [
+      { citation: "MN 123", role: "Acchariyaabbhutasutta: the wonders at the Bodhisatta's birth.", basis: "canonical" },
+      { citation: "Ud 1.1", role: "Pa\u1E6Dhamabodhisutta: the Buddha just after the awakening.", basis: "canonical" },
+      { citation: "Kd 1", role: "Mah\u0101khandhaka (Mah\u0101vagga 1): opens with the weeks after the awakening.", basis: "canonical" },
+      { citation: "DN 16", role: "Mah\u0101parinibb\u0101nasutta: the Buddha's last days and final passing.", basis: "canonical" }
+    ],
+    association: "Tradition (the commentaries) places the birth, awakening and final passing on the Vis\u0101kha (Ves\u0101kha) full moon; the canonical texts do not give these dates."
+  },
+  "asalha-puja": {
+    name: "\u0100s\u0101\u1E37ha P\u016Bj\u0101",
+    texts: [
+      { citation: "SN 56.11", role: "Dhammacakkappavattanasutta: the first discourse, to the group of five at Isipatana.", basis: "canonical" },
+      { citation: "SN 22.59", role: "Anattalakkha\u1E47asutta: the discourse on not-self to the same five.", basis: "canonical" },
+      { citation: "Kd 1", role: "Mah\u0101khandhaka (Mah\u0101vagga 1): narrates the first discourse and the first ordinations.", basis: "canonical" }
+    ],
+    association: "Tradition (the commentaries) places the first discourse on the \u0100s\u0101\u1E37ha full moon; the canonical texts do not give the date."
+  },
+  "vassa-start": {
+    name: "Start of the Rains Retreat (Vassa)",
+    texts: [{ citation: "Kd 3", role: 'Vass\u016Bpan\u0101yikakkhandhaka (Mah\u0101vagga 3): the earlier rains residence begins the day after the \u0100s\u0101\u1E37ha full moon ("aparajjugat\u0101ya \u0101s\u0101\u1E37hiy\u0101 purimik\u0101 upagantabb\u0101"), the later one a month after.', basis: "canonical" }]
+  },
+  "vassa-end": {
+    name: "End of the Rains Retreat (Vassa)",
+    texts: [{ citation: "Kd 3", role: "Vass\u016Bpan\u0101yikakkhandhaka (Mah\u0101vagga 3): the rules of the rains residence.", basis: "canonical" }]
+  },
+  pavarana: {
+    name: "Pav\u0101ra\u1E47\u0101",
+    texts: [
+      { citation: "Kd 4", role: "Pav\u0101ra\u1E47\u0101kkhandhaka (Mah\u0101vagga 4): the invitation ceremony at the end of the rains.", basis: "canonical" },
+      { citation: "SN 8.7", role: "Pav\u0101ra\u1E47\u0101sutta: the Buddha's own Pav\u0101ra\u1E47\u0101 with five hundred monks on the fifteenth-day uposatha.", basis: "canonical" }
+    ]
+  },
+  "kathina-season": {
+    name: "Ka\u1E6Dhina season",
+    texts: [{ citation: "Kd 7", role: "Ka\u1E6Dhinakkhandhaka (Mah\u0101vagga 7): the ka\u1E6Dhina cloth for monks who have completed the rains.", basis: "canonical" }],
+    association: "Ka\u1E6Dhina is offered in the month after the rains: from the day after Pav\u0101ra\u1E47\u0101 to the next full moon."
+  }
+};
+function thaiFestivalDates(year, t) {
+  const months = thaiMonths(year);
+  const adhikamasa = isAdhikamasa(year);
+  const fm = (m, second = false) => {
+    const mo = months.find((x) => x.month === m && !!x.second === second);
+    return { date: addDays(mo.start, 14), lunar_date: `full moon (waxing 15) of month ${mo.second ? "8 (second \u0100s\u0101\u1E37ha)" : mo.month}, ${mo.name}` };
+  };
+  const base = { "magha-puja": fm(adhikamasa ? 4 : 3), vesak: fm(adhikamasa ? 7 : 6), "asalha-puja": fm(8, adhikamasa), pavarana: fm(11), kattika: fm(12) };
+  let pick2 = (x) => x;
+  if (t === "thai-dhammayut") {
+    const pool = dhammayutDays(`${year - 1}-12-01`, `${year}-12-31`);
+    pick2 = (x) => {
+      const d = closest(pool, "full", parseDate(x.date)).date;
+      return d === x.date ? x : { ...x, date: d, mahanikaya_date: x.date };
+    };
+  }
+  const res = { "magha-puja": pick2(base["magha-puja"]), vesak: pick2(base.vesak), "asalha-puja": pick2(base["asalha-puja"]), pavarana: pick2(base.pavarana) };
+  res["vassa-start"] = { date: addDays(res["asalha-puja"].date, 1), lunar_date: "waning 1 of the \u0100s\u0101\u1E37ha month (the day after \u0100s\u0101\u1E37ha P\u016Bj\u0101)" };
+  res["vassa-end"] = { date: res.pavarana.date, lunar_date: "Pav\u0101ra\u1E47\u0101 day: full moon of month 11 (Assayuja)" };
+  res["kathina-season"] = { start: addDays(res.pavarana.date, 1), end: pick2(base.kattika).date, lunar_date: "waning 1 of month 11 to the full moon of month 12 (Kattika)" };
+  const notes = [`Thai lunar year ${year} is ${thaiYearType(year)}${adhikamasa ? ": M\u0101gha and Vis\u0101kha P\u016Bj\u0101 move to months 4 and 7, and \u0100s\u0101\u1E37ha P\u016Bj\u0101 to the second month 8" : ""}.`];
+  return { res, notes };
+}
+function myanmarFestivalDates(year) {
+  const days = myanmarDays(`${year}-01-01`, `${year}-12-31`);
+  const fm = (m) => days.find((d) => d.phase === "full" && (+d.lunar_month >= 13 ? +d.lunar_month - 12 : +d.lunar_month) === m);
+  const kason = fm(2), waso = fm(4), thadingyut = fm(7), tazaungmon = fm(8);
+  const res = {
+    "magha-puja": { date: null, note: "Not computed for the Burmese calendar." },
+    vesak: kason && { date: kason.date, lunar_date: `full moon of ${kason.lunar_month_name}` },
+    "asalha-puja": waso && { date: waso.date, lunar_date: "full moon of (2nd) Waso" },
+    "vassa-start": waso && { date: addDays(waso.date, 1), lunar_date: "waning 1 of (2nd) Waso" },
+    pavarana: thadingyut && { date: thadingyut.date, lunar_date: "full moon of Thadingyut" },
+    "vassa-end": thadingyut && { date: thadingyut.date, lunar_date: "full moon of Thadingyut" },
+    "kathina-season": thadingyut && tazaungmon && { start: addDays(thadingyut.date, 1), end: tazaungmon.date, lunar_date: "waning 1 of Thadingyut to the full moon of Tazaungmon" }
+  };
+  const watat = days.some((d) => d.lunar_month === "0");
+  return { res, notes: watat ? ["This Burmese year has an intercalary First Waso (watat year); the Rains Retreat follows the second Waso."] : [] };
+}
+function sriLankaFestivalDates(year) {
+  const all = sriLankaDays(Date.UTC(year, 0, 1), Date.UTC(year + 1, 0, 1)).filter((d) => d.phase === "full" && d.date.startsWith(`${year}-`));
+  const poya = (name) => all.find((d) => d.lunar_month_name === name);
+  const navam = poya("Navam"), vesak = poya("Vesak"), esala = poya("Esala"), vap = poya("Vap"), il = poya("Il");
+  const res = {
+    "magha-puja": navam && { date: navam.date, lunar_date: "Navam full moon poya (the M\u0101gha month)" },
+    vesak: vesak && { date: vesak.date, lunar_date: "Vesak full moon poya" },
+    "asalha-puja": esala && { date: esala.date, lunar_date: "Esala full moon poya" },
+    "vassa-start": esala && { date: addDays(esala.date, 1), lunar_date: "the day after Esala poya" },
+    pavarana: vap && { date: vap.date, lunar_date: "Vap full moon poya" },
+    "vassa-end": vap && { date: vap.date, lunar_date: "Vap full moon poya" },
+    "kathina-season": vap && il && { start: addDays(vap.date, 1), end: il.date, lunar_date: "the day after Vap poya to Il poya" }
+  };
+  const notes = all.filter((d) => d.lunar_month_name.startsWith("Adhi ")).map((d) => `${d.date} is ${d.lunar_month_name} poya, an extra (adhi) month; festivals are kept in the regular month.`);
+  return { res, notes };
+}
+var DISCLAIMER = "Computed from the stated rule; not an official announcement. National authorities, Sangha bodies and individual monasteries publish the dates they keep, and these can differ, usually by one day.";
+var TRADITION_IDS = Object.keys(TRADITIONS);
+function traditionInfo(t) {
+  const info = TRADITIONS[t];
+  if (!info) throw new Error(`Unknown tradition "${t}". Use one of: ${TRADITION_IDS.join(", ")}.`);
+  const { utcOffsetMinutes, ...rest } = info;
+  return { id: t, ...rest };
+}
+function checkYear(y) {
+  if (!Number.isInteger(y) || y < 1950 || y > 2100) throw new Error("Years 1950\u20132100 are supported.");
+}
+function uposatha(from, to, t) {
+  const tradition = traditionInfo(t);
+  const a = parseDate(from), b = parseDate(to);
+  if (b < a) throw new Error('"to" must not be before "from".');
+  if ((b - a) / DAY_MS > 731) throw new Error("Ask for at most two years (731 days) at a time.");
+  checkYear(+from.slice(0, 4));
+  checkYear(+to.slice(0, 4));
+  const days = GENERATORS[t](from, to).map((d) => ({
+    date: d.date,
+    weekday: WEEKDAYS[new Date(parseDate(d.date)).getUTCDay()],
+    phase: d.phase,
+    label: PHASE_LABEL[d.phase],
+    ...d,
+    status: "computed"
+  }));
+  const notes = [];
+  if (t === "thai-dhammayut") {
+    const differ = days.filter((d) => d.mahanikaya_date && d.mahanikaya_date !== d.date).length;
+    notes.push(`${differ} of these ${days.length} days differ from the Thai Mah\u0101nik\u0101ya (civil calendar) day, which is given as mahanikaya_date.`);
+    notes.push('The Dhammayut lists published by Wat Metta follow this reckoning through April 2025 but give the Mah\u0101nik\u0101ya dates from May 2025 on (its 2026 list is "for both the Dhammayut Order and the Mah\u0101nik\u0101ya Order in Thailand"). Check the list your monastery publishes.');
+  }
+  if (t === "sri-lanka") notes.push("Only full-moon poya days are public holidays in Sri Lanka, and only they were checked against the government gazettes (2024\u20132026). New-moon and quarter-moon days use the same tithi rule but have not been checked against a published list.");
+  return { tradition, from, to, status: "computed", disclaimer: DISCLAIMER, days, notes, texts: UPOSATHA_TEXTS };
+}
+function festivals(year, t) {
+  const tradition = traditionInfo(t);
+  checkYear(year);
+  const { res, notes } = t === "myanmar" ? myanmarFestivalDates(year) : t === "sri-lanka" ? sriLankaFestivalDates(year) : thaiFestivalDates(year, t);
+  const list = Object.entries(FESTIVALS).map(([id, f]) => {
+    const r = res[id] || { date: null, note: "Not found in this year by the rule." };
+    return { id, name: f.name, ...r, status: r.date || r.start ? "computed" : "not computed", texts: f.texts, ...f.association ? { association: f.association } : {} };
+  });
+  return { year, tradition, status: "computed", disclaimer: DISCLAIMER, festivals: list, notes };
+}
+function resolveTexts(canon, texts) {
+  return texts.map((x) => {
+    const { unit } = canon.resolve(x.citation);
+    return { citation: x.citation, id: unit.id, title: unit.title, role: x.role, basis: x.basis };
+  });
+}
+function register({ tool, z, canon }) {
+  const date3 = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).describe("Date as YYYY-MM-DD (years 1950\u20132100).");
+  const tradition = z.enum(TRADITION_IDS).describe("thai-mahanikaya (Thai civil lunar calendar), thai-dhammayut (Pakkhaga\u1E47an\u0101), myanmar (Burmese calendar) or sri-lanka (poya days).");
+  tool("uposatha", "Uposatha (observance) days \u2014 full moon, new moon and the two half-moon days \u2014 between two dates for one Therav\u0101da tradition: Thai Mah\u0101nik\u0101ya, Thai Dhammayut, Myanmar or Sri Lanka. Each day gives its lunar month and lunar day. Dates are computed offline from the stated rule and labelled as computed, not official; local monasteries may keep a different day.", {
+    from: date3,
+    to: date3.describe('Last date, YYYY-MM-DD, at most 731 days after "from".'),
+    tradition
+  }, ({ from, to, tradition: t }) => {
+    const result = uposatha(from, to, t);
+    return { ...result, texts: resolveTexts(canon, result.texts) };
+  });
+  tool("festivals", "Dates of M\u0101gha P\u016Bj\u0101, Vesak (Vis\u0101kha P\u016Bj\u0101), \u0100s\u0101\u1E37ha P\u016Bj\u0101, the start and end of the Rains Retreat (Vassa), Pav\u0101ra\u1E47\u0101 and the Ka\u1E6Dhina season in one year for one tradition, with the canonical texts associated with each (for example SN 56.11 for \u0100s\u0101\u1E37ha P\u016Bj\u0101). Dates are computed offline and labelled as computed, not official.", {
+    year: z.number().int().min(1950).max(2100).describe("Gregorian year, 1950\u20132100."),
+    tradition
+  }, ({ year, tradition: t }) => {
+    const result = festivals(year, t);
+    return { ...result, festivals: result.festivals.map((f) => ({ ...f, texts: resolveTexts(canon, f.texts) })) };
+  });
+}
 
 // src/server.mjs
 var VERSION = "2.0.0";

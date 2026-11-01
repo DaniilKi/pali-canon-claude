@@ -29,7 +29,7 @@ async function fails(name, args, pattern) {
 try {
   await client.connect(transport);
   const { tools } = await client.listTools();
-  assert.equal(tools.length, 11);
+  assert.ok(tools.length >= 11); // core tools; optional features (src/features) add more
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint));
   assert.equal((await client.listResources()).resources.length, 2);
   assert.equal((await client.listPrompts()).prompts.length, 3);
@@ -51,6 +51,8 @@ try {
   await call('search_texts', { query: '"sabbe sankhara anicca"', collection: 'dhp' }, (d) => assert.ok(d.results.some((r) => r.id === 'dhp277')));
   for (const node of ['canon', 'vinaya', 'sn', 'sn56', 'abhidhamma']) await call('browse_canon', { node, limit: 3 });
   await call('list_sources', {});
+  await call('uposatha', { from: '2025-07-01', to: '2025-07-31', tradition: 'thai-mahanikaya' }, (d) => assert.ok(d.days.some((x) => x.date === '2025-07-10' && x.phase === 'full' && x.status === 'computed')));
+  await call('festivals', { year: 2025, tradition: 'sri-lanka' }, (d) => assert.equal(d.festivals.find((f) => f.id === 'asalha-puja').texts[0].id, 'sn56.11'));
   await fails('get_text', { uid: '../private' });
   await fails('resolve_reference', { reference: 'MN 153' }, /not in the canon index/);
   await fails('resolve_reference', { reference: 'Ja i 1' }, /no PTS page numbers/);
