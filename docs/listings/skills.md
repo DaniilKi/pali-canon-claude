@@ -8,12 +8,12 @@ Checked on 1 November 2026. Hubs change often; re-check each link before submitt
 
 ## What is ready in the repository
 
-- **The skill files follow the open Agent Skills format** ([agentskills.io/specification](https://agentskills.io/specification)). Each `skills/<name>/SKILL.md` has only the fields that format allows: `name`, `description`, `license`, `compatibility` and `metadata`. An automatic test (`tests/core.test.mjs`) checks this on every change.
+- **The skill files follow the open Agent Skills format** ([agentskills.io/specification](https://agentskills.io/specification)). Each `skills/<name>/SKILL.md` uses the fields that format allows (`name`, `description`, `license`, `compatibility` and `metadata`) plus one Claude Code field, `argument-hint`, explained below. An automatic test (`tests/core.test.mjs`) checks this on every change.
 - **Each skill states that it needs the MCP server**, in three places:
   - the end of its `description` ("Requires the Pali Canon MCP server.");
   - the `compatibility` field, with the install link;
   - the first instruction of the skill, which tells the AI to say so and point to the install page if the tools are missing, rather than answering from memory.
-- **The Claude Code slash-command hint** (for example `[Pali word] [optional sutta reference]`) now sits under `metadata.argument-hint`, because the shared format does not allow an `argument-hint` field at the top level. The skills still read the user's words through `$ARGUMENTS`.
+- **The Claude Code slash-command hint** (for example `[Pali word] [optional sutta reference]`) stays as a top-level `argument-hint` field, because Claude Code only reads it there and shows it in the slash menu. A copy also sits under `metadata.argument-hint`. The strict format checker (skills-ref) would flag the top-level field, but none of the hubs below run that checker. If a hub ever rejects it, removing the top-level line fixes that, at the cost of losing the hint in Claude Code.
 
 ## Text to use on every hub
 
@@ -60,8 +60,8 @@ What to enter:
 - **Repository:** `DaniilKi/pali-canon-claude`. **Plugin path:** leave empty (the plugin is at the repository root). **Branch or tag:** leave empty to follow `main`, or use the latest release tag.
 - **Listing details:** read from `.claude-plugin/plugin.json` and `README.md`; nothing to type. If the portal asks for a description, use the long description above.
 - **Data handling answers** (true for the current code):
-  - Reads or stores personal data: no. The server keeps nothing between requests.
-  - Sends data to other services: only the reference or word being looked up, sent read-only to the fixed list of sites in `src/http.mjs` (Access to Insight and its mirrors, dhammatalks.org, the Digital Pāḷi Dictionary). The Pāli text itself is offline.
+  - Reads or stores personal data: no. It stores no personal or user data; it only keeps public index pages from Access to Insight in memory while it runs.
+  - Sends data to other services: only reference paths (which page of a translation to fetch) and dictionary words go out, read-only, to the fixed list of sites in `src/http.mjs` (Access to Insight and its mirrors, dhammatalks.org, the Digital Pāḷi Dictionary). Search queries are not sent anywhere: `search_access_to_insight` downloads the public index pages and searches them on the user's computer. The Pāli text itself is offline.
   - Data retention: none.
   - Intended for people under 18: no (general audience, not aimed at children).
 - **Compliance:** a maintainer checks the contact email and reads and accepts the four acknowledgements. An agent must not accept these.
@@ -83,7 +83,7 @@ The first line should show `study`, `compare` and `pali-word`. Then check https:
 
 ### 3. SkillsMP
 
-SkillsMP is an independent search engine for public `SKILL.md` files on GitHub. We found no submission form; reviews say it indexes public repositories by itself, possibly only those with a few GitHub stars (unconfirmed). The site blocked automated checks, so a maintainer should search it for "pali" after the repository is public and has a release, and note here whether it is listed.
+SkillsMP is an independent search engine for public `SKILL.md` files on GitHub. We found no submission form; reviews say it indexes public repositories by itself, possibly only those with a few GitHub stars (unconfirmed). The site blocked automated checks, so a maintainer should search it for "pali" after the first GitHub release ([#2](https://github.com/DaniilKi/pali-canon-claude/issues/2)) is published, and note here whether it is listed.
 
 ### 4. claude-market/marketplace (skipped)
 

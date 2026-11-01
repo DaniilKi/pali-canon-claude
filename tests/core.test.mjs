@@ -157,7 +157,8 @@ test('skills follow the Agent Skills spec and declare the MCP server dependency'
   const names = readdirSync(dir, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
   assert.ok(names.length >= 3);
   // Field list from https://agentskills.io/specification (skills-ref rejects any other top-level key).
-  const ALLOWED = new Set(['name', 'description', 'license', 'compatibility', 'metadata', 'allowed-tools']);
+  // Plus argument-hint: a Claude Code extension it reads only at the top level (slash-menu hint); hubs do not run skills-ref.
+  const ALLOWED = new Set(['name', 'description', 'license', 'compatibility', 'metadata', 'allowed-tools', 'argument-hint']);
   const unquote = (v) => (/^".*"$/.test(v) ? JSON.parse(v) : v);
   for (const name of names) {
     const text = readFileSync(new URL(`${name}/SKILL.md`, dir), 'utf8').replace(/\r\n/g, '\n');
@@ -186,6 +187,8 @@ test('skills follow the Agent Skills spec and declare the MCP server dependency'
     assert.match(fm.description, /Requires the Pali Canon MCP server/);
     assert.match(fm.compatibility, /Pali Canon MCP server/);
     assert.equal(fm.metadata['requires-mcp-server'], 'pali-canon');
+    assert.ok(fm['argument-hint'], `${name}: top-level argument-hint for the Claude Code slash menu`);
+    assert.equal(fm['argument-hint'], fm.metadata['argument-hint']);
     assert.match(text.slice(m[0].length), /needs the Pali Canon MCP server/);
   }
 });

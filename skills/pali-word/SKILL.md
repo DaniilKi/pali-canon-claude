@@ -3,6 +3,7 @@ name: pali-word
 description: Explain a Pali word with dictionary evidence and its usage in cited canonical passages. Use for Pali vocabulary, diacritics, meanings, grammatical forms and translation choices. Requires the Pali Canon MCP server.
 license: MIT
 compatibility: "Requires the Pali Canon MCP server (pali-canon-claude), installed as the Claude Code plugin, the Claude Desktop extension or any MCP client: https://github.com/DaniilKi/pali-canon-claude#install. The Pali text works offline; dictionary and English translations need network access."
+argument-hint: "[Pali word] [optional sutta reference]"
 metadata:
   argument-hint: "[Pali word] [optional sutta reference]"
   requires-mcp-server: pali-canon

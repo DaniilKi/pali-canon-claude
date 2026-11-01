@@ -3,6 +3,7 @@ name: compare
 description: Compare English translations of a Pali sutta against the Pali text, preserving translator, numbering and interpretive differences. Requires the Pali Canon MCP server.
 license: MIT
 compatibility: "Requires the Pali Canon MCP server (pali-canon-claude), installed as the Claude Code plugin, the Claude Desktop extension or any MCP client: https://github.com/DaniilKi/pali-canon-claude#install. The Pali text works offline; dictionary and English translations need network access."
+argument-hint: "[reference] [translators or comparison question]"
 metadata:
   argument-hint: "[reference] [translators or comparison question]"
   requires-mcp-server: pali-canon
