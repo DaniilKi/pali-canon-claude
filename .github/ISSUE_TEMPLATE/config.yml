@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security problem (please report privately)
+    url: https://github.com/DaniilKi/pali-canon-claude/security/advisories/new
+    about: Report a vulnerability privately. Do not post security details in a public issue. See SECURITY.md.
+  - name: Privacy policy and terms of use
+    url: https://github.com/DaniilKi/pali-canon-claude/blob/main/PRIVACY.md
+    about: What the tool collects (nothing on your computer; only aggregate counts when hosted).
+  - name: How to contribute
+    url: https://github.com/DaniilKi/pali-canon-claude/blob/main/CONTRIBUTING.md
+    about: Ways to help, with or without programming.
