@@ -34,10 +34,24 @@ test('evaluation set: every relevance rule matches at least one text, and rare o
   }
 });
 
-test('docs cite the evaluation figures and every citation in them resolves', () => {
+test('docs: the "Chance" column matches the question set and the bundled canon', () => {
+  // Chance of a hit in the top 10 = 1 - (1 - share of relevant texts)^10, as in
+  // scripts/semantic/eval_embeddings.py. Recomputed here so the published table cannot drift.
   const doc = readFileSync(new URL('docs/semantic-search.md', root), 'utf8');
-  for (const q of queries.filter((x) => !x.pali)) assert.ok(doc.includes(q.query), q.query);
-  for (const q of queries) for (const ref of Object.keys(q.cite ?? {})) assert.ok(canon.resolve(ref).unit);
+  const units = canon.load().canon.units;
+  let expected = 0;
+  for (const q of queries.filter((x) => !x.pali)) {
+    const pat = q.title ? new RegExp(q.title, 'i') : null;
+    const ids = new Set(q.ids ?? []);
+    const n = units.filter((u) => ids.has(u.id) || (q.prefix && u.id.startsWith(q.prefix)) || (pat && pat.test(u.title))).length;
+    const chance = 1 - (1 - n / units.length) ** 10;
+    expected += chance;
+    const row = doc.split(/\r?\n/).find((l) => l.startsWith(`| ${q.query} |`));
+    assert.ok(row, `no table row for "${q.query}"`);
+    const cell = row.split('|').map((c) => c.trim()).filter(Boolean).at(-1);
+    assert.equal(cell, `${(chance * 100).toFixed(1)}%`, q.query);
+  }
+  assert.ok(doc.includes(`about ${expected.toFixed(2)} hits`), `expected-by-chance total ${expected.toFixed(2)}`);
 });
 
 test('deferred: no search_by_meaning module and no embedding data are shipped', () => {

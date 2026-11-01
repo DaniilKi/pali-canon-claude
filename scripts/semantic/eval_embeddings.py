@@ -4,15 +4,19 @@ produces is shipped. See docs/semantic-search.md for the results and the decisio
 
 Usage (models downloaded by hand from Hugging Face into <models>/<org>/<name>/):
   python -I scripts/semantic/eval_embeddings.py <models dir> [potion] [minilm] [multi]
+Files needed (each under 200 MB):
+  potion  minishlab/potion-base-8M/                              model.safetensors, tokenizer.json
+  minilm  sentence-transformers/all-MiniLM-L6-v2/                model.safetensors, tokenizer.json
+  multi   sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/  onnx/model_qint8_avx512.onnx, tokenizer.json
 Needs numpy, tokenizers, safetensors; torch + transformers for minilm; onnxruntime for multi.
+Each text is embedded as (title + '. ' + text)[:600], so the title counts toward the 600.
 """
 import gzip, json, re, sys, time, os
 import numpy as np
 from tokenizers import Tokenizer
 
-sys.stdout.reconfigure(encoding='utf-8')
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-S = sys.argv[1]
+S = None  # models folder, set from argv in main()
 SKIP = {'title', 'chapter', 'nikaya', 'book', 'subhead'}
 
 def load_units():
@@ -30,8 +34,11 @@ def relevance(q):
     ids, prefix = set(q.get('ids', [])), q.get('prefix')
     return lambda i, t: i in ids or (prefix and i.startswith(prefix)) or (pat and pat.search(t))
 
-units = load_units()
-Q = [(q['query'], relevance(q)) for q in json.load(open(os.path.join(ROOT, 'scripts', 'semantic', 'queries.json'), encoding='utf-8'))['queries']]
+def load_queries():
+    with open(os.path.join(ROOT, 'scripts', 'semantic', 'queries.json'), encoding='utf-8') as f:
+        return [(q['query'], relevance(q)) for q in json.load(f)['queries']]
+
+units, Q = [], []
 
 def doc(u): return (u['title'] + '. ' + u['text'])[:600]
 
@@ -108,8 +115,16 @@ def evaluate(label, enc):
     print(f'\n## {label}: hit@10 {hits}/{n}, MRR@10 {mrr/n:.2f}, encode {len(units)} docs {t:.0f}s, dims {D.shape[1]}')
     for q, r, rnd, top in rows: print(f'  {q!r:55} rank={r} random@10={rnd} top3={top}')
 
-if __name__ == '__main__':
+def main():
+    global S, units, Q
+    sys.stdout.reconfigure(encoding='utf-8')
+    if len(sys.argv) < 2: sys.exit(__doc__)
+    S = sys.argv[1]
+    units, Q = load_units(), load_queries()
     which = sys.argv[2:] or ['potion', 'minilm', 'multi']
     if 'potion' in which: evaluate('potion-base-8M (static, MIT)', potion('minishlab/potion-base-8M')[0])
     if 'minilm' in which: evaluate('all-MiniLM-L6-v2 (Apache-2.0)', minilm_torch('sentence-transformers/all-MiniLM-L6-v2')[0])
     if 'multi' in which: evaluate('paraphrase-multilingual-MiniLM-L12-v2 qint8 (Apache-2.0)', onnx_model('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2', 'model_qint8_avx512.onnx')[0])
+
+if __name__ == '__main__':
+    main()
