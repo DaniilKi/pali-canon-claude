@@ -29,6 +29,9 @@ The `reading_plan` tool's study-guide plans list, in order, the texts cited by t
 ## Numbered lists (bundled)
 
 `server/data/dhamma_lists.json` is this project's own curation (MIT): list names, Pāli member names as they appear in the VRI text, short English glosses written for the index, and citations. The Pāli passages themselves come from the bundled VRI text under VRI's terms.
+## Ancient Buddhist Texts (Ānandajoti Bhikkhu)
+
+Text-and-translation pages are fetched live from the "Texts and Translations" section of [ancient-buddhist-texts.net](https://ancient-buddhist-texts.net/Texts-and-Translations/index.htm), edited and translated by Ānandajoti Bhikkhu. The site's [Copyright Notice](https://ancient-buddhist-texts.net/Miscellaneous/Copyright-Notice.htm) (May 2013) places the introductions, translations, studies and notes under the [Creative Commons Attribution-ShareAlike 3.0 Unported](https://creativecommons.org/licenses/by-sa/3.0/) licence, attribution to Ānandajoti Bhikkhu; the site's page footers now link [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The same notice says the Pāli of several of these editions derives from the Sri Lanka Tripitaka Project's Buddha Jayanti databases, which it describes as public domain. Works the notice lists as copyright of others (for example PTS editions used by permission) are not fetched. The bundled index `server/data/anandajoti.json` stores page paths, the site's references, English titles and match scores only.
 
 ## Digital Pāḷi Dictionary
 

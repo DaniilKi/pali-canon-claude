@@ -35,6 +35,41 @@ export const fold = (value) => String(value ?? '').normalize('NFD').replace(/\p{
 
 let data = null;
 
+/** Ānandajoti Bhikkhu's text-and-translation pages (server/data/anandajoti.json, built by scripts/anandajoti/build.mjs). */
+export const ANANDAJOTI_BASE = 'https://ancient-buddhist-texts.net';
+export const ANANDAJOTI_LICENSE = 'CC BY-SA 3.0 — Ānandajoti Bhikkhu, Ancient Buddhist Texts (ancient-buddhist-texts.net). The site’s Copyright Notice (2013) gives CC BY-SA 3.0 Unported; its page footers link CC BY-SA 4.0. Share-alike: reuse must keep the same licence and credit Ānandajoti Bhikkhu.';
+let anandajotiSource = null;
+
+function mergeAnandajoti(translations) {
+  let file;
+  try { file = dataPath('anandajoti.json'); } catch { return; }
+  const aj = JSON.parse(readFileSync(file, 'utf8'));
+  anandajotiSource = aj.source;
+  for (const [id, l] of Object.entries(aj.links)) {
+    (translations[id] ||= []).push({
+      source: 'anandajoti', url: ANANDAJOTI_BASE + l.path, path: l.path, ...(l.parts ? { parts: l.parts } : {}),
+      translator: 'Ānandajoti Bhikkhu', english: l.title || undefined, reference: l.reference, license: 'CC BY-SA 3.0',
+      match: l.match, ...(l.commentary ? { commentary: true } : {}),
+    });
+  }
+}
+
+/** Metadata of the Ānandajoti index (licence, policy, date checked), or null when the data file is absent. */
+export function anandajotiInfo() {
+  load();
+  return anandajotiSource;
+}
+
+const SOURCE_NAMES = { dhammatalks: 'dhammatalks.org', ati: 'Access to Insight', anandajoti: 'Ancient Buddhist Texts (Ānandajoti Bhikkhu)' };
+/** Display name of a translation link's source. */
+export const sourceName = (t) => SOURCE_NAMES[t.source] || t.source;
+/** Stable translation_id of a link: dt:<path>, ati:<path> or aj:<path>. */
+export function translationId(t) {
+  if (t.source === 'ati') return `ati:${t.path}`;
+  if (t.source === 'anandajoti') return `aj:${t.path.replace(/^\/Texts-and-Translations\//, '').replace(/\.htm$/, '')}`;
+  return `dt:${t.url.split('/suttas/')[1].replace(/\.html$/, '')}`;
+}
+
 function dataPath(name) {
   const candidates = [join(here, 'data', name), join(here, '..', 'server', 'data', name), join(process.cwd(), 'server', 'data', name)];
   const found = candidates.find((p) => existsSync(p));
@@ -46,6 +81,7 @@ export function load() {
   if (data) return data;
   const canon = JSON.parse(gunzipSync(readFileSync(dataPath('canon.json.gz'))).toString('utf8'));
   const translations = JSON.parse(readFileSync(dataPath('translations.json'), 'utf8'));
+  mergeAnandajoti(translations);
   const byId = new Map();
   for (const u of canon.units) if (!byId.has(u.id)) byId.set(u.id, u);
   const ranges = [];
@@ -57,6 +93,8 @@ export function load() {
   for (const [id, links] of Object.entries(translations)) {
     for (const link of links) {
       if (link.url) urlIndex.set(link.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\.html?$/, ''), id);
+      // A work spread over several pages (e.g. DN 16 on Ancient Buddhist Texts): each part page cites the work.
+      for (const part of link.parts || []) urlIndex.set(`ancient-buddhist-texts.net${part}`.replace(/\.html?$/, ''), id);
     }
   }
   data = { canon, byId, ranges, translations, urlIndex, search: null };
@@ -168,7 +206,9 @@ export function resolve(reference) {
     const key = `${c.host}${c.path}`;
     const id = d.urlIndex.get(key) || d.urlIndex.get(key.replace(/^accesstoinsight\.org/, 'accesstoinsight.org'));
     if (!id) throw new CitationError('That page is not linked to a canon text in the bundled index. Give the sutta citation instead.');
-    notes.push(`Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id}.`);
+    notes.push(c.host === 'ancient-buddhist-texts.net'
+      ? `Linked from ${c.host}: Ānandajoti Bhikkhu's text and translation of ${id}.`
+      : `Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id}.`);
     return { unit: d.byId.get(id), notes, alternatives: [] };
   }
   const id = c.kind === 'uid' ? c.uid : citationId(c);
@@ -257,11 +297,12 @@ export function describe(u, notes = []) {
   const { links: own, via } = linksFor(u);
   if (via) notes = [...notes, `English translations are of the whole ${via.acronym} (${via.title}); this text is part of it.`];
   const english = own.map((t) => ({
-    source: t.source === 'ati' ? 'Access to Insight' : 'dhammatalks.org',
+    source: sourceName(t),
     translator: t.translator, reference: t.reference || undefined, url: t.url,
     ...(t.license ? { license: t.license } : {}),
-    translation_id: t.source === 'ati' ? `ati:${t.path}` : `dt:${t.url.split('/suttas/')[1].replace(/\.html$/, '')}`,
+    translation_id: translationId(t),
     match: t.match,
+    ...(t.commentary ? { includes_commentary: true } : {}),
   }));
   const blocks = bookBlocks(u);
   const book = d.canon.books[u.book];
