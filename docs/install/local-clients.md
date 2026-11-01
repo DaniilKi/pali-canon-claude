@@ -29,6 +29,7 @@ The server has 11 tools. Six of them work without internet (`get_text` needs it 
 | `lookup_pali` | Looks a word up in the Digital Pāḷi Dictionary | Yes |
 | `search_access_to_insight` | Searches Access to Insight's indexes | Yes |
 | `get_access_to_insight_text` | Reads an Access to Insight page | Yes |
+| `find_talks` | Finds Dhamma talks by Ṭhānissaro Bhikkhu on dhammatalks.org by topic or passage (titles, dates and links only) | Yes |
 
 With no connection, the online tools return a clear error and the offline ones keep working. The server never sends your questions anywhere: the online tools only fetch pages from a short, fixed list of sites (see [Sources](../sources.md)).
 

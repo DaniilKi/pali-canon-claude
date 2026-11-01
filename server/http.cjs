@@ -24955,6 +24955,14 @@ function listSources() {
         fallback: "\u1E6Ch\u0101nissaro's earlier versions on Access to Insight."
       },
       {
+        id: "dhammatalks-talks",
+        name: "dhammatalks.org \u2014 Dhamma talks by \u1E6Ch\u0101nissaro Bhikkhu",
+        role: "Talk titles, dates and links found through the site's own search (find_talks; live, link-only: talk text is never fetched). Commentary, not scripture.",
+        url: "https://www.dhammatalks.org/audio/",
+        search: "https://www.dhammatalks.org/search/",
+        license: "CC BY-NC 4.0"
+      },
+      {
         id: "ati",
         name: "Access to Insight (BCBS)",
         role: "English translations, study guides and indexes (live).",
@@ -24983,12 +24991,14 @@ __export(talks_exports, {
   SITE: () => SITE,
   TALKS_SOURCE: () => TALKS_SOURCE,
   findTalks: () => findTalks,
+  parseCursor: () => parseCursor,
   parseTalkResults: () => parseTalkResults,
   phraseFromReference: () => phraseFromReference,
   plainTerms: () => plainTerms,
   politely: () => politely,
   register: () => register,
-  searchUrl: () => searchUrl
+  searchUrl: () => searchUrl,
+  sharedPhrase: () => sharedPhrase
 });
 var SITE = "https://www.dhammatalks.org";
 var CATEGORIES = ["evening", "morning"];
@@ -25003,18 +25013,84 @@ var TALKS_SOURCE = {
 };
 var LINK_ONLY = "Links only: titles, dates and URLs from dhammatalks.org's own search. The talks' text is not fetched or returned; open a link to listen or read.";
 var COMMENTARY = "Talks are a teacher's commentary (\u1E6Ch\u0101nissaro Bhikkhu), not scripture. Keep them distinct from the P\u0101li text and its translations.";
-var MINOR = /* @__PURE__ */ new Set(["a", "an", "the", "to", "of", "on", "in", "at", "and", "or", "with", "for", "by", "from", "about", "is"]);
+var MINOR = /* @__PURE__ */ new Set([
+  "a",
+  "an",
+  "the",
+  "to",
+  "of",
+  "on",
+  "in",
+  "at",
+  "and",
+  "or",
+  "with",
+  "for",
+  "by",
+  "from",
+  "about",
+  "is",
+  "&",
+  "as",
+  "are",
+  "was",
+  "were",
+  "be",
+  "being",
+  "been",
+  "has",
+  "have",
+  "had",
+  "it",
+  "its",
+  "not",
+  "no",
+  "this",
+  "that",
+  "these",
+  "those",
+  "there",
+  "where",
+  "what",
+  "when",
+  "which",
+  "who",
+  "into",
+  "one",
+  "after",
+  "another",
+  "over",
+  "through",
+  "up",
+  "out"
+]);
 function plainTerms(value) {
   return String(value ?? "").normalize("NFD").replace(new RegExp("\\p{M}", "gu"), "").replace(/[‘’ʼ]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, " ").trim();
 }
+function titleWords(reference) {
+  const title = String(reference ?? "").replace(/^(?:[A-Za-z]{1,5}\s+)?[\dIVXLC]+(?:\s*[:.]\s*\d+)*(?:\s*[-–—]\s*\d+(?:[:.]\d+)*)?\s*:?\s*/, "").replace(/\([^)]*\)|\[[^\]]*\]/g, " ").replace(/["“”]/g, "");
+  return title.split(/\s+/).filter((w) => new RegExp("\\p{L}", "u").test(w));
+}
 function phraseFromReference(reference) {
-  let title = String(reference ?? "").replace(/^(?:[A-Za-z]{1,5}\s+)?[\dIVXLC]+(?:\s*[:.]\s*\d+)*(?:\s*[-–—]\s*\d+(?:[:.]\d+)*)?\s*:?\s*/, "");
-  title = plainTerms(title.replace(/\([^)]*\)|\[[^\]]*\]/g, " ").replace(/["]/g, ""));
-  const words = title.split(/\s+/).filter((w) => /[A-Za-z]/.test(w));
-  if (!words.length) return null;
-  const distinctive = words.filter((w) => !MINOR.has(w.toLowerCase()));
-  if (distinctive.length < 2 && words.length < 3) return null;
-  return words.join(" ");
+  const raw = titleWords(reference);
+  if (!raw.length) return null;
+  const distinctive = raw.filter((w) => !MINOR.has(plainTerms(w).toLowerCase()));
+  const pali = distinctive.some((w) => w.normalize("NFD") !== w.normalize("NFD").replace(new RegExp("\\p{M}", "gu"), ""));
+  if (!(distinctive.length >= 3 || pali && raw.length >= 3)) return null;
+  return plainTerms(raw.join(" "));
+}
+var wordKey = (text) => ` ${plainTerms(text).toLowerCase().replace(/[^a-z0-9']+/g, " ").trim()} `;
+var titleIndex = null;
+function sharedPhrase(phrase, url, canon) {
+  if (!titleIndex) {
+    titleIndex = /* @__PURE__ */ new Map();
+    for (const links of Object.values(canon.load().translations)) {
+      for (const l of links) if (l.source === "dhammatalks" && l.url && !titleIndex.has(l.url)) titleIndex.set(l.url, wordKey(titleWords(l.reference).join(" ")));
+    }
+  }
+  const key = wordKey(phrase);
+  for (const [other, title] of titleIndex) if (other !== url && title.includes(key)) return true;
+  return false;
 }
 function parseTalkResults(html) {
   const results = [];
@@ -25064,9 +25140,22 @@ var defaultFetch = (url) => politely(() => fetchPublic(url, { json: false, retri
 async function searchCategory(terms2, category, page, fetchHtml) {
   const url = searchUrl(terms2, category, page);
   const html = await liveCache.wrap(`talks:${url}`, () => fetchHtml(url));
-  return { url, results: parseTalkResults(html), has_more: html.includes(`page=${page + 1}`) };
+  return { url, results: parseTalkResults(html), has_more: new RegExp(`[?&;]page=${page + 1}(?![0-9])`).test(html) };
 }
-async function findTalks({ query, passage, category = "all", page = 1, limit = 10 } = {}, { canon, fetchHtml = defaultFetch } = {}) {
+var MAX_SITE_PAGE = 500;
+function parseCursor(cursor, categories) {
+  const state = [];
+  for (const part of String(cursor).split(",")) {
+    const m = part.trim().match(/^(evening|morning):(\d{1,3}):(\d{1,3})$/);
+    if (!m || !categories.includes(m[1]) || state.some((s) => s.category === m[1])) throw new Error("cursor is not valid for this search: pass back next_cursor unchanged, with the same query, passage and category.");
+    const page = Number(m[2]), offset = Number(m[3]);
+    if (page < 1 || page > MAX_SITE_PAGE || offset > 100) throw new Error("cursor is out of range.");
+    state.push({ category: m[1], page, offset });
+  }
+  return state;
+}
+var formatCursor = (state) => state.map((s) => `${s.category}:${s.page}:${s.offset}`).join(",");
+async function findTalks({ query, passage, category = "all", page = 1, limit = 10, cursor } = {}, { canon, fetchHtml = defaultFetch } = {}) {
   query = plainTerms(query);
   page = Math.max(1, Math.trunc(Number(page) || 1));
   limit = Math.min(20, Math.max(1, Math.trunc(Number(limit) || 10)));
@@ -25081,10 +25170,12 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
     const { unit } = canon.resolve(passage);
     const { links, via } = canon.linksFor(unit);
     const dt = via ? null : links.find((l) => l.source === "dhammatalks");
-    const phrase = dt ? phraseFromReference(dt.reference) : null;
-    passageInfo = { id: unit.id, citation: unit.acronym, title: unit.title || null, translation_url: dt?.url ?? null, translation_title: phrase };
+    const candidate = dt ? phraseFromReference(dt.reference) : null;
+    const shared = candidate ? sharedPhrase(candidate, dt.url, canon) : false;
+    const phrase = shared ? null : candidate;
+    passageInfo = { id: unit.id, citation: unit.acronym, title: unit.title || null, translation_url: dt?.url ?? null, translation_title: candidate };
     if (!phrase) {
-      const why = via ? `${unit.acronym} has no translation page of its own on dhammatalks.org (only its chapter, ${via.acronym}, does)` : !dt ? `${unit.acronym} has no linked \u1E6Ch\u0101nissaro translation on dhammatalks.org` : `the title of \u1E6Ch\u0101nissaro's translation ("${dt.reference}") is too general to identify talks about this passage`;
+      const why = via ? `${unit.acronym} has no translation page of its own on dhammatalks.org (only its chapter, ${via.acronym}, does)` : !dt ? `${unit.acronym} has no linked \u1E6Ch\u0101nissaro translation on dhammatalks.org` : shared ? `the title of \u1E6Ch\u0101nissaro's translation ("${candidate}") is also part of another of his translation titles, so it cannot single out this passage` : `the title of \u1E6Ch\u0101nissaro's translation ("${dt.reference}") is too general to identify talks about this passage`;
       return {
         source: TALKS_SOURCE,
         passage: passageInfo,
@@ -25099,36 +25190,62 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
   } else {
     notes.push(`Matches are keyword matches found by dhammatalks.org's search (all words; "quoted phrases" allowed). Diacritics are removed because the site's search does not handle them.`);
   }
+  const state = cursor ? parseCursor(cursor, categories) : categories.map((c) => ({ category: c, page, offset: 0 }));
   const searched = [];
+  const pages = /* @__PURE__ */ new Map();
+  const load2 = async (st) => {
+    const key = `${st.category}:${st.page}`;
+    if (!pages.has(key)) {
+      let found;
+      try {
+        found = await searchCategory(terms2, st.category, st.page, fetchHtml);
+      } catch (error2) {
+        throw new Error(`dhammatalks.org search is unavailable right now (${error2.message}). Open ${searchUrl(terms2, st.category, st.page)} directly or try again shortly.`);
+      }
+      searched.push(found.url);
+      pages.set(key, found);
+    }
+    return pages.get(key);
+  };
+  const remaining = async (st) => {
+    for (; ; ) {
+      const found = await load2(st);
+      if (st.offset < found.results.length) return true;
+      if (!found.has_more || !found.results.length || st.page >= MAX_SITE_PAGE) return false;
+      st.page += 1;
+      st.offset = 0;
+    }
+  };
+  let active = [];
+  for (const st of state) if (await remaining(st)) active.push(st);
   const seen = /* @__PURE__ */ new Set();
   const results = [];
-  let hasMore = false;
-  for (const c of categories) {
-    let found;
-    try {
-      found = await searchCategory(terms2, c, page, fetchHtml);
-    } catch (error2) {
-      throw new Error(`dhammatalks.org search is unavailable right now (${error2.message}). Open ${searchUrl(terms2, c, page)} directly or try again shortly.`);
+  while (results.length < limit && active.length) {
+    const next = [];
+    for (const st of active) {
+      if (results.length < limit) {
+        const r = (await load2(st)).results[st.offset++];
+        if (!seen.has(r.url)) {
+          seen.add(r.url);
+          results.push(r);
+        }
+      }
+      if (await remaining(st)) next.push(st);
     }
-    searched.push(found.url);
-    hasMore ||= found.has_more;
-    for (const r of found.results) if (!seen.has(r.url)) {
-      seen.add(r.url);
-      results.push(r);
-    }
+    active = next;
   }
   return {
     source: TALKS_SOURCE,
     ...passageInfo ? { passage: passageInfo } : {},
     searched_for: terms2,
     category,
-    page,
-    results: results.slice(0, limit),
-    returned: Math.min(limit, results.length),
-    has_more: hasMore || results.length > limit,
-    ...hasMore ? { next_page: page + 1 } : {},
+    ...cursor ? { cursor } : { page },
+    results,
+    returned: results.length,
+    has_more: active.length > 0,
+    ...active.length ? { next_cursor: formatCursor(active) } : {},
     search_urls: searched,
-    notes
+    notes: active.length ? [...notes, "More talks match: call again with cursor set to next_cursor (same query, passage and category) to continue exactly where this list stopped."] : notes
   };
 }
 function register({ tool, z, citation, canon }) {
@@ -25136,8 +25253,9 @@ function register({ tool, z, citation, canon }) {
     query: z.string().max(200).optional().describe('Topic keywords, e.g. "jhana", "Kalamas", "\\"right resolve\\"" (diacritics are removed).'),
     passage: citation.optional().describe("A passage; talks containing the title of \u1E6Ch\u0101nissaro's translation are found. Combine with query to narrow."),
     category: z.enum(["all", "evening", "morning"]).default("all").describe("Evening talks, short morning talks, or both."),
-    page: z.number().int().min(1).max(50).default(1),
-    limit: z.number().int().min(1).max(20).default(10)
+    page: z.number().int().min(1).max(50).default(1).describe("Site results page to start from (20 talks per category per page). To continue a list, use cursor instead."),
+    limit: z.number().int().min(1).max(20).default(10),
+    cursor: z.string().max(100).optional().describe("next_cursor from a previous call, to continue the same search exactly where it stopped (overrides page).")
   }, (args) => findTalks(args, { canon }), { network: true });
 }
 

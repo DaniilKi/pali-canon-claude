@@ -163,6 +163,8 @@ export function listSources() {
         numbering: 'Standard citation IDs (as used by SuttaCentral and Bhikkhu Bodhi) were aligned to the VRI text at build time; PTS page numbers come from VRI page markers.' },
       { id: 'dhammatalks', name: 'dhammatalks.org — Ṭhānissaro Bhikkhu', role: 'English translations (live).', url: 'https://www.dhammatalks.org/suttas/',
         license: 'CC BY-NC 4.0', fallback: 'Ṭhānissaro\'s earlier versions on Access to Insight.' },
+      { id: 'dhammatalks-talks', name: 'dhammatalks.org — Dhamma talks by Ṭhānissaro Bhikkhu', role: 'Talk titles, dates and links found through the site\'s own search (find_talks; live, link-only: talk text is never fetched). Commentary, not scripture.',
+        url: 'https://www.dhammatalks.org/audio/', search: 'https://www.dhammatalks.org/search/', license: 'CC BY-NC 4.0' },
       { id: 'ati', name: 'Access to Insight (BCBS)', role: 'English translations, study guides and indexes (live).', url: ATI,
         mirrors: ['raw.githubusercontent.com/bcbsit/ati (official)', 'cdn.jsdelivr.net/gh/bcbsit/ati (official, CDN)', 'raw.githubusercontent.com/digitalpalireader/accesstoinsight'],
         license: 'Per page (CC BY-NC 4.0, BPS free-distribution, public domain…); notices are returned with each text.' },

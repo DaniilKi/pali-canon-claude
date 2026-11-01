@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Status | **Draft, not sent** |
-| Ask | Permission to use the English translations and layout of the Abhayagiri chanting book for paritta texts, with credit, free distribution only |
+| Ask | Permission to use the English translations and layout of the Abhayagiri chanting book for paritta texts, with credit, free distribution only. Also: whether we may link to their recorded Dhamma talks (title, date and link only), and whether they have or would consider an index of talks by sutta ([#46](https://github.com/DaniilKi/pali-canon-claude/issues/46)) |
 | Contact route | contact form: https://www.abhayagiri.org/contact/other |
 | Contact checked | 1 November 2026 |
 
@@ -39,6 +39,7 @@ These safeguards apply to everything the tool returns, and we would keep them fo
 1. May we reproduce the English translations of the chants (and, if appropriate, their arrangement) from your chanting book, with credit and a link, in this free tool?
 2. If yes, which edition should we use, and is there a credit line you would like?
 3. If you prefer, may we simply link to the chanting book for each chant?
+4. Separately: if you publish recorded Dhamma talks online, may we link to them? We would show only a talk's title, date and a link to your page, never its text or audio, and only through a search or index you provide. If you have, or would consider, an index of talks by sutta, we would gladly use it so that readers can go from a passage to talks about it.
 
 If it would help, I am happy to send more detail, show you the tool working, or change how your work is presented. A short reply is plenty, and "no" is a perfectly good answer: we will follow it.
 
