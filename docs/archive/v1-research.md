@@ -1,6 +1,6 @@
 # Research and architecture decisions
 
-> **Note (v2.0.0):** the sources changed after this research. SuttaCentral asks that its work not be used in AI tools, so v2 bundles the VRI Pāli text and uses dhammatalks.org and Access to Insight for English. See [sources.md](sources.md).
+> **Historical record (v1, 31 October 2026). Superseded.** This describes version 1, which fetched texts from SuttaCentral. Version 2 stopped using SuttaCentral content because SuttaCentral asks that its work not be used in AI tools, and bundles the VRI Pāli text instead. For current sources see [../sources.md](../sources.md); for the reasoning see [../decisions.md](../decisions.md). Kept for its survey of other traditions' tools and of how Claude extensions work.
 
 Reviewed 2026-10-31. This is a small source-retrieval project for personal study and community reuse. It does not attempt to create a new canon, translation, or religious authority.
 
@@ -53,7 +53,7 @@ Coverage includes more than Pali texts, so language and tradition must remain vi
 
 [Dhammatalks.org](https://www.dhammatalks.org/suttas/) is offered as a useful external reading destination. It is not represented as another implemented retrieval provider. Supporting arbitrary Buddhist websites would expand parsing and rights uncertainty without improving the reliable core paths.
 
-[nbkhoi/sutta-mcp](https://github.com/nbkhoi/sutta-mcp) already provides a Buddhist MCP integration over SuttaCentral. This project does not claim to be the first. Its provider implementation is independent; no code from that noncommercial-licensed project was copied. This package adds Claude plugin/desktop distribution, study workflows, DPD lookup and Access to Insight retrieval. See [verified provider endpoints and limitations](provider-api.md).
+[nbkhoi/sutta-mcp](https://github.com/nbkhoi/sutta-mcp) already provides a Buddhist MCP integration over SuttaCentral. This project does not claim to be the first. Its provider implementation is independent; no code from that noncommercial-licensed project was copied. This package adds Claude plugin/desktop distribution, study workflows, DPD lookup and Access to Insight retrieval.
 
 ## Functionality chosen from the research
 
