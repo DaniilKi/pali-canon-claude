@@ -150,3 +150,28 @@ test('a verse inherits its chapter translations, with a note', () => {
   assert.ok(desc.english.length > 0);
   assert.ok(desc.notes.some((n) => /whole Dhp 179/.test(n)));
 });
+
+test('npm package: bin starts the bundled server with a portable shebang', async () => {
+  const { readFileSync, existsSync } = await import('node:fs');
+  const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
+  const pkg = JSON.parse(read('package.json'));
+  assert.equal(pkg.bin['pali-canon-mcp'], 'server/index.cjs');
+  const server = read('server/index.cjs');
+  // LF only: a CRLF shebang ("node\r") fails on macOS and Linux.
+  assert.ok(server.startsWith('#!/usr/bin/env node\n'), 'server/index.cjs must start with an LF shebang');
+  for (const file of ['server/data/canon.json.gz', 'server/data/translations.json']) {
+    assert.ok(existsSync(new URL(`../${file}`, import.meta.url)), file);
+  }
+  assert.ok(pkg.files.includes('server'), 'package files must ship server/ (bundle and data)');
+  // The bundle looks for its data next to itself (__dirname/data) before any cwd fallback.
+  assert.match(read('src/canon.mjs'), /join\(here, 'data', name\)/);
+});
+
+test('version is the same in package.json, manifest.json, plugin.json and the server', async () => {
+  const { readFileSync } = await import('node:fs');
+  const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
+  const version = JSON.parse(read('package.json')).version;
+  assert.equal(JSON.parse(read('manifest.json')).version, version, 'manifest.json');
+  assert.equal(JSON.parse(read('.claude-plugin/plugin.json')).version, version, '.claude-plugin/plugin.json');
+  assert.match(read('src/index.mjs'), new RegExp(`const VERSION = '${version.replace(/\./g, '\.')}'`), 'src/index.mjs VERSION');
+});
