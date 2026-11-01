@@ -33,8 +33,25 @@ export function attribution() {
 }
 
 /** Look up one bhikkhu rule. `canon` is the bundled canon module (resolve, describe). */
+// The VRI edition gives the seven adhikaraṇa-samathas as one paragraph (655), after an unnumbered
+// intro line. The bundled index splits that list into units As 1–7 that do not match it (As 1 is the
+// intro line only; As 3–7 run on through the whole bhikkhunī Vibhaṅga), so every As rule points to the
+// unit that holds paragraph 655.
+export const AS_PASSAGE = 'pli-tv-bu-vb-as2';
+const AS_INTRO = 'pli-tv-bu-vb-as1';
+
+function resolveRule(reference, canon) {
+  try {
+    return canon.resolve(reference);
+  } catch (e) {
+    const bi = String(e.message).match(/\((pli-tv-bi-vb-[a-z]+)\d*\)/);
+    if (bi) throw new Error(`"${reference}" is a bhikkhunī rule (or not one in the canon index). The Buddhist Monastic Code links here cover the 227 bhikkhu rules only; list the bhikkhunī rules with browse_canon("${bi[1]}").`);
+    throw e;
+  }
+}
+
 export function vinayaRule(reference, canon) {
-  const { unit, notes } = canon.resolve(reference);
+  const { unit, notes } = resolveRule(reference, canon);
   const m = unit.id.match(/^pli-tv-(bu|bi)-vb-([a-z]+)(\d+)(-\d+)?$/);
   if (!m) throw new Error(`"${reference}" is ${unit.acronym} (${unit.id}), not a Pātimokkha rule. Use forms like Pj 1, Ss 5, Np 18, Pc 5, Sk 26 or As 1.`);
   if (m[1] === 'bi') throw new Error(`${unit.acronym} is a bhikkhunī rule. The Buddhist Monastic Code links here cover the 227 bhikkhu rules only; read the Pāli with get_text("${unit.id}").`);
@@ -42,8 +59,16 @@ export function vinayaRule(reference, canon) {
   const key = `${m[2]}${m[3]}`;
   const entry = bmc.rules[key];
   if (!entry) throw new Error(`No Buddhist Monastic Code link is recorded for ${unit.acronym}.`);
+  const isAs = m[2] === 'as';
   const text = canon.describe(unit, notes);
+  const passage = isAs ? canon.describe(canon.resolve(AS_PASSAGE).unit, []) : text;
+  const textNotes = isAs ? [] : text.notes;
   const bmcNotes = [];
+  if (isAs) {
+    bmcNotes.push(`The VRI edition gives the seven adhikaraṇa-samathas as one paragraph (${passage.vri_paragraphs}), introduced by an unnumbered line (${AS_INTRO}). The canon index's own split into As 1–7 does not follow it, so the text shown for ${CLASS_ABBR.as} ${Number(m[3])} is that whole paragraph: read it with get_text("${AS_PASSAGE}").`);
+  } else if (/kaṇḍaṃ$/.test(text.title)) {
+    bmcNotes.push(`The VRI edition gives no separate title for this rule: "${text.title}" is the heading of the chapter it opens.`);
+  }
   if (entry.discussed_with) {
     bmcNotes.push(`The BMC explains ${CLASS_ABBR[m[2]]} ${Number(m[3])} together with ${CLASS_ABBR[m[2]]} ${entry.discussed_with.replace(/\D+/, '')}, so the link opens that shared section.`);
   }
@@ -55,12 +80,15 @@ export function vinayaRule(reference, canon) {
     canonical_text: {
       id: text.id,
       citation: text.citation,
-      title: text.title,
-      pts: text.pts,
-      vri_book: text.vri_book,
-      vri_paragraphs: text.vri_paragraphs,
-      first_line: text.first_line,
-      read_with: `get_text("${text.id}") for the full Pāli (VRI edition): origin story, rule and word analysis.`,
+      ...(isAs ? { passage_id: passage.id } : {}),
+      title: passage.title,
+      pts: passage.pts,
+      vri_book: passage.vri_book,
+      vri_paragraphs: passage.vri_paragraphs,
+      first_line: passage.first_line,
+      read_with: isAs
+        ? `get_text("${passage.id}") for the Pāli list of the seven adhikaraṇa-samathas (VRI edition, one paragraph); get_text("${AS_INTRO}") for its intro line.`
+        : `get_text("${text.id}") for the full Pāli (VRI edition): origin story, rule and word analysis.`,
       source: text.source,
       suttacentral: text.links.suttacentral,
     },
@@ -73,7 +101,7 @@ export function vinayaRule(reference, canon) {
       attribution: attribution(),
     },
     english: 'No English translation of the rule text is bundled. Ṭhānissaro Bhikkhu\'s translation and explanation are at the BMC link.',
-    notes: [...text.notes, ...bmcNotes],
+    notes: [...textNotes, ...bmcNotes],
   };
 }
 

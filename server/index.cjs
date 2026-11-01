@@ -22857,6 +22857,7 @@ __export(features_exports, {
 // src/vinaya-bmc.mjs
 var vinaya_bmc_exports = {};
 __export(vinaya_bmc_exports, {
+  AS_PASSAGE: () => AS_PASSAGE,
   RULE_COUNTS: () => RULE_COUNTS,
   attribution: () => attribution,
   register: () => register,
@@ -24028,8 +24029,19 @@ function attribution() {
     note: "Linked only: the explanation is read on dhammatalks.org. The BMC is the author's commentary on the rules, not scripture and not a ruling for any community."
   };
 }
+var AS_PASSAGE = "pli-tv-bu-vb-as2";
+var AS_INTRO = "pli-tv-bu-vb-as1";
+function resolveRule(reference, canon) {
+  try {
+    return canon.resolve(reference);
+  } catch (e) {
+    const bi = String(e.message).match(/\((pli-tv-bi-vb-[a-z]+)\d*\)/);
+    if (bi) throw new Error(`"${reference}" is a bhikkhun\u012B rule (or not one in the canon index). The Buddhist Monastic Code links here cover the 227 bhikkhu rules only; list the bhikkhun\u012B rules with browse_canon("${bi[1]}").`);
+    throw e;
+  }
+}
 function vinayaRule(reference, canon) {
-  const { unit, notes } = canon.resolve(reference);
+  const { unit, notes } = resolveRule(reference, canon);
   const m = unit.id.match(/^pli-tv-(bu|bi)-vb-([a-z]+)(\d+)(-\d+)?$/);
   if (!m) throw new Error(`"${reference}" is ${unit.acronym} (${unit.id}), not a P\u0101timokkha rule. Use forms like Pj 1, Ss 5, Np 18, Pc 5, Sk 26 or As 1.`);
   if (m[1] === "bi") throw new Error(`${unit.acronym} is a bhikkhun\u012B rule. The Buddhist Monastic Code links here cover the 227 bhikkhu rules only; read the P\u0101li with get_text("${unit.id}").`);
@@ -24037,8 +24049,16 @@ function vinayaRule(reference, canon) {
   const key = `${m[2]}${m[3]}`;
   const entry = bmc_default.rules[key];
   if (!entry) throw new Error(`No Buddhist Monastic Code link is recorded for ${unit.acronym}.`);
+  const isAs = m[2] === "as";
   const text = canon.describe(unit, notes);
+  const passage = isAs ? canon.describe(canon.resolve(AS_PASSAGE).unit, []) : text;
+  const textNotes = isAs ? [] : text.notes;
   const bmcNotes = [];
+  if (isAs) {
+    bmcNotes.push(`The VRI edition gives the seven adhikara\u1E47a-samathas as one paragraph (${passage.vri_paragraphs}), introduced by an unnumbered line (${AS_INTRO}). The canon index's own split into As 1\u20137 does not follow it, so the text shown for ${CLASS_ABBR.as} ${Number(m[3])} is that whole paragraph: read it with get_text("${AS_PASSAGE}").`);
+  } else if (/kaṇḍaṃ$/.test(text.title)) {
+    bmcNotes.push(`The VRI edition gives no separate title for this rule: "${text.title}" is the heading of the chapter it opens.`);
+  }
   if (entry.discussed_with) {
     bmcNotes.push(`The BMC explains ${CLASS_ABBR[m[2]]} ${Number(m[3])} together with ${CLASS_ABBR[m[2]]} ${entry.discussed_with.replace(/\D+/, "")}, so the link opens that shared section.`);
   }
@@ -24050,12 +24070,13 @@ function vinayaRule(reference, canon) {
     canonical_text: {
       id: text.id,
       citation: text.citation,
-      title: text.title,
-      pts: text.pts,
-      vri_book: text.vri_book,
-      vri_paragraphs: text.vri_paragraphs,
-      first_line: text.first_line,
-      read_with: `get_text("${text.id}") for the full P\u0101li (VRI edition): origin story, rule and word analysis.`,
+      ...isAs ? { passage_id: passage.id } : {},
+      title: passage.title,
+      pts: passage.pts,
+      vri_book: passage.vri_book,
+      vri_paragraphs: passage.vri_paragraphs,
+      first_line: passage.first_line,
+      read_with: isAs ? `get_text("${passage.id}") for the P\u0101li list of the seven adhikara\u1E47a-samathas (VRI edition, one paragraph); get_text("${AS_INTRO}") for its intro line.` : `get_text("${text.id}") for the full P\u0101li (VRI edition): origin story, rule and word analysis.`,
       source: text.source,
       suttacentral: text.links.suttacentral
     },
@@ -24068,7 +24089,7 @@ function vinayaRule(reference, canon) {
       attribution: attribution()
     },
     english: "No English translation of the rule text is bundled. \u1E6Ch\u0101nissaro Bhikkhu's translation and explanation are at the BMC link.",
-    notes: [...text.notes, ...bmcNotes]
+    notes: [...textNotes, ...bmcNotes]
   };
 }
 function register({ tool, z, canon }) {

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import * as canon from '../src/canon.mjs';
-import { vinayaRule, ruleKeys, RULE_COUNTS, source, register } from '../src/vinaya-bmc.mjs';
+import { vinayaRule, ruleKeys, RULE_COUNTS, source, register, AS_PASSAGE } from '../src/vinaya-bmc.mjs';
 
 const CLASSES = [['pj', 'Pj'], ['ss', 'Ss'], ['ay', 'Ay'], ['np', 'Np'], ['pc', 'Pc'], ['pd', 'Pd'], ['sk', 'Sk'], ['as', 'As']];
 // Rules the BMC discusses as pairs; its table of contents lists them as "1 [2]" … "23 [24]" and "61 [62]".
@@ -57,9 +57,40 @@ test('citation forms and errors', () => {
   assert.match(vinayaRule('Pj 1', canon).canonical_text.read_with, /get_text\("pli-tv-bu-vb-pj1"\)/);
   assert.throws(() => vinayaRule('Pj 5', canon), /not in the canon index/);
   assert.throws(() => vinayaRule('Bi Pc 5', canon), /bhikkhunī rule/);
+  assert.throws(() => vinayaRule('Bi Pj 1', canon), /bhikkhunī rule.*browse_canon\("pli-tv-bi-vb-pj"\)/);
   assert.throws(() => vinayaRule('As 1-7', canon), /group of rules/);
   assert.throws(() => vinayaRule('MN 10', canon), /not a Pātimokkha rule/);
   assert.throws(() => vinayaRule('Kd 1', canon), /not a Pātimokkha rule/);
+});
+
+test('As 1–7 point to the one VRI paragraph that lists the seven samathas, not the bhikkhunī Vibhaṅga', () => {
+  const { unit } = canon.resolve(AS_PASSAGE);
+  const para = canon.segments(unit).filter((s) => s.vri_paragraph);
+  assert.equal(para.length, 1, 'the passage is exactly one numbered VRI paragraph');
+  // The seven samathas, as named in that paragraph (read from the bundled canon, checked here).
+  assert.equal(para[0].text.split(',').length, 7);
+  for (let n = 1; n <= 7; n++) {
+    const r = vinayaRule(`As ${n}`, canon);
+    const t = r.canonical_text;
+    assert.equal(t.id, `pli-tv-bu-vb-as${n}`);
+    assert.equal(t.passage_id, AS_PASSAGE);
+    assert.equal(t.vri_paragraphs, para[0].vri_paragraph, `As ${n}`);
+    assert.equal(t.title, 'Adhikaraṇasamathā', `As ${n}`);
+    assert.doesNotMatch(t.title, /bhikkhunī/);
+    assert.doesNotMatch(t.pts, /351/);
+    assert.equal(t.first_line, para[0].text.slice(0, t.first_line.length));
+    assert.match(t.read_with, /get_text\("pli-tv-bu-vb-as2"\)/);
+    assert.match(r.notes.join(' '), /one paragraph/);
+    assert.doesNotMatch(r.notes.join(' '), /peyyāla/);
+  }
+});
+
+test('a rule that opens its chapter says its title is the chapter heading', () => {
+  const sk1 = vinayaRule('Sk 1', canon);
+  assert.equal(sk1.canonical_text.title, 'Sekhiyakaṇḍaṃ');
+  assert.match(sk1.notes.join(' '), /heading of the chapter/);
+  assert.doesNotMatch(vinayaRule('Sk 2', canon).notes.join(' '), /heading of the chapter/);
+  assert.doesNotMatch(vinayaRule('Pc 90', canon).notes.join(' '), /heading of the chapter/);
 });
 
 test('source record: Ṭhānissaro Bhikkhu, CC BY-NC, link only', () => {
