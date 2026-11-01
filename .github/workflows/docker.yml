@@ -7,7 +7,7 @@ on:
     tags: ['v*']
   workflow_dispatch:
   pull_request:
-    paths: ['Dockerfile', '.dockerignore', 'src/**', 'scripts/build.mjs', 'package*.json', '.github/workflows/docker.yml']
+    paths: ['Dockerfile', '.dockerignore', 'src/**', 'server/**', 'LICENSE', 'THIRD_PARTY.md', 'scripts/build.mjs', 'package*.json', '.github/workflows/docker.yml']
 permissions:
   contents: read
   packages: write

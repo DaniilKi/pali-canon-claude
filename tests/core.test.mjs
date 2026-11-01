@@ -236,8 +236,41 @@ test('HTTP transport rejects oversized bodies', async () => {
   const http = createHttpServer({ rateLimitPerMinute: 0 });
   await new Promise((r) => http.listen(0, '127.0.0.1', r));
   try {
-    const res = await fetch(`http://127.0.0.1:${http.address().port}/mcp`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: 'x'.repeat(1024 * 1024 + 10) }).catch(() => null);
-    assert.ok(!res || res.status === 413);
+    const url = `http://127.0.0.1:${http.address().port}/mcp`;
+    const res = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: 'x'.repeat(1024 * 1024 + 10) });
+    assert.equal(res.status, 413, 'declared oversized body gets a 413, not a reset');
+    assert.match((await res.json()).error.message, /too large/);
+    // Chunked body with no Content-Length: the limit is enforced while reading.
+    const big = new Uint8Array(1024 * 1024 + 10).fill(120);
+    const stream = new ReadableStream({ start(c) { for (let i = 0; i < big.length; i += 65536) c.enqueue(big.slice(i, i + 65536)); c.close(); } });
+    const chunked = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: stream, duplex: 'half' });
+    assert.equal(chunked.status, 413, 'streamed oversized body gets a 413');
+    await chunked.text();
+  } finally {
+    http.closeAllConnections?.();
+    await new Promise((r) => http.close(r));
+  }
+});
+
+test('rate limit: client IP comes from the trusted proxy hop, not a forged X-Forwarded-For', async () => {
+  const { clientIp, parseTrustProxy, createHttpServer } = await import('../src/http-server.mjs');
+  const req = (xff, remote = '10.0.0.1') => ({ headers: xff === undefined ? {} : { 'x-forwarded-for': xff }, socket: { remoteAddress: remote } });
+  assert.equal(clientIp(req('6.6.6.6, 1.2.3.4'), 0), '10.0.0.1', 'proxy headers ignored unless trusted');
+  assert.equal(clientIp(req('6.6.6.6, 1.2.3.4'), 1), '1.2.3.4', 'one hop: rightmost entry (added by the proxy)');
+  assert.equal(clientIp(req('6.6.6.6, 1.2.3.4, 10.1.1.1'), 2), '1.2.3.4', 'two hops');
+  assert.equal(clientIp(req('1.2.3.4'), 3), '1.2.3.4', 'fewer entries than hops: leftmost');
+  assert.equal(clientIp(req(undefined), 1), '10.0.0.1');
+  assert.equal(parseTrustProxy('1'), 1); assert.equal(parseTrustProxy('true'), 1); assert.equal(parseTrustProxy('2'), 2);
+  assert.equal(parseTrustProxy(''), 0); assert.equal(parseTrustProxy('0'), 0); assert.equal(parseTrustProxy(undefined), 0);
+
+  const http = createHttpServer({ rateLimitPerMinute: 2, trustProxy: 1 });
+  await new Promise((r) => http.listen(0, '127.0.0.1', r));
+  try {
+    const url = `http://127.0.0.1:${http.address().port}/mcp`;
+    const hit = (spoof) => fetch(url, { method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream', 'x-forwarded-for': `${spoof}, 203.0.113.7` }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'ping' }) });
+    assert.equal((await hit('1.1.1.1')).status, 200);
+    assert.equal((await hit('2.2.2.2')).status, 200);
+    assert.equal((await hit('3.3.3.3')).status, 429, 'a new forged leftmost entry does not reset the limit');
   } finally {
     http.closeAllConnections?.();
     await new Promise((r) => http.close(r));

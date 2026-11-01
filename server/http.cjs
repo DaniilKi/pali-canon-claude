@@ -25111,14 +25111,22 @@ var RateLimiter = class {
     for (const [ip, entry] of this.clients) if (t - entry.start >= this.windowMs) this.clients.delete(ip);
   }
 };
-function clientIp(req, trustProxy) {
-  if (trustProxy) {
-    const fly = req.headers["fly-client-ip"];
-    if (typeof fly === "string" && fly) return fly.trim();
-    const forwarded = req.headers["x-forwarded-for"];
-    if (typeof forwarded === "string" && forwarded) return forwarded.split(",")[0].trim();
+function clientIp(req, trustProxyHops = 0) {
+  if (trustProxyHops > 0) {
+    const header = req.headers["x-forwarded-for"];
+    const raw = Array.isArray(header) ? header.join(",") : header;
+    if (typeof raw === "string" && raw) {
+      const hops = raw.split(",").map((part) => part.trim()).filter(Boolean);
+      if (hops.length) return hops[Math.max(0, hops.length - trustProxyHops)];
+    }
   }
   return req.socket.remoteAddress || "unknown";
+}
+function parseTrustProxy(value) {
+  const text = String(value ?? "").trim();
+  if (/^(true|yes|on)$/i.test(text)) return 1;
+  const n = Number.parseInt(text, 10);
+  return Number.isFinite(n) && n > 0 ? n : 0;
 }
 function send(res, status, body, headers = {}) {
   const text = typeof body === "string" ? body : JSON.stringify(body);
@@ -25126,26 +25134,48 @@ function send(res, status, body, headers = {}) {
   res.end(text);
 }
 var rpcError = (code, message) => ({ jsonrpc: "2.0", error: { code, message }, id: null });
+var tooLarge = () => Object.assign(new Error("too large"), { status: 413 });
+var MAX_DRAIN = 8 * MAX_BODY;
 function readBody(req) {
   return new Promise((resolve2, reject) => {
+    const declared = Number(req.headers["content-length"]);
+    if (Number.isFinite(declared) && declared > MAX_DRAIN) {
+      req.resume();
+      reject(tooLarge());
+      return;
+    }
     const chunks = [];
     let bytes = 0;
+    let settled = false;
+    const fail = (error2) => {
+      if (!settled) {
+        settled = true;
+        reject(error2);
+      }
+    };
     req.on("data", (chunk) => {
       bytes += chunk.length;
-      if (bytes > MAX_BODY) {
-        reject(Object.assign(new Error("too large"), { status: 413 }));
-        req.destroy();
+      if (bytes > MAX_DRAIN) {
+        chunks.length = 0;
+        fail(tooLarge());
         return;
       }
-      chunks.push(chunk);
+      if (bytes <= MAX_BODY) chunks.push(chunk);
+      else chunks.length = 0;
     });
-    req.on("end", () => resolve2(Buffer.concat(chunks).toString("utf8")));
-    req.on("error", reject);
+    req.on("end", () => {
+      if (bytes > MAX_BODY) fail(tooLarge());
+      else if (!settled) {
+        settled = true;
+        resolve2(Buffer.concat(chunks).toString("utf8"));
+      }
+    });
+    req.on("error", fail);
   });
 }
 function createHttpServer({
   rateLimitPerMinute = intEnv("RATE_LIMIT_PER_MINUTE", 120),
-  trustProxy = /^(1|true|yes)$/i.test(process.env.TRUST_PROXY || "")
+  trustProxy = parseTrustProxy(process.env.TRUST_PROXY)
 } = {}) {
   const limiter = new RateLimiter({ perMinute: rateLimitPerMinute });
   const started = Date.now();
@@ -25193,7 +25223,7 @@ function createHttpServer({
         return;
       }
       counters.mcp_requests += 1;
-      const wait2 = limiter.take(clientIp(req, trustProxy));
+      const wait2 = limiter.take(clientIp(req, trustProxy === true ? 1 : Number(trustProxy) || 0));
       if (wait2) {
         counters.rate_limited += 1;
         send(res, 429, rpcError(-32e3, `Rate limit reached (${rateLimitPerMinute} requests per minute). Try again in ${wait2} s.`), { "Retry-After": String(wait2) });
@@ -25209,7 +25239,7 @@ function createHttpServer({
         body = JSON.parse(raw);
       } catch (error2) {
         if (error2.status === 413) {
-          send(res, 413, rpcError(-32600, "Request body too large (1 MB limit)."));
+          send(res, 413, rpcError(-32600, "Request body too large (1 MB limit)."), { Connection: "close" });
           return;
         }
         send(res, 400, rpcError(-32700, "Parse error: body must be JSON-RPC."));

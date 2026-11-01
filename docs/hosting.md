@@ -62,11 +62,11 @@ To build it yourself from this repository: `docker build -t pali-canon-mcp .`
 
 ## Run it without Docker
 
-You need Node.js 20 or newer.
+All you need is Node.js 20 or newer. The server is already built into one file, so there is nothing
+to install first. From the repository folder run:
 
 ```sh
-npm ci
-node server/http.cjs          # or: npm run serve
+node server/http.cjs
 ```
 
 ## Settings
@@ -78,12 +78,14 @@ All settings are optional environment variables.
 | `PORT` | `8080` | Port to listen on. |
 | `HOST` | `0.0.0.0` | Network address to listen on. |
 | `RATE_LIMIT_PER_MINUTE` | `120` | Requests each visitor may make per minute. `0` turns the limit off. |
-| `TRUST_PROXY` | off | Set to `1` when running behind a hosting platform (Fly.io, Render) so each visitor's real address is used for the rate limit. Leave off when the server faces the internet directly. |
+| `TRUST_PROXY` | off | How many proxies sit in front of the server. Set to `1` on a hosting platform such as Fly.io or Render, so each visitor's real address (the one the platform adds last to `X-Forwarded-For`) is used for the rate limit. Addresses a visitor writes in that header themselves are ignored. Leave it off when the server faces the internet directly. |
 | `PALI_CANON_CACHE_MB` | `64` | Memory for recently fetched translations and dictionary entries. `0` turns it off. |
 | `PALI_CANON_CACHE_TTL_MINUTES` | `360` | How long a fetched page is kept (six hours). |
 
-The server needs about 300 MB of memory, because the whole Pāli Canon is loaded at start-up so that
-reading and searching are fast. Give it at least 512 MB.
+The whole Pāli Canon is loaded at start-up so that reading and searching are fast, so the server needs
+a fair amount of memory. Measured on 1 November 2026 (Windows 11, Node.js 26, `server/http.cjs`): about
+290 MB right after start-up and about 345 MB at the peak of the 50-session load test below. Give it at
+least 512 MB, as `fly.toml` does.
 
 ## Deploy on Fly.io
 

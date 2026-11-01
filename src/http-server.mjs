@@ -58,14 +58,29 @@ export class RateLimiter {
   }
 }
 
-function clientIp(req, trustProxy) {
-  if (trustProxy) {
-    const fly = req.headers['fly-client-ip'];
-    if (typeof fly === 'string' && fly) return fly.trim();
-    const forwarded = req.headers['x-forwarded-for'];
-    if (typeof forwarded === 'string' && forwarded) return forwarded.split(',')[0].trim();
+/**
+ * Client address for the rate limit. With `trustProxyHops` = 0 the socket address is used. Behind N trusted
+ * proxies (Fly.io and Render each add one) the address is the Nth entry from the RIGHT of X-Forwarded-For:
+ * entries further left are written by the client and can be forged, so they are never used.
+ */
+export function clientIp(req, trustProxyHops = 0) {
+  if (trustProxyHops > 0) {
+    const header = req.headers['x-forwarded-for'];
+    const raw = Array.isArray(header) ? header.join(',') : header;
+    if (typeof raw === 'string' && raw) {
+      const hops = raw.split(',').map((part) => part.trim()).filter(Boolean);
+      if (hops.length) return hops[Math.max(0, hops.length - trustProxyHops)];
+    }
   }
   return req.socket.remoteAddress || 'unknown';
+}
+
+/** TRUST_PROXY: off/0 = no proxy; 1/true/yes = one proxy hop; a number = that many hops. */
+export function parseTrustProxy(value) {
+  const text = String(value ?? '').trim();
+  if (/^(true|yes|on)$/i.test(text)) return 1;
+  const n = Number.parseInt(text, 10);
+  return Number.isFinite(n) && n > 0 ? n : 0;
 }
 
 function send(res, status, body, headers = {}) {
@@ -76,27 +91,43 @@ function send(res, status, body, headers = {}) {
 
 const rpcError = (code, message) => ({ jsonrpc: '2.0', error: { code, message }, id: null });
 
+const tooLarge = () => Object.assign(new Error('too large'), { status: 413 });
+// An over-limit body up to this size is read to the end and discarded before the 413 is sent, so the
+// client has finished uploading and reliably receives the response. Anything bigger is cut off at once.
+const MAX_DRAIN = 8 * MAX_BODY;
+
+/**
+ * Read the request body up to MAX_BODY. Over the limit, the data is discarded (never kept in memory)
+ * and the promise rejects with status 413 once the upload ends, or as soon as MAX_DRAIN is passed.
+ */
 function readBody(req) {
   return new Promise((resolve, reject) => {
+    const declared = Number(req.headers['content-length']);
+    if (Number.isFinite(declared) && declared > MAX_DRAIN) { req.resume(); reject(tooLarge()); return; }
     const chunks = [];
     let bytes = 0;
+    let settled = false;
+    const fail = (error) => { if (!settled) { settled = true; reject(error); } };
     req.on('data', (chunk) => {
       bytes += chunk.length;
-      if (bytes > MAX_BODY) { reject(Object.assign(new Error('too large'), { status: 413 })); req.destroy(); return; }
-      chunks.push(chunk);
+      if (bytes > MAX_DRAIN) { chunks.length = 0; fail(tooLarge()); return; }
+      if (bytes <= MAX_BODY) chunks.push(chunk); else chunks.length = 0;
     });
-    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
-    req.on('error', reject);
+    req.on('end', () => {
+      if (bytes > MAX_BODY) fail(tooLarge());
+      else if (!settled) { settled = true; resolve(Buffer.concat(chunks).toString('utf8')); }
+    });
+    req.on('error', fail);
   });
 }
 
 /**
  * Create (but do not start) the HTTP server. Options default to environment variables:
- * RATE_LIMIT_PER_MINUTE (120; 0 disables), TRUST_PROXY (1 behind Fly.io/Render so the real client IP is used).
+ * RATE_LIMIT_PER_MINUTE (120; 0 disables), TRUST_PROXY (number of trusted proxy hops; 1 behind Fly.io/Render).
  */
 export function createHttpServer({
   rateLimitPerMinute = intEnv('RATE_LIMIT_PER_MINUTE', 120),
-  trustProxy = /^(1|true|yes)$/i.test(process.env.TRUST_PROXY || ''),
+  trustProxy = parseTrustProxy(process.env.TRUST_PROXY),
 } = {}) {
   const limiter = new RateLimiter({ perMinute: rateLimitPerMinute });
   const started = Date.now();
@@ -133,7 +164,7 @@ export function createHttpServer({
       if (path !== '/mcp') { send(res, 404, 'Not found. The MCP endpoint is /mcp.'); return; }
 
       counters.mcp_requests += 1;
-      const wait = limiter.take(clientIp(req, trustProxy));
+      const wait = limiter.take(clientIp(req, trustProxy === true ? 1 : Number(trustProxy) || 0));
       if (wait) {
         counters.rate_limited += 1;
         send(res, 429, rpcError(-32000, `Rate limit reached (${rateLimitPerMinute} requests per minute). Try again in ${wait} s.`), { 'Retry-After': String(wait) });
@@ -151,7 +182,7 @@ export function createHttpServer({
         const raw = await readBody(req);
         body = JSON.parse(raw);
       } catch (error) {
-        if (error.status === 413) { send(res, 413, rpcError(-32600, 'Request body too large (1 MB limit).')); return; }
+        if (error.status === 413) { send(res, 413, rpcError(-32600, 'Request body too large (1 MB limit).'), { Connection: 'close' }); return; }
         send(res, 400, rpcError(-32700, 'Parse error: body must be JSON-RPC.'));
         return;
       }
