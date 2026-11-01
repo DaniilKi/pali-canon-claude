@@ -26,6 +26,20 @@ npm run linkcheck           # check today's sample of 250 translation links (--a
 npm run registry:check      # validate server.json before publishing to the MCP Registry
 ```
 
+Other scripts, run directly with `node` (or `python`):
+
+| Command | What it does |
+|---|---|
+| `node scripts/export-index.mjs [--out dir]` | Citation index (ID ↔ VRI paragraph ↔ PTS page ↔ translation links, with each link's licence) as JSON and CSV in `dist/export`; `release.yml` attaches it to releases. See [export.md](export.md) |
+| `node scripts/build-site.mjs [--out dir] [--no-export]` | Prepares the GitHub Pages source in `dist/site` from `docs/`, `site/` and `llms.txt`; `pages.yml` renders it with Jekyll and deploys on push to `main` (needs Pages Source: GitHub Actions) |
+| `node scripts/anandajoti/build.mjs --cache <dir>` | Rebuilds `server/data/anandajoti.json` (Ānandajoti Bhikkhu links, each checked against the Pāli on the page); needs network |
+| `node scripts/anandajoti/audit.mjs --sample 30` | Live audit of a sample of the Ānandajoti links (`npm run linkcheck` reads only `translations.json`, so it does not cover them) |
+| `node scripts/build_topics.mjs` | Rebuilds `server/data/topics.json` from Access to Insight's General and Numerical indexes, pinned to one `bcbsit/ati` commit |
+| `node scripts/build-bmc.mjs` | Rebuilds `server/data/bmc.json` (rule → *Buddhist Monastic Code* section) from the book's table of contents; needs network |
+| `python scripts/render-icon.py` | Renders `assets/icon.svg` to `assets/icon.png` and `.claude-plugin/icon.png` (512 px, Pillow); keep its shapes in step with the SVG |
+| `python scripts/semantic/eval_embeddings.py` | Reproduces the search-by-meaning evaluation in [semantic-search.md](semantic-search.md) (deferred) |
+| `scripts/expected-tools.mjs` | Not run directly: reads the exact tool names from `src/server.mjs` and the modules in `src/features/index.mjs`. The HTTP, widget, smoke and npx checks compare the live tool list with it, so a new feature tool needs no count edits |
+
 Behind a corporate or sandbox proxy, Node's `fetch` ignores `HTTPS_PROXY` unless you set `NODE_USE_ENV_PROXY=1` (supported in recent Node releases), and you may need `NODE_EXTRA_CA_CERTS` pointing at the proxy's CA bundle. `scripts/smoke.mjs` passes the environment through to the server it starts.
 
 ## Repository layout
@@ -38,14 +52,28 @@ src/                 server source (ES modules)
   cache.mjs          in-memory LRU for live English/ATI/DPD responses
   citations.mjs      citation parser: IDs, PTS volume/page, Vinaya forms, links
   canon.mjs          bundled canon: load, resolve, segments, describe, search, browse, linksFor
-  english.mjs        translations: dhammatalks.org, Access to Insight, mirrors, fallback
+  english.mjs        translations: dhammatalks.org, Access to Insight, Ancient Buddhist Texts (aj:), mirrors, fallback
   providers.mjs      Digital Pāḷi Dictionary, Access to Insight search/read, list_sources
   http.mjs           allowlisted fetch, redirects, retries, mirrors, outage simulation
+  features/index.mjs feature registry: one `export * as x from '../x.mjs'` line per feature module
+  verify.mjs         verify_quote            find-citations.mjs  find_citations
+  calendar.mjs       uposatha, festivals     daily.mjs           daily_text, reading_plan
+  topics.mjs         topic, list_topics, dhamma_list
+  dppn.mjs           lookup_name             vinaya-bmc.mjs      vinaya_rule
+  abhidhamma.mjs     abhidhamma_matika, patthana_condition
+  paritta.mjs        paritta                 talks.mjs           find_talks
+  pronunciation.mjs  pali://pronunciation    memorise.mjs        memorise_passage prompt
+  chatgpt-widget.mjs read_passage_widget (hosted HTTP only, CHATGPT_WIDGET=1)
 server/              BUILT OUTPUT, committed (plugin users need no build)
   index.cjs          bundled stdio server (what every local client runs)
   http.cjs           bundled HTTP server (hosted /mcp; see hosting.md)
   data/canon.json.gz        Pāli text + citation index (generated)
   data/translations.json    translation links (generated)
+  data/anandajoti.json      Ānandajoti Bhikkhu links, merged in by canon.load() (scripts/anandajoti/build.mjs)
+  data/topics.json          Access to Insight General and Numerical index topics (scripts/build_topics.mjs)
+  data/dhamma_lists.json    numbered lists, curated by hand and checked against the VRI text by tests/topics.test.mjs
+  data/bmc.json             rule → Buddhist Monastic Code section links (scripts/build-bmc.mjs)
+  data/dppn.json            DPPN source record; no entries until the licence is confirmed (#32)
   THIRD_PARTY_LICENSES.txt
 scripts/
   build.mjs          esbuild bundle + licence collection
@@ -58,18 +86,23 @@ scripts/
   check-server-json.mjs  server.json checks; --publish refuses placeholders
   install-links.mjs  generates the one-click editor links in install/ide.md
   coverage.mjs       coverage numbers
+  expected-tools.mjs exact tool names derived from the source (see the table above)
+  export-index.mjs, build-site.mjs   citation index export and docs site (see the table above)
+  anandajoti/, build_topics.mjs, build-bmc.mjs   data builders for the new data files
   pack-desktop.mjs   .mcpb packaging
   canon/             Python data pipeline (see its README)
-skills/              study, compare, pali-word (SKILL.md, shared format; agents/openai.yaml for Codex)
-tests/core.test.mjs  unit and regression tests
+skills/              study, compare, pali-word, method, memorise (SKILL.md, shared format; agents/openai.yaml for Codex)
+tests/core.test.mjs  unit and regression tests; each feature has its own tests/<feature>.test.mjs
 .claude-plugin/      Claude Code plugin + marketplace manifests (checked by tests/core.test.mjs; run `claude plugin validate .`)
 .mcp.json            Claude Code plugin's MCP server config
 .codex-plugin/, .mcp.codex.json, .agents/plugins/marketplace.json   Codex plugin and marketplace
-gemini-extension.json, GEMINI.md, commands/   Gemini CLI extension (manifest, context file, /study /compare /pali-word)
+gemini-extension.json, GEMINI.md, commands/   Gemini CLI extension (manifest, context file, /study /compare /pali-word /method /memorise)
 manifest.json        Claude Desktop extension manifest (lists PRIVACY.md under privacy_policies)
 server.json          MCP Registry entry (io.github.DaniilKi/pali-canon)
-Dockerfile, fly.toml, render.yaml   hosted HTTP server image and hosting configs
-docs/                human documentation
+Dockerfile, fly.toml, render.yaml   hosted HTTP server image and hosting configs (fly.toml and render.yaml set CHATGPT_WIDGET=1)
+site/, llms.txt      docs site layout (Jekyll) and the plain-text guide for AI agents
+assets/icon.svg, icon.png   directory icon (palm-leaf manuscript)
+docs/                human documentation (docs/i18n/: machine-drafted translations of the guidance)
 ```
 
 ## Tools
@@ -87,8 +120,26 @@ docs/                human documentation
 | `search_access_to_insight` | Access to Insight sutta and subject indexes | online, mirrored |
 | `get_access_to_insight_text` | Read an Access to Insight page with its licence notice | online, mirrored |
 | `list_sources` | Sources, versions, licences, mirrors | offline |
+| `verify_quote` | `text`, `language` (auto/pali/english), `texts` (English scope, up to 12 citations), `limit`. Fuzzy-matches a quotation. Pāli: the bundled VRI text through a lazy word and trigram index (built on the first Pāli check). English: the linked translations, fetched live and cached (default scope: the 26 Dhammapada chapters, one page per translator, at most 80 pages). Returns matches with citation and similarity, the verdict `found` / `close_paraphrase` / `not_found_in_scope`, the scope, `equally_similar_texts` and `citation_note` for stock passages, and `next_step` (check the Pāli) for English misses | offline (Pāli); online (English) |
+| `find_citations` | `text` (up to 200,000 characters). Finds every citation form the parser accepts, resolves each with `canon.resolve`, and reports unresolved ones with the reason and UTF-16 offsets | offline |
+| `uposatha` | `from`, `to`, `tradition` (thai-mahanikaya, thai-dhammayut, myanmar, sri-lanka). Uposatha days (full, new and half moons) with lunar month and day; computed and labelled with the rule | offline |
+| `festivals` | `year`, `tradition`. Māgha Pūjā, Vesak, Āsāḷha Pūjā, Vassa start and end, Pavāraṇā and the Kaṭhina season, with their canonical texts; computed (see [calendar.md](calendar.md)) | offline |
+| `daily_text` | `date` (YYYY-MM-DD, UTC, default today), `kind` (`verse` or `sutta`). Fixed-rotation Dhammapada verse or sutta of the day from the bundled canon | offline |
+| `reading_plan` | `name`, `day`. Plans `dhammapada-26-days`, `mn-year`, `ati-into-the-stream`, `ati-four-noble-truths`; lists plans, a whole schedule or one day's readings with `get_text` arguments | offline |
+| `lookup_name` | `name`, `limit`, `textLimit`, `exactWord`. DPPN entry when bundled (none yet: licence unconfirmed, #32), links to the online editions, and the VRI texts that name it (ranked title, then opening, then body) | offline |
+| `topic` | `name`. Texts on a topic from Access to Insight's General and Numerical indexes, mapped to canon IDs (title, PTS page, numbering notes), with see-also topics and the matching numbered list | offline |
+| `list_topics` | `query`, `index` (subject, numerical or all), `offset`, `limit`. Browse or search the 472 topics | offline |
+| `dhamma_list` | `name`. A standard numbered list (four noble truths, five aggregates, the 37 aids, ten fetters, twelve links…): Pāli members, labelled English glosses, status (canonical or later) and the defining passage. No name lists all 37 | offline |
+| `abhidhamma_matika` | `section`. The Dhammasaṅgaṇī mātikā (22 triads, 100 Abhidhamma dyads by group, 42 Suttanta dyads) with VRI paragraphs and `get_text` locations | offline |
+| `patthana_condition` | `name` (Pāli name, 1–24 or "all"). One of the 24 Paṭṭhāna conditions: Pāli name, definition text and location, and a `lookup_pali` pointer for the term | offline |
+| `vinaya_rule` | `rule` (Pj 1–4, Ss 1–13, Ay 1–2, Np 1–30, Pc 1–92, Pd 1–4, Sk 1–75, As 1–7). A monk's Pātimokkha rule: its VRI text and the section of Ṭhānissaro Bhikkhu's *Buddhist Monastic Code* that explains it (link only) | offline |
+| `paritta` | `name`, `text`, `offset`, `limit`. Commonly recited texts (paritta, Khuddakapāṭha chants) in Pāli from the bundled VRI text; canonical sources only; English as links | offline |
+| `find_talks` | `query`, `passage`, `category` (all, evening, morning), `page`, `limit`, `cursor`. Link-only search of Ṭhānissaro Bhikkhu's talks through dhammatalks.org's own search page: titles, dates and URLs only, continued with `next_cursor`; a passage is searched by the exact title of his translation; cached, requests at least 1 second apart | online |
+| `read_passage_widget` | Hosted HTTP only, when `CHATGPT_WIDGET=1` (registered by `src/http-server.mjs`, not the feature registry). Pāli and one English translation for the ChatGPT reading widget (`ui://pali-canon/reader-v1.html`, plus the Apps SDK alias `ui://pali-canon/reader-v1.skybridge.html`). `offset`/`limit` page the Pāli, `english_offset` the English (6,000 characters per call) | online (English) |
 
-Resources: `pali://sources`, `pali://canon-guide`. Prompts: `study_passage`, `compare_translations`, `topic_research`. All tools are annotated read-only and idempotent; network tools set `openWorldHint`.
+Resources: `pali://sources`, `pali://canon-guide`, `pali://pronunciation` (Pāli pronunciation guide and links to public-domain grammars, `src/pronunciation.mjs`). Prompts: `study_passage`, `compare_translations`, `topic_research`, `memorise_passage` (chunks by segment, cloze practice and a spaced review schedule, `src/memorise.mjs`). All tools are annotated read-only and idempotent; network tools set `openWorldHint`.
+
+Feature tools live in their own modules (see AGENTS.md, "Add a tool"). The tool surface is pinned by exact names: `scripts/expected-tools.mjs` reads them from `src/server.mjs` (the 11 core tools) and the modules in `src/features/index.mjs`, so the tests, smoke run and npx check need no count edits when a tool is added. A new tool still needs a row in the annotations table of [listings/claude-connector.md](listings/claude-connector.md) and in [install/local-clients.md](install/local-clients.md); tests enforce both.
 
 ## Connect any MCP client
 
@@ -132,7 +183,7 @@ The data is generated by the Python pipeline in [`scripts/canon/`](../scripts/ca
 
 ## Coverage numbers
 
-`npm run coverage` prints texts, approximate texts, grouped members and English links per collection; `--json` gives the full summary. Use it whenever data changes, and update [coverage.md](coverage.md) and the README to match.
+`npm run coverage` prints texts, approximate texts, grouped members and English links per collection and per source (dhammatalks.org, Access to Insight, Ancient Buddhist Texts); `--json` gives the full summary. Use it whenever data changes, and update [coverage.md](coverage.md) and the README to match.
 
 ## Adding a source
 

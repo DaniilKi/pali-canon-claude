@@ -22,7 +22,7 @@
   "interface": {
     "displayName": "Pali Canon",
     "shortDescription": "Read and cite the Pali Canon from real sources",
-    "longDescription": "The whole Pali Tipitaka (VRI Chattha Sangayana edition) offline, with citation and PTS page lookup, English translations from dhammatalks.org and Access to Insight (with mirrors), and Digital Pali Dictionary lookup. Every result carries its source, attribution and licence. Three skills: $study for passages and topics, $compare for translations, $pali-word for vocabulary. Read-only; it never fetches SuttaCentral content. If Codex does not start the server after install, run `codex mcp add pali-canon -- npx -y pali-canon-mcp`.",
+    "longDescription": "The whole Pali Tipitaka (VRI Chattha Sangayana edition) offline, with citation and PTS page lookup, English translations from dhammatalks.org and Access to Insight (with mirrors), and Digital Pali Dictionary lookup. Every result carries its source, attribution and licence. Five skills: $study for passages and topics, $compare for translations, $pali-word for vocabulary, $method for genre, textual layers and uncertainty, $memorise for learning verses by heart. Read-only; it never fetches SuttaCentral content. If Codex does not start the server after install, run `codex mcp add pali-canon -- npx -y pali-canon-mcp`.",
     "developerName": "DaniilKi and contributors",
     "category": "Education",
     "capabilities": [

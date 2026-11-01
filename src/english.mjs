@@ -1,6 +1,6 @@
-/** English translations: Ṭhānissaro Bhikkhu (dhammatalks.org) and Access to Insight, with mirrors. */
+/** English translations: Ṭhānissaro Bhikkhu (dhammatalks.org), Access to Insight (with mirrors) and Ānandajoti Bhikkhu (Ancient Buddhist Texts). */
 import { fetchMirrors, plainText, decodeHtml } from './http.mjs';
-import { load, linksFor } from './canon.mjs';
+import { load, linksFor, translationId, sourceName, ANANDAJOTI_BASE, ANANDAJOTI_LICENSE } from './canon.mjs';
 import { liveCache } from './cache.mjs';
 
 const ATI_MIRRORS = [
@@ -36,6 +36,58 @@ export function atiNotice(html) {
 // Successful page fetches are kept briefly in memory (see cache.mjs) with their notices; failures never are.
 const fetchAti = (path) => liveCache.wrap(`ati:${path}`, () => fetchAtiLive(path));
 const fetchDhammatalks = (url) => liveCache.wrap(`dt:${url}`, () => fetchDhammatalksLive(url));
+const fetchAnandajotiPage = (path) => liveCache.wrap(`aj:${path}`, () => fetchAnandajotiPageLive(path));
+
+/** Only pages of the Ancient Buddhist Texts "Texts and Translations" section are fetched. */
+export function anandajotiUrl(path) {
+  if (/\.\./.test(path) || !/^\/Texts-and-Translations\/[A-Za-z0-9 _.-]+(\/[A-Za-z0-9 _.-]+)*\.htm$/.test(path)) {
+    throw new Error('Unsupported Ancient Buddhist Texts path.');
+  }
+  return ANANDAJOTI_BASE + encodeURI(path);
+}
+
+/**
+ * Readable text of one Ancient Buddhist Texts page: the line-by-line Pāli and English, with the
+ * translator's notes marked [Note: …] and commentary blocks marked as commentary. Navigation, the
+ * floating legend and the footer are dropped.
+ */
+export function anandajotiContent(html) {
+  let body = html.match(/<body\b[^>]*>([^]*)<\/body>/i)?.[1] ?? html;
+  const cut = body.search(/<div\b[^>]*id=["']infowrapper["']|<footer\b|<p\b[^>]*class=["']NavBar3["'][^>]*>\s*<a\b[^>]*History\.htm/i);
+  if (cut > 0) body = body.slice(0, cut);
+  body = body
+    .replace(/<p\b[^>]*class=["']NavBar\d["'][^>]*>[^]*?<\/p>/gi, '')
+    .replace(/<span\b[^>]*class=["']TT["'][^>]*>\s*<span\b[^>]*>([^]*?)<\/span>\s*<sup\b[^>]*><\/sup>\s*<\/span>/gi, ' [Note: $1] ')
+    .replace(/<div\b[^>]*class=["']vannana["'][^>]*>([^]*?)<\/div>/gi, '<p>[Commentary (Aṭṭhakathā) begins]</p>$1<p>[Commentary ends]</p>');
+  return plainText(body);
+}
+
+async function fetchAnandajotiPageLive(path) {
+  const { body } = await fetchMirrors([anandajotiUrl(path)]);
+  return { title: decodeHtml(body.match(/<title\b[^>]*>([^]*?)<\/title>/i)?.[1] ?? '').trim(), text: anandajotiContent(body) };
+}
+
+/** Fetch an Ānandajoti translation. Multi-page works are read part by part, only as far as `need` characters. */
+async function fetchAnandajoti(link, need) {
+  const parts = link.parts || [link.path];
+  let text = '';
+  let title = '';
+  let read = 0;
+  for (const part of parts) {
+    const page = await fetchAnandajotiPage(part);
+    if (!title) title = page.title;
+    text += (text ? '\n\n' : '') + page.text;
+    read += 1;
+    if (text.length >= need) break;
+  }
+  return {
+    source: 'Ancient Buddhist Texts', url: link.url, fetched_from: 'ancient-buddhist-texts.net',
+    fetched_url: ANANDAJOTI_BASE + encodeURI(parts[0]), title: link.english || title, text,
+    parts_read: read, parts_total: parts.length,
+    attribution: 'Edited and translated from the Pāli by Ānandajoti Bhikkhu (Ancient Buddhist Texts, ancient-buddhist-texts.net).',
+    license: ANANDAJOTI_LICENSE,
+  };
+}
 
 async function fetchAtiLive(path) {
   const { body, url, mirror } = await fetchMirrors(atiMirrors(path));
@@ -66,9 +118,10 @@ async function fetchDhammatalksLive(url) {
 /** List the English translations linked to a text. */
 export function available(unit) {
   return linksFor(unit).links.map((t) => ({
-    translation_id: t.source === 'ati' ? `ati:${t.path}` : `dt:${t.url.split('/suttas/')[1].replace(/\.html$/, '')}`,
-    source: t.source === 'ati' ? 'Access to Insight' : 'dhammatalks.org',
+    translation_id: translationId(t),
+    source: sourceName(t),
     translator: t.translator, reference: t.reference || undefined, ...(t.license ? { license: t.license } : {}), match: t.match,
+    ...(t.commentary ? { includes_commentary: true } : {}),
   }));
 }
 
@@ -81,17 +134,21 @@ export async function translation(unit, which, { offset = 0, limit = 12000 } = {
   let link;
   if (!which) {
     link = links.find((l) => l.source === 'dhammatalks') || links[0];
-  } else if (/^(ati|dt):/.test(which)) {
-    link = links.find((l) => (l.source === 'ati' ? `ati:${l.path}` : `dt:${l.url.split('/suttas/')[1].replace(/\.html$/, '')}`) === which);
+  } else if (/^(ati|dt|aj):/.test(which)) {
+    link = links.find((l) => translationId(l) === which);
   } else {
-    const w = which.toLowerCase();
-    link = links.find((l) => (l.translator || '').toLowerCase().includes(w) || l.source.includes(w));
+    // Translator names match with or without diacritics ("Anandajoti" finds "Ānandajoti Bhikkhu").
+    const plain = (v) => String(v || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+    const w = plain(which);
+    link = links.find((l) => plain(l.translator).includes(w) || l.source.includes(w));
   }
   if (!link) throw new Error(`Translation "${which}" is not linked for ${unit.acronym}. Available: ${available(unit).map((a) => `${a.translation_id} (${a.translator})`).join(', ')}.`);
   let result;
   const notes = via ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   try {
-    result = link.source === 'ati' ? await fetchAti(link.path) : await fetchDhammatalks(link.url);
+    result = link.source === 'ati' ? await fetchAti(link.path)
+      : link.source === 'anandajoti' ? await fetchAnandajoti(link, offset + limit + 1)
+        : await fetchDhammatalks(link.url);
   } catch (error) {
     // dhammatalks.org has no mirror; during an outage (not for a missing page) fall back to the same
     // translator's Access to Insight version of this same text.
@@ -106,17 +163,24 @@ export async function translation(unit, which, { offset = 0, limit = 12000 } = {
     notes.push(`dhammatalks.org could not be reached (${error.message}); showing Ṭhānissaro Bhikkhu's earlier version from Access to Insight instead.`);
     link = sameTranslator;
   }
-  if (result.fetched_from !== result.source && result.fetched_from !== 'dhammatalks.org' && result.fetched_from !== 'accesstoinsight.org') {
+  if (link.source === 'anandajoti') {
+    notes.push('A line-by-line edition: each Pāli line is followed by its English translation. [Note: …] marks are the translator\'s notes, not scripture.');
+    if (link.commentary) notes.push('This page also translates the commentary (Aṭṭhakathā); those passages are marked "[Commentary (Aṭṭhakathā) begins]" and are commentary, not the canonical text.');
+  }
+  if (result.fetched_from !== result.source && !['dhammatalks.org', 'accesstoinsight.org', 'ancient-buddhist-texts.net'].includes(result.fetched_from)) {
     notes.push(`The primary site was unavailable; text served from ${result.fetched_from}, an identical copy of the archive.`);
   }
   const theirs = (link.reference || '').match(/^(AN|SN) (\d+):(\d+)/);
   if (theirs && `${theirs[1].toLowerCase()}${theirs[2]}.${theirs[3]}` !== unit.id) {
     notes.push(`This translation numbers the text ${theirs[1]} ${theirs[2]}:${theirs[3]} (PTS-based numbering); it is the same text as ${unit.acronym}.`);
   }
-  const text = result.text;
+  const { parts_read: partsRead, parts_total: partsTotal, ...rest } = result;
+  const text = rest.text;
+  const complete = partsRead === undefined || partsRead === partsTotal;
+  if (!complete) notes.push(`This translation is spread over ${partsTotal} pages; ${partsRead} of them ${partsRead === 1 ? 'was' : 'were'} read for this request. Ask again with next_offset to continue.`);
   return {
-    text_id: unit.id, citation: unit.acronym, translator: link.translator, translation_id: link.source === 'ati' ? `ati:${link.path}` : `dt:${link.url.split('/suttas/')[1].replace(/\.html$/, '')}`,
-    ...result, text: text.slice(offset, offset + limit), offset, limit, total_characters: text.length,
+    text_id: unit.id, citation: unit.acronym, translator: link.translator, translation_id: translationId(link),
+    ...rest, text: text.slice(offset, offset + limit), offset, limit, total_characters: complete ? text.length : null,
     next_offset: offset + limit < text.length ? offset + limit : null, match: link.match, notes,
   };
 }

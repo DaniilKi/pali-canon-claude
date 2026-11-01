@@ -78,9 +78,9 @@ export function createServer() {
     return result;
   }, { network: true });
 
-  tool('get_translation', 'Read an English translation of a text (Ṭhānissaro Bhikkhu on dhammatalks.org, or Access to Insight translators), with attribution, license and numbering notes. Falls back to official mirrors if a site is down.', {
+  tool('get_translation', 'Read an English translation of a text (Ṭhānissaro Bhikkhu on dhammatalks.org, Access to Insight translators, or Ānandajoti Bhikkhu on Ancient Buddhist Texts), with attribution, license and numbering notes. Falls back to official mirrors if a site is down.', {
     uid: citation,
-    translation: z.string().max(200).optional().describe('translation_id from get_metadata (e.g. "dt:MN/MN10" or "ati:/tipitaka/mn/mn.010.nysa"), a translator name, or omit for the default.'),
+    translation: z.string().max(200).optional().describe('translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), a translator name, or omit for the default.'),
     offset: z.number().int().min(0).max(2000000).default(0),
     limit: z.number().int().min(500).max(30000).default(12000).describe('Characters per page.'),
   }, async ({ uid, translation, offset, limit }) => {

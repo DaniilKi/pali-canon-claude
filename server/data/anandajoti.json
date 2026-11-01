@@ -1,0 +1,1345 @@
+{
+ "source": {
+  "name": "Ancient Buddhist Texts",
+  "site": "https://ancient-buddhist-texts.net/",
+  "translator": "Ānandajoti Bhikkhu",
+  "license": "CC BY-SA 3.0 Unported (site Copyright Notice, 26 May 2013); page footers now link CC BY-SA 4.0. Attribution: Ānandajoti Bhikkhu.",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "notice_url": "https://ancient-buddhist-texts.net/Miscellaneous/Copyright-Notice.htm",
+  "checked": "2026-11-01",
+  "policy": "Linked only when the site names the text and its Pāli lines (English and notes set aside) cover at least 60% of the VRI text (word 3-grams) and no other text comes within 0.1 of it; SN/AN also need the Pāli title printed in the page heading (pali_title) to agree with ours."
+ },
+ "links": {
+  "an4.61": {
+   "path": "/Texts-and-Translations/Short-Pieces/Pattakammasuttam.htm",
+   "reference": "AN 4.61",
+   "title": "The Discourse about Suitable Deeds",
+   "match": "number+title+pali",
+   "pali_title": "Pattakammasuttaṁ",
+   "coverage": 0.84
+  },
+  "an4.70": {
+   "path": "/Texts-and-Translations/Short-Pieces/Adhammikasutta.htm",
+   "reference": "AN 4.70",
+   "title": "The Discourse on the Dishonest",
+   "match": "number+title+pali",
+   "pali_title": "Adhammikasuttaṁ",
+   "coverage": 0.83,
+   "commentary": true
+  },
+  "an5.41": {
+   "path": "/Texts-and-Translations/Short-Pieces/Adiyasuttam.htm",
+   "reference": "AN 5.41",
+   "title": "The Discourse on the Right Use (of Wealth)",
+   "match": "number+title+pali",
+   "pali_title": "Ādiyasuttaṁ",
+   "coverage": 0.97
+  },
+  "an6.37": {
+   "path": "/Texts-and-Translations/Short-Pieces/Chalangadana.htm",
+   "reference": "AN 6.37",
+   "title": "The Six Factors of Giving",
+   "match": "number+title+pali",
+   "pali_title": "Chaḷaṅgadāna",
+   "coverage": 0.87,
+   "commentary": true
+  },
+  "an8.51": {
+   "path": "/Texts-and-Translations/Gotamisuttani/01-Gotami.htm",
+   "reference": "AN 8.51",
+   "title": "The Discourse about Gotamī",
+   "match": "number+title+pali",
+   "pali_title": "Gotamīsuttaṁ",
+   "coverage": 0.8
+  },
+  "an8.53": {
+   "path": "/Texts-and-Translations/Gotamisuttani/03-Brief.htm",
+   "reference": "AN 8.53",
+   "title": "The Brief Discourse",
+   "match": "number+title+pali",
+   "pali_title": "Saṅkhittasuttaṁ",
+   "coverage": 0.84
+  },
+  "an10.60": {
+   "path": "/Texts-and-Translations/Short-Pieces/Girimanandasuttam.htm",
+   "reference": "AN 10.60",
+   "title": "The Discourse to Girimānanda",
+   "match": "number+title+pali",
+   "pali_title": "Girimānandasuttaṁ",
+   "coverage": 0.64
+  },
+  "an10.69": {
+   "path": "/Texts-and-Translations/Short-Pieces/Kathavatthu.htm",
+   "reference": "AN 10.69",
+   "title": "The First Discourse on the Bases for Talk",
+   "match": "number+title+pali",
+   "pali_title": "Paṭhamakathāvatthusuttaṁ",
+   "coverage": 0.83
+  },
+  "dhp1-20": {
+   "path": "/Texts-and-Translations/Dhammapada/01-Pairs.htm",
+   "reference": "Dhp 1–20",
+   "title": "Dhammapada chapter 1",
+   "match": "chapter",
+   "pali_title": "Yamakavaggo",
+   "coverage": 0.81
+  },
+  "dhp21-32": {
+   "path": "/Texts-and-Translations/Dhammapada/02-Heedfulness.htm",
+   "reference": "Dhp 21–32",
+   "title": "Dhammapada chapter 2",
+   "match": "chapter",
+   "pali_title": "Appamādavaggo",
+   "coverage": 0.69
+  },
+  "dhp33-43": {
+   "path": "/Texts-and-Translations/Dhammapada/03-Mind.htm",
+   "reference": "Dhp 33–43",
+   "title": "Dhammapada chapter 3",
+   "match": "chapter",
+   "pali_title": "Cittavaggo",
+   "coverage": 0.78
+  },
+  "dhp44-59": {
+   "path": "/Texts-and-Translations/Dhammapada/04-Flowers.htm",
+   "reference": "Dhp 44–59",
+   "title": "Dhammapada chapter 4",
+   "match": "chapter",
+   "pali_title": "Pupphavaggo",
+   "coverage": 0.69
+  },
+  "dhp60-75": {
+   "path": "/Texts-and-Translations/Dhammapada/05-Fools.htm",
+   "reference": "Dhp 60–75",
+   "title": "Dhammapada chapter 5",
+   "match": "chapter",
+   "pali_title": "Bālavaggo",
+   "coverage": 0.84
+  },
+  "dhp76-89": {
+   "path": "/Texts-and-Translations/Dhammapada/06-Wise.htm",
+   "reference": "Dhp 76–89",
+   "title": "Dhammapada chapter 6",
+   "match": "chapter",
+   "pali_title": "Paṇḍitavaggo",
+   "coverage": 0.84
+  },
+  "dhp90-99": {
+   "path": "/Texts-and-Translations/Dhammapada/07-Arahats.htm",
+   "reference": "Dhp 90–99",
+   "title": "Dhammapada chapter 7",
+   "match": "chapter",
+   "pali_title": "Arahantavaggo",
+   "coverage": 0.79
+  },
+  "dhp100-115": {
+   "path": "/Texts-and-Translations/Dhammapada/08-Thousands.htm",
+   "reference": "Dhp 100–115",
+   "title": "Dhammapada chapter 8",
+   "match": "chapter",
+   "pali_title": "Sahassavaggo",
+   "coverage": 0.84
+  },
+  "dhp116-128": {
+   "path": "/Texts-and-Translations/Dhammapada/09-Wickedness.htm",
+   "reference": "Dhp 116–128",
+   "title": "Dhammapada chapter 9",
+   "match": "chapter",
+   "pali_title": "Pāpavaggo",
+   "coverage": 0.62
+  },
+  "dhp129-145": {
+   "path": "/Texts-and-Translations/Dhammapada/10-Stick.htm",
+   "reference": "Dhp 129–145",
+   "title": "Dhammapada chapter 10",
+   "match": "chapter",
+   "pali_title": "Daṇḍavaggo",
+   "coverage": 0.79
+  },
+  "dhp146-156": {
+   "path": "/Texts-and-Translations/Dhammapada/11-Old-Age.htm",
+   "reference": "Dhp 146–156",
+   "title": "Dhammapada chapter 11",
+   "match": "chapter",
+   "pali_title": "Jarāvaggo",
+   "coverage": 0.77
+  },
+  "dhp157-166": {
+   "path": "/Texts-and-Translations/Dhammapada/12-Self.htm",
+   "reference": "Dhp 157–166",
+   "title": "Dhammapada chapter 12",
+   "match": "chapter",
+   "pali_title": "Attavaggo",
+   "coverage": 0.67
+  },
+  "dhp167-178": {
+   "path": "/Texts-and-Translations/Dhammapada/13-World.htm",
+   "reference": "Dhp 167–178",
+   "title": "Dhammapada chapter 13",
+   "match": "chapter",
+   "pali_title": "Lokavaggo",
+   "coverage": 0.8
+  },
+  "dhp179-196": {
+   "path": "/Texts-and-Translations/Dhammapada/14-Buddha.htm",
+   "reference": "Dhp 179–196",
+   "title": "Dhammapada chapter 14",
+   "match": "chapter",
+   "pali_title": "Buddhavaggo",
+   "coverage": 0.84
+  },
+  "dhp197-208": {
+   "path": "/Texts-and-Translations/Dhammapada/15-Happiness.htm",
+   "reference": "Dhp 197–208",
+   "title": "Dhammapada chapter 15",
+   "match": "chapter",
+   "pali_title": "Sukhavaggo",
+   "coverage": 0.82
+  },
+  "dhp209-220": {
+   "path": "/Texts-and-Translations/Dhammapada/16-Love.htm",
+   "reference": "Dhp 209–220",
+   "title": "Dhammapada chapter 16",
+   "match": "chapter",
+   "pali_title": "Piyavaggo",
+   "coverage": 0.95
+  },
+  "dhp221-234": {
+   "path": "/Texts-and-Translations/Dhammapada/17-Anger.htm",
+   "reference": "Dhp 221–234",
+   "title": "Dhammapada chapter 17",
+   "match": "chapter",
+   "pali_title": "Kodhavaggo",
+   "coverage": 0.82
+  },
+  "dhp235-255": {
+   "path": "/Texts-and-Translations/Dhammapada/18-Stains.htm",
+   "reference": "Dhp 235–255",
+   "title": "Dhammapada chapter 18",
+   "match": "chapter",
+   "pali_title": "Malavaggo",
+   "coverage": 0.76
+  },
+  "dhp256-272": {
+   "path": "/Texts-and-Translations/Dhammapada/19-Dhamma.htm",
+   "reference": "Dhp 256–272",
+   "title": "Dhammapada chapter 19",
+   "match": "chapter",
+   "pali_title": "Dhammaṭṭhavaggo",
+   "coverage": 0.89
+  },
+  "dhp273-289": {
+   "path": "/Texts-and-Translations/Dhammapada/20-Path.htm",
+   "reference": "Dhp 273–289",
+   "title": "Dhammapada chapter 20",
+   "match": "chapter",
+   "pali_title": "Maggavaggo",
+   "coverage": 0.74
+  },
+  "dhp290-305": {
+   "path": "/Texts-and-Translations/Dhammapada/21-Miscellaneous.htm",
+   "reference": "Dhp 290–305",
+   "title": "Dhammapada chapter 21",
+   "match": "chapter",
+   "pali_title": "Pakiṇṇakavaggo",
+   "coverage": 0.88
+  },
+  "dhp306-319": {
+   "path": "/Texts-and-Translations/Dhammapada/22-Underworld.htm",
+   "reference": "Dhp 306–319",
+   "title": "Dhammapada chapter 22",
+   "match": "chapter",
+   "pali_title": "Nirayavaggo",
+   "coverage": 0.83
+  },
+  "dhp320-333": {
+   "path": "/Texts-and-Translations/Dhammapada/23-Elephant.htm",
+   "reference": "Dhp 320–333",
+   "title": "Dhammapada chapter 23",
+   "match": "chapter",
+   "pali_title": "Nāgavaggo",
+   "coverage": 0.81
+  },
+  "dhp334-359": {
+   "path": "/Texts-and-Translations/Dhammapada/24-Craving.htm",
+   "reference": "Dhp 334–359",
+   "title": "Dhammapada chapter 24",
+   "match": "chapter",
+   "pali_title": "Taṇhāvaggo",
+   "coverage": 0.71
+  },
+  "dhp360-382": {
+   "path": "/Texts-and-Translations/Dhammapada/25-Monastics.htm",
+   "reference": "Dhp 360–382",
+   "title": "Dhammapada chapter 25",
+   "match": "chapter",
+   "pali_title": "Bhikkhuvaggo",
+   "coverage": 0.83
+  },
+  "dn16": {
+   "path": "/Texts-and-Translations/Mahaparinibbanasuttam/index.htm",
+   "parts": [
+    "/Texts-and-Translations/Mahaparinibbanasuttam/01-King-Ajatasattu.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/02-Prevent-Vajji-Decline.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/03-Prevent-Community-Decline-1.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/04-Prevent-Community-Decline-2.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/05-Prevent-Community-Decline-3.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/06-Prevent-Community-Decline-4.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/07-Prevent-Community-Decline-5.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/08-Prevent-Community-Decline-6.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/09-Ambalatthika.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/10-Sariputta.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/11-Virtue.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/12-Building.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/13-Truths.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/14-Mirror.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/15-Ambapali.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/16-Sickness.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/17-Anandas-Failure.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/18-Relinquishment.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/19-Earthquakes.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/20-Assemblies.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/21-Mind-Mastery.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/22-Liberations.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/23-Anandas-Fault.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/24-Ananda-at-Rajagaha.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/25-Ananda-at-Vesali.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/26-Thirty-Seven-Things.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/27-Noble-Things.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/28-References.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/29-Last-Meal.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/30-Drinking-Water.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/31-Pukkusa.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/32-Cunda.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/33-Worshipping.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/34-Divinities.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/35-Four-Places.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/36-Anandas-Qualities.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/37-Kusinara.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/38-Mallas.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/39-Subhadda.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/40-Last-Instructions.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/41-Final-Emancipation.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/42-Preperation-of-Body.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/43-Mahakassapa.htm",
+    "/Texts-and-Translations/Mahaparinibbanasuttam/44-Distribution.htm"
+   ],
+   "reference": "DN 16",
+   "title": "The Discourse about the Great Emancipation",
+   "match": "number+title+pali",
+   "pali_title": "Mahāparinibbānasuttaṁ",
+   "coverage": 0.79
+  },
+  "ds1.1": {
+   "path": "/Texts-and-Translations/Abhidhammamatika/01-Tikamatika.htm",
+   "reference": "Dhs Mātikā (triads)",
+   "title": "The Matrix: Triads",
+   "match": "number+title+pali",
+   "pali_title": "Tikamātikā",
+   "coverage": 0.86
+  },
+  "ds1.3": {
+   "path": "/Texts-and-Translations/Abhidhammamatika/03-Suttantadukamatika.htm",
+   "reference": "Dhs Mātikā (discourse pairs)",
+   "title": "The Matrix: Pairs from the Discourses",
+   "match": "number+pali",
+   "coverage": 0.99
+  },
+  "mn26": {
+   "path": "/Texts-and-Translations/Ariyapariyesana/index.htm",
+   "parts": [
+    "/Texts-and-Translations/Ariyapariyesana/01-Gathering-at-Rammakas-Hermitage.htm",
+    "/Texts-and-Translations/Ariyapariyesana/02-The-Two-Searches.htm",
+    "/Texts-and-Translations/Ariyapariyesana/03-The-Decision-to-Search-for-Awakening.htm",
+    "/Texts-and-Translations/Ariyapariyesana/04-The-Meeting-with-Alara-Kalama.htm",
+    "/Texts-and-Translations/Ariyapariyesana/05-The-Meeting-with-Uddaka-Ramaputta.htm",
+    "/Texts-and-Translations/Ariyapariyesana/06-The-Awakening.htm",
+    "/Texts-and-Translations/Ariyapariyesana/07-The-Story-about-Brahmas-Request.htm",
+    "/Texts-and-Translations/Ariyapariyesana/08-Deciding-Who-to-Teach.htm",
+    "/Texts-and-Translations/Ariyapariyesana/09-The-Abstainer-Upaka.htm",
+    "/Texts-and-Translations/Ariyapariyesana/10-The-Meeting-at-Isipatana.htm",
+    "/Texts-and-Translations/Ariyapariyesana/11-The-Group-of-Five-Monks-attain-Nibbana.htm",
+    "/Texts-and-Translations/Ariyapariyesana/12-The-Five-Strands-of-Sense-Pleasure.htm"
+   ],
+   "reference": "MN 26",
+   "title": "The Discourse about the Noble Search",
+   "match": "number+pali",
+   "coverage": 0.83
+  },
+  "mn44": {
+   "path": "/Texts-and-Translations/Culavedalla/Culavedalla.htm",
+   "reference": "MN 44",
+   "title": "The Small Discourse giving an Elaboration",
+   "match": "number+title+pali",
+   "pali_title": "Cūḷavedallasuttaṁ",
+   "coverage": 0.83,
+   "commentary": true
+  },
+  "mn62": {
+   "path": "/Texts-and-Translations/Short-Pieces/MahaRahulovadasuttam.htm",
+   "reference": "MN 62",
+   "title": "The Long Discourse Giving Advice to Rāhula",
+   "match": "number+title+pali",
+   "pali_title": "Mahārāhulovādasuttaṁ",
+   "coverage": 0.79
+  },
+  "mn85": {
+   "path": "/Texts-and-Translations/Bodhirajakumara/index.htm",
+   "parts": [
+    "/Texts-and-Translations/Bodhirajakumara/01-The-Invitation.htm",
+    "/Texts-and-Translations/Bodhirajakumara/02-At the-Palace.htm",
+    "/Texts-and-Translations/Bodhirajakumara/03-The-Meeting-with-Alara-Kalama.htm",
+    "/Texts-and-Translations/Bodhirajakumara/04-The-Meeting-with-Uddaka-Ramaputta.htm",
+    "/Texts-and-Translations/Bodhirajakumara/05-The-Similes.htm",
+    "/Texts-and-Translations/Bodhirajakumara/06-Suppressing-Thought-and-Breath.htm",
+    "/Texts-and-Translations/Bodhirajakumara/07-The-Fasting.htm",
+    "/Texts-and-Translations/Bodhirajakumara/08-Finding-the-Right-Path.htm",
+    "/Texts-and-Translations/Bodhirajakumara/09-The-Story-about-Brahmas-Request.htm",
+    "/Texts-and-Translations/Bodhirajakumara/10-Deciding-Who-to-Teach.htm",
+    "/Texts-and-Translations/Bodhirajakumara/11-The-Abstainer-Upaka.htm",
+    "/Texts-and-Translations/Bodhirajakumara/12-The-Meeting-at-Isipatana.htm",
+    "/Texts-and-Translations/Bodhirajakumara/13-All-about-Attainments.htm"
+   ],
+   "reference": "MN 85",
+   "title": "The Discourse to Prince Bodhi",
+   "match": "number+title+pali",
+   "pali_title": "Bodhirājakumārasuttaṁ",
+   "coverage": 0.83
+  },
+  "mn98": {
+   "path": "/Texts-and-Translations/Short-Pieces/Vasetthasuttam.htm",
+   "reference": "MN 98",
+   "title": "The Discourse concerning Vāseṭṭha",
+   "match": "number+title+pali",
+   "pali_title": "Vāseṭṭhasuttaṁ",
+   "coverage": 0.69,
+   "commentary": true
+  },
+  "mn118": {
+   "path": "/Texts-and-Translations/Anapanasati/index.htm",
+   "parts": [
+    "/Texts-and-Translations/Anapanasati/Anapanasatisuttam-1.htm",
+    "/Texts-and-Translations/Anapanasati/Anapanasatisuttam-2.htm",
+    "/Texts-and-Translations/Anapanasati/Anapanasatisuttam-3.htm",
+    "/Texts-and-Translations/Anapanasati/Anapanasatisuttam-4.htm",
+    "/Texts-and-Translations/Anapanasati/Anapanasatisuttam-5.htm",
+    "/Texts-and-Translations/Anapanasati/Anapanasatisuttam-6.htm",
+    "/Texts-and-Translations/Anapanasati/Anapanasatisuttam-7.htm",
+    "/Texts-and-Translations/Anapanasati/Anapanasatisuttam-8.htm"
+   ],
+   "reference": "MN 118",
+   "title": "The Discourse about Mindfulness while Breathing",
+   "match": "number+pali",
+   "coverage": 0.83
+  },
+  "mn119": {
+   "path": "/Texts-and-Translations/Kayagatasati/index.htm",
+   "parts": [
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-01.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-02.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-03.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-04.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-05.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-06.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-07.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-08.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-09.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-10.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-11.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-12.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-13.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-14.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-15.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-16.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-17.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-18.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-19.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-20.htm",
+    "/Texts-and-Translations/Kayagatasati/Kayagatasatisuttam-21.htm"
+   ],
+   "reference": "MN 119",
+   "title": "The Discourse about Mindfulness related to the Body",
+   "match": "number+title+pali",
+   "pali_title": "Kāyagatāsatisuttaṁ",
+   "coverage": 0.74
+  },
+  "mn141": {
+   "path": "/Texts-and-Translations/Short-Pieces/Saccavibhangasuttam.htm",
+   "reference": "MN 141",
+   "title": "The Discourse giving the Analysis of the Truths",
+   "match": "number+title+pali",
+   "pali_title": "Saccavibhaṅgasuttaṁ",
+   "coverage": 0.81
+  },
+  "mn142": {
+   "path": "/Texts-and-Translations/Short-Pieces/Dakkhinavibhangasuttam.htm",
+   "reference": "MN 142",
+   "title": "The Analysis of Offerings",
+   "match": "number+title+pali",
+   "pali_title": "Dakkhiṇāvibhaṅgasuttaṁ",
+   "coverage": 0.85
+  },
+  "mn146": {
+   "path": "/Texts-and-Translations/Nandakovada/Nandakovada.htm",
+   "reference": "MN 146",
+   "title": "Nandaka’s Advice",
+   "match": "number+title+pali",
+   "pali_title": "Nandakovāda",
+   "coverage": 0.78,
+   "commentary": true
+  },
+  "sn5.1": {
+   "path": "/Texts-and-Translations/Bhikkhunisamyuttam/01-Alavika.htm",
+   "reference": "SN 5.1",
+   "title": "Bhikkhunisamyutta 5.1 Alavikasutta",
+   "match": "number+title+pali",
+   "pali_title": "Āḷavikāsuttaṁ",
+   "coverage": 0.99
+  },
+  "sn5.2": {
+   "path": "/Texts-and-Translations/Bhikkhunisamyuttam/02-Soma.htm",
+   "reference": "SN 5.2",
+   "title": "Bhikkhunisamyutta 5.2 Somasutta",
+   "match": "number+title+pali",
+   "pali_title": "Somāsuttaṁ",
+   "coverage": 0.91
+  },
+  "sn5.3": {
+   "path": "/Texts-and-Translations/Bhikkhunisamyuttam/03-Kisagotami.htm",
+   "reference": "SN 5.3",
+   "title": "Bhikkhunisamyutta 5.3 Kisagotamisutta",
+   "match": "number+title+pali",
+   "pali_title": "Kisāgotamīsuttaṁ",
+   "coverage": 0.98
+  },
+  "sn5.4": {
+   "path": "/Texts-and-Translations/Bhikkhunisamyuttam/04-Vijaya.htm",
+   "reference": "SN 5.4",
+   "title": "Bhikkhunisamyutta 5.4 Vijayasutta",
+   "match": "number+title+pali",
+   "pali_title": "Vijayāsuttaṁ",
+   "coverage": 0.9
+  },
+  "sn5.5": {
+   "path": "/Texts-and-Translations/Bhikkhunisamyuttam/05-Uppalavanna.htm",
+   "reference": "SN 5.5",
+   "title": "Bhikkhunisamyutta 5.5 Uppalavannasutta",
+   "match": "number+title+pali",
+   "pali_title": "Uppalavaṇṇāsuttaṁ",
+   "coverage": 0.88
+  },
+  "sn5.6": {
+   "path": "/Texts-and-Translations/Bhikkhunisamyuttam/06-Cala.htm",
+   "reference": "SN 5.6",
+   "title": "Bhikkhunisamyutta 5.6 Calasutta",
+   "match": "number+title+pali",
+   "pali_title": "Cālāsuttaṁ",
+   "coverage": 0.88
+  },
+  "sn5.7": {
+   "path": "/Texts-and-Translations/Bhikkhunisamyuttam/07-Upacala.htm",
+   "reference": "SN 5.7",
+   "title": "Bhikkhunisamyutta 5.7 Upacalasutta",
+   "match": "number+title+pali",
+   "pali_title": "Upacālāsuttaṁ",
+   "coverage": 0.91
+  },
+  "sn5.8": {
+   "path": "/Texts-and-Translations/Bhikkhunisamyuttam/08-Sisupacala.htm",
+   "reference": "SN 5.8",
+   "title": "Bhikkhunisamyutta 5.8 Sisupacalasutta",
+   "match": "number+title+pali",
+   "pali_title": "Sīsupacālāsuttaṁ",
+   "coverage": 0.83
+  },
+  "sn5.9": {
+   "path": "/Texts-and-Translations/Bhikkhunisamyuttam/09-Sela.htm",
+   "reference": "SN 5.9",
+   "title": "Bhikkhunisamyutta 5.9 Selasutta",
+   "match": "number+title+pali",
+   "pali_title": "Selāsuttaṁ",
+   "coverage": 0.83
+  },
+  "sn5.10": {
+   "path": "/Texts-and-Translations/Bhikkhunisamyuttam/10-Vajira.htm",
+   "reference": "SN 5.10",
+   "title": "Bhikkhunisamyutta 5.10 Vajirasutta",
+   "match": "number+title+pali",
+   "pali_title": "Vajirāsuttaṁ",
+   "coverage": 0.9
+  },
+  "sn12.2": {
+   "path": "/Texts-and-Translations/Short-Pieces/Paticcasamuppadavibhangasuttam.htm",
+   "reference": "SN 12.2",
+   "title": "The Discourse giving the Analysis (of Conditional Origination)",
+   "match": "number+title+pali",
+   "pali_title": "Vibhaṅgasuttaṁ",
+   "coverage": 0.94
+  },
+  "sn44.1": {
+   "path": "/Texts-and-Translations/Short-Pieces/Khemasuttam.htm",
+   "reference": "SN 44.1",
+   "title": "The Discourse about Khemā",
+   "match": "number+title+pali",
+   "pali_title": "Khemāsuttaṁ",
+   "coverage": 0.84
+  },
+  "sn48.10": {
+   "path": "/Texts-and-Translations/Short-Pieces/Indriyavibhangasuttam.htm",
+   "reference": "SN 48.10",
+   "title": "The Second Discourse giving an Analysis of the Faculties",
+   "match": "number+title+pali",
+   "pali_title": "Dutiya[-indriya]vibhaṅgasuttaṁ",
+   "coverage": 0.85
+  },
+  "snp5.1": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-00-Introduction.htm",
+   "reference": "Snp 5.1",
+   "title": "Parayanavaggo-01: Introductory Verses",
+   "match": "number+title+pali",
+   "pali_title": "Vatthugāthā",
+   "coverage": 0.73
+  },
+  "snp5.2": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-01.htm",
+   "reference": "Snp 5.2",
+   "title": "Parayanavaggo-02: The Young Man Ajita’s Questions",
+   "match": "number+title+pali",
+   "pali_title": "Ajitamāṇavapucchā",
+   "coverage": 0.72
+  },
+  "snp5.4": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-03.htm",
+   "reference": "Snp 5.4",
+   "title": "Parayanavaggo-04: The Young Man Punnaka’s Questions",
+   "match": "number+title+pali",
+   "pali_title": "Puṇṇakamāṇavapucchā",
+   "coverage": 0.74
+  },
+  "snp5.5": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-04.htm",
+   "reference": "Snp 5.5",
+   "title": "Parayanavaggo-04: The Young Man Mettagu’s Questions",
+   "match": "number+title+pali",
+   "pali_title": "Mettagūmāṇavapucchā",
+   "coverage": 0.76
+  },
+  "snp5.7": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-06.htm",
+   "reference": "Snp 5.7",
+   "title": "Parayanavaggo-06: The Young Man Upasiva’s Questions",
+   "match": "number+title+pali",
+   "pali_title": "Upasīvamāṇavapucchā",
+   "coverage": 0.65
+  },
+  "snp5.8": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-07.htm",
+   "reference": "Snp 5.8",
+   "title": "Parayanavaggo-07: The Young Man Nanda’s Questions",
+   "match": "number+title+pali",
+   "pali_title": "Nandamāṇavapucchā",
+   "coverage": 0.68
+  },
+  "snp5.9": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-08.htm",
+   "reference": "Snp 5.9",
+   "title": "Parayanavaggo-08: The Young Man Hemaka’s Questions",
+   "match": "number+title+pali",
+   "pali_title": "Hemakamāṇavapucchā",
+   "coverage": 0.96
+  },
+  "snp5.10": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-09.htm",
+   "reference": "Snp 5.10",
+   "title": "Parayanavaggo-09: The Young Man Todeyya’s Questions",
+   "match": "number+title+pali",
+   "pali_title": "Todeyyamāṇavapucchā",
+   "coverage": 0.8
+  },
+  "snp5.11": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-10.htm",
+   "reference": "Snp 5.11",
+   "title": "Parayanavaggo-10: The Young Man Kappa’s Questions",
+   "match": "number+title+pali",
+   "pali_title": "Kappamāṇavapucchā",
+   "coverage": 0.87
+  },
+  "snp5.12": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-11.htm",
+   "reference": "Snp 5.12",
+   "title": "Parayanavaggo-11: The Young Man Jatukanni’s Questions",
+   "match": "number+title+pali",
+   "pali_title": "Jatukaṇṇīmāṇavapucchā",
+   "coverage": 0.85
+  },
+  "snp5.13": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-12.htm",
+   "reference": "Snp 5.13",
+   "title": "Parayanavaggo-12: The Young Man Bhadravudha’s Questions",
+   "match": "number+title+pali",
+   "pali_title": "Bhadrāvudhamāṇavapucchā",
+   "coverage": 0.79
+  },
+  "snp5.14": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-13.htm",
+   "reference": "Snp 5.14",
+   "title": "Parayanavaggo-13: The Young Man Udaya’s Questions",
+   "match": "number+title+pali",
+   "pali_title": "Udayamāṇavapucchā",
+   "coverage": 0.75
+  },
+  "snp5.15": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-14.htm",
+   "reference": "Snp 5.15",
+   "title": "Parayanavaggo-14: The Young Man Posala’s Questions",
+   "match": "number+title+pali",
+   "pali_title": "Posālamāṇavapucchā",
+   "coverage": 0.8
+  },
+  "snp5.16": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-15.htm",
+   "reference": "Snp 5.16",
+   "title": "Parayanavaggo-15: The Young Man Mogharaja’s Questions",
+   "match": "number+title+pali",
+   "pali_title": "Mogharājamāṇavapucchā",
+   "coverage": 0.88
+  },
+  "snp5.17": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-16.htm",
+   "reference": "Snp 5.17",
+   "title": "Parayanavaggo-16: The Young Man Piṅgiya’s Questions",
+   "match": "number+title+pali",
+   "pali_title": "Piṅgiyamāṇavapucchā",
+   "coverage": 0.65
+  },
+  "snp5.18": {
+   "path": "/Texts-and-Translations/Parayanavagga/Parayanavaggo-Epilogue-1.htm",
+   "reference": "Snp 5.18",
+   "title": "Parayanavaggo: Verses in Praise of the Way to the Beyond",
+   "match": "number+title+pali",
+   "pali_title": "Pārāyanatthutigāthā",
+   "coverage": 0.75
+  },
+  "ud1.1": {
+   "path": "/Texts-and-Translations/Udana/1-Bodhivaggo-01.htm",
+   "reference": "Ud 1.1",
+   "title": "The First Discourse about the Awakening (Tree)",
+   "match": "number+title+pali",
+   "pali_title": "Paṭhamabodhisuttaṁ",
+   "coverage": 0.97
+  },
+  "ud1.2": {
+   "path": "/Texts-and-Translations/Udana/1-Bodhivaggo-02.htm",
+   "reference": "Ud 1.2",
+   "title": "The Second Discourse about the Awakening (Tree)",
+   "match": "number+title+pali",
+   "pali_title": "Dutiyabodhisuttaṁ",
+   "coverage": 0.96
+  },
+  "ud1.3": {
+   "path": "/Texts-and-Translations/Udana/1-Bodhivaggo-03.htm",
+   "reference": "Ud 1.3",
+   "title": "The Third Discourse about the Awakening (Tree)",
+   "match": "number+title+pali",
+   "pali_title": "Tatiyabodhisuttaṁ",
+   "coverage": 0.96
+  },
+  "ud1.4": {
+   "path": "/Texts-and-Translations/Udana/1-Bodhivaggo-04.htm",
+   "reference": "Ud 1.4",
+   "title": "The Discourse about the Banyan (Tree)",
+   "match": "number+pali",
+   "coverage": 0.89
+  },
+  "ud1.5": {
+   "path": "/Texts-and-Translations/Udana/1-Bodhivaggo-05.htm",
+   "reference": "Ud 1.5",
+   "title": "The Discourse about the Elders",
+   "match": "number+pali",
+   "coverage": 0.85
+  },
+  "ud1.6": {
+   "path": "/Texts-and-Translations/Udana/1-Bodhivaggo-06.htm",
+   "reference": "Ud 1.6",
+   "title": "The Discourse about Kassapa",
+   "match": "number+pali",
+   "coverage": 0.84
+  },
+  "ud1.7": {
+   "path": "/Texts-and-Translations/Udana/1-Bodhivaggo-07.htm",
+   "reference": "Ud 1.7",
+   "title": "The Discourse about Pava",
+   "match": "number+pali",
+   "coverage": 0.94
+  },
+  "ud1.8": {
+   "path": "/Texts-and-Translations/Udana/1-Bodhivaggo-08.htm",
+   "reference": "Ud 1.8",
+   "title": "The Discourse about Sangamaji",
+   "match": "number+title+pali",
+   "pali_title": "Saṅgāmajīsuttaṁ",
+   "coverage": 0.82
+  },
+  "ud1.9": {
+   "path": "/Texts-and-Translations/Udana/1-Bodhivaggo-09.htm",
+   "reference": "Ud 1.9",
+   "title": "The Discourse about Those with Knotted Hair",
+   "match": "number+title+pali",
+   "pali_title": "Jaṭilasuttaṁ",
+   "coverage": 0.76
+  },
+  "ud1.10": {
+   "path": "/Texts-and-Translations/Udana/1-Bodhivaggo-10.htm",
+   "reference": "Ud 1.10",
+   "title": "The Discourse about Bahiya",
+   "match": "number+title+pali",
+   "pali_title": "Bāhiyasuttaṁ",
+   "coverage": 0.83
+  },
+  "ud2.1": {
+   "path": "/Texts-and-Translations/Udana/2-Mucalindavaggo-01.htm",
+   "reference": "Ud 2.1",
+   "title": "The Discourse about Mucalinda",
+   "match": "number+title+pali",
+   "pali_title": "Mucalindasuttaṁ",
+   "coverage": 0.91
+  },
+  "ud2.2": {
+   "path": "/Texts-and-Translations/Udana/2-Mucalindavaggo-02.htm",
+   "reference": "Ud 2.2",
+   "title": "The Discourse about the Kings",
+   "match": "number+title+pali",
+   "pali_title": "Rājasuttaṁ",
+   "coverage": 0.92
+  },
+  "ud2.3": {
+   "path": "/Texts-and-Translations/Udana/2-Mucalindavaggo-03.htm",
+   "reference": "Ud 2.3",
+   "title": "The Discourse about the Stick",
+   "match": "number+title+pali",
+   "pali_title": "Daṇḍasuttaṁ",
+   "coverage": 0.96
+  },
+  "ud2.4": {
+   "path": "/Texts-and-Translations/Udana/2-Mucalindavaggo-04.htm",
+   "reference": "Ud 2.4",
+   "title": "The Discourse about Veneration",
+   "match": "number+title+pali",
+   "pali_title": "Sakkārasuttaṁ",
+   "coverage": 0.86
+  },
+  "ud2.5": {
+   "path": "/Texts-and-Translations/Udana/2-Mucalindavaggo-05.htm",
+   "reference": "Ud 2.5",
+   "title": "The Discourse about the Lay Follower",
+   "match": "number+title+pali",
+   "pali_title": "Upāsakasuttaṁ",
+   "coverage": 0.86
+  },
+  "ud2.6": {
+   "path": "/Texts-and-Translations/Udana/2-Mucalindavaggo-06.htm",
+   "reference": "Ud 2.6",
+   "title": "The Discourse about the Pregnant Woman",
+   "match": "number+pali",
+   "coverage": 0.9
+  },
+  "ud2.7": {
+   "path": "/Texts-and-Translations/Udana/2-Mucalindavaggo-07.htm",
+   "reference": "Ud 2.7",
+   "title": "The Discourse about the Only Son",
+   "match": "number+pali",
+   "coverage": 0.76
+  },
+  "ud2.8": {
+   "path": "/Texts-and-Translations/Udana/2-Mucalindavaggo-08.htm",
+   "reference": "Ud 2.8",
+   "title": "The Discourse about Suppavasa",
+   "match": "number+title+pali",
+   "pali_title": "Suppavāsāsuttaṁ",
+   "coverage": 0.81
+  },
+  "ud2.9": {
+   "path": "/Texts-and-Translations/Udana/2-Mucalindavaggo-09.htm",
+   "reference": "Ud 2.9",
+   "title": "The Discourse about Visakha",
+   "match": "number+title+pali",
+   "pali_title": "Visākhāsuttaṁ",
+   "coverage": 0.88
+  },
+  "ud2.10": {
+   "path": "/Texts-and-Translations/Udana/2-Mucalindavaggo-10.htm",
+   "reference": "Ud 2.10",
+   "title": "The Discourse about Bhaddiya",
+   "match": "number+title+pali",
+   "pali_title": "Bhaddiyasuttaṁ",
+   "coverage": 0.69
+  },
+  "ud3.1": {
+   "path": "/Texts-and-Translations/Udana/3-Nandavaggo-01.htm",
+   "reference": "Ud 3.1",
+   "title": "The Discourse about Deeds",
+   "match": "number+pali",
+   "coverage": 0.93
+  },
+  "ud3.2": {
+   "path": "/Texts-and-Translations/Udana/3-Nandavaggo-02.htm",
+   "reference": "Ud 3.2",
+   "title": "The Discourse about Nanda",
+   "match": "number+title+pali",
+   "pali_title": "Nandasuttaṁ",
+   "coverage": 0.86
+  },
+  "ud3.3": {
+   "path": "/Texts-and-Translations/Udana/3-Nandavaggo-03.htm",
+   "reference": "Ud 3.3",
+   "title": "The Discourse about Yasoja",
+   "match": "number+title+pali",
+   "pali_title": "Yasojasuttaṁ",
+   "coverage": 0.88
+  },
+  "ud3.4": {
+   "path": "/Texts-and-Translations/Udana/3-Nandavaggo-04.htm",
+   "reference": "Ud 3.4",
+   "title": "The Discourse about Sariputta",
+   "match": "number+title+pali",
+   "pali_title": "Sāriputtasuttaṁ",
+   "coverage": 0.88
+  },
+  "ud3.5": {
+   "path": "/Texts-and-Translations/Udana/3-Nandavaggo-05.htm",
+   "reference": "Ud 3.5",
+   "title": "The Discourse about Kolita",
+   "match": "number+pali",
+   "coverage": 0.98
+  },
+  "ud3.6": {
+   "path": "/Texts-and-Translations/Udana/3-Nandavaggo-06.htm",
+   "reference": "Ud 3.6",
+   "title": "The Discourse about Pilindivaccha",
+   "match": "number+pali",
+   "coverage": 0.83
+  },
+  "ud3.7": {
+   "path": "/Texts-and-Translations/Udana/3-Nandavaggo-07.htm",
+   "reference": "Ud 3.7",
+   "title": "The Discourse about Kassapa",
+   "match": "number+pali",
+   "coverage": 0.84
+  },
+  "ud3.8": {
+   "path": "/Texts-and-Translations/Udana/3-Nandavaggo-08.htm",
+   "reference": "Ud 3.8",
+   "title": "The Discourse about the Alms-Gatherer",
+   "match": "number+title+pali",
+   "pali_title": "Piṇḍapātikasuttaṁ",
+   "coverage": 0.88
+  },
+  "ud3.9": {
+   "path": "/Texts-and-Translations/Udana/3-Nandavaggo-09.htm",
+   "reference": "Ud 3.9",
+   "title": "The Discourse about the Crafts",
+   "match": "number+title+pali",
+   "pali_title": "Sippasuttaṁ",
+   "coverage": 0.81
+  },
+  "ud3.10": {
+   "path": "/Texts-and-Translations/Udana/3-Nandavaggo-10.htm",
+   "reference": "Ud 3.10",
+   "title": "The Discourse about Looking Around the World",
+   "match": "number+pali",
+   "coverage": 0.81
+  },
+  "ud4.1": {
+   "path": "/Texts-and-Translations/Udana/4-Meghiyavaggo-01.htm",
+   "reference": "Ud 4.1",
+   "title": "The Discourse about Meghiya",
+   "match": "number+title+pali",
+   "pali_title": "Meghiyasuttaṁ",
+   "coverage": 0.81
+  },
+  "ud4.2": {
+   "path": "/Texts-and-Translations/Udana/4-Meghiyavaggo-02.htm",
+   "reference": "Ud 4.2",
+   "title": "The Discourse about Agitation",
+   "match": "number+title+pali",
+   "pali_title": "Uddhatasuttaṁ",
+   "coverage": 0.91
+  },
+  "ud4.3": {
+   "path": "/Texts-and-Translations/Udana/4-Meghiyavaggo-03.htm",
+   "reference": "Ud 4.3",
+   "title": "The Discourse about the Cowherd",
+   "match": "number+pali",
+   "coverage": 0.93
+  },
+  "ud4.4": {
+   "path": "/Texts-and-Translations/Udana/4-Meghiyavaggo-04.htm",
+   "reference": "Ud 4.4",
+   "title": "The Discourse about Moonlight",
+   "match": "number+pali",
+   "coverage": 0.87
+  },
+  "ud4.5": {
+   "path": "/Texts-and-Translations/Udana/4-Meghiyavaggo-05.htm",
+   "reference": "Ud 4.5",
+   "title": "The Discourse about the Naga (Elephant)",
+   "match": "number+title+pali",
+   "pali_title": "Nāgasuttaṁ",
+   "coverage": 0.81
+  },
+  "ud4.6": {
+   "path": "/Texts-and-Translations/Udana/4-Meghiyavaggo-06.htm",
+   "reference": "Ud 4.6",
+   "title": "The Discourse about Pindola",
+   "match": "number+title+pali",
+   "pali_title": "Piṇḍolasuttaṁ",
+   "coverage": 0.96
+  },
+  "ud4.7": {
+   "path": "/Texts-and-Translations/Udana/4-Meghiyavaggo-07.htm",
+   "reference": "Ud 4.7",
+   "title": "The Discourse about Sariputta",
+   "match": "number+title+pali",
+   "pali_title": "Sāriputtasuttaṁ",
+   "coverage": 0.99
+  },
+  "ud4.8": {
+   "path": "/Texts-and-Translations/Udana/4-Meghiyavaggo-08.htm",
+   "reference": "Ud 4.8",
+   "title": "The Discourse about Sundari",
+   "match": "number+title+pali",
+   "pali_title": "Sundarīsuttaṁ",
+   "coverage": 0.84
+  },
+  "ud4.9": {
+   "path": "/Texts-and-Translations/Udana/4-Meghiyavaggo-09.htm",
+   "reference": "Ud 4.9",
+   "title": "The Discourse about Upasena",
+   "match": "number+title+pali",
+   "pali_title": "Upasenasuttaṁ",
+   "coverage": 0.89
+  },
+  "ud5.1": {
+   "path": "/Texts-and-Translations/Udana/5-Sonavaggo-01.htm",
+   "reference": "Ud 5.1",
+   "title": "The Discourse about the King",
+   "match": "number+pali",
+   "coverage": 0.92
+  },
+  "ud5.2": {
+   "path": "/Texts-and-Translations/Udana/5-Sonavaggo-02.htm",
+   "reference": "Ud 5.2",
+   "title": "The Discourse about the One Short-Lived",
+   "match": "number+title+pali",
+   "pali_title": "Appāyukasuttaṁ",
+   "coverage": 0.93
+  },
+  "ud5.3": {
+   "path": "/Texts-and-Translations/Udana/5-Sonavaggo-03.htm",
+   "reference": "Ud 5.3",
+   "title": "The Discourse about the Leper Suppabuddha",
+   "match": "number+title+pali",
+   "pali_title": "Suppabuddhakuṭṭhisuttaṁ",
+   "coverage": 0.8
+  },
+  "ud5.4": {
+   "path": "/Texts-and-Translations/Udana/5-Sonavaggo-04.htm",
+   "reference": "Ud 5.4",
+   "title": "The Discourse about the Young Boys",
+   "match": "number+title+pali",
+   "pali_title": "Kumārakasuttaṁ",
+   "coverage": 0.79
+  },
+  "ud5.5": {
+   "path": "/Texts-and-Translations/Udana/5-Sonavaggo-05.htm",
+   "reference": "Ud 5.5",
+   "title": "The Discourse about the Observance",
+   "match": "number+title+pali",
+   "pali_title": "Uposathasuttaṁ",
+   "coverage": 0.71
+  },
+  "ud5.6": {
+   "path": "/Texts-and-Translations/Udana/5-Sonavaggo-06.htm",
+   "reference": "Ud 5.6",
+   "title": "The Discourse about Sona",
+   "match": "number+title+pali",
+   "pali_title": "Soṇasuttaṁ",
+   "coverage": 0.78
+  },
+  "ud5.7": {
+   "path": "/Texts-and-Translations/Udana/5-Sonavaggo-07.htm",
+   "reference": "Ud 5.7",
+   "title": "The Discourse about Revata",
+   "match": "number+pali",
+   "coverage": 0.94
+  },
+  "ud5.8": {
+   "path": "/Texts-and-Translations/Udana/5-Sonavaggo-08.htm",
+   "reference": "Ud 5.8",
+   "title": "The Discourse about Ananda",
+   "match": "number+pali",
+   "coverage": 0.95
+  },
+  "ud5.9": {
+   "path": "/Texts-and-Translations/Udana/5-Sonavaggo-09.htm",
+   "reference": "Ud 5.9",
+   "title": "The Discourse about Mocking",
+   "match": "number+pali",
+   "coverage": 0.84
+  },
+  "ud6.1": {
+   "path": "/Texts-and-Translations/Udana/6-Jaccandhavaggo-01.htm",
+   "reference": "Ud 6.1",
+   "title": "The Discourse about the Relinquishment of the Life Process",
+   "match": "number+pali",
+   "coverage": 0.85
+  },
+  "ud6.2": {
+   "path": "/Texts-and-Translations/Udana/6-Jaccandhavaggo-02.htm",
+   "reference": "Ud 6.2",
+   "title": "The Discourse about Those with Knotted Hair",
+   "match": "number+pali",
+   "coverage": 0.84
+  },
+  "ud6.3": {
+   "path": "/Texts-and-Translations/Udana/6-Jaccandhavaggo-03.htm",
+   "reference": "Ud 6.3",
+   "title": "The Discourse about Reflecting",
+   "match": "number+title+pali",
+   "pali_title": "Paccavekkhanasuttaṁ",
+   "coverage": 0.78
+  },
+  "ud6.4": {
+   "path": "/Texts-and-Translations/Udana/6-Jaccandhavaggo-04.htm",
+   "reference": "Ud 6.4",
+   "title": "The First Discourse about the Various Sectarians",
+   "match": "number+title+pali",
+   "pali_title": "Paṭhamanānātitthiyasuttaṁ",
+   "coverage": 0.84
+  },
+  "ud6.5": {
+   "path": "/Texts-and-Translations/Udana/6-Jaccandhavaggo-05.htm",
+   "reference": "Ud 6.5",
+   "title": "The Second Discourse about the Various Sectarians",
+   "match": "number+title+pali",
+   "pali_title": "Dutiyanānātitthiyasuttaṁ",
+   "coverage": 0.79
+  },
+  "ud6.7": {
+   "path": "/Texts-and-Translations/Udana/6-Jaccandhavaggo-07.htm",
+   "reference": "Ud 6.7",
+   "title": "The Discourse about Subhuti",
+   "match": "number+title+pali",
+   "pali_title": "Subhūtisuttaṁ",
+   "coverage": 0.82
+  },
+  "ud6.8": {
+   "path": "/Texts-and-Translations/Udana/6-Jaccandhavaggo-08.htm",
+   "reference": "Ud 6.8",
+   "title": "The Discourse about the Courtesan",
+   "match": "number+title+pali",
+   "pali_title": "Gaṇikāsuttaṁ",
+   "coverage": 0.82
+  },
+  "ud6.9": {
+   "path": "/Texts-and-Translations/Udana/6-Jaccandhavaggo-09.htm",
+   "reference": "Ud 6.9",
+   "title": "The Discourse about (Running) Beyond",
+   "match": "number+pali",
+   "coverage": 0.8
+  },
+  "ud6.10": {
+   "path": "/Texts-and-Translations/Udana/6-Jaccandhavaggo-10.htm",
+   "reference": "Ud 6.10",
+   "title": "The Discourse about the Arising of the Realised One",
+   "match": "number+pali",
+   "coverage": 0.74
+  },
+  "ud7.1": {
+   "path": "/Texts-and-Translations/Udana/7-Cullavaggo-01.htm",
+   "reference": "Ud 7.1",
+   "title": "The First Discourse about Bhaddiya",
+   "match": "number+pali",
+   "coverage": 0.77
+  },
+  "ud7.2": {
+   "path": "/Texts-and-Translations/Udana/7-Cullavaggo-02.htm",
+   "reference": "Ud 7.2",
+   "title": "The Second Discourse about Bhaddiya",
+   "match": "number+pali",
+   "coverage": 0.81
+  },
+  "ud7.3": {
+   "path": "/Texts-and-Translations/Udana/7-Cullavaggo-03.htm",
+   "reference": "Ud 7.3",
+   "title": "The Discourse about Clinging",
+   "match": "number+pali",
+   "coverage": 0.83
+  },
+  "ud7.4": {
+   "path": "/Texts-and-Translations/Udana/7-Cullavaggo-04.htm",
+   "reference": "Ud 7.4",
+   "title": "The Second Discourse about Clinging",
+   "match": "number+title+pali",
+   "pali_title": "Dutiyasattasuttaṁ",
+   "coverage": 0.79
+  },
+  "ud7.5": {
+   "path": "/Texts-and-Translations/Udana/7-Cullavaggo-05.htm",
+   "reference": "Ud 7.5",
+   "title": "The Discourse about Bhaddiya the Dwarf",
+   "match": "number+pali",
+   "coverage": 0.78
+  },
+  "ud7.6": {
+   "path": "/Texts-and-Translations/Udana/7-Cullavaggo-06.htm",
+   "reference": "Ud 7.6",
+   "title": "The Discourse about the Destruction of Craving",
+   "match": "number+pali",
+   "coverage": 0.76
+  },
+  "ud7.7": {
+   "path": "/Texts-and-Translations/Udana/7-Cullavaggo-07.htm",
+   "reference": "Ud 7.7",
+   "title": "The Discourse about the Destruction of Diversification",
+   "match": "number+pali",
+   "coverage": 0.91
+  },
+  "ud7.8": {
+   "path": "/Texts-and-Translations/Udana/7-Cullavaggo-08.htm",
+   "reference": "Ud 7.8",
+   "title": "The Discourse about Kaccana",
+   "match": "number+title+pali",
+   "pali_title": "Kaccānasuttaṁ",
+   "coverage": 0.91
+  },
+  "ud7.9": {
+   "path": "/Texts-and-Translations/Udana/7-Cullavaggo-09.htm",
+   "reference": "Ud 7.9",
+   "title": "The Discourse about the Well",
+   "match": "number+title+pali",
+   "pali_title": "Udapānasuttaṁ",
+   "coverage": 0.91
+  },
+  "ud7.10": {
+   "path": "/Texts-and-Translations/Udana/7-Cullavaggo-10.htm",
+   "reference": "Ud 7.10",
+   "title": "The Discourse about Udena",
+   "match": "number+pali",
+   "coverage": 0.67
+  },
+  "ud8.1": {
+   "path": "/Texts-and-Translations/Udana/8-Pataligamiyavaggo-01.htm",
+   "reference": "Ud 8.1",
+   "title": "The First Discourse about Nibbana",
+   "match": "number+pali",
+   "coverage": 0.91
+  },
+  "ud8.2": {
+   "path": "/Texts-and-Translations/Udana/8-Pataligamiyavaggo-02.htm",
+   "reference": "Ud 8.2",
+   "title": "The Second Discourse about Nibbana",
+   "match": "number+pali",
+   "coverage": 0.83
+  },
+  "ud8.3": {
+   "path": "/Texts-and-Translations/Udana/8-Pataligamiyavaggo-03.htm",
+   "reference": "Ud 8.3",
+   "title": "The Third Discourse about Nibbana",
+   "match": "number+pali",
+   "coverage": 0.86
+  },
+  "ud8.4": {
+   "path": "/Texts-and-Translations/Udana/8-Pataligamiyavaggo-04.htm",
+   "reference": "Ud 8.4",
+   "title": "The Fourth Discourse about Nibbana",
+   "match": "number+pali",
+   "coverage": 0.78
+  },
+  "ud8.5": {
+   "path": "/Texts-and-Translations/Udana/8-Pataligamiyavaggo-05.htm",
+   "reference": "Ud 8.5",
+   "title": "The Discourse about Cunda",
+   "match": "number+title+pali",
+   "pali_title": "Cundasuttaṁ",
+   "coverage": 0.84
+  },
+  "ud8.6": {
+   "path": "/Texts-and-Translations/Udana/8-Pataligamiyavaggo-06.htm",
+   "reference": "Ud 8.6",
+   "title": "The Discourse about the Patali Villagers",
+   "match": "number+title+pali",
+   "pali_title": "Pāṭaligāmiyasuttaṁ",
+   "coverage": 0.86
+  },
+  "ud8.7": {
+   "path": "/Texts-and-Translations/Udana/8-Pataligamiyavaggo-07.htm",
+   "reference": "Ud 8.7",
+   "title": "The Discourse on the Two Paths",
+   "match": "number+title+pali",
+   "pali_title": "Dvidhāpathasuttaṁ",
+   "coverage": 0.83
+  },
+  "ud8.8": {
+   "path": "/Texts-and-Translations/Udana/8-Pataligamiyavaggo-08.htm",
+   "reference": "Ud 8.8",
+   "title": "The Discourse about Visakha",
+   "match": "number+title+pali",
+   "pali_title": "Visākhāsuttaṁ",
+   "coverage": 0.8
+  },
+  "ud8.9": {
+   "path": "/Texts-and-Translations/Udana/8-Pataligamiyavaggo-09.htm",
+   "reference": "Ud 8.9",
+   "title": "The First Discourse about Dabba",
+   "match": "number+title+pali",
+   "pali_title": "Paṭhamadabbasuttaṁ",
+   "coverage": 0.89
+  },
+  "vb6": {
+   "path": "/Texts-and-Translations/Paticcasamuppadavibhanga/index.htm",
+   "parts": [
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/00-The-Section-Derived-from-the-Discourses.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/01-The-Conditions-Tetrad.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/02-The-Roots-Tetrad.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/03-The-Association-Tetrad.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/04-The-Mutuality-Tetrad.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/04x-The-Matrix.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/05-The-Conditions-Tetrad.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/06-The-Roots-Tetrad.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/07-The-Associations-Tetrad.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/08-The-Mutuality-Tetrad.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/09-The-Explanation-of-the-Unwholesome.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/10-The-Explanation-of-the-Wholesome.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/11-The-Explanation-of-what-is-Without-Consequences.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/12-The-Explanation-of-the-Wholesome-with-a-Root-of-Ignorance.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/13-The-Explanation-of-Results-having-a-Wholesome-Root.htm",
+    "/Texts-and-Translations/Paticcasamuppadavibhanga/14-The-Explanation-of-Results-having-an-Unwholesome-Root.htm"
+   ],
+   "reference": "Vibh 6",
+   "title": "Analysis of Conditional Origination",
+   "match": "number+title+pali",
+   "pali_title": "Paṭiccasamuppādavibhaṅgo",
+   "coverage": 0.8
+  },
+  "vb7": {
+   "path": "/Texts-and-Translations/Satipatthanavibhanga/index.htm",
+   "parts": [
+    "/Texts-and-Translations/Satipatthanavibhanga/01-Sankhepo.htm",
+    "/Texts-and-Translations/Satipatthanavibhanga/02-Kayanupassananiddeso.htm",
+    "/Texts-and-Translations/Satipatthanavibhanga/03-Vedananupassananiddeso.htm",
+    "/Texts-and-Translations/Satipatthanavibhanga/04-Cittanupassananiddeso.htm",
+    "/Texts-and-Translations/Satipatthanavibhanga/05-Dhammanupassananiddeso.htm",
+    "/Texts-and-Translations/Satipatthanavibhanga/06-Pathamanayo.htm",
+    "/Texts-and-Translations/Satipatthanavibhanga/07-Dutiyanayo.htm",
+    "/Texts-and-Translations/Satipatthanavibhanga/08-Tikamatika.htm",
+    "/Texts-and-Translations/Satipatthanavibhanga/09-Dukamatika.htm"
+   ],
+   "reference": "Vibh 7",
+   "title": "Analysis of the Ways of Attending to Mindfulness",
+   "match": "number+title+pali",
+   "pali_title": "Satipaṭṭhānavibhaṅgo",
+   "coverage": 0.7
+  }
+ }
+}

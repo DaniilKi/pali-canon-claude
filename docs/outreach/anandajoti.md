@@ -4,13 +4,16 @@
 |---|---|
 | Status | **Draft, not sent** |
 | Ask | Confirm the licence of ancient-buddhist-texts.net translations and that live retrieval with attribution is welcome |
-| Contact route | `anandajoti@gmail.com` (shown on https://ancient-buddhist-texts.net/Reference/DPPN.htm) |
+| Contact route | `anandajoti@gmail.com` (shown on https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm) |
 | Contact checked | 1 November 2026 |
 
 ## Before sending
 
-- The address `anandajoti@gmail.com` appears on https://ancient-buddhist-texts.net/Reference/DPPN.htm. The home page itself shows no email, and points to https://linktr.ee/anandajoti.
+- The address `anandajoti@gmail.com` appears on https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm. The home page itself shows no email, and points to https://linktr.ee/anandajoti.
 - The home page fetched for this check did not show a licence statement. Our source library lists the site as CC BY-SA 3.0; this letter asks him to confirm.
+- The address `anandajoti@gmail.com` appears on https://ancient-buddhist-texts.net/Reference/DPPN.htm. The home page itself shows no email, and points to https://linktr.ee/anandajoti.
+- The home page shows no licence statement, but the site's Copyright Notice (https://ancient-buddhist-texts.net/Miscellaneous/Copyright-Notice.htm, May 2013) gives CC BY-SA 3.0 Unported with attribution to Ānandajoti Bhikkhu, and the footer on every page links CC BY-SA 4.0. Question 1 asks which he prefers us to cite.
+- Since 1 November 2026 the tool links 153 of his pages and fetches them live with attribution (see docs/sources.md). If he asks for links only, switch off the `aj:` retrieval and keep the links.
 - A separate letter (dppn.md) asks about the revised DPPN. The two can be merged into one email if preferred.
 - Fill in the maintainer's name and reply-to address. Only the maintainer sends this letter; agents never send it.
 - After sending, update the status in [README.md](README.md). Record the reply in [docs/sources.md](../sources.md).
@@ -36,7 +39,7 @@ These safeguards apply to everything the tool returns, and we would keep them fo
 
 **What we are asking.**
 
-1. Our source library lists your site as CC BY-SA 3.0. Is that right for the translations, and are there any texts with different terms?
+1. Your Copyright Notice (May 2013) gives CC BY-SA 3.0 Unported for the translations, and your page footers link CC BY-SA 4.0. Which should we cite, and are there any texts with different terms?
 2. Are you comfortable with live retrieval as described? If you prefer links only, we will do that.
 3. How would you like to be credited?
 

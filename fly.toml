@@ -11,6 +11,7 @@ primary_region = "iad"
   TRUST_PROXY = "1"
   RATE_LIMIT_PER_MINUTE = "120"
   PALI_CANON_CACHE_MB = "64"
+  CHATGPT_WIDGET = "1"
 
 [http_service]
   internal_port = 8080

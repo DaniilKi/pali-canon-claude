@@ -331,7 +331,7 @@ test('rate limiter: per-IP fixed window', async () => {
 
 test('HTTP transport: /mcp serves the same read-only tools, with CORS, health, limits and no sessions', async () => {
   const { createHttpServer } = await import('../src/http-server.mjs');
-  const http = createHttpServer({ rateLimitPerMinute: 5, trustProxy: false });
+  const http = createHttpServer({ rateLimitPerMinute: 5, trustProxy: false, chatgptWidget: false });
   await new Promise((r) => http.listen(0, '127.0.0.1', r));
   const base = `http://127.0.0.1:${http.address().port}`;
   const headers = { 'content-type': 'application/json', accept: 'application/json, text/event-stream' };
@@ -349,7 +349,8 @@ test('HTTP transport: /mcp serves the same read-only tools, with CORS, health, l
     assert.equal(init.headers.get('mcp-session-id'), null, 'stateless: no session id');
     assert.equal((await init.json()).result.serverInfo.name, 'pali-canon');
     const tools = (await (await rpc('tools/list', {}, 2)).json()).result.tools;
-    assert.equal(tools.length, 11);
+    const { expectedToolNames } = await import('../scripts/expected-tools.mjs');
+    assert.deepEqual(tools.map((t) => t.name).sort(), expectedToolNames(), 'core tools plus every feature module (src/features)');
     assert.ok(tools.every((t) => t.annotations.readOnlyHint && t.annotations.destructiveHint === false));
     assert.equal(tools.find((t) => t.name === 'get_translation').annotations.openWorldHint, true);
     const call = await (await rpc('tools/call', { name: 'resolve_reference', arguments: { reference: 'SN 56:11' } }, 3)).json();
@@ -470,7 +471,7 @@ test('Claude Code plugin and marketplace manifests follow the documented schema'
   assert.ok(existsSync(new URL('server/index.cjs', root)));
 
   // Each skill has front matter with a single-line text description.
-  for (const s of ['study', 'compare', 'pali-word']) {
+  for (const s of ['study', 'compare', 'pali-word', 'method', 'memorise']) {
     const md = readFileSync(new URL(`skills/${s}/SKILL.md`, root), 'utf8');
     assert.ok(md.startsWith(`---\nname: ${s}\ndescription: `) && /^description: \S.*$/m.test(md), s);
   }
@@ -510,7 +511,7 @@ test('Codex plugin packaging is consistent with the Claude plugin', async () => 
   const entry = market.plugins.find((p) => p.name === codex.name);
   assert.deepEqual(entry.source, { source: 'local', path: './' });
   assert.ok(entry.policy.installation && entry.policy.authentication && entry.category);
-  for (const skill of ['study', 'compare', 'pali-word']) {
+  for (const skill of ['study', 'compare', 'pali-word', 'method', 'memorise']) {
     assert.ok(existsSync(new URL(`skills/${skill}/SKILL.md`, root)), skill);
     const yaml = readFileSync(new URL(`skills/${skill}/agents/openai.yaml`, root), 'utf8');
     assert.match(yaml, /type: "mcp"/, skill);
@@ -542,7 +543,7 @@ test('Gemini extension stays in step with the package and the skills', async () 
   assert.ok(existsSync(new URL('server/index.cjs', root)), 'server/index.cjs must be committed');
   assert.ok(existsSync(new URL('server/data/canon.json.gz', root)), 'server/data must be committed');
   const tools = [...read('src/server.mjs').matchAll(/tool\('([a-z_]+)'/g)].map((m) => m[1]);
-  for (const skill of ['study', 'compare', 'pali-word']) {
+  for (const skill of ['study', 'compare', 'pali-word', 'method', 'memorise']) {
     const toml = read(`commands/${skill}.toml`);
     assert.match(toml, /^description = "[^"\n]+"$/m, skill);
     assert.match(toml, /^prompt = '''\n[\s\S]*\{\{args\}\}[\s\S]*\n'''\n?$/m, skill);
@@ -652,4 +653,15 @@ test('skills follow the Agent Skills spec and declare the MCP server dependency'
     assert.equal(fm['argument-hint'], fm.metadata['argument-hint']);
     assert.match(text.slice(m[0].length), /needs the Pali Canon MCP server/);
   }
+});
+
+test('expected tool list matches what the feature modules register', async () => {
+  const { coreToolNames, featureFiles, expectedToolNames } = await import('../scripts/expected-tools.mjs');
+  const features = await import('../src/features/index.mjs');
+  const { z } = await import('zod');
+  const registered = [];
+  const stub = { tool: (name) => registered.push(name), prompt: () => {}, resource: () => {}, z, citation: z.string(), canon, english: {}, providers: {} };
+  for (const feature of Object.values(features)) feature.register?.(stub);
+  assert.equal(featureFiles().length, Object.keys(features).length, 'every feature line is read');
+  assert.deepEqual([...coreToolNames(), ...registered].sort(), expectedToolNames());
 });

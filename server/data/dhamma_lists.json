@@ -1,0 +1,496 @@
+{
+  "about": "Standard numbered lists of the Pāli teaching, curated for pali-canon-mcp. Each list names the canonical passage(s) that set it out; the member names are the Pāli terms of that passage, and every member's term was checked against the bundled VRI text of each defining passage (tests/topics.test.mjs). English glosses are short plain-English labels written for this index: they are glosses, not translations of the passage. Read the passage itself (get_text) before quoting.",
+  "gloss_note": "English glosses are short labels written for this index, not translations. Quote the Pāli passage (get_text) or a named translation (get_translation) instead.",
+  "status_labels": {
+    "canonical": "The list, with these members, is set out in the cited suttas.",
+    "canonical-later-name": "The members are given together in the cited suttas; the collective name or count is a later (commentarial) convention.",
+    "later": "A later list: not given as a set in the four main Nikāyas. Labelled so it is not mistaken for an early teaching list."
+  },
+  "lists": [
+    {
+      "slug": "four-noble-truths", "name": "Four noble truths", "pali": "cattāri ariyasaccāni", "count": 4, "status": "canonical",
+      "aliases": ["noble truths", "4 noble truths", "ariyasacca"],
+      "defined_in": ["SN 56.11"], "see_also_texts": ["MN 141", "DN 22"],
+      "members": [
+        { "pali": "dukkha ariyasacca", "gloss": "the truth of suffering (unsatisfactoriness)", "match": "dukkham ariyasaccam" },
+        { "pali": "dukkhasamudaya ariyasacca", "gloss": "the truth of the origin of suffering", "match": "dukkhasamudayam ariyasaccam" },
+        { "pali": "dukkhanirodha ariyasacca", "gloss": "the truth of the cessation of suffering", "match": "dukkhanirodham ariyasaccam" },
+        { "pali": "dukkhanirodhagāminī paṭipadā ariyasacca", "gloss": "the truth of the way leading to the cessation of suffering", "match": "dukkhanirodhagamini patipada ariyasaccam" }
+      ],
+      "related": ["noble-eightfold-path", "three-cravings"]
+    },
+    {
+      "slug": "noble-eightfold-path", "name": "Noble eightfold path", "pali": "ariyo aṭṭhaṅgiko maggo", "count": 8, "status": "canonical",
+      "aliases": ["eightfold path", "eight path factors", "middle way", "magga"],
+      "defined_in": ["SN 45.8"], "see_also_texts": ["SN 56.11", "MN 117", "MN 141"],
+      "members": [
+        { "pali": "sammādiṭṭhi", "gloss": "right view", "match": "sammaditthi" },
+        { "pali": "sammāsaṅkappa", "gloss": "right resolve (intention)", "match": "sammasankappo" },
+        { "pali": "sammāvācā", "gloss": "right speech", "match": "sammavaca" },
+        { "pali": "sammākammanta", "gloss": "right action", "match": "sammakammanto" },
+        { "pali": "sammāājīva", "gloss": "right livelihood", "match": "sammaajivo" },
+        { "pali": "sammāvāyāma", "gloss": "right effort", "match": "sammavayamo" },
+        { "pali": "sammāsati", "gloss": "right mindfulness", "match": "sammasati" },
+        { "pali": "sammāsamādhi", "gloss": "right concentration", "match": "sammasamadhi" }
+      ],
+      "related": ["four-noble-truths", "four-right-efforts", "four-foundations-of-mindfulness", "four-jhanas", "thirty-seven-aids-to-awakening"]
+    },
+    {
+      "slug": "three-characteristics", "name": "Three characteristics", "pali": "tilakkhaṇa", "count": 3, "status": "canonical-later-name",
+      "status_note": "The three are stated together in the suttas (\"all fabrications are impermanent … stressful; all phenomena are not-self\"); the name tilakkhaṇa, \"three characteristics\", is a later term.",
+      "aliases": ["three marks", "three marks of existence", "tilakkhana", "anicca dukkha anatta"],
+      "defined_in": ["AN 3.136"], "see_also_texts": ["SN 22.59", "Dhp 277"],
+      "members": [
+        { "pali": "anicca", "gloss": "impermanent", "match": "sabbe sankhara anicca" },
+        { "pali": "dukkha", "gloss": "suffering, unsatisfactory", "match": "sabbe sankhara dukkha" },
+        { "pali": "anattā", "gloss": "not-self", "match": "sabbe dhamma anatta" }
+      ],
+      "related": ["five-aggregates"]
+    },
+    {
+      "slug": "five-aggregates", "name": "Five aggregates (of clinging)", "pali": "pañcupādānakkhandhā", "count": 5, "status": "canonical",
+      "aliases": ["aggregates", "five khandhas", "khandha", "skandhas", "five heaps"],
+      "defined_in": ["SN 22.48"], "see_also_texts": ["SN 22.56", "SN 22.59", "MN 109"],
+      "members": [
+        { "pali": "rūpupādānakkhandha", "gloss": "form (the body and material things)", "match": "rupupadanakkhandho" },
+        { "pali": "vedanupādānakkhandha", "gloss": "feeling (pleasant, painful, neither)", "match": "vedanupadanakkhandho" },
+        { "pali": "saññupādānakkhandha", "gloss": "perception (recognition, labelling)", "match": "sannupadanakkhandho" },
+        { "pali": "saṅkhārupādānakkhandha", "gloss": "fabrications (volitional formations)", "match": "sankharupadanakkhandho" },
+        { "pali": "viññāṇupādānakkhandha", "gloss": "consciousness", "match": "vinnanupadanakkhandho" }
+      ],
+      "related": ["three-characteristics", "four-kinds-of-clinging"]
+    },
+    {
+      "slug": "five-hindrances", "name": "Five hindrances", "pali": "pañca nīvaraṇāni", "count": 5, "status": "canonical",
+      "aliases": ["hindrances", "nivarana", "nīvaraṇa"],
+      "defined_in": ["SN 46.51", "MN 10"], "see_also_texts": ["DN 2", "SN 46.55"],
+      "members": [
+        { "pali": "kāmacchanda", "gloss": "sensual desire", "match": "kamacchand" },
+        { "pali": "byāpāda", "gloss": "ill will", "match": "byapad" },
+        { "pali": "thinamiddha", "gloss": "sloth and torpor (drowsiness)", "match": "thinamiddh" },
+        { "pali": "uddhaccakukkucca", "gloss": "restlessness and remorse (anxiety)", "match": "uddhaccakukkucc" },
+        { "pali": "vicikicchā", "gloss": "doubt", "match": "vicikicch" }
+      ],
+      "related": ["seven-factors-of-awakening", "four-jhanas"]
+    },
+    {
+      "slug": "seven-factors-of-awakening", "name": "Seven factors of awakening", "pali": "satta bojjhaṅgā", "count": 7, "status": "canonical",
+      "aliases": ["factors of awakening", "factors of enlightenment", "bojjhanga", "bojjhaṅga", "seven bojjhangas"],
+      "defined_in": ["MN 118", "SN 46.51"], "see_also_texts": ["MN 10", "SN 46.1"],
+      "members": [
+        { "pali": "satisambojjhaṅga", "gloss": "mindfulness", "match": "satisambojjhang" },
+        { "pali": "dhammavicayasambojjhaṅga", "gloss": "investigation of qualities (dhammas)", "match": "dhammavicayasambojjhang" },
+        { "pali": "vīriyasambojjhaṅga", "gloss": "persistence (energy)", "match": "viriyasambojjhang" },
+        { "pali": "pītisambojjhaṅga", "gloss": "rapture (joy)", "match": "pitisambojjhang" },
+        { "pali": "passaddhisambojjhaṅga", "gloss": "calm (tranquillity)", "match": "passaddhisambojjhang" },
+        { "pali": "samādhisambojjhaṅga", "gloss": "concentration", "match": "samadhisambojjhang" },
+        { "pali": "upekkhāsambojjhaṅga", "gloss": "equanimity", "match": "upekkhasambojjhang" }
+      ],
+      "related": ["five-hindrances", "thirty-seven-aids-to-awakening"]
+    },
+    {
+      "slug": "four-foundations-of-mindfulness", "name": "Four establishings of mindfulness", "pali": "cattāro satipaṭṭhānā", "count": 4, "status": "canonical",
+      "aliases": ["satipatthana", "satipaṭṭhāna", "four foundations of mindfulness", "four frames of reference"],
+      "defined_in": ["MN 10"], "see_also_texts": ["DN 22", "SN 47.2"],
+      "members": [
+        { "pali": "kāye kāyānupassanā", "gloss": "contemplating the body in and of itself", "match": "kaye kayanupassi" },
+        { "pali": "vedanāsu vedanānupassanā", "gloss": "contemplating feelings in and of themselves", "match": "vedanasu vedananupassi" },
+        { "pali": "citte cittānupassanā", "gloss": "contemplating the mind in and of itself", "match": "citte cittanupassi" },
+        { "pali": "dhammesu dhammānupassanā", "gloss": "contemplating mental qualities (dhammas) in and of themselves", "match": "dhammesu dhammanupassi" }
+      ],
+      "related": ["thirty-seven-aids-to-awakening", "noble-eightfold-path"]
+    },
+    {
+      "slug": "four-right-efforts", "name": "Four right efforts", "pali": "cattāro sammappadhānā", "count": 4, "status": "canonical",
+      "aliases": ["right exertions", "sammappadhana", "four great efforts", "right effort"],
+      "defined_in": ["AN 4.13", "SN 45.8"], "see_also_texts": ["AN 4.14"],
+      "members": [
+        { "pali": "anuppannānaṃ akusalānaṃ dhammānaṃ anuppādāya", "gloss": "effort to prevent unskilful qualities that have not arisen", "match": "akusalanam dhammanam anuppadaya" },
+        { "pali": "uppannānaṃ akusalānaṃ dhammānaṃ pahānāya", "gloss": "effort to abandon unskilful qualities that have arisen", "match": "akusalanam dhammanam pahanaya" },
+        { "pali": "anuppannānaṃ kusalānaṃ dhammānaṃ uppādāya", "gloss": "effort to arouse skilful qualities that have not arisen", "match": "kusalanam dhammanam uppadaya" },
+        { "pali": "uppannānaṃ kusalānaṃ dhammānaṃ ṭhitiyā", "gloss": "effort to maintain and develop skilful qualities that have arisen", "match": "kusalanam dhammanam thitiya" }
+      ],
+      "related": ["thirty-seven-aids-to-awakening", "noble-eightfold-path"]
+    },
+    {
+      "slug": "four-bases-of-power", "name": "Four bases of power", "pali": "cattāro iddhipādā", "count": 4, "status": "canonical",
+      "aliases": ["iddhipada", "iddhipāda", "bases of success", "roads to power"],
+      "defined_in": ["SN 51.1"], "see_also_texts": ["SN 51.20", "DN 18"],
+      "members": [
+        { "pali": "chandasamādhippadhānasaṅkhārasamannāgata iddhipāda", "gloss": "concentration founded on desire (zeal), with fabrications of exertion", "match": "chandasamadhippadhanasankhara" },
+        { "pali": "vīriyasamādhippadhānasaṅkhārasamannāgata iddhipāda", "gloss": "concentration founded on persistence, with fabrications of exertion", "match": "viriyasamadhippadhanasankhara" },
+        { "pali": "cittasamādhippadhānasaṅkhārasamannāgata iddhipāda", "gloss": "concentration founded on intent (mind), with fabrications of exertion", "match": "cittasamadhippadhanasankhara" },
+        { "pali": "vīmaṃsāsamādhippadhānasaṅkhārasamannāgata iddhipāda", "gloss": "concentration founded on discrimination (investigation), with fabrications of exertion", "match": "vimamsasamadhippadhanasankhara" }
+      ],
+      "related": ["thirty-seven-aids-to-awakening"]
+    },
+    {
+      "slug": "five-faculties", "name": "Five faculties", "pali": "pañcindriyāni", "count": 5, "status": "canonical",
+      "aliases": ["indriya", "five spiritual faculties", "five controlling faculties"],
+      "defined_in": ["SN 48.10"], "see_also_texts": ["SN 48.1"],
+      "members": [
+        { "pali": "saddhindriya", "gloss": "conviction (faith)", "match": "saddhindriy" },
+        { "pali": "vīriyindriya", "gloss": "persistence (energy)", "match": "viriyindriy" },
+        { "pali": "satindriya", "gloss": "mindfulness", "match": "satindriy" },
+        { "pali": "samādhindriya", "gloss": "concentration", "match": "samadhindriy" },
+        { "pali": "paññindriya", "gloss": "discernment (wisdom)", "match": "pannindriy" }
+      ],
+      "related": ["five-powers", "thirty-seven-aids-to-awakening"]
+    },
+    {
+      "slug": "five-powers", "name": "Five powers (strengths)", "pali": "pañca balāni", "count": 5, "status": "canonical",
+      "aliases": ["five strengths", "bala", "powers"],
+      "defined_in": ["AN 5.13"], "see_also_texts": ["AN 5.14", "SN 48.43"],
+      "members": [
+        { "pali": "saddhābala", "gloss": "the power of conviction", "match": "saddhabalam" },
+        { "pali": "vīriyabala", "gloss": "the power of persistence", "match": "viriyabalam" },
+        { "pali": "satibala", "gloss": "the power of mindfulness", "match": "satibalam" },
+        { "pali": "samādhibala", "gloss": "the power of concentration", "match": "samadhibalam" },
+        { "pali": "paññābala", "gloss": "the power of discernment", "match": "pannabalam" }
+      ],
+      "related": ["five-faculties", "thirty-seven-aids-to-awakening"]
+    },
+    {
+      "slug": "thirty-seven-aids-to-awakening", "name": "The thirty-seven aids to awakening", "pali": "bodhipakkhiyā dhammā", "count": 37, "status": "canonical-later-name",
+      "status_note": "The seven sets are listed together as the qualities the Buddha taught (DN 16, MN 103); counting them as \"thirty-seven\" (37 = 4+4+4+5+5+7+8) is a later convention.",
+      "aliases": ["37 factors", "wings to awakening", "bodhipakkhiya dhamma", "requisites of enlightenment", "37 aids"],
+      "defined_in": ["DN 16", "MN 103"], "see_also_texts": ["MN 77"],
+      "members": [
+        { "pali": "cattāro satipaṭṭhānā", "gloss": "four establishings of mindfulness", "match": "cattaro satipatthana", "list": "four-foundations-of-mindfulness" },
+        { "pali": "cattāro sammappadhānā", "gloss": "four right efforts", "match": "cattaro sammappadhana", "list": "four-right-efforts" },
+        { "pali": "cattāro iddhipādā", "gloss": "four bases of power", "match": "cattaro iddhipada", "list": "four-bases-of-power" },
+        { "pali": "pañcindriyāni", "gloss": "five faculties", "match": "pancindriyani", "list": "five-faculties" },
+        { "pali": "pañca balāni", "gloss": "five powers", "match": "panca balani", "list": "five-powers" },
+        { "pali": "satta bojjhaṅgā", "gloss": "seven factors of awakening", "match": "satta bojjhanga", "list": "seven-factors-of-awakening" },
+        { "pali": "ariyo aṭṭhaṅgiko maggo", "gloss": "noble eightfold path", "match": "ariyo atthangiko maggo", "list": "noble-eightfold-path" }
+      ]
+    },
+    {
+      "slug": "ten-fetters", "name": "Ten fetters", "pali": "dasa saṃyojanāni", "count": 10, "status": "canonical",
+      "aliases": ["fetters", "samyojana", "saṃyojana", "five lower fetters", "five higher fetters"],
+      "defined_in": ["AN 10.13"], "see_also_texts": ["MN 64", "SN 45.179"],
+      "members": [
+        { "pali": "sakkāyadiṭṭhi", "gloss": "self-identity view", "group": "lower (orambhāgiya)", "match": "sakkayaditthi" },
+        { "pali": "vicikicchā", "gloss": "doubt", "group": "lower (orambhāgiya)", "match": "vicikiccha" },
+        { "pali": "sīlabbataparāmāsa", "gloss": "grasping at precepts and practices", "group": "lower (orambhāgiya)", "match": "silabbataparamaso" },
+        { "pali": "kāmacchanda", "gloss": "sensual desire", "group": "lower (orambhāgiya)", "match": "kamacchando" },
+        { "pali": "byāpāda", "gloss": "ill will", "group": "lower (orambhāgiya)", "match": "byapado" },
+        { "pali": "rūparāga", "gloss": "passion for form", "group": "higher (uddhambhāgiya)", "match": "ruparago" },
+        { "pali": "arūparāga", "gloss": "passion for the formless", "group": "higher (uddhambhāgiya)", "match": "aruparago" },
+        { "pali": "māna", "gloss": "conceit", "group": "higher (uddhambhāgiya)", "match": "mano" },
+        { "pali": "uddhacca", "gloss": "restlessness", "group": "higher (uddhambhāgiya)", "match": "uddhaccam" },
+        { "pali": "avijjā", "gloss": "ignorance", "group": "higher (uddhambhāgiya)", "match": "avijja" }
+      ],
+      "related": ["four-stages-of-awakening", "seven-underlying-tendencies"]
+    },
+    {
+      "slug": "dependent-origination", "name": "Dependent origination (twelve links)", "pali": "paṭiccasamuppāda", "count": 12, "status": "canonical",
+      "aliases": ["twelve links", "12 links", "paticca samuppada", "dependent co-arising", "twelve nidanas", "nidana"],
+      "defined_in": ["SN 12.1", "SN 12.2"], "see_also_texts": ["DN 15", "MN 38"],
+      "members": [
+        { "pali": "avijjā", "gloss": "ignorance", "match": "avijjapaccaya" },
+        { "pali": "saṅkhārā", "gloss": "fabrications (volitional formations)", "match": "sankharapaccaya" },
+        { "pali": "viññāṇa", "gloss": "consciousness", "match": "vinnanapaccaya" },
+        { "pali": "nāmarūpa", "gloss": "name-and-form (mentality-materiality)", "match": "namarupapaccaya" },
+        { "pali": "saḷāyatana", "gloss": "the six sense media", "match": "salayatanapaccaya" },
+        { "pali": "phassa", "gloss": "contact", "match": "phassapaccaya" },
+        { "pali": "vedanā", "gloss": "feeling", "match": "vedanapaccaya" },
+        { "pali": "taṇhā", "gloss": "craving", "match": "tanhapaccaya" },
+        { "pali": "upādāna", "gloss": "clinging", "match": "upadanapaccaya" },
+        { "pali": "bhava", "gloss": "becoming", "match": "bhavapaccaya" },
+        { "pali": "jāti", "gloss": "birth", "match": "jatipaccaya" },
+        { "pali": "jarāmaraṇa", "gloss": "aging and death", "match": "jaramaranam" }
+      ],
+      "related": ["four-noble-truths", "four-kinds-of-clinging"]
+    },
+    {
+      "slug": "four-jhanas", "name": "Four jhānas", "pali": "cattāri jhānāni", "count": 4, "status": "canonical",
+      "aliases": ["jhana", "jhāna", "absorptions", "right concentration"],
+      "defined_in": ["SN 45.8"], "see_also_texts": ["DN 2", "MN 39", "AN 5.28"],
+      "members": [
+        { "pali": "paṭhama jhāna", "gloss": "first jhāna", "match": "pathamam jhanam" },
+        { "pali": "dutiya jhāna", "gloss": "second jhāna", "match": "dutiyam jhanam" },
+        { "pali": "tatiya jhāna", "gloss": "third jhāna", "match": "tatiyam jhanam" },
+        { "pali": "catuttha jhāna", "gloss": "fourth jhāna", "match": "catuttham jhanam" }
+      ],
+      "related": ["four-formless-attainments", "noble-eightfold-path", "five-hindrances"]
+    },
+    {
+      "slug": "four-formless-attainments", "name": "Four formless attainments", "pali": "cattāro āruppā", "count": 4, "status": "canonical",
+      "aliases": ["formless jhanas", "arupa jhana", "immaterial attainments", "formless dimensions"],
+      "defined_in": ["MN 111", "MN 26"], "see_also_texts": ["MN 121"],
+      "members": [
+        { "pali": "ākāsānañcāyatana", "gloss": "the dimension of the infinitude of space", "match": "akasanancayatan" },
+        { "pali": "viññāṇañcāyatana", "gloss": "the dimension of the infinitude of consciousness", "match": "vinnanancayatan" },
+        { "pali": "ākiñcaññāyatana", "gloss": "the dimension of nothingness", "match": "akincannayatan" },
+        { "pali": "nevasaññānāsaññāyatana", "gloss": "the dimension of neither perception nor non-perception", "match": "nevasannanasannayatan" }
+      ],
+      "related": ["four-jhanas"]
+    },
+    {
+      "slug": "brahmaviharas", "name": "Four sublime attitudes (brahmavihāras)", "pali": "cattāro brahmavihārā", "count": 4, "status": "canonical",
+      "aliases": ["brahmavihara", "brahma viharas", "four immeasurables", "appamanna", "divine abidings", "sublime abidings"],
+      "defined_in": ["DN 13", "MN 7"], "see_also_texts": ["MN 99"],
+      "members": [
+        { "pali": "mettā", "gloss": "goodwill (loving-kindness)", "match": "mettasahagatena" },
+        { "pali": "karuṇā", "gloss": "compassion", "match": "karunasahagatena" },
+        { "pali": "muditā", "gloss": "empathetic joy", "match": "muditasahagatena" },
+        { "pali": "upekkhā", "gloss": "equanimity", "match": "upekkhasahagatena" }
+      ]
+    },
+    {
+      "slug": "ten-paramis", "name": "Ten perfections (pāramīs)", "pali": "dasa pāramiyo", "count": 10, "status": "later",
+      "status_note": "A later list. The ten perfections are set out in the Buddhavaṃsa (Bv 2, the story of Sumedha), a late book of the Khuddaka Nikāya, and are developed in the commentaries. They are not given as a set in the four main Nikāyas.",
+      "aliases": ["paramis", "pāramī", "parami", "paramitas", "perfections", "ten perfections"],
+      "defined_in": ["Bv 2"], "see_also_texts": [],
+      "members": [
+        { "pali": "dāna", "gloss": "generosity", "match": "danaparami" },
+        { "pali": "sīla", "gloss": "virtue", "match": "silaparami" },
+        { "pali": "nekkhamma", "gloss": "renunciation", "match": "nekkhammaparami" },
+        { "pali": "paññā", "gloss": "discernment (wisdom)", "match": "pannaparami" },
+        { "pali": "vīriya", "gloss": "persistence (energy)", "match": "viriyaparami" },
+        { "pali": "khanti", "gloss": "patience", "match": "khantiparami" },
+        { "pali": "sacca", "gloss": "truthfulness", "match": "saccaparami" },
+        { "pali": "adhiṭṭhāna", "gloss": "determination", "match": "adhitthanaparami" },
+        { "pali": "mettā", "gloss": "goodwill", "match": "mettaparami" },
+        { "pali": "upekkhā", "gloss": "equanimity", "match": "upekkhaparami" }
+      ]
+    },
+    {
+      "slug": "three-refuges", "name": "Three refuges (triple gem)", "pali": "tisaraṇa", "count": 3, "status": "canonical",
+      "aliases": ["refuges", "triple gem", "three jewels", "ti-ratana", "saranagamana"],
+      "defined_in": ["Kp 1"], "see_also_texts": [],
+      "members": [
+        { "pali": "buddha", "gloss": "the Buddha", "match": "buddham saranam gacchami" },
+        { "pali": "dhamma", "gloss": "the Dhamma (the teaching)", "match": "dhammam saranam gacchami" },
+        { "pali": "saṅgha", "gloss": "the Saṅgha (the community)", "match": "sangham saranam gacchami" }
+      ]
+    },
+    {
+      "slug": "five-precepts", "name": "Five precepts", "pali": "pañca sikkhāpadāni", "count": 5, "status": "canonical",
+      "aliases": ["precepts", "panca sila", "pañcasīla", "five training rules"],
+      "defined_in": ["AN 8.39"], "see_also_texts": ["AN 5.174"],
+      "members": [
+        { "pali": "pāṇātipātā veramaṇī", "gloss": "abstaining from taking life", "match": "panatipata" },
+        { "pali": "adinnādānā veramaṇī", "gloss": "abstaining from taking what is not given", "match": "adinnadana" },
+        { "pali": "kāmesumicchācārā veramaṇī", "gloss": "abstaining from sexual misconduct", "match": "kamesumicchacara" },
+        { "pali": "musāvādā veramaṇī", "gloss": "abstaining from lying", "match": "musavada" },
+        { "pali": "surāmerayamajjapamādaṭṭhānā veramaṇī", "gloss": "abstaining from intoxicants that cause heedlessness", "match": "suramerayamajjapamadatthana" }
+      ],
+      "related": ["ten-training-rules"]
+    },
+    {
+      "slug": "ten-training-rules", "name": "Ten training rules (novice precepts)", "pali": "dasa sikkhāpadāni", "count": 10, "status": "canonical",
+      "aliases": ["ten precepts", "dasa sila", "novice precepts", "samanera precepts"],
+      "defined_in": ["Kp 2"], "see_also_texts": [],
+      "members": [
+        { "pali": "pāṇātipātā veramaṇī", "gloss": "abstaining from taking life", "match": "panatipata" },
+        { "pali": "adinnādānā veramaṇī", "gloss": "abstaining from taking what is not given", "match": "adinnadana" },
+        { "pali": "abrahmacariyā veramaṇī", "gloss": "abstaining from sexual activity", "match": "abrahmacariya" },
+        { "pali": "musāvādā veramaṇī", "gloss": "abstaining from lying", "match": "musavada" },
+        { "pali": "surāmerayamajjapamādaṭṭhānā veramaṇī", "gloss": "abstaining from intoxicants", "match": "suramerayamajjapamadatthana" },
+        { "pali": "vikālabhojanā veramaṇī", "gloss": "abstaining from eating at the wrong time", "match": "vikalabhojana" },
+        { "pali": "nacca-gīta-vādita-visūkadassanā veramaṇī", "gloss": "abstaining from dancing, singing, music and shows", "match": "nacca-gita-vadita-visukadassana" },
+        { "pali": "mālā-gandha-vilepana-dhāraṇa-maṇḍana-vibhūsanaṭṭhānā veramaṇī", "gloss": "abstaining from garlands, scents, cosmetics and adornment", "match": "mala-gandha-vilepana" },
+        { "pali": "uccāsayana-mahāsayanā veramaṇī", "gloss": "abstaining from high and luxurious beds and seats", "match": "uccasayana-mahasayana" },
+        { "pali": "jātarūpa-rajatapaṭiggahaṇā veramaṇī", "gloss": "abstaining from accepting gold and silver (money)", "match": "jatarupa-rajatapatiggahana" }
+      ],
+      "related": ["five-precepts"]
+    },
+    {
+      "slug": "three-unwholesome-roots", "name": "Three roots of the unskilful", "pali": "tīṇi akusalamūlāni", "count": 3, "status": "canonical",
+      "aliases": ["three poisons", "unwholesome roots", "akusala mula", "greed hatred delusion", "three fires"],
+      "defined_in": ["MN 9"], "see_also_texts": ["AN 3.69"],
+      "members": [
+        { "pali": "lobha", "gloss": "greed", "match": "lobho akusalamulam" },
+        { "pali": "dosa", "gloss": "aversion (hatred)", "match": "doso akusalamulam" },
+        { "pali": "moha", "gloss": "delusion", "match": "moho akusalamulam" }
+      ],
+      "related": ["three-wholesome-roots"]
+    },
+    {
+      "slug": "three-wholesome-roots", "name": "Three roots of the skilful", "pali": "tīṇi kusalamūlāni", "count": 3, "status": "canonical",
+      "aliases": ["wholesome roots", "kusala mula"],
+      "defined_in": ["MN 9"], "see_also_texts": [],
+      "members": [
+        { "pali": "alobha", "gloss": "non-greed", "match": "alobho kusalamulam" },
+        { "pali": "adosa", "gloss": "non-aversion", "match": "adoso kusalamulam" },
+        { "pali": "amoha", "gloss": "non-delusion", "match": "amoho kusalamulam" }
+      ],
+      "related": ["three-unwholesome-roots"]
+    },
+    {
+      "slug": "ten-unwholesome-courses-of-action", "name": "Ten unskilful courses of action", "pali": "dasa akusalakammapathā", "count": 10, "status": "canonical",
+      "aliases": ["ten unwholesome actions", "akusala kammapatha", "ten courses of action"],
+      "defined_in": ["MN 9"], "see_also_texts": ["MN 41", "AN 10.176"],
+      "members": [
+        { "pali": "pāṇātipāta", "gloss": "killing", "group": "body", "match": "panatipato" },
+        { "pali": "adinnādāna", "gloss": "stealing", "group": "body", "match": "adinnadanam" },
+        { "pali": "kāmesumicchācāra", "gloss": "sexual misconduct", "group": "body", "match": "kamesumicchacaro" },
+        { "pali": "musāvāda", "gloss": "lying", "group": "speech", "match": "musavado" },
+        { "pali": "pisuṇā vācā", "gloss": "divisive speech", "group": "speech", "match": "pisuna vaca" },
+        { "pali": "pharusā vācā", "gloss": "harsh speech", "group": "speech", "match": "pharusa vaca" },
+        { "pali": "samphappalāpa", "gloss": "idle chatter", "group": "speech", "match": "samphappalapo" },
+        { "pali": "abhijjhā", "gloss": "covetousness", "group": "mind", "match": "abhijjha" },
+        { "pali": "byāpāda", "gloss": "ill will", "group": "mind", "match": "byapado" },
+        { "pali": "micchādiṭṭhi", "gloss": "wrong view", "group": "mind", "match": "micchaditthi" }
+      ],
+      "related": ["five-precepts", "three-unwholesome-roots"]
+    },
+    {
+      "slug": "four-nutriments", "name": "Four nutriments", "pali": "cattāro āhārā", "count": 4, "status": "canonical",
+      "aliases": ["four foods", "ahara", "āhāra", "nutriment"],
+      "defined_in": ["MN 9", "SN 12.11"], "see_also_texts": ["SN 12.63"],
+      "members": [
+        { "pali": "kabaḷīkāra āhāra", "gloss": "physical food", "match": "kabalikar" },
+        { "pali": "phassa", "gloss": "contact", "match": "phasso dutiyo" },
+        { "pali": "manosañcetanā", "gloss": "mental intention", "match": "manosancetana tatiya" },
+        { "pali": "viññāṇa", "gloss": "consciousness", "match": "vinnanam catuttham" }
+      ]
+    },
+    {
+      "slug": "three-taints", "name": "Three effluents (taints)", "pali": "tayo āsavā", "count": 3, "status": "canonical",
+      "status_note": "The suttas usually give three; a fourth, the effluent of views (diṭṭhāsava), is added in some texts.",
+      "aliases": ["asava", "āsava", "taints", "fermentations", "effluents", "cankers", "outflows"],
+      "defined_in": ["MN 9"], "see_also_texts": ["MN 2"],
+      "members": [
+        { "pali": "kāmāsava", "gloss": "the effluent of sensuality", "match": "kamasavo" },
+        { "pali": "bhavāsava", "gloss": "the effluent of becoming", "match": "bhavasavo" },
+        { "pali": "avijjāsava", "gloss": "the effluent of ignorance", "match": "avijjasavo" }
+      ]
+    },
+    {
+      "slug": "four-kinds-of-clinging", "name": "Four kinds of clinging", "pali": "cattāri upādānāni", "count": 4, "status": "canonical",
+      "aliases": ["clinging", "upadana", "upādāna", "grasping"],
+      "defined_in": ["MN 11", "SN 12.2"], "see_also_texts": ["MN 9"],
+      "members": [
+        { "pali": "kāmupādāna", "gloss": "clinging to sensuality", "match": "kamupadanam" },
+        { "pali": "diṭṭhupādāna", "gloss": "clinging to views", "match": "ditthupadanam" },
+        { "pali": "sīlabbatupādāna", "gloss": "clinging to precepts and practices", "match": "silabbatupadanam" },
+        { "pali": "attavādupādāna", "gloss": "clinging to doctrines of self", "match": "attavadupadanam" }
+      ],
+      "related": ["dependent-origination", "five-aggregates"]
+    },
+    {
+      "slug": "three-cravings", "name": "Three kinds of craving", "pali": "tisso taṇhā", "count": 3, "status": "canonical",
+      "aliases": ["craving", "tanha", "taṇhā", "thirst"],
+      "defined_in": ["SN 56.11"], "see_also_texts": ["DN 22", "MN 9"],
+      "members": [
+        { "pali": "kāmataṇhā", "gloss": "craving for sensuality", "match": "kamatanha" },
+        { "pali": "bhavataṇhā", "gloss": "craving for becoming", "match": "bhavatanha" },
+        { "pali": "vibhavataṇhā", "gloss": "craving for non-becoming", "match": "vibhavatanha" }
+      ],
+      "related": ["four-noble-truths"]
+    },
+    {
+      "slug": "three-feelings", "name": "Three kinds of feeling", "pali": "tisso vedanā", "count": 3, "status": "canonical",
+      "aliases": ["feelings", "vedana", "vedanā"],
+      "defined_in": ["SN 36.1"], "see_also_texts": ["MN 44", "SN 36.6"],
+      "members": [
+        { "pali": "sukhā vedanā", "gloss": "pleasant feeling", "match": "sukha vedana" },
+        { "pali": "dukkhā vedanā", "gloss": "painful feeling", "match": "dukkha vedana" },
+        { "pali": "adukkhamasukhā vedanā", "gloss": "neither-painful-nor-pleasant feeling", "match": "adukkhamasukha vedana" }
+      ]
+    },
+    {
+      "slug": "three-kinds-of-suffering", "name": "Three kinds of stressfulness", "pali": "tisso dukkhatā", "count": 3, "status": "canonical",
+      "aliases": ["three kinds of dukkha", "dukkhata", "three sufferings"],
+      "defined_in": ["SN 38.14"], "see_also_texts": ["SN 45.165"],
+      "members": [
+        { "pali": "dukkhadukkhatā", "gloss": "the stressfulness of pain", "match": "dukkhadukkhata" },
+        { "pali": "saṅkhāradukkhatā", "gloss": "the stressfulness of fabrication", "match": "sankharadukkhata" },
+        { "pali": "vipariṇāmadukkhatā", "gloss": "the stressfulness of change", "match": "viparinamadukkhata" }
+      ]
+    },
+    {
+      "slug": "six-sense-bases", "name": "Six internal sense bases", "pali": "cha ajjhattikāni āyatanāni", "count": 6, "status": "canonical",
+      "aliases": ["sense bases", "sense media", "salayatana", "saḷāyatana", "six senses", "ayatana"],
+      "defined_in": ["MN 148", "SN 12.2"], "see_also_texts": ["MN 137"],
+      "members": [
+        { "pali": "cakkhāyatana", "gloss": "eye", "match": "cakkhayatanam" },
+        { "pali": "sotāyatana", "gloss": "ear", "match": "sotayatanam" },
+        { "pali": "ghānāyatana", "gloss": "nose", "match": "ghanayatanam" },
+        { "pali": "jivhāyatana", "gloss": "tongue", "match": "jivhayatanam" },
+        { "pali": "kāyāyatana", "gloss": "body", "match": "kayayatanam" },
+        { "pali": "manāyatana", "gloss": "intellect (mind)", "match": "manayatanam" }
+      ],
+      "related": ["dependent-origination"]
+    },
+    {
+      "slug": "four-great-elements", "name": "Four great elements", "pali": "cattāro mahābhūtā", "count": 4, "status": "canonical",
+      "aliases": ["elements", "mahabhuta", "dhatu", "four properties", "earth water fire wind"],
+      "defined_in": ["MN 28"], "see_also_texts": ["MN 62", "MN 140"],
+      "members": [
+        { "pali": "pathavīdhātu", "gloss": "the earth property (solidity)", "match": "pathavidhatu" },
+        { "pali": "āpodhātu", "gloss": "the water property (liquidity)", "match": "apodhatu" },
+        { "pali": "tejodhātu", "gloss": "the fire property (heat)", "match": "tejodhatu" },
+        { "pali": "vāyodhātu", "gloss": "the wind property (motion)", "match": "vayodhatu" }
+      ]
+    },
+    {
+      "slug": "three-trainings", "name": "Three trainings", "pali": "tisso sikkhā", "count": 3, "status": "canonical",
+      "aliases": ["threefold training", "sila samadhi panna", "virtue concentration discernment", "sikkha"],
+      "defined_in": ["AN 3.88"], "see_also_texts": ["AN 3.89"],
+      "members": [
+        { "pali": "adhisīlasikkhā", "gloss": "training in heightened virtue", "match": "adhisilasikkha" },
+        { "pali": "adhicittasikkhā", "gloss": "training in heightened mind (concentration)", "match": "adhicittasikkha" },
+        { "pali": "adhipaññāsikkhā", "gloss": "training in heightened discernment", "match": "adhipannasikkha" }
+      ]
+    },
+    {
+      "slug": "eight-worldly-conditions", "name": "Eight worldly conditions", "pali": "aṭṭha lokadhammā", "count": 8, "status": "canonical",
+      "aliases": ["worldly winds", "lokadhamma", "eight worldly concerns", "worldly dhammas"],
+      "defined_in": ["AN 8.6"], "see_also_texts": ["AN 8.5"],
+      "members": [
+        { "pali": "lābha", "gloss": "gain", "match": "labho" },
+        { "pali": "alābha", "gloss": "loss", "match": "alabho" },
+        { "pali": "yasa", "gloss": "status", "match": "yaso" },
+        { "pali": "ayasa", "gloss": "disgrace", "match": "ayaso" },
+        { "pali": "nindā", "gloss": "censure", "match": "ninda" },
+        { "pali": "pasaṃsā", "gloss": "praise", "match": "pasamsa" },
+        { "pali": "sukha", "gloss": "pleasure", "match": "sukham" },
+        { "pali": "dukkha", "gloss": "pain", "match": "dukkham" }
+      ]
+    },
+    {
+      "slug": "seven-underlying-tendencies", "name": "Seven underlying tendencies", "pali": "satta anusayā", "count": 7, "status": "canonical",
+      "aliases": ["anusaya", "latent tendencies", "obsessions"],
+      "defined_in": ["AN 7.11"], "see_also_texts": ["AN 7.12", "MN 64"],
+      "members": [
+        { "pali": "kāmarāgānusaya", "gloss": "sensual passion", "match": "kamaraganusayo" },
+        { "pali": "paṭighānusaya", "gloss": "resistance (irritation)", "match": "patighanusayo" },
+        { "pali": "diṭṭhānusaya", "gloss": "views", "match": "ditthanusayo" },
+        { "pali": "vicikicchānusaya", "gloss": "doubt", "match": "vicikicchanusayo" },
+        { "pali": "mānānusaya", "gloss": "conceit", "match": "mananusayo" },
+        { "pali": "bhavarāgānusaya", "gloss": "passion for becoming", "match": "bhavaraganusayo" },
+        { "pali": "avijjānusaya", "gloss": "ignorance", "match": "avijjanusayo" }
+      ],
+      "related": ["ten-fetters"]
+    },
+    {
+      "slug": "six-recollections", "name": "Six recollections", "pali": "cha anussatiṭṭhānāni", "count": 6, "status": "canonical",
+      "aliases": ["recollections", "anussati", "six remembrances"],
+      "defined_in": ["AN 6.25"], "see_also_texts": ["AN 6.10", "AN 11.12"],
+      "members": [
+        { "pali": "buddhānussati", "gloss": "recollection of the Buddha (the Tathāgata)", "match": "tathagatam anussarati" },
+        { "pali": "dhammānussati", "gloss": "recollection of the Dhamma", "match": "dhammam anussarati" },
+        { "pali": "saṅghānussati", "gloss": "recollection of the Saṅgha", "match": "sangham anussarati" },
+        { "pali": "sīlānussati", "gloss": "recollection of one's virtue", "match": "silani anussarati" },
+        { "pali": "cāgānussati", "gloss": "recollection of one's generosity", "match": "cagam anussarati" },
+        { "pali": "devatānussati", "gloss": "recollection of the devas", "match": "devata anussarati" }
+      ]
+    },
+    {
+      "slug": "four-stages-of-awakening", "name": "Four fruits of the contemplative life (stages of awakening)", "pali": "cattāri sāmaññaphalāni", "count": 4, "status": "canonical",
+      "aliases": ["stages of awakening", "stages of enlightenment", "noble persons", "stream entry", "sotapanna", "arahant", "four fruits"],
+      "defined_in": ["SN 45.35"], "see_also_texts": ["SN 48.18", "MN 118"],
+      "members": [
+        { "pali": "sotāpattiphala", "gloss": "the fruit of stream-entry", "match": "sotapattiphal" },
+        { "pali": "sakadāgāmiphala", "gloss": "the fruit of once-returning", "match": "sakadagamiphal" },
+        { "pali": "anāgāmiphala", "gloss": "the fruit of non-returning", "match": "anagamiphal" },
+        { "pali": "arahattaphala", "gloss": "the fruit of arahantship (full awakening)", "match": "arahattaphal" }
+      ],
+      "related": ["ten-fetters"]
+    }
+  ]
+}

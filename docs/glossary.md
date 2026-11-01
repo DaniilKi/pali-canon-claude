@@ -21,6 +21,8 @@ Terms used in this project, explained for newcomers. Pāli words are given with 
 | **Nipāta** | A numbered book of the Aṅguttara Nikāya (AN 3 is "the threes") |
 | **Peyyāla** | An abbreviation of repeated text, marked "…pe…" in the Pāli. Texts the edition only abbreviates are marked *approximate* |
 | **Gāthā** | A verse |
+| **Mātikā** | The "matrix" of headings at the start of the Dhammasaṅgaṇī, the first Abhidhamma book: 22 triads (*tika*, three-way divisions such as wholesome, unwholesome, indeterminate) and 142 dyads (*duka*, two-way divisions), 100 Abhidhamma dyads and 42 Suttanta dyads. The `abhidhamma_matika` tool lists them |
+| **Paccaya** | A condition: one of the 24 ways one thing supports another, set out in the Paṭṭhāna, the last Abhidhamma book. The `patthana_condition` tool gives each one's Pāli definition and where it is in the text; for an English meaning, look the Pāli term up with `lookup_pali` |
 
 ## Commentaries and later works
 
@@ -55,6 +57,14 @@ Terms used in this project, explained for newcomers. Pāli words are given with 
 | **Vassa** | The three-month rains retreat |
 | **Paritta** | Protective chants, such as the Maṅgala, Ratana and Karaṇīyamettā Suttas |
 | **Vesak** | The festival marking the Buddha's birth, awakening and passing |
+| **Poya** | Sri Lankan name for an uposatha day; the full-moon poya is a public holiday |
+| **Māgha Pūjā, Āsāḷha Pūjā** | Full-moon festivals of the Māgha and Āsāḷha months; tradition links them to the Ovāda-pāṭimokkha and the first discourse ([calendar](calendar.md)) |
+| **Pavāraṇā** | The "invitation" ceremony that ends the rains retreat |
+| **Kaṭhina** | Offering of cloth to monks in the month after the rains retreat |
+| **Adhikamāsa / adhikavāra** | In the Thai lunar calendar, a year with an extra month (a second Āsāḷha) / with an extra day |
+| **Watat** | In the Burmese calendar, a year with an extra month (a First Waso) |
+| **Pakkhagaṇanā** | The fortnight reckoning kept by the Thai Dhammayut order, whose uposatha day can differ from the civil calendar's by one day, earlier or later |
+| **Tithi** | A lunar day: the time for the moon to move 12° further from the sun; Sri Lankan poya days follow it |
 
 ## Technical terms
 
@@ -71,3 +81,4 @@ Terms used in this project, explained for newcomers. Pāli words are given with 
 | **Mirror** | An official copy of a website, used when the site is down |
 | **Offline** | Works with no internet connection |
 | **Audit** | The automatic check of all 8,544 texts run before each release |
+| **Semantic search** | Search by meaning rather than by exact words, using *embeddings* (lists of numbers that place texts with similar meaning close together). Evaluated and deferred: see [semantic-search.md](semantic-search.md) |

@@ -1,0 +1,1704 @@
+{
+ "about": "Published reference dates used by tests/calendar.test.mjs to check src/calendar.mjs. Each block names its source and URL; dates were copied from the source, not computed. Retrieved 2026-11-01.",
+ "sources": {},
+ "thai-mahanikaya": {
+  "source": "splendidmoons, Mahānikāya uposatha calendar (CSV download)",
+  "url": "https://splendidmoons.github.io/calendars/mahanikaya.csv",
+  "page": "https://splendidmoons.github.io/downloads",
+  "licence": "MIT (code, https://github.com/splendidmoons/splendidmoons); dates are facts",
+  "days": [
+   {
+    "date": "2024-01-04",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2024-01-10",
+    "phase": "new"
+   },
+   {
+    "date": "2024-01-18",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2024-01-25",
+    "phase": "full"
+   },
+   {
+    "date": "2024-02-02",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2024-02-09",
+    "phase": "new"
+   },
+   {
+    "date": "2024-02-17",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2024-02-24",
+    "phase": "full"
+   },
+   {
+    "date": "2024-03-03",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2024-03-09",
+    "phase": "new"
+   },
+   {
+    "date": "2024-03-17",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2024-03-24",
+    "phase": "full"
+   },
+   {
+    "date": "2024-04-01",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2024-04-08",
+    "phase": "new"
+   },
+   {
+    "date": "2024-04-16",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2024-04-23",
+    "phase": "full"
+   },
+   {
+    "date": "2024-05-01",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2024-05-07",
+    "phase": "new"
+   },
+   {
+    "date": "2024-05-15",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2024-05-22",
+    "phase": "full"
+   },
+   {
+    "date": "2024-05-30",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2024-06-06",
+    "phase": "new"
+   },
+   {
+    "date": "2024-06-14",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2024-06-21",
+    "phase": "full"
+   },
+   {
+    "date": "2024-06-29",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2024-07-05",
+    "phase": "new"
+   },
+   {
+    "date": "2024-07-13",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2024-07-20",
+    "phase": "full"
+   },
+   {
+    "date": "2024-07-28",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2024-08-04",
+    "phase": "new"
+   },
+   {
+    "date": "2024-08-12",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2024-08-19",
+    "phase": "full"
+   },
+   {
+    "date": "2024-08-27",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2024-09-02",
+    "phase": "new"
+   },
+   {
+    "date": "2024-09-10",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2024-09-17",
+    "phase": "full"
+   },
+   {
+    "date": "2024-09-25",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2024-10-02",
+    "phase": "new"
+   },
+   {
+    "date": "2024-10-10",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2024-10-17",
+    "phase": "full"
+   },
+   {
+    "date": "2024-10-25",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2024-10-31",
+    "phase": "new"
+   },
+   {
+    "date": "2024-11-08",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2024-11-15",
+    "phase": "full"
+   },
+   {
+    "date": "2024-11-23",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2024-11-30",
+    "phase": "new"
+   },
+   {
+    "date": "2024-12-08",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2024-12-15",
+    "phase": "full"
+   },
+   {
+    "date": "2024-12-23",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2024-12-29",
+    "phase": "new"
+   },
+   {
+    "date": "2025-01-06",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2025-01-13",
+    "phase": "full"
+   },
+   {
+    "date": "2025-01-21",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2025-01-28",
+    "phase": "new"
+   },
+   {
+    "date": "2025-02-05",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2025-02-12",
+    "phase": "full"
+   },
+   {
+    "date": "2025-02-20",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2025-02-26",
+    "phase": "new"
+   },
+   {
+    "date": "2025-03-06",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2025-03-13",
+    "phase": "full"
+   },
+   {
+    "date": "2025-03-21",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2025-03-28",
+    "phase": "new"
+   },
+   {
+    "date": "2025-04-05",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2025-04-12",
+    "phase": "full"
+   },
+   {
+    "date": "2025-04-20",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2025-04-26",
+    "phase": "new"
+   },
+   {
+    "date": "2025-05-04",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2025-05-11",
+    "phase": "full"
+   },
+   {
+    "date": "2025-05-19",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2025-05-26",
+    "phase": "new"
+   },
+   {
+    "date": "2025-06-03",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2025-06-10",
+    "phase": "full"
+   },
+   {
+    "date": "2025-06-18",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2025-06-25",
+    "phase": "new"
+   },
+   {
+    "date": "2025-07-03",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2025-07-10",
+    "phase": "full"
+   },
+   {
+    "date": "2025-07-18",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2025-07-25",
+    "phase": "new"
+   },
+   {
+    "date": "2025-08-02",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2025-08-09",
+    "phase": "full"
+   },
+   {
+    "date": "2025-08-17",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2025-08-23",
+    "phase": "new"
+   },
+   {
+    "date": "2025-08-31",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2025-09-07",
+    "phase": "full"
+   },
+   {
+    "date": "2025-09-15",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2025-09-22",
+    "phase": "new"
+   },
+   {
+    "date": "2025-09-30",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2025-10-07",
+    "phase": "full"
+   },
+   {
+    "date": "2025-10-15",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2025-10-21",
+    "phase": "new"
+   },
+   {
+    "date": "2025-10-29",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2025-11-05",
+    "phase": "full"
+   },
+   {
+    "date": "2025-11-13",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2025-11-20",
+    "phase": "new"
+   },
+   {
+    "date": "2025-11-28",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2025-12-05",
+    "phase": "full"
+   },
+   {
+    "date": "2025-12-13",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2025-12-19",
+    "phase": "new"
+   },
+   {
+    "date": "2025-12-27",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2026-01-03",
+    "phase": "full"
+   },
+   {
+    "date": "2026-01-11",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2026-01-18",
+    "phase": "new"
+   },
+   {
+    "date": "2026-01-26",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2026-02-02",
+    "phase": "full"
+   },
+   {
+    "date": "2026-02-10",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2026-02-16",
+    "phase": "new"
+   },
+   {
+    "date": "2026-02-24",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2026-03-03",
+    "phase": "full"
+   },
+   {
+    "date": "2026-03-11",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2026-03-18",
+    "phase": "new"
+   },
+   {
+    "date": "2026-03-26",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2026-04-02",
+    "phase": "full"
+   },
+   {
+    "date": "2026-04-10",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2026-04-16",
+    "phase": "new"
+   },
+   {
+    "date": "2026-04-24",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2026-05-01",
+    "phase": "full"
+   },
+   {
+    "date": "2026-05-09",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2026-05-16",
+    "phase": "new"
+   },
+   {
+    "date": "2026-05-24",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2026-05-31",
+    "phase": "full"
+   },
+   {
+    "date": "2026-06-08",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2026-06-14",
+    "phase": "new"
+   },
+   {
+    "date": "2026-06-22",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2026-06-29",
+    "phase": "full"
+   },
+   {
+    "date": "2026-07-07",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2026-07-14",
+    "phase": "new"
+   },
+   {
+    "date": "2026-07-22",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2026-07-29",
+    "phase": "full"
+   },
+   {
+    "date": "2026-08-06",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2026-08-13",
+    "phase": "new"
+   },
+   {
+    "date": "2026-08-21",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2026-08-28",
+    "phase": "full"
+   },
+   {
+    "date": "2026-09-05",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2026-09-11",
+    "phase": "new"
+   },
+   {
+    "date": "2026-09-19",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2026-09-26",
+    "phase": "full"
+   },
+   {
+    "date": "2026-10-04",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2026-10-11",
+    "phase": "new"
+   },
+   {
+    "date": "2026-10-19",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2026-10-26",
+    "phase": "full"
+   },
+   {
+    "date": "2026-11-03",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2026-11-09",
+    "phase": "new"
+   },
+   {
+    "date": "2026-11-17",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2026-11-24",
+    "phase": "full"
+   },
+   {
+    "date": "2026-12-02",
+    "phase": "waning-half"
+   },
+   {
+    "date": "2026-12-09",
+    "phase": "new"
+   },
+   {
+    "date": "2026-12-17",
+    "phase": "waxing-half"
+   },
+   {
+    "date": "2026-12-24",
+    "phase": "full"
+   }
+  ],
+  "festivals": [
+   {
+    "date": "2024-02-24",
+    "festival": "magha-puja"
+   },
+   {
+    "date": "2024-05-22",
+    "festival": "vesak"
+   },
+   {
+    "date": "2024-07-20",
+    "festival": "asalha-puja"
+   },
+   {
+    "date": "2024-07-21",
+    "festival": "vassa-start"
+   },
+   {
+    "date": "2024-10-17",
+    "festival": "pavarana"
+   },
+   {
+    "date": "2024-10-17",
+    "festival": "vassa-end"
+   },
+   {
+    "date": "2025-02-12",
+    "festival": "magha-puja"
+   },
+   {
+    "date": "2025-05-11",
+    "festival": "vesak"
+   },
+   {
+    "date": "2025-07-10",
+    "festival": "asalha-puja"
+   },
+   {
+    "date": "2025-07-11",
+    "festival": "vassa-start"
+   },
+   {
+    "date": "2025-10-07",
+    "festival": "pavarana"
+   },
+   {
+    "date": "2025-10-07",
+    "festival": "vassa-end"
+   },
+   {
+    "date": "2026-03-03",
+    "festival": "magha-puja"
+   },
+   {
+    "date": "2026-05-31",
+    "festival": "vesak"
+   },
+   {
+    "date": "2026-07-29",
+    "festival": "asalha-puja"
+   },
+   {
+    "date": "2026-07-30",
+    "festival": "vassa-start"
+   },
+   {
+    "date": "2026-10-26",
+    "festival": "pavarana"
+   },
+   {
+    "date": "2026-10-26",
+    "festival": "vassa-end"
+   }
+  ]
+ },
+ "thai-dhammayut": {
+  "source": "Metta Forest Monastery (Wat Metta), Uposatha calendars \"for the Dhammayut Order in Thailand\"",
+  "years": {
+   "2024": {
+    "url": "https://www.watmetta.org/news/Uposatha2024.pdf",
+    "archived": "https://web.archive.org/web/20240705131558/https://www.watmetta.org/news/Uposatha2024.pdf",
+    "note_on_list": "These are the Uposatha dates for the Dhammayut Order in Thailand. On the dates marked with an asterisk, the Mahānikāya dates fall one day earlier.",
+    "days": [
+     {
+      "date": "2024-01-04",
+      "phase": "half"
+     },
+     {
+      "date": "2024-01-10",
+      "phase": "new"
+     },
+     {
+      "date": "2024-01-18",
+      "phase": "half"
+     },
+     {
+      "date": "2024-01-25",
+      "phase": "full"
+     },
+     {
+      "date": "2024-02-02",
+      "phase": "half"
+     },
+     {
+      "date": "2024-02-09",
+      "phase": "new"
+     },
+     {
+      "date": "2024-02-17",
+      "phase": "half"
+     },
+     {
+      "date": "2024-02-24",
+      "phase": "full"
+     },
+     {
+      "date": "2024-03-03",
+      "phase": "half"
+     },
+     {
+      "date": "2024-03-10",
+      "phase": "new",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2024-03-18",
+      "phase": "half",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2024-03-24",
+      "phase": "full"
+     },
+     {
+      "date": "2024-04-01",
+      "phase": "half"
+     },
+     {
+      "date": "2024-04-08",
+      "phase": "new"
+     },
+     {
+      "date": "2024-04-16",
+      "phase": "half"
+     },
+     {
+      "date": "2024-04-23",
+      "phase": "full"
+     },
+     {
+      "date": "2024-05-01",
+      "phase": "half"
+     },
+     {
+      "date": "2024-05-08",
+      "phase": "new",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2024-05-16",
+      "phase": "half",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2024-05-22",
+      "phase": "full"
+     },
+     {
+      "date": "2024-05-30",
+      "phase": "half"
+     },
+     {
+      "date": "2024-06-06",
+      "phase": "new"
+     },
+     {
+      "date": "2024-06-14",
+      "phase": "half"
+     },
+     {
+      "date": "2024-06-21",
+      "phase": "full"
+     },
+     {
+      "date": "2024-06-29",
+      "phase": "half"
+     },
+     {
+      "date": "2024-07-06",
+      "phase": "new",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2024-07-14",
+      "phase": "half",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2024-07-20",
+      "phase": "full"
+     },
+     {
+      "date": "2024-07-28",
+      "phase": "half"
+     },
+     {
+      "date": "2024-08-04",
+      "phase": "new"
+     },
+     {
+      "date": "2024-08-12",
+      "phase": "half"
+     },
+     {
+      "date": "2024-08-19",
+      "phase": "full"
+     },
+     {
+      "date": "2024-08-27",
+      "phase": "half"
+     },
+     {
+      "date": "2024-09-03",
+      "phase": "new",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2024-09-11",
+      "phase": "half",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2024-09-17",
+      "phase": "full"
+     },
+     {
+      "date": "2024-09-25",
+      "phase": "half"
+     },
+     {
+      "date": "2024-10-02",
+      "phase": "new"
+     },
+     {
+      "date": "2024-10-10",
+      "phase": "half"
+     },
+     {
+      "date": "2024-10-17",
+      "phase": "full"
+     },
+     {
+      "date": "2024-10-25",
+      "phase": "half"
+     },
+     {
+      "date": "2024-11-01",
+      "phase": "new",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2024-11-09",
+      "phase": "half",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2024-11-16",
+      "phase": "full",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2024-11-24",
+      "phase": "half",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2024-11-30",
+      "phase": "new"
+     },
+     {
+      "date": "2024-12-08",
+      "phase": "half"
+     },
+     {
+      "date": "2024-12-15",
+      "phase": "full"
+     },
+     {
+      "date": "2024-12-23",
+      "phase": "half"
+     },
+     {
+      "date": "2024-12-30",
+      "phase": "new",
+      "mahanikaya_one_day_earlier": true
+     }
+    ],
+    "festivals": {
+     "magha-puja": "2024-02-24",
+     "vesak": "2024-05-22",
+     "asalha-puja": "2024-07-20",
+     "vassa-start": "2024-07-21",
+     "vassa-end": "2024-10-17"
+    }
+   },
+   "2025": {
+    "url": "https://www.watmetta.org/news/Uposatha2025.pdf",
+    "archived": "https://web.archive.org/web/20250826150659/https://www.watmetta.org/news/Uposatha2025.pdf",
+    "note_on_list": "These are the Uposatha dates for the Dhammayut Order in Thailand. On the dates marked with an asterisk, the Mahānikāya dates fall one day earlier.",
+    "days": [
+     {
+      "date": "2025-01-07",
+      "phase": "half",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2025-01-14",
+      "phase": "full",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2025-01-22",
+      "phase": "half",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2025-01-28",
+      "phase": "new"
+     },
+     {
+      "date": "2025-02-05",
+      "phase": "half"
+     },
+     {
+      "date": "2025-02-12",
+      "phase": "full"
+     },
+     {
+      "date": "2025-02-20",
+      "phase": "half"
+     },
+     {
+      "date": "2025-02-27",
+      "phase": "new",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2025-03-07",
+      "phase": "half",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2025-03-14",
+      "phase": "full",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2025-03-22",
+      "phase": "half",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2025-03-28",
+      "phase": "new"
+     },
+     {
+      "date": "2025-04-05",
+      "phase": "half"
+     },
+     {
+      "date": "2025-04-12",
+      "phase": "full"
+     },
+     {
+      "date": "2025-04-20",
+      "phase": "half"
+     },
+     {
+      "date": "2025-04-27",
+      "phase": "new",
+      "mahanikaya_one_day_earlier": true
+     },
+     {
+      "date": "2025-05-05",
+      "phase": "half"
+     },
+     {
+      "date": "2025-05-11",
+      "phase": "full"
+     },
+     {
+      "date": "2025-05-19",
+      "phase": "half"
+     },
+     {
+      "date": "2025-05-26",
+      "phase": "new"
+     },
+     {
+      "date": "2025-06-03",
+      "phase": "half"
+     },
+     {
+      "date": "2025-06-10",
+      "phase": "full"
+     },
+     {
+      "date": "2025-06-18",
+      "phase": "half"
+     },
+     {
+      "date": "2025-06-25",
+      "phase": "new"
+     },
+     {
+      "date": "2025-07-03",
+      "phase": "half"
+     },
+     {
+      "date": "2025-07-10",
+      "phase": "full"
+     },
+     {
+      "date": "2025-07-18",
+      "phase": "half"
+     },
+     {
+      "date": "2025-07-25",
+      "phase": "new"
+     },
+     {
+      "date": "2025-08-02",
+      "phase": "half"
+     },
+     {
+      "date": "2025-08-09",
+      "phase": "full"
+     },
+     {
+      "date": "2025-08-17",
+      "phase": "half"
+     },
+     {
+      "date": "2025-08-23",
+      "phase": "new"
+     },
+     {
+      "date": "2025-08-31",
+      "phase": "half"
+     },
+     {
+      "date": "2025-09-07",
+      "phase": "full"
+     },
+     {
+      "date": "2025-09-15",
+      "phase": "half"
+     },
+     {
+      "date": "2025-09-22",
+      "phase": "new"
+     },
+     {
+      "date": "2025-09-30",
+      "phase": "half"
+     },
+     {
+      "date": "2025-10-07",
+      "phase": "full"
+     },
+     {
+      "date": "2025-10-15",
+      "phase": "half"
+     },
+     {
+      "date": "2025-10-21",
+      "phase": "new"
+     },
+     {
+      "date": "2025-10-29",
+      "phase": "half"
+     },
+     {
+      "date": "2025-11-05",
+      "phase": "full"
+     },
+     {
+      "date": "2025-11-13",
+      "phase": "half"
+     },
+     {
+      "date": "2025-11-20",
+      "phase": "new"
+     },
+     {
+      "date": "2025-11-28",
+      "phase": "half"
+     },
+     {
+      "date": "2025-12-05",
+      "phase": "full"
+     },
+     {
+      "date": "2025-12-13",
+      "phase": "half"
+     },
+     {
+      "date": "2025-12-19",
+      "phase": "new"
+     },
+     {
+      "date": "2025-12-27",
+      "phase": "half"
+     }
+    ],
+    "festivals": {
+     "magha-puja": "2025-02-12",
+     "vesak": "2025-05-11",
+     "asalha-puja": "2025-07-10",
+     "vassa-start": "2025-07-11",
+     "vassa-end": "2025-10-07"
+    }
+   },
+   "2026": {
+    "url": "https://www.watmetta.org/news/Uposatha2026.pdf",
+    "archived": "https://web.archive.org/web/20250826191237/https://www.watmetta.org/news/Uposatha2026.pdf",
+    "note_on_list": "These are the Uposatha dates for both the Dhammayut Order and the Mahānikāya Order in Thailand.",
+    "days": [
+     {
+      "date": "2026-01-03",
+      "phase": "full"
+     },
+     {
+      "date": "2026-01-11",
+      "phase": "half"
+     },
+     {
+      "date": "2026-01-18",
+      "phase": "new"
+     },
+     {
+      "date": "2026-01-26",
+      "phase": "half"
+     },
+     {
+      "date": "2026-02-02",
+      "phase": "full"
+     },
+     {
+      "date": "2026-02-10",
+      "phase": "half"
+     },
+     {
+      "date": "2026-02-16",
+      "phase": "new"
+     },
+     {
+      "date": "2026-02-24",
+      "phase": "half"
+     },
+     {
+      "date": "2026-03-03",
+      "phase": "full"
+     },
+     {
+      "date": "2026-03-11",
+      "phase": "half"
+     },
+     {
+      "date": "2026-03-18",
+      "phase": "new"
+     },
+     {
+      "date": "2026-03-26",
+      "phase": "half"
+     },
+     {
+      "date": "2026-04-02",
+      "phase": "full"
+     },
+     {
+      "date": "2026-04-10",
+      "phase": "half"
+     },
+     {
+      "date": "2026-04-16",
+      "phase": "new"
+     },
+     {
+      "date": "2026-04-24",
+      "phase": "half"
+     },
+     {
+      "date": "2026-05-01",
+      "phase": "full"
+     },
+     {
+      "date": "2026-05-09",
+      "phase": "half"
+     },
+     {
+      "date": "2026-05-16",
+      "phase": "new"
+     },
+     {
+      "date": "2026-05-24",
+      "phase": "half"
+     },
+     {
+      "date": "2026-05-31",
+      "phase": "full"
+     },
+     {
+      "date": "2026-06-08",
+      "phase": "half"
+     },
+     {
+      "date": "2026-06-14",
+      "phase": "new"
+     },
+     {
+      "date": "2026-06-22",
+      "phase": "half"
+     },
+     {
+      "date": "2026-06-29",
+      "phase": "full"
+     },
+     {
+      "date": "2026-07-07",
+      "phase": "half"
+     },
+     {
+      "date": "2026-07-14",
+      "phase": "new"
+     },
+     {
+      "date": "2026-07-22",
+      "phase": "half"
+     },
+     {
+      "date": "2026-07-29",
+      "phase": "full"
+     },
+     {
+      "date": "2026-08-06",
+      "phase": "half"
+     },
+     {
+      "date": "2026-08-13",
+      "phase": "new"
+     },
+     {
+      "date": "2026-08-21",
+      "phase": "half"
+     },
+     {
+      "date": "2026-08-28",
+      "phase": "full"
+     },
+     {
+      "date": "2026-09-05",
+      "phase": "half"
+     },
+     {
+      "date": "2026-09-11",
+      "phase": "new"
+     },
+     {
+      "date": "2026-09-19",
+      "phase": "half"
+     },
+     {
+      "date": "2026-09-26",
+      "phase": "full"
+     },
+     {
+      "date": "2026-10-04",
+      "phase": "half"
+     },
+     {
+      "date": "2026-10-11",
+      "phase": "new"
+     },
+     {
+      "date": "2026-10-19",
+      "phase": "half"
+     },
+     {
+      "date": "2026-10-26",
+      "phase": "full"
+     },
+     {
+      "date": "2026-11-03",
+      "phase": "half"
+     },
+     {
+      "date": "2026-11-09",
+      "phase": "new"
+     },
+     {
+      "date": "2026-11-17",
+      "phase": "half"
+     },
+     {
+      "date": "2026-11-24",
+      "phase": "full"
+     },
+     {
+      "date": "2026-12-02",
+      "phase": "half"
+     },
+     {
+      "date": "2026-12-09",
+      "phase": "new"
+     },
+     {
+      "date": "2026-12-17",
+      "phase": "half"
+     },
+     {
+      "date": "2026-12-24",
+      "phase": "full"
+     }
+    ],
+    "festivals": {
+     "magha-puja": "2026-03-03",
+     "vesak": "2026-05-31",
+     "asalha-puja": "2026-07-29",
+     "vassa-start": "2026-07-30",
+     "vassa-end": "2026-10-26"
+    }
+   }
+  }
+ },
+ "sri-lanka": {
+  "source": "Gazette Extraordinary of the Democratic Socialist Republic of Sri Lanka, Holidays Act No. 29 of 1971, Order under Section 04 (public and bank holidays)",
+  "years": {
+   "2024": {
+    "gazette": "No. 2341/46 of 20 July 2023",
+    "url": "https://documents.gov.lk/view/extra-gazettes/2023/7/2341-46_E.pdf",
+    "archived": "https://web.archive.org/web/20251016125151/https://documents.gov.lk/view/extra-gazettes/2023/7/2341-46_E.pdf",
+    "poya_days": [
+     {
+      "date": "2024-01-25",
+      "poya": "Duruthu",
+      "as_printed": "Duruthu Full Moon Poya Day"
+     },
+     {
+      "date": "2024-02-23",
+      "poya": "Navam",
+      "as_printed": "Nawam Full Moon Poya Day"
+     },
+     {
+      "date": "2024-03-24",
+      "poya": "Medin",
+      "as_printed": "Medin Full Moon Poya Day"
+     },
+     {
+      "date": "2024-04-23",
+      "poya": "Bak",
+      "as_printed": "Bak Full Moon Poya Day"
+     },
+     {
+      "date": "2024-05-23",
+      "poya": "Vesak",
+      "as_printed": "Vesak Full Moon Poya Day"
+     },
+     {
+      "date": "2024-06-21",
+      "poya": "Poson",
+      "as_printed": "Poson Full Moon Poya Day"
+     },
+     {
+      "date": "2024-07-20",
+      "poya": "Esala",
+      "as_printed": "Esala Full Moon Poya Day"
+     },
+     {
+      "date": "2024-08-19",
+      "poya": "Nikini",
+      "as_printed": "Nikini Full Moon Poya Day"
+     },
+     {
+      "date": "2024-09-17",
+      "poya": "Binara",
+      "as_printed": "Binara Full Moon Poya Day"
+     },
+     {
+      "date": "2024-10-17",
+      "poya": "Vap",
+      "as_printed": "Vap Full Moon Poya Day"
+     },
+     {
+      "date": "2024-11-15",
+      "poya": "Il",
+      "as_printed": "Il Full Moon Poya Day"
+     },
+     {
+      "date": "2024-12-14",
+      "poya": "Unduvap",
+      "as_printed": "Unduvap Full Moon Poya Day"
+     }
+    ]
+   },
+   "2025": {
+    "gazette": "No. 2395/33 of 31 July 2024",
+    "url": "https://documents.gov.lk/view/extra-gazettes/2024/7/2395-33_E.pdf",
+    "archived": "https://web.archive.org/web/20251212082428/https://documents.gov.lk/view/extra-gazettes/2024/7/2395-33_E.pdf",
+    "poya_days": [
+     {
+      "date": "2025-01-13",
+      "poya": "Duruthu",
+      "as_printed": "Duruthu Full Moon Poya Day"
+     },
+     {
+      "date": "2025-02-12",
+      "poya": "Navam",
+      "as_printed": "Nawam Full Moon Poya Day"
+     },
+     {
+      "date": "2025-03-13",
+      "poya": "Medin",
+      "as_printed": "Medin Full Moon Poya Day"
+     },
+     {
+      "date": "2025-04-12",
+      "poya": "Bak",
+      "as_printed": "Bak Full Moon Poya Day"
+     },
+     {
+      "date": "2025-05-12",
+      "poya": "Vesak",
+      "as_printed": "Vesak Full Moon Poya Day"
+     },
+     {
+      "date": "2025-06-10",
+      "poya": "Poson",
+      "as_printed": "Poson Full Moon Poya Day"
+     },
+     {
+      "date": "2025-07-10",
+      "poya": "Esala",
+      "as_printed": "Esala Full Moon Poya Day"
+     },
+     {
+      "date": "2025-08-08",
+      "poya": "Nikini",
+      "as_printed": "Nikini Full Moon Poya Day"
+     },
+     {
+      "date": "2025-09-07",
+      "poya": "Binara",
+      "as_printed": "Binara Full Moon Poya Day"
+     },
+     {
+      "date": "2025-10-06",
+      "poya": "Vap",
+      "as_printed": "Vap Full Moon Poya Day"
+     },
+     {
+      "date": "2025-11-05",
+      "poya": "Il",
+      "as_printed": "Il Full Moon Poya Day"
+     },
+     {
+      "date": "2025-12-04",
+      "poya": "Unduvap",
+      "as_printed": "Unduvap Full Moon Poya Day"
+     }
+    ]
+   },
+   "2026": {
+    "gazette": "No. 2438/22 of 27 May 2025",
+    "url": "https://documents.gov.lk/view/extra-gazettes/2025/5/2438-22_E.pdf",
+    "archived": "https://web.archive.org/web/20251030070904/https://documents.gov.lk/view/extra-gazettes/2025/5/2438-22_E.pdf",
+    "poya_days": [
+     {
+      "date": "2026-01-03",
+      "poya": "Duruthu",
+      "as_printed": "Duruthu Full Moon Poya Day"
+     },
+     {
+      "date": "2026-02-01",
+      "poya": "Navam",
+      "as_printed": "Navam Full Moon Poya Day"
+     },
+     {
+      "date": "2026-03-02",
+      "poya": "Medin",
+      "as_printed": "Medin Full Moon Poya Day"
+     },
+     {
+      "date": "2026-04-01",
+      "poya": "Bak",
+      "as_printed": "Bak Full Moon Poya Day"
+     },
+     {
+      "date": "2026-05-01",
+      "poya": "Vesak",
+      "as_printed": "Vesak Full Moon Poya Day"
+     },
+     {
+      "date": "2026-05-30",
+      "poya": "Adhi Poson",
+      "as_printed": "Adhi Poson Full Moon Poya Day"
+     },
+     {
+      "date": "2026-06-29",
+      "poya": "Poson",
+      "as_printed": "Poson Full Moon Poya Day"
+     },
+     {
+      "date": "2026-07-29",
+      "poya": "Esala",
+      "as_printed": "Esala Full Moon Poya Day"
+     },
+     {
+      "date": "2026-08-27",
+      "poya": "Nikini",
+      "as_printed": "Nikini Full Moon Poya Day"
+     },
+     {
+      "date": "2026-09-26",
+      "poya": "Binara",
+      "as_printed": "Binara Full Moon Poya Day"
+     },
+     {
+      "date": "2026-10-25",
+      "poya": "Vap",
+      "as_printed": "Vap Full Moon Poya Day"
+     },
+     {
+      "date": "2026-11-24",
+      "poya": "Il",
+      "as_printed": "Il Full Moon Poya Day"
+     },
+     {
+      "date": "2026-12-23",
+      "poya": "Unduvap",
+      "as_printed": "Unduvap Full Moon Poya Day"
+     }
+    ]
+   }
+  }
+ },
+ "myanmar": {
+  "source": "Department of Civil Aviation, Myanmar (Aeronautical Information Services): AIC \"Myanmar Public Holidays for Year <year>\". Dates transcribed from the PDFs; sha256 of the file as retrieved on 2026-11-01 is given so the copy can be checked. No web-archive copy exists.",
+  "note": "A one-day holiday must equal the computed full moon. Multi-day holidays (Lighting Festival, some Tazaungmon holidays) are ranges that must contain it. Māgha Pūjā is not in these lists.",
+  "years": {
+   "2024": {
+    "url": "https://ais.gov.mm/wp-content/uploads/2024/01/AIC-03-2024.pdf",
+    "document": "AIC A 03/2024, published as of 15 Feb 2024",
+    "sha256": "dde6f4b3734be981b51dbbd2bd8fcc194563972d633e6fd8ce7c06f74aa74e73",
+    "retrieved": "2026-11-01",
+    "holidays": [
+     {
+      "holiday": "Full Moon Day of Tabaung",
+      "month": "Tabaung",
+      "from": "2024-03-24",
+      "to": "2024-03-24"
+     },
+     {
+      "holiday": "Full Moon Day of Kasong",
+      "month": "Kason",
+      "from": "2024-05-22",
+      "to": "2024-05-22"
+     },
+     {
+      "holiday": "Beginning of Buddhist [Lent] (the line is printed \"Beginning of Buddhist\")",
+      "month": "Waso",
+      "from": "2024-07-20",
+      "to": "2024-07-20"
+     },
+     {
+      "holiday": "Lighting Festival",
+      "month": "Thadingyut",
+      "from": "2024-10-16",
+      "to": "2024-10-18"
+     },
+     {
+      "holiday": "Full Moon Day of Tasaungmone",
+      "month": "Tazaungmon",
+      "from": "2024-11-15",
+      "to": "2024-11-15"
+     }
+    ]
+   },
+   "2025": {
+    "url": "https://ais.gov.mm/wp-content/uploads/2025/01/AIC-03-2025.pdf",
+    "document": "AIC A 03/2025, published as of 07 Jan 2025",
+    "sha256": "09ba8749a755dc8192662b71f848d440b709c6c9700aa4481e2d0dd1e892f3a0",
+    "retrieved": "2026-11-01",
+    "holidays": [
+     {
+      "holiday": "Full Moon Day of Tabaung",
+      "month": "Tabaung",
+      "from": "2025-03-13",
+      "to": "2025-03-13"
+     },
+     {
+      "holiday": "Full Moon Day of Kasong",
+      "month": "Kason",
+      "from": "2025-05-11",
+      "to": "2025-05-11"
+     },
+     {
+      "holiday": "Full Moon Day of Warso",
+      "month": "Waso",
+      "from": "2025-07-09",
+      "to": "2025-07-09"
+     },
+     {
+      "holiday": "Lighting Festival",
+      "month": "Thadingyut",
+      "from": "2025-10-05",
+      "to": "2025-10-07"
+     },
+     {
+      "holiday": "Full Moon Day of Tasaungmone",
+      "month": "Tazaungmon",
+      "from": "2025-11-04",
+      "to": "2025-11-04"
+     }
+    ]
+   },
+   "2026": {
+    "url": "https://ais.gov.mm/wp-content/uploads/2025/12/AIC-03-2026.pdf",
+    "document": "AIC A 03/2026, published on 01 Jan 2026",
+    "sha256": "7bbb97b88ad2ede434fc662cf6c765d8127dcbb7cba1b32d0a0c449c866d157c",
+    "retrieved": "2026-11-01",
+    "holidays": [
+     {
+      "holiday": "Full Moon Day of Tabaung",
+      "month": "Tabaung",
+      "from": "2026-03-02",
+      "to": "2026-03-02"
+     },
+     {
+      "holiday": "Full Moon Day of Kasong",
+      "month": "Kason",
+      "from": "2026-04-30",
+      "to": "2026-04-30"
+     },
+     {
+      "holiday": "Full Moon Day of Warso",
+      "month": "Waso",
+      "from": "2026-07-29",
+      "to": "2026-07-29"
+     },
+     {
+      "holiday": "Lighting Festival",
+      "month": "Thadingyut",
+      "from": "2026-10-26",
+      "to": "2026-10-27"
+     },
+     {
+      "holiday": "Full Moon Day of Tasaungmone",
+      "month": "Tazaungmon",
+      "from": "2026-11-23",
+      "to": "2026-11-24"
+     }
+    ]
+   }
+  },
+  "secondary": {
+   "source": "Bank of Ayudhya (Krungsri), Yangon Representative Office: Public Holidays in Myanmar 2025 (bank holiday list). Kept as a second, archived check of 2025.",
+   "url": "https://www.krungsri.com/en/international-banking/myanmar/about-us/bank-holiday",
+   "archived": "https://web.archive.org/web/20250620012051/https://www.krungsri.com/en/international-banking/myanmar/about-us/bank-holiday",
+   "years": {
+    "2025": {
+     "holidays": [
+      {
+       "holiday": "Full Moon Day of Tabaung",
+       "month": "Tabaung",
+       "from": "2025-03-12",
+       "to": "2025-03-14"
+      },
+      {
+       "holiday": "Full Moon Day of Waso",
+       "month": "Waso",
+       "from": "2025-07-09",
+       "to": "2025-07-09"
+      },
+      {
+       "holiday": "Full Moon Day of Thadingyut",
+       "month": "Thadingyut",
+       "from": "2025-10-06",
+       "to": "2025-10-07"
+      },
+      {
+       "holiday": "Full Moon Day of Tazaungmone",
+       "month": "Tazaungmon",
+       "from": "2025-11-03",
+       "to": "2025-11-04"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

@@ -14,3 +14,5 @@ services:
         value: "120"
       - key: PALI_CANON_CACHE_MB
         value: "64"
+      - key: CHATGPT_WIDGET
+        value: "1"

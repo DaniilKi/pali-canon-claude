@@ -4,12 +4,12 @@
 |---|---|
 | Status | **Draft, not sent** |
 | Ask | Confirm the copyright status of the DPPN (original and revised) and permission to bundle short entries, or link to entries, with attribution |
-| Contact route | `anandajoti@gmail.com` (shown on https://ancient-buddhist-texts.net/Reference/DPPN.htm) |
+| Contact route | `anandajoti@gmail.com` (shown on https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm) |
 | Contact checked | 1 November 2026 |
 
 ## Before sending
 
-- The revised DPPN is published at https://ancient-buddhist-texts.net/Reference/DPPN.htm, "Revised by Ānandajoti Bhikkhu", and that page shows `anandajoti@gmail.com`. The page shows no copyright or licence statement for the revision.
+- The revised DPPN is published at https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm, "Revised by Ānandajoti Bhikkhu", and that page shows `anandajoti@gmail.com`. The page shows no copyright or licence statement for the revision.
 - A SuttaCentral forum post (https://discourse.suttacentral.net/t/revised-edition-of-the-dictionary-of-pali-proper-names/39992) describes the earlier digitised original as public domain. We have not confirmed this, or who holds rights in the 1937–38 original; the PTS letter asks too.
 - Can be merged with anandajoti.md into one email.
 - Fill in the maintainer's name and reply-to address. Only the maintainer sends this letter; agents never send it.

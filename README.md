@@ -12,6 +12,7 @@ Pali Canon for Claude gives Claude the complete Pāli Tipiṭaka, the scripture 
 
 - [Why this exists](#why-this-exists)
 - [What it does](#what-it-does)
+- [What you can ask it](#what-you-can-ask-it)
 - [What's inside](#whats-inside)
 - [Our approach](#our-approach)
 - [Sources at a glance](#sources-at-a-glance)
@@ -53,18 +54,47 @@ Once installed, you can ask Claude things like:
 
 Claude quotes only what it retrieved, names the translator, and keeps four things separate: **the Pāli text, the translation, the dictionary meaning, and its own explanation**.
 
+## What you can ask it
+
+Pali Canon gives the AI **26 tools**, 4 prompts, 3 reference resources and 5 skills. You do not need to know their names: ask in your own words and the AI picks the right tool. The tool names are shown in `code` for anyone who wants to check. Everything works offline unless marked *(internet)*.
+
+### Study
+
+- **Find and read any text.** Give a citation, a PTS page or a link and get the Pāli with its references (`resolve_reference`, `get_metadata`, `get_text`). Browse the canon book by book (`browse_canon`) or search the whole Pāli text (`search_texts`).
+- **Read and compare translations** *(internet)*. Ṭhānissaro Bhikkhu, the translators on Access to Insight and Ānandajoti Bhikkhu, always named and attributed (`get_translation`, `compare_translations`, `search_access_to_insight`, `get_access_to_insight_text`).
+- **Look up a Pāli word** *(internet)* in the Digital Pāḷi Dictionary (`lookup_pali`). A pronunciation guide explains how to read Pāli aloud (`pali://pronunciation`).
+- **Ask who or where.** "Who was Anāthapiṇḍika?" lists the texts that name a person or place and links to the Dictionary of Pāli Proper Names (`lookup_name`).
+- **Explore by topic or list.** "Texts on anger", "What are the five hindrances?": over 400 topics from Access to Insight's indexes and 37 numbered lists with their source passages (`topic`, `list_topics`, `dhamma_list`). See [topics and lists](docs/topics.md).
+- **Abhidhamma and Vinaya.** The matrix (mātikā) of the Dhammasaṅgaṇī (`abhidhamma_matika`), the 24 conditions of the Paṭṭhāna (`patthana_condition`), and any of the 227 monks' rules with a link to the *Buddhist Monastic Code* that explains it (`vinaya_rule`).
+- **Find Dhamma talks** *(internet)* by Ṭhānissaro Bhikkhu on a topic or a sutta, as links only (`find_talks`).
+- **Study skills.** `study` reads and explains a passage, `compare` compares translations, `pali-word` explains a word in context, and `method` keeps genre, early text, commentary and school differences apart.
+
+### Practice
+
+- **Uposatha and festivals.** Observance days and the dates of Vesak, Āsāḷha Pūjā, the Rains Retreat and more, for Thai Mahānikāya, Thai Dhammayut, Myanmar and Sri Lanka (`uposatha`, `festivals`). The dates are computed and labelled as such; your monastery's calendar decides. See [the calendar guide](docs/calendar.md).
+- **Chanting.** Paritta and other commonly recited texts (Maṅgala, Ratana, Karaṇīyamettā and more) in Pāli, with links to English (`paritta`).
+- **Daily reading.** A Dhammapada verse or a sutta for the day (`daily_text`), and reading plans such as the Dhammapada in 26 days or the Majjhima Nikāya in a year (`reading_plan`).
+- **Learn by heart.** The `memorise` skill (and the `memorise_passage` prompt in Claude Desktop) breaks a passage into short parts, quizzes you with fill-in-the-blanks and suggests when to review.
+
+### Checking quotes and citations
+
+- **"Did the Buddha really say this?"** `verify_quote` checks a quotation. Pāli is checked against the whole canon offline; English against the linked translations *(internet)*, by default the Dhammapada. It says whether the words were found, closely paraphrased or not found in the texts searched, and it never claims who did or did not say something. See [checking a quotation](docs/verify-quote.md).
+- **Check every citation in an essay.** Paste an essay, a talk transcript or a reference list, and `find_citations` finds each citation (MN 10, S v 420, links…) and checks that it points to a real text.
+
+Every tool only reads; none can change anything. The full technical list is in [docs/development.md](docs/development.md#tools), and more example requests are in [docs/examples.md](docs/examples.md).
+
 ## What's inside
 
 | Part of the canon | What it is | Texts | English linked |
 |---|---|---:|---|
-| **Sutta Piṭaka** | Discourses of the Buddha and his disciples: the long, middle-length, connected and numbered collections (DN, MN, SN, AN) and the Khuddaka Nikāya (Dhammapada, Sutta Nipāta, Theragāthā, Jātaka and more) | 6,999 | 1,773 texts (DN, MN, SN, AN, Dhp, Ud, Iti, Snp, Thag, Thig, Khp) |
+| **Sutta Piṭaka** | Discourses of the Buddha and his disciples: the long, middle-length, connected and numbered collections (DN, MN, SN, AN) and the Khuddaka Nikāya (Dhammapada, Sutta Nipāta, Theragāthā, Jātaka and more) | 6,999 | 1,778 texts (DN, MN, SN, AN, Dhp, Ud, Iti, Snp, Thag, Thig, Khp) |
 | **Vinaya Piṭaka** | Monastic discipline: the rules for monks and nuns and their origin stories, the Khandhakas and the Parivāra | 443 | not yet |
-| **Abhidhamma Piṭaka** | Systematic analysis of mind and matter: seven books from the Dhammasaṅgaṇī to the Paṭṭhāna | 1,102 | not yet |
+| **Abhidhamma Piṭaka** | Systematic analysis of mind and matter: seven books from the Dhammasaṅgaṇī to the Paṭṭhāna | 1,102 | 4 texts (parts of the Dhammasaṅgaṇī and Vibhaṅga) |
 | **Total** | | **8,544** | |
 
 - **The Pāli is complete**, from the Vipassana Research Institute's Chaṭṭha Saṅgāyana edition (the text of the Sixth Council, Yangon, 1954–56): 61 books, bundled and available offline.
 - **Page references for the PTS edition** are included: 11,964 page markers, so scholarly citations such as "M i 55" work. Thai, Myanmar and VRI page markers are in the data too.
-- **English translations** by Ṭhānissaro Bhikkhu (dhammatalks.org) and the many translators on Access to Insight are fetched live, with backup copies if a site is down.
+- **English translations** by Ṭhānissaro Bhikkhu (dhammatalks.org), the many translators on Access to Insight and Ānandajoti Bhikkhu (Ancient Buddhist Texts) are fetched live, with backup copies if a site is down.
 - **A Pāli dictionary**: the Digital Pāḷi Dictionary, live.
 
 The full breakdown by collection is in [docs/coverage.md](docs/coverage.md).
@@ -88,6 +118,7 @@ The reasoning behind each choice is recorded in [docs/decisions.md](docs/decisio
 | **Vipassana Research Institute (VRI)**, Chaṭṭha Saṅgāyana Tipiṭaka | The complete Pāli text and its page references | Bundled (offline) | Free for non-commercial use, with attribution to VRI | [tipitaka.org](https://www.tipitaka.org) · [data on GitHub](https://github.com/VipassanaTech/tipitaka-xml) |
 | **Ṭhānissaro Bhikkhu**, dhammatalks.org | English translations | Fetched live; falls back to his Access to Insight versions | CC BY-NC 4.0 | [dhammatalks.org/suttas](https://www.dhammatalks.org/suttas/) |
 | **Access to Insight** (Barre Center for Buddhist Studies) | English translations by many translators, study guides, topic index | Fetched live; falls back to the official GitHub copy and two other mirrors | Varies by page; each page's notice is returned | [accesstoinsight.org](https://www.accesstoinsight.org/) · [mirror](https://github.com/bcbsit/ati) |
+| **Ānandajoti Bhikkhu**, Ancient Buddhist Texts | Line-by-line Pāli and English translations (153 links: Udāna, Dhammapada, DN 16 and more) | Fetched live | CC BY-SA 3.0 | [ancient-buddhist-texts.net](https://ancient-buddhist-texts.net/) |
 | **Digital Pāḷi Dictionary** (Bodhirasa Bhikkhu) | Word meanings, grammar, roots | Fetched live | CC BY-NC-SA 4.0 | [dpdict.net](https://www.dpdict.net/) |
 | **SuttaCentral** | Links only, for parallels and further translations | Not fetched: SuttaCentral asks that its work not be used in AI tools | n/a | [suttacentral.net](https://suttacentral.net/) |
 | **Mahāsaṅgīti Pāli** (public domain) | Matching the standard citation numbers to the VRI text, once, when the data was built | Build time only; not shipped | Public Domain Mark 1.0 | [bilara-data](https://github.com/suttacentral/bilara-data) |
@@ -98,7 +129,7 @@ Considered and **not used** (with reasons), and the sources **planned** next, ar
 
 - **Every text, every release.** An automatic audit checks all 8,544 texts: each resolves by its citation, has text, does not overlap its neighbours, and its PTS page leads back to it. Result: 0 failures.
 - **Checked against an independent edition.** All 1,190 canonical pages of Access to Insight and their PTS citations were compared with our mapping: 0 problems.
-- **Translations are linked only with strong evidence.** A translation is attached only when its title, number or PTS page matches unambiguously. We prefer no link to a wrong link. 2,295 links pass this test.
+- **Translations are linked only with strong evidence.** A translation is attached only when its title, number or PTS page matches unambiguously. We prefer no link to a wrong link. 2,448 links pass this test.
 - **Independent review.** A separate reviewer checked about 110 citations and every PTS lookup in its sample. The problems it found were fixed and are now permanent tests.
 - **Outage drills.** We simulate each website going down and confirm that the backups take over and the Pāli still works.
 
@@ -106,9 +137,11 @@ Details: [docs/how-it-works.md](docs/how-it-works.md).
 
 ## Install
 
-Pick the app you use. Every option runs the same server, with the same 11 tools.
+Pick the app you use. Every option runs the same server, with the same 26 tools.
 
 ### Claude Desktop (easiest)
+
+Full guide: [docs/install/claude-desktop.md](docs/install/claude-desktop.md).
 
 1. Download the latest **`pali-canon-<version>.mcpb`** file from the [Releases page](https://github.com/DaniilKi/pali-canon-claude/releases/latest).
 2. Open Claude Desktop → **Settings → Extensions**, and drag the file onto the page (or use **Advanced settings → Install Extension…**).
@@ -126,21 +159,23 @@ Install [Node.js 20 or newer](https://nodejs.org/en/download), then type in Clau
 /plugin install pali-canon@pali-canon
 ```
 
-Start a new session and try the three built-in study skills:
+Start a new session and try the five built-in skills:
 
 ```text
 /pali-canon:study MN 10
 /pali-canon:compare AN 3.65
 /pali-canon:pali-word anicca in SN 22.59
+/pali-canon:method Kv 1
+/pali-canon:memorise Dhp 1
 ```
 
 Full guide, updating and troubleshooting: [docs/install/claude-code.md](docs/install/claude-code.md).
 
-The three skills also work in other AI apps that read `SKILL.md` files (`npx skills add DaniilKi/pali-canon-claude`), but they need the Pali Canon server installed too.
+The skills also work in other AI apps that read `SKILL.md` files (`npx skills add DaniilKi/pali-canon-claude`), but they need the Pali Canon server installed too.
 
 ### Codex (CLI and app)
 
-Pali Canon works in OpenAI's Codex as a plugin (tools plus the `$study`, `$compare` and `$pali-word` skills) or as a plain MCP server (tools only). You need [Node.js 20 or newer](https://nodejs.org/en/download).
+Pali Canon works in OpenAI's Codex as a plugin (tools plus the `$study`, `$compare`, `$pali-word`, `$method` and `$memorise` skills) or as a plain MCP server (tools only). You need [Node.js 20 or newer](https://nodejs.org/en/download).
 
 ```sh
 # Plugin: add this repository as a marketplace, then run /plugins inside Codex and install "Pali Canon"
@@ -182,7 +217,11 @@ You can already run your own copy with Docker or Node.js; see [docs/hosting.md](
 
 ### Other MCP apps
 
-Technical users can connect any app that supports MCP (the Model Context Protocol). Use the command `npx` with the arguments `-y pali-canon-mcp` once the npm package is published, or today `node /path/to/pali-canon-claude/server/index.cjs`. See [docs/development.md](docs/development.md#connect-any-mcp-client). ChatGPT support is on the [roadmap](#roadmap).
+Technical users can connect any app that supports MCP (the Model Context Protocol). Use the command `npx` with the arguments `-y pali-canon-mcp` once the npm package is published, or today `node /path/to/pali-canon-claude/server/index.cjs`. See [docs/development.md](docs/development.md#connect-any-mcp-client).
+
+### ChatGPT
+
+The hosted version can be added to ChatGPT as an app, with a reading view that shows the Pāli and English side by side, with the citation, PTS page and translator. It is not submitted yet, because it needs the hosted version first. See [docs/listings/chatgpt.md](docs/listings/chatgpt.md).
 
 ## Using it well
 
@@ -195,7 +234,7 @@ New to the terms? See the [glossary](docs/glossary.md).
 
 ## What it does not do yet
 
-- English is linked for 1,773 texts, about a fifth of the canon. The Vinaya, the Abhidhamma and much of the Khuddaka Nikāya have no English yet.
+- English is linked for 1,782 texts, about a fifth of the canon. The Vinaya, nearly all of the Abhidhamma and much of the Khuddaka Nikāya have no English yet.
 - The commentaries (Aṭṭhakathā) and sub-commentaries (Ṭīkā) are not included yet.
 - The Pāli is shown in Roman script only. Sinhala, Thai, Myanmar, Khmer and other scripts are planned.
 - Translations and the dictionary need internet; the Pāli does not.
@@ -206,12 +245,14 @@ New to the terms? See the [glossary](docs/glossary.md).
 Fifty issues are planned, under one tracking issue: [Roadmap: parity with Bible and Quran AI tools (#52)](https://github.com/DaniilKi/pali-canon-claude/issues/52). In short:
 
 - **Reach:** putting the hosted version online, Claude's connector directory, ChatGPT, the MCP Registry and community directories, and support in many languages. The Codex, Gemini CLI and code editor packages are done and waiting for hands-on testing.
-- **Study:** commentaries, word-by-word analysis, quote checking, other scripts, parallels between texts, topics, and people and places.
-- **Practice:** Uposatha (observance day) calendar, festivals, chanting texts, daily readings.
+- **Study:** commentaries, word-by-word analysis, other scripts, parallels between texts, more translators and other languages. Quote checking, citation finding, topics, numbered lists and people and places are done. Search by meaning was tested and deferred ([why](docs/semantic-search.md)).
+- **Practice:** the uposatha calendar, festivals, chanting texts, daily readings and memorisation are done. Chanting-book layouts and recordings wait on publishers' permission.
 
 How we compare with Bible, Quran and Sefaria tools, and why each item matters: [docs/roadmap.md](docs/roadmap.md).
 
 ## Documentation
+
+The [docs site](https://daniilki.github.io/pali-canon-claude/) shows these pages in a browser (it goes live once GitHub Pages is switched on). AI agents can read [llms.txt](llms.txt).
 
 | Document | For | What it covers |
 |---|---|---|
@@ -219,6 +260,12 @@ How we compare with Bible, Quran and Sefaria tools, and why each item matters: [
 | [Source library](docs/sources.md) | everyone | Every source: used, linked, planned or declined, and why, with links |
 | [Citation guide](docs/citations.md) | everyone | Every citation form the tool understands, and the numbering differences |
 | [Glossary](docs/glossary.md) | everyone | Pāli and technical terms explained |
+| [Examples](docs/examples.md) | everyone | Example requests and the tools that answer them |
+| [Checking a quotation](docs/verify-quote.md) | everyone | How `verify_quote` works and what its answers mean |
+| [Calendar](docs/calendar.md) | everyone | How uposatha and festival dates are computed, per tradition |
+| [Topics and lists](docs/topics.md) | everyone | Looking texts up by subject or numbered list |
+| [Other languages](docs/i18n/README.md) | everyone | Machine-drafted guidance in Sinhala, Thai, Burmese, Khmer, Lao, Vietnamese, Chinese and Spanish, awaiting native review. Scripture and citations are never translated |
+| [Citation index export](docs/export.md) | researchers | Every citation ID with its VRI paragraph, PTS page and translation links, as JSON and CSV (no scripture text) |
 | [Roadmap](docs/roadmap.md) | everyone | Comparison with other traditions' tools, and the plan |
 | [How it works](docs/how-it-works.md) | curious readers | How the data was built and checked |
 | [Decisions](docs/decisions.md) | contributors | Each major decision and its reasoning |

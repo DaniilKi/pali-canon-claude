@@ -2,7 +2,8 @@
 
 [Codex](https://developers.openai.com/codex) is OpenAI's coding assistant. It runs in a terminal (the Codex CLI) and as a desktop app. Pali Canon works in both. There are two ways to set it up:
 
-- **As a plugin** (recommended). You get the Pali Canon tools *and* the three study skills: `$study`, `$compare` and `$pali-word`.
+- **As a plugin** (recommended). You get the Pali Canon tools *and* the four study skills: `$study`, `$compare`, `$pali-word` and `$method`.
+- **As a plugin** (recommended). You get the Pali Canon tools *and* the four study skills: `$study`, `$compare`, `$pali-word` and `$memorise`.
 - **As a plain MCP server.** You get the tools only. This is the quickest route if you already manage MCP servers by hand.
 
 Both need [Node.js](https://nodejs.org/) 20 or newer on your computer. Nothing else is required: the whole Pāli Canon is bundled, so reading texts works offline. English translations and the dictionary are fetched live from their publishers.
@@ -27,6 +28,7 @@ Both need [Node.js](https://nodejs.org/) 20 or newer on your computer. Nothing e
    $study MN 10
    $compare Dhp 183
    $pali-word sati
+   $method Kv 1
    ```
 
 The plugin runs the copy of the server that ships inside it (`node ./server/index.cjs`), so you do not need to download anything else and nothing needs editing.
@@ -69,7 +71,7 @@ args = ["-y", "pali-canon-mcp"]
 ## Check that it works
 
 - Run `codex mcp list`. You should see `pali-canon`.
-- In a session, type `/mcp`. Pali Canon should list 11 tools, such as `resolve_reference` and `get_text`.
+- In a session, type `/mcp`. Pali Canon should list 26 tools, such as `resolve_reference` and `get_text`.
 - Ask: "Use the Pali Canon tools to show me the first paragraph of MN 10 with its citation." The answer should quote the Pāli and name the source (VRI Chaṭṭha Saṅgāyana).
 
 ## Troubleshooting

@@ -36,12 +36,13 @@ claude plugin install pali-canon@pali-canon
 
 ## Check that it works
 
-Type `/plugin` and open the **Installed** tab: you should see **pali-canon** marked as enabled. Then try one of the three study skills:
+Type `/plugin` and open the **Installed** tab: you should see **pali-canon** marked as enabled. Then try one of the four study skills:
 
 ```text
 /pali-canon:study MN 10
 /pali-canon:compare AN 3.65
 /pali-canon:pali-word anicca in SN 22.59
+/pali-canon:method Kv 1
 ```
 
 Or simply ask: *"Use Pali Canon to read MN 10 with a translation and cite the PTS page."*
@@ -51,9 +52,9 @@ Or simply ask: *"Use Pali Canon to read MN 10 with a translation and cite the PT
 | Part | What it does |
 |---|---|
 | One MCP server (`pali-canon`) | Gives Claude read-only tools to look up citations and PTS pages, read the Pāli of the whole Tipiṭaka offline, fetch English translations and look up Pāli words. See [How it works](../how-it-works.md). |
-| Three skills | `study`, `compare` and `pali-word`: step-by-step study methods Claude follows when you call them. |
+| Five skills | `study`, `compare`, `pali-word`, `method` and `memorise`: step-by-step study methods Claude follows when you call them. |
 
-The whole Pāli Canon (about 6 MB, compressed) comes with the plugin, so the Pāli works without internet. English translations and dictionary entries are fetched live from dhammatalks.org, Access to Insight, the Digital Pāḷi Dictionary and their official mirrors. Nothing else is contacted, and nothing you ask is stored. Each text keeps its own licence, mostly non-commercial; see [THIRD_PARTY.md](../../THIRD_PARTY.md).
+The whole Pāli Canon (about 6 MB, compressed) comes with the plugin, so the Pāli works without internet. English translations and dictionary entries are fetched live from dhammatalks.org, Access to Insight, Ancient Buddhist Texts, the Digital Pāḷi Dictionary and their official mirrors. Nothing else is contacted, and nothing you ask is stored. Each text keeps its own licence, mostly non-commercial; see [THIRD_PARTY.md](../../THIRD_PARTY.md).
 
 ## Updating
 

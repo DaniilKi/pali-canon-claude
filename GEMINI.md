@@ -19,3 +19,5 @@ This extension gives you the `pali-canon` MCP server: the whole Pāli Tipiṭaka
 - `/study [reference, PTS page, link or topic]`: read and explain a passage with exact citations.
 - `/compare [reference] [translators or question]`: compare English translations against the Pāli.
 - `/pali-word [word] [optional reference]`: explain a Pāli word with dictionary evidence and usage.
+- `/method [reference, claim or question]`: genre, early text versus commentary, school differences and stating uncertainty.
+- `/memorise [reference]`: learn a passage by heart from the retrieved Pāli, with cloze practice and a review schedule.

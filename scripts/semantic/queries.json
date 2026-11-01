@@ -1,0 +1,21 @@
+{
+  "note": "Evaluation set for issue #33. A result counts as relevant when its VRI id is listed in `ids` or its VRI Pali title matches `title` (case-insensitive regex). Judged from VRI titles and ids only; `cite` entries are checked against the bundled canon by tests/semantic.test.mjs.",
+  "queries": [
+    { "query": "dealing with anger", "title": "kodh|akkos|kakac", "ids": ["mn21", "sn7.2"], "cite": { "MN 21": "Kakacūpamasuttaṃ", "SN 7.2": "Akkosasuttaṃ", "AN 7.64": "Kodhanasuttaṃ" } },
+    { "query": "mindfulness of breathing", "title": "ānāpān", "cite": { "MN 118": "Ānāpānassatisuttaṃ" } },
+    { "query": "loving-kindness meditation", "title": "^mett[aā]sutta", "cite": { "Snp 1.8": "Mettasuttaṃ", "AN 11.15": "Mettāsuttaṃ" } },
+    { "query": "the four noble truths", "title": "dhammacakka", "prefix": "sn56.", "cite": { "SN 56.11": "Dhammacakkappavattanasuttaṃ" } },
+    { "query": "the last days and death of the Buddha", "title": "parinibbān", "cite": { "DN 16": "Mahāparinibbānasuttaṃ" } },
+    { "query": "the body and feelings are not self", "title": "anatta", "cite": { "SN 22.59": "Anattalakkhaṇasuttaṃ" } },
+    { "query": "everything is burning with the fire of passion", "title": "āditta", "cite": { "SN 35.28": "Ādittasuttaṃ" } },
+    { "query": "four foundations of mindfulness", "title": "satipaṭṭhān", "cite": { "MN 10": "Satipaṭṭhānasutta", "DN 22": "Mahāsatipaṭṭhānasuttaṃ" } },
+    { "query": "the highest blessings", "title": "maṅgala", "cite": { "Snp 2.4": "Maṅgalasuttaṃ", "Kp 5": "Maṅgalasuttaṃ" } },
+    { "query": "dependent origination", "title": "paṭiccasamuppād", "cite": { "SN 12.1": "Paṭiccasamuppādasuttaṃ" } },
+    { "query": "duties of a layman to parents, teachers and wife", "ids": ["dn31"], "cite": { "DN 31": "Siṅgālasuttaṃ" } },
+    { "query": "do not believe something just because of tradition", "ids": ["an3.65"], "cite": { "AN 3.65": "Kesamuttisuttaṃ" } },
+    { "query": "the benefits of giving and generosity", "title": "^dān|dānavatthu|dānūpapatti|dānānisaṃs" },
+    { "query": "old age, sickness and death", "title": "jarā|maraṇ|byādhi" },
+    { "query": "kodha", "pali": true, "title": "kodh|akkos|kakac" },
+    { "query": "ānāpānassati", "pali": true, "title": "ānāpān" }
+  ]
+}

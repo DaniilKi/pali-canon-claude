@@ -179,3 +179,123 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** Skill hubs and other agents read `SKILL.md` files using the open Agent Skills spec, whose strict validator rejects extra top-level fields. Claude Code reads `argument-hint` (the hint in the slash menu) only at the top level. A skill installed alone from a hub arrives without our server ([#15](https://github.com/DaniilKi/pali-canon-claude/issues/15)).
 - **Decision.** Use the spec fields, and keep `argument-hint` at the top level as the one Claude Code extension, with a copy under `metadata.argument-hint`. Every skill says it needs the Pali Canon server in its description, its `compatibility` field and its first instruction, which tells the AI to say the tools are missing rather than answer from memory.
 - **Consequences.** Claude Code keeps the slash-menu hint. A strict validator would flag `argument-hint`; if a hub ever enforces that, removing the line fixes it but loses the hint. A test enforces these rules, and listing copy is in [listings/skills.md](listings/skills.md).
+
+### D30. Quote checking reports what the searched texts contain, never who said what
+
+- **Context.** Many sayings shared online as "the Buddha said" are not in the texts, and people asked for a way to check them ([#24](https://github.com/DaniilKi/pali-canon-claude/issues/24)).
+- **Decision.** `verify_quote` matches a Pāli quotation against the whole bundled canon offline, and an English one against the linked translations of the texts named (by default the Dhammapada), fetched live under their terms. Its verdict is `found`, `close_paraphrase` or `not_found_in_scope`, always with the scope searched. It never makes claims about authorship. An English miss is not a finding about the saying: an older or freer translation of a real verse is listed as the first possibility, and the answer points to the Pāli check. When a wording matches several texts equally well (stock passages, repeated verses), the result gives the count and says no single text is the source. Test quotations are built from the bundled text or fixture pages, except the circulated quotations under test.
+- **Consequences.** Answers stay honest about their limits. The first Pāli check builds a word index in memory (roughly 50 to 110 MB), which matters on a small hosted machine ([hosting.md](hosting.md)).
+
+### D31. Citations in free text are read conservatively
+
+- **Context.** People want to check every citation in an essay, a talk transcript or a reference list at once ([#25](https://github.com/DaniilKi/pali-canon-claude/issues/25)).
+- **Decision.** `find_citations` only proposes spans; the existing parser and resolver decide what each one means. Abbreviations are case-sensitive, and short ones that can read as English or as another book (D, M, S, A, J, Dh, It and others) are skipped before bare numbers. "Mahāvagga" and "Cūḷavagga" count only after "Vinaya" or as Mv and Cv. Unresolved citations are reported with the reason, never corrected. Offsets are JavaScript (UTF-16) offsets.
+- **Consequences.** Some real citations in unusual forms are missed, in exchange for no false ones. [citations.md](citations.md) says which forms are recognised in free text.
+
+### D32. Uposatha and festival calendar: four reckonings, computed and labelled
+
+- **Context.** People asked for observance and festival dates for each tradition ([#42](https://github.com/DaniilKi/pali-canon-claude/issues/42), [#43](https://github.com/DaniilKi/pali-canon-claude/issues/43)).
+- **Decision.** Port three MIT calendar programs (splendidmoons for Thai Mahānikāya, pythaidate for Thai Dhammayut, mmcal for Myanmar) and use Meeus's astronomy for Sri Lanka, with the poya rule fitted to the 2024–2026 gazettes. Myanmar is checked against the Department of Civil Aviation holiday circulars. Every date is labelled `computed` with its rule. Published reference dates are test fixtures, with URLs, or a SHA-256 checksum where no archive copy exists. Dhammayut keeps its Pakkhagaṇanā reckoning as the default; because Wat Metta's lists follow Mahānikāya dates from May 2025, both dates are returned with a note. Myanmar Māgha Pūjā has no date, because no source names its Burmese month.
+- **Consequences.** No data files and no network. Dhammayut dates can differ from the civil calendar by a day either way. Sri Lankan and Myanmar new-moon and half-moon days are not yet checked against a published list, so both issues stay open.
+
+### D33. A method skill for genre, textual layers and uncertainty
+
+- **Context.** Readers need to know what kind of text they are reading and which layer a claim comes from ([#38](https://github.com/DaniilKi/pali-canon-claude/issues/38)).
+- **Decision.** The `method` skill covers genre (sutta, verse, Vinaya rule, Abhidhamma), early text versus commentary, school and teacher differences without ranking them, and how firmly to state a conclusion. It claims only what the bundled data proves, and tests check each claim. Commentaries are not bundled, so any commentarial reading must be labelled as commentary with where it was read, or called unverified. Naming the schools behind the Kathāvatthu's opposing views is attributed to its commentary. `study` and `compare` point to it.
+- **Consequences.** Five skills instead of four. Like the others, it has not yet been tried by hand in Codex or Gemini CLI.
+
+### D34. Daily texts and reading plans are fixed and verifiable
+
+- **Context.** Practitioners asked for a text of the day and reading plans ([#45](https://github.com/DaniilKi/pali-canon-claude/issues/45)).
+- **Decision.** `daily_text` steps through the bundled canon by a number coprime with the pool size, so a date always gives the same text for a given data version and every item comes up once per cycle. The sutta pool holds only texts with an English link. The study-guide plans keep only the Access to Insight links each guide cites, each resolved through the verified link index. Links that cannot be placed on exactly one text (single Itivuttaka verses on a multi-text page) are listed as omitted, never mapped by number.
+- **Consequences.** A data rebuild can change the sutta for a date. Ṭhānissaro Bhikkhu's own study guides on dhammatalks.org could become another plan source later.
+
+### D35. Topics from Access to Insight's indexes; numbered lists curated and checked against the text
+
+- **Context.** People look things up by subject or by a numbered list, not only by citation ([#30](https://github.com/DaniilKi/pali-canon-claude/issues/30), [#31](https://github.com/DaniilKi/pali-canon-claude/issues/31)).
+- **Decision.** Topics come from Access to Insight's General and Numerical indexes (CC BY 4.0, unlike most of the site), pinned to one commit, taking names, cross-references and links only. Links map to canon IDs only through the verified link index, or by citation for DN, MN, Dhp, Khp, Iti and Ud when the URL agrees; SN and AN are never mapped by number. Numbered lists are curated by hand, and a test requires every member's Pāli term to appear in the VRI text of every passage cited as defining it. Glosses are labelled as glosses, and lists not set out in the four main Nikāyas (the ten pāramīs) are labelled `later`.
+- **Consequences.** 472 topics and 37 lists, offline. DPD word families wait for the offline dictionary ([#22](https://github.com/DaniilKi/pali-canon-claude/issues/22)) because of its download size.
+
+### D36. Proper names: the dictionary is linked, not bundled, until its licence is confirmed
+
+- **Context.** People ask who or where a name is ([#32](https://github.com/DaniilKi/pali-canon-claude/issues/32)). Malalasekera's *Dictionary of Pāli Proper Names* (1937–38) is the standard reference, but its author died in 1973, the Pali Text Society has not released it under Creative Commons, and the online editions state no licence.
+- **Decision.** `lookup_name` ships with no dictionary entries. It links to the online editions and lists the texts that name the person or place, ranked by title, then opening, then body. Short one-word names are matched as whole words; `exactWord` does the same for any name.
+- **Consequences.** The tool is useful today for finding passages but gives no biography. Entries can be added once the Pali Text Society or Ānandajoti Bhikkhu (for the revised edition) gives permission.
+
+### D37. The tool surface is pinned by exact names, not a count
+
+- **Context.** Wave 3 added fifteen tools in parallel branches. Each branch first changed the hard-coded "11 tools" checks to "at least 11", which hides a tool that silently fails to register.
+- **Decision.** `scripts/expected-tools.mjs` reads the tool names from `src/server.mjs` and every module listed in `src/features/index.mjs`, importing nothing. The HTTP and widget tests, the smoke run and the npx check compare the live tool list with it exactly. Docs that must list every tool (the connector annotations table, the local-clients guide) are checked against the live tools.
+- **Consequences.** A new feature tool needs no count edits, and a missing or extra tool fails the checks. Each new tool still needs its rows in those two docs.
+
+### D38. Monastic rules link to the Buddhist Monastic Code, never quote it
+
+- **Context.** People asked for each monk's rule with an explanation ([#40](https://github.com/DaniilKi/pali-canon-claude/issues/40)).
+- **Decision.** `vinaya_rule` gives the rule's VRI text and a link to the section of Ṭhānissaro Bhikkhu's *Buddhist Monastic Code* that explains it, labelled as commentary. The mapping is generated from the book's table of contents (`scripts/build-bmc.mjs`), not typed by hand. Paired Sekhiya rules link to the shared section with a note. Bhikkhunī rules are out of scope and return an error. The seven Adhikaraṇasamatha rules point to the one VRI paragraph that lists all seven, because the canon index gives them wrong bounds. No rule titles are made up.
+- **Consequences.** No English rule text until a licensed source allows it. The bounds of `pli-tv-bu-vb-as3` to `as7` still need a data fix for `get_text` and `resolve_reference`.
+
+### D39. Abhidhamma tools read the bundled text and add no English of their own
+
+- **Context.** The Abhidhamma had no study tools ([#39](https://github.com/DaniilKi/pali-canon-claude/issues/39)).
+- **Decision.** `abhidhamma_matika` and `patthana_condition` parse the mātikā and the 24 conditions from the bundled VRI text at run time, so every Pāli string stays tied to the edition. Numbering and headings follow the VRI paragraphs exactly; no traditional triad names are added, because the text has none. Following D1, the tools give no English glosses: each condition points to `lookup_pali` with its Pāli term instead. Invented English names are not accepted as input.
+- **Consequences.** Offline and faithful to the text, but readers need the dictionary or a translation for meaning.
+
+### D40. The pronunciation guide links only grammars whose public-domain status can be checked
+
+- **Context.** People asked how to read Pāli aloud and where to learn its grammar ([#41](https://github.com/DaniilKi/pali-canon-claude/issues/41)).
+- **Decision.** The `pali://pronunciation` resource links a grammar only when it was published before 1931 and either the Internet Archive marks it not in copyright or its author died long enough ago. Duroiselle's 1921 scan is linked, not the 1997 "free distribution" reprint, because that is not an open licence. The English translation of Geiger is not linked, because its status could not be verified. Stress is not marked, because traditions place it differently.
+- **Consequences.** Fewer links, each one safe to share.
+
+### D41. Chanting texts come from the canon; chanting-book versions wait for permission
+
+- **Context.** Practitioners asked for paritta and other chants ([#44](https://github.com/DaniilKi/pali-canon-claude/issues/44)).
+- **Decision.** Each `paritta` entry holds canonical citations only and returns the bundled VRI Pāli. Where chanting books differ from the canon (Āṭānāṭiya, Bojjhaṅga, the Aṅgulimāla passage) the tool says so and returns the canonical text. The Khuddakapāṭha is the default where a chant is in both it and the Sutta Nipāta. The Vaṭṭa Paritta's source is Cp 29, with Ja 35 as an alternative. Names match exactly or as whole words; an ambiguous name is an error. English is given as links only. Chanting-book layouts and their English are permission-gated, and the gate reports each publisher's real status.
+- **Consequences.** The core set works offline today. Layouts, translations and recordings need the drafted letters to be sent and answered, and a licensed recording source.
+
+### D42. Dhamma talks are found through the site's own search and returned as links only
+
+- **Context.** People asked for talks on a topic or a sutta ([#46](https://github.com/DaniilKi/pali-canon-claude/issues/46)). dhammatalks.org's robots.txt (checked 1 November 2026) allows this use, and its content is CC BY-NC 4.0.
+- **Decision.** `find_talks` queries the site's own search page live, cached, with requests at least one second apart, and returns titles, dates and URLs only, never talk text. The site has no passage-to-talk index, so a passage is searched by the exact title of Ṭhānissaro's translation, and only when that title is distinctive (at least three distinctive words, or a Pāli name and three words, and not part of another of his titles). Each answer says a match means the phrase appears, not that the talk is about the sutta. Results continue with a per-category cursor.
+- **Consequences.** Some passages cannot be searched. Other monasteries' talks need their permission; the Abhayagiri and Amaravati letters now ask.
+
+### D43. Memorisation builds every card from retrieved text
+
+- **Context.** Practitioners asked for help learning verses by heart ([#47](https://github.com/DaniilKi/pali-canon-claude/issues/47)).
+- **Decision.** The `memorise` skill and the `memorise_passage` prompt are pure instructions that hold no scripture; every chunk and fill-in-the-blank card is built from `get_text` output, which carries the VRI attribution. The review intervals are general study guidance, not a practice ruling, and a test keeps the skill and the Gemini command on the same intervals.
+- **Consequences.** Four prompts and five skills.
+
+### D44. Search by meaning deferred: no small model links English questions to Pāli
+
+- **Context.** [#33](https://github.com/DaniilKi/pali-canon-claude/issues/33) asked for semantic search. Only the VRI Pāli and its titles may be stored as derived data, and three small, openly licensed models were tested on 14 English concept questions over all 8,544 texts ([semantic-search.md](semantic-search.md)).
+- **Decision.** Ship no `search_by_meaning` tool and no vectors. The best model placed a correct text in the top 10 for 3 of 14 questions (chance alone gives about 0.28) and never found the canonical answers; the two transformer models scored 0 of 14 and would need a large native runtime, which D21 excludes. A tool that returns confident but unrelated texts conflicts with the mission.
+- **Consequences.** Concept questions go through Pāli search terms and the topic and list tools (D35). The issue stays open; `scripts/semantic/` keeps the evaluation reproducible for when a better model or storable English text exists.
+
+### D45. Ānandajoti Bhikkhu's translations, linked on Pāli evidence
+
+- **Context.** English was missing for parts of the canon, including all of the Abhidhamma ([#34](https://github.com/DaniilKi/pali-canon-claude/issues/34)). Ancient Buddhist Texts prints the Pāli line by line above the English.
+- **Decision.** A page is linked only when the site names the text and its Pāli lines cover at least 60% of the VRI text's word 3-grams, with no other text in the collection within 0.10. SN and AN also need the Pāli title in the page's own heading to agree with ours; it is read from the site and stored, never copied from our data, and links where the spellings differ are dropped. The licence is CC BY-SA 3.0 Unported, per the site's 2013 Copyright Notice (the page footers' 4.0 is noted). Only `/Texts-and-Translations/` is allowlisted. The links live in their own file, `server/data/anandajoti.json`. PTS's Creative Commons volumes are not linked, because there is no authorised digital text.
+- **Consequences.** 153 links, among them the first English for the Abhidhamma. They appear in the citation index export with their own licence label, and `verify_quote`'s default English scope grew to three translators (77 pages, under a raised cap of 80). The daily link check does not cover them yet; `scripts/anandajoti/audit.mjs` does.
+
+### D46. Docs site and citation index export without new dependencies
+
+- **Context.** Readers wanted the docs as a website, and researchers wanted the citation index as data ([#18](https://github.com/DaniilKi/pali-canon-claude/issues/18)).
+- **Decision.** GitHub's own Jekyll action builds the site from a folder that the dependency-free `scripts/build-site.mjs` prepares; links that leave `docs/` go to GitHub. The citation index export holds no text, only IDs, locations and links, under VRI's non-commercial terms. Each translation link keeps its raw licence code and gains a readable name, taken from the pages' own notices, in both JSON and CSV; a test fails on any code without a name.
+- **Consequences.** `package.json` gains no dependency. The site goes live only once GitHub Pages is switched on for the repository.
+
+### D47. Only guidance is translated, and drafts wait for native review
+
+- **Context.** Most Theravāda Buddhists do not read English ([#19](https://github.com/DaniilKi/pali-canon-claude/issues/19)).
+- **Decision.** The skills and server instructions are drafted in Sinhala, Thai, Burmese, Khmer, Lao, Vietnamese, Simplified Chinese and Spanish under `docs/i18n/<lang>/`, each marked "Machine-drafted, awaiting native review". Scripture, citations, tool names and URLs are never translated, and a test keeps them verbatim. A language note tells the assistant to quote published translations in their original language and label its own renderings. Neither the skills nor the server load the drafts yet.
+- **Consequences.** Changes to the English skills must be carried into all eight drafts (the test checks the tool names). #19 closes once at least Sinhala, Thai and Burmese are reviewed.
+
+### D48. ChatGPT reading view only on the hosted endpoint, behind a switch
+
+- **Context.** ChatGPT apps can show an interactive view, but the shared `tool()` helper cannot attach the metadata it needs, and stdio clients should not see it ([#11](https://github.com/DaniilKi/pali-canon-claude/issues/11)).
+- **Decision.** `src/http-server.mjs` registers `read_passage_widget` directly when `CHATGPT_WIDGET=1`, not through the feature registry. The page is served both as an MCP App and under the Apps SDK alias, loads no external resources and renders data as text only. Its links may go only to the allowlisted English sources and link-only SuttaCentral. Long English continues with `english_offset` rather than a bigger limit. The submission name is `pali-canon`, display name "Pali Canon".
+- **Consequences.** The hosted configs (`fly.toml`, `render.yaml`) turn the view on, so ChatGPT sees one more tool than other clients. Submission needs the hosted endpoint and a verified OpenAI organization.
+
+### D49. Connector directory: palm-leaf icon and an annotations table that matches the server
+
+- **Context.** Claude's Connectors Directory reviews each tool's annotations and needs an icon ([#7](https://github.com/DaniilKi/pali-canon-claude/issues/7)).
+- **Decision.** The icon is the palm-leaf manuscript mark (`assets/icon.svg`, rendered to PNG), not the dharma wheel: it is less devotional, which fits "a library, not a teacher". Only the hosted connector is submitted, because desktop `.mcpb` listings are deprecated; the local server goes through the plugin route. The packet's annotations table must list exactly the live tools, and the packet gives no tool count.
+- **Consequences.** Every new tool needs a table row (a test enforces it). Tool titles still have to be set in `src/server.mjs` before submission, and the privacy policy needs a retention statement for the hosted version.

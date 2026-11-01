@@ -1,0 +1,50 @@
+# Pali Canon for Claude
+
+> An MCP server that gives AI assistants the complete Theravāda scripture, the Pāli Tipiṭaka (Chaṭṭha Saṅgāyana edition of the Vipassana Research Institute, bundled and offline), so they retrieve and cite the real text instead of paraphrasing from memory. It resolves citations (MN 10, SN 56.11, Dhp 183, PTS pages such as "M i 55", translation URLs), reads the Pāli with VRI paragraph numbers and PTS page breaks, fetches linked English translations (dhammatalks.org, Access to Insight) with attribution and licence, and looks up words in the Digital Pāḷi Dictionary. It is read-only and a library, not a teacher.
+
+Rules for using it well:
+
+- Quote only text a tool returned. Never reconstruct or "complete" a passage from memory.
+- Cite the text ID (for example MN 10) with the VRI paragraph or PTS page, and name the translator of any English.
+- Keep four layers separate: the Pāli text, a translation, a dictionary gloss, and your own explanation. Commentary is labelled as commentary.
+- Translators number some SN and AN texts differently (AN 7.68 is AN 7.64 in PTS-based numbering). Report the numbering notes the tools return.
+- If a requested translation is missing, say so and list what is available; do not substitute another one silently.
+- Content keeps its source licence: the VRI text and the dhammatalks.org, Access to Insight and DPD material are for non-commercial use with attribution.
+- SuttaCentral is linked for parallels but its content is not used, at its request.
+
+## Tools
+
+- resolve_reference: turn any citation, PTS page or link into the canonical text it names, with title, PTS location, VRI paragraphs, English translations and numbering notes. Offline.
+- get_metadata: details of one text, including linked English translations (with translation_id) and contained texts. Offline.
+- get_text: the Pāli text of a sutta or section, in order, with VRI paragraph numbers, PTS page breaks, optional variant readings and an optional English translation. Paginated by segment. The Pāli is offline.
+- get_translation: an English translation (Ṭhānissaro Bhikkhu on dhammatalks.org, or Access to Insight translators) with attribution, licence and numbering notes. Network, with official mirrors.
+- compare_translations: two to four English translations of the same text side by side, with the Pāli opening. Network.
+- search_texts: full-text search of the Pāli (diacritics optional, all words must appear, "quoted phrases") plus titles and English titles. Offline.
+- browse_canon: browse the canon, a basket (sutta, vinaya, abhidhamma), a collection (dn, mn, sn, an, dhp…) or a section (sn56, an4). Offline.
+- lookup_pali: a Pāli word in the Digital Pāḷi Dictionary (grammar, roots, meanings). Reference material, not scripture. Network.
+- search_access_to_insight: find Access to Insight translations, study guides and topics. Network.
+- get_access_to_insight_text: read an Access to Insight page by path or URL, with its licence notice. Network.
+- list_sources: sources, editions, licences, mirrors and what works offline.
+
+Prompts: study_passage, compare_translations, topic_research. Skills: study, compare, pali-word.
+
+## Docs
+
+- [README](https://github.com/DaniilKi/pali-canon-claude/blob/main/README.md): mission, coverage, install for every client, limits
+- [Citation guide](https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/citations.md): every accepted citation form and the numbering differences
+- [Examples](https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/examples.md): example requests and which tools answer them
+- [Install guides](https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/install/README.md): Claude Desktop, Claude Code, Codex, Gemini CLI, editors and local models
+- [Coverage](https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/coverage.md): exactly what is included, by collection
+- [Source library](https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/sources.md): every source and its licence
+- [Glossary](https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/glossary.md): Pāli and technical terms
+
+## Data
+
+- [Citation index export](https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/export.md): every citable text with its VRI book and paragraphs, PTS reference and English translation links, as JSON and CSV (attached to each GitHub release; no scripture text)
+- [Third-party licences](https://github.com/DaniilKi/pali-canon-claude/blob/main/THIRD_PARTY.md): what the VRI, dhammatalks.org, Access to Insight and DPD terms allow
+
+## Optional
+
+- [How it works](https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/how-it-works.md): how the data was built and checked
+- [AGENTS.md](https://github.com/DaniilKi/pali-canon-claude/blob/main/AGENTS.md): rules, architecture and data model for contributors
+- [Privacy](https://github.com/DaniilKi/pali-canon-claude/blob/main/PRIVACY.md): what the server sends and to whom

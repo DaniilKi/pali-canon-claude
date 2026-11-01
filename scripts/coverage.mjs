@@ -7,13 +7,13 @@ import * as canon from '../src/canon.mjs';
 
 const dataDir = fileURLToPath(new URL('../server/data/', import.meta.url));
 const d = JSON.parse(gunzipSync(readFileSync(`${dataDir}canon.json.gz`)));
-const translations = JSON.parse(readFileSync(`${dataDir}translations.json`, 'utf8'));
-canon.load();
+// translations.json merged with server/data/anandajoti.json, as the server sees them.
+const { translations } = canon.load();
 
 const rows = new Map();
-const total = { texts: 0, approximate: 0, grouped: 0, direct: 0, english: 0, dhammatalks: 0, ati: 0 };
+const total = { texts: 0, approximate: 0, grouped: 0, direct: 0, english: 0, dhammatalks: 0, ati: 0, anandajoti: 0 };
 for (const u of d.units) {
-  const r = rows.get(u.collection) ?? { collection: u.collection, name: d.collections[u.collection]?.name ?? u.collection, texts: 0, approximate: 0, grouped: 0, direct: 0, english: 0, dhammatalks: 0, ati: 0 };
+  const r = rows.get(u.collection) ?? { collection: u.collection, name: d.collections[u.collection]?.name ?? u.collection, texts: 0, approximate: 0, grouped: 0, direct: 0, english: 0, dhammatalks: 0, ati: 0, anandajoti: 0 };
   rows.set(u.collection, r);
   r.texts++;
   if (u.approximate) r.approximate++;
@@ -29,8 +29,8 @@ const summary = { source: d.source, books: d.books.length, words, pts_page_marke
 
 if (process.argv.includes('--json')) console.log(JSON.stringify(summary, null, 2));
 else {
-  console.log('collection\ttexts\tapprox\tgrouped\tenglish(texts)\tdhammatalks\tati');
-  for (const r of rows.values()) console.log([r.collection, r.texts, r.approximate, r.grouped, r.english, r.dhammatalks, r.ati].join('\t'));
+  console.log('collection\ttexts\tapprox\tgrouped\tenglish(texts)\tdhammatalks\tati\tanandajoti');
+  for (const r of rows.values()) console.log([r.collection, r.texts, r.approximate, r.grouped, r.english, r.dhammatalks, r.ati, r.anandajoti].join('\t'));
   console.log(`\nbooks ${summary.books} · words ${words} · PTS markers ${pts} · texts ${total.texts} · approximate ${total.approximate} · grouped ${total.grouped}`);
-  console.log(`english: ${total.direct} texts directly, ${total.english} incl. inherited · links dhammatalks ${total.dhammatalks} + ati ${total.ati} = ${total.dhammatalks + total.ati}`);
+  console.log(`english: ${total.direct} texts directly, ${total.english} incl. inherited · links dhammatalks ${total.dhammatalks} + ati ${total.ati} + anandajoti ${total.anandajoti} = ${total.dhammatalks + total.ati + total.anandajoti}`);
 }

@@ -14,8 +14,8 @@ A plain explanation of what happens inside the tool, how the data was built, and
                                               dhammatalks.org · Access to Insight · Digital Pāḷi Dictionary
 ```
 
-- **The server** is a small program that Claude talks to through the Model Context Protocol (MCP), the standard way AI apps connect to tools. It offers 11 tools, such as "resolve a citation", "get the text" and "compare translations" (listed in [development.md](development.md#tools)).
-- **Skills and prompts** are written instructions that teach Claude good study habits: quote only retrieved text, cite precisely, keep translation and interpretation apart. Claude Code gets three skills (`study`, `compare`, `pali-word`); Claude Desktop gets equivalent prompts.
+- **The server** is a small program that Claude talks to through the Model Context Protocol (MCP), the standard way AI apps connect to tools. It offers 26 tools, such as "resolve a citation", "get the text" and "compare translations" (listed in [development.md](development.md#tools)).
+- **Skills and prompts** are written instructions that teach Claude good study habits: quote only retrieved text, cite precisely, keep translation and interpretation apart. Claude Code gets five skills (`study`, `compare`, `pali-word`, `method`, `memorise`); Claude Desktop gets equivalent prompts.
 - **The bundled canon** is one compressed file (5.6 MB) holding the whole Pāli text and an index of every citation.
 - **Live sources** are fetched only when you ask for an English translation, a dictionary entry or an Access to Insight page.
 
@@ -60,7 +60,7 @@ These run before every release, and the build, tests and audit also run on every
 ## Safety and privacy by design
 
 - The server only reads. It cannot write files, run commands or change accounts.
-- It contacts a **fixed list of hosts**: the three sources and their official mirrors. Redirects are re-checked against the list, so it cannot be used to reach other sites.
+- It contacts a **fixed list of hosts**: dhammatalks.org, Access to Insight, the Digital Pāḷi Dictionary, the translation pages of Ancient Buddhist Texts, and the official mirrors. Redirects are re-checked against the list, so it cannot be used to reach other sites.
 - Responses are size-limited, retried with backoff, and labelled with where they came from (including when a mirror was used).
 - Retrieved text is treated as data, never as instructions to Claude.
 

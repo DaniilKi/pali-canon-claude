@@ -1,6 +1,6 @@
 # Coverage
 
-What Pali Canon for Claude contains in version 2.0.0, computed directly from the bundled data (`server/data/canon.json.gz` and `server/data/translations.json`).
+What Pali Canon for Claude contains in version 2.0.0, computed directly from the bundled data (`server/data/canon.json.gz`, `server/data/translations.json` and `server/data/anandajoti.json`).
 
 ## Summary
 
@@ -14,7 +14,7 @@ What Pali Canon for Claude contains in version 2.0.0, computed directly from the
 | Grouped texts | 1,259 texts printed together with others (AN 1.296–305, Dhp 1–20…) answer to their own number too |
 | Abbreviated texts | 266 texts that the edition abbreviates (*peyyāla*) are marked approximate |
 | PTS page markers | 11,964 (also Thai, Myanmar and VRI edition markers) |
-| English translation links | 2,295 links covering 1,350 texts directly, 1,773 including verses that share their chapter's translation |
+| English translation links | 2,448 links covering 1,359 texts directly, 1,782 including verses that share their chapter's translation |
 | Works offline | All Pāli reading, citation lookup, PTS page lookup and Pāli search |
 
 "Texts" here means the units people cite: a sutta, a verse, a rule, a Khandhaka chapter, an Abhidhamma section. Some collections are counted by verse (Dhammapada) and some by chapter or story.
@@ -24,14 +24,14 @@ What Pali Canon for Claude contains in version 2.0.0, computed directly from the
 | Collection | Citation | Texts | Grouped | Approximate | English (texts) |
 |---|---|---:|---:|---:|---:|
 | Dīgha Nikāya, long discourses | DN | 34 | | | 16 |
-| Majjhima Nikāya, middle-length discourses | MN | 152 | | | 111 |
+| Majjhima Nikāya, middle-length discourses | MN | 152 | | | 112 |
 | Saṃyutta Nikāya, connected discourses | SN | 1,954 | 135 | 56 | 458 |
-| Aṅguttara Nikāya, numbered discourses | AN | 2,085 | 677 | 141 | 330 |
+| Aṅguttara Nikāya, numbered discourses | AN | 2,085 | 677 | 141 | 332 |
 | Khuddakapāṭha | Kp / Khp | 9 | | | 9 |
 | Dhammapada | Dhp | 449 verses | 423 | | 449 (via 26 chapters) |
 | Udāna | Ud | 80 | | | 80 |
 | Itivuttaka | Iti | 112 | | | 109 |
-| Sutta Nipāta | Snp (Sn) | 73 | | | 70 |
+| Sutta Nipāta | Snp (Sn) | 73 | | | 72 |
 | Vimānavatthu | Vv | 85 | | | — |
 | Petavatthu | Pv | 51 | | | — |
 | Theragāthā | Thag | 264 | | | 106 |
@@ -60,17 +60,17 @@ Nuns' rules that are identical to monks' rules are not repeated in the Pāli, wh
 
 ## Abhidhamma Piṭaka: systematic teaching (1,102 texts)
 
-| Book | Citation | Texts | Approximate |
-|---|---|---:|---:|
-| Dhammasaṅgaṇī | Ds | 21 | |
-| Vibhaṅga | Vb | 18 | |
-| Dhātukathā | Dt | 19 | |
-| Puggalapaññatti | Pp | 20 | |
-| Kathāvatthu | Kv | 219 | |
-| Yamaka | Ya | 77 | |
-| Paṭṭhāna | Paṭṭhāna | 728 | 51 |
+| Book | Citation | Texts | Approximate | English (texts) |
+|---|---|---:|---:|---:|
+| Dhammasaṅgaṇī | Ds | 21 | | 2 |
+| Vibhaṅga | Vb | 18 | | 2 |
+| Dhātukathā | Dt | 19 | | — |
+| Puggalapaññatti | Pp | 20 | | — |
+| Kathāvatthu | Kv | 219 | | — |
+| Yamaka | Ya | 77 | | — |
+| Paṭṭhāna | Paṭṭhāna | 728 | 51 | — |
 
-No English translation is linked yet.
+English is linked for four Abhidhamma texts, all from Ānandajoti Bhikkhu: two parts of the Dhammasaṅgaṇī mātikā and Vibhaṅga 6–7.
 
 ## English translations
 
@@ -78,6 +78,7 @@ No English translation is linked yet.
 |---|---:|---|
 | Ṭhānissaro Bhikkhu, dhammatalks.org | 1,242 | Current versions of his translations |
 | Access to Insight | 1,053 | Ṭhānissaro's earlier versions (782) and about 25 other translators, among them Maurice Walshe, John D. Ireland, Andrew Olendzki, Acharya Buddharakkhita, Nyanaponika Thera, Piyadassi Thera, Ñāṇamoli Thera and Bhikkhu Bodhi; each page keeps its own licence notice |
+| Ānandajoti Bhikkhu, Ancient Buddhist Texts | 153 | Line-by-line Pāli and English (CC BY-SA 3.0): Udāna, Dhammapada chapters, most of the Pārāyanavagga, the Bhikkhunīsaṃyutta, DN 16, several MN, SN and AN suttas, two parts of the Dhammasaṅgaṇī mātikā and Vibhaṅga 6–7. Each link is checked against the Pāli on the page |
 
 A translation is linked only on strong evidence: a matching number and title, a PTS start page that identifies exactly one text, or a confirmed title. When the evidence is ambiguous we leave the text unlinked, so some texts that do have a translation online are not linked yet ([#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)).
 

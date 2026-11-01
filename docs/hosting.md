@@ -5,7 +5,7 @@ cannot start programs, though: Claude on the web and on phones, ChatGPT, and Cla
 directory all need an **address on the internet** instead. This page explains how to run that web
 version, for this project or for a temple, university or library that wants its own copy.
 
-The web version is the same server with the same 11 tools. It only reads; it cannot change anything.
+The web version is the same server with the same 26 tools (27 when the ChatGPT reading view is switched on with `CHATGPT_WIDGET=1`). It only reads; it cannot change anything.
 It needs no login, because everything it serves is public scripture and openly licensed material.
 
 ## What it offers
@@ -81,11 +81,19 @@ All settings are optional environment variables.
 | `TRUST_PROXY` | off | How many proxies sit in front of the server. Set to `1` on a hosting platform such as Fly.io or Render, so each visitor's real address (the one the platform adds last to `X-Forwarded-For`) is used for the rate limit. Addresses a visitor writes in that header themselves are ignored. Leave it off when the server faces the internet directly. |
 | `PALI_CANON_CACHE_MB` | `64` | Memory for recently fetched translations and dictionary entries. `0` turns it off. |
 | `PALI_CANON_CACHE_TTL_MINUTES` | `360` | How long a fetched page is kept (six hours). |
+| `CHATGPT_WIDGET` | off | `1` adds the ChatGPT reading view: one extra read-only tool, `read_passage_widget`, and its page. `fly.toml` and `render.yaml` turn it on. See [listings/chatgpt.md](listings/chatgpt.md). |
 
 The whole Pāli Canon is loaded at start-up so that reading and searching are fast, so the server needs
 a fair amount of memory. Measured on 1 November 2026 (Windows 11, Node.js 26, `server/http.cjs`): about
 290 MB right after start-up and about 345 MB at the peak of the 50-session load test below. Give it at
 least 512 MB, as `fly.toml` does.
+
+The optional `verify_quote` tool builds a Pāli word index the first time a Pāli quotation is checked, and
+keeps it. This adds roughly 50 to 80 MB of resident memory for as long as the server runs, and during the
+build (about 4 seconds) memory can briefly be 100 MB or more above that starting point. With the 64 MB
+translation cache full as well, a server near the 345 MB load-test peak comes close to 512 MB on that first
+check. If the host restarts for lack of memory, give it 768 MB or set a smaller `PALI_CANON_CACHE_MB`.
+See [verify-quote.md](verify-quote.md#memory).
 
 ## Deploy on Fly.io
 

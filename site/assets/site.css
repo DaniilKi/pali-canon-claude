@@ -1,0 +1,26 @@
+:root {
+  --bg: #fdfcf8; --fg: #1f1d1a; --muted: #5f5a52; --line: #e4dfd4; --accent: #8a4b12; --code: #f3efe6;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #171614; --fg: #ece8df; --muted: #a59f94; --line: #34312c; --accent: #e3a35c; --code: #23211e; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif; }
+a { color: var(--accent); }
+.top { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; align-items: baseline; padding: 1rem max(16px, calc((100% - 52rem) / 2)); border-bottom: 1px solid var(--line); }
+.brand { font-weight: 700; text-decoration: none; color: var(--fg); }
+.top nav { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .95rem; }
+main, footer { max-width: 52rem; margin: 0 auto; padding: 0 16px; }
+main { padding-top: 1rem; padding-bottom: 3rem; }
+footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; padding-bottom: 2rem; }
+h1, h2, h3 { line-height: 1.25; }
+h1 { font-size: 2rem; }
+pre, code { font-family: ui-monospace, "Cascadia Code", Menlo, Consolas, monospace; font-size: .9em; }
+code { background: var(--code); padding: .1em .3em; border-radius: 3px; }
+pre { background: var(--code); padding: .8rem 1rem; overflow-x: auto; border-radius: 6px; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 1rem 0; }
+th, td { border: 1px solid var(--line); padding: .4rem .6rem; text-align: left; vertical-align: top; }
+blockquote { margin: 1rem 0; padding: .2rem 1rem; border-left: 4px solid var(--line); color: var(--muted); }
+img { max-width: 100%; }
