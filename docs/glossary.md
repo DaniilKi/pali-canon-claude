@@ -46,6 +46,29 @@ Terms used in this project, explained for newcomers. Pāli words are given with 
 | **Variant reading** | A place where editions (Sinhala, Thai, PTS and others) differ; VRI records these in notes |
 | **Mahāsaṅgīti** | SuttaCentral's Pāli edition, derived from VRI; public domain |
 
+## Variant readings
+
+The VRI edition prints, in its notes, readings found in other printed editions where they differ from the Chaṭṭha Saṅgāyana text. A note such as *pīti (sī. pī.), pītī (ka.)* means: the Sinhala and PTS editions read *pīti*; the edition marked *ka.* reads *pītī*. `get_text` with `variants: "structured"` splits each note into readings and the editions (sigla) that carry them, and keeps the note verbatim beside them. The meanings below are VRI's own, from its [help page](https://tipitaka.org/help) ("version abbreviations"). The sigla were counted in the 18,725 notes of the bundled root texts.
+
+| Siglum | Meaning | Notes |
+|---|---|---|
+| **sī.** | Sri Lankan edition | Sinhala (*Sīhaḷa*) |
+| **syā.** | Thai edition | Siamese (*Syāma*) |
+| **pī.** | Pali Text Society edition | |
+| **kaṃ.** | Cambodian edition | |
+| **ka.** | Cambodian edition, per VRI | VRI gives "kaṃ. / ka." as Cambodian, but some notes cite both side by side (for example *syā. kaṃ. ka.*), so they are probably different witnesses. The tool keeps the siglum as printed and never merges it with *kaṃ.* |
+| **aṭṭha.** (after a siglum) | That edition's commentary (*aṭṭhakathā*) | *sī. aṭṭha.* = the reading of the Sri Lankan commentary, not the root text. Returned as `part: "commentary"` |
+| **ṭīkā** (after a siglum) | That edition's sub-commentary | Returned as `part: "sub-commentary"` |
+| **sabbattha** | "Everywhere": all (other) editions | Returned as `scope` |
+| **bahūsu** | "In many" editions | Returned as `scope` |
+| **katthaci** | "In some" editions | Returned as `scope` |
+
+*Omissions* are not readings either. *( ) natthi (sī. pī.)* means the passage printed in parentheses in the text is absent (*natthi*) from the Sinhala and PTS editions; *idaṃ padaṃ natthi (…)* means this word is absent from them. These are returned as `omissions`, with the editions, never as a reading of the word *natthi*. A bare *natthi (…)* without the *( )* is ambiguous and stays a remark.
+
+Other notes are not readings and are returned unchanged as *remarks*: cross-references (*dī. ni. 1.157*, *ma. ni.*, *saṃ. ni.*, *a. ni.*), queries marked *(?)*, and editorial comments such as *evamuparipi* ("likewise further on") or *aṭṭhakathāyaṃ pāṭhantaraṃ* ("a variant reading in the commentary"). *machasaṃ.* (the Myanmar Chaṭṭha Saṅgāyana edition, used in other editions' notes) does not occur in the root-text notes. Notes whose reading text contains an editorial phrase (*na dissati* "is not found", *idaṃ padaṃ* "this word", *potthakesu* "in the books", *passitabbaṃ* "see", *oloketabbā* "consult", *aṭṭhakathā* "the commentary", *imissā gāthāya* "in this verse") are remarks, as are notes with nested or unbalanced parentheses, which are kept whole. Together, readings, omissions and remarks cover every character of the note. Obvious spelling slips (*si.*, *syā* without a full stop) are matched to their siglum and the printed form is kept as `as_printed`.
+
+The bundled data keeps each note with its paragraph, not at the word it follows, so the tool does not say which word a reading replaces; find it in the paragraph.
+
 ## Practice
 
 | Term | Meaning |

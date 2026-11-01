@@ -1,6 +1,7 @@
 // Exhaustive offline audit of the bundled canon: every text, every citation form, every PTS start page, every translation link.
 import * as canon from '../src/canon.mjs';
 import { EDITIONS, editionLabel, editionIndex, nextUnit } from '../src/editions.mjs';
+import { textSegments, parseNoteSpans, uncovered, SIGLA } from '../src/variants.mjs';
 
 const d = canon.load();
 const failures = [];
@@ -37,6 +38,29 @@ for (const u of d.canon.units) {
         if (!shown.has(label)) fail('edition-segment', `${label} (block ${i}) missing from get_text of ${u.id}`);
         else count('edition-segment');
       }
+    }
+  }
+  // 3c. Structured variants (#28): same text as plain mode; every reading, omission and remark is verbatim from its note and together they cover it; known sigla only; no editorial text or bare "natthi" as a reading.
+  {
+    const { segments: vs } = textSegments(u, { variants: 'structured' });
+    if (vs.length !== segs.length || vs.some((s, i) => s.text !== segs[i].text)) fail('variants', `${u.id} structured text differs from plain text`);
+    for (const s of vs) for (const v of s.variants || []) {
+      for (const r of v.readings) {
+        if (!v.raw.includes(r.reading)) fail('variants', `${s.ref}: reading "${r.reading}" not in note`);
+        for (const e of r.editions) if (!SIGLA[e.siglum]) fail('variants', `${s.ref}: unknown siglum ${e.siglum}`);
+        count('variant-reading');
+      }
+      for (const x of v.remarks) if (!v.raw.includes(x)) fail('variants', `${s.ref}: remark "${x}" not in note`);
+      for (const o of v.omissions) {
+        if (!v.raw.includes(o.text)) fail('variants', `${s.ref}: omission "${o.text}" not in note`);
+        for (const e of o.editions) if (!SIGLA[e.siglum]) fail('variants', `${s.ref}: unknown siglum ${e.siglum}`);
+        count('variant-omission');
+      }
+      // Coverage: every non-separator character of the note is in a reading, omission or remark.
+      const gap = uncovered(v.raw, parseNoteSpans(v.raw).spans);
+      if (gap) fail('variants', `${s.ref}: note text not covered: "${gap}"`);
+      // Semantic: a reading is never the omission word "natthi" alone or an editorial sentence.
+      for (const r of v.readings) if (/^(sabbattha\s+)?natthi$|na dissati|potthakesu/.test(r.reading)) fail('variants', `${s.ref}: editorial text "${r.reading}" given as a reading`);
     }
   }
   // 4. Range members resolve inside the range.
