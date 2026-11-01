@@ -55,7 +55,7 @@ A source is used only when it meets all five tests:
 |---|---|---|---|---|
 | **Digital Pāḷi Dictionary** (Bodhirasa Bhikkhu) | **Live**; offline copy **planned** ([#22](https://github.com/DaniilKi/pali-canon-claude/issues/22), [#23](https://github.com/DaniilKi/pali-canon-claude/issues/23)) | The most complete and actively maintained Pāli dictionary, with grammar, roots, compounds and inflections | CC BY-NC-SA 4.0 | [dpdict.net](https://www.dpdict.net/) · [data releases](https://github.com/digitalpalidictionary/dpd-db/releases) · [licence](https://docs.dpdict.net/license/) |
 | **PTS Pāli–English Dictionary** (Rhys Davids & Stede, 1921–25) | **To evaluate** | The classic dictionary; age suggests public domain in many countries | to confirm | [Digital Dictionaries of South Asia](https://dsal.uchicago.edu/dictionaries/pali/) |
-| **Dictionary of Pāli Proper Names** (Malalasekera) | **Planned** ([#32](https://github.com/DaniilKi/pali-canon-claude/issues/32)) | People and places in the canon; the original is described as public domain | to confirm | [revised edition discussion](https://discourse.suttacentral.net/t/revised-edition-of-the-dictionary-of-pali-proper-names/39992) |
+| **Dictionary of Pāli Proper Names** (Malalasekera, 1937–38) | **Linked; ask permission** ([#32](https://github.com/DaniilKi/pali-canon-claude/issues/32)). `lookup_name` is built but ships no entries | People and places in the canon. Public-domain status could not be confirmed; see [DPPN licence research](#dppn-licence-research) | unconfirmed; probably in copyright | [revised edition (Ānandajoti)](https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm) · [palikanon.com](https://www.palikanon.com/english/pali_names/dic_idx.html) |
 | **Buddhist Monastic Code** (Ṭhānissaro Bhikkhu) | **Planned, linked** ([#40](https://github.com/DaniilKi/pali-canon-claude/issues/40)) | Rule-by-rule explanation of the Vinaya | free distribution | [dhammatalks.org](https://www.dhammatalks.org/) |
 
 ## Commentaries
@@ -120,6 +120,23 @@ The one remaining use is narrow. The *numbering* most readers cite (MN 10, SN 46
 | This software | Anything the MIT licence allows | — |
 
 Full licence notices: [THIRD_PARTY.md](../THIRD_PARTY.md).
+
+## DPPN licence research
+
+Checked on 1 November 2026 for [#32](https://github.com/DaniilKi/pali-canon-claude/issues/32). Result: **not confirmed as public domain or openly licensed**, so no entries are bundled.
+
+| What we checked | What it says |
+|---|---|
+| The work | G. P. Malalasekera, *Dictionary of Pāli Proper Names*, 2 vols., London: John Murray for the Pali Text Society (Indian Texts Series), 1937–38; reprinted by the PTS and by Indian publishers. Library catalogues ([Wellcome Collection](https://content.wellcomecollection.org/works/n7umbnvr), [Penn Libraries](https://find.library.upenn.edu/catalog/99896953503681)) give the author's dates as 1899–1973 |
+| Copyright term (our reading, not legal advice) | The UK and Sri Lanka protect works for the author's life plus 70 years, which would run to the end of 2043. In the United States a foreign work of 1937–38 still in copyright at home in 1996 would have had its copyright restored for 95 years from publication (to the end of 2032 and 2033). On none of these readings is it public domain today |
+| [Pali Text Society copyright page](https://palitextsociety.org/copyright-information/) | Lists the works the PTS has released under Creative Commons (eleven in 2013 under CC BY-NC 3.0, including the *Pali-English Dictionary*; five Ñāṇamoli works in 2021 under CC BY-NC 4.0). The DPPN is **not** among them |
+| [Ānandajoti Bhikkhu's revised edition](https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm) (Ancient Buddhist Texts) | States no licence or permission for the dictionary; its note asks that it not be quoted without checking the printed text. Ānandajoti's own translations are CC BY-SA, but that does not cover Malalasekera's text |
+| [palikanon.com](https://www.palikanon.com/english/pali_names/dic_idx.html) | Says most entries are taken from Malalasekera and points to the printed edition from the PTS; states no licence |
+| [aimwell.org](https://www.aimwell.org/DPPN) | States no licence |
+| [Digital Pāḷi Dictionary](https://github.com/digitalpalidictionary/dpd-db) | Does not bundle the DPPN; its documentation lists the DPPN only as a separate dictionary users can install |
+| [SuttaCentral forum thread](https://discourse.suttacentral.net/t/revised-edition-of-the-dictionary-of-pali-proper-names/39992) | A user calls the work "now public domain", without a source. Not enough on its own |
+
+What happens now: `lookup_name` returns no dictionary entry, says why, links to the two online editions and lists the texts of the bundled VRI canon whose Pāli contains the name. The data file is `server/data/dppn.json`; entries can be added there, each with its citations checked against the bundled canon by `tests/dppn.test.mjs`, once the Pali Text Society (or Ānandajoti Bhikkhu, for the revised edition) gives written permission. Their reply will be recorded here.
 
 ## Permission letters
 

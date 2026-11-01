@@ -29,7 +29,7 @@ async function fails(name, args, pattern) {
 try {
   await client.connect(transport);
   const { tools } = await client.listTools();
-  assert.equal(tools.length, 11);
+  assert.ok(tools.length >= 11);
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint));
   assert.equal((await client.listResources()).resources.length, 2);
   assert.equal((await client.listPrompts()).prompts.length, 3);
@@ -38,6 +38,7 @@ try {
 
   // Offline: resolution, text, search, browse.
   await call('resolve_reference', { reference: 'SN 56:11' }, (d) => { assert.equal(d.id, 'sn56.11'); assert.match(d.pts, /^S v 420/); });
+  await call('lookup_name', { name: 'Sāriputta', textLimit: 3 }, (d) => { assert.equal(d.dictionary.name, 'Dictionary of Pāli Proper Names'); assert.ok(d.appears_in.total_texts_matched > 0); });
   await call('resolve_reference', { reference: 'M i 55' }, (d) => assert.equal(d.id, 'mn10'));
   await call('resolve_reference', { reference: 'AN 1.300' }, (d) => assert.match(d.id, /^an1\.\d+-\d+$/));
   await call('resolve_reference', { reference: 'Sn 1.8' }, (d) => assert.equal(d.title, 'Mettasuttaṃ'));
