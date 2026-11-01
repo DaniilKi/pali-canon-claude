@@ -16,7 +16,13 @@ LETTERS = re.compile(r'[^a-zāīūṅñṭḍṇḷṃ]')
 SKIP_SEGMENT = re.compile(r':0(?:\.|$)|:\d+\.0$|:\d+(?:\.\d+)*\.0\.\d+$')
 
 
+ENUMERATOR = re.compile(r'\([^()]{0,6}\)')
+TAGS = re.compile(r'<[^>]+>')
+
+
 def norm(text):
+    # Drop markup and short enumerators such as "(Ka)", "(Kha)" that only one edition prints.
+    text = ENUMERATOR.sub('', TAGS.sub('', text))
     text = unicodedata.normalize('NFC', text.lower()).replace('ṁ', 'ṃ').replace('ŋ', 'ṃ')
     text = text.replace('…pe…', '').replace('pe…', '')
     return LETTERS.sub('', text)

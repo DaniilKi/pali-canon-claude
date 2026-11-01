@@ -615,14 +615,22 @@ def aligned_units(builder, bilara):
         window = blocks[u['start']:min(u['end'], u['start'] + 8)]
         has_numbered = any(b['rend'] in ('subhead', 'chapter', 'title') and vri.label(b['text']) for b in window)
         container = re.search(r'(saṃyuttaṃ|vaggo|kaṇḍaṃ|nipāto|pāḷi|bhāgo\)|paṇṇāsakaṃ)$', u['title'] or '')
-        if sc_collection(u['id']) == 'dhp':
+        if re.match(r'^(Ime kho|Namo tassa)', ref_title or ''):
+            ref_title = ''   # a recitation line or invocation, not a title
+        if re.match(r'^(Ime kho|Namo tassa)', u['title'] or ''):
+            heads = [vri.label(b['text'])[2] for b in blocks[u['start']:u['end']]
+                     if b['rend'] in ('subhead', 'chapter', 'title') and vri.label(b['text']) and not COLOPHON.search(b['text'])]
+            u['title'] = ref_title or (heads[0] if heads else u['title'])
+        elif sc_collection(u['id']) == 'dhp':
             pass  # Dhammapada verses are titled by their vagga; the root's story names are commentary.
         elif ref_title and (not has_numbered or container or not u['title']):
             u['title'] = ref_title
         elif ref_title:
             # Several nested numbered headings (e.g. Paṭṭhāna): prefer the one naming this text.
             want = align.norm(ref_title)[:10]
-            for b in window:
+            for b in reversed(window):
+                if re.search(r'(vaggo|saṃyuttaṃ|nipāto|paṇṇāsakaṃ|pāḷi)$', b['text'] or ''):
+                    continue
                 lab = vri.label(b['text']) if b['rend'] in ('subhead', 'chapter', 'title') else None
                 if lab and align.norm(lab[2])[:10] == want:
                     u['title'] = lab[2]

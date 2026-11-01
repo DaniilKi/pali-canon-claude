@@ -40,5 +40,7 @@ There is no single universal numbering. In SN and AN the standard/Bodhi numberin
 ## Verification
 
 - An independent check against all 1,190 canonical Access to Insight pages and their PTS citations reports 0 problems.
-- An exhaustive offline audit of all 8,541 texts covers ID, printed citation, rendered text, range members, PTS round-trips, non-overlap and translation links. It reports 0 failures.
+- An exhaustive offline audit of all 8,544 texts covers ID, printed citation, rendered text, range members, PTS round-trips, non-overlap and translation links. It reports 0 failures.
 - Simulated outages of each online source show the mirrors taking over. With all online sources down, the Pāli text, citation resolution and search still work.
+
+- An independent review checked about 110 citations and every PTS lookup in its set. It found wrongly attached English links in the first draft. Links are now kept only with strong evidence and checked for consistency, and the cases it found are regression tests.

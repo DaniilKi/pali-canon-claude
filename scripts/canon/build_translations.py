@@ -51,6 +51,84 @@ def section_of(uid):
     return m.group(1) if m else re.match(r'^[a-z-]+', uid).group(0)
 
 
+STRONG = {'number+title', 'pts-start+title', 'pts-start+number', 'chapter', 'number'}
+ORDINAL_WORDS = {'pathama': 1, 'dutiya': 2, 'tatiya': 3, 'catuttha': 4, 'pancama': 5, 'chattha': 6, 'sattama': 7, 'atthama': 8, 'navama': 9, 'dasama': 10}
+
+
+def pali_ordinal(title):
+    t = fold(title)
+    for word, n in ORDINAL_WORDS.items():
+        if t.startswith(word):
+            return n
+    return None
+
+
+def english_ordinal(text):
+    m = re.search(r'\((\d+)\)\s*$', (text or '').split('|')[0].strip()) or re.search(r'\((\d+)\)', text or '')
+    return int(m.group(1)) if m else None
+
+
+def english_title(entry):
+    if entry['source'] == 'ati':
+        return entry.get('english', '')
+    return re.sub(r'^\S+ [\dIVXLC:.,–-]+\s*', '', entry.get('reference', ''))
+
+
+def page_key(entry):
+    """The sutta a page is about, ignoring the translator: ATI 'an03.065.than' and 'an03.065.bodh' share 'an03.065'."""
+    if entry['source'] == 'ati':
+        return entry['path'].rsplit('.', 1)[0]
+    return entry['url']
+
+
+def conservative(out, by_id, report):
+    """Keep only links with strong evidence; drop anything ambiguous. A missing link is safe, a wrong one is not."""
+    strong_ati_titles = {}
+    for uid, links in out.items():
+        for l in links:
+            if l['source'] == 'ati' and l['match'] in STRONG:
+                strong_ati_titles.setdefault(uid, set()).add(fold(english_title(l)))
+    kept, dropped = {}, {}
+    for uid, links in out.items():
+        unit = by_id.get(uid, {})
+        p_ord = pali_ordinal(unit.get('title', ''))
+        good = []
+        for l in links:
+            ok = l['match'] in STRONG
+            if l['match'] == 'ati-title':
+                # A dhammatalks.org page bridged through ATI must carry the same English title as a strongly matched ATI page.
+                ok = fold(english_title(l)) in strong_ati_titles.get(uid, set()) and bool(fold(english_title(l)))
+                if ok:
+                    l = dict(l, match='ati-title-confirmed')
+            e_ord = english_ordinal(l.get('reference', '') if l['source'] == 'dhammatalks' else l.get('english', ''))
+            if ok and p_ord and e_ord and p_ord != e_ord:
+                ok = False
+            if ok:
+                good.append(l)
+            else:
+                dropped[l['match']] = dropped.get(l['match'], 0) + 1
+        # One sutta per text: if links point at different pages of the same source, keep only an unambiguous best.
+        final = []
+        for source in ('dhammatalks', 'ati'):
+            group = [l for l in good if l['source'] == source]
+            keys = {page_key(l) for l in group}
+            if len(keys) <= 1:
+                final.extend(group)
+                continue
+            num = re.search(r'(\d+)$', uid)
+            exact = [l for l in group if l['match'].startswith(('number', 'pts-start'))]
+            exact_keys = {page_key(l) for l in exact}
+            if len(exact_keys) == 1:
+                final.extend(exact)
+                dropped['ambiguous-sibling'] = dropped.get('ambiguous-sibling', 0) + len(group) - len(exact)
+            else:
+                dropped['ambiguous'] = dropped.get('ambiguous', 0) + len(group)
+        if final:
+            kept[uid] = final
+    report['dropped_for_safety'] = dropped
+    return kept
+
+
 def main():
     canon = json.load(gzip.open(sys.argv[1], 'rt', encoding='utf-8'))
     dt = json.load(open(sys.argv[2]))
@@ -88,7 +166,9 @@ def main():
                 titled = [u for u in pool if title and similar(title, u.get('title', ''))]
                 if titled:
                     return min(titled, key=lambda u: abs(number_of(u['id'])[0] - n)), why + '+title'
-                if exact in pool:
+                # A PTS page identifies a text only if exactly one text starts there; dense sections
+                # (AN 1, AN 2…) put several short suttas on one page, so number alone is not enough.
+                if len(pool) == 1 and exact in pool:
                     return exact, why + '+number'
                 if len(pool) == 1:
                     return pool[0], why
@@ -143,7 +223,7 @@ def main():
         pm = re.match(r'\s*[A-Z][a-zī]*\.?\s+([ivx]+)\s+(\d+)', page.get('pts') or '')
         if pm and pm.group(1) in roman:
             pts = (roman[pm.group(1)], int(pm.group(2)))
-        entry = {'source': 'ati', 'path': '/' + path.rsplit('.html', 1)[0], 'url': 'https://www.accesstoinsight.org/' + path,
+        entry = {'source': 'ati', 'english': (page.get('html_title') or '').split(':', 1)[-1].strip(), 'path': '/' + path.rsplit('.html', 1)[0], 'url': 'https://www.accesstoinsight.org/' + path,
                  'translator': page.get('author') or page.get('author_short') or '', 'license': page.get('license', ''),
                  'reference': page.get('pts', '')}
         if coll == 'dhp':
@@ -223,6 +303,7 @@ def main():
     for uid, entry in offset_fill(ati_pending, ati_matched) + offset_fill(dt_pending, dt_matched):
         add(uid, entry)
         report[entry['source']]['neighbour-offset'] = report[entry['source']].get('neighbour-offset', 0) + 1
+    out = conservative(out, by_id, report)
     json.dump(out, open(sys.argv[4], 'w'), ensure_ascii=False, separators=(',', ':'))
     print(json.dumps(report, indent=1))
     print('texts with translations:', len(out), 'links:', sum(len(v) for v in out.values()))

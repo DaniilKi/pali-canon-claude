@@ -1,6 +1,6 @@
 /** English translations: Ṭhānissaro Bhikkhu (dhammatalks.org) and Access to Insight, with mirrors. */
 import { fetchMirrors, plainText, decodeHtml } from './http.mjs';
-import { load } from './canon.mjs';
+import { load, linksFor } from './canon.mjs';
 
 const ATI_MIRRORS = [
   (p) => `https://accesstoinsight.org${p}.html`,
@@ -12,7 +12,7 @@ const MIRROR_NAMES = ['accesstoinsight.org', 'BCBS official repository (GitHub)'
 const DT_LICENSE = 'CC BY-NC 4.0 — Ṭhānissaro Bhikkhu, dhammatalks.org. Free for non-commercial use with attribution; "commercial" includes any sale.';
 
 export function atiMirrors(path) {
-  if (!/^\/(tipitaka|lib|ptf|noncanon)\/[a-z0-9/._-]+$/i.test(path) && !/^\/index-(sutta|subject)$/.test(path)) {
+  if (/\.\./.test(path) || (!/^\/(tipitaka|lib|ptf|noncanon)\/[a-z0-9/._-]+$/i.test(path) && !/^\/index-(sutta|subject)$/.test(path))) {
     throw new Error('Unsupported Access to Insight path.');
   }
   return ATI_MIRRORS.map((f) => f(path));
@@ -60,7 +60,7 @@ async function fetchDhammatalks(url) {
 
 /** List the English translations linked to a text. */
 export function available(unit) {
-  return (load().translations[unit.id] || []).map((t) => ({
+  return linksFor(unit).links.map((t) => ({
     translation_id: t.source === 'ati' ? `ati:${t.path}` : `dt:${t.url.split('/suttas/')[1].replace(/\.html$/, '')}`,
     source: t.source === 'ati' ? 'Access to Insight' : 'dhammatalks.org',
     translator: t.translator, reference: t.reference || undefined, ...(t.license ? { license: t.license } : {}), match: t.match,
@@ -69,7 +69,7 @@ export function available(unit) {
 
 /** Fetch one translation of a text. `which` is a translation_id, a translator name fragment, or omitted for the default. */
 export async function translation(unit, which, { offset = 0, limit = 12000 } = {}) {
-  const links = load().translations[unit.id] || [];
+  const { links, via } = linksFor(unit);
   if (!links.length) {
     throw new Error(`No English translation is linked for ${unit.acronym}. Read the Pāli with get_text, or see https://suttacentral.net/${unit.id} for other translations.`);
   }
@@ -84,12 +84,14 @@ export async function translation(unit, which, { offset = 0, limit = 12000 } = {
   }
   if (!link) throw new Error(`Translation "${which}" is not linked for ${unit.acronym}. Available: ${available(unit).map((a) => `${a.translation_id} (${a.translator})`).join(', ')}.`);
   let result;
-  const notes = [];
+  const notes = via ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   try {
     result = link.source === 'ati' ? await fetchAti(link.path) : await fetchDhammatalks(link.url);
   } catch (error) {
-    // dhammatalks.org has no mirror; fall back to the same translator's earlier version on Access to Insight.
-    const sameTranslator = link.source === 'dhammatalks' && links.find((l) => l.source === 'ati' && /thanissaro/i.test(l.translator || ''));
+    // dhammatalks.org has no mirror; during an outage (not for a missing page) fall back to the same
+    // translator's Access to Insight version of this same text.
+    const outage = !error.failures || error.failures.some((f) => !/HTTP 404/.test(f));
+    const sameTranslator = outage && link.source === 'dhammatalks' && links.find((l) => l.source === 'ati' && /thanissaro/i.test(l.translator || ''));
     if (!sameTranslator) throw new Error(`Could not retrieve the translation (${error.message}). The Pāli text is still available offline with get_text; try again later or choose another translation_id.`);
     try {
       result = await fetchAti(sameTranslator.path);
@@ -102,8 +104,9 @@ export async function translation(unit, which, { offset = 0, limit = 12000 } = {
   if (result.fetched_from !== result.source && result.fetched_from !== 'dhammatalks.org' && result.fetched_from !== 'accesstoinsight.org') {
     notes.push(`The primary site was unavailable; text served from ${result.fetched_from}, an identical copy of the archive.`);
   }
-  if (link.reference && /^(AN|SN) \d+:\d+/.test(link.reference) && !link.reference.toLowerCase().replace(/[ :]/g, '').startsWith(unit.id.replace('.', ''))) {
-    notes.push(`This translation numbers the text "${link.reference.split(' ').slice(0, 2).join(' ')}" (PTS-based numbering); it is the same text as ${unit.acronym}.`);
+  const theirs = (link.reference || '').match(/^(AN|SN) (\d+):(\d+)/);
+  if (theirs && `${theirs[1].toLowerCase()}${theirs[2]}.${theirs[3]}` !== unit.id) {
+    notes.push(`This translation numbers the text ${theirs[1]} ${theirs[2]}:${theirs[3]} (PTS-based numbering); it is the same text as ${unit.acronym}.`);
   }
   const text = result.text;
   return {

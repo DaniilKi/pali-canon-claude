@@ -68,13 +68,28 @@ function sectionOf(id) {
   return m ? m[1].replace(/\.$/, '') : id.match(/^(pli-tv-[a-z]+-[a-z]+-[a-z]+|pli-tv-[a-z]+|[a-z-]+)/)[1];
 }
 
+const VERSE_CITED = new Set(['snp', 'thag', 'thig', 'dhp']);
+
 function ptsLabel(collection, volume, page) {
   const abbr = PTS_ABBR[collection];
-  if (!abbr || !volume) return null;
+  if (!abbr || page === undefined || page === null) return null;
+  // Books cited by verse number get an explicit page label so a page is never mistaken for a verse.
+  if (VERSE_CITED.has(collection)) return `PTS ed. p. ${page}`;
+  if (!volume) return `${abbr} ${page}`;
   if (['mnd', 'cnd', 'ps', 'mil', 'ne', 'pe', 'kp', 'dhp', 'ud', 'iti', 'snp', 'vv', 'pv', 'thag', 'thig', 'bv', 'cp', 'ds', 'dt', 'pp', 'kv'].includes(collection) && volume <= 1) {
     return `${abbr} ${page}`;
   }
   return `${abbr} ${ROMAN[volume] || volume} ${page}`;
+}
+
+/** Translation links for a text; a verse or member inherits those of the range that contains it (e.g. a Dhp chapter). */
+export function linksFor(u) {
+  const d = load();
+  const own = d.translations[u.id];
+  if (own?.length) return { links: own, via: null };
+  const container = rangeContaining(u.id);
+  if (container && d.translations[container.id]?.length) return { links: d.translations[container.id], via: container };
+  return { links: [], via: null };
 }
 
 function unitSummary(u, extra = {}) {
@@ -88,7 +103,7 @@ function unitSummary(u, extra = {}) {
     pts: u.pts ? ptsLabel(u.collection, u.pts.volume, u.pts.page) + (u.pts.end_page && u.pts.end_page !== u.pts.page ? `–${u.pts.end_page}` : '') : null,
     vri_paragraphs: u.vri || null,
     ...(u.approximate ? { approximate: true } : {}),
-    english_available: (d.translations[u.id] || []).length,
+    english_available: linksFor(u).links.length,
     ...extra,
   };
 }
@@ -119,7 +134,8 @@ function ptsLookup(c) {
   const hits = pool.filter((u) => u.pts.page <= c.page && c.page <= (u.pts.end_page ?? u.pts.page));
   if (!hits.length) return null;
   // Prefer the text that begins on that page, then the shortest span.
-  hits.sort((a, b) => (b.pts.page === c.page) - (a.pts.page === c.page) || (a.end - a.start) - (b.end - b.start));
+  // Prefer texts that begin on that page, then the earliest in the book (S i 1 is SN 1.1, not SN 1.2).
+  hits.sort((a, b) => (b.pts.page === c.page) - (a.pts.page === c.page) || a.book - b.book || a.start - b.start);
   return hits;
 }
 
@@ -144,7 +160,8 @@ export function resolve(reference) {
         ? `The VRI edition bundled here carries no PTS page numbers for the ${unpaged}, so ${c.raw} cannot be looked up by page. Cite it by number instead (e.g. Ja 1).`
         : `No text found at PTS ${c.raw}. Check the volume and page; PTS pages are available for the Sutta and Vinaya Piṭakas and most Abhidhamma books.`);
     }
-    notes.push(`PTS ${c.raw} falls within ${hits[0].acronym}${hits[0].pts.page === c.page ? ', which begins on that page' : ''}.`);
+    const label = c.raw.replace(/^PTS[:\s]*/i, '');
+    notes.push(`PTS ${label} falls within ${hits[0].acronym}${hits[0].pts.page === c.page ? ', which begins on that page' : ''}.`);
     return { unit: hits[0], notes, alternatives: hits.slice(1, 4).map((u) => unitSummary(u)) };
   }
   if (c.kind === 'url') {
@@ -237,7 +254,9 @@ export function source() {
 
 export function describe(u, notes = []) {
   const d = load();
-  const english = (d.translations[u.id] || []).map((t) => ({
+  const { links: own, via } = linksFor(u);
+  if (via) notes = [...notes, `English translations are of the whole ${via.acronym} (${via.title}); this text is part of it.`];
+  const english = own.map((t) => ({
     source: t.source === 'ati' ? 'Access to Insight' : 'dhammatalks.org',
     translator: t.translator, reference: t.reference || undefined, url: t.url,
     ...(t.license ? { license: t.license } : {}),

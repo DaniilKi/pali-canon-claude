@@ -122,6 +122,9 @@ export function parseCitation(input) {
   if (pts) {
     const key = fold(pts[1]).replace(/\./g, '');
     const romanVolume = ROMAN[pts[2].toLowerCase()] || null;
+    if (pts[1] === 'Sn' || ['th', 'thi', 'thig', 'thag', 'dhp', 'snp', 'ud', 'it', 'iti', 'khp', 'kp'].includes(key)) {
+      throw new CitationError(`${pts[1]} is not cited by PTS volume and page. Cite it by number (e.g. Snp 1.8, Thag 1.1, Dhp 183, Ud 1.10, Iti 27).`);
+    }
     // "SN 5.420" is a sutta number, never a page; only roman numerals (or "PTS" prefix) mean volume/page.
     if (romanVolume && PTS_COLLECTIONS[key]) {
       return { kind: 'pts', collection: PTS_COLLECTIONS[key], volume: romanVolume, page: Number(pts[3]), raw };
@@ -133,13 +136,19 @@ export function parseCitation(input) {
   if (vin && (VINAYA_CLASS[vin[2]] || ['kd', 'mv', 'cv', 'pvr', 'khandhaka', 'mahavagga', 'culavagga', 'cullavagga', 'parivara'].includes(vin[2]))) {
     const nums = numbers(vin[3]);
     if (VINAYA_CLASS[vin[2]]) {
-      const who = vin[1] && vin[1].startsWith('bi') ? 'bi' : 'bu';
+      const who = vin[1] && /^(bi|bhikkhuni)/.test(vin[1]) ? 'bi' : 'bu';
       const end = nums.end === null ? '' : `-${Array.isArray(nums.end) ? nums.end.join('.') : nums.end}`;
       return { kind: 'uid', uid: `pli-tv-${who}-vb-${VINAYA_CLASS[vin[2]]}${nums.path.join('.')}${end}`, raw };
     }
-    if (['mv', 'mahavagga'].includes(vin[2])) return { kind: 'uid', uid: `pli-tv-kd${nums.path[0]}`, raw, note: 'Mahāvagga khandhakas are Kd 1–10.' };
-    if (['cv', 'culavagga', 'cullavagga'].includes(vin[2])) return { kind: 'uid', uid: `pli-tv-kd${nums.path[0] + 10}`, raw, note: `Cūḷavagga ${nums.path[0]} is Khandhaka ${nums.path[0] + 10}.` };
-    if (['kd', 'khandhaka'].includes(vin[2])) return { kind: 'uid', uid: `pli-tv-kd${nums.path[0]}`, raw };
+    const khandhaka = (n, max, label) => {
+      if (nums.path.length > 1) throw new CitationError(`${label} is cited by chapter number only (e.g. ${label.split(' ')[0]} 1); sections inside a khandhaka are reached by reading it with get_text.`);
+      if (nums.end !== null) throw new CitationError(`Give one ${label.split(' ')[0]} chapter at a time.`);
+      if (n < 1 || n > max) throw new CitationError(`${label} has chapters 1–${max}.`);
+      return n;
+    };
+    if (['mv', 'mahavagga'].includes(vin[2])) return { kind: 'uid', uid: `pli-tv-kd${khandhaka(nums.path[0], 10, 'Mv (Mahāvagga)')}`, raw, note: 'Mahāvagga chapters are Khandhakas 1–10.' };
+    if (['cv', 'culavagga', 'cullavagga'].includes(vin[2])) { const n = khandhaka(nums.path[0], 12, 'Cv (Cūḷavagga)'); return { kind: 'uid', uid: `pli-tv-kd${n + 10}`, raw, note: `Cūḷavagga ${n} is Khandhaka ${n + 10}.` }; }
+    if (['kd', 'khandhaka'].includes(vin[2])) return { kind: 'uid', uid: `pli-tv-kd${khandhaka(nums.path[0], 22, 'Kd (Khandhaka)')}`, raw };
     return { kind: 'uid', uid: `pli-tv-pvr${nums.path.join('.')}`, raw };
   }
 
@@ -147,6 +156,7 @@ export function parseCitation(input) {
   const m = text.match(/^([A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ .-]+?)\.?\s*(\d[\d\s.:,-]*)$/);
   if (!m) throw new CitationError(`Could not read "${raw}". Use forms like MN 10, SN 56.11, AN 3.65, Dhp 183, Snp 1.8, Thag 1.1, Pj 1 or M i 55.`);
   const name = m[1].trim();
+  if (/\s[ivxIVX]+$/.test(name)) throw new CitationError(`"${raw}" looks like a PTS volume/page reference for a collection that is not cited that way. Cite it by number instead.`);
   let key = fold(name).replace(/[\s.-]+/g, '');
   key = key.replace(/(nikaya|nikayo)$/, (s) => s);
   let collection = COLLECTIONS[key];
@@ -157,6 +167,7 @@ export function parseCitation(input) {
   if (!collection) throw new CitationError(`Unknown collection "${name}". Known: DN, MN, SN, AN, Kp, Dhp, Ud, Iti, Snp (Sn), Vv, Pv, Thag, Thig, Ap, Bv, Cp, Ja, Mnd, Cnd, Ps, Mil, Ne, Pe, Vinaya (Pj, Ss, Pc, Kd, Pvr…) and Abhidhamma books.`);
   const nums = numbers(m[2]);
   if (!nums) throw new CitationError(`Could not read the number in "${raw}".`);
+  if (typeof nums.end === 'number' && nums.end < nums.path[nums.path.length - 1]) throw new CitationError(`"${raw}" is a reversed range.`);
   return { kind: 'id', collection, path: nums.path, end: nums.end, raw };
 }
 

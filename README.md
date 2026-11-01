@@ -57,11 +57,12 @@ Resources: `pali://sources`, `pali://canon-guide`.
 
 Citation IDs follow the numbering most readers use today (Bhikkhu Bodhi / SuttaCentral). At build time, each ID was matched to the VRI text by its opening words. Where wording differs between editions, the match falls back to verse numbers and to the numbered headings between neighboring texts. The checks behind it:
 
-- **8,541 texts** across all three piṭakas. Every one resolves by ID and by printed citation, and renders text. No two texts claim the same passage.
+- **8,544 texts** across all three piṭakas. Every one resolves by ID and by printed citation, and renders text. No two texts claim the same passage.
 - **Texts printed together** (AN 1.297–305, Dhp 1–20, SN 46.143–152) also answer to each member number: 1,259 members.
 - **Abbreviated (peyyāla) texts** that VRI collapses are flagged `approximate` and point to the passage where the abbreviation occurs: 265 texts, all in SN/AN repetition series, Paṭṭhāna, and Vinaya rules recited together.
 - **Independent check against Access to Insight's PTS citations:** 102/102 MN, 17/17 DN, all SN and AN pages fall in the correct text, and 0 problems overall. Pages that differ only by numbering scheme are reported as such.
-- Every one of 2,572 translation links resolves back to its text.
+- **2,295 English translation links**, kept only with strong evidence: matching Pāli title or number, a PTS start page that identifies exactly one text, and Pāli ordinals (Paṭhama/Dutiya…) that agree with the translation's "(1)/(2)". Where the evidence is ambiguous, no link is made. Bridged links were content-checked against Ṭhānissaro's Access to Insight versions. A verse inherits the translation of the chapter that contains it.
+- An independent review spot-checked about 110 citations and every PTS lookup in the review set, and all returned the right text. Its findings on links and edge cases are fixed and locked in by regression tests.
 
 The build scripts are in [`scripts/canon/`](scripts/canon/README.md). Run `node scripts/audit.mjs` to re-run the exhaustive offline audit.
 

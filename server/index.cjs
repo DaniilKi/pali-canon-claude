@@ -21790,6 +21790,9 @@ function parseCitation(input) {
   if (pts) {
     const key2 = fold(pts[1]).replace(/\./g, "");
     const romanVolume = ROMAN[pts[2].toLowerCase()] || null;
+    if (pts[1] === "Sn" || ["th", "thi", "thig", "thag", "dhp", "snp", "ud", "it", "iti", "khp", "kp"].includes(key2)) {
+      throw new CitationError(`${pts[1]} is not cited by PTS volume and page. Cite it by number (e.g. Snp 1.8, Thag 1.1, Dhp 183, Ud 1.10, Iti 27).`);
+    }
     if (romanVolume && PTS_COLLECTIONS[key2]) {
       return { kind: "pts", collection: PTS_COLLECTIONS[key2], volume: romanVolume, page: Number(pts[3]), raw };
     }
@@ -21798,18 +21801,28 @@ function parseCitation(input) {
   if (vin && (VINAYA_CLASS[vin[2]] || ["kd", "mv", "cv", "pvr", "khandhaka", "mahavagga", "culavagga", "cullavagga", "parivara"].includes(vin[2]))) {
     const nums2 = numbers(vin[3]);
     if (VINAYA_CLASS[vin[2]]) {
-      const who = vin[1] && vin[1].startsWith("bi") ? "bi" : "bu";
+      const who = vin[1] && /^(bi|bhikkhuni)/.test(vin[1]) ? "bi" : "bu";
       const end = nums2.end === null ? "" : `-${Array.isArray(nums2.end) ? nums2.end.join(".") : nums2.end}`;
       return { kind: "uid", uid: `pli-tv-${who}-vb-${VINAYA_CLASS[vin[2]]}${nums2.path.join(".")}${end}`, raw };
     }
-    if (["mv", "mahavagga"].includes(vin[2])) return { kind: "uid", uid: `pli-tv-kd${nums2.path[0]}`, raw, note: "Mah\u0101vagga khandhakas are Kd 1\u201310." };
-    if (["cv", "culavagga", "cullavagga"].includes(vin[2])) return { kind: "uid", uid: `pli-tv-kd${nums2.path[0] + 10}`, raw, note: `C\u016B\u1E37avagga ${nums2.path[0]} is Khandhaka ${nums2.path[0] + 10}.` };
-    if (["kd", "khandhaka"].includes(vin[2])) return { kind: "uid", uid: `pli-tv-kd${nums2.path[0]}`, raw };
+    const khandhaka = (n, max, label) => {
+      if (nums2.path.length > 1) throw new CitationError(`${label} is cited by chapter number only (e.g. ${label.split(" ")[0]} 1); sections inside a khandhaka are reached by reading it with get_text.`);
+      if (nums2.end !== null) throw new CitationError(`Give one ${label.split(" ")[0]} chapter at a time.`);
+      if (n < 1 || n > max) throw new CitationError(`${label} has chapters 1\u2013${max}.`);
+      return n;
+    };
+    if (["mv", "mahavagga"].includes(vin[2])) return { kind: "uid", uid: `pli-tv-kd${khandhaka(nums2.path[0], 10, "Mv (Mah\u0101vagga)")}`, raw, note: "Mah\u0101vagga chapters are Khandhakas 1\u201310." };
+    if (["cv", "culavagga", "cullavagga"].includes(vin[2])) {
+      const n = khandhaka(nums2.path[0], 12, "Cv (C\u016B\u1E37avagga)");
+      return { kind: "uid", uid: `pli-tv-kd${n + 10}`, raw, note: `C\u016B\u1E37avagga ${n} is Khandhaka ${n + 10}.` };
+    }
+    if (["kd", "khandhaka"].includes(vin[2])) return { kind: "uid", uid: `pli-tv-kd${khandhaka(nums2.path[0], 22, "Kd (Khandhaka)")}`, raw };
     return { kind: "uid", uid: `pli-tv-pvr${nums2.path.join(".")}`, raw };
   }
   const m = text.match(/^([A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ .-]+?)\.?\s*(\d[\d\s.:,-]*)$/);
   if (!m) throw new CitationError(`Could not read "${raw}". Use forms like MN 10, SN 56.11, AN 3.65, Dhp 183, Snp 1.8, Thag 1.1, Pj 1 or M i 55.`);
   const name = m[1].trim();
+  if (/\s[ivxIVX]+$/.test(name)) throw new CitationError(`"${raw}" looks like a PTS volume/page reference for a collection that is not cited that way. Cite it by number instead.`);
   let key = fold(name).replace(/[\s.-]+/g, "");
   key = key.replace(/(nikaya|nikayo)$/, (s) => s);
   let collection = COLLECTIONS[key];
@@ -21820,6 +21833,7 @@ function parseCitation(input) {
   if (!collection) throw new CitationError(`Unknown collection "${name}". Known: DN, MN, SN, AN, Kp, Dhp, Ud, Iti, Snp (Sn), Vv, Pv, Thag, Thig, Ap, Bv, Cp, Ja, Mnd, Cnd, Ps, Mil, Ne, Pe, Vinaya (Pj, Ss, Pc, Kd, Pvr\u2026) and Abhidhamma books.`);
   const nums = numbers(m[2]);
   if (!nums) throw new CitationError(`Could not read the number in "${raw}".`);
+  if (typeof nums.end === "number" && nums.end < nums.path[nums.path.length - 1]) throw new CitationError(`"${raw}" is a reversed range.`);
   return { kind: "id", collection, path: nums.path, end: nums.end, raw };
 }
 function citationId(c) {
@@ -21940,13 +21954,24 @@ function sectionOf(id) {
   const m = id.match(/^([a-z-]+\d+\.)/);
   return m ? m[1].replace(/\.$/, "") : id.match(/^(pli-tv-[a-z]+-[a-z]+-[a-z]+|pli-tv-[a-z]+|[a-z-]+)/)[1];
 }
+var VERSE_CITED = /* @__PURE__ */ new Set(["snp", "thag", "thig", "dhp"]);
 function ptsLabel(collection, volume, page) {
   const abbr = PTS_ABBR[collection];
-  if (!abbr || !volume) return null;
+  if (!abbr || page === void 0 || page === null) return null;
+  if (VERSE_CITED.has(collection)) return `PTS ed. p. ${page}`;
+  if (!volume) return `${abbr} ${page}`;
   if (["mnd", "cnd", "ps", "mil", "ne", "pe", "kp", "dhp", "ud", "iti", "snp", "vv", "pv", "thag", "thig", "bv", "cp", "ds", "dt", "pp", "kv"].includes(collection) && volume <= 1) {
     return `${abbr} ${page}`;
   }
   return `${abbr} ${ROMAN2[volume] || volume} ${page}`;
+}
+function linksFor(u) {
+  const d = load();
+  const own = d.translations[u.id];
+  if (own?.length) return { links: own, via: null };
+  const container = rangeContaining(u.id);
+  if (container && d.translations[container.id]?.length) return { links: d.translations[container.id], via: container };
+  return { links: [], via: null };
 }
 function unitSummary(u, extra = {}) {
   const d = load();
@@ -21959,7 +21984,7 @@ function unitSummary(u, extra = {}) {
     pts: u.pts ? ptsLabel(u.collection, u.pts.volume, u.pts.page) + (u.pts.end_page && u.pts.end_page !== u.pts.page ? `\u2013${u.pts.end_page}` : "") : null,
     vri_paragraphs: u.vri || null,
     ...u.approximate ? { approximate: true } : {},
-    english_available: (d.translations[u.id] || []).length,
+    english_available: linksFor(u).links.length,
     ...extra
   };
 }
@@ -21984,7 +22009,7 @@ function ptsLookup(c) {
   const pool = d.canon.units.filter((u) => u.pts && !u.approximate && u.kind !== "range" && (c.collection === "nidd" ? c.volume === 1 ? u.collection === "mnd" : u.collection === "cnd" : u.collection === wanted) && (c.collection === "nidd" || u.pts.volume === c.volume));
   const hits = pool.filter((u) => u.pts.page <= c.page && c.page <= (u.pts.end_page ?? u.pts.page));
   if (!hits.length) return null;
-  hits.sort((a, b) => (b.pts.page === c.page) - (a.pts.page === c.page) || a.end - a.start - (b.end - b.start));
+  hits.sort((a, b) => (b.pts.page === c.page) - (a.pts.page === c.page) || a.book - b.book || a.start - b.start);
   return hits;
 }
 function resolve(reference) {
@@ -22005,7 +22030,8 @@ function resolve(reference) {
       const unpaged = { ja: "J\u0101taka", nidd: c.volume === 2 ? "C\u016B\u1E37aniddesa" : null, ya: "Yamaka", patthana: "Pa\u1E6D\u1E6Dh\u0101na" }[c.collection];
       throw new CitationError(unpaged ? `The VRI edition bundled here carries no PTS page numbers for the ${unpaged}, so ${c.raw} cannot be looked up by page. Cite it by number instead (e.g. Ja 1).` : `No text found at PTS ${c.raw}. Check the volume and page; PTS pages are available for the Sutta and Vinaya Pi\u1E6Dakas and most Abhidhamma books.`);
     }
-    notes.push(`PTS ${c.raw} falls within ${hits[0].acronym}${hits[0].pts.page === c.page ? ", which begins on that page" : ""}.`);
+    const label = c.raw.replace(/^PTS[:\s]*/i, "");
+    notes.push(`PTS ${label} falls within ${hits[0].acronym}${hits[0].pts.page === c.page ? ", which begins on that page" : ""}.`);
     return { unit: hits[0], notes, alternatives: hits.slice(1, 4).map((u) => unitSummary(u)) };
   }
   if (c.kind === "url") {
@@ -22098,7 +22124,9 @@ function source() {
 }
 function describe(u, notes = []) {
   const d = load();
-  const english = (d.translations[u.id] || []).map((t) => ({
+  const { links: own, via } = linksFor(u);
+  if (via) notes = [...notes, `English translations are of the whole ${via.acronym} (${via.title}); this text is part of it.`];
+  const english = own.map((t) => ({
     source: t.source === "ati" ? "Access to Insight" : "dhammatalks.org",
     translator: t.translator,
     reference: t.reference || void 0,
@@ -22377,7 +22405,7 @@ var ATI_MIRRORS = [
 var MIRROR_NAMES = ["accesstoinsight.org", "BCBS official repository (GitHub)", "BCBS official repository (jsDelivr CDN)", "Digital Pali Reader mirror (GitHub)"];
 var DT_LICENSE = 'CC BY-NC 4.0 \u2014 \u1E6Ch\u0101nissaro Bhikkhu, dhammatalks.org. Free for non-commercial use with attribution; "commercial" includes any sale.';
 function atiMirrors(path) {
-  if (!/^\/(tipitaka|lib|ptf|noncanon)\/[a-z0-9/._-]+$/i.test(path) && !/^\/index-(sutta|subject)$/.test(path)) {
+  if (/\.\./.test(path) || !/^\/(tipitaka|lib|ptf|noncanon)\/[a-z0-9/._-]+$/i.test(path) && !/^\/index-(sutta|subject)$/.test(path)) {
     throw new Error("Unsupported Access to Insight path.");
   }
   return ATI_MIRRORS.map((f) => f(path));
@@ -22425,7 +22453,7 @@ async function fetchDhammatalks(url) {
   };
 }
 function available(unit) {
-  return (load().translations[unit.id] || []).map((t) => ({
+  return linksFor(unit).links.map((t) => ({
     translation_id: t.source === "ati" ? `ati:${t.path}` : `dt:${t.url.split("/suttas/")[1].replace(/\.html$/, "")}`,
     source: t.source === "ati" ? "Access to Insight" : "dhammatalks.org",
     translator: t.translator,
@@ -22435,7 +22463,7 @@ function available(unit) {
   }));
 }
 async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
-  const links = load().translations[unit.id] || [];
+  const { links, via } = linksFor(unit);
   if (!links.length) {
     throw new Error(`No English translation is linked for ${unit.acronym}. Read the P\u0101li with get_text, or see https://suttacentral.net/${unit.id} for other translations.`);
   }
@@ -22450,11 +22478,12 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
   }
   if (!link) throw new Error(`Translation "${which}" is not linked for ${unit.acronym}. Available: ${available(unit).map((a) => `${a.translation_id} (${a.translator})`).join(", ")}.`);
   let result;
-  const notes = [];
+  const notes = via ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   try {
     result = link.source === "ati" ? await fetchAti(link.path) : await fetchDhammatalks(link.url);
   } catch (error2) {
-    const sameTranslator = link.source === "dhammatalks" && links.find((l) => l.source === "ati" && /thanissaro/i.test(l.translator || ""));
+    const outage = !error2.failures || error2.failures.some((f) => !/HTTP 404/.test(f));
+    const sameTranslator = outage && link.source === "dhammatalks" && links.find((l) => l.source === "ati" && /thanissaro/i.test(l.translator || ""));
     if (!sameTranslator) throw new Error(`Could not retrieve the translation (${error2.message}). The P\u0101li text is still available offline with get_text; try again later or choose another translation_id.`);
     try {
       result = await fetchAti(sameTranslator.path);
@@ -22467,8 +22496,9 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
   if (result.fetched_from !== result.source && result.fetched_from !== "dhammatalks.org" && result.fetched_from !== "accesstoinsight.org") {
     notes.push(`The primary site was unavailable; text served from ${result.fetched_from}, an identical copy of the archive.`);
   }
-  if (link.reference && /^(AN|SN) \d+:\d+/.test(link.reference) && !link.reference.toLowerCase().replace(/[ :]/g, "").startsWith(unit.id.replace(".", ""))) {
-    notes.push(`This translation numbers the text "${link.reference.split(" ").slice(0, 2).join(" ")}" (PTS-based numbering); it is the same text as ${unit.acronym}.`);
+  const theirs = (link.reference || "").match(/^(AN|SN) (\d+):(\d+)/);
+  if (theirs && `${theirs[1].toLowerCase()}${theirs[2]}.${theirs[3]}` !== unit.id) {
+    notes.push(`This translation numbers the text ${theirs[1]} ${theirs[2]}:${theirs[3]} (PTS-based numbering); it is the same text as ${unit.acronym}.`);
   }
   const text = result.text;
   return {

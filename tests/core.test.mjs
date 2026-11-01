@@ -103,3 +103,50 @@ test('dictionary and HTML cleaning', () => {
   assert.equal(plainText('<p><span class="ref">Nya 1</span>Thus I heard</p>'), 'Thus I heard');
   assert.equal(plainText('<i>dhamma</i>s'), 'dhammas');
 });
+
+test('regressions from independent review: no silent wrong answers', () => {
+  assert.equal(id('Bhikkhuni Ss 1'), 'pli-tv-bi-vb-ss1');
+  assert.equal(id('bhikkhunī ss 1'), 'pli-tv-bi-vb-ss1');
+  assert.equal(id('Bhikkhunī Pārājika 5'), 'pli-tv-bi-vb-pj5');
+  for (const ref of ['Mv 11', 'Cv 0', 'Cv 13', 'Kd 23', 'Kd 1.2', 'Kd 1-3', 'MN 12-10', 'Th i 1', 'Sn i 25', 'Thi i 1']) {
+    assert.throws(() => canon.resolve(ref), CitationError, ref);
+  }
+  assert.equal(id('S i 1'), 'sn1.1');
+  assert.equal(id('Ds 1.1'), 'ds1.1');
+  const snp = canon.describe(canon.resolve('Snp 1.8').unit);
+  assert.doesNotMatch(String(snp.pts), /null/);
+  assert.equal(canon.resolve('MN 1').unit.title.includes('vagg'), false);
+  assert.equal(canon.resolve('SN 56.11').unit.title.includes('vagg'), false);
+  assert.doesNotMatch(canon.resolve('Ss 1').unit.title, /^Ime kho/);
+  assert.ok(!canon.resolve('S v 420').notes.some((n) => /PTS PTS/.test(n)));
+});
+
+test('translation links agree with Pāli ordinals and never point at a sibling sutta', () => {
+  const d = canon.load();
+  const ord = { pathama: 1, dutiya: 2, tatiya: 3, catuttha: 4, pancama: 5 };
+  for (const [tid, links] of Object.entries(d.translations)) {
+    const t = canon.fold(d.byId.get(tid).title || '');
+    const p = Object.entries(ord).find(([w]) => t.startsWith(w))?.[1];
+    for (const l of links) {
+      const e = (l.reference || '').match(/\((\d)\)/);
+      if (p && e) assert.equal(Number(e[1]), p, `${tid} ↔ ${l.reference}`);
+    }
+    const dt = new Set(links.filter((l) => l.source === 'dhammatalks').map((l) => l.url));
+    assert.ok(dt.size <= 1, `${tid} has several dhammatalks pages`);
+  }
+  // Cases found by review: wrong links must be gone.
+  const urls = (x) => (d.translations[x] || []).map((l) => l.url).join(' ');
+  assert.doesNotMatch(urls('an10.100'), /AN10_76/);
+  assert.doesNotMatch(urls('an10.48'), /AN10_59/);
+  assert.doesNotMatch(urls('sn3.12'), /SN3_3\./);
+  assert.doesNotMatch(urls('ud6.6'), /ud6_4/);
+  assert.match(urls('an3.65'), /AN3_66/);
+  assert.match(urls('an7.68'), /AN7_64/);
+});
+
+test('a verse inherits its chapter translations, with a note', () => {
+  const u = canon.resolve('Dhp 183').unit;
+  const desc = canon.describe(u);
+  assert.ok(desc.english.length > 0);
+  assert.ok(desc.notes.some((n) => /whole Dhp 179/.test(n)));
+});
