@@ -163,8 +163,19 @@ test('npm package: bin starts the bundled server with a portable shebang', async
     assert.ok(existsSync(new URL(`../${file}`, import.meta.url)), file);
   }
   assert.ok(pkg.files.includes('server'), 'package files must ship server/ (bundle and data)');
-  // The bundle looks for its data next to itself (__dirname/data) before any cwd fallback.
-  assert.match(read('src/canon.mjs'), /join\(here, 'data', name\)/);
+});
+
+test('bundled server finds its data when started from an unrelated folder', async () => {
+  const { spawnSync } = await import('node:child_process');
+  const { tmpdir } = await import('node:os');
+  const { fileURLToPath } = await import('node:url');
+  const check = fileURLToPath(new URL('../scripts/npx-check.mjs', import.meta.url));
+  const server = fileURLToPath(new URL('../server/index.cjs', import.meta.url));
+  // initialize, tools/list and an offline resolve_reference with the cwd outside the repo,
+  // so the data must be found next to the bundle, not in the current folder.
+  const run = spawnSync(process.execPath, [check, process.execPath, server], { cwd: tmpdir(), encoding: 'utf8', timeout: 120000 });
+  assert.equal(run.status, 0, `npx-check failed:\n${run.stdout}\n${run.stderr}`);
+  assert.match(run.stdout, /bundled data found/);
 });
 
 test('version is the same in package.json, manifest.json, plugin.json and the server', async () => {
@@ -173,5 +184,5 @@ test('version is the same in package.json, manifest.json, plugin.json and the se
   const version = JSON.parse(read('package.json')).version;
   assert.equal(JSON.parse(read('manifest.json')).version, version, 'manifest.json');
   assert.equal(JSON.parse(read('.claude-plugin/plugin.json')).version, version, '.claude-plugin/plugin.json');
-  assert.match(read('src/index.mjs'), new RegExp(`const VERSION = '${version.replace(/\./g, '\.')}'`), 'src/index.mjs VERSION');
+  assert.ok(read('src/index.mjs').includes(`const VERSION = '${version}'`), 'src/index.mjs VERSION');
 });
