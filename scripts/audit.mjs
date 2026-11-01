@@ -2,6 +2,7 @@
 import * as canon from '../src/canon.mjs';
 import { EDITIONS, editionLabel, editionIndex, nextUnit } from '../src/editions.mjs';
 import { textSegments, parseNoteSpans, uncovered, SIGLA } from '../src/variants.mjs';
+import * as commentary from '../src/commentary.mjs';
 
 const d = canon.load();
 const failures = [];
@@ -120,6 +121,87 @@ for (const [id, links] of Object.entries(d.translations)) {
       if (r.unit.id !== id && !(d.translations[r.unit.id] || []).some((x) => x.url === l.url)) fail('link', `${l.url} -> ${r.unit.id} (expected ${id})`);
       count('link');
     } catch (e) { fail('link', `${l.url}: ${e.message}`); }
+  }
+}
+// 8. Commentary (server/data/commentary.json.gz): every alignment points at a real text and at root paragraphs
+//    inside it; known passages land where they belong; commentary headings agree with the texts' titles.
+const com = commentary.load();
+if (!com) fail('commentary', 'server/data/commentary.json.gz is missing');
+else {
+  const rootParas = new Map(); // root book -> Map(paragraph -> [block indexes])
+  const parasOf = (bi) => {
+    if (rootParas.has(bi)) return rootParas.get(bi);
+    const map = new Map();
+    let current = null;
+    d.canon.books[bi].blocks.forEach((b, i) => {
+      const m = String(b[1] ?? '').match(/^(\d+)(?:-(\d+))?$/);
+      if (m) current = [Number(m[1]), Number(m[2] ?? m[1])];
+      if (!current) return;
+      for (let p = current[0]; p <= current[1]; p += 1) (map.get(p) || map.set(p, []).get(p)).push(i);
+    });
+    rootParas.set(bi, map);
+    return map;
+  };
+  for (const [i, p] of com.passages.entries()) {
+    const [bi, start, end, root, a, b, , , evidence] = p;
+    const book = com.books[bi];
+    if (!book || start < 0 || end > book.blocks.length || start >= end) { fail('commentary-passage', `#${i} has a bad block range`); continue; }
+    if (!book.blocks.slice(start, end).some((x) => x[2])) fail('commentary-passage', `#${i} (${book.file}) is empty`);
+    if (!d.canon.books[root] || !book.root_files.includes(d.canon.books[root].file)) fail('commentary-passage', `#${i} (${book.file}) points at root book ${root}, not one it comments on`);
+    else if (![...Array(b - a + 1).keys()].some((k) => parasOf(root).has(a + k))) fail('commentary-passage', `#${i} paragraph ${a}-${b} is not in ${d.canon.books[root].file}`);
+    if (!['paragraph', 'paragraph+lemma'].includes(evidence)) fail('commentary-passage', `#${i} has unknown evidence ${evidence}`);
+    count('commentary-passage');
+  }
+  for (const [id, list] of Object.entries(com.units)) {
+    const u = d.byId.get(id);
+    if (!u) { fail('commentary-unit', `${id} is not a canon text`); continue; }
+    for (const pi of list) {
+      const p = com.passages[pi];
+      if (!p) { fail('commentary-unit', `${id} -> missing passage #${pi}`); continue; }
+      const blocks = [];
+      for (let k = p[4]; k <= p[5]; k += 1) blocks.push(...(parasOf(p[3]).get(k) || []));
+      if (p[3] !== u.book || !blocks.some((x) => x >= u.start && x < u.end)) fail('commentary-unit', `${id}: passage #${pi} (paragraphs ${p[4]}-${p[5]}) is outside the text`);
+      else count('commentary-alignment');
+    }
+  }
+  // Spot-checks: citation -> a heading the commentary must show (or no commentary at all).
+  const spot = [
+    ['DN 1', 'Brahmajāla'], ['DN 22', 'Mahāsatipaṭṭhānasuttavaṇṇanā'], ['MN 1', 'Mūlapariyāyasuttavaṇṇanā'],
+    ['MN 10', 'Satipaṭṭhānasuttavaṇṇanā'], ['MN 21', 'Kakacūpamasuttavaṇṇanā'], ['SN 56.11', 'Dhammacakkappavattanasuttavaṇṇanā'],
+    ['SN 22.59', 'Anattalakkhaṇasuttavaṇṇanā'], ['AN 3.65', 'Kesamuttisuttavaṇṇanā'], ['AN 8.53', 'Saṃkhittasuttavaṇṇanā'],
+    ['Dhp 1', 'Cakkhupālattheravatthu'], ['Dhp 183', 'Ānandattherapañhavatthu'], ['Dhp 1–20', 'Yamakavaggo'], ['AN 1.9', null],
+  ];
+  for (const [ref, heading] of spot) {
+    try {
+      const r = commentary.getCommentary(ref, { limit: 200 });
+      const text = r.segments.map((s) => s.text).join('\n');
+      if (heading === null ? r.available : !(r.available && text.includes(heading))) fail('commentary-spot', `${ref}: expected ${heading === null ? 'no commentary' : `"${heading}"`}`);
+      else count('commentary-spot');
+    } catch (e) { fail('commentary-spot', `${ref}: ${e.message}`); }
+  }
+  // Every sutta-commentary heading in a single-paragraph passage names the text it is aligned to.
+  const key = (s) => canon.fold(s).replace(/[nm](?=[kg])/g, 'n').replace(/[^a-z]/g, '');
+  for (const u of d.canon.units) {
+    if (!['dn', 'mn', 'sn', 'an'].includes(u.collection) || u.kind === 'range' || u.approximate) continue;
+    const t = key(u.title || '').replace(/(suttam|sutta)$/, '');
+    for (const pi of com.units[u.id] || []) {
+      const p = com.passages[pi];
+      if (p[4] !== p[5]) continue;
+      for (const head of com.books[p[0]].blocks.slice(p[1], p[2])) {
+        if (head[0] === 'centre' || !/suttavaṇṇanā$/.test(head[2])) continue;
+        const h = key(head[2].replace(/^[\d\-–. ]+/, '').replace(/suttavaṇṇanā$/, ''));
+        if (!(h && t && (h.includes(t.slice(0, 6)) || t.includes(h.slice(0, 6))))) fail('commentary-heading', `${u.id} "${u.title}" has commentary headed "${head[2]}"`);
+        else count('commentary-heading');
+      }
+    }
+  }
+  // Coverage floor for the main collections (texts with at least one aligned passage).
+  const floor = { dn: 1, mn: 1, dhp: 0.99, sn: 0.9, an: 0.75 };
+  for (const [coll, min] of Object.entries(floor)) {
+    const texts = d.canon.units.filter((u) => u.collection === coll && u.kind !== 'range' && !u.approximate);
+    const covered = texts.filter((u) => com.units[u.id]).length;
+    counts[`commentary-${coll}`] = `${covered}/${texts.length}`;
+    if (covered < min * texts.length) fail('commentary-coverage', `${coll}: ${covered}/${texts.length} texts have commentary (floor ${min})`);
   }
 }
 console.log(JSON.stringify(counts));

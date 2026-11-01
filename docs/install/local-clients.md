@@ -14,7 +14,7 @@ Please read [what to expect from small models](#what-to-expect-from-small-models
 
 ## What works offline
 
-The server has 26 tools. Nineteen of them work without internet (`get_text` needs it only when you ask for an English translation, and `verify_quote` checks Pāli quotations offline but English ones online):
+The server has 27 tools. Twenty of them work without internet (`get_text` needs it only when you ask for an English translation, and `verify_quote` checks Pāli quotations offline but English ones online):
 
 | Tool | What it does | Internet? |
 |---|---|---|
@@ -32,6 +32,7 @@ The server has 26 tools. Nineteen of them work without internet (`get_text` need
 | `get_access_to_insight_text` | Reads an Access to Insight page | Yes |
 | `find_citations` | Finds every citation in a piece of text (an essay, a talk transcript) and checks each one | No |
 | `find_talks` | Finds Dhamma talks by Ṭhānissaro Bhikkhu on dhammatalks.org by topic or passage (titles, dates and links only) | Yes |
+| `get_commentary` | Reads the traditional Pāli commentary (Aṭṭhakathā, VRI edition) on a text, clearly labelled as commentary | No |
 | `verify_quote` | Checks whether a quotation attributed to the Buddha is in the texts: Pāli against the whole bundled canon (offline), English against the linked translations of the texts you name (default: the Dhammapada) | Yes |
 | `lookup_name` | Who or what a name is (Sāriputta, Sāvatthī): the Dictionary of Pāli Proper Names entry when bundled, and the texts where the name appears | No |
 | `topic` | Texts on a topic ("anger", "five hindrances") from Access to Insight's indexes | No |
