@@ -1,0 +1,12 @@
+interface:
+  display_name: "Pali word"
+  short_description: "Explain a Pali word with dictionary and canon evidence"
+  brand_color: "#C77018"
+  default_prompt: "Use $pali-word to explain the Pali word sati with passages from the canon."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "pali-canon"
+      description: "Pali Canon MCP server (read-only): Tipitaka texts, citations, translations and Pali dictionary"
+      transport: "stdio"
+      command: "npx"

@@ -1,0 +1,20 @@
+{
+  "name": "pali-canon",
+  "interface": {
+    "displayName": "Pali Canon"
+  },
+  "plugins": [
+    {
+      "name": "pali-canon",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Education"
+    }
+  ]
+}
