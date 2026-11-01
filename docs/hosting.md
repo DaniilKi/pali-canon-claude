@@ -81,6 +81,7 @@ All settings are optional environment variables.
 | `TRUST_PROXY` | off | How many proxies sit in front of the server. Set to `1` on a hosting platform such as Fly.io or Render, so each visitor's real address (the one the platform adds last to `X-Forwarded-For`) is used for the rate limit. Addresses a visitor writes in that header themselves are ignored. Leave it off when the server faces the internet directly. |
 | `PALI_CANON_CACHE_MB` | `64` | Memory for recently fetched translations and dictionary entries. `0` turns it off. |
 | `PALI_CANON_CACHE_TTL_MINUTES` | `360` | How long a fetched page is kept (six hours). |
+| `CHATGPT_WIDGET` | off | `1` adds the ChatGPT reading view: one extra read-only tool, `read_passage_widget`, and its page. `fly.toml` and `render.yaml` turn it on. See [listings/chatgpt.md](listings/chatgpt.md). |
 
 The whole Pāli Canon is loaded at start-up so that reading and searching are fast, so the server needs
 a fair amount of memory. Measured on 1 November 2026 (Windows 11, Node.js 26, `server/http.cjs`): about

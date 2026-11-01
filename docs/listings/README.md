@@ -63,5 +63,6 @@ Keep the numbers in step with `npm run coverage`.
 | Smithery | [smithery.md](smithery.md) | Ready for the `.mcpb` bundle; hosted URL waits for #5 |
 | PulseMCP | [pulsemcp.md](pulsemcp.md) | Closed to submissions; takes listings from the official registry |
 | awesome-mcp-servers | [awesome-mcp-servers.md](awesome-mcp-servers.md) | Entry line ready |
+| ChatGPT app | [chatgpt.md](chatgpt.md) | Packet ready; waits for the hosted address (#5) and an OpenAI account |
 
 Update this table when a listing goes live.

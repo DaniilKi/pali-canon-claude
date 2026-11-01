@@ -36,6 +36,8 @@ try {
   // 11 core tools plus optional feature modules (src/features/index.mjs).
   assert.ok(tools.length >= 11, `${tools.length} tools`);
   assert.deepEqual(tools.map((tool) => tool.name).sort(), expectedToolNames());
+  assert.equal(tools.length, 11);
+  assert.ok(!tools.some((tool) => tool.name === 'read_passage_widget'), 'the ChatGPT widget tool is hosted-HTTP only');
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint));
   assert.ok((await client.listResources()).resources.length >= 2);
   assert.ok((await client.listPrompts()).prompts.length >= 3);
