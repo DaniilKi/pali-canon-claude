@@ -30,6 +30,8 @@ Other scripts, run directly with `node` (or `python`):
 
 | Command | What it does |
 |---|---|
+| `npm run evals [-- --live] [--category c] [--id id] [--verbose]` | Accuracy evaluation: runs the tool checks of `evals/questions.jsonl` against an in-process server (network off unless `--live`), prints pass/fail/skip per category, exits 1 on any failure or unresolvable expected citation. `tests/evals.test.mjs` runs it in CI |
+| `evals/claude-plugin-eval/run.sh`, `evals/codex/run.sh` | Model-level evaluation with `claude plugin eval` and `codex exec`, graded by expected citations (`evals/model-grading.mjs`); needs a model, not run in CI |
 | `node scripts/export-index.mjs [--out dir]` | Citation index (ID ↔ VRI paragraph ↔ PTS page ↔ translation links, with each link's licence) as JSON and CSV in `dist/export`; `release.yml` attaches it to releases. See [export.md](export.md) |
 | `node scripts/build-site.mjs [--out dir] [--no-export]` | Prepares the GitHub Pages source in `dist/site` from `docs/`, `site/` and `llms.txt`; `pages.yml` renders it with Jekyll and deploys on push to `main` (needs Pages Source: GitHub Actions) |
 | `node scripts/anandajoti/build.mjs --cache <dir>` | Rebuilds `server/data/anandajoti.json` (Ānandajoti Bhikkhu links, each checked against the Pāli on the page); needs network |
