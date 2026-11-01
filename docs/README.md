@@ -10,6 +10,7 @@ Start with the [project README](../README.md). Then:
 - [Glossary](glossary.md): Pāli and technical terms
 - [Roadmap](roadmap.md): how we compare with Bible, Quran and Sefaria tools, and the plan
 - [Directory listings](listings/README.md): the MCP Registry entry and the packets for community directories
+- [Install in editors and agent apps](install/ide.md): Cursor, VS Code, Windsurf, Zed, Cline and Goose
 
 **For the curious and for contributors**
 

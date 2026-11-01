@@ -536,4 +536,36 @@ test('Gemini extension stays in step with the package and the skills', async () 
     }
     assert.ok(existsSync(new URL(`skills/${skill}/SKILL.md`, root)), skill);
   }
+test('editor install guide: one-click links and configs all start npx -y pali-canon-mcp', async () => {
+  const { readFileSync } = await import('node:fs');
+  const { installLinks, ARGS } = await import('../scripts/install-links.mjs');
+  const doc = readFileSync(new URL('../docs/install/ide.md', import.meta.url), 'utf8');
+  const links = installLinks();
+  for (const key of ['cursor', 'cursorWeb', 'vscode', 'vscodeInsiders', 'vscodeWeb', 'vscodeInsidersWeb', 'vscodeCli', 'goose']) {
+    assert.ok(doc.includes(links[key]), `docs/install/ide.md is missing the generated ${key} link`);
+  }
+  // Every deep link in the page must be one we generate (no hand-edited stale copies).
+  const generated = new Set(Object.values(links));
+  for (const m of doc.matchAll(/(?:cursor:\/\/|vscode(?:-insiders)?:mcp|goose:\/\/|https:\/\/cursor\.com\/en\/install-mcp|https:\/\/vscode\.dev\/redirect)[^\s)`"]*/g)) {
+    assert.ok(generated.has(m[0]), `unexpected install link: ${m[0]}`);
+  }
+  // The links decode to the documented server.
+  const cursorConfig = JSON.parse(Buffer.from(new URL(links.cursor).searchParams.get('config'), 'base64').toString());
+  assert.deepEqual(cursorConfig, { command: 'npx', args: ['-y', 'pali-canon-mcp'] });
+  const vscodeConfig = JSON.parse(decodeURIComponent(links.vscode.split('?')[1]));
+  assert.deepEqual(vscodeConfig, { name: 'pali-canon', type: 'stdio', command: 'npx', args: ['-y', 'pali-canon-mcp'] });
+  assert.equal(new URL(links.vscodeWeb).searchParams.get('url'), links.vscode);
+  assert.deepEqual(new URL(links.goose).searchParams.getAll('arg'), ARGS);
+  // Every JSON config block parses and defines exactly one pali-canon server in the client's own key.
+  const blocks = [...doc.matchAll(/```json\n([\s\S]*?)```/g)].map((m) => JSON.parse(m[1]));
+  assert.ok(blocks.length >= 6);
+  for (const block of blocks) {
+    const [key] = Object.keys(block);
+    assert.ok(['mcpServers', 'servers', 'context_servers'].includes(key), key);
+    const server = block[key]['pali-canon'];
+    assert.ok(server, `${key} has no pali-canon entry`);
+    if (server.command === 'npx') assert.deepEqual(server.args, ['-y', 'pali-canon-mcp']);
+    else assert.equal(server.command, 'node');
+  }
+  assert.match(doc, /```yaml\nextensions:\n  pali-canon:\n[\s\S]*?cmd: npx\n    args: \["-y", "pali-canon-mcp"\]/);
 });
