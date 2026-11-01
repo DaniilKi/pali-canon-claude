@@ -110,6 +110,8 @@ function parseEditionPage(raw, text) {
   rest = rest.replace(/\(([^)]*)\)/, (_, b) => { book = b.trim(); return ' '; });
   // "vol." and "p." come after the collection (never strip the start: "Pp" is the Puggalapaññatti).
   rest = rest.replace(/\s(?:volume|vol|pages|page|pp|p)\.?\s*(?=\d)/gi, ' ').replace(/\s+/g, ' ').trim();
+  // A trailing page word with no number after it ("Thai MN 1.103 p") is noise, not a book name.
+  rest = rest.replace(/\s(?:volume|vol|pages|page|pp|p)\.?$/i, '').trim();
   const example = 'Thai MN 1.103 (collection, volume.page), or Thai Dhp 15 for a single-volume collection';
   const m = rest.match(/^([A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ][A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ .-]*?)[\s.,]*(\d+)(?:\s*[.:,]\s*|\s+)?(\d+)?(?:[\s,]+([A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ][^\d]*))?$/);
   if (!m) {
@@ -117,9 +119,20 @@ function parseEditionPage(raw, text) {
     throw new CitationError(`Could not read the edition page in "${raw}". Write it as ${example}.`);
   }
   if (m[4] && !book) book = m[4].trim();
-  const key = fold(m[1]).replace(/[\s.-]+/g, '');
-  const scope = VINAYA_SCOPES[key] || COLLECTIONS[key] || (m[1].trim() === 'Sn' ? 'snp' : null);
-  if (!scope) throw new CitationError(`Unknown collection "${m[1].trim()}" in "${raw}". Use DN, MN, SN, AN, Dhp, Ud, Iti, Snp, Thag, Thig, Ja… or for the Vinaya the book: Pj, Pc, Mv, Cv, Pvr.`);
+  const name = m[1].trim().replace(/\.$/, '');
+  const key = fold(name).replace(/[\s.-]+/g, '');
+  // Case-sensitive "Sn" is the Sutta Nipāta (as in parseCitation); it must win over COLLECTIONS.sn (the Saṃyutta).
+  // A plain "Ap" covers the whole Apadāna book (Therā- and Therī-); "Tha Ap" / "Thi Ap" narrow it.
+  const scope = name === 'Sn' ? 'snp'
+    : (key === 'ap' || key === 'apadana') ? 'ap'
+    : VINAYA_SCOPES[key] || COLLECTIONS[key] || null;
+  if (!scope) {
+    const roman = name.match(/^(.*?)[\s.]+([ivx]+)$/i);
+    if (roman && ROMAN[roman[2].toLowerCase()] && m[3] === undefined && (VINAYA_SCOPES[fold(roman[1]).replace(/[\s.-]+/g, '')] || COLLECTIONS[fold(roman[1]).replace(/[\s.-]+/g, '')])) {
+      throw new CitationError(`"${raw}": edition volumes are written in arabic numerals, volume.page. Write it as ${head[1]} ${roman[1].trim()} ${ROMAN[roman[2].toLowerCase()]}.${m[2]}.`);
+    }
+    throw new CitationError(`Unknown collection "${m[1].trim()}" in "${raw}". Use DN, MN, SN, AN, Dhp, Ud, Iti, Snp, Thag, Thig, Ja… or for the Vinaya the book: Pj, Pc, Mv, Cv, Pvr.`);
+  }
   const volume = m[3] === undefined ? 0 : Number(m[2]);
   const page = Number(m[3] === undefined ? m[2] : m[3]);
   return { kind: 'edition', edition, scope, volume, page, ...(book ? { book } : {}), raw };

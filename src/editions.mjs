@@ -116,6 +116,19 @@ export function lookupEditionPage(d, c, ErrorClass = Error) {
     }
     found = filtered;
   }
+  // VRI prints the Therāpadāna and the Therīapadāna in one Apadāna book (vol. 2 holds both), so the page index
+  // cannot tell them apart. Keep only pages that begin in the requested part; otherwise refuse and say where it is.
+  if ((c.scope === 'tha-ap' || c.scope === 'thi-ap') && found.length) {
+    const ownerOf = (x) => idx.owner[x.book][x.block] || nextUnit(d, x.book, x.block);
+    const kept = found.filter((x) => ownerOf(x)?.id.startsWith(c.scope));
+    if (!kept.length) {
+      const where = [...new Set(found.map((x) => ownerOf(x)?.acronym).filter(Boolean))].join(', ') || 'no text';
+      const part = c.scope === 'thi-ap' ? 'Therīapadāna' : 'Therāpadāna';
+      const at = `${c.volume ? `${c.volume}.` : ''}${c.page}`;
+      throw new ErrorClass(`${c.raw}: ${edName} Apadāna page ${at} begins in ${where}, not in the ${part}. If that is the page you mean, cite it as "${edName} Ap ${at}".`);
+    }
+    found = kept;
+  }
   if (!found.length) {
     // Explain which volumes and page ranges exist for this edition and collection.
     const vols = new Map();
@@ -127,6 +140,22 @@ export function lookupEditionPage(d, c, ErrorClass = Error) {
       vols.set(v, [Math.min(r[0], p), Math.max(r[1], p)]);
     }
     if (!vols.size) throw new ErrorClass(`The VRI data carries no ${edName} page numbers for this collection, so ${c.raw} cannot be looked up. Cite the text by number instead.`);
+    // Inside the marked range of a volume: say which pages around it are marked (the data has gaps).
+    const range = vols.get(c.volume);
+    if (range && c.page > range[0] && c.page < range[1]) {
+      let below = null;
+      let above = null;
+      for (const [key, list] of idx.markers) {
+        const [ed, coll, at] = key.split('|');
+        if (ed !== c.edition || !collections.includes(coll)) continue;
+        const [v, p] = at.split('.').map(Number);
+        if (v !== c.volume) continue;
+        if (p < c.page && (!below || p > below.p)) below = { p, at, book: list[0].book };
+        if (p > c.page && (!above || p < above.p)) above = { p, at, book: list[0].book };
+      }
+      const fmt = (x) => editionLabel(d, c.edition, x.book, x.at);
+      throw new ErrorClass(`No ${edName} page ${c.volume ? `${c.volume}.` : ''}${c.page} is marked for this collection: the VRI data leaves the pages between ${fmt(below)} and ${fmt(above)} unmarked. Cite one of those, or the text by number.`);
+    }
     const have = [...vols.entries()].sort((a, b) => a[0] - b[0]).map(([v, [a, b]]) => (v === 0 ? `pages ${a}–${b} (single volume: give the page only)` : `vol. ${v} pp. ${a}–${b}`)).join('; ');
     throw new ErrorClass(`No ${edName} page ${c.volume ? `${c.volume}.` : ''}${c.page} is marked for this collection. Marked: ${have}.`);
   }

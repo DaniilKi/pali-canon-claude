@@ -80,7 +80,11 @@ Readers in Thailand and Myanmar often cite their national printed editions by vo
 All three point to the opening of MN 10 (Mahāsatipaṭṭhāna Sutta).
 
 - **Always name the collection.** VRI numbers these volumes *within each collection* (MN volumes 1–3, SN volumes 1–5 and so on), not across the whole edition as the printed Thai set does. So "Thai 9.55" alone cannot be looked up; the tool asks for the collection.
-- **Single-volume collections take the page only:** "Thai Dhp 15", "Myanmar Thag 50".
+- **Single-volume collections take the page only:** "Thai Dhp 15", "Myanmar Thag 220".
+- **Sn is still the Sutta Nipāta:** "Thai Sn 330" is the same as "Thai Snp 330"; "Thai SN 1.5" is the Saṃyutta.
+- **Apadāna:** VRI prints the Therāpadāna and the Therīapadāna in one book, so "Thai Ap 2.300" covers both. "Thai Thi Ap 2.300" or "Thai Tha Ap 2.200" narrow it, and a page that begins in the other part is refused with the plain "Ap" form to use.
+- **Volumes are arabic numerals:** "Thai MN 1.103", not "Thai MN i 103" (the tool suggests the right form).
+- **Some pages are not marked.** The VRI data has gaps in some editions' page markers (Myanmar Thag jumps from page 19 to 220, for example). A page inside a gap is refused, and the tool names the nearest marked pages either side.
 - **The Vinaya is cited by book:** Pj (Pārājika), Pc (Pācittiya), Mv (Mahāvagga), Cv (Cūḷavagga), Pvr (Parivāra), for example "Thai Mv 1.10".
 - **VRI edition, SN and AN:** VRI repeats its volume numbers across the books (vaggas and nipātas) of these two collections, so add the book in brackets: "VRI SN 1.20 (Nidānavaggo)". Diacritics and the ending are optional ("(Nidanavagga)"). Without the book the tool lists the possibilities rather than guessing.
 - Looser forms also work: "Thai ed. MN vol. 1 p. 103", "Myanmar edition DN 2.55", "thai mn 1:103".

@@ -150,3 +150,10 @@ test('a verse inherits its chapter translations, with a note', () => {
   assert.ok(desc.english.length > 0);
   assert.ok(desc.notes.some((n) => /whole Dhp 179/.test(n)));
 });
+
+test('edition page citations keep "Sn" (Sutta Nipāta) apart from "SN" (Saṃyutta)', () => {
+  assert.equal(parseCitation('Thai Sn 330').scope, 'snp');
+  assert.equal(parseCitation('Thai SN 1.5').scope, 'sn');
+  assert.throws(() => canon.resolve('Thai Sn 1.5'), CitationError);
+  assert.throws(() => canon.resolve('Thai Thi Ap 2.200'), CitationError);
+});

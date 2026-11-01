@@ -83,3 +83,33 @@ test('describe reports edition page breaks', () => {
   assert.equal(mil.thai, undefined);
   assert.ok(mil.myanmar);
 });
+
+test('case-sensitive "Sn" in an edition citation is the Sutta Nipāta, never the Saṃyutta', () => {
+  assert.equal(parseCitation('Thai Sn 330').scope, 'snp');
+  assert.equal(parseCitation('Myanmar Sn. 300').scope, 'snp');
+  assert.equal(parseCitation('Thai SN 1.5').scope, 'sn');
+  assert.equal(id('Thai Sn 330'), id('Thai Snp 330'));
+  assert.match(id('Myanmar Sn 300'), /^snp/);
+  // Previously "Myanmar Sn 1.20" returned SN 1.33 and "Thai Sn 1.5" SN 1.6. The Sutta Nipāta is one volume, so these are refused.
+  assert.throws(() => canon.resolve('Myanmar Sn 1.20'), /single volume/);
+  assert.throws(() => canon.resolve('Thai Sn 1.5'), /single volume/);
+  assert.equal(id('Thai SN 1.5'), 'sn1.6');
+});
+
+test('Thera and Therī Apadāna are kept apart in edition citations', () => {
+  // VRI prints both parts in one Apadāna book; Thai Ap 2.200 begins in the Therāpadāna.
+  assert.equal(id('Thai Ap 2.200'), 'tha-ap538');
+  assert.equal(id('Thai Tha Ap 2.200'), 'tha-ap538');
+  assert.throws(() => canon.resolve('Thai Thi Ap 2.200'), (e) => e instanceof CitationError && /not in the Therīapadāna/.test(e.message) && /Thai Ap 2\.200/.test(e.message));
+  assert.match(id('Thai Thi Ap 2.300'), /^thi-ap/);
+  assert.match(id('Myanmar Thi Ap 2.200'), /^thi-ap/);
+});
+
+test('edition page errors are specific', () => {
+  // Myanmar Thag has a gap in its markers (19, then 220): say so rather than a misleading range.
+  assert.throws(() => canon.resolve('Myanmar Thag 50'), /unmarked/);
+  assert.equal(id('Myanmar Thag 220'), 'thag1.2');
+  // A stray page word is ignored; a roman volume gets the arabic form suggested.
+  assert.equal(id('Thai MN 1.103 p'), 'mn10');
+  assert.throws(() => canon.resolve('Thai MN i 103'), /Thai MN 1\.103/);
+});

@@ -21710,6 +21710,17 @@ function lookupEditionPage(d, c, ErrorClass = Error) {
     }
     found = filtered;
   }
+  if ((c.scope === "tha-ap" || c.scope === "thi-ap") && found.length) {
+    const ownerOf = (x) => idx.owner[x.book][x.block] || nextUnit(d, x.book, x.block);
+    const kept = found.filter((x) => ownerOf(x)?.id.startsWith(c.scope));
+    if (!kept.length) {
+      const where = [...new Set(found.map((x) => ownerOf(x)?.acronym).filter(Boolean))].join(", ") || "no text";
+      const part = c.scope === "thi-ap" ? "Ther\u012Bapad\u0101na" : "Ther\u0101pad\u0101na";
+      const at = `${c.volume ? `${c.volume}.` : ""}${c.page}`;
+      throw new ErrorClass(`${c.raw}: ${edName} Apad\u0101na page ${at} begins in ${where}, not in the ${part}. If that is the page you mean, cite it as "${edName} Ap ${at}".`);
+    }
+    found = kept;
+  }
   if (!found.length) {
     const vols = /* @__PURE__ */ new Map();
     for (const [key] of idx.markers) {
@@ -21720,6 +21731,21 @@ function lookupEditionPage(d, c, ErrorClass = Error) {
       vols.set(v, [Math.min(r[0], p), Math.max(r[1], p)]);
     }
     if (!vols.size) throw new ErrorClass(`The VRI data carries no ${edName} page numbers for this collection, so ${c.raw} cannot be looked up. Cite the text by number instead.`);
+    const range = vols.get(c.volume);
+    if (range && c.page > range[0] && c.page < range[1]) {
+      let below = null;
+      let above = null;
+      for (const [key, list] of idx.markers) {
+        const [ed, coll, at] = key.split("|");
+        if (ed !== c.edition || !collections.includes(coll)) continue;
+        const [v, p] = at.split(".").map(Number);
+        if (v !== c.volume) continue;
+        if (p < c.page && (!below || p > below.p)) below = { p, at, book: list[0].book };
+        if (p > c.page && (!above || p < above.p)) above = { p, at, book: list[0].book };
+      }
+      const fmt = (x) => editionLabel(d, c.edition, x.book, x.at);
+      throw new ErrorClass(`No ${edName} page ${c.volume ? `${c.volume}.` : ""}${c.page} is marked for this collection: the VRI data leaves the pages between ${fmt(below)} and ${fmt(above)} unmarked. Cite one of those, or the text by number.`);
+    }
     const have = [...vols.entries()].sort((a, b) => a[0] - b[0]).map(([v, [a, b]]) => v === 0 ? `pages ${a}\u2013${b} (single volume: give the page only)` : `vol. ${v} pp. ${a}\u2013${b}`).join("; ");
     throw new ErrorClass(`No ${edName} page ${c.volume ? `${c.volume}.` : ""}${c.page} is marked for this collection. Marked: ${have}.`);
   }
@@ -21999,6 +22025,7 @@ function parseEditionPage(raw, text) {
     return " ";
   });
   rest = rest.replace(/\s(?:volume|vol|pages|page|pp|p)\.?\s*(?=\d)/gi, " ").replace(/\s+/g, " ").trim();
+  rest = rest.replace(/\s(?:volume|vol|pages|page|pp|p)\.?$/i, "").trim();
   const example = "Thai MN 1.103 (collection, volume.page), or Thai Dhp 15 for a single-volume collection";
   const m = rest.match(/^([A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ][A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ .-]*?)[\s.,]*(\d+)(?:\s*[.:,]\s*|\s+)?(\d+)?(?:[\s,]+([A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ][^\d]*))?$/);
   if (!m) {
@@ -22006,9 +22033,16 @@ function parseEditionPage(raw, text) {
     throw new CitationError(`Could not read the edition page in "${raw}". Write it as ${example}.`);
   }
   if (m[4] && !book) book = m[4].trim();
-  const key = fold2(m[1]).replace(/[\s.-]+/g, "");
-  const scope = VINAYA_SCOPES[key] || COLLECTIONS[key] || (m[1].trim() === "Sn" ? "snp" : null);
-  if (!scope) throw new CitationError(`Unknown collection "${m[1].trim()}" in "${raw}". Use DN, MN, SN, AN, Dhp, Ud, Iti, Snp, Thag, Thig, Ja\u2026 or for the Vinaya the book: Pj, Pc, Mv, Cv, Pvr.`);
+  const name = m[1].trim().replace(/\.$/, "");
+  const key = fold2(name).replace(/[\s.-]+/g, "");
+  const scope = name === "Sn" ? "snp" : key === "ap" || key === "apadana" ? "ap" : VINAYA_SCOPES[key] || COLLECTIONS[key] || null;
+  if (!scope) {
+    const roman = name.match(/^(.*?)[\s.]+([ivx]+)$/i);
+    if (roman && ROMAN[roman[2].toLowerCase()] && m[3] === void 0 && (VINAYA_SCOPES[fold2(roman[1]).replace(/[\s.-]+/g, "")] || COLLECTIONS[fold2(roman[1]).replace(/[\s.-]+/g, "")])) {
+      throw new CitationError(`"${raw}": edition volumes are written in arabic numerals, volume.page. Write it as ${head[1]} ${roman[1].trim()} ${ROMAN[roman[2].toLowerCase()]}.${m[2]}.`);
+    }
+    throw new CitationError(`Unknown collection "${m[1].trim()}" in "${raw}". Use DN, MN, SN, AN, Dhp, Ud, Iti, Snp, Thag, Thig, Ja\u2026 or for the Vinaya the book: Pj, Pc, Mv, Cv, Pvr.`);
+  }
   const volume = m[3] === void 0 ? 0 : Number(m[2]);
   const page = Number(m[3] === void 0 ? m[2] : m[3]);
   return { kind: "edition", edition, scope, volume, page, ...book ? { book } : {}, raw };
