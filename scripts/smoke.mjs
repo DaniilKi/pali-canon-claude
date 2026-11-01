@@ -92,6 +92,7 @@ try {
     await call('lookup_pali', { word: 'sati', limit: 2 }, (d) => { assert.ok(d.entries.length); assert.doesNotMatch(d.detail_excerpt, /Did you spot a mistake/); });
     await call('search_access_to_insight', { query: 'metta', limit: 3 }, (d) => assert.ok(d.results.length));
     await call('get_access_to_insight_text', { path: '/tipitaka/kn/snp/snp.1.08.than.html', limit: 2000 }, (d) => assert.match(d.text, /good|kindness/i));
+    if (tools.some((t) => t.name === 'find_talks')) await call('find_talks', { passage: 'AN 3.65', limit: 3 }, (d) => { assert.ok(d.results.length); assert.ok(d.results.every((r) => r.url.startsWith('https://www.dhammatalks.org/audio/'))); });
   }
   console.log(`MCP smoke passed: ${tools.length} tools, ${checks} checks. Live=${live}`);
 } finally { await client.close(); }

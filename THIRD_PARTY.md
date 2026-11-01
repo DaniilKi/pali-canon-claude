@@ -15,6 +15,7 @@ The standard citation IDs (for example `sn46.131-140`, `pli-tv-bu-vb-pj1`) follo
 Translations are fetched live from [dhammatalks.org](https://www.dhammatalks.org/suttas/). They are licensed [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) and attributed to Ṭhānissaro Bhikkhu. The site defines "commercial" to include any sale. The bundled translation index stores page titles and URLs only.
 
 The `vinaya_rule` tool links to sections of Ṭhānissaro Bhikkhu's *The Buddhist Monastic Code, Volume I* (third edition, revised 2025, [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)) on [dhammatalks.org](https://www.dhammatalks.org/vinaya/bmc/Section0000.html). `server/data/bmc.json` stores only rule numbers, section URLs and chapter headings taken from the book's table of contents; the attribution and licence are returned with every result.
+`find_talks` searches the site's own search page for Ṭhānissaro Bhikkhu's Dhamma talks (same CC BY-NC 4.0 licence) and returns talk titles, dates and links only. No talk text, transcript or search snippet is fetched into results or bundled. Requests are cached in memory and spaced at least one second apart, and `/Archive/MachineTranscripts/`, which the site's robots.txt disallows, is never requested.
 
 ## Access to Insight
 
