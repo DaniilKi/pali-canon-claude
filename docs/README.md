@@ -2,6 +2,8 @@
 
 Start with the [project README](../README.md). Then:
 
+These pages are also published as a website at https://daniilki.github.io/pali-canon-claude/, built by `scripts/build-site.mjs` and the "Docs site" workflow (`.github/workflows/pages.yml`). The site goes live only after a maintainer turns on GitHub Pages once: repository Settings → Pages → Build and deployment → Source: **GitHub Actions**. Until then the address returns 404 and the first workflow run fails at the Pages setup step.
+
 **For everyone**
 
 - [Coverage](coverage.md): exactly what is included, by collection

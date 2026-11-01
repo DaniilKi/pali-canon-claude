@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join, posix, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as canon from '../src/canon.mjs';
-import { buildIndex, toCsv, notice, writeExport, CSV_COLUMNS } from '../scripts/export-index.mjs';
+import { buildIndex, toCsv, notice, writeExport, CSV_COLUMNS, LICENSE_LABELS } from '../scripts/export-index.mjs';
 import { buildSite, rewriteTarget, rewriteLinks, sitePage, titleOf, REPO } from '../scripts/build-site.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -95,6 +95,36 @@ test('CSV round-trips: header, one row per text, quoting of commas and quotes', 
   assert.equal(parseCsv(tricky)[1][col('title')], 'a, "b"');
 });
 
+test('every translation link has a known licence code with a readable name, in JSON and CSV', () => {
+  const seen = new Set();
+  for (const t of index.texts) for (const e of t.english) {
+    assert.ok(e.license && LICENSE_LABELS[e.license], `${t.id} ${e.url}: ${e.license}`);
+    assert.equal(e.license_name, LICENSE_LABELS[e.license].name);
+    seen.add(e.license);
+  }
+  assert.deepEqual([...seen].sort(), Object.keys(LICENSE_LABELS).sort(), 'no unused or missing labels');
+  assert.deepEqual(index.license_labels, LICENSE_LABELS);
+  const rows = parseCsv(toCsv(index));
+  const col = (name) => rows[0].indexOf(name);
+  for (const r of rows.slice(1)) {
+    const n = Number(r[col('english_count')]);
+    for (const c of ['english_urls', 'english_translators', 'english_references', 'english_translation_ids', 'english_licenses']) {
+      assert.equal(n ? r[col(c)].split(' | ').length : 0, n ? n : 0, `${r[0]} ${c}`);
+      if (!n) assert.equal(r[col(c)], '', `${r[0]} ${c}`);
+    }
+  }
+  const dn1 = rows.find((r) => r[0] === 'dn1');
+  assert.deepEqual(dn1[col('english_licenses')].split(' | '), [LICENSE_LABELS['CC BY-NC 4.0'].name, LICENSE_LABELS.BPS.name]);
+  assert.equal(dn1[col('english_translation_ids')].split(' | ')[0], 'dt:DN/DN01');
+  const md = read('docs/export.md');
+  const note = notice(index);
+  for (const [code, l] of Object.entries(LICENSE_LABELS)) {
+    assert.ok(md.includes(`\`${code}\``) && md.includes(l.name), `docs/export.md explains ${code}`);
+    assert.ok(note.includes(`\`${code}\``) && note.includes(l.name), `licence notice explains ${code}`);
+  }
+  assert.match(index.license, /english_licenses/);
+});
+
 test('writeExport writes JSON, CSV and the licence notice', () => {
   const dir = mkdtempSync(join(tmpdir(), 'pcc-export-'));
   try {
@@ -156,6 +186,13 @@ test('examples page uses real tool parameters', () => {
     if (md.includes(`\`${param}:`)) assert.match(server, new RegExp(`\\b${param}:`), param);
   }
   assert.doesNotMatch(md, /`variants:/);
+});
+
+test('export page links the site files by absolute URL (they are not in the repository)', () => {
+  const md = read('docs/export.md');
+  assert.doesNotMatch(md, /\]\(export\//);
+  assert.match(md, /\]\(https:\/\/daniilki\.github\.io\/pali-canon-claude\/export\/citation-index\.csv\)/);
+  assert.match(read('docs/README.md'), /Source: \*\*GitHub Actions\*\*/);
 });
 
 test('export page states the real text count and fields', () => {

@@ -1,6 +1,8 @@
 name: Docs site
 # Builds the documentation site from docs/, llms.txt and the citation index export, and deploys it to GitHub Pages.
 # scripts/build-site.mjs prepares the source (no dependencies); GitHub's own Jekyll renders it.
+# One-time setup by a maintainer (GITHUB_TOKEN cannot do it): Settings -> Pages -> Source: GitHub Actions.
+# Until then configure-pages fails. Site: https://daniilki.github.io/pali-canon-claude/
 on:
   push:
     branches: [main]
