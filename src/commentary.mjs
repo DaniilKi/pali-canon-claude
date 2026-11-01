@@ -23,7 +23,25 @@ export const LABEL = 'Commentary (Aṭṭhakathā), not the canon: the tradition
 const EVIDENCE = {
   'paragraph+lemma': 'VRI paragraph number, confirmed by the root-text words the commentary quotes',
   paragraph: 'VRI paragraph number (no distinctive quotation contradicts it)',
+  'paragraph+verse': 'VRI paragraph number, confirmed by the root verse the commentary quotes in full after it',
+  'paragraph+heading': 'VRI paragraph number, confirmed by the commentary heading that names this text',
 };
+
+const PARA = /^(\d+)(?:\s*[-–]\s*(\d+))?$/;
+/**
+ * A VRI paragraph number ("12", "105-106", "105–106", "105-6") as [first, last], or null. There is no
+ * paragraph 0 (n="0" marks book front matter). Same rule as para_range() in scripts/canon/build_commentary.py;
+ * scripts/audit.mjs uses this one.
+ */
+export function paraRange(n) {
+  const m = String(n ?? '').trim().match(PARA);
+  if (!m) return null;
+  const a = Number(m[1]);
+  let tail = m[2] ?? m[1];
+  if (tail.length < m[1].length) tail = m[1].slice(0, m[1].length - tail.length) + tail; // "105-6" is 105-106
+  const b = Number(tail);
+  return b >= a && a > 0 ? [a, b] : null;
+}
 
 let data = null;
 
