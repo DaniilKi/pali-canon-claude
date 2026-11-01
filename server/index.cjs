@@ -18,9 +18,9 @@ var __export = (target, all) => {
 };
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+    for (let key2 of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key2) && key2 !== except)
+        __defProp(to, key2, { get: () => from[key2], enumerable: !(desc = __getOwnPropDesc(from, key2)) || desc.enumerable });
   }
   return to;
 };
@@ -81,10 +81,10 @@ var require_code = __commonJS({
       }
       get names() {
         var _a;
-        return (_a = this._names) !== null && _a !== void 0 ? _a : this._names = this._items.reduce((names, c) => {
+        return (_a = this._names) !== null && _a !== void 0 ? _a : this._names = this._items.reduce((names2, c) => {
           if (c instanceof Name)
-            names[c.str] = (names[c.str] || 0) + 1;
-          return names;
+            names2[c.str] = (names2[c.str] || 0) + 1;
+          return names2;
         }, {});
       }
     };
@@ -169,15 +169,15 @@ var require_code = __commonJS({
       return JSON.stringify(x).replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029");
     }
     exports2.safeStringify = safeStringify;
-    function getProperty(key) {
-      return typeof key == "string" && exports2.IDENTIFIER.test(key) ? new _Code(`.${key}`) : _`[${key}]`;
+    function getProperty(key2) {
+      return typeof key2 == "string" && exports2.IDENTIFIER.test(key2) ? new _Code(`.${key2}`) : _`[${key2}]`;
     }
     exports2.getProperty = getProperty;
-    function getEsmExportName(key) {
-      if (typeof key == "string" && exports2.IDENTIFIER.test(key)) {
-        return new _Code(`${key}`);
+    function getEsmExportName(key2) {
+      if (typeof key2 == "string" && exports2.IDENTIFIER.test(key2)) {
+        return new _Code(`${key2}`);
       }
-      throw new Error(`CodeGen: invalid export name: ${key}, use explicit $id name mapping`);
+      throw new Error(`CodeGen: invalid export name: ${key2}, use explicit $id name mapping`);
     }
     exports2.getEsmExportName = getEsmExportName;
     function regexpCode(rx) {
@@ -410,11 +410,11 @@ var require_codegen = __commonJS({
         const rhs = this.rhs === void 0 ? "" : ` = ${this.rhs}`;
         return `${varKind} ${this.name}${rhs};` + _n;
       }
-      optimizeNames(names, constants) {
-        if (!names[this.name.str])
+      optimizeNames(names2, constants) {
+        if (!names2[this.name.str])
           return;
         if (this.rhs)
-          this.rhs = optimizeExpr(this.rhs, names, constants);
+          this.rhs = optimizeExpr(this.rhs, names2, constants);
         return this;
       }
       get names() {
@@ -431,15 +431,15 @@ var require_codegen = __commonJS({
       render({ _n }) {
         return `${this.lhs} = ${this.rhs};` + _n;
       }
-      optimizeNames(names, constants) {
-        if (this.lhs instanceof code_1.Name && !names[this.lhs.str] && !this.sideEffects)
+      optimizeNames(names2, constants) {
+        if (this.lhs instanceof code_1.Name && !names2[this.lhs.str] && !this.sideEffects)
           return;
-        this.rhs = optimizeExpr(this.rhs, names, constants);
+        this.rhs = optimizeExpr(this.rhs, names2, constants);
         return this;
       }
       get names() {
-        const names = this.lhs instanceof code_1.Name ? {} : { ...this.lhs.names };
-        return addExprNames(names, this.rhs);
+        const names2 = this.lhs instanceof code_1.Name ? {} : { ...this.lhs.names };
+        return addExprNames(names2, this.rhs);
       }
     };
     var AssignOp = class extends Assign {
@@ -495,8 +495,8 @@ var require_codegen = __commonJS({
       optimizeNodes() {
         return `${this.code}` ? this : void 0;
       }
-      optimizeNames(names, constants) {
-        this.code = optimizeExpr(this.code, names, constants);
+      optimizeNames(names2, constants) {
+        this.code = optimizeExpr(this.code, names2, constants);
         return this;
       }
       get names() {
@@ -525,20 +525,20 @@ var require_codegen = __commonJS({
         }
         return nodes.length > 0 ? this : void 0;
       }
-      optimizeNames(names, constants) {
+      optimizeNames(names2, constants) {
         const { nodes } = this;
         let i = nodes.length;
         while (i--) {
           const n = nodes[i];
-          if (n.optimizeNames(names, constants))
+          if (n.optimizeNames(names2, constants))
             continue;
-          subtractNames(names, n.names);
+          subtractNames(names2, n.names);
           nodes.splice(i, 1);
         }
         return nodes.length > 0 ? this : void 0;
       }
       get names() {
-        return this.nodes.reduce((names, n) => addNames(names, n.names), {});
+        return this.nodes.reduce((names2, n) => addNames(names2, n.names), {});
       }
     };
     var BlockNode = class extends ParentNode {
@@ -583,20 +583,20 @@ var require_codegen = __commonJS({
           return void 0;
         return this;
       }
-      optimizeNames(names, constants) {
+      optimizeNames(names2, constants) {
         var _a;
-        this.else = (_a = this.else) === null || _a === void 0 ? void 0 : _a.optimizeNames(names, constants);
-        if (!(super.optimizeNames(names, constants) || this.else))
+        this.else = (_a = this.else) === null || _a === void 0 ? void 0 : _a.optimizeNames(names2, constants);
+        if (!(super.optimizeNames(names2, constants) || this.else))
           return;
-        this.condition = optimizeExpr(this.condition, names, constants);
+        this.condition = optimizeExpr(this.condition, names2, constants);
         return this;
       }
       get names() {
-        const names = super.names;
-        addExprNames(names, this.condition);
+        const names2 = super.names;
+        addExprNames(names2, this.condition);
         if (this.else)
-          addNames(names, this.else.names);
-        return names;
+          addNames(names2, this.else.names);
+        return names2;
       }
     };
     If.kind = "if";
@@ -611,10 +611,10 @@ var require_codegen = __commonJS({
       render(opts) {
         return `for(${this.iteration})` + super.render(opts);
       }
-      optimizeNames(names, constants) {
-        if (!super.optimizeNames(names, constants))
+      optimizeNames(names2, constants) {
+        if (!super.optimizeNames(names2, constants))
           return;
-        this.iteration = optimizeExpr(this.iteration, names, constants);
+        this.iteration = optimizeExpr(this.iteration, names2, constants);
         return this;
       }
       get names() {
@@ -635,8 +635,8 @@ var require_codegen = __commonJS({
         return `for(${varKind} ${name}=${from}; ${name}<${to}; ${name}++)` + super.render(opts);
       }
       get names() {
-        const names = addExprNames(super.names, this.from);
-        return addExprNames(names, this.to);
+        const names2 = addExprNames(super.names, this.from);
+        return addExprNames(names2, this.to);
       }
     };
     var ForIter = class extends For {
@@ -650,10 +650,10 @@ var require_codegen = __commonJS({
       render(opts) {
         return `for(${this.varKind} ${this.name} ${this.loop} ${this.iterable})` + super.render(opts);
       }
-      optimizeNames(names, constants) {
-        if (!super.optimizeNames(names, constants))
+      optimizeNames(names2, constants) {
+        if (!super.optimizeNames(names2, constants))
           return;
-        this.iterable = optimizeExpr(this.iterable, names, constants);
+        this.iterable = optimizeExpr(this.iterable, names2, constants);
         return this;
       }
       get names() {
@@ -695,20 +695,20 @@ var require_codegen = __commonJS({
         (_b = this.finally) === null || _b === void 0 ? void 0 : _b.optimizeNodes();
         return this;
       }
-      optimizeNames(names, constants) {
+      optimizeNames(names2, constants) {
         var _a, _b;
-        super.optimizeNames(names, constants);
-        (_a = this.catch) === null || _a === void 0 ? void 0 : _a.optimizeNames(names, constants);
-        (_b = this.finally) === null || _b === void 0 ? void 0 : _b.optimizeNames(names, constants);
+        super.optimizeNames(names2, constants);
+        (_a = this.catch) === null || _a === void 0 ? void 0 : _a.optimizeNames(names2, constants);
+        (_b = this.finally) === null || _b === void 0 ? void 0 : _b.optimizeNames(names2, constants);
         return this;
       }
       get names() {
-        const names = super.names;
+        const names2 = super.names;
         if (this.catch)
-          addNames(names, this.catch.names);
+          addNames(names2, this.catch.names);
         if (this.finally)
-          addNames(names, this.finally.names);
-        return names;
+          addNames(names2, this.finally.names);
+        return names2;
       }
     };
     var Catch = class extends BlockNode {
@@ -804,11 +804,11 @@ var require_codegen = __commonJS({
       // returns code for object literal for the passed argument list of key-value pairs
       object(...keyValues) {
         const code = ["{"];
-        for (const [key, value] of keyValues) {
+        for (const [key2, value] of keyValues) {
           if (code.length > 1)
             code.push(",");
-          code.push(key);
-          if (key !== value || this.opts.es5) {
+          code.push(key2);
+          if (key2 !== value || this.opts.es5) {
             code.push(":");
             (0, code_1.addCodeArg)(code, value);
           }
@@ -992,15 +992,15 @@ var require_codegen = __commonJS({
       }
     };
     exports2.CodeGen = CodeGen;
-    function addNames(names, from) {
+    function addNames(names2, from) {
       for (const n in from)
-        names[n] = (names[n] || 0) + (from[n] || 0);
-      return names;
+        names2[n] = (names2[n] || 0) + (from[n] || 0);
+      return names2;
     }
-    function addExprNames(names, from) {
-      return from instanceof code_1._CodeOrName ? addNames(names, from.names) : names;
+    function addExprNames(names2, from) {
+      return from instanceof code_1._CodeOrName ? addNames(names2, from.names) : names2;
     }
-    function optimizeExpr(expr, names, constants) {
+    function optimizeExpr(expr, names2, constants) {
       if (expr instanceof code_1.Name)
         return replaceName(expr);
       if (!canOptimize(expr))
@@ -1016,18 +1016,18 @@ var require_codegen = __commonJS({
       }, []));
       function replaceName(n) {
         const c = constants[n.str];
-        if (c === void 0 || names[n.str] !== 1)
+        if (c === void 0 || names2[n.str] !== 1)
           return n;
-        delete names[n.str];
+        delete names2[n.str];
         return c;
       }
       function canOptimize(e) {
-        return e instanceof code_1._Code && e._items.some((c) => c instanceof code_1.Name && names[c.str] === 1 && constants[c.str] !== void 0);
+        return e instanceof code_1._Code && e._items.some((c) => c instanceof code_1.Name && names2[c.str] === 1 && constants[c.str] !== void 0);
       }
     }
-    function subtractNames(names, from) {
+    function subtractNames(names2, from) {
       for (const n in from)
-        names[n] = (names[n] || 0) - (from[n] || 0);
+        names2[n] = (names2[n] || 0) - (from[n] || 0);
     }
     function not(x) {
       return typeof x == "boolean" || typeof x == "number" || x === null ? !x : (0, code_1._)`!${par(x)}`;
@@ -1083,17 +1083,17 @@ var require_util = __commonJS({
       if (typeof schema === "boolean")
         return;
       const rules = self.RULES.keywords;
-      for (const key in schema) {
-        if (!rules[key])
-          checkStrictMode(it, `unknown keyword: "${key}"`);
+      for (const key2 in schema) {
+        if (!rules[key2])
+          checkStrictMode(it, `unknown keyword: "${key2}"`);
       }
     }
     exports2.checkUnknownRules = checkUnknownRules;
     function schemaHasRules(schema, rules) {
       if (typeof schema == "boolean")
         return !schema;
-      for (const key in schema)
-        if (rules[key])
+      for (const key2 in schema)
+        if (rules[key2])
           return true;
       return false;
     }
@@ -1101,8 +1101,8 @@ var require_util = __commonJS({
     function schemaHasRulesButRef(schema, RULES) {
       if (typeof schema == "boolean")
         return !schema;
-      for (const key in schema)
-        if (key !== "$ref" && RULES.all[key])
+      for (const key2 in schema)
+        if (key2 !== "$ref" && RULES.all[key2])
           return true;
       return false;
     }
@@ -1225,7 +1225,7 @@ var require_names = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
-    var names = {
+    var names2 = {
       // validation function arguments
       data: new codegen_1.Name("data"),
       // data passed to validation function
@@ -1254,7 +1254,7 @@ var require_names = __commonJS({
       jsonLen: new codegen_1.Name("jsonLen"),
       jsonPart: new codegen_1.Name("jsonPart")
     };
-    exports2.default = names;
+    exports2.default = names2;
   }
 });
 
@@ -1680,8 +1680,8 @@ var require_defaults = __commonJS({
     function assignDefaults(it, ty) {
       const { properties, items } = it.schema;
       if (ty === "object" && properties) {
-        for (const key in properties) {
-          assignDefault(it, key, properties[key].default);
+        for (const key2 in properties) {
+          assignDefault(it, key2, properties[key2].default);
         }
       } else if (ty === "array" && Array.isArray(items)) {
         items.forEach((sch, i) => assignDefault(it, i, sch.default));
@@ -2065,8 +2065,8 @@ var require_fast_deep_equal = __commonJS({
         for (i = length; i-- !== 0; )
           if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
         for (i = length; i-- !== 0; ) {
-          var key = keys[i];
-          if (!equal(a[key], b[key])) return false;
+          var key2 = keys[i];
+          if (!equal(a[key2], b[key2])) return false;
         }
         return true;
       }
@@ -2138,20 +2138,20 @@ var require_json_schema_traverse = __commonJS({
     function _traverse(opts, pre, post, schema, jsonPtr, rootSchema, parentJsonPtr, parentKeyword, parentSchema, keyIndex) {
       if (schema && typeof schema == "object" && !Array.isArray(schema)) {
         pre(schema, jsonPtr, rootSchema, parentJsonPtr, parentKeyword, parentSchema, keyIndex);
-        for (var key in schema) {
-          var sch = schema[key];
+        for (var key2 in schema) {
+          var sch = schema[key2];
           if (Array.isArray(sch)) {
-            if (key in traverse.arrayKeywords) {
+            if (key2 in traverse.arrayKeywords) {
               for (var i = 0; i < sch.length; i++)
-                _traverse(opts, pre, post, sch[i], jsonPtr + "/" + key + "/" + i, rootSchema, jsonPtr, key, schema, i);
+                _traverse(opts, pre, post, sch[i], jsonPtr + "/" + key2 + "/" + i, rootSchema, jsonPtr, key2, schema, i);
             }
-          } else if (key in traverse.propsKeywords) {
+          } else if (key2 in traverse.propsKeywords) {
             if (sch && typeof sch == "object") {
               for (var prop in sch)
-                _traverse(opts, pre, post, sch[prop], jsonPtr + "/" + key + "/" + escapeJsonPtr(prop), rootSchema, jsonPtr, key, schema, prop);
+                _traverse(opts, pre, post, sch[prop], jsonPtr + "/" + key2 + "/" + escapeJsonPtr(prop), rootSchema, jsonPtr, key2, schema, prop);
             }
-          } else if (key in traverse.keywords || opts.allKeys && !(key in traverse.skipKeywords)) {
-            _traverse(opts, pre, post, sch, jsonPtr + "/" + key, rootSchema, jsonPtr, key, schema);
+          } else if (key2 in traverse.keywords || opts.allKeys && !(key2 in traverse.skipKeywords)) {
+            _traverse(opts, pre, post, sch, jsonPtr + "/" + key2, rootSchema, jsonPtr, key2, schema);
           }
         }
         post(schema, jsonPtr, rootSchema, parentJsonPtr, parentKeyword, parentSchema, keyIndex);
@@ -2208,10 +2208,10 @@ var require_resolve = __commonJS({
       "$dynamicAnchor"
     ]);
     function hasRef(schema) {
-      for (const key in schema) {
-        if (REF_KEYWORDS.has(key))
+      for (const key2 in schema) {
+        if (REF_KEYWORDS.has(key2))
           return true;
-        const sch = schema[key];
+        const sch = schema[key2];
         if (Array.isArray(sch) && sch.some(hasRef))
           return true;
         if (typeof sch == "object" && hasRef(sch))
@@ -2221,14 +2221,14 @@ var require_resolve = __commonJS({
     }
     function countKeys(schema) {
       let count = 0;
-      for (const key in schema) {
-        if (key === "$ref")
+      for (const key2 in schema) {
+        if (key2 === "$ref")
           return Infinity;
         count++;
-        if (SIMPLE_INLINED.has(key))
+        if (SIMPLE_INLINED.has(key2))
           continue;
-        if (typeof schema[key] == "object") {
-          (0, util_1.eachItem)(schema[key], (sch) => count += countKeys(sch));
+        if (typeof schema[key2] == "object") {
+          (0, util_1.eachItem)(schema[key2], (sch) => count += countKeys(sch));
         }
         if (count === Infinity)
           return Infinity;
@@ -2417,8 +2417,8 @@ var require_validate = __commonJS({
     function schemaCxtHasRules({ schema, self }) {
       if (typeof schema == "boolean")
         return !schema;
-      for (const key in schema)
-        if (self.RULES.all[key])
+      for (const key2 in schema)
+        if (self.RULES.all[key2])
           return true;
       return false;
     }
@@ -4513,7 +4513,7 @@ var require_core = __commonJS({
         }
       }
       // Adds schema to the instance
-      addSchema(schema, key, _meta, _validateSchema = this.opts.validateSchema) {
+      addSchema(schema, key2, _meta, _validateSchema = this.opts.validateSchema) {
         if (Array.isArray(schema)) {
           for (const sch of schema)
             this.addSchema(sch, void 0, _meta, _validateSchema);
@@ -4527,15 +4527,15 @@ var require_core = __commonJS({
             throw new Error(`schema ${schemaId} must be string`);
           }
         }
-        key = (0, resolve_1.normalizeId)(key || id);
-        this._checkUnique(key);
-        this.schemas[key] = this._addSchema(schema, _meta, key, _validateSchema, true);
+        key2 = (0, resolve_1.normalizeId)(key2 || id);
+        this._checkUnique(key2);
+        this.schemas[key2] = this._addSchema(schema, _meta, key2, _validateSchema, true);
         return this;
       }
       // Add schema that will be used to validate other schemas
       // options in META_IGNORE_OPTIONS are alway set to false
-      addMetaSchema(schema, key, _validateSchema = this.opts.validateSchema) {
-        this.addSchema(schema, key, true, _validateSchema);
+      addMetaSchema(schema, key2, _validateSchema = this.opts.validateSchema) {
+        this.addSchema(schema, key2, true, _validateSchema);
         return this;
       }
       //  Validate schema against its meta-schema
@@ -4691,14 +4691,14 @@ var require_core = __commonJS({
           let keywords = metaSchema;
           for (const seg of segments2)
             keywords = keywords[seg];
-          for (const key in rules) {
-            const rule = rules[key];
+          for (const key2 in rules) {
+            const rule = rules[key2];
             if (typeof rule != "object")
               continue;
             const { $data } = rule.definition;
-            const schema = keywords[key];
+            const schema = keywords[key2];
             if ($data && schema)
-              keywords[key] = schemaOrData(schema);
+              keywords[key2] = schemaOrData(schema);
           }
         }
         return metaSchema;
@@ -4771,10 +4771,10 @@ var require_core = __commonJS({
     Ajv2.MissingRefError = ref_error_1.default;
     exports2.default = Ajv2;
     function checkOptions(checkOpts, options, msg, log = "error") {
-      for (const key in checkOpts) {
-        const opt = key;
+      for (const key2 in checkOpts) {
+        const opt = key2;
         if (opt in options)
-          this.logger[log](`${msg}: option ${key}. ${checkOpts[opt]}`);
+          this.logger[log](`${msg}: option ${key2}. ${checkOpts[opt]}`);
       }
     }
     function getSchEnv(keyRef) {
@@ -4788,8 +4788,8 @@ var require_core = __commonJS({
       if (Array.isArray(optsSchemas))
         this.addSchema(optsSchemas);
       else
-        for (const key in optsSchemas)
-          this.addSchema(optsSchemas[key], key);
+        for (const key2 in optsSchemas)
+          this.addSchema(optsSchemas[key2], key2);
     }
     function addInitialFormats() {
       for (const name in this.opts.formats) {
@@ -5837,11 +5837,11 @@ var require_dependencies = __commonJS({
     function splitDependencies({ schema }) {
       const propertyDeps = {};
       const schemaDeps = {};
-      for (const key in schema) {
-        if (key === "__proto__")
+      for (const key2 in schema) {
+        if (key2 === "__proto__")
           continue;
-        const deps = Array.isArray(schema[key]) ? propertyDeps : schemaDeps;
-        deps[key] = schema[key];
+        const deps = Array.isArray(schema[key2]) ? propertyDeps : schemaDeps;
+        deps[key2] = schema[key2];
       }
       return [propertyDeps, schemaDeps];
     }
@@ -5918,13 +5918,13 @@ var require_propertyNames = __commonJS({
         if ((0, util_1.alwaysValidSchema)(it, schema))
           return;
         const valid = gen.name("valid");
-        gen.forIn("key", data2, (key) => {
-          cxt.setParams({ propertyName: key });
+        gen.forIn("key", data2, (key2) => {
+          cxt.setParams({ propertyName: key2 });
           cxt.subschema({
             keyword: "propertyNames",
-            data: key,
+            data: key2,
             dataTypes: ["string"],
-            propertyName: key,
+            propertyName: key2,
             compositeRule: true
           }, valid);
           gen.if((0, codegen_1.not)(valid), () => {
@@ -5973,38 +5973,38 @@ var require_additionalProperties = __commonJS({
         checkAdditionalProperties();
         cxt.ok((0, codegen_1._)`${errsCount} === ${names_1.default.errors}`);
         function checkAdditionalProperties() {
-          gen.forIn("key", data2, (key) => {
+          gen.forIn("key", data2, (key2) => {
             if (!props.length && !patProps.length)
-              additionalPropertyCode(key);
+              additionalPropertyCode(key2);
             else
-              gen.if(isAdditional(key), () => additionalPropertyCode(key));
+              gen.if(isAdditional(key2), () => additionalPropertyCode(key2));
           });
         }
-        function isAdditional(key) {
+        function isAdditional(key2) {
           let definedProp;
           if (props.length > 8) {
             const propsSchema = (0, util_1.schemaRefOrVal)(it, parentSchema.properties, "properties");
-            definedProp = (0, code_1.isOwnProperty)(gen, propsSchema, key);
+            definedProp = (0, code_1.isOwnProperty)(gen, propsSchema, key2);
           } else if (props.length) {
-            definedProp = (0, codegen_1.or)(...props.map((p) => (0, codegen_1._)`${key} === ${p}`));
+            definedProp = (0, codegen_1.or)(...props.map((p) => (0, codegen_1._)`${key2} === ${p}`));
           } else {
             definedProp = codegen_1.nil;
           }
           if (patProps.length) {
-            definedProp = (0, codegen_1.or)(definedProp, ...patProps.map((p) => (0, codegen_1._)`${(0, code_1.usePattern)(cxt, p)}.test(${key})`));
+            definedProp = (0, codegen_1.or)(definedProp, ...patProps.map((p) => (0, codegen_1._)`${(0, code_1.usePattern)(cxt, p)}.test(${key2})`));
           }
           return (0, codegen_1.not)(definedProp);
         }
-        function deleteAdditional(key) {
-          gen.code((0, codegen_1._)`delete ${data2}[${key}]`);
+        function deleteAdditional(key2) {
+          gen.code((0, codegen_1._)`delete ${data2}[${key2}]`);
         }
-        function additionalPropertyCode(key) {
+        function additionalPropertyCode(key2) {
           if (opts.removeAdditional === "all" || opts.removeAdditional && schema === false) {
-            deleteAdditional(key);
+            deleteAdditional(key2);
             return;
           }
           if (schema === false) {
-            cxt.setParams({ additionalProperty: key });
+            cxt.setParams({ additionalProperty: key2 });
             cxt.error();
             if (!allErrors)
               gen.break();
@@ -6013,22 +6013,22 @@ var require_additionalProperties = __commonJS({
           if (typeof schema == "object" && !(0, util_1.alwaysValidSchema)(it, schema)) {
             const valid = gen.name("valid");
             if (opts.removeAdditional === "failing") {
-              applyAdditionalSchema(key, valid, false);
+              applyAdditionalSchema(key2, valid, false);
               gen.if((0, codegen_1.not)(valid), () => {
                 cxt.reset();
-                deleteAdditional(key);
+                deleteAdditional(key2);
               });
             } else {
-              applyAdditionalSchema(key, valid);
+              applyAdditionalSchema(key2, valid);
               if (!allErrors)
                 gen.if((0, codegen_1.not)(valid), () => gen.break());
             }
           }
         }
-        function applyAdditionalSchema(key, valid, errors) {
+        function applyAdditionalSchema(key2, valid, errors) {
           const subschema = {
             keyword: "additionalProperties",
-            dataProp: key,
+            dataProp: key2,
             dataPropType: util_1.Type.Str
           };
           if (errors === false) {
@@ -6153,19 +6153,19 @@ var require_patternProperties = __commonJS({
           }
         }
         function validateProperties(pat) {
-          gen.forIn("key", data2, (key) => {
-            gen.if((0, codegen_1._)`${(0, code_1.usePattern)(cxt, pat)}.test(${key})`, () => {
+          gen.forIn("key", data2, (key2) => {
+            gen.if((0, codegen_1._)`${(0, code_1.usePattern)(cxt, pat)}.test(${key2})`, () => {
               const alwaysValid = alwaysValidPatterns.includes(pat);
               if (!alwaysValid) {
                 cxt.subschema({
                   keyword: "patternProperties",
                   schemaProp: pat,
-                  dataProp: key,
+                  dataProp: key2,
                   dataPropType: util_2.Type.Str
                 }, valid);
               }
               if (it.opts.unevaluated && props !== true) {
-                gen.assign((0, codegen_1._)`${props}[${key}]`, true);
+                gen.assign((0, codegen_1._)`${props}[${key2}]`, true);
               } else if (!alwaysValid && !it.allErrors) {
                 gen.if((0, codegen_1.not)(valid), () => gen.break());
               }
@@ -7425,19 +7425,19 @@ function floatSafeRemainder(val, step) {
   const stepInt = Number.parseInt(step.toFixed(decCount).replace(".", ""));
   return valInt % stepInt / 10 ** decCount;
 }
-function defineLazy(object3, key, getter) {
+function defineLazy(object3, key2, getter) {
   const set = false;
-  Object.defineProperty(object3, key, {
+  Object.defineProperty(object3, key2, {
     get() {
       if (!set) {
         const value = getter();
-        object3[key] = value;
+        object3[key2] = value;
         return value;
       }
       throw new Error("cached value already set");
     },
     set(v) {
-      Object.defineProperty(object3, key, {
+      Object.defineProperty(object3, key2, {
         value: v
         // configurable: true,
       });
@@ -7456,11 +7456,11 @@ function assignProp(target, prop, value) {
 function getElementAtPath(obj, path) {
   if (!path)
     return obj;
-  return path.reduce((acc, key) => acc?.[key], obj);
+  return path.reduce((acc, key2) => acc?.[key2], obj);
 }
 function promiseAllObject(promisesObj) {
   const keys = Object.keys(promisesObj);
-  const promises = keys.map((key) => promisesObj[key]);
+  const promises = keys.map((key2) => promisesObj[key2]);
   return Promise.all(promises).then((results) => {
     const resolvedObj = {};
     for (let i = 0; i < keys.length; i++) {
@@ -7513,8 +7513,8 @@ function isPlainObject(o) {
 }
 function numKeys(data2) {
   let keyCount = 0;
-  for (const key in data2) {
-    if (Object.prototype.hasOwnProperty.call(data2, key)) {
+  for (const key2 in data2) {
+    if (Object.prototype.hasOwnProperty.call(data2, key2)) {
       keyCount++;
     }
   }
@@ -7650,13 +7650,13 @@ var BIGINT_FORMAT_RANGES = {
 function pick(schema, mask) {
   const newShape = {};
   const currDef = schema._zod.def;
-  for (const key in mask) {
-    if (!(key in currDef.shape)) {
-      throw new Error(`Unrecognized key: "${key}"`);
+  for (const key2 in mask) {
+    if (!(key2 in currDef.shape)) {
+      throw new Error(`Unrecognized key: "${key2}"`);
     }
-    if (!mask[key])
+    if (!mask[key2])
       continue;
-    newShape[key] = currDef.shape[key];
+    newShape[key2] = currDef.shape[key2];
   }
   return clone(schema, {
     ...schema._zod.def,
@@ -7667,13 +7667,13 @@ function pick(schema, mask) {
 function omit(schema, mask) {
   const newShape = { ...schema._zod.def.shape };
   const currDef = schema._zod.def;
-  for (const key in mask) {
-    if (!(key in currDef.shape)) {
-      throw new Error(`Unrecognized key: "${key}"`);
+  for (const key2 in mask) {
+    if (!(key2 in currDef.shape)) {
+      throw new Error(`Unrecognized key: "${key2}"`);
     }
-    if (!mask[key])
+    if (!mask[key2])
       continue;
-    delete newShape[key];
+    delete newShape[key2];
   }
   return clone(schema, {
     ...schema._zod.def,
@@ -7714,23 +7714,23 @@ function partial(Class2, schema, mask) {
   const oldShape = schema._zod.def.shape;
   const shape = { ...oldShape };
   if (mask) {
-    for (const key in mask) {
-      if (!(key in oldShape)) {
-        throw new Error(`Unrecognized key: "${key}"`);
+    for (const key2 in mask) {
+      if (!(key2 in oldShape)) {
+        throw new Error(`Unrecognized key: "${key2}"`);
       }
-      if (!mask[key])
+      if (!mask[key2])
         continue;
-      shape[key] = Class2 ? new Class2({
+      shape[key2] = Class2 ? new Class2({
         type: "optional",
-        innerType: oldShape[key]
-      }) : oldShape[key];
+        innerType: oldShape[key2]
+      }) : oldShape[key2];
     }
   } else {
-    for (const key in oldShape) {
-      shape[key] = Class2 ? new Class2({
+    for (const key2 in oldShape) {
+      shape[key2] = Class2 ? new Class2({
         type: "optional",
-        innerType: oldShape[key]
-      }) : oldShape[key];
+        innerType: oldShape[key2]
+      }) : oldShape[key2];
     }
   }
   return clone(schema, {
@@ -7743,22 +7743,22 @@ function required(Class2, schema, mask) {
   const oldShape = schema._zod.def.shape;
   const shape = { ...oldShape };
   if (mask) {
-    for (const key in mask) {
-      if (!(key in shape)) {
-        throw new Error(`Unrecognized key: "${key}"`);
+    for (const key2 in mask) {
+      if (!(key2 in shape)) {
+        throw new Error(`Unrecognized key: "${key2}"`);
       }
-      if (!mask[key])
+      if (!mask[key2])
         continue;
-      shape[key] = new Class2({
+      shape[key2] = new Class2({
         type: "nonoptional",
-        innerType: oldShape[key]
+        innerType: oldShape[key2]
       });
     }
   } else {
-    for (const key in oldShape) {
-      shape[key] = new Class2({
+    for (const key2 in oldShape) {
+      shape[key2] = new Class2({
         type: "nonoptional",
-        innerType: oldShape[key]
+        innerType: oldShape[key2]
       });
     }
   }
@@ -8956,28 +8956,28 @@ var $ZodArray = /* @__PURE__ */ $constructor("$ZodArray", (inst, def) => {
     return payload;
   };
 });
-function handleObjectResult(result, final, key) {
+function handleObjectResult(result, final, key2) {
   if (result.issues.length) {
-    final.issues.push(...prefixIssues(key, result.issues));
+    final.issues.push(...prefixIssues(key2, result.issues));
   }
-  final.value[key] = result.value;
+  final.value[key2] = result.value;
 }
-function handleOptionalObjectResult(result, final, key, input) {
+function handleOptionalObjectResult(result, final, key2, input) {
   if (result.issues.length) {
-    if (input[key] === void 0) {
-      if (key in input) {
-        final.value[key] = void 0;
+    if (input[key2] === void 0) {
+      if (key2 in input) {
+        final.value[key2] = void 0;
       } else {
-        final.value[key] = result.value;
+        final.value[key2] = result.value;
       }
     } else {
-      final.issues.push(...prefixIssues(key, result.issues));
+      final.issues.push(...prefixIssues(key2, result.issues));
     }
   } else if (result.value === void 0) {
-    if (key in input)
-      final.value[key] = void 0;
+    if (key2 in input)
+      final.value[key2] = void 0;
   } else {
-    final.value[key] = result.value;
+    final.value[key2] = result.value;
   }
 }
 var $ZodObject = /* @__PURE__ */ $constructor("$ZodObject", (inst, def) => {
@@ -9001,12 +9001,12 @@ var $ZodObject = /* @__PURE__ */ $constructor("$ZodObject", (inst, def) => {
   defineLazy(inst._zod, "propValues", () => {
     const shape = def.shape;
     const propValues = {};
-    for (const key in shape) {
-      const field = shape[key]._zod;
+    for (const key2 in shape) {
+      const field = shape[key2]._zod;
       if (field.values) {
-        propValues[key] ?? (propValues[key] = /* @__PURE__ */ new Set());
+        propValues[key2] ?? (propValues[key2] = /* @__PURE__ */ new Set());
         for (const v of field.values)
-          propValues[key].add(v);
+          propValues[key2].add(v);
       }
     }
     return propValues;
@@ -9014,22 +9014,22 @@ var $ZodObject = /* @__PURE__ */ $constructor("$ZodObject", (inst, def) => {
   const generateFastpass = (shape) => {
     const doc = new Doc(["shape", "payload", "ctx"]);
     const normalized = _normalized.value;
-    const parseStr = (key) => {
-      const k = esc(key);
+    const parseStr = (key2) => {
+      const k = esc(key2);
       return `shape[${k}]._zod.run({ value: input[${k}], issues: [] }, ctx)`;
     };
     doc.write(`const input = payload.value;`);
     const ids = /* @__PURE__ */ Object.create(null);
     let counter = 0;
-    for (const key of normalized.keys) {
-      ids[key] = `key_${counter++}`;
+    for (const key2 of normalized.keys) {
+      ids[key2] = `key_${counter++}`;
     }
     doc.write(`const newResult = {}`);
-    for (const key of normalized.keys) {
-      if (normalized.optionalKeys.has(key)) {
-        const id = ids[key];
-        doc.write(`const ${id} = ${parseStr(key)};`);
-        const k = esc(key);
+    for (const key2 of normalized.keys) {
+      if (normalized.optionalKeys.has(key2)) {
+        const id = ids[key2];
+        doc.write(`const ${id} = ${parseStr(key2)};`);
+        const k = esc(key2);
         doc.write(`
         if (${id}.issues.length) {
           if (input[${k}] === undefined) {
@@ -9051,14 +9051,14 @@ var $ZodObject = /* @__PURE__ */ $constructor("$ZodObject", (inst, def) => {
         }
         `);
       } else {
-        const id = ids[key];
-        doc.write(`const ${id} = ${parseStr(key)};`);
+        const id = ids[key2];
+        doc.write(`const ${id} = ${parseStr(key2)};`);
         doc.write(`
           if (${id}.issues.length) payload.issues = payload.issues.concat(${id}.issues.map(iss => ({
             ...iss,
-            path: iss.path ? [${esc(key)}, ...iss.path] : [${esc(key)}]
+            path: iss.path ? [${esc(key2)}, ...iss.path] : [${esc(key2)}]
           })));`);
-        doc.write(`newResult[${esc(key)}] = ${id}.value`);
+        doc.write(`newResult[${esc(key2)}] = ${id}.value`);
       }
     }
     doc.write(`payload.value = newResult;`);
@@ -9093,16 +9093,16 @@ var $ZodObject = /* @__PURE__ */ $constructor("$ZodObject", (inst, def) => {
     } else {
       payload.value = {};
       const shape = value.shape;
-      for (const key of value.keys) {
-        const el = shape[key];
-        const r = el._zod.run({ value: input[key], issues: [] }, ctx);
+      for (const key2 of value.keys) {
+        const el = shape[key2];
+        const r = el._zod.run({ value: input[key2], issues: [] }, ctx);
         const isOptional = el._zod.optin === "optional" && el._zod.optout === "optional";
         if (r instanceof Promise) {
-          proms.push(r.then((r2) => isOptional ? handleOptionalObjectResult(r2, payload, key, input) : handleObjectResult(r2, payload, key)));
+          proms.push(r.then((r2) => isOptional ? handleOptionalObjectResult(r2, payload, key2, input) : handleObjectResult(r2, payload, key2)));
         } else if (isOptional) {
-          handleOptionalObjectResult(r, payload, key, input);
+          handleOptionalObjectResult(r, payload, key2, input);
         } else {
-          handleObjectResult(r, payload, key);
+          handleObjectResult(r, payload, key2);
         }
       }
     }
@@ -9113,18 +9113,18 @@ var $ZodObject = /* @__PURE__ */ $constructor("$ZodObject", (inst, def) => {
     const keySet = value.keySet;
     const _catchall = catchall._zod;
     const t = _catchall.def.type;
-    for (const key of Object.keys(input)) {
-      if (keySet.has(key))
+    for (const key2 of Object.keys(input)) {
+      if (keySet.has(key2))
         continue;
       if (t === "never") {
-        unrecognized.push(key);
+        unrecognized.push(key2);
         continue;
       }
-      const r = _catchall.run({ value: input[key], issues: [] }, ctx);
+      const r = _catchall.run({ value: input[key2], issues: [] }, ctx);
       if (r instanceof Promise) {
-        proms.push(r.then((r2) => handleObjectResult(r2, payload, key)));
+        proms.push(r.then((r2) => handleObjectResult(r2, payload, key2)));
       } else {
-        handleObjectResult(r, payload, key);
+        handleObjectResult(r, payload, key2);
       }
     }
     if (unrecognized.length) {
@@ -9286,17 +9286,17 @@ function mergeValues(a, b) {
   }
   if (isPlainObject(a) && isPlainObject(b)) {
     const bKeys = Object.keys(b);
-    const sharedKeys = Object.keys(a).filter((key) => bKeys.indexOf(key) !== -1);
+    const sharedKeys = Object.keys(a).filter((key2) => bKeys.indexOf(key2) !== -1);
     const newObj = { ...a, ...b };
-    for (const key of sharedKeys) {
-      const sharedValue = mergeValues(a[key], b[key]);
+    for (const key2 of sharedKeys) {
+      const sharedValue = mergeValues(a[key2], b[key2]);
       if (!sharedValue.valid) {
         return {
           valid: false,
-          mergeErrorPath: [key, ...sharedValue.mergeErrorPath]
+          mergeErrorPath: [key2, ...sharedValue.mergeErrorPath]
         };
       }
-      newObj[key] = sharedValue.data;
+      newObj[key2] = sharedValue.data;
     }
     return { valid: true, data: newObj };
   }
@@ -9354,29 +9354,29 @@ var $ZodRecord = /* @__PURE__ */ $constructor("$ZodRecord", (inst, def) => {
     if (def.keyType._zod.values) {
       const values = def.keyType._zod.values;
       payload.value = {};
-      for (const key of values) {
-        if (typeof key === "string" || typeof key === "number" || typeof key === "symbol") {
-          const result = def.valueType._zod.run({ value: input[key], issues: [] }, ctx);
+      for (const key2 of values) {
+        if (typeof key2 === "string" || typeof key2 === "number" || typeof key2 === "symbol") {
+          const result = def.valueType._zod.run({ value: input[key2], issues: [] }, ctx);
           if (result instanceof Promise) {
             proms.push(result.then((result2) => {
               if (result2.issues.length) {
-                payload.issues.push(...prefixIssues(key, result2.issues));
+                payload.issues.push(...prefixIssues(key2, result2.issues));
               }
-              payload.value[key] = result2.value;
+              payload.value[key2] = result2.value;
             }));
           } else {
             if (result.issues.length) {
-              payload.issues.push(...prefixIssues(key, result.issues));
+              payload.issues.push(...prefixIssues(key2, result.issues));
             }
-            payload.value[key] = result.value;
+            payload.value[key2] = result.value;
           }
         }
       }
       let unrecognized;
-      for (const key in input) {
-        if (!values.has(key)) {
+      for (const key2 in input) {
+        if (!values.has(key2)) {
           unrecognized = unrecognized ?? [];
-          unrecognized.push(key);
+          unrecognized.push(key2);
         }
       }
       if (unrecognized && unrecognized.length > 0) {
@@ -9389,10 +9389,10 @@ var $ZodRecord = /* @__PURE__ */ $constructor("$ZodRecord", (inst, def) => {
       }
     } else {
       payload.value = {};
-      for (const key of Reflect.ownKeys(input)) {
-        if (key === "__proto__")
+      for (const key2 of Reflect.ownKeys(input)) {
+        if (key2 === "__proto__")
           continue;
-        const keyResult = def.keyType._zod.run({ value: key, issues: [] }, ctx);
+        const keyResult = def.keyType._zod.run({ value: key2, issues: [] }, ctx);
         if (keyResult instanceof Promise) {
           throw new Error("Async schemas not supported in object keys currently");
         }
@@ -9401,24 +9401,24 @@ var $ZodRecord = /* @__PURE__ */ $constructor("$ZodRecord", (inst, def) => {
             origin: "record",
             code: "invalid_key",
             issues: keyResult.issues.map((iss) => finalizeIssue(iss, ctx, config())),
-            input: key,
-            path: [key],
+            input: key2,
+            path: [key2],
             inst
           });
           payload.value[keyResult.value] = keyResult.value;
           continue;
         }
-        const result = def.valueType._zod.run({ value: input[key], issues: [] }, ctx);
+        const result = def.valueType._zod.run({ value: input[key2], issues: [] }, ctx);
         if (result instanceof Promise) {
           proms.push(result.then((result2) => {
             if (result2.issues.length) {
-              payload.issues.push(...prefixIssues(key, result2.issues));
+              payload.issues.push(...prefixIssues(key2, result2.issues));
             }
             payload.value[keyResult.value] = result2.value;
           }));
         } else {
           if (result.issues.length) {
-            payload.issues.push(...prefixIssues(key, result.issues));
+            payload.issues.push(...prefixIssues(key2, result.issues));
           }
           payload.value[keyResult.value] = result.value;
         }
@@ -10473,15 +10473,15 @@ var JSONSchemaGenerator = class {
             json.type = "object";
             json.properties = {};
             const shape = def.shape;
-            for (const key in shape) {
-              json.properties[key] = this.process(shape[key], {
+            for (const key2 in shape) {
+              json.properties[key2] = this.process(shape[key2], {
                 ...params,
-                path: [...params.path, "properties", key]
+                path: [...params.path, "properties", key2]
               });
             }
             const allKeys = new Set(Object.keys(shape));
-            const requiredKeys = new Set([...allKeys].filter((key) => {
-              const v = def.shape[key]._zod;
+            const requiredKeys = new Set([...allKeys].filter((key2) => {
+              const v = def.shape[key2]._zod;
               if (this.io === "input") {
                 return v.optin === void 0;
               } else {
@@ -10815,8 +10815,8 @@ var JSONSchemaGenerator = class {
       if (defId)
         seen.defId = defId;
       const schema2 = seen.schema;
-      for (const key in schema2) {
-        delete schema2[key];
+      for (const key2 in schema2) {
+        delete schema2[key2];
       }
       schema2.$ref = ref;
     };
@@ -10943,8 +10943,8 @@ function toJSONSchema(input, _params) {
       defs
     };
     for (const entry of input._idmap.entries()) {
-      const [key, schema] = entry;
-      schemas[key] = gen2.emit(schema, {
+      const [key2, schema] = entry;
+      schemas[key2] = gen2.emit(schema, {
         ..._params,
         external
       });
@@ -10991,8 +10991,8 @@ function isTransforming(_schema, _ctx) {
       return isTransforming(def.element, ctx);
     }
     case "object": {
-      for (const key in def.shape) {
-        if (isTransforming(def.shape[key], ctx))
+      for (const key2 in def.shape) {
+        if (isTransforming(def.shape[key2], ctx))
           return true;
       }
       return false;
@@ -13537,9 +13537,9 @@ var util;
   };
   util2.objectKeys = typeof Object.keys === "function" ? (obj) => Object.keys(obj) : (object3) => {
     const keys = [];
-    for (const key in object3) {
-      if (Object.prototype.hasOwnProperty.call(object3, key)) {
-        keys.push(key);
+    for (const key2 in object3) {
+      if (Object.prototype.hasOwnProperty.call(object3, key2)) {
+        keys.push(key2);
       }
     }
     return keys;
@@ -13939,10 +13939,10 @@ var ParseStatus = class _ParseStatus {
   static async mergeObjectAsync(status, pairs) {
     const syncPairs = [];
     for (const pair of pairs) {
-      const key = await pair.key;
+      const key2 = await pair.key;
       const value = await pair.value;
       syncPairs.push({
-        key,
+        key: key2,
         value
       });
     }
@@ -13951,17 +13951,17 @@ var ParseStatus = class _ParseStatus {
   static mergeObjectSync(status, pairs) {
     const finalObject = {};
     for (const pair of pairs) {
-      const { key, value } = pair;
-      if (key.status === "aborted")
+      const { key: key2, value } = pair;
+      if (key2.status === "aborted")
         return INVALID;
       if (value.status === "aborted")
         return INVALID;
-      if (key.status === "dirty")
+      if (key2.status === "dirty")
         status.dirty();
       if (value.status === "dirty")
         status.dirty();
-      if (key.value !== "__proto__" && (typeof value.value !== "undefined" || pair.alwaysSet)) {
-        finalObject[key.value] = value.value;
+      if (key2.value !== "__proto__" && (typeof value.value !== "undefined" || pair.alwaysSet)) {
+        finalObject[key2.value] = value.value;
       }
     }
     return { status: status.value, value: finalObject };
@@ -13986,12 +13986,12 @@ var errorUtil;
 
 // node_modules/zod/v3/types.js
 var ParseInputLazyPath = class {
-  constructor(parent, value, path, key) {
+  constructor(parent, value, path, key2) {
     this._cachedPath = [];
     this.parent = parent;
     this.data = value;
     this._path = path;
-    this._key = key;
+    this._key = key2;
   }
   get path() {
     if (!this._cachedPath.length) {
@@ -15736,9 +15736,9 @@ ZodArray2.create = (schema, params) => {
 function deepPartialify(schema) {
   if (schema instanceof ZodObject2) {
     const newShape = {};
-    for (const key in schema.shape) {
-      const fieldSchema = schema.shape[key];
-      newShape[key] = ZodOptional2.create(deepPartialify(fieldSchema));
+    for (const key2 in schema.shape) {
+      const fieldSchema = schema.shape[key2];
+      newShape[key2] = ZodOptional2.create(deepPartialify(fieldSchema));
     }
     return new ZodObject2({
       ...schema._def,
@@ -15789,29 +15789,29 @@ var ZodObject2 = class _ZodObject extends ZodType2 {
     const { shape, keys: shapeKeys } = this._getCached();
     const extraKeys = [];
     if (!(this._def.catchall instanceof ZodNever2 && this._def.unknownKeys === "strip")) {
-      for (const key in ctx.data) {
-        if (!shapeKeys.includes(key)) {
-          extraKeys.push(key);
+      for (const key2 in ctx.data) {
+        if (!shapeKeys.includes(key2)) {
+          extraKeys.push(key2);
         }
       }
     }
     const pairs = [];
-    for (const key of shapeKeys) {
-      const keyValidator = shape[key];
-      const value = ctx.data[key];
+    for (const key2 of shapeKeys) {
+      const keyValidator = shape[key2];
+      const value = ctx.data[key2];
       pairs.push({
-        key: { status: "valid", value: key },
-        value: keyValidator._parse(new ParseInputLazyPath(ctx, value, ctx.path, key)),
-        alwaysSet: key in ctx.data
+        key: { status: "valid", value: key2 },
+        value: keyValidator._parse(new ParseInputLazyPath(ctx, value, ctx.path, key2)),
+        alwaysSet: key2 in ctx.data
       });
     }
     if (this._def.catchall instanceof ZodNever2) {
       const unknownKeys = this._def.unknownKeys;
       if (unknownKeys === "passthrough") {
-        for (const key of extraKeys) {
+        for (const key2 of extraKeys) {
           pairs.push({
-            key: { status: "valid", value: key },
-            value: { status: "valid", value: ctx.data[key] }
+            key: { status: "valid", value: key2 },
+            value: { status: "valid", value: ctx.data[key2] }
           });
         }
       } else if (unknownKeys === "strict") {
@@ -15828,15 +15828,15 @@ var ZodObject2 = class _ZodObject extends ZodType2 {
       }
     } else {
       const catchall = this._def.catchall;
-      for (const key of extraKeys) {
-        const value = ctx.data[key];
+      for (const key2 of extraKeys) {
+        const value = ctx.data[key2];
         pairs.push({
-          key: { status: "valid", value: key },
+          key: { status: "valid", value: key2 },
           value: catchall._parse(
-            new ParseInputLazyPath(ctx, value, ctx.path, key)
+            new ParseInputLazyPath(ctx, value, ctx.path, key2)
             //, ctx.child(key), value, getParsedType(value)
           ),
-          alwaysSet: key in ctx.data
+          alwaysSet: key2 in ctx.data
         });
       }
     }
@@ -15844,10 +15844,10 @@ var ZodObject2 = class _ZodObject extends ZodType2 {
       return Promise.resolve().then(async () => {
         const syncPairs = [];
         for (const pair of pairs) {
-          const key = await pair.key;
+          const key2 = await pair.key;
           const value = await pair.value;
           syncPairs.push({
-            key,
+            key: key2,
             value,
             alwaysSet: pair.alwaysSet
           });
@@ -15972,8 +15972,8 @@ var ZodObject2 = class _ZodObject extends ZodType2 {
   //   }) as any;
   //   return merged;
   // }
-  setKey(key, schema) {
-    return this.augment({ [key]: schema });
+  setKey(key2, schema) {
+    return this.augment({ [key2]: schema });
   }
   // merge<Incoming extends AnyZodObject>(
   //   merging: Incoming
@@ -16004,9 +16004,9 @@ var ZodObject2 = class _ZodObject extends ZodType2 {
   }
   pick(mask) {
     const shape = {};
-    for (const key of util.objectKeys(mask)) {
-      if (mask[key] && this.shape[key]) {
-        shape[key] = this.shape[key];
+    for (const key2 of util.objectKeys(mask)) {
+      if (mask[key2] && this.shape[key2]) {
+        shape[key2] = this.shape[key2];
       }
     }
     return new _ZodObject({
@@ -16016,9 +16016,9 @@ var ZodObject2 = class _ZodObject extends ZodType2 {
   }
   omit(mask) {
     const shape = {};
-    for (const key of util.objectKeys(this.shape)) {
-      if (!mask[key]) {
-        shape[key] = this.shape[key];
+    for (const key2 of util.objectKeys(this.shape)) {
+      if (!mask[key2]) {
+        shape[key2] = this.shape[key2];
       }
     }
     return new _ZodObject({
@@ -16034,12 +16034,12 @@ var ZodObject2 = class _ZodObject extends ZodType2 {
   }
   partial(mask) {
     const newShape = {};
-    for (const key of util.objectKeys(this.shape)) {
-      const fieldSchema = this.shape[key];
-      if (mask && !mask[key]) {
-        newShape[key] = fieldSchema;
+    for (const key2 of util.objectKeys(this.shape)) {
+      const fieldSchema = this.shape[key2];
+      if (mask && !mask[key2]) {
+        newShape[key2] = fieldSchema;
       } else {
-        newShape[key] = fieldSchema.optional();
+        newShape[key2] = fieldSchema.optional();
       }
     }
     return new _ZodObject({
@@ -16049,16 +16049,16 @@ var ZodObject2 = class _ZodObject extends ZodType2 {
   }
   required(mask) {
     const newShape = {};
-    for (const key of util.objectKeys(this.shape)) {
-      if (mask && !mask[key]) {
-        newShape[key] = this.shape[key];
+    for (const key2 of util.objectKeys(this.shape)) {
+      if (mask && !mask[key2]) {
+        newShape[key2] = this.shape[key2];
       } else {
-        const fieldSchema = this.shape[key];
+        const fieldSchema = this.shape[key2];
         let newField = fieldSchema;
         while (newField instanceof ZodOptional2) {
           newField = newField._def.innerType;
         }
-        newShape[key] = newField;
+        newShape[key2] = newField;
       }
     }
     return new _ZodObject({
@@ -16302,14 +16302,14 @@ function mergeValues2(a, b) {
     return { valid: true, data: a };
   } else if (aType === ZodParsedType.object && bType === ZodParsedType.object) {
     const bKeys = util.objectKeys(b);
-    const sharedKeys = util.objectKeys(a).filter((key) => bKeys.indexOf(key) !== -1);
+    const sharedKeys = util.objectKeys(a).filter((key2) => bKeys.indexOf(key2) !== -1);
     const newObj = { ...a, ...b };
-    for (const key of sharedKeys) {
-      const sharedValue = mergeValues2(a[key], b[key]);
+    for (const key2 of sharedKeys) {
+      const sharedValue = mergeValues2(a[key2], b[key2]);
       if (!sharedValue.valid) {
         return { valid: false };
       }
-      newObj[key] = sharedValue.data;
+      newObj[key2] = sharedValue.data;
     }
     return { valid: true, data: newObj };
   } else if (aType === ZodParsedType.array && bType === ZodParsedType.array) {
@@ -16473,11 +16473,11 @@ var ZodRecord2 = class _ZodRecord extends ZodType2 {
     const pairs = [];
     const keyType = this._def.keyType;
     const valueType = this._def.valueType;
-    for (const key in ctx.data) {
+    for (const key2 in ctx.data) {
       pairs.push({
-        key: keyType._parse(new ParseInputLazyPath(ctx, key, ctx.path, key)),
-        value: valueType._parse(new ParseInputLazyPath(ctx, ctx.data[key], ctx.path, key)),
-        alwaysSet: key in ctx.data
+        key: keyType._parse(new ParseInputLazyPath(ctx, key2, ctx.path, key2)),
+        value: valueType._parse(new ParseInputLazyPath(ctx, ctx.data[key2], ctx.path, key2)),
+        alwaysSet: key2 in ctx.data
       });
     }
     if (ctx.common.async) {
@@ -16525,9 +16525,9 @@ var ZodMap = class extends ZodType2 {
     }
     const keyType = this._def.keyType;
     const valueType = this._def.valueType;
-    const pairs = [...ctx.data.entries()].map(([key, value], index) => {
+    const pairs = [...ctx.data.entries()].map(([key2, value], index) => {
       return {
-        key: keyType._parse(new ParseInputLazyPath(ctx, key, ctx.path, [index, "key"])),
+        key: keyType._parse(new ParseInputLazyPath(ctx, key2, ctx.path, [index, "key"])),
         value: valueType._parse(new ParseInputLazyPath(ctx, value, ctx.path, [index, "value"]))
       };
     });
@@ -16535,30 +16535,30 @@ var ZodMap = class extends ZodType2 {
       const finalMap = /* @__PURE__ */ new Map();
       return Promise.resolve().then(async () => {
         for (const pair of pairs) {
-          const key = await pair.key;
+          const key2 = await pair.key;
           const value = await pair.value;
-          if (key.status === "aborted" || value.status === "aborted") {
+          if (key2.status === "aborted" || value.status === "aborted") {
             return INVALID;
           }
-          if (key.status === "dirty" || value.status === "dirty") {
+          if (key2.status === "dirty" || value.status === "dirty") {
             status.dirty();
           }
-          finalMap.set(key.value, value.value);
+          finalMap.set(key2.value, value.value);
         }
         return { status: status.value, value: finalMap };
       });
     } else {
       const finalMap = /* @__PURE__ */ new Map();
       for (const pair of pairs) {
-        const key = pair.key;
+        const key2 = pair.key;
         const value = pair.value;
-        if (key.status === "aborted" || value.status === "aborted") {
+        if (key2.status === "aborted" || value.status === "aborted") {
           return INVALID;
         }
-        if (key.status === "dirty" || value.status === "dirty") {
+        if (key2.status === "dirty" || value.status === "dirty") {
           status.dirty();
         }
-        finalMap.set(key.value, value.value);
+        finalMap.set(key2.value, value.value);
       }
       return { status: status.value, value: finalMap };
     }
@@ -17699,19 +17699,19 @@ var getRefs = (options) => {
 };
 
 // node_modules/zod-to-json-schema/dist/esm/errorMessages.js
-function addErrorMessage(res, key, errorMessage, refs) {
+function addErrorMessage(res, key2, errorMessage, refs) {
   if (!refs?.errorMessages)
     return;
   if (errorMessage) {
     res.errorMessage = {
       ...res.errorMessage,
-      [key]: errorMessage
+      [key2]: errorMessage
     };
   }
 }
-function setResponseValueAndErrors(res, key, value, errorMessage, refs) {
-  res[key] = value;
-  addErrorMessage(res, key, errorMessage, refs);
+function setResponseValueAndErrors(res, key2, value, errorMessage, refs) {
+  res[key2] = value;
+  addErrorMessage(res, key2, errorMessage, refs);
 }
 
 // node_modules/zod-to-json-schema/dist/esm/getRelativePath.js
@@ -18303,11 +18303,11 @@ function parseRecordDef(def, refs) {
     return {
       type: "object",
       required: def.keyType._def.values,
-      properties: def.keyType._def.values.reduce((acc, key) => ({
+      properties: def.keyType._def.values.reduce((acc, key2) => ({
         ...acc,
-        [key]: parseDef(def.valueType._def, {
+        [key2]: parseDef(def.valueType._def, {
           ...refs,
-          currentPath: [...refs.currentPath, "properties", key]
+          currentPath: [...refs.currentPath, "properties", key2]
         }) ?? parseAnyDef(refs)
       }), {}),
       additionalProperties: refs.rejectedAdditionalProperties
@@ -18374,10 +18374,10 @@ function parseMapDef(def, refs) {
 // node_modules/zod-to-json-schema/dist/esm/parsers/nativeEnum.js
 function parseNativeEnumDef(def) {
   const object3 = def.values;
-  const actualKeys = Object.keys(def.values).filter((key) => {
-    return typeof object3[object3[key]] !== "number";
+  const actualKeys = Object.keys(def.values).filter((key2) => {
+    return typeof object3[object3[key2]] !== "number";
   });
-  const actualValues = actualKeys.map((key) => object3[key]);
+  const actualValues = actualKeys.map((key2) => object3[key2]);
   const parsedTypes = Array.from(new Set(actualValues.map((values) => typeof values)));
   return {
     type: parsedTypes.length === 1 ? parsedTypes[0] === "string" ? "string" : "number" : ["string", "number"],
@@ -19931,8 +19931,8 @@ function isPlainObject2(value) {
 }
 function mergeCapabilities(base, additional) {
   const result = { ...base };
-  for (const key in additional) {
-    const k = key;
+  for (const key2 in additional) {
+    const k = key2;
     const addValue = additional[k];
     if (addValue === void 0)
       continue;
@@ -20736,12 +20736,12 @@ function toolInputElementCount(value, max) {
           stack.push(child);
       }
     } else {
-      for (const key in node) {
-        if (!Object.prototype.hasOwnProperty.call(node, key))
+      for (const key2 in node) {
+        if (!Object.prototype.hasOwnProperty.call(node, key2))
           continue;
         if (++count > max)
           return count;
-        const child = node[key];
+        const child = node[key2];
         if (child !== null && typeof child === "object")
           stack.push(child);
       }
@@ -21801,13 +21801,13 @@ function parseCitation(input) {
   if (ati && /^(dn|mn)\./i.test(text)) return { kind: "id", collection: ati[1].toLowerCase(), path: [Number(ati[2])], end: null, raw };
   const pts = text.match(/^([A-Za-zāīūṭḍṇḷñṅṃ]+(?: I{1,2})?)(?:\.\s*|\s+)([IVXivx]+)(?:\.\s*|\s+)(\d+)$/);
   if (pts) {
-    const key2 = fold(pts[1]).replace(/\./g, "");
+    const key3 = fold(pts[1]).replace(/\./g, "");
     const romanVolume = ROMAN[pts[2].toLowerCase()] || null;
-    if (pts[1] === "Sn" || ["th", "thi", "thig", "thag", "dhp", "snp", "ud", "it", "iti", "khp", "kp"].includes(key2)) {
+    if (pts[1] === "Sn" || ["th", "thi", "thig", "thag", "dhp", "snp", "ud", "it", "iti", "khp", "kp"].includes(key3)) {
       throw new CitationError(`${pts[1]} is not cited by PTS volume and page. Cite it by number (e.g. Snp 1.8, Thag 1.1, Dhp 183, Ud 1.10, Iti 27).`);
     }
-    if (romanVolume && PTS_COLLECTIONS[key2]) {
-      return { kind: "pts", collection: PTS_COLLECTIONS[key2], volume: romanVolume, page: Number(pts[3]), raw };
+    if (romanVolume && PTS_COLLECTIONS[key3]) {
+      return { kind: "pts", collection: PTS_COLLECTIONS[key3], volume: romanVolume, page: Number(pts[3]), raw };
     }
   }
   const vin = fold(text).replace(/vinaya\s*/, "").match(/^(bu|bhikkhu|bi|bhikkhuni)?\s*([a-z]+)\s*(\d+(?:\s*[.:-]\s*\d+)*)$/);
@@ -21836,9 +21836,9 @@ function parseCitation(input) {
   if (!m) throw new CitationError(`Could not read "${raw}". Use forms like MN 10, SN 56.11, AN 3.65, Dhp 183, Snp 1.8, Thag 1.1, Pj 1 or M i 55.`);
   const name = m[1].trim();
   if (/\s[ivxIVX]+$/.test(name)) throw new CitationError(`"${raw}" looks like a PTS volume/page reference for a collection that is not cited that way. Cite it by number instead.`);
-  let key = fold(name).replace(/[\s.-]+/g, "");
-  key = key.replace(/(nikaya|nikayo)$/, (s) => s);
-  let collection = COLLECTIONS[key];
+  let key2 = fold(name).replace(/[\s.-]+/g, "");
+  key2 = key2.replace(/(nikaya|nikayo)$/, (s) => s);
+  let collection = COLLECTIONS[key2];
   if (name === "Sn" || name === "Sn.") collection = "snp";
   if (/^(sutta ?nipata|sn ?p)$/i.test(fold(name))) collection = "snp";
   if (/^(theri ?apadana|thi ?ap)$/.test(fold(name))) collection = "thi-ap";
@@ -22048,8 +22048,8 @@ function resolve(reference) {
     return { unit: hits[0], notes, alternatives: hits.slice(1, 4).map((u) => unitSummary(u)) };
   }
   if (c.kind === "url") {
-    const key = `${c.host}${c.path}`;
-    const id2 = d.urlIndex.get(key) || d.urlIndex.get(key.replace(/^accesstoinsight\.org/, "accesstoinsight.org"));
+    const key2 = `${c.host}${c.path}`;
+    const id2 = d.urlIndex.get(key2) || d.urlIndex.get(key2.replace(/^accesstoinsight\.org/, "accesstoinsight.org"));
     if (!id2) throw new CitationError("That page is not linked to a canon text in the bundled index. Give the sutta citation instead.");
     notes.push(`Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id2}.`);
     return { unit: d.byId.get(id2), notes, alternatives: [] };
@@ -22229,32 +22229,32 @@ function search(query, { collection, limit = 10, offset = 0 } = {}) {
 }
 function browse(node = "canon", { offset = 0, limit = 60 } = {}) {
   const d = load();
-  const key = fold2(node).replace(/\s+/g, "");
+  const key2 = fold2(node).replace(/\s+/g, "");
   const units = d.canon.units.filter((u) => !u.approximate);
   const page = (items) => ({ total: items.length, offset, limit, next_offset: offset + limit < items.length ? offset + limit : null, items: items.slice(offset, offset + limit) });
-  if (["canon", "tipitaka", "all", ""].includes(key)) {
+  if (["canon", "tipitaka", "all", ""].includes(key2)) {
     return { node: "canon", ...page(COLLECTION_ORDER.map((c) => ({ id: c, name: COLLECTION_NAMES[c], pitaka: PITAKA[c] || "sutta", texts: units.filter((u) => u.collection === c && u.kind !== "range").length }))) };
   }
-  if (["sutta", "vinaya", "abhidhamma"].includes(key)) {
-    const cs = COLLECTION_ORDER.filter((c) => (PITAKA[c] || "sutta") === key);
-    return { node: key, ...page(cs.map((c) => ({ id: c, name: COLLECTION_NAMES[c] }))) };
+  if (["sutta", "vinaya", "abhidhamma"].includes(key2)) {
+    const cs = COLLECTION_ORDER.filter((c) => (PITAKA[c] || "sutta") === key2);
+    return { node: key2, ...page(cs.map((c) => ({ id: c, name: COLLECTION_NAMES[c] }))) };
   }
-  if (["sn", "an", "vinaya"].includes(key)) {
+  if (["sn", "an", "vinaya"].includes(key2)) {
     const sections = /* @__PURE__ */ new Map();
-    for (const u of units.filter((x) => x.collection === key && x.kind !== "range")) {
+    for (const u of units.filter((x) => x.collection === key2 && x.kind !== "range")) {
       const s = sectionOf(u.id);
       if (!sections.has(s)) sections.set(s, { id: s, first: u.acronym, title: u.title, texts: 0 });
       sections.get(s).texts += 1;
     }
-    return { node: key, name: COLLECTION_NAMES[key], note: "Open a section ID to list its texts.", ...page([...sections.values()]) };
+    return { node: key2, name: COLLECTION_NAMES[key2], note: "Open a section ID to list its texts.", ...page([...sections.values()]) };
   }
-  let members = units.filter((u) => (u.collection === key || sectionOf(u.id) === key) && u.kind !== "range");
-  if (!members.length) members = units.filter((u) => u.id.startsWith(`${key}.`) && u.kind !== "range");
-  if (!members.length) members = units.filter((u) => u.id.startsWith(key) && u.kind !== "range");
+  let members = units.filter((u) => (u.collection === key2 || sectionOf(u.id) === key2) && u.kind !== "range");
+  if (!members.length) members = units.filter((u) => u.id.startsWith(`${key2}.`) && u.kind !== "range");
+  if (!members.length) members = units.filter((u) => u.id.startsWith(key2) && u.kind !== "range");
   if (!members.length) throw new Error(`Unknown browse node "${node}". Start with "canon", "sutta", "vinaya", "abhidhamma" or a collection such as mn, sn, sn56, an4, dhp.`);
   members.sort((a, b) => a.book - b.book || a.start - b.start);
   const collection = members[0].collection;
-  return { node: key, name: COLLECTION_NAMES[key] || COLLECTION_NAMES[collection] || collection, ...key !== collection ? { collection } : {}, ...page(members.map((u) => unitSummary(u))) };
+  return { node: key2, name: COLLECTION_NAMES[key2] || COLLECTION_NAMES[collection] || collection, ...key2 !== collection ? { collection } : {}, ...page(members.map((u) => unitSummary(u))) };
 }
 var _test = { lookupId, rangeContaining, ptsLookup };
 
@@ -22405,12 +22405,12 @@ var ENTITIES = {
   Ntilde: "\xD1"
 };
 function decodeHtml(value) {
-  return String(value ?? "").replace(/&(#x[\da-f]+|#\d+|[a-z][a-z\d]+);/gi, (whole, key) => {
-    if (key.startsWith("#")) {
-      const point = key[1].toLowerCase() === "x" ? parseInt(key.slice(2), 16) : Number(key.slice(1));
+  return String(value ?? "").replace(/&(#x[\da-f]+|#\d+|[a-z][a-z\d]+);/gi, (whole, key2) => {
+    if (key2.startsWith("#")) {
+      const point = key2[1].toLowerCase() === "x" ? parseInt(key2.slice(2), 16) : Number(key2.slice(1));
       return point > 0 && point <= 1114111 ? String.fromCodePoint(point) : whole;
     }
-    return ENTITIES[key] ?? whole;
+    return ENTITIES[key2] ?? whole;
   });
 }
 function plainText(html) {
@@ -22437,34 +22437,34 @@ var LruCache = class {
   get enabled() {
     return this.maxBytes > 0 && this.ttlMs > 0;
   }
-  get(key) {
-    const entry = this.map.get(key);
+  get(key2) {
+    const entry = this.map.get(key2);
     if (!entry) return void 0;
     if (entry.expires <= this.now()) {
-      this.delete(key);
+      this.delete(key2);
       return void 0;
     }
-    this.map.delete(key);
-    this.map.set(key, entry);
+    this.map.delete(key2);
+    this.map.set(key2, entry);
     return entry.value;
   }
-  set(key, value) {
+  set(key2, value) {
     if (!this.enabled) return;
     const bytes = sizeOf(value);
     if (bytes > this.maxBytes / 4) return;
-    this.delete(key);
-    this.map.set(key, { value, bytes, expires: this.now() + this.ttlMs });
+    this.delete(key2);
+    this.map.set(key2, { value, bytes, expires: this.now() + this.ttlMs });
     this.bytes += bytes;
     for (const oldest of this.map.keys()) {
       if (this.bytes <= this.maxBytes) break;
       this.delete(oldest);
     }
   }
-  delete(key) {
-    const entry = this.map.get(key);
+  delete(key2) {
+    const entry = this.map.get(key2);
     if (!entry) return;
     this.bytes -= entry.bytes;
-    this.map.delete(key);
+    this.map.delete(key2);
   }
   clear() {
     this.map.clear();
@@ -22474,28 +22474,28 @@ var LruCache = class {
     this.misses = 0;
   }
   /** Return the cached value for `key`, or run `load()` once (even if called concurrently) and cache its result. */
-  async wrap(key, load2) {
+  async wrap(key2, load2) {
     if (!this.enabled) return load2();
-    const cached2 = this.get(key);
+    const cached2 = this.get(key2);
     if (cached2 !== void 0) {
       this.hits += 1;
       return cached2;
     }
-    if (this.pending.has(key)) {
+    if (this.pending.has(key2)) {
       this.hits += 1;
-      return this.pending.get(key);
+      return this.pending.get(key2);
     }
     this.misses += 1;
     const promise = (async () => {
       try {
         const value = await load2();
-        this.set(key, value);
+        this.set(key2, value);
         return value;
       } finally {
-        this.pending.delete(key);
+        this.pending.delete(key2);
       }
     })();
-    this.pending.set(key, promise);
+    this.pending.set(key2, promise);
     return promise;
   }
   stats() {
@@ -22850,6 +22850,178 @@ function listSources() {
 
 // src/features/index.mjs
 var features_exports = {};
+__export(features_exports, {
+  topics: () => topics_exports
+});
+
+// src/topics.mjs
+var topics_exports = {};
+__export(topics_exports, {
+  dhammaList: () => dhammaList,
+  key: () => key,
+  listTopics: () => listTopics,
+  listsIndex: () => listsIndex,
+  register: () => register,
+  topic: () => topic,
+  topicsIndex: () => topicsIndex
+});
+var import_node_fs2 = require("node:fs");
+var import_node_path2 = require("node:path");
+var import_node_url2 = require("node:url");
+var import_meta2 = {};
+var here2;
+try {
+  here2 = __dirname;
+} catch {
+  here2 = (0, import_node_path2.dirname)((0, import_node_url2.fileURLToPath)(import_meta2.url));
+}
+function readData(name) {
+  const candidates = [(0, import_node_path2.join)(here2, "data", name), (0, import_node_path2.join)(here2, "..", "server", "data", name), (0, import_node_path2.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => (0, import_node_fs2.existsSync)(p));
+  if (!found) throw new Error(`Bundled data (${name}) is missing. Reinstall the extension or rebuild.`);
+  return JSON.parse((0, import_node_fs2.readFileSync)(found, "utf8"));
+}
+var topicsData = null;
+var listsData = null;
+function topicsIndex() {
+  return topicsData ||= readData("topics.json");
+}
+function listsIndex() {
+  return listsData ||= readData("dhamma_lists.json");
+}
+var NUMBER_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen"];
+function key(value) {
+  return fold2(value).replace(/\b(\d{1,2})\b/g, (m, n) => NUMBER_WORDS[Number(n)] ?? m).replace(/[^a-z0-9]+/g, " ").trim();
+}
+var stem = (k) => k.split(" ").map((w) => w.replace(/(ies|es|s)$/, "")).join(" ");
+function names(entry) {
+  const parts = entry.name.split(/\s*[();]\s*/).filter(Boolean).flatMap((p) => [p, p.replace(/^the\s+/i, "")]);
+  return [entry.slug.replace(/-/g, " "), entry.name, ...parts, entry.pali, ...entry.aliases || []].filter(Boolean).map(key);
+}
+function match(entries, query) {
+  const q = key(query);
+  if (!q) return [];
+  const qs = stem(q);
+  const words = qs.split(" ");
+  const scored = [];
+  for (const entry of entries) {
+    const keys = names(entry);
+    let score = 0;
+    if (keys.includes(q)) score = 2;
+    else if (keys.some((k) => stem(k) === qs)) score = 2;
+    else if (keys.some((k) => {
+      const sk = stem(k);
+      return words.every((w) => sk.split(" ").some((x) => x.startsWith(w)));
+    })) score = 1;
+    if (score) scored.push({ entry, score });
+  }
+  return scored.sort((a, b) => b.score - a.score || (a.entry.index === "numerical") - (b.entry.index === "numerical") || a.entry.name.length - b.entry.name.length).map((s) => s.entry);
+}
+function textInfo(canon, id) {
+  const { unit, notes } = canon.resolve(id);
+  const info = canon.describe(unit, notes);
+  return { id: unit.id, citation: unit.acronym, title: unit.title || null, pts: info.pts, ...info.approximate ? { approximate: true } : {} };
+}
+var TOPIC_NOTE = "Topic and links from Access to Insight's index; each link was mapped to the canon text it names. Read a text with get_text (P\u0101li) or get_translation (English). The index groups texts; it is not a ruling on what they mean.";
+function topic(canon, name) {
+  const all = topicsIndex().topics;
+  let hits = match(all, name);
+  if (!hits.length) {
+    const viaList = match(listsIndex().lists, name)[0];
+    if (viaList) for (const alt of [viaList.pali, viaList.name, ...viaList.aliases || []]) {
+      hits = match(all, alt);
+      if (hits.length) break;
+    }
+  }
+  if (!hits.length) throw new Error(`No topic matches "${name}". Use list_topics to browse or search topic names, or search_texts for the P\u0101li text.`);
+  const t = hits[0];
+  const bySlug = new Map(all.map((x) => [x.slug, x]));
+  const lists = listsIndex().lists;
+  const pool = t.number ? lists.filter((l) => l.count === t.number) : lists;
+  const exact = (q) => match(pool, q).find((l) => names(l).some((k) => stem(k) === stem(key(q))));
+  const list = [t.name.replace(/\s*\(\d+\)$/, ""), ...names(t)].map(exact).find(Boolean) || null;
+  const src = topicsIndex().source;
+  return {
+    topic: { slug: t.slug, name: t.name, index: t.index === "numerical" ? "Access to Insight Numerical Index" : "Access to Insight General Index", ...t.number ? { number: t.number } : {}, ...t.aliases?.length ? { aliases: t.aliases } : {}, ati_url: t.ati_url },
+    texts: t.texts.map((x) => {
+      const info = textInfo(canon, x.id);
+      return {
+        ...info,
+        ati_reference: x.ati_reference,
+        ati_url: x.ati_url,
+        ...key(x.ati_reference) !== key(info.citation) ? { numbering_note: `Access to Insight cites this as ${x.ati_reference}; the standard ID is ${info.id}.` } : {}
+      };
+    }),
+    ...t.see_also?.length ? { see_also: t.see_also.map((s) => ({ slug: s, name: bySlug.get(s)?.name })).filter((s) => s.name) } : {},
+    ...t.further_reading?.length ? { further_reading: t.further_reading.map((r) => ({ ...r, kind: "Access to Insight essay or study guide (commentary, not scripture)" })) } : {},
+    ...list ? { dhamma_list: { slug: list.slug, name: list.name, hint: `dhamma_list("${list.slug}") gives the members and defining passage.` } } : {},
+    ...hits.length > 1 ? { other_matches: hits.slice(1, 8).map((h) => ({ slug: h.slug, name: h.name })) } : {},
+    note: TOPIC_NOTE,
+    source: { name: src.name, url: t.ati_url, license: src.license, attribution: src.attribution, commit: src.commit }
+  };
+}
+function listTopics({ query, index = "all", offset = 0, limit = 50 } = {}) {
+  let pool = topicsIndex().topics;
+  if (index !== "all") pool = pool.filter((t) => t.index === index);
+  if (query) pool = match(pool, query);
+  const src = topicsIndex().source;
+  return {
+    total: pool.length,
+    offset,
+    returned: Math.min(limit, Math.max(0, pool.length - offset)),
+    next_offset: offset + limit < pool.length ? offset + limit : null,
+    topics: pool.slice(offset, offset + limit).map((t) => ({ slug: t.slug, name: t.name, index: t.index, texts: t.texts.length })),
+    hint: 'Open one with topic("<slug or name>"). Numbered teaching lists with their members are in dhamma_list.',
+    source: { name: src.name, license: src.license, attribution: src.attribution }
+  };
+}
+function dhammaList(canon, name) {
+  const data2 = listsIndex();
+  if (!name) {
+    return {
+      lists: data2.lists.map((l2) => ({ slug: l2.slug, name: l2.name, pali: l2.pali, count: l2.count, status: l2.status })),
+      hint: 'Open one with dhamma_list("<slug or name>"), e.g. "five hindrances" or "four-noble-truths".',
+      status_labels: data2.status_labels
+    };
+  }
+  const hits = match(data2.lists, name);
+  if (!hits.length) throw new Error(`No numbered list matches "${name}". Call dhamma_list with no name to see every list, or topic("${name}") for Access to Insight's index.`);
+  const l = hits[0];
+  const byslug = new Map(data2.lists.map((x) => [x.slug, x]));
+  const topics = match(topicsIndex().topics.filter((t) => t.index === "numerical" && t.number === l.count), l.name.replace(/\s*\(.*\)$/, "").replace(/^\S+\s+/, ""));
+  return {
+    slug: l.slug,
+    name: l.name,
+    pali: l.pali,
+    count: l.count,
+    status: l.status,
+    status_meaning: data2.status_labels[l.status],
+    ...l.status_note ? { status_note: l.status_note } : {},
+    members: l.members.map((m, i) => ({ n: i + 1, pali: m.pali, gloss: m.gloss, ...m.group ? { group: m.group } : {}, ...m.list ? { list: m.list } : {} })),
+    gloss_note: data2.gloss_note,
+    defined_in: l.defined_in.map((c) => ({ ...textInfo(canon, c), role: "sets out this list (every member name checked in the VRI text)" })),
+    ...l.see_also_texts?.length ? { see_also_texts: l.see_also_texts.map((c) => textInfo(canon, c)) } : {},
+    ...l.related?.length ? { related_lists: l.related.map((s) => ({ slug: s, name: byslug.get(s)?.name })).filter((r) => r.name) } : {},
+    ...topics.length ? { topic: { slug: topics[0].slug, name: topics[0].name, hint: `topic("${topics[0].slug}") lists more texts from Access to Insight's index.` } } : {},
+    ...hits.length > 1 ? { other_matches: hits.slice(1, 6).map((h) => ({ slug: h.slug, name: h.name })) } : {},
+    note: "Read the defining passage with get_text before quoting it. P\u0101li member names are from that passage (VRI edition); English glosses are labels, not translations.",
+    source: { curated_by: "pali-canon-mcp (server/data/dhamma_lists.json)", text: canon.source().name, terms: canon.source().terms }
+  };
+}
+function register({ tool, z, canon }) {
+  tool("topic", `Texts on a topic from Access to Insight's subject and numerical indexes (e.g. "emptiness", "anger", "five hindrances"), each mapped to its canon ID with title and PTS page. Works offline.`, {
+    name: z.string().min(1).max(200).describe('A topic name or slug, e.g. "emptiness", "upekkha", "kamma", "five hindrances".')
+  }, ({ name }) => topic(canon, name));
+  tool("list_topics", "Browse or search the topic index (over 300 topics from Access to Insight's General and Numerical indexes). Works offline.", {
+    query: z.string().max(200).optional().describe('Words to find in topic names, e.g. "anger" or "four".'),
+    index: z.enum(["all", "subject", "numerical"]).optional().describe("Which index: subject topics, numbered topics, or all (default)."),
+    offset: z.number().int().min(0).optional(),
+    limit: z.number().int().min(1).max(200).optional()
+  }, ({ query, index, offset, limit }) => listTopics({ query, index, offset, limit }));
+  tool("dhamma_list", "A standard numbered list of the teaching (four noble truths, five aggregates, seven factors of awakening, ten fetters, twelve links\u2026) with its members in P\u0101li, plain-English glosses and the canonical passage that sets it out. No name lists them all. Works offline.", {
+    name: z.string().max(200).optional().describe('A list name or slug, e.g. "five hindrances", "eightfold path", "37 aids", "brahmaviharas". Omit to see every list.')
+  }, ({ name }) => dhammaList(canon, name));
+}
 
 // src/server.mjs
 var VERSION = "2.0.0";
@@ -23008,7 +23180,7 @@ function createServer() {
   }
   prompt("study_passage", "Read and explain a passage with cited P\u0101li and translation.", "reference", (ref) => `Study ${ref}. Call resolve_reference, then get_text (P\u0101li, with translation "default" if one is available). Summarise the setting and teaching plainly. Quote only retrieved text; cite the text ID with VRI paragraph or PTS page, and name the translator. Mention numbering notes the tool returns. Separate scripture, translation choices and your interpretation. Point to SuttaCentral for parallels.`);
   prompt("compare_translations", "Compare available English translations against the P\u0101li.", "reference", (ref) => `Compare translations of ${ref}. Call compare_translations, then examine a short passage against the P\u0101li segments from get_text. Keep each translator's exact wording attributed; explain differences as translation choices unless the P\u0101li shows a textual variant. State which translations were unavailable.`);
-  prompt("topic_research", "Research a topic through canonical passages.", "topic", (topic) => `Research ${topic} in the P\u0101li Canon. Use search_texts with P\u0101li terms (lookup_pali helps find them) and English title words, and search_access_to_insight for study guides. Read the most relevant passages with get_text before quoting. Ground every claim in a cited passage; separate canonical text, dictionary glosses, translators' notes and your synthesis. State search limits.`);
+  prompt("topic_research", "Research a topic through canonical passages.", "topic", (topic2) => `Research ${topic2} in the P\u0101li Canon. Use search_texts with P\u0101li terms (lookup_pali helps find them) and English title words, and search_access_to_insight for study guides. Read the most relevant passages with get_text before quoting. Ground every claim in a cited passage; separate canonical text, dictionary glosses, translators' notes and your synthesis. State search limits.`);
   const resource = server.registerResource.bind(server);
   for (const feature of Object.values(features_exports)) feature.register?.({ tool, prompt, resource, z: external_exports, citation, canon: canon_exports, english: english_exports, providers: providers_exports });
   return server;
