@@ -172,9 +172,13 @@ test('Codex plugin packaging is consistent with the Claude plugin', async () => 
   // Server map keyed by name (Codex accepts this or an mcpServers wrapper).
   const servers = json('.mcp.codex.json');
   assert.deepEqual(Object.keys(servers), ['pali-canon']);
-  assert.equal(servers['pali-canon'].command, 'npx');
-  assert.deepEqual(servers['pali-canon'].args, ['-y', 'pali-canon-mcp']);
-  assert.ok(Object.keys(pkg.bin).includes('pali-canon-mcp'));
+  // Runs the bundled server, never an npm name that is not yet published (supply-chain risk via npx -y).
+  assert.equal(servers['pali-canon'].command, 'node');
+  assert.deepEqual(servers['pali-canon'].args, ['./server/index.cjs']);
+  // Codex's local host does not default a plugin server's cwd to the plugin root; a relative cwd is resolved against it.
+  assert.equal(servers['pali-canon'].cwd, '.');
+  assert.ok(existsSync(new URL('server/index.cjs', root)), 'bundled server must exist');
+  assert.ok(!JSON.stringify(servers).includes('npx'), 'no npx in the plugin server until the npm name is published');
   const market = json('.agents/plugins/marketplace.json');
   const entry = market.plugins.find((p) => p.name === codex.name);
   assert.deepEqual(entry.source, { source: 'local', path: './' });
@@ -187,5 +191,6 @@ test('Codex plugin packaging is consistent with the Claude plugin', async () => 
     // A stdio dependency must name the same command as the plugin's server, or Codex treats it as missing.
     assert.match(yaml, /transport: "stdio"/, skill);
     assert.match(yaml, new RegExp(`command: "${servers['pali-canon'].command}"`), skill);
+    assert.match(yaml, /command: "node"/, skill);
   }
 });

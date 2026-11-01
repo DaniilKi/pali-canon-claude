@@ -7,7 +7,7 @@
 
 Both need [Node.js](https://nodejs.org/) 20 or newer on your computer. Nothing else is required: the whole Pāli Canon is bundled, so reading texts works offline. English translations and the dictionary are fetched live from their publishers.
 
-> **Status.** The commands below that use `npx -y pali-canon-mcp` start working once the npm package is published ([#4](https://github.com/DaniilKi/pali-canon-claude/issues/4)). Until then, use the "from a copy of the repository" alternatives, which run the same server.
+> **Status.** This setup has been checked against Codex's documentation and source code, but it has **not yet been tried in a real Codex install**. If something does not work, please [open an issue](https://github.com/DaniilKi/pali-canon-claude/issues/9).
 
 ## Option 1: install the plugin
 
@@ -29,55 +29,40 @@ Both need [Node.js](https://nodejs.org/) 20 or newer on your computer. Nothing e
    $pali-word sati
    ```
 
-The plugin starts its server with `npx -y pali-canon-mcp`. If your computer cannot use `npx` (no internet when installing, or the package is not yet published), edit `.mcp.codex.json` in the installed plugin folder so the server runs the copy that ships with the repository:
+The plugin runs the copy of the server that ships inside it (`node ./server/index.cjs`), so you do not need to download anything else and nothing needs editing.
 
-```json
-{
-  "pali-canon": {
-    "command": "node",
-    "args": ["./server/index.cjs"],
-    "startup_timeout_sec": 60,
-    "tool_timeout_sec": 120
-  }
-}
-```
-
-Codex runs plugin servers from the plugin's own folder, so `./server/index.cjs` finds the bundled server.
+How the plugin finds that file: Codex does not automatically start a plugin's server inside the plugin's folder. The plugin's server settings (`.mcp.codex.json`) therefore say `"cwd": "."`, which Codex turns into the plugin's own folder ([Codex source](https://github.com/openai/codex/blob/f7a135ec6173d19c881b7b7b0ef75f2e1e6d1985/codex-rs/codex-mcp/src/plugin_config.rs#L322-L331)). This has been read from the source, not yet tried in Codex.
 
 ## Option 2: add the MCP server only
 
-One command:
+Download or clone this repository, then point Codex at the server inside it. One command:
 
 ```sh
-codex mcp add pali-canon -- npx -y pali-canon-mcp
+codex mcp add pali-canon -- node /absolute/path/pali-canon-claude/server/index.cjs
 ```
 
 Or add this block to your Codex settings file, `~/.codex/config.toml` (on Windows: `C:\Users\<you>\.codex\config.toml`):
 
 ```toml
 [mcp_servers.pali-canon]
-command = "npx"
-args = ["-y", "pali-canon-mcp"]
+command = "node"
+args = ["C:/absolute/path/pali-canon-claude/server/index.cjs"]
 startup_timeout_sec = 60
-tool_timeout_sec = 120
 ```
 
-`tool_timeout_sec = 120` gives long texts and slow publisher websites enough time. Codex's default is shorter, and a long sutta with a translation can take longer than that on a slow connection.
+Use forward slashes in Windows paths inside `config.toml`, or double every backslash.
 
-**From a copy of the repository** (works today, without npm):
+**Coming later: install with `npx`.** Once the server is published on npm ([#4](https://github.com/DaniilKi/pali-canon-claude/issues/4)), you will be able to skip the download. These commands do **not** work yet. Do not use them until #4 is done and this page says so:
 
 ```sh
-codex mcp add pali-canon -- node /absolute/path/pali-canon-claude/server/index.cjs
+codex mcp add pali-canon -- npx -y pali-canon-mcp
 ```
 
 ```toml
 [mcp_servers.pali-canon]
-command = "node"
-args = ["C:/absolute/path/pali-canon-claude/server/index.cjs"]
-tool_timeout_sec = 120
+command = "npx"
+args = ["-y", "pali-canon-mcp"]
 ```
-
-Use forward slashes in Windows paths inside `config.toml`, or double every backslash.
 
 **Hosted (remote URL) version.** A hosted server is on the [roadmap](../roadmap.md) but does not exist yet. When it does, it will be added with `codex mcp add pali-canon --url <address>` and this page will give the address. Until then, use one of the local options above.
 
@@ -89,8 +74,8 @@ Use forward slashes in Windows paths inside `config.toml`, or double every backs
 
 ## Troubleshooting
 
-- **"command not found: npx" or the server does not start.** Install Node.js 20 or newer, then open a new terminal. On Windows, restart the Codex app after installing Node.js.
-- **Tools time out on long texts.** Raise `tool_timeout_sec` (120 is a good start).
+- **"command not found: node" or the server does not start.** Install Node.js 20 or newer, then open a new terminal. On Windows, restart the Codex app after installing Node.js.
+- **Tools time out on long texts.** Codex waits 300 seconds for a tool by default ([Codex source](https://github.com/openai/codex/blob/9630b2e0193e596b2505316f794e74ee1143e069/codex-rs/codex-mcp/src/rmcp_client.rs#L123)), which is normally plenty. If you have set a lower `tool_timeout_sec` in `config.toml` ([Codex configuration reference](https://developers.openai.com/codex/config-reference)), raise it or remove it.
 - **The skills do not appear.** The skills come with the plugin (Option 1), not with Option 2. Start a new session after installing.
 - **English translations fail but Pāli works.** The translation publishers' websites may be down. The server tries mirrors of Access to Insight automatically; Pāli text never needs the network.
 
