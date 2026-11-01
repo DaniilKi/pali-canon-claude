@@ -24972,6 +24972,174 @@ function listSources() {
 
 // src/features/index.mjs
 var features_exports = {};
+__export(features_exports, {
+  talks: () => talks_exports
+});
+
+// src/talks.mjs
+var talks_exports = {};
+__export(talks_exports, {
+  CATEGORIES: () => CATEGORIES,
+  SITE: () => SITE,
+  TALKS_SOURCE: () => TALKS_SOURCE,
+  findTalks: () => findTalks,
+  parseTalkResults: () => parseTalkResults,
+  phraseFromReference: () => phraseFromReference,
+  plainTerms: () => plainTerms,
+  politely: () => politely,
+  register: () => register,
+  searchUrl: () => searchUrl
+});
+var SITE = "https://www.dhammatalks.org";
+var CATEGORIES = ["evening", "morning"];
+var MIN_INTERVAL_MS = 1e3;
+var DISALLOWED = "/Archive/MachineTranscripts/";
+var TALKS_SOURCE = {
+  name: "dhammatalks.org \u2014 Dhamma talks by \u1E6Ch\u0101nissaro Bhikkhu (Metta Forest Monastery)",
+  url: `${SITE}/audio/`,
+  search: `${SITE}/search/`,
+  license: "CC BY-NC 4.0",
+  attribution: "Talks by \u1E6Ch\u0101nissaro Bhikkhu, dhammatalks.org. Licensed CC BY-NC 4.0; the copyright holder considers any sale, including by non-profits, commercial."
+};
+var LINK_ONLY = "Links only: titles, dates and URLs from dhammatalks.org's own search. The talks' text is not fetched or returned; open a link to listen or read.";
+var COMMENTARY = "Talks are a teacher's commentary (\u1E6Ch\u0101nissaro Bhikkhu), not scripture. Keep them distinct from the P\u0101li text and its translations.";
+var MINOR = /* @__PURE__ */ new Set(["a", "an", "the", "to", "of", "on", "in", "at", "and", "or", "with", "for", "by", "from", "about", "is"]);
+function plainTerms(value) {
+  return String(value ?? "").normalize("NFD").replace(new RegExp("\\p{M}", "gu"), "").replace(/[‘’ʼ]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, " ").trim();
+}
+function phraseFromReference(reference) {
+  let title = String(reference ?? "").replace(/^(?:[A-Za-z]{1,5}\s+)?[\dIVXLC]+(?:\s*[:.]\s*\d+)*(?:\s*[-–—]\s*\d+(?:[:.]\d+)*)?\s*:?\s*/, "");
+  title = plainTerms(title.replace(/\([^)]*\)|\[[^\]]*\]/g, " ").replace(/["]/g, ""));
+  const words = title.split(/\s+/).filter((w) => /[A-Za-z]/.test(w));
+  if (!words.length) return null;
+  const distinctive = words.filter((w) => !MINOR.has(w.toLowerCase()));
+  if (distinctive.length < 2 && words.length < 3) return null;
+  return words.join(" ");
+}
+function parseTalkResults(html) {
+  const results = [];
+  for (const chunk of String(html ?? "").split(/(?=<li\b[^>]*\bclass="[^"]*\bsearch-result\b)/i).slice(1)) {
+    if (!/^<li\b[^>]*\bclass="[^"]*\bli-audio\b/i.test(chunk)) continue;
+    const link = chunk.match(/<a\b[^>]*\bhref="(\/audio\/(evening|morning)\/(\d{4})\/[^"#?]+\.html)"[^>]*>([^]*?)<\/a>/i);
+    if (!link) continue;
+    const [, path, category, year] = link;
+    const title = decodeHtml(link[4].replace(/<[^>]*>/g, "")).replace(/\s+/g, " ").trim();
+    if (!title) continue;
+    let clean = decodeHtml(path);
+    try {
+      clean = decodeURI(clean);
+    } catch {
+      continue;
+    }
+    const result = { title, url: SITE + encodeURI(clean), category, year: Number(year) };
+    const id = chunk.match(/^<li\b[^>]*\bid="(\d{2})(\d{2})(\d{2})-/i);
+    if (id && Number(id[1]) === Number(year) % 100 && Number(id[2]) >= 1 && Number(id[2]) <= 12 && Number(id[3]) >= 1 && Number(id[3]) <= 31) {
+      result.date = `${year}-${id[2]}-${id[3]}`;
+    }
+    const audio = chunk.match(/\bdata-link="(\/Archive\/[^"]+\.mp3)"/i);
+    if (audio && !audio[1].startsWith(DISALLOWED)) result.audio_url = SITE + encodeURI(decodeHtml(audio[1]));
+    results.push(result);
+  }
+  return results;
+}
+function searchUrl(terms2, category, page = 1) {
+  const params = new URLSearchParams({ q: terms2, cat: category });
+  if (page > 1) params.set("page", String(page));
+  return `${SITE}/search/?${params}`;
+}
+var lastRequest = 0;
+var queue = Promise.resolve();
+function politely(load2, now = Date.now) {
+  const run = queue.then(async () => {
+    const delay = lastRequest + MIN_INTERVAL_MS - now();
+    if (delay > 0) await new Promise((r) => setTimeout(r, delay));
+    lastRequest = now();
+    return load2();
+  });
+  queue = run.catch(() => {
+  });
+  return run;
+}
+var defaultFetch = (url) => politely(() => fetchPublic(url, { json: false, retries: 1, timeout: 2e4 }));
+async function searchCategory(terms2, category, page, fetchHtml) {
+  const url = searchUrl(terms2, category, page);
+  const html = await liveCache.wrap(`talks:${url}`, () => fetchHtml(url));
+  return { url, results: parseTalkResults(html), has_more: html.includes(`page=${page + 1}`) };
+}
+async function findTalks({ query, passage, category = "all", page = 1, limit = 10 } = {}, { canon, fetchHtml = defaultFetch } = {}) {
+  query = plainTerms(query);
+  page = Math.max(1, Math.trunc(Number(page) || 1));
+  limit = Math.min(20, Math.max(1, Math.trunc(Number(limit) || 10)));
+  if (!query && !passage) throw new Error('Give a topic (query) or a passage (for example "MN 118").');
+  if (query.length > 200) throw new Error("Query is too long (200 characters at most).");
+  const categories = category === "all" ? CATEGORIES : [category];
+  if (!categories.every((c) => CATEGORIES.includes(c))) throw new Error('category must be "evening", "morning" or "all".');
+  const notes = [LINK_ONLY, COMMENTARY];
+  let passageInfo = null;
+  let terms2 = query;
+  if (passage) {
+    const { unit } = canon.resolve(passage);
+    const { links, via } = canon.linksFor(unit);
+    const dt = via ? null : links.find((l) => l.source === "dhammatalks");
+    const phrase = dt ? phraseFromReference(dt.reference) : null;
+    passageInfo = { id: unit.id, citation: unit.acronym, title: unit.title || null, translation_url: dt?.url ?? null, translation_title: phrase };
+    if (!phrase) {
+      const why = via ? `${unit.acronym} has no translation page of its own on dhammatalks.org (only its chapter, ${via.acronym}, does)` : !dt ? `${unit.acronym} has no linked \u1E6Ch\u0101nissaro translation on dhammatalks.org` : `the title of \u1E6Ch\u0101nissaro's translation ("${dt.reference}") is too general to identify talks about this passage`;
+      return {
+        source: TALKS_SOURCE,
+        passage: passageInfo,
+        searched_for: null,
+        results: [],
+        has_more: false,
+        notes: [...notes, `No search was run: ${why}. dhammatalks.org has no passage-to-talk index, and a loose keyword match would be a wrong link. Try a topic query instead.`]
+      };
+    }
+    terms2 = `"${phrase}"${query ? ` ${query}` : ""}`;
+    notes.push(`dhammatalks.org has no passage-to-talk index. These talks contain the phrase "${phrase}", the title of \u1E6Ch\u0101nissaro Bhikkhu's translation of ${unit.acronym}${query ? `, and the words "${query}"` : ""}. A match shows the words appear in the talk, not that the talk is about this sutta.`);
+  } else {
+    notes.push(`Matches are keyword matches found by dhammatalks.org's search (all words; "quoted phrases" allowed). Diacritics are removed because the site's search does not handle them.`);
+  }
+  const searched = [];
+  const seen = /* @__PURE__ */ new Set();
+  const results = [];
+  let hasMore = false;
+  for (const c of categories) {
+    let found;
+    try {
+      found = await searchCategory(terms2, c, page, fetchHtml);
+    } catch (error2) {
+      throw new Error(`dhammatalks.org search is unavailable right now (${error2.message}). Open ${searchUrl(terms2, c, page)} directly or try again shortly.`);
+    }
+    searched.push(found.url);
+    hasMore ||= found.has_more;
+    for (const r of found.results) if (!seen.has(r.url)) {
+      seen.add(r.url);
+      results.push(r);
+    }
+  }
+  return {
+    source: TALKS_SOURCE,
+    ...passageInfo ? { passage: passageInfo } : {},
+    searched_for: terms2,
+    category,
+    page,
+    results: results.slice(0, limit),
+    returned: Math.min(limit, results.length),
+    has_more: hasMore || results.length > limit,
+    ...hasMore ? { next_page: page + 1 } : {},
+    search_urls: searched,
+    notes
+  };
+}
+function register({ tool, z, citation, canon }) {
+  tool("find_talks", "Find Dhamma talks by \u1E6Ch\u0101nissaro Bhikkhu on dhammatalks.org by topic (query) or by passage (a citation such as MN 118). Link-only: returns talk titles, dates and URLs from the site's own search, never talk text. Talks are commentary, not scripture.", {
+    query: z.string().max(200).optional().describe('Topic keywords, e.g. "jhana", "Kalamas", "\\"right resolve\\"" (diacritics are removed).'),
+    passage: citation.optional().describe("A passage; talks containing the title of \u1E6Ch\u0101nissaro's translation are found. Combine with query to narrow."),
+    category: z.enum(["all", "evening", "morning"]).default("all").describe("Evening talks, short morning talks, or both."),
+    page: z.number().int().min(1).max(50).default(1),
+    limit: z.number().int().min(1).max(20).default(10)
+  }, (args) => findTalks(args, { canon }), { network: true });
+}
 
 // src/server.mjs
 var VERSION = "2.0.0";

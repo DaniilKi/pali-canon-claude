@@ -14,6 +14,8 @@ The standard citation IDs (for example `sn46.131-140`, `pli-tv-bu-vb-pj1`) follo
 
 Translations are fetched live from [dhammatalks.org](https://www.dhammatalks.org/suttas/). They are licensed [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) and attributed to Ṭhānissaro Bhikkhu. The site defines "commercial" to include any sale. The bundled translation index stores page titles and URLs only.
 
+`find_talks` searches the site's own search page for Ṭhānissaro Bhikkhu's Dhamma talks (same CC BY-NC 4.0 licence) and returns talk titles, dates and links only. No talk text, transcript or search snippet is fetched into results or bundled. Requests are cached in memory and spaced at least one second apart, and `/Archive/MachineTranscripts/`, which the site's robots.txt disallows, is never requested.
+
 ## Access to Insight
 
 Pages are fetched live from [accesstoinsight.org](https://accesstoinsight.org/). If it is unavailable, they come from the official Barre Center for Buddhist Studies repository [bcbsit/ati](https://github.com/bcbsit/ati) (via raw.githubusercontent.com or jsDelivr), or from the [Digital Pali Reader mirror](https://github.com/digitalpalireader/accesstoinsight). Licences vary by page (CC BY-NC 4.0, BPS free-distribution terms, public domain and others), and each page's own notice is returned with its text. Do not sell ATI content. The bundled index stores PTS references, titles, translators and licence labels only.
