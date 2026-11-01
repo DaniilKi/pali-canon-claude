@@ -150,3 +150,24 @@ test('a verse inherits its chapter translations, with a note', () => {
   assert.ok(desc.english.length > 0);
   assert.ok(desc.notes.some((n) => /whole Dhp 179/.test(n)));
 });
+
+test('legal and community documents exist and are linked from the manifest', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const read = (p) => readFile(new URL(`../${p}`, import.meta.url), 'utf8');
+  const privacy = await read('PRIVACY.md');
+  assert.match(privacy, /collect nothing/i);
+  assert.match(privacy, /aggregate counts/i);
+  assert.match(privacy, /No request content is logged/);
+  assert.match(await read('TERMS.md'), /non-commercial/i);
+  assert.match(await read('SECURITY.md'), /Report a vulnerability/);
+  assert.match(await read('CODE_OF_CONDUCT.md'), /Contributor Covenant, version 2\.1/);
+  const manifest = JSON.parse(await read('manifest.json'));
+  assert.deepEqual(manifest.privacy_policies, ['https://github.com/DaniilKi/pali-canon-claude/blob/main/PRIVACY.md']);
+  assert.match(manifest.support, /github\.com\/DaniilKi\/pali-canon-claude\/issues/);
+  const ids = (yml) => [...yml.matchAll(/^\s+id: ([\w-]+)$/gm)].map((m) => m[1]);
+  assert.deepEqual(ids(await read('.github/ISSUE_TEMPLATE/wrong-citation.yml')).slice(0, 4), ['citation', 'expected', 'pts-page', 'actual']);
+  assert.deepEqual(ids(await read('.github/ISSUE_TEMPLATE/source-proposal.yml')).slice(2),
+    ['standing', 'permission', 'respect', 'durability', 'verifiability']);
+  assert.match(await read('.github/ISSUE_TEMPLATE/bug.yml'), /^name: Bug report$/m);
+  assert.match(await read('.github/ISSUE_TEMPLATE/config.yml'), /security\/advisories\/new/);
+});

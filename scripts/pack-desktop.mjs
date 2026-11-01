@@ -9,7 +9,7 @@ const dist = resolve(root, 'dist');
 if (!staging.startsWith(dist + sep)) throw new Error('Invalid bundle staging path.');
 await rm(staging, { recursive: true, force: true });
 await mkdir(staging, { recursive: true });
-for (const name of ['manifest.json', 'server', 'README.md', 'LICENSE', 'THIRD_PARTY.md']) {
+for (const name of ['manifest.json', 'server', 'README.md', 'LICENSE', 'THIRD_PARTY.md', 'PRIVACY.md']) {
   await cp(resolve(root, name), resolve(staging, name), { recursive: true });
 }
 const { version } = JSON.parse(await readFile(resolve(root, 'package.json'), 'utf8'));
