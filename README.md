@@ -1,120 +1,110 @@
 # Pali Canon for Claude
 
-A Claude Code plugin and Claude Desktop extension for studying the **Tipitaka / Pali Canon** through retrieved sources. Search texts, read Pali alongside translations, compare translators, explore parallels, look up Pali words, and retrieve Access to Insight pages with source links.
+A Claude Code plugin and Claude Desktop extension for studying the **Tipiṭaka / Pāli Canon** with exact, cited sources.
 
-No API key, paid data subscription, or hosted service is required. Internet access is required for upstream sources. This is an independent community project, not an Anthropic or Buddhist publisher's official integration.
+- **The whole Pāli Canon is built in.** It's the Chaṭṭha Saṅgāyana Tipiṭaka from the Vipassana Research Institute (VRI), covering the Sutta, Vinaya and Abhidhamma Piṭakas. Reading, citation lookup, PTS page lookup and full-text Pāli search all work **offline**.
+- **Any common citation resolves:** MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8 (or Sn 1.8), Ud 1.10, Iti 27, Thag 1.1, Ja 1, Pj 1, Kd 1, Cv 4, PTS pages (M i 55, S v 420, Vin iii 1), and links from SuttaCentral, Access to Insight or dhammatalks.org.
+- **Numbering differences are handled, not hidden.** Ṭhānissaro Bhikkhu and Access to Insight number parts of SN and AN by the older PTS scheme. Their AN 7.64 is AN 7.68 in the standard numbering. Translations are linked by content, and both numbers are reported.
+- **English translations come with mirrors.** Ṭhānissaro Bhikkhu (dhammatalks.org) and Access to Insight's translators are available. If accesstoinsight.org is down, its official GitHub copy is used. If dhammatalks.org is down, Ṭhānissaro's Access to Insight version is used.
+- **Pāli dictionary:** lookups use the Digital Pāḷi Dictionary.
+
+No API key, account or hosted service. This is an independent community project, not an official integration of Anthropic or any Buddhist publisher.
 
 ## Install in Claude Code
 
-Install [Node.js 20 or newer](https://nodejs.org/en/download) if it is not already available. In Claude Code, run:
+Install [Node.js 20+](https://nodejs.org/en/download), then in Claude Code:
 
 ```text
 /plugin marketplace add DaniilKi/pali-canon-claude
 /plugin install pali-canon@pali-canon
 ```
 
-Start a new session or run `/reload-plugins`, then open `/mcp` and confirm the Pali Canon server is connected. The plugin ships a bundled server: users do not need `npm install` just to run it.
-
-Try:
+Start a new session (or `/reload-plugins`) and check `/mcp`. Then try:
 
 ```text
 /pali-canon:study MN 10
-/pali-canon:compare MN 1, Sujato and another available English translator
+/pali-canon:compare AN 3.65
 /pali-canon:pali-word anicca in SN 22.59
 ```
 
-Or ask normally: “Find passages about right speech, retrieve the relevant sections, and cite the translators.”
-
 ## Install in Claude Desktop
 
-1. Download [`pali-canon-1.0.0.mcpb` from Releases](https://github.com/DaniilKi/pali-canon-claude/releases/latest).
-2. Open Claude Desktop → **Settings → Desktop app → Manage** beside Extensions → **Advanced settings → Install Extension**. Select the downloaded bundle and follow the prompts. Older layouts place Extensions directly under Settings.
-3. Check its connection status and ask: “Use Pali Canon to read MN 1 with Pali text and source citations.”
+1. Download the latest `pali-canon-<version>.mcpb` from [Releases](https://github.com/DaniilKi/pali-canon-claude/releases/latest).
+2. In Claude Desktop, open **Settings → Extensions**, then drag the file onto the page, or use **Advanced settings → Install Extension…**. Click **Install** and make sure the extension is enabled.
+3. Ask: "Use Pali Canon to read MN 10 with a translation and cite the PTS page."
 
-Claude Desktop supplies the Node runtime for the bundle. The desktop extension installs the MCP tools; the three `/pali-canon:…` skills belong to the Claude Code plugin.
-
-This release runs locally over stdio. It does not provide a public HTTPS URL for Claude web's **Add custom connector** field. A local HTTP URL would not work there because Anthropic's cloud must reach remote connectors.
+Claude Desktop supplies Node.js for the extension. The `/pali-canon:…` skills are part of the Claude Code plugin. Desktop gets the equivalent `study_passage`, `compare_translations` and `topic_research` prompts.
 
 ## Tools
 
-| Tool | Purpose |
-|---|---|
-| `resolve_reference` | Normalize a human reference or supported source URL into a canonical identifier. |
-| `search_texts` | Search SuttaCentral texts by words, title, or subject. |
-| `get_metadata` | Identify a work and discover its available translations. |
-| `get_text` | Read a bounded passage with translation, segment IDs, optional Pali and notes. |
-| `compare_translations` | Retrieve aligned segments from two to four selected translators. |
-| `get_parallels` | Find related textual witnesses and parallel references. |
-| `browse_canon` | Browse the upstream collection hierarchy. |
-| `lookup_pali` | Retrieve available Pali dictionary evidence and dictionary links. |
-| `search_access_to_insight` | Find matching pages in the ATI catalogue. |
-| `get_access_to_insight_text` | Read an ATI page with attribution and licence information. |
-| `list_sources` | Inspect source coverage, upstream links, and limitations. |
+| Tool | Purpose | Network |
+|---|---|---|
+| `resolve_reference` | Any citation, PTS page or link → the text, its PTS location, VRI paragraphs, translations and numbering notes | offline |
+| `get_metadata` | Details of a text, including linked translations (`translation_id`) and a SuttaCentral link for parallels | offline |
+| `get_text` | Pāli text with VRI paragraph numbers, PTS page breaks and variant readings, paginated; optionally adds an English translation | offline (English: online) |
+| `get_translation` | One English translation with attribution, license and numbering notes | online, mirrored |
+| `compare_translations` | Two to four English translations side by side, with the Pāli opening | online, mirrored |
+| `search_texts` | Full-text Pāli search (diacritics optional, phrases in quotes), titles and English titles | offline |
+| `browse_canon` | Canon → piṭaka → collection → section → text | offline |
+| `lookup_pali` | Digital Pāḷi Dictionary entry | online |
+| `search_access_to_insight` | Access to Insight sutta and subject indexes | online, mirrored |
+| `get_access_to_insight_text` | Read an Access to Insight page with its license notice | online, mirrored |
+| `list_sources` | Sources, versions, licenses, mirrors | offline |
 
-The server also offers `study_passage`, `compare_translations`, and `topic_research` MCP prompts, plus the `pali://sources` and `pali://canon-guide` resources. Client support for prompts and resources varies.
+Resources: `pali://sources`, `pali://canon-guide`.
 
-Example tool arguments:
+## How the canon index was built and checked
 
-```json
-{"uid":"mn1","language":"en","author":"sujato","offset":0,"limit":20,"includePali":true}
-```
+Citation IDs follow the numbering most readers use today (Bhikkhu Bodhi / SuttaCentral). At build time, each ID was matched to the VRI text by its opening words. Where wording differs between editions, the match falls back to verse numbers and to the numbered headings between neighboring texts. The checks behind it:
 
-Pass the object above to `get_text`. Use `get_metadata` to discover actual author IDs before selecting another translation. Tools return continuation information when more content remains; follow it instead of treating a partial response as the whole text. Missing translations and source failures are reported explicitly.
+- **8,544 texts** across all three piṭakas. Every one resolves by ID and by printed citation, and renders text. No two texts claim the same passage.
+- **Texts printed together** (AN 1.297–305, Dhp 1–20, SN 46.143–152) also answer to each member number: 1,259 members.
+- **Abbreviated (peyyāla) texts** that VRI collapses are flagged `approximate` and point to the passage where the abbreviation occurs: 265 texts, all in SN/AN repetition series, Paṭṭhāna, and Vinaya rules recited together.
+- **Independent check against Access to Insight's PTS citations:** 102/102 MN, 17/17 DN, all SN and AN pages fall in the correct text, and 0 problems overall. Pages that differ only by numbering scheme are reported as such.
+- **2,295 English translation links**, kept only with strong evidence: matching Pāli title or number, a PTS start page that identifies exactly one text, and Pāli ordinals (Paṭhama/Dutiya…) that agree with the translation's "(1)/(2)". Where the evidence is ambiguous, no link is made. Bridged links were content-checked against Ṭhānissaro's Access to Insight versions. A verse inherits the translation of the chapter that contains it.
+- An independent review spot-checked about 110 citations and every PTS lookup in the review set, and all returned the right text. Its findings on links and edge cases are fixed and locked in by regression tests.
 
-SuttaCentral URLs passed to `get_text` preserve their language, translator, and segment anchor. Search returns separate content and title matches: use `offset` with `next_offset` for content, and `titleOffset` with `next_title_offset` for titles.
+The build scripts are in [`scripts/canon/`](scripts/canon/README.md). Run `node scripts/audit.mjs` to re-run the exhaustive offline audit.
 
-## Coverage and citation
+## Citing correctly
 
-- **SuttaCentral:** catalogue, available texts/translations, Pali alignment where supported, search, and parallels. Availability varies by work, language, author, and upstream format. Browsing a canon category does not guarantee every text has a retrievable English translation.
-- **Access to Insight:** selected sutta translations and modern essays/articles. It is a selective collection, not a complete Tipitaka translation. Search uses its catalogue; it is not a full-text index of every article body.
-- **Digital Pali Dictionary:** live dictionary lookup, summaries, and available grammar or example material, with its separate noncommercial/share-alike terms. No DPD database is bundled.
+Quote only retrieved text. Cite the **text ID + VRI paragraph or PTS page + translator + source URL**. Keep Pāli, translation, dictionary gloss and your own explanation distinct. When the tool reports that two numbering schemes differ, mention both.
 
-No complete offline corpus, audio library, manuscript viewer, or scholarly critical edition is included. Parallel collections may contain non-Pali Buddhist texts; those witnesses are identified separately. Modern essays and dictionary glosses are not canonical quotations.
+## Sources and licenses
 
-Citations should name **work/reference → segment or passage → translator → source URL**. The study skills ask Claude to retrieve before quoting and distinguish text, translation, commentary, and interpretation. Source-grounded retrieval reduces errors; users should still check consequential quotations at the linked publication.
+The software is **MIT**. The texts are not.
 
-## Privacy and licences
+- **Pāli:** VRI Chaṭṭha Saṅgāyana Tipiṭaka. VRI makes it freely available for non-commercial use, with attribution to the Vipassana Research Institute.
+- **Ṭhānissaro Bhikkhu (dhammatalks.org):** CC BY-NC 4.0. "Commercial" includes any sale.
+- **Access to Insight:** licenses vary by page (CC BY-NC, BPS free distribution, public domain…). Each page's notice is returned with its text.
+- **Digital Pāḷi Dictionary:** CC BY-NC-SA 4.0.
+- **SuttaCentral:** linked only. SuttaCentral asks that its work not be used in AI tools, so this project does not fetch or bundle its translations or text. Its public citation numbering is used as nomenclature, and its public-domain Pāli root was used only at build time to align those numbers to the VRI text.
 
-The local server has no account system, API credentials, analytics, or persistent query database. Its tools read public sources and do not edit source websites or local documents. Searches and requested identifiers are sent to the relevant upstream websites, which may log requests under their own policies. Retrieved results enter your Claude conversation under your Claude account's settings. Do not put private information into public-source searches.
+See [THIRD_PARTY.md](THIRD_PARTY.md) and [docs/sources.md](docs/sources.md) for the reasoning.
 
-The software is **MIT**. Retrieved text is **not automatically MIT**. Preserve publisher, translator, copyright, and licence notices. ATI texts generally cannot be sold; DPD material has noncommercial and share-alike conditions. See [THIRD_PARTY.md](THIRD_PARTY.md). Keep this distinction when adapting the package commercially.
+## Privacy
+
+There are no accounts, analytics or stored queries. Pāli reading and search never leave your computer. Translation, dictionary and Access to Insight requests go to those public sites or their official mirrors, which may log requests.
 
 ## Manual MCP installation
-
-For an MCP client without plugin or MCPB installation, download the source, keep its bundled `server/` directory, install Node.js 20+, then add a stdio server:
 
 ```sh
 claude mcp add --transport stdio pali-canon -- node /absolute/path/pali-canon-claude/server/index.cjs
 ```
 
-For Claude Desktop's manual configuration, merge this server entry into the existing `mcpServers` object in `claude_desktop_config.json`; preserve other entries:
-
-```json
-{
-  "mcpServers": {
-    "pali-canon": {
-      "command": "node",
-      "args": ["C:/absolute/path/pali-canon-claude/server/index.cjs"]
-    }
-  }
-}
-```
-
-Replace the path with your actual location and restart the client. On Windows the config normally lives at `%APPDATA%\Claude\claude_desktop_config.json`. A manual MCP registration installs tools, not the plugin's skills. Avoid installing both routes in the same client unless you want duplicate tools.
+For Claude Desktop's `claude_desktop_config.json`, add `"pali-canon": {"command": "node", "args": ["C:/absolute/path/pali-canon-claude/server/index.cjs"]}` under `mcpServers`. Keep the `server/data/` folder next to `index.cjs`.
 
 ## Develop
 
 ```sh
-git clone https://github.com/DaniilKi/pali-canon-claude.git
-cd pali-canon-claude
 npm ci
 npm run build
-npm test
-npm run smoke
-npm run smoke -- --live
+npm test                    # unit tests (offline)
+node scripts/audit.mjs      # exhaustive canon audit (offline)
+npm run smoke               # MCP protocol checks (offline)
+npm run smoke -- --live     # plus live translation, dictionary and ATI checks
+node scripts/outage.mjs     # simulated outages: mirrors and offline behaviour
 npm run pack:desktop
 ```
 
-`npm test` runs focused local checks. `npm run smoke` checks the local MCP protocol; add `-- --live` to exercise upstream sources over the network. Run `claude plugin validate .` when Claude Code CLI is available, then try `claude --plugin-dir .` for an actual Claude session. Protocol/source checks alone do not prove installation in a user's Claude account.
-
-Read [research and architecture notes](docs/research.md) for source choices, scripture-tool comparisons, and official Anthropic documentation. Report reproducible failures through [GitHub Issues](https://github.com/DaniilKi/pali-canon-claude/issues), including the tool, sanitized arguments, and error text.
+Behind a corporate proxy, run Node with `NODE_USE_ENV_PROXY=1`. Report problems through [GitHub Issues](https://github.com/DaniilKi/pali-canon-claude/issues), including the citation you used and the error text.

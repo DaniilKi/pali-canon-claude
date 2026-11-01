@@ -1,21 +1,27 @@
 # Third-party content and dependencies
 
-The [MIT licence](LICENSE) covers this project's original software and documentation. It does **not** relicense retrieved scriptures, translations, dictionary entries, commentary, names, or upstream services. Source text is retrieved on demand rather than bundled as an offline corpus.
+The [MIT licence](LICENSE) covers this project's own software and documentation. It does **not** relicense scripture, translations, dictionary entries or upstream services.
 
-## SuttaCentral
+## Bundled: Chaṭṭha Saṅgāyana Tipiṭaka (VRI)
 
-Text, translations, parallels, search results, and catalogue information come from [SuttaCentral](https://suttacentral.net/), its [server/API source](https://github.com/suttacentral/suttacentral/tree/main/server), and related data projects such as [Bilara data](https://github.com/suttacentral/bilara-data). Preserve translator attribution and the licence identified for each work. Do not assume that every translation has the same licence. See [SuttaCentral licensing](https://suttacentral.net/licensing) and the relevant source repository or publication for authoritative terms.
+`server/data/canon.json.gz` contains the Pāli text of the Tipiṭaka from the Vipassana Research Institute's [tipitaka-xml](https://github.com/VipassanaTech/tipitaka-xml) repository (romanised edition; the exact commit is recorded in the data file and reported by `list_sources`). VRI states that these files are "made freely available for non-commercial use" and asks that projects attribute the Vipassana Research Institute and stay in sync with its corrections. The text is reproduced without changes, apart from markup removal. Page references are VRI's own markers for the PTS, Myanmar, VRI and Thai editions. Rebuild the data from a newer commit to pick up VRI corrections ([scripts/canon/README.md](scripts/canon/README.md)).
+
+## Citation numbering
+
+The standard citation IDs (for example `sn46.131-140`, `pli-tv-bu-vb-pj1`) follow the public numbering scheme used by SuttaCentral and Bhikkhu Bodhi. To align those numbers with the VRI text, the build reads the file and segment names and the opening words of the Mahāsaṅgīti Pāli root in [bilara-data](https://github.com/suttacentral/bilara-data), which is marked Public Domain Mark 1.0. Only the resulting number-to-location mapping and the public-domain Pāli titles are kept. No SuttaCentral translation, comment or other text is fetched or bundled. SuttaCentral [asks](https://suttacentral.net/licensing) that its content not be used for generative AI or apps built on it, and this project respects that by linking to SuttaCentral rather than retrieving from it.
+
+## dhammatalks.org (Ṭhānissaro Bhikkhu)
+
+Translations are fetched live from [dhammatalks.org](https://www.dhammatalks.org/suttas/). They are licensed [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) and attributed to Ṭhānissaro Bhikkhu. The site defines "commercial" to include any sale. The bundled translation index stores page titles and URLs only.
 
 ## Access to Insight
 
-[Access to Insight](https://www.accesstoinsight.org/) hosts selected translations and modern articles under varying page-specific licences. Its [copyright FAQ](https://www.accesstoinsight.org/faq.html#copyright) requires free distribution of copied or derived texts, with attribution, copyright notice, and licence terms retained. Most content is not public domain; the Sri Lanka Tripitaka Project files are an identified exception. Follow the individual page's licence. Do not sell fetched ATI content or silently apply this repository's MIT licence to it.
+Pages are fetched live from [accesstoinsight.org](https://accesstoinsight.org/). If it is unavailable, they come from the official Barre Center for Buddhist Studies repository [bcbsit/ati](https://github.com/bcbsit/ati) (via raw.githubusercontent.com or jsDelivr), or from the [Digital Pali Reader mirror](https://github.com/digitalpalireader/accesstoinsight). Licences vary by page (CC BY-NC 4.0, BPS free-distribution terms, public domain and others), and each page's own notice is returned with its text. Do not sell ATI content. The bundled index stores PTS references, titles, translators and licence labels only.
 
-## Digital Pali Dictionary
+## Digital Pāḷi Dictionary
 
-[Digital Pali Dictionary](https://dpdict.net/) is a separate dictionary project. Its [licensing documentation](https://docs.dpdict.net/license/) specifies [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/): attribution, noncommercial use, and share-alike obligations. Linking to DPD does not include its database in this repository. Dictionary content actually obtained from DPD retains its own conditions; dictionary material from other sources retains their terms.
+Lookups go live to [dpdict.net](https://www.dpdict.net/). DPD is [CC BY-NC-SA 4.0](https://docs.dpdict.net/license/), by Bodhirasa Bhikkhu. No DPD data is bundled.
 
 ## Runtime dependencies
 
-The bundled server includes the Model Context Protocol TypeScript SDK and its bundled dependency code. Relevant licence notices are distributed beside the generated server in `server/`; inspect those notices and `package-lock.json` for the actual versions and dependency tree. Build tools and MCPB packaging tools are development dependencies, not source-data licences. Regenerating the server must preserve bundled licence notices.
-
-This project is independent and is not endorsed by Anthropic, SuttaCentral, Access to Insight, or Digital Pali Dictionary.
+The bundled server includes the Model Context Protocol TypeScript SDK and its dependencies. Their licence notices are in `server/THIRD_PARTY_LICENSES.txt`.

@@ -1,5 +1,7 @@
 # Research and architecture decisions
 
+> **Note (v2.0.0):** the sources changed after this research. SuttaCentral asks that its work not be used in AI tools, so v2 bundles the VRI Pāli text and uses dhammatalks.org and Access to Insight for English. See [sources.md](sources.md).
+
 Reviewed 2026-10-31. This is a small source-retrieval project for personal study and community reuse. It does not attempt to create a new canon, translation, or religious authority.
 
 ## What Claude extensions do

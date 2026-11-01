@@ -1,0 +1,378 @@
+/**
+ * The bundled Pāli Canon: VRI Chaṭṭha Saṅgāyana text, standard citation IDs aligned to it,
+ * PTS page references and English translation links. Everything here works offline.
+ */
+import { readFileSync, existsSync } from 'node:fs';
+import { gunzipSync } from 'node:zlib';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { parseCitation, citationId, CitationError } from './citations.mjs';
+
+let here;
+try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
+
+const ROMAN = ['', 'i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii'];
+const HEADING = new Set(['subhead', 'title', 'chapter', 'book', 'nikaya', 'subsubhead']);
+// Centred lines are headings only when they are invocations or colophons; otherwise (e.g. rule recitations) they are text.
+const CENTRE_HEADING = /(niṭṭhit[aāo]ṃ?|niṭṭhitā|samattaṃ|samattā)\.?$|^Namo tassa|uddānaṃ$/i;
+const VERSE = new Set(['gatha1', 'gatha2', 'gatha3', 'gathalast']);
+const PITAKA = { vinaya: 'vinaya', ds: 'abhidhamma', vb: 'abhidhamma', dt: 'abhidhamma', pp: 'abhidhamma', kv: 'abhidhamma', ya: 'abhidhamma', patthana: 'abhidhamma' };
+const COLLECTION_ORDER = ['vinaya', 'dn', 'mn', 'sn', 'an', 'kp', 'dhp', 'ud', 'iti', 'snp', 'vv', 'pv', 'thag', 'thig', 'ap', 'bv', 'cp', 'ja', 'mnd', 'cnd', 'ps', 'mil', 'ne', 'pe', 'ds', 'vb', 'dt', 'pp', 'kv', 'ya', 'patthana'];
+const COLLECTION_NAMES = {
+  vinaya: 'Vinaya Piṭaka', dn: 'Dīgha Nikāya', mn: 'Majjhima Nikāya', sn: 'Saṃyutta Nikāya', an: 'Aṅguttara Nikāya',
+  kp: 'Khuddakapāṭha', dhp: 'Dhammapada', ud: 'Udāna', iti: 'Itivuttaka', snp: 'Suttanipāta', vv: 'Vimānavatthu',
+  pv: 'Petavatthu', thag: 'Theragāthā', thig: 'Therīgāthā', ap: 'Apadāna', bv: 'Buddhavaṃsa', cp: 'Cariyāpiṭaka',
+  ja: 'Jātaka', mnd: 'Mahāniddesa', cnd: 'Cūḷaniddesa', ps: 'Paṭisambhidāmagga', mil: 'Milindapañha', ne: 'Nettippakaraṇa',
+  pe: 'Peṭakopadesa', ds: 'Dhammasaṅgaṇī', vb: 'Vibhaṅga', dt: 'Dhātukathā', pp: 'Puggalapaññatti', kv: 'Kathāvatthu',
+  ya: 'Yamaka', patthana: 'Paṭṭhāna',
+};
+const PTS_ABBR = { dn: 'D', mn: 'M', sn: 'S', an: 'A', vinaya: 'Vin', ud: 'Ud', iti: 'It', snp: 'Sn', vv: 'Vv', pv: 'Pv',
+  thag: 'Th', thig: 'Thī', ap: 'Ap', bv: 'Bv', cp: 'Cp', ja: 'Ja', mnd: 'Nidd I', cnd: 'Nidd II', ps: 'Paṭis', mil: 'Mil',
+  ne: 'Nett', pe: 'Peṭ', ds: 'Dhs', vb: 'Vibh', dt: 'Dhātuk', pp: 'Pp', kv: 'Kv', ya: 'Yam', patthana: 'Paṭṭh', kp: 'Khp', dhp: 'Dhp' };
+
+export const fold = (value) => String(value ?? '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()
+  .replace(/ṁ|ṃ/g, 'm');
+
+let data = null;
+
+function dataPath(name) {
+  const candidates = [join(here, 'data', name), join(here, '..', 'server', 'data', name), join(process.cwd(), 'server', 'data', name)];
+  const found = candidates.find((p) => existsSync(p));
+  if (!found) throw new Error(`Bundled canon data (${name}) is missing. Reinstall the extension or run the canon build.`);
+  return found;
+}
+
+export function load() {
+  if (data) return data;
+  const canon = JSON.parse(gunzipSync(readFileSync(dataPath('canon.json.gz'))).toString('utf8'));
+  const translations = JSON.parse(readFileSync(dataPath('translations.json'), 'utf8'));
+  const byId = new Map();
+  for (const u of canon.units) if (!byId.has(u.id)) byId.set(u.id, u);
+  const ranges = [];
+  for (const u of canon.units) {
+    const m = u.id.match(/^(.*?)(\d+)-(\d+)$/);
+    if (m) ranges.push({ prefix: m[1], from: Number(m[2]), to: Number(m[3]), unit: u });
+  }
+  const urlIndex = new Map();
+  for (const [id, links] of Object.entries(translations)) {
+    for (const link of links) {
+      if (link.url) urlIndex.set(link.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\.html?$/, ''), id);
+    }
+  }
+  data = { canon, byId, ranges, translations, urlIndex, search: null };
+  return data;
+}
+
+function sectionOf(id) {
+  const m = id.match(/^([a-z-]+\d+\.)/);
+  return m ? m[1].replace(/\.$/, '') : id.match(/^(pli-tv-[a-z]+-[a-z]+-[a-z]+|pli-tv-[a-z]+|[a-z-]+)/)[1];
+}
+
+const VERSE_CITED = new Set(['snp', 'thag', 'thig', 'dhp']);
+
+function ptsLabel(collection, volume, page) {
+  const abbr = PTS_ABBR[collection];
+  if (!abbr || page === undefined || page === null) return null;
+  // Books cited by verse number get an explicit page label so a page is never mistaken for a verse.
+  if (VERSE_CITED.has(collection)) return `PTS ed. p. ${page}`;
+  if (!volume) return `${abbr} ${page}`;
+  if (['mnd', 'cnd', 'ps', 'mil', 'ne', 'pe', 'kp', 'dhp', 'ud', 'iti', 'snp', 'vv', 'pv', 'thag', 'thig', 'bv', 'cp', 'ds', 'dt', 'pp', 'kv'].includes(collection) && volume <= 1) {
+    return `${abbr} ${page}`;
+  }
+  return `${abbr} ${ROMAN[volume] || volume} ${page}`;
+}
+
+/** Translation links for a text; a verse or member inherits those of the range that contains it (e.g. a Dhp chapter). */
+export function linksFor(u) {
+  const d = load();
+  const own = d.translations[u.id];
+  if (own?.length) return { links: own, via: null };
+  const container = rangeContaining(u.id);
+  if (container && d.translations[container.id]?.length) return { links: d.translations[container.id], via: container };
+  return { links: [], via: null };
+}
+
+function unitSummary(u, extra = {}) {
+  const d = load();
+  return {
+    id: u.id,
+    citation: u.acronym,
+    title: u.title || null,
+    collection: COLLECTION_NAMES[u.collection] || u.collection,
+    ...(u.kind === 'range' ? { covers: u.members?.length ? `${u.members[0]} … ${u.members[u.members.length - 1]}` : undefined } : {}),
+    pts: u.pts ? ptsLabel(u.collection, u.pts.volume, u.pts.page) + (u.pts.end_page && u.pts.end_page !== u.pts.page ? `–${u.pts.end_page}` : '') : null,
+    vri_paragraphs: u.vri || null,
+    ...(u.approximate ? { approximate: true } : {}),
+    english_available: linksFor(u).links.length,
+    ...extra,
+  };
+}
+
+function rangeContaining(id) {
+  const d = load();
+  const m = id.match(/^(.*?)(\d+)$/);
+  if (!m) return null;
+  const n = Number(m[2]);
+  return d.ranges.find((r) => r.prefix === m[1] && r.from <= n && n <= r.to)?.unit || null;
+}
+
+function lookupId(id) {
+  const d = load();
+  if (d.byId.has(id)) return { unit: d.byId.get(id), via: 'id' };
+  const container = rangeContaining(id);
+  if (container) return { unit: container, via: 'range', note: `${id} is not printed separately; it belongs to ${container.acronym} (${container.id}), which groups abbreviated or short texts.` };
+  return null;
+}
+
+function ptsLookup(c) {
+  const d = load();
+  const wanted = c.collection === 'nidd' ? null : c.collection === 'tha-ap' ? 'ap' : c.collection;
+  if (c.collection === 'nidd' && c.volume > 2) return null;
+  const pool = d.canon.units.filter((u) => u.pts && !u.approximate && u.kind !== 'range'
+    && (c.collection === 'nidd' ? (c.volume === 1 ? u.collection === 'mnd' : u.collection === 'cnd') : u.collection === wanted)
+    && (c.collection === 'nidd' || u.pts.volume === c.volume));
+  const hits = pool.filter((u) => u.pts.page <= c.page && c.page <= (u.pts.end_page ?? u.pts.page));
+  if (!hits.length) return null;
+  // Prefer the text that begins on that page, then the shortest span.
+  // Prefer texts that begin on that page, then the earliest in the book (S i 1 is SN 1.1, not SN 1.2).
+  hits.sort((a, b) => (b.pts.page === c.page) - (a.pts.page === c.page) || a.book - b.book || a.start - b.start);
+  return hits;
+}
+
+/** Resolve any citation to a canon text. Returns { unit, notes[], alternatives[] } or throws. */
+export function resolve(reference) {
+  const d = load();
+  const notes = [];
+  let c;
+  try {
+    c = parseCitation(reference);
+  } catch (error) {
+    if (error instanceof CitationError) throw error;
+    throw new CitationError(`Could not read "${reference}".`);
+  }
+  if (c.segment) notes.push(`Passage anchor ":${c.segment}" is a SuttaCentral segment number; this tool returns VRI paragraphs, so read the text and locate the passage.`);
+  if (c.note) notes.push(c.note);
+  if (c.kind === 'pts') {
+    const hits = ptsLookup(c);
+    if (!hits) {
+      const unpaged = { ja: 'Jātaka', nidd: c.volume === 2 ? 'Cūḷaniddesa' : null, ya: 'Yamaka', patthana: 'Paṭṭhāna' }[c.collection];
+      throw new CitationError(unpaged
+        ? `The VRI edition bundled here carries no PTS page numbers for the ${unpaged}, so ${c.raw} cannot be looked up by page. Cite it by number instead (e.g. Ja 1).`
+        : `No text found at PTS ${c.raw}. Check the volume and page; PTS pages are available for the Sutta and Vinaya Piṭakas and most Abhidhamma books.`);
+    }
+    const label = c.raw.replace(/^PTS[:\s]*/i, '');
+    notes.push(`PTS ${label} falls within ${hits[0].acronym}${hits[0].pts.page === c.page ? ', which begins on that page' : ''}.`);
+    return { unit: hits[0], notes, alternatives: hits.slice(1, 4).map((u) => unitSummary(u)) };
+  }
+  if (c.kind === 'url') {
+    const key = `${c.host}${c.path}`;
+    const id = d.urlIndex.get(key) || d.urlIndex.get(key.replace(/^accesstoinsight\.org/, 'accesstoinsight.org'));
+    if (!id) throw new CitationError('That page is not linked to a canon text in the bundled index. Give the sutta citation instead.');
+    notes.push(`Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id}.`);
+    return { unit: d.byId.get(id), notes, alternatives: [] };
+  }
+  const id = c.kind === 'uid' ? c.uid : citationId(c);
+  let hit = lookupId(id);
+  if (!hit && c.kind === 'id' && c.end !== null && c.end !== undefined) {
+    // "MN 10-12" or "Dhp 5-7": a span that is not itself a text → return its first text.
+    const first = citationId({ ...c, end: null });
+    hit = lookupId(first);
+    if (hit) notes.push(`${reference} spans several texts; showing the first, ${hit.unit.acronym}. Request the others separately.`);
+  }
+  if (!hit && c.kind === 'id' && c.collection === 'snp' && c.path.length === 1) {
+    throw new CitationError(`Snp ${c.path[0]} looks like a verse number. Cite the Sutta Nipāta by chapter and sutta, e.g. Snp 1.8 (Mettasutta).`);
+  }
+  if (!hit && c.kind === 'id' && ['thag', 'thig'].includes(c.collection) && c.path.length === 1) {
+    hit = lookupId(`${c.collection}${c.path[0]}.1`);
+    if (hit) notes.push(`${reference} read as ${hit.unit.acronym} (chapter ${c.path[0]}, first poem). Cite Thag/Thig as chapter.poem.`);
+  }
+  if (!hit) {
+    // "Kv 1", "Dt 1", "Ds 1": books numbered in sub-sections → the first section under that number.
+    const child = d.canon.units.find((u) => !u.approximate && u.id.startsWith(`${id}.`));
+    if (child) {
+      hit = { unit: child, via: 'child' };
+      notes.push(`${reference} is divided into sections; showing the first, ${child.acronym}. Use browse_canon("${id}") to list them.`);
+    }
+  }
+  if (!hit) {
+    const collection = c.kind === 'id' ? c.collection : sectionOf(id);
+    throw new CitationError(`${reference} (${id}) is not in the canon index. Check the number with browse_canon("${collection}").`);
+  }
+  if (hit.note) notes.push(hit.note);
+  if (hit.unit.approximate) notes.push(`${hit.unit.id} is abbreviated (peyyāla) in the VRI edition; the passage shown is where the abbreviation occurs.`);
+  const schemes = (d.translations[hit.unit.id] || []).filter((t) => t.reference && /^(AN|SN) \d+:\d+/.test(t.reference))
+    .map((t) => t.reference.match(/^(AN|SN) (\d+):(\d+)/)).filter(Boolean)
+    .filter((m) => `${m[1].toLowerCase()}${m[2]}.${m[3]}` !== hit.unit.id);
+  if (schemes.length) notes.push(`Also numbered ${schemes[0][1]} ${schemes[0][2]}.${schemes[0][3]} in the PTS-based numbering used by Ṭhānissaro Bhikkhu (dhammatalks.org) and Access to Insight.`);
+  return { unit: hit.unit, notes, alternatives: [] };
+}
+
+function bookBlocks(u) {
+  return load().canon.books[u.book].blocks;
+}
+
+/** Group a unit's VRI blocks into readable segments: headings, prose paragraphs and whole stanzas. */
+export function segments(u, { includeNotes = false } = {}) {
+  const blocks = bookBlocks(u).slice(u.start, u.end);
+  const out = [];
+  let stanza = null;
+  const flush = () => { if (stanza) { out.push(stanza); stanza = null; } };
+  for (const [rend, n, text, notes, pages] of blocks) {
+    const pts = (pages.P || []).map((p) => {
+      const [vol, page] = p.split('.').map(Number);
+      return ptsLabel(u.collection, vol, page);
+    });
+    if (rend === 'hangnum') { flush(); stanza = { type: 'verse', vri: n, text: '', pts: [] }; continue; }
+    if (VERSE.has(rend)) {
+      if (!stanza) stanza = { type: 'verse', vri: n, text: '', pts: [] };
+      stanza.text += (stanza.text ? '\n' : '') + text;
+      stanza.pts.push(...pts);
+      if (includeNotes && notes.length) (stanza.variants ||= []).push(...notes);
+      if (rend === 'gathalast') flush();
+      continue;
+    }
+    flush();
+    if (!text) continue;
+    const isHeading = HEADING.has(rend) || (rend === 'centre' && CENTRE_HEADING.test(text));
+    const seg = { type: isHeading ? 'heading' : 'prose', vri: n, text, pts };
+    if (includeNotes && notes.length) seg.variants = notes;
+    out.push(seg);
+  }
+  flush();
+  return out.map((s, i) => {
+    const r = { ref: `${u.id}/${i + 1}`, type: s.type, text: s.text };
+    if (s.vri) r.vri_paragraph = s.vri;
+    if (s.pts?.length) r.pts_page_begins = [...new Set(s.pts.filter(Boolean))];
+    if (s.variants?.length) r.variant_readings = s.variants;
+    return r;
+  });
+}
+
+export function source() {
+  return load().canon.source;
+}
+
+export function describe(u, notes = []) {
+  const d = load();
+  const { links: own, via } = linksFor(u);
+  if (via) notes = [...notes, `English translations are of the whole ${via.acronym} (${via.title}); this text is part of it.`];
+  const english = own.map((t) => ({
+    source: t.source === 'ati' ? 'Access to Insight' : 'dhammatalks.org',
+    translator: t.translator, reference: t.reference || undefined, url: t.url,
+    ...(t.license ? { license: t.license } : {}),
+    translation_id: t.source === 'ati' ? `ati:${t.path}` : `dt:${t.url.split('/suttas/')[1].replace(/\.html$/, '')}`,
+    match: t.match,
+  }));
+  const blocks = bookBlocks(u);
+  const book = d.canon.books[u.book];
+  return {
+    ...unitSummary(u),
+    pitaka: PITAKA[u.collection] || 'sutta',
+    vri_book: book.title,
+    vri_file: book.file,
+    ...(u.members ? { contains: u.members } : {}),
+    english,
+    links: {
+      suttacentral: `https://suttacentral.net/${u.id}`,
+      note: 'SuttaCentral lists parallels and further translations. This tool links to it but does not fetch its content, at SuttaCentral\'s request.',
+    },
+    notes,
+    segments: segments(u).length,
+    source: d.canon.source,
+    first_line: blocks.slice(u.start, u.end).find((b) => !HEADING.has(b[0]) && !(b[0] === 'centre' && CENTRE_HEADING.test(b[2])) && b[2])?.[2]?.slice(0, 160) || null,
+  };
+}
+
+// ---- search ---------------------------------------------------------------
+
+function buildSearch() {
+  const d = load();
+  const owner = d.canon.books.map((b) => new Array(b.blocks.length).fill(null));
+  // Most specific unit per block: prefer non-range, non-approximate, shortest span.
+  const sorted = [...d.canon.units].filter((u) => !u.approximate)
+    // Later writers win: ranges first, then larger texts, so each block belongs to its most specific text.
+    .sort((a, b) => (b.kind === 'range') - (a.kind === 'range') || (b.end - b.start) - (a.end - a.start));
+  for (const u of sorted) for (let i = u.start; i < u.end; i += 1) owner[u.book][i] = u;
+  const folded = d.canon.books.map((b) => b.blocks.map((blk) => fold(blk[2])));
+  const titles = d.canon.units.filter((u) => !u.approximate).map((u) => {
+    const english = (d.translations[u.id] || []).map((t) => t.reference || '').join(' ');
+    return { u, text: fold(`${u.acronym} ${u.title} ${english}`) };
+  });
+  d.search = { owner, folded, titles };
+  return d.search;
+}
+
+function terms(query) {
+  const phrases = [...query.matchAll(/"([^"]+)"/g)].map((m) => fold(m[1]).trim()).filter(Boolean);
+  const words = fold(query.replace(/"[^"]+"/g, ' ')).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
+  return [...phrases, ...words];
+}
+
+export function search(query, { collection, limit = 10, offset = 0 } = {}) {
+  const d = load();
+  const s = d.search || buildSearch();
+  const wanted = terms(query);
+  if (!wanted.length) throw new Error('Search needs at least one word of two or more letters.');
+  const filter = collection ? fold(collection).replace(/\s+/g, '') : null;
+  const okCollection = (u) => !filter || u.collection === filter || u.id.startsWith(filter);
+  const titleHits = s.titles.filter(({ u, text }) => okCollection(u) && wanted.every((w) => text.includes(w)))
+    .slice(0, 20).map(({ u }) => unitSummary(u));
+  const hits = [];
+  const seen = new Set();
+  let total = 0;
+  for (let bi = 0; bi < s.folded.length; bi += 1) {
+    const blocks = s.folded[bi];
+    for (let k = 0; k < blocks.length; k += 1) {
+      const text = blocks[k];
+      if (!wanted.every((w) => text.includes(w))) continue;
+      const u = s.owner[bi][k];
+      if (!u || !okCollection(u) || seen.has(u.id)) continue;
+      seen.add(u.id);
+      total += 1;
+      if (total <= offset || hits.length >= limit) continue;
+      const original = d.canon.books[bi].blocks[k][2];
+      const at = Math.max(0, text.indexOf(wanted[0]) - 80);
+      hits.push({ ...unitSummary(u), match_vri_paragraph: d.canon.books[bi].blocks[k][1] || undefined,
+        excerpt: (at ? '…' : '') + original.slice(at, at + 260) + (original.length > at + 260 ? '…' : '') });
+    }
+  }
+  return {
+    query, searched: 'Full Pāli text of the VRI Chaṭṭha Saṅgāyana edition (diacritics optional), text titles and English translation titles.',
+    title_matches: titleHits, results: hits, total_texts_matched: total, offset, limit,
+    next_offset: offset + limit < total ? offset + limit : null,
+    tip: total === 0 && !titleHits.length ? 'Search Pāli words (e.g. "satipatthana", "anapanassati") or an English title word. For English topics also try search_access_to_insight.' : undefined,
+  };
+}
+
+// ---- browsing -------------------------------------------------------------
+
+export function browse(node = 'canon', { offset = 0, limit = 60 } = {}) {
+  const d = load();
+  const key = fold(node).replace(/\s+/g, '');
+  const units = d.canon.units.filter((u) => !u.approximate);
+  const page = (items) => ({ total: items.length, offset, limit, next_offset: offset + limit < items.length ? offset + limit : null, items: items.slice(offset, offset + limit) });
+  if (['canon', 'tipitaka', 'all', ''].includes(key)) {
+    return { node: 'canon', ...page(COLLECTION_ORDER.map((c) => ({ id: c, name: COLLECTION_NAMES[c], pitaka: PITAKA[c] || 'sutta', texts: units.filter((u) => u.collection === c && u.kind !== 'range').length }))) };
+  }
+  if (['sutta', 'vinaya', 'abhidhamma'].includes(key)) {
+    const cs = COLLECTION_ORDER.filter((c) => (PITAKA[c] || 'sutta') === key);
+    return { node: key, ...page(cs.map((c) => ({ id: c, name: COLLECTION_NAMES[c] }))) };
+  }
+  if (['sn', 'an', 'vinaya'].includes(key)) {
+    const sections = new Map();
+    for (const u of units.filter((x) => x.collection === key && x.kind !== 'range')) {
+      const s = sectionOf(u.id);
+      if (!sections.has(s)) sections.set(s, { id: s, first: u.acronym, title: u.title, texts: 0 });
+      sections.get(s).texts += 1;
+    }
+    return { node: key, name: COLLECTION_NAMES[key], note: 'Open a section ID to list its texts.', ...page([...sections.values()]) };
+  }
+  let members = units.filter((u) => (u.collection === key || sectionOf(u.id) === key) && u.kind !== 'range');
+  if (!members.length) members = units.filter((u) => u.id.startsWith(`${key}.`) && u.kind !== 'range');
+  if (!members.length) members = units.filter((u) => u.id.startsWith(key) && u.kind !== 'range');
+  if (!members.length) throw new Error(`Unknown browse node "${node}". Start with "canon", "sutta", "vinaya", "abhidhamma" or a collection such as mn, sn, sn56, an4, dhp.`);
+  members.sort((a, b) => a.book - b.book || a.start - b.start);
+  return { node: key, name: COLLECTION_NAMES[key] || members[0].collection, ...page(members.map((u) => unitSummary(u))) };
+}
+
+export const _test = { lookupId, rangeContaining, ptsLookup };

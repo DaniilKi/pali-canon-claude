@@ -2,22 +2,50 @@
   "manifest_version": "0.3",
   "name": "pali-canon",
   "display_name": "Pali Canon",
-  "version": "1.0.0",
-  "description": "Read and study the Pali Canon with source citations, translations, parallels and Pali word lookup.",
-  "long_description": "Read-only online retrieval from SuttaCentral, Access to Insight and Digital Pali Dictionary. No API keys or local corpus download. Text availability and reuse terms depend on the upstream source. Claude Code study skills are distributed separately in the GitHub plugin.",
-  "author": { "name": "DaniilKi", "url": "https://github.com/DaniilKi" },
+  "version": "2.0.0",
+  "description": "Read and study the Pāli Canon: the whole Tipiṭaka offline, any citation or PTS page, English translations with mirrors, Pāli dictionary.",
+  "long_description": "Bundles the complete Pāli Tipiṭaka (VRI Chaṭṭha Saṅgāyana edition) for offline reading, citation lookup (MN 10, SN 56:11, Dhp 183, Pj 1, M i 55…), PTS page lookup and full-text Pāli search. English translations by Ṭhānissaro Bhikkhu (dhammatalks.org) and Access to Insight are fetched live with official mirrors; Digital Pāḷi Dictionary lookups are live. Numbering differences between editions are reported. Texts keep their own licences (non-commercial).",
+  "author": {
+    "name": "DaniilKi",
+    "url": "https://github.com/DaniilKi"
+  },
   "homepage": "https://github.com/DaniilKi/pali-canon-claude",
   "documentation": "https://github.com/DaniilKi/pali-canon-claude#readme",
   "support": "https://github.com/DaniilKi/pali-canon-claude/issues",
-  "repository": { "type": "git", "url": "https://github.com/DaniilKi/pali-canon-claude" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DaniilKi/pali-canon-claude"
+  },
   "license": "MIT",
   "server": {
     "type": "node",
     "entry_point": "server/index.cjs",
-    "mcp_config": { "command": "node", "args": ["${__dirname}/server/index.cjs"] }
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/server/index.cjs"
+      ]
+    }
   },
   "tools_generated": true,
   "prompts_generated": true,
-  "compatibility": { "platforms": ["darwin", "win32", "linux"], "runtimes": { "node": ">=20.0.0" } },
-  "keywords": ["buddhism", "pali", "tipitaka", "suttacentral", "study"]
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=20.0.0"
+    }
+  },
+  "keywords": [
+    "buddhism",
+    "pali",
+    "tipitaka",
+    "theravada",
+    "sutta",
+    "study",
+    "dhamma"
+  ]
 }
