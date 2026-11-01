@@ -419,4 +419,51 @@ test('server.json for the MCP Registry is consistent and refuses placeholders at
   assert.ok(!checkServerJson({ publish: true }).some((p) => /placeholder/i.test(p)));
   // The guard itself still recognises the placeholder address.
   assert.ok(PLACEHOLDER.test('https://PLACEHOLDER-hosted-endpoint-issue-5.invalid/mcp'));
+test('Claude Code plugin and marketplace manifests follow the documented schema', async () => {
+  const { readFileSync, existsSync } = await import('node:fs');
+  const root = new URL('../', import.meta.url);
+  const json = (p) => JSON.parse(readFileSync(new URL(p, root), 'utf8'));
+  const plugin = json('.claude-plugin/plugin.json');
+  const market = json('.claude-plugin/marketplace.json');
+  const pkg = json('package.json');
+  const id = /^[a-z0-9][a-z0-9-]*[a-z0-9]$/; // kebab-case, valid in a plugin@marketplace id
+
+  // marketplace.json: name, owner.name and plugins are required; description avoids a validator warning.
+  assert.match(market.name, id);
+  assert.ok(!/^(claude|anthropic|cc-plugin-|claudeai-)/.test(market.name), 'reserved marketplace name prefix');
+  assert.ok(market.owner?.name, 'owner.name is required');
+  assert.ok(market.description, 'top-level description');
+  assert.equal(market.plugins.length, 1);
+  const entry = market.plugins[0];
+  // The entry name is the install id and must equal the manifest name, or `/plugin install` fails.
+  assert.equal(entry.name, plugin.name);
+  assert.equal(entry.source, './', 'plugin lives at the marketplace root');
+  assert.equal(entry.description, plugin.description, 'entry description overrides plugin.json in listings; keep them identical');
+  assert.equal(entry.version, undefined, 'version belongs in plugin.json only');
+  for (const k of ['commands', 'agents', 'skills', 'hooks', 'mcpServers']) assert.equal(entry[k], undefined, `entry must not declare ${k}`);
+
+  // plugin.json: only documented keys, kebab-case name, version kept in step with package.json.
+  const known = new Set(['$schema', 'name', 'displayName', 'version', 'description', 'author', 'homepage', 'repository', 'license', 'keywords',
+    'metadata', 'icon', 'documentationUrl', 'supportUrl', 'privacyPolicyUrl', 'termsOfServiceUrl', 'defaultEnabled', 'dependencies',
+    'settings', 'userConfig', 'channels', 'skills', 'commands', 'agents', 'hooks', 'mcpServers', 'lspServers', 'outputStyles']);
+  for (const k of Object.keys(plugin)) assert.ok(known.has(k), `unknown plugin.json key ${k}`);
+  assert.match(plugin.name, id);
+  assert.ok(!/(^|-)(claude|anthropic)(-|$)/.test(plugin.name), 'plugin name must not read as an Anthropic plugin');
+  assert.equal(plugin.version, pkg.version);
+  assert.ok(plugin.author?.name && plugin.description && plugin.license);
+  for (const k of ['homepage', 'documentationUrl', 'supportUrl']) assert.match(plugin[k], /^https:\/\/github\.com\/DaniilKi\/pali-canon-claude/, k);
+
+  // .mcp.json starts the committed bundle from the plugin root with plain arguments.
+  const server = json('.mcp.json').mcpServers['pali-canon'];
+  assert.equal(server.command, 'node');
+  assert.deepEqual(server.args, ['${CLAUDE_PLUGIN_ROOT}/server/index.cjs']);
+  assert.ok(existsSync(new URL('server/index.cjs', root)));
+
+  // Each skill has front matter with a single-line text description.
+  for (const s of ['study', 'compare', 'pali-word']) {
+    const md = readFileSync(new URL(`skills/${s}/SKILL.md`, root), 'utf8');
+    assert.ok(md.startsWith(`---\nname: ${s}\ndescription: `) && /^description: \S.*$/m.test(md), s);
+  }
+  // A top-level bin/ folder stops claude.ai and Cowork from installing the plugin.
+  assert.ok(!existsSync(new URL('bin', root)), 'no top-level bin/ directory');
 });
