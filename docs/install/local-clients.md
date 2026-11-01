@@ -14,7 +14,7 @@ Please read [what to expect from small models](#what-to-expect-from-small-models
 
 ## What works offline
 
-The server has 11 tools. Six of them need no internet:
+The server has 11 tools. Six of them work without internet (`get_text` needs it only when you ask for an English translation):
 
 | Tool | What it does | Internet? |
 |---|---|---|
@@ -106,15 +106,17 @@ Notes:
 Follow Open WebUI's guide, [Open WebUI integration](https://docs.openwebui.com/features/extensibility/plugin/tools/openapi-servers/open-webui). In short:
 
 - **For everyone on the server** (admin): ⚙️ **Settings → Admin → Integrations**, in the **Tools** section click ➕, enter `http://localhost:8000`, and save.
-- **Just for you**: ⚙️ **Settings → Integrations**, **Tools** section, ➕. This tab appears only if an admin has turned on *Direct Integrations*.
+- **Just for you**: ⚙️ **Settings → Integrations**, **Tools** section, ➕. This tab appears only if an admin has turned on *Direct Integrations*, and people who are not admins also need the admin to give them the *Direct Tool Servers* permission. A server added here is called from your browser, so `http://localhost:8000` works even when Open WebUI itself runs in Docker.
 
-If Open WebUI runs in **Docker**, `localhost` means the container, not your computer. Use `http://host.docker.internal:8000` instead (and start mcpo with `--host 0.0.0.0` and an API key, as above).
+If Open WebUI runs in **Docker** and you add the server **for everyone** (the admin route), Open WebUI's own server makes the calls, and there `localhost` means the container, not your computer. Use `http://host.docker.internal:8000` instead (and start mcpo with `--host 0.0.0.0` and an API key, as above). The "just for you" route does not need this.
 
 If you run mcpo with a config file holding several servers, each one has its own address, such as `http://localhost:8000/pali-canon`. Enter that full address, not just `http://localhost:8000`.
 
 ### 3. Use it
 
-In a chat, turn on the tool server from the ➕ / tools menu under the message box. Open WebUI uses the model's own ("native") tool calling by default. If a model ignores the tools, try a stronger model rather than switching to the older "Legacy" mode.
+Open WebUI does not switch on tool servers added for everyone by default. In each chat, click the **Integrations** button to the left of the ➕ in the message box, open **Tools**, and switch on the Pāli Canon server.
+
+The model also needs function calling. To check it, open **Chat Controls** (top right of the chat) → **Advanced Params** → **Function Calling**, and make sure it is on *Default* or *Native* (Native uses the model's own tool calling and works best with models that support it). If a model ignores the tools, try a stronger model rather than switching to an older prompt-based mode.
 
 **What mcpo passes on:** only the tools. The server's built-in guidance for the model (how to cite, keep sources apart, and so on), its prompts and its resources do not reach Open WebUI. Add the [suggested system prompt](#suggested-system-prompt) to the model or the chat to make up for this.
 
@@ -193,4 +195,4 @@ instead of answering from memory.
 
 ## Tested
 
-On 1 November 2026 we started the server through mcpo 0.0.20 on Windows 11 (Node.js 26, with the version pins shown above) and checked that all 11 tools appear in its OpenAPI listing, and that `resolve_reference` (MN 10), `search_texts` and `get_text` (Dhp 1) return the bundled text with no internet needed. The LM Studio, Open WebUI, oterm, Kit and MCPHost steps follow each project's documentation as of that date. Apps change quickly: if a menu has moved, their own guide (linked above) is the reference. Please [open an issue](https://github.com/DaniilKi/pali-canon-claude/issues) if something here no longer matches.
+On 1 November 2026 we started the server through mcpo 0.0.20 on Windows 11 (Node.js 26, with the version pins shown above) and checked that all 11 tools appear in its OpenAPI listing, and that `resolve_reference` (MN 10), `search_texts` and `get_text` (Dhp 1) return the bundled text with no internet needed. The LM Studio, Open WebUI, oterm, Kit and MCPHost steps follow each project's documentation as of that date. This checks the bridge, not a full chat: we have not yet run the steps end to end in a chat app with a local model. Apps change quickly: if a menu has moved, their own guide (linked above) is the reference. Please [open an issue](https://github.com/DaniilKi/pali-canon-claude/issues) if something here no longer matches.

@@ -153,7 +153,7 @@ test('a verse inherits its chapter translations, with a note', () => {
 
 test('local-clients guide lists every tool, with offline tools marked correctly', async () => {
   const { readFileSync } = await import('node:fs');
-  const read = (p) => readFileSync(new URL(p, import.meta.url), 'utf8');
+  const read = (p) => readFileSync(new URL(p, import.meta.url), 'utf8').replace(/\r\n/g, '\n');
   const source = read('../src/index.mjs');
   const guide = read('../docs/install/local-clients.md');
   const starts = [...source.matchAll(/^tool\('([a-z_]+)', '([^']*)'/gm)];
@@ -171,5 +171,7 @@ test('local-clients guide lists every tool, with offline tools marked correctly'
     else if (/works offline/i.test(description)) assert.match(internet, /^No, unless/, name);
     else assert.equal(internet, 'Yes', name);
   }
-  for (const [, block] of guide.matchAll(/```json\n([\s\S]*?)```/g)) assert.doesNotThrow(() => JSON.parse(block));
+  const jsonBlocks = [...guide.matchAll(/```json\n([\s\S]*?)```/g)].map((m) => m[1]);
+  assert.ok(jsonBlocks.length >= 2, 'expected JSON examples for LM Studio and oterm');
+  for (const block of jsonBlocks) assert.doesNotThrow(() => JSON.parse(block));
 });
