@@ -591,4 +591,44 @@ test('local-clients guide lists every tool, with offline tools marked correctly'
   const jsonBlocks = [...guide.matchAll(/```json\n([\s\S]*?)```/g)].map((m) => m[1]);
   assert.ok(jsonBlocks.length >= 2, 'expected JSON examples for LM Studio and oterm');
   for (const block of jsonBlocks) assert.doesNotThrow(() => JSON.parse(block));
+test('skills follow the Agent Skills spec and declare the MCP server dependency', async () => {
+  const { readFileSync, readdirSync } = await import('node:fs');
+  const dir = new URL('../skills/', import.meta.url);
+  const names = readdirSync(dir, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
+  assert.ok(names.length >= 3);
+  // Field list from https://agentskills.io/specification (skills-ref rejects any other top-level key).
+  // Plus argument-hint: a Claude Code extension it reads only at the top level (slash-menu hint); hubs do not run skills-ref.
+  const ALLOWED = new Set(['name', 'description', 'license', 'compatibility', 'metadata', 'allowed-tools', 'argument-hint']);
+  const unquote = (v) => (/^".*"$/.test(v) ? JSON.parse(v) : v);
+  for (const name of names) {
+    const text = readFileSync(new URL(`${name}/SKILL.md`, dir), 'utf8').replace(/\r\n/g, '\n');
+    const m = text.match(/^---\n([\s\S]*?)\n---\n/);
+    assert.ok(m, `${name}: frontmatter`);
+    const fm = {};
+    let map = null;
+    for (const line of m[1].split('\n')) {
+      const nested = line.match(/^ {2}([\w-]+): (.+)$/);
+      if (nested && map) { map[nested[1]] = unquote(nested[2]); continue; }
+      const top = line.match(/^([\w-]+):(?: (.*))?$/);
+      assert.ok(top, `${name}: unparsed frontmatter line ${line}`);
+      if (top[2] === undefined) { fm[top[1]] = map = {}; continue; }
+      map = null;
+      // A plain YAML scalar may not contain ": " or start with a quote/indicator; quote it instead.
+      if (!/^"/.test(top[2])) assert.ok(!/: |^[\[{&*!|>'%@`]/.test(top[2]), `${name}: ${top[1]} must be quoted`);
+      fm[top[1]] = unquote(top[2]);
+    }
+    for (const key of Object.keys(fm)) assert.ok(ALLOWED.has(key), `${name}: field ${key} is not in the Agent Skills spec`);
+    assert.equal(fm.name, name, 'name must match the directory');
+    assert.match(fm.name, /^[a-z0-9]+(-[a-z0-9]+)*$/);
+    assert.ok(fm.name.length <= 64);
+    assert.ok(fm.description.length > 0 && fm.description.length <= 1024);
+    assert.ok(fm.compatibility.length > 0 && fm.compatibility.length <= 500);
+    for (const v of Object.values(fm.metadata)) assert.equal(typeof v, 'string');
+    assert.match(fm.description, /Requires the Pali Canon MCP server/);
+    assert.match(fm.compatibility, /Pali Canon MCP server/);
+    assert.equal(fm.metadata['requires-mcp-server'], 'pali-canon');
+    assert.ok(fm['argument-hint'], `${name}: top-level argument-hint for the Claude Code slash menu`);
+    assert.equal(fm['argument-hint'], fm.metadata['argument-hint']);
+    assert.match(text.slice(m[0].length), /needs the Pali Canon MCP server/);
+  }
 });
