@@ -26,6 +26,7 @@ test('canonical sources are the expected texts', () => {
   assert.deepEqual(ids.khandha, ['an4.67']);
   assert.deepEqual(ids.dhajagga, ['sn11.3']);
   assert.deepEqual(ids.mora, ['ja159']);
+  assert.deepEqual(ids.vatta, ['cp29', 'ja35']);
   assert.deepEqual(ids.atanatiya, ['dn32']);
   assert.deepEqual(ids.bojjhanga, ['sn46.14', 'sn46.15', 'sn46.16']);
   assert.equal(canon.resolve('Kp 5').unit.title, 'Maṅgalasuttaṃ');
@@ -36,6 +37,8 @@ test('canonical sources are the expected texts', () => {
   assert.match(canon.resolve('Ja 159').unit.title, /^Morajātakaṃ/);
   assert.equal(canon.resolve('DN 32').unit.title, 'Āṭānāṭiyasuttaṃ');
   assert.equal(canon.resolve('SN 46.14').unit.title, 'Paṭhamagilānasuttaṃ');
+  assert.equal(canon.resolve('Cp 29').unit.title, 'Vaṭṭapotakacariyā');
+  assert.equal(canon.resolve('Ja 35').unit.title, 'Vaṭṭakajātakaṃ');
 });
 
 test('keys and aliases are unique and every entry is found by key and name', () => {
@@ -127,11 +130,47 @@ test('errors: unknown name and a text that is not a source', () => {
 
 test('chanting-book layouts are permission-gated: code path present, no content', () => {
   assert.ok(CHANTING_BOOKS.length >= 2);
-  for (const b of CHANTING_BOOKS) assert.equal(b.granted, false, b.id);
+  for (const b of CHANTING_BOOKS) {
+    assert.equal(b.granted, false, b.id);
+    assert.equal(b.status, 'request letter drafted, not yet sent', b.id);
+  }
   for (const b of chantingBooks()) {
     assert.equal(b.available, false);
-    assert.match(b.reason, /not granted/);
+    assert.match(b.reason, /has not been obtained \(request letter drafted, not yet sent\)/);
+    assert.doesNotMatch(b.reason, /requested|asked/);
     assert.deepEqual(Object.keys(b).sort(), ['available', 'publisher', 'reason']);
   }
   assert.deepEqual(paritta(canon, { name: 'mangala' }).chanting_books, chantingBooks());
+});
+
+test('Vaṭṭa Paritta: Cp 29 is the default source and holds the chant; Ja 35 shares its closing verse', () => {
+  const r = paritta(canon, { name: 'vatta' });
+  assert.equal(r.text_id, 'cp29');
+  assert.equal(r.title, 'Vaṭṭapotakacariyā');
+  assert.deepEqual(r.other_sources, ['Ja 35']);
+  const cp = fold(canon.segments(canon.resolve('Cp 29').unit).map((s) => s.text).join(' '));
+  const ja = fold(canon.segments(canon.resolve('Ja 35').unit).map((s) => s.text).join(' '));
+  assert.ok(cp.includes('atthi loke silaguno'));
+  assert.ok(cp.includes('santi pakkha apatana'));
+  assert.ok(ja.includes('santi pakkha apatana'));
+  assert.ok(!ja.includes('atthi loke silaguno'));
+  assert.equal(paritta(canon, { name: 'vatta', text: 'Ja 35' }).text_id, 'ja35');
+});
+
+test('find(): no loose substring matches; ambiguous queries are errors', () => {
+  assert.equal(find('a'), null);
+  assert.equal(find('ma'), null);
+  assert.equal(find('metta bhavana'), null);
+  assert.equal(find('protection'), null);
+  assert.throws(() => find('jataka'), /more than one paritta \(mora, vatta\)/);
+  assert.throws(() => paritta(canon, { name: 'jataka' }), /more than one paritta/);
+  assert.throws(() => paritta(canon, { name: 'a' }), /No paritta named "a"/);
+  assert.throws(() => paritta(canon, { name: 'metta bhavana' }), /No paritta named/);
+  assert.ok(!PARITTA.find((e) => e.key === 'mangala').aliases.includes('protection'));
+  // Whole-word partial matches still work.
+  assert.equal(find('quail').key, 'vatta');
+  assert.equal(find('peacock').key, 'mora');
+  assert.equal(find('Vaṭṭapotakacariyā').key, 'vatta');
+  // No alias may match more than one entry.
+  for (const e of PARITTA) for (const l of [e.key, e.name, ...e.aliases]) assert.equal(find(l).key, e.key, l);
 });

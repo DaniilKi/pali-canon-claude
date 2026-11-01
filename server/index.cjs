@@ -22868,7 +22868,7 @@ var PARITTA = [
   {
     key: "mangala",
     name: "Ma\u1E45gala Sutta",
-    aliases: ["mangala sutta", "mahamangala", "blessings", "protection"],
+    aliases: ["mangala sutta", "mahamangala", "blessings"],
     texts: ["Kp 5", "Snp 2.4"],
     note: "The same sutta appears in the Khuddakap\u0101\u1E6Dha (Kp 5) and the Sutta Nip\u0101ta (Snp 2.4)."
   },
@@ -22910,9 +22910,9 @@ var PARITTA = [
   {
     key: "vatta",
     name: "Va\u1E6D\u1E6Da Paritta",
-    aliases: ["vatta", "vattaka", "quail", "vattaka jataka"],
-    texts: ["Ja 35"],
-    note: "Canonical source: the verse of the Va\u1E6D\u1E6Daka J\u0101taka (Ja 35)."
+    aliases: ["vatta", "vattaka", "quail", "vattaka jataka", "vattapotaka", "vattapotakacariya"],
+    texts: ["Cp 29", "Ja 35"],
+    note: 'Canonical source: the Va\u1E6D\u1E6Dapotakacariy\u0101 of the Cariy\u0101pi\u1E6Daka (Cp 29), which holds the verses of the chant. The Va\u1E6D\u1E6Daka J\u0101taka (Ja 35) shares part of them; pass text: "Ja 35" to read it.'
   },
   {
     key: "dhajagga",
@@ -22957,22 +22957,32 @@ var PARITTA = [
   { key: "nidhikanda", name: "Nidhika\u1E47\u1E0Da Sutta", aliases: ["nidhikanda", "reserve fund", "treasure"], texts: ["Kp 8"] }
 ];
 var CHANTING_BOOKS = [
-  { id: "amaravati", publisher: "Amaravati Publications", granted: false, letter: "docs/outreach/amaravati.md" },
-  { id: "abhayagiri", publisher: "Abhayagiri Buddhist Monastery", granted: false, letter: "docs/outreach/abhayagiri.md" }
+  { id: "amaravati", publisher: "Amaravati Publications", granted: false, status: "request letter drafted, not yet sent", letter: "docs/outreach/amaravati.md" },
+  { id: "abhayagiri", publisher: "Abhayagiri Buddhist Monastery", granted: false, status: "request letter drafted, not yet sent", letter: "docs/outreach/abhayagiri.md" }
 ];
 function chantingBooks() {
   return CHANTING_BOOKS.map((b) => ({
     publisher: b.publisher,
     available: b.granted,
-    ...b.granted ? {} : { reason: "Permission to reproduce this chanting book's layout and English has been requested but not granted, so none of it is included." }
+    ...b.granted ? {} : { reason: `Permission to reproduce this chanting book's layout and English has not been obtained (${b.status}), so none of it is included.` }
   }));
 }
 var keyOf = (s) => fold2(s).replace(/[^a-z0-9]+/g, " ").trim();
+var strip = (s) => s.replace(/\b(sutta|suttam|paritta)\b/g, " ").replace(/\s+/g, " ").trim();
+var MIN_PARTIAL = 4;
 function find(name) {
-  const q = keyOf(name).replace(/\b(sutta|suttam|paritta)\b/g, "").trim();
+  const q = strip(keyOf(name ?? ""));
   if (!q) return null;
-  const labels = (e) => [e.key, e.name, ...e.aliases].map(keyOf).map((l) => [l, l.replace(/\b(sutta|suttam|paritta)\b/g, "").trim()]).flat();
-  return PARITTA.find((e) => labels(e).includes(q)) || PARITTA.find((e) => labels(e).some((l) => l && (l.includes(q) || q.includes(l)))) || null;
+  const labels = (e) => [e.key, e.name, ...e.aliases].map(keyOf).flatMap((l) => [l, strip(l)]).filter(Boolean);
+  const ambiguous = (hits2) => new Error(`"${name}" matches more than one paritta (${hits2.map((e) => e.key).join(", ")}). Use one of those keys.`);
+  const exact = PARITTA.filter((e) => labels(e).includes(q));
+  if (exact.length > 1) throw ambiguous(exact);
+  if (exact.length === 1) return exact[0];
+  if (q.replace(/ /g, "").length < MIN_PARTIAL) return null;
+  const re = new RegExp(`(^| )${q}( |$)`);
+  const hits = PARITTA.filter((e) => labels(e).some((l) => re.test(l)));
+  if (hits.length > 1) throw ambiguous(hits);
+  return hits[0] ?? null;
 }
 function englishLinks(described) {
   return described.english.map(({ source: source2, translator, reference, url, license, translation_id }) => ({

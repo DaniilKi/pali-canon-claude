@@ -15,7 +15,7 @@ import { fold } from './canon.mjs';
  * containing a phrase (folded match); tests check every phrase is found in the bundle.
  */
 export const PARITTA = [
-  { key: 'mangala', name: 'Maṅgala Sutta', aliases: ['mangala sutta', 'mahamangala', 'blessings', 'protection'], texts: ['Kp 5', 'Snp 2.4'],
+  { key: 'mangala', name: 'Maṅgala Sutta', aliases: ['mangala sutta', 'mahamangala', 'blessings'], texts: ['Kp 5', 'Snp 2.4'],
     note: 'The same sutta appears in the Khuddakapāṭha (Kp 5) and the Sutta Nipāta (Snp 2.4).' },
   { key: 'ratana', name: 'Ratana Sutta', aliases: ['ratana sutta', 'jewel', 'treasures'], texts: ['Kp 6', 'Snp 2.1'],
     note: 'The same sutta appears in the Khuddakapāṭha (Kp 6) and the Sutta Nipāta (Snp 2.1).' },
@@ -27,8 +27,8 @@ export const PARITTA = [
     note: 'Canonical source: AN 11.15 (Mettāsuttaṃ), the eleven benefits of mettā.' },
   { key: 'mora', name: 'Mora Paritta', aliases: ['mora', 'peacock', 'mora jataka'], texts: ['Ja 159'],
     note: 'Canonical source: the verses of the Mora Jātaka (Ja 159). The bundled Jātaka holds the verses only; the prose story belongs to the commentary.' },
-  { key: 'vatta', name: 'Vaṭṭa Paritta', aliases: ['vatta', 'vattaka', 'quail', 'vattaka jataka'], texts: ['Ja 35'],
-    note: 'Canonical source: the verse of the Vaṭṭaka Jātaka (Ja 35).' },
+  { key: 'vatta', name: 'Vaṭṭa Paritta', aliases: ['vatta', 'vattaka', 'quail', 'vattaka jataka', 'vattapotaka', 'vattapotakacariya'], texts: ['Cp 29', 'Ja 35'],
+    note: 'Canonical source: the Vaṭṭapotakacariyā of the Cariyāpiṭaka (Cp 29), which holds the verses of the chant. The Vaṭṭaka Jātaka (Ja 35) shares part of them; pass text: "Ja 35" to read it.' },
   { key: 'dhajagga', name: 'Dhajagga Sutta', aliases: ['dhajagga', 'banner', 'top of the standard', 'crest of the banner'], texts: ['SN 11.3'],
     note: 'Canonical source: SN 11.3 (Dhajaggasuttaṃ).' },
   { key: 'atanatiya', name: 'Āṭānāṭiya Sutta', aliases: ['atanatiya', 'atanatiya paritta'], texts: ['DN 32'],
@@ -53,33 +53,48 @@ export const PARITTA = [
 ];
 
 /**
- * Chanting-book layouts and English renderings (Amaravati, Abhayagiri). Permission has been asked
- * (docs/outreach/) but not granted, so `granted` is false and no content is bundled. When a publisher
+ * Chanting-book layouts and English renderings (Amaravati, Abhayagiri). Permission has not been
+ * obtained (request letters drafted in docs/outreach/, not yet sent), so `granted` is false and no
+ * content is bundled. `status` records where the request stands; keep it in step with docs/outreach/. When a publisher
  * agrees, record it in docs/sources.md, add the data file and set `granted`.
  */
 export const CHANTING_BOOKS = [
-  { id: 'amaravati', publisher: 'Amaravati Publications', granted: false, letter: 'docs/outreach/amaravati.md' },
-  { id: 'abhayagiri', publisher: 'Abhayagiri Buddhist Monastery', granted: false, letter: 'docs/outreach/abhayagiri.md' },
+  { id: 'amaravati', publisher: 'Amaravati Publications', granted: false, status: 'request letter drafted, not yet sent', letter: 'docs/outreach/amaravati.md' },
+  { id: 'abhayagiri', publisher: 'Abhayagiri Buddhist Monastery', granted: false, status: 'request letter drafted, not yet sent', letter: 'docs/outreach/abhayagiri.md' },
 ];
 
 export function chantingBooks() {
   return CHANTING_BOOKS.map((b) => ({
     publisher: b.publisher,
     available: b.granted,
-    ...(b.granted ? {} : { reason: 'Permission to reproduce this chanting book\'s layout and English has been requested but not granted, so none of it is included.' }),
+    ...(b.granted ? {} : { reason: `Permission to reproduce this chanting book's layout and English has not been obtained (${b.status}), so none of it is included.` }),
   }));
 }
 
 const keyOf = (s) => fold(s).replace(/[^a-z0-9]+/g, ' ').trim();
 
-/** Find an entry by key, name or alias (diacritics optional). Exact match first, then substring. */
+const strip = (s) => s.replace(/\b(sutta|suttam|paritta)\b/g, ' ').replace(/\s+/g, ' ').trim();
+const MIN_PARTIAL = 4;
+
+/**
+ * Find an entry by key, name or alias (diacritics optional). An exact label match wins. Otherwise
+ * the query (at least MIN_PARTIAL letters) must appear as whole words inside a label; a query that
+ * merely contains a label (e.g. "metta bhavana") does not match. Returns null when nothing matches
+ * and throws when the query fits more than one entry.
+ */
 export function find(name) {
-  const q = keyOf(name).replace(/\b(sutta|suttam|paritta)\b/g, '').trim();
+  const q = strip(keyOf(name ?? ''));
   if (!q) return null;
-  const labels = (e) => [e.key, e.name, ...e.aliases].map(keyOf).map((l) => [l, l.replace(/\b(sutta|suttam|paritta)\b/g, '').trim()]).flat();
-  return PARITTA.find((e) => labels(e).includes(q))
-    || PARITTA.find((e) => labels(e).some((l) => l && (l.includes(q) || q.includes(l))))
-    || null;
+  const labels = (e) => [e.key, e.name, ...e.aliases].map(keyOf).flatMap((l) => [l, strip(l)]).filter(Boolean);
+  const ambiguous = (hits) => new Error(`"${name}" matches more than one paritta (${hits.map((e) => e.key).join(', ')}). Use one of those keys.`);
+  const exact = PARITTA.filter((e) => labels(e).includes(q));
+  if (exact.length > 1) throw ambiguous(exact);
+  if (exact.length === 1) return exact[0];
+  if (q.replace(/ /g, '').length < MIN_PARTIAL) return null;
+  const re = new RegExp(`(^| )${q}( |$)`); // q holds only [a-z0-9 ]
+  const hits = PARITTA.filter((e) => labels(e).some((l) => re.test(l)));
+  if (hits.length > 1) throw ambiguous(hits);
+  return hits[0] ?? null;
 }
 
 function englishLinks(described) {
