@@ -15,6 +15,7 @@ Start with the [project README](../README.md). Then:
 - [How it works](how-it-works.md): how the data was built and checked
 - [Decisions](decisions.md): each major decision and its reasoning
 - [Development](development.md): build, test, connect clients, release
+- [Permission letters](outreach/README.md): letters to our sources and their status
 
 **For AI agents**
 

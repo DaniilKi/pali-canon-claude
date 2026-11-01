@@ -71,7 +71,7 @@ A source is used only when it meets all five tests:
 | Source | Status | Why | Terms | Link |
 |---|---|---|---|---|
 | **SuttaCentral parallels** | **Linked** | The best parallels database; we link to it for every text | request not to use in AI | [suttacentral.net](https://suttacentral.net/) |
-| **DharmaNexus** (University of Hamburg) | **To evaluate; ask first** ([#29](https://github.com/DaniilKi/pali-canon-claude/issues/29)) | Computed text reuse across the Pāli canon | unstated | [DharmaNexus Pāli](https://buddhanexus2.kc-tbts.uni-hamburg.de/db/pli) |
+| **DharmaNexus** (now part of Dharmamitra) | **To evaluate; ask first** ([#29](https://github.com/DaniilKi/pali-canon-claude/issues/29)) | Computed text reuse across the Pāli canon | unstated; [permission letter drafted](outreach/dharmanexus.md) | [DharmaNexus](https://dharmamitra.org/db) |
 | **splendidmoons**, **uposatha** | **Planned** ([#42](https://github.com/DaniilKi/pali-canon-claude/issues/42)) | Uposatha and festival calendars by tradition | MIT | [splendidmoons](https://pypi.org/project/splendidmoons/) · [uposatha](https://github.com/jhanarato/uposatha) |
 | **Aksharamukha** | **Declined (licence)**; own transliterator planned ([#26](https://github.com/DaniilKi/pali-canon-claude/issues/26)) | Excellent script converter, but AGPL-3.0 would force that licence on the whole tool | AGPL-3.0 | [Aksharamukha](https://pypi.org/project/aksharamukha) |
 | **Chanting books** (Amaravati, Abhayagiri) | **Planned, with permission** ([#44](https://github.com/DaniilKi/pali-canon-claude/issues/44)) | Daily recitation in Pāli and English | ask publishers | — |
@@ -120,6 +120,10 @@ The one remaining use is narrow. The *numbering* most readers cite (MN 10, SN 46
 | This software | Anything the MIT licence allows | — |
 
 Full licence notices: [THIRD_PARTY.md](../THIRD_PARTY.md).
+
+## Permission letters
+
+We are writing to each source whose terms need confirming or whose permission we need. The letters, their contact routes and their status are in [outreach/](outreach/README.md). Replies are recorded in this file as they arrive; until then each source is used only as its published terms allow.
 
 ## Proposing a new source
 
