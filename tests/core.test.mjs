@@ -154,13 +154,50 @@ test('a verse inherits its chapter translations, with a note', () => {
 test('CI runs the full matrix and the nightly job reports source health', async () => {
   const { readFile } = await import('node:fs/promises');
   const check = await readFile(new URL('../.github/workflows/check.yml', import.meta.url), 'utf8');
-  assert.match(check, /os: \[ubuntu-latest, macos-latest, windows-latest\]/);
-  assert.match(check, /node: \[20, 22\]/);
+  // Loose checks, so reordering or reformatting the YAML does not break this test.
+  const matrixLine = (key) => check.match(new RegExp(`^\\s*${key}:\\s*\\[([^\\]]*)\\]`, 'm'))?.[1].split(',').map((v) => v.trim()) ?? [];
+  for (const os of ['ubuntu-latest', 'macos-latest', 'windows-latest']) assert.ok(matrixLine('os').includes(os), os);
+  for (const node of ['20', '22']) assert.ok(matrixLine('node').includes(node), `node ${node}`);
   assert.match(check, /git diff --exit-code -- server\//);
   const nightly = await readFile(new URL('../.github/workflows/nightly.yml', import.meta.url), 'utf8');
-  for (const needle of ['schedule:', 'workflow_dispatch:', 'issues: write', 'npm run smoke -- --live', 'npm run outage', 'title == "Source health"', 'title="Source health"']) {
-    assert.ok(nightly.includes(needle), needle);
+  assert.match(nightly, /^\s*schedule:/m);
+  assert.match(nightly, /^\s*workflow_dispatch:/m);
+  assert.match(nightly, /issues:\s*write/);
+  for (const run of [/npm run smoke -- --live/, /npm run outage/, /scripts\/linkcheck\.mjs/]) assert.match(nightly, run);
+  for (const step of ['smoke', 'outage', 'linkcheck']) {
+    assert.match(nightly, new RegExp(`id:\\s*${step}\\b`), `step ${step}`);
+    assert.match(nightly, new RegExp(`steps\\.${step}\\.outcome`), `issue and fail conditions use ${step}`);
   }
+  assert.match(nightly, /Source health/);
   const outage = await readFile(new URL('../scripts/outage.mjs', import.meta.url), 'utf8');
   assert.match(outage, /process\.exitCode = 1/, 'outage script must fail the nightly run on unexpected results');
+  assert.match(outage, /ALLOWED_HOSTS/, 'total outage must block every allowlisted host');
+});
+
+test('total-outage hosts cover the whole allowlist, www and bare variants included', async () => {
+  const { ALLOWED_HOSTS } = await import('../src/http.mjs');
+  for (const host of ['accesstoinsight.org', 'www.accesstoinsight.org', 'dhammatalks.org', 'www.dhammatalks.org', 'dpdict.net', 'www.dpdict.net', 'raw.githubusercontent.com', 'cdn.jsdelivr.net']) {
+    assert.ok(ALLOWED_HOSTS.includes(host), host);
+  }
+});
+
+test('link check covers every translation link over a rotation of daily samples', async () => {
+  const { collectLinks, dailySample } = await import('../scripts/linkcheck.mjs');
+  const links = collectLinks({
+    a: [{ url: 'https://www.dhammatalks.org/x.html' }, { url: 'https://www.accesstoinsight.org/y.html', path: '/y', source: 'ati' }],
+    b: [{ url: 'https://www.dhammatalks.org/x.html' }, { source: 'none' }],
+  });
+  assert.equal(links.length, 2, 'duplicates merged, entries without a URL skipped');
+  assert.deepEqual(links.find((l) => l.url.endsWith('x.html')).uids, ['a', 'b']);
+  const items = Array.from({ length: 10 }, (_, i) => i);
+  assert.deepEqual(dailySample(items, 4, 0), [0, 1, 2, 3]);
+  assert.deepEqual(dailySample(items, 4, 2), [8, 9, 0, 1], 'wraps around');
+  assert.equal(dailySample(items, 0, 5).length, 10, 'no limit means all');
+  const seen = new Set();
+  for (let day = 0; day < 3; day += 1) dailySample(items, 4, day).forEach((i) => seen.add(i));
+  assert.equal(seen.size, 10, 'three days cover all ten');
+  const { readFile } = await import('node:fs/promises');
+  const real = collectLinks(JSON.parse(await readFile(new URL('../server/data/translations.json', import.meta.url), 'utf8')));
+  assert.ok(real.length > 1000);
+  for (const link of real) assert.ok(/^https:\/\/(www\.)?(dhammatalks|accesstoinsight)\.org\//.test(link.url), link.url);
 });

@@ -4,11 +4,13 @@
 // text must still work and every online call must fail cleanly with an error message, not crash.
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+import { ALLOWED_HOSTS } from '../src/http.mjs';
 const scenarios = [
   ['accesstoinsight.org', 'ATI site down'],
   ['accesstoinsight.org,raw.githubusercontent.com', 'ATI site + GitHub raw down'],
   ['www.dhammatalks.org', 'dhammatalks.org down'],
-  ['www.dhammatalks.org,accesstoinsight.org,raw.githubusercontent.com,cdn.jsdelivr.net,www.dpdict.net', 'everything online down', true],
+  // Every allowlisted host, so the result does not depend on which host variant (www or not) a call or redirect uses.
+  [ALLOWED_HOSTS.join(','), 'everything online down', true],
 ];
 const failures = [];
 // online: the call needs the network. In a total outage it must report an error; otherwise it must succeed.

@@ -22254,6 +22254,7 @@ var ALLOWED = [
   { host: "raw.githubusercontent.com", prefixes: ["/bcbsit/ati/", "/digitalpalireader/accesstoinsight/"] },
   { host: "cdn.jsdelivr.net", prefixes: ["/gh/bcbsit/ati@"] }
 ];
+var ALLOWED_HOSTS = ALLOWED.map((r) => r.host);
 var MAX_BYTES = 6 * 1024 * 1024;
 var USER_AGENT = "pali-canon-claude/2.0 (scripture study; read-only; https://github.com/DaniilKi/pali-canon-claude)";
 function allowed(url) {

@@ -6,6 +6,8 @@ const ALLOWED = [
   { host: 'raw.githubusercontent.com', prefixes: ['/bcbsit/ati/', '/digitalpalireader/accesstoinsight/'] },
   { host: 'cdn.jsdelivr.net', prefixes: ['/gh/bcbsit/ati@'] },
 ];
+/** Every host the server may contact (used by scripts/outage.mjs to simulate a total outage). */
+export const ALLOWED_HOSTS = ALLOWED.map((r) => r.host);
 const MAX_BYTES = 6 * 1024 * 1024;
 const USER_AGENT = 'pali-canon-claude/2.0 (scripture study; read-only; https://github.com/DaniilKi/pali-canon-claude)';
 
