@@ -4,6 +4,7 @@ import { z } from 'zod';
 import * as canon from './canon.mjs';
 import * as english from './english.mjs';
 import * as providers from './providers.mjs';
+import * as features from './features/index.mjs';
 
 export const VERSION = '2.0.0';
 
@@ -155,6 +156,9 @@ export function createServer() {
   prompt('study_passage', 'Read and explain a passage with cited Pāli and translation.', 'reference', (ref) => `Study ${ref}. Call resolve_reference, then get_text (Pāli, with translation "default" if one is available). Summarise the setting and teaching plainly. Quote only retrieved text; cite the text ID with VRI paragraph or PTS page, and name the translator. Mention numbering notes the tool returns. Separate scripture, translation choices and your interpretation. Point to SuttaCentral for parallels.`);
   prompt('compare_translations', 'Compare available English translations against the Pāli.', 'reference', (ref) => `Compare translations of ${ref}. Call compare_translations, then examine a short passage against the Pāli segments from get_text. Keep each translator's exact wording attributed; explain differences as translation choices unless the Pāli shows a textual variant. State which translations were unavailable.`);
   prompt('topic_research', 'Research a topic through canonical passages.', 'topic', (topic) => `Research ${topic} in the Pāli Canon. Use search_texts with Pāli terms (lookup_pali helps find them) and English title words, and search_access_to_insight for study guides. Read the most relevant passages with get_text before quoting. Ground every claim in a cited passage; separate canonical text, dictionary glosses, translators' notes and your synthesis. State search limits.`);
+
+  const resource = server.registerResource.bind(server);
+  for (const feature of Object.values(features)) feature.register?.({ tool, prompt, resource, z, citation, canon, english, providers });
 
   return server;
 }
