@@ -8,16 +8,33 @@ permissions:
   contents: read
 jobs:
   check:
-    runs-on: ubuntu-latest
+    name: Node ${{ matrix.node }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [20, 22]
+    defaults:
+      run:
+        shell: bash
     steps:
+      # Keep LF line endings on Windows too, so the build and the committed server/ compare byte for byte.
+      - name: Use LF line endings
+        if: runner.os == 'Windows'
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node }}
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm run check
       - run: npm run smoke
       - run: npm run pack:desktop
+      # One leg is enough for the staleness check; the build is the same on every platform.
       - name: Check committed standalone server is current
+        if: matrix.os == 'ubuntu-latest' && matrix.node == 20
         run: git diff --exit-code -- server/
