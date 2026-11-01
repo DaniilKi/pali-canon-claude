@@ -35,7 +35,9 @@
     "serve": "node server/http.cjs",
     "loadtest": "node scripts/loadtest.mjs",
     "linkcheck": "node scripts/linkcheck.mjs",
-    "registry:check": "node scripts/check-server-json.mjs --publish"
+    "registry:check": "node scripts/check-server-json.mjs --publish",
+    "evals": "node evals/run.mjs",
+    "eval": "node evals/run.mjs"
   },
   "dependencies": {},
   "devDependencies": {

@@ -138,6 +138,20 @@ Considered and **not used** (with reasons), and the sources **planned** next, ar
 
 Details: [docs/how-it-works.md](docs/how-it-works.md).
 
+## Evaluation
+
+We measure whether answers cite correctly instead of just saying so. The suite in [`evals/`](evals/) has 189 questions: the kind of thing a user asks, the citations a correct answer must give, and checks that call the server's tools. Categories: citation and PTS-page resolution, numbering traps (AN 7.64 vs AN 7.68; the Kālāma Sutta is AN 3.65 here but AN 3:66 on dhammatalks.org), abbreviated texts, quote checking, edition pages, scripts, variants, the calendar, lists and topics, Vinaya rules, Abhidhamma, reading plans, paritta, translation availability and refusals of invalid citations. Every expected citation is checked against the bundled canon each time the suite runs.
+
+Offline tool checks (`npm run evals`, run by CI on every change), November 2026:
+
+| Result | Questions |
+|---|---|
+| Passed | 176 (100% of those run) |
+| Failed | 0 |
+| Skipped | 13: 6 need the network (`npm run evals -- --live`: all 6 passed on 1 November 2026, including the English misattribution checks, which CI does not run); 7 test commentary and word analysis, which are not scored until those tools ship |
+
+Model-level runs, where Claude or Codex answers the questions with the server connected and must cite the expected texts, are scripted in [`evals/claude-plugin-eval/`](evals/claude-plugin-eval/) (`claude plugin eval`) and [`evals/codex/`](evals/codex/) (`codex exec`). They need a model and are run by hand; their scores will be added here once run.
+
 ## Install
 
 Pick the app you use. Every option runs the same server, with the same 26 tools.
