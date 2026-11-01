@@ -27,11 +27,5 @@
         "type": "stdio"
       }
     }
-  ],
-  "remotes": [
-    {
-      "type": "streamable-http",
-      "url": "https://PLACEHOLDER-hosted-endpoint-issue-5.invalid/mcp"
-    }
   ]
 }

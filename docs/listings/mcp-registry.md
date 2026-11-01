@@ -11,14 +11,20 @@ Publishing guide: https://github.com/modelcontextprotocol/registry/blob/main/doc
 - The icon at [`assets/icon.svg`](../../assets/icon.svg).
 - A check: `node scripts/check-server-json.mjs --publish` lists anything still missing before publishing. Without `--publish`, the same check runs in the test suite.
 
-## The hosted entry is a placeholder
+## The hosted version: add when #5 is live
 
-`server.json` has a `remotes` entry whose address is `https://PLACEHOLDER-hosted-endpoint-issue-5.invalid/mcp`. The `.invalid` ending can never be a real website. It marks where the hosted address goes once [#5](https://github.com/DaniilKi/pali-canon-claude/issues/5) is live. **Do not publish it as it is.** Before publishing, either:
+`server.json` lists only the npm package for now, because the hosted version ([#5](https://github.com/DaniilKi/pali-canon-claude/issues/5)) is not live yet and the registry needs a real, publicly reachable address. When it is live, add this block to `server.json` after `"packages": [...]` (with a comma before it), put the real hosted address in place of the placeholder, and publish a new registry version:
 
-- replace the address with the live hosted URL (it must answer publicly), or
-- delete the whole `"remotes": [...]` block and publish the npm entry alone.
+```json
+"remotes": [
+  {
+    "type": "streamable-http",
+    "url": "https://PLACEHOLDER-hosted-endpoint-issue-5.invalid/mcp"
+  }
+]
+```
 
-The `--publish` check refuses to pass while the placeholder is there.
+The `.invalid` ending can never be a real website. The `--publish` check refuses to pass if that placeholder address ever ends up in `server.json`.
 
 ## Steps (a maintainer does these)
 

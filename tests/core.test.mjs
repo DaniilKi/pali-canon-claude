@@ -157,10 +157,9 @@ test('server.json for the MCP Registry is consistent and refuses placeholders at
   // Registry namespaces are compared case-sensitively against the GitHub login (registry#689).
   assert.equal(REGISTRY_NAME, 'io.github.DaniilKi/pali-canon');
   assert.equal(NPM_PACKAGE, 'pali-canon-mcp');
-  // The hosted endpoint is not live yet (#5): publish mode must refuse the placeholder remote.
-  const { readFileSync } = await import('node:fs');
-  const server = JSON.parse(readFileSync(new URL('../server.json', import.meta.url), 'utf8'));
-  if ((server.remotes || []).some((r) => PLACEHOLDER.test(r.url))) {
-    assert.ok(checkServerJson({ publish: true }).some((p) => /placeholder/.test(p)));
-  }
+  // The hosted endpoint is not live yet (#5): server.json must not carry a placeholder remote,
+  // so publish mode reports no placeholder problem (it may still report mcpName/name until #4).
+  assert.ok(!checkServerJson({ publish: true }).some((p) => /placeholder/i.test(p)));
+  // The guard itself still recognises the placeholder address.
+  assert.ok(PLACEHOLDER.test('https://PLACEHOLDER-hosted-endpoint-issue-5.invalid/mcp'));
 });

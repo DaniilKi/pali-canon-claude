@@ -1,6 +1,6 @@
 # Directory listings
 
-This folder holds everything needed to list Pali Canon for Claude in the official MCP Registry and in community directories. Nothing here has been submitted yet. A maintainer submits each one by hand, because every directory needs a sign-in. The open steps are also listed in the project hand-off notes (`HANDOFF.md`).
+This folder holds everything needed to list Pali Canon for Claude in the official MCP Registry and in community directories. Nothing here has been submitted yet. A maintainer submits each one by hand, because every directory needs a sign-in. The open maintainer steps are tracked in [issue #14](https://github.com/DaniilKi/pali-canon-claude/issues/14).
 
 An **MCP server** is a small program that lets an AI app (Claude, Codex, Cursor and others) use a tool. A **directory** or **registry** is a website where people find such tools. Listing the server is how most people will discover it.
 
@@ -40,7 +40,7 @@ An **MCP server** is a small program that lets an AI app (Claude, Codex, Cursor 
 
 **Long description:**
 
-> Pali Canon gives AI assistants the complete Pāli Tipiṭaka, the scripture of Theravāda Buddhism, so they quote and cite the real text instead of paraphrasing from memory. It bundles the whole VRI Chaṭṭha Saṅgāyana edition (8,544 citable texts, about 2.8 million words) for offline reading. It resolves citations such as MN 10, SN 56:11 and Dhp 183, and PTS pages such as M i 55, and runs full-text Pāli search. English translations by Ṭhānissaro Bhikkhu (dhammatalks.org) and from Access to Insight are fetched live, with official mirrors, and always attributed. Digital Pāḷi Dictionary lookups are live. Numbering differences between editions are reported, not hidden. It is read-only and needs no API key. The texts keep their own non-commercial licences.
+> Pali Canon gives AI assistants the complete Pāli Tipiṭaka, the scripture of Theravāda Buddhism, so they quote and cite the real text instead of paraphrasing from memory. It bundles the whole VRI Chaṭṭha Saṅgāyana edition (8,544 citable texts, about 2.8 million words) for offline reading. It resolves citations such as MN 10, SN 56:11 and Dhp 183, and PTS pages such as M i 55, and runs full-text Pāli search. English translations by Ṭhānissaro Bhikkhu (dhammatalks.org) and from Access to Insight are fetched live, with backup mirrors, and always attributed. Digital Pāḷi Dictionary lookups are live. Numbering differences between editions are reported, not hidden. It is read-only and needs no API key. The texts keep their own non-commercial licences.
 
 **What it offers:** 11 read-only tools (`resolve_reference`, `get_metadata`, `get_text`, `get_translation`, `compare_translations`, `search_texts`, `browse_canon`, `lookup_pali`, `search_access_to_insight`, `get_access_to_insight_text`, `list_sources`), 3 prompts (`study_passage`, `compare_translations`, `topic_research`) and 2 resources.
 
