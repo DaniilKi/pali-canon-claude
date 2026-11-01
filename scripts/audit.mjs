@@ -1,5 +1,7 @@
 // Exhaustive offline audit of the bundled canon: every text, every citation form, every PTS start page, every translation link.
 import * as canon from '../src/canon.mjs';
+import { EDITIONS, editionLabel, editionIndex, nextUnit } from '../src/editions.mjs';
+import { textSegments, parseNoteSpans, uncovered, SIGLA } from '../src/variants.mjs';
 
 const d = canon.load();
 const failures = [];
@@ -24,6 +26,43 @@ for (const u of d.canon.units) {
   const segs = canon.segments(u);
   if (!segs.some((s) => s.type !== 'heading' && s.text)) fail('text', `${u.id} has no body text`);
   else count('text');
+  // 3b. Every Thai/Myanmar/VRI page break inside the text is shown in its segments.
+  const shown = new Set(segs.flatMap((s) => Object.values(EDITIONS).flatMap((e) => s[`${e.key}_page_begins`] || [])));
+  const blocks = d.canon.books[u.book].blocks;
+  let lastText = u.end - 1;
+  while (lastText >= u.start && !blocks[lastText][2]) lastText -= 1;
+  for (let i = u.start; i <= lastText; i += 1) {
+    for (const ed of Object.keys(EDITIONS)) {
+      for (const at of blocks[i][4]?.[ed] || []) {
+        const label = editionLabel(d, ed, u.book, at);
+        if (!shown.has(label)) fail('edition-segment', `${label} (block ${i}) missing from get_text of ${u.id}`);
+        else count('edition-segment');
+      }
+    }
+  }
+  // 3c. Structured variants (#28): same text as plain mode; every reading, omission and remark is verbatim from its note and together they cover it; known sigla only; no editorial text or bare "natthi" as a reading.
+  {
+    const { segments: vs } = textSegments(u, { variants: 'structured' });
+    if (vs.length !== segs.length || vs.some((s, i) => s.text !== segs[i].text)) fail('variants', `${u.id} structured text differs from plain text`);
+    for (const s of vs) for (const v of s.variants || []) {
+      for (const r of v.readings) {
+        if (!v.raw.includes(r.reading)) fail('variants', `${s.ref}: reading "${r.reading}" not in note`);
+        for (const e of r.editions) if (!SIGLA[e.siglum]) fail('variants', `${s.ref}: unknown siglum ${e.siglum}`);
+        count('variant-reading');
+      }
+      for (const x of v.remarks) if (!v.raw.includes(x)) fail('variants', `${s.ref}: remark "${x}" not in note`);
+      for (const o of v.omissions) {
+        if (!v.raw.includes(o.text)) fail('variants', `${s.ref}: omission "${o.text}" not in note`);
+        for (const e of o.editions) if (!SIGLA[e.siglum]) fail('variants', `${s.ref}: unknown siglum ${e.siglum}`);
+        count('variant-omission');
+      }
+      // Coverage: every non-separator character of the note is in a reading, omission or remark.
+      const gap = uncovered(v.raw, parseNoteSpans(v.raw).spans);
+      if (gap) fail('variants', `${s.ref}: note text not covered: "${gap}"`);
+      // Semantic: a reading is never the omission word "natthi" alone or an editorial sentence.
+      for (const r of v.readings) if (/^(sabbattha\s+)?natthi$|na dissati|potthakesu/.test(r.reading)) fail('variants', `${s.ref}: editorial text "${r.reading}" given as a reading`);
+    }
+  }
   // 4. Range members resolve inside the range.
   for (const m of u.members || []) {
     try {
@@ -43,6 +82,28 @@ for (const u of d.canon.units) {
       count('pts');
     } catch (e) { fail('pts', `${ref} (${u.id}): ${e.message}`); }
   }
+}
+// 5b. Every Thai, Myanmar and VRI page marker resolves back to a text containing it (round trip, like PTS).
+{
+  const idx = editionIndex(d);
+  const contains = (u, book, block) => u && u.book === book && u.start <= block && block < u.end;
+  d.canon.books.forEach((book, bi) => {
+    book.blocks.forEach((blk, k) => {
+      for (const ed of Object.keys(EDITIONS)) {
+        for (const at of blk[4]?.[ed] || []) {
+          const label = editionLabel(d, ed, bi, at);
+          let r;
+          try { r = canon.resolve(label); } catch (e) { fail('edition', `${label}: ${e.message}`); continue; }
+          if (contains(r.unit, bi, k)) { count('edition'); continue; }
+          const occurrences = idx.markers.get(`${ed}|${book.collection}|${at}`);
+          if (!idx.owner[bi][k] && r.unit === nextUnit(d, bi, k)) { count('edition-between-texts'); continue; }
+          if (occurrences.length > 1 && occurrences[0].block !== k
+            && [r.unit.id, ...r.alternatives.map((a) => a.id)].includes(idx.owner[bi][k]?.id)) { count('edition-duplicate-marker'); continue; }
+          fail('edition', `${label} (${book.file} block ${k}) -> ${r.unit.id}, which does not contain it`);
+        }
+      }
+    });
+  });
 }
 // 6. No two distinct texts claim the same passage (ranges and abbreviated members excepted).
 const spans = d.canon.units.filter((u) => u.kind !== 'range' && !u.approximate).sort((a, b) => a.book - b.book || a.start - b.start);

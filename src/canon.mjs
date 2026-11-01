@@ -7,6 +7,7 @@ import { gunzipSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseCitation, citationId, CitationError } from './citations.mjs';
+import { EDITIONS, editionIndex, editionLabel, lookupEditionPage, nextUnit, textsOnPage, editionPagesFor } from './editions.mjs';
 
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
@@ -202,6 +203,25 @@ export function resolve(reference) {
     notes.push(`PTS ${label} falls within ${hits[0].acronym}${hits[0].pts.page === c.page ? ', which begins on that page' : ''}.`);
     return { unit: hits[0], notes, alternatives: hits.slice(1, 4).map((u) => unitSummary(u)) };
   }
+  if (c.kind === 'edition') {
+    const { hit, occurrences } = lookupEditionPage(d, c, CitationError);
+    const idx = editionIndex(d);
+    const label = editionLabel(d, c.edition, hit.book, `${c.volume}.${c.page}`);
+    let unit = idx.owner[hit.book][hit.block];
+    if (!unit) {
+      unit = nextUnit(d, hit.book, hit.block);
+      if (!unit) throw new CitationError(`${label} begins in a line that belongs to no text in the index.`);
+      notes.push(`${label} begins in a line printed between texts (${d.canon.books[hit.book].blocks[hit.block][2].slice(0, 60)}); showing the text that follows, ${unit.acronym}.`);
+    } else {
+      const para = d.canon.books[hit.book].blocks[hit.block][1];
+      notes.push(`${label} begins within ${unit.acronym}${para ? ` (VRI paragraph ${para})` : ''}. Page numbers are those VRI recorded for the ${EDITIONS[c.edition].full}.`);
+    }
+    if (occurrences.length > 1) notes.push(`VRI marks ${label} ${occurrences.length} times in this book; the first is used.`);
+    const others = new Map();
+    for (const occ of occurrences) for (const u of textsOnPage(d, c.edition, occ)) if (u.id !== unit.id) others.set(u.id, u);
+    if (unit.approximate) notes.push(`${unit.id} is abbreviated (peyyāla) in the VRI edition; the passage shown is where the abbreviation occurs.`);
+    return { unit, notes, alternatives: [...others.values()].slice(0, 3).map((u) => unitSummary(u)) };
+  }
   if (c.kind === 'url') {
     const key = `${c.host}${c.path}`;
     const id = d.urlIndex.get(key) || d.urlIndex.get(key.replace(/^accesstoinsight\.org/, 'accesstoinsight.org'));
@@ -257,24 +277,35 @@ export function segments(u, { includeNotes = false } = {}) {
   const out = [];
   let stanza = null;
   const flush = () => { if (stanza) { out.push(stanza); stanza = null; } };
+  const d = load();
+  // Thai, Myanmar and VRI page breaks; a break in an empty block is carried to the next segment.
+  let pending = [];
+  const editionLabels = (pages) => {
+    const labels = [...pending];
+    pending = [];
+    for (const ed of Object.keys(EDITIONS)) for (const at of pages[ed] || []) labels.push([ed, editionLabel(d, ed, u.book, at)]);
+    return labels;
+  };
   for (const [rend, n, text, notes, pages] of blocks) {
     const pts = (pages.P || []).map((p) => {
       const [vol, page] = p.split('.').map(Number);
       return ptsLabel(u.collection, vol, page);
     });
-    if (rend === 'hangnum') { flush(); stanza = { type: 'verse', vri: n, text: '', pts: [] }; continue; }
+    const eds = editionLabels(pages);
+    if (rend === 'hangnum') { flush(); stanza = { type: 'verse', vri: n, text: '', pts: [], eds }; continue; }
     if (VERSE.has(rend)) {
-      if (!stanza) stanza = { type: 'verse', vri: n, text: '', pts: [] };
+      if (!stanza) stanza = { type: 'verse', vri: n, text: '', pts: [], eds: [] };
       stanza.text += (stanza.text ? '\n' : '') + text;
       stanza.pts.push(...pts);
+      stanza.eds.push(...eds);
       if (includeNotes && notes.length) (stanza.variants ||= []).push(...notes);
       if (rend === 'gathalast') flush();
       continue;
     }
     flush();
-    if (!text) continue;
+    if (!text) { pending = eds; continue; }
     const isHeading = HEADING.has(rend) || (rend === 'centre' && CENTRE_HEADING.test(text));
-    const seg = { type: isHeading ? 'heading' : 'prose', vri: n, text, pts };
+    const seg = { type: isHeading ? 'heading' : 'prose', vri: n, text, pts, eds };
     if (includeNotes && notes.length) seg.variants = notes;
     out.push(seg);
   }
@@ -283,6 +314,10 @@ export function segments(u, { includeNotes = false } = {}) {
     const r = { ref: `${u.id}/${i + 1}`, type: s.type, text: s.text };
     if (s.vri) r.vri_paragraph = s.vri;
     if (s.pts?.length) r.pts_page_begins = [...new Set(s.pts.filter(Boolean))];
+    for (const [ed, meta] of Object.entries(EDITIONS)) {
+      const labels = (s.eds || []).filter(([e]) => e === ed).map(([, label]) => label);
+      if (labels.length) r[`${meta.key}_page_begins`] = [...new Set(labels)];
+    }
     if (s.variants?.length) r.variant_readings = s.variants;
     return r;
   });
@@ -319,6 +354,7 @@ export function describe(u, notes = []) {
     },
     notes,
     segments: segments(u).length,
+    ...(() => { const e = editionPagesFor(d, u); return e ? { edition_pages: e } : {}; })(),
     source: d.canon.source,
     first_line: blocks.slice(u.start, u.end).find((b) => !HEADING.has(b[0]) && !(b[0] === 'centre' && CENTRE_HEADING.test(b[2])) && b[2])?.[2]?.slice(0, 160) || null,
   };

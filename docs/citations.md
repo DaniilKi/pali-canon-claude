@@ -70,6 +70,32 @@ Scholarly works cite the Pali Text Society edition by volume (roman numeral) and
 
 Results also show the PTS page of every text, so you can cite it either way.
 
+## Thai, Myanmar and VRI edition pages
+
+Readers in Thailand and Myanmar often cite their national printed editions by volume and page. The VRI files bundled here record where each page of three printed editions begins, and the tool shows and accepts them:
+
+| Edition | Write | Example |
+|---|---|---|
+| Thai (Siam Raṭṭha) | `Thai <collection> <volume>.<page>` | Thai MN 1.103 |
+| Myanmar (Sixth Council) | `Myanmar <collection> <volume>.<page>` | Myanmar MN 1.70 |
+| VRI printed edition | `VRI <collection> <volume>.<page>` | VRI MN 1.71 |
+
+All three point to the opening of MN 10 (Mahāsatipaṭṭhāna Sutta).
+
+- **Always name the collection.** VRI numbers these volumes *within each collection* (MN volumes 1–3, SN volumes 1–5 and so on), not across the whole edition as the printed Thai set does. So "Thai 9.55" alone cannot be looked up; the tool asks for the collection.
+- **Single-volume collections take the page only:** "Thai Dhp 15", "Myanmar Thag 220".
+- **Sn is still the Sutta Nipāta:** "Thai Sn 330" is the same as "Thai Snp 330"; "Thai SN 1.5" is the Saṃyutta.
+- **Apadāna:** VRI prints the Therāpadāna and the Therīapadāna in one book, so "Thai Ap 2.300" covers both. "Thai Thi Ap 2.300" or "Thai Tha Ap 2.200" narrow it, and a page that begins in the other part is refused with the plain "Ap" form to use.
+- **Volumes are arabic numerals:** "Thai MN 1.103", not "Thai MN i 103" (the tool suggests the right form).
+- **Some pages are not marked.** The VRI data has gaps in some editions' page markers (Myanmar Thag jumps from page 19 to 220, for example). A page inside a gap is refused, and the tool names the nearest marked pages either side.
+- **The Vinaya is cited by book:** Pj (Pārājika), Pc (Pācittiya), Mv (Mahāvagga), Cv (Cūḷavagga), Pvr (Parivāra), for example "Thai Mv 1.10".
+- **VRI edition, SN and AN:** VRI repeats its volume numbers across the books (vaggas and nipātas) of these two collections, so add the book in brackets: "VRI SN 1.20 (Nidānavaggo)". Diacritics and the ending are optional ("(Nidanavagga)"). Without the book the tool lists the possibilities rather than guessing.
+- Looser forms also work: "Thai ed. MN vol. 1 p. 103", "Myanmar edition DN 2.55", "thai mn 1:103".
+- The tool returns the text in which that page **begins**, notes the VRI paragraph, and lists other texts printed on the same page. A page that begins in a line between two texts (for example a recitation formula) returns the text that follows, with a note.
+- Not every edition is marked for every book. The VRI data has no Thai pages for the Milindapañha, Nettippakaraṇa and Peṭakopadesa; the tool says so instead of guessing.
+
+`get_text` shows these page breaks on each segment (`thai_page_begins`, `myanmar_page_begins`, `vri_page_begins`, next to `pts_page_begins`), and `get_metadata` / `resolve_reference` give each text's first and last page break and the break before it (`edition_pages`). Every label they show can be pasted back as a citation; the audit checks this for all 56,050 markers.
+
 ## Two numbering systems
 
 There is no single universal numbering. In parts of the Saṃyutta and Aṅguttara Nikāyas, two systems differ:

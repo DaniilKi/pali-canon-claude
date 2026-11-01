@@ -109,12 +109,12 @@ docs/                human documentation (docs/i18n/: machine-drafted translatio
 
 | Tool | Purpose | Network |
 |---|---|---|
-| `resolve_reference` | Any citation, PTS page or link → the text, its PTS location, VRI paragraphs, translations and numbering notes | offline |
+| `resolve_reference` | `reference`, `script`. Any citation, PTS page, Thai/Myanmar/VRI edition page ("Thai MN 1.103") or link → the text, its PTS location, `edition_pages`, VRI paragraphs, translations and numbering notes. The reference may be written in any supported script; `script` puts Pāli titles in that script | offline |
 | `get_metadata` | Details of a text, including linked translations (`translation_id`) and a SuttaCentral link | offline |
-| `get_text` | Pāli with VRI paragraph numbers, PTS page breaks and optional variants, paginated by segment; optional `translation` | offline (English online) |
+| `get_text` | `uid`, `offset`, `limit`, `includeVariants`, `variants` (none/raw/structured; overrides `includeVariants`), `translation`, `script`. Pāli with VRI paragraph numbers, PTS and Thai/Myanmar/VRI page breaks (`pts_page_begins`, `thai_page_begins`, `myanmar_page_begins`, `vri_page_begins`) and optional variants, paginated by segment. `variants: "structured"` adds per-segment `variants` (raw note, readings with editions, omissions, remarks), `variant_sigla` and `variant_note` (`src/variants.mjs`). `script` (roman, sinhala, thai, myanmar, devanagari, khmer, lao, lanna, or ISO codes such as sinh) transliterates the Pāli and adds `script_note`; IDs, citations and English stay Roman (`src/script.mjs`) | offline (English online) |
 | `get_translation` | One English translation with attribution, licence and numbering notes, paginated by characters | online, mirrored |
 | `compare_translations` | Two to four translations side by side with the Pāli opening | online, mirrored |
-| `search_texts` | Full-text Pāli search (diacritics optional, "quoted phrases"), titles, English titles | offline |
+| `search_texts` | `query`, `collection`, `limit`, `offset`, `script`. Full-text Pāli search (diacritics optional, "quoted phrases"), titles, English titles. The query may be in any supported script (`input_script`, `input_romanized` are reported); `script` writes titles and excerpts in that script | offline |
 | `browse_canon` | canon → piṭaka → collection → section → text | offline |
 | `lookup_pali` | Digital Pāḷi Dictionary entry | online |
 | `search_access_to_insight` | Access to Insight sutta and subject indexes | online, mirrored |

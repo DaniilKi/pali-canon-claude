@@ -182,10 +182,9 @@ test('every citation on the examples page resolves with the bundled canon', () =
 test('examples page uses real tool parameters', () => {
   const md = read('docs/examples.md');
   const server = read('src/server.mjs');
-  for (const param of ['includeVariants', 'translation', 'collection']) {
+  for (const param of ['includeVariants', 'variants', 'script', 'translation', 'collection']) {
     if (md.includes(`\`${param}:`)) assert.match(server, new RegExp(`\\b${param}:`), param);
   }
-  assert.doesNotMatch(md, /`variants:/);
 });
 
 test('export page links the site files by absolute URL (they are not in the repository)', () => {
