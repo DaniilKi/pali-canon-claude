@@ -108,7 +108,7 @@ npm run pack:desktop   # dist/*.mcpb + SHA256SUMS.txt
 A change is done when:
 
 - `npm run check` passes and the rebuilt `server/` is committed;
-- any new edge case has a regression test (in `tests/core.test.mjs` for now; see Lessons learned about separate test files);
+- any new edge case has a regression test (a separate `tests/<feature>.test.mjs` file for new features);
 - any change to sources, tools or coverage is reflected in `README.md`, `docs/coverage.md`, `docs/sources.md`, `THIRD_PARTY.md` and `list_sources` as relevant;
 - new decisions are appended to `docs/decisions.md`.
 
@@ -133,7 +133,7 @@ A change is done when:
 - Numbering schemes differ in SN and AN (standard AN 7.68 = PTS-based AN 7.64; Kālāma AN 3.65 = dhammatalks AN 3.66). The independent reviewer found wrong links caused by exactly this.
 - Node's `fetch` ignores `HTTPS_PROXY` unless `NODE_USE_ENV_PROXY=1` is set; the smoke test must pass the environment to its child process.
 - Do not commit `__pycache__` or `*.report.json` (both are in `.gitignore`).
-- Parallel PRs that all append to `tests/core.test.mjs` conflict with each other (Wave 1 had to merge many such conflicts by hand). Prefer a separate `tests/<feature>.test.mjs` file per feature. The `test` script in `package.json` runs only `tests/core.test.mjs`, so switching to a glob such as `tests/*.test.mjs` is the integrator's job; until that change lands, a new file is not run.
+- Parallel PRs that all append to `tests/core.test.mjs` conflict with each other (Wave 1 had to merge many such conflicts by hand). Prefer a separate `tests/<feature>.test.mjs` file per feature. `npm test` (`scripts/test.mjs`) runs every `tests/*.test.mjs` file.
 
 ## Environment notes for agent sessions
 
