@@ -30,8 +30,8 @@ printf '/romn/*.tik.xml
 /romn/e0104n.att.xml
 /tipitaka.org/romn/tree.json
 ' >> $W/vri/.git/info/sparse-checkout && git -C $W/vri sparse-checkout reapply
-python3 scripts/canon/build_postcanonical.py $W/vri $VRI_COMMIT $W/postcanonical.json.gz $W/postcanonical-extra.json.gz   # prints sizes and the extra file's SHA-256
-cp $W/postcanonical.json.gz server/data/   # the extra file is NOT copied: it is a release asset (see below)
+python3 scripts/canon/build_postcanonical.py $W/vri $VRI_COMMIT $W/postcanonical.json.gz   # prints the size and SHA-256
+cp $W/postcanonical.json.gz server/data/
 cp $W/canon.json.gz $W/translations.json server/data/
 node scripts/audit.mjs                                                         # must report failures: 0
 npm run check && npm run smoke -- --live
@@ -48,5 +48,5 @@ npm run check && npm run smoke -- --live
   - Texts that VRI abbreviates are flagged `approximate`.
   - It writes a report (`canon.json.gz.report.json`) of unplaced members and title differences.
 - `validate.py` checks the result independently against Access to Insight's PTS citations and its Thai/CDB cross-numbering.
-- `build_postcanonical.py` (#21) parses the VRI Ṭīkā and Añña books (`*.tik.xml`, `*.nrf.xml` except the Peṭakopadesa and Milindapañha already in the canon, the Visuddhimagga `e0101n`/`e0102n` and its Mahāṭīkā `e0103n`/`e0104n`) with `vri.py`, unchanged apart from markup removal. Titles and the Ṭīkā/Añña section come from VRI's own table of contents (`tipitaka.org/romn/tree.json`); ids are slugs of those titles. Output is gzip with mtime 0, so the same commit gives the same bytes. `server/data/postcanonical.json.gz` holds the index of every book and the text of the Ṭīkā section and the Visuddhimagga books (budget 12 MB); `postcanonical-extra.json.gz` holds the other Añña books and is published as the release asset `data-postcanonical-1/postcanonical-extra.json.gz`. After a rebuild that changes it, publish it under a **new** tag and update `EXTRA` (tag, url, sha256, bytes) in `src/postcanonical.mjs`; `node scripts/audit.mjs` fails if the pin and the data disagree.
+- `build_postcanonical.py` (#21) parses the VRI Ṭīkā and Añña books (`*.tik.xml`, `*.nrf.xml` except the Peṭakopadesa and Milindapañha already in the canon, the Visuddhimagga `e0101n`/`e0102n` and its Mahāṭīkā `e0103n`/`e0104n`) with `vri.py`, unchanged apart from markup removal. Titles and the Ṭīkā/Añña section come from VRI's own table of contents (`tipitaka.org/romn/tree.json`); ids are slugs of those titles. Output is gzip with mtime 0 (the bytes can still differ between zlib builds; nothing depends on them). `server/data/postcanonical.json.gz` holds every book with its text (about 14.5 MB gz, over the 12 MB target and accepted in decision D-21a: the package stays well under 60 MB, and the server needs no download, extra host or disk cache). `node scripts/audit.mjs` round-trips every block's citation (the one search returns) and fails above 16 MB.
 - `build_translations.py` links dhammatalks.org and ATI pages to texts by content (Pāli title, PTS page, neighbours' numbering offset), because both sites use PTS numbering for parts of SN and AN. Pages that cannot be matched with confidence are left unlinked.

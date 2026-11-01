@@ -1,34 +1,30 @@
-// Post-canonical books (#21): Ṭīkā and Añña, citations, search option, on-demand data with checksum.
+// Post-canonical books (#21): Ṭīkā and Añña, citations, search option, citation round trips.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, rmSync, existsSync, readdirSync, statSync } from 'node:fs';
-import { gzipSync } from 'node:zlib';
-import { createHash } from 'node:crypto';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { existsSync, statSync, readFileSync } from 'node:fs';
 import * as canon from '../src/canon.mjs';
 import * as pc from '../src/postcanonical.mjs';
-import { fetchBinary } from '../src/http.mjs';
 
-const sha = (b) => createHash('sha256').update(b).digest('hex');
-
-test('the bundled data is the pinned build: index of every book, extra part pinned by SHA-256, within budget', () => {
+test('every book is bundled from the pinned VRI commit, within the size budget (decision D-21a)', () => {
   const d = pc.load();
   assert.ok(d, 'server/data/postcanonical.json.gz is installed');
   assert.equal(d.source.commit, canon.source().commit, 'same pinned VRI commit as the canon');
-  assert.equal(d.extra.sha256, pc.EXTRA.sha256, 'code pins the SHA-256 the build recorded');
-  assert.equal(d.extra.bytes, pc.EXTRA.bytes);
-  assert.ok(statSync(new URL('../server/data/postcanonical.json.gz', import.meta.url)).size < 12e6, 'ṭīkā + post-canonical bundle ≤ 12 MB gz');
-  assert.ok(d.books.length >= 100);
+  assert.ok(statSync(new URL('../server/data/postcanonical.json.gz', import.meta.url)).size < 16e6, 'ṭīkā + post-canonical bundle < 16 MB gz');
+  assert.equal(d.books.length, 109);
   for (const b of d.books) {
     assert.equal(b.canonical, false, b.id);
     assert.ok(['Ṭīkā', 'Añña'].includes(b.section), b.id);
     assert.ok(!/^s05(18|20)m/.test(b.file), 'Peṭakopadesa and Milindapañha stay in the canon data only');
-    assert.equal(!!b.blocks, b.part === 'core', b.id);
+    assert.ok(Array.isArray(b.blocks) && b.blocks.length === b.block_count, `${b.id} is bundled with its text`);
     assert.throws(() => canon.resolve(b.id), undefined, `${b.id} must not be a canon citation`);
   }
-  assert.ok(d.books.filter((b) => b.section === 'Ṭīkā').every((b) => b.part === 'core'), 'the whole Ṭīkā section is bundled');
-  for (const id of ['visuddhimagga-1', 'visuddhimagga-2', 'abhidhammatthasangaho']) assert.equal(d.byId.get(id).part, 'core', id);
+});
+
+test('no download path: the module imports nothing from the network client and writes no files', () => {
+  const src = readFileSync(new URL('../src/postcanonical.mjs', import.meta.url), 'utf8');
+  assert.doesNotMatch(src, /from '\.\/http\.mjs'|writeFileSync|mkdirSync|githubusercontent/);
+  const http = readFileSync(new URL('../src/http.mjs', import.meta.url), 'utf8');
+  assert.doesNotMatch(http, /releases\/download|release-assets|objects\.githubusercontent|host: 'github\.com'/, 'no GitHub release hosts in ALLOWED');
 });
 
 test('Vism chapter, chapter.paragraph and VRI paragraph citations', async () => {
@@ -44,6 +40,9 @@ test('Vism chapter, chapter.paragraph and VRI paragraph citations', async () => 
   const five = pc.describe('Vism I,5');
   assert.equal(five.approximate, true);
   assert.match(five.notes.join(' '), /Ñāṇamoli/);
+  assert.match(one.notes.join(' '), /four heading lines come first/, 'the note says what precedes paragraph 1');
+  assert.ok(one.segments.slice(0, 4).every((s) => s.type === 'heading') && one.segments[4].text.startsWith('Sīle patiṭṭhāya'));
+  assert.match(pc.describe('Vism 2.1').notes.join(' '), /heading .*comes first, then paragraph 1/);
   assert.equal(five.title, '1. Sīlaniddeso');
 
   for (const [ref, title] of [['Vism 3.1', '3. Kammaṭṭhānaggahaṇaniddeso'], ['Vism III', '3. Kammaṭṭhānaggahaṇaniddeso'], ['Vism ch. 12', '12. Iddhividhaniddeso'], ['Visuddhimagga XXIII', '23. Paññābhāvanānisaṃsaniddeso']]) {
@@ -91,9 +90,11 @@ test('other books by id, file stem or title; ambiguous paragraph numbers are ref
   assert.equal(pc.describe('s0201t').book.id, 'mulapannasa-tika');
   assert.equal(pc.describe('Mūlapaṇṇāsa-Ṭīkā').book.id, 'mulapannasa-tika');
   assert.throws(() => pc.describe('vibhanga-mulatika §1'), /restarts its paragraph numbers/);
-  const m = pc.describe('mahavamsa 3');
-  assert.equal(m.book.bundled, false);
-  assert.match(m.book.on_demand, /SHA-256/);
+  const m = await pc.getText('mahavamsa 3', { limit: 2 });
+  assert.equal(m.book.id, 'mahavamsa');
+  assert.equal(m.canonical, false);
+  assert.match(m.label, /Añña/);
+  assert.ok(m.segments.length > 0, 'Añña books are bundled and read offline');
 });
 
 test('canon citations are never shadowed', () => {
@@ -110,7 +111,7 @@ test('search: post-canonical only when asked, separate and labelled', async () =
   assert.ok(r.total_matched >= 1);
   assert.equal(r.results[0].canonical, false);
   assert.match(r.results[0].citation, /^Vism §\d+$/);
-  assert.match(r.not_searched || '', /^$|on-demand/);
+  assert.equal(r.not_searched, undefined);
   const abhs = await pc.search('kāmāvacaraṃ somanassasahagataṃ', { books: ['abhidh-s'], limit: 3 });
   assert.match(abhs.results[0].citation, /^Abhidh-s \d+\.\d+$/);
   const tika = await pc.search('satipatthana', { section: 'tika', limit: 2 });
@@ -124,49 +125,48 @@ test('search: post-canonical only when asked, separate and labelled', async () =
   assert.ok(both.post_canonical.results.length >= 1);
 });
 
-test('on-demand data: SHA-256 checked, cached on disk, failures explained', async () => {
-  const dir = mkdtempSync(join(tmpdir(), 'pc-cache-'));
-  try {
-    const bytes = gzipSync(Buffer.from(JSON.stringify({ books: { mahavamsa: [['chapter', null, 'Test chapter'], ['bodytext', '1', 'Test text']] } })));
-    const pin = { ...pc.EXTRA, sha256: sha(bytes), bytes: bytes.length };
-    let calls = 0;
-    const fetcher = async (url) => { calls += 1; assert.equal(url, pc.EXTRA.url); return bytes; };
-    pc._reset();
-    const t = await pc.getText('mahavamsa', { fetcher, dir, pin });
-    assert.equal(t.book.bundled, false);
-    assert.equal(t.segments[1].text, 'Test text');
-    assert.equal(calls, 1);
-    assert.equal(readdirSync(dir).length, 1, 'written to the cache');
-    pc._reset();
-    const again = await pc.loadExtra({ fetcher: async () => { throw new Error('offline'); }, dir, pin });
-    assert.equal(again.from, 'cache');
-
-    pc._reset();
-    const empty = mkdtempSync(join(tmpdir(), 'pc-cache-'));
-    await assert.rejects(pc.loadExtra({ fetcher: async () => Buffer.from('tampered'), dir: empty, pin }), /failed its checksum/);
-    assert.ok(!readdirSync(empty).length, 'a failed download is never cached');
-    await assert.rejects(pc.loadExtra({ fetcher: async () => { throw new Error('unreachable'); }, dir: empty, pin }), /could not be downloaded \(unreachable\)/);
-    rmSync(empty, { recursive: true, force: true });
-  } finally {
-    pc._reset();
-    rmSync(dir, { recursive: true, force: true });
+const segmentText = (t) => pc.fold(t.segments.map((s) => s.text).join(' '));
+async function readAll(citation) {
+  let offset = 0;
+  let text = '';
+  for (;;) {
+    const page = await pc.getText(citation, { offset, limit: 200 });
+    text += ' ' + segmentText(page);
+    if (page.next_offset === null) return text;
+    offset = page.next_offset;
   }
-});
+}
 
-test('release assets: only this repository through the allowlist', async () => {
-  for (const url of [
-    'https://github.com/someone/else/releases/download/v1/x.json.gz',
-    'https://github.com/DaniilKi/pali-canon-claude/archive/main.zip',
-    'https://release-assets.githubusercontent.com/github-production-release-asset/999/abc',
-    'http://github.com/DaniilKi/pali-canon-claude/releases/download/v1/x',
-  ]) await assert.rejects(fetchBinary(url, { retries: 0 }), /outside the supported/, url);
-});
-
-test('cache directory follows the OS', () => {
-  assert.equal(pc.cacheDir({ PALI_CANON_CACHE_DIR: '/x' }, 'linux'), '/x');
-  assert.match(pc.cacheDir({ XDG_CACHE_HOME: '/c' }, 'linux'), /[\\/]c[\\/]pali-canon-mcp$/);
-  assert.match(pc.cacheDir({ LOCALAPPDATA: 'C:\\L' }, 'win32'), /pali-canon-mcp[\\/]Cache$/);
-  assert.match(pc.cacheDir({}, 'darwin'), /Library[\\/]Caches[\\/]pali-canon-mcp$/);
+test('search hits round-trip: every cited passage resolves and contains the hit', async () => {
+  // The reviewer's probe: common words across all books; each hit's citation fed back through getText.
+  const words = ['dhamma', 'citta', 'rupa', 'vedana', 'kamma', 'nibbana', 'sila', 'samadhi', 'panna', 'loka'];
+  let checked = 0;
+  for (const w of words) {
+    const r = await pc.search(w, { limit: 50 });
+    for (const hit of r.results) {
+      const text = await readAll(hit.citation);
+      const probe = pc.fold(hit.excerpt.replace(/^…|…$/g, '')).slice(0, 60);
+      assert.ok(text.includes(probe), `${hit.citation} does not contain the hit "${probe}"`);
+      checked += 1;
+    }
+  }
+  assert.ok(checked >= 400, `checked ${checked}`);
+  // The cases the review found: no ambiguous §N, no chapter mixed with an earlier chapter's paragraph, trailing
+  // subheads cited with the paragraph that contains them.
+  const d = pc.load();
+  for (const id of ['abhidhammatthasangaho', 'dhammasangani-mulatika', 'pancapakarana-mulatika']) {
+    const book = d.byId.get(id);
+    for (let i = 0; i < book.blocks.length; i += 1) {
+      const sel = pc.select(pc.citationFor(book, i));
+      assert.ok(sel.book === book && sel.start <= i && i < sel.end, `${id} block ${i}`);
+    }
+  }
+  const abhs = d.byId.get('abhidhammatthasangaho');
+  const sub = abhs.blocks.findIndex(([, , t]) => t === 'Ahetukacittaṃ');
+  assert.ok(sub > 0);
+  const c = pc.citationFor(abhs, sub);
+  assert.match(c, /^Abhidh-s 1\.\d+$/);
+  assert.ok(segmentText(await pc.getText(c, { limit: 50 })).includes('ahetukacittam'), c);
 });
 
 test('tool registration: read-only tools, labelled results', async () => {
@@ -174,13 +174,13 @@ test('tool registration: read-only tools, labelled results', async () => {
   const z = (await import('zod')).z;
   pc.register({ tool: (name, description, schema, fn, opts) => { tools[name] = { description, schema, fn, opts }; }, z });
   assert.deepEqual(Object.keys(tools).sort(), ['get_post_canonical', 'search_post_canonical']);
-  for (const t of Object.values(tools)) { assert.equal(t.opts.network, true); assert.match(t.description, /not the canon/i); }
+  for (const t of Object.values(tools)) { assert.equal(t.opts?.network ?? false, false, 'offline: no openWorldHint'); assert.match(t.description, /not the canon/i); }
   const list = await tools.get_post_canonical.fn({ citation: '', offset: 0, limit: 200, includeVariants: false });
   assert.ok(list.items.some((b) => b.id === 'abhidhammatthasangaho'));
   assert.equal(list.canonical, false);
   const v = await tools.get_post_canonical.fn({ citation: 'Vism 1.1', offset: 0, limit: 5, includeVariants: false });
   assert.equal(v.citation, 'Vism 1.1');
-  const s = await tools.search_post_canonical.fn({ query: 'sīle patiṭṭhāya', books: ['vism'], include_on_demand: false, limit: 2, offset: 0 });
+  const s = await tools.search_post_canonical.fn({ query: 'sīle patiṭṭhāya', books: ['vism'], limit: 2, offset: 0 });
   assert.ok(s.results.length);
 });
 

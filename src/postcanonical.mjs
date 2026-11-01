@@ -4,12 +4,8 @@
  * scripts/canon/build_postcanonical.py. None of it is the canon: every result carries canonical: false,
  * a label, and VRI's attribution, and the canon search leaves these books out unless asked.
  *
- * Data (size budget, see the build script):
- *   server/data/postcanonical.json.gz  bundled: the index of all 109 books, and the text of the Ṭīkā section
- *                                      and of the Visuddhimagga with its Mahāṭīkā. Loaded lazily; offline.
- *   postcanonical-extra.json.gz        the other Añña books (grammar, chronicles, nīti…), a pinned GitHub
- *                                      release asset fetched on first use through src/http.mjs, checked
- *                                      against EXTRA.sha256 and cached under the OS cache directory.
+ * Data: server/data/postcanonical.json.gz, all 109 books with their full text, bundled and loaded lazily on
+ * first use. Everything works offline; nothing is downloaded and nothing is written to disk.
  *
  * Citations (docs/citations.md): Vism ch. 1 / Vism I (chapter), Vism 1.1 / Vism I,1 (chapter, paragraph in
  * Ñāṇamoli's numbering: the chapter is located, the paragraph only when it is the first), Vism §19 and
@@ -17,27 +13,15 @@
  * and any book id ("mahavamsa", "mahavamsa 3", "mahavamsa 3.12"). Visuddhimagga PTS pages ("Vism p. 3",
  * "Vism 3") are recognised but cannot be located: the VRI edition carries no PTS page breaks for it.
  */
-import { readFileSync, existsSync, mkdirSync, writeFileSync, renameSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
-import { createHash } from 'node:crypto';
-import { homedir, platform } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { fetchBinary } from './http.mjs';
 
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
 
 export const FILE = 'postcanonical.json.gz';
-/** The on-demand part, pinned by release tag, file name, size and SHA-256 (rebuilt byte-identically by the build script). */
-export const EXTRA = Object.freeze({
-  tag: 'data-postcanonical-1',
-  file: 'postcanonical-extra.json.gz',
-  url: 'https://github.com/DaniilKi/pali-canon-claude/releases/download/data-postcanonical-1/postcanonical-extra.json.gz',
-  sha256: '05d478e8f73f7b2da44c477487b6ca879fe6cbfcdb11be3b7102ffbfa4426bb4',
-  bytes: 3766866,
-});
-
 export const LABELS = {
   'Ṭīkā': 'Post-canonical, not the canon: a book from the VRI Ṭīkā section (sub-commentaries on the canon and its commentaries, and Abhidhamma and Vinaya manuals). Keep it distinct from the root text and from the commentary (Aṭṭhakathā) when quoting.',
   'Añña': 'Post-canonical, not the canon: a book from the VRI "Añña" (other books) section, such as the Visuddhimagga, its Mahāṭīkā, chronicles, grammars and later Pāli works. Keep it distinct from the canonical texts when quoting.',
@@ -81,14 +65,13 @@ const number = (s) => (/^\d+$/.test(s) ? Number(s) : roman(s));
 // ---- data ----------------------------------------------------------------------------------------
 
 let data = null;
-let extraData = null;
 
 function dataPath() {
   const candidates = [join(here, 'data', FILE), join(here, '..', 'server', 'data', FILE), join(process.cwd(), 'server', 'data', FILE)];
   return candidates.find((p) => existsSync(p)) || null;
 }
 
-/** Load the bundled index and core texts once. Returns null when the data file is not installed. */
+/** Load the bundled books once. Returns null when the data file is not installed. */
 export function load() {
   if (data) return data;
   const path = dataPath();
@@ -109,66 +92,6 @@ function need() {
   const d = load();
   if (!d) throw new Error('The post-canonical data file (postcanonical.json.gz) is not installed with this copy of the server. Reinstall it, or read the canon with get_text.');
   return d;
-}
-
-/** The OS cache directory used for on-demand data (PALI_CANON_CACHE_DIR overrides it). */
-export function cacheDir(env = process.env, os = platform()) {
-  if (env.PALI_CANON_CACHE_DIR) return env.PALI_CANON_CACHE_DIR;
-  const home = homedir();
-  if (os === 'win32') return join(env.LOCALAPPDATA || join(home, 'AppData', 'Local'), 'pali-canon-mcp', 'Cache');
-  if (os === 'darwin') return join(home, 'Library', 'Caches', 'pali-canon-mcp');
-  return join(env.XDG_CACHE_HOME || join(home, '.cache'), 'pali-canon-mcp');
-}
-
-const sha256 = (buf) => createHash('sha256').update(buf).digest('hex');
-
-/**
- * The on-demand books. Order: memory → cache file (re-verified) → download through the allowlisted client.
- * Throws unless the bytes match the pinned SHA-256. `fetcher` and `dir` are test hooks.
- */
-export async function loadExtra({ fetcher = fetchBinary, dir = cacheDir(), pin = EXTRA } = {}) {
-  if (extraData && extraData.sha256 === pin.sha256) return extraData;
-  const cached = join(dir, `${pin.sha256}-${pin.file}`);
-  let bytes = null;
-  let from = 'cache';
-  try {
-    if (existsSync(cached)) {
-      const buf = readFileSync(cached);
-      if (sha256(buf) === pin.sha256) bytes = buf;
-    }
-  } catch { bytes = null; }
-  if (!bytes) {
-    from = 'download';
-    let buf;
-    try {
-      buf = await fetcher(pin.url, { maxBytes: pin.bytes + 1024, timeout: 60000 });
-    } catch (error) {
-      throw new Error(`This book is not bundled and its on-demand data could not be downloaded (${error.message}). It is fetched once from ${pin.url} and then works offline. The Visuddhimagga, Abhidhammatthasaṅgaha and the Ṭīkā are bundled and work offline.`);
-    }
-    const got = sha256(buf);
-    if (got !== pin.sha256) throw new Error(`The downloaded post-canonical data failed its checksum (SHA-256 ${got}, expected ${pin.sha256}); it was not used.`);
-    bytes = buf;
-    try {
-      mkdirSync(dir, { recursive: true });
-      const tmp = `${cached}.${process.pid}.tmp`;
-      writeFileSync(tmp, bytes);
-      renameSync(tmp, cached);
-    } catch { /* A read-only cache only means the next start downloads again. */ }
-  }
-  const parsed = JSON.parse(gunzipSync(bytes).toString('utf8'));
-  extraData = { sha256: pin.sha256, books: parsed.books, from };
-  return extraData;
-}
-
-/** Reset in-memory state (tests). */
-export function _reset() { extraData = null; }
-
-async function blocksOf(book, opts) {
-  if (book.blocks) return book.blocks;
-  const extra = await loadExtra(opts);
-  const blocks = extra.books[book.id];
-  if (!blocks) throw new Error(`${book.title}: missing from the on-demand data.`);
-  return blocks;
 }
 
 // ---- sections ------------------------------------------------------------------------------------
@@ -198,6 +121,7 @@ function chapterRange(book, k, { fromStart = false } = {}) {
 const VISM_BOOKS = ['visuddhimagga-1', 'visuddhimagga-2'];
 /** The 23 Visuddhimagga chapters across its two VRI volumes. */
 function vismChapters(d) {
+  if (d.vismChapters) return d.vismChapters;
   const out = [];
   for (const id of VISM_BOOKS) {
     const book = d.byId.get(id);
@@ -206,14 +130,37 @@ function vismChapters(d) {
       out.push({ book, ...r });
     });
   }
+  d.vismChapters = out;
   return out;
 }
 
-/** Paragraph search within [start, end) of a book's blocks: the block numbered `p` up to the next numbered block. */
+const paraIndexes = new WeakMap();
+/** Block indexes carrying each VRI paragraph number, in order (a range "105-106" is listed under both). */
+function paraIndex(blocks) {
+  let index = paraIndexes.get(blocks);
+  if (index) return index;
+  index = new Map();
+  blocks.forEach(([, n], i) => {
+    const r = paraRange(n);
+    if (!r) return;
+    for (let p = r[0]; p <= Math.min(r[1], r[0] + 1000); p += 1) {
+      if (!index.has(p)) index.set(p, []);
+      index.get(p).push(i);
+    }
+  });
+  paraIndexes.set(blocks, index);
+  return index;
+}
+
+/**
+ * Paragraph search within [start, end) of a book's blocks: the first block numbered `p`, with the headings just
+ * before it, up to the next numbered block or chapter/work heading, less any trailing headings (they belong to the
+ * next paragraph). citationFor() relies on these boundaries.
+ */
 function paragraphRange(blocks, start, end, p) {
-  for (let i = start; i < end; i += 1) {
-    const r = paraRange(blocks[i][1]);
-    if (!r || p < r[0] || p > r[1]) continue;
+  const i = (paraIndex(blocks).get(p) || []).find((j) => j >= start && j < end);
+  if (i === undefined) return null;
+  {
     let s = i;
     // A heading just before the numbered block belongs to it.
     while (s > start && HEADING.has(blocks[s - 1][0]) && !paraRange(blocks[s - 1][1])) s -= 1;
@@ -226,11 +173,7 @@ function paragraphRange(blocks, start, end, p) {
     while (e - 1 > i && HEADING.has(blocks[e - 1][0])) e -= 1;
     return { start: s, end: e, para: blocks[i][1] };
   }
-  return null;
 }
-
-// Numbered paragraphs (from the index alone) are only known once blocks are read, so paragraph
-// citations of on-demand books are resolved lazily in getText(); describe() reports the chapter.
 
 // ---- citation parsing ----------------------------------------------------------------------------
 
@@ -273,7 +216,7 @@ function bookFor(d, f) {
 /**
  * Parse and locate a post-canonical citation. Returns a selection
  * { work, book, start, end, citation, title, kind, approximate?, notes, paragraph? } (end exclusive), with
- * `pendingParagraph` for a paragraph in an on-demand book (located when its text is loaded).
+ * `pendingParagraph` for a generic paragraph citation (located by settle(); use select() for the final range).
  * Throws CitationError for a recognised citation that cannot be located; returns null when not post-canonical.
  */
 export function locate(reference) {
@@ -306,7 +249,7 @@ function locateVism(d, rest, written) {
     const k = number(m[1]);
     const p = Number(m[2]);
     if (p === 1) {
-      return chapter(k, { citation: `Vism ${k}.1`, kind: 'chapter-start', notes: [`Vism ${k}.1 is the first paragraph of chapter ${k} (Ñāṇamoli's chapter.paragraph numbering, as in The Path of Purification). The chapter is returned from its start; the first segments are that paragraph.`] });
+      return chapter(k, { citation: `Vism ${k}.1`, kind: 'chapter-start', notes: [`Vism ${k}.1 is the first paragraph of chapter ${k} (Ñāṇamoli's chapter.paragraph numbering, as in The Path of Purification). ${k === 1 ? 'Chapter 1 is returned from the start of the book: four heading lines come first (the homage "Namo tassa…", the title "Visuddhimaggo", the volume line and "Nidānādikathā"), then paragraph 1, the opening verse "Sīle patiṭṭhāya…". VRI prints the heading "1. Sīlaniddeso" later, after the introduction.' : 'The chapter is returned from its start: its heading (and any section heading under it) comes first, then paragraph 1.'}`] });
     }
     return chapter(k, {
       citation: `Vism ${k}.${p}`, kind: 'chapter', approximate: true,
@@ -384,13 +327,12 @@ function locateGeneric(d, book, rest, written) {
   throw new CitationError(`Unrecognised citation "${written}" for ${book.title}. Use "${book.id}", "${book.id} <chapter>", "${book.id} <chapter>.<VRI paragraph>" or "${book.id} §<VRI paragraph>".`);
 }
 
-/** Resolve a paragraph left pending (on-demand books, generic citations) once the blocks are loaded. */
+/** Resolve a generic paragraph citation left pending by locate(). */
 function settle(sel, blocks) {
   if (!sel.pendingParagraph) return sel;
   const p = sel.pendingParagraph;
   if (sel.wholeBook) {
-    const hits = [];
-    for (let i = 0; i < blocks.length; i += 1) { const r = paraRange(blocks[i][1]); if (r && p >= r[0] && p <= r[1]) hits.push(i); }
+    const hits = paraIndex(blocks).get(p) || [];
     if (!hits.length) throw new CitationError(`${sel.book.title} has no VRI paragraph ${p}.`);
     if (hits.length > 1) {
       const where = hits.slice(0, 8).map((i) => { const k = sel.book.chapters.filter(([, s]) => s <= i).length; return k ? `${sel.book.id} ${k}.${p}` : null; }).filter(Boolean);
@@ -403,6 +345,15 @@ function settle(sel, blocks) {
   return { ...sel, start: pr.start, end: pr.end, paragraph: pr.para, chapter: sel.chapter || k || undefined, pendingParagraph: undefined };
 }
 
+/**
+ * Locate a citation down to its final block range: { book, start, end, ... } (end exclusive). Throws for a citation
+ * that is recognised but cannot be located; returns null when it is not post-canonical.
+ */
+export function select(reference) {
+  const sel = locate(reference);
+  return sel && settle(sel, sel.book.blocks);
+}
+
 // ---- output --------------------------------------------------------------------------------------
 
 function sourceInfo(d) {
@@ -411,8 +362,7 @@ function sourceInfo(d) {
 }
 
 function bookInfo(book) {
-  return { id: book.id, title: book.title, vri_file: book.file, vri_section: book.section, vri_group: book.group, canonical: false,
-    bundled: book.part === 'core', ...(book.part === 'core' ? {} : { on_demand: `Not bundled: downloaded once from this project's pinned release ${EXTRA.tag} (${Math.round(EXTRA.bytes / 1e5) / 10} MB, SHA-256 checked) and cached; then offline.` }) };
+  return { id: book.id, title: book.title, vri_file: book.file, vri_section: book.section, vri_group: book.group, canonical: false };
 }
 
 const labelFor = (sel) => WORK_LABELS[sel.work] ? `${WORK_LABELS[sel.work]} ${LABELS[sel.book.section]}` : LABELS[sel.book.section];
@@ -468,23 +418,19 @@ function summary(d, sel) {
 /** resolve_reference for a post-canonical citation: what it names, without the text. Works offline. */
 export function describe(reference) {
   const d = need();
-  let sel = locate(reference);
+  const sel = select(reference);
   if (!sel) throw new CitationError(`"${reference}" is not a post-canonical citation known here. List the books with browse().`);
-  if (sel.book.blocks) sel = settle(sel, sel.book.blocks);
   const out = summary(d, sel);
-  if (sel.pendingParagraph) out.notes = [...out.notes, `VRI paragraph ${sel.pendingParagraph} is located when the text is read (get_post_canonical).`];
   out.read_with = { tool: 'get_post_canonical', citation: sel.citation };
   return out;
 }
 
-/** The text of a post-canonical citation, paginated by segment. Async: an on-demand book may be downloaded once. */
-export async function getText(reference, { offset = 0, limit = 60, includeVariants = false, ...opts } = {}) {
+/** The text of a post-canonical citation, paginated by segment. Async for the tool interface; all data is local. */
+export async function getText(reference, { offset = 0, limit = 60, includeVariants = false } = {}) {
   const d = need();
-  let sel = locate(reference);
+  const sel = select(reference);
   if (!sel) throw new CitationError(`"${reference}" is not a post-canonical citation known here. List the books with browse().`);
-  const blocks = await blocksOf(sel.book, opts);
-  sel = settle(sel, blocks);
-  const all = segmentsOf(blocks.slice(sel.start, sel.end), { includeVariants });
+  const all = segmentsOf(sel.book.blocks.slice(sel.start, sel.end), { includeVariants });
   const page = all.slice(offset, offset + limit).map((s, i) => ({ ref: `${sel.citation}/${offset + i + 1}`, ...s }));
   return {
     ...summary(d, sel),
@@ -502,7 +448,7 @@ export function browse(node = '', { offset = 0, limit = 60 } = {}) {
   const d = need();
   const key = fold(node);
   const page = (items) => ({ total: items.length, offset, limit, next_offset: offset + limit < items.length ? offset + limit : null, items: items.slice(offset, offset + limit) });
-  const card = (b) => ({ id: b.id, title: b.title, vri_section: b.section, vri_group: b.group, chapters: b.chapters.length, bundled: b.part === 'core' });
+  const card = (b) => ({ id: b.id, title: b.title, vri_section: b.section, vri_group: b.group, chapters: b.chapters.length });
   const base = { canonical: false, source: sourceInfo(d) };
   if (['', 'post-canonical', 'postcanonical', 'all'].includes(key)) {
     return { ...base, node: 'post-canonical', label: 'Post-canonical Pāli books of the VRI edition (not the canon). Cite them as "Vism I.1", "Vism ch. 4", "Abhidh-s 1" or by id ("mahavamsa 3").', ...page(d.books.map(card)) };
@@ -529,22 +475,68 @@ function foldedBlocks(book, blocks) {
   return foldedCache.get(book.id);
 }
 
-function citationFor(book, i, blocks) {
-  let n = null;
-  for (let k = i; k >= 0 && n === null; k -= 1) if (paraRange(blocks[k][1])) n = blocks[k][1];
-  const k = book.chapters.filter(([, s]) => s <= i).length;
-  const p = n && paraRange(n)[0];
-  if (VISM_BOOKS.includes(book.id) && p) return `Vism §${p}`;
-  if (book.id === ABHS_BOOK && i < workEnd(book, 0) && p && k) return `Abhidh-s ${k}.${p}`;
-  return p ? (k ? `${book.id} ${k}.${p}` : `${book.id} §${p}`) : (k ? `${book.id} ${k}` : book.id);
+const chapterAt = (book, i) => book.chapters.filter(([, s]) => s <= i).length;
+const citationMemo = new WeakMap();
+/** Does `citation` resolve, unambiguously, to a range of `book` that contains block i? */
+function covers(book, citation, i) {
+  let memo = citationMemo.get(book);
+  if (!memo) citationMemo.set(book, (memo = new Map()));
+  if (!memo.has(citation)) {
+    let range = null;
+    try {
+      const sel = select(citation);
+      if (sel && sel.book === book) range = [sel.start, sel.end];
+    } catch { range = null; }
+    memo.set(citation, range);
+  }
+  const r = memo.get(citation);
+  return !!r && i >= r[0] && i < r[1];
 }
 
 /**
- * Full-text search of the post-canonical books (folded, all terms, "quoted phrases"), one hit per block.
- * By default only bundled books are searched; includeOnDemand also searches (and if needed downloads) the rest.
- * `books` limits to ids, `section` to "tika" or "anna".
+ * The most precise citation whose text contains block i of a book. Candidates come from the paragraph the block
+ * belongs to (the numbered block a heading opens into, or the last numbered block before it, never across a chapter
+ * or work heading) and from its chapter; a candidate is kept only if select() gives a range of this book that holds
+ * the block, so a citation is never ambiguous and never points elsewhere. Falls back to the chapter, then the book.
  */
-export async function search(query, { limit = 10, offset = 0, books, section, includeOnDemand = false, ...opts } = {}) {
+export function citationFor(book, i) {
+  const blocks = book.blocks;
+  const ps = [];
+  const own = paraRange(blocks[i][1]);
+  if (own) ps.push(own[0]);
+  else {
+    let j = i;
+    while (j < blocks.length && HEADING.has(blocks[j][0]) && !paraRange(blocks[j][1])) j += 1;
+    if (j > i && j < blocks.length && paraRange(blocks[j][1])) ps.push(paraRange(blocks[j][1])[0]);
+    if (blocks[i][0] !== 'chapter' && blocks[i][0] !== 'book') {
+      for (let b = i - 1; b >= 0; b -= 1) {
+        const r = paraRange(blocks[b][1]);
+        if (r) { ps.push(r[0]); break; }
+        if (blocks[b][0] === 'chapter' || blocks[b][0] === 'book') break;
+      }
+    }
+  }
+  const k = chapterAt(book, i);
+  const cands = [];
+  if (VISM_BOOKS.includes(book.id)) {
+    for (const p of ps) cands.push(`Vism §${p}`);
+    const n = vismChapters(need()).findIndex((c) => c.book === book && i >= c.start && i < c.end) + 1;
+    if (n) cands.push(`Vism ch. ${n}`);
+  } else if (book.id === ABHS_BOOK && i < workEnd(book, 0)) {
+    for (const p of ps) cands.push(`Abhidh-s ${Math.max(k, 1)}.${p}`);
+    cands.push(`Abhidh-s ${Math.max(k, 1)}`);
+  }
+  for (const p of ps) { if (k) cands.push(`${book.id} ${k}.${p}`); cands.push(`${book.id} §${p}`); }
+  if (k) cands.push(`${book.id} ${k}`);
+  return cands.find((c) => covers(book, c, i)) || book.id;
+}
+
+/**
+ * Full-text search of the post-canonical books (folded, all terms, "quoted phrases"), one hit per citable passage.
+ * Every hit's citation resolves to a passage that contains it (citationFor). `books` limits to ids, `section` to
+ * "tika" or "anna".
+ */
+export async function search(query, { limit = 10, offset = 0, books, section } = {}) {
   const d = need();
   const wanted = terms(query);
   if (!wanted.length) throw new Error('Search needs at least one word of two or more letters.');
@@ -555,26 +547,24 @@ export async function search(query, { limit = 10, offset = 0, books, section, in
     return [splitKey(d, f)?.book.id || b];
   })) : null;
   const sec = section ? ({ tika: 'Ṭīkā', anna: 'Añña' })[fold(section)] : null;
-  let pool = d.books.filter((b) => (!want || want.has(b.id)) && (!sec || b.section === sec));
-  const skipped = pool.filter((b) => b.part !== 'core');
-  if (!includeOnDemand) pool = pool.filter((b) => b.part === 'core');
+  const pool = d.books.filter((b) => (!want || want.has(b.id)) && (!sec || b.section === sec));
   const hits = [];
   const seen = new Set();
   let total = 0;
   for (const book of pool) {
-    const blocks = await blocksOf(book, opts);
+    const { blocks } = book;
     const folded = foldedBlocks(book, blocks);
     for (let i = 0; i < folded.length; i += 1) {
       if (!wanted.every((w) => folded[i].includes(w))) continue;
       // One hit per citable passage (a VRI paragraph often spans several blocks).
-      const citation = citationFor(book, i, blocks);
+      const citation = citationFor(book, i);
       if (seen.has(`${book.id}|${citation}`)) continue;
       seen.add(`${book.id}|${citation}`);
       total += 1;
       if (total <= offset || hits.length >= limit) continue;
       const original = blocks[i][2];
       const at = Math.max(0, folded[i].indexOf(wanted[0]) - 80);
-      const k = book.chapters.filter(([, s]) => s <= i).length;
+      const k = chapterAt(book, i);
       hits.push({ canonical: false, citation, book_id: book.id, book_title: book.title, vri_section: book.section,
         ...(k ? { chapter: book.chapters[k - 1][0] } : {}), ...(blocks[i][1] ? { match_vri_paragraph: blocks[i][1] } : {}),
         excerpt: (at ? '…' : '') + original.slice(at, at + 260) + (original.length > at + 260 ? '…' : '') });
@@ -583,8 +573,7 @@ export async function search(query, { limit = 10, offset = 0, books, section, in
   return {
     query, canonical: false,
     label: 'Post-canonical books (VRI Ṭīkā and Añña sections), not the canon. Results are kept separate from canonical search results.',
-    searched: includeOnDemand ? `${pool.length} post-canonical books` : `${pool.length} bundled post-canonical books (the Ṭīkā section, the Visuddhimagga and its Mahāṭīkā)`,
-    ...(!includeOnDemand && skipped.length ? { not_searched: `${skipped.length} on-demand Añña books (grammar, chronicles, nīti and others); set include_on_demand to search them (downloads ${Math.round(EXTRA.bytes / 1e5) / 10} MB once).` } : {}),
+    searched: `${pool.length} post-canonical books`,
     results: hits, total_matched: total, offset, limit, next_offset: offset + limit < total ? offset + limit : null,
     source: sourceInfo(d),
   };
@@ -607,7 +596,7 @@ export async function withPostCanonical(canonResult, query, { include = false, l
 
 /** Feature registration. Not yet listed in src/features/index.mjs (see the pull request's integration notes). */
 export function register({ tool, z }) {
-  tool('get_post_canonical', 'Read a post-canonical Pāli book of the VRI edition: the Visuddhimagga ("Vism ch. 1" or "Vism I" chapter, "Vism 1.1" chapter.paragraph, "Vism §19" VRI paragraph), the Abhidhammatthasaṅgaha ("Abhidh-s 1", "Abhidh-s 1.4"), the sub-commentaries (Ṭīkā) and other later works by id ("mahavamsa 3"). Omit the citation, or give "tika" or "anna", to list the books. Not the canon: every result is labelled canonical: false. Bundled books work offline; a few Añña books are downloaded once from this project\'s pinned release. Visuddhimagga PTS pages cannot be located (the VRI edition has none).', {
+  tool('get_post_canonical', 'Read a post-canonical Pāli book of the VRI edition: the Visuddhimagga ("Vism ch. 1" or "Vism I" chapter, "Vism 1.1" chapter.paragraph, "Vism §19" VRI paragraph), the Abhidhammatthasaṅgaha ("Abhidh-s 1", "Abhidh-s 1.4"), the sub-commentaries (Ṭīkā) and other later works by id ("mahavamsa 3"). Omit the citation, or give "tika" or "anna", to list the books. Not the canon: every result is labelled canonical: false. Works offline. Visuddhimagga PTS pages cannot be located (the VRI edition has none).', {
     citation: z.string().max(200).default('').describe('Vism ch. 1, Vism I, Vism 1.1, Vism §19, visuddhi. 1.19, Abhidh-s 1, Abhidh-s 1.4, a book id such as mahavamsa or silakkhandhavagga-tika (optionally with a chapter or chapter.paragraph), or empty to list the books.'),
     offset: z.number().int().min(0).max(100000).default(0).describe('Segment offset for continuation.'),
     limit: z.number().int().min(1).max(200).default(60).describe('Segments per page.'),
@@ -616,14 +605,13 @@ export function register({ tool, z }) {
     const key = fold(citation);
     if (['', 'post-canonical', 'postcanonical', 'all', 'tika', 'anna'].includes(key)) return browse(key, { offset, limit });
     return getText(citation, { offset, limit, includeVariants });
-  }, { network: true });
+  });
 
-  tool('search_post_canonical', 'Search the full Pāli text of the post-canonical books (Visuddhimagga, Abhidhammatthasaṅgaha, sub-commentaries/Ṭīkā and other VRI Añña books): diacritics optional, all words must appear, "quoted phrases" allowed. Not the canon: results are labelled canonical: false. Bundled books are searched offline; set include_on_demand to also search the books downloaded on demand.', {
+  tool('search_post_canonical', 'Search the full Pāli text of the post-canonical books (Visuddhimagga, Abhidhammatthasaṅgaha, sub-commentaries/Ṭīkā and other VRI Añña books): diacritics optional, all words must appear, "quoted phrases" allowed. Not the canon: results are labelled canonical: false. Works offline.', {
     query: z.string().trim().min(1).max(300),
     books: z.array(z.string().max(80)).max(20).optional().describe('Limit to book ids or works, e.g. ["vism"], ["abhidh-s"], ["mulapannasa-tika"].'),
     section: z.enum(['tika', 'anna']).optional().describe('Limit to the VRI Ṭīkā or Añña section.'),
-    include_on_demand: z.boolean().default(false).describe('Also search the Añña books that are not bundled (downloads them once).'),
     limit: z.number().int().min(1).max(50).default(10),
     offset: z.number().int().min(0).max(100000).default(0),
-  }, ({ query, books, section, include_on_demand, limit, offset }) => search(query, { books, section, includeOnDemand: include_on_demand, limit, offset }), { network: true });
+  }, ({ query, books, section, limit, offset }) => search(query, { books, section, limit, offset }));
 }

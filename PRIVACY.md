@@ -15,8 +15,7 @@ This is how the tool runs today: as a Claude Desktop extension, a Claude Code pl
 - **Some requests go to public websites.** When you ask for an English translation or a dictionary entry, the tool fetches that page from the site that publishes it:
   - [dhammatalks.org](https://www.dhammatalks.org) (Ṭhānissaro Bhikkhu's translations),
   - [Access to Insight](https://www.accesstoinsight.org) and its official mirrors on GitHub and jsDelivr,
-  - the [Digital Pāḷi Dictionary](https://www.dpdict.net);
-  - this project's own data releases on [GitHub](https://github.com/DaniilKi/pali-canon-claude/releases) (and GitHub's download host), only when you first read or search one of the post-canonical books that are not bundled. The file is checked against a fixed checksum and kept in your computer's cache folder, so it is downloaded once.
+  - the [Digital Pāḷi Dictionary](https://www.dpdict.net).
 
   These are the only sites the tool can contact; the list is fixed in the code. The request contains only what is needed to fetch the page (for example, the address of a sutta or the Pāli word you looked up) and a label naming this tool. Like any website, those sites and mirrors may keep ordinary web server logs, such as your internet address and the page requested. Their own privacy policies apply to those logs.
 - **Your AI app has its own policy.** Your conversation with Claude (or another assistant) is handled by that app's provider under its own privacy policy. This tool does not see or store your conversation; it only receives the specific lookups the assistant asks it to make.

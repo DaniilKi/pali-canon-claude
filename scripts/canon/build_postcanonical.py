@@ -3,25 +3,22 @@
 Mahāṭīkā). None of it is the canon: every book is flagged canonical: false.
 
 Usage:
-    python scripts/canon/build_postcanonical.py <vri-dir> <vri-commit> <out core .json.gz> <out extra .json.gz>
+    python scripts/canon/build_postcanonical.py <vri-dir> <vri-commit> <out .json.gz>
 
 <vri-dir> is a sparse clone of VipassanaTech/tipitaka-xml at <vri-commit> with these paths checked out:
     /romn/*.tik.xml  /romn/*.nrf.xml  /romn/e0101n.mul.xml  /romn/e0102n.mul.xml
     /romn/e0103n.att.xml  /romn/e0104n.att.xml  /tipitaka.org/romn/tree.json
 
-Size budget (decision D-#21): the bundled file (server/data/postcanonical.json.gz) holds the index
-of every book (titles, VRI section, chapters) and the full text of the Ṭīkā section and the
-Visuddhimagga with its Mahāṭīkā. The other Añña books (grammar, chronicles, nīti, Leḍī Sayādaw,
-devotional and Sinhalese works) go to a second file published as a pinned GitHub release asset
-and loaded on demand with a SHA-256 check (src/postcanonical.mjs EXTRA).
+Size (decision D-21a): every book is bundled in one file, server/data/postcanonical.json.gz
+(about 14.5 MB gz, over the 12 MB target but well inside the 60 MB package budget), so the
+server needs no download, no extra allowed host and no disk cache for these books.
 
 Excluded: s0518m.nrf.xml (Peṭakopadesa) and s0520m.nrf.xml (Milindapañha), already in the canon
 data as part of the Khuddaka Nikāya.
 
 Nothing is generated or normalised beyond markup removal: the text is VRI's (scripts/canon/vri.py).
 Titles and sections come from VRI's own table of contents (tipitaka.org/romn/tree.json).
-Both outputs are gzip with mtime 0, so a rebuild at the same commit gives the same bytes and
-the same SHA-256.
+The output is gzip with mtime 0 (the bytes can still differ between zlib builds; nothing pins them).
 """
 import glob
 import gzip
@@ -38,8 +35,6 @@ import vri  # noqa: E402
 IN_CANON = {'s0518m', 's0520m'}
 # Root and commentary-type files of the Añña section that are not *.nrf.xml.
 EXTRA_FILES = ['e0101n.mul.xml', 'e0102n.mul.xml', 'e0103n.att.xml', 'e0104n.att.xml']
-# Añña books bundled with the server; every other e*.nrf.xml book is loaded on demand.
-CORE_ANNA = {'e0101n', 'e0102n', 'e0103n', 'e0104n', 'e0105n'}
 FILE = re.compile(r'^(\w+?)\.(tik|nrf|mul|att)\.xml$')
 
 
@@ -87,7 +82,7 @@ def block(b):
     return row
 
 
-def main(vri_dir, commit, out_core, out_extra):
+def main(vri_dir, commit, out_path):
     titles = tree_titles(vri_dir)
     romn = os.path.join(vri_dir, 'romn')
     files = sorted(os.path.basename(p) for p in glob.glob(os.path.join(romn, '*.tik.xml')) + glob.glob(os.path.join(romn, '*.nrf.xml')))
@@ -97,7 +92,7 @@ def main(vri_dir, commit, out_core, out_extra):
     def stem_of(name):
         return FILE.match(name).group(1)
     plain = [slug(titles.get(stem_of(n), ['', ''])[-1]) for n in files]
-    books, extra_blocks, ids = [], {}, set()
+    books, ids = [], set()
     for name in files:
         stem = FILE.match(name).group(1)
         path = titles.get(stem)
@@ -119,15 +114,9 @@ def main(vri_dir, commit, out_core, out_extra):
         rows = [block(b) for b in parsed]
         chapters = [[b['text'], i] for i, b in enumerate(parsed) if b['rend'] == 'chapter' and b['text']]
         works = [[b['text'], i] for i, b in enumerate(parsed) if b['rend'] == 'book' and b['text']]
-        part = 'core' if section == 'Ṭīkā' or stem in CORE_ANNA else 'extra'
-        entry = {'id': bid, 'file': name, 'title': title, 'section': section, 'group': path[1:-1],
-                 'part': part, 'chapters': chapters, 'works': works, 'block_count': len(rows),
-                 'paragraphs': sum(1 for b in parsed if b['n'])}
-        if part == 'core':
-            entry['blocks'] = rows
-        else:
-            extra_blocks[bid] = rows
-        books.append(entry)
+        books.append({'id': bid, 'file': name, 'title': title, 'section': section, 'group': path[1:-1],
+                      'chapters': chapters, 'works': works, 'block_count': len(rows),
+                      'paragraphs': sum(1 for b in parsed if b['n']), 'blocks': rows})
 
     source = {
         'name': 'Chaṭṭha Saṅgāyana Tipiṭaka (VRI): Ṭīkā and Añña (post-canonical) books',
@@ -136,28 +125,21 @@ def main(vri_dir, commit, out_core, out_extra):
         'attribution': 'Vipassana Research Institute (VRI), Chaṭṭha Saṅgāyana Tipiṭaka, www.tipitaka.org',
         'terms': 'Made freely available by VRI for non-commercial use with attribution.',
     }
-    extra = {'source': source, 'books': extra_blocks}
-    extra_bytes = gzip.compress(json.dumps(extra, ensure_ascii=False, separators=(',', ':')).encode('utf-8'), 9, mtime=0)
-    core = {'source': source, 'extra': {'books': sorted(extra_blocks), 'sha256': hashlib.sha256(extra_bytes).hexdigest(),
-                                        'bytes': len(extra_bytes)}, 'books': books}
-    core_bytes = gzip.compress(json.dumps(core, ensure_ascii=False, separators=(',', ':')).encode('utf-8'), 9, mtime=0)
-    with open(out_core, 'wb') as fh:
-        fh.write(core_bytes)
-    with open(out_extra, 'wb') as fh:
-        fh.write(extra_bytes)
+    data = {'source': source, 'books': books}
+    out_bytes = gzip.compress(json.dumps(data, ensure_ascii=False, separators=(',', ':')).encode('utf-8'), 9, mtime=0)
+    with open(out_path, 'wb') as fh:
+        fh.write(out_bytes)
     report = {
-        'commit': commit, 'books': len(books), 'core_books': sum(1 for b in books if b['part'] == 'core'),
-        'extra_books': len(extra_blocks), 'core_bytes': len(core_bytes), 'extra_bytes': len(extra_bytes),
-        'extra_sha256': core['extra']['sha256'],
+        'commit': commit, 'books': len(books), 'bytes': len(out_bytes), 'sha256': hashlib.sha256(out_bytes).hexdigest(),
         'sections': {s: sum(1 for b in books if b['section'] == s) for s in ('Ṭīkā', 'Añña')},
         'blocks': sum(b['block_count'] for b in books), 'paragraphs': sum(b['paragraphs'] for b in books),
     }
-    with open(out_core + '.report.json', 'w', encoding='utf-8') as fh:
+    with open(out_path + '.report.json', 'w', encoding='utf-8') as fh:
         json.dump(report, fh, ensure_ascii=False, indent=1)
-    print(json.dumps(report, ensure_ascii=False))
+    print(json.dumps(report))
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 5:
+    if len(sys.argv) != 4:
         raise SystemExit(__doc__)
     main(*sys.argv[1:])
