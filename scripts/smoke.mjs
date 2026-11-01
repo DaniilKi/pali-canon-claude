@@ -32,6 +32,8 @@ try {
   assert.ok(tools.length >= 11, `${tools.length} tools`); // core tools plus optional features (src/features)
   assert.ok(tools.length >= 11); // core tools; optional features (src/features) add more
   assert.ok(tools.length >= 11);
+  // 11 core tools plus optional feature modules (src/features/index.mjs).
+  assert.ok(tools.length >= 11, `${tools.length} tools`);
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint));
   assert.ok((await client.listResources()).resources.length >= 2);
   assert.ok((await client.listPrompts()).prompts.length >= 3);
@@ -62,6 +64,11 @@ try {
   await call('festivals', { year: 2025, tradition: 'sri-lanka' }, (d) => assert.equal(d.festivals.find((f) => f.id === 'asalha-puja').texts[0].id, 'sn56.11'));
   await call('daily_text', { date: '2026-11-01' }, (d) => { assert.match(d.text.id, /^dhp\d+$/); assert.ok(d.pali.length); });
   await call('reading_plan', { name: 'mn-year', day: 365 }, (d) => assert.equal(d.readings[0].id, 'mn152'));
+  if (tools.some((tool) => tool.name === 'dhamma_list')) {
+    await call('dhamma_list', { name: 'five hindrances' }, (d) => { assert.equal(d.count, 5); assert.equal(d.defined_in[0].id, 'sn46.51'); });
+    await call('topic', { name: 'emptiness' }, (d) => assert.ok(d.texts.some((t) => t.id === 'mn121')));
+    await call('list_topics', { limit: 3 }, (d) => assert.ok(d.total >= 300));
+  }
   await fails('get_text', { uid: '../private' });
   await fails('resolve_reference', { reference: 'MN 153' }, /not in the canon index/);
   await fails('resolve_reference', { reference: 'Ja i 1' }, /no PTS page numbers/);
