@@ -7,3 +7,4 @@ export * as findCitations from '../find-citations.mjs';
 export * as calendar from '../calendar.mjs';
 export * as daily from '../daily.mjs';
 export * as topics from '../topics.mjs';
+export * as dppn from '../dppn.mjs';

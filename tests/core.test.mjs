@@ -353,6 +353,9 @@ test('HTTP transport: /mcp serves the same read-only tools, with CORS, health, l
     assert.ok(tools.length >= 11);
     assert.ok(tools.length >= 11); // core tools; optional features (src/features) add more
     assert.ok(tools.length >= 11);
+    const { expectedToolNames, coreToolNames } = await import('../scripts/expected-tools.mjs');
+    assert.equal(coreToolNames().length, 11, 'core tools: removing or adding one must be deliberate');
+    assert.deepEqual(tools.map((t) => t.name).sort(), expectedToolNames(), 'exactly the core tools plus those the feature modules register');
     assert.ok(tools.every((t) => t.annotations.readOnlyHint && t.annotations.destructiveHint === false));
     assert.equal(tools.find((t) => t.name === 'get_translation').annotations.openWorldHint, true);
     const call = await (await rpc('tools/call', { name: 'resolve_reference', arguments: { reference: 'SN 56:11' } }, 3)).json();
@@ -655,4 +658,15 @@ test('skills follow the Agent Skills spec and declare the MCP server dependency'
     assert.equal(fm['argument-hint'], fm.metadata['argument-hint']);
     assert.match(text.slice(m[0].length), /needs the Pali Canon MCP server/);
   }
+});
+
+test('expected tool list matches what the feature modules register', async () => {
+  const { coreToolNames, featureFiles, expectedToolNames } = await import('../scripts/expected-tools.mjs');
+  const features = await import('../src/features/index.mjs');
+  const { z } = await import('zod');
+  const registered = [];
+  const stub = { tool: (name) => registered.push(name), prompt: () => {}, resource: () => {}, z, citation: {}, canon, english: {}, providers: {} };
+  for (const feature of Object.values(features)) feature.register?.(stub);
+  assert.equal(featureFiles().length, Object.keys(features).length, 'every feature line is read');
+  assert.deepEqual([...coreToolNames(), ...registered].sort(), expectedToolNames());
 });

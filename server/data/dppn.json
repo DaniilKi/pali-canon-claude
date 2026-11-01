@@ -1,0 +1,17 @@
+{
+  "source": {
+    "id": "dppn",
+    "name": "Dictionary of Pāli Proper Names",
+    "author": "G. P. Malalasekera (1899–1973)",
+    "edition": "First edition, 2 vols., London: John Murray for the Pali Text Society (Indian Texts Series), 1937–38",
+    "status": "not-bundled",
+    "license": null,
+    "attribution": "G. P. Malalasekera, Dictionary of Pāli Proper Names (Pali Text Society, 1937–38).",
+    "reason": "Copyright status not confirmed. The author died in 1973, so under a life-plus-70-years term (UK, Sri Lanka) the work may still be in copyright until the end of 2043, the Pali Text Society has not listed it among its Creative Commons releases, and the online editions state no licence. No entries are bundled until the Pali Text Society or the editor of the revised edition gives permission. See docs/sources.md (DPPN licence research) and issue #32.",
+    "read_online": [
+      { "label": "Revised edition by Ānandajoti Bhikkhu (Ancient Buddhist Texts)", "url": "https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm" },
+      { "label": "Online copy at palikanon.com", "url": "https://www.palikanon.com/english/pali_names/dic_idx.html" }
+    ]
+  },
+  "entries": []
+}

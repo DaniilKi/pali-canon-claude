@@ -4,12 +4,12 @@
 |---|---|
 | Status | **Draft, not sent** |
 | Ask | Confirm the licence of ancient-buddhist-texts.net translations and that live retrieval with attribution is welcome |
-| Contact route | `anandajoti@gmail.com` (shown on https://ancient-buddhist-texts.net/Reference/DPPN.htm) |
+| Contact route | `anandajoti@gmail.com` (shown on https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm) |
 | Contact checked | 1 November 2026 |
 
 ## Before sending
 
-- The address `anandajoti@gmail.com` appears on https://ancient-buddhist-texts.net/Reference/DPPN.htm. The home page itself shows no email, and points to https://linktr.ee/anandajoti.
+- The address `anandajoti@gmail.com` appears on https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm. The home page itself shows no email, and points to https://linktr.ee/anandajoti.
 - The home page fetched for this check did not show a licence statement. Our source library lists the site as CC BY-SA 3.0; this letter asks him to confirm.
 - A separate letter (dppn.md) asks about the revised DPPN. The two can be merged into one email if preferred.
 - Fill in the maintainer's name and reply-to address. Only the maintainer sends this letter; agents never send it.

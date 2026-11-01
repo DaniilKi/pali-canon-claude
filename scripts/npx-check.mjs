@@ -3,6 +3,7 @@
 // from any directory. Usage: node scripts/npx-check.mjs <command> [args...]
 // Example: node scripts/npx-check.mjs npx --offline --no pali-canon-mcp
 import { spawn } from 'node:child_process';
+import { expectedToolNames } from './expected-tools.mjs';
 
 const [command, ...args] = process.argv.slice(2);
 if (!command) {

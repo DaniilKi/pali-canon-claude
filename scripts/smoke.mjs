@@ -1,6 +1,7 @@
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import assert from 'node:assert/strict';
+import { expectedToolNames } from './expected-tools.mjs';
 
 const live = process.argv.includes('--live');
 const serverFlag = process.argv.indexOf('--server');
@@ -34,6 +35,7 @@ try {
   assert.ok(tools.length >= 11);
   // 11 core tools plus optional feature modules (src/features/index.mjs).
   assert.ok(tools.length >= 11, `${tools.length} tools`);
+  assert.deepEqual(tools.map((tool) => tool.name).sort(), expectedToolNames());
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint));
   assert.ok((await client.listResources()).resources.length >= 2);
   assert.ok((await client.listPrompts()).prompts.length >= 3);
@@ -42,6 +44,7 @@ try {
 
   // Offline: resolution, text, search, browse.
   await call('resolve_reference', { reference: 'SN 56:11' }, (d) => { assert.equal(d.id, 'sn56.11'); assert.match(d.pts, /^S v 420/); });
+  await call('lookup_name', { name: 'Sāriputta', textLimit: 3 }, (d) => { assert.equal(d.dictionary.name, 'Dictionary of Pāli Proper Names'); assert.ok(d.appears_in.total_texts_matched > 0); });
   await call('resolve_reference', { reference: 'M i 55' }, (d) => assert.equal(d.id, 'mn10'));
   await call('resolve_reference', { reference: 'AN 1.300' }, (d) => assert.match(d.id, /^an1\.\d+-\d+$/));
   await call('resolve_reference', { reference: 'Sn 1.8' }, (d) => assert.equal(d.title, 'Mettasuttaṃ'));

@@ -48,6 +48,9 @@ The copyright notices:
 - **mmcal / ceMmDateTime.js**, Burmese calendar: Copyright (c) 2018 Yan Naing Aye. <https://github.com/yan9a/mmcal>
 
 The astronomical formulas follow Jean Meeus, *Astronomical Algorithms* (2nd ed., Willmann-Bell, 1998). No calendar data files are bundled. The published dates used only as test references are listed with their sources in [docs/calendar.md](docs/calendar.md).
+## Dictionary of Pāli Proper Names (DPPN)
+
+G. P. Malalasekera's DPPN (1937–38) is linked only. Its copyright or licence status is unconfirmed (see "DPPN licence research" in [docs/sources.md](docs/sources.md)), so no entries are bundled: `server/data/dppn.json` holds source details and an empty entry list. `lookup_name` links to the online editions ([revised edition by Ānandajoti Bhikkhu](https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm), palikanon.com) and lists texts of the bundled VRI canon where a name appears.
 
 ## Runtime dependencies
 
