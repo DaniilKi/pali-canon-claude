@@ -162,8 +162,14 @@ test('Gemini extension stays in step with the package and the skills', async () 
   assert.equal(ext.contextFileName, 'GEMINI.md');
   assert.ok(existsSync(new URL('GEMINI.md', root)));
   const server = ext.mcpServers['pali-canon'];
-  assert.equal(server.command, 'npx');
-  assert.deepEqual(server.args, ['-y', Object.keys(pkg.bin)[0]]);
+  // The extension runs the server from the cloned repo (like manifest.json's ${__dirname}),
+  // so it needs no npm package and works offline.
+  assert.equal(server.command, 'node');
+  assert.equal(server.args.length, 1);
+  assert.equal(server.args[0], '${extensionPath}${/}server${/}index.cjs');
+  assert.ok(server.args[0].endsWith('server${/}index.cjs'));
+  assert.ok(existsSync(new URL('server/index.cjs', root)), 'server/index.cjs must be committed');
+  assert.ok(existsSync(new URL('server/data/canon.json.gz', root)), 'server/data must be committed');
   const tools = [...read('src/index.mjs').matchAll(/tool\('([a-z_]+)'/g)].map((m) => m[1]);
   for (const skill of ['study', 'compare', 'pali-word']) {
     const toml = read(`commands/${skill}.toml`);

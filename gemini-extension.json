@@ -5,8 +5,8 @@
   "contextFileName": "GEMINI.md",
   "mcpServers": {
     "pali-canon": {
-      "command": "npx",
-      "args": ["-y", "pali-canon-mcp"]
+      "command": "node",
+      "args": ["${extensionPath}${/}server${/}index.cjs"]
     }
   }
 }
