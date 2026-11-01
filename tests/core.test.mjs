@@ -470,7 +470,7 @@ test('Claude Code plugin and marketplace manifests follow the documented schema'
   assert.ok(existsSync(new URL('server/index.cjs', root)));
 
   // Each skill has front matter with a single-line text description.
-  for (const s of ['study', 'compare', 'pali-word']) {
+  for (const s of ['study', 'compare', 'pali-word', 'method']) {
     const md = readFileSync(new URL(`skills/${s}/SKILL.md`, root), 'utf8');
     assert.ok(md.startsWith(`---\nname: ${s}\ndescription: `) && /^description: \S.*$/m.test(md), s);
   }
@@ -510,7 +510,7 @@ test('Codex plugin packaging is consistent with the Claude plugin', async () => 
   const entry = market.plugins.find((p) => p.name === codex.name);
   assert.deepEqual(entry.source, { source: 'local', path: './' });
   assert.ok(entry.policy.installation && entry.policy.authentication && entry.category);
-  for (const skill of ['study', 'compare', 'pali-word']) {
+  for (const skill of ['study', 'compare', 'pali-word', 'method']) {
     assert.ok(existsSync(new URL(`skills/${skill}/SKILL.md`, root)), skill);
     const yaml = readFileSync(new URL(`skills/${skill}/agents/openai.yaml`, root), 'utf8');
     assert.match(yaml, /type: "mcp"/, skill);
@@ -542,7 +542,7 @@ test('Gemini extension stays in step with the package and the skills', async () 
   assert.ok(existsSync(new URL('server/index.cjs', root)), 'server/index.cjs must be committed');
   assert.ok(existsSync(new URL('server/data/canon.json.gz', root)), 'server/data must be committed');
   const tools = [...read('src/server.mjs').matchAll(/tool\('([a-z_]+)'/g)].map((m) => m[1]);
-  for (const skill of ['study', 'compare', 'pali-word']) {
+  for (const skill of ['study', 'compare', 'pali-word', 'method']) {
     const toml = read(`commands/${skill}.toml`);
     assert.match(toml, /^description = "[^"\n]+"$/m, skill);
     assert.match(toml, /^prompt = '''\n[\s\S]*\{\{args\}\}[\s\S]*\n'''\n?$/m, skill);
