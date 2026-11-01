@@ -90,7 +90,8 @@ A source is used only when it meets all five tests:
 | **Published uposatha and holiday lists** (Wat Metta, Sri Lanka gazettes, Myanmar Department of Civil Aviation holiday circulars, Krungsri Myanmar holidays) | **Build only (test reference)** | 2024–2026 dates the calendar is checked against; nothing is shipped | facts, cited with URLs | [docs/calendar.md](calendar.md#checked-against-published-calendars-20242026) |
 | **uposatha** (jhanarato) | **Not used** | Python library for a Western forest-monastery calendar; the four traditions above are covered by the other sources | MIT | [uposatha](https://github.com/jhanarato/uposatha) |
 | **Aksharamukha** | **Declined (licence)**; own transliterator planned ([#26](https://github.com/DaniilKi/pali-canon-claude/issues/26)) | Excellent script converter, but AGPL-3.0 would force that licence on the whole tool | AGPL-3.0 | [Aksharamukha](https://pypi.org/project/aksharamukha) |
-| **Chanting books** (Amaravati, Abhayagiri) | **Planned, with permission** ([#44](https://github.com/DaniilKi/pali-canon-claude/issues/44)) | Daily recitation in Pāli and English | ask publishers | — |
+| **Chanting books** (Amaravati, Abhayagiri) | **Permission not yet asked**: request letters drafted, not sent ([#44](https://github.com/DaniilKi/pali-canon-claude/issues/44)); the `paritta` tool already gives the Pāli of each chant from the bundled VRI text and links English from dhammatalks.org and Access to Insight. No chanting-book layout or English is included until a publisher agrees | Daily recitation in Pāli and English | ask publishers; letters drafted, not sent: [Amaravati](outreach/amaravati.md), [Abhayagiri](outreach/abhayagiri.md) | — |
+| **Chant recordings** | **Deferred** ([#44](https://github.com/DaniilKi/pali-canon-claude/issues/44)): no recording source has been chosen or checked yet. The `paritta` tool links no audio | Hearing the chants | to check per source before any link is added | — |
 
 ## Peer projects
 
