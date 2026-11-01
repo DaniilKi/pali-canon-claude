@@ -1,10 +1,17 @@
 ---
 name: study
-description: Study or find passages in the Pali Canon, Tipitaka or Buddhist suttas with the exact Pali text, translator attribution and precise citations (text ID, VRI paragraph, PTS page). Use for passage explanations and topical Buddhist text research.
-argument-hint: "[sutta reference, PTS page, link or topic]"
+description: Study or find passages in the Pali Canon, Tipitaka or Buddhist suttas with the exact Pali text, translator attribution and precise citations (text ID, VRI paragraph, PTS page). Use for passage explanations and topical Buddhist text research. Requires the Pali Canon MCP server.
+license: MIT
+compatibility: "Requires the Pali Canon MCP server (pali-canon-claude), installed as the Claude Code plugin, the Claude Desktop extension or any MCP client: https://github.com/DaniilKi/pali-canon-claude#install. The Pali text works offline; dictionary and English translations need network access."
+metadata:
+  argument-hint: "[sutta reference, PTS page, link or topic]"
+  requires-mcp-server: pali-canon
+  homepage: https://github.com/DaniilKi/pali-canon-claude
 ---
 
 Study this request: $ARGUMENTS
+
+This skill needs the Pali Canon MCP server (tools such as `resolve_reference`, `get_text` and `lookup_pali`). If those tools are not available, say so, point to https://github.com/DaniilKi/pali-canon-claude#install and do not answer from memory.
 
 Use the bundled Pali Canon MCP tools and check each tool's schema rather than guessing parameters. If the server is missing, explain how to install the plugin. Never substitute invented retrieval.
 
