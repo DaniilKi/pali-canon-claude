@@ -31,8 +31,8 @@ try {
   const { tools } = await client.listTools();
   assert.ok(tools.length >= 11, `${tools.length} tools`); // core tools plus optional features (src/features)
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint));
-  assert.equal((await client.listResources()).resources.length, 2);
-  assert.equal((await client.listPrompts()).prompts.length, 3);
+  assert.ok((await client.listResources()).resources.length >= 2);
+  assert.ok((await client.listPrompts()).prompts.length >= 3);
   await client.readResource({ uri: 'pali://canon-guide' });
   await client.getPrompt({ name: 'study_passage', arguments: { reference: 'MN 10' } });
 
@@ -43,6 +43,7 @@ try {
   await call('resolve_reference', { reference: 'Sn 1.8' }, (d) => assert.equal(d.title, 'Mettasuttaṃ'));
   await call('resolve_reference', { reference: 'https://www.dhammatalks.org/suttas/AN/AN7_64.html' }, (d) => assert.equal(d.id, 'an7.68'));
   await call('resolve_reference', { reference: 'Vin iii 1' }, (d) => assert.equal(d.id, 'pli-tv-bu-vb-pj1'));
+  await call('find_citations', { text: 'See MN 10 and S v 420, not MN 999.' }, (d) => { assert.deepEqual(d.citations.map((c) => c.text_id ?? c.status), ['mn10', 'sn56.11', 'unresolved']); });
   await call('get_metadata', { uid: 'AN 3.65' }, (d) => { assert.match(d.pts, /^A i 188/); assert.ok(d.notes.some((n) => /3\.66/.test(n))); assert.ok(d.english.length); });
   const first = await call('get_text', { uid: 'MN 10', limit: 5 }, (d) => { assert.equal(d.text_id, 'mn10'); assert.equal(d.returned, 5); assert.ok(d.segments.some((s) => /Evaṃ me sutaṃ/.test(s.text))); });
   await call('get_text', { uid: 'mn10', limit: 3, offset: first.next_offset }, (d) => assert.notEqual(d.segments[0].ref, first.segments.at(-1).ref));

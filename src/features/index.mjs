@@ -3,3 +3,4 @@
 // Add exactly one line per feature so parallel pull requests merge cleanly, e.g.
 // export * as calendar from '../calendar.mjs';
 export * as verify from '../verify.mjs';
+export * as findCitations from '../find-citations.mjs';
