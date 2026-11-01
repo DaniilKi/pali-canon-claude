@@ -656,9 +656,9 @@ var require_codegen = __commonJS({
     };
     Else.kind = "else";
     var If = class _If extends BlockNode {
-      constructor(condition, nodes) {
+      constructor(condition2, nodes) {
         super(nodes);
-        this.condition = condition;
+        this.condition = condition2;
       }
       render(opts) {
         let code = `if(${this.condition})` + super.render(opts);
@@ -921,8 +921,8 @@ var require_codegen = __commonJS({
         return new code_1._Code(code);
       }
       // `if` clause (or statement if `thenBody` and, optionally, `elseBody` are passed)
-      if(condition, thenBody, elseBody) {
-        this._blockNode(new If(condition));
+      if(condition2, thenBody, elseBody) {
+        this._blockNode(new If(condition2));
         if (thenBody && elseBody) {
           this.code(thenBody).else().code(elseBody).endIf();
         } else if (thenBody) {
@@ -933,8 +933,8 @@ var require_codegen = __commonJS({
         return this;
       }
       // `else if` clause - invalid without `if` or after `else` clauses
-      elseIf(condition) {
-        return this._elseNode(new If(condition));
+      elseIf(condition2) {
+        return this._elseNode(new If(condition2));
       }
       // `else` clause - only valid after `if` or `else if` clauses
       else() {
@@ -1801,11 +1801,11 @@ var require_defaults = __commonJS({
         (0, util_1.checkStrictMode)(it, `default is ignored for: ${childData}`);
         return;
       }
-      let condition = (0, codegen_1._)`${childData} === undefined`;
+      let condition2 = (0, codegen_1._)`${childData} === undefined`;
       if (opts.useDefaults === "empty") {
-        condition = (0, codegen_1._)`${condition} || ${childData} === null || ${childData} === ""`;
+        condition2 = (0, codegen_1._)`${condition2} || ${childData} === null || ${childData} === ""`;
       }
-      gen.if(condition, (0, codegen_1._)`${childData} = ${(0, codegen_1.stringify)(defaultValue)}`);
+      gen.if(condition2, (0, codegen_1._)`${childData} = ${(0, codegen_1.stringify)(defaultValue)}`);
     }
   }
 });
@@ -2729,11 +2729,11 @@ var require_validate = __commonJS({
           this.errsCount = it.gen.const("_errs", names_1.default.errors);
         }
       }
-      result(condition, successAction, failAction) {
-        this.failResult((0, codegen_1.not)(condition), successAction, failAction);
+      result(condition2, successAction, failAction) {
+        this.failResult((0, codegen_1.not)(condition2), successAction, failAction);
       }
-      failResult(condition, successAction, failAction) {
-        this.gen.if(condition);
+      failResult(condition2, successAction, failAction) {
+        this.gen.if(condition2);
         if (failAction)
           failAction();
         else
@@ -2750,28 +2750,28 @@ var require_validate = __commonJS({
             this.gen.else();
         }
       }
-      pass(condition, failAction) {
-        this.failResult((0, codegen_1.not)(condition), void 0, failAction);
+      pass(condition2, failAction) {
+        this.failResult((0, codegen_1.not)(condition2), void 0, failAction);
       }
-      fail(condition) {
-        if (condition === void 0) {
+      fail(condition2) {
+        if (condition2 === void 0) {
           this.error();
           if (!this.allErrors)
             this.gen.if(false);
           return;
         }
-        this.gen.if(condition);
+        this.gen.if(condition2);
         this.error();
         if (this.allErrors)
           this.gen.endIf();
         else
           this.gen.else();
       }
-      fail$data(condition) {
+      fail$data(condition2) {
         if (!this.$data)
-          return this.fail(condition);
+          return this.fail(condition2);
         const { schemaCode } = this;
-        this.fail((0, codegen_1._)`${schemaCode} !== undefined && (${(0, codegen_1.or)(this.invalid$data(), condition)})`);
+        this.fail((0, codegen_1._)`${schemaCode} !== undefined && (${(0, codegen_1.or)(this.invalid$data(), condition2)})`);
       }
       error(append, errorParams, errorPaths) {
         if (errorParams) {
@@ -5104,12 +5104,12 @@ var require_ref = __commonJS({
       function callSyncRef() {
         cxt.result((0, code_1.callValidateCode)(cxt, v, passCxt), () => addEvaluatedFrom(v), () => addErrorsFrom(v));
       }
-      function addErrorsFrom(source2) {
-        const errs = (0, codegen_1._)`${source2}.errors`;
+      function addErrorsFrom(source3) {
+        const errs = (0, codegen_1._)`${source3}.errors`;
         gen.assign(names_1.default.vErrors, (0, codegen_1._)`${names_1.default.vErrors} === null ? ${errs} : ${names_1.default.vErrors}.concat(${errs})`);
         gen.assign(names_1.default.errors, (0, codegen_1._)`${names_1.default.vErrors}.length`);
       }
-      function addEvaluatedFrom(source2) {
+      function addEvaluatedFrom(source3) {
         var _a;
         if (!it.opts.unevaluated)
           return;
@@ -5120,7 +5120,7 @@ var require_ref = __commonJS({
               it.props = util_1.mergeEvaluated.props(gen, schEvaluated.props, it.props);
             }
           } else {
-            const props = gen.var("props", (0, codegen_1._)`${source2}.evaluated.props`);
+            const props = gen.var("props", (0, codegen_1._)`${source3}.evaluated.props`);
             it.props = util_1.mergeEvaluated.props(gen, props, it.props, codegen_1.Name);
           }
         }
@@ -5130,7 +5130,7 @@ var require_ref = __commonJS({
               it.items = util_1.mergeEvaluated.items(gen, schEvaluated.items, it.items);
             }
           } else {
-            const items = gen.var("items", (0, codegen_1._)`${source2}.evaluated.items`);
+            const items = gen.var("items", (0, codegen_1._)`${source3}.evaluated.items`);
             it.items = util_1.mergeEvaluated.items(gen, items, it.items, codegen_1.Name);
           }
         }
@@ -8514,8 +8514,8 @@ var upgradeWebSocket = defineWebSocketHelper(async (c, events, options) => {
       get readyState() {
         return ws.readyState;
       },
-      send(source2, opts) {
-        ws.send(source2, { compress: opts?.compress });
+      send(source3, opts) {
+        ws.send(source3, { compress: opts?.compress });
       },
       url: new URL(c.req.url)
     };
@@ -8791,10 +8791,10 @@ function cached(getter) {
 function nullish(input) {
   return input === null || input === void 0;
 }
-function cleanRegex(source2) {
-  const start = source2.startsWith("^") ? 1 : 0;
-  const end = source2.endsWith("$") ? source2.length - 1 : source2.length;
-  return source2.slice(start, end);
+function cleanRegex(source3) {
+  const start = source3.startsWith("^") ? 1 : 0;
+  const end = source3.endsWith("$") ? source3.length - 1 : source3.length;
+  return source3.slice(start, end);
 }
 function floatSafeRemainder(val, step) {
   const valDecCount = (val.toString().split(".")[1] || "").length;
@@ -20274,13 +20274,13 @@ function escapeLiteralCheckValue(literal2, refs) {
   return refs.patternStrategy === "escape" ? escapeNonAlphaNumeric(literal2) : literal2;
 }
 var ALPHA_NUMERIC = new Set("ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvxyz0123456789");
-function escapeNonAlphaNumeric(source2) {
+function escapeNonAlphaNumeric(source3) {
   let result = "";
-  for (let i = 0; i < source2.length; i++) {
-    if (!ALPHA_NUMERIC.has(source2[i])) {
+  for (let i = 0; i < source3.length; i++) {
+    if (!ALPHA_NUMERIC.has(source3[i])) {
       result += "\\";
     }
-    result += source2[i];
+    result += source3[i];
   }
   return result;
 }
@@ -20350,60 +20350,60 @@ function stringifyRegExpWithFlags(regex, refs) {
     s: regex.flags.includes("s")
     // `.` matches newlines
   };
-  const source2 = flags.i ? regex.source.toLowerCase() : regex.source;
+  const source3 = flags.i ? regex.source.toLowerCase() : regex.source;
   let pattern = "";
   let isEscaped = false;
   let inCharGroup = false;
   let inCharRange = false;
-  for (let i = 0; i < source2.length; i++) {
+  for (let i = 0; i < source3.length; i++) {
     if (isEscaped) {
-      pattern += source2[i];
+      pattern += source3[i];
       isEscaped = false;
       continue;
     }
     if (flags.i) {
       if (inCharGroup) {
-        if (source2[i].match(/[a-z]/)) {
+        if (source3[i].match(/[a-z]/)) {
           if (inCharRange) {
-            pattern += source2[i];
-            pattern += `${source2[i - 2]}-${source2[i]}`.toUpperCase();
+            pattern += source3[i];
+            pattern += `${source3[i - 2]}-${source3[i]}`.toUpperCase();
             inCharRange = false;
-          } else if (source2[i + 1] === "-" && source2[i + 2]?.match(/[a-z]/)) {
-            pattern += source2[i];
+          } else if (source3[i + 1] === "-" && source3[i + 2]?.match(/[a-z]/)) {
+            pattern += source3[i];
             inCharRange = true;
           } else {
-            pattern += `${source2[i]}${source2[i].toUpperCase()}`;
+            pattern += `${source3[i]}${source3[i].toUpperCase()}`;
           }
           continue;
         }
-      } else if (source2[i].match(/[a-z]/)) {
-        pattern += `[${source2[i]}${source2[i].toUpperCase()}]`;
+      } else if (source3[i].match(/[a-z]/)) {
+        pattern += `[${source3[i]}${source3[i].toUpperCase()}]`;
         continue;
       }
     }
     if (flags.m) {
-      if (source2[i] === "^") {
+      if (source3[i] === "^") {
         pattern += `(^|(?<=[\r
 ]))`;
         continue;
-      } else if (source2[i] === "$") {
+      } else if (source3[i] === "$") {
         pattern += `($|(?=[\r
 ]))`;
         continue;
       }
     }
-    if (flags.s && source2[i] === ".") {
-      pattern += inCharGroup ? `${source2[i]}\r
-` : `[${source2[i]}\r
+    if (flags.s && source3[i] === ".") {
+      pattern += inCharGroup ? `${source3[i]}\r
+` : `[${source3[i]}\r
 ]`;
       continue;
     }
-    pattern += source2[i];
-    if (source2[i] === "\\") {
+    pattern += source3[i];
+    if (source3[i] === "\\") {
       isEscaped = true;
-    } else if (inCharGroup && source2[i] === "]") {
+    } else if (inCharGroup && source3[i] === "]") {
       inCharGroup = false;
-    } else if (!inCharGroup && source2[i] === "[") {
+    } else if (!inCharGroup && source3[i] === "[") {
       inCharGroup = true;
     }
   }
@@ -24972,6 +24972,235 @@ function listSources() {
 
 // src/features/index.mjs
 var features_exports = {};
+__export(features_exports, {
+  abhidhamma: () => abhidhamma_exports
+});
+
+// src/abhidhamma.mjs
+var abhidhamma_exports = {};
+__export(abhidhamma_exports, {
+  GLOSSES: () => GLOSSES,
+  GLOSS_LABEL: () => GLOSS_LABEL,
+  buildConditions: () => buildConditions,
+  buildMatika: () => buildMatika,
+  condition: () => condition,
+  matika: () => matika,
+  register: () => register
+});
+var MATIKA_UNITS = [
+  { id: "ds1.1", key: "tika", kind: "tika" },
+  { id: "ds1.2", key: "duka", kind: "duka" },
+  { id: "ds1.3", key: "suttantika", kind: "duka" }
+];
+var PATTHANA_UNIT = "patthana1.1";
+var ITEM = /^\((Ka|Kha|Ga|Gha)\)\s*(.*)$/;
+var strip = (text) => String(text ?? "").replace(/<[^>]+>/g, "").trim();
+var unitById = (canon, id) => {
+  const unit = canon.load().byId.get(id);
+  if (!unit) throw new Error(`Bundled text ${id} is missing from the canon data.`);
+  return unit;
+};
+var GLOSS_LABEL = "Editorial gloss: a short plain-English aid written for this tool, using common English renderings. It is not scripture, not a translation of the definition and not a commentary; read the P\u0101li definition for the text itself.";
+var GLOSSES = {
+  hetu: { english: "root", gloss: "The roots (such as greed, hatred and delusion, or their wholesome opposites) support the states that arise with them." },
+  arammana: { english: "object", gloss: "An object supports the consciousness and mental factors that take it as their object." },
+  adhipati: { english: "predominance", gloss: "A dominant factor (desire, energy, mind, investigation, or an esteemed object) supports the states it leads." },
+  anantara: { english: "proximity", gloss: "A mental state that has just ceased supports the mental state that arises immediately after it." },
+  samanantara: { english: "contiguity", gloss: "Like proximity: the immediately preceding mental state supports the next one without any gap." },
+  sahajata: { english: "conascence", gloss: "States that arise together support the states born together with them." },
+  annamanna: { english: "mutuality", gloss: "States that arise together support each other reciprocally." },
+  nissaya: { english: "support", gloss: "A state supports another as its foundation, such as a sense base for its kind of consciousness." },
+  upanissaya: { english: "decisive support", gloss: "A strong supporting cause: earlier states, and also things such as climate, food, a person or a dwelling." },
+  purejata: { english: "prenascence", gloss: "Something that arose earlier (a sense base or a sense object) supports mental states that arise later." },
+  pacchajata: { english: "postnascence", gloss: "Mental states that arise later support the body that already exists." },
+  asevana: { english: "repetition", gloss: "Earlier states of the same kind support the following ones by repetition." },
+  kamma: { english: "kamma", gloss: "Volition, as wholesome or unwholesome action, supports its results and the states associated with it." },
+  vipaka: { english: "kamma-result", gloss: "Resultant mental states support one another." },
+  ahara: { english: "nutriment", gloss: "Nutriment, physical food and the mental nutriments, sustains the body and associated states." },
+  indriya: { english: "faculty", gloss: "Faculties, such as the eye faculty or the mental faculties, support the states they govern." },
+  jhana: { english: "jh\u0101na", gloss: "The jh\u0101na factors support the states associated with them." },
+  magga: { english: "path", gloss: "The path factors support the states associated with them." },
+  sampayutta: { english: "association", gloss: "The four mental aggregates support one another by being associated." },
+  vippayutta: { english: "dissociation", gloss: "Material and mental states support each other while remaining distinct." },
+  atthi: { english: "presence", gloss: "A state supports another by being present." },
+  natthi: { english: "absence", gloss: "A mental state that has just ceased supports the next one by its absence." },
+  vigata: { english: "disappearance", gloss: "A mental state that has just disappeared supports the next one by its disappearance." },
+  avigata: { english: "non-disappearance", gloss: "A state supports another by not having disappeared." }
+};
+var locate = (unit, first, count) => ({
+  text_id: unit.id,
+  citation: unit.acronym,
+  segment_ref: `${unit.id}/${first + 1}`,
+  get_text: { uid: unit.acronym, offset: first, limit: count }
+});
+var matikaCache = null;
+function buildMatika(canon = canon_exports) {
+  if (matikaCache) return matikaCache;
+  const sections = MATIKA_UNITS.map(({ id, key, kind }) => {
+    const unit = unitById(canon, id);
+    const segs = canon.segments(unit);
+    const entries = [];
+    let group = null;
+    let current = null;
+    segs.forEach((seg, i) => {
+      const text = strip(seg.text);
+      if (seg.type === "heading") {
+        if (key === "duka" && !/mātikā$/i.test(text)) group = text;
+        return;
+      }
+      const m = text.match(ITEM);
+      if (!m) return;
+      if (seg.vri_paragraph) {
+        current = { number: Number(seg.vri_paragraph), kind, ...group ? { group } : {}, items: [], first: i, last: i };
+        entries.push(current);
+      }
+      if (!current) return;
+      current.items.push({ label: m[1], text: m[2] });
+      current.last = i;
+    });
+    const firstEntry = entries.length ? entries[0].first : segs.length;
+    const heading = segs.slice(0, firstEntry).filter((s) => s.type === "heading" && /mātikā$/i.test(strip(s.text))).pop();
+    return {
+      key,
+      text_id: unit.id,
+      citation: unit.acronym,
+      title: unit.title,
+      heading: heading ? strip(heading.text) : unit.title,
+      vri_paragraphs: unit.vri,
+      entries: entries.map(({ first, last, ...e }) => ({ ...e, vri_paragraph: String(e.number), ...locate(unit, first, last - first + 1) }))
+    };
+  });
+  matikaCache = sections;
+  return sections;
+}
+var stem = (value) => fold2(value).replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
+var groupStem = (heading) => stem(heading).replace(/m$/, "").replace(/(gocchaka|duka)$/, "");
+function source2(canon) {
+  const s = canon.source();
+  return { edition: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), P\u0101li", attribution: s.attribution, terms: s.terms };
+}
+function groupsOf(section) {
+  const groups = [];
+  for (const e of section.entries) {
+    const g = e.group || null;
+    if (!groups.length || groups[groups.length - 1].heading !== g) groups.push({ heading: g, from: e.number, to: e.number, count: 0 });
+    const last = groups[groups.length - 1];
+    last.to = e.number;
+    last.count += 1;
+  }
+  return groups.filter((g) => g.heading);
+}
+function matika(section, canon = canon_exports) {
+  const sections = buildMatika(canon);
+  const base = { book: "Dhammasa\u1E45ga\u1E47\u012B", ...source2(canon) };
+  const overview = () => ({
+    ...base,
+    sections: sections.map((s) => ({
+      section: s.key,
+      heading: s.heading,
+      text_id: s.text_id,
+      citation: s.citation,
+      vri_paragraphs: s.vri_paragraphs,
+      entries: s.entries.length,
+      ...groupsOf(s).length ? { groups: groupsOf(s).map((g) => ({ heading: g.heading, dyads: `${g.from}\u2013${g.to}`, count: g.count })) } : {}
+    })),
+    usage: 'Pass section "tika", "duka", "suttantika", a dyad group such as "hetugocchaka", or one entry such as "tika 5" or "duka 101". Read the full text with get_text using the returned uid and offset.'
+  });
+  if (section === void 0 || section === null || !String(section).trim() || stem(section) === "all") return overview();
+  const wanted = stem(section);
+  const one = wanted.match(/^(tika|duka|triad|dyad)\s*(\d+)$/);
+  if (one) {
+    const n = Number(one[2]);
+    const pool = /^(tika|triad)$/.test(one[1]) ? sections.filter((s) => s.key === "tika") : sections.filter((s) => s.key !== "tika");
+    const entry = pool.flatMap((s) => s.entries).find((e) => e.number === n);
+    if (!entry) throw new Error(`No ${one[1]} ${n} in the Dhammasa\u1E45ga\u1E47\u012B m\u0101tik\u0101: triads are numbered 1\u201322, dyads 1\u2013142 (1\u2013100 Abhidhamma, 101\u2013142 Suttanta).`);
+    return { ...base, entries: [entry] };
+  }
+  const aliases = { tika: ["tika", "tikamatika", "triads", "triad"], duka: ["duka", "dukamatika", "abhidhammaduka", "abhidhammadukamatika", "abhidhamma duka", "dyads", "dyad"], suttantika: ["suttantika", "suttanta", "suttantikaduka", "suttantikadukamatika", "suttanta duka", "suttanta dyads"] };
+  const compact = fold2(section).replace(/[^a-z0-9]/g, "");
+  const bySection = sections.find((s) => aliases[s.key].includes(wanted) || s.text_id.replace(/[^a-z0-9]/g, "") === compact);
+  if (bySection) {
+    const { entries, ...meta } = bySection;
+    return { ...base, section: meta.key, heading: meta.heading, text_id: meta.text_id, citation: meta.citation, vri_paragraphs: meta.vri_paragraphs, entries };
+  }
+  const duka = sections.find((s) => s.key === "duka");
+  const group = groupsOf(duka).find((g) => stem(g.heading) === wanted || groupStem(g.heading) === wanted.replace(/m$/, "").replace(/(gocchaka|duka)$/, "").trim());
+  if (group) {
+    return { ...base, section: "duka", group: group.heading, entries: duka.entries.filter((e) => e.group === group.heading) };
+  }
+  throw new Error(`Unknown m\u0101tik\u0101 section "${section}". Use tika, duka, suttantika, one of the dyad groups (${groupsOf(duka).map((g) => g.heading).join(", ")}), or an entry such as "tika 5" or "duka 101".`);
+}
+var conditionsCache = null;
+function buildConditions(canon = canon_exports) {
+  if (conditionsCache) return conditionsCache;
+  const unit = unitById(canon, PATTHANA_UNIT);
+  const segs = canon.segments(unit);
+  const uddesaHeading = segs.findIndex((s) => s.type === "heading" && /Paccayuddeso$/.test(strip(s.text)));
+  const niddesaHeading = segs.findIndex((s) => s.type === "heading" && /Paccayaniddeso$/.test(strip(s.text)));
+  if (uddesaHeading < 0 || niddesaHeading < 0) throw new Error("The Pa\u1E6D\u1E6Dh\u0101na paccayuddesa or paccayaniddesa was not found in the bundled text.");
+  const uddesaIndex = uddesaHeading + 1;
+  const uddesa = strip(segs[uddesaIndex].text);
+  const names = uddesa.replace(/ti\.?$/, "").split(/,\s*/).map((n) => n.trim()).filter(Boolean);
+  const conditions = names.map((name, i) => {
+    const key = fold2(name).replace(/paccayo$/, "");
+    const start = segs.findIndex((s, j) => j > niddesaHeading && s.vri_paragraph && fold2(strip(s.text)).startsWith(`${fold2(name)}ti`));
+    if (start < 0) throw new Error(`No definition found for ${name} in the bundled Pa\u1E6D\u1E6Dh\u0101na.`);
+    let end = start + 1;
+    while (end < segs.length && !segs[end].vri_paragraph && segs[end].type === "prose" && !/Paccayaniddeso\.$/.test(strip(segs[end].text))) end += 1;
+    const definition = segs.slice(start, end).map((s) => strip(s.text));
+    return {
+      number: i + 1,
+      name,
+      key,
+      definition: {
+        opening: definition[0].split(/\s+–\s+/)[0],
+        vri_paragraph: segs[start].vri_paragraph,
+        ...locate(unit, start, end - start),
+        text: definition
+      },
+      listed_in: { heading: strip(segs[uddesaHeading].text), ...locate(unit, uddesaIndex, 1) }
+    };
+  });
+  conditionsCache = conditions;
+  return conditions;
+}
+function condition(name, canon = canon_exports) {
+  const conditions = buildConditions(canon);
+  const base = { book: "Pa\u1E6D\u1E6Dh\u0101na", ...source2(canon) };
+  const withGloss = (c, full) => {
+    const g = GLOSSES[c.key];
+    const out = { number: c.number, name: c.name, english: g?.english ?? null, gloss: g ? { text: g.gloss, label: GLOSS_LABEL } : null };
+    if (!full) {
+      const { text, ...where } = c.definition;
+      return { ...out, definition: where };
+    }
+    return { ...out, definition: c.definition, listed_in: c.listed_in };
+  };
+  const raw = String(name ?? "").trim();
+  const wanted = stem(raw);
+  if (!wanted || wanted === "all" || wanted === "list") {
+    return {
+      ...base,
+      count: conditions.length,
+      conditions: conditions.map((c) => withGloss(c, false)),
+      usage: 'Pass one name (hetu, \u0101ramma\u1E47apaccayo, "decisive support") or number 1\u201324 for its full definition text.'
+    };
+  }
+  const key = wanted.replace(/\s*(paccayo|paccaya|condition)$/, "").replace(/ /g, "");
+  const found = /^\d+$/.test(key) ? conditions[Number(key) - 1] : conditions.find((c) => c.key === key || fold2(c.name) === key) || conditions.find((c) => stem(GLOSSES[c.key]?.english ?? "").replace(/[ -]/g, "") === key.replace(/-/g, ""));
+  if (!found) {
+    throw new Error(`Unknown Pa\u1E6D\u1E6Dh\u0101na condition "${raw}". The 24 conditions are: ${conditions.map((c) => c.name).join(", ")}.`);
+  }
+  return { ...base, condition: withGloss(found, true) };
+}
+function register({ tool, z, canon }) {
+  tool("abhidhamma_matika", "Browse the m\u0101tik\u0101 (matrix) of the Dhammasa\u1E45ga\u1E47\u012B: the 22 triads (tika), the 100 Abhidhamma dyads (duka) in their groups and the 42 Suttanta dyads, in P\u0101li from the bundled VRI text, each with its VRI paragraph and a get_text location. Without a section it returns an overview. Works offline.", {
+    section: z.string().max(60).optional().describe('"tika", "duka", "suttantika", a dyad group such as "hetugocchaka" or "\u0101sava", or one entry such as "tika 5" or "duka 101". Omit for an overview.')
+  }, ({ section }) => matika(section, canon));
+  tool("patthana_condition", 'One of the 24 conditions (paccaya) of the Pa\u1E6D\u1E6Dh\u0101na: its P\u0101li name from the bundled VRI text, the location and P\u0101li text of its definition (paccayaniddesa), and a short English gloss labelled as an editorial gloss. Pass "all" for the list. Works offline.', {
+    name: z.string().trim().min(1).max(60).describe('P\u0101li name (hetu, hetupaccayo, \u0101ramma\u1E47a\u2026), a common English name ("root", "decisive support"), a number 1\u201324, or "all".')
+  }, ({ name }) => condition(name, canon));
+}
 
 // src/server.mjs
 var VERSION = "2.0.0";
