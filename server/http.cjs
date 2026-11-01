@@ -8001,8 +8001,8 @@ var Response$1 = class Response$12 {
   #body;
   #init;
   [getResponseCache]() {
-    const cache = this[cacheKey];
-    const liveHeaders = cache && cache[2] instanceof Headers ? cache[2] : void 0;
+    const cache2 = this[cacheKey];
+    const liveHeaders = cache2 && cache2[2] instanceof Headers ? cache2[2] : void 0;
     delete this[cacheKey];
     return this[responseCache] ||= new GlobalResponse(this.#body, liveHeaders ? {
       status: this.#init?.status,
@@ -8030,10 +8030,10 @@ var Response$1 = class Response$12 {
     ];
   }
   get headers() {
-    const cache = this[cacheKey];
-    if (cache) {
-      if (!(cache[2] instanceof Headers)) cache[2] = new Headers(cache[2] || (cache[1] === null ? void 0 : { "content-type": defaultContentType }));
-      return cache[2];
+    const cache2 = this[cacheKey];
+    if (cache2) {
+      if (!(cache2[2] instanceof Headers)) cache2[2] = new Headers(cache2[2] || (cache2[1] === null ? void 0 : { "content-type": defaultContentType }));
+      return cache2[2];
     }
     return this[getResponseCache]().headers;
   }
@@ -8796,12 +8796,12 @@ function cleanRegex(source2) {
   const end = source2.endsWith("$") ? source2.length - 1 : source2.length;
   return source2.slice(start, end);
 }
-function floatSafeRemainder(val, step) {
+function floatSafeRemainder(val, step2) {
   const valDecCount = (val.toString().split(".")[1] || "").length;
-  const stepDecCount = (step.toString().split(".")[1] || "").length;
+  const stepDecCount = (step2.toString().split(".")[1] || "").length;
   const decCount = valDecCount > stepDecCount ? valDecCount : stepDecCount;
   const valInt = Number.parseInt(val.toFixed(decCount).replace(".", ""));
-  const stepInt = Number.parseInt(step.toFixed(decCount).replace(".", ""));
+  const stepInt = Number.parseInt(step2.toFixed(decCount).replace(".", ""));
   return valInt % stepInt / 10 ** decCount;
 }
 function defineLazy(object3, key, getter) {
@@ -12164,32 +12164,32 @@ var JSONSchemaGenerator = class {
     const root = this.seen.get(schema);
     if (!root)
       throw new Error("Unprocessed schema. This is a bug in Zod.");
-    const makeURI = (entry) => {
+    const makeURI = (entry2) => {
       const defsSegment = this.target === "draft-2020-12" ? "$defs" : "definitions";
       if (params.external) {
-        const externalId = params.external.registry.get(entry[0])?.id;
+        const externalId = params.external.registry.get(entry2[0])?.id;
         const uriGenerator = params.external.uri ?? ((id2) => id2);
         if (externalId) {
           return { ref: uriGenerator(externalId) };
         }
-        const id = entry[1].defId ?? entry[1].schema.id ?? `schema${this.counter++}`;
-        entry[1].defId = id;
+        const id = entry2[1].defId ?? entry2[1].schema.id ?? `schema${this.counter++}`;
+        entry2[1].defId = id;
         return { defId: id, ref: `${uriGenerator("__shared")}#/${defsSegment}/${id}` };
       }
-      if (entry[1] === root) {
+      if (entry2[1] === root) {
         return { ref: "#" };
       }
       const uriPrefix = `#`;
       const defUriPrefix = `${uriPrefix}/${defsSegment}/`;
-      const defId = entry[1].schema.id ?? `__schema${this.counter++}`;
+      const defId = entry2[1].schema.id ?? `__schema${this.counter++}`;
       return { defId, ref: defUriPrefix + defId };
     };
-    const extractToDef = (entry) => {
-      if (entry[1].schema.$ref) {
+    const extractToDef = (entry2) => {
+      if (entry2[1].schema.$ref) {
         return;
       }
-      const seen = entry[1];
-      const { ref, defId } = makeURI(entry);
+      const seen = entry2[1];
+      const { ref, defId } = makeURI(entry2);
       seen.def = { ...seen.schema };
       if (defId)
         seen.defId = defId;
@@ -12200,8 +12200,8 @@ var JSONSchemaGenerator = class {
       schema2.$ref = ref;
     };
     if (params.cycles === "throw") {
-      for (const entry of this.seen.entries()) {
-        const seen = entry[1];
+      for (const entry2 of this.seen.entries()) {
+        const seen = entry2[1];
         if (seen.cycle) {
           throw new Error(`Cycle detected: #/${seen.cycle?.join("/")}/<root>
 
@@ -12209,31 +12209,31 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         }
       }
     }
-    for (const entry of this.seen.entries()) {
-      const seen = entry[1];
-      if (schema === entry[0]) {
-        extractToDef(entry);
+    for (const entry2 of this.seen.entries()) {
+      const seen = entry2[1];
+      if (schema === entry2[0]) {
+        extractToDef(entry2);
         continue;
       }
       if (params.external) {
-        const ext = params.external.registry.get(entry[0])?.id;
-        if (schema !== entry[0] && ext) {
-          extractToDef(entry);
+        const ext = params.external.registry.get(entry2[0])?.id;
+        if (schema !== entry2[0] && ext) {
+          extractToDef(entry2);
           continue;
         }
       }
-      const id = this.metadataRegistry.get(entry[0])?.id;
+      const id = this.metadataRegistry.get(entry2[0])?.id;
       if (id) {
-        extractToDef(entry);
+        extractToDef(entry2);
         continue;
       }
       if (seen.cycle) {
-        extractToDef(entry);
+        extractToDef(entry2);
         continue;
       }
       if (seen.count > 1) {
         if (params.reused === "ref") {
-          extractToDef(entry);
+          extractToDef(entry2);
           continue;
         }
       }
@@ -12265,8 +12265,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
           path: seen.path ?? []
         });
     };
-    for (const entry of [...this.seen.entries()].reverse()) {
-      flattenRef(entry[0], { target: this.target });
+    for (const entry2 of [...this.seen.entries()].reverse()) {
+      flattenRef(entry2[0], { target: this.target });
     }
     const result = {};
     if (this.target === "draft-2020-12") {
@@ -12284,8 +12284,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     }
     Object.assign(result, root.def);
     const defs = params.external?.defs ?? {};
-    for (const entry of this.seen.entries()) {
-      const seen = entry[1];
+    for (const entry2 of this.seen.entries()) {
+      const seen = entry2[1];
       if (seen.def && seen.defId) {
         defs[seen.defId] = seen.def;
       }
@@ -12311,8 +12311,8 @@ function toJSONSchema(input, _params) {
   if (input instanceof $ZodRegistry) {
     const gen2 = new JSONSchemaGenerator(_params);
     const defs = {};
-    for (const entry of input._idmap.entries()) {
-      const [_, schema] = entry;
+    for (const entry2 of input._idmap.entries()) {
+      const [_, schema] = entry2;
       gen2.process(schema);
     }
     const schemas = {};
@@ -12321,8 +12321,8 @@ function toJSONSchema(input, _params) {
       uri: _params?.uri,
       defs
     };
-    for (const entry of input._idmap.entries()) {
-      const [key, schema] = entry;
+    for (const entry2 of input._idmap.entries()) {
+      const [key, schema] = entry2;
       schemas[key] = gen2.emit(schema, {
         ..._params,
         external
@@ -17077,12 +17077,12 @@ ZodString2.create = (params) => {
     ...processCreateParams(params)
   });
 };
-function floatSafeRemainder2(val, step) {
+function floatSafeRemainder2(val, step2) {
   const valDecCount = (val.toString().split(".")[1] || "").length;
-  const stepDecCount = (step.toString().split(".")[1] || "").length;
+  const stepDecCount = (step2.toString().split(".")[1] || "").length;
   const decCount = valDecCount > stepDecCount ? valDecCount : stepDecCount;
   const valInt = Number.parseInt(val.toFixed(decCount).replace(".", ""));
-  const stepInt = Number.parseInt(step.toFixed(decCount).replace(".", ""));
+  const stepInt = Number.parseInt(step2.toFixed(decCount).replace(".", ""));
   return valInt % stepInt / 10 ** decCount;
 }
 var ZodNumber2 = class _ZodNumber extends ZodType2 {
@@ -24261,7 +24261,7 @@ function describe(u, notes = []) {
   const d = load();
   const { links: own, via } = linksFor(u);
   if (via) notes = [...notes, `English translations are of the whole ${via.acronym} (${via.title}); this text is part of it.`];
-  const english = own.map((t) => ({
+  const english2 = own.map((t) => ({
     source: t.source === "ati" ? "Access to Insight" : "dhammatalks.org",
     translator: t.translator,
     reference: t.reference || void 0,
@@ -24278,7 +24278,7 @@ function describe(u, notes = []) {
     vri_book: book.title,
     vri_file: book.file,
     ...u.members ? { contains: u.members } : {},
-    english,
+    english: english2,
     links: {
       suttacentral: `https://suttacentral.net/${u.id}`,
       note: "SuttaCentral lists parallels and further translations. This tool links to it but does not fetch its content, at SuttaCentral's request."
@@ -24296,8 +24296,8 @@ function buildSearch() {
   for (const u of sorted) for (let i = u.start; i < u.end; i += 1) owner[u.book][i] = u;
   const folded = d.canon.books.map((b) => b.blocks.map((blk) => fold2(blk[2])));
   const titles = d.canon.units.filter((u) => !u.approximate).map((u) => {
-    const english = (d.translations[u.id] || []).map((t) => t.reference || "").join(" ");
-    return { u, text: fold2(`${u.acronym} ${u.title} ${english}`) };
+    const english2 = (d.translations[u.id] || []).map((t) => t.reference || "").join(" ");
+    return { u, text: fold2(`${u.acronym} ${u.title} ${english2}`) };
   });
   d.search = { owner, folded, titles };
   return d.search;
@@ -24560,15 +24560,15 @@ var LruCache = class {
     return this.maxBytes > 0 && this.ttlMs > 0;
   }
   get(key) {
-    const entry = this.map.get(key);
-    if (!entry) return void 0;
-    if (entry.expires <= this.now()) {
+    const entry2 = this.map.get(key);
+    if (!entry2) return void 0;
+    if (entry2.expires <= this.now()) {
       this.delete(key);
       return void 0;
     }
     this.map.delete(key);
-    this.map.set(key, entry);
-    return entry.value;
+    this.map.set(key, entry2);
+    return entry2.value;
   }
   set(key, value) {
     if (!this.enabled) return;
@@ -24583,9 +24583,9 @@ var LruCache = class {
     }
   }
   delete(key) {
-    const entry = this.map.get(key);
-    if (!entry) return;
-    this.bytes -= entry.bytes;
+    const entry2 = this.map.get(key);
+    if (!entry2) return;
+    this.bytes -= entry2.bytes;
     this.map.delete(key);
   }
   clear() {
@@ -24972,6 +24972,368 @@ function listSources() {
 
 // src/features/index.mjs
 var features_exports = {};
+__export(features_exports, {
+  daily: () => daily_exports
+});
+
+// src/daily.mjs
+var daily_exports = {};
+__export(daily_exports, {
+  GUIDE_DATA: () => GUIDE_DATA,
+  PLAN_NAMES: () => PLAN_NAMES,
+  cyclePosition: () => cyclePosition,
+  dailyText: () => dailyText,
+  listPlans: () => listPlans,
+  parseDate: () => parseDate,
+  readingPlan: () => readingPlan,
+  register: () => register,
+  splitParts: () => splitParts
+});
+var DAY_MS = 864e5;
+var SUTTA_POOL_COLLECTIONS = /* @__PURE__ */ new Set(["dn", "mn", "sn", "an", "kp", "ud", "iti", "snp"]);
+var ATI2 = "https://www.accesstoinsight.org";
+function parseDate(value, now = /* @__PURE__ */ new Date()) {
+  let date3 = value;
+  if (date3 === void 0 || date3 === null || date3 === "") date3 = now.toISOString().slice(0, 10);
+  const m = String(date3).trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!m) throw new Error(`Date "${value}" is not in YYYY-MM-DD form (for example 2026-11-01).`);
+  const ms = Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  const check2 = new Date(ms).toISOString().slice(0, 10);
+  if (check2 !== `${m[1]}-${m[2]}-${m[3]}`) throw new Error(`Date "${value}" does not exist.`);
+  return { date: check2, dayNumber: Math.floor(ms / DAY_MS) };
+}
+var gcd = (a, b) => b ? gcd(b, a % b) : a;
+function step(n) {
+  if (n <= 2) return 1;
+  let k = Math.max(1, Math.floor(n * 0.381966));
+  while (gcd(k, n) !== 1) k += 1;
+  return k;
+}
+function cyclePosition(dayNumber, n) {
+  const day = (dayNumber % n + n) % n;
+  return day * step(n) % n;
+}
+var cache = null;
+function pools(canon) {
+  if (cache?.canon === canon) return cache;
+  const d = canon.load();
+  const num2 = (id) => Number(id.match(/(\d+)$/)?.[1] ?? 0);
+  const verses = d.canon.units.filter((u) => u.collection === "dhp" && u.kind !== "range" && /^dhp\d+$/.test(u.id)).sort((a, b) => num2(a.id) - num2(b.id));
+  const chapters = d.canon.units.filter((u) => u.collection === "dhp" && u.kind === "range").sort((a, b) => a.book - b.book || a.start - b.start);
+  const suttas = d.canon.units.filter((u) => SUTTA_POOL_COLLECTIONS.has(u.collection) && u.kind !== "range" && !u.approximate && d.translations[u.id]?.length).sort((a, b) => a.book - b.book || a.start - b.start);
+  cache = { canon, verses, chapters, suttas, plans: /* @__PURE__ */ new Map() };
+  return cache;
+}
+function english(canon, u) {
+  return canon.describe(u).english.map(({ source: source2, translator, reference, url, license, translation_id }) => ({
+    source: source2,
+    translator,
+    ...reference ? { reference } : {},
+    url,
+    ...license ? { license } : {},
+    translation_id
+  }));
+}
+function sourceBlock(canon) {
+  const s = canon.source();
+  return { pali: { name: s.name, attribution: s.attribution, terms: s.terms, commit: s.commit } };
+}
+function dailyText(canon, { date: date3, kind = "verse" } = {}, now = /* @__PURE__ */ new Date()) {
+  const { date: day, dayNumber } = parseDate(date3, now);
+  const p = pools(canon);
+  const pool = kind === "sutta" ? p.suttas : p.verses;
+  if (!pool.length) throw new Error("No texts are available for the daily text.");
+  const position = cyclePosition(dayNumber, pool.length);
+  const u = pool[position];
+  const described = canon.describe(u);
+  const base = {
+    date: day,
+    kind,
+    how_chosen: kind === "sutta" ? `Fixed rotation through ${pool.length} suttas of DN, MN, SN, AN, Kp, Ud, Iti and Snp that have an English translation linked; the same date always gives the same sutta (for this data version), and every sutta comes round once in ${pool.length} days.` : `Fixed rotation through the ${pool.length} verses of the Dhammapada; the same date always gives the same verse, and every verse comes round once in ${pool.length} days.`,
+    rotation: { position: position + 1, of: pool.length },
+    text: { id: u.id, citation: u.acronym, title: u.title || null, pts: described.pts, vri_paragraphs: described.vri_paragraphs }
+  };
+  const links = { suttacentral: described.links.suttacentral };
+  if (kind === "sutta") {
+    return {
+      ...base,
+      first_line: described.first_line,
+      segments: described.segments,
+      read_with: { tool: "get_text", uid: u.id, note: "Read the whole P\u0101li text (and an English translation) with get_text." },
+      english: english(canon, u),
+      notes: described.notes,
+      links,
+      source: sourceBlock(canon)
+    };
+  }
+  const chapter = p.chapters.find((c) => c.members?.includes(u.id));
+  const pali = canon.segments(u).filter((s) => s.type === "verse");
+  return {
+    ...base,
+    chapter: chapter ? { id: chapter.id, citation: chapter.acronym, title: chapter.title } : null,
+    pali,
+    english: english(canon, u),
+    notes: described.notes,
+    links,
+    source: sourceBlock(canon)
+  };
+}
+var GUIDES = {
+  "ati-into-the-stream": {
+    title: "Into the Stream: A Study Guide on the First Stage of Awakening",
+    author: "\u1E6Ch\u0101nissaro Bhikkhu",
+    url: `${ATI2}/lib/study/into_the_stream.html`,
+    cite: '"Into the Stream: A Study Guide on the First Stage of Awakening", by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 17 December 2013.',
+    copyright: "\xA9 2011 Metta Forest Monastery",
+    license: "CC BY-NC 4.0",
+    entries: [
+      ["kn/dhp/dhp.13.than", "dhp167-178"],
+      ["mn/mn.095x.than", "mn95"],
+      ["sn/sn45/sn45.002.than", "sn45.2"],
+      ["an/an08/an08.054.than", "an8.54"],
+      ["an/an04/an04.073.than", "an4.73"],
+      ["an/an04/an04.192.than", "an4.192"],
+      ["mn/mn.110.than", "mn110"],
+      ["kn/dhp/dhp.06.than", "dhp76-89"],
+      ["kn/dhp/dhp.14.than", "dhp179-196"],
+      ["an/an05/an05.202.than", "an5.202"],
+      ["an/an06/an06.086.than", "an6.86"],
+      ["kn/snp/snp.2.09.than", "snp2.9"],
+      ["an/an03/an03.065.than", "an3.65"],
+      ["an/an08/an08.053.than", "an8.53"],
+      ["an/an07/an07.079.than", "an7.83"],
+      ["mn/mn.135.than", "mn135"],
+      ["mn/mn.002.than", "mn2"],
+      ["sn/sn22/sn22.122.than", "sn22.122"],
+      ["sn/sn22/sn22.039.than", "sn22.39"],
+      ["dn/dn.02.0.than", "dn2"],
+      ["an/an10/an10.176.than", "an10.176"],
+      ["mn/mn.118.than", "mn118"],
+      ["an/an08/an08.030.than", "an8.30"],
+      ["an/an07/an07.064.than", "an7.68"],
+      ["sn/sn45/sn45.008.than", "sn45.8"],
+      ["an/an10/an10.092.than", "an10.92"],
+      ["sn/sn12/sn12.020.than", "sn12.20"],
+      ["sn/sn12/sn12.068.than", "sn12.68"],
+      ["mn/mn.044.than", "mn44"],
+      ["mn/mn.106.than", "mn106"],
+      ["mn/mn.075x.than", "mn75"],
+      ["mn/mn.078.than", "mn78"],
+      ["kn/snp/snp.4.09.than", "snp4.9"],
+      ["sn/sn55/sn55.032.than", "sn55.32"],
+      ["sn/sn55/sn55.033.than", "sn55.33"],
+      ["an/an05/an05.175.than", "an5.175"],
+      ["an/an05/an05.148.than", "an5.148"],
+      ["sn/sn48/sn48.053.than", "sn48.53"],
+      ["an/an10/an10.093.than", "an10.93"],
+      ["sn/sn55/sn55.030.than", "sn55.30"],
+      ["sn/sn55/sn55.021.than", "sn55.21"],
+      ["an/an04/an04.184.than", "an4.184"],
+      ["sn/sn55/sn55.001.than", "sn55.1"],
+      ["sn/sn13/sn13.001.than", "sn13.1"],
+      ["sn/sn13/sn13.002.than", "sn13.2"],
+      ["sn/sn13/sn13.008.than", "sn13.8"],
+      ["an/an05/an05.038.than", "an5.38"],
+      ["sn/sn55/sn55.040.than", "sn55.40"],
+      ["mn/mn.070.than", "mn70"],
+      ["sn/sn55/sn55.054.than", "sn55.54"]
+    ],
+    omitted: [
+      ["kn/iti/iti.1.001-027.than", "The guide cites single verses inside a page that holds Iti 1\u201327; the index links that page to one text only, so the verses are not placed by number."],
+      ["an/an02/an02.031.than", "Not in the verified link index."],
+      ["sn/sn09/sn09.011.than", "Not in the verified link index."],
+      ["sn/sn47/sn47.035.than", "Not in the verified link index."],
+      ["dn/dn.16.5-6.than", "Excerpt of DN 16; not in the verified link index."],
+      ["an/an10/an10.013.than", "Not in the verified link index."],
+      ["sn/sn22/sn22.089.than", "Not in the verified link index."],
+      ["an/an05/an05.254.than", "Not in the verified link index."],
+      ["an/an03/an03.089.than", "Not in the verified link index."]
+    ]
+  },
+  "ati-four-noble-truths": {
+    title: "The Four Noble Truths: A Study Guide",
+    author: "\u1E6Ch\u0101nissaro Bhikkhu",
+    url: `${ATI2}/lib/study/truths.html`,
+    cite: '"The Four Noble Truths: A Study Guide", by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 30 November 2013.',
+    copyright: "\xA9 1999 Metta Forest Monastery",
+    license: "CC BY-NC 4.0",
+    entries: [
+      ["mn/mn.061.than", "mn61"],
+      ["sn/sn56/sn56.031.than", "sn56.31"],
+      ["an/an06/an06.063.than", "an6.63"],
+      ["sn/sn56/sn56.011.than", "sn56.11"],
+      ["sn/sn38/sn38.014.than", "sn38.14"],
+      ["mn/mn.141.than", "mn141"],
+      ["sn/sn22/sn22.048.than", "sn22.48"],
+      ["mn/mn.109.than", "mn109"],
+      ["sn/sn22/sn22.079.than", "sn22.79"],
+      ["mn/mn.028.than", "mn28"],
+      ["mn/mn.044.than", "mn44"],
+      ["sn/sn22/sn22.056.than", "sn22.56"],
+      ["dn/dn.22.0.than", "dn22"],
+      ["an/an10/an10.092.than", "an10.92"],
+      ["sn/sn12/sn12.070.than", "sn12.70"],
+      ["sn/sn12/sn12.002.than", "sn12.2"],
+      ["sn/sn22/sn22.053.than", "sn22.53"],
+      ["sn/sn12/sn12.064.than", "sn12.64"],
+      ["dn/dn.11.0.than", "dn11"],
+      ["kn/ud/ud.8.01.than", "ud8.1"],
+      ["kn/ud/ud.8.03.than", "ud8.3"],
+      ["kn/ud/ud.8.04.than", "ud8.4"],
+      ["sn/sn45/sn45.008.than", "sn45.8"],
+      ["mn/mn.126.than", "mn126"],
+      ["sn/sn45/sn45.001.than", "sn45.1"],
+      ["sn/sn45/sn45.002.than", "sn45.2"],
+      ["mn/mn.117.than", "mn117"],
+      ["an/an10/an10.176.than", "an10.176"],
+      ["mn/mn.010.than", "mn10"],
+      ["mn/mn.118.than", "mn118"],
+      ["mn/mn.125.horn", "mn125"],
+      ["an/an04/an04.041.than", "an4.41"],
+      ["an/an05/an05.028.than", "an5.28"],
+      ["kn/dhp/dhp.25.than", "dhp360-382"],
+      ["an/an09/an09.036.than", "an9.36"],
+      ["dn/dn.02.0.than", "dn2"],
+      ["kn/thig/thig.05.10.than", "thig5.10"]
+    ],
+    omitted: [["sn/sn12/sn12.023.than", "Not in the verified link index."]]
+  }
+};
+var GUIDE_DATA = GUIDES;
+var PLAN_INFO = {
+  "dhammapada-26-days": { title: "The Dhammapada in 26 days", description: "One chapter (vagga) of the Dhammapada a day, in order: 26 chapters, 423 verses." },
+  "mn-year": { title: "The Majjhima Nik\u0101ya in a year", description: "All 152 Middle-Length Discourses over 365 days, in order. Long suttas are split by segment so each day has a similar amount of P\u0101li." },
+  "ati-into-the-stream": { title: `Study guide: ${GUIDES["ati-into-the-stream"].title}`, description: "The texts cited in \u1E6Ch\u0101nissaro Bhikkhu's Access to Insight study guide, one a day in the order the guide first cites them. Read the guide itself for its commentary; this plan lists citations and links only." },
+  "ati-four-noble-truths": { title: `Study guide: ${GUIDES["ati-four-noble-truths"].title}`, description: "The texts cited in \u1E6Ch\u0101nissaro Bhikkhu's Access to Insight study guide, one a day in the order the guide first cites them. Read the guide itself for its commentary; this plan lists citations and links only." }
+};
+var PLAN_NAMES = Object.keys(PLAN_INFO);
+function entry(canon, u, extra = {}) {
+  const d = canon.describe(u);
+  return {
+    id: u.id,
+    citation: u.acronym,
+    title: u.title || null,
+    pts: d.pts,
+    ...extra,
+    english: english(canon, u),
+    links: { suttacentral: d.links.suttacentral }
+  };
+}
+function segmentChars(canon, u) {
+  return canon.segments(u).map((s) => s.text.length);
+}
+function splitParts(lengths, p) {
+  const total = lengths.reduce((a, b) => a + b, 0);
+  const parts = [];
+  let start = 0;
+  let acc = 0;
+  for (let k = 1; k < p; k += 1) {
+    const target = total * k / p;
+    let end = start;
+    while (end < lengths.length - (p - k) && (end === start || acc + lengths[end] <= target)) {
+      acc += lengths[end];
+      end += 1;
+    }
+    parts.push([start, end - start]);
+    start = end;
+  }
+  parts.push([start, lengths.length - start]);
+  return parts;
+}
+function buildPlan(canon, name) {
+  const p = pools(canon);
+  if (p.plans.has(name)) return p.plans.get(name);
+  const d = canon.load();
+  let days;
+  if (name === "dhammapada-26-days") {
+    days = p.chapters.map((u) => [{ unit: u, extra: { get_text: { uid: u.id } } }]);
+  } else if (name === "mn-year") {
+    const mn = d.canon.units.filter((u) => u.collection === "mn" && u.kind !== "range").sort((a, b) => Number(a.id.slice(2)) - Number(b.id.slice(2)));
+    const lengths = mn.map((u) => segmentChars(canon, u));
+    const chars = lengths.map((l) => l.reduce((a, b) => a + b, 0));
+    const parts = mn.map(() => 1);
+    for (let extra = 365 - mn.length; extra > 0; extra -= 1) {
+      let best = -1;
+      for (let i = 0; i < mn.length; i += 1) {
+        if (parts[i] >= lengths[i].length) continue;
+        if (best < 0 || chars[i] / parts[i] > chars[best] / parts[best]) best = i;
+      }
+      parts[best] += 1;
+    }
+    days = [];
+    mn.forEach((u, i) => {
+      splitParts(lengths[i], parts[i]).forEach(([offset, limit], k) => {
+        days.push([{ unit: u, extra: { ...parts[i] > 1 ? { part: k + 1, of: parts[i] } : {}, get_text: { uid: u.id, offset, limit } } }]);
+      });
+    });
+  } else if (GUIDES[name]) {
+    days = GUIDES[name].entries.map(([path, id]) => {
+      const url = `${ATI2}/tipitaka/${path}.html`;
+      const { unit, notes } = canon.resolve(url);
+      if (unit.id !== id) throw new Error(`Study-guide link ${url} resolves to ${unit.id}, expected ${id}.`);
+      const link = (d.translations[id] || []).find((t) => t.source === "ati" && t.path === `/tipitaka/${path}`);
+      return [{ unit, extra: { guide_link: { url, ...link?.reference ? { reference: link.reference } : {}, translator: link?.translator }, ...notes.length ? { notes } : {}, get_text: { uid: id } } }];
+    });
+  } else {
+    throw new Error(`Unknown reading plan "${name}". Available plans: ${PLAN_NAMES.join(", ")}.`);
+  }
+  p.plans.set(name, days);
+  return days;
+}
+function planHeader(canon, name, days) {
+  const info = PLAN_INFO[name];
+  const guide = GUIDES[name];
+  return {
+    name,
+    title: info.title,
+    description: info.description,
+    days: days.length,
+    ...guide ? {
+      guide: {
+        title: guide.title,
+        author: guide.author,
+        url: guide.url,
+        cite: guide.cite,
+        copyright: guide.copyright,
+        license: guide.license,
+        note: "Link only: the guide's text is not reproduced. The order of texts follows the guide's first citation of each; links this server cannot place on exactly one text are listed under omitted, never guessed."
+      },
+      omitted: guide.omitted.map(([path, reason]) => ({ url: `${ATI2}/tipitaka/${path}.html`, reason }))
+    } : {},
+    source: sourceBlock(canon)
+  };
+}
+function listPlans(canon) {
+  return {
+    plans: PLAN_NAMES.map((name) => {
+      const days = buildPlan(canon, name);
+      return { name, title: PLAN_INFO[name].title, description: PLAN_INFO[name].description, days: days.length };
+    }),
+    usage: "Call reading_plan with a plan name and a day number (1 = first day). Omit the day to see the whole schedule."
+  };
+}
+function readingPlan(canon, { name, day } = {}) {
+  if (!name) return listPlans(canon);
+  const key = String(name).trim().toLowerCase();
+  const days = buildPlan(canon, key);
+  const header = planHeader(canon, key, days);
+  if (day === void 0 || day === null) {
+    return { ...header, schedule: days.map((readings, i) => ({ day: i + 1, readings: readings.map(({ unit, extra }) => ({ id: unit.id, citation: unit.acronym, ...extra.part ? { part: extra.part, of: extra.of } : {} })) })) };
+  }
+  if (!Number.isInteger(day) || day < 1 || day > days.length) throw new Error(`Day ${day} is outside plan "${key}", which runs from day 1 to day ${days.length}.`);
+  return { ...header, day, readings: days[day - 1].map(({ unit, extra }) => entry(canon, unit, extra)) };
+}
+function register({ tool, z, canon = canon_exports }) {
+  const date3 = z.string().max(20).optional().describe("Date as YYYY-MM-DD (UTC). Defaults to today in UTC.");
+  tool("daily_text", "A Dhammapada verse (default) or a sutta for a given day, chosen by a fixed rotation through the bundled P\u0101li canon so the same date always gives the same text. Returns the P\u0101li (verse) or the opening line (sutta), citation, PTS page, English translation links and source attribution. Works offline.", {
+    date: date3,
+    kind: z.enum(["verse", "sutta"]).default("verse").describe('"verse" for a Dhammapada verse, "sutta" for a sutta that has an English translation.')
+  }, (args) => dailyText(canon, args));
+  tool("reading_plan", `Reading plans through the canon: ${PLAN_NAMES.join(", ")}. Give a plan name and a day number to get that day's readings (citation, PTS page, get_text arguments, English links). Omit the name to list plans; omit the day for the whole schedule. Works offline.`, {
+    name: z.string().max(60).optional().describe(`Plan name: ${PLAN_NAMES.join(", ")}.`),
+    day: z.number().int().min(1).max(400).optional().describe("Day of the plan, starting at 1.")
+  }, (args) => readingPlan(canon, args));
+}
 
 // src/server.mjs
 var VERSION = "2.0.0";
@@ -25158,20 +25520,20 @@ var RateLimiter = class {
   take(ip) {
     if (!this.perMinute || this.perMinute <= 0) return 0;
     const t = this.now();
-    let entry = this.clients.get(ip);
-    if (!entry || t - entry.start >= this.windowMs) {
+    let entry2 = this.clients.get(ip);
+    if (!entry2 || t - entry2.start >= this.windowMs) {
       this.clients.delete(ip);
-      entry = { start: t, count: 0 };
-      this.clients.set(ip, entry);
+      entry2 = { start: t, count: 0 };
+      this.clients.set(ip, entry2);
       if (this.clients.size > this.maxClients) this.clients.delete(this.clients.keys().next().value);
     }
-    entry.count += 1;
-    if (entry.count <= this.perMinute) return 0;
-    return Math.max(1, Math.ceil((entry.start + this.windowMs - t) / 1e3));
+    entry2.count += 1;
+    if (entry2.count <= this.perMinute) return 0;
+    return Math.max(1, Math.ceil((entry2.start + this.windowMs - t) / 1e3));
   }
   sweep() {
     const t = this.now();
-    for (const [ip, entry] of this.clients) if (t - entry.start >= this.windowMs) this.clients.delete(ip);
+    for (const [ip, entry2] of this.clients) if (t - entry2.start >= this.windowMs) this.clients.delete(ip);
   }
 };
 function clientIp(req, trustProxyHops = 0) {

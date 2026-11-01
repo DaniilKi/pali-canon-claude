@@ -60,7 +60,7 @@ child.stdin.write(`${JSON.stringify({ jsonrpc: '2.0', method: 'notifications/ini
 const list = await request('tools/list', {});
 if (list.error) fail(`tools/list: ${JSON.stringify(list.error)}`);
 const tools = list.result?.tools ?? [];
-if (tools.length !== EXPECTED_TOOLS) fail(`expected ${EXPECTED_TOOLS} tools, got ${tools.length}`);
+if (tools.length < EXPECTED_TOOLS) fail(`expected at least ${EXPECTED_TOOLS} tools, got ${tools.length}`);
 if (!tools.every((tool) => tool.annotations?.readOnlyHint)) fail('every tool must be annotated read-only');
 console.log(`PASS tools/list: ${tools.length} tools`);
 

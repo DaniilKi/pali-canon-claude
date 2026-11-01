@@ -18,6 +18,8 @@ Translations are fetched live from [dhammatalks.org](https://www.dhammatalks.org
 
 Pages are fetched live from [accesstoinsight.org](https://accesstoinsight.org/). If it is unavailable, they come from the official Barre Center for Buddhist Studies repository [bcbsit/ati](https://github.com/bcbsit/ati) (via raw.githubusercontent.com or jsDelivr), or from the [Digital Pali Reader mirror](https://github.com/digitalpalireader/accesstoinsight). Licences vary by page (CC BY-NC 4.0, BPS free-distribution terms, public domain and others), and each page's own notice is returned with its text. Do not sell ATI content. The bundled index stores PTS references, titles, translators and licence labels only.
 
+The `reading_plan` tool's study-guide plans list, in order, the texts cited by two of Ṭhānissaro Bhikkhu's Access to Insight study guides ([Into the Stream](https://www.accesstoinsight.org/lib/study/into_the_stream.html), © 2011 Metta Forest Monastery; [The Four Noble Truths](https://www.accesstoinsight.org/lib/study/truths.html), © 1999 Metta Forest Monastery; both CC BY-NC 4.0). Only the guides' citations and links are stored; none of their text is bundled or returned.
+
 ## Digital Pāḷi Dictionary
 
 Lookups go live to [dpdict.net](https://www.dpdict.net/). DPD is [CC BY-NC-SA 4.0](https://docs.dpdict.net/license/), by Bodhirasa Bhikkhu. No DPD data is bundled.
