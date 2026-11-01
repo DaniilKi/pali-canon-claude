@@ -41,7 +41,7 @@ These safeguards apply to everything the tool returns, and we would keep them fo
 
 **What we are asking.**
 
-1. Please confirm that the live retrieval described above is acceptable under the site's licence and its understanding of "non-commercial", including in a free public online version of the tool (planned; it would keep only aggregate usage counts).
+1. Please confirm that the live retrieval described above is acceptable under the site's licence and its understanding of "non-commercial", including in a free public online version of the tool (planned; it would not log what people ask or read).
 2. Are the link-only features above welcome? If you would prefer we did not index the talks, we will not.
 3. Is there a credit line you would like us to show?
 

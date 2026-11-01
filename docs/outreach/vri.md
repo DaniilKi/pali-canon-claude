@@ -32,7 +32,7 @@ I maintain **Pali Canon for Claude** (https://github.com/DaniilKi/pali-canon-cla
 - the Thai, Myanmar and VRI page references already present in your files;
 - your editions in other scripts (Devanagari, Sinhala, Thai, Myanmar, Khmer, Lao, Lanna), used only to test our own script converter for accuracy, not shipped.
 
-The tool is distributed free as an open-source package (GitHub, npm, a Docker image and AI-app plugin directories). We also plan a free public online version, which would keep only aggregate usage counts and no record of what people read.
+It is distributed free on GitHub as a Claude Code plugin and a Claude Desktop extension; we plan to publish it on npm, as a Docker image and in AI-app directories. We also plan a free public online version, which would not log what people ask or read.
 
 These safeguards apply to everything the tool returns, and we would keep them for your work:
 
@@ -45,7 +45,7 @@ These safeguards apply to everything the tool returns, and we would keep them fo
 
 **What we are asking.**
 
-1. Please confirm that bundling and serving your Pāli text in this free, non-commercial tool, distributed through the channels above, is within your terms.
+1. Please confirm that bundling and serving your Pāli text in this free, non-commercial tool, distributed through the channels above (current and planned), is within your terms.
 2. Please confirm that we may extend this to the commentaries, sub-commentaries and other books listed above on the same terms.
 3. Please tell us the credit line you would like us to show (at present: "Chaṭṭha Saṅgāyana Tipiṭaka, Vipassana Research Institute, tipitaka.org").
 
