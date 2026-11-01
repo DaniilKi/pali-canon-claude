@@ -1,0 +1,12 @@
+{
+  "name": "pali-canon",
+  "owner": { "name": "DaniilKi", "url": "https://github.com/DaniilKi" },
+  "metadata": { "description": "Source-grounded Buddhist text tools and study workflows." },
+  "plugins": [
+    {
+      "name": "pali-canon",
+      "source": "./",
+      "description": "Pali Canon MCP tools with passage study, translation comparison, and Pali word study skills."
+    }
+  ]
+}
