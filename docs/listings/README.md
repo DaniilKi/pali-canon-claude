@@ -23,7 +23,7 @@ An **MCP server** is a small program that lets an AI app (Claude, Codex, Cursor 
 | Repository | https://github.com/DaniilKi/pali-canon-claude |
 | Issues | https://github.com/DaniilKi/pali-canon-claude/issues |
 | Licence | MIT for the code. The texts keep their own licences (non-commercial; see [THIRD_PARTY.md](../../THIRD_PARTY.md)). |
-| Icon | [`assets/icon.svg`](../../assets/icon.svg), served at https://raw.githubusercontent.com/DaniilKi/pali-canon-claude/main/assets/icon.svg (available once this folder is on `main`) |
+| Icon | [`assets/icon.svg`](../../assets/icon.svg) (512 px PNG: [`assets/icon.png`](../../assets/icon.png), made by `python scripts/render-icon.py`), served at https://raw.githubusercontent.com/DaniilKi/pali-canon-claude/main/assets/icon.svg (available once this folder is on `main`) |
 | Categories | Religion and spirituality; Education; Research; Reference; Art and culture |
 | Runs | Locally (stdio) on macOS, Windows and Linux, with Node.js 20 or newer. A hosted version is planned (#5). |
 | Needs an API key | No |
@@ -57,6 +57,7 @@ Keep the numbers in step with `npm run coverage`.
 
 | Directory | Packet | Status |
 |---|---|---|
+| Claude Connectors Directory (hosted server) | [claude-connector.md](claude-connector.md) | Ready; waits for the hosted endpoint (#5) and tool titles |
 | Official MCP Registry | [mcp-registry.md](mcp-registry.md) | Ready; waits for npm (#4) |
 | Glama | [glama.md](glama.md) | Ready (`glama.json` is in the repository) |
 | mcp.so | [mcp-so.md](mcp-so.md) | Ready; best after npm (#4) |
