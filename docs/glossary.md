@@ -71,3 +71,4 @@ Terms used in this project, explained for newcomers. Pāli words are given with 
 | **Mirror** | An official copy of a website, used when the site is down |
 | **Offline** | Works with no internet connection |
 | **Audit** | The automatic check of all 8,544 texts run before each release |
+| **Semantic search** | Search by meaning rather than by exact words, using *embeddings* (lists of numbers that place texts with similar meaning close together). Evaluated and deferred: see [semantic-search.md](semantic-search.md) |
