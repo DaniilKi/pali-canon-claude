@@ -30,6 +30,7 @@ try {
   await client.connect(transport);
   const { tools } = await client.listTools();
   assert.equal(tools.length, 11);
+  assert.ok(!tools.some((tool) => tool.name === 'read_passage_widget'), 'the ChatGPT widget tool is hosted-HTTP only');
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint));
   assert.equal((await client.listResources()).resources.length, 2);
   assert.equal((await client.listPrompts()).prompts.length, 3);

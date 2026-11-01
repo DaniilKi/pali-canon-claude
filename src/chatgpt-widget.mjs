@@ -26,12 +26,20 @@ export const SKYBRIDGE_MIME = 'text/html+skybridge';
 
 const WIDGET_DESCRIPTION = 'Shows the Pāli text and an English translation side by side, with the citation, PTS page, translator, attribution and licence. Everything shown was retrieved by the tool; nothing is generated.';
 
-// The widget loads nothing from the network: no scripts, styles, fonts or API calls. Links open through the host.
-const RESOURCE_META = {
+// The widget loads nothing from the network: no scripts, styles, fonts or API calls. Links open through the host
+// (window.openai.openExternal / ui/open-link). redirect_domains marks the only link targets the widget makes as
+// trusted openExternal destinations: the two English sources already on the src/http.mjs allowlist, and
+// suttacentral.net (link only, never fetched). `_meta.ui.csp` has no equivalent field, so it is set only here.
+export const REDIRECT_DOMAINS = [
+  'https://www.dhammatalks.org', 'https://dhammatalks.org',
+  'https://www.accesstoinsight.org', 'https://accesstoinsight.org',
+  'https://suttacentral.net',
+];
+export const RESOURCE_META = {
   ui: { prefersBorder: true, csp: { connectDomains: [], resourceDomains: [], frameDomains: [] } },
   'openai/widgetDescription': WIDGET_DESCRIPTION,
   'openai/widgetPrefersBorder': true,
-  'openai/widgetCSP': { connect_domains: [], resource_domains: [] },
+  'openai/widgetCSP': { connect_domains: [], resource_domains: [], redirect_domains: REDIRECT_DOMAINS },
 };
 
 export const TOOL_META = {
@@ -42,7 +50,7 @@ export const TOOL_META = {
 };
 
 /** Data for the widget: Pāli segments (VRI) plus one English translation, each with its attribution. */
-export async function readPassage({ uid, translation, english: wantEnglish = true, offset = 0, limit = 40, englishCharacters = 6000 }) {
+export async function readPassage({ uid, translation, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6000 }) {
   const { unit, notes } = canon.resolve(uid);
   const described = canon.describe(unit, notes);
   const all = canon.segments(unit);
@@ -71,12 +79,12 @@ export async function readPassage({ uid, translation, english: wantEnglish = tru
   };
   if (wantEnglish && result.english_available.length) {
     try {
-      const t = await english.translation(unit, translation && translation !== 'default' ? translation : undefined, { limit: englishCharacters });
+      const t = await english.translation(unit, translation && translation !== 'default' ? translation : undefined, { offset: englishOffset, limit: englishCharacters });
       result.english = {
         translator: t.translator, translation_id: t.translation_id, source: t.source, url: t.url,
         reference: (canon.describe(unit).english.find((e) => e.translation_id === t.translation_id) || {}).reference,
         fetched_from: t.fetched_from, attribution: t.attribution, license: t.license,
-        text: t.text, total_characters: t.total_characters, truncated: t.next_offset !== null, notes: t.notes,
+        text: t.text, offset: t.offset, total_characters: t.total_characters, next_offset: t.next_offset, truncated: t.next_offset !== null, notes: t.notes,
       };
     } catch (error) {
       result.english_error = error.message;
@@ -102,6 +110,7 @@ export function registerChatgptWidget(server) {
       english: z.boolean().default(true).describe('Fetch an English translation (live). false shows the Pāli only.'),
       offset: z.number().int().min(0).max(100000).default(0).describe('Pāli segment offset for continuation.'),
       limit: z.number().int().min(1).max(80).default(40).describe('Pāli segments to show.'),
+      english_offset: z.number().int().min(0).max(10000000).default(0).describe('English character offset for continuation (use english.next_offset from the previous result). Shows up to 6,000 characters of the translation per call.'),
     },
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
     _meta: TOOL_META,
@@ -207,7 +216,8 @@ export const WIDGET_HTML = `<!doctype html>
       head.appendChild(link(d.english.url, d.english.source || d.english.url));
       en.appendChild(head);
       en.appendChild(el('div', 'en', d.english.text || ''));
-      if (d.english.truncated) en.appendChild(el('p', 'note', 'The translation continues on the source page.'));
+      if (d.english.offset) en.insertBefore(el('p', 'note', 'Continuing from character ' + d.english.offset + ' of ' + d.english.total_characters + '.'), en.lastChild);
+      if (d.english.truncated) en.appendChild(el('p', 'note', 'The translation continues (character ' + d.english.next_offset + ' of ' + d.english.total_characters + '). Ask for more to continue, or read the rest on the source page.'));
     } else {
       en.appendChild(el('p', 'empty', d.english_error || 'No English translation requested.'));
     }

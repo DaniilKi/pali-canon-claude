@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import * as canon from '../src/canon.mjs';
 import {
   readPassage, WIDGET_HTML, WIDGET_TOOL, WIDGET_URI, SKYBRIDGE_URI, MCP_APP_MIME, SKYBRIDGE_MIME, TOOL_META,
+  RESOURCE_META, REDIRECT_DOMAINS,
 } from '../src/chatgpt-widget.mjs';
+import { ALLOWED_HOSTS } from '../src/http.mjs';
 
 test('widget citations used here resolve with the bundled canon', () => {
   assert.equal(canon.resolve('MN 10').unit.id, 'mn10');
@@ -79,6 +81,7 @@ test('HTTP endpoint with CHATGPT_WIDGET: tool _meta, UI templates and an offline
     assert.equal(t.annotations.readOnlyHint, true);
     assert.equal(t.annotations.destructiveHint, false);
     assert.equal(t.annotations.openWorldHint, true, 'fetches English live');
+    assert.ok(t.inputSchema.properties.english_offset, 'English continuation input');
     for (const name of ['resolve_reference', 'get_text', 'get_translation', 'list_sources']) {
       assert.equal(tools.find((x) => x.name === name)._meta, undefined, `${name} unchanged`);
     }
@@ -92,6 +95,7 @@ test('HTTP endpoint with CHATGPT_WIDGET: tool _meta, UI templates and an offline
       assert.equal(read.mimeType, mime);
       assert.equal(read.text, WIDGET_HTML);
       assert.ok(read._meta['openai/widgetDescription']);
+      assert.deepEqual(read._meta['openai/widgetCSP'].redirect_domains, REDIRECT_DOMAINS);
     }
 
     const call = (await rpc('tools/call', { name: WIDGET_TOOL, arguments: { uid: 'Dhp 183', english: false } }, 4)).result;
@@ -122,4 +126,16 @@ test('HTTP endpoint without CHATGPT_WIDGET keeps the 11 tools', async () => {
     http.closeAllConnections?.();
     await new Promise((r) => http.close(r));
   }
+});
+
+test('redirect_domains lists only allowlisted English sources and link-only suttacentral.net; no new fetch hosts', () => {
+  assert.deepEqual(RESOURCE_META['openai/widgetCSP'].connect_domains, []);
+  assert.deepEqual(RESOURCE_META['openai/widgetCSP'].resource_domains, []);
+  for (const origin of REDIRECT_DOMAINS) {
+    const u = new URL(origin);
+    assert.equal(u.protocol, 'https:');
+    assert.equal(u.pathname, '/');
+    assert.ok(ALLOWED_HOSTS.includes(u.hostname) || u.hostname === 'suttacentral.net', `${origin} is an allowlisted or link-only host`);
+  }
+  assert.ok(!ALLOWED_HOSTS.includes('suttacentral.net'), 'SuttaCentral stays link-only');
 });

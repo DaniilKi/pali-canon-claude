@@ -25,11 +25,11 @@ The hosted server gains one extra tool and its page when the setting `CHATGPT_WI
 | Part | Value |
 |---|---|
 | Tool | `read_passage_widget` (read-only; fetches English live, so `openWorldHint: true`) |
-| Inputs | `uid` (any citation the other tools accept), `translation`, `english` (true/false), `offset`, `limit` |
+| Inputs | `uid` (any citation the other tools accept), `translation`, `english` (true/false), `offset` and `limit` (Pāli segments), `english_offset` (English characters) |
 | Returns | Pāli segments with VRI paragraph and PTS page markers, VRI attribution and licence; one English translation with translator, source link, attribution and licence; numbering notes; a SuttaCentral link (link only) |
 | Page (MCP Apps standard) | `ui://pali-canon/reader-v1.html`, type `text/html;profile=mcp-app`, linked by `_meta.ui.resourceUri` |
 | Page (Apps SDK alias) | `ui://pali-canon/reader-v1.skybridge.html`, type `text/html+skybridge`, linked by `_meta["openai/outputTemplate"]` |
-| Content security | The page loads nothing from the internet: `connectDomains`, `resourceDomains` and `frameDomains` are all empty. Links open through ChatGPT. |
+| Content security | The page loads nothing from the internet: `connectDomains`, `resourceDomains` and `frameDomains` are all empty. Links open through ChatGPT (`openExternal`). `openai/widgetCSP.redirect_domains` lists the only link targets as trusted redirect destinations: `https://www.dhammatalks.org`, `https://dhammatalks.org`, `https://www.accesstoinsight.org`, `https://accesstoinsight.org` (the English sources, already on the `src/http.mjs` allowlist) and `https://suttacentral.net` (link only, never fetched). `_meta.ui.csp` has no field for this, so it is set only in the Apps SDK key. |
 | Source | [`src/chatgpt-widget.mjs`](../../src/chatgpt-widget.mjs), tests in [`tests/chatgpt-widget.test.mjs`](../../tests/chatgpt-widget.test.mjs) |
 
 When the page HTML changes in a way that could break a cached copy, raise `WIDGET_VERSION` (`v1` → `v2`)
@@ -37,6 +37,11 @@ so the addresses change, as OpenAI asks.
 
 If no English translation is linked for a text, or the reader turns English off, the view shows the Pāli
 alone and says so. It never puts a different translation in its place.
+
+Long texts are shown in parts. Each call shows up to 40 Pāli segments and up to 6,000 characters of the
+English. For a long sutta such as MN 10 the view says where each column stops; asking for more calls the
+tool again with `offset` (Pāli) or `english_offset` (English, from `english.next_offset`). `get_translation`
+with `offset` also returns the rest of the English as plain text, and the source page link is always shown.
 
 ## Step 1: put the server online
 
@@ -89,8 +94,8 @@ Record the submission on issue #11 ("Submitted to the app directory"), and updat
 
 | Field | Value |
 |---|---|
-| Name (`name`, ≤64) | Pali Canon |
-| Display name (≤30) | Pali Canon |
+| Name (`name`, ≤64; stable identifier: lowercase letters, numbers, single hyphens) | `pali-canon` |
+| Display name (`displayName`, ≤30) | Pali Canon |
 | Subtitle (`shortDescription`, ≤30) | Read and cite the Tipiṭaka |
 | Developer name (≤80) | the maintainer's verified name |
 | Category | Education (or the closest reference / education category the dashboard offers) |

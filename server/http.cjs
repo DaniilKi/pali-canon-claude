@@ -25144,11 +25144,18 @@ var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 var MCP_APP_MIME = "text/html;profile=mcp-app";
 var SKYBRIDGE_MIME = "text/html+skybridge";
 var WIDGET_DESCRIPTION = "Shows the P\u0101li text and an English translation side by side, with the citation, PTS page, translator, attribution and licence. Everything shown was retrieved by the tool; nothing is generated.";
+var REDIRECT_DOMAINS = [
+  "https://www.dhammatalks.org",
+  "https://dhammatalks.org",
+  "https://www.accesstoinsight.org",
+  "https://accesstoinsight.org",
+  "https://suttacentral.net"
+];
 var RESOURCE_META = {
   ui: { prefersBorder: true, csp: { connectDomains: [], resourceDomains: [], frameDomains: [] } },
   "openai/widgetDescription": WIDGET_DESCRIPTION,
   "openai/widgetPrefersBorder": true,
-  "openai/widgetCSP": { connect_domains: [], resource_domains: [] }
+  "openai/widgetCSP": { connect_domains: [], resource_domains: [], redirect_domains: REDIRECT_DOMAINS }
 };
 var TOOL_META = {
   ui: { resourceUri: WIDGET_URI },
@@ -25156,7 +25163,7 @@ var TOOL_META = {
   "openai/toolInvocation/invoking": "Opening the passage\u2026",
   "openai/toolInvocation/invoked": "Passage ready."
 };
-async function readPassage({ uid, translation: translation2, english: wantEnglish = true, offset = 0, limit = 40, englishCharacters = 6e3 }) {
+async function readPassage({ uid, translation: translation2, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6e3 }) {
   const { unit, notes } = resolve(uid);
   const described = describe(unit, notes);
   const all = segments(unit);
@@ -25188,7 +25195,7 @@ async function readPassage({ uid, translation: translation2, english: wantEnglis
   };
   if (wantEnglish && result.english_available.length) {
     try {
-      const t = await translation(unit, translation2 && translation2 !== "default" ? translation2 : void 0, { limit: englishCharacters });
+      const t = await translation(unit, translation2 && translation2 !== "default" ? translation2 : void 0, { offset: englishOffset, limit: englishCharacters });
       result.english = {
         translator: t.translator,
         translation_id: t.translation_id,
@@ -25199,7 +25206,9 @@ async function readPassage({ uid, translation: translation2, english: wantEnglis
         attribution: t.attribution,
         license: t.license,
         text: t.text,
+        offset: t.offset,
         total_characters: t.total_characters,
+        next_offset: t.next_offset,
         truncated: t.next_offset !== null,
         notes: t.notes
       };
@@ -25228,7 +25237,8 @@ function registerChatgptWidget(server) {
       translation: external_exports.string().max(200).optional().describe('"default", a translation_id from get_metadata, or a translator name. Omit for the default.'),
       english: external_exports.boolean().default(true).describe("Fetch an English translation (live). false shows the P\u0101li only."),
       offset: external_exports.number().int().min(0).max(1e5).default(0).describe("P\u0101li segment offset for continuation."),
-      limit: external_exports.number().int().min(1).max(80).default(40).describe("P\u0101li segments to show.")
+      limit: external_exports.number().int().min(1).max(80).default(40).describe("P\u0101li segments to show."),
+      english_offset: external_exports.number().int().min(0).max(1e7).default(0).describe("English character offset for continuation (use english.next_offset from the previous result). Shows up to 6,000 characters of the translation per call.")
     },
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
     _meta: TOOL_META
@@ -25332,7 +25342,8 @@ var WIDGET_HTML = `<!doctype html>
       head.appendChild(link(d.english.url, d.english.source || d.english.url));
       en.appendChild(head);
       en.appendChild(el('div', 'en', d.english.text || ''));
-      if (d.english.truncated) en.appendChild(el('p', 'note', 'The translation continues on the source page.'));
+      if (d.english.offset) en.insertBefore(el('p', 'note', 'Continuing from character ' + d.english.offset + ' of ' + d.english.total_characters + '.'), en.lastChild);
+      if (d.english.truncated) en.appendChild(el('p', 'note', 'The translation continues (character ' + d.english.next_offset + ' of ' + d.english.total_characters + '). Ask for more to continue, or read the rest on the source page.'));
     } else {
       en.appendChild(el('p', 'empty', d.english_error || 'No English translation requested.'));
     }
