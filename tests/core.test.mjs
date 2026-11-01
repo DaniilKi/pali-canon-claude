@@ -150,3 +150,28 @@ test('a verse inherits its chapter translations, with a note', () => {
   assert.ok(desc.english.length > 0);
   assert.ok(desc.notes.some((n) => /whole Dhp 179/.test(n)));
 });
+
+test('Gemini extension stays in step with the package and the skills', async () => {
+  const { readFileSync, existsSync } = await import('node:fs');
+  const root = new URL('../', import.meta.url);
+  const read = (p) => readFileSync(new URL(p, root), 'utf8');
+  const ext = JSON.parse(read('gemini-extension.json'));
+  const pkg = JSON.parse(read('package.json'));
+  assert.equal(ext.version, pkg.version);
+  assert.match(ext.name, /^[a-z0-9-]+$/);
+  assert.equal(ext.contextFileName, 'GEMINI.md');
+  assert.ok(existsSync(new URL('GEMINI.md', root)));
+  const server = ext.mcpServers['pali-canon'];
+  assert.equal(server.command, 'npx');
+  assert.deepEqual(server.args, ['-y', Object.keys(pkg.bin)[0]]);
+  const tools = [...read('src/index.mjs').matchAll(/tool\('([a-z_]+)'/g)].map((m) => m[1]);
+  for (const skill of ['study', 'compare', 'pali-word']) {
+    const toml = read(`commands/${skill}.toml`);
+    assert.match(toml, /^description = "[^"\n]+"$/m, skill);
+    assert.match(toml, /^prompt = '''\n[\s\S]*\{\{args\}\}[\s\S]*\n'''\n?$/m, skill);
+    for (const [, name] of toml.matchAll(/`([a-z]+_[a-z_]+)`/g)) {
+      if (!['next_offset', 'translation_id'].includes(name)) assert.ok(tools.includes(name), `${skill}: unknown tool ${name}`);
+    }
+    assert.ok(existsSync(new URL(`skills/${skill}/SKILL.md`, root)), skill);
+  }
+});
