@@ -25,7 +25,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "start": "node server/index.cjs",
-    "test": "node --test tests/core.test.mjs",
+    "test": "node scripts/test.mjs",
     "smoke": "node scripts/smoke.mjs",
     "check": "npm run build && npm test && npm run audit",
     "pack:desktop": "node scripts/pack-desktop.mjs",
