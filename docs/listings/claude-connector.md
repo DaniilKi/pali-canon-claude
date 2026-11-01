@@ -159,6 +159,21 @@ What every tool declares, and the proposed `title`. "Open-world" (`openWorldHint
 | `search_access_to_insight` | Search Access to Insight | yes | no | yes | Reads Access to Insight's indexes (or its GitHub mirror). |
 | `get_access_to_insight_text` | Read Access to Insight page | yes | no | yes | Fetches one Access to Insight page by path. |
 | `list_sources` | List sources and licences | yes | no | no | Static list. |
+| `abhidhamma_matika` | Abhidhamma mātikā | yes | no | no | Bundled VRI Dhammasaṅgaṇī mātikā (triads and dyads). |
+| `patthana_condition` | Paṭṭhāna condition | yes | no | no | The 24 conditions and their definitions from the bundled VRI Paṭṭhāna. |
+| `uposatha` | Uposatha days | yes | no | no | Computes observance days offline from the stated lunar rule. |
+| `festivals` | Festival dates | yes | no | no | Computes festival dates offline and lists the associated canonical texts. |
+| `daily_text` | Text of the day | yes | no | no | Fixed rotation through the bundled canon; English is links only. |
+| `reading_plan` | Reading plans | yes | no | no | Bundled reading plans; each day gives citations and links. |
+| `lookup_name` | Proper name lookup | yes | no | no | Bundled Dictionary of Pāli Proper Names entries (when bundled), links to the online editions and canon occurrences; nothing is fetched. |
+| `find_citations` | Find citations in text | yes | no | no | Parses citations in the given text and checks them against the bundled canon. |
+| `paritta` | Paritta chants | yes | no | no | Bundled VRI Pāli of commonly recited texts; English is links only. |
+| `find_talks` | Find Dhamma talks | yes | no | yes | Queries dhammatalks.org search; returns links only, never talk text. |
+| `topic` | Texts on a topic | yes | no | no | Bundled Access to Insight subject and numerical index entries. |
+| `list_topics` | Browse topics | yes | no | no | Bundled topic index. |
+| `dhamma_list` | Numbered teaching lists | yes | no | no | Bundled lists with Pāli members and their canonical passages. |
+| `verify_quote` | Verify a quotation | yes | no | yes | Pāli is matched offline; English quotations fetch the named translations live. |
+| `vinaya_rule` | Pātimokkha rule | yes | no | no | Bundled VRI Vinaya text plus a stored link to the Buddhist Monastic Code. |
 
 No tool writes, deletes, sends or stores anything, so none needs `destructiveHint: true`. The table must list exactly the live tools: `tests/connector-listing.test.mjs` fails when a tool (for example one added through `src/features/`) has no row here, or a row names a tool that no longer exists. Add the row in the same change that adds the tool; the directory re-reviews material changes to tools.
 

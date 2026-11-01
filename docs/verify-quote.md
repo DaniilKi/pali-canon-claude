@@ -7,7 +7,7 @@ Many sayings shared online as "the Buddha said" are not in the early texts. `ver
 | Quotation in | Searched against | Network |
 |---|---|---|
 | **Pāli** | The whole bundled Pāli Tipiṭaka (VRI Chaṭṭha Saṅgāyana edition, 8,544 texts). Commentaries and later Pāli works are not included. | Offline |
-| **English** | The English translations linked to the texts you name (`texts`, up to 12 citations, at most 60 pages). Without `texts`, the 26 chapters of the Dhammapada: one page per translator ([Ṭhānissaro Bhikkhu](https://www.dhammatalks.org/suttas/KN/Dhp/) and Acharya Buddharakkhita on [Access to Insight](https://www.accesstoinsight.org/tipitaka/kn/dhp/)), 52 pages. | Live, cached like other translations |
+| **English** | The English translations linked to the texts you name (`texts`, up to 12 citations, at most 80 pages). Without `texts`, the 26 chapters of the Dhammapada: one page per translator ([Ṭhānissaro Bhikkhu](https://www.dhammatalks.org/suttas/KN/Dhp/), Acharya Buddharakkhita on [Access to Insight](https://www.accesstoinsight.org/tipitaka/kn/dhp/) and Ānandajoti Bhikkhu on [Ancient Buddhist Texts](https://ancient-buddhist-texts.net/)), 77 pages. | Live, cached like other translations |
 
 The language is detected automatically, or set `language` to `pali` or `english`. Text with Pāli diacritics is Pāli; text with common English words (the, is, you, of...) is English. Only when neither is clear does detection look words up in the Pāli index, which builds that index (see below).
 

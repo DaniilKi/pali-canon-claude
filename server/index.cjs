@@ -22995,7 +22995,7 @@ __export(verify_exports, {
 });
 var THRESHOLDS = { found: 0.82, close_paraphrase: 0.5 };
 var MAX_QUERY_WORDS = 120;
-var MAX_ENGLISH_PAGES = 60;
+var MAX_ENGLISH_PAGES = 80;
 var COMMON_SKIP = 15e4;
 var DEFAULT_ENGLISH_SCOPE = { label: "the Dhammapada (all 26 chapters)", collection: "dhp" };
 var PALI_HINT = /[āīūṅñṭḍṇḷṃṁ]/i;
@@ -23395,7 +23395,7 @@ function englishScope(texts) {
       if (seenTranslator.has(who) || seenUrl.has(l.url)) continue;
       seenTranslator.add(who);
       seenUrl.add(l.url);
-      pages.push({ unit: owner, translation_id: l.source === "ati" ? `ati:${l.path}` : `dt:${l.url.split("/suttas/")[1].replace(/\.html$/, "")}`, translator, url: l.url });
+      pages.push({ unit: owner, translation_id: translationId(l), translator, url: l.url });
     }
   }
   if (pages.length > MAX_ENGLISH_PAGES) throw new Error(`That scope needs ${pages.length} translation pages; the limit is ${MAX_ENGLISH_PAGES}. Pass fewer texts.`);

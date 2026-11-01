@@ -30,23 +30,15 @@ async function fails(name, args, pattern) {
 try {
   await client.connect(transport);
   const { tools } = await client.listTools();
-  assert.ok(tools.length >= 11, `${tools.length} tools`); // core tools plus optional features (src/features)
-  assert.ok(tools.length >= 11); // core tools; optional features (src/features) add more
-  assert.ok(tools.length >= 11);
-  // 11 core tools plus optional feature modules (src/features/index.mjs).
-  assert.ok(tools.length >= 11, `${tools.length} tools`);
+  // 11 core tools plus the optional feature modules (src/features/index.mjs), derived from the source.
   assert.deepEqual(tools.map((tool) => tool.name).sort(), expectedToolNames());
-  assert.equal(tools.length, 11);
   assert.ok(!tools.some((tool) => tool.name === 'read_passage_widget'), 'the ChatGPT widget tool is hosted-HTTP only');
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint));
-  assert.ok((await client.listResources()).resources.length >= 2);
-  assert.ok((await client.listPrompts()).prompts.length >= 3);
   const { resources } = await client.listResources();
   for (const uri of ['pali://sources', 'pali://canon-guide', 'pali://pronunciation']) assert.ok(resources.some((r) => r.uri === uri), uri);
-  assert.equal((await client.listPrompts()).prompts.length, 3);
-  assert.equal((await client.listResources()).resources.length, 2);
   const { prompts } = await client.listPrompts();
-  assert.ok(prompts.length >= 4 && prompts.some((p) => p.name === 'memorise_passage'));
+  for (const name of ['study_passage', 'compare_translations', 'topic_research', 'memorise_passage']) assert.ok(prompts.some((p) => p.name === name), name);
+  console.log(`${tools.length} tools, ${resources.length} resources, ${prompts.length} prompts`);
   await client.readResource({ uri: 'pali://canon-guide' });
   assert.match((await client.readResource({ uri: 'pali://pronunciation' })).contents[0].text, /Niggahīta/);
   await client.getPrompt({ name: 'study_passage', arguments: { reference: 'MN 10' } });

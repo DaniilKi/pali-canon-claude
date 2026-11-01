@@ -106,7 +106,7 @@ test('English is links only, from the existing translation index, never SuttaCen
     const unit = canon.resolve(e.texts[0]).unit;
     assert.equal(r.english.length, canon.linksFor(unit).links.length, e.key);
     for (const link of r.english) {
-      assert.match(link.url, /^https:\/\/(www\.)?(dhammatalks\.org|accesstoinsight\.org)\//, `${e.key} ${link.url}`);
+      assert.match(link.url, /^https:\/\/((www\.)?(dhammatalks\.org|accesstoinsight\.org)\/|ancient-buddhist-texts\.net\/Texts-and-Translations\/)/, `${e.key} ${link.url}`);
       assert.ok(!('text' in link));
     }
   }

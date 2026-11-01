@@ -50,6 +50,12 @@ export const LICENSE_LABELS = {
     url: null,
     used_by: 'Access to Insight',
   },
+  'CC BY-SA 3.0': {
+    name: 'CC BY-SA 3.0 (Creative Commons Attribution-ShareAlike 3.0 Unported)',
+    terms: "the site's Copyright Notice gives 3.0 Unported, its page footers link 4.0; share-alike, credit Ānandajoti Bhikkhu",
+    url: 'https://creativecommons.org/licenses/by-sa/3.0/',
+    used_by: 'Ancient Buddhist Texts (Ānandajoti Bhikkhu)',
+  },
 };
 
 export const licenseName = (code) => (code && LICENSE_LABELS[code] ? LICENSE_LABELS[code].name : null);
@@ -59,6 +65,7 @@ export const LICENSE_NOTE = [
   'It contains no scripture text and no translation text: only IDs, Pāli titles, paragraph numbers, PTS page references, translator names and URLs.',
   'The Pāli titles and page markers come from the VRI edition, which VRI makes freely available for non-commercial use with attribution.',
   'Translation pages belong to their publishers and keep their own licences: dhammatalks.org (Ṭhānissaro Bhikkhu) is CC BY-NC 4.0;',
+  'Ancient Buddhist Texts (Ānandajoti Bhikkhu) is CC BY-SA 3.0 (share-alike);',
   'Access to Insight licences vary by page: each link carries its licence code (`license`) and readable name (`license_name`) in the JSON, and the CSV lists the readable names in `english_licenses`.',
   'Do not sell this data or content reached through it.',
   'Citation numbering follows the public scheme also used by SuttaCentral; no SuttaCentral content is included.',

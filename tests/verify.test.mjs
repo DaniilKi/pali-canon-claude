@@ -202,7 +202,9 @@ test('stock passages report how many texts match equally, instead of one arbitra
 test('English scope: default is the Dhammapada, one page per translator; untranslated texts are listed', () => {
   const def = englishScope();
   assert.match(def.label, /Dhammapada/);
-  assert.ok(def.pages.length >= 26 && def.pages.length <= 60, `${def.pages.length}`);
+  assert.ok(def.pages.length >= 26 && def.pages.length <= 80, `${def.pages.length}`);
+  assert.ok(def.pages.every((p) => /^(dt|ati|aj):/.test(p.translation_id)), 'every source gets its own translation_id form');
+  assert.ok(def.pages.some((p) => p.translation_id.startsWith('aj:')), 'Ānandajoti chapters are in the default scope');
   assert.equal(new Set(def.pages.map((p) => p.url)).size, def.pages.length);
   for (const p of def.pages) assert.equal(canon.resolve(p.unit.id).unit.id, p.unit.id);
   const vin = englishScope(['Pj 1', 'AN 3.65']);

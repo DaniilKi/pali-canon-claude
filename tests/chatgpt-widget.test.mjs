@@ -6,6 +6,7 @@ import {
   RESOURCE_META, REDIRECT_DOMAINS,
 } from '../src/chatgpt-widget.mjs';
 import { ALLOWED_HOSTS } from '../src/http.mjs';
+import { expectedToolNames } from '../scripts/expected-tools.mjs';
 
 test('widget citations used here resolve with the bundled canon', () => {
   assert.equal(canon.resolve('MN 10').unit.id, 'mn10');
@@ -73,7 +74,7 @@ test('HTTP endpoint with CHATGPT_WIDGET: tool _meta, UI templates and an offline
   try {
     assert.equal((await (await fetch(`${base}/healthz`)).json()).chatgpt_widget, true);
     const tools = (await rpc('tools/list', {})).result.tools;
-    assert.equal(tools.length, 12, 'the 11 existing tools plus the widget tool');
+    assert.deepEqual(tools.map((x) => x.name).sort(), [...expectedToolNames(), WIDGET_TOOL].sort(), 'every server tool plus the widget tool');
     const t = tools.find((x) => x.name === WIDGET_TOOL);
     assert.deepEqual(t._meta, TOOL_META);
     assert.equal(t._meta.ui.resourceUri, WIDGET_URI);
@@ -112,7 +113,7 @@ test('HTTP endpoint with CHATGPT_WIDGET: tool _meta, UI templates and an offline
   }
 });
 
-test('HTTP endpoint without CHATGPT_WIDGET keeps the 11 tools', async () => {
+test('HTTP endpoint without CHATGPT_WIDGET keeps exactly the server tools', async () => {
   const { createHttpServer } = await import('../src/http-server.mjs');
   const http = createHttpServer({ rateLimitPerMinute: 0, chatgptWidget: false });
   await new Promise((r) => http.listen(0, '127.0.0.1', r));
@@ -120,7 +121,7 @@ test('HTTP endpoint without CHATGPT_WIDGET keeps the 11 tools', async () => {
   try {
     const res = await fetch(`${base}/mcp`, { method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list', params: {} }) });
     const tools = (await res.json()).result.tools;
-    assert.equal(tools.length, 11);
+    assert.deepEqual(tools.map((t) => t.name).sort(), expectedToolNames());
     assert.ok(!tools.some((t) => t.name === WIDGET_TOOL));
   } finally {
     http.closeAllConnections?.();

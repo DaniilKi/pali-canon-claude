@@ -2,12 +2,13 @@
 // Pāli quotes are matched offline against the bundled VRI text; English quotes against the linked
 // English translations, fetched live (cached) through english.mjs. The answer only ever reports
 // what the texts searched contain: it never says who did or did not say something.
-import { fold, load, resolve, segments, source, linksFor } from './canon.mjs';
+import { fold, load, resolve, segments, source, linksFor, translationId } from './canon.mjs';
 import * as englishModule from './english.mjs';
 
 export const THRESHOLDS = { found: 0.82, close_paraphrase: 0.5 };
 const MAX_QUERY_WORDS = 120;
-const MAX_ENGLISH_PAGES = 60;
+// 80 fits the default scope: the 26 Dhammapada chapters from three translators (Ṭhānissaro, Buddharakkhita, Ānandajoti).
+const MAX_ENGLISH_PAGES = 80;
 const COMMON_SKIP = 150000; // query words this frequent are ignored for retrieval (still scored)
 const DEFAULT_ENGLISH_SCOPE = { label: 'the Dhammapada (all 26 chapters)', collection: 'dhp' };
 
@@ -375,7 +376,7 @@ export function englishScope(texts) {
       const who = fold(translator).replace(/[^a-z]/g, '');
       if (seenTranslator.has(who) || seenUrl.has(l.url)) continue;
       seenTranslator.add(who); seenUrl.add(l.url);
-      pages.push({ unit: owner, translation_id: l.source === 'ati' ? `ati:${l.path}` : `dt:${l.url.split('/suttas/')[1].replace(/\.html$/, '')}`, translator, url: l.url });
+      pages.push({ unit: owner, translation_id: translationId(l), translator, url: l.url });
     }
   }
   if (pages.length > MAX_ENGLISH_PAGES) throw new Error(`That scope needs ${pages.length} translation pages; the limit is ${MAX_ENGLISH_PAGES}. Pass fewer texts.`);
