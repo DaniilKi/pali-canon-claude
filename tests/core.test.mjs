@@ -352,6 +352,7 @@ test('HTTP transport: /mcp serves the same read-only tools, with CORS, health, l
     assert.ok(tools.length >= 11, `${tools.length} tools`); // core tools plus optional features (src/features)
     assert.ok(tools.length >= 11);
     assert.ok(tools.length >= 11); // core tools; optional features (src/features) add more
+    assert.ok(tools.length >= 11);
     assert.ok(tools.every((t) => t.annotations.readOnlyHint && t.annotations.destructiveHint === false));
     assert.equal(tools.find((t) => t.name === 'get_translation').annotations.openWorldHint, true);
     const call = await (await rpc('tools/call', { name: 'resolve_reference', arguments: { reference: 'SN 56:11' } }, 3)).json();
