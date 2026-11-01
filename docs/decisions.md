@@ -95,3 +95,9 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** Bible and Quran tools are already available in many AI apps; Theravāda has almost none.
 - **Decision.** Make the tool excellent in Claude first (desktop, Code, then a hosted version and the connector directory), then package the same server for Codex, ChatGPT, Gemini, editors and registries.
 - **Consequences.** Distribution work is tracked in the Distribution milestone, and the npm package and hosted endpoint come first because the rest depend on them.
+
+### D16. Release assets are built by CI, with checksums made at release time
+
+- **Context.** Packing the `.mcpb` is not byte-reproducible (the zip records build times), and a Windows-built zip can drop the executable bit on `server/index.cjs`. No `SHA256SUMS.txt` existed for v2.0.0.
+- **Decision.** `.github/workflows/release.yml` builds every release on Ubuntu from the tag: `npm run check`, smoke test, `.mcpb`, npm tarball, then `SHA256SUMS.txt` over exactly the files it uploads. It runs on `v*` tags, or by hand for an existing tag (used for v2.0.0, tagged on `0cd736f`). npm publishing runs only when the `NPM_TOKEN` secret exists.
+- **Consequences.** The checksums on a release always match its attached files. Locally packed bundles will have different hashes; that is expected.
