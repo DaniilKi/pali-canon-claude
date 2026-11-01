@@ -24979,8 +24979,7 @@ __export(features_exports, {
 // src/abhidhamma.mjs
 var abhidhamma_exports = {};
 __export(abhidhamma_exports, {
-  GLOSSES: () => GLOSSES,
-  GLOSS_LABEL: () => GLOSS_LABEL,
+  DICTIONARY_NOTE: () => DICTIONARY_NOTE,
   buildConditions: () => buildConditions,
   buildMatika: () => buildMatika,
   condition: () => condition,
@@ -25000,42 +24999,16 @@ var unitById = (canon, id) => {
   if (!unit) throw new Error(`Bundled text ${id} is missing from the canon data.`);
   return unit;
 };
-var GLOSS_LABEL = "Editorial gloss: a short plain-English aid written for this tool, using common English renderings. It is not scripture, not a translation of the definition and not a commentary; read the P\u0101li definition for the text itself.";
-var GLOSSES = {
-  hetu: { english: "root", gloss: "The roots (such as greed, hatred and delusion, or their wholesome opposites) support the states that arise with them." },
-  arammana: { english: "object", gloss: "An object supports the consciousness and mental factors that take it as their object." },
-  adhipati: { english: "predominance", gloss: "A dominant factor (desire, energy, mind, investigation, or an esteemed object) supports the states it leads." },
-  anantara: { english: "proximity", gloss: "A mental state that has just ceased supports the mental state that arises immediately after it." },
-  samanantara: { english: "contiguity", gloss: "Like proximity: the immediately preceding mental state supports the next one without any gap." },
-  sahajata: { english: "conascence", gloss: "States that arise together support the states born together with them." },
-  annamanna: { english: "mutuality", gloss: "States that arise together support each other reciprocally." },
-  nissaya: { english: "support", gloss: "A state supports another as its foundation, such as a sense base for its kind of consciousness." },
-  upanissaya: { english: "decisive support", gloss: "A strong supporting cause: earlier states, and also things such as climate, food, a person or a dwelling." },
-  purejata: { english: "prenascence", gloss: "Something that arose earlier (a sense base or a sense object) supports mental states that arise later." },
-  pacchajata: { english: "postnascence", gloss: "Mental states that arise later support the body that already exists." },
-  asevana: { english: "repetition", gloss: "Earlier states of the same kind support the following ones by repetition." },
-  kamma: { english: "kamma", gloss: "Volition, as wholesome or unwholesome action, supports its results and the states associated with it." },
-  vipaka: { english: "kamma-result", gloss: "Resultant mental states support one another." },
-  ahara: { english: "nutriment", gloss: "Nutriment, physical food and the mental nutriments, sustains the body and associated states." },
-  indriya: { english: "faculty", gloss: "Faculties, such as the eye faculty or the mental faculties, support the states they govern." },
-  jhana: { english: "jh\u0101na", gloss: "The jh\u0101na factors support the states associated with them." },
-  magga: { english: "path", gloss: "The path factors support the states associated with them." },
-  sampayutta: { english: "association", gloss: "The four mental aggregates support one another by being associated." },
-  vippayutta: { english: "dissociation", gloss: "Material and mental states support each other while remaining distinct." },
-  atthi: { english: "presence", gloss: "A state supports another by being present." },
-  natthi: { english: "absence", gloss: "A mental state that has just ceased supports the next one by its absence." },
-  vigata: { english: "disappearance", gloss: "A mental state that has just disappeared supports the next one by its disappearance." },
-  avigata: { english: "non-disappearance", gloss: "A state supports another by not having disappeared." }
-};
+var DICTIONARY_NOTE = "For an English meaning, look the P\u0101li term up with lookup_pali (Digital P\u0101\u1E37i Dictionary). Dictionary glosses are reference material, not scripture and not a translation of this definition.";
 var locate = (unit, first, count) => ({
   text_id: unit.id,
   citation: unit.acronym,
   segment_ref: `${unit.id}/${first + 1}`,
   get_text: { uid: unit.acronym, offset: first, limit: count }
 });
-var matikaCache = null;
+var matikaCache = /* @__PURE__ */ new WeakMap();
 function buildMatika(canon = canon_exports) {
-  if (matikaCache) return matikaCache;
+  if (matikaCache.has(canon)) return matikaCache.get(canon);
   const sections = MATIKA_UNITS.map(({ id, key, kind }) => {
     const unit = unitById(canon, id);
     const segs = canon.segments(unit);
@@ -25070,7 +25043,7 @@ function buildMatika(canon = canon_exports) {
       entries: entries.map(({ first, last, ...e }) => ({ ...e, vri_paragraph: String(e.number), ...locate(unit, first, last - first + 1) }))
     };
   });
-  matikaCache = sections;
+  matikaCache.set(canon, sections);
   return sections;
 }
 var stem = (value) => fold2(value).replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
@@ -25130,9 +25103,9 @@ function matika(section, canon = canon_exports) {
   }
   throw new Error(`Unknown m\u0101tik\u0101 section "${section}". Use tika, duka, suttantika, one of the dyad groups (${groupsOf(duka).map((g) => g.heading).join(", ")}), or an entry such as "tika 5" or "duka 101".`);
 }
-var conditionsCache = null;
+var conditionsCache = /* @__PURE__ */ new WeakMap();
 function buildConditions(canon = canon_exports) {
-  if (conditionsCache) return conditionsCache;
+  if (conditionsCache.has(canon)) return conditionsCache.get(canon);
   const unit = unitById(canon, PATTHANA_UNIT);
   const segs = canon.segments(unit);
   const uddesaHeading = segs.findIndex((s) => s.type === "heading" && /Paccayuddeso$/.test(strip(s.text)));
@@ -25161,15 +25134,15 @@ function buildConditions(canon = canon_exports) {
       listed_in: { heading: strip(segs[uddesaHeading].text), ...locate(unit, uddesaIndex, 1) }
     };
   });
-  conditionsCache = conditions;
+  conditionsCache.set(canon, conditions);
   return conditions;
 }
 function condition(name, canon = canon_exports) {
   const conditions = buildConditions(canon);
   const base = { book: "Pa\u1E6D\u1E6Dh\u0101na", ...source2(canon) };
-  const withGloss = (c, full) => {
-    const g = GLOSSES[c.key];
-    const out = { number: c.number, name: c.name, english: g?.english ?? null, gloss: g ? { text: g.gloss, label: GLOSS_LABEL } : null };
+  const withDictionary = (c, full) => {
+    const term = c.name.replace(/paccayo$/i, "").toLowerCase();
+    const out = { number: c.number, name: c.name, dictionary: { tool: "lookup_pali", word: term, note: DICTIONARY_NOTE } };
     if (!full) {
       const { text, ...where } = c.definition;
       return { ...out, definition: where };
@@ -25182,23 +25155,23 @@ function condition(name, canon = canon_exports) {
     return {
       ...base,
       count: conditions.length,
-      conditions: conditions.map((c) => withGloss(c, false)),
-      usage: 'Pass one name (hetu, \u0101ramma\u1E47apaccayo, "decisive support") or number 1\u201324 for its full definition text.'
+      conditions: conditions.map((c) => withDictionary(c, false)),
+      usage: "Pass one P\u0101li name (hetu, \u0101ramma\u1E47apaccayo) or number 1\u201324 for its full definition text."
     };
   }
-  const key = wanted.replace(/\s*(paccayo|paccaya|condition)$/, "").replace(/ /g, "");
-  const found = /^\d+$/.test(key) ? conditions[Number(key) - 1] : conditions.find((c) => c.key === key || fold2(c.name) === key) || conditions.find((c) => stem(GLOSSES[c.key]?.english ?? "").replace(/[ -]/g, "") === key.replace(/-/g, ""));
+  const key = wanted.replace(/\s*(paccayo|paccaya)$/, "").replace(/ /g, "");
+  const found = /^\d{1,2}$/.test(raw) ? Number(raw) >= 1 && Number(raw) <= conditions.length ? conditions[Number(raw) - 1] : void 0 : /\d/.test(raw) ? void 0 : conditions.find((c) => c.key === key || fold2(c.name) === key);
   if (!found) {
     throw new Error(`Unknown Pa\u1E6D\u1E6Dh\u0101na condition "${raw}". The 24 conditions are: ${conditions.map((c) => c.name).join(", ")}.`);
   }
-  return { ...base, condition: withGloss(found, true) };
+  return { ...base, condition: withDictionary(found, true) };
 }
 function register({ tool, z, canon }) {
   tool("abhidhamma_matika", "Browse the m\u0101tik\u0101 (matrix) of the Dhammasa\u1E45ga\u1E47\u012B: the 22 triads (tika), the 100 Abhidhamma dyads (duka) in their groups and the 42 Suttanta dyads, in P\u0101li from the bundled VRI text, each with its VRI paragraph and a get_text location. Without a section it returns an overview. Works offline.", {
     section: z.string().max(60).optional().describe('"tika", "duka", "suttantika", a dyad group such as "hetugocchaka" or "\u0101sava", or one entry such as "tika 5" or "duka 101". Omit for an overview.')
   }, ({ section }) => matika(section, canon));
-  tool("patthana_condition", 'One of the 24 conditions (paccaya) of the Pa\u1E6D\u1E6Dh\u0101na: its P\u0101li name from the bundled VRI text, the location and P\u0101li text of its definition (paccayaniddesa), and a short English gloss labelled as an editorial gloss. Pass "all" for the list. Works offline.', {
-    name: z.string().trim().min(1).max(60).describe('P\u0101li name (hetu, hetupaccayo, \u0101ramma\u1E47a\u2026), a common English name ("root", "decisive support"), a number 1\u201324, or "all".')
+  tool("patthana_condition", 'One of the 24 conditions (paccaya) of the Pa\u1E6D\u1E6Dh\u0101na: its P\u0101li name from the bundled VRI text, the location and P\u0101li text of its definition (paccayaniddesa), and the P\u0101li term to look up with lookup_pali for an English dictionary meaning. Pass "all" for the list. Works offline.', {
+    name: z.string().trim().min(1).max(60).describe('P\u0101li name (hetu, hetupaccayo, \u0101ramma\u1E47a\u2026), a number 1\u201324, or "all".')
   }, ({ name }) => condition(name, canon));
 }
 

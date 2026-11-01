@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import * as canon from '../src/canon.mjs';
-import { matika, condition, buildMatika, buildConditions, GLOSSES, GLOSS_LABEL } from '../src/abhidhamma.mjs';
+import { matika, condition, buildMatika, buildConditions, DICTIONARY_NOTE } from '../src/abhidhamma.mjs';
 
 // Every location must resolve through the citation the tool hands out, and the segment it points to
 // must carry the heading text and VRI paragraph the tool reports.
@@ -76,23 +76,34 @@ test('24 Paṭṭhāna conditions: names from the paccayuddesa, definitions from
     assertLocation(c.definition, [c.definition.opening, ...c.definition.text], String(c.number));
     assert.ok(canon.fold(c.definition.opening).startsWith(canon.fold(c.name)), c.name);
     assertLocation(c.listed_in, [c.name]);
-    assert.ok(GLOSSES[c.key], `gloss for ${c.key}`);
   }
-  assert.equal(Object.keys(GLOSSES).length, 24);
 });
 
-test('patthana_condition lookup and gloss labelling', () => {
-  for (const [input, number] of [['hetu', 1], ['Hetupaccayo', 1], ['ārammaṇa', 2], ['arammana paccaya', 2], ['decisive support', 9], ['upanissaya', 9], ['kamma-result', 14], ['root condition', 1], ['24', 24], ['avigatapaccayo', 24]]) {
+test('patthana_condition lookup and dictionary pointer', () => {
+  for (const [input, number] of [['hetu', 1], ['Hetupaccayo', 1], ['ārammaṇa', 2], ['arammana paccaya', 2], ['upanissaya', 9], ['1', 1], [' 9 ', 9], ['24', 24], ['avigatapaccayo', 24]]) {
     assert.equal(condition(input).condition.number, number, input);
   }
   const c = condition('anantara').condition;
   assert.equal(c.name, 'anantarapaccayo');
-  assert.equal(c.gloss.label, GLOSS_LABEL);
-  assert.match(c.gloss.label, /not scripture/);
+  // No English is written into the tool: only a pointer to the DPD lookup with the Pāli term from the text.
+  assert.equal(c.english, undefined);
+  assert.equal(c.gloss, undefined);
+  assert.deepEqual(c.dictionary, { tool: 'lookup_pali', word: 'anantara', note: DICTIONARY_NOTE });
+  assert.equal(condition('Hetupaccayo').condition.dictionary.word, 'hetu');
   assert.match(c.definition.text[0], /^Anantarapaccayoti – /);
   const all = condition('all');
   assert.equal(all.count, 24);
   assert.equal(all.conditions[23].definition.text, undefined);
   assert.throws(() => condition('foo'), /Unknown Paṭṭhāna condition/);
-  assert.throws(() => condition('25'), /Unknown Paṭṭhāna condition/);
+  for (const bad of ['0', '25', '-1', '1.5', '01.', '+3', '100', 'decisive support', 'Paṭṭh 1.1']) {
+    assert.throws(() => condition(bad), /Unknown Paṭṭhāna condition/, bad);
+  }
+});
+
+test('parsed results are cached per canon object', () => {
+  const other = { ...canon };
+  assert.equal(buildConditions(canon), buildConditions(canon));
+  assert.notEqual(buildConditions(other), buildConditions(canon));
+  assert.deepEqual(buildConditions(other), buildConditions(canon));
+  assert.notEqual(buildMatika(other), buildMatika(canon));
 });

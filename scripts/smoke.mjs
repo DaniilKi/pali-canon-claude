@@ -52,7 +52,7 @@ try {
   for (const node of ['canon', 'vinaya', 'sn', 'sn56', 'abhidhamma']) await call('browse_canon', { node, limit: 3 });
   await call('list_sources', {});
   await call('abhidhamma_matika', { section: 'tika 1' }, (d) => assert.equal(d.entries[0].items[0].text, 'kusalā dhammā.'));
-  await call('patthana_condition', { name: 'hetu' }, (d) => { assert.equal(d.condition.definition.citation, 'Paṭṭh 1.1'); assert.match(d.condition.gloss.label, /not scripture/); });
+  await call('patthana_condition', { name: 'hetu' }, (d) => { assert.equal(d.condition.definition.citation, 'Paṭṭh 1.1'); assert.equal(d.condition.dictionary.tool, 'lookup_pali'); });
   await fails('get_text', { uid: '../private' });
   await fails('resolve_reference', { reference: 'MN 153' }, /not in the canon index/);
   await fails('resolve_reference', { reference: 'Ja i 1' }, /no PTS page numbers/);
