@@ -84,8 +84,13 @@ function parseUrl(raw) {
   if (!['suttacentral.net', 'accesstoinsight.org', 'dhammatalks.org', 'ancient-buddhist-texts.net'].includes(host) || !/^https?:$/.test(url.protocol)) {
     throw new CitationError('Links are understood for suttacentral.net, accesstoinsight.org, dhammatalks.org and ancient-buddhist-texts.net only.');
   }
-  // Ancient Buddhist Texts paths are case-sensitive and end in .htm; keep the extension so they match the link index.
-  if (host === 'ancient-buddhist-texts.net') return { kind: 'url', host, path: url.pathname.replace(/\.htm$/, ''), raw };
+  // Ancient Buddhist Texts paths are case-sensitive, so the case is kept; the .htm extension is dropped, as the link index stores paths without it.
+  // Some page names contain spaces ("02-At the-Palace.htm"); the index stores them decoded.
+  if (host === 'ancient-buddhist-texts.net') {
+    let path = url.pathname;
+    try { path = decodeURI(path); } catch { /* keep as given */ }
+    return { kind: 'url', host, path: path.replace(/\.htm$/, ''), raw };
+  }
   if (host === 'suttacentral.net') {
     const first = url.pathname.split('/').filter(Boolean)[0] || '';
     if (!/^[a-z][a-z0-9.-]*$/.test(first)) throw new CitationError('Unrecognised SuttaCentral link.');

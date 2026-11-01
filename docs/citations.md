@@ -81,6 +81,8 @@ Another example: the Kālāma Sutta is AN 3.65 in the standard numbering and AN 
 
 Ancient Buddhist Texts (Ānandajoti Bhikkhu) mostly uses the standard numbers, but not always: its Titthāyatanasutta is headed "AN 3.62", which is AN 3.61 in the standard numbering (AN 3.62 is the Bhayasutta). Because its Pāli did not match AN 3.62, that page is not linked.
 
+An Ancient Buddhist Texts link is understood as a citation only for a page in the link index. Where the site spreads one work over several pages (DN 16, MN 26, MN 85, MN 118, MN 119, Vibh 6, Vibh 7), the index page and every part page resolve to the whole work, for example `https://ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/02-Prevent-Vajji-Decline.htm` resolves to DN 16, not to a passage within it.
+
 What the tool does:
 
 - uses the standard number for every citation;

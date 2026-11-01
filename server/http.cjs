@@ -23903,7 +23903,14 @@ function parseUrl(raw) {
   if (!["suttacentral.net", "accesstoinsight.org", "dhammatalks.org", "ancient-buddhist-texts.net"].includes(host) || !/^https?:$/.test(url.protocol)) {
     throw new CitationError("Links are understood for suttacentral.net, accesstoinsight.org, dhammatalks.org and ancient-buddhist-texts.net only.");
   }
-  if (host === "ancient-buddhist-texts.net") return { kind: "url", host, path: url.pathname.replace(/\.htm$/, ""), raw };
+  if (host === "ancient-buddhist-texts.net") {
+    let path = url.pathname;
+    try {
+      path = decodeURI(path);
+    } catch {
+    }
+    return { kind: "url", host, path: path.replace(/\.htm$/, ""), raw };
+  }
   if (host === "suttacentral.net") {
     const first = url.pathname.split("/").filter(Boolean)[0] || "";
     if (!/^[a-z][a-z0-9.-]*$/.test(first)) throw new CitationError("Unrecognised SuttaCentral link.");
@@ -24125,6 +24132,7 @@ function load() {
   for (const [id, links] of Object.entries(translations)) {
     for (const link of links) {
       if (link.url) urlIndex.set(link.url.replace(/^https?:\/\/(www\.)?/, "").replace(/\.html?$/, ""), id);
+      for (const part of link.parts || []) urlIndex.set(`ancient-buddhist-texts.net${part}`.replace(/\.html?$/, ""), id);
     }
   }
   data = { canon, byId, ranges, translations, urlIndex, search: null };

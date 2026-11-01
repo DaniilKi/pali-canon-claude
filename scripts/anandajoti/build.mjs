@@ -7,10 +7,13 @@
  *   1. A page is a candidate only for the text its own heading or index entry names
  *      (the WORKS table below records that claim, with the site's own reference).
  *   2. The Pāli printed on the page must cover most of the VRI text of that unit
- *      (word 3-gram coverage >= MIN_COVERAGE, after the page's English is set aside), and no other unit of the same collection
- *      and similar size may come within MARGIN of it (the named text must be clearly the best match). This catches numbering differences
- *      (e.g. the site's "AN 3.62" is AN 3.61 in our numbering) and partial translations.
- *   3. SN and AN additionally need the Pāli title to agree (never by number alone).
+ *      (word 3-gram coverage >= MIN_COVERAGE). Only the bold Pāli lines are read (paliOf): the English
+ *      lines and the translator's notes are set aside. No other unit of the same collection and similar
+ *      size may come within MARGIN of it (the named text must be clearly the best match). This catches
+ *      numbering differences (e.g. the site's "AN 3.62" is AN 3.61 in our numbering) and partial translations.
+ *   3. SN and AN additionally need the Pāli title printed in the page's own heading (siteTitles) to agree
+ *      with our title (never by number alone). The agreeing heading word is stored as `pali_title`;
+ *      `match` says 'number+title+pali' only when such a title was read from the site.
  *   Anything that fails is reported and left out: no link is better than a wrong link.
  *
  * Usage: node scripts/anandajoti/build.mjs --cache <dir> [--out server/data/anandajoti.json]
@@ -47,21 +50,21 @@ const WORKS = [
   { id: 'mn141', reference: 'MN 141', title: 'The Discourse giving the Analysis of the Truths', page: `${T}/Short-Pieces/Saccavibhangasuttam.htm` },
   { id: 'mn142', reference: 'MN 142', title: 'The Analysis of Offerings', page: `${T}/Short-Pieces/Dakkhinavibhangasuttam.htm` },
   { id: 'mn146', reference: 'MN 146', title: 'Nandaka’s Advice', page: `${T}/Nandakovada/Nandakovada.htm`, commentary: true },
-  { id: 'sn12.2', reference: 'SN 12.2', title: 'The Discourse giving the Analysis (of Conditional Origination)', page: `${T}/Short-Pieces/Paticcasamuppadavibhangasuttam.htm`, pali: 'Vibhaṅgasuttaṃ' },
-  { id: 'sn35.95', reference: 'SN 35.95', title: 'The Discourse Concerning Māluṅkyaputta', page: `${T}/Short-Pieces/Malunkyaputtasuttam.htm`, pali: 'Mālukyaputtasuttaṃ' },
-  { id: 'sn44.1', reference: 'SN 44.1', title: 'The Discourse about Khemā', page: `${T}/Short-Pieces/Khemasuttam.htm`, pali: 'Khemāsuttaṃ' },
-  { id: 'sn48.10', reference: 'SN 48.10', title: 'The Second Discourse giving an Analysis of the Faculties', page: `${T}/Short-Pieces/Indriyavibhangasuttam.htm`, pali: 'Dutiyavibhaṅgasuttaṃ' },
+  { id: 'sn12.2', reference: 'SN 12.2', title: 'The Discourse giving the Analysis (of Conditional Origination)', page: `${T}/Short-Pieces/Paticcasamuppadavibhangasuttam.htm` },
+  { id: 'sn35.95', reference: 'SN 35.95', title: 'The Discourse Concerning Māluṅkyaputta', page: `${T}/Short-Pieces/Malunkyaputtasuttam.htm` },
+  { id: 'sn44.1', reference: 'SN 44.1', title: 'The Discourse about Khemā', page: `${T}/Short-Pieces/Khemasuttam.htm` },
+  { id: 'sn48.10', reference: 'SN 48.10', title: 'The Second Discourse giving an Analysis of the Faculties', page: `${T}/Short-Pieces/Indriyavibhangasuttam.htm` },
   // The site numbers this AN 3.62; the build checks the Pāli and title against our numbering.
-  { id: 'an3.62', reference: 'AN 3.62', title: 'The Belief Systems', page: `${T}/Short-Pieces/Titthayatanasuttam.htm`, pali: 'Titthāyatanasuttaṃ' },
-  { id: 'an4.61', reference: 'AN 4.61', title: 'The Discourse about Suitable Deeds', page: `${T}/Short-Pieces/Pattakammasuttam.htm`, pali: 'Pattakammasuttaṃ' },
-  { id: 'an4.70', reference: 'AN 4.70', title: 'The Discourse on the Dishonest', page: `${T}/Short-Pieces/Adhammikasutta.htm`, pali: 'Adhammikasuttaṃ', commentary: true },
-  { id: 'an5.41', reference: 'AN 5.41', title: 'The Discourse on the Right Use (of Wealth)', page: `${T}/Short-Pieces/Adiyasuttam.htm`, pali: 'Ādiyasuttaṃ' },
-  { id: 'an6.37', reference: 'AN 6.37', title: 'The Six Factors of Giving', page: `${T}/Short-Pieces/Chalangadana.htm`, pali: 'Chaḷaṅgadānasuttaṃ', commentary: true },
-  { id: 'an8.51', reference: 'AN 8.51', title: 'The Discourse about Gotamī', page: `${T}/Gotamisuttani/01-Gotami.htm`, pali: 'Gotamīsuttaṃ' },
-  { id: 'an8.52', reference: 'AN 8.52', title: 'The Discourse about Advising', page: `${T}/Gotamisuttani/02-Advising.htm`, pali: 'Ovādasuttaṃ' },
-  { id: 'an8.53', reference: 'AN 8.53', title: 'The Brief Discourse', page: `${T}/Gotamisuttani/03-Brief.htm`, pali: 'Saṅkhittasutta' },
-  { id: 'an10.60', reference: 'AN 10.60', title: 'The Discourse to Girimānanda', page: `${T}/Short-Pieces/Girimanandasuttam.htm`, pali: 'Girimānandasuttaṃ' },
-  { id: 'an10.69', reference: 'AN 10.69', title: 'The First Discourse on the Bases for Talk', page: `${T}/Short-Pieces/Kathavatthu.htm`, pali: 'Paṭhamakathāvatthusuttaṃ' },
+  { id: 'an3.62', reference: 'AN 3.62', title: 'The Belief Systems', page: `${T}/Short-Pieces/Titthayatanasuttam.htm` },
+  { id: 'an4.61', reference: 'AN 4.61', title: 'The Discourse about Suitable Deeds', page: `${T}/Short-Pieces/Pattakammasuttam.htm` },
+  { id: 'an4.70', reference: 'AN 4.70', title: 'The Discourse on the Dishonest', page: `${T}/Short-Pieces/Adhammikasutta.htm`, commentary: true },
+  { id: 'an5.41', reference: 'AN 5.41', title: 'The Discourse on the Right Use (of Wealth)', page: `${T}/Short-Pieces/Adiyasuttam.htm` },
+  { id: 'an6.37', reference: 'AN 6.37', title: 'The Six Factors of Giving', page: `${T}/Short-Pieces/Chalangadana.htm`, commentary: true },
+  { id: 'an8.51', reference: 'AN 8.51', title: 'The Discourse about Gotamī', page: `${T}/Gotamisuttani/01-Gotami.htm` },
+  { id: 'an8.52', reference: 'AN 8.52', title: 'The Discourse about Advising', page: `${T}/Gotamisuttani/02-Advising.htm` },
+  { id: 'an8.53', reference: 'AN 8.53', title: 'The Brief Discourse', page: `${T}/Gotamisuttani/03-Brief.htm` },
+  { id: 'an10.60', reference: 'AN 10.60', title: 'The Discourse to Girimānanda', page: `${T}/Short-Pieces/Girimanandasuttam.htm` },
+  { id: 'an10.69', reference: 'AN 10.69', title: 'The First Discourse on the Bases for Talk', page: `${T}/Short-Pieces/Kathavatthu.htm` },
   { id: 'ds1.1', reference: 'Dhs Mātikā (triads)', title: 'The Matrix: Triads', page: `${T}/Abhidhammamatika/01-Tikamatika.htm` },
   { id: 'ds1.2', reference: 'Dhs Mātikā (pairs)', title: 'The Matrix: Pairs', page: `${T}/Abhidhammamatika/02-Dukamatika.htm` },
   { id: 'ds1.3', reference: 'Dhs Mātikā (discourse pairs)', title: 'The Matrix: Pairs from the Discourses', page: `${T}/Abhidhammamatika/03-Suttantadukamatika.htm` },
@@ -86,7 +89,7 @@ function generated() {
   // Pārāyanavagga: the site's introductory verses and sixteen questions, then two epilogues = Snp 5.1–5.19.
   const pv = ['Parayanavaggo-00-Introduction', ...Array.from({ length: 16 }, (_, i) => `Parayanavaggo-${String(i + 1).padStart(2, '0')}`), 'Parayanavaggo-Epilogue-1', 'Parayanavaggo-Epilogue-2'];
   pv.forEach((file, i) => out.push({ id: `snp5.${i + 1}`, reference: `Snp 5.${i + 1}`, title: null, page: `${T}/Parayanavagga/${file}.htm` }));
-  SN5.forEach((name, i) => out.push({ id: `sn5.${i + 1}`, reference: `SN 5.${i + 1}`, title: null, page: `${T}/Bhikkhunisamyuttam/${String(i + 1).padStart(2, '0')}-${name}.htm`, pali: canon.load().byId.get(`sn5.${i + 1}`).title }));
+  SN5.forEach((name, i) => out.push({ id: `sn5.${i + 1}`, reference: `SN 5.${i + 1}`, title: null, page: `${T}/Bhikkhunisamyuttam/${String(i + 1).padStart(2, '0')}-${name}.htm` }));
   return out;
 }
 
@@ -109,15 +112,20 @@ async function get(path) {
 export const words = (text) => canon.fold(String(text).replace(/<[^>]*>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' '))
   .replace(/[-‐]/g, '').replace(/[^a-z]+/g, ' ').trim().split(' ').filter(Boolean);
 export const grams = (ws) => { const s = new Set(); for (let i = 0; i + 2 < ws.length; i += 1) s.add(`${ws[i]} ${ws[i + 1]} ${ws[i + 2]}`); return s; };
+/** Removes the translator's pop-up notes (<span class="TT"><span>note</span><sup></sup></span>). */
+const stripNotes = (html) => html.replace(/<span\b[^>]*class=["']TT["'][^>]*>\s*<span\b[^>]*>[^]*?<\/span>\s*<sup\b[^>]*><\/sup>\s*<\/span>/gi, ' ');
 /** The Pāli lines of a line-by-line page: the site prints each Pāli line in bold above its English. */
 export function paliOf(html) {
-  const noNotes = html.replace(/<span[^>]*class=["']TT["'][^>]*>\s*<span[^>]*>[^]*?<\/span>\s*<sup[^>]*><\/sup>\s*<\/span>/gi, ' ');
-  const bold = [...noNotes.matchAll(/<(b|strong)[^>]*>([^]*?)<\/>/gi)].map((m) => m[2]).join(' ');
+  const noNotes = stripNotes(html);
+  const bold = [...noNotes.matchAll(/<(b|strong)\b[^>]*>([^]*?)<\/\1>/gi)].map((m) => m[2]).join(' ');
   return bold.length > 200 ? bold : noNotes;
 }
+// The VRI text labels list items "(Ka) … (Kha) … (Ga)" (e.g. the Dhammasaṅgaṇī mātikā); editions that
+// print the list without them would otherwise share almost no 3-grams with it, so the labels are dropped.
+const ITEM_LABEL = /\((?:ka|kha|ga|gha|ṅa|ca|cha|ja|jha)\)/gi;
 const unitGrams = new Map();
 function gramsOf(u) {
-  if (!unitGrams.has(u.id)) unitGrams.set(u.id, grams(words(canon.segments(u).filter((s) => s.type !== 'heading').map((s) => s.text).join(' '))));
+  if (!unitGrams.has(u.id)) unitGrams.set(u.id, grams(words(canon.segments(u).filter((s) => s.type !== 'heading').map((s) => s.text.replace(ITEM_LABEL, ' ')).join(' '))));
   return unitGrams.get(u.id);
 }
 const unitVocab = new Map();
@@ -139,7 +147,31 @@ export function coverage(pageWords, u) {
   for (const x of g) if (page.has(x)) n += 1;
   return n / g.size;
 }
-const foldTitle = (t) => canon.fold(t).replace(/[^a-z]/g, '').replace(/(suttam|sutta)$/, '');
+/**
+ * Folded title for comparison. Square brackets mark the editor's additions on the site
+ * ("Dutiya[-indriya]vibhaṅgasuttaṁ"), so bracketed text is dropped before comparing.
+ */
+export const foldTitle = (t) => canon.fold(String(t).replace(/\[[^\]]*\]/g, '')).replace(/[^a-z]/g, '').replace(/(suttam|sutta)$/, '');
+/**
+ * The words printed in bold in the page's own headings (paragraphs of class Heading1–5, translator's
+ * notes removed), as printed. Read from the site, never from our canon, so that the SN/AN title check
+ * compares two independent witnesses. Words of fewer than five letters are left out.
+ */
+export function siteTitles(html) {
+  const out = [];
+  for (const m of stripNotes(html).matchAll(/<p\b[^>]*class=["']Heading\d["'][^>]*>([^]*?)<\/p>/gi)) {
+    const bold = [...m[1].matchAll(/<(b|strong)\b[^>]*>([^]*?)<\/\1>/gi)].map((b) => b[2]).join(' ').replace(/<[^>]*>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ');
+    for (const w of bold.split(/[\s.,;:()0-9]+/)) {
+      const word = w.replace(/^[-‐]+|[-‐]+$/g, '');
+      if (canon.fold(word).replace(/[^a-z]/g, '').length >= 5) out.push(word);
+    }
+  }
+  return [...new Set(out)];
+}
+/** The site's heading word that agrees with our Pāli title, or undefined. */
+export const agreeingTitle = (titles, ourTitle) => titles.find((t) => foldTitle(t) === foldTitle(ourTitle));
+/** The heading words worth quoting when no title agrees: the ones that look like sutta titles. */
+const suttaWords = (titles) => titles.filter((t) => /sutta(m)?$/.test(canon.fold(t).replace(/[^a-z]/g, '')));
 
 async function partsOf(work) {
   if (work.page) return [work.page];
@@ -176,7 +208,12 @@ async function main() {
     const why = [];
     if (cov < MIN_COVERAGE) why.push(`Pāli coverage ${cov.toFixed(2)} < ${MIN_COVERAGE}`);
     if (rivals.length) why.push(`also matches ${rivals.slice(0, 3).map((r) => `${r.id} (${r.cov.toFixed(2)})`).join(', ')}`);
-    if (/^(sn|an)\d/.test(u.id) && (!work.pali || foldTitle(work.pali) !== foldTitle(u.title))) why.push(`title "${work.pali}" does not agree with "${u.title}"`);
+    const titles = siteTitles(html);
+    const paliTitle = agreeingTitle(titles, u.title);
+    if (/^(sn|an)\d/.test(u.id) && !paliTitle) {
+      const shown = suttaWords(titles);
+      why.push(`site heading title ${shown.length ? shown.map((t) => `"${t}"`).join(', ') : '(none found)'} does not agree with "${u.title}"`);
+    }
     if (why.length) { rejected.push({ id: work.id, page: parts[0], why: why.join('; ') }); continue; }
     const pageTitle = (html.match(/<title>([^<]*)<\/title>/i)?.[1] || '').trim();
     links[u.id] = {
@@ -184,7 +221,8 @@ async function main() {
       ...(parts.length > 1 ? { parts } : {}),
       reference: work.reference,
       title: work.title || pageTitle.replace(/^.*? - /, '') || null,
-      match: work.match || (/^(sn|an)\d/.test(u.id) ? 'number+title+pali' : 'number+pali'),
+      match: work.match || (paliTitle ? 'number+title+pali' : 'number+pali'),
+      ...(paliTitle ? { pali_title: paliTitle } : {}),
       coverage: Number(cov.toFixed(2)),
       ...(work.commentary ? { commentary: true } : {}),
     };
@@ -198,7 +236,7 @@ async function main() {
       license_url: 'https://creativecommons.org/licenses/by-sa/3.0/',
       notice_url: 'https://ancient-buddhist-texts.net/Miscellaneous/Copyright-Notice.htm',
       checked: '2026-11-01',
-      policy: `Linked only when the site names the text and its Pāli covers at least ${MIN_COVERAGE * 100}% of the VRI text (word 3-grams) and no other text comes within ${MARGIN} of it; SN/AN also need the Pāli title to agree.`,
+      policy: `Linked only when the site names the text and its Pāli lines (English and notes set aside) cover at least ${MIN_COVERAGE * 100}% of the VRI text (word 3-grams) and no other text comes within ${MARGIN} of it; SN/AN also need the Pāli title printed in the page heading (pali_title) to agree with ours.`,
     },
     links: Object.fromEntries(Object.entries(links).sort(([a], [b]) => a.localeCompare(b, 'en', { numeric: true }))),
   };

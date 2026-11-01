@@ -6,6 +6,7 @@ import * as canon from '../src/canon.mjs';
 import * as english from '../src/english.mjs';
 import { fetchPublic, ALLOWED_HOSTS } from '../src/http.mjs';
 import { liveCache } from '../src/cache.mjs';
+import { paliOf, siteTitles, agreeingTitle, foldTitle, words } from '../scripts/anandajoti/build.mjs';
 
 const index = JSON.parse(readFileSync(new URL('../server/data/anandajoti.json', import.meta.url), 'utf8'));
 const entries = Object.entries(index.links);
@@ -60,12 +61,57 @@ test('the site\'s own references resolve to the linked text with the bundled can
   assert.ok(checked >= 100, `checked ${checked}`);
 });
 
-test('SN and AN are never linked by number alone', () => {
+test('SN and AN are never linked by number alone: the site\'s own heading title agrees with ours', () => {
+  let checked = 0;
   for (const [id, l] of entries) {
-    if (/^(sn|an)\d/.test(id)) assert.match(l.match, /title/, id);
+    // Any link that claims title evidence must carry the title read from the site, and it must agree with the bundled canon.
+    if (/title/.test(l.match) || /^(sn|an)\d/.test(id)) {
+      assert.equal(l.match, 'number+title+pali', id);
+      assert.equal(typeof l.pali_title, 'string', `${id} has no pali_title read from the site`);
+      assert.equal(foldTitle(l.pali_title), foldTitle(canon.resolve(id).unit.title), `${id}: site "${l.pali_title}" vs ours "${canon.resolve(id).unit.title}"`);
+      checked += 1;
+    }
   }
+  assert.ok(entries.filter(([id]) => /^(sn|an)\d/.test(id)).length >= 15);
+  assert.ok(checked >= 15, `checked ${checked}`);
   // The site numbers Titthāyatanasutta "AN 3.62"; in our numbering AN 3.62 is the Bhayasutta, so it must not be linked there.
   assert.equal(index.links['an3.62'], undefined);
+  // Heading titles that differ from ours (Bhikkhunovādaka- for AN 8.52, Māluṅkya- for SN 35.95) are not linked.
+  assert.equal(index.links['an8.52'], undefined);
+  assert.equal(index.links['sn35.95'], undefined);
+});
+
+test('paliOf keeps the bold Pāli lines and sets the English and the notes aside', () => {
+  const html = page(`<p class="Heading3"><b>10. Bāhiyasuttaṁ</b><br>The Discourse about Bāhiya</p>
+${'<p><b>Evaṁ me sutaṁ: ekaṁ samayaṁ Bhagavā Sāvatthiyaṁ viharati <span class="TT"><span>BJT reads Sāvatthiyaṁ</span><sup class="autonumber"></sup></span></b><br>Thus I heard: at one time the Fortunate One was dwelling near Sāvatthī</p>\n'.repeat(6)}`);
+  const pali = paliOf(html);
+  assert.match(pali, /Evaṁ me sutaṁ/);
+  assert.doesNotMatch(pali, /Thus I heard|Fortunate One|BJT reads/);
+  assert.ok(pali.length < html.length / 2);
+  assert.deepEqual(words('Evaṁ me sutaṁ').slice(0, 3), ['evam', 'me', 'sutam']);
+});
+
+test('siteTitles reads the Pāli title from the page heading, without the notes', () => {
+  assert.deepEqual(siteTitles('<p class="Heading1"><b>SN 5. Bhikkhunīsaṁyuttaṁ</b><br>The Thematic Discourses</p><p class="Heading3"><b>2. Somāsuttaṁ</b><br>The Discourse about Somā</p>'), ['Bhikkhunīsaṁyuttaṁ', 'Somāsuttaṁ']);
+  const advising = siteTitles('<p class="Heading3"><b>Bhikkhunovādakasuttaṁ <span class="TT"><span>PTS, RTE omit; ChS: <vr>Ovādasuttaṁ</vr>.</span><sup class="autonumber"></sup></span></b><br>The Discourse about Advising</p>');
+  assert.deepEqual(advising, ['Bhikkhunovādakasuttaṁ']);
+  assert.equal(agreeingTitle(advising, 'Ovādasuttaṃ'), undefined);
+  // Square brackets are the editor's additions.
+  assert.equal(agreeingTitle(siteTitles('<p class="Heading1"><b>Dutiya[-indriya]vibhaṅgasuttaṁ<br> <small>(SN 48.10)</small></b></p>'), 'Dutiyavibhaṅgasuttaṃ'), 'Dutiya[-indriya]vibhaṅgasuttaṁ');
+  assert.deepEqual(siteTitles('<p class="Heading3">The Request</p>'), []);
+});
+
+test('each part page of a multi-page work cites that work', () => {
+  const multi = entries.filter(([, l]) => l.parts);
+  assert.ok(multi.length >= 5);
+  for (const [id, l] of multi) {
+    for (const p of l.parts) {
+      let got;
+      try { got = canon.resolve(`https://ancient-buddhist-texts.net${p}`).unit.id; } catch (e) { got = e.message; }
+      assert.equal(got, id, p);
+    }
+  }
+  assert.equal(canon.resolve('https://ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/02-Prevent-Vajji-Decline.htm').unit.id, 'dn16');
 });
 
 test('available() lists the new source with an aj: translation_id and licence', () => {

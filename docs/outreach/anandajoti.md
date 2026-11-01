@@ -11,7 +11,7 @@
 
 - The address `anandajoti@gmail.com` appears on https://ancient-buddhist-texts.net/Reference/DPPN.htm. The home page itself shows no email, and points to https://linktr.ee/anandajoti.
 - The home page shows no licence statement, but the site's Copyright Notice (https://ancient-buddhist-texts.net/Miscellaneous/Copyright-Notice.htm, May 2013) gives CC BY-SA 3.0 Unported with attribution to Ānandajoti Bhikkhu, and the footer on every page links CC BY-SA 4.0. Question 1 asks which he prefers us to cite.
-- Since 1 November 2026 the tool links 150 of his pages and fetches them live with attribution (see docs/sources.md). If he asks for links only, switch off the `aj:` retrieval and keep the links.
+- Since 1 November 2026 the tool links 153 of his pages and fetches them live with attribution (see docs/sources.md). If he asks for links only, switch off the `aj:` retrieval and keep the links.
 - A separate letter (dppn.md) asks about the revised DPPN. The two can be merged into one email if preferred.
 - Fill in the maintainer's name and reply-to address. Only the maintainer sends this letter; agents never send it.
 - After sending, update the status in [README.md](README.md). Record the reply in [docs/sources.md](../sources.md).

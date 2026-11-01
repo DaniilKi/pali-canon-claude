@@ -93,6 +93,8 @@ export function load() {
   for (const [id, links] of Object.entries(translations)) {
     for (const link of links) {
       if (link.url) urlIndex.set(link.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\.html?$/, ''), id);
+      // A work spread over several pages (e.g. DN 16 on Ancient Buddhist Texts): each part page cites the work.
+      for (const part of link.parts || []) urlIndex.set(`ancient-buddhist-texts.net${part}`.replace(/\.html?$/, ''), id);
     }
   }
   data = { canon, byId, ranges, translations, urlIndex, search: null };
