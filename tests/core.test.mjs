@@ -231,6 +231,8 @@ test('link check covers every translation link over a rotation of daily samples'
   const real = collectLinks(JSON.parse(await readFile(new URL('../server/data/translations.json', import.meta.url), 'utf8')));
   assert.ok(real.length > 1000);
   for (const link of real) assert.ok(/^https:\/\/(www\.)?(dhammatalks|accesstoinsight)\.org\//.test(link.url), link.url);
+});
+
 test('legal and community documents exist and are linked from the manifest', async () => {
   const { readFile } = await import('node:fs/promises');
   const read = (p) => readFile(new URL(`../${p}`, import.meta.url), 'utf8');
@@ -250,6 +252,8 @@ test('legal and community documents exist and are linked from the manifest', asy
     ['standing', 'permission', 'respect', 'durability', 'verifiability']);
   assert.match(await read('.github/ISSUE_TEMPLATE/bug.yml'), /^name: Bug report$/m);
   assert.match(await read('.github/ISSUE_TEMPLATE/config.yml'), /security\/advisories\/new/);
+});
+
 test('npm package: bin starts the bundled server with a portable shebang', async () => {
   const { readFileSync, existsSync } = await import('node:fs');
   const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
@@ -283,7 +287,9 @@ test('version is the same in package.json, manifest.json, plugin.json and the se
   const version = JSON.parse(read('package.json')).version;
   assert.equal(JSON.parse(read('manifest.json')).version, version, 'manifest.json');
   assert.equal(JSON.parse(read('.claude-plugin/plugin.json')).version, version, '.claude-plugin/plugin.json');
-  assert.ok(read('src/index.mjs').includes(`const VERSION = '${version}'`), 'src/index.mjs VERSION');
+  assert.ok(read('src/server.mjs').includes(`export const VERSION = '${version}'`), 'src/server.mjs VERSION');
+});
+
 test('live-response cache: LRU order, TTL, byte budget, shared in-flight fetch, failures not cached', async () => {
   const { LruCache } = await import('../src/cache.mjs');
   let clock = 0;
@@ -408,6 +414,8 @@ test('rate limit: client IP comes from the trusted proxy hop, not a forged X-For
     http.closeAllConnections?.();
     await new Promise((r) => http.close(r));
   }
+});
+
 test('server.json for the MCP Registry is consistent and refuses placeholders at publish time', async () => {
   const { checkServerJson, REGISTRY_NAME, NPM_PACKAGE, PLACEHOLDER } = await import('../scripts/check-server-json.mjs');
   assert.deepEqual(checkServerJson(), []);
@@ -419,6 +427,8 @@ test('server.json for the MCP Registry is consistent and refuses placeholders at
   assert.ok(!checkServerJson({ publish: true }).some((p) => /placeholder/i.test(p)));
   // The guard itself still recognises the placeholder address.
   assert.ok(PLACEHOLDER.test('https://PLACEHOLDER-hosted-endpoint-issue-5.invalid/mcp'));
+});
+
 test('Claude Code plugin and marketplace manifests follow the documented schema', async () => {
   const { readFileSync, existsSync } = await import('node:fs');
   const root = new URL('../', import.meta.url);
@@ -466,6 +476,8 @@ test('Claude Code plugin and marketplace manifests follow the documented schema'
   }
   // A top-level bin/ folder stops claude.ai and Cowork from installing the plugin.
   assert.ok(!existsSync(new URL('bin', root)), 'no top-level bin/ directory');
+});
+
 test('Codex plugin packaging is consistent with the Claude plugin', async () => {
   const { readFileSync, existsSync } = await import('node:fs');
   const root = new URL('../', import.meta.url);
@@ -507,6 +519,9 @@ test('Codex plugin packaging is consistent with the Claude plugin', async () => 
     assert.match(yaml, /transport: "stdio"/, skill);
     assert.match(yaml, new RegExp(`command: "${servers['pali-canon'].command}"`), skill);
     assert.match(yaml, /command: "node"/, skill);
+  }
+});
+
 test('Gemini extension stays in step with the package and the skills', async () => {
   const { readFileSync, existsSync } = await import('node:fs');
   const root = new URL('../', import.meta.url);
@@ -526,7 +541,7 @@ test('Gemini extension stays in step with the package and the skills', async () 
   assert.ok(server.args[0].endsWith('server${/}index.cjs'));
   assert.ok(existsSync(new URL('server/index.cjs', root)), 'server/index.cjs must be committed');
   assert.ok(existsSync(new URL('server/data/canon.json.gz', root)), 'server/data must be committed');
-  const tools = [...read('src/index.mjs').matchAll(/tool\('([a-z_]+)'/g)].map((m) => m[1]);
+  const tools = [...read('src/server.mjs').matchAll(/tool\('([a-z_]+)'/g)].map((m) => m[1]);
   for (const skill of ['study', 'compare', 'pali-word']) {
     const toml = read(`commands/${skill}.toml`);
     assert.match(toml, /^description = "[^"\n]+"$/m, skill);
@@ -536,6 +551,8 @@ test('Gemini extension stays in step with the package and the skills', async () 
     }
     assert.ok(existsSync(new URL(`skills/${skill}/SKILL.md`, root)), skill);
   }
+});
+
 test('editor install guide: one-click links and configs all start npx -y pali-canon-mcp', async () => {
   const { readFileSync } = await import('node:fs');
   const { installLinks, ARGS } = await import('../scripts/install-links.mjs');
@@ -568,12 +585,14 @@ test('editor install guide: one-click links and configs all start npx -y pali-ca
     else assert.equal(server.command, 'node');
   }
   assert.match(doc, /```yaml\nextensions:\n  pali-canon:\n[\s\S]*?cmd: npx\n    args: \["-y", "pali-canon-mcp"\]/);
+});
+
 test('local-clients guide lists every tool, with offline tools marked correctly', async () => {
   const { readFileSync } = await import('node:fs');
   const read = (p) => readFileSync(new URL(p, import.meta.url), 'utf8').replace(/\r\n/g, '\n');
-  const source = read('../src/index.mjs');
+  const source = read('../src/server.mjs');
   const guide = read('../docs/install/local-clients.md');
-  const starts = [...source.matchAll(/^tool\('([a-z_]+)', '([^']*)'/gm)];
+  const starts = [...source.matchAll(/^\s*tool\('([a-z_]+)', '([^']*)'/gm)];
   const tools = starts.map((m, i) => ({
     name: m[1],
     description: m[2],
@@ -591,6 +610,8 @@ test('local-clients guide lists every tool, with offline tools marked correctly'
   const jsonBlocks = [...guide.matchAll(/```json\n([\s\S]*?)```/g)].map((m) => m[1]);
   assert.ok(jsonBlocks.length >= 2, 'expected JSON examples for LM Studio and oterm');
   for (const block of jsonBlocks) assert.doesNotThrow(() => JSON.parse(block));
+});
+
 test('skills follow the Agent Skills spec and declare the MCP server dependency', async () => {
   const { readFileSync, readdirSync } = await import('node:fs');
   const dir = new URL('../skills/', import.meta.url);
