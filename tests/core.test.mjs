@@ -150,3 +150,17 @@ test('a verse inherits its chapter translations, with a note', () => {
   assert.ok(desc.english.length > 0);
   assert.ok(desc.notes.some((n) => /whole Dhp 179/.test(n)));
 });
+
+test('server.json for the MCP Registry is consistent and refuses placeholders at publish time', async () => {
+  const { checkServerJson, REGISTRY_NAME, NPM_PACKAGE, PLACEHOLDER } = await import('../scripts/check-server-json.mjs');
+  assert.deepEqual(checkServerJson(), []);
+  // Registry namespaces are compared case-sensitively against the GitHub login (registry#689).
+  assert.equal(REGISTRY_NAME, 'io.github.DaniilKi/pali-canon');
+  assert.equal(NPM_PACKAGE, 'pali-canon-mcp');
+  // The hosted endpoint is not live yet (#5): publish mode must refuse the placeholder remote.
+  const { readFileSync } = await import('node:fs');
+  const server = JSON.parse(readFileSync(new URL('../server.json', import.meta.url), 'utf8'));
+  if ((server.remotes || []).some((r) => PLACEHOLDER.test(r.url))) {
+    assert.ok(checkServerJson({ publish: true }).some((p) => /placeholder/.test(p)));
+  }
+});

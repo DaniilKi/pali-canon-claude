@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="Pali Canon icon: a stack of palm-leaf manuscript leaves">
+  <title>Pali Canon</title>
+  <rect width="256" height="256" rx="48" fill="#7a2e1d"/>
+  <g fill="#f3d9a4" stroke="#5a1f12" stroke-width="4">
+    <rect x="36" y="64" width="184" height="34" rx="17"/>
+    <rect x="36" y="111" width="184" height="34" rx="17"/>
+    <rect x="36" y="158" width="184" height="34" rx="17"/>
+  </g>
+  <g stroke="#c9963b" stroke-width="3" stroke-linecap="round">
+    <line x1="62" y1="81" x2="194" y2="81"/>
+    <line x1="62" y1="128" x2="194" y2="128"/>
+    <line x1="62" y1="175" x2="194" y2="175"/>
+  </g>
+  <g fill="#7a2e1d">
+    <circle cx="84" cy="81" r="6"/><circle cx="172" cy="81" r="6"/>
+    <circle cx="84" cy="128" r="6"/><circle cx="172" cy="128" r="6"/>
+    <circle cx="84" cy="175" r="6"/><circle cx="172" cy="175" r="6"/>
+  </g>
+  <path d="M84 48 V208 M172 48 V208" stroke="#e8b04a" stroke-width="4" stroke-linecap="round"/>
+</svg>
