@@ -1,0 +1,49 @@
+name: npx install
+# Packs the npm tarball, installs it in an empty folder on each OS and starts the server
+# over stdio (initialize, tools/list, one offline tool call). Proves `npx -y pali-canon-mcp`
+# works and finds its bundled data relative to the installed server, not the repo.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  npx:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [20, 24]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Pack the npm tarball
+        run: |
+          mkdir -p "$RUNNER_TEMP/pack"
+          npm pack --pack-destination "$RUNNER_TEMP/pack"
+          ls -l "$RUNNER_TEMP/pack"
+      - name: Install the tarball in an empty project
+        working-directory: ${{ runner.temp }}
+        run: |
+          mkdir install && cd install
+          npm init -y >/dev/null
+          npm install --no-audit --no-fund "$RUNNER_TEMP"/pack/*.tgz
+      - name: Start the installed server offline (npx --offline)
+        working-directory: ${{ runner.temp }}/install
+        env:
+          npm_config_offline: 'true'
+        run: node "$GITHUB_WORKSPACE/scripts/npx-check.mjs" npx --offline --no pali-canon-mcp
+      - name: Start it the way MCP clients do (npx -y, fresh folder)
+        working-directory: ${{ runner.temp }}
+        run: |
+          mkdir fresh && cd fresh
+          tgz=$(ls "$RUNNER_TEMP"/pack/*.tgz)
+          node "$GITHUB_WORKSPACE/scripts/npx-check.mjs" npx -y --package="$tgz" pali-canon-mcp
