@@ -14,6 +14,7 @@ import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/
 import { createServer as createMcpServer, VERSION } from './server.mjs';
 import { liveCache } from './cache.mjs';
 import { load } from './canon.mjs';
+import { registerChatgptWidget } from './chatgpt-widget.mjs';
 
 const MAX_BODY = 1024 * 1024;
 const CORS = {
@@ -123,11 +124,13 @@ function readBody(req) {
 
 /**
  * Create (but do not start) the HTTP server. Options default to environment variables:
- * RATE_LIMIT_PER_MINUTE (120; 0 disables), TRUST_PROXY (number of trusted proxy hops; 1 behind Fly.io/Render).
+ * RATE_LIMIT_PER_MINUTE (120; 0 disables), TRUST_PROXY (number of trusted proxy hops; 1 behind Fly.io/Render),
+ * CHATGPT_WIDGET (1/true/yes/on adds the ChatGPT reading widget: tool read_passage_widget and its UI templates).
  */
 export function createHttpServer({
   rateLimitPerMinute = intEnv('RATE_LIMIT_PER_MINUTE', 120),
   trustProxy = parseTrustProxy(process.env.TRUST_PROXY),
+  chatgptWidget = /^(1|true|yes|on)$/i.test(String(process.env.CHATGPT_WIDGET ?? '').trim()),
 } = {}) {
   const limiter = new RateLimiter({ perMinute: rateLimitPerMinute });
   const started = Date.now();
@@ -151,6 +154,7 @@ export function createHttpServer({
           uptime_seconds: Math.round((Date.now() - started) / 1000),
           counters, cache: liveCache.stats(),
           rate_limit_per_minute: rateLimitPerMinute || null,
+          chatgpt_widget: Boolean(chatgptWidget),
           privacy: 'No request content, tool arguments, IP addresses or user agents are logged; only these aggregate counts are kept in memory.',
         });
         return;
@@ -194,6 +198,7 @@ export function createHttpServer({
 
       for (const [key, value] of Object.entries(CORS)) res.setHeader(key, value);
       const server = createMcpServer();
+      if (chatgptWidget) registerChatgptWidget(server);
       const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined, enableJsonResponse: true });
       res.on('close', () => { transport.close().catch(() => {}); server.close().catch(() => {}); });
       await server.connect(transport);
