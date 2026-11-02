@@ -23,7 +23,7 @@ Dear Dharmamitra and DharmaNexus team,
 
 I maintain **Pali Canon for Claude** (https://github.com/DaniilKi/pali-canon-claude), a free, open-source tool that helps AI assistants such as Claude look up and quote the Pāli Canon accurately instead of paraphrasing it from memory. When someone asks about a sutta, the assistant retrieves the actual passage from a named source and gives its citation (for example "MN 10" or "M i 55"), the translator or editor, the licence and a link to the original page. The tool is a library, not a teacher: it gives no rulings on practice and does not rank teachers or traditions.
 
-**How we would use your work.** We plan a feature that, for any text, lists other passages that share wording with it. We will build part of this ourselves from the VRI edition and from the commentaries' own cross-references. Your computed text-reuse data for the Pāli canon would make it far better. We would show each parallel with "DharmaNexus" as its source, the licence you specify and a link to the passage in your database.
+**How we would use your work.** The tool now lists, for any text, other passages that share wording with it. We built this ourselves from the VRI edition alone: passages shared word for word, and the commentaries' own cross-references. It finds only exact shared wording within the Pāli canon; your computed text-reuse data would make it far better. We would show each parallel with "DharmaNexus" as its source, the licence you specify and a link to the passage in your database.
 
 These safeguards apply to everything the tool returns, and we would keep them for your work:
 

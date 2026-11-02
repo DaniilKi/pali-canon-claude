@@ -56,7 +56,7 @@ Claude quotes only what it retrieved, names the translator, and keeps four thing
 
 ## What you can ask it
 
-Pali Canon gives the AI **30 tools**, 4 prompts, 3 reference resources and 5 skills. You do not need to know their names: ask in your own words and the AI picks the right tool. The tool names are shown in `code` for anyone who wants to check. Everything works offline unless marked *(internet)*.
+Pali Canon gives the AI **31 tools**, 4 prompts, 3 reference resources and 5 skills. You do not need to know their names: ask in your own words and the AI picks the right tool. The tool names are shown in `code` for anyone who wants to check. Everything works offline unless marked *(internet)*.
 
 ### Study
 
@@ -67,6 +67,7 @@ Pali Canon gives the AI **30 tools**, 4 prompts, 3 reference resources and 5 ski
 - **Read and compare translations** *(internet)*. Ṭhānissaro Bhikkhu, the translators on Access to Insight and Ānandajoti Bhikkhu, always named and attributed (`get_translation`, `compare_translations`, `search_access_to_insight`, `get_access_to_insight_text`).
 - **Look up a Pāli word** in the Digital Pāḷi Dictionary (`lookup_pali`, live, answering from a bundled subset when offline), or **analyse a passage word by word**: split, grammar, root and meaning of every word (`analyse_passage`). A pronunciation guide explains how to read Pāli aloud (`pali://pronunciation`).
 - **Read the commentary.** The traditional Pāli commentary (Aṭṭhakathā) on a text, aligned by VRI paragraph and always labelled as commentary, not canon (`get_commentary`, or `get_text` with `commentary: true`).
+- **Find parallels and cross-references.** Other texts that share a passage with this one word for word, and texts the traditional commentary cites when explaining it, each link saying where it comes from and how it was matched, plus the SuttaCentral link for parallels in other traditions (`get_parallels`). See [D59](docs/decisions.md).
 - **Read later Pāli classics.** The Visuddhimagga ("Vism 1.1", "Vism §19"), the Abhidhammatthasaṅgaha ("Abhidh-s 1.4"), the sub-commentaries (Ṭīkā) and chronicles such as the Mahāvaṃsa, labelled `canonical: false` (`get_post_canonical`, `search_post_canonical`, or `search_texts` with `include_post_canonical`). Visuddhimagga PTS pages cannot be looked up yet.
 - **Ask who or where.** "Who was Anāthapiṇḍika?" lists the texts that name a person or place and links to the Dictionary of Pāli Proper Names (`lookup_name`).
 - **Explore by topic or list.** "Texts on anger", "What are the five hindrances?": over 400 topics from Access to Insight's indexes and 37 numbered lists with their source passages (`topic`, `list_topics`, `dhamma_list`). See [topics and lists](docs/topics.md).
@@ -157,7 +158,7 @@ Model-level runs, where Claude or Codex answers the questions with the server co
 
 ## Install
 
-Pick the app you use. Every option runs the same server, with the same 30 tools.
+Pick the app you use. Every option runs the same server, with the same 31 tools.
 
 ### Claude Desktop (easiest)
 
