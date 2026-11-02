@@ -37,6 +37,7 @@ export const TOOL_TITLES = {
   dhamma_list: "Numbered teaching lists",
   verify_quote: "Verify a quotation",
   vinaya_rule: "Pātimokkha rule",
+  get_commentary: "Read the commentary",
 };
 
 export const VERSION = '2.0.0';

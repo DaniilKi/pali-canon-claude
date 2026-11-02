@@ -8,6 +8,8 @@ The [MIT licence](LICENSE) covers this project's own software and documentation.
 
 ## Citation numbering
 
+`server/data/commentary.json.gz` contains the commentaries (Aṭṭhakathā) of the same VRI repository and commit (`romn/*.att.xml`), under the same terms: free for non-commercial use, with attribution to the Vipassana Research Institute. The text is reproduced without changes, apart from markup removal; the build adds only the alignment of each passage to the root paragraph it explains. `get_commentary` returns VRI's attribution and terms with every result and labels the text as commentary.
+
 The standard citation IDs (for example `sn46.131-140`, `pli-tv-bu-vb-pj1`) follow the public numbering scheme used by SuttaCentral and Bhikkhu Bodhi. To align those numbers with the VRI text, the build reads the file and segment names and the opening words of the Mahāsaṅgīti Pāli root in [bilara-data](https://github.com/suttacentral/bilara-data), which is marked Public Domain Mark 1.0. Only the resulting number-to-location mapping and the public-domain Pāli titles are kept. No SuttaCentral translation, comment or other text is fetched or bundled. SuttaCentral [asks](https://suttacentral.net/licensing) that its content not be used for generative AI or apps built on it, and this project respects that by linking to SuttaCentral rather than retrieving from it.
 
 ## dhammatalks.org (Ṭhānissaro Bhikkhu)

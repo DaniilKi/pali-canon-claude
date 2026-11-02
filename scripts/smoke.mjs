@@ -81,6 +81,7 @@ try {
   await call('vinaya_rule', { rule: 'Pc 5' }, (d) => { assert.equal(d.canonical_text.id, 'pli-tv-bu-vb-pc5'); assert.match(d.buddhist_monastic_code.url, /dhammatalks\.org\/vinaya\/bmc\/Section0016\.html#Pc5$/); });
   await call('abhidhamma_matika', { section: 'tika 1' }, (d) => assert.equal(d.entries[0].items[0].text, 'kusalā dhammā.'));
   await call('patthana_condition', { name: 'hetu' }, (d) => { assert.equal(d.condition.definition.citation, 'Paṭṭh 1.1'); assert.equal(d.condition.dictionary.tool, 'lookup_pali'); });
+  if (tools.some((t) => t.name === 'get_commentary')) await call('get_commentary', { uid: 'MN 10', limit: 3 }, (d) => { assert.equal(d.available, true); assert.match(d.label, /not the canon/); assert.equal(d.commentary, 'Papañcasūdanī'); });
   if (tools.some((t) => t.name === 'paritta')) await call('paritta', { name: 'Ratana' }, (d) => { assert.equal(d.text_id, 'kp6'); assert.ok(d.segments.length); });
   await fails('get_text', { uid: '../private' });
   await fails('resolve_reference', { reference: 'MN 153' }, /not in the canon index/);

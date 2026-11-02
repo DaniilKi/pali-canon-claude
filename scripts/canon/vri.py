@@ -1,5 +1,8 @@
 """Parse VRI Chaṭṭha Saṅgāyana TEI XML (romn) into a flat list of blocks.
 
+Used for the root texts (*.mul.xml) and the commentaries (*.att.xml, see
+build_commentary.py), which share the same markup.
+
 Each block keeps the visible Pāli text, its VRI paragraph number, the
 variant-reading notes, the page breaks of the printed editions it carries
 (P = Pali Text Society, M = Myanmar, V = VRI, T = Thai) and the stack of
@@ -18,6 +21,8 @@ PB = re.compile(r'<pb\b[^>]*ed="(\w)"[^>]*n="([^"]+)"[^>]*/?>')
 NOTE = re.compile(r'<note\b[^>]*>(.*?)</note\s*>', re.S)
 PARANUM = re.compile(r'<hi rend="paranum">.*?</hi>\s*(?:<hi rend="dot">.*?</hi>)?', re.S)
 TAG = re.compile(r'<[^>]+>')
+# Bold runs. In the commentaries (*.att.xml) these are the lemmas: words quoted from the root text.
+BOLD = re.compile(r'<hi rend="bold">(.*?)</hi\s*>', re.S)
 SPACE = re.compile(r'\s+')
 
 
@@ -96,6 +101,7 @@ def parse(path):
             'pages': pages,
             'page_offsets': offsets,
             'divs': [dict(d) for d in stack],
+            'bold': [b for b in (clean(x) for x in BOLD.findall(NOTE.sub('', body))) if b],
         })
     return blocks
 

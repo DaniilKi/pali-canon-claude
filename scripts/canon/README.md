@@ -6,7 +6,7 @@
 W=/tmp/pali-build && mkdir -p $W && cd $W
 # 1. VRI Chaṭṭha Saṅgāyana XML (romanised root texts only)
 git clone --depth 1 --filter=blob:none --no-checkout https://github.com/VipassanaTech/tipitaka-xml.git vri && cd vri
-git sparse-checkout init --no-cone && printf '/romn/*.mul.xml\n/romn/s0518m.nrf.xml\n/romn/s0520m.nrf.xml\n' > .git/info/sparse-checkout
+git sparse-checkout init --no-cone && printf '/romn/*.mul.xml\n/romn/*.att.xml\n/romn/s0518m.nrf.xml\n/romn/s0520m.nrf.xml\n' > .git/info/sparse-checkout
 git checkout main && VRI_COMMIT=$(git rev-parse HEAD) && cd ..
 # 2. Public-domain Mahāsaṅgīti root (citation numbering alignment only)
 git clone --depth 1 --filter=blob:none --no-checkout -b published https://github.com/suttacentral/bilara-data.git bilara && cd bilara
@@ -21,7 +21,8 @@ python3 scripts/canon/build_indexes.py ati $W/ati $W/ati-index.json
 python3 scripts/canon/build_indexes.py dhammatalks $W/dt-index.json
 python3 scripts/canon/validate.py $W/canon.json.gz $W/ati-index.json          # must report TOTAL problems: 0
 python3 scripts/canon/build_translations.py $W/canon.json.gz $W/dt-index.json $W/ati-index.json $W/translations.json
-cp $W/canon.json.gz $W/translations.json server/data/
+python3 scripts/canon/build_commentary.py $W/vri $VRI_COMMIT $W/canon.json.gz $W/commentary.json.gz   # writes commentary.json.gz.report.json
+cp $W/canon.json.gz $W/translations.json $W/commentary.json.gz server/data/
 node scripts/audit.mjs                                                         # must report failures: 0
 npm run check && npm run smoke -- --live
 ```
@@ -36,5 +37,6 @@ npm run check && npm run smoke -- --live
   - It caps each text at the next one, so no two texts overlap.
   - Texts that VRI abbreviates are flagged `approximate`.
   - It writes a report (`canon.json.gz.report.json`) of unplaced members and title differences.
+- `build_commentary.py` aligns the commentaries (`*.att.xml`, same VRI commit) to the texts. Each commentary passage starts at a numbered paragraph, the VRI number of the root paragraph it explains; the heading and introduction that open a text's commentary, and a Dhammapada or Jātaka story told before its verse, go with it. The bold words the commentary quotes are looked up in that root paragraph (only words found in at most 2% of the book's paragraphs count). The passage is aligned when they confirm the number, or when nothing contradicts it; it is left out when they fit another paragraph within 8 better. Numbered introductions (opening verses numbered 1, 2, 3… before the numbering restarts) and numbers out of sequence are not aligned. A numbered heading that opens a text ("3. Dukkhalakkhaṇavatthu", "2. Mahākoṭṭhikattheragāthāvaṇṇanā") always starts the next passage, never ends the one before; book front matter (n="0", "Namo tassa…") belongs to none. Books that restart their paragraph numbers (Jātaka, Apadāna, Buddhavaṃsa, Cariyāpiṭaka, Paṭisambhidāmagga, several Abhidhamma books) are split into segments, and a passage goes to one segment only (the one whose verse it quotes or whose paragraph its quotations fit, or on a tie the one the previous passage went to), else it stays unaligned. A quoted stanza that is the neighbouring paragraph's verse, or an opening heading that names a neighbouring text, rejects the number; the paragraph's own verse quoted in full, or a heading naming the text, confirms it when the quotations point elsewhere. The report gives, per collection, the passages aligned and rejected, the texts with commentary, the texts the commentary numbers (`cited`, `cited_aligned`, with the unaligned ones listed), and a control: how often the same check would accept the paragraph 7 further on (the false-alignment rate). `node scripts/audit.mjs` re-checks every alignment against the canon (in its segment), checks that no passage carries the next text's opening heading, holds coverage of the numbered texts to floors with a list of known exceptions, and spot-checks known passages in both directions.
 - `validate.py` checks the result independently against Access to Insight's PTS citations and its Thai/CDB cross-numbering.
 - `build_translations.py` links dhammatalks.org and ATI pages to texts by content (Pāli title, PTS page, neighbours' numbering offset), because both sites use PTS numbering for parts of SN and AN. Pages that cannot be matched with confidence are left unlinked.

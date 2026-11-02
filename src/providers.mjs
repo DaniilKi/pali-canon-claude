@@ -161,6 +161,8 @@ export function listSources() {
       { id: 'vri', name: canon.name, role: 'Pāli text of the whole Tipiṭaka, bundled offline (no network needed).', repository: canon.repository, version: canon.commit,
         attribution: canon.attribution, terms: canon.terms,
         numbering: 'Standard citation IDs (as used by SuttaCentral and Bhikkhu Bodhi) were aligned to the VRI text at build time; PTS page numbers come from VRI page markers.' },
+      { id: 'vri-atthakatha', name: 'Chaṭṭha Saṅgāyana Aṭṭhakathā (VRI), romn/*.att.xml', role: 'Commentaries (get_commentary), bundled offline (server/data/commentary.json.gz), aligned to the texts by VRI paragraph number and checked against the words they quote. Commentary, not scripture.',
+        repository: canon.repository, version: canon.commit, attribution: canon.attribution, terms: canon.terms },
       { id: 'dhammatalks', name: 'dhammatalks.org — Ṭhānissaro Bhikkhu', role: 'English translations (live).', url: 'https://www.dhammatalks.org/suttas/',
         license: 'CC BY-NC 4.0', fallback: 'Ṭhānissaro\'s earlier versions on Access to Insight.' },
       { id: 'dhammatalks-talks', name: 'dhammatalks.org — Dhamma talks by Ṭhānissaro Bhikkhu', role: 'Talk titles, dates and links found through the site\'s own search (find_talks; live, link-only: talk text is never fetched). Commentary, not scripture.',

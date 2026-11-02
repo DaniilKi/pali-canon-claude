@@ -173,6 +173,7 @@ What every tool declares, and the proposed `title`. "Open-world" (`openWorldHint
 | `list_topics` | Browse topics | yes | no | no | Bundled topic index. |
 | `dhamma_list` | Numbered teaching lists | yes | no | no | Bundled lists with Pāli members and their canonical passages. |
 | `verify_quote` | Verify a quotation | yes | no | yes | Pāli is matched offline; English quotations fetch the named translations live. |
+| `get_commentary` | Read the commentary | yes | no | no | Bundled VRI Aṭṭhakathā aligned to the text; labelled as commentary, not canon. |
 | `vinaya_rule` | Pātimokkha rule | yes | no | no | Bundled VRI Vinaya text plus a stored link to the Buddhist Monastic Code. |
 
 No tool writes, deletes, sends or stores anything, so none needs `destructiveHint: true`. The table must list exactly the live tools: `tests/connector-listing.test.mjs` fails when a tool (for example one added through `src/features/`) has no row here, or a row names a tool that no longer exists. Add the row in the same change that adds the tool; the directory re-reviews material changes to tools.
