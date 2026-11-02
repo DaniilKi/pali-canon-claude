@@ -53,3 +53,18 @@ npm run check && npm run smoke -- --live
 - `validate.py` checks the result independently against Access to Insight's PTS citations and its Thai/CDB cross-numbering.
 - `build_postcanonical.py` (#21) parses the VRI Ṭīkā and Añña books (`*.tik.xml`, `*.nrf.xml` except the Peṭakopadesa and Milindapañha already in the canon, the Visuddhimagga `e0101n`/`e0102n` and its Mahāṭīkā `e0103n`/`e0104n`) with `vri.py`, unchanged apart from markup removal. Titles and the Ṭīkā/Añña section come from VRI's own table of contents (`tipitaka.org/romn/tree.json`); ids are slugs of those titles. Output is gzip with mtime 0 (the bytes can still differ between zlib builds; nothing depends on them). `server/data/postcanonical.json.gz` holds every book with its text (about 14.5 MB gz, over the 12 MB target and accepted in decision D-21a: the package stays well under 60 MB, and the server needs no download, extra host or disk cache). `node scripts/audit.mjs` round-trips every block's citation (the one search returns) and fails above 16 MB.
 - `build_translations.py` links dhammatalks.org and ATI pages to texts by content (Pāli title, PTS page, neighbours' numbering offset), because both sites use PTS numbering for parts of SN and AN. Pages that cannot be matched with confidence are left unlinked.
+
+## Rebuilding the dictionary subset (DPD)
+
+`server/data/dpd.json.gz` is a compact subset of the Digital Pāḷi Dictionary (CC BY-NC-SA 4.0), used by `analyse_passage` and as the offline fallback of `lookup_pali`. Pin the release and check its SHA-256 (GitHub shows the digest on the release page) before building. The unpacked `dpd.db` is about 2.3 GB; delete it afterwards.
+
+```sh
+V=v0.4.20261026
+curl -sSLO https://github.com/digitalpalidictionary/dpd-db/releases/download/$V/dpd.db.tar.xz
+sha256sum dpd.db.tar.xz          # 62a3f55d285ae27f5e1d15492cd7bfa92e9e66a0b6bfed9ea97b58a28e346f49 for v0.4.20261026
+tar -xJf dpd.db.tar.xz           # dpd.db
+python scripts/dpd/build_dpd.py dpd.db server/data/canon.json.gz server/data/dpd.json.gz --archive-sha256 <sha256>
+node scripts/audit.mjs           # checks the pin (DPD_PIN in src/analyse.mjs), licence and word coverage (>= 98.5%)
+```
+
+When moving to a new release, update `DPD_PIN` in `src/analyse.mjs` and the release line in `THIRD_PARTY.md`. Rebuild the subset whenever `canon.json.gz` changes (the audit compares the canon commit). The tokeniser in `build_dpd.py` must stay in step with `tokenize()` and `wordParts()` in `src/analyse.mjs`.

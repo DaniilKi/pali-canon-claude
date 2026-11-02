@@ -39,7 +39,9 @@ Text-and-translation pages are fetched live from the "Texts and Translations" se
 
 ## Digital Pāḷi Dictionary
 
-Lookups go live to [dpdict.net](https://www.dpdict.net/). DPD is [CC BY-NC-SA 4.0](https://docs.dpdict.net/license/), by Bodhirasa Bhikkhu. No DPD data is bundled.
+Lookups go live to [dpdict.net](https://www.dpdict.net/). DPD is [CC BY-NC-SA 4.0](https://docs.dpdict.net/license/), by Bodhirasa Bhikkhu.
+
+`server/data/dpd.json.gz` is a compact subset of DPD release [v0.4.20261026](https://github.com/digitalpalidictionary/dpd-db/releases/tag/v0.4.20261026) (asset `dpd.db.tar.xz`, SHA-256 `62a3f55d285ae27f5e1d15492cd7bfa92e9e66a0b6bfed9ea97b58a28e346f49`; DOI [10.5281/zenodo.22979413](https://doi.org/10.5281/zenodo.22979413)), built by `scripts/dpd/build_dpd.py`: every headword and root, and the inflection map and deconstructor splits for the words of the bundled VRI texts. It is used by `analyse_passage` and by `lookup_pali` when dpdict.net is unreachable. It is a derivative of DPD and is shared under the same licence, **CC BY-NC-SA 4.0**, non-commercial, crediting “Digital Pāḷi Dictionary by Bodhirasa Bhikkhu”. Every result built from it returns this notice.
 
 ## Calendar code (ported, MIT)
 

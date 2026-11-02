@@ -102,7 +102,7 @@ Surveyed for [#35](https://github.com/DaniilKi/pali-canon-claude/issues/35) on 1
 
 | Source | Status | Why | Terms | Link |
 |---|---|---|---|---|
-| **Digital Pāḷi Dictionary** (Bodhirasa Bhikkhu) | **Live**; offline copy **planned** ([#22](https://github.com/DaniilKi/pali-canon-claude/issues/22), [#23](https://github.com/DaniilKi/pali-canon-claude/issues/23)) | The most complete and actively maintained Pāli dictionary, with grammar, roots, compounds and inflections | CC BY-NC-SA 4.0 | [dpdict.net](https://www.dpdict.net/) · [data releases](https://github.com/digitalpalidictionary/dpd-db/releases) · [licence](https://docs.dpdict.net/license/) |
+| **Digital Pāḷi Dictionary** (Bodhirasa Bhikkhu) | **Live**, plus a **bundled** compact subset of release v0.4.20261026 (headwords, grammar, roots, meanings, compound and sandhi splits) for word-by-word analysis and offline lookups ([#22](https://github.com/DaniilKi/pali-canon-claude/issues/22), [#23](https://github.com/DaniilKi/pali-canon-claude/issues/23)) | The most complete and actively maintained Pāli dictionary, with grammar, roots, compounds and inflections | CC BY-NC-SA 4.0 | [dpdict.net](https://www.dpdict.net/) · [data releases](https://github.com/digitalpalidictionary/dpd-db/releases) · [licence](https://docs.dpdict.net/license/) |
 | **PTS Pāli–English Dictionary** (Rhys Davids & Stede, 1921–25) | **To evaluate** | The classic dictionary; age suggests public domain in many countries | to confirm | [Digital Dictionaries of South Asia](https://dsal.uchicago.edu/dictionaries/pali/) |
 | **Dictionary of Pāli Proper Names** (Malalasekera, 1937–38) | **Linked; ask permission** ([#32](https://github.com/DaniilKi/pali-canon-claude/issues/32)). `lookup_name` is built but ships no entries | People and places in the canon. Public-domain status could not be confirmed; see [DPPN licence research](#dppn-licence-research) | unconfirmed; probably in copyright | [revised edition (Ānandajoti)](https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm) · [palikanon.com](https://www.palikanon.com/english/pali_names/dic_idx.html) |
 | **Buddhist Monastic Code** (Ṭhānissaro Bhikkhu) | **Planned, linked** ([#40](https://github.com/DaniilKi/pali-canon-claude/issues/40)) | Rule-by-rule explanation of the Vinaya | free distribution | [dhammatalks.org](https://www.dhammatalks.org/) |
@@ -166,7 +166,7 @@ Tools from other traditions that set the bar we measure against (details in the 
 | Pāli text | Bundled; no network needed |
 | Access to Insight | accesstoinsight.org → [bcbsit/ati](https://github.com/bcbsit/ati) on GitHub (the repository that deploys the site) → the same through the jsDelivr CDN → [digitalpalireader/accesstoinsight](https://github.com/digitalpalireader/accesstoinsight) |
 | Ṭhānissaro Bhikkhu | dhammatalks.org → his earlier version on Access to Insight (and its mirrors), with a note that it is the earlier version |
-| Dictionary | dpdict.net with retries; offline copy planned ([#23](https://github.com/DaniilKi/pali-canon-claude/issues/23)) |
+| Dictionary | dpdict.net with retries; when it is unreachable, the bundled DPD subset answers, labelled as offline ([#23](https://github.com/DaniilKi/pali-canon-claude/issues/23)) |
 
 ## Why SuttaCentral is linked, not used
 

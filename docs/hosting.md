@@ -95,6 +95,13 @@ translation cache full as well, a server near the 345 MB load-test peak comes cl
 check. If the host restarts for lack of memory, give it 768 MB or set a smaller `PALI_CANON_CACHE_MB`.
 See [verify-quote.md](verify-quote.md#memory).
 
+The bundled dictionary (`server/data/dpd.json.gz`, a subset of the Digital Pāḷi Dictionary) is loaded the
+first time `analyse_passage` is called or `lookup_pali` has to answer offline because dpdict.net cannot be
+reached, and it is then kept. Measured on 1 November 2026 (Windows 11, Node.js 26): about 0.9 s to load,
+about 170 MB more JavaScript heap and about 280 MB more resident memory. On top of the 345 MB load-test
+peak that is over 512 MB, so a host that offers `analyse_passage` should have 1 GB (or at least 768 MB with
+a smaller `PALI_CANON_CACHE_MB`).
+
 ## Deploy on Fly.io
 
 [Fly.io](https://fly.io) runs Docker images close to users. The repository includes `fly.toml`.
