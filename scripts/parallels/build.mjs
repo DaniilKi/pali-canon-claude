@@ -68,6 +68,7 @@ export function build() {
             'Relative references (anantarasutte, purimasutte, paṭhamasutte) are never resolved.',
             'A text citing itself is not a link.',
             'A sutta name is dropped when it is also the start of the title or DPD sutta name of another text (udaya / Udayamāṇavapucchā), when a Cūḷa- or Mahā- title ends in it, when a VRI reference in brackets next to it points at another text, or when it follows "Evaṃ me sutanti" (the commentary naming its own text).',
+            'A sutta name is dropped when a quotation next to it (just before, or introduced just after as what was said) comes from another text: the VRI reference on it does not point at the named text and another text holds more of the quotation than the named one.',
           ],
         },
         'shared-passage': {

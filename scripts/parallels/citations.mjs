@@ -219,6 +219,80 @@ export function parseRefs(inside) {
   return out;
 }
 
+/**
+ * The quotations next to a sutta name: the ‘‘…’’ quotation that ends at most 60 characters before it, and the one
+ * that starts at most 100 characters after it, introduced as what was said ("…suttena dīpetabbo. Vuttañhetaṃ (saṃ. ni. 1.176) – ‘‘…"), which may
+ * run on into the next commentary passage (`after` is this passage's rest plus the next passage).
+ */
+export function quotationsNear(before, after) {
+  const out = [];
+  const b = before.match(/‘‘([^‘’]{3,1200})’’([^‘’]{0,60})$/);
+  if (b) out.push({ quote: b[1], ref: b[2].match(/\(([^()]{2,160})\)/)?.[1] || null });
+  const i = after.indexOf('‘‘');
+  // Only a quotation the commentary introduces as what was said ("Vuttañhetaṃ –", "vuttaṃ hetaṃ (…) –"), not the
+  // next item of a list of suttas.
+  if (i >= 0 && i <= 100 && /vutt[^\s.]*(?:\s+hetaṃ)?\s*(?:\([^()]*\)\s*)?[–:]\s*$/i.test(after.slice(0, i))) {
+    const close = after.indexOf('’’', i + 2);
+    out.push({ quote: after.slice(i + 2, close > 0 ? close : i + 1200), ref: [...after.slice(0, i).matchAll(/\(([^()]{2,160})\)/g)].at(-1)?.[1] || null });
+  }
+  return out;
+}
+
+/**
+ * The texts a quotation comes from: the quotation's letters are cut into runs of 25 letters (as in checkQuote's
+ * 'part' test; at most 12, spread over the whole quotation) and each run is looked up in the whole canon. Returns
+ * every text holding at least half of the runs, with its share: [{ unit, share }], [] when none does.
+ */
+export function quotationSources(quote) {
+  const l = letters(quote);
+  const runs = [];
+  // Spread over the whole quotation, so a stock opening ("ekaṃ samayaṃ bhagavā sāvatthiyaṃ…") does not decide it.
+  const n = Math.min(12, Math.floor(l.length / MIN_PART));
+  const step = n > 1 ? (l.length - MIN_PART) / (n - 1) : 0;
+  for (let k = 0; k < n; k++) runs.push(l.slice(Math.round(k * step), Math.round(k * step) + MIN_PART));
+  if (!runs.length) return [];
+  const hits = new Map();
+  for (const r of runs) for (const u of textsQuoting(r, { trim: false })) hits.set(u, (hits.get(u) || 0) + 1);
+  return [...hits].filter(([, n]) => n * 2 >= runs.length).map(([u, n]) => ({ unit: u, share: n / runs.length }));
+}
+
+let canonLetters = null;
+/** Every non-range text's letters in one string, with the start offset of each text: where a quotation occurs. */
+function lettersIndex() {
+  if (canonLetters) return canonLetters;
+  const { d } = index || buildIndex();
+  const parts = [];
+  const starts = [];
+  let at = 0;
+  for (const u of d.canon.units) {
+    if (u.kind === 'range') continue;
+    const l = letters(d.canon.books[u.book].blocks.slice(u.start, u.end).map((b) => b[2] || '').join(' ')) + '|';
+    starts.push([at, u]);
+    parts.push(l);
+    at += l.length;
+  }
+  canonLetters = { all: parts.join(''), starts };
+  return canonLetters;
+}
+
+/** The texts in which a piece of a quotation (12+ letters between peyyāla marks, like checkQuote) occurs. */
+export function textsQuoting(quote, { trim = true } = {}) {
+  const { all, starts } = lettersIndex();
+  const chunks = quote.split(/pe|…|\.\.\./).map(letters).filter((c) => c.length);
+  if (trim && chunks.length) chunks[chunks.length - 1] = chunks.at(-1).slice(0, -2);
+  const found = new Set();
+  for (const c of chunks) {
+    if (c.length < MIN_WHOLE) continue;
+    for (let i = all.indexOf(c); i >= 0; i = all.indexOf(c, i + 1)) {
+      let lo = 0;
+      let hi = starts.length - 1;
+      while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (starts[mid][0] <= i) lo = mid; else hi = mid - 1; }
+      found.add(starts[lo][1]);
+    }
+  }
+  return [...found];
+}
+
 const related = (x, y) => x.id === y.id || (x.members || []).includes(y.id) || (y.members || []).includes(x.id);
 
 export const MAX_EVIDENCE = 400;
@@ -339,6 +413,32 @@ export function buildCitations({ debug = null } = {}) {
         const beforeRef = text.slice(Math.max(0, m.index - 175), m.index).match(/\(([^()]{2,160})\)([^()]{0,12})$/);
         const near = [after?.[1], beforeRef && !/[.;]/.test(beforeRef[2]) ? beforeRef[1] : null].filter(Boolean);
         if (near.some((r) => refTargets(r).some((x) => !related(x, t)))) { bump('dropped: a reference next to the name points at another text'); continue; }
+        // The name inside a quotation that repeats another passage of the same commentary ("Idaṃ sandhāya vuttaṃ
+        // – ‘‘ayaṃ panattho …suttena dīpetabbo’’ti"): not a citation of its own; the passage it repeats is read instead.
+        const open = text.lastIndexOf('‘‘', m.index);
+        if (open > text.lastIndexOf('’’', m.index)) {
+          const close = text.indexOf('’’', m.index);
+          const quoted = text.slice(open + 2, close > 0 ? close : undefined).replace(/ti$/, '');
+          const plain = (x) => x.toLowerCase().replace(/\s*\([^()]*\)/g, '').replace(/\s+/g, ' ');
+          if (quoted.length >= 20 && res.segments.some((x, j) => j !== i && plain(x.text).includes(plain(quoted)))) { bump('dropped: name inside a quotation of another commentary passage'); continue; }
+        }
+        // A quotation next to the name that is not in the named text but is in another one: the commentary is
+        // explaining that other text ("ayaṃ panattho bakabrahmasuttena dīpetabbo. Vuttañhetaṃ – ‘‘…" quotes SN 6.5).
+        const rest = text.slice(m.index + m[0].length) + ' ' + (res.segments[i + 1]?.text || '');
+        // A quotation that itself names the sutta ("…brahmajāle veyyākaraṇe vuttāni") is about it, not against it.
+        const misplaced = quotationsNear(text.slice(0, m.index), rest).some(({ quote: q, ref }) => {
+          if (fold(q).includes(fold(stem).slice(0, -1))) return false;
+          // VRI's own reference on the quotation decides when it points at the named text.
+          if (ref && refTargets(ref).some((x) => related(x, t))) return false;
+          // Otherwise dropped when another text (not the one commented on) holds more of the quotation than the
+          // named text does: a text sharing only its stock parts is not where the quotation comes from.
+          const where = quotationSources(q);
+          if (!where.length) return false;
+          const best = Math.max(...where.map((x) => x.share));
+          const mine = Math.max(0, ...where.filter((x) => related(x.unit, t)).map((x) => x.share));
+          return mine < best && where.some((x) => x.share === best && !related(x.unit, t) && !related(x.unit, unit));
+        });
+        if (misplaced) { bump('dropped: a quotation next to the name is from another text, not the named one'); continue; }
         const start = Math.max(0, m.index - (ctx ? 90 : 60));
         links.push({ ...base, to: t.id, match, named: m[0], evidence: text.slice(start, m.index + m[0].length) });
         bump(`kept: ${match}`);

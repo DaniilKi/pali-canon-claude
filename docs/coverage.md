@@ -92,7 +92,7 @@ A translation is linked only on strong evidence: a matching number and title, a 
 
 `get_parallels` links a text to others in two ways, built offline from the bundled VRI edition ([D59](decisions.md)). Every link says which kind it is and how it was matched.
 
-- **Commentary citations** (5,305): the traditional commentary on one text cites another. Most (4,753) are VRI's own references in brackets, confirmed by finding the quoted words in the cited paragraph; 401 are VRI references with no quotation to check (never used for SN or AN); 151 are suttas named in the commentary whose name, diacritics included, is the title of exactly one text and of no other text's title or Digital Pāḷi Dictionary sutta name.
+- **Commentary citations** (5,301): the traditional commentary on one text cites another. Most (4,753) are VRI's own references in brackets, confirmed by finding the quoted words in the cited paragraph; 401 are VRI references with no quotation to check (never used for SN or AN); 147 are suttas named in the commentary whose name, diacritics included, is the title of exactly one text and of no other text's title or Digital Pāḷi Dictionary sutta name, and whose neighbouring quotation, if any, comes from that text.
 - **Shared passages** (1,516): two canonical texts share a passage word for word. Stock formulae (runs found in more than 4 texts, or built only from common phrases) are left out.
 
 | Collection | Texts | With any link | With a commentary citation | With a shared passage |

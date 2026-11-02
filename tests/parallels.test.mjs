@@ -7,8 +7,9 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import * as parallels from '../src/parallels.mjs';
 import * as canon from '../src/canon.mjs';
+import * as commentary from '../src/commentary.mjs';
 import { createServer } from '../src/server.mjs';
-import { parseRefs, checkQuote, titleStem, nameStem, PREFIXES } from '../scripts/parallels/citations.mjs';
+import { parseRefs, checkQuote, titleStem, nameStem, quotationsNear, quotationSources, PREFIXES } from '../scripts/parallels/citations.mjs';
 
 const d = parallels.load();
 const collection = (id) => canon.load().byId.get(id).collection;
@@ -175,4 +176,25 @@ test('sutta names: diacritics count, and names shared with another text are drop
   }
   // The glossary (DPD sutta names) is a recorded input.
   assert.match(d.source.inputs['glossary.json.gz'].sha256, /^[0-9a-f]{64}$/);
+});
+
+test('sutta names: a quotation next to the name that comes from another text drops the link (coordinator, #105)', () => {
+  const link = (from, to) => d.citations.some((l) => l.from === from && l.to === to && l.match.startsWith('sutta-name'));
+  // "Ayaṃ panattho bakabrahmasuttena dīpetabbo. Vuttañhetaṃ (saṃ. ni. 1.176) – ‘‘…’’": the quoted verse is SN 6.5, not SN 6.4.
+  assert.ok(!link('thag20.1', 'sn6.4'));
+  assert.ok(!link('tha-ap4', 'sn6.4'));
+  const segs = commentary.commentaryFor(canon.load().byId.get('thag20.1'), { limit: 100000 }).segments;
+  const k = segs.findIndex((x) => x.ref === 'thag20.1/c138');
+  const at = segs[k].text.indexOf('bakabrahmasuttena');
+  const [, q] = quotationsNear(segs[k].text.slice(0, at), segs[k].text.slice(at + 'bakabrahmasuttena'.length) + ' ' + segs[k + 1].text);
+  assert.equal(q.ref, 'saṃ. ni. 1.176');
+  const sources = quotationSources(q.quote);
+  const best = Math.max(...sources.map((x) => x.share));
+  assert.deepEqual(sources.filter((x) => x.share === best).map((x) => x.unit.id), ['sn6.5']);
+  // A quotation is only read after the name when the commentary introduces it as what was said ("vuttaṃ –").
+  assert.deepEqual(quotationsNear('', ' methunavirati brahmacariyanti vuttā. ‘‘Mayañca bhariyā nātikkamāma’’'), []);
+  // Kept: the quotation is in the named text, or VRI's own reference on it points there.
+  assert.ok(link('dn2', 'mn8'));
+  assert.ok(link('dn2', 'dn29'));
+  assert.ok(link('ne13', 'mn6'));
 });
