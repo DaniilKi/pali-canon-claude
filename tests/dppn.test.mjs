@@ -142,8 +142,14 @@ test('short names are matched as whole words; exactWord narrows longer ones', ()
   const loose = lookupName({ name: 'Uda', textLimit: 1, exactWord: false }).appears_in;
   assert.ok(loose.total_texts_matched > 1000, 'as a substring, uda is in thousands of texts (udaka, udana)');
   assert.ok(uda.total_texts_matched < loose.total_texts_matched / 5);
-  // Citations are not titles: Ud 1.1 does not match the name Uda.
-  assert.ok(!uda.title_matches.some((t) => t.text_id.startsWith('ud')));
+  // Citations are not titles: Ud 1.1 does not match the name Uda. An Udāna text may still match through a
+  // word of the translator's title (Ud 7.10 "King Udena", linked in #37), never through the citation "Ud".
+  const d = canon.load();
+  for (const t of uda.title_matches.filter((x) => x.text_id.startsWith('ud'))) {
+    const words = [t.title, ...(d.translations[t.text_id] || []).map((l) => l.reference)].join(' ');
+    assert.match(words, /\bUd[a-zāīū]+/i, `${t.text_id} matched only through its citation`);
+  }
+  assert.ok(!uda.title_matches.some((t) => t.text_id === 'ud1.1'));
   const nanda = lookupName({ name: 'Nanda', textLimit: 5 }).appears_in;
   assert.match(nanda.match, /whole word/);
   assert.ok(!nanda.texts.some((t) => /ānanda/i.test(t.title)), 'Nanda does not match Ānanda');

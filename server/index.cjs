@@ -23075,7 +23075,8 @@ __export(providers_exports, {
   getAtiText: () => getAtiText,
   listSources: () => listSources,
   lookupPali: () => lookupPali,
-  searchAti: () => searchAti
+  searchAti: () => searchAti,
+  translationCoverage: () => translationCoverage
 });
 var DPD = "https://www.dpdict.net";
 var ATI = "https://accesstoinsight.org";
@@ -23239,6 +23240,54 @@ async function getAtiText({ path, offset = 0, limit = 12e3 }) {
     licensing: notice.licensing || "See the page for its terms."
   };
 }
+var COVERAGE_SOURCES = ["dhammatalks", "ati", "anandajoti"];
+var coverageCache = null;
+function translationCoverage() {
+  if (coverageCache) return coverageCache;
+  const d = load();
+  const rows = /* @__PURE__ */ new Map();
+  const total = { texts: 0, with_english: 0, with_english_including_inherited: 0, links: 0, content_matched_links: 0, by_source: {} };
+  const bump = (o, k, n = 1) => {
+    o[k] = (o[k] || 0) + n;
+  };
+  for (const u of d.canon.units) {
+    const key3 = u.collection.startsWith("vin") ? "vinaya" : u.collection;
+    if (!rows.has(key3)) {
+      const c = d.canon.collections[u.collection] || {};
+      rows.set(key3, {
+        collection: key3,
+        name: key3 === "vinaya" ? "Vinaya Pi\u1E6Daka" : c.name || key3,
+        texts: 0,
+        with_english: 0,
+        with_english_including_inherited: 0,
+        links: 0,
+        content_matched_links: 0,
+        by_source: {}
+      });
+    }
+    const row = rows.get(key3);
+    const own = d.translations[u.id] || [];
+    const reach = linksFor(u).links;
+    for (const o of [row, total]) {
+      o.links += own.length;
+      for (const l of own) {
+        bump(o.by_source, COVERAGE_SOURCES.includes(l.source) ? l.source : "other");
+        if (String(l.match || "").startsWith("content")) o.content_matched_links += 1;
+      }
+      if (u.kind === "range") continue;
+      o.texts += 1;
+      if (own.length) o.with_english += 1;
+      if (reach.length) o.with_english_including_inherited += 1;
+    }
+  }
+  const pct = (o) => ({ ...o, percent_with_english: o.texts ? Math.round(1e3 * o.with_english_including_inherited / o.texts) / 10 : 0 });
+  coverageCache = {
+    note: 'Counts of texts (grouped ranges counted through their members) with an English translation link; links counts every link, including those on grouped ranges. "including_inherited" adds verses whose chapter is linked. content_matched_links were placed by the content-based linker (names, numbers and PTS spans in the translation compared with the P\u0101li) and audited; a text without a link may still have a translation we could not place with confidence.',
+    total: pct(total),
+    collections: [...rows.values()].map(pct)
+  };
+  return coverageCache;
+}
 function listSources() {
   const canon = source();
   return {
@@ -23310,6 +23359,7 @@ function listSources() {
       { id: "suttacentral", name: "SuttaCentral", role: "Linked only (parallels, other translations). Its content is not fetched or bundled, respecting its request that its work not be used in AI tools.", url: "https://suttacentral.net" }
     ],
     evidence_rule: "Quote only retrieved text. Cite the text ID, VRI paragraph or PTS page, and the translator. Distinguish P\u0101li, translation, dictionary gloss and your own explanation. Numbering schemes differ (standard/Bodhi vs PTS); this tool reports both where they differ.",
+    translation_coverage: translationCoverage(),
     offline: "All P\u0101li text, citation resolution, PTS lookup and P\u0101li search work without internet, and so do topics, numbered lists, proper-name occurrences, paritta, Abhidhamma and Vinaya-rule lookups, daily texts, reading plans, citation finding, P\u0101li quotation checks and the uposatha and festival calendar. English translations, Dhamma talks and the dictionary need internet."
   };
 }
