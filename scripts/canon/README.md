@@ -38,3 +38,15 @@ npm run check && npm run smoke -- --live
   - It writes a report (`canon.json.gz.report.json`) of unplaced members and title differences.
 - `validate.py` checks the result independently against Access to Insight's PTS citations and its Thai/CDB cross-numbering.
 - `build_translations.py` links dhammatalks.org and ATI pages to texts by content (Pāli title, PTS page, neighbours' numbering offset), because both sites use PTS numbering for parts of SN and AN. Pages that cannot be matched with confidence are left unlinked.
+
+## Monthly data refresh
+
+`.github/workflows/data-refresh.yml` runs on the 3rd of every month (and on demand, with an optional VRI ref and DPD tag). It follows the commands above against upstream HEAD: VRI tipitaka-xml, the Mahāsaṅgīti root (numbering only), Access to Insight and the dhammatalks.org sitemap. It also rebuilds the commentary, post-canonical books and DPD subset when their build scripts and data files are present. The DPD release asset is checked against GitHub's SHA-256 digest when the release has one, and `update_dpd_pin.py` moves `DPD_PIN` in `src/analyse.mjs` with it. The workflow then runs `validate.py`, `npm run audit` and `npm test`, and opens (or updates) a pull request from the `data-refresh` branch. Its body is the report from `diff_report.py`: upstream commits and checksums, check results, texts added, removed and moved, PTS page changes, page-marker counts, wording changes per collection and translation-link changes. The pull request is a draft when a check fails, and it is never merged automatically. If nothing changed in content, no pull request is opened.
+
+Run the report by hand on any two copies of `server/data/`:
+
+```sh
+python scripts/canon/diff_report.py old/ server/data/ --out report.md --json summary.json
+```
+
+Files whose bytes differ but whose parsed content is the same (for example, a different gzip header) count as unchanged.

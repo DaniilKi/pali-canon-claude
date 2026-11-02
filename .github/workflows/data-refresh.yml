@@ -1,0 +1,250 @@
+name: Monthly data refresh
+# Rebuilds the bundled data against the latest upstream sources, checks it and opens a pull request with a readable
+# diff report (scripts/canon/diff_report.py). It never merges: a maintainer reviews every moved text, PTS change and
+# link change first (issue #50).
+#
+#   VRI tipitaka-xml        upstream HEAD (or the `vri_ref` input)    -> canon.json.gz, and when their build scripts
+#                                                                       exist: commentary.json.gz, postcanonical.json.gz
+#   Mahāsaṅgīti root        bilara-data `published` HEAD             -> citation numbering alignment only (no content)
+#   Access to Insight       bcbsit/ati HEAD                          -> validate.py and translation links (no content)
+#   dhammatalks.org         live sitemap and page titles             -> translation links (no content)
+#   DPD                     latest GitHub release, SHA-256 checked    -> dpd.json.gz, only when scripts/dpd/build_dpd.py
+#                                                                       and server/data/dpd.json.gz exist (#22)
+#
+# Every upstream commit, release and checksum is written into the PR body. Keep the commands in step with
+# scripts/canon/README.md. The PR is a draft whenever validate.py, the audit or the tests fail.
+# Pull requests opened with GITHUB_TOKEN do not trigger other workflows, so this job dispatches check.yml on the
+# refresh branch itself. The repository setting "Allow GitHub Actions to create and approve pull requests" must be on.
+on:
+  schedule:
+    - cron: '23 5 3 * *'   # 05:23 UTC on the 3rd of every month
+  workflow_dispatch:
+    inputs:
+      vri_ref:
+        description: VRI tipitaka-xml branch, tag or commit to build from
+        default: main
+      dpd_tag:
+        description: DPD release tag (empty = latest release)
+        default: ''
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+concurrency:
+  group: data-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      W: ${{ github.workspace }}/../pali-build
+      BRANCH: data-refresh
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci --no-audit --no-fund
+
+      - name: Fetch upstream sources (sparse, upstream HEAD)
+        env:
+          VRI_REF: ${{ inputs.vri_ref || 'main' }}
+        run: |
+          set -euo pipefail
+          case "$VRI_REF" in *[!A-Za-z0-9._/-]*|'') echo "invalid vri_ref"; exit 1;; esac
+          mkdir -p "$W/old" "$W/new"
+          cp server/data/* "$W/old/"
+          # 1. VRI romanised XML: root texts always; commentary and post-canonical books only when their builders exist.
+          git clone -q --depth 1 --filter=blob:none --no-checkout https://github.com/VipassanaTech/tipitaka-xml.git "$W/vri"
+          patterns=('/romn/*.mul.xml' '/romn/s0518m.nrf.xml' '/romn/s0520m.nrf.xml')
+          if [ -f scripts/canon/build_commentary.py ]; then patterns+=('/romn/*.att.xml'); fi
+          if [ -f scripts/canon/build_postcanonical.py ]; then
+            patterns+=('/romn/*.tik.xml' '/romn/*.nrf.xml' '/romn/e0101n.mul.xml' '/romn/e0102n.mul.xml'
+                       '/romn/e0103n.att.xml' '/romn/e0104n.att.xml' '/tipitaka.org/romn/tree.json')
+          fi
+          git -C "$W/vri" sparse-checkout set --no-cone "${patterns[@]}"
+          git -C "$W/vri" fetch -q --depth 1 origin "$VRI_REF"
+          git -C "$W/vri" checkout -q FETCH_HEAD
+          # 2. Public-domain Mahāsaṅgīti root, for citation numbering alignment only.
+          git clone -q --depth 1 --filter=blob:none --no-checkout -b published https://github.com/suttacentral/bilara-data.git "$W/bilara"
+          git -C "$W/bilara" sparse-checkout set --no-cone '/root/pli/ms/'
+          git -C "$W/bilara" checkout -q published
+          # 3. Access to Insight (official BCBS repository): metadata for validation and translation links.
+          git clone -q --depth 1 --filter=blob:none --no-checkout https://github.com/bcbsit/ati.git "$W/ati"
+          git -C "$W/ati" sparse-checkout set --no-cone '/tipitaka/' '!/tipitaka/kn/"*'
+          git -C "$W/ati" checkout -q HEAD
+          {
+            echo "VRI_COMMIT=$(git -C "$W/vri" rev-parse HEAD)"
+            echo "BILARA_COMMIT=$(git -C "$W/bilara" rev-parse HEAD)"
+            echo "ATI_COMMIT=$(git -C "$W/ati" rev-parse HEAD)"
+            echo "OLD_VRI_COMMIT=$(python -c "import gzip,json;print(json.load(gzip.open('server/data/canon.json.gz','rt',encoding='utf-8'))['source']['commit'])")"
+          } >> "$GITHUB_ENV"
+
+      - name: Build the canon
+        run: python scripts/canon/build_canon.py "$W/vri" "$VRI_COMMIT" "$W/bilara" "$W/new/canon.json.gz"
+
+      - name: Build reference indexes (titles and PTS references only)
+        run: |
+          python scripts/canon/build_indexes.py ati "$W/ati" "$W/ati-index.json"
+          python scripts/canon/build_indexes.py dhammatalks "$W/dt-index.json"
+
+      - name: Validate numbering (validate.py)
+        id: validate
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python scripts/canon/validate.py "$W/new/canon.json.gz" "$W/ati-index.json" 2>&1 | tee "$W/validate.log"
+
+      - name: Build translation links
+        run: |
+          set -euo pipefail
+          extra=()
+          # Content matching (#37) when this checkout's builder supports it.
+          if grep -q -- '--content' scripts/canon/build_translations.py; then extra=(--content "$W/ati" "$W/dt-cache"); fi
+          python scripts/canon/build_translations.py "$W/new/canon.json.gz" "$W/dt-index.json" "$W/ati-index.json" "$W/new/translations.json" "${extra[@]}"
+
+      - name: "Build commentary (when #20 is merged)"
+        if: hashFiles('scripts/canon/build_commentary.py') != ''
+        run: python scripts/canon/build_commentary.py "$W/vri" "$VRI_COMMIT" "$W/new/canon.json.gz" "$W/new/commentary.json.gz"
+
+      - name: "Build post-canonical books (when #21 is merged)"
+        if: hashFiles('scripts/canon/build_postcanonical.py') != ''
+        run: python scripts/canon/build_postcanonical.py "$W/vri" "$VRI_COMMIT" "$W/new/postcanonical.json.gz"
+
+      - name: "Build the DPD subset from the latest release (when #22 is merged)"
+        if: hashFiles('scripts/dpd/build_dpd.py') != '' && hashFiles('server/data/dpd.json.gz') != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DPD_TAG: ${{ inputs.dpd_tag }}
+        run: |
+          set -euo pipefail
+          if [ -n "$DPD_TAG" ]; then path="releases/tags/$DPD_TAG"; else path="releases/latest"; fi
+          gh api "repos/digitalpalidictionary/dpd-db/$path" > "$W/dpd-release.json"
+          tag=$(jq -r .tag_name "$W/dpd-release.json")
+          case "$tag" in *[!A-Za-z0-9._-]*|'') echo "unexpected DPD tag"; exit 1;; esac
+          url="https://github.com/digitalpalidictionary/dpd-db/releases/download/$tag/dpd.db.tar.xz"
+          digest=$(jq -r '.assets[] | select(.name == "dpd.db.tar.xz") | .digest // ""' "$W/dpd-release.json")
+          mkdir -p "$W/dpd"
+          curl -fsSL --retry 3 -o "$W/dpd/dpd.db.tar.xz" "$url"
+          sha=$(sha256sum "$W/dpd/dpd.db.tar.xz" | cut -d' ' -f1)
+          if [ -n "$digest" ] && [ "$digest" != "sha256:$sha" ]; then echo "SHA-256 $sha does not match the release digest $digest"; exit 1; fi
+          tar -xJf "$W/dpd/dpd.db.tar.xz" -C "$W/dpd" && rm "$W/dpd/dpd.db.tar.xz"
+          db=$(find "$W/dpd" -name dpd.db | head -n 1)
+          python scripts/dpd/build_dpd.py "$db" "$W/new/canon.json.gz" "$W/new/dpd.json.gz" --archive-sha256 "$sha" --asset-url "$url"
+          rm -rf "$W/dpd"
+          echo "DPD_LINE=DPD release [$tag](https://github.com/digitalpalidictionary/dpd-db/releases/tag/$tag), dpd.db.tar.xz SHA-256 \`$sha\`${digest:+ (matches the release digest)}" >> "$GITHUB_ENV"
+
+      - name: Install the rebuilt data
+        run: |
+          set -euo pipefail
+          for f in server/data/*; do   # files no step rebuilt stay as committed
+            [ -e "$W/new/$(basename "$f")" ] || cp "$f" "$W/new/"
+          done
+          python scripts/canon/diff_report.py "$W/old" "$W/new" --changed-list "$W/changed.txt"
+          while read -r f; do cp "$W/new/$f" server/data/; done < "$W/changed.txt"
+          if grep -qx 'dpd.json.gz' "$W/changed.txt" && [ -f src/analyse.mjs ]; then
+            python scripts/canon/update_dpd_pin.py server/data/dpd.json.gz src/analyse.mjs
+          fi
+          echo "Changed files:"; cat "$W/changed.txt"
+
+      - name: Build the server bundle
+        run: npm run build
+
+      - name: Audit (npm run audit)
+        id: audit
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          npm run audit 2>&1 | tee "$W/audit.log"
+
+      - name: Tests (npm test)
+        id: tests
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          npm test 2>&1 | tee "$W/test.log"
+
+      - name: Write the diff report
+        env:
+          VALIDATE: ${{ steps.validate.outcome }}
+          AUDIT: ${{ steps.audit.outcome }}
+          TESTS: ${{ steps.tests.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python scripts/canon/diff_report.py "$W/old" "$W/new" --out "$W/report.md" --json "$W/summary.json" \
+            --check "validate.py=$VALIDATE" --check "npm run audit=$AUDIT" --check "npm test=$TESTS" \
+            --note "VRI tipitaka-xml \`$OLD_VRI_COMMIT\` → \`$VRI_COMMIT\`" \
+            --note "Mahāsaṅgīti root (bilara-data published, numbering only) \`$BILARA_COMMIT\`" \
+            --note "Access to Insight (bcbsit/ati, metadata only) \`$ATI_COMMIT\`; dhammatalks.org sitemap read $(date -u +%Y-%m-%d)" \
+            ${DPD_LINE:+--note "$DPD_LINE"} \
+            --note "Workflow run: $RUN_URL"
+          {
+            cat "$W/report.md"
+            for name in validate audit test; do
+              echo; echo "<details><summary>${name} log (last 40 lines)</summary>"; echo; echo '```'
+              tail -n 40 "$W/$name.log" 2>/dev/null || echo "(no log)"
+              echo '```'; echo "</details>"
+            done
+          } > "$W/report-full.md"
+          cat "$W/report-full.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: data-refresh-report
+          path: |
+            ${{ env.W }}/report-full.md
+            ${{ env.W }}/summary.json
+            ${{ env.W }}/new/*.report.json
+          if-no-files-found: ignore
+
+      - name: Open or update the pull request (never merged automatically)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          VALIDATE: ${{ steps.validate.outcome }}
+          AUDIT: ${{ steps.audit.outcome }}
+          TESTS: ${{ steps.tests.outcome }}
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain -- server src)" ]; then
+            echo "No data change against upstream; no pull request." | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          draft=false
+          if [ "$VALIDATE" != success ] || [ "$AUDIT" != success ] || [ "$TESTS" != success ]; then draft=true; fi
+          month=$(date -u +%Y-%m)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add server src
+          git commit -q -m "Data refresh $month: VRI ${VRI_COMMIT:0:12}" -m "Rebuilt by .github/workflows/data-refresh.yml; see the pull request for the diff report."
+          git push -q --force origin "$BRANCH"
+          # GitHub limits a PR body to 65,536 characters; the full report is in the run's artifact and summary.
+          python - "$W/report-full.md" "$W/body.md" <<'PY'
+          import sys
+          text = open(sys.argv[1], encoding='utf-8').read()
+          if len(text) > 60000:
+              text = text[:60000] + '\n\n… report truncated; the full report is in the workflow run (artifact "data-refresh-report").\n'
+          open(sys.argv[2], 'w', encoding='utf-8').write(text + '\nOpened by the monthly data refresh workflow (#50).\n')
+          PY
+          title="Data refresh $month"
+          if [ "$draft" = true ]; then title="$title (checks failing)"; fi
+          number=$(gh api "repos/$REPO/pulls?state=open&head=${REPO%%/*}:$BRANCH" --jq '.[0].number // empty')
+          if [ -n "$number" ]; then
+            gh api -X PATCH "repos/$REPO/pulls/$number" -f title="$title" -F body=@"$W/body.md" --silent
+            echo "Updated pull request #$number" | tee -a "$GITHUB_STEP_SUMMARY"
+          else
+            number=$(gh api "repos/$REPO/pulls" -f title="$title" -f head="$BRANCH" -f base="${{ github.event.repository.default_branch }}" \
+              -F draft="$draft" -F body=@"$W/body.md" --jq .number)
+            echo "Opened pull request #$number" | tee -a "$GITHUB_STEP_SUMMARY"
+          fi
+          # Pull requests opened with GITHUB_TOKEN do not start other workflows: run the package check on the branch.
+          gh api "repos/$REPO/actions/workflows/check.yml/dispatches" -f ref="$BRANCH" --silent || echo "Could not dispatch check.yml"
