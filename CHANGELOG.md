@@ -14,11 +14,12 @@ Everything merged to `main` since the `v2.0.0` tag. The server now has **32 tool
 - **Parallels and cross-references.** `get_parallels` lists texts that share a passage word for word and texts the commentary cites, each link naming its source and how it was matched. Built offline from the bundled canon and commentary; SuttaCentral stays a link only (#29, D59).
 - **English-keyboard input.** Pāli typed without diacritics, in Velthuis or Harvard-Kyoto, or with anglicised spellings ("sanyutta", "nyana") is understood by every tool that takes Pāli words, and every rewrite is labelled. Sutta names ("Satipatthana Sutta") resolve when they name one text; shared names list the candidates (#102, D60, D61).
 - **English search and the glossary.** English searches ("mindfulness of breathing") are expanded into Pāli terms from the Digital Pāḷi Dictionary's English index, labelled `expanded_from_english`. The new `glossary` tool looks terms up English → Pāli and Pāli → English (#102, D62).
-- Study and practice tools added after the v2.0.0 tag: `verify_quote`, `find_citations`, `lookup_name`, `topic`, `list_topics`, `dhamma_list`, `abhidhamma_matika`, `patthana_condition`, `vinaya_rule`, `paritta`, `find_talks`, `daily_text`, `reading_plan`, `uposatha`, `festivals`, the `memorise_passage` prompt and the `method` and `memorise` skills.
+- Study and practice tools added after the v2.0.0 tag: `verify_quote`, `find_citations`, `lookup_name`, `topic`, `list_topics`, `dhamma_list`, `abhidhamma_matika`, `patthana_condition`, `vinaya_rule`, `paritta`, `find_talks`, `daily_text`, `reading_plan`, `uposatha`, `festivals`, the `memorise_passage` prompt, the `pali://pronunciation` resource (#41) and the `method` and `memorise` skills.
+- Clearer `browse_canon` labels and `lookup_pali` output (#49).
 
 ### Data
 
-- **92 more translation links.** Ancient Buddhist Texts (Ānandajoti Bhikkhu) as a third English source, and a content-based linker that places links the number and title rules leave out (#34, #37, D57).
+- **245 more translation links** (2,295 → 2,540): 153 to Ancient Buddhist Texts (Ānandajoti Bhikkhu), a third English source (#34), and 92 more to dhammatalks.org and Access to Insight, mostly from a content-based linker that places links the number and title rules leave out (#37, D57).
 - **Other scripts.** A `script` option on `get_text`, `search_texts` and `resolve_reference` for Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao and Lanna; input in any of them is accepted (#26, D50).
 - **Edition pages.** Thai, Myanmar and VRI edition page markers in `get_text` and `describe`, accepted as citations such as "Thai MN 1.103" (#27, D51).
 - **Structured variants.** `variants: "structured"` on `get_text` returns readings, omissions and remarks by edition (#28, D52).
@@ -33,7 +34,7 @@ Everything merged to `main` since the `v2.0.0` tag. The server now has **32 tool
 
 ### Distribution
 
-- npm package `pali-canon-mcp`, a hosted Streamable HTTP endpoint with a Docker image, MCP Registry entry, Codex plugin, Gemini CLI extension, Claude Code marketplace, ChatGPT reading view, tool titles for the Claude connector directory, a documentation site and localised guidance drafts in eight languages. Publishing and deployment still need the steps in [HANDOFF.md](HANDOFF.md).
+- npm package `pali-canon-mcp`, a hosted Streamable HTTP endpoint with a Docker image, MCP Registry entry, Codex plugin, Gemini CLI extension, Claude Code marketplace, ChatGPT reading view, tool titles for the Claude connector directory, privacy policy and terms of use (`PRIVACY.md`, `TERMS.md`, #6), a documentation site and localised guidance drafts in eight languages. Publishing and deployment still need the steps in [HANDOFF.md](HANDOFF.md).
 
 ## 2.0.0
 

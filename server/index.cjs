@@ -23141,7 +23141,8 @@ function fromHarvardKyoto(word) {
   const s = String(word);
   return s[0].toLowerCase() + s.slice(1).replace(/[AIUMGJTDNL]/g, (c) => HK[c]);
 }
-var looksHK = (w) => /[a-z]/.test(w) && /^.+[AIUMGJTDNL]/.test(w) && !/[BCEFHKOPQRSVWXYZ]/.test(w.slice(1));
+var looksAbbreviation = (w) => /^[A-Z]/.test(w) && !/[AIUMGJTDNL]/.test(w.slice(1, -1)) && /[AIUMGJTDNL]$/.test(w);
+var looksHK = (w) => /[a-z]/.test(w) && /^.+[AIUMGJTDNL]/.test(w) && !/[BCEFHKOPQRSVWXYZ]/.test(w.slice(1)) && !looksAbbreviation(w);
 var vocab = null;
 function vocabulary() {
   if (vocab) return vocab;
@@ -23182,7 +23183,25 @@ function isPaliStem(word) {
   const i = lowerBound(sorted, k);
   return i < sorted.length && sorted[i].startsWith(k);
 }
+function canonHasSpelling(cand) {
+  const key3 = (x) => x.toLowerCase().replace(/ñ/g, "~").replace(/ṃ/g, "*").normalize("NFD").replace(/[̀-ͯ]/g, "");
+  const want = key3(cand);
+  const k = fold4(cand);
+  const { sorted, spelling } = vocabulary();
+  for (let i = lowerBound(sorted, k); i < sorted.length && sorted[i].startsWith(k); i += 1) {
+    if (sorted[i].length <= k.length + 3 && key3(spelling.get(sorted[i])[0]).startsWith(want)) return true;
+  }
+  return false;
+}
 var isPaliWord = (word) => vocabulary().counts.has(fold4(word));
+function isPaliForm(word) {
+  const k = fold4(word);
+  const { counts, sorted } = vocabulary();
+  if (counts.has(k)) return true;
+  if (k.length < 4) return false;
+  for (let i = lowerBound(sorted, k); i < sorted.length && sorted[i].startsWith(k); i += 1) if (sorted[i].length <= k.length + 3) return true;
+  return false;
+}
 function fuzzyKey(word) {
   return fold4(word).replace(/[^a-z]/g, "").replace(/m(?=[^aeiou])/g, "n").replace(/ny/g, "n").replace(/([kgcjtdpb])h/g, "$1").replace(/([bcdfghjklmnpqrstvwxyz])\1+/g, "$1");
 }
@@ -23239,18 +23258,18 @@ function normalizeWord(token) {
   const w = String(token).normalize("NFC").replace(/ṁ/g, "\u1E43").replace(/Ṁ/g, "\u1E42");
   if (!/[A-Za-z]/.test(w) || /\d/.test(w)) return { word: w, rule: null };
   const letters = (w.match(/[A-Za-zāīūṅñṭḍṇḷṃĀĪŪṄÑṬḌṆḶṂ]/g) || []).length;
-  if (VELTHUIS_MARK.test(w) && letters >= 4) return { word: fromVelthuis(w), rule: "velthuis" };
+  if (VELTHUIS_MARK.test(w) && letters >= 4 && !/[a-z]\.[TDNML][a-z]/.test(w)) return { word: fromVelthuis(w), rule: "velthuis" };
   if (!/^[A-Za-zāīūṅñṭḍṇḷṃĀĪŪṄÑṬḌṆḶṂ'’-]+$/.test(w)) return { word: w, rule: null };
   const lower = w.toLowerCase();
   if (Object.hasOwn(ALIASES, lower) && !isPaliWord(lower)) return { word: ALIASES[lower], rule: "alias", label: ALIAS_LABEL };
   if (w === w.toUpperCase()) return { word: w, rule: null };
-  const pali3 = (s) => isPaliStem(s);
+  const pali3 = (s) => !/ñ$/i.test(s) && isPaliForm(s);
   if (looksHK(w)) {
     const hk = fromHarvardKyoto(w);
     if (pali3(hk)) return { word: hk, rule: "harvard-kyoto" };
     return { word: w, rule: null };
   }
-  if (/[āīūṅñṭḍṇḷṃ]/i.test(w) || pali3(w)) return { word: w, rule: null };
+  if (/[āīūṅñṭḍṇḷṃ]/i.test(w) || isPaliStem(w)) return { word: w, rule: null };
   if (/aa|ii|uu/i.test(w)) {
     const v = fromVelthuis(w);
     if (pali3(v)) return { word: v, rule: "doubled vowels" };
@@ -23258,7 +23277,7 @@ function normalizeWord(token) {
   if (/ny/i.test(w)) {
     for (const [re, to] of [[/ny/g, "\xF1"], [/ny/g, "\u1E43y"], [/Ny/g, "\xD1"]]) {
       const cand = w.replace(re, to);
-      if (cand !== w && pali3(cand)) return { word: cand.replace(/n(?=k|g)/g, "\u1E45"), rule: "anglicised" };
+      if (cand !== w && pali3(cand) && canonHasSpelling(cand)) return { word: cand.replace(/n(?=k|g)/g, "\u1E45"), rule: "anglicised" };
     }
   }
   return { word: w, rule: null };
@@ -23268,6 +23287,9 @@ function normalizeInput(text) {
   const nfc = original.normalize("NFC");
   if (/^\s*https?:\/\//i.test(nfc)) return { text: nfc, original, changed: false, scheme: "url", changes: [] };
   const changes = [];
+  const words3 = nfc.match(/[A-Za-zāīūṅñṭḍṇḷṃṁĀĪŪṄÑṬḌṆḶṂṀ]+/g) || [];
+  const others = words3.filter((x) => !/^s[uū]tras?$/i.test(x) && !/^the$/i.test(x));
+  const sutraOk = others.length > 0 && others.every((x) => normalizeWord(x).rule || isPaliStem(x));
   const out = nfc.replace(/[A-Za-zāīūṅñṭḍṇḷṃṁĀĪŪṄÑṬḌṆḶṂṀ.~",'’-]+/g, (token) => {
     const m = token.match(/^([,'’"-]*?)(.*?)([.,'’"-]*)$/);
     let [, lead, core, tail] = m;
@@ -23284,7 +23306,7 @@ function normalizeInput(text) {
       lead = lead.slice(0, -1);
     }
     if (!core) return token;
-    const r = normalizeWord(core);
+    const r = /^s[uū]tras?$/i.test(core) && !sutraOk ? { word: core, rule: null } : normalizeWord(core);
     const fixed = r.word.replace(/ṁ/g, "\u1E43");
     if (r.rule) changes.push({ from: core, to: fixed, rule: r.rule, ...r.label ? { label: r.label } : {} });
     return lead + fixed + tail;
@@ -23354,11 +23376,11 @@ function buildIndex() {
   const d = load();
   const exact = /* @__PURE__ */ new Map();
   const fuzzy = /* @__PURE__ */ new Map();
-  const add = (unit, raw, via) => {
+  const add = (unit, raw, via, english2 = false) => {
     const { key: key3, sutta, letters } = nameKey(raw);
     if (key3.length < 3) return;
     for (const k of /* @__PURE__ */ new Set([key3, letters])) {
-      const entry3 = { unit, name: raw, via, sutta };
+      const entry3 = { unit, name: raw, via, sutta, english: english2 };
       (exact.get(k) || exact.set(k, []).get(k)).push(entry3);
       const fk = fuzzyKey(k);
       (fuzzy.get(fk) || fuzzy.set(fk, []).get(fk)).push(entry3);
@@ -23375,7 +23397,15 @@ function buildIndex() {
   for (const [id, links] of Object.entries(d.translations)) {
     const u = d.byId.get(id);
     if (!u) continue;
-    for (const t of links) if (t.english && !/\d/.test(t.english)) add(u, t.english, `English title (${sourceName(t)}, ${t.translator})`);
+    for (const t of links) {
+      if (t.english && !/\d/.test(t.english)) {
+        const via = `English title (${sourceName(t)}, ${t.translator})`;
+        add(u, t.english, via, true);
+        const bare = t.english.replace(/^(the|a|an)\s+/i, "");
+        if (bare !== t.english) add(u, bare, via, true);
+      }
+      if (t.pali_title && !/\d/.test(t.pali_title)) add(u, t.pali_title, `P\u0101li title (${sourceName(t)})`);
+    }
   }
   try {
     for (const [id, variants] of loadGlossary().names) {
@@ -23401,8 +23431,11 @@ function resolveName(text) {
   const { exact, fuzzy } = index || buildIndex();
   const q = nameKey(text);
   if (q.key.length < 3) return null;
+  const words3 = fold5(String(text)).replace(/[^a-z\s]/g, " ").trim().split(/\s+/).filter(Boolean);
+  const marked = words3.some((w) => /^(sutta|suttas|suttanta|sutra|chapter|vagga|vaggo|discourse)$/.test(w));
+  const englishOk = marked || words3.length > 1;
   const pick2 = (entries) => {
-    let list2 = entries || [];
+    let list2 = (entries || []).filter((e) => englishOk || !e.english);
     if (q.sutta) {
       const suttas = list2.filter((e) => e.sutta || e.via !== "P\u0101li title (VRI)");
       if (suttas.length) list2 = suttas;
@@ -23414,6 +23447,7 @@ function resolveName(text) {
   let found = pick2(exact.get(q.key));
   let how = "exact";
   if (!found.length && q.letters !== q.key) found = pick2(exact.get(q.letters));
+  if (!found.length && words3.length > 1 && /^(chapter|vagga|vaggo)$/.test(words3.at(-1))) found = pick2(exact.get(nameKey(words3.slice(0, -1).join(" ")).key));
   if (!found.length) {
     found = pick2(fuzzy.get(fuzzyKey(q.key)));
     how = "spelling variant";
@@ -29308,12 +29342,85 @@ __export(glossary_exports, {
   expandEnglish: () => expandEnglish,
   glossary: () => glossary,
   looksEnglish: () => looksEnglish,
+  paliStemOf: () => paliStemOf,
   paliToEnglish: () => paliToEnglish,
+  paliWordsInEnglish: () => paliWordsInEnglish,
   register: () => register17
 });
 var fold7 = fold3;
 var GLOSS_NOTE = "Dictionary and list glosses are labels for finding words, not translations. Quote the P\u0101li text (get_text) or a named translation (get_translation) instead.";
-var STOPWORDS = /* @__PURE__ */ new Set(["a", "an", "the", "of", "to", "in", "on", "at", "by", "for", "with", "and", "or", "is", "are", "be", "as", "it", "its", "from", "about", "what", "which", "on", "into", "how", "does", "do", "that", "this", "buddha", "buddhist", "sutta", "suttas", "teaching", "teachings"]);
+var STOPWORDS = /* @__PURE__ */ new Set([
+  "a",
+  "an",
+  "the",
+  "of",
+  "to",
+  "in",
+  "on",
+  "at",
+  "by",
+  "for",
+  "with",
+  "and",
+  "or",
+  "is",
+  "are",
+  "be",
+  "as",
+  "it",
+  "its",
+  "from",
+  "about",
+  "what",
+  "which",
+  "on",
+  "into",
+  "how",
+  "does",
+  "do",
+  "that",
+  "this",
+  "buddha",
+  "buddhist",
+  "sutta",
+  "suttas",
+  "teaching",
+  "teachings",
+  // Common English words that are also Pāli forms (there, he, no, so, same…): never evidence that a query is Pāli.
+  "there",
+  "he",
+  "have",
+  "has",
+  "had",
+  "no",
+  "so",
+  "same",
+  "made",
+  "use",
+  "did",
+  "say",
+  "said",
+  "any",
+  "many",
+  "was",
+  "were",
+  "i",
+  "you",
+  "we",
+  "they",
+  "his",
+  "her",
+  "not",
+  "all",
+  "why",
+  "who",
+  "when",
+  "where",
+  "can",
+  "me",
+  "my",
+  "some"
+]);
 var idx = null;
 function indexes() {
   if (idx) return idx;
@@ -29403,8 +29510,30 @@ function looksEnglish(query) {
   if (!words3.length || /[āīūṅñṭḍṇḷṃ]/i.test(String(query))) return false;
   const content = words3.filter((w) => !STOPWORDS.has(w));
   if (!content.length) return false;
-  if (content.some((w) => isPaliWord(w))) return false;
+  if (content.some((w) => isPaliWord(w) && !englishNotLoan(w))) return false;
   return content.some((w) => dpdEnglish(w));
+}
+function englishNotLoan(w) {
+  const hit = dpdEnglish(w);
+  if (!hit) return false;
+  const { g } = indexes();
+  const k = fold7(w);
+  if (/[āīūṅñṭḍṇḷṃ]/.test(hit.key)) return false;
+  return !hit.ids.some((i) => fold7(g.headwords[i][0]).replace(/[^a-z]/g, "") === k);
+}
+function paliStemOf(word) {
+  const w = fold7(word).replace(/[^a-z]/g, "");
+  if (w.length >= 4 && isPaliWord(w)) return w;
+  if (w.length >= 5 && /s$/.test(w) && isPaliWord(w.slice(0, -1))) return w.slice(0, -1);
+  if (w.length >= 4 && isPaliStem(w)) return w;
+  return null;
+}
+function paliWordsInEnglish(query) {
+  const words3 = fold7(String(query ?? "").replace(/"/g, " ")).split(/[^a-z'-]+/).filter(Boolean);
+  const content = words3.filter((w) => !STOPWORDS.has(w));
+  if (!content.length || content.length === words3.length) return null;
+  const stems = content.map(paliStemOf);
+  return stems.every(Boolean) ? stems : null;
 }
 function expandEnglish(query, { maxTerms = 8, perChunk = 4 } = {}) {
   const words3 = fold7(String(query ?? "").replace(/"/g, " ")).split(/[^a-z'-]+/).filter(Boolean);
@@ -29429,9 +29558,14 @@ function expandEnglish(query, { maxTerms = 8, perChunk = 4 } = {}) {
   let used = 0;
   let dropped = 0;
   const sources = /* @__PURE__ */ new Set();
+  const keptPali = [];
   for (const c of chunks) {
     if (!c.hit) {
-      unmatched.push(c.text);
+      const stem4 = paliStemOf(c.text);
+      if (stem4) {
+        keptPali.push({ typed: c.text, searched: stem4 });
+        groups.push([stem4]);
+      } else unmatched.push(c.text);
       continue;
     }
     const terms3 = [];
@@ -29450,8 +29584,8 @@ function expandEnglish(query, { maxTerms = 8, perChunk = 4 } = {}) {
       sources.add(c.hit.source);
     }
   }
-  if (!groups.length) return null;
-  return { mapping, groups, dropped, unmatched, sources: [...sources] };
+  if (!Object.keys(mapping).length) return null;
+  return { mapping, groups, dropped, unmatched, sources: [...sources], ...keptPali.length ? { kept_pali: keptPali } : {} };
 }
 function register17({ tool, z }) {
   tool("glossary", "Look up an English word or phrase to find the P\u0101li terms for it, or a P\u0101li word to see its short English gloss, from the Digital P\u0101\u1E37i Dictionary's English index and the curated numbered-list glosses. Every entry names its source. Glosses are labels for finding words, not translations. Works offline.", {
@@ -30250,7 +30384,9 @@ function searchWithInput(query, { collection, limit = 10, offset = 0, english: e
   const opts = { collection, limit, offset };
   const n = normalizeInput(query);
   const note = normalizationNote(n);
-  const isEnglish = english2 === "only" || english2 === "auto" && !n.changed && looksEnglish(query);
+  const wordCount = (query.match(/[A-Za-z]+/g) || []).length;
+  const mostlyAsTyped = !n.changed || n.changes.length * 2 < wordCount;
+  const isEnglish = english2 === "only" || english2 === "auto" && mostlyAsTyped && looksEnglish(query);
   let result;
   if (english2 !== "only") result = search(n.text, opts);
   if (isEnglish) {
@@ -30276,6 +30412,7 @@ function searchWithInput(query, { collection, limit = 10, offset = 0, english: e
         combined: combined === "all" ? "every English word or phrase must be matched by one of its P\u0101li terms" : "no text has all of them together, so texts with any of these P\u0101li terms are listed",
         ...exp.dropped ? { dropped_terms: exp.dropped, dropped_note: `${exp.dropped} further P\u0101li term${exp.dropped > 1 ? "s" : ""} from the glossary were not searched (at most ${MAX_EXPANSION_TERMS} in all, 4 per word).` } : {},
         ...exp.unmatched.length ? { not_in_glossary: exp.unmatched } : {},
+        ...exp.kept_pali ? { searched_as_pali: exp.kept_pali } : {},
         note: 'The English was looked up in the glossary and the P\u0101li text was searched for these terms. They are dictionary glosses, not translations; check each passage. Turn this off with english: "off".'
       };
       if (!result || !result.total_texts_matched) {
@@ -30286,7 +30423,14 @@ function searchWithInput(query, { collection, limit = 10, offset = 0, english: e
       }
       result.expanded_from_english = label;
     }
-  } else if (result.total_texts_matched < FEW_HITS) {
+  } else if (!result.total_texts_matched && !/"/.test(n.text) && paliWordsInEnglish(n.text)) {
+    const pali3 = paliWordsInEnglish(n.text);
+    const r = search(pali3.join(" "), opts);
+    if (r.total_texts_matched) {
+      result = { ...r, query, english_words_ignored: { searched_pali: pali3, note: `The English words of the question were left out and only the P\u0101li word${pali3.length > 1 ? "s" : ""} ${pali3.map((w) => `"${w}"`).join(", ")} searched (an English plural s dropped).` } };
+    }
+  }
+  if (!isEnglish && !result.english_words_ignored && result.total_texts_matched < FEW_HITS) {
     const v = variantSearch(n.text, result, opts);
     if (v) result = v;
   }

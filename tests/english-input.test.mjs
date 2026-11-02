@@ -268,3 +268,61 @@ test('topic, dhamma_list, paritta and search_post_canonical accept Velthuis inpu
   assert.ok(pc.results.length);
   assert.equal(pc.input_normalised.read_as, 'kasiṇa');
 });
+
+// Review of #105.
+test('English words are never rewritten into Pāli: any, many, Kenya, Tony, tiny, pony; no rewrite ends in ñ', () => {
+  for (const w of ['any', 'many', 'Kenya', 'Tony', 'tiny', 'pony', 'panya', 'canyon', 'Bunyan', 'onyx']) {
+    const r = input.normalizeWord(w);
+    assert.equal(r.rule, null, `${w} -> ${r.word}`);
+  }
+  for (const w of ['sanyutta', 'nyana', 'sanyojana', 'Sanyutta']) {
+    const r = input.normalizeWord(w);
+    assert.equal(r.rule, 'anglicised', w);
+    assert.doesNotMatch(r.word, /ñ$/);
+  }
+  assert.equal(input.isPaliForm('any'), false);
+  assert.equal(input.isPaliForm('saṃyutt'), true);
+});
+
+test('abbreviations and "ed.Name" are not Harvard-Kyoto or Velthuis; "sutra" is "sutta" only in a Pāli name', () => {
+  for (const w of ['DhA', 'ItI', 'ThagA', 'SnA', 'ed.Norman', 'cf.Nyanaponika']) assert.equal(input.normalizeWord(w).rule, null, w);
+  assert.equal(input.normalizeWord('saMyutta').word, 'saṃyutta');
+  assert.equal(input.normalizeInput('Heart Sutra').text, 'Heart Sutra');
+  assert.equal(input.normalizeInput('Metta sutra').text, 'Metta sutta');
+});
+
+test('search_texts: English questions with common words are expanded or searched for their Pāli words', async () => {
+  for (const q of ['Is there any teaching on anger?', 'Is there a teaching on anger?']) {
+    const b = await ok('search_texts', { query: q, limit: 3 });
+    assert.ok(b.total_texts_matched > 0, q);
+    assert.ok(b.expanded_from_english.anger.includes('kodha'), q);
+    assert.equal(b.input_normalised, undefined, q);
+  }
+  const j = await ok('search_texts', { query: 'How many jhanas are there', limit: 3 });
+  assert.ok(j.total_texts_matched > 0);
+  assert.deepEqual(j.english_words_ignored.searched_pali, ['jhana']);
+  // A Pāli loan word is still Pāli, not English.
+  const n = await ok('search_texts', { query: 'nibbana', limit: 2 });
+  assert.equal(n.expanded_from_english, undefined);
+  assert.equal(glossaryMod.looksEnglish('Is there a teaching on anger?'), true);
+  assert.equal(glossaryMod.looksEnglish('dukkha'), false);
+});
+
+test('resolve_reference: Adittapariyaya is ambiguous (SN 35.28 on ATI, SN 35.235 in VRI); "Fire Sermon" finds SN 35.28', async () => {
+  const r = await call('resolve_reference', { reference: 'Adittapariyaya' });
+  assert.equal(r.error, true);
+  assert.match(JSON.stringify(r.body), /SN 35\.28/);
+  assert.match(JSON.stringify(r.body), /SN 35\.235/);
+  for (const ref of ['Fire Sermon', 'The Fire Sermon']) {
+    const b = await ok('resolve_reference', { reference: ref });
+    assert.equal(b.id, 'sn35.28', ref);
+    assert.equal(b.matched_by, 'name');
+  }
+});
+
+test('resolve_reference: a bare common noun is not a name through an English chapter title; "Heart Sutra" is not MN 29/30', async () => {
+  assert.equal((await call('resolve_reference', { reference: 'Anger' })).error, true);
+  assert.equal((await ok('resolve_reference', { reference: 'Anger chapter' })).id, 'dhp221-234');
+  assert.equal((await call('resolve_reference', { reference: 'Heart Sutra' })).error, true);
+  assert.equal((await ok('resolve_reference', { reference: 'Mindfulness of Breathing' })).id, 'mn118');
+});

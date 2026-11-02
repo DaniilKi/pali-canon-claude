@@ -53,7 +53,9 @@ export function fromHarvardKyoto(word) {
   return s[0].toLowerCase() + s.slice(1).replace(/[AIUMGJTDNL]/g, (c) => HK[c]);
 }
 
-const looksHK = (w) => /[a-z]/.test(w) && /^.+[AIUMGJTDNL]/.test(w) && !/[BCEFHKOPQRSVWXYZ]/.test(w.slice(1));
+// A capitalised word whose only Harvard-Kyoto capital is its last letter is an abbreviation (DhA, ItI, ThagA, SnA).
+const looksAbbreviation = (w) => /^[A-Z]/.test(w) && !/[AIUMGJTDNL]/.test(w.slice(1, -1)) && /[AIUMGJTDNL]$/.test(w);
+const looksHK = (w) => /[a-z]/.test(w) && /^.+[AIUMGJTDNL]/.test(w) && !/[BCEFHKOPQRSVWXYZ]/.test(w.slice(1)) && !looksAbbreviation(w);
 
 // ---- vocabulary of the bundled canon -----------------------------------------------------------------------
 
@@ -99,8 +101,36 @@ export function isPaliStem(word) {
   return i < sorted.length && sorted[i].startsWith(k);
 }
 
+/**
+ * Does the canon spell this word (or a word it begins, ending of at most 3 letters) with ñ and ṃ exactly where the
+ * candidate has them? Folding equates ñ with n and ṃ with m, so "keña" would otherwise pass as "kena".
+ */
+function canonHasSpelling(cand) {
+  const key = (x) => x.toLowerCase().replace(/ñ/g, '~').replace(/ṃ/g, '*').normalize('NFD').replace(/[̀-ͯ]/g, '');
+  const want = key(cand);
+  const k = fold(cand);
+  const { sorted, spelling } = vocabulary();
+  for (let i = lowerBound(sorted, k); i < sorted.length && sorted[i].startsWith(k); i += 1) {
+    if (sorted[i].length <= k.length + 3 && key(spelling.get(sorted[i])[0]).startsWith(want)) return true;
+  }
+  return false;
+}
+
 /** Is this exactly a word of the canon (folded)? */
 export const isPaliWord = (word) => vocabulary().counts.has(fold(word));
+
+/**
+ * Strict test for a rewritten word: exactly a word of the canon, or a stem of at least 4 letters that a canon word
+ * extends by an ending of at most 3 letters ("samyutt" in "saṃyuttaṃ"). Short English words ("any" → "añ") fail.
+ */
+export function isPaliForm(word) {
+  const k = fold(word);
+  const { counts, sorted } = vocabulary();
+  if (counts.has(k)) return true;
+  if (k.length < 4) return false;
+  for (let i = lowerBound(sorted, k); i < sorted.length && sorted[i].startsWith(k); i += 1) if (sorted[i].length <= k.length + 3) return true;
+  return false;
+}
 
 // ---- fuzzy key and spelling variants -----------------------------------------------------------------------
 
@@ -176,18 +206,20 @@ export function normalizeWord(token) {
   const w = String(token).normalize('NFC').replace(/ṁ/g, 'ṃ').replace(/Ṁ/g, 'Ṃ');
   if (!/[A-Za-z]/.test(w) || /\d/.test(w)) return { word: w, rule: null };
   const letters = (w.match(/[A-Za-zāīūṅñṭḍṇḷṃĀĪŪṄÑṬḌṆḶṂ]/g) || []).length;
-  if (VELTHUIS_MARK.test(w) && letters >= 4) return { word: fromVelthuis(w), rule: 'velthuis' };
+  // "ed.Norman", "cf.Nyanaponika": an abbreviation and a name, not Velthuis (Velthuis capitals never follow a small letter).
+  if (VELTHUIS_MARK.test(w) && letters >= 4 && !/[a-z]\.[TDNML][a-z]/.test(w)) return { word: fromVelthuis(w), rule: 'velthuis' };
   if (!/^[A-Za-zāīūṅñṭḍṇḷṃĀĪŪṄÑṬḌṆḶṂ'’-]+$/.test(w)) return { word: w, rule: null };
   const lower = w.toLowerCase();
   if (Object.hasOwn(ALIASES, lower) && !isPaliWord(lower)) return { word: ALIASES[lower], rule: 'alias', label: ALIAS_LABEL };
   if (w === w.toUpperCase()) return { word: w, rule: null };
-  const pali = (s) => isPaliStem(s);
+  // A rewrite must give a real Pāli form, and never a word ending in ñ (no Pāli word does: "any" is not "añ").
+  const pali = (s) => !/ñ$/i.test(s) && isPaliForm(s);
   if (looksHK(w)) {
     const hk = fromHarvardKyoto(w);
     if (pali(hk)) return { word: hk, rule: 'harvard-kyoto' };
     return { word: w, rule: null };
   }
-  if (/[āīūṅñṭḍṇḷṃ]/i.test(w) || pali(w)) return { word: w, rule: null };
+  if (/[āīūṅñṭḍṇḷṃ]/i.test(w) || isPaliStem(w)) return { word: w, rule: null };
   if (/aa|ii|uu/i.test(w)) {
     const v = fromVelthuis(w);
     if (pali(v)) return { word: v, rule: 'doubled vowels' };
@@ -196,7 +228,7 @@ export function normalizeWord(token) {
   if (/ny/i.test(w)) {
     for (const [re, to] of [[/ny/g, 'ñ'], [/ny/g, 'ṃy'], [/Ny/g, 'Ñ']]) {
       const cand = w.replace(re, to);
-      if (cand !== w && pali(cand)) return { word: cand.replace(/n(?=k|g)/g, 'ṅ'), rule: 'anglicised' };
+      if (cand !== w && pali(cand) && canonHasSpelling(cand)) return { word: cand.replace(/n(?=k|g)/g, 'ṅ'), rule: 'anglicised' };
     }
   }
   return { word: w, rule: null };
@@ -211,6 +243,10 @@ export function normalizeInput(text) {
   const nfc = original.normalize('NFC');
   if (/^\s*https?:\/\//i.test(nfc)) return { text: nfc, original, changed: false, scheme: 'url', changes: [] };
   const changes = [];
+  // "sutra" is read as "sutta" only when the rest of the name is Pāli ("Metta sutra"), not in "Heart Sutra".
+  const words = nfc.match(/[A-Za-zāīūṅñṭḍṇḷṃṁĀĪŪṄÑṬḌṆḶṂṀ]+/g) || [];
+  const others = words.filter((x) => !/^s[uū]tras?$/i.test(x) && !/^the$/i.test(x));
+  const sutraOk = others.length > 0 && others.every((x) => normalizeWord(x).rule || isPaliStem(x));
   const out = nfc.replace(/[A-Za-zāīūṅñṭḍṇḷṃṁĀĪŪṄÑṬḌṆḶṂṀ.~",'’-]+/g, (token) => {
     // Keep surrounding punctuation ("sa.myutta," or a quoted "nibbaana").
     const m = token.match(/^([,'’"-]*?)(.*?)([.,'’"-]*)$/);
@@ -220,7 +256,7 @@ export function normalizeInput(text) {
     if (lead.endsWith(',,') && core.startsWith('n')) { core = `,,${core}`; lead = lead.slice(0, -2); }
     if (lead.endsWith('"') && /^[nN]/.test(core)) { core = `"${core}`; lead = lead.slice(0, -1); }
     if (!core) return token;
-    const r = normalizeWord(core);
+    const r = /^s[uū]tras?$/i.test(core) && !sutraOk ? { word: core, rule: null } : normalizeWord(core);
     const fixed = r.word.replace(/ṁ/g, 'ṃ');
     if (r.rule) changes.push({ from: core, to: fixed, rule: r.rule, ...(r.label ? { label: r.label } : {}) });
     return lead + fixed + tail;

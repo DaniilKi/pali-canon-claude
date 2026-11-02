@@ -51,8 +51,8 @@ Lookups go live to [dpdict.net](https://www.dpdict.net/). DPD is [CC BY-NC-SA 4.
 
 `src/input.mjs` (Pāli typed on an English keyboard, #102) ports or follows:
 
-- **digitalpalidictionary/dpd-koreader** (MIT), <https://github.com/digitalpalidictionary/dpd-koreader>: the Velthuis table and its order (`dpd/velthuis.lua`), ṁ = ṃ and NFC handling (`dpd/normalize.lua`), and the English fuzzy key (strip diacritics, `kh` → `k`, collapse doubled consonants; `dpd/english.lua`). Copyright the Digital Pāḷi Dictionary project (Bodhirasa Bhikkhu and contributors).
-- **tokushige-koyasan/corpus-search-toolkit** (MIT), <https://github.com/tokushige-koyasan/corpus-search-toolkit>: the conservative scheme detection of `scripts/to_iast.py` (ASCII markers, English lines left alone) and the spelling-variant classes of `scripts/variants.py` (doubled consonants, nasals before a consonant).
+- **digitalpalidictionary/dpd-koreader** (MIT), <https://github.com/digitalpalidictionary/dpd-koreader>: the Velthuis table and its order (`dpd/velthuis.lua`), ṁ = ṃ and NFC handling (`dpd/normalize.lua`), and the English fuzzy key (strip diacritics, `kh` → `k`, collapse doubled consonants; `dpd/english.lua`). Its `LICENSE` file reads: “Copyright (c) 2026 Nirodhavihāri”.
+- **tokushige-koyasan/corpus-search-toolkit** (MIT), <https://github.com/tokushige-koyasan/corpus-search-toolkit>: the conservative scheme detection of `scripts/to_iast.py` (ASCII markers, English lines left alone) and the spelling-variant classes of `scripts/variants.py` (doubled consonants, nasals before a consonant). Its `LICENSE` file reads: “Copyright (c) 2026 tokushige-koyasan”.
 - **matko/emacs-pali-velthuis** (Unlicense, public domain), <https://github.com/matko/emacs-pali-velthuis>: its quail table is the Velthuis test fixture in `tests/english-input.test.mjs`.
 
 The MIT permission notice reproduced under "Calendar code" below applies to both MIT works.

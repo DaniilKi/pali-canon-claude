@@ -8,7 +8,7 @@
  */
 import * as canon from './canon.mjs';
 import { normalizeInput, normalizationNote, spellingVariants, canonSpellings } from './input.mjs';
-import { looksEnglish, expandEnglish } from './glossary.mjs';
+import { looksEnglish, expandEnglish, paliWordsInEnglish } from './glossary.mjs';
 
 /** Fewer texts than this triggers the spelling-variant retry. */
 export const FEW_HITS = 3;
@@ -47,7 +47,10 @@ export function searchWithInput(query, { collection, limit = 10, offset = 0, eng
   const opts = { collection, limit, offset };
   const n = normalizeInput(query);
   const note = normalizationNote(n);
-  const isEnglish = english === 'only' || (english === 'auto' && !n.changed && looksEnglish(query));
+  // A rewritten word does not stop an English question from being expanded when most of its words are left as typed.
+  const wordCount = (query.match(/[A-Za-z]+/g) || []).length;
+  const mostlyAsTyped = !n.changed || n.changes.length * 2 < wordCount;
+  const isEnglish = english === 'only' || (english === 'auto' && mostlyAsTyped && looksEnglish(query));
   let result;
   if (english !== 'only') result = canon.search(n.text, opts);
   if (isEnglish) {
@@ -73,6 +76,7 @@ export function searchWithInput(query, { collection, limit = 10, offset = 0, eng
         combined: combined === 'all' ? 'every English word or phrase must be matched by one of its Pāli terms' : 'no text has all of them together, so texts with any of these Pāli terms are listed',
         ...(exp.dropped ? { dropped_terms: exp.dropped, dropped_note: `${exp.dropped} further Pāli term${exp.dropped > 1 ? 's' : ''} from the glossary were not searched (at most ${MAX_EXPANSION_TERMS} in all, 4 per word).` } : {}),
         ...(exp.unmatched.length ? { not_in_glossary: exp.unmatched } : {}),
+        ...(exp.kept_pali ? { searched_as_pali: exp.kept_pali } : {}),
         note: 'The English was looked up in the glossary and the Pāli text was searched for these terms. They are dictionary glosses, not translations; check each passage. Turn this off with english: "off".',
       };
       if (!result || !result.total_texts_matched) {
@@ -83,7 +87,15 @@ export function searchWithInput(query, { collection, limit = 10, offset = 0, eng
       }
       result.expanded_from_english = label;
     }
-  } else if (result.total_texts_matched < FEW_HITS) {
+  } else if (!result.total_texts_matched && !/"/.test(n.text) && paliWordsInEnglish(n.text)) {
+    // Pāli words in an English question ("How many jhanas are there"): search the Pāli words only, labelled.
+    const pali = paliWordsInEnglish(n.text);
+    const r = canon.search(pali.join(' '), opts);
+    if (r.total_texts_matched) {
+      result = { ...r, query, english_words_ignored: { searched_pali: pali, note: `The English words of the question were left out and only the Pāli word${pali.length > 1 ? 's' : ''} ${pali.map((w) => `"${w}"`).join(', ')} searched (an English plural s dropped).` } };
+    }
+  }
+  if (!isEnglish && !result.english_words_ignored && result.total_texts_matched < FEW_HITS) {
     const v = variantSearch(n.text, result, opts);
     if (v) result = v;
   }

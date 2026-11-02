@@ -10,12 +10,15 @@
 import * as canon from './canon.mjs';
 import { loadGlossary } from './glossary-data.mjs';
 import { listsIndex } from './topics.mjs';
-import { normalizeInput, normalizationNote, isPaliWord } from './input.mjs';
+import { normalizeInput, normalizationNote, isPaliWord, isPaliStem } from './input.mjs';
 import { DPD_LICENSE } from './analyse.mjs';
 
 const fold = canon.fold;
 export const GLOSS_NOTE = 'Dictionary and list glosses are labels for finding words, not translations. Quote the Pāli text (get_text) or a named translation (get_translation) instead.';
-export const STOPWORDS = new Set(['a', 'an', 'the', 'of', 'to', 'in', 'on', 'at', 'by', 'for', 'with', 'and', 'or', 'is', 'are', 'be', 'as', 'it', 'its', 'from', 'about', 'what', 'which', 'on', 'into', 'how', 'does', 'do', 'that', 'this', 'buddha', 'buddhist', 'sutta', 'suttas', 'teaching', 'teachings']);
+export const STOPWORDS = new Set(['a', 'an', 'the', 'of', 'to', 'in', 'on', 'at', 'by', 'for', 'with', 'and', 'or', 'is', 'are', 'be', 'as', 'it', 'its', 'from', 'about', 'what', 'which', 'on', 'into', 'how', 'does', 'do', 'that', 'this', 'buddha', 'buddhist', 'sutta', 'suttas', 'teaching', 'teachings',
+  // Common English words that are also Pāli forms (there, he, no, so, same…): never evidence that a query is Pāli.
+  'there', 'he', 'have', 'has', 'had', 'no', 'so', 'same', 'made', 'use', 'did', 'say', 'said', 'any', 'many', 'was', 'were',
+  'i', 'you', 'we', 'they', 'his', 'her', 'not', 'all', 'why', 'who', 'when', 'where', 'can', 'me', 'my', 'some']);
 
 let idx = null;
 
@@ -120,8 +123,42 @@ export function looksEnglish(query) {
   if (!words.length || /[āīūṅñṭḍṇḷṃ]/i.test(String(query))) return false;
   const content = words.filter((w) => !STOPWORDS.has(w));
   if (!content.length) return false;
-  if (content.some((w) => isPaliWord(w))) return false;
+  // A word that is both a Pāli form and an English word in DPD's index ("hate", "time") is not evidence either way;
+  // a Pāli loan word in the index ("nibbana", whose entry is nibbāna itself) still counts as Pāli.
+  if (content.some((w) => isPaliWord(w) && !englishNotLoan(w))) return false;
   return content.some((w) => dpdEnglish(w));
+}
+
+/** In DPD's English index as an English word, not as the Pāli word itself ("nibbana" → nibbāna is a loan). */
+function englishNotLoan(w) {
+  const hit = dpdEnglish(w);
+  if (!hit) return false;
+  const { g } = indexes();
+  const k = fold(w);
+  // The index key itself written with Pāli letters ("nibbāna") is a Pāli word, not English.
+  if (/[āīūṅñṭḍṇḷṃ]/.test(hit.key)) return false;
+  return !hit.ids.some((i) => fold(g.headwords[i][0]).replace(/[^a-z]/g, '') === k);
+}
+
+/** A Pāli word typed in an English question: as typed, or without an English plural s ("jhanas" → "jhana"). */
+export function paliStemOf(word) {
+  const w = fold(word).replace(/[^a-z]/g, '');
+  if (w.length >= 4 && isPaliWord(w)) return w;
+  if (w.length >= 5 && /s$/.test(w) && isPaliWord(w.slice(0, -1))) return w.slice(0, -1);
+  if (w.length >= 4 && isPaliStem(w)) return w;
+  return null;
+}
+
+/**
+ * The Pāli words of a question written in English around them ("How many jhanas are there" → ["jhana"]): every
+ * word that is not an English stop word must be Pāli. Null when there are no stop words or a word is not Pāli.
+ */
+export function paliWordsInEnglish(query) {
+  const words = fold(String(query ?? '').replace(/"/g, ' ')).split(/[^a-z'-]+/).filter(Boolean);
+  const content = words.filter((w) => !STOPWORDS.has(w));
+  if (!content.length || content.length === words.length) return null;
+  const stems = content.map(paliStemOf);
+  return stems.every(Boolean) ? stems : null;
 }
 
 /**
@@ -152,8 +189,14 @@ export function expandEnglish(query, { maxTerms = 8, perChunk = 4 } = {}) {
   let used = 0;
   let dropped = 0;
   const sources = new Set();
+  const keptPali = [];
   for (const c of chunks) {
-    if (!c.hit) { unmatched.push(c.text); continue; }
+    if (!c.hit) {
+      // A Pāli word inside an English question ("How many jhanas are there") is searched as Pāli (an English plural s dropped).
+      const stem = paliStemOf(c.text);
+      if (stem) { keptPali.push({ typed: c.text, searched: stem }); groups.push([stem]); } else unmatched.push(c.text);
+      continue;
+    }
     const terms = [];
     for (const i of c.hit.ids) {
       const lemma = g.headwords[i][0];
@@ -163,8 +206,8 @@ export function expandEnglish(query, { maxTerms = 8, perChunk = 4 } = {}) {
     }
     if (terms.length) { mapping[c.text] = terms; groups.push(terms.map(fold)); sources.add(c.hit.source); }
   }
-  if (!groups.length) return null;
-  return { mapping, groups, dropped, unmatched, sources: [...sources] };
+  if (!Object.keys(mapping).length) return null;
+  return { mapping, groups, dropped, unmatched, sources: [...sources], ...(keptPali.length ? { kept_pali: keptPali } : {}) };
 }
 
 /** MCP registration (feature registry: src/features/index.mjs). */

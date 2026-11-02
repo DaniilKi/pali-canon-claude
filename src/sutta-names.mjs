@@ -32,11 +32,11 @@ function buildIndex() {
   const d = canon.load();
   const exact = new Map();
   const fuzzy = new Map();
-  const add = (unit, raw, via) => {
+  const add = (unit, raw, via, english = false) => {
     const { key, sutta, letters } = nameKey(raw);
     if (key.length < 3) return;
     for (const k of new Set([key, letters])) {
-      const entry = { unit, name: raw, via, sutta };
+      const entry = { unit, name: raw, via, sutta, english };
       (exact.get(k) || exact.set(k, []).get(k)).push(entry);
       const fk = fuzzyKey(k);
       (fuzzy.get(fk) || fuzzy.set(fk, []).get(fk)).push(entry);
@@ -54,7 +54,17 @@ function buildIndex() {
   for (const [id, links] of Object.entries(d.translations)) {
     const u = d.byId.get(id);
     if (!u) continue;
-    for (const t of links) if (t.english && !/\d/.test(t.english)) add(u, t.english, `English title (${canon.sourceName(t)}, ${t.translator})`);
+    for (const t of links) {
+      if (t.english && !/\d/.test(t.english)) {
+        const via = `English title (${canon.sourceName(t)}, ${t.translator})`;
+        add(u, t.english, via, true);
+        // "The Fire Sermon" is also found as "Fire Sermon".
+        const bare = t.english.replace(/^(the|a|an)\s+/i, '');
+        if (bare !== t.english) add(u, bare, via, true);
+      }
+      // The Pāli name the translation's page gives ("Adittapariyaya Sutta" for SN 35.28 on Access to Insight).
+      if (t.pali_title && !/\d/.test(t.pali_title)) add(u, t.pali_title, `Pāli title (${canon.sourceName(t)})`);
+    }
   }
   try {
     for (const [id, variants] of loadGlossary().names) {
@@ -86,8 +96,13 @@ export function resolveName(text) {
   const { exact, fuzzy } = index || buildIndex();
   const q = nameKey(text);
   if (q.key.length < 3) return null;
+  // A single common word ("Anger") reaches a text through an English title only when the query asks for a sutta,
+  // chapter or vagga ("Anger chapter"); otherwise it is a topic, not a name (search_texts or topic).
+  const words = fold(String(text)).replace(/[^a-z\s]/g, ' ').trim().split(/\s+/).filter(Boolean);
+  const marked = words.some((w) => /^(sutta|suttas|suttanta|sutra|chapter|vagga|vaggo|discourse)$/.test(w));
+  const englishOk = marked || words.length > 1;
   const pick = (entries) => {
-    let list = entries || [];
+    let list = (entries || []).filter((e) => englishOk || !e.english);
     // "… sutta" asks for a sutta: other kinds of text with the same stem (Satipaṭṭhānakathā) are left out.
     if (q.sutta) {
       const suttas = list.filter((e) => e.sutta || e.via !== 'Pāli title (VRI)');
@@ -100,6 +115,8 @@ export function resolveName(text) {
   let found = pick(exact.get(q.key));
   let how = 'exact';
   if (!found.length && q.letters !== q.key) found = pick(exact.get(q.letters));
+  // "Anger chapter", "Kodha vagga": the name without the word that says what kind of text it is.
+  if (!found.length && words.length > 1 && /^(chapter|vagga|vaggo)$/.test(words.at(-1))) found = pick(exact.get(nameKey(words.slice(0, -1).join(' ')).key));
   if (!found.length) { found = pick(fuzzy.get(fuzzyKey(q.key))); how = 'spelling variant'; }
   if (!found.length) return null;
   found.sort((a, b) => a.unit.book - b.unit.book || a.unit.start - b.unit.start);
