@@ -9,6 +9,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as canonModule from './canon.mjs';
+import { withNormalised } from './input.mjs';
 
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
@@ -146,14 +147,14 @@ export function dhammaList(canon, name) {
 export function register({ tool, z, canon }) {
   tool('topic', 'Texts on a topic from Access to Insight\'s subject and numerical indexes (e.g. "emptiness", "anger", "five hindrances"), each mapped to its canon ID with title and PTS page. Works offline.', {
     name: z.string().min(1).max(200).describe('A topic name or slug, e.g. "emptiness", "upekkha", "kamma", "five hindrances".'),
-  }, ({ name }) => topic(canon, name));
+  }, ({ name }) => withNormalised(name, (n) => topic(canon, n)));
   tool('list_topics', 'Browse or search the topic index (over 300 topics from Access to Insight\'s General and Numerical indexes). Works offline.', {
     query: z.string().max(200).optional().describe('Words to find in topic names, e.g. "anger" or "four".'),
     index: z.enum(['all', 'subject', 'numerical']).optional().describe('Which index: subject topics, numbered topics, or all (default).'),
     offset: z.number().int().min(0).optional(),
     limit: z.number().int().min(1).max(200).optional(),
-  }, ({ query, index, offset, limit }) => listTopics({ query, index, offset, limit }));
+  }, ({ query, index, offset, limit }) => withNormalised(query, (q) => listTopics({ query: q, index, offset, limit })));
   tool('dhamma_list', 'A standard numbered list of the teaching (four noble truths, five aggregates, seven factors of awakening, ten fetters, twelve links…) with its members in Pāli, plain-English glosses and the canonical passage that sets it out. No name lists them all. Works offline.', {
     name: z.string().max(200).optional().describe('A list name or slug, e.g. "five hindrances", "eightfold path", "37 aids", "brahmaviharas". Omit to see every list.'),
-  }, ({ name }) => dhammaList(canon, name));
+  }, ({ name }) => withNormalised(name, (n) => dhammaList(canon, n)));
 }

@@ -19,6 +19,7 @@ Pali Canon for Claude gives Claude the complete Pāli Tipiṭaka, the scripture 
 - [How accuracy is checked](#how-accuracy-is-checked)
 - [Install](#install)
 - [Using it well](#using-it-well)
+- [Typing Pāli on an English keyboard](#typing-pāli-on-an-english-keyboard)
 - [What it does not do yet](#what-it-does-not-do-yet)
 - [Roadmap](#roadmap)
 - [Documentation](#documentation)
@@ -56,7 +57,7 @@ Claude quotes only what it retrieved, names the translator, and keeps four thing
 
 ## What you can ask it
 
-Pali Canon gives the AI **30 tools**, 4 prompts, 3 reference resources and 5 skills. You do not need to know their names: ask in your own words and the AI picks the right tool. The tool names are shown in `code` for anyone who wants to check. Everything works offline unless marked *(internet)*.
+Pali Canon gives the AI **31 tools**, 4 prompts, 3 reference resources and 5 skills. You do not need to know their names: ask in your own words and the AI picks the right tool. The tool names are shown in `code` for anyone who wants to check. Everything works offline unless marked *(internet)*.
 
 ### Study
 
@@ -66,6 +67,7 @@ Pali Canon gives the AI **30 tools**, 4 prompts, 3 reference resources and 5 ski
 - **See where the printed editions differ.** VRI's variant notes, split into readings with the editions (Sinhala, Thai, PTS and others) that carry them (`get_text` with `variants: "structured"`).
 - **Read and compare translations** *(internet)*. Ṭhānissaro Bhikkhu, the translators on Access to Insight and Ānandajoti Bhikkhu, always named and attributed (`get_translation`, `compare_translations`, `search_access_to_insight`, `get_access_to_insight_text`).
 - **Look up a Pāli word** in the Digital Pāḷi Dictionary (`lookup_pali`, live, answering from a bundled subset when offline), or **analyse a passage word by word**: split, grammar, root and meaning of every word (`analyse_passage`). A pronunciation guide explains how to read Pāli aloud (`pali://pronunciation`).
+- **Ask in English or type Pāli without diacritics.** "Find the Satipatthana sutta", "lookup nibbana" or "search mindfulness of breathing" work: names, plain spellings and English words are understood, and the answer always says what was inferred (`glossary`, and every search and lookup tool). See [Typing Pāli on an English keyboard](#typing-pāli-on-an-english-keyboard).
 - **Read the commentary.** The traditional Pāli commentary (Aṭṭhakathā) on a text, aligned by VRI paragraph and always labelled as commentary, not canon (`get_commentary`, or `get_text` with `commentary: true`).
 - **Read later Pāli classics.** The Visuddhimagga ("Vism 1.1", "Vism §19"), the Abhidhammatthasaṅgaha ("Abhidh-s 1.4"), the sub-commentaries (Ṭīkā) and chronicles such as the Mahāvaṃsa, labelled `canonical: false` (`get_post_canonical`, `search_post_canonical`, or `search_texts` with `include_post_canonical`). Visuddhimagga PTS pages cannot be looked up yet.
 - **Ask who or where.** "Who was Anāthapiṇḍika?" lists the texts that name a person or place and links to the Dictionary of Pāli Proper Names (`lookup_name`).
@@ -157,7 +159,7 @@ Model-level runs, where Claude or Codex answers the questions with the server co
 
 ## Install
 
-Pick the app you use. Every option runs the same server, with the same 30 tools.
+Pick the app you use. Every option runs the same server, with the same 31 tools.
 
 ### Claude Desktop (easiest)
 
@@ -251,6 +253,16 @@ The hosted version can be added to ChatGPT as an app, with a reading view that s
 - **Remember it is a library, not a teacher.** It gives you the texts and their translations faithfully. Interpretation, and questions of practice, belong with the tradition and its teachers.
 
 New to the terms? See the [glossary](docs/glossary.md).
+
+## Typing Pāli on an English keyboard
+
+You do not need Pāli letters. Type the way your keyboard lets you, and every answer says what it understood, so nothing is silently changed.
+
+- **No diacritics:** "samyutta", "nibbana", "satipatthana". Search ignores diacritics anyway. A dictionary lookup lists every word spelled with those letters: "nibbana" gives both *nibbāna* (extinguishment) and *nibbana* (desireless), marked `inferred_spelling`.
+- **Common English-keyboard spellings:** "sanyutta" (saṃyutta), "nyana" (ñāṇa), "nirvana" (nibbāna, marked as a Sanskrit or English form). When an exact search finds little, the search also tries spellings that differ only in *h* after a consonant, double letters, *ny*/*ñ* or *ṃ*/*n*, and says so (`spelling_note`).
+- **Typing schemes:** Velthuis ("sa.myutta", "pa~n~naa", "nibbaana") and Harvard-Kyoto ("saMyutta"). Velthuis dots and tildes never occur in English words, so they are always read. Harvard-Kyoto capitals, doubled vowels and English-keyboard spellings are read only when the result is a word in the canon, so ordinary English ("vacuum", "McDonald", "NASA") is left alone.
+- **Sutta names:** "Satipatthana Sutta", "Dhammacakkappavattana", "anapanasati sutta" or an English title such as "Mindfulness of Breathing" find the text (`matched_by: "name"`). When a name belongs to several texts, as the Metta Sutta does (Snp 1.8, Kp 9 and others), you get the list to choose from; the tool never picks one for you. "samyutta 56 11" is read as SN 56.11.
+- **Questions in English:** a search such as "mindfulness of breathing" or "suffering" is turned into Pāli words (sati, assāsapassāsa; dukkha…) from the Digital Pāḷi Dictionary's English index, and the answer lists exactly which Pāli words were searched (`expanded_from_english`). Set `english: "off"` to search only what you typed. The `glossary` tool looks words up in both directions. Glossary meanings are dictionary labels for finding words, not translations of the texts.
 
 ## What it does not do yet
 

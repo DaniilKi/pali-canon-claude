@@ -14,7 +14,7 @@ Please read [what to expect from small models](#what-to-expect-from-small-models
 
 ## What works offline
 
-The server has 30 tools. Twenty-three of them work without internet (`get_text` needs it only when you ask for an English translation, and `verify_quote` checks Pāli quotations offline but English ones online):
+The server has 31 tools. Twenty-four of them work without internet (`get_text` needs it only when you ask for an English translation, and `verify_quote` checks Pāli quotations offline but English ones online):
 
 | Tool | What it does | Internet? |
 |---|---|---|
@@ -36,6 +36,7 @@ The server has 30 tools. Twenty-three of them work without internet (`get_text` 
 | `get_post_canonical` | Reads post-canonical Pāli books (Visuddhimagga, Abhidhammatthasaṅgaha, sub-commentaries), labelled as not canon | No |
 | `search_post_canonical` | Searches the post-canonical books | No |
 | `analyse_passage` | Word-by-word analysis of a passage from the bundled Digital Pāḷi Dictionary subset (split, grammar, root, meaning) | No |
+| `glossary` | English → Pāli terms ("mindfulness" → sati) and Pāli → short English glosses, from the Digital Pāḷi Dictionary's English index and the curated list glosses, each with its source | No |
 | `verify_quote` | Checks whether a quotation attributed to the Buddha is in the texts: Pāli against the whole bundled canon (offline), English against the linked translations of the texts you name (default: the Dhammapada) | Yes |
 | `lookup_name` | Who or what a name is (Sāriputta, Sāvatthī): the Dictionary of Pāli Proper Names entry when bundled, and the texts where the name appears | No |
 | `topic` | Texts on a topic ("anger", "five hindrances") from Access to Insight's indexes | No |
@@ -109,7 +110,7 @@ Once the npm package is available, this shorter form works too:
 uvx mcpo --host 127.0.0.1 --port 8000 -- npx -y pali-canon-mcp
 ```
 
-Leave the terminal open. To check it, open [http://localhost:8000/docs](http://localhost:8000/docs) in a browser: you should see the 30 tools, and you can try `resolve_reference` with `{"reference": "MN 10"}`.
+Leave the terminal open. To check it, open [http://localhost:8000/docs](http://localhost:8000/docs) in a browser: you should see the 31 tools, and you can try `resolve_reference` with `{"reference": "MN 10"}`.
 
 Notes:
 

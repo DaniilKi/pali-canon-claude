@@ -17,6 +17,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { withNormalised } from './input.mjs';
 
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
@@ -613,5 +614,5 @@ export function register({ tool, z }) {
     section: z.enum(['tika', 'anna']).optional().describe('Limit to the VRI Ṭīkā or Añña section.'),
     limit: z.number().int().min(1).max(50).default(10),
     offset: z.number().int().min(0).max(100000).default(0),
-  }, ({ query, books, section, limit, offset }) => search(query, { books, section, limit, offset }));
+  }, ({ query, books, section, limit, offset }) => withNormalised(query, (q) => search(q, { books, section, limit, offset })));
 }

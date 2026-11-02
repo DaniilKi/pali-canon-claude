@@ -17,3 +17,4 @@ export * as memorise from '../memorise.mjs';
 export * as commentary from '../commentary.mjs';
 export * as postCanonical from '../postcanonical.mjs';
 export * as analyse from '../analyse.mjs';
+export * as glossary from '../glossary.mjs';

@@ -372,7 +372,7 @@ function buildSearch() {
   for (const u of sorted) for (let i = u.start; i < u.end; i += 1) owner[u.book][i] = u;
   const folded = d.canon.books.map((b) => b.blocks.map((blk) => fold(blk[2])));
   const titles = d.canon.units.filter((u) => !u.approximate).map((u) => {
-    const english = (d.translations[u.id] || []).map((t) => t.reference || '').join(' ');
+    const english = (d.translations[u.id] || []).map((t) => `${t.reference || ''} ${t.english || ''}`).join(' ');
     return { u, text: fold(`${u.acronym} ${u.title} ${english}`) };
   });
   d.search = { owner, folded, titles };
@@ -385,14 +385,19 @@ function terms(query) {
   return [...phrases, ...words];
 }
 
-export function search(query, { collection, limit = 10, offset = 0 } = {}) {
+/**
+ * Full-text search. `groups` (optional, used for spelling variants and English expansion, #102) replaces the query's
+ * own terms: an array of groups of folded alternatives, where every group must match and any alternative in a group may.
+ */
+export function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const d = load();
   const s = d.search || buildSearch();
-  const wanted = terms(query);
+  const wanted = groups?.length ? groups.map((g) => g.map((w) => fold(w))) : terms(query).map((w) => [w]);
   if (!wanted.length) throw new Error('Search needs at least one word of two or more letters.');
+  const has = (text) => wanted.every((alts) => alts.some((w) => text.includes(w)));
   const filter = collection ? fold(collection).replace(/\s+/g, '') : null;
   const okCollection = (u) => !filter || u.collection === filter || u.id.startsWith(filter);
-  const titleHits = s.titles.filter(({ u, text }) => okCollection(u) && wanted.every((w) => text.includes(w)))
+  const titleHits = s.titles.filter(({ u, text }) => okCollection(u) && has(text))
     .slice(0, 20).map(({ u }) => unitSummary(u));
   const hits = [];
   const seen = new Set();
@@ -401,14 +406,14 @@ export function search(query, { collection, limit = 10, offset = 0 } = {}) {
     const blocks = s.folded[bi];
     for (let k = 0; k < blocks.length; k += 1) {
       const text = blocks[k];
-      if (!wanted.every((w) => text.includes(w))) continue;
+      if (!has(text)) continue;
       const u = s.owner[bi][k];
       if (!u || !okCollection(u) || seen.has(u.id)) continue;
       seen.add(u.id);
       total += 1;
       if (total <= offset || hits.length >= limit) continue;
       const original = d.canon.books[bi].blocks[k][2];
-      const at = Math.max(0, text.indexOf(wanted[0]) - 80);
+      const at = Math.max(0, text.indexOf(wanted[0].find((w) => text.includes(w))) - 80);
       hits.push({ ...unitSummary(u), match_vri_paragraph: d.canon.books[bi].blocks[k][1] || undefined,
         excerpt: (at ? '…' : '') + original.slice(at, at + 260) + (original.length > at + 260 ? '…' : '') });
     }

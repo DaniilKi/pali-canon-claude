@@ -6,6 +6,7 @@ import * as commentary from '../src/commentary.mjs';
 import * as postcanonical from '../src/postcanonical.mjs';
 import { statSync } from 'node:fs';
 import { loadDpd, DPD_PIN, tokenize, wordParts } from '../src/analyse.mjs';
+import { loadGlossary } from '../src/glossary-data.mjs';
 
 const d = canon.load();
 const failures = [];
@@ -446,6 +447,28 @@ else {
       count('content-link');
     }
   }
+}
+// 11. Glossary and sutta names (#102): same DPD pin as dpd.json.gz, no SuttaCentral columns, every name on a real
+// text, every index entry pointing at a headword, within its 3 MB budget.
+{
+  const file = new URL('../server/data/glossary.json.gz', import.meta.url);
+  const g = loadGlossary();
+  const size = statSync(file).size;
+  counts['glossary-bytes'] = size;
+  if (size > 3 * 1024 * 1024) fail('glossary-size', `${size} bytes, budget 3 MB`);
+  for (const key of ['version', 'asset_sha256']) if (g.source[key] !== DPD_PIN[key]) fail('glossary-pin', `glossary.json.gz ${key} ${g.source[key]} != DPD_PIN ${DPD_PIN[key]}`);
+  if (g.source.license !== 'CC BY-NC-SA 4.0' || !/Bodhirasa/.test(g.source.attribution || '')) fail('glossary-licence', g.source.license);
+  if (g.source.canon_commit !== d.canon.source.commit) fail('glossary-canon', `built from canon ${g.source.canon_commit}`);
+  if (/suttacentral\.net|sc_bilara|"sc_/i.test(JSON.stringify(g.names))) fail('glossary-sc', 'SuttaCentral data in names');
+  for (const [id, variants] of g.names) {
+    if (!d.byId.has(id)) fail('glossary-name', `${id} is not a canon text`);
+    else if (!variants.length) fail('glossary-name', `${id} has no name`);
+    else count('glossary-name');
+  }
+  for (const table of ['en', 'phrases']) for (const [k, ids] of Object.entries(g[table])) {
+    if (!ids.length || ids.some((i) => !g.headwords[i])) fail('glossary-entry', `${table} "${k}" points at a missing headword`);
+  }
+  counts['glossary-en-keys'] = Object.keys(g.en).length;
 }
 console.log(JSON.stringify(counts));
 console.log(`texts: ${d.canon.units.length}; failures: ${failures.length}`);

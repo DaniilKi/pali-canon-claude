@@ -67,6 +67,7 @@ curl -sSLO https://github.com/digitalpalidictionary/dpd-db/releases/download/$V/
 sha256sum dpd.db.tar.xz          # 62a3f55d285ae27f5e1d15492cd7bfa92e9e66a0b6bfed9ea97b58a28e346f49 for v0.4.20261026
 tar -xJf dpd.db.tar.xz           # dpd.db
 python scripts/dpd/build_dpd.py dpd.db server/data/canon.json.gz server/data/dpd.json.gz --archive-sha256 <sha256>
+python -I scripts/dpd/build_glossary.py dpd.db server/data/canon.json.gz server/data/dpd.json.gz server/data/glossary.json.gz --archive-sha256 <sha256>
 node scripts/audit.mjs           # checks the pin (DPD_PIN in src/analyse.mjs), licence and word coverage (>= 98.5%)
 ```
 
