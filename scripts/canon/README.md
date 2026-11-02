@@ -12,8 +12,10 @@ git checkout main && VRI_COMMIT=$(git rev-parse HEAD) && cd ..
 git clone --depth 1 --filter=blob:none --no-checkout -b published https://github.com/suttacentral/bilara-data.git bilara && cd bilara
 git sparse-checkout init --no-cone && printf '/root/pli/ms/\n' > .git/info/sparse-checkout && git checkout published && cd ..
 # 3. Access to Insight (official BCBS repository) for translation links and validation
-git clone --depth 1 --filter=blob:none --no-checkout https://github.com/bcbsit/ati.git ati && cd ati
-git sparse-checkout init --no-cone && printf '/tipitaka/\n' > .git/info/sparse-checkout && git checkout main && cd ..
+git clone --filter=blob:none --no-checkout https://github.com/bcbsit/ati.git ati && cd ati
+git config core.protectNTFS false   # Windows only: one file name in the repository contains a quote
+git sparse-checkout init --no-cone && printf '/tipitaka/\n!/tipitaka/kn/"*\n' > .git/info/sparse-checkout
+git checkout 45fedca341497120651efa20e756b04a13e61089 && cd ..   # pinned; the same commit as topics.json
 
 cd /path/to/pali-canon-claude
 python3 scripts/canon/build_canon.py $W/vri $VRI_COMMIT $W/bilara $W/canon.json.gz
@@ -34,6 +36,7 @@ printf '/romn/*.tik.xml
 ' >> $W/vri/.git/info/sparse-checkout && git -C $W/vri sparse-checkout reapply
 python3 scripts/canon/build_postcanonical.py $W/vri $VRI_COMMIT $W/postcanonical.json.gz   # prints the size and SHA-256
 cp $W/postcanonical.json.gz server/data/
+python3 scripts/canon/build_translations.py $W/canon.json.gz $W/dt-index.json $W/ati-index.json $W/translations.json --content $W/ati $W/dt-cache
 cp $W/canon.json.gz $W/translations.json server/data/
 node scripts/audit.mjs                                                         # must report failures: 0
 npm run check && npm run smoke -- --live
@@ -68,3 +71,5 @@ node scripts/audit.mjs           # checks the pin (DPD_PIN in src/analyse.mjs), 
 ```
 
 When moving to a new release, update `DPD_PIN` in `src/analyse.mjs` and the release line in `THIRD_PARTY.md`. Rebuild the subset whenever `canon.json.gz` changes (the audit compares the canon commit). The tokeniser in `build_dpd.py` must stay in step with `tokenize()` and `wordParts()` in `src/analyse.mjs`.
+- `--content` (#37) then reads the pages still unlinked (ATI from the checkout; dhammatalks.org pages fetched once, one a second, cached in `dt-cache`) and compares them with the Pāli of the texts within 15 numbers of the page's own number. Evidence is the names in the English (people, places, Pāli words the translator kept, the page's Pāli title), counted only when *rare* in the collection (in at most 2% of its texts). A link is added only by one of three rules: `content-pts+names` (the page's PTS page lies in the text and it has names no nearby text has), `content-number+names` (two or more rare names found in this text and in no other nearby, within 5 numbers), `content-title+number` (the Pāli title names exactly one nearby text, ordinals agreeing, within 5 numbers, and no other text has more of the names). Multi-text pages and introductions are skipped, ordinals must agree, and any collision with another proposal or an existing page from the same source drops the link. The matched names are stored as `evidence`, and `scripts/audit.mjs` re-checks them against the Pāli. Set `CONTENT_DEBUG=1` to print every decision. On Windows run Python with `PYTHONUTF8=1`.
+- Access to Insight pages whose name ends in `x` (`sn22.084x.wlsh`) are another translation of the same sutta and count as the same page.

@@ -420,6 +420,33 @@ else {
   counts['dpd-word-coverage-%'] = Number((coverage * 100).toFixed(2));
   if (coverage < 0.985) fail('dpd-coverage', `only ${(coverage * 100).toFixed(2)}% of ${tokens} words are in the DPD subset (need 98.5%)`);
 }
+// 7b. Content-matched links (#37): a known match type, recorded evidence that really occurs in the Pāli of the
+// linked text, a page linked to no other text, and no second page from the same source on the text.
+{
+  const CONTENT = new Set(['content-pts+names', 'content-number+names', 'content-title+number']);
+  const flat = (t) => t.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/(?<=[aiu])\1/g, '').replace(/([aiu])\1/g, '$1').replace(/[^a-z]/g, '');
+  const pageKey = (l) => (l.source === 'ati' ? l.path.replace(/\.[^./]+$/, '').replace(/x$/, '') : l.url);
+  const owners = new Map();
+  for (const [id, links] of Object.entries(d.translations)) for (const l of links) owners.set(l.url, [...(owners.get(l.url) || []), id]);
+  for (const [id, links] of Object.entries(d.translations)) {
+    for (const l of links) {
+      if (!String(l.match || '').startsWith('content')) continue;
+      if (!CONTENT.has(l.match)) { fail('content-link', `${id}: unknown match type ${l.match}`); continue; }
+      const u = d.byId.get(id);
+      if (!u || u.approximate || u.kind === 'range') { fail('content-link', `${id}: content links only go to whole, non-abbreviated texts`); continue; }
+      if (l.match !== 'content-title+number' && !(l.evidence || []).length) fail('content-link', `${id}: ${l.url} has no evidence`);
+      const pali = flat(canon.segments(u).map((x) => x.text || '').join(' '));
+      for (const term of l.evidence || []) {
+        const stem = term.length <= 6 ? term.slice(0, -1) : term.slice(0, -2);
+        if (!pali.includes(stem)) fail('content-link', `${id}: evidence "${term}" not in its Pāli`);
+      }
+      if ((owners.get(l.url) || []).length !== 1) fail('content-link', `${l.url} is linked to ${owners.get(l.url).join(', ')}`);
+      const keys = new Set(links.filter((x) => x.source === l.source).map(pageKey));
+      if (keys.size !== 1) fail('content-link', `${id}: ${keys.size} different ${l.source} pages`);
+      count('content-link');
+    }
+  }
+}
 console.log(JSON.stringify(counts));
 console.log(`texts: ${d.canon.units.length}; failures: ${failures.length}`);
 const byKind = {};
