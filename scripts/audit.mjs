@@ -3,6 +3,8 @@ import * as canon from '../src/canon.mjs';
 import { EDITIONS, editionLabel, editionIndex, nextUnit } from '../src/editions.mjs';
 import { textSegments, parseNoteSpans, uncovered, SIGLA } from '../src/variants.mjs';
 import * as commentary from '../src/commentary.mjs';
+import * as postcanonical from '../src/postcanonical.mjs';
+import { statSync } from 'node:fs';
 
 const d = canon.load();
 const failures = [];
@@ -275,6 +277,112 @@ else {
     if (covered !== c.with_commentary) fail('commentary-coverage', `${coll}: ${covered} texts have commentary, the build counted ${c.with_commentary}`);
     if (c.cited_aligned < minCited * c.cited) fail('commentary-coverage', `${coll}: ${c.cited_aligned}/${c.cited} texts the commentary numbers are aligned (floor ${minCited})`);
     if (covered < minTexts * texts.length) fail('commentary-coverage', `${coll}: ${covered}/${texts.length} texts have commentary (floor ${minTexts})`);
+  }
+}
+// 9. Post-canonical books (server/data/postcanonical.json.gz, #21): pinned, never canonical, never shadowing a canon
+//    citation; every chapter of every book resolves to its own heading; every Visuddhimagga VRI paragraph and every
+//    Abhidhammatthasaṅgaha section resolves to the block that carries it; every block's citation (the one search
+//    returns for it) resolves, unambiguously, to a passage that contains the block; generic "<book> k.p" and
+//    "<book> §p" forms resolve to the block that carries p.
+{
+  const pc = postcanonical.load();
+  if (!pc) fail('postcanonical', 'server/data/postcanonical.json.gz is missing');
+  else {
+    if (pc.source.commit !== d.canon.source.commit) fail('postcanonical', `VRI commit ${pc.source.commit} differs from the canon's`);
+    // Decision D-21a: one bundle of all books (target 12 MB was exceeded on purpose; package budget is 60 MB).
+    const size = statSync(new URL('../server/data/postcanonical.json.gz', import.meta.url)).size;
+    if (size > 16e6) fail('postcanonical', `bundle is ${size} bytes, over the 16 MB ceiling of decision D-21a`);
+    const canonFiles = new Set(d.canon.books.map((b) => b.file));
+    for (const b of pc.books) {
+      if (b.canonical !== false) fail('postcanonical', `${b.id} not flagged canonical: false`);
+      if (canonFiles.has(b.file)) fail('postcanonical', `${b.file} is also in the canon data`);
+      if (!Array.isArray(b.blocks) || b.blocks.length !== b.block_count) fail('postcanonical', `${b.id}: text missing or block count wrong`);
+      try { canon.resolve(b.id); fail('postcanonical', `${b.id} is also a canon citation`); } catch { count('postcanonical-id-free'); }
+      if (postcanonical.isPostCanonical(b.id) !== true) fail('postcanonical', `${b.id} not recognised`);
+      try {
+        const r = postcanonical.describe(b.id);
+        if (r.book.id !== b.id || r.canonical !== false) fail('postcanonical', `${b.id} -> ${r.book.id}`);
+        else count('postcanonical-book');
+      } catch (e) { fail('postcanonical', `${b.id}: ${e.message}`); }
+      b.chapters.forEach(([title, at], i) => {
+        try {
+          const r = postcanonical.locate(`${b.id} ${i + 1}`);
+          if (r.title !== title || r.start !== at || r.end <= r.start) fail('postcanonical-chapter', `${b.id} ${i + 1} -> "${r.title}" [${r.start},${r.end})`);
+          else if (!b.blocks.slice(r.start, r.end).some(([rend, , text]) => text && rend !== 'chapter')) fail('postcanonical-chapter', `${b.id} ${i + 1} has no text`);
+          else count('postcanonical-chapter');
+        } catch (e) { fail('postcanonical-chapter', `${b.id} ${i + 1}: ${e.message}`); }
+      });
+    }
+    // Visuddhimagga: 23 chapters "N. …niddeso"; VRI paragraphs 1–896, each resolving to its own block, in both citation forms.
+    for (let k = 1; k <= 23; k += 1) {
+      const r = postcanonical.locate(`Vism ch. ${k}`);
+      if (!(r.title.startsWith(`${k}. `) && /^\d+\. \S+niddeso$/.test(r.title))) fail("postcanonical-vism", `Vism ch. ${k} -> ${r.title}`);
+      else count('postcanonical-vism-chapter');
+    }
+    for (const [vi, id] of ['visuddhimagga-1', 'visuddhimagga-2'].entries()) {
+      for (const [, n] of pc.byId.get(id).blocks) {
+        const range = postcanonical.paraRange(n);
+        if (!range) continue;
+        for (const ref of [`Vism §${range[0]}`, `visuddhi. ${vi + 1}.${range[0]}`]) {
+          try {
+            const r = postcanonical.locate(ref);
+            if (r.book.id !== id || r.paragraph !== n) fail('postcanonical-vism', `${ref} -> ${r.book.id} §${r.paragraph}`);
+            else count('postcanonical-vism-paragraph');
+          } catch (e) { fail('postcanonical-vism', `${ref}: ${e.message}`); }
+        }
+      }
+    }
+    // Abhidhammatthasaṅgaha: 9 chapters "N. …paricchedo"; every numbered section resolves to its own block within its chapter.
+    const abhs = pc.byId.get('abhidhammatthasangaho');
+    for (let k = 1; k <= 9; k += 1) {
+      const ch = postcanonical.locate(`Abhidh-s ${k}`);
+      if (!(ch.title.startsWith(`${k}. `) && /^\d+\. \S+paricchedo$/.test(ch.title))) { fail('postcanonical-abhs', `Abhidh-s ${k} -> ${ch.title}`); continue; }
+      count('postcanonical-abhs-chapter');
+      for (let i = ch.start; i < ch.end; i += 1) {
+        const range = postcanonical.paraRange(abhs.blocks[i][1]);
+        if (!range) continue;
+        try {
+          const r = postcanonical.locate(`Abhidh-s ${k}.${range[0]}`);
+          if (r.paragraph !== abhs.blocks[i][1] || r.start > i || r.end <= i) fail('postcanonical-abhs', `Abhidh-s ${k}.${range[0]} -> [${r.start},${r.end}) not block ${i}`);
+          else count('postcanonical-abhs-section');
+        } catch (e) { fail('postcanonical-abhs', `Abhidh-s ${k}.${range[0]}: ${e.message}`); }
+      }
+    }
+    // Every block's citation round-trips: select(citationFor(block)) is a range of the same book that holds the block.
+    const levels = { paragraph: 0, chapter: 0, book: 0 };
+    for (const b of pc.books) {
+      for (let i = 0; i < b.blocks.length; i += 1) {
+        const c = postcanonical.citationFor(b, i);
+        try {
+          const r = postcanonical.select(c);
+          if (!r || r.book !== b || i < r.start || i >= r.end) fail('postcanonical-roundtrip', `${b.id} block ${i}: ${c} -> ${r ? `${r.book.id} [${r.start},${r.end})` : 'null'}`);
+          else { count('postcanonical-roundtrip'); levels[r.paragraph ? 'paragraph' : r.kind === 'book' || r.kind === 'work' ? 'book' : 'chapter'] += 1; }
+        } catch (e) { fail('postcanonical-roundtrip', `${b.id} block ${i}: ${c}: ${e.message}`); }
+      }
+      // Generic forms: "<id> k.p" for the first block carrying p in chapter k (ranges such as 50-205 carry every p in them), and "<id> §p" when p occurs once.
+      const seen = new Map();
+      b.blocks.forEach(([, n]) => { const r = postcanonical.paraRange(n); if (r) for (let p = r[0]; p <= r[1]; p += 1) seen.set(p, (seen.get(p) || 0) + 1); });
+      const firstInChapter = new Set();
+      b.blocks.forEach(([, n], i) => {
+        const r = postcanonical.paraRange(n);
+        if (!r) return;
+        const k = b.chapters.filter(([, s]) => s <= i).length;
+        const forms = [];
+        if (seen.get(r[0]) === 1) forms.push(`${b.id} §${r[0]}`);
+        const first = k && !firstInChapter.has(`${k}|${r[0]}`);
+        for (let p = r[0]; p <= r[1] && k; p += 1) firstInChapter.add(`${k}|${p}`);
+        if (first) { if (i < (b.works.slice(1).find(([, w]) => w > b.chapters[k - 1][1])?.[1] ?? Infinity)) forms.push(`${b.id} ${k}.${r[0]}`); }
+        for (const ref of forms) {
+          try {
+            const sel = postcanonical.select(ref);
+            if (sel.book !== b || sel.start > i || sel.end <= i || sel.paragraph !== n) fail('postcanonical-generic', `${ref} -> [${sel.start},${sel.end}) §${sel.paragraph}, not block ${i}`);
+            else count('postcanonical-generic-paragraph');
+          } catch (e) { fail('postcanonical-generic', `${ref}: ${e.message}`); }
+        }
+      });
+    }
+    counts['postcanonical-citation-levels'] = levels;
+    try { postcanonical.locate('Vism p. 3'); fail('postcanonical-vism', 'Vism p. 3 located without PTS data'); } catch { count('postcanonical-pts-refused'); }
   }
 }
 console.log(JSON.stringify(counts));

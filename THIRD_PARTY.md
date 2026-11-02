@@ -6,6 +6,8 @@ The [MIT licence](LICENSE) covers this project's own software and documentation.
 
 `server/data/canon.json.gz` contains the Pāli text of the Tipiṭaka from the Vipassana Research Institute's [tipitaka-xml](https://github.com/VipassanaTech/tipitaka-xml) repository (romanised edition; the exact commit is recorded in the data file and reported by `list_sources`). VRI states that these files are "made freely available for non-commercial use" and asks that projects attribute the Vipassana Research Institute and stay in sync with its corrections. The text is reproduced without changes, apart from markup removal. Page references are VRI's own markers for the PTS, Myanmar, VRI and Thai editions. Rebuild the data from a newer commit to pick up VRI corrections ([scripts/canon/README.md](scripts/canon/README.md)).
 
+`server/data/postcanonical.json.gz` holds post-canonical books from the same repository and commit (the Ṭīkā and Añña sections: `romn/*.tik.xml`, `romn/*.nrf.xml`, the Visuddhimagga and its Mahāṭīkā), under the same VRI terms and attribution, unchanged apart from markup removal; titles come from VRI's table of contents (`tipitaka.org/romn/tree.json`).
+
 ## Citation numbering
 
 `server/data/commentary.json.gz` contains the commentaries (Aṭṭhakathā) of the same VRI repository and commit (`romn/*.att.xml`), under the same terms: free for non-commercial use, with attribution to the Vipassana Research Institute. The text is reproduced without changes, apart from markup removal; the build adds only the alignment of each passage to the root paragraph it explains. `get_commentary` returns VRI's attribution and terms with every result and labels the text as commentary.

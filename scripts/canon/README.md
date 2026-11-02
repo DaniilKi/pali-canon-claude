@@ -23,6 +23,18 @@ python3 scripts/canon/validate.py $W/canon.json.gz $W/ati-index.json          # 
 python3 scripts/canon/build_translations.py $W/canon.json.gz $W/dt-index.json $W/ati-index.json $W/translations.json
 python3 scripts/canon/build_commentary.py $W/vri $VRI_COMMIT $W/canon.json.gz $W/commentary.json.gz   # writes commentary.json.gz.report.json
 cp $W/canon.json.gz $W/translations.json $W/commentary.json.gz server/data/
+# Post-canonical books (#21): widen the VRI sparse checkout, then build (same pinned commit)
+printf '/romn/*.tik.xml
+/romn/*.nrf.xml
+/romn/e0101n.mul.xml
+/romn/e0102n.mul.xml
+/romn/e0103n.att.xml
+/romn/e0104n.att.xml
+/tipitaka.org/romn/tree.json
+' >> $W/vri/.git/info/sparse-checkout && git -C $W/vri sparse-checkout reapply
+python3 scripts/canon/build_postcanonical.py $W/vri $VRI_COMMIT $W/postcanonical.json.gz   # prints the size and SHA-256
+cp $W/postcanonical.json.gz server/data/
+cp $W/canon.json.gz $W/translations.json server/data/
 node scripts/audit.mjs                                                         # must report failures: 0
 npm run check && npm run smoke -- --live
 ```
@@ -39,4 +51,5 @@ npm run check && npm run smoke -- --live
   - It writes a report (`canon.json.gz.report.json`) of unplaced members and title differences.
 - `build_commentary.py` aligns the commentaries (`*.att.xml`, same VRI commit) to the texts. Each commentary passage starts at a numbered paragraph, the VRI number of the root paragraph it explains; the heading and introduction that open a text's commentary, and a Dhammapada or Jātaka story told before its verse, go with it. The bold words the commentary quotes are looked up in that root paragraph (only words found in at most 2% of the book's paragraphs count). The passage is aligned when they confirm the number, or when nothing contradicts it; it is left out when they fit another paragraph within 8 better. Numbered introductions (opening verses numbered 1, 2, 3… before the numbering restarts) and numbers out of sequence are not aligned. A numbered heading that opens a text ("3. Dukkhalakkhaṇavatthu", "2. Mahākoṭṭhikattheragāthāvaṇṇanā") always starts the next passage, never ends the one before; book front matter (n="0", "Namo tassa…") belongs to none. Books that restart their paragraph numbers (Jātaka, Apadāna, Buddhavaṃsa, Cariyāpiṭaka, Paṭisambhidāmagga, several Abhidhamma books) are split into segments, and a passage goes to one segment only (the one whose verse it quotes or whose paragraph its quotations fit, or on a tie the one the previous passage went to), else it stays unaligned. A quoted stanza that is the neighbouring paragraph's verse, or an opening heading that names a neighbouring text, rejects the number; the paragraph's own verse quoted in full, or a heading naming the text, confirms it when the quotations point elsewhere. The report gives, per collection, the passages aligned and rejected, the texts with commentary, the texts the commentary numbers (`cited`, `cited_aligned`, with the unaligned ones listed), and a control: how often the same check would accept the paragraph 7 further on (the false-alignment rate). `node scripts/audit.mjs` re-checks every alignment against the canon (in its segment), checks that no passage carries the next text's opening heading, holds coverage of the numbered texts to floors with a list of known exceptions, and spot-checks known passages in both directions.
 - `validate.py` checks the result independently against Access to Insight's PTS citations and its Thai/CDB cross-numbering.
+- `build_postcanonical.py` (#21) parses the VRI Ṭīkā and Añña books (`*.tik.xml`, `*.nrf.xml` except the Peṭakopadesa and Milindapañha already in the canon, the Visuddhimagga `e0101n`/`e0102n` and its Mahāṭīkā `e0103n`/`e0104n`) with `vri.py`, unchanged apart from markup removal. Titles and the Ṭīkā/Añña section come from VRI's own table of contents (`tipitaka.org/romn/tree.json`); ids are slugs of those titles. Output is gzip with mtime 0 (the bytes can still differ between zlib builds; nothing depends on them). `server/data/postcanonical.json.gz` holds every book with its text (about 14.5 MB gz, over the 12 MB target and accepted in decision D-21a: the package stays well under 60 MB, and the server needs no download, extra host or disk cache). `node scripts/audit.mjs` round-trips every block's citation (the one search returns) and fails above 16 MB.
 - `build_translations.py` links dhammatalks.org and ATI pages to texts by content (Pāli title, PTS page, neighbours' numbering offset), because both sites use PTS numbering for parts of SN and AN. Pages that cannot be matched with confidence are left unlinked.
