@@ -8917,11 +8917,11 @@ var $ZodNever = /* @__PURE__ */ $constructor("$ZodNever", (inst, def) => {
     return payload;
   };
 });
-function handleArrayResult(result, final, index2) {
+function handleArrayResult(result, final, index3) {
   if (result.issues.length) {
-    final.issues.push(...prefixIssues(index2, result.issues));
+    final.issues.push(...prefixIssues(index3, result.issues));
   }
-  final.value[index2] = result.value;
+  final.value[index3] = result.value;
 }
 var $ZodArray = /* @__PURE__ */ $constructor("$ZodArray", (inst, def) => {
   $ZodType.init(inst, def);
@@ -9305,14 +9305,14 @@ function mergeValues(a, b) {
       return { valid: false, mergeErrorPath: [] };
     }
     const newArray = [];
-    for (let index2 = 0; index2 < a.length; index2++) {
-      const itemA = a[index2];
-      const itemB = b[index2];
+    for (let index3 = 0; index3 < a.length; index3++) {
+      const itemA = a[index3];
+      const itemB = b[index3];
       const sharedValue = mergeValues(itemA, itemB);
       if (!sharedValue.valid) {
         return {
           valid: false,
-          mergeErrorPath: [index2, ...sharedValue.mergeErrorPath]
+          mergeErrorPath: [index3, ...sharedValue.mergeErrorPath]
         };
       }
       newArray.push(sharedValue.data);
@@ -10785,32 +10785,32 @@ var JSONSchemaGenerator = class {
     const root = this.seen.get(schema);
     if (!root)
       throw new Error("Unprocessed schema. This is a bug in Zod.");
-    const makeURI = (entry2) => {
+    const makeURI = (entry3) => {
       const defsSegment = this.target === "draft-2020-12" ? "$defs" : "definitions";
       if (params.external) {
-        const externalId = params.external.registry.get(entry2[0])?.id;
+        const externalId = params.external.registry.get(entry3[0])?.id;
         const uriGenerator = params.external.uri ?? ((id2) => id2);
         if (externalId) {
           return { ref: uriGenerator(externalId) };
         }
-        const id = entry2[1].defId ?? entry2[1].schema.id ?? `schema${this.counter++}`;
-        entry2[1].defId = id;
+        const id = entry3[1].defId ?? entry3[1].schema.id ?? `schema${this.counter++}`;
+        entry3[1].defId = id;
         return { defId: id, ref: `${uriGenerator("__shared")}#/${defsSegment}/${id}` };
       }
-      if (entry2[1] === root) {
+      if (entry3[1] === root) {
         return { ref: "#" };
       }
       const uriPrefix = `#`;
       const defUriPrefix = `${uriPrefix}/${defsSegment}/`;
-      const defId = entry2[1].schema.id ?? `__schema${this.counter++}`;
+      const defId = entry3[1].schema.id ?? `__schema${this.counter++}`;
       return { defId, ref: defUriPrefix + defId };
     };
-    const extractToDef = (entry2) => {
-      if (entry2[1].schema.$ref) {
+    const extractToDef = (entry3) => {
+      if (entry3[1].schema.$ref) {
         return;
       }
-      const seen = entry2[1];
-      const { ref, defId } = makeURI(entry2);
+      const seen = entry3[1];
+      const { ref, defId } = makeURI(entry3);
       seen.def = { ...seen.schema };
       if (defId)
         seen.defId = defId;
@@ -10821,8 +10821,8 @@ var JSONSchemaGenerator = class {
       schema2.$ref = ref;
     };
     if (params.cycles === "throw") {
-      for (const entry2 of this.seen.entries()) {
-        const seen = entry2[1];
+      for (const entry3 of this.seen.entries()) {
+        const seen = entry3[1];
         if (seen.cycle) {
           throw new Error(`Cycle detected: #/${seen.cycle?.join("/")}/<root>
 
@@ -10830,31 +10830,31 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         }
       }
     }
-    for (const entry2 of this.seen.entries()) {
-      const seen = entry2[1];
-      if (schema === entry2[0]) {
-        extractToDef(entry2);
+    for (const entry3 of this.seen.entries()) {
+      const seen = entry3[1];
+      if (schema === entry3[0]) {
+        extractToDef(entry3);
         continue;
       }
       if (params.external) {
-        const ext = params.external.registry.get(entry2[0])?.id;
-        if (schema !== entry2[0] && ext) {
-          extractToDef(entry2);
+        const ext = params.external.registry.get(entry3[0])?.id;
+        if (schema !== entry3[0] && ext) {
+          extractToDef(entry3);
           continue;
         }
       }
-      const id = this.metadataRegistry.get(entry2[0])?.id;
+      const id = this.metadataRegistry.get(entry3[0])?.id;
       if (id) {
-        extractToDef(entry2);
+        extractToDef(entry3);
         continue;
       }
       if (seen.cycle) {
-        extractToDef(entry2);
+        extractToDef(entry3);
         continue;
       }
       if (seen.count > 1) {
         if (params.reused === "ref") {
-          extractToDef(entry2);
+          extractToDef(entry3);
           continue;
         }
       }
@@ -10886,8 +10886,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
           path: seen.path ?? []
         });
     };
-    for (const entry2 of [...this.seen.entries()].reverse()) {
-      flattenRef(entry2[0], { target: this.target });
+    for (const entry3 of [...this.seen.entries()].reverse()) {
+      flattenRef(entry3[0], { target: this.target });
     }
     const result = {};
     if (this.target === "draft-2020-12") {
@@ -10905,8 +10905,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     }
     Object.assign(result, root.def);
     const defs = params.external?.defs ?? {};
-    for (const entry2 of this.seen.entries()) {
-      const seen = entry2[1];
+    for (const entry3 of this.seen.entries()) {
+      const seen = entry3[1];
       if (seen.def && seen.defId) {
         defs[seen.defId] = seen.def;
       }
@@ -10932,8 +10932,8 @@ function toJSONSchema(input, _params) {
   if (input instanceof $ZodRegistry) {
     const gen2 = new JSONSchemaGenerator(_params);
     const defs = {};
-    for (const entry2 of input._idmap.entries()) {
-      const [_, schema] = entry2;
+    for (const entry3 of input._idmap.entries()) {
+      const [_, schema] = entry3;
       gen2.process(schema);
     }
     const schemas = {};
@@ -10942,8 +10942,8 @@ function toJSONSchema(input, _params) {
       uri: _params?.uri,
       defs
     };
-    for (const entry2 of input._idmap.entries()) {
-      const [key3, schema] = entry2;
+    for (const entry3 of input._idmap.entries()) {
+      const [key3, schema] = entry3;
       schemas[key3] = gen2.emit(schema, {
         ..._params,
         external
@@ -13305,12 +13305,12 @@ var ReadBuffer = class {
     if (!this._buffer) {
       return null;
     }
-    const index2 = this._buffer.indexOf("\n");
-    if (index2 === -1) {
+    const index3 = this._buffer.indexOf("\n");
+    if (index3 === -1) {
       return null;
     }
-    const line = this._buffer.toString("utf8", 0, index2).replace(/\r$/, "");
-    this._buffer = this._buffer.subarray(index2 + 1);
+    const line = this._buffer.toString("utf8", 0, index3).replace(/\r$/, "");
+    this._buffer = this._buffer.subarray(index3 + 1);
     return deserializeMessage(line);
   }
   clear() {
@@ -15996,10 +15996,10 @@ var ZodObject2 = class _ZodObject extends ZodType2 {
   //   }) as any;
   //   return merged;
   // }
-  catchall(index2) {
+  catchall(index3) {
     return new _ZodObject({
       ...this._def,
-      catchall: index2
+      catchall: index3
     });
   }
   pick(mask) {
@@ -16317,9 +16317,9 @@ function mergeValues2(a, b) {
       return { valid: false };
     }
     const newArray = [];
-    for (let index2 = 0; index2 < a.length; index2++) {
-      const itemA = a[index2];
-      const itemB = b[index2];
+    for (let index3 = 0; index3 < a.length; index3++) {
+      const itemA = a[index3];
+      const itemB = b[index3];
       const sharedValue = mergeValues2(itemA, itemB);
       if (!sharedValue.valid) {
         return { valid: false };
@@ -16525,10 +16525,10 @@ var ZodMap = class extends ZodType2 {
     }
     const keyType = this._def.keyType;
     const valueType = this._def.valueType;
-    const pairs = [...ctx.data.entries()].map(([key3, value], index2) => {
+    const pairs = [...ctx.data.entries()].map(([key3, value], index3) => {
       return {
-        key: keyType._parse(new ParseInputLazyPath(ctx, key3, ctx.path, [index2, "key"])),
-        value: valueType._parse(new ParseInputLazyPath(ctx, value, ctx.path, [index2, "value"]))
+        key: keyType._parse(new ParseInputLazyPath(ctx, key3, ctx.path, [index3, "key"])),
+        value: valueType._parse(new ParseInputLazyPath(ctx, value, ctx.path, [index3, "value"]))
       };
     });
     if (ctx.common.async) {
@@ -17566,8 +17566,8 @@ function getDotPath(path) {
   if (path.length === 0) {
     return "object root";
   }
-  return path.reduce((acc, seg, index2) => {
-    if (index2 === 0) {
+  return path.reduce((acc, seg, index3) => {
+    if (index3 === 0) {
       return String(seg);
     }
     if (typeof seg === "number") {
@@ -18847,7 +18847,7 @@ var get$ref = (item, refs) => {
       return { $ref: getRelativePath(refs.currentPath, item.path) };
     case "none":
     case "seen": {
-      if (item.path.length < refs.currentPath.length && item.path.every((value, index2) => refs.currentPath[index2] === value)) {
+      if (item.path.length < refs.currentPath.length && item.path.every((value, index3) => refs.currentPath[index3] === value)) {
         console.warn(`Recursive reference detected at ${refs.currentPath.join("/")}! Defaulting to any`);
         return parseAnyDef(refs);
       }
@@ -20271,7 +20271,7 @@ var Server = class extends Protocol {
     super(options);
     this._serverInfo = _serverInfo;
     this._loggingLevels = /* @__PURE__ */ new Map();
-    this.LOG_LEVEL_SEVERITY = new Map(LoggingLevelSchema.options.map((level, index2) => [level, index2]));
+    this.LOG_LEVEL_SEVERITY = new Map(LoggingLevelSchema.options.map((level, index3) => [level, index3]));
     this.isMessageIgnored = (level, sessionId) => {
       const currentLevel = this._loggingLevels.get(sessionId);
       return currentLevel ? this.LOG_LEVEL_SEVERITY.get(level) < this.LOG_LEVEL_SEVERITY.get(currentLevel) : false;
@@ -20676,7 +20676,7 @@ function validateToolName(name) {
     warnings.push("Tool name starts or ends with a dot, which may cause parsing issues in some contexts");
   }
   if (!TOOL_NAME_REGEX.test(name)) {
-    const invalidChars = name.split("").filter((char) => !/[A-Za-z0-9._-]/.test(char)).filter((char, index2, arr) => arr.indexOf(char) === index2);
+    const invalidChars = name.split("").filter((char) => !/[A-Za-z0-9._-]/.test(char)).filter((char, index3, arr) => arr.indexOf(char) === index3);
     warnings.push(`Tool name contains invalid characters: ${invalidChars.map((c) => `"${c}"`).join(", ")}`, "Allowed characters are: A-Z, a-z, 0-9, underscore (_), dash (-), and dot (.)");
     return {
       isValid: false,
@@ -21566,7 +21566,7 @@ var canon_exports = {};
 __export(canon_exports, {
   ANANDAJOTI_BASE: () => ANANDAJOTI_BASE,
   ANANDAJOTI_LICENSE: () => ANANDAJOTI_LICENSE,
-  _test: () => _test,
+  _test: () => _test2,
   anandajotiInfo: () => anandajotiInfo,
   browse: () => browse,
   describe: () => describe,
@@ -21698,11 +21698,11 @@ function editionIndex(d) {
   return d.editions;
 }
 function editionLabel(d, ed, bookIndex, at) {
-  const idx = editionIndex(d);
+  const idx2 = editionIndex(d);
   const book = d.canon.books[bookIndex];
   const [vol, page] = at.split(".");
   const where = Number(vol) === 0 ? page : `${Number(vol)}.${page}`;
-  const qualifier = idx.needsBook.has(`${ed}|${book.collection}`) ? ` (${book.title})` : "";
+  const qualifier = idx2.needsBook.has(`${ed}|${book.collection}`) ? ` (${book.title})` : "";
   return `${EDITIONS[ed].name} ${SCOPE_LABEL[book.collection] || book.collection} ${where}${qualifier}`;
 }
 function scopeCollections(scope) {
@@ -21711,12 +21711,12 @@ function scopeCollections(scope) {
   return [scope];
 }
 function lookupEditionPage(d, c, ErrorClass = Error) {
-  const idx = editionIndex(d);
+  const idx2 = editionIndex(d);
   const edName = EDITIONS[c.edition].name;
   const collections = scopeCollections(c.scope);
   let found = [];
   for (const coll of collections) {
-    const list = idx.markers.get(`${c.edition}|${coll}|${c.volume}.${c.page}`);
+    const list = idx2.markers.get(`${c.edition}|${coll}|${c.volume}.${c.page}`);
     if (list) found.push(...list);
   }
   if (c.book) {
@@ -21729,7 +21729,7 @@ function lookupEditionPage(d, c, ErrorClass = Error) {
     found = filtered;
   }
   if ((c.scope === "tha-ap" || c.scope === "thi-ap") && found.length) {
-    const ownerOf2 = (x) => idx.owner[x.book][x.block] || nextUnit(d, x.book, x.block);
+    const ownerOf2 = (x) => idx2.owner[x.book][x.block] || nextUnit(d, x.book, x.block);
     const kept = found.filter((x) => ownerOf2(x)?.id.startsWith(c.scope));
     if (!kept.length) {
       const where = [...new Set(found.map((x) => ownerOf2(x)?.acronym).filter(Boolean))].join(", ") || "no text";
@@ -21741,7 +21741,7 @@ function lookupEditionPage(d, c, ErrorClass = Error) {
   }
   if (!found.length) {
     const vols = /* @__PURE__ */ new Map();
-    for (const [key3] of idx.markers) {
+    for (const [key3] of idx2.markers) {
       const [ed, coll, at] = key3.split("|");
       if (ed !== c.edition || !collections.includes(coll)) continue;
       const [v, p] = at.split(".").map(Number);
@@ -21753,7 +21753,7 @@ function lookupEditionPage(d, c, ErrorClass = Error) {
     if (range && c.page > range[0] && c.page < range[1]) {
       let below = null;
       let above = null;
-      for (const [key3, list] of idx.markers) {
+      for (const [key3, list] of idx2.markers) {
         const [ed, coll, at] = key3.split("|");
         if (ed !== c.edition || !collections.includes(coll)) continue;
         const [v, p] = at.split(".").map(Number);
@@ -21771,7 +21771,7 @@ function lookupEditionPage(d, c, ErrorClass = Error) {
   if (books.length > 1) {
     const options = books.map((b) => {
       const first = found.find((x) => x.book === b);
-      const u = idx.owner[b][first.block] || nextUnit(d, b, first.block);
+      const u = idx2.owner[b][first.block] || nextUnit(d, b, first.block);
       return `${editionLabel(d, c.edition, b, `${c.volume}.${c.page}`)} \u2192 ${u ? u.acronym : "no text"}`;
     });
     throw new ErrorClass(`${c.raw} is ambiguous: the ${edName} edition as recorded by VRI repeats this volume and page in ${books.length} books. Add the book name, e.g. ${options.join("; or ")}.`);
@@ -21788,14 +21788,14 @@ function nextUnit(d, book, block) {
   return best;
 }
 function textsOnPage(d, ed, { book, block }) {
-  const idx = editionIndex(d);
+  const idx2 = editionIndex(d);
   const blocks = d.canon.books[book].blocks;
   let end = block + 1;
   while (end < blocks.length && !blocks[end][4]?.[ed]?.length) end += 1;
   const seen = /* @__PURE__ */ new Set();
   const out = [];
   for (let i = block; i < Math.min(end + 1, blocks.length); i += 1) {
-    const u = idx.owner[book][i];
+    const u = idx2.owner[book][i];
     if (u && !seen.has(u.id)) {
       seen.add(u.id);
       out.push(u);
@@ -22146,6 +22146,7 @@ function citationId(c) {
   const end = c.end === null || c.end === void 0 ? "" : `-${Array.isArray(c.end) ? c.end.join(".") : c.end}`;
   return `${c.collection}${body}${end}`;
 }
+var _test = { numbers, fold: fold2, COLLECTIONS };
 
 // src/canon.mjs
 var import_meta = {};
@@ -22381,9 +22382,9 @@ function resolve(reference) {
   }
   if (c.kind === "edition") {
     const { hit: hit2, occurrences } = lookupEditionPage(d, c, CitationError);
-    const idx = editionIndex(d);
+    const idx2 = editionIndex(d);
     const label = editionLabel(d, c.edition, hit2.book, `${c.volume}.${c.page}`);
-    let unit = idx.owner[hit2.book][hit2.block];
+    let unit = idx2.owner[hit2.book][hit2.block];
     if (!unit) {
       unit = nextUnit(d, hit2.book, hit2.block);
       if (!unit) throw new CitationError(`${label} begins in a line that belongs to no text in the index.`);
@@ -22547,7 +22548,7 @@ function buildSearch() {
   for (const u of sorted) for (let i = u.start; i < u.end; i += 1) owner[u.book][i] = u;
   const folded = d.canon.books.map((b) => b.blocks.map((blk) => fold3(blk[2])));
   const titles = d.canon.units.filter((u) => !u.approximate).map((u) => {
-    const english2 = (d.translations[u.id] || []).map((t) => t.reference || "").join(" ");
+    const english2 = (d.translations[u.id] || []).map((t) => `${t.reference || ""} ${t.english || ""}`).join(" ");
     return { u, text: fold3(`${u.acronym} ${u.title} ${english2}`) };
   });
   d.search = { owner, folded, titles };
@@ -22558,14 +22559,15 @@ function terms(query) {
   const words3 = fold3(query.replace(/"[^"]+"/g, " ")).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
   return [...phrases, ...words3];
 }
-function search(query, { collection, limit = 10, offset = 0 } = {}) {
+function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const d = load();
   const s = d.search || buildSearch();
-  const wanted = terms(query);
+  const wanted = groups?.length ? groups.map((g) => g.map((w) => fold3(w))) : terms(query).map((w) => [w]);
   if (!wanted.length) throw new Error("Search needs at least one word of two or more letters.");
+  const has = (text) => wanted.every((alts) => alts.some((w) => text.includes(w)));
   const filter = collection ? fold3(collection).replace(/\s+/g, "") : null;
   const okCollection = (u) => !filter || u.collection === filter || u.id.startsWith(filter);
-  const titleHits = s.titles.filter(({ u, text }) => okCollection(u) && wanted.every((w) => text.includes(w))).slice(0, 20).map(({ u }) => unitSummary(u));
+  const titleHits = s.titles.filter(({ u, text }) => okCollection(u) && has(text)).slice(0, 20).map(({ u }) => unitSummary(u));
   const hits = [];
   const seen = /* @__PURE__ */ new Set();
   let total = 0;
@@ -22573,14 +22575,14 @@ function search(query, { collection, limit = 10, offset = 0 } = {}) {
     const blocks = s.folded[bi];
     for (let k = 0; k < blocks.length; k += 1) {
       const text = blocks[k];
-      if (!wanted.every((w) => text.includes(w))) continue;
+      if (!has(text)) continue;
       const u = s.owner[bi][k];
       if (!u || !okCollection(u) || seen.has(u.id)) continue;
       seen.add(u.id);
       total += 1;
       if (total <= offset || hits.length >= limit) continue;
       const original = d.canon.books[bi].blocks[k][2];
-      const at = Math.max(0, text.indexOf(wanted[0]) - 80);
+      const at = Math.max(0, text.indexOf(wanted[0].find((w) => text.includes(w))) - 80);
       hits.push({
         ...unitSummary(u),
         match_vri_paragraph: d.canon.books[bi].blocks[k][1] || void 0,
@@ -22629,7 +22631,7 @@ function browse(node = "canon", { offset = 0, limit = 60 } = {}) {
   const collection = members[0].collection;
   return { node: key3, name: COLLECTION_NAMES[key3] || COLLECTION_NAMES[collection] || collection, ...key3 !== collection ? { collection } : {}, ...page(members.map((u) => unitSummary(u))) };
 }
-var _test = { lookupId, rangeContaining, ptsLookup };
+var _test2 = { lookupId, rangeContaining, ptsLookup };
 
 // src/english.mjs
 var english_exports = {};
@@ -22741,12 +22743,12 @@ async function fetchPublic(url, { json = true, retries = 2, timeout = 2e4 } = {}
 }
 async function fetchMirrors(urls, { json = false, timeout = 15e3 } = {}) {
   const failures = [];
-  for (const [index2, url] of urls.entries()) {
+  for (const [index3, url] of urls.entries()) {
     try {
-      return { body: await fetchPublic(url, { json, retries: index2 === 0 ? 1 : 0, timeout }), url, mirror: index2 };
+      return { body: await fetchPublic(url, { json, retries: index3 === 0 ? 1 : 0, timeout }), url, mirror: index3 };
     } catch (error3) {
       failures.push(`${new URL(url).hostname}: ${error3.message}`);
-      if (error3.status === 404 && index2 === urls.length - 1) break;
+      if (error3.status === 404 && index3 === urls.length - 1) break;
     }
   }
   const error2 = new Error(`All sources failed \u2014 ${failures.join("; ")}`);
@@ -22815,15 +22817,15 @@ var LruCache = class {
     return this.maxBytes > 0 && this.ttlMs > 0;
   }
   get(key3) {
-    const entry2 = this.map.get(key3);
-    if (!entry2) return void 0;
-    if (entry2.expires <= this.now()) {
+    const entry3 = this.map.get(key3);
+    if (!entry3) return void 0;
+    if (entry3.expires <= this.now()) {
       this.delete(key3);
       return void 0;
     }
     this.map.delete(key3);
-    this.map.set(key3, entry2);
-    return entry2.value;
+    this.map.set(key3, entry3);
+    return entry3.value;
   }
   set(key3, value) {
     if (!this.enabled) return;
@@ -22838,9 +22840,9 @@ var LruCache = class {
     }
   }
   delete(key3) {
-    const entry2 = this.map.get(key3);
-    if (!entry2) return;
-    this.bytes -= entry2.bytes;
+    const entry3 = this.map.get(key3);
+    if (!entry3) return;
+    this.bytes -= entry3.bytes;
     this.map.delete(key3);
   }
   clear() {
@@ -22853,10 +22855,10 @@ var LruCache = class {
   /** Return the cached value for `key`, or run `load()` once (even if called concurrently) and cache its result. */
   async wrap(key3, load5) {
     if (!this.enabled) return load5();
-    const cached4 = this.get(key3);
-    if (cached4 !== void 0) {
+    const cached5 = this.get(key3);
+    if (cached5 !== void 0) {
       this.hits += 1;
-      return cached4;
+      return cached5;
     }
     if (this.pending.has(key3)) {
       this.hits += 1;
@@ -23095,6 +23097,229 @@ __export(analyse_exports, {
   tokenize: () => tokenize,
   wordParts: () => wordParts
 });
+var import_node_fs3 = require("node:fs");
+var import_node_zlib3 = require("node:zlib");
+var import_node_path3 = require("node:path");
+var import_node_url3 = require("node:url");
+
+// src/input.mjs
+var fold4 = fold3;
+var VELTHUIS = [
+  ["m..", "\u1E43"],
+  ["n..", "\u1E45"],
+  [",,n", "\xF1"],
+  ["AA", "\u0100"],
+  ["II", "\u012A"],
+  ["UU", "\u016A"],
+  ["aa", "\u0101"],
+  ["ii", "\u012B"],
+  ["uu", "\u016B"],
+  ['"N', "\u1E44"],
+  ['"n', "\u1E45"],
+  ["~N", "\xD1"],
+  ["~n", "\xF1"],
+  [".T", "\u1E6C"],
+  [".t", "\u1E6D"],
+  [".D", "\u1E0C"],
+  [".d", "\u1E0D"],
+  [".N", "\u1E46"],
+  [".n", "\u1E47"],
+  [".M", "\u1E42"],
+  [".m", "\u1E43"],
+  [".L", "\u1E36"],
+  [".l", "\u1E37"],
+  [".h", "\u1E25"]
+];
+var VELTHUIS_MARK = /(?:^|[a-z])(?:\.[tdnmlhTDNML]|"[nN]|~[nN])|,,n|[mn]\.\./;
+function fromVelthuis(word) {
+  let s = String(word);
+  for (const [from, to] of VELTHUIS) s = s.split(from).join(to);
+  return s;
+}
+var HK = { A: "\u0101", I: "\u012B", U: "\u016B", M: "\u1E43", G: "\u1E45", J: "\xF1", T: "\u1E6D", D: "\u1E0D", N: "\u1E47", L: "\u1E37" };
+function fromHarvardKyoto(word) {
+  const s = String(word);
+  return s[0].toLowerCase() + s.slice(1).replace(/[AIUMGJTDNL]/g, (c) => HK[c]);
+}
+var looksHK = (w) => /[a-z]/.test(w) && /^.+[AIUMGJTDNL]/.test(w) && !/[BCEFHKOPQRSVWXYZ]/.test(w.slice(1));
+var vocab = null;
+function vocabulary() {
+  if (vocab) return vocab;
+  const d = load();
+  const raw = /* @__PURE__ */ new Map();
+  for (const b of d.canon.books) for (const blk of b.blocks) {
+    if (!blk[2]) continue;
+    for (const w of blk[2].toLowerCase().match(/[a-zāīūṅñṭḍṇḷṃṁ]+/g) || []) raw.set(w, (raw.get(w) || 0) + 1);
+  }
+  const counts = /* @__PURE__ */ new Map();
+  const spelling = /* @__PURE__ */ new Map();
+  for (const [w, n] of raw) {
+    const k = fold4(w);
+    counts.set(k, (counts.get(k) || 0) + n);
+    const best = spelling.get(k);
+    if (!best || best[1] < n) spelling.set(k, [w.replace(/ṁ/g, "\u1E43"), n]);
+  }
+  const sorted = [...counts.keys()].sort();
+  const byFuzzy = [...counts.keys()].map((w) => [fuzzyKey(w), w]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0);
+  vocab = { counts, spelling, sorted, byFuzzy };
+  return vocab;
+}
+function lowerBound(arr, key3, get = (x) => x) {
+  let lo = 0;
+  let hi = arr.length;
+  while (lo < hi) {
+    const mid = lo + hi >> 1;
+    if (get(arr[mid]) < key3) lo = mid + 1;
+    else hi = mid;
+  }
+  return lo;
+}
+function isPaliStem(word) {
+  const k = fold4(word);
+  if (k.length < 2) return false;
+  const { counts, sorted } = vocabulary();
+  if (counts.has(k)) return true;
+  const i = lowerBound(sorted, k);
+  return i < sorted.length && sorted[i].startsWith(k);
+}
+var isPaliWord = (word) => vocabulary().counts.has(fold4(word));
+function fuzzyKey(word) {
+  return fold4(word).replace(/[^a-z]/g, "").replace(/m(?=[^aeiou])/g, "n").replace(/ny/g, "n").replace(/([kgcjtdpb])h/g, "$1").replace(/([bcdfghjklmnpqrstvwxyz])\1+/g, "$1");
+}
+function spellingVariants(word, { max = 4 } = {}) {
+  const key3 = fuzzyKey(word);
+  if (key3.length < 3) return [];
+  const { counts, byFuzzy } = vocabulary();
+  const found = [];
+  for (let i = lowerBound(byFuzzy, key3, (x) => x[0]); i < byFuzzy.length && byFuzzy[i][0].startsWith(key3); i += 1) {
+    if (byFuzzy[i][0].length <= key3.length + 3) found.push(byFuzzy[i][1]);
+  }
+  const self = fold4(word);
+  const ranked = found.filter((w) => w !== self).sort((a, b) => counts.get(b) - counts.get(a) || a.length - b.length);
+  const out = [];
+  for (const w of ranked) {
+    if (out.some((o) => w.startsWith(o))) continue;
+    for (let j = out.length - 1; j >= 0; j -= 1) if (out[j].startsWith(w)) out.splice(j, 1);
+    out.push(w);
+    if (out.length >= max) break;
+  }
+  return out;
+}
+function canonSpellings(folded, { max = 3 } = {}) {
+  const { counts, sorted, spelling } = vocabulary();
+  const out = [];
+  for (let i = lowerBound(sorted, folded); i < sorted.length && sorted[i].startsWith(folded); i += 1) {
+    if (sorted[i].length <= folded.length + 3) out.push(sorted[i]);
+  }
+  return out.sort((a, b) => counts.get(b) - counts.get(a)).slice(0, max).map((w) => spelling.get(w)[0]);
+}
+var ALIASES = {
+  nirvana: "nibb\u0101na",
+  nirv\u0101\u1E47a: "nibb\u0101na",
+  karma: "kamma",
+  dharma: "dhamma",
+  sutra: "sutta",
+  s\u016Btra: "sutta",
+  dhyana: "jh\u0101na",
+  dhy\u0101na: "jh\u0101na",
+  skandha: "khandha",
+  skandhas: "khandha",
+  bodhisattva: "bodhisatta",
+  arhat: "arahant",
+  arhant: "arahant",
+  samskara: "sa\u1E45kh\u0101ra",
+  sa\u1E43sk\u0101ra: "sa\u1E45kh\u0101ra",
+  trishna: "ta\u1E47h\u0101",
+  t\u1E5B\u1E63\u1E47\u0101: "ta\u1E47h\u0101",
+  pratityasamutpada: "pa\u1E6Diccasamupp\u0101da",
+  abhidharma: "abhidhamma"
+};
+var ALIAS_LABEL = "Sanskrit or English loan form of the P\u0101li word";
+function normalizeWord(token) {
+  const w = String(token).normalize("NFC").replace(/ṁ/g, "\u1E43").replace(/Ṁ/g, "\u1E42");
+  if (!/[A-Za-z]/.test(w) || /\d/.test(w)) return { word: w, rule: null };
+  const letters = (w.match(/[A-Za-zāīūṅñṭḍṇḷṃĀĪŪṄÑṬḌṆḶṂ]/g) || []).length;
+  if (VELTHUIS_MARK.test(w) && letters >= 4) return { word: fromVelthuis(w), rule: "velthuis" };
+  if (!/^[A-Za-zāīūṅñṭḍṇḷṃĀĪŪṄÑṬḌṆḶṂ'’-]+$/.test(w)) return { word: w, rule: null };
+  const lower = w.toLowerCase();
+  if (Object.hasOwn(ALIASES, lower) && !isPaliWord(lower)) return { word: ALIASES[lower], rule: "alias", label: ALIAS_LABEL };
+  if (w === w.toUpperCase()) return { word: w, rule: null };
+  const pali3 = (s) => isPaliStem(s);
+  if (looksHK(w)) {
+    const hk = fromHarvardKyoto(w);
+    if (pali3(hk)) return { word: hk, rule: "harvard-kyoto" };
+    return { word: w, rule: null };
+  }
+  if (/[āīūṅñṭḍṇḷṃ]/i.test(w) || pali3(w)) return { word: w, rule: null };
+  if (/aa|ii|uu/i.test(w)) {
+    const v = fromVelthuis(w);
+    if (pali3(v)) return { word: v, rule: "doubled vowels" };
+  }
+  if (/ny/i.test(w)) {
+    for (const [re, to] of [[/ny/g, "\xF1"], [/ny/g, "\u1E43y"], [/Ny/g, "\xD1"]]) {
+      const cand = w.replace(re, to);
+      if (cand !== w && pali3(cand)) return { word: cand.replace(/n(?=k|g)/g, "\u1E45"), rule: "anglicised" };
+    }
+  }
+  return { word: w, rule: null };
+}
+function normalizeInput(text) {
+  const original = String(text ?? "");
+  const nfc = original.normalize("NFC");
+  if (/^\s*https?:\/\//i.test(nfc)) return { text: nfc, original, changed: false, scheme: "url", changes: [] };
+  const changes = [];
+  const out = nfc.replace(/[A-Za-zāīūṅñṭḍṇḷṃṁĀĪŪṄÑṬḌṆḶṂṀ.~",'’-]+/g, (token) => {
+    const m = token.match(/^([,'’"-]*?)(.*?)([.,'’"-]*)$/);
+    let [, lead, core, tail] = m;
+    if (/[mn]$/.test(core) && tail.startsWith("..")) {
+      core += "..";
+      tail = tail.slice(2);
+    }
+    if (lead.endsWith(",,") && core.startsWith("n")) {
+      core = `,,${core}`;
+      lead = lead.slice(0, -2);
+    }
+    if (lead.endsWith('"') && /^[nN]/.test(core)) {
+      core = `"${core}`;
+      lead = lead.slice(0, -1);
+    }
+    if (!core) return token;
+    const r = normalizeWord(core);
+    const fixed = r.word.replace(/ṁ/g, "\u1E43");
+    if (r.rule) changes.push({ from: core, to: fixed, rule: r.rule, ...r.label ? { label: r.label } : {} });
+    return lead + fixed + tail;
+  }).replace(/ṁ/g, "\u1E43").replace(/Ṁ/g, "\u1E42");
+  const rules = [...new Set(changes.map((c) => c.rule))];
+  const scheme = rules.includes("velthuis") ? "velthuis" : rules.includes("harvard-kyoto") ? "harvard-kyoto" : /[āīūṅñṭḍṇḷṃ]/i.test(out) ? "unicode" : "ascii";
+  return { text: out, original, changed: changes.length > 0, scheme, changes };
+}
+function normalizationNote(n) {
+  if (!n?.changed) return void 0;
+  return {
+    original: n.original,
+    read_as: n.text,
+    scheme: n.scheme,
+    changes: n.changes,
+    note: `Read "${n.original}" as "${n.text}" (${[...new Set(n.changes.map((c) => c.rule))].join(", ")}). These spellings are inferred from the input, not given by you; check them against the result.`
+  };
+}
+async function withNormalised(value, fn) {
+  if (typeof value !== "string" || !value.trim()) return fn(value);
+  const n = normalizeInput(value);
+  if (!n.changed) return fn(value);
+  try {
+    const r = await fn(n.text);
+    return r && typeof r === "object" && !Array.isArray(r) ? { ...r, input_normalised: normalizationNote(n) } : r;
+  } catch (error2) {
+    try {
+      return await fn(value);
+    } catch {
+      throw error2;
+    }
+  }
+}
+
+// src/glossary-data.mjs
 var import_node_fs2 = require("node:fs");
 var import_node_zlib2 = require("node:zlib");
 var import_node_path2 = require("node:path");
@@ -23105,6 +23330,141 @@ try {
   here2 = __dirname;
 } catch {
   here2 = (0, import_node_path2.dirname)((0, import_node_url2.fileURLToPath)(import_meta2.url));
+}
+var cached2 = null;
+function loadGlossary() {
+  if (cached2) return cached2;
+  const name = "glossary.json.gz";
+  const candidates = [(0, import_node_path2.join)(here2, "data", name), (0, import_node_path2.join)(here2, "..", "server", "data", name), (0, import_node_path2.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => (0, import_node_fs2.existsSync)(p));
+  if (!found) throw new Error("Bundled glossary data (glossary.json.gz) is missing. Reinstall the extension.");
+  cached2 = JSON.parse((0, import_node_zlib2.gunzipSync)((0, import_node_fs2.readFileSync)(found)).toString("utf8"));
+  return cached2;
+}
+
+// src/sutta-names.mjs
+var fold5 = fold3;
+var SUTTA_END = /(suttantam|suttanta|suttam|suttani|suttena|suttassa|sutte|suttam|sutta|suttas|suttanta)$/;
+function nameKey(text) {
+  const letters = fold5(String(text ?? "")).replace(/^\s*\d+[.)]?\s*/, "").replace(/[^a-z]/g, "");
+  return { key: letters.replace(SUTTA_END, ""), sutta: SUTTA_END.test(letters) && letters.replace(SUTTA_END, "").length > 0, letters };
+}
+var index = null;
+function buildIndex() {
+  const d = load();
+  const exact = /* @__PURE__ */ new Map();
+  const fuzzy = /* @__PURE__ */ new Map();
+  const add = (unit, raw, via) => {
+    const { key: key3, sutta, letters } = nameKey(raw);
+    if (key3.length < 3) return;
+    for (const k of /* @__PURE__ */ new Set([key3, letters])) {
+      const entry3 = { unit, name: raw, via, sutta };
+      (exact.get(k) || exact.set(k, []).get(k)).push(entry3);
+      const fk = fuzzyKey(k);
+      (fuzzy.get(fk) || fuzzy.set(fk, []).get(fk)).push(entry3);
+    }
+  };
+  const units = d.canon.units.filter((u) => !u.approximate);
+  const rangeOf = _test2.rangeContaining;
+  for (const u of units) {
+    if (!u.title) continue;
+    const container = u.kind === "range" ? null : rangeOf(u.id);
+    if (container && fold5(container.title) === fold5(u.title)) continue;
+    add(u, u.title, "P\u0101li title (VRI)");
+  }
+  for (const [id, links] of Object.entries(d.translations)) {
+    const u = d.byId.get(id);
+    if (!u) continue;
+    for (const t of links) if (t.english && !/\d/.test(t.english)) add(u, t.english, `English title (${sourceName(t)}, ${t.translator})`);
+  }
+  try {
+    for (const [id, variants] of loadGlossary().names) {
+      const u = d.byId.get(id);
+      if (u) for (const v of variants) add(u, v, "DPD sutta name");
+    }
+  } catch {
+  }
+  index = { exact, fuzzy };
+  return index;
+}
+var COLLECTION_WORDS = _test.COLLECTIONS;
+var AMBIGUOUS = /* @__PURE__ */ new Set(["d", "m", "s", "a", "j", "th", "thi", "dh", "it", "pt", "ap", "pe", "ne", "ps", "pp", "ds", "dt", "cp", "ya"]);
+function spacedNumbers(text) {
+  const m = String(text).trim().match(/^([A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ][A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ .-]*?)\s+(\d+)\s+(\d+)(?:\s+(\d+))?$/);
+  if (!m) return null;
+  const key3 = fold5(m[1]).replace(/[\s.-]+/g, "");
+  if (!COLLECTION_WORDS[key3] || AMBIGUOUS.has(key3)) return null;
+  return `${m[1]} ${[m[2], m[3], m[4]].filter(Boolean).join(".")}`;
+}
+var citationOf = (u) => ({ id: u.id, citation: u.acronym, title: u.title || null });
+function resolveName(text) {
+  const { exact, fuzzy } = index || buildIndex();
+  const q = nameKey(text);
+  if (q.key.length < 3) return null;
+  const pick2 = (entries) => {
+    let list2 = entries || [];
+    if (q.sutta) {
+      const suttas = list2.filter((e) => e.sutta || e.via !== "P\u0101li title (VRI)");
+      if (suttas.length) list2 = suttas;
+    }
+    const byUnit = /* @__PURE__ */ new Map();
+    for (const e of list2) if (!byUnit.has(e.unit.id)) byUnit.set(e.unit.id, e);
+    return [...byUnit.values()];
+  };
+  let found = pick2(exact.get(q.key));
+  let how = "exact";
+  if (!found.length && q.letters !== q.key) found = pick2(exact.get(q.letters));
+  if (!found.length) {
+    found = pick2(fuzzy.get(fuzzyKey(q.key)));
+    how = "spelling variant";
+  }
+  if (!found.length) return null;
+  found.sort((a, b) => a.unit.book - b.unit.book || a.unit.start - b.unit.start);
+  if (found.length === 1) return { entry: found[0], how, others: [] };
+  const long = found.filter((e) => ["dn", "mn"].includes(e.unit.collection));
+  if (long.length === 1 && found.every((e) => e === long[0] || ["sn", "an"].includes(e.unit.collection))) {
+    return { entry: long[0], how, others: found.filter((e) => e !== long[0]), rule: "dn-mn" };
+  }
+  const list = found.map((e) => `${e.unit.acronym} (${e.unit.title || e.name})`).join(", ");
+  const err = new CitationError(`"${String(text).trim()}" is the name of ${found.length} texts: ${list}. Name matches are never guessed; resolve one of these citations instead.`);
+  err.candidates = found.map((e) => ({ ...citationOf(e.unit), matched_name: e.name, via: e.via }));
+  throw err;
+}
+function resolveReference(reference) {
+  try {
+    return resolve(reference);
+  } catch (error2) {
+    if (!(error2 instanceof CitationError)) throw error2;
+    const spaced = spacedNumbers(reference);
+    if (spaced) {
+      const r2 = resolve(spaced);
+      return { ...r2, notes: [`Read "${reference}" as ${spaced}.`, ...r2.notes], matched_by: "collection and numbers" };
+    }
+    if (/\d/.test(reference) || /^https?:/i.test(reference.trim())) throw error2;
+    const n = normalizeInput(reference);
+    const hit = resolveName(n.text);
+    if (!hit) throw new CitationError(`Could not read "${reference.trim()}" as a citation, and no text in the canon has that name (P\u0101li titles, English translation titles and DPD sutta names were checked). Try search_texts, or a citation such as MN 10.`);
+    const r = resolve(hit.entry.unit.id);
+    const notes = [`Resolved by name: "${reference.trim()}" matches the ${hit.entry.via} "${hit.entry.name}"${hit.how === "spelling variant" ? " as a spelling variant (aspirates, doubled consonants, ny/\xF1 ignored)" : ""}.`];
+    if (hit.rule === "dn-mn") notes.push(`${hit.others.length} other text${hit.others.length > 1 ? "s" : ""} in the Sa\u1E43yutta or A\u1E45guttara Nik\u0101ya ${hit.others.length > 1 ? "have" : "has"} this name too (listed under also_named). By convention a sutta name with no number means the D\u012Bgha or Majjhima text; give the citation if you meant another.`);
+    return {
+      ...r,
+      notes: [...notes, ...r.notes],
+      matched_by: "name",
+      name_match: { query: reference.trim(), matched_name: hit.entry.name, via: hit.entry.via, match: hit.how },
+      ...hit.others.length ? { also_named: hit.others.map((e) => ({ ...citationOf(e.unit), matched_name: e.name })) } : {},
+      ...n.changed ? { input_normalised: normalizationNote(n) } : {}
+    };
+  }
+}
+
+// src/analyse.mjs
+var import_meta3 = {};
+var here3;
+try {
+  here3 = __dirname;
+} catch {
+  here3 = (0, import_node_path3.dirname)((0, import_node_url3.fileURLToPath)(import_meta3.url));
 }
 var DPD_LICENSE = {
   name: "CC BY-NC-SA 4.0",
@@ -23119,14 +23479,14 @@ var DPD_PIN = {
   doi: "10.5281/zenodo.22979413",
   attribution: "Digital P\u0101\u1E37i Dictionary by Bodhirasa Bhikkhu, v0.4.20261026, CC BY-NC-SA 4.0 (https://www.dpdict.net/)"
 };
-var cached2 = null;
+var cached3 = null;
 function loadDpd() {
-  if (cached2) return cached2;
+  if (cached3) return cached3;
   const name = "dpd.json.gz";
-  const candidates = [(0, import_node_path2.join)(here2, "data", name), (0, import_node_path2.join)(here2, "..", "server", "data", name), (0, import_node_path2.join)(process.cwd(), "server", "data", name)];
-  const found = candidates.find((p) => (0, import_node_fs2.existsSync)(p));
+  const candidates = [(0, import_node_path3.join)(here3, "data", name), (0, import_node_path3.join)(here3, "..", "server", "data", name), (0, import_node_path3.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => (0, import_node_fs3.existsSync)(p));
   if (!found) throw new Error("Bundled dictionary data (dpd.json.gz) is missing. Reinstall the extension.");
-  const data5 = JSON.parse((0, import_node_zlib2.gunzipSync)((0, import_node_fs2.readFileSync)(found)).toString("utf8"));
+  const data5 = JSON.parse((0, import_node_zlib3.gunzipSync)((0, import_node_fs3.readFileSync)(found)).toString("utf8"));
   const headwords = /* @__PURE__ */ new Map();
   const lemmas = /* @__PURE__ */ new Map();
   const folded = /* @__PURE__ */ new Map();
@@ -23141,8 +23501,8 @@ function loadDpd() {
     add(lemmas, clean, id);
     add(folded, fold3(clean), id);
   }
-  cached2 = { source: data5.source, roots: data5.roots, forms: data5.forms, headwords, lemmas, folded };
-  return cached2;
+  cached3 = { source: data5.source, roots: data5.roots, forms: data5.forms, headwords, lemmas, folded };
+  return cached3;
 }
 var cleanLemma = (lemma) => String(lemma ?? "").replace(/\s+\d+(?:\.\d+)?$/, "");
 function dpdNotice() {
@@ -23211,9 +23571,9 @@ function tagFits(pos, tag, hwPos) {
 }
 function formEntries(form) {
   const dpd = loadDpd();
-  const entry2 = dpd.forms[form];
-  if (!entry2) return null;
-  const [ids = [], grammar = [], splits = []] = entry2;
+  const entry3 = dpd.forms[form];
+  if (!entry3) return null;
+  const [ids = [], grammar = [], splits = []] = entry3;
   const senses = ids.map((id) => dpd.headwords.get(id)).filter(Boolean);
   const entries = /* @__PURE__ */ new Map();
   const tagged = /* @__PURE__ */ new Set();
@@ -23290,34 +23650,34 @@ function analyseToken(surface) {
 }
 function pickSegment(unit, segs, { segment, paragraph }) {
   if (paragraph !== void 0 && paragraph !== null && paragraph !== "") {
-    const index3 = segs.findIndex((s) => String(s.vri_paragraph) === String(paragraph));
-    if (index3 < 0) throw new Error(`${unit.acronym} has no VRI paragraph ${paragraph}. Use get_text to see its paragraphs.`);
-    return index3;
+    const index4 = segs.findIndex((s) => String(s.vri_paragraph) === String(paragraph));
+    if (index4 < 0) throw new Error(`${unit.acronym} has no VRI paragraph ${paragraph}. Use get_text to see its paragraphs.`);
+    return index4;
   }
   if (segment === void 0 || segment === null || segment === "") {
-    const index3 = segs.findIndex((s) => s.type !== "heading");
-    return index3 < 0 ? 0 : index3;
+    const index4 = segs.findIndex((s) => s.type !== "heading");
+    return index4 < 0 ? 0 : index4;
   }
   const raw = String(segment).trim();
   const m = raw.match(/^(?:(.+)\/)?(\d+)$/);
   if (!m) throw new Error(`Segment "${raw}" is not a segment number or ref such as ${unit.id}/3 (refs come from get_text).`);
   if (m[1] && m[1].toLowerCase() !== unit.id) throw new Error(`Segment ref ${raw} belongs to ${m[1]}, not ${unit.id}. Pass the matching uid.`);
-  const index2 = Number(m[2]) - 1;
-  if (index2 < 0 || index2 >= segs.length) throw new Error(`${unit.acronym} has ${segs.length} segments; segment ${m[2]} does not exist.`);
-  return index2;
+  const index3 = Number(m[2]) - 1;
+  if (index3 < 0 || index3 >= segs.length) throw new Error(`${unit.acronym} has ${segs.length} segments; segment ${m[2]} does not exist.`);
+  return index3;
 }
 function analysePassage({ uid, segment, paragraph, offset = 0, limit = 60 } = {}) {
-  const { unit, notes } = resolve(String(uid ?? ""));
+  const { unit, notes } = resolveReference(String(uid ?? ""));
   const segs = segments(unit);
   if (!segs.length) throw new Error(`${unit.acronym} has no text to analyse.`);
-  const index2 = pickSegment(unit, segs, { segment, paragraph });
-  const seg = segs[index2];
+  const index3 = pickSegment(unit, segs, { segment, paragraph });
+  const seg = segs[index3];
   const tokens = tokenize(seg.text);
   const page = tokens.slice(offset, offset + limit);
   const words3 = page.flatMap((t) => analyseToken(t));
   const unknown2 = words3.filter((w) => w.status === "unknown").length;
   const outNotes = [...notes];
-  if (segment === void 0 && paragraph === void 0) outNotes.push(`No segment given: analysed the first body segment (${seg.ref}). Pass segment (e.g. "${unit.id}/${index2 + 1}") for another.`);
+  if (segment === void 0 && paragraph === void 0) outNotes.push(`No segment given: analysed the first body segment (${seg.ref}). Pass segment (e.g. "${unit.id}/${index3 + 1}") for another.`);
   if (unit.approximate) outNotes.push("This text is abbreviated (peyy\u0101la) in the VRI edition; the analysis covers the words printed, not the expanded text.");
   return {
     text_id: unit.id,
@@ -23516,10 +23876,10 @@ async function searchAti({ query, limit = 10 }) {
     throw new Error(`Access to Insight indexes are unreachable on all mirrors (${error2.message}).`);
   }
   const matches = [];
-  const collect = (fragment, index2, heading = "") => {
+  const collect = (fragment, index3, heading = "") => {
     const context = plainText(`${heading} ${fragment}`);
     if (!terms3.every((t) => fold3(context).includes(t))) return;
-    for (const a of anchors(fragment)) matches.push({ ...a, context: shortText(context, 600), index: index2 });
+    for (const a of anchors(fragment)) matches.push({ ...a, context: shortText(context, 600), index: index3 });
   };
   for (const m of atiContent(pages.sutta).matchAll(/<li\b[^>]*>([^]*?)<\/li>/gi)) collect(m[1], "sutta index");
   for (const subject of atiContent(pages.subject).split(/(?=<dt\b)/i)) {
@@ -23716,7 +24076,7 @@ function listSources() {
         role: "Word lookup (live), with a bundled offline subset (headwords, grammar, roots, meanings, compound and sandhi splits) used for word-by-word passage analysis and when dpdict.net is unreachable.",
         url: DPD,
         license: "CC BY-NC-SA 4.0",
-        bundled: { ...DPD_PIN, subset: "All headwords and roots; inflection map and deconstructor splits for the word forms of the bundled VRI root texts (server/data/dpd.json.gz)." }
+        bundled: { ...DPD_PIN, subset: "All headwords and roots; inflection map and deconstructor splits for the word forms of the bundled VRI root texts (server/data/dpd.json.gz). A second subset, server/data/glossary.json.gz, holds the DPD English index, multi-word meanings and sutta names (no SuttaCentral columns) for the glossary tool, English search and sutta names." }
       },
       { id: "suttacentral", name: "SuttaCentral", role: "Linked only (parallels, other translations). Its content is not fetched or bundled, respecting its request that its work not be used in AI tools.", url: "https://suttacentral.net" }
     ],
@@ -23736,6 +24096,7 @@ __export(features_exports, {
   daily: () => daily_exports,
   dppn: () => dppn_exports,
   findCitations: () => find_citations_exports,
+  glossary: () => glossary_exports,
   memorise: () => memorise_exports,
   parallels: () => parallels_exports,
   paritta: () => paritta_exports,
@@ -23844,7 +24205,7 @@ function findWindows(corpus, qwords, { keep = KEEP_WINDOWS } = {}) {
   return picked;
 }
 function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.length } = {}) {
-  const join8 = corpus.compounds ? "" : " ";
+  const join9 = corpus.compounds ? "" : " ";
   const Q = trigrams(corpus.compounds ? query.replace(/ /g, "") : query);
   const qlen = qwords.length;
   const variantSets = qwords.map((w) => new Set(corpus.variants(w).map((v) => v.id)));
@@ -23862,7 +24223,7 @@ function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.len
       const b = a + len;
       if (b > max) continue;
       const ids = corpus.tokens.subarray(a, b);
-      const dice = similarity(Q, Array.from(ids, (id) => corpus.vocab[id]).join(join8));
+      const dice = similarity(Q, Array.from(ids, (id) => corpus.vocab[id]).join(join9));
       if (dice <= best.sim) continue;
       const present = new Set(ids);
       const joined = corpus.compounds ? Array.from(ids, (id) => corpus.vocab[id]).join("") : "";
@@ -23908,7 +24269,7 @@ function buildPaliIndex() {
   if (pali) return pali;
   const d = load();
   const ids = /* @__PURE__ */ new Map();
-  const vocab = [];
+  const vocab2 = [];
   let tokens = new Int32Array(1 << 22);
   let nt = 0;
   const bookStart = [];
@@ -23922,9 +24283,9 @@ function buildPaliIndex() {
       for (const w of words(fold3(blk[2]))) {
         let id = ids.get(w);
         if (id === void 0) {
-          id = vocab.length;
+          id = vocab2.length;
           ids.set(w, id);
-          vocab.push(w);
+          vocab2.push(w);
         }
         if (nt === tokens.length) {
           const t = new Int32Array(tokens.length * 2);
@@ -23938,15 +24299,15 @@ function buildPaliIndex() {
   }
   blockStart.push(nt);
   tokens = tokens.slice(0, nt);
-  const freq = new Int32Array(vocab.length);
+  const freq = new Int32Array(vocab2.length);
   for (let i = 0; i < nt; i += 1) freq[tokens[i]] += 1;
-  const offsets = new Int32Array(vocab.length + 1);
-  for (let i = 0; i < vocab.length; i += 1) offsets[i + 1] = offsets[i] + freq[i];
-  const fill = offsets.slice(0, vocab.length);
+  const offsets = new Int32Array(vocab2.length + 1);
+  for (let i = 0; i < vocab2.length; i += 1) offsets[i + 1] = offsets[i] + freq[i];
+  const fill = offsets.slice(0, vocab2.length);
   const postings = new Int32Array(nt);
   for (let i = 0; i < nt; i += 1) postings[fill[tokens[i]]++] = i;
   const gramIndex = /* @__PURE__ */ new Map();
-  vocab.forEach((w, id) => {
+  vocab2.forEach((w, id) => {
     if (w.length < 4) return;
     for (const g of trigramKeys(w)) {
       let list = gramIndex.get(g);
@@ -23957,7 +24318,7 @@ function buildPaliIndex() {
   for (const [g, list] of gramIndex) gramIndex.set(g, Int32Array.from(list));
   pali = {
     ids,
-    vocab,
+    vocab: vocab2,
     tokens,
     freq,
     total: nt,
@@ -24021,7 +24382,7 @@ function blockAt(tokenPos) {
   return { book: b, index: lo - bookStart[b] };
 }
 var unitsByBook = null;
-function ownerOf(book, index2) {
+function ownerOf(book, index3) {
   if (!unitsByBook) {
     unitsByBook = /* @__PURE__ */ new Map();
     for (const u of load().canon.units) {
@@ -24029,7 +24390,7 @@ function ownerOf(book, index2) {
       unitsByBook.get(u.book).push(u);
     }
   }
-  const covering = (unitsByBook.get(book) || []).filter((u) => u.start <= index2 && index2 < u.end);
+  const covering = (unitsByBook.get(book) || []).filter((u) => u.start <= index3 && index3 < u.end);
   covering.sort((a, b) => !!a.approximate - !!b.approximate || (a.kind === "range") - (b.kind === "range") || a.end - a.start - (b.end - b.start));
   return covering[0] || null;
 }
@@ -24094,7 +24455,7 @@ function verifyPali(text, limit) {
 }
 function englishCorpus(pages) {
   const ids = /* @__PURE__ */ new Map();
-  const vocab = [];
+  const vocab2 = [];
   const tokens = [];
   const starts = [];
   for (const page of pages) {
@@ -24102,19 +24463,19 @@ function englishCorpus(pages) {
     for (const w of words(englishFold(page.text))) {
       let id = ids.get(w);
       if (id === void 0) {
-        id = vocab.length;
+        id = vocab2.length;
         ids.set(w, id);
-        vocab.push(w);
+        vocab2.push(w);
       }
       tokens.push(id);
     }
   }
   starts.push(tokens.length);
-  const pos = vocab.map(() => []);
+  const pos = vocab2.map(() => []);
   tokens.forEach((id, i) => pos[id].push(i));
   return {
     tokens: Int32Array.from(tokens),
-    vocab,
+    vocab: vocab2,
     total: tokens.length,
     starts,
     positions: (id) => pos[id],
@@ -24875,15 +25236,15 @@ function sriLankaDays(fromMs, toMs) {
     const closing = opening && news.find((n) => n.instant > opening.instant + DAY_MS);
     if (!opening || !closing) continue;
     const s1 = siderealSign(opening.instant), s2 = siderealSign(closing.instant);
-    const idx = (s1 + 1) % 12;
+    const idx2 = (s1 + 1) % 12;
     const adhi = s1 === s2;
     const day = sriLankaDay(phase, p.instant);
     out.push({
       date: day.date,
       phase,
       lunar_day: SL_TITHI_NAME[phase],
-      lunar_month_name: `${adhi ? "Adhi " : ""}${SRI_LANKA_MONTHS[idx]}`,
-      lunar_month_sanskrit: `${adhi ? "Adhika " : ""}${SANSKRIT_MONTHS[idx]}`,
+      lunar_month_name: `${adhi ? "Adhi " : ""}${SRI_LANKA_MONTHS[idx2]}`,
+      lunar_month_sanskrit: `${adhi ? "Adhika " : ""}${SANSKRIT_MONTHS[idx2]}`,
       tithi_utc: { start: new Date(day.start).toISOString().slice(0, 16) + "Z", end: new Date(day.end).toISOString().slice(0, 16) + "Z" }
     });
   }
@@ -25504,21 +25865,21 @@ __export(topics_exports, {
   topic: () => topic,
   topicsIndex: () => topicsIndex
 });
-var import_node_fs3 = require("node:fs");
-var import_node_path3 = require("node:path");
-var import_node_url3 = require("node:url");
-var import_meta3 = {};
-var here3;
+var import_node_fs4 = require("node:fs");
+var import_node_path4 = require("node:path");
+var import_node_url4 = require("node:url");
+var import_meta4 = {};
+var here4;
 try {
-  here3 = __dirname;
+  here4 = __dirname;
 } catch {
-  here3 = (0, import_node_path3.dirname)((0, import_node_url3.fileURLToPath)(import_meta3.url));
+  here4 = (0, import_node_path4.dirname)((0, import_node_url4.fileURLToPath)(import_meta4.url));
 }
 function readData(name) {
-  const candidates = [(0, import_node_path3.join)(here3, "data", name), (0, import_node_path3.join)(here3, "..", "server", "data", name), (0, import_node_path3.join)(process.cwd(), "server", "data", name)];
-  const found = candidates.find((p) => (0, import_node_fs3.existsSync)(p));
+  const candidates = [(0, import_node_path4.join)(here4, "data", name), (0, import_node_path4.join)(here4, "..", "server", "data", name), (0, import_node_path4.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => (0, import_node_fs4.existsSync)(p));
   if (!found) throw new Error(`Bundled data (${name}) is missing. Reinstall the extension or rebuild.`);
-  return JSON.parse((0, import_node_fs3.readFileSync)(found, "utf8"));
+  return JSON.parse((0, import_node_fs4.readFileSync)(found, "utf8"));
 }
 var topicsData = null;
 var listsData = null;
@@ -25533,9 +25894,9 @@ function key(value) {
   return fold3(value).replace(/\b(\d{1,2})\b/g, (m, n) => NUMBER_WORDS[Number(n)] ?? m).replace(/[^a-z0-9]+/g, " ").trim();
 }
 var stem2 = (k) => k.split(" ").map((w) => w.replace(/(ies|es|s)$/, "")).join(" ");
-function names(entry2) {
-  const parts = entry2.name.split(/\s*[();]\s*/).filter(Boolean).flatMap((p) => [p, p.replace(/^the\s+/i, "")]);
-  return [entry2.slug.replace(/-/g, " "), entry2.name, ...parts, entry2.pali, ...entry2.aliases || []].filter(Boolean).map(key);
+function names(entry3) {
+  const parts = entry3.name.split(/\s*[();]\s*/).filter(Boolean).flatMap((p) => [p, p.replace(/^the\s+/i, "")]);
+  return [entry3.slug.replace(/-/g, " "), entry3.name, ...parts, entry3.pali, ...entry3.aliases || []].filter(Boolean).map(key);
 }
 function match(entries, query) {
   const q = key(query);
@@ -25543,8 +25904,8 @@ function match(entries, query) {
   const qs = stem2(q);
   const words3 = qs.split(" ");
   const scored = [];
-  for (const entry2 of entries) {
-    const keys = names(entry2);
+  for (const entry3 of entries) {
+    const keys = names(entry3);
     let score = 0;
     if (keys.includes(q)) score = 2;
     else if (keys.some((k) => stem2(k) === qs)) score = 2;
@@ -25552,7 +25913,7 @@ function match(entries, query) {
       const sk = stem2(k);
       return words3.every((w) => sk.split(" ").some((x) => x.startsWith(w)));
     })) score = 1;
-    if (score) scored.push({ entry: entry2, score });
+    if (score) scored.push({ entry: entry3, score });
   }
   return scored.sort((a, b) => b.score - a.score || (a.entry.index === "numerical") - (b.entry.index === "numerical") || a.entry.name.length - b.entry.name.length).map((s) => s.entry);
 }
@@ -25599,9 +25960,9 @@ function topic(canon, name) {
     source: { name: src.name, url: t.ati_url, license: src.license, attribution: src.attribution, commit: src.commit }
   };
 }
-function listTopics({ query, index: index2 = "all", offset = 0, limit = 50 } = {}) {
+function listTopics({ query, index: index3 = "all", offset = 0, limit = 50 } = {}) {
   let pool = topicsIndex().topics;
-  if (index2 !== "all") pool = pool.filter((t) => t.index === index2);
+  if (index3 !== "all") pool = pool.filter((t) => t.index === index3);
   if (query) pool = match(pool, query);
   const src = topicsIndex().source;
   return {
@@ -25650,16 +26011,16 @@ function dhammaList(canon, name) {
 function register6({ tool, z, canon }) {
   tool("topic", `Texts on a topic from Access to Insight's subject and numerical indexes (e.g. "emptiness", "anger", "five hindrances"), each mapped to its canon ID with title and PTS page. Works offline.`, {
     name: z.string().min(1).max(200).describe('A topic name or slug, e.g. "emptiness", "upekkha", "kamma", "five hindrances".')
-  }, ({ name }) => topic(canon, name));
+  }, ({ name }) => withNormalised(name, (n) => topic(canon, n)));
   tool("list_topics", "Browse or search the topic index (over 300 topics from Access to Insight's General and Numerical indexes). Works offline.", {
     query: z.string().max(200).optional().describe('Words to find in topic names, e.g. "anger" or "four".'),
     index: z.enum(["all", "subject", "numerical"]).optional().describe("Which index: subject topics, numbered topics, or all (default)."),
     offset: z.number().int().min(0).optional(),
     limit: z.number().int().min(1).max(200).optional()
-  }, ({ query, index: index2, offset, limit }) => listTopics({ query, index: index2, offset, limit }));
+  }, ({ query, index: index3, offset, limit }) => withNormalised(query, (q) => listTopics({ query: q, index: index3, offset, limit })));
   tool("dhamma_list", "A standard numbered list of the teaching (four noble truths, five aggregates, seven factors of awakening, ten fetters, twelve links\u2026) with its members in P\u0101li, plain-English glosses and the canonical passage that sets it out. No name lists them all. Works offline.", {
     name: z.string().max(200).optional().describe('A list name or slug, e.g. "five hindrances", "eightfold path", "37 aids", "brahmaviharas". Omit to see every list.')
-  }, ({ name }) => dhammaList(canon, name));
+  }, ({ name }) => withNormalised(name, (n) => dhammaList(canon, n)));
 }
 
 // src/dppn.mjs
@@ -25674,25 +26035,25 @@ __export(dppn_exports, {
   nameStems: () => nameStems,
   register: () => register7
 });
-var import_node_fs4 = require("node:fs");
-var import_node_path4 = require("node:path");
-var import_node_url4 = require("node:url");
-var import_meta4 = {};
-var here4;
+var import_node_fs5 = require("node:fs");
+var import_node_path5 = require("node:path");
+var import_node_url5 = require("node:url");
+var import_meta5 = {};
+var here5;
 try {
-  here4 = __dirname;
+  here5 = __dirname;
 } catch {
-  here4 = (0, import_node_path4.dirname)((0, import_node_url4.fileURLToPath)(import_meta4.url));
+  here5 = (0, import_node_path5.dirname)((0, import_node_url5.fileURLToPath)(import_meta5.url));
 }
-var cached3 = null;
+var cached4 = null;
 function loadDppn() {
-  if (cached3) return cached3;
+  if (cached4) return cached4;
   const name = "dppn.json";
-  const candidates = [(0, import_node_path4.join)(here4, "data", name), (0, import_node_path4.join)(here4, "..", "server", "data", name), (0, import_node_path4.join)(process.cwd(), "server", "data", name)];
-  const found = candidates.find((p) => (0, import_node_fs4.existsSync)(p));
+  const candidates = [(0, import_node_path5.join)(here5, "data", name), (0, import_node_path5.join)(here5, "..", "server", "data", name), (0, import_node_path5.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => (0, import_node_fs5.existsSync)(p));
   if (!found) throw new Error("Bundled proper-names data (dppn.json) is missing. Reinstall the extension.");
-  cached3 = JSON.parse((0, import_node_fs4.readFileSync)(found, "utf8"));
-  return cached3;
+  cached4 = JSON.parse((0, import_node_fs5.readFileSync)(found, "utf8"));
+  return cached4;
 }
 var key2 = (value) => fold3(value).replace(/[^a-z0-9]+/g, "");
 var words2 = (value) => fold3(value).split(/[^a-z0-9]+/).filter(Boolean);
@@ -25739,9 +26100,9 @@ function matchEntries(entries, name, limit = 5) {
   const prefix = entries.filter((e) => !exact.includes(e) && keysOf(e).some((k) => k.startsWith(q)));
   return [...exact, ...prefix].slice(0, limit);
 }
-function describeEntry(entry2) {
+function describeEntry(entry3) {
   const references = [];
-  for (const ref of entry2.refs || []) {
+  for (const ref of entry3.refs || []) {
     try {
       const { unit } = resolve(ref);
       references.push({ cited: ref, text_id: unit.id, citation: unit.acronym, title: unit.title });
@@ -25750,11 +26111,11 @@ function describeEntry(entry2) {
     }
   }
   return {
-    name: entry2.name,
-    ...entry2.aliases?.length ? { aliases: entry2.aliases } : {},
-    ...entry2.kind ? { kind: entry2.kind } : {},
-    entry: entry2.text,
-    ...entry2.page ? { page: entry2.page } : {},
+    name: entry3.name,
+    ...entry3.aliases?.length ? { aliases: entry3.aliases } : {},
+    ...entry3.kind ? { kind: entry3.kind } : {},
+    entry: entry3.text,
+    ...entry3.page ? { page: entry3.page } : {},
     references
   };
 }
@@ -27048,8 +27409,8 @@ function vinayaRule(reference, canon) {
   if (m[1] === "bi") throw new Error(`${unit.acronym} is a bhikkhun\u012B rule. The Buddhist Monastic Code links here cover the 227 bhikkhu rules only; read the P\u0101li with get_text("${unit.id}").`);
   if (m[4]) throw new Error(`${unit.acronym} is a group of rules. Ask for one rule at a time, e.g. ${CLASS_ABBR[m[2]]} ${Number(m[3])}.`);
   const key3 = `${m[2]}${m[3]}`;
-  const entry2 = bmc_default.rules[key3];
-  if (!entry2) throw new Error(`No Buddhist Monastic Code link is recorded for ${unit.acronym}.`);
+  const entry3 = bmc_default.rules[key3];
+  if (!entry3) throw new Error(`No Buddhist Monastic Code link is recorded for ${unit.acronym}.`);
   const isAs = m[2] === "as";
   const text = canon.describe(unit, notes);
   const passage = isAs ? canon.describe(canon.resolve(AS_PASSAGE).unit, []) : text;
@@ -27060,8 +27421,8 @@ function vinayaRule(reference, canon) {
   } else if (/kaṇḍaṃ$/.test(text.title)) {
     bmcNotes.push(`The VRI edition gives no separate title for this rule: "${text.title}" is the heading of the chapter it opens.`);
   }
-  if (entry2.discussed_with) {
-    bmcNotes.push(`The BMC explains ${CLASS_ABBR[m[2]]} ${Number(m[3])} together with ${CLASS_ABBR[m[2]]} ${entry2.discussed_with.replace(/\D+/, "")}, so the link opens that shared section.`);
+  if (entry3.discussed_with) {
+    bmcNotes.push(`The BMC explains ${CLASS_ABBR[m[2]]} ${Number(m[3])} together with ${CLASS_ABBR[m[2]]} ${entry3.discussed_with.replace(/\D+/, "")}, so the link opens that shared section.`);
   }
   return {
     rule: `${CLASS_ABBR[m[2]]} ${Number(m[3])}`,
@@ -27082,10 +27443,10 @@ function vinayaRule(reference, canon) {
       suttacentral: text.links.suttacentral
     },
     buddhist_monastic_code: {
-      url: entry2.url,
-      chapter: entry2.chapter,
-      ...entry2.section ? { section: entry2.section } : {},
-      ...entry2.discussed_with ? { discussed_with: `${CLASS_ABBR[m[2]]} ${entry2.discussed_with.replace(/\D+/, "")}` } : {},
+      url: entry3.url,
+      chapter: entry3.chapter,
+      ...entry3.section ? { section: entry3.section } : {},
+      ...entry3.discussed_with ? { discussed_with: `${CLASS_ABBR[m[2]]} ${entry3.discussed_with.replace(/\D+/, "")}` } : {},
       kind: "commentary (modern explanation), linked only",
       attribution: attribution()
     },
@@ -27208,9 +27569,9 @@ function matika(section, canon = canon_exports) {
   if (one) {
     const n = Number(one[2]);
     const pool = /^(tika|triad)$/.test(one[1]) ? sections.filter((s) => s.key === "tika") : sections.filter((s) => s.key !== "tika");
-    const entry2 = pool.flatMap((s) => s.entries).find((e) => e.number === n);
-    if (!entry2) throw new Error(`No ${one[1]} ${n} in the Dhammasa\u1E45ga\u1E47\u012B m\u0101tik\u0101: triads are numbered 1\u201322, dyads 1\u2013142 (1\u2013100 Abhidhamma, 101\u2013142 Suttanta).`);
-    return { ...base, entries: [entry2] };
+    const entry3 = pool.flatMap((s) => s.entries).find((e) => e.number === n);
+    if (!entry3) throw new Error(`No ${one[1]} ${n} in the Dhammasa\u1E45ga\u1E47\u012B m\u0101tik\u0101: triads are numbered 1\u201322, dyads 1\u2013142 (1\u2013100 Abhidhamma, 101\u2013142 Suttanta).`);
+    return { ...base, entries: [entry3] };
   }
   const aliases = { tika: ["tika", "tikamatika", "triads", "triad"], duka: ["duka", "dukamatika", "abhidhammaduka", "abhidhammadukamatika", "abhidhamma duka", "dyads", "dyad"], suttantika: ["suttantika", "suttanta", "suttantikaduka", "suttantikadukamatika", "suttanta duka", "suttanta dyads"] };
   const compact = fold3(section).replace(/[^a-z0-9]/g, "");
@@ -27295,7 +27656,7 @@ function register9({ tool, z, canon }) {
   }, ({ section }) => matika(section, canon));
   tool("patthana_condition", 'One of the 24 conditions (paccaya) of the Pa\u1E6D\u1E6Dh\u0101na: its P\u0101li name from the bundled VRI text, the location and P\u0101li text of its definition (paccayaniddesa), and the P\u0101li term to look up with lookup_pali for an English dictionary meaning. Pass "all" for the list. Works offline.', {
     name: z.string().trim().min(1).max(60).describe('P\u0101li name (hetu, hetupaccayo, \u0101ramma\u1E47a\u2026), a number 1\u201324, or "all".')
-  }, ({ name }) => condition(name, canon));
+  }, ({ name }) => withNormalised(name, (n) => condition(n, canon)));
 }
 
 // src/pronunciation.mjs
@@ -27629,34 +27990,34 @@ function paritta(canon, { name, text, offset = 0, limit = 60 } = {}) {
       chanting_books: chantingBooks()
     };
   }
-  const entry2 = find(name);
-  if (!entry2) throw new Error(`No paritta named "${name}". Available: ${PARITTA.map((e) => e.key).join(", ")}.`);
-  let ref = entry2.texts[0];
+  const entry3 = find(name);
+  if (!entry3) throw new Error(`No paritta named "${name}". Available: ${PARITTA.map((e) => e.key).join(", ")}.`);
+  let ref = entry3.texts[0];
   if (text) {
     const want = canon.resolve(text).unit.id;
-    ref = entry2.texts.find((t) => canon.resolve(t).unit.id === want);
-    if (!ref) throw new Error(`${text} is not a source of ${entry2.name}. Its sources: ${entry2.texts.join(", ")}.`);
+    ref = entry3.texts.find((t) => canon.resolve(t).unit.id === want);
+    if (!ref) throw new Error(`${text} is not a source of ${entry3.name}. Its sources: ${entry3.texts.join(", ")}.`);
   }
   const { unit, notes } = canon.resolve(ref);
   const described = canon.describe(unit, notes);
   let all = canon.segments(unit);
   let passageNote;
-  if (entry2.passage) {
-    const needle = keyOf(entry2.passage);
+  if (entry3.passage) {
+    const needle = keyOf(entry3.passage);
     const hits = all.filter((s) => keyOf(s.text).includes(needle));
-    if (!hits.length) throw new Error(`The passage for ${entry2.name} was not found in ${unit.acronym}. Read it with get_text("${unit.acronym}").`);
+    if (!hits.length) throw new Error(`The passage for ${entry3.name} was not found in ${unit.acronym}. Read it with get_text("${unit.acronym}").`);
     all = [...all.filter((s) => s.type === "heading").slice(0, 1), ...hits];
     passageNote = `Selected ${hits.length} of ${canon.segments(unit).length} segments of ${unit.acronym}.`;
   }
   const page = all.slice(offset, offset + limit);
   return {
-    key: entry2.key,
-    name: entry2.name,
+    key: entry3.key,
+    name: entry3.name,
     text_id: unit.id,
     citation: unit.acronym,
     title: unit.title,
     pts: described.pts,
-    ...entry2.texts.length > 1 ? { other_sources: entry2.texts.filter((t) => t !== ref) } : {},
+    ...entry3.texts.length > 1 ? { other_sources: entry3.texts.filter((t) => t !== ref) } : {},
     edition: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), P\u0101li",
     attribution: canon.source().attribution,
     terms: canon.source().terms,
@@ -27666,7 +28027,7 @@ function paritta(canon, { name, text, offset = 0, limit = 60 } = {}) {
     returned: page.length,
     next_offset: offset + page.length < all.length ? offset + page.length : null,
     segments: page,
-    notes: [...entry2.note ? [entry2.note] : [], ...passageNote ? [passageNote] : [], ...described.notes],
+    notes: [...entry3.note ? [entry3.note] : [], ...passageNote ? [passageNote] : [], ...described.notes],
     english: englishLinks(described),
     english_note: described.english.length ? "Links only. Read one with get_translation (uid and translation_id); it returns the translator, licence and notice." : `No English translation is linked for ${unit.acronym} in this tool. See https://suttacentral.net/${unit.id} for other translations.`,
     chanting_books: chantingBooks()
@@ -27678,7 +28039,7 @@ function register11({ tool, z, canon }) {
     text: z.string().max(100).optional().describe(`Choose one of the entry's canonical sources, e.g. "Snp 2.1" instead of the default "Kp 6", or "SN 46.16" for Bojjha\u1E45ga.`),
     offset: z.number().int().min(0).max(1e5).default(0).describe("Segment offset for continuation."),
     limit: z.number().int().min(1).max(200).default(60).describe("Segments per page.")
-  }, (args) => paritta(canon, args));
+  }, (args) => withNormalised(args.name, (name) => paritta(canon, { ...args, name })));
 }
 
 // src/talks.mjs
@@ -27992,16 +28353,16 @@ __export(commentary_exports, {
   register: () => register14,
   segmentOwners: () => segmentOwners
 });
-var import_node_fs5 = require("node:fs");
-var import_node_zlib3 = require("node:zlib");
-var import_node_path5 = require("node:path");
-var import_node_url5 = require("node:url");
-var import_meta5 = {};
-var here5;
+var import_node_fs6 = require("node:fs");
+var import_node_zlib4 = require("node:zlib");
+var import_node_path6 = require("node:path");
+var import_node_url6 = require("node:url");
+var import_meta6 = {};
+var here6;
 try {
-  here5 = __dirname;
+  here6 = __dirname;
 } catch {
-  here5 = (0, import_node_path5.dirname)((0, import_node_url5.fileURLToPath)(import_meta5.url));
+  here6 = (0, import_node_path6.dirname)((0, import_node_url6.fileURLToPath)(import_meta6.url));
 }
 var FILE = "commentary.json.gz";
 var ROMAN4 = ["", "i", "ii", "iii", "iv", "v", "vi", "vii"];
@@ -28027,14 +28388,14 @@ function paraRange(n) {
 }
 var data2 = null;
 function dataPath2() {
-  const candidates = [(0, import_node_path5.join)(here5, "data", FILE), (0, import_node_path5.join)(here5, "..", "server", "data", FILE), (0, import_node_path5.join)(process.cwd(), "server", "data", FILE)];
-  return candidates.find((p) => (0, import_node_fs5.existsSync)(p)) || null;
+  const candidates = [(0, import_node_path6.join)(here6, "data", FILE), (0, import_node_path6.join)(here6, "..", "server", "data", FILE), (0, import_node_path6.join)(process.cwd(), "server", "data", FILE)];
+  return candidates.find((p) => (0, import_node_fs6.existsSync)(p)) || null;
 }
 function load2() {
   if (data2) return data2;
   const path = dataPath2();
   if (!path) return null;
-  data2 = JSON.parse((0, import_node_zlib3.gunzipSync)((0, import_node_fs5.readFileSync)(path)).toString("utf8"));
+  data2 = JSON.parse((0, import_node_zlib4.gunzipSync)((0, import_node_fs6.readFileSync)(path)).toString("utf8"));
   return data2;
 }
 function ptsLabel2(abbr, page) {
@@ -28181,7 +28542,7 @@ __export(postcanonical_exports, {
   browse: () => browse2,
   citationFor: () => citationFor,
   describe: () => describe2,
-  fold: () => fold4,
+  fold: () => fold6,
   getText: () => getText,
   isPostCanonical: () => isPostCanonical,
   load: () => load3,
@@ -28193,16 +28554,16 @@ __export(postcanonical_exports, {
   select: () => select,
   withPostCanonical: () => withPostCanonical
 });
-var import_node_fs6 = require("node:fs");
-var import_node_zlib4 = require("node:zlib");
-var import_node_path6 = require("node:path");
-var import_node_url6 = require("node:url");
-var import_meta6 = {};
-var here6;
+var import_node_fs7 = require("node:fs");
+var import_node_zlib5 = require("node:zlib");
+var import_node_path7 = require("node:path");
+var import_node_url7 = require("node:url");
+var import_meta7 = {};
+var here7;
 try {
-  here6 = __dirname;
+  here7 = __dirname;
 } catch {
-  here6 = (0, import_node_path6.dirname)((0, import_node_url6.fileURLToPath)(import_meta6.url));
+  here7 = (0, import_node_path7.dirname)((0, import_node_url7.fileURLToPath)(import_meta7.url));
 }
 var FILE2 = "postcanonical.json.gz";
 var LABELS = {
@@ -28218,7 +28579,7 @@ var HEADING3 = /* @__PURE__ */ new Set(["subhead", "title", "chapter", "book", "
 var CENTRE_HEADING3 = /(niṭṭhit[aāo]ṃ?|niṭṭhitā|samattaṃ|samattā)\.?$|^Namo tassa|uddānaṃ$/i;
 var VERSE3 = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
 var ED_KEYS = { P: "pts", M: "myanmar", V: "vri", T: "thai" };
-var fold4 = (value) => String(value ?? "").normalize("NFD").replace(new RegExp("\\p{M}", "gu"), "").toLowerCase().replace(/ṁ/g, "m").replace(/\s+/g, " ").trim();
+var fold6 = (value) => String(value ?? "").normalize("NFD").replace(new RegExp("\\p{M}", "gu"), "").toLowerCase().replace(/ṁ/g, "m").replace(/\s+/g, " ").trim();
 var PARA2 = /^(\d+)(?:\s*[-–]\s*(\d+))?$/;
 function paraRange2(n) {
   const m = String(n ?? "").trim().match(PARA2);
@@ -28240,20 +28601,20 @@ function roman(s) {
 var number3 = (s) => /^\d+$/.test(s) ? Number(s) : roman(s);
 var data3 = null;
 function dataPath3() {
-  const candidates = [(0, import_node_path6.join)(here6, "data", FILE2), (0, import_node_path6.join)(here6, "..", "server", "data", FILE2), (0, import_node_path6.join)(process.cwd(), "server", "data", FILE2)];
-  return candidates.find((p) => (0, import_node_fs6.existsSync)(p)) || null;
+  const candidates = [(0, import_node_path7.join)(here7, "data", FILE2), (0, import_node_path7.join)(here7, "..", "server", "data", FILE2), (0, import_node_path7.join)(process.cwd(), "server", "data", FILE2)];
+  return candidates.find((p) => (0, import_node_fs7.existsSync)(p)) || null;
 }
 function load3() {
   if (data3) return data3;
   const path = dataPath3();
   if (!path) return null;
-  const d = JSON.parse((0, import_node_zlib4.gunzipSync)((0, import_node_fs6.readFileSync)(path)).toString("utf8"));
+  const d = JSON.parse((0, import_node_zlib5.gunzipSync)((0, import_node_fs7.readFileSync)(path)).toString("utf8"));
   d.byId = /* @__PURE__ */ new Map();
   d.byKey = /* @__PURE__ */ new Map();
   for (const b of d.books) {
     b.canonical = false;
     d.byId.set(b.id, b);
-    for (const key3 of [b.id, fold4(b.file.replace(/\..*$/, "")), fold4(b.title)]) if (!d.byKey.has(key3)) d.byKey.set(key3, b);
+    for (const key3 of [b.id, fold6(b.file.replace(/\..*$/, "")), fold6(b.title)]) if (!d.byKey.has(key3)) d.byKey.set(key3, b);
   }
   data3 = d;
   return data3;
@@ -28292,19 +28653,19 @@ function vismChapters(d) {
 }
 var paraIndexes = /* @__PURE__ */ new WeakMap();
 function paraIndex(blocks) {
-  let index2 = paraIndexes.get(blocks);
-  if (index2) return index2;
-  index2 = /* @__PURE__ */ new Map();
+  let index3 = paraIndexes.get(blocks);
+  if (index3) return index3;
+  index3 = /* @__PURE__ */ new Map();
   blocks.forEach(([, n], i) => {
     const r = paraRange2(n);
     if (!r) return;
     for (let p = r[0]; p <= Math.min(r[1], r[0] + 1e3); p += 1) {
-      if (!index2.has(p)) index2.set(p, []);
-      index2.get(p).push(i);
+      if (!index3.has(p)) index3.set(p, []);
+      index3.get(p).push(i);
     }
   });
-  paraIndexes.set(blocks, index2);
-  return index2;
+  paraIndexes.set(blocks, index3);
+  return index3;
 }
 function paragraphRange(blocks, start, end, p) {
   const i = (paraIndex(blocks).get(p) || []).find((j) => j >= start && j < end);
@@ -28328,7 +28689,7 @@ var VISUDDHI = /^visuddhi\.\s*([12])\s*\.\s*(\d+)$/;
 var ABHS = /^(?:abhidh-?s|abhidh\.?\s*s\.?|abh-?s|abhidhammatthasa[n]gaha)\.?(?:\s+|$)(.*)$/;
 var PTS_UNAVAILABLE = 'The Visuddhimagga is cited by PTS page ("Vism 3" = page 3 of the PTS edition), but the VRI edition bundled here carries no PTS page breaks for it (only Myanmar and VRI pages), and no openly licensed PTS-page concordance is available (the PTS text on GRETIL was declined, docs/sources.md). The page cannot be located without guessing, so no passage is given. Cite a chapter instead ("Vism ch. 4" or "Vism IV"), a chapter and paragraph ("Vism IV.1"), or a VRI paragraph ("Vism \xA751").';
 function isPostCanonical(reference) {
-  const f = fold4(reference);
+  const f = fold6(reference);
   if (!f) return false;
   if (VISM.test(f) || VISUDDHI.test(f) || ABHS.test(f)) return true;
   const d = load3();
@@ -28349,7 +28710,7 @@ function bookFor(d, f) {
 }
 function locate2(reference) {
   const d = need();
-  const f = fold4(reference);
+  const f = fold6(reference);
   let m;
   if (m = f.match(VISUDDHI)) return vismParagraph(d, Number(m[2]), { volume: Number(m[1]), written: reference });
   if (m = f.match(VISM)) return locateVism(d, m[1].trim(), reference);
@@ -28610,7 +28971,7 @@ async function getText(reference, { offset = 0, limit = 60, includeVariants = fa
 }
 function browse2(node = "", { offset = 0, limit = 60 } = {}) {
   const d = need();
-  const key3 = fold4(node);
+  const key3 = fold6(node);
   const page = (items) => ({ total: items.length, offset, limit, next_offset: offset + limit < items.length ? offset + limit : null, items: items.slice(offset, offset + limit) });
   const card = (b) => ({ id: b.id, title: b.title, vri_section: b.section, vri_group: b.group, chapters: b.chapters.length });
   const base = { canonical: false, source: sourceInfo2(d) };
@@ -28627,13 +28988,13 @@ function browse2(node = "", { offset = 0, limit = 60 } = {}) {
   return { ...base, node: sel.citation, label: labelFor(sel), book: bookInfo(sel.book), ...page(chapters) };
 }
 function terms2(query) {
-  const phrases = [...String(query).matchAll(/"([^"]+)"/g)].map((m) => fold4(m[1])).filter(Boolean);
-  const words3 = fold4(String(query).replace(/"[^"]+"/g, " ")).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
+  const phrases = [...String(query).matchAll(/"([^"]+)"/g)].map((m) => fold6(m[1])).filter(Boolean);
+  const words3 = fold6(String(query).replace(/"[^"]+"/g, " ")).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
   return [...phrases, ...words3];
 }
 var foldedCache = /* @__PURE__ */ new Map();
 function foldedBlocks(book, blocks) {
-  if (!foldedCache.has(book.id)) foldedCache.set(book.id, blocks.map((b) => fold4(b[2])));
+  if (!foldedCache.has(book.id)) foldedCache.set(book.id, blocks.map((b) => fold6(b[2])));
   return foldedCache.get(book.id);
 }
 var chapterAt = (book, i) => book.chapters.filter(([, s]) => s <= i).length;
@@ -28696,12 +29057,12 @@ async function search2(query, { limit = 10, offset = 0, books, section } = {}) {
   const wanted = terms2(query);
   if (!wanted.length) throw new Error("Search needs at least one word of two or more letters.");
   const want = books?.length ? new Set(books.flatMap((b) => {
-    const f = fold4(b);
+    const f = fold6(b);
     if (VISM.test(f) && !f.replace(VISM, "$1")) return VISM_BOOKS;
     if (ABHS.test(f) && !f.replace(ABHS, "$1")) return [ABHS_BOOK];
     return [splitKey(d, f)?.book.id || b];
   })) : null;
-  const sec = section ? { tika: "\u1E6C\u012Bk\u0101", anna: "A\xF1\xF1a" }[fold4(section)] : null;
+  const sec = section ? { tika: "\u1E6C\u012Bk\u0101", anna: "A\xF1\xF1a" }[fold6(section)] : null;
   const pool = d.books.filter((b) => (!want || want.has(b.id)) && (!sec || b.section === sec));
   const hits = [];
   const seen = /* @__PURE__ */ new Set();
@@ -28759,7 +29120,7 @@ function register15({ tool, z }) {
     limit: z.number().int().min(1).max(200).default(60).describe("Segments per page."),
     includeVariants: z.boolean().default(false).describe("Include variant readings recorded by VRI (raw notes).")
   }, async ({ citation, offset, limit, includeVariants }) => {
-    const key3 = fold4(citation);
+    const key3 = fold6(citation);
     if (["", "post-canonical", "postcanonical", "all", "tika", "anna"].includes(key3)) return browse2(key3, { offset, limit });
     return getText(citation, { offset, limit, includeVariants });
   });
@@ -28769,7 +29130,7 @@ function register15({ tool, z }) {
     section: z.enum(["tika", "anna"]).optional().describe("Limit to the VRI \u1E6C\u012Bk\u0101 or A\xF1\xF1a section."),
     limit: z.number().int().min(1).max(50).default(10),
     offset: z.number().int().min(0).max(1e5).default(0)
-  }, ({ query, books, section, limit, offset }) => search2(query, { books, section, limit, offset }));
+  }, ({ query, books, section, limit, offset }) => withNormalised(query, (q) => search2(q, { books, section, limit, offset })));
 }
 
 // src/parallels.mjs
@@ -28782,16 +29143,16 @@ __export(parallels_exports, {
   load: () => load4,
   register: () => register16
 });
-var import_node_fs7 = require("node:fs");
-var import_node_zlib5 = require("node:zlib");
-var import_node_path7 = require("node:path");
-var import_node_url7 = require("node:url");
-var import_meta7 = {};
-var here7;
+var import_node_fs8 = require("node:fs");
+var import_node_zlib6 = require("node:zlib");
+var import_node_path8 = require("node:path");
+var import_node_url8 = require("node:url");
+var import_meta8 = {};
+var here8;
 try {
-  here7 = __dirname;
+  here8 = __dirname;
 } catch {
-  here7 = (0, import_node_path7.dirname)((0, import_node_url7.fileURLToPath)(import_meta7.url));
+  here8 = (0, import_node_path8.dirname)((0, import_node_url8.fileURLToPath)(import_meta8.url));
 }
 var FILE3 = "parallels.json.gz";
 var SOURCES = ["commentary-citation", "shared-passage"];
@@ -28803,18 +29164,18 @@ var MATCH = {
   "shared-word-sequences": "the two texts share runs of 8 or more words, word for word (diacritics and case ignored); runs found in more than 4 texts are treated as stock formulae and ignored"
 };
 var data4 = null;
-var index = null;
+var index2 = null;
 function dataPath4() {
-  const candidates = [(0, import_node_path7.join)(here7, "data", FILE3), (0, import_node_path7.join)(here7, "..", "server", "data", FILE3), (0, import_node_path7.join)(process.cwd(), "server", "data", FILE3)];
-  return candidates.find((p) => (0, import_node_fs7.existsSync)(p)) || null;
+  const candidates = [(0, import_node_path8.join)(here8, "data", FILE3), (0, import_node_path8.join)(here8, "..", "server", "data", FILE3), (0, import_node_path8.join)(process.cwd(), "server", "data", FILE3)];
+  return candidates.find((p) => (0, import_node_fs8.existsSync)(p)) || null;
 }
 function load4() {
   if (data4) return data4;
   const path = dataPath4();
   if (!path) return null;
-  data4 = JSON.parse((0, import_node_zlib5.gunzipSync)((0, import_node_fs7.readFileSync)(path)).toString("utf8"));
-  index = /* @__PURE__ */ new Map();
-  const add = (id, entry2) => (index.get(id) || index.set(id, []).get(id)).push(entry2);
+  data4 = JSON.parse((0, import_node_zlib6.gunzipSync)((0, import_node_fs8.readFileSync)(path)).toString("utf8"));
+  index2 = /* @__PURE__ */ new Map();
+  const add = (id, entry3) => (index2.get(id) || index2.set(id, []).get(id)).push(entry3);
   data4.citations.forEach((l, i) => {
     add(l.from, ["out", i]);
     add(l.to, ["in", i]);
@@ -28876,7 +29237,7 @@ function linksOf(unit) {
   const ids = [unit.id, ...unit.members || []];
   const entries = [];
   const seen = /* @__PURE__ */ new Set();
-  for (const id of ids) for (const e of index.get(id) || []) {
+  for (const id of ids) for (const e of index2.get(id) || []) {
     const k = e.join(":");
     if (!seen.has(k)) {
       seen.add(k);
@@ -28938,6 +29299,168 @@ function register16({ tool, z, citation }) {
   }, ({ uid, limit, offset }) => getParallels(uid, { offset, limit }));
 }
 
+// src/glossary.mjs
+var glossary_exports = {};
+__export(glossary_exports, {
+  GLOSS_NOTE: () => GLOSS_NOTE,
+  STOPWORDS: () => STOPWORDS,
+  englishToPali: () => englishToPali,
+  expandEnglish: () => expandEnglish,
+  glossary: () => glossary,
+  looksEnglish: () => looksEnglish,
+  paliToEnglish: () => paliToEnglish,
+  register: () => register17
+});
+var fold7 = fold3;
+var GLOSS_NOTE = "Dictionary and list glosses are labels for finding words, not translations. Quote the P\u0101li text (get_text) or a named translation (get_translation) instead.";
+var STOPWORDS = /* @__PURE__ */ new Set(["a", "an", "the", "of", "to", "in", "on", "at", "by", "for", "with", "and", "or", "is", "are", "be", "as", "it", "its", "from", "about", "what", "which", "on", "into", "how", "does", "do", "that", "this", "buddha", "buddhist", "sutta", "suttas", "teaching", "teachings"]);
+var idx = null;
+function indexes() {
+  if (idx) return idx;
+  const g = loadGlossary();
+  const en = /* @__PURE__ */ new Map();
+  for (const [k, ids] of Object.entries(g.en)) en.set(fold7(k), { key: k, ids, source: "DPD English index" });
+  for (const [k, ids] of Object.entries(g.phrases)) if (!en.has(fold7(k))) en.set(fold7(k), { key: k, ids, source: "DPD meaning (phrase)" });
+  const pa = /* @__PURE__ */ new Map();
+  g.headwords.forEach(([lemma], i) => {
+    const k = fold7(lemma);
+    (pa.get(k) || pa.set(k, []).get(k)).push(i);
+  });
+  const listEn = [];
+  for (const l of listsIndex().lists) {
+    listEn.push({ pali: l.pali, gloss: l.name, list: l.slug, kind: "list" });
+    for (const m of l.members) listEn.push({ pali: m.pali, gloss: m.gloss, list: l.slug, kind: "member" });
+  }
+  idx = { g, en, pa, listEn };
+  return idx;
+}
+var dpdSource = () => {
+  const s = loadGlossary().source;
+  return { name: "Digital P\u0101\u1E37i Dictionary", version: s.version, attribution: s.attribution, license: { ...DPD_LICENSE, attribution: s.attribution } };
+};
+var LIST_SOURCE = "dhamma_lists (curated glosses, server/data/dhamma_lists.json)";
+var entry2 = (i, source4) => {
+  const [pali3, pos, meaning, ebt] = idx.g.headwords[i];
+  return { pali: pali3, pos, meaning, ebt_count: ebt, source: source4 };
+};
+function englishKeys(term) {
+  const k = fold7(term).replace(/[^a-z' -]/g, " ").replace(/\s+/g, " ").trim();
+  const keys = [k];
+  if (/ies$/.test(k)) keys.push(k.replace(/ies$/, "y"));
+  if (/[^s]s$/.test(k)) keys.push(k.slice(0, -1));
+  return keys;
+}
+function dpdEnglish(term) {
+  const { en } = indexes();
+  for (const k of englishKeys(term)) if (en.has(k)) return en.get(k);
+  return null;
+}
+var wordRe = (w) => new RegExp(`(^|[^a-z])${w.replace(/[^a-z' -]/g, "")}s?([^a-z]|$)`);
+function englishToPali(term, { limit = 10 } = {}) {
+  const { listEn } = indexes();
+  const out = [];
+  const hit = dpdEnglish(term);
+  if (hit) for (const i of hit.ids.slice(0, limit)) out.push({ ...entry2(i, hit.source), english_key: hit.key });
+  const k = englishKeys(term)[0];
+  if (k.length >= 3) {
+    const re = wordRe(k);
+    for (const l of listEn) {
+      if (out.length >= limit * 2) break;
+      if (re.test(fold7(l.gloss))) out.push({ pali: l.pali, gloss: l.gloss, list: l.list, source: LIST_SOURCE });
+    }
+  }
+  return out;
+}
+function paliToEnglish(term, { limit = 10 } = {}) {
+  const { pa, listEn } = indexes();
+  const k = fold7(term).replace(/[^a-z]/g, "");
+  const out = (pa.get(k) || []).slice(0, limit).map((i) => entry2(i, "DPD headword"));
+  for (const l of listEn) {
+    if (fold7(l.pali).replace(/[^a-z]/g, "") === k) out.push({ pali: l.pali, gloss: l.gloss, list: l.list, source: LIST_SOURCE });
+  }
+  return out;
+}
+function glossary({ term, direction = "auto", limit = 10 } = {}) {
+  const raw = String(term ?? "").trim();
+  if (!raw) throw new Error("Give an English or P\u0101li word or phrase.");
+  const n = normalizeInput(raw);
+  const en = direction === "pa-en" ? [] : englishToPali(raw, { limit });
+  const pa = direction === "en-pa" ? [] : paliToEnglish(n.text, { limit });
+  const result = {
+    term: raw,
+    ...n.changed && direction !== "en-pa" ? { input_normalised: normalizationNote(n) } : {},
+    ...direction !== "pa-en" ? { english_to_pali: en } : {},
+    ...direction !== "en-pa" ? { pali_to_english: pa } : {},
+    found: en.length + pa.length,
+    note: GLOSS_NOTE,
+    sources: { dpd: dpdSource(), lists: { name: LIST_SOURCE, note: listsIndex().gloss_note } }
+  };
+  if (!result.found) result.hint = "Not in DPD's English index or the curated list glosses (nothing is guessed). Try a simpler word, lookup_pali for a P\u0101li word, or search_access_to_insight for English topics.";
+  return result;
+}
+function looksEnglish(query) {
+  const words3 = fold7(String(query ?? "").replace(/"/g, " ")).split(/[^a-z'-]+/).filter(Boolean);
+  if (!words3.length || /[āīūṅñṭḍṇḷṃ]/i.test(String(query))) return false;
+  const content = words3.filter((w) => !STOPWORDS.has(w));
+  if (!content.length) return false;
+  if (content.some((w) => isPaliWord(w))) return false;
+  return content.some((w) => dpdEnglish(w));
+}
+function expandEnglish(query, { maxTerms = 8, perChunk = 4 } = {}) {
+  const words3 = fold7(String(query ?? "").replace(/"/g, " ")).split(/[^a-z'-]+/).filter(Boolean);
+  const chunks = [];
+  for (let i = 0; i < words3.length; ) {
+    let found = null;
+    for (let j = Math.min(words3.length, i + 6); j > i + 1 && !found; j -= 1) {
+      const h = dpdEnglish(words3.slice(i, j).join(" "));
+      if (h) found = { text: words3.slice(i, j).join(" "), hit: h, end: j };
+    }
+    if (!found && !STOPWORDS.has(words3[i])) {
+      const h = dpdEnglish(words3[i]);
+      found = h ? { text: words3[i], hit: h, end: i + 1 } : { text: words3[i], hit: null, end: i + 1 };
+    }
+    if (found) chunks.push(found);
+    i = found ? found.end : i + 1;
+  }
+  const { g } = indexes();
+  const mapping = {};
+  const groups = [];
+  const unmatched = [];
+  let used = 0;
+  let dropped = 0;
+  const sources = /* @__PURE__ */ new Set();
+  for (const c of chunks) {
+    if (!c.hit) {
+      unmatched.push(c.text);
+      continue;
+    }
+    const terms3 = [];
+    for (const i of c.hit.ids) {
+      const lemma = g.headwords[i][0];
+      const f = fold7(lemma);
+      if (f.length < 3 || terms3.some((t) => fold7(t) === f)) continue;
+      if (terms3.length < perChunk && used < maxTerms) {
+        terms3.push(lemma);
+        used += 1;
+      } else dropped += 1;
+    }
+    if (terms3.length) {
+      mapping[c.text] = terms3;
+      groups.push(terms3.map(fold7));
+      sources.add(c.hit.source);
+    }
+  }
+  if (!groups.length) return null;
+  return { mapping, groups, dropped, unmatched, sources: [...sources] };
+}
+function register17({ tool, z }) {
+  tool("glossary", "Look up an English word or phrase to find the P\u0101li terms for it, or a P\u0101li word to see its short English gloss, from the Digital P\u0101\u1E37i Dictionary's English index and the curated numbered-list glosses. Every entry names its source. Glosses are labels for finding words, not translations. Works offline.", {
+    term: z.string().trim().min(1).max(100).describe('An English word or phrase ("mindfulness", "suffering", "dependent origination") or a P\u0101li word, with or without diacritics.'),
+    direction: z.enum(["auto", "en-pa", "pa-en"]).default("auto").describe('"en-pa" English to P\u0101li, "pa-en" P\u0101li to English, "auto" both.'),
+    limit: z.number().int().min(1).max(30).default(10).describe("Entries per direction and source.")
+  }, (args) => glossary(args));
+}
+
 // src/script.mjs
 var SCRIPTS = ["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"];
 var SCRIPT_NAMES = {
@@ -28950,7 +29473,7 @@ var SCRIPT_NAMES = {
   lao: "Lao",
   lanna: "Lanna (Tai Tham)"
 };
-var ALIASES = {
+var ALIASES2 = {
   roman: "roman",
   romn: "roman",
   latn: "roman",
@@ -28989,7 +29512,7 @@ var ALIASES = {
 };
 function scriptName(name) {
   const key3 = String(name ?? "").trim().toLowerCase();
-  const found = ALIASES[key3];
+  const found = ALIASES2[key3];
   if (!found) throw new Error(`Unknown script "${name}". Available: ${SCRIPTS.join(", ")}.`);
   return found;
 }
@@ -29690,6 +30213,131 @@ function structuredInfo(page) {
   };
 }
 
+// src/english-search.mjs
+var FEW_HITS = 3;
+var MAX_EXPANSION_TERMS = 8;
+function plainWords(query) {
+  return fold3(query.replace(/"[^"]*"/g, " ")).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
+}
+function variantSearch(query, base, opts) {
+  if (/"/.test(query)) return null;
+  const words3 = plainWords(query);
+  if (!words3.length || words3.some((w) => /\d/.test(w))) return null;
+  const groups = [];
+  const changed = [];
+  for (const w of words3) {
+    const variants = spellingVariants(w);
+    if (!variants.length) {
+      groups.push([w]);
+      continue;
+    }
+    groups.push([w, ...variants]);
+    changed.push({ word: w, also_searched: variants, canon_spellings: variants.flatMap((v) => canonSpellings(v, { max: 2 })).slice(0, 4) });
+  }
+  if (!changed.length) return null;
+  const r = search(query, { ...opts, groups });
+  if (r.total_texts_matched <= base.total_texts_matched && r.title_matches.length <= base.title_matches.length) return null;
+  const desc = changed.map((c) => `"${c.word}" (${c.canon_spellings.length ? c.canon_spellings.join(", ") : c.also_searched.join(", ")})`).join("; ");
+  return {
+    ...r,
+    query: base.query,
+    spelling_note: `No exact match for ${changed.map((c) => `"${c.word}"`).join(", ")}${base.total_texts_matched ? ` beyond ${base.total_texts_matched} text${base.total_texts_matched > 1 ? "s" : ""}` : ""}; also searched spellings the canon uses: ${desc}. Variants ignore aspirates (th/t), doubled consonants, ny/\xF1 and \u1E43/n.`,
+    spelling_variants: changed,
+    exact_search: { total_texts_matched: base.total_texts_matched }
+  };
+}
+function searchWithInput(query, { collection, limit = 10, offset = 0, english: english2 = "auto" } = {}) {
+  const opts = { collection, limit, offset };
+  const n = normalizeInput(query);
+  const note = normalizationNote(n);
+  const isEnglish = english2 === "only" || english2 === "auto" && !n.changed && looksEnglish(query);
+  let result;
+  if (english2 !== "only") result = search(n.text, opts);
+  if (isEnglish) {
+    const exp = expandEnglish(query, { maxTerms: MAX_EXPANSION_TERMS });
+    if (!exp) {
+      if (english2 === "only") {
+        result = { ...search(n.text, { ...opts, limit: 0 }), results: [], total_texts_matched: 0, next_offset: null };
+        result.expanded_from_english = { found: false, note: "No word of the query is in the glossary (DPD English index); nothing was expanded." };
+      }
+    } else {
+      let groups = exp.groups;
+      let r = search(query, { ...opts, groups });
+      let combined = "all";
+      if (!r.total_texts_matched && groups.length > 1) {
+        groups = [groups.flat()];
+        r = search(query, { ...opts, groups });
+        combined = "any";
+      }
+      const label = {
+        ...exp.mapping,
+        source: exp.sources.includes("DPD meaning (phrase)") ? "DPD English index and DPD meanings" : "DPD English index",
+        searched_pali: groups.map((g) => g.join(" | ")),
+        combined: combined === "all" ? "every English word or phrase must be matched by one of its P\u0101li terms" : "no text has all of them together, so texts with any of these P\u0101li terms are listed",
+        ...exp.dropped ? { dropped_terms: exp.dropped, dropped_note: `${exp.dropped} further P\u0101li term${exp.dropped > 1 ? "s" : ""} from the glossary were not searched (at most ${MAX_EXPANSION_TERMS} in all, 4 per word).` } : {},
+        ...exp.unmatched.length ? { not_in_glossary: exp.unmatched } : {},
+        note: 'The English was looked up in the glossary and the P\u0101li text was searched for these terms. They are dictionary glosses, not translations; check each passage. Turn this off with english: "off".'
+      };
+      if (!result || !result.total_texts_matched) {
+        result = { ...r, query, title_matches: result?.title_matches?.length ? result.title_matches : r.title_matches, tip: void 0 };
+        if (english2 !== "only") label.original_search = "The words as typed were also searched: they are not in the P\u0101li text (title matches, if any, are kept).";
+      } else {
+        result = { ...result, english_expansion_results: { results: r.results, total_texts_matched: r.total_texts_matched, next_offset: r.next_offset } };
+      }
+      result.expanded_from_english = label;
+    }
+  } else if (result.total_texts_matched < FEW_HITS) {
+    const v = variantSearch(n.text, result, opts);
+    if (v) result = v;
+  }
+  if (note) result = { ...result, input_normalised: note };
+  return result;
+}
+
+// src/lookup-input.mjs
+var DIACRITICS = /[āīūṅñṭḍṇḷṃṁ]/i;
+function foldedHeadwords(word) {
+  const dpd = loadDpd();
+  const ids = dpd.folded.get(fold3(word)) || [];
+  return ids.map((id) => dpd.headwords.get(id)).filter(Boolean).map((h) => ({ headword: h.clean, lemma: h.lemma, pos: h.pos, meaning: h.meaning || "(no meaning given)" }));
+}
+async function lookupPaliInput({ word, limit = 5 }) {
+  const raw = String(word ?? "").trim();
+  const n = normalizeInput(raw);
+  const typed = n.text.trim();
+  let inferred = null;
+  const partial2 = n.changes.some((c) => c.rule === "anglicised");
+  if (!DIACRITICS.test(typed) || partial2) {
+    let found = [];
+    try {
+      found = foldedHeadwords(typed);
+    } catch {
+    }
+    const marked = [...new Set(typed.toLowerCase().match(/[ñṅṭḍṇḷṃ]/g) || [])];
+    if (marked.length) found = found.filter((f) => marked.every((ch) => f.headword.includes(ch)));
+    const spellings = [...new Set(found.map((f) => f.headword))];
+    if (spellings.length && !(spellings.length === 1 && spellings[0] === typed.toLowerCase())) {
+      inferred = {
+        input: raw,
+        spellings,
+        headwords: found.slice(0, 20),
+        ...found.length > 20 ? { more: found.length - 20 } : {},
+        note: `"${typed}" has ${partial2 ? "diacritics only where they could be inferred" : "no diacritics"}, so every DPD headword spelled with these letters is listed: ${spellings.join(", ")}. The diacritics were inferred from the bundled DPD subset (${loadDpd().source.version}); look up the exact spelling for its full entry.`
+      };
+    }
+  }
+  let result = await lookupPali({ word: typed, limit });
+  if (!result.entries?.length && inferred?.spellings.length === 1 && inferred.spellings[0] !== typed) {
+    const again = await lookupPali({ word: inferred.spellings[0], limit });
+    if (again.entries?.length) result = { ...again, looked_up: inferred.spellings[0], looked_up_note: `No entry for "${typed}"; showing the entry for the inferred spelling "${inferred.spellings[0]}".` };
+  }
+  return {
+    ...result,
+    ...n.changed ? { input_normalised: normalizationNote(n) } : {},
+    ...inferred ? { inferred_spelling: inferred } : {}
+  };
+}
+
 // src/server.mjs
 var TOOL_TITLES = {
   resolve_reference: "Resolve citation",
@@ -29700,6 +30348,7 @@ var TOOL_TITLES = {
   search_texts: "Search the Tipi\u1E6Daka",
   browse_canon: "Browse the canon",
   lookup_pali: "P\u0101li dictionary lookup",
+  glossary: "Look up English\u2013P\u0101li glossary terms",
   search_access_to_insight: "Search Access to Insight",
   get_access_to_insight_text: "Read Access to Insight page",
   list_sources: "List sources and licences",
@@ -29752,20 +30401,20 @@ function createServer() {
       }
     });
   }
-  tool("resolve_reference", "Turn any citation, PTS page or link into the canonical text it names, with its title, PTS location, VRI paragraph numbers, available English translations, Thai/Myanmar/VRI edition pages and numbering notes. Works offline. The reference may be written in any supported script (Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao, Lanna); set script to get P\u0101li titles in that script.", {
+  tool("resolve_reference", 'Turn any citation, PTS page, link or sutta name (P\u0101li or English title, e.g. "Satipatthana Sutta"; ambiguous names list the candidates) into the canonical text it names, with its title, PTS location, VRI paragraph numbers, available English translations, Thai/Myanmar/VRI edition pages and numbering notes. Works offline. The reference may be written in any supported script (Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao, Lanna); set script to get P\u0101li titles in that script.', {
     reference: citation,
     script: scriptParam
   }, ({ reference, script }) => {
     const input = romanizeInput(reference);
     let resolved;
     try {
-      resolved = resolve(input.text);
+      resolved = resolveReference(input.text);
     } catch (error2) {
       if (isPostCanonical(input.text)) return localizePostCanonical(describe2(input.text), script, input);
       throw error2;
     }
-    const { unit, notes, alternatives } = resolved;
-    return localizeDescribe({ ...describe(unit, notes), ...alternatives.length ? { also_on_that_page: alternatives } : {} }, script, input);
+    const { unit, notes, alternatives, matched_by, name_match, also_named, input_normalised } = resolved;
+    return localizeDescribe({ ...describe(unit, notes), ...alternatives.length ? { also_on_that_page: alternatives } : {}, ...matched_by ? { matched_by } : {}, ...name_match ? { name_match } : {}, ...also_named ? { also_named } : {}, ...input_normalised ? { input_normalised } : {} }, script, input);
   });
   tool("get_metadata", "Details of one text: title, collection, PTS range, VRI book and paragraphs, contained texts, linked English translations (with translation_id), and a SuttaCentral link for parallels. Works offline.", {
     uid: citation
@@ -29862,20 +30511,22 @@ function createServer() {
       guidance: ok < 2 ? `Only ${ok} English translation could be retrieved; compare against the P\u0101li instead, or see https://suttacentral.net/${unit.id}.` : "Compare wording against the P\u0101li segments; distinguish translation choices from textual differences."
     };
   }, { network: true });
-  tool("search_texts", 'Search the full P\u0101li text of the Tipi\u1E6Daka (diacritics optional; all words must appear; "quoted phrases" allowed), text titles, and English translation titles. Works offline. The query may be written in any supported script; set script for titles and excerpts in that script.', {
+  tool("search_texts", 'Search the full P\u0101li text of the Tipi\u1E6Daka (diacritics optional; all words must appear; "quoted phrases" allowed), text titles, and English translation titles. Works offline. P\u0101li typed on an English keyboard (samyutta, sanyutta, Velthuis sa.myutta, Harvard-Kyoto saMyutta) is understood and labelled; an English query (e.g. "mindfulness of breathing") is expanded into P\u0101li terms from the glossary, labelled expanded_from_english. The query may be written in any supported script; set script for titles and excerpts in that script.', {
     query: external_exports.string().trim().min(1).max(300),
     collection: external_exports.string().max(30).optional().describe("Limit to a collection or section, e.g. mn, sn, sn56, an4, dhp, vinaya."),
     limit: external_exports.number().int().min(1).max(50).default(10),
     offset: external_exports.number().int().min(0).max(1e5).default(0),
     script: scriptParam,
-    include_post_canonical: external_exports.boolean().default(false).describe(SEARCH_OPTION_DESCRIPTION)
-  }, async ({ query, collection, limit, offset, script, include_post_canonical }) => {
+    include_post_canonical: external_exports.boolean().default(false).describe(SEARCH_OPTION_DESCRIPTION),
+    english: external_exports.enum(["auto", "off", "only"]).default("auto").describe('English queries: "auto" expands a query that looks English into P\u0101li terms from the glossary (DPD English index) and also runs the search as typed; "only" searches the expansion only; "off" never expands. Expansions are labelled expanded_from_english.')
+  }, async ({ query, collection, limit, offset, script, include_post_canonical, english: english2 }) => {
     const input = romanizeInput(query);
-    const result = localizeSearch(search(input.text, { collection, limit, offset }), script, input);
+    const searched = searchWithInput(input.text, { collection, limit, offset, english: english2 });
+    const result = localizeSearch(searched, script, input);
     if (include_post_canonical && collection) {
       return { ...result, post_canonical: { canonical: false, searched: false, results: [], note: `Not searched: collection "${collection}" limits the search to that part of the canon. Search the post-canonical books without collection, or with search_post_canonical.` } };
     }
-    const out = await withPostCanonical(result, input.text, { include: include_post_canonical, limit, offset });
+    const out = await withPostCanonical(result, searched.input_normalised?.read_as ?? input.text, { include: include_post_canonical, limit, offset });
     if (out.post_canonical && !out.post_canonical.error) out.post_canonical = localizePostCanonical(out.post_canonical, script);
     return out;
   });
@@ -29884,10 +30535,10 @@ function createServer() {
     offset: external_exports.number().int().min(0).max(1e5).default(0),
     limit: external_exports.number().int().min(1).max(200).default(60)
   }, ({ node, offset, limit }) => browse(node, { offset, limit }));
-  tool("lookup_pali", "Look up a P\u0101li word in the Digital P\u0101\u1E37i Dictionary (grammar, roots, meanings). Dictionary glosses are reference material, not scripture.", {
+  tool("lookup_pali", 'Look up a P\u0101li word in the Digital P\u0101\u1E37i Dictionary (grammar, roots, meanings). Diacritics are optional: "nibbana" also offers nibb\u0101na, labelled inferred_spelling; Velthuis and Harvard-Kyoto are understood. Dictionary glosses are reference material, not scripture.', {
     word: external_exports.string().trim().min(1).max(100),
     limit: external_exports.number().int().min(1).max(10).default(5)
-  }, lookupPali, { network: true });
+  }, lookupPaliInput, { network: true });
   tool("search_access_to_insight", "Find Access to Insight translations, study guides and topics through its sutta and subject indexes (falls back to its official GitHub mirror).", {
     query: external_exports.string().trim().min(1).max(200),
     limit: external_exports.number().int().min(1).max(30).default(10)
