@@ -16,6 +16,7 @@ import { gunzipSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as canon from './canon.mjs';
+import { resolveReference } from './sutta-names.mjs';
 
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
@@ -263,7 +264,7 @@ function pickSegment(unit, segs, { segment, paragraph }) {
  * number; `paragraph` picks by VRI paragraph instead. Words are paged with offset/limit.
  */
 export function analysePassage({ uid, segment, paragraph, offset = 0, limit = 60 } = {}) {
-  const { unit, notes } = canon.resolve(String(uid ?? ''));
+  const { unit, notes } = resolveReference(String(uid ?? ''));
   const segs = canon.segments(unit);
   if (!segs.length) throw new Error(`${unit.acronym} has no text to analyse.`);
   const index = pickSegment(unit, segs, { segment, paragraph });

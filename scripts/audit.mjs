@@ -6,6 +6,11 @@ import * as commentary from '../src/commentary.mjs';
 import * as postcanonical from '../src/postcanonical.mjs';
 import { statSync } from 'node:fs';
 import { loadDpd, DPD_PIN, tokenize, wordParts } from '../src/analyse.mjs';
+import * as parallels from '../src/parallels.mjs';
+import { checkQuote, titleStem, nameStem, otherTextsNamed, paragraphWindow } from './parallels/citations.mjs';
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { loadGlossary } from '../src/glossary-data.mjs';
 
 const d = canon.load();
 const failures = [];
@@ -446,6 +451,111 @@ else {
       count('content-link');
     }
   }
+}
+// 11. Parallels and cross-references (#29, D59): every link rechecked. Both texts resolve; commentary citations
+// point at a real commentary segment that holds their evidence, with the quotation found again in the cited
+// paragraph, and never reach SN or AN by number alone; shared passages name real segments that really share
+// wording. The data must have been built from the bundled canon and commentary (SHA-256 recorded).
+{
+  const pd = parallels.load();
+  if (!pd) fail('parallels', 'server/data/parallels.json.gz is missing');
+  else {
+    const size = statSync(new URL('../server/data/parallels.json.gz', import.meta.url)).size;
+    counts['parallels-MB'] = Number((size / 1e6).toFixed(2));
+    if (size > 5e6) fail('parallels', `parallels.json.gz is ${(size / 1e6).toFixed(1)} MB (budget 5 MB)`);
+    for (const [file, meta] of Object.entries(pd.source.inputs)) {
+      const sha = createHash('sha256').update(readFileSync(new URL(`../server/data/${file}`, import.meta.url))).digest('hex');
+      if (sha !== meta.sha256) fail('parallels', `built from a different ${file}: rebuild with node scripts/parallels/build.mjs`);
+      if (meta.vri_commit !== d.canon.source.commit) fail('parallels', `${file} input has VRI commit ${meta.vri_commit}`);
+    }
+    const MATCHES = new Set(['vri-reference+quotation', 'vri-reference', 'sutta-name', 'sutta-name+nikaya']);
+    const comCache = new Map();
+    const comSegs = (id) => {
+      if (!comCache.has(id)) comCache.set(id, new Map(commentary.commentaryFor(d.byId.get(id), { limit: 100000 }).segments.map((x) => [x.ref, x.text])));
+      return comCache.get(id);
+    };
+    const segCache = new Map();
+    const segs = (id) => {
+      if (!segCache.has(id)) segCache.set(id, new Map(canon.segments(d.byId.get(id)).map((x) => [x.ref, x])));
+      return segCache.get(id);
+    };
+    const bookOf = new Map(d.canon.books.map((b, i) => [b.file, i]));
+    for (const l of pd.citations) {
+      const tag = `${l.from} -> ${l.to} (${l.commentary_ref})`;
+      const from = d.byId.get(l.from);
+      const to = d.byId.get(l.to);
+      if (!from || !to) { fail('parallels-citation', `${tag}: a text does not resolve`); continue; }
+      if (l.from === l.to) fail('parallels-citation', `${tag}: cites itself`);
+      if (!MATCHES.has(l.match)) fail('parallels-citation', `${tag}: unknown match ${l.match}`);
+      if (['sn', 'an'].includes(to.collection) && l.match === 'vri-reference') fail('parallels-citation', `${tag}: SN/AN linked by number alone`);
+      const text = comSegs(l.from).get(l.commentary_ref);
+      if (text === undefined) { fail('parallels-citation', `${tag}: commentary segment does not exist`); continue; }
+      if (!l.evidence || !text.includes(l.evidence)) fail('parallels-citation', `${tag}: evidence not in the commentary segment`);
+      if (l.target_segment && !segs(l.to).has(l.target_segment)) fail('parallels-citation', `${tag}: cited segment ${l.target_segment} does not exist`);
+      if (l.match.startsWith('vri-reference')) {
+        const bi = bookOf.get(l.cited?.vri_file);
+        const blocks = d.canon.books[bi]?.blocks || [];
+        const at = blocks.findIndex((x, i) => i >= to.start && i < to.end && (commentary.paraRange(x[1]) || [0, -1])[0] <= l.cited.vri_paragraph && l.cited.vri_paragraph <= (commentary.paraRange(x[1]) || [0, -1])[1]);
+        if (bi !== to.book || at < 0) { fail('parallels-citation', `${tag}: VRI paragraph ${l.cited?.vri_paragraph} is not in ${l.to}`); continue; }
+        if (!l.evidence.includes(l.vri_reference)) fail('parallels-citation', `${tag}: evidence lacks the reference`);
+        if (l.match === 'vri-reference+quotation') {
+          const [a, b] = commentary.paraRange(l.cited.reference_paragraphs) || [];
+          const [qs, qe] = l.quotation_span || [];
+          const r = a && qe > qs ? checkQuote(l.evidence.slice(qs, qe), paragraphWindow(bi, a, b)) : { status: 'none' };
+          if (r.status !== 'whole' && r.status !== 'part') fail('parallels-citation', `${tag}: quotation not found again in the cited paragraph`);
+          if (!(a <= l.cited.vri_paragraph && l.cited.vri_paragraph <= b)) fail('parallels-citation', `${tag}: paragraph outside the reference`);
+        }
+      } else {
+        if (!l.named || !l.evidence.endsWith(l.named)) fail('parallels-citation', `${tag}: evidence lacks the sutta name`);
+        const stem = nameStem(l.named);
+        if (titleStem(to.title) !== stem) fail('parallels-citation', `${tag}: "${l.named}" is not the title of ${l.to} (diacritics included)`);
+        if (otherTextsNamed(stem, l.to).length) fail('parallels-citation', `${tag}: "${l.named}" is also a name of ${otherTextsNamed(stem, l.to).join(', ')}`);
+      }
+      count('parallels-citation');
+    }
+    const words = (t) => canon.fold(t).replace(/[^a-z]+/g, ' ').trim().split(' ');
+    const K = pd.source.method['shared-passage'].shingle_words;
+    for (const l of pd.shared) {
+      const tag = `${l.a} <-> ${l.b}`;
+      if (!d.byId.get(l.a) || !d.byId.get(l.b) || l.a === l.b) { fail('parallels-shared', `${tag}: a text does not resolve`); continue; }
+      if (!(l.score > 0 && l.score <= 1)) fail('parallels-shared', `${tag}: score ${l.score}`);
+      const ta = l.a_segments.map((r) => segs(l.a).get(r)?.text);
+      const tb = l.b_segments.map((r) => segs(l.b).get(r)?.text);
+      if (!ta.length || !tb.length || ta.includes(undefined) || tb.includes(undefined)) { fail('parallels-shared', `${tag}: a segment does not exist`); continue; }
+      const grams = new Set();
+      const wa = words(ta.join(' '));
+      for (let i = 0; i + K <= wa.length; i++) grams.add(wa.slice(i, i + K).join(' '));
+      const wb = words(tb.join(' '));
+      let found = false;
+      for (let i = 0; i + K <= wb.length && !found; i++) found = grams.has(wb.slice(i, i + K).join(' '));
+      if (!found) fail('parallels-shared', `${tag}: the segments share no ${K}-word run`);
+      count('parallels-shared');
+    }
+    const one = parallels.getParallels('MN 10', { limit: 100 });
+    if (!one.links.every((x) => parallels.SOURCES.includes(x.source) && x.how_matched)) fail('parallels', 'a get_parallels link lacks its source');
+  }
+}
+// 12. Glossary and sutta names (#102): same DPD pin as dpd.json.gz, no SuttaCentral columns, every name on a real
+// text, every index entry pointing at a headword, within its 3 MB budget.
+{
+  const file = new URL('../server/data/glossary.json.gz', import.meta.url);
+  const g = loadGlossary();
+  const size = statSync(file).size;
+  counts['glossary-bytes'] = size;
+  if (size > 3 * 1024 * 1024) fail('glossary-size', `${size} bytes, budget 3 MB`);
+  for (const key of ['version', 'asset_sha256']) if (g.source[key] !== DPD_PIN[key]) fail('glossary-pin', `glossary.json.gz ${key} ${g.source[key]} != DPD_PIN ${DPD_PIN[key]}`);
+  if (g.source.license !== 'CC BY-NC-SA 4.0' || !/Bodhirasa/.test(g.source.attribution || '')) fail('glossary-licence', g.source.license);
+  if (g.source.canon_commit !== d.canon.source.commit) fail('glossary-canon', `built from canon ${g.source.canon_commit}`);
+  if (/suttacentral\.net|sc_bilara|"sc_/i.test(JSON.stringify(g.names))) fail('glossary-sc', 'SuttaCentral data in names');
+  for (const [id, variants] of g.names) {
+    if (!d.byId.has(id)) fail('glossary-name', `${id} is not a canon text`);
+    else if (!variants.length) fail('glossary-name', `${id} has no name`);
+    else count('glossary-name');
+  }
+  for (const table of ['en', 'phrases']) for (const [k, ids] of Object.entries(g[table])) {
+    if (!ids.length || ids.some((i) => !g.headwords[i])) fail('glossary-entry', `${table} "${k}" points at a missing headword`);
+  }
+  counts['glossary-en-keys'] = Object.keys(g.en).length;
 }
 console.log(JSON.stringify(counts));
 console.log(`texts: ${d.canon.units.length}; failures: ${failures.length}`);

@@ -21,7 +21,7 @@ No account or key is needed for Pali Canon itself.
    gemini extensions install https://github.com/DaniilKi/pali-canon-claude
    ```
 
-   Gemini shows what the extension contains and asks you to confirm. To pin one version, add `--ref v2.0.0`. To get updates automatically, add `--auto-update`.
+   Gemini shows what the extension contains and asks you to confirm. To pin one version, add `--ref v2.1.0`. To get updates automatically, add `--auto-update`.
 2. Start Gemini with `gemini` and type `/mcp`. You should see the `pali-canon` server with its tools, such as `resolve_reference` and `get_text`.
 3. Try the four study commands:
 

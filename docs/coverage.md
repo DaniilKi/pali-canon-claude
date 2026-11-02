@@ -1,6 +1,6 @@
 # Coverage
 
-What Pali Canon for Claude contains in version 2.0.0, computed directly from the bundled data (`server/data/canon.json.gz`, `server/data/translations.json` and `server/data/anandajoti.json`).
+What Pali Canon for Claude contains in version 2.1.0, computed directly from the bundled data (`server/data/canon.json.gz`, `server/data/translations.json` and `server/data/anandajoti.json`).
 
 ## Summary
 
@@ -87,6 +87,22 @@ English is linked for four Abhidhamma texts, all from Ānandajoti Bhikkhu: two p
 | Ānandajoti Bhikkhu, Ancient Buddhist Texts | 153 | Line-by-line Pāli and English (CC BY-SA 3.0): Udāna, Dhammapada chapters, most of the Pārāyanavagga, the Bhikkhunīsaṃyutta, DN 16, several MN, SN and AN suttas, two parts of the Dhammasaṅgaṇī mātikā and Vibhaṅga 6–7. Each link is checked against the Pāli on the page |
 
 A translation is linked only on strong evidence: a matching number and title, a PTS start page that identifies exactly one text, or a confirmed title. When the evidence is ambiguous we leave the text unlinked, so some texts that do have a translation online are not linked yet. A second, content-based pass ([#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)) places a page only when rare names in the English occur in exactly one nearby Pāli text, or its Pāli title names exactly one; each such link stores its evidence and is audited.
+
+## Parallels and cross-references
+
+`get_parallels` links a text to others in two ways, built offline from the bundled VRI edition ([D59](decisions.md)). Every link says which kind it is and how it was matched.
+
+- **Commentary citations** (5,301): the traditional commentary on one text cites another. Most (4,753) are VRI's own references in brackets, confirmed by finding the quoted words in the cited paragraph; 401 are VRI references with no quotation to check (never used for SN or AN); 147 are suttas named in the commentary whose name, diacritics included, is the title of exactly one text and of no other text's title or Digital Pāḷi Dictionary sutta name, and whose neighbouring quotation, if any, comes from that text.
+- **Shared passages** (1,516): two canonical texts share a passage word for word. Stock formulae (runs found in more than 4 texts, or built only from common phrases) are left out.
+
+| Collection | Texts | With any link | With a commentary citation | With a shared passage |
+|---|---:|---:|---:|---:|
+| Dīgha Nikāya (DN) | 34 | 34 | 32 | 31 |
+| Majjhima Nikāya (MN) | 152 | 148 | 136 | 110 |
+| Saṃyutta Nikāya (SN) | 1,954 | 633 | 324 | 444 |
+| Aṅguttara Nikāya (AN) | 2,085 | 661 | 323 | 493 |
+
+Many short SN and AN texts have no link: the commentary passes over them, and their shared wording is the stock wording of their series. No link is given rather than a doubtful one. For parallels in Chinese, Sanskrit and Tibetan texts, each result links to SuttaCentral (link only).
 
 ## Not included yet
 

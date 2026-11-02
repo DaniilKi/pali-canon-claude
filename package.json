@@ -1,7 +1,7 @@
 {
   "name": "pali-canon-mcp",
   "mcpName": "io.github.DaniilKi/pali-canon",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "The Pāli Canon for Claude: whole Tipiṭaka offline (VRI), citation and PTS resolution, English translations with mirrors, Pāli dictionary.",
   "type": "module",
   "license": "MIT",

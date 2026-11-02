@@ -10,6 +10,8 @@ The [MIT licence](LICENSE) covers this project's own software and documentation.
 
 `server/data/commentary.json.gz` contains the commentaries (Aṭṭhakathā) of the same VRI repository and commit (`romn/*.att.xml`), under the same terms: free for non-commercial use, with attribution to the Vipassana Research Institute. The text is reproduced without changes, apart from markup removal; the build adds only the alignment of each passage to the root paragraph it explains. `get_commentary` returns VRI's attribution and terms with every result and labels the text as commentary.
 
+`server/data/parallels.json.gz` is derived only from the bundled VRI canon and commentary above (same terms: non-commercial, attribution to the Vipassana Research Institute). It holds links between texts, the commentary words that make each citation (short excerpts, at most 400 characters) and segment references; no new text. No SuttaCentral data is fetched, bundled or derived: SuttaCentral appears only as a link. DharmaNexus (Dharmamitra) parallels and the parallels columns of the Digital Pāḷi Dictionary's sutta table are not used (see D59).
+
 ## Citation numbering
 
 The standard citation IDs (for example `sn46.131-140`, `pli-tv-bu-vb-pj1`) follow the public numbering scheme used by SuttaCentral and Bhikkhu Bodhi. To align those numbers with the VRI text, the build reads the file and segment names and the opening words of the Mahāsaṅgīti Pāli root in [bilara-data](https://github.com/suttacentral/bilara-data), which is marked Public Domain Mark 1.0. Only the resulting number-to-location mapping and the public-domain Pāli titles are kept. No SuttaCentral translation, comment or other text is fetched or bundled. SuttaCentral [asks](https://suttacentral.net/licensing) that its content not be used for generative AI or apps built on it, and this project respects that by linking to SuttaCentral rather than retrieving from it.
@@ -42,6 +44,18 @@ Text-and-translation pages are fetched live from the "Texts and Translations" se
 Lookups go live to [dpdict.net](https://www.dpdict.net/). DPD is [CC BY-NC-SA 4.0](https://docs.dpdict.net/license/), by Bodhirasa Bhikkhu.
 
 `server/data/dpd.json.gz` is a compact subset of DPD release [v0.4.20261026](https://github.com/digitalpalidictionary/dpd-db/releases/tag/v0.4.20261026) (asset `dpd.db.tar.xz`, SHA-256 `62a3f55d285ae27f5e1d15492cd7bfa92e9e66a0b6bfed9ea97b58a28e346f49`; DOI [10.5281/zenodo.22979413](https://doi.org/10.5281/zenodo.22979413)), built by `scripts/dpd/build_dpd.py`: every headword and root, and the inflection map and deconstructor splits for the words of the bundled VRI texts. It is used by `analyse_passage` and by `lookup_pali` when dpdict.net is unreachable. It is a derivative of DPD and is shared under the same licence, **CC BY-NC-SA 4.0**, non-commercial, crediting “Digital Pāḷi Dictionary by Bodhirasa Bhikkhu”. Every result built from it returns this notice.
+
+`server/data/glossary.json.gz` is a second derivative of the same release, built by `scripts/dpd/build_glossary.py`: DPD's English index (the `epd` column of its `lookup` table) and the multi-word senses of DPD meanings, limited to headwords found in the bundled canon and ranked by DPD's own early-text counts, plus DPD's own sutta names (`sutta_info`: `dpd_sutta` and `dpd_sutta_var` only) mapped to canon text IDs through VRI's file and paragraph number. Every SuttaCentral column (`sc_*`), the `dv_*` columns and DPD's SuttaCentral-style `dpd_code` are dropped: no SuttaCentral content is bundled. It is used by `glossary`, the English expansion of `search_texts` and sutta names in `resolve_reference`, and is shared under the same licence, **CC BY-NC-SA 4.0**, crediting “Digital Pāḷi Dictionary by Bodhirasa Bhikkhu”.
+
+## English-keyboard input (ported, MIT and Unlicense)
+
+`src/input.mjs` (Pāli typed on an English keyboard, #102) ports or follows:
+
+- **digitalpalidictionary/dpd-koreader** (MIT), <https://github.com/digitalpalidictionary/dpd-koreader>: the Velthuis table and its order (`dpd/velthuis.lua`), ṁ = ṃ and NFC handling (`dpd/normalize.lua`), and the English fuzzy key (strip diacritics, `kh` → `k`, collapse doubled consonants; `dpd/english.lua`). Its `LICENSE` file reads: “Copyright (c) 2026 Nirodhavihāri”.
+- **tokushige-koyasan/corpus-search-toolkit** (MIT), <https://github.com/tokushige-koyasan/corpus-search-toolkit>: the conservative scheme detection of `scripts/to_iast.py` (ASCII markers, English lines left alone) and the spelling-variant classes of `scripts/variants.py` (doubled consonants, nasals before a consonant). Its `LICENSE` file reads: “Copyright (c) 2026 tokushige-koyasan”.
+- **matko/emacs-pali-velthuis** (Unlicense, public domain), <https://github.com/matko/emacs-pali-velthuis>: its quail table is the Velthuis test fixture in `tests/english-input.test.mjs`.
+
+The MIT permission notice reproduced under "Calendar code" below applies to both MIT works.
 
 ## Calendar code (ported, MIT)
 

@@ -9,6 +9,9 @@ import { SCRIPT_CHOICES, SCRIPT_DESCRIPTION, romanizeInput, localizeText, locali
 import * as variantsMod from './variants.mjs';
 import * as commentaryModule from './commentary.mjs';
 import * as postcanonical from './postcanonical.mjs';
+import { resolveReference } from './sutta-names.mjs';
+import { searchWithInput } from './english-search.mjs';
+import { lookupPaliInput } from './lookup-input.mjs';
 
 // Human-readable titles shown by MCP clients and required by the Claude connector directory.
 // Keep in step with the review table in docs/listings/claude-connector.md (tests/connector-listing.test.mjs checks it).
@@ -21,6 +24,7 @@ export const TOOL_TITLES = {
   search_texts: "Search the Tipiṭaka",
   browse_canon: "Browse the canon",
   lookup_pali: "Pāli dictionary lookup",
+  glossary: "Look up English–Pāli glossary terms",
   search_access_to_insight: "Search Access to Insight",
   get_access_to_insight_text: "Read Access to Insight page",
   list_sources: "List sources and licences",
@@ -40,12 +44,13 @@ export const TOOL_TITLES = {
   verify_quote: "Verify a quotation",
   vinaya_rule: "Pātimokkha rule",
   get_commentary: "Read the commentary",
+  get_parallels: "Find parallels and cross-references",
   get_post_canonical: "Read post-canonical texts",
   search_post_canonical: "Search post-canonical texts",
   analyse_passage: "Analyse a passage word by word",
 };
 
-export const VERSION = '2.0.0';
+export const VERSION = '2.1.0';
 
 /** Build a fully registered MCP server (tools, resources, prompts). Used by the stdio entry (src/index.mjs) and the HTTP entry (src/http-server.mjs). */
 export function createServer() {
@@ -79,21 +84,21 @@ export function createServer() {
     });
   }
 
-  tool('resolve_reference', 'Turn any citation, PTS page or link into the canonical text it names, with its title, PTS location, VRI paragraph numbers, available English translations, Thai/Myanmar/VRI edition pages and numbering notes. Works offline. The reference may be written in any supported script (Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao, Lanna); set script to get Pāli titles in that script.', {
+  tool('resolve_reference', 'Turn any citation, PTS page, link or sutta name (Pāli or English title, e.g. "Satipatthana Sutta"; ambiguous names list the candidates) into the canonical text it names, with its title, PTS location, VRI paragraph numbers, available English translations, Thai/Myanmar/VRI edition pages and numbering notes. Works offline. The reference may be written in any supported script (Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao, Lanna); set script to get Pāli titles in that script.', {
     reference: citation,
     script: scriptParam,
   }, ({ reference, script }) => {
     const input = romanizeInput(reference);
     let resolved;
     try {
-      resolved = canon.resolve(input.text);
+      resolved = resolveReference(input.text);
     } catch (error) {
       // Post-canonical citations (Vism 1.1, Abhidh-s 1, mahavamsa 3) never shadow canon ones: only after the canon fails.
       if (postcanonical.isPostCanonical(input.text)) return localizePostCanonical(postcanonical.describe(input.text), script, input);
       throw error;
     }
-    const { unit, notes, alternatives } = resolved;
-    return localizeDescribe({ ...canon.describe(unit, notes), ...(alternatives.length ? { also_on_that_page: alternatives } : {}) }, script, input);
+    const { unit, notes, alternatives, matched_by, name_match, also_named, input_normalised } = resolved;
+    return localizeDescribe({ ...canon.describe(unit, notes), ...(alternatives.length ? { also_on_that_page: alternatives } : {}), ...(matched_by ? { matched_by } : {}), ...(name_match ? { name_match } : {}), ...(also_named ? { also_named } : {}), ...(input_normalised ? { input_normalised } : {}) }, script, input);
   });
 
   tool('get_metadata', 'Details of one text: title, collection, PTS range, VRI book and paragraphs, contained texts, linked English translations (with translation_id), and a SuttaCentral link for parallels. Works offline.', {
@@ -181,20 +186,22 @@ export function createServer() {
     };
   }, { network: true });
 
-  tool('search_texts', 'Search the full Pāli text of the Tipiṭaka (diacritics optional; all words must appear; "quoted phrases" allowed), text titles, and English translation titles. Works offline. The query may be written in any supported script; set script for titles and excerpts in that script.', {
+  tool('search_texts', 'Search the full Pāli text of the Tipiṭaka (diacritics optional; all words must appear; "quoted phrases" allowed), text titles, and English translation titles. Works offline. Pāli typed on an English keyboard (samyutta, sanyutta, Velthuis sa.myutta, Harvard-Kyoto saMyutta) is understood and labelled; an English query (e.g. "mindfulness of breathing") is expanded into Pāli terms from the glossary, labelled expanded_from_english. The query may be written in any supported script; set script for titles and excerpts in that script.', {
     query: z.string().trim().min(1).max(300),
     collection: z.string().max(30).optional().describe('Limit to a collection or section, e.g. mn, sn, sn56, an4, dhp, vinaya.'),
     limit: z.number().int().min(1).max(50).default(10),
     offset: z.number().int().min(0).max(100000).default(0),
     script: scriptParam,
     include_post_canonical: z.boolean().default(false).describe(postcanonical.SEARCH_OPTION_DESCRIPTION),
-  }, async ({ query, collection, limit, offset, script, include_post_canonical }) => {
+    english: z.enum(['auto', 'off', 'only']).default('auto').describe('English queries: "auto" expands a query that looks English into Pāli terms from the glossary (DPD English index) and also runs the search as typed; "only" searches the expansion only; "off" never expands. Expansions are labelled expanded_from_english.'),
+  }, async ({ query, collection, limit, offset, script, include_post_canonical, english }) => {
     const input = romanizeInput(query);
-    const result = localizeSearch(canon.search(input.text, { collection, limit, offset }), script, input);
+    const searched = searchWithInput(input.text, { collection, limit, offset, english });
+    const result = localizeSearch(searched, script, input);
     if (include_post_canonical && collection) {
       return { ...result, post_canonical: { canonical: false, searched: false, results: [], note: `Not searched: collection "${collection}" limits the search to that part of the canon. Search the post-canonical books without collection, or with search_post_canonical.` } };
     }
-    const out = await postcanonical.withPostCanonical(result, input.text, { include: include_post_canonical, limit, offset });
+    const out = await postcanonical.withPostCanonical(result, searched.input_normalised?.read_as ?? input.text, { include: include_post_canonical, limit, offset });
     if (out.post_canonical && !out.post_canonical.error) out.post_canonical = localizePostCanonical(out.post_canonical, script);
     return out;
   });
@@ -205,9 +212,9 @@ export function createServer() {
     limit: z.number().int().min(1).max(200).default(60),
   }, ({ node, offset, limit }) => canon.browse(node, { offset, limit }));
 
-  tool('lookup_pali', 'Look up a Pāli word in the Digital Pāḷi Dictionary (grammar, roots, meanings). Dictionary glosses are reference material, not scripture.', {
+  tool('lookup_pali', 'Look up a Pāli word in the Digital Pāḷi Dictionary (grammar, roots, meanings). Diacritics are optional: "nibbana" also offers nibbāna, labelled inferred_spelling; Velthuis and Harvard-Kyoto are understood. Dictionary glosses are reference material, not scripture.', {
     word: z.string().trim().min(1).max(100), limit: z.number().int().min(1).max(10).default(5),
-  }, providers.lookupPali, { network: true });
+  }, lookupPaliInput, { network: true });
 
   tool('search_access_to_insight', 'Find Access to Insight translations, study guides and topics through its sutta and subject indexes (falls back to its official GitHub mirror).', {
     query: z.string().trim().min(1).max(200), limit: z.number().int().min(1).max(30).default(10),

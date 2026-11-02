@@ -36,6 +36,7 @@ export const CATEGORIES = {
   paritta: 'chanted texts traced to canonical sources',
   translations: 'translation availability and the no-silent-substitution rule',
   refusals: 'invalid citations fail with a clear error',
+  english_input: 'Pāli typed on an English keyboard, sutta names and English questions (#102), every inference labelled',
 };
 
 const EXPECT_KEYS = new Set(['error', 'equals', 'includes', 'excludes', 'matches', 'some_match', 'min', 'max', 'exists', 'absent',

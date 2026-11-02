@@ -38,8 +38,8 @@ body:
     id: version
     attributes:
       label: Tool version
-      description: For example 2.0.0. If you do not know, leave it blank.
-      placeholder: "2.0.0"
+      description: For example 2.1.0. If you do not know, leave it blank.
+      placeholder: "2.1.0"
   - type: input
     id: system
     attributes:

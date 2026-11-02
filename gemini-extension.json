@@ -1,6 +1,6 @@
 {
   "name": "pali-canon",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Study the Tipitaka: the whole Pali Canon offline, any citation or PTS page, English translations with mirrors, and Pali dictionary lookup.",
   "contextFileName": "GEMINI.md",
   "mcpServers": {

@@ -36,7 +36,7 @@ Run `claude plugin validate . --strict` and the portal's **Validate** button aga
 | What would you like to submit? | **Plugin bundle** (not MCP connector: our server runs locally, it is not a remote URL) |
 | Repository | `DaniilKi/pali-canon-claude` |
 | Plugin path | leave empty (the plugin is at the repository root) |
-| Branch or tag | leave empty to follow `main`, or a release tag such as `v2.0.0` to publish only tagged releases |
+| Branch or tag | leave empty to follow `main`, or a release tag such as `v2.1.0` to publish only tagged releases |
 
 ### Listing details (read from `plugin.json` and `README.md`)
 

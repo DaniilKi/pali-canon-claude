@@ -2,7 +2,7 @@
 
 Every source this project uses, links to, plans to use, or has decided not to use, with the reason and a direct link. The aim is that anyone, scholar or newcomer, can see exactly where each word comes from and go to the original.
 
-Last reviewed: 1 November 2026 (v2.0.0).
+Last reviewed: 1 November 2026 (v2.1.0).
 
 ## How we choose sources
 
@@ -133,7 +133,9 @@ Surveyed for [#35](https://github.com/DaniilKi/pali-canon-claude/issues/35) on 1
 | Source | Status | Why | Terms | Link |
 |---|---|---|---|---|
 | **SuttaCentral parallels** | **Linked** | The best parallels database; we link to it for every text | request not to use in AI | [suttacentral.net](https://suttacentral.net/) |
+| **Parallels and cross-references** (this project) | **Bundled** | `get_parallels`: commentary citations and shared passages, built offline from the bundled VRI canon and commentary ([D59](decisions.md)) | VRI terms (non-commercial, attribution) | `server/data/parallels.json.gz` |
 | **DharmaNexus** (now part of Dharmamitra) | **To evaluate; ask first** ([#29](https://github.com/DaniilKi/pali-canon-claude/issues/29)) | Computed text reuse across the Pāli canon | unstated; [permission letter drafted](outreach/dharmanexus.md) | [DharmaNexus](https://dharmamitra.org/db) |
+| **DPD sutta table, parallels columns** (`dv_*`, `sc_*`) | **Not used** ([#29](https://github.com/DaniilKi/pali-canon-claude/issues/29)) | Parallels listed in the Digital Pāḷi Dictionary database | `sc_*` columns are SuttaCentral data; the provenance of the `dv_*` columns could not be confirmed as independent of SuttaCentral | [dpd-db](https://github.com/digitalpalidictionary/dpd-db) |
 | **splendidmoons** (Thai Mahānikāya calendar) | **Bundled (code port)** ([#42](https://github.com/DaniilKi/pali-canon-claude/issues/42)) | Thai lunar-calendar rules behind the `uposatha` and `festivals` tools; its published calendar is a test reference | MIT (code); dates are facts | [splendidmoons](https://splendidmoons.github.io/) · [code](https://github.com/splendidmoons/splendidmoons) |
 | **pythaidate** (Pakkhagaṇanā) | **Bundled (code port)** ([#42](https://github.com/DaniilKi/pali-canon-claude/issues/42)) | The Dhammayut fortnight reckoning | MIT | [pythaidate](https://github.com/hmmbug/pythaidate) |
 | **mmcal / ceMmDateTime** (Burmese calendar) | **Bundled (code port)** ([#42](https://github.com/DaniilKi/pali-canon-claude/issues/42)) | Myanmar calendar arithmetic | MIT | [mmcal](https://github.com/yan9a/mmcal) |

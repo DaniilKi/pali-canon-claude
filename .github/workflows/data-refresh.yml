@@ -138,6 +138,9 @@ jobs:
           tar -xJf "$W/dpd/dpd.db.tar.xz" -C "$W/dpd" && rm "$W/dpd/dpd.db.tar.xz"
           db=$(find "$W/dpd" -name dpd.db | head -n 1)
           python scripts/dpd/build_dpd.py "$db" "$W/new/canon.json.gz" "$W/new/dpd.json.gz" --archive-sha256 "$sha" --asset-url "$url"
+          if [ -f scripts/dpd/build_glossary.py ]; then
+            python -I scripts/dpd/build_glossary.py "$db" "$W/new/canon.json.gz" "$W/new/dpd.json.gz" "$W/new/glossary.json.gz" --archive-sha256 "$sha"
+          fi
           rm -rf "$W/dpd"
           echo "DPD_LINE=DPD release [$tag](https://github.com/digitalpalidictionary/dpd-db/releases/tag/$tag), dpd.db.tar.xz SHA-256 \`$sha\`${digest:+ (matches the release digest)}" >> "$GITHUB_ENV"
 
@@ -153,6 +156,16 @@ jobs:
             python scripts/canon/update_dpd_pin.py server/data/dpd.json.gz src/analyse.mjs
           fi
           echo "Changed files:"; cat "$W/changed.txt"
+
+      - name: "Rebuild parallels from the installed data (when #29 is merged)"
+        if: hashFiles('scripts/parallels/build.mjs') != ''
+        run: |
+          set -euo pipefail
+          node scripts/parallels/build.mjs
+          if ! git diff --quiet -- server/data/parallels.json.gz; then
+            cp server/data/parallels.json.gz "$W/new/"
+            grep -qx 'parallels.json.gz' "$W/changed.txt" || echo 'parallels.json.gz' >> "$W/changed.txt"
+          fi
 
       - name: Build the server bundle
         run: npm run build

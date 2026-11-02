@@ -419,6 +419,9 @@ def main():
         entry = {'source': 'ati', 'english': (page.get('html_title') or '').split(':', 1)[-1].strip(), 'path': '/' + path.rsplit('.html', 1)[0], 'url': 'https://www.accesstoinsight.org/' + path,
                  'translator': page.get('author') or page.get('author_short') or '', 'license': page.get('license', ''),
                  'reference': page.get('pts', '')}
+        # The Pāli name ATI gives the page ("Adittapariyaya Sutta: The Fire Sermon"), for sutta-name lookups (D61).
+        if ':' in (page.get('html_title') or '') and title.strip():
+            entry['pali_title'] = title.strip()
         if coll == 'dhp':
             vaggas = sorted([u for u in canon['units'] if u['collection'] == 'dhp' and u.get('kind') == 'range'],
                             key=lambda u: number_of(u['id'])[0])

@@ -71,7 +71,7 @@ args = ["-y", "pali-canon-mcp"]
 ## Check that it works
 
 - Run `codex mcp list`. You should see `pali-canon`.
-- In a session, type `/mcp`. Pali Canon should list 30 tools, such as `resolve_reference` and `get_text`.
+- In a session, type `/mcp`. Pali Canon should list 32 tools, such as `resolve_reference` and `get_text`.
 - Ask: "Use the Pali Canon tools to show me the first paragraph of MN 10 with its citation." The answer should quote the Pāli and name the source (VRI Chaṭṭha Saṅgāyana).
 
 ## Troubleshooting
