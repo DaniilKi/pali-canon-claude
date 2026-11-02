@@ -3,6 +3,7 @@
 Usage:
   python scripts/canon/diff_report.py OLD_DATA_DIR NEW_DATA_DIR [--out report.md] [--json summary.json]
                                       [--changed-list files.txt] [--check NAME=OUTCOME ...] [--note TEXT ...] [--limit N]
+                                      [--budget-mb MB] [--extra FILE ...]
 
 OLD_DATA_DIR and NEW_DATA_DIR each hold a copy of server/data/ (the committed one and the rebuilt one).
 Only the files present in both are compared in detail; every file is listed with its size. A file counts as
@@ -15,10 +16,16 @@ The report covers:
     texts whose boundaries or wording changed, title, approximate-flag and member changes;
   * PTS changes: start/end page per text, and the number of PTS, Thai, Myanmar and VRI page markers;
   * translation-link changes in translations.json: added, removed, moved to another text, match type changed;
-  * books added or removed and, per book, how many blocks changed.
+  * books added or removed and, per book, how many blocks changed;
+  * the report's own checks (summary "report_checks", also shown in the Checks table):
+      - package size budget: the new data files plus every --extra file (the server bundle, README and the other
+        packaged files) must stay within --budget-mb (on-disk size, an upper bound for the packed size);
+      - linked unit IDs: every unit ID or citation that anandajoti.json, topics.json and dhamma_lists.json point to
+        must still exist in the new canon. Ānandajoti links on texts whose wording changed are listed for a rebuild
+        with scripts/anandajoti/build.mjs (their coverage was measured on the old wording).
 
-It reads data only and writes Markdown (and optionally JSON). Exit status is 0 whether or not anything changed;
-the JSON summary has "changed": true|false for the workflow.
+It reads data only and writes Markdown (and optionally JSON). Exit status is 0 whether or not anything changed or a
+report check failed: the JSON summary has "changed": true|false and "report_checks" for the workflow.
 """
 import argparse
 import gzip
@@ -210,17 +217,42 @@ def source_line(src):
     return json.dumps(src, ensure_ascii=False)[:120]
 
 
-def report(old_dir, new_dir, checks, notes, limit):
+# ---------------------------------------------------------------- data keyed by unit ID
+
+def dependent_ids(new_dir, canon):
+    """(file, where, ID or citation) for every reference in the ID-keyed data files that the canon no longer has.
+
+    bmc.json is keyed by Pātimokkha rule (pj1, ss1, ...), resolved through the citation parser; tests/vinaya-bmc.test.mjs
+    checks those against the bundled canon."""
+    ids = {u['id'] for u in canon['units']}
+    acronyms = {u.get('acronym') for u in canon['units']}
+    missing = []
+    ana = load(os.path.join(new_dir, 'anandajoti.json')) or {}
+    for uid in (ana.get('links') or {}):
+        if uid not in ids:
+            missing.append(('anandajoti.json', 'links', uid))
+    topics = load(os.path.join(new_dir, 'topics.json')) or {}
+    for t in topics.get('topics') or []:
+        for x in t.get('texts') or []:
+            if x.get('id') and x['id'] not in ids:
+                missing.append(('topics.json', f"topic {t.get('slug', '?')}", x['id']))
+    lists = load(os.path.join(new_dir, 'dhamma_lists.json')) or {}
+    for li in lists.get('lists') or []:
+        for field in ('defined_in', 'see_also_texts'):
+            for cit in li.get(field) or []:
+                if cit not in acronyms:
+                    missing.append(('dhamma_lists.json', f"list {li.get('slug', '?')} {field}", cit))
+    return missing
+
+
+def report(old_dir, new_dir, checks, notes, limit, budget_mb=None, extras=()):
     names = sorted(set(os.listdir(old_dir)) | set(os.listdir(new_dir)))
     names = [n for n in names if n.endswith(('.json', '.json.gz')) and not n.endswith('.report.json')]
-    summary = {'changed': False, 'files': {}, 'checks': dict(checks)}
+    summary = {'changed': False, 'files': {}, 'checks': dict(checks), 'report_checks': {}}
     md = ['# Data refresh report', '']
     if notes:
         md += [f'- {n}' for n in notes] + ['']
-    if checks:
-        md += ['## Checks', '', '| Check | Result |', '|---|---|']
-        md += [f'| {k} | {"pass" if v == "success" else ("**" + v + "**")} |' for k, v in checks]
-        md += ['']
+    checks_at = len(md)  # the Checks table goes here once the report's own checks are known
 
     # Files and upstream versions
     md += ['## Files and upstream versions', '', '| File | Old | New | Upstream (old → new) |', '|---|---|---|---|']
@@ -246,7 +278,17 @@ def report(old_dir, new_dir, checks, notes, limit):
             up = a if a == b else f'{a or "—"} → {b or "—"}'
         mark = '' if changed else ' (unchanged)'
         md.append(f'| `{n}`{mark} | {size_o} | {size_n} | {up} |')
-    md += ['', f'Total size of the new data files: {fmt_size(total_new)} (package budget: 60 MB including the server bundle).', '']
+    total_extra = sum(os.path.getsize(f) for f in extras)
+    total = total_new + total_extra
+    summary['size'] = {'data_bytes': total_new, 'extra_bytes': total_extra, 'total_bytes': total, 'budget_mb': budget_mb}
+    line = f'Total size of the new data files: {fmt_size(total_new)}'
+    if extras:
+        line += f'; with the server bundle and the other packaged files ({len(extras)}): {fmt_size(total)}'
+    if budget_mb is not None:
+        over = total > budget_mb * 1048576
+        summary['report_checks'][f'package size budget (≤ {budget_mb:g} MB)'] = 'failure' if over else 'success'
+        line += f' (package budget {budget_mb:g} MB: ' + ('**over budget**' if over else 'within budget') + ')'
+    md += ['', line + '.', '']
 
     # Canon
     oc, nc = load(os.path.join(old_dir, 'canon.json.gz')), load(os.path.join(new_dir, 'canon.json.gz'))
@@ -284,6 +326,23 @@ def report(old_dir, new_dir, checks, notes, limit):
             md += [f'Books added: {", ".join(d["books_added"]) or "none"}. Books removed: {", ".join(d["books_removed"]) or "none"}.', '']
         summary['canon'] = {k: len(v) for k, v in d.items() if isinstance(v, list)}
         summary['canon']['commit'] = {'old': a, 'new': b}
+        ana = (load(os.path.join(new_dir, 'anandajoti.json')) or {}).get('links') or {}
+        recheck = [(w[0], w[1], ana[w[0]].get('reference') or '', ana[w[0]].get('coverage', '')) for w in d['wording'] if w[0] in ana]
+        if recheck:
+            md += [f'{len(recheck)} Ānandajoti link(s) are on texts whose wording changed. Their Pāli coverage was measured on '
+                   'the old wording: rerun `node scripts/anandajoti/build.mjs --cache <dir>` before merging.', '']
+            md += section('Ānandajoti links to recheck', recheck, ['ID', 'Citation', 'Site reference', 'Old coverage'], limit, True)
+        summary['anandajoti_recheck'] = len(recheck)
+
+    # Data keyed by unit ID (built separately; the refresh does not rebuild it)
+    if nc:
+        missing = dependent_ids(new_dir, nc)
+        summary['report_checks']['linked unit IDs resolve'] = 'failure' if missing else 'success'
+        summary['dangling_ids'] = [list(m) for m in missing]
+        md += ['## Data keyed by unit ID', '',
+               'anandajoti.json, topics.json and dhamma_lists.json are built separately and point at canon IDs or citations; '
+               'every one must still resolve in the new canon.', '']
+        md += section('IDs that no longer resolve', missing, ['File', 'Where', 'ID or citation'], limit, True)
 
     # Translation links
     ot, nt = load(os.path.join(old_dir, 'translations.json')), load(os.path.join(new_dir, 'translations.json'))
@@ -301,6 +360,11 @@ def report(old_dir, new_dir, checks, notes, limit):
         md += section('Match type changed', d['match'], ['Text', 'Source', 'URL', 'Old', 'New'], limit)
         summary['links'] = {k: len(d[k]) for k in ('added', 'removed', 'moved', 'match')}
 
+    all_checks = list(checks) + list(summary['report_checks'].items())
+    if all_checks:
+        rows = ['## Checks', '', '| Check | Result |', '|---|---|']
+        rows += [f'| {k} | {"pass" if v == "success" else ("**" + v + "**")} |' for k, v in all_checks]
+        md[checks_at:checks_at] = rows + ['']
     if not summary['changed']:
         md.insert(2, '**No data file changed.**\n')
     md += ['---', '', 'Review every moved text, PTS change and link change before merging; this PR is never merged automatically.']
@@ -317,9 +381,11 @@ def main(argv=None):
     ap.add_argument('--note', action='append', default=[])
     ap.add_argument('--changed-list', help='write the names of the files whose content changed, one per line')
     ap.add_argument('--limit', type=int, default=150, help='rows shown per list (default 150)')
+    ap.add_argument('--budget-mb', type=float, help='fail the "package size budget" report check above this many MB')
+    ap.add_argument('--extra', action='append', default=[], help='another packaged file counted in the size budget')
     args = ap.parse_args(argv)
     checks = [tuple(c.split('=', 1)) if '=' in c else (c, 'unknown') for c in args.check]
-    md, summary = report(args.old_dir, args.new_dir, checks, args.note, args.limit)
+    md, summary = report(args.old_dir, args.new_dir, checks, args.note, args.limit, args.budget_mb, args.extra)
     if args.out:
         with open(args.out, 'w', encoding='utf-8', newline='\n') as f:
             f.write(md)

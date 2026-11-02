@@ -190,3 +190,94 @@ test('update_dpd_pin.py rewrites only DPD_PIN, from the rebuilt subset', { skip:
   assert.equal(fs.readFileSync(mjs, 'utf8'), 'export const X = 1;\n');
   fs.rmSync(dir, { recursive: true, force: true });
 });
+
+// ---- review fixes: base branch, ATI checkout, draft state, size budget, IDs, PR body
+
+const runLines = WORKFLOW.split('\n').filter((l) => !/^\s*#/.test(l));
+
+test('the PR base branch does not depend on github.event.repository (absent on the schedule trigger)', () => {
+  for (const l of runLines) assert.doesNotMatch(l, /github\.event\.repository/, l);
+  assert.match(WORKFLOW, /base=\$\(gh api "repos\/\$REPO" --jq \.default_branch\)/);
+  assert.match(WORKFLOW, /-f base="\$base"/);
+});
+
+test('Access to Insight is checked out whole (/tipitaka/), Khuddaka texts included, as in scripts/canon/README.md', () => {
+  assert.match(WORKFLOW, /git -C "\$W\/ati" sparse-checkout set --no-cone '\/tipitaka\/'\n/);
+  assert.doesNotMatch(WORKFLOW, /!\/tipitaka/);
+});
+
+test('an existing refresh PR gets this month\'s draft state; report checks (size, IDs) also make a draft', () => {
+  assert.match(WORKFLOW, /convertPullRequestToDraft/);
+  assert.match(WORKFLOW, /markPullRequestReadyForReview/);
+  assert.match(WORKFLOW, /if \[ "\$was_draft" != "\$draft" \]/);
+  assert.match(WORKFLOW, /--budget-mb 60/);
+  assert.match(WORKFLOW, /\.report_checks\[\]/);
+  assert.match(WORKFLOW, /scripts\/canon\/pr_body\.py/);
+});
+
+test('diff_report.py: package size budget and unit IDs that no longer resolve fail the report checks', { skip: !PYTHON && 'no Python 3' }, () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'refresh-'));
+  fs.mkdirSync(path.join(dir, 'old'));
+  fs.mkdirSync(path.join(dir, 'new'));
+  gz(path.join(dir, 'old', 'canon.json.gz'), canonFixture());
+  const cur = canonFixture();
+  cur.units = cur.units.filter((u) => u.id !== 'sn1.2');
+  cur.books[0].blocks[1][2] = 'mn text two, corrected'; // mn1 wording changes under an Ānandajoti link
+  gz(path.join(dir, 'new', 'canon.json.gz'), cur);
+  const ana = { source: {}, links: { mn1: { path: '/x.htm', reference: 'MN 1', coverage: 0.8 }, 'sn1.2': { path: '/y.htm', reference: 'SN 1.2' } } };
+  const topics = { source: {}, topics: [{ slug: 't', texts: [{ id: 'mn2' }, { id: 'sn1.2' }] }] };
+  const lists = { lists: [{ slug: 'l', defined_in: ['MN 1'], see_also_texts: ['SN 1.2'] }] };
+  for (const side of ['old', 'new']) {
+    fs.writeFileSync(path.join(dir, side, 'anandajoti.json'), JSON.stringify(ana));
+    fs.writeFileSync(path.join(dir, side, 'topics.json'), JSON.stringify(topics));
+    fs.writeFileSync(path.join(dir, side, 'dhamma_lists.json'), JSON.stringify(lists));
+  }
+  const bundle = path.join(dir, 'index.cjs');
+  fs.writeFileSync(bundle, Buffer.alloc(300 * 1024));
+  const run = (budget) => {
+    const r = py([path.join(ROOT, 'scripts/canon/diff_report.py'), path.join(dir, 'old'), path.join(dir, 'new'),
+      '--out', path.join(dir, 'r.md'), '--json', path.join(dir, 's.json'), '--budget-mb', String(budget), '--extra', bundle]);
+    assert.equal(r.status, 0, r.stderr);
+    return { s: JSON.parse(fs.readFileSync(path.join(dir, 's.json'), 'utf8')), md: fs.readFileSync(path.join(dir, 'r.md'), 'utf8') };
+  };
+  const over = run(0.2);
+  assert.equal(over.s.report_checks['package size budget (≤ 0.2 MB)'], 'failure');
+  assert.ok(over.s.size.total_bytes > 300 * 1024);
+  assert.match(over.md, /\*\*over budget\*\*/);
+  assert.match(over.md, /\| package size budget \(≤ 0\.2 MB\) \| \*\*failure\*\* \|/);
+  assert.equal(over.s.report_checks['linked unit IDs resolve'], 'failure');
+  assert.deepEqual(over.s.dangling_ids.map((d) => `${d[0]}:${d[2]}`).sort(), ['anandajoti.json:sn1.2', 'dhamma_lists.json:SN 1.2', 'topics.json:sn1.2']);
+  assert.equal(over.s.anandajoti_recheck, 1);
+  assert.match(over.md, /\| mn1 \| MN 1 \| MN 1 \| 0\.8 \|/);
+  const within = run(60);
+  assert.equal(within.s.report_checks['package size budget (≤ 60 MB)'], 'success');
+  assert.match(within.md, /within budget/);
+  fs.rmSync(dir, { recursive: true, force: true });
+});
+
+test('pr_body.py cuts a long report at a section boundary and closes what is open', { skip: !PYTHON && 'no Python 3' }, () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'refresh-'));
+  const rows = Array.from({ length: 400 }, (_, i) => `| sn${i} | SN ${i} | ${'x'.repeat(40)} |`).join('\n');
+  const sec = (t) => `<details open><summary><b>${t}</b>: 400</summary>\n\n| ID | Citation | Note |\n|---|---|---|\n${rows}\n\n</details>\n\n`;
+  const report = `# Data refresh report\n\n## Checks\n\n| Check | Result |\n|---|---|\n| npm test | pass |\n\n${sec('A')}${sec('B')}${sec('C')}`;
+  fs.writeFileSync(path.join(dir, 'r.md'), report);
+  const r = py([path.join(ROOT, 'scripts/canon/pr_body.py'), path.join(dir, 'r.md'), path.join(dir, 'b.md'), '--limit', '40000']);
+  assert.equal(r.status, 0, r.stderr);
+  const body = fs.readFileSync(path.join(dir, 'b.md'), 'utf8');
+  assert.ok(body.length <= 40000, String(body.length));
+  assert.equal((body.match(/<details[\s>]/g) || []).length, (body.match(/<\/details>/g) || []).length);
+  assert.match(body, /report truncated/);
+  assert.match(body, /<\/details>\n\n?\n… report truncated/);
+  // One section too long to fit: cut at a line, close the open <details> and code fence.
+  fs.writeFileSync(path.join(dir, 'r.md'), `<details><summary>log</summary>\n\n\`\`\`\n${'line\n'.repeat(5000)}\`\`\`\n</details>\n`);
+  const r2 = py([path.join(ROOT, 'scripts/canon/pr_body.py'), path.join(dir, 'r.md'), path.join(dir, 'b.md'), '--limit', '3000']);
+  assert.equal(r2.status, 0, r2.stderr);
+  const b2 = fs.readFileSync(path.join(dir, 'b.md'), 'utf8');
+  assert.ok(b2.length <= 3000);
+  assert.match(b2, /line\n```\n<\/details>\n/);
+  // A short report is kept whole.
+  fs.writeFileSync(path.join(dir, 'r.md'), report.slice(0, 200));
+  py([path.join(ROOT, 'scripts/canon/pr_body.py'), path.join(dir, 'r.md'), path.join(dir, 'b.md')]);
+  assert.ok(fs.readFileSync(path.join(dir, 'b.md'), 'utf8').startsWith(report.slice(0, 200)));
+  fs.rmSync(dir, { recursive: true, force: true });
+});
