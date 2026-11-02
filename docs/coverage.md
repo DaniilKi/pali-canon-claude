@@ -1,6 +1,6 @@
 # Coverage
 
-What Pali Canon for Claude contains in version 2.0.0, computed directly from the bundled data (`server/data/canon.json.gz`, `server/data/translations.json` and `server/data/anandajoti.json`).
+What Pali Canon for Claude contains in version 2.1.0, computed directly from the bundled data (`server/data/canon.json.gz`, `server/data/translations.json` and `server/data/anandajoti.json`).
 
 ## Summary
 

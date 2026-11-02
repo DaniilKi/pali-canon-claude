@@ -2,7 +2,7 @@
 
 Every source this project uses, links to, plans to use, or has decided not to use, with the reason and a direct link. The aim is that anyone, scholar or newcomer, can see exactly where each word comes from and go to the original.
 
-Last reviewed: 1 November 2026 (v2.0.0).
+Last reviewed: 1 November 2026 (v2.1.0).
 
 ## How we choose sources
 

@@ -6,7 +6,7 @@ import { expectedToolNames } from './expected-tools.mjs';
 const live = process.argv.includes('--live');
 const serverFlag = process.argv.indexOf('--server');
 const serverPath = serverFlag >= 0 ? process.argv[serverFlag + 1] : 'server/index.cjs';
-const client = new Client({ name: 'pali-canon-smoke', version: '2.0.0' });
+const client = new Client({ name: 'pali-canon-smoke', version: '2.1.0' });
 // Pass the environment through so proxy settings (HTTPS_PROXY, NODE_USE_ENV_PROXY) reach the server.
 const transport = new StdioClientTransport({ command: process.execPath, args: [serverPath], stderr: 'pipe', env: { ...process.env } });
 transport.stderr?.on('data', (data) => process.stderr.write(data));

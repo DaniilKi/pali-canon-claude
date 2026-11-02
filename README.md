@@ -4,7 +4,7 @@
 
 Pali Canon for Claude gives Claude the complete Pāli Tipiṭaka, the scripture of Theravāda Buddhism. With it, Claude can read the actual text, quote it accurately, cite it precisely, and show published English translations side by side. It runs on your own computer and the Pāli text works without internet.
 
-> Version 2.0.0 · Free and open source (MIT) · An independent community project, not affiliated with Anthropic or any Buddhist publisher.
+> Version 2.1.0 · Free and open source (MIT) · An independent community project, not affiliated with Anthropic or any Buddhist publisher.
 
 ---
 
@@ -57,7 +57,7 @@ Claude quotes only what it retrieved, names the translator, and keeps four thing
 
 ## What you can ask it
 
-Pali Canon gives the AI **31 tools**, 4 prompts, 3 reference resources and 5 skills. You do not need to know their names: ask in your own words and the AI picks the right tool. The tool names are shown in `code` for anyone who wants to check. Everything works offline unless marked *(internet)*.
+Pali Canon gives the AI **32 tools**, 4 prompts, 3 reference resources and 5 skills. You do not need to know their names: ask in your own words and the AI picks the right tool. The tool names are shown in `code` for anyone who wants to check. Everything works offline unless marked *(internet)*.
 
 ### Study
 
@@ -160,7 +160,7 @@ Model-level runs, where Claude or Codex answers the questions with the server co
 
 ## Install
 
-Pick the app you use. Every option runs the same server, with the same 31 tools.
+Pick the app you use. Every option runs the same server, with the same 32 tools.
 
 ### Claude Desktop (easiest)
 

@@ -32495,7 +32495,7 @@ var TOOL_TITLES = {
   search_post_canonical: "Search post-canonical texts",
   analyse_passage: "Analyse a passage word by word"
 };
-var VERSION = "2.0.0";
+var VERSION = "2.1.0";
 function createServer2() {
   const server = new McpServer({ name: "pali-canon", version: VERSION }, {
     instructions: [

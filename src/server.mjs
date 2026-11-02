@@ -50,7 +50,7 @@ export const TOOL_TITLES = {
   analyse_passage: "Analyse a passage word by word",
 };
 
-export const VERSION = '2.0.0';
+export const VERSION = '2.1.0';
 
 /** Build a fully registered MCP server (tools, resources, prompts). Used by the stdio entry (src/index.mjs) and the HTTP entry (src/http-server.mjs). */
 export function createServer() {
