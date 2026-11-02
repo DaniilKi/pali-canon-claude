@@ -120,6 +120,28 @@ function passagesFor(d, unit) {
 }
 
 /**
+ * For each commentary segment of a unit (in the order commentaryFor returns them), the passage it comes
+ * from and the canon units that passage is aligned to. Used by scripts/parallels/build.mjs to tell whose
+ * commentary a citation sits in.
+ */
+let ownersOf = null;
+export function segmentOwners(unit) {
+  const d = load();
+  if (!d) return [];
+  if (!ownersOf) {
+    ownersOf = new Map();
+    for (const [id, list] of Object.entries(d.units)) for (const pi of list) (ownersOf.get(pi) || ownersOf.set(pi, []).get(pi)).push(id);
+  }
+  const owners = ownersOf;
+  const out = [];
+  for (const pi of passagesFor(d, unit)) {
+    const n = passageSegments(d, pi).length;
+    for (let i = 0; i < n; i++) out.push({ passage: pi, units: owners.get(pi) || [] });
+  }
+  return out;
+}
+
+/**
  * Commentary on a text: resolves any citation, returns the aligned commentary passages as
  * segments, paginated by segment. Throws on an unknown citation (like get_text).
  */

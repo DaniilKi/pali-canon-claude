@@ -154,6 +154,16 @@ jobs:
           fi
           echo "Changed files:"; cat "$W/changed.txt"
 
+      - name: "Rebuild parallels from the installed data (when #29 is merged)"
+        if: hashFiles('scripts/parallels/build.mjs') != ''
+        run: |
+          set -euo pipefail
+          node scripts/parallels/build.mjs
+          if ! git diff --quiet -- server/data/parallels.json.gz; then
+            cp server/data/parallels.json.gz "$W/new/"
+            grep -qx 'parallels.json.gz' "$W/changed.txt" || echo 'parallels.json.gz' >> "$W/changed.txt"
+          fi
+
       - name: Build the server bundle
         run: npm run build
 
