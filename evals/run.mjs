@@ -24,7 +24,7 @@ export const CATEGORIES = {
   approximate_texts: 'abbreviated (peyyāla) texts and grouped members stay flagged',
   quote_verification: 'genuine Pāli quotations found at the right text; fabricated and misattributed ones not found',
   find_citations: 'every citation in a passage found, resolved or reported unresolved',
-  commentary: 'commentary and word analysis (get_commentary, analyse_passage: skipped until registered)',
+  commentary: 'commentary and word analysis (get_commentary, analyse_passage)',
   scripts: 'the script parameter and input in other scripts',
   edition_pages: 'Thai, Myanmar and VRI edition page references, both directions',
   variants: 'structured and raw variant readings with edition sigla',

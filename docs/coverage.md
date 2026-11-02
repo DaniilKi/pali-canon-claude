@@ -17,7 +17,10 @@ What Pali Canon for Claude contains in version 2.0.0, computed directly from the
 | Thai, Myanmar and VRI page markers | 56,050 (21,781 Thai, 16,687 Myanmar, 17,582 VRI), shown in `get_text` and accepted as citations such as "Thai MN 1.103"; 56,048 resolve back to a text containing the marker |
 | Variant readings | 18,725 VRI notes; 16,632 (88.8%) give at least one reading attributed to editions by siglum (`get_text` `variants: "structured"`) |
 | Scripts | Roman, plus Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao and Lanna by transliteration. The first five are tested against VRI's own script editions; Lao and Lanna have no VRI edition and are tested by round trip only |
-| English translation links | 2,448 links covering 1,359 texts directly, 1,782 including verses that share their chapter's translation |
+| English translation links | 2,540 links covering 1,400 texts directly, 1,823 including verses that share their chapter's translation (64 of them placed by the content-based linker, [#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)). `list_sources` reports the same per collection as `translation_coverage`, counting grouped ranges through their members (1,374 and 1,797 of 8,445) |
+| Commentary (Aṭṭhakathā) | VRI commentaries aligned to the texts by VRI paragraph number (`get_commentary`, `get_text` `commentary: true`): DN 34/34, MN 152/152, SN 1,800/1,954, AN 1,598/2,085, Dhp 449/449, Ja 512/547, Vinaya 370/443 texts; every text the commentary numbers is aligned except 8 known exceptions. `server/data/commentary.json.gz`, 10.8 MB |
+| Post-canonical books | All 109 VRI Ṭīkā and Añña books (Visuddhimagga, its Mahāṭīkā, Abhidhammatthasaṅgaha, Mahāvaṃsa and the sub-commentaries), labelled `canonical: false` (`get_post_canonical`, `search_post_canonical`). `server/data/postcanonical.json.gz`, 14.5 MB |
+| Word analysis | Digital Pāḷi Dictionary v0.4.20261026 subset: 89,763 headwords, 753 roots and the word forms of the bundled texts; 99.74% of the canon's words are known (`analyse_passage`, offline `lookup_pali`). `server/data/dpd.json.gz`, 5.3 MB |
 | Works offline | All Pāli reading, citation lookup, PTS and edition page lookup, Pāli search and script conversion |
 
 "Texts" here means the units people cite: a sutta, a verse, a rule, a Khandhaka chapter, an Abhidhamma section. Some collections are counted by verse (Dhammapada) and some by chapter or story.
@@ -28,8 +31,8 @@ What Pali Canon for Claude contains in version 2.0.0, computed directly from the
 |---|---|---:|---:|---:|---:|
 | Dīgha Nikāya, long discourses | DN | 34 | | | 16 |
 | Majjhima Nikāya, middle-length discourses | MN | 152 | | | 112 |
-| Saṃyutta Nikāya, connected discourses | SN | 1,954 | 135 | 56 | 458 |
-| Aṅguttara Nikāya, numbered discourses | AN | 2,085 | 677 | 141 | 332 |
+| Saṃyutta Nikāya, connected discourses | SN | 1,954 | 135 | 56 | 467 |
+| Aṅguttara Nikāya, numbered discourses | AN | 2,085 | 677 | 141 | 364 |
 | Khuddakapāṭha | Kp / Khp | 9 | | | 9 |
 | Dhammapada | Dhp | 449 verses | 423 | | 449 (via 26 chapters) |
 | Udāna | Ud | 80 | | | 80 |
@@ -79,18 +82,17 @@ English is linked for four Abhidhamma texts, all from Ānandajoti Bhikkhu: two p
 
 | Source | Links | Notes |
 |---|---:|---|
-| Ṭhānissaro Bhikkhu, dhammatalks.org | 1,242 | Current versions of his translations |
-| Access to Insight | 1,053 | Ṭhānissaro's earlier versions (782) and about 25 other translators, among them Maurice Walshe, John D. Ireland, Andrew Olendzki, Acharya Buddharakkhita, Nyanaponika Thera, Piyadassi Thera, Ñāṇamoli Thera and Bhikkhu Bodhi; each page keeps its own licence notice |
+| Ṭhānissaro Bhikkhu, dhammatalks.org | 1,276 | Current versions of his translations |
+| Access to Insight | 1,111 | Ṭhānissaro's earlier versions (816) and about 25 other translators, among them Maurice Walshe, John D. Ireland, Andrew Olendzki, Acharya Buddharakkhita, Nyanaponika Thera, Piyadassi Thera, Ñāṇamoli Thera and Bhikkhu Bodhi; each page keeps its own licence notice |
 | Ānandajoti Bhikkhu, Ancient Buddhist Texts | 153 | Line-by-line Pāli and English (CC BY-SA 3.0): Udāna, Dhammapada chapters, most of the Pārāyanavagga, the Bhikkhunīsaṃyutta, DN 16, several MN, SN and AN suttas, two parts of the Dhammasaṅgaṇī mātikā and Vibhaṅga 6–7. Each link is checked against the Pāli on the page |
 
-A translation is linked only on strong evidence: a matching number and title, a PTS start page that identifies exactly one text, or a confirmed title. When the evidence is ambiguous we leave the text unlinked, so some texts that do have a translation online are not linked yet ([#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)).
+A translation is linked only on strong evidence: a matching number and title, a PTS start page that identifies exactly one text, or a confirmed title. When the evidence is ambiguous we leave the text unlinked, so some texts that do have a translation online are not linked yet. A second, content-based pass ([#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)) places a page only when rare names in the English occur in exactly one nearby Pāli text, or its Pāli title names exactly one; each such link stores its evidence and is audited.
 
 ## Not included yet
 
 | Missing | Plan |
 |---|---|
-| Commentaries (Aṭṭhakathā), sub-commentaries (Ṭīkā) | [#20](https://github.com/DaniilKi/pali-canon-claude/issues/20), [#21](https://github.com/DaniilKi/pali-canon-claude/issues/21) |
-| Post-canonical classics: Visuddhimagga, Abhidhammatthasaṅgaha | [#21](https://github.com/DaniilKi/pali-canon-claude/issues/21) |
+| Visuddhimagga PTS page citations ("Vism 3"): refused until an openly licensed PTS-page concordance is found | [#21](https://github.com/DaniilKi/pali-canon-claude/issues/21) |
 | Lao and Lanna checked against a printed edition (VRI publishes none at the pinned commit) and by native readers | [#26](https://github.com/DaniilKi/pali-canon-claude/issues/26) |
 | English for Vinaya, Abhidhamma and most of the Khuddaka Nikāya | [#34](https://github.com/DaniilKi/pali-canon-claude/issues/34) |
 | Translations in other languages | [#35](https://github.com/DaniilKi/pali-canon-claude/issues/35) |

@@ -5,7 +5,7 @@ cannot start programs, though: Claude on the web and on phones, ChatGPT, and Cla
 directory all need an **address on the internet** instead. This page explains how to run that web
 version, for this project or for a temple, university or library that wants its own copy.
 
-The web version is the same server with the same 26 tools (27 when the ChatGPT reading view is switched on with `CHATGPT_WIDGET=1`). It only reads; it cannot change anything.
+The web version is the same server with the same 30 tools (31 when the ChatGPT reading view is switched on with `CHATGPT_WIDGET=1`). It only reads; it cannot change anything.
 It needs no login, because everything it serves is public scripture and openly licensed material.
 
 ## What it offers

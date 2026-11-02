@@ -594,7 +594,7 @@ export async function withPostCanonical(canonResult, query, { include = false, l
 
 // ---- tools (feature registration, src/features/index.mjs) ----------------------------------------
 
-/** Feature registration. Not yet listed in src/features/index.mjs (see the pull request's integration notes). */
+/** Feature registration (src/features/index.mjs). */
 export function register({ tool, z }) {
   tool('get_post_canonical', 'Read a post-canonical Pāli book of the VRI edition: the Visuddhimagga ("Vism ch. 1" or "Vism I" chapter, "Vism 1.1" chapter.paragraph, "Vism §19" VRI paragraph), the Abhidhammatthasaṅgaha ("Abhidh-s 1", "Abhidh-s 1.4"), the sub-commentaries (Ṭīkā) and other later works by id ("mahavamsa 3"). Omit the citation, or give "tika" or "anna", to list the books. Not the canon: every result is labelled canonical: false. Works offline. Visuddhimagga PTS pages cannot be located (the VRI edition has none).', {
     citation: z.string().max(200).default('').describe('Vism ch. 1, Vism I, Vism 1.1, Vism §19, visuddhi. 1.19, Abhidh-s 1, Abhidh-s 1.4, a book id such as mahavamsa or silakkhandhavagga-tika (optionally with a chapter or chapter.paragraph), or empty to list the books.'),

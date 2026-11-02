@@ -213,6 +213,8 @@ export function listSources() {
         numbering: 'Standard citation IDs (as used by SuttaCentral and Bhikkhu Bodhi) were aligned to the VRI text at build time; PTS page numbers come from VRI page markers.' },
       { id: 'vri-atthakatha', name: 'Chaṭṭha Saṅgāyana Aṭṭhakathā (VRI), romn/*.att.xml', role: 'Commentaries (get_commentary), bundled offline (server/data/commentary.json.gz), aligned to the texts by VRI paragraph number and checked against the words they quote. Commentary, not scripture.',
         repository: canon.repository, version: canon.commit, attribution: canon.attribution, terms: canon.terms },
+      { id: 'vri-postcanonical', name: 'Chaṭṭha Saṅgāyana Ṭīkā and Añña books (VRI), romn/*.tik.xml, *.nrf.xml and the Visuddhimagga', role: 'Post-canonical books (get_post_canonical, search_post_canonical, search_texts include_post_canonical): the Visuddhimagga and its Mahāṭīkā, the Abhidhammatthasaṅgaha, the sub-commentaries and other later works, 109 books bundled offline (server/data/postcanonical.json.gz). Not the canon: every result is labelled canonical: false. Visuddhimagga PTS pages are not available.',
+        repository: canon.repository, version: canon.commit, attribution: canon.attribution, terms: canon.terms },
       { id: 'dhammatalks', name: 'dhammatalks.org — Ṭhānissaro Bhikkhu', role: 'English translations (live).', url: 'https://www.dhammatalks.org/suttas/',
         license: 'CC BY-NC 4.0', fallback: 'Ṭhānissaro\'s earlier versions on Access to Insight.' },
       { id: 'dhammatalks-talks', name: 'dhammatalks.org — Dhamma talks by Ṭhānissaro Bhikkhu', role: 'Talk titles, dates and links found through the site\'s own search (find_talks; live, link-only: talk text is never fetched). Commentary, not scripture.',
@@ -237,6 +239,6 @@ export function listSources() {
     ],
     evidence_rule: 'Quote only retrieved text. Cite the text ID, VRI paragraph or PTS page, and the translator. Distinguish Pāli, translation, dictionary gloss and your own explanation. Numbering schemes differ (standard/Bodhi vs PTS); this tool reports both where they differ.',
     translation_coverage: translationCoverage(),
-    offline: 'All Pāli text, citation resolution, PTS lookup and Pāli search work without internet, and so do topics, numbered lists, proper-name occurrences, paritta, Abhidhamma and Vinaya-rule lookups, daily texts, reading plans, citation finding, Pāli quotation checks and the uposatha and festival calendar. English translations and Dhamma talks need internet; the full dictionary is live, with a bundled DPD subset used offline.',
+    offline: 'All Pāli text, citation resolution, PTS lookup and Pāli search work without internet, and so do topics, numbered lists, proper-name occurrences, paritta, Abhidhamma and Vinaya-rule lookups, daily texts, reading plans, citation finding, Pāli quotation checks, the commentary, the post-canonical books, word-by-word analysis and the uposatha and festival calendar. English translations and Dhamma talks need internet; the full dictionary is live, with a bundled DPD subset used offline.',
   };
 }

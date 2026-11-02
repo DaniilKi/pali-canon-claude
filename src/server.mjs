@@ -7,6 +7,8 @@ import * as providers from './providers.mjs';
 import * as features from './features/index.mjs';
 import { SCRIPT_CHOICES, SCRIPT_DESCRIPTION, romanizeInput, localizeText, localizeSearch, localizeDescribe } from './script.mjs';
 import * as variantsMod from './variants.mjs';
+import * as commentaryModule from './commentary.mjs';
+import * as postcanonical from './postcanonical.mjs';
 
 // Human-readable titles shown by MCP clients and required by the Claude connector directory.
 // Keep in step with the review table in docs/listings/claude-connector.md (tests/connector-listing.test.mjs checks it).
@@ -38,6 +40,9 @@ export const TOOL_TITLES = {
   verify_quote: "Verify a quotation",
   vinaya_rule: "Pātimokkha rule",
   get_commentary: "Read the commentary",
+  get_post_canonical: "Read post-canonical texts",
+  search_post_canonical: "Search post-canonical texts",
+  analyse_passage: "Analyse a passage word by word",
 };
 
 export const VERSION = '2.0.0';
@@ -79,7 +84,15 @@ export function createServer() {
     script: scriptParam,
   }, ({ reference, script }) => {
     const input = romanizeInput(reference);
-    const { unit, notes, alternatives } = canon.resolve(input.text);
+    let resolved;
+    try {
+      resolved = canon.resolve(input.text);
+    } catch (error) {
+      // Post-canonical citations (Vism 1.1, Abhidh-s 1, mahavamsa 3) never shadow canon ones: only after the canon fails.
+      if (postcanonical.isPostCanonical(input.text)) return postcanonical.describe(input.text);
+      throw error;
+    }
+    const { unit, notes, alternatives } = resolved;
     return localizeDescribe({ ...canon.describe(unit, notes), ...(alternatives.length ? { also_on_that_page: alternatives } : {}) }, script, input);
   });
 
@@ -98,7 +111,8 @@ export function createServer() {
     variants: z.enum(variantsMod.VARIANT_MODES).optional().describe('Variant readings recorded by VRI: "raw" = the notes verbatim (same as includeVariants: true); "structured" = each note split into readings with the editions (sigla) that carry them, plus omissions ("( ) natthi": the passage in parentheses is absent from those editions), note kept verbatim; "none". Overrides includeVariants.'),
     translation: z.string().max(200).optional().describe('"default" for the preferred English translation, a translation_id, a translator name, or omit for Pāli only.'),
     script: scriptParam,
-  }, async ({ uid, offset, limit, includeVariants, variants, translation, script }) => {
+    commentary: z.boolean().default(false).describe('Add the traditional commentary (Aṭṭhakathā) on this text, labelled as commentary, not canon.'),
+  }, async ({ uid, offset, limit, includeVariants, variants, translation, script, commentary }) => {
     const input = romanizeInput(uid);
     const { unit, notes } = canon.resolve(input.text);
     const { segments: all, mode: variantMode } = variantsMod.textSegments(unit, { includeVariants, variants });
@@ -118,6 +132,7 @@ export function createServer() {
         result.english_error = error.message;
       }
     }
+    if (commentary) result.commentary = commentaryModule.commentaryFor(unit, { limit: 20 });
     return localizeText(result, script, input);
   }, { network: true });
 
@@ -164,9 +179,11 @@ export function createServer() {
     limit: z.number().int().min(1).max(50).default(10),
     offset: z.number().int().min(0).max(100000).default(0),
     script: scriptParam,
-  }, ({ query, collection, limit, offset, script }) => {
+    include_post_canonical: z.boolean().default(false).describe(postcanonical.SEARCH_OPTION_DESCRIPTION),
+  }, ({ query, collection, limit, offset, script, include_post_canonical }) => {
     const input = romanizeInput(query);
-    return localizeSearch(canon.search(input.text, { collection, limit, offset }), script, input);
+    const result = localizeSearch(canon.search(input.text, { collection, limit, offset }), script, input);
+    return postcanonical.withPostCanonical(result, input.text, { include: include_post_canonical, limit, offset });
   });
 
   tool('browse_canon', 'Browse the Tipiṭaka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja…) or a section (sn56, an4, kv1). Works offline.', {

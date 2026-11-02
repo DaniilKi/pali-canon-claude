@@ -56,7 +56,7 @@ Claude quotes only what it retrieved, names the translator, and keeps four thing
 
 ## What you can ask it
 
-Pali Canon gives the AI **26 tools**, 4 prompts, 3 reference resources and 5 skills. You do not need to know their names: ask in your own words and the AI picks the right tool. The tool names are shown in `code` for anyone who wants to check. Everything works offline unless marked *(internet)*.
+Pali Canon gives the AI **30 tools**, 4 prompts, 3 reference resources and 5 skills. You do not need to know their names: ask in your own words and the AI picks the right tool. The tool names are shown in `code` for anyone who wants to check. Everything works offline unless marked *(internet)*.
 
 ### Study
 
@@ -65,7 +65,9 @@ Pali Canon gives the AI **26 tools**, 4 prompts, 3 reference resources and 5 ski
 - **Cite the Thai, Myanmar or VRI printed edition.** "Thai MN 1.103", "Myanmar Dhp 15" or "VRI SN 1.20 (Nidānavaggo)" finds the text on that page, and `get_text` marks where each edition's pages begin. See [citation formats](docs/citations.md).
 - **See where the printed editions differ.** VRI's variant notes, split into readings with the editions (Sinhala, Thai, PTS and others) that carry them (`get_text` with `variants: "structured"`).
 - **Read and compare translations** *(internet)*. Ṭhānissaro Bhikkhu, the translators on Access to Insight and Ānandajoti Bhikkhu, always named and attributed (`get_translation`, `compare_translations`, `search_access_to_insight`, `get_access_to_insight_text`).
-- **Look up a Pāli word** *(internet)* in the Digital Pāḷi Dictionary (`lookup_pali`). A pronunciation guide explains how to read Pāli aloud (`pali://pronunciation`).
+- **Look up a Pāli word** in the Digital Pāḷi Dictionary (`lookup_pali`, live, answering from a bundled subset when offline), or **analyse a passage word by word**: split, grammar, root and meaning of every word (`analyse_passage`). A pronunciation guide explains how to read Pāli aloud (`pali://pronunciation`).
+- **Read the commentary.** The traditional Pāli commentary (Aṭṭhakathā) on a text, aligned by VRI paragraph and always labelled as commentary, not canon (`get_commentary`, or `get_text` with `commentary: true`).
+- **Read later Pāli classics.** The Visuddhimagga ("Vism 1.1", "Vism §19"), the Abhidhammatthasaṅgaha ("Abhidh-s 1.4"), the sub-commentaries (Ṭīkā) and chronicles such as the Mahāvaṃsa, labelled `canonical: false` (`get_post_canonical`, `search_post_canonical`, or `search_texts` with `include_post_canonical`). Visuddhimagga PTS pages cannot be looked up yet.
 - **Ask who or where.** "Who was Anāthapiṇḍika?" lists the texts that name a person or place and links to the Dictionary of Pāli Proper Names (`lookup_name`).
 - **Explore by topic or list.** "Texts on anger", "What are the five hindrances?": over 400 topics from Access to Insight's indexes and 37 numbered lists with their source passages (`topic`, `list_topics`, `dhamma_list`). See [topics and lists](docs/topics.md).
 - **Abhidhamma and Vinaya.** The matrix (mātikā) of the Dhammasaṅgaṇī (`abhidhamma_matika`), the 24 conditions of the Paṭṭhāna (`patthana_condition`), and any of the 227 monks' rules with a link to the *Buddhist Monastic Code* that explains it (`vinaya_rule`).
@@ -90,7 +92,7 @@ Every tool only reads; none can change anything. The full technical list is in [
 
 | Part of the canon | What it is | Texts | English linked |
 |---|---|---:|---|
-| **Sutta Piṭaka** | Discourses of the Buddha and his disciples: the long, middle-length, connected and numbered collections (DN, MN, SN, AN) and the Khuddaka Nikāya (Dhammapada, Sutta Nipāta, Theragāthā, Jātaka and more) | 6,999 | 1,778 texts (DN, MN, SN, AN, Dhp, Ud, Iti, Snp, Thag, Thig, Khp) |
+| **Sutta Piṭaka** | Discourses of the Buddha and his disciples: the long, middle-length, connected and numbered collections (DN, MN, SN, AN) and the Khuddaka Nikāya (Dhammapada, Sutta Nipāta, Theragāthā, Jātaka and more) | 6,999 | 1,819 texts (DN, MN, SN, AN, Dhp, Ud, Iti, Snp, Thag, Thig, Khp) |
 | **Vinaya Piṭaka** | Monastic discipline: the rules for monks and nuns and their origin stories, the Khandhakas and the Parivāra | 443 | not yet |
 | **Abhidhamma Piṭaka** | Systematic analysis of mind and matter: seven books from the Dhammasaṅgaṇī to the Paṭṭhāna | 1,102 | 4 texts (parts of the Dhammasaṅgaṇī and Vibhaṅga) |
 | **Total** | | **8,544** | |
@@ -98,7 +100,8 @@ Every tool only reads; none can change anything. The full technical list is in [
 - **The Pāli is complete**, from the Vipassana Research Institute's Chaṭṭha Saṅgāyana edition (the text of the Sixth Council, Yangon, 1954–56): 61 books, bundled and available offline.
 - **Page references for the PTS edition** are included: 11,964 page markers, so scholarly citations such as "M i 55" work. Thai, Myanmar and VRI page markers (56,050) are shown and can be cited too.
 - **English translations** by Ṭhānissaro Bhikkhu (dhammatalks.org), the many translators on Access to Insight and Ānandajoti Bhikkhu (Ancient Buddhist Texts) are fetched live, with backup copies if a site is down.
-- **A Pāli dictionary**: the Digital Pāḷi Dictionary, live.
+- **A Pāli dictionary**: the Digital Pāḷi Dictionary, live, with a bundled subset for word-by-word analysis and offline lookups.
+- **The commentaries** (Aṭṭhakathā) aligned to the texts, and **109 post-canonical books** (the Visuddhimagga, Abhidhammatthasaṅgaha, sub-commentaries and chronicles), from the same VRI edition, bundled and always labelled as not canon.
 
 The full breakdown by collection is in [docs/coverage.md](docs/coverage.md).
 
@@ -122,7 +125,7 @@ The reasoning behind each choice is recorded in [docs/decisions.md](docs/decisio
 | **Ṭhānissaro Bhikkhu**, dhammatalks.org | English translations | Fetched live; falls back to his Access to Insight versions | CC BY-NC 4.0 | [dhammatalks.org/suttas](https://www.dhammatalks.org/suttas/) |
 | **Access to Insight** (Barre Center for Buddhist Studies) | English translations by many translators, study guides, topic index | Fetched live; falls back to the official GitHub copy and two other mirrors | Varies by page; each page's notice is returned | [accesstoinsight.org](https://www.accesstoinsight.org/) · [mirror](https://github.com/bcbsit/ati) |
 | **Ānandajoti Bhikkhu**, Ancient Buddhist Texts | Line-by-line Pāli and English translations (153 links: Udāna, Dhammapada, DN 16 and more) | Fetched live | CC BY-SA 3.0 | [ancient-buddhist-texts.net](https://ancient-buddhist-texts.net/) |
-| **Digital Pāḷi Dictionary** (Bodhirasa Bhikkhu) | Word meanings, grammar, roots | Fetched live | CC BY-NC-SA 4.0 | [dpdict.net](https://www.dpdict.net/) |
+| **Digital Pāḷi Dictionary** (Bodhirasa Bhikkhu) | Word meanings, grammar, roots, word-by-word analysis | Fetched live; a subset (release v0.4.20261026) is bundled for analysis and offline lookups | CC BY-NC-SA 4.0 | [dpdict.net](https://www.dpdict.net/) |
 | **SuttaCentral** | Links only, for parallels and further translations | Not fetched: SuttaCentral asks that its work not be used in AI tools | n/a | [suttacentral.net](https://suttacentral.net/) |
 | **Mahāsaṅgīti Pāli** (public domain) | Matching the standard citation numbers to the VRI text, once, when the data was built | Build time only; not shipped | Public Domain Mark 1.0 | [bilara-data](https://github.com/suttacentral/bilara-data) |
 
@@ -132,7 +135,7 @@ Considered and **not used** (with reasons), and the sources **planned** next, ar
 
 - **Every text, every release.** An automatic audit checks all 8,544 texts: each resolves by its citation, has text, does not overlap its neighbours, and its PTS page leads back to it. Result: 0 failures.
 - **Checked against an independent edition.** All 1,190 canonical pages of Access to Insight and their PTS citations were compared with our mapping: 0 problems.
-- **Translations are linked only with strong evidence.** A translation is attached only when its title, number or PTS page matches unambiguously. We prefer no link to a wrong link. 2,448 links pass this test.
+- **Translations are linked only with strong evidence.** A translation is attached only when its title, number or PTS page matches unambiguously. We prefer no link to a wrong link. 2,540 links pass this test (64 of them placed by comparing the names in the English with the Pāli, each audited).
 - **Independent review.** A separate reviewer checked about 110 citations and every PTS lookup in its sample. The problems it found were fixed and are now permanent tests.
 - **Outage drills.** We simulate each website going down and confirm that the backups take over and the Pāli still works.
 
@@ -146,15 +149,15 @@ Offline tool checks (`npm run evals`, run by CI on every change), November 2026:
 
 | Result | Questions |
 |---|---|
-| Passed | 176 (100% of those run) |
+| Passed | 183 (100% of those run) |
 | Failed | 0 |
-| Skipped | 13: 6 need the network (`npm run evals -- --live`: all 6 passed on 1 November 2026, including the English misattribution checks, which CI does not run); 7 test commentary and word analysis, which are not scored until those tools ship |
+| Skipped | 6: they need the network (`npm run evals -- --live`: all 6 passed on 1 November 2026, including the English misattribution checks, which CI does not run) |
 
 Model-level runs, where Claude or Codex answers the questions with the server connected and must cite the expected texts, are scripted in [`evals/claude-plugin-eval/`](evals/claude-plugin-eval/) (`claude plugin eval`) and [`evals/codex/`](evals/codex/) (`codex exec`). They need a model and are run by hand; their scores will be added here once run.
 
 ## Install
 
-Pick the app you use. Every option runs the same server, with the same 26 tools.
+Pick the app you use. Every option runs the same server, with the same 30 tools.
 
 ### Claude Desktop (easiest)
 
@@ -251,7 +254,7 @@ New to the terms? See the [glossary](docs/glossary.md).
 
 ## What it does not do yet
 
-- English is linked for 1,782 texts, about a fifth of the canon. The Vinaya, nearly all of the Abhidhamma and much of the Khuddaka Nikāya have no English yet.
+- English is linked for 1,823 texts, about a fifth of the canon. The Vinaya, nearly all of the Abhidhamma and much of the Khuddaka Nikāya have no English yet.
 - The commentaries (Aṭṭhakathā) and sub-commentaries (Ṭīkā) are not included yet.
 - Other scripts are transliterated by this server from the Roman edition, not taken from printed script editions. Lao and Lanna have not yet been checked against a printed edition or by native readers.
 - Translations and the dictionary need internet; the Pāli does not.
