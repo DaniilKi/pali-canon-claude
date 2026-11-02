@@ -8,6 +8,7 @@
  * conservative translation index already holds; read them with get_translation.
  */
 import { fold } from './canon.mjs';
+import { withNormalised } from './input.mjs';
 
 /**
  * The set. `texts` are citations; the first is the default, the rest are canonical alternatives
@@ -164,5 +165,5 @@ export function register({ tool, z, canon }) {
     text: z.string().max(100).optional().describe('Choose one of the entry\'s canonical sources, e.g. "Snp 2.1" instead of the default "Kp 6", or "SN 46.16" for Bojjhaṅga.'),
     offset: z.number().int().min(0).max(100000).default(0).describe('Segment offset for continuation.'),
     limit: z.number().int().min(1).max(200).default(60).describe('Segments per page.'),
-  }, (args) => paritta(canon, args));
+  }, (args) => withNormalised(args.name, (name) => paritta(canon, { ...args, name })));
 }

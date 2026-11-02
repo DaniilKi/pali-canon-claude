@@ -37,6 +37,7 @@ The server has 31 tools. Twenty-four of them work without internet (`get_text` n
 | `search_post_canonical` | Searches the post-canonical books | No |
 | `analyse_passage` | Word-by-word analysis of a passage from the bundled Digital Pāḷi Dictionary subset (split, grammar, root, meaning) | No |
 | `get_parallels` | Other texts that share a passage with this one, and texts the commentary cites, each link saying its source | No |
+| `glossary` | English → Pāli terms ("mindfulness" → sati) and Pāli → short English glosses, from the Digital Pāḷi Dictionary's English index and the curated list glosses, each with its source | No |
 | `verify_quote` | Checks whether a quotation attributed to the Buddha is in the texts: Pāli against the whole bundled canon (offline), English against the linked translations of the texts you name (default: the Dhammapada) | Yes |
 | `lookup_name` | Who or what a name is (Sāriputta, Sāvatthī): the Dictionary of Pāli Proper Names entry when bundled, and the texts where the name appears | No |
 | `topic` | Texts on a topic ("anger", "five hindrances") from Access to Insight's indexes | No |

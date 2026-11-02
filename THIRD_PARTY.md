@@ -45,6 +45,18 @@ Lookups go live to [dpdict.net](https://www.dpdict.net/). DPD is [CC BY-NC-SA 4.
 
 `server/data/dpd.json.gz` is a compact subset of DPD release [v0.4.20261026](https://github.com/digitalpalidictionary/dpd-db/releases/tag/v0.4.20261026) (asset `dpd.db.tar.xz`, SHA-256 `62a3f55d285ae27f5e1d15492cd7bfa92e9e66a0b6bfed9ea97b58a28e346f49`; DOI [10.5281/zenodo.22979413](https://doi.org/10.5281/zenodo.22979413)), built by `scripts/dpd/build_dpd.py`: every headword and root, and the inflection map and deconstructor splits for the words of the bundled VRI texts. It is used by `analyse_passage` and by `lookup_pali` when dpdict.net is unreachable. It is a derivative of DPD and is shared under the same licence, **CC BY-NC-SA 4.0**, non-commercial, crediting “Digital Pāḷi Dictionary by Bodhirasa Bhikkhu”. Every result built from it returns this notice.
 
+`server/data/glossary.json.gz` is a second derivative of the same release, built by `scripts/dpd/build_glossary.py`: DPD's English index (the `epd` column of its `lookup` table) and the multi-word senses of DPD meanings, limited to headwords found in the bundled canon and ranked by DPD's own early-text counts, plus DPD's own sutta names (`sutta_info`: `dpd_sutta` and `dpd_sutta_var` only) mapped to canon text IDs through VRI's file and paragraph number. Every SuttaCentral column (`sc_*`), the `dv_*` columns and DPD's SuttaCentral-style `dpd_code` are dropped: no SuttaCentral content is bundled. It is used by `glossary`, the English expansion of `search_texts` and sutta names in `resolve_reference`, and is shared under the same licence, **CC BY-NC-SA 4.0**, crediting “Digital Pāḷi Dictionary by Bodhirasa Bhikkhu”.
+
+## English-keyboard input (ported, MIT and Unlicense)
+
+`src/input.mjs` (Pāli typed on an English keyboard, #102) ports or follows:
+
+- **digitalpalidictionary/dpd-koreader** (MIT), <https://github.com/digitalpalidictionary/dpd-koreader>: the Velthuis table and its order (`dpd/velthuis.lua`), ṁ = ṃ and NFC handling (`dpd/normalize.lua`), and the English fuzzy key (strip diacritics, `kh` → `k`, collapse doubled consonants; `dpd/english.lua`). Copyright the Digital Pāḷi Dictionary project (Bodhirasa Bhikkhu and contributors).
+- **tokushige-koyasan/corpus-search-toolkit** (MIT), <https://github.com/tokushige-koyasan/corpus-search-toolkit>: the conservative scheme detection of `scripts/to_iast.py` (ASCII markers, English lines left alone) and the spelling-variant classes of `scripts/variants.py` (doubled consonants, nasals before a consonant).
+- **matko/emacs-pali-velthuis** (Unlicense, public domain), <https://github.com/matko/emacs-pali-velthuis>: its quail table is the Velthuis test fixture in `tests/english-input.test.mjs`.
+
+The MIT permission notice reproduced under "Calendar code" below applies to both MIT works.
+
 ## Calendar code (ported, MIT)
 
 `src/calendar.mjs` (the `uposatha` and `festivals` tools) contains JavaScript ports of three MIT-licensed programs. Each is distributed under the MIT licence, whose permission notice is reproduced here in full as that licence requires:

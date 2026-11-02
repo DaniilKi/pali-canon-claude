@@ -91,6 +91,12 @@ try {
   await fails('resolve_reference', { reference: 'Vism p. 3' }, /PTS/);
   await call('analyse_passage', { uid: 'Dhp 183', limit: 4 }, (d) => { assert.ok(d.words.length); assert.match(JSON.stringify(d), /CC BY-NC-SA 4\.0/); });
   if (tools.some((t) => t.name === 'paritta')) await call('paritta', { name: 'Ratana' }, (d) => { assert.equal(d.text_id, 'kp6'); assert.ok(d.segments.length); });
+  // English-keyboard input (#102)
+  await call('resolve_reference', { reference: 'Satipatthana Sutta' }, (d) => { assert.equal(d.id, 'mn10'); assert.equal(d.matched_by, 'name'); });
+  await fails('resolve_reference', { reference: 'Metta sutta' }, /Snp 1\.8.*never guessed|never guessed/);
+  await call('search_texts', { query: 'mindfulness of breathing', limit: 3 }, (d) => { assert.ok(d.results.length); assert.deepEqual(d.expanded_from_english.mindfulness, ['sati']); });
+  await call('search_texts', { query: 'sa.myutta', limit: 2 }, (d) => assert.equal(d.input_normalised.read_as, 'saṃyutta'));
+  await call('glossary', { term: 'suffering' }, (d) => { assert.equal(d.english_to_pali[0].pali, 'dukkha'); assert.ok(d.english_to_pali.every((e) => e.source)); });
   await fails('get_text', { uid: '../private' });
   await fails('resolve_reference', { reference: 'MN 153' }, /not in the canon index/);
   await fails('resolve_reference', { reference: 'Ja i 1' }, /no PTS page numbers/);

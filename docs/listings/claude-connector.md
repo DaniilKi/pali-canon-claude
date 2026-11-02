@@ -178,6 +178,7 @@ What every tool declares, and the proposed `title`. "Open-world" (`openWorldHint
 | `search_post_canonical` | Search post-canonical texts | yes | no | no | Searches the bundled post-canonical books only; results labelled `canonical: false`. |
 | `analyse_passage` | Analyse a passage word by word | yes | no | no | Bundled Digital Pāḷi Dictionary subset applied to the bundled Pāli; glosses are not a translation. |
 | `get_parallels` | Find parallels and cross-references | yes | no | no | Bundled links built from the VRI canon and commentary; each names its source; SuttaCentral is a link only, never fetched. |
+| `glossary` | Look up English–Pāli glossary terms | yes | no | no | Bundled DPD English index and curated list glosses; every entry names its source; glosses are not translations. |
 | `vinaya_rule` | Pātimokkha rule | yes | no | no | Bundled VRI Vinaya text plus a stored link to the Buddhist Monastic Code. |
 
 No tool writes, deletes, sends or stores anything, so none needs `destructiveHint: true`. The table must list exactly the live tools: `tests/connector-listing.test.mjs` fails when a tool (for example one added through `src/features/`) has no row here, or a row names a tool that no longer exists. Add the row in the same change that adds the tool; the directory re-reviews material changes to tools.

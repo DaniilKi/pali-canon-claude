@@ -7,6 +7,7 @@
  * Every Pāli heading is read from the bundled text at runtime; nothing is reconstructed.
  */
 import * as bundled from './canon.mjs';
+import { withNormalised } from './input.mjs';
 
 const MATIKA_UNITS = [
   { id: 'ds1.1', key: 'tika', kind: 'tika' },
@@ -210,5 +211,5 @@ export function register({ tool, z, canon }) {
 
   tool('patthana_condition', 'One of the 24 conditions (paccaya) of the Paṭṭhāna: its Pāli name from the bundled VRI text, the location and Pāli text of its definition (paccayaniddesa), and the Pāli term to look up with lookup_pali for an English dictionary meaning. Pass "all" for the list. Works offline.', {
     name: z.string().trim().min(1).max(60).describe('Pāli name (hetu, hetupaccayo, ārammaṇa…), a number 1–24, or "all".'),
-  }, ({ name }) => condition(name, canon));
+  }, ({ name }) => withNormalised(name, (n) => condition(n, canon)));
 }

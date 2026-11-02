@@ -10,6 +10,7 @@ import * as parallels from '../src/parallels.mjs';
 import { checkQuote, titleStem, paragraphWindow } from './parallels/citations.mjs';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { loadGlossary } from '../src/glossary-data.mjs';
 
 const d = canon.load();
 const failures = [];
@@ -451,7 +452,7 @@ else {
     }
   }
 }
-// 9. Parallels and cross-references (#29, D59): every link rechecked. Both texts resolve; commentary citations
+// 11. Parallels and cross-references (#29, D59): every link rechecked. Both texts resolve; commentary citations
 // point at a real commentary segment that holds their evidence, with the quotation found again in the cited
 // paragraph, and never reach SN or AN by number alone; shared passages name real segments that really share
 // wording. The data must have been built from the bundled canon and commentary (SHA-256 recorded).
@@ -532,6 +533,28 @@ else {
     const one = parallels.getParallels('MN 10', { limit: 100 });
     if (!one.links.every((x) => parallels.SOURCES.includes(x.source) && x.how_matched)) fail('parallels', 'a get_parallels link lacks its source');
   }
+}
+// 12. Glossary and sutta names (#102): same DPD pin as dpd.json.gz, no SuttaCentral columns, every name on a real
+// text, every index entry pointing at a headword, within its 3 MB budget.
+{
+  const file = new URL('../server/data/glossary.json.gz', import.meta.url);
+  const g = loadGlossary();
+  const size = statSync(file).size;
+  counts['glossary-bytes'] = size;
+  if (size > 3 * 1024 * 1024) fail('glossary-size', `${size} bytes, budget 3 MB`);
+  for (const key of ['version', 'asset_sha256']) if (g.source[key] !== DPD_PIN[key]) fail('glossary-pin', `glossary.json.gz ${key} ${g.source[key]} != DPD_PIN ${DPD_PIN[key]}`);
+  if (g.source.license !== 'CC BY-NC-SA 4.0' || !/Bodhirasa/.test(g.source.attribution || '')) fail('glossary-licence', g.source.license);
+  if (g.source.canon_commit !== d.canon.source.commit) fail('glossary-canon', `built from canon ${g.source.canon_commit}`);
+  if (/suttacentral\.net|sc_bilara|"sc_/i.test(JSON.stringify(g.names))) fail('glossary-sc', 'SuttaCentral data in names');
+  for (const [id, variants] of g.names) {
+    if (!d.byId.has(id)) fail('glossary-name', `${id} is not a canon text`);
+    else if (!variants.length) fail('glossary-name', `${id} has no name`);
+    else count('glossary-name');
+  }
+  for (const table of ['en', 'phrases']) for (const [k, ids] of Object.entries(g[table])) {
+    if (!ids.length || ids.some((i) => !g.headwords[i])) fail('glossary-entry', `${table} "${k}" points at a missing headword`);
+  }
+  counts['glossary-en-keys'] = Object.keys(g.en).length;
 }
 console.log(JSON.stringify(counts));
 console.log(`texts: ${d.canon.units.length}; failures: ${failures.length}`);
