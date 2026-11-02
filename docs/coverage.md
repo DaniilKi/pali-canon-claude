@@ -92,15 +92,15 @@ A translation is linked only on strong evidence: a matching number and title, a 
 
 `get_parallels` links a text to others in two ways, built offline from the bundled VRI edition ([D59](decisions.md)). Every link says which kind it is and how it was matched.
 
-- **Commentary citations** (5,422): the traditional commentary on one text cites another. Most (4,753) are VRI's own references in brackets, confirmed by finding the quoted words in the cited paragraph; 401 are VRI references with no quotation to check (never used for SN or AN); 268 are suttas named in the commentary whose name is the title of exactly one text.
+- **Commentary citations** (5,305): the traditional commentary on one text cites another. Most (4,753) are VRI's own references in brackets, confirmed by finding the quoted words in the cited paragraph; 401 are VRI references with no quotation to check (never used for SN or AN); 151 are suttas named in the commentary whose name, diacritics included, is the title of exactly one text and of no other text's title or Digital Pāḷi Dictionary sutta name.
 - **Shared passages** (1,516): two canonical texts share a passage word for word. Stock formulae (runs found in more than 4 texts, or built only from common phrases) are left out.
 
 | Collection | Texts | With any link | With a commentary citation | With a shared passage |
 |---|---:|---:|---:|---:|
 | Dīgha Nikāya (DN) | 34 | 34 | 32 | 31 |
 | Majjhima Nikāya (MN) | 152 | 148 | 136 | 110 |
-| Saṃyutta Nikāya (SN) | 1,954 | 636 | 330 | 444 |
-| Aṅguttara Nikāya (AN) | 2,085 | 661 | 326 | 493 |
+| Saṃyutta Nikāya (SN) | 1,954 | 633 | 324 | 444 |
+| Aṅguttara Nikāya (AN) | 2,085 | 661 | 323 | 493 |
 
 Many short SN and AN texts have no link: the commentary passes over them, and their shared wording is the stock wording of their series. No link is given rather than a doubtful one. For parallels in Chinese, Sanskrit and Tibetan texts, each result links to SuttaCentral (link only).
 

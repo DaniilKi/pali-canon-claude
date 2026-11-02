@@ -9,14 +9,18 @@
  *     the cited paragraph (±1). In SN and AN a reference is never used without that quotation check:
  *     no link by number alone.
  *  2. Suttas named in the commentary ("Ambaṭṭhasutte vuttaṃ", "Majjhimanikāye … Cūḷasīhanādasutte"):
- *     the name must equal the title of exactly one canonical text (within the named Nikāya, when one is
- *     named nearby). Relative references ("anantarasutte", "purimasutte") are never resolved.
+ *     the name, diacritics included, must equal the title of exactly one canonical text (within the named
+ *     Nikāya, when one is named nearby). The name is ambiguous, and dropped, when it is also the start of
+ *     another text's title ("udaya" / "Udayamāṇavapucchā") or a DPD name of another text, and a link is
+ *     dropped when a VRI reference in brackets right next to the name points at a different text.
+ *     Relative references ("anantarasutte", "purimasutte") are never resolved.
  *
  * A citation is kept only when the commentary passage that holds it is aligned to exactly one text, so the
  * citing text is known. No link is better than a wrong link.
  */
 import * as canon from '../../src/canon.mjs';
 import * as commentary from '../../src/commentary.mjs';
+import { loadGlossary } from '../../src/glossary-data.mjs';
 
 export const fold = canon.fold;
 export const tokens = (s) => fold(s).replace(/[^a-z]+/g, ' ').trim().split(' ').filter(Boolean);
@@ -59,18 +63,59 @@ function buildIndex() {
   for (const u of d.canon.units) byBook[u.book].push(u);
   // Titles -> units ("Ambaṭṭhasuttaṃ" -> ambattha).
   const titles = new Map();
+  // Every other name a text goes by, with diacritics: its title (any kind of text) and its DPD sutta names
+  // (dpd_sutta, dpd_sutta_var). A sutta name that is one of these, or the start of one, for another text is ambiguous.
+  const otherNames = [];
   for (const u of d.canon.units) {
+    const full = paliLower(u.title || '').replace(/^[\d\s.()-]+/, '');
+    if (full) otherNames.push([full, u.id]);
     if (u.kind === 'range') continue;
     const stem = titleStem(u.title);
     if (stem) (titles.get(stem) || titles.set(stem, []).get(stem)).push(u);
   }
-  index = { d, books, paras, byBook, titles };
+  for (const [id, names] of loadGlossary().names) for (const n of names) otherNames.push([paliLower(n), id]);
+  index = { d, books, paras, byBook, titles, otherNames };
   return index;
 }
 
+/** Lower case, NFC, ṁ = ṃ; diacritics kept. */
+export const paliLower = (s) => s.normalize('NFC').toLowerCase().replace(/ṁ/g, 'ṃ');
+
+/** The name stem of a sutta title, diacritics kept: "Ambaṭṭhasuttaṃ" -> "ambaṭṭha". */
 export function titleStem(title) {
-  const m = fold(title || '').replace(/^[\d\s.()-]+/, '').match(/^([a-z]+)sutta(?:m|ntam|nta)?$/);
+  const m = paliLower(title || '').replace(/^[\d\s.()-]+/, '').match(/^([a-zāīūṃṅñṭḍṇḷ]+?)sutta(?:ṃ|ntaṃ|nta)?$/);
   return m ? m[1] : null;
+}
+
+/** The name stem of a sutta named in the commentary, diacritics kept: "Mahāgovindasutte" -> "mahāgovinda". */
+export const nameStem = (named) => paliLower(named).replace(/sutt[a-zāīūṃṅñṭḍṇḷ]*$/, '').split('sutta').at(-1);
+
+/** Other texts that go by this name, or by a name that starts with it (title or DPD sutta name). */
+export function otherTextsNamed(stem, id) {
+  const { otherNames, d } = index || buildIndex();
+  const self = d.byId.get(id) || { id };
+  const out = new Set();
+  // "rāhulovāda" also names the Cūḷa- and Mahārāhulovāda suttas: a Cūḷa-/Mahā- title ending in the name is another candidate.
+  const qualified = ['cūḷa', 'cūla', 'culla', 'mahā'].map((q) => q + stem);
+  for (const [n, other] of otherNames) {
+    if (other === id || related(d.byId.get(other) || { id: other }, self)) continue;
+    if (n.startsWith(stem) || qualified.some((q) => n.startsWith(q))) out.add(other);
+  }
+  return [...out];
+}
+
+/** The texts a bracketed VRI reference points at, or [] when it cannot be resolved. */
+export function refTargets(inside) {
+  const { paras } = index || buildIndex();
+  const out = new Set();
+  for (const r of parseRefs(inside)) {
+    for (let n = r.a; n <= r.b; n++) {
+      const bi = paras[r.book].get(n);
+      const t = bi >= 0 ? unitAt(r.book, bi) : null;
+      if (t) out.add(t);
+    }
+  }
+  return [...out];
 }
 
 /** The smallest canon unit holding block i of a book, or null when two different texts tie. */
@@ -184,6 +229,7 @@ export const MAX_EVIDENCE = 400;
  */
 export function buildCitations({ debug = null } = {}) {
   const { d, books, paras, titles } = index || buildIndex();
+  const NEAR = /^\s{0,2}\(([^()]{2,160})\)/;
   const com = commentary.load();
   const stats = {};
   const bump = (k) => { stats[k] = (stats[k] || 0) + 1; };
@@ -268,10 +314,9 @@ export function buildCitations({ debug = null } = {}) {
       }
       // 2. Suttas named in the text.
       for (const m of text.matchAll(NAME_RE)) {
-        let name = m[1];
-        const parts = fold(name).split('sutta');
-        const stem = parts.at(-1);
-        if (!stem || stem.length < 3 || GENERIC.has(stem)) continue;
+        const stem = nameStem(m[0]);
+        const folded = fold(stem);
+        if (!stem || folded.length < 3 || GENERIC.has(folded)) continue;
         // Followed by "vaṇṇanā"/"niddesa": the commentary on, or the Niddesa of, the sutta, not the sutta.
         bump('sutta-names');
         const cands = titles.get(stem);
@@ -285,6 +330,15 @@ export function buildCitations({ debug = null } = {}) {
         const t = pool[0];
         if (own.length !== 1 || own[0] !== unit.id) { bump('dropped: commentary passage shared by several texts'); continue; }
         if (related(t, unit)) { bump('dropped: names its own text'); continue; }
+        // "Evaṃ me sutanti X-suttaṃ": the opening of the commentary on a text, naming that text itself.
+        if (/sutanti\s*$/.test(text.slice(Math.max(0, m.index - 12), m.index))) { bump('dropped: names the text being commented on'); continue; }
+        if (otherTextsNamed(stem, t.id).length) { bump('dropped: name is also (the start of) a name of another text'); continue; }
+        // A VRI reference in brackets right after the name, or just before it ("(dī. ni. 2.329) imasmiṃ … sutte"),
+        // must point at the same text.
+        const after = text.slice(m.index + m[0].length).match(NEAR);
+        const beforeRef = text.slice(Math.max(0, m.index - 175), m.index).match(/\(([^()]{2,160})\)([^()]{0,12})$/);
+        const near = [after?.[1], beforeRef && !/[.;]/.test(beforeRef[2]) ? beforeRef[1] : null].filter(Boolean);
+        if (near.some((r) => refTargets(r).some((x) => !related(x, t)))) { bump('dropped: a reference next to the name points at another text'); continue; }
         const start = Math.max(0, m.index - (ctx ? 90 : 60));
         links.push({ ...base, to: t.id, match, named: m[0], evidence: text.slice(start, m.index + m[0].length) });
         bump(`kept: ${match}`);

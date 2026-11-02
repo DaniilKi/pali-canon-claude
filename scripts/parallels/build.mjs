@@ -15,6 +15,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as canon from '../../src/canon.mjs';
 import * as commentary from '../../src/commentary.mjs';
+import { loadGlossary } from '../../src/glossary-data.mjs';
 import { buildCitations, PREFIXES, MIN_WHOLE, MIN_PART } from './citations.mjs';
 import { buildShared, PARAMS } from './shared.mjs';
 
@@ -48,6 +49,8 @@ export function build() {
       inputs: {
         'canon.json.gz': { sha256: sha256('canon.json.gz'), vri_commit: canon.source().commit },
         'commentary.json.gz': { sha256: sha256('commentary.json.gz'), vri_commit: commentary.load().source.commit },
+        // DPD sutta names, read only to rule out ambiguous sutta names; nothing from it is stored.
+        'glossary.json.gz': { sha256: sha256('glossary.json.gz'), vri_commit: loadGlossary().source.canon_commit },
       },
       attribution: 'Derived from the Vipassana Research Institute (VRI) Chaṭṭha Saṅgāyana Tipiṭaka, www.tipitaka.org',
       terms: 'Made freely available by VRI for non-commercial use with attribution. No SuttaCentral data is used.',
@@ -55,8 +58,8 @@ export function build() {
         'commentary-citation': {
           'vri-reference+quotation': `VRI's own bracketed reference in the commentary (book, volume, VRI paragraph), with the quotation before it found in the cited paragraph (±1): a piece of at least ${MIN_WHOLE} letters whole, or a run of ${MIN_PART} letters`,
           'vri-reference': "VRI's own bracketed reference, no quotation to check; never used for SN or AN",
-          'sutta-name': 'a sutta named in the commentary whose name equals the title of exactly one canonical text',
-          'sutta-name+nikaya': 'a sutta named after its Nikāya ("Majjhimanikāye … sutte"), the title unique within that Nikāya',
+          'sutta-name': 'a sutta named in the commentary whose name, diacritics included, equals the title of exactly one canonical text and is not the start of the title or DPD sutta name of any other text',
+          'sutta-name+nikaya': 'a sutta named after its Nikāya ("Majjhimanikāye … sutte"), the title unique within that Nikāya, with the same name rules',
           reference_books: Object.keys(PREFIXES).sort(),
           rules: [
             'Only commentary passages aligned to exactly one text are read, so the citing text is known.',
@@ -64,6 +67,7 @@ export function build() {
             'A quotation that is not in the cited paragraph drops the link.',
             'Relative references (anantarasutte, purimasutte, paṭhamasutte) are never resolved.',
             'A text citing itself is not a link.',
+            'A sutta name is dropped when it is also the start of the title or DPD sutta name of another text (udaya / Udayamāṇavapucchā), when a Cūḷa- or Mahā- title ends in it, when a VRI reference in brackets next to it points at another text, or when it follows "Evaṃ me sutanti" (the commentary naming its own text).',
           ],
         },
         'shared-passage': {

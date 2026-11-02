@@ -7,7 +7,7 @@ import * as postcanonical from '../src/postcanonical.mjs';
 import { statSync } from 'node:fs';
 import { loadDpd, DPD_PIN, tokenize, wordParts } from '../src/analyse.mjs';
 import * as parallels from '../src/parallels.mjs';
-import { checkQuote, titleStem, paragraphWindow } from './parallels/citations.mjs';
+import { checkQuote, titleStem, nameStem, otherTextsNamed, paragraphWindow } from './parallels/citations.mjs';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { loadGlossary } from '../src/glossary-data.mjs';
@@ -507,8 +507,9 @@ else {
         }
       } else {
         if (!l.named || !l.evidence.endsWith(l.named)) fail('parallels-citation', `${tag}: evidence lacks the sutta name`);
-        const stem = canon.fold(l.named).replace(/sutt[a-z]*$/, '').split('sutta').at(-1);
-        if (titleStem(to.title) !== stem) fail('parallels-citation', `${tag}: "${l.named}" is not the title of ${l.to}`);
+        const stem = nameStem(l.named);
+        if (titleStem(to.title) !== stem) fail('parallels-citation', `${tag}: "${l.named}" is not the title of ${l.to} (diacritics included)`);
+        if (otherTextsNamed(stem, l.to).length) fail('parallels-citation', `${tag}: "${l.named}" is also a name of ${otherTextsNamed(stem, l.to).join(', ')}`);
       }
       count('parallels-citation');
     }

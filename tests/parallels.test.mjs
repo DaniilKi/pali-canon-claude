@@ -8,7 +8,7 @@ import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import * as parallels from '../src/parallels.mjs';
 import * as canon from '../src/canon.mjs';
 import { createServer } from '../src/server.mjs';
-import { parseRefs, checkQuote, titleStem, PREFIXES } from '../scripts/parallels/citations.mjs';
+import { parseRefs, checkQuote, titleStem, nameStem, PREFIXES } from '../scripts/parallels/citations.mjs';
 
 const d = parallels.load();
 const collection = (id) => canon.load().byId.get(id).collection;
@@ -52,7 +52,7 @@ test('no SN or AN text is linked by number alone', () => {
   for (const l of sa) {
     assert.ok(['vri-reference+quotation', 'sutta-name', 'sutta-name+nikaya'].includes(l.match), `${l.from} -> ${l.to}: ${l.match}`);
     if (l.match === 'vri-reference+quotation') assert.ok(l.quotation_span && l.evidence.slice(...l.quotation_span).length >= 12);
-    else assert.equal(titleStem(canon.load().byId.get(l.to).title), canon.fold(l.named).replace(/sutt[a-z]*$/, '').split('sutta').at(-1));
+    else assert.equal(titleStem(canon.load().byId.get(l.to).title), nameStem(l.named));
   }
 });
 
@@ -104,8 +104,8 @@ test('builder rules: reference parsing, quotation check, titles', () => {
   assert.equal(checkQuote('kesakambalo tesaṃ paṭikuṭṭho akkhāyatī’', 'yāni kānici tantāvutānaṃ vatthānaṃ, kesakambalo tesaṃ paṭikuṭṭho akkhāyati.').status, 'whole');
   assert.equal(checkQuote('sabbe saṅkhārā', 'sabbe saṅkhārā aniccā').status, 'too-short');
   assert.equal(checkQuote('ekapuggalo bhikkhave loke uppajjamāno', 'cattārome bhikkhave puggalā santo').status, 'not-found');
-  assert.equal(titleStem('Ambaṭṭhasuttaṃ'), 'ambattha');
-  assert.equal(titleStem('1. Mūlapariyāyasuttaṃ'), 'mulapariyaya');
+  assert.equal(titleStem('Ambaṭṭhasuttaṃ'), 'ambaṭṭha');
+  assert.equal(titleStem('1. Mūlapariyāyasuttaṃ'), 'mūlapariyāya');
   assert.equal(titleStem('Yamakavaggo'), null);
 });
 
@@ -152,4 +152,27 @@ test('the builder is deterministic: a fresh build gives the committed bytes', as
   const { build } = await import('../scripts/parallels/build.mjs');
   const { gz } = build();
   assert.equal(Buffer.compare(gz, readFileSync(new URL('../server/data/parallels.json.gz', import.meta.url))), 0, 'run node scripts/parallels/build.mjs');
+});
+
+test('sutta names: diacritics count, and names shared with another text are dropped (review of #105)', () => {
+  const link = (from, to) => d.citations.some((l) => l.from === from && l.to === to && l.match.startsWith('sutta-name'));
+  // "Terasame udayasutte" in the Cūḷaniddesa is the Pārāyana's Udayamāṇavapucchā (Snp 5.14), not SN 7.12.
+  assert.ok(!link('cnd17', 'sn7.12'));
+  // The Ajita question (Snp 5.2), not AN 10.116 Ajitasutta.
+  assert.ok(!link('cnd19', 'an10.116'));
+  assert.ok(!link('cnd6', 'an10.116'));
+  // "tissametteyyasuttassa (su. ni. 1038 ādayo)" is Snp 5.3, not Snp 4.7.
+  assert.ok(!link('cnd19', 'snp4.7'));
+  // "pārāyanasuttaṃ" is the Pārāyana chapter of the Sutta Nipāta, not SN 43.44 Parāyanasuttaṃ (different vowel).
+  assert.ok(!link('an7.53', 'sn43.44'));
+  // "Evaṃ me sutanti rāhulovādasuttaṃ" opens the commentary on MN 147 itself.
+  assert.ok(!link('mn147', 'sn35.121'));
+  assert.equal(nameStem('Pārāyanasuttaṃ'), 'pārāyana');
+  assert.equal(nameStem('ajitasuttassa'), 'ajita');
+  // Every name link: exact title with diacritics, and no other text goes by that name.
+  for (const l of d.citations.filter((x) => x.match.startsWith('sutta-name'))) {
+    assert.equal(titleStem(canon.load().byId.get(l.to).title), nameStem(l.named), `${l.from} -> ${l.to}`);
+  }
+  // The glossary (DPD sutta names) is a recorded input.
+  assert.match(d.source.inputs['glossary.json.gz'].sha256, /^[0-9a-f]{64}$/);
 });
