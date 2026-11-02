@@ -81,6 +81,14 @@ try {
   await call('vinaya_rule', { rule: 'Pc 5' }, (d) => { assert.equal(d.canonical_text.id, 'pli-tv-bu-vb-pc5'); assert.match(d.buddhist_monastic_code.url, /dhammatalks\.org\/vinaya\/bmc\/Section0016\.html#Pc5$/); });
   await call('abhidhamma_matika', { section: 'tika 1' }, (d) => assert.equal(d.entries[0].items[0].text, 'kusalā dhammā.'));
   await call('patthana_condition', { name: 'hetu' }, (d) => { assert.equal(d.condition.definition.citation, 'Paṭṭh 1.1'); assert.equal(d.condition.dictionary.tool, 'lookup_pali'); });
+  if (tools.some((t) => t.name === 'get_commentary')) await call('get_commentary', { uid: 'MN 10', limit: 3 }, (d) => { assert.equal(d.available, true); assert.match(d.label, /not the canon/); assert.equal(d.commentary, 'Papañcasūdanī'); });
+  await call('get_text', { uid: 'MN 10', limit: 2, commentary: true }, (d) => { assert.equal(d.returned, 2); assert.equal(d.commentary.available, true); assert.match(d.commentary.label, /not the canon/); });
+  await call('get_post_canonical', { citation: 'Vism 1.1', limit: 3 }, (d) => { assert.equal(d.canonical, false); assert.ok(d.segments.length); });
+  await call('search_post_canonical', { query: 'kasiṇa', books: ['vism'], limit: 3 }, (d) => { assert.ok(d.results.length); assert.ok(d.results.every((r) => r.canonical === false)); });
+  await call('search_texts', { query: 'kasiṇa', limit: 2, include_post_canonical: true }, (d) => assert.ok(d.post_canonical.results.length));
+  await call('resolve_reference', { reference: 'mahavamsa 3' }, (d) => { assert.equal(d.canonical, false); assert.equal(d.read_with.tool, 'get_post_canonical'); });
+  await fails('resolve_reference', { reference: 'Vism p. 3' }, /PTS/);
+  await call('analyse_passage', { uid: 'Dhp 183', limit: 4 }, (d) => { assert.ok(d.words.length); assert.match(JSON.stringify(d), /CC BY-NC-SA 4\.0/); });
   if (tools.some((t) => t.name === 'paritta')) await call('paritta', { name: 'Ratana' }, (d) => { assert.equal(d.text_id, 'kp6'); assert.ok(d.segments.length); });
   await fails('get_text', { uid: '../private' });
   await fails('resolve_reference', { reference: 'MN 153' }, /not in the canon index/);

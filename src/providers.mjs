@@ -1,8 +1,9 @@
 /** Network-backed providers: Digital Pāḷi Dictionary and Access to Insight (with mirrors). */
 import { fetchPublic, fetchMirrors, decodeHtml, plainText, shortText } from './http.mjs';
 import { atiMirrors, atiContent, atiNotice } from './english.mjs';
-import { load, fold as foldPali, source as canonSource } from './canon.mjs';
+import { load, linksFor, fold as foldPali, source as canonSource } from './canon.mjs';
 import { liveCache } from './cache.mjs';
+import { lookupOffline, DPD_PIN } from './analyse.mjs';
 
 const DPD = 'https://www.dpdict.net';
 const ATI = 'https://accesstoinsight.org';
@@ -53,7 +54,14 @@ export async function lookupPali({ word, limit = 5 }) {
   try {
     data = await liveCache.wrap(`dpd:${word}`, () => fetchPublic(url, { retries: 2 }));
   } catch (error) {
-    throw new Error(`Digital Pāḷi Dictionary is unavailable right now (${error.message}). Open ${DPD}/?q=${encodeURIComponent(word)} directly or try again shortly.`);
+    // Outage fallback (#23): answer from the bundled DPD subset, labelled as such.
+    let offline = null;
+    try { offline = lookupOffline({ word, limit }); } catch { /* bundled data missing: report the outage below */ }
+    // Say what actually failed: an outage (network error, timeout, 5xx, 429, broken JSON) or a refused request (other 4xx).
+    const outage = error?.retryable !== false;
+    const what = outage ? `dpdict.net is unreachable right now (${error.message})` : `dpdict.net did not answer this lookup (${error.message})`;
+    if (offline) return { ...offline, note: `${what}; this answer comes from the bundled offline DPD subset (${offline.dictionary.version}), not the live site.` };
+    throw new Error(`${outage ? 'Digital Pāḷi Dictionary is unavailable right now' : 'Digital Pāḷi Dictionary did not answer this lookup'} (${error.message}) and "${word}" is not in the bundled offline subset. Open ${DPD}/?q=${encodeURIComponent(word)} directly${outage ? ' or try again shortly' : ''}.`);
   }
   const summary = String(data.summary_html ?? '');
   const entries = [...summary.matchAll(/<p\b[^>]*class=["'][^"']*summary[^"']*["'][^>]*>([^]*?)<\/p>/gi)].map((m) => plainText(m[1]));
@@ -154,6 +162,48 @@ export async function getAtiText({ path, offset = 0, limit = 12000 }) {
   };
 }
 
+const COVERAGE_SOURCES = ['dhammatalks', 'ati', 'anandajoti'];
+let coverageCache = null;
+
+/** English translation coverage per collection (#37): texts, texts with a direct link, texts reached through a
+ *  containing text (verses of a linked chapter), and links per source, with how many were matched by content. */
+export function translationCoverage() {
+  if (coverageCache) return coverageCache;
+  const d = load();
+  const rows = new Map();
+  const total = { texts: 0, with_english: 0, with_english_including_inherited: 0, links: 0, content_matched_links: 0, by_source: {} };
+  const bump = (o, k, n = 1) => { o[k] = (o[k] || 0) + n; };
+  for (const u of d.canon.units) {
+    const key = u.collection.startsWith('vin') ? 'vinaya' : u.collection;
+    if (!rows.has(key)) {
+      const c = d.canon.collections[u.collection] || {};
+      rows.set(key, { collection: key, name: key === 'vinaya' ? 'Vinaya Piṭaka' : (c.name || key), texts: 0, with_english: 0,
+        with_english_including_inherited: 0, links: 0, content_matched_links: 0, by_source: {} });
+    }
+    const row = rows.get(key);
+    const own = d.translations[u.id] || [];
+    const reach = linksFor(u).links;
+    for (const o of [row, total]) {
+      o.links += own.length;
+      for (const l of own) {
+        bump(o.by_source, COVERAGE_SOURCES.includes(l.source) ? l.source : 'other');
+        if (String(l.match || '').startsWith('content')) o.content_matched_links += 1;
+      }
+      if (u.kind === 'range') continue;   // grouped texts count once, through their members
+      o.texts += 1;
+      if (own.length) o.with_english += 1;
+      if (reach.length) o.with_english_including_inherited += 1;
+    }
+  }
+  const pct = (o) => ({ ...o, percent_with_english: o.texts ? Math.round((1000 * o.with_english_including_inherited) / o.texts) / 10 : 0 });
+  coverageCache = {
+    note: 'Counts of texts (grouped ranges counted through their members) with an English translation link; links counts every link, including those on grouped ranges. "including_inherited" adds verses whose chapter is linked. content_matched_links were placed by the content-based linker (names, numbers and PTS spans in the translation compared with the Pāli) and audited; a text without a link may still have a translation we could not place with confidence.',
+    total: pct(total),
+    collections: [...rows.values()].map(pct),
+  };
+  return coverageCache;
+}
+
 export function listSources() {
   const canon = canonSource();
   return {
@@ -161,6 +211,10 @@ export function listSources() {
       { id: 'vri', name: canon.name, role: 'Pāli text of the whole Tipiṭaka, bundled offline (no network needed).', repository: canon.repository, version: canon.commit,
         attribution: canon.attribution, terms: canon.terms,
         numbering: 'Standard citation IDs (as used by SuttaCentral and Bhikkhu Bodhi) were aligned to the VRI text at build time; PTS page numbers come from VRI page markers.' },
+      { id: 'vri-atthakatha', name: 'Chaṭṭha Saṅgāyana Aṭṭhakathā (VRI), romn/*.att.xml', role: 'Commentaries (get_commentary), bundled offline (server/data/commentary.json.gz), aligned to the texts by VRI paragraph number and checked against the words they quote. Commentary, not scripture.',
+        repository: canon.repository, version: canon.commit, attribution: canon.attribution, terms: canon.terms },
+      { id: 'vri-postcanonical', name: 'Chaṭṭha Saṅgāyana Ṭīkā and Añña books (VRI), romn/*.tik.xml, *.nrf.xml and the Visuddhimagga', role: 'Post-canonical books (get_post_canonical, search_post_canonical, search_texts include_post_canonical): the Visuddhimagga and its Mahāṭīkā, the Abhidhammatthasaṅgaha, the sub-commentaries and other later works, 109 books bundled offline (server/data/postcanonical.json.gz). Not the canon: every result is labelled canonical: false. Visuddhimagga PTS pages are not available.',
+        repository: canon.repository, version: canon.commit, attribution: canon.attribution, terms: canon.terms },
       { id: 'dhammatalks', name: 'dhammatalks.org — Ṭhānissaro Bhikkhu', role: 'English translations (live).', url: 'https://www.dhammatalks.org/suttas/',
         license: 'CC BY-NC 4.0', fallback: 'Ṭhānissaro\'s earlier versions on Access to Insight.' },
       { id: 'dhammatalks-talks', name: 'dhammatalks.org — Dhamma talks by Ṭhānissaro Bhikkhu', role: 'Talk titles, dates and links found through the site\'s own search (find_talks; live, link-only: talk text is never fetched). Commentary, not scripture.',
@@ -179,10 +233,12 @@ export function listSources() {
       { id: 'calendar', name: 'Uposatha and festival calendar (computed)', role: 'Offline uposatha and festival dates for Thai Mahānikāya, Thai Dhammayut, Myanmar and Sri Lanka, computed from published rules; not official announcements.',
         code: ['splendidmoons (MIT, © 2023 Gambhiro Bhikkhu)', 'pythaidate (MIT, © 2023 Mark Hollow)', 'mmcal ceMmDateTime.js (MIT, © 2018 Yan Naing Aye)', 'Meeus, Astronomical Algorithms (2nd ed.)'], docs: 'https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/calendar.md' },
       { id: 'grammars', name: 'Public-domain Pāli grammars (Duroiselle 1921, Frankfurter 1883, Müller 1884, Geiger 1916)', role: 'Linked only from pali://pronunciation; not bundled.', url: 'https://archive.org/details/in.ernet.dli.2015.61817', license: 'Public domain (verified per item; see docs/sources.md)' },
-      { id: 'dpd', name: 'Digital Pāḷi Dictionary', role: 'Word lookup (live).', url: DPD, license: 'CC BY-NC-SA 4.0' },
+      { id: 'dpd', name: 'Digital Pāḷi Dictionary', role: 'Word lookup (live), with a bundled offline subset (headwords, grammar, roots, meanings, compound and sandhi splits) used for word-by-word passage analysis and when dpdict.net is unreachable.', url: DPD, license: 'CC BY-NC-SA 4.0',
+        bundled: { ...DPD_PIN, subset: 'All headwords and roots; inflection map and deconstructor splits for the word forms of the bundled VRI root texts (server/data/dpd.json.gz).' } },
       { id: 'suttacentral', name: 'SuttaCentral', role: 'Linked only (parallels, other translations). Its content is not fetched or bundled, respecting its request that its work not be used in AI tools.', url: 'https://suttacentral.net' },
     ],
     evidence_rule: 'Quote only retrieved text. Cite the text ID, VRI paragraph or PTS page, and the translator. Distinguish Pāli, translation, dictionary gloss and your own explanation. Numbering schemes differ (standard/Bodhi vs PTS); this tool reports both where they differ.',
-    offline: 'All Pāli text, citation resolution, PTS lookup and Pāli search work without internet, and so do topics, numbered lists, proper-name occurrences, paritta, Abhidhamma and Vinaya-rule lookups, daily texts, reading plans, citation finding, Pāli quotation checks and the uposatha and festival calendar. English translations, Dhamma talks and the dictionary need internet.',
+    translation_coverage: translationCoverage(),
+    offline: 'All Pāli text, citation resolution, PTS lookup and Pāli search work without internet, and so do topics, numbered lists, proper-name occurrences, paritta, Abhidhamma and Vinaya-rule lookups, daily texts, reading plans, citation finding, Pāli quotation checks, the commentary, the post-canonical books, word-by-word analysis and the uposatha and festival calendar. English translations and Dhamma talks need internet; the full dictionary is live, with a bundled DPD subset used offline.',
   };
 }

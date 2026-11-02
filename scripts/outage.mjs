@@ -1,7 +1,8 @@
 // Failover test: simulates outages of the online sources and checks that mirrors and offline text keep working.
 // Exits non-zero when a result is not what the failover design promises (the nightly workflow relies on this):
 // with one site down every call must still succeed through a mirror; with everything down the offline Pāli
-// text must still work and every online call must fail cleanly with an error message, not crash.
+// text and the bundled dictionary subset must still work and every other online call must fail cleanly with an
+// error message, not crash.
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { ALLOWED_HOSTS } from '../src/http.mjs';
@@ -37,8 +38,13 @@ for (const [hosts, label, total = false] of scenarios) {
     console.log(' ATI search       :', r.err ? 'ERROR ' + r.d.error.slice(0, 120) : `ok ${r.d.results.length} results ${r.d.note || ''}`);
     expect(label, 'ATI search', r, { total });
     r = await call('lookup_pali', { word: 'metta' });
-    console.log(' dictionary       :', r.err ? 'ERROR ' + r.d.error.slice(0, 140) : 'ok');
-    expect(label, 'dictionary', r, { total });
+    console.log(' dictionary       :', r.err ? 'ERROR ' + r.d.error.slice(0, 140) : `ok${r.d.offline ? ` (offline DPD ${r.d.dictionary.version}, ${r.d.entries.length} entries)` : ''}`);
+    // The dictionary falls back to the bundled DPD subset (#23), so it must answer even in a total outage,
+    // labelled as offline, with entries and the DPD licence.
+    expect(label, 'dictionary', r, { online: false });
+    if (total && !r.err && !(r.d.offline && r.d.entries.length && r.d.license?.name === 'CC BY-NC-SA 4.0' && /unreachable/.test(r.d.note || ''))) {
+      failures.push(`${label}: dictionary fallback is not labelled offline with entries and the DPD licence`);
+    }
   } catch (error) {
     failures.push(`${label}: crashed (${error.message})`);
   } finally {

@@ -5,7 +5,7 @@ cannot start programs, though: Claude on the web and on phones, ChatGPT, and Cla
 directory all need an **address on the internet** instead. This page explains how to run that web
 version, for this project or for a temple, university or library that wants its own copy.
 
-The web version is the same server with the same 26 tools (27 when the ChatGPT reading view is switched on with `CHATGPT_WIDGET=1`). It only reads; it cannot change anything.
+The web version is the same server with the same 30 tools (31 when the ChatGPT reading view is switched on with `CHATGPT_WIDGET=1`). It only reads; it cannot change anything.
 It needs no login, because everything it serves is public scripture and openly licensed material.
 
 ## What it offers
@@ -94,6 +94,13 @@ build (about 4 seconds) memory can briefly be 100 MB or more above that starting
 translation cache full as well, a server near the 345 MB load-test peak comes close to 512 MB on that first
 check. If the host restarts for lack of memory, give it 768 MB or set a smaller `PALI_CANON_CACHE_MB`.
 See [verify-quote.md](verify-quote.md#memory).
+
+The bundled dictionary (`server/data/dpd.json.gz`, a subset of the Digital Pāḷi Dictionary) is loaded the
+first time `analyse_passage` is called or `lookup_pali` has to answer offline because dpdict.net cannot be
+reached, and it is then kept. Measured on 1 November 2026 (Windows 11, Node.js 26): about 0.9 s to load,
+about 170 MB more JavaScript heap and about 280 MB more resident memory. On top of the 345 MB load-test
+peak that is over 512 MB, so a host that offers `analyse_passage` should have 1 GB (or at least 768 MB with
+a smaller `PALI_CANON_CACHE_MB`).
 
 ## Deploy on Fly.io
 

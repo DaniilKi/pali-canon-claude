@@ -1,16 +1,23 @@
 """Map English translations on dhammatalks.org and Access to Insight to canon text IDs.
 
 Usage: python3 scripts/canon/build_translations.py <canon.json.gz> <dt-index.json> <ati-index.json> <out.json>
+           [--content <bcbsit-ati checkout> <dt-page-cache-dir>]
+
+--content runs the content-based linker (#37) on the pages left unlinked: names, numbers and PTS spans.
 
 Both sites number SN and AN (and parts of KN) by the older PTS scheme, which differs
 from the standard IDs in places, so pages are matched by content: the Pāli title,
 the PTS page (ATI) and number proximity. Each mapping records how it was matched.
 """
 import gzip
+import html
 import json
+import os
 import re
 import sys
+import time
 import unicodedata
+import urllib.request
 
 ORDINALS = re.compile(r'(pathama|dutiya|tatiya|catuttha|pancama|chattha|sattama|atthama|navama|dasama)')
 
@@ -77,7 +84,7 @@ def english_title(entry):
 def page_key(entry):
     """The sutta a page is about, ignoring the translator: ATI 'an03.065.than' and 'an03.065.bodh' share 'an03.065'."""
     if entry['source'] == 'ati':
-        return entry['path'].rsplit('.', 1)[0]
+        return re.sub(r'x$', '', entry['path'].rsplit('.', 1)[0])   # 'sn22.084x.wlsh' is another translation of sn22.084
     return entry['url']
 
 
@@ -129,6 +136,190 @@ def conservative(out, by_id, report):
     return kept
 
 
+# ---------------------------------------------------------------------------
+# Content-based linker (#37): a second pass over the pages the rules above left
+# unlinked. It compares the names in the English (people, places, Pāli terms the
+# translator kept) with the Pāli of the texts near the page's own number, and
+# for Access to Insight also with the PTS page the page cites. A link is added
+# only when one text carries rare names from the page and no nearby text comes
+# close. Nothing is fetched from SuttaCentral; dhammatalks.org pages are read
+# once, politely, and cached outside the repository.
+# ---------------------------------------------------------------------------
+CONTENT_WINDOW = 15          # texts within this many numbers of the page's own number are candidates
+CONTENT_MAX_SHARE = 0.02     # a name is "rare" if at most 2% of the collection's texts contain it,
+CONTENT_MIN_RARE = 6         # or at most this many texts, whichever is larger
+ENGLISH_STOP = set("""about above after again against almost already also although always among another anyone anything
+around because become before behind being below beside besides between beyond blessed brahmin brahmins brahman brahmans
+cannot could during either elsewhere enough every everyone everything further having however indeed instead itself later
+little many master monks monk might never nothing often other others otherwise perhaps rather really since something
+sometimes still their themselves there therefore these thing things those though through thus together toward towards
+under unless until venerable whatever when whenever where whereas wherever whether which while whoever whole whose
+would yourself lord friend friends reverend householder teacher great noble nuns lady ladies gods
+world truth chapter section notes translator introduction sutta suttas samyutta nikaya vagga devaputta""".split())
+
+
+def content_fold(word):
+    w = unicodedata.normalize('NFD', word or '').lower()
+    w = ''.join(c for c in w if unicodedata.category(c) != 'Mn')
+    w = w.replace('ṁ', 'm').replace('ṃ', 'm').replace('.', '')
+    w = re.sub(r'([aiu])\1', r'\1', w)   # Velthuis-style long vowels on older ATI pages ("Saariputta")
+    return re.sub(r'[^a-z]', '', w)
+
+
+def stem(term):
+    s = term[:-1] if len(term) <= 6 else term[:-2]
+    return s if len(s) >= 4 else None
+
+
+def html_body(raw, start_marks, end_marks):
+    found = [raw.find(m) for m in start_marks if raw.find(m) >= 0]
+    lo = min(found) if found else 0
+    his = [raw.find(m, lo) for m in end_marks if raw.find(m, lo) >= 0]
+    body = raw[lo:min(his)] if his else raw[lo:]
+    return re.sub(r'<(script|style)\b.*?</\1>', ' ', body, flags=re.S | re.I)
+
+
+def english_terms(body):
+    """Names and Pāli words in an English page: capitalised words, words with diacritics, italicised words."""
+    italics = ' '.join(re.findall(r'<(?:i|em)\b[^>]*>(.*?)</(?:i|em)>', body, flags=re.S | re.I))
+    text = html.unescape(re.sub(r'<[^>]+>', ' ', body))
+    raw = [w.strip('.') for w in re.findall(r"[A-Za-zÀ-ɏḀ-ỿ.]+", text) if w[:1].isupper() or re.search(r'[^\x00-\x7f]', w)]
+    raw += re.findall(r"[A-Za-zÀ-ɏḀ-ỿ]+", html.unescape(re.sub(r'<[^>]+>', ' ', italics)))
+    terms = set()
+    for w in raw:
+        f = content_fold(w)
+        if len(f) >= 5 and f not in ENGLISH_STOP and stem(f):
+            terms.add(f)
+    return terms
+
+
+def read_page(page, ati_root, dt_cache):
+    entry = page['entry']
+    if entry['source'] == 'ati':
+        raw = open(os.path.join(ati_root, page['file']), encoding='utf-8', errors='replace').read()
+        return html_body(raw, ['id="H_docTitle"', 'id="H_content"'], ['id="F_footer"', 'id="F_toenail"', 'id="F_citation"'])
+    os.makedirs(dt_cache, exist_ok=True)
+    cached = os.path.join(dt_cache, re.sub(r'[^A-Za-z0-9_.-]', '_', entry['url'].split('/suttas/')[1]))
+    if not os.path.exists(cached):
+        req = urllib.request.Request(entry['url'], headers={'User-Agent': 'pali-canon-claude link builder (read-only; https://github.com/DaniilKi/pali-canon-claude)'})
+        raw = urllib.request.urlopen(req, timeout=40).read().decode('utf-8', 'replace')
+        open(cached, 'w', encoding='utf-8').write(raw)
+        time.sleep(1)
+    raw = open(cached, encoding='utf-8').read()
+    return html_body(raw, ['id="sutta"'], ['class="footer'])
+
+
+def content_link(out, pages, canon, by_id, ati_root, dt_cache):
+    """Link pages the conservative rules left unlinked, on names shared with exactly one nearby text."""
+    report = {'considered': 0, 'added': {}, 'rejected': {}}
+    reject = lambda why: report['rejected'].__setitem__(why, report['rejected'].get(why, 0) + 1)
+    linked_urls = {l['url'] for links in out.values() for l in links}
+    tokens, coll_units = {}, {}
+    for u in canon['units']:
+        if u.get('approximate') or u.get('kind') == 'range':
+            continue
+        blocks = canon['books'][u['book']]['blocks'][u['start']:u['end']]
+        tokens[u['id']] = {content_fold(w) for b in blocks for w in re.findall(r'\S+', b[2] or '')}
+        coll_units.setdefault(u['collection'], []).append(u['id'])
+    hit_cache, df_cache = {}, {}
+
+    def hits(term, uid):
+        key = (term, uid)
+        if key not in hit_cache:
+            s = stem(term)
+            hit_cache[key] = any(t.startswith(s) for t in tokens.get(uid, ()))
+        return hit_cache[key]
+
+    def df(term, coll):
+        key = (term, coll)
+        if key not in df_cache:
+            df_cache[key] = sum(1 for uid in coll_units.get(coll, []) if hits(term, uid))
+        return df_cache[key]
+
+    proposals = []
+    for page in pages:
+        entry = page['entry']
+        if entry['url'] in linked_urls:
+            continue
+        if re.search(r'\d-\d|intro', page.get('name', '')):   # multi-text pages and introductions stay unlinked
+            continue
+        section, n = page['section'], page['n']
+        cands = [by_id[uid] for uid in tokens if section_of(uid) == section and number_of(uid)
+                 and abs(number_of(uid)[0] - n) <= CONTENT_WINDOW]
+        if not cands:
+            continue
+        report['considered'] += 1
+        coll = cands[0]['collection']
+        try:
+            body = read_page(page, ati_root, dt_cache)
+        except Exception:  # noqa: BLE001
+            reject('unreadable')
+            continue
+        limit = max(CONTENT_MIN_RARE, CONTENT_MAX_SHARE * len(coll_units.get(coll, [])))
+        rare = {t for t in english_terms(body) if 0 < df(t, coll) <= limit}
+        score = {u['id']: {t for t in rare if hits(t, u['id'])} for u in cands}
+        ranked = sorted(cands, key=lambda u: (-len(score[u['id']]), abs(number_of(u['id'])[0] - n)))
+        others = lambda uid: set().union(*[score[u['id']] for u in cands if u['id'] != uid]) if len(cands) > 1 else set()
+        e_ord = english_ordinal(entry.get('reference', '') if entry['source'] == 'dhammatalks' else entry.get('english', ''))
+
+        def pts_fits(u):
+            if not page['pts']:
+                return None
+            vol, pg = page['pts']
+            p = u.get('pts') or {}
+            return p.get('volume') == vol and p.get('page', 10 ** 6) <= pg <= p.get('end_page', -1)
+
+        def distance(u):
+            return abs(number_of(u['id'])[0] - n)
+
+        best, why = ranked[0], None
+        top = len(score[best['id']])
+        second = len(score[ranked[1]['id']]) if len(ranked) > 1 else 0
+        unique_names = score[best['id']] - others(best['id'])
+        # 1. The page's PTS page lies in the text, and the text has names from the page that no nearby text has.
+        if top >= 1 and top > second and unique_names and pts_fits(best):
+            why = 'content-pts+names'
+        # 2. Two or more rare names from the page occur in this text and in no other text nearby, close to the page's number.
+        elif top >= 2 and second == 0 and pts_fits(best) is not False and distance(best) <= 5:
+            why = 'content-number+names'
+        else:
+            # 3. The page's Pāli title names exactly one nearby text (ordinal agreeing), close to the page's number,
+            #    with nothing in the names pointing elsewhere.
+            titled = [(u, similar(page['title'], u.get('title', ''))) for u in cands] if page.get('title') else []
+            titled = [(u, sim) for u, sim in titled if sim >= 2]
+            if len(titled) > 1 and e_ord:
+                titled = [(u, sim) for u, sim in titled if pali_ordinal(u.get('title', '')) == e_ord]
+            if len(titled) == 1:
+                u, sim = titled[0]
+                if (distance(u) <= (5 if sim == 3 else 2) and pts_fits(u) is not False
+                        and len(score[u['id']]) >= top and not (sim == 2 and e_ord is None and pali_ordinal(u.get('title', '')))):
+                    best, why = u, 'content-title+number'
+        pts_ok = pts_fits(best)
+        if os.environ.get('CONTENT_DEBUG'):
+            report.setdefault('decisions', []).append({'url': entry['url'], 'claimed': f'{section}{n}', 'pts': page['pts'], 'match': why,
+                'pts_ok': pts_ok, 'ranked': [(u['id'], u.get('title', ''), sorted(score[u['id']])) for u in ranked[:3]]})
+        if not why:
+            reject('pts-mismatch' if pts_ok is False and top else ('no-rare-names' if not top else 'not-unique'))
+            continue
+        p_ord = pali_ordinal(best.get('title', ''))
+        if p_ord and e_ord and p_ord != e_ord:
+            reject('ordinal')
+            continue
+        proposals.append((best['id'], dict(entry, match=why, evidence=sorted(score[best['id']]))))
+    # One page per source per text: drop every proposal that collides with another or with an existing link.
+    claim = {}
+    for uid, l in proposals:
+        claim.setdefault((uid, l['source']), set()).add(page_key(l))
+    for uid, l in proposals:
+        existing = {page_key(x) for x in out.get(uid, []) if x['source'] == l['source']}
+        if len(claim[(uid, l['source'])]) > 1 or (existing and page_key(l) not in existing):
+            reject('collision')
+            continue
+        out.setdefault(uid, []).append(l)
+        report['added'][l['match']] = report['added'].get(l['match'], 0) + 1
+    return out, report
+
+
 def main():
     canon = json.load(gzip.open(sys.argv[1], 'rt', encoding='utf-8'))
     dt = json.load(open(sys.argv[2]))
@@ -173,7 +364,8 @@ def main():
                 if len(pool) == 1:
                     return pool[0], why
         if bridge and title:
-            for uid, other_title in bridge.get(section, []):
+            # Nearest number first: same-titled siblings (Tittha Sutta (1), (2), (3)) must not all bridge to the first one.
+            for uid, other_title in sorted(bridge.get(section, []), key=lambda x: abs(number_of(x[0])[0] - n)):
                 if similar(title, other_title) >= 2 and abs(number_of(uid)[0] - n) <= 6:
                     return by_id[uid], 'ati-title'
         if title:
@@ -205,6 +397,7 @@ def main():
         out.setdefault(uid, []).append(entry)
 
     bridge, ati_matched, ati_pending, dt_matched, dt_pending = {}, [], [], [], []
+    pages = []   # every page with its claimed position, for the content linker
     # ---- Access to Insight ----
     roman = {'i': 1, 'ii': 2, 'iii': 3, 'iv': 4, 'v': 5, 'vi': 6}
     for page in ati:
@@ -241,6 +434,7 @@ def main():
         if cdb and coll == 'sn':
             s, _, k = cdb.group(1).partition('.')
             section, n = f'sn{int(s)}.', int(k)
+        pages.append({'entry': entry, 'section': section, 'n': n, 'title': title, 'pts': pts, 'file': path, 'name': name})
         unit, why = choose(section, n, title, pts)
         report['ati'][why or 'unmatched'] = report['ati'].get(why or 'unmatched', 0) + 1
         if unit:
@@ -292,6 +486,7 @@ def main():
             title = re.sub(r'^\w+ [\d:]+ ', '', ref)
         unit, why = choose(section, n, title, bridge=bridge)
         entry = {'source': 'dhammatalks', 'url': page['url'], 'translator': 'Ṭhānissaro Bhikkhu', 'reference': ref}
+        pages.append({'entry': entry, 'section': section, 'n': n, 'title': title, 'pts': None, 'name': path.split('/')[-1]})
         report['dhammatalks'][why or 'unmatched'] = report['dhammatalks'].get(why or 'unmatched', 0) + 1
         if unit:
             add(unit['id'], dict(entry, match=why))
@@ -304,6 +499,11 @@ def main():
         add(uid, entry)
         report[entry['source']]['neighbour-offset'] = report[entry['source']].get('neighbour-offset', 0) + 1
     out = conservative(out, by_id, report)
+    if '--content' in sys.argv:
+        k = sys.argv.index('--content')
+        ati_root, dt_cache = sys.argv[k + 1], sys.argv[k + 2]
+        out, content_report = content_link(out, pages, canon, by_id, ati_root, dt_cache)
+        report['content'] = content_report
     json.dump(out, open(sys.argv[4], 'w'), ensure_ascii=False, separators=(',', ':'))
     print(json.dumps(report, indent=1))
     print('texts with translations:', len(out), 'links:', sum(len(v) for v in out.values()))

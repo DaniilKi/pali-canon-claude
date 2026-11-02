@@ -153,9 +153,9 @@ What every tool declares, and the proposed `title`. "Open-world" (`openWorldHint
 | `get_text` | Read Pāli text | yes | no | yes | The Pāli is offline, but the optional `translation` argument fetches English live. |
 | `get_translation` | Read English translation | yes | no | yes | Fetches dhammatalks.org, Access to Insight (with mirrors) or Ancient Buddhist Texts. |
 | `compare_translations` | Compare translations | yes | no | yes | Fetches two to four translations live. |
-| `search_texts` | Search the Tipiṭaka | yes | no | no | Searches the bundled text and stored titles only. |
+| `search_texts` | Search the Tipiṭaka | yes | no | no | Searches the bundled text and stored titles only (optionally the bundled post-canonical books, kept separate). |
 | `browse_canon` | Browse the canon | yes | no | no | Bundled table of contents. |
-| `lookup_pali` | Pāli dictionary lookup | yes | no | yes | Queries the Digital Pāḷi Dictionary. |
+| `lookup_pali` | Pāli dictionary lookup | yes | no | yes | Queries the Digital Pāḷi Dictionary; answers from the bundled subset, labelled, when the site is unreachable. |
 | `search_access_to_insight` | Search Access to Insight | yes | no | yes | Reads Access to Insight's indexes (or its GitHub mirror). |
 | `get_access_to_insight_text` | Read Access to Insight page | yes | no | yes | Fetches one Access to Insight page by path. |
 | `list_sources` | List sources and licences | yes | no | no | Static list. |
@@ -173,6 +173,10 @@ What every tool declares, and the proposed `title`. "Open-world" (`openWorldHint
 | `list_topics` | Browse topics | yes | no | no | Bundled topic index. |
 | `dhamma_list` | Numbered teaching lists | yes | no | no | Bundled lists with Pāli members and their canonical passages. |
 | `verify_quote` | Verify a quotation | yes | no | yes | Pāli is matched offline; English quotations fetch the named translations live. |
+| `get_commentary` | Read the commentary | yes | no | no | Bundled VRI Aṭṭhakathā aligned to the text; labelled as commentary, not canon. |
+| `get_post_canonical` | Read post-canonical texts | yes | no | no | Bundled VRI Ṭīkā and Añña books (Visuddhimagga, Abhidhammatthasaṅgaha…); labelled `canonical: false`. |
+| `search_post_canonical` | Search post-canonical texts | yes | no | no | Searches the bundled post-canonical books only; results labelled `canonical: false`. |
+| `analyse_passage` | Analyse a passage word by word | yes | no | no | Bundled Digital Pāḷi Dictionary subset applied to the bundled Pāli; glosses are not a translation. |
 | `vinaya_rule` | Pātimokkha rule | yes | no | no | Bundled VRI Vinaya text plus a stored link to the Buddhist Monastic Code. |
 
 No tool writes, deletes, sends or stores anything, so none needs `destructiveHint: true`. The table must list exactly the live tools: `tests/connector-listing.test.mjs` fails when a tool (for example one added through `src/features/`) has no row here, or a row names a tool that no longer exists. Add the row in the same change that adds the tool; the directory re-reviews material changes to tools.

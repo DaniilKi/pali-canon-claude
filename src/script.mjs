@@ -409,3 +409,30 @@ export function localizeSearch(result, script, input) {
   if (Array.isArray(out.title_matches)) out.title_matches = out.title_matches.map((r) => localizeUnitFields(r, s));
   return { ...out, ...scriptNote(s), ...inputNote(input) };
 }
+
+/** get_text commentary: true: the commentary's segments and title in `script`, by the same rules as the canon segments. */
+export function localizeCommentary(commentary, script) {
+  const s = script ? scriptName(script) : 'roman';
+  if (s === 'roman' || !commentary) return commentary;
+  return localizeText(commentary, s);
+}
+
+/**
+ * Post-canonical results (resolve_reference fallback, search_texts post_canonical): titles, chapter names and
+ * excerpts in `script`; citations and IDs stay Roman.
+ */
+export function localizePostCanonical(result, script, input) {
+  const s = script ? scriptName(script) : 'roman';
+  if (s === 'roman' || !result) return result && { ...result, ...inputNote(input) };
+  const named = (obj, key) => (typeof obj[key] === 'string' ? { [`${key}_roman`]: obj[key], [key]: pali(obj[key], s) } : {});
+  const out = { ...result, ...named(result, 'title') };
+  if (out.book && typeof out.book === 'object') out.book = { ...out.book, ...named(out.book, 'title') };
+  if (Array.isArray(out.results)) {
+    out.results = out.results.map((r) => ({
+      ...r, ...named(r, 'book_title'),
+      ...(typeof r.chapter === 'string' ? { chapter: pali(r.chapter, s) } : {}),
+      ...(typeof r.excerpt === 'string' ? { excerpt: pali(r.excerpt, s) } : {}),
+    }));
+  }
+  return { ...out, ...scriptNote(s), ...inputNote(input) };
+}
