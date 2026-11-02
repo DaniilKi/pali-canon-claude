@@ -100,3 +100,72 @@ test('analyse_passage answers word by word over the protocol, with the DPD licen
   assert.ok(Array.isArray(body.words) && body.words.length > 0 && body.words.length <= 5);
   assert.match(JSON.stringify(body), /CC BY-NC-SA 4\.0/);
 });
+
+// Review of #101: continuation pointer, script handling and the collection rule.
+test('get_text commentary says it is the opening and how to continue with get_commentary', async () => {
+  const { body } = await call('get_text', { uid: 'MN 10', limit: 1, commentary: true });
+  assert.deepEqual(body.commentary.read_with, { tool: 'get_commentary', uid: 'mn10' });
+  assert.match(body.commentary.opening_note, /opening of the commentary/);
+  assert.match(body.commentary.opening_note, /get_commentary/);
+  assert.equal(body.commentary.next_offset, 20);
+  const next = await call('get_commentary', { uid: 'mn10', offset: body.commentary.next_offset, limit: 1 });
+  assert.equal(next.error, false);
+  assert.equal(next.body.segments[0].ref, 'mn10/c21');
+});
+
+test('get_text commentary follows script like the canon segments', async () => {
+  const roman = await call('get_text', { uid: 'Dhp 1', limit: 1, commentary: true });
+  const { error, body } = await call('get_text', { uid: 'Dhp 1', limit: 1, commentary: true, script: 'sinhala' });
+  assert.equal(error, false);
+  assert.equal(body.script, 'sinhala');
+  assert.equal(body.commentary.script, 'sinhala');
+  assert.equal(body.commentary.segments.length, roman.body.commentary.segments.length);
+  for (const [i, seg] of body.commentary.segments.entries()) {
+    assert.doesNotMatch(seg.text, /[a-zāīūṃṅñṭḍṇḷ]{3}/i, 'no Roman Pāli left');
+    assert.match(seg.text, /[඀-෿]/);
+    assert.equal(seg.ref, roman.body.commentary.segments[i].ref, 'refs stay Roman');
+  }
+  assert.deepEqual(body.commentary.read_with, { tool: 'get_commentary', uid: 'dhp1' });
+});
+
+test('search_texts include_post_canonical is not searched when collection is set, and says so', async () => {
+  const { error, body } = await call('search_texts', { query: 'kasiṇa', collection: 'mn', limit: 3, include_post_canonical: true });
+  assert.equal(error, false);
+  assert.equal(body.post_canonical.searched, false);
+  assert.deepEqual(body.post_canonical.results, []);
+  assert.match(body.post_canonical.note, /collection/);
+  const { tools } = await client.listTools();
+  const desc = tools.find((t) => t.name === 'search_texts').inputSchema.properties.include_post_canonical.description;
+  assert.match(desc, /collection/);
+  assert.match(desc, /script/);
+});
+
+test('search_texts post_canonical results follow script; citations stay Roman', async () => {
+  const { error, body } = await call('search_texts', { query: 'kasiṇa', limit: 2, include_post_canonical: true, script: 'devanagari' });
+  assert.equal(error, false);
+  const pc = body.post_canonical;
+  assert.equal(pc.script, 'devanagari');
+  assert.ok(pc.results.length);
+  for (const r of pc.results) {
+    assert.equal(r.canonical, false);
+    assert.match(r.excerpt, /[ऀ-ॿ]/);
+    assert.match(r.book_title, /[ऀ-ॿ]/);
+    assert.ok(r.book_title_roman);
+    assert.match(r.citation, /^[a-z0-9 .§-]+$/i, 'citation stays Roman');
+  }
+});
+
+test('resolve_reference post-canonical fallback follows script like the canon path', async () => {
+  const { error, body } = await call('resolve_reference', { reference: 'mahavamsa 3', script: 'thai' });
+  assert.equal(error, false);
+  assert.equal(body.canonical, false);
+  assert.equal(body.script, 'thai');
+  assert.match(body.script_note, /Thai/);
+  assert.match(body.title, /[฀-๿]/);
+  assert.equal(body.title_roman, 'Tatiya pariccheda');
+  assert.match(body.book.title, /[฀-๿]/);
+  assert.equal(body.citation, 'mahavamsa 3');
+  // Without script nothing is transliterated.
+  const roman = await call('resolve_reference', { reference: 'Vism 1.1' });
+  assert.equal(roman.body.script, undefined);
+});

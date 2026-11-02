@@ -5,7 +5,7 @@ import * as canon from './canon.mjs';
 import * as english from './english.mjs';
 import * as providers from './providers.mjs';
 import * as features from './features/index.mjs';
-import { SCRIPT_CHOICES, SCRIPT_DESCRIPTION, romanizeInput, localizeText, localizeSearch, localizeDescribe } from './script.mjs';
+import { SCRIPT_CHOICES, SCRIPT_DESCRIPTION, romanizeInput, localizeText, localizeSearch, localizeDescribe, localizeCommentary, localizePostCanonical } from './script.mjs';
 import * as variantsMod from './variants.mjs';
 import * as commentaryModule from './commentary.mjs';
 import * as postcanonical from './postcanonical.mjs';
@@ -89,7 +89,7 @@ export function createServer() {
       resolved = canon.resolve(input.text);
     } catch (error) {
       // Post-canonical citations (Vism 1.1, Abhidh-s 1, mahavamsa 3) never shadow canon ones: only after the canon fails.
-      if (postcanonical.isPostCanonical(input.text)) return postcanonical.describe(input.text);
+      if (postcanonical.isPostCanonical(input.text)) return localizePostCanonical(postcanonical.describe(input.text), script, input);
       throw error;
     }
     const { unit, notes, alternatives } = resolved;
@@ -132,8 +132,16 @@ export function createServer() {
         result.english_error = error.message;
       }
     }
-    if (commentary) result.commentary = commentaryModule.commentaryFor(unit, { limit: 20 });
-    return localizeText(result, script, input);
+    const out = localizeText(result, script, input);
+    if (commentary) {
+      const c = commentaryModule.commentaryFor(unit, { limit: 20 });
+      out.commentary = {
+        ...localizeCommentary(c, script),
+        read_with: { tool: 'get_commentary', uid: unit.id },
+        ...(c.available ? { opening_note: `This is the opening of the commentary (up to 20 segments${c.next_offset != null ? `, of ${c.total_segments}` : ''}). It continues with get_commentary (uid "${unit.id}", offset ${c.next_offset ?? c.total_segments}).` } : {}),
+      };
+    }
+    return out;
   }, { network: true });
 
   tool('get_translation', 'Read an English translation of a text (Ṭhānissaro Bhikkhu on dhammatalks.org, Access to Insight translators, or Ānandajoti Bhikkhu on Ancient Buddhist Texts), with attribution, license and numbering notes. Falls back to official mirrors if a site is down.', {
@@ -180,10 +188,15 @@ export function createServer() {
     offset: z.number().int().min(0).max(100000).default(0),
     script: scriptParam,
     include_post_canonical: z.boolean().default(false).describe(postcanonical.SEARCH_OPTION_DESCRIPTION),
-  }, ({ query, collection, limit, offset, script, include_post_canonical }) => {
+  }, async ({ query, collection, limit, offset, script, include_post_canonical }) => {
     const input = romanizeInput(query);
     const result = localizeSearch(canon.search(input.text, { collection, limit, offset }), script, input);
-    return postcanonical.withPostCanonical(result, input.text, { include: include_post_canonical, limit, offset });
+    if (include_post_canonical && collection) {
+      return { ...result, post_canonical: { canonical: false, searched: false, results: [], note: `Not searched: collection "${collection}" limits the search to that part of the canon. Search the post-canonical books without collection, or with search_post_canonical.` } };
+    }
+    const out = await postcanonical.withPostCanonical(result, input.text, { include: include_post_canonical, limit, offset });
+    if (out.post_canonical && !out.post_canonical.error) out.post_canonical = localizePostCanonical(out.post_canonical, script);
+    return out;
   });
 
   tool('browse_canon', 'Browse the Tipiṭaka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja…) or a section (sn56, an4, kv1). Works offline.', {

@@ -30,7 +30,7 @@ const WORK_LABELS = {
   vism: 'Visuddhimagga ("The Path of Purification"), a post-canonical manual traditionally attributed to Buddhaghosa. Not the canon.',
   'abhidh-s': 'Abhidhammatthasaṅgaha, a post-canonical Abhidhamma manual traditionally attributed to Ācariya Anuruddha. Not the canon.',
 };
-export const SEARCH_OPTION_DESCRIPTION = 'Also search the post-canonical books (Visuddhimagga, Abhidhammatthasaṅgaha, sub-commentaries/Ṭīkā), returned separately under post_canonical and labelled canonical: false. Default false: only the canon is searched.';
+export const SEARCH_OPTION_DESCRIPTION = 'Also search the post-canonical books (Visuddhimagga, Abhidhammatthasaṅgaha, sub-commentaries/Ṭīkā), returned separately under post_canonical and labelled canonical: false. Ignored when collection is set (a collection limits the search to the canon). Titles and excerpts follow script like the canon results; citations stay Roman. Default false: only the canon is searched.';
 
 const HEADING = new Set(['subhead', 'title', 'chapter', 'book', 'nikaya', 'subsubhead']);
 const CENTRE_HEADING = /(niṭṭhit[aāo]ṃ?|niṭṭhitā|samattaṃ|samattā)\.?$|^Namo tassa|uddānaṃ$/i;

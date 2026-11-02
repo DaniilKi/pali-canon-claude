@@ -28186,7 +28186,7 @@ var WORK_LABELS = {
   vism: 'Visuddhimagga ("The Path of Purification"), a post-canonical manual traditionally attributed to Buddhaghosa. Not the canon.',
   "abhidh-s": "Abhidhammatthasa\u1E45gaha, a post-canonical Abhidhamma manual traditionally attributed to \u0100cariya Anuruddha. Not the canon."
 };
-var SEARCH_OPTION_DESCRIPTION = "Also search the post-canonical books (Visuddhimagga, Abhidhammatthasa\u1E45gaha, sub-commentaries/\u1E6C\u012Bk\u0101), returned separately under post_canonical and labelled canonical: false. Default false: only the canon is searched.";
+var SEARCH_OPTION_DESCRIPTION = "Also search the post-canonical books (Visuddhimagga, Abhidhammatthasa\u1E45gaha, sub-commentaries/\u1E6C\u012Bk\u0101), returned separately under post_canonical and labelled canonical: false. Ignored when collection is set (a collection limits the search to the canon). Titles and excerpts follow script like the canon results; citations stay Roman. Default false: only the canon is searched.";
 var HEADING3 = /* @__PURE__ */ new Set(["subhead", "title", "chapter", "book", "nikaya", "subsubhead"]);
 var CENTRE_HEADING3 = /(niṭṭhit[aāo]ṃ?|niṭṭhitā|samattaṃ|samattā)\.?$|^Namo tassa|uddānaṃ$/i;
 var VERSE3 = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
@@ -29286,6 +29286,27 @@ function localizeSearch(result, script, input) {
   if (Array.isArray(out.title_matches)) out.title_matches = out.title_matches.map((r) => localizeUnitFields(r, s));
   return { ...out, ...scriptNote(s), ...inputNote(input) };
 }
+function localizeCommentary(commentary, script) {
+  const s = script ? scriptName(script) : "roman";
+  if (s === "roman" || !commentary) return commentary;
+  return localizeText(commentary, s);
+}
+function localizePostCanonical(result, script, input) {
+  const s = script ? scriptName(script) : "roman";
+  if (s === "roman" || !result) return result && { ...result, ...inputNote(input) };
+  const named = (obj, key3) => typeof obj[key3] === "string" ? { [`${key3}_roman`]: obj[key3], [key3]: pali2(obj[key3], s) } : {};
+  const out = { ...result, ...named(result, "title") };
+  if (out.book && typeof out.book === "object") out.book = { ...out.book, ...named(out.book, "title") };
+  if (Array.isArray(out.results)) {
+    out.results = out.results.map((r) => ({
+      ...r,
+      ...named(r, "book_title"),
+      ...typeof r.chapter === "string" ? { chapter: pali2(r.chapter, s) } : {},
+      ...typeof r.excerpt === "string" ? { excerpt: pali2(r.excerpt, s) } : {}
+    }));
+  }
+  return { ...out, ...scriptNote(s), ...inputNote(input) };
+}
 
 // src/variants.mjs
 var VRI_KEY = 'VRI, "Help viewing the Tipitaka", https://tipitaka.org/help (list of version abbreviations)';
@@ -29546,7 +29567,7 @@ function createServer() {
     try {
       resolved = resolve(input.text);
     } catch (error2) {
-      if (isPostCanonical(input.text)) return describe2(input.text);
+      if (isPostCanonical(input.text)) return localizePostCanonical(describe2(input.text), script, input);
       throw error2;
     }
     const { unit, notes, alternatives } = resolved;
@@ -29595,8 +29616,16 @@ function createServer() {
         result.english_error = error2.message;
       }
     }
-    if (commentary) result.commentary = commentaryFor(unit, { limit: 20 });
-    return localizeText(result, script, input);
+    const out = localizeText(result, script, input);
+    if (commentary) {
+      const c = commentaryFor(unit, { limit: 20 });
+      out.commentary = {
+        ...localizeCommentary(c, script),
+        read_with: { tool: "get_commentary", uid: unit.id },
+        ...c.available ? { opening_note: `This is the opening of the commentary (up to 20 segments${c.next_offset != null ? `, of ${c.total_segments}` : ""}). It continues with get_commentary (uid "${unit.id}", offset ${c.next_offset ?? c.total_segments}).` } : {}
+      };
+    }
+    return out;
   }, { network: true });
   tool("get_translation", "Read an English translation of a text (\u1E6Ch\u0101nissaro Bhikkhu on dhammatalks.org, Access to Insight translators, or \u0100nandajoti Bhikkhu on Ancient Buddhist Texts), with attribution, license and numbering notes. Falls back to official mirrors if a site is down.", {
     uid: citation,
@@ -29646,10 +29675,15 @@ function createServer() {
     offset: external_exports.number().int().min(0).max(1e5).default(0),
     script: scriptParam,
     include_post_canonical: external_exports.boolean().default(false).describe(SEARCH_OPTION_DESCRIPTION)
-  }, ({ query, collection, limit, offset, script, include_post_canonical }) => {
+  }, async ({ query, collection, limit, offset, script, include_post_canonical }) => {
     const input = romanizeInput(query);
     const result = localizeSearch(search(input.text, { collection, limit, offset }), script, input);
-    return withPostCanonical(result, input.text, { include: include_post_canonical, limit, offset });
+    if (include_post_canonical && collection) {
+      return { ...result, post_canonical: { canonical: false, searched: false, results: [], note: `Not searched: collection "${collection}" limits the search to that part of the canon. Search the post-canonical books without collection, or with search_post_canonical.` } };
+    }
+    const out = await withPostCanonical(result, input.text, { include: include_post_canonical, limit, offset });
+    if (out.post_canonical && !out.post_canonical.error) out.post_canonical = localizePostCanonical(out.post_canonical, script);
+    return out;
   });
   tool("browse_canon", 'Browse the Tipi\u1E6Daka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja\u2026) or a section (sn56, an4, kv1). Works offline.', {
     node: external_exports.string().max(60).default("canon"),
