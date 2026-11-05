@@ -26534,13 +26534,25 @@ function cleanDpdText(html) {
   if (end >= 0) text = text.slice(0, end);
   return text.split("\n").map((line) => line.trim()).filter((line) => line && !DPD_CHROME.test(line)).join("\n");
 }
+var DpdResponseError = class extends Error {
+};
+function validateDpdResponse(data5) {
+  const record2 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  if (!record2(data5) || typeof data5.summary_html !== "string" || typeof data5.dpd_html !== "string") {
+    throw new DpdResponseError("Expected string summary_html and dpd_html fields.");
+  }
+  if (data5.license != null && (!record2(data5.license) || ["name", "url", "attribution"].some((key3) => typeof data5.license[key3] !== "string" || !data5.license[key3].trim()))) {
+    throw new DpdResponseError("The supplied licence metadata is incomplete or malformed.");
+  }
+  return data5;
+}
 async function lookupPali({ word, limit = 5 }) {
   word = String(word ?? "").trim();
   if (!word || word.length > 100) throw new Error("Give one P\u0101li word (1\u2013100 characters).");
   const url = `${DPD}/search_json?q=${encodeURIComponent(word)}`;
   let data5;
   try {
-    data5 = await liveCache.wrap(`dpd:${word}`, () => fetchPublic(url, { retries: 2 }));
+    data5 = await liveCache.wrap(`dpd:${word}`, async () => validateDpdResponse(await fetchPublic(url, { retries: 2 })));
   } catch (error2) {
     let offline = null;
     try {
@@ -26548,9 +26560,11 @@ async function lookupPali({ word, limit = 5 }) {
     } catch {
     }
     const outage = error2?.retryable !== false;
-    const what = outage ? `dpdict.net is unreachable right now (${error2.message})` : `dpdict.net did not answer this lookup (${error2.message})`;
+    const malformed = error2 instanceof DpdResponseError;
+    const what = malformed ? `dpdict.net returned an unusable dictionary response (${error2.message})` : outage ? `dpdict.net is unreachable right now (${error2.message})` : `dpdict.net did not answer this lookup (${error2.message})`;
     if (offline) return { ...offline, note: `${what}; this answer comes from the bundled offline DPD subset (${offline.dictionary.version}), not the live site.` };
-    throw new Error(`${outage ? "Digital P\u0101\u1E37i Dictionary is unavailable right now" : "Digital P\u0101\u1E37i Dictionary did not answer this lookup"} (${error2.message}) and "${word}" is not in the bundled offline subset. Open ${DPD}/?q=${encodeURIComponent(word)} directly${outage ? " or try again shortly" : ""}.`);
+    const diagnosis = malformed ? "Digital P\u0101\u1E37i Dictionary returned an unusable response" : outage ? "Digital P\u0101\u1E37i Dictionary is unavailable right now" : "Digital P\u0101\u1E37i Dictionary did not answer this lookup";
+    throw new Error(`${diagnosis} (${error2.message}) and "${word}" is not in the bundled offline subset. Open ${DPD}/?q=${encodeURIComponent(word)} directly${outage ? " or try again shortly" : ""}.`);
   }
   const summary2 = String(data5.summary_html ?? "");
   const entries = [...summary2.matchAll(/<p\b[^>]*class=["'][^"']*summary[^"']*["'][^>]*>([^]*?)<\/p>/gi)].map((m) => plainText(m[1]));

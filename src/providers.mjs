@@ -46,22 +46,39 @@ export function cleanDpdText(html) {
   return text.split('\n').map(line => line.trim()).filter(line => line && !DPD_CHROME.test(line)).join('\n');
 }
 
+class DpdResponseError extends Error {}
+
+function validateDpdResponse(data) {
+  const record = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
+  if (!record(data) || typeof data.summary_html !== 'string' || typeof data.dpd_html !== 'string') {
+    throw new DpdResponseError('Expected string summary_html and dpd_html fields.');
+  }
+  if (data.license != null && (!record(data.license) || ['name', 'url', 'attribution'].some((key) => typeof data.license[key] !== 'string' || !data.license[key].trim()))) {
+    throw new DpdResponseError('The supplied licence metadata is incomplete or malformed.');
+  }
+  return data;
+}
+
 export async function lookupPali({ word, limit = 5 }) {
   word = String(word ?? '').trim();
   if (!word || word.length > 100) throw new Error('Give one Pāli word (1–100 characters).');
   const url = `${DPD}/search_json?q=${encodeURIComponent(word)}`;
   let data;
   try {
-    data = await liveCache.wrap(`dpd:${word}`, () => fetchPublic(url, { retries: 2 }));
+    data = await liveCache.wrap(`dpd:${word}`, async () => validateDpdResponse(await fetchPublic(url, { retries: 2 })));
   } catch (error) {
     // Outage fallback (#23): answer from the bundled DPD subset, labelled as such.
     let offline = null;
     try { offline = lookupOffline({ word, limit }); } catch { /* bundled data missing: report the outage below */ }
     // Say what actually failed: an outage (network error, timeout, 5xx, 429, broken JSON) or a refused request (other 4xx).
     const outage = error?.retryable !== false;
-    const what = outage ? `dpdict.net is unreachable right now (${error.message})` : `dpdict.net did not answer this lookup (${error.message})`;
+    const malformed = error instanceof DpdResponseError;
+    const what = malformed ? `dpdict.net returned an unusable dictionary response (${error.message})`
+      : outage ? `dpdict.net is unreachable right now (${error.message})` : `dpdict.net did not answer this lookup (${error.message})`;
     if (offline) return { ...offline, note: `${what}; this answer comes from the bundled offline DPD subset (${offline.dictionary.version}), not the live site.` };
-    throw new Error(`${outage ? 'Digital Pāḷi Dictionary is unavailable right now' : 'Digital Pāḷi Dictionary did not answer this lookup'} (${error.message}) and "${word}" is not in the bundled offline subset. Open ${DPD}/?q=${encodeURIComponent(word)} directly${outage ? ' or try again shortly' : ''}.`);
+    const diagnosis = malformed ? 'Digital Pāḷi Dictionary returned an unusable response'
+      : outage ? 'Digital Pāḷi Dictionary is unavailable right now' : 'Digital Pāḷi Dictionary did not answer this lookup';
+    throw new Error(`${diagnosis} (${error.message}) and "${word}" is not in the bundled offline subset. Open ${DPD}/?q=${encodeURIComponent(word)} directly${outage ? ' or try again shortly' : ''}.`);
   }
   const summary = String(data.summary_html ?? '');
   const entries = [...summary.matchAll(/<p\b[^>]*class=["'][^"']*summary[^"']*["'][^>]*>([^]*?)<\/p>/gi)].map((m) => plainText(m[1]));
