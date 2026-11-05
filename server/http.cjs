@@ -26724,6 +26724,15 @@ async function mapLimit(items, n, fn) {
   }));
   return out;
 }
+function englishVersion(page) {
+  return {
+    translator: page.translator,
+    translation_id: page.translation_id,
+    url: page.url,
+    ...page.requested_translation_id ? { requested_translation_id: page.requested_translation_id } : {},
+    ...page.notes?.length ? { notes: page.notes } : {}
+  };
+}
 async function verifyEnglish(text, texts, limit, fetchTranslation) {
   const q = words(englishFold(text)).slice(0, MAX_QUERY_WORDS);
   if (!q.length) throw new Error("The quotation has no words to match.");
@@ -26731,7 +26740,18 @@ async function verifyEnglish(text, texts, limit, fetchTranslation) {
   const fetched = await mapLimit(plan.pages, 6, async (p) => {
     try {
       const t = await fetchTranslation(p.unit, p.translation_id, { limit: 2e6 });
-      return { ...p, text: t.text, attribution: t.attribution, license: t.license, translator: t.translator || p.translator, url: t.url || p.url, notes: t.notes };
+      const actualId = t.translation_id || p.translation_id;
+      return {
+        ...p,
+        translation_id: actualId,
+        ...actualId !== p.translation_id ? { requested_translation_id: p.translation_id } : {},
+        text: t.text,
+        attribution: t.attribution,
+        license: t.license,
+        translator: t.translator || p.translator,
+        url: t.url || p.url,
+        notes: t.notes
+      };
     } catch (error2) {
       return { ...p, error: error2.message };
     }
@@ -26759,9 +26779,7 @@ async function verifyEnglish(text, texts, limit, fetchTranslation) {
       text_id: p.unit.id,
       citation: p.unit.acronym,
       title: p.unit.title,
-      translator: p.translator,
-      translation_id: p.translation_id,
-      url: p.url,
+      ...englishVersion(p),
       similarity: Math.round(r.sim * 100) / 100,
       matched_words: matched,
       // normalised words from the translation, for checking; read the full page at the URL
@@ -26776,8 +26794,8 @@ async function verifyEnglish(text, texts, limit, fetchTranslation) {
     scope: {
       language: "english",
       searched: `English translations linked to ${plan.label}: ${pages.length} page(s).`,
-      translations_checked: pages.map((p) => ({ citation: p.unit.acronym, translator: p.translator, translation_id: p.translation_id, url: p.url })),
-      ...failed.length ? { not_retrieved: failed.map((p) => ({ citation: p.unit.acronym, translator: p.translator, url: p.url, error: p.error })) } : {},
+      translations_checked: pages.map((p) => ({ citation: p.unit.acronym, ...englishVersion(p) })),
+      ...failed.length ? { not_retrieved: failed.map((p) => ({ citation: p.unit.acronym, translator: p.translator, translation_id: p.translation_id, url: p.url, error: p.error })) } : {},
       ...plan.withoutEnglish.length ? { no_english_linked: plan.withoutEnglish } : {},
       note: 'Only these translations were compared. Popular English wordings are often older or freer translations, and two translations of the same verse can share few words: check the P\u0101li as well (verify_quote with language "pali").'
     }
