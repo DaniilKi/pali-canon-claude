@@ -14,7 +14,7 @@ This project retrieves the VRI Pāli edition. Completion means readers can relia
 | Post-canonical Pāli | All 109 bundled books can be read from first to last segment and are always labelled `canonical: false` | The corpus check reads each whole book through `get_post_canonical`, including its continuations |
 | English | Each advertised translation link resolves to the right text; a requested translator is never silently replaced; outages are labelled | 2,540 links cover 1,823 indexed texts including inherited verse links. On the member-based denominator, `list_sources` reports 1,797 of 8,445 texts. There is no linked English Vinaya and only four Abhidhamma texts have English. Complete English coverage needs authorised sources and scholarly matching, not generated translations |
 | Other scripts | Automated round trips and VRI fixture comparisons pass; native readers approve actual output | Sinhala, Thai, Myanmar, Devanagari and Khmer have VRI fixtures. Lao and Lanna still need native-reader confirmation; see [HANDOFF](../HANDOFF.md) |
-| Packaging and sharding | Installed bundles expose the same tools and full corpus; content fingerprints match before and after any storage-only change | Run the corpus check against both builds. The separate sharding contribution `19ebaf9` is not present in this checkout and has not been integrated or verified here |
+| Packaging and sharding | Installed bundles expose the same tools and full corpus; content fingerprints match before and after any storage-only change | The parallel session reports packaging commit `f27b953`, including sharding commit `19ebaf9`, with a successful extracted-npm full-corpus audit. Neither commit is present in this checkout; that result has not been integrated or independently verified here |
 | Supported clients | Core reading and continuation work in actual Claude Desktop, Codex, Gemini and hosted clients on supported systems | Automated stdio/HTTP tests are not a substitute for real-client tests. The outstanding client and Windows checks are listed in [HANDOFF](../HANDOFF.md) |
 | Distribution | Published npm package, registry entries and any hosted endpoint install and work as documented | Accounts, publishing credentials, hosting and directory approvals remain explicit external gates; see [HANDOFF](../HANDOFF.md) |
 
@@ -50,3 +50,19 @@ Supported correction: configure and publish a cloud environment that selects `Da
 References: [GitHub REST troubleshooting](https://docs.github.com/en/rest/using-the-rest-api/troubleshooting-the-rest-api#resource-not-accessible), [create a blob](https://docs.github.com/en/rest/git/blobs#create-a-blob), [create a pull request](https://docs.github.com/en/rest/pulls/pulls#create-a-pull-request), and [cloud environment setup](https://developers.openai.com/codex/environments/cloud-environments).
 
 After access is corrected, publish the development branch and run its checks. Review and integrate the sharding contribution there, rerun `npm run check`, `npm run smoke`, `npm run evals` and the full corpus gate, compare the semantic fingerprints, and obtain independent integration review. Keep `main` and deployment unchanged until separately authorised.
+
+## Integrating the parallel packaging work
+
+The two full-corpus audits were completed independently before their results were shared. Avoid retaining redundant full-reading implementations solely because both branches have one. This branch contributes source-coverage diagnostics, thirteen corruption/continuation regression fixtures, completion criteria and development-branch gates. The other session reports validation of the *extracted npm package*, which checks a different installation boundary from this branch's original committed-server run.
+
+The checker here loads expected content through `canon.load()`, `commentary.load()` and `postcanonical.load()`; it does not open monolithic gzip data paths. It is therefore conceptually compatible with storage sharding that preserves those APIs and content. Actual compatibility remains unverified until the other commit is available.
+
+When both commits are available locally:
+
+1. Inspect both diffs and preserve the tested commits before combining them. The missing GitHub write scope and Library connection failure currently prevent supported cross-session publication/transfer.
+2. Resolve `package.json` commands, workflow changes and decision-log entries deliberately. Keep development-branch triggers and one implementation of the exhaustive reading logic, with its corruption fixtures and source-coverage report.
+3. Rebuild `server/index.cjs` and `server/http.cjs` from the combined source. Do not resolve generated bundle conflicts by selecting one branch's bundle.
+4. Keep the extracted-package check. This reader can target that same installation using `--server <extracted-package>/server/index.cjs` while taking its baseline from the combined source checkout. Preserve package-manifest, licence, tool-list and missing-shard checks from the packaging contribution as applicable after inspecting them.
+5. Compare the same-scope semantic fingerprint and counts with the baseline above; compression/shard boundaries alone must not change them. Run the combined package checks and one independent review, then retain the resulting report with the integration commit.
+
+No new exhaustive run was performed here after the parallel packaging result arrived, and no denied remote write was retried.
