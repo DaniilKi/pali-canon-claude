@@ -68,6 +68,14 @@ async function fetchOnce(url, { json, timeout }) {
         if (bytes > MAX_BYTES) throw new HttpError('Response exceeded the 6 MB limit.', 200, false);
         chunks.push(value);
       }
+    } catch (error) {
+      // Releasing a lock alone leaves an oversized download running. Cancel unread data without
+      // allowing a cancellation failure to replace the original size/network error.
+      try { await reader.cancel(); } catch {}
+      if (error instanceof HttpError) throw error;
+      // A connection may fail after fetch() has already returned its headers. Retry the whole page,
+      // never a partial body, under the same bounded policy as a connection failure before headers.
+      throw new HttpError(`${target.hostname} response body interrupted (${error.cause?.code || error.name || 'stream error'})`, 0, true);
     } finally { reader.releaseLock(); }
     const body = Buffer.concat(chunks).toString('utf8');
     if (!json) return body;

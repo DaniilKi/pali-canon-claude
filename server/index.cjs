@@ -22715,6 +22715,13 @@ async function fetchOnce(url, { json, timeout }) {
         if (bytes > MAX_BYTES) throw new HttpError("Response exceeded the 6 MB limit.", 200, false);
         chunks.push(value);
       }
+    } catch (error2) {
+      try {
+        await reader.cancel();
+      } catch {
+      }
+      if (error2 instanceof HttpError) throw error2;
+      throw new HttpError(`${target.hostname} response body interrupted (${error2.cause?.code || error2.name || "stream error"})`, 0, true);
     } finally {
       reader.releaseLock();
     }
