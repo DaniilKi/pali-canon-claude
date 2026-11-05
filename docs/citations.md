@@ -116,6 +116,8 @@ Supported native-script citations work across Pāli reading, metadata, English r
 
 For word analysis with `analyse_passage`, choose one segment reference from `get_text` (for example, `"segment":"mn10/2"`) or a VRI paragraph number (`"paragraph":105`). Giving both is an error, even if they identify the same passage. Omit both to intentionally analyse the first body segment; an empty selector is an error. The returned `segment.ref` and `segment.text` identify exactly which source passage was analysed. Dictionary glosses are not a translation.
 
+The analysis `uid` accepts the same supported native-script citations as `get_text`, with input-script and Roman-reading labels. Reuse segment references exactly as returned by `get_text`; those references and the dictionary output remain Roman.
+
 ## Two numbering systems
 
 There is no single universal numbering. In parts of the Saṃyutta and Aṅguttara Nikāyas, two systems differ:

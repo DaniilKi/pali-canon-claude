@@ -96,6 +96,7 @@ try {
   await call('resolve_reference', { reference: 'mahavamsa 3' }, (d) => { assert.equal(d.canonical, false); assert.equal(d.read_with.tool, 'get_post_canonical'); });
   await fails('resolve_reference', { reference: 'Vism p. 3' }, /PTS/);
   await call('analyse_passage', { uid: 'Dhp 183', limit: 4 }, (d) => { assert.ok(d.words.length); assert.match(JSON.stringify(d), /CC BY-NC-SA 4\.0/); });
+  await call('analyse_passage', { uid: 'MN ๑๐', limit: 1 }, (d) => { assert.equal(d.text_id, 'mn10'); assert.equal(d.input_script, 'thai'); assert.equal(d.segment.ref, 'mn10/2'); assert.ok(d.words.length); });
   if (tools.some((t) => t.name === 'paritta')) await call('paritta', { name: 'Ratana' }, (d) => { assert.equal(d.text_id, 'kp6'); assert.ok(d.segments.length); });
   // English-keyboard input (#102)
   await call('resolve_reference', { reference: 'Satipatthana Sutta' }, (d) => { assert.equal(d.id, 'mn10'); assert.equal(d.matched_by, 'name'); });

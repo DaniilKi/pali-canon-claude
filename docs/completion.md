@@ -74,3 +74,9 @@ When both commits are available locally:
 5. Compare the same-scope semantic fingerprint and counts with the baseline above; compression/shard boundaries alone must not change them. Run the combined package checks and one independent review, then retain the resulting report with the integration commit.
 
 The later complete-book feature was validated by the expanded corpus gate above. The parallel extracted-package audit has not been rerun or claimed as integrated here. No denied remote write was retried.
+
+The parallel session later reported Pāli quotation source-boundary commit `fbc9362`. It is not present in this checkout. Its `src/verify.mjs` changes need an explicit combined review and regression run with this branch's English provenance commit `9a047c0`; neither contribution establishes the combined behavior alone. No further verifier edits were made here after that report.
+
+Word analysis also accepts the existing seven-script native-citation normalization. Provider and MCP regressions compare exact source segments and DPD analyses with equivalent Roman calls, retain word continuation, and verify that normalization cannot bypass foreign/conflicting segment-reference checks. This is input compatibility, not native-reader approval of output typography.
+
+The added analysis dependency moves the existing script module earlier in esbuild's generated bundles. The large generated diff is module ordering and generated-name churn, not additional source changes. The compiled-server smoke also checks native-citation analysis. Regenerate both bundles from combined source during integration rather than manually merging generated sections.

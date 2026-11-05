@@ -17,6 +17,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as canon from './canon.mjs';
 import { resolveReference } from './sutta-names.mjs';
+import { romanizeInput, inputNote } from './script.mjs';
 
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
@@ -268,7 +269,8 @@ function pickSegment(unit, segs, { segment, paragraph }) {
  * number; `paragraph` picks by VRI paragraph instead. Words are paged with offset/limit.
  */
 export function analysePassage({ uid, segment, paragraph, offset = 0, limit = 60 } = {}) {
-  const { unit, notes } = resolveReference(String(uid ?? ''));
+  const input = romanizeInput(uid);
+  const { unit, notes } = resolveReference(input.text);
   const segs = canon.segments(unit);
   if (!segs.length) throw new Error(`${unit.acronym} has no text to analyse.`);
   const index = pickSegment(unit, segs, { segment, paragraph });
@@ -281,7 +283,7 @@ export function analysePassage({ uid, segment, paragraph, offset = 0, limit = 60
   if (segment === undefined && paragraph === undefined) outNotes.push(`No segment given: analysed the first body segment (${seg.ref}). Pass segment (e.g. "${unit.id}/${index + 1}") for another.`);
   if (unit.approximate) outNotes.push('This text is abbreviated (peyyāla) in the VRI edition; the analysis covers the words printed, not the expanded text.');
   return {
-    text_id: unit.id, citation: unit.acronym, title: unit.title,
+    text_id: unit.id, citation: unit.acronym, title: unit.title, ...inputNote(input),
     segment: { ref: seg.ref, type: seg.type, ...(seg.vri_paragraph ? { vri_paragraph: seg.vri_paragraph } : {}), text: seg.text },
     total_segments: segs.length,
     words_total: tokens.length, offset, limit, returned_tokens: page.length,
@@ -346,7 +348,7 @@ export function lookupOffline({ word, limit = 5 } = {}) {
 /** MCP registration (feature registry: src/features/index.mjs). */
 export function register({ tool, z }) {
   tool('analyse_passage', 'Word-by-word analysis of a passage of the bundled Pāli text from the Digital Pāḷi Dictionary (offline): for each word its compound or sandhi split, headword, grammar (case, number, tense), root and short meaning. Pass a citation and a segment ref from get_text (e.g. "mn10/3") or a VRI paragraph. Every possible parse is listed; dictionary glosses are not a translation. CC BY-NC-SA 4.0 notice included. Works offline.', {
-    uid: z.string().min(1).max(300).describe('Any citation get_text accepts, e.g. MN 10, SN 56.11, Dhp 183.'),
+    uid: z.string().min(1).max(300).describe('Any citation get_text accepts, e.g. MN 10, SN 56.11, Dhp 183. Supported native-script letters and digits are converted and labelled; source segment refs and dictionary output stay Roman.'),
     segment: z.union([z.string().trim().min(1).max(60), z.number().int().min(1)]).optional().describe('Segment ref from get_text such as "mn10/3", or its number (3). Give segment or paragraph, never both. Omit both for the first body segment; blank values are errors.'),
     paragraph: z.union([z.string().trim().min(1).max(20), z.number().int().min(0)]).optional().describe('VRI paragraph number instead of segment. Give at most one selector; omit both for the first body segment.'),
     offset: z.number().int().min(0).max(100000).default(0).describe('Word offset within the segment, for continuation.'),

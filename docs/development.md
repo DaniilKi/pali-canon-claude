@@ -251,6 +251,8 @@ The HTTP-only ChatGPT reader uses versioned `v2` UI resources. Widget tool error
 
 Citation input normalization is shared by `get_text`, `resolve_reference`, `get_metadata`, `get_translation`, `compare_translations` and the hosted reader. Existing supported native letters/digits are converted with `romanizeInput`; responses label `input_script` and `input_romanized`. Roman inputs receive no extra labels. This does not change the output script: metadata and English remain Roman, and the widget displays Roman Pāli. `tests/reader-script-input.test.mjs` uses handwritten citations in Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao and Lanna through MCP and the widget data function. Native-reader and signed-in browser acceptance are separate gates.
 
+`analyse_passage` also applies this existing native-citation normalization before its citation/name resolver, and returns the same input labels. Source segment references from `get_text`, Pāli surface words and dictionary analyses remain Roman. `tests/analysis-selection.test.mjs` compares source segments and DPD results with equivalent Roman calls in all seven scripts and checks that native input cannot bypass the exact selector safeguards. Name matching, dictionary content and licensing are unchanged.
+
 ## Troubleshooting
 
 | Symptom | Cause and fix |

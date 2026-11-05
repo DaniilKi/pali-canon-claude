@@ -5,6 +5,16 @@ import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import { createServer } from '../src/server.mjs';
 import { analysePassage } from '../src/analyse.mjs';
 
+const nativeCitations = [
+  ['thai', 'MN ๑๐', 'mn10', 'MN 10'],
+  ['myanmar', 'MN ၁၀', 'mn10', 'MN 10'],
+  ['devanagari', 'MN १०', 'mn10', 'MN 10'],
+  ['khmer', 'MN ១០', 'mn10', 'MN 10'],
+  ['lao', 'MN ໑໐', 'mn10', 'MN 10'],
+  ['lanna', 'MN ᪑᪐', 'mn10', 'MN 10'],
+  ['sinhala', 'ධම්මපද 183', 'dhp183', 'dhammapada 183'],
+];
+
 test('a paragraph cannot bypass a conflicting segment reference from another text', () => {
   assert.throws(() => analysePassage({ uid: 'MN 10', segment: 'mn11/2', paragraph: 105, limit: 1 }), /either segment or paragraph.*not both/i);
 });
@@ -52,5 +62,47 @@ test('MCP rejects ambiguous and blank selectors and allows an intentional defaul
     assert.equal(result.structuredContent.segment.ref, 'mn10/2');
     assert.match(result.structuredContent.notes.join(' '), /No segment given/);
     assert.equal(result.structuredContent.license.name, 'CC BY-NC-SA 4.0');
+  } finally { await client.close(); }
+});
+
+test('native citations select exactly the same source and DPD analyses as Roman citations', () => {
+  for (const [script, uid, id, roman] of nativeCitations) {
+    const expected = analysePassage({ uid: id, limit: 4 });
+    const actual = analysePassage({ uid, limit: 4 });
+    assert.equal(actual.text_id, id);
+    assert.equal(actual.input_script, script);
+    assert.equal(actual.input_romanized, roman);
+    assert.deepEqual(actual.segment, expected.segment);
+    assert.deepEqual(actual.words, expected.words);
+    assert.equal(actual.license.name, 'CC BY-NC-SA 4.0');
+    assert.ok(!Object.hasOwn(expected, 'input_script'));
+  }
+});
+
+test('native citation normalization preserves exact segment checks and word continuation', () => {
+  const uid = 'MN ๑๐';
+  assert.throws(() => analysePassage({ uid, segment: 'mn11/2' }), /belongs to mn11/);
+  assert.throws(() => analysePassage({ uid, segment: 2, paragraph: 105 }), /not both/);
+  assert.throws(() => analysePassage({ uid: 'MN ๙๙๙' }), /999/);
+  const first = analysePassage({ uid, segment: 'mn10/2', limit: 2 });
+  const next = analysePassage({ uid, segment: first.segment.ref, offset: first.next_offset, limit: 2 });
+  assert.equal(next.segment.ref, first.segment.ref);
+  assert.equal(next.offset, 2);
+  assert.equal(next.input_script, 'thai');
+});
+
+test('the MCP analysis tool accepts the same handwritten native citations as get_text', async () => {
+  const [a, b] = InMemoryTransport.createLinkedPair();
+  const client = new Client({ name: 'analysis-native-input-fixture', version: '1' });
+  await Promise.all([createServer().connect(b), client.connect(a)]);
+  try {
+    for (const [script, uid, id] of nativeCitations) {
+      const read = await client.callTool({ name: 'get_text', arguments: { uid, limit: 1 } });
+      const result = await client.callTool({ name: 'analyse_passage', arguments: { uid, limit: 1 } });
+      assert.ok(!result.isError, JSON.stringify(result.content));
+      assert.equal(result.structuredContent.text_id, read.structuredContent.text_id);
+      assert.equal(result.structuredContent.text_id, id);
+      assert.equal(result.structuredContent.input_script, script);
+    }
   } finally { await client.close(); }
 });
