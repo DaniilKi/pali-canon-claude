@@ -223,8 +223,19 @@ export function parseCitation(input) {
   if (!collection) throw new CitationError(`Unknown collection "${name}". Known: DN, MN, SN, AN, Kp, Dhp, Ud, Iti, Snp (Sn), Vv, Pv, Thag, Thig, Ap, Bv, Cp, Ja, Mnd, Cnd, Ps, Mil, Ne, Pe, Vinaya (Pj, Ss, Pc, Kd, Pvr…) and Abhidhamma books.`);
   const nums = numbers(m[2]);
   if (!nums) throw new CitationError(`Could not read the number in "${raw}".`);
-  if (typeof nums.end === 'number' && nums.end < nums.path[nums.path.length - 1]) throw new CitationError(`"${raw}" is a reversed range.`);
+  if (nums.end !== null) rangeEndPath({ ...nums, raw });
   return { kind: 'id', collection, path: nums.path, end: nums.end, raw };
+}
+
+/** Expand a range's final endpoint without guessing its depth or accepting a reversed full path. */
+export function rangeEndPath(c) {
+  const end = Array.isArray(c.end) ? c.end : [...c.path.slice(0, -1), c.end];
+  if (end.length !== c.path.length) throw new CitationError(`"${c.raw}" range endpoints must use the same number of levels.`);
+  for (let i = 0; i < end.length; i += 1) {
+    if (end[i] < c.path[i]) throw new CitationError(`"${c.raw}" is a reversed range.`);
+    if (end[i] > c.path[i]) break;
+  }
+  return end;
 }
 
 /** Build the standard text ID for an id-kind citation (mn10, sn56.11, an1.296, dhp1-20). */

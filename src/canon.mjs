@@ -8,7 +8,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseCitation, citationId, CitationError } from './citations.mjs';
+import { parseCitation, citationId, rangeEndPath, CitationError } from './citations.mjs';
 import { EDITIONS, editionIndex, editionLabel, lookupEditionPage, nextUnit, textsOnPage, editionPagesFor } from './editions.mjs';
 
 let here;
@@ -239,7 +239,12 @@ export function resolve(reference) {
     // "MN 10-12" or "Dhp 5-7": a span that is not itself a text → return its first text.
     const first = citationId({ ...c, end: null });
     hit = lookupId(first);
-    if (hit) notes.push(`${reference} spans several texts; showing the first, ${hit.unit.acronym}. Request the others separately.`);
+    if (hit) {
+      const last = citationId({ ...c, path: rangeEndPath(c), end: null });
+      if (!lookupId(last)) throw new CitationError(`${reference}: final range endpoint "${last}" is not in the canon index. Check the range with browse_canon.`);
+      if (last !== first) notes.push(`${reference} spans several texts; showing the first, ${hit.unit.acronym}. Request the others separately.`);
+      else notes.push(`${reference} has identical endpoints; showing ${hit.unit.acronym}.`);
+    }
   }
   if (!hit && c.kind === 'id' && c.collection === 'snp' && c.path.length === 1) {
     throw new CitationError(`Snp ${c.path[0]} looks like a verse number. Cite the Sutta Nipāta by chapter and sutta, e.g. Snp 1.8 (Mettasutta).`);

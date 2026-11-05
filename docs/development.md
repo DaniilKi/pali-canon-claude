@@ -309,3 +309,9 @@ The Pāli verifier builds a small table of token boundaries for citable source r
 `find_citations` gives Thai, Myanmar and VRI printed-page references priority over embedded sutta, verse or PTS forms. It retains edition names, optional volume/page words and recognised parenthetical source-book qualifiers, and reports `scheme: "edition"`. Invalid Roman edition volumes and numeric ranges stay edition candidates and return the direct resolver's error; they cannot silently become a different citation scheme.
 
 The scanner remains pattern-based. It takes known source titles for book-qualifier detection; it does not swallow ordinary surrounding parentheses or infer an unknown book. Check forms it does not recognise directly with `resolve_reference`. Tests compare every displayed marked edition label with direct page resolution, preserve Unicode UTF-16 offsets and check surrounding prose. The installed-package audit repeats representative valid, ambiguous and invalid page references offline.
+
+## Validating ordinary citation ranges
+
+Before falling back from an unrecorded range to its first text, canonical resolution checks the final endpoint in the same source index. The parser compares complete multi-level paths and rejects incompatible numbering depths. Recorded groups and members resolved through those groups retain their existing behavior. Identical endpoints do not claim to span several texts.
+
+`tests/citation-range-validation.test.mjs` checks missing endpoints, full-path ordering, known source groups, scanner errors and MCP resolution/retrieval. The installed-package audit repeats the invalid and valid cases. These checks validate endpoints; they do not expand abbreviations, assemble a range into a new text or assert intermediate-number coverage.

@@ -122,6 +122,8 @@ What the tool does:
 
 The edition prints some texts as one block: AN 1.296–305, Dhp 1–20 (a chapter), SN 46.143–152. You can ask for the whole block or any one member ("AN 1.300", "Dhp 5"); the tool tells you the member is part of a larger block.
 
+An ordinary range that is not recorded as a single source group, such as `MN 10–12`, returns its first text with an explicit note. Both endpoints must exist in the bundled index, at the same numbering depth, and the full end path must not precede the start. A missing endpoint is an error even when the first text exists. This validates the endpoints; it does not retrieve the whole range or establish that every intermediate number is separately indexed.
+
 ## Abbreviated texts (peyyāla)
 
 The Pāli often abbreviates repeated passages with "…pe…" ("and so on"). Where the edition does not print a text in full, the tool marks it **approximate** and points to the passage where the abbreviation occurs. There are 266 such texts, mostly in SN and AN repetition series, the Paṭṭhāna, and Vinaya rules recited together.
