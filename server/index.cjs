@@ -23008,6 +23008,9 @@ function available(unit) {
   }));
 }
 async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
+  if (offset > 0 && !/^(ati|dt|aj):/.test(which || "")) {
+    throw new Error("Translation continuation requires the exact translation_id returned by the previous page. Use its continue_with arguments; a default or translator name can select a different version after an outage.");
+  }
   const { links, via } = linksFor(unit);
   if (!links.length) {
     throw new Error(`No English translation is linked for ${unit.acronym}. Read the P\u0101li with get_text, or see https://suttacentral.net/${unit.id} for other translations.`);
@@ -23031,6 +23034,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
     const outage = !error2.failures || error2.failures.some((f) => !/HTTP 404/.test(f));
     const sameTranslator = outage && link.source === "dhammatalks" && links.find((l) => l.source === "ati" && /thanissaro/i.test(l.translator || ""));
     if (!sameTranslator) throw new Error(`Could not retrieve the translation (${error2.message}). The P\u0101li text is still available offline with get_text; try again later or choose another translation_id.`);
+    if (offset > 0) throw new Error(`Could not continue the requested translation version (${error2.message}). Its character offset cannot be transferred to the earlier Access to Insight version. Retry this translation_id later, or start another translation at offset 0. The P\u0101li text is still available offline with get_text.`);
     try {
       result = await fetchAti(sameTranslator.path);
     } catch {
@@ -23053,7 +23057,8 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
   const { parts_read: partsRead, parts_total: partsTotal, ...rest } = result;
   const text = rest.text;
   const complete = partsRead === void 0 || partsRead === partsTotal;
-  if (!complete) notes.push(`This translation is spread over ${partsTotal} pages; ${partsRead} of them ${partsRead === 1 ? "was" : "were"} read for this request. Ask again with next_offset to continue.`);
+  const nextOffset = offset + limit < text.length ? offset + limit : null;
+  if (!complete) notes.push(`This translation is spread over ${partsTotal} pages; ${partsRead} of them ${partsRead === 1 ? "was" : "were"} read for this request. Use continue_with to continue with this exact translation_id and next_offset.`);
   return {
     text_id: unit.id,
     citation: unit.acronym,
@@ -23064,7 +23069,11 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
     offset,
     limit,
     total_characters: complete ? text.length : null,
-    next_offset: offset + limit < text.length ? offset + limit : null,
+    next_offset: nextOffset,
+    continue_with: nextOffset === null ? null : {
+      name: "get_translation",
+      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit }
+    },
     match: link.match,
     notes
   };
@@ -30693,8 +30702,8 @@ function createServer() {
   }, { network: true });
   tool("get_translation", "Read an English translation of a text (\u1E6Ch\u0101nissaro Bhikkhu on dhammatalks.org, Access to Insight translators, or \u0100nandajoti Bhikkhu on Ancient Buddhist Texts), with attribution, license and numbering notes. Falls back to official mirrors if a site is down.", {
     uid: citation,
-    translation: external_exports.string().max(200).optional().describe('translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), a translator name, or omit for the default.'),
-    offset: external_exports.number().int().min(0).max(2e6).default(0),
+    translation: external_exports.string().max(200).optional().describe('At offset 0: translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), a translator name, or omit for the default. For continuation, use the exact translation_id returned by the previous page.'),
+    offset: external_exports.number().int().min(0).max(2e6).default(0).describe("Character offset. For nonzero offsets use the previous result's continue_with arguments, including its exact translation_id; offsets cannot transfer between translation versions."),
     limit: external_exports.number().int().min(500).max(3e4).default(12e3).describe("Characters per page.")
   }, async ({ uid, translation: translation2, offset, limit }) => {
     const { unit } = resolve(uid);

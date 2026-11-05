@@ -127,6 +127,9 @@ export function available(unit) {
 
 /** Fetch one translation of a text. `which` is a translation_id, a translator name fragment, or omitted for the default. */
 export async function translation(unit, which, { offset = 0, limit = 12000 } = {}) {
+  if (offset > 0 && !/^(ati|dt|aj):/.test(which || '')) {
+    throw new Error('Translation continuation requires the exact translation_id returned by the previous page. Use its continue_with arguments; a default or translator name can select a different version after an outage.');
+  }
   const { links, via } = linksFor(unit);
   if (!links.length) {
     throw new Error(`No English translation is linked for ${unit.acronym}. Read the Pāli with get_text, or see https://suttacentral.net/${unit.id} for other translations.`);
@@ -155,6 +158,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000 } = {
     const outage = !error.failures || error.failures.some((f) => !/HTTP 404/.test(f));
     const sameTranslator = outage && link.source === 'dhammatalks' && links.find((l) => l.source === 'ati' && /thanissaro/i.test(l.translator || ''));
     if (!sameTranslator) throw new Error(`Could not retrieve the translation (${error.message}). The Pāli text is still available offline with get_text; try again later or choose another translation_id.`);
+    if (offset > 0) throw new Error(`Could not continue the requested translation version (${error.message}). Its character offset cannot be transferred to the earlier Access to Insight version. Retry this translation_id later, or start another translation at offset 0. The Pāli text is still available offline with get_text.`);
     try {
       result = await fetchAti(sameTranslator.path);
     } catch {
@@ -177,10 +181,16 @@ export async function translation(unit, which, { offset = 0, limit = 12000 } = {
   const { parts_read: partsRead, parts_total: partsTotal, ...rest } = result;
   const text = rest.text;
   const complete = partsRead === undefined || partsRead === partsTotal;
-  if (!complete) notes.push(`This translation is spread over ${partsTotal} pages; ${partsRead} of them ${partsRead === 1 ? 'was' : 'were'} read for this request. Ask again with next_offset to continue.`);
+  const nextOffset = offset + limit < text.length ? offset + limit : null;
+  if (!complete) notes.push(`This translation is spread over ${partsTotal} pages; ${partsRead} of them ${partsRead === 1 ? 'was' : 'were'} read for this request. Use continue_with to continue with this exact translation_id and next_offset.`);
   return {
     text_id: unit.id, citation: unit.acronym, translator: link.translator, translation_id: translationId(link),
     ...rest, text: text.slice(offset, offset + limit), offset, limit, total_characters: complete ? text.length : null,
-    next_offset: offset + limit < text.length ? offset + limit : null, match: link.match, notes,
+    next_offset: nextOffset,
+    continue_with: nextOffset === null ? null : {
+      name: 'get_translation',
+      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit },
+    },
+    match: link.match, notes,
   };
 }

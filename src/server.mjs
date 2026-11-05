@@ -159,8 +159,8 @@ export function createServer() {
 
   tool('get_translation', 'Read an English translation of a text (Ṭhānissaro Bhikkhu on dhammatalks.org, Access to Insight translators, or Ānandajoti Bhikkhu on Ancient Buddhist Texts), with attribution, license and numbering notes. Falls back to official mirrors if a site is down.', {
     uid: citation,
-    translation: z.string().max(200).optional().describe('translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), a translator name, or omit for the default.'),
-    offset: z.number().int().min(0).max(2000000).default(0),
+    translation: z.string().max(200).optional().describe('At offset 0: translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), a translator name, or omit for the default. For continuation, use the exact translation_id returned by the previous page.'),
+    offset: z.number().int().min(0).max(2000000).default(0).describe('Character offset. For nonzero offsets use the previous result\'s continue_with arguments, including its exact translation_id; offsets cannot transfer between translation versions.'),
     limit: z.number().int().min(500).max(30000).default(12000).describe('Characters per page.'),
   }, async ({ uid, translation, offset, limit }) => {
     const { unit } = canon.resolve(uid);

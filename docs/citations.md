@@ -110,6 +110,8 @@ Book responses carry `selection: "source_book"`, a `book_id`, the VRI filename, 
 
 For the separate post-canonical search, `search_post_canonical` accepts whole-book filters from the `get_post_canonical` catalogue, or aliases such as `vism` and `abhidh-s`. Unknown entries produce an error asking for a real book ID; they are not reported as missing text. A chapter citation such as `mahavamsa 3` belongs in `get_post_canonical`, not in the search's `books` filter. Omit that filter or use `[]` to search all post-canonical books (subject to the optional section filter).
 
+English translations use character offsets, separate from Pāli segment offsets. Continue with the English result's `continue_with` tool name and arguments. This pins its exact `translation_id`, including when the first page came from a labelled outage fallback. A nonzero English offset with a default or translator name is rejected; an unavailable requested version cannot transfer its offset to a different version. You can retry later, or begin another version at offset 0. The same continuation is included when English is attached to `get_text`.
+
 ## Two numbering systems
 
 There is no single universal numbering. In parts of the Saṃyutta and Aṅguttara Nikāyas, two systems differ:
