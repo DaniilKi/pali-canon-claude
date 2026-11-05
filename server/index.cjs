@@ -22741,11 +22741,11 @@ async function fetchPublic(url, { json = true, retries = 2, timeout = 2e4 } = {}
   }
   throw last;
 }
-async function fetchMirrors(urls, { json = false, timeout = 15e3 } = {}) {
+async function fetchMirrors(urls, { json = false, timeout = 15e3, mirrorRetries = 0 } = {}) {
   const failures = [];
   for (const [index3, url] of urls.entries()) {
     try {
-      return { body: await fetchPublic(url, { json, retries: index3 === 0 ? 1 : 0, timeout }), url, mirror: index3 };
+      return { body: await fetchPublic(url, { json, retries: index3 === 0 ? 1 : mirrorRetries, timeout }), url, mirror: index3 };
     } catch (error3) {
       failures.push(`${new URL(url).hostname}: ${error3.message}`);
       if (error3.status === 404 && index3 === urls.length - 1) break;
@@ -23895,8 +23895,17 @@ function anchors(fragment) {
 var atiIndexCache = null;
 async function atiIndexes() {
   if (atiIndexCache) return atiIndexCache;
-  const [sutta, subject] = await Promise.all(["/index-sutta", "/index-subject"].map((p) => fetchMirrors(atiMirrors(p))));
-  atiIndexCache = { sutta: sutta.body, subject: subject.body, mirror: Math.max(sutta.mirror, subject.mirror) };
+  const paths = ["/index-sutta", "/index-subject"];
+  const results = await Promise.allSettled(paths.map((p) => fetchMirrors(atiMirrors(p), { mirrorRetries: 1 })));
+  const failures = results.flatMap((r, i) => r.status === "rejected" ? [`${paths[i]}: ${r.reason.message}`] : []);
+  if (failures.length) throw new Error(failures.join("\n"));
+  const [sutta, subject] = results.map((r) => r.value);
+  atiIndexCache = {
+    sutta: sutta.body,
+    subject: subject.body,
+    mirror: Math.max(sutta.mirror, subject.mirror),
+    sources: { sutta: sutta.url, subject: subject.url }
+  };
   return atiIndexCache;
 }
 async function searchAti({ query, limit = 10 }) {
@@ -23907,7 +23916,8 @@ async function searchAti({ query, limit = 10 }) {
   try {
     pages = await atiIndexes();
   } catch (error2) {
-    throw new Error(`Access to Insight indexes are unreachable on all mirrors (${error2.message}).`);
+    throw new Error(`Could not load the Access to Insight search indexes. Failed indexes and mirror errors:
+${error2.message}`);
   }
   const matches = [];
   const collect = (fragment, index3, heading = "") => {
@@ -23931,7 +23941,8 @@ async function searchAti({ query, limit = 10 }) {
     results: unique.slice(0, limit),
     total_index_matches: unique.length,
     omitted: Math.max(0, unique.length - limit),
-    ...pages.mirror ? { note: "accesstoinsight.org was unavailable; indexes were read from its official GitHub mirror." } : {},
+    index_sources: pages.sources,
+    ...pages.mirror ? { note: "Some Access to Insight indexes were read from archive mirrors; index_sources lists the URL used for each index." } : {},
     attribution: "Access to Insight, Barre Center for Buddhist Studies; translators and authors retain their copyrights."
   };
 }

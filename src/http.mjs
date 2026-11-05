@@ -90,11 +90,11 @@ export async function fetchPublic(url, { json = true, retries = 2, timeout = 200
 }
 
 /** Try mirrors in order; returns { body, url, mirror } from the first that answers. */
-export async function fetchMirrors(urls, { json = false, timeout = 15000 } = {}) {
+export async function fetchMirrors(urls, { json = false, timeout = 15000, mirrorRetries = 0 } = {}) {
   const failures = [];
   for (const [index, url] of urls.entries()) {
     try {
-      return { body: await fetchPublic(url, { json, retries: index === 0 ? 1 : 0, timeout }), url, mirror: index };
+      return { body: await fetchPublic(url, { json, retries: index === 0 ? 1 : mirrorRetries, timeout }), url, mirror: index };
     } catch (error) {
       failures.push(`${new URL(url).hostname}: ${error.message}`);
       if (error.status === 404 && index === urls.length - 1) break;

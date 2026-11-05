@@ -35,7 +35,9 @@ for (const [hosts, label, total = false] of scenarios) {
     console.log(' Pāli text        :', r.err ? 'ERROR' : `ok, ${r.d.total_segments} segments (offline)`);
     expect(label, 'offline Pāli text', r, { online: false });
     r = await call('search_access_to_insight', { query: 'metta', limit: 2 });
-    console.log(' ATI search       :', r.err ? 'ERROR ' + r.d.error.slice(0, 120) : `ok ${r.d.results.length} results ${r.d.note || ''}`);
+    // Keep every index/mirror error: the old 120-character prefix hid the CDN failure in #107.
+    console.log(' ATI search       :', r.err ? 'ERROR ' + r.d.error : `ok ${r.d.results.length} results ${r.d.note || ''}`);
+    if (!r.err) console.log(' ATI index sources:', JSON.stringify(r.d.index_sources));
     expect(label, 'ATI search', r, { total });
     r = await call('lookup_pali', { word: 'metta' });
     console.log(' dictionary       :', r.err ? 'ERROR ' + r.d.error.slice(0, 140) : `ok${r.d.offline ? ` (offline DPD ${r.d.dictionary.version}, ${r.d.entries.length} entries)` : ''}`);

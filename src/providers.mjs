@@ -109,8 +109,17 @@ let atiIndexCache = null;
 
 async function atiIndexes() {
   if (atiIndexCache) return atiIndexCache;
-  const [sutta, subject] = await Promise.all(['/index-sutta', '/index-subject'].map((p) => fetchMirrors(atiMirrors(p))));
-  atiIndexCache = { sutta: sutta.body, subject: subject.body, mirror: Math.max(sutta.mirror, subject.mirror) };
+  const paths = ['/index-sutta', '/index-subject'];
+  // When the site and GitHub raw are down, the CDN is the only remaining host.
+  // Give transient failures there one retry, rather than abandoning the search immediately.
+  const results = await Promise.allSettled(paths.map((p) => fetchMirrors(atiMirrors(p), { mirrorRetries: 1 })));
+  const failures = results.flatMap((r, i) => r.status === 'rejected' ? [`${paths[i]}: ${r.reason.message}`] : []);
+  if (failures.length) throw new Error(failures.join('\n'));
+  const [sutta, subject] = results.map((r) => r.value);
+  atiIndexCache = {
+    sutta: sutta.body, subject: subject.body, mirror: Math.max(sutta.mirror, subject.mirror),
+    sources: { sutta: sutta.url, subject: subject.url },
+  };
   return atiIndexCache;
 }
 
@@ -119,7 +128,7 @@ export async function searchAti({ query, limit = 10 }) {
   if (!query) throw new Error('Give a search query.');
   const terms = foldPali(query).split(/[^a-z0-9]+/).filter(Boolean);
   let pages;
-  try { pages = await atiIndexes(); } catch (error) { throw new Error(`Access to Insight indexes are unreachable on all mirrors (${error.message}).`); }
+  try { pages = await atiIndexes(); } catch (error) { throw new Error(`Could not load the Access to Insight search indexes. Failed indexes and mirror errors:\n${error.message}`); }
   const matches = [];
   const collect = (fragment, index, heading = '') => {
     const context = plainText(`${heading} ${fragment}`);
@@ -139,7 +148,8 @@ export async function searchAti({ query, limit = 10 }) {
   return {
     query, scope: 'Access to Insight sutta and subject indexes (titles and topics, not full text).',
     results: unique.slice(0, limit), total_index_matches: unique.length, omitted: Math.max(0, unique.length - limit),
-    ...(pages.mirror ? { note: 'accesstoinsight.org was unavailable; indexes were read from its official GitHub mirror.' } : {}),
+    index_sources: pages.sources,
+    ...(pages.mirror ? { note: 'Some Access to Insight indexes were read from archive mirrors; index_sources lists the URL used for each index.' } : {}),
     attribution: 'Access to Insight, Barre Center for Buddhist Studies; translators and authors retain their copyrights.',
   };
 }
