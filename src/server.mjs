@@ -207,7 +207,7 @@ export function createServer() {
     return out;
   });
 
-  tool('browse_canon', 'Browse the Tipiṭaka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja…) or a section (sn56, an4, kv1). Works offline.', {
+  tool('browse_canon', 'Browse the Tipiṭaka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja…), a section (sn56, an4, kv1), an exact text ID (mn1) or a recorded group ID (dhp1-20). Exact IDs exclude similarly numbered siblings; groups list their recorded members. Works offline.', {
     node: z.string().max(60).default('canon'),
     offset: z.number().int().min(0).max(100000).default(0),
     limit: z.number().int().min(1).max(200).default(60),

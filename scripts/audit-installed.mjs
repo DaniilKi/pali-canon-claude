@@ -26,7 +26,7 @@ let stderr = '';
 const counts = { canonical_texts: 0, canonical_segments: 0, canonical_pages: 0,
   commentary_texts: 0, commentary_unaligned_texts: 0, commentary_segments: 0, commentary_pages: 0,
   commentary_books: 0, commentary_book_segments: 0, commentary_book_pages: 0, commentary_search_checks: 0,
-  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0 };
+  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0, browse_scope_checks: 0, browse_group_pages: 0 };
 try {
   if (reportAt >= 0) await writeFile(resolve(process.argv[reportAt + 1]), '{"status":"running"}\n');
   const serverDirectory = serverAt >= 0 ? resolve(process.argv[serverAt + 1]) : join(root, 'server');
@@ -196,6 +196,28 @@ require('node:module').syncBuiltinESMExports();\n`);
     assert.equal(result.spelling_note, undefined);
     assert.equal(result.english_words_ignored, undefined);
     counts.quote_search_checks += 1;
+  }
+  for (const node of ['mn1', 'mn15', 'sn1.1', 'pli-tv-bu-vb-pc1']) {
+    const result = await call('browse_canon', { node });
+    assert.deepEqual(result.items.map((item) => item.id), [node], 'exact browse IDs exclude numbered siblings');
+    counts.browse_scope_checks += 1;
+  }
+  const groupMembers = canon.load().byId.get('dhp1-20').members;
+  const browsedMembers = [];
+  let groupOffset = 0;
+  do {
+    const result = await call('browse_canon', { node: 'dhp1-20', offset: groupOffset, limit: 3 });
+    assert.equal(result.total, groupMembers.length);
+    browsedMembers.push(...result.items.map((item) => item.id));
+    counts.browse_group_pages += 1;
+    groupOffset = result.next_offset;
+  } while (groupOffset !== null);
+  assert.deepEqual(browsedMembers, groupMembers, 'recorded group members are reachable exactly once');
+  counts.browse_scope_checks += 1;
+  for (const node of ['s', 'sn1.100000']) {
+    const result = await client.callTool({ name: 'browse_canon', arguments: { node } });
+    assert.equal(result.isError, true, 'partial/unknown browse IDs cannot select unrelated texts');
+    counts.browse_scope_checks += 1;
   }
   assert.ok(!stderr.includes('UNEXPECTED_NETWORK_ATTEMPT'), 'every checked operation must work without attempting network access');
   const summary = { ...counts, approximate_canonical_texts: canon.load().canon.units.filter((unit) => unit.approximate).length, network_attempts: 0, failures: 0 };

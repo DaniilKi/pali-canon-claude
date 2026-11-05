@@ -364,6 +364,18 @@ export function describe(u, notes = []) {
 
 // ---- search ---------------------------------------------------------------
 
+/** Match recorded members and actual identifier descendants, never numbered siblings or partial names. */
+function scopePredicate(d, scope) {
+  const parent = scope && !/\d$/.test(scope);
+  const members = new Set(d.byId.get(scope)?.members || []);
+  return (unit) => {
+    if (!scope || unit.collection === scope || unit.id === scope || members.has(unit.id)) return true;
+    if (!unit.id.startsWith(scope)) return false;
+    const next = unit.id[scope.length];
+    return next === '.' || (parent && (next === '-' || /\d/.test(next || '')));
+  };
+}
+
 function buildSearch() {
   const d = load();
   const owner = d.canon.books.map((b) => new Array(b.blocks.length).fill(null));
@@ -397,16 +409,7 @@ function terms(query) {
 export function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const d = load();
   const filter = collection ? fold(collection).replace(/\s+/g, '') : null;
-  const parent = filter && !/\d$/.test(filter);
-  const members = new Set(d.byId.get(filter)?.members || []);
-  const okCollection = (unit) => {
-    if (!filter || unit.collection === filter || unit.id === filter || members.has(unit.id)) return true;
-    if (!unit.id.startsWith(filter)) return false;
-    const next = unit.id[filter.length];
-    // Numbered siblings (sn1 vs sn10, mn1 vs mn10) are not descendants.
-    // Dots separate numbered levels; hyphens and a first digit follow named levels.
-    return next === '.' || (parent && (next === '-' || /\d/.test(next || '')));
-  };
+  const okCollection = scopePredicate(d, filter);
   if (collection && (!filter || !d.canon.units.some(okCollection))) {
     throw new Error(`Unknown canonical search scope "${collection}". Use browse_canon to list collection and section IDs.`);
   }
@@ -467,9 +470,8 @@ export function browse(node = 'canon', { offset = 0, limit = 60 } = {}) {
     }
     return { node: key, name: COLLECTION_NAMES[key], note: 'Open a section ID to list its texts.', ...page([...sections.values()]) };
   }
-  let members = units.filter((u) => (u.collection === key || sectionOf(u.id) === key) && u.kind !== 'range');
-  if (!members.length) members = units.filter((u) => u.id.startsWith(`${key}.`) && u.kind !== 'range');
-  if (!members.length) members = units.filter((u) => u.id.startsWith(key) && u.kind !== 'range');
+  const inScope = scopePredicate(d, key);
+  const members = units.filter((u) => u.kind !== 'range' && inScope(u));
   if (!members.length) throw new Error(`Unknown browse node "${node}". Start with "canon", "sutta", "vinaya", "abhidhamma" or a collection such as mn, sn, sn56, an4, dhp.`);
   members.sort((a, b) => a.book - b.book || a.start - b.start);
   const collection = members[0].collection;

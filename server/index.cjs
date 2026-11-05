@@ -22624,6 +22624,16 @@ function describe(u, notes = []) {
     first_line: blocks.slice(u.start, u.end).find((b) => !HEADING.has(b[0]) && !(b[0] === "centre" && CENTRE_HEADING.test(b[2])) && b[2])?.[2]?.slice(0, 160) || null
   };
 }
+function scopePredicate(d, scope) {
+  const parent = scope && !/\d$/.test(scope);
+  const members = new Set(d.byId.get(scope)?.members || []);
+  return (unit) => {
+    if (!scope || unit.collection === scope || unit.id === scope || members.has(unit.id)) return true;
+    if (!unit.id.startsWith(scope)) return false;
+    const next = unit.id[scope.length];
+    return next === "." || parent && (next === "-" || /\d/.test(next || ""));
+  };
+}
 function buildSearch() {
   const d = load();
   const owner = d.canon.books.map((b) => new Array(b.blocks.length).fill(null));
@@ -22646,14 +22656,7 @@ function terms(query) {
 function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const d = load();
   const filter = collection ? fold3(collection).replace(/\s+/g, "") : null;
-  const parent = filter && !/\d$/.test(filter);
-  const members = new Set(d.byId.get(filter)?.members || []);
-  const okCollection = (unit) => {
-    if (!filter || unit.collection === filter || unit.id === filter || members.has(unit.id)) return true;
-    if (!unit.id.startsWith(filter)) return false;
-    const next = unit.id[filter.length];
-    return next === "." || parent && (next === "-" || /\d/.test(next || ""));
-  };
+  const okCollection = scopePredicate(d, filter);
   if (collection && (!filter || !d.canon.units.some(okCollection))) {
     throw new Error(`Unknown canonical search scope "${collection}". Use browse_canon to list collection and section IDs.`);
   }
@@ -22719,9 +22722,8 @@ function browse(node = "canon", { offset = 0, limit = 60 } = {}) {
     }
     return { node: key3, name: COLLECTION_NAMES[key3], note: "Open a section ID to list its texts.", ...page([...sections.values()]) };
   }
-  let members = units.filter((u) => (u.collection === key3 || sectionOf(u.id) === key3) && u.kind !== "range");
-  if (!members.length) members = units.filter((u) => u.id.startsWith(`${key3}.`) && u.kind !== "range");
-  if (!members.length) members = units.filter((u) => u.id.startsWith(key3) && u.kind !== "range");
+  const inScope = scopePredicate(d, key3);
+  const members = units.filter((u) => u.kind !== "range" && inScope(u));
   if (!members.length) throw new Error(`Unknown browse node "${node}". Start with "canon", "sutta", "vinaya", "abhidhamma" or a collection such as mn, sn, sn56, an4, dhp.`);
   members.sort((a, b) => a.book - b.book || a.start - b.start);
   const collection = members[0].collection;
@@ -30942,7 +30944,7 @@ function createServer() {
     if (out.post_canonical && !out.post_canonical.error) out.post_canonical = localizePostCanonical(out.post_canonical, script);
     return out;
   });
-  tool("browse_canon", 'Browse the Tipi\u1E6Daka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja\u2026) or a section (sn56, an4, kv1). Works offline.', {
+  tool("browse_canon", 'Browse the Tipi\u1E6Daka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja\u2026), a section (sn56, an4, kv1), an exact text ID (mn1) or a recorded group ID (dhp1-20). Exact IDs exclude similarly numbered siblings; groups list their recorded members. Works offline.', {
     node: external_exports.string().max(60).default("canon"),
     offset: external_exports.number().int().min(0).max(1e5).default(0),
     limit: external_exports.number().int().min(1).max(200).default(60)

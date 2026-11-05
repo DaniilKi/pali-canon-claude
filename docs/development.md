@@ -291,3 +291,9 @@ Title-only searches can now reach every indexed match. They previously repeated 
 Straight double quotes (`"sati buddha"`) and paired curly double quotes (`“sati buddha”`) select the same ordered phrase in canonical, commentary and post-canonical search. Whitespace inside the phrase remains flexible. Quotes do not change the source text or join separate passages. Apostrophes and curly single quotes remain ordinary Pāli punctuation.
 
 When literal Pāli search finds no quoted phrase, spelling retries and the English-question keyword fallback do not discard its phrase constraint. English glossary expansion remains a separate labelled option; use `english: "off"` for literal Pāli phrase search. Unmatched double quotes conservatively disable loose retries, as straight quotes already did.
+
+## Browsing exact identifiers and recorded groups
+
+`browse_canon` uses the same identifier boundaries as canonical search. An exact text ID such as `mn1` or `sn1.1` lists that text without admitting MN 10 or SN 1.10. Named parent IDs such as `pli-tv-bu-vb-pc` still list their descendants. Arbitrary partial names such as `s` return an error.
+
+A recorded group ID such as `dhp1-20` lists its existing members with ordinary pagination. Group membership comes from the bundled index; arbitrary citation ranges are not parsed here. Existing browsing rules for abbreviated records and collection/section menus are retained. Regression checks cover every complete text ID and every recorded group; the isolated installed-package audit repeats exact-ID, invalid-ID and group-pagination checks.
