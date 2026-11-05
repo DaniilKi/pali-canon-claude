@@ -243,6 +243,8 @@ The HTTP server explicitly sets a 65-second keep-alive idle timeout and 66-secon
 
 The HTTP-only ChatGPT reader uses versioned `v2` UI resources. Widget tool errors include matching JSON text and `structuredContent`; the embedded page clears old text/links on error via either bridge, including Apps SDK full-result metadata. English continuation uses `english.continue_with` (`name` and `arguments`), with a pinned translation ID for any positive character offset. The reader refuses to transfer an offset to an outage fallback version. This protection is specific to `read_passage_widget`; the plain `get_translation` API is unchanged. UI totals may be unknown for a partially read multi-page translation and are not displayed as numbers until known. Behaviour tests are in `tests/widget-rendering.test.mjs` (actual script in a minimal DOM) and `tests/widget-continuation.test.mjs` (mock sources), alongside the widget HTTP tests. Real host/browser acceptance remains a separate gate.
 
+`search_post_canonical` validates every `books` filter before searching. Use whole-book IDs from `get_post_canonical`'s catalogue, recognised VRI stems/titles or whole-work aliases such as `vism` and `abhidh-s`. A typo or invalid member of a mixed selection is an error, not an empty/partial search. Chapter/paragraph citations are not book filters. Omitting `books` or passing `[]` retains the unrestricted meaning; valid filters with no matching text still return zero results. These rules do not change canonical search scope. `tests/postcanonical-scope.test.mjs` exercises all catalogue IDs and the MCP error/result distinction.
+
 ## Troubleshooting
 
 | Symptom | Cause and fix |

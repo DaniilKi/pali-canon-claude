@@ -31227,7 +31227,9 @@ async function search2(query, { limit = 10, offset = 0, books, section } = {}) {
     const f = fold6(b);
     if (VISM.test(f) && !f.replace(VISM, "$1")) return VISM_BOOKS;
     if (ABHS.test(f) && !f.replace(ABHS, "$1")) return [ABHS_BOOK];
-    return [splitKey(d, f)?.book.id || b];
+    const book = keyed(d, f);
+    if (!book) throw new CitationError2(`Unknown post-canonical book filter "${b}". Choose whole-book IDs from get_post_canonical (omit citation to list books), or use a work alias such as "vism" or "abhidh-s". Chapter/paragraph citations are not book filters.`);
+    return [book.id];
   })) : null;
   const sec = section ? { tika: "\u1E6C\u012Bk\u0101", anna: "A\xF1\xF1a" }[fold6(section)] : null;
   const pool = d.books.filter((b) => (!want || want.has(b.id)) && (!sec || b.section === sec));
@@ -31293,7 +31295,7 @@ function register15({ tool, z }) {
   });
   tool("search_post_canonical", 'Search the full P\u0101li text of the post-canonical books (Visuddhimagga, Abhidhammatthasa\u1E45gaha, sub-commentaries/\u1E6C\u012Bk\u0101 and other VRI A\xF1\xF1a books): diacritics optional, all words must appear, "quoted phrases" allowed. Not the canon: results are labelled canonical: false. Works offline.', {
     query: z.string().trim().min(1).max(300),
-    books: z.array(z.string().max(80)).max(20).optional().describe('Limit to book ids or works, e.g. ["vism"], ["abhidh-s"], ["mulapannasa-tika"].'),
+    books: z.array(z.string().max(80)).max(20).optional().describe('Limit to whole-book IDs from get_post_canonical or work aliases, e.g. ["vism"], ["abhidh-s"], ["mulapannasa-tika"]. Unknown entries are errors; chapter/paragraph citations are not book filters. Omit or use [] for no book restriction.'),
     section: z.enum(["tika", "anna"]).optional().describe("Limit to the VRI \u1E6C\u012Bk\u0101 or A\xF1\xF1a section."),
     limit: z.number().int().min(1).max(50).default(10),
     offset: z.number().int().min(0).max(1e5).default(0)

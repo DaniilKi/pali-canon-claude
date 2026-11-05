@@ -108,6 +108,8 @@ This reads the Pācittiyapāḷi from its opening, including the two introductor
 
 Book responses carry `selection: "source_book"`, a `book_id`, the VRI filename, pinned source version, attribution and terms. Their segment references begin `vri-book:`, and are source-file reading positions, not standard sutta/rule citations. They have no individual `text_id`. Cite the source file and the VRI paragraph or printed page shown; use `uid` when you need a standard citation. Book mode includes the source's front matter and keeps abbreviations as printed, without reconstructing them.
 
+For the separate post-canonical search, `search_post_canonical` accepts whole-book filters from the `get_post_canonical` catalogue, or aliases such as `vism` and `abhidh-s`. Unknown entries produce an error asking for a real book ID; they are not reported as missing text. A chapter citation such as `mahavamsa 3` belongs in `get_post_canonical`, not in the search's `books` filter. Omit that filter or use `[]` to search all post-canonical books (subject to the optional section filter).
+
 ## Two numbering systems
 
 There is no single universal numbering. In parts of the Saṃyutta and Aṅguttara Nikāyas, two systems differ:
