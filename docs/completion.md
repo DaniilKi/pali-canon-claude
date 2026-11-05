@@ -16,6 +16,7 @@ This project retrieves the VRI Pāli edition. Completion means readers can relia
 | Other scripts | Automated round trips and VRI fixture comparisons pass; native readers approve actual output | Sinhala, Thai, Myanmar, Devanagari and Khmer have VRI fixtures. Lao and Lanna still need native-reader confirmation; see [HANDOFF](../HANDOFF.md) |
 | Packaging and sharding | Installed bundles expose the same tools and full corpus; content fingerprints match before and after any storage-only change | The parallel session reports packaging commit `f27b953`, including sharding commit `19ebaf9`, with a successful extracted-npm full-corpus audit. Neither commit is present in this checkout; that result has not been integrated or independently verified here |
 | Supported clients | Core reading and continuation work in actual Claude Desktop, Codex, Gemini and hosted clients on supported systems | Automated stdio/HTTP tests are not a substitute for real-client tests. The outstanding client and Windows checks are listed in [HANDOFF](../HANDOFF.md) |
+| HTTP reliability | Health-counter labels remain bounded and do not retain arbitrary request strings; SDK clients can connect, read, continue and reuse connections across normal cold-work pauses | Regressions exercise invalid/prototype-like names, widget counts, SDK reading and a delayed pooled request. The server uses a finite 65-second keep-alive window. Signed-in app and deployment acceptance remain outstanding |
 | Distribution | Published npm package, registry entries and any hosted endpoint install and work as documented | Accounts, publishing credentials, hosting and directory approvals remain explicit external gates; see [HANDOFF](../HANDOFF.md) |
 
 ## Run the exhaustive reading check
@@ -40,7 +41,7 @@ The manual `Read the full bundled corpus` workflow runs this gate on pushes to `
 
 ## Development branch and access
 
-`dev/pali-reliability` is a local development branch based on ATI resilience commit `d08325e`. It preserves that completed change and adds the exhaustive corpus gate. It has not been pushed. Do not describe another session's contribution as integrated until its commit and final combined tests have been verified.
+`dev/pali-reliability` is a local development branch based on ATI resilience commit `d08325e`. It preserves that completed change and adds the exhaustive corpus gate, complete root-book reading and HTTP reliability fixes. It has not been pushed. Do not describe another session's contribution as integrated until its commit and final combined tests have been verified.
 
 The observed publishing failures are separate from local repository quality:
 
@@ -67,4 +68,4 @@ When both commits are available locally:
 4. Keep the extracted-package check. This reader can target that same installation using `--server <extracted-package>/server/index.cjs` while taking its baseline from the combined source checkout. Preserve package-manifest, licence, tool-list and missing-shard checks from the packaging contribution as applicable after inspecting them.
 5. Compare the same-scope semantic fingerprint and counts with the baseline above; compression/shard boundaries alone must not change them. Run the combined package checks and one independent review, then retain the resulting report with the integration commit.
 
-No new exhaustive run was performed here after the parallel packaging result arrived, and no denied remote write was retried.
+The later complete-book feature was validated by the expanded corpus gate above. The parallel extracted-package audit has not been rerun or claimed as integrated here. No denied remote write was retried.

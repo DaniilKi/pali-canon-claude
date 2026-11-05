@@ -33157,6 +33157,7 @@ var WIDGET_HTML = `<!doctype html>
 
 // src/http-server.mjs
 var MAX_BODY = 1024 * 1024;
+var MCP_METHODS = new Set([...ClientRequestSchema.options, ...ClientNotificationSchema.options].map((schema) => schema.shape.method.value));
 var CORS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
@@ -33262,13 +33263,22 @@ function createHttpServer({
 } = {}) {
   const limiter = new RateLimiter({ perMinute: rateLimitPerMinute });
   const started = Date.now();
-  const counters = { requests: 0, mcp_requests: 0, rate_limited: 0, errors: 0, by_status: {}, mcp_methods: {}, tool_calls: {} };
+  const toolNames = /* @__PURE__ */ new Set([...Object.keys(TOOL_TITLES), ...chatgptWidget ? [WIDGET_TOOL] : []]);
+  const counters = {
+    requests: 0,
+    mcp_requests: 0,
+    rate_limited: 0,
+    errors: 0,
+    by_status: /* @__PURE__ */ Object.create(null),
+    mcp_methods: /* @__PURE__ */ Object.create(null),
+    tool_calls: /* @__PURE__ */ Object.create(null)
+  };
   const bump = (bucket, key3) => {
     bucket[key3] = (bucket[key3] || 0) + 1;
   };
   const sweeper = setInterval(() => limiter.sweep(), 6e4);
   sweeper.unref();
-  const http = (0, import_node_http3.createServer)(async (req, res) => {
+  const http = (0, import_node_http3.createServer)({ keepAliveTimeout: 65e3, headersTimeout: 66e3 }, async (req, res) => {
     counters.requests += 1;
     res.on("finish", () => bump(counters.by_status, `${Math.floor(res.statusCode / 100)}xx`));
     const path = (req.url || "/").split("?")[0];
@@ -33331,8 +33341,10 @@ function createHttpServer({
       }
       for (const message of Array.isArray(body) ? body : [body]) {
         if (!message || typeof message.method !== "string") continue;
-        bump(counters.mcp_methods, message.method.slice(0, 40));
-        if (message.method === "tools/call" && typeof message.params?.name === "string") bump(counters.tool_calls, message.params.name.slice(0, 40));
+        bump(counters.mcp_methods, MCP_METHODS.has(message.method) ? message.method : "other");
+        if (message.method === "tools/call" && typeof message.params?.name === "string") {
+          bump(counters.tool_calls, toolNames.has(message.params.name) ? message.params.name : "other");
+        }
       }
       for (const [key3, value] of Object.entries(CORS)) res.setHeader(key3, value);
       const server = createServer2();

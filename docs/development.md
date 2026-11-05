@@ -237,6 +237,10 @@ For a complete offline reading gate through the built server, run `npm run corpu
 
 `.github/workflows/npx.yml` packs the npm tarball and starts it with `npx` on Linux, macOS and Windows. `release.yml`, `docker.yml` and `deploy.yml` run on release tags (see Releasing).
 
+The HTTP health counters use only method labels derived from the installed SDK request/notification schemas and tool labels from `TOOL_TITLES` (plus the widget tool when enabled). Unrecognised names accumulate under `other`; request-supplied names never create new permanent labels. Counter dictionaries have no object prototype. `tests/http-client.test.mjs` checks bounded cardinality and data retention under invalid requests, prototype-like names, conditional widget counts and an actual SDK HTTP client's connection/reading/continuation sequence. Counters count attempts, including invalid requests; they are not a count of successful tool results.
+
+The HTTP server explicitly sets a 65-second keep-alive idle timeout and 66-second header deadline. A pooled-connection regression simulates a 6.1-second event-loop pause: the old default reset the next request before it reached the handler. The longer finite window preserves that connection without changing tool execution or search logic. First-use work still takes time; the setting does not improve its CPU latency. The existing `scripts/loadtest.mjs` exercises the compiled HTTP server with concurrent SDK clients.
+
 ## Troubleshooting
 
 | Symptom | Cause and fix |

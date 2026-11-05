@@ -22,6 +22,9 @@ It needs no login, because everything it serves is public scripture and openly l
   passages or words looked up, IP addresses or browser details.
 - It keeps only **running totals** in memory: how many requests, how many of each tool, how many were
   turned away by the rate limit. You can see them at `/healthz`. They reset when the server restarts.
+- Method/tool labels come from the MCP protocol and the configured tool list. Unrecognised names are
+  grouped under `other`, so arbitrary request strings are not retained or published as health-counter keys,
+  and those counter dictionaries stay bounded even when invalid requests keep arriving.
 - To stop one visitor from overloading the server, it remembers each visitor's IP address **in memory
   for one minute** to count their requests (120 a minute by default). Nothing is written to disk.
 - English translations and dictionary entries fetched from their websites are kept **in memory for up
@@ -164,6 +167,10 @@ the in-memory cache.
 - `npm run build` bundles both `server/index.cjs` (stdio) and `server/http.cjs` (HTTP).
 - CORS allows any origin (`*`) with the MCP headers, since the server is public, read-only and uses no cookies.
 - Request bodies are limited to 1 MB.
+- HTTP keep-alive connections have a 65-second idle window and a 66-second header deadline. This
+  avoids reaping a pooled connection during the several-second event-loop pause of a first-use index
+  load. These are connection/header settings, not the tool execution timeout. See the
+  [Node HTTP timeout documentation](https://nodejs.org/api/http.html#serverkeepalivetimeout).
 - `.github/workflows/docker.yml` builds the multi-arch image to `ghcr.io/daniilki/pali-canon-mcp` on `v*`
   tags and on demand, and smoke-tests it on pull requests. `.github/workflows/deploy.yml` deploys to
   Fly.io only when the `FLY_API_TOKEN` secret exists.

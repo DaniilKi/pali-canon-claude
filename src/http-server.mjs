@@ -11,12 +11,15 @@
  */
 import { createServer as createHttp } from 'node:http';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
-import { createServer as createMcpServer, VERSION } from './server.mjs';
+import { ClientRequestSchema, ClientNotificationSchema } from '@modelcontextprotocol/sdk/types.js';
+import { createServer as createMcpServer, VERSION, TOOL_TITLES } from './server.mjs';
 import { liveCache } from './cache.mjs';
 import { load } from './canon.mjs';
-import { registerChatgptWidget } from './chatgpt-widget.mjs';
+import { registerChatgptWidget, WIDGET_TOOL } from './chatgpt-widget.mjs';
 
 const MAX_BODY = 1024 * 1024;
+// Derive protocol labels from the installed SDK; arbitrary request strings must not become permanent keys.
+const MCP_METHODS = new Set([...ClientRequestSchema.options, ...ClientNotificationSchema.options].map((schema) => schema.shape.method.value));
 const CORS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
@@ -134,13 +137,19 @@ export function createHttpServer({
 } = {}) {
   const limiter = new RateLimiter({ perMinute: rateLimitPerMinute });
   const started = Date.now();
-  const counters = { requests: 0, mcp_requests: 0, rate_limited: 0, errors: 0, by_status: {}, mcp_methods: {}, tool_calls: {} };
+  const toolNames = new Set([...Object.keys(TOOL_TITLES), ...(chatgptWidget ? [WIDGET_TOOL] : [])]);
+  const counters = {
+    requests: 0, mcp_requests: 0, rate_limited: 0, errors: 0,
+    by_status: Object.create(null), mcp_methods: Object.create(null), tool_calls: Object.create(null),
+  };
   const bump = (bucket, key) => { bucket[key] = (bucket[key] || 0) + 1; };
 
   const sweeper = setInterval(() => limiter.sweep(), 60000);
   sweeper.unref();
 
-  const http = createHttp(async (req, res) => {
+  // First-use indexes can occupy the event loop beyond Node 20/22's short default idle timeout.
+  // Keep pooled client connections alive across that pause; the header deadline remains finite.
+  const http = createHttp({ keepAliveTimeout: 65000, headersTimeout: 66000 }, async (req, res) => {
     counters.requests += 1;
     res.on('finish', () => bump(counters.by_status, `${Math.floor(res.statusCode / 100)}xx`));
     const path = (req.url || '/').split('?')[0];
@@ -192,8 +201,10 @@ export function createHttpServer({
       }
       for (const message of Array.isArray(body) ? body : [body]) {
         if (!message || typeof message.method !== 'string') continue;
-        bump(counters.mcp_methods, message.method.slice(0, 40));
-        if (message.method === 'tools/call' && typeof message.params?.name === 'string') bump(counters.tool_calls, message.params.name.slice(0, 40));
+        bump(counters.mcp_methods, MCP_METHODS.has(message.method) ? message.method : 'other');
+        if (message.method === 'tools/call' && typeof message.params?.name === 'string') {
+          bump(counters.tool_calls, toolNames.has(message.params.name) ? message.params.name : 'other');
+        }
       }
 
       for (const [key, value] of Object.entries(CORS)) res.setHeader(key, value);
