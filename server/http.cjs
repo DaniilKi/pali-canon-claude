@@ -24777,7 +24777,8 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const wanted = groups?.length ? groups.map((g) => g.map((w) => searchFold(w, fold3))) : terms(query).map((w) => [w]);
   if (!wanted.length) throw new Error("Search needs at least one word of two or more letters.");
   const has = (text) => wanted.every((alts) => alts.some((w) => text.includes(w)));
-  const titleHits = s.titles.filter(({ u, text }) => okCollection(u) && has(text)).slice(0, 20).map(({ u }) => unitSummary(u));
+  const matchingTitles = s.titles.filter(({ u, text }) => okCollection(u) && has(text));
+  const titleHits = matchingTitles.slice(offset, offset + limit).map(({ u }) => unitSummary(u));
   const hits = [];
   const seen = /* @__PURE__ */ new Set();
   let total = 0;
@@ -24803,12 +24804,14 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
     query,
     searched: "Full P\u0101li text of the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition (diacritics optional), text titles and English translation titles.",
     title_matches: titleHits,
+    total_title_matches: matchingTitles.length,
+    title_next_offset: limit > 0 && offset + limit < matchingTitles.length ? offset + limit : null,
     results: hits,
     total_texts_matched: total,
     offset,
     limit,
-    next_offset: offset + limit < total ? offset + limit : null,
-    tip: total === 0 && !titleHits.length ? 'Search P\u0101li words (e.g. "satipatthana", "anapanassati") or an English title word. For English topics also try search_access_to_insight.' : void 0
+    next_offset: limit > 0 && offset + limit < total ? offset + limit : null,
+    tip: total === 0 && !matchingTitles.length ? 'Search P\u0101li words (e.g. "satipatthana", "anapanassati") or an English title word. For English topics also try search_access_to_insight.' : void 0
   };
 }
 function browse(node = "canon", { offset = 0, limit = 60 } = {}) {
@@ -32737,7 +32740,7 @@ function variantSearch(query, base, opts) {
   }
   if (!changed.length) return null;
   const r = search(query, { ...opts, groups });
-  if (r.total_texts_matched <= base.total_texts_matched && r.title_matches.length <= base.title_matches.length) return null;
+  if (r.total_texts_matched <= base.total_texts_matched && r.total_title_matches <= base.total_title_matches) return null;
   const desc = changed.map((c) => `"${c.word}" (${c.canon_spellings.length ? c.canon_spellings.join(", ") : c.also_searched.join(", ")})`).join("; ");
   return {
     ...r,
@@ -32760,7 +32763,16 @@ function searchWithInput(query, { collection, limit = 10, offset = 0, english: e
     const exp = expandEnglish(query, { maxTerms: MAX_EXPANSION_TERMS });
     if (!exp) {
       if (english2 === "only") {
-        result = { ...search(n.text, { ...opts, limit: 0 }), results: [], total_texts_matched: 0, next_offset: null };
+        result = {
+          ...search(n.text, { ...opts, limit: 0 }),
+          limit,
+          results: [],
+          total_texts_matched: 0,
+          next_offset: null,
+          title_matches: [],
+          total_title_matches: 0,
+          title_next_offset: null
+        };
         result.expanded_from_english = { found: false, note: "No word of the query is in the glossary (DPD English index); nothing was expanded." };
       }
     } else {
@@ -32783,7 +32795,15 @@ function searchWithInput(query, { collection, limit = 10, offset = 0, english: e
         note: 'The English was looked up in the glossary and the P\u0101li text was searched for these terms. They are dictionary glosses, not translations; check each passage. Turn this off with english: "off".'
       };
       if (!result || !result.total_texts_matched) {
-        result = { ...r, query, title_matches: result?.title_matches?.length ? result.title_matches : r.title_matches, tip: void 0 };
+        const titleSource = result?.total_title_matches ? result : r;
+        result = {
+          ...r,
+          query,
+          title_matches: titleSource.title_matches,
+          total_title_matches: titleSource.total_title_matches,
+          title_next_offset: titleSource.title_next_offset,
+          tip: void 0
+        };
         if (english2 !== "only") label.original_search = "The words as typed were also searched: they are not in the P\u0101li text (title matches, if any, are kept).";
       } else {
         result = { ...result, english_expansion_results: { results: r.results, total_texts_matched: r.total_texts_matched, next_offset: r.next_offset } };
@@ -33023,7 +33043,7 @@ function createServer2() {
       guidance: ok < 2 ? `Only ${ok} English translation could be retrieved; compare against the P\u0101li instead, or see https://suttacentral.net/${unit.id}.` : "Compare wording against the P\u0101li segments; distinguish translation choices from textual differences."
     };
   }, { network: true });
-  tool("search_texts", 'Search the full P\u0101li text of the Tipi\u1E6Daka (diacritics optional; all words must appear; "quoted phrases" allowed), text titles, and English translation titles. Works offline. P\u0101li typed on an English keyboard (samyutta, sanyutta, Velthuis sa.myutta, Harvard-Kyoto saMyutta) is understood and labelled; an English query (e.g. "mindfulness of breathing") is expanded into P\u0101li terms from the glossary, labelled expanded_from_english. The query may be written in any supported script; set script for titles and excerpts in that script.', {
+  tool("search_texts", 'Search the full P\u0101li text of the Tipi\u1E6Daka (diacritics optional; all words must appear; "quoted phrases" allowed), text titles, and English translation titles. Title matches have total_title_matches and title_next_offset; use offset and limit to page them. next_offset continues P\u0101li-body results independently. Works offline. P\u0101li typed on an English keyboard (samyutta, sanyutta, Velthuis sa.myutta, Harvard-Kyoto saMyutta) is understood and labelled; an English query (e.g. "mindfulness of breathing") is expanded into P\u0101li terms from the glossary, labelled expanded_from_english. The query may be written in any supported script; set script for titles and excerpts in that script.', {
     query: external_exports.string().trim().min(1).max(300),
     collection: external_exports.string().max(30).optional().describe("Limit to a collection or section, e.g. mn, sn, sn56, an4, dhp, vinaya."),
     limit: external_exports.number().int().min(1).max(50).default(10),

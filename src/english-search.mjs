@@ -32,7 +32,7 @@ function variantSearch(query, base, opts) {
   }
   if (!changed.length) return null;
   const r = canon.search(query, { ...opts, groups });
-  if (r.total_texts_matched <= base.total_texts_matched && r.title_matches.length <= base.title_matches.length) return null;
+  if (r.total_texts_matched <= base.total_texts_matched && r.total_title_matches <= base.total_title_matches) return null;
   const desc = changed.map((c) => `"${c.word}" (${c.canon_spellings.length ? c.canon_spellings.join(', ') : c.also_searched.join(', ')})`).join('; ');
   return {
     ...r, query: base.query,
@@ -57,7 +57,8 @@ export function searchWithInput(query, { collection, limit = 10, offset = 0, eng
     const exp = expandEnglish(query, { maxTerms: MAX_EXPANSION_TERMS });
     if (!exp) {
       if (english === 'only') {
-        result = { ...canon.search(n.text, { ...opts, limit: 0 }), results: [], total_texts_matched: 0, next_offset: null };
+        result = { ...canon.search(n.text, { ...opts, limit: 0 }), limit, results: [], total_texts_matched: 0, next_offset: null,
+          title_matches: [], total_title_matches: 0, title_next_offset: null };
         result.expanded_from_english = { found: false, note: 'No word of the query is in the glossary (DPD English index); nothing was expanded.' };
       }
     } else {
@@ -80,7 +81,11 @@ export function searchWithInput(query, { collection, limit = 10, offset = 0, eng
         note: 'The English was looked up in the glossary and the Pāli text was searched for these terms. They are dictionary glosses, not translations; check each passage. Turn this off with english: "off".',
       };
       if (!result || !result.total_texts_matched) {
-        result = { ...r, query, title_matches: result?.title_matches?.length ? result.title_matches : r.title_matches, tip: undefined };
+        // Choose a title stream by its total count, not whether this particular page is empty.
+        const titleSource = result?.total_title_matches ? result : r;
+        result = { ...r, query, title_matches: titleSource.title_matches,
+          total_title_matches: titleSource.total_title_matches, title_next_offset: titleSource.title_next_offset,
+          tip: undefined };
         if (english !== 'only') label.original_search = 'The words as typed were also searched: they are not in the Pāli text (title matches, if any, are kept).';
       } else {
         result = { ...result, english_expansion_results: { results: r.results, total_texts_matched: r.total_texts_matched, next_offset: r.next_offset } };

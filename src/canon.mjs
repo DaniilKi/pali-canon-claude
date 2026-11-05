@@ -416,8 +416,8 @@ export function search(query, { collection, limit = 10, offset = 0, groups } = {
   const wanted = groups?.length ? groups.map((g) => g.map((w) => searchFold(w, fold))) : terms(query).map((w) => [w]);
   if (!wanted.length) throw new Error('Search needs at least one word of two or more letters.');
   const has = (text) => wanted.every((alts) => alts.some((w) => text.includes(w)));
-  const titleHits = s.titles.filter(({ u, text }) => okCollection(u) && has(text))
-    .slice(0, 20).map(({ u }) => unitSummary(u));
+  const matchingTitles = s.titles.filter(({ u, text }) => okCollection(u) && has(text));
+  const titleHits = matchingTitles.slice(offset, offset + limit).map(({ u }) => unitSummary(u));
   const hits = [];
   const seen = new Set();
   let total = 0;
@@ -438,9 +438,11 @@ export function search(query, { collection, limit = 10, offset = 0, groups } = {
   }
   return {
     query, searched: 'Full Pāli text of the VRI Chaṭṭha Saṅgāyana edition (diacritics optional), text titles and English translation titles.',
-    title_matches: titleHits, results: hits, total_texts_matched: total, offset, limit,
-    next_offset: offset + limit < total ? offset + limit : null,
-    tip: total === 0 && !titleHits.length ? 'Search Pāli words (e.g. "satipatthana", "anapanassati") or an English title word. For English topics also try search_access_to_insight.' : undefined,
+    title_matches: titleHits, total_title_matches: matchingTitles.length,
+    title_next_offset: limit > 0 && offset + limit < matchingTitles.length ? offset + limit : null,
+    results: hits, total_texts_matched: total, offset, limit,
+    next_offset: limit > 0 && offset + limit < total ? offset + limit : null,
+    tip: total === 0 && !matchingTitles.length ? 'Search Pāli words (e.g. "satipatthana", "anapanassati") or an English title word. For English topics also try search_access_to_insight.' : undefined,
   };
 }
 

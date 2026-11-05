@@ -26,7 +26,7 @@ let stderr = '';
 const counts = { canonical_texts: 0, canonical_segments: 0, canonical_pages: 0,
   commentary_texts: 0, commentary_unaligned_texts: 0, commentary_segments: 0, commentary_pages: 0,
   commentary_books: 0, commentary_book_segments: 0, commentary_book_pages: 0, commentary_search_checks: 0,
-  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0 };
+  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0 };
 try {
   if (reportAt >= 0) await writeFile(resolve(process.argv[reportAt + 1]), '{"status":"running"}\n');
   const serverDirectory = serverAt >= 0 ? resolve(process.argv[serverAt + 1]) : join(root, 'server');
@@ -148,6 +148,37 @@ require('node:module').syncBuiltinESMExports();\n`);
   assert.equal(invalidScope.isError, true, 'unknown scopes must be rejected, not reported as source absence');
   assert.match(invalidScope.content[0].text, /Unknown canonical search scope/);
   counts.search_scope_checks += 1;
+  const expectedTitles = canon.search('discourse', { limit: 10000 }).title_matches.map((hit) => hit.id);
+  const returnedTitles = [];
+  let titleOffset = 0;
+  do {
+    const result = await call('search_texts', { query: 'discourse', english: 'off', limit: 7, offset: titleOffset });
+    assert.equal(result.total_title_matches, expectedTitles.length);
+    assert.equal(result.total_texts_matched, 0);
+    assert.equal(result.next_offset, null, 'title-only continuation is separate from body continuation');
+    assert.ok(result.title_matches.length <= 7);
+    assert.equal(result.title_next_offset, titleOffset + 7 < expectedTitles.length ? titleOffset + 7 : null);
+    returnedTitles.push(...result.title_matches.map((hit) => hit.id));
+    counts.title_search_pages += 1;
+    titleOffset = result.title_next_offset;
+  } while (titleOffset !== null);
+  assert.deepEqual(returnedTitles, expectedTitles, 'every title match is reachable exactly once');
+  counts.title_search_matches = returnedTitles.length;
+  counts.title_search_checks += 1;
+  const literalTitles = canon.search('mindfulness', { limit: 10000 }).title_matches.map((hit) => hit.id);
+  for (const offset of [0, literalTitles.length]) {
+    const result = await call('search_texts', { query: 'mindfulness', english: 'auto', limit: 5, offset });
+    assert.equal(result.total_title_matches, literalTitles.length);
+    assert.deepEqual(result.title_matches.map((hit) => hit.id), literalTitles.slice(offset, offset + 5));
+    counts.title_search_checks += 1;
+  }
+  const noExpansion = await call('search_texts', { query: '"12.15"', english: 'only', limit: 5 });
+  assert.equal(noExpansion.expanded_from_english.found, false);
+  assert.equal(noExpansion.total_title_matches, 0);
+  assert.deepEqual(noExpansion.title_matches, []);
+  assert.equal(noExpansion.title_next_offset, null);
+  assert.equal(noExpansion.limit, 5);
+  counts.title_search_checks += 1;
   assert.ok(!stderr.includes('UNEXPECTED_NETWORK_ATTEMPT'), 'every checked operation must work without attempting network access');
   const summary = { ...counts, approximate_canonical_texts: canon.load().canon.units.filter((unit) => unit.approximate).length, network_attempts: 0, failures: 0 };
   if (reportAt >= 0) {
