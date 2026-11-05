@@ -25,7 +25,7 @@ The hosted server gains one extra tool and its page when the setting `CHATGPT_WI
 | Part | Value |
 |---|---|
 | Tool | `read_passage_widget` (read-only; fetches English live, so `openWorldHint: true`) |
-| Inputs | `uid` (an individual Roman-script citation or source link), `translation`, `english` (true/false), `offset` and `limit` (Pāli segments), `english_offset` (English characters) |
+| Inputs | `uid` (an individual citation in a supported script, or source link), `translation`, `english` (true/false), `offset` and `limit` (Pāli segments), `english_offset` (English characters). Native input is labelled; the widget displays Roman Pāli and unchanged English |
 | Returns | Pāli segments with VRI paragraph and PTS page markers, VRI attribution and licence; one English translation with translator, source link, attribution and licence; numbering notes; a SuttaCentral link (link only) |
 | Page (MCP Apps standard) | `ui://pali-canon/reader-v2.html`, type `text/html;profile=mcp-app`, linked by `_meta.ui.resourceUri` |
 | Page (Apps SDK alias) | `ui://pali-canon/reader-v2.skybridge.html`, type `text/html+skybridge`, linked by `_meta["openai/outputTemplate"]` |

@@ -16,6 +16,7 @@
 import { z } from 'zod';
 import * as canon from './canon.mjs';
 import * as english from './english.mjs';
+import { romanizeInput, inputNote } from './script.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
 export const WIDGET_VERSION = 'v2';
@@ -52,13 +53,14 @@ export const TOOL_META = {
 
 /** Data for the widget: Pāli segments (VRI) plus one English translation, each with its attribution. */
 export async function readPassage({ uid, translation, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6000 }) {
-  const { unit, notes } = canon.resolve(uid);
+  const input = romanizeInput(uid);
+  const { unit, notes } = canon.resolve(input.text);
   const described = canon.describe(unit, notes);
   const all = canon.segments(unit);
   const page = all.slice(offset, offset + limit);
   const vri = canon.source();
   const result = {
-    text_id: unit.id,
+    text_id: unit.id, ...inputNote(input),
     citation: unit.acronym,
     title: unit.title || null,
     collection: described.collection,
@@ -114,7 +116,7 @@ export function registerChatgptWidget(server) {
   }
   server.registerTool(WIDGET_TOOL, {
     title: 'Read a passage (Pāli and English)',
-    description: 'Show an individual text in a reading view: Pāli (VRI) and one English translation, with citation, PTS page, translator, attribution and licence. Use when the user wants to read a sutta or passage. Accepts individual Roman-script citations and source links. The Pāli works offline; English is fetched live. For English continuation use the exact english.continue_with arguments from the previous result.',
+    description: 'Show an individual text in a reading view: Pāli (VRI) and one English translation, with citation, PTS page, translator, attribution and licence. Use when the user wants to read a sutta or passage. Accepts individual citations in supported scripts and source links; displayed text stays Roman. The Pāli works offline; English is fetched live. For English continuation use the exact english.continue_with arguments from the previous result.',
     inputSchema: {
       uid: z.string().min(1).max(300).describe('Any citation: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, a PTS page such as M i 55, or a suttacentral.net / accesstoinsight.org / dhammatalks.org link.'),
       translation: z.string().max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or a translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),

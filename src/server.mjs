@@ -5,7 +5,7 @@ import * as canon from './canon.mjs';
 import * as english from './english.mjs';
 import * as providers from './providers.mjs';
 import * as features from './features/index.mjs';
-import { SCRIPT_CHOICES, SCRIPT_DESCRIPTION, romanizeInput, localizeText, localizeSearch, localizeDescribe, localizeCommentary, localizePostCanonical } from './script.mjs';
+import { SCRIPT_CHOICES, SCRIPT_DESCRIPTION, romanizeInput, inputNote, localizeText, localizeSearch, localizeDescribe, localizeCommentary, localizePostCanonical } from './script.mjs';
 import * as variantsMod from './variants.mjs';
 import * as commentaryModule from './commentary.mjs';
 import * as postcanonical from './postcanonical.mjs';
@@ -106,8 +106,9 @@ export function createServer() {
   tool('get_metadata', 'Details of one text: title, collection, PTS range, VRI book and paragraphs, contained texts, linked English translations (with translation_id), and a SuttaCentral link for parallels. Works offline.', {
     uid: citation,
   }, ({ uid }) => {
-    const { unit, notes } = canon.resolve(uid);
-    return canon.describe(unit, notes);
+    const input = romanizeInput(uid);
+    const { unit, notes } = canon.resolve(input.text);
+    return localizeDescribe(canon.describe(unit, notes), undefined, input);
   });
 
   tool('get_text', 'Read Pāli from the VRI edition: give uid for a sutta/section, or book for a complete source book including its front matter (IDs from browse_canon node "books"). Give exactly one of uid and book. Long texts are paginated by segment, with VRI paragraphs, PTS and Thai/Myanmar/VRI page breaks and optional raw/structured variants. With uid, optionally add English (translation: "default" or a translation_id from get_metadata) or aligned commentary. The Pāli works offline. Set script for Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao or Lanna (transliterated from VRI Roman); uid may also be typed in those scripts.', {
@@ -163,8 +164,9 @@ export function createServer() {
     offset: z.number().int().min(0).max(2000000).default(0).describe('Character offset. For nonzero offsets use the previous result\'s continue_with arguments, including its exact translation_id; offsets cannot transfer between translation versions.'),
     limit: z.number().int().min(500).max(30000).default(12000).describe('Characters per page.'),
   }, async ({ uid, translation, offset, limit }) => {
-    const { unit } = canon.resolve(uid);
-    return english.translation(unit, translation, { offset, limit });
+    const input = romanizeInput(uid);
+    const { unit } = canon.resolve(input.text);
+    return { ...await english.translation(unit, translation, { offset, limit }), ...inputNote(input) };
   }, { network: true });
 
   tool('compare_translations', 'Fetch two to four English translations of the same text side by side, with the Pāli opening for reference. Lists what is available when fewer exist.', {
@@ -172,7 +174,8 @@ export function createServer() {
     translations: z.array(z.string().max(200)).max(4).optional().describe('translation_ids or translator names; omit to compare all available (up to 4).'),
     limit: z.number().int().min(500).max(15000).default(6000).describe('Characters per translation.'),
   }, async ({ uid, translations, limit }) => {
-    const { unit, notes } = canon.resolve(uid);
+    const input = romanizeInput(uid);
+    const { unit, notes } = canon.resolve(input.text);
     const available = english.available(unit);
     const wanted = translations?.length ? translations : available.map((a) => a.translation_id);
     const seen = new Set();
@@ -187,7 +190,7 @@ export function createServer() {
     }
     const ok = editions.filter((e) => !e.error).length;
     return {
-      text_id: unit.id, citation: unit.acronym, title: unit.title, notes,
+      text_id: unit.id, citation: unit.acronym, title: unit.title, notes, ...inputNote(input),
       pali_opening: canon.segments(unit).filter((s) => s.type !== 'heading').slice(0, 3),
       available, editions,
       guidance: ok < 2 ? `Only ${ok} English translation could be retrieved; compare against the Pāli instead, or see https://suttacentral.net/${unit.id}.` : 'Compare wording against the Pāli segments; distinguish translation choices from textual differences.',

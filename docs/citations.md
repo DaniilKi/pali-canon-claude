@@ -112,6 +112,8 @@ For the separate post-canonical search, `search_post_canonical` accepts whole-bo
 
 English translations use character offsets, separate from Pāli segment offsets. Continue with the English result's `continue_with` tool name and arguments. This pins its exact `translation_id`, including when the first page came from a labelled outage fallback. A nonzero English offset with a default or translator name is rejected; an unavailable requested version cannot transfer its offset to a different version. You can retry later, or begin another version at offset 0. The same continuation is included when English is attached to `get_text`.
 
+Supported native-script citations work across Pāli reading, metadata, English reading, translation comparison and the hosted reader. For example, `MN ๑๐` (Thai digits) resolves to `mn10`; `ධම්මපද 183` (Sinhala letters) resolves to `dhp183`. Responses label the input script and Roman reading. Canonical IDs, English and metadata stay Roman; the hosted widget also displays Roman Pāli. Use `get_text`'s `script` option for Pāli output in another script.
+
 ## Two numbering systems
 
 There is no single universal numbering. In parts of the Saṃyutta and Aṅguttara Nikāyas, two systems differ:

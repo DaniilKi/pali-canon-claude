@@ -341,7 +341,8 @@ export function romanizeInput(text) {
   return { text: toRomanFrom(s, script).normalize('NFC'), script, original: s };
 }
 
-function inputNote(input) {
+/** Label converted native input while leaving Roman input unlabelled, independent of output script. */
+export function inputNote(input) {
   return input?.original ? { input_script: input.script, input_romanized: input.text } : {};
 }
 

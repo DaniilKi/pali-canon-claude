@@ -32772,8 +32772,9 @@ function createServer2() {
   tool("get_metadata", "Details of one text: title, collection, PTS range, VRI book and paragraphs, contained texts, linked English translations (with translation_id), and a SuttaCentral link for parallels. Works offline.", {
     uid: citation
   }, ({ uid }) => {
-    const { unit, notes } = resolve(uid);
-    return describe(unit, notes);
+    const input = romanizeInput(uid);
+    const { unit, notes } = resolve(input.text);
+    return localizeDescribe(describe(unit, notes), void 0, input);
   });
   tool("get_text", 'Read P\u0101li from the VRI edition: give uid for a sutta/section, or book for a complete source book including its front matter (IDs from browse_canon node "books"). Give exactly one of uid and book. Long texts are paginated by segment, with VRI paragraphs, PTS and Thai/Myanmar/VRI page breaks and optional raw/structured variants. With uid, optionally add English (translation: "default" or a translation_id from get_metadata) or aligned commentary. The P\u0101li works offline. Set script for Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao or Lanna (transliterated from VRI Roman); uid may also be typed in those scripts.', {
     uid: citation.optional(),
@@ -32835,15 +32836,17 @@ function createServer2() {
     offset: external_exports.number().int().min(0).max(2e6).default(0).describe("Character offset. For nonzero offsets use the previous result's continue_with arguments, including its exact translation_id; offsets cannot transfer between translation versions."),
     limit: external_exports.number().int().min(500).max(3e4).default(12e3).describe("Characters per page.")
   }, async ({ uid, translation: translation2, offset, limit }) => {
-    const { unit } = resolve(uid);
-    return translation(unit, translation2, { offset, limit });
+    const input = romanizeInput(uid);
+    const { unit } = resolve(input.text);
+    return { ...await translation(unit, translation2, { offset, limit }), ...inputNote(input) };
   }, { network: true });
   tool("compare_translations", "Fetch two to four English translations of the same text side by side, with the P\u0101li opening for reference. Lists what is available when fewer exist.", {
     uid: citation,
     translations: external_exports.array(external_exports.string().max(200)).max(4).optional().describe("translation_ids or translator names; omit to compare all available (up to 4)."),
     limit: external_exports.number().int().min(500).max(15e3).default(6e3).describe("Characters per translation.")
   }, async ({ uid, translations, limit }) => {
-    const { unit, notes } = resolve(uid);
+    const input = romanizeInput(uid);
+    const { unit, notes } = resolve(input.text);
     const available2 = available(unit);
     const wanted = translations?.length ? translations : available2.map((a) => a.translation_id);
     const seen = /* @__PURE__ */ new Set();
@@ -32864,6 +32867,7 @@ function createServer2() {
       citation: unit.acronym,
       title: unit.title,
       notes,
+      ...inputNote(input),
       pali_opening: segments(unit).filter((s) => s.type !== "heading").slice(0, 3),
       available: available2,
       editions,
@@ -32961,13 +32965,15 @@ var TOOL_META = {
   "openai/toolInvocation/invoked": "Reader updated."
 };
 async function readPassage({ uid, translation: translation2, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6e3 }) {
-  const { unit, notes } = resolve(uid);
+  const input = romanizeInput(uid);
+  const { unit, notes } = resolve(input.text);
   const described = describe(unit, notes);
   const all = segments(unit);
   const page = all.slice(offset, offset + limit);
   const vri = source();
   const result = {
     text_id: unit.id,
+    ...inputNote(input),
     citation: unit.acronym,
     title: unit.title || null,
     collection: described.collection,
@@ -33038,7 +33044,7 @@ function registerChatgptWidget(server) {
   }
   server.registerTool(WIDGET_TOOL, {
     title: "Read a passage (P\u0101li and English)",
-    description: "Show an individual text in a reading view: P\u0101li (VRI) and one English translation, with citation, PTS page, translator, attribution and licence. Use when the user wants to read a sutta or passage. Accepts individual Roman-script citations and source links. The P\u0101li works offline; English is fetched live. For English continuation use the exact english.continue_with arguments from the previous result.",
+    description: "Show an individual text in a reading view: P\u0101li (VRI) and one English translation, with citation, PTS page, translator, attribution and licence. Use when the user wants to read a sutta or passage. Accepts individual citations in supported scripts and source links; displayed text stays Roman. The P\u0101li works offline; English is fetched live. For English continuation use the exact english.continue_with arguments from the previous result.",
     inputSchema: {
       uid: external_exports.string().min(1).max(300).describe("Any citation: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, a PTS page such as M i 55, or a suttacentral.net / accesstoinsight.org / dhammatalks.org link."),
       translation: external_exports.string().max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or a translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),

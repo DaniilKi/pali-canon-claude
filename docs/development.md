@@ -247,6 +247,8 @@ The HTTP-only ChatGPT reader uses versioned `v2` UI resources. Widget tool error
 
 `search_post_canonical` validates every `books` filter before searching. Use whole-book IDs from `get_post_canonical`'s catalogue, recognised VRI stems/titles or whole-work aliases such as `vism` and `abhidh-s`. A typo or invalid member of a mixed selection is an error, not an empty/partial search. Chapter/paragraph citations are not book filters. Omitting `books` or passing `[]` retains the unrestricted meaning; valid filters with no matching text still return zero results. These rules do not change canonical search scope. `tests/postcanonical-scope.test.mjs` exercises all catalogue IDs and the MCP error/result distinction.
 
+Citation input normalization is shared by `get_text`, `resolve_reference`, `get_metadata`, `get_translation`, `compare_translations` and the hosted reader. Existing supported native letters/digits are converted with `romanizeInput`; responses label `input_script` and `input_romanized`. Roman inputs receive no extra labels. This does not change the output script: metadata and English remain Roman, and the widget displays Roman Pāli. `tests/reader-script-input.test.mjs` uses handwritten citations in Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao and Lanna through MCP and the widget data function. Native-reader and signed-in browser acceptance are separate gates.
+
 ## Troubleshooting
 
 | Symptom | Cause and fix |

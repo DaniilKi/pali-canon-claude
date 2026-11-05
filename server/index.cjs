@@ -30650,8 +30650,9 @@ function createServer() {
   tool("get_metadata", "Details of one text: title, collection, PTS range, VRI book and paragraphs, contained texts, linked English translations (with translation_id), and a SuttaCentral link for parallels. Works offline.", {
     uid: citation
   }, ({ uid }) => {
-    const { unit, notes } = resolve(uid);
-    return describe(unit, notes);
+    const input = romanizeInput(uid);
+    const { unit, notes } = resolve(input.text);
+    return localizeDescribe(describe(unit, notes), void 0, input);
   });
   tool("get_text", 'Read P\u0101li from the VRI edition: give uid for a sutta/section, or book for a complete source book including its front matter (IDs from browse_canon node "books"). Give exactly one of uid and book. Long texts are paginated by segment, with VRI paragraphs, PTS and Thai/Myanmar/VRI page breaks and optional raw/structured variants. With uid, optionally add English (translation: "default" or a translation_id from get_metadata) or aligned commentary. The P\u0101li works offline. Set script for Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao or Lanna (transliterated from VRI Roman); uid may also be typed in those scripts.', {
     uid: citation.optional(),
@@ -30713,15 +30714,17 @@ function createServer() {
     offset: external_exports.number().int().min(0).max(2e6).default(0).describe("Character offset. For nonzero offsets use the previous result's continue_with arguments, including its exact translation_id; offsets cannot transfer between translation versions."),
     limit: external_exports.number().int().min(500).max(3e4).default(12e3).describe("Characters per page.")
   }, async ({ uid, translation: translation2, offset, limit }) => {
-    const { unit } = resolve(uid);
-    return translation(unit, translation2, { offset, limit });
+    const input = romanizeInput(uid);
+    const { unit } = resolve(input.text);
+    return { ...await translation(unit, translation2, { offset, limit }), ...inputNote(input) };
   }, { network: true });
   tool("compare_translations", "Fetch two to four English translations of the same text side by side, with the P\u0101li opening for reference. Lists what is available when fewer exist.", {
     uid: citation,
     translations: external_exports.array(external_exports.string().max(200)).max(4).optional().describe("translation_ids or translator names; omit to compare all available (up to 4)."),
     limit: external_exports.number().int().min(500).max(15e3).default(6e3).describe("Characters per translation.")
   }, async ({ uid, translations, limit }) => {
-    const { unit, notes } = resolve(uid);
+    const input = romanizeInput(uid);
+    const { unit, notes } = resolve(input.text);
     const available2 = available(unit);
     const wanted = translations?.length ? translations : available2.map((a) => a.translation_id);
     const seen = /* @__PURE__ */ new Set();
@@ -30742,6 +30745,7 @@ function createServer() {
       citation: unit.acronym,
       title: unit.title,
       notes,
+      ...inputNote(input),
       pali_opening: segments(unit).filter((s) => s.type !== "heading").slice(0, 3),
       available: available2,
       editions,
