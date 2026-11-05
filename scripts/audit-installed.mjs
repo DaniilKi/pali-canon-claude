@@ -25,7 +25,7 @@ let transport;
 let stderr = '';
 const counts = { canonical_texts: 0, canonical_segments: 0, canonical_pages: 0,
   commentary_texts: 0, commentary_unaligned_texts: 0, commentary_segments: 0, commentary_pages: 0,
-  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0 };
+  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0 };
 try {
   if (reportAt >= 0) await writeFile(resolve(process.argv[reportAt + 1]), '{"status":"running"}\n');
   const serverDirectory = serverAt >= 0 ? resolve(process.argv[serverAt + 1]) : join(root, 'server');
@@ -99,6 +99,21 @@ require('node:module').syncBuiltinESMExports();\n`);
     assert.ok(verify(await call(name, args)), `${name}: bundled offline dataset`);
     counts.lazy_data_checks += 1;
   }
+  // Search must find complete stanzas returned by retrieval, including their internal line breaks.
+  const quote = (text) => `"${text.replace(/\s+/gu, ' ').trim()}"`;
+  const rootVerse = canon.segments(canon.resolve('Dhp 183').unit).find((segment) => segment.type === 'verse');
+  const rootSearch = await call('search_texts', { query: quote(rootVerse.text), collection: 'dhp', english: 'off' });
+  assert.ok(rootSearch.results.some((hit) => hit.id === 'dhp183'), 'installed canonical whole-stanza search');
+  counts.search_checks += 1;
+  const laterVerse = (await postcanonical.getText('Vism §1', { limit: 50 })).segments.find((segment) => segment.type === 'verse');
+  const laterSearch = await call('search_post_canonical', { query: quote(laterVerse.text), books: ['vism'], limit: 50 });
+  assert.ok(laterSearch.results.length, 'installed post-canonical whole-stanza search');
+  for (const hit of laterSearch.results) {
+    const selected = await call('get_post_canonical', { citation: hit.citation, limit: 200 });
+    const text = selected.segments.map((segment) => segment.text).join(' ').replace(/\s+/gu, ' ');
+    assert.ok(postcanonical.fold(text).includes(postcanonical.fold(laterVerse.text.replace(/\s+/gu, ' '))), hit.citation);
+  }
+  counts.search_checks += 1;
   assert.ok(!stderr.includes('UNEXPECTED_NETWORK_ATTEMPT'), 'every checked operation must work without attempting network access');
   const summary = { ...counts, approximate_canonical_texts: canon.load().canon.units.filter((unit) => unit.approximate).length, network_attempts: 0, failures: 0 };
   if (reportAt >= 0) {

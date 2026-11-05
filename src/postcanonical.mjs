@@ -1,3 +1,4 @@
+import { searchSegments, searchFold, searchExcerpt } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * Post-canonical Pāli books of the VRI Chaṭṭha Saṅgāyana edition: the sub-commentaries (Ṭīkā) and the
@@ -465,21 +466,22 @@ export function browse(node = '', { offset = 0, limit = 60 } = {}) {
 }
 
 function terms(query) {
-  const phrases = [...String(query).matchAll(/"([^"]+)"/g)].map((m) => fold(m[1])).filter(Boolean);
+  const phrases = [...String(query).matchAll(/"([^"]+)"/g)].map((m) => searchFold(m[1], fold).trim()).filter(Boolean);
   const words = fold(String(query).replace(/"[^"]+"/g, ' ')).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
   return [...phrases, ...words];
 }
 
-const foldedCache = new Map();
-function foldedBlocks(book, blocks) {
-  if (!foldedCache.has(book.id)) foldedCache.set(book.id, blocks.map((b) => fold(b[2])));
-  return foldedCache.get(book.id);
+const searchCache = new Map();
+function searchPassages(book, blocks) {
+  if (!searchCache.has(book.id)) searchCache.set(book.id, searchSegments(blocks)
+    .map((segment) => ({ ...segment, folded: searchFold(segment.text, fold) })));
+  return searchCache.get(book.id);
 }
 
 const chapterAt = (book, i) => book.chapters.filter(([, s]) => s <= i).length;
 const citationMemo = new WeakMap();
-/** Does `citation` resolve, unambiguously, to a range of `book` that contains block i? */
-function covers(book, citation, i) {
+/** Does `citation` resolve, unambiguously, to a range of `book` containing [i, end)? */
+function covers(book, citation, i, end = i + 1) {
   let memo = citationMemo.get(book);
   if (!memo) citationMemo.set(book, (memo = new Map()));
   if (!memo.has(citation)) {
@@ -491,7 +493,7 @@ function covers(book, citation, i) {
     memo.set(citation, range);
   }
   const r = memo.get(citation);
-  return !!r && i >= r[0] && i < r[1];
+  return !!r && i >= r[0] && end <= r[1];
 }
 
 /**
@@ -500,7 +502,7 @@ function covers(book, citation, i) {
  * or work heading) and from its chapter; a candidate is kept only if select() gives a range of this book that holds
  * the block, so a citation is never ambiguous and never points elsewhere. Falls back to the chapter, then the book.
  */
-export function citationFor(book, i) {
+export function citationFor(book, i, end = i + 1) {
   const blocks = book.blocks;
   const ps = [];
   const own = paraRange(blocks[i][1]);
@@ -529,7 +531,7 @@ export function citationFor(book, i) {
   }
   for (const p of ps) { if (k) cands.push(`${book.id} ${k}.${p}`); cands.push(`${book.id} §${p}`); }
   if (k) cands.push(`${book.id} ${k}`);
-  return cands.find((c) => covers(book, c, i)) || book.id;
+  return cands.find((c) => covers(book, c, i, end)) || book.id;
 }
 
 /**
@@ -554,21 +556,21 @@ export async function search(query, { limit = 10, offset = 0, books, section } =
   let total = 0;
   for (const book of pool) {
     const { blocks } = book;
-    const folded = foldedBlocks(book, blocks);
-    for (let i = 0; i < folded.length; i += 1) {
-      if (!wanted.every((w) => folded[i].includes(w))) continue;
+    const passages = searchPassages(book, blocks);
+    for (const passage of passages) {
+      const i = passage.start;
+      if (!wanted.every((w) => passage.folded.includes(w))) continue;
       // One hit per citable passage (a VRI paragraph often spans several blocks).
-      const citation = citationFor(book, i);
+      const citation = citationFor(book, i, passage.end);
       if (seen.has(`${book.id}|${citation}`)) continue;
       seen.add(`${book.id}|${citation}`);
       total += 1;
       if (total <= offset || hits.length >= limit) continue;
-      const original = blocks[i][2];
-      const at = Math.max(0, folded[i].indexOf(wanted[0]) - 80);
+      const excerpt = searchExcerpt(passage.text, wanted[0], fold);
       const k = chapterAt(book, i);
       hits.push({ canonical: false, citation, book_id: book.id, book_title: book.title, vri_section: book.section,
         ...(k ? { chapter: book.chapters[k - 1][0] } : {}), ...(blocks[i][1] ? { match_vri_paragraph: blocks[i][1] } : {}),
-        excerpt: (at ? '…' : '') + original.slice(at, at + 260) + (original.length > at + 260 ? '…' : '') });
+        excerpt });
     }
   }
   return {

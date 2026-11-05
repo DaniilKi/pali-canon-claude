@@ -258,3 +258,9 @@ To exhaustively check an extracted npm tarball or desktop staging directory, add
 Use an existing writable destination directory; on Windows, choose a path on your own computer. The report distinguishes missing commentary alignments from retrieval failures. It also counts approximate texts: passing this check does not fill the VRI edition's abbreviations, supply missing commentary alignments or add English translations. The data remains exactly as sourced.
 
 The package CI runs the exhaustive installed-corpus audit once on Ubuntu with Node 20. Its separate npm installation matrix checks that all lazy datasets load from the installed tarball on every supported OS. Those checks now fail when a lazy dictionary shard is missing, or a missing optional translation-link index would silently reduce the available references, even if MN 10 resolves correctly. Negative regression fixtures also reject dropped or altered text, wrong totals, repeated pages and missing continuations.
+
+## Searching complete verses
+
+Pāli full-text search checks complete stanzas as retrieval displays them. A quoted verse can use spaces, tabs or line breaks between its words. Search preserves punctuation and does not join separate stanzas, prose paragraphs or canonical texts. Post-canonical results carry a citation that contains the whole matching stanza, even when its lines occupy several XML blocks. Excerpts preserve the source line breaks.
+
+`tests/verse-search.test.mjs` derives its quotations from bundled text and checks canonical and post-canonical search, citation containment and boundary isolation. The isolated installed-corpus audit repeats whole-stanza searches through the shipped MCP server with network access disabled.

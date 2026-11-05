@@ -1,3 +1,4 @@
+import { searchSegments, searchFold, searchExcerpt } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * The bundled Pāli Canon: VRI Chaṭṭha Saṅgāyana text, standard citation IDs aligned to it,
@@ -371,17 +372,22 @@ function buildSearch() {
     // Later writers win: ranges first, then larger texts, so each block belongs to its most specific text.
     .sort((a, b) => (b.kind === 'range') - (a.kind === 'range') || (b.end - b.start) - (a.end - a.start));
   for (const u of sorted) for (let i = u.start; i < u.end; i += 1) owner[u.book][i] = u;
-  const folded = d.canon.books.map((b) => b.blocks.map((blk) => fold(blk[2])));
+  const passages = d.canon.books.map((book, bi) => searchSegments(book.blocks, (i) => owner[bi][i])
+    .map((segment) => ({ ...segment, folded: searchFold(segment.text, fold) })));
   const titles = d.canon.units.filter((u) => !u.approximate).map((u) => {
     const english = (d.translations[u.id] || []).map((t) => `${t.reference || ''} ${t.english || ''}`).join(' ');
     return { u, text: fold(`${u.acronym} ${u.title} ${english}`) };
   });
-  d.search = { owner, folded, titles };
+  // Proper-name lookup still ranks matches per XML paragraph; preserve its index lazily.
+  let folded;
+  d.search = { owner, passages, titles, get folded() {
+    return folded ||= d.canon.books.map((book) => book.blocks.map((block) => fold(block[2])));
+  } };
   return d.search;
 }
 
 function terms(query) {
-  const phrases = [...query.matchAll(/"([^"]+)"/g)].map((m) => fold(m[1]).trim()).filter(Boolean);
+  const phrases = [...query.matchAll(/"([^"]+)"/g)].map((m) => searchFold(m[1], fold).trim()).filter(Boolean);
   const words = fold(query.replace(/"[^"]+"/g, ' ')).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
   return [...phrases, ...words];
 }
@@ -393,7 +399,7 @@ function terms(query) {
 export function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const d = load();
   const s = d.search || buildSearch();
-  const wanted = groups?.length ? groups.map((g) => g.map((w) => fold(w))) : terms(query).map((w) => [w]);
+  const wanted = groups?.length ? groups.map((g) => g.map((w) => searchFold(w, fold))) : terms(query).map((w) => [w]);
   if (!wanted.length) throw new Error('Search needs at least one word of two or more letters.');
   const has = (text) => wanted.every((alts) => alts.some((w) => text.includes(w)));
   const filter = collection ? fold(collection).replace(/\s+/g, '') : null;
@@ -403,20 +409,19 @@ export function search(query, { collection, limit = 10, offset = 0, groups } = {
   const hits = [];
   const seen = new Set();
   let total = 0;
-  for (let bi = 0; bi < s.folded.length; bi += 1) {
-    const blocks = s.folded[bi];
-    for (let k = 0; k < blocks.length; k += 1) {
-      const text = blocks[k];
+  for (let bi = 0; bi < s.passages.length; bi += 1) {
+    for (const passage of s.passages[bi]) {
+      const k = passage.start;
+      const text = passage.folded;
       if (!has(text)) continue;
       const u = s.owner[bi][k];
       if (!u || !okCollection(u) || seen.has(u.id)) continue;
       seen.add(u.id);
       total += 1;
       if (total <= offset || hits.length >= limit) continue;
-      const original = d.canon.books[bi].blocks[k][2];
-      const at = Math.max(0, text.indexOf(wanted[0].find((w) => text.includes(w))) - 80);
+      const excerpt = searchExcerpt(passage.text, wanted[0].find((w) => text.includes(w)), fold);
       hits.push({ ...unitSummary(u), match_vri_paragraph: d.canon.books[bi].blocks[k][1] || undefined,
-        excerpt: (at ? '…' : '') + original.slice(at, at + 260) + (original.length > at + 260 ? '…' : '') });
+        excerpt });
     }
   }
   return {

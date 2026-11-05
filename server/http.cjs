@@ -23703,6 +23703,47 @@ __export(canon_exports, {
   translationId: () => translationId
 });
 
+// src/search-segments.mjs
+var VERSE = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
+var searchFold = (text, fold8) => fold8(text).replace(/\s+/gu, " ");
+function searchSegments(blocks, owner = () => null) {
+  const out = [];
+  let stanza = null;
+  let previousOwner;
+  const flush = () => {
+    if (stanza?.text) out.push(stanza);
+    stanza = null;
+  };
+  blocks.forEach(([rend, , text], i) => {
+    const currentOwner = owner(i);
+    if (currentOwner !== previousOwner) flush();
+    previousOwner = currentOwner;
+    if (rend === "hangnum") {
+      flush();
+      stanza = { start: i, end: i + 1, text: "" };
+      return;
+    }
+    if (VERSE.has(rend)) {
+      stanza ||= { start: i, end: i + 1, text: "" };
+      stanza.text += (stanza.text ? "\n" : "") + text;
+      stanza.end = i + 1;
+      if (rend === "gathalast") flush();
+      return;
+    }
+    flush();
+    if (text) out.push({ start: i, end: i + 1, text });
+  });
+  flush();
+  return out;
+}
+function searchExcerpt(original, needle, fold8) {
+  const escape3 = (part) => part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const pattern = new RegExp(needle.split(/\s+/u).map(escape3).join("\\s+"), "u");
+  const found = pattern.exec(fold8(original));
+  const at = Math.max(0, (found?.index ?? 0) - 80);
+  return (at ? "\u2026" : "") + original.slice(at, at + 260) + (original.length > at + 260 ? "\u2026" : "");
+}
+
 // src/bundled-data.mjs
 var import_node_fs = require("node:fs");
 var import_node_path = require("node:path");
@@ -24315,7 +24356,7 @@ try {
 var ROMAN2 = ["", "i", "ii", "iii", "iv", "v", "vi", "vii"];
 var HEADING = /* @__PURE__ */ new Set(["subhead", "title", "chapter", "book", "nikaya", "subsubhead"]);
 var CENTRE_HEADING = /(niṭṭhit[aāo]ṃ?|niṭṭhitā|samattaṃ|samattā)\.?$|^Namo tassa|uddānaṃ$/i;
-var VERSE = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
+var VERSE2 = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
 var PITAKA = { vinaya: "vinaya", ds: "abhidhamma", vb: "abhidhamma", dt: "abhidhamma", pp: "abhidhamma", kv: "abhidhamma", ya: "abhidhamma", patthana: "abhidhamma" };
 var COLLECTION_ORDER = ["vinaya", "dn", "mn", "sn", "an", "kp", "dhp", "ud", "iti", "snp", "vv", "pv", "thag", "thig", "ap", "bv", "cp", "ja", "mnd", "cnd", "ps", "mil", "ne", "pe", "ds", "vb", "dt", "pp", "kv", "ya", "patthana"];
 var COLLECTION_NAMES = {
@@ -24625,7 +24666,7 @@ function segments(u, { includeNotes = false } = {}) {
       stanza = { type: "verse", vri: n, text: "", pts: [], eds };
       continue;
     }
-    if (VERSE.has(rend)) {
+    if (VERSE2.has(rend)) {
       if (!stanza) stanza = { type: "verse", vri: n, text: "", pts: [], eds: [] };
       stanza.text += (stanza.text ? "\n" : "") + text;
       stanza.pts.push(...pts);
@@ -24702,23 +24743,26 @@ function buildSearch() {
   const owner = d.canon.books.map((b) => new Array(b.blocks.length).fill(null));
   const sorted = [...d.canon.units].filter((u) => !u.approximate).sort((a, b) => (b.kind === "range") - (a.kind === "range") || b.end - b.start - (a.end - a.start));
   for (const u of sorted) for (let i = u.start; i < u.end; i += 1) owner[u.book][i] = u;
-  const folded = d.canon.books.map((b) => b.blocks.map((blk) => fold3(blk[2])));
+  const passages = d.canon.books.map((book, bi) => searchSegments(book.blocks, (i) => owner[bi][i]).map((segment) => ({ ...segment, folded: searchFold(segment.text, fold3) })));
   const titles = d.canon.units.filter((u) => !u.approximate).map((u) => {
     const english2 = (d.translations[u.id] || []).map((t) => `${t.reference || ""} ${t.english || ""}`).join(" ");
     return { u, text: fold3(`${u.acronym} ${u.title} ${english2}`) };
   });
-  d.search = { owner, folded, titles };
+  let folded;
+  d.search = { owner, passages, titles, get folded() {
+    return folded ||= d.canon.books.map((book) => book.blocks.map((block) => fold3(block[2])));
+  } };
   return d.search;
 }
 function terms(query) {
-  const phrases = [...query.matchAll(/"([^"]+)"/g)].map((m) => fold3(m[1]).trim()).filter(Boolean);
+  const phrases = [...query.matchAll(/"([^"]+)"/g)].map((m) => searchFold(m[1], fold3).trim()).filter(Boolean);
   const words3 = fold3(query.replace(/"[^"]+"/g, " ")).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
   return [...phrases, ...words3];
 }
 function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const d = load();
   const s = d.search || buildSearch();
-  const wanted = groups?.length ? groups.map((g) => g.map((w) => fold3(w))) : terms(query).map((w) => [w]);
+  const wanted = groups?.length ? groups.map((g) => g.map((w) => searchFold(w, fold3))) : terms(query).map((w) => [w]);
   if (!wanted.length) throw new Error("Search needs at least one word of two or more letters.");
   const has = (text) => wanted.every((alts) => alts.some((w) => text.includes(w)));
   const filter = collection ? fold3(collection).replace(/\s+/g, "") : null;
@@ -24727,22 +24771,21 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const hits = [];
   const seen = /* @__PURE__ */ new Set();
   let total = 0;
-  for (let bi = 0; bi < s.folded.length; bi += 1) {
-    const blocks = s.folded[bi];
-    for (let k = 0; k < blocks.length; k += 1) {
-      const text = blocks[k];
+  for (let bi = 0; bi < s.passages.length; bi += 1) {
+    for (const passage of s.passages[bi]) {
+      const k = passage.start;
+      const text = passage.folded;
       if (!has(text)) continue;
       const u = s.owner[bi][k];
       if (!u || !okCollection(u) || seen.has(u.id)) continue;
       seen.add(u.id);
       total += 1;
       if (total <= offset || hits.length >= limit) continue;
-      const original = d.canon.books[bi].blocks[k][2];
-      const at = Math.max(0, text.indexOf(wanted[0].find((w) => text.includes(w))) - 80);
+      const excerpt = searchExcerpt(passage.text, wanted[0].find((w) => text.includes(w)), fold3);
       hits.push({
         ...unitSummary(u),
         match_vri_paragraph: d.canon.books[bi].blocks[k][1] || void 0,
-        excerpt: (at ? "\u2026" : "") + original.slice(at, at + 260) + (original.length > at + 260 ? "\u2026" : "")
+        excerpt
       });
     }
   }
@@ -30556,7 +30599,7 @@ var FILE = "commentary.json.gz";
 var ROMAN4 = ["", "i", "ii", "iii", "iv", "v", "vi", "vii"];
 var HEADING2 = /* @__PURE__ */ new Set(["subhead", "title", "chapter", "book", "nikaya", "subsubhead"]);
 var CENTRE_HEADING2 = /(niṭṭhit[aāo]ṃ?|niṭṭhitā|samattaṃ|samattā)\.?$|^Namo tassa|uddānaṃ$/i;
-var VERSE2 = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
+var VERSE3 = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
 var LABEL = "Commentary (A\u1E6D\u1E6Dhakath\u0101), not the canon: the traditional Therav\u0101da explanation of the texts, compiled in P\u0101li in Sri Lanka (traditionally attributed to Buddhaghosa, Dhammap\u0101la and others). Keep it distinct from the root text when quoting.";
 var EVIDENCE = {
   "paragraph+lemma": "VRI paragraph number, confirmed by the root-text words the commentary quotes",
@@ -30609,7 +30652,7 @@ function passageSegments(d, pi) {
       flush();
       continue;
     }
-    if (VERSE2.has(rend)) {
+    if (VERSE3.has(rend)) {
       stanza ||= { type: "verse", text: "", pts: [] };
       stanza.text += (stanza.text ? "\n" : "") + text;
       stanza.pts.push(...pts);
@@ -30764,7 +30807,7 @@ var WORK_LABELS = {
 var SEARCH_OPTION_DESCRIPTION = "Also search the post-canonical books (Visuddhimagga, Abhidhammatthasa\u1E45gaha, sub-commentaries/\u1E6C\u012Bk\u0101), returned separately under post_canonical and labelled canonical: false. Ignored when collection is set (a collection limits the search to the canon). Titles and excerpts follow script like the canon results; citations stay Roman. Default false: only the canon is searched.";
 var HEADING3 = /* @__PURE__ */ new Set(["subhead", "title", "chapter", "book", "nikaya", "subsubhead"]);
 var CENTRE_HEADING3 = /(niṭṭhit[aāo]ṃ?|niṭṭhitā|samattaṃ|samattā)\.?$|^Namo tassa|uddānaṃ$/i;
-var VERSE3 = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
+var VERSE4 = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
 var ED_KEYS = { P: "pts", M: "myanmar", V: "vri", T: "thai" };
 var fold6 = (value) => String(value ?? "").normalize("NFD").replace(new RegExp("\\p{M}", "gu"), "").toLowerCase().replace(/ṁ/g, "m").replace(/\s+/g, " ").trim();
 var PARA2 = /^(\d+)(?:\s*[-–]\s*(\d+))?$/;
@@ -31084,7 +31127,7 @@ function segmentsOf(blocks, { includeVariants = false } = {}) {
       stanza = { type: "verse", vri: n, text: "", eds };
       continue;
     }
-    if (VERSE3.has(rend)) {
+    if (VERSE4.has(rend)) {
       stanza ||= { type: "verse", vri: n, text: "", eds: [] };
       stanza.text += (stanza.text ? "\n" : "") + text;
       stanza.eds.push(...eds);
@@ -31175,18 +31218,18 @@ function browse2(node = "", { offset = 0, limit = 60 } = {}) {
   return { ...base, node: sel.citation, label: labelFor(sel), book: bookInfo(sel.book), ...page(chapters) };
 }
 function terms2(query) {
-  const phrases = [...String(query).matchAll(/"([^"]+)"/g)].map((m) => fold6(m[1])).filter(Boolean);
+  const phrases = [...String(query).matchAll(/"([^"]+)"/g)].map((m) => searchFold(m[1], fold6).trim()).filter(Boolean);
   const words3 = fold6(String(query).replace(/"[^"]+"/g, " ")).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
   return [...phrases, ...words3];
 }
-var foldedCache = /* @__PURE__ */ new Map();
-function foldedBlocks(book, blocks) {
-  if (!foldedCache.has(book.id)) foldedCache.set(book.id, blocks.map((b) => fold6(b[2])));
-  return foldedCache.get(book.id);
+var searchCache = /* @__PURE__ */ new Map();
+function searchPassages(book, blocks) {
+  if (!searchCache.has(book.id)) searchCache.set(book.id, searchSegments(blocks).map((segment) => ({ ...segment, folded: searchFold(segment.text, fold6) })));
+  return searchCache.get(book.id);
 }
 var chapterAt = (book, i) => book.chapters.filter(([, s]) => s <= i).length;
 var citationMemo = /* @__PURE__ */ new WeakMap();
-function covers(book, citation, i) {
+function covers(book, citation, i, end = i + 1) {
   let memo = citationMemo.get(book);
   if (!memo) citationMemo.set(book, memo = /* @__PURE__ */ new Map());
   if (!memo.has(citation)) {
@@ -31200,9 +31243,9 @@ function covers(book, citation, i) {
     memo.set(citation, range);
   }
   const r = memo.get(citation);
-  return !!r && i >= r[0] && i < r[1];
+  return !!r && i >= r[0] && end <= r[1];
 }
-function citationFor(book, i) {
+function citationFor(book, i, end = i + 1) {
   const blocks = book.blocks;
   const ps = [];
   const own = paraRange2(blocks[i][1]);
@@ -31237,7 +31280,7 @@ function citationFor(book, i) {
     cands.push(`${book.id} \xA7${p}`);
   }
   if (k) cands.push(`${book.id} ${k}`);
-  return cands.find((c) => covers(book, c, i)) || book.id;
+  return cands.find((c) => covers(book, c, i, end)) || book.id;
 }
 async function search2(query, { limit = 10, offset = 0, books, section } = {}) {
   const d = need();
@@ -31256,16 +31299,16 @@ async function search2(query, { limit = 10, offset = 0, books, section } = {}) {
   let total = 0;
   for (const book of pool) {
     const { blocks } = book;
-    const folded = foldedBlocks(book, blocks);
-    for (let i = 0; i < folded.length; i += 1) {
-      if (!wanted.every((w) => folded[i].includes(w))) continue;
-      const citation = citationFor(book, i);
+    const passages = searchPassages(book, blocks);
+    for (const passage of passages) {
+      const i = passage.start;
+      if (!wanted.every((w) => passage.folded.includes(w))) continue;
+      const citation = citationFor(book, i, passage.end);
       if (seen.has(`${book.id}|${citation}`)) continue;
       seen.add(`${book.id}|${citation}`);
       total += 1;
       if (total <= offset || hits.length >= limit) continue;
-      const original = blocks[i][2];
-      const at = Math.max(0, folded[i].indexOf(wanted[0]) - 80);
+      const excerpt = searchExcerpt(passage.text, wanted[0], fold6);
       const k = chapterAt(book, i);
       hits.push({
         canonical: false,
@@ -31275,7 +31318,7 @@ async function search2(query, { limit = 10, offset = 0, books, section } = {}) {
         vri_section: book.section,
         ...k ? { chapter: book.chapters[k - 1][0] } : {},
         ...blocks[i][1] ? { match_vri_paragraph: blocks[i][1] } : {},
-        excerpt: (at ? "\u2026" : "") + original.slice(at, at + 260) + (original.length > at + 260 ? "\u2026" : "")
+        excerpt
       });
     }
   }
