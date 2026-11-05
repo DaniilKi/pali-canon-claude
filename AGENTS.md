@@ -37,7 +37,7 @@ Give AI assistants the complete Theravāda scripture (the Pāli Tipiṭaka) so t
 - v2.1.0 adds parallels, English-keyboard input and the glossary to v2.0.0 (see [CHANGELOG.md](CHANGELOG.md)); the GitHub releases still need to be created ([#2](https://github.com/DaniilKi/pali-canon-claude/issues/2)).
 - Roadmap: 50 issues in four milestones under tracking issue [#52](https://github.com/DaniilKi/pali-canon-claude/issues/52). Labels: `area: distribution|study|practice|data|quality`, `priority: must|should|nice`.
 
-Regenerate the numbers with `npm run coverage`.
+Regenerate the numbers with `npm run coverage`. The four large gzip datasets are committed as 4 MiB byte shards plus `.parts.json` manifests (D64); logical `.json.gz` names below refer to their reconstructed originals. Runtime loading is offline and verifies SHA-256. Before Python tools read committed data, unpack it with `node scripts/shard-data.mjs --unpack server/data /tmp/pali-inputs`; see `scripts/canon/README.md`.
 
 ## Architecture
 

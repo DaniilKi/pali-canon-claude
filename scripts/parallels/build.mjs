@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { readBundled } from '../../src/bundled-data.mjs';
 /**
  * Builds server/data/parallels.json.gz (issue #29, D59): cross-references from the commentaries' own
  * citations, and passages shared word for word between canonical texts. Offline and deterministic: it reads
@@ -22,7 +23,7 @@ import { buildShared, PARAMS } from './shared.mjs';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const DATA = join(ROOT, 'server', 'data');
 const OUT = join(DATA, 'parallels.json.gz');
-const sha256 = (file) => createHash('sha256').update(readFileSync(join(DATA, file))).digest('hex');
+const sha256 = (file) => createHash('sha256').update(readBundled(join(DATA, file))).digest('hex');
 
 const collectionOf = (id) => canon.load().byId.get(id).collection;
 

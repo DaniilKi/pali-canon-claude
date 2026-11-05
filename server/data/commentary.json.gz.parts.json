@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "size": 10832372,
+  "sha256": "3bb272e8e57d330fc88d41379b800cfaea301cb2bc6128243cf73bf22546f4f9",
+  "parts": [
+    {
+      "file": "commentary.json.gz.part-0001",
+      "size": 4194304,
+      "sha256": "8a22f46c2e33e4dee3430e319cebc2dd852a03faee0be18c7035c22159deaf28"
+    },
+    {
+      "file": "commentary.json.gz.part-0002",
+      "size": 4194304,
+      "sha256": "47f03c6da849940620d44d8404ceb98752a7849eda681c0b4475c3cc2b96e5ac"
+    },
+    {
+      "file": "commentary.json.gz.part-0003",
+      "size": 2443764,
+      "sha256": "88ee68bb706c373d37268baf7d08808b9630e0d29f583bfc054676fd52db960d"
+    }
+  ]
+}

@@ -39,7 +39,7 @@ test('workflow rebuilds from upstream HEAD, validates, audits and writes the dif
 test('optional builders run only when their scripts exist; DPD is checked against its SHA-256', () => {
   assert.match(WORKFLOW, /if: hashFiles\('scripts\/canon\/build_commentary\.py'\) != ''/);
   assert.match(WORKFLOW, /if: hashFiles\('scripts\/canon\/build_postcanonical\.py'\) != ''/);
-  assert.match(WORKFLOW, /if: hashFiles\('scripts\/dpd\/build_dpd\.py'\) != '' && hashFiles\('server\/data\/dpd\.json\.gz'\) != ''/);
+  assert.match(WORKFLOW, /if: hashFiles\('scripts\/dpd\/build_dpd\.py'\) != '' && hashFiles\('server\/data\/dpd\.json\.gz\*'\) != ''/);
   assert.match(WORKFLOW, /sha256sum/);
   assert.match(WORKFLOW, /--archive-sha256 "\$sha"/);
   assert.match(WORKFLOW, /update_dpd_pin\.py/);

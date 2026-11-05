@@ -1,3 +1,4 @@
+import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * The traditional Pāli commentaries (Aṭṭhakathā) of the VRI Chaṭṭha Saṅgāyana edition, aligned to the
  * root texts by VRI paragraph number and checked against the words they quote (see
@@ -5,7 +6,6 @@
  *
  * Commentary is not the canon: every result says so, names the commentary and carries VRI's attribution.
  */
-import { readFileSync, existsSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -47,7 +47,7 @@ let data = null;
 
 function dataPath() {
   const candidates = [join(here, 'data', FILE), join(here, '..', 'server', 'data', FILE), join(process.cwd(), 'server', 'data', FILE)];
-  return candidates.find((p) => existsSync(p)) || null;
+  return candidates.find((p) => bundledExists(p)) || null;
 }
 
 /** Load the commentary data once. Returns null when the data file is not installed. */
@@ -55,7 +55,7 @@ export function load() {
   if (data) return data;
   const path = dataPath();
   if (!path) return null;
-  data = JSON.parse(gunzipSync(readFileSync(path)).toString('utf8'));
+  data = JSON.parse(gunzipSync(readBundled(path)).toString('utf8'));
   return data;
 }
 

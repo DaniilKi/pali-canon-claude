@@ -1,3 +1,4 @@
+import { readBundled } from '../src/bundled-data.mjs';
 // Post-canonical books (#21): Ṭīkā and Añña, citations, search option, citation round trips.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -9,7 +10,7 @@ test('every book is bundled from the pinned VRI commit, within the size budget (
   const d = pc.load();
   assert.ok(d, 'server/data/postcanonical.json.gz is installed');
   assert.equal(d.source.commit, canon.source().commit, 'same pinned VRI commit as the canon');
-  assert.ok(statSync(new URL('../server/data/postcanonical.json.gz', import.meta.url)).size < 16e6, 'ṭīkā + post-canonical bundle < 16 MB gz');
+  assert.ok(readBundled(new URL('../server/data/postcanonical.json.gz', import.meta.url)).length < 16e6, 'ṭīkā + post-canonical bundle < 16 MB gz');
   assert.equal(d.books.length, 109);
   for (const b of d.books) {
     assert.equal(b.canonical, false, b.id);

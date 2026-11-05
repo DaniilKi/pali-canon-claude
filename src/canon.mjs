@@ -1,3 +1,4 @@
+import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * The bundled Pāli Canon: VRI Chaṭṭha Saṅgāyana text, standard citation IDs aligned to it,
  * PTS page references and English translation links. Everything here works offline.
@@ -73,14 +74,14 @@ export function translationId(t) {
 
 function dataPath(name) {
   const candidates = [join(here, 'data', name), join(here, '..', 'server', 'data', name), join(process.cwd(), 'server', 'data', name)];
-  const found = candidates.find((p) => existsSync(p));
+  const found = candidates.find((p) => bundledExists(p));
   if (!found) throw new Error(`Bundled canon data (${name}) is missing. Reinstall the extension or run the canon build.`);
   return found;
 }
 
 export function load() {
   if (data) return data;
-  const canon = JSON.parse(gunzipSync(readFileSync(dataPath('canon.json.gz'))).toString('utf8'));
+  const canon = JSON.parse(gunzipSync(readBundled(dataPath('canon.json.gz'))).toString('utf8'));
   const translations = JSON.parse(readFileSync(dataPath('translations.json'), 'utf8'));
   mergeAnandajoti(translations);
   const byId = new Map();

@@ -60,7 +60,7 @@ jobs:
           set -euo pipefail
           case "$VRI_REF" in *[!A-Za-z0-9._/-]*|'') echo "invalid vri_ref"; exit 1;; esac
           mkdir -p "$W/old" "$W/new"
-          cp server/data/* "$W/old/"
+          node scripts/shard-data.mjs --unpack server/data "$W/old"
           # 1. VRI romanised XML: root texts always; commentary and post-canonical books only when their builders exist.
           git clone -q --depth 1 --filter=blob:none --no-checkout https://github.com/VipassanaTech/tipitaka-xml.git "$W/vri"
           patterns=('/romn/*.mul.xml' '/romn/s0518m.nrf.xml' '/romn/s0520m.nrf.xml')
@@ -84,7 +84,7 @@ jobs:
             echo "VRI_COMMIT=$(git -C "$W/vri" rev-parse HEAD)"
             echo "BILARA_COMMIT=$(git -C "$W/bilara" rev-parse HEAD)"
             echo "ATI_COMMIT=$(git -C "$W/ati" rev-parse HEAD)"
-            echo "OLD_VRI_COMMIT=$(python -c "import gzip,json;print(json.load(gzip.open('server/data/canon.json.gz','rt',encoding='utf-8'))['source']['commit'])")"
+            echo "OLD_VRI_COMMIT=$(python -c "import gzip,json;print(json.load(gzip.open('$W/old/canon.json.gz','rt',encoding='utf-8'))['source']['commit'])")"
           } >> "$GITHUB_ENV"
 
       - name: Build the canon
@@ -119,7 +119,7 @@ jobs:
         run: python scripts/canon/build_postcanonical.py "$W/vri" "$VRI_COMMIT" "$W/new/postcanonical.json.gz"
 
       - name: "Build the DPD subset from the latest release (when #22 is merged)"
-        if: hashFiles('scripts/dpd/build_dpd.py') != '' && hashFiles('server/data/dpd.json.gz') != ''
+        if: hashFiles('scripts/dpd/build_dpd.py') != '' && hashFiles('server/data/dpd.json.gz*') != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DPD_TAG: ${{ inputs.dpd_tag }}
@@ -147,7 +147,7 @@ jobs:
       - name: Install the rebuilt data
         run: |
           set -euo pipefail
-          for f in server/data/*; do   # files no step rebuilt stay as committed
+          for f in "$W/old/"*; do   # logical data files no step rebuilt stay as committed
             [ -e "$W/new/$(basename "$f")" ] || cp "$f" "$W/new/"
           done
           python scripts/canon/diff_report.py "$W/old" "$W/new" --changed-list "$W/changed.txt"

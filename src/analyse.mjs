@@ -1,3 +1,4 @@
+import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * analyse_passage: word-by-word analysis of a passage of the bundled Pāli text (issues #22 and #23).
  *
@@ -11,7 +12,6 @@
  * Licence: DPD is CC BY-NC-SA 4.0 (Bodhirasa Bhikkhu). The notice and attribution are returned
  * with every result.
  */
-import { readFileSync, existsSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -44,9 +44,9 @@ export function loadDpd() {
   if (cached) return cached;
   const name = 'dpd.json.gz';
   const candidates = [join(here, 'data', name), join(here, '..', 'server', 'data', name), join(process.cwd(), 'server', 'data', name)];
-  const found = candidates.find((p) => existsSync(p));
+  const found = candidates.find((p) => bundledExists(p));
   if (!found) throw new Error('Bundled dictionary data (dpd.json.gz) is missing. Reinstall the extension.');
-  const data = JSON.parse(gunzipSync(readFileSync(found)).toString('utf8'));
+  const data = JSON.parse(gunzipSync(readBundled(found)).toString('utf8'));
   const headwords = new Map();
   const lemmas = new Map();
   const folded = new Map();

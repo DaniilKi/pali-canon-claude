@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "size": 14510577,
+  "sha256": "8a886d2cbd10356fe4b421cd6ae39175d990bc6b1cc84cd5f396216fda75a02f",
+  "parts": [
+    {
+      "file": "postcanonical.json.gz.part-0001",
+      "size": 4194304,
+      "sha256": "3b21aeb1467103dda9b7bdff1a8a06b134df11454003a623ae617d6c452efbd9"
+    },
+    {
+      "file": "postcanonical.json.gz.part-0002",
+      "size": 4194304,
+      "sha256": "7943baafd6927bdedd408058f75f5a28c7934dddef660932355692976c297147"
+    },
+    {
+      "file": "postcanonical.json.gz.part-0003",
+      "size": 4194304,
+      "sha256": "a67a0f4c851845de4d519f86f4f5aaae8a86ade22a4a0e7559160b8056073d2e"
+    },
+    {
+      "file": "postcanonical.json.gz.part-0004",
+      "size": 1927665,
+      "sha256": "13b966525a2d9b312c79c368ba43cfa9cda545124f5692097966aaf0c0d6c82b"
+    }
+  ]
+}

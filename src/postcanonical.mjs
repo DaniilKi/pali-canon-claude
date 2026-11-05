@@ -1,3 +1,4 @@
+import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * Post-canonical Pāli books of the VRI Chaṭṭha Saṅgāyana edition: the sub-commentaries (Ṭīkā) and the
  * "Añña" (other) books, among them the Visuddhimagga and the Abhidhammatthasaṅgaha. Built by
@@ -13,7 +14,6 @@
  * and any book id ("mahavamsa", "mahavamsa 3", "mahavamsa 3.12"). Visuddhimagga PTS pages ("Vism p. 3",
  * "Vism 3") are recognised but cannot be located: the VRI edition carries no PTS page breaks for it.
  */
-import { readFileSync, existsSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -69,7 +69,7 @@ let data = null;
 
 function dataPath() {
   const candidates = [join(here, 'data', FILE), join(here, '..', 'server', 'data', FILE), join(process.cwd(), 'server', 'data', FILE)];
-  return candidates.find((p) => existsSync(p)) || null;
+  return candidates.find((p) => bundledExists(p)) || null;
 }
 
 /** Load the bundled books once. Returns null when the data file is not installed. */
@@ -77,7 +77,7 @@ export function load() {
   if (data) return data;
   const path = dataPath();
   if (!path) return null;
-  const d = JSON.parse(gunzipSync(readFileSync(path)).toString('utf8'));
+  const d = JSON.parse(gunzipSync(readBundled(path)).toString('utf8'));
   d.byId = new Map();
   d.byKey = new Map();
   for (const b of d.books) {

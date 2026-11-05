@@ -1,3 +1,4 @@
+import { readBundled } from '../src/bundled-data.mjs';
 // Print coverage numbers by collection from the bundled data (used for docs/coverage.md).
 // Usage: node scripts/coverage.mjs [--json]
 import { readFileSync } from 'node:fs';
@@ -7,7 +8,7 @@ import * as canon from '../src/canon.mjs';
 import * as parallels from '../src/parallels.mjs';
 
 const dataDir = fileURLToPath(new URL('../server/data/', import.meta.url));
-const d = JSON.parse(gunzipSync(readFileSync(`${dataDir}canon.json.gz`)));
+const d = JSON.parse(gunzipSync(readBundled(`${dataDir}canon.json.gz`)));
 // translations.json merged with server/data/anandajoti.json, as the server sees them.
 const { translations } = canon.load();
 

@@ -21580,10 +21580,44 @@ __export(canon_exports, {
   sourceName: () => sourceName,
   translationId: () => translationId
 });
+
+// src/bundled-data.mjs
 var import_node_fs = require("node:fs");
-var import_node_zlib = require("node:zlib");
 var import_node_path = require("node:path");
 var import_node_url = require("node:url");
+var import_node_crypto = require("node:crypto");
+var pathString = (path) => path instanceof URL ? (0, import_node_url.fileURLToPath)(path) : path;
+var shardManifest = (path) => `${pathString(path)}.parts.json`;
+var bundledExists = (path) => (0, import_node_fs.existsSync)(path) || (0, import_node_fs.existsSync)(shardManifest(path));
+var sha256 = (bytes) => (0, import_node_crypto.createHash)("sha256").update(bytes).digest("hex");
+function readBundled(path) {
+  path = pathString(path);
+  if ((0, import_node_fs.existsSync)(path)) return (0, import_node_fs.readFileSync)(path);
+  const manifest = JSON.parse((0, import_node_fs.readFileSync)(shardManifest(path), "utf8"));
+  const invalid = () => {
+    throw new Error(`Invalid bundled data shards: ${(0, import_node_path.basename)(path)}`);
+  };
+  if (manifest.version !== 1 || !Number.isSafeInteger(manifest.size) || manifest.size < 1 || !/^[a-f0-9]{64}$/.test(manifest.sha256) || !Array.isArray(manifest.parts) || !manifest.parts.length) invalid();
+  let size = 0;
+  const chunks = manifest.parts.map((part, i) => {
+    const name = `${(0, import_node_path.basename)(path)}.part-${String(i + 1).padStart(4, "0")}`;
+    if (part.file !== name || !Number.isSafeInteger(part.size) || part.size < 1 || part.size >= 5 * 1024 * 1024 || !/^[a-f0-9]{64}$/.test(part.sha256)) invalid();
+    const bytes2 = (0, import_node_fs.readFileSync)((0, import_node_path.join)((0, import_node_path.dirname)(path), name));
+    if (bytes2.length !== part.size || sha256(bytes2) !== part.sha256) invalid();
+    size += bytes2.length;
+    return bytes2;
+  });
+  if (size !== manifest.size) invalid();
+  const bytes = Buffer.concat(chunks);
+  if (sha256(bytes) !== manifest.sha256) invalid();
+  return bytes;
+}
+
+// src/canon.mjs
+var import_node_fs2 = require("node:fs");
+var import_node_zlib = require("node:zlib");
+var import_node_path2 = require("node:path");
+var import_node_url2 = require("node:url");
 
 // src/editions.mjs
 var EDITIONS = {
@@ -22154,7 +22188,7 @@ var here;
 try {
   here = __dirname;
 } catch {
-  here = (0, import_node_path.dirname)((0, import_node_url.fileURLToPath)(import_meta.url));
+  here = (0, import_node_path2.dirname)((0, import_node_url2.fileURLToPath)(import_meta.url));
 }
 var ROMAN2 = ["", "i", "ii", "iii", "iv", "v", "vi", "vii"];
 var HEADING = /* @__PURE__ */ new Set(["subhead", "title", "chapter", "book", "nikaya", "subsubhead"]);
@@ -22240,7 +22274,7 @@ function mergeAnandajoti(translations) {
   } catch {
     return;
   }
-  const aj = JSON.parse((0, import_node_fs.readFileSync)(file, "utf8"));
+  const aj = JSON.parse((0, import_node_fs2.readFileSync)(file, "utf8"));
   anandajotiSource = aj.source;
   for (const [id, l] of Object.entries(aj.links)) {
     (translations[id] ||= []).push({
@@ -22269,15 +22303,15 @@ function translationId(t) {
   return `dt:${t.url.split("/suttas/")[1].replace(/\.html$/, "")}`;
 }
 function dataPath(name) {
-  const candidates = [(0, import_node_path.join)(here, "data", name), (0, import_node_path.join)(here, "..", "server", "data", name), (0, import_node_path.join)(process.cwd(), "server", "data", name)];
-  const found = candidates.find((p) => (0, import_node_fs.existsSync)(p));
+  const candidates = [(0, import_node_path2.join)(here, "data", name), (0, import_node_path2.join)(here, "..", "server", "data", name), (0, import_node_path2.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => bundledExists(p));
   if (!found) throw new Error(`Bundled canon data (${name}) is missing. Reinstall the extension or run the canon build.`);
   return found;
 }
 function load() {
   if (data) return data;
-  const canon = JSON.parse((0, import_node_zlib.gunzipSync)((0, import_node_fs.readFileSync)(dataPath("canon.json.gz"))).toString("utf8"));
-  const translations = JSON.parse((0, import_node_fs.readFileSync)(dataPath("translations.json"), "utf8"));
+  const canon = JSON.parse((0, import_node_zlib.gunzipSync)(readBundled(dataPath("canon.json.gz"))).toString("utf8"));
+  const translations = JSON.parse((0, import_node_fs2.readFileSync)(dataPath("translations.json"), "utf8"));
   mergeAnandajoti(translations);
   const byId = /* @__PURE__ */ new Map();
   for (const u of canon.units) if (!byId.has(u.id)) byId.set(u.id, u);
@@ -23097,10 +23131,9 @@ __export(analyse_exports, {
   tokenize: () => tokenize,
   wordParts: () => wordParts
 });
-var import_node_fs3 = require("node:fs");
 var import_node_zlib3 = require("node:zlib");
-var import_node_path3 = require("node:path");
-var import_node_url3 = require("node:url");
+var import_node_path4 = require("node:path");
+var import_node_url4 = require("node:url");
 
 // src/input.mjs
 var fold4 = fold3;
@@ -23342,25 +23375,25 @@ async function withNormalised(value, fn) {
 }
 
 // src/glossary-data.mjs
-var import_node_fs2 = require("node:fs");
+var import_node_fs3 = require("node:fs");
 var import_node_zlib2 = require("node:zlib");
-var import_node_path2 = require("node:path");
-var import_node_url2 = require("node:url");
+var import_node_path3 = require("node:path");
+var import_node_url3 = require("node:url");
 var import_meta2 = {};
 var here2;
 try {
   here2 = __dirname;
 } catch {
-  here2 = (0, import_node_path2.dirname)((0, import_node_url2.fileURLToPath)(import_meta2.url));
+  here2 = (0, import_node_path3.dirname)((0, import_node_url3.fileURLToPath)(import_meta2.url));
 }
 var cached2 = null;
 function loadGlossary() {
   if (cached2) return cached2;
   const name = "glossary.json.gz";
-  const candidates = [(0, import_node_path2.join)(here2, "data", name), (0, import_node_path2.join)(here2, "..", "server", "data", name), (0, import_node_path2.join)(process.cwd(), "server", "data", name)];
-  const found = candidates.find((p) => (0, import_node_fs2.existsSync)(p));
+  const candidates = [(0, import_node_path3.join)(here2, "data", name), (0, import_node_path3.join)(here2, "..", "server", "data", name), (0, import_node_path3.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => (0, import_node_fs3.existsSync)(p));
   if (!found) throw new Error("Bundled glossary data (glossary.json.gz) is missing. Reinstall the extension.");
-  cached2 = JSON.parse((0, import_node_zlib2.gunzipSync)((0, import_node_fs2.readFileSync)(found)).toString("utf8"));
+  cached2 = JSON.parse((0, import_node_zlib2.gunzipSync)((0, import_node_fs3.readFileSync)(found)).toString("utf8"));
   return cached2;
 }
 
@@ -23498,7 +23531,7 @@ var here3;
 try {
   here3 = __dirname;
 } catch {
-  here3 = (0, import_node_path3.dirname)((0, import_node_url3.fileURLToPath)(import_meta3.url));
+  here3 = (0, import_node_path4.dirname)((0, import_node_url4.fileURLToPath)(import_meta3.url));
 }
 var DPD_LICENSE = {
   name: "CC BY-NC-SA 4.0",
@@ -23517,10 +23550,10 @@ var cached3 = null;
 function loadDpd() {
   if (cached3) return cached3;
   const name = "dpd.json.gz";
-  const candidates = [(0, import_node_path3.join)(here3, "data", name), (0, import_node_path3.join)(here3, "..", "server", "data", name), (0, import_node_path3.join)(process.cwd(), "server", "data", name)];
-  const found = candidates.find((p) => (0, import_node_fs3.existsSync)(p));
+  const candidates = [(0, import_node_path4.join)(here3, "data", name), (0, import_node_path4.join)(here3, "..", "server", "data", name), (0, import_node_path4.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => bundledExists(p));
   if (!found) throw new Error("Bundled dictionary data (dpd.json.gz) is missing. Reinstall the extension.");
-  const data5 = JSON.parse((0, import_node_zlib3.gunzipSync)((0, import_node_fs3.readFileSync)(found)).toString("utf8"));
+  const data5 = JSON.parse((0, import_node_zlib3.gunzipSync)(readBundled(found)).toString("utf8"));
   const headwords = /* @__PURE__ */ new Map();
   const lemmas = /* @__PURE__ */ new Map();
   const folded = /* @__PURE__ */ new Map();
@@ -24239,7 +24272,7 @@ function findWindows(corpus, qwords, { keep = KEEP_WINDOWS } = {}) {
   return picked;
 }
 function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.length } = {}) {
-  const join9 = corpus.compounds ? "" : " ";
+  const join10 = corpus.compounds ? "" : " ";
   const Q = trigrams(corpus.compounds ? query.replace(/ /g, "") : query);
   const qlen = qwords.length;
   const variantSets = qwords.map((w) => new Set(corpus.variants(w).map((v) => v.id)));
@@ -24257,7 +24290,7 @@ function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.len
       const b = a + len;
       if (b > max) continue;
       const ids = corpus.tokens.subarray(a, b);
-      const dice = similarity(Q, Array.from(ids, (id) => corpus.vocab[id]).join(join9));
+      const dice = similarity(Q, Array.from(ids, (id) => corpus.vocab[id]).join(join10));
       if (dice <= best.sim) continue;
       const present = new Set(ids);
       const joined = corpus.compounds ? Array.from(ids, (id) => corpus.vocab[id]).join("") : "";
@@ -25900,17 +25933,17 @@ __export(topics_exports, {
   topicsIndex: () => topicsIndex
 });
 var import_node_fs4 = require("node:fs");
-var import_node_path4 = require("node:path");
-var import_node_url4 = require("node:url");
+var import_node_path5 = require("node:path");
+var import_node_url5 = require("node:url");
 var import_meta4 = {};
 var here4;
 try {
   here4 = __dirname;
 } catch {
-  here4 = (0, import_node_path4.dirname)((0, import_node_url4.fileURLToPath)(import_meta4.url));
+  here4 = (0, import_node_path5.dirname)((0, import_node_url5.fileURLToPath)(import_meta4.url));
 }
 function readData(name) {
-  const candidates = [(0, import_node_path4.join)(here4, "data", name), (0, import_node_path4.join)(here4, "..", "server", "data", name), (0, import_node_path4.join)(process.cwd(), "server", "data", name)];
+  const candidates = [(0, import_node_path5.join)(here4, "data", name), (0, import_node_path5.join)(here4, "..", "server", "data", name), (0, import_node_path5.join)(process.cwd(), "server", "data", name)];
   const found = candidates.find((p) => (0, import_node_fs4.existsSync)(p));
   if (!found) throw new Error(`Bundled data (${name}) is missing. Reinstall the extension or rebuild.`);
   return JSON.parse((0, import_node_fs4.readFileSync)(found, "utf8"));
@@ -26070,20 +26103,20 @@ __export(dppn_exports, {
   register: () => register7
 });
 var import_node_fs5 = require("node:fs");
-var import_node_path5 = require("node:path");
-var import_node_url5 = require("node:url");
+var import_node_path6 = require("node:path");
+var import_node_url6 = require("node:url");
 var import_meta5 = {};
 var here5;
 try {
   here5 = __dirname;
 } catch {
-  here5 = (0, import_node_path5.dirname)((0, import_node_url5.fileURLToPath)(import_meta5.url));
+  here5 = (0, import_node_path6.dirname)((0, import_node_url6.fileURLToPath)(import_meta5.url));
 }
 var cached4 = null;
 function loadDppn() {
   if (cached4) return cached4;
   const name = "dppn.json";
-  const candidates = [(0, import_node_path5.join)(here5, "data", name), (0, import_node_path5.join)(here5, "..", "server", "data", name), (0, import_node_path5.join)(process.cwd(), "server", "data", name)];
+  const candidates = [(0, import_node_path6.join)(here5, "data", name), (0, import_node_path6.join)(here5, "..", "server", "data", name), (0, import_node_path6.join)(process.cwd(), "server", "data", name)];
   const found = candidates.find((p) => (0, import_node_fs5.existsSync)(p));
   if (!found) throw new Error("Bundled proper-names data (dppn.json) is missing. Reinstall the extension.");
   cached4 = JSON.parse((0, import_node_fs5.readFileSync)(found, "utf8"));
@@ -28387,16 +28420,15 @@ __export(commentary_exports, {
   register: () => register14,
   segmentOwners: () => segmentOwners
 });
-var import_node_fs6 = require("node:fs");
 var import_node_zlib4 = require("node:zlib");
-var import_node_path6 = require("node:path");
-var import_node_url6 = require("node:url");
+var import_node_path7 = require("node:path");
+var import_node_url7 = require("node:url");
 var import_meta6 = {};
 var here6;
 try {
   here6 = __dirname;
 } catch {
-  here6 = (0, import_node_path6.dirname)((0, import_node_url6.fileURLToPath)(import_meta6.url));
+  here6 = (0, import_node_path7.dirname)((0, import_node_url7.fileURLToPath)(import_meta6.url));
 }
 var FILE = "commentary.json.gz";
 var ROMAN4 = ["", "i", "ii", "iii", "iv", "v", "vi", "vii"];
@@ -28422,14 +28454,14 @@ function paraRange(n) {
 }
 var data2 = null;
 function dataPath2() {
-  const candidates = [(0, import_node_path6.join)(here6, "data", FILE), (0, import_node_path6.join)(here6, "..", "server", "data", FILE), (0, import_node_path6.join)(process.cwd(), "server", "data", FILE)];
-  return candidates.find((p) => (0, import_node_fs6.existsSync)(p)) || null;
+  const candidates = [(0, import_node_path7.join)(here6, "data", FILE), (0, import_node_path7.join)(here6, "..", "server", "data", FILE), (0, import_node_path7.join)(process.cwd(), "server", "data", FILE)];
+  return candidates.find((p) => bundledExists(p)) || null;
 }
 function load2() {
   if (data2) return data2;
   const path = dataPath2();
   if (!path) return null;
-  data2 = JSON.parse((0, import_node_zlib4.gunzipSync)((0, import_node_fs6.readFileSync)(path)).toString("utf8"));
+  data2 = JSON.parse((0, import_node_zlib4.gunzipSync)(readBundled(path)).toString("utf8"));
   return data2;
 }
 function ptsLabel2(abbr, page) {
@@ -28588,16 +28620,15 @@ __export(postcanonical_exports, {
   select: () => select,
   withPostCanonical: () => withPostCanonical
 });
-var import_node_fs7 = require("node:fs");
 var import_node_zlib5 = require("node:zlib");
-var import_node_path7 = require("node:path");
-var import_node_url7 = require("node:url");
+var import_node_path8 = require("node:path");
+var import_node_url8 = require("node:url");
 var import_meta7 = {};
 var here7;
 try {
   here7 = __dirname;
 } catch {
-  here7 = (0, import_node_path7.dirname)((0, import_node_url7.fileURLToPath)(import_meta7.url));
+  here7 = (0, import_node_path8.dirname)((0, import_node_url8.fileURLToPath)(import_meta7.url));
 }
 var FILE2 = "postcanonical.json.gz";
 var LABELS = {
@@ -28635,14 +28666,14 @@ function roman(s) {
 var number3 = (s) => /^\d+$/.test(s) ? Number(s) : roman(s);
 var data3 = null;
 function dataPath3() {
-  const candidates = [(0, import_node_path7.join)(here7, "data", FILE2), (0, import_node_path7.join)(here7, "..", "server", "data", FILE2), (0, import_node_path7.join)(process.cwd(), "server", "data", FILE2)];
-  return candidates.find((p) => (0, import_node_fs7.existsSync)(p)) || null;
+  const candidates = [(0, import_node_path8.join)(here7, "data", FILE2), (0, import_node_path8.join)(here7, "..", "server", "data", FILE2), (0, import_node_path8.join)(process.cwd(), "server", "data", FILE2)];
+  return candidates.find((p) => bundledExists(p)) || null;
 }
 function load3() {
   if (data3) return data3;
   const path = dataPath3();
   if (!path) return null;
-  const d = JSON.parse((0, import_node_zlib5.gunzipSync)((0, import_node_fs7.readFileSync)(path)).toString("utf8"));
+  const d = JSON.parse((0, import_node_zlib5.gunzipSync)(readBundled(path)).toString("utf8"));
   d.byId = /* @__PURE__ */ new Map();
   d.byKey = /* @__PURE__ */ new Map();
   for (const b of d.books) {
@@ -29177,16 +29208,16 @@ __export(parallels_exports, {
   load: () => load4,
   register: () => register16
 });
-var import_node_fs8 = require("node:fs");
+var import_node_fs6 = require("node:fs");
 var import_node_zlib6 = require("node:zlib");
-var import_node_path8 = require("node:path");
-var import_node_url8 = require("node:url");
+var import_node_path9 = require("node:path");
+var import_node_url9 = require("node:url");
 var import_meta8 = {};
 var here8;
 try {
   here8 = __dirname;
 } catch {
-  here8 = (0, import_node_path8.dirname)((0, import_node_url8.fileURLToPath)(import_meta8.url));
+  here8 = (0, import_node_path9.dirname)((0, import_node_url9.fileURLToPath)(import_meta8.url));
 }
 var FILE3 = "parallels.json.gz";
 var SOURCES = ["commentary-citation", "shared-passage"];
@@ -29200,14 +29231,14 @@ var MATCH = {
 var data4 = null;
 var index2 = null;
 function dataPath4() {
-  const candidates = [(0, import_node_path8.join)(here8, "data", FILE3), (0, import_node_path8.join)(here8, "..", "server", "data", FILE3), (0, import_node_path8.join)(process.cwd(), "server", "data", FILE3)];
-  return candidates.find((p) => (0, import_node_fs8.existsSync)(p)) || null;
+  const candidates = [(0, import_node_path9.join)(here8, "data", FILE3), (0, import_node_path9.join)(here8, "..", "server", "data", FILE3), (0, import_node_path9.join)(process.cwd(), "server", "data", FILE3)];
+  return candidates.find((p) => (0, import_node_fs6.existsSync)(p)) || null;
 }
 function load4() {
   if (data4) return data4;
   const path = dataPath4();
   if (!path) return null;
-  data4 = JSON.parse((0, import_node_zlib6.gunzipSync)((0, import_node_fs8.readFileSync)(path)).toString("utf8"));
+  data4 = JSON.parse((0, import_node_zlib6.gunzipSync)((0, import_node_fs6.readFileSync)(path)).toString("utf8"));
   index2 = /* @__PURE__ */ new Map();
   const add = (id, entry3) => (index2.get(id) || index2.set(id, []).get(id)).push(entry3);
   data4.citations.forEach((l, i) => {

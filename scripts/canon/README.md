@@ -2,6 +2,21 @@
 
 `server/data/canon.json.gz` (Pāli text + citation index) and `server/data/translations.json` (translation links) are generated. Python 3.10+ and git are needed; nothing here runs at user install time.
 
+## Bundled shards and Python build inputs
+
+The four large gzip datasets (`canon`, `commentary`, `postcanonical`, `dpd`) ship as 4 MiB byte shards and a `<name>.json.gz.parts.json` manifest. These are pieces of the **original compressed bytes**, not separately compressed JSON records. The manifest records their order, byte counts and SHA-256 hashes, plus the original gzip hash. Runtime loaders verify and join them in memory, then decompress as before. No download or disk cache is needed. Legacy monolithic files are still accepted.
+
+Before passing committed data to a Python builder, validator, diff report or experiment, unpack it into a separate working directory from the repository root:
+
+```sh
+node scripts/shard-data.mjs --unpack server/data /tmp/pali-inputs
+# Use /tmp/pali-inputs/canon.json.gz (and the other original filenames) as Python inputs.
+```
+
+For the embedding experiment, set `PALI_CANON_DATA_DIR` to that directory. Python builders continue to write ordinary `.json.gz` files. Install rebuilt outputs in `server/data/`, then run `npm run build`: it splits files of 5 MiB or more deterministically, verifies the shards and removes obsolete parts. The monthly refresh unpacks old data into its working directory and re-shards installed outputs during the bundle build. `npm run audit` checks the 5 MiB data-file ceiling and shard integrity as well as the existing full-text checks.
+
+## Rebuild from pinned sources
+
 ```sh
 W=/tmp/pali-build && mkdir -p $W && cd $W
 # 1. VRI Chaṭṭha Saṅgāyana XML (romanised root texts only)

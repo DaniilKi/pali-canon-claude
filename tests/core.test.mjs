@@ -1,3 +1,4 @@
+import { bundledExists } from '../src/bundled-data.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { parseCitation, CitationError } from '../src/citations.mjs';
@@ -263,7 +264,7 @@ test('npm package: bin starts the bundled server with a portable shebang', async
   // LF only: a CRLF shebang ("node\r") fails on macOS and Linux.
   assert.ok(server.startsWith('#!/usr/bin/env node\n'), 'server/index.cjs must start with an LF shebang');
   for (const file of ['server/data/canon.json.gz', 'server/data/translations.json']) {
-    assert.ok(existsSync(new URL(`../${file}`, import.meta.url)), file);
+    assert.ok(bundledExists(new URL(`../${file}`, import.meta.url)), file);
   }
   assert.ok(pkg.files.includes('server'), 'package files must ship server/ (bundle and data)');
 });
@@ -541,7 +542,7 @@ test('Gemini extension stays in step with the package and the skills', async () 
   assert.equal(server.args[0], '${extensionPath}${/}server${/}index.cjs');
   assert.ok(server.args[0].endsWith('server${/}index.cjs'));
   assert.ok(existsSync(new URL('server/index.cjs', root)), 'server/index.cjs must be committed');
-  assert.ok(existsSync(new URL('server/data/canon.json.gz', root)), 'server/data must be committed');
+  assert.ok(bundledExists(new URL('server/data/canon.json.gz', root)), 'server/data must be committed');
   const tools = [...read('src/server.mjs').matchAll(/tool\('([a-z_]+)'/g)].map((m) => m[1]);
   for (const skill of ['study', 'compare', 'pali-word', 'method', 'memorise']) {
     const toml = read(`commands/${skill}.toml`);
