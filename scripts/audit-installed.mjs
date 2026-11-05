@@ -1,0 +1,117 @@
+// Exhaustive offline check of the shipped bundle, isolated from src/ and the checkout's server/data.
+import assert from 'node:assert/strict';
+import { cp, mkdtemp, mkdir, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { dirname, resolve, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+import * as canon from '../src/canon.mjs';
+import * as commentary from '../src/commentary.mjs';
+import * as postcanonical from '../src/postcanonical.mjs';
+import { checkPages } from './installed-corpus.mjs';
+import { offlineDataChecks } from './offline-data-checks.mjs';
+import { available as availableEnglish } from '../src/english.mjs';
+
+const serverAt = process.argv.indexOf('--server-dir');
+if (serverAt >= 0 && !process.argv[serverAt + 1]) throw new Error('--server-dir requires a directory path');
+const reportAt = process.argv.indexOf('--report');
+if (reportAt >= 0 && !process.argv[reportAt + 1]) throw new Error('--report requires a destination path');
+const missingCommentary = [];
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const stage = await mkdtemp(join(tmpdir(), 'pali-installed-'));
+const client = new Client({ name: 'pali-installed-corpus-audit', version: '1.0.0' });
+let transport;
+let stderr = '';
+const counts = { canonical_texts: 0, canonical_segments: 0, canonical_pages: 0,
+  commentary_texts: 0, commentary_unaligned_texts: 0, commentary_segments: 0, commentary_pages: 0,
+  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0 };
+try {
+  if (reportAt >= 0) await writeFile(resolve(process.argv[reportAt + 1]), '{"status":"running"}\n');
+  const serverDirectory = serverAt >= 0 ? resolve(process.argv[serverAt + 1]) : join(root, 'server');
+  await cp(serverDirectory, join(stage, 'server'), { recursive: true });
+  await mkdir(join(stage, 'empty'));
+  const guard = join(stage, 'no-network.cjs');
+  await writeFile(guard, `const fail = () => { process.stderr.write('UNEXPECTED_NETWORK_ATTEMPT\\n'); throw new Error('Network is disabled in the installed corpus audit'); };
+globalThis.fetch = fail;
+for (const name of ['node:http', 'node:https']) { const m = require(name); m.request = fail; m.get = fail; }
+const net = require('node:net'); net.connect = fail; net.createConnection = fail;
+require('node:module').syncBuiltinESMExports();\n`);
+  transport = new StdioClientTransport({ command: process.execPath,
+    args: ['--require', guard, join(stage, 'server', 'index.cjs')],
+    cwd: join(stage, 'empty'), stderr: 'pipe', env: { ...process.env } });
+  transport.stderr.on('data', (chunk) => { stderr += chunk.toString(); });
+  await client.connect(transport);
+  const call = async (name, args) => {
+    const response = await client.callTool({ name, arguments: args }, undefined, { timeout: 120000 });
+    assert.ok(!response.isError, `${name}(${JSON.stringify(args)}): ${JSON.stringify(response.content)}`);
+    const text = response.content.find((part) => part.type === 'text')?.text;
+    assert.equal(typeof text, 'string', `${name}: JSON text response`);
+    return JSON.parse(text);
+  };
+  for (const u of canon.load().canon.units) {
+    const { unit } = canon.resolve(u.id);
+    const expectedEnglish = JSON.parse(JSON.stringify(availableEnglish(unit)));
+    const canonical = await checkPages(call, 'get_text', { uid: u.id }, canon.segments(unit), {
+      metadata: (result) => {
+        assert.equal(result.text_id, unit.id);
+        assert.deepEqual(result.english_available, expectedEnglish, `${u.id}: linked translation metadata`);
+      },
+    });
+    counts.canonical_texts += 1;
+    counts.canonical_segments += canonical.segments;
+    counts.canonical_pages += canonical.pages;
+    const expected = commentary.commentaryFor(unit, { limit: Number.MAX_SAFE_INTEGER });
+    if (expected.available) {
+      const checked = await checkPages(call, 'get_commentary', { uid: u.id }, expected.segments, {
+        metadata: (result) => {
+          assert.equal(result.available, true);
+          assert.equal(result.text_id, unit.id);
+          assert.equal(result.label, expected.label);
+        },
+      });
+      counts.commentary_texts += 1;
+      counts.commentary_segments += checked.segments;
+      counts.commentary_pages += checked.pages;
+    } else {
+      const result = await call('get_commentary', { uid: u.id, limit: 1 });
+      assert.equal(result.available, false, `${u.id}: unaligned commentary must be labelled`);
+      assert.deepEqual(result.segments, []);
+      assert.ok(result.notes.length, `${u.id}: missing alignment needs an explanation`);
+      counts.commentary_unaligned_texts += 1;
+      missingCommentary.push({ id: u.id, citation: u.acronym, collection: u.collection, notes: result.notes });
+    }
+    if (counts.canonical_texts % 1000 === 0) console.log(`Checked ${counts.canonical_texts} canonical texts and their commentary`);
+  }
+  for (const book of postcanonical.load().books) {
+    const sel = postcanonical.select(book.id);
+    const expected = postcanonical.segmentsOf(sel.book.blocks.slice(sel.start, sel.end))
+      .map((segment, i) => ({ ref: `${sel.citation}/${i + 1}`, ...segment }));
+    const checked = await checkPages(call, 'get_post_canonical', { citation: book.id }, expected, {
+      metadata: (result) => assert.equal(result.canonical, false),
+    });
+    counts.postcanonical_books += 1;
+    counts.postcanonical_segments += checked.segments;
+    counts.postcanonical_pages += checked.pages;
+    if (counts.postcanonical_books % 20 === 0) console.log(`Checked ${counts.postcanonical_books} post-canonical books`);
+  }
+  for (const [name, args, verify] of offlineDataChecks) {
+    assert.ok(verify(await call(name, args)), `${name}: bundled offline dataset`);
+    counts.lazy_data_checks += 1;
+  }
+  assert.ok(!stderr.includes('UNEXPECTED_NETWORK_ATTEMPT'), 'every checked operation must work without attempting network access');
+  const summary = { ...counts, approximate_canonical_texts: canon.load().canon.units.filter((unit) => unit.approximate).length, network_attempts: 0, failures: 0 };
+  if (reportAt >= 0) {
+    await writeFile(resolve(process.argv[reportAt + 1]), `${JSON.stringify({ status: 'passed', summary, unaligned_commentary: missingCommentary }, null, 2)}\n`);
+  }
+  console.log(JSON.stringify(summary));
+} catch (error) {
+  if (reportAt >= 0) {
+    await writeFile(resolve(process.argv[reportAt + 1]), `${JSON.stringify({ status: 'failed', error: error.message, partial_counts: counts }, null, 2)}\n`);
+  }
+  throw error;
+} finally {
+  await client.close();
+  await transport?.close();
+  await rm(stage, { recursive: true, force: true });
+}

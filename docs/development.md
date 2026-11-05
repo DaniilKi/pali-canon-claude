@@ -242,3 +242,19 @@ Directory submissions use https://github.com/DaniilKi/pali-canon-claude/blob/mai
 | A citation resolves wrongly | Add a failing test in `tests/core.test.mjs`, fix, run `npm run audit` |
 | `npm run outage` exits with "OUTAGE CHECK FAILED" | A mirror or fallback no longer behaves as designed. The scenario and call it lists show which source to look at |
 | `node scripts/linkcheck.mjs` exits with "LINK CHECK FAILED" | A translation page has moved or gone (HTTP 404/410), or a whole site was down. Fix or remove the link in the translation data, or wait for the site to come back |
+
+## Verify every text in the installed bundle
+
+Run `npm run audit:installed` after building the server. This copies only `server/` to a temporary directory, starts its stdio MCP server from an empty working directory, and disables network access in that process. It reads every page of every canonical text and aligned commentary, plus every post-canonical book, and compares the returned segments and citations with the source corpus. It also compares linked translation metadata for every text and exercises eleven offline fixtures covering all bundled datasets, including the dictionary, glossary, parallels, topics and Vinaya references. The temporary copy is removed when the check ends.
+
+For a JSON report that also lists every text without an aligned commentary passage, run:
+
+```sh
+npm run audit:installed -- --report /tmp/pali-installed-corpus.json
+```
+
+To exhaustively check an extracted npm tarball or desktop staging directory, add `--server-dir /path/to/package/server`; the source corpus in this checkout remains the comparison baseline. A report records `running`, then `passed` or `failed`, so a failed rerun cannot leave an earlier successful report looking current.
+
+Use an existing writable destination directory; on Windows, choose a path on your own computer. The report distinguishes missing commentary alignments from retrieval failures. It also counts approximate texts: passing this check does not fill the VRI edition's abbreviations, supply missing commentary alignments or add English translations. The data remains exactly as sourced.
+
+The package CI runs the exhaustive installed-corpus audit once on Ubuntu with Node 20. Its separate npm installation matrix checks that all lazy datasets load from the installed tarball on every supported OS. Those checks now fail when a lazy dictionary shard is missing, or a missing optional translation-link index would silently reduce the available references, even if MN 10 resolves correctly. Negative regression fixtures also reject dropped or altered text, wrong totals, repeated pages and missing continuations.

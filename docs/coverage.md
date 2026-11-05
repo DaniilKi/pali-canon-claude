@@ -114,3 +114,11 @@ Many short SN and AN texts have no link: the commentary passes over them, and th
 | Translations in other languages | [#35](https://github.com/DaniilKi/pali-canon-claude/issues/35) |
 
 To regenerate these numbers, see [development.md](development.md#coverage-numbers).
+
+## Offline delivery check
+
+The 5 November 2026 installed-package audit read every page of all 8,544 canonical text records and all 109 post-canonical books through the shipped MCP server. The returned text, citations and continuation offsets matched the source corpus. The server ran in an isolated directory with network access disabled. Translation-link metadata also matched for every canonical record.
+
+For the same 8,544 records, commentary was available for 6,070; 2,474 returned an explicit notice that no passage was aligned. This does not mean the traditional commentary is absent: it may skip a repeated text, or an alignment has not been established confidently. The 266 texts abbreviated in VRI remain marked approximate. English translation bodies are fetched live and are not part of the offline bundle.
+
+Run `npm run audit:installed` to repeat the check. The optional JSON report lists every text without an aligned commentary passage; see [the development guide](development.md#verify-every-text-in-the-installed-bundle). Passing this check verifies delivery against the bundled source data, without claiming that every source gap has been filled.

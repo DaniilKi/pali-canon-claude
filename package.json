@@ -37,7 +37,8 @@
     "linkcheck": "node scripts/linkcheck.mjs",
     "registry:check": "node scripts/check-server-json.mjs --publish",
     "evals": "node evals/run.mjs",
-    "eval": "node evals/run.mjs"
+    "eval": "node evals/run.mjs",
+    "audit:installed": "node scripts/audit-installed.mjs"
   },
   "dependencies": {},
   "devDependencies": {
