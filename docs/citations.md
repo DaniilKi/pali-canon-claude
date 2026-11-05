@@ -96,6 +96,18 @@ All three point to the opening of MN 10 (Mahāsatipaṭṭhāna Sutta).
 
 `get_text` shows these page breaks on each segment (`thai_page_begins`, `myanmar_page_begins`, `vri_page_begins`, next to `pts_page_begins`), and `get_metadata` / `resolve_reference` give each text's first and last page break and the break before it (`edition_pages`). Every label they show can be pasted back as a citation; the audit checks this for all 56,050 markers.
 
+## Complete VRI source books
+
+To read a complete root-text book, first call `browse_canon` with `node: "books"`. The catalogue gives its title, VRI filename and the exact `book` ID to use with `get_text`. For example:
+
+```json
+{"book":"vin02m1","offset":0,"limit":60}
+```
+
+This reads the Pācittiyapāḷi from its opening, including the two introductory recitation lines outside the individual rule spans. All 61 bundled root files can be read this way, with the same `next_offset`, `script` and variant options as an individual passage. Give exactly one selector: `book` for a complete source book, or `uid` for a standard citation. English translations and aligned commentary require an individual `uid`.
+
+Book responses carry `selection: "source_book"`, a `book_id`, the VRI filename, pinned source version, attribution and terms. Their segment references begin `vri-book:`, and are source-file reading positions, not standard sutta/rule citations. They have no individual `text_id`. Cite the source file and the VRI paragraph or printed page shown; use `uid` when you need a standard citation. Book mode includes the source's front matter and keeps abbreviations as printed, without reconstructing them.
+
 ## Two numbering systems
 
 There is no single universal numbering. In parts of the Saṃyutta and Aṅguttara Nikāyas, two systems differ:

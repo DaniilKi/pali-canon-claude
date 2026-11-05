@@ -25,6 +25,8 @@ What Pali Canon for Claude contains in version 2.1.0, computed directly from the
 
 "Texts" here means the units people cite: a sutta, a verse, a rule, a Khandhaka chapter, an Abhidhamma section. Some collections are counted by verse (Dhammapada) and some by chapter or story.
 
+All 61 root files can also be read from beginning to end using `get_text` with a `book` ID from `browse_canon` (`node: "books"`). This includes source headings and front matter outside individual citation spans. These are source-book readings, not additional citable texts; the 8,544-unit count stays the same. See [complete source-book reading](citations.md#complete-vri-source-books).
+
 ## Sutta Piṭaka: discourses (6,999 texts)
 
 | Collection | Citation | Texts | Grouped | Approximate | English (texts) |

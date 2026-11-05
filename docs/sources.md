@@ -30,7 +30,7 @@ A source is used only when it meets all five tests:
 
 | Source | Status | Why | Terms | Link |
 |---|---|---|---|---|
-| **Chaṭṭha Saṅgāyana Tipiṭaka**, Vipassana Research Institute (VRI) | **Bundled** | The text of the Sixth Council (Yangon, 1954–56), the most widely used modern edition. Complete, carefully proofread, published as versioned XML with page markers for four other editions | Free for non-commercial use; attribute VRI | [tipitaka.org](https://www.tipitaka.org) · [GitHub](https://github.com/VipassanaTech/tipitaka-xml) |
+| **Chaṭṭha Saṅgāyana Tipiṭaka**, Vipassana Research Institute (VRI) | **Bundled** | The text of the Sixth Council (Yangon, 1954–56), the most widely used modern edition. Complete, carefully proofread, published as versioned XML with page markers for four other editions; complete source-file reads (`get_text` with `book`) include the source front matter | Free for non-commercial use; attribute VRI | [tipitaka.org](https://www.tipitaka.org) · [GitHub](https://github.com/VipassanaTech/tipitaka-xml) |
 | **Mahāsaṅgīti Tipiṭaka** (SuttaCentral's Pāli) | **Build only** | Used once to match standard citation numbers (MN 10, SN 46.131–140) to the VRI text. It is derived from VRI, so it is not an independent witness, and it is not shipped | Public Domain Mark 1.0 | [bilara-data](https://github.com/suttacentral/bilara-data) |
 | **Pali Text Society editions** | **Bundled (page numbers only)** | The standard scholarly citation system ("M i 55"). We use VRI's own markers for PTS page breaks, not the PTS text | page numbers are facts | [palitextsociety.org](https://palitextsociety.org/) |
 | **PTS texts on GRETIL** | **Declined** | Provided for scholarly use only | restricted | [GRETIL](https://gretil.sub.uni-goettingen.de/) |

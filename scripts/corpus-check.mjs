@@ -57,7 +57,7 @@ export function options(argv) {
     if (arg === '--scope') out.scope = value;
   }
   assert.ok(Number.isInteger(out.pageSize) && out.pageSize >= 1 && out.pageSize <= 200, 'page size must be 1–200');
-  assert.ok(['all', 'canon', 'commentary', 'postcanonical'].includes(out.scope), 'scope must be all, canon, commentary or postcanonical');
+  assert.ok(['all', 'canon', 'commentary', 'postcanonical', 'books'].includes(out.scope), 'scope must be all, canon, commentary, postcanonical or books');
   return out;
 }
 
@@ -90,7 +90,7 @@ export async function run({ server, pageSize, scope, report }) {
     schema_version: 1, scope, transport: 'stdio', server: resolve(server), page_size: pageSize,
     vri_commit: root.canon.source.commit, offline: true,
     expected: { canon_texts: root.canon.units.length, canon_books: root.canon.books.length, postcanonical_books: pc?.books.length ?? null },
-    checked: { canon: 0, commentary: 0, postcanonical: 0 }, commentary_unavailable: 0,
+    checked: { canon: 0, commentary: 0, postcanonical: 0, books: 0 }, commentary_unavailable: 0,
     pages: 0, segments: 0, collections: {}, failures: [], failure_count: 0,
     source_coverage: sourceCoverage(root.canon),
   };
@@ -123,7 +123,7 @@ export async function run({ server, pageSize, scope, report }) {
   try {
     await client.connect(transport);
     for (const [index, unit] of root.canon.units.entries()) {
-      if (scope === 'postcanonical') break;
+      if (scope === 'postcanonical' || scope === 'books') break;
       const resolved = canon.resolve(unit.id).unit;
       if (scope === 'all' || scope === 'canon') {
         await record('canon', unit.id, async () => {
@@ -184,10 +184,32 @@ export async function run({ server, pageSize, scope, report }) {
       });
       console.log(`Read post-canonical book ${book.id}; ${summary.failure_count} failures`);
     }
+    if (scope === 'all') summary.indexed_texts_sha256 = hash.copy().digest('hex');
+    if (scope === 'all' || scope === 'books') {
+      for (const [index, book] of root.canon.books.entries()) {
+        const id = book.file.replace(/\.mul\.xml$/, '');
+        await record('books', id, async () => {
+          const expected = canon.segments({ id: `vri-book:${id}`, book: index, start: 0, end: book.blocks.length, collection: book.pitaka === 'vinaya' ? 'vinaya' : book.collection });
+          return checkPages(call, {
+            tool: 'get_text', args: { book: id }, expected, pageSize,
+            validate: (page) => {
+              assert.equal(page.selection, 'source_book');
+              assert.equal(page.book_id, id);
+              assert.equal(page.vri_file, book.file);
+              assert.equal(page.text_id, undefined, 'source book presented as a standard text ID');
+              assert.equal(page.canonical, true);
+              assert.equal(page.source.commit, root.canon.source.commit);
+              assert.equal(page.source.terms, root.canon.source.terms);
+            },
+          });
+        });
+        console.log(`Read complete source book ${id}; ${summary.failure_count} failures`);
+      }
+    }
   } finally { await client.close(); }
-  for (const kind of ['canon', 'commentary', 'postcanonical']) {
+  for (const kind of ['canon', 'commentary', 'postcanonical', 'books']) {
     if (scope !== 'all' && scope !== kind) continue;
-    const expected = kind === 'postcanonical' ? pc.books.length : root.canon.units.length;
+    const expected = kind === 'postcanonical' ? pc.books.length : kind === 'books' ? root.canon.books.length : root.canon.units.length;
     if (summary.checked[kind] !== expected && summary.failure_count === 0) {
       summary.failure_count += 1;
       summary.failures.push({ scope: kind, error: `Checked ${summary.checked[kind]} of ${expected} expected entries` });

@@ -64,6 +64,12 @@ try {
   await call('search_texts', { query: 'anapanassati', limit: 3 }, (d) => assert.ok(d.results.length));
   await call('search_texts', { query: '"sabbe sankhara anicca"', collection: 'dhp' }, (d) => assert.ok(d.results.some((r) => r.id === 'dhp277')));
   for (const node of ['canon', 'vinaya', 'sn', 'sn56', 'abhidhamma']) await call('browse_canon', { node, limit: 3 });
+  await call('browse_canon', { node: 'books', limit: 3 }, (d) => assert.ok(d.items.every((b) => b.read_with.tool === 'get_text' && b.read_with.book === b.id)));
+  const bookOpening = await call('get_text', { book: 'vin02m1', limit: 3 }, (d) => {
+    assert.equal(d.selection, 'source_book'); assert.equal(d.book_id, 'vin02m1');
+    assert.ok(d.source.terms && d.segments.every((s) => s.ref.startsWith('vri-book:vin02m1/')));
+  });
+  await call('get_text', { book: 'vin02m1', offset: bookOpening.next_offset, limit: 3 }, (d) => assert.notEqual(d.segments[0].ref, bookOpening.segments.at(-1).ref));
   await call('list_sources', {});
   // verify_quote on Dhp 5 as returned by get_text (no scripture typed here), without diacritics.
   const dhp5 = await call('get_text', { uid: 'Dhp 5' });

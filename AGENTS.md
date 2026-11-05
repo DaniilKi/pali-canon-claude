@@ -113,6 +113,7 @@ Packaging around the same bundle (none of it changes `server/`):
 - **Segments** (`canon.segments`) group blocks into headings, prose and whole stanzas with `vri_paragraph`, `pts_page_begins` and optional `variant_readings`. `centre` blocks count as headings only for colophons and invocations.
 - **Search** folds diacritics, needs all terms, supports quoted phrases, and lets specific texts take precedence over ranges that contain them.
 - **Translations** default to dhammatalks.org, then the first link. `translation_id` is `dt:<path>`, `ati:<path>` or `aj:<path>`. A verse inherits its chapter's links (`linksFor`). ATI mirrors, in order: live site → raw.githubusercontent `bcbsit/ati` → jsDelivr `bcbsit/ati` → `digitalpalireader/accesstoinsight`.
+- **Complete root books**: `browse_canon` node `books` lists the 61 bundled root files; `get_text` accepts exactly one of `uid` (individual citation) or `book` (catalogue ID, handled by `src/source-books.mjs`). Book results include front matter and use `vri-book:` segment references, `selection: 'source_book'`, source attribution/terms and no individual `text_id`. Translation and aligned commentary options require `uid`.
 
 ### Translation links (build_translations.py `conservative()`)
 
