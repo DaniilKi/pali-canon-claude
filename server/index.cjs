@@ -21751,6 +21751,10 @@ var VINAYA_SCOPES = {
 };
 var fold = (value) => String(value ?? "").normalize("NFD").replace(new RegExp("\\p{M}", "gu"), "").toLowerCase();
 var stem = (title) => fold(title).replace(/\(.*?\)/g, "").replace(/[^a-z]/g, "").replace(/pali$/, "").replace(/[aom]+$/, "");
+function matchesEditionBook(title, qualifier) {
+  const want = stem(qualifier);
+  return want.length >= 3 && stem(title).startsWith(want);
+}
 function editionIndex(d) {
   if (d.editions) return d.editions;
   const { books, units } = d.canon;
@@ -21803,8 +21807,7 @@ function lookupEditionPage(d, c, ErrorClass = Error) {
     if (list) found.push(...list);
   }
   if (c.book) {
-    const want = stem(c.book);
-    const filtered = found.filter((x) => want.length >= 3 && stem(d.canon.books[x.book].title).startsWith(want));
+    const filtered = found.filter((x) => matchesEditionBook(d.canon.books[x.book].title, c.book));
     if (!filtered.length && found.length) {
       const titles = [...new Set(found.map((x) => d.canon.books[x.book].title))];
       throw new ErrorClass(`${c.raw}: "${c.book}" does not match a book carrying ${edName} page ${c.volume ? `${c.volume}.` : ""}${c.page}. It occurs in: ${titles.join(", ")}.`);
@@ -24933,8 +24936,12 @@ var ROMAN3 = "(?:I{1,3}|IV|VI{0,2}|i{1,3}|iv|vi{0,2})";
 var VINAYA = "(?:Pj|Ss|Ay|Np|Pc|Pd|Sk|Kd|Mv|Cv|Pvr|Parajika|Sanghadisesa|Aniyata|Nissaggiya|Pacittiya|Patidesaniya|Sekhiya|Adhikaranasamatha|Khandhaka)";
 var LOWER_IDS = ["dn", "mn", "sn", "an", "kp", "dhp", "ud", "iti", "snp", "vv", "pv", "thag", "thig", "bv", "mnd", "cnd", "mil", "kv", "ds", "vb", "patthana"];
 var LINK_HOSTS = /^(?:www\.)?(?:suttacentral\.net|accesstoinsight\.org|dhammatalks\.org)$/i;
+var EDITION_HEAD = `(?:${Object.keys(EDITION_WORDS).sort((a, b) => b.length - a.length).join("|")})(?:\\.?\\s*ed(?:ition)?\\.?)?[\\s.:,]+`;
+var EDITION_SCOPE = [.../* @__PURE__ */ new Set([...ABBREVIATIONS, ...FULL_NAMES, ...Object.keys(_test.COLLECTIONS), ...Object.keys(VINAYA_SCOPES)])].sort((a, b) => b.length - a.length).join("|");
+var EDITION_PAGE = `(?:${ROMAN3}(?:\\.\\s*|\\s+))?(?:(?:volume|vol)\\.?\\s*)?\\d+(?:(?:\\s*[.:,]\\s*|\\s+(?:(?:pages?|pp|p)\\.?\\s*)?)\\d+)*(?:\\s*[-\u2013\u2014]\\s*\\d+(?:[.:]\\d+)*)?`;
 var PATTERNS = [
   { scheme: "link", rank: 0, re: /https?:\/\/[^\s<>"'()[\]{}]+/giu },
+  { scheme: "edition", rank: 0, re: new RegExp(`${BOUND_BEFORE}${EDITION_HEAD}(?:${EDITION_SCOPE})\\.?\\s*${EDITION_PAGE}${BOUND_AFTER}`, "giu") },
   { scheme: "pts", rank: 1, re: new RegExp(`${BOUND_BEFORE}(?:PTS[: ]\\s?)?(?:${PTS_ABBREVIATIONS.join("|")})(?:\\.\\s?|\\s)${ROMAN3}(?:\\.\\s?|\\s)\\d+${BOUND_AFTER}`, "gu") },
   { scheme: "vinaya", rank: 2, re: new RegExp(`${BOUND_BEFORE}(?:Vinaya\\s)?(?:(?:Bu|Bi|Bhikkhu|Bhikkhuni)\\s?)?${VINAYA}\\s?${NUM}${BOUND_AFTER}`, "gu") },
   { scheme: "vinaya", rank: 2, re: new RegExp(`${BOUND_BEFORE}Vinaya\\s(?:Mahavagga|Cul?lavagga)\\s?${NUM}${BOUND_AFTER}`, "giu") },
@@ -24958,7 +24965,7 @@ function foldWithOffsets(text) {
 function trimLink(raw) {
   return raw.replace(/[.,;:!?]+$/, "");
 }
-function scan(text) {
+function scan(text, { editionBookNames = [] } = {}) {
   const { folded, offsets } = foldWithOffsets(text);
   const span = (start, end) => {
     let to = offsets[end - 1] + 1;
@@ -24970,7 +24977,12 @@ function scan(text) {
     re.lastIndex = 0;
     for (const m of folded.matchAll(re)) {
       const length = scheme === "link" ? trimLink(m[0]).length : m[0].length;
-      const [start, end] = span(m.index, m.index + length);
+      const [start, baseEnd] = span(m.index, m.index + length);
+      let end = baseEnd;
+      if (scheme === "edition") {
+        const qualifier = text.slice(end).match(/^\s*\(([^()\r\n]{1,100})\)/u);
+        if (qualifier && editionBookNames.some((title) => matchesEditionBook(title, qualifier[1]))) end += qualifier[0].length;
+      }
       if (scheme === "link") {
         let host = "";
         try {
@@ -24995,7 +25007,7 @@ function scan(text) {
 var MAX_TEXT = 2e5;
 var MAX_RESULTS = 500;
 function findCitations(text, canon, { limit = MAX_RESULTS } = {}) {
-  const spans = scan(text);
+  const spans = scan(text, { editionBookNames: canon.load().canon.books.map((book) => book.title) });
   const citations = spans.slice(0, limit).map((span) => {
     try {
       const { unit, notes, alternatives } = canon.resolve(span.text.normalize("NFC"));
@@ -25022,12 +25034,12 @@ function findCitations(text, canon, { limit = MAX_RESULTS } = {}) {
     ...spans.length > citations.length ? { truncated: true } : {},
     offsets: "start and end are UTF-16 code-unit offsets into the input, end exclusive (JavaScript String.slice).",
     citations,
-    scope: "Citations are found by pattern; a citation the scanner did not recognise is not checked. Unresolved citations are reported, never corrected. Abbreviations that read as English in prose (single letters before a bare number, It, Ps, Pe, Ne, Pp, Ya, Dt, As) are skipped; write MN, SN, Iti, Pa\u1E6Dis and so on, or check one citation with resolve_reference.",
+    scope: "Citations are found by pattern; a citation the scanner did not recognise is not checked. Printed edition prefixes are retained, with parenthetical book qualifiers recognised from the bundled source titles. Unresolved citations are reported, never corrected. Abbreviations that read as English in prose (single letters before a bare number, It, Ps, Pe, Ne, Pp, Ya, Dt, As) are skipped; write MN, SN, Iti, Pa\u1E6Dis and so on, or check one citation with resolve_reference.",
     source: { name: source4.name, attribution: source4.attribution, terms: source4.terms }
   };
 }
 function register3({ tool, z, canon }) {
-  tool("find_citations", "Find every P\u0101li Canon citation in a piece of free text (an essay, a talk transcript, a paper's references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, PTS pages like M i 55 or S v 420, Bilara IDs like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org links. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Works offline.", {
+  tool("find_citations", "Find every P\u0101li Canon citation in a piece of free text (an essay, a talk transcript, a paper's references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nid\u0101navaggo), PTS pages like M i 55 or S v 420, Bilara IDs like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org links. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Works offline.", {
     text: z.string().min(1).max(MAX_TEXT).describe("The free text to scan, up to 200,000 characters.")
   }, ({ text }) => findCitations(text, canon));
 }

@@ -18,6 +18,9 @@
  *   - links count only for suttacentral.net, accesstoinsight.org and dhammatalks.org.
  */
 
+import { EDITION_WORDS, VINAYA_SCOPES, matchesEditionBook } from './editions.mjs';
+import { _test as citationTables } from './citations.mjs';
+
 // Not inside a word, a number or an e-mail address.
 const BOUND_BEFORE = '(?<![\\p{L}\\p{N}_@])';
 const BOUND_AFTER = '(?![\\p{L}\\p{N}_@]|,\\d)';
@@ -41,11 +44,17 @@ const ROMAN = '(?:I{1,3}|IV|VI{0,2}|i{1,3}|iv|vi{0,2})';
 const VINAYA = '(?:Pj|Ss|Ay|Np|Pc|Pd|Sk|Kd|Mv|Cv|Pvr|Parajika|Sanghadisesa|Aniyata|Nissaggiya|Pacittiya|Patidesaniya|Sekhiya|Adhikaranasamatha|Khandhaka)';
 const LOWER_IDS = ['dn', 'mn', 'sn', 'an', 'kp', 'dhp', 'ud', 'iti', 'snp', 'vv', 'pv', 'thag', 'thig', 'bv', 'mnd', 'cnd', 'mil', 'kv', 'ds', 'vb', 'patthana'];
 const LINK_HOSTS = /^(?:www\.)?(?:suttacentral\.net|accesstoinsight\.org|dhammatalks\.org)$/i;
+const EDITION_HEAD = `(?:${Object.keys(EDITION_WORDS).sort((a, b) => b.length - a.length).join('|')})(?:\\.?\\s*ed(?:ition)?\\.?)?[\\s.:,]+`;
+const EDITION_SCOPE = [...new Set([...ABBREVIATIONS, ...FULL_NAMES, ...Object.keys(citationTables.COLLECTIONS), ...Object.keys(VINAYA_SCOPES)])]
+  .sort((a, b) => b.length - a.length).join('|');
+// Keep invalid Roman volumes/ranges as edition candidates too: never reinterpret their interior as a text or PTS page.
+const EDITION_PAGE = `(?:${ROMAN}(?:\\.\\s*|\\s+))?(?:(?:volume|vol)\\.?\\s*)?\\d+(?:(?:\\s*[.:,]\\s*|\\s+(?:(?:pages?|pp|p)\\.?\\s*)?)\\d+)*(?:\\s*[-–—]\\s*\\d+(?:[.:]\\d+)*)?`;
 
-// Each pattern runs on the folded text (same length as the input, diacritics removed).
+// Each pattern runs on folded text; offsets are mapped back to the original input.
 // Lower `rank` wins when two candidates overlap at the same start.
 const PATTERNS = [
   { scheme: 'link', rank: 0, re: /https?:\/\/[^\s<>"'()[\]{}]+/giu },
+  { scheme: 'edition', rank: 0, re: new RegExp(`${BOUND_BEFORE}${EDITION_HEAD}(?:${EDITION_SCOPE})\\.?\\s*${EDITION_PAGE}${BOUND_AFTER}`, 'giu') },
   { scheme: 'pts', rank: 1, re: new RegExp(`${BOUND_BEFORE}(?:PTS[: ]\\s?)?(?:${PTS_ABBREVIATIONS.join('|')})(?:\\.\\s?|\\s)${ROMAN}(?:\\.\\s?|\\s)\\d+${BOUND_AFTER}`, 'gu') },
   { scheme: 'vinaya', rank: 2, re: new RegExp(`${BOUND_BEFORE}(?:Vinaya\\s)?(?:(?:Bu|Bi|Bhikkhu|Bhikkhuni)\\s?)?${VINAYA}\\s?${NUM}${BOUND_AFTER}`, 'gu') },
   { scheme: 'vinaya', rank: 2, re: new RegExp(`${BOUND_BEFORE}Vinaya\\s(?:Mahavagga|Cul?lavagga)\\s?${NUM}${BOUND_AFTER}`, 'giu') },
@@ -76,8 +85,8 @@ function trimLink(raw) {
   return raw.replace(/[.,;:!?]+$/, '');
 }
 
-/** Candidate citation spans in `text`, without resolving them: [{ start, end, text, scheme }]. */
-export function scan(text) {
+/** Candidate spans without resolving them. Source book names retain recognised parenthetical edition qualifiers. */
+export function scan(text, { editionBookNames = [] } = {}) {
   const { folded, offsets } = foldWithOffsets(text);
   // Map a folded span back to the input, keeping combining marks that follow its last character.
   const span = (start, end) => {
@@ -90,7 +99,13 @@ export function scan(text) {
     re.lastIndex = 0;
     for (const m of folded.matchAll(re)) {
       const length = scheme === 'link' ? trimLink(m[0]).length : m[0].length;
-      const [start, end] = span(m.index, m.index + length);
+      const [start, baseEnd] = span(m.index, m.index + length);
+      let end = baseEnd;
+      if (scheme === 'edition') {
+        const qualifier = text.slice(end).match(/^\s*\(([^()\r\n]{1,100})\)/u);
+        // Only consume a book qualifier supported by the source index; ordinary parenthetical prose stays separate.
+        if (qualifier && editionBookNames.some((title) => matchesEditionBook(title, qualifier[1]))) end += qualifier[0].length;
+      }
       if (scheme === 'link') {
         let host = '';
         try { host = new URL(text.slice(start, end)).hostname; } catch { /* not a URL */ }
@@ -116,7 +131,7 @@ export const MAX_RESULTS = 500;
 
 /** Find, resolve and report every citation in `text`. */
 export function findCitations(text, canon, { limit = MAX_RESULTS } = {}) {
-  const spans = scan(text);
+  const spans = scan(text, { editionBookNames: canon.load().canon.books.map((book) => book.title) });
   const citations = spans.slice(0, limit).map((span) => {
     try {
       const { unit, notes, alternatives } = canon.resolve(span.text.normalize('NFC'));
@@ -139,13 +154,13 @@ export function findCitations(text, canon, { limit = MAX_RESULTS } = {}) {
     ...(spans.length > citations.length ? { truncated: true } : {}),
     offsets: 'start and end are UTF-16 code-unit offsets into the input, end exclusive (JavaScript String.slice).',
     citations,
-    scope: 'Citations are found by pattern; a citation the scanner did not recognise is not checked. Unresolved citations are reported, never corrected. Abbreviations that read as English in prose (single letters before a bare number, It, Ps, Pe, Ne, Pp, Ya, Dt, As) are skipped; write MN, SN, Iti, Paṭis and so on, or check one citation with resolve_reference.',
+    scope: 'Citations are found by pattern; a citation the scanner did not recognise is not checked. Printed edition prefixes are retained, with parenthetical book qualifiers recognised from the bundled source titles. Unresolved citations are reported, never corrected. Abbreviations that read as English in prose (single letters before a bare number, It, Ps, Pe, Ne, Pp, Ya, Dt, As) are skipped; write MN, SN, Iti, Paṭis and so on, or check one citation with resolve_reference.',
     source: { name: source.name, attribution: source.attribution, terms: source.terms },
   };
 }
 
 export function register({ tool, z, canon }) {
-  tool('find_citations', 'Find every Pāli Canon citation in a piece of free text (an essay, a talk transcript, a paper\'s references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, PTS pages like M i 55 or S v 420, Bilara IDs like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org links. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Works offline.', {
+  tool('find_citations', 'Find every Pāli Canon citation in a piece of free text (an essay, a talk transcript, a paper\'s references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nidānavaggo), PTS pages like M i 55 or S v 420, Bilara IDs like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org links. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Works offline.', {
     text: z.string().min(1).max(MAX_TEXT).describe('The free text to scan, up to 200,000 characters.'),
   }, ({ text }) => findCitations(text, canon));
 }

@@ -174,6 +174,7 @@ Running text is read more strictly than a single citation typed into `resolve_re
 - Abbreviations are case-sensitive: "MN 10" is a citation, "mn 10" and "Mn 10" are not. Lower-case IDs written without a space ("mn10", "sn56.11:5.1") are read.
 - Abbreviations that look like English or other books before a bare number are skipped: single letters (D, M, S, A, J), Dh, It, Th, Thī, Ne, Pe, Peṭ, Ps (often Psalms), Pp, Ya, Dt and As. Use MN, SN, Iti, Thag, Paṭis and so on, or full names. Single letters still work for PTS pages ("M i 55", "S v 420").
 - Mahāvagga and Cūḷavagga are read as Vinaya chapters only after "Vinaya" ("Vinaya Mahāvagga 1"), or as Mv and Cv.
+- Printed edition pages retain their edition prefix: `Thai MN 1.103`, `Myanmar Dhp 15` and `VRI SN 1.20 (Nidānavaggo)` are page references, not sutta or verse numbers. Edition names are case-insensitive. Parenthetical book qualifiers are recognised against bundled source titles using the same prefix matching as direct page lookup; ordinary parenthetical prose remains separate. Missing or ambiguous pages remain unresolved.
 - Links count only for suttacentral.net, accesstoinsight.org and dhammatalks.org.
 - A number glued to letters ("MN 10th") or written with thousands separators ("MN 10,000") is not a citation.
 

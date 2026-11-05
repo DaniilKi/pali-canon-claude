@@ -26,7 +26,7 @@ let stderr = '';
 const counts = { canonical_texts: 0, canonical_segments: 0, canonical_pages: 0,
   commentary_texts: 0, commentary_unaligned_texts: 0, commentary_segments: 0, commentary_pages: 0,
   commentary_books: 0, commentary_book_segments: 0, commentary_book_pages: 0, commentary_search_checks: 0,
-  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0, browse_scope_checks: 0, browse_group_pages: 0, quote_verification_checks: 0 };
+  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0, browse_scope_checks: 0, browse_group_pages: 0, quote_verification_checks: 0, edition_citation_checks: 0 };
 try {
   if (reportAt >= 0) await writeFile(resolve(process.argv[reportAt + 1]), '{"status":"running"}\n');
   const serverDirectory = serverAt >= 0 ? resolve(process.argv[serverAt + 1]) : join(root, 'server');
@@ -238,6 +238,18 @@ require('node:module').syncBuiltinESMExports();\n`);
       assert.ok(full.includes(excerpt), `${hit.text_id}: complete matched excerpt belongs to cited text`);
     }
     counts.quote_verification_checks += 1;
+  }
+  const editionReferences = ['Thai MN 1.103', 'Myanmar Dhp 15', 'VRI SN 1.20 (Nidānavaggo)',
+    'Thai Pj 1.10', 'Thai ed. MN vol. 1 p. 103', 'VRI SN 1.20', 'Thai MN 99.999', 'Thai MN i 55'];
+  const editionScan = await call('find_citations', { text: editionReferences.join('; ') });
+  assert.deepEqual(editionScan.citations.map((hit) => hit.text), editionReferences);
+  for (const hit of editionScan.citations) {
+    assert.equal(hit.scheme, 'edition', 'edition page cannot become a canonical text or PTS number');
+    let expected;
+    try { expected = canon.resolve(hit.text).unit.id; } catch { expected = null; }
+    assert.equal(hit.text_id ?? null, expected, hit.text);
+    assert.equal(hit.status, expected ? 'resolved' : 'unresolved');
+    counts.edition_citation_checks += 1;
   }
   assert.ok(!stderr.includes('UNEXPECTED_NETWORK_ATTEMPT'), 'every checked operation must work without attempting network access');
   const summary = { ...counts, approximate_canonical_texts: canon.load().canon.units.filter((unit) => unit.approximate).length, network_attempts: 0, failures: 0 };
