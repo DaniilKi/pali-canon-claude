@@ -25,14 +25,14 @@ The hosted server gains one extra tool and its page when the setting `CHATGPT_WI
 | Part | Value |
 |---|---|
 | Tool | `read_passage_widget` (read-only; fetches English live, so `openWorldHint: true`) |
-| Inputs | `uid` (any citation the other tools accept), `translation`, `english` (true/false), `offset` and `limit` (Pāli segments), `english_offset` (English characters) |
+| Inputs | `uid` (an individual Roman-script citation or source link), `translation`, `english` (true/false), `offset` and `limit` (Pāli segments), `english_offset` (English characters) |
 | Returns | Pāli segments with VRI paragraph and PTS page markers, VRI attribution and licence; one English translation with translator, source link, attribution and licence; numbering notes; a SuttaCentral link (link only) |
-| Page (MCP Apps standard) | `ui://pali-canon/reader-v1.html`, type `text/html;profile=mcp-app`, linked by `_meta.ui.resourceUri` |
-| Page (Apps SDK alias) | `ui://pali-canon/reader-v1.skybridge.html`, type `text/html+skybridge`, linked by `_meta["openai/outputTemplate"]` |
-| Content security | The page loads nothing from the internet: `connectDomains`, `resourceDomains` and `frameDomains` are all empty. Links open through ChatGPT (`openExternal`). `openai/widgetCSP.redirect_domains` lists the only link targets as trusted redirect destinations: `https://www.dhammatalks.org`, `https://dhammatalks.org`, `https://www.accesstoinsight.org`, `https://accesstoinsight.org` (the English sources, already on the `src/http.mjs` allowlist) and `https://suttacentral.net` (link only, never fetched). `_meta.ui.csp` has no field for this, so it is set only in the Apps SDK key. |
+| Page (MCP Apps standard) | `ui://pali-canon/reader-v2.html`, type `text/html;profile=mcp-app`, linked by `_meta.ui.resourceUri` |
+| Page (Apps SDK alias) | `ui://pali-canon/reader-v2.skybridge.html`, type `text/html+skybridge`, linked by `_meta["openai/outputTemplate"]` |
+| Content security | The page loads nothing from the internet: `connectDomains`, `resourceDomains` and `frameDomains` are all empty. Links open through ChatGPT (`openExternal`). `openai/widgetCSP.redirect_domains` lists the only link targets as trusted redirect destinations: `https://www.dhammatalks.org`, `https://dhammatalks.org`, `https://www.accesstoinsight.org`, `https://accesstoinsight.org`, `https://ancient-buddhist-texts.net` (the English sources, already on the `src/http.mjs` allowlist) and `https://suttacentral.net` (link only, never fetched). `_meta.ui.csp` has no field for this, so it is set only in the Apps SDK key. |
 | Source | [`src/chatgpt-widget.mjs`](../../src/chatgpt-widget.mjs), tests in [`tests/chatgpt-widget.test.mjs`](../../tests/chatgpt-widget.test.mjs) |
 
-When the page HTML changes in a way that could break a cached copy, raise `WIDGET_VERSION` (`v1` → `v2`)
+When the page HTML changes in a way that could break a cached copy, raise `WIDGET_VERSION` (the current revision is `v2`)
 so the addresses change, as OpenAI asks.
 
 If no English translation is linked for a text, or the reader turns English off, the view shows the Pāli
@@ -40,8 +40,19 @@ alone and says so. It never puts a different translation in its place.
 
 Long texts are shown in parts. Each call shows up to 40 Pāli segments and up to 6,000 characters of the
 English. For a long sutta such as MN 10 the view says where each column stops; asking for more calls the
-tool again with `offset` (Pāli) or `english_offset` (English, from `english.next_offset`). `get_translation`
+tool again with `offset` (Pāli). For English, use the returned `english.continue_with` tool name and arguments: the next character offset is pinned to the exact translation ID. A non-zero `english_offset` without that ID is rejected for English while the Pāli remains readable. An outage fallback to another version cannot reuse the old character offset; restart that version from its beginning. `get_translation`
 with `offset` also returns the rest of the English as plain text, and the source page link is always shown.
+
+The `v2` page clears the previous passage, citation and source links on a failed read, including errors
+delivered through the Apps SDK full-result metadata or MCP Apps error envelope. The tool includes its
+error object in `structuredContent` so the Apps SDK can display it. Multi-page translations with an
+unknown total show continuation positions without inventing a total character count.
+
+The automated tests execute the actual embedded script with a minimal DOM and both bridge event
+shapes, plus mocked source recovery/outage cases and HTTP tool calls. They do not prove rendering,
+navigation or frame behaviour in a signed-in ChatGPT client. Those manual tests below are still needed.
+Bridge contracts: [OpenAI reference](https://developers.openai.com/plugins/reference),
+[MCP Apps tool errors](https://modelcontextprotocol.github.io/ext-apps/api/classes/app.App.html).
 
 ## Step 1: put the server online
 
@@ -115,7 +126,7 @@ Record the submission on issue #11 ("Submitted to the app directory"), and updat
 > (8,544 citable texts, about 2.8 million words). Ask for a sutta by its usual reference (MN 10, SN 56:11,
 > AN 3.65, Dhp 183, Snp 1.8) or by a PTS page (M i 55) and the app opens a reading view with the Pāli and an
 > English translation side by side, showing the citation, the PTS page and the translator. English
-> translations by Ṭhānissaro Bhikkhu (dhammatalks.org) and from Access to Insight are fetched live and
+> translations by Ṭhānissaro Bhikkhu (dhammatalks.org), Access to Insight and Ānandajoti Bhikkhu (Ancient Buddhist Texts) are fetched live and
 > always attributed. The app can also search the Pāli, browse the canon, compare translations and look up
 > words in the Digital Pāḷi Dictionary. Numbering differences between editions are reported, not hidden.
 > If a translation does not exist, the app says so rather than substituting another. It is a library, not

@@ -32916,7 +32916,7 @@ function createServer2() {
 
 // src/chatgpt-widget.mjs
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v1";
+var WIDGET_VERSION = "v2";
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 var MCP_APP_MIME = "text/html;profile=mcp-app";
@@ -32927,6 +32927,7 @@ var REDIRECT_DOMAINS = [
   "https://dhammatalks.org",
   "https://www.accesstoinsight.org",
   "https://accesstoinsight.org",
+  "https://ancient-buddhist-texts.net",
   "https://suttacentral.net"
 ];
 var RESOURCE_META = {
@@ -32939,7 +32940,7 @@ var TOOL_META = {
   ui: { resourceUri: WIDGET_URI },
   "openai/outputTemplate": SKYBRIDGE_URI,
   "openai/toolInvocation/invoking": "Opening the passage\u2026",
-  "openai/toolInvocation/invoked": "Passage ready."
+  "openai/toolInvocation/invoked": "Reader updated."
 };
 async function readPassage({ uid, translation: translation2, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6e3 }) {
   const { unit, notes } = resolve(uid);
@@ -32973,7 +32974,13 @@ async function readPassage({ uid, translation: translation2, english: wantEnglis
   };
   if (wantEnglish && result.english_available.length) {
     try {
+      if (englishOffset > 0 && !/^(dt|ati|aj):/.test(translation2 || "")) {
+        throw new Error("To continue English, use the exact translation_id from the previous result (english.continue_with gives the full arguments). Character offsets cannot be transferred between versions; start at english_offset 0 to choose a new translation.");
+      }
       const t = await translation(unit, translation2 && translation2 !== "default" ? translation2 : void 0, { offset: englishOffset, limit: englishCharacters });
+      if (englishOffset > 0 && t.translation_id !== translation2) {
+        throw new Error("Cannot continue at this character offset: the requested translation is unavailable and the fallback is a different version. Retry the original translation later, or restart the fallback with english_offset 0.");
+      }
       result.english = {
         translator: t.translator,
         translation_id: t.translation_id,
@@ -32988,7 +32995,11 @@ async function readPassage({ uid, translation: translation2, english: wantEnglis
         total_characters: t.total_characters,
         next_offset: t.next_offset,
         truncated: t.next_offset !== null,
-        notes: t.notes
+        notes: t.notes,
+        continue_with: t.next_offset !== null ? {
+          name: WIDGET_TOOL,
+          arguments: { uid: unit.id, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset }
+        } : null
       };
     } catch (error2) {
       result.english_error = error2.message;
@@ -33009,14 +33020,14 @@ function registerChatgptWidget(server) {
   }
   server.registerTool(WIDGET_TOOL, {
     title: "Read a passage (P\u0101li and English)",
-    description: "Show a text in a reading view: the P\u0101li (VRI edition) and one English translation side by side, with citation, PTS page, translator, attribution and licence. Use when the user wants to read a sutta or passage. Accepts the same citations as get_text. The P\u0101li works offline; the English is fetched live.",
+    description: "Show an individual text in a reading view: P\u0101li (VRI) and one English translation, with citation, PTS page, translator, attribution and licence. Use when the user wants to read a sutta or passage. Accepts individual Roman-script citations and source links. The P\u0101li works offline; English is fetched live. For English continuation use the exact english.continue_with arguments from the previous result.",
     inputSchema: {
       uid: external_exports.string().min(1).max(300).describe("Any citation: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, a PTS page such as M i 55, or a suttacentral.net / accesstoinsight.org / dhammatalks.org link."),
-      translation: external_exports.string().max(200).optional().describe('"default", a translation_id from get_metadata, or a translator name. Omit for the default.'),
+      translation: external_exports.string().max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or a translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
       english: external_exports.boolean().default(true).describe("Fetch an English translation (live). false shows the P\u0101li only."),
       offset: external_exports.number().int().min(0).max(1e5).default(0).describe("P\u0101li segment offset for continuation."),
       limit: external_exports.number().int().min(1).max(80).default(40).describe("P\u0101li segments to show."),
-      english_offset: external_exports.number().int().min(0).max(1e7).default(0).describe("English character offset for continuation (use english.next_offset from the previous result). Shows up to 6,000 characters of the translation per call.")
+      english_offset: external_exports.number().int().min(0).max(1e7).default(0).describe("English character offset for continuation. Use english.continue_with.arguments from the previous result: non-zero offsets require its exact translation_id, so a source recovery/outage cannot transfer offsets to another version. Shows up to 6,000 characters per call.")
     },
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
     _meta: TOOL_META
@@ -33025,10 +33036,11 @@ function registerChatgptWidget(server) {
       const result = await readPassage(args);
       return { content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result };
     } catch (error2) {
-      return { isError: true, content: [{ type: "text", text: JSON.stringify({
+      const result = {
         error: error2.message || "Request failed.",
         recovery: "Check the citation with resolve_reference or browse_canon. Never invent missing text."
-      }) }] };
+      };
+      return { isError: true, content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result };
     }
   });
 }
@@ -33090,8 +33102,18 @@ var WIDGET_HTML = `<!doctype html>
     return a;
   }
   function setTheme(theme) { if (theme === 'dark' || theme === 'light') document.documentElement.setAttribute('data-theme', theme); }
+  function characterPosition(at, total) { return 'character ' + at + (typeof total === 'number' && Number.isFinite(total) ? ' of ' + total : ''); }
   function render(d) {
-    if (!d || typeof d !== 'object' || !d.pali || d === rendered) return;
+    if (!d || typeof d !== 'object' || d === rendered) return;
+    if (!d.pali) {
+      if (typeof d.error !== 'string') return;
+      rendered = d;
+      document.getElementById('title').textContent = 'Could not open the passage';
+      ['meta', 'pali', 'english', 'footer'].forEach(function (id) { clear(document.getElementById(id)); });
+      document.getElementById('pali').appendChild(el('p', 'empty', d.error));
+      document.getElementById('english').appendChild(el('p', 'empty', 'Check the citation and ask to open the passage again.'));
+      return;
+    }
     rendered = d;
     document.getElementById('title').textContent = (d.citation || '') + (d.title ? ' \xB7 ' + d.title : '');
     var meta = document.getElementById('meta'); clear(meta);
@@ -33120,8 +33142,8 @@ var WIDGET_HTML = `<!doctype html>
       head.appendChild(link(d.english.url, d.english.source || d.english.url));
       en.appendChild(head);
       en.appendChild(el('div', 'en', d.english.text || ''));
-      if (d.english.offset) en.insertBefore(el('p', 'note', 'Continuing from character ' + d.english.offset + ' of ' + d.english.total_characters + '.'), en.lastChild);
-      if (d.english.truncated) en.appendChild(el('p', 'note', 'The translation continues (character ' + d.english.next_offset + ' of ' + d.english.total_characters + '). Ask for more to continue, or read the rest on the source page.'));
+      if (d.english.offset) en.insertBefore(el('p', 'note', 'Continuing from ' + characterPosition(d.english.offset, d.english.total_characters) + '.'), en.lastChild);
+      if (d.english.truncated) en.appendChild(el('p', 'note', 'The translation continues (' + characterPosition(d.english.next_offset, d.english.total_characters) + '). Ask for more to continue, or read the rest on the source page.'));
     } else {
       en.appendChild(el('p', 'empty', d.english_error || 'No English translation requested.'));
     }
@@ -33132,7 +33154,28 @@ var WIDGET_HTML = `<!doctype html>
     var sc = el('p', ''); sc.appendChild(document.createTextNode('Parallels and other translations: ')); sc.appendChild(link(d.links && d.links.suttacentral, 'SuttaCentral')); f.appendChild(sc);
   }
   // Apps SDK (window.openai) path.
-  function fromOpenai() { if (window.openai) { setTheme(window.openai.theme); render(window.openai.toolOutput); } }
+  function toolResult(result) {
+    if (!result) return;
+    if (result.isError) {
+      var message = result.structuredContent && result.structuredContent.error;
+      if (typeof message !== 'string') {
+        var text = typeof result.content === 'string' ? { text: result.content } :
+          (Array.isArray(result.content) ? result.content.find(function (part) { return part.type === 'text'; }) : null);
+        if (text) { try { message = JSON.parse(text.text).error; } catch (e) { message = text.text; } }
+      }
+      render({ error: typeof message === 'string' ? message : 'The passage could not be loaded.' });
+      return;
+    }
+    render(result.structuredContent);
+  }
+  function fromOpenai() {
+    if (window.openai) {
+      setTheme(window.openai.theme);
+      var metadata = window.openai.toolResponseMetadata;
+      var result = metadata && (metadata.mcp_tool_result || metadata.call_tool_result);
+      if (result && result.isError) toolResult(result); else render(window.openai.toolOutput);
+    }
+  }
   window.addEventListener('openai:set_globals', fromOpenai);
   // MCP Apps bridge path (JSON-RPC over postMessage).
   window.addEventListener('message', function (ev) {
@@ -33142,7 +33185,7 @@ var WIDGET_HTML = `<!doctype html>
       if (m.result.hostContext) setTheme(m.result.hostContext.theme);
       post({ jsonrpc: '2.0', method: 'ui/notifications/initialized', params: {} });
     } else if (m.method === 'ui/notifications/tool-result') {
-      render(m.params && m.params.structuredContent);
+      toolResult(m.params);
     } else if (m.method === 'ui/notifications/host-context-changed') {
       setTheme(m.params && m.params.theme);
     }

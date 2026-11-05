@@ -107,6 +107,11 @@ test('HTTP endpoint with CHATGPT_WIDGET: tool _meta, UI templates and an offline
     const bad = (await rpc('tools/call', { name: WIDGET_TOOL, arguments: { uid: 'MN 999', english: false } }, 5)).result;
     assert.equal(bad.isError, true);
     assert.match(JSON.parse(bad.content[0].text).recovery, /Never invent/);
+    assert.deepEqual(bad.structuredContent, JSON.parse(bad.content[0].text), 'Apps SDK toolOutput receives the error too');
+    const unpinned = (await rpc('tools/call', { name: WIDGET_TOOL, arguments: { uid: 'MN 10', english_offset: 6000 } }, 6)).result;
+    assert.ok(!unpinned.isError, 'Pāli remains readable when English continuation needs correction');
+    assert.equal(unpinned.structuredContent.english, null);
+    assert.match(unpinned.structuredContent.english_error, /translation_id/);
   } finally {
     http.closeAllConnections?.();
     await new Promise((r) => http.close(r));
