@@ -114,6 +114,8 @@ English translations use character offsets, separate from Pāli segment offsets.
 
 Supported native-script citations work across Pāli reading, metadata, English reading, translation comparison and the hosted reader. For example, `MN ๑๐` (Thai digits) resolves to `mn10`; `ධම්මපද 183` (Sinhala letters) resolves to `dhp183`. Responses label the input script and Roman reading. Canonical IDs, English and metadata stay Roman; the hosted widget also displays Roman Pāli. Use `get_text`'s `script` option for Pāli output in another script.
 
+For word analysis with `analyse_passage`, choose one segment reference from `get_text` (for example, `"segment":"mn10/2"`) or a VRI paragraph number (`"paragraph":105`). Giving both is an error, even if they identify the same passage. Omit both to intentionally analyse the first body segment; an empty selector is an error. The returned `segment.ref` and `segment.text` identify exactly which source passage was analysed. Dictionary glosses are not a translation.
+
 ## Two numbering systems
 
 There is no single universal numbering. In parts of the Saṃyutta and Aṅguttara Nikāyas, two systems differ:

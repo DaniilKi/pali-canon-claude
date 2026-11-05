@@ -240,12 +240,16 @@ export function analyseToken(surface) {
 
 /** Pick a segment of a unit by "3", "mn10/3" or a VRI paragraph number. */
 function pickSegment(unit, segs, { segment, paragraph }) {
-  if (paragraph !== undefined && paragraph !== null && paragraph !== '') {
-    const index = segs.findIndex((s) => String(s.vri_paragraph) === String(paragraph));
+  if (segment !== undefined && paragraph !== undefined) throw new Error('Choose either segment or paragraph, not both. Omit both to analyse the first body segment.');
+  for (const [name, value] of [['segment', segment], ['paragraph', paragraph]]) {
+    if (value === null || (value !== undefined && !String(value).trim())) throw new Error(`The ${name} selector cannot be empty or blank. Omit it for the first body segment, or choose a reference from get_text.`);
+  }
+  if (paragraph !== undefined) {
+    const index = segs.findIndex((s) => s.vri_paragraph != null && String(s.vri_paragraph) === String(paragraph).trim());
     if (index < 0) throw new Error(`${unit.acronym} has no VRI paragraph ${paragraph}. Use get_text to see its paragraphs.`);
     return index;
   }
-  if (segment === undefined || segment === null || segment === '') {
+  if (segment === undefined) {
     const index = segs.findIndex((s) => s.type !== 'heading');
     return index < 0 ? 0 : index;
   }
@@ -343,8 +347,8 @@ export function lookupOffline({ word, limit = 5 } = {}) {
 export function register({ tool, z }) {
   tool('analyse_passage', 'Word-by-word analysis of a passage of the bundled Pāli text from the Digital Pāḷi Dictionary (offline): for each word its compound or sandhi split, headword, grammar (case, number, tense), root and short meaning. Pass a citation and a segment ref from get_text (e.g. "mn10/3") or a VRI paragraph. Every possible parse is listed; dictionary glosses are not a translation. CC BY-NC-SA 4.0 notice included. Works offline.', {
     uid: z.string().min(1).max(300).describe('Any citation get_text accepts, e.g. MN 10, SN 56.11, Dhp 183.'),
-    segment: z.union([z.string().max(60), z.number().int().min(1)]).optional().describe('Segment ref from get_text such as "mn10/3", or its number (3). Omit for the first body segment.'),
-    paragraph: z.union([z.string().max(20), z.number().int().min(0)]).optional().describe('VRI paragraph number instead of segment.'),
+    segment: z.union([z.string().trim().min(1).max(60), z.number().int().min(1)]).optional().describe('Segment ref from get_text such as "mn10/3", or its number (3). Give segment or paragraph, never both. Omit both for the first body segment; blank values are errors.'),
+    paragraph: z.union([z.string().trim().min(1).max(20), z.number().int().min(0)]).optional().describe('VRI paragraph number instead of segment. Give at most one selector; omit both for the first body segment.'),
     offset: z.number().int().min(0).max(100000).default(0).describe('Word offset within the segment, for continuation.'),
     limit: z.number().int().min(1).max(200).default(60).describe('Words per call.'),
   }, (args) => analysePassage(args));
