@@ -21584,6 +21584,14 @@ __export(canon_exports, {
 // src/search-segments.mjs
 var VERSE = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
 var searchFold = (text, fold8) => fold8(text).replace(/\s+/gu, " ");
+function searchTerms(query, fold8) {
+  const paired = /"([^"]+)"|“([^”]+)”/gu;
+  const text = String(query);
+  const phrases = [...text.matchAll(paired)].map((match2) => searchFold(match2[1] ?? match2[2], fold8).trim()).filter(Boolean);
+  const words3 = fold8(text.replace(paired, " ")).split(/[^a-z0-9]+/u).filter((word) => word.length > 1);
+  return [...phrases, ...words3];
+}
+var hasSearchQuotes = (query) => /["“”]/u.test(query);
 function searchSegments(blocks, owner = () => null) {
   const out = [];
   let stanza = null;
@@ -22633,9 +22641,7 @@ function buildSearch() {
   return d.search;
 }
 function terms(query) {
-  const phrases = [...query.matchAll(/"([^"]+)"/g)].map((m) => searchFold(m[1], fold3).trim()).filter(Boolean);
-  const words3 = fold3(query.replace(/"[^"]+"/g, " ")).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
-  return [...phrases, ...words3];
+  return searchTerms(query, fold3);
 }
 function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const d = load();
@@ -29175,9 +29181,7 @@ function browse2(node = "", { offset = 0, limit = 60 } = {}) {
   return { ...base, node: sel.citation, label: labelFor(sel), book: bookInfo2(sel.book), ...page(chapters) };
 }
 function terms2(query) {
-  const phrases = [...String(query).matchAll(/"([^"]+)"/g)].map((m) => searchFold(m[1], fold6).trim()).filter(Boolean);
-  const words3 = fold6(String(query).replace(/"[^"]+"/g, " ")).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
-  return [...phrases, ...words3];
+  return searchTerms(query, fold6);
 }
 var searchCache = /* @__PURE__ */ new Map();
 function searchPassages(book, blocks) {
@@ -29778,9 +29782,7 @@ function indexed(book) {
   return text;
 }
 function terms3(query) {
-  const phrases = [...query.matchAll(/"([^"]+)"/gu)].map((match2) => searchFold(match2[1], fold3).trim()).filter(Boolean);
-  const words3 = fold3(query.replace(/"[^"]+"/gu, " ")).split(/[^a-z0-9]+/u).filter((word) => word.length > 1);
-  return [.../* @__PURE__ */ new Set([...phrases, ...words3])];
+  return [...new Set(searchTerms(query, fold3))];
 }
 function search3(query, { books, offset = 0, limit = 10 } = {}) {
   const data5 = load2();
@@ -30602,7 +30604,7 @@ function plainWords(query) {
   return fold3(query.replace(/"[^"]*"/g, " ")).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
 }
 function variantSearch(query, base, opts) {
-  if (/"/.test(query)) return null;
+  if (hasSearchQuotes(query)) return null;
   const words3 = plainWords(query);
   if (!words3.length || words3.some((w) => /\d/.test(w))) return null;
   const groups = [];
@@ -30688,7 +30690,7 @@ function searchWithInput(query, { collection, limit = 10, offset = 0, english: e
       }
       result.expanded_from_english = label;
     }
-  } else if (!result.total_texts_matched && !/"/.test(n.text) && paliWordsInEnglish(n.text)) {
+  } else if (!result.total_texts_matched && !hasSearchQuotes(n.text) && paliWordsInEnglish(n.text)) {
     const pali3 = paliWordsInEnglish(n.text);
     const r = search(pali3.join(" "), opts);
     if (r.total_texts_matched) {

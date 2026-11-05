@@ -1,4 +1,4 @@
-import { searchSegments, searchFold, searchExcerpt } from './search-segments.mjs';
+import { searchSegments, searchFold, searchExcerpt, searchTerms } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * The bundled Pāli Canon: VRI Chaṭṭha Saṅgāyana text, standard citation IDs aligned to it,
@@ -387,9 +387,7 @@ function buildSearch() {
 }
 
 function terms(query) {
-  const phrases = [...query.matchAll(/"([^"]+)"/g)].map((m) => searchFold(m[1], fold).trim()).filter(Boolean);
-  const words = fold(query.replace(/"[^"]+"/g, ' ')).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
-  return [...phrases, ...words];
+  return searchTerms(query, fold);
 }
 
 /**

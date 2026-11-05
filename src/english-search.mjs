@@ -7,6 +7,7 @@
  *     (aspirates, doubled consonants, ny/ñ, ṃ/n), labelled spelling_note.
  */
 import * as canon from './canon.mjs';
+import { hasSearchQuotes } from './search-segments.mjs';
 import { normalizeInput, normalizationNote, spellingVariants, canonSpellings } from './input.mjs';
 import { looksEnglish, expandEnglish, paliWordsInEnglish } from './glossary.mjs';
 
@@ -19,7 +20,7 @@ function plainWords(query) {
 }
 
 function variantSearch(query, base, opts) {
-  if (/"/.test(query)) return null;
+  if (hasSearchQuotes(query)) return null;
   const words = plainWords(query);
   if (!words.length || words.some((w) => /\d/.test(w))) return null;
   const groups = [];
@@ -92,7 +93,7 @@ export function searchWithInput(query, { collection, limit = 10, offset = 0, eng
       }
       result.expanded_from_english = label;
     }
-  } else if (!result.total_texts_matched && !/"/.test(n.text) && paliWordsInEnglish(n.text)) {
+  } else if (!result.total_texts_matched && !hasSearchQuotes(n.text) && paliWordsInEnglish(n.text)) {
     // Pāli words in an English question ("How many jhanas are there"): search the Pāli words only, labelled.
     const pali = paliWordsInEnglish(n.text);
     const r = canon.search(pali.join(' '), opts);

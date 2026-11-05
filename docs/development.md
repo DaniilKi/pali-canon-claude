@@ -285,3 +285,9 @@ Unknown scopes, including a whitespace-only scope, return an error directing the
 `search_texts` returns two separately counted streams. `results`, `total_texts_matched` and `next_offset` describe Pāli-body matches. `title_matches`, `total_title_matches` and `title_next_offset` describe matches in Pāli and linked English translation titles. The requested `offset` and `limit` apply to each stream. Pass `title_next_offset` back as `offset` to continue titles; pass `next_offset` to continue body results. A null pointer means that stream has ended.
 
 Title-only searches can now reach every indexed match. They previously repeated the first 20 titles regardless of offset. English glossary expansion keeps the same literal title stream across pages, including an empty page after its last title; it does not switch to expanded Pāli titles at that point. `english: "only"` with no glossary expansion returns no literal title stream. Exhausted title pages do not claim the query has no matches when earlier pages contained titles. Source text, translation links and coverage are unchanged.
+
+## Quoted phrases pasted from formatted text
+
+Straight double quotes (`"sati buddha"`) and paired curly double quotes (`“sati buddha”`) select the same ordered phrase in canonical, commentary and post-canonical search. Whitespace inside the phrase remains flexible. Quotes do not change the source text or join separate passages. Apostrophes and curly single quotes remain ordinary Pāli punctuation.
+
+When literal Pāli search finds no quoted phrase, spelling retries and the English-question keyword fallback do not discard its phrase constraint. English glossary expansion remains a separate labelled option; use `english: "off"` for literal Pāli phrase search. Unmatched double quotes conservatively disable loose retries, as straight quotes already did.

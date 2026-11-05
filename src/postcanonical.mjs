@@ -1,4 +1,4 @@
-import { searchSegments, searchFold, searchExcerpt } from './search-segments.mjs';
+import { searchSegments, searchFold, searchExcerpt, searchTerms } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * Post-canonical Pāli books of the VRI Chaṭṭha Saṅgāyana edition: the sub-commentaries (Ṭīkā) and the
@@ -466,9 +466,7 @@ export function browse(node = '', { offset = 0, limit = 60 } = {}) {
 }
 
 function terms(query) {
-  const phrases = [...String(query).matchAll(/"([^"]+)"/g)].map((m) => searchFold(m[1], fold).trim()).filter(Boolean);
-  const words = fold(String(query).replace(/"[^"]+"/g, ' ')).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
-  return [...phrases, ...words];
+  return searchTerms(query, fold);
 }
 
 const searchCache = new Map();

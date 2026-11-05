@@ -26,7 +26,7 @@ let stderr = '';
 const counts = { canonical_texts: 0, canonical_segments: 0, canonical_pages: 0,
   commentary_texts: 0, commentary_unaligned_texts: 0, commentary_segments: 0, commentary_pages: 0,
   commentary_books: 0, commentary_book_segments: 0, commentary_book_pages: 0, commentary_search_checks: 0,
-  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0 };
+  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0 };
 try {
   if (reportAt >= 0) await writeFile(resolve(process.argv[reportAt + 1]), '{"status":"running"}\n');
   const serverDirectory = serverAt >= 0 ? resolve(process.argv[serverAt + 1]) : join(root, 'server');
@@ -179,6 +179,24 @@ require('node:module').syncBuiltinESMExports();\n`);
   assert.equal(noExpansion.title_next_offset, null);
   assert.equal(noExpansion.limit, 5);
   counts.title_search_checks += 1;
+  for (const [name, args] of [
+    ['search_texts', { english: 'off' }],
+    ['search_post_canonical', { books: ['vism'] }],
+    ['search_commentary', { books: ['s0201a.att.xml'] }],
+  ]) {
+    const plain = await call(name, { ...args, query: '"sati buddha"', limit: 50 });
+    const curly = await call(name, { ...args, query: '“sati buddha”', limit: 50 });
+    assert.deepEqual(curly.results, plain.results, `${name}: curly quotes preserve phrase matches`);
+    assert.equal(curly.total_matched ?? curly.total_texts_matched, plain.total_matched ?? plain.total_texts_matched);
+    counts.quote_search_checks += 1;
+  }
+  for (const text of ['satipatana', 'How many jhanas are there']) {
+    const result = await call('search_texts', { query: `“${text}”`, english: 'off' });
+    assert.equal(result.total_texts_matched, 0, 'a failed quoted phrase remains an exact search');
+    assert.equal(result.spelling_note, undefined);
+    assert.equal(result.english_words_ignored, undefined);
+    counts.quote_search_checks += 1;
+  }
   assert.ok(!stderr.includes('UNEXPECTED_NETWORK_ATTEMPT'), 'every checked operation must work without attempting network access');
   const summary = { ...counts, approximate_canonical_texts: canon.load().canon.units.filter((unit) => unit.approximate).length, network_attempts: 0, failures: 0 };
   if (reportAt >= 0) {

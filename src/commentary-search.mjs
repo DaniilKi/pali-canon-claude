@@ -2,7 +2,7 @@
 import * as commentary from './commentary.mjs';
 import { fold } from './canon.mjs';
 import { withNormalised } from './input.mjs';
-import { searchFold, searchExcerpt } from './search-segments.mjs';
+import { searchFold, searchExcerpt, searchTerms } from './search-segments.mjs';
 
 // Bound retained folded text; the source corpus itself is already resident once loaded.
 const INDEX_BUDGET_BYTES = 8 * 1024 * 1024;
@@ -28,9 +28,7 @@ function indexed(book) {
   return text;
 }
 function terms(query) {
-  const phrases = [...query.matchAll(/"([^"]+)"/gu)].map((match) => searchFold(match[1], fold).trim()).filter(Boolean);
-  const words = fold(query.replace(/"[^"]+"/gu, ' ')).split(/[^a-z0-9]+/u).filter((word) => word.length > 1);
-  return [...new Set([...phrases, ...words])];
+  return [...new Set(searchTerms(query, fold))];
 }
 
 export function search(query, { books, offset = 0, limit = 10 } = {}) {

@@ -3,6 +3,20 @@ const VERSE = new Set(['gatha1', 'gatha2', 'gatha3', 'gathalast']);
 
 export const searchFold = (text, fold) => fold(text).replace(/\s+/gu, ' ');
 
+/** Paired double quotes preserve phrase order; apostrophes remain ordinary Pāli punctuation. */
+export function searchTerms(query, fold) {
+  const paired = /"([^"]+)"|“([^”]+)”/gu;
+  const text = String(query);
+  const phrases = [...text.matchAll(paired)]
+    .map((match) => searchFold(match[1] ?? match[2], fold).trim()).filter(Boolean);
+  const words = fold(text.replace(paired, ' ')).split(/[^a-z0-9]+/u).filter((word) => word.length > 1);
+  return [...phrases, ...words];
+}
+
+// Even an unmatched quote must not silently opt into loose spelling/keyword retries.
+export const hasSearchQuotes = (query) => /["“”]/u.test(query);
+
+
 export function searchSegments(blocks, owner = () => null) {
   const out = [];
   let stanza = null;
