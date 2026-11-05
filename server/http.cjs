@@ -24761,12 +24761,22 @@ function terms(query) {
 }
 function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const d = load();
+  const filter = collection ? fold3(collection).replace(/\s+/g, "") : null;
+  const parent = filter && !/\d$/.test(filter);
+  const members = new Set(d.byId.get(filter)?.members || []);
+  const okCollection = (unit) => {
+    if (!filter || unit.collection === filter || unit.id === filter || members.has(unit.id)) return true;
+    if (!unit.id.startsWith(filter)) return false;
+    const next = unit.id[filter.length];
+    return next === "." || parent && (next === "-" || /\d/.test(next || ""));
+  };
+  if (collection && (!filter || !d.canon.units.some(okCollection))) {
+    throw new Error(`Unknown canonical search scope "${collection}". Use browse_canon to list collection and section IDs.`);
+  }
   const s = d.search || buildSearch();
   const wanted = groups?.length ? groups.map((g) => g.map((w) => searchFold(w, fold3))) : terms(query).map((w) => [w]);
   if (!wanted.length) throw new Error("Search needs at least one word of two or more letters.");
   const has = (text) => wanted.every((alts) => alts.some((w) => text.includes(w)));
-  const filter = collection ? fold3(collection).replace(/\s+/g, "") : null;
-  const okCollection = (u) => !filter || u.collection === filter || u.id.startsWith(filter);
   const titleHits = s.titles.filter(({ u, text }) => okCollection(u) && has(text)).slice(0, 20).map(({ u }) => unitSummary(u));
   const hits = [];
   const seen = /* @__PURE__ */ new Set();
