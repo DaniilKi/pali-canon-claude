@@ -26,7 +26,7 @@ let stderr = '';
 const counts = { canonical_texts: 0, canonical_segments: 0, canonical_pages: 0,
   commentary_texts: 0, commentary_unaligned_texts: 0, commentary_segments: 0, commentary_pages: 0,
   commentary_books: 0, commentary_book_segments: 0, commentary_book_pages: 0, commentary_search_checks: 0,
-  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0, browse_scope_checks: 0, browse_group_pages: 0, quote_verification_checks: 0, edition_citation_checks: 0, citation_range_checks: 0, abt_citation_links: 0 };
+  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0, browse_scope_checks: 0, browse_group_pages: 0, quote_verification_checks: 0, edition_citation_checks: 0, citation_range_checks: 0, abt_citation_links: 0, paired_normalisation_checks: 0 };
 try {
   if (reportAt >= 0) await writeFile(resolve(process.argv[reportAt + 1]), '{"status":"running"}\n');
   const serverDirectory = serverAt >= 0 ? resolve(process.argv[serverAt + 1]) : join(root, 'server');
@@ -288,6 +288,23 @@ require('node:module').syncBuiltinESMExports();\n`);
       counts.abt_citation_links += 1;
     }
   }
+  for (const [name, extra] of [['search_texts', { english: 'off' }],
+    ['search_post_canonical', { books: ['vism'] }], ['search_commentary', { books: ['s0201a.att.xml'] }]]) {
+    const expected = await call(name, { query: '“namo tassa”', ...extra, limit: 50 });
+    const actual = await call(name, { query: '"namo tassa"', ...extra, limit: 50 });
+    assert.deepEqual(actual.results, expected.results, `${name}: normalisation must preserve phrase delimiters`);
+    assert.equal(actual.total_matched ?? actual.total_texts_matched, expected.total_matched ?? expected.total_texts_matched);
+    assert.equal(actual.input_normalised, undefined, 'the opening quote is not a Velthuis letter');
+    counts.paired_normalisation_checks += 1;
+  }
+  const pairedMiss = await call('search_texts', { query: '"nibbana buddha"', english: 'off' });
+  assert.equal(pairedMiss.total_texts_matched, 0, 'a missing quoted phrase cannot become keyword matches');
+  assert.equal(pairedMiss.input_normalised, undefined);
+  counts.paired_normalisation_checks += 1;
+  const pairedSpelling = await call('search_texts', { query: '"nibbaana buddha"', english: 'off' });
+  assert.equal(pairedSpelling.total_texts_matched, 0);
+  assert.equal(pairedSpelling.input_normalised.read_as, '"nibbāna buddha"');
+  counts.paired_normalisation_checks += 1;
   assert.ok(!stderr.includes('UNEXPECTED_NETWORK_ATTEMPT'), 'every checked operation must work without attempting network access');
   const summary = { ...counts, approximate_canonical_texts: canon.load().canon.units.filter((unit) => unit.approximate).length, network_attempts: 0, failures: 0 };
   if (reportAt >= 0) {

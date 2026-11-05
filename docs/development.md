@@ -321,3 +321,9 @@ Before falling back from an unrecorded range to its first text, canonical resolu
 `find_citations` recognises Ancient Buddhist Texts URLs as well as the three previously supported link hosts. Landing pages and part pages resolve through the same bundled URL index used by direct citation resolution. Unknown paths remain unresolved, lookalike hosts are excluded, and source path case is preserved. The scanner does not fetch these pages or change the network allowlist. Use URL encoding for spaces in a prose URL.
 
 `tests/find-abt-citations.test.mjs` checks every current ABT landing and part-page link, including an encoded-space path, with original UTF-16 offsets. It also checks surrounding punctuation, query/fragment handling, lookalike hosts and unknown paths. The installed audit repeats all known links through the shipped offline MCP server.
+
+## Paired search quotes and Velthuis input
+
+The shared input normalizer preserves paired straight phrase quotes at word boundaries before applying spelling rules to their contents. An opening quote before `n` is a phrase delimiter in `"namo tassa"`; it must not be consumed as the Velthuis marker for `ṅ`. Words inside the phrase can still be normalized, with the existing labelled changes, while internal markers such as `sa"nkhaara` retain their Velthuis role. An unpaired word-initial marker retains its existing encoding behavior.
+
+`tests/normalised-search-quotes.test.mjs` checks delimiters, line breaks, spelling conversion within phrases and Velthuis markers alongside phrases. It compares straight and curly quote results through all three MCP search tools. The installed-package audit repeats these checks and verifies that a missing phrase remains missing rather than turning into loose keyword matches. Quotation verification and provider fetching are unchanged.

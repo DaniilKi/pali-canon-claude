@@ -247,7 +247,7 @@ export function normalizeInput(text) {
   const words = nfc.match(/[A-Za-zāīūṅñṭḍṇḷṃṁĀĪŪṄÑṬḌṆḶṂṀ]+/g) || [];
   const others = words.filter((x) => !/^s[uū]tras?$/i.test(x) && !/^the$/i.test(x));
   const sutraOk = others.length > 0 && others.every((x) => normalizeWord(x).rule || isPaliStem(x));
-  const out = nfc.replace(/[A-Za-zāīūṅñṭḍṇḷṃṁĀĪŪṄÑṬḌṆḶṂṀ.~",'’-]+/g, (token) => {
+  const normalizeTokens = (fragment) => fragment.replace(/[A-Za-zāīūṅñṭḍṇḷṃṁĀĪŪṄÑṬḌṆḶṂṀ.~",'’-]+/g, (token) => {
     // Keep surrounding punctuation ("sa.myutta," or a quoted "nibbaana").
     const m = token.match(/^([,'’"-]*?)(.*?)([.,'’"-]*)$/);
     let [, lead, core, tail] = m;
@@ -260,7 +260,17 @@ export function normalizeInput(text) {
     const fixed = r.word.replace(/ṁ/g, 'ṃ');
     if (r.rule) changes.push({ from: core, to: fixed, rule: r.rule, ...(r.label ? { label: r.label } : {}) });
     return lead + fixed + tail;
-  }).replace(/ṁ/g, 'ṃ').replace(/Ṁ/g, 'Ṃ');
+  });
+  // Protect paired phrase delimiters from the Velthuis "n -> ṅ rule. Internal or unpaired
+  // markers still reach normalizeWord; a quote followed by a letter cannot close a phrase.
+  let out = ''; let from = 0;
+  for (const phrase of nfc.matchAll(/(?<!\p{L})"(?:[^"]|"(?=[nN]))+"(?!\p{L})/gu)) {
+    const start = phrase.index, end = start + phrase[0].length - 1;
+    out += normalizeTokens(nfc.slice(from, start)) + '"' + normalizeTokens(nfc.slice(start + 1, end)) + '"';
+    from = end + 1;
+  }
+  out += normalizeTokens(nfc.slice(from));
+  out = out.replace(/ṁ/g, 'ṃ').replace(/Ṁ/g, 'Ṃ');
   const rules = [...new Set(changes.map((c) => c.rule))];
   const scheme = rules.includes('velthuis') ? 'velthuis' : rules.includes('harvard-kyoto') ? 'harvard-kyoto'
     : /[āīūṅñṭḍṇḷṃ]/i.test(out) ? 'unicode' : 'ascii';

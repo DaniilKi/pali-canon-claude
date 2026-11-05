@@ -23404,7 +23404,7 @@ function normalizeInput(text) {
   const words3 = nfc.match(/[A-Za-zāīūṅñṭḍṇḷṃṁĀĪŪṄÑṬḌṆḶṂṀ]+/g) || [];
   const others = words3.filter((x) => !/^s[uū]tras?$/i.test(x) && !/^the$/i.test(x));
   const sutraOk = others.length > 0 && others.every((x) => normalizeWord(x).rule || isPaliStem(x));
-  const out = nfc.replace(/[A-Za-zāīūṅñṭḍṇḷṃṁĀĪŪṄÑṬḌṆḶṂṀ.~",'’-]+/g, (token) => {
+  const normalizeTokens = (fragment) => fragment.replace(/[A-Za-zāīūṅñṭḍṇḷṃṁĀĪŪṄÑṬḌṆḶṂṀ.~",'’-]+/g, (token) => {
     const m = token.match(/^([,'’"-]*?)(.*?)([.,'’"-]*)$/);
     let [, lead, core, tail] = m;
     if (/[mn]$/.test(core) && tail.startsWith("..")) {
@@ -23424,7 +23424,16 @@ function normalizeInput(text) {
     const fixed = r.word.replace(/ṁ/g, "\u1E43");
     if (r.rule) changes.push({ from: core, to: fixed, rule: r.rule, ...r.label ? { label: r.label } : {} });
     return lead + fixed + tail;
-  }).replace(/ṁ/g, "\u1E43").replace(/Ṁ/g, "\u1E42");
+  });
+  let out = "";
+  let from = 0;
+  for (const phrase of nfc.matchAll(new RegExp('(?<!\\p{L})"(?:[^"]|"(?=[nN]))+"(?!\\p{L})', "gu"))) {
+    const start = phrase.index, end = start + phrase[0].length - 1;
+    out += normalizeTokens(nfc.slice(from, start)) + '"' + normalizeTokens(nfc.slice(start + 1, end)) + '"';
+    from = end + 1;
+  }
+  out += normalizeTokens(nfc.slice(from));
+  out = out.replace(/ṁ/g, "\u1E43").replace(/Ṁ/g, "\u1E42");
   const rules = [...new Set(changes.map((c) => c.rule))];
   const scheme = rules.includes("velthuis") ? "velthuis" : rules.includes("harvard-kyoto") ? "harvard-kyoto" : /[āīūṅñṭḍṇḷṃ]/i.test(out) ? "unicode" : "ascii";
   return { text: out, original, changed: changes.length > 0, scheme, changes };
