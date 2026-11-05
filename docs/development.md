@@ -135,7 +135,7 @@ docs/                human documentation (docs/i18n/: machine-drafted translatio
 | `festivals` | `year`, `tradition`. Māgha Pūjā, Vesak, Āsāḷha Pūjā, Vassa start and end, Pavāraṇā and the Kaṭhina season, with their canonical texts; computed (see [calendar.md](calendar.md)) | offline |
 | `daily_text` | `date` (YYYY-MM-DD, UTC, default today), `kind` (`verse` or `sutta`). Fixed-rotation Dhammapada verse or sutta of the day from the bundled canon | offline |
 | `reading_plan` | `name`, `day`. Plans `dhammapada-26-days`, `mn-year`, `ati-into-the-stream`, `ati-four-noble-truths`; lists plans, a whole schedule or one day's readings with `get_text` arguments | offline |
-| `lookup_name` | `name`, `limit`, `textLimit`, `exactWord`. DPPN entry when bundled (none yet: licence unconfirmed, #32), links to the online editions, and the VRI texts that name it (ranked title, then opening, then body) | offline |
+| `lookup_name` | `name`, `limit`, `textLimit`, `exactWord`. DPPN entry when bundled (none yet: licence unconfirmed, #32), links to the online editions, and the VRI texts that name it (ranked Pāli/English title, then opening, then body; matching title evidence included) | offline |
 | `topic` | `name`. Texts on a topic from Access to Insight's General and Numerical indexes, mapped to canon IDs (title, PTS page, numbering notes), with see-also topics and the matching numbered list | offline |
 | `list_topics` | `query`, `index` (subject, numerical or all), `offset`, `limit`. Browse or search the 472 topics | offline |
 | `dhamma_list` | `name`. A standard numbered list (four noble truths, five aggregates, the 37 aids, ten fetters, twelve links…): Pāli members, labelled English glosses, status (canonical or later) and the defining passage. No name lists all 37 | offline |
@@ -327,3 +327,9 @@ Before falling back from an unrecorded range to its first text, canonical resolu
 The shared input normalizer preserves paired straight phrase quotes at word boundaries before applying spelling rules to their contents. An opening quote before `n` is a phrase delimiter in `"namo tassa"`; it must not be consumed as the Velthuis marker for `ṅ`. Words inside the phrase can still be normalized, with the existing labelled changes, while internal markers such as `sa"nkhaara` retain their Velthuis role. An unpaired word-initial marker retains its existing encoding behavior.
 
 `tests/normalised-search-quotes.test.mjs` checks delimiters, line breaks, spelling conversion within phrases and Velthuis markers alongside phrases. It compares straight and curly quote results through all three MCP search tools. The installed-package audit repeats these checks and verifies that a missing phrase remains missing rather than turning into loose keyword matches. Quotation verification and provider fetching are unchanged.
+
+## Proper-name title evidence
+
+`lookup_name` ranks names found in an indexed Pāli or English translation title before opening/body matches. Explicit English title fields are used for ATI and ABT. Known dhammatalks caption formats retain their title text after removing the citation header, including Roman-numbered Dhammapada chapters. Bare bibliographic or generic collection references supply no individual title and are not searched as names.
+
+Each `matched_titles` entry records the exact title, language and source, plus the translator when applicable. Every query word must match one title; words from different editions or the Pāli title cannot be joined to create a name match. The canonical Pāli `title` field stays separate. Body occurrence counts are not added for metadata-only matches. This remains a word search, and the DPPN licence gate still prevents dictionary entries from being bundled.

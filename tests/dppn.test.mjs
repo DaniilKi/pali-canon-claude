@@ -130,8 +130,8 @@ test('ranking: title matches, then the opening (nidāna), then the rest; not can
     assert.ok(!r.texts[0].text_id.startsWith('pli-tv-bu-vb'), `${name}: not the Vinaya vibhaṅga first`);
     assert.match(r.order, /title first/);
   }
-  // Pasenadi is named in the opening of MN 90 (Kaṇṇakatthala), which leads the list.
-  assert.equal(lookupName({ name: 'Pasenadi', textLimit: 3 }).appears_in.texts[0].text_id, 'mn90');
+  // SN 3.13 has an indexed English title naming Pasenadi, which ranks before the opening-only MN 90 match.
+  assert.equal(lookupName({ name: 'Pasenadi', textLimit: 3 }).appears_in.texts[0].text_id, 'sn3.13');
   for (const t of lookupName({ name: 'Kapilavatthu', textLimit: 10 }).appears_in.texts) assert.equal(canon.resolve(t.text_id).unit.id, t.text_id);
 });
 
@@ -144,9 +144,8 @@ test('short names are matched as whole words; exactWord narrows longer ones', ()
   assert.ok(uda.total_texts_matched < loose.total_texts_matched / 5);
   // Citations are not titles: Ud 1.1 does not match the name Uda. An Udāna text may still match through a
   // word of the translator's title (Ud 7.10 "King Udena", linked in #37), never through the citation "Ud".
-  const d = canon.load();
   for (const t of uda.title_matches.filter((x) => x.text_id.startsWith('ud'))) {
-    const words = [t.title, ...(d.translations[t.text_id] || []).map((l) => l.reference)].join(' ');
+    const words = t.matched_titles.map((evidence) => evidence.title).join(' ');
     assert.match(words, /\bUd[a-zāīū]+/i, `${t.text_id} matched only through its citation`);
   }
   assert.ok(!uda.title_matches.some((t) => t.text_id === 'ud1.1'));

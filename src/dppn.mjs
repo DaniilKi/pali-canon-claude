@@ -4,7 +4,7 @@
  * Entries would come from Malalasekera's Dictionary of Pāli Proper Names (DPPN), bundled in
  * server/data/dppn.json. Its copyright status is not confirmed (see docs/sources.md), so the
  * bundled dataset ships with NO entries: the tool says so, links to the online editions, and
- * lists the texts of the bundled VRI canon whose Pāli contains the name. When permission
+ * lists canonical texts whose Pāli paragraphs or indexed titles match the name. When permission
  * arrives, filling `entries` is the only change needed.
  *
  * Entry shape (server/data/dppn.json): { name, aliases?: [], kind?: 'person'|'place'|...,
@@ -14,6 +14,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as canon from './canon.mjs';
+import { parseCitation } from './citations.mjs';
 
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
@@ -115,10 +116,26 @@ function describeEntry(entry) {
 const HEADINGS = new Set(['nikaya', 'book', 'chapter', 'title', 'subhead', 'subsubhead', 'centre', 'hangnum']);
 const OPENING_PARAGRAPHS = 2;
 const WHY = [
-  'The name is in the title.',
+  'The name is in an indexed Pāli or English translation title.',
   'The name is in the opening paragraphs (the nidāna or first lines).',
   'The name is in the body of the text.',
 ];
+
+/** Existing English title metadata; dhammatalks stores its title after a citation in the legacy caption. */
+function translationTitle(link) {
+  if (link.english?.trim()) return link.english;
+  if (link.source !== 'dhammatalks') return null;
+  const reference = link.reference || '';
+  const numbered = reference.match(/^([A-Za-z][A-Za-z-]*\s+\d+(?:[.:]\d+)*(?:[-–—]\d+(?:[.:]\d+)*)?)\s+(.+)$/u);
+  if (numbered) {
+    try {
+      const header = parseCitation(numbered[1]);
+      if (header.kind === 'id' || header.kind === 'uid') return numbered[2];
+    } catch { /* An unrecognised caption is not evidence of a title. */ }
+  }
+  // The source's Dhammapada chapter captions use Roman numerals. Bare Itivuttaka references have no individual title.
+  return reference.match(/^Dhp\s+[IVX]+\s*:\s*(.+)$/u)?.[1] || null;
+}
 
 /** The canon's search index (owner text and folded Pāli per paragraph), built once by canon.search. */
 function searchIndex() {
@@ -164,23 +181,34 @@ export function appearsIn(name, limit = 10, { exactWord } = {}) {
     }
   }
   // Titles: the Pāli title and English translation titles, not the citation (Ud 1.1 is not the name Uda).
-  const titleMatches = s.titles.filter(({ u }) => matches(canon.fold([u.title, ...(d.translations[u.id] || []).map((t) => t.reference)].filter(Boolean).join(' '))))
-    .map(({ u }) => u);
+  const titleMatches = [];
+  const titleEvidence = new Map();
+  for (const { u } of s.titles) {
+    const evidence = [];
+    if (u.title && matches(canon.fold(u.title))) evidence.push({ title: u.title, language: 'pali', source: d.canon.source.name });
+    for (const link of d.translations[u.id] || []) {
+      const title = translationTitle(link);
+      if (title && matches(canon.fold(title))) evidence.push({ title, language: 'english', source: canon.sourceName(link),
+        ...(link.translator ? { translator: link.translator } : {}) });
+    }
+    if (evidence.length) { titleMatches.push(u); titleEvidence.set(u.id, evidence); }
+  }
   for (const u of titleMatches) if (!hits.has(u.id)) hits.set(u.id, { u, order: hits.size, paragraphs: 0, opening: false });
   const inTitle = new Set(titleMatches.map((u) => u.id));
   const tier = (h) => (inTitle.has(h.u.id) ? 0 : h.opening ? 1 : 2);
   const ranked = [...hits.values()].map((h) => ({ ...h, tier: tier(h) }))
     .sort((a, b) => a.tier - b.tier || b.paragraphs - a.paragraphs || a.order - b.order);
   return {
-    searched: 'Pāli text of the VRI Chaṭṭha Saṅgāyana edition, for every word of the name in the same paragraph.',
+    searched: 'Pāli text of the VRI Chaṭṭha Saṅgāyana edition (every name word in one paragraph), and indexed Pāli and English translation titles (every word in one title).',
     stems: ms.map((m) => m.stem),
     match: whole ? 'whole word with a case ending' : 'stem (inflected forms and compounds included)',
     ...(shortName && exactWord === undefined ? { note: `One-word names of ${MIN_STEM} letters or fewer are matched as whole words; pass exactWord: false to match inside longer words.` } : {}),
-    order: 'Ranked: name in the title first, then in the opening paragraphs (nidāna), then elsewhere; within each group, texts naming it in more paragraphs first.',
-    caution: 'A word search, not a dictionary: it can include other people or places with the same name, or ordinary words spelt the same (ānanda also means joy), and miss irregular forms.',
-    title_matches: titleMatches.slice(0, limit).map((u) => ({ text_id: u.id, citation: u.acronym, title: u.title })),
+    order: 'Ranked: name in a Pāli or English translation title first, then in the opening paragraphs (nidāna), then elsewhere; within each group, texts naming it in more paragraphs first.',
+    caution: 'A word search, not a dictionary: it can include other people or places with the same name, or ordinary words spelt the same (ānanda also means joy), and miss irregular forms. A title hit can come from linked English-title metadata even when the Pāli body has no name match.',
+    title_matches: titleMatches.slice(0, limit).map((u) => ({ text_id: u.id, citation: u.acronym, title: u.title, matched_titles: titleEvidence.get(u.id) })),
     texts: ranked.slice(0, limit).map((h) => ({
       text_id: h.u.id, citation: h.u.acronym, title: h.u.title, why: WHY[h.tier],
+      ...(titleEvidence.has(h.u.id) ? { matched_titles: titleEvidence.get(h.u.id) } : {}),
       ...(h.paragraphs ? { paragraphs_naming_it: h.paragraphs } : {}), ...(h.first ? { vri_paragraph: h.first } : {}),
     })),
     total_texts_matched: hits.size,
@@ -210,7 +238,7 @@ export function lookupName({ name, limit = 5, textLimit = 10, exactWord }, data 
 }
 
 export function register({ tool, z }) {
-  tool('lookup_name', 'Who or what is a name in the Pāli Canon (a person such as Sāriputta or Anāthapiṇḍika, a place such as Sāvatthī)? Returns the Dictionary of Pāli Proper Names entry when bundled (with attribution and licence), links to the online editions, and the texts of the bundled canon where the name appears. Works offline.', {
+  tool('lookup_name', 'Who or what is a name in the Pāli Canon (a person such as Sāriputta or Anāthapiṇḍika, a place such as Sāvatthī)? Returns the Dictionary of Pāli Proper Names entry when bundled (with attribution and licence), links to the online editions, and matching Pāli passages or indexed Pāli/English titles from the bundled canon. Title matches identify the exact title, language and source; they are metadata, not dictionary entries. Works offline.', {
     name: z.string().min(1).max(100).describe('A proper name in Pāli, diacritics optional: Sāriputta, Anathapindika, Savatthi.'),
     limit: z.number().int().min(1).max(20).default(5).describe('Maximum dictionary entries.'),
     textLimit: z.number().int().min(1).max(50).default(10).describe('Maximum canon texts listed where the name appears.'),

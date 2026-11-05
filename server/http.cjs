@@ -28440,10 +28440,24 @@ function describeEntry(entry3) {
 var HEADINGS = /* @__PURE__ */ new Set(["nikaya", "book", "chapter", "title", "subhead", "subsubhead", "centre", "hangnum"]);
 var OPENING_PARAGRAPHS = 2;
 var WHY = [
-  "The name is in the title.",
+  "The name is in an indexed P\u0101li or English translation title.",
   "The name is in the opening paragraphs (the nid\u0101na or first lines).",
   "The name is in the body of the text."
 ];
+function translationTitle(link) {
+  if (link.english?.trim()) return link.english;
+  if (link.source !== "dhammatalks") return null;
+  const reference = link.reference || "";
+  const numbered = reference.match(/^([A-Za-z][A-Za-z-]*\s+\d+(?:[.:]\d+)*(?:[-–—]\d+(?:[.:]\d+)*)?)\s+(.+)$/u);
+  if (numbered) {
+    try {
+      const header = parseCitation(numbered[1]);
+      if (header.kind === "id" || header.kind === "uid") return numbered[2];
+    } catch {
+    }
+  }
+  return reference.match(/^Dhp\s+[IVX]+\s*:\s*(.+)$/u)?.[1] || null;
+}
 function searchIndex() {
   const d = load();
   if (!d.search) search("evam", { limit: 1 });
@@ -28478,24 +28492,43 @@ function appearsIn(name, limit = 10, { exactWord } = {}) {
       }
     }
   }
-  const titleMatches = s.titles.filter(({ u }) => matches(fold3([u.title, ...(d.translations[u.id] || []).map((t) => t.reference)].filter(Boolean).join(" ")))).map(({ u }) => u);
+  const titleMatches = [];
+  const titleEvidence = /* @__PURE__ */ new Map();
+  for (const { u } of s.titles) {
+    const evidence = [];
+    if (u.title && matches(fold3(u.title))) evidence.push({ title: u.title, language: "pali", source: d.canon.source.name });
+    for (const link of d.translations[u.id] || []) {
+      const title = translationTitle(link);
+      if (title && matches(fold3(title))) evidence.push({
+        title,
+        language: "english",
+        source: sourceName(link),
+        ...link.translator ? { translator: link.translator } : {}
+      });
+    }
+    if (evidence.length) {
+      titleMatches.push(u);
+      titleEvidence.set(u.id, evidence);
+    }
+  }
   for (const u of titleMatches) if (!hits.has(u.id)) hits.set(u.id, { u, order: hits.size, paragraphs: 0, opening: false });
   const inTitle = new Set(titleMatches.map((u) => u.id));
   const tier = (h) => inTitle.has(h.u.id) ? 0 : h.opening ? 1 : 2;
   const ranked = [...hits.values()].map((h) => ({ ...h, tier: tier(h) })).sort((a, b) => a.tier - b.tier || b.paragraphs - a.paragraphs || a.order - b.order);
   return {
-    searched: "P\u0101li text of the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition, for every word of the name in the same paragraph.",
+    searched: "P\u0101li text of the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition (every name word in one paragraph), and indexed P\u0101li and English translation titles (every word in one title).",
     stems: ms.map((m) => m.stem),
     match: whole ? "whole word with a case ending" : "stem (inflected forms and compounds included)",
     ...shortName && exactWord === void 0 ? { note: `One-word names of ${MIN_STEM} letters or fewer are matched as whole words; pass exactWord: false to match inside longer words.` } : {},
-    order: "Ranked: name in the title first, then in the opening paragraphs (nid\u0101na), then elsewhere; within each group, texts naming it in more paragraphs first.",
-    caution: "A word search, not a dictionary: it can include other people or places with the same name, or ordinary words spelt the same (\u0101nanda also means joy), and miss irregular forms.",
-    title_matches: titleMatches.slice(0, limit).map((u) => ({ text_id: u.id, citation: u.acronym, title: u.title })),
+    order: "Ranked: name in a P\u0101li or English translation title first, then in the opening paragraphs (nid\u0101na), then elsewhere; within each group, texts naming it in more paragraphs first.",
+    caution: "A word search, not a dictionary: it can include other people or places with the same name, or ordinary words spelt the same (\u0101nanda also means joy), and miss irregular forms. A title hit can come from linked English-title metadata even when the P\u0101li body has no name match.",
+    title_matches: titleMatches.slice(0, limit).map((u) => ({ text_id: u.id, citation: u.acronym, title: u.title, matched_titles: titleEvidence.get(u.id) })),
     texts: ranked.slice(0, limit).map((h) => ({
       text_id: h.u.id,
       citation: h.u.acronym,
       title: h.u.title,
       why: WHY[h.tier],
+      ...titleEvidence.has(h.u.id) ? { matched_titles: titleEvidence.get(h.u.id) } : {},
       ...h.paragraphs ? { paragraphs_naming_it: h.paragraphs } : {},
       ...h.first ? { vri_paragraph: h.first } : {}
     })),
@@ -28526,7 +28559,7 @@ function lookupName({ name, limit = 5, textLimit = 10, exactWord }, data5 = load
   return result;
 }
 function register7({ tool, z }) {
-  tool("lookup_name", "Who or what is a name in the P\u0101li Canon (a person such as S\u0101riputta or An\u0101thapi\u1E47\u1E0Dika, a place such as S\u0101vatth\u012B)? Returns the Dictionary of P\u0101li Proper Names entry when bundled (with attribution and licence), links to the online editions, and the texts of the bundled canon where the name appears. Works offline.", {
+  tool("lookup_name", "Who or what is a name in the P\u0101li Canon (a person such as S\u0101riputta or An\u0101thapi\u1E47\u1E0Dika, a place such as S\u0101vatth\u012B)? Returns the Dictionary of P\u0101li Proper Names entry when bundled (with attribution and licence), links to the online editions, and matching P\u0101li passages or indexed P\u0101li/English titles from the bundled canon. Title matches identify the exact title, language and source; they are metadata, not dictionary entries. Works offline.", {
     name: z.string().min(1).max(100).describe("A proper name in P\u0101li, diacritics optional: S\u0101riputta, Anathapindika, Savatthi."),
     limit: z.number().int().min(1).max(20).default(5).describe("Maximum dictionary entries."),
     textLimit: z.number().int().min(1).max(50).default(10).describe("Maximum canon texts listed where the name appears."),

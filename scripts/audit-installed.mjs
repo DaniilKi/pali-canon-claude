@@ -26,7 +26,7 @@ let stderr = '';
 const counts = { canonical_texts: 0, canonical_segments: 0, canonical_pages: 0,
   commentary_texts: 0, commentary_unaligned_texts: 0, commentary_segments: 0, commentary_pages: 0,
   commentary_books: 0, commentary_book_segments: 0, commentary_book_pages: 0, commentary_search_checks: 0,
-  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0, browse_scope_checks: 0, browse_group_pages: 0, quote_verification_checks: 0, edition_citation_checks: 0, citation_range_checks: 0, abt_citation_links: 0, paired_normalisation_checks: 0 };
+  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0, browse_scope_checks: 0, browse_group_pages: 0, quote_verification_checks: 0, edition_citation_checks: 0, citation_range_checks: 0, abt_citation_links: 0, paired_normalisation_checks: 0, proper_name_title_checks: 0 };
 try {
   if (reportAt >= 0) await writeFile(resolve(process.argv[reportAt + 1]), '{"status":"running"}\n');
   const serverDirectory = serverAt >= 0 ? resolve(process.argv[serverAt + 1]) : join(root, 'server');
@@ -305,6 +305,22 @@ require('node:module').syncBuiltinESMExports();\n`);
   assert.equal(pairedSpelling.total_texts_matched, 0);
   assert.equal(pairedSpelling.input_normalised.read_as, '"nibbāna buddha"');
   counts.paired_normalisation_checks += 1;
+  for (const [name, id, language, source] of [['Pasenadi', 'sn3.13', 'english', 'Access to Insight'],
+    ['Ānanda', 'ud5.8', 'english', 'dhammatalks.org'], ['Heedfulness', 'dhp21-32', 'english', 'dhammatalks.org'],
+    ['Sāriputta', 'ud3.4', 'pali', canon.source().name]]) {
+    const result = await call('lookup_name', { name, textLimit: 50 });
+    assert.equal(result.dictionary.status, 'not-bundled', 'title evidence cannot fill the unlicensed dictionary');
+    assert.equal(result.found, false);
+    assert.deepEqual(result.entries, []);
+    const hit = result.appears_in.title_matches.find((item) => item.text_id === id);
+    assert.ok(hit?.matched_titles.some((evidence) => evidence.language === language && evidence.source === source), name);
+    const ranked = result.appears_in.texts.find((item) => item.text_id === id);
+    assert.ok(ranked, `${name}: title-ranked text is returned`);
+    assert.deepEqual(ranked.matched_titles, hit.matched_titles);
+    if (name === 'Pasenadi') assert.equal(result.appears_in.texts[0].text_id, id);
+    if (name === 'Heedfulness') assert.equal(ranked.paragraphs_naming_it, undefined, 'English metadata is not a body occurrence');
+    counts.proper_name_title_checks += 1;
+  }
   assert.ok(!stderr.includes('UNEXPECTED_NETWORK_ATTEMPT'), 'every checked operation must work without attempting network access');
   const summary = { ...counts, approximate_canonical_texts: canon.load().canon.units.filter((unit) => unit.approximate).length, network_attempts: 0, failures: 0 };
   if (reportAt >= 0) {
