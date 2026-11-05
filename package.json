@@ -30,6 +30,7 @@
     "check": "npm run build && npm test && npm run audit",
     "pack:desktop": "node scripts/pack-desktop.mjs",
     "audit": "node scripts/audit.mjs",
+    "corpus:check": "node scripts/corpus-check.mjs",
     "outage": "node scripts/outage.mjs",
     "coverage": "node scripts/coverage.mjs",
     "serve": "node server/http.cjs",

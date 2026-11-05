@@ -126,6 +126,7 @@ npm run check          # build + unit tests + full audit — required for every 
 npm run smoke          # MCP protocol over stdio
 npm run smoke -- --live   # live sources (needs network; behind a proxy set NODE_USE_ENV_PROXY=1 and NODE_EXTRA_CA_CERTS)
 npm run outage         # mirror failover drill
+npm run corpus:check   # every page of the bundled corpus over MCP stdio; --report corpus-check.report.json
 npm run serve          # hosted HTTP endpoint (server/http.cjs) on $PORT (default 8080), see docs/hosting.md
 npm run loadtest       # 50 concurrent HTTP sessions, p50/p95 and errors
 npm run linkcheck      # today's 250 translation links (--all for every link)

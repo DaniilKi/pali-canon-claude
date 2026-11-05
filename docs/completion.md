@@ -1,0 +1,52 @@
+# Completion criteria and current gaps
+
+This project retrieves the VRI Pāli edition. Completion means readers can reliably reach every promised passage, continue to its end, identify its source and limitations, and use the packaged server in the supported clients. It does not mean that an English translation exists for every text or that machine-generated scripture can fill a gap.
+
+## Acceptance gates
+
+| Area | Measurable acceptance criterion | Current evidence or remaining work |
+|---|---|---|
+| Canonical Pāli | Every indexed unit in all 61 bundled root-text files resolves and renders; every page through MCP matches the bundled segments exactly, in order, without omissions or repetition | `npm run audit` checks the data; `npm run corpus:check -- --scope canon` reads all 8,544 units through the committed stdio server |
+| Source coverage | No numbered body block lies outside every citable unit; unassigned front matter is reported | The corpus check reports `source_coverage`, including the exact file and block of any gap. At this revision nine centred front-matter blocks are outside the citation spans: two introductory recitation lines in `vin02m1.mul.xml` and seven opening invocations in AN files. None is a numbered body paragraph. Whole-book front matter is not currently a separate reader operation |
+| Pagination | Returned segments, references, paragraph/page metadata, counts and continuation offsets agree on every page; termination occurs exactly at the source end | `scripts/corpus-check.mjs`; regression fixtures reject skipped, repeated, truncated, altered and prematurely terminated pages |
+| Abbreviations | Every abbreviated indexed unit remains flagged in the response; no expansion is invented | The full canonical reading check requires abbreviation warnings; the existing data audit covers the 266 approximate units |
+| Commentary | Every root unit either returns every aligned commentary segment, labelled as commentary, or clearly reports that no passage is aligned | The exhaustive commentary check covers all 8,544 root units. The initial run found 2,474 unavailable responses. This includes texts the commentary passes over and alignment gaps; unavailable does not mean a missing canonical text. See [coverage](coverage.md) and [sources](sources.md) |
+| Post-canonical Pāli | All 109 bundled books can be read from first to last segment and are always labelled `canonical: false` | The corpus check reads each whole book through `get_post_canonical`, including its continuations |
+| English | Each advertised translation link resolves to the right text; a requested translator is never silently replaced; outages are labelled | 2,540 links cover 1,823 indexed texts including inherited verse links. On the member-based denominator, `list_sources` reports 1,797 of 8,445 texts. There is no linked English Vinaya and only four Abhidhamma texts have English. Complete English coverage needs authorised sources and scholarly matching, not generated translations |
+| Other scripts | Automated round trips and VRI fixture comparisons pass; native readers approve actual output | Sinhala, Thai, Myanmar, Devanagari and Khmer have VRI fixtures. Lao and Lanna still need native-reader confirmation; see [HANDOFF](../HANDOFF.md) |
+| Packaging and sharding | Installed bundles expose the same tools and full corpus; content fingerprints match before and after any storage-only change | Run the corpus check against both builds. The separate sharding contribution `19ebaf9` is not present in this checkout and has not been integrated or verified here |
+| Supported clients | Core reading and continuation work in actual Claude Desktop, Codex, Gemini and hosted clients on supported systems | Automated stdio/HTTP tests are not a substitute for real-client tests. The outstanding client and Windows checks are listed in [HANDOFF](../HANDOFF.md) |
+| Distribution | Published npm package, registry entries and any hosted endpoint install and work as documented | Accounts, publishing credentials, hosting and directory approvals remain explicit external gates; see [HANDOFF](../HANDOFF.md) |
+
+## Run the exhaustive reading check
+
+```sh
+npm ci
+npm run check
+npm run corpus:check -- --report corpus-check.report.json
+```
+
+The default scope is `all`: canon, commentary and post-canonical books. It runs the built `server/index.cjs` over MCP stdio with every allowlisted online source simulated as unavailable. It compares the structured response with the JSON text response, and every returned segment with the local source representation. Reports include source coverage, collection totals, checked entries, pages, segments, a semantic SHA-256 fingerprint and failures. A failure exits non-zero. A selected scope is explicitly labelled `passed_selected_scope`, never a pass for the entire corpus.
+
+Use `--scope canon`, `--scope commentary` or `--scope postcanonical` to diagnose a section; use `--page-size 17` to exercise different continuation boundaries. `--server <path>` selects a different built stdio server. The checker uses the source data in the current checkout as its baseline, so that source must represent the same intended corpus as the server under test. A fingerprint is meaningful only for the same scope and source version. Segment fingerprints are independent of page size and compressed-file boundaries.
+
+The checker confirms faithful retrieval of the bundled representation. It shares segmentation/resolution code with the source and does not independently prove that every editorial boundary or manuscript reading is correct. Keep the full audit, source provenance, citation evidence, licensing rules and scholarly review in addition to this check.
+
+The 5 November 2026 local baseline passed with 8,544 canonical checks, 8,544 commentary checks and 109 post-canonical book checks: 21,302 pages and 378,651 returned segments, zero failures, and zero unreachable numbered body blocks. Segment totals count each requested unit and include shared/grouped passages; they are not a count of distinct passages. The all-scope semantic SHA-256 is `3d69bcd5da4edfcb4b2316989987d01089476ae5beb77409eba2d224b9d38709`. This is a Roman-script retrieval baseline for VRI commit `2d134ff9ef60f70a1eb03c9370580228811a3070`, not a certification of every live provider, script or client.
+
+The manual `Read the full bundled corpus` workflow runs this gate on pushes to `dev/**` and `integrate/**`, and uploads the report. The existing package-check workflow also runs on those development branches, retaining its Node 20/22 and Linux/macOS/Windows matrix. GitHub execution remains pending until a branch is successfully published.
+
+## Development branch and access
+
+`dev/pali-reliability` is a local development branch based on ATI resilience commit `d08325e`. It preserves that completed change and adds the exhaustive corpus gate. It has not been pushed. Do not describe another session's contribution as integrated until its commit and final combined tests have been verified.
+
+The observed publishing failures are separate from local repository quality:
+
+- The cloud Git credential received HTTP 403 for a push to `DaniilKi/pali-canon-claude`.
+- The connected GitHub app returned “Resource not accessible by integration” when creating a blob. The user account has repository admin/push permission, but the connector's accessible installation list did not include `DaniilKi`. Account permissions do not establish token permissions.
+
+Supported correction: configure and publish a cloud environment that selects `DaniilKi/pali-canon-claude`, rather than relying on a separate checkout inside an environment configured for another repository. In the relevant GitHub app installation/connection, include this repository and approve the integration's required permissions. GitHub documents **Contents: write** for creating blobs and **Pull requests: write** for creating PRs. Publishing changes to `.github/workflows/` may additionally require the integration's workflow-write permission. If the app does not offer the needed permission, its integration administrator must provide a supported write-capable configuration. Do not paste tokens into chat, use unrelated credentials or keep retrying the same denied write.
+
+References: [GitHub REST troubleshooting](https://docs.github.com/en/rest/using-the-rest-api/troubleshooting-the-rest-api#resource-not-accessible), [create a blob](https://docs.github.com/en/rest/git/blobs#create-a-blob), [create a pull request](https://docs.github.com/en/rest/pulls/pulls#create-a-pull-request), and [cloud environment setup](https://developers.openai.com/codex/environments/cloud-environments).
+
+After access is corrected, publish the development branch and run its checks. Review and integrate the sharding contribution there, rerun `npm run check`, `npm run smoke`, `npm run evals` and the full corpus gate, compare the semantic fingerprints, and obtain independent integration review. Keep `main` and deployment unchanged until separately authorised.

@@ -18,6 +18,7 @@ npm run check               # build + test + audit (what CI runs)
 npm run smoke               # MCP protocol checks over stdio (offline)
 npm run smoke -- --live     # plus live translation, dictionary and Access to Insight checks
 npm run outage              # simulated outages: mirrors and offline behaviour
+npm run corpus:check        # every page of every bundled canon, aligned commentary and post-canonical text over MCP
 npm run coverage            # coverage numbers by collection (docs/coverage.md)
 npm run pack:desktop        # build dist/pali-canon-<version>.mcpb and SHA256SUMS.txt
 npm run serve               # hosted HTTP endpoint on $PORT (default 8080); see hosting.md
@@ -231,6 +232,8 @@ Directory submissions use https://github.com/DaniilKi/pali-canon-claude/blob/mai
 `.github/workflows/nightly.yml` runs every night (and on demand from the Actions tab). It runs three checks. The first is the live smoke test (`npm run smoke -- --live`). The second is the outage test (`npm run outage`). The third is the link check (`node scripts/linkcheck.mjs`). The link check opens a different 250 of the translation links each day, one at a time and slowly, so every link is checked about every ten days. Run `node scripts/linkcheck.mjs --all` to check them all at once. If any check fails, the job opens an issue called "Source health", or adds a comment to it if one is already open. Close that issue once the source is back or the dead link is fixed.
 
 ATI search needs both `/index-sutta` and `/index-subject`. Each backup mirror gets one retry for transient failures (network errors, 5xx or 429); permanent errors such as 404 are not retried. Other mirror calls keep their existing retry policy. Search returns `index_sources` with the exact URL used for each index, including the jsDelivr CDN when it served the official archive. If either index cannot be loaded, the error names every failed index and includes its full mirror errors. The outage drill prints those errors without truncating the CDN details. `tests/ati-search.test.mjs` exercises these cases with mocked responses, independent of live source availability.
+
+For a complete offline reading gate through the built server, run `npm run corpus:check -- --report corpus-check.report.json`. This reads every page of all indexed canonical texts, aligned commentaries and 109 post-canonical books over MCP stdio. See [completion criteria](completion.md) for its exact guarantees, source-coverage exceptions, remaining translation/client gaps and development-branch checks.
 
 `.github/workflows/npx.yml` packs the npm tarball and starts it with `npx` on Linux, macOS and Windows. `release.yml`, `docker.yml` and `deploy.yml` run on release tags (see Releasing).
 

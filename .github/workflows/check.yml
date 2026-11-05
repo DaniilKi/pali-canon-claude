@@ -1,7 +1,7 @@
 name: Check package
 on:
   push:
-    branches: [main]
+    branches: [main, 'dev/**', 'integrate/**']
   pull_request:
   workflow_dispatch:
 permissions:
