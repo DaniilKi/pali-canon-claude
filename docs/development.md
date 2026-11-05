@@ -297,3 +297,9 @@ When literal Pāli search finds no quoted phrase, spelling retries and the Engli
 `browse_canon` uses the same identifier boundaries as canonical search. An exact text ID such as `mn1` or `sn1.1` lists that text without admitting MN 10 or SN 1.10. Named parent IDs such as `pli-tv-bu-vb-pc` still list their descendants. Arbitrary partial names such as `s` return an error.
 
 A recorded group ID such as `dhp1-20` lists its existing members with ordinary pagination. Group membership comes from the bundled index; arbitrary citation ranges are not parsed here. Existing browsing rules for abbreviated records and collection/section menus are retained. Regression checks cover every complete text ID and every recorded group; the isolated installed-package audit repeats exact-ID, invalid-ID and group-pagination checks.
+
+## Quote verification and source boundaries
+
+The Pāli verifier builds a small table of token boundaries for citable source regions alongside its word index. Candidate retrieval, candidate spacing and similarity refinement respect these boundaries. Within a recorded group, matching can span member texts, but the final citation must contain the whole matched block range. Independent neighbouring texts and separate source books cannot contribute to a single match.
+
+`tests/verify-boundaries.test.mjs` derives negative boundary fixtures from bundled source fragments and checks excerpt containment, grouped-verse citations and unchanged ordinary matches. These deliberately juxtaposed fixtures are not scriptural quotations. The installed-package audit repeats the boundary and group checks offline.
