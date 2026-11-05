@@ -67,7 +67,7 @@ On Windows PowerShell: `$env:CHATGPT_WIDGET = "1"; node server/http.cjs`. ChatGP
 3. Name: `Pali Canon`. Description: the short description from the [shared facts](README.md#shared-facts-use-the-same-words-everywhere).
 4. Connection: **Public endpoint**, and paste the `/mcp` address. Authentication: none (the server is public and read-only).
 5. Read the risk warning, choose **I understand and want to continue**, then **Create as a plugin**.
-6. Check that ChatGPT lists 33 tools: the 32 server tools plus `read_passage_widget`.
+6. Check that ChatGPT lists 34 tools: the 33 server tools plus `read_passage_widget`.
 7. In a new chat, try the five test prompts below on the computer **and** on a phone. The reading view
    should show the Pāli on the left, English on the right (stacked on a phone), with PTS page and translator.
 8. After a server change: redeploy, open the connection on chatgpt.com/plugins, choose **Refresh**, and start a new chat.

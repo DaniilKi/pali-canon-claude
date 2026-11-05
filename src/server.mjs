@@ -44,6 +44,7 @@ export const TOOL_TITLES = {
   verify_quote: "Verify a quotation",
   vinaya_rule: "Pātimokkha rule",
   get_commentary: "Read the commentary",
+  search_commentary: "Search the commentary",
   get_parallels: "Find parallels and cross-references",
   get_post_canonical: "Read post-canonical texts",
   search_post_canonical: "Search post-canonical texts",

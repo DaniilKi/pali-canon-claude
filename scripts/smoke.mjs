@@ -82,6 +82,13 @@ try {
   await call('abhidhamma_matika', { section: 'tika 1' }, (d) => assert.equal(d.entries[0].items[0].text, 'kusalā dhammā.'));
   await call('patthana_condition', { name: 'hetu' }, (d) => { assert.equal(d.condition.definition.citation, 'Paṭṭh 1.1'); assert.equal(d.condition.dictionary.tool, 'lookup_pali'); });
   if (tools.some((t) => t.name === 'get_commentary')) await call('get_commentary', { uid: 'MN 10', limit: 3 }, (d) => { assert.equal(d.available, true); assert.match(d.label, /not the canon/); assert.equal(d.commentary, 'Papañcasūdanī'); });
+  const commentarySearch = await call('search_commentary', { query: 'dhamma', limit: 1 }, (d) => {
+    assert.equal(d.canonical, false); assert.equal(d.content_type, 'commentary'); assert.ok(d.results.length);
+  });
+  await call('get_commentary', { uid: commentarySearch.results[0].read_with.uid }, (d) => {
+    assert.equal(d.canonical, false); assert.equal(d.segments[0].ref, commentarySearch.results[0].citation);
+    assert.ok(!('comments_on_vri_paragraphs' in d.segments[0]));
+  });
   if (tools.some((t) => t.name === 'get_parallels')) await call('get_parallels', { uid: 'DN 22', limit: 50 }, (d) => { assert.equal(d.text_id, 'dn22'); assert.ok(d.links.some((l) => l.text.id === 'mn10' && l.source === 'shared-passage' && l.this_segments.length)); assert.ok(d.links.every((l) => ['commentary-citation', 'shared-passage'].includes(l.source) && l.how_matched)); assert.match(d.suttacentral_parallels.url, /^https:\/\/suttacentral\.net\/dn22$/); });
   await call('get_text', { uid: 'MN 10', limit: 2, commentary: true }, (d) => { assert.equal(d.returned, 2); assert.equal(d.commentary.available, true); assert.match(d.commentary.label, /not the canon/); });
   await call('get_post_canonical', { citation: 'Vism 1.1', limit: 3 }, (d) => { assert.equal(d.canonical, false); assert.ok(d.segments.length); });

@@ -25,6 +25,7 @@ let transport;
 let stderr = '';
 const counts = { canonical_texts: 0, canonical_segments: 0, canonical_pages: 0,
   commentary_texts: 0, commentary_unaligned_texts: 0, commentary_segments: 0, commentary_pages: 0,
+  commentary_books: 0, commentary_book_segments: 0, commentary_book_pages: 0, commentary_search_checks: 0,
   postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0 };
 try {
   if (reportAt >= 0) await writeFile(resolve(process.argv[reportAt + 1]), '{"status":"running"}\n');
@@ -82,6 +83,26 @@ require('node:module').syncBuiltinESMExports();\n`);
       missingCommentary.push({ id: u.id, citation: u.acronym, collection: u.collection, notes: result.notes });
     }
     if (counts.canonical_texts % 1000 === 0) console.log(`Checked ${counts.canonical_texts} canonical texts and their commentary`);
+  }
+  for (const book of commentary.load().books) {
+    const uid = commentary.bookInfo(book).uid;
+    const expected = commentary.bookSegments(book).map((segment, i) => ({ ref: `${uid}/c${i + 1}`, ...segment }));
+    const checked = await checkPages(call, 'get_commentary', { uid }, expected, {
+      metadata: (result) => {
+        assert.equal(result.canonical, false);
+        assert.equal(result.content_type, 'commentary');
+        assert.equal(result.book.vri_file, book.file);
+      },
+    });
+    counts.commentary_books += 1;
+    counts.commentary_book_segments += checked.segments;
+    counts.commentary_book_pages += checked.pages;
+    const query = `"${expected[0].text.replace(/\s+/gu, ' ').slice(0, 160).trim()}"`;
+    const found = await call('search_commentary', { query, books: [book.file], limit: 1 });
+    assert.equal(found.results[0]?.citation, `${uid}/c1`, `${book.file}: first source segment is searchable`);
+    const selected = await call('get_commentary', { uid: found.results[0].read_with.uid });
+    assert.deepEqual(selected.segments, [expected[0]]);
+    counts.commentary_search_checks += 1;
   }
   for (const book of postcanonical.load().books) {
     const sel = postcanonical.select(book.id);

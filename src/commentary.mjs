@@ -68,13 +68,11 @@ function ptsLabel(abbr, page) {
 const paraLabel = (a, b) => (a === b ? String(a) : `${a}–${b}`);
 
 /** Group a passage's blocks into headings, prose paragraphs and whole stanzas. */
-function passageSegments(d, pi) {
-  const [bi, start, end, , a, b] = d.passages[pi];
-  const book = d.books[bi];
+function renderBlocks(book, blocks) {
   const out = [];
   let stanza = null;
   const flush = () => { if (stanza) { out.push(stanza); stanza = null; } };
-  for (const [rend, , text, pages] of book.blocks.slice(start, end)) {
+  for (const [rend, , text, pages] of blocks) {
     const pts = (pages || []).map((p) => ptsLabel(book.abbr, p)).filter(Boolean);
     if (rend === 'hangnum') { flush(); continue; }
     if (VERSE.has(rend)) {
@@ -92,9 +90,53 @@ function passageSegments(d, pi) {
   flush();
   return out.map((s) => ({
     type: s.type, text: s.text,
-    comments_on_vri_paragraphs: paraLabel(a, b),
     ...(s.pts.length ? { commentary_pts_page_begins: [...new Set(s.pts)] } : {}),
   }));
+}
+
+function passageSegments(d, pi) {
+  const [bi, start, end, , a, b] = d.passages[pi];
+  return renderBlocks(d.books[bi], d.books[bi].blocks.slice(start, end))
+    .map((segment) => ({ ...segment, comments_on_vri_paragraphs: paraLabel(a, b) }));
+}
+
+const wholeBooks = new WeakMap();
+/** Render a bundled book without asserting any root-text alignment. */
+export function bookSegments(book) {
+  if (!wholeBooks.has(book)) wholeBooks.set(book, renderBlocks(book, book.blocks));
+  return wholeBooks.get(book);
+}
+
+export function bookInfo(book) {
+  return { uid: `commentary:${book.file}`, vri_file: book.file, title: book.title,
+    work: book.work, description: book.description };
+}
+
+/** Read full books or exact search-result segment refs; root citations still use the aligned reader. */
+export function readBook(uid, { offset = 0, limit = 40 } = {}) {
+  const d = load();
+  if (!d) throw new Error('Bundled commentary data is missing. Reinstall the extension.');
+  const base = { canonical: false, content_type: 'commentary', label: LABEL,
+    alignment_note: 'Direct book reading does not assert an alignment to a canonical text. Use a canonical citation with get_commentary for verified aligned passages.',
+    source: sourceInfo(d) };
+  if (uid === 'commentary' || uid === 'commentary:') {
+    const items = d.books.slice(offset, offset + limit).map(bookInfo);
+    return { ...base, total_books: d.books.length, offset, limit, returned: items.length,
+      next_offset: offset + items.length < d.books.length ? offset + items.length : null, books: items };
+  }
+  const match = String(uid).match(/^commentary:([a-z0-9_.-]+)(?:\/c([1-9]\d*))?$/);
+  const book = match && d.books.find((item) => item.file === match[1]);
+  if (!book) throw new Error('Unknown commentary book reference. Use get_commentary with uid "commentary" to list bundled book references.');
+  const all = bookSegments(book);
+  const first = match[2] ? Number(match[2]) - 1 : 0;
+  if (!Number.isSafeInteger(first) || first >= all.length) throw new Error(`Commentary segment does not exist in ${book.file}.`);
+  const selected = match[2] ? all.slice(first, first + 1) : all;
+  const page = selected.slice(offset, offset + limit).map((segment, i) => ({
+    ref: `${bookInfo(book).uid}/c${first + offset + i + 1}`, ...segment,
+  }));
+  return { ...base, citation: uid, book: bookInfo(book), commentary: book.work,
+    total_segments: selected.length, offset, limit, returned: page.length,
+    next_offset: offset + page.length < selected.length ? offset + page.length : null, segments: page };
 }
 
 function sourceInfo(d) {
@@ -146,6 +188,7 @@ export function segmentOwners(unit) {
  * segments, paginated by segment. Throws on an unknown citation (like get_text).
  */
 export function getCommentary(uid, { offset = 0, limit = 40 } = {}) {
+  if (uid === 'commentary' || String(uid).startsWith('commentary:')) return readBook(uid, { offset, limit });
   const { unit, notes } = canon.resolve(uid);
   return commentaryFor(unit, { offset, limit, notes });
 }
@@ -188,7 +231,7 @@ export function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {})
 
 /** Feature registration (src/features/index.mjs). */
 export function register({ tool, z, citation }) {
-  tool('get_commentary', 'Read the traditional Pāli commentary (Aṭṭhakathā, VRI Chaṭṭha Saṅgāyana edition) on a text: Sumaṅgalavilāsinī (DN), Papañcasūdanī (MN), Sāratthappakāsinī (SN), Manorathapūraṇī (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. Paginated by segment. Works offline.', {
+  tool('get_commentary', 'Read the traditional Pāli commentary (Aṭṭhakathā, VRI Chaṭṭha Saṅgāyana edition) on a text: Sumaṅgalavilāsinī (DN), Papañcasūdanī (MN), Sāratthappakāsinī (SN), Manorathapūraṇī (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. For direct book reading without asserting root alignment, use uid "commentary" to list the included books, then a returned commentary:<VRI-file> or commentary:<VRI-file>/cN segment reference. Paginated by segment. Works offline.', {
     uid: citation,
     offset: z.number().int().min(0).max(100000).default(0).describe('Segment offset for continuation.'),
     limit: z.number().int().min(1).max(200).default(40).describe('Segments per page.'),

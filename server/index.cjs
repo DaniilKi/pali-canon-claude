@@ -23978,7 +23978,7 @@ async function atiIndexes() {
 async function searchAti({ query, limit = 10 }) {
   query = String(query ?? "").trim();
   if (!query) throw new Error("Give a search query.");
-  const terms3 = fold3(query).split(/[^a-z0-9]+/).filter(Boolean);
+  const terms4 = fold3(query).split(/[^a-z0-9]+/).filter(Boolean);
   let pages;
   try {
     pages = await atiIndexes();
@@ -23988,7 +23988,7 @@ async function searchAti({ query, limit = 10 }) {
   const matches = [];
   const collect = (fragment, index3, heading = "") => {
     const context = plainText(`${heading} ${fragment}`);
-    if (!terms3.every((t) => fold3(context).includes(t))) return;
+    if (!terms4.every((t) => fold3(context).includes(t))) return;
     for (const a of anchors(fragment)) matches.push({ ...a, context: shortText(context, 600), index: index3 });
   };
   for (const m of atiContent(pages.sutta).matchAll(/<li\b[^>]*>([^]*?)<\/li>/gi)) collect(m[1], "sutta index");
@@ -24103,7 +24103,7 @@ function listSources() {
       {
         id: "vri-atthakatha",
         name: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana A\u1E6D\u1E6Dhakath\u0101 (VRI), romn/*.att.xml",
-        role: "Commentaries (get_commentary), bundled offline (server/data/commentary.json.gz), aligned to the texts by VRI paragraph number and checked against the words they quote. Commentary, not scripture.",
+        role: "Commentaries bundled offline (server/data/commentary.json.gz): get_commentary with a canonical citation reads verified aligned passages; search_commentary searches all included books, and direct commentary book references read them without asserting root alignment. Commentary, not scripture.",
         repository: canon.repository,
         version: canon.commit,
         attribution: canon.attribution,
@@ -24203,6 +24203,7 @@ __export(features_exports, {
   analyse: () => analyse_exports,
   calendar: () => calendar_exports,
   commentary: () => commentary_exports,
+  commentarySearch: () => commentary_search_exports,
   daily: () => daily_exports,
   dppn: () => dppn_exports,
   findCitations: () => find_citations_exports,
@@ -28286,8 +28287,8 @@ function parseTalkResults(html) {
   }
   return results;
 }
-function searchUrl(terms3, category, page = 1) {
-  const params = new URLSearchParams({ q: terms3, cat: category });
+function searchUrl(terms4, category, page = 1) {
+  const params = new URLSearchParams({ q: terms4, cat: category });
   if (page > 1) params.set("page", String(page));
   return `${SITE}/search/?${params}`;
 }
@@ -28305,8 +28306,8 @@ function politely(load5, now = Date.now) {
   return run;
 }
 var defaultFetch = (url) => politely(() => fetchPublic(url, { json: false, retries: 1, timeout: 2e4 }));
-async function searchCategory(terms3, category, page, fetchHtml) {
-  const url = searchUrl(terms3, category, page);
+async function searchCategory(terms4, category, page, fetchHtml) {
+  const url = searchUrl(terms4, category, page);
   const html = await liveCache.wrap(`talks:${url}`, () => fetchHtml(url));
   return { url, results: parseTalkResults(html), has_more: new RegExp(`[?&;]page=${page + 1}(?![0-9])`).test(html) };
 }
@@ -28333,7 +28334,7 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
   if (!categories.every((c) => CATEGORIES.includes(c))) throw new Error('category must be "evening", "morning" or "all".');
   const notes = [LINK_ONLY, COMMENTARY];
   let passageInfo = null;
-  let terms3 = query;
+  let terms4 = query;
   if (passage) {
     const { unit } = canon.resolve(passage);
     const { links, via } = canon.linksFor(unit);
@@ -28353,7 +28354,7 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
         notes: [...notes, `No search was run: ${why}. dhammatalks.org has no passage-to-talk index, and a loose keyword match would be a wrong link. Try a topic query instead.`]
       };
     }
-    terms3 = `"${phrase}"${query ? ` ${query}` : ""}`;
+    terms4 = `"${phrase}"${query ? ` ${query}` : ""}`;
     notes.push(`dhammatalks.org has no passage-to-talk index. These talks contain the phrase "${phrase}", the title of \u1E6Ch\u0101nissaro Bhikkhu's translation of ${unit.acronym}${query ? `, and the words "${query}"` : ""}. A match shows the words appear in the talk, not that the talk is about this sutta.`);
   } else {
     notes.push(`Matches are keyword matches found by dhammatalks.org's search (all words; "quoted phrases" allowed). Diacritics are removed because the site's search does not handle them.`);
@@ -28366,9 +28367,9 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
     if (!pages.has(key3)) {
       let found;
       try {
-        found = await searchCategory(terms3, st.category, st.page, fetchHtml);
+        found = await searchCategory(terms4, st.category, st.page, fetchHtml);
       } catch (error2) {
-        throw new Error(`dhammatalks.org search is unavailable right now (${error2.message}). Open ${searchUrl(terms3, st.category, st.page)} directly or try again shortly.`);
+        throw new Error(`dhammatalks.org search is unavailable right now (${error2.message}). Open ${searchUrl(terms4, st.category, st.page)} directly or try again shortly.`);
       }
       searched.push(found.url);
       pages.set(key3, found);
@@ -28405,7 +28406,7 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
   return {
     source: TALKS_SOURCE,
     ...passageInfo ? { passage: passageInfo } : {},
-    searched_for: terms3,
+    searched_for: terms4,
     category,
     ...cursor ? { cursor } : { page },
     results,
@@ -28456,10 +28457,13 @@ function register13({ prompt }) {
 var commentary_exports = {};
 __export(commentary_exports, {
   LABEL: () => LABEL,
+  bookInfo: () => bookInfo,
+  bookSegments: () => bookSegments,
   commentaryFor: () => commentaryFor,
   getCommentary: () => getCommentary,
   load: () => load2,
   paraRange: () => paraRange,
+  readBook: () => readBook,
   register: () => register14,
   segmentOwners: () => segmentOwners
 });
@@ -28513,9 +28517,7 @@ function ptsLabel2(abbr, page) {
   return vol ? `${abbr} ${ROMAN4[vol] || vol} ${num2}` : `${abbr} ${num2}`;
 }
 var paraLabel = (a, b) => a === b ? String(a) : `${a}\u2013${b}`;
-function passageSegments(d, pi) {
-  const [bi, start, end, , a, b] = d.passages[pi];
-  const book = d.books[bi];
+function renderBlocks(book, blocks) {
   const out = [];
   let stanza = null;
   const flush = () => {
@@ -28524,7 +28526,7 @@ function passageSegments(d, pi) {
       stanza = null;
     }
   };
-  for (const [rend, , text, pages] of book.blocks.slice(start, end)) {
+  for (const [rend, , text, pages] of blocks) {
     const pts = (pages || []).map((p) => ptsLabel2(book.abbr, p)).filter(Boolean);
     if (rend === "hangnum") {
       flush();
@@ -28546,13 +28548,76 @@ function passageSegments(d, pi) {
   return out.map((s) => ({
     type: s.type,
     text: s.text,
-    comments_on_vri_paragraphs: paraLabel(a, b),
     ...s.pts.length ? { commentary_pts_page_begins: [...new Set(s.pts)] } : {}
   }));
 }
+function passageSegments(d, pi) {
+  const [bi, start, end, , a, b] = d.passages[pi];
+  return renderBlocks(d.books[bi], d.books[bi].blocks.slice(start, end)).map((segment) => ({ ...segment, comments_on_vri_paragraphs: paraLabel(a, b) }));
+}
+var wholeBooks = /* @__PURE__ */ new WeakMap();
+function bookSegments(book) {
+  if (!wholeBooks.has(book)) wholeBooks.set(book, renderBlocks(book, book.blocks));
+  return wholeBooks.get(book);
+}
+function bookInfo(book) {
+  return {
+    uid: `commentary:${book.file}`,
+    vri_file: book.file,
+    title: book.title,
+    work: book.work,
+    description: book.description
+  };
+}
+function readBook(uid, { offset = 0, limit = 40 } = {}) {
+  const d = load2();
+  if (!d) throw new Error("Bundled commentary data is missing. Reinstall the extension.");
+  const base = {
+    canonical: false,
+    content_type: "commentary",
+    label: LABEL,
+    alignment_note: "Direct book reading does not assert an alignment to a canonical text. Use a canonical citation with get_commentary for verified aligned passages.",
+    source: sourceInfo(d)
+  };
+  if (uid === "commentary" || uid === "commentary:") {
+    const items = d.books.slice(offset, offset + limit).map(bookInfo);
+    return {
+      ...base,
+      total_books: d.books.length,
+      offset,
+      limit,
+      returned: items.length,
+      next_offset: offset + items.length < d.books.length ? offset + items.length : null,
+      books: items
+    };
+  }
+  const match2 = String(uid).match(/^commentary:([a-z0-9_.-]+)(?:\/c([1-9]\d*))?$/);
+  const book = match2 && d.books.find((item) => item.file === match2[1]);
+  if (!book) throw new Error('Unknown commentary book reference. Use get_commentary with uid "commentary" to list bundled book references.');
+  const all = bookSegments(book);
+  const first = match2[2] ? Number(match2[2]) - 1 : 0;
+  if (!Number.isSafeInteger(first) || first >= all.length) throw new Error(`Commentary segment does not exist in ${book.file}.`);
+  const selected = match2[2] ? all.slice(first, first + 1) : all;
+  const page = selected.slice(offset, offset + limit).map((segment, i) => ({
+    ref: `${bookInfo(book).uid}/c${first + offset + i + 1}`,
+    ...segment
+  }));
+  return {
+    ...base,
+    citation: uid,
+    book: bookInfo(book),
+    commentary: book.work,
+    total_segments: selected.length,
+    offset,
+    limit,
+    returned: page.length,
+    next_offset: offset + page.length < selected.length ? offset + page.length : null,
+    segments: page
+  };
+}
 function sourceInfo(d) {
-  const { name, repository, commit, files, attribution: attribution2, terms: terms3 } = d.source;
-  return { name, repository, commit, files, attribution: attribution2, terms: terms3 };
+  const { name, repository, commit, files, attribution: attribution2, terms: terms4 } = d.source;
+  return { name, repository, commit, files, attribution: attribution2, terms: terms4 };
 }
 function describePassage(d, pi) {
   const [bi, , , rootBook, a, b, checked, hits, evidence] = d.passages[pi];
@@ -28589,6 +28654,7 @@ function segmentOwners(unit) {
   return out;
 }
 function getCommentary(uid, { offset = 0, limit = 40 } = {}) {
+  if (uid === "commentary" || String(uid).startsWith("commentary:")) return readBook(uid, { offset, limit });
   const { unit, notes } = resolve(uid);
   return commentaryFor(unit, { offset, limit, notes });
 }
@@ -28634,7 +28700,7 @@ function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {}) {
   };
 }
 function register14({ tool, z, citation }) {
-  tool("get_commentary", "Read the traditional P\u0101li commentary (A\u1E6D\u1E6Dhakath\u0101, VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition) on a text: Suma\u1E45galavil\u0101sin\u012B (DN), Papa\xF1cas\u016Bdan\u012B (MN), S\u0101ratthappak\u0101sin\u012B (SN), Manorathap\u016Bra\u1E47\u012B (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. Paginated by segment. Works offline.", {
+  tool("get_commentary", 'Read the traditional P\u0101li commentary (A\u1E6D\u1E6Dhakath\u0101, VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition) on a text: Suma\u1E45galavil\u0101sin\u012B (DN), Papa\xF1cas\u016Bdan\u012B (MN), S\u0101ratthappak\u0101sin\u012B (SN), Manorathap\u016Bra\u1E47\u012B (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. For direct book reading without asserting root alignment, use uid "commentary" to list the included books, then a returned commentary:<VRI-file> or commentary:<VRI-file>/cN segment reference. Paginated by segment. Works offline.', {
     uid: citation,
     offset: z.number().int().min(0).max(1e5).default(0).describe("Segment offset for continuation."),
     limit: z.number().int().min(1).max(200).default(40).describe("Segments per page.")
@@ -28980,10 +29046,10 @@ function select(reference) {
   return sel && settle(sel, sel.book.blocks);
 }
 function sourceInfo2(d) {
-  const { name, repository, commit, files, attribution: attribution2, terms: terms3 } = d.source;
-  return { name, repository, commit, files, attribution: attribution2, terms: terms3 };
+  const { name, repository, commit, files, attribution: attribution2, terms: terms4 } = d.source;
+  return { name, repository, commit, files, attribution: attribution2, terms: terms4 };
 }
-function bookInfo(book) {
+function bookInfo2(book) {
   return { id: book.id, title: book.title, vri_file: book.file, vri_section: book.section, vri_group: book.group, canonical: false };
 }
 var labelFor = (sel) => WORK_LABELS[sel.work] ? `${WORK_LABELS[sel.work]} ${LABELS[sel.book.section]}` : LABELS[sel.book.section];
@@ -29045,7 +29111,7 @@ function summary(d, sel) {
     ...sel.chapter ? { chapter: sel.chapter } : {},
     ...sel.paragraph ? { vri_paragraph: sel.paragraph } : {},
     ...sel.approximate ? { approximate: true } : {},
-    book: bookInfo(sel.book),
+    book: bookInfo2(sel.book),
     ...sel.chapters ? { chapters: sel.chapters } : {},
     notes: sel.notes || [],
     source: sourceInfo2(d)
@@ -29093,7 +29159,7 @@ function browse2(node = "", { offset = 0, limit = 60 } = {}) {
   const sel = locate2(node);
   if (!sel) throw new CitationError2(`Unknown post-canonical node "${node}". Try "post-canonical", "tika", "anna", "vism", "abhidh-s" or a book id.`);
   const chapters = sel.chapters || sel.book.chapters.map(([t], i) => ({ citation: `${sel.book.id} ${i + 1}`, title: t }));
-  return { ...base, node: sel.citation, label: labelFor(sel), book: bookInfo(sel.book), ...page(chapters) };
+  return { ...base, node: sel.citation, label: labelFor(sel), book: bookInfo2(sel.book), ...page(chapters) };
 }
 function terms2(query) {
   const phrases = [...String(query).matchAll(/"([^"]+)"/g)].map((m) => searchFold(m[1], fold6).trim()).filter(Boolean);
@@ -29357,8 +29423,8 @@ function linksOf(unit) {
   return links.map((x) => x.link);
 }
 function sourceInfo3(d) {
-  const { name, builder, inputs, attribution: attribution2, terms: terms3 } = d.source;
-  return { name, builder, inputs, attribution: attribution2, terms: terms3 };
+  const { name, builder, inputs, attribution: attribution2, terms: terms4 } = d.source;
+  return { name, builder, inputs, attribution: attribution2, terms: terms4 };
 }
 function getParallels(uid, { offset = 0, limit = 25 } = {}) {
   const { unit, notes } = resolve(uid);
@@ -29642,19 +29708,19 @@ function expandEnglish(query, { maxTerms = 8, perChunk = 4 } = {}) {
       } else unmatched.push(c.text);
       continue;
     }
-    const terms3 = [];
+    const terms4 = [];
     for (const i of c.hit.ids) {
       const lemma = g.headwords[i][0];
       const f = fold7(lemma);
-      if (f.length < 3 || terms3.some((t) => fold7(t) === f)) continue;
-      if (terms3.length < perChunk && used < maxTerms) {
-        terms3.push(lemma);
+      if (f.length < 3 || terms4.some((t) => fold7(t) === f)) continue;
+      if (terms4.length < perChunk && used < maxTerms) {
+        terms4.push(lemma);
         used += 1;
       } else dropped += 1;
     }
-    if (terms3.length) {
-      mapping[c.text] = terms3;
-      groups.push(terms3.map(fold7));
+    if (terms4.length) {
+      mapping[c.text] = terms4;
+      groups.push(terms4.map(fold7));
       sources.add(c.hit.source);
     }
   }
@@ -29667,6 +29733,101 @@ function register17({ tool, z }) {
     direction: z.enum(["auto", "en-pa", "pa-en"]).default("auto").describe('"en-pa" English to P\u0101li, "pa-en" P\u0101li to English, "auto" both.'),
     limit: z.number().int().min(1).max(30).default(10).describe("Entries per direction and source.")
   }, (args) => glossary(args));
+}
+
+// src/commentary-search.mjs
+var commentary_search_exports = {};
+__export(commentary_search_exports, {
+  register: () => register18,
+  search: () => search3
+});
+var INDEX_BUDGET_BYTES = 8 * 1024 * 1024;
+var indexes2 = /* @__PURE__ */ new Map();
+var indexBytes = 0;
+function indexed(book) {
+  const cached5 = indexes2.get(book);
+  if (cached5) {
+    indexes2.delete(book);
+    indexes2.set(book, cached5);
+    return cached5.text;
+  }
+  const text = bookSegments(book).map((segment) => searchFold(segment.text, fold3));
+  const bytes = text.reduce((sum, value) => sum + value.length * 2, 0);
+  if (bytes <= INDEX_BUDGET_BYTES) {
+    while (indexBytes + bytes > INDEX_BUDGET_BYTES && indexes2.size) {
+      const oldest = indexes2.keys().next().value;
+      indexBytes -= indexes2.get(oldest).bytes;
+      indexes2.delete(oldest);
+    }
+    indexes2.set(book, { text, bytes });
+    indexBytes += bytes;
+  }
+  return text;
+}
+function terms3(query) {
+  const phrases = [...query.matchAll(/"([^"]+)"/gu)].map((match2) => searchFold(match2[1], fold3).trim()).filter(Boolean);
+  const words3 = fold3(query.replace(/"[^"]+"/gu, " ")).split(/[^a-z0-9]+/u).filter((word) => word.length > 1);
+  return [.../* @__PURE__ */ new Set([...phrases, ...words3])];
+}
+function search3(query, { books, offset = 0, limit = 10 } = {}) {
+  const data5 = load2();
+  if (!data5) throw new Error("Bundled commentary data is missing. Reinstall the extension.");
+  const wanted = terms3(String(query));
+  if (!wanted.length) throw new Error("Commentary search needs at least one word of two or more letters.");
+  const wantedBooks = books?.length ? new Set(books.map((book) => String(book).replace(/^commentary:/u, ""))) : null;
+  if (wantedBooks) for (const file of wantedBooks) {
+    if (!data5.books.some((book) => book.file === file)) throw new Error(`Unknown commentary book "${file}". Use get_commentary with uid "commentary" to list included books.`);
+  }
+  const pool = data5.books.filter((book) => !wantedBooks || wantedBooks.has(book.file));
+  const results = [];
+  let total = 0;
+  for (const book of pool) {
+    const segments2 = bookSegments(book);
+    const folded = indexed(book);
+    for (let i = 0; i < folded.length; i += 1) {
+      if (!wanted.every((term) => folded[i].includes(term))) continue;
+      total += 1;
+      if (total <= offset || results.length >= limit) continue;
+      const info = bookInfo(book);
+      const ref = `${info.uid}/c${i + 1}`;
+      results.push({
+        canonical: false,
+        content_type: "commentary",
+        citation: ref,
+        book: info,
+        segment: i + 1,
+        type: segments2[i].type,
+        excerpt: searchExcerpt(segments2[i].text, wanted[0], fold3),
+        ...segments2[i].commentary_pts_page_begins ? { commentary_pts_page_begins: segments2[i].commentary_pts_page_begins } : {},
+        read_with: { tool: "get_commentary", uid: ref },
+        context_with: { tool: "get_commentary", uid: info.uid, offset: Math.max(0, i - 1), limit: 3 }
+      });
+    }
+  }
+  const { name, repository, commit, files, attribution: attribution2, terms: licence } = data5.source;
+  return {
+    query,
+    canonical: false,
+    content_type: "commentary",
+    label: LABEL,
+    searched_books: pool.length,
+    total_matched: total,
+    offset,
+    limit,
+    returned: results.length,
+    next_offset: offset + results.length < total ? offset + results.length : null,
+    results,
+    alignment_note: "Search covers the included commentary books, including material with no verified root-text alignment. A hit does not establish which canonical passage it explains.",
+    source: { name, repository, commit, files, attribution: attribution2, terms: licence }
+  };
+}
+function register18({ tool, z }) {
+  tool("search_commentary", 'Search the P\u0101li of all bundled VRI commentary books (A\u1E6D\u1E6Dhakath\u0101), including passages not aligned to a canonical text. Diacritics optional; all words must match one prose segment or complete stanza; "quoted phrases" accept line breaks. Results are commentary, not canon, and do not assert root-text alignment. Each result includes a direct get_commentary reference for reading the exact source segment and its context. Works offline.', {
+    query: z.string().min(2).max(500),
+    books: z.array(z.string().min(1).max(100)).max(100).optional().describe('VRI filenames or commentary:<VRI-file> book references returned by get_commentary with uid "commentary". Omit to search all included books.'),
+    offset: z.number().int().min(0).max(1e6).default(0),
+    limit: z.number().int().min(1).max(50).default(10)
+  }, ({ query, books, offset, limit }) => withNormalised(query, (value) => search3(value, { books, offset, limit })));
 }
 
 // src/script.mjs
@@ -30586,6 +30747,7 @@ var TOOL_TITLES = {
   verify_quote: "Verify a quotation",
   vinaya_rule: "P\u0101timokkha rule",
   get_commentary: "Read the commentary",
+  search_commentary: "Search the commentary",
   get_parallels: "Find parallels and cross-references",
   get_post_canonical: "Read post-canonical texts",
   search_post_canonical: "Search post-canonical texts",

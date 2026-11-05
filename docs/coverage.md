@@ -122,3 +122,7 @@ The 5 November 2026 installed-package audit read every page of all 8,544 canonic
 For the same 8,544 records, commentary was available for 6,070; 2,474 returned an explicit notice that no passage was aligned. This does not mean the traditional commentary is absent: it may skip a repeated text, or an alignment has not been established confidently. The 266 texts abbreviated in VRI remain marked approximate. English translation bodies are fetched live and are not part of the offline bundle.
 
 Run `npm run audit:installed` to repeat the check. The optional JSON report lists every text without an aligned commentary passage; see [the development guide](development.md#verify-every-text-in-the-installed-bundle). Passing this check verifies delivery against the bundled source data, without claiming that every source gap has been filled.
+
+## Commentary beyond verified alignments
+
+All 47 included VRI Aṭṭhakathā books are now searchable with `search_commentary` and readable directly with `get_commentary` book references. This includes introductions and unaligned material already present in the bundle. Search hits identify their exact source segment and nearby context. Direct book results are labelled as commentary and do not claim a root-text alignment. The counts of confidently aligned texts and source abbreviations above are unchanged.

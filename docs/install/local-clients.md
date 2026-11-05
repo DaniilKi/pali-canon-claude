@@ -14,7 +14,7 @@ Please read [what to expect from small models](#what-to-expect-from-small-models
 
 ## What works offline
 
-The server has 32 tools. Twenty-five of them work without internet (`get_text` needs it only when you ask for an English translation, and `verify_quote` checks Pāli quotations offline but English ones online):
+The server has 33 tools. Twenty-six of them work without internet (`get_text` needs it only when you ask for an English translation, and `verify_quote` checks Pāli quotations offline but English ones online):
 
 | Tool | What it does | Internet? |
 |---|---|---|
@@ -32,6 +32,7 @@ The server has 32 tools. Twenty-five of them work without internet (`get_text` n
 | `get_access_to_insight_text` | Reads an Access to Insight page | Yes |
 | `find_citations` | Finds every citation in a piece of text (an essay, a talk transcript) and checks each one | No |
 | `find_talks` | Finds Dhamma talks by Ṭhānissaro Bhikkhu on dhammatalks.org by topic or passage (titles, dates and links only) | Yes |
+| `search_commentary` | Searches all included VRI commentary books; returns exact source references without asserting root-text alignment | No |
 | `get_commentary` | Reads the traditional Pāli commentary (Aṭṭhakathā, VRI edition) on a text, clearly labelled as commentary | No |
 | `get_post_canonical` | Reads post-canonical Pāli books (Visuddhimagga, Abhidhammatthasaṅgaha, sub-commentaries), labelled as not canon | No |
 | `search_post_canonical` | Searches the post-canonical books | No |
@@ -111,7 +112,7 @@ Once the npm package is available, this shorter form works too:
 uvx mcpo --host 127.0.0.1 --port 8000 -- npx -y pali-canon-mcp
 ```
 
-Leave the terminal open. To check it, open [http://localhost:8000/docs](http://localhost:8000/docs) in a browser: you should see the 32 tools, and you can try `resolve_reference` with `{"reference": "MN 10"}`.
+Leave the terminal open. To check it, open [http://localhost:8000/docs](http://localhost:8000/docs) in a browser: you should see the 33 tools, and you can try `resolve_reference` with `{"reference": "MN 10"}`.
 
 Notes:
 

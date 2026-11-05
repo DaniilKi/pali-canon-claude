@@ -3,6 +3,7 @@
 export const offlineDataChecks = [
   ['get_text', { uid: 'MN 10', limit: 1 }, (d) => d.text_id === 'mn10' && d.segments?.length > 0],
   ['get_metadata', { uid: 'AN 4.61' }, (d) => d.english?.some((entry) => entry.translation_id.startsWith('aj:'))],
+  ['search_commentary', { query: 'dhamma', limit: 1 }, (d) => d.canonical === false && d.content_type === 'commentary' && d.results?.[0]?.read_with?.tool === 'get_commentary'],
   ['get_commentary', { uid: 'MN 10', limit: 1 }, (d) => d.available === true && d.segments?.length > 0],
   ['get_post_canonical', { citation: 'Vism 1.1', limit: 1 }, (d) => d.canonical === false && d.segments?.length > 0],
   ['analyse_passage', { uid: 'Dhp 183', limit: 4 }, (d) => d.words?.length > 0],
