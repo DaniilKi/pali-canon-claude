@@ -31738,10 +31738,14 @@ function load3() {
   const d = JSON.parse((0, import_node_zlib5.gunzipSync)(readBundled(path)).toString("utf8"));
   d.byId = /* @__PURE__ */ new Map();
   d.byKey = /* @__PURE__ */ new Map();
+  d.byTitle = /* @__PURE__ */ new Map();
   for (const b of d.books) {
     b.canonical = false;
     d.byId.set(b.id, b);
-    for (const key3 of [b.id, fold6(b.file.replace(/\..*$/, "")), fold6(b.title)]) if (!d.byKey.has(key3)) d.byKey.set(key3, b);
+    for (const key3 of [b.id, fold6(b.file.replace(/\..*$/, ""))]) d.byKey.set(key3, b);
+    const title = fold6(b.title).replace(/\s+/g, "-");
+    if (!d.byTitle.has(title)) d.byTitle.set(title, []);
+    d.byTitle.get(title).push(b);
   }
   data3 = d;
   return data3;
@@ -31824,7 +31828,14 @@ function isPostCanonical(reference) {
   return !!bookFor(d, f);
 }
 var TAIL = /^(.+?)\s+((?:ch\.?\s*|§\s*|para\.?\s*)?[\divxl]+(?:\s*[.,:]\s*\d+)?)$/;
-var keyed = (d, key3) => d.byKey.get(key3) || d.byKey.get(key3.replace(/\s+/g, "-")) || null;
+function keyed(d, key3) {
+  const normal = key3.replace(/\s+/g, "-");
+  const exact = d.byKey.get(key3) || d.byKey.get(normal);
+  if (exact) return exact;
+  const books = d.byTitle.get(normal) || [];
+  if (books.length > 1) throw new CitationError2(`Post-canonical title "${key3}" is ambiguous: it names ${books.map((b) => b.id).join(", ")}. Use one exact catalogue ID or VRI file stem to choose the source book.`);
+  return books[0] || null;
+}
 function splitKey(d, f) {
   const whole = keyed(d, f);
   if (whole) return { book: whole, rest: "" };
