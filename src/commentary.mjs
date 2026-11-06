@@ -195,7 +195,10 @@ export function getCommentary(uid, { offset = 0, limit = 40 } = {}) {
 
 /** Commentary for an already resolved unit (used by get_text with commentary: true). */
 export function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {}) {
-  const base = { text_id: unit.id, citation: unit.acronym, title: unit.title, label: LABEL };
+  const alignment = canon.alignmentInfo(unit);
+  if (alignment && !notes.includes(alignment.note)) notes = [...notes, alignment.note];
+  const base = { text_id: unit.id, citation: unit.acronym, title: unit.title, label: LABEL,
+    ...(unit.approximate ? { approximate: true } : {}), ...(alignment ? { alignment } : {}) };
   const d = load();
   if (!d) {
     return { ...base, available: false, segments: [], notes: [...notes, 'The commentary data file (commentary.json.gz) is not installed with this copy of the server. Reinstall, or read the Pāli text with get_text.'] };
@@ -213,7 +216,6 @@ export function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {})
   const page = all.slice(offset, offset + limit).map((s, i) => ({ ref: `${unit.id}/c${offset + i + 1}`, ...s }));
   const works = [...new Set(passages.map((pi) => d.books[d.passages[pi][0]].work))];
   const extra = [];
-  if (unit.approximate) extra.push(`${unit.id} is abbreviated (peyyāla) in the VRI edition; the commentary shown explains the paragraph where the abbreviation occurs.`);
   if (passages.some((pi) => d.passages[pi][4] !== d.passages[pi][5])) extra.push('Some passages explain a run of root paragraphs together (comments_on_vri_paragraphs gives the range), so they may also cover neighbouring texts.');
   return {
     ...base, available: true,

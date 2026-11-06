@@ -23689,6 +23689,7 @@ __export(canon_exports, {
   ANANDAJOTI_BASE: () => ANANDAJOTI_BASE,
   ANANDAJOTI_LICENSE: () => ANANDAJOTI_LICENSE,
   _test: () => _test2,
+  alignmentInfo: () => alignmentInfo,
   anandajotiInfo: () => anandajotiInfo,
   browse: () => browse,
   describe: () => describe,
@@ -24536,8 +24537,34 @@ function linksFor(u) {
   if (container && d.translations[container.id]?.length) return { links: d.translations[container.id], via: container };
   return { links: [], via: null };
 }
+function alignmentInfo(unit) {
+  if (!unit) return null;
+  if (unit.approximate) {
+    if (unit.shares_passage_with) return {
+      kind: "shared_passage",
+      shared_with: unit.shares_passage_with,
+      note: `${unit.id} is approximate and shares its indexed source span with ${unit.shares_passage_with}. A separate source span is not asserted; no missing wording is reconstructed.`
+    };
+    return {
+      kind: "unverified_alignment",
+      note: `${unit.id} has no confirmed independent location in the bundled citation index. The supplied source span is provisional; this does not establish that VRI abbreviates or omits the text.`
+    };
+  }
+  if (!unit.members?.length) return null;
+  const d = load();
+  const uncertain = (unit.members || []).filter((id) => {
+    const member = d.byId.get(id);
+    return member?.approximate && !member.shares_passage_with;
+  });
+  return uncertain.length ? {
+    kind: "group_with_unverified_members",
+    unverified_members: uncertain,
+    note: `${unit.id} includes unverified member mappings (${uncertain.join(", ")}). Its bundled span can include neighbouring passages; it does not establish separate locations for those members.`
+  } : null;
+}
 function unitSummary(u, extra = {}) {
   const d = load();
+  const alignment = alignmentInfo(u);
   return {
     id: u.id,
     citation: u.acronym,
@@ -24547,6 +24574,7 @@ function unitSummary(u, extra = {}) {
     pts: u.pts ? ptsLabel(u.collection, u.pts.volume, u.pts.page) + (u.pts.end_page && u.pts.end_page !== u.pts.page ? `\u2013${u.pts.end_page}` : "") : null,
     vri_paragraphs: u.vri || null,
     ...u.approximate ? { approximate: true } : {},
+    ...alignment ? { alignment } : {},
     english_available: linksFor(u).links.length,
     ...extra
   };
@@ -24562,7 +24590,7 @@ function lookupId(id) {
   const d = load();
   if (d.byId.has(id)) return { unit: d.byId.get(id), via: "id" };
   const container = rangeContaining(id);
-  if (container) return { unit: container, via: "range", note: `${id} is not printed separately; it belongs to ${container.acronym} (${container.id}), which groups abbreviated or short texts.` };
+  if (container) return { unit: container, via: "range", note: `${id} is not separately indexed; the bundled citation lookup maps it to source group ${container.acronym} (${container.id}).` };
   return null;
 }
 function ptsLookup(c) {
@@ -24613,7 +24641,8 @@ function resolve(reference) {
     if (occurrences.length > 1) notes.push(`VRI marks ${label} ${occurrences.length} times in this book; the first is used.`);
     const others = /* @__PURE__ */ new Map();
     for (const occ of occurrences) for (const u of textsOnPage(d, c.edition, occ)) if (u.id !== unit.id) others.set(u.id, u);
-    if (unit.approximate) notes.push(`${unit.id} is abbreviated (peyy\u0101la) in the VRI edition; the passage shown is where the abbreviation occurs.`);
+    const alignment2 = alignmentInfo(unit);
+    if (alignment2) notes.push(alignment2.note);
     return { unit, notes, alternatives: [...others.values()].slice(0, 3).map((u) => unitSummary(u)) };
   }
   if (c.kind === "url") {
@@ -24621,7 +24650,10 @@ function resolve(reference) {
     const id2 = d.urlIndex.get(key3) || d.urlIndex.get(key3.replace(/^accesstoinsight\.org/, "accesstoinsight.org"));
     if (!id2) throw new CitationError("That page is not linked to a canon text in the bundled index. Give the sutta citation instead.");
     notes.push(c.host === "ancient-buddhist-texts.net" ? `Linked from ${c.host}: \u0100nandajoti Bhikkhu's text and translation of ${id2}.` : `Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id2}.`);
-    return { unit: d.byId.get(id2), notes, alternatives: [] };
+    const unit = d.byId.get(id2);
+    const alignment2 = alignmentInfo(unit);
+    if (alignment2) notes.push(alignment2.note);
+    return { unit, notes, alternatives: [] };
   }
   const id = c.kind === "uid" ? c.uid : citationId(c);
   let hit = lookupId(id);
@@ -24654,7 +24686,8 @@ function resolve(reference) {
     throw new CitationError(`${reference} (${id}) is not in the canon index. Check the number with browse_canon("${collection}").`);
   }
   if (hit.note) notes.push(hit.note);
-  if (hit.unit.approximate) notes.push(`${hit.unit.id} is abbreviated (peyy\u0101la) in the VRI edition; the passage shown is where the abbreviation occurs.`);
+  const alignment = alignmentInfo(hit.unit);
+  if (alignment) notes.push(alignment.note);
   const schemes = (d.translations[hit.unit.id] || []).filter((t) => t.reference && /^(AN|SN) \d+:\d+/.test(t.reference)).map((t) => t.reference.match(/^(AN|SN) (\d+):(\d+)/)).filter(Boolean).filter((m) => `${m[1].toLowerCase()}${m[2]}.${m[3]}` !== hit.unit.id);
   if (schemes.length) notes.push(`Also numbered ${schemes[0][1]} ${schemes[0][2]}.${schemes[0][3]} in the PTS-based numbering used by \u1E6Ch\u0101nissaro Bhikkhu (dhammatalks.org) and Access to Insight.`);
   return { unit: hit.unit, notes, alternatives: [] };
@@ -24812,6 +24845,7 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const filter = collection ? fold3(collection).replace(/\s+/g, "") : null;
   const resolved = groupedScope(d, filter, collection);
   const okCollection = scopePredicate(d, resolved?.unit.id || filter);
+  const scopeAlignment = alignmentInfo(d.byId.get(resolved?.unit.id || filter));
   if (collection && (!filter || !d.canon.units.some(okCollection))) {
     throw new Error(`Unknown canonical search scope "${collection}". Use browse_canon to list collection and section IDs.`);
   }
@@ -24846,6 +24880,7 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
     query,
     searched: "Full P\u0101li text of the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition (diacritics optional), text titles and English translation titles.",
     ...resolved ? { scope_resolution: resolved.metadata } : {},
+    ...scopeAlignment ? { scope_alignment: scopeAlignment } : {},
     title_matches: titleHits,
     total_title_matches: matchingTitles.length,
     title_next_offset: limit > 0 && offset + limit < matchingTitles.length ? offset + limit : null,
@@ -24894,7 +24929,14 @@ function browse(node = "canon", { offset = 0, limit = 60 } = {}) {
   if (!members.length) throw new Error(`Unknown browse node "${node}". Start with "canon", "sutta", "vinaya", "abhidhamma" or a collection such as mn, sn, sn56, an4, dhp.`);
   members.sort((a, b) => a.book - b.book || a.start - b.start);
   const collection = members[0].collection;
-  return { node: key3, name: COLLECTION_NAMES[key3] || COLLECTION_NAMES[collection] || collection, ...key3 !== collection ? { collection } : {}, ...page(members.map((u) => unitSummary(u))) };
+  const alignment = alignmentInfo(d.byId.get(key3));
+  return {
+    node: key3,
+    name: COLLECTION_NAMES[key3] || COLLECTION_NAMES[collection] || collection,
+    ...key3 !== collection ? { collection } : {},
+    ...alignment ? { alignment } : {},
+    ...page(members.map((u) => unitSummary(u)))
+  };
 }
 var _test2 = { lookupId, rangeContaining, ptsLookup };
 
@@ -26002,7 +26044,6 @@ function analysePassage({ uid, segment, paragraph, offset = 0, limit = 60 } = {}
   const unknown2 = words3.filter((w) => w.status === "unknown").length;
   const outNotes = [...notes];
   if (segment === void 0 && paragraph === void 0) outNotes.push(`No segment given: analysed the first body segment (${seg.ref}). Pass segment (e.g. "${unit.id}/${index3 + 1}") for another.`);
-  if (unit.approximate) outNotes.push("This text is abbreviated (peyy\u0101la) in the VRI edition; the analysis covers the words printed, not the expanded text.");
   return {
     text_id: unit.id,
     citation: unit.acronym,
@@ -30711,7 +30752,7 @@ function memorisePrompt(reference) {
   return [
     `Help me memorise ${reference} in P\u0101li, using only text retrieved from the Pali Canon MCP tools.`,
     "",
-    "1. Retrieve. Call resolve_reference, then get_text (no translation needed; follow next_offset until the passage is covered). Report the text ID, title, VRI edition attribution and any notes. If the text is marked approximate (abbreviated peyy\u0101la), say so and do not expand it. If the passage cannot be retrieved, stop and say so; never recite from memory.",
+    "1. Retrieve. Call resolve_reference, then get_text (no translation needed; follow next_offset until the passage is covered). Report the text ID, title, VRI edition attribution and any notes. If the text is marked approximate, report the returned alignment caution and do not expand it; the flag alone does not prove source abbreviation or omission. If the passage cannot be retrieved, stop and say so; never recite from memory.",
     "2. Chunk by segment. Each get_text segment is one unit: a verse (stanza) is one chunk; split a long prose segment only at its own sentence or clause punctuation. Number the chunks and keep each segment ref and VRI paragraph (or PTS page) so every chunk is citable. Copy the P\u0101li exactly, diacritics included; never reword, normalise, complete or reorder it. Skip headings unless I ask for them.",
     '3. Learn. Show one chunk at a time, then the chunk joined to the ones before it (cumulative chaining). If I ask for meaning, call get_text with translation "default" and name the translator, or use lookup_pali for single words; label your own glosses as yours.',
     "4. Cloze practice. Make fill-in-the-blank cards from the retrieved chunk only: blank one word per card at first, then more (every other word, then first letters only, then the whole line). Check my answer against the retrieved text, show the exact retrieved wording and its citation, and ignore only differences in capitals and diacritics I could not type, saying so.",
@@ -30930,7 +30971,16 @@ function getCommentary(uid, { offset = 0, limit = 40 } = {}) {
   return commentaryFor(unit, { offset, limit, notes });
 }
 function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {}) {
-  const base = { text_id: unit.id, citation: unit.acronym, title: unit.title, label: LABEL };
+  const alignment = alignmentInfo(unit);
+  if (alignment && !notes.includes(alignment.note)) notes = [...notes, alignment.note];
+  const base = {
+    text_id: unit.id,
+    citation: unit.acronym,
+    title: unit.title,
+    label: LABEL,
+    ...unit.approximate ? { approximate: true } : {},
+    ...alignment ? { alignment } : {}
+  };
   const d = load2();
   if (!d) {
     return { ...base, available: false, segments: [], notes: [...notes, "The commentary data file (commentary.json.gz) is not installed with this copy of the server. Reinstall, or read the P\u0101li text with get_text."] };
@@ -30951,7 +31001,6 @@ function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {}) {
   const page = all.slice(offset, offset + limit).map((s, i) => ({ ref: `${unit.id}/c${offset + i + 1}`, ...s }));
   const works = [...new Set(passages.map((pi) => d.books[d.passages[pi][0]].work))];
   const extra = [];
-  if (unit.approximate) extra.push(`${unit.id} is abbreviated (peyy\u0101la) in the VRI edition; the commentary shown explains the paragraph where the abbreviation occurs.`);
   if (passages.some((pi) => d.passages[pi][4] !== d.passages[pi][5])) extra.push("Some passages explain a run of root paragraphs together (comments_on_vri_paragraphs gives the range), so they may also cover neighbouring texts.");
   return {
     ...base,
@@ -31712,7 +31761,6 @@ function getParallels(uid, { offset = 0, limit = 25 } = {}) {
   for (const l of all) counts[l.source]++;
   const extra = [];
   if (!all.length) extra.push(`No parallel or cross-reference is recorded for ${unit.acronym}. Only links with clear evidence are kept, so this does not mean the text has none: see SuttaCentral (link below) for parallels in other traditions, or search_texts for a phrase.`);
-  if (unit.approximate) extra.push(`${unit.acronym} is abbreviated (peyy\u0101la) in the VRI edition, so shared passages are found only in the words that are printed.`);
   return {
     ...base,
     available: true,

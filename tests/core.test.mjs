@@ -43,10 +43,10 @@ test('Khuddaka collections', () => {
   assert.equal(canon.resolve('Thi Ap 1').unit.title, 'Sumedhātherīapadānaṃ');
 });
 
-test('texts printed together resolve by member number, with a note', () => {
+test('recorded source groups resolve by member number, with an index note', () => {
   const r = canon.resolve('AN 10.208');
   assert.equal(r.unit.id, 'an10.199-210');
-  assert.ok(r.notes.some((n) => /not printed separately/.test(n)));
+  assert.ok(r.notes.some((n) => /not separately indexed/.test(n)));
   assert.match(id('AN 1.300'), /^an1\.\d+-\d+$/);
   assert.match(id('SN 46.150'), /^sn46\.\d+-\d+$/);
 });

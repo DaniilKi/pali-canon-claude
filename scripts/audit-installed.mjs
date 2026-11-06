@@ -25,6 +25,7 @@ let transport;
 let stderr = '';
 const counts = { canonical_texts: 0, canonical_segments: 0, canonical_pages: 0,
   shared_span_checks: 0,
+  alignment_note_checks: 0, alignment_metadata_checks: 0,
   commentary_texts: 0, commentary_unaligned_texts: 0, commentary_segments: 0, commentary_pages: 0,
   commentary_books: 0, commentary_book_segments: 0, commentary_book_pages: 0, commentary_search_checks: 0,
   postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, grouped_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0, browse_scope_checks: 0, browse_group_pages: 0, quote_verification_checks: 0, edition_citation_checks: 0, citation_range_checks: 0, abt_citation_links: 0, paired_normalisation_checks: 0, proper_name_title_checks: 0, stored_title_resolution_checks: 0 };
@@ -58,9 +59,15 @@ require('node:module').syncBuiltinESMExports();\n`);
       metadata: (result) => {
         assert.equal(result.text_id, unit.id);
         assert.deepEqual(result.english_available, expectedEnglish, `${u.id}: linked translation metadata`);
+        const alignment = canon.alignmentInfo(unit);
+        if (alignment) {
+          assert.ok(result.notes.includes(alignment.note), `${u.id}: citation certainty must be labelled`);
+          assert.doesNotMatch(result.notes.join(' '), /is abbreviated|where the abbreviation occurs/);
+        }
       },
     });
     counts.canonical_texts += 1;
+    if (canon.alignmentInfo(unit)) counts.alignment_note_checks += 1;
     counts.canonical_segments += canonical.segments;
     counts.canonical_pages += canonical.pages;
     const expected = commentary.commentaryFor(unit, { limit: Number.MAX_SAFE_INTEGER });
@@ -85,7 +92,25 @@ require('node:module').syncBuiltinESMExports();\n`);
     }
     if (counts.canonical_texts % 1000 === 0) console.log(`Checked ${counts.canonical_texts} canonical texts and their commentary`);
   }
+  for (const [name, args, kind] of [
+    ['get_metadata', { uid: 'an1.82' }, 'unverified_alignment'],
+    ['get_commentary', { uid: 'an1.83' }, 'unverified_alignment'],
+    ['get_metadata', { uid: 'pli-tv-bu-vb-as3' }, 'shared_passage'],
+    ['resolve_reference', { reference: 'an1.82-97' }, 'group_with_unverified_members'],
+    ['browse_canon', { node: 'an1.82-97' }, 'group_with_unverified_members'],
+    ['search_texts', { query: 'dhamma', collection: 'an1.82', english: 'off' }, 'unverified_alignment'],
+  ]) {
+    const result = await call(name, args);
+    assert.equal((result.scope_alignment || result.alignment).kind, kind, `${name}: alignment evidence`);
+    counts.alignment_metadata_checks += 1;
+  }
   const sharedOwner = await call('get_text', { uid: 'pli-tv-bu-vb-as2', limit: 200 });
+  for (const name of ['analyse_passage', 'get_parallels']) {
+    const result = await call(name, { uid: 'an1.82', limit: 1 });
+    assert.match(result.notes.join(' '), /no confirmed independent location/);
+    assert.doesNotMatch(result.notes.join(' '), /is abbreviated|where the abbreviation occurs/);
+    counts.alignment_metadata_checks += 1;
+  }
   const sharedCommentary = await call('get_commentary', { uid: 'pli-tv-bu-vb-as2', limit: 200 });
   const firstDisputeRule = await call('get_text', { uid: 'pli-tv-bu-vb-as1', limit: 200 });
   const withoutRef = (segments) => segments.map(({ ref, ...segment }) => segment);

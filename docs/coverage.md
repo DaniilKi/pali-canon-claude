@@ -11,8 +11,8 @@ What Pali Canon for Claude contains in version 2.1.0, computed directly from the
 | Books | 61 VRI files (all root texts, *mūla*, of the three piṭakas, plus the Milindapañha and Peṭakopadesa that the Burmese canon includes) |
 | Size | about 2.8 million words of Pāli; 5.6 MB compressed |
 | Citable texts | **8,544**, each with a standard citation ID |
-| Grouped texts | 1,259 texts printed together with others (AN 1.296–305, Dhp 1–20…) answer to their own number too |
-| Abbreviated texts | 266 texts that the edition abbreviates (*peyyāla*) are marked approximate |
+| Grouped text members | 1,259 members of recorded source groups (AN 1.296–305, Dhp 1–20…) answer to their own number too; uncertain member alignments retain their warnings |
+| Approximate citation mappings | 266: 199 explicitly share an indexed source span, and 67 have no confirmed independent location. The flag alone does not prove source abbreviation or omission |
 | PTS page markers | 11,964 |
 | Thai, Myanmar and VRI page markers | 56,050 (21,781 Thai, 16,687 Myanmar, 17,582 VRI), shown in `get_text` and accepted as citations such as "Thai MN 1.103"; 56,048 resolve back to a text containing the marker |
 | Variant readings | 18,725 VRI notes; 16,632 (88.8%) give at least one reading attributed to editions by siglum (`get_text` `variants: "structured"`) |
@@ -119,7 +119,7 @@ To regenerate these numbers, see [development.md](development.md#coverage-number
 
 The 5 November 2026 installed-package audit read every page of all 8,544 canonical text records and all 109 post-canonical books through the shipped MCP server. The returned text, citations and continuation offsets matched the source corpus. The server ran in an isolated directory with network access disabled. Translation-link metadata also matched for every canonical record.
 
-For the same 8,544 records, commentary was available for 6,070; 2,474 returned an explicit notice that no passage was aligned. This does not mean the traditional commentary is absent: it may skip a repeated text, or an alignment has not been established confidently. The 266 texts abbreviated in VRI remain marked approximate. English translation bodies are fetched live and are not part of the offline bundle.
+For the same 8,544 records, commentary was available for 6,070; 2,474 returned an explicit notice that no passage was aligned. This does not mean the traditional commentary is absent: it may skip a repeated text, or an alignment has not been established confidently. The 266 approximate citation mappings retain their flags; metadata distinguishes explicit source sharing from unverified independent alignment. English translation bodies are fetched live and are not part of the offline bundle.
 
 Run `npm run audit:installed` to repeat the check. The optional JSON report lists every text without an aligned commentary passage; see [the development guide](development.md#verify-every-text-in-the-installed-bundle). Passing this check verifies delivery against the bundled source data, without claiming that every source gap has been filled.
 

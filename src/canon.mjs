@@ -133,8 +133,28 @@ export function linksFor(u) {
   return { links: [], via: null };
 }
 
+/** Describe index certainty without inferring missing or abbreviated source wording. */
+export function alignmentInfo(unit) {
+  if (!unit) return null;
+  if (unit.approximate) {
+    if (unit.shares_passage_with) return { kind: 'shared_passage', shared_with: unit.shares_passage_with,
+      note: `${unit.id} is approximate and shares its indexed source span with ${unit.shares_passage_with}. A separate source span is not asserted; no missing wording is reconstructed.` };
+    return { kind: 'unverified_alignment',
+      note: `${unit.id} has no confirmed independent location in the bundled citation index. The supplied source span is provisional; this does not establish that VRI abbreviates or omits the text.` };
+  }
+  if (!unit.members?.length) return null;
+  const d = load();
+  const uncertain = (unit.members || []).filter((id) => {
+    const member = d.byId.get(id);
+    return member?.approximate && !member.shares_passage_with;
+  });
+  return uncertain.length ? { kind: 'group_with_unverified_members', unverified_members: uncertain,
+    note: `${unit.id} includes unverified member mappings (${uncertain.join(', ')}). Its bundled span can include neighbouring passages; it does not establish separate locations for those members.` } : null;
+}
+
 function unitSummary(u, extra = {}) {
   const d = load();
+  const alignment = alignmentInfo(u);
   return {
     id: u.id,
     citation: u.acronym,
@@ -144,6 +164,7 @@ function unitSummary(u, extra = {}) {
     pts: u.pts ? ptsLabel(u.collection, u.pts.volume, u.pts.page) + (u.pts.end_page && u.pts.end_page !== u.pts.page ? `–${u.pts.end_page}` : '') : null,
     vri_paragraphs: u.vri || null,
     ...(u.approximate ? { approximate: true } : {}),
+    ...(alignment ? { alignment } : {}),
     english_available: linksFor(u).links.length,
     ...extra,
   };
@@ -161,7 +182,7 @@ function lookupId(id) {
   const d = load();
   if (d.byId.has(id)) return { unit: d.byId.get(id), via: 'id' };
   const container = rangeContaining(id);
-  if (container) return { unit: container, via: 'range', note: `${id} is not printed separately; it belongs to ${container.acronym} (${container.id}), which groups abbreviated or short texts.` };
+  if (container) return { unit: container, via: 'range', note: `${id} is not separately indexed; the bundled citation lookup maps it to source group ${container.acronym} (${container.id}).` };
   return null;
 }
 
@@ -221,7 +242,8 @@ export function resolve(reference) {
     if (occurrences.length > 1) notes.push(`VRI marks ${label} ${occurrences.length} times in this book; the first is used.`);
     const others = new Map();
     for (const occ of occurrences) for (const u of textsOnPage(d, c.edition, occ)) if (u.id !== unit.id) others.set(u.id, u);
-    if (unit.approximate) notes.push(`${unit.id} is abbreviated (peyyāla) in the VRI edition; the passage shown is where the abbreviation occurs.`);
+    const alignment = alignmentInfo(unit);
+    if (alignment) notes.push(alignment.note);
     return { unit, notes, alternatives: [...others.values()].slice(0, 3).map((u) => unitSummary(u)) };
   }
   if (c.kind === 'url') {
@@ -231,7 +253,10 @@ export function resolve(reference) {
     notes.push(c.host === 'ancient-buddhist-texts.net'
       ? `Linked from ${c.host}: Ānandajoti Bhikkhu's text and translation of ${id}.`
       : `Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id}.`);
-    return { unit: d.byId.get(id), notes, alternatives: [] };
+    const unit = d.byId.get(id);
+    const alignment = alignmentInfo(unit);
+    if (alignment) notes.push(alignment.note);
+    return { unit, notes, alternatives: [] };
   }
   const id = c.kind === 'uid' ? c.uid : citationId(c);
   let hit = lookupId(id);
@@ -266,7 +291,8 @@ export function resolve(reference) {
     throw new CitationError(`${reference} (${id}) is not in the canon index. Check the number with browse_canon("${collection}").`);
   }
   if (hit.note) notes.push(hit.note);
-  if (hit.unit.approximate) notes.push(`${hit.unit.id} is abbreviated (peyyāla) in the VRI edition; the passage shown is where the abbreviation occurs.`);
+  const alignment = alignmentInfo(hit.unit);
+  if (alignment) notes.push(alignment.note);
   const schemes = (d.translations[hit.unit.id] || []).filter((t) => t.reference && /^(AN|SN) \d+:\d+/.test(t.reference))
     .map((t) => t.reference.match(/^(AN|SN) (\d+):(\d+)/)).filter(Boolean)
     .filter((m) => `${m[1].toLowerCase()}${m[2]}.${m[3]}` !== hit.unit.id);
@@ -431,6 +457,7 @@ export function search(query, { collection, limit = 10, offset = 0, groups } = {
   const filter = collection ? fold(collection).replace(/\s+/g, '') : null;
   const resolved = groupedScope(d, filter, collection);
   const okCollection = scopePredicate(d, resolved?.unit.id || filter);
+  const scopeAlignment = alignmentInfo(d.byId.get(resolved?.unit.id || filter));
   if (collection && (!filter || !d.canon.units.some(okCollection))) {
     throw new Error(`Unknown canonical search scope "${collection}". Use browse_canon to list collection and section IDs.`);
   }
@@ -461,6 +488,7 @@ export function search(query, { collection, limit = 10, offset = 0, groups } = {
   return {
     query, searched: 'Full Pāli text of the VRI Chaṭṭha Saṅgāyana edition (diacritics optional), text titles and English translation titles.',
     ...(resolved ? { scope_resolution: resolved.metadata } : {}),
+    ...(scopeAlignment ? { scope_alignment: scopeAlignment } : {}),
     title_matches: titleHits, total_title_matches: matchingTitles.length,
     title_next_offset: limit > 0 && offset + limit < matchingTitles.length ? offset + limit : null,
     results: hits, total_texts_matched: total, offset, limit,
@@ -503,7 +531,9 @@ export function browse(node = 'canon', { offset = 0, limit = 60 } = {}) {
   if (!members.length) throw new Error(`Unknown browse node "${node}". Start with "canon", "sutta", "vinaya", "abhidhamma" or a collection such as mn, sn, sn56, an4, dhp.`);
   members.sort((a, b) => a.book - b.book || a.start - b.start);
   const collection = members[0].collection;
-  return { node: key, name: COLLECTION_NAMES[key] || COLLECTION_NAMES[collection] || collection, ...(key !== collection ? { collection } : {}), ...page(members.map((u) => unitSummary(u))) };
+  const alignment = alignmentInfo(d.byId.get(key));
+  return { node: key, name: COLLECTION_NAMES[key] || COLLECTION_NAMES[collection] || collection, ...(key !== collection ? { collection } : {}),
+    ...(alignment ? { alignment } : {}), ...page(members.map((u) => unitSummary(u))) };
 }
 
 export const _test = { lookupId, rangeContaining, ptsLookup };

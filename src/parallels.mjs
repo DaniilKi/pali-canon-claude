@@ -142,7 +142,6 @@ export function getParallels(uid, { offset = 0, limit = 25 } = {}) {
   for (const l of all) counts[l.source]++;
   const extra = [];
   if (!all.length) extra.push(`No parallel or cross-reference is recorded for ${unit.acronym}. Only links with clear evidence are kept, so this does not mean the text has none: see SuttaCentral (link below) for parallels in other traditions, or search_texts for a phrase.`);
-  if (unit.approximate) extra.push(`${unit.acronym} is abbreviated (peyyāla) in the VRI edition, so shared passages are found only in the words that are printed.`);
   return {
     ...base, available: true,
     total: all.length, counts, offset, limit, returned: page.length,

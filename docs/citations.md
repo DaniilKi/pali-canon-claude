@@ -132,7 +132,9 @@ An ordinary range that is not recorded as a single source group, such as `MN 10�
 
 ## Abbreviated texts (peyyāla)
 
-The Pāli often abbreviates repeated passages with "…pe…" ("and so on"). Where the edition does not print a text in full, the tool marks it **approximate** and points to the passage where the abbreviation occurs. There are 266 such texts, mostly in SN and AN repetition series, the Paṭṭhāna, and Vinaya rules recited together.
+The Pāli often abbreviates repeated passages with "…pe…" ("and so on"). The bundled citation index has 266 **approximate** mappings: 199 explicitly share an indexed source span with another record; 67 have no confirmed independent location. The flag alone does not establish that the VRI edition abbreviates or omits a text. Nothing is expanded or reconstructed.
+
+Metadata distinguishes `alignment.kind: "shared_passage"` (with `shared_with`) from `"unverified_alignment"`. For example, AN 1.82 and 1.83 retain a provisional span covering VRI paragraphs 81–83; the bundle does not establish a safe independent standard-number mapping for them. AN 1.82–97 also reports its four unverified member mappings and warns that the group span may include neighbouring passages. Reading, scoped search, commentary, word analysis and parallels carry the caution. These labels change no source text, citation number, span, approximation flag or commentary assignment.
 
 ## Citing what you retrieved
 

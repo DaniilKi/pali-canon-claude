@@ -20,7 +20,7 @@ for (const alias of ['an1.300', 'sn46.150', 'an10.208', 'sn46.121']) test(`group
     assert.equal(resolution.resolved_id, unit.id);
     assert.equal(resolution.approximate, !!unit.approximate);
     assert.deepEqual(resolution.read_with, { tool: 'get_text', uid: unit.id });
-    assert.match(resolution.note, /not printed separately/);
+    assert.match(resolution.note, /not separately indexed/);
     if (unit.approximate) assert.match(resolution.note, /excluded from the full-text search index/);
   }
 });

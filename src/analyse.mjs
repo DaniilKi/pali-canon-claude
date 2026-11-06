@@ -275,7 +275,6 @@ export function analysePassage({ uid, segment, paragraph, offset = 0, limit = 60
   const unknown = words.filter((w) => w.status === 'unknown').length;
   const outNotes = [...notes];
   if (segment === undefined && paragraph === undefined) outNotes.push(`No segment given: analysed the first body segment (${seg.ref}). Pass segment (e.g. "${unit.id}/${index + 1}") for another.`);
-  if (unit.approximate) outNotes.push('This text is abbreviated (peyyāla) in the VRI edition; the analysis covers the words printed, not the expanded text.');
   return {
     text_id: unit.id, citation: unit.acronym, title: unit.title,
     segment: { ref: seg.ref, type: seg.type, ...(seg.vri_paragraph ? { vri_paragraph: seg.vri_paragraph } : {}), text: seg.text },
