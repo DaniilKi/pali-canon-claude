@@ -31,14 +31,14 @@ Pali Canon for Claude gives Claude the complete Pāli Tipiṭaka, the scripture 
 
 Theravāda Buddhism is the living tradition of Sri Lanka, Myanmar, Thailand, Cambodia and Laos, with well over 100 million followers worldwide. Its scripture, the **Pāli Canon** (*Tipiṭaka*, "three baskets"), is one of the largest scriptures of any religion: about 2.8 million words of Pāli.
 
-Christians and Muslims already have many AI study tools, from Bible and Quran servers to Sefaria for Jewish texts. When this project started, we found **no Theravāda tool in Claude's connector directory**. Meanwhile, AI models answering questions about the Buddha's teaching often:
+**Our mission** is to bring the rigour of traditional and academic Buddhist scholarship together with the best openly available Pāli and Theravāda resources, in one modern tool built for AI. We started with Claude. The same tool now also works in Codex, Gemini CLI and code editors, with ChatGPT and a hosted web version next. All the while we are building a **proven, verifiable repository of knowledge**: every passage comes from a named source and every claim can be checked.
+
+When this project started, we found **no Theravāda tool in Claude's connector directory**. Meanwhile, AI models answering questions about the Buddha's teaching often:
 
 - paraphrase from memory and present it as a quotation;
 - invent or garble citations ("MN 152" for a passage that is not there);
 - confuse the different numbering systems that translators use;
 - repeat popular quotes that are not in the texts at all.
-
-**Our mission** is to bring the rigour of traditional and academic Buddhist scholarship together with the best openly available Pāli and Theravāda resources, in one modern tool built for AI. We started with Claude. The same tool now also works in Codex, Gemini CLI and code editors, with ChatGPT and a hosted web version next. All the while we are building a **proven, verifiable repository of knowledge**: every passage comes from a named source and every claim can be checked.
 
 ## What it does
 
