@@ -2,7 +2,7 @@
 // Pāli quotes are matched offline against the bundled VRI text; English quotes against the linked
 // English translations, fetched live (cached) through english.mjs. The answer only ever reports
 // what the texts searched contain: it never says who did or did not say something.
-import { fold, load, resolve, segments, source, linksFor, translationId } from './canon.mjs';
+import { fold, load, resolve, segments, source, linksFor, translationId, alignmentInfo } from './canon.mjs';
 import * as englishModule from './english.mjs';
 
 export const THRESHOLDS = { found: 0.82, close_paraphrase: 0.5 };
@@ -303,20 +303,22 @@ function paliMatch(cand, refined) {
   const firstText = blocks[first.index][2];
   const segment = segments(unit).find((s) => firstText && s.text.includes(firstText));
   const notes = [];
-  if (unit.approximate) notes.push('This text is abbreviated (peyyāla) in the edition; its boundaries are approximate.');
-  if (unit.kind === 'range') notes.push(`The edition prints ${unit.acronym} as one group; the passage is inside it.`);
+  const alignment = alignmentInfo(unit);
+  if (alignment) notes.push(alignment.note);
+  if (unit.kind === 'range') notes.push(`The citation index uses the grouped source span ${unit.acronym}; the passage is inside that span.`);
   return {
     text_id: unit.id, citation: unit.acronym, title: unit.title,
     segment_ref: segment?.ref, vri_paragraph: segment?.vri_paragraph, pts_page_begins: segment?.pts_page_begins,
     similarity: Math.round(refined.sim * 100) / 100,
     matched_text: excerpt.length > 600 ? `${excerpt.slice(0, 600)}…` : excerpt,
     edition: 'Chaṭṭha Saṅgāyana Tipiṭaka (VRI), Pāli',
+    ...(alignment ? { alignment } : {}),
     ...(notes.length ? { notes } : {}),
   };
 }
 
 function verifyPali(text, limit) {
-  const q = words(fold(text)).slice(0, MAX_QUERY_WORDS);
+  const q = words(fold(text));
   if (!q.length) throw new Error('The quotation has no Pāli words to match.');
   const corpus = paliCorpus();
   const query = q.join(' ');
@@ -364,7 +366,7 @@ function englishCorpus(pages) {
   const pos = vocab.map(() => []);
   tokens.forEach((id, i) => pos[id].push(i));
   return {
-    tokens: Int32Array.from(tokens), vocab, total: tokens.length, starts,
+    tokens: Int32Array.from(tokens), vocab, total: tokens.length, starts, boundaries: Int32Array.from(starts),
     positions: (id) => pos[id], freq: (id) => pos[id].length,
     variants: (w) => {
       const out = [];
@@ -431,7 +433,7 @@ function englishVersion(page) {
 }
 
 async function verifyEnglish(text, texts, limit, fetchTranslation) {
-  const q = words(englishFold(text)).slice(0, MAX_QUERY_WORDS);
+  const q = words(englishFold(text));
   if (!q.length) throw new Error('The quotation has no words to match.');
   const plan = englishScope(texts);
   const fetched = await mapLimit(plan.pages, 6, async (p) => {
@@ -531,6 +533,8 @@ export async function verifyQuote({ text, language = 'auto', texts, limit = 5 },
   const quote = String(text ?? '').trim();
   if (quote.length < 8) throw new Error('Give at least a few words of the quotation.');
   const lang = language === 'auto' || !language ? detectLanguage(quote) : language;
+  const comparisonWords = words(lang === 'pali' ? fold(quote) : englishFold(quote));
+  if (comparisonWords.length > MAX_QUERY_WORDS) throw new Error(`Give at most ${MAX_QUERY_WORDS} words. Split a longer quotation into shorter excerpts; no partial comparison was performed.`);
   const result = lang === 'pali' ? verifyPali(quote, limit) : await verifyEnglish(quote, texts, limit, fetchTranslation);
   const best = result.matches[0]?.similarity ?? 0;
   const verdict = verdictFor(best);
@@ -550,7 +554,7 @@ export async function verifyQuote({ text, language = 'auto', texts, limit = 5 },
 
 export function register({ tool, z }) {
   tool('verify_quote', 'Check whether a quotation attributed to the Buddha appears in the texts: a Pāli quotation is matched (fuzzily) against the whole bundled Pāli Tipiṭaka offline; an English one against the linked English translations of the texts you name (default: the Dhammapada), fetched live. Returns the best matches with citation and similarity, a verdict (found, close_paraphrase, not_found_in_scope) and exactly what was searched.', {
-    text: z.string().trim().min(8).max(2000).describe('The quotation to check.'),
+    text: z.string().trim().min(8).max(2000).describe('The quotation to check: at most 120 words and 2,000 characters. Split longer quotations into shorter excerpts.'),
     language: z.enum(['auto', 'pali', 'english']).default('auto').describe('Language of the quotation; "auto" detects it.'),
     texts: z.array(z.string().min(1).max(300)).max(12).optional().describe('English only: citations whose linked translations to search (e.g. ["AN 3.65", "Snp 1.8"]). Default: all chapters of the Dhammapada.'),
     limit: z.number().int().min(1).max(10).default(5),

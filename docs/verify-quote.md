@@ -11,6 +11,8 @@ Many sayings shared online as "the Buddha said" are not in the early texts. `ver
 
 The language is detected automatically, or set `language` to `pali` or `english`. Text with Pāli diacritics is Pāli; text with common English words (the, is, you, of...) is English. Only when neither is clear does detection look words up in the Pāli index, which builds that index (see below).
 
+Submit at most **120 words and 2,000 characters** at a time. Longer word sequences return an error asking for shorter excerpts; the tool does not silently verify a prefix and issue a verdict for the whole quotation.
+
 ## What it returns
 
 - **verdict**: `found`, `close_paraphrase` or `not_found_in_scope`.
@@ -32,6 +34,8 @@ Text is lower-cased and diacritics and punctuation are removed (so *manopubbaṅ
 - **similarity** = Dice coefficient of character trigrams between the quotation and the passage, weighted by how many of the quotation's distinctive words the passage contains. In Pāli, spaces are ignored (compounds are split differently by different writers) and the word weighting is gentler.
 - `found` at 0.82 or more, `close_paraphrase` from 0.5, below that `not_found_in_scope`.
 - Texts whose best passage scores the same as the best match (to two decimals) are counted as equally similar. Up to 200 equally strong candidates are compared, so a larger count is reported as "at least".
+
+English candidate retrieval and refinement stay within each fetched translation page. A preceding partial version cannot hide an exact match in the next source. Pāli group matches also retain any index-alignment caution; a recorded group is not proof that its members are separately aligned or that the edition abbreviates them. The reader's approximate badge describes the mapping rather than asserting source omission.
 
 ## Memory
 

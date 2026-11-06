@@ -41,6 +41,15 @@ const fixture = () => ({
   english: null, links: { suttacentral: 'https://suttacentral.net/mn10' },
 });
 
+test('an approximate mapping badge does not assert source abbreviation', () => {
+  const data = { ...fixture(), approximate: true,
+    notes: ['The independent citation location is unverified.'] };
+  const ui = view(data);
+  assert.match(ui.elements.meta.textContent, /approximate mapping/);
+  assert.doesNotMatch(ui.elements.meta.textContent, /abbreviated in the edition/);
+  assert.match(ui.elements.pali.textContent, /location is unverified/);
+});
+
 test('Apps SDK errors clear the previous passage and source links instead of leaving stale text', () => {
   const ui = view(fixture());
   assert.match(ui.elements.pali.textContent, /Prior fixture text/);

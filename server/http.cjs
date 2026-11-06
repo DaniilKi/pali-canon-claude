@@ -27411,8 +27411,9 @@ function paliMatch(cand, refined) {
   const firstText = blocks[first.index][2];
   const segment = segments(unit).find((s) => firstText && s.text.includes(firstText));
   const notes = [];
-  if (unit.approximate) notes.push("This text is abbreviated (peyy\u0101la) in the edition; its boundaries are approximate.");
-  if (unit.kind === "range") notes.push(`The edition prints ${unit.acronym} as one group; the passage is inside it.`);
+  const alignment = alignmentInfo(unit);
+  if (alignment) notes.push(alignment.note);
+  if (unit.kind === "range") notes.push(`The citation index uses the grouped source span ${unit.acronym}; the passage is inside that span.`);
   return {
     text_id: unit.id,
     citation: unit.acronym,
@@ -27423,11 +27424,12 @@ function paliMatch(cand, refined) {
     similarity: Math.round(refined.sim * 100) / 100,
     matched_text: excerpt.length > 600 ? `${excerpt.slice(0, 600)}\u2026` : excerpt,
     edition: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), P\u0101li",
+    ...alignment ? { alignment } : {},
     ...notes.length ? { notes } : {}
   };
 }
 function verifyPali(text, limit) {
-  const q = words(fold3(text)).slice(0, MAX_QUERY_WORDS);
+  const q = words(fold3(text));
   if (!q.length) throw new Error("The quotation has no P\u0101li words to match.");
   const corpus = paliCorpus();
   const query = q.join(" ");
@@ -27483,6 +27485,7 @@ function englishCorpus(pages) {
     vocab: vocab2,
     total: tokens.length,
     starts,
+    boundaries: Int32Array.from(starts),
     positions: (id) => pos[id],
     freq: (id) => pos[id].length,
     variants: (w) => {
@@ -27552,7 +27555,7 @@ function englishVersion(page) {
   };
 }
 async function verifyEnglish(text, texts, limit, fetchTranslation) {
-  const q = words(englishFold(text)).slice(0, MAX_QUERY_WORDS);
+  const q = words(englishFold(text));
   if (!q.length) throw new Error("The quotation has no words to match.");
   const plan = englishScope(texts);
   const fetched = await mapLimit(plan.pages, 6, async (p) => {
@@ -27649,6 +27652,8 @@ async function verifyQuote({ text, language = "auto", texts, limit = 5 }, { fetc
   const quote = String(text ?? "").trim();
   if (quote.length < 8) throw new Error("Give at least a few words of the quotation.");
   const lang = language === "auto" || !language ? detectLanguage(quote) : language;
+  const comparisonWords = words(lang === "pali" ? fold3(quote) : englishFold(quote));
+  if (comparisonWords.length > MAX_QUERY_WORDS) throw new Error(`Give at most ${MAX_QUERY_WORDS} words. Split a longer quotation into shorter excerpts; no partial comparison was performed.`);
   const result = lang === "pali" ? verifyPali(quote, limit) : await verifyEnglish(quote, texts, limit, fetchTranslation);
   const best = result.matches[0]?.similarity ?? 0;
   const verdict = verdictFor(best);
@@ -27670,7 +27675,7 @@ async function verifyQuote({ text, language = "auto", texts, limit = 5 }, { fetc
 }
 function register2({ tool, z }) {
   tool("verify_quote", "Check whether a quotation attributed to the Buddha appears in the texts: a P\u0101li quotation is matched (fuzzily) against the whole bundled P\u0101li Tipi\u1E6Daka offline; an English one against the linked English translations of the texts you name (default: the Dhammapada), fetched live. Returns the best matches with citation and similarity, a verdict (found, close_paraphrase, not_found_in_scope) and exactly what was searched.", {
-    text: z.string().trim().min(8).max(2e3).describe("The quotation to check."),
+    text: z.string().trim().min(8).max(2e3).describe("The quotation to check: at most 120 words and 2,000 characters. Split longer quotations into shorter excerpts."),
     language: z.enum(["auto", "pali", "english"]).default("auto").describe('Language of the quotation; "auto" detects it.'),
     texts: z.array(z.string().min(1).max(300)).max(12).optional().describe('English only: citations whose linked translations to search (e.g. ["AN 3.65", "Snp 1.8"]). Default: all chapters of the Dhammapada.'),
     limit: z.number().int().min(1).max(10).default(5)
@@ -33629,7 +33634,7 @@ var WIDGET_HTML = `<!doctype html>
     if (d.pts) meta.appendChild(el('span', 'chip', 'PTS ' + d.pts));
     if (d.vri_paragraphs) meta.appendChild(el('span', 'chip', 'VRI \xB6 ' + d.vri_paragraphs));
     if (d.english && d.english.translator) meta.appendChild(el('span', 'chip', 'Tr. ' + d.english.translator));
-    if (d.approximate) meta.appendChild(el('span', 'chip', 'abbreviated in the edition'));
+    if (d.approximate) meta.appendChild(el('span', 'chip', 'approximate mapping'));
 
     var pali = document.getElementById('pali'); clear(pali);
     (d.notes || []).forEach(function (n) { pali.appendChild(el('p', 'note', n)); });

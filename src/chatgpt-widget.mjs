@@ -219,7 +219,7 @@ export const WIDGET_HTML = `<!doctype html>
     if (d.pts) meta.appendChild(el('span', 'chip', 'PTS ' + d.pts));
     if (d.vri_paragraphs) meta.appendChild(el('span', 'chip', 'VRI ¶ ' + d.vri_paragraphs));
     if (d.english && d.english.translator) meta.appendChild(el('span', 'chip', 'Tr. ' + d.english.translator));
-    if (d.approximate) meta.appendChild(el('span', 'chip', 'abbreviated in the edition'));
+    if (d.approximate) meta.appendChild(el('span', 'chip', 'approximate mapping'));
 
     var pali = document.getElementById('pali'); clear(pali);
     (d.notes || []).forEach(function (n) { pali.appendChild(el('p', 'note', n)); });

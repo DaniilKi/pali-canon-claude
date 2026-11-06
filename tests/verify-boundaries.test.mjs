@@ -50,3 +50,13 @@ test('ordinary within-text passages retain exact matches and source containment'
     assertContained(result);
   }
 });
+
+test('a matched group reports uncertain member mappings without asserting printed grouping', async () => {
+  const result = await verifyQuote({ text: across('an1.84', 'an1.85'), language: 'pali', limit: 10 });
+  const match = result.matches.find((hit) => hit.text_id === 'an1.82-97');
+  assert.ok(match, 'the containing indexed group should carry the complete match');
+  assert.equal(match.alignment.kind, 'group_with_unverified_members');
+  assert.match(match.notes.join(' '), /unverified member mappings/);
+  assert.doesNotMatch(match.notes.join(' '), /edition prints|is abbreviated/);
+  assertContained(result);
+});
