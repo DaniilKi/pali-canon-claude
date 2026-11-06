@@ -22651,6 +22651,21 @@ function scopePredicate(d, scope) {
     return next === "." || parent && (next === "-" || /\d/.test(next || ""));
   };
 }
+function groupedScope(d, key3, requested) {
+  if (!key3 || d.byId.has(key3)) return null;
+  const hit = lookupId(key3);
+  if (hit?.via !== "range") return null;
+  return {
+    unit: hit.unit,
+    metadata: {
+      requested,
+      resolved_id: hit.unit.id,
+      approximate: !!hit.unit.approximate,
+      note: hit.note + (hit.unit.approximate ? " The approximate group itself is excluded from the full-text search index." : ""),
+      read_with: { tool: "get_text", uid: hit.unit.id }
+    }
+  };
+}
 function buildSearch() {
   const d = load();
   const owner = d.canon.books.map((b) => new Array(b.blocks.length).fill(null));
@@ -22673,7 +22688,8 @@ function terms(query) {
 function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const d = load();
   const filter = collection ? fold3(collection).replace(/\s+/g, "") : null;
-  const okCollection = scopePredicate(d, filter);
+  const resolved = groupedScope(d, filter, collection);
+  const okCollection = scopePredicate(d, resolved?.unit.id || filter);
   if (collection && (!filter || !d.canon.units.some(okCollection))) {
     throw new Error(`Unknown canonical search scope "${collection}". Use browse_canon to list collection and section IDs.`);
   }
@@ -22707,6 +22723,7 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   return {
     query,
     searched: "Full P\u0101li text of the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition (diacritics optional), text titles and English translation titles.",
+    ...resolved ? { scope_resolution: resolved.metadata } : {},
     title_matches: titleHits,
     total_title_matches: matchingTitles.length,
     title_next_offset: limit > 0 && offset + limit < matchingTitles.length ? offset + limit : null,
@@ -22721,8 +22738,19 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
 function browse(node = "canon", { offset = 0, limit = 60 } = {}) {
   const d = load();
   const key3 = fold3(node).replace(/\s+/g, "");
-  const units = d.canon.units.filter((u) => !u.approximate);
   const page = (items) => ({ total: items.length, offset, limit, next_offset: offset + limit < items.length ? offset + limit : null, items: items.slice(offset, offset + limit) });
+  const resolved = groupedScope(d, key3, node);
+  if (resolved) {
+    const collection2 = resolved.unit.collection;
+    return {
+      node: key3,
+      name: COLLECTION_NAMES[collection2] || collection2,
+      collection: collection2,
+      scope_resolution: resolved.metadata,
+      ...page([unitSummary(resolved.unit)])
+    };
+  }
+  const units = d.canon.units.filter((u) => !u.approximate);
   if (["canon", "tipitaka", "all", ""].includes(key3)) {
     return { node: "canon", ...page(COLLECTION_ORDER.map((c) => ({ id: c, name: COLLECTION_NAMES[c], pitaka: PITAKA[c] || "sutta", texts: units.filter((u) => u.collection === c && u.kind !== "range").length }))) };
   }

@@ -280,6 +280,8 @@ The `collection` filter in `search_texts` matches whole collection or section id
 
 Unknown scopes, including a whitespace-only scope, return an error directing the caller to `browse_canon`, rather than an empty result that could be mistaken for missing source text. The same boundary check applies to title matches, English glossary expansion, spelling retries and paginated results. This changes search selection only; it adds no source text and changes no citation numbering or alignment.
 
+An unprinted member ID already recognised by citation lookup, such as `an1.300`, selects its existing source group (`an1.297-305`). Search adds `scope_resolution` with the requested ID, actual group ID, approximation flag, explanation and `get_text` pointer. Results and pagination are identical to searching that group directly. This does not parse arbitrary ranges or claim that the individual member is printed separately. Approximate groups themselves remain excluded from the full-text index, and the explanation says so.
+
 ## Paginating title matches
 
 `search_texts` returns two separately counted streams. `results`, `total_texts_matched` and `next_offset` describe Pāli-body matches. `title_matches`, `total_title_matches` and `title_next_offset` describe matches in Pāli and linked English translation titles. The requested `offset` and `limit` apply to each stream. Pass `title_next_offset` back as `offset` to continue titles; pass `next_offset` to continue body results. A null pointer means that stream has ended.
@@ -297,6 +299,8 @@ When literal Pāli search finds no quoted phrase, spelling retries and the Engli
 `browse_canon` uses the same identifier boundaries as canonical search. An exact text ID such as `mn1` or `sn1.1` lists that text without admitting MN 10 or SN 1.10. Named parent IDs such as `pli-tv-bu-vb-pc` still list their descendants. Arbitrary partial names such as `s` return an error.
 
 A recorded group ID such as `dhp1-20` lists its existing members with ordinary pagination. Group membership comes from the bundled index; arbitrary citation ranges are not parsed here. Existing browsing rules for abbreviated records and collection/section menus are retained. Regression checks cover every complete text ID and every recorded group; the isolated installed-package audit repeats exact-ID, invalid-ID and group-pagination checks.
+
+Browsing a recognised unprinted member instead returns one card for its authoritative source group, with the same `scope_resolution` used by search. An approximate group keeps its `approximate` flag. No separate member card or reconstructed text is created. Regression checks compare all 7,397 current unprinted numeric aliases against public citation resolution; installed-package checks repeat representative complete and approximate group cases.
 
 ## Quote verification and source boundaries
 

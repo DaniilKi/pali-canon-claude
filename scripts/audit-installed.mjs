@@ -26,7 +26,7 @@ let stderr = '';
 const counts = { canonical_texts: 0, canonical_segments: 0, canonical_pages: 0,
   commentary_texts: 0, commentary_unaligned_texts: 0, commentary_segments: 0, commentary_pages: 0,
   commentary_books: 0, commentary_book_segments: 0, commentary_book_pages: 0, commentary_search_checks: 0,
-  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0, browse_scope_checks: 0, browse_group_pages: 0, quote_verification_checks: 0, edition_citation_checks: 0, citation_range_checks: 0, abt_citation_links: 0, paired_normalisation_checks: 0, proper_name_title_checks: 0, stored_title_resolution_checks: 0 };
+  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, grouped_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0, browse_scope_checks: 0, browse_group_pages: 0, quote_verification_checks: 0, edition_citation_checks: 0, citation_range_checks: 0, abt_citation_links: 0, paired_normalisation_checks: 0, proper_name_title_checks: 0, stored_title_resolution_checks: 0 };
 try {
   if (reportAt >= 0) await writeFile(resolve(process.argv[reportAt + 1]), '{"status":"running"}\n');
   const serverDirectory = serverAt >= 0 ? resolve(process.argv[serverAt + 1]) : join(root, 'server');
@@ -148,6 +148,26 @@ require('node:module').syncBuiltinESMExports();\n`);
   assert.equal(invalidScope.isError, true, 'unknown scopes must be rejected, not reported as source absence');
   assert.match(invalidScope.content[0].text, /Unknown canonical search scope/);
   counts.search_scope_checks += 1;
+  for (const alias of ['an1.300', 'sn46.150', 'an10.208', 'sn46.121']) {
+    const { unit } = canon.resolve(alias);
+    const result = await call('search_texts', { query: 'bhikkhave', collection: alias, english: 'off' });
+    const direct = await call('search_texts', { query: 'bhikkhave', collection: unit.id, english: 'off' });
+    const { scope_resolution, ...withoutResolution } = result;
+    assert.deepEqual(withoutResolution, direct, `${alias}: identical recorded group search`);
+    assert.equal(scope_resolution.resolved_id, unit.id);
+    assert.equal(scope_resolution.requested, alias);
+    assert.equal(scope_resolution.approximate, !!unit.approximate);
+    assert.deepEqual(scope_resolution.read_with, { tool: 'get_text', uid: unit.id });
+    if (unit.approximate) assert.match(scope_resolution.note, /excluded from the full-text search index/);
+    if (['an1.300', 'an10.208'].includes(alias)) assert.ok(result.results.length, `${alias}: source matches`);
+    counts.grouped_scope_checks += 1;
+    const browsed = await call('browse_canon', { node: alias });
+    assert.deepEqual(browsed.scope_resolution, scope_resolution);
+    assert.equal(browsed.total, 1);
+    assert.equal(browsed.items[0].id, unit.id);
+    assert.equal(!!browsed.items[0].approximate, !!unit.approximate);
+    counts.grouped_scope_checks += 1;
+  }
   const expectedTitles = canon.search('discourse', { limit: 10000 }).title_matches.map((hit) => hit.id);
   const returnedTitles = [];
   let titleOffset = 0;
