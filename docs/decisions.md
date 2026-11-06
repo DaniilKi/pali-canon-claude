@@ -619,3 +619,9 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** Both the Dīgha and Saṃyutta sub-commentaries include a book titled Mahāvagga-Ṭīkā. Title lookup retained only the first book, so reading, citation resolution and title-based search filters silently chose the Dīgha source.
 - **Decision.** Index exact catalogue IDs and VRI file stems separately from titles. Refuse a title with multiple source books, list their exact IDs, and apply the same rule to whole-book filters and chapter/paragraph references. Preserve unique titles and exact source identifiers.
 - **Consequences.** Regression tests use both actual bundled books, verify separate exact-ID/file-stem reading and search, and require MCP errors to include both choices without substituted content. No source text, numbering, licensing or data changes.
+
+### D103. Resolve complete source identities before work-name prefixes
+
+- **Context.** Independent review confirmed duplicate-title refusal and found a unique title that could not be read: `Visuddhimagga Nidānakathā` was intercepted as a malformed Visuddhimagga citation before the catalogue lookup, although its exact ID and title-based search filter worked.
+- **Decision.** Try the exact catalogue ID, file stem or unambiguous complete title (including a chapter/paragraph suffix) before the special Visuddhimagga/Abhidhammatthasaṅgaha shorthand parsers. Test every unique catalogue title, title/ID source equality, public resolution/reading, and the established shorthand and ambiguity behavior.
+- **Consequences.** The Nidānakathā remains a separately labelled post-canonical source. Plain `Visuddhimagga 3` remains an unavailable PTS-page lookup, and `Vism IV.1`/`Vism §51` retain their meanings. No source text, alignment, numbering, rights or data changes.

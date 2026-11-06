@@ -29727,13 +29727,13 @@ function bookFor(d, f) {
 function locate2(reference) {
   const d = need();
   const f = fold6(reference);
+  const hit = splitKey(d, f);
+  if (hit) return locateGeneric(d, hit.book, hit.rest, reference);
   let m;
   if (m = f.match(VISUDDHI)) return vismParagraph(d, Number(m[2]), { volume: Number(m[1]), written: reference });
   if (m = f.match(VISM)) return locateVism(d, m[1].trim(), reference);
   if (m = f.match(ABHS)) return locateAbhs(d, m[1].trim(), reference);
-  const hit = splitKey(d, f);
-  if (!hit) return null;
-  return locateGeneric(d, hit.book, hit.rest, reference);
+  return null;
 }
 function locateVism(d, rest, written) {
   const chapters = vismChapters(d);

@@ -174,7 +174,7 @@ Keep the Pāli, the translation, any dictionary gloss and your own interpretatio
 
 These books are **not the canon**. They are later Pāli works from the same VRI edition: the sub-commentaries (Ṭīkā), and the "Añña" (other) books, such as the Visuddhimagga and its Mahāṭīkā, the Abhidhammatthasaṅgaha, the chronicles and the grammars. Every result for them says `canonical: false` and carries a label and VRI's attribution. The canon search leaves them out unless you ask for them.
 
-Read them with `get_post_canonical` and its `citation` argument; `resolve_reference` also recognises these references. `get_text` reads canonical texts and their complete root books.
+Read them with `get_post_canonical` and its `citation` argument; `resolve_reference` also recognises these references. `get_text` reads canonical texts and their complete root books. Complete unique catalogue titles also identify their own source: for example, "Visuddhimagga Nidānakathā" (or "Visuddhimagga Nidānakathā 1") reads that separate book, rather than the Visuddhimagga itself.
 
 ```text
 Vism 1.1     Vism I,1     Vism IV.12   Vism ch. 4   Vism IV      Vism §51     visuddhi. 1.51
