@@ -78,8 +78,8 @@ The [PTS copyright page](https://palitextsociety.org/copyright-information/) (ch
 
 Why none is linked yet:
 
-- **No authorised digital text found.** The PTS site's free "Downloads" category lists 24 items (1 November 2026); the 16 on its first page are Pāli texts and studies such as the *Jinacarita*, *Dāṭhāvaṃsa* and *Pāli Metre*, none of them these translations. The copyright page links no files. Scans posted elsewhere by third parties have no stated provenance, so we do not link or read them.
-- **No stable section addresses.** Linking "by section" needs a page or anchor per sutta, rule or paragraph. A scanned PDF gives only volume and page, which we could not check against the text.
+- **No verified digital text adopted.** The PTS free Downloads survey of 1 November 2026 found none of these translations. A later [English Khuddakapāṭha commentary assessment](translations/english-khp-commentary-assessment.md) traces a third-party 2005 scan and records candidate paragraph boundaries. PTS's CC grant is positive rights evidence; the scan's completeness and transcription fidelity remain unverified. It is a research reference, not a runtime source.
+- **Section addresses need independent checking.** That candidate's English paragraphs and bundled Pāli segments have partial and many-to-many boundaries. A page or paragraph number alone cannot establish a link. No English commentary mapping or coverage is shipped.
 - **Next step.** The [PTS letter](outreach/pts.md) (drafted, not sent) asks whether there is an authorised digital source. When there is one, the volumes go through the same build-and-audit route as Ānandajoti's pages: Horner's Vinaya first, as it would be the first English for the Vinaya here.
 
 
