@@ -43,6 +43,12 @@ export const VINAYA_SCOPES = {
 const fold = (value) => String(value ?? '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
 const stem = (title) => fold(title).replace(/\(.*?\)/g, '').replace(/[^a-z]/g, '').replace(/pali$/, '').replace(/[aom]+$/, '');
 
+/** Same conservative book-prefix comparison for direct page lookup and citation scanning. */
+export function matchesEditionBook(title, qualifier) {
+  const want = stem(qualifier);
+  return want.length >= 3 && stem(title).startsWith(want);
+}
+
 /** Build (once) the index of every T/M/V marker: key "T|mn|1.103" → [{ book, block }]. */
 export function editionIndex(d) {
   if (d.editions) return d.editions;
@@ -108,8 +114,7 @@ export function lookupEditionPage(d, c, ErrorClass = Error) {
     if (list) found.push(...list);
   }
   if (c.book) {
-    const want = stem(c.book);
-    const filtered = found.filter((x) => want.length >= 3 && stem(d.canon.books[x.book].title).startsWith(want));
+    const filtered = found.filter((x) => matchesEditionBook(d.canon.books[x.book].title, c.book));
     if (!filtered.length && found.length) {
       const titles = [...new Set(found.map((x) => d.canon.books[x.book].title))];
       throw new ErrorClass(`${c.raw}: "${c.book}" does not match a book carrying ${edName} page ${c.volume ? `${c.volume}.` : ''}${c.page}. It occurs in: ${titles.join(', ')}.`);

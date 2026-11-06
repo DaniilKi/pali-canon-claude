@@ -1,9 +1,10 @@
 // Starts an installed copy of the server and speaks raw MCP JSON-RPC to it over stdio:
-// initialize, then tools/list. No dependencies, so it can check an npm-installed package
+// initialize, tools/list and every lazily loaded dataset. No dependencies, so it can check an npm-installed package
 // from any directory. Usage: node scripts/npx-check.mjs <command> [args...]
 // Example: node scripts/npx-check.mjs npx --offline --no pali-canon-mcp
 import { spawn } from 'node:child_process';
 import { expectedToolNames } from './expected-tools.mjs';
+import { offlineDataChecks } from './offline-data-checks.mjs';
 
 const [command, ...args] = process.argv.slice(2);
 if (!command) {
@@ -71,6 +72,18 @@ const call = await request('tools/call', { name: 'resolve_reference', arguments:
 const text = call.result?.content?.find((part) => part.type === 'text')?.text ?? '';
 if (call.error || call.result?.isError || !text.includes('"mn10"')) fail(`resolve_reference MN 10: ${JSON.stringify(call.error ?? text.slice(0, 300))}`);
 console.log('PASS tools/call resolve_reference MN 10 (bundled data found)');
+
+// A valid canon must not hide missing lazy datasets in an installed npm/desktop package.
+for (const [name, arguments_, verify] of offlineDataChecks) {
+  const response = await request('tools/call', { name, arguments: arguments_ });
+  const payload = response.result?.content?.find((part) => part.type === 'text')?.text ?? '';
+  if (response.error || response.result?.isError) fail(`${name}: ${JSON.stringify(response.error ?? payload.slice(0, 300))}`);
+  let data;
+  try { data = JSON.parse(payload); } catch { fail(`${name}: invalid JSON response`); }
+  if (!verify(data)) fail(`${name}: bundled offline data check failed`);
+  console.log(`PASS tools/call ${name} (bundled offline data found)`);
+}
+
 
 clearTimeout(timer);
 child.stdin.end();

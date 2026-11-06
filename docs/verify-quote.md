@@ -27,7 +27,7 @@ For English, it is not a finding about the saying at all. Many popular English w
 
 ## How matching works
 
-Text is lower-cased and diacritics and punctuation are removed (so *manopubbaṅgamā* and *manopubbangama* are the same). Candidate passages are found through a word index built the first time a Pāli quotation is checked (a few seconds; see memory below); spelling variants are matched through shared three-letter sequences (trigrams). Each candidate is then scored:
+Text is lower-cased and diacritics and punctuation are removed (so *manopubbaṅgamā* and *manopubbangama* are the same). Candidate passages are found through a word index built the first time a Pāli quotation is checked (a few seconds; see memory below); spelling variants are matched through shared three-letter sequences (trigrams). Candidate windows and their scoring stay within a citable source passage. Adjacent independent texts are never combined into one match. A quotation spanning members of a recorded group, such as adjacent Dhammapada verses, can match the containing group; its citation then covers every matched block. The excerpt is taken entirely from the cited text. Each candidate is then scored:
 
 - **similarity** = Dice coefficient of character trigrams between the quotation and the passage, weighted by how many of the quotation's distinctive words the passage contains. In Pāli, spaces are ignored (compounds are split differently by different writers) and the word weighting is gentler.
 - `found` at 0.82 or more, `close_paraphrase` from 0.5, below that `not_found_in_scope`.

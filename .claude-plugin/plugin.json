@@ -20,5 +20,7 @@
     "mcp"
   ],
   "documentationUrl": "https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/install/claude-code.md",
-  "supportUrl": "https://github.com/DaniilKi/pali-canon-claude/issues"
+  "supportUrl": "https://github.com/DaniilKi/pali-canon-claude/issues",
+  "privacyPolicyUrl": "https://github.com/DaniilKi/pali-canon-claude/blob/main/PRIVACY.md",
+  "termsOfServiceUrl": "https://github.com/DaniilKi/pali-canon-claude/blob/main/TERMS.md"
 }

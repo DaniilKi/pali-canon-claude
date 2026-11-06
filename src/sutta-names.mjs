@@ -16,6 +16,7 @@ import * as canon from './canon.mjs';
 import { CitationError, _test as citationsTest } from './citations.mjs';
 import { normalizeInput, fuzzyKey, normalizationNote } from './input.mjs';
 import { loadGlossary } from './glossary-data.mjs';
+import { translationTitle } from './translation-titles.mjs';
 
 const fold = canon.fold;
 const SUTTA_END = /(suttantam|suttanta|suttam|suttani|suttena|suttassa|sutte|suttam|sutta|suttas|suttanta)$/;
@@ -55,12 +56,13 @@ function buildIndex() {
     const u = d.byId.get(id);
     if (!u) continue;
     for (const t of links) {
-      if (t.english && !/\d/.test(t.english)) {
+      const english = translationTitle(t);
+      if (english && !/\d/.test(english)) {
         const via = `English title (${canon.sourceName(t)}, ${t.translator})`;
-        add(u, t.english, via, true);
+        add(u, english, via, true);
         // "The Fire Sermon" is also found as "Fire Sermon".
-        const bare = t.english.replace(/^(the|a|an)\s+/i, '');
-        if (bare !== t.english) add(u, bare, via, true);
+        const bare = english.replace(/^(the|a|an)\s+/i, '');
+        if (bare !== english) add(u, bare, via, true);
       }
       // The Pāli name the translation's page gives ("Adittapariyaya Sutta" for SN 35.28 on Access to Insight).
       if (t.pali_title && !/\d/.test(t.pali_title)) add(u, t.pali_title, `Pāli title (${canon.sourceName(t)})`);

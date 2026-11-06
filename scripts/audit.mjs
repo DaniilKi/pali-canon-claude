@@ -1,10 +1,11 @@
+import { readBundled } from '../src/bundled-data.mjs';
 // Exhaustive offline audit of the bundled canon: every text, every citation form, every PTS start page, every translation link.
 import * as canon from '../src/canon.mjs';
 import { EDITIONS, editionLabel, editionIndex, nextUnit } from '../src/editions.mjs';
 import { textSegments, parseNoteSpans, uncovered, SIGLA } from '../src/variants.mjs';
 import * as commentary from '../src/commentary.mjs';
 import * as postcanonical from '../src/postcanonical.mjs';
-import { statSync } from 'node:fs';
+import { statSync, readdirSync } from 'node:fs';
 import { loadDpd, DPD_PIN, tokenize, wordParts } from '../src/analyse.mjs';
 import * as parallels from '../src/parallels.mjs';
 import { checkQuote, titleStem, nameStem, otherTextsNamed, paragraphWindow } from './parallels/citations.mjs';
@@ -19,6 +20,13 @@ const counts = {};
 const count = (k) => { counts[k] = (counts[k] || 0) + 1; };
 
 for (const u of d.canon.units) {
+  if (u.shares_passage_with) {
+    const owner = d.byId.get(u.shares_passage_with);
+    if (!u.approximate || !owner || u.book !== owner.book || u.start !== owner.start || u.end !== owner.end
+      || u.vri !== owner.vri || JSON.stringify(u.pts) !== JSON.stringify(owner.pts)) {
+      fail('shared-passage', `${u.id}: does not match its declared owner ${u.shares_passage_with}`);
+    } else count('shared-passage');
+  }
   // 1. The ID itself resolves to this text (or, for an approximate member, to a text with the same passage).
   try {
     const r = canon.resolve(u.id);
@@ -296,7 +304,7 @@ else {
   else {
     if (pc.source.commit !== d.canon.source.commit) fail('postcanonical', `VRI commit ${pc.source.commit} differs from the canon's`);
     // Decision D-21a: one bundle of all books (target 12 MB was exceeded on purpose; package budget is 60 MB).
-    const size = statSync(new URL('../server/data/postcanonical.json.gz', import.meta.url)).size;
+    const size = readBundled(new URL('../server/data/postcanonical.json.gz', import.meta.url)).length;
     if (size > 16e6) fail('postcanonical', `bundle is ${size} bytes, over the 16 MB ceiling of decision D-21a`);
     const canonFiles = new Set(d.canon.books.map((b) => b.file));
     for (const b of pc.books) {
@@ -464,7 +472,7 @@ else {
     counts['parallels-MB'] = Number((size / 1e6).toFixed(2));
     if (size > 5e6) fail('parallels', `parallels.json.gz is ${(size / 1e6).toFixed(1)} MB (budget 5 MB)`);
     for (const [file, meta] of Object.entries(pd.source.inputs)) {
-      const sha = createHash('sha256').update(readFileSync(new URL(`../server/data/${file}`, import.meta.url))).digest('hex');
+      const sha = createHash('sha256').update(readBundled(new URL(`../server/data/${file}`, import.meta.url))).digest('hex');
       if (sha !== meta.sha256) fail('parallels', `built from a different ${file}: rebuild with node scripts/parallels/build.mjs`);
       if (meta.vri_commit !== d.canon.source.commit) fail('parallels', `${file} input has VRI commit ${meta.vri_commit}`);
     }
@@ -556,6 +564,15 @@ else {
     if (!ids.length || ids.some((i) => !g.headwords[i])) fail('glossary-entry', `${table} "${k}" points at a missing headword`);
   }
   counts['glossary-en-keys'] = Object.keys(g.en).length;
+}
+// Directory validation blocks any plugin file of 5 MiB or more. Verify the data and its shard hashes offline.
+const dataDirectory = new URL('../server/data/', import.meta.url);
+for (const file of readdirSync(dataDirectory)) {
+  if (statSync(new URL(file, dataDirectory)).size >= 5 * 1024 * 1024) fail('directory-size', `${file} must be under 5 MiB`);
+  if (file.endsWith('.parts.json')) {
+    try { readBundled(new URL(file.slice(0, -'.parts.json'.length), dataDirectory)); }
+    catch (error) { fail('data-shards', `${file}: ${error.message}`); }
+  }
 }
 console.log(JSON.stringify(counts));
 console.log(`texts: ${d.canon.units.length}; failures: ${failures.length}`);

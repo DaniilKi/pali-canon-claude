@@ -173,6 +173,7 @@ What every tool declares, and the proposed `title`. "Open-world" (`openWorldHint
 | `list_topics` | Browse topics | yes | no | no | Bundled topic index. |
 | `dhamma_list` | Numbered teaching lists | yes | no | no | Bundled lists with Pāli members and their canonical passages. |
 | `verify_quote` | Verify a quotation | yes | no | yes | Pāli is matched offline; English quotations fetch the named translations live. |
+| `search_commentary` | Search the commentary | yes | no | no | Searches the bundled VRI Aṭṭhakathā only; hits read back through direct commentary references, without asserting root alignment. |
 | `get_commentary` | Read the commentary | yes | no | no | Bundled VRI Aṭṭhakathā aligned to the text; labelled as commentary, not canon. |
 | `get_post_canonical` | Read post-canonical texts | yes | no | no | Bundled VRI Ṭīkā and Añña books (Visuddhimagga, Abhidhammatthasaṅgaha…); labelled `canonical: false`. |
 | `search_post_canonical` | Search post-canonical texts | yes | no | no | Searches the bundled post-canonical books only; results labelled `canonical: false`. |

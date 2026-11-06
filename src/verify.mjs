@@ -71,21 +71,27 @@ function findWindows(corpus, qwords, { keep = KEEP_WINDOWS } = {}) {
   const span = n + Math.max(3, Math.ceil(n * 0.5));
   const inWindow = new Int32Array(n);
   let score = 0; let lo = 0;
+  let region = 0;
   const found = [];
   for (let hi = 0; hi < order.length; hi += 1) {
     const h = order[hi];
+    // A candidate cannot gain evidence from a neighbouring, independently cited text.
+    if (corpus.boundaries && pos[h] >= corpus.boundaries[region + 1]) {
+      while (pos[h] >= corpus.boundaries[region + 1]) region += 1;
+      inWindow.fill(0); score = 0; lo = hi;
+    }
     if (inWindow[who[h]]++ === 0) score += weight[who[h]];
     while (pos[order[lo]] < pos[h] - span) {
       const l = order[lo];
       if (--inWindow[who[l]] === 0) score -= weight[who[l]];
       lo += 1;
     }
-    if (score >= 0.3 * totalWeight) found.push({ start: pos[order[lo]], end: pos[h], score });
+    if (score >= 0.3 * totalWeight) found.push({ start: pos[order[lo]], end: pos[h], score, region });
   }
   found.sort((a, b) => b.score - a.score || a.start - b.start);
   const picked = [];
   for (const f of found) {
-    if (picked.some((p) => Math.abs(p.start - f.start) < span)) continue;
+    if (picked.some((p) => p.region === f.region && Math.abs(p.start - f.start) < span)) continue;
     picked.push(f);
     if (picked.length >= keep) break;
   }
@@ -168,10 +174,21 @@ function buildPaliIndex() {
   const ids = new Map(); const vocab = [];
   let tokens = new Int32Array(1 << 22); let nt = 0;
   const bookStart = []; const blockStart = [];
+  const boundaries = [];
+  // The outermost citable unit permits a whole recorded group, but never joins independent texts.
+  // Abbreviated records provide boundaries only where a complete indexed text does not cover the block.
+  const owners = d.canon.books.map((book) => new Array(book.blocks.length).fill(null));
+  const outermost = [...d.canon.units].sort((a, b) => Number(!!b.approximate) - Number(!!a.approximate)
+    || (a.end - a.start) - (b.end - b.start));
+  for (const unit of outermost) for (let i = unit.start; i < unit.end; i += 1) owners[unit.book][i] = unit;
   let blocks = 0;
-  for (const book of d.canon.books) {
+  for (const [bi, book] of d.canon.books.entries()) {
     bookStart.push(blocks);
-    for (const blk of book.blocks) {
+    let previousOwner;
+    for (const [i, blk] of book.blocks.entries()) {
+      const owner = owners[bi][i];
+      if ((i === 0 || owner !== previousOwner) && boundaries.at(-1) !== nt) boundaries.push(nt);
+      previousOwner = owner;
       blockStart.push(nt);
       blocks += 1;
       for (const w of words(fold(blk[2]))) {
@@ -183,6 +200,7 @@ function buildPaliIndex() {
     }
   }
   blockStart.push(nt);
+  boundaries.push(nt);
   tokens = tokens.slice(0, nt);
   const freq = new Int32Array(vocab.length);
   for (let i = 0; i < nt; i += 1) freq[tokens[i]] += 1;
@@ -199,7 +217,7 @@ function buildPaliIndex() {
   });
   for (const [g, list] of gramIndex) gramIndex.set(g, Int32Array.from(list));
   pali = {
-    ids, vocab, tokens, freq, total: nt, bookStart, blockStart: Int32Array.from(blockStart),
+    ids, vocab, tokens, freq, total: nt, bookStart, blockStart: Int32Array.from(blockStart), boundaries: Int32Array.from(boundaries),
     positions: (id) => postings.subarray(offsets[id], offsets[id + 1]),
     freqOf: (id) => freq[id],
     gramIndex,
@@ -243,7 +261,14 @@ function paliVariants(w) {
 
 function paliCorpus() {
   const ix = buildPaliIndex();
-  return { compounds: true, tokens: ix.tokens, vocab: ix.vocab, total: ix.total, positions: ix.positions, freq: ix.freqOf, variants: paliVariants };
+  return { compounds: true, tokens: ix.tokens, vocab: ix.vocab, total: ix.total, positions: ix.positions, freq: ix.freqOf, variants: paliVariants, boundaries: ix.boundaries };
+}
+
+function paliBounds(position) {
+  const { boundaries } = buildPaliIndex();
+  let lo = 0; let hi = boundaries.length - 2;
+  while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (boundaries[mid] <= position) lo = mid; else hi = mid - 1; }
+  return { min: boundaries[lo], max: boundaries[lo + 1] };
 }
 
 function blockAt(tokenPos) {
@@ -256,12 +281,12 @@ function blockAt(tokenPos) {
 }
 
 let unitsByBook = null;
-function ownerOf(book, index) {
+function ownerOf(book, index, end = index + 1) {
   if (!unitsByBook) {
     unitsByBook = new Map();
     for (const u of load().canon.units) { if (!unitsByBook.has(u.book)) unitsByBook.set(u.book, []); unitsByBook.get(u.book).push(u); }
   }
-  const covering = (unitsByBook.get(book) || []).filter((u) => u.start <= index && index < u.end);
+  const covering = (unitsByBook.get(book) || []).filter((u) => u.start <= index && end <= u.end);
   covering.sort((a, b) => (!!a.approximate - !!b.approximate) || ((a.kind === 'range') - (b.kind === 'range')) || ((a.end - a.start) - (b.end - b.start)));
   return covering[0] || null;
 }
@@ -269,7 +294,8 @@ function ownerOf(book, index) {
 function paliMatch(cand, refined) {
   const d = load();
   const first = blockAt(refined.a); const last = blockAt(refined.b - 1);
-  const unit = ownerOf(first.book, first.index);
+  if (first.book !== last.book) return null;
+  const unit = ownerOf(first.book, first.index, last.index + 1);
   if (!unit) return null;
   const blocks = d.canon.books[first.book].blocks;
   const lastIndex = last.book === first.book ? last.index : first.index;
@@ -296,8 +322,11 @@ function verifyPali(text, limit) {
   const query = q.join(' ');
   const out = [];
   const seen = new Set();
-  const { ranked, truncated } = rankWindows(findWindows(corpus, q), (c) => ({ r: refine(corpus, query, q, c) }));
-  const ties = countTies(ranked, truncated, ({ r }) => { const b = blockAt(r.a); return ownerOf(b.book, b.index)?.id; });
+  const { ranked, truncated } = rankWindows(findWindows(corpus, q), (c) => ({ r: refine(corpus, query, q, c, paliBounds(c.start)) }));
+  const ties = countTies(ranked, truncated, ({ r }) => {
+    const first = blockAt(r.a), last = blockAt(r.b - 1);
+    return first.book === last.book ? ownerOf(first.book, first.index, last.index + 1)?.id : null;
+  });
   for (const { c, r } of ranked) {
     const m = paliMatch(c, r);
     if (!m) continue;

@@ -140,13 +140,23 @@ What the tool does:
 - **reports the translator's own number** whenever it differs, so you can give both;
 - treats the PTS volume and page as the anchor both systems share.
 
+## Sutta names and linked English titles
+
+`resolve_reference` also accepts indexed Pāli names and stored English translation titles. For example, `A Gallon Measure` (or `Gallon Measure`) resolves to SN 3.13, and `King Udena` to Ud 7.10, using the existing dhammatalks captions. The result identifies the matched name and its source; an article-stripped alias can appear in `name_match.matched_name`.
+
+Names shared by several texts retain all candidates and the existing explicit DN/MN convention; other ambiguous names are not guessed. A single common English word needs a marker such as `sutta` or `chapter`, and a name containing digits does not enter name lookup. Use a canonical citation when a title is ambiguous. This lookup uses bundled metadata and does not fetch translation pages.
+
 ## Texts printed together
 
 The edition prints some texts as one block: AN 1.296–305, Dhp 1–20 (a chapter), SN 46.143–152. You can ask for the whole block or any one member ("AN 1.300", "Dhp 5"); the tool tells you the member is part of a larger block.
 
+An ordinary range that is not recorded as a single source group, such as `MN 10–12`, returns its first text with an explicit note. Both endpoints must exist in the bundled index, at the same numbering depth, and the full end path must not precede the start. A missing endpoint is an error even when the first text exists. This validates the endpoints; it does not retrieve the whole range or establish that every intermediate number is separately indexed.
+
 ## Abbreviated texts (peyyāla)
 
-The Pāli often abbreviates repeated passages with "…pe…" ("and so on"). Where the edition does not print a text in full, the tool marks it **approximate** and points to the passage where the abbreviation occurs. There are 266 such texts, mostly in SN and AN repetition series, the Paṭṭhāna, and Vinaya rules recited together.
+The Pāli often abbreviates repeated passages with "…pe…" ("and so on"). The bundled citation index has 266 **approximate** mappings: 199 explicitly share an indexed source span with another record; 67 have no confirmed independent location. The flag alone does not establish that the VRI edition abbreviates or omits a text. Nothing is expanded or reconstructed.
+
+Metadata distinguishes `alignment.kind: "shared_passage"` (with `shared_with`) from `"unverified_alignment"`. For example, AN 1.82 and 1.83 retain a provisional span covering VRI paragraphs 81–83; the bundle does not establish a safe independent standard-number mapping for them. AN 1.82–97 also reports its four unverified member mappings and warns that the group span may include neighbouring passages. Reading, scoped search, commentary, word analysis and parallels carry the caution. These labels change no source text, citation number, span, approximation flag or commentary assignment.
 
 ## Citing what you retrieved
 
@@ -196,7 +206,8 @@ Running text is read more strictly than a single citation typed into `resolve_re
 - Abbreviations are case-sensitive: "MN 10" is a citation, "mn 10" and "Mn 10" are not. Lower-case IDs written without a space ("mn10", "sn56.11:5.1") are read.
 - Abbreviations that look like English or other books before a bare number are skipped: single letters (D, M, S, A, J), Dh, It, Th, Thī, Ne, Pe, Peṭ, Ps (often Psalms), Pp, Ya, Dt and As. Use MN, SN, Iti, Thag, Paṭis and so on, or full names. Single letters still work for PTS pages ("M i 55", "S v 420").
 - Mahāvagga and Cūḷavagga are read as Vinaya chapters only after "Vinaya" ("Vinaya Mahāvagga 1"), or as Mv and Cv.
-- Links count only for suttacentral.net, accesstoinsight.org and dhammatalks.org.
+- Printed edition pages retain their edition prefix: `Thai MN 1.103`, `Myanmar Dhp 15` and `VRI SN 1.20 (Nidānavaggo)` are page references, not sutta or verse numbers. Edition names are case-insensitive. Parenthetical book qualifiers are recognised against bundled source titles using the same prefix matching as direct page lookup; ordinary parenthetical prose remains separate. Missing or ambiguous pages remain unresolved.
+- Links count only for suttacentral.net, accesstoinsight.org, dhammatalks.org and ancient-buddhist-texts.net. ABT landing and part-page links use the existing bundled mappings; unknown paths remain unresolved. URL paths remain case-sensitive, and spaces in prose URLs must be URL-encoded (`%20`). Link checking here is offline; pages are not fetched.
 - A number glued to letters ("MN 10th") or written with thousands separators ("MN 10,000") is not a citation.
 
 A citation written in a form the scanner does not recognise is not checked, so check doubtful ones with `resolve_reference`.

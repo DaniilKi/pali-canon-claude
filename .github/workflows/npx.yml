@@ -1,10 +1,10 @@
 name: npx install
 # Packs the npm tarball, installs it in an empty folder on each OS and starts the server
-# over stdio (initialize, tools/list, one offline tool call). Proves `npx -y pali-canon-mcp`
+# over stdio (initialize, tools/list, every lazy offline dataset). Proves `npx -y pali-canon-mcp`
 # works and finds its bundled data relative to the installed server, not the repo.
 on:
   push:
-    branches: [main]
+    branches: [main, 'dev/**', 'integrate/**']
   pull_request:
   workflow_dispatch:
 permissions:

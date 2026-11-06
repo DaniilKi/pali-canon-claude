@@ -2,6 +2,39 @@
 
 `server/data/canon.json.gz` (Pāli text + citation index) and `server/data/translations.json` (translation links) are generated. Python 3.10+ and git are needed; nothing here runs at user install time.
 
+## Bundled shards and Python build inputs
+
+The four large gzip datasets (`canon`, `commentary`, `postcanonical`, `dpd`) ship as 4 MiB byte shards and a `<name>.json.gz.parts.json` manifest. These are pieces of the **original compressed bytes**, not separately compressed JSON records. The manifest records their order, byte counts and SHA-256 hashes, plus the original gzip hash. Runtime loaders verify and join them in memory, then decompress as before. No download or disk cache is needed. Legacy monolithic files are still accepted.
+
+Before passing committed data to a Python builder, validator, diff report or experiment, unpack it into a separate working directory from the repository root:
+
+```sh
+node scripts/shard-data.mjs --unpack server/data /tmp/pali-inputs
+# Use /tmp/pali-inputs/canon.json.gz (and the other original filenames) as Python inputs.
+```
+
+For the embedding experiment, set `PALI_CANON_DATA_DIR` to that directory. Python builders continue to write ordinary `.json.gz` files. Install rebuilt outputs in `server/data/`, then run `npm run build`: it splits files of 5 MiB or more deterministically, verifies the shards and removes obsolete parts. The monthly refresh unpacks old data into its working directory and re-shards installed outputs during the bundle build. `npm run audit` checks the 5 MiB data-file ceiling and shard integrity as well as the existing full-text checks.
+
+## Rebuild from pinned sources
+
+### Repairing legacy shared-passage bounds
+
+The builder refreshes records marked `shares_passage_with` after its final boundary clipping and before aggregating groups. Legacy indexes copied some abbreviated Vinaya records before clipping, leaving their ends past the declared owner. To repair an old bundled pair without fetching sources, unpack to a separate directory and run:
+
+```sh
+node scripts/shard-data.mjs --unpack server/data /tmp/pali-legacy-input
+python3 scripts/canon/shared_spans.py /tmp/pali-legacy-input/canon.json.gz /tmp/pali-canon-fixed.json.gz /tmp/pali-legacy-input/commentary.json.gz /tmp/pali-commentary-fixed.json.gz
+cp /tmp/pali-canon-fixed.json.gz server/data/canon.json.gz
+cp /tmp/pali-commentary-fixed.json.gz server/data/commentary.json.gz
+node scripts/parallels/build.mjs
+npm run build
+npm run check
+```
+
+Use the corresponding legacy canon and commentary inputs together. The repair follows existing explicit sharing relationships, refreshes affected group metadata, and removes commentary assignments outside the already aligned owner/member sets. It never creates text or new alignments. Changed group starts, page-volume changes, invalid sharing relationships or loss of commentary coverage require a source rebuild instead. Gzip output is deterministic; source books, paragraphs, variant notes and page markers remain byte-equivalent as JSON values. The committed correction changes five abbreviated records, their parent group and six commentary mapping lists. Rebuild the derived parallels index to record the corrected input hashes; source content and text coverage totals are unchanged.
+
+### Full source rebuild
+
 ```sh
 W=/tmp/pali-build && mkdir -p $W && cd $W
 # 1. VRI Chaṭṭha Saṅgāyana XML (romanised root texts only)

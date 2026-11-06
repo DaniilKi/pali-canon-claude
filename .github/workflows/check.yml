@@ -34,6 +34,10 @@ jobs:
       - run: npm run check
       - run: npm run smoke
       - run: npm run pack:desktop
+      # Exhaust every shipped text once; npx.yml checks all lazy datasets on each OS.
+      - name: Audit the isolated installed corpus offline
+        if: matrix.os == 'ubuntu-latest' && matrix.node == 20
+        run: npm run audit:installed
       # One leg is enough for the staleness check; the build is the same on every platform.
       - name: Check committed standalone server is current
         if: matrix.os == 'ubuntu-latest' && matrix.node == 20

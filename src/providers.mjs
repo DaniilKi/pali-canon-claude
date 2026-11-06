@@ -238,7 +238,7 @@ export function listSources() {
       { id: 'vri', name: canon.name, role: 'Pāli text of the whole Tipiṭaka, bundled offline (no network needed).', repository: canon.repository, version: canon.commit,
         attribution: canon.attribution, terms: canon.terms,
         numbering: 'Standard citation IDs (as used by SuttaCentral and Bhikkhu Bodhi) were aligned to the VRI text at build time; PTS page numbers come from VRI page markers.' },
-      { id: 'vri-atthakatha', name: 'Chaṭṭha Saṅgāyana Aṭṭhakathā (VRI), romn/*.att.xml', role: 'Commentaries (get_commentary), bundled offline (server/data/commentary.json.gz), aligned to the texts by VRI paragraph number and checked against the words they quote. Commentary, not scripture.',
+      { id: 'vri-atthakatha', name: 'Chaṭṭha Saṅgāyana Aṭṭhakathā (VRI), romn/*.att.xml', role: 'Commentaries bundled offline (server/data/commentary.json.gz): get_commentary with a canonical citation reads verified aligned passages; search_commentary searches all included books, and direct commentary book references read them without asserting root alignment. Commentary, not scripture.',
         repository: canon.repository, version: canon.commit, attribution: canon.attribution, terms: canon.terms },
       { id: 'parallels', name: 'Parallels and cross-references (built from the VRI canon and Aṭṭhakathā)', role: 'get_parallels: passages two canonical texts share word for word, and texts the commentary cites, built offline (server/data/parallels.json.gz, scripts/parallels/build.mjs). Every link names its source and how it was matched. No SuttaCentral data is used.',
         repository: canon.repository, version: canon.commit, attribution: canon.attribution, terms: canon.terms },

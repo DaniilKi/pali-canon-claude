@@ -2,7 +2,7 @@
 
 Everything a maintainer needs to list Pali Canon beyond our own marketplace. Nothing here has been submitted yet: submitting is a human step (it needs a signed-in claude.ai account and acceptance of Anthropic's directory terms).
 
-Checked against the Claude Code and claude.com documentation on 1 November 2026, and against `claude plugin validate` from Claude Code 2.1.316.
+Packaging limits and manifest URL fields rechecked against the official documentation on 5 November 2026. The previous local manifest check used `claude plugin validate` from Claude Code 2.1.316.
 
 ## The three places Pali Canon can be listed
 
@@ -18,10 +18,10 @@ Found with the [pre-submission checklist](https://claude.com/docs/plugins/pre-su
 
 | # | Item | Severity | Notes |
 |---|---|---|---|
-| 1 | `server/data/canon.json.gz` is 5.3 MiB (5,568,237 bytes). The directory requires every file in the plugin folder to be under 5 MiB; otherwise validation stops with *Repository too large to validate*. | **Blocker for the directory** (not for our own marketplace) | Fix in the data build: split the canon into files under 5 MiB (for example one per piṭaka) and load them together. This touches `server/data/` and the loader, so it needs its own issue. The local `claude plugin validate` does not check this; the portal does. |
-| 2 | No icon. | Warning, but **decide before the first submission** | The directory takes the icon only once, the first time the plugin is saved or submitted in the portal. It must be a square PNG or JPEG, 512 to 2048 px, under 2 MB, saved as `.claude-plugin/icon.png` (or named by `"icon"` in `plugin.json`). SVG and WebP are not accepted. It must be our own artwork. |
-| 3 | Privacy policy and terms pages. | Recommended | `plugin.json` can carry `privacyPolicyUrl` and `termsOfServiceUrl`. Add them when issue [#6](https://github.com/DaniilKi/pali-canon-claude/issues/6) publishes those pages. The README's privacy paragraph covers the facts meanwhile. |
-| 4 | `server/index.cjs` is an 810 KiB bundle; `canon.json.gz` is a binary. | Policy hold (a reviewer reads it) | Files over 256 KiB, and binaries that are not images or fonts, are held for a human reviewer. Expected; not a rejection. Point the reviewer to `src/` (readable source) and `npm run build` (how the bundle is made). |
+| 1 | Every plugin file must be under 5 MiB; the archive must be under 50 MiB, unpacked contents under 256 MiB, with fewer than 10,000 entries. | Size blocker addressed | The four oversized gzip datasets now ship as verified 4 MiB shards, joined offline by the loaders. `npm run build` maintains the shards; `npm run audit` checks data-file limits. Recheck the whole repository in the portal before submitting. |
+| 2 | Project icon. | Included | `.claude-plugin/icon.png` is generated from our own artwork in `assets/icon.svg`. Confirm it before the first submission: the directory takes the icon only once. |
+| 3 | Privacy policy and terms pages. | Included | `privacyPolicyUrl` and `termsOfServiceUrl` point to the existing `PRIVACY.md` and `TERMS.md`. These are supported directory fields in the [manifest reference](https://code.claude.com/docs/en/plugins-reference#directory-listing-fields). |
+| 4 | `server/index.cjs` is an 810 KiB bundle; the data shards are binaries. | Policy hold (a reviewer reads it) | Files over 256 KiB, and binaries that are not images or fonts, are held for a human reviewer. Expected; not a rejection. Point the reviewer to `src/` (readable source) and `npm run build` (how the bundle is made). |
 | 5 | `package.json` and `package-lock.json` at the plugin root. | Policy hold | Claude Code installs packages from the lockfile when someone installs the plugin, and the directory holds such plugins for review. The server does not need them (the bundle is self-contained). A later option: move the plugin into a subfolder without a lockfile. |
 | 6 | `CLAUDE.md` at the plugin root. | Warning only | It is for contributors and is not loaded for plugin users. Intended. |
 
@@ -84,8 +84,8 @@ Run `claude plugin validate . --strict` and the portal's **Validate** button aga
 
 ## Handoff checklist (for a maintainer)
 
-1. Fix blocker 1 (split `canon.json.gz` into files under 5 MiB) in its own issue.
-2. Add the icon (item 2) and, once #6 lands, `privacyPolicyUrl` and `termsOfServiceUrl` in `.claude-plugin/plugin.json`.
+1. Run `npm run check` and verify the current repository against the directory size limits.
+2. Review the included icon and linked privacy and terms pages before submitting.
 3. Sign in at [claude.ai/directory/manage](https://claude.ai/directory/manage) on a paid plan (Pro, Max or Ultra, or an Owner on Team or Enterprise) and connect the GitHub account that can push to `DaniilKi/pali-canon-claude`.
 4. Choose **Submit new**, then **Plugin bundle**, enter the repository, press **Validate**, fix any *Blocking* findings, and fill in the form with the answers above.
 5. Submit for review and follow the **Versions** tab. When a version passes, press **Publish**.

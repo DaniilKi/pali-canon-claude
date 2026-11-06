@@ -1,3 +1,4 @@
+import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * analyse_passage: word-by-word analysis of a passage of the bundled Pāli text (issues #22 and #23).
  *
@@ -11,7 +12,6 @@
  * Licence: DPD is CC BY-NC-SA 4.0 (Bodhirasa Bhikkhu). The notice and attribution are returned
  * with every result.
  */
-import { readFileSync, existsSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -45,9 +45,9 @@ export function loadDpd() {
   if (cached) return cached;
   const name = 'dpd.json.gz';
   const candidates = [join(here, 'data', name), join(here, '..', 'server', 'data', name), join(process.cwd(), 'server', 'data', name)];
-  const found = candidates.find((p) => existsSync(p));
+  const found = candidates.find((p) => bundledExists(p));
   if (!found) throw new Error('Bundled dictionary data (dpd.json.gz) is missing. Reinstall the extension.');
-  const data = JSON.parse(gunzipSync(readFileSync(found)).toString('utf8'));
+  const data = JSON.parse(gunzipSync(readBundled(found)).toString('utf8'));
   const headwords = new Map();
   const lemmas = new Map();
   const folded = new Map();
@@ -281,7 +281,6 @@ export function analysePassage({ uid, segment, paragraph, offset = 0, limit = 60
   const unknown = words.filter((w) => w.status === 'unknown').length;
   const outNotes = [...notes];
   if (segment === undefined && paragraph === undefined) outNotes.push(`No segment given: analysed the first body segment (${seg.ref}). Pass segment (e.g. "${unit.id}/${index + 1}") for another.`);
-  if (unit.approximate) outNotes.push('This text is abbreviated (peyyāla) in the VRI edition; the analysis covers the words printed, not the expanded text.');
   return {
     text_id: unit.id, citation: unit.acronym, title: unit.title, ...inputNote(input),
     segment: { ref: seg.ref, type: seg.type, ...(seg.vri_paragraph ? { vri_paragraph: seg.vri_paragraph } : {}), text: seg.text },

@@ -120,7 +120,8 @@ docs/                human documentation (docs/i18n/: machine-drafted translatio
 | `search_texts` | `query`, `collection`, `limit`, `offset`, `script`, `include_post_canonical`, `english` (auto/off/only). Full-text Pāli search (diacritics optional, "quoted phrases"), titles, English titles. The query may be in any supported script (`input_script`, `input_romanized` are reported); `script` writes titles and excerpts in that script. `include_post_canonical: true` adds a separate `post_canonical` result list (labelled `canonical: false`, titles and excerpts in `script`); with `collection` set it is not searched and says so. English-keyboard input is normalised (`input_normalised`); a Pāli query with fewer than 3 texts is retried with spelling variants (`spelling_note`, `spelling_variants`, `exact_search`); an English query is expanded into at most 8 Pāli terms from the glossary (`expanded_from_english`: the mapping, `source`, `searched_pali`, `dropped_terms`, `searched_as_pali` for Pāli words kept from the question); a question of English stop words around Pāli words that finds nothing as typed searches the Pāli words only (`english_words_ignored`); `english: "off"` disables expansion (`src/english-search.mjs`, D60, D62) | offline |
 | `browse_canon` | canon → piṭaka → collection → section → text; node `books` lists complete VRI root files with `get_text` book IDs | offline |
 | `lookup_pali` | Digital Pāḷi Dictionary entry; when dpdict.net is unreachable, the bundled subset answers, labelled `offline: true`. Input without diacritics adds `inferred_spelling` (every bundled DPD headword that folds to it); when the live site has nothing for the word as typed and one spelling was inferred, that one is looked up (`looked_up`) (`src/lookup-input.mjs`) | online (offline fallback) |
-| `get_commentary` | `uid`, `offset`, `limit`. The VRI Aṭṭhakathā passages aligned to the text by VRI paragraph number and checked against the words they quote, labelled as commentary, with the work, evidence type and commentary PTS pages (`src/commentary.mjs`, `server/data/commentary.json.gz`) | offline |
+| `search_commentary` | `query`, `books` (VRI filenames or commentary book UIDs), `limit`, `offset`. Searches all 47 included commentary books, one hit per rendered segment or complete stanza. Each hit has a direct `get_commentary` reference plus a context request. Results carry `canonical: false`, VRI terms and no inferred root alignment (`src/commentary-search.mjs`) | offline |
+| `get_commentary` | `uid`, `offset`, `limit`. Use a canonical citation for aligned passages, `commentary` to list books, `commentary:<VRI-file>` for a whole book, or `commentary:<VRI-file>/cN` for an exact rendered source segment. Direct book reads carry `canonical: false` and do not assert root alignment. The VRI Aṭṭhakathā passages aligned to the text by VRI paragraph number and checked against the words they quote, labelled as commentary, with the work, evidence type and commentary PTS pages (`src/commentary.mjs`, `server/data/commentary.json.gz`) | offline |
 | `get_post_canonical` | `citation`, `offset`, `limit`, `includeVariants`. A post-canonical VRI book (Ṭīkā and Añña: Visuddhimagga "Vism ch. 1", "Vism 1.1", "Vism §19"; Abhidhammatthasaṅgaha "Abhidh-s 1.4"; any book by id, "mahavamsa 3"); empty, "tika" or "anna" lists books. Everything labelled `canonical: false`; Vism PTS pages are refused (`src/postcanonical.mjs`, `server/data/postcanonical.json.gz`) | offline |
 | `search_post_canonical` | `query`, `books`, `section` (tika/anna), `limit`, `offset`. Full-text search of the post-canonical books; each hit's citation round-trips through `get_post_canonical` | offline |
 | `analyse_passage` | `uid`, at most one of `segment` or `paragraph`, `offset`, `limit`. Omit both selectors for the first body segment; supplied blank selectors are errors. Word by word from the bundled DPD subset: split, every parse (headword, grammar, root, meaning), quotation sandhi undone only when DPD knows the result, unknown words marked `unknown`; CC BY-NC-SA 4.0 notice (`src/analyse.mjs`, `server/data/dpd.json.gz`) | offline |
@@ -130,12 +131,12 @@ docs/                human documentation (docs/i18n/: machine-drafted translatio
 | `get_access_to_insight_text` | Read an Access to Insight page with its licence notice | online, mirrored |
 | `list_sources` | Sources, versions, licences, mirrors, and `translation_coverage` per collection | offline |
 | `verify_quote` | `text`, `language` (auto/pali/english), `texts` (English scope, up to 12 citations), `limit`. Fuzzy-matches a quotation. Pāli: the bundled VRI text through a lazy word and trigram index (built on the first Pāli check). English: the linked translations, fetched live and cached (default scope: the 26 Dhammapada chapters, one page per translator, at most 80 pages). Returns matches with citation and similarity, the verdict `found` / `close_paraphrase` / `not_found_in_scope`, the scope, `equally_similar_texts` and `citation_note` for stock passages, and `next_step` (check the Pāli) for English misses | offline (Pāli); online (English) |
-| `find_citations` | `text` (up to 200,000 characters). Finds every citation form the parser accepts, resolves each with `canon.resolve`, and reports unresolved ones with the reason and UTF-16 offsets | offline |
+| `find_citations` | `text` (up to 200,000 characters). Finds recognised citation patterns, including printed edition pages, resolves each with `canon.resolve`, and reports unresolved ones with the reason and UTF-16 offsets | offline |
 | `uposatha` | `from`, `to`, `tradition` (thai-mahanikaya, thai-dhammayut, myanmar, sri-lanka). Uposatha days (full, new and half moons) with lunar month and day; computed and labelled with the rule | offline |
 | `festivals` | `year`, `tradition`. Māgha Pūjā, Vesak, Āsāḷha Pūjā, Vassa start and end, Pavāraṇā and the Kaṭhina season, with their canonical texts; computed (see [calendar.md](calendar.md)) | offline |
 | `daily_text` | `date` (YYYY-MM-DD, UTC, default today), `kind` (`verse` or `sutta`). Fixed-rotation Dhammapada verse or sutta of the day from the bundled canon | offline |
 | `reading_plan` | `name`, `day`. Plans `dhammapada-26-days`, `mn-year`, `ati-into-the-stream`, `ati-four-noble-truths`; lists plans, a whole schedule or one day's readings with `get_text` arguments | offline |
-| `lookup_name` | `name`, `limit`, `textLimit`, `exactWord`. DPPN entry when bundled (none yet: licence unconfirmed, #32), links to the online editions, and the VRI texts that name it (ranked title, then opening, then body) | offline |
+| `lookup_name` | `name`, `limit`, `textLimit`, `exactWord`. DPPN entry when bundled (none yet: licence unconfirmed, #32), links to the online editions, and the VRI texts that name it (ranked Pāli/English title, then opening, then body; matching title evidence included) | offline |
 | `topic` | `name`. Texts on a topic from Access to Insight's General and Numerical indexes, mapped to canon IDs (title, PTS page, numbering notes), with see-also topics and the matching numbered list | offline |
 | `list_topics` | `query`, `index` (subject, numerical or all), `offset`, `limit`. Browse or search the 472 topics | offline |
 | `dhamma_list` | `name`. A standard numbered list (four noble truths, five aggregates, the 37 aids, ten fetters, twelve links…): Pāli members, labelled English glosses, status (canonical or later) and the defining passage. No name lists all 37 | offline |
@@ -265,3 +266,103 @@ Citation input normalization is shared by `get_text`, `resolve_reference`, `get_
 | A citation resolves wrongly | Add a failing test in `tests/core.test.mjs`, fix, run `npm run audit` |
 | `npm run outage` exits with "OUTAGE CHECK FAILED" | A mirror or fallback no longer behaves as designed. The scenario and call it lists show which source to look at |
 | `node scripts/linkcheck.mjs` exits with "LINK CHECK FAILED" | A translation page has moved or gone (HTTP 404/410), or a whole site was down. Fix or remove the link in the translation data, or wait for the site to come back |
+
+## Verify every text in the installed bundle
+
+Run `npm run audit:installed` after building the server. This copies only `server/` to a temporary directory, starts its stdio MCP server from an empty working directory, and disables network access in that process. It reads every page of every canonical text and aligned commentary, plus every post-canonical book, and compares the returned segments and citations with the source corpus. It also compares linked translation metadata for every text and exercises eleven offline fixtures covering all bundled datasets, including the dictionary, glossary, parallels, topics and Vinaya references. The temporary copy is removed when the check ends.
+
+For a JSON report that also lists every text without an aligned commentary passage, run:
+
+```sh
+npm run audit:installed -- --report /tmp/pali-installed-corpus.json
+```
+
+To exhaustively check an extracted npm tarball or desktop staging directory, add `--server-dir /path/to/package/server`; the source corpus in this checkout remains the comparison baseline. A report records `running`, then `passed` or `failed`, so a failed rerun cannot leave an earlier successful report looking current.
+
+Use an existing writable destination directory; on Windows, choose a path on your own computer. The report distinguishes missing commentary alignments from retrieval failures. It also counts approximate texts: passing this check does not fill the VRI edition's abbreviations, supply missing commentary alignments or add English translations. The data remains exactly as sourced.
+
+The package CI runs the exhaustive installed-corpus audit once on Ubuntu with Node 20. Its separate npm installation matrix checks that all lazy datasets load from the installed tarball on every supported OS. Those checks now fail when a lazy dictionary shard is missing, or a missing optional translation-link index would silently reduce the available references, even if MN 10 resolves correctly. Negative regression fixtures also reject dropped or altered text, wrong totals, repeated pages and missing continuations.
+
+## Searching complete verses
+
+Pāli full-text search checks complete stanzas as retrieval displays them. A quoted verse can use spaces, tabs or line breaks between its words. Search preserves punctuation and does not join separate stanzas, prose paragraphs or canonical texts. Post-canonical results carry a citation that contains the whole matching stanza, even when its lines occupy several XML blocks. Excerpts preserve the source line breaks.
+
+`tests/verse-search.test.mjs` derives its quotations from bundled text and checks canonical and post-canonical search, citation containment and boundary isolation. The isolated installed-corpus audit repeats whole-stanza searches through the shipped MCP server with network access disabled.
+
+## Search and read the complete bundled commentary
+
+`search_commentary` searches the 47 VRI Aṭṭhakathā books already included in the package. It also reaches introductions and other material excluded from verified root-text alignments. Words must match within one prose segment or complete stanza; quoted phrases accept line breaks. Search is Pāli typed in Roman letters, with diacritics optional. It does not fetch any website. Retained folded search text uses an 8 MiB payload budget; whole-book source data and rendered segments remain lazy in-memory data.
+
+Start with `get_commentary` and `{"uid":"commentary"}` to list included books. Use the returned VRI filenames in the search's optional `books` filter. Each search hit supplies `read_with` for the exact segment and `context_with` for nearby segments. Pass the `uid`, `offset` and `limit` fields to `get_commentary`; `tool` names the tool to call. These are rendered-segment references, not traditional canonical citations. Retain the package release or repository commit together with the returned VRI commit when citing them: segment numbering can change with a data or rendering update.
+
+Direct book references are not canonical citations and do not assert which root passage the commentary explains. Existing canonical calls such as `get_commentary("MN 10")` retain their verified alignment behavior. Missing alignments remain missing; global book reading simply exposes already bundled text without guessing a relationship.
+
+## Precise canonical search scopes
+
+The `collection` filter in `search_texts` matches whole collection or section identifiers. `sn1` selects SN 1 and its numbered members; it does not include SN 10–19. Likewise, `an1` excludes AN 10–11 and `kv1` excludes Kv 10 and later chapters. Exact text identifiers do not admit texts with the same initial digits. Existing grouped text IDs, such as `dhp1-20`, include only the members recorded in the bundle; the filter does not parse arbitrary citation ranges. Case and spaces are still normalised (`SN 1` becomes `sn1`), and named Vinaya section identifiers remain supported.
+
+Unknown scopes, including a whitespace-only scope, return an error directing the caller to `browse_canon`, rather than an empty result that could be mistaken for missing source text. The same boundary check applies to title matches, English glossary expansion, spelling retries and paginated results. This changes search selection only; it adds no source text and changes no citation numbering or alignment.
+
+A member ID absent from the independent citation index but recognised by group lookup, such as `an1.300`, selects its existing source group (`an1.297-305`). Search adds `scope_resolution` with the requested ID, actual group ID, approximation flag, explanation and `get_text` pointer. Results and pagination are identical to searching that group directly. This does not parse arbitrary ranges or establish whether the individual member is printed separately. Approximate groups themselves remain excluded from the full-text index, and the explanation says so. `scope_alignment` carries any explicit sharing or unverified-alignment caution for the selected source scope, even on an empty result.
+
+## Paginating title matches
+
+`search_texts` returns two separately counted streams. `results`, `total_texts_matched` and `next_offset` describe Pāli-body matches. `title_matches`, `total_title_matches` and `title_next_offset` describe matches in Pāli and linked English translation titles. The requested `offset` and `limit` apply to each stream. Pass `title_next_offset` back as `offset` to continue titles; pass `next_offset` to continue body results. A null pointer means that stream has ended.
+
+Title-only searches can now reach every indexed match. They previously repeated the first 20 titles regardless of offset. English glossary expansion keeps the same literal title stream across pages, including an empty page after its last title; it does not switch to expanded Pāli titles at that point. `english: "only"` with no glossary expansion returns no literal title stream. Exhausted title pages do not claim the query has no matches when earlier pages contained titles. Source text, translation links and coverage are unchanged.
+
+## Quoted phrases pasted from formatted text
+
+Straight double quotes (`"sati buddha"`) and paired curly double quotes (`“sati buddha”`) select the same ordered phrase in canonical, commentary and post-canonical search. Whitespace inside the phrase remains flexible. Quotes do not change the source text or join separate passages. Apostrophes and curly single quotes remain ordinary Pāli punctuation.
+
+When literal Pāli search finds no quoted phrase, spelling retries and the English-question keyword fallback do not discard its phrase constraint. English glossary expansion remains a separate labelled option; use `english: "off"` for literal Pāli phrase search. Unmatched double quotes conservatively disable loose retries, as straight quotes already did.
+
+## Browsing exact identifiers and recorded groups
+
+`browse_canon` uses the same identifier boundaries as canonical search. An exact text ID such as `mn1` or `sn1.1` lists that text without admitting MN 10 or SN 1.10. Named parent IDs such as `pli-tv-bu-vb-pc` still list their descendants. Arbitrary partial names such as `s` return an error.
+
+A recorded group ID such as `dhp1-20` lists its existing members with ordinary pagination. Group membership comes from the bundled index; arbitrary citation ranges are not parsed here. Existing browsing rules for abbreviated records and collection/section menus are retained. Regression checks cover every complete text ID and every recorded group; the isolated installed-package audit repeats exact-ID, invalid-ID and group-pagination checks.
+
+Browsing a member recognised only by group lookup instead returns one card for its recorded source group, with the same `scope_resolution` used by search. An approximate group keeps its `approximate` flag. No separate member card or reconstructed text is created. Regression checks compare all 7,397 current unindexed numeric aliases against public citation resolution; installed-package checks repeat representative complete and approximate group cases. A group with unverified member locations also returns an `alignment` caution; no span is trimmed based on the group's numeric ID alone.
+
+## Quote verification and source boundaries
+
+The Pāli verifier builds a small table of token boundaries for citable source regions alongside its word index. Candidate retrieval, candidate spacing and similarity refinement respect these boundaries. Within a recorded group, matching can span member texts, but the final citation must contain the whole matched block range. Independent neighbouring texts and separate source books cannot contribute to a single match.
+
+`tests/verify-boundaries.test.mjs` derives negative boundary fixtures from bundled source fragments and checks excerpt containment, grouped-verse citations and unchanged ordinary matches. These deliberately juxtaposed fixtures are not scriptural quotations. The installed-package audit repeats the boundary and group checks offline.
+
+## Finding printed edition citations in prose
+
+`find_citations` gives Thai, Myanmar and VRI printed-page references priority over embedded sutta, verse or PTS forms. It retains edition names, optional volume/page words and recognised parenthetical source-book qualifiers, and reports `scheme: "edition"`. Invalid Roman edition volumes and numeric ranges stay edition candidates and return the direct resolver's error; they cannot silently become a different citation scheme.
+
+The scanner remains pattern-based. It takes known source titles for book-qualifier detection; it does not swallow ordinary surrounding parentheses or infer an unknown book. Check forms it does not recognise directly with `resolve_reference`. Tests compare every displayed marked edition label with direct page resolution, preserve Unicode UTF-16 offsets and check surrounding prose. The installed-package audit repeats representative valid, ambiguous and invalid page references offline.
+
+## Validating ordinary citation ranges
+
+Before falling back from an unrecorded range to its first text, canonical resolution checks the final endpoint in the same source index. The parser compares complete multi-level paths and rejects incompatible numbering depths. Recorded groups and members resolved through those groups retain their existing behavior. Identical endpoints do not claim to span several texts.
+
+`tests/citation-range-validation.test.mjs` checks missing endpoints, full-path ordering, known source groups, scanner errors and MCP resolution/retrieval. The installed-package audit repeats the invalid and valid cases. These checks validate endpoints; they do not expand abbreviations, assemble a range into a new text or assert intermediate-number coverage.
+
+## Discovering existing ABT links in citations
+
+`find_citations` recognises Ancient Buddhist Texts URLs as well as the three previously supported link hosts. Landing pages and part pages resolve through the same bundled URL index used by direct citation resolution. Unknown paths remain unresolved, lookalike hosts are excluded, and source path case is preserved. The scanner does not fetch these pages or change the network allowlist. Use URL encoding for spaces in a prose URL.
+
+`tests/find-abt-citations.test.mjs` checks every current ABT landing and part-page link, including an encoded-space path, with original UTF-16 offsets. It also checks surrounding punctuation, query/fragment handling, lookalike hosts and unknown paths. The installed audit repeats all known links through the shipped offline MCP server.
+
+## Paired search quotes and Velthuis input
+
+The shared input normalizer preserves paired straight phrase quotes at word boundaries before applying spelling rules to their contents. An opening quote before `n` is a phrase delimiter in `"namo tassa"`; it must not be consumed as the Velthuis marker for `ṅ`. Words inside the phrase can still be normalized, with the existing labelled changes, while internal markers such as `sa"nkhaara` retain their Velthuis role. An unpaired word-initial marker retains its existing encoding behavior.
+
+`tests/normalised-search-quotes.test.mjs` checks delimiters, line breaks, spelling conversion within phrases and Velthuis markers alongside phrases. It compares straight and curly quote results through all three MCP search tools. The installed-package audit repeats these checks and verifies that a missing phrase remains missing rather than turning into loose keyword matches. Quotation verification and provider fetching are unchanged.
+
+## Proper-name title evidence
+
+`lookup_name` ranks names found in an indexed Pāli or English translation title before opening/body matches. Explicit English title fields are used for ATI and ABT. Known dhammatalks caption formats retain their title text after removing the citation header, including Roman-numbered Dhammapada chapters. Bare bibliographic or generic collection references supply no individual title and are not searched as names.
+
+Each `matched_titles` entry records the exact title, language and source, plus the translator when applicable. Every query word must match one title; words from different editions or the Pāli title cannot be joined to create a name match. The canonical Pāli `title` field stays separate. Body occurrence counts are not added for metadata-only matches. This remains a word search, and the DPPN licence gate still prevents dictionary entries from being bundled.
+
+## Resolving stored translation captions by name
+
+`translation-titles.mjs` supplies the same metadata title extraction to proper-name ranking and reference-name indexing. Explicit English title fields and supported dhammatalks citation-plus-title captions are treated consistently, without indexing bare bibliographic references. The title's existing canonical mapping is retained; the caption's citation header is not used to infer a new mapping.
+
+The reference resolver preserves its article aliases, single-word English topic guard, digit restriction, ambiguity lists and explicit DN/MN convention. Tests exercise every currently eligible stored dhammatalks caption through the public resolver, retaining its mapped ID among the result or ambiguity candidates. Unrecognised caption formats fail the corpus fixture rather than silently disappearing. Installed-package checks repeat representative names, aliases, ambiguity and guard behavior offline.

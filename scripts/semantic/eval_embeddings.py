@@ -4,6 +4,8 @@ produces is shipped. See docs/semantic-search.md for the results and the decisio
 
 Usage (models downloaded by hand from Hugging Face into <models>/<org>/<name>/):
   python -I scripts/semantic/eval_embeddings.py <models dir> [potion] [minilm] [multi]
+First unpack the bundled data into a separate directory and set PALI_CANON_DATA_DIR to it
+(see scripts/canon/README.md).
 Files needed (each under 200 MB):
   potion  minishlab/potion-base-8M/                              model.safetensors, tokenizer.json
   minilm  sentence-transformers/all-MiniLM-L6-v2/                model.safetensors, tokenizer.json
@@ -20,7 +22,7 @@ S = None  # models folder, set from argv in main()
 SKIP = {'title', 'chapter', 'nikaya', 'book', 'subhead'}
 
 def load_units():
-    c = json.load(gzip.open(os.path.join(ROOT, 'server', 'data', 'canon.json.gz'), 'rt', encoding='utf-8'))
+    c = json.load(gzip.open(os.path.join(os.environ.get('PALI_CANON_DATA_DIR', os.path.join(ROOT, 'server', 'data')), 'canon.json.gz'), 'rt', encoding='utf-8'))
     out = []
     for u in c['units']:
         blocks = c['books'][u['book']]['blocks'][u['start']:u['end']]

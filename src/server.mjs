@@ -45,6 +45,7 @@ export const TOOL_TITLES = {
   verify_quote: "Verify a quotation",
   vinaya_rule: "Pātimokkha rule",
   get_commentary: "Read the commentary",
+  search_commentary: "Search the commentary",
   get_parallels: "Find parallels and cross-references",
   get_post_canonical: "Read post-canonical texts",
   search_post_canonical: "Search post-canonical texts",
@@ -197,7 +198,7 @@ export function createServer() {
     };
   }, { network: true });
 
-  tool('search_texts', 'Search the full Pāli text of the Tipiṭaka (diacritics optional; all words must appear; "quoted phrases" allowed), text titles, and English translation titles. Works offline. Pāli typed on an English keyboard (samyutta, sanyutta, Velthuis sa.myutta, Harvard-Kyoto saMyutta) is understood and labelled; an English query (e.g. "mindfulness of breathing") is expanded into Pāli terms from the glossary, labelled expanded_from_english. The query may be written in any supported script; set script for titles and excerpts in that script.', {
+  tool('search_texts', 'Search the full Pāli text of the Tipiṭaka (diacritics optional; all words must appear; "quoted phrases" allowed), text titles, and English translation titles. Title matches have total_title_matches and title_next_offset; use offset and limit to page them. next_offset continues Pāli-body results independently. Works offline. Pāli typed on an English keyboard (samyutta, sanyutta, Velthuis sa.myutta, Harvard-Kyoto saMyutta) is understood and labelled; an English query (e.g. "mindfulness of breathing") is expanded into Pāli terms from the glossary, labelled expanded_from_english. The query may be written in any supported script; set script for titles and excerpts in that script.', {
     query: z.string().trim().min(1).max(300),
     collection: z.string().max(30).optional().describe('Limit to a collection or section, e.g. mn, sn, sn56, an4, dhp, vinaya.'),
     limit: z.number().int().min(1).max(50).default(10),
@@ -217,7 +218,7 @@ export function createServer() {
     return out;
   });
 
-  tool('browse_canon', 'Browse the Tipiṭaka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja…) or a section (sn56, an4, kv1). Use "books" for the complete VRI root-file catalogue and get_text book IDs, including front matter outside individual citation spans. Works offline.', {
+  tool('browse_canon', 'Browse the Tipiṭaka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja…), a section (sn56, an4, kv1), an exact text ID (mn1) or a recorded group ID (dhp1-20). Exact IDs exclude similarly numbered siblings; groups list their recorded members. Use "books" for the complete VRI root-file catalogue and get_text book IDs, including front matter outside individual citation spans. Works offline.', {
     node: z.string().max(60).default('canon'),
     offset: z.number().int().min(0).max(100000).default(0),
     limit: z.number().int().min(1).max(200).default(60),

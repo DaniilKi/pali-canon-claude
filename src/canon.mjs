@@ -1,3 +1,5 @@
+import { searchSegments, searchFold, searchExcerpt, searchTerms } from './search-segments.mjs';
+import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * The bundled Pāli Canon: VRI Chaṭṭha Saṅgāyana text, standard citation IDs aligned to it,
  * PTS page references and English translation links. Everything here works offline.
@@ -6,7 +8,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseCitation, citationId, CitationError } from './citations.mjs';
+import { parseCitation, citationId, rangeEndPath, CitationError } from './citations.mjs';
 import { EDITIONS, editionIndex, editionLabel, lookupEditionPage, nextUnit, textsOnPage, editionPagesFor } from './editions.mjs';
 
 let here;
@@ -73,14 +75,14 @@ export function translationId(t) {
 
 function dataPath(name) {
   const candidates = [join(here, 'data', name), join(here, '..', 'server', 'data', name), join(process.cwd(), 'server', 'data', name)];
-  const found = candidates.find((p) => existsSync(p));
+  const found = candidates.find((p) => bundledExists(p));
   if (!found) throw new Error(`Bundled canon data (${name}) is missing. Reinstall the extension or run the canon build.`);
   return found;
 }
 
 export function load() {
   if (data) return data;
-  const canon = JSON.parse(gunzipSync(readFileSync(dataPath('canon.json.gz'))).toString('utf8'));
+  const canon = JSON.parse(gunzipSync(readBundled(dataPath('canon.json.gz'))).toString('utf8'));
   const translations = JSON.parse(readFileSync(dataPath('translations.json'), 'utf8'));
   mergeAnandajoti(translations);
   const byId = new Map();
@@ -131,8 +133,28 @@ export function linksFor(u) {
   return { links: [], via: null };
 }
 
+/** Describe index certainty without inferring missing or abbreviated source wording. */
+export function alignmentInfo(unit) {
+  if (!unit) return null;
+  if (unit.approximate) {
+    if (unit.shares_passage_with) return { kind: 'shared_passage', shared_with: unit.shares_passage_with,
+      note: `${unit.id} is approximate and shares its indexed source span with ${unit.shares_passage_with}. A separate source span is not asserted; no missing wording is reconstructed.` };
+    return { kind: 'unverified_alignment',
+      note: `${unit.id} has no confirmed independent location in the bundled citation index. The supplied source span is provisional; this does not establish that VRI abbreviates or omits the text.` };
+  }
+  if (!unit.members?.length) return null;
+  const d = load();
+  const uncertain = (unit.members || []).filter((id) => {
+    const member = d.byId.get(id);
+    return member?.approximate && !member.shares_passage_with;
+  });
+  return uncertain.length ? { kind: 'group_with_unverified_members', unverified_members: uncertain,
+    note: `${unit.id} includes unverified member mappings (${uncertain.join(', ')}). Its bundled span can include neighbouring passages; it does not establish separate locations for those members.` } : null;
+}
+
 function unitSummary(u, extra = {}) {
   const d = load();
+  const alignment = alignmentInfo(u);
   return {
     id: u.id,
     citation: u.acronym,
@@ -142,6 +164,7 @@ function unitSummary(u, extra = {}) {
     pts: u.pts ? ptsLabel(u.collection, u.pts.volume, u.pts.page) + (u.pts.end_page && u.pts.end_page !== u.pts.page ? `–${u.pts.end_page}` : '') : null,
     vri_paragraphs: u.vri || null,
     ...(u.approximate ? { approximate: true } : {}),
+    ...(alignment ? { alignment } : {}),
     english_available: linksFor(u).links.length,
     ...extra,
   };
@@ -159,7 +182,7 @@ function lookupId(id) {
   const d = load();
   if (d.byId.has(id)) return { unit: d.byId.get(id), via: 'id' };
   const container = rangeContaining(id);
-  if (container) return { unit: container, via: 'range', note: `${id} is not printed separately; it belongs to ${container.acronym} (${container.id}), which groups abbreviated or short texts.` };
+  if (container) return { unit: container, via: 'range', note: `${id} is not separately indexed; the bundled citation lookup maps it to source group ${container.acronym} (${container.id}).` };
   return null;
 }
 
@@ -219,7 +242,8 @@ export function resolve(reference) {
     if (occurrences.length > 1) notes.push(`VRI marks ${label} ${occurrences.length} times in this book; the first is used.`);
     const others = new Map();
     for (const occ of occurrences) for (const u of textsOnPage(d, c.edition, occ)) if (u.id !== unit.id) others.set(u.id, u);
-    if (unit.approximate) notes.push(`${unit.id} is abbreviated (peyyāla) in the VRI edition; the passage shown is where the abbreviation occurs.`);
+    const alignment = alignmentInfo(unit);
+    if (alignment) notes.push(alignment.note);
     return { unit, notes, alternatives: [...others.values()].slice(0, 3).map((u) => unitSummary(u)) };
   }
   if (c.kind === 'url') {
@@ -229,7 +253,10 @@ export function resolve(reference) {
     notes.push(c.host === 'ancient-buddhist-texts.net'
       ? `Linked from ${c.host}: Ānandajoti Bhikkhu's text and translation of ${id}.`
       : `Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id}.`);
-    return { unit: d.byId.get(id), notes, alternatives: [] };
+    const unit = d.byId.get(id);
+    const alignment = alignmentInfo(unit);
+    if (alignment) notes.push(alignment.note);
+    return { unit, notes, alternatives: [] };
   }
   const id = c.kind === 'uid' ? c.uid : citationId(c);
   let hit = lookupId(id);
@@ -237,7 +264,12 @@ export function resolve(reference) {
     // "MN 10-12" or "Dhp 5-7": a span that is not itself a text → return its first text.
     const first = citationId({ ...c, end: null });
     hit = lookupId(first);
-    if (hit) notes.push(`${reference} spans several texts; showing the first, ${hit.unit.acronym}. Request the others separately.`);
+    if (hit) {
+      const last = citationId({ ...c, path: rangeEndPath(c), end: null });
+      if (!lookupId(last)) throw new CitationError(`${reference}: final range endpoint "${last}" is not in the canon index. Check the range with browse_canon.`);
+      if (last !== first) notes.push(`${reference} spans several texts; showing the first, ${hit.unit.acronym}. Request the others separately.`);
+      else notes.push(`${reference} has identical endpoints; showing ${hit.unit.acronym}.`);
+    }
   }
   if (!hit && c.kind === 'id' && c.collection === 'snp' && c.path.length === 1) {
     throw new CitationError(`Snp ${c.path[0]} looks like a verse number. Cite the Sutta Nipāta by chapter and sutta, e.g. Snp 1.8 (Mettasutta).`);
@@ -259,7 +291,8 @@ export function resolve(reference) {
     throw new CitationError(`${reference} (${id}) is not in the canon index. Check the number with browse_canon("${collection}").`);
   }
   if (hit.note) notes.push(hit.note);
-  if (hit.unit.approximate) notes.push(`${hit.unit.id} is abbreviated (peyyāla) in the VRI edition; the passage shown is where the abbreviation occurs.`);
+  const alignment = alignmentInfo(hit.unit);
+  if (alignment) notes.push(alignment.note);
   const schemes = (d.translations[hit.unit.id] || []).filter((t) => t.reference && /^(AN|SN) \d+:\d+/.test(t.reference))
     .map((t) => t.reference.match(/^(AN|SN) (\d+):(\d+)/)).filter(Boolean)
     .filter((m) => `${m[1].toLowerCase()}${m[2]}.${m[3]}` !== hit.unit.id);
@@ -362,6 +395,33 @@ export function describe(u, notes = []) {
 
 // ---- search ---------------------------------------------------------------
 
+/** Match recorded members and actual identifier descendants, never numbered siblings or partial names. */
+function scopePredicate(d, scope) {
+  const parent = scope && !/\d$/.test(scope);
+  const members = new Set(d.byId.get(scope)?.members || []);
+  return (unit) => {
+    if (!scope || unit.collection === scope || unit.id === scope || members.has(unit.id)) return true;
+    if (!unit.id.startsWith(scope)) return false;
+    const next = unit.id[scope.length];
+    return next === '.' || (parent && (next === '-' || /\d/.test(next || '')));
+  };
+}
+
+// Reuse citation lookup's recorded group mapping; an unprinted member is never a new text.
+function groupedScope(d, key, requested) {
+  if (!key || d.byId.has(key)) return null;
+  const hit = lookupId(key);
+  if (hit?.via !== 'range') return null;
+  return {
+    unit: hit.unit,
+    metadata: {
+      requested, resolved_id: hit.unit.id, approximate: !!hit.unit.approximate,
+      note: hit.note + (hit.unit.approximate ? ' The approximate group itself is excluded from the full-text search index.' : ''),
+      read_with: { tool: 'get_text', uid: hit.unit.id },
+    },
+  };
+}
+
 function buildSearch() {
   const d = load();
   const owner = d.canon.books.map((b) => new Array(b.blocks.length).fill(null));
@@ -370,19 +430,22 @@ function buildSearch() {
     // Later writers win: ranges first, then larger texts, so each block belongs to its most specific text.
     .sort((a, b) => (b.kind === 'range') - (a.kind === 'range') || (b.end - b.start) - (a.end - a.start));
   for (const u of sorted) for (let i = u.start; i < u.end; i += 1) owner[u.book][i] = u;
-  const folded = d.canon.books.map((b) => b.blocks.map((blk) => fold(blk[2])));
+  const passages = d.canon.books.map((book, bi) => searchSegments(book.blocks, (i) => owner[bi][i])
+    .map((segment) => ({ ...segment, folded: searchFold(segment.text, fold) })));
   const titles = d.canon.units.filter((u) => !u.approximate).map((u) => {
     const english = (d.translations[u.id] || []).map((t) => `${t.reference || ''} ${t.english || ''}`).join(' ');
     return { u, text: fold(`${u.acronym} ${u.title} ${english}`) };
   });
-  d.search = { owner, folded, titles };
+  // Proper-name lookup still ranks matches per XML paragraph; preserve its index lazily.
+  let folded;
+  d.search = { owner, passages, titles, get folded() {
+    return folded ||= d.canon.books.map((book) => book.blocks.map((block) => fold(block[2])));
+  } };
   return d.search;
 }
 
 function terms(query) {
-  const phrases = [...query.matchAll(/"([^"]+)"/g)].map((m) => fold(m[1]).trim()).filter(Boolean);
-  const words = fold(query.replace(/"[^"]+"/g, ' ')).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
-  return [...phrases, ...words];
+  return searchTerms(query, fold);
 }
 
 /**
@@ -391,38 +454,46 @@ function terms(query) {
  */
 export function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const d = load();
+  const filter = collection ? fold(collection).replace(/\s+/g, '') : null;
+  const resolved = groupedScope(d, filter, collection);
+  const okCollection = scopePredicate(d, resolved?.unit.id || filter);
+  const scopeAlignment = alignmentInfo(d.byId.get(resolved?.unit.id || filter));
+  if (collection && (!filter || !d.canon.units.some(okCollection))) {
+    throw new Error(`Unknown canonical search scope "${collection}". Use browse_canon to list collection and section IDs.`);
+  }
   const s = d.search || buildSearch();
-  const wanted = groups?.length ? groups.map((g) => g.map((w) => fold(w))) : terms(query).map((w) => [w]);
+  const wanted = groups?.length ? groups.map((g) => g.map((w) => searchFold(w, fold))) : terms(query).map((w) => [w]);
   if (!wanted.length) throw new Error('Search needs at least one word of two or more letters.');
   const has = (text) => wanted.every((alts) => alts.some((w) => text.includes(w)));
-  const filter = collection ? fold(collection).replace(/\s+/g, '') : null;
-  const okCollection = (u) => !filter || u.collection === filter || u.id.startsWith(filter);
-  const titleHits = s.titles.filter(({ u, text }) => okCollection(u) && has(text))
-    .slice(0, 20).map(({ u }) => unitSummary(u));
+  const matchingTitles = s.titles.filter(({ u, text }) => okCollection(u) && has(text));
+  const titleHits = matchingTitles.slice(offset, offset + limit).map(({ u }) => unitSummary(u));
   const hits = [];
   const seen = new Set();
   let total = 0;
-  for (let bi = 0; bi < s.folded.length; bi += 1) {
-    const blocks = s.folded[bi];
-    for (let k = 0; k < blocks.length; k += 1) {
-      const text = blocks[k];
+  for (let bi = 0; bi < s.passages.length; bi += 1) {
+    for (const passage of s.passages[bi]) {
+      const k = passage.start;
+      const text = passage.folded;
       if (!has(text)) continue;
       const u = s.owner[bi][k];
       if (!u || !okCollection(u) || seen.has(u.id)) continue;
       seen.add(u.id);
       total += 1;
       if (total <= offset || hits.length >= limit) continue;
-      const original = d.canon.books[bi].blocks[k][2];
-      const at = Math.max(0, text.indexOf(wanted[0].find((w) => text.includes(w))) - 80);
+      const excerpt = searchExcerpt(passage.text, wanted[0].find((w) => text.includes(w)), fold);
       hits.push({ ...unitSummary(u), match_vri_paragraph: d.canon.books[bi].blocks[k][1] || undefined,
-        excerpt: (at ? '…' : '') + original.slice(at, at + 260) + (original.length > at + 260 ? '…' : '') });
+        excerpt });
     }
   }
   return {
     query, searched: 'Full Pāli text of the VRI Chaṭṭha Saṅgāyana edition (diacritics optional), text titles and English translation titles.',
-    title_matches: titleHits, results: hits, total_texts_matched: total, offset, limit,
-    next_offset: offset + limit < total ? offset + limit : null,
-    tip: total === 0 && !titleHits.length ? 'Search Pāli words (e.g. "satipatthana", "anapanassati") or an English title word. For English topics also try search_access_to_insight.' : undefined,
+    ...(resolved ? { scope_resolution: resolved.metadata } : {}),
+    ...(scopeAlignment ? { scope_alignment: scopeAlignment } : {}),
+    title_matches: titleHits, total_title_matches: matchingTitles.length,
+    title_next_offset: limit > 0 && offset + limit < matchingTitles.length ? offset + limit : null,
+    results: hits, total_texts_matched: total, offset, limit,
+    next_offset: limit > 0 && offset + limit < total ? offset + limit : null,
+    tip: total === 0 && !matchingTitles.length ? 'Search Pāli words (e.g. "satipatthana", "anapanassati") or an English title word. For English topics also try search_access_to_insight.' : undefined,
   };
 }
 
@@ -431,8 +502,14 @@ export function search(query, { collection, limit = 10, offset = 0, groups } = {
 export function browse(node = 'canon', { offset = 0, limit = 60 } = {}) {
   const d = load();
   const key = fold(node).replace(/\s+/g, '');
-  const units = d.canon.units.filter((u) => !u.approximate);
   const page = (items) => ({ total: items.length, offset, limit, next_offset: offset + limit < items.length ? offset + limit : null, items: items.slice(offset, offset + limit) });
+  const resolved = groupedScope(d, key, node);
+  if (resolved) {
+    const collection = resolved.unit.collection;
+    return { node: key, name: COLLECTION_NAMES[collection] || collection, collection,
+      scope_resolution: resolved.metadata, ...page([unitSummary(resolved.unit)]) };
+  }
+  const units = d.canon.units.filter((u) => !u.approximate);
   if (['canon', 'tipitaka', 'all', ''].includes(key)) {
     return { node: 'canon', ...page(COLLECTION_ORDER.map((c) => ({ id: c, name: COLLECTION_NAMES[c], pitaka: PITAKA[c] || 'sutta', texts: units.filter((u) => u.collection === c && u.kind !== 'range').length }))) };
   }
@@ -449,13 +526,14 @@ export function browse(node = 'canon', { offset = 0, limit = 60 } = {}) {
     }
     return { node: key, name: COLLECTION_NAMES[key], note: 'Open a section ID to list its texts.', ...page([...sections.values()]) };
   }
-  let members = units.filter((u) => (u.collection === key || sectionOf(u.id) === key) && u.kind !== 'range');
-  if (!members.length) members = units.filter((u) => u.id.startsWith(`${key}.`) && u.kind !== 'range');
-  if (!members.length) members = units.filter((u) => u.id.startsWith(key) && u.kind !== 'range');
+  const inScope = scopePredicate(d, key);
+  const members = units.filter((u) => u.kind !== 'range' && inScope(u));
   if (!members.length) throw new Error(`Unknown browse node "${node}". Start with "canon", "sutta", "vinaya", "abhidhamma" or a collection such as mn, sn, sn56, an4, dhp.`);
   members.sort((a, b) => a.book - b.book || a.start - b.start);
   const collection = members[0].collection;
-  return { node: key, name: COLLECTION_NAMES[key] || COLLECTION_NAMES[collection] || collection, ...(key !== collection ? { collection } : {}), ...page(members.map((u) => unitSummary(u))) };
+  const alignment = alignmentInfo(d.byId.get(key));
+  return { node: key, name: COLLECTION_NAMES[key] || COLLECTION_NAMES[collection] || collection, ...(key !== collection ? { collection } : {}),
+    ...(alignment ? { alignment } : {}), ...page(members.map((u) => unitSummary(u))) };
 }
 
 export const _test = { lookupId, rangeContaining, ptsLookup };

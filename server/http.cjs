@@ -23689,6 +23689,7 @@ __export(canon_exports, {
   ANANDAJOTI_BASE: () => ANANDAJOTI_BASE,
   ANANDAJOTI_LICENSE: () => ANANDAJOTI_LICENSE,
   _test: () => _test2,
+  alignmentInfo: () => alignmentInfo,
   anandajotiInfo: () => anandajotiInfo,
   browse: () => browse,
   describe: () => describe,
@@ -23702,10 +23703,93 @@ __export(canon_exports, {
   sourceName: () => sourceName,
   translationId: () => translationId
 });
+
+// src/search-segments.mjs
+var VERSE = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
+var searchFold = (text, fold8) => fold8(text).replace(/\s+/gu, " ");
+function searchTerms(query, fold8) {
+  const paired = /"([^"]+)"|“([^”]+)”/gu;
+  const text = String(query);
+  const phrases = [...text.matchAll(paired)].map((match2) => searchFold(match2[1] ?? match2[2], fold8).trim()).filter(Boolean);
+  const words3 = fold8(text.replace(paired, " ")).split(/[^a-z0-9]+/u).filter((word) => word.length > 1);
+  return [...phrases, ...words3];
+}
+var hasSearchQuotes = (query) => /["“”]/u.test(query);
+function searchSegments(blocks, owner = () => null) {
+  const out = [];
+  let stanza = null;
+  let previousOwner;
+  const flush = () => {
+    if (stanza?.text) out.push(stanza);
+    stanza = null;
+  };
+  blocks.forEach(([rend, , text], i) => {
+    const currentOwner = owner(i);
+    if (currentOwner !== previousOwner) flush();
+    previousOwner = currentOwner;
+    if (rend === "hangnum") {
+      flush();
+      stanza = { start: i, end: i + 1, text: "" };
+      return;
+    }
+    if (VERSE.has(rend)) {
+      stanza ||= { start: i, end: i + 1, text: "" };
+      stanza.text += (stanza.text ? "\n" : "") + text;
+      stanza.end = i + 1;
+      if (rend === "gathalast") flush();
+      return;
+    }
+    flush();
+    if (text) out.push({ start: i, end: i + 1, text });
+  });
+  flush();
+  return out;
+}
+function searchExcerpt(original, needle, fold8) {
+  const escape3 = (part) => part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const pattern = new RegExp(needle.split(/\s+/u).map(escape3).join("\\s+"), "u");
+  const found = pattern.exec(fold8(original));
+  const at = Math.max(0, (found?.index ?? 0) - 80);
+  return (at ? "\u2026" : "") + original.slice(at, at + 260) + (original.length > at + 260 ? "\u2026" : "");
+}
+
+// src/bundled-data.mjs
 var import_node_fs = require("node:fs");
-var import_node_zlib = require("node:zlib");
 var import_node_path = require("node:path");
 var import_node_url = require("node:url");
+var import_node_crypto = require("node:crypto");
+var pathString = (path) => path instanceof URL ? (0, import_node_url.fileURLToPath)(path) : path;
+var shardManifest = (path) => `${pathString(path)}.parts.json`;
+var bundledExists = (path) => (0, import_node_fs.existsSync)(path) || (0, import_node_fs.existsSync)(shardManifest(path));
+var sha256 = (bytes) => (0, import_node_crypto.createHash)("sha256").update(bytes).digest("hex");
+function readBundled(path) {
+  path = pathString(path);
+  if ((0, import_node_fs.existsSync)(path)) return (0, import_node_fs.readFileSync)(path);
+  const manifest = JSON.parse((0, import_node_fs.readFileSync)(shardManifest(path), "utf8"));
+  const invalid = () => {
+    throw new Error(`Invalid bundled data shards: ${(0, import_node_path.basename)(path)}`);
+  };
+  if (manifest.version !== 1 || !Number.isSafeInteger(manifest.size) || manifest.size < 1 || !/^[a-f0-9]{64}$/.test(manifest.sha256) || !Array.isArray(manifest.parts) || !manifest.parts.length) invalid();
+  let size = 0;
+  const chunks = manifest.parts.map((part, i) => {
+    const name = `${(0, import_node_path.basename)(path)}.part-${String(i + 1).padStart(4, "0")}`;
+    if (part.file !== name || !Number.isSafeInteger(part.size) || part.size < 1 || part.size >= 5 * 1024 * 1024 || !/^[a-f0-9]{64}$/.test(part.sha256)) invalid();
+    const bytes2 = (0, import_node_fs.readFileSync)((0, import_node_path.join)((0, import_node_path.dirname)(path), name));
+    if (bytes2.length !== part.size || sha256(bytes2) !== part.sha256) invalid();
+    size += bytes2.length;
+    return bytes2;
+  });
+  if (size !== manifest.size) invalid();
+  const bytes = Buffer.concat(chunks);
+  if (sha256(bytes) !== manifest.sha256) invalid();
+  return bytes;
+}
+
+// src/canon.mjs
+var import_node_fs2 = require("node:fs");
+var import_node_zlib = require("node:zlib");
+var import_node_path2 = require("node:path");
+var import_node_url2 = require("node:url");
 
 // src/editions.mjs
 var EDITIONS = {
@@ -23790,6 +23874,10 @@ var VINAYA_SCOPES = {
 };
 var fold = (value) => String(value ?? "").normalize("NFD").replace(new RegExp("\\p{M}", "gu"), "").toLowerCase();
 var stem = (title) => fold(title).replace(/\(.*?\)/g, "").replace(/[^a-z]/g, "").replace(/pali$/, "").replace(/[aom]+$/, "");
+function matchesEditionBook(title, qualifier) {
+  const want = stem(qualifier);
+  return want.length >= 3 && stem(title).startsWith(want);
+}
 function editionIndex(d) {
   if (d.editions) return d.editions;
   const { books, units } = d.canon;
@@ -23842,8 +23930,7 @@ function lookupEditionPage(d, c, ErrorClass = Error) {
     if (list) found.push(...list);
   }
   if (c.book) {
-    const want = stem(c.book);
-    const filtered = found.filter((x) => want.length >= 3 && stem(d.canon.books[x.book].title).startsWith(want));
+    const filtered = found.filter((x) => matchesEditionBook(d.canon.books[x.book].title, c.book));
     if (!filtered.length && found.length) {
       const titles = [...new Set(found.map((x) => d.canon.books[x.book].title))];
       throw new ErrorClass(`${c.raw}: "${c.book}" does not match a book carrying ${edName} page ${c.volume ? `${c.volume}.` : ""}${c.page}. It occurs in: ${titles.join(", ")}.`);
@@ -24260,8 +24347,17 @@ function parseCitation(input) {
   if (!collection) throw new CitationError(`Unknown collection "${name}". Known: DN, MN, SN, AN, Kp, Dhp, Ud, Iti, Snp (Sn), Vv, Pv, Thag, Thig, Ap, Bv, Cp, Ja, Mnd, Cnd, Ps, Mil, Ne, Pe, Vinaya (Pj, Ss, Pc, Kd, Pvr\u2026) and Abhidhamma books.`);
   const nums = numbers(m[2]);
   if (!nums) throw new CitationError(`Could not read the number in "${raw}".`);
-  if (typeof nums.end === "number" && nums.end < nums.path[nums.path.length - 1]) throw new CitationError(`"${raw}" is a reversed range.`);
+  if (nums.end !== null) rangeEndPath({ ...nums, raw });
   return { kind: "id", collection, path: nums.path, end: nums.end, raw };
+}
+function rangeEndPath(c) {
+  const end = Array.isArray(c.end) ? c.end : [...c.path.slice(0, -1), c.end];
+  if (end.length !== c.path.length) throw new CitationError(`"${c.raw}" range endpoints must use the same number of levels.`);
+  for (let i = 0; i < end.length; i += 1) {
+    if (end[i] < c.path[i]) throw new CitationError(`"${c.raw}" is a reversed range.`);
+    if (end[i] > c.path[i]) break;
+  }
+  return end;
 }
 function citationId(c) {
   const body = c.path.join(".");
@@ -24276,12 +24372,12 @@ var here;
 try {
   here = __dirname;
 } catch {
-  here = (0, import_node_path.dirname)((0, import_node_url.fileURLToPath)(import_meta.url));
+  here = (0, import_node_path2.dirname)((0, import_node_url2.fileURLToPath)(import_meta.url));
 }
 var ROMAN2 = ["", "i", "ii", "iii", "iv", "v", "vi", "vii"];
 var HEADING = /* @__PURE__ */ new Set(["subhead", "title", "chapter", "book", "nikaya", "subsubhead"]);
 var CENTRE_HEADING = /(niṭṭhit[aāo]ṃ?|niṭṭhitā|samattaṃ|samattā)\.?$|^Namo tassa|uddānaṃ$/i;
-var VERSE = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
+var VERSE2 = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
 var PITAKA = { vinaya: "vinaya", ds: "abhidhamma", vb: "abhidhamma", dt: "abhidhamma", pp: "abhidhamma", kv: "abhidhamma", ya: "abhidhamma", patthana: "abhidhamma" };
 var COLLECTION_ORDER = ["vinaya", "dn", "mn", "sn", "an", "kp", "dhp", "ud", "iti", "snp", "vv", "pv", "thag", "thig", "ap", "bv", "cp", "ja", "mnd", "cnd", "ps", "mil", "ne", "pe", "ds", "vb", "dt", "pp", "kv", "ya", "patthana"];
 var COLLECTION_NAMES = {
@@ -24362,7 +24458,7 @@ function mergeAnandajoti(translations) {
   } catch {
     return;
   }
-  const aj = JSON.parse((0, import_node_fs.readFileSync)(file, "utf8"));
+  const aj = JSON.parse((0, import_node_fs2.readFileSync)(file, "utf8"));
   anandajotiSource = aj.source;
   for (const [id, l] of Object.entries(aj.links)) {
     (translations[id] ||= []).push({
@@ -24391,15 +24487,15 @@ function translationId(t) {
   return `dt:${t.url.split("/suttas/")[1].replace(/\.html$/, "")}`;
 }
 function dataPath(name) {
-  const candidates = [(0, import_node_path.join)(here, "data", name), (0, import_node_path.join)(here, "..", "server", "data", name), (0, import_node_path.join)(process.cwd(), "server", "data", name)];
-  const found = candidates.find((p) => (0, import_node_fs.existsSync)(p));
+  const candidates = [(0, import_node_path2.join)(here, "data", name), (0, import_node_path2.join)(here, "..", "server", "data", name), (0, import_node_path2.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => bundledExists(p));
   if (!found) throw new Error(`Bundled canon data (${name}) is missing. Reinstall the extension or run the canon build.`);
   return found;
 }
 function load() {
   if (data) return data;
-  const canon = JSON.parse((0, import_node_zlib.gunzipSync)((0, import_node_fs.readFileSync)(dataPath("canon.json.gz"))).toString("utf8"));
-  const translations = JSON.parse((0, import_node_fs.readFileSync)(dataPath("translations.json"), "utf8"));
+  const canon = JSON.parse((0, import_node_zlib.gunzipSync)(readBundled(dataPath("canon.json.gz"))).toString("utf8"));
+  const translations = JSON.parse((0, import_node_fs2.readFileSync)(dataPath("translations.json"), "utf8"));
   mergeAnandajoti(translations);
   const byId = /* @__PURE__ */ new Map();
   for (const u of canon.units) if (!byId.has(u.id)) byId.set(u.id, u);
@@ -24441,8 +24537,34 @@ function linksFor(u) {
   if (container && d.translations[container.id]?.length) return { links: d.translations[container.id], via: container };
   return { links: [], via: null };
 }
+function alignmentInfo(unit) {
+  if (!unit) return null;
+  if (unit.approximate) {
+    if (unit.shares_passage_with) return {
+      kind: "shared_passage",
+      shared_with: unit.shares_passage_with,
+      note: `${unit.id} is approximate and shares its indexed source span with ${unit.shares_passage_with}. A separate source span is not asserted; no missing wording is reconstructed.`
+    };
+    return {
+      kind: "unverified_alignment",
+      note: `${unit.id} has no confirmed independent location in the bundled citation index. The supplied source span is provisional; this does not establish that VRI abbreviates or omits the text.`
+    };
+  }
+  if (!unit.members?.length) return null;
+  const d = load();
+  const uncertain = (unit.members || []).filter((id) => {
+    const member = d.byId.get(id);
+    return member?.approximate && !member.shares_passage_with;
+  });
+  return uncertain.length ? {
+    kind: "group_with_unverified_members",
+    unverified_members: uncertain,
+    note: `${unit.id} includes unverified member mappings (${uncertain.join(", ")}). Its bundled span can include neighbouring passages; it does not establish separate locations for those members.`
+  } : null;
+}
 function unitSummary(u, extra = {}) {
   const d = load();
+  const alignment = alignmentInfo(u);
   return {
     id: u.id,
     citation: u.acronym,
@@ -24452,6 +24574,7 @@ function unitSummary(u, extra = {}) {
     pts: u.pts ? ptsLabel(u.collection, u.pts.volume, u.pts.page) + (u.pts.end_page && u.pts.end_page !== u.pts.page ? `\u2013${u.pts.end_page}` : "") : null,
     vri_paragraphs: u.vri || null,
     ...u.approximate ? { approximate: true } : {},
+    ...alignment ? { alignment } : {},
     english_available: linksFor(u).links.length,
     ...extra
   };
@@ -24467,7 +24590,7 @@ function lookupId(id) {
   const d = load();
   if (d.byId.has(id)) return { unit: d.byId.get(id), via: "id" };
   const container = rangeContaining(id);
-  if (container) return { unit: container, via: "range", note: `${id} is not printed separately; it belongs to ${container.acronym} (${container.id}), which groups abbreviated or short texts.` };
+  if (container) return { unit: container, via: "range", note: `${id} is not separately indexed; the bundled citation lookup maps it to source group ${container.acronym} (${container.id}).` };
   return null;
 }
 function ptsLookup(c) {
@@ -24518,7 +24641,8 @@ function resolve(reference) {
     if (occurrences.length > 1) notes.push(`VRI marks ${label} ${occurrences.length} times in this book; the first is used.`);
     const others = /* @__PURE__ */ new Map();
     for (const occ of occurrences) for (const u of textsOnPage(d, c.edition, occ)) if (u.id !== unit.id) others.set(u.id, u);
-    if (unit.approximate) notes.push(`${unit.id} is abbreviated (peyy\u0101la) in the VRI edition; the passage shown is where the abbreviation occurs.`);
+    const alignment2 = alignmentInfo(unit);
+    if (alignment2) notes.push(alignment2.note);
     return { unit, notes, alternatives: [...others.values()].slice(0, 3).map((u) => unitSummary(u)) };
   }
   if (c.kind === "url") {
@@ -24526,14 +24650,22 @@ function resolve(reference) {
     const id2 = d.urlIndex.get(key3) || d.urlIndex.get(key3.replace(/^accesstoinsight\.org/, "accesstoinsight.org"));
     if (!id2) throw new CitationError("That page is not linked to a canon text in the bundled index. Give the sutta citation instead.");
     notes.push(c.host === "ancient-buddhist-texts.net" ? `Linked from ${c.host}: \u0100nandajoti Bhikkhu's text and translation of ${id2}.` : `Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id2}.`);
-    return { unit: d.byId.get(id2), notes, alternatives: [] };
+    const unit = d.byId.get(id2);
+    const alignment2 = alignmentInfo(unit);
+    if (alignment2) notes.push(alignment2.note);
+    return { unit, notes, alternatives: [] };
   }
   const id = c.kind === "uid" ? c.uid : citationId(c);
   let hit = lookupId(id);
   if (!hit && c.kind === "id" && c.end !== null && c.end !== void 0) {
     const first = citationId({ ...c, end: null });
     hit = lookupId(first);
-    if (hit) notes.push(`${reference} spans several texts; showing the first, ${hit.unit.acronym}. Request the others separately.`);
+    if (hit) {
+      const last = citationId({ ...c, path: rangeEndPath(c), end: null });
+      if (!lookupId(last)) throw new CitationError(`${reference}: final range endpoint "${last}" is not in the canon index. Check the range with browse_canon.`);
+      if (last !== first) notes.push(`${reference} spans several texts; showing the first, ${hit.unit.acronym}. Request the others separately.`);
+      else notes.push(`${reference} has identical endpoints; showing ${hit.unit.acronym}.`);
+    }
   }
   if (!hit && c.kind === "id" && c.collection === "snp" && c.path.length === 1) {
     throw new CitationError(`Snp ${c.path[0]} looks like a verse number. Cite the Sutta Nip\u0101ta by chapter and sutta, e.g. Snp 1.8 (Mettasutta).`);
@@ -24554,7 +24686,8 @@ function resolve(reference) {
     throw new CitationError(`${reference} (${id}) is not in the canon index. Check the number with browse_canon("${collection}").`);
   }
   if (hit.note) notes.push(hit.note);
-  if (hit.unit.approximate) notes.push(`${hit.unit.id} is abbreviated (peyy\u0101la) in the VRI edition; the passage shown is where the abbreviation occurs.`);
+  const alignment = alignmentInfo(hit.unit);
+  if (alignment) notes.push(alignment.note);
   const schemes = (d.translations[hit.unit.id] || []).filter((t) => t.reference && /^(AN|SN) \d+:\d+/.test(t.reference)).map((t) => t.reference.match(/^(AN|SN) (\d+):(\d+)/)).filter(Boolean).filter((m) => `${m[1].toLowerCase()}${m[2]}.${m[3]}` !== hit.unit.id);
   if (schemes.length) notes.push(`Also numbered ${schemes[0][1]} ${schemes[0][2]}.${schemes[0][3]} in the PTS-based numbering used by \u1E6Ch\u0101nissaro Bhikkhu (dhammatalks.org) and Access to Insight.`);
   return { unit: hit.unit, notes, alternatives: [] };
@@ -24591,7 +24724,7 @@ function segments(u, { includeNotes = false } = {}) {
       stanza = { type: "verse", vri: n, text: "", pts: [], eds };
       continue;
     }
-    if (VERSE.has(rend)) {
+    if (VERSE2.has(rend)) {
       if (!stanza) stanza = { type: "verse", vri: n, text: "", pts: [], eds: [] };
       stanza.text += (stanza.text ? "\n" : "") + text;
       stanza.pts.push(...pts);
@@ -24663,72 +24796,118 @@ function describe(u, notes = []) {
     first_line: blocks.slice(u.start, u.end).find((b) => !HEADING.has(b[0]) && !(b[0] === "centre" && CENTRE_HEADING.test(b[2])) && b[2])?.[2]?.slice(0, 160) || null
   };
 }
+function scopePredicate(d, scope) {
+  const parent = scope && !/\d$/.test(scope);
+  const members = new Set(d.byId.get(scope)?.members || []);
+  return (unit) => {
+    if (!scope || unit.collection === scope || unit.id === scope || members.has(unit.id)) return true;
+    if (!unit.id.startsWith(scope)) return false;
+    const next = unit.id[scope.length];
+    return next === "." || parent && (next === "-" || /\d/.test(next || ""));
+  };
+}
+function groupedScope(d, key3, requested) {
+  if (!key3 || d.byId.has(key3)) return null;
+  const hit = lookupId(key3);
+  if (hit?.via !== "range") return null;
+  return {
+    unit: hit.unit,
+    metadata: {
+      requested,
+      resolved_id: hit.unit.id,
+      approximate: !!hit.unit.approximate,
+      note: hit.note + (hit.unit.approximate ? " The approximate group itself is excluded from the full-text search index." : ""),
+      read_with: { tool: "get_text", uid: hit.unit.id }
+    }
+  };
+}
 function buildSearch() {
   const d = load();
   const owner = d.canon.books.map((b) => new Array(b.blocks.length).fill(null));
   const sorted = [...d.canon.units].filter((u) => !u.approximate).sort((a, b) => (b.kind === "range") - (a.kind === "range") || b.end - b.start - (a.end - a.start));
   for (const u of sorted) for (let i = u.start; i < u.end; i += 1) owner[u.book][i] = u;
-  const folded = d.canon.books.map((b) => b.blocks.map((blk) => fold3(blk[2])));
+  const passages = d.canon.books.map((book, bi) => searchSegments(book.blocks, (i) => owner[bi][i]).map((segment) => ({ ...segment, folded: searchFold(segment.text, fold3) })));
   const titles = d.canon.units.filter((u) => !u.approximate).map((u) => {
     const english2 = (d.translations[u.id] || []).map((t) => `${t.reference || ""} ${t.english || ""}`).join(" ");
     return { u, text: fold3(`${u.acronym} ${u.title} ${english2}`) };
   });
-  d.search = { owner, folded, titles };
+  let folded;
+  d.search = { owner, passages, titles, get folded() {
+    return folded ||= d.canon.books.map((book) => book.blocks.map((block) => fold3(block[2])));
+  } };
   return d.search;
 }
 function terms(query) {
-  const phrases = [...query.matchAll(/"([^"]+)"/g)].map((m) => fold3(m[1]).trim()).filter(Boolean);
-  const words3 = fold3(query.replace(/"[^"]+"/g, " ")).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
-  return [...phrases, ...words3];
+  return searchTerms(query, fold3);
 }
 function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const d = load();
+  const filter = collection ? fold3(collection).replace(/\s+/g, "") : null;
+  const resolved = groupedScope(d, filter, collection);
+  const okCollection = scopePredicate(d, resolved?.unit.id || filter);
+  const scopeAlignment = alignmentInfo(d.byId.get(resolved?.unit.id || filter));
+  if (collection && (!filter || !d.canon.units.some(okCollection))) {
+    throw new Error(`Unknown canonical search scope "${collection}". Use browse_canon to list collection and section IDs.`);
+  }
   const s = d.search || buildSearch();
-  const wanted = groups?.length ? groups.map((g) => g.map((w) => fold3(w))) : terms(query).map((w) => [w]);
+  const wanted = groups?.length ? groups.map((g) => g.map((w) => searchFold(w, fold3))) : terms(query).map((w) => [w]);
   if (!wanted.length) throw new Error("Search needs at least one word of two or more letters.");
   const has = (text) => wanted.every((alts) => alts.some((w) => text.includes(w)));
-  const filter = collection ? fold3(collection).replace(/\s+/g, "") : null;
-  const okCollection = (u) => !filter || u.collection === filter || u.id.startsWith(filter);
-  const titleHits = s.titles.filter(({ u, text }) => okCollection(u) && has(text)).slice(0, 20).map(({ u }) => unitSummary(u));
+  const matchingTitles = s.titles.filter(({ u, text }) => okCollection(u) && has(text));
+  const titleHits = matchingTitles.slice(offset, offset + limit).map(({ u }) => unitSummary(u));
   const hits = [];
   const seen = /* @__PURE__ */ new Set();
   let total = 0;
-  for (let bi = 0; bi < s.folded.length; bi += 1) {
-    const blocks = s.folded[bi];
-    for (let k = 0; k < blocks.length; k += 1) {
-      const text = blocks[k];
+  for (let bi = 0; bi < s.passages.length; bi += 1) {
+    for (const passage of s.passages[bi]) {
+      const k = passage.start;
+      const text = passage.folded;
       if (!has(text)) continue;
       const u = s.owner[bi][k];
       if (!u || !okCollection(u) || seen.has(u.id)) continue;
       seen.add(u.id);
       total += 1;
       if (total <= offset || hits.length >= limit) continue;
-      const original = d.canon.books[bi].blocks[k][2];
-      const at = Math.max(0, text.indexOf(wanted[0].find((w) => text.includes(w))) - 80);
+      const excerpt = searchExcerpt(passage.text, wanted[0].find((w) => text.includes(w)), fold3);
       hits.push({
         ...unitSummary(u),
         match_vri_paragraph: d.canon.books[bi].blocks[k][1] || void 0,
-        excerpt: (at ? "\u2026" : "") + original.slice(at, at + 260) + (original.length > at + 260 ? "\u2026" : "")
+        excerpt
       });
     }
   }
   return {
     query,
     searched: "Full P\u0101li text of the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition (diacritics optional), text titles and English translation titles.",
+    ...resolved ? { scope_resolution: resolved.metadata } : {},
+    ...scopeAlignment ? { scope_alignment: scopeAlignment } : {},
     title_matches: titleHits,
+    total_title_matches: matchingTitles.length,
+    title_next_offset: limit > 0 && offset + limit < matchingTitles.length ? offset + limit : null,
     results: hits,
     total_texts_matched: total,
     offset,
     limit,
-    next_offset: offset + limit < total ? offset + limit : null,
-    tip: total === 0 && !titleHits.length ? 'Search P\u0101li words (e.g. "satipatthana", "anapanassati") or an English title word. For English topics also try search_access_to_insight.' : void 0
+    next_offset: limit > 0 && offset + limit < total ? offset + limit : null,
+    tip: total === 0 && !matchingTitles.length ? 'Search P\u0101li words (e.g. "satipatthana", "anapanassati") or an English title word. For English topics also try search_access_to_insight.' : void 0
   };
 }
 function browse(node = "canon", { offset = 0, limit = 60 } = {}) {
   const d = load();
   const key3 = fold3(node).replace(/\s+/g, "");
-  const units = d.canon.units.filter((u) => !u.approximate);
   const page = (items) => ({ total: items.length, offset, limit, next_offset: offset + limit < items.length ? offset + limit : null, items: items.slice(offset, offset + limit) });
+  const resolved = groupedScope(d, key3, node);
+  if (resolved) {
+    const collection2 = resolved.unit.collection;
+    return {
+      node: key3,
+      name: COLLECTION_NAMES[collection2] || collection2,
+      collection: collection2,
+      scope_resolution: resolved.metadata,
+      ...page([unitSummary(resolved.unit)])
+    };
+  }
+  const units = d.canon.units.filter((u) => !u.approximate);
   if (["canon", "tipitaka", "all", ""].includes(key3)) {
     return { node: "canon", ...page(COLLECTION_ORDER.map((c) => ({ id: c, name: COLLECTION_NAMES[c], pitaka: PITAKA[c] || "sutta", texts: units.filter((u) => u.collection === c && u.kind !== "range").length }))) };
   }
@@ -24745,13 +24924,19 @@ function browse(node = "canon", { offset = 0, limit = 60 } = {}) {
     }
     return { node: key3, name: COLLECTION_NAMES[key3], note: "Open a section ID to list its texts.", ...page([...sections.values()]) };
   }
-  let members = units.filter((u) => (u.collection === key3 || sectionOf(u.id) === key3) && u.kind !== "range");
-  if (!members.length) members = units.filter((u) => u.id.startsWith(`${key3}.`) && u.kind !== "range");
-  if (!members.length) members = units.filter((u) => u.id.startsWith(key3) && u.kind !== "range");
+  const inScope = scopePredicate(d, key3);
+  const members = units.filter((u) => u.kind !== "range" && inScope(u));
   if (!members.length) throw new Error(`Unknown browse node "${node}". Start with "canon", "sutta", "vinaya", "abhidhamma" or a collection such as mn, sn, sn56, an4, dhp.`);
   members.sort((a, b) => a.book - b.book || a.start - b.start);
   const collection = members[0].collection;
-  return { node: key3, name: COLLECTION_NAMES[key3] || COLLECTION_NAMES[collection] || collection, ...key3 !== collection ? { collection } : {}, ...page(members.map((u) => unitSummary(u))) };
+  const alignment = alignmentInfo(d.byId.get(key3));
+  return {
+    node: key3,
+    name: COLLECTION_NAMES[key3] || COLLECTION_NAMES[collection] || collection,
+    ...key3 !== collection ? { collection } : {},
+    ...alignment ? { alignment } : {},
+    ...page(members.map((u) => unitSummary(u)))
+  };
 }
 var _test2 = { lookupId, rangeContaining, ptsLookup };
 
@@ -25235,10 +25420,9 @@ __export(analyse_exports, {
   tokenize: () => tokenize,
   wordParts: () => wordParts
 });
-var import_node_fs3 = require("node:fs");
 var import_node_zlib3 = require("node:zlib");
-var import_node_path3 = require("node:path");
-var import_node_url3 = require("node:url");
+var import_node_path4 = require("node:path");
+var import_node_url4 = require("node:url");
 
 // src/input.mjs
 var fold4 = fold3;
@@ -25428,7 +25612,7 @@ function normalizeInput(text) {
   const words3 = nfc.match(/[A-Za-zāīūṅñṭḍṇḷṃṁĀĪŪṄÑṬḌṆḶṂṀ]+/g) || [];
   const others = words3.filter((x) => !/^s[uū]tras?$/i.test(x) && !/^the$/i.test(x));
   const sutraOk = others.length > 0 && others.every((x) => normalizeWord(x).rule || isPaliStem(x));
-  const out = nfc.replace(/[A-Za-zāīūṅñṭḍṇḷṃṁĀĪŪṄÑṬḌṆḶṂṀ.~",'’-]+/g, (token) => {
+  const normalizeTokens = (fragment) => fragment.replace(/[A-Za-zāīūṅñṭḍṇḷṃṁĀĪŪṄÑṬḌṆḶṂṀ.~",'’-]+/g, (token) => {
     const m = token.match(/^([,'’"-]*?)(.*?)([.,'’"-]*)$/);
     let [, lead, core, tail] = m;
     if (/[mn]$/.test(core) && tail.startsWith("..")) {
@@ -25448,7 +25632,16 @@ function normalizeInput(text) {
     const fixed = r.word.replace(/ṁ/g, "\u1E43");
     if (r.rule) changes.push({ from: core, to: fixed, rule: r.rule, ...r.label ? { label: r.label } : {} });
     return lead + fixed + tail;
-  }).replace(/ṁ/g, "\u1E43").replace(/Ṁ/g, "\u1E42");
+  });
+  let out = "";
+  let from = 0;
+  for (const phrase of nfc.matchAll(new RegExp('(?<!\\p{L})"(?:[^"]|"(?=[nN]))+"(?!\\p{L})', "gu"))) {
+    const start = phrase.index, end = start + phrase[0].length - 1;
+    out += normalizeTokens(nfc.slice(from, start)) + '"' + normalizeTokens(nfc.slice(start + 1, end)) + '"';
+    from = end + 1;
+  }
+  out += normalizeTokens(nfc.slice(from));
+  out = out.replace(/ṁ/g, "\u1E43").replace(/Ṁ/g, "\u1E42");
   const rules = [...new Set(changes.map((c) => c.rule))];
   const scheme = rules.includes("velthuis") ? "velthuis" : rules.includes("harvard-kyoto") ? "harvard-kyoto" : /[āīūṅñṭḍṇḷṃ]/i.test(out) ? "unicode" : "ascii";
   return { text: out, original, changed: changes.length > 0, scheme, changes };
@@ -25480,26 +25673,42 @@ async function withNormalised(value, fn) {
 }
 
 // src/glossary-data.mjs
-var import_node_fs2 = require("node:fs");
+var import_node_fs3 = require("node:fs");
 var import_node_zlib2 = require("node:zlib");
-var import_node_path2 = require("node:path");
-var import_node_url2 = require("node:url");
+var import_node_path3 = require("node:path");
+var import_node_url3 = require("node:url");
 var import_meta2 = {};
 var here2;
 try {
   here2 = __dirname;
 } catch {
-  here2 = (0, import_node_path2.dirname)((0, import_node_url2.fileURLToPath)(import_meta2.url));
+  here2 = (0, import_node_path3.dirname)((0, import_node_url3.fileURLToPath)(import_meta2.url));
 }
 var cached2 = null;
 function loadGlossary() {
   if (cached2) return cached2;
   const name = "glossary.json.gz";
-  const candidates = [(0, import_node_path2.join)(here2, "data", name), (0, import_node_path2.join)(here2, "..", "server", "data", name), (0, import_node_path2.join)(process.cwd(), "server", "data", name)];
-  const found = candidates.find((p) => (0, import_node_fs2.existsSync)(p));
+  const candidates = [(0, import_node_path3.join)(here2, "data", name), (0, import_node_path3.join)(here2, "..", "server", "data", name), (0, import_node_path3.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => (0, import_node_fs3.existsSync)(p));
   if (!found) throw new Error("Bundled glossary data (glossary.json.gz) is missing. Reinstall the extension.");
-  cached2 = JSON.parse((0, import_node_zlib2.gunzipSync)((0, import_node_fs2.readFileSync)(found)).toString("utf8"));
+  cached2 = JSON.parse((0, import_node_zlib2.gunzipSync)((0, import_node_fs3.readFileSync)(found)).toString("utf8"));
   return cached2;
+}
+
+// src/translation-titles.mjs
+function translationTitle(link) {
+  if (link.english?.trim()) return link.english;
+  if (link.source !== "dhammatalks") return null;
+  const reference = link.reference || "";
+  const numbered = reference.match(/^([A-Za-z][A-Za-z-]*\s+\d+(?:[.:]\d+)*(?:[-–—]\d+(?:[.:]\d+)*)?)\s+(.+)$/u);
+  if (numbered) {
+    try {
+      const header = parseCitation(numbered[1]);
+      if (header.kind === "id" || header.kind === "uid") return numbered[2];
+    } catch {
+    }
+  }
+  return reference.match(/^Dhp\s+[IVX]+\s*:\s*(.+)$/u)?.[1] || null;
 }
 
 // src/sutta-names.mjs
@@ -25536,11 +25745,12 @@ function buildIndex() {
     const u = d.byId.get(id);
     if (!u) continue;
     for (const t of links) {
-      if (t.english && !/\d/.test(t.english)) {
+      const english2 = translationTitle(t);
+      if (english2 && !/\d/.test(english2)) {
         const via = `English title (${sourceName(t)}, ${t.translator})`;
-        add(u, t.english, via, true);
-        const bare = t.english.replace(/^(the|a|an)\s+/i, "");
-        if (bare !== t.english) add(u, bare, via, true);
+        add(u, english2, via, true);
+        const bare = english2.replace(/^(the|a|an)\s+/i, "");
+        if (bare !== english2) add(u, bare, via, true);
       }
       if (t.pali_title && !/\d/.test(t.pali_title)) add(u, t.pali_title, `P\u0101li title (${sourceName(t)})`);
     }
@@ -26199,7 +26409,7 @@ var here3;
 try {
   here3 = __dirname;
 } catch {
-  here3 = (0, import_node_path3.dirname)((0, import_node_url3.fileURLToPath)(import_meta3.url));
+  here3 = (0, import_node_path4.dirname)((0, import_node_url4.fileURLToPath)(import_meta3.url));
 }
 var DPD_LICENSE = {
   name: "CC BY-NC-SA 4.0",
@@ -26218,10 +26428,10 @@ var cached3 = null;
 function loadDpd() {
   if (cached3) return cached3;
   const name = "dpd.json.gz";
-  const candidates = [(0, import_node_path3.join)(here3, "data", name), (0, import_node_path3.join)(here3, "..", "server", "data", name), (0, import_node_path3.join)(process.cwd(), "server", "data", name)];
-  const found = candidates.find((p) => (0, import_node_fs3.existsSync)(p));
+  const candidates = [(0, import_node_path4.join)(here3, "data", name), (0, import_node_path4.join)(here3, "..", "server", "data", name), (0, import_node_path4.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => bundledExists(p));
   if (!found) throw new Error("Bundled dictionary data (dpd.json.gz) is missing. Reinstall the extension.");
-  const data5 = JSON.parse((0, import_node_zlib3.gunzipSync)((0, import_node_fs3.readFileSync)(found)).toString("utf8"));
+  const data5 = JSON.parse((0, import_node_zlib3.gunzipSync)(readBundled(found)).toString("utf8"));
   const headwords = /* @__PURE__ */ new Map();
   const lemmas = /* @__PURE__ */ new Map();
   const folded = /* @__PURE__ */ new Map();
@@ -26418,7 +26628,6 @@ function analysePassage({ uid, segment, paragraph, offset = 0, limit = 60 } = {}
   const unknown2 = words3.filter((w) => w.status === "unknown").length;
   const outNotes = [...notes];
   if (segment === void 0 && paragraph === void 0) outNotes.push(`No segment given: analysed the first body segment (${seg.ref}). Pass segment (e.g. "${unit.id}/${index3 + 1}") for another.`);
-  if (unit.approximate) outNotes.push("This text is abbreviated (peyy\u0101la) in the VRI edition; the analysis covers the words printed, not the expanded text.");
   return {
     text_id: unit.id,
     citation: unit.acronym,
@@ -26632,7 +26841,7 @@ async function atiIndexes() {
 async function searchAti({ query, limit = 10 }) {
   query = String(query ?? "").trim();
   if (!query) throw new Error("Give a search query.");
-  const terms3 = fold3(query).split(/[^a-z0-9]+/).filter(Boolean);
+  const terms4 = fold3(query).split(/[^a-z0-9]+/).filter(Boolean);
   let pages;
   try {
     pages = await atiIndexes();
@@ -26643,7 +26852,7 @@ ${error2.message}`);
   const matches = [];
   const collect = (fragment, index3, heading = "") => {
     const context = plainText(`${heading} ${fragment}`);
-    if (!terms3.every((t) => fold3(context).includes(t))) return;
+    if (!terms4.every((t) => fold3(context).includes(t))) return;
     for (const a of anchors(fragment)) matches.push({ ...a, context: shortText(context, 600), index: index3 });
   };
   for (const m of atiContent(pages.sutta).matchAll(/<li\b[^>]*>([^]*?)<\/li>/gi)) collect(m[1], "sutta index");
@@ -26759,7 +26968,7 @@ function listSources() {
       {
         id: "vri-atthakatha",
         name: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana A\u1E6D\u1E6Dhakath\u0101 (VRI), romn/*.att.xml",
-        role: "Commentaries (get_commentary), bundled offline (server/data/commentary.json.gz), aligned to the texts by VRI paragraph number and checked against the words they quote. Commentary, not scripture.",
+        role: "Commentaries bundled offline (server/data/commentary.json.gz): get_commentary with a canonical citation reads verified aligned passages; search_commentary searches all included books, and direct commentary book references read them without asserting root alignment. Commentary, not scripture.",
         repository: canon.repository,
         version: canon.commit,
         attribution: canon.attribution,
@@ -26859,6 +27068,7 @@ __export(features_exports, {
   analyse: () => analyse_exports,
   calendar: () => calendar_exports,
   commentary: () => commentary_exports,
+  commentarySearch: () => commentary_search_exports,
   daily: () => daily_exports,
   dppn: () => dppn_exports,
   findCitations: () => find_citations_exports,
@@ -26950,28 +27160,35 @@ function findWindows(corpus, qwords, { keep = KEEP_WINDOWS } = {}) {
   const inWindow = new Int32Array(n);
   let score = 0;
   let lo = 0;
+  let region = 0;
   const found = [];
   for (let hi = 0; hi < order.length; hi += 1) {
     const h = order[hi];
+    if (corpus.boundaries && pos[h] >= corpus.boundaries[region + 1]) {
+      while (pos[h] >= corpus.boundaries[region + 1]) region += 1;
+      inWindow.fill(0);
+      score = 0;
+      lo = hi;
+    }
     if (inWindow[who[h]]++ === 0) score += weight[who[h]];
     while (pos[order[lo]] < pos[h] - span) {
       const l = order[lo];
       if (--inWindow[who[l]] === 0) score -= weight[who[l]];
       lo += 1;
     }
-    if (score >= 0.3 * totalWeight) found.push({ start: pos[order[lo]], end: pos[h], score });
+    if (score >= 0.3 * totalWeight) found.push({ start: pos[order[lo]], end: pos[h], score, region });
   }
   found.sort((a, b) => b.score - a.score || a.start - b.start);
   const picked = [];
   for (const f of found) {
-    if (picked.some((p) => Math.abs(p.start - f.start) < span)) continue;
+    if (picked.some((p) => p.region === f.region && Math.abs(p.start - f.start) < span)) continue;
     picked.push(f);
     if (picked.length >= keep) break;
   }
   return picked;
 }
 function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.length } = {}) {
-  const join9 = corpus.compounds ? "" : " ";
+  const join10 = corpus.compounds ? "" : " ";
   const Q = trigrams(corpus.compounds ? query.replace(/ /g, "") : query);
   const qlen = qwords.length;
   const variantSets = qwords.map((w) => new Set(corpus.variants(w).map((v) => v.id)));
@@ -26989,7 +27206,7 @@ function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.len
       const b = a + len;
       if (b > max) continue;
       const ids = corpus.tokens.subarray(a, b);
-      const dice = similarity(Q, Array.from(ids, (id) => corpus.vocab[id]).join(join9));
+      const dice = similarity(Q, Array.from(ids, (id) => corpus.vocab[id]).join(join10));
       if (dice <= best.sim) continue;
       const present = new Set(ids);
       const joined = corpus.compounds ? Array.from(ids, (id) => corpus.vocab[id]).join("") : "";
@@ -27040,10 +27257,18 @@ function buildPaliIndex() {
   let nt = 0;
   const bookStart = [];
   const blockStart = [];
+  const boundaries = [];
+  const owners = d.canon.books.map((book) => new Array(book.blocks.length).fill(null));
+  const outermost = [...d.canon.units].sort((a, b) => Number(!!b.approximate) - Number(!!a.approximate) || a.end - a.start - (b.end - b.start));
+  for (const unit of outermost) for (let i = unit.start; i < unit.end; i += 1) owners[unit.book][i] = unit;
   let blocks = 0;
-  for (const book of d.canon.books) {
+  for (const [bi, book] of d.canon.books.entries()) {
     bookStart.push(blocks);
-    for (const blk of book.blocks) {
+    let previousOwner;
+    for (const [i, blk] of book.blocks.entries()) {
+      const owner = owners[bi][i];
+      if ((i === 0 || owner !== previousOwner) && boundaries.at(-1) !== nt) boundaries.push(nt);
+      previousOwner = owner;
       blockStart.push(nt);
       blocks += 1;
       for (const w of words(fold3(blk[2]))) {
@@ -27064,6 +27289,7 @@ function buildPaliIndex() {
     }
   }
   blockStart.push(nt);
+  boundaries.push(nt);
   tokens = tokens.slice(0, nt);
   const freq = new Int32Array(vocab2.length);
   for (let i = 0; i < nt; i += 1) freq[tokens[i]] += 1;
@@ -27090,6 +27316,7 @@ function buildPaliIndex() {
     total: nt,
     bookStart,
     blockStart: Int32Array.from(blockStart),
+    boundaries: Int32Array.from(boundaries),
     positions: (id) => postings.subarray(offsets[id], offsets[id + 1]),
     freqOf: (id) => freq[id],
     gramIndex
@@ -27127,7 +27354,18 @@ function paliVariants(w) {
 }
 function paliCorpus() {
   const ix = buildPaliIndex();
-  return { compounds: true, tokens: ix.tokens, vocab: ix.vocab, total: ix.total, positions: ix.positions, freq: ix.freqOf, variants: paliVariants };
+  return { compounds: true, tokens: ix.tokens, vocab: ix.vocab, total: ix.total, positions: ix.positions, freq: ix.freqOf, variants: paliVariants, boundaries: ix.boundaries };
+}
+function paliBounds(position) {
+  const { boundaries } = buildPaliIndex();
+  let lo = 0;
+  let hi = boundaries.length - 2;
+  while (lo < hi) {
+    const mid = lo + hi + 1 >> 1;
+    if (boundaries[mid] <= position) lo = mid;
+    else hi = mid - 1;
+  }
+  return { min: boundaries[lo], max: boundaries[lo + 1] };
 }
 function blockAt(tokenPos) {
   const { blockStart, bookStart } = buildPaliIndex();
@@ -27148,7 +27386,7 @@ function blockAt(tokenPos) {
   return { book: b, index: lo - bookStart[b] };
 }
 var unitsByBook = null;
-function ownerOf(book, index3) {
+function ownerOf(book, index3, end = index3 + 1) {
   if (!unitsByBook) {
     unitsByBook = /* @__PURE__ */ new Map();
     for (const u of load().canon.units) {
@@ -27156,7 +27394,7 @@ function ownerOf(book, index3) {
       unitsByBook.get(u.book).push(u);
     }
   }
-  const covering = (unitsByBook.get(book) || []).filter((u) => u.start <= index3 && index3 < u.end);
+  const covering = (unitsByBook.get(book) || []).filter((u) => u.start <= index3 && end <= u.end);
   covering.sort((a, b) => !!a.approximate - !!b.approximate || (a.kind === "range") - (b.kind === "range") || a.end - a.start - (b.end - b.start));
   return covering[0] || null;
 }
@@ -27164,7 +27402,8 @@ function paliMatch(cand, refined) {
   const d = load();
   const first = blockAt(refined.a);
   const last = blockAt(refined.b - 1);
-  const unit = ownerOf(first.book, first.index);
+  if (first.book !== last.book) return null;
+  const unit = ownerOf(first.book, first.index, last.index + 1);
   if (!unit) return null;
   const blocks = d.canon.books[first.book].blocks;
   const lastIndex = last.book === first.book ? last.index : first.index;
@@ -27194,10 +27433,10 @@ function verifyPali(text, limit) {
   const query = q.join(" ");
   const out = [];
   const seen = /* @__PURE__ */ new Set();
-  const { ranked, truncated } = rankWindows(findWindows(corpus, q), (c) => ({ r: refine2(corpus, query, q, c) }));
+  const { ranked, truncated } = rankWindows(findWindows(corpus, q), (c) => ({ r: refine2(corpus, query, q, c, paliBounds(c.start)) }));
   const ties = countTies(ranked, truncated, ({ r }) => {
-    const b = blockAt(r.a);
-    return ownerOf(b.book, b.index)?.id;
+    const first = blockAt(r.a), last = blockAt(r.b - 1);
+    return first.book === last.book ? ownerOf(first.book, first.index, last.index + 1)?.id : null;
   });
   for (const { c, r } of ranked) {
     const m = paliMatch(c, r);
@@ -27555,9 +27794,13 @@ var PTS_ABBREVIATIONS = [
 var ROMAN3 = "(?:I{1,3}|IV|VI{0,2}|i{1,3}|iv|vi{0,2})";
 var VINAYA = "(?:Pj|Ss|Ay|Np|Pc|Pd|Sk|Kd|Mv|Cv|Pvr|Parajika|Sanghadisesa|Aniyata|Nissaggiya|Pacittiya|Patidesaniya|Sekhiya|Adhikaranasamatha|Khandhaka)";
 var LOWER_IDS = ["dn", "mn", "sn", "an", "kp", "dhp", "ud", "iti", "snp", "vv", "pv", "thag", "thig", "bv", "mnd", "cnd", "mil", "kv", "ds", "vb", "patthana"];
-var LINK_HOSTS = /^(?:www\.)?(?:suttacentral\.net|accesstoinsight\.org|dhammatalks\.org)$/i;
+var LINK_HOSTS = /^(?:www\.)?(?:suttacentral\.net|accesstoinsight\.org|dhammatalks\.org|ancient-buddhist-texts\.net)$/i;
+var EDITION_HEAD = `(?:${Object.keys(EDITION_WORDS).sort((a, b) => b.length - a.length).join("|")})(?:\\.?\\s*ed(?:ition)?\\.?)?[\\s.:,]+`;
+var EDITION_SCOPE = [.../* @__PURE__ */ new Set([...ABBREVIATIONS, ...FULL_NAMES, ...Object.keys(_test.COLLECTIONS), ...Object.keys(VINAYA_SCOPES)])].sort((a, b) => b.length - a.length).join("|");
+var EDITION_PAGE = `(?:${ROMAN3}(?:\\.\\s*|\\s+))?(?:(?:volume|vol)\\.?\\s*)?\\d+(?:(?:\\s*[.:,]\\s*|\\s+(?:(?:pages?|pp|p)\\.?\\s*)?)\\d+)*(?:\\s*[-\u2013\u2014]\\s*\\d+(?:[.:]\\d+)*)?`;
 var PATTERNS = [
   { scheme: "link", rank: 0, re: /https?:\/\/[^\s<>"'()[\]{}]+/giu },
+  { scheme: "edition", rank: 0, re: new RegExp(`${BOUND_BEFORE}${EDITION_HEAD}(?:${EDITION_SCOPE})\\.?\\s*${EDITION_PAGE}${BOUND_AFTER}`, "giu") },
   { scheme: "pts", rank: 1, re: new RegExp(`${BOUND_BEFORE}(?:PTS[: ]\\s?)?(?:${PTS_ABBREVIATIONS.join("|")})(?:\\.\\s?|\\s)${ROMAN3}(?:\\.\\s?|\\s)\\d+${BOUND_AFTER}`, "gu") },
   { scheme: "vinaya", rank: 2, re: new RegExp(`${BOUND_BEFORE}(?:Vinaya\\s)?(?:(?:Bu|Bi|Bhikkhu|Bhikkhuni)\\s?)?${VINAYA}\\s?${NUM}${BOUND_AFTER}`, "gu") },
   { scheme: "vinaya", rank: 2, re: new RegExp(`${BOUND_BEFORE}Vinaya\\s(?:Mahavagga|Cul?lavagga)\\s?${NUM}${BOUND_AFTER}`, "giu") },
@@ -27581,7 +27824,7 @@ function foldWithOffsets(text) {
 function trimLink(raw) {
   return raw.replace(/[.,;:!?]+$/, "");
 }
-function scan(text) {
+function scan(text, { editionBookNames = [] } = {}) {
   const { folded, offsets } = foldWithOffsets(text);
   const span = (start, end) => {
     let to = offsets[end - 1] + 1;
@@ -27593,7 +27836,12 @@ function scan(text) {
     re.lastIndex = 0;
     for (const m of folded.matchAll(re)) {
       const length = scheme === "link" ? trimLink(m[0]).length : m[0].length;
-      const [start, end] = span(m.index, m.index + length);
+      const [start, baseEnd] = span(m.index, m.index + length);
+      let end = baseEnd;
+      if (scheme === "edition") {
+        const qualifier = text.slice(end).match(/^\s*\(([^()\r\n]{1,100})\)/u);
+        if (qualifier && editionBookNames.some((title) => matchesEditionBook(title, qualifier[1]))) end += qualifier[0].length;
+      }
       if (scheme === "link") {
         let host = "";
         try {
@@ -27618,7 +27866,7 @@ function scan(text) {
 var MAX_TEXT = 2e5;
 var MAX_RESULTS = 500;
 function findCitations(text, canon, { limit = MAX_RESULTS } = {}) {
-  const spans = scan(text);
+  const spans = scan(text, { editionBookNames: canon.load().canon.books.map((book) => book.title) });
   const citations = spans.slice(0, limit).map((span) => {
     try {
       const { unit, notes, alternatives } = canon.resolve(span.text.normalize("NFC"));
@@ -27645,12 +27893,12 @@ function findCitations(text, canon, { limit = MAX_RESULTS } = {}) {
     ...spans.length > citations.length ? { truncated: true } : {},
     offsets: "start and end are UTF-16 code-unit offsets into the input, end exclusive (JavaScript String.slice).",
     citations,
-    scope: "Citations are found by pattern; a citation the scanner did not recognise is not checked. Unresolved citations are reported, never corrected. Abbreviations that read as English in prose (single letters before a bare number, It, Ps, Pe, Ne, Pp, Ya, Dt, As) are skipped; write MN, SN, Iti, Pa\u1E6Dis and so on, or check one citation with resolve_reference.",
+    scope: "Citations are found by pattern; a citation the scanner did not recognise is not checked. Printed edition prefixes are retained, with parenthetical book qualifiers recognised from the bundled source titles. Unresolved citations are reported, never corrected. Abbreviations that read as English in prose (single letters before a bare number, It, Ps, Pe, Ne, Pp, Ya, Dt, As) are skipped; write MN, SN, Iti, Pa\u1E6Dis and so on, or check one citation with resolve_reference.",
     source: { name: source4.name, attribution: source4.attribution, terms: source4.terms }
   };
 }
 function register3({ tool, z, canon }) {
-  tool("find_citations", "Find every P\u0101li Canon citation in a piece of free text (an essay, a talk transcript, a paper's references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, PTS pages like M i 55 or S v 420, Bilara IDs like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org links. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Works offline.", {
+  tool("find_citations", "Find every P\u0101li Canon citation in a piece of free text (an essay, a talk transcript, a paper's references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nid\u0101navaggo), PTS pages like M i 55 or S v 420, Bilara IDs like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org / ancient-buddhist-texts.net links. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Works offline.", {
     text: z.string().min(1).max(MAX_TEXT).describe("The free text to scan, up to 200,000 characters.")
   }, ({ text }) => findCitations(text, canon));
 }
@@ -28650,17 +28898,17 @@ __export(topics_exports, {
   topicsIndex: () => topicsIndex
 });
 var import_node_fs4 = require("node:fs");
-var import_node_path4 = require("node:path");
-var import_node_url4 = require("node:url");
+var import_node_path5 = require("node:path");
+var import_node_url5 = require("node:url");
 var import_meta4 = {};
 var here4;
 try {
   here4 = __dirname;
 } catch {
-  here4 = (0, import_node_path4.dirname)((0, import_node_url4.fileURLToPath)(import_meta4.url));
+  here4 = (0, import_node_path5.dirname)((0, import_node_url5.fileURLToPath)(import_meta4.url));
 }
 function readData(name) {
-  const candidates = [(0, import_node_path4.join)(here4, "data", name), (0, import_node_path4.join)(here4, "..", "server", "data", name), (0, import_node_path4.join)(process.cwd(), "server", "data", name)];
+  const candidates = [(0, import_node_path5.join)(here4, "data", name), (0, import_node_path5.join)(here4, "..", "server", "data", name), (0, import_node_path5.join)(process.cwd(), "server", "data", name)];
   const found = candidates.find((p) => (0, import_node_fs4.existsSync)(p));
   if (!found) throw new Error(`Bundled data (${name}) is missing. Reinstall the extension or rebuild.`);
   return JSON.parse((0, import_node_fs4.readFileSync)(found, "utf8"));
@@ -28820,20 +29068,20 @@ __export(dppn_exports, {
   register: () => register7
 });
 var import_node_fs5 = require("node:fs");
-var import_node_path5 = require("node:path");
-var import_node_url5 = require("node:url");
+var import_node_path6 = require("node:path");
+var import_node_url6 = require("node:url");
 var import_meta5 = {};
 var here5;
 try {
   here5 = __dirname;
 } catch {
-  here5 = (0, import_node_path5.dirname)((0, import_node_url5.fileURLToPath)(import_meta5.url));
+  here5 = (0, import_node_path6.dirname)((0, import_node_url6.fileURLToPath)(import_meta5.url));
 }
 var cached4 = null;
 function loadDppn() {
   if (cached4) return cached4;
   const name = "dppn.json";
-  const candidates = [(0, import_node_path5.join)(here5, "data", name), (0, import_node_path5.join)(here5, "..", "server", "data", name), (0, import_node_path5.join)(process.cwd(), "server", "data", name)];
+  const candidates = [(0, import_node_path6.join)(here5, "data", name), (0, import_node_path6.join)(here5, "..", "server", "data", name), (0, import_node_path6.join)(process.cwd(), "server", "data", name)];
   const found = candidates.find((p) => (0, import_node_fs5.existsSync)(p));
   if (!found) throw new Error("Bundled proper-names data (dppn.json) is missing. Reinstall the extension.");
   cached4 = JSON.parse((0, import_node_fs5.readFileSync)(found, "utf8"));
@@ -28906,7 +29154,7 @@ function describeEntry(entry3) {
 var HEADINGS = /* @__PURE__ */ new Set(["nikaya", "book", "chapter", "title", "subhead", "subsubhead", "centre", "hangnum"]);
 var OPENING_PARAGRAPHS = 2;
 var WHY = [
-  "The name is in the title.",
+  "The name is in an indexed P\u0101li or English translation title.",
   "The name is in the opening paragraphs (the nid\u0101na or first lines).",
   "The name is in the body of the text."
 ];
@@ -28944,24 +29192,43 @@ function appearsIn(name, limit = 10, { exactWord } = {}) {
       }
     }
   }
-  const titleMatches = s.titles.filter(({ u }) => matches(fold3([u.title, ...(d.translations[u.id] || []).map((t) => t.reference)].filter(Boolean).join(" ")))).map(({ u }) => u);
+  const titleMatches = [];
+  const titleEvidence = /* @__PURE__ */ new Map();
+  for (const { u } of s.titles) {
+    const evidence = [];
+    if (u.title && matches(fold3(u.title))) evidence.push({ title: u.title, language: "pali", source: d.canon.source.name });
+    for (const link of d.translations[u.id] || []) {
+      const title = translationTitle(link);
+      if (title && matches(fold3(title))) evidence.push({
+        title,
+        language: "english",
+        source: sourceName(link),
+        ...link.translator ? { translator: link.translator } : {}
+      });
+    }
+    if (evidence.length) {
+      titleMatches.push(u);
+      titleEvidence.set(u.id, evidence);
+    }
+  }
   for (const u of titleMatches) if (!hits.has(u.id)) hits.set(u.id, { u, order: hits.size, paragraphs: 0, opening: false });
   const inTitle = new Set(titleMatches.map((u) => u.id));
   const tier = (h) => inTitle.has(h.u.id) ? 0 : h.opening ? 1 : 2;
   const ranked = [...hits.values()].map((h) => ({ ...h, tier: tier(h) })).sort((a, b) => a.tier - b.tier || b.paragraphs - a.paragraphs || a.order - b.order);
   return {
-    searched: "P\u0101li text of the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition, for every word of the name in the same paragraph.",
+    searched: "P\u0101li text of the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition (every name word in one paragraph), and indexed P\u0101li and English translation titles (every word in one title).",
     stems: ms.map((m) => m.stem),
     match: whole ? "whole word with a case ending" : "stem (inflected forms and compounds included)",
     ...shortName && exactWord === void 0 ? { note: `One-word names of ${MIN_STEM} letters or fewer are matched as whole words; pass exactWord: false to match inside longer words.` } : {},
-    order: "Ranked: name in the title first, then in the opening paragraphs (nid\u0101na), then elsewhere; within each group, texts naming it in more paragraphs first.",
-    caution: "A word search, not a dictionary: it can include other people or places with the same name, or ordinary words spelt the same (\u0101nanda also means joy), and miss irregular forms.",
-    title_matches: titleMatches.slice(0, limit).map((u) => ({ text_id: u.id, citation: u.acronym, title: u.title })),
+    order: "Ranked: name in a P\u0101li or English translation title first, then in the opening paragraphs (nid\u0101na), then elsewhere; within each group, texts naming it in more paragraphs first.",
+    caution: "A word search, not a dictionary: it can include other people or places with the same name, or ordinary words spelt the same (\u0101nanda also means joy), and miss irregular forms. A title hit can come from linked English-title metadata even when the P\u0101li body has no name match.",
+    title_matches: titleMatches.slice(0, limit).map((u) => ({ text_id: u.id, citation: u.acronym, title: u.title, matched_titles: titleEvidence.get(u.id) })),
     texts: ranked.slice(0, limit).map((h) => ({
       text_id: h.u.id,
       citation: h.u.acronym,
       title: h.u.title,
       why: WHY[h.tier],
+      ...titleEvidence.has(h.u.id) ? { matched_titles: titleEvidence.get(h.u.id) } : {},
       ...h.paragraphs ? { paragraphs_naming_it: h.paragraphs } : {},
       ...h.first ? { vri_paragraph: h.first } : {}
     })),
@@ -28992,7 +29259,7 @@ function lookupName({ name, limit = 5, textLimit = 10, exactWord }, data5 = load
   return result;
 }
 function register7({ tool, z }) {
-  tool("lookup_name", "Who or what is a name in the P\u0101li Canon (a person such as S\u0101riputta or An\u0101thapi\u1E47\u1E0Dika, a place such as S\u0101vatth\u012B)? Returns the Dictionary of P\u0101li Proper Names entry when bundled (with attribution and licence), links to the online editions, and the texts of the bundled canon where the name appears. Works offline.", {
+  tool("lookup_name", "Who or what is a name in the P\u0101li Canon (a person such as S\u0101riputta or An\u0101thapi\u1E47\u1E0Dika, a place such as S\u0101vatth\u012B)? Returns the Dictionary of P\u0101li Proper Names entry when bundled (with attribution and licence), links to the online editions, and matching P\u0101li passages or indexed P\u0101li/English titles from the bundled canon. Title matches identify the exact title, language and source; they are metadata, not dictionary entries. Works offline.", {
     name: z.string().min(1).max(100).describe("A proper name in P\u0101li, diacritics optional: S\u0101riputta, Anathapindika, Savatthi."),
     limit: z.number().int().min(1).max(20).default(5).describe("Maximum dictionary entries."),
     textLimit: z.number().int().min(1).max(50).default(10).describe("Maximum canon texts listed where the name appears."),
@@ -30960,8 +31227,8 @@ function parseTalkResults(html) {
   }
   return results;
 }
-function searchUrl(terms3, category, page = 1) {
-  const params = new URLSearchParams({ q: terms3, cat: category });
+function searchUrl(terms4, category, page = 1) {
+  const params = new URLSearchParams({ q: terms4, cat: category });
   if (page > 1) params.set("page", String(page));
   return `${SITE}/search/?${params}`;
 }
@@ -30979,8 +31246,8 @@ function politely(load5, now = Date.now) {
   return run;
 }
 var defaultFetch = (url) => politely(() => fetchPublic(url, { json: false, retries: 1, timeout: 2e4 }));
-async function searchCategory(terms3, category, page, fetchHtml) {
-  const url = searchUrl(terms3, category, page);
+async function searchCategory(terms4, category, page, fetchHtml) {
+  const url = searchUrl(terms4, category, page);
   const html = await liveCache.wrap(`talks:${url}`, () => fetchHtml(url));
   return { url, results: parseTalkResults(html), has_more: new RegExp(`[?&;]page=${page + 1}(?![0-9])`).test(html) };
 }
@@ -31007,7 +31274,7 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
   if (!categories.every((c) => CATEGORIES.includes(c))) throw new Error('category must be "evening", "morning" or "all".');
   const notes = [LINK_ONLY, COMMENTARY];
   let passageInfo = null;
-  let terms3 = query;
+  let terms4 = query;
   if (passage) {
     const { unit } = canon.resolve(passage);
     const { links, via } = canon.linksFor(unit);
@@ -31027,7 +31294,7 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
         notes: [...notes, `No search was run: ${why}. dhammatalks.org has no passage-to-talk index, and a loose keyword match would be a wrong link. Try a topic query instead.`]
       };
     }
-    terms3 = `"${phrase}"${query ? ` ${query}` : ""}`;
+    terms4 = `"${phrase}"${query ? ` ${query}` : ""}`;
     notes.push(`dhammatalks.org has no passage-to-talk index. These talks contain the phrase "${phrase}", the title of \u1E6Ch\u0101nissaro Bhikkhu's translation of ${unit.acronym}${query ? `, and the words "${query}"` : ""}. A match shows the words appear in the talk, not that the talk is about this sutta.`);
   } else {
     notes.push(`Matches are keyword matches found by dhammatalks.org's search (all words; "quoted phrases" allowed). Diacritics are removed because the site's search does not handle them.`);
@@ -31040,9 +31307,9 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
     if (!pages.has(key3)) {
       let found;
       try {
-        found = await searchCategory(terms3, st.category, st.page, fetchHtml);
+        found = await searchCategory(terms4, st.category, st.page, fetchHtml);
       } catch (error2) {
-        throw new Error(`dhammatalks.org search is unavailable right now (${error2.message}). Open ${searchUrl(terms3, st.category, st.page)} directly or try again shortly.`);
+        throw new Error(`dhammatalks.org search is unavailable right now (${error2.message}). Open ${searchUrl(terms4, st.category, st.page)} directly or try again shortly.`);
       }
       searched.push(found.url);
       pages.set(key3, found);
@@ -31079,7 +31346,7 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
   return {
     source: TALKS_SOURCE,
     ...passageInfo ? { passage: passageInfo } : {},
-    searched_for: terms3,
+    searched_for: terms4,
     category,
     ...cursor ? { cursor } : { page },
     results,
@@ -31113,7 +31380,7 @@ function memorisePrompt(reference) {
   return [
     `Help me memorise ${reference} in P\u0101li, using only text retrieved from the Pali Canon MCP tools.`,
     "",
-    "1. Retrieve. Call resolve_reference, then get_text (no translation needed; follow next_offset until the passage is covered). Report the text ID, title, VRI edition attribution and any notes. If the text is marked approximate (abbreviated peyy\u0101la), say so and do not expand it. If the passage cannot be retrieved, stop and say so; never recite from memory.",
+    "1. Retrieve. Call resolve_reference, then get_text (no translation needed; follow next_offset until the passage is covered). Report the text ID, title, VRI edition attribution and any notes. If the text is marked approximate, report the returned alignment caution and do not expand it; the flag alone does not prove source abbreviation or omission. If the passage cannot be retrieved, stop and say so; never recite from memory.",
     "2. Chunk by segment. Each get_text segment is one unit: a verse (stanza) is one chunk; split a long prose segment only at its own sentence or clause punctuation. Number the chunks and keep each segment ref and VRI paragraph (or PTS page) so every chunk is citable. Copy the P\u0101li exactly, diacritics included; never reword, normalise, complete or reorder it. Skip headings unless I ask for them.",
     '3. Learn. Show one chunk at a time, then the chunk joined to the ones before it (cumulative chaining). If I ask for meaning, call get_text with translation "default" and name the translator, or use lookup_pali for single words; label your own glosses as yours.',
     "4. Cloze practice. Make fill-in-the-blank cards from the retrieved chunk only: blank one word per card at first, then more (every other word, then first letters only, then the whole line). Check my answer against the retrieved text, show the exact retrieved wording and its citation, and ignore only differences in capitals and diacritics I could not type, saying so.",
@@ -31130,29 +31397,31 @@ function register13({ prompt }) {
 var commentary_exports = {};
 __export(commentary_exports, {
   LABEL: () => LABEL,
+  bookInfo: () => bookInfo,
+  bookSegments: () => bookSegments,
   commentaryFor: () => commentaryFor,
   getCommentary: () => getCommentary,
   load: () => load2,
   paraRange: () => paraRange,
+  readBook: () => readBook,
   register: () => register14,
   segmentOwners: () => segmentOwners
 });
-var import_node_fs6 = require("node:fs");
 var import_node_zlib4 = require("node:zlib");
-var import_node_path6 = require("node:path");
-var import_node_url6 = require("node:url");
+var import_node_path7 = require("node:path");
+var import_node_url7 = require("node:url");
 var import_meta6 = {};
 var here6;
 try {
   here6 = __dirname;
 } catch {
-  here6 = (0, import_node_path6.dirname)((0, import_node_url6.fileURLToPath)(import_meta6.url));
+  here6 = (0, import_node_path7.dirname)((0, import_node_url7.fileURLToPath)(import_meta6.url));
 }
 var FILE = "commentary.json.gz";
 var ROMAN4 = ["", "i", "ii", "iii", "iv", "v", "vi", "vii"];
 var HEADING2 = /* @__PURE__ */ new Set(["subhead", "title", "chapter", "book", "nikaya", "subsubhead"]);
 var CENTRE_HEADING2 = /(niṭṭhit[aāo]ṃ?|niṭṭhitā|samattaṃ|samattā)\.?$|^Namo tassa|uddānaṃ$/i;
-var VERSE2 = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
+var VERSE3 = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
 var LABEL = "Commentary (A\u1E6D\u1E6Dhakath\u0101), not the canon: the traditional Therav\u0101da explanation of the texts, compiled in P\u0101li in Sri Lanka (traditionally attributed to Buddhaghosa, Dhammap\u0101la and others). Keep it distinct from the root text when quoting.";
 var EVIDENCE = {
   "paragraph+lemma": "VRI paragraph number, confirmed by the root-text words the commentary quotes",
@@ -31172,14 +31441,14 @@ function paraRange(n) {
 }
 var data2 = null;
 function dataPath2() {
-  const candidates = [(0, import_node_path6.join)(here6, "data", FILE), (0, import_node_path6.join)(here6, "..", "server", "data", FILE), (0, import_node_path6.join)(process.cwd(), "server", "data", FILE)];
-  return candidates.find((p) => (0, import_node_fs6.existsSync)(p)) || null;
+  const candidates = [(0, import_node_path7.join)(here6, "data", FILE), (0, import_node_path7.join)(here6, "..", "server", "data", FILE), (0, import_node_path7.join)(process.cwd(), "server", "data", FILE)];
+  return candidates.find((p) => bundledExists(p)) || null;
 }
 function load2() {
   if (data2) return data2;
   const path = dataPath2();
   if (!path) return null;
-  data2 = JSON.parse((0, import_node_zlib4.gunzipSync)((0, import_node_fs6.readFileSync)(path)).toString("utf8"));
+  data2 = JSON.parse((0, import_node_zlib4.gunzipSync)(readBundled(path)).toString("utf8"));
   return data2;
 }
 function ptsLabel2(abbr, page) {
@@ -31188,9 +31457,7 @@ function ptsLabel2(abbr, page) {
   return vol ? `${abbr} ${ROMAN4[vol] || vol} ${num2}` : `${abbr} ${num2}`;
 }
 var paraLabel = (a, b) => a === b ? String(a) : `${a}\u2013${b}`;
-function passageSegments(d, pi) {
-  const [bi, start, end, , a, b] = d.passages[pi];
-  const book = d.books[bi];
+function renderBlocks(book, blocks) {
   const out = [];
   let stanza = null;
   const flush = () => {
@@ -31199,13 +31466,13 @@ function passageSegments(d, pi) {
       stanza = null;
     }
   };
-  for (const [rend, , text, pages] of book.blocks.slice(start, end)) {
+  for (const [rend, , text, pages] of blocks) {
     const pts = (pages || []).map((p) => ptsLabel2(book.abbr, p)).filter(Boolean);
     if (rend === "hangnum") {
       flush();
       continue;
     }
-    if (VERSE2.has(rend)) {
+    if (VERSE3.has(rend)) {
       stanza ||= { type: "verse", text: "", pts: [] };
       stanza.text += (stanza.text ? "\n" : "") + text;
       stanza.pts.push(...pts);
@@ -31221,13 +31488,76 @@ function passageSegments(d, pi) {
   return out.map((s) => ({
     type: s.type,
     text: s.text,
-    comments_on_vri_paragraphs: paraLabel(a, b),
     ...s.pts.length ? { commentary_pts_page_begins: [...new Set(s.pts)] } : {}
   }));
 }
+function passageSegments(d, pi) {
+  const [bi, start, end, , a, b] = d.passages[pi];
+  return renderBlocks(d.books[bi], d.books[bi].blocks.slice(start, end)).map((segment) => ({ ...segment, comments_on_vri_paragraphs: paraLabel(a, b) }));
+}
+var wholeBooks = /* @__PURE__ */ new WeakMap();
+function bookSegments(book) {
+  if (!wholeBooks.has(book)) wholeBooks.set(book, renderBlocks(book, book.blocks));
+  return wholeBooks.get(book);
+}
+function bookInfo(book) {
+  return {
+    uid: `commentary:${book.file}`,
+    vri_file: book.file,
+    title: book.title,
+    work: book.work,
+    description: book.description
+  };
+}
+function readBook(uid, { offset = 0, limit = 40 } = {}) {
+  const d = load2();
+  if (!d) throw new Error("Bundled commentary data is missing. Reinstall the extension.");
+  const base = {
+    canonical: false,
+    content_type: "commentary",
+    label: LABEL,
+    alignment_note: "Direct book reading does not assert an alignment to a canonical text. Use a canonical citation with get_commentary for verified aligned passages.",
+    source: sourceInfo(d)
+  };
+  if (uid === "commentary" || uid === "commentary:") {
+    const items = d.books.slice(offset, offset + limit).map(bookInfo);
+    return {
+      ...base,
+      total_books: d.books.length,
+      offset,
+      limit,
+      returned: items.length,
+      next_offset: offset + items.length < d.books.length ? offset + items.length : null,
+      books: items
+    };
+  }
+  const match2 = String(uid).match(/^commentary:([a-z0-9_.-]+)(?:\/c([1-9]\d*))?$/);
+  const book = match2 && d.books.find((item) => item.file === match2[1]);
+  if (!book) throw new Error('Unknown commentary book reference. Use get_commentary with uid "commentary" to list bundled book references.');
+  const all = bookSegments(book);
+  const first = match2[2] ? Number(match2[2]) - 1 : 0;
+  if (!Number.isSafeInteger(first) || first >= all.length) throw new Error(`Commentary segment does not exist in ${book.file}.`);
+  const selected = match2[2] ? all.slice(first, first + 1) : all;
+  const page = selected.slice(offset, offset + limit).map((segment, i) => ({
+    ref: `${bookInfo(book).uid}/c${first + offset + i + 1}`,
+    ...segment
+  }));
+  return {
+    ...base,
+    citation: uid,
+    book: bookInfo(book),
+    commentary: book.work,
+    total_segments: selected.length,
+    offset,
+    limit,
+    returned: page.length,
+    next_offset: offset + page.length < selected.length ? offset + page.length : null,
+    segments: page
+  };
+}
 function sourceInfo(d) {
-  const { name, repository, commit, files, attribution: attribution2, terms: terms3 } = d.source;
-  return { name, repository, commit, files, attribution: attribution2, terms: terms3 };
+  const { name, repository, commit, files, attribution: attribution2, terms: terms4 } = d.source;
+  return { name, repository, commit, files, attribution: attribution2, terms: terms4 };
 }
 function describePassage(d, pi) {
   const [bi, , , rootBook, a, b, checked, hits, evidence] = d.passages[pi];
@@ -31264,11 +31594,21 @@ function segmentOwners(unit) {
   return out;
 }
 function getCommentary(uid, { offset = 0, limit = 40 } = {}) {
+  if (uid === "commentary" || String(uid).startsWith("commentary:")) return readBook(uid, { offset, limit });
   const { unit, notes } = resolve(uid);
   return commentaryFor(unit, { offset, limit, notes });
 }
 function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {}) {
-  const base = { text_id: unit.id, citation: unit.acronym, title: unit.title, label: LABEL };
+  const alignment = alignmentInfo(unit);
+  if (alignment && !notes.includes(alignment.note)) notes = [...notes, alignment.note];
+  const base = {
+    text_id: unit.id,
+    citation: unit.acronym,
+    title: unit.title,
+    label: LABEL,
+    ...unit.approximate ? { approximate: true } : {},
+    ...alignment ? { alignment } : {}
+  };
   const d = load2();
   if (!d) {
     return { ...base, available: false, segments: [], notes: [...notes, "The commentary data file (commentary.json.gz) is not installed with this copy of the server. Reinstall, or read the P\u0101li text with get_text."] };
@@ -31289,7 +31629,6 @@ function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {}) {
   const page = all.slice(offset, offset + limit).map((s, i) => ({ ref: `${unit.id}/c${offset + i + 1}`, ...s }));
   const works = [...new Set(passages.map((pi) => d.books[d.passages[pi][0]].work))];
   const extra = [];
-  if (unit.approximate) extra.push(`${unit.id} is abbreviated (peyy\u0101la) in the VRI edition; the commentary shown explains the paragraph where the abbreviation occurs.`);
   if (passages.some((pi) => d.passages[pi][4] !== d.passages[pi][5])) extra.push("Some passages explain a run of root paragraphs together (comments_on_vri_paragraphs gives the range), so they may also cover neighbouring texts.");
   return {
     ...base,
@@ -31309,7 +31648,7 @@ function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {}) {
   };
 }
 function register14({ tool, z, citation }) {
-  tool("get_commentary", "Read the traditional P\u0101li commentary (A\u1E6D\u1E6Dhakath\u0101, VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition) on a text: Suma\u1E45galavil\u0101sin\u012B (DN), Papa\xF1cas\u016Bdan\u012B (MN), S\u0101ratthappak\u0101sin\u012B (SN), Manorathap\u016Bra\u1E47\u012B (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. Paginated by segment. Works offline.", {
+  tool("get_commentary", 'Read the traditional P\u0101li commentary (A\u1E6D\u1E6Dhakath\u0101, VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition) on a text: Suma\u1E45galavil\u0101sin\u012B (DN), Papa\xF1cas\u016Bdan\u012B (MN), S\u0101ratthappak\u0101sin\u012B (SN), Manorathap\u016Bra\u1E47\u012B (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. For direct book reading without asserting root alignment, use uid "commentary" to list the included books, then a returned commentary:<VRI-file> or commentary:<VRI-file>/cN segment reference. Paginated by segment. Works offline.', {
     uid: citation,
     offset: z.number().int().min(0).max(1e5).default(0).describe("Segment offset for continuation."),
     limit: z.number().int().min(1).max(200).default(40).describe("Segments per page.")
@@ -31338,16 +31677,15 @@ __export(postcanonical_exports, {
   select: () => select,
   withPostCanonical: () => withPostCanonical
 });
-var import_node_fs7 = require("node:fs");
 var import_node_zlib5 = require("node:zlib");
-var import_node_path7 = require("node:path");
-var import_node_url7 = require("node:url");
+var import_node_path8 = require("node:path");
+var import_node_url8 = require("node:url");
 var import_meta7 = {};
 var here7;
 try {
   here7 = __dirname;
 } catch {
-  here7 = (0, import_node_path7.dirname)((0, import_node_url7.fileURLToPath)(import_meta7.url));
+  here7 = (0, import_node_path8.dirname)((0, import_node_url8.fileURLToPath)(import_meta7.url));
 }
 var FILE2 = "postcanonical.json.gz";
 var LABELS = {
@@ -31361,7 +31699,7 @@ var WORK_LABELS = {
 var SEARCH_OPTION_DESCRIPTION = "Also search the post-canonical books (Visuddhimagga, Abhidhammatthasa\u1E45gaha, sub-commentaries/\u1E6C\u012Bk\u0101), returned separately under post_canonical and labelled canonical: false. Ignored when collection is set (a collection limits the search to the canon). Titles and excerpts follow script like the canon results; citations stay Roman. Default false: only the canon is searched.";
 var HEADING3 = /* @__PURE__ */ new Set(["subhead", "title", "chapter", "book", "nikaya", "subsubhead"]);
 var CENTRE_HEADING3 = /(niṭṭhit[aāo]ṃ?|niṭṭhitā|samattaṃ|samattā)\.?$|^Namo tassa|uddānaṃ$/i;
-var VERSE3 = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
+var VERSE4 = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
 var ED_KEYS = { P: "pts", M: "myanmar", V: "vri", T: "thai" };
 var fold6 = (value) => String(value ?? "").normalize("NFD").replace(new RegExp("\\p{M}", "gu"), "").toLowerCase().replace(/ṁ/g, "m").replace(/\s+/g, " ").trim();
 var PARA2 = /^(\d+)(?:\s*[-–]\s*(\d+))?$/;
@@ -31385,14 +31723,14 @@ function roman(s) {
 var number3 = (s) => /^\d+$/.test(s) ? Number(s) : roman(s);
 var data3 = null;
 function dataPath3() {
-  const candidates = [(0, import_node_path7.join)(here7, "data", FILE2), (0, import_node_path7.join)(here7, "..", "server", "data", FILE2), (0, import_node_path7.join)(process.cwd(), "server", "data", FILE2)];
-  return candidates.find((p) => (0, import_node_fs7.existsSync)(p)) || null;
+  const candidates = [(0, import_node_path8.join)(here7, "data", FILE2), (0, import_node_path8.join)(here7, "..", "server", "data", FILE2), (0, import_node_path8.join)(process.cwd(), "server", "data", FILE2)];
+  return candidates.find((p) => bundledExists(p)) || null;
 }
 function load3() {
   if (data3) return data3;
   const path = dataPath3();
   if (!path) return null;
-  const d = JSON.parse((0, import_node_zlib5.gunzipSync)((0, import_node_fs7.readFileSync)(path)).toString("utf8"));
+  const d = JSON.parse((0, import_node_zlib5.gunzipSync)(readBundled(path)).toString("utf8"));
   d.byId = /* @__PURE__ */ new Map();
   d.byKey = /* @__PURE__ */ new Map();
   for (const b of d.books) {
@@ -31656,10 +31994,10 @@ function select(reference) {
   return sel && settle(sel, sel.book.blocks);
 }
 function sourceInfo2(d) {
-  const { name, repository, commit, files, attribution: attribution2, terms: terms3 } = d.source;
-  return { name, repository, commit, files, attribution: attribution2, terms: terms3 };
+  const { name, repository, commit, files, attribution: attribution2, terms: terms4 } = d.source;
+  return { name, repository, commit, files, attribution: attribution2, terms: terms4 };
 }
-function bookInfo(book) {
+function bookInfo2(book) {
   return { id: book.id, title: book.title, vri_file: book.file, vri_section: book.section, vri_group: book.group, canonical: false };
 }
 var labelFor = (sel) => WORK_LABELS[sel.work] ? `${WORK_LABELS[sel.work]} ${LABELS[sel.book.section]}` : LABELS[sel.book.section];
@@ -31681,7 +32019,7 @@ function segmentsOf(blocks, { includeVariants = false } = {}) {
       stanza = { type: "verse", vri: n, text: "", eds };
       continue;
     }
-    if (VERSE3.has(rend)) {
+    if (VERSE4.has(rend)) {
       stanza ||= { type: "verse", vri: n, text: "", eds: [] };
       stanza.text += (stanza.text ? "\n" : "") + text;
       stanza.eds.push(...eds);
@@ -31721,7 +32059,7 @@ function summary(d, sel) {
     ...sel.chapter ? { chapter: sel.chapter } : {},
     ...sel.paragraph ? { vri_paragraph: sel.paragraph } : {},
     ...sel.approximate ? { approximate: true } : {},
-    book: bookInfo(sel.book),
+    book: bookInfo2(sel.book),
     ...sel.chapters ? { chapters: sel.chapters } : {},
     notes: sel.notes || [],
     source: sourceInfo2(d)
@@ -31769,21 +32107,19 @@ function browse2(node = "", { offset = 0, limit = 60 } = {}) {
   const sel = locate2(node);
   if (!sel) throw new CitationError2(`Unknown post-canonical node "${node}". Try "post-canonical", "tika", "anna", "vism", "abhidh-s" or a book id.`);
   const chapters = sel.chapters || sel.book.chapters.map(([t], i) => ({ citation: `${sel.book.id} ${i + 1}`, title: t }));
-  return { ...base, node: sel.citation, label: labelFor(sel), book: bookInfo(sel.book), ...page(chapters) };
+  return { ...base, node: sel.citation, label: labelFor(sel), book: bookInfo2(sel.book), ...page(chapters) };
 }
 function terms2(query) {
-  const phrases = [...String(query).matchAll(/"([^"]+)"/g)].map((m) => fold6(m[1])).filter(Boolean);
-  const words3 = fold6(String(query).replace(/"[^"]+"/g, " ")).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
-  return [...phrases, ...words3];
+  return searchTerms(query, fold6);
 }
-var foldedCache = /* @__PURE__ */ new Map();
-function foldedBlocks(book, blocks) {
-  if (!foldedCache.has(book.id)) foldedCache.set(book.id, blocks.map((b) => fold6(b[2])));
-  return foldedCache.get(book.id);
+var searchCache = /* @__PURE__ */ new Map();
+function searchPassages(book, blocks) {
+  if (!searchCache.has(book.id)) searchCache.set(book.id, searchSegments(blocks).map((segment) => ({ ...segment, folded: searchFold(segment.text, fold6) })));
+  return searchCache.get(book.id);
 }
 var chapterAt = (book, i) => book.chapters.filter(([, s]) => s <= i).length;
 var citationMemo = /* @__PURE__ */ new WeakMap();
-function covers(book, citation, i) {
+function covers(book, citation, i, end = i + 1) {
   let memo = citationMemo.get(book);
   if (!memo) citationMemo.set(book, memo = /* @__PURE__ */ new Map());
   if (!memo.has(citation)) {
@@ -31797,9 +32133,9 @@ function covers(book, citation, i) {
     memo.set(citation, range);
   }
   const r = memo.get(citation);
-  return !!r && i >= r[0] && i < r[1];
+  return !!r && i >= r[0] && end <= r[1];
 }
-function citationFor(book, i) {
+function citationFor(book, i, end = i + 1) {
   const blocks = book.blocks;
   const ps = [];
   const own = paraRange2(blocks[i][1]);
@@ -31834,7 +32170,7 @@ function citationFor(book, i) {
     cands.push(`${book.id} \xA7${p}`);
   }
   if (k) cands.push(`${book.id} ${k}`);
-  return cands.find((c) => covers(book, c, i)) || book.id;
+  return cands.find((c) => covers(book, c, i, end)) || book.id;
 }
 async function search2(query, { limit = 10, offset = 0, books, section } = {}) {
   const d = need();
@@ -31855,16 +32191,16 @@ async function search2(query, { limit = 10, offset = 0, books, section } = {}) {
   let total = 0;
   for (const book of pool) {
     const { blocks } = book;
-    const folded = foldedBlocks(book, blocks);
-    for (let i = 0; i < folded.length; i += 1) {
-      if (!wanted.every((w) => folded[i].includes(w))) continue;
-      const citation = citationFor(book, i);
+    const passages = searchPassages(book, blocks);
+    for (const passage of passages) {
+      const i = passage.start;
+      if (!wanted.every((w) => passage.folded.includes(w))) continue;
+      const citation = citationFor(book, i, passage.end);
       if (seen.has(`${book.id}|${citation}`)) continue;
       seen.add(`${book.id}|${citation}`);
       total += 1;
       if (total <= offset || hits.length >= limit) continue;
-      const original = blocks[i][2];
-      const at = Math.max(0, folded[i].indexOf(wanted[0]) - 80);
+      const excerpt = searchExcerpt(passage.text, wanted[0], fold6);
       const k = chapterAt(book, i);
       hits.push({
         canonical: false,
@@ -31874,7 +32210,7 @@ async function search2(query, { limit = 10, offset = 0, books, section } = {}) {
         vri_section: book.section,
         ...k ? { chapter: book.chapters[k - 1][0] } : {},
         ...blocks[i][1] ? { match_vri_paragraph: blocks[i][1] } : {},
-        excerpt: (at ? "\u2026" : "") + original.slice(at, at + 260) + (original.length > at + 260 ? "\u2026" : "")
+        excerpt
       });
     }
   }
@@ -31929,16 +32265,16 @@ __export(parallels_exports, {
   load: () => load4,
   register: () => register16
 });
-var import_node_fs8 = require("node:fs");
+var import_node_fs6 = require("node:fs");
 var import_node_zlib6 = require("node:zlib");
-var import_node_path8 = require("node:path");
-var import_node_url8 = require("node:url");
+var import_node_path9 = require("node:path");
+var import_node_url9 = require("node:url");
 var import_meta8 = {};
 var here8;
 try {
   here8 = __dirname;
 } catch {
-  here8 = (0, import_node_path8.dirname)((0, import_node_url8.fileURLToPath)(import_meta8.url));
+  here8 = (0, import_node_path9.dirname)((0, import_node_url9.fileURLToPath)(import_meta8.url));
 }
 var FILE3 = "parallels.json.gz";
 var SOURCES = ["commentary-citation", "shared-passage"];
@@ -31952,14 +32288,14 @@ var MATCH = {
 var data4 = null;
 var index2 = null;
 function dataPath4() {
-  const candidates = [(0, import_node_path8.join)(here8, "data", FILE3), (0, import_node_path8.join)(here8, "..", "server", "data", FILE3), (0, import_node_path8.join)(process.cwd(), "server", "data", FILE3)];
-  return candidates.find((p) => (0, import_node_fs8.existsSync)(p)) || null;
+  const candidates = [(0, import_node_path9.join)(here8, "data", FILE3), (0, import_node_path9.join)(here8, "..", "server", "data", FILE3), (0, import_node_path9.join)(process.cwd(), "server", "data", FILE3)];
+  return candidates.find((p) => (0, import_node_fs6.existsSync)(p)) || null;
 }
 function load4() {
   if (data4) return data4;
   const path = dataPath4();
   if (!path) return null;
-  data4 = JSON.parse((0, import_node_zlib6.gunzipSync)((0, import_node_fs8.readFileSync)(path)).toString("utf8"));
+  data4 = JSON.parse((0, import_node_zlib6.gunzipSync)((0, import_node_fs6.readFileSync)(path)).toString("utf8"));
   index2 = /* @__PURE__ */ new Map();
   const add = (id, entry3) => (index2.get(id) || index2.set(id, []).get(id)).push(entry3);
   data4.citations.forEach((l, i) => {
@@ -32035,8 +32371,8 @@ function linksOf(unit) {
   return links.map((x) => x.link);
 }
 function sourceInfo3(d) {
-  const { name, builder, inputs, attribution: attribution2, terms: terms3 } = d.source;
-  return { name, builder, inputs, attribution: attribution2, terms: terms3 };
+  const { name, builder, inputs, attribution: attribution2, terms: terms4 } = d.source;
+  return { name, builder, inputs, attribution: attribution2, terms: terms4 };
 }
 function getParallels(uid, { offset = 0, limit = 25 } = {}) {
   const { unit, notes } = resolve(uid);
@@ -32055,7 +32391,6 @@ function getParallels(uid, { offset = 0, limit = 25 } = {}) {
   for (const l of all) counts[l.source]++;
   const extra = [];
   if (!all.length) extra.push(`No parallel or cross-reference is recorded for ${unit.acronym}. Only links with clear evidence are kept, so this does not mean the text has none: see SuttaCentral (link below) for parallels in other traditions, or search_texts for a phrase.`);
-  if (unit.approximate) extra.push(`${unit.acronym} is abbreviated (peyy\u0101la) in the VRI edition, so shared passages are found only in the words that are printed.`);
   return {
     ...base,
     available: true,
@@ -32320,19 +32655,19 @@ function expandEnglish(query, { maxTerms = 8, perChunk = 4 } = {}) {
       } else unmatched.push(c.text);
       continue;
     }
-    const terms3 = [];
+    const terms4 = [];
     for (const i of c.hit.ids) {
       const lemma = g.headwords[i][0];
       const f = fold7(lemma);
-      if (f.length < 3 || terms3.some((t) => fold7(t) === f)) continue;
-      if (terms3.length < perChunk && used < maxTerms) {
-        terms3.push(lemma);
+      if (f.length < 3 || terms4.some((t) => fold7(t) === f)) continue;
+      if (terms4.length < perChunk && used < maxTerms) {
+        terms4.push(lemma);
         used += 1;
       } else dropped += 1;
     }
-    if (terms3.length) {
-      mapping[c.text] = terms3;
-      groups.push(terms3.map(fold7));
+    if (terms4.length) {
+      mapping[c.text] = terms4;
+      groups.push(terms4.map(fold7));
       sources.add(c.hit.source);
     }
   }
@@ -32345,6 +32680,99 @@ function register17({ tool, z }) {
     direction: z.enum(["auto", "en-pa", "pa-en"]).default("auto").describe('"en-pa" English to P\u0101li, "pa-en" P\u0101li to English, "auto" both.'),
     limit: z.number().int().min(1).max(30).default(10).describe("Entries per direction and source.")
   }, (args) => glossary(args));
+}
+
+// src/commentary-search.mjs
+var commentary_search_exports = {};
+__export(commentary_search_exports, {
+  register: () => register18,
+  search: () => search3
+});
+var INDEX_BUDGET_BYTES = 8 * 1024 * 1024;
+var indexes2 = /* @__PURE__ */ new Map();
+var indexBytes = 0;
+function indexed(book) {
+  const cached5 = indexes2.get(book);
+  if (cached5) {
+    indexes2.delete(book);
+    indexes2.set(book, cached5);
+    return cached5.text;
+  }
+  const text = bookSegments(book).map((segment) => searchFold(segment.text, fold3));
+  const bytes = text.reduce((sum, value) => sum + value.length * 2, 0);
+  if (bytes <= INDEX_BUDGET_BYTES) {
+    while (indexBytes + bytes > INDEX_BUDGET_BYTES && indexes2.size) {
+      const oldest = indexes2.keys().next().value;
+      indexBytes -= indexes2.get(oldest).bytes;
+      indexes2.delete(oldest);
+    }
+    indexes2.set(book, { text, bytes });
+    indexBytes += bytes;
+  }
+  return text;
+}
+function terms3(query) {
+  return [...new Set(searchTerms(query, fold3))];
+}
+function search3(query, { books, offset = 0, limit = 10 } = {}) {
+  const data5 = load2();
+  if (!data5) throw new Error("Bundled commentary data is missing. Reinstall the extension.");
+  const wanted = terms3(String(query));
+  if (!wanted.length) throw new Error("Commentary search needs at least one word of two or more letters.");
+  const wantedBooks = books?.length ? new Set(books.map((book) => String(book).replace(/^commentary:/u, ""))) : null;
+  if (wantedBooks) for (const file of wantedBooks) {
+    if (!data5.books.some((book) => book.file === file)) throw new Error(`Unknown commentary book "${file}". Use get_commentary with uid "commentary" to list included books.`);
+  }
+  const pool = data5.books.filter((book) => !wantedBooks || wantedBooks.has(book.file));
+  const results = [];
+  let total = 0;
+  for (const book of pool) {
+    const segments2 = bookSegments(book);
+    const folded = indexed(book);
+    for (let i = 0; i < folded.length; i += 1) {
+      if (!wanted.every((term) => folded[i].includes(term))) continue;
+      total += 1;
+      if (total <= offset || results.length >= limit) continue;
+      const info = bookInfo(book);
+      const ref = `${info.uid}/c${i + 1}`;
+      results.push({
+        canonical: false,
+        content_type: "commentary",
+        citation: ref,
+        book: info,
+        segment: i + 1,
+        type: segments2[i].type,
+        excerpt: searchExcerpt(segments2[i].text, wanted[0], fold3),
+        ...segments2[i].commentary_pts_page_begins ? { commentary_pts_page_begins: segments2[i].commentary_pts_page_begins } : {},
+        read_with: { tool: "get_commentary", uid: ref },
+        context_with: { tool: "get_commentary", uid: info.uid, offset: Math.max(0, i - 1), limit: 3 }
+      });
+    }
+  }
+  const { name, repository, commit, files, attribution: attribution2, terms: licence } = data5.source;
+  return {
+    query,
+    canonical: false,
+    content_type: "commentary",
+    label: LABEL,
+    searched_books: pool.length,
+    total_matched: total,
+    offset,
+    limit,
+    returned: results.length,
+    next_offset: offset + results.length < total ? offset + results.length : null,
+    results,
+    alignment_note: "Search covers the included commentary books, including material with no verified root-text alignment. A hit does not establish which canonical passage it explains.",
+    source: { name, repository, commit, files, attribution: attribution2, terms: licence }
+  };
+}
+function register18({ tool, z }) {
+  tool("search_commentary", 'Search the P\u0101li of all bundled VRI commentary books (A\u1E6D\u1E6Dhakath\u0101), including passages not aligned to a canonical text. Diacritics optional; all words must match one prose segment or complete stanza; "quoted phrases" accept line breaks. Results are commentary, not canon, and do not assert root-text alignment. Each result includes a direct get_commentary reference for reading the exact source segment and its context. Works offline.', {
+    query: z.string().min(2).max(500),
+    books: z.array(z.string().min(1).max(100)).max(100).optional().describe('VRI filenames or commentary:<VRI-file> book references returned by get_commentary with uid "commentary". Omit to search all included books.'),
+    offset: z.number().int().min(0).max(1e6).default(0),
+    limit: z.number().int().min(1).max(50).default(10)
+  }, ({ query, books, offset, limit }) => withNormalised(query, (value) => search3(value, { books, offset, limit })));
 }
 
 // src/variants.mjs
@@ -32543,7 +32971,7 @@ function plainWords(query) {
   return fold3(query.replace(/"[^"]*"/g, " ")).split(/[^a-z0-9]+/).filter((w) => w.length > 1);
 }
 function variantSearch(query, base, opts) {
-  if (/"/.test(query)) return null;
+  if (hasSearchQuotes(query)) return null;
   const words3 = plainWords(query);
   if (!words3.length || words3.some((w) => /\d/.test(w))) return null;
   const groups = [];
@@ -32559,7 +32987,7 @@ function variantSearch(query, base, opts) {
   }
   if (!changed.length) return null;
   const r = search(query, { ...opts, groups });
-  if (r.total_texts_matched <= base.total_texts_matched && r.title_matches.length <= base.title_matches.length) return null;
+  if (r.total_texts_matched <= base.total_texts_matched && r.total_title_matches <= base.total_title_matches) return null;
   const desc = changed.map((c) => `"${c.word}" (${c.canon_spellings.length ? c.canon_spellings.join(", ") : c.also_searched.join(", ")})`).join("; ");
   return {
     ...r,
@@ -32582,7 +33010,16 @@ function searchWithInput(query, { collection, limit = 10, offset = 0, english: e
     const exp = expandEnglish(query, { maxTerms: MAX_EXPANSION_TERMS });
     if (!exp) {
       if (english2 === "only") {
-        result = { ...search(n.text, { ...opts, limit: 0 }), results: [], total_texts_matched: 0, next_offset: null };
+        result = {
+          ...search(n.text, { ...opts, limit: 0 }),
+          limit,
+          results: [],
+          total_texts_matched: 0,
+          next_offset: null,
+          title_matches: [],
+          total_title_matches: 0,
+          title_next_offset: null
+        };
         result.expanded_from_english = { found: false, note: "No word of the query is in the glossary (DPD English index); nothing was expanded." };
       }
     } else {
@@ -32605,14 +33042,22 @@ function searchWithInput(query, { collection, limit = 10, offset = 0, english: e
         note: 'The English was looked up in the glossary and the P\u0101li text was searched for these terms. They are dictionary glosses, not translations; check each passage. Turn this off with english: "off".'
       };
       if (!result || !result.total_texts_matched) {
-        result = { ...r, query, title_matches: result?.title_matches?.length ? result.title_matches : r.title_matches, tip: void 0 };
+        const titleSource = result?.total_title_matches ? result : r;
+        result = {
+          ...r,
+          query,
+          title_matches: titleSource.title_matches,
+          total_title_matches: titleSource.total_title_matches,
+          title_next_offset: titleSource.title_next_offset,
+          tip: void 0
+        };
         if (english2 !== "only") label.original_search = "The words as typed were also searched: they are not in the P\u0101li text (title matches, if any, are kept).";
       } else {
         result = { ...result, english_expansion_results: { results: r.results, total_texts_matched: r.total_texts_matched, next_offset: r.next_offset } };
       }
       result.expanded_from_english = label;
     }
-  } else if (!result.total_texts_matched && !/"/.test(n.text) && paliWordsInEnglish(n.text)) {
+  } else if (!result.total_texts_matched && !hasSearchQuotes(n.text) && paliWordsInEnglish(n.text)) {
     const pali3 = paliWordsInEnglish(n.text);
     const r = search(pali3.join(" "), opts);
     if (r.total_texts_matched) {
@@ -32695,7 +33140,7 @@ function catalogue({ offset = 0, limit = 60 } = {}) {
     items: items.slice(offset, offset + limit)
   };
 }
-function readBook({ book, offset = 0, limit = 60, includeVariants = false, variants }) {
+function readBook2({ book, offset = 0, limit = 60, includeVariants = false, variants }) {
   const root = load().canon;
   const index3 = root.books.findIndex((b) => bookId(b) === book || b.file === book);
   if (index3 < 0) throw new Error(`Unknown VRI source book "${book}". Choose a book ID from browse_canon with node "books".`);
@@ -32758,6 +33203,7 @@ var TOOL_TITLES = {
   verify_quote: "Verify a quotation",
   vinaya_rule: "P\u0101timokkha rule",
   get_commentary: "Read the commentary",
+  search_commentary: "Search the commentary",
   get_parallels: "Find parallels and cross-references",
   get_post_canonical: "Read post-canonical texts",
   search_post_canonical: "Search post-canonical texts",
@@ -32828,7 +33274,7 @@ function createServer2() {
     if (uid === void 0 === (book === void 0)) throw new Error('Give exactly one of uid (an individual citation) or book (an ID from browse_canon with node "books").');
     if (book !== void 0) {
       if (translation2 !== void 0 || commentary) throw new Error("English translations and aligned commentary require an individual uid. Read the source book with book, then use a standard citation with uid for those options.");
-      return localizeText(readBook({ book, offset, limit, includeVariants, variants }), script);
+      return localizeText(readBook2({ book, offset, limit, includeVariants, variants }), script);
     }
     const input = romanizeInput(uid);
     const { unit, notes } = resolve(input.text);
@@ -32912,7 +33358,7 @@ function createServer2() {
       guidance: ok < 2 ? `Only ${ok} English translation could be retrieved; compare against the P\u0101li instead, or see https://suttacentral.net/${unit.id}.` : "Compare wording against the P\u0101li segments; distinguish translation choices from textual differences."
     };
   }, { network: true });
-  tool("search_texts", 'Search the full P\u0101li text of the Tipi\u1E6Daka (diacritics optional; all words must appear; "quoted phrases" allowed), text titles, and English translation titles. Works offline. P\u0101li typed on an English keyboard (samyutta, sanyutta, Velthuis sa.myutta, Harvard-Kyoto saMyutta) is understood and labelled; an English query (e.g. "mindfulness of breathing") is expanded into P\u0101li terms from the glossary, labelled expanded_from_english. The query may be written in any supported script; set script for titles and excerpts in that script.', {
+  tool("search_texts", 'Search the full P\u0101li text of the Tipi\u1E6Daka (diacritics optional; all words must appear; "quoted phrases" allowed), text titles, and English translation titles. Title matches have total_title_matches and title_next_offset; use offset and limit to page them. next_offset continues P\u0101li-body results independently. Works offline. P\u0101li typed on an English keyboard (samyutta, sanyutta, Velthuis sa.myutta, Harvard-Kyoto saMyutta) is understood and labelled; an English query (e.g. "mindfulness of breathing") is expanded into P\u0101li terms from the glossary, labelled expanded_from_english. The query may be written in any supported script; set script for titles and excerpts in that script.', {
     query: external_exports.string().trim().min(1).max(300),
     collection: external_exports.string().max(30).optional().describe("Limit to a collection or section, e.g. mn, sn, sn56, an4, dhp, vinaya."),
     limit: external_exports.number().int().min(1).max(50).default(10),
@@ -32931,7 +33377,7 @@ function createServer2() {
     if (out.post_canonical && !out.post_canonical.error) out.post_canonical = localizePostCanonical(out.post_canonical, script);
     return out;
   });
-  tool("browse_canon", 'Browse the Tipi\u1E6Daka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja\u2026) or a section (sn56, an4, kv1). Use "books" for the complete VRI root-file catalogue and get_text book IDs, including front matter outside individual citation spans. Works offline.', {
+  tool("browse_canon", 'Browse the Tipi\u1E6Daka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja\u2026), a section (sn56, an4, kv1), an exact text ID (mn1) or a recorded group ID (dhp1-20). Exact IDs exclude similarly numbered siblings; groups list their recorded members. Use "books" for the complete VRI root-file catalogue and get_text book IDs, including front matter outside individual citation spans. Works offline.', {
     node: external_exports.string().max(60).default("canon"),
     offset: external_exports.number().int().min(0).max(1e5).default(0),
     limit: external_exports.number().int().min(1).max(200).default(60)
