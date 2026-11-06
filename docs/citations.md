@@ -174,6 +174,8 @@ Keep the Pāli, the translation, any dictionary gloss and your own interpretatio
 
 These books are **not the canon**. They are later Pāli works from the same VRI edition: the sub-commentaries (Ṭīkā), and the "Añña" (other) books, such as the Visuddhimagga and its Mahāṭīkā, the Abhidhammatthasaṅgaha, the chronicles and the grammars. Every result for them says `canonical: false` and carries a label and VRI's attribution. The canon search leaves them out unless you ask for them.
 
+Read them with `get_post_canonical` and its `citation` argument; `resolve_reference` also recognises these references. `get_text` reads canonical texts and their complete root books.
+
 ```text
 Vism 1.1     Vism I,1     Vism IV.12   Vism ch. 4   Vism IV      Vism §51     visuddhi. 1.51
 Abhidh-s 1   Abhidh-s I   Abhidh-s 1.4   Abhidh-s
@@ -187,7 +189,9 @@ mahavamsa    mahavamsa 3  mulapannasa-tika 2   s0201t   vibhanga-mulatika 1.1   
 - A bare number after "Vism" is always read as a PTS page, as in the PTS dictionaries. Write a chapter as "Vism ch. 4" or "Vism IV".
 - **VRI paragraph**: "Vism §51". VRI's own cross-references write "visuddhi. 1.51" (volume 1, paragraph 51); that form works too. It is not the same as "Vism 1.51" (chapter 1, paragraph 51).
 
-`get_text` marks the Myanmar and VRI page breaks (`myanmar_page_begins`, `vri_page_begins`, written volume.page).
+Paragraph numbers must be positive. For example, "Vism IV.0" is an error; it does not return an approximate chapter reading.
+
+`get_post_canonical` marks the Myanmar and VRI page breaks (`myanmar_page_begins`, `vri_page_begins`, written volume.page).
 
 **Abhidhammatthasaṅgaha.** "Abhidh-s 1" is chapter 1 (of 9), "Abhidh-s 1.4" is chapter 1, section 4. Section numbers are VRI's paragraph numbers, which restart in each chapter. Other editions and translations (for example Bhikkhu Bodhi's *Comprehensive Manual of Abhidhamma*) number their sections themselves, so check the text before citing their numbers. Chapter 1 includes the two opening verses printed before its heading.
 

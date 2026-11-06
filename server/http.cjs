@@ -31863,6 +31863,7 @@ function locateVism(d, rest, written) {
   if (m = rest.match(/^(\d+|[ivxl]+)\s*[.,:]\s*(\d+)$/)) {
     const k = number3(m[1]);
     const p = Number(m[2]);
+    if (!(p > 0)) throw new CitationError2("Give a positive paragraph number. Paragraph 0 does not identify a Visuddhimagga passage.");
     if (p === 1) {
       return chapter(k, { citation: `Vism ${k}.1`, kind: "chapter-start", notes: [`Vism ${k}.1 is the first paragraph of chapter ${k} (\xD1\u0101\u1E47amoli's chapter.paragraph numbering, as in The Path of Purification). ${k === 1 ? 'Chapter 1 is returned from the start of the book: four heading lines come first (the homage "Namo tassa\u2026", the title "Visuddhimaggo", the volume line and "Nid\u0101n\u0101dikath\u0101"), then paragraph 1, the opening verse "S\u012Ble pati\u1E6D\u1E6Dh\u0101ya\u2026". VRI prints the heading "1. S\u012Blaniddeso" later, after the introduction.' : "The chapter is returned from its start: its heading (and any section heading under it) comes first, then paragraph 1."}`] });
     }
