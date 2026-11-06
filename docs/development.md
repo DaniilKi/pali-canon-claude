@@ -333,3 +333,9 @@ The shared input normalizer preserves paired straight phrase quotes at word boun
 `lookup_name` ranks names found in an indexed Pāli or English translation title before opening/body matches. Explicit English title fields are used for ATI and ABT. Known dhammatalks caption formats retain their title text after removing the citation header, including Roman-numbered Dhammapada chapters. Bare bibliographic or generic collection references supply no individual title and are not searched as names.
 
 Each `matched_titles` entry records the exact title, language and source, plus the translator when applicable. Every query word must match one title; words from different editions or the Pāli title cannot be joined to create a name match. The canonical Pāli `title` field stays separate. Body occurrence counts are not added for metadata-only matches. This remains a word search, and the DPPN licence gate still prevents dictionary entries from being bundled.
+
+## Resolving stored translation captions by name
+
+`translation-titles.mjs` supplies the same metadata title extraction to proper-name ranking and reference-name indexing. Explicit English title fields and supported dhammatalks citation-plus-title captions are treated consistently, without indexing bare bibliographic references. The title's existing canonical mapping is retained; the caption's citation header is not used to infer a new mapping.
+
+The reference resolver preserves its article aliases, single-word English topic guard, digit restriction, ambiguity lists and explicit DN/MN convention. Tests exercise every currently eligible stored dhammatalks caption through the public resolver, retaining its mapped ID among the result or ambiguity candidates. Unrecognised caption formats fail the corpus fixture rather than silently disappearing. Installed-package checks repeat representative names, aliases, ambiguity and guard behavior offline.

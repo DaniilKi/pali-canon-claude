@@ -14,7 +14,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as canon from './canon.mjs';
-import { parseCitation } from './citations.mjs';
+import { translationTitle } from './translation-titles.mjs';
 
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
@@ -120,22 +120,6 @@ const WHY = [
   'The name is in the opening paragraphs (the nidāna or first lines).',
   'The name is in the body of the text.',
 ];
-
-/** Existing English title metadata; dhammatalks stores its title after a citation in the legacy caption. */
-function translationTitle(link) {
-  if (link.english?.trim()) return link.english;
-  if (link.source !== 'dhammatalks') return null;
-  const reference = link.reference || '';
-  const numbered = reference.match(/^([A-Za-z][A-Za-z-]*\s+\d+(?:[.:]\d+)*(?:[-–—]\d+(?:[.:]\d+)*)?)\s+(.+)$/u);
-  if (numbered) {
-    try {
-      const header = parseCitation(numbered[1]);
-      if (header.kind === 'id' || header.kind === 'uid') return numbered[2];
-    } catch { /* An unrecognised caption is not evidence of a title. */ }
-  }
-  // The source's Dhammapada chapter captions use Roman numerals. Bare Itivuttaka references have no individual title.
-  return reference.match(/^Dhp\s+[IVX]+\s*:\s*(.+)$/u)?.[1] || null;
-}
 
 /** The canon's search index (owner text and folded Pāli per paragraph), built once by canon.search. */
 function searchIndex() {

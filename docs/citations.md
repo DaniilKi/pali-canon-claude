@@ -118,6 +118,12 @@ What the tool does:
 - **reports the translator's own number** whenever it differs, so you can give both;
 - treats the PTS volume and page as the anchor both systems share.
 
+## Sutta names and linked English titles
+
+`resolve_reference` also accepts indexed Pāli names and stored English translation titles. For example, `A Gallon Measure` (or `Gallon Measure`) resolves to SN 3.13, and `King Udena` to Ud 7.10, using the existing dhammatalks captions. The result identifies the matched name and its source; an article-stripped alias can appear in `name_match.matched_name`.
+
+Names shared by several texts retain all candidates and the existing explicit DN/MN convention; other ambiguous names are not guessed. A single common English word needs a marker such as `sutta` or `chapter`, and a name containing digits does not enter name lookup. Use a canonical citation when a title is ambiguous. This lookup uses bundled metadata and does not fetch translation pages.
+
 ## Texts printed together
 
 The edition prints some texts as one block: AN 1.296–305, Dhp 1–20 (a chapter), SN 46.143–152. You can ask for the whole block or any one member ("AN 1.300", "Dhp 5"); the tool tells you the member is part of a larger block.

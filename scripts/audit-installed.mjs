@@ -26,7 +26,7 @@ let stderr = '';
 const counts = { canonical_texts: 0, canonical_segments: 0, canonical_pages: 0,
   commentary_texts: 0, commentary_unaligned_texts: 0, commentary_segments: 0, commentary_pages: 0,
   commentary_books: 0, commentary_book_segments: 0, commentary_book_pages: 0, commentary_search_checks: 0,
-  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0, browse_scope_checks: 0, browse_group_pages: 0, quote_verification_checks: 0, edition_citation_checks: 0, citation_range_checks: 0, abt_citation_links: 0, paired_normalisation_checks: 0, proper_name_title_checks: 0 };
+  postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0, browse_scope_checks: 0, browse_group_pages: 0, quote_verification_checks: 0, edition_citation_checks: 0, citation_range_checks: 0, abt_citation_links: 0, paired_normalisation_checks: 0, proper_name_title_checks: 0, stored_title_resolution_checks: 0 };
 try {
   if (reportAt >= 0) await writeFile(resolve(process.argv[reportAt + 1]), '{"status":"running"}\n');
   const serverDirectory = serverAt >= 0 ? resolve(process.argv[serverAt + 1]) : join(root, 'server');
@@ -321,6 +321,26 @@ require('node:module').syncBuiltinESMExports();\n`);
     if (name === 'Heedfulness') assert.equal(ranked.paragraphs_naming_it, undefined, 'English metadata is not a body occurrence');
     counts.proper_name_title_checks += 1;
   }
+  for (const [reference, id, matched] of [['A Gallon Measure', 'sn3.13', 'A Gallon Measure'],
+    ['Gallon Measure', 'sn3.13', 'Gallon Measure'], ['King Udena', 'ud7.10', 'King Udena'],
+    ['Categorically sutta', 'an2.18', 'Categorically']]) {
+    const result = await call('resolve_reference', { reference });
+    assert.equal(result.id, id);
+    assert.equal(result.matched_by, 'name');
+    assert.equal(result.name_match.matched_name, matched);
+    assert.match(result.name_match.via, /English title \(dhammatalks\.org/);
+    counts.stored_title_resolution_checks += 1;
+  }
+  for (const reference of ['Categorically', 'King Udena 999']) {
+    const result = await client.callTool({ name: 'resolve_reference', arguments: { reference } });
+    assert.equal(result.isError, true, 'stored captions cannot bypass topic/numeric-name safeguards');
+    counts.stored_title_resolution_checks += 1;
+  }
+  const repeatedTitle = await client.callTool({ name: 'resolve_reference', arguments: { reference: 'Heedfulness chapter' } });
+  assert.equal(repeatedTitle.isError, true);
+  assert.match(repeatedTitle.content[0].text, /Name matches are never guessed/);
+  assert.match(repeatedTitle.content[0].text, /Dhp 21–32/);
+  counts.stored_title_resolution_checks += 1;
   assert.ok(!stderr.includes('UNEXPECTED_NETWORK_ATTEMPT'), 'every checked operation must work without attempting network access');
   const summary = { ...counts, approximate_canonical_texts: canon.load().canon.units.filter((unit) => unit.approximate).length, network_attempts: 0, failures: 0 };
   if (reportAt >= 0) {

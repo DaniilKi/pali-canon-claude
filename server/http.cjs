@@ -25609,6 +25609,22 @@ function loadGlossary() {
   return cached2;
 }
 
+// src/translation-titles.mjs
+function translationTitle(link) {
+  if (link.english?.trim()) return link.english;
+  if (link.source !== "dhammatalks") return null;
+  const reference = link.reference || "";
+  const numbered = reference.match(/^([A-Za-z][A-Za-z-]*\s+\d+(?:[.:]\d+)*(?:[-–—]\d+(?:[.:]\d+)*)?)\s+(.+)$/u);
+  if (numbered) {
+    try {
+      const header = parseCitation(numbered[1]);
+      if (header.kind === "id" || header.kind === "uid") return numbered[2];
+    } catch {
+    }
+  }
+  return reference.match(/^Dhp\s+[IVX]+\s*:\s*(.+)$/u)?.[1] || null;
+}
+
 // src/sutta-names.mjs
 var fold5 = fold3;
 var SUTTA_END = /(suttantam|suttanta|suttam|suttani|suttena|suttassa|sutte|suttam|sutta|suttas|suttanta)$/;
@@ -25643,11 +25659,12 @@ function buildIndex() {
     const u = d.byId.get(id);
     if (!u) continue;
     for (const t of links) {
-      if (t.english && !/\d/.test(t.english)) {
+      const english2 = translationTitle(t);
+      if (english2 && !/\d/.test(english2)) {
         const via = `English title (${sourceName(t)}, ${t.translator})`;
-        add(u, t.english, via, true);
-        const bare = t.english.replace(/^(the|a|an)\s+/i, "");
-        if (bare !== t.english) add(u, bare, via, true);
+        add(u, english2, via, true);
+        const bare = english2.replace(/^(the|a|an)\s+/i, "");
+        if (bare !== english2) add(u, bare, via, true);
       }
       if (t.pali_title && !/\d/.test(t.pali_title)) add(u, t.pali_title, `P\u0101li title (${sourceName(t)})`);
     }
@@ -28444,20 +28461,6 @@ var WHY = [
   "The name is in the opening paragraphs (the nid\u0101na or first lines).",
   "The name is in the body of the text."
 ];
-function translationTitle(link) {
-  if (link.english?.trim()) return link.english;
-  if (link.source !== "dhammatalks") return null;
-  const reference = link.reference || "";
-  const numbered = reference.match(/^([A-Za-z][A-Za-z-]*\s+\d+(?:[.:]\d+)*(?:[-–—]\d+(?:[.:]\d+)*)?)\s+(.+)$/u);
-  if (numbered) {
-    try {
-      const header = parseCitation(numbered[1]);
-      if (header.kind === "id" || header.kind === "uid") return numbered[2];
-    } catch {
-    }
-  }
-  return reference.match(/^Dhp\s+[IVX]+\s*:\s*(.+)$/u)?.[1] || null;
-}
 function searchIndex() {
   const d = load();
   if (!d.search) search("evam", { limit: 1 });
