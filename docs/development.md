@@ -366,3 +366,7 @@ Each `matched_titles` entry records the exact title, language and source, plus t
 `translation-titles.mjs` supplies the same metadata title extraction to proper-name ranking and reference-name indexing. Explicit English title fields and supported dhammatalks citation-plus-title captions are treated consistently, without indexing bare bibliographic references. The title's existing canonical mapping is retained; the caption's citation header is not used to infer a new mapping.
 
 The reference resolver preserves its article aliases, single-word English topic guard, digit restriction, ambiguity lists and explicit DN/MN convention. Tests exercise every currently eligible stored dhammatalks caption through the public resolver, retaining its mapped ID among the result or ambiguity candidates. Unrecognised caption formats fail the corpus fixture rather than silently disappearing. Installed-package checks repeat representative names, aliases, ambiguity and guard behavior offline.
+
+## Optional real-browser reader acceptance
+
+`python scripts/widget-browser-check.py --report widget-browser.report.json` runs the actual reader HTML in Chromium at phone and desktop widths with simulated Apps SDK/MCP Apps hosts. Install Python Playwright and its Chromium first, or select an installed browser with `--browser /path/to/chromium`. This is separate from the dependency-free VM regressions in `npm test`; it adds real DOM, layout and postMessage checks without claiming signed-in client acceptance. See [local client evidence and limits](local-client-acceptance.md).

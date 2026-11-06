@@ -218,3 +218,5 @@ instead of answering from memory.
 ## Tested
 
 On 1 November 2026 we started the server through mcpo 0.0.20 on Windows 11 (Node.js 26, with the version pins shown above) and checked that all 11 tools appear in its OpenAPI listing, and that `resolve_reference` (MN 10), `search_texts` and `get_text` (Dhp 1) return the bundled text with no internet needed. The LM Studio, Open WebUI, oterm, Kit and MCPHost steps follow each project's documentation as of that date. This checks the bridge, not a full chat: we have not yet run the steps end to end in a chat app with a local model. Apps change quickly: if a menu has moved, their own guide (linked above) is the reference. Please [open an issue](https://github.com/DaniilKi/pali-canon-claude/issues) if something here no longer matches.
+
+On 6 November 2026 the development server was also checked through mcpo 0.0.20 on Linux (Python 3.12.14, MCP Python 1.30.0, FastAPI 0.119.1, Node 24.19.0): all 33 routes appeared and 27 local HTTP feature/continuation checks passed. This still checks the bridge rather than a model-driven chat. See [local client acceptance evidence](../local-client-acceptance.md).

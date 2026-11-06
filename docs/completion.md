@@ -69,6 +69,10 @@ A separate data comparison against the reliability tip confirmed identical canon
 
 All four outage scenarios passed, including ATI plus GitHub raw unavailable and every online source unavailable. Full live smoke remained unsuccessful because dhammatalks talk search was unreachable. Live evaluations passed 200 of 201 questions: the exact dhammatalks MN 10 check received its explicitly labelled ATI fallback during source unavailability. These are recorded failures, not a fully green live-source acceptance result. Test expectations were retained.
 
+## Additional local client evidence
+
+An independent review of verifier commit `efe9f24` passed 21 targeted tests and 17 HTTP/widget checks. Real Chromium rendering and the mcpo OpenAPI bridge were also exercised; Codex app-server startup remains blocked by this executor's read-only client home. See [the exact scope, versions and remaining client gates](local-client-acceptance.md). These checks do not establish signed-in app or model-driven chat acceptance.
+
 ## Remaining acceptance gates
 
 - A separate independent integration review and the remote OS/Node CI matrix are still required before release approval. Local automated checks are evidence of implementation behavior, not independent scholarly review.
