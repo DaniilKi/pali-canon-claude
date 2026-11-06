@@ -331,8 +331,13 @@ function locateGeneric(d, book, rest, written) {
 
 /** Resolve a generic paragraph citation left pending by locate(). */
 function settle(sel, blocks) {
-  if (!sel.pendingParagraph) return sel;
+  if (sel.pendingParagraph === undefined) return sel;
   const p = sel.pendingParagraph;
+  if (!(p > 0)) throw new CitationError('Give a positive VRI paragraph number. Paragraph 0 does not identify a passage.');
+  const scopedHits = (paraIndex(blocks).get(p) || []).filter((i) => i >= sel.start && i < sel.end);
+  if (!sel.wholeBook && scopedHits.length > 1) {
+    throw new CitationError(`${sel.title} restarts its paragraph numbers within this chapter: VRI paragraph ${p} occurs ${scopedHits.length} times. No occurrence was selected. Read the chapter ("${sel.book.id} ${sel.chapter}") or search for a phrase to locate the passage.`);
+  }
   if (sel.wholeBook) {
     const hits = paraIndex(blocks).get(p) || [];
     if (!hits.length) throw new CitationError(`${sel.book.title} has no VRI paragraph ${p}.`);

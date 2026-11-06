@@ -31976,8 +31976,13 @@ function locateGeneric(d, book, rest, written) {
   throw new CitationError2(`Unrecognised citation "${written}" for ${book.title}. Use "${book.id}", "${book.id} <chapter>", "${book.id} <chapter>.<VRI paragraph>" or "${book.id} \xA7<VRI paragraph>".`);
 }
 function settle(sel, blocks) {
-  if (!sel.pendingParagraph) return sel;
+  if (sel.pendingParagraph === void 0) return sel;
   const p = sel.pendingParagraph;
+  if (!(p > 0)) throw new CitationError2("Give a positive VRI paragraph number. Paragraph 0 does not identify a passage.");
+  const scopedHits = (paraIndex(blocks).get(p) || []).filter((i) => i >= sel.start && i < sel.end);
+  if (!sel.wholeBook && scopedHits.length > 1) {
+    throw new CitationError2(`${sel.title} restarts its paragraph numbers within this chapter: VRI paragraph ${p} occurs ${scopedHits.length} times. No occurrence was selected. Read the chapter ("${sel.book.id} ${sel.chapter}") or search for a phrase to locate the passage.`);
+  }
   if (sel.wholeBook) {
     const hits = paraIndex(blocks).get(p) || [];
     if (!hits.length) throw new CitationError2(`${sel.book.title} has no VRI paragraph ${p}.`);

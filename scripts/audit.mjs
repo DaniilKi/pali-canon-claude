@@ -373,7 +373,21 @@ else {
           else { count('postcanonical-roundtrip'); levels[r.paragraph ? 'paragraph' : r.kind === 'book' || r.kind === 'work' ? 'book' : 'chapter'] += 1; }
         } catch (e) { fail('postcanonical-roundtrip', `${b.id} block ${i}: ${c}: ${e.message}`); }
       }
-      // Generic forms: "<id> k.p" for the first block carrying p in chapter k (ranges such as 50-205 carry every p in them), and "<id> §p" when p occurs once.
+      // Generic forms: unique paragraph numbers resolve; repeats within a chapter must be refused.
+      // Count occurrences from raw source blocks, independently of paragraph selection.
+      const chapterNumbers = new Map();
+      const chapterOccurrences = (k, p) => {
+        if (!chapterNumbers.has(k)) {
+          const scope = postcanonical.locate(`${b.id} ${k}`);
+          const numbers = new Map();
+          for (let j = scope.start; j < scope.end; j += 1) {
+            const range = postcanonical.paraRange(b.blocks[j][1]);
+            if (range) for (let n = range[0]; n <= range[1]; n += 1) numbers.set(n, (numbers.get(n) || 0) + 1);
+          }
+          chapterNumbers.set(k, numbers);
+        }
+        return chapterNumbers.get(k).get(p) || 0;
+      };
       const seen = new Map();
       b.blocks.forEach(([, n]) => { const r = postcanonical.paraRange(n); if (r) for (let p = r[0]; p <= r[1]; p += 1) seen.set(p, (seen.get(p) || 0) + 1); });
       const firstInChapter = new Set();
@@ -387,11 +401,16 @@ else {
         for (let p = r[0]; p <= r[1] && k; p += 1) firstInChapter.add(`${k}|${p}`);
         if (first) { if (i < (b.works.slice(1).find(([, w]) => w > b.chapters[k - 1][1])?.[1] ?? Infinity)) forms.push(`${b.id} ${k}.${r[0]}`); }
         for (const ref of forms) {
+          const ambiguous = ref === `${b.id} ${k}.${r[0]}` && chapterOccurrences(k, r[0]) > 1;
           try {
             const sel = postcanonical.select(ref);
-            if (sel.book !== b || sel.start > i || sel.end <= i || sel.paragraph !== n) fail('postcanonical-generic', `${ref} -> [${sel.start},${sel.end}) §${sel.paragraph}, not block ${i}`);
+            if (ambiguous) fail('postcanonical-generic', `${ref} selected one of multiple source occurrences`);
+            else if (sel.book !== b || sel.start > i || sel.end <= i || sel.paragraph !== n) fail('postcanonical-generic', `${ref} -> [${sel.start},${sel.end}) §${sel.paragraph}, not block ${i}`);
             else count('postcanonical-generic-paragraph');
-          } catch (e) { fail('postcanonical-generic', `${ref}: ${e.message}`); }
+          } catch (e) {
+            if (ambiguous && e.message.includes(`occurs ${chapterOccurrences(k, r[0])} times`) && /No occurrence was selected/.test(e.message)) count('postcanonical-generic-ambiguity-refused');
+            else fail('postcanonical-generic', `${ref}: ${e.message}`);
+          }
         }
       });
     }
