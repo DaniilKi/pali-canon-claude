@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "status": "assessment_only_not_a_translation_import",
+  "source": {
+    "repository": "https://github.com/cbeta-org/xml-p5",
+    "commit": "dbdea41071e1e260ad84b72faefd4587333cf76d",
+    "release": "CBETA 2026.R2",
+    "path": "N/N26/N26n0008.xml",
+    "git_blob_sha1": "2384d11a0a9b88599334870800e2470adde38591",
+    "sha256": "0dde91f3f686dbbfc00bce93dd9be28df23bd92e9b776cf2a7ffbfa953262b04",
+    "bytes": 28115,
+    "document_id": "N26n0008",
+    "title": "小誦經",
+    "translator_as_printed": "悟醒譯",
+    "edition": "漢譯南傳大藏經（元亨寺版）",
+    "header_publication_date": "2025-01-30 02:14:01 +0800"
+  },
+  "rights": {
+    "assigned_cc_license": null,
+    "artifact_condition": "Available for non-commercial use when distributed with this header intact.",
+    "current_notice": "https://cbeta.org/copyright",
+    "current_notice_license": "CC BY-NC-SA 4.0 International",
+    "release_readme_notice": "https://www.cbeta.org/copyright.php",
+    "release_readme_notice_redirect": "https://archive2.cbeta.org/copyright.php",
+    "archived_notice_license": "CC BY-NC-SA 3.0 Taiwan",
+    "release_license_selection": "unresolved_do_not_assign_a_version_by_header_date"
+  },
+  "gates": {
+    "runtime_enabled": false,
+    "independent_bilingual_review": "not_obtained",
+    "alignment": "structural_candidates_only",
+    "issue_35": "open_requires_at_least_three_languages"
+  },
+  "section_headings": ["一 三歸文", "二 十戒文", "三 三十二身分", "四 問沙彌文", "五 吉祥經", "六 三寶經", "七 戶外經", "八 伏藏經", "九 慈悲經"],
+  "candidates": [
+    {"canonical_id": "kp1", "citation": "Khp 1", "pali_title": "Saraṇattayaṃ", "section": 1, "heading_id": "pN26p0001a0601", "content_ids": ["pN26p0001a0701"], "excluded_preface_ids": ["lgN26p0001a0301"], "note_anchor_ids": []},
+    {"canonical_id": "kp2", "citation": "Khp 2", "pali_title": "Dasasikkhāpadaṃ", "section": 2, "content_ids": ["pN26p0001a1101"], "excluded_preface_ids": [], "note_anchor_ids": []},
+    {"canonical_id": "kp3", "citation": "Khp 3", "pali_title": "Dvattiṃsākāro", "section": 3, "content_ids": ["pN26p0002a0401"], "excluded_preface_ids": [], "note_anchor_ids": []},
+    {"canonical_id": "kp4", "citation": "Khp 4", "pali_title": "Kumārapañhā", "section": 4, "content_ids": ["pN26p0002a0901"], "excluded_preface_ids": [], "note_anchor_ids": ["nkr_note_orig_0002001"]}
+  ]
+}
