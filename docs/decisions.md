@@ -625,3 +625,10 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** Independent review confirmed duplicate-title refusal and found a unique title that could not be read: `Visuddhimagga Nidānakathā` was intercepted as a malformed Visuddhimagga citation before the catalogue lookup, although its exact ID and title-based search filter worked.
 - **Decision.** Try the exact catalogue ID, file stem or unambiguous complete title (including a chapter/paragraph suffix) before the special Visuddhimagga/Abhidhammatthasaṅgaha shorthand parsers. Test every unique catalogue title, title/ID source equality, public resolution/reading, and the established shorthand and ambiguity behavior.
 - **Consequences.** The Nidānakathā remains a separately labelled post-canonical source. Plain `Visuddhimagga 3` remains an unavailable PTS-page lookup, and `Vism IV.1`/`Vism §51` retain their meanings. No source text, alignment, numbering, rights or data changes.
+
+
+### D104. Keep Abhidhammatthasaṅgaha search within the selected work
+
+- **Context.** The `abhidh-s` work alias read only the Saṅgaha but searched its entire VRI file, including the separate Abhidhammatthavibhāvinīṭīkā appended after block 874. A quotation present only in that later work appeared in a Saṅgaha-scoped search.
+- **Decision.** Bound the alias by the same existing `workEnd` used by the reader. Keep exact book IDs and file stems as whole-file selections, Visuddhimagga as both volumes, and combine multiple selections by union. Filter complete searchable passages against the selected boundary before matching.
+- **Consequences.** Tests use actual bundled text from both works, check alias exclusion and manual retention, and preserve whole-file, mixed and duplicate filters. No new boundary is inferred and no text, source, licence or data changes.
