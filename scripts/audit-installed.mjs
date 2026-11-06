@@ -24,6 +24,7 @@ const client = new Client({ name: 'pali-installed-corpus-audit', version: '1.0.0
 let transport;
 let stderr = '';
 const counts = { canonical_texts: 0, canonical_segments: 0, canonical_pages: 0,
+  shared_span_checks: 0,
   commentary_texts: 0, commentary_unaligned_texts: 0, commentary_segments: 0, commentary_pages: 0,
   commentary_books: 0, commentary_book_segments: 0, commentary_book_pages: 0, commentary_search_checks: 0,
   postcanonical_books: 0, postcanonical_segments: 0, postcanonical_pages: 0, lazy_data_checks: 0, search_checks: 0, search_scope_checks: 0, grouped_scope_checks: 0, title_search_pages: 0, title_search_matches: 0, title_search_checks: 0, quote_search_checks: 0, browse_scope_checks: 0, browse_group_pages: 0, quote_verification_checks: 0, edition_citation_checks: 0, citation_range_checks: 0, abt_citation_links: 0, paired_normalisation_checks: 0, proper_name_title_checks: 0, stored_title_resolution_checks: 0 };
@@ -83,6 +84,21 @@ require('node:module').syncBuiltinESMExports();\n`);
       missingCommentary.push({ id: u.id, citation: u.acronym, collection: u.collection, notes: result.notes });
     }
     if (counts.canonical_texts % 1000 === 0) console.log(`Checked ${counts.canonical_texts} canonical texts and their commentary`);
+  }
+  const sharedOwner = await call('get_text', { uid: 'pli-tv-bu-vb-as2', limit: 200 });
+  const sharedCommentary = await call('get_commentary', { uid: 'pli-tv-bu-vb-as2', limit: 200 });
+  const firstDisputeRule = await call('get_text', { uid: 'pli-tv-bu-vb-as1', limit: 200 });
+  const withoutRef = (segments) => segments.map(({ ref, ...segment }) => segment);
+  for (const uid of ['pli-tv-bu-vb-as3', 'pli-tv-bu-vb-as4', 'pli-tv-bu-vb-as5', 'pli-tv-bu-vb-as6', 'pli-tv-bu-vb-as7', 'pli-tv-bu-vb-as1-7']) {
+    const result = await call('get_text', { uid, limit: 200 });
+    const expected = uid.endsWith('1-7') ? [...firstDisputeRule.segments, ...sharedOwner.segments] : sharedOwner.segments;
+    assert.deepEqual(withoutRef(result.segments), withoutRef(expected), `${uid}: restricted to the shared source passage`);
+    assert.equal(result.next_offset, null);
+    counts.shared_span_checks += 1;
+    const explained = await call('get_commentary', { uid, limit: 200 });
+    assert.deepEqual(withoutRef(explained.segments), withoutRef(sharedCommentary.segments), `${uid}: no commentary from following root texts`);
+    assert.equal(explained.next_offset, null);
+    counts.shared_span_checks += 1;
   }
   for (const book of commentary.load().books) {
     const uid = commentary.bookInfo(book).uid;

@@ -20,6 +20,13 @@ const counts = {};
 const count = (k) => { counts[k] = (counts[k] || 0) + 1; };
 
 for (const u of d.canon.units) {
+  if (u.shares_passage_with) {
+    const owner = d.byId.get(u.shares_passage_with);
+    if (!u.approximate || !owner || u.book !== owner.book || u.start !== owner.start || u.end !== owner.end
+      || u.vri !== owner.vri || JSON.stringify(u.pts) !== JSON.stringify(owner.pts)) {
+      fail('shared-passage', `${u.id}: does not match its declared owner ${u.shares_passage_with}`);
+    } else count('shared-passage');
+  }
   // 1. The ID itself resolves to this text (or, for an approximate member, to a text with the same passage).
   try {
     const r = canon.resolve(u.id);

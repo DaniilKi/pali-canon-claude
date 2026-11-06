@@ -21,6 +21,7 @@ from collections import OrderedDict
 
 sys.path.insert(0, os.path.dirname(__file__))
 import vri  # noqa: E402
+from shared_spans import synchronise_shared_spans  # noqa: E402
 
 BOOKS = OrderedDict([
     # file: (collection, pitaka)
@@ -597,6 +598,9 @@ def aligned_units(builder, bilara):
             owner = next((p for p in primary if p['book'] == u['book'] and p['start'] == u['start'] and not p.get('approximate')), None)
             if owner:
                 u['end'] = owner['end']
+    # Shared records were copied before global clipping. Refresh them after every
+    # primary boundary adjustment, before their spans are used to build groups.
+    synchronise_shared_spans(units)
     by_id = {u['id']: u for u in units}
     for file_uid, keys in files.items():
         if file_uid in by_id or len(keys) < 2:

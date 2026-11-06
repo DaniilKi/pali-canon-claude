@@ -1,22 +1,22 @@
 {
   "version": 1,
-  "size": 10832372,
-  "sha256": "3bb272e8e57d330fc88d41379b800cfaea301cb2bc6128243cf73bf22546f4f9",
+  "size": 10831883,
+  "sha256": "4ecff3352c9b74781baa9dd9e9196a119f9c3c7f7bbac3815bb101fda9e626eb",
   "parts": [
     {
       "file": "commentary.json.gz.part-0001",
       "size": 4194304,
-      "sha256": "8a22f46c2e33e4dee3430e319cebc2dd852a03faee0be18c7035c22159deaf28"
+      "sha256": "581fb24ed95f5ba4a30f7ca02be4dced03f81315f34d3aa6e8a8601a97f2d946"
     },
     {
       "file": "commentary.json.gz.part-0002",
       "size": 4194304,
-      "sha256": "47f03c6da849940620d44d8404ceb98752a7849eda681c0b4475c3cc2b96e5ac"
+      "sha256": "40d18b97cd9859a80eced012436e84cecad1654a78a33a98b7e3ed8f9700bf98"
     },
     {
       "file": "commentary.json.gz.part-0003",
-      "size": 2443764,
-      "sha256": "88ee68bb706c373d37268baf7d08808b9630e0d29f583bfc054676fd52db960d"
+      "size": 2443275,
+      "sha256": "65e6bb1b7b8ec6b1e4f536d9db1fb21ef685fa2af20ae18da0bd2935deacb6a9"
     }
   ]
 }
