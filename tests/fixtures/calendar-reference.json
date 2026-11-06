@@ -1124,7 +1124,11 @@
     }
    },
    "2026": {
-    "url": "https://www.watmetta.org/news/Uposatha2026.pdf",
+    "url": "https://watmetta-photos.b-cdn.net/uposatha2026.pdf",
+    "source_page": "https://www.watmetta.org/events/",
+    "previous_url": "https://www.watmetta.org/news/Uposatha2026.pdf",
+    "current_link_checked": "2026-11-06",
+    "current_publication_check": "All 49 date cells and the five festival/retreat dates below match the PDF linked by the current events page. The old URL returns 404; the archived source remains preserved. Both-order wording does not establish an order-wide convention.",
     "archived": "https://web.archive.org/web/20250826191237/https://www.watmetta.org/news/Uposatha2026.pdf",
     "note_on_list": "These are the Uposatha dates for both the Dhammayut Order and the Mahānikāya Order in Thailand.",
     "days": [

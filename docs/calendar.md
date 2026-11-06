@@ -122,15 +122,26 @@ The tool keeps the Pakkhagaṇanā day and reports the Mahānikāya day next to 
 
 ### Myanmar reference
 
-The official lists are circulars of the Department of Civil Aviation, the only government lists of Myanmar public holidays for 2024–2026 that could be retrieved. They are plain PDFs. No web-archive copy of them exists, so the fixture records each file's SHA-256 as retrieved on 2026-11-01; anyone can download the PDF and compare. The 2024 list prints the Waso holiday as "Beginning of Buddhist" (the word after it is cut off); its date is the Waso full moon.
+The original official references are Department of Civil Aviation circulars for 2024–2026. They are plain PDFs. The fixture records their SHA-256 values as retrieved on 2026-11-01; those byte hashes were not reverified during the later web-text review below. The 2024 list prints the Waso holiday as "Beginning of Buddhist" (the word after it is cut off); its date is the Waso full moon.
 
 One-day holidays must equal the computed full moon. The Lighting Festival (Thadingyut) and, in 2026, Tazaungmon are given as two- or three-day ranges, so for those the test checks only that the full moon falls inside the range.
 
 An earlier version of the fixture used the Krungsri bank-holiday page for 2026. That page is now behind a bot check and was never archived, so it has been replaced by the government list.
 
-### Not checked
+## Additional published evidence (6 November 2026)
 
-- **Myanmar new-moon and half-moon days** are not public holidays and have no published list here; they come from the same ported calendar as the full moons.
+The offline facts in [`calendar-published-samples.json`](../tests/fixtures/calendar-published-samples.json) were transcribed from original publications and checked against outputs by [`calendar-evidence.test.mjs`](../tests/calendar-evidence.test.mjs). Calendar arithmetic and defaults were unchanged.
+
+- **Myanmar eighth-day samples.** MOI's Global New Light of Myanmar mastheads identify [10 January 2026](https://www.moi.gov.mm/nlm/file-download/download/public/4792) as waning 8 of Pyatho 1387 and [25 January 2026](https://www.moi.gov.mm/nlm/file-download/download/public/4826) as waxing 8 of Tabodwe 1387. The [26 December 2025 edition](https://www.moi.gov.mm/nlm/sites/default/files/newspaper-pdf/2025-12/26_Dec_25_gnlm.pdf) identifies its own date as waxing 8 of Pyatho 1387 (page 1), and also states the January 25 mapping in announcement 170/2025 (page 3). All three date mappings agree with the tool. These are lunar-calendar labels, not independent uposatha announcements or astronomical quarter measurements. They provide three narrow eighth-day checks, not a published all-days observance list; no new-moon sample was established.
+- **Myanmar 2027 holidays.** [DICA/MyCO's Business Calendar](https://myco.dica.gov.mm/public/Holidays.aspx) lists exact full-moon holidays for Tabaung (22 March), Kasong/Kason (20 May) and Waso (18 July). All three match. Thadingyut (14–16 October) and Tazaungmone (12–13 November) are holiday windows; the computed full moons fall inside them. Those are two range checks, not two exact-date validations.
+- **A real source discrepancy.** MyCO gives 25–27 October for the 2026 Thadingyut holiday, while [aviation AIC A 03/2026](https://ais.gov.mm/wp-content/uploads/2025/12/AIC-03-2026.pdf) gives 26–27 October. Both contain the computed 26 October full moon. Different holiday-window bounds do not establish an incorrect full-moon calculation, so neither source is silently substituted for the other.
+- **Wat Metta's current link.** The [events page](https://www.watmetta.org/events/) now links [this 2026 PDF](https://watmetta-photos.b-cdn.net/uposatha2026.pdf); the old `/news/Uposatha2026.pdf` URL returned 404. All 49 date cells and five existing festival/retreat entries match the preserved fixture. The PDF describes both orders, but does not establish a permanent, order-wide Dhammayut convention. The default and side-by-side caveat remain unchanged; human confirmation is still required.
+
+Verification used original PDF text and the official HTML table. Executor downloads were blocked by a proxy and MOI screenshot fetches timed out, so no new PDF byte checksums are claimed. The candidate [Sri Lankan 2026 desk calendar](https://moha.gov.lk/web/images/latest_document/government_holidays/2026/2026_E.pdf) could not be fetched during this review, and contributed no fixture. Astronomical phase dates must be distinguished from poya observance dates before using any such calendar as evidence for the tool's tithi-based observance rule.
+
+### Still not established
+
+- **Myanmar new-moon and half-moon observance coverage** remains incomplete. The three newspaper eighth-day mappings above do not validate an entire observance list or any new-moon date.
 - **Sri Lankan new-moon and half-moon days** are not public holidays and have not been checked against a published list.
 - **Myanmar Māgha Pūjā** has no date (above).
 

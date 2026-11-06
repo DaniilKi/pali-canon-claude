@@ -1,0 +1,24 @@
+{
+  "about": "Calendar date facts independently transcribed from original publications on 2026-11-06. These are narrow samples, not community approval or comprehensive observance validation. No newspaper articles or PDFs are bundled.",
+  "verification": "Original PDF text and the official HTML table were inspected through the web reader. Executor PDF downloads were blocked by a proxy; MOI screenshot fetches timed out. No new byte checksums are claimed.",
+  "sources": {
+    "gnlm-2026-01-10": { "publisher": "Myanmar Ministry of Information / Global New Light of Myanmar", "url": "https://www.moi.gov.mm/nlm/file-download/download/public/4792", "publication_date": "2026-01-10", "page": 1, "location": "masthead" },
+    "gnlm-2026-01-25": { "publisher": "Myanmar Ministry of Information / Global New Light of Myanmar", "url": "https://www.moi.gov.mm/nlm/file-download/download/public/4826", "publication_date": "2026-01-25", "page": 1, "location": "masthead" },
+    "gnlm-2025-12-26": { "publisher": "Myanmar Ministry of Information / Global New Light of Myanmar", "url": "https://www.moi.gov.mm/nlm/sites/default/files/newspaper-pdf/2025-12/26_Dec_25_gnlm.pdf", "publication_date": "2025-12-26", "page": 1, "location": "masthead; page 3 announcement 170/2025 paragraph 2 also maps 2026-01-25 to waxing 8 of Tabodwe 1387" },
+    "myco": { "publisher": "Myanmar Directorate of Investment and Company Administration / MyCO", "url": "https://myco.dica.gov.mm/public/Holidays.aspx", "retrieved": "2026-11-06", "location": "2026 and 2027 Business Calendar holiday tables", "scope": "Single-day holidays give an exact date; first/last-day entries give only an inclusive holiday window." }
+  },
+  "myanmar_lunar_date_samples": [
+    { "date": "2025-12-26", "lunar_day": "waxing 8", "month": "Pyatho", "myanmar_year": 1387, "phase": "waxing-half", "source": "gnlm-2025-12-26" },
+    { "date": "2026-01-10", "lunar_day": "waning 8", "month": "Pyatho", "myanmar_year": 1387, "phase": "waning-half", "source": "gnlm-2026-01-10" },
+    { "date": "2026-01-25", "lunar_day": "waxing 8", "month": "Tabodwe", "myanmar_year": 1387, "phase": "waxing-half", "source": "gnlm-2026-01-25", "corroborating_source": "gnlm-2025-12-26" }
+  ],
+  "lunar_sample_scope": "The publications establish Burmese lunar-date mappings. The phase field applies this project's existing eighth-day rule; these are not published uposatha announcements or astronomical quarter-phase measurements. No new-moon sample was established.",
+  "myco_2027_full_moon_holidays": [
+    { "holiday": "Full Moon Day of Tabaung", "month": "Tabaung", "from": "2027-03-22", "to": "2027-03-22" },
+    { "holiday": "Full Moon Day of Kasong", "month": "Kason", "from": "2027-05-20", "to": "2027-05-20" },
+    { "holiday": "Full Moon Day of Waso", "month": "Waso", "from": "2027-07-18", "to": "2027-07-18" },
+    { "holiday": "Full Moon Day of Thadingyut", "month": "Thadingyut", "from": "2027-10-14", "to": "2027-10-16" },
+    { "holiday": "Full Moon Day of Tazaungmone", "month": "Tazaungmon", "from": "2027-11-12", "to": "2027-11-13" }
+  ],
+  "myco_2026_thadingyut_window": { "from": "2026-10-25", "to": "2026-10-27", "source": "myco", "comparison": "The aviation AIC fixture publishes 2026-10-26 through 2026-10-27. Different holiday windows do not identify different exact full moons." }
+}
