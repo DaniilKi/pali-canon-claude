@@ -496,3 +496,10 @@ node scripts/audit-partial-translations.mjs --server-dir <installed-package-serv
 ```
 
 It changes only a temporary package copy, replaces provider fetches with labelled synthetic responses, checks stdio/HTTP and fresh-process mapping/text changes, and removes the fixture copy. The real candidate and shipped source data remain unchanged.
+
+
+### Partial scopes in public export and documentation coverage
+
+`npm run coverage` and `--json` exclude partial declarations from legacy whole-unit direct/reachable and per-provider counts. Separate `partial_texts`, `partial_links`, `partial_dhammatalks`, `partial_ati` and `partial_anandajoti` counters include declared scopes only; invalid declarations stop reporting. These CLI counts include range records, unlike the runtime collection percentages that count their members.
+
+`scripts/export-index.mjs` retains full `translation_scope` and `whole_unit_coverage: false` on JSON partial entries. JSON/CSV `english_count` excludes partials; `partial_english_count` is separate. Legacy CSV URL, identity, reference and licence columns contain only whole-unit links. The appended `partial_english` column stores a JSON array of complete entries, preserving field association and reading commands. `english_inherited_from` applies to whole-unit links. Tests run the actual coverage/export CLIs with in-memory synthetic declarations and outbound access forbidden; no production source metadata is added.

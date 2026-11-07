@@ -350,3 +350,8 @@ The next reproduced reference bug is fixed: unsupported numeric suffixes in name
 
 
 Pāli fuzzy verification evidence now uses source positions rather than the first equal paragraph. DN 1's repeated-paragraph regressions map to dn1/92, dn1/97 and dn1/109, with complete bounded source-span reading commands. Excerpts begin at the matched words, preserve source combining marks and flag whole-word truncation. Thirteen DN/MN source-window fixtures, long quotations, grouped-source boundaries and native input retain reading/scoring checks in both installed transports (D161). Real-client and expert acceptance remain separate.
+
+
+## Coverage/export follow-up — 7 November 2026
+
+Public citation JSON/CSV and documentation coverage now preserve the runtime partial-source distinction. Synthetic fixtures exercise the actual export and coverage commands with network forbidden, including mixed versions and malformed declarations. No real translation or coverage increment is introduced. The [official Iti 10–13 shared-page lead](translations/iti-shared-page-assessment.md) is a separate actionable scope problem: shared-source retrieval/verification, publisher abbreviations and individual alignment need explicit treatment before adding links for Iti 11–13.

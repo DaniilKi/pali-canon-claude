@@ -84,6 +84,8 @@ English is linked for four Abhidhamma texts, all from Ānandajoti Bhikkhu: two p
 
 ## English translations
 
+Whole-unit counts exclude partial-unit translation mappings. `npm run coverage -- --json` reports `partial_texts`, `partial_links` and separate `partial_dhammatalks`/`partial_ati`/`partial_anandajoti` counts. It counts all indexed records, including ranges, matching this document’s direct-link figures; `list_sources` counts grouped ranges through their members. Neither a partial link nor its containing unit implies whole-unit translation coverage. The public [citation export](export.md) preserves partial scope and keeps CSV whole-unit fields separate. No real partial translation is currently activated.
+
 | Source | Links | Notes |
 |---|---:|---|
 | Ṭhānissaro Bhikkhu, dhammatalks.org | 1,276 | Current versions of his translations |

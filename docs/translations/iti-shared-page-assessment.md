@@ -1,0 +1,11 @@
+# Itivuttaka 10–13 shared-page lead
+
+Assessment only, observed 7 November 2026. No new translation links or source text are added by this review. This lead concerns an existing approved provider and does not use the excluded Ancient Buddhist Texts host.
+
+The [official dhammatalks Itivuttaka index](https://www.dhammatalks.org/suttas/KN/Iti/) explicitly groups 10–13. Its [linked source page](https://www.dhammatalks.org/suttas/KN/Iti/iti10.html) names that range, presents four alternatives with ellipses and refers readers to the verses for 2–5. It is a condensed shared source, not four independent page-level translations. The existing provider licensing/attribution policy remains in force; this assessment copies no English translation body. The rendered official page and index were inspected; no raw artifact or separate paragraph alignment was established.
+
+The bundled index currently attaches that URL only to `iti10`, with the publisher’s range caption. `iti11`, `iti12` and `iti13` have no English links. The VRI titles identify the successive subjects as aversion, delusion, anger and contempt; this agrees with the publisher’s sequence. Number and subject agreement supports the candidate group, but does not independently map words, verses or omissions within its condensed presentation.
+
+The next engineering step is a source-preserving shared-page contract. It must expose the publisher’s whole range and abbreviation/cross-reference limits in metadata, retrieval, quotation verification, comparison/widget views, URL resolution, exports and counts. A quotation found anywhere on that page cannot be attributed to one requested discourse without individual alignment. URL lookup must not arbitrarily identify one member as the whole page. Group links must not inflate verified whole-unit or independent-page counts.
+
+Do not clone the existing link onto the three missing IDs as ordinary complete translations. Preserve the lead until those contracts and source-specific regressions are implemented. This review does not close issue #34 or the broader English coverage gate.
