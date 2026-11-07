@@ -19,6 +19,7 @@ import { gunzipSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { withNormalised } from './input.mjs';
+import { romanizeInput, localizePostCanonical, SCRIPT_DESCRIPTION, scriptName } from './script.mjs';
 
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
@@ -629,22 +630,35 @@ export async function withPostCanonical(canonResult, query, { include = false, l
 
 /** Feature registration (src/features/index.mjs). */
 export function register({ tool, z }) {
-  tool('get_post_canonical', 'Read a post-canonical Pāli book of the VRI edition: the Visuddhimagga ("Vism ch. 1" or "Vism I" chapter, "Vism 1.1" chapter.paragraph, "Vism §19" VRI paragraph), the Abhidhammatthasaṅgaha ("Abhidh-s 1", "Abhidh-s 1.4"), the sub-commentaries (Ṭīkā) and other later works by id ("mahavamsa 3"). Omit the citation, or give "tika" or "anna", to list the books. Not the canon: every result is labelled canonical: false. Works offline. Visuddhimagga PTS pages cannot be located (the VRI edition has none).', {
+  tool('get_post_canonical', 'Read a post-canonical Pāli book of the VRI edition: the Visuddhimagga ("Vism ch. 1" or "Vism I" chapter, "Vism 1.1" chapter.paragraph, "Vism §19" VRI paragraph), the Abhidhammatthasaṅgaha ("Abhidh-s 1", "Abhidh-s 1.4"), the sub-commentaries (Ṭīkā) and other later works by id ("mahavamsa 3"). Omit the citation, or give "tika" or "anna", to list the books. Not the canon: every result is labelled canonical: false. Works offline. Visuddhimagga PTS pages cannot be located (the VRI edition has none). Native-script citation input and script output are supported; continue_with preserves the selection, variants and script.', {
     citation: z.string().max(200).default('').describe('Vism ch. 1, Vism I, Vism 1.1, Vism §19, visuddhi. 1.19, Abhidh-s 1, Abhidh-s 1.4, a book id such as mahavamsa or silakkhandhavagga-tika (optionally with a chapter or chapter.paragraph), or empty to list the books.'),
     offset: z.number().int().min(0).max(100000).default(0).describe('Segment offset for continuation.'),
     limit: z.number().int().min(1).max(200).default(60).describe('Segments per page.'),
     includeVariants: z.boolean().default(false).describe('Include variant readings recorded by VRI (raw notes).'),
-  }, async ({ citation, offset, limit, includeVariants }) => {
-    const key = fold(citation);
-    if (['', 'post-canonical', 'postcanonical', 'all', 'tika', 'anna'].includes(key)) return browse(key, { offset, limit });
-    return getText(citation, { offset, limit, includeVariants });
+    script: z.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
+  }, async ({ citation, offset, limit, includeVariants, script }) => {
+    if (script) scriptName(script);
+    const input = romanizeInput(citation);
+    const key = fold(input.text);
+    const catalogue = ['', 'post-canonical', 'postcanonical', 'all', 'tika', 'anna'].includes(key);
+    const result = catalogue
+      ? browse(key, { offset, limit }) : await getText(input.text, { offset, limit, includeVariants });
+    return { ...localizePostCanonical(result, script, input),
+      continue_with: result.next_offset !== null ? { tool: 'get_post_canonical', citation: catalogue ? key : result.citation,
+        offset: result.next_offset, limit, includeVariants, ...(script ? { script: scriptName(script) } : {}) } : null };
   });
 
-  tool('search_post_canonical', 'Search the full Pāli text of the post-canonical books (Visuddhimagga, Abhidhammatthasaṅgaha, sub-commentaries/Ṭīkā and other VRI Añña books): diacritics optional, all words must appear, "quoted phrases" allowed. Not the canon: results are labelled canonical: false. Works offline.', {
+  tool('search_post_canonical', 'Search the full Pāli text of the post-canonical books (Visuddhimagga, Abhidhammatthasaṅgaha, sub-commentaries/Ṭīkā and other VRI Añña books): diacritics optional, all words must appear, "quoted phrases" allowed. Not the canon: results are labelled canonical: false. Native-script query input and script output are supported; exact/context reading commands retain the script. Works offline.', {
     query: z.string().trim().min(1).max(300),
+    script: z.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
     books: z.array(z.string().max(80)).max(20).optional().describe('Limit to whole-book IDs from get_post_canonical or work aliases, e.g. ["vism"], ["abhidh-s"], ["mulapannasa-tika"]. The abhidh-s alias searches only the Saṅgaha, excluding the appended Vibhāvinī; use abhidhammatthasangaho for the whole VRI file. Multiple entries select their union. Unknown entries are errors; chapter/paragraph citations are not book filters. Omit or use [] for no book restriction.'),
     section: z.enum(['tika', 'anna']).optional().describe('Limit to the VRI Ṭīkā or Añña section.'),
     limit: z.number().int().min(1).max(50).default(10),
     offset: z.number().int().min(0).max(100000).default(0),
-  }, ({ query, books, section, limit, offset }) => withNormalised(query, (q) => search(q, { books, section, limit, offset })));
+  }, async ({ query, books, section, limit, offset, script }) => {
+    if (script) scriptName(script);
+    const input = romanizeInput(query);
+    const result = await withNormalised(input.text, (q) => search(q, { books, section, limit, offset }));
+    return localizePostCanonical(result, script, input);
+  });
 }

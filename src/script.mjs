@@ -404,23 +404,34 @@ export function localizeText(result, script, input) {
 /** search_texts result in `script`: titles and excerpts. */
 export function localizeSearch(result, script, input) {
   const s = script ? scriptName(script) : 'roman';
-  if (s === 'roman') return { ...result, ...inputNote(input) };
   const out = { ...result };
-  if (Array.isArray(out.results)) out.results = out.results.map((r) => localizeUnitFields(r, s));
-  if (Array.isArray(out.title_matches)) out.title_matches = out.title_matches.map((r) => localizeUnitFields(r, s));
-  return { ...out, ...scriptNote(s), ...inputNote(input) };
+  const hit = r => {
+    const value = s === 'roman' ? { ...r } : localizeUnitFields(r, s);
+    if (script) for (const key of ['read_with', 'context_with']) if (value[key]) value[key] = { ...value[key], script: s };
+    return value;
+  };
+  if (Array.isArray(out.results)) out.results = out.results.map(hit);
+  if (Array.isArray(out.title_matches)) out.title_matches = out.title_matches.map(hit);
+  if (script && out.scope_resolution?.read_with) out.scope_resolution = { ...out.scope_resolution,
+    read_with: { ...out.scope_resolution.read_with, script: s } };
+  return { ...out, ...(s !== 'roman' ? scriptNote(s) : {}), ...inputNote(input) };
 }
 
 /** get_text commentary: true: the commentary's segments and title in `script`, by the same rules as the canon segments. */
 export function localizeCommentary(commentary, script, input) {
   const s = script ? scriptName(script) : 'roman';
   if (!commentary) return commentary;
-  if (s === 'roman') return { ...commentary, ...inputNote(input) };
-  const out = localizeText(commentary, s, input);
+  const out = s === 'roman' ? { ...commentary, ...inputNote(input) } : localizeText(commentary, s, input);
   // A catalogue or an unavailable alignment is not an empty page of commentary.
   if (!Array.isArray(commentary.segments)) delete out.segments;
-  if (out.book) out.book = localizeUnitFields(out.book, s);
-  if (Array.isArray(out.books)) out.books = out.books.map((book) => localizeUnitFields(book, s));
+  if (s !== 'roman' && out.book) out.book = localizeUnitFields(out.book, s);
+  if (s !== 'roman' && Array.isArray(out.books)) out.books = out.books.map((book) => localizeUnitFields(book, s));
+  if (Array.isArray(out.results)) out.results = out.results.map(hit => ({
+    ...(s === 'roman' ? hit : localizeUnitFields(hit, s)),
+    ...(s !== 'roman' && hit.book ? { book: localizeUnitFields(hit.book, s) } : {}),
+    ...(script && hit.read_with ? { read_with: { ...hit.read_with, script: s } } : {}),
+    ...(script && hit.context_with ? { context_with: { ...hit.context_with, script: s } } : {}),
+  }));
   return out;
 }
 
@@ -430,16 +441,20 @@ export function localizeCommentary(commentary, script, input) {
  */
 export function localizePostCanonical(result, script, input) {
   const s = script ? scriptName(script) : 'roman';
-  if (s === 'roman' || !result) return result && { ...result, ...inputNote(input) };
-  const named = (obj, key) => (typeof obj[key] === 'string' ? { [`${key}_roman`]: obj[key], [key]: pali(obj[key], s) } : {});
-  const out = { ...result, ...named(result, 'title') };
+  if (!result) return result;
+  const named = (obj, key) => (s !== 'roman' && typeof obj[key] === 'string' ? { [`${key}_roman`]: obj[key], [key]: pali(obj[key], s) } : {});
+  const out = Array.isArray(result.segments) ? localizeText(result, s, input) : { ...result, ...named(result, 'title') };
   if (out.book && typeof out.book === 'object') out.book = { ...out.book, ...named(out.book, 'title') };
   if (Array.isArray(out.results)) {
     out.results = out.results.map((r) => ({
       ...r, ...named(r, 'book_title'),
-      ...(typeof r.chapter === 'string' ? { chapter: pali(r.chapter, s) } : {}),
-      ...(typeof r.excerpt === 'string' ? { excerpt: pali(r.excerpt, s) } : {}),
+      ...(s !== 'roman' && typeof r.chapter === 'string' ? { chapter: pali(r.chapter, s) } : {}),
+      ...(s !== 'roman' && typeof r.excerpt === 'string' ? { excerpt: pali(r.excerpt, s) } : {}),
+      ...(script && r.read_with ? { read_with: { ...r.read_with, script: s } } : {}),
+      ...(script && r.context_with ? { context_with: { ...r.context_with, script: s } } : {}),
     }));
   }
-  return { ...out, ...scriptNote(s), ...inputNote(input) };
+  for (const key of ['items', 'chapters']) if (Array.isArray(out[key])) out[key] = out[key].map(item => typeof item === 'object' && item ? { ...item, ...named(item, 'title') } : item);
+  if (script && out.read_with) out.read_with = { ...out.read_with, script: s };
+  return { ...out, ...(s !== 'roman' ? scriptNote(s) : {}), ...inputNote(input) };
 }

@@ -3,6 +3,7 @@ import * as commentary from './commentary.mjs';
 import { fold } from './canon.mjs';
 import { withNormalised } from './input.mjs';
 import { searchFold, searchExcerpt, searchTerms } from './search-segments.mjs';
+import { romanizeInput, localizeCommentary, SCRIPT_DESCRIPTION, scriptName } from './script.mjs';
 
 // Bound retained folded text; the source corpus itself is already resident once loaded.
 const INDEX_BUDGET_BYTES = 8 * 1024 * 1024;
@@ -69,10 +70,16 @@ export function search(query, { books, offset = 0, limit = 10 } = {}) {
 }
 
 export function register({ tool, z }) {
-  tool('search_commentary', 'Search the Pāli of all bundled VRI commentary books (Aṭṭhakathā), including passages not aligned to a canonical text. Diacritics optional; all words must match one prose segment or complete stanza; "quoted phrases" accept line breaks. Results are commentary, not canon, and do not assert root-text alignment. Each result includes a direct get_commentary reference for reading the exact source segment and its context. Works offline.', {
+  tool('search_commentary', 'Search the Pāli of all bundled VRI commentary books (Aṭṭhakathā), including passages not aligned to a canonical text. Diacritics optional; all words must match one prose segment or complete stanza; "quoted phrases" accept line breaks. Results are commentary, not canon, and do not assert root-text alignment. Each result includes a direct get_commentary reference for reading the exact source segment and its context. Accepts supported native-script queries and script output; exact/context commands retain the script. Works offline.', {
     query: z.string().min(2).max(500),
+    script: z.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
     books: z.array(z.string().min(1).max(100)).max(100).optional().describe('VRI filenames or commentary:<VRI-file> book references returned by get_commentary with uid "commentary". Omit to search all included books.'),
     offset: z.number().int().min(0).max(1000000).default(0),
     limit: z.number().int().min(1).max(50).default(10),
-  }, ({ query, books, offset, limit }) => withNormalised(query, (value) => search(value, { books, offset, limit })));
+  }, async ({ query, books, offset, limit, script }) => {
+    if (script) scriptName(script);
+    const input = romanizeInput(query);
+    const result = await withNormalised(input.text, (value) => search(value, { books, offset, limit }));
+    return localizeCommentary(result, script, input);
+  });
 }

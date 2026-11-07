@@ -53,6 +53,10 @@ export const TOOL_META = {
 
 /** Data for the widget: Pāli segments (VRI) plus one English translation, each with its attribution. */
 export async function readPassage({ uid, translation, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6000 }) {
+  if (translation !== undefined) {
+    if (typeof translation !== 'string' || !translation.trim()) throw new Error('Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.');
+    translation = translation.trim();
+  }
   const input = romanizeInput(uid);
   const { unit, notes } = canon.resolve(input.text);
   const described = canon.describe(unit, notes);
@@ -119,7 +123,7 @@ export function registerChatgptWidget(server) {
     description: 'Show an individual text in a reading view: Pāli (VRI) and one English translation, with citation, PTS page, translator, attribution and licence. Use when the user wants to read a sutta or passage. Accepts individual citations in supported scripts and source links; displayed text stays Roman. The Pāli works offline; English is fetched live. For English continuation use the exact english.continue_with arguments from the previous result.',
     inputSchema: {
       uid: z.string().min(1).max(300).describe('Any citation: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, a PTS page such as M i 55, or a suttacentral.net / accesstoinsight.org / dhammatalks.org link.'),
-      translation: z.string().max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or a translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
+      translation: z.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or a translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
       english: z.boolean().default(true).describe('Fetch an English translation (live). false shows the Pāli only.'),
       offset: z.number().int().min(0).max(100000).default(0).describe('Pāli segment offset for continuation.'),
       limit: z.number().int().min(1).max(80).default(40).describe('Pāli segments to show.'),

@@ -25348,6 +25348,10 @@ function available(unit) {
   }));
 }
 async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
+  if (which !== void 0) {
+    if (typeof which !== "string" || !which.trim()) throw new Error("Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.");
+    which = which.trim();
+  }
   if (offset > 0 && !/^(ati|dt|aj):/.test(which || "")) {
     throw new Error("Translation continuation requires the exact translation_id returned by the previous page. Use its continue_with arguments; a default or translator name can select a different version after an outage.");
   }
@@ -26401,37 +26405,56 @@ function localizeText(result, script, input) {
 }
 function localizeSearch(result, script, input) {
   const s = script ? scriptName(script) : "roman";
-  if (s === "roman") return { ...result, ...inputNote(input) };
   const out = { ...result };
-  if (Array.isArray(out.results)) out.results = out.results.map((r) => localizeUnitFields(r, s));
-  if (Array.isArray(out.title_matches)) out.title_matches = out.title_matches.map((r) => localizeUnitFields(r, s));
-  return { ...out, ...scriptNote(s), ...inputNote(input) };
+  const hit = (r) => {
+    const value = s === "roman" ? { ...r } : localizeUnitFields(r, s);
+    if (script) {
+      for (const key3 of ["read_with", "context_with"]) if (value[key3]) value[key3] = { ...value[key3], script: s };
+    }
+    return value;
+  };
+  if (Array.isArray(out.results)) out.results = out.results.map(hit);
+  if (Array.isArray(out.title_matches)) out.title_matches = out.title_matches.map(hit);
+  if (script && out.scope_resolution?.read_with) out.scope_resolution = {
+    ...out.scope_resolution,
+    read_with: { ...out.scope_resolution.read_with, script: s }
+  };
+  return { ...out, ...s !== "roman" ? scriptNote(s) : {}, ...inputNote(input) };
 }
 function localizeCommentary(commentary, script, input) {
   const s = script ? scriptName(script) : "roman";
   if (!commentary) return commentary;
-  if (s === "roman") return { ...commentary, ...inputNote(input) };
-  const out = localizeText(commentary, s, input);
+  const out = s === "roman" ? { ...commentary, ...inputNote(input) } : localizeText(commentary, s, input);
   if (!Array.isArray(commentary.segments)) delete out.segments;
-  if (out.book) out.book = localizeUnitFields(out.book, s);
-  if (Array.isArray(out.books)) out.books = out.books.map((book) => localizeUnitFields(book, s));
+  if (s !== "roman" && out.book) out.book = localizeUnitFields(out.book, s);
+  if (s !== "roman" && Array.isArray(out.books)) out.books = out.books.map((book) => localizeUnitFields(book, s));
+  if (Array.isArray(out.results)) out.results = out.results.map((hit) => ({
+    ...s === "roman" ? hit : localizeUnitFields(hit, s),
+    ...s !== "roman" && hit.book ? { book: localizeUnitFields(hit.book, s) } : {},
+    ...script && hit.read_with ? { read_with: { ...hit.read_with, script: s } } : {},
+    ...script && hit.context_with ? { context_with: { ...hit.context_with, script: s } } : {}
+  }));
   return out;
 }
 function localizePostCanonical(result, script, input) {
   const s = script ? scriptName(script) : "roman";
-  if (s === "roman" || !result) return result && { ...result, ...inputNote(input) };
-  const named = (obj, key3) => typeof obj[key3] === "string" ? { [`${key3}_roman`]: obj[key3], [key3]: pali(obj[key3], s) } : {};
-  const out = { ...result, ...named(result, "title") };
+  if (!result) return result;
+  const named = (obj, key3) => s !== "roman" && typeof obj[key3] === "string" ? { [`${key3}_roman`]: obj[key3], [key3]: pali(obj[key3], s) } : {};
+  const out = Array.isArray(result.segments) ? localizeText(result, s, input) : { ...result, ...named(result, "title") };
   if (out.book && typeof out.book === "object") out.book = { ...out.book, ...named(out.book, "title") };
   if (Array.isArray(out.results)) {
     out.results = out.results.map((r) => ({
       ...r,
       ...named(r, "book_title"),
-      ...typeof r.chapter === "string" ? { chapter: pali(r.chapter, s) } : {},
-      ...typeof r.excerpt === "string" ? { excerpt: pali(r.excerpt, s) } : {}
+      ...s !== "roman" && typeof r.chapter === "string" ? { chapter: pali(r.chapter, s) } : {},
+      ...s !== "roman" && typeof r.excerpt === "string" ? { excerpt: pali(r.excerpt, s) } : {},
+      ...script && r.read_with ? { read_with: { ...r.read_with, script: s } } : {},
+      ...script && r.context_with ? { context_with: { ...r.context_with, script: s } } : {}
     }));
   }
-  return { ...out, ...scriptNote(s), ...inputNote(input) };
+  for (const key3 of ["items", "chapters"]) if (Array.isArray(out[key3])) out[key3] = out[key3].map((item) => typeof item === "object" && item ? { ...item, ...named(item, "title") } : item);
+  if (script && out.read_with) out.read_with = { ...out.read_with, script: s };
+  return { ...out, ...s !== "roman" ? scriptNote(s) : {}, ...inputNote(input) };
 }
 
 // src/postcanonical.mjs
@@ -27040,23 +27063,43 @@ async function withPostCanonical(canonResult, query, { include = false, limit = 
   }
 }
 function register({ tool, z }) {
-  tool("get_post_canonical", 'Read a post-canonical P\u0101li book of the VRI edition: the Visuddhimagga ("Vism ch. 1" or "Vism I" chapter, "Vism 1.1" chapter.paragraph, "Vism \xA719" VRI paragraph), the Abhidhammatthasa\u1E45gaha ("Abhidh-s 1", "Abhidh-s 1.4"), the sub-commentaries (\u1E6C\u012Bk\u0101) and other later works by id ("mahavamsa 3"). Omit the citation, or give "tika" or "anna", to list the books. Not the canon: every result is labelled canonical: false. Works offline. Visuddhimagga PTS pages cannot be located (the VRI edition has none).', {
+  tool("get_post_canonical", 'Read a post-canonical P\u0101li book of the VRI edition: the Visuddhimagga ("Vism ch. 1" or "Vism I" chapter, "Vism 1.1" chapter.paragraph, "Vism \xA719" VRI paragraph), the Abhidhammatthasa\u1E45gaha ("Abhidh-s 1", "Abhidh-s 1.4"), the sub-commentaries (\u1E6C\u012Bk\u0101) and other later works by id ("mahavamsa 3"). Omit the citation, or give "tika" or "anna", to list the books. Not the canon: every result is labelled canonical: false. Works offline. Visuddhimagga PTS pages cannot be located (the VRI edition has none). Native-script citation input and script output are supported; continue_with preserves the selection, variants and script.', {
     citation: z.string().max(200).default("").describe("Vism ch. 1, Vism I, Vism 1.1, Vism \xA719, visuddhi. 1.19, Abhidh-s 1, Abhidh-s 1.4, a book id such as mahavamsa or silakkhandhavagga-tika (optionally with a chapter or chapter.paragraph), or empty to list the books."),
     offset: z.number().int().min(0).max(1e5).default(0).describe("Segment offset for continuation."),
     limit: z.number().int().min(1).max(200).default(60).describe("Segments per page."),
-    includeVariants: z.boolean().default(false).describe("Include variant readings recorded by VRI (raw notes).")
-  }, async ({ citation, offset, limit, includeVariants }) => {
-    const key3 = fold6(citation);
-    if (["", "post-canonical", "postcanonical", "all", "tika", "anna"].includes(key3)) return browse2(key3, { offset, limit });
-    return getText(citation, { offset, limit, includeVariants });
+    includeVariants: z.boolean().default(false).describe("Include variant readings recorded by VRI (raw notes)."),
+    script: z.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION)
+  }, async ({ citation, offset, limit, includeVariants, script }) => {
+    if (script) scriptName(script);
+    const input = romanizeInput(citation);
+    const key3 = fold6(input.text);
+    const catalogue2 = ["", "post-canonical", "postcanonical", "all", "tika", "anna"].includes(key3);
+    const result = catalogue2 ? browse2(key3, { offset, limit }) : await getText(input.text, { offset, limit, includeVariants });
+    return {
+      ...localizePostCanonical(result, script, input),
+      continue_with: result.next_offset !== null ? {
+        tool: "get_post_canonical",
+        citation: catalogue2 ? key3 : result.citation,
+        offset: result.next_offset,
+        limit,
+        includeVariants,
+        ...script ? { script: scriptName(script) } : {}
+      } : null
+    };
   });
-  tool("search_post_canonical", 'Search the full P\u0101li text of the post-canonical books (Visuddhimagga, Abhidhammatthasa\u1E45gaha, sub-commentaries/\u1E6C\u012Bk\u0101 and other VRI A\xF1\xF1a books): diacritics optional, all words must appear, "quoted phrases" allowed. Not the canon: results are labelled canonical: false. Works offline.', {
+  tool("search_post_canonical", 'Search the full P\u0101li text of the post-canonical books (Visuddhimagga, Abhidhammatthasa\u1E45gaha, sub-commentaries/\u1E6C\u012Bk\u0101 and other VRI A\xF1\xF1a books): diacritics optional, all words must appear, "quoted phrases" allowed. Not the canon: results are labelled canonical: false. Native-script query input and script output are supported; exact/context reading commands retain the script. Works offline.', {
     query: z.string().trim().min(1).max(300),
+    script: z.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
     books: z.array(z.string().max(80)).max(20).optional().describe('Limit to whole-book IDs from get_post_canonical or work aliases, e.g. ["vism"], ["abhidh-s"], ["mulapannasa-tika"]. The abhidh-s alias searches only the Sa\u1E45gaha, excluding the appended Vibh\u0101vin\u012B; use abhidhammatthasangaho for the whole VRI file. Multiple entries select their union. Unknown entries are errors; chapter/paragraph citations are not book filters. Omit or use [] for no book restriction.'),
     section: z.enum(["tika", "anna"]).optional().describe("Limit to the VRI \u1E6C\u012Bk\u0101 or A\xF1\xF1a section."),
     limit: z.number().int().min(1).max(50).default(10),
     offset: z.number().int().min(0).max(1e5).default(0)
-  }, ({ query, books, section, limit, offset }) => withNormalised(query, (q) => search2(q, { books, section, limit, offset })));
+  }, async ({ query, books, section, limit, offset, script }) => {
+    if (script) scriptName(script);
+    const input = romanizeInput(query);
+    const result = await withNormalised(input.text, (q) => search2(q, { books, section, limit, offset }));
+    return localizePostCanonical(result, script, input);
+  });
 }
 
 // src/variants.mjs
@@ -33200,12 +33243,18 @@ function search3(query, { books, offset = 0, limit = 10 } = {}) {
   };
 }
 function register18({ tool, z }) {
-  tool("search_commentary", 'Search the P\u0101li of all bundled VRI commentary books (A\u1E6D\u1E6Dhakath\u0101), including passages not aligned to a canonical text. Diacritics optional; all words must match one prose segment or complete stanza; "quoted phrases" accept line breaks. Results are commentary, not canon, and do not assert root-text alignment. Each result includes a direct get_commentary reference for reading the exact source segment and its context. Works offline.', {
+  tool("search_commentary", 'Search the P\u0101li of all bundled VRI commentary books (A\u1E6D\u1E6Dhakath\u0101), including passages not aligned to a canonical text. Diacritics optional; all words must match one prose segment or complete stanza; "quoted phrases" accept line breaks. Results are commentary, not canon, and do not assert root-text alignment. Each result includes a direct get_commentary reference for reading the exact source segment and its context. Accepts supported native-script queries and script output; exact/context commands retain the script. Works offline.', {
     query: z.string().min(2).max(500),
+    script: z.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
     books: z.array(z.string().min(1).max(100)).max(100).optional().describe('VRI filenames or commentary:<VRI-file> book references returned by get_commentary with uid "commentary". Omit to search all included books.'),
     offset: z.number().int().min(0).max(1e6).default(0),
     limit: z.number().int().min(1).max(50).default(10)
-  }, ({ query, books, offset, limit }) => withNormalised(query, (value) => search3(value, { books, offset, limit })));
+  }, async ({ query, books, offset, limit, script }) => {
+    if (script) scriptName(script);
+    const input = romanizeInput(query);
+    const result = await withNormalised(input.text, (value) => search3(value, { books, offset, limit }));
+    return localizeCommentary(result, script, input);
+  });
 }
 
 // src/source-book-search.mjs
@@ -33549,7 +33598,7 @@ function createServer2() {
     limit: external_exports.number().int().min(1).max(200).default(60).describe("Segments per page."),
     includeVariants: external_exports.boolean().default(false).describe("Include variant readings recorded by VRI."),
     variants: external_exports.enum(VARIANT_MODES).optional().describe('Variant readings recorded by VRI: "raw" = the notes verbatim (same as includeVariants: true); "structured" = each note split into readings with the editions (sigla) that carry them, plus omissions ("( ) natthi": the passage in parentheses is absent from those editions), note kept verbatim; "none". Overrides includeVariants.'),
-    translation: external_exports.string().max(200).optional().describe('"default" for the preferred English translation, a translation_id, a translator name, or omit for P\u0101li only.'),
+    translation: external_exports.string().trim().min(1).max(200).optional().describe('"default" for the preferred English translation, a translation_id, a translator name, or omit for P\u0101li only. A supplied empty selector is an error.'),
     script: scriptParam,
     commentary: external_exports.boolean().default(false).describe("Add the traditional commentary (A\u1E6D\u1E6Dhakath\u0101) on this text, labelled as commentary, not canon.")
   }, async ({ uid, book, offset, limit, includeVariants, variants, translation: translation2, script, commentary }) => {
@@ -33599,7 +33648,7 @@ function createServer2() {
   }, { network: true });
   tool("get_translation", "Read an English translation of a text (\u1E6Ch\u0101nissaro Bhikkhu on dhammatalks.org, Access to Insight translators, or \u0100nandajoti Bhikkhu on Ancient Buddhist Texts), with attribution, license and numbering notes. Falls back to official mirrors if a site is down.", {
     uid: citation,
-    translation: external_exports.string().max(200).optional().describe('At offset 0: translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), a translator name, or omit for the default. For continuation, use the exact translation_id returned by the previous page.'),
+    translation: external_exports.string().trim().min(1).max(200).optional().describe('At offset 0: translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), a translator name, or omit for the default. For continuation, use the exact translation_id returned by the previous page.'),
     offset: external_exports.number().int().min(0).max(2e6).default(0).describe("Character offset. For nonzero offsets use the previous result's continue_with arguments, including its exact translation_id; offsets cannot transfer between translation versions."),
     limit: external_exports.number().int().min(500).max(3e4).default(12e3).describe("Characters per page.")
   }, async ({ uid, translation: translation2, offset, limit }) => {
@@ -33609,7 +33658,7 @@ function createServer2() {
   }, { network: true });
   tool("compare_translations", "Fetch two to four English translations of the same text side by side, with the P\u0101li opening for reference. Lists what is available when fewer exist.", {
     uid: citation,
-    translations: external_exports.array(external_exports.string().max(200)).max(4).optional().describe("translation_ids or translator names; omit to compare all available (up to 4)."),
+    translations: external_exports.array(external_exports.string().trim().min(1).max(200)).max(4).optional().describe("translation_ids or translator names; omit to compare all available (up to 4)."),
     limit: external_exports.number().int().min(500).max(15e3).default(6e3).describe("Characters per translation.")
   }, async ({ uid, translations, limit }) => {
     const input = romanizeInput(uid);
@@ -33732,6 +33781,10 @@ var TOOL_META = {
   "openai/toolInvocation/invoked": "Reader updated."
 };
 async function readPassage({ uid, translation: translation2, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6e3 }) {
+  if (translation2 !== void 0) {
+    if (typeof translation2 !== "string" || !translation2.trim()) throw new Error("Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.");
+    translation2 = translation2.trim();
+  }
   const input = romanizeInput(uid);
   const { unit, notes } = resolve(input.text);
   const described = describe(unit, notes);
@@ -33814,7 +33867,7 @@ function registerChatgptWidget(server) {
     description: "Show an individual text in a reading view: P\u0101li (VRI) and one English translation, with citation, PTS page, translator, attribution and licence. Use when the user wants to read a sutta or passage. Accepts individual citations in supported scripts and source links; displayed text stays Roman. The P\u0101li works offline; English is fetched live. For English continuation use the exact english.continue_with arguments from the previous result.",
     inputSchema: {
       uid: external_exports.string().min(1).max(300).describe("Any citation: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, a PTS page such as M i 55, or a suttacentral.net / accesstoinsight.org / dhammatalks.org link."),
-      translation: external_exports.string().max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or a translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
+      translation: external_exports.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or a translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
       english: external_exports.boolean().default(true).describe("Fetch an English translation (live). false shows the P\u0101li only."),
       offset: external_exports.number().int().min(0).max(1e5).default(0).describe("P\u0101li segment offset for continuation."),
       limit: external_exports.number().int().min(1).max(80).default(40).describe("P\u0101li segments to show."),

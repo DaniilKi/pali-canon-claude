@@ -127,6 +127,10 @@ export function available(unit) {
 
 /** Fetch one translation of a text. `which` is a translation_id, a translator name fragment, or omitted for the default. */
 export async function translation(unit, which, { offset = 0, limit = 12000 } = {}) {
+  if (which !== undefined) {
+    if (typeof which !== 'string' || !which.trim()) throw new Error('Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.');
+    which = which.trim();
+  }
   if (offset > 0 && !/^(ati|dt|aj):/.test(which || '')) {
     throw new Error('Translation continuation requires the exact translation_id returned by the previous page. Use its continue_with arguments; a default or translator name can select a different version after an outage.');
   }
