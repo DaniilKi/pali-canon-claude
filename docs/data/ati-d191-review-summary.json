@@ -1,0 +1,32 @@
+{
+  "review_packet_only": true,
+  "approvals_changed": false,
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "summary": {
+    "ledger_pages": 114,
+    "pending_pages": 74,
+    "pages_with_first_english_possibilities": 27,
+    "publisher_extents": {
+      "complete": 57,
+      "excerpt": 17
+    }
+  },
+  "warning": "PTS overlap, extent and licence labels are screening clues only. No content, scope or permission is approved. No English body is included.",
+  "decision": "D191",
+  "baseline_commit": "0e12771421af2659daaf0f5fea3c04b16429f2ff",
+  "added_english_links": 4,
+  "newly_linked_units": [
+    "an3.109",
+    "an4.124",
+    "an4.173",
+    "an11.9"
+  ],
+  "packet_sha256": "9605087b2005aaa3a18fa4acb81cf5fa3c5e492d69af12b846deedad74242820",
+  "input_sha256": {
+    "scripts/canon/ati_review_packet.py": "ca7725d3326f54abb929ebf67053da14a4762ba3700c01351f06633dd386ee20",
+    "scripts/canon/reviewed_ati_stories.json": "af9b43230f7d550d91d609969c954581f81c1faf1cefa833e22b2254ee6012f4",
+    "server/data/translations.json": "8b60e7c9818d42e2ac5d34a4c65f82c4097be641a51f703d88e7a76758348932",
+    "docs/data/ati-coverage-screen.json": "c714f0fc9d4941c19674bc44a935609f24438eef2994d68c3c5c9b578a4b88de"
+  }
+}

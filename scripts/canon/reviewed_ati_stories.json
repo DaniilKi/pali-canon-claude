@@ -772,6 +772,86 @@
         "vri_verse_groups": 0
       },
       "mapping_note": "Whole-discourse correspondence with edition numbering: ATI Sannoga Sutta (AN 7.48, PTS A iv 57) maps to indexed AN 7.51 (Saṃyogasuttaṃ), VRI paragraph 51. Four mirrored woman/man bondage and non-bondage sections identify the discourse. ATI condenses repeated negative lists; VRI abbreviates part of its introduction. This is not line-by-line alignment or a general +3 rule."
+    },
+    {
+      "unit_id": "an3.109",
+      "path": "/tipitaka/an/an03/an03.105.than",
+      "pali_title": "Arakkhitasuttaṃ",
+      "english_title": "The Peak of the Roof",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 3.105",
+      "source_verses": "AN 3.105; PTS A i 261",
+      "vri_verses": "110",
+      "source_html_sha256": "4e3a7ab5bc1cf980660ad1ca17176739d547b99d62014df7508db1b14ea72e2d",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "1a0eabd116c890c95fce6483e85afb3e207bbdec2afc0c6d0111250caea4e2db",
+      "evidence": {
+        "basis": "Anathapindika; unguarded/guarded mind, bodily/verbal/mental actions, sogginess/rot and bad/good death; parallel poorly/well-roofed house similes.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Kuta Sutta AN 3.105 maps to indexed AN 3.109 (Arakkhitasuttaṃ), VRI paragraph 110. Anathapindika, the guarded/unguarded action sequences and both roof similes establish correspondence, not the overlapping PTS page or a general offset. Nearby AN 3.107 concerns singing/dancing, AN 3.108 insatiability. ATI abbreviates repeated action lists; editorial See also retains publisher numbering. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an4.124",
+      "path": "/tipitaka/an/an04/an04.124.than",
+      "pali_title": "Dutiyanānākaraṇasuttaṃ",
+      "english_title": "Mental Absorption (2)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 4.124",
+      "source_verses": "AN 4.124; PTS A ii 128",
+      "vri_verses": "124",
+      "source_html_sha256": "b82d9f85c0cbdd7e7c3162e5ba83873b227ee1c05265fe0d1c061c25ba2d5851",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "abe1845f1778c90178abc411113e71b5ad3182f51683c2d2fa3de93f96db30b5",
+      "evidence": {
+        "basis": "Four jhanas; eleven ways of regarding the five aggregates; Pure Abodes rebirth not shared by ordinary people.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Jhana Sutta AN 4.124 matches indexed AN 4.124 (Dutiyanānākaraṇasuttaṃ), VRI paragraph 124. The four absorptions, eleven contemplation predicates and Pure Abodes conclusion identify the second discourse. Both editions abbreviate repeated absorption formulas. These published abbreviations are retained, not filled in by the tool. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an4.173",
+      "path": "/tipitaka/an/an04/an04.174.than",
+      "pali_title": "Mahākoṭṭhikasuttaṃ",
+      "english_title": "To Kotthita",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 4.174",
+      "source_verses": "AN 4.174; PTS A ii 161",
+      "vri_verses": "173",
+      "source_html_sha256": "cccc86f94039ab566a0f7d86cd3df3cd40c92b6bbe78ffcab5559c3e5454a26c",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "4697898381786bd0904860791aba980182fe6ee73c3292aa6b01afef7579983a",
+      "evidence": {
+        "basis": "Maha Kotthita questions Sariputta; four alternatives after six contact-media cease, each rejected; mutual extent and cessation of elaboration.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Kotthita Sutta AN 4.174 maps to indexed AN 4.173 (Mahākoṭṭhikasuttaṃ), VRI paragraph 173. The named interlocutors, four rejected alternatives and contact-media/elaboration conclusion establish identity. English condenses repeated questions and adds bracketed glosses, speaker labels and an editorial Note; these are not extra canonical passages. No general minus-one rule is inferred. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an11.9",
+      "path": "/tipitaka/an/an11/an11.010.than",
+      "pali_title": "Saddhasuttaṃ",
+      "english_title": "To Sandha",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 11.10",
+      "source_verses": "AN 11.10; PTS A v 323",
+      "vri_verses": "9",
+      "source_html_sha256": "4f899cdb5167745e791bdef788c9aa173e2ea0281683d34d14b9038911184054",
+      "pali_sha256": "d75adbab29066109c6cc3ce49b7664ba465ade89be0ac96912c7d2de6c1cbd0f",
+      "root_blocks_sha256": "c51733b02bed1465dce67deee29ef846d5fa8cbd100af6c92b08df88a68afc2a",
+      "evidence": {
+        "basis": "Nadika Brick Hall; colt/thoroughbred grain and spur similes, five hindrances, eleven dependencies, three occurrences of the homage stanza and perception explanation.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 3
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Sandha Sutta AN 11.10 maps to indexed AN 11.9 (Saddhasuttaṃ), VRI paragraph 9. The Brick Hall setting, colt/thoroughbred contrasts, hindrance/dependency lists, three homage occurrences and concluding perception explanation establish whole-discourse correspondence. ATI calls the interlocutor Sandha; VRI uses Saddha. Both use stock-list abbreviations. The two Notes are editorial glosses, not additional canonical text. No general minus-one rule is inferred. This is not line-by-line alignment. Source wording caution: in its positive thoroughbred section ATI says “obsessed with uncertainty”, while VRI has na vicikicchāparetena (not obsessed with uncertainty). The published English is preserved, not silently corrected; the two wordings are not equivalent."
     }
   ]
 }

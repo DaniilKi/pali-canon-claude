@@ -12,7 +12,7 @@ const realFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = realFetch; liveCache.clear(); });
 
 test('source-reviewed whole-text links retain exact edition identity and provenance', () => {
-  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16', 'sn7.21', 'sn22.109', 'sn22.110', 'sn22.121', 'sn25.5', 'sn47.35', 'sn40.9', 'sn22.7', 'sn35.238', 'sn55.24', 'an4.77', 'an3.136', 'an5.130', 'an3.52', 'an3.89', 'an3.90', 'an4.262', 'an5.64', 'an6.102', 'an6.104', 'an7.23', 'an7.33', 'an7.51']);
+  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16', 'sn7.21', 'sn22.109', 'sn22.110', 'sn22.121', 'sn25.5', 'sn47.35', 'sn40.9', 'sn22.7', 'sn35.238', 'sn55.24', 'an4.77', 'an3.136', 'an5.130', 'an3.52', 'an3.89', 'an3.90', 'an4.262', 'an5.64', 'an6.102', 'an6.104', 'an7.23', 'an7.33', 'an7.51', 'an3.109', 'an4.124', 'an4.173', 'an11.9']);
   for (const row of manifest.links) {
     const u = canon.resolve(row.unit_id).unit;
     const link = canon.load().translations[u.id].find(t => t.match === 'reviewed-story' && t.path === row.path);
@@ -357,4 +357,29 @@ test('SN 36.15 cannot mislabel its single entire prose segment as a reviewed par
  const source=canon.load().canon.source;
  const link={source:'ati',path:'/tipitaka/sn/sn36/sn36.015.nypo',partial_scope:{version:1,status:'reviewed',unit_id:u.id,first_ref:body[0].ref,last_ref:body[0].ref,source_commit:source.commit,pali_sha256:scopeHash(selected),text_sha256:'0'.repeat(64)}};
  assert.throws(()=>partialScope(link,u,segs,source),/Invalid or unreviewed partial translation scope/);
+});
+
+test('roof and contact-media pages resolve by discourse content rather than overlapping PTS pages', async () => {
+  const cases = [
+    ['an3.109', '/tipitaka/an/an03/an03.105.than', ['an3.105', 'an3.107', 'an3.108'], /guarded\/unguarded.*roof similes/],
+    ['an4.173', '/tipitaka/an/an04/an04.174.than', ['an4.174'], /four rejected alternatives/],
+    ['an11.9', '/tipitaka/an/an11/an11.010.than', ['an11.10'], /Sandha.*Saddha/],
+  ];
+  let calls = 0; globalThis.fetch = async () => { calls++; throw Error('Must not fetch'); };
+  for (const [uid, path, wrong, note] of cases) {
+    const link = english.available(canon.resolve(uid).unit).find(l => l.translation_id === `ati:${path}`);
+    assert.ok(link); assert.match(link.mapping_note, note);
+    assert.equal(canon.resolve(`https://www.accesstoinsight.org${path}.html`).unit.id, uid);
+    for (const other of wrong) await assert.rejects(english.translation(canon.resolve(other).unit, `ati:${path}`));
+  }
+  assert.equal(calls, 0);
+});
+
+test('the second absorption discourse retains publisher abbreviations and three Sandha homage occurrences and source-wording caution are pinned', () => {
+  const jhana = manifest.links.find(r => r.unit_id === 'an4.124');
+  assert.match(jhana.mapping_note, /Both editions abbreviate/);
+  const sandha = manifest.links.find(r => r.unit_id === 'an11.9');
+  assert.equal(sandha.evidence.vri_verse_groups, 3);
+  assert.match(sandha.mapping_note, /ATI says.*obsessed with uncertainty.*VRI has na vicikicchāparetena.*not obsessed/s);
+  assert.match(sandha.mapping_note, /three homage occurrences.*two Notes are editorial/);
 });

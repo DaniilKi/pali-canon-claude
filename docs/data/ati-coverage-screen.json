@@ -1277,6 +1277,22 @@
         }
       ],
       "report": "ati-an-training-and-growth.md"
+    },
+    {
+      "decision": "D191",
+      "accepted_links": 4,
+      "newly_covered_units": [
+        "an3.109",
+        "an4.124",
+        "an4.173",
+        "an11.9"
+      ],
+      "deferred": [
+        {
+          "path": "tipitaka/sn/sn36/sn36.015.nypo.html",
+          "reason": "A single-unit condensed-page model needs distinct opt-in, non-whole-unit counts and page-level quotation semantics across consumers; existing partial/shared contracts cannot honestly represent the three intra-segment treatments. Hold retained pending full additive implementation and evidence."
+        }
+      ]
     }
   ]
 }

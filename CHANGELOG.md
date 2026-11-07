@@ -4,6 +4,10 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Add four source-reviewed AN English choices with explicit edition mapping and
+  full rights/provenance; document the complete single-unit condensed-page
+  contract needed for SN 36.15, retaining its hold.
+
 - Repaired an evidence-audit timing race: synthetic provider calls are counted
   from a synchronous fixture ledger instead of asynchronous stderr. Rejection,
   fallback and no-network requirements remain strict; runtime source and
