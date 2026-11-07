@@ -19,7 +19,7 @@ test('worker failure and deadline reject every pending read instead of leaving f
   const a=assert.rejects(worker.execute('get_text',{}),/unavailable/),b=assert.rejects(worker.execute('get_text',{}),/unavailable/);
   if(mode!=='timeout')fake.emit(mode,mode==='error'?new Error('private input must not escape'):1);
   else await new Promise(resolve=>setTimeout(resolve,35));
-  await Promise.all([a,b]);assert.deepEqual(worker.status(),{state:'failed',pending:0,limit:64});await assert.rejects(worker.execute('get_text',{}),/unavailable/);assert.equal(fake.sent.length,2);await worker.close();
+  await Promise.all([a,b]);assert.deepEqual(worker.status(),{state:'failed',pending:0,limit:32});await assert.rejects(worker.execute('get_text',{}),/unavailable/);assert.equal(fake.sent.length,2);await worker.close();
  }
 });
 test('HTTP health serves while a tool is pending and becomes unavailable when its worker fails',async()=>{

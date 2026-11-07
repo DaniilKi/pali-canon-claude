@@ -158,7 +158,7 @@ reader stay on the HTTP thread. This does not add CPU capacity. Ship **all three
 The npm package and Dockerfile include the complete directory. Stdio remains in one thread.
 
 Health reports the worker's bounded state and pending count, plus the cache snapshot from its last
-completed tool call; `frontend_cache` separately reports the reader's live-response cache. A crashed or unresponsive worker makes health return HTTP 503. At most 64 core
+completed tool call; `frontend_cache` separately reports the reader's live-response cache. A crashed or unresponsive worker makes health return HTTP 503. At most 32 core
 tool calls may be outstanding; additional calls return an explicit queue-full tool error for retry.
 A 180-second dispatch deadline includes queueing and provider waits. If any core call exceeds it,
 the watchdog rejects outstanding calls and stops the worker; the process must restart before tool
@@ -189,6 +189,48 @@ rounds took about 18–22 seconds. With isolated execution and a bounded 64 MiB 
 probes without a failure: maximum health latency was 365 ms and warm rounds took 3.1 and 0.9 seconds.
 Process high-water RSS was about 1.3 GiB. These are local Node 20 container measurements, not an
 actual-provider SLA, proof of 64 simultaneous heavy calls, full-cache or signed-in-client acceptance.
+
+### Capacity with populated caches
+
+The capacity audit can fill both live-response caches through their public reading tools, using
+sixteen distinct linked URLs served by a local synthetic fetch fixture. Each page explicitly says
+it is a cache-pressure fixture, not scripture. The final fixture size leaves each 64 MiB cache at
+**99.8% of its accounted byte budget**, with no real provider requests. The two caches remain populated
+through the subsequent workload. Optional `--reader-caches` also opens one source-faithful widget page
+from all 109 post-canonical books, 61 root files and 47 commentary books before mixed tool requests.
+
+```sh
+node scripts/audit-hosted-load.mjs --clients 32 --rounds 3 --full-cache --reader-caches --report capacity.json
+# Deliberate overload: queue-full rejections remain visible and are accepted only with this flag.
+node scripts/audit-hosted-load.mjs --clients 100 --rounds 3 --full-cache --allow-overload --report overload.json
+```
+
+On Linux/Node 20.20.2 under one CPU and 2 GiB, without swap or external network:
+
+| Workload | Result |
+|---|---|
+| 32 clients, both caches at 99.8%, all reader datasets warmed by one page from every book, 96 mixed calls | All 96 completed with the 32-call queue; all 643 health probes passed; peak RSS about 1.73 GiB |
+| 100 clients, same warmed-reader/full-cache setup, previous 64-call queue | 162 completed, 102 queue-full replies and **36 client timeouts**; healthy probes alone hid this capacity failure |
+| 100 clients, same setup, current 32-call queue | 126 completed and 174 explicit queue-full retry responses; **zero other failures**; all 677 health probes passed; queue drained and exact MN 10 recovery read succeeded; peak RSS about 1.82 GiB |
+
+The queue was reduced from 64 to 32 outstanding core calls after that reproduced failure. This
+chooses more early retry responses instead of admitting work that exceeds ordinary client deadlines;
+it adds no CPU capacity. Health remained responsive in both cases, so it must be evaluated alongside
+actual tool completion and retry counts.
+
+These are instance burst measurements with the **per-IP rate limiter disabled**. The deployed default
+of 120 requests/minute/IP still applies, including initialization and metadata requests. Cold rounds
+took roughly 48–57 seconds in the populated-cache samples, close to many MCP clients' 60-second
+deadline. Use small batches, handle explicit queue-full responses with a later retry, and measure the
+actual host before increasing traffic. Fly's HTTP concurrency settings are routing limits, not a
+promise that 100 or 200 simultaneous heavy tools will complete without rejection.
+
+The hosted CI job repeats the 32-client populated-cache/warmed-reader scenario and requires no
+rejections, successful recovery reading and healthy probes during cache population as well as the
+burst. A deliberate overload run reports `passed_with_overload`, never an unconditional pass. This
+still does not establish an upper bound for other queries, larger responses, more simultaneous calls,
+real provider behavior, native-reader review or signed-in-client acceptance. The 32-call admission bound fixes the reproduced timeout pattern; it does not guarantee those
+latencies for arbitrary queries or hosts.
 
 Result on a Windows 11 laptop (1 November 2026), 50 concurrent sessions, no errors:
 

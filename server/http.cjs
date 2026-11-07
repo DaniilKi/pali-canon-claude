@@ -34890,7 +34890,7 @@ try {
 }
 var workerPath = () => (0, import_node_path10.join)(here9, "http-worker.cjs");
 var HttpToolWorker = class {
-  constructor({ maxPending = 64, timeoutMs = 18e4, workerFactory = () => new import_node_worker_threads.Worker(workerPath()) } = {}) {
+  constructor({ maxPending = 32, timeoutMs = 18e4, workerFactory = () => new import_node_worker_threads.Worker(workerPath()) } = {}) {
     this.maxPending = maxPending;
     this.timeoutMs = timeoutMs;
     this.workerFactory = workerFactory;

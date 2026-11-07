@@ -6,7 +6,7 @@ let here;try{here=__dirname;}catch{here=join(dirname(fileURLToPath(import.meta.u
 const workerPath=()=>join(here,'http-worker.cjs');
 
 export class HttpToolWorker {
- constructor({maxPending=64,timeoutMs=180000,workerFactory=()=>new Worker(workerPath())}={}) {
+ constructor({maxPending=32,timeoutMs=180000,workerFactory=()=>new Worker(workerPath())}={}) {
   this.maxPending=maxPending;this.timeoutMs=timeoutMs;this.workerFactory=workerFactory;this.pending=new Map();this.nextId=0;this.worker=null;this.failure=null;this.closed=false;this.cache=null;
  }
  status() {return {state:this.closed?'closed':this.failure?'failed':this.worker?'running':'idle',pending:this.pending.size,limit:this.maxPending};}
