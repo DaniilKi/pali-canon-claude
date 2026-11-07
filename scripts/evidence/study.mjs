@@ -15,8 +15,10 @@ function sourceCard(card) {
   assert.deepEqual(card.pali, { name: source().name, attribution: source().attribution, terms: source().terms, commit: source().commit });
 }
 function english(unit) {
-  return json(canon.describe(unit).english.map(({ source, translator, reference, url, license, translation_id }) => ({
+  return json(canon.describe(unit).english.map(({ source, translator, reference, url, license, translation_id, translation_scope, includes_commentary }) => ({
     source, translator, ...(reference ? { reference } : {}), url, ...(license ? { license } : {}), translation_id,
+    ...(translation_scope ? { translation_scope, whole_unit_coverage: false } : {}),
+    ...(includes_commentary ? { includes_commentary: true } : {}),
   })));
 }
 

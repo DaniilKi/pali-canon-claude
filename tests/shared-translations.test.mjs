@@ -134,3 +134,12 @@ test('paritta link metadata does not strip scope from a shared source', () => {
   const selected = paritta(canon, { name: 'atanatiya', limit: 1 });
   const scoped = selected.english.find(e => e.translation_scope); assert.ok(scoped); assert.equal(scoped.whole_unit_coverage, false); assert.deepEqual(scoped.translation_scope.text_ids, ['dn31', 'dn32']);
 });
+
+test('shared-page ties count source versions rather than independently aligned canonical texts', async () => {
+  install(); const full = { ...syntheticShared(), url: syntheticShared().url.replace('SHARED', 'FULL') }; delete full.shared_scope;
+  canon.load().translations = { ...canon.load().translations, iti14: [full] }; provider();
+  const result = await verifyQuote({ text: 'amber lantern copper window', language: 'english', texts: ['iti11', 'iti14'], include_shared: true });
+  assert.equal(result.equally_similar_texts, undefined);
+  assert.equal(result.equally_similar_sources, 2);
+  assert.match(result.citation_note, /source versions.*not.*individually aligned canonical texts/);
+});

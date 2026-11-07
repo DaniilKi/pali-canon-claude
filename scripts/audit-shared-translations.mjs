@@ -89,7 +89,7 @@ try {
       assert.equal(totals.links, baseline.links); assert.equal(totals.with_english, baseline.with_english); assert.equal(totals.shared_links, 1); assert.equal(totals.with_shared_english, 4); assert.equal(totals.shared_only, 3);
       const args = { text: 'amber lantern copper window', language: 'english', texts: [uid] };
       const normal = await call('verify_quote', args); assert.equal(normal.scope.shared_translations_excluded.length, 1); assert.ok(normal.matches.every(m => m.text_id === uid));
-      const inclusive = await call('verify_quote', { ...args, include_shared: true }); assert.equal(inclusive.scope.translations_checked.length, 2);
+      const inclusive = await call('verify_quote', { ...args, include_shared: true }); assert.equal(inclusive.scope.translations_checked.length, 2); assert.equal(inclusive.equally_similar_texts, undefined); assert.equal(inclusive.equally_similar_sources, 2);
       assert.ok(inclusive.scope.translations_checked.some(m => m.translation_scope?.kind === 'shared_page'));
       for (const shared of inclusive.matches.filter(m => m.translation_scope?.kind === 'shared_page')) assert.equal(shared.text_id, null);
     } else {

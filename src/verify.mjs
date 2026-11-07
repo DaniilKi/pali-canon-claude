@@ -598,7 +598,10 @@ async function verifyEnglish(text, texts, limit, fetchTranslation, includePartia
     while (corpus.starts[page + 1] <= c.start) page += 1;
     return { page, r: refine(corpus, query, q, c, { min: corpus.starts[page], max: corpus.starts[page + 1] }) };
   });
-  const ties = countTies(ranked, truncated, ({ page }) => pages[page].unit.id);
+  const sourceTies = pages.some(p => p.translation_scope?.kind === 'shared_page');
+  const ties = countTies(ranked, truncated, ({ page }) => sourceTies
+    ? `${pages[page].url}|${pages[page].translation_id}|${pages[page].translation_scope?.scope_sha256 || 'whole'}` : pages[page].unit.id);
+  if (sourceTies) ties.sources = true;
   const seen = new Set();
   for (const { page, r } of ranked) {
     const p = pages[page];
@@ -670,6 +673,7 @@ const NEXT_STEP_ENGLISH = 'To check whether this is a translation of a real pass
 
 function tieNote(ties) {
   if (!ties || ties.texts < 2) return undefined;
+  if (ties.sources) return `This wording matches ${ties.at_least ? 'at least ' : ''}${ties.texts} source versions equally well. This is not a count of individually aligned canonical texts. Compare the complete source scopes; the listed matches may be limited.`;
   return `This wording matches ${ties.at_least ? 'at least ' : ''}${ties.texts} texts equally well (a stock or repeated passage). The matches listed are the first in canon order, not a unique source: quote more of the passage, or check the text you have in mind.`;
 }
 
@@ -711,7 +715,7 @@ export async function verifyQuote({ text, language = 'auto', texts, limit = 5, i
     ...(literal ? { source_literal: literal.source_literal } : {}),
     comparison: { method: literal ? 'literal_source_substring' : 'normalized_fuzzy', verbatim: 'not_assessed',
       note: literal ? 'The unchanged quotation was located in a readable canonical source segment before comparison. No spelling repair or native conversion was used. This establishes source-substring presence, not source-edition correctness, native-edition collation or authorship.' : 'Case, diacritics and punctuation are normalized; Pāli spacing is also normalized. Native Pāli input is transliterated to Roman first. Even a similarity of 1 does not establish verbatim wording, a unique source or authorship.' },
-    ...(note ? { equally_similar_texts: result.ties.texts, equally_similar_at_least: result.ties.at_least, citation_note: note } : {}),
+    ...(note ? { ...(result.ties.sources ? { equally_similar_sources: result.ties.texts } : { equally_similar_texts: result.ties.texts }), equally_similar_at_least: result.ties.at_least, citation_note: note } : {}),
     ...(notFoundEnglish ? { next_step: NEXT_STEP_ENGLISH } : {}),
     matches: verdict === 'not_found_in_scope' ? result.matches.slice(0, 3) : result.matches,
     scope: result.scope,

@@ -66,3 +66,5 @@ This confirms what this bundled source prints. It does not correct the spelling,
 ### Condensed pages covering several discourses
 
 When reviewed metadata names a shared page, it concerns several discourses together and may use abbreviations or cross-references. It is excluded from ordinary English verification. Explicitly select member IDs in `texts` and set `include_shared: true` to compare that complete page. Results keep the publisher’s caption and full member list; a match has no individual `text_id`. Finding or not finding words on the page does not establish the wording, completeness or absence of any one discourse. These are separate counts, not additional complete translations. No real shared-page declaration is currently activated.
+
+When shared pages are included, an ambiguity count is labelled `equally_similar_sources`: it counts compared source versions, not independently aligned canonical texts. `equally_similar_texts` is omitted for that comparison. Ordinary Pāli and whole-unit English comparisons keep their existing text-count behavior.

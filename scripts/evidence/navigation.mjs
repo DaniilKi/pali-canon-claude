@@ -130,8 +130,10 @@ export async function auditNavigation(call) {
         assert.equal(page.terms, canon.source().terms);
         assert.equal(page.attribution, canon.source().attribution);
         assert.deepEqual(page.chanting_books, paritta.chantingBooks());
-        const english = canon.describe(unit).english.map(({source,translator,reference,url,license,translation_id}) => ({
+        const english = canon.describe(unit).english.map(({source,translator,reference,url,license,translation_id,translation_scope,includes_commentary}) => ({
           source,translator,reference,url,...(license ? {license} : {}),translation_id,
+          ...(translation_scope ? { translation_scope, whole_unit_coverage: false } : {}),
+          ...(includes_commentary ? { includes_commentary: true } : {}),
         }));
         assert.deepEqual(page.english, json(english), 'English remains source-indexed links, not chanting-book content');
         assert.deepEqual(page.other_sources || [], raw.texts.filter(t => t !== raw.texts[i]));
