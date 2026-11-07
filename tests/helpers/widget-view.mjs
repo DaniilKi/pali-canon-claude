@@ -42,6 +42,9 @@ export function view(bridge, { supported = true, modelCapabilities, stateWriter,
   if (bridge === 'MCP Apps' && initialize) init(modelCapabilities);
   return { elements, calls, timers, messages, models, stateUpdates, window, initialize: init,
     notify(method, params = {}) { message({ method, params }); },
+    request(id, method, params = {}) { message({ id, method, params }); },
+    pagehide(persisted = false) { handlers.pagehide({ persisted }); },
+    foreign(data) { handlers.message({ source: {}, data: { jsonrpc: '2.0', ...data } }); },
     contextReply(index, result = {}, error) { message({ id: models[index].id, ...(error ? { error } : { result }) }); },
     output(data) {
       if (bridge === 'Apps SDK') { window.openai.toolOutput = data; handlers['openai:set_globals'](); }

@@ -23,7 +23,7 @@ import { readBook } from './source-books.mjs';
 import { getCommentary } from './commentary.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v11';
+export const WIDGET_VERSION = 'v12';
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 export const SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 export const MCP_APP_MIME = 'text/html;profile=mcp-app';
@@ -333,11 +333,12 @@ export const WIDGET_HTML = `<!doctype html>
 <script>
 (function () {
   var rendered = null;
+  var closed = false;
   var generation = 0, requestId = 2, pending = null, serverTools = false, awaitingSelection = false, lastInput, lastOutput, lastMetadata;
   var modelCapabilities, modelChannel, modelModality, modelDesired, modelFlight, modelAccepted, modelFailure, modelRevision = 0, modelBlocked = false;
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = String(text); return e; }
   function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
-  function modelStatus(message) { document.getElementById('context-status').textContent = message; }
+  function modelStatus(message) { if (!closed) document.getElementById('context-status').textContent = message; }
   function modelAdvice() { return modelDesired && modelDesired.snapshot.state === 'displayed' ? ' Tell the assistant the displayed citation.' : ' No current reading has been confirmed for the assistant.'; }
   function vacantContext(state) { return { schema: 'pali-reader-selection-v1', widget_version: '${WIDGET_VERSION}', state: state,
     quotation: state === 'loading' ? 'A new reading is pending; do not assume an earlier page is the requested selection.' : 'No retrieved passage is displayed. Reopen a source before quoting.' }; }
@@ -360,12 +361,13 @@ export const WIDGET_HTML = `<!doctype html>
       quotation: 'Reading metadata only; no passage text is included. Retrieve read_with and verify its source, references and cautions before quoting. No scholarly or native-reader approval is implied.' };
   }
   function wantModelContext(snapshot) {
+    if (closed) return;
     var key = JSON.stringify(snapshot);
     if (!modelDesired || modelDesired.key !== key) modelDesired = { key: key, snapshot: Object.assign(JSON.parse(key), { revision: ++modelRevision }) };
     pumpModelContext();
   }
   function pumpModelContext() {
-    if (!modelDesired) return;
+    if (closed || !modelDesired) return;
     if (modelBlocked) { modelStatus(modelFailure + modelAdvice()); return; }
     if (!modelChannel) {
       function advertised(value) { return value && typeof value === 'object' && !Array.isArray(value); }
@@ -387,24 +389,27 @@ export const WIDGET_HTML = `<!doctype html>
         modelFlight = null;
         if (saved && typeof saved.then === 'function') {
           Promise.resolve(saved).then(function () {}, function () {});
+          if (closed) return;
           failModelContext('This host could not confirm reading-context storage. Sharing is unconfirmed.'); return;
         }
+        if (closed) return;
         modelAccepted = desired.key;
         if (modelDesired.key === desired.key) modelStatus('The updated reading state was passed to the host. Model delivery is not verified.');
         else Promise.resolve().then(pumpModelContext);
-      } catch (error) { modelFlight = null; failModelContext('The host could not store the reading context.'); }
+      } catch (error) { modelFlight = null; if (!closed) failModelContext('The host could not store the reading context.'); }
       return;
     }
     var flight = { id: requestId++, key: desired.key }; modelFlight = flight;
     modelStatus('Updating the reading state available to the host…');
     flight.timer = setTimeout(function () {
-      if (modelFlight !== flight) return;
+      if (closed || modelFlight !== flight) return;
       flight.timedOut = true; modelStatus('The host has not confirmed the reading context.' + modelAdvice());
     }, 30000);
     post({ jsonrpc: '2.0', id: flight.id, method: 'ui/update-model-context', params: modelModality === 'structured' ? { structuredContent: payload } : { content: [{ type: 'text', text: JSON.stringify(payload) }] } });
   }
   function failModelContext(message) { modelBlocked = true; modelFailure = message; modelStatus(message + modelAdvice()); }
   function modelReply(message) {
+    if (closed) return;
     var flight = modelFlight;
     if (!flight || message.id !== flight.id) return;
     clearTimeout(flight.timer); modelFlight = null;
@@ -414,13 +419,14 @@ export const WIDGET_HTML = `<!doctype html>
     if (modelDesired.key === flight.key) modelStatus('The host accepted the current reading state. Model delivery is not verified.');
     else pumpModelContext();
   }
-  function canNavigate() { return !!(window.openai && typeof window.openai.callTool === 'function') || serverTools; }
+  function canNavigate() { return !closed && (!!(window.openai && typeof window.openai.callTool === 'function') || serverTools); }
   function abandon() {
     if (pending) { clearTimeout(pending.timer); pending = null; }
     document.getElementById('navigation').setAttribute('aria-busy', 'false');
   }
   function navigation() {
     var nav = document.getElementById('navigation'); clear(nav);
+    if (closed) return;
     if (awaitingSelection) { nav.appendChild(el('p', 'note', 'Opening the requested passage…')); return; }
     if (!canNavigate() || !rendered || !rendered.pali) return;
     if (pending) nav.appendChild(el('p', 'note', 'Loading the requested passage…'));
@@ -433,7 +439,7 @@ export const WIDGET_HTML = `<!doctype html>
     });
   }
   function finish(call, result, error) {
-    if (pending !== call || call.generation !== generation) return;
+    if (closed || pending !== call || call.generation !== generation) return;
     abandon();
     var data = result && result.structuredContent, args = call.command.arguments;
     var readable = data && data.pali && Array.isArray(data.pali.segments) &&
@@ -455,6 +461,7 @@ export const WIDGET_HTML = `<!doctype html>
     if (error) render({ error: error.message || String(error) });
     else if (!result || (!result.isError && !readable)) render({ error: 'The host did not return a readable passage. Ask to reopen the selection.' });
     else toolResult(result);
+    if (closed) return;
     navigation();
     var title = document.getElementById('title'); if (typeof title.focus === 'function') title.focus();
   }
@@ -464,6 +471,7 @@ export const WIDGET_HTML = `<!doctype html>
     document.getElementById('navigation').setAttribute('aria-busy', 'true'); navigation();
     document.getElementById('status').textContent = 'Loading the requested passage…';
     wantModelContext(vacantContext('loading'));
+    if (closed || pending !== call) return;
     call.timer = setTimeout(function () { finish(call, null, new Error('The host did not respond. Ask to reopen the selection.')); }, 30000);
     try {
       if (serverTools) post({ jsonrpc: '2.0', id: call.id, method: 'tools/call', params: command });
@@ -474,6 +482,7 @@ export const WIDGET_HTML = `<!doctype html>
   }
   function post(msg) { try { window.parent.postMessage(msg, '*'); } catch (e) {} }
   function openLink(url) {
+    if (closed) return;
     if (window.openai && typeof window.openai.openExternal === 'function') { window.openai.openExternal({ href: url }); return; }
     post({ jsonrpc: '2.0', id: Date.now(), method: 'ui/open-link', params: { url: url } });
   }
@@ -486,6 +495,7 @@ export const WIDGET_HTML = `<!doctype html>
   function setTheme(theme) { if (theme === 'dark' || theme === 'light') document.documentElement.setAttribute('data-theme', theme); }
   function characterPosition(at, total) { return 'character ' + at + (typeof total === 'number' && Number.isFinite(total) ? ' of ' + total : ''); }
   function render(d) {
+    if (closed) return;
     if (!d || typeof d !== 'object' || d === rendered) return;
     if (!d.pali && typeof d.error !== 'string') return;
     abandon(); generation++; awaitingSelection = false;
@@ -573,6 +583,7 @@ export const WIDGET_HTML = `<!doctype html>
     render(result.structuredContent);
   }
   function fromOpenai() {
+    if (closed) return;
     if (window.openai) {
       setTheme(window.openai.theme);
       var input = JSON.stringify(window.openai.toolInput || null);
@@ -589,6 +600,7 @@ export const WIDGET_HTML = `<!doctype html>
     }
   }
   function requested(args) {
+    if (closed) return;
     function ordered(value) { return JSON.stringify(Object.keys(value || {}).sort().map(function (key) { return [key, value[key]]; })); }
     if (pending && ordered(args) === ordered(pending.command.arguments)) return;
     abandon(); generation++; awaitingSelection = true;
@@ -596,11 +608,39 @@ export const WIDGET_HTML = `<!doctype html>
     document.getElementById('status').textContent = 'Opening the requested passage…';
     wantModelContext(vacantContext('loading'));
   }
+  function closeReader() {
+    if (closed) return;
+    var canClear = !modelFlight && !modelBlocked, channel = modelChannel, modality = modelModality;
+    closed = true; generation++; abandon();
+    if (modelFlight) clearTimeout(modelFlight.timer);
+    modelFlight = null; modelDesired = null; modelAccepted = null; rendered = null; lastOutput = null; lastMetadata = null; lastInput = null;
+    awaitingSelection = false;
+    ['meta', 'pali', 'english', 'footer', 'navigation'].forEach(function (id) { clear(document.getElementById(id)); });
+    document.getElementById('title').textContent = 'Reader closed';
+    document.getElementById('status').textContent = 'Reader closed. Open a new reader to continue.';
+    document.getElementById('context-status').textContent = 'Reader closed. Clearing host-held reading context has not been verified.';
+    if (canClear && channel) {
+      var payload = { pali_reader: Object.assign(vacantContext('closed'), { revision: ++modelRevision }) };
+      try {
+        if (channel === 'widget-state') {
+          var saved = window.openai.setWidgetState({ modelContent: JSON.stringify(payload) });
+          if (saved && typeof saved.then === 'function') Promise.resolve(saved).then(function () {}, function () {});
+        } else post({ jsonrpc: '2.0', id: requestId++, method: 'ui/update-model-context', params: modality === 'structured' ? { structuredContent: payload } : { content: [{ type: 'text', text: JSON.stringify(payload) }] } });
+      } catch (error) { /* Closure must not depend on host context storage. */ }
+    }
+  }
+  window.addEventListener('pagehide', function (event) { if (!event.persisted) closeReader(); });
   window.addEventListener('openai:set_globals', fromOpenai);
   // MCP Apps bridge path (JSON-RPC over postMessage).
   window.addEventListener('message', function (ev) {
     if (ev.source !== window.parent) return;
     var m = ev.data; if (!m || m.jsonrpc !== '2.0') return;
+    if (m.method === 'ui/resource-teardown') {
+      closeReader();
+      if (m.id === null || typeof m.id === 'string' || (typeof m.id === 'number' && Number.isFinite(m.id))) post({ jsonrpc: '2.0', id: m.id, result: {} });
+      return;
+    }
+    if (closed) return;
     if (m.id === 1 && m.result) {
       modelCapabilities = m.result.hostCapabilities && m.result.hostCapabilities.updateModelContext; pumpModelContext();
       serverTools = !!(m.result.hostCapabilities && m.result.hostCapabilities.serverTools); navigation();

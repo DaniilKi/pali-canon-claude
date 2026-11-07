@@ -812,3 +812,9 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** A standard host cancellation after tool-input left the reader indefinitely opening the requested passage, with stale prior text and loading metadata. Direct navigation also needed its pending callback invalidated on cancellation.
 - **Decision.** Handle ui/notifications/tool-cancelled for an active/announced read or initial waiting state. Clear prior passage, attribution and controls; publish a cancelled metadata state without old source IDs or the host's private reason. Ignore late correlated replies and idle late cancellation notices, and allow a subsequent selection to recover. Version resources to v11.
 - **Consequences.** Cancellation is distinct from provider/source unavailability. Uncorrelated host event ordering and signed-in clients remain acceptance gates. No source data, licence, alignment or translation is changed.
+
+### D135. Acknowledge resource teardown and stop all local reading work
+
+- **Context.** The reader did not handle ui/resource-teardown, although a host may wait for its response before removing the view. Pending reads/context timers and callbacks also needed a terminal lifecycle boundary.
+- **Decision.** Clear local content/state, cancel timers, invalidate navigation and queued/context callbacks, and acknowledge the original request ID. Allow repeated teardown acknowledgements, ignore untrusted frame requests and close on non-cached pagehide. When context is idle/healthy, send one best-effort closed snapshot; never race an unconfirmed older update or block closure on optional context storage. Protect reentrant closure during a setter/read result. Version resources to v12.
+- **Consequences.** No source content, rights or mapping changes. Local closure is verified; host/model context removal is not. Signed-in host lifecycle and model-delivery acceptance remain separate gates.
