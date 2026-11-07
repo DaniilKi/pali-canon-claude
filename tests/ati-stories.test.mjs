@@ -11,7 +11,7 @@ const realFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = realFetch; liveCache.clear(); });
 
 test('source-reviewed whole-text links retain exact edition identity and provenance', () => {
-  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42']);
+  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7']);
   for (const row of manifest.links) {
     const u = canon.resolve(row.unit_id).unit;
     const link = canon.load().translations[u.id].find(t => t.match === 'reviewed-story' && t.path === row.path);
@@ -25,6 +25,7 @@ test('source-reviewed whole-text links retain exact edition identity and provena
     const blocks = canon.load().canon.books[u.book].blocks.slice(u.start, u.end);
     const pali = blocks.filter(b => ['gatha1', 'gatha2', 'gatha3', 'gathalast'].includes(b[0])).map(b => b[2]).join('\n');
     assert.equal(createHash('sha256').update(pali).digest('hex'), row.pali_sha256);
+    if (row.path.startsWith('/tipitaka/sn/')) assert.match(row.root_blocks_sha256, /^[a-f0-9]{64}$/);
     if (row.root_blocks_sha256) assert.equal(createHash('sha256').update(JSON.stringify(blocks)).digest('hex'), row.root_blocks_sha256);
     assert.equal(blocks.filter(b => b[0] === 'hangnum').length, row.evidence.vri_stanzas ?? row.evidence.vri_numbered_paragraphs);
     if (row.evidence.vri_verse_groups) assert.equal(blocks.filter(b => b[0] === 'gathalast').length, row.evidence.vri_verse_groups);
@@ -158,4 +159,53 @@ test('Kindada gains a complete first English choice, without linking its neighbo
   assert.match(links[0].mapping_note, /food, clothing, vehicle, lamp, residence and Dhamma/);
   assert.equal(canon.resolve('https://www.accesstoinsight.org/tipitaka/sn/sn01/sn01.042.than.html').unit.id, 'sn1.42');
   for (const uid of ['sn1.41', 'sn1.43']) assert.ok(english.available(canon.resolve(uid).unit).every(l => l.translation_id !== id));
+});
+
+test('reviewed SN choices distinguish repeated verses and preserve abbreviation cautions', async () => {
+  const cases = [['sn4.8', '/tipitaka/sn/sn04/sn04.008.than', /Mara.*SN 1.12/],
+    ['sn17.5', '/tipitaka/sn/sn17/sn17.005.than', /VRI abbreviates.*SN 17.1/],
+    ['sn3.7', '/tipitaka/sn/sn03/sn03.007.than', /VRI abbreviates.*ATI spells it out/]];
+  for (const [uid, path, note] of cases) {
+    const links = english.available(canon.resolve(uid).unit);
+    assert.equal(links.length, 1);
+    assert.equal(links[0].translation_id, `ati:${path}`);
+    assert.match(links[0].mapping_note, note);
+    assert.equal(canon.resolve(`https://www.accesstoinsight.org${path}.html`).unit.id, uid);
+  }
+  const id = 'ati:/tipitaka/sn/sn04/sn04.008.than';
+  assert.ok(english.available(canon.resolve('sn1.12').unit).every(l => l.translation_id !== id));
+  let calls = 0;
+  globalThis.fetch = async () => { calls++; throw Error('Must not fetch'); };
+  await assert.rejects(english.translation(canon.resolve('sn1.12').unit, id));
+  assert.equal(calls, 0);
+  const u = canon.resolve('sn17.5').unit;
+  const blocks = canon.load().canon.books[u.book].blocks.slice(u.start, u.end);
+  assert.match(blocks.map(b => b[2]).join(' '), /…pe…/);
+  assert.equal(blocks.filter(b => ['gatha1', 'gatha2', 'gatha3', 'gathalast'].includes(b[0])).length, 0);
+});
+
+test('SN source review refuses a verse-only scope even if its verse hash matches', { skip: !python }, () => {
+  const result = spawnSync(python, ['-c', `
+import sys,json,hashlib,tempfile,pathlib
+sys.path.insert(0,'scripts/canon')
+import reviewed_ati_stories as m
+with tempfile.TemporaryDirectory() as tmp:
+ root=pathlib.Path(tmp);(root/'tipitaka/sn/sn17').mkdir(parents=True)
+ raw=b'Synthetic source with licence';(root/'tipitaka/sn/sn17/fixture.html').write_bytes(raw)
+ blocks=[['bodytext',None,'Synthetic prose']]
+ row={'unit_id':'sn17.1','path':'/tipitaka/sn/sn17/fixture','pali_title':'Fixture','vri_verses':'1','pali_sha256':hashlib.sha256(b'').hexdigest(),'source_html_sha256':hashlib.sha256(raw).hexdigest(),'english_title':'Fixture','translator':'Synthetic','license':'Synthetic','source_reference':'SN fixture','mapping_note':'Synthetic note'}
+ manifest={'ati_commit':'test','vri_commit':'test','links':[row]};m.MANIFEST=root/'manifest.json'
+ c={'books':[{'blocks':blocks}],'units':[{'id':'sn17.1','book':0,'start':0,'end':1,'title':'Fixture','vri':'1'}]}
+ m.MANIFEST.write_text(json.dumps(manifest))
+ try:m.reviewed_links(c,root)
+ except ValueError as e:assert 'complete root block' in str(e)
+ else:raise AssertionError('verse-only SN scope accepted')
+ row['root_blocks_sha256']=hashlib.sha256(json.dumps(blocks,ensure_ascii=False,separators=(',',':')).encode()).hexdigest();m.MANIFEST.write_text(json.dumps(manifest))
+ assert 'sn17.1' in m.reviewed_links(c,root)
+ c['books'][0]['blocks'][0][2]='Different prose with same empty verse hash'
+ try:m.reviewed_links(c,root)
+ except ValueError as e:assert 'Complete root scope changed' in str(e)
+ else:raise AssertionError('prose drift accepted')
+`], { encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
 });

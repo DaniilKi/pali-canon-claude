@@ -210,3 +210,14 @@ evidence and additional ownership changes. It inserts in source order and
 remaps all numeric passage references, preserving every earlier passage's
 identity. It is idempotent. No source wording or alignment thresholds change.
 The full normal builder needs no special-case alignment override.
+
+### Reviewed SN discourse scope (D185)
+
+Every individually reviewed SN page must pin `root_blocks_sha256`, the SHA-256
+of the complete unit block slice serialized as UTF-8 JSON with unescaped Unicode
+and compact separators. A verse hash alone cannot detect a changed prose
+introduction, ending or an all-prose discourse. SN 4.8 is distinguished from
+SN 1.12 by its Māra prose context; shared verses alone are insufficient.
+SN 17.5 and SN 3.7 keep VRI's explicit abbreviations and disclose differences
+from the English edition. Complete source pages are linked, not synthesized.
+See [the review](../../docs/data/ati-sn-coverage.md) for exact evidence.

@@ -192,6 +192,66 @@
       },
       "mapping_note": "Whole-discourse verse correspondence: ATI Kindada Sutta (SN 1.42, PTS S i 32) matches Kiṃdadasuttaṃ, VRI paragraph 42. The ordered gifts of food, clothing, vehicle, lamp, residence and Dhamma identify the complete dialogue; this is not line-by-line alignment or an inference from the sutta number alone.",
       "root_blocks_sha256": "c63a80210d3bde9d4c437ea54634923e587b8e4447637a944346154d53820ab9"
+    },
+    {
+      "unit_id": "sn4.8",
+      "path": "/tipitaka/sn/sn04/sn04.008.than",
+      "pali_title": "Nandatisuttaṃ",
+      "english_title": "Delight",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "SN 4.8",
+      "source_verses": "SN 4.8; PTS S i 107",
+      "vri_verses": "144",
+      "source_html_sha256": "941d5a669b3470f6fc1ea80a034dff82acc5ffd62b618d180b08614262c264fa",
+      "pali_sha256": "66d86c9f522e36efe1f53cfb7c411cf8ecdaeefd3ffb851370533aeb04d7f2f6",
+      "root_blocks_sha256": "0ed80ad0e437b9780f32804b36b3c92535e574ae0c761012fd79f26954ed77bc",
+      "evidence": {
+        "basis": "Named Nandana/Nandati dialogue, PTS S i 107, Mara at Jeta Grove and his final disappearance; repeated verses alone also occur in SN 1.12 and do not establish identity.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 2
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Nandana Sutta (SN 4.8, PTS S i 107) matches Nandatisuttaṃ, VRI paragraph 144. Mara visits Jeta Grove, recites the delight verse, hears the grief reply and disappears dejected. Those prose boundaries distinguish it from SN 1.12 with similar verses and a deva speaker. This is not line-by-line alignment or numbering-only inference. The translator’s prefatory explanation is not canonical speech."
+    },
+    {
+      "unit_id": "sn17.5",
+      "path": "/tipitaka/sn/sn17/sn17.005.than",
+      "pali_title": "Mīḷhakasuttaṃ",
+      "english_title": "The Dung Beetle",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "SN 17.5",
+      "source_verses": "SN 17.5; PTS S ii 228",
+      "vri_verses": "161",
+      "source_html_sha256": "e650a94b008af577ce808b9e8b192172bd782d53841b9392dab3758e4f12f4c5",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "e3a02269512eb6e11b2008b28b9d35c16d0888983cbc9d1e318245f1640b4a28",
+      "evidence": {
+        "basis": "PTS S ii 228 and distinctive ordered dung-beetle analogy: pride in dung, monk boasting of food and another invitation plus four requisites, contempt for virtuous monks, long-term harm and concluding training.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Pilahaka Sutta (SN 17.5, PTS S ii 228) matches Mīḷhakasuttaṃ, VRI paragraph 161, through the distinctive dung-beetle analogy and the monk’s boasting sequence. VRI abbreviates introductory and concluding formulas with …pe…; ATI gives them at length. The same training formula is explicit in VRI SN 17.1. The bundled Pāli abbreviations are preserved; this is not line-by-line alignment or a reconstruction of missing Pāli. Source “See also” references are editorial."
+    },
+    {
+      "unit_id": "sn3.7",
+      "path": "/tipitaka/sn/sn03/sn03.007.than",
+      "pali_title": "Aḍḍakaraṇasuttaṃ",
+      "english_title": "In Judgment",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "SN 3.7",
+      "source_verses": "SN 3.7; PTS S i 74",
+      "vri_verses": "118",
+      "source_html_sha256": "79d805ca3d12a8eb7bdd999715679389856cf05e69a7ade3da8f50c46531b31c",
+      "pali_sha256": "5c952672b7cd2fc8858911245b3225d29c2bf342afe81a30d4bc388c1f962898",
+      "root_blocks_sha256": "6b9db932a4e7d6571fcbfd376e3e6f7308f6824262c2099025461efe678d3c54",
+      "evidence": {
+        "basis": "Named Atthakarana/Aḍḍakaraṇa discourse, PTS S i 74, Pasenadi disillusioned by wealthy litigants lying for sensual pleasure, Buddha agrees and ends with fish-in-trap verse.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 1
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Atthakarana Sutta (SN 3.7, PTS S i 74) matches Aḍḍakaraṇasuttaṃ, VRI paragraph 118. Pasenadi’s judgment complaint, the Buddha’s agreement and the concluding fish-in-a-trap verse establish identity. VRI abbreviates the speech-to-verse transition with …pe…; ATI spells it out and abbreviates a repeated wealth description. These edition abbreviations remain unchanged; this is not line-by-line alignment or numbering-only inference."
     }
   ]
 }

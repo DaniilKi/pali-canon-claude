@@ -4,6 +4,11 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Added first English choices for SN 4.8, SN 17.5 and SN 3.7 after source,
+  content, scope and rights review. Distinguish SN 4.8 from its repeated verses
+  in SN 1.12; preserve source abbreviations and explain edition differences.
+  All reviewed SN links now require a complete root-block scope hash (D185).
+
 - Restored Yasoja’s opening commentary using the unchanged source alignment
   checks; existing passages retain their identity and source order. Added the
   first English choice for SN 1.42 with individually reviewed scope, title,

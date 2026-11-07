@@ -1076,6 +1076,28 @@
         }
       ],
       "report": "yasoja-commentary-and-kindada.md"
+    },
+    {
+      "decision": "D185",
+      "baseline": "d809af49e69629ea5a5c91ab22df71123c7d61ab",
+      "accepted": [
+        {
+          "path": "tipitaka/sn/sn04/sn04.008.than.html",
+          "unit_id": "sn4.8",
+          "resolution": "Mara prose introduction and disappearance distinguish repeated verse dialogue from SN 1.12; PTS and CC-BY-NC verified."
+        },
+        {
+          "path": "tipitaka/sn/sn17/sn17.005.than.html",
+          "unit_id": "sn17.5",
+          "resolution": "Distinctive dung-beetle analogy, monk boasting, PTS and rights verified. Explicit note preserves VRI abbreviation; complete English is not literal Pali expansion."
+        },
+        {
+          "path": "tipitaka/sn/sn03/sn03.007.than.html",
+          "unit_id": "sn3.7",
+          "resolution": "Pasenadi judgment complaint and fish-trap verse, PTS and rights verified. Edition abbreviations explicitly explained."
+        }
+      ],
+      "report": "ati-sn-coverage.md"
     }
   ]
 }
