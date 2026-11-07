@@ -1,0 +1,73 @@
+{
+  "schema": "pali-translation-candidate-v1",
+  "status": "assessment_only",
+  "checked": "2026-11-07",
+  "source": {
+    "url": "https://ancient-buddhist-texts.net/Texts-and-Translations/Short-Pieces/Paccayuddesaniddesa.htm",
+    "title": "The Enumeration and Explanation of the Conditions",
+    "pali_title": "Paccayuddesaniddesa",
+    "translator": "Ānandajoti Bhikkhu",
+    "source_edition_label": "Burmese Chaṭṭha Saṅgayana Text",
+    "page_update_label": "October 2013",
+    "copyright_notice": "https://ancient-buddhist-texts.net/Miscellaneous/Copyright-Notice.htm",
+    "rights_evidence": "The May 2013 notice assigns introductions, translations and notes outside its named exceptions to CC BY-SA 3.0 Unported, with attribution to Anandajoti Bhikkhu. This work is not named among the exceptions. Existing project records separately note 4.0 links in some page footers; no inferred relicensing is claimed.",
+    "artifact_sha256": null,
+    "artifact_status": "Rendered web text inspected; raw HTML bytes and complete markup/footnote boundaries are not pinned."
+  },
+  "vri": {
+    "commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "file": "abh03m7.mul.xml",
+    "unit": "patthana1.1",
+    "unit_segments": 139,
+    "candidate_span": {
+      "first_ref": "patthana1.1/6",
+      "last_ref": "patthana1.1/63"
+    },
+    "after_span": {
+      "ref": "patthana1.1/64",
+      "text": "Paccayaniddeso."
+    },
+    "following_section": {
+      "ref": "patthana1.1/65",
+      "title": "3. Pucchāvāro"
+    },
+    "next_unit": "patthana1.2"
+  },
+  "scope": {
+    "relation": "proper_subspan",
+    "whole_unit_translation": false,
+    "whole_book_translation": false,
+    "source_section_numbers_are_not_repository_ids": true,
+    "all_24_explanations_compared": false
+  },
+  "probes": [
+    {
+      "source_section": "enumeration",
+      "source_evidence": "Complete Pali section manually transcribed from rendered author page; not a raw HTML artifact",
+      "normalization": "canon.fold; retain only a-z (case, diacritics, whitespace and punctuation are ignored)",
+      "normalized_characters": 345,
+      "normalized_sha256": "c3a1160040e09be46b2a9778337d36e43280a5e8c9b7d587f9e8bf9255d9bcc0",
+      "target_ref": "patthana1.1/7",
+      "competing_containment_refs": [
+        "patthana1.1/7"
+      ]
+    },
+    {
+      "source_section": "root-condition-explanation",
+      "source_evidence": "Complete Pali section manually transcribed from rendered author page; not a raw HTML artifact",
+      "normalization": "canon.fold; retain only a-z (case, diacritics, whitespace and punctuation are ignored)",
+      "normalized_characters": 90,
+      "normalized_sha256": "beefe7a68833d1f0fc1156cf00ddb7aa641926f689ad89475f959b2af5690744",
+      "target_ref": "patthana1.1/9",
+      "competing_containment_refs": [
+        "patthana1.1/9"
+      ]
+    }
+  ],
+  "remaining_gates": [
+    "Acquire/pin the author artifact through supported access; retain source notices and verify actual HTML, notes and editorial boundaries. Do not retry known denied executor access.",
+    "Compare all 24 complete Pali explanations and neighboring boundaries, retaining edition differences, before approving the full candidate span.",
+    "Represent partial-unit translation scope explicitly in metadata, retrieval, verification and coverage counts; a whole-unit link is not justified.",
+    "Complete source-policy/intended-use review and independent boundary review before runtime adoption."
+  ]
+}
