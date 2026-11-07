@@ -93,10 +93,10 @@ export function spacedNumbers(text) {
 
 const citationOf = (u) => ({ id: u.id, citation: u.acronym, title: u.title || null });
 
-// Name keys deliberately remove separators; never let that also erase unconverted letters.
+// Name keys deliberately remove separators; never let that also erase unconverted letters or numerals.
 function assertRomanName(text) {
-  if ([...String(text)].some(ch => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch))) {
-    throw new CitationError('The reference contains unsupported or unconverted characters. Use Roman or completely convert one supported Pāli script before name lookup.');
+  if ([...String(text)].some(ch => (/\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch)) || (/\p{N}/u.test(ch) && !/[0-9]/u.test(ch)))) {
+    throw new CitationError('The reference contains unsupported or unconverted characters. Use a standard citation or an unnumbered Roman text name; supported native-script citations are converted before lookup.');
   }
 }
 

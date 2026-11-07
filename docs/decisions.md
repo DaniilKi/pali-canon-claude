@@ -969,3 +969,10 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** All four search tools returned the same results for sati١ and sati² as for sati, silently dropping the numeral; the scoped commentary reproduction returned 720 matches in each case.
 - **Decision.** Require numeral conversion to ASCII digits for ordinary search input, including mixed native words with unsupported numerals. Retain supported native-digit conversion. Keep unsupported numerals only inside a complete quoted source phrase, without spelling/English inference; direct search/tokenization APIs apply the same safeguard.
 - **Consequences.** Unsupported numeral-bearing queries cannot masquerade as their Latin part. Quoted absent numeral sequences return no matches, and source-phrase queries cannot be replaced by alternative term groups. This changes search input handling, not source characters or citation numbering.
+
+
+### D160. Reject unsupported numeric glyphs before name resolution
+
+- **Context.** Satipatthana Sutta² and Satipatthana Sutta١ both silently selected MN 10: name-key folding discarded the numeral, bypassing the ASCII-number safeguard.
+- **Decision.** Extend the shared name-reference guard to reject non-ASCII Unicode numerals before normalization/key matching. This applies to direct name resolution and to resolve_reference/analyse_passage after supported native conversion. Require a standard citation or a supported Roman name instead of guessing what the suffix meant.
+- **Consequences.** Unsupported number-bearing names cannot select another passage without disclosure. Standard ASCII references, eight-script native citations, AN numbering cautions and post-canonical fallback retain their behavior. This does not alter source text, citation numbering or source-phrase search mode.

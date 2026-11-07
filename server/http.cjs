@@ -26441,8 +26441,8 @@ function spacedNumbers(text) {
 }
 var citationOf = (u) => ({ id: u.id, citation: u.acronym, title: u.title || null });
 function assertRomanName(text) {
-  if ([...String(text)].some((ch) => new RegExp("\\p{L}", "u").test(ch) && !new RegExp("\\p{Script=Latin}", "u").test(ch))) {
-    throw new CitationError("The reference contains unsupported or unconverted characters. Use Roman or completely convert one supported P\u0101li script before name lookup.");
+  if ([...String(text)].some((ch) => new RegExp("\\p{L}", "u").test(ch) && !new RegExp("\\p{Script=Latin}", "u").test(ch) || new RegExp("\\p{N}", "u").test(ch) && !/[0-9]/u.test(ch))) {
+    throw new CitationError("The reference contains unsupported or unconverted characters. Use a standard citation or an unnumbered Roman text name; supported native-script citations are converted before lookup.");
   }
 }
 function resolveName(text) {

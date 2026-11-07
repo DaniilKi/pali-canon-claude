@@ -34,3 +34,17 @@ test('MCP resolution and analysis reject incomplete input but retain all support
   }
  } finally {await client.close();await server.close();}
 });
+
+
+test('unsupported numeric name suffixes cannot select a text while native citations remain valid',async()=>{
+ const names=['Satipatthana Sutta²','Satipatthana Sutta١','Satipatthana SuttaⅢ',transliterate('Satipaṭṭhāna Sutta','roman','thai')+'١'];
+ for(const name of names.slice(0,3)){assert.throws(()=>resolveName(name),/unsupported or unconverted/);assert.throws(()=>resolveReference(name),/unsupported or unconverted/);}
+ const [a,b]=InMemoryTransport.createLinkedPair(),server=createServer(),client=new Client({name:'numeric-reference',version:'1'});await server.connect(a);await client.connect(b);
+ try {
+  for(const name of names)for(const [tool,args]of [['resolve_reference',{reference:name}],['analyse_passage',{uid:name,limit:1}]]){const r=await client.callTool({name:tool,arguments:args});assert.equal(r.isError,true);assert.match(JSON.parse(r.content[0].text).error,/unsupported or unconverted/);}
+  for(const script of SCRIPTS){
+   for(const [reference,id]of [['MN 10','mn10'],['AN 3.65','an3.65']]){const r=await client.callTool({name:'resolve_reference',arguments:{reference:transliterate(reference,'roman',script)}});assert.ok(!r.isError,JSON.stringify(r.content));assert.equal(r.structuredContent.id,id);if(id==='an3.65')assert.match(r.structuredContent.notes.join(' '),/AN 3.66/);}
+   const r=await client.callTool({name:'analyse_passage',arguments:{uid:transliterate('MN 10','roman',script),limit:1}});assert.ok(!r.isError);assert.equal(r.structuredContent.text_id,'mn10');
+  }
+ } finally {await client.close();await server.close();}
+});

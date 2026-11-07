@@ -336,3 +336,6 @@ The strict-input review examined 464,078 nonempty bundled source blocks and foun
 
 
 All seven reproduced grammar-source search failures now use labelled source_phrase mode: original ऐ, औ and ऋ glyphs remain in the query and in exact/context read-back, with eight output scripts checked. The mode also reaches the canonical Ne 37 example and combined canonical/post-canonical search, retains source labels and skips spelling/English inference. Matching remains case-, diacritic- and whitespace-insensitive; source-edition correctness is unverified. Ordinary queries now reject unsupported numerals instead of silently turning sati١ or sati² into sati. Supported native digits remain converted (D158–D159).
+
+
+The next reproduced reference bug is fixed: unsupported numeric suffixes in names (Satipatthana Sutta² and Satipatthana Sutta١) no longer disappear into MN 10. Shared direct/MCP name resolution rejects them before matching; valid native MN 10/AN 3.65 citations and numbering cautions remain tested across eight scripts in both installed transports (D160).

@@ -43,11 +43,13 @@ try {
   for(const reference of ['漢Satipatthana Sutta字','ηSatipatthana Sutta','สति']) {
    for(const [name,args] of [['resolve_reference',{reference}],['analyse_passage',{uid:reference,limit:1}]]) {const r=await call(name,args);assert.equal(r.isError,true);assert.match(JSON.parse(r.content[0].text).error,/converted completely/);}
   }
+  for(const reference of ['Satipatthana Sutta²','Satipatthana Sutta١','Satipatthana SuttaⅢ',transliterate('Satipaṭṭhāna Sutta','roman','thai')+'١']) for(const [name,args]of [['resolve_reference',{reference}],['analyse_passage',{uid:reference,limit:1}]]) {const r=await call(name,args);assert.equal(r.isError,true);assert.match(JSON.parse(r.content[0].text).error,/unsupported or unconverted/);}
+  for(const script of SCRIPTS){for(const [ref,id]of [['MN 10','mn10'],['AN 3.65','an3.65']]){const r=await call('resolve_reference',{reference:transliterate(ref,'roman',script)});assert.ok(!r.isError);assert.equal(r.structuredContent.id,id);if(id==='an3.65')assert.match(r.structuredContent.notes.join(' '),/AN 3.66/);}const r=await call('analyse_passage',{uid:transliterate('MN 10','roman',script),limit:1});assert.ok(!r.isError);assert.equal(r.structuredContent.text_id,'mn10');}
   const ambiguous=await call('resolve_reference',{reference:'Metta sutta'});assert.equal(ambiguous.isError,true);
   const page=await call('resolve_reference',{reference:'S i 57'});assert.ok(!page.isError);assert.equal(page.structuredContent.id,'sn2.22');assert.ok(page.structuredContent.also_on_that_page.length);
   const roman=await call('resolve_reference',{reference:'Satipatthana Sutta'});assert.equal(roman.structuredContent.id,resolveReference('Satipatthana Sutta').unit.id);
   assert.doesNotMatch(stderr,/UNEXPECTED_NETWORK_ATTEMPT/);
-  reports.push({transport:mode,requests,scripts:SCRIPTS.length,unsupported_letters_not_discarded:true,native_resolution_and_analysis:true,shared_name_cautions_retained:true,ambiguous_page_alternatives_retained:true,postcanonical_fallback_preserved:true,network_attempts:0});
+  reports.push({transport:mode,requests,scripts:SCRIPTS.length,unsupported_letters_not_discarded:true,unsupported_numerals_not_discarded:true,native_numeric_citations_retained:true,native_resolution_and_analysis:true,shared_name_cautions_retained:true,ambiguous_page_alternatives_retained:true,postcanonical_fallback_preserved:true,network_attempts:0});
   await client.close();client=null;
   if(child&&child.exitCode===null&&child.signalCode===null){const ended=new Promise(r=>child.once('exit',r));child.kill();await ended;}child=null;
  }
