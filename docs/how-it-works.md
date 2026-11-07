@@ -14,7 +14,7 @@ A plain explanation of what happens inside the tool, how the data was built, and
                                               dhammatalks.org · Access to Insight · Digital Pāḷi Dictionary
 ```
 
-- **The server** is a small program that Claude talks to through the Model Context Protocol (MCP), the standard way AI apps connect to tools. It offers 33 tools, such as "resolve a citation", "get the text" and "compare translations" (listed in [development.md](development.md#tools)).
+- **The server** is a small program that Claude talks to through the Model Context Protocol (MCP), the standard way AI apps connect to tools. It offers 34 tools, such as "resolve a citation", "get the text" and "compare translations" (listed in [development.md](development.md#tools)).
 - **Skills and prompts** are written instructions that teach Claude good study habits: quote only retrieved text, cite precisely, keep translation and interpretation apart. Claude Code gets five skills (`study`, `compare`, `pali-word`, `method`, `memorise`); Claude Desktop gets equivalent prompts.
 - **The bundled canon** is one compressed file (5.6 MB) holding the whole Pāli text and an index of every citation.
 - **Live sources** are fetched only when you ask for an English translation, a dictionary entry or an Access to Insight page.

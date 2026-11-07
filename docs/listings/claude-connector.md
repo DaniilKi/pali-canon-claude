@@ -154,6 +154,7 @@ What every tool declares, and the proposed `title`. "Open-world" (`openWorldHint
 | `get_translation` | Read English translation | yes | no | yes | Fetches dhammatalks.org, Access to Insight (with mirrors) or Ancient Buddhist Texts. |
 | `compare_translations` | Compare translations | yes | no | yes | Fetches two to four translations live. |
 | `search_texts` | Search the Tipiṭaka | yes | no | no | Searches the bundled text and stored titles only (optionally the bundled post-canonical books, kept separate). |
+| `search_source_book` | Search a complete VRI source book | yes | no | no | Searches only a bundled root file; source segment references and reading commands do not assert individual citation alignment. |
 | `browse_canon` | Browse the canon | yes | no | no | Bundled table of contents. |
 | `lookup_pali` | Pāli dictionary lookup | yes | no | yes | Queries the Digital Pāḷi Dictionary; answers from the bundled subset, labelled, when the site is unreachable. |
 | `search_access_to_insight` | Search Access to Insight | yes | no | yes | Reads Access to Insight's indexes (or its GitHub mirror). |

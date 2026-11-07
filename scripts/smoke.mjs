@@ -70,6 +70,11 @@ try {
     assert.ok(d.source.terms && d.segments.every((s) => s.ref.startsWith('vri-book:vin02m1/')));
   });
   await call('get_text', { book: 'vin02m1', offset: bookOpening.next_offset, limit: 3 }, (d) => assert.notEqual(d.segments[0].ref, bookOpening.segments.at(-1).ref));
+  await call('search_source_book', { book: 'vin02m1', query: '"Ime kho panāyasmanto dvenavuti pācittiyā"' }, (d) => {
+    assert.equal(d.total_matched, 1);
+    assert.equal(d.results[0].ref, 'vri-book:vin02m1/7');
+    assert.deepEqual(d.results[0].read_with, { tool: 'get_text', book: 'vin02m1', offset: 6, limit: 1, script: 'roman' });
+  });
   await call('list_sources', {});
   // verify_quote on Dhp 5 as returned by get_text (no scripture typed here), without diacritics.
   const dhp5 = await call('get_text', { uid: 'Dhp 5' });

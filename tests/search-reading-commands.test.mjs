@@ -59,3 +59,9 @@ test('repeated post-canonical paragraph numbers retain distinct exact reading of
   }
   assert.notEqual(offsets[0],offsets[1]);
 });
+
+test('a source-book reading cannot acquire an individual text identity', async () => {
+  const segment={ref:'vri-book:fixture/1',text:'Fixture book text'};
+  const hit={ref:segment.ref,book_id:'fixture',read_with:{tool:'get_text',book:'fixture',offset:0,limit:1},context_with:{tool:'get_text',book:'fixture',offset:0,limit:3}};
+  await assert.rejects(checkSearchHit(async()=>({returned:1,segments:[segment],selection:'source_book',canonical:true,book_id:'fixture',text_id:'mn1'}),hit,[segment],'"Fixture book text"'),/individual text identity/);
+});
