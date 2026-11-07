@@ -319,6 +319,13 @@ function paliMatch(cand, refined) {
   };
 }
 
+const paliScope = () => ({
+  language: 'pali',
+  searched: 'The whole Pāli Tipiṭaka as bundled: VRI Chaṭṭha Saṅgāyana edition, 8,544 texts (Vinaya, Sutta and Abhidhamma Piṭakas). Commentaries (aṭṭhakathā), sub-commentaries and later Pāli literature are not included.',
+  attribution: source().attribution,
+  terms: source().terms,
+});
+
 function verifyPali(text, limit) {
   const q = words(fold(text));
   if (!q.length) throw new Error('The quotation has no Pāli words to match.');
@@ -343,13 +350,37 @@ function verifyPali(text, limit) {
   return {
     matches: out,
     ties,
-    scope: {
-      language: 'pali',
-      searched: 'The whole Pāli Tipiṭaka as bundled: VRI Chaṭṭha Saṅgāyana edition, 8,544 texts (Vinaya, Sutta and Abhidhamma Piṭakas). Commentaries (aṭṭhakathā), sub-commentaries and later Pāli literature are not included.',
-      attribution: source().attribution,
-      terms: source().terms,
-    },
+    scope: paliScope(),
   };
+}
+
+// Rescue only unchanged substrings actually printed in the bundled canon. Never repair an input
+// or convert an unsupported glyph by guessing; source block positions select the reading command.
+function literalPaliSource(quote, limit) {
+  const d = load(), matches = [], texts = new Set();
+  let matchingBlocks = 0;
+  for (const [bi, book] of d.canon.books.entries()) for (const [i, block] of book.blocks.entries()) {
+    if (!block[2].includes(quote)) continue;
+    const unit = ownerOf(bi, i);
+    if (!unit) continue;
+    const rendered = segments(unit, { includeSourcePositions: true });
+    const at = rendered.findIndex(s => s.source_blocks[0] <= i && i < s.source_blocks[1]);
+    if (at < 0 || !rendered[at].text.includes(quote)) continue;
+    matchingBlocks++; texts.add(unit.id);
+    if (matches.length >= limit) continue;
+    const seg = rendered[at], alignment = alignmentInfo(unit), notes = [];
+    if (alignment) notes.push(alignment.note);
+    if (unit.kind === 'range') notes.push(`The citation index uses the grouped source span ${unit.acronym}; the passage is inside that span.`);
+    matches.push({ text_id: unit.id, citation: unit.acronym, title: unit.title,
+      segment_ref: seg.ref, vri_paragraph: seg.vri_paragraph, pts_page_begins: seg.pts_page_begins,
+      similarity: 1, matched_text: block[2].slice(block[2].indexOf(quote), block[2].indexOf(quote) + quote.length),
+      edition: 'Chaṭṭha Saṅgāyana Tipiṭaka (VRI), Pāli', vri_file: book.file,
+      read_with: { tool: 'get_text', uid: unit.id, offset: at, limit: 1 },
+      ...(alignment ? { alignment } : {}), ...(notes.length ? { notes } : {}) });
+  }
+  return matches.length ? { matches, ties: { texts: texts.size, at_least: false }, scope: paliScope(),
+    source_literal: { matching_blocks: matchingBlocks, returned_blocks: matches.length, query_preserved: true,
+      native_conversion: false, source_commit: source().commit } } : null;
 }
 
 // ---- English ----------------------------------------------------------------
@@ -583,35 +614,43 @@ function tieNote(ties) {
 export async function verifyQuote({ text, language = 'auto', texts, limit = 5 }, { fetchTranslation = englishModule.translation } = {}) {
   const quote = String(text ?? '').trim();
   if (quote.length < 8) throw new Error('Give at least a few words of the quotation.');
-  const input = romanizeLookupInput(quote);
+  let input, literal;
+  try { input = romanizeLookupInput(quote); }
+  catch (error) {
+    if (['auto', 'pali'].includes(language) && [...quote].some(ch => /\p{L}/u.test(ch) && /\p{Script=Latin}/u.test(ch))) literal = literalPaliSource(quote, limit);
+    if (!literal) throw error;
+    input = { text: quote, script: 'roman' };
+  }
   if (input.original && language === 'english') throw new Error('Native-script quotation input is supported as Pāli. Choose language pali or auto; English mode requires an English quotation in Roman script.');
   const comparisonText = input.text.trim();
-  const lang = language === 'auto' || !language ? (input.original ? 'pali' : detectLanguage(comparisonText)) : language;
+  const lang = language === 'auto' || !language ? (input.original || literal ? 'pali' : detectLanguage(comparisonText)) : language;
   const comparisonWords = words(lang === 'pali' ? fold(comparisonText) : englishFold(comparisonText));
   if (comparisonWords.length > MAX_QUERY_WORDS) throw new Error(`Give at most ${MAX_QUERY_WORDS} words. Split a longer quotation into shorter excerpts; no partial comparison was performed.`);
-  const result = lang === 'pali' ? verifyPali(comparisonText, limit) : await verifyEnglish(comparisonText, texts, limit, fetchTranslation);
+  if (lang === 'pali' && !comparisonWords.length) throw new Error('The quotation has no Pāli words to match.');
+  const result = literal || (lang === 'pali' ? verifyPali(comparisonText, limit) : await verifyEnglish(comparisonText, texts, limit, fetchTranslation));
   const best = result.matches[0]?.similarity ?? 0;
-  const verdict = verdictFor(best);
+  const verdict = literal ? 'found' : verdictFor(best);
   const notFoundEnglish = verdict === 'not_found_in_scope' && lang === 'english';
   const note = verdict === 'not_found_in_scope' ? undefined : tieNote(result.ties);
   const containerNote = lang === 'english' && verdict !== 'not_found_in_scope' && result.matches[0]?.unverified_requested_text_ids?.length
     ? ' The match is in a linked containing source; correspondence to the narrower requested text is not verified.' : '';
   return {
-    quote, ...inputNote(input), language: lang, verdict, explanation: EXPLAIN[notFoundEnglish ? 'not_found_in_scope_english' : verdict] + containerNote,
+    quote, ...inputNote(input), language: lang, verdict, explanation: literal ? 'The quotation occurs as an unchanged substring in the bundled VRI canonical source shown below. Mixed-script source characters were kept, not converted or corrected. This does not establish correct spelling, a unique source or authorship.' : EXPLAIN[notFoundEnglish ? 'not_found_in_scope_english' : verdict] + containerNote,
     best_similarity: best,
-    comparison: { method: 'normalized_fuzzy', verbatim: 'not_assessed',
-      note: 'Case, diacritics and punctuation are normalized; Pāli spacing is also normalized. Native Pāli input is transliterated to Roman first. Even a similarity of 1 does not establish verbatim wording, a unique source or authorship.' },
+    ...(literal ? { source_literal: literal.source_literal } : {}),
+    comparison: { method: literal ? 'literal_source_substring' : 'normalized_fuzzy', verbatim: 'not_assessed',
+      note: literal ? 'The unchanged quotation was located in a readable canonical source segment before comparison. No spelling repair or native conversion was used. This establishes source-substring presence, not source-edition correctness, native-edition collation or authorship.' : 'Case, diacritics and punctuation are normalized; Pāli spacing is also normalized. Native Pāli input is transliterated to Roman first. Even a similarity of 1 does not establish verbatim wording, a unique source or authorship.' },
     ...(note ? { equally_similar_texts: result.ties.texts, equally_similar_at_least: result.ties.at_least, citation_note: note } : {}),
     ...(notFoundEnglish ? { next_step: NEXT_STEP_ENGLISH } : {}),
     matches: verdict === 'not_found_in_scope' ? result.matches.slice(0, 3) : result.matches,
     scope: result.scope,
-    thresholds: { ...THRESHOLDS, measure: 'Dice coefficient of character trigrams (diacritics and punctuation removed), weighted by the share of the quotation’s distinctive words the passage contains; see docs/verify-quote.md' },
+    thresholds: literal ? { measure: 'Unchanged source-substring presence; no fuzzy similarity threshold was applied.' } : { ...THRESHOLDS, measure: 'Dice coefficient of character trigrams (diacritics and punctuation removed), weighted by the share of the quotation’s distinctive words the passage contains; see docs/verify-quote.md' },
     guidance: 'Report only what the texts searched contain. This result describes those texts; it is not a judgement about who said the words.',
   };
 }
 
 export function register({ tool, z }) {
-  tool('verify_quote', 'Check whether a quotation attributed to the Buddha appears in the texts: a Pāli quotation is matched (fuzzily) against the whole bundled Pāli Tipiṭaka offline; an English one against the linked English translations of the texts you name (default: the Dhammapada), fetched live. Returns the best matches with citation and similarity, a verdict (found, close_paraphrase, not_found_in_scope) and exactly what was searched.', {
+  tool('verify_quote', 'Check whether a quotation attributed to the Buddha appears in the texts: a Pāli quotation is matched (fuzzily) against the whole bundled Pāli Tipiṭaka offline; an English one against the linked English translations of the texts you name (default: the Dhammapada), fetched live. If an otherwise unconvertible quotation occurs unchanged in the bundled canon, source-substring presence is reported separately with exact reading commands; spelling and native-edition correctness are not inferred. Returns the best matches with citation and similarity, a verdict (found, close_paraphrase, not_found_in_scope) and exactly what was searched.', {
     text: z.string().trim().min(8).max(2000).describe('The quotation to check: Pāli in Roman or a supported native script (converted and labelled), or English in Roman script. At most 120 comparison words and 2,000 input characters; split longer quotations into shorter excerpts.'),
     language: z.enum(['auto', 'pali', 'english']).default('auto').describe('Language of the quotation; "auto" detects Roman input and treats supported native-script input as Pāli. This is mechanical transliteration, not translation. Native input with explicit English mode is refused.'),
     texts: z.array(z.string().min(1).max(300)).max(12).optional().describe('English only: exact citations or indexed source groups whose linked translations to search, in Roman or supported native script. Multi-text fallback spans and ambiguous pages are refused before fetching. Inherited containing-source matches do not verify the narrower requested text. Default: all Dhammapada chapters.'),

@@ -330,3 +330,6 @@ Search input integrity now prevents unsupported letters from silently disappeari
 
 
 The D155 head's installed evidence workflow exposed a source-query regression: VRI itself prints a non-Roman combining sign within Roman mौṃjvānagare. Fully quoted Roman phrases with such marks now remain as entered under the existing diacritic-insensitive matching, with query_note explicitly disclaiming native conversion and spelling/source-edition verification. Unsupported non-Latin letters and incomplete unquoted/native-script input remain rejected. The actual printed phrase and exact read-back are retained in installed tests; source data is unchanged (D156).
+
+
+The strict-input review examined 464,078 nonempty bundled source blocks and found 79 conversion exceptions (19 canonical, 60 post-canonical; none in the bundled commentary). verify_quote now confirms a copied canonical quotation only when its unchanged substring is located in a readable source segment, returning exact get_text commands and a distinct literal_source_substring method. It preserves glyphs rather than guessing corrections and retains source/scope/word-limit safeguards. All 19 canonical cases are tested offline in both installed transports; this does not add post-canonical quotation verification or expert/native-reader acceptance (D157).

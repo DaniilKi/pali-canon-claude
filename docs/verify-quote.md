@@ -22,7 +22,7 @@ Submit at most **120 comparison words and 2,000 input characters** at a time. Na
 - **verdict**: `found`, `close_paraphrase` or `not_found_in_scope`.
 - **matches**: the best passages, each with its citation (`text_id`, `citation`, segment, VRI paragraph, PTS page for Pāli; translator, URL, attribution and licence for English) and a **similarity** from 0 to 1.
 - **quote**, **input_script**, **input_romanized**: the trimmed original quotation is retained; native Pāli conversion is separately labelled. Source excerpts remain in the original Roman VRI form.
-- **comparison**: `method: "normalized_fuzzy"`, `verbatim: "not_assessed"`. A `found` verdict or similarity of `1` does not establish verbatim wording, a unique source or authorship. This distinction also applies to Roman and English input.
+- **comparison**: normally `method: "normalized_fuzzy"`, `verbatim: "not_assessed"`. A `found` verdict or similarity of `1` does not establish verbatim wording, a unique source or authorship. This distinction also applies to Roman and English input.
 - **scope**: exactly which texts and translations were searched, and any page that could not be retrieved.
 - **equally_similar_texts**, **citation_note**: present when the same wording matches several texts equally well, such as a stock opening ("Evaṃ me sutaṃ...") or a verse repeated in another book. The note gives the number of texts (with `equally_similar_at_least` when there are more than were counted) and says that the matches listed are the first in canon order, not a unique source.
 - **next_step**: for an English quotation that is not found, how to check the Pāli instead.
@@ -52,3 +52,10 @@ The Pāli index is built once per server process, on the first Pāli check, and 
 ## Tests
 
 The tests (`tests/verify.test.mjs`) check 20 genuine quotations and 20 well-known misattributions. The genuine Pāli quotations are built from the bundled text (some without diacritics, one misspelt) and the English ones are sliced from the fixture pages, so no scripture is typed into the tests. The misattributions include "Holding on to anger is like grasping a hot coal…" and "Peace comes from within. Do not seek it without."
+
+
+## Printed source characters that cannot be converted
+
+Some bundled VRI passages contain non-Roman characters within otherwise Roman text. If a pasted quotation cannot be converted but occurs unchanged in a readable canonical source segment, the tool reports `comparison.method: "literal_source_substring"`, retains the characters and returns exact `get_text` commands. `source_literal` gives the number of matching source blocks and confirms that no native conversion was used. The score of 1 denotes substring presence in this mode; no fuzzy threshold is applied.
+
+This confirms what this bundled source prints. It does not correct the spelling, collate a native edition, prove unique wording or establish authorship; `comparison.verbatim` remains `not_assessed`. Altered or unsupported input without that source occurrence still fails. English mode and the canonical-only scope remain unchanged, and the 120-word limit still applies.
