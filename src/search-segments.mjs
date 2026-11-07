@@ -1,7 +1,25 @@
+import { romanizeLookupInput } from './script.mjs';
 /** Search the same complete stanzas retrieval renders, without joining separate paragraphs or texts. */
 const VERSE = new Set(['gatha1', 'gatha2', 'gatha3', 'gathalast']);
 
 export const searchFold = (text, fold) => fold(text).replace(/\s+/gu, ' ');
+
+/** Quoted Roman source material may contain non-Roman combining marks in the pinned edition.
+ * Keep that input intact rather than inventing a native-script conversion or correcting the source. */
+export function romanizeSearchInput(query) {
+  const text = String(query);
+  try { return romanizeLookupInput(text); }
+  catch (error) {
+    const chars = [...text];
+    const quoted = /^"[^"]+"$|^“[^”]+”$/u.test(text.trim());
+    const roman = chars.some(ch => /\p{L}/u.test(ch) && /\p{Script=Latin}/u.test(ch))
+      && !chars.some(ch => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch));
+    if (!quoted || !roman || !chars.some(ch => /\p{M}/u.test(ch))) throw error;
+    return { text, script: 'roman', query_note: 'This quoted Roman query contains combining marks that were kept as entered, without native-script conversion. Matching remains diacritic-insensitive; this does not verify the spelling or source edition.' };
+  }
+}
+
+export const searchInputNote = input => input.query_note ? { query_note: input.query_note } : {};
 
 /** Validate before normalization/tokenization can discard unsupported letters. Native input is converted at MCP entry. */
 export function assertSearchQuery(query) {

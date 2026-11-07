@@ -44,7 +44,7 @@ try {
   await client.connect(transport);
   const call = async (name, args) => {
     const response = await client.callTool({ name, arguments: args }, undefined, { timeout: 120000 });
-    assert.ok(!response.isError, `${name}: ${JSON.stringify(response.content)}`);
+    assert.ok(!response.isError, `${name} ${JSON.stringify(args)}: ${JSON.stringify(response.content)}`);
     return JSON.parse(response.content.find(part => part.type === 'text').text);
   };
   const contracts = await auditMcpContracts(client, call);

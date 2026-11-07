@@ -46,9 +46,15 @@ try {
     assert.ok((result.total_matched??result.total_texts_matched)>0);
    }
   }
+  for(const [name,options] of scopes) {
+   const r=await call(name,{query:'"saौti"',limit:1,...options});assert.ok(!r.isError,JSON.stringify(r.content));assert.ok((r.structuredContent.total_matched??r.structuredContent.total_texts_matched)>0);assert.equal(r.structuredContent.input_script,undefined);assert.match(r.structuredContent.query_note,/kept as entered.*diacritic-insensitive/);
+   for(const query of ['saौti','"ส่ติ"','"漢sati字"']) assert.equal((await call(name,{query,limit:1,...options})).isError,true);
+  }
+  const actual=await call('search_post_canonical',{query:'"Mrammaraṭṭhe mौṃjvānagare leḍītīaraññavihāravāsinā mahā therena katāyaṃ paccayuddesadīpanī."',books:['patthanuddesa-dipanipatha'],limit:1});assert.ok(!actual.isError,JSON.stringify(actual.content));assert.ok(actual.structuredContent.total_matched>0);
+  const {tool,...args}=actual.structuredContent.results[0].read_with,read=await call(tool,args);assert.ok(!read.isError);assert.ok(read.structuredContent.segments.some(s=>s.text.includes('mौṃjvānagare')));
   for(const english of ['auto','off','only']) {const r=await call('search_texts',{query:'漢mindfulness字',english,limit:1});assert.equal(r.isError,true);}
   assert.doesNotMatch(stderr,/UNEXPECTED_NETWORK_ATTEMPT/);
-  reports.push({transport:mode,requests,scripts:SCRIPTS.length,search_tools:4,unsupported_letters_not_discarded:true,complete_native_conversion:true,phrase_and_pagination_parity:true,source_commands_and_cautions_retained:true,english_modes_guarded:true,network_attempts:0});
+  reports.push({transport:mode,requests,scripts:SCRIPTS.length,search_tools:4,unsupported_letters_not_discarded:true,complete_native_conversion:true,phrase_and_pagination_parity:true,source_commands_and_cautions_retained:true,english_modes_guarded:true,quoted_roman_source_marks_preserved:true,network_attempts:0});
   await client.close();client=null;
   if(child&&child.exitCode===null&&child.signalCode===null){const ended=new Promise(r=>child.once('exit',r));child.kill();await ended;}child=null;
  }

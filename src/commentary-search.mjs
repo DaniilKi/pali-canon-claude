@@ -2,8 +2,8 @@
 import * as commentary from './commentary.mjs';
 import { fold } from './canon.mjs';
 import { withNormalised } from './input.mjs';
-import { searchFold, searchExcerpt, searchTerms } from './search-segments.mjs';
-import { romanizeLookupInput, localizeCommentary, SCRIPT_DESCRIPTION, scriptName } from './script.mjs';
+import { searchFold, searchExcerpt, searchTerms, romanizeSearchInput, searchInputNote } from './search-segments.mjs';
+import { localizeCommentary, SCRIPT_DESCRIPTION, scriptName } from './script.mjs';
 
 // Bound retained folded text; the source corpus itself is already resident once loaded.
 const INDEX_BUDGET_BYTES = 8 * 1024 * 1024;
@@ -78,8 +78,8 @@ export function register({ tool, z }) {
     limit: z.number().int().min(1).max(50).default(10),
   }, async ({ query, books, offset, limit, script }) => {
     if (script) scriptName(script);
-    const input = romanizeLookupInput(query);
+    const input = romanizeSearchInput(query);
     const result = await withNormalised(input.text, (value) => search(value, { books, offset, limit }));
-    return localizeCommentary(result, script, input);
+    return localizeCommentary({ ...result, ...searchInputNote(input) }, script, input);
   });
 }

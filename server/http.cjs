@@ -23704,9 +23704,616 @@ __export(canon_exports, {
   translationId: () => translationId
 });
 
+// src/script.mjs
+var SCRIPTS = ["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"];
+var SCRIPT_NAMES = {
+  roman: "Roman (Latin with diacritics)",
+  sinhala: "Sinhala",
+  thai: "Thai",
+  myanmar: "Myanmar (Burmese)",
+  devanagari: "Devanagari",
+  khmer: "Khmer",
+  lao: "Lao",
+  lanna: "Lanna (Tai Tham)"
+};
+var ALIASES = {
+  roman: "roman",
+  romn: "roman",
+  latn: "roman",
+  latin: "roman",
+  iast: "roman",
+  iso: "roman",
+  sinhala: "sinhala",
+  sinh: "sinhala",
+  si: "sinhala",
+  sinhalese: "sinhala",
+  thai: "thai",
+  th: "thai",
+  myanmar: "myanmar",
+  mymr: "myanmar",
+  burmese: "myanmar",
+  my: "myanmar",
+  burma: "myanmar",
+  devanagari: "devanagari",
+  deva: "devanagari",
+  hindi: "devanagari",
+  nagari: "devanagari",
+  khmer: "khmer",
+  khmr: "khmer",
+  km: "khmer",
+  cambodian: "khmer",
+  lao: "lao",
+  laoo: "lao",
+  laos: "lao",
+  lanna: "lanna",
+  lana: "lanna",
+  taitham: "lanna",
+  "tai tham": "lanna",
+  tham: "lanna",
+  "tai-tham": "lanna",
+  tai_tham: "lanna"
+};
+function scriptName(name) {
+  const key3 = String(name ?? "").trim().toLowerCase();
+  const found = ALIASES[key3];
+  if (!found) throw new Error(`Unknown script "${name}". Available: ${SCRIPTS.join(", ")}.`);
+  return found;
+}
+var CONSONANTS = [
+  "kh",
+  "gh",
+  "ch",
+  "jh",
+  "\u1E6Dh",
+  "\u1E0Dh",
+  "th",
+  "dh",
+  "ph",
+  "bh",
+  "k",
+  "g",
+  "\u1E45",
+  "c",
+  "j",
+  "\xF1",
+  "\u1E6D",
+  "\u1E0D",
+  "\u1E47",
+  "t",
+  "d",
+  "n",
+  "p",
+  "b",
+  "m",
+  "y",
+  "r",
+  "l",
+  "v",
+  "s",
+  "h",
+  "\u1E37"
+];
+var VOWELS = ["a", "\u0101", "i", "\u012B", "u", "\u016B", "e", "o"];
+var C_ORDER = [
+  "k",
+  "kh",
+  "g",
+  "gh",
+  "\u1E45",
+  "c",
+  "ch",
+  "j",
+  "jh",
+  "\xF1",
+  "\u1E6D",
+  "\u1E6Dh",
+  "\u1E0D",
+  "\u1E0Dh",
+  "\u1E47",
+  "t",
+  "th",
+  "d",
+  "dh",
+  "n",
+  "p",
+  "ph",
+  "b",
+  "bh",
+  "m",
+  "y",
+  "r",
+  "l",
+  "v",
+  "s",
+  "h",
+  "\u1E37"
+];
+var zip = (keys, chars) => Object.fromEntries(keys.map((k, i) => [k, chars[i]]));
+var TABLES = {
+  devanagari: {
+    c: [..."\u0915\u0916\u0917\u0918\u0919\u091A\u091B\u091C\u091D\u091E\u091F\u0920\u0921\u0922\u0923\u0924\u0925\u0926\u0927\u0928\u092A\u092B\u092C\u092D\u092E\u092F\u0930\u0932\u0935\u0938\u0939\u0933"],
+    v: ["\u0905", "\u0906", "\u0907", "\u0908", "\u0909", "\u090A", "\u090F", "\u0913"],
+    s: ["", "\u093E", "\u093F", "\u0940", "\u0941", "\u0942", "\u0947", "\u094B"],
+    virama: "\u094D",
+    m: "\u0902",
+    digits: [..."\u0966\u0967\u0968\u0969\u096A\u096B\u096C\u096D\u096E\u096F"],
+    stop: "\u0964",
+    abbr: "\u0970",
+    verseEnd: "\u0964",
+    stanzaEnd: "\u0965",
+    // VRI writes a zero-width joiner after the virama in these clusters.
+    zwj: ["kk", "kl", "kv", "cc", "jj", "\xF1c", "\xF1j", "\xF1\xF1", "nn", "pl", "ll"]
+  },
+  sinhala: {
+    c: [..."\u0D9A\u0D9B\u0D9C\u0D9D\u0D9E\u0DA0\u0DA1\u0DA2\u0DA3\u0DA4\u0DA7\u0DA8\u0DA9\u0DAA\u0DAB\u0DAD\u0DAE\u0DAF\u0DB0\u0DB1\u0DB4\u0DB5\u0DB6\u0DB7\u0DB8\u0DBA\u0DBB\u0DBD\u0DC0\u0DC3\u0DC4\u0DC5"],
+    v: ["\u0D85", "\u0D86", "\u0D89", "\u0D8A", "\u0D8B", "\u0D8C", "\u0D91", "\u0D94"],
+    s: ["", "\u0DCF", "\u0DD2", "\u0DD3", "\u0DD4", "\u0DD6", "\u0DD9", "\u0DDC"],
+    virama: "\u0DCA",
+    m: "\u0D82",
+    digits: null,
+    abbr: ".",
+    // VRI writes ZWJ before y and r (yansaya, rakaransaya) and ZWNJ in every other cluster.
+    joiner: (a, b) => b === "y" || b === "r" ? "\u200D" : "\u200C"
+  },
+  thai: {
+    c: [..."\u0E01\u0E02\u0E04\u0E06\u0E07\u0E08\u0E09\u0E0A\u0E0C\u0E0D\u0E0F\u0E10\u0E11\u0E12\u0E13\u0E15\u0E16\u0E17\u0E18\u0E19\u0E1B\u0E1C\u0E1E\u0E20\u0E21\u0E22\u0E23\u0E25\u0E27\u0E2A\u0E2B\u0E2C"],
+    v: ["\u0E2D", "\u0E2D\u0E32", "\u0E2D\u0E34", "\u0E2D\u0E35", "\u0E2D\u0E38", "\u0E2D\u0E39", "\u0E40\u0E2D", "\u0E42\u0E2D"],
+    s: ["", "\u0E32", "\u0E34", "\u0E35", "\u0E38", "\u0E39", "\u0E40", "\u0E42"],
+    virama: "\u0E3A",
+    m: "\u0E4D",
+    digits: [..."\u0E50\u0E51\u0E52\u0E53\u0E54\u0E55\u0E56\u0E57\u0E58\u0E59"],
+    prefix: true,
+    stop: "\u0E2F",
+    abbr: "."
+  },
+  myanmar: {
+    c: [..."\u1000\u1001\u1002\u1003\u1004\u1005\u1006\u1007\u1008\u1009\u100B\u100C\u100D\u100E\u100F\u1010\u1011\u1012\u1013\u1014\u1015\u1016\u1017\u1018\u1019\u101A\u101B\u101C\u101D\u101E\u101F\u1020"],
+    v: ["\u1021", "\u1021\u102C", "\u1023", "\u1024", "\u1025", "\u1026", "\u1027", "\u1029"],
+    s: ["", "\u102C", "\u102D", "\u102E", "\u102F", "\u1030", "\u1031", "\u1031\u102C"],
+    virama: "\u1039",
+    final: "\u103A",
+    m: "\u1036",
+    digits: [..."\u1040\u1041\u1042\u1043\u1044\u1045\u1046\u1047\u1048\u1049"],
+    stop: "\u104B",
+    abbr: ".",
+    verseEnd: "\u104B",
+    ellipsis: "\u104B",
+    comma: "\u104A",
+    // Stacks VRI writes as one letter, a medial or kinzi (applied in this order).
+    ligatures: [["\u101E\u1039\u101E", "\u103F"], ["\u1009\u1039\u1009", "\u100A"], ["\u1039\u101A", "\u103B"], ["\u1039\u101B", "\u103C"], ["\u1039\u101D", "\u103D"], ["\u1039\u101F", "\u103E"], ["\u1004\u1039", "\u1004\u103A\u1039"]],
+    extraIndependent: { "\u1026": "\u016B", "\u102A": "o" }
+  },
+  khmer: {
+    c: [..."\u1780\u1781\u1782\u1783\u1784\u1785\u1786\u1787\u1788\u1789\u178A\u178B\u178C\u178D\u178E\u178F\u1790\u1791\u1792\u1793\u1794\u1795\u1796\u1797\u1798\u1799\u179A\u179B\u179C\u179F\u17A0\u17A1"],
+    v: ["\u17A2", "\u17A2\u17B6", "\u17A5", "\u17A6", "\u17A7", "\u17A9", "\u17AF", "\u17B1"],
+    s: ["", "\u17B6", "\u17B7", "\u17B8", "\u17BB", "\u17BC", "\u17C1", "\u17C4"],
+    virama: "\u17D2",
+    final: "\u17D1",
+    m: "\u17C6",
+    digits: [..."\u17E0\u17E1\u17E2\u17E3\u17E4\u17E5\u17E6\u17E7\u17E8\u17E9"],
+    stop: "\u17D4",
+    abbr: ".",
+    extraIndependent: { "\u17A8": "\u016B" }
+  },
+  lao: {
+    // Lao with the Pāli letters added in Unicode 12 (U+0E86-U+0EAC) and the Pāli virama U+0EBA.
+    c: [
+      "\u0E81",
+      "\u0E82",
+      "\u0E84",
+      "\u0E86",
+      "\u0E87",
+      "\u0E88",
+      "\u0E89",
+      "\u0E8A",
+      "\u0E8C",
+      "\u0E8E",
+      "\u0E8F",
+      "\u0E90",
+      "\u0E91",
+      "\u0E92",
+      "\u0E93",
+      "\u0E95",
+      "\u0E96",
+      "\u0E97",
+      "\u0E98",
+      "\u0E99",
+      "\u0E9B",
+      "\u0E9C",
+      "\u0E9E",
+      "\u0EA0",
+      "\u0EA1",
+      "\u0E8D",
+      "\u0EA3",
+      "\u0EA5",
+      "\u0EA7",
+      "\u0EAA",
+      "\u0EAB",
+      "\u0EAC"
+    ],
+    v: ["\u0EAD", "\u0EAD\u0EB2", "\u0EAD\u0EB4", "\u0EAD\u0EB5", "\u0EAD\u0EB8", "\u0EAD\u0EB9", "\u0EC0\u0EAD", "\u0EC2\u0EAD"],
+    s: ["", "\u0EB2", "\u0EB4", "\u0EB5", "\u0EB8", "\u0EB9", "\u0EC0", "\u0EC2"],
+    virama: "\u0EBA",
+    m: "\u0ECD",
+    digits: [..."\u0ED0\u0ED1\u0ED2\u0ED3\u0ED4\u0ED5\u0ED6\u0ED7\u0ED8\u0ED9"],
+    prefix: true
+  },
+  lanna: {
+    // Tai Tham is stored in logical order; sakot (U+1A60) stacks clusters and
+    // the visible asat (U+1A7A) marks a consonant with no vowel.
+    c: [
+      "\u1A20",
+      "\u1A21",
+      "\u1A23",
+      "\u1A25",
+      "\u1A26",
+      "\u1A27",
+      "\u1A28",
+      "\u1A29",
+      "\u1A2B",
+      "\u1A2C",
+      "\u1A2D",
+      "\u1A2E",
+      "\u1A2F",
+      "\u1A30",
+      "\u1A31",
+      "\u1A32",
+      "\u1A33",
+      "\u1A34",
+      "\u1A35",
+      "\u1A36",
+      "\u1A37",
+      "\u1A39",
+      "\u1A3B",
+      "\u1A3D",
+      "\u1A3E",
+      "\u1A3F",
+      "\u1A41",
+      "\u1A43",
+      "\u1A45",
+      "\u1A48",
+      "\u1A49",
+      "\u1A4A"
+    ],
+    v: ["\u1A4B", "\u1A4B\u1A63", "\u1A4D", "\u1A4E", "\u1A4F", "\u1A50", "\u1A51", "\u1A52"],
+    s: ["", "\u1A63", "\u1A65", "\u1A66", "\u1A69", "\u1A6A", "\u1A6E", "\u1A6E\u1A63"],
+    virama: "\u1A60",
+    final: "\u1A7A",
+    m: "\u1A74",
+    digits: [..."\u1A90\u1A91\u1A92\u1A93\u1A94\u1A95\u1A96\u1A97\u1A98\u1A99"],
+    extraIndependent: { "\u1A4C": "\u0101" },
+    extraSigns: { "\u1A64": "\u0101", "\u1A70": "o" },
+    // Subjoined letters and the great sa some Lanna texts use; accepted on input.
+    expand: [["\u1A55", "\u1A60\u1A41"], ["\u1A56", "\u1A60\u1A43"], ["\u1A54", "\u1A48\u1A60\u1A48"]]
+  }
+};
+var MYMR_TALL = /([ခဂပဝ]|ဒ္ဓ)(ေ?)ာ/g;
+for (const t of Object.values(TABLES)) {
+  t.cons = zip(C_ORDER, t.c);
+  t.ind = zip(VOWELS, t.v);
+  t.sign = zip(VOWELS, t.s);
+  t.zwj = new Set(t.zwj ?? []);
+}
+var ROMAN_TOKENS = [...CONSONANTS, ...VOWELS, "\u1E43"];
+var PE = "\uE000";
+var STOP = "\uE001";
+var STANZA = "\uE002";
+function* romanTokens(s) {
+  for (let i = 0; i < s.length; ) {
+    let tok = null;
+    for (const t of ROMAN_TOKENS) if (s.startsWith(t, i)) {
+      tok = t;
+      break;
+    }
+    if (tok) {
+      yield { kind: tok === "\u1E43" ? "m" : VOWELS.includes(tok) ? "v" : "c", tok };
+      i += tok.length;
+    } else {
+      if (s[i] === "\u1E41" || s[i] === "\u014B") yield { kind: "m", tok: "\u1E43" };
+      else yield { kind: "o", tok: s[i] };
+      i += 1;
+    }
+  }
+}
+function romanPunctuation(s, t, stanza) {
+  if (stanza && t.stanzaEnd) s = s.replace(/\.(\)?\s*)$/, `${STANZA}$1`);
+  if (t.abbr) {
+    s = s.replace(/…(\s*)(pe)…/gi, `\u2026$1$2${PE}\u2026`);
+    s = s.replace(new RegExp("(?<=(?:^|[\\s(.])\\p{Ll}{1,6})\\.(?=\\s*[\\p{Ll}\\d)])", "gu"), PE);
+  }
+  if (t.stop) s = s.replace(/(?<![0-9])\./g, STOP);
+  if (t.verseEnd) s = s.replace(/;(\s*)$/, `${STOP}$1`);
+  return s;
+}
+function fromRoman(text, script, stanza) {
+  const t = TABLES[script];
+  const s = romanPunctuation(text.normalize("NFC"), t, stanza).toLowerCase();
+  let out = "";
+  let pending = null;
+  let consStart = -1;
+  for (const { kind, tok } of romanTokens(s)) {
+    if (kind === "c") {
+      if (pending) {
+        out += t.virama;
+        if (t.zwj.has(pending + tok)) out += "\u200D";
+        else if (t.joiner) out += t.joiner(pending, tok);
+      }
+      consStart = out.length;
+      out += t.cons[tok];
+      pending = tok;
+    } else if (kind === "v") {
+      if (pending) {
+        const sign = t.sign[tok];
+        if (t.prefix && (tok === "e" || tok === "o")) out = out.slice(0, consStart) + sign + out.slice(consStart);
+        else out += sign;
+        pending = null;
+      } else {
+        out += t.ind[tok];
+      }
+    } else {
+      if (pending) {
+        out += t.final ?? t.virama;
+        pending = null;
+      }
+      if (kind === "m") out += t.m;
+      else if (tok >= "0" && tok <= "9") out += t.digits ? t.digits[tok.charCodeAt(0) - 48] : tok;
+      else if (tok === PE) out += t.abbr;
+      else if (tok === STOP) out += t.stop;
+      else if (tok === STANZA) out += t.stanzaEnd;
+      else if (tok === "\u2026" && t.ellipsis) out += t.ellipsis;
+      else if (tok === "," && t.comma) out += t.comma;
+      else out += tok;
+    }
+  }
+  if (pending) out += t.final ?? t.virama;
+  if (t.ligatures) for (const [a, b] of t.ligatures) out = out.split(a).join(b);
+  if (script === "myanmar") out = out.replace(MYMR_TALL, "$1$2\u102B");
+  return out;
+}
+var REVERSE = {};
+function reverse(script) {
+  if (REVERSE[script]) return REVERSE[script];
+  const t = TABLES[script];
+  const cons = new Map(C_ORDER.map((r) => [t.cons[r], r]));
+  const carrier = t.ind.a;
+  cons.set(carrier, "");
+  const ind = /* @__PURE__ */ new Map();
+  for (const r of VOWELS) if (r !== "a" && !t.ind[r].startsWith(carrier)) ind.set(t.ind[r], r);
+  for (const [k, v] of Object.entries(t.extraIndependent ?? {})) ind.set(k, v);
+  const signs = new Map(VOWELS.filter((r) => t.sign[r] && !(t.prefix && (r === "e" || r === "o"))).map((r) => [t.sign[r], r]));
+  for (const [k, v] of Object.entries(t.extraSigns ?? {})) signs.set(k, v);
+  const punct = /* @__PURE__ */ new Map();
+  if (t.stop) punct.set(t.stop, ".");
+  if (t.stanzaEnd) punct.set(t.stanzaEnd, ".");
+  if (t.abbr) punct.set(t.abbr, ".");
+  if (t.ellipsis) punct.set(t.ellipsis, ".");
+  if (t.comma) punct.set(t.comma, ",");
+  if (t.digits) t.digits.forEach((d, i) => punct.set(d, String(i)));
+  const expand = [...t.expand ?? []];
+  if (t.ligatures) for (const [a, b] of [...t.ligatures].reverse()) expand.push([b, a]);
+  if (script === "myanmar") expand.push(["\u102B", "\u102C"]);
+  const byLength = (m) => [...m.keys()].sort((a, b) => b.length - a.length);
+  const prefixes = t.prefix ? /* @__PURE__ */ new Map([[t.sign.e, "e"], [t.sign.o, "o"]]) : /* @__PURE__ */ new Map();
+  return REVERSE[script] = { t, cons, ind, signs, signList: byLength(signs), indList: byLength(ind), punct, expand, prefixes };
+}
+function toRomanFrom(text, script) {
+  const R = reverse(script);
+  const { t } = R;
+  let s = text.normalize("NFC").replace(/[\u200c\u200d]/g, "");
+  for (const [a, b] of R.expand) s = s.split(a).join(b);
+  const at = (i, list) => list.find((x) => s.startsWith(x, i));
+  let out = "";
+  for (let i = 0; i < s.length; ) {
+    let prefix = null;
+    if (R.prefixes.has(s[i]) && R.cons.has(s[i + 1])) {
+      prefix = R.prefixes.get(s[i]);
+      i += 1;
+    }
+    const c = s[i];
+    if (R.cons.has(c)) {
+      out += R.cons.get(c);
+      i += 1;
+      if (prefix) out += prefix;
+      else if (s[i] === t.virama || t.final && s[i] === t.final) i += 1;
+      else {
+        const sign = at(i, R.signList);
+        if (sign) {
+          out += R.signs.get(sign);
+          i += sign.length;
+        } else out += "a";
+      }
+      continue;
+    }
+    const v = at(i, R.indList);
+    if (v) {
+      out += R.ind.get(v);
+      i += v.length;
+      continue;
+    }
+    if (c === t.m) {
+      out += "\u1E43";
+      i += 1;
+      continue;
+    }
+    out += R.punct.get(c) ?? c;
+    i += 1;
+  }
+  if (t.abbr) out = out.replace(/[.…](\s*)pe\.[.…]/g, "\u2026$1pe\u2026");
+  return out;
+}
+var RANGES = [
+  ["devanagari", 2304, 2431],
+  ["sinhala", 3456, 3583],
+  ["thai", 3584, 3711],
+  ["lao", 3712, 3839],
+  ["myanmar", 4096, 4255],
+  ["khmer", 6016, 6143],
+  ["lanna", 6688, 6831]
+];
+function detectScript(text) {
+  const counts = {};
+  for (const ch of String(text ?? "")) {
+    const cp = ch.codePointAt(0);
+    if (cp < 2304) continue;
+    for (const [name, lo, hi] of RANGES) if (cp >= lo && cp <= hi) {
+      counts[name] = (counts[name] ?? 0) + 1;
+      break;
+    }
+  }
+  let best = "roman";
+  let n = 0;
+  for (const [name, c] of Object.entries(counts)) if (c > n) {
+    best = name;
+    n = c;
+  }
+  return best;
+}
+function transliterate(text, from, to, { stanza = false } = {}) {
+  if (text == null) return text;
+  const s = String(text);
+  const a = from === "auto" ? detectScript(s) : scriptName(from);
+  const b = scriptName(to);
+  if (a === b) return s;
+  const roman2 = a === "roman" ? s : toRomanFrom(s, a);
+  return b === "roman" ? roman2 : fromRoman(roman2, b, stanza);
+}
+var SCRIPT_CHOICES = SCRIPTS;
+var SCRIPT_DESCRIPTION = "Write the P\u0101li in this script: roman (default), sinhala, thai, myanmar, devanagari, khmer, lao or lanna (Tai Tham). Citations, IDs and English stay in Roman.";
+function romanizeInput(text) {
+  const s = String(text ?? "");
+  const script = detectScript(s);
+  if (script === "roman") return { text: s, script };
+  return { text: toRomanFrom(s, script).normalize("NFC"), script, original: s };
+}
+function romanizeLookupInput(text) {
+  const input = romanizeInput(text);
+  if (detectScript(input.text) !== "roman" || [...input.text].some((ch) => new RegExp("\\p{L}", "u").test(ch) && !new RegExp("\\p{Script=Latin}", "u").test(ch))) {
+    throw new Error("The lookup input could not be converted completely. Use P\u0101li in Roman or one supported script, without mixed or unsupported characters.");
+  }
+  return input;
+}
+function inputNote(input) {
+  return input?.original ? { input_script: input.script, input_romanized: input.text } : {};
+}
+function scriptNote(script) {
+  return {
+    script,
+    script_note: `P\u0101li transliterated into ${SCRIPT_NAMES[script]} by this server from the VRI Roman edition (exact letter-for-letter; punctuation follows VRI's own script editions where they exist). Citations, IDs and English are left in Roman.`
+  };
+}
+var pali = (text, script, opts) => typeof text === "string" && text ? transliterate(text, "roman", script, opts) : text;
+function verse(text, script) {
+  const lines = text.split("\n");
+  return lines.map((line, i) => pali(line, script, { stanza: i === lines.length - 1 })).join("\n");
+}
+function localizeUnitFields(obj, script) {
+  const out = { ...obj };
+  if (typeof out.title === "string") {
+    out.title_roman = out.title;
+    out.title = pali(out.title, script);
+  }
+  if (typeof out.vri_book === "string") out.vri_book = pali(out.vri_book, script);
+  if (typeof out.excerpt === "string") out.excerpt = pali(out.excerpt, script);
+  return out;
+}
+function localizeDescribe(result, script, input) {
+  const s = script ? scriptName(script) : "roman";
+  if (s === "roman") return { ...result, ...inputNote(input) };
+  const out = localizeUnitFields(result, s);
+  if (Array.isArray(out.also_on_that_page)) out.also_on_that_page = out.also_on_that_page.map((a) => localizeUnitFields(a, s));
+  if (Array.isArray(out.members)) out.members = out.members.map((m) => m && typeof m === "object" ? localizeUnitFields(m, s) : m);
+  return { ...out, ...scriptNote(s), ...inputNote(input) };
+}
+function localizeText(result, script, input) {
+  const s = script ? scriptName(script) : "roman";
+  if (s === "roman") return { ...result, ...inputNote(input) };
+  const out = localizeUnitFields(result, s);
+  out.segments = (result.segments ?? []).map((seg) => {
+    const x = { ...seg };
+    if (typeof x.text === "string") x.text = x.type === "verse" ? verse(x.text, s) : pali(x.text, s);
+    if (Array.isArray(x.variant_readings)) x.variant_readings = x.variant_readings.map((v) => pali(v, s));
+    if (Array.isArray(x.variants)) x.variants = x.variants.map((v) => ({
+      ...v,
+      raw: pali(v.raw, s),
+      readings: (v.readings ?? []).map((r) => ({ ...r, reading: pali(r.reading, s) })),
+      omissions: (v.omissions ?? []).map((o) => ({ ...o, text: pali(o.text, s) })),
+      remarks: (v.remarks ?? []).map((r) => pali(r, s))
+    }));
+    return x;
+  });
+  if (Array.isArray(result.pali_opening)) out.pali_opening = result.pali_opening;
+  return { ...out, ...scriptNote(s), ...inputNote(input) };
+}
+function localizeSearch(result, script, input) {
+  const s = script ? scriptName(script) : "roman";
+  const out = { ...result };
+  const hit = (r) => {
+    const value = s === "roman" ? { ...r } : localizeUnitFields(r, s);
+    if (script) {
+      for (const key3 of ["read_with", "context_with"]) if (value[key3]) value[key3] = { ...value[key3], script: s };
+    }
+    return value;
+  };
+  if (Array.isArray(out.results)) out.results = out.results.map(hit);
+  if (Array.isArray(out.title_matches)) out.title_matches = out.title_matches.map(hit);
+  if (script && out.scope_resolution?.read_with) out.scope_resolution = {
+    ...out.scope_resolution,
+    read_with: { ...out.scope_resolution.read_with, script: s }
+  };
+  return { ...out, ...s !== "roman" ? scriptNote(s) : {}, ...inputNote(input) };
+}
+function localizeCommentary(commentary, script, input) {
+  const s = script ? scriptName(script) : "roman";
+  if (!commentary) return commentary;
+  const out = s === "roman" ? { ...commentary, ...inputNote(input) } : localizeText(commentary, s, input);
+  if (!Array.isArray(commentary.segments)) delete out.segments;
+  if (s !== "roman" && out.book) out.book = localizeUnitFields(out.book, s);
+  if (s !== "roman" && Array.isArray(out.books)) out.books = out.books.map((book) => localizeUnitFields(book, s));
+  if (Array.isArray(out.results)) out.results = out.results.map((hit) => ({
+    ...s === "roman" ? hit : localizeUnitFields(hit, s),
+    ...s !== "roman" && hit.book ? { book: localizeUnitFields(hit.book, s) } : {},
+    ...script && hit.read_with ? { read_with: { ...hit.read_with, script: s } } : {},
+    ...script && hit.context_with ? { context_with: { ...hit.context_with, script: s } } : {}
+  }));
+  return out;
+}
+function localizePostCanonical(result, script, input) {
+  const s = script ? scriptName(script) : "roman";
+  if (!result) return result;
+  const named = (obj, key3) => s !== "roman" && typeof obj[key3] === "string" ? { [`${key3}_roman`]: obj[key3], [key3]: pali(obj[key3], s) } : {};
+  const out = Array.isArray(result.segments) ? localizeText(result, s, input) : { ...result, ...named(result, "title") };
+  if (out.book && typeof out.book === "object") out.book = { ...out.book, ...named(out.book, "title") };
+  if (Array.isArray(out.results)) {
+    out.results = out.results.map((r) => ({
+      ...r,
+      ...named(r, "book_title"),
+      ...s !== "roman" && typeof r.chapter === "string" ? { chapter: pali(r.chapter, s) } : {},
+      ...s !== "roman" && typeof r.excerpt === "string" ? { excerpt: pali(r.excerpt, s) } : {},
+      ...script && r.read_with ? { read_with: { ...r.read_with, script: s } } : {},
+      ...script && r.context_with ? { context_with: { ...r.context_with, script: s } } : {}
+    }));
+  }
+  for (const key3 of ["items", "chapters"]) if (Array.isArray(out[key3])) out[key3] = out[key3].map((item) => typeof item === "object" && item ? { ...item, ...named(item, "title") } : item);
+  if (script && out.read_with) out.read_with = { ...out.read_with, script: s };
+  return { ...out, ...s !== "roman" ? scriptNote(s) : {}, ...inputNote(input) };
+}
+
 // src/search-segments.mjs
 var VERSE = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
 var searchFold = (text, fold8) => fold8(text).replace(/\s+/gu, " ");
+function romanizeSearchInput(query) {
+  const text = String(query);
+  try {
+    return romanizeLookupInput(text);
+  } catch (error2) {
+    const chars = [...text];
+    const quoted = /^"[^"]+"$|^“[^”]+”$/u.test(text.trim());
+    const roman2 = chars.some((ch) => new RegExp("\\p{L}", "u").test(ch) && new RegExp("\\p{Script=Latin}", "u").test(ch)) && !chars.some((ch) => new RegExp("\\p{L}", "u").test(ch) && !new RegExp("\\p{Script=Latin}", "u").test(ch));
+    if (!quoted || !roman2 || !chars.some((ch) => new RegExp("\\p{M}", "u").test(ch))) throw error2;
+    return { text, script: "roman", query_note: "This quoted Roman query contains combining marks that were kept as entered, without native-script conversion. Matching remains diacritic-insensitive; this does not verify the spelling or source edition." };
+  }
+}
+var searchInputNote = (input) => input.query_note ? { query_note: input.query_note } : {};
 function assertSearchQuery(query) {
   if ([...String(query)].some((ch) => new RegExp("\\p{L}", "u").test(ch) && !new RegExp("\\p{Script=Latin}", "u").test(ch))) {
     throw new Error("Search query contains unsupported or unconverted letters. Use Roman P\u0101li or completely convert one supported script before searching.");
@@ -25604,7 +26211,7 @@ function canonSpellings(folded, { max = 3 } = {}) {
   }
   return out.sort((a, b) => counts.get(b) - counts.get(a)).slice(0, max).map((w) => spelling.get(w)[0]);
 }
-var ALIASES = {
+var ALIASES2 = {
   nirvana: "nibb\u0101na",
   nirv\u0101\u1E47a: "nibb\u0101na",
   karma: "kamma",
@@ -25633,7 +26240,7 @@ function normalizeWord(token) {
   if (VELTHUIS_MARK.test(w) && letters >= 4 && !/[a-z]\.[TDNML][a-z]/.test(w)) return { word: fromVelthuis(w), rule: "velthuis" };
   if (!/^[A-Za-zāīūṅñṭḍṇḷṃĀĪŪṄÑṬḌṆḶṂ'’-]+$/.test(w)) return { word: w, rule: null };
   const lower = w.toLowerCase();
-  if (Object.hasOwn(ALIASES, lower) && !isPaliWord(lower)) return { word: ALIASES[lower], rule: "alias", label: ALIAS_LABEL };
+  if (Object.hasOwn(ALIASES2, lower) && !isPaliWord(lower)) return { word: ALIASES2[lower], rule: "alias", label: ALIAS_LABEL };
   if (w === w.toUpperCase()) return { word: w, rule: null };
   const pali3 = (s) => !/ñ$/i.test(s) && isPaliForm(s);
   if (looksHK(w)) {
@@ -25895,600 +26502,6 @@ function resolveReference(reference) {
       ...n.changed ? { input_normalised: normalizationNote(n) } : {}
     };
   }
-}
-
-// src/script.mjs
-var SCRIPTS = ["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"];
-var SCRIPT_NAMES = {
-  roman: "Roman (Latin with diacritics)",
-  sinhala: "Sinhala",
-  thai: "Thai",
-  myanmar: "Myanmar (Burmese)",
-  devanagari: "Devanagari",
-  khmer: "Khmer",
-  lao: "Lao",
-  lanna: "Lanna (Tai Tham)"
-};
-var ALIASES2 = {
-  roman: "roman",
-  romn: "roman",
-  latn: "roman",
-  latin: "roman",
-  iast: "roman",
-  iso: "roman",
-  sinhala: "sinhala",
-  sinh: "sinhala",
-  si: "sinhala",
-  sinhalese: "sinhala",
-  thai: "thai",
-  th: "thai",
-  myanmar: "myanmar",
-  mymr: "myanmar",
-  burmese: "myanmar",
-  my: "myanmar",
-  burma: "myanmar",
-  devanagari: "devanagari",
-  deva: "devanagari",
-  hindi: "devanagari",
-  nagari: "devanagari",
-  khmer: "khmer",
-  khmr: "khmer",
-  km: "khmer",
-  cambodian: "khmer",
-  lao: "lao",
-  laoo: "lao",
-  laos: "lao",
-  lanna: "lanna",
-  lana: "lanna",
-  taitham: "lanna",
-  "tai tham": "lanna",
-  tham: "lanna",
-  "tai-tham": "lanna",
-  tai_tham: "lanna"
-};
-function scriptName(name) {
-  const key3 = String(name ?? "").trim().toLowerCase();
-  const found = ALIASES2[key3];
-  if (!found) throw new Error(`Unknown script "${name}". Available: ${SCRIPTS.join(", ")}.`);
-  return found;
-}
-var CONSONANTS = [
-  "kh",
-  "gh",
-  "ch",
-  "jh",
-  "\u1E6Dh",
-  "\u1E0Dh",
-  "th",
-  "dh",
-  "ph",
-  "bh",
-  "k",
-  "g",
-  "\u1E45",
-  "c",
-  "j",
-  "\xF1",
-  "\u1E6D",
-  "\u1E0D",
-  "\u1E47",
-  "t",
-  "d",
-  "n",
-  "p",
-  "b",
-  "m",
-  "y",
-  "r",
-  "l",
-  "v",
-  "s",
-  "h",
-  "\u1E37"
-];
-var VOWELS = ["a", "\u0101", "i", "\u012B", "u", "\u016B", "e", "o"];
-var C_ORDER = [
-  "k",
-  "kh",
-  "g",
-  "gh",
-  "\u1E45",
-  "c",
-  "ch",
-  "j",
-  "jh",
-  "\xF1",
-  "\u1E6D",
-  "\u1E6Dh",
-  "\u1E0D",
-  "\u1E0Dh",
-  "\u1E47",
-  "t",
-  "th",
-  "d",
-  "dh",
-  "n",
-  "p",
-  "ph",
-  "b",
-  "bh",
-  "m",
-  "y",
-  "r",
-  "l",
-  "v",
-  "s",
-  "h",
-  "\u1E37"
-];
-var zip = (keys, chars) => Object.fromEntries(keys.map((k, i) => [k, chars[i]]));
-var TABLES = {
-  devanagari: {
-    c: [..."\u0915\u0916\u0917\u0918\u0919\u091A\u091B\u091C\u091D\u091E\u091F\u0920\u0921\u0922\u0923\u0924\u0925\u0926\u0927\u0928\u092A\u092B\u092C\u092D\u092E\u092F\u0930\u0932\u0935\u0938\u0939\u0933"],
-    v: ["\u0905", "\u0906", "\u0907", "\u0908", "\u0909", "\u090A", "\u090F", "\u0913"],
-    s: ["", "\u093E", "\u093F", "\u0940", "\u0941", "\u0942", "\u0947", "\u094B"],
-    virama: "\u094D",
-    m: "\u0902",
-    digits: [..."\u0966\u0967\u0968\u0969\u096A\u096B\u096C\u096D\u096E\u096F"],
-    stop: "\u0964",
-    abbr: "\u0970",
-    verseEnd: "\u0964",
-    stanzaEnd: "\u0965",
-    // VRI writes a zero-width joiner after the virama in these clusters.
-    zwj: ["kk", "kl", "kv", "cc", "jj", "\xF1c", "\xF1j", "\xF1\xF1", "nn", "pl", "ll"]
-  },
-  sinhala: {
-    c: [..."\u0D9A\u0D9B\u0D9C\u0D9D\u0D9E\u0DA0\u0DA1\u0DA2\u0DA3\u0DA4\u0DA7\u0DA8\u0DA9\u0DAA\u0DAB\u0DAD\u0DAE\u0DAF\u0DB0\u0DB1\u0DB4\u0DB5\u0DB6\u0DB7\u0DB8\u0DBA\u0DBB\u0DBD\u0DC0\u0DC3\u0DC4\u0DC5"],
-    v: ["\u0D85", "\u0D86", "\u0D89", "\u0D8A", "\u0D8B", "\u0D8C", "\u0D91", "\u0D94"],
-    s: ["", "\u0DCF", "\u0DD2", "\u0DD3", "\u0DD4", "\u0DD6", "\u0DD9", "\u0DDC"],
-    virama: "\u0DCA",
-    m: "\u0D82",
-    digits: null,
-    abbr: ".",
-    // VRI writes ZWJ before y and r (yansaya, rakaransaya) and ZWNJ in every other cluster.
-    joiner: (a, b) => b === "y" || b === "r" ? "\u200D" : "\u200C"
-  },
-  thai: {
-    c: [..."\u0E01\u0E02\u0E04\u0E06\u0E07\u0E08\u0E09\u0E0A\u0E0C\u0E0D\u0E0F\u0E10\u0E11\u0E12\u0E13\u0E15\u0E16\u0E17\u0E18\u0E19\u0E1B\u0E1C\u0E1E\u0E20\u0E21\u0E22\u0E23\u0E25\u0E27\u0E2A\u0E2B\u0E2C"],
-    v: ["\u0E2D", "\u0E2D\u0E32", "\u0E2D\u0E34", "\u0E2D\u0E35", "\u0E2D\u0E38", "\u0E2D\u0E39", "\u0E40\u0E2D", "\u0E42\u0E2D"],
-    s: ["", "\u0E32", "\u0E34", "\u0E35", "\u0E38", "\u0E39", "\u0E40", "\u0E42"],
-    virama: "\u0E3A",
-    m: "\u0E4D",
-    digits: [..."\u0E50\u0E51\u0E52\u0E53\u0E54\u0E55\u0E56\u0E57\u0E58\u0E59"],
-    prefix: true,
-    stop: "\u0E2F",
-    abbr: "."
-  },
-  myanmar: {
-    c: [..."\u1000\u1001\u1002\u1003\u1004\u1005\u1006\u1007\u1008\u1009\u100B\u100C\u100D\u100E\u100F\u1010\u1011\u1012\u1013\u1014\u1015\u1016\u1017\u1018\u1019\u101A\u101B\u101C\u101D\u101E\u101F\u1020"],
-    v: ["\u1021", "\u1021\u102C", "\u1023", "\u1024", "\u1025", "\u1026", "\u1027", "\u1029"],
-    s: ["", "\u102C", "\u102D", "\u102E", "\u102F", "\u1030", "\u1031", "\u1031\u102C"],
-    virama: "\u1039",
-    final: "\u103A",
-    m: "\u1036",
-    digits: [..."\u1040\u1041\u1042\u1043\u1044\u1045\u1046\u1047\u1048\u1049"],
-    stop: "\u104B",
-    abbr: ".",
-    verseEnd: "\u104B",
-    ellipsis: "\u104B",
-    comma: "\u104A",
-    // Stacks VRI writes as one letter, a medial or kinzi (applied in this order).
-    ligatures: [["\u101E\u1039\u101E", "\u103F"], ["\u1009\u1039\u1009", "\u100A"], ["\u1039\u101A", "\u103B"], ["\u1039\u101B", "\u103C"], ["\u1039\u101D", "\u103D"], ["\u1039\u101F", "\u103E"], ["\u1004\u1039", "\u1004\u103A\u1039"]],
-    extraIndependent: { "\u1026": "\u016B", "\u102A": "o" }
-  },
-  khmer: {
-    c: [..."\u1780\u1781\u1782\u1783\u1784\u1785\u1786\u1787\u1788\u1789\u178A\u178B\u178C\u178D\u178E\u178F\u1790\u1791\u1792\u1793\u1794\u1795\u1796\u1797\u1798\u1799\u179A\u179B\u179C\u179F\u17A0\u17A1"],
-    v: ["\u17A2", "\u17A2\u17B6", "\u17A5", "\u17A6", "\u17A7", "\u17A9", "\u17AF", "\u17B1"],
-    s: ["", "\u17B6", "\u17B7", "\u17B8", "\u17BB", "\u17BC", "\u17C1", "\u17C4"],
-    virama: "\u17D2",
-    final: "\u17D1",
-    m: "\u17C6",
-    digits: [..."\u17E0\u17E1\u17E2\u17E3\u17E4\u17E5\u17E6\u17E7\u17E8\u17E9"],
-    stop: "\u17D4",
-    abbr: ".",
-    extraIndependent: { "\u17A8": "\u016B" }
-  },
-  lao: {
-    // Lao with the Pāli letters added in Unicode 12 (U+0E86-U+0EAC) and the Pāli virama U+0EBA.
-    c: [
-      "\u0E81",
-      "\u0E82",
-      "\u0E84",
-      "\u0E86",
-      "\u0E87",
-      "\u0E88",
-      "\u0E89",
-      "\u0E8A",
-      "\u0E8C",
-      "\u0E8E",
-      "\u0E8F",
-      "\u0E90",
-      "\u0E91",
-      "\u0E92",
-      "\u0E93",
-      "\u0E95",
-      "\u0E96",
-      "\u0E97",
-      "\u0E98",
-      "\u0E99",
-      "\u0E9B",
-      "\u0E9C",
-      "\u0E9E",
-      "\u0EA0",
-      "\u0EA1",
-      "\u0E8D",
-      "\u0EA3",
-      "\u0EA5",
-      "\u0EA7",
-      "\u0EAA",
-      "\u0EAB",
-      "\u0EAC"
-    ],
-    v: ["\u0EAD", "\u0EAD\u0EB2", "\u0EAD\u0EB4", "\u0EAD\u0EB5", "\u0EAD\u0EB8", "\u0EAD\u0EB9", "\u0EC0\u0EAD", "\u0EC2\u0EAD"],
-    s: ["", "\u0EB2", "\u0EB4", "\u0EB5", "\u0EB8", "\u0EB9", "\u0EC0", "\u0EC2"],
-    virama: "\u0EBA",
-    m: "\u0ECD",
-    digits: [..."\u0ED0\u0ED1\u0ED2\u0ED3\u0ED4\u0ED5\u0ED6\u0ED7\u0ED8\u0ED9"],
-    prefix: true
-  },
-  lanna: {
-    // Tai Tham is stored in logical order; sakot (U+1A60) stacks clusters and
-    // the visible asat (U+1A7A) marks a consonant with no vowel.
-    c: [
-      "\u1A20",
-      "\u1A21",
-      "\u1A23",
-      "\u1A25",
-      "\u1A26",
-      "\u1A27",
-      "\u1A28",
-      "\u1A29",
-      "\u1A2B",
-      "\u1A2C",
-      "\u1A2D",
-      "\u1A2E",
-      "\u1A2F",
-      "\u1A30",
-      "\u1A31",
-      "\u1A32",
-      "\u1A33",
-      "\u1A34",
-      "\u1A35",
-      "\u1A36",
-      "\u1A37",
-      "\u1A39",
-      "\u1A3B",
-      "\u1A3D",
-      "\u1A3E",
-      "\u1A3F",
-      "\u1A41",
-      "\u1A43",
-      "\u1A45",
-      "\u1A48",
-      "\u1A49",
-      "\u1A4A"
-    ],
-    v: ["\u1A4B", "\u1A4B\u1A63", "\u1A4D", "\u1A4E", "\u1A4F", "\u1A50", "\u1A51", "\u1A52"],
-    s: ["", "\u1A63", "\u1A65", "\u1A66", "\u1A69", "\u1A6A", "\u1A6E", "\u1A6E\u1A63"],
-    virama: "\u1A60",
-    final: "\u1A7A",
-    m: "\u1A74",
-    digits: [..."\u1A90\u1A91\u1A92\u1A93\u1A94\u1A95\u1A96\u1A97\u1A98\u1A99"],
-    extraIndependent: { "\u1A4C": "\u0101" },
-    extraSigns: { "\u1A64": "\u0101", "\u1A70": "o" },
-    // Subjoined letters and the great sa some Lanna texts use; accepted on input.
-    expand: [["\u1A55", "\u1A60\u1A41"], ["\u1A56", "\u1A60\u1A43"], ["\u1A54", "\u1A48\u1A60\u1A48"]]
-  }
-};
-var MYMR_TALL = /([ခဂပဝ]|ဒ္ဓ)(ေ?)ာ/g;
-for (const t of Object.values(TABLES)) {
-  t.cons = zip(C_ORDER, t.c);
-  t.ind = zip(VOWELS, t.v);
-  t.sign = zip(VOWELS, t.s);
-  t.zwj = new Set(t.zwj ?? []);
-}
-var ROMAN_TOKENS = [...CONSONANTS, ...VOWELS, "\u1E43"];
-var PE = "\uE000";
-var STOP = "\uE001";
-var STANZA = "\uE002";
-function* romanTokens(s) {
-  for (let i = 0; i < s.length; ) {
-    let tok = null;
-    for (const t of ROMAN_TOKENS) if (s.startsWith(t, i)) {
-      tok = t;
-      break;
-    }
-    if (tok) {
-      yield { kind: tok === "\u1E43" ? "m" : VOWELS.includes(tok) ? "v" : "c", tok };
-      i += tok.length;
-    } else {
-      if (s[i] === "\u1E41" || s[i] === "\u014B") yield { kind: "m", tok: "\u1E43" };
-      else yield { kind: "o", tok: s[i] };
-      i += 1;
-    }
-  }
-}
-function romanPunctuation(s, t, stanza) {
-  if (stanza && t.stanzaEnd) s = s.replace(/\.(\)?\s*)$/, `${STANZA}$1`);
-  if (t.abbr) {
-    s = s.replace(/…(\s*)(pe)…/gi, `\u2026$1$2${PE}\u2026`);
-    s = s.replace(new RegExp("(?<=(?:^|[\\s(.])\\p{Ll}{1,6})\\.(?=\\s*[\\p{Ll}\\d)])", "gu"), PE);
-  }
-  if (t.stop) s = s.replace(/(?<![0-9])\./g, STOP);
-  if (t.verseEnd) s = s.replace(/;(\s*)$/, `${STOP}$1`);
-  return s;
-}
-function fromRoman(text, script, stanza) {
-  const t = TABLES[script];
-  const s = romanPunctuation(text.normalize("NFC"), t, stanza).toLowerCase();
-  let out = "";
-  let pending = null;
-  let consStart = -1;
-  for (const { kind, tok } of romanTokens(s)) {
-    if (kind === "c") {
-      if (pending) {
-        out += t.virama;
-        if (t.zwj.has(pending + tok)) out += "\u200D";
-        else if (t.joiner) out += t.joiner(pending, tok);
-      }
-      consStart = out.length;
-      out += t.cons[tok];
-      pending = tok;
-    } else if (kind === "v") {
-      if (pending) {
-        const sign = t.sign[tok];
-        if (t.prefix && (tok === "e" || tok === "o")) out = out.slice(0, consStart) + sign + out.slice(consStart);
-        else out += sign;
-        pending = null;
-      } else {
-        out += t.ind[tok];
-      }
-    } else {
-      if (pending) {
-        out += t.final ?? t.virama;
-        pending = null;
-      }
-      if (kind === "m") out += t.m;
-      else if (tok >= "0" && tok <= "9") out += t.digits ? t.digits[tok.charCodeAt(0) - 48] : tok;
-      else if (tok === PE) out += t.abbr;
-      else if (tok === STOP) out += t.stop;
-      else if (tok === STANZA) out += t.stanzaEnd;
-      else if (tok === "\u2026" && t.ellipsis) out += t.ellipsis;
-      else if (tok === "," && t.comma) out += t.comma;
-      else out += tok;
-    }
-  }
-  if (pending) out += t.final ?? t.virama;
-  if (t.ligatures) for (const [a, b] of t.ligatures) out = out.split(a).join(b);
-  if (script === "myanmar") out = out.replace(MYMR_TALL, "$1$2\u102B");
-  return out;
-}
-var REVERSE = {};
-function reverse(script) {
-  if (REVERSE[script]) return REVERSE[script];
-  const t = TABLES[script];
-  const cons = new Map(C_ORDER.map((r) => [t.cons[r], r]));
-  const carrier = t.ind.a;
-  cons.set(carrier, "");
-  const ind = /* @__PURE__ */ new Map();
-  for (const r of VOWELS) if (r !== "a" && !t.ind[r].startsWith(carrier)) ind.set(t.ind[r], r);
-  for (const [k, v] of Object.entries(t.extraIndependent ?? {})) ind.set(k, v);
-  const signs = new Map(VOWELS.filter((r) => t.sign[r] && !(t.prefix && (r === "e" || r === "o"))).map((r) => [t.sign[r], r]));
-  for (const [k, v] of Object.entries(t.extraSigns ?? {})) signs.set(k, v);
-  const punct = /* @__PURE__ */ new Map();
-  if (t.stop) punct.set(t.stop, ".");
-  if (t.stanzaEnd) punct.set(t.stanzaEnd, ".");
-  if (t.abbr) punct.set(t.abbr, ".");
-  if (t.ellipsis) punct.set(t.ellipsis, ".");
-  if (t.comma) punct.set(t.comma, ",");
-  if (t.digits) t.digits.forEach((d, i) => punct.set(d, String(i)));
-  const expand = [...t.expand ?? []];
-  if (t.ligatures) for (const [a, b] of [...t.ligatures].reverse()) expand.push([b, a]);
-  if (script === "myanmar") expand.push(["\u102B", "\u102C"]);
-  const byLength = (m) => [...m.keys()].sort((a, b) => b.length - a.length);
-  const prefixes = t.prefix ? /* @__PURE__ */ new Map([[t.sign.e, "e"], [t.sign.o, "o"]]) : /* @__PURE__ */ new Map();
-  return REVERSE[script] = { t, cons, ind, signs, signList: byLength(signs), indList: byLength(ind), punct, expand, prefixes };
-}
-function toRomanFrom(text, script) {
-  const R = reverse(script);
-  const { t } = R;
-  let s = text.normalize("NFC").replace(/[\u200c\u200d]/g, "");
-  for (const [a, b] of R.expand) s = s.split(a).join(b);
-  const at = (i, list) => list.find((x) => s.startsWith(x, i));
-  let out = "";
-  for (let i = 0; i < s.length; ) {
-    let prefix = null;
-    if (R.prefixes.has(s[i]) && R.cons.has(s[i + 1])) {
-      prefix = R.prefixes.get(s[i]);
-      i += 1;
-    }
-    const c = s[i];
-    if (R.cons.has(c)) {
-      out += R.cons.get(c);
-      i += 1;
-      if (prefix) out += prefix;
-      else if (s[i] === t.virama || t.final && s[i] === t.final) i += 1;
-      else {
-        const sign = at(i, R.signList);
-        if (sign) {
-          out += R.signs.get(sign);
-          i += sign.length;
-        } else out += "a";
-      }
-      continue;
-    }
-    const v = at(i, R.indList);
-    if (v) {
-      out += R.ind.get(v);
-      i += v.length;
-      continue;
-    }
-    if (c === t.m) {
-      out += "\u1E43";
-      i += 1;
-      continue;
-    }
-    out += R.punct.get(c) ?? c;
-    i += 1;
-  }
-  if (t.abbr) out = out.replace(/[.…](\s*)pe\.[.…]/g, "\u2026$1pe\u2026");
-  return out;
-}
-var RANGES = [
-  ["devanagari", 2304, 2431],
-  ["sinhala", 3456, 3583],
-  ["thai", 3584, 3711],
-  ["lao", 3712, 3839],
-  ["myanmar", 4096, 4255],
-  ["khmer", 6016, 6143],
-  ["lanna", 6688, 6831]
-];
-function detectScript(text) {
-  const counts = {};
-  for (const ch of String(text ?? "")) {
-    const cp = ch.codePointAt(0);
-    if (cp < 2304) continue;
-    for (const [name, lo, hi] of RANGES) if (cp >= lo && cp <= hi) {
-      counts[name] = (counts[name] ?? 0) + 1;
-      break;
-    }
-  }
-  let best = "roman";
-  let n = 0;
-  for (const [name, c] of Object.entries(counts)) if (c > n) {
-    best = name;
-    n = c;
-  }
-  return best;
-}
-function transliterate(text, from, to, { stanza = false } = {}) {
-  if (text == null) return text;
-  const s = String(text);
-  const a = from === "auto" ? detectScript(s) : scriptName(from);
-  const b = scriptName(to);
-  if (a === b) return s;
-  const roman2 = a === "roman" ? s : toRomanFrom(s, a);
-  return b === "roman" ? roman2 : fromRoman(roman2, b, stanza);
-}
-var SCRIPT_CHOICES = SCRIPTS;
-var SCRIPT_DESCRIPTION = "Write the P\u0101li in this script: roman (default), sinhala, thai, myanmar, devanagari, khmer, lao or lanna (Tai Tham). Citations, IDs and English stay in Roman.";
-function romanizeInput(text) {
-  const s = String(text ?? "");
-  const script = detectScript(s);
-  if (script === "roman") return { text: s, script };
-  return { text: toRomanFrom(s, script).normalize("NFC"), script, original: s };
-}
-function romanizeLookupInput(text) {
-  const input = romanizeInput(text);
-  if (detectScript(input.text) !== "roman" || [...input.text].some((ch) => new RegExp("\\p{L}", "u").test(ch) && !new RegExp("\\p{Script=Latin}", "u").test(ch))) {
-    throw new Error("The lookup input could not be converted completely. Use P\u0101li in Roman or one supported script, without mixed or unsupported characters.");
-  }
-  return input;
-}
-function inputNote(input) {
-  return input?.original ? { input_script: input.script, input_romanized: input.text } : {};
-}
-function scriptNote(script) {
-  return {
-    script,
-    script_note: `P\u0101li transliterated into ${SCRIPT_NAMES[script]} by this server from the VRI Roman edition (exact letter-for-letter; punctuation follows VRI's own script editions where they exist). Citations, IDs and English are left in Roman.`
-  };
-}
-var pali = (text, script, opts) => typeof text === "string" && text ? transliterate(text, "roman", script, opts) : text;
-function verse(text, script) {
-  const lines = text.split("\n");
-  return lines.map((line, i) => pali(line, script, { stanza: i === lines.length - 1 })).join("\n");
-}
-function localizeUnitFields(obj, script) {
-  const out = { ...obj };
-  if (typeof out.title === "string") {
-    out.title_roman = out.title;
-    out.title = pali(out.title, script);
-  }
-  if (typeof out.vri_book === "string") out.vri_book = pali(out.vri_book, script);
-  if (typeof out.excerpt === "string") out.excerpt = pali(out.excerpt, script);
-  return out;
-}
-function localizeDescribe(result, script, input) {
-  const s = script ? scriptName(script) : "roman";
-  if (s === "roman") return { ...result, ...inputNote(input) };
-  const out = localizeUnitFields(result, s);
-  if (Array.isArray(out.also_on_that_page)) out.also_on_that_page = out.also_on_that_page.map((a) => localizeUnitFields(a, s));
-  if (Array.isArray(out.members)) out.members = out.members.map((m) => m && typeof m === "object" ? localizeUnitFields(m, s) : m);
-  return { ...out, ...scriptNote(s), ...inputNote(input) };
-}
-function localizeText(result, script, input) {
-  const s = script ? scriptName(script) : "roman";
-  if (s === "roman") return { ...result, ...inputNote(input) };
-  const out = localizeUnitFields(result, s);
-  out.segments = (result.segments ?? []).map((seg) => {
-    const x = { ...seg };
-    if (typeof x.text === "string") x.text = x.type === "verse" ? verse(x.text, s) : pali(x.text, s);
-    if (Array.isArray(x.variant_readings)) x.variant_readings = x.variant_readings.map((v) => pali(v, s));
-    if (Array.isArray(x.variants)) x.variants = x.variants.map((v) => ({
-      ...v,
-      raw: pali(v.raw, s),
-      readings: (v.readings ?? []).map((r) => ({ ...r, reading: pali(r.reading, s) })),
-      omissions: (v.omissions ?? []).map((o) => ({ ...o, text: pali(o.text, s) })),
-      remarks: (v.remarks ?? []).map((r) => pali(r, s))
-    }));
-    return x;
-  });
-  if (Array.isArray(result.pali_opening)) out.pali_opening = result.pali_opening;
-  return { ...out, ...scriptNote(s), ...inputNote(input) };
-}
-function localizeSearch(result, script, input) {
-  const s = script ? scriptName(script) : "roman";
-  const out = { ...result };
-  const hit = (r) => {
-    const value = s === "roman" ? { ...r } : localizeUnitFields(r, s);
-    if (script) {
-      for (const key3 of ["read_with", "context_with"]) if (value[key3]) value[key3] = { ...value[key3], script: s };
-    }
-    return value;
-  };
-  if (Array.isArray(out.results)) out.results = out.results.map(hit);
-  if (Array.isArray(out.title_matches)) out.title_matches = out.title_matches.map(hit);
-  if (script && out.scope_resolution?.read_with) out.scope_resolution = {
-    ...out.scope_resolution,
-    read_with: { ...out.scope_resolution.read_with, script: s }
-  };
-  return { ...out, ...s !== "roman" ? scriptNote(s) : {}, ...inputNote(input) };
-}
-function localizeCommentary(commentary, script, input) {
-  const s = script ? scriptName(script) : "roman";
-  if (!commentary) return commentary;
-  const out = s === "roman" ? { ...commentary, ...inputNote(input) } : localizeText(commentary, s, input);
-  if (!Array.isArray(commentary.segments)) delete out.segments;
-  if (s !== "roman" && out.book) out.book = localizeUnitFields(out.book, s);
-  if (s !== "roman" && Array.isArray(out.books)) out.books = out.books.map((book) => localizeUnitFields(book, s));
-  if (Array.isArray(out.results)) out.results = out.results.map((hit) => ({
-    ...s === "roman" ? hit : localizeUnitFields(hit, s),
-    ...s !== "roman" && hit.book ? { book: localizeUnitFields(hit.book, s) } : {},
-    ...script && hit.read_with ? { read_with: { ...hit.read_with, script: s } } : {},
-    ...script && hit.context_with ? { context_with: { ...hit.context_with, script: s } } : {}
-  }));
-  return out;
-}
-function localizePostCanonical(result, script, input) {
-  const s = script ? scriptName(script) : "roman";
-  if (!result) return result;
-  const named = (obj, key3) => s !== "roman" && typeof obj[key3] === "string" ? { [`${key3}_roman`]: obj[key3], [key3]: pali(obj[key3], s) } : {};
-  const out = Array.isArray(result.segments) ? localizeText(result, s, input) : { ...result, ...named(result, "title") };
-  if (out.book && typeof out.book === "object") out.book = { ...out.book, ...named(out.book, "title") };
-  if (Array.isArray(out.results)) {
-    out.results = out.results.map((r) => ({
-      ...r,
-      ...named(r, "book_title"),
-      ...s !== "roman" && typeof r.chapter === "string" ? { chapter: pali(r.chapter, s) } : {},
-      ...s !== "roman" && typeof r.excerpt === "string" ? { excerpt: pali(r.excerpt, s) } : {},
-      ...script && r.read_with ? { read_with: { ...r.read_with, script: s } } : {},
-      ...script && r.context_with ? { context_with: { ...r.context_with, script: s } } : {}
-    }));
-  }
-  for (const key3 of ["items", "chapters"]) if (Array.isArray(out[key3])) out[key3] = out[key3].map((item) => typeof item === "object" && item ? { ...item, ...named(item, "title") } : item);
-  if (script && out.read_with) out.read_with = { ...out.read_with, script: s };
-  return { ...out, ...s !== "roman" ? scriptNote(s) : {}, ...inputNote(input) };
 }
 
 // src/postcanonical.mjs
@@ -27130,9 +27143,9 @@ function register({ tool, z }) {
     offset: z.number().int().min(0).max(1e5).default(0)
   }, async ({ query, books, section, limit, offset, script }) => {
     if (script) scriptName(script);
-    const input = romanizeLookupInput(query);
+    const input = romanizeSearchInput(query);
     const result = await withNormalised(input.text, (q) => search2(q, { books, section, limit, offset }));
-    return localizePostCanonical(result, script, input);
+    return localizePostCanonical({ ...result, ...searchInputNote(input) }, script, input);
   });
 }
 
@@ -33426,9 +33439,9 @@ function register18({ tool, z }) {
     limit: z.number().int().min(1).max(50).default(10)
   }, async ({ query, books, offset, limit, script }) => {
     if (script) scriptName(script);
-    const input = romanizeLookupInput(query);
+    const input = romanizeSearchInput(query);
     const result = await withNormalised(input.text, (value) => search3(value, { books, offset, limit }));
-    return localizeCommentary(result, script, input);
+    return localizeCommentary({ ...result, ...searchInputNote(input) }, script, input);
   });
 }
 
@@ -33514,9 +33527,9 @@ function register19({ tool, z }) {
     limit: z.number().int().min(1).max(50).default(10)
   }, async ({ book, query, script, offset, limit }) => {
     const output = scriptName(script);
-    const input = romanizeLookupInput(query);
+    const input = romanizeSearchInput(query);
     const result = await withNormalised(input.text, (text) => search4(text, { book, offset, limit }));
-    const localized = localizeSearch(result, output, input);
+    const localized = localizeSearch({ ...result, ...searchInputNote(input) }, output, input);
     localized.results = localized.results.map((hit) => ({
       ...hit,
       read_with: { ...hit.read_with, script: output },
@@ -33878,9 +33891,9 @@ function createServer2() {
     include_post_canonical: external_exports.boolean().default(false).describe(SEARCH_OPTION_DESCRIPTION),
     english: external_exports.enum(["auto", "off", "only"]).default("auto").describe('English queries: "auto" expands a query that looks English into P\u0101li terms from the glossary (DPD English index) and also runs the search as typed; "only" searches the expansion only; "off" never expands. Expansions are labelled expanded_from_english.')
   }, async ({ query, collection, limit, offset, script, include_post_canonical, english: english2 }) => {
-    const input = romanizeLookupInput(query);
+    const input = romanizeSearchInput(query);
     const searched = searchWithInput(input.text, { collection, limit, offset, english: english2 });
-    const result = localizeSearch(searched, script, input);
+    const result = localizeSearch({ ...searched, ...searchInputNote(input) }, script, input);
     if (include_post_canonical && collection) {
       return { ...result, post_canonical: { canonical: false, searched: false, results: [], note: `Not searched: collection "${collection}" limits the search to that part of the canon. Search the post-canonical books without collection, or with search_post_canonical.` } };
     }

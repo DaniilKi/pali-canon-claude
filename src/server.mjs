@@ -11,6 +11,7 @@ import * as commentaryModule from './commentary.mjs';
 import * as postcanonical from './postcanonical.mjs';
 import { resolveReference } from './sutta-names.mjs';
 import { searchWithInput } from './english-search.mjs';
+import { romanizeSearchInput, searchInputNote } from './search-segments.mjs';
 import { lookupPaliInput } from './lookup-input.mjs';
 import * as sourceBooks from './source-books.mjs';
 
@@ -210,9 +211,9 @@ export function createServer() {
     include_post_canonical: z.boolean().default(false).describe(postcanonical.SEARCH_OPTION_DESCRIPTION),
     english: z.enum(['auto', 'off', 'only']).default('auto').describe('English queries: "auto" expands a query that looks English into Pāli terms from the glossary (DPD English index) and also runs the search as typed; "only" searches the expansion only; "off" never expands. Expansions are labelled expanded_from_english.'),
   }, async ({ query, collection, limit, offset, script, include_post_canonical, english }) => {
-    const input = romanizeLookupInput(query);
+    const input = romanizeSearchInput(query);
     const searched = searchWithInput(input.text, { collection, limit, offset, english });
-    const result = localizeSearch(searched, script, input);
+    const result = localizeSearch({ ...searched, ...searchInputNote(input) }, script, input);
     if (include_post_canonical && collection) {
       return { ...result, post_canonical: { canonical: false, searched: false, results: [], note: `Not searched: collection "${collection}" limits the search to that part of the canon. Search the post-canonical books without collection, or with search_post_canonical.` } };
     }

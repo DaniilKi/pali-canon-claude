@@ -327,3 +327,6 @@ The current managed executor has Codex CLI 0.159.2 and an existing ChatGPT login
 
 
 Search input integrity now prevents unsupported letters from silently disappearing into a different query. Canonical, commentary, post-canonical and complete-root-file MCP searches require complete native conversion; shared tokenization and English expansion validate before folding. Valid eight-script input, quoted phrases, pagination and source commands/cautions remain equivalent in installed stdio/HTTP audits. The scoped reproduction and policy are recorded in D155. Actual signed-in client access remains a separate gate.
+
+
+The D155 head's installed evidence workflow exposed a source-query regression: VRI itself prints a non-Roman combining sign within Roman mौṃjvānagare. Fully quoted Roman phrases with such marks now remain as entered under the existing diacritic-insensitive matching, with query_note explicitly disclaiming native conversion and spelling/source-edition verification. Unsupported non-Latin letters and incomplete unquoted/native-script input remain rejected. The actual printed phrase and exact read-back are retained in installed tests; source data is unchanged (D156).

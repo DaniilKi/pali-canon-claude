@@ -1,4 +1,4 @@
-import { searchSegments, searchFold, searchExcerpt, searchTerms, searchReading } from './search-segments.mjs';
+import { searchSegments, searchFold, searchExcerpt, searchTerms, romanizeSearchInput, searchInputNote, searchReading } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * Post-canonical Pāli books of the VRI Chaṭṭha Saṅgāyana edition: the sub-commentaries (Ṭīkā) and the
@@ -19,7 +19,7 @@ import { gunzipSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { withNormalised } from './input.mjs';
-import { romanizeInput, romanizeLookupInput, localizePostCanonical, SCRIPT_DESCRIPTION, scriptName } from './script.mjs';
+import { romanizeInput, localizePostCanonical, SCRIPT_DESCRIPTION, scriptName } from './script.mjs';
 
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
@@ -657,8 +657,8 @@ export function register({ tool, z }) {
     offset: z.number().int().min(0).max(100000).default(0),
   }, async ({ query, books, section, limit, offset, script }) => {
     if (script) scriptName(script);
-    const input = romanizeLookupInput(query);
+    const input = romanizeSearchInput(query);
     const result = await withNormalised(input.text, (q) => search(q, { books, section, limit, offset }));
-    return localizePostCanonical(result, script, input);
+    return localizePostCanonical({ ...result, ...searchInputNote(input) }, script, input);
   });
 }

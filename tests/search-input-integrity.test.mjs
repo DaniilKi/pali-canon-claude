@@ -37,3 +37,21 @@ test('all four MCP search tools reject incomplete conversion and preserve native
   }
  } finally {await c.close();await s.close();}
 });
+
+
+test('quoted Roman source marks remain searchable without claiming native conversion or repaired spelling',async()=>{
+ const [a,b]=InMemoryTransport.createLinkedPair(),s=createServer(),c=new Client({name:'source-query',version:'1'});await s.connect(a);await c.connect(b);
+ try {
+  for(const [name,options] of scopes) {
+   const r=await c.callTool({name,arguments:{query:'"saौti"',limit:1,...options}});
+   assert.ok(!r.isError,JSON.stringify(r.content));assert.ok((r.structuredContent.total_matched??r.structuredContent.total_texts_matched)>0);
+   assert.equal(r.structuredContent.input_script,undefined);assert.equal(r.structuredContent.query,'"saौti"');assert.match(r.structuredContent.query_note,/kept as entered.*diacritic-insensitive/);
+   for(const query of ['saौti','"ส่ติ"','"漢sati字"']) assert.equal((await c.callTool({name,arguments:{query,limit:1,...options}})).isError,true);
+  }
+  const query='"Mrammaraṭṭhe mौṃjvānagare leḍītīaraññavihāravāsinā mahā therena katāyaṃ paccayuddesadīpanī."';
+  const r=await c.callTool({name:'search_post_canonical',arguments:{query,books:['patthanuddesa-dipanipatha'],limit:1}});
+  assert.ok(!r.isError,JSON.stringify(r.content));assert.ok(r.structuredContent.total_matched>0);
+  const hit=r.structuredContent.results[0],{tool,...args}=hit.read_with;
+  const read=await c.callTool({name:tool,arguments:args});assert.ok(!read.isError);assert.ok(read.structuredContent.segments.some(s=>s.text.includes('mौṃjvānagare')));
+ } finally {await c.close();await s.close();}
+});
