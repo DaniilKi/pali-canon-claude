@@ -27,6 +27,8 @@ try {
     child.stderr.on('data', value => { stderr += value; const match = stderr.match(/listening on (http:\/\/127\.0\.0\.1:\d+\/mcp)/); if (match) { clearTimeout(timer); resolve(match[1]); } });
   });
   await client.connect(new StreamableHTTPClientTransport(new URL(url)));
+  const widget = (await client.listTools()).tools.find(tool => tool.name === 'read_passage_widget');
+  assert.deepEqual(widget._meta.ui.visibility, ['model', 'app']); assert.equal(widget._meta['openai/widgetAccessible'], true);
   for (const uri of [WIDGET_URI, SKYBRIDGE_URI]) assert.equal((await client.readResource({ uri })).contents[0].text, WIDGET_HTML);
   const counts = await auditWidget(client, { exhaustAligned: process.argv.includes('--exhaust-aligned') });
   assert.doesNotMatch(stderr, /UNEXPECTED_NETWORK_ATTEMPT/);

@@ -33755,7 +33755,7 @@ function createServer2() {
 // src/chatgpt-widget.mjs
 var import_node_crypto2 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v8";
+var WIDGET_VERSION = "v9";
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 var MCP_APP_MIME = "text/html;profile=mcp-app";
@@ -33776,7 +33776,8 @@ var RESOURCE_META = {
   "openai/widgetCSP": { connect_domains: [], resource_domains: [], redirect_domains: REDIRECT_DOMAINS }
 };
 var TOOL_META = {
-  ui: { resourceUri: WIDGET_URI },
+  ui: { resourceUri: WIDGET_URI, visibility: ["model", "app"] },
+  "openai/widgetAccessible": true,
   "openai/outputTemplate": SKYBRIDGE_URI,
   "openai/toolInvocation/invoking": "Opening the passage\u2026",
   "openai/toolInvocation/invoked": "Reader updated."
@@ -34125,24 +34126,87 @@ var WIDGET_HTML = `<!doctype html>
   footer { padding:10px 16px 14px; border-top:1px solid var(--line); }
   footer p { margin:4px 0; }
   a { color:var(--accent); }
+  nav { padding:0 16px 12px; display:flex; flex-wrap:wrap; gap:8px; }
+  nav button { font:inherit; color:var(--accent); background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:8px 12px; cursor:pointer; max-width:100%; box-sizing:border-box; }
+  nav button:disabled { opacity:.6; cursor:wait; }
+  nav button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
   .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
   .empty { color:var(--muted); font-style:italic; }
   @media (max-width: 640px) { .cols { grid-template-columns:1fr; } .col + .col { border-left:0; border-top:1px solid var(--line); } }
 </style>
 </head>
 <body>
-<header><h1 id="title">Loading the passage\u2026</h1><div class="meta" id="meta"></div></header>
+<header><h1 id="title" tabindex="-1">Loading the passage\u2026</h1><div class="meta" id="meta"></div></header>
 <p id="status" class="sr-only" role="status" aria-live="polite" aria-atomic="true">Waiting for a passage.</p>
 <main class="cols">
   <section class="col" aria-labelledby="pali-h"><h2 id="pali-h">P\u0101li</h2><div id="pali"></div></section>
   <section class="col" aria-labelledby="en-h"><h2 id="en-h">English</h2><div id="english"></div></section>
 </main>
+<nav id="navigation" aria-label="Passage navigation"></nav>
 <footer id="footer"></footer>
 <script>
 (function () {
   var rendered = null;
+  var generation = 0, requestId = 2, pending = null, serverTools = false, awaitingSelection = false, lastInput, lastOutput, lastMetadata;
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = String(text); return e; }
   function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+  function canNavigate() { return !!(window.openai && typeof window.openai.callTool === 'function') || serverTools; }
+  function abandon() {
+    if (pending) { clearTimeout(pending.timer); pending = null; }
+    document.getElementById('navigation').setAttribute('aria-busy', 'false');
+  }
+  function navigation() {
+    var nav = document.getElementById('navigation'); clear(nav);
+    if (awaitingSelection) { nav.appendChild(el('p', 'note', 'Opening the requested passage\u2026')); return; }
+    if (!canNavigate() || !rendered || !rendered.pali) return;
+    if (pending) nav.appendChild(el('p', 'note', 'Loading the requested passage\u2026'));
+    var d = rendered;
+    [[d.pali.context_with, 'Surrounding P\u0101li'], [d.pali.exact_with, 'Return to exact segment'], [d.pali.continue_with, 'Continue P\u0101li'], [d.english && d.english.continue_with, 'Continue English']].forEach(function (entry) {
+      var command = entry[0];
+      if (!command || command.name !== '${WIDGET_TOOL}' || !command.arguments || typeof command.arguments !== 'object' || Array.isArray(command.arguments)) return;
+      var button = el('button', '', entry[1]); button.type = 'button'; button.disabled = !!pending;
+      button.addEventListener('click', function () { if (rendered === d) navigate(command); }); nav.appendChild(button);
+    });
+  }
+  function finish(call, result, error) {
+    if (pending !== call || call.generation !== generation) return;
+    abandon();
+    var data = result && result.structuredContent, args = call.command.arguments;
+    var readable = data && data.pali && Array.isArray(data.pali.segments) &&
+      data.pali.segments.every(function (segment) { return segment && typeof segment.text === 'string'; }) &&
+      Number.isInteger(data.pali.returned) && data.pali.returned === data.pali.segments.length &&
+      Number.isInteger(data.pali.total_segments) && data.pali.total_segments >= data.pali.returned &&
+      Number.isInteger(data.pali.offset) && data.pali.offset >= 0;
+    if (!error && result && !result.isError && readable) {
+      if ((args.source_commit && (!data.source || data.source.commit !== args.source_commit)) ||
+          (args.script && (data.script || 'roman') !== args.script) ||
+          (args.book && data.book_id !== args.book) ||
+          (args.uid && data.text_id !== args.uid && data.citation !== args.uid) ||
+          (args.commentary && (data.content_type !== 'commentary' || (data.context_for !== args.commentary && data.citation !== args.commentary && !(data.requested_on && data.requested_on.id === args.commentary)))) ||
+          (args.context > 0 && data.context_for !== (args.segment || args.commentary)) ||
+          (args.english_offset > 0 && data.english && data.english.translation_id !== args.translation)) {
+        error = new Error('The host returned a different source, selection, script or translation version. Ask to reopen the selection.');
+      }
+    }
+    if (error) render({ error: error.message || String(error) });
+    else if (!result || (!result.isError && !readable)) render({ error: 'The host did not return a readable passage. Ask to reopen the selection.' });
+    else toolResult(result);
+    navigation();
+    var title = document.getElementById('title'); if (typeof title.focus === 'function') title.focus();
+  }
+  function navigate(command) {
+    if (pending || awaitingSelection || !canNavigate()) return;
+    var call = { id: requestId++, generation: generation, command: command }; pending = call;
+    document.getElementById('navigation').setAttribute('aria-busy', 'true'); navigation();
+    document.getElementById('status').textContent = 'Loading the requested passage\u2026';
+    call.timer = setTimeout(function () { finish(call, null, new Error('The host did not respond. Ask to reopen the selection.')); }, 30000);
+    try {
+      if (serverTools) post({ jsonrpc: '2.0', id: call.id, method: 'tools/call', params: command });
+      else if (window.openai && typeof window.openai.callTool === 'function') {
+        Promise.resolve(window.openai.callTool(command.name, command.arguments)).then(function (result) { finish(call, result); }, function (error) { finish(call, null, error); });
+      }
+    } catch (error) { finish(call, null, error); }
+  }
   function post(msg) { try { window.parent.postMessage(msg, '*'); } catch (e) {} }
   function openLink(url) {
     if (window.openai && typeof window.openai.openExternal === 'function') { window.openai.openExternal({ href: url }); return; }
@@ -34158,6 +34222,8 @@ var WIDGET_HTML = `<!doctype html>
   function characterPosition(at, total) { return 'character ' + at + (typeof total === 'number' && Number.isFinite(total) ? ' of ' + total : ''); }
   function render(d) {
     if (!d || typeof d !== 'object' || d === rendered) return;
+    if (!d.pali && typeof d.error !== 'string') return;
+    abandon(); generation++; awaitingSelection = false;
     if (!d.pali) {
       if (typeof d.error !== 'string') return;
       rendered = d;
@@ -34166,6 +34232,7 @@ var WIDGET_HTML = `<!doctype html>
       ['meta', 'pali', 'english', 'footer'].forEach(function (id) { clear(document.getElementById(id)); });
       document.getElementById('pali').appendChild(el('p', 'empty', d.error));
       document.getElementById('english').appendChild(el('p', 'empty', 'Check the citation and ask to open the passage again.'));
+      navigation();
       return;
     }
     rendered = d;
@@ -34221,6 +34288,7 @@ var WIDGET_HTML = `<!doctype html>
     document.getElementById('status').textContent = (d.citation || 'Passage') + '. ' + (d.canonical === false ? (d.content_type === 'commentary' ? 'Commentary, not the canon. ' : 'Post-canonical, not the canon. ') : d.selection === 'source_book' ? 'Complete source file, no individual text identity. ' : '') +
       (d.available === false ? d.availability_note + ' ' : d.pali.returned ? 'Showing P\u0101li segments ' + (d.pali.offset + 1) + ' to ' + (d.pali.offset + d.pali.returned) + ' of ' + d.pali.total_segments + '. ' : 'No P\u0101li segments on this page. ') +
       (d.english ? 'English ' + (d.english.offset ? 'continuing from character ' + d.english.offset : 'loaded') + '.' : (d.english_error || 'No English translation requested.'));
+    navigation();
   }
   // Apps SDK (window.openai) path.
   function toolResult(result) {
@@ -34240,10 +34308,25 @@ var WIDGET_HTML = `<!doctype html>
   function fromOpenai() {
     if (window.openai) {
       setTheme(window.openai.theme);
+      var input = JSON.stringify(window.openai.toolInput || null);
+      if (lastInput !== input && rendered && window.openai.toolInput) requested(window.openai.toolInput);
+      lastInput = input;
       var metadata = window.openai.toolResponseMetadata;
+      var output = window.openai.toolOutput, freshOutput = output !== lastOutput, freshMetadata = metadata !== lastMetadata;
+      lastOutput = output; lastMetadata = metadata;
       var result = metadata && (metadata.mcp_tool_result || metadata.call_tool_result);
-      if (result && result.isError) toolResult(result); else render(window.openai.toolOutput);
+      if (result && result.isError && (freshMetadata || !freshOutput)) {
+        if (freshMetadata || freshOutput) toolResult(result);
+      } else if (freshOutput) render(output);
+      else if (freshMetadata && result && result.structuredContent) toolResult(result);
     }
+  }
+  function requested(args) {
+    function ordered(value) { return JSON.stringify(Object.keys(value || {}).sort().map(function (key) { return [key, value[key]]; })); }
+    if (pending && ordered(args) === ordered(pending.command.arguments)) return;
+    abandon(); generation++; awaitingSelection = true;
+    document.getElementById('navigation').setAttribute('aria-busy', 'true'); navigation();
+    document.getElementById('status').textContent = 'Opening the requested passage\u2026';
   }
   window.addEventListener('openai:set_globals', fromOpenai);
   // MCP Apps bridge path (JSON-RPC over postMessage).
@@ -34251,10 +34334,15 @@ var WIDGET_HTML = `<!doctype html>
     if (ev.source !== window.parent) return;
     var m = ev.data; if (!m || m.jsonrpc !== '2.0') return;
     if (m.id === 1 && m.result) {
+      serverTools = !!(m.result.hostCapabilities && m.result.hostCapabilities.serverTools); navigation();
       if (m.result.hostContext) setTheme(m.result.hostContext.theme);
       post({ jsonrpc: '2.0', method: 'ui/notifications/initialized', params: {} });
+    } else if (pending && m.id === pending.id && (m.result || m.error)) {
+      finish(pending, m.result, m.error && new Error(m.error.message || 'The host refused the navigation request.'));
     } else if (m.method === 'ui/notifications/tool-result') {
       toolResult(m.params);
+    } else if (m.method === 'ui/notifications/tool-input') {
+      requested(m.params && m.params.arguments);
     } else if (m.method === 'ui/notifications/host-context-changed') {
       setTheme(m.params && m.params.theme);
     }

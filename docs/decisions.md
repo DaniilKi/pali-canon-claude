@@ -782,3 +782,15 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** Exact commentary /cN anchors still lacked context/return navigation after canonical, post-canonical and root-file selections gained it. Reading a complete commentary book as if its passages were aligned to a requested root text would assert unsupported correspondence.
 - **Decision.** Attach source/script/anchor-pinned context and return commands to exact commentary selections. Resolve the parent only from the returned source ref: aligned anchors retain their root-reference commentary scope; direct book anchors retain their complete-book scope and no-root-alignment warning. Clip windows at the parent's boundaries, preserve commentary labels/notes and explicit English availability, and reject stale pins or continuation-offset conflicts. Version resources to v8.
 - **Consequences.** No new alignment, translation, source text or licence is added. Fingerprints guard the selected rendered segment rather than every neighbour. Source availability, native-reader/specialist review and signed-in host acceptance remain independent gates.
+
+### D130. Navigate directly with returned reader commands and reject stale or mismatched replies
+
+- **Context.** The reader supplied exact continuation/context commands but required a chat turn to follow them. Direct host calls can arrive late or fail after the user has selected another text, creating a risk of showing the wrong source or stale attribution.
+- **Decision.** Add capability-detected controls for Pāli/English continuation and context/return, preferring MCP Apps tools/call with legacy callTool compatibility. Dispatch only the reader tool with unchanged returned arguments. Serialize calls, expose loading, time out after 30 seconds, and restore keyboard focus to the heading. Invalidate old requests on new selections/input, accept own-input echoes, and validate readable reply shape plus expected source/scope/script/translation version before rendering. Error replies clear prior text and notices. Version resources to v9.
+- **Consequences.** No automatic tool call occurs on load. Unsupported hosts keep chat navigation. Simulated bridges, VM races and Chromium tests do not establish signed-in host acceptance or model awareness of local UI navigation; those remain separate gates.
+
+### D131. Keep local Apps SDK navigation across unrelated globals and stale error metadata
+
+- **Context.** After a UI-initiated tool call, toolOutput can still refer to the original host result. A theme/globals event could restore that old passage. Unchanged error metadata could also suppress a newer valid result.
+- **Decision.** Track consumed output/metadata identities. Process only changed host fields, retain local navigation across unrelated events, and allow fresh valid output to recover past unchanged older error metadata. New error metadata still clears stale content.
+- **Consequences.** This handles asynchronous bridge updates without assuming a signed-in client's event timing. It does not make direct UI state automatically visible to the model.

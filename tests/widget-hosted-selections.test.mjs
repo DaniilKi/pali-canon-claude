@@ -18,7 +18,8 @@ test('hosted MCP widget accepts labelled post-canonical/file selections and scri
     await client.connect(new StreamableHTTPClientTransport(new URL(`http://127.0.0.1:${server.address().port}/mcp`)));
     const tool = (await client.listTools()).tools.find(t => t.name === WIDGET_TOOL);
     assert.equal(tool._meta.ui.resourceUri, WIDGET_URI); assert.equal(tool._meta['openai/outputTemplate'], SKYBRIDGE_URI);
-    assert.match(WIDGET_URI, /reader-v8/);
+    assert.deepEqual(tool._meta.ui.visibility, ['model', 'app']); assert.equal(tool._meta['openai/widgetAccessible'], true);
+    assert.match(WIDGET_URI, /reader-v9/);
     for (const script of SCRIPTS) {
       const post = await call({ uid: transliterate('Vism 1.1', 'roman', script), script, limit: 2 });
       assert.equal(post.canonical, false); assert.equal(post.text_id, undefined); assert.equal(post.english, null);
