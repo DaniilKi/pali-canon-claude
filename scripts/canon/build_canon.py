@@ -22,6 +22,7 @@ from collections import OrderedDict
 sys.path.insert(0, os.path.dirname(__file__))
 import vri  # noqa: E402
 from shared_spans import synchronise_shared_spans  # noqa: E402
+from story_spans import story_spans  # noqa: E402
 
 BOOKS = OrderedDict([
     # file: (collection, pitaka)
@@ -684,6 +685,11 @@ def main():
     heuristic_units = b.units
     units, misses, disagreements = aligned_units(b, bilara)
     b.units = units
+    story_spans(b.books, b.units)
+    for u in b.units:
+        if u['collection'] in ('pv', 'vv'):
+            paras = [p['n'] for p in b.books[u['book']]['blocks'][u['start']:u['end']] if p['n']]
+            u['vri'] = paras[0] if len(paras) == 1 else f'{paras[0]}–{paras[-1]}'
     b.annotate_pages()
     print('alignment misses (mapped to nearest preceding passage):', len(misses))
     print('title disagreements (root title vs VRI heading):', len(disagreements))

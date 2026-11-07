@@ -17,6 +17,35 @@ For the embedding experiment, set `PALI_CANON_DATA_DIR` to that directory. Pytho
 
 ## Rebuild from pinned sources
 
+### Vv/Pv story headings
+
+The final build now snaps all 136 Vimānavatthu/Petavatthu units to explicit
+VRI story headings, after checking citation order and the full titles. Verse
+anchors alone could start in the middle of a dialogue and give its first verse
+to the preceding story. The three known title variants are explicit pairs in
+`story_spans.py`, not fuzzy matches. Unexpected titles or missing headings stop
+the build rather than guessing. This does not change VRI wording or numbering.
+
+For the legacy bundled pair, unpack as above, download `romn/s0506m.mul.xml` and
+`romn/s0507m.mul.xml` from the **canon's pinned source commit**, then run:
+
+```sh
+python3 scripts/canon/repair_story_spans.py /tmp/pali-inputs/canon.json.gz /tmp/pali-inputs/commentary.json.gz /tmp/pali-vri /tmp/canon-fixed.gz /tmp/commentary-fixed.gz
+cp /tmp/canon-fixed.gz server/data/canon.json.gz
+cp /tmp/commentary-fixed.gz server/data/commentary.json.gz
+node scripts/shard-data.mjs
+node scripts/parallels/build.mjs
+npm run check
+```
+
+The repair requires complete source blocks, notes and page markers to match the
+bundled edition before writing anything. It uses the existing commentary
+paragraph evidence to refresh story membership, not to invent new alignments.
+All 69 corrected spans and 11 changed assignment lists, source hashes and
+preservation checks are recorded in
+[`docs/data/story-boundary-repair.json`](../../docs/data/story-boundary-repair.json).
+Current coverage totals are unchanged.
+
 ### Repairing legacy shared-passage bounds
 
 The builder refreshes records marked `shares_passage_with` after its final boundary clipping and before aggregating groups. Legacy indexes copied some abbreviated Vinaya records before clipping, leaving their ends past the declared owner. To repair an old bundled pair without fetching sources, unpack to a separate directory and run:

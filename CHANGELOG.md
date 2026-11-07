@@ -2,6 +2,14 @@
 
 All notable changes to Pali Canon for Claude. Versions follow [semantic versioning](https://semver.org/). Decision numbers (D…) refer to [docs/decisions.md](docs/decisions.md).
 
+## Development branch (unreleased)
+
+- Corrected 69 Vimānavatthu/Petavatthu citation spans and 11 commentary
+  assignment lists using the pinned VRI story headings. This keeps a following
+  story's opening verse out of the preceding story. All 136 stories have boundary
+  regression checks; source wording and coverage are unchanged (D180,
+  [repair record](docs/data/story-boundary-repair.md)).
+
 ## 2.1.0 (November 2026)
 
 Everything merged to `main` since the `v2.0.0` tag. The server now has **32 tools** (11 core and 21 study and practice tools), or 33 on the hosted server with the ChatGPT reading view switched on.
