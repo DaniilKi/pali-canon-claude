@@ -11,7 +11,7 @@ const realFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = realFetch; liveCache.clear(); });
 
 test('source-reviewed whole-text links retain exact edition identity and provenance', () => {
-  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16', 'sn7.21', 'sn22.109', 'sn22.110', 'sn22.121', 'sn25.5', 'sn47.35']);
+  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16', 'sn7.21', 'sn22.109', 'sn22.110', 'sn22.121', 'sn25.5', 'sn47.35', 'sn40.9', 'sn22.7', 'sn35.238', 'sn55.24', 'an4.77', 'an3.136', 'an5.130']);
   for (const row of manifest.links) {
     const u = canon.resolve(row.unit_id).unit;
     const link = canon.load().translations[u.id].find(t => t.match === 'reviewed-story' && t.path === row.path);
@@ -25,7 +25,7 @@ test('source-reviewed whole-text links retain exact edition identity and provena
     const blocks = canon.load().canon.books[u.book].blocks.slice(u.start, u.end);
     const pali = blocks.filter(b => ['gatha1', 'gatha2', 'gatha3', 'gathalast'].includes(b[0])).map(b => b[2]).join('\n');
     assert.equal(createHash('sha256').update(pali).digest('hex'), row.pali_sha256);
-    if (row.path.startsWith('/tipitaka/sn/')) assert.match(row.root_blocks_sha256, /^[a-f0-9]{64}$/);
+    if (row.path.startsWith('/tipitaka/sn/') || row.path.startsWith('/tipitaka/an/')) assert.match(row.root_blocks_sha256, /^[a-f0-9]{64}$/);
     if (row.root_blocks_sha256) assert.equal(createHash('sha256').update(JSON.stringify(blocks)).digest('hex'), row.root_blocks_sha256);
     assert.equal(blocks.filter(b => b[0] === 'hangnum').length, row.evidence.vri_stanzas ?? row.evidence.vri_numbered_paragraphs);
     if (row.evidence.vri_verse_groups) assert.equal(blocks.filter(b => b[0] === 'gathalast').length, row.evidence.vri_verse_groups);
@@ -257,4 +257,60 @@ test('an editorial reference to a shared opening never fetches or splices the ot
  assert.match(out.notes.join(' '),/does not silently fetch or splice/);
  assert.equal(out.next_offset,null);assert.ok(calls.length>0);
  assert.ok(calls.every(url=>!url.includes('sn22.109')));
+});
+
+test('reviewed edition-number differences never attach the source to the numerically named unit',async()=>{
+ const cases=[['sn35.238','sn35.197','ati:/tipitaka/sn/sn35/sn35.197.than'],['an3.136','an3.134','ati:/tipitaka/an/an03/an03.134.than']];
+ let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Must not fetch');};
+ for(const [right,wrong,id] of cases){
+  const source=english.available(canon.resolve(right).unit).find(x=>x.translation_id===id);assert.ok(source);
+  assert.match(source.mapping_note,/edition numbering.*no general|edition numbering.*not a general/s);
+  const url='https://www.accesstoinsight.org'+id.slice(4)+'.html';assert.equal(canon.resolve(url).unit.id,right);
+  assert.ok(english.available(canon.resolve(wrong).unit).every(x=>x.translation_id!==id));
+  await assert.rejects(english.translation(canon.resolve(wrong).unit,id));
+ }
+ assert.equal(calls,0);
+});
+
+test('earlier-concentration preface is editorial, and the shorter Ananda source remains unapproved',async()=>{
+ const id='ati:/tipitaka/sn/sn40/sn40.009.wlsh';
+ const source=english.available(canon.resolve('sn40.9').unit).find(x=>x.translation_id===id);assert.ok(source);
+ assert.match(source.mapping_note,/earlier eight discourses.*not translated here.*eight numbered Notes/s);
+ let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Must not fetch');};
+ for(const uid of ['sn40.1','sn40.8']){
+  assert.ok(english.available(canon.resolve(uid).unit).every(x=>x.translation_id!==id));
+  await assert.rejects(english.translation(canon.resolve(uid).unit,id));
+ }
+ assert.equal(calls,0);
+ const held='/tipitaka/sn/sn36/sn36.015.nypo';
+ assert.ok(manifest.links.every(r=>r.path!==held));
+ assert.ok(english.available(canon.resolve('sn36.15').unit).every(x=>x.translation_id!==`ati:${held}`));
+ const u=canon.resolve('sn36.15').unit;const b=canon.load().canon.books[u.book].blocks.slice(u.start,u.end).map(x=>x[2]).join(' ');
+ assert.match(b,/anupubbasaṅkhārānaṃ nirodho/);assert.match(b,/anupubbasaṅkhārānaṃ vūpasamo/);assert.match(b,/anupubbasaṅkhārānaṃ paṭippassaddhi/);
+});
+
+test('reviewed AN pages require full prose scope and retain AN path restrictions', {skip:!python},()=>{
+ const r=spawnSync(python,['-c',`
+import sys,json,hashlib,tempfile,pathlib
+sys.path.insert(0,'scripts/canon')
+import reviewed_ati_stories as m
+with tempfile.TemporaryDirectory() as tmp:
+ root=pathlib.Path(tmp);(root/'tipitaka/an/an04').mkdir(parents=True)
+ raw=b'Synthetic source with licence';(root/'tipitaka/an/an04/fixture.html').write_bytes(raw)
+ blocks=[['bodytext',None,'Synthetic prose']]
+ row={'unit_id':'an4.1','path':'/tipitaka/an/an04/fixture','pali_title':'Fixture','vri_verses':'1','pali_sha256':hashlib.sha256(b'').hexdigest(),'source_html_sha256':hashlib.sha256(raw).hexdigest(),'english_title':'Fixture','translator':'Synthetic','license':'Synthetic','source_reference':'AN fixture','mapping_note':'Synthetic note'}
+ manifest={'ati_commit':'test','vri_commit':'test','links':[row]};m.MANIFEST=root/'manifest.json'
+ c={'books':[{'blocks':blocks}],'units':[{'id':'an4.1','book':0,'start':0,'end':1,'title':'Fixture','vri':'1'}]}
+ m.MANIFEST.write_text(json.dumps(manifest))
+ try:m.reviewed_links(c,root)
+ except ValueError as e:assert 'complete root block' in str(e)
+ else:raise AssertionError('verse-only AN review accepted')
+ row['root_blocks_sha256']=hashlib.sha256(json.dumps(blocks,ensure_ascii=False,separators=(',',':')).encode()).hexdigest();m.MANIFEST.write_text(json.dumps(manifest))
+ assert 'an4.1' in m.reviewed_links(c,root)
+ for path in ['/tipitaka/dn/fixture','/tipitaka/an/../fixture','https://other.example/fixture']:
+  row['path']=path;m.MANIFEST.write_text(json.dumps(manifest))
+  try:m.reviewed_links(c,root)
+  except ValueError:pass
+  else:raise AssertionError(path)
+`],{encoding:'utf8'});assert.equal(r.status,0,r.stderr);
 });

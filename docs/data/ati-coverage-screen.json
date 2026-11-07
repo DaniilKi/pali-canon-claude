@@ -1164,6 +1164,55 @@
         }
       ],
       "report": "ati-paired-discourses-and-review-workflow.md"
+    },
+    {
+      "decision": "D188",
+      "baseline": "c6ce9fb99adbc8106160a992aa4edb0c3a6c0aa5",
+      "accepted": [
+        {
+          "unit_id": "sn40.9",
+          "path": "tipitaka/sn/sn40/sn40.009.wlsh.html",
+          "resolution": "Individually reviewed identity, complete named-work scope, edition/editorial differences and full page-specific notice; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "sn22.7",
+          "path": "tipitaka/sn/sn22/sn22.007.wlsh.html",
+          "resolution": "Individually reviewed identity, complete named-work scope, edition/editorial differences and full page-specific notice; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "sn35.238",
+          "path": "tipitaka/sn/sn35/sn35.197.than.html",
+          "resolution": "Individually reviewed identity, complete named-work scope, edition/editorial differences and full page-specific notice; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "sn55.24",
+          "path": "tipitaka/sn/sn55/sn55.024.wlsh.html",
+          "resolution": "Individually reviewed identity, complete named-work scope, edition/editorial differences and full page-specific notice; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "an4.77",
+          "path": "tipitaka/an/an04/an04.077.than.html",
+          "resolution": "Individually reviewed identity, complete named-work scope, edition/editorial differences and full page-specific notice; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "an3.136",
+          "path": "tipitaka/an/an03/an03.134.than.html",
+          "resolution": "Individually reviewed identity, complete named-work scope, edition/editorial differences and full page-specific notice; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "an5.130",
+          "path": "tipitaka/an/an05/an05.130.than.html",
+          "resolution": "Individually reviewed identity, complete named-work scope, edition/editorial differences and full page-specific notice; evidence in manifest and batch report."
+        }
+      ],
+      "deferred": [
+        {
+          "unit_id": "sn36.15",
+          "path": "tipitaka/sn/sn36/sn36.015.nypo.html",
+          "reason": "Publisher metadata says complete, but English presents one gradual-cessation treatment while VRI separately repeats cessation, stilling and subsiding sequences. A precise scoped/condensed-edition review is required; no whole-VRI coverage asserted."
+        }
+      ],
+      "report": "ati-signless-and-an-coverage.md"
     }
   ]
 }

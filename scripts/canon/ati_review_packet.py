@@ -24,6 +24,10 @@ def packet(canon, translations, root, ledger, manifest):
     approved = {r['path'].lstrip('/') + '.html' for r in manifest['links']}
     current = {l.get('path', '').lstrip('/') + '.html' for links in translations.values()
                for l in links if l.get('source') == 'ati'}
+    prior_holds = {}
+    for review in ledger.get('followup_reviews', []):
+        for held in review.get('deferred', []):
+            prior_holds.setdefault(held['path'], []).append({'decision': review['decision'], 'reason': held['reason']})
     rows, seen = [], set()
     for entry in ledger['rows']:
         path = entry['path']
@@ -67,6 +71,7 @@ def packet(canon, translations, root, ledger, manifest):
             'first_english_possibilities': sum(not u['has_english'] for u in candidates),
             'review_required': ['identity and complete boundaries', 'edition/editorial/excerpt scope',
                                 'page-specific rights and complete notice'],
+            'prior_review_holds': prior_holds.get(path, []),
             'approved': False})
     rows.sort(key=lambda r: (-bool(r['first_english_possibilities']),
                              r['publisher_extent'] != 'complete', r['path']))
@@ -88,6 +93,8 @@ def require_checkout(root, commit):
 
 def require_ledger_sources(root, ledger):
     paths = {r['path'] for r in ledger['rows']}
+    if not paths:
+        return
     tracked = set(subprocess.check_output(['git', '-C', str(root), 'ls-files', '-z', '--', *sorted(paths)], text=True).split(chr(0))) - {''}
     if tracked != paths:
         raise ValueError('Every ledger page must be tracked in the pinned ATI checkout')

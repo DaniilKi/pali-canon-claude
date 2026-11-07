@@ -239,3 +239,17 @@ extent label or a licence label does not establish identity, scope or rights.
 Manually compare content and boundaries, inspect the full rights notice, then
 add an explicit manifest record and regression tests using the existing flow.
 See the [workflow assessment](../../docs/data/ati-paired-discourses-and-review-workflow.md).
+
+### Individually reviewed AN paths (D188)
+
+The reviewed-path guard now permits KN/SN/AN source pages. Both SN and AN
+records require a complete root-block hash; an empty verse hash cannot protect
+prose. General title/number heuristics, providers and runtime allowlists remain
+unchanged. ATI AN 3.134 maps individually to indexed AN 3.136 by content and
+PTS evidence, not a reusable offset. See the
+[scope review](../../docs/data/ati-signless-and-an-coverage.md).
+
+D188 packets also retain prior scope-hold notes from the ledger so reviewers
+can address known gaps rather than repeat discovery. Historical holds remain
+context, not automatic vetoes or approvals. An empty ledger is valid and
+requires no source-path query.

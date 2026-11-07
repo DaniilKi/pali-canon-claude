@@ -49,9 +49,9 @@ def reviewed_links(canon, ati_root):
         if row.get('root_blocks_sha256') and hashlib.sha256(json.dumps(blocks, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest() != row['root_blocks_sha256']:
             raise ValueError(f'Complete root scope changed: {u["id"]}')
         path = row['path']
-        if path.startswith('/tipitaka/sn/') and not row.get('root_blocks_sha256'):
-            raise ValueError('SN review requires the complete root block scope, not verses alone')
-        if '..' in path or not re.fullmatch(r'/tipitaka/(?:kn|sn)/[a-z0-9_./-]+', path):
+        if path.startswith(('/tipitaka/sn/', '/tipitaka/an/')) and not row.get('root_blocks_sha256'):
+            raise ValueError('SN/AN review requires the complete root block scope, not verses alone')
+        if '..' in path or not re.fullmatch(r'/tipitaka/(?:kn|sn|an)/[a-z0-9_./-]+', path):
             raise ValueError('Invalid reviewed ATI path')
         if path in owners and owners[path] != u['id']:
             raise ValueError(f'Reviewed whole-text page has multiple owners: {path}')

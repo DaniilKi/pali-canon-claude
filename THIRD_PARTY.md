@@ -82,6 +82,14 @@ body is stored by the new metadata-only review-packet tool. The
 [review record](docs/data/ati-paired-discourses-and-review-workflow.md) explains
 condensed openings, repetitions and editorial Notes.
 
+D188 adds Walshe’s SN 40.9, SN 22.7 and SN 55.24 (copyright 1985 BPS,
+Wheel 318–321), retaining their full free-distribution/acknowledgement/50-copy
+notice. The additional Ṭhānissaro pages are SN 35.197 → indexed SN 35.238
+(2004), AN 4.77 (1997), AN 3.134 → indexed AN 3.136 (1996), and AN 5.130
+(2004), all CC BY-NC 4.0. Original notices and source citations remain in live
+reading; English bodies are not bundled. See the
+[source review](docs/data/ati-signless-and-an-coverage.md) for editorial scope.
+
 ## Access to Insight indexes (bundled topic index)
 
 `server/data/topics.json` holds topic names, cross-references and links taken from Access to Insight's [General Index](https://www.accesstoinsight.org/index-subject.html) and [Numerical Index](https://www.accesstoinsight.org/index-number.html), read from commit `45fedca341497120651efa20e756b04a13e61089` of [bcbsit/ati](https://github.com/bcbsit/ati). The text of both pages is “by Access to Insight” and licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); the attribution and licence are returned with every `topic` and `list_topics` result. Only names and links are kept, and each sutta link is mapped to a canon ID by this project. Documents linked from the indexes keep their own terms.

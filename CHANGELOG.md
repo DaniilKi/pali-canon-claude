@@ -4,6 +4,11 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Added seven first-English choices across SN and AN, with explicit older
+  ATI numbering, condensed repetitions and editorial-note scope. Completed
+  SN 40.9’s prefatory/notes review. Reviewed AN paths now require complete
+  root-block hashes; general linking heuristics are unchanged (D188).
+
 - Added six first-English SN choices with reviewed content, edition scope and
   rights, including separately identified stream-enterer/arahant discourses.
   Added a metadata-only, read-only ATI review-packet tool to organize remaining

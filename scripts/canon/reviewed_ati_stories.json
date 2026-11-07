@@ -432,6 +432,146 @@
         "vri_verse_groups": 0
       },
       "mapping_note": "Whole-discourse correspondence: ATI Sata Sutta (SN 47.35, PTS S v 180) matches indexed Satisutta, VRI paragraph 401. Four mindfulness domains are followed by feelings, thoughts and perceptions each known as arising, persisting and ending. This sequence and the repeated instruction distinguish it from similarly titled mindfulness texts. Both editions abbreviate repeated domains; this is not line-by-line alignment or numbering-only inference."
+    },
+    {
+      "unit_id": "sn40.9",
+      "path": "/tipitaka/sn/sn40/sn40.009.wlsh",
+      "pali_title": "Animittapañhāsuttaṃ",
+      "english_title": "The Signless",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "source_reference": "SN 40.9",
+      "source_verses": "SN 40.9; PTS S iv 268",
+      "vri_verses": "340",
+      "source_html_sha256": "19feb9e4665b5e948a2f08cf41d86156039eca70d0cd2c062892871031cb1c72",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "1f33b015e6005b7c2a04948cb1e495665f014b38c2be2cb5c0ebc03e5449c500",
+      "evidence": {
+        "basis": "Moggallana signless concentration, sign-following consciousness, Buddha intervention, restored concentration and final teacher-supported attainment. Complete quoted unit; introductory earlier-eight summary and eight Notes are editorial.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Animitto Sutta (SN 40.9, PTS S iv 268) matches Animittapañhāsuttaṃ, VRI paragraph 340. Moggallana’s signless concentration, disturbance, the Buddha’s intervention and final attainment statement identify the complete quoted discourse. The bracketed preface summarizes earlier eight discourses; those are not translated here or counted as covered. The preface and eight numbered Notes are translator/editorial context, not canonical speech of this unit. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "sn22.7",
+      "path": "/tipitaka/sn/sn22/sn22.007.wlsh",
+      "pali_title": "Upādāparitassanāsuttaṃ",
+      "english_title": "Grasping and Worry",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "source_reference": "SN 22.7",
+      "source_verses": "SN 22.7; PTS S iii 15",
+      "vri_verses": "7",
+      "source_html_sha256": "c176239052f3181e0a88a748904d8fecd1f204b0c6920c62cb131d02c0a37660",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "b0c1ded5096e2dc8fd0bd3932fa0194e53ea01c2d93c413ef1ddba2a1c8d7cd7",
+      "evidence": {
+        "basis": "Five aggregates, four self-relations, change and ensuing worry versus instructed disciple without self-identification/worry; both mirrored sections complete in condensed form. PTS S iii 15.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Publisher’s whole-discourse version with repetitions condensed: ATI Upaadaaparitassanaa Sutta (SN 22.7, PTS S iii 15) matches Upādāparitassanāsuttaṃ, VRI paragraph 7. Both grasping/worry and non-grasping/non-worry sections treat five aggregates and changing self-identification. Bracketed repetition summaries, shortened setup and three numbered Notes are editorial conventions; VRI also abbreviates repetitions. This is not line-by-line alignment or a fully expanded rendering of every clause."
+    },
+    {
+      "unit_id": "sn35.238",
+      "path": "/tipitaka/sn/sn35/sn35.197.than",
+      "pali_title": "Āsīvisopamasuttaṃ",
+      "english_title": "Vipers",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "SN 35.197",
+      "source_verses": "SN 35.197; PTS S iv 172",
+      "vri_verses": "238",
+      "source_html_sha256": "5bfdffebe4a1cf3db12e6c710eca54805bbffc2f58c3a87324fb5c8b51583b48",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "84e59eb583ec4cd89afd3389c4ded324d6309b1d2ee1dc24b38b790f09b39f50",
+      "evidence": {
+        "basis": "Four vipers, five executioners, sixth pursuer, empty village, bandits, flood, raft crossing and full ordered decoding of simile to elements/aggregates/passion/senses/floods/path/arahant. PTS S iv 172.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence with edition numbering: ATI Asivisa Sutta is SN 35.197; this index uses SN 35.238 (Āsīvisopamasuttaṃ, VRI paragraph 238), PTS S iv 172. The ordered vipers/executioners/village/bandits/flood/raft story and its complete decoding establish identity, not a general +41 rule. ATI supplies a setting preface where the indexed VRI unit begins directly with the simile; VRI abbreviates some repeated sensory/path formulas. The “See also” link is editorial. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "sn55.24",
+      "path": "/tipitaka/sn/sn55/sn55.024.wlsh",
+      "pali_title": "Paṭhamasaraṇānisakkasuttaṃ",
+      "english_title": "Sarakaani (Who Took to Drink)",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "source_reference": "SN 55.24",
+      "source_verses": "SN 55.24; PTS S v 375",
+      "vri_verses": "1020",
+      "source_html_sha256": "6e0732f1e89c8006c8881c19628ead0daa27d7ecdb871100f00fa40518b0f5d5",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "0796406e205e97f630c752e1e48fafb25e6e96fb11a8eed450d68a80f8765789",
+      "evidence": {
+        "basis": "Sarakani/Saranani declared stream-enterer after death, Sakyan criticism, Mahanama dialogue, six ordered types, sal-tree comparison and death-time training ending. PTS S v 375 lies inside VRI S v 374–377.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Sarakaani Sutta (SN 55.24, PTS S v 375) matches Paṭhamasaraṇānisakkasuttaṃ, VRI paragraph 1020 (PTS S v 374–377). Sarakani/Saraṇāni, Mahanama, six ordered person-types, the sal-tree comparison and death-time training ending distinguish this from SN 55.25. Introductory reporting and recurring formulas are condensed. Bracketed setup and eight numbered Notes, including interpolation/death interpretations, are translator/editorial material, not additional canonical statements. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an4.77",
+      "path": "/tipitaka/an/an04/an04.077.than",
+      "pali_title": "Acinteyyasuttaṃ",
+      "english_title": "Unconjecturable",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 4.77",
+      "source_verses": "AN 4.77; PTS A ii 80",
+      "vri_verses": "77",
+      "source_html_sha256": "0cbdfea269da7246ced8b83f77b91241a6de9e0cd720fc3f7235cfdbed8670cf",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "823a07d056c70c9c6e7d78938e6bc59e410f2806b7c19f8f76f91f09a41f92c6",
+      "evidence": {
+        "basis": "Ordered four unconjecturables: Buddha range, jhana range, karma results, world speculation; warning and repeated conclusion; PTS A ii 80.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Acintita Sutta (AN 4.77, PTS A ii 80) matches Acinteyyasuttaṃ, VRI paragraph 77. The ordered four unconjecturables and repeated warning/conclusion identify the unit. ATI abbreviates repeated wording and adds two explanatory Notes and bracketed glosses; those annotations are not canonical speech. This is not line-by-line alignment or numbering-only inference."
+    },
+    {
+      "unit_id": "an3.136",
+      "path": "/tipitaka/an/an03/an03.134.than",
+      "pali_title": "Uppādāsuttaṃ",
+      "english_title": "The Discourse on the Orderliness of the Dhamma",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 3.134",
+      "source_verses": "AN 3.134; PTS A i 286",
+      "vri_verses": "137",
+      "source_html_sha256": "a64591f2ce8de7cc0eb5b6ddb64b532cb07c2a49bbc78cf101cb10d7978955a7",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "af22bff6e3e20974e43d0b9702665c01e8f2efc92d86ed8b6cbafb3511e7ab33",
+      "evidence": {
+        "basis": "Whether Tathagatas arise or not: stability of Dhamma; all formations impermanent, all formations suffering, all phenomena not-self; each followed by awakening/declaration formula. PTS A i 286.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence with edition numbering: ATI Dhamma-niyama Sutta is AN 3.134; this index uses AN 3.136 (Uppādāsuttaṃ), VRI paragraph 137, PTS A i 286. The three ordered Dhamma regularities, with or without a Tathagata, and repeated awakening/declaration formula establish identity; no general offset is inferred. The final Note interpreting Unbinding and its external citations is the translator’s explanation, not this discourse’s canonical speech. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an5.130",
+      "path": "/tipitaka/an/an05/an05.130.than",
+      "pali_title": "Byasanasuttaṃ",
+      "english_title": "Being Consummate",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 5.130",
+      "source_verses": "AN 5.130; PTS A iii 147",
+      "vri_verses": "130",
+      "source_html_sha256": "7872feb557f605c4daa0d5bc472bb09f0b3f6d59982d2fa601b9983b489c2e18",
+      "pali_sha256": "e23f139401876728784fcba1f5adc2ced46bd095d16e3ee44c7a6ec58445df57",
+      "root_blocks_sha256": "60415112c29f2decf1dd60c06a2ce28bae78b61b251df0d44ad94e9061300908",
+      "evidence": {
+        "basis": "Five losses and corresponding five successes: relatives, wealth, health, virtue, views; distinction of first three from final two regarding bad/good rebirth. PTS A iii 147.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 1
+      },
+      "mapping_note": "Whole-discourse correspondence despite different titles: ATI Sampada Sutta (AN 5.130, PTS A iii 147) matches Byasanasuttaṃ, VRI paragraph 130. Both the five losses and five successes, with the first-three/final-two distinction, identify the full discourse. The indexed VRI chapter ending and recap are paratext, not separately translated works. This is not line-by-line alignment or a title/number-only inference."
     }
   ]
 }

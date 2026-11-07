@@ -13,13 +13,14 @@ with tempfile.TemporaryDirectory() as tmp:
  raw='[MY_TITLE]={Same title} [PTS_ID]={S i 2} [EXTENT]={complete} [AUTHOR]={Synthetic} [LICENSE]={Synthetic}<div id="F_provenance">Synthetic notice</div><!-- BEGIN COPYRIGHTED TEXT CHUNK -->DO_NOT_COPY_BODY<!-- #COPYRIGHTED_TEXT_CHUNK -->'
  p=root/'tipitaka/sn/sn01/fixture.html';p.write_text(raw)
  c={'source':{'commit':'vri'},'units':[{'id':'sn1.2','title':'Same','collection':'sn','pts':{'volume':1,'page':2,'end_page':2}}, {'id':'sn1.3','title':'Same','collection':'sn','pts':{'volume':1,'page':2,'end_page':2}}]}
- ledger={'rows':[{'path':'tipitaka/sn/sn01/fixture.html'}]};m={'ati_commit':'ati','vri_commit':'vri','links':[]};links={}
+ ledger={'rows':[{'path':'tipitaka/sn/sn01/fixture.html'}],'followup_reviews':[{'decision':'Dtest','deferred':[{'path':'tipitaka/sn/sn01/fixture.html','reason':'Prior scope gap to recheck'}]}]};m={'ati_commit':'ati','vri_commit':'vri','links':[]};links={}
  frozen=copy.deepcopy((c,ledger,m,links));out=packet(c,links,root,ledger,m)
  assert (c,ledger,m,links)==frozen
  assert out['review_packet_only'] and not out['approvals_changed']
  row=out['rows'][0];assert not row['approved'] and len(row['possible_pts_matches'])==2
  assert row['first_english_possibilities']==2 and row['rights_notice_container_present']
  assert 'page-specific rights and complete notice' in row['review_required']
+ assert row['prior_review_holds']==[{'decision':'Dtest','reason':'Prior scope gap to recheck'}]
  assert 'DO_NOT_COPY_BODY' not in json.dumps(out)
  links={'sn1.2':[{'source':'ati','path':'/tipitaka/sn/sn01/another'}]}
  assert packet(c,links,root,ledger,m)['rows'][0]['first_english_possibilities']==1
@@ -57,6 +58,8 @@ with tempfile.TemporaryDirectory() as tmp:
    except ValueError:pass
    else:raise AssertionError(responses)
  with patch('ati_review_packet.subprocess.check_output',side_effect=['ati','']):require_checkout(root,'ati')
+ with patch('ati_review_packet.subprocess.check_output') as probe:
+  require_ledger_sources(root,{'rows':[]});probe.assert_not_called()
  ledger={'rows':[{'path':'tipitaka/fixture.html'}]}
  with patch('ati_review_packet.subprocess.check_output',return_value='tipitaka/fixture.html'+chr(0)):require_ledger_sources(root,ledger)
  with patch('ati_review_packet.subprocess.check_output',return_value=''):
