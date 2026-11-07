@@ -4,6 +4,34 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import { createServer } from '../src/server.mjs';
 import { analysePassage } from '../src/analyse.mjs';
+import * as canon from '../src/canon.mjs';
+import { repeatedParagraphs, auditAnalysisParagraphs } from '../scripts/evidence/analysis-paragraphs.mjs';
+
+test('every repeated canonical paragraph requires an exact analysis segment', () => {
+  const repeated = [];
+  for (const unit of canon.load().canon.units) {
+    const labels = new Map();
+    for (const segment of canon.segments(unit)) {
+      if (segment.vri_paragraph == null) continue;
+      const label = String(segment.vri_paragraph);
+      if (!labels.has(label)) labels.set(label, []);
+      labels.get(label).push(segment.ref);
+    }
+    for (const [label, refs] of labels) if (refs.length > 1) {
+      repeated.push([unit.id, Number(label), refs]);
+      assert.throws(() => analysePassage({ uid: unit.id, paragraph: label, limit: 1 }), /matches .* segments/);
+    }
+  }
+  assert.deepEqual(repeated, repeatedParagraphs);
+});
+
+test('MCP ambiguous-paragraph errors preserve exact reading and analysis recovery across scripts', async () => {
+  const [a, b] = InMemoryTransport.createLinkedPair();
+  const client = new Client({ name: 'analysis-paragraph-fixture', version: '1' });
+  await Promise.all([createServer().connect(b), client.connect(a)]);
+  try { await auditAnalysisParagraphs((name, args) => client.callTool({ name, arguments: args })); }
+  finally { await client.close(); }
+});
 
 const nativeCitations = [
   ['thai', 'MN ๑๐', 'mn10', 'MN 10'],

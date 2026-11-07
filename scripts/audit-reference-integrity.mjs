@@ -1,5 +1,6 @@
 // Audit packaged reference input integrity offline across both transports.
 import assert from 'node:assert/strict';
+import {auditAnalysisParagraphs,repeatedParagraphs} from './evidence/analysis-paragraphs.mjs';
 import {cp, mkdtemp, mkdir, rm, writeFile} from 'node:fs/promises';
 import {spawn} from 'node:child_process';
 import {tmpdir} from 'node:os';
@@ -48,12 +49,13 @@ try {
   const ambiguous=await call('resolve_reference',{reference:'Metta sutta'});assert.equal(ambiguous.isError,true);
   const page=await call('resolve_reference',{reference:'S i 57'});assert.ok(!page.isError);assert.equal(page.structuredContent.id,'sn2.22');assert.ok(page.structuredContent.also_on_that_page.length);
   const roman=await call('resolve_reference',{reference:'Satipatthana Sutta'});assert.equal(roman.structuredContent.id,resolveReference('Satipatthana Sutta').unit.id);
+  await auditAnalysisParagraphs(call);
   assert.doesNotMatch(stderr,/UNEXPECTED_NETWORK_ATTEMPT/);
-  reports.push({transport:mode,requests,scripts:SCRIPTS.length,unsupported_letters_not_discarded:true,unsupported_numerals_not_discarded:true,native_numeric_citations_retained:true,native_resolution_and_analysis:true,shared_name_cautions_retained:true,ambiguous_page_alternatives_retained:true,postcanonical_fallback_preserved:true,network_attempts:0});
+  reports.push({transport:mode,requests,scripts:SCRIPTS.length,unsupported_letters_not_discarded:true,unsupported_numerals_not_discarded:true,native_numeric_citations_retained:true,native_resolution_and_analysis:true,repeated_canonical_paragraphs:repeatedParagraphs.length,exact_analysis_recovery:true,shared_name_cautions_retained:true,ambiguous_page_alternatives_retained:true,postcanonical_fallback_preserved:true,network_attempts:0});
   await client.close();client=null;
   if(child&&child.exitCode===null&&child.signalCode===null){const ended=new Promise(r=>child.once('exit',r));child.kill();await ended;}child=null;
  }
- const report={status:'passed',cases:reports,scope:'Isolated packaged reference and analysis input integrity. Supported script names retain canonical and post-canonical identity; unsupported letters cannot disappear into a valid name. Not model-driven or signed-in-client acceptance, new source coverage or native-reader review.'};
+ const report={status:'passed',cases:reports,scope:'Isolated packaged reference and analysis input integrity. Supported script names retain canonical and post-canonical identity; unsupported letters cannot disappear into a valid name. Repeated canonical paragraphs fail explicitly and both exact occurrences retain source text and word continuation. Not model-driven or signed-in-client acceptance, new source coverage or native-reader review.'};
  if(reportPath)await writeFile(reportPath,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
 } catch(error) {
  if(reportPath)await writeFile(reportPath,JSON.stringify({status:'failed',error:error.message})+'\n');throw error;

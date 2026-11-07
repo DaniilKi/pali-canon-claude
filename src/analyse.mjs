@@ -257,7 +257,10 @@ function pickSegment(unit, segs, { segment, paragraph }) {
   if (paragraph !== undefined) {
     const matches = segs.flatMap((s, i) => s.vri_paragraph != null && String(s.vri_paragraph) === String(paragraph).trim() ? [i] : []);
     if (!matches.length) throw new Error(`${unit.acronym} has no VRI paragraph ${paragraph}. Use ${unit.reader || 'get_text'} to see its paragraphs.`);
-    if (unit.uniqueParagraph && matches.length > 1) throw new Error(`VRI paragraph ${paragraph} matches ${matches.length} segments in ${unit.acronym}. Choose an exact segment reference from ${unit.reader}; no occurrence was selected.`);
+    if (matches.length > 1) {
+      const refs = matches.slice(0, 5).map(i => segs[i].ref).join(', ');
+      throw new Error(`VRI paragraph ${paragraph} matches ${matches.length} segments in ${unit.acronym}. Choose an exact segment reference from ${unit.reader || 'get_text'} (${refs}${matches.length > 5 ? ', …' : ''}); no occurrence was selected.`);
+    }
     return matches[0];
   }
   if (segment === undefined) {
@@ -277,7 +280,7 @@ function selection(uid, book) {
   if ((uid === undefined) === (book === undefined)) throw new Error('Give exactly one of uid (a canonical or post-canonical citation) and book (a complete VRI root-book ID).');
   if (book !== undefined) {
     const page = readBook({ book, limit: Number.MAX_SAFE_INTEGER });
-    return { unit: { id: `vri-book:${page.book_id}`, acronym: page.title, reader: 'get_text', uniqueParagraph: true },
+    return { unit: { id: `vri-book:${page.book_id}`, acronym: page.title, reader: 'get_text' },
       segs: page.segments, notes: page.notes, source: page.source, extended: true,
       metadata: { selection: 'source_book', canonical: true, book_id: page.book_id, title: page.title,
         vri_file: page.vri_file, text_source: page.source } };
@@ -292,7 +295,7 @@ function selection(uid, book) {
     const segs = postcanonical.segmentsOf(sel.book.blocks.slice(sel.start, sel.end))
       .map((segment, i) => ({ ref: `${meta.citation}/${i + 1}`, ...segment }));
     const { source, read_with, ...metadata } = meta;
-    return { unit: { id: meta.citation, acronym: meta.citation, reader: 'get_post_canonical', uniqueParagraph: true },
+    return { unit: { id: meta.citation, acronym: meta.citation, reader: 'get_post_canonical' },
       segs, notes: meta.notes, source, input, extended: true,
       metadata: { ...metadata, content_type: 'post_canonical', text_source: source } };
   }
@@ -388,7 +391,7 @@ export function register({ tool, z }) {
     uid: z.string().min(1).max(300).optional().describe('Canonical citation (MN 10) or post-canonical citation (Vism 1.1, Abhidh-s 1, mahavamsa 3). Native-script letters and digits are converted and labelled; source refs and analysis stay Roman. Give uid or book, not both.'),
     book: z.string().trim().min(1).max(100).optional().describe('Complete VRI root-book ID from browse_canon node "books", as with get_text book mode. Give book instead of uid; source-file positions are not individual canonical identities.'),
     segment: z.union([z.string().trim().min(1).max(200), z.number().int().min(1)]).optional().describe('Exact segment ref from get_text or get_post_canonical, or its number. Give segment or paragraph, never both. Omit both for the first body segment; blank values are errors.'),
-    paragraph: z.union([z.string().trim().min(1).max(20), z.number().int().min(0)]).optional().describe('Exact VRI paragraph label instead of segment. For complete-book/post-canonical selections, a label matching several segments is an error: choose an exact segment ref. Give at most one selector; omit both for the first body segment.'),
+    paragraph: z.union([z.string().trim().min(1).max(20), z.number().int().min(0)]).optional().describe('Exact VRI paragraph label instead of segment. In every scope, a label matching several segments is an error: choose an exact segment ref. Give at most one selector; omit both for the first body segment.'),
     offset: z.number().int().min(0).max(100000).default(0).describe('Word offset within the segment, for continuation.'),
     limit: z.number().int().min(1).max(200).default(60).describe('Words per call.'),
   }, (args) => analysePassage(args));
