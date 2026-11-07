@@ -14,6 +14,7 @@ import { searchWithInput } from './english-search.mjs';
 import { romanizeSearchInput, searchInputNote } from './search-segments.mjs';
 import { lookupPaliInput } from './lookup-input.mjs';
 import * as sourceBooks from './source-books.mjs';
+import { HostedToolError } from './hosted-tool-error.mjs';
 
 // Human-readable titles shown by MCP clients and required by the Claude connector directory.
 // Keep in step with the review table in docs/listings/claude-connector.md (tests/connector-listing.test.mjs checks it).
@@ -82,6 +83,10 @@ export function createServer({executeTool} = {}) {
         const result = await fn(args);
         return { content: [{ type: 'text', text: JSON.stringify(result) }], structuredContent: result };
       } catch (error) {
+        if (error instanceof HostedToolError) {
+          const result = error.response();
+          return { isError: true, content: [{ type: 'text', text: JSON.stringify(result) }], structuredContent: result };
+        }
         return { isError: true, content: [{ type: 'text', text: JSON.stringify({
           error: error.message || 'Request failed.',
           recovery: 'Check the citation with resolve_reference or browse_canon. Never invent missing text.',

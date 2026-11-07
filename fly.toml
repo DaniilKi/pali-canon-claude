@@ -21,8 +21,10 @@ primary_region = "iad"
   min_machines_running = 1
   [http_service.concurrency]
     type = "requests"
-    soft_limit = 100
-    hard_limit = 200
+    # Prefer other available Machines before the 32-call core worker bound is reached.
+    # The hard limit also leaves room for metadata, reader and retry responses.
+    soft_limit = 16
+    hard_limit = 64
 
 [[http_service.checks]]
   interval = "30s"
@@ -32,6 +34,9 @@ primary_region = "iad"
   path = "/healthz"
 
 [[vm]]
-  size = "shared-cpu-1x"
+  # The capacity gate assumes sustained CPU time, not shared-CPU burst credits.
+  # Review the performance-tier cost before deployment.
+  cpu_kind = "performance"
+  cpus = 1
   # Full offline search and study datasets exceed 512 MB; see docs/hosting.md.
   memory = "2gb"

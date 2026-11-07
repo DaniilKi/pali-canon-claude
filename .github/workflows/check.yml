@@ -27,6 +27,8 @@ jobs:
         run: |
           cp -R "$RUNNER_TEMP/memory-package/package/server" "$RUNNER_TEMP/memory-package/src"
           node scripts/smoke.mjs --http --server "$RUNNER_TEMP/memory-package/src/http.cjs"
+      - name: Check packaged worker failure recovery without changing citations
+        run: node scripts/audit-hosted-recovery.mjs --server-dir "$RUNNER_TEMP/memory-package/package/server" --report "$RUNNER_TEMP/memory-report/recovery.json"
       - name: Exercise offline tools under the Fly template's memory limit
         run: |
           memory=$(sed -n 's/^  memory = "\([^"]*\)"/\1/p' fly.toml)

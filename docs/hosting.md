@@ -135,7 +135,35 @@ acceptance. See [verify-quote.md](verify-quote.md#memory) for the quotation inde
    on, every release tag (`v*`) deploys automatically, and the *Deploy to Fly.io* workflow can be run by
    hand. Without the secret the workflow does nothing.
 
-`fly.toml` keeps one shared-CPU machine with 2 GB RAM always running so the first request is fast.
+`fly.toml` keeps one Machine with one performance vCPU and 2 GB RAM always running. This is a proposed
+resource tier for deployment review; no existing Machine was changed. Review the current provider
+price before applying it.
+
+The sustained one-CPU Docker budget is not equivalent to `shared-cpu-1x`. Fly's
+[CPU performance reference](https://docs.fly.io/machines/cpu-performance) describes shared vCPUs as a
+small baseline quota with accumulated burst credits; performance vCPUs receive a full baseline CPU
+quota. Credit depletion can therefore invalidate a cold-index timing measured under a continuous
+one-CPU cap. The template uses `cpu_kind = "performance"`, `cpus = 1` to match that assumption rather
+than relying on credits. This still does not reproduce Fly hardware, neighbours or routing, and a
+cheaper shared profile needs its own cold-start and depleted-credit acceptance tests.
+
+A local conservative approximation using a 5 ms quota per 80 ms period with no initial burst missed
+the audit's 30-second HTTP readiness deadline. It included the test driver in the same quota and did
+not emulate Fly's credit system. It is evidence against transferring the sustained-CPU result to a
+shared tier, not a claim that shared Machines can never serve this application.
+
+The template now measures concurrent **requests**, with a soft routing threshold of **16** and a hard
+threshold of **64**. The application still admits at most 32 outstanding core tool calls. The old
+100-request soft threshold was above that bound; the new value is intended to prefer spare Machines
+before the core queue fills. The higher hard threshold leaves room for metadata, reader and retry
+responses; it is not a promise of 64 simultaneous heavy reads. Fly documents how these thresholds
+[deprioritize or exclude a Machine from routing](https://docs.fly.io/reference/load-balancing).
+
+This only helps when other capacity exists. Fly's [autostop/autostart](https://docs.fly.io/launch/autostop-autostart)
+starts and stops already-created Machines; it does not create additional instances. A one-Machine
+deployment can still return busy responses. Provisioning, costs, actual multi-Machine routing and
+host-specific load testing require a separate deployment review. No Machines were created or scaled
+by this development change.
 
 ## Deploy on Render
 
@@ -167,6 +195,24 @@ probe does not promise that a slow tool has completed.
 
 Point any free uptime monitor (for example UptimeRobot or Better Stack) at `https://<your address>/healthz`
 every five minutes. It returns HTTP 200 with `"status": "ok"` when the server is healthy.
+
+### Recovering from hosted tool errors
+
+Capacity and worker failures preserve their existing human-readable `error` text and now return the
+same JSON in the text response and `structuredContent`:
+
+| Code | Meaning | Action |
+|---|---|---|
+| `HOSTED_TOOL_BUSY` | The bounded core queue is full | `retryable: true`, `retry_after_seconds: 5`: wait, then retry the **same read arguments** with a smaller batch if needed |
+| `HOSTED_TOOL_UNAVAILABLE` / `HOSTED_TOOL_CLOSED` | The worker cannot serve more reads | `retryable: false`, `requires_restart: true`: the operator must restore the service before the read is retried |
+| `HOSTED_TOOL_DISPATCH_FAILED` / `HOSTED_TOOL_EXECUTION_FAILED` | An internal execution step failed | Report it to the operator; automatic retry is not advised |
+
+The five-second value is a minimum backoff hint, not a reserved slot or availability guarantee. Clients
+must bound and space retries; the server never automatically replays a read. These errors no longer
+suggest resolving a different citation. Actual citation/provider errors retain their existing
+contracts, including source-unavailable versus not-found distinctions. Only trusted internal error
+types can produce these infrastructure instructions; a matching code on an ordinary error cannot.
+The separate HTTP per-IP 429 response still has its own `Retry-After` header.
 
 ## Load test
 

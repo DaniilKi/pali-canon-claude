@@ -30,7 +30,7 @@ test('HTTP health serves while a tool is pending and becomes unavailable when it
   while(!fake.sent.length)await new Promise(resolve=>setImmediate(resolve));
   worker.cache={entries:1,bytes:10,max_bytes:100,ttl_seconds:360,hits:2,misses:1};
   const health=await fetch(base+'/healthz');assert.equal(health.status,200);const body=await health.json();assert.equal(body.tool_worker.pending,1);assert.deepEqual(body.cache,worker.cache);assert.equal(typeof body.frontend_cache.bytes,'number');assert.doesNotMatch(JSON.stringify(body),/MN 10/);
-  fake.emit('error',new Error('fixture'));const response=await request;assert.equal((await response.json()).result.isError,true);
+  fake.emit('error',new Error('fixture'));const response=await request,result=(await response.json()).result;assert.equal(result.isError,true);assert.equal(result.structuredContent.code,'HOSTED_TOOL_UNAVAILABLE');assert.equal(result.structuredContent.retryable,false);assert.equal(result.structuredContent.requires_restart,true);assert.match(result.structuredContent.recovery,/operator.*restart/i);assert.deepEqual(JSON.parse(result.content[0].text),result.structuredContent);
   const failed=await fetch(base+'/healthz');assert.equal(failed.status,503);assert.equal((await failed.json()).status,'unavailable');
  }finally{server.closeAllConnections();await new Promise(resolve=>server.close(resolve));}
  assert.equal(fake.terminated,1);
