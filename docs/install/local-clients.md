@@ -37,7 +37,7 @@ The server has 34 tools. Twenty-seven of them work without internet (`get_text` 
 | `get_commentary` | Reads the traditional Pāli commentary (Aṭṭhakathā, VRI edition) on a text, clearly labelled as commentary | No |
 | `get_post_canonical` | Reads post-canonical Pāli books (Visuddhimagga, Abhidhammatthasaṅgaha, sub-commentaries), labelled as not canon | No |
 | `search_post_canonical` | Searches the post-canonical books | No |
-| `analyse_passage` | Word-by-word analysis of a passage from the bundled Digital Pāḷi Dictionary subset (split, grammar, root, meaning) | No |
+| `analyse_passage` | Word-by-word analysis of canonical, post-canonical or complete-root-file Pāli using the bundled DPD subset; source labels remain distinct and unknown words are explicit | No |
 | `get_parallels` | Other texts that share a passage with this one, and texts the commentary cites, each link saying its source | No |
 | `glossary` | English → Pāli terms ("mindfulness" → sati) and Pāli → short English glosses, from the Digital Pāḷi Dictionary's English index and the curated list glosses, each with its source | No |
 | `verify_quote` | Checks whether a quotation attributed to the Buddha is in the texts: Pāli against the whole bundled canon (offline), English against the linked translations of the texts you name (default: the Dhammapada) | Yes |

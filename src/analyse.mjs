@@ -18,6 +18,8 @@ import { fileURLToPath } from 'node:url';
 import * as canon from './canon.mjs';
 import { resolveReference } from './sutta-names.mjs';
 import { romanizeInput, inputNote } from './script.mjs';
+import * as postcanonical from './postcanonical.mjs';
+import { readBook } from './source-books.mjs';
 
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
@@ -87,6 +89,13 @@ const LONG_TO_SHORT = { ā: 'a', ī: 'i', ū: 'u' };
 /** Word tokens of a passage, as written (quotation marks inside a word are kept: "hotī’’ti"). */
 export function tokenize(text) {
   return String(text ?? '').replace(/<[^>]+>/g, ' ').match(TOKEN) ?? [];
+}
+
+// Later grammar books quote non-Pāli letters, sometimes attached to Roman text. Keep them literal:
+// dropping a glyph could turn its remaining letters into an unrelated known Pāli form.
+const SOURCE_TOKEN = /\p{L}[\p{L}\p{M}]*(?:[’‘'`]+\p{L}[\p{L}\p{M}]*)*/gu;
+function sourceTokens(text) {
+  return String(text ?? '').replace(/<[^>]+>/g, ' ').match(SOURCE_TOKEN) ?? [];
 }
 
 /**
@@ -246,9 +255,10 @@ function pickSegment(unit, segs, { segment, paragraph }) {
     if (value === null || (value !== undefined && !String(value).trim())) throw new Error(`The ${name} selector cannot be empty or blank. Omit it for the first body segment, or choose a reference from get_text.`);
   }
   if (paragraph !== undefined) {
-    const index = segs.findIndex((s) => s.vri_paragraph != null && String(s.vri_paragraph) === String(paragraph).trim());
-    if (index < 0) throw new Error(`${unit.acronym} has no VRI paragraph ${paragraph}. Use get_text to see its paragraphs.`);
-    return index;
+    const matches = segs.flatMap((s, i) => s.vri_paragraph != null && String(s.vri_paragraph) === String(paragraph).trim() ? [i] : []);
+    if (!matches.length) throw new Error(`${unit.acronym} has no VRI paragraph ${paragraph}. Use ${unit.reader || 'get_text'} to see its paragraphs.`);
+    if (unit.uniqueParagraph && matches.length > 1) throw new Error(`VRI paragraph ${paragraph} matches ${matches.length} segments in ${unit.acronym}. Choose an exact segment reference from ${unit.reader}; no occurrence was selected.`);
+    return matches[0];
   }
   if (segment === undefined) {
     const index = segs.findIndex((s) => s.type !== 'heading');
@@ -256,11 +266,39 @@ function pickSegment(unit, segs, { segment, paragraph }) {
   }
   const raw = String(segment).trim();
   const m = raw.match(/^(?:(.+)\/)?(\d+)$/);
-  if (!m) throw new Error(`Segment "${raw}" is not a segment number or ref such as ${unit.id}/3 (refs come from get_text).`);
-  if (m[1] && m[1].toLowerCase() !== unit.id) throw new Error(`Segment ref ${raw} belongs to ${m[1]}, not ${unit.id}. Pass the matching uid.`);
+  if (!m) throw new Error(`Segment "${raw}" is not a segment number or ref such as ${unit.id}/3 (refs come from ${unit.reader || 'get_text'}).`);
+  if (m[1] && m[1].toLowerCase() !== unit.id.toLowerCase()) throw new Error(`Segment ref ${raw} belongs to ${m[1]}, not ${unit.id}. Pass the matching uid or book.`);
   const index = Number(m[2]) - 1;
   if (index < 0 || index >= segs.length) throw new Error(`${unit.acronym} has ${segs.length} segments; segment ${m[2]} does not exist.`);
   return index;
+}
+
+function selection(uid, book) {
+  if ((uid === undefined) === (book === undefined)) throw new Error('Give exactly one of uid (a canonical or post-canonical citation) and book (a complete VRI root-book ID).');
+  if (book !== undefined) {
+    const page = readBook({ book, limit: Number.MAX_SAFE_INTEGER });
+    return { unit: { id: `vri-book:${page.book_id}`, acronym: page.title, reader: 'get_text', uniqueParagraph: true },
+      segs: page.segments, notes: page.notes, source: page.source, extended: true,
+      metadata: { selection: 'source_book', canonical: true, book_id: page.book_id, title: page.title,
+        vri_file: page.vri_file, text_source: page.source } };
+  }
+  const input = romanizeInput(uid);
+  let resolved;
+  try { resolved = resolveReference(input.text); }
+  catch (error) {
+    if (!postcanonical.isPostCanonical(input.text)) throw error;
+    const sel = postcanonical.select(input.text);
+    const meta = postcanonical.describe(input.text);
+    const segs = postcanonical.segmentsOf(sel.book.blocks.slice(sel.start, sel.end))
+      .map((segment, i) => ({ ref: `${meta.citation}/${i + 1}`, ...segment }));
+    const { source, read_with, ...metadata } = meta;
+    return { unit: { id: meta.citation, acronym: meta.citation, reader: 'get_post_canonical', uniqueParagraph: true },
+      segs, notes: meta.notes, source, input, extended: true,
+      metadata: { ...metadata, content_type: 'post_canonical', text_source: source } };
+  }
+  const { unit, notes } = resolved;
+  return { unit, notes, input, segs: canon.segments(unit), source: canon.source(),
+    metadata: { text_id: unit.id, citation: unit.acronym, title: unit.title } };
 }
 
 /**
@@ -268,22 +306,21 @@ function pickSegment(unit, segs, { segment, paragraph }) {
  * headword, grammar, root and short meaning from DPD. `segment` is a get_text ref ("mn10/3") or
  * number; `paragraph` picks by VRI paragraph instead. Words are paged with offset/limit.
  */
-export function analysePassage({ uid, segment, paragraph, offset = 0, limit = 60 } = {}) {
-  const input = romanizeInput(uid);
-  const { unit, notes } = resolveReference(input.text);
-  const segs = canon.segments(unit);
+export function analysePassage({ uid, book, segment, paragraph, offset = 0, limit = 60 } = {}) {
+  const selected = selection(uid, book);
+  const { unit, notes, segs, source, input } = selected;
   if (!segs.length) throw new Error(`${unit.acronym} has no text to analyse.`);
   const index = pickSegment(unit, segs, { segment, paragraph });
   const seg = segs[index];
-  const tokens = tokenize(seg.text);
+  const tokens = selected.extended ? sourceTokens(seg.text) : tokenize(seg.text);
   const page = tokens.slice(offset, offset + limit);
   const words = page.flatMap((t) => analyseToken(t));
   const unknown = words.filter((w) => w.status === 'unknown').length;
   const outNotes = [...notes];
   if (segment === undefined && paragraph === undefined) outNotes.push(`No segment given: analysed the first body segment (${seg.ref}). Pass segment (e.g. "${unit.id}/${index + 1}") for another.`);
   return {
-    text_id: unit.id, citation: unit.acronym, title: unit.title, ...inputNote(input),
-    segment: { ref: seg.ref, type: seg.type, ...(seg.vri_paragraph ? { vri_paragraph: seg.vri_paragraph } : {}), text: seg.text },
+    ...selected.metadata, ...(input ? inputNote(input) : {}),
+    segment: selected.extended ? seg : { ref: seg.ref, type: seg.type, ...(seg.vri_paragraph ? { vri_paragraph: seg.vri_paragraph } : {}), text: seg.text },
     total_segments: segs.length,
     words_total: tokens.length, offset, limit, returned_tokens: page.length,
     next_offset: offset + page.length < tokens.length ? offset + page.length : null,
@@ -291,7 +328,8 @@ export function analysePassage({ uid, segment, paragraph, offset = 0, limit = 60
     ...(unknown ? { unknown_words: unknown } : {}),
     notes: outNotes,
     guidance: 'Dictionary analysis, not a translation or a ruling. DPD lists every possible parse of an inflected form and the deconstructor’s splits are computed suggestions; the right one depends on context. Quote the Pāli from segment.text and keep it distinct from these glosses.',
-    edition: 'Chaṭṭha Saṅgāyana Tipiṭaka (VRI), Pāli', text_attribution: canon.source().attribution,
+    edition: selected.metadata.canonical === false ? 'Chaṭṭha Saṅgāyana edition (VRI), post-canonical Pāli' : 'Chaṭṭha Saṅgāyana Tipiṭaka (VRI), Pāli', text_attribution: source.attribution, text_source: source,
+    ...(selected.extended ? { dictionary_coverage_note: 'The bundled inflection and deconstructor map was built for VRI root vocabulary. Other forms can remain unknown; no additional dictionary data is fetched.' } : {}),
     ...dpdNotice(),
   };
 }
@@ -346,10 +384,11 @@ export function lookupOffline({ word, limit = 5 } = {}) {
 
 /** MCP registration (feature registry: src/features/index.mjs). */
 export function register({ tool, z }) {
-  tool('analyse_passage', 'Word-by-word analysis of a passage of the bundled Pāli text from the Digital Pāḷi Dictionary (offline): for each word its compound or sandhi split, headword, grammar (case, number, tense), root and short meaning. Pass a citation and a segment ref from get_text (e.g. "mn10/3") or a VRI paragraph. Every possible parse is listed; dictionary glosses are not a translation. CC BY-NC-SA 4.0 notice included. Works offline.', {
-    uid: z.string().min(1).max(300).describe('Any citation get_text accepts, e.g. MN 10, SN 56.11, Dhp 183. Supported native-script letters and digits are converted and labelled; source segment refs and dictionary output stay Roman.'),
-    segment: z.union([z.string().trim().min(1).max(60), z.number().int().min(1)]).optional().describe('Segment ref from get_text such as "mn10/3", or its number (3). Give segment or paragraph, never both. Omit both for the first body segment; blank values are errors.'),
-    paragraph: z.union([z.string().trim().min(1).max(20), z.number().int().min(0)]).optional().describe('VRI paragraph number instead of segment. Give at most one selector; omit both for the first body segment.'),
+  tool('analyse_passage', 'Word-by-word analysis of retrieved Pāli from the bundled Digital Pāḷi Dictionary subset: compound or sandhi split, headword, grammar, root and short meaning. Give uid for a canonical or post-canonical citation, or book for a complete VRI root file, and a segment ref from its reader. Post-canonical text stays labelled not canon; source-file analysis does not infer a standard citation. The dictionary subset was built for canonical vocabulary; other words can be unknown. Every available parse is listed; glosses are not a translation. CC BY-NC-SA 4.0 notice included. Works offline.', {
+    uid: z.string().min(1).max(300).optional().describe('Canonical citation (MN 10) or post-canonical citation (Vism 1.1, Abhidh-s 1, mahavamsa 3). Native-script letters and digits are converted and labelled; source refs and analysis stay Roman. Give uid or book, not both.'),
+    book: z.string().trim().min(1).max(100).optional().describe('Complete VRI root-book ID from browse_canon node "books", as with get_text book mode. Give book instead of uid; source-file positions are not individual canonical identities.'),
+    segment: z.union([z.string().trim().min(1).max(200), z.number().int().min(1)]).optional().describe('Exact segment ref from get_text or get_post_canonical, or its number. Give segment or paragraph, never both. Omit both for the first body segment; blank values are errors.'),
+    paragraph: z.union([z.string().trim().min(1).max(20), z.number().int().min(0)]).optional().describe('Exact VRI paragraph label instead of segment. For complete-book/post-canonical selections, a label matching several segments is an error: choose an exact segment ref. Give at most one selector; omit both for the first body segment.'),
     offset: z.number().int().min(0).max(100000).default(0).describe('Word offset within the segment, for continuation.'),
     limit: z.number().int().min(1).max(200).default(60).describe('Words per call.'),
   }, (args) => analysePassage(args));

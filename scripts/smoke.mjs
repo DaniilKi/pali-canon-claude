@@ -109,6 +109,14 @@ try {
   await fails('resolve_reference', { reference: 'Vism p. 3' }, /PTS/);
   await call('analyse_passage', { uid: 'Dhp 183', limit: 4 }, (d) => { assert.ok(d.words.length); assert.match(JSON.stringify(d), /CC BY-NC-SA 4\.0/); });
   await call('analyse_passage', { uid: 'MN ๑๐', limit: 1 }, (d) => { assert.equal(d.text_id, 'mn10'); assert.equal(d.input_script, 'thai'); assert.equal(d.segment.ref, 'mn10/2'); assert.ok(d.words.length); });
+  await call('analyse_passage', { uid: 'Vism 1.1', segment: 'Vism 1.1/5', limit: 3 }, (d) => {
+    assert.equal(d.canonical, false); assert.equal(d.book.id, 'visuddhimagga-1');
+    assert.ok(!d.text_id); assert.ok(d.words.length); assert.match(d.dictionary_coverage_note, /remain unknown/);
+  });
+  await call('analyse_passage', { book: 'vin02m1', segment: 'vri-book:vin02m1/7', limit: 3 }, (d) => {
+    assert.equal(d.selection, 'source_book'); assert.equal(d.book_id, 'vin02m1');
+    assert.ok(!d.text_id && !d.citation); assert.equal(d.segment.text, 'Ime kho panāyasmanto dvenavuti pācittiyā');
+  });
   if (tools.some((t) => t.name === 'paritta')) await call('paritta', { name: 'Ratana' }, (d) => { assert.equal(d.text_id, 'kp6'); assert.ok(d.segments.length); });
   // English-keyboard input (#102)
   await call('resolve_reference', { reference: 'Satipatthana Sutta' }, (d) => { assert.equal(d.id, 'mn10'); assert.equal(d.matched_by, 'name'); });
