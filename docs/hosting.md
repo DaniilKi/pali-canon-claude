@@ -86,24 +86,41 @@ All settings are optional environment variables.
 | `PALI_CANON_CACHE_TTL_MINUTES` | `360` | How long a fetched page is kept (six hours). |
 | `CHATGPT_WIDGET` | off | `1` adds the ChatGPT reading view: one extra read-only tool, `read_passage_widget`, and its page. `fly.toml` and `render.yaml` turn it on. See [listings/chatgpt.md](listings/chatgpt.md). |
 
-The whole Pāli Canon is loaded at start-up so that reading and searching are fast, so the server needs
-a fair amount of memory. Measured on 1 November 2026 (Windows 11, Node.js 26, `server/http.cjs`): about
-290 MB right after start-up and about 345 MB at the peak of the 50-session load test below. Give it at
-least 512 MB, as `fly.toml` does.
+The full offline study tools retain several datasets and indexes in one server process. The shipped
+hosting templates now allocate **2 GB per instance** (`memory = "2gb"` on Fly; Render's
+[`1c-2g` compute plan](https://render.com/docs/compute-plans), previously called `standard`).
+This raises the configured resource tier; review the provider's current cost before deployment.
+Changing the template does not resize or deploy an existing service.
 
-The optional `verify_quote` tool builds a Pāli word index the first time a Pāli quotation is checked, and
-keeps it. This adds roughly 50 to 80 MB of resident memory for as long as the server runs, and during the
-build (about 4 seconds) memory can briefly be 100 MB or more above that starting point. With the 64 MB
-translation cache full as well, a server near the 345 MB load-test peak comes close to 512 MB on that first
-check. If the host restarts for lack of memory, give it 768 MB or set a smaller `PALI_CANON_CACHE_MB`.
-See [verify-quote.md](verify-quote.md#memory).
+On 7 November 2026, an isolated installed package at development commit `09b9523` was exercised with
+Node 20.20.2 in `node:20-slim`, using actual HTTP MCP requests and no outbound network. A fresh
+512 MiB Docker container completed initialization and a verse read, then its first `search_texts`
+request crashed the server with **JavaScript heap out of memory**. Under a 2 GiB container limit,
+the same sequential session completed reading, canonical search, word analysis, quotation verification,
+commentary search, post-canonical search, parallels and glossary lookup. Server process high-water
+RSS reached about **1,132 MiB**. A separate unrestricted Linux/Node 24 run reached about 1,235 MiB.
+These measurements supersede the earlier 512 MB recommendation based on a narrower reading load test.
 
-The bundled dictionary (`server/data/dpd.json.gz`, a subset of the Digital Pāḷi Dictionary) is loaded the
-first time `analyse_passage` is called or `lookup_pali` has to answer offline because dpdict.net cannot be
-reached, and it is then kept. Measured on 1 November 2026 (Windows 11, Node.js 26): about 0.9 s to load,
-about 170 MB more JavaScript heap and about 280 MB more resident memory. On top of the 345 MB load-test
-peak that is over 512 MB, so a host that offers `analyse_passage` should have 1 GB (or at least 768 MB with
-a smaller `PALI_CANON_CACHE_MB`).
+This is a representative working budget, not an upper bound: concurrent requests, cold index builds,
+platform differences and a full live-response cache can require more. Monitor the deployed instance
+and repeat realistic load tests before choosing its concurrency limit or reducing memory. Disabling
+the 64 MB live cache does not remove the bundled study datasets. Do not shrink V8's heap merely to
+fit a small instance; that can make an otherwise valid tool request abort the process.
+
+To reproduce the process measurements on Linux after building (or point `--server-dir` at an extracted
+npm package):
+
+```sh
+node scripts/profile-memory.mjs --server-dir server --budget-mb 2048 --report memory.json
+```
+
+The profiler starts a temporary isolated HTTP server, follows a fixed study sequence, records Linux
+`/proc` resident/high-water memory after each operation, blocks outbound requests, and cleans up the
+server. It exits nonzero if a tool fails or the measured peak exceeds the supplied MiB budget. It does
+not impose an operating-system memory limit itself. The **Hosted memory budget** CI job runs it inside
+a Docker container constrained to the Fly template's memory allocation, with swap and external
+networking disabled, and uploads the report. This does not establish actual-host or signed-in-client
+acceptance. See [verify-quote.md](verify-quote.md#memory) for the quotation index alone.
 
 ## Deploy on Fly.io
 
@@ -118,7 +135,7 @@ a smaller `PALI_CANON_CACHE_MB`).
    on, every release tag (`v*`) deploys automatically, and the *Deploy to Fly.io* workflow can be run by
    hand. Without the secret the workflow does nothing.
 
-`fly.toml` keeps one machine (shared CPU, 512 MB) always running so the first request is fast.
+`fly.toml` keeps one shared-CPU machine with 2 GB RAM always running so the first request is fast.
 
 ## Deploy on Render
 
@@ -129,7 +146,8 @@ a smaller `PALI_CANON_CACHE_MB`).
 3. The address will be `https://<service>.onrender.com/mcp`. The health check uses `/healthz`.
 
 Render's free plan sleeps when idle, so the first request after a pause can take up to a minute; the
-`starter` plan in `render.yaml` stays awake.
+`1c-2g` plan in `render.yaml` stays awake and supplies 2 GB RAM. The former 512 MB `starter`
+configuration was insufficient for the reproduced full-study session.
 
 ## Uptime monitoring
 

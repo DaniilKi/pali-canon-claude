@@ -4,7 +4,8 @@ services:
     name: pali-canon-mcp
     runtime: docker
     dockerfilePath: ./Dockerfile
-    plan: starter
+    # Full offline study session measured above 1 GB; see docs/hosting.md.
+    plan: 1c-2g
     healthCheckPath: /healthz
     autoDeploy: false
     envVars:

@@ -7,6 +7,40 @@ on:
 permissions:
   contents: read
 jobs:
+  hosted-memory:
+    name: Hosted memory budget
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Pack the committed server
+        run: |
+          mkdir -p "$RUNNER_TEMP/memory-package" "$RUNNER_TEMP/memory-report"
+          npm pack --pack-destination "$RUNNER_TEMP/memory-package"
+          tar -xzf "$RUNNER_TEMP/memory-package/"*.tgz -C "$RUNNER_TEMP/memory-package"
+      - name: Exercise offline tools under the Fly template's memory limit
+        run: |
+          memory=$(sed -n 's/^  memory = "\([^"]*\)"/\1/p' fly.toml)
+          test -n "$memory"
+          docker run --rm --memory "$memory" --memory-swap "$memory" --network none \
+            --user "$(id -u):$(id -g)" --cap-drop ALL --security-opt no-new-privileges \
+            --mount "type=bind,src=$RUNNER_TEMP/memory-package/package,dst=/package,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/scripts,dst=/app/scripts,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/node_modules,dst=/app/node_modules,readonly" \
+            --mount "type=bind,src=$RUNNER_TEMP/memory-report,dst=/report" \
+            node:20-slim node /app/scripts/profile-memory.mjs \
+            --server-dir /package/server --budget-mb 2048 --report /report/memory.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hosted-memory-report
+          path: ${{ runner.temp }}/memory-report/memory.json
+          if-no-files-found: warn
   reader-browser:
     name: Chromium reader
     runs-on: ubuntu-latest

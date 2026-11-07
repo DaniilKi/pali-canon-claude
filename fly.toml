@@ -33,4 +33,5 @@ primary_region = "iad"
 
 [[vm]]
   size = "shared-cpu-1x"
-  memory = "512mb"
+  # Full offline search and study datasets exceed 512 MB; see docs/hosting.md.
+  memory = "2gb"

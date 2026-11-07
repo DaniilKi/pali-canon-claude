@@ -68,7 +68,7 @@ Before sending, fill in the maintainer's name and reply-to address in each lette
 
 ## Hosting
 
-- [ ] **Give the hosted server 1 GB before it offers `analyse_passage`** — the bundled DPD subset adds about 280 MB of resident memory once loaded, which takes the 345 MB load-test peak over 512 MB. Raise the Fly machine to 1 GB (`memory` under `[[vm]]` in `fly.toml`), or to 768 MB with a smaller `PALI_CANON_CACHE_MB`, before deploying this version (D56) — [docs/hosting.md](docs/hosting.md)
+- [ ] **Verify the hosted memory allocation and cost before deployment** — both templates now allocate 2 GB after a 512 MiB container crashed on the first canonical search. The installed full-study session completes under 2 GiB; CI checks that budget (D162). Confirm the chosen provider's current tier and price, then test actual-host memory and concurrent load before deployment. No live service was resized by the template change — [docs/hosting.md](docs/hosting.md)
 
 ## Repository settings
 
