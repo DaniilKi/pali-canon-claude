@@ -22817,6 +22817,7 @@ function searchTerms(query, fold8) {
   return [...phrases, ...words3];
 }
 var hasSearchQuotes = (query) => /["“”]/u.test(query);
+var hasSearchPhrase = (query) => /"[^"]+"|“[^”]+”/u.test(query);
 function searchReading(rendered, command, start2, end, prefix) {
   const index4 = rendered.findIndex((s) => s.source_blocks[0] <= start2 && s.source_blocks[1] >= end);
   if (index4 < 0) throw new Error("Search passage has no containing source reading segment.");
@@ -24803,10 +24804,19 @@ function normalizationNote(n) {
     note: `Read "${n.original}" as "${n.text}" (${[...new Set(n.changes.map((c) => c.rule))].join(", ")}). These spellings are inferred from the input, not given by you; check them against the result.`
   };
 }
-async function withNormalised(value, fn) {
+var preserveSearchInput = (result) => ({
+  ...result,
+  query_mode: "as_typed_phrase",
+  query_note: "Quoted source wording matched as entered, so no keyboard-spelling rewrite was applied. Matching remains case-, diacritic- and whitespace-insensitive; source spelling, alignment and uniqueness are not verified."
+});
+async function withNormalised(value, fn, { preferSource = false } = {}) {
   if (typeof value !== "string" || !value.trim()) return fn(value);
   const n = normalizeInput(value);
   if (!n.changed) return fn(value);
+  if (preferSource) {
+    const original = await fn(value);
+    if (original?.total_matched > 0 || original?.total_texts_matched > 0) return preserveSearchInput(original);
+  }
   try {
     const r = await fn(n.text);
     return r && typeof r === "object" && !Array.isArray(r) ? { ...r, input_normalised: normalizationNote(n) } : r;
@@ -25594,7 +25604,9 @@ async function search2(query, { limit = 10, offset = 0, books, section } = {}) {
 async function withPostCanonical(canonResult, query, { include = false, limit = 10, offset = 0 } = {}) {
   if (!include) return canonResult;
   try {
-    return { ...canonResult, post_canonical: await search2(query, { limit, offset }) };
+    const run = (q) => search2(q, { limit, offset });
+    const result = isSourcePhrase(query) ? { ...await run(query), ...searchInputNote({ source_phrase: true }) } : await withNormalised(query, run, { preferSource: hasSearchPhrase(query) });
+    return { ...canonResult, post_canonical: result };
   } catch (error2) {
     return { ...canonResult, post_canonical: { canonical: false, error: error2.message } };
   }
@@ -25635,7 +25647,7 @@ function register({ tool, z }) {
     if (script) scriptName(script);
     const input = romanizeSearchInput(query);
     const run = (q) => search2(q, { books, section, limit, offset });
-    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run);
+    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run, { preferSource: hasSearchPhrase(input.text) });
     return localizePostCanonical({ ...result, ...searchInputNote(input) }, script, input);
   });
 }
@@ -32037,7 +32049,7 @@ function register18({ tool, z }) {
     if (script) scriptName(script);
     const input = romanizeSearchInput(query);
     const run = (value) => search3(value, { books, offset, limit });
-    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run);
+    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run, { preferSource: hasSearchPhrase(input.text) });
     return localizeCommentary({ ...result, ...searchInputNote(input) }, script, input);
   });
 }
@@ -32126,7 +32138,7 @@ function register19({ tool, z }) {
     const output = scriptName(script);
     const input = romanizeSearchInput(query);
     const run = (text) => search4(text, { book, offset, limit });
-    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run);
+    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run, { preferSource: hasSearchPhrase(input.text) });
     const localized = localizeSearch({ ...result, ...searchInputNote(input) }, output, input);
     localized.results = localized.results.map((hit) => ({
       ...hit,
@@ -32178,6 +32190,10 @@ function searchWithInput(query, { collection, limit = 10, offset = 0, english: e
     return { ...search(query, opts), ...searchInputNote({ source_phrase: true }) };
   }
   const n = normalizeInput(query);
+  if (english2 !== "only" && n.changed && hasSearchPhrase(query)) {
+    const original = search(query, opts);
+    if (original.total_texts_matched > 0) return preserveSearchInput(original);
+  }
   const note = normalizationNote(n);
   const wordCount = (query.match(/[A-Za-z]+/g) || []).length;
   const mostlyAsTyped = !n.changed || n.changes.length * 2 < wordCount;
@@ -32547,7 +32563,7 @@ function createServer({ executeTool } = {}) {
     if (include_post_canonical && collection) {
       return { ...result, post_canonical: { canonical: false, searched: false, results: [], note: `Not searched: collection "${collection}" limits the search to that part of the canon. Search the post-canonical books without collection, or with search_post_canonical.` } };
     }
-    const out = await withPostCanonical(result, searched.input_normalised?.read_as ?? input.text, { include: include_post_canonical, limit, offset });
+    const out = await withPostCanonical(result, input.text, { include: include_post_canonical, limit, offset });
     if (out.post_canonical && !out.post_canonical.error) out.post_canonical = localizePostCanonical(out.post_canonical, script);
     return out;
   });

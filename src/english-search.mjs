@@ -7,8 +7,8 @@
  *     (aspirates, doubled consonants, ny/ñ, ṃ/n), labelled spelling_note.
  */
 import * as canon from './canon.mjs';
-import { hasSearchQuotes, assertSearchQuery, isSourcePhrase, searchInputNote } from './search-segments.mjs';
-import { normalizeInput, normalizationNote, spellingVariants, canonSpellings } from './input.mjs';
+import { hasSearchQuotes, hasSearchPhrase, assertSearchQuery, isSourcePhrase, searchInputNote } from './search-segments.mjs';
+import { normalizeInput, normalizationNote, spellingVariants, canonSpellings, preserveSearchInput } from './input.mjs';
 import { looksEnglish, expandEnglish, paliWordsInEnglish } from './glossary.mjs';
 
 /** Fewer texts than this triggers the spelling-variant retry. */
@@ -52,6 +52,10 @@ export function searchWithInput(query, { collection, limit = 10, offset = 0, eng
     return { ...canon.search(query, opts), ...searchInputNote({ source_phrase: true }) };
   }
   const n = normalizeInput(query);
+  if (english !== 'only' && n.changed && hasSearchPhrase(query)) {
+    const original = canon.search(query, opts);
+    if (original.total_texts_matched > 0) return preserveSearchInput(original);
+  }
   const note = normalizationNote(n);
   // A rewritten word does not stop an English question from being expanded when most of its words are left as typed.
   const wordCount = (query.match(/[A-Za-z]+/g) || []).length;

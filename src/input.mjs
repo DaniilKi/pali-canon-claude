@@ -287,14 +287,23 @@ export function normalizationNote(n) {
   };
 }
 
+export const preserveSearchInput = result => ({ ...result, query_mode: 'as_typed_phrase',
+  query_note: 'Quoted source wording matched as entered, so no keyboard-spelling rewrite was applied. Matching remains case-, diacritic- and whitespace-insensitive; source spelling, alignment and uniqueness are not verified.' });
+
 /**
  * Run fn on the normalised value; label the result (input_normalised) when the input was rewritten. If the rewritten
- * value fails and the value as typed succeeds, the typed value wins, unlabelled. Works with sync and async fn.
+ * value fails and the value as typed succeeds, the typed value wins, unlabelled. Search callers can prefer
+ * a quoted source match before inference; total counts (not the current result page) decide that preference.
+ * Works with sync and async fn.
  */
-export async function withNormalised(value, fn) {
+export async function withNormalised(value, fn, { preferSource = false } = {}) {
   if (typeof value !== 'string' || !value.trim()) return fn(value);
   const n = normalizeInput(value);
   if (!n.changed) return fn(value);
+  if (preferSource) {
+    const original = await fn(value);
+    if (original?.total_matched > 0 || original?.total_texts_matched > 0) return preserveSearchInput(original);
+  }
   try {
     const r = await fn(n.text);
     return r && typeof r === 'object' && !Array.isArray(r) ? { ...r, input_normalised: normalizationNote(n) } : r;

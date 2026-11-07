@@ -8,6 +8,7 @@ import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {SCRIPTS,transliterate} from '../src/script.mjs';
 import {sourceGrammarFixtures} from './evidence/source-phrases.mjs';
 import {sourceQuoteFixtures} from './evidence/source-quotes.mjs';
+import {auditQuotedWording} from './evidence/quoted-wording.mjs';
 import {StdioClientTransport} from '@modelcontextprotocol/sdk/client/stdio.js';
 import {StreamableHTTPClientTransport} from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 function option(name) { const i=process.argv.indexOf(name); if(i<0)return; assert.ok(process.argv[i+1]&&!process.argv[i+1].startsWith('--'),`${name} requires a path`);return resolve(process.argv[i+1]); }
@@ -67,8 +68,9 @@ try {
   const canonical=sourceQuoteFixtures().find(f=>f.text.includes('ऋ')),root=await call('search_texts',{query:'"'+canonical.text+'"',collection:'ne37',limit:1});assert.ok(!root.isError);assert.equal(root.structuredContent.query_mode,'source_phrase');assert.equal(root.structuredContent.results[0].id,'ne37');const {tool:rootTool,...rootArgs}=root.structuredContent.results[0].read_with,rootRead=await call(rootTool,rootArgs);assert.ok(!rootRead.isError);assert.ok(rootRead.structuredContent.segments.some(s=>s.text.includes(canonical.text)));
   const combined=await call('search_texts',{query:'“'+fixtures[0].phrase+'”',include_post_canonical:true,limit:1});assert.ok(!combined.isError);assert.equal(combined.structuredContent.query_mode,'source_phrase');assert.ok(combined.structuredContent.post_canonical.total_matched>0);assert.equal(combined.structuredContent.post_canonical.canonical,false);
 
+  const quotedWording=await auditQuotedWording({callTool:params=>call(params.name,params.arguments)});
   assert.doesNotMatch(stderr,/UNEXPECTED_NETWORK_ATTEMPT/);
-  reports.push({transport:mode,requests,scripts:SCRIPTS.length,search_tools:4,unsupported_letters_not_discarded:true,complete_native_conversion:true,phrase_and_pagination_parity:true,source_commands_and_cautions_retained:true,english_modes_guarded:true,quoted_roman_source_marks_preserved:true,grammar_source_cases:fixtures.length,source_glyphs_and_context_preserved:true,unsupported_numerals_not_discarded:true,network_attempts:0});
+  reports.push({transport:mode,requests,scripts:SCRIPTS.length,search_tools:4,unsupported_letters_not_discarded:true,complete_native_conversion:true,phrase_and_pagination_parity:true,source_commands_and_cautions_retained:true,english_modes_guarded:true,quoted_roman_source_marks_preserved:true,grammar_source_cases:fixtures.length,source_glyphs_and_context_preserved:true,unsupported_numerals_not_discarded:true,quoted_wording:quotedWording,network_attempts:0});
   await client.close();client=null;
   if(child&&child.exitCode===null&&child.signalCode===null){const ended=new Promise(r=>child.once('exit',r));child.kill();await ended;}child=null;
  }

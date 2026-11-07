@@ -2,7 +2,7 @@
 import * as commentary from './commentary.mjs';
 import { fold } from './canon.mjs';
 import { withNormalised } from './input.mjs';
-import { searchFold, searchExcerpt, searchTerms, romanizeSearchInput, searchInputNote } from './search-segments.mjs';
+import { searchFold, searchExcerpt, searchTerms, romanizeSearchInput, searchInputNote, hasSearchPhrase } from './search-segments.mjs';
 import { localizeCommentary, SCRIPT_DESCRIPTION, scriptName } from './script.mjs';
 
 // Bound retained folded text; the source corpus itself is already resident once loaded.
@@ -84,7 +84,7 @@ export function register({ tool, z }) {
     if (script) scriptName(script);
     const input = romanizeSearchInput(query);
     const run = value => search(value, { books, offset, limit });
-    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run);
+    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run, { preferSource: hasSearchPhrase(input.text) });
     return localizeCommentary({ ...result, ...searchInputNote(input) }, script, input);
   });
 }

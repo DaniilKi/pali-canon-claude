@@ -356,6 +356,16 @@ Before falling back from an unrecorded range to its first text, canonical resolu
 
 The shared input normalizer preserves paired straight phrase quotes at word boundaries before applying spelling rules to their contents. An opening quote before `n` is a phrase delimiter in `"namo tassa"`; it must not be consumed as the Velthuis marker for `ṅ`. Words inside the phrase can still be normalized, with the existing labelled changes, while internal markers such as `sa"nkhaara` retain their Velthuis role. An unpaired word-initial marker retains its existing encoding behavior.
 
+All four source-search tools first keep quoted wording when it matches in the selected Pāli source
+before a proposed keyboard rewrite. For example, `"abalaabalo"` occurs in Niruttidīpanī and must not
+be replaced by `"abalābalo"` and reported absent. Such results use `query_mode: "as_typed_phrase"`;
+matching remains case-, diacritic- and whitespace-insensitive, so this is not verification of spelling,
+alignment or uniqueness. If the entered quoted wording has no source matches, labelled keyboard
+normalization remains available. Unquoted input retains its inference behavior. Counts across the
+whole selected scope decide this preference even when the requested page is empty. Combined
+canonical/post-canonical search makes the decision independently for each corpus; a canonical
+`input_normalised` note must not be applied to the post-canonical result.
+
 `tests/normalised-search-quotes.test.mjs` checks delimiters, line breaks, spelling conversion within phrases and Velthuis markers alongside phrases. It compares straight and curly quote results through all three MCP search tools. The installed-package audit repeats these checks and verifies that a missing phrase remains missing rather than turning into loose keyword matches. Quotation verification and provider fetching are unchanged.
 
 ## Proper-name title evidence

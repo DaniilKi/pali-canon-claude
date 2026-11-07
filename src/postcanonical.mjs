@@ -1,4 +1,4 @@
-import { searchSegments, searchFold, searchExcerpt, searchTerms, romanizeSearchInput, searchInputNote, searchReading } from './search-segments.mjs';
+import { searchSegments, searchFold, searchExcerpt, searchTerms, romanizeSearchInput, searchInputNote, searchReading, hasSearchPhrase, isSourcePhrase } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * Post-canonical Pāli books of the VRI Chaṭṭha Saṅgāyana edition: the sub-commentaries (Ṭīkā) and the
@@ -620,7 +620,10 @@ export async function search(query, { limit = 10, offset = 0, books, section } =
 export async function withPostCanonical(canonResult, query, { include = false, limit = 10, offset = 0 } = {}) {
   if (!include) return canonResult;
   try {
-    return { ...canonResult, post_canonical: await search(query, { limit, offset }) };
+    const run = q => search(q, { limit, offset });
+    const result = isSourcePhrase(query) ? { ...await run(query), ...searchInputNote({ source_phrase: true }) }
+      : await withNormalised(query, run, { preferSource: hasSearchPhrase(query) });
+    return { ...canonResult, post_canonical: result };
   } catch (error) {
     return { ...canonResult, post_canonical: { canonical: false, error: error.message } };
   }
@@ -659,7 +662,7 @@ export function register({ tool, z }) {
     if (script) scriptName(script);
     const input = romanizeSearchInput(query);
     const run = q => search(q, { books, section, limit, offset });
-    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run);
+    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run, { preferSource: hasSearchPhrase(input.text) });
     return localizePostCanonical({ ...result, ...searchInputNote(input) }, script, input);
   });
 }

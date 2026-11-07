@@ -223,7 +223,7 @@ export function createServer({executeTool} = {}) {
     if (include_post_canonical && collection) {
       return { ...result, post_canonical: { canonical: false, searched: false, results: [], note: `Not searched: collection "${collection}" limits the search to that part of the canon. Search the post-canonical books without collection, or with search_post_canonical.` } };
     }
-    const out = await postcanonical.withPostCanonical(result, searched.input_normalised?.read_as ?? input.text, { include: include_post_canonical, limit, offset });
+    const out = await postcanonical.withPostCanonical(result, input.text, { include: include_post_canonical, limit, offset });
     if (out.post_canonical && !out.post_canonical.error) out.post_canonical = localizePostCanonical(out.post_canonical, script);
     return out;
   });

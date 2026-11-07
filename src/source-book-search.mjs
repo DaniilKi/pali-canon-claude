@@ -1,7 +1,7 @@
 // Search complete root files, including source passages outside standard citation spans.
 import { readBook } from './source-books.mjs';
 import { fold } from './canon.mjs';
-import { searchFold, searchTerms, searchExcerpt, romanizeSearchInput, searchInputNote } from './search-segments.mjs';
+import { searchFold, searchTerms, searchExcerpt, romanizeSearchInput, searchInputNote, hasSearchPhrase } from './search-segments.mjs';
 import { withNormalised } from './input.mjs';
 import { localizeSearch, scriptName, SCRIPT_DESCRIPTION } from './script.mjs';
 
@@ -63,7 +63,7 @@ export function register({ tool, z }) {
     const output = scriptName(script);
     const input = romanizeSearchInput(query);
     const run = text => search(text, { book, offset, limit });
-    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run);
+    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run, { preferSource: hasSearchPhrase(input.text) });
     const localized = localizeSearch({ ...result, ...searchInputNote(input) }, output, input);
     localized.results = localized.results.map((hit) => ({ ...hit,
       read_with: { ...hit.read_with, script: output }, context_with: { ...hit.context_with, script: output } }));

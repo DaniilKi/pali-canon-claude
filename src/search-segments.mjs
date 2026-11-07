@@ -50,6 +50,7 @@ export function searchTerms(query, fold) {
 
 // Even an unmatched quote must not silently opt into loose spelling/keyword retries.
 export const hasSearchQuotes = (query) => /["“”]/u.test(query);
+export const hasSearchPhrase = (query) => /"[^"]+"|“[^”]+”/u.test(query);
 
 /** Map a search passage to the reader's actual source bounds, never by repeated paragraph numbers/text. */
 export function searchReading(rendered, command, start, end, prefix) {
