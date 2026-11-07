@@ -26523,6 +26523,9 @@ async function verifyEnglish(text, texts, limit, fetchTranslation) {
 }
 var ENGLISH_WORDS = new Set("the and is are was were be been of to you your a an not with in into that this these those it its what which who by for from will would shall should can cannot could all we our us they them their there than as at do does did have has had my if but or when where only his her he she i nothing everything one own every how why more most never always".split(" "));
 function detectLanguage(text) {
+  const input = romanizeLookupInput(text);
+  if (input.original) return "pali";
+  text = input.text;
   if (PALI_HINT.test(text)) return "pali";
   const q = words(fold3(text));
   if (!q.length) return "english";
@@ -26537,8 +26540,8 @@ function verdictFor(best) {
   return "not_found_in_scope";
 }
 var EXPLAIN = {
-  found: "The quotation matches the text cited below.",
-  close_paraphrase: "Similar wording was found, but not an exact match: compare the quotation with the passage cited below.",
+  found: "The quotation meets the normalized similarity threshold for the text cited below. Compare the source wording; this does not establish verbatim wording or authorship.",
+  close_paraphrase: "Similar wording was found below the match threshold. Compare the quotation with the cited source; this does not establish verbatim wording.",
   not_found_in_scope: "No matching passage was found in the texts searched (see scope). This only describes those texts: the saying may come from a commentary, a later work, another translation, or a modern author.",
   not_found_in_scope_english: "No translation searched has this wording (see scope). This is not a finding about the saying itself. Popular English wordings are often older or freer translations of a real verse, which can share few words with the translations searched: check the P\u0101li of the passage (see next_step), or name other texts in `texts`. A saying may also come from a commentary, a later work or a modern author."
 };
@@ -26550,20 +26553,29 @@ function tieNote(ties) {
 async function verifyQuote({ text, language = "auto", texts, limit = 5 }, { fetchTranslation = translation } = {}) {
   const quote = String(text ?? "").trim();
   if (quote.length < 8) throw new Error("Give at least a few words of the quotation.");
-  const lang = language === "auto" || !language ? detectLanguage(quote) : language;
-  const comparisonWords = words(lang === "pali" ? fold3(quote) : englishFold(quote));
+  const input = romanizeLookupInput(quote);
+  if (input.original && language === "english") throw new Error("Native-script quotation input is supported as P\u0101li. Choose language pali or auto; English mode requires an English quotation in Roman script.");
+  const comparisonText = input.text.trim();
+  const lang = language === "auto" || !language ? input.original ? "pali" : detectLanguage(comparisonText) : language;
+  const comparisonWords = words(lang === "pali" ? fold3(comparisonText) : englishFold(comparisonText));
   if (comparisonWords.length > MAX_QUERY_WORDS) throw new Error(`Give at most ${MAX_QUERY_WORDS} words. Split a longer quotation into shorter excerpts; no partial comparison was performed.`);
-  const result = lang === "pali" ? verifyPali(quote, limit) : await verifyEnglish(quote, texts, limit, fetchTranslation);
+  const result = lang === "pali" ? verifyPali(comparisonText, limit) : await verifyEnglish(comparisonText, texts, limit, fetchTranslation);
   const best = result.matches[0]?.similarity ?? 0;
   const verdict = verdictFor(best);
   const notFoundEnglish = verdict === "not_found_in_scope" && lang === "english";
   const note = verdict === "not_found_in_scope" ? void 0 : tieNote(result.ties);
   return {
     quote,
+    ...inputNote(input),
     language: lang,
     verdict,
     explanation: EXPLAIN[notFoundEnglish ? "not_found_in_scope_english" : verdict],
     best_similarity: best,
+    comparison: {
+      method: "normalized_fuzzy",
+      verbatim: "not_assessed",
+      note: "Case, diacritics and punctuation are normalized; P\u0101li spacing is also normalized. Native P\u0101li input is transliterated to Roman first. Even a similarity of 1 does not establish verbatim wording, a unique source or authorship."
+    },
     ...note ? { equally_similar_texts: result.ties.texts, equally_similar_at_least: result.ties.at_least, citation_note: note } : {},
     ...notFoundEnglish ? { next_step: NEXT_STEP_ENGLISH } : {},
     matches: verdict === "not_found_in_scope" ? result.matches.slice(0, 3) : result.matches,
@@ -26574,8 +26586,8 @@ async function verifyQuote({ text, language = "auto", texts, limit = 5 }, { fetc
 }
 function register3({ tool, z }) {
   tool("verify_quote", "Check whether a quotation attributed to the Buddha appears in the texts: a P\u0101li quotation is matched (fuzzily) against the whole bundled P\u0101li Tipi\u1E6Daka offline; an English one against the linked English translations of the texts you name (default: the Dhammapada), fetched live. Returns the best matches with citation and similarity, a verdict (found, close_paraphrase, not_found_in_scope) and exactly what was searched.", {
-    text: z.string().trim().min(8).max(2e3).describe("The quotation to check: at most 120 words and 2,000 characters. Split longer quotations into shorter excerpts."),
-    language: z.enum(["auto", "pali", "english"]).default("auto").describe('Language of the quotation; "auto" detects it.'),
+    text: z.string().trim().min(8).max(2e3).describe("The quotation to check: P\u0101li in Roman or a supported native script (converted and labelled), or English in Roman script. At most 120 comparison words and 2,000 input characters; split longer quotations into shorter excerpts."),
+    language: z.enum(["auto", "pali", "english"]).default("auto").describe('Language of the quotation; "auto" detects Roman input and treats supported native-script input as P\u0101li. This is mechanical transliteration, not translation. Native input with explicit English mode is refused.'),
     texts: z.array(z.string().min(1).max(300)).max(12).optional().describe('English only: citations whose linked translations to search (e.g. ["AN 3.65", "Snp 1.8"]). Default: all chapters of the Dhammapada.'),
     limit: z.number().int().min(1).max(10).default(5)
   }, (args) => verifyQuote(args), { network: true });

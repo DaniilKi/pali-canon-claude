@@ -1,0 +1,67 @@
+// Audit packaged native Pāli quotation verification with normalized-match/source cautions; no real network access.
+import assert from 'node:assert/strict';
+import {cp, mkdtemp, mkdir, rm, writeFile} from 'node:fs/promises';
+import {spawn} from 'node:child_process';
+import {tmpdir} from 'node:os';
+import {join, resolve} from 'node:path';
+import {Client} from '@modelcontextprotocol/sdk/client/index.js';
+import {SCRIPTS,transliterate} from '../src/script.mjs';
+import * as canon from '../src/canon.mjs';
+import {verifyQuote} from '../src/verify.mjs';
+import {StdioClientTransport} from '@modelcontextprotocol/sdk/client/stdio.js';
+import {StreamableHTTPClientTransport} from '@modelcontextprotocol/sdk/client/streamableHttp.js';
+function option(name) { const i=process.argv.indexOf(name); if(i<0)return; assert.ok(process.argv[i+1]&&!process.argv[i+1].startsWith('--'),`${name} requires a path`);return resolve(process.argv[i+1]); }
+const serverDir=option('--server-dir')||resolve('server'), reportPath=option('--report');
+let stage, child, timer, client;
+const reports=[];
+try {
+ stage=await mkdtemp(join(tmpdir(),'pali-native-verification-'));await cp(serverDir,join(stage,'server'),{recursive:true});await mkdir(join(stage,'empty'));
+ const guard=join(stage,'synthetic-provider.cjs');
+ await writeFile(guard,`const fail=()=>{console.error('UNEXPECTED_NETWORK_ATTEMPT');throw Error('UNEXPECTED_NETWORK_ATTEMPT')};globalThis.fetch=fail;for(const n of ['node:http','node:https']){const m=require(n);m.request=fail;m.get=fail}const net=require('node:net');net.connect=fail;net.createConnection=fail;require('node:module').syncBuiltinESMExports();`);
+ for(const mode of ['stdio','http']) {
+  client=new Client({name:'installed-native-verification',version:'1'});let stderr='';
+  const env={...process.env,PALI_CANON_CACHE_MB:'0',HOST:'127.0.0.1',PORT:'0',CHATGPT_WIDGET:'1',RATE_LIMIT_PER_MINUTE:'0'};
+  if(mode==='stdio') {
+   const t=new StdioClientTransport({command:process.execPath,args:['--require',guard,join(stage,'server/index.cjs')],cwd:join(stage,'empty'),env,stderr:'pipe'});
+   t.stderr?.on('data',value=>{stderr+=value;});await client.connect(t);
+  } else {
+   child=spawn(process.execPath,['--require',guard,join(stage,'server/http.cjs')],{cwd:join(stage,'empty'),env,stdio:['ignore','ignore','pipe']});
+   const url=await new Promise((resolve,reject)=>{
+    timer=setTimeout(()=>reject(Error('Packaged HTTP server readiness timed out')),30000);
+    child.once('error',reject);child.once('exit',code=>reject(Error(`Packaged HTTP server exited (${code})`)));
+    child.stderr.on('data',value=>{stderr+=value;const m=stderr.match(/listening on (http:\/\/127\.0\.0\.1:\d+\/mcp)/);if(m){clearTimeout(timer);resolve(m[1]);}});
+   });await client.connect(new StreamableHTTPClientTransport(new URL(url)));
+  }
+  let requests=0,comparisons=0;
+  const json=value=>JSON.parse(JSON.stringify(value));
+  const call=async args=>{requests++;return client.callTool({name:'verify_quote',arguments:args});};
+  const read=async args=>{const r=await call(args);assert.ok(!r.isError,JSON.stringify(r.content));assert.deepEqual(JSON.parse(r.content[0].text),r.structuredContent);return r.structuredContent;};
+  const native=(value,script)=>transliterate(value,'roman',script);
+  const quoteFrom=ref=>canon.segments(canon.resolve(ref).unit).find(s=>s.type!=='heading').text.replace(/<[^>]+>/g,'').split(/\s+/).filter(w=>/\p{L}/u.test(w)).slice(0,12).join(' ');
+  function source(r){const {quote,input_script,input_romanized,...rest}=r;return json(rest);}
+  function cautious(r){assert.equal(r.comparison.method,'normalized_fuzzy');assert.equal(r.comparison.verbatim,'not_assessed');assert.match(r.comparison.note,/similarity of 1.*verbatim wording.*unique source or authorship/);assert.match(r.guidance,/not a judgement about who/);assert.equal(r.scope.attribution,canon.source().attribution);assert.equal(r.scope.terms,canon.source().terms);}
+  for(const ref of ['Dhp 183','MN 10','SN 56.11']){
+   const quote=quoteFrom(ref),expected=await verifyQuote({text:quote,language:'pali'});assert.equal(expected.verdict,'found');
+   for(const script of SCRIPTS)for(const language of ['pali','auto']){
+    const text=native(quote,script),r=await read({text,language});assert.deepEqual(source(r),source(expected));assert.equal(r.quote,text);assert.equal(r.input_script,script==='roman'?undefined:script);if(script!=='roman')assert.ok(r.input_romanized);cautious(r);comparisons++;
+    if(ref==='Dhp 183'){assert.ok(r.matches.some(m=>m.text_id==='dhp183'));assert.ok(r.equally_similar_texts>1);assert.match(r.citation_note,/not a unique source/);}
+   }
+  }
+  const normalized=await read({text:canon.fold(quoteFrom('Dhp 183')).toUpperCase().replace(/\s+/g,' , '),language:'pali'});assert.equal(normalized.best_similarity,1);cautious(normalized);assert.match(normalized.explanation,/normalized similarity/);
+  for(const script of SCRIPTS)for(const language of ['pali','auto']){const r=await call({text:native(Array(121).fill('sati').join(' '),script),language});assert.equal(r.isError,true);assert.match(JSON.parse(r.content[0].text).error,/120 words.*no partial comparison/);}
+  for(const text of ['สति สติ สติ','ส่ติ สติ สติ','漢sati sati sati字','ηsati sati sati'])for(const language of ['pali','auto','english']){const r=await call({text,language});assert.equal(r.isError,true);assert.match(JSON.parse(r.content[0].text).error,/converted completely/);}
+  const badMode=await call({text:native(quoteFrom('Dhp 183'),'thai'),language:'english'});assert.equal(badMode.isError,true);assert.match(JSON.parse(badMode.content[0].text).error,/English mode requires/);
+  assert.doesNotMatch(stderr,/UNEXPECTED_NETWORK_ATTEMPT/);
+  reports.push({transport:mode,requests,scripts:SCRIPTS.length,source_comparisons:comparisons,original_input_preserved:true,normalized_not_verbatim:true,repeated_sources_preserved:true,word_limits_and_invalid_modes_refused:true,source_parity:true,network_attempts:0});
+  await client.close();client=null;
+  if(child&&child.exitCode===null&&child.signalCode===null){const ended=new Promise(r=>child.once('exit',r));child.kill();await ended;}child=null;
+ }
+ const report={status:'passed',cases:reports,scope:'Isolated packaged native Pāli verification across eight scripts using bundled-source quotations; normalized fuzzy comparison is not verbatim proof, unique attribution or authorship. Not live-English, native-reader or signed-in-client acceptance.'};
+ if(reportPath)await writeFile(reportPath,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
+} catch(error) {
+ if(reportPath)await writeFile(reportPath,JSON.stringify({status:'failed',error:error.message})+'\n');throw error;
+} finally {
+ clearTimeout(timer);if(client)await client.close().catch(()=>{});
+ if(child&&child.exitCode===null&&child.signalCode===null){const ended=new Promise(r=>child.once('exit',r));child.kill();await ended;}
+ if(stage)await rm(stage,{recursive:true,force:true});
+}

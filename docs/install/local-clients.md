@@ -40,7 +40,7 @@ The server has 34 tools. Twenty-seven of them work without internet (`get_text` 
 | `analyse_passage` | Word-by-word analysis of canonical, post-canonical or complete-root-file Pāli using the bundled DPD subset; source labels remain distinct and unknown words are explicit | No |
 | `get_parallels` | Other texts that share a passage with this one, and texts the commentary cites, each link saying its source | No |
 | `glossary` | English → Pāli terms ("mindfulness" → sati) and Pāli in Roman/native scripts → short English glosses, from the Digital Pāḷi Dictionary's English index and the curated list glosses, each with its source | No |
-| `verify_quote` | Checks whether a quotation attributed to the Buddha is in the texts: Pāli against the whole bundled canon (offline), English against the linked translations of the texts you name (default: the Dhammapada) | Yes |
+| `verify_quote` | Checks whether a quotation attributed to the Buddha is in the texts: Roman/native Pāli against the bundled canon offline, English against linked translations; normalized fuzzy matches with explicit exactness limits | Yes |
 | `lookup_name` | Finds source-backed title/body occurrences of a Pāli name in Roman/native scripts (Sāriputta, Sāvatthī). DPPN entries are not bundled; the response exposes that licence gate. | No |
 | `topic` | Texts on a topic from Access to Insight's indexes; Pāli selectors accept Roman/native input with conversion labels and existing alternative matches | No |
 | `list_topics` | Browses or searches the topic index; native Pāli queries preserve filters, ranking and pagination | No |

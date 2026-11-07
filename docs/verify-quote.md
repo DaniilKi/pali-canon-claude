@@ -6,17 +6,19 @@ Many sayings shared online as "the Buddha said" are not in the early texts. `ver
 
 | Quotation in | Searched against | Network |
 |---|---|---|
-| **Pāli** | The whole bundled Pāli Tipiṭaka (VRI Chaṭṭha Saṅgāyana edition, 8,544 texts). Commentaries and later Pāli works are not included. | Offline |
+| **Pāli in Roman or a supported native script** | The whole bundled Pāli Tipiṭaka (VRI Chaṭṭha Saṅgāyana edition, 8,544 texts). Commentaries and later Pāli works are not included. | Offline |
 | **English** | The English translations linked to the texts you name (`texts`, up to 12 citations, at most 80 pages). Without `texts`, the 26 chapters of the Dhammapada: one page per translator ([Ṭhānissaro Bhikkhu](https://www.dhammatalks.org/suttas/KN/Dhp/), Acharya Buddharakkhita on [Access to Insight](https://www.accesstoinsight.org/tipitaka/kn/dhp/) and Ānandajoti Bhikkhu on [Ancient Buddhist Texts](https://ancient-buddhist-texts.net/)), 77 pages. | Live, cached like other translations |
 
-The language is detected automatically, or set `language` to `pali` or `english`. Text with Pāli diacritics is Pāli; text with common English words (the, is, you, of...) is English. Only when neither is clear does detection look words up in the Pāli index, which builds that index (see below).
+The language is detected automatically, or set `language` to `pali` or `english`. Supported native-script input is completely transliterated to Roman for Pāli comparison before language detection and word counting. Auto mode treats it as Pāli; this is a documented input assumption, not translation or a linguistic finding about regional-language prose. Explicit English mode refuses native input rather than changing the requested language. Incomplete mixed or unsupported script input returns an error before matching or fetching. Text with Pāli diacritics is Pāli; text with common English words (the, is, you, of...) is English. Only when neither is clear does detection look words up in the Pāli index, which builds that index (see below).
 
-Submit at most **120 words and 2,000 characters** at a time. Longer word sequences return an error asking for shorter excerpts; the tool does not silently verify a prefix and issue a verdict for the whole quotation.
+Submit at most **120 comparison words and 2,000 input characters** at a time. Native word counting uses the converted Pāli before any matching; an overlong quotation cannot bypass the limit by being written in another script. Longer word sequences return an error asking for shorter excerpts; the tool does not silently verify a prefix and issue a verdict for the whole quotation.
 
 ## What it returns
 
 - **verdict**: `found`, `close_paraphrase` or `not_found_in_scope`.
 - **matches**: the best passages, each with its citation (`text_id`, `citation`, segment, VRI paragraph, PTS page for Pāli; translator, URL, attribution and licence for English) and a **similarity** from 0 to 1.
+- **quote**, **input_script**, **input_romanized**: the trimmed original quotation is retained; native Pāli conversion is separately labelled. Source excerpts remain in the original Roman VRI form.
+- **comparison**: `method: "normalized_fuzzy"`, `verbatim: "not_assessed"`. A `found` verdict or similarity of `1` does not establish verbatim wording, a unique source or authorship. This distinction also applies to Roman and English input.
 - **scope**: exactly which texts and translations were searched, and any page that could not be retrieved.
 - **equally_similar_texts**, **citation_note**: present when the same wording matches several texts equally well, such as a stock opening ("Evaṃ me sutaṃ...") or a verse repeated in another book. The note gives the number of texts (with `equally_similar_at_least` when there are more than were counted) and says that the matches listed are the first in canon order, not a unique source.
 - **next_step**: for an English quotation that is not found, how to check the Pāli instead.
@@ -36,6 +38,8 @@ Text is lower-cased and diacritics and punctuation are removed (so *manopubbaṅ
 - Texts whose best passage scores the same as the best match (to two decimals) are counted as equally similar. Up to 200 equally strong candidates are compared, so a larger count is reported as "at least".
 
 English candidate retrieval and refinement stay within each fetched translation page. A preceding partial version cannot hide an exact match in the next source. Pāli group matches also retain any index-alignment caution; a recorded group is not proof that its members are separately aligned or that the edition abbreviates them. The reader's approximate badge describes the mapping rather than asserting source omission.
+
+Native-input tests compare all eight supported scripts and five pinned VRI script-edition samples with Roman controls. These are mechanical conversion/source checks, not a native-edition collation or native-reader approval; Lao and Lanna still await native-reader review.
 
 ## Memory
 
