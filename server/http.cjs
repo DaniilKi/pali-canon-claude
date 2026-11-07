@@ -33755,7 +33755,7 @@ function createServer2() {
 // src/chatgpt-widget.mjs
 var import_node_crypto2 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v9";
+var WIDGET_VERSION = "v10";
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 var MCP_APP_MIME = "text/html;profile=mcp-app";
@@ -33825,6 +33825,7 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
       pali: {
         ...page2.pali,
         ...context ? {} : { next_offset: null, continue_with: null },
+        read_with: { name: WIDGET_TOOL, arguments: { ...args, ...context ? { context } : {} } },
         context_with: !context && exact.pali.total_segments > 1 ? { name: WIDGET_TOOL, arguments: { ...args, context: 2 } } : null,
         exact_with: context ? { name: WIDGET_TOOL, arguments: args } : null
       },
@@ -33893,11 +33894,11 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
         ...surrounding,
         context_for: anchor,
         ...displayed.english_error ? { english_error: displayed.english_error } : {},
-        pali: { ...surrounding.pali, context_with: null, exact_with: { name: WIDGET_TOOL, arguments: args } }
+        pali: { ...surrounding.pali, read_with: { name: WIDGET_TOOL, arguments: { ...args, context } }, context_with: null, exact_with: { name: WIDGET_TOOL, arguments: args } }
       };
     }
     const parentPage = getCommentary(parent, { limit: 1 });
-    return { ...displayed, pali: { ...displayed.pali, context_with: parentPage.total_segments > 1 ? { name: WIDGET_TOOL, arguments: { ...args, context: 2 } } : null, exact_with: null } };
+    return { ...displayed, pali: { ...displayed.pali, read_with: { name: WIDGET_TOOL, arguments: args }, context_with: parentPage.total_segments > 1 ? { name: WIDGET_TOOL, arguments: { ...args, context: 2 } } : null, exact_with: null } };
   }
   if (book !== void 0) {
     const page2 = readBook({ book, offset, limit });
@@ -34023,6 +34024,7 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
         next_offset: t.next_offset,
         truncated: t.next_offset !== null,
         notes: t.notes,
+        read_with: { name: WIDGET_TOOL, arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.offset, ...script ? { script: scriptName(script) } : {} } },
         continue_with: t.next_offset !== null ? {
           name: WIDGET_TOOL,
           arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset, ...script ? { script: scriptName(script) } : {} }
@@ -34051,6 +34053,7 @@ function widgetDisplay(result, { input, script, uid, book, commentary, wantEngli
   return { ...result, ...display, pali: {
     ...result.pali,
     segments: segments2,
+    read_with: { name: WIDGET_TOOL, arguments: { ...args, english: false, offset: result.pali.offset } },
     continue_with: result.pali.next_offset === null ? null : { name: WIDGET_TOOL, arguments: args }
   } };
 }
@@ -34143,13 +34146,92 @@ var WIDGET_HTML = `<!doctype html>
   <section class="col" aria-labelledby="en-h"><h2 id="en-h">English</h2><div id="english"></div></section>
 </main>
 <nav id="navigation" aria-label="Passage navigation"></nav>
+<p id="context-status" class="note" role="note" aria-live="polite" aria-atomic="true" style="padding:0 16px">Reading-context sharing has not been established.</p>
 <footer id="footer"></footer>
 <script>
 (function () {
   var rendered = null;
   var generation = 0, requestId = 2, pending = null, serverTools = false, awaitingSelection = false, lastInput, lastOutput, lastMetadata;
+  var modelCapabilities, modelChannel, modelModality, modelDesired, modelFlight, modelAccepted, modelFailure, modelRevision = 0, modelBlocked = false;
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = String(text); return e; }
   function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+  function modelStatus(message) { document.getElementById('context-status').textContent = message; }
+  function modelAdvice() { return modelDesired && modelDesired.snapshot.state === 'displayed' ? ' Tell the assistant the displayed citation.' : ' No current reading has been confirmed for the assistant.'; }
+  function vacantContext(state) { return { schema: 'pali-reader-selection-v1', widget_version: '${WIDGET_VERSION}', state: state,
+    quotation: state === 'loading' ? 'A new reading is pending; do not assume an earlier page is the requested selection.' : 'No retrieved passage is displayed. Reopen a source before quoting.' }; }
+  function readingContext(d) {
+    if (!d || !d.pali) return vacantContext('error');
+    var source = d.source || {}, book = d.book || {}, p = d.pali, e = d.english;
+    return { schema: 'pali-reader-selection-v1', widget_version: '${WIDGET_VERSION}', state: 'displayed',
+      kind: d.selection === 'source_book' ? 'source_book' : d.content_type || (d.canonical === true ? 'canonical' : 'unknown'),
+      canonical: d.canonical, selection: d.selection, citation: d.citation, text_id: d.text_id, book_id: d.book_id,
+      book: { id: book.id, uid: book.uid, file: book.file, title: book.title }, requested_on: d.requested_on,
+      segment_ref: d.segment_ref, context_for: d.context_for, script: d.script || 'roman', available: d.available,
+      approximate: !!d.approximate, alignment: d.alignment, alignment_note: d.alignment_note, alignment_method: d.alignment_method,
+      availability_note: d.availability_note, notes: d.notes || [],
+      source: { name: source.name, repository: source.repository, commit: source.commit, files: source.files, attribution: source.attribution, terms: source.terms },
+      pali: { offset: p.offset, returned: p.returned, total_segments: p.total_segments, refs: (p.segments || []).map(function (s) { return s.ref; }), read_with: p.read_with },
+      english: e ? { state: 'displayed', translation_id: e.translation_id, translator: e.translator, source: e.source, url: e.url,
+        fetched_from: e.fetched_from, offset: e.offset, next_offset: e.next_offset, total_characters: e.total_characters,
+        attribution: e.attribution, license: e.license, notes: e.notes || [], read_with: e.read_with }
+        : { state: 'not_displayed', note: d.english_error || 'No English translation requested.', linked_versions: (d.english_available || []).map(function (version) { return version.translation_id; }) },
+      quotation: 'Reading metadata only; no passage text is included. Retrieve read_with and verify its source, references and cautions before quoting. No scholarly or native-reader approval is implied.' };
+  }
+  function wantModelContext(snapshot) {
+    var key = JSON.stringify(snapshot);
+    if (!modelDesired || modelDesired.key !== key) modelDesired = { key: key, snapshot: Object.assign(JSON.parse(key), { revision: ++modelRevision }) };
+    pumpModelContext();
+  }
+  function pumpModelContext() {
+    if (!modelDesired) return;
+    if (modelBlocked) { modelStatus(modelFailure + modelAdvice()); return; }
+    if (!modelChannel) {
+      function advertised(value) { return value && typeof value === 'object' && !Array.isArray(value); }
+      if (modelCapabilities && (advertised(modelCapabilities.structuredContent) || advertised(modelCapabilities.text))) {
+        modelChannel = 'mcp'; modelModality = advertised(modelCapabilities.structuredContent) ? 'structured' : 'text';
+      } else if (window.openai && typeof window.openai.setWidgetState === 'function') modelChannel = 'widget-state';
+      else { modelStatus('This host has not exposed reading-context sharing.' + modelAdvice()); return; }
+    }
+    if (modelFlight) {
+      modelStatus(modelFlight.timedOut ? 'The host has not confirmed the reading context.' + modelAdvice() : 'Updating the reading state available to the host\u2026');
+      return;
+    }
+    if (modelAccepted === modelDesired.key) return;
+    var desired = modelDesired, payload = { pali_reader: desired.snapshot };
+    if (modelChannel === 'widget-state') {
+      modelFlight = { key: desired.key };
+      try {
+        var saved = window.openai.setWidgetState({ modelContent: JSON.stringify(payload) });
+        modelFlight = null;
+        if (saved && typeof saved.then === 'function') {
+          Promise.resolve(saved).then(function () {}, function () {});
+          failModelContext('This host could not confirm reading-context storage. Sharing is unconfirmed.'); return;
+        }
+        modelAccepted = desired.key;
+        if (modelDesired.key === desired.key) modelStatus('The updated reading state was passed to the host. Model delivery is not verified.');
+        else Promise.resolve().then(pumpModelContext);
+      } catch (error) { modelFlight = null; failModelContext('The host could not store the reading context.'); }
+      return;
+    }
+    var flight = { id: requestId++, key: desired.key }; modelFlight = flight;
+    modelStatus('Updating the reading state available to the host\u2026');
+    flight.timer = setTimeout(function () {
+      if (modelFlight !== flight) return;
+      flight.timedOut = true; modelStatus('The host has not confirmed the reading context.' + modelAdvice());
+    }, 30000);
+    post({ jsonrpc: '2.0', id: flight.id, method: 'ui/update-model-context', params: modelModality === 'structured' ? { structuredContent: payload } : { content: [{ type: 'text', text: JSON.stringify(payload) }] } });
+  }
+  function failModelContext(message) { modelBlocked = true; modelFailure = message; modelStatus(message + modelAdvice()); }
+  function modelReply(message) {
+    var flight = modelFlight;
+    if (!flight || message.id !== flight.id) return;
+    clearTimeout(flight.timer); modelFlight = null;
+    if (message.error) { failModelContext('The host rejected reading-context sharing.'); return; }
+    if (!message.result || typeof message.result !== 'object' || Array.isArray(message.result)) { failModelContext('The host did not confirm reading-context sharing.'); return; }
+    modelAccepted = flight.key;
+    if (modelDesired.key === flight.key) modelStatus('The host accepted the current reading state. Model delivery is not verified.');
+    else pumpModelContext();
+  }
   function canNavigate() { return !!(window.openai && typeof window.openai.callTool === 'function') || serverTools; }
   function abandon() {
     if (pending) { clearTimeout(pending.timer); pending = null; }
@@ -34199,6 +34281,7 @@ var WIDGET_HTML = `<!doctype html>
     var call = { id: requestId++, generation: generation, command: command }; pending = call;
     document.getElementById('navigation').setAttribute('aria-busy', 'true'); navigation();
     document.getElementById('status').textContent = 'Loading the requested passage\u2026';
+    wantModelContext(vacantContext('loading'));
     call.timer = setTimeout(function () { finish(call, null, new Error('The host did not respond. Ask to reopen the selection.')); }, 30000);
     try {
       if (serverTools) post({ jsonrpc: '2.0', id: call.id, method: 'tools/call', params: command });
@@ -34233,6 +34316,7 @@ var WIDGET_HTML = `<!doctype html>
       document.getElementById('pali').appendChild(el('p', 'empty', d.error));
       document.getElementById('english').appendChild(el('p', 'empty', 'Check the citation and ask to open the passage again.'));
       navigation();
+      wantModelContext(readingContext(d));
       return;
     }
     rendered = d;
@@ -34289,6 +34373,7 @@ var WIDGET_HTML = `<!doctype html>
       (d.available === false ? d.availability_note + ' ' : d.pali.returned ? 'Showing P\u0101li segments ' + (d.pali.offset + 1) + ' to ' + (d.pali.offset + d.pali.returned) + ' of ' + d.pali.total_segments + '. ' : 'No P\u0101li segments on this page. ') +
       (d.english ? 'English ' + (d.english.offset ? 'continuing from character ' + d.english.offset : 'loaded') + '.' : (d.english_error || 'No English translation requested.'));
     navigation();
+    wantModelContext(readingContext(d));
   }
   // Apps SDK (window.openai) path.
   function toolResult(result) {
@@ -34327,6 +34412,7 @@ var WIDGET_HTML = `<!doctype html>
     abandon(); generation++; awaitingSelection = true;
     document.getElementById('navigation').setAttribute('aria-busy', 'true'); navigation();
     document.getElementById('status').textContent = 'Opening the requested passage\u2026';
+    wantModelContext(vacantContext('loading'));
   }
   window.addEventListener('openai:set_globals', fromOpenai);
   // MCP Apps bridge path (JSON-RPC over postMessage).
@@ -34334,9 +34420,12 @@ var WIDGET_HTML = `<!doctype html>
     if (ev.source !== window.parent) return;
     var m = ev.data; if (!m || m.jsonrpc !== '2.0') return;
     if (m.id === 1 && m.result) {
+      modelCapabilities = m.result.hostCapabilities && m.result.hostCapabilities.updateModelContext; pumpModelContext();
       serverTools = !!(m.result.hostCapabilities && m.result.hostCapabilities.serverTools); navigation();
       if (m.result.hostContext) setTheme(m.result.hostContext.theme);
       post({ jsonrpc: '2.0', method: 'ui/notifications/initialized', params: {} });
+    } else if (modelFlight && m.id === modelFlight.id && (m.result || m.error)) {
+      modelReply(m);
     } else if (pending && m.id === pending.id && (m.result || m.error)) {
       finish(pending, m.result, m.error && new Error(m.error.message || 'The host refused the navigation request.'));
     } else if (m.method === 'ui/notifications/tool-result') {

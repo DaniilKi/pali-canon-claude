@@ -1,58 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { runInNewContext } from 'node:vm';
-import { WIDGET_HTML, TOOL_META } from '../src/chatgpt-widget.mjs';
+import { TOOL_META } from '../src/chatgpt-widget.mjs';
 
-class Element {
-  constructor(tag = '') { this.tagName = tag; this.children = []; this.value = ''; this.attributes = {}; this.listeners = {}; }
-  set textContent(value) { this.value = String(value); this.children = []; }
-  get textContent() { return this.value + this.children.map(c => c.textContent).join(''); }
-  get firstChild() { return this.children[0]; }
-  get lastChild() { return this.children.at(-1); }
-  appendChild(child) { this.children.push(child); return child; }
-  removeChild(child) { this.children.splice(this.children.indexOf(child), 1); return child; }
-  insertBefore(child, before) { this.children.splice(this.children.indexOf(before), 0, child); return child; }
-  setAttribute(name, value) { this.attributes[name] = value; }
-  addEventListener(name, callback) { this.listeners[name] = callback; }
-  focus() { this.focused = true; }
-  click() { if (!this.disabled) this.listeners.click?.(); }
-}
-const commit = '1'.repeat(40);
-const command = args => ({ name: 'read_passage_widget', arguments: { uid: 'mn10', source_commit: commit, script: 'thai', english: false, ...args } });
-const fixture = (label = 'first') => ({
-  citation: 'MN 10', text_id: 'mn10', source: { commit }, script: 'thai', title: label, notes: [],
-  pali: { attribution: 'Fixture credit', license: 'Fixture terms', segments: [{ ref: 'mn10/1', text: `${label} fixture` }],
-    offset: 0, returned: 1, total_segments: 10, next_offset: 1, continue_with: command({ offset: 1, limit: 1 }) },
-  english: null, links: {},
-});
-const settle = () => new Promise(resolve => setImmediate(resolve));
-
-function view(bridge, { supported = true } = {}) {
-  const elements = Object.fromEntries(['title', 'meta', 'pali', 'english', 'footer', 'status', 'navigation'].map(id => [id, new Element()]));
-  const handlers = {}, calls = [], messages = [], timers = new Map(); let timer = 0;
-  const parent = { postMessage(m) { messages.push(m); if (m.method === 'tools/call') calls.push(m); } };
-  const window = { parent, addEventListener(name, cb) { handlers[name] = cb; } };
-  if (bridge === 'Apps SDK') window.openai = supported ? { callTool(name, args) { return new Promise((resolve, reject) => calls.push({ name, arguments: args, resolve, reject })); } } : {};
-  const document = { documentElement: new Element(), getElementById: id => elements[id], createElement: tag => new Element(tag), createTextNode: text => { const e = new Element(); e.textContent = text; return e; } };
-  runInNewContext(WIDGET_HTML.match(/<script>([^]*?)<\/script>/)[1], {
-    window, document, Date, setTimeout(cb) { timers.set(++timer, cb); return timer; }, clearTimeout(id) { timers.delete(id); },
-  });
-  const message = data => handlers.message({ source: parent, data: { jsonrpc: '2.0', ...data } });
-  if (bridge === 'MCP Apps') message({ id: 1, result: { hostCapabilities: supported ? { serverTools: {} } : {} } });
-  return { elements, calls, timers, messages, window,
-    output(data) {
-      if (bridge === 'Apps SDK') { window.openai.toolOutput = data; handlers['openai:set_globals'](); }
-      else message({ method: 'ui/notifications/tool-result', params: { structuredContent: data } });
-    },
-    globals(data, metadata) { window.openai.toolOutput = data; window.openai.toolResponseMetadata = metadata; handlers['openai:set_globals'](); },
-    refresh() { handlers['openai:set_globals'](); },
-    reply(index, result) { const c = calls[index]; if (bridge === 'Apps SDK') c.resolve(result); else message({ id: c.id, result }); },
-    reject(index, text) { const c = calls[index]; if (bridge === 'Apps SDK') c.reject(Error(text)); else message({ id: c.id, error: { code: -1, message: text } }); },
-    input(args) { if (bridge === 'Apps SDK') { window.openai.toolInput = args; handlers['openai:set_globals'](); } else message({ method: 'ui/notifications/tool-input', params: { arguments: args } }); },
-    click(label) { const button = elements.navigation.children.find(c => c.textContent === label); assert.ok(button, label); button.click(); return button; },
-    timeout() { for (const cb of [...timers.values()]) cb(); },
-  };
-}
+import { view, fixture, command, settle, commit } from './helpers/widget-view.mjs';
 
 test('Apps SDK theme/global updates retain local navigation and fresh output recovers past stale error metadata', async () => {
   const ui = view('Apps SDK'); ui.output(fixture()); ui.click('Continue Pāli');

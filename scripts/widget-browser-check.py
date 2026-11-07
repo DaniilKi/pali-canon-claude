@@ -47,22 +47,28 @@ def check():
                 page.on("pageerror", lambda e: errors.append(str(e)))
                 if bridge == "MCP Apps":
                     page.set_content("<style>body{margin:0}iframe{border:0;width:100%;height:850px}</style>")
-                    page.evaluate("""html => {
-                      window.bridgeMessages=[]; window.navQueue=[];
+                    page.evaluate("""input => {
+                      const html=input.html, modalities={[input.modality]:{}};
+                      window.bridgeMessages=[]; window.navQueue=[]; window.contextQueue=[]; window.contextHistory=[]; window.contextAutoAck=true;
                       const frame=document.createElement('iframe'); frame.id='reader';
                       window.addEventListener('message', ev=> {
                         window.bridgeMessages.push(ev.data);
-                        if(ev.data.method==='ui/initialize') frame.contentWindow.postMessage({jsonrpc:'2.0',id:1,result:{hostContext:{theme:'dark'},hostCapabilities:{serverTools:{}}}},'*');
+                        if(ev.data.method==='ui/initialize') frame.contentWindow.postMessage({jsonrpc:'2.0',id:1,result:{hostContext:{theme:'dark'},hostCapabilities:{serverTools:{},updateModelContext:modalities}}},'*');
                         if(ev.data.method==='tools/call') window.navQueue.push(ev.data);
+                        if(ev.data.method==='ui/update-model-context') {
+                          const payload=ev.data.params.structuredContent||JSON.parse(ev.data.params.content[0].text);
+                          window.contextHistory.push(payload.pali_reader);
+                          if(window.contextAutoAck) frame.contentWindow.postMessage({jsonrpc:'2.0',id:ev.data.id,result:{}},'*'); else window.contextQueue.push(ev.data);
+                        }
                       });
                       frame.srcdoc=html;document.body.append(frame);
-                    }""", html)
+                    }""", {"html": html, "modality": "structuredContent" if width == 390 else "text"})
                     page.wait_for_function("window.bridgeMessages.some(m=>m.method==='ui/notifications/initialized')")
                     frame = page.frames[1]
                     send = lambda data: page.evaluate(
                         "data=>document.querySelector('iframe').contentWindow.postMessage({jsonrpc:'2.0',method:'ui/notifications/tool-result',params:{structuredContent:data}},'*')", data)
                 else:
-                    page.evaluate("""() => {window.opened=[];window.navQueue=[];window.openai={theme:'dark',openExternal:args=>window.opened.push(args.href),callTool:(name,args)=>new Promise((resolve,reject)=>window.navQueue.push({params:{name,arguments:args},resolve,reject}))}}""")
+                    page.evaluate("""() => {window.opened=[];window.navQueue=[];window.contextHistory=[];window.widgetStateAttempts=0;window.openai={theme:'dark',openExternal:args=>window.opened.push(args.href),callTool:(name,args)=>new Promise((resolve,reject)=>window.navQueue.push({params:{name,arguments:args},resolve,reject})),setWidgetState:state=>{window.widgetStateAttempts++;if(window.widgetStateThrows)throw Error('Fixture state failure');window.openai.widgetState=state;window.contextHistory.push(JSON.parse(state.modelContent).pali_reader);window.dispatchEvent(new Event('openai:set_globals'))}}}""")
                     page.set_content(html)
                     frame = page.main_frame
                     send = lambda data: page.evaluate(
@@ -83,6 +89,27 @@ def check():
                 def displayed(data):
                     send(data)
                     verified(data)
+
+                def context_verified(data):
+                    refs=[s["ref"] for s in data["pali"]["segments"]]
+                    page.wait_for_function("x=>{const d=window.contextHistory.at(-1);return d?.state==='displayed'&&d.citation===x.citation&&JSON.stringify(d.pali.refs)===JSON.stringify(x.refs)}", arg={"citation": data["citation"], "refs": refs})
+                    meta=page.evaluate("window.contextHistory.at(-1)")
+                    assert meta["source"] == data["source"]
+                    assert meta.get("text_id") == data.get("text_id")
+                    assert meta.get("canonical") == data.get("canonical")
+                    assert meta.get("selection") == data.get("selection")
+                    assert meta["script"] == data.get("script", "roman")
+                    assert meta.get("available") == data.get("available")
+                    assert meta["approximate"] == bool(data.get("approximate"))
+                    assert meta.get("alignment_note") == data.get("alignment_note")
+                    assert meta.get("context_for") == data.get("context_for")
+                    assert meta["notes"] == data.get("notes", [])
+                    assert meta["pali"]["read_with"] == data["pali"]["read_with"]
+                    assert "segments" not in meta["pali"] and "text" not in meta["english"]
+                    if data.get("english"):
+                        assert meta["english"]["translation_id"] == data["english"]["translation_id"]
+                        assert meta["english"]["read_with"] == data["english"]["read_with"]
+                    frame.wait_for_function("()=>document.querySelector('#context-status').textContent.includes('Model delivery is not verified')")
 
                 def reply(command, data=None, error=None):
                     nonlocal navigation_calls
@@ -107,11 +134,13 @@ def check():
                     verified(data)
                     frame.wait_for_function("()=>document.querySelector('#navigation').getAttribute('aria-busy')==='false'")
                     assert frame.evaluate("document.activeElement.id") == "title"
+                    context_verified(data)
                     if bridge == "Apps SDK":
                         page.evaluate("()=>{window.openai.theme='dark';window.dispatchEvent(new Event('openai:set_globals'))}")
                         verified(data)
 
                 displayed(fixture)
+                context_verified(fixture)
                 assert frame.locator("html").get_attribute("data-theme") == "dark"
                 assert frame.get_by_role("main").count() == 1
                 assert frame.get_by_role("heading", level=1).count() == 1
@@ -193,6 +222,7 @@ def check():
                 frame.wait_for_function("()=>document.querySelector('#pali').textContent.includes('No verified commentary alignment')")
                 assert frame.locator("#pali .seg").count() == 0
                 assert "No verified commentary alignment" in status.text_content()
+                context_verified(comment["absent"])
                 assert frame.locator("#footer a").count() == 0
                 displayed(comment["uncertain"])
                 if comment["uncertain"].get("approximate"):
@@ -241,6 +271,23 @@ def check():
                 displayed(payload["returned"])
                 assert frame.locator("#pali .seg").count() == 1
                 assert "Source context for" not in frame.locator("#meta").inner_text()
+                if bridge == "MCP Apps":
+                    context_verified(payload["returned"])
+                    page.evaluate("window.contextAutoAck=false")
+                    displayed(fixture)
+                    page.wait_for_function("window.contextQueue.length===1")
+                    displayed(post["native"])
+                    assert page.evaluate("window.contextQueue.length") == 1
+                    page.evaluate("()=>{const m=window.contextQueue.shift();window.oldContextID=m.id;document.querySelector('iframe').contentWindow.postMessage({jsonrpc:'2.0',id:m.id,result:{}},'*')}")
+                    page.wait_for_function("window.contextQueue.length===1")
+                    assert page.evaluate("window.contextHistory.at(-1).citation") == post["native"]["citation"]
+                    assert "Updating" in frame.locator("#context-status").inner_text()
+                    page.evaluate("()=>document.querySelector('iframe').contentWindow.postMessage({jsonrpc:'2.0',id:window.oldContextID,error:{code:-1,message:'Stale context error'}},'*')")
+                    page.wait_for_timeout(30)
+                    assert "Updating" in frame.locator("#context-status").inner_text()
+                    page.evaluate("()=>{const m=window.contextQueue.shift();document.querySelector('iframe').contentWindow.postMessage({jsonrpc:'2.0',id:m.id,result:{}},'*')}")
+                    context_verified(post["native"])
+                    page.evaluate("window.contextAutoAck=true")
                 for late_error in [False, True]:
                     displayed(fixture)
                     frame.get_by_role("button", name="Continue Pāli", exact=True).click()
@@ -258,6 +305,10 @@ def check():
                 assert "Navigation <img src=x> failed" in frame.locator("#pali").inner_text()
                 assert frame.locator("#pali .seg").count() == 0
                 assert frame.locator("#footer").inner_text() == ""
+                page.wait_for_function("window.contextHistory.at(-1)?.state==='error'")
+                cleared = page.evaluate("window.contextHistory.at(-1)")
+                assert "source" not in cleared and "pali" not in cleared
+                assert "Navigation <img" not in json.dumps(cleared)
                 assert frame.locator("img").count() == 0
                 assert frame.locator("#navigation button").count() == 0
                 displayed(fixture)
@@ -277,12 +328,30 @@ def check():
                 if bridge == "Apps SDK":
                     page.evaluate("window.openai.toolResponseMetadata=undefined")
                 displayed(fixture)
+                context_verified(fixture)
+                if bridge == "MCP Apps":
+                    page.evaluate("window.contextAutoAck=false")
+                    displayed(post["native"])
+                    page.wait_for_function("window.contextQueue.length===1")
+                    page.evaluate("()=>{const m=window.contextQueue.shift();document.querySelector('iframe').contentWindow.postMessage({jsonrpc:'2.0',id:m.id,error:{code:-32601,message:'Fixture unsupported context'}},'*')}")
+                    frame.wait_for_function("()=>document.querySelector('#context-status').textContent.includes('rejected')")
+                    sent = page.evaluate("window.contextHistory.length")
+                    displayed(source["first"])
+                    assert page.evaluate("window.contextHistory.length") == sent
+                else:
+                    page.evaluate("window.widgetStateThrows=true")
+                    displayed(post["native"])
+                    frame.wait_for_function("()=>document.querySelector('#context-status').textContent.includes('could not store')")
+                    sent = page.evaluate("window.widgetStateAttempts")
+                    displayed(source["first"])
+                    assert page.evaluate("window.widgetStateAttempts") == sent
+                assert "Model delivery is not verified" not in frame.locator("#context-status").inner_text()
                 assert not errors, errors
-                checks.append({"bridge": bridge, "width": width, "navigation_calls": navigation_calls,
+                checks.append({"bridge": bridge, "width": width, "navigation_calls": navigation_calls, "context_updates": page.evaluate("window.contextHistory.length"), "context_mode": ("structuredContent" if width == 390 else "text") if bridge == "MCP Apps" else "widget-state",
                     "checks": ["initialization", "theme", "source text", "responsive columns", "no horizontal overflow",
                         "named landmarks and headings", "keyboard link activation", "200% zoom", "live status updates",
                         "Pāli continuation", "English pinned continuation after primary recovery", "unpinned offset refused",
-                        "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "commentary labels and availability", "unaligned source caution", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "exact Pali segment without invented English alignment", "source-preserving context and exact return", "direct navigation controls and keyboard activation", "late success and rejection ignored", "navigation failure clears stale content", "local navigation survives globals updates", "no invented post-canonical/source-file links", "no JS errors"]})
+                        "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "commentary labels and availability", "unaligned source caution", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "exact Pali segment without invented English alignment", "source-preserving context and exact return", "direct navigation controls and keyboard activation", "late success and rejection ignored", "navigation failure clears stale content", "local navigation survives globals updates", "model-context capability and modality checks", "metadata-only source context and replay commands", "late context acknowledgements coalesce to current state", "context errors leave the reader usable", "cleared reading state on error", "no invented post-canonical/source-file links", "no JS errors"]})
                 page.close()
         assert not requests, requests
         report = {

@@ -34,6 +34,9 @@ test('English continuation requires an exact translation ID and offers pinned co
   assert.equal(next.english.translation_id, first.english.translation_id);
   assert.equal(next.english.offset, first.english.next_offset);
   assert.ok(next.english.text.startsWith(atiText.slice(first.english.next_offset, first.english.next_offset + 50)));
+  const replay = await readPassage(next.english.read_with.arguments);
+  assert.equal(replay.english.translation_id, next.english.translation_id);
+  assert.equal(replay.english.offset, next.english.offset); assert.equal(replay.english.text, next.english.text);
 });
 
 test('a pinned English continuation refuses an outage fallback to another version', async () => {

@@ -7,10 +7,19 @@ import { SCRIPTS, transliterate } from '../../src/script.mjs';
 import { expectedSegments } from './study-scripts.mjs';
 
 export async function auditWidget(client, { exhaustAligned = false } = {}) {
-  const counts = { scripts: 0, selection_cases: 0, continued_pages: 0, exact_segments: 0, context_reads: 0, exact_returns: 0, commentary_context_reads: 0, commentary_exact_returns: 0, postcanonical_books: 0, root_files: 0, commentary_books: 0, aligned_checked: 0, aligned_available: 0, aligned_unavailable: 0, rejected_requests: 0 };
+  const counts = { scripts: 0, selection_cases: 0, continued_pages: 0, replay_reads: 0, exact_segments: 0, context_reads: 0, exact_returns: 0, commentary_context_reads: 0, commentary_exact_returns: 0, postcanonical_books: 0, root_files: 0, commentary_books: 0, aligned_checked: 0, aligned_available: 0, aligned_unavailable: 0, rejected_requests: 0 };
   const call = async args => {
     const response = await client.callTool({ name: 'read_passage_widget', arguments: args });
     assert.ok(!response.isError, JSON.stringify(response.content)); return response.structuredContent;
+  };
+  const replay = async page => {
+    const command = page.pali.read_with;
+    assert.equal(command.name, 'read_passage_widget'); assert.equal(command.arguments.english, false);
+    assert.equal(command.arguments.source_commit, page.source.commit);
+    const repeated = await call(command.arguments);
+    assert.deepEqual(repeated.pali.segments, page.pali.segments); assert.deepEqual(repeated.source, page.source);
+    assert.equal(repeated.canonical, page.canonical); assert.equal(repeated.text_id, page.text_id);
+    counts.replay_reads++;
   };
   for (const script of SCRIPTS) {
     for (const mode of ['canonical', 'postcanonical', 'source_file', 'aligned_commentary', 'commentary_book']) {
@@ -19,6 +28,7 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
         : mode === 'source_file' ? { book: 'vin02m1', offset: 6, limit: 1, script }
         : { uid: transliterate(mode === 'canonical' ? 'MN 10' : 'Vism 1.1', 'roman', script), limit: 2, script, ...(mode === 'canonical' ? { english: false } : {}) };
       const first = await call(args);
+      await replay(first);
       const offset = args.offset || 0;
       const all = mode === 'aligned_commentary' ? commentary.getCommentary('MN 10', { limit: 100000 }).segments
         : mode === 'commentary_book' ? commentary.getCommentary('commentary:s0101a.att.xml', { limit: 100000 }).segments
@@ -47,6 +57,7 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
       const source = await call({ ...args, offset: 1, limit: 1, english: false, script });
       const segment = source.pali.segments[0].ref;
       const exact = await call({ ...args, segment, script });
+      await replay(exact);
       assert.deepEqual(exact.pali.segments, source.pali.segments); assert.deepEqual(exact.source, source.source);
       assert.equal(exact.segment_ref, segment); assert.equal(exact.text_id, source.text_id);
       assert.equal(exact.selection, source.selection); assert.equal(exact.canonical, source.canonical);
@@ -55,6 +66,7 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
       assert.equal(exact.pali.context_with.arguments.source_commit, exact.source.commit);
       assert.equal(exact.pali.context_with.arguments.script, script);
       const context = await call(exact.pali.context_with.arguments);
+      await replay(context);
       const expected = await call({ ...args, offset: 0, limit: 4, english: false, script });
       assert.deepEqual(context.pali.segments, expected.pali.segments); assert.equal(context.context_for, segment);
       assert.deepEqual(context.source, exact.source); assert.equal(context.text_id, exact.text_id);
@@ -66,6 +78,7 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
     for (const reference of ['mn10/c66', 'commentary:s0101a.att.xml/c2']) {
       const exact = await call({ commentary: reference, english: false, script });
       const context = await call(exact.pali.context_with.arguments);
+      await replay(context);
       const parent = reference.replace(/\/c\d+$/, '');
       const index = Number(reference.match(/\/c(\d+)$/)[1]) - 1, offset = Math.max(0, index - 2);
       const expected = commentary.getCommentary(parent, { offset, limit: index - offset + 3 });
@@ -81,6 +94,7 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
   }
   for (const book of post.load().books) {
     const page = await call({ uid: book.id, english: false, limit: 1 });
+    await replay(page);
     const original = await post.getText(book.id, { limit: 1 });
     assert.equal(page.canonical, false); assert.equal(page.book.id, book.id);
     assert.deepEqual(page.pali.segments, original.segments); assert.deepEqual(page.source, original.source);
@@ -88,6 +102,7 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
   }
   for (const book of catalogue({ limit: 200 }).items) {
     const page = await call({ book: book.id, english: false, limit: 1 });
+    await replay(page);
     const original = readBook({ book: book.id, limit: 1 });
     assert.equal(page.selection, 'source_book'); assert.equal(page.book_id, book.id); assert.equal(page.text_id, undefined);
     assert.deepEqual(page.pali.segments, original.segments); assert.deepEqual(page.source, original.source);
@@ -96,12 +111,14 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
   for (const book of commentary.load().books) {
     const selector = `commentary:${book.file}`;
     const page = await call({ commentary: selector, english: false, limit: 1 });
+    await replay(page);
     const original = commentary.getCommentary(selector, { limit: 1 });
     assert.equal(page.canonical, false); assert.equal(page.content_type, 'commentary'); assert.equal(page.text_id, undefined);
     assert.deepEqual(page.pali.segments, original.segments); assert.equal(page.alignment_note, original.alignment_note);
     const anchor = await call({ commentary: selector + '/c1', english: false });
     if (anchor.pali.context_with) {
       const context = await call(anchor.pali.context_with.arguments);
+      await replay(context);
       assert.equal(context.requested_on, undefined); assert.equal(context.selection, 'commentary_book');
       assert.deepEqual(context.pali.segments, commentary.getCommentary(selector, { limit: 3 }).segments);
       const returned = await call(context.pali.exact_with.arguments);

@@ -794,3 +794,15 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** After a UI-initiated tool call, toolOutput can still refer to the original host result. A theme/globals event could restore that old passage. Unchanged error metadata could also suppress a newer valid result.
 - **Decision.** Track consumed output/metadata identities. Process only changed host fields, retain local navigation across unrelated events, and allow fresh valid output to recover past unchanged older error metadata. New error metadata still clears stale content.
 - **Consequences.** This handles asynchronous bridge updates without assuming a signed-in client's event timing. It does not make direct UI state automatically visible to the model.
+
+### D132. Share source-preserving reading metadata only through detected host context capabilities
+
+- **Context.** Direct UI navigation can leave the assistant referring to an earlier chat result. Host support and delivery timing vary, so a local display cannot be treated as proof of model awareness.
+- **Decision.** Share a versioned metadata-only selection: source/version/notices, scope and refs, script, availability and alignment cautions, English version and reader commands. Prefer an advertised MCP context modality, with a detected synchronous widget-state API as compatibility fallback; retain one selected channel per instance. Serialize/coalesce updates, retain timed-out requests as unconfirmed until acknowledged, and stop automatic attempts on rejection or incompatible setters. Loading/error states omit old source identity. Show delivery status separately from reading status. Version resources to v10.
+- **Consequences.** No passage body or private error detail is shared, and no follow-up message is triggered. Host acceptance is not model delivery/adherence or scholarly/native-reader approval. Unsupported hosts retain citation-based chat use. Context failure does not disable reading or retry through another route.
+
+### D133. Supply commands to retrieve the displayed reading before quoting metadata
+
+- **Context.** Model-visible source metadata alone is not retrieved passage content. Continuation commands point beyond the current window and cannot substitute for re-reading what is displayed.
+- **Decision.** Return pali.read_with for the current source window and english.read_with for its translation version/offset. Exact/context commands retain source and anchor pins; all modes retain scope and script. Replay the commands through the extracted package across eight scripts and every included post-canonical/root/commentary book.
+- **Consequences.** Replays remain source reads, not source reconstruction. Live English contents are not promised immutable; assistants must verify the returned version, range and notices. Automated replay/metadata checks do not establish signed-in model adherence.
