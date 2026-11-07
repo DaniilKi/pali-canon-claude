@@ -7,7 +7,7 @@
  *     (aspirates, doubled consonants, ny/ñ, ṃ/n), labelled spelling_note.
  */
 import * as canon from './canon.mjs';
-import { hasSearchQuotes } from './search-segments.mjs';
+import { hasSearchQuotes, assertSearchQuery } from './search-segments.mjs';
 import { normalizeInput, normalizationNote, spellingVariants, canonSpellings } from './input.mjs';
 import { looksEnglish, expandEnglish, paliWordsInEnglish } from './glossary.mjs';
 
@@ -45,6 +45,7 @@ function variantSearch(query, base, opts) {
 
 /** search_texts' canon search with normalised input, English expansion and spelling variants. */
 export function searchWithInput(query, { collection, limit = 10, offset = 0, english = 'auto' } = {}) {
+  assertSearchQuery(query);
   const opts = { collection, limit, offset };
   const n = normalizeInput(query);
   const note = normalizationNote(n);

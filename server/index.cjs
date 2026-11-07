@@ -21585,7 +21585,13 @@ __export(canon_exports, {
 // src/search-segments.mjs
 var VERSE = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
 var searchFold = (text, fold8) => fold8(text).replace(/\s+/gu, " ");
+function assertSearchQuery(query) {
+  if ([...String(query)].some((ch) => new RegExp("\\p{L}", "u").test(ch) && !new RegExp("\\p{Script=Latin}", "u").test(ch))) {
+    throw new Error("Search query contains unsupported or unconverted letters. Use Roman P\u0101li or completely convert one supported script before searching.");
+  }
+}
 function searchTerms(query, fold8) {
+  assertSearchQuery(query);
   const paired = /"([^"]+)"|“([^”]+)”/gu;
   const text = String(query);
   const phrases = [...text.matchAll(paired)].map((match2) => searchFold(match2[1] ?? match2[2], fold8).trim()).filter(Boolean);
@@ -22736,6 +22742,7 @@ function terms(query) {
   return searchTerms(query, fold3);
 }
 function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
+  assertSearchQuery(query);
   const d = load();
   const filter = collection ? fold3(collection).replace(/\s+/g, "") : null;
   const resolved = groupedScope(d, filter, collection);
@@ -25001,7 +25008,7 @@ function register({ tool, z }) {
     offset: z.number().int().min(0).max(1e5).default(0)
   }, async ({ query, books, section, limit, offset, script }) => {
     if (script) scriptName(script);
-    const input = romanizeInput(query);
+    const input = romanizeLookupInput(query);
     const result = await withNormalised(input.text, (q) => search2(q, { books, section, limit, offset }));
     return localizePostCanonical(result, script, input);
   });
@@ -31297,7 +31304,7 @@ function register18({ tool, z }) {
     limit: z.number().int().min(1).max(50).default(10)
   }, async ({ query, books, offset, limit, script }) => {
     if (script) scriptName(script);
-    const input = romanizeInput(query);
+    const input = romanizeLookupInput(query);
     const result = await withNormalised(input.text, (value) => search3(value, { books, offset, limit }));
     return localizeCommentary(result, script, input);
   });
@@ -31385,7 +31392,7 @@ function register19({ tool, z }) {
     limit: z.number().int().min(1).max(50).default(10)
   }, async ({ book, query, script, offset, limit }) => {
     const output = scriptName(script);
-    const input = romanizeInput(query);
+    const input = romanizeLookupInput(query);
     const result = await withNormalised(input.text, (text) => search4(text, { book, offset, limit }));
     const localized = localizeSearch(result, output, input);
     localized.results = localized.results.map((hit) => ({
@@ -31431,6 +31438,7 @@ function variantSearch(query, base, opts) {
   };
 }
 function searchWithInput(query, { collection, limit = 10, offset = 0, english: english2 = "auto" } = {}) {
+  assertSearchQuery(query);
   const opts = { collection, limit, offset };
   const n = normalizeInput(query);
   const note = normalizationNote(n);
@@ -31748,7 +31756,7 @@ function createServer() {
     include_post_canonical: external_exports.boolean().default(false).describe(SEARCH_OPTION_DESCRIPTION),
     english: external_exports.enum(["auto", "off", "only"]).default("auto").describe('English queries: "auto" expands a query that looks English into P\u0101li terms from the glossary (DPD English index) and also runs the search as typed; "only" searches the expansion only; "off" never expands. Expansions are labelled expanded_from_english.')
   }, async ({ query, collection, limit, offset, script, include_post_canonical, english: english2 }) => {
-    const input = romanizeInput(query);
+    const input = romanizeLookupInput(query);
     const searched = searchWithInput(input.text, { collection, limit, offset, english: english2 });
     const result = localizeSearch(searched, script, input);
     if (include_post_canonical && collection) {

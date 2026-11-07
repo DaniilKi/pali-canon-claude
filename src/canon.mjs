@@ -1,4 +1,4 @@
-import { searchSegments, searchFold, searchExcerpt, searchTerms, searchReading } from './search-segments.mjs';
+import { searchSegments, searchFold, searchExcerpt, searchTerms, searchReading, assertSearchQuery } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * The bundled Pāli Canon: VRI Chaṭṭha Saṅgāyana text, standard citation IDs aligned to it,
@@ -465,6 +465,7 @@ function terms(query) {
  * own terms: an array of groups of folded alternatives, where every group must match and any alternative in a group may.
  */
 export function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
+  assertSearchQuery(query);
   const d = load();
   const filter = collection ? fold(collection).replace(/\s+/g, '') : null;
   const resolved = groupedScope(d, filter, collection);

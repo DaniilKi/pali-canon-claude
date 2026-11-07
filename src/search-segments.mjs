@@ -3,8 +3,16 @@ const VERSE = new Set(['gatha1', 'gatha2', 'gatha3', 'gathalast']);
 
 export const searchFold = (text, fold) => fold(text).replace(/\s+/gu, ' ');
 
+/** Validate before normalization/tokenization can discard unsupported letters. Native input is converted at MCP entry. */
+export function assertSearchQuery(query) {
+  if ([...String(query)].some(ch => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch))) {
+    throw new Error('Search query contains unsupported or unconverted letters. Use Roman Pāli or completely convert one supported script before searching.');
+  }
+}
+
 /** Paired double quotes preserve phrase order; apostrophes remain ordinary Pāli punctuation. */
 export function searchTerms(query, fold) {
+  assertSearchQuery(query);
   const paired = /"([^"]+)"|“([^”]+)”/gu;
   const text = String(query);
   const phrases = [...text.matchAll(paired)]

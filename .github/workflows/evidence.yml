@@ -52,6 +52,8 @@ jobs:
         run: node scripts/audit-citation-scanner.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-citation-scanner.report.json
       - name: Check packaged reference and analysis input integrity offline
         run: node scripts/audit-reference-integrity.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report reference-input-integrity.report.json
+      - name: Check packaged search input integrity and native query parity offline
+        run: node scripts/audit-search-input.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report search-input-integrity.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -71,4 +73,5 @@ jobs:
             native-parallels.report.json
             native-citation-scanner.report.json
             reference-input-integrity.report.json
+            search-input-integrity.report.json
           if-no-files-found: warn

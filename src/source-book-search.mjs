@@ -3,7 +3,7 @@ import { readBook } from './source-books.mjs';
 import { fold } from './canon.mjs';
 import { searchFold, searchTerms, searchExcerpt } from './search-segments.mjs';
 import { withNormalised } from './input.mjs';
-import { romanizeInput, localizeSearch, scriptName, SCRIPT_DESCRIPTION } from './script.mjs';
+import { romanizeLookupInput, localizeSearch, scriptName, SCRIPT_DESCRIPTION } from './script.mjs';
 
 // Bound retained rendered/folded text; oversized books remain searchable without being cached.
 const BUDGET = 8 * 1024 * 1024;
@@ -61,7 +61,7 @@ export function register({ tool, z }) {
     limit: z.number().int().min(1).max(50).default(10),
   }, async ({ book, query, script, offset, limit }) => {
     const output = scriptName(script);
-    const input = romanizeInput(query);
+    const input = romanizeLookupInput(query);
     const result = await withNormalised(input.text, (text) => search(text, { book, offset, limit }));
     const localized = localizeSearch(result, output, input);
     localized.results = localized.results.map((hit) => ({ ...hit,

@@ -210,7 +210,7 @@ export function createServer() {
     include_post_canonical: z.boolean().default(false).describe(postcanonical.SEARCH_OPTION_DESCRIPTION),
     english: z.enum(['auto', 'off', 'only']).default('auto').describe('English queries: "auto" expands a query that looks English into Pāli terms from the glossary (DPD English index) and also runs the search as typed; "only" searches the expansion only; "off" never expands. Expansions are labelled expanded_from_english.'),
   }, async ({ query, collection, limit, offset, script, include_post_canonical, english }) => {
-    const input = romanizeInput(query);
+    const input = romanizeLookupInput(query);
     const searched = searchWithInput(input.text, { collection, limit, offset, english });
     const result = localizeSearch(searched, script, input);
     if (include_post_canonical && collection) {

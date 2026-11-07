@@ -19,7 +19,7 @@ import { gunzipSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { withNormalised } from './input.mjs';
-import { romanizeInput, localizePostCanonical, SCRIPT_DESCRIPTION, scriptName } from './script.mjs';
+import { romanizeInput, romanizeLookupInput, localizePostCanonical, SCRIPT_DESCRIPTION, scriptName } from './script.mjs';
 
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
@@ -657,7 +657,7 @@ export function register({ tool, z }) {
     offset: z.number().int().min(0).max(100000).default(0),
   }, async ({ query, books, section, limit, offset, script }) => {
     if (script) scriptName(script);
-    const input = romanizeInput(query);
+    const input = romanizeLookupInput(query);
     const result = await withNormalised(input.text, (q) => search(q, { books, section, limit, offset }));
     return localizePostCanonical(result, script, input);
   });

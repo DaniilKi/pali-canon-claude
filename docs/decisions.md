@@ -935,3 +935,10 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** resolve_reference returned MN 10 for 漢Satipatthana Sutta字 and ηSatipatthana Sutta because the letters-only name key discarded unsupported letters. The analysis selector shares that name resolver.
 - **Decision.** Require complete script conversion at both MCP entry points before citation/name lookup. Guard the shared name resolver against unconverted non-Latin letters before separator folding, including direct calls. Preserve supported native names, Roman spelling inference, existing shared-name conventions/cautions and post-canonical fallback.
 - **Consequences.** Unsupported or mixed input produces a recoverable error instead of evidence for an altered name. Offline package audits cover stdio/HTTP resolution and analysis across eight scripts. This is input integrity, not new source coverage or real-client acceptance.
+
+
+### D155. Validate complete search input before tokenization and expansion
+
+- **Context.** Unsupported letters in 漢sati字 and ηsati disappeared during word tokenization, producing sati matches. Mixed Thai/Devanagari สति became a different query; commentary matches increased from 720 to 2,286 in the scoped reproduction.
+- **Decision.** Require complete conversion at all four source-search MCP entry points. Guard shared search tokenization, canonical search including explicit alternative groups, and English expansion before any normalization can discard unsupported letters. Preserve Roman/English keyboard behavior, valid native conversion labels, phrase boundaries, pagination, exact reading commands and source cautions.
+- **Consequences.** Invalid input returns an error instead of partial-query evidence. Installed stdio/HTTP audits check four tools and eight scripts with outbound access disabled. This adds no source content, translation or actual signed-in-client acceptance.
