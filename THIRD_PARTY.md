@@ -65,6 +65,15 @@ notices and citations remain in live reading results. The Pāli source stays
 unchanged, including abbreviations; correspondence and edition notes are
 documented in the [SN review](docs/data/ati-sn-coverage.md).
 
+SN 9.11 is copyright 1999 Ṭhānissaro Bhikkhu, CC BY-NC 4.0. Walshe’s
+SN 1.3 and SN 12.16 pages are copyright 1985 BPS, from Wheel 318–321,
+transcribed in 2007 by arrangement with BPS. Their full notice requires free
+distribution, source/derivation acknowledgement and the complete licence, with
+a 50-copy print limit. Existing readers retain those notices and citations.
+Expanded framing, condensed repetitions and editorial notes are disclosed in
+the [scope review](docs/data/ati-introductions-and-notes.md); no English bodies
+are bundled.
+
 ## Access to Insight indexes (bundled topic index)
 
 `server/data/topics.json` holds topic names, cross-references and links taken from Access to Insight's [General Index](https://www.accesstoinsight.org/index-subject.html) and [Numerical Index](https://www.accesstoinsight.org/index-number.html), read from commit `45fedca341497120651efa20e756b04a13e61089` of [bcbsit/ati](https://github.com/bcbsit/ati). The text of both pages is “by Access to Insight” and licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); the attribution and licence are returned with every `topic` and `list_topics` result. Only names and links are kept, and each sutta link is mapped to a canon ID by this project. Documents linked from the indexes keep their own terms.

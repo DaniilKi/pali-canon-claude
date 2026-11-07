@@ -140,7 +140,7 @@ Considered and **not used** (with reasons), and the sources **planned** next, ar
 
 - **Every text, every release.** An automatic audit checks all 8,544 texts: each resolves by its citation, has text, does not overlap its neighbours, and its PTS page leads back to it. Result: 0 failures.
 - **Checked against an independent edition.** All 1,190 canonical pages of Access to Insight and their PTS citations were compared with our mapping: 0 problems.
-- **Translations are linked only with strong evidence.** A translation is attached only when its title, number or PTS page matches unambiguously, or an individually reviewed story correspondence establishes its scope. We prefer no link to a wrong link. 2,553 links pass this test (64 of them placed by comparing the names in the English with the Pāli, each audited).
+- **Translations are linked only with strong evidence.** A translation is attached only when its title, number or PTS page matches unambiguously, or an individually reviewed story correspondence establishes its scope. We prefer no link to a wrong link. 2,556 links pass this test (64 of them placed by comparing the names in the English with the Pāli, each audited).
 - **Independent review.** A separate reviewer checked about 110 citations and every PTS lookup in its sample. The problems it found were fixed and are now permanent tests.
 - **Outage drills.** We simulate each website going down and confirm that the backups take over and the Pāli still works.
 
@@ -269,7 +269,7 @@ You do not need Pāli letters. Type the way your keyboard lets you, and every an
 
 ## What it does not do yet
 
-- English is linked for 1,834 texts, about a fifth of the canon. The Vinaya, nearly all of the Abhidhamma and much of the Khuddaka Nikāya have no English yet.
+- English is linked for 1,837 texts, about a fifth of the canon. The Vinaya, nearly all of the Abhidhamma and much of the Khuddaka Nikāya have no English yet.
 - The commentaries (Aṭṭhakathā) and sub-commentaries (Ṭīkā) are not included yet.
 - Other scripts are transliterated by this server from the Roman edition, not taken from printed script editions. Lao and Lanna have not yet been checked against a printed edition or by native readers.
 - Translations and the dictionary need internet; the Pāli does not.

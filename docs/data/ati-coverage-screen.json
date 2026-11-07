@@ -1098,6 +1098,28 @@
         }
       ],
       "report": "ati-sn-coverage.md"
+    },
+    {
+      "decision": "D186",
+      "baseline": "1f05064e103ad0a61398988dc2bce025c61c610b",
+      "accepted": [
+        {
+          "unit_id": "sn9.11",
+          "path": "tipitaka/sn/sn09/sn09.011.than.html",
+          "resolution": "Forest monk/deity context, ordered instruction, PTS and CC-BY-NC verified."
+        },
+        {
+          "unit_id": "sn1.3",
+          "path": "tipitaka/sn/sn01/sn01.003.wlsh.html",
+          "resolution": "Distinctive contrasting verses and PTS verified; publisher note explicitly identifies introduction repeated from SN 1.1; BPS notice retained."
+        },
+        {
+          "unit_id": "sn12.16",
+          "path": "tipitaka/sn/sn12/sn12.016.wlsh.html",
+          "resolution": "Three distinctions and dependent-origination sequence, PTS and BPS notice verified; label repeated clauses as condensed, with editorial summary and Notes distinguished."
+        }
+      ],
+      "report": "ati-introductions-and-notes.md"
     }
   ]
 }

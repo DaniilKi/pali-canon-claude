@@ -4,6 +4,11 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Added first English choices for SN 9.11, SN 1.3 and SN 12.16. Explicit
+  mapping notes distinguish Walshe’s expanded introduction, condensed
+  repetitions and editorial notes from the bundled Pāli and canonical speech.
+  Wrong-discourse selection is rejected for reused framing and titles (D186).
+
 - Added first English choices for SN 4.8, SN 17.5 and SN 3.7 after source,
   content, scope and rights review. Distinguish SN 4.8 from its repeated verses
   in SN 1.12; preserve source abbreviations and explain edition differences.

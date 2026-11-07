@@ -252,6 +252,66 @@
         "vri_verse_groups": 1
       },
       "mapping_note": "Whole-discourse correspondence: ATI Atthakarana Sutta (SN 3.7, PTS S i 74) matches Aḍḍakaraṇasuttaṃ, VRI paragraph 118. Pasenadi’s judgment complaint, the Buddha’s agreement and the concluding fish-in-a-trap verse establish identity. VRI abbreviates the speech-to-verse transition with …pe…; ATI spells it out and abbreviates a repeated wealth description. These edition abbreviations remain unchanged; this is not line-by-line alignment or numbering-only inference."
+    },
+    {
+      "unit_id": "sn9.11",
+      "path": "/tipitaka/sn/sn09/sn09.011.than",
+      "pali_title": "Akusalavitakkasuttaṃ",
+      "english_title": "Inappropriate Attention",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "SN 9.11",
+      "source_verses": "SN 9.11; PTS S i 203",
+      "vri_verses": "231",
+      "source_html_sha256": "cc2600e9b1ad015217a6639bfbfef77d6a960c51db55d83a74aa5de5a6f72e0e",
+      "pali_sha256": "d273eee1e6c950e30a00e00af902d2d095c05cb136de312ce796183038722197",
+      "root_blocks_sha256": "f2d60aeb87726f14bb6a85b5d644161d6529ccfdef2e0e9ddfe755b3dbc6cb92",
+      "evidence": {
+        "basis": "Kosalans forest monk with sensuality, ill-will and harmful thoughts; compassionate forest deity instructs attention, Teacher/Dhamma/Sangha/virtues and joy; monk responds; PTS S i 203.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 2
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Ayoniso-manasikara Sutta (SN 9.11, PTS S i 203) matches Akusalavitakkasuttaṃ, VRI paragraph 231. The forest monk’s three unskillful thoughts, the deity’s ordered advice and the monk’s final response establish identity despite different titles. This is not line-by-line alignment or numbering-only inference. Source “See also” material is editorial."
+    },
+    {
+      "unit_id": "sn1.3",
+      "path": "/tipitaka/sn/sn01/sn01.003.wlsh",
+      "pali_title": "Upanīyasuttaṃ",
+      "english_title": "Doomed",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "source_reference": "SN 1.3",
+      "source_verses": "SN 1.3; PTS S i 2",
+      "vri_verses": "3",
+      "source_html_sha256": "672781b2a4dcffbfbcf2659f66eacafe0a0c35f6d7828b5ea9c62e6b41884cbf",
+      "pali_sha256": "027fdfbb933e59538f70ec0d3ddf40599ff6e51bb9787521970cc04f278c8730",
+      "root_blocks_sha256": "9bbc02a78c431c00fc06f881218db52674f2d59c4ab31d9ff93cea839256e084",
+      "evidence": {
+        "basis": "PTS S i 2, two ordered verses on short life and aging: deva recommends merit, Buddha responds by abandoning worldly bait for peace. Publisher note 1 explicitly attributes expanded introductory framing to SN 1.1.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 2
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Upaneyyam Sutta (SN 1.3, PTS S i 2) matches Upanīyasuttaṃ, VRI paragraph 3. The deva’s merit verse and the Buddha’s contrasting renunciation verse identify this dialogue. Walshe’s note 1 explicitly says the longer introduction repeats SN 1.1’s framing; VRI SN 1.3 keeps a short Savatthi introduction. This is not line-by-line alignment or an expansion of bundled Pāli. The numbered Notes section is the translator’s explanation, not canonical speech. This page is not a translation of SN 1.1."
+    },
+    {
+      "unit_id": "sn12.16",
+      "path": "/tipitaka/sn/sn12/sn12.016.wlsh",
+      "pali_title": "Dhammakathikasuttaṃ",
+      "english_title": "The Teacher of the Dhamma",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "source_reference": "SN 12.16",
+      "source_verses": "SN 12.16; PTS S ii 18",
+      "vri_verses": "16",
+      "source_html_sha256": "0a436c2e09e517ff175c9ff807d357b7f29ac756aa3128a6713135dfad113d59",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "2b1233073761b8161fed88d44b4443261fe1db7faa4086bd8ad165b6c85e56f7",
+      "evidence": {
+        "basis": "PTS S ii 18, three distinctions (teacher, practitioner, liberation) concerning aging-and-death then the dependent-origination sequence through ignorance. Same-named SN 22.115 instead concerns five aggregates.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Publisher’s whole-discourse version with repetitions condensed: ATI Dhammakathiko Sutta (SN 12.16, PTS S ii 18) matches Dhammakathikasuttaṃ, VRI paragraph 16. Teaching, practising and liberation concern aging-and-death and then the dependent-origination sequence through ignorance, unlike the aggregates in same-named SN 22.115. ATI condenses the repeated sequence into a bracketed summary; VRI also abbreviates but lists its intermediate links. This is not line-by-line alignment or a fully expanded rendering of every repeated clause. The bracketed summary and numbered Notes are translator/editorial material; bundled Pāli stays unchanged."
     }
   ]
 }

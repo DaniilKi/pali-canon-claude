@@ -11,7 +11,7 @@ const realFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = realFetch; liveCache.clear(); });
 
 test('source-reviewed whole-text links retain exact edition identity and provenance', () => {
-  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7']);
+  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16']);
   for (const row of manifest.links) {
     const u = canon.resolve(row.unit_id).unit;
     const link = canon.load().translations[u.id].find(t => t.match === 'reviewed-story' && t.path === row.path);
@@ -208,4 +208,24 @@ with tempfile.TemporaryDirectory() as tmp:
  else:raise AssertionError('prose drift accepted')
 `], { encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
+});
+
+test('expanded introductions and condensed repetitions remain explicit, with wrong-discourse selection refused', async () => {
+  const cases = [['sn9.11','sn09/sn09.011.than', /different titles.*See also/s],
+    ['sn1.3','sn01/sn01.003.wlsh', /note 1.*SN 1.1.*numbered Notes/s],
+    ['sn12.16','sn12/sn12.016.wlsh', /repetitions condensed.*SN 22.115.*bracketed summary.*numbered Notes/s]];
+  for (const [uid,path,note] of cases) {
+    const links = english.available(canon.resolve(uid).unit);
+    assert.equal(links.length, 1);
+    assert.equal(links[0].translation_id, `ati:/tipitaka/sn/${path}`);
+    assert.match(links[0].mapping_note, note);
+    assert.equal(canon.resolve(`https://www.accesstoinsight.org/tipitaka/sn/${path}.html`).unit.id, uid);
+  }
+  let calls=0;
+  globalThis.fetch=async()=>{ calls++; throw Error('Must not fetch'); };
+  for (const [uid,id] of [['sn1.1','ati:/tipitaka/sn/sn01/sn01.003.wlsh'],['sn22.115','ati:/tipitaka/sn/sn12/sn12.016.wlsh']]) {
+    assert.ok(english.available(canon.resolve(uid).unit).every(l=>l.translation_id!==id));
+    await assert.rejects(english.translation(canon.resolve(uid).unit,id));
+  }
+  assert.equal(calls,0);
 });
