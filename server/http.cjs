@@ -32374,7 +32374,11 @@ function scopedState(cursor, categories, scope) {
   return parseCursor(match2[2], categories);
 }
 async function findTalks({ query, passage, category = "all", page = 1, limit = 10, cursor } = {}, { canon, fetchHtml = defaultFetch } = {}) {
-  query = plainTerms(query);
+  const queryInput = romanizeLookupInput(query);
+  const passageInput = romanizeLookupInput(passage);
+  query = plainTerms(queryInput.text);
+  passage = passageInput.text;
+  const converted = { ...inputNote(queryInput), ...passageInput.original ? { passage_input_script: passageInput.script, passage_input_romanized: passageInput.text } : {} };
   page = Math.max(1, Math.trunc(Number(page) || 1));
   limit = Math.min(20, Math.max(1, Math.trunc(Number(limit) || 10)));
   if (!query && !passage) throw new Error('Give a topic (query) or a passage (for example "MN 118").');
@@ -32396,6 +32400,7 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
       if (cursor !== void 0) throw new Error("Talk cursor cannot continue this passage search: no distinctive source title is available. Restart without cursor.");
       const why = via ? `${unit.acronym} has no translation page of its own on dhammatalks.org (only its chapter, ${via.acronym}, does)` : !dt ? `${unit.acronym} has no linked \u1E6Ch\u0101nissaro translation on dhammatalks.org` : shared ? `the title of \u1E6Ch\u0101nissaro's translation ("${candidate}") is also part of another of his translation titles, so it cannot single out this passage` : `the title of \u1E6Ch\u0101nissaro's translation ("${dt.reference}") is too general to identify talks about this passage`;
       return {
+        ...converted,
         source: TALKS_SOURCE,
         passage: passageInfo,
         searched_for: null,
@@ -32450,6 +32455,7 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
     if (await remaining(st)) active.push(st);
   }
   return {
+    ...converted,
     source: TALKS_SOURCE,
     ...passageInfo ? { passage: passageInfo } : {},
     searched_for: terms4,
@@ -32465,8 +32471,8 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
 }
 function register13({ tool, z, citation, canon }) {
   tool("find_talks", "Find Dhamma talks by \u1E6Ch\u0101nissaro Bhikkhu on dhammatalks.org by topic (query) or by passage (a citation such as MN 118). Link-only: returns talk titles, dates and URLs from the site's own search, never talk text. Talks are commentary, not scripture.", {
-    query: z.string().max(200).optional().describe('Topic keywords, e.g. "jhana", "Kalamas", "\\"right resolve\\"" (diacritics are removed).'),
-    passage: citation.optional().describe("A passage; talks containing the title of \u1E6Ch\u0101nissaro's translation are found. Combine with query to narrow."),
+    query: z.string().max(200).optional().describe('Topic keywords, e.g. "jhana", "Kalamas", "\\"right resolve\\"" (Roman or supported native P\u0101li; conversion labelled before diacritics are removed).'),
+    passage: citation.optional().describe("A passage in Roman or a supported native script (conversion labelled separately); talks containing the title of \u1E6Ch\u0101nissaro's translation are found. Combine with query to narrow."),
     category: z.enum(["all", "evening", "morning"]).default("all").describe("Evening talks, short morning talks, or both."),
     page: z.number().int().min(1).max(50).default(1).describe("Site results page to start from (20 talks per category per page). To continue a list, use cursor instead."),
     limit: z.number().int().min(1).max(20).default(10),

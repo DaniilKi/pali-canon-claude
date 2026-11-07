@@ -8,6 +8,7 @@
 import { fetchPublic, decodeHtml } from './http.mjs';
 import { liveCache } from './cache.mjs';
 import { createHash } from 'node:crypto';
+import { romanizeLookupInput, inputNote } from './script.mjs';
 
 export const SITE = 'https://www.dhammatalks.org';
 export const CATEGORIES = ['evening', 'morning'];
@@ -164,7 +165,12 @@ function scopedState(cursor, categories, scope) {
  * `fetchHtml` is injectable for tests.
  */
 export async function findTalks({ query, passage, category = 'all', page = 1, limit = 10, cursor } = {}, { canon, fetchHtml = defaultFetch } = {}) {
-  query = plainTerms(query);
+  const queryInput = romanizeLookupInput(query);
+  const passageInput = romanizeLookupInput(passage);
+  query = plainTerms(queryInput.text);
+  passage = passageInput.text;
+  const converted = { ...inputNote(queryInput), ...(passageInput.original
+    ? { passage_input_script: passageInput.script, passage_input_romanized: passageInput.text } : {}) };
   page = Math.max(1, Math.trunc(Number(page) || 1));
   limit = Math.min(20, Math.max(1, Math.trunc(Number(limit) || 10)));
   if (!query && !passage) throw new Error('Give a topic (query) or a passage (for example "MN 118").');
@@ -189,7 +195,7 @@ export async function findTalks({ query, passage, category = 'all', page = 1, li
         : !dt ? `${unit.acronym} has no linked Ṭhānissaro translation on dhammatalks.org`
           : shared ? `the title of Ṭhānissaro's translation ("${candidate}") is also part of another of his translation titles, so it cannot single out this passage`
           : `the title of Ṭhānissaro's translation ("${dt.reference}") is too general to identify talks about this passage`;
-      return { source: TALKS_SOURCE, passage: passageInfo, searched_for: null, results: [], has_more: false,
+      return { ...converted, source: TALKS_SOURCE, passage: passageInfo, searched_for: null, results: [], has_more: false,
         notes: [...notes, `No search was run: ${why}. dhammatalks.org has no passage-to-talk index, and a loose keyword match would be a wrong link. Try a topic query instead.`] };
     }
     terms = `"${phrase}"${query ? ` ${query}` : ''}`;
@@ -236,6 +242,7 @@ export async function findTalks({ query, passage, category = 'all', page = 1, li
     if (await remaining(st)) active.push(st);
   }
   return {
+    ...converted,
     source: TALKS_SOURCE,
     ...(passageInfo ? { passage: passageInfo } : {}),
     searched_for: terms,
@@ -252,8 +259,8 @@ export async function findTalks({ query, passage, category = 'all', page = 1, li
 
 export function register({ tool, z, citation, canon }) {
   tool('find_talks', 'Find Dhamma talks by Ṭhānissaro Bhikkhu on dhammatalks.org by topic (query) or by passage (a citation such as MN 118). Link-only: returns talk titles, dates and URLs from the site\'s own search, never talk text. Talks are commentary, not scripture.', {
-    query: z.string().max(200).optional().describe('Topic keywords, e.g. "jhana", "Kalamas", "\\"right resolve\\"" (diacritics are removed).'),
-    passage: citation.optional().describe('A passage; talks containing the title of Ṭhānissaro\'s translation are found. Combine with query to narrow.'),
+    query: z.string().max(200).optional().describe('Topic keywords, e.g. "jhana", "Kalamas", "\\"right resolve\\"" (Roman or supported native Pāli; conversion labelled before diacritics are removed).'),
+    passage: citation.optional().describe('A passage in Roman or a supported native script (conversion labelled separately); talks containing the title of Ṭhānissaro\'s translation are found. Combine with query to narrow.'),
     category: z.enum(['all', 'evening', 'morning']).default('all').describe('Evening talks, short morning talks, or both.'),
     page: z.number().int().min(1).max(50).default(1).describe('Site results page to start from (20 talks per category per page). To continue a list, use cursor instead.'),
     limit: z.number().int().min(1).max(20).default(10),

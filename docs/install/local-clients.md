@@ -32,7 +32,7 @@ The server has 34 tools. Twenty-seven of them work without internet (`get_text` 
 | `search_access_to_insight` | Searches Access to Insight's indexes | Yes |
 | `get_access_to_insight_text` | Reads an Access to Insight page | Yes |
 | `find_citations` | Finds every citation in a piece of text (an essay, a talk transcript) and checks each one | No |
-| `find_talks` | Finds Dhamma talks by Ṭhānissaro Bhikkhu on dhammatalks.org by topic or passage (titles, dates and links only) | Yes |
+| `find_talks` | Finds Dhamma talks by Ṭhānissaro Bhikkhu by topic/passage in Roman or supported native scripts; separate input labels and equivalent-script cursors (titles, dates and links only) | Yes |
 | `search_commentary` | Searches all included VRI commentary books; returns exact source references without asserting root-text alignment | No |
 | `get_commentary` | Reads the traditional Pāli commentary (Aṭṭhakathā, VRI edition) on a text, clearly labelled as commentary; `script` preserves native-script reading across pages and direct book references | No |
 | `get_post_canonical` | Reads post-canonical Pāli books (Visuddhimagga, Abhidhammatthasaṅgaha, sub-commentaries), labelled as not canon | No |
