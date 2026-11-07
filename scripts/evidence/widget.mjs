@@ -7,7 +7,7 @@ import { SCRIPTS, transliterate } from '../../src/script.mjs';
 import { expectedSegments } from './study-scripts.mjs';
 
 export async function auditWidget(client, { exhaustAligned = false } = {}) {
-  const counts = { scripts: 0, selection_cases: 0, continued_pages: 0, postcanonical_books: 0, root_files: 0, commentary_books: 0, aligned_checked: 0, aligned_available: 0, aligned_unavailable: 0, rejected_requests: 0 };
+  const counts = { scripts: 0, selection_cases: 0, continued_pages: 0, exact_segments: 0, postcanonical_books: 0, root_files: 0, commentary_books: 0, aligned_checked: 0, aligned_available: 0, aligned_unavailable: 0, rejected_requests: 0 };
   const call = async args => {
     const response = await client.callTool({ name: 'read_passage_widget', arguments: args });
     assert.ok(!response.isError, JSON.stringify(response.content)); return response.structuredContent;
@@ -41,6 +41,17 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
       assert.deepEqual(next.pali.segments, expectedSegments(all.slice(offset + args.limit, offset + args.limit * 2), script));
       assert.deepEqual(next.source, first.source); assert.equal(next.canonical, first.canonical);
       counts.selection_cases++; counts.continued_pages++;
+    }
+    for (const args of [{ uid: 'MN 10' }, { uid: 'Vism 1.1' }, { book: 'vin02m1' }, { uid: 'AN 2.1' }]) {
+      const source = await call({ ...args, offset: 1, limit: 1, english: false, script });
+      const segment = source.pali.segments[0].ref;
+      const exact = await call({ ...args, segment, script });
+      assert.deepEqual(exact.pali.segments, source.pali.segments); assert.deepEqual(exact.source, source.source);
+      assert.equal(exact.segment_ref, segment); assert.equal(exact.text_id, source.text_id);
+      assert.equal(exact.selection, source.selection); assert.equal(exact.canonical, source.canonical);
+      assert.equal(exact.approximate, source.approximate); assert.equal(exact.pali.continue_with, null);
+      assert.equal(exact.english, null); assert.match(exact.english_error, /no verified segment-level English alignment/);
+      counts.exact_segments++;
     }
     counts.scripts++;
   }
@@ -86,7 +97,11 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
     else { assert.match(page.availability_note, /No verified commentary alignment/); assert.equal(page.pali.continue_with, null); counts.aligned_unavailable++; }
     counts.aligned_checked++;
   }
-  for (const args of [{}, { uid: 'Vism 1.1', book: 'vin02m1' }, { book: 'unknown-book' }, { uid: 'Vism p. 3' }, { uid: 'Mahāvagga-Ṭīkā' }, { uid: 'Vism 1.1', script: 'unknown' }, { commentary: 'MN 10', uid: 'MN 10' }, { commentary: 'commentary' }, { commentary: 'mn10/c999999' }, { commentary: 'commentary:unknown' }]) {
+  for (const args of [{}, { uid: 'Vism 1.1', book: 'vin02m1' }, { book: 'unknown-book' }, { uid: 'Vism p. 3' }, { uid: 'Mahāvagga-Ṭīkā' }, { uid: 'Vism 1.1', script: 'unknown' }, { commentary: 'MN 10', uid: 'MN 10' }, { commentary: 'commentary' }, { commentary: 'mn10/c999999' }, { commentary: 'commentary:unknown' },
+    { uid: 'MN 10', segment: 'mn1/2' }, { uid: 'Vism 1.1', segment: 'Vism 1.2/2' }, { book: 'vin02m1', segment: 'mn10/7' },
+    { uid: 'MN 10', segment: 'mn10/0' }, { uid: 'MN 10', segment: 'mn10/99999' }, { uid: 'MN 10', segment: 'mn10/2', offset: 1 },
+    { uid: 'MN 10', segment: 'mn10/2', english_offset: 1 }, { commentary: 'MN 10', segment: 'mn10/c66' },
+  ]) {
     assert.equal((await client.callTool({ name: 'read_passage_widget', arguments: args })).isError, true); counts.rejected_requests++;
   }
   assert.equal((await call({ uid: 'MN 10', english: false, limit: 1 })).text_id, 'mn10');

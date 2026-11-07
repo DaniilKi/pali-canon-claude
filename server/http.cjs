@@ -33754,7 +33754,7 @@ function createServer2() {
 
 // src/chatgpt-widget.mjs
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v5";
+var WIDGET_VERSION = "v6";
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 var MCP_APP_MIME = "text/html;profile=mcp-app";
@@ -33780,7 +33780,7 @@ var TOOL_META = {
   "openai/toolInvocation/invoking": "Opening the passage\u2026",
   "openai/toolInvocation/invoked": "Reader updated."
 };
-async function readPassage({ uid, book, commentary, translation: translation2, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6e3, script }) {
+async function readPassage({ uid, book, commentary, segment, translation: translation2, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6e3, script }) {
   if ([uid, book, commentary].filter((value) => value !== void 0).length !== 1) throw new Error("Give exactly one of uid (canonical/post-canonical), book (complete root file), or commentary (aligned citation or direct commentary reference).");
   if (uid !== void 0) {
     const reference = romanizeInput(uid).text;
@@ -33794,6 +33794,24 @@ async function readPassage({ uid, book, commentary, translation: translation2, e
     translation2 = translation2.trim();
   }
   if (script) scriptName(script);
+  if (segment !== void 0) {
+    if (commentary !== void 0) throw new Error("For exact commentary, give its /cN reference in commentary instead of segment.");
+    if (offset !== 0 || englishOffset !== 0) throw new Error("An exact segment cannot be combined with P\u0101li or English continuation offsets.");
+    if (typeof segment !== "string" || segment !== segment.trim() || segment.length > 400) throw new Error("Give the exact segment reference from the selected reader.");
+    const match2 = segment.match(/^.+\/([1-9]\d*)$/);
+    const index4 = match2 ? Number(match2[1]) - 1 : -1;
+    if (!Number.isSafeInteger(index4) || index4 < 0 || index4 > 1e5) throw new Error("Give the exact segment reference from the selected reader, ending in a positive /N.");
+    const page2 = await readPassage({ uid, book, offset: index4, limit: 1, english: false, script });
+    if (page2.pali.segments[0]?.ref !== segment) throw new Error(`Segment ${segment} does not belong to this selection. Copy its exact reference from get_text or get_post_canonical; no other segment was selected.`);
+    const caution = "This is one exact P\u0101li source segment. English translations are linked to whole texts, with no verified segment-level English alignment here. Read the whole citation without segment to request English.";
+    return {
+      ...page2,
+      segment_ref: segment,
+      notes: [...page2.notes || [], caution],
+      pali: { ...page2.pali, next_offset: null, continue_with: null },
+      ...wantEnglish || translation2 !== void 0 ? { english_error: caution } : {}
+    };
+  }
   if (commentary !== void 0) {
     const input2 = romanizeInput(commentary);
     const page2 = getCommentary(input2.text, { offset, limit });
@@ -34009,6 +34027,7 @@ function registerChatgptWidget(server) {
       uid: external_exports.string().min(1).max(300).optional().describe("Canonical or post-canonical citation (Vism 1.1); choose exactly one of uid, book or commentary. Other citations: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, a PTS page such as M i 55, or a suttacentral.net / accesstoinsight.org / dhammatalks.org link."),
       commentary: external_exports.string().trim().min(1).max(300).optional().describe("Commentary selection instead of uid/book: MN 10 for aligned commentary, mn10/c66 for its exact segment, or commentary:<VRI-file>[/cN] for a direct source book/segment. Commentary stays distinct from canon and later works. Use get_commentary uid commentary for the catalogue."),
       book: external_exports.string().trim().min(1).max(100).optional().describe("Complete VRI root source file ID from browse_canon node books, including front matter. Give book instead of uid/commentary. File refs do not identify individual suttas or rules; no English is selected here."),
+      segment: external_exports.string().trim().min(1).max(400).optional().describe("One exact segment ref from the selected get_text/get_post_canonical reader, e.g. mn10/66, Vism 1.1/2 or vri-book:vin02m1/7. Keep uid or book as its source selection. No P\u0101li/English continuation offsets or segment-aligned English. For commentary use its exact /cN reference in commentary instead."),
       script: external_exports.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
       translation: external_exports.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or a translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
       english: external_exports.boolean().default(true).describe("Fetch an English translation (live). false shows the P\u0101li only."),
@@ -34126,7 +34145,7 @@ var WIDGET_HTML = `<!doctype html>
       (s.commentary_pts_page_begins || []).forEach(function (pg) { p.appendChild(el('span', 'pts', 'Commentary PTS ' + pg)); });
       if (s.comments_on_vri_paragraphs) p.appendChild(el('span', 'vri', 'On root VRI \xB6' + s.comments_on_vri_paragraphs));
       (s.pts_page_begins || []).forEach(function (pg) { p.appendChild(el('span', 'pts', pg)); });
-      if ((d.canonical === false || d.selection === 'source_book') && s.ref) p.appendChild(el('span', 'vri', s.ref));
+      if ((d.canonical === false || d.selection === 'source_book' || d.segment_ref) && s.ref) p.appendChild(el('span', 'vri', s.ref));
       if (s.vri_paragraph) p.appendChild(el('span', 'vri', '\xB6' + s.vri_paragraph));
       p.appendChild(document.createTextNode(s.text || ''));
       pali.appendChild(p);

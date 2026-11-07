@@ -169,6 +169,12 @@ def check():
                 assert frame.evaluate("document.documentElement.scrollWidth<=innerWidth")
                 displayed(source["next"])
                 assert "vri-book:vin02m1/8" in frame.locator("#pali").inner_text()
+                displayed(payload["exact"])
+                assert frame.locator("#pali .seg").count() == 1
+                assert "mn10/66" in frame.locator("#pali").inner_text()
+                assert "no verified segment-level English alignment" in frame.locator("#english").inner_text()
+                assert "Showing Pāli segments 66 to 66" in status.text_content()
+                assert frame.locator("#pali button").count() == 0
                 displayed(fixture)
                 assert "Complete source file" not in frame.locator("#meta").inner_text()
                 assert "Post-canonical · not the canon" not in frame.locator("#meta").inner_text()
@@ -191,7 +197,7 @@ def check():
                     "checks": ["initialization", "theme", "source text", "responsive columns", "no horizontal overflow",
                         "named landmarks and headings", "keyboard link activation", "200% zoom", "live status updates",
                         "Pāli continuation", "English pinned continuation after primary recovery", "unpinned offset refused",
-                        "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "commentary labels and availability", "unaligned source caution", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "no invented post-canonical/source-file links", "no JS errors"]})
+                        "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "commentary labels and availability", "unaligned source caution", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "exact Pali segment without invented English alignment", "no invented post-canonical/source-file links", "no JS errors"]})
                 page.close()
         assert not requests, requests
         report = {

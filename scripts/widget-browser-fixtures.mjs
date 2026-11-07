@@ -57,6 +57,7 @@ try {
   assert.ok(refused.pali.segments.length);
   const sourceFile = await read({ book: 'vin02m1', offset: 6, limit: 1 });
   const sourceNext = await read(sourceFile.pali.continue_with.arguments);
+  const exact = await read({ uid: 'MN 10', segment: 'mn10/66' });
   const commentaryFirst = await read({ commentary: 'MN 10', limit: 2 });
   const commentaryNext = await read(commentaryFirst.pali.continue_with.arguments);
   const commentaryDirect = await read({ commentary: 'commentary:s0101a.att.xml', script: 'thai', limit: 2 });
@@ -68,7 +69,7 @@ try {
   const postNative = await read({ uid: transliterate('Vism 1.1', 'roman', 'sinhala'), script: 'sinh', limit: 2 });
   const postUncertain = await read({ uid: 'Vism 1.2', limit: 2 });
   assert.equal(fetches, beforePostFetches, 'post-canonical widget must not fetch or invent English');
-  process.stdout.write(JSON.stringify({ commentary: { first: commentaryFirst, next: commentaryNext, direct: commentaryDirect, absent: commentaryAbsent, uncertain: commentaryUncertain }, source_file: { first: sourceFile, next: sourceNext }, postcanonical: { first: postFirst, next: postNext, native: postNative, uncertain: postUncertain }, html: WIDGET_HTML, fixture: first,
+  process.stdout.write(JSON.stringify({ exact, commentary: { first: commentaryFirst, next: commentaryNext, direct: commentaryDirect, absent: commentaryAbsent, uncertain: commentaryUncertain }, source_file: { first: sourceFile, next: sourceNext }, postcanonical: { first: postFirst, next: postNext, native: postNative, uncertain: postUncertain }, html: WIDGET_HTML, fixture: first,
     continuation: { next, fallback, pinned, unpinned, primary, refused }, fixture_fetches: fetches }));
 } finally {
   globalThis.fetch = originalFetch;

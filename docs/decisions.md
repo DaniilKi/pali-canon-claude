@@ -758,3 +758,9 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** Representative view tests cannot establish that available and unavailable commentary selections remain faithful across the whole root index. A widget must not replace absent alignment with root text or neighbouring commentary.
 - **Decision.** Add an optional complete 8,544-reference sweep to the installed widget audit and enable it in CI. Compare returned availability, segments, notes, source and uncertainty with the bundled commentary reader, alongside all 47 direct books and eight-script selection/cursor cases.
 - **Consequences.** This is mechanical package/wrapper parity against current source mappings, not independent scholarly review. No alignment confidence, coverage or source rights is promoted by a passing sweep.
+
+### D126. Select exact hosted Pāli segments without asserting English alignment
+
+- **Context.** Exact source refs from canonical, post-canonical and complete-file readings could not be opened precisely in the hosted widget. A source offset alone cannot prove the intended text identity, and whole-text English is not mapped to those Pāli segment boundaries.
+- **Decision.** Accept segment alongside its uid/book selection. Read the indicated position through the existing renderer and require the returned ref to equal the requested ref exactly. Return one segment without continuation; reject missing/cross-source refs and nonzero continuation offsets. Preserve source scope, script and uncertainty, show the exact ref and state that segment-level English alignment is unavailable without fetching a whole translation. Commentary retains its existing exact /cN selector. Version UI resources to v6.
+- **Consequences.** No source content, mapping or rights changes. Exact position matching does not promote approximate canonical spans to scholarly verification. Actual-host and native-reader gates remain open.
