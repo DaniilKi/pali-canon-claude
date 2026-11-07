@@ -287,6 +287,12 @@ creating indexes and collecting garbage; retained indexes make repeated queries 
 local samples, not a latency distribution or reserved CPU. Further cold-index work and real-host
 acceptance remain open.
 
+Sharing admission also means reader calls can wait behind cold searches. The widget's existing
+30-second navigation deadline can expire before a congested read completes; late results remain
+ignored by its existing safety checks. Explicit busy replies and a healthy probe do not establish
+reader latency acceptance. Retest cold mixed reader/search workloads before treating this as an
+acceptable interactive-host profile.
+
 These are instance burst measurements with the **per-IP rate limiter disabled**. The deployed default
 of 120 requests/minute/IP still applies, including initialization and metadata requests. Cold rounds
 took roughly 48–57 seconds in the populated-cache samples, close to many MCP clients' 60-second
