@@ -35,7 +35,7 @@ The normalized strings have 345 and 90 characters respectively. Each matches its
 Run the offline guard:
 
 ```sh
-node scripts/audit-patthana-candidate.mjs --report /tmp/patthana-candidate.report.json
+node scripts/audit-patthana-candidate.mjs --report patthana-candidate.report.json
 ```
 
 It checks the VRI pin, boundaries, normalized target hashes, competing canonical matches and assessment-only adoption state. Regression tests reject whole-unit claims, incorrect text/segment IDs, changed target hashes and an overextended endpoint. The guard does not reacquire the source or certify the unexamined explanations. No source-language content was added to runtime data.
