@@ -89,7 +89,11 @@ export function vinayaRule(reference, canon) {
       read_with: isAs
         ? `get_text("${passage.id}") for the Pāli list of the seven adhikaraṇa-samathas (VRI edition, one paragraph); get_text("${AS_INTRO}") for its intro line.`
         : `get_text("${text.id}") for the full Pāli (VRI edition): origin story, rule and word analysis.`,
-      source: text.source,
+      reading_command: { tool: 'get_text', uid: passage.id },
+      ...(isAs ? { passage_citation: passage.citation, introduction: { id: AS_INTRO, read_with: { tool: 'get_text', uid: AS_INTRO } } } : {}),
+      ...(passage.approximate ? { approximate: true } : {}),
+      ...(passage.alignment ? { alignment: passage.alignment } : {}),
+      source: passage.source,
       suttacentral: text.links.suttacentral,
     },
     buddhist_monastic_code: {

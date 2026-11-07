@@ -29337,7 +29337,11 @@ function vinayaRule(reference, canon) {
       vri_paragraphs: passage.vri_paragraphs,
       first_line: passage.first_line,
       read_with: isAs ? `get_text("${passage.id}") for the P\u0101li list of the seven adhikara\u1E47a-samathas (VRI edition, one paragraph); get_text("${AS_INTRO}") for its intro line.` : `get_text("${text.id}") for the full P\u0101li (VRI edition): origin story, rule and word analysis.`,
-      source: text.source,
+      reading_command: { tool: "get_text", uid: passage.id },
+      ...isAs ? { passage_citation: passage.citation, introduction: { id: AS_INTRO, read_with: { tool: "get_text", uid: AS_INTRO } } } : {},
+      ...passage.approximate ? { approximate: true } : {},
+      ...passage.alignment ? { alignment: passage.alignment } : {},
+      source: passage.source,
       suttacentral: text.links.suttacentral
     },
     buddhist_monastic_code: {
