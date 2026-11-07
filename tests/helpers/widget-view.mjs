@@ -26,17 +26,17 @@ export const fixture = (label = 'first') => ({
 });
 export const settle = () => new Promise(resolve => setImmediate(resolve));
 
-export function view(bridge, { supported = true, modelCapabilities, stateWriter, initialize = true, sizingRuntime, openLinks = true } = {}) {
+export function view(bridge, { supported = true, modelCapabilities, stateWriter, initialize = true, sizingRuntime, openLinks = true, html = WIDGET_HTML } = {}) {
   const elements = Object.fromEntries(['title', 'meta', 'pali', 'english', 'footer', 'status', 'navigation', 'context-status', 'link-status'].map(id => [id, new Element()]));
-  const handlers = {}, calls = [], messages = [], models = [], stateUpdates = [], timers = new Map(); let timer = 0;
+  const handlers = {}, calls = [], messages = [], models = [], stateUpdates = [], timers = new Map(), deadlines = new Map(); let timer = 0, now = 0;
   const parent = { postMessage(m) { messages.push(m); if (m.method === 'tools/call') calls.push(m); if (m.method === 'ui/update-model-context') models.push(m); } };
   const window = { parent, addEventListener(name, cb) { handlers[name] = cb; } };
   if (bridge === 'Apps SDK') window.openai = supported ? { callTool(name, args) { return new Promise((resolve, reject) => calls.push({ name, arguments: args, resolve, reject })); } } : {};
   if (stateWriter) { window.openai ||= {}; window.openai.setWidgetState = state => { stateUpdates.push(state); if (typeof stateWriter === 'function') return stateWriter(state); }; }
   if (sizingRuntime) Object.assign(window, sizingRuntime);
   const document = { body: sizingRuntime && sizingRuntime.body, documentElement: new Element(), getElementById: id => elements[id], createElement: tag => new Element(tag), createTextNode: text => { const e = new Element(); e.textContent = text; return e; } };
-  runInNewContext(WIDGET_HTML.match(/<script>([^]*?)<\/script>/)[1], {
-    window, document, Date, setTimeout(cb) { timers.set(++timer, cb); return timer; }, clearTimeout(id) { timers.delete(id); },
+  runInNewContext(html.match(/<script>([^]*?)<\/script>/)[1], {
+    window, document, Date, setTimeout(cb, ms) { timers.set(++timer, cb); deadlines.set(timer, now + ms); return timer; }, clearTimeout(id) { timers.delete(id); deadlines.delete(id); },
   });
   const message = data => handlers.message({ source: parent, data: { jsonrpc: '2.0', ...data } });
   const init = caps => message({ id: 1, result: { hostCapabilities: { ...(supported ? { serverTools: {} } : {}), ...(openLinks ? { openLinks: {} } : {}), ...(caps === undefined ? {} : { updateModelContext: caps }) } } });
@@ -60,6 +60,7 @@ export function view(bridge, { supported = true, modelCapabilities, stateWriter,
     input(args) { if (bridge === 'Apps SDK') { window.openai.toolInput = args; handlers['openai:set_globals'](); } else message({ method: 'ui/notifications/tool-input', params: { arguments: args } }); },
     click(label) { const button = elements.navigation.children.find(c => c.textContent === label); assert.ok(button, label); button.click(); return button; },
     timeout() { for (const cb of [...timers.values()]) cb(); },
+    advance(ms) { const end = now + ms; for (;;) { const next = [...deadlines].filter(([id, due]) => timers.has(id) && due <= end).sort((a,b) => a[1]-b[1])[0]; if (!next) break; const [id, due] = next, cb = timers.get(id); now = due; timers.delete(id); deadlines.delete(id); cb(); } now = end; },
   };
 }
 

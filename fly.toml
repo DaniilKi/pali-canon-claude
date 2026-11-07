@@ -21,10 +21,10 @@ primary_region = "iad"
   min_machines_running = 1
   [http_service.concurrency]
     type = "requests"
-    # Prefer other available Machines before the 32-call core worker bound is reached.
+    # Prefer other available Machines before the 24-call worker bound is reached.
     # The hard limit also leaves room for metadata, reader and retry responses.
     soft_limit = 16
-    hard_limit = 64
+    hard_limit = 48
 
 [[http_service.checks]]
   interval = "30s"

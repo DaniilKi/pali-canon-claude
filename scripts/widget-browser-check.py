@@ -142,7 +142,7 @@ def check():
                     else:
                         button.click()
                     assert frame.locator("#navigation").get_attribute("aria-busy") == "true"
-                    assert frame.locator("#navigation button").evaluate_all("buttons=>buttons.every(b=>b.disabled)")
+                    assert frame.locator("#navigation button").evaluate_all("buttons=>buttons.every(b=>b.textContent==='Stop waiting'?!b.disabled:b.disabled)")
                     notify("ui/notifications/tool-input-partial", {"arguments": {"uid": "Private provisional UI echo fixture"}})
                     reply(command, data)
                     verified(data)
@@ -308,6 +308,39 @@ def check():
                 displayed(payload["returned"])
                 assert frame.locator("#pali .seg").count() == 1
                 assert "Source context for" not in frame.locator("#meta").inner_text()
+                # Exercise actual Chromium timers across the old deadline with both host bridges.
+                # Clock control avoids multiplying 55/90-second wall waits across viewport cases.
+                displayed(fixture)
+                context_verified(fixture)
+                page.clock.install()
+                frame.get_by_role("button", name="Continue Pāli", exact=True).click()
+                page.wait_for_function("window.navQueue.length===1")
+                frame.get_by_role("button", name="Stop waiting", exact=True).wait_for()
+                page.wait_for_timeout(50)
+                page.clock.fast_forward(55000)
+                assert frame.locator("#navigation").get_attribute("aria-busy") == "true"
+                reply(fixture["pali"]["continue_with"], continuation["next"])
+                verified(continuation["next"])
+                for late_error in [False, True]:
+                    displayed(fixture)
+                    frame.get_by_role("button", name="Continue Pāli", exact=True).click()
+                    page.wait_for_function("window.navQueue.length===1")
+                    frame.get_by_role("button", name="Stop waiting", exact=True).press("Enter")
+                    frame.locator("#title").filter(has_text="Reading cancelled").wait_for()
+                    reply(fixture["pali"]["continue_with"], continuation["next"], "Late cancelled fixture" if late_error else None)
+                    page.wait_for_timeout(30)
+                    assert frame.locator("#title").inner_text() == "Reading cancelled"
+                    assert frame.locator("#pali .seg").count() == 0
+                displayed(fixture)
+                frame.get_by_role("button", name="Continue Pāli", exact=True).click()
+                page.wait_for_function("window.navQueue.length===1")
+                page.wait_for_timeout(50)
+                page.clock.fast_forward(90000)
+                frame.locator("#status").filter(has_text="within 90 seconds").wait_for()
+                reply(fixture["pali"]["continue_with"], continuation["next"])
+                page.wait_for_timeout(30)
+                assert frame.locator("#pali .seg").count() == 0
+                displayed(payload["returned"])
                 if bridge == "MCP Apps":
                     context_verified(payload["returned"])
                     page.evaluate("window.contextAutoAck=false")
@@ -430,7 +463,7 @@ def check():
                     "checks": ["initialization", "theme", "source text", "responsive columns", "no horizontal overflow",
                         "named landmarks and headings", "keyboard link activation", "host link refusal preserves source and reports failure", "malformed MCP and rejected legacy link outcomes", "200% zoom", "live status updates", "streamed input loading and cancellation", "private partial arguments omitted", "partial echoes preserve pending reads", "closed reader ignores partial input", "cancelled reading clears source and model state", "late cancelled replies ignored and fresh reading recovers",
                         "Pāli continuation", "English pinned continuation after primary recovery", "unpinned offset refused",
-                        "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "commentary labels and availability", "unaligned source caution", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "exact Pali segment without invented English alignment", "source-preserving context and exact return", "direct navigation controls and keyboard activation", "late success and rejection ignored", "navigation failure clears stale content", "local navigation survives globals updates", "model-context capability and modality checks", "metadata-only source context and replay commands", "late context acknowledgements coalesce to current state", "context errors leave the reader usable", "cleared reading state on error", "teardown acknowledgement and terminal cleanup", "late closed-reader replies ignored", "no invented post-canonical/source-file links", "no JS errors"]})
+                        "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "commentary labels and availability", "unaligned source caution", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "exact Pali segment without invented English alignment", "source-preserving context and exact return", "direct navigation controls and keyboard activation", "55-second cold wait retained", "finite 90-second navigation timeout", "keyboard Stop waiting and stale cancelled replies", "late success and rejection ignored", "navigation failure clears stale content", "local navigation survives globals updates", "model-context capability and modality checks", "metadata-only source context and replay commands", "late context acknowledgements coalesce to current state", "context errors leave the reader usable", "cleared reading state on error", "teardown acknowledgement and terminal cleanup", "late closed-reader replies ignored", "no invented post-canonical/source-file links", "no JS errors"]})
                 page.close()
         sizing = check_sizing(browser, payload)
         assert not requests, requests

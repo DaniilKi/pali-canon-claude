@@ -37,7 +37,8 @@ for (const bridge of ['MCP Apps', 'Apps SDK']) {
     ui.output(data);
     assert.equal(ui.elements.navigation.children.length, 4);
     ui.click('Continue Pāli'); ui.click('Continue English');
-    assert.equal(ui.calls.length, 1); assert.ok(ui.elements.navigation.children.filter(b => b.tagName === 'button').every(b => b.disabled));
+    assert.equal(ui.calls.length, 1); assert.ok(ui.elements.navigation.children.filter(b => b.tagName === 'button' && b.textContent !== 'Stop waiting').every(b => b.disabled));
+    assert.equal(ui.elements.navigation.children.find(b => b.textContent === 'Stop waiting').disabled, undefined);
     const sent = bridge === 'Apps SDK' ? { name: ui.calls[0].name, arguments: ui.calls[0].arguments } : ui.calls[0].params;
     assert.equal(JSON.stringify(sent), JSON.stringify(data.pali.continue_with));
     assert.equal(ui.elements.navigation.attributes['aria-busy'], 'true');

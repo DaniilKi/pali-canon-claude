@@ -24,7 +24,9 @@ import { getCommentary } from './commentary.mjs';
 import { HostedToolError } from './hosted-tool-error.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v16';
+export const WIDGET_VERSION = 'v17';
+// Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.
+export const NAVIGATION_TIMEOUT_MS = 90000;
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 export const SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 export const MCP_APP_MIME = 'text/html;profile=mcp-app';
@@ -477,7 +479,16 @@ export const WIDGET_HTML = `<!doctype html>
     if (closed) return;
     if (awaitingSelection) { nav.appendChild(el('p', 'note', 'Opening the requested passage…')); return; }
     if (!canNavigate() || !rendered || !rendered.pali) return;
-    if (pending) nav.appendChild(el('p', 'note', 'Loading the requested passage…'));
+    if (pending) {
+      nav.appendChild(el('p', 'note', 'Loading the requested passage… Waiting up to 90 seconds.'));
+      var active = pending, stop = el('button', '', 'Stop waiting'); stop.type = 'button';
+      stop.addEventListener('click', function () {
+        if (pending !== active || closed) return;
+        render({ cancelled: true, error: 'Stopped waiting for this passage. Ask to open it again when you are ready.' });
+        var title = document.getElementById('title'); if (typeof title.focus === 'function') title.focus();
+      });
+      nav.appendChild(stop);
+    }
     var d = rendered;
     [[d.pali.context_with, 'Surrounding Pāli'], [d.pali.exact_with, 'Return to exact segment'], [d.pali.continue_with, 'Continue Pāli'], [d.english && d.english.continue_with, 'Continue English']].forEach(function (entry) {
       var command = entry[0];
@@ -521,7 +532,7 @@ export const WIDGET_HTML = `<!doctype html>
     document.getElementById('status').textContent = 'Loading the requested passage…';
     wantModelContext(vacantContext('loading'));
     if (closed || pending !== call) return;
-    call.timer = setTimeout(function () { finish(call, null, new Error('The host did not respond. Ask to reopen the selection.')); }, 30000);
+    call.timer = setTimeout(function () { finish(call, null, new Error('The host did not respond within 90 seconds. Ask to reopen the selection.')); }, ${NAVIGATION_TIMEOUT_MS});
     try {
       if (serverTools) post({ jsonrpc: '2.0', id: call.id, method: 'tools/call', params: command });
       else if (window.openai && typeof window.openai.callTool === 'function') {

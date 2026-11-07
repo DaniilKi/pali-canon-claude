@@ -153,10 +153,10 @@ not emulate Fly's credit system. It is evidence against transferring the sustain
 shared tier, not a claim that shared Machines can never serve this application.
 
 The template now measures concurrent **requests**, with a soft routing threshold of **16** and a hard
-threshold of **64**. The application admits at most 32 outstanding tool calls, including reader calls. The old
+threshold of **48**. The application admits at most 24 outstanding tool calls, including reader calls. The old
 100-request soft threshold was above that bound; the new value is intended to prefer spare Machines
 before the core queue fills. The higher hard threshold leaves room for metadata, reader and retry
-responses; it is not a promise of 64 simultaneous heavy reads. Fly documents how these thresholds
+responses; it is not a promise of 48 simultaneous heavy reads. Fly documents how these thresholds
 [deprioritize or exclude a Machine from routing](https://docs.fly.io/reference/load-balancing).
 
 This only helps when other capacity exists. Fly's [autostop/autostart](https://docs.fly.io/launch/autostop-autostart)
@@ -190,7 +190,7 @@ completed tool call; `frontend_cache` remains for diagnostics but reader request
 The reader uses the same corpus objects, search state and live cache as the core tools, avoiding a
 second copy of the large post-canonical/commentary datasets in the HTTP loop. Widget resources and
 advertised metadata stay available on the HTTP thread; a reading request still needs healthy worker
-capacity. A crashed or unresponsive worker makes health return HTTP 503. At most 32
+capacity. A crashed or unresponsive worker makes health return HTTP 503. At most 24
 tool calls may be outstanding; additional calls return an explicit queue-full tool error for retry.
 A 180-second dispatch deadline includes queueing and provider waits. If any admitted call exceeds it,
 the watchdog rejects outstanding calls and stops the worker; the process must restart before tool
@@ -240,6 +240,16 @@ probes without a failure: maximum health latency was 365 ms and warm rounds took
 Process high-water RSS was about 1.3 GiB. These are local Node 20 container measurements, not an
 actual-provider SLA, proof of 64 simultaneous heavy calls, full-cache or signed-in-client acceptance.
 
+The compute worker now requests a **1,408 MiB old-generation JavaScript heap** inside the same
+**2 GiB container limit**. A diagnostic Node 20 full-study run observed an automatic heap limit of
+1,098,907,648 bytes and a worker exit with `ERR_WORKER_OUT_OF_MEMORY`, even though the server process
+and its health endpoint could remain alive. The larger explicit worker heap addresses that internal
+limit; it does not allocate extra infrastructure or replace the outer memory cap.
+[Node's worker resource-limit documentation](https://nodejs.org/docs/latest-v20.x/api/worker_threads.html#new-workerfilename-options)
+distinguishes JavaScript heap limits from buffers and process-wide memory, and notes that
+`--max-old-space-size` overrides this worker setting. The fixed-budget audits must still pass; custom
+V8 flags or larger workloads require their own acceptance checks.
+
 ### Capacity with populated caches
 
 The capacity audit fills the shared live-response cache through both public reading tools, using
@@ -251,7 +261,7 @@ through the subsequent workload. Optional `--reader-caches` also opens one sourc
 from all 109 post-canonical books, 61 root files and 47 commentary books before mixed tool requests.
 
 ```sh
-node scripts/audit-hosted-load.mjs --clients 32 --rounds 3 --full-cache --reader-caches --report capacity.json
+node scripts/audit-hosted-load.mjs --clients 24 --rounds 3 --full-cache --reader-caches --reader-ui --report capacity.json
 # Deliberate overload: queue-full rejections remain visible and are accepted only with this flag.
 node scripts/audit-hosted-load.mjs --clients 100 --rounds 3 --full-cache --allow-overload --report overload.json
 ```
@@ -287,11 +297,50 @@ creating indexes and collecting garbage; retained indexes make repeated queries 
 local samples, not a latency distribution or reserved CPU. Further cold-index work and real-host
 acceptance remain open.
 
-Sharing admission also means reader calls can wait behind cold searches. The widget's existing
-30-second navigation deadline can expire before a congested read completes; late results remain
-ignored by its existing safety checks. Explicit busy replies and a healthy probe do not establish
-reader latency acceptance. Retest cold mixed reader/search workloads before treating this as an
-acceptable interactive-host profile.
+Sharing admission also means reader calls can wait behind cold searches. Reader v17 permits a
+bounded **90-second navigation wait**, covering the reproduced 54–55-second cold reads that exceeded
+the previous 30-second UI timer. It shows the wait budget and provides a keyboard-accessible **Stop
+waiting** control. Cancellation or timeout clears the old passage and requests cleared reading context, and a late
+success/failure cannot replace a newer reading. Host rejection, transport failure or explicit busy
+replies still end the wait immediately; a host may impose its own shorter deadline.
+
+Stop waiting ends the UI wait, not the server's running read: it does not claim a host cancellation
+API or interrupt a synchronous scan. The worker retains a bounded 24-call admission limit and 180-second
+watchdog, and the UI never replays automatically. The installed mixed-load audit can pass measured
+tool durations through both bridge implementations using deterministic clocks (`--reader-ui`),
+including a same-HTML 30-second timer control. Chromium separately verifies the 55/90-second timer
+boundaries, keyboard cancellation and stale replies with browser clock control. These checks fix a
+UI deadline mismatch, not cold-search speed, actual-host latency or support for long calls in every
+client. Explicit busy replies and healthy probes do not establish interactive-host acceptance.
+
+UI replay runs after the measured burst, so simulated client rendering is not charged to the server's
+one-CPU budget. An earlier instrumentation-heavy overload sample ran it during the burst and hit 28
+ordinary 60-second MCP client timeouts; that failed run is retained separately. The audit preserves
+normal client timeouts and reports unexpected failures rather than extending them to obtain a pass.
+Deferred replay still exposed eight client timeouts, and a separate server-only probe confirmed the
+worker heap exhaustion described above. The final admission bound is 24, with explicit busy responses
+for excess work; the proposed Fly hard routing limit is 48. A healthy probe alone is insufficient.
+
+For a prestarted **local** resource-isolated server, the audit also accepts `--connect-url` (HTTP
+127.0.0.1 only), `--server-pid` and `--server-log`. This keeps client CPU outside the server budget while
+measuring the actual server PID and checking its outbound guard log. It does not create or expose a
+production service. Record the independently enforced container limits and stop the owned server
+after testing; the audit deliberately does not terminate an externally supplied process.
+
+With the explicit worker heap and 24-call admission, a fresh server-only one-CPU/2 GiB test completed
+76 of 300 calls and returned 224 controlled busy responses, with **zero unexpected tool or health
+failures**. All 424 health probes passed, the queue drained and the exact recovery read succeeded.
+Maximum cold tool time was **33.0 seconds**, warm maxima 3.6 and 2.4 seconds, and peak server RSS
+**1.59 GiB**. Reader replies at 33 seconds still fail the former UI timer, while v17 displays them.
+This removes the reproduced automatic-heap failure in that sample, not every possible workload or
+host deadline. The combined client/server container scenarios remain separately reported because
+their CPU and memory budgets include the test driver too.
+
+The final CI-style combined-container, full-cache 24-client case completed all 72 calls with no
+rejections, 474 healthy probes (323 ms maximum), 33.1 seconds maximum tool time and 1.54 GiB peak
+server RSS. A separate fresh-process case without live-cache/reader-book prepopulation completed
+all 72 calls with 323 healthy probes and no rejections. Both use the same one-CPU/2 GiB limit,
+unchanged 60-second MCP client deadline and deterministic post-burst UI replay.
 
 These are instance burst measurements with the **per-IP rate limiter disabled**. The deployed default
 of 120 requests/minute/IP still applies, including initialization and metadata requests. Cold rounds
@@ -300,12 +349,11 @@ deadline. Use small batches, handle explicit queue-full responses with a later r
 actual host before increasing traffic. Fly's HTTP concurrency settings are routing limits, not a
 promise that 100 or 200 simultaneous heavy tools will complete without rejection.
 
-The hosted CI job repeats the 32-client populated-cache/warmed-reader scenario and requires no
+The hosted CI job repeats the 24-client populated-cache/warmed-reader scenario and requires no
 rejections, successful recovery reading and healthy probes during cache population as well as the
 burst. A deliberate overload run reports `passed_with_overload`, never an unconditional pass. This
 still does not establish an upper bound for other queries, larger responses, more simultaneous calls,
-real provider behavior, native-reader review or signed-in-client acceptance. The 32-call admission bound fixes the reproduced timeout pattern; it does not guarantee those
-latencies for arbitrary queries or hosts.
+real provider behavior, native-reader review or signed-in-client acceptance. Admission bounds do not guarantee those latencies for arbitrary queries or hosts.
 
 Result on a Windows 11 laptop (1 November 2026), 50 concurrent sessions, no errors:
 

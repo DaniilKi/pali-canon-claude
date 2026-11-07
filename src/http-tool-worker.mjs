@@ -5,9 +5,12 @@ import {fileURLToPath} from 'node:url';
 import {HostedToolError} from './hosted-tool-error.mjs';
 let here;try{here=__dirname;}catch{here=join(dirname(fileURLToPath(import.meta.url)),'..','server');}
 const workerPath=()=>join(here,'http-worker.cjs');
+// The full-study isolate exceeds Node 20's automatic ~1 GiB heap under the 2 GiB template.
+// This is a JS heap limit, not extra RAM; the enclosing 2 GiB memory gate still applies.
+export const HOSTED_WORKER_HEAP_MB = 1408;
 
 export class HttpToolWorker {
- constructor({maxPending=32,timeoutMs=180000,workerFactory=()=>new Worker(workerPath())}={}) {
+ constructor({maxPending=24,timeoutMs=180000,workerFactory=options=>new Worker(workerPath(),options)}={}) {
   this.maxPending=maxPending;this.timeoutMs=timeoutMs;this.workerFactory=workerFactory;this.pending=new Map();this.nextId=0;this.worker=null;this.failure=null;this.closed=false;this.cache=null;
  }
  status() {return {state:this.closed?'closed':this.failure?'failed':this.worker?'running':'idle',pending:this.pending.size,limit:this.maxPending};}
@@ -19,7 +22,7 @@ export class HttpToolWorker {
   if(this.closed||this.failure)return Promise.reject(this.failure||new HostedToolError('HOSTED_TOOL_CLOSED'));
   if(this.pending.size>=this.maxPending)return Promise.reject(new HostedToolError('HOSTED_TOOL_BUSY'));
   if(!this.worker){
-   try{this.worker=this.workerFactory();}catch{this.fail();return Promise.reject(this.failure);}
+   try{this.worker=this.workerFactory({resourceLimits:{maxOldGenerationSizeMb:HOSTED_WORKER_HEAP_MB}});}catch{this.fail();return Promise.reject(this.failure);}
    this.worker.on('message',message=>{const job=this.pending.get(message.id);if(!job)return;clearTimeout(job.timer);this.pending.delete(message.id);if(message.cache)this.cache=message.cache;if(message.result)job.resolve(message.result);else job.reject(new HostedToolError('HOSTED_TOOL_EXECUTION_FAILED'));});
    this.worker.on('error',()=>this.fail());this.worker.on('exit',()=>{if(!this.closed)this.fail();});
   }

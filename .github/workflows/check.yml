@@ -62,9 +62,11 @@ jobs:
             --mount "type=bind,src=$RUNNER_TEMP/memory-package/package,dst=/package,readonly" \
             --mount "type=bind,src=$GITHUB_WORKSPACE/scripts,dst=/app/scripts,readonly" \
             --mount "type=bind,src=$GITHUB_WORKSPACE/node_modules,dst=/app/node_modules,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/src,dst=/app/src,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/tests,dst=/app/tests,readonly" \
             --mount "type=bind,src=$RUNNER_TEMP/memory-report,dst=/report" \
             node:20-slim node /app/scripts/audit-hosted-load.mjs \
-            --server-dir /package/server --clients 32 --rounds 3 --full-cache --reader-caches --report /report/full-cache.json
+            --server-dir /package/server --clients 24 --rounds 3 --full-cache --reader-caches --reader-ui --report /report/full-cache.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:

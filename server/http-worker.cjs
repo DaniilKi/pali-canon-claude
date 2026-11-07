@@ -32597,7 +32597,8 @@ function createServer({ executeTool } = {}) {
 // src/chatgpt-widget.mjs
 var import_node_crypto4 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v16";
+var WIDGET_VERSION = "v17";
+var NAVIGATION_TIMEOUT_MS = 9e4;
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 var MCP_APP_MIME = "text/html;profile=mcp-app";
@@ -33137,7 +33138,16 @@ var WIDGET_HTML = `<!doctype html>
     if (closed) return;
     if (awaitingSelection) { nav.appendChild(el('p', 'note', 'Opening the requested passage\u2026')); return; }
     if (!canNavigate() || !rendered || !rendered.pali) return;
-    if (pending) nav.appendChild(el('p', 'note', 'Loading the requested passage\u2026'));
+    if (pending) {
+      nav.appendChild(el('p', 'note', 'Loading the requested passage\u2026 Waiting up to 90 seconds.'));
+      var active = pending, stop = el('button', '', 'Stop waiting'); stop.type = 'button';
+      stop.addEventListener('click', function () {
+        if (pending !== active || closed) return;
+        render({ cancelled: true, error: 'Stopped waiting for this passage. Ask to open it again when you are ready.' });
+        var title = document.getElementById('title'); if (typeof title.focus === 'function') title.focus();
+      });
+      nav.appendChild(stop);
+    }
     var d = rendered;
     [[d.pali.context_with, 'Surrounding P\u0101li'], [d.pali.exact_with, 'Return to exact segment'], [d.pali.continue_with, 'Continue P\u0101li'], [d.english && d.english.continue_with, 'Continue English']].forEach(function (entry) {
       var command = entry[0];
@@ -33181,7 +33191,7 @@ var WIDGET_HTML = `<!doctype html>
     document.getElementById('status').textContent = 'Loading the requested passage\u2026';
     wantModelContext(vacantContext('loading'));
     if (closed || pending !== call) return;
-    call.timer = setTimeout(function () { finish(call, null, new Error('The host did not respond. Ask to reopen the selection.')); }, 30000);
+    call.timer = setTimeout(function () { finish(call, null, new Error('The host did not respond within 90 seconds. Ask to reopen the selection.')); }, ${NAVIGATION_TIMEOUT_MS});
     try {
       if (serverTools) post({ jsonrpc: '2.0', id: call.id, method: 'tools/call', params: command });
       else if (window.openai && typeof window.openai.callTool === 'function') {
