@@ -23,7 +23,7 @@ import { readBook } from './source-books.mjs';
 import { getCommentary } from './commentary.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v15';
+export const WIDGET_VERSION = 'v16';
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 export const SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 export const MCP_APP_MIME = 'text/html;profile=mcp-app';
@@ -57,7 +57,7 @@ export const TOOL_META = {
 };
 
 /** Data for the widget: Pāli segments (VRI) plus one English translation, each with its attribution. */
-export async function readPassage({ uid, book, commentary, segment, context = 0, source_commit: sourceCommit, anchor_sha256: anchorHash, translation, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6000, script }) {
+export async function readPassage({ uid, book, commentary, segment, context = 0, source_commit: sourceCommit, anchor_sha256: anchorHash, translation, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, english_prefix_sha256: englishPrefix, englishCharacters = 6000, script }) {
   if ([uid, book, commentary].filter(value => value !== undefined).length !== 1) throw new Error('Give exactly one of uid (canonical/post-canonical), book (complete root file), or commentary (aligned citation or direct commentary reference).');
   if (sourceCommit !== undefined && sourceCommit !== canon.source().commit) throw new Error('The requested VRI source version is no longer bundled. Reopen the selection from the current source; no continuation or context was substituted.');
   if (!Number.isInteger(context) || context < 0 || context > 20) throw new Error('Context must be an integer from 0 to 20 neighbouring segments on each side.');
@@ -68,6 +68,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
   const commentaryAnchor = commentary !== undefined ? romanizeInput(commentary).text.match(/^(.+)\/c([1-9]\d*)$/) : null;
   if (segment === undefined && !commentaryAnchor && (context !== 0 || anchorHash !== undefined)) throw new Error('Context and anchor_sha256 require an exact segment selection.');
   if (commentaryAnchor && (context !== 0 || anchorHash !== undefined) && (offset !== 0 || englishOffset !== 0)) throw new Error('Commentary context cannot be combined with continuation offsets.');
+  if (englishPrefix !== undefined && (!wantEnglish || englishOffset <= 0 || typeof englishPrefix !== 'string' || !/^[a-f0-9]{64}$/.test(englishPrefix))) throw new Error('english_prefix_sha256 requires English continuation and its unchanged prefix hash.');
   if (translation !== undefined) {
     if (typeof translation !== 'string' || !translation.trim()) throw new Error('Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.');
     translation = translation.trim();
@@ -206,7 +207,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
       if (englishOffset > 0 && !/^(dt|ati|aj):/.test(translation || '')) {
         throw new Error('To continue English, use the exact translation_id from the previous result (english.continue_with gives the full arguments). Character offsets cannot be transferred between versions; start at english_offset 0 to choose a new translation.');
       }
-      const t = await english.translation(unit, translation && translation !== 'default' ? translation : undefined, { offset: englishOffset, limit: englishCharacters });
+      const t = await english.translation(unit, translation && translation !== 'default' ? translation : undefined, { offset: englishOffset, limit: englishCharacters, prefix_sha256: englishPrefix });
       if (englishOffset > 0 && t.translation_id !== translation) {
         throw new Error('Cannot continue at this character offset: the requested translation is unavailable and the fallback is a different version. Retry the original translation later, or restart the fallback with english_offset 0.');
       }
@@ -214,11 +215,11 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
         translator: t.translator, translation_id: t.translation_id, source: t.source, url: t.url,
         reference: (canon.describe(unit).english.find((e) => e.translation_id === t.translation_id) || {}).reference,
         fetched_from: t.fetched_from, attribution: t.attribution, license: t.license,
-        text: t.text, offset: t.offset, total_characters: t.total_characters, next_offset: t.next_offset, truncated: t.next_offset !== null, notes: t.notes,
-        read_with: { name: WIDGET_TOOL, arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.offset, ...(script ? { script: scriptName(script) } : {}) } },
+        text: t.text, prefix_sha256: t.prefix_sha256, offset: t.offset, total_characters: t.total_characters, next_offset: t.next_offset, truncated: t.next_offset !== null, notes: t.notes,
+        read_with: { name: WIDGET_TOOL, arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.offset, ...(t.offset > 0 ? { english_prefix_sha256: t.prefix_sha256 } : {}), ...(script ? { script: scriptName(script) } : {}) } },
         continue_with: t.next_offset !== null ? {
           name: WIDGET_TOOL,
-          arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset, ...(script ? { script: scriptName(script) } : {}) },
+          arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset, english_prefix_sha256: t.continue_with.arguments.prefix_sha256, ...(script ? { script: scriptName(script) } : {}) },
         } : null,
       };
     } catch (error) {
@@ -262,6 +263,7 @@ export function registerChatgptWidget(server) {
       english: z.boolean().default(true).describe('Fetch an English translation (live). false shows the Pāli only.'),
       offset: z.number().int().min(0).max(100000).default(0).describe('Pāli segment offset for continuation.'),
       limit: z.number().int().min(1).max(80).default(40).describe('Pāli segments to show.'),
+      english_prefix_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Unchanged prefix hash from english.continue_with. Rejects continuation when preceding upstream text changed. Requires English and a positive english_offset.'),
       english_offset: z.number().int().min(0).max(10000000).default(0).describe('English character offset for continuation. Use english.continue_with.arguments from the previous result: non-zero offsets require its exact translation_id, so a source recovery/outage cannot transfer offsets to another version. Shows up to 6,000 characters per call.'),
     },
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
@@ -393,7 +395,7 @@ export const WIDGET_HTML = `<!doctype html>
       source: { name: source.name, repository: source.repository, commit: source.commit, files: source.files, attribution: source.attribution, terms: source.terms },
       pali: { offset: p.offset, returned: p.returned, total_segments: p.total_segments, refs: (p.segments || []).map(function (s) { return s.ref; }), read_with: p.read_with },
       english: e ? { state: 'displayed', translation_id: e.translation_id, translator: e.translator, source: e.source, url: e.url,
-        fetched_from: e.fetched_from, offset: e.offset, next_offset: e.next_offset, total_characters: e.total_characters,
+        fetched_from: e.fetched_from, prefix_sha256: e.prefix_sha256, offset: e.offset, next_offset: e.next_offset, total_characters: e.total_characters,
         attribution: e.attribution, license: e.license, notes: e.notes || [], read_with: e.read_with }
         : { state: 'not_displayed', note: d.english_error || 'No English translation requested.', linked_versions: (d.english_available || []).map(function (version) { return version.translation_id; }) },
       quotation: 'Reading metadata only; no passage text is included. Retrieve read_with and verify its source, references and cautions before quoting. No scholarly or native-reader approval is implied.' };
@@ -494,7 +496,7 @@ export const WIDGET_HTML = `<!doctype html>
           (args.uid && data.text_id !== args.uid && data.citation !== args.uid) ||
           (args.commentary && (data.content_type !== 'commentary' || (data.context_for !== args.commentary && data.citation !== args.commentary && !(data.requested_on && data.requested_on.id === args.commentary)))) ||
           (args.context > 0 && data.context_for !== (args.segment || args.commentary)) ||
-          (args.english_offset > 0 && data.english && data.english.translation_id !== args.translation)) {
+          (args.english_offset > 0 && data.english && (data.english.translation_id !== args.translation || (args.english_prefix_sha256 && data.english.prefix_sha256 !== args.english_prefix_sha256)))) {
         error = new Error('The host returned a different source, selection, script or translation version. Ask to reopen the selection.');
       }
     }

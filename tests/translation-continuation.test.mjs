@@ -44,7 +44,7 @@ test('first-page fallback remains labelled and offers an exact continuation afte
   const first = await english.translation(unit, undefined, { limit: 500 });
   assert.match(first.translation_id, /^ati:/);
   assert.match(first.notes.join(' '), /earlier version/);
-  assert.deepEqual(first.continue_with, { name: 'get_translation', arguments: { uid: unit.id, translation: first.translation_id, offset: 500, limit: 500 } });
+  assert.deepEqual(first.continue_with, { name: 'get_translation', arguments: { uid: unit.id, translation: first.translation_id, offset: 500, limit: 500, prefix_sha256: first.continue_with.arguments.prefix_sha256 } });
   sources();
   const args = first.continue_with.arguments;
   const next = await english.translation(canon.resolve(args.uid).unit, args.translation, args);

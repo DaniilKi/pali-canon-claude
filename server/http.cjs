@@ -25235,6 +25235,8 @@ var liveCache = new LruCache({
 });
 
 // src/english.mjs
+var import_node_crypto2 = require("node:crypto");
+var prefixHash = (text, offset) => (0, import_node_crypto2.createHash)("sha256").update(text.slice(0, offset)).digest("hex");
 var ATI_MIRRORS = [
   (p) => `https://accesstoinsight.org${p}.html`,
   (p) => `https://raw.githubusercontent.com/bcbsit/ati/main${p}.html`,
@@ -25347,7 +25349,7 @@ function available(unit) {
     ...t.commentary ? { includes_commentary: true } : {}
   }));
 }
-async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
+async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha256: expectedPrefix } = {}) {
   if (which !== void 0) {
     if (typeof which !== "string" || !which.trim()) throw new Error("Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.");
     which = which.trim();
@@ -25355,6 +25357,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
   if (offset > 0 && !/^(ati|dt|aj):/.test(which || "")) {
     throw new Error("Translation continuation requires the exact translation_id returned by the previous page. Use its continue_with arguments; a default or translator name can select a different version after an outage.");
   }
+  if (expectedPrefix !== void 0 && (typeof expectedPrefix !== "string" || !/^[a-f0-9]{64}$/.test(expectedPrefix) || offset <= 0)) throw new Error("prefix_sha256 requires a positive continuation offset and the unchanged SHA-256 from continue_with.");
   const { links, via } = linksFor(unit);
   if (!links.length) {
     throw new Error(`No English translation is linked for ${unit.acronym}. Read the P\u0101li with get_text, or see https://suttacentral.net/${unit.id} for other translations.`);
@@ -25400,6 +25403,9 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
   }
   const { parts_read: partsRead, parts_total: partsTotal, ...rest } = result;
   const text = rest.text;
+  const prefix = prefixHash(text, offset);
+  if (expectedPrefix !== void 0 && (offset > text.length || prefix !== expectedPrefix)) throw new Error("The retrieved translation prefix changed before this character offset. Cannot safely continue: restart at offset 0 and follow the new continue_with arguments.");
+  if (offset > 0 && expectedPrefix === void 0) notes.push("This manually supplied character offset is not guarded against upstream text edits. Restart at offset 0 and follow continue_with to check the preceding text prefix.");
   const complete = partsRead === void 0 || partsRead === partsTotal;
   const nextOffset = offset + limit < text.length ? offset + limit : null;
   if (!complete) notes.push(`This translation is spread over ${partsTotal} pages; ${partsRead} of them ${partsRead === 1 ? "was" : "were"} read for this request. Use continue_with to continue with this exact translation_id and next_offset.`);
@@ -25414,9 +25420,10 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
     limit,
     total_characters: complete ? text.length : null,
     next_offset: nextOffset,
+    prefix_sha256: prefix,
     continue_with: nextOffset === null ? null : {
       name: "get_translation",
-      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit }
+      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit, prefix_sha256: prefixHash(text, nextOffset) }
     },
     match: link.match,
     notes
@@ -33650,11 +33657,12 @@ function createServer2() {
     uid: citation,
     translation: external_exports.string().trim().min(1).max(200).optional().describe('At offset 0: translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), a translator name, or omit for the default. For continuation, use the exact translation_id returned by the previous page.'),
     offset: external_exports.number().int().min(0).max(2e6).default(0).describe("Character offset. For nonzero offsets use the previous result's continue_with arguments, including its exact translation_id; offsets cannot transfer between translation versions."),
-    limit: external_exports.number().int().min(500).max(3e4).default(12e3).describe("Characters per page.")
-  }, async ({ uid, translation: translation2, offset, limit }) => {
+    limit: external_exports.number().int().min(500).max(3e4).default(12e3).describe("Characters per page."),
+    prefix_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Unchanged prefix hash from continue_with. Checks the previously traversed text before applying a character offset; edits require restarting at offset 0.")
+  }, async ({ uid, translation: translation2, offset, limit, prefix_sha256 }) => {
     const input = romanizeInput(uid);
     const { unit } = resolve(input.text);
-    return { ...await translation(unit, translation2, { offset, limit }), ...inputNote(input) };
+    return { ...await translation(unit, translation2, { offset, limit, prefix_sha256 }), ...inputNote(input) };
   }, { network: true });
   tool("compare_translations", "Fetch two to four English translations of the same text side by side, with the P\u0101li opening for reference. Lists what is available when fewer exist.", {
     uid: citation,
@@ -33753,9 +33761,9 @@ function createServer2() {
 }
 
 // src/chatgpt-widget.mjs
-var import_node_crypto2 = require("node:crypto");
+var import_node_crypto3 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v15";
+var WIDGET_VERSION = "v16";
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 var MCP_APP_MIME = "text/html;profile=mcp-app";
@@ -33782,7 +33790,7 @@ var TOOL_META = {
   "openai/toolInvocation/invoking": "Opening the passage\u2026",
   "openai/toolInvocation/invoked": "Reader updated."
 };
-async function readPassage({ uid, book, commentary, segment, context = 0, source_commit: sourceCommit, anchor_sha256: anchorHash, translation: translation2, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6e3, script }) {
+async function readPassage({ uid, book, commentary, segment, context = 0, source_commit: sourceCommit, anchor_sha256: anchorHash, translation: translation2, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, english_prefix_sha256: englishPrefix, englishCharacters = 6e3, script }) {
   if ([uid, book, commentary].filter((value) => value !== void 0).length !== 1) throw new Error("Give exactly one of uid (canonical/post-canonical), book (complete root file), or commentary (aligned citation or direct commentary reference).");
   if (sourceCommit !== void 0 && sourceCommit !== source().commit) throw new Error("The requested VRI source version is no longer bundled. Reopen the selection from the current source; no continuation or context was substituted.");
   if (!Number.isInteger(context) || context < 0 || context > 20) throw new Error("Context must be an integer from 0 to 20 neighbouring segments on each side.");
@@ -33796,6 +33804,7 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
   const commentaryAnchor = commentary !== void 0 ? romanizeInput(commentary).text.match(/^(.+)\/c([1-9]\d*)$/) : null;
   if (segment === void 0 && !commentaryAnchor && (context !== 0 || anchorHash !== void 0)) throw new Error("Context and anchor_sha256 require an exact segment selection.");
   if (commentaryAnchor && (context !== 0 || anchorHash !== void 0) && (offset !== 0 || englishOffset !== 0)) throw new Error("Commentary context cannot be combined with continuation offsets.");
+  if (englishPrefix !== void 0 && (!wantEnglish || englishOffset <= 0 || typeof englishPrefix !== "string" || !/^[a-f0-9]{64}$/.test(englishPrefix))) throw new Error("english_prefix_sha256 requires English continuation and its unchanged prefix hash.");
   if (translation2 !== void 0) {
     if (typeof translation2 !== "string" || !translation2.trim()) throw new Error("Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.");
     translation2 = translation2.trim();
@@ -33810,7 +33819,7 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
     if (!Number.isSafeInteger(index4) || index4 < 0 || index4 > 1e5) throw new Error("Give the exact segment reference from the selected reader, ending in a positive /N.");
     const exact = await readPassage({ uid, book, offset: index4, limit: 1, english: false, script });
     if (exact.pali.segments[0]?.ref !== segment) throw new Error(`Segment ${segment} does not belong to this selection. Copy its exact reference from get_text or get_post_canonical; no other segment was selected.`);
-    const fingerprint = (0, import_node_crypto2.createHash)("sha256").update(JSON.stringify(exact.pali.segments[0])).digest("hex");
+    const fingerprint = (0, import_node_crypto3.createHash)("sha256").update(JSON.stringify(exact.pali.segments[0])).digest("hex");
     if (anchorHash !== void 0 && anchorHash !== fingerprint) throw new Error("The exact source segment has changed. Reopen it before requesting context; no neighbouring passage was substituted.");
     const selector = book !== void 0 ? { book: exact.book_id } : { uid: exact.text_id || exact.citation };
     const args = { ...selector, segment, english: false, source_commit: exact.source.commit, anchor_sha256: fingerprint, ...script ? { script: scriptName(script) } : {} };
@@ -33880,7 +33889,7 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
       if (anchorHash !== void 0) throw new Error("The exact commentary anchor is unavailable; no context was substituted.");
       return displayed;
     }
-    const fingerprint = (0, import_node_crypto2.createHash)("sha256").update(JSON.stringify(displayed.pali.segments[0])).digest("hex");
+    const fingerprint = (0, import_node_crypto3.createHash)("sha256").update(JSON.stringify(displayed.pali.segments[0])).digest("hex");
     if (anchorHash !== void 0 && anchorHash !== fingerprint) throw new Error("The exact commentary segment has changed. Reopen it before requesting context; no neighbouring passage was substituted.");
     const anchor = displayed.pali.segments[0].ref;
     const parent = anchor.replace(/\/c[1-9]\d*$/, "");
@@ -34005,7 +34014,7 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
       if (englishOffset > 0 && !/^(dt|ati|aj):/.test(translation2 || "")) {
         throw new Error("To continue English, use the exact translation_id from the previous result (english.continue_with gives the full arguments). Character offsets cannot be transferred between versions; start at english_offset 0 to choose a new translation.");
       }
-      const t = await translation(unit, translation2 && translation2 !== "default" ? translation2 : void 0, { offset: englishOffset, limit: englishCharacters });
+      const t = await translation(unit, translation2 && translation2 !== "default" ? translation2 : void 0, { offset: englishOffset, limit: englishCharacters, prefix_sha256: englishPrefix });
       if (englishOffset > 0 && t.translation_id !== translation2) {
         throw new Error("Cannot continue at this character offset: the requested translation is unavailable and the fallback is a different version. Retry the original translation later, or restart the fallback with english_offset 0.");
       }
@@ -34019,15 +34028,16 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
         attribution: t.attribution,
         license: t.license,
         text: t.text,
+        prefix_sha256: t.prefix_sha256,
         offset: t.offset,
         total_characters: t.total_characters,
         next_offset: t.next_offset,
         truncated: t.next_offset !== null,
         notes: t.notes,
-        read_with: { name: WIDGET_TOOL, arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.offset, ...script ? { script: scriptName(script) } : {} } },
+        read_with: { name: WIDGET_TOOL, arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.offset, ...t.offset > 0 ? { english_prefix_sha256: t.prefix_sha256 } : {}, ...script ? { script: scriptName(script) } : {} } },
         continue_with: t.next_offset !== null ? {
           name: WIDGET_TOOL,
-          arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset, ...script ? { script: scriptName(script) } : {} }
+          arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset, english_prefix_sha256: t.continue_with.arguments.prefix_sha256, ...script ? { script: scriptName(script) } : {} }
         } : null
       };
     } catch (error2) {
@@ -34082,6 +34092,7 @@ function registerChatgptWidget(server) {
       english: external_exports.boolean().default(true).describe("Fetch an English translation (live). false shows the P\u0101li only."),
       offset: external_exports.number().int().min(0).max(1e5).default(0).describe("P\u0101li segment offset for continuation."),
       limit: external_exports.number().int().min(1).max(80).default(40).describe("P\u0101li segments to show."),
+      english_prefix_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Unchanged prefix hash from english.continue_with. Rejects continuation when preceding upstream text changed. Requires English and a positive english_offset."),
       english_offset: external_exports.number().int().min(0).max(1e7).default(0).describe("English character offset for continuation. Use english.continue_with.arguments from the previous result: non-zero offsets require its exact translation_id, so a source recovery/outage cannot transfer offsets to another version. Shows up to 6,000 characters per call.")
     },
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
@@ -34211,7 +34222,7 @@ var WIDGET_HTML = `<!doctype html>
       source: { name: source.name, repository: source.repository, commit: source.commit, files: source.files, attribution: source.attribution, terms: source.terms },
       pali: { offset: p.offset, returned: p.returned, total_segments: p.total_segments, refs: (p.segments || []).map(function (s) { return s.ref; }), read_with: p.read_with },
       english: e ? { state: 'displayed', translation_id: e.translation_id, translator: e.translator, source: e.source, url: e.url,
-        fetched_from: e.fetched_from, offset: e.offset, next_offset: e.next_offset, total_characters: e.total_characters,
+        fetched_from: e.fetched_from, prefix_sha256: e.prefix_sha256, offset: e.offset, next_offset: e.next_offset, total_characters: e.total_characters,
         attribution: e.attribution, license: e.license, notes: e.notes || [], read_with: e.read_with }
         : { state: 'not_displayed', note: d.english_error || 'No English translation requested.', linked_versions: (d.english_available || []).map(function (version) { return version.translation_id; }) },
       quotation: 'Reading metadata only; no passage text is included. Retrieve read_with and verify its source, references and cautions before quoting. No scholarly or native-reader approval is implied.' };
@@ -34312,7 +34323,7 @@ var WIDGET_HTML = `<!doctype html>
           (args.uid && data.text_id !== args.uid && data.citation !== args.uid) ||
           (args.commentary && (data.content_type !== 'commentary' || (data.context_for !== args.commentary && data.citation !== args.commentary && !(data.requested_on && data.requested_on.id === args.commentary)))) ||
           (args.context > 0 && data.context_for !== (args.segment || args.commentary)) ||
-          (args.english_offset > 0 && data.english && data.english.translation_id !== args.translation)) {
+          (args.english_offset > 0 && data.english && (data.english.translation_id !== args.translation || (args.english_prefix_sha256 && data.english.prefix_sha256 !== args.english_prefix_sha256)))) {
         error = new Error('The host returned a different source, selection, script or translation version. Ask to reopen the selection.');
       }
     }

@@ -2,6 +2,8 @@
 import { fetchMirrors, plainText, decodeHtml } from './http.mjs';
 import { load, linksFor, translationId, sourceName, ANANDAJOTI_BASE, ANANDAJOTI_LICENSE } from './canon.mjs';
 import { liveCache } from './cache.mjs';
+import { createHash } from 'node:crypto';
+const prefixHash = (text, offset) => createHash('sha256').update(text.slice(0, offset)).digest('hex');
 
 const ATI_MIRRORS = [
   (p) => `https://accesstoinsight.org${p}.html`,
@@ -126,7 +128,7 @@ export function available(unit) {
 }
 
 /** Fetch one translation of a text. `which` is a translation_id, a translator name fragment, or omitted for the default. */
-export async function translation(unit, which, { offset = 0, limit = 12000 } = {}) {
+export async function translation(unit, which, { offset = 0, limit = 12000, prefix_sha256: expectedPrefix } = {}) {
   if (which !== undefined) {
     if (typeof which !== 'string' || !which.trim()) throw new Error('Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.');
     which = which.trim();
@@ -134,6 +136,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000 } = {
   if (offset > 0 && !/^(ati|dt|aj):/.test(which || '')) {
     throw new Error('Translation continuation requires the exact translation_id returned by the previous page. Use its continue_with arguments; a default or translator name can select a different version after an outage.');
   }
+  if (expectedPrefix !== undefined && (typeof expectedPrefix !== 'string' || !/^[a-f0-9]{64}$/.test(expectedPrefix) || offset <= 0)) throw new Error('prefix_sha256 requires a positive continuation offset and the unchanged SHA-256 from continue_with.');
   const { links, via } = linksFor(unit);
   if (!links.length) {
     throw new Error(`No English translation is linked for ${unit.acronym}. Read the Pāli with get_text, or see https://suttacentral.net/${unit.id} for other translations.`);
@@ -184,16 +187,19 @@ export async function translation(unit, which, { offset = 0, limit = 12000 } = {
   }
   const { parts_read: partsRead, parts_total: partsTotal, ...rest } = result;
   const text = rest.text;
+  const prefix = prefixHash(text, offset);
+  if (expectedPrefix !== undefined && (offset > text.length || prefix !== expectedPrefix)) throw new Error('The retrieved translation prefix changed before this character offset. Cannot safely continue: restart at offset 0 and follow the new continue_with arguments.');
+  if (offset > 0 && expectedPrefix === undefined) notes.push('This manually supplied character offset is not guarded against upstream text edits. Restart at offset 0 and follow continue_with to check the preceding text prefix.');
   const complete = partsRead === undefined || partsRead === partsTotal;
   const nextOffset = offset + limit < text.length ? offset + limit : null;
   if (!complete) notes.push(`This translation is spread over ${partsTotal} pages; ${partsRead} of them ${partsRead === 1 ? 'was' : 'were'} read for this request. Use continue_with to continue with this exact translation_id and next_offset.`);
   return {
     text_id: unit.id, citation: unit.acronym, translator: link.translator, translation_id: translationId(link),
     ...rest, text: text.slice(offset, offset + limit), offset, limit, total_characters: complete ? text.length : null,
-    next_offset: nextOffset,
+    next_offset: nextOffset, prefix_sha256: prefix,
     continue_with: nextOffset === null ? null : {
       name: 'get_translation',
-      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit },
+      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit, prefix_sha256: prefixHash(text, nextOffset) },
     },
     match: link.match, notes,
   };

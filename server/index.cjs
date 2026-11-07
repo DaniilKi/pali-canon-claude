@@ -23113,6 +23113,8 @@ var liveCache = new LruCache({
 });
 
 // src/english.mjs
+var import_node_crypto2 = require("node:crypto");
+var prefixHash = (text, offset) => (0, import_node_crypto2.createHash)("sha256").update(text.slice(0, offset)).digest("hex");
 var ATI_MIRRORS = [
   (p) => `https://accesstoinsight.org${p}.html`,
   (p) => `https://raw.githubusercontent.com/bcbsit/ati/main${p}.html`,
@@ -23225,7 +23227,7 @@ function available(unit) {
     ...t.commentary ? { includes_commentary: true } : {}
   }));
 }
-async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
+async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha256: expectedPrefix } = {}) {
   if (which !== void 0) {
     if (typeof which !== "string" || !which.trim()) throw new Error("Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.");
     which = which.trim();
@@ -23233,6 +23235,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
   if (offset > 0 && !/^(ati|dt|aj):/.test(which || "")) {
     throw new Error("Translation continuation requires the exact translation_id returned by the previous page. Use its continue_with arguments; a default or translator name can select a different version after an outage.");
   }
+  if (expectedPrefix !== void 0 && (typeof expectedPrefix !== "string" || !/^[a-f0-9]{64}$/.test(expectedPrefix) || offset <= 0)) throw new Error("prefix_sha256 requires a positive continuation offset and the unchanged SHA-256 from continue_with.");
   const { links, via } = linksFor(unit);
   if (!links.length) {
     throw new Error(`No English translation is linked for ${unit.acronym}. Read the P\u0101li with get_text, or see https://suttacentral.net/${unit.id} for other translations.`);
@@ -23278,6 +23281,9 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
   }
   const { parts_read: partsRead, parts_total: partsTotal, ...rest } = result;
   const text = rest.text;
+  const prefix = prefixHash(text, offset);
+  if (expectedPrefix !== void 0 && (offset > text.length || prefix !== expectedPrefix)) throw new Error("The retrieved translation prefix changed before this character offset. Cannot safely continue: restart at offset 0 and follow the new continue_with arguments.");
+  if (offset > 0 && expectedPrefix === void 0) notes.push("This manually supplied character offset is not guarded against upstream text edits. Restart at offset 0 and follow continue_with to check the preceding text prefix.");
   const complete = partsRead === void 0 || partsRead === partsTotal;
   const nextOffset = offset + limit < text.length ? offset + limit : null;
   if (!complete) notes.push(`This translation is spread over ${partsTotal} pages; ${partsRead} of them ${partsRead === 1 ? "was" : "were"} read for this request. Use continue_with to continue with this exact translation_id and next_offset.`);
@@ -23292,9 +23298,10 @@ async function translation(unit, which, { offset = 0, limit = 12e3 } = {}) {
     limit,
     total_characters: complete ? text.length : null,
     next_offset: nextOffset,
+    prefix_sha256: prefix,
     continue_with: nextOffset === null ? null : {
       name: "get_translation",
-      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit }
+      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit, prefix_sha256: prefixHash(text, nextOffset) }
     },
     match: link.match,
     notes
@@ -31528,11 +31535,12 @@ function createServer() {
     uid: citation,
     translation: external_exports.string().trim().min(1).max(200).optional().describe('At offset 0: translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), a translator name, or omit for the default. For continuation, use the exact translation_id returned by the previous page.'),
     offset: external_exports.number().int().min(0).max(2e6).default(0).describe("Character offset. For nonzero offsets use the previous result's continue_with arguments, including its exact translation_id; offsets cannot transfer between translation versions."),
-    limit: external_exports.number().int().min(500).max(3e4).default(12e3).describe("Characters per page.")
-  }, async ({ uid, translation: translation2, offset, limit }) => {
+    limit: external_exports.number().int().min(500).max(3e4).default(12e3).describe("Characters per page."),
+    prefix_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Unchanged prefix hash from continue_with. Checks the previously traversed text before applying a character offset; edits require restarting at offset 0.")
+  }, async ({ uid, translation: translation2, offset, limit, prefix_sha256 }) => {
     const input = romanizeInput(uid);
     const { unit } = resolve(input.text);
-    return { ...await translation(unit, translation2, { offset, limit }), ...inputNote(input) };
+    return { ...await translation(unit, translation2, { offset, limit, prefix_sha256 }), ...inputNote(input) };
   }, { network: true });
   tool("compare_translations", "Fetch two to four English translations of the same text side by side, with the P\u0101li opening for reference. Lists what is available when fewer exist.", {
     uid: citation,

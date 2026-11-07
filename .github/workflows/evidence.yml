@@ -28,6 +28,8 @@ jobs:
         run: node scripts/audit-evidence.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report evidence.report.json
       - name: Read canonical commentary post-canonical and source-file widget selections offline
         run: node scripts/audit-widget.mjs --exhaust-aligned --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report widget-reading.report.json
+      - name: Check packaged English continuation against synthetic upstream edits offline
+        run: node scripts/audit-english-prefix.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report english-prefix.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -35,4 +37,5 @@ jobs:
           path: |
             evidence.report.json
             widget-reading.report.json
+            english-prefix.report.json
           if-no-files-found: warn

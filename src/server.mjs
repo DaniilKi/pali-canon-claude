@@ -166,10 +166,11 @@ export function createServer() {
     translation: z.string().trim().min(1).max(200).optional().describe('At offset 0: translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), a translator name, or omit for the default. For continuation, use the exact translation_id returned by the previous page.'),
     offset: z.number().int().min(0).max(2000000).default(0).describe('Character offset. For nonzero offsets use the previous result\'s continue_with arguments, including its exact translation_id; offsets cannot transfer between translation versions.'),
     limit: z.number().int().min(500).max(30000).default(12000).describe('Characters per page.'),
-  }, async ({ uid, translation, offset, limit }) => {
+    prefix_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Unchanged prefix hash from continue_with. Checks the previously traversed text before applying a character offset; edits require restarting at offset 0.'),
+  }, async ({ uid, translation, offset, limit, prefix_sha256 }) => {
     const input = romanizeInput(uid);
     const { unit } = canon.resolve(input.text);
-    return { ...await english.translation(unit, translation, { offset, limit }), ...inputNote(input) };
+    return { ...await english.translation(unit, translation, { offset, limit, prefix_sha256 }), ...inputNote(input) };
   }, { network: true });
 
   tool('compare_translations', 'Fetch two to four English translations of the same text side by side, with the Pāli opening for reference. Lists what is available when fewer exist.', {
