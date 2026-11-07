@@ -806,3 +806,9 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** Model-visible source metadata alone is not retrieved passage content. Continuation commands point beyond the current window and cannot substitute for re-reading what is displayed.
 - **Decision.** Return pali.read_with for the current source window and english.read_with for its translation version/offset. Exact/context commands retain source and anchor pins; all modes retain scope and script. Replay the commands through the extracted package across eight scripts and every included post-canonical/root/commentary book.
 - **Consequences.** Replays remain source reads, not source reconstruction. Live English contents are not promised immutable; assistants must verify the returned version, range and notices. Automated replay/metadata checks do not establish signed-in model adherence.
+
+### D134. End cancelled reader operations without retaining their source as current
+
+- **Context.** A standard host cancellation after tool-input left the reader indefinitely opening the requested passage, with stale prior text and loading metadata. Direct navigation also needed its pending callback invalidated on cancellation.
+- **Decision.** Handle ui/notifications/tool-cancelled for an active/announced read or initial waiting state. Clear prior passage, attribution and controls; publish a cancelled metadata state without old source IDs or the host's private reason. Ignore late correlated replies and idle late cancellation notices, and allow a subsequent selection to recover. Version resources to v11.
+- **Consequences.** Cancellation is distinct from provider/source unavailability. Uncorrelated host event ordering and signed-in clients remain acceptance gates. No source data, licence, alignment or translation is changed.

@@ -23,7 +23,7 @@ import { readBook } from './source-books.mjs';
 import { getCommentary } from './commentary.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v10';
+export const WIDGET_VERSION = 'v11';
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 export const SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 export const MCP_APP_MIME = 'text/html;profile=mcp-app';
@@ -342,7 +342,7 @@ export const WIDGET_HTML = `<!doctype html>
   function vacantContext(state) { return { schema: 'pali-reader-selection-v1', widget_version: '${WIDGET_VERSION}', state: state,
     quotation: state === 'loading' ? 'A new reading is pending; do not assume an earlier page is the requested selection.' : 'No retrieved passage is displayed. Reopen a source before quoting.' }; }
   function readingContext(d) {
-    if (!d || !d.pali) return vacantContext('error');
+    if (!d || !d.pali) return vacantContext(d && d.cancelled ? 'cancelled' : 'error');
     var source = d.source || {}, book = d.book || {}, p = d.pali, e = d.english;
     return { schema: 'pali-reader-selection-v1', widget_version: '${WIDGET_VERSION}', state: 'displayed',
       kind: d.selection === 'source_book' ? 'source_book' : d.content_type || (d.canonical === true ? 'canonical' : 'unknown'),
@@ -492,11 +492,11 @@ export const WIDGET_HTML = `<!doctype html>
     if (!d.pali) {
       if (typeof d.error !== 'string') return;
       rendered = d;
-      document.getElementById('title').textContent = 'Could not open the passage';
-      document.getElementById('status').textContent = 'Could not open the passage. ' + d.error;
+      document.getElementById('title').textContent = d.cancelled ? 'Reading cancelled' : 'Could not open the passage';
+      document.getElementById('status').textContent = (d.cancelled ? 'Reading cancelled. ' : 'Could not open the passage. ') + d.error;
       ['meta', 'pali', 'english', 'footer'].forEach(function (id) { clear(document.getElementById(id)); });
       document.getElementById('pali').appendChild(el('p', 'empty', d.error));
-      document.getElementById('english').appendChild(el('p', 'empty', 'Check the citation and ask to open the passage again.'));
+      document.getElementById('english').appendChild(el('p', 'empty', d.cancelled ? 'No translation is displayed. Ask to open a passage again when you are ready.' : 'Check the citation and ask to open the passage again.'));
       navigation();
       wantModelContext(readingContext(d));
       return;
@@ -614,6 +614,8 @@ export const WIDGET_HTML = `<!doctype html>
       toolResult(m.params);
     } else if (m.method === 'ui/notifications/tool-input') {
       requested(m.params && m.params.arguments);
+    } else if (m.method === 'ui/notifications/tool-cancelled') {
+      if (pending || awaitingSelection || !rendered) render({ cancelled: true, error: 'The reading request was cancelled. Ask to open a passage again when you are ready.' });
     } else if (m.method === 'ui/notifications/host-context-changed') {
       setTheme(m.params && m.params.theme);
     }

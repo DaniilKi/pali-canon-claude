@@ -329,6 +329,24 @@ def check():
                     page.evaluate("window.openai.toolResponseMetadata=undefined")
                 displayed(fixture)
                 context_verified(fixture)
+                frame.get_by_role("button", name="Continue Pāli", exact=True).click()
+                page.wait_for_function("window.navQueue.length===1")
+                page.evaluate("""bridge=>{const target=bridge==='MCP Apps'?document.querySelector('iframe').contentWindow:window;target.postMessage({jsonrpc:'2.0',method:'ui/notifications/tool-cancelled',params:{reason:'Private cancellation fixture'}},'*')}""", bridge)
+                frame.locator("#title").filter(has_text="Reading cancelled").wait_for()
+                page.wait_for_function("window.contextHistory.at(-1)?.state==='cancelled'")
+                cancelled = page.evaluate("window.contextHistory.at(-1)")
+                assert "source" not in cancelled and "pali" not in cancelled
+                assert "Private cancellation" not in json.dumps(cancelled)
+                assert frame.locator("#pali .seg").count() == 0
+                assert frame.locator("#footer").inner_text() == ""
+                reply(fixture["pali"]["continue_with"], continuation["next"])
+                page.wait_for_timeout(30)
+                assert "Reading cancelled" in frame.locator("#title").inner_text()
+                displayed(fixture)
+                context_verified(fixture)
+                page.evaluate("""bridge=>{const target=bridge==='MCP Apps'?document.querySelector('iframe').contentWindow:window;target.postMessage({jsonrpc:'2.0',method:'ui/notifications/tool-cancelled',params:{}},'*')}""", bridge)
+                page.wait_for_timeout(30)
+                verified(fixture)
                 if bridge == "MCP Apps":
                     page.evaluate("window.contextAutoAck=false")
                     displayed(post["native"])
@@ -349,7 +367,7 @@ def check():
                 assert not errors, errors
                 checks.append({"bridge": bridge, "width": width, "navigation_calls": navigation_calls, "context_updates": page.evaluate("window.contextHistory.length"), "context_mode": ("structuredContent" if width == 390 else "text") if bridge == "MCP Apps" else "widget-state",
                     "checks": ["initialization", "theme", "source text", "responsive columns", "no horizontal overflow",
-                        "named landmarks and headings", "keyboard link activation", "200% zoom", "live status updates",
+                        "named landmarks and headings", "keyboard link activation", "200% zoom", "live status updates", "cancelled reading clears source and model state", "late cancelled replies ignored and fresh reading recovers",
                         "Pāli continuation", "English pinned continuation after primary recovery", "unpinned offset refused",
                         "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "commentary labels and availability", "unaligned source caution", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "exact Pali segment without invented English alignment", "source-preserving context and exact return", "direct navigation controls and keyboard activation", "late success and rejection ignored", "navigation failure clears stale content", "local navigation survives globals updates", "model-context capability and modality checks", "metadata-only source context and replay commands", "late context acknowledgements coalesce to current state", "context errors leave the reader usable", "cleared reading state on error", "no invented post-canonical/source-file links", "no JS errors"]})
                 page.close()

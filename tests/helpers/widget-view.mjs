@@ -41,6 +41,7 @@ export function view(bridge, { supported = true, modelCapabilities, stateWriter,
   const init = caps => message({ id: 1, result: { hostCapabilities: { ...(supported ? { serverTools: {} } : {}), ...(caps === undefined ? {} : { updateModelContext: caps }) } } });
   if (bridge === 'MCP Apps' && initialize) init(modelCapabilities);
   return { elements, calls, timers, messages, models, stateUpdates, window, initialize: init,
+    notify(method, params = {}) { message({ method, params }); },
     contextReply(index, result = {}, error) { message({ id: models[index].id, ...(error ? { error } : { result }) }); },
     output(data) {
       if (bridge === 'Apps SDK') { window.openai.toolOutput = data; handlers['openai:set_globals'](); }
