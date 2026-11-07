@@ -23,6 +23,8 @@ What Pali Canon for Claude contains in version 2.1.0, computed directly from the
 | Word analysis | Digital Pāḷi Dictionary v0.4.20261026 subset: 89,763 headwords, 753 roots and the word forms of the bundled texts; 99.73% of words in the citable text passages are known (`analyse_passage`, offline `lookup_pali`). `server/data/dpd.json.gz`, 5.3 MB |
 | Works offline | All Pāli reading, citation lookup, PTS and edition page lookup, Pāli search and script conversion |
 
+Word analysis also accepts post-canonical citations and complete-root-book selections. The 99.73% figure above measures indexed canonical passages only; it does not measure later literature or file front matter. The DPD subset is unchanged. Other words remain unknown, and dictionary glosses are not translations.
+
 "Texts" here means the units people cite: a sutta, a verse, a rule, a Khandhaka chapter, an Abhidhamma section. Some collections are counted by verse (Dhammapada) and some by chapter or story.
 
 All 61 root files can also be read from beginning to end using `get_text` with a `book` ID from `browse_canon` (`node: "books"`). This includes source headings and front matter outside individual citation spans. These are source-book readings, not additional citable texts; the 8,544-unit count stays the same. See [complete source-book reading](citations.md#complete-vri-source-books).
