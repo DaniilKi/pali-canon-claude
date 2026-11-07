@@ -15,6 +15,7 @@ import { auditStudyCommands } from './evidence/study.mjs';
 import { auditNavigation } from './evidence/navigation.mjs';
 import { auditVinayaCommands } from './evidence/vinaya.mjs';
 import { auditAbhidhammaCommands } from './evidence/abhidhamma.mjs';
+import { auditMcpContracts } from './evidence/contracts.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 function option(name) {
@@ -44,6 +45,7 @@ try {
     assert.ok(!response.isError, `${name}: ${JSON.stringify(response.content)}`);
     return JSON.parse(response.content.find(part => part.type === 'text').text);
   };
+  const contracts = await auditMcpContracts(client, call);
   const graph = parallels.load();
   const owners = new Set([...graph.citations.map(l => l.from), ...graph.shared.flatMap(l => [l.a, l.b])]);
   const checked = new Set();
@@ -99,8 +101,8 @@ try {
   const vinaya = await auditVinayaCommands(call);
   const abhidhamma = await auditAbhidhammaCommands(call);
   assert.doesNotMatch(stderr, /UNEXPECTED_NETWORK_ATTEMPT/);
-  const report = { status: 'passed', counts, search, study, navigation, vinaya, abhidhamma, network_attempts: 0, vri_commit: canon.source().commit,
-    scope: 'All recorded commentary citation links, retained shared-passage refs and source-book search fixtures and complete study/topic/list/paritta/Vinaya/Abhidhamma navigation checks through an isolated installed server; does not validate inferred scholarly relationships or omitted/truncated refs.' };
+  const report = { status: 'passed', counts, search, study, navigation, vinaya, abhidhamma, contracts, network_attempts: 0, vri_commit: canon.source().commit,
+    scope: 'All recorded commentary citation links, retained shared-passage refs and source-book search fixtures and complete study/topic/list/paritta/Vinaya/Abhidhamma navigation and MCP prompt/resource contract checks through an isolated installed server; does not validate inferred scholarly relationships or omitted/truncated refs.' };
   if (reportPath) await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report));
 } catch (error) {
