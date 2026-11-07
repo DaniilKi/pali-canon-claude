@@ -9,6 +9,7 @@ import {SCRIPTS,transliterate} from '../src/script.mjs';
 import * as canon from '../src/canon.mjs';
 import {verifyQuote} from '../src/verify.mjs';
 import {sourceQuoteFixtures} from './evidence/source-quotes.mjs';
+import {verificationSpanFixtures,longVerificationQuote} from './evidence/verification-spans.mjs';
 import {StdioClientTransport} from '@modelcontextprotocol/sdk/client/stdio.js';
 import {StreamableHTTPClientTransport} from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 function option(name) { const i=process.argv.indexOf(name); if(i<0)return; assert.ok(process.argv[i+1]&&!process.argv[i+1].startsWith('--'),`${name} requires a path`);return resolve(process.argv[i+1]); }
@@ -51,6 +52,19 @@ try {
   const normalized=await read({text:canon.fold(quoteFrom('Dhp 183')).toUpperCase().replace(/\s+/g,' , '),language:'pali'});assert.equal(normalized.best_similarity,1);cautious(normalized);assert.match(normalized.explanation,/normalized similarity/);
   for(const script of SCRIPTS)for(const language of ['pali','auto']){const r=await call({text:native(Array(121).fill('sati').join(' '),script),language});assert.equal(r.isError,true);assert.match(JSON.parse(r.content[0].text).error,/120 words.*no partial comparison/);}
   for(const text of ['สति สติ สติ','ส่ติ สติ สติ','漢sati sati sati字','ηsati sati sati'])for(const language of ['pali','auto','english']){const r=await call({text,language});assert.equal(r.isError,true);assert.match(JSON.parse(r.content[0].text).error,/converted completely/);}
+  let sourceReadings=0;
+  const squash=text=>text.replace(/\s+/gu,' ').trim(),dense=text=>canon.fold(text).replace(/[^a-z0-9]/gu,'');
+  async function followSpan(hit) {
+   const span=hit.source_span;assert.ok(span);assert.equal(hit.segment_ref,span.first_segment_ref);assert.deepEqual(hit.read_with,hit.reading_commands[0]);let next=span.offset;const segments=[];
+   for(const {tool,...args}of hit.reading_commands){assert.equal(tool,'get_text');assert.equal(args.uid,hit.text_id);assert.equal(args.offset,next);assert.ok(args.limit>=1&&args.limit<=200);requests++;sourceReadings++;const r=await client.callTool({name:tool,arguments:args});assert.ok(!r.isError,JSON.stringify(r.content));assert.equal(r.structuredContent.text_id,hit.text_id);assert.equal(r.structuredContent.returned,args.limit);segments.push(...r.structuredContent.segments);next+=args.limit;}
+   assert.equal(next,span.end_offset);assert.equal(segments.length,span.segments);assert.equal(segments[0].ref,span.first_segment_ref);assert.equal(segments.at(-1).ref,span.last_segment_ref);const text=segments.map(s=>s.text).join('\n');assert.ok(squash(text).includes(squash(hit.matched_text.replace(/…$/u,''))));return text;
+  }
+  const anchorFixtures=verificationSpanFixtures();assert.equal(anchorFixtures.length,13);let targetHits=0;
+  for(const f of anchorFixtures){const r=await read({text:f.quote,language:'pali',limit:10});assert.equal(r.verdict,'found');for(const hit of r.matches)await followSpan(hit);const target=r.matches.find(m=>m.text_id===f.uid&&m.similarity===1);if(target){targetHits++;assert.equal(target.segment_ref,f.expected_ref);assert.notEqual(target.segment_ref,f.earlier_ref);assert.equal(dense(target.matched_text),dense(f.quote));}}
+  assert.ok(targetHits>=10);
+  for(const script of SCRIPTS){const f=anchorFixtures[0],r=await read({text:native(f.quote,script),language:'pali',limit:10}),target=r.matches.find(m=>m.text_id===f.uid&&m.similarity===1);assert.ok(target);assert.equal(target.segment_ref,f.expected_ref);assert.ok(dense(await followSpan(target)).includes(dense(f.quote)));}
+  const longQuote=longVerificationQuote(),longResult=await read({text:longQuote,language:'pali',limit:5}),longHit=longResult.matches.find(m=>m.similarity===1);assert.ok(longHit);assert.equal(longHit.matched_text_truncated,true);assert.ok(dense(longQuote).startsWith(dense(longHit.matched_text)));assert.ok(dense(await followSpan(longHit)).includes(dense(longQuote)));
+  const marked=canon.load().canon.books.find(b=>b.file==='s0504m.mul.xml').blocks[1164][2].split('ः')[0],markedResult=await read({text:marked,language:'pali',limit:10}),markedHit=markedResult.matches.find(m=>m.text_id==='iti112');assert.ok(markedHit);assert.ok(markedHit.matched_text.endsWith('ः'));await followSpan(markedHit);
   const literalFixtures=sourceQuoteFixtures();assert.equal(literalFixtures.length,19);let repeatedSourceChecked=false;
   for(const fixture of literalFixtures)for(const language of ['pali','auto']) {
    const r=await read({text:fixture.text,language,limit:1});assert.equal(r.quote,fixture.text);assert.equal(r.verdict,'found');assert.equal(r.comparison.method,'literal_source_substring');assert.equal(r.comparison.verbatim,'not_assessed');assert.equal(r.input_script,undefined);assert.equal(r.input_romanized,undefined);assert.equal(r.source_literal.native_conversion,false);assert.ok(r.source_literal.matching_blocks>=1);assert.equal(r.source_literal.returned_blocks,1);assert.equal(r.thresholds.found,undefined);
@@ -61,7 +75,7 @@ try {
   for(const args of [{text:'漢'+literalFixtures[0].text,language:'pali'},{text:literalFixtures[0].text,language:'english'},{text:'Mrammaraṭṭhe mौṃjvānagare leḍītīaraññavihāravāsinā mahā therena katāyaṃ paccayuddesadīpanī.',language:'pali'}]) assert.equal((await call(args)).isError,true);
   const badMode=await call({text:native(quoteFrom('Dhp 183'),'thai'),language:'english'});assert.equal(badMode.isError,true);assert.match(JSON.parse(badMode.content[0].text).error,/English mode requires/);
   assert.doesNotMatch(stderr,/UNEXPECTED_NETWORK_ATTEMPT/);
-  reports.push({transport:mode,requests,scripts:SCRIPTS.length,source_comparisons:comparisons,literal_canonical_fixtures:literalFixtures.length,literal_source_identity_and_commands:true,repeated_literal_sources_preserved:repeatedSourceChecked,original_input_preserved:true,normalized_not_verbatim:true,repeated_sources_preserved:true,word_limits_and_invalid_modes_refused:true,source_parity:true,network_attempts:0});
+  reports.push({transport:mode,requests,scripts:SCRIPTS.length,source_comparisons:comparisons,source_window_cases:anchorFixtures.length,source_reading_commands:sourceReadings,source_position_anchors:true,complete_spans_and_safe_previews:true,literal_canonical_fixtures:literalFixtures.length,literal_source_identity_and_commands:true,repeated_literal_sources_preserved:repeatedSourceChecked,original_input_preserved:true,normalized_not_verbatim:true,repeated_sources_preserved:true,word_limits_and_invalid_modes_refused:true,source_parity:true,network_attempts:0});
   await client.close();client=null;
   if(child&&child.exitCode===null&&child.signalCode===null){const ended=new Promise(r=>child.once('exit',r));child.kill();await ended;}child=null;
  }

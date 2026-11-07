@@ -976,3 +976,10 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** Satipatthana Sutta² and Satipatthana Sutta١ both silently selected MN 10: name-key folding discarded the numeral, bypassing the ASCII-number safeguard.
 - **Decision.** Extend the shared name-reference guard to reject non-ASCII Unicode numerals before normalization/key matching. This applies to direct name resolution and to resolve_reference/analyse_passage after supported native conversion. Require a standard citation or a supported Roman name instead of guessing what the suffix meant.
 - **Consequences.** Unsupported number-bearing names cannot select another passage without disclosure. Standard ASCII references, eight-script native citations, AN numbering cautions and post-canonical fallback retain their behavior. This does not alter source text, citation numbering or source-phrase search mode.
+
+
+### D161. Anchor Pāli verification evidence to source positions
+
+- **Context.** Three source-derived DN 1 quotations scored 1 but their segment_ref values pointed to earlier repeated text: dn1/92 became dn1/89, and dn1/97 and dn1/109 became dn1/76. Excerpts could also show the first 600 characters of a long paragraph instead of the matched words. Text equality cannot identify a repeated passage's position.
+- **Decision.** Map refined token offsets back to untouched source characters and source-block/rendered-segment bounds. Return source_span with exclusive end_offset, read_with and bounded reading_commands covering the complete span. Build matched_text from the actual selected words, retain trailing source combining marks and truncate only at complete word boundaries with matched_text_truncated. Preserve scores, ownership/alignment boundaries and source cautions.
+- **Consequences.** Reading commands distinguish repeated paragraphs and cover quotations crossing rendered segments/headings. Thirteen source-derived DN/MN windows, long previews, native input and a source combining mark are checked through installed stdio/HTTP. This validates location and retrieval, not unique wording, authorship, native-edition collation or source correction.

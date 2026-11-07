@@ -293,26 +293,59 @@ function ownerOf(book, index, end = index + 1) {
   return covering[0] || null;
 }
 
+// Map the comparison's folded words back to untouched UTF-16 source substrings.
+function sourceWordSpans(text) {
+  let normalized = '', at = 0;
+  const starts = [], ends = [];
+  for (const ch of text) {
+    const value = fold(ch);
+    normalized += value;
+    for (let i = 0; i < value.length; i++) { starts.push(at); ends.push(at + ch.length); }
+    at += ch.length;
+  }
+  return [...normalized.matchAll(/[a-z0-9]+/gu)].map(match => {
+    let end = ends[match.index + match[0].length - 1];
+    while (end < text.length && /\p{M}/u.test(String.fromCodePoint(text.codePointAt(end)))) end += String.fromCodePoint(text.codePointAt(end)).length;
+    return [starts[match.index], end];
+  });
+}
+
 function paliMatch(cand, refined) {
-  const d = load();
+  const d = load(), ix = buildPaliIndex();
   const first = blockAt(refined.a); const last = blockAt(refined.b - 1);
   if (first.book !== last.book) return null;
   const unit = ownerOf(first.book, first.index, last.index + 1);
   if (!unit) return null;
   const blocks = d.canon.books[first.book].blocks;
-  const lastIndex = last.book === first.book ? last.index : first.index;
-  const excerpt = blocks.slice(first.index, lastIndex + 1).map((b) => b[2]).filter(Boolean).join(' / ');
-  const firstText = blocks[first.index][2];
-  const segment = segments(unit).find((s) => firstText && s.text.includes(firstText));
-  const notes = [];
+  const rendered = segments(unit, { includeSourcePositions: true });
+  const start = rendered.findIndex(s => s.source_blocks[0] <= first.index && first.index < s.source_blocks[1]);
+  const end = rendered.findIndex(s => s.source_blocks[0] <= last.index && last.index < s.source_blocks[1]);
+  if (start < 0 || end < start) throw new Error('The verification window has no readable source segment span.');
+  const firstWord = refined.a - ix.blockStart[ix.bookStart[first.book] + first.index];
+  const lastWord = refined.b - ix.blockStart[ix.bookStart[last.book] + last.index] - 1;
+  const begin = sourceWordSpans(blocks[first.index][2])[firstWord]?.[0];
+  const finish = sourceWordSpans(blocks[last.index][2])[lastWord]?.[1];
+  if (begin === undefined || finish === undefined) throw new Error('The verification window could not be mapped back to its source words.');
+  const excerpt = blocks.slice(first.index, last.index + 1).map((b, i) => b[2].slice(i === 0 ? begin : 0,
+    first.index + i === last.index ? finish : undefined)).filter(Boolean).join('\n');
+  const previewEnd = excerpt.length > 600 ? sourceWordSpans(excerpt).filter(span => span[1] <= 600).at(-1)?.[1] ?? 0 : excerpt.length;
+  const preview = excerpt.slice(0, previewEnd) + (excerpt.length > 600 ? '…' : '');
+  const readingCommands = [];
+  for (let offset = start; offset <= end; offset += 200) readingCommands.push({ tool: 'get_text', uid: unit.id,
+    offset, limit: Math.min(200, end + 1 - offset) });
+  const segment = rendered[start], notes = [];
   const alignment = alignmentInfo(unit);
   if (alignment) notes.push(alignment.note);
   if (unit.kind === 'range') notes.push(`The citation index uses the grouped source span ${unit.acronym}; the passage is inside that span.`);
   return {
     text_id: unit.id, citation: unit.acronym, title: unit.title,
-    segment_ref: segment?.ref, vri_paragraph: segment?.vri_paragraph, pts_page_begins: segment?.pts_page_begins,
+    segment_ref: segment.ref, vri_paragraph: segment.vri_paragraph, pts_page_begins: segment.pts_page_begins,
+    source_span: { first_segment_ref: segment.ref, last_segment_ref: rendered[end].ref,
+      offset: start, end_offset: end + 1, segments: end - start + 1 },
+    read_with: readingCommands[0], reading_commands: readingCommands,
     similarity: Math.round(refined.sim * 100) / 100,
-    matched_text: excerpt.length > 600 ? `${excerpt.slice(0, 600)}…` : excerpt,
+    matched_text: preview,
+    ...(excerpt.length > 600 ? { matched_text_truncated: true } : {}),
     edition: 'Chaṭṭha Saṅgāyana Tipiṭaka (VRI), Pāli',
     ...(alignment ? { alignment } : {}),
     ...(notes.length ? { notes } : {}),
@@ -650,7 +683,7 @@ export async function verifyQuote({ text, language = 'auto', texts, limit = 5 },
 }
 
 export function register({ tool, z }) {
-  tool('verify_quote', 'Check whether a quotation attributed to the Buddha appears in the texts: a Pāli quotation is matched (fuzzily) against the whole bundled Pāli Tipiṭaka offline; an English one against the linked English translations of the texts you name (default: the Dhammapada), fetched live. If an otherwise unconvertible quotation occurs unchanged in the bundled canon, source-substring presence is reported separately with exact reading commands; spelling and native-edition correctness are not inferred. Returns the best matches with citation and similarity, a verdict (found, close_paraphrase, not_found_in_scope) and exactly what was searched.', {
+  tool('verify_quote', 'Check whether a quotation attributed to the Buddha appears in the texts: a Pāli quotation is matched (fuzzily) against the whole bundled Pāli Tipiṭaka offline; an English one against the linked English translations of the texts you name (default: the Dhammapada), fetched live. If an otherwise unconvertible quotation occurs unchanged in the bundled canon, source-substring presence is reported separately with exact reading commands; spelling and native-edition correctness are not inferred. Pāli matches provide source-position reading commands covering their complete segment span. Returns the best matches with citation and similarity, a verdict (found, close_paraphrase, not_found_in_scope) and exactly what was searched.', {
     text: z.string().trim().min(8).max(2000).describe('The quotation to check: Pāli in Roman or a supported native script (converted and labelled), or English in Roman script. At most 120 comparison words and 2,000 input characters; split longer quotations into shorter excerpts.'),
     language: z.enum(['auto', 'pali', 'english']).default('auto').describe('Language of the quotation; "auto" detects Roman input and treats supported native-script input as Pāli. This is mechanical transliteration, not translation. Native input with explicit English mode is refused.'),
     texts: z.array(z.string().min(1).max(300)).max(12).optional().describe('English only: exact citations or indexed source groups whose linked translations to search, in Roman or supported native script. Multi-text fallback spans and ambiguous pages are refused before fetching. Inherited containing-source matches do not verify the narrower requested text. Default: all Dhammapada chapters.'),
