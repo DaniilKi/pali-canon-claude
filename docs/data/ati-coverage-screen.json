@@ -1314,6 +1314,26 @@
           "reason": "Identity is indexed AN2.47/VRI48, but source omits final two-assembly summary and substantive foremost-assembly assertion inside an2.47/2 (offsets828/860). Current partial_scope cannot represent this intra-segment omission; no whole-unit link activated. Single-unit condensed contract or precise intra-segment scope needed."
         }
       ]
+    },
+    {
+      "decision": "D193",
+      "accepted_links": 4,
+      "newly_covered_units": [
+        "an1.47",
+        "an1.48",
+        "an2.119",
+        "an10.219"
+      ],
+      "deferred": [
+        {
+          "path": "tipitaka/an/an01/an01.049.than.html",
+          "reason": "Four-discourse Luminous page covers indexed AN1.49–52 plus extensive interpretive Notes. Not an ordinary individual translation; exact shared-page contract, source/English pins and end-to-end consumer review needed before activation."
+        },
+        {
+          "path": "tipitaka/sn/sn15/sn15.014.than.html",
+          "reason": "Mother source explicitly combines SN15.14–19 (mother/father/brother/sister/son/daughter) with common framing and ellipses. Keep withheld as an ordinary individual ATI link. Existing DT entry at SN 15.14 has reference SN 15:14–19, warranting separate exact-source scope review; its body was not assumed identical to ATI."
+        }
+      ]
     }
   ]
 }

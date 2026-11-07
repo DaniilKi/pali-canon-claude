@@ -992,6 +992,86 @@
         "vri_verse_groups": 0
       },
       "mapping_note": "Whole-discourse correspondence: ATI Sanyojana Sutta AN 10.13 matches indexed AN 10.13 (Saṃyojanasuttaṃ), VRI paragraph 13. Both five-lower and five-higher fetter lists match in order. This is an additional earlier ATI choice alongside the existing dhammatalks.org version, not a newly English-covered text. PTS overlap with neighbouring unlinked units does not license links to AN 10.12 or AN 10.14. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an1.47",
+      "path": "/tipitaka/an/an01/an01.047.than",
+      "pali_title": "Paṇihitaacchavaggo",
+      "english_title": "Soft",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 1.47",
+      "source_verses": "AN 1.47; PTS A i 8",
+      "vri_verses": "47",
+      "source_html_sha256": "0ac19f09fb2ad2797d56df11c37dc9fbc2e41fbac7edc5e6d5add9e688300cba",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "db3277a73233146865d63eb47b5c146841742ed208d28d3d23e1cac9407af9ff",
+      "evidence": {
+        "basis": "Phandana tree softness/workability compared to developed mind, and concluding developed-mind claim.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Mudu Sutta AN 1.47 matches indexed AN 1.47, VRI paragraph 47. The phandana tree softness/workability comparison and developed-mind conclusion establish identity despite a PTS discrepancy: ATI prints A i 8, while the indexed VRI unit starts at A i 9. Preserve both references; do not use neighbouring PTS overlap as ownership. ATI renders the tree as balsam. Indexed Paṇihitaacchavaggo is the chapter label, not an independent sutta title. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an1.48",
+      "path": "/tipitaka/an/an01/an01.048.than",
+      "pali_title": "Paṇihitaacchavaggo",
+      "english_title": "Quick to Reverse Itself",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 1.48",
+      "source_verses": "AN 1.48; PTS A i 10",
+      "vri_verses": "48",
+      "source_html_sha256": "457c1bd830e6c396bb246df26f5ef2965480555b5babccb8fbb364b6ee055553",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "1965f3ec8fdf7a5c84deb297871c59fe5b533655d014ee01a7aa4d5347a39102",
+      "evidence": {
+        "basis": "Mind changes especially rapidly; it is difficult to find a simile for its rapid change.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Lahu-parivatta Sutta AN 1.48 matches indexed AN 1.48, VRI paragraph 48, through the mind’s rapid change and difficulty of finding a simile. Both cite A i 10. This is a separate one-discourse page, not the following four-discourse Luminous compilation. Indexed Paṇihitaacchavaggo is the containing chapter label. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an2.119",
+      "path": "/tipitaka/an/an02/an02.119.than",
+      "pali_title": "1. Āsāduppajahavaggo",
+      "english_title": "Hard to Find",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 2.119",
+      "source_verses": "AN 2.119; PTS A i 87",
+      "vri_verses": "120",
+      "source_html_sha256": "b77ef61749ac9135b7ae9bb432abccc8b0e0804008fa0f5096b3cdb7696ad103",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "fe423f07060ed7a3d7d3a7fcbd41f4c28a51181cca56bcd415147fdc59313b3c",
+      "evidence": {
+        "basis": "Two hard-to-find persons: first benefactor and one grateful who acknowledges/repays kindness, with opening/closing summary.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Dullabha Sutta AN 2.119 matches indexed AN 2.119, VRI paragraph 120. The first benefactor and grateful responder identify the complete discourse; indexed AN 2.120 instead concerns the satisfied person and satisfier. Preserve the distinction between discourse number 119 and VRI paragraph 120. Indexed Āsāduppajahavaggo is the containing chapter label. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an10.219",
+      "path": "/tipitaka/an/an10/an10.208.than",
+      "pali_title": "Karajakāyasuttaṃ",
+      "english_title": "The Sublime Attitudes",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 10.208",
+      "source_verses": "AN 10.208; PTS A v 299",
+      "vri_verses": "219",
+      "source_html_sha256": "5aa25e97cf11bf3869f19ca8d44a9b0c9ff4c659d1bc763591211ba4e167f2d9",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "0b545b5c8a1de995622faa084d0288bcfc4c78080bfdf36c454f849d24357ee0",
+      "evidence": {
+        "basis": "Intentional action-results opening; goodwill and equanimity pervasion and youth dialogues, women/men/body and nonreturning; compassion/appreciation abbreviated in both.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Brahmavihara Sutta AN 10.208 maps to indexed AN 10.219 (Karajakāyasuttaṃ), VRI paragraph 219. The action-results opening, goodwill/equanimity pervasion and youth dialogues, woman/man and action-born body passages, and non-returning conclusions establish scope. Both published editions abbreviate compassion and appreciation; the tool does not expand them. The opening also occurs in adjacent AN 10.218, but that unit continues with misconduct/conduct lists rather than these sublime-attitude dialogues. Two Notes, including Woodward’s patchwork observation and the east gloss, are editorial. No general +11 offset is inferred. This is not line-by-line alignment."
     }
   ]
 }

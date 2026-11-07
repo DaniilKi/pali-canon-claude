@@ -4,6 +4,10 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Add four first-English AN choices with explicit PTS/paragraph differences and
+  preserved abbreviations; hold the Luminous and Mother multi-discourse pages
+  for reviewed shared-page integration, keeping earlier scope holds intact.
+
 - Add seven reviewed ATI choices (six first-English texts and one alternative),
   preserving source wording and edition notes. Hold the Bombast page’s missing
   intra-segment conclusion alongside SN 36.15; condensed scope stays unactivated.

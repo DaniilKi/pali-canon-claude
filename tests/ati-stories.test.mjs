@@ -12,7 +12,7 @@ const realFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = realFetch; liveCache.clear(); });
 
 test('source-reviewed whole-text links retain exact edition identity and provenance', () => {
-  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16', 'sn7.21', 'sn22.109', 'sn22.110', 'sn22.121', 'sn25.5', 'sn47.35', 'sn40.9', 'sn22.7', 'sn35.238', 'sn55.24', 'an4.77', 'an3.136', 'an5.130', 'an3.52', 'an3.89', 'an3.90', 'an4.262', 'an5.64', 'an6.102', 'an6.104', 'an7.23', 'an7.33', 'an7.51', 'an3.109', 'an4.124', 'an4.173', 'an11.9', 'an2.9', 'an2.19', 'an2.24', 'an3.39', 'an3.86', 'an3.87', 'an10.13']);
+  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16', 'sn7.21', 'sn22.109', 'sn22.110', 'sn22.121', 'sn25.5', 'sn47.35', 'sn40.9', 'sn22.7', 'sn35.238', 'sn55.24', 'an4.77', 'an3.136', 'an5.130', 'an3.52', 'an3.89', 'an3.90', 'an4.262', 'an5.64', 'an6.102', 'an6.104', 'an7.23', 'an7.33', 'an7.51', 'an3.109', 'an4.124', 'an4.173', 'an11.9', 'an2.9', 'an2.19', 'an2.24', 'an3.39', 'an3.86', 'an3.87', 'an10.13', 'an1.47', 'an1.48', 'an2.119', 'an10.219']);
   for (const row of manifest.links) {
     const u = canon.resolve(row.unit_id).unit;
     const link = canon.load().translations[u.id].find(t => t.match === 'reviewed-story' && t.path === row.path);
@@ -425,4 +425,36 @@ test('AN 2.47 omitted foremost-assembly ending cannot be hidden by whole-segment
   const source = canon.load().canon.source;
   const link = {source:'ati', path, partial_scope:{version:1,status:'reviewed',unit_id:u.id,first_ref:segs[0].ref,last_ref:segs[1].ref,source_commit:source.commit,pali_sha256:scopeHash(segs.map(({ref,type,text}) => ({ref,type,text}))),text_sha256:'0'.repeat(64)}};
   assert.throws(() => partialScope(link, u, segs, source), /Invalid or unreviewed partial translation scope/);
+});
+
+test('softness, quick mind, gratitude and sublime-attitude pages have content-specific ownership', async () => {
+  const cases = [
+    ['an1.47', '/tipitaka/an/an01/an01.047.than', ['an1.41', 'an1.44']],
+    ['an1.48', '/tipitaka/an/an01/an01.048.than', ['an1.49', 'an1.50']],
+    ['an2.119', '/tipitaka/an/an02/an02.119.than', ['an2.120']],
+    ['an10.219', '/tipitaka/an/an10/an10.208.than', ['an10.208', 'an10.218']],
+  ];
+  let calls = 0; globalThis.fetch = async () => { calls++; throw Error('Must not fetch'); };
+  for (const [uid, path, wrong] of cases) {
+    assert.ok(english.available(canon.resolve(uid).unit).some(l => l.translation_id === `ati:${path}`));
+    assert.equal(canon.resolve(`https://www.accesstoinsight.org${path}.html`).unit.id, uid);
+    for (const other of wrong) await assert.rejects(english.translation(canon.resolve(other).unit, `ati:${path}`));
+  }
+  assert.equal(calls, 0);
+});
+
+test('reviewed PTS discrepancy, paragraph numbering and abbreviated sublime attitudes remain explicit', () => {
+  const row = uid => manifest.links.find(r => r.unit_id === uid);
+  assert.equal(row('an1.47').source_verses, 'AN 1.47; PTS A i 8');
+  assert.equal(canon.resolve('an1.47').unit.pts.page, 9);
+  assert.match(row('an1.47').mapping_note, /ATI prints A i 8.*VRI unit starts at A i 9/);
+  assert.equal(row('an2.119').vri_verses, '120');
+  assert.match(row('an10.219').mapping_note, /Both published editions abbreviate compassion and appreciation.*Two Notes.*editorial/);
+});
+
+test('four-text Luminous and six-text Mother pages remain withheld as ordinary individual ATI translations', () => {
+  for (const path of ['/tipitaka/an/an01/an01.049.than', '/tipitaka/sn/sn15/sn15.014.than']) {
+    assert.ok(!manifest.links.some(r => r.path === path));
+    assert.ok(!Object.values(canon.load().translations).flat().some(l => l.path === path));
+  }
 });
