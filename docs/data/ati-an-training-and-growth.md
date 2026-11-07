@@ -102,3 +102,25 @@ completed in three pages each, preserving exact identity and prefix guards.
 These checks complement source review; they do not establish independent
 philological correctness of the translations. Exact-commit CI is recorded
 in the completed batch receipt.
+
+## CI follow-up: reliable audit observation (D190)
+
+The first evidence CI run failed in its unchanged translation-version audit:
+it counted five stderr messages before a group of rejected requests and six
+afterwards. The preceding valid operations require six synthetic fetches;
+stdout/HTTP responses and stderr messages have independent delivery order.
+A controlled regression reproduces the late-message count change without any
+additional fetch. This is a harness observation race, not evidence that an
+invalid selector fetched a source.
+
+The audit now records fixture-provider events synchronously before returning,
+checks prohibited fallback and rejected-request counts against that ledger,
+and rejects unexpected network events after shutdown. Missing or malformed
+evidence fails. No test is skipped, no no-fetch assertion is relaxed and no
+production behavior or translation data changes. All six packaged audit modes
+passed locally with the repaired observation. Exact-commit CI is rerun for
+this follow-up; the initial failure remains in GitHub history.
+
+The follow-up full local check passed 906 tests (one existing skip), and the
+complete 8,544-text audit reported zero failures. The focused ledger and
+translation-version regressions passed all 12 tests.

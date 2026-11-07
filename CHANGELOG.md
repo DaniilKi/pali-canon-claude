@@ -4,6 +4,11 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Repaired an evidence-audit timing race: synthetic provider calls are counted
+  from a synchronous fixture ledger instead of asynchronous stderr. Rejection,
+  fallback and no-network requirements remain strict; runtime source and
+  translation data are unchanged (D190).
+
 - Added ten first-English AN choices with independently reviewed content and
   edition numbering. Paired trainings, female/male growth and same-titled
   Anodhi texts retain distinct ownership. Refined SN 36.15’s scope hold: its

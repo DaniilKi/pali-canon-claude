@@ -8,6 +8,7 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 import { earlierQuote, currentQuote, earlierVersion, currentVersion, versionHtml } from '../tests/helpers/translation-versions.mjs';
+import { fetchRecorderSource, readFetchLedger } from '../tests/helpers/synthetic-fetch-ledger.mjs';
 import { syntheticShared } from '../tests/helpers/shared-translation.mjs';
 import { SCRIPTS, transliterate } from '../src/script.mjs';
 import { syntheticLink, syntheticHtml, syntheticText } from '../tests/helpers/partial-translation.mjs';
@@ -28,13 +29,16 @@ try {
   const canonicalEarlierUrl = earlierVersion.url.replace('www.', '');
   const mirrorUrl = 'https://raw.githubusercontent.com/bcbsit/ati/main' + earlierVersion.path + '.html';
   for (const mode of ['stdio', 'http', 'primary_outage', 'ati_mirror', 'partial', 'shared']) {
+    const fetchLog = join(stage, 'fixture-fetches.jsonl');
+    await writeFile(fetchLog, '');
+    const fetchEvents = () => readFetchLedger(fetchLog);
     const translations = { ...original, 'patthana1.1': [currentVersion, earlierVersion] };
     const partial = syntheticLink(), shared = syntheticShared(['dhp1', 'dhp2']);
     if (mode === 'partial') translations['patthana1.1'].push(partial);
     if (mode === 'shared') translations.dhp1 = [shared];
     await writeFile(join(stage, 'server/data/translations.json'), JSON.stringify(translations));
     const bodies = { [currentVersion.url]: versionHtml(currentQuote), [canonicalEarlierUrl]: versionHtml(earlierQuote), [mirrorUrl]: versionHtml(earlierQuote), [partial.url]: syntheticHtml, [shared.url]: syntheticHtml };
-    await writeFile(preload, `const bodies=${JSON.stringify(bodies)};const fail=()=>{console.error('UNEXPECTED_NETWORK_ATTEMPT');throw Error('UNEXPECTED_NETWORK_ATTEMPT')};globalThis.fetch=async input=>{const url=String(input);if(!Object.hasOwn(bodies,url))return fail();console.error('SYNTHETIC_FETCH '+url);if((${JSON.stringify(mode)}==='primary_outage'&&url===${JSON.stringify(currentVersion.url)})||(${JSON.stringify(mode)}==='ati_mirror'&&url===${JSON.stringify(canonicalEarlierUrl)}))return new Response('Synthetic outage',{status:503});return new Response(bodies[url],{status:200,headers:{'content-type':'text/html'}})};for(const name of ['node:http','node:https']){const m=require(name);m.request=fail;m.get=fail}const net=require('node:net');net.connect=fail;net.createConnection=fail;require('node:module').syncBuiltinESMExports();`);
+    await writeFile(preload, `const bodies=${JSON.stringify(bodies)};${fetchRecorderSource(fetchLog)}const fail=rejectUnexpectedNetwork;globalThis.fetch=async input=>{const url=String(input);if(!Object.hasOwn(bodies,url))return fail();recordSyntheticFetch(url);if((${JSON.stringify(mode)}==='primary_outage'&&url===${JSON.stringify(currentVersion.url)})||(${JSON.stringify(mode)}==='ati_mirror'&&url===${JSON.stringify(canonicalEarlierUrl)}))return new Response('Synthetic outage',{status:503});return new Response(bodies[url],{status:200,headers:{'content-type':'text/html'}})};for(const name of ['node:http','node:https']){const m=require(name);m.request=fail;m.get=fail}const net=require('node:net');net.connect=fail;net.createConnection=fail;require('node:module').syncBuiltinESMExports();`);
     const env = { ...process.env, PALI_CANON_CACHE_MB: '0', HOST: '127.0.0.1', PORT: '0', RATE_LIMIT_PER_MINUTE: '0' };
     let stderr = ''; client = new Client({ name: 'installed-exact-translation-versions', version: '1' });
     if (mode === 'stdio') {
@@ -59,16 +63,16 @@ try {
     const args = { text: earlierQuote, language: 'english', texts: [uid] };
     if (mode === 'primary_outage') {
       await call('verify_quote', { ...args, translation_ids: [currentId] }, /could be retrieved/);
-      assert.ok(!stderr.includes('SYNTHETIC_FETCH ' + canonicalEarlierUrl), 'Exact current selection must not fetch its earlier fallback');
+      assert.ok(!(await fetchEvents()).some(e => e.url === canonicalEarlierUrl), 'Exact current selection must not fetch its earlier fallback');
       const normal = await call('verify_quote', args); assert.equal(normal.verdict, 'found'); assert.equal(normal.matches[0].translation_id, earlierId); assert.equal(normal.matches[0].requested_translation_id, currentId); assert.match(normal.matches[0].notes.join(' '), /earlier version/);
       const both = await call('verify_quote', { ...args, translation_ids: [currentId, earlierId] }); assert.equal(both.verdict, 'found'); assert.equal(both.scope.translations_checked.length, 1); assert.equal(both.scope.not_retrieved[0].translation_id, currentId); assert.equal(both.scope.not_retrieved[0].compared, false);
     } else if (mode === 'ati_mirror') {
-      const selected = await call('verify_quote', { ...args, translation_ids: [earlierId] }); assert.equal(selected.verdict, 'found'); assert.equal(selected.matches[0].translation_id, earlierId); assert.match(selected.matches[0].notes.join(' '), /BCBS official repository/); assert.ok(!stderr.includes('SYNTHETIC_FETCH ' + currentVersion.url));
+      const selected = await call('verify_quote', { ...args, translation_ids: [earlierId] }); assert.equal(selected.verdict, 'found'); assert.equal(selected.matches[0].translation_id, earlierId); assert.match(selected.matches[0].notes.join(' '), /BCBS official repository/); assert.ok(!(await fetchEvents()).some(e => e.url === currentVersion.url));
     } else if (mode === 'partial' || mode === 'shared') {
       const isPartial = mode === 'partial', target = isPartial ? uid : 'dhp2', id = isPartial ? 'dt:SYNTHETIC/PARTIAL' : 'dt:SYNTHETIC/SHARED';
       const scoped = { text: 'Synthetic fixture only amber lantern copper window', language: 'english', texts: [target], translation_ids: [id] };
-      const count = (stderr.match(/SYNTHETIC_FETCH /g) || []).length;
-      await call('verify_quote', scoped, isPartial ? /include_partial/ : /include_shared/); assert.equal((stderr.match(/SYNTHETIC_FETCH /g) || []).length, count);
+      const count = (await fetchEvents()).length;
+      await call('verify_quote', scoped, isPartial ? /include_partial/ : /include_shared/); assert.equal((await fetchEvents()).length, count);
       const found = await call('verify_quote', { ...scoped, [isPartial ? 'include_partial' : 'include_shared']: true });
       assert.equal(found.verdict, 'found'); assert.equal(found.scope.translations_checked.length, 1); assert.equal(found.matches[0].translation_id, id); assert.equal(found.matches[0].translation_scope.kind, isPartial ? 'partial_unit' : 'shared_page'); assert.equal(found.matches[0].whole_unit_coverage, false);
       if (!isPartial) { assert.equal(found.matches[0].text_id, null); assert.equal(found.scope.requested_texts[0].translation_scope.text_id, null); assert.deepEqual(found.matches[0].unverified_requested_text_ids, ['dhp2']); }
@@ -79,19 +83,21 @@ try {
       const selected = await call('verify_quote', { ...args, translation_ids: [earlierId] }); assert.equal(selected.verdict, 'found'); assert.equal(selected.matches[0].translation_id, earlierId); assert.equal(selected.matches[0].license, 'Synthetic fixture terms only'); assert.equal(selected.scope.translation_selection.fallback_allowed, false);
       const both = await call('verify_quote', { ...args, translation_ids: [currentId, earlierId] }); assert.equal(both.verdict, 'found'); assert.deepEqual(new Set(both.scope.translations_checked.map(t => t.translation_id)), new Set([currentId, earlierId]));
       const current = await call('verify_quote', { ...args, translation_ids: [currentId] }); assert.equal(current.verdict, 'not_found_in_scope'); assert.equal(current.scope.translations_checked[0].translation_id, currentId);
-      const fetches = (stderr.match(/SYNTHETIC_FETCH /g) || []).length;
+      const fetches = (await fetchEvents()).length;
       await call('verify_quote', { ...args, translation_ids: ['ati:/unknown'] }, /not linked/);
       await call('verify_quote', { ...args, translation_ids: ['dt:MN/MN10'] }, /not linked/);
       await call('verify_quote', { ...args, texts: undefined, translation_ids: [earlierId] }, /explicit texts/);
       await call('verify_quote', { ...args, texts: [uid, 'MN 10'], translation_ids: [earlierId] }, /every requested text/);
       await call('verify_quote', { ...args, translation_ids: ['Thanissaro'] }, /exact translation IDs/);
-      assert.equal((stderr.match(/SYNTHETIC_FETCH /g) || []).length, fetches);
+      assert.equal((await fetchEvents()).length, fetches);
       const duplicates = await call('verify_quote', { ...args, translation_ids: [' ' + earlierId + ' ', earlierId] }); assert.equal(duplicates.scope.translations_checked.length, 1); assert.deepEqual(duplicates.scope.translation_selection.translation_ids, [earlierId]);
       for (const script of SCRIPTS) { const native = await call('verify_quote', { ...args, texts: [transliterate(uid, 'roman', script)], translation_ids: [earlierId] }); assert.equal(native.verdict, 'found'); assert.equal(native.matches[0].translation_id, earlierId); assert.equal(native.scope.requested_texts[0].input_script, script === 'roman' ? undefined : script); }
     }
     assert.doesNotMatch(stderr, /UNEXPECTED_NETWORK_ATTEMPT/);
-    reports.push({ mode, transport: mode === 'stdio' ? 'stdio' : 'http', requests, status: 'passed', synthetic_fixture_only: true, real_network_attempts: 0 });
     await close();
+    const events = await fetchEvents();
+    assert.equal(events.filter(e => e.kind === 'unexpected').length, 0, 'No unexpected network may occur, including delayed events');
+    reports.push({ mode, transport: mode === 'stdio' ? 'stdio' : 'http', requests, status: 'passed', synthetic_fixture_only: true, synthetic_fetch_events: events.filter(e => e.kind === 'fetch').length, observation: 'synchronous_fixture_ledger', real_network_attempts: 0 });
   }
   const report = { status: 'passed', cases: reports, scope: 'Extracted-package synthetic current/earlier translation versions only. Exact linked IDs, no different-version fallback, same-version ATI mirror provenance, atomic scope rejection, native references and scoped-source consent through stdio/HTTP. No real translation imported or publisher requested.' };
   if (reportPath) await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n'); console.log(JSON.stringify(report));
