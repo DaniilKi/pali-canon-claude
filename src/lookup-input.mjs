@@ -9,6 +9,7 @@ import { lookupPali } from './providers.mjs';
 import { loadDpd } from './analyse.mjs';
 import { normalizeInput, normalizationNote } from './input.mjs';
 import * as canon from './canon.mjs';
+import { romanizeLookupInput, inputNote } from './script.mjs';
 
 const DIACRITICS = /[āīūṅñṭḍṇḷṃṁ]/i;
 
@@ -22,12 +23,14 @@ export function foldedHeadwords(word) {
 
 export async function lookupPaliInput({ word, limit = 5 }) {
   const raw = String(word ?? '').trim();
-  const n = normalizeInput(raw);
+  const input = romanizeLookupInput(raw);
+  // Native spelling encodes the letters directly; English-keyboard inference must not rewrite it.
+  const n = input.original ? { text: input.text, changed: false, changes: [] } : normalizeInput(raw);
   const typed = n.text.trim();
   let inferred = null;
   // No diacritics, or diacritics only partly inferred by the normaliser (nyana → ñana: vowel length unknown).
   const partial = n.changes.some((c) => c.rule === 'anglicised');
-  if (!DIACRITICS.test(typed) || partial) {
+  if (!input.original && (!DIACRITICS.test(typed) || partial)) {
     let found = [];
     try { found = foldedHeadwords(typed); } catch { /* bundled DPD missing: live lookup only */ }
     // Keep the letters the normaliser did infer (ñ in ñana).
@@ -47,7 +50,7 @@ export async function lookupPaliInput({ word, limit = 5 }) {
     if (again.entries?.length) result = { ...again, looked_up: inferred.spellings[0], looked_up_note: `No entry for "${typed}"; showing the entry for the inferred spelling "${inferred.spellings[0]}".` };
   }
   return {
-    ...result,
+    ...result, ...inputNote(input),
     ...(n.changed ? { input_normalised: normalizationNote(n) } : {}),
     ...(inferred ? { inferred_spelling: inferred } : {}),
   };

@@ -12,6 +12,7 @@ import { loadGlossary } from './glossary-data.mjs';
 import { listsIndex } from './topics.mjs';
 import { normalizeInput, normalizationNote, isPaliWord, isPaliStem } from './input.mjs';
 import { DPD_LICENSE } from './analyse.mjs';
+import { romanizeLookupInput, inputNote } from './script.mjs';
 
 const fold = canon.fold;
 export const GLOSS_NOTE = 'Dictionary and list glosses are labels for finding words, not translations. Quote the Pāli text (get_text) or a named translation (get_translation) instead.';
@@ -101,11 +102,12 @@ export function paliToEnglish(term, { limit = 10 } = {}) {
 export function glossary({ term, direction = 'auto', limit = 10 } = {}) {
   const raw = String(term ?? '').trim();
   if (!raw) throw new Error('Give an English or Pāli word or phrase.');
-  const n = normalizeInput(raw);
-  const en = direction === 'pa-en' ? [] : englishToPali(raw, { limit });
+  const input = direction === 'en-pa' ? { text: raw, script: 'roman' } : romanizeLookupInput(raw);
+  const n = input.original ? { text: input.text, changed: false, changes: [] } : normalizeInput(raw);
+  const en = direction === 'pa-en' || input.original ? [] : englishToPali(raw, { limit });
   const pa = direction === 'en-pa' ? [] : paliToEnglish(n.text, { limit });
   const result = {
-    term: raw,
+    term: raw, ...inputNote(input),
     ...(n.changed && direction !== 'en-pa' ? { input_normalised: normalizationNote(n) } : {}),
     ...(direction !== 'pa-en' ? { english_to_pali: en } : {}),
     ...(direction !== 'en-pa' ? { pali_to_english: pa } : {}),
@@ -213,7 +215,7 @@ export function expandEnglish(query, { maxTerms = 8, perChunk = 4 } = {}) {
 /** MCP registration (feature registry: src/features/index.mjs). */
 export function register({ tool, z }) {
   tool('glossary', 'Look up an English word or phrase to find the Pāli terms for it, or a Pāli word to see its short English gloss, from the Digital Pāḷi Dictionary\'s English index and the curated numbered-list glosses. Every entry names its source. Glosses are labels for finding words, not translations. Works offline.', {
-    term: z.string().trim().min(1).max(100).describe('An English word or phrase ("mindfulness", "suffering", "dependent origination") or a Pāli word, with or without diacritics.'),
+    term: z.string().trim().min(1).max(100).describe('An English word or phrase ("mindfulness", "suffering", "dependent origination") or a Pāli word in Roman or any supported native script. Native conversion is labelled; dictionary text stays in its source form.'),
     direction: z.enum(['auto', 'en-pa', 'pa-en']).default('auto').describe('"en-pa" English to Pāli, "pa-en" Pāli to English, "auto" both.'),
     limit: z.number().int().min(1).max(30).default(10).describe('Entries per direction and source.'),
   }, (args) => glossary(args));

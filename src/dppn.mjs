@@ -13,6 +13,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { romanizeLookupInput, inputNote } from './script.mjs';
 import * as canon from './canon.mjs';
 import { translationTitle } from './translation-titles.mjs';
 
@@ -202,7 +203,8 @@ export function appearsIn(name, limit = 10, { exactWord } = {}) {
 
 /** Look up a proper name. `data` defaults to the bundled dppn.json (tests pass a fixture). */
 export function lookupName({ name, limit = 5, textLimit = 10, exactWord }, data = loadDppn()) {
-  const value = validateName(name);
+  const input = romanizeLookupInput(name);
+  const value = validateName(input.text);
   const { source, entries = [] } = data;
   const dictionary = {
     name: source.name, author: source.author, edition: source.edition,
@@ -210,7 +212,7 @@ export function lookupName({ name, limit = 5, textLimit = 10, exactWord }, data 
     license: source.license, attribution: source.attribution,
   };
   const matches = matchEntries(entries, value, limit).map(describeEntry);
-  const result = { name: value, dictionary, found: matches.length > 0, entries: matches };
+  const result = { name: value, ...inputNote(input), dictionary, found: matches.length > 0, entries: matches };
   if (!entries.length) {
     result.note = `No dictionary entries are bundled. ${source.reason}`;
   } else if (!matches.length) {
@@ -223,7 +225,7 @@ export function lookupName({ name, limit = 5, textLimit = 10, exactWord }, data 
 
 export function register({ tool, z }) {
   tool('lookup_name', 'Who or what is a name in the Pāli Canon (a person such as Sāriputta or Anāthapiṇḍika, a place such as Sāvatthī)? Returns the Dictionary of Pāli Proper Names entry when bundled (with attribution and licence), links to the online editions, and matching Pāli passages or indexed Pāli/English titles from the bundled canon. Title matches identify the exact title, language and source; they are metadata, not dictionary entries. Works offline.', {
-    name: z.string().min(1).max(100).describe('A proper name in Pāli, diacritics optional: Sāriputta, Anathapindika, Savatthi.'),
+    name: z.string().min(1).max(100).describe('A proper name in Pāli, in Roman or a supported native script (conversion labelled). Diacritics optional in Roman: Sāriputta, Anathapindika, Savatthi.'),
     limit: z.number().int().min(1).max(20).default(5).describe('Maximum dictionary entries.'),
     textLimit: z.number().int().min(1).max(50).default(10).describe('Maximum canon texts listed where the name appears.'),
     exactWord: z.boolean().optional().describe('Match each word of the name as a whole word with a case ending. Default: only for one-word names of 5 letters or fewer. Use it to stop Ānanda matching inside compounds such as ānandajāta.'),

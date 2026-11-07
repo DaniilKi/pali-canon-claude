@@ -28,7 +28,7 @@ The server has 34 tools. Twenty-seven of them work without internet (`get_text` 
 | `list_sources` | Sources, editions and licences | No |
 | `get_translation` | Reads an English translation from dhammatalks.org, Access to Insight or Ancient Buddhist Texts | Yes |
 | `compare_translations` | Shows two to four English translations side by side | Yes |
-| `lookup_pali` | Looks a word up in the Digital Pāḷi Dictionary (falls back to the bundled subset when offline) | Yes |
+| `lookup_pali` | Looks a Pāli word up in Roman or a supported native script (falls back to the bundled DPD subset when offline) | Yes |
 | `search_access_to_insight` | Searches Access to Insight's indexes | Yes |
 | `get_access_to_insight_text` | Reads an Access to Insight page | Yes |
 | `find_citations` | Finds every citation in a piece of text (an essay, a talk transcript) and checks each one | No |
@@ -39,9 +39,9 @@ The server has 34 tools. Twenty-seven of them work without internet (`get_text` 
 | `search_post_canonical` | Searches the post-canonical books | No |
 | `analyse_passage` | Word-by-word analysis of canonical, post-canonical or complete-root-file Pāli using the bundled DPD subset; source labels remain distinct and unknown words are explicit | No |
 | `get_parallels` | Other texts that share a passage with this one, and texts the commentary cites, each link saying its source | No |
-| `glossary` | English → Pāli terms ("mindfulness" → sati) and Pāli → short English glosses, from the Digital Pāḷi Dictionary's English index and the curated list glosses, each with its source | No |
+| `glossary` | English → Pāli terms ("mindfulness" → sati) and Pāli in Roman/native scripts → short English glosses, from the Digital Pāḷi Dictionary's English index and the curated list glosses, each with its source | No |
 | `verify_quote` | Checks whether a quotation attributed to the Buddha is in the texts: Pāli against the whole bundled canon (offline), English against the linked translations of the texts you name (default: the Dhammapada) | Yes |
-| `lookup_name` | Finds source-backed title/body occurrences of a name (Sāriputta, Sāvatthī). DPPN entries are not bundled; the response exposes that licence gate. | No |
+| `lookup_name` | Finds source-backed title/body occurrences of a Pāli name in Roman/native scripts (Sāriputta, Sāvatthī). DPPN entries are not bundled; the response exposes that licence gate. | No |
 | `topic` | Texts on a topic ("anger", "five hindrances") from Access to Insight's indexes | No |
 | `list_topics` | Browses or searches the topic index | No |
 | `dhamma_list` | A numbered list of the teaching (four noble truths, five aggregates…) with its Pāli members and source passage | No |

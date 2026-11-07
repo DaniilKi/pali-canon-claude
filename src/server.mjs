@@ -227,7 +227,7 @@ export function createServer() {
     limit: z.number().int().min(1).max(200).default(60),
   }, ({ node, offset, limit }) => node.trim().toLowerCase() === 'books' ? sourceBooks.catalogue({ offset, limit }) : canon.browse(node, { offset, limit }));
 
-  tool('lookup_pali', 'Look up a Pāli word in the Digital Pāḷi Dictionary (grammar, roots, meanings). Diacritics are optional: "nibbana" also offers nibbāna, labelled inferred_spelling; Velthuis and Harvard-Kyoto are understood. Dictionary glosses are reference material, not scripture.', {
+  tool('lookup_pali', 'Look up a Pāli word in the Digital Pāḷi Dictionary (grammar, roots, meanings). Diacritics are optional: "nibbana" also offers nibbāna, labelled inferred_spelling; Velthuis and Harvard-Kyoto are understood for Roman input. Supported native-script Pāli is converted and labelled before lookup, with no keyboard-spelling inference. Dictionary glosses are reference material, not scripture.', {
     word: z.string().trim().min(1).max(100), limit: z.number().int().min(1).max(10).default(5),
   }, lookupPaliInput, { network: true });
 

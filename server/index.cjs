@@ -24241,6 +24241,13 @@ function romanizeInput(text) {
   if (script === "roman") return { text: s, script };
   return { text: toRomanFrom(s, script).normalize("NFC"), script, original: s };
 }
+function romanizeLookupInput(text) {
+  const input = romanizeInput(text);
+  if (input.original && (detectScript(input.text) !== "roman" || [...input.text].some((ch) => new RegExp("\\p{L}", "u").test(ch) && !new RegExp("\\p{Script=Latin}", "u").test(ch)))) {
+    throw new Error("The lookup input could not be converted completely. Use P\u0101li in Roman or one supported script, without mixed or unsupported characters.");
+  }
+  return input;
+}
 function inputNote(input) {
   return input?.original ? { input_script: input.script, input_romanized: input.text } : {};
 }
@@ -28144,7 +28151,8 @@ function appearsIn(name, limit = 10, { exactWord } = {}) {
   };
 }
 function lookupName({ name, limit = 5, textLimit = 10, exactWord }, data5 = loadDppn()) {
-  const value = validateName(name);
+  const input = romanizeLookupInput(name);
+  const value = validateName(input.text);
   const { source: source4, entries = [] } = data5;
   const dictionary = {
     name: source4.name,
@@ -28155,7 +28163,7 @@ function lookupName({ name, limit = 5, textLimit = 10, exactWord }, data5 = load
     attribution: source4.attribution
   };
   const matches = matchEntries(entries, value, limit).map(describeEntry);
-  const result = { name: value, dictionary, found: matches.length > 0, entries: matches };
+  const result = { name: value, ...inputNote(input), dictionary, found: matches.length > 0, entries: matches };
   if (!entries.length) {
     result.note = `No dictionary entries are bundled. ${source4.reason}`;
   } else if (!matches.length) {
@@ -28167,7 +28175,7 @@ function lookupName({ name, limit = 5, textLimit = 10, exactWord }, data5 = load
 }
 function register8({ tool, z }) {
   tool("lookup_name", "Who or what is a name in the P\u0101li Canon (a person such as S\u0101riputta or An\u0101thapi\u1E47\u1E0Dika, a place such as S\u0101vatth\u012B)? Returns the Dictionary of P\u0101li Proper Names entry when bundled (with attribution and licence), links to the online editions, and matching P\u0101li passages or indexed P\u0101li/English titles from the bundled canon. Title matches identify the exact title, language and source; they are metadata, not dictionary entries. Works offline.", {
-    name: z.string().min(1).max(100).describe("A proper name in P\u0101li, diacritics optional: S\u0101riputta, Anathapindika, Savatthi."),
+    name: z.string().min(1).max(100).describe("A proper name in P\u0101li, in Roman or a supported native script (conversion labelled). Diacritics optional in Roman: S\u0101riputta, Anathapindika, Savatthi."),
     limit: z.number().int().min(1).max(20).default(5).describe("Maximum dictionary entries."),
     textLimit: z.number().int().min(1).max(50).default(10).describe("Maximum canon texts listed where the name appears."),
     exactWord: z.boolean().optional().describe("Match each word of the name as a whole word with a case ending. Default: only for one-word names of 5 letters or fewer. Use it to stop \u0100nanda matching inside compounds such as \u0101nandaj\u0101ta.")
@@ -30948,11 +30956,13 @@ function paliToEnglish(term, { limit = 10 } = {}) {
 function glossary({ term, direction = "auto", limit = 10 } = {}) {
   const raw = String(term ?? "").trim();
   if (!raw) throw new Error("Give an English or P\u0101li word or phrase.");
-  const n = normalizeInput(raw);
-  const en = direction === "pa-en" ? [] : englishToPali(raw, { limit });
+  const input = direction === "en-pa" ? { text: raw, script: "roman" } : romanizeLookupInput(raw);
+  const n = input.original ? { text: input.text, changed: false, changes: [] } : normalizeInput(raw);
+  const en = direction === "pa-en" || input.original ? [] : englishToPali(raw, { limit });
   const pa = direction === "en-pa" ? [] : paliToEnglish(n.text, { limit });
   const result = {
     term: raw,
+    ...inputNote(input),
     ...n.changed && direction !== "en-pa" ? { input_normalised: normalizationNote(n) } : {},
     ...direction !== "pa-en" ? { english_to_pali: en } : {},
     ...direction !== "en-pa" ? { pali_to_english: pa } : {},
@@ -31047,7 +31057,7 @@ function expandEnglish(query, { maxTerms = 8, perChunk = 4 } = {}) {
 }
 function register17({ tool, z }) {
   tool("glossary", "Look up an English word or phrase to find the P\u0101li terms for it, or a P\u0101li word to see its short English gloss, from the Digital P\u0101\u1E37i Dictionary's English index and the curated numbered-list glosses. Every entry names its source. Glosses are labels for finding words, not translations. Works offline.", {
-    term: z.string().trim().min(1).max(100).describe('An English word or phrase ("mindfulness", "suffering", "dependent origination") or a P\u0101li word, with or without diacritics.'),
+    term: z.string().trim().min(1).max(100).describe('An English word or phrase ("mindfulness", "suffering", "dependent origination") or a P\u0101li word in Roman or any supported native script. Native conversion is labelled; dictionary text stays in its source form.'),
     direction: z.enum(["auto", "en-pa", "pa-en"]).default("auto").describe('"en-pa" English to P\u0101li, "pa-en" P\u0101li to English, "auto" both.'),
     limit: z.number().int().min(1).max(30).default(10).describe("Entries per direction and source.")
   }, (args) => glossary(args));
@@ -31363,11 +31373,12 @@ function foldedHeadwords(word) {
 }
 async function lookupPaliInput({ word, limit = 5 }) {
   const raw = String(word ?? "").trim();
-  const n = normalizeInput(raw);
+  const input = romanizeLookupInput(raw);
+  const n = input.original ? { text: input.text, changed: false, changes: [] } : normalizeInput(raw);
   const typed = n.text.trim();
   let inferred = null;
   const partial2 = n.changes.some((c) => c.rule === "anglicised");
-  if (!DIACRITICS.test(typed) || partial2) {
+  if (!input.original && (!DIACRITICS.test(typed) || partial2)) {
     let found = [];
     try {
       found = foldedHeadwords(typed);
@@ -31393,6 +31404,7 @@ async function lookupPaliInput({ word, limit = 5 }) {
   }
   return {
     ...result,
+    ...inputNote(input),
     ...n.changed ? { input_normalised: normalizationNote(n) } : {},
     ...inferred ? { inferred_spelling: inferred } : {}
   };
@@ -31610,7 +31622,7 @@ function createServer() {
     offset: external_exports.number().int().min(0).max(1e5).default(0),
     limit: external_exports.number().int().min(1).max(200).default(60)
   }, ({ node, offset, limit }) => node.trim().toLowerCase() === "books" ? catalogue({ offset, limit }) : browse(node, { offset, limit }));
-  tool("lookup_pali", 'Look up a P\u0101li word in the Digital P\u0101\u1E37i Dictionary (grammar, roots, meanings). Diacritics are optional: "nibbana" also offers nibb\u0101na, labelled inferred_spelling; Velthuis and Harvard-Kyoto are understood. Dictionary glosses are reference material, not scripture.', {
+  tool("lookup_pali", 'Look up a P\u0101li word in the Digital P\u0101\u1E37i Dictionary (grammar, roots, meanings). Diacritics are optional: "nibbana" also offers nibb\u0101na, labelled inferred_spelling; Velthuis and Harvard-Kyoto are understood for Roman input. Supported native-script P\u0101li is converted and labelled before lookup, with no keyboard-spelling inference. Dictionary glosses are reference material, not scripture.', {
     word: external_exports.string().trim().min(1).max(100),
     limit: external_exports.number().int().min(1).max(10).default(5)
   }, lookupPaliInput, { network: true });
