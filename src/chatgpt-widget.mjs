@@ -23,7 +23,7 @@ import { readBook } from './source-books.mjs';
 import { getCommentary } from './commentary.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v13';
+export const WIDGET_VERSION = 'v14';
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 export const SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 export const MCP_APP_MIME = 'text/html;profile=mcp-app';
@@ -336,9 +336,45 @@ export const WIDGET_HTML = `<!doctype html>
   var closed = false;
   var generation = 0, requestId = 2, pending = null, serverTools = false, awaitingSelection = false, lastInput, lastOutput, lastMetadata;
   var modelCapabilities, modelChannel, modelModality, modelDesired, modelFlight, modelAccepted, modelFailure, modelRevision = 0, modelBlocked = false;
+  var sizeChannel, sizeObserver, sizeFrame, sizeHeight, sizeBlocked = false;
+  function stopSizing() {
+    if (sizeObserver) sizeObserver.disconnect();
+    sizeObserver = null;
+    if (sizeFrame != null && window.cancelAnimationFrame) window.cancelAnimationFrame(sizeFrame);
+    sizeFrame = null;
+  }
+  function queueSize() {
+    if (closed || sizeBlocked || !sizeChannel || sizeFrame != null || !window.requestAnimationFrame) return;
+    sizeFrame = window.requestAnimationFrame(function () {
+      sizeFrame = null;
+      if (closed || sizeBlocked) return;
+      // Measure intrinsic body content, not viewport/scrollHeight: the latter prevents shrinkage
+      // when the host resizes the frame to our previous height. Report height only; width is host-owned.
+      var height = Math.ceil(document.body.getBoundingClientRect().height);
+      if (!Number.isFinite(height) || height <= 0 || height === sizeHeight) return;
+      sizeHeight = height;
+      try {
+        if (sizeChannel === 'mcp') post({ jsonrpc: '2.0', method: 'ui/notifications/size-changed', params: { height: height } });
+        else {
+          var result = window.openai.notifyIntrinsicHeight(height);
+          if (result && typeof result.then === 'function') Promise.resolve(result).catch(function () { sizeBlocked = true; stopSizing(); });
+        }
+      } catch (error) { sizeBlocked = true; stopSizing(); }
+    });
+  }
+  function startSizing(channel) {
+    if (closed || sizeBlocked || sizeChannel) return;
+    sizeChannel = channel;
+    if (window.ResizeObserver) {
+      try { sizeObserver = new window.ResizeObserver(queueSize); sizeObserver.observe(document.body); }
+      catch (error) { stopSizing(); }
+    }
+    queueSize();
+  }
+  window.addEventListener('resize', queueSize);
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = String(text); return e; }
   function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
-  function modelStatus(message) { if (!closed) document.getElementById('context-status').textContent = message; }
+  function modelStatus(message) { if (!closed) { document.getElementById('context-status').textContent = message; queueSize(); } }
   function modelAdvice() { return modelDesired && modelDesired.snapshot.state === 'displayed' ? ' Tell the assistant the displayed citation.' : ' No current reading has been confirmed for the assistant.'; }
   function vacantContext(state) { return { schema: 'pali-reader-selection-v1', widget_version: '${WIDGET_VERSION}', state: state,
     quotation: state === 'loading' ? 'A new reading is pending; do not assume an earlier page is the requested selection.' : 'No retrieved passage is displayed. Reopen a source before quoting.' }; }
@@ -425,6 +461,7 @@ export const WIDGET_HTML = `<!doctype html>
     document.getElementById('navigation').setAttribute('aria-busy', 'false');
   }
   function navigation() {
+    queueSize();
     var nav = document.getElementById('navigation'); clear(nav);
     if (closed) return;
     if (awaitingSelection) { nav.appendChild(el('p', 'note', 'Opening the requested passage…')); return; }
@@ -583,6 +620,7 @@ export const WIDGET_HTML = `<!doctype html>
     render(result.structuredContent);
   }
   function fromOpenai() {
+    if (window.openai && typeof window.openai.notifyIntrinsicHeight === 'function') startSizing('sdk');
     if (closed) return;
     if (window.openai) {
       setTheme(window.openai.theme);
@@ -611,7 +649,7 @@ export const WIDGET_HTML = `<!doctype html>
   function closeReader() {
     if (closed) return;
     var canClear = !modelFlight && !modelBlocked, channel = modelChannel, modality = modelModality;
-    closed = true; generation++; abandon();
+    closed = true; generation++; abandon(); stopSizing();
     if (modelFlight) clearTimeout(modelFlight.timer);
     modelFlight = null; modelDesired = null; modelAccepted = null; rendered = null; lastOutput = null; lastMetadata = null; lastInput = null;
     awaitingSelection = false;
@@ -646,6 +684,7 @@ export const WIDGET_HTML = `<!doctype html>
       serverTools = !!(m.result.hostCapabilities && m.result.hostCapabilities.serverTools); navigation();
       if (m.result.hostContext) setTheme(m.result.hostContext.theme);
       post({ jsonrpc: '2.0', method: 'ui/notifications/initialized', params: {} });
+      startSizing('mcp');
     } else if (modelFlight && m.id === modelFlight.id && (m.result || m.error)) {
       modelReply(m);
     } else if (pending && m.id === pending.id && (m.result || m.error)) {

@@ -4,6 +4,7 @@ import argparse
 import json
 import subprocess
 from pathlib import Path
+from widget_sizing import check_sizing
 
 parser = argparse.ArgumentParser(
     description="Run the actual reader HTML in Chromium with simulated host bridges; no model or signed-in ChatGPT session."
@@ -420,11 +421,13 @@ def check():
                         "Pāli continuation", "English pinned continuation after primary recovery", "unpinned offset refused",
                         "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "commentary labels and availability", "unaligned source caution", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "exact Pali segment without invented English alignment", "source-preserving context and exact return", "direct navigation controls and keyboard activation", "late success and rejection ignored", "navigation failure clears stale content", "local navigation survives globals updates", "model-context capability and modality checks", "metadata-only source context and replay commands", "late context acknowledgements coalesce to current state", "context errors leave the reader usable", "cleared reading state on error", "teardown acknowledgement and terminal cleanup", "late closed-reader replies ignored", "no invented post-canonical/source-file links", "no JS errors"]})
                 page.close()
+        sizing = check_sizing(browser, payload)
         assert not requests, requests
         report = {
             "status": "passed",
             "browser": "Chromium " + browser.version,
             "checks": checks,
+            "sizing": sizing,
             "fixtures": {"pali": "bundled VRI", "english": "synthetic HTTP responses", "transport": "in-memory MCP", "simulated_fetches": payload["fixture_fetches"]},
             "scope": "Local browser with simulated host bridges; not signed-in ChatGPT acceptance",
         }

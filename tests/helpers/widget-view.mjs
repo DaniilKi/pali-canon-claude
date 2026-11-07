@@ -26,14 +26,15 @@ export const fixture = (label = 'first') => ({
 });
 export const settle = () => new Promise(resolve => setImmediate(resolve));
 
-export function view(bridge, { supported = true, modelCapabilities, stateWriter, initialize = true } = {}) {
+export function view(bridge, { supported = true, modelCapabilities, stateWriter, initialize = true, sizingRuntime } = {}) {
   const elements = Object.fromEntries(['title', 'meta', 'pali', 'english', 'footer', 'status', 'navigation', 'context-status'].map(id => [id, new Element()]));
   const handlers = {}, calls = [], messages = [], models = [], stateUpdates = [], timers = new Map(); let timer = 0;
   const parent = { postMessage(m) { messages.push(m); if (m.method === 'tools/call') calls.push(m); if (m.method === 'ui/update-model-context') models.push(m); } };
   const window = { parent, addEventListener(name, cb) { handlers[name] = cb; } };
   if (bridge === 'Apps SDK') window.openai = supported ? { callTool(name, args) { return new Promise((resolve, reject) => calls.push({ name, arguments: args, resolve, reject })); } } : {};
   if (stateWriter) { window.openai ||= {}; window.openai.setWidgetState = state => { stateUpdates.push(state); if (typeof stateWriter === 'function') return stateWriter(state); }; }
-  const document = { documentElement: new Element(), getElementById: id => elements[id], createElement: tag => new Element(tag), createTextNode: text => { const e = new Element(); e.textContent = text; return e; } };
+  if (sizingRuntime) Object.assign(window, sizingRuntime);
+  const document = { body: sizingRuntime && sizingRuntime.body, documentElement: new Element(), getElementById: id => elements[id], createElement: tag => new Element(tag), createTextNode: text => { const e = new Element(); e.textContent = text; return e; } };
   runInNewContext(WIDGET_HTML.match(/<script>([^]*?)<\/script>/)[1], {
     window, document, Date, setTimeout(cb) { timers.set(++timer, cb); return timer; }, clearTimeout(id) { timers.delete(id); },
   });
@@ -43,6 +44,7 @@ export function view(bridge, { supported = true, modelCapabilities, stateWriter,
   return { elements, calls, timers, messages, models, stateUpdates, window, initialize: init,
     notify(method, params = {}) { message({ method, params }); },
     request(id, method, params = {}) { message({ id, method, params }); },
+    resize() { handlers.resize(); },
     pagehide(persisted = false) { handlers.pagehide({ persisted }); },
     foreign(data) { handlers.message({ source: {}, data: { jsonrpc: '2.0', ...data } }); },
     contextReply(index, result = {}, error) { message({ id: models[index].id, ...(error ? { error } : { result }) }); },
