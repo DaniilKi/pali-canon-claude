@@ -14,6 +14,7 @@ const common = {
 // server/index.cjs: stdio transport (Claude Desktop, Claude Code). server/http.cjs: Streamable HTTP (hosted /mcp).
 const results = [
   await build({ ...common, entryPoints: ['src/index.mjs'], outfile: 'server/index.cjs' }),
+  await build({ ...common, entryPoints: ['src/http-worker.mjs'], outfile: 'server/http-worker.cjs' }),
   await build({
     ...common, outfile: 'server/http.cjs',
     stdin: { contents: "import { startHttpServer } from './src/http-server.mjs';\nstartHttpServer();\n", resolveDir: process.cwd(), sourcefile: 'http-entry.mjs', loader: 'js' },
@@ -33,7 +34,7 @@ for (const input of results.flatMap((result) => Object.keys(result.metafile.inpu
     directory = dirname(directory);
   }
 }
-const notices = ['Third-party packages included in server/index.cjs and server/http.cjs. Their licenses apply to their code.'];
+const notices = ['Third-party packages included in server/index.cjs, server/http.cjs and server/http-worker.cjs. Their licenses apply to their code.'];
 for (const directory of [...packageRoots].sort()) {
   const metadata = JSON.parse(await readFile(resolve(directory, 'package.json'), 'utf8'));
   notices.push(`\n--- ${metadata.name} ${metadata.version} (${metadata.license || 'see license'}) ---`);
@@ -42,4 +43,4 @@ for (const directory of [...packageRoots].sort()) {
   }
 }
 await writeFile('server/THIRD_PARTY_LICENSES.txt', notices.join('\n\n'));
-console.error('Built self-contained server/index.cjs (stdio) and server/http.cjs (HTTP)');
+console.error('Built self-contained stdio, HTTP and hosted-tool-worker bundles');

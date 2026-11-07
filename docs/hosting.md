@@ -82,7 +82,7 @@ All settings are optional environment variables.
 | `HOST` | `0.0.0.0` | Network address to listen on. |
 | `RATE_LIMIT_PER_MINUTE` | `120` | Requests each visitor may make per minute. `0` turns the limit off. |
 | `TRUST_PROXY` | off | How many proxies sit in front of the server. Set to `1` on a hosting platform such as Fly.io or Render, so each visitor's real address (the one the platform adds last to `X-Forwarded-For`) is used for the rate limit. Addresses a visitor writes in that header themselves are ignored. Leave it off when the server faces the internet directly. |
-| `PALI_CANON_CACHE_MB` | `64` | Memory for recently fetched translations and dictionary entries. `0` turns it off. |
+| `PALI_CANON_CACHE_MB` | `64` | Per-thread live-response cache budget. Hosted core tools and the frontend reader have separate caches (up to 128 MiB combined at the default); `0` disables both. |
 | `PALI_CANON_CACHE_TTL_MINUTES` | `360` | How long a fetched page is kept (six hours). |
 | `CHATGPT_WIDGET` | off | `1` adds the ChatGPT reading view: one extra read-only tool, `read_passage_widget`, and its page. `fly.toml` and `render.yaml` turn it on. See [listings/chatgpt.md](listings/chatgpt.md). |
 
@@ -151,6 +151,20 @@ configuration was insufficient for the reproduced full-study session.
 
 ## Uptime monitoring
 
+The installed HTTP entry keeps core tool execution in one shared worker thread. CPU-heavy searches
+share that worker and its datasets; `/healthz`, HTTP transport, resources, prompts and the hosted
+reader stay on the HTTP thread. This does not add CPU capacity. Ship **all three runtime bundles**
+(`index.cjs`, `http.cjs`, `http-worker.cjs`) with `server/data`; copying only `http.cjs` is insufficient.
+The npm package and Dockerfile include the complete directory. Stdio remains in one thread.
+
+Health reports the worker's bounded state and pending count, plus the cache snapshot from its last
+completed tool call; `frontend_cache` separately reports the reader's live-response cache. A crashed or unresponsive worker makes health return HTTP 503. At most 64 core
+tool calls may be outstanding; additional calls return an explicit queue-full tool error for retry.
+A 180-second dispatch deadline includes queueing and provider waits. If any core call exceeds it,
+the watchdog rejects outstanding calls and stops the worker; the process must restart before tool
+execution can resume. This can reject a very slow provider batch too. No request is automatically replayed. A successful liveness
+probe does not promise that a slow tool has completed.
+
 Point any free uptime monitor (for example UptimeRobot or Better Stack) at `https://<your address>/healthz`
 every five minutes. It returns HTTP 200 with `"status": "ok"` when the server is healthy.
 
@@ -160,6 +174,21 @@ every five minutes. It returns HTTP 200 with `"status": "ok"` when the server is
 Each session connects, lists the tools, resolves a citation, reads Pāli text, searches and browses.
 Add `--live` to also fetch an English translation and a dictionary entry, or `--url https://…/mcp` to
 test a deployed server (keep in mind its rate limit applies to you).
+
+For mixed offline study operations with independent five-second health probes, run:
+
+```sh
+node scripts/audit-hosted-load.mjs --server-dir server --clients 16 --rounds 3 --report concurrency.json
+node scripts/smoke.mjs --http
+```
+
+The hosted CI job runs the mixed test inside **one CPU and 2 GiB**, without swap or external network.
+The original 48-call sample completed every tool call but missed 15 of 19 health deadlines; warm
+rounds took about 18–22 seconds. With isolated execution and a bounded 64 MiB commentary index cache
+(the shipped folded corpus needs about 59 MB), the same sample completed all 48 calls and 365 health
+probes without a failure: maximum health latency was 365 ms and warm rounds took 3.1 and 0.9 seconds.
+Process high-water RSS was about 1.3 GiB. These are local Node 20 container measurements, not an
+actual-provider SLA, proof of 64 simultaneous heavy calls, full-cache or signed-in-client acceptance.
 
 Result on a Windows 11 laptop (1 November 2026), 50 concurrent sessions, no errors:
 

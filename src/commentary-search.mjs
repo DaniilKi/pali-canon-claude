@@ -6,9 +6,12 @@ import { searchFold, searchExcerpt, searchTerms, romanizeSearchInput, searchInpu
 import { localizeCommentary, SCRIPT_DESCRIPTION, scriptName } from './script.mjs';
 
 // Bound retained folded text; the source corpus itself is already resident once loaded.
-const INDEX_BUDGET_BYTES = 8 * 1024 * 1024;
+// The shipped corpus needs about 59 MB folded. An 8 MB LRU rebuilt nearly every book on every full scan.
+const INDEX_BUDGET_BYTES = 64 * 1024 * 1024;
 const indexes = new Map();
 let indexBytes = 0;
+let builds = 0;
+export const searchCacheStats = () => ({ books: indexes.size, bytes: indexBytes, max_bytes: INDEX_BUDGET_BYTES, builds });
 function indexed(book) {
   const cached = indexes.get(book);
   if (cached) {
@@ -16,6 +19,7 @@ function indexed(book) {
     return cached.text;
   }
   const text = commentary.bookSegments(book).map((segment) => searchFold(segment.text, fold));
+  builds += 1;
   const bytes = text.reduce((sum, value) => sum + value.length * 2, 0);
   if (bytes <= INDEX_BUDGET_BYTES) {
     while (indexBytes + bytes > INDEX_BUDGET_BYTES && indexes.size) {

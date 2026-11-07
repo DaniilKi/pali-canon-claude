@@ -16,6 +16,7 @@ import { createServer as createMcpServer, VERSION, TOOL_TITLES } from './server.
 import { liveCache } from './cache.mjs';
 import { load } from './canon.mjs';
 import { registerChatgptWidget, WIDGET_TOOL } from './chatgpt-widget.mjs';
+import { HttpToolWorker } from './http-tool-worker.mjs';
 
 const MAX_BODY = 1024 * 1024;
 // Derive protocol labels from the installed SDK; arbitrary request strings must not become permanent keys.
@@ -134,6 +135,7 @@ export function createHttpServer({
   rateLimitPerMinute = intEnv('RATE_LIMIT_PER_MINUTE', 120),
   trustProxy = parseTrustProxy(process.env.TRUST_PROXY),
   chatgptWidget = /^(1|true|yes|on)$/i.test(String(process.env.CHATGPT_WIDGET ?? '').trim()),
+  toolExecutor = null,
 } = {}) {
   const limiter = new RateLimiter({ perMinute: rateLimitPerMinute });
   const started = Date.now();
@@ -158,10 +160,12 @@ export function createHttpServer({
 
       if (path === '/healthz' || path === '/health') {
         if (req.method !== 'GET' && req.method !== 'HEAD') { send(res, 405, 'Method not allowed', { Allow: 'GET, HEAD' }); return; }
-        send(res, 200, {
-          status: 'ok', name: 'pali-canon', version: VERSION, transport: 'streamable-http (stateless)',
+        const unavailable = toolExecutor?.status().state === 'failed';
+        send(res, unavailable ? 503 : 200, {
+          status: unavailable ? 'unavailable' : 'ok', name: 'pali-canon', version: VERSION, transport: 'streamable-http (stateless)',
           uptime_seconds: Math.round((Date.now() - started) / 1000),
-          counters, cache: liveCache.stats(),
+          counters, cache: toolExecutor?.cache || liveCache.stats(),
+          ...(toolExecutor ? { tool_worker: toolExecutor.status(), frontend_cache: liveCache.stats() } : {}),
           rate_limit_per_minute: rateLimitPerMinute || null,
           chatgpt_widget: Boolean(chatgptWidget),
           privacy: 'No request content, tool arguments, IP addresses or user agents are logged; only these aggregate counts are kept in memory.',
@@ -208,7 +212,7 @@ export function createHttpServer({
       }
 
       for (const [key, value] of Object.entries(CORS)) res.setHeader(key, value);
-      const server = createMcpServer();
+      const server = createMcpServer(toolExecutor ? { executeTool: (name, args) => toolExecutor.execute(name, args) } : {});
       if (chatgptWidget) registerChatgptWidget(server);
       const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined, enableJsonResponse: true });
       res.on('close', () => { transport.close().catch(() => {}); server.close().catch(() => {}); });
@@ -222,7 +226,7 @@ export function createHttpServer({
       else res.end();
     }
   });
-  http.on('close', () => clearInterval(sweeper));
+  http.on('close', () => { clearInterval(sweeper); toolExecutor?.close().catch(() => {}); });
   http.counters = counters;
   return http;
 }
@@ -230,7 +234,7 @@ export function createHttpServer({
 /** Start listening on $PORT (default 8080) and $HOST (default 0.0.0.0). Used by server/http.cjs. */
 export function startHttpServer({ port = intEnv('PORT', 8080), host = process.env.HOST || '0.0.0.0' } = {}) {
   load(); // read the bundled canon once at startup, not on the first request
-  const http = createHttpServer();
+  const http = createHttpServer({ toolExecutor: new HttpToolWorker() });
   http.listen(port, host, () => {
     const address = http.address();
     console.error(`Pali Canon MCP ${VERSION} listening on http://${host}:${address.port}/mcp`);

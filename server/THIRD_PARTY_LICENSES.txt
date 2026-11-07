@@ -1,4 +1,4 @@
-Third-party packages included in server/index.cjs and server/http.cjs. Their licenses apply to their code.
+Third-party packages included in server/index.cjs, server/http.cjs and server/http-worker.cjs. Their licenses apply to their code.
 
 
 --- @hono/node-server 2.1.5 (MIT) ---

@@ -1,15 +1,18 @@
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
+import { spawn } from 'node:child_process';
+import { resolve } from 'node:path';
 import assert from 'node:assert/strict';
 import { expectedToolNames } from './expected-tools.mjs';
 
 const live = process.argv.includes('--live');
+const httpMode = process.argv.includes('--http');
 const serverFlag = process.argv.indexOf('--server');
-const serverPath = serverFlag >= 0 ? process.argv[serverFlag + 1] : 'server/index.cjs';
+const serverPath = serverFlag >= 0 ? process.argv[serverFlag + 1] : httpMode ? 'server/http.cjs' : 'server/index.cjs';
 const client = new Client({ name: 'pali-canon-smoke', version: '2.1.0' });
 // Pass the environment through so proxy settings (HTTPS_PROXY, NODE_USE_ENV_PROXY) reach the server.
-const transport = new StdioClientTransport({ command: process.execPath, args: [serverPath], stderr: 'pipe', env: { ...process.env } });
-transport.stderr?.on('data', (data) => process.stderr.write(data));
+let transport, child, timer;
 let checks = 0;
 async function call(name, args, verify) {
   const response = await client.callTool({ name, arguments: args }, undefined, { timeout: 120000 });
@@ -28,6 +31,18 @@ async function fails(name, args, pattern) {
   checks += 1;
 }
 try {
+  if (httpMode) {
+    child = spawn(process.execPath, [resolve(serverPath)], { env: { ...process.env, HOST: '127.0.0.1', PORT: '0', CHATGPT_WIDGET: '0', RATE_LIMIT_PER_MINUTE: '0' }, stdio: ['ignore', 'ignore', 'pipe'] });
+    const url = await new Promise((resolve, reject) => {
+      let stderr = ''; timer = setTimeout(() => reject(Error('HTTP smoke readiness timed out')), 30000);
+      child.once('error', reject); child.once('exit', code => reject(Error(`HTTP smoke server exited (${code})`)));
+      child.stderr.on('data', data => { stderr += data; process.stderr.write(data); const match = stderr.match(/listening on (http:\/\/127\.0\.0\.1:\d+\/mcp)/); if (match) { clearTimeout(timer); resolve(match[1]); } });
+    });
+    transport = new StreamableHTTPClientTransport(new URL(url));
+  } else {
+    transport = new StdioClientTransport({ command: process.execPath, args: [serverPath], stderr: 'pipe', env: { ...process.env } });
+    transport.stderr?.on('data', data => process.stderr.write(data));
+  }
   await client.connect(transport);
   const { tools } = await client.listTools();
   // 11 core tools plus the optional feature modules (src/features/index.mjs), derived from the source.
@@ -140,4 +155,7 @@ try {
     if (tools.some((t) => t.name === 'find_talks')) await call('find_talks', { passage: 'AN 3.65', limit: 3 }, (d) => { assert.ok(d.results.length); assert.ok(d.results.every((r) => r.url.startsWith('https://www.dhammatalks.org/audio/'))); });
   }
   console.log(`MCP smoke passed: ${tools.length} tools, ${checks} checks. Live=${live}`);
-} finally { await client.close(); }
+} finally {
+  clearTimeout(timer); await client.close().catch(() => {});
+  if (child && child.exitCode === null && child.signalCode === null) { const ended = new Promise(resolve => child.once('exit', resolve)); child.kill(); await ended; }
+}

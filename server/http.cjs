@@ -28245,7 +28245,7 @@ function findWindows(corpus, qwords, { keep = KEEP_WINDOWS } = {}) {
   return picked;
 }
 function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.length } = {}) {
-  const join10 = corpus.compounds ? "" : " ";
+  const join11 = corpus.compounds ? "" : " ";
   const Q = trigrams(corpus.compounds ? query.replace(/ /g, "") : query);
   const qlen = qwords.length;
   const variantSets = qwords.map((w) => new Set(corpus.variants(w).map((v) => v.id)));
@@ -28263,7 +28263,7 @@ function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.len
       const b = a + len;
       if (b > max) continue;
       const ids = corpus.tokens.subarray(a, b);
-      const dice = similarity(Q, Array.from(ids, (id) => corpus.vocab[id]).join(join10));
+      const dice = similarity(Q, Array.from(ids, (id) => corpus.vocab[id]).join(join11));
       if (dice <= best.sim) continue;
       const present = new Set(ids);
       const joined = corpus.compounds ? Array.from(ids, (id) => corpus.vocab[id]).join("") : "";
@@ -33460,11 +33460,14 @@ function register17({ tool, z }) {
 var commentary_search_exports = {};
 __export(commentary_search_exports, {
   register: () => register18,
-  search: () => search3
+  search: () => search3,
+  searchCacheStats: () => searchCacheStats
 });
-var INDEX_BUDGET_BYTES = 8 * 1024 * 1024;
+var INDEX_BUDGET_BYTES = 64 * 1024 * 1024;
 var indexes2 = /* @__PURE__ */ new Map();
 var indexBytes = 0;
+var builds = 0;
+var searchCacheStats = () => ({ books: indexes2.size, bytes: indexBytes, max_bytes: INDEX_BUDGET_BYTES, builds });
 function indexed(book) {
   const cached5 = indexes2.get(book);
   if (cached5) {
@@ -33473,6 +33476,7 @@ function indexed(book) {
     return cached5.text;
   }
   const text = bookSegments(book).map((segment) => searchFold(segment.text, fold3));
+  builds += 1;
   const bytes = text.reduce((sum, value) => sum + value.length * 2, 0);
   if (bytes <= INDEX_BUDGET_BYTES) {
     while (indexBytes + bytes > INDEX_BUDGET_BYTES && indexes2.size) {
@@ -33848,7 +33852,7 @@ var TOOL_TITLES = {
   analyse_passage: "Analyse a passage word by word"
 };
 var VERSION = "2.1.0";
-function createServer2() {
+function createServer2({ executeTool } = {}) {
   const server = new McpServer({ name: "pali-canon", version: VERSION }, {
     instructions: [
       "The P\u0101li text of the whole Tipi\u1E6Daka (VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition) is bundled and works offline; English translations (\u1E6Ch\u0101nissaro Bhikkhu, Access to Insight) and the dictionary are fetched live with mirrors.",
@@ -33866,6 +33870,7 @@ function createServer2() {
     const title = TOOL_TITLES[name];
     server.registerTool(name, { title, description, inputSchema, annotations: { ...annotations, ...title ? { title } : {}, openWorldHint: network } }, async (args) => {
       try {
+        if (executeTool) return await executeTool(name, args);
         const result = await fn(args);
         return { content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result };
       } catch (error2) {
@@ -34872,6 +34877,94 @@ var WIDGET_HTML = `<!doctype html>
 </html>
 `;
 
+// src/http-tool-worker.mjs
+var import_node_worker_threads = require("node:worker_threads");
+var import_node_path10 = require("node:path");
+var import_node_url10 = require("node:url");
+var import_meta9 = {};
+var here9;
+try {
+  here9 = __dirname;
+} catch {
+  here9 = (0, import_node_path10.join)((0, import_node_path10.dirname)((0, import_node_url10.fileURLToPath)(import_meta9.url)), "..", "server");
+}
+var workerPath = () => (0, import_node_path10.join)(here9, "http-worker.cjs");
+var HttpToolWorker = class {
+  constructor({ maxPending = 64, timeoutMs = 18e4, workerFactory = () => new import_node_worker_threads.Worker(workerPath()) } = {}) {
+    this.maxPending = maxPending;
+    this.timeoutMs = timeoutMs;
+    this.workerFactory = workerFactory;
+    this.pending = /* @__PURE__ */ new Map();
+    this.nextId = 0;
+    this.worker = null;
+    this.failure = null;
+    this.closed = false;
+    this.cache = null;
+  }
+  status() {
+    return { state: this.closed ? "closed" : this.failure ? "failed" : this.worker ? "running" : "idle", pending: this.pending.size, limit: this.maxPending };
+  }
+  fail() {
+    this.failure = new Error("Hosted tool worker is unavailable; retry after the server restarts.");
+    for (const { reject, timer } of this.pending.values()) {
+      clearTimeout(timer);
+      reject(this.failure);
+    }
+    this.pending.clear();
+  }
+  execute(name, args) {
+    if (this.closed || this.failure) return Promise.reject(this.failure || new Error("Hosted tool worker is closed."));
+    if (this.pending.size >= this.maxPending) return Promise.reject(new Error("Hosted tool queue is full; retry this read shortly."));
+    if (!this.worker) {
+      try {
+        this.worker = this.workerFactory();
+      } catch {
+        this.fail();
+        return Promise.reject(this.failure);
+      }
+      this.worker.on("message", (message) => {
+        const job = this.pending.get(message.id);
+        if (!job) return;
+        clearTimeout(job.timer);
+        this.pending.delete(message.id);
+        if (message.cache) this.cache = message.cache;
+        if (message.result) job.resolve(message.result);
+        else job.reject(new Error("Hosted tool execution failed."));
+      });
+      this.worker.on("error", () => this.fail());
+      this.worker.on("exit", () => {
+        if (!this.closed) this.fail();
+      });
+    }
+    const id = ++this.nextId;
+    return new Promise((resolve2, reject) => {
+      const timer = setTimeout(() => {
+        this.fail();
+        void this.worker.terminate().catch(() => {
+        });
+      }, this.timeoutMs);
+      timer.unref();
+      this.pending.set(id, { resolve: resolve2, reject, timer });
+      try {
+        this.worker.postMessage({ id, name, args });
+      } catch {
+        clearTimeout(timer);
+        this.pending.delete(id);
+        reject(new Error("Hosted tool dispatch failed."));
+      }
+    });
+  }
+  async close() {
+    this.closed = true;
+    for (const { reject, timer } of this.pending.values()) {
+      clearTimeout(timer);
+      reject(new Error("Hosted tool worker is closed."));
+    }
+    this.pending.clear();
+    if (this.worker) await this.worker.terminate();
+  }
+};
+
 // src/http-server.mjs
 var MAX_BODY = 1024 * 1024;
 var MCP_METHODS = new Set([...ClientRequestSchema.options, ...ClientNotificationSchema.options].map((schema) => schema.shape.method.value));
@@ -34976,7 +35069,8 @@ function readBody(req) {
 function createHttpServer({
   rateLimitPerMinute = intEnv("RATE_LIMIT_PER_MINUTE", 120),
   trustProxy = parseTrustProxy(process.env.TRUST_PROXY),
-  chatgptWidget = /^(1|true|yes|on)$/i.test(String(process.env.CHATGPT_WIDGET ?? "").trim())
+  chatgptWidget = /^(1|true|yes|on)$/i.test(String(process.env.CHATGPT_WIDGET ?? "").trim()),
+  toolExecutor = null
 } = {}) {
   const limiter = new RateLimiter({ perMinute: rateLimitPerMinute });
   const started = Date.now();
@@ -35010,14 +35104,16 @@ function createHttpServer({
           send(res, 405, "Method not allowed", { Allow: "GET, HEAD" });
           return;
         }
-        send(res, 200, {
-          status: "ok",
+        const unavailable = toolExecutor?.status().state === "failed";
+        send(res, unavailable ? 503 : 200, {
+          status: unavailable ? "unavailable" : "ok",
           name: "pali-canon",
           version: VERSION,
           transport: "streamable-http (stateless)",
           uptime_seconds: Math.round((Date.now() - started) / 1e3),
           counters,
-          cache: liveCache.stats(),
+          cache: toolExecutor?.cache || liveCache.stats(),
+          ...toolExecutor ? { tool_worker: toolExecutor.status(), frontend_cache: liveCache.stats() } : {},
           rate_limit_per_minute: rateLimitPerMinute || null,
           chatgpt_widget: Boolean(chatgptWidget),
           privacy: "No request content, tool arguments, IP addresses or user agents are logged; only these aggregate counts are kept in memory."
@@ -35064,7 +35160,7 @@ function createHttpServer({
         }
       }
       for (const [key3, value] of Object.entries(CORS)) res.setHeader(key3, value);
-      const server = createServer2();
+      const server = createServer2(toolExecutor ? { executeTool: (name, args) => toolExecutor.execute(name, args) } : {});
       if (chatgptWidget) registerChatgptWidget(server);
       const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: void 0, enableJsonResponse: true });
       res.on("close", () => {
@@ -35082,13 +35178,17 @@ function createHttpServer({
       else res.end();
     }
   });
-  http.on("close", () => clearInterval(sweeper));
+  http.on("close", () => {
+    clearInterval(sweeper);
+    toolExecutor?.close().catch(() => {
+    });
+  });
   http.counters = counters;
   return http;
 }
 function startHttpServer({ port = intEnv("PORT", 8080), host = process.env.HOST || "0.0.0.0" } = {}) {
   load();
-  const http = createHttpServer();
+  const http = createHttpServer({ toolExecutor: new HttpToolWorker() });
   http.listen(port, host, () => {
     const address = http.address();
     console.error(`Pali Canon MCP ${VERSION} listening on http://${host}:${address.port}/mcp`);

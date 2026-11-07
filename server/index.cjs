@@ -31338,11 +31338,14 @@ function register17({ tool, z }) {
 var commentary_search_exports = {};
 __export(commentary_search_exports, {
   register: () => register18,
-  search: () => search3
+  search: () => search3,
+  searchCacheStats: () => searchCacheStats
 });
-var INDEX_BUDGET_BYTES = 8 * 1024 * 1024;
+var INDEX_BUDGET_BYTES = 64 * 1024 * 1024;
 var indexes2 = /* @__PURE__ */ new Map();
 var indexBytes = 0;
+var builds = 0;
+var searchCacheStats = () => ({ books: indexes2.size, bytes: indexBytes, max_bytes: INDEX_BUDGET_BYTES, builds });
 function indexed(book) {
   const cached5 = indexes2.get(book);
   if (cached5) {
@@ -31351,6 +31354,7 @@ function indexed(book) {
     return cached5.text;
   }
   const text = bookSegments(book).map((segment) => searchFold(segment.text, fold3));
+  builds += 1;
   const bytes = text.reduce((sum, value) => sum + value.length * 2, 0);
   if (bytes <= INDEX_BUDGET_BYTES) {
     while (indexBytes + bytes > INDEX_BUDGET_BYTES && indexes2.size) {
@@ -31726,7 +31730,7 @@ var TOOL_TITLES = {
   analyse_passage: "Analyse a passage word by word"
 };
 var VERSION = "2.1.0";
-function createServer() {
+function createServer({ executeTool } = {}) {
   const server = new McpServer({ name: "pali-canon", version: VERSION }, {
     instructions: [
       "The P\u0101li text of the whole Tipi\u1E6Daka (VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition) is bundled and works offline; English translations (\u1E6Ch\u0101nissaro Bhikkhu, Access to Insight) and the dictionary are fetched live with mirrors.",
@@ -31744,6 +31748,7 @@ function createServer() {
     const title = TOOL_TITLES[name];
     server.registerTool(name, { title, description, inputSchema, annotations: { ...annotations, ...title ? { title } : {}, openWorldHint: network } }, async (args) => {
       try {
+        if (executeTool) return await executeTool(name, args);
         const result = await fn(args);
         return { content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result };
       } catch (error2) {

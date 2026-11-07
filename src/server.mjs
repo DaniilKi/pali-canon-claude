@@ -57,7 +57,7 @@ export const TOOL_TITLES = {
 export const VERSION = '2.1.0';
 
 /** Build a fully registered MCP server (tools, resources, prompts). Used by the stdio entry (src/index.mjs) and the HTTP entry (src/http-server.mjs). */
-export function createServer() {
+export function createServer({executeTool} = {}) {
   const server = new McpServer({ name: 'pali-canon', version: VERSION }, {
     instructions: [
       'The Pāli text of the whole Tipiṭaka (VRI Chaṭṭha Saṅgāyana edition) is bundled and works offline; English translations (Ṭhānissaro Bhikkhu, Access to Insight) and the dictionary are fetched live with mirrors.',
@@ -78,6 +78,7 @@ export function createServer() {
     const title = TOOL_TITLES[name];
     server.registerTool(name, { title, description, inputSchema, annotations: { ...annotations, ...(title ? { title } : {}), openWorldHint: network } }, async (args) => {
       try {
+        if (executeTool) return await executeTool(name, args);
         const result = await fn(args);
         return { content: [{ type: 'text', text: JSON.stringify(result) }], structuredContent: result };
       } catch (error) {
