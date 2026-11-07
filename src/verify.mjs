@@ -5,6 +5,7 @@
 import { fold, load, resolve, segments, source, linksFor, translationId, alignmentInfo } from './canon.mjs';
 import * as englishModule from './english.mjs';
 import { romanizeLookupInput, inputNote } from './script.mjs';
+import { parseCitation, citationId, rangeEndPath } from './citations.mjs';
 
 export const THRESHOLDS = { found: 0.82, close_paraphrase: 0.5 };
 const MAX_QUERY_WORDS = 120;
@@ -383,36 +384,74 @@ function englishCorpus(pages) {
   };
 }
 
+/** Resolve one explicit English scope without silently selecting the first of several texts. */
+function englishReference(reference) {
+  const input = romanizeLookupInput(reference);
+  const { unit, notes = [], alternatives = [] } = resolve(input.text);
+  const citation = parseCitation(input.text);
+  if (citation.kind === 'id' && citation.end !== null && citation.end !== undefined) {
+    const first = citationId({ ...citation, end: null });
+    const last = citationId({ ...citation, path: rangeEndPath(citation), end: null });
+    if (first !== last && citationId(citation) !== unit.id) {
+      throw new Error(`"${reference}" spans multiple texts rather than one recorded source group. List each exact text in texts, or choose an indexed source group; no translations were compared.`);
+    }
+  }
+  if (alternatives.length) {
+    throw new Error(`"${reference}" maps to multiple canonical passages. Candidates include ${[unit.acronym, ...alternatives.map(u => u.citation)].join(', ')}. Choose an exact text for English verification; no translations were compared.`);
+  }
+  return { unit, requested: { reference, text_id: unit.id, citation: unit.acronym, ...inputNote(input),
+    notes: [...new Set([...notes, ...resolve(unit.id).notes])] } };
+}
+
 /** Pages to check for an English quote: one per (text, translator), dhammatalks.org first. */
 export function englishScope(texts) {
   let units;
   let label;
+  let requested;
   if (texts?.length) {
-    units = texts.map((t) => resolve(t).unit);
+    const resolved = texts.map(englishReference);
+    units = resolved.map(r => r.unit);
+    requested = resolved.map(r => r.requested);
     label = units.map((u) => u.acronym).join(', ');
   } else {
     units = load().canon.units.filter((u) => u.collection === DEFAULT_ENGLISH_SCOPE.collection && u.kind === 'range');
     label = DEFAULT_ENGLISH_SCOPE.label;
   }
   const pages = [];
-  const seenUrl = new Set();
+  const byUrl = new Map();
   const withoutEnglish = [];
-  for (const unit of units) {
+  for (const [index, unit] of units.entries()) {
     const { links, via } = linksFor(unit);
     const owner = via || unit;
+    const record = requested?.[index];
+    if (record) {
+      record.translation_scope = { text_id: owner.id, citation: owner.acronym,
+        kind: !links.length ? 'unavailable' : via ? 'inherited_container' : 'direct' };
+      if (via) record.notes.push(`English verification for ${unit.acronym} uses its linked containing source ${owner.acronym}. A match in that source does not verify correspondence to the narrower requested text.`);
+    }
     if (!links.length) { withoutEnglish.push(unit.acronym); continue; }
     const seenTranslator = new Set();
     const sorted = [...links].sort((a, b) => (b.source === 'dhammatalks') - (a.source === 'dhammatalks'));
     for (const l of sorted) {
       const translator = l.translator || l.source;
       const who = fold(translator).replace(/[^a-z]/g, '');
-      if (seenTranslator.has(who) || seenUrl.has(l.url)) continue;
-      seenTranslator.add(who); seenUrl.add(l.url);
-      pages.push({ unit: owner, translation_id: translationId(l), translator, url: l.url });
+      if (seenTranslator.has(who)) continue;
+      seenTranslator.add(who);
+      const context = record ? { requested_text_ids: [unit.id], scope_notes: [...record.notes],
+        ...(via ? { unverified_requested_text_ids: [unit.id] } : {}) } : {};
+      const existing = byUrl.get(l.url);
+      if (existing) {
+        for (const key of ['requested_text_ids', 'unverified_requested_text_ids', 'scope_notes']) {
+          if (context[key]?.length) existing[key] = [...new Set([...(existing[key] || []), ...context[key]])];
+        }
+        continue;
+      }
+      const page = { unit: owner, translation_id: translationId(l), translator, url: l.url, ...context };
+      pages.push(page); byUrl.set(l.url, page);
     }
   }
   if (pages.length > MAX_ENGLISH_PAGES) throw new Error(`That scope needs ${pages.length} translation pages; the limit is ${MAX_ENGLISH_PAGES}. Pass fewer texts.`);
-  return { label, pages, withoutEnglish };
+  return { label, pages, withoutEnglish, ...(requested ? { requested_texts: requested } : {}) };
 }
 
 async function mapLimit(items, n, fn) {
@@ -424,12 +463,19 @@ async function mapLimit(items, n, fn) {
   return out;
 }
 
+// Request-resolution cautions are separate from the provider's actual-version notes.
+function scopeEvidence(page) {
+  return Object.fromEntries(['requested_text_ids', 'unverified_requested_text_ids', 'scope_notes']
+    .filter(key => page[key]?.length).map(key => [key, page[key]]));
+}
+
 // Matches and checked-source records must describe the version actually read, including labelled fallback.
 function englishVersion(page) {
   return {
     translator: page.translator, translation_id: page.translation_id, url: page.url,
     ...(page.requested_translation_id ? { requested_translation_id: page.requested_translation_id } : {}),
     ...(page.notes?.length ? { notes: page.notes } : {}),
+    ...scopeEvidence(page),
   };
 }
 
@@ -480,8 +526,9 @@ async function verifyEnglish(text, texts, limit, fetchTranslation) {
     scope: {
       language: 'english',
       searched: `English translations linked to ${plan.label}: ${pages.length} page(s).`,
+      ...(plan.requested_texts ? { requested_texts: plan.requested_texts } : {}),
       translations_checked: pages.map((p) => ({ citation: p.unit.acronym, ...englishVersion(p) })),
-      ...(failed.length ? { not_retrieved: failed.map((p) => ({ citation: p.unit.acronym, translator: p.translator, translation_id: p.translation_id, url: p.url, error: p.error })) } : {}),
+      ...(failed.length ? { not_retrieved: failed.map((p) => ({ citation: p.unit.acronym, translator: p.translator, translation_id: p.translation_id, url: p.url, error: p.error, ...scopeEvidence(p) })) } : {}),
       ...(plan.withoutEnglish.length ? { no_english_linked: plan.withoutEnglish } : {}),
       note: 'Only these translations were compared. Popular English wordings are often older or freer translations, and two translations of the same verse can share few words: check the Pāli as well (verify_quote with language "pali").',
     },
@@ -547,8 +594,10 @@ export async function verifyQuote({ text, language = 'auto', texts, limit = 5 },
   const verdict = verdictFor(best);
   const notFoundEnglish = verdict === 'not_found_in_scope' && lang === 'english';
   const note = verdict === 'not_found_in_scope' ? undefined : tieNote(result.ties);
+  const containerNote = lang === 'english' && verdict !== 'not_found_in_scope' && result.matches[0]?.unverified_requested_text_ids?.length
+    ? ' The match is in a linked containing source; correspondence to the narrower requested text is not verified.' : '';
   return {
-    quote, ...inputNote(input), language: lang, verdict, explanation: EXPLAIN[notFoundEnglish ? 'not_found_in_scope_english' : verdict],
+    quote, ...inputNote(input), language: lang, verdict, explanation: EXPLAIN[notFoundEnglish ? 'not_found_in_scope_english' : verdict] + containerNote,
     best_similarity: best,
     comparison: { method: 'normalized_fuzzy', verbatim: 'not_assessed',
       note: 'Case, diacritics and punctuation are normalized; Pāli spacing is also normalized. Native Pāli input is transliterated to Roman first. Even a similarity of 1 does not establish verbatim wording, a unique source or authorship.' },
@@ -565,7 +614,7 @@ export function register({ tool, z }) {
   tool('verify_quote', 'Check whether a quotation attributed to the Buddha appears in the texts: a Pāli quotation is matched (fuzzily) against the whole bundled Pāli Tipiṭaka offline; an English one against the linked English translations of the texts you name (default: the Dhammapada), fetched live. Returns the best matches with citation and similarity, a verdict (found, close_paraphrase, not_found_in_scope) and exactly what was searched.', {
     text: z.string().trim().min(8).max(2000).describe('The quotation to check: Pāli in Roman or a supported native script (converted and labelled), or English in Roman script. At most 120 comparison words and 2,000 input characters; split longer quotations into shorter excerpts.'),
     language: z.enum(['auto', 'pali', 'english']).default('auto').describe('Language of the quotation; "auto" detects Roman input and treats supported native-script input as Pāli. This is mechanical transliteration, not translation. Native input with explicit English mode is refused.'),
-    texts: z.array(z.string().min(1).max(300)).max(12).optional().describe('English only: citations whose linked translations to search (e.g. ["AN 3.65", "Snp 1.8"]). Default: all chapters of the Dhammapada.'),
+    texts: z.array(z.string().min(1).max(300)).max(12).optional().describe('English only: exact citations or indexed source groups whose linked translations to search, in Roman or supported native script. Multi-text fallback spans and ambiguous pages are refused before fetching. Inherited containing-source matches do not verify the narrower requested text. Default: all Dhammapada chapters.'),
     limit: z.number().int().min(1).max(10).default(5),
   }, (args) => verifyQuote(args), { network: true });
 }

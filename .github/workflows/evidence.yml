@@ -44,6 +44,8 @@ jobs:
         run: node scripts/audit-vinaya.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-vinaya.report.json
       - name: Check packaged native Pali quotation verification offline
         run: node scripts/audit-verification.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-verification.report.json
+      - name: Check packaged English verification scope and provenance offline
+        run: node scripts/audit-english-scope.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report english-verification-scope.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -59,4 +61,5 @@ jobs:
             native-topics.report.json
             native-vinaya.report.json
             native-verification.report.json
+            english-verification-scope.report.json
           if-no-files-found: warn
