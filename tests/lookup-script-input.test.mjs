@@ -41,7 +41,7 @@ test('native proper names preserve exact canon-match evidence and the unbundled 
 });
 test('incomplete mixed-script conversions fail before folded matching or provider access; Roman keyboard behavior remains',async()=>{
  const calls=live();
- for(const value of ['สति','ส่ติ']){
+ for(const value of ['สति','ส่ติ','漢sati字','ηsati']){
   assert.throws(()=>glossary({term:value,direction:'pa-en'}),/converted completely/);
   assert.throws(()=>lookupName({name:value}),/converted completely/);
   await assert.rejects(lookupPaliInput({word:value}),/converted completely/);

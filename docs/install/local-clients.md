@@ -45,8 +45,8 @@ The server has 34 tools. Twenty-seven of them work without internet (`get_text` 
 | `topic` | Texts on a topic ("anger", "five hindrances") from Access to Insight's indexes | No |
 | `list_topics` | Browses or searches the topic index | No |
 | `dhamma_list` | A numbered list of the teaching (four noble truths, five aggregates…) with its Pāli members and source passage | No |
-| `abhidhamma_matika` | The mātikā (matrix) of the Dhammasaṅgaṇī in Pāli | No |
-| `patthana_condition` | One of the 24 conditions of the Paṭṭhāna, with its Pāli definition | No |
+| `abhidhamma_matika` | The mātikā (matrix) of the Dhammasaṅgaṇī; Roman/native selectors with labelled conversion and original Roman source text | No |
+| `patthana_condition` | One of the 24 conditions of the Paṭṭhāna; Roman/native names or numbers select the original Pāli definition, with labelled conversion | No |
 | `paritta` | Paritta and other commonly recited texts from canonical VRI sources, with links to English; names and source citations accept Roman/native input, with conversion labels (returned source text stays Roman) | No |
 | `daily_text` | A Dhammapada verse or a sutta for a given day | No |
 | `reading_plan` | Reading plans through the canon, day by day | No |

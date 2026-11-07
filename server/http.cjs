@@ -26365,7 +26365,7 @@ function romanizeInput(text) {
 }
 function romanizeLookupInput(text) {
   const input = romanizeInput(text);
-  if (input.original && (detectScript(input.text) !== "roman" || [...input.text].some((ch) => new RegExp("\\p{L}", "u").test(ch) && !new RegExp("\\p{Script=Latin}", "u").test(ch)))) {
+  if (detectScript(input.text) !== "roman" || [...input.text].some((ch) => new RegExp("\\p{L}", "u").test(ch) && !new RegExp("\\p{Script=Latin}", "u").test(ch))) {
     throw new Error("The lookup input could not be converted completely. Use P\u0101li in Roman or one supported script, without mixed or unsupported characters.");
   }
   return input;
@@ -31641,8 +31641,10 @@ function groupsOf(section) {
   return groups.filter((g) => g.heading);
 }
 function matika(section, canon = canon_exports) {
+  const input = romanizeLookupInput(section);
+  section = input.text;
   const sections = buildMatika(canon);
-  const base = { book: "Dhammasa\u1E45ga\u1E47\u012B", ...source3(canon) };
+  const base = { book: "Dhammasa\u1E45ga\u1E47\u012B", ...source3(canon), ...inputNote(input) };
   const overview = () => ({
     ...base,
     sections: sections.map((s) => ({
@@ -31662,7 +31664,7 @@ function matika(section, canon = canon_exports) {
     })),
     usage: 'Pass section "tika", "duka", "suttantika", a dyad group such as "hetugocchaka", or one entry such as "tika 5" or "duka 101". Read the full text with get_text using the returned uid and offset.'
   });
-  if (section === void 0 || section === null || !String(section).trim() || stem3(section) === "all") return overview();
+  if (section === void 0 || section === null || !String(section).trim() || fold3(section).trim() === "all") return overview();
   const wanted = stem3(section);
   const literal2 = fold3(section).trim();
   const one = literal2.match(/^(tika|duka|triad|dyad)\s*(\d+)$/);
@@ -31725,8 +31727,9 @@ function buildConditions(canon = canon_exports) {
   return conditions;
 }
 function condition(name, canon = canon_exports) {
+  const input = romanizeLookupInput(name);
   const conditions = buildConditions(canon);
-  const base = { book: "Pa\u1E6D\u1E6Dh\u0101na", ...source3(canon) };
+  const base = { book: "Pa\u1E6D\u1E6Dh\u0101na", ...source3(canon), ...inputNote(input) };
   const withDictionary = (c, full) => {
     const term = c.name.replace(/paccayo$/i, "").toLowerCase();
     const out = {
@@ -31741,9 +31744,9 @@ function condition(name, canon = canon_exports) {
     }
     return { ...out, definition: c.definition, listed_in: c.listed_in };
   };
-  const raw = String(name ?? "").trim();
+  const raw = String(input.text ?? "").trim();
   const wanted = stem3(raw);
-  if (!wanted || wanted === "all" || wanted === "list") {
+  if (!raw || /^(all|list)$/i.test(raw)) {
     return {
       ...base,
       count: conditions.length,
@@ -31752,7 +31755,9 @@ function condition(name, canon = canon_exports) {
     };
   }
   const key3 = wanted.replace(/\s*(paccayo|paccaya)$/, "").replace(/ /g, "");
-  const found = /^\d{1,2}$/.test(raw) ? Number(raw) >= 1 && Number(raw) <= conditions.length ? conditions[Number(raw) - 1] : void 0 : /\d/.test(raw) ? void 0 : conditions.find((c) => c.key === key3 || fold3(c.name) === key3);
+  const matches = /^\d{1,2}$/.test(raw) ? conditions.filter((c) => c.number === Number(raw)) : /\d/.test(raw) ? [] : conditions.filter((c) => c.key === key3 || fold3(c.name) === key3);
+  if (matches.length > 1) throw new Error(`Ambiguous Pa\u1E6D\u1E6Dh\u0101na condition "${raw}". Use one exact condition number (1\u201324).`);
+  const [found] = matches;
   if (!found) {
     throw new Error(`Unknown Pa\u1E6D\u1E6Dh\u0101na condition "${raw}". The 24 conditions are: ${conditions.map((c) => c.name).join(", ")}.`);
   }
@@ -31760,11 +31765,14 @@ function condition(name, canon = canon_exports) {
 }
 function register10({ tool, z, canon }) {
   tool("abhidhamma_matika", "Browse the m\u0101tik\u0101 (matrix) of the Dhammasa\u1E45ga\u1E47\u012B: the 22 triads (tika), the 100 Abhidhamma dyads (duka) in their groups and the 42 Suttanta dyads, in P\u0101li from the bundled VRI text, each with its VRI paragraph and an exact source read_with command. Without a section it returns an overview with section and group commands. Entry selectors require a positive whole number. Works offline.", {
-    section: z.string().max(60).optional().describe('"tika", "duka", "suttantika", a dyad group such as "hetugocchaka" or "\u0101sava", or one entry such as "tika 5" or "duka 101". Omit for an overview.')
+    section: z.string().max(60).optional().describe('"tika", "duka", "suttantika", a dyad group such as "hetugocchaka" or "\u0101sava", or one entry such as "tika 5" or "duka 101". Roman or supported native script; conversion is labelled. Omit for an overview.')
   }, ({ section }) => matika(section, canon));
   tool("patthana_condition", 'One of the 24 conditions (paccaya) of the Pa\u1E6D\u1E6Dh\u0101na: its P\u0101li name from the bundled VRI text, exact source reading commands and P\u0101li text of its definition (paccayaniddesa), and the P\u0101li term to look up with lookup_pali for an English dictionary meaning. Pass "all" for the list. Works offline.', {
-    name: z.string().trim().min(1).max(60).describe('P\u0101li name (hetu, hetupaccayo, \u0101ramma\u1E47a\u2026), a number 1\u201324, or "all".')
-  }, ({ name }) => withNormalised(name, (n) => condition(n, canon)));
+    name: z.string().trim().min(1).max(60).describe('P\u0101li name (hetu, hetupaccayo, \u0101ramma\u1E47a\u2026), a number 1\u201324, or "all", in Roman or a supported native script (conversion labelled).')
+  }, ({ name }) => {
+    const input = romanizeLookupInput(name);
+    return input.original ? condition(name, canon) : withNormalised(name, (n) => condition(n, canon));
+  });
 }
 
 // src/pronunciation.mjs

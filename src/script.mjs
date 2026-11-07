@@ -344,7 +344,7 @@ export function romanizeInput(text) {
 /** Native lookup words must convert completely; never drop unconverted letters during folded matching. */
 export function romanizeLookupInput(text) {
   const input = romanizeInput(text);
-  if (input.original && (detectScript(input.text) !== 'roman' || [...input.text].some(ch => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch)))) {
+  if (detectScript(input.text) !== 'roman' || [...input.text].some(ch => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch))) {
     throw new Error('The lookup input could not be converted completely. Use Pāli in Roman or one supported script, without mixed or unsupported characters.');
   }
   return input;

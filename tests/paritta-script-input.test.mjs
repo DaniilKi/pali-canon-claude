@@ -38,7 +38,7 @@ test('name and source conversion provenance stay distinct when different scripts
 });
 test('native unknown, mixed/incomplete and cross-source selectors cannot silently choose another chant or a catalogue',()=>{
  assert.throws(()=>paritta(canon,{name:'รตน',text:'MN ๑๐'}),/not a source/);
- for(const value of ['สति','รต่น']){assert.throws(()=>paritta(canon,{name:value}),/converted completely/);assert.throws(()=>paritta(canon,{name:'ratana',text:value}),/converted completely/);}
+ for(const value of ['สति','รต่น','漢ratana字','ηratana']){assert.throws(()=>paritta(canon,{name:value}),/converted completely/);assert.throws(()=>paritta(canon,{name:'ratana',text:value}),/converted completely/);}
  assert.throws(()=>paritta(canon,{name:transliterate('papapapapapapa','roman','thai')}),/No paritta/);
  assert.throws(()=>paritta(canon,{text:'Snp ๒.๑'}),/Choose a paritta name/);
  assert.equal(paritta(canon).paritta.length,PARITTA.length);

@@ -36,6 +36,8 @@ jobs:
         run: node scripts/audit-lookups.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-lookups.report.json
       - name: Check packaged native paritta selectors and continuations offline
         run: node scripts/audit-paritta.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-paritta.report.json
+      - name: Check packaged native Abhidhamma selectors and source commands offline
+        run: node scripts/audit-abhidhamma.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-abhidhamma.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -47,4 +49,5 @@ jobs:
             talk-pagination.report.json
             native-lookups.report.json
             native-paritta.report.json
+            native-abhidhamma.report.json
           if-no-files-found: warn

@@ -8,6 +8,7 @@
  */
 import * as bundled from './canon.mjs';
 import { withNormalised } from './input.mjs';
+import { romanizeLookupInput, inputNote } from './script.mjs';
 
 const MATIKA_UNITS = [
   { id: 'ds1.1', key: 'tika', kind: 'tika' },
@@ -102,8 +103,10 @@ function groupsOf(section) {
 
 /** abhidhamma_matika: overview without a section, or the entries of a section, group or single triad/dyad. */
 export function matika(section, canon = bundled) {
+  const input = romanizeLookupInput(section);
+  section = input.text;
   const sections = buildMatika(canon);
-  const base = { book: 'Dhammasaṅgaṇī', ...source(canon) };
+  const base = { book: 'Dhammasaṅgaṇī', ...source(canon), ...inputNote(input) };
   const overview = () => ({
     ...base,
     sections: sections.map((s) => ({
@@ -115,7 +118,7 @@ export function matika(section, canon = bundled) {
     })),
     usage: 'Pass section "tika", "duka", "suttantika", a dyad group such as "hetugocchaka", or one entry such as "tika 5" or "duka 101". Read the full text with get_text using the returned uid and offset.',
   });
-  if (section === undefined || section === null || !String(section).trim() || stem(section) === 'all') return overview();
+  if (section === undefined || section === null || !String(section).trim() || bundled.fold(section).trim() === 'all') return overview();
   const wanted = stem(section);
   // Never turn a negative, decimal or range into a different valid entry by stripping punctuation.
   const literal = bundled.fold(section).trim();
@@ -184,8 +187,9 @@ export function buildConditions(canon = bundled) {
 
 /** patthana_condition: one condition by Pāli name or number 1–24, or "all" for the list. */
 export function condition(name, canon = bundled) {
+  const input = romanizeLookupInput(name);
   const conditions = buildConditions(canon);
-  const base = { book: 'Paṭṭhāna', ...source(canon) };
+  const base = { book: 'Paṭṭhāna', ...source(canon), ...inputNote(input) };
   const withDictionary = (c, full) => {
     const term = c.name.replace(/paccayo$/i, '').toLowerCase();
     const out = { number: c.number, name: c.name, read_with: { tool: 'patthana_condition', name: String(c.number) },
@@ -196,17 +200,21 @@ export function condition(name, canon = bundled) {
     }
     return { ...out, definition: c.definition, listed_in: c.listed_in };
   };
-  const raw = String(name ?? '').trim();
+  const raw = String(input.text ?? '').trim();
   const wanted = stem(raw);
-  if (!wanted || wanted === 'all' || wanted === 'list') {
+  // Only an omitted/blank value or an explicit control word requests the catalogue.
+  // Unknown letters or punctuation must never become an overview after Roman folding.
+  if (!raw || /^(all|list)$/i.test(raw)) {
     return { ...base, count: conditions.length, conditions: conditions.map((c) => withDictionary(c, false)),
       usage: 'Pass one Pāli name (hetu, ārammaṇapaccayo) or number 1–24 for its full definition text.' };
   }
   const key = wanted.replace(/\s*(paccayo|paccaya)$/, '').replace(/ /g, '');
   // Numbers are checked on the raw input: only 1–24 written as plain digits ("-1" or "1.5" are not numbers here).
-  const found = /^\d{1,2}$/.test(raw) ? (Number(raw) >= 1 && Number(raw) <= conditions.length ? conditions[Number(raw) - 1] : undefined)
-    : /\d/.test(raw) ? undefined
-      : conditions.find((c) => c.key === key || bundled.fold(c.name) === key);
+  const matches = /^\d{1,2}$/.test(raw) ? conditions.filter(c => c.number === Number(raw))
+    : /\d/.test(raw) ? []
+      : conditions.filter((c) => c.key === key || bundled.fold(c.name) === key);
+  if (matches.length > 1) throw new Error(`Ambiguous Paṭṭhāna condition "${raw}". Use one exact condition number (1–24).`);
+  const [found] = matches;
   if (!found) {
     throw new Error(`Unknown Paṭṭhāna condition "${raw}". The 24 conditions are: ${conditions.map((c) => c.name).join(', ')}.`);
   }
@@ -215,10 +223,13 @@ export function condition(name, canon = bundled) {
 
 export function register({ tool, z, canon }) {
   tool('abhidhamma_matika', 'Browse the mātikā (matrix) of the Dhammasaṅgaṇī: the 22 triads (tika), the 100 Abhidhamma dyads (duka) in their groups and the 42 Suttanta dyads, in Pāli from the bundled VRI text, each with its VRI paragraph and an exact source read_with command. Without a section it returns an overview with section and group commands. Entry selectors require a positive whole number. Works offline.', {
-    section: z.string().max(60).optional().describe('"tika", "duka", "suttantika", a dyad group such as "hetugocchaka" or "āsava", or one entry such as "tika 5" or "duka 101". Omit for an overview.'),
+    section: z.string().max(60).optional().describe('"tika", "duka", "suttantika", a dyad group such as "hetugocchaka" or "āsava", or one entry such as "tika 5" or "duka 101". Roman or supported native script; conversion is labelled. Omit for an overview.'),
   }, ({ section }) => matika(section, canon));
 
   tool('patthana_condition', 'One of the 24 conditions (paccaya) of the Paṭṭhāna: its Pāli name from the bundled VRI text, exact source reading commands and Pāli text of its definition (paccayaniddesa), and the Pāli term to look up with lookup_pali for an English dictionary meaning. Pass "all" for the list. Works offline.', {
-    name: z.string().trim().min(1).max(60).describe('Pāli name (hetu, hetupaccayo, ārammaṇa…), a number 1–24, or "all".'),
-  }, ({ name }) => withNormalised(name, (n) => condition(n, canon)));
+    name: z.string().trim().min(1).max(60).describe('Pāli name (hetu, hetupaccayo, ārammaṇa…), a number 1–24, or "all", in Roman or a supported native script (conversion labelled).'),
+  }, ({ name }) => {
+    const input = romanizeLookupInput(name);
+    return input.original ? condition(name, canon) : withNormalised(name, (n) => condition(n, canon));
+  });
 }
