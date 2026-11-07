@@ -12,9 +12,11 @@ Theravāda Buddhists should have AI study tools as good, and as widely available
 
 ## How we compare today
 
+The Pali Canon column describes the development branch as of 7 November 2026, including work not yet released. The other columns retain the original survey below; they have not been rechecked in this engineering cycle. Implementation does not close the [remaining acceptance gates](completion.md).
+
 Based on the public documentation of these tools, reviewed November 2026. "Bible", "Quran" and "Sefaria" stand for the leading MCP tools of each tradition (for example StudyBible MCP, Quran.com MCP and tafsir-mcp, and Sefaria's own MCP).
 
-| Capability | Pali Canon v2 | Bible | Quran | Sefaria |
+| Capability | Pali Canon development | Bible | Quran | Sefaria |
 |---|---|---|---|---|
 | Complete scripture text | ✓ (whole Tipiṭaka) | ✓ | ✓ | ✓ |
 | Works offline | ✓ | some | — | — |
@@ -24,23 +26,25 @@ Based on the public documentation of these tools, reviewed November 2026. "Bible
 | Full-text search | ✓ | ✓ | ✓ | ✓ |
 | Translations side by side | ✓ (English) | ✓ | ✓ | ✓ |
 | Translations in many languages | — | ✓ | ✓ (100+) | partly |
-| Dictionary | ✓ (live) | ✓ | ✓ | ✓ |
-| Word-by-word analysis of the original | — | ✓ (Strong's) | ✓ (morphology) | partly |
-| Commentaries | — | ✓ | ✓ (tafsir) | ✓ |
-| Cross-references and parallels | link only | ✓ | partly | ✓ (link graph) |
-| Topics | via Access to Insight index | ✓ | partly | ✓ |
-| People and places | — | ✓ | — | partly |
-| Original scripts | Roman only | ✓ | ✓ | ✓ |
-| Quote verification | — | some | some | some |
-| Calendar (prayer times, church year…) | — | some | ✓ | ✓ |
-| Recitation and chanting | — | — | ✓ | — |
-| Daily verse and reading plans | — | ✓ | ✓ | ✓ |
+| Dictionary | ✓ (live and bundled DPD subset) | ✓ | ✓ | ✓ |
+| Word-by-word analysis of the original | ✓ (DPD; dictionary analysis, not translation) | ✓ (Strong's) | ✓ (morphology) | partly |
+| Commentaries | ✓ (Pāli Aṭṭhakathā and later works; alignment gaps explicit) | ✓ | ✓ (tafsir) | ✓ |
+| Cross-references and parallels | ✓ (VRI commentary citations and shared wording) | ✓ | partly | ✓ (link graph) |
+| Topics | ✓ (bundled source-derived topic index) | ✓ | partly | ✓ |
+| People and places | title/body search; DPPN content rights unresolved | ✓ | — | partly |
+| Original scripts | Roman plus seven scripts; native-reader gates remain | ✓ | ✓ | ✓ |
+| Quote verification | ✓ (retrieved Pāli and linked English) | some | some | some |
+| Calendar (prayer times, church year…) | computed dates; community checks remain | some | ✓ | ✓ |
+| Recitation and chanting | Pāli paritta; recording permissions remain | — | ✓ | — |
+| Daily verse and reading plans | ✓ (offline) | ✓ | ✓ | ✓ |
 | Hosted, no-install version | — | some | ✓ | ✓ |
-| Available in many AI apps | Claude only | ✓ | ✓ | ✓ |
+| Available in many AI apps | packages/configs prepared; actual-client gates remain | ✓ | ✓ | ✓ |
 
-**Where we already lead:** the whole canon offline, PTS page lookup across numbering schemes, mirrored translations, a published audit of every text, and respect for sources that ask not to be used in AI tools. Other Buddhist AI tools exist ([sources.md](sources.md#peer-projects)), but none we found offers commentaries, other scripts, a calendar or chanting.
+**Where we already lead:** the whole canon offline, PTS page lookup across numbering schemes, mirrored translations, a published audit of every text, and respect for sources that ask not to be used in AI tools. See [implementation evidence and remaining gates](completion.md) before treating a prepared package or computed date as accepted in a real client or community.
 
 ## The plan
+
+The version headings below preserve the original issue groupings, not a list of wholly unimplemented features. Consult the [prioritized development queue](completion.md#prioritized-development-queue--7-november-2026) for the current engineering order; source rights, publishing, specialist review and signed-in client acceptance remain separately tracked.
 
 ### Distribution: reach every major AI app
 

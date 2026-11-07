@@ -40,7 +40,7 @@ The server has 33 tools. Twenty-six of them work without internet (`get_text` ne
 | `get_parallels` | Other texts that share a passage with this one, and texts the commentary cites, each link saying its source | No |
 | `glossary` | English → Pāli terms ("mindfulness" → sati) and Pāli → short English glosses, from the Digital Pāḷi Dictionary's English index and the curated list glosses, each with its source | No |
 | `verify_quote` | Checks whether a quotation attributed to the Buddha is in the texts: Pāli against the whole bundled canon (offline), English against the linked translations of the texts you name (default: the Dhammapada) | Yes |
-| `lookup_name` | Who or what a name is (Sāriputta, Sāvatthī): the Dictionary of Pāli Proper Names entry when bundled, and the texts where the name appears | No |
+| `lookup_name` | Finds source-backed title/body occurrences of a name (Sāriputta, Sāvatthī). DPPN entries are not bundled; the response exposes that licence gate. | No |
 | `topic` | Texts on a topic ("anger", "five hindrances") from Access to Insight's indexes | No |
 | `list_topics` | Browses or searches the topic index | No |
 | `dhamma_list` | A numbered list of the teaching (four noble truths, five aggregates…) with its Pāli members and source passage | No |
@@ -55,6 +55,8 @@ The server has 33 tools. Twenty-six of them work without internet (`get_text` ne
 With no connection, the online tools return a clear error and the offline ones keep working. The server never sends your questions anywhere: the online tools only fetch pages from a short, fixed list of sites (see [Sources](../sources.md)).
 
 ## Before you start
+
+The public npm registry returned HTTP 404 for `pali-canon-mcp` on 7 November 2026. Use the downloaded checkout today. The `npx` examples below remain conditional on publication; testing an installed local tarball in CI does not establish that the package is publicly available.
 
 You need:
 

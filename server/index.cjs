@@ -30270,8 +30270,15 @@ function sharedLink(l, side) {
     coverage: { this_text: l[`${mine}_coverage`], other_text: l[`${theirs}_coverage`] },
     this_segments: l[`${mine}_segments`],
     other_segments: l[`${theirs}_segments`],
+    this_read_with: segmentReading(l[`${mine}_segments`][0]),
+    other_read_with: segmentReading(l[`${theirs}_segments`][0]),
     ...l[`${mine}_segment_count`] > l[`${mine}_segments`].length || l[`${theirs}_segment_count`] > l[`${theirs}_segments`].length ? { segments_truncated: { this_text: l[`${mine}_segment_count`], other_text: l[`${theirs}_segment_count`] } } : {}
   };
+}
+function segmentReading(ref) {
+  const match2 = ref.match(/^([^/]+)\/([1-9]\d*)$/);
+  if (!match2 || !Number.isSafeInteger(Number(match2[2]))) throw new Error("Invalid shared-passage segment reference in bundled parallels.");
+  return { tool: "get_text", uid: match2[1], offset: Number(match2[2]) - 1, limit: 1 };
 }
 var ORDER = { a: 0, b: 0, out: 1, in: 2 };
 function linksOf(unit) {

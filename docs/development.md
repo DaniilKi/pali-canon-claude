@@ -370,3 +370,9 @@ The reference resolver preserves its article aliases, single-word English topic 
 ## Real-browser reader acceptance
 
 `python scripts/widget-browser-check.py --report widget-browser.report.json` runs the actual reader HTML in Chromium at phone and desktop widths with simulated Apps SDK/MCP Apps hosts. The dedicated `Chromium reader` job in `check.yml` runs this gate on pushes and pull requests and uploads its JSON report even on failure. It uses Playwright 1.62.0 and Python 3.12. Install the same pinned Playwright and its Chromium first, or select an installed browser with `--browser /path/to/chromium`. This is separate from the dependency-free VM regressions in `npm test`; it adds real DOM, layout and postMessage checks without claiming signed-in client acceptance. See [local client evidence and limits](local-client-acceptance.md).
+
+## Installed evidence-reading audit
+
+`node scripts/audit-evidence.mjs --report evidence.report.json` follows every recorded commentary citation and every retained shared-passage segment reference through an isolated copy of the committed server. Use `--server-dir /path/to/installed/package/server` to target an installed artifact. Its process starts outside the checkout, with HTTP, fetch and socket connections disabled. Responses must match the bundled source segments exactly; the complete paginated link graph must also match.
+
+The separate `Evidence reading commands` workflow installs the actual npm tarball and uploads the report. Shared-passage results now provide `this_read_with` and `other_read_with` to open the first retained matching segment in either text. Each command includes an explicit segment offset: a `uid/N` display reference is not itself a canonical citation. Further retained segment references can be read at their corresponding offsets. Truncated reference lists stay explicitly marked; this audit certifies addresses and reading behavior, not the scholarly relationship or omitted references.

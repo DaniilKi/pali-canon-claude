@@ -92,9 +92,19 @@ function sharedLink(l, side) {
     coverage: { this_text: l[`${mine}_coverage`], other_text: l[`${theirs}_coverage`] },
     this_segments: l[`${mine}_segments`],
     other_segments: l[`${theirs}_segments`],
+    this_read_with: segmentReading(l[`${mine}_segments`][0]),
+    other_read_with: segmentReading(l[`${theirs}_segments`][0]),
     ...(l[`${mine}_segment_count`] > l[`${mine}_segments`].length || l[`${theirs}_segment_count`] > l[`${theirs}_segments`].length
       ? { segments_truncated: { this_text: l[`${mine}_segment_count`], other_text: l[`${theirs}_segment_count`] } } : {}),
   };
+}
+
+// Canonical segment refs are positions in a source text, not standalone citations.
+// Give clients explicit reading arguments rather than sending an unreadable uid/segment to get_text.
+function segmentReading(ref) {
+  const match = ref.match(/^([^/]+)\/([1-9]\d*)$/);
+  if (!match || !Number.isSafeInteger(Number(match[2]))) throw new Error('Invalid shared-passage segment reference in bundled parallels.');
+  return { tool: 'get_text', uid: match[1], offset: Number(match[2]) - 1, limit: 1 };
 }
 
 // Shared passages first (largest first), then what this text's commentary cites, then what cites this text.
