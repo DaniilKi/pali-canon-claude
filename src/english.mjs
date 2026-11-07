@@ -145,7 +145,8 @@ export function selectTranslation(links, which, citation) {
 }
 
 /** Fetch one translation of a text. `which` is a translation_id, an unambiguous translator name fragment, or omitted for the default. */
-export async function translation(unit, which, { offset = 0, limit = 12000, prefix_sha256: expectedPrefix, allow_partial = false, allow_shared = false, scope_sha256 } = {}) {
+export async function translation(unit, which, { offset = 0, limit = 12000, prefix_sha256: expectedPrefix, allow_partial = false, allow_shared = false, allow_fallback = true, scope_sha256 } = {}) {
+  if (typeof allow_fallback !== 'boolean') throw new Error('allow_fallback must be a boolean.');
   if (typeof allow_shared !== 'boolean') throw new Error('allow_shared must be a boolean.');
   if (typeof allow_partial !== 'boolean') throw new Error('allow_partial must be a boolean.');
   if (which !== undefined) {
@@ -184,7 +185,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
     // dhammatalks.org has no mirror; during an outage (not for a missing page) fall back to the same
     // translator's Access to Insight version of this same text.
     const outage = !error.failures || error.failures.some((f) => !/HTTP 404/.test(f));
-    const sameTranslator = !declaredScope && outage && link.source === 'dhammatalks' && links.find((l) => !isScoped(l) && l.source === 'ati' && /thanissaro/i.test(l.translator || ''));
+    const sameTranslator = allow_fallback && !declaredScope && outage && link.source === 'dhammatalks' && links.find((l) => !isScoped(l) && l.source === 'ati' && /thanissaro/i.test(l.translator || ''));
     if (!sameTranslator) throw new Error(`Could not retrieve the translation (${error.message}). The Pāli text is still available offline with get_text; try again later or choose another translation_id.`);
     if (offset > 0) throw new Error(`Could not continue the requested translation version (${error.message}). Its character offset cannot be transferred to the earlier Access to Insight version. Retry this translation_id later, or start another translation at offset 0. The Pāli text is still available offline with get_text.`);
     try {

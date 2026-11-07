@@ -88,7 +88,7 @@ Pali Canon gives the AI **34 tools**, 4 prompts, 3 reference resources and 5 ski
 
 ### Checking quotes and citations
 
-- **"Did the Buddha really say this?"** `verify_quote` checks a quotation. Pāli is checked against the whole canon offline; English against the linked translations *(internet)*, by default the Dhammapada. It compares complete retrieved source versions, explicitly lists versions that could not be compared, and says whether the words were found, closely paraphrased or not found in the texts searched, and it never claims who did or did not say something. See [checking a quotation](docs/verify-quote.md).
+- **"Did the Buddha really say this?"** `verify_quote` checks a quotation. Pāli is checked against the whole canon offline; English against the linked translations *(internet)*, by default the Dhammapada. It compares complete retrieved source versions, explicitly lists versions that could not be compared, and says whether the words were found, closely paraphrased or not found in the texts searched, and it never claims who did or did not say something. You can also choose which linked translation versions to check, including an earlier version from the same translator. See [checking a quotation](docs/verify-quote.md).
 - **Check every citation in an essay.** Paste an essay, a talk transcript or a reference list, and `find_citations` finds each citation (MN 10, S v 420, links…) and checks that it points to a real text.
 
 Every tool only reads; none can change anything. The full technical list is in [docs/development.md](docs/development.md#tools), and more example requests are in [docs/examples.md](docs/examples.md).

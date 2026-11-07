@@ -46,6 +46,8 @@ jobs:
         run: node scripts/audit-verification.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-verification.report.json
       - name: Check packaged English verification scope and provenance offline
         run: node scripts/audit-english-scope.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report english-verification-scope.report.json
+      - name: Verify exact earlier and current linked translation versions offline
+        run: node scripts/audit-translation-versions.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report translation-versions.report.json
       - name: Reject incomplete English verification sources offline
         run: node scripts/audit-english-completeness.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report english-completeness.report.json
       - name: Check synthetic partial translation scope and coverage offline
@@ -76,6 +78,7 @@ jobs:
             native-vinaya.report.json
             native-verification.report.json
             english-verification-scope.report.json
+            translation-versions.report.json
             english-completeness.report.json
             partial-translations.report.json
             shared-translations.report.json

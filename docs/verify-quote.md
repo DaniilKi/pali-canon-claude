@@ -75,3 +75,23 @@ When shared pages are included, an ambiguity count is labelled `equally_similar_
 English checking compares complete retrieved source versions, up to 2,000,000 UTF-16 code units per version. It does not treat a readable prefix as the whole source. A continuation offset, an unknown total length, a nonzero starting offset, inconsistent length metadata or an over-limit response prevents that version from being compared. If every selected version fails, the tool returns an error without a quotation verdict. Read the linked source directly or choose another version.
 
 When other versions can be compared completely, results list only those under `scope.translations_checked`. Omitted versions remain in `scope.not_retrieved` with `compared: false`; incomplete responses carry `error_code: "INCOMPLETE_ENGLISH_SOURCE"`. Actual fallback identity, the requested version and provider notes are retained. `complete_source_versions_compared` and `source_versions_not_compared` count source versions, not texts or translation coverage. The explanation states that unexamined versions’ wording or absence is not established. Ordinary paginated reading remains available. This is completeness of the returned extraction, not independent proof of the publisher’s entire edition or paragraph alignment.
+
+
+### Choose an earlier or specific linked version
+
+By default, English checking uses one preferred page per translator, preferring dhammatalks.org when that translator also has an Access to Insight version. Earlier wording can differ. Call `get_metadata` for the passage, copy the desired `translation_id` values and provide them in `translation_ids` with explicit `texts`. For example, MN 10’s linked earlier Ṭhānissaro version is `ati:/tipitaka/mn/mn.010.than`:
+
+```json
+{
+  "text": "Paste the quotation to check here.",
+  "language": "english",
+  "texts": ["MN 10"],
+  "translation_ids": ["ati:/tipitaka/mn/mn.010.than"]
+}
+```
+
+You can select multiple linked versions of the same translator. Select at least one version for every requested text; unknown, wrong-text, empty or incomplete selections fail before fetching. IDs are literal and case-sensitive; use the IDs returned by metadata, including their ASCII numerals, even when citations in `texts` use another script. Surrounding whitespace and repeated IDs are normalized. A containing chapter’s version can serve multiple verse requests while retaining the lack of individual-verse alignment.
+
+`scope.translation_selection` records `mode: "exact_ids"`, the normalized IDs and `fallback_allowed: false`. Every selected version remains distinct. An unavailable selected current version is not replaced by an earlier one; other explicitly selected versions may still be compared, with failures retained. Same-version ATI archive mirrors remain available and keep their provenance. Without `translation_ids`, preferred-version selection and its labelled outage fallback are unchanged. Partial/shared IDs still require `include_partial`/`include_shared`; exact identity does not grant scope consent.
+
+Limits are 12 requested references and 80 selected IDs/pages. Exact IDs select linked source versions; they do not freeze future publisher edits, establish verbatim quotation or prove paragraph alignment. No new source material is activated.

@@ -131,7 +131,7 @@ docs/                human documentation (docs/i18n/: machine-drafted translatio
 | `search_access_to_insight` | Access to Insight sutta and subject indexes | online, mirrored |
 | `get_access_to_insight_text` | Read an Access to Insight page with its licence notice | online, mirrored |
 | `list_sources` | Sources, versions, licences, mirrors, and `translation_coverage` per collection | offline |
-| `verify_quote` | `text`, `language` (auto/pali/english), `texts` (English scope, up to 12 citations), `include_partial`, `include_shared` (explicit English opt-in), `limit`. Fuzzy-matches a quotation. Pāli: the bundled VRI text through a lazy word and trigram index (built on the first Pāli check). English: the linked translations, fetched live and cached (default scope: the 26 Dhammapada chapters, one page per translator, at most 80 pages). Returns matches with citation and similarity, the verdict `found` / `close_paraphrase` / `not_found_in_scope`, the scope, `equally_similar_texts` and `citation_note` for stock passages, and `next_step` (check the Pāli) for English misses | offline (Pāli); online (English) |
+| `verify_quote` | `text`, `language` (auto/pali/english), `texts` (English scope, up to 12 citations), `translation_ids` (up to 80 exact linked versions; explicit texts required, no different-version fallback), `include_partial`, `include_shared` (explicit English opt-in), `limit`. Fuzzy-matches a quotation. Pāli: the bundled VRI text through a lazy word and trigram index (built on the first Pāli check). English: the linked translations, fetched live and cached (default scope: the 26 Dhammapada chapters, one page per translator, at most 80 pages). Returns matches with citation and similarity, the verdict `found` / `close_paraphrase` / `not_found_in_scope`, the scope, `equally_similar_texts` and `citation_note` for stock passages, and `next_step` (check the Pāli) for English misses | offline (Pāli); online (English) |
 | `find_citations` | `text` (up to 200,000 characters), `limit` (1–500), opaque `cursor`. Reuse identical text with `next_cursor`; counts are per page except `found`. Structured reports are capped at 256 KiB, with the complete MCP tool result below 1 MiB. Oversized candidates retain original offsets with `status: not_checked`, `text_preview` and `text_omitted` rather than a full `text` or a verdict. Finds recognised citation patterns, including every bundled canonical reader ID (e.g. `ja526`, `ps3.2`, `ya1.1.1`) and printed edition pages, resolves each with `canon.resolve`, and reports unresolved ones with the reason and UTF-16 offsets | offline |
 | `uposatha` | `from`, `to`, `tradition` (thai-mahanikaya, thai-dhammayut, myanmar, sri-lanka). Uposatha days (full, new and half moons) with lunar month and day; computed and labelled with the rule | offline |
 | `festivals` | `year`, `tradition`. Māgha Pūjā, Vesak, Āsāḷha Pūjā, Vassa start and end, Pavāraṇā and the Kaṭhina season, with their canonical texts; computed (see [calendar.md](calendar.md)) | offline |
@@ -531,3 +531,18 @@ Complete source versions remain comparable when another fails, with explicit per
 ```sh
 node scripts/audit-english-completeness.mjs --server-dir <installed-package-server-directory> --report english-completeness.report.json
 ```
+
+
+### Exact linked English verification versions
+
+`verify_quote.translation_ids` is an optional nonempty array of 1–80 exact metadata IDs (at most 400 characters each), requiring explicit English `texts`. Every ID must be linked within those resolved texts, and every requested text must have a selected linked version. Validation is atomic before provider access. Normalize surrounding whitespace and duplicates only; never infer source numbering, translator names, URLs or native-script version paths.
+
+Explicit selection bypasses the default one-page-per-translator preference, deduplicates only the same source/version/scope and preserves all requested citation contexts. Selected partial/shared sources retain their separate consent requirements and fingerprints. A selected local scoped page does not borrow an unselected containing chapter’s identity.
+
+The verifier passes the internal reader option `allow_fallback: false` and independently rejects a returned version ID that differs or is missing. Rejected substitutions retain actual/requested provenance, provider notes, `compared: false` and `UNEXPECTED_TRANSLATION_VERSION`; no rejected source contributes quotation words. Same-version ATI mirrors remain allowed. The public `get_translation` default fallback behavior is unchanged. Completeness checks and the 80-page comparison bound still apply. `scope.translation_selection` distinguishes exact IDs from preferred-per-translator mode.
+
+```sh
+node scripts/audit-translation-versions.mjs --server-dir <installed-package-server-directory> --report translation-versions.report.json
+```
+
+The packaged synthetic gate checks reachable-current/earlier selection, multiple versions of one translator, primary outage, same-version mirrors, invalid/missing/wrong-text selections, eight reference scripts and partial/shared consent over stdio/HTTP. No publisher requests or source declarations are introduced.
