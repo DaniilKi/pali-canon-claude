@@ -125,7 +125,7 @@ test('get_text commentary follows script like the canon segments', async () => {
     assert.match(seg.text, /[඀-෿]/);
     assert.equal(seg.ref, roman.body.commentary.segments[i].ref, 'refs stay Roman');
   }
-  assert.deepEqual(body.commentary.read_with, { tool: 'get_commentary', uid: 'dhp1' });
+  assert.deepEqual(body.commentary.read_with, { tool: 'get_commentary', uid: 'dhp1', script: 'sinhala' });
 });
 
 test('search_texts include_post_canonical is not searched when collection is set, and says so', async () => {

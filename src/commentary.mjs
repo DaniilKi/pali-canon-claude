@@ -10,6 +10,7 @@ import { gunzipSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as canon from './canon.mjs';
+import { romanizeInput, localizeCommentary, SCRIPT_DESCRIPTION } from './script.mjs';
 
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
@@ -187,7 +188,12 @@ export function segmentOwners(unit) {
  * Commentary on a text: resolves any citation, returns the aligned commentary passages as
  * segments, paginated by segment. Throws on an unknown citation (like get_text).
  */
-export function getCommentary(uid, { offset = 0, limit = 40 } = {}) {
+export function getCommentary(uid, { offset = 0, limit = 40, script } = {}) {
+  const input = romanizeInput(uid);
+  return localizeCommentary(readCommentary(input.text, { offset, limit }), script, input);
+}
+
+function readCommentary(uid, { offset, limit }) {
   if (uid === 'commentary' || String(uid).startsWith('commentary:')) return readBook(uid, { offset, limit });
   const anchor = String(uid).match(/^([^/]+)\/c([1-9]\d*)$/);
   const { unit, notes } = canon.resolve(anchor ? anchor[1] : uid);
@@ -243,9 +249,10 @@ export function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {})
 
 /** Feature registration (src/features/index.mjs). */
 export function register({ tool, z, citation }) {
-  tool('get_commentary', 'Read the traditional Pāli commentary (Aṭṭhakathā, VRI Chaṭṭha Saṅgāyana edition) on a text: Sumaṅgalavilāsinī (DN), Papañcasūdanī (MN), Sāratthappakāsinī (SN), Manorathapūraṇī (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. Use an emitted aligned segment ref such as "mn10/c66" to read exactly that commentary segment. For direct book reading without asserting root alignment, use uid "commentary" to list the included books, then a returned commentary:<VRI-file> or commentary:<VRI-file>/cN segment reference. Paginated by segment. Works offline.', {
+  tool('get_commentary', 'Read the traditional Pāli commentary (Aṭṭhakathā, VRI Chaṭṭha Saṅgāyana edition) on a text: Sumaṅgalavilāsinī (DN), Papañcasūdanī (MN), Sāratthappakāsinī (SN), Manorathapūraṇī (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. Use an emitted aligned segment ref such as "mn10/c66" to read exactly that commentary segment. For direct book reading without asserting root alignment, use uid "commentary" to list the included books, then a returned commentary:<VRI-file> or commentary:<VRI-file>/cN segment reference. Set script for supported native-script output; canonical citations may be typed in those scripts. References and source metadata remain Roman. Paginated by segment. Works offline.', {
     uid: citation,
+    script: z.string().trim().min(1).max(30).optional().describe(`${SCRIPT_DESCRIPTION} ISO codes such as sinh and mymr work too.`),
     offset: z.number().int().min(0).max(100000).default(0).describe('Segment offset for continuation.'),
     limit: z.number().int().min(1).max(200).default(40).describe('Segments per page.'),
-  }, ({ uid, offset, limit }) => getCommentary(uid, { offset, limit }));
+  }, ({ uid, offset, limit, script }) => getCommentary(uid, { offset, limit, script }));
 }

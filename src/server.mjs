@@ -154,7 +154,7 @@ export function createServer() {
       const c = commentaryModule.commentaryFor(unit, { limit: 20 });
       out.commentary = {
         ...localizeCommentary(c, script),
-        read_with: { tool: 'get_commentary', uid: unit.id },
+        read_with: { tool: 'get_commentary', uid: unit.id, ...(script ? { script } : {}) },
         ...(c.available ? { opening_note: `This is the opening of the commentary (up to 20 segments${c.next_offset != null ? `, of ${c.total_segments}` : ''}). It continues with get_commentary (uid "${unit.id}", offset ${c.next_offset ?? c.total_segments}).` } : {}),
       };
     }
