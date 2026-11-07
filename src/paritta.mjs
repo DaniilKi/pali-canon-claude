@@ -107,10 +107,12 @@ function englishLinks(described) {
 /** List the set, or return one entry with its Pāli from the bundled VRI text. */
 export function paritta(canon, { name, text, offset = 0, limit = 60 } = {}) {
   if (!name) {
+    if (text !== undefined) throw new Error('Choose a paritta name before selecting its canonical source with text. Omit both fields to list the set.');
     return {
       paritta: PARITTA.map((e) => {
         const units = e.texts.map((t) => canon.resolve(t).unit);
-        return { key: e.key, name: e.name, texts: units.map((u) => ({ citation: u.acronym, text_id: u.id, title: u.title })) };
+        return { key: e.key, name: e.name, read_with: { tool: 'paritta', name: e.key },
+          texts: units.map((u) => ({ citation: u.acronym, text_id: u.id, title: u.title, read_with: { tool: 'paritta', name: e.key, text: u.id } })) };
       }),
       note: 'Pass name (e.g. "ratana", "Karaṇīyamettā") to read the Pāli. Texts are the canonical sources as printed in the VRI edition; chanting books may arrange or extend them.',
       chanting_books: chantingBooks(),
@@ -119,7 +121,7 @@ export function paritta(canon, { name, text, offset = 0, limit = 60 } = {}) {
   const entry = find(name);
   if (!entry) throw new Error(`No paritta named "${name}". Available: ${PARITTA.map((e) => e.key).join(', ')}.`);
   let ref = entry.texts[0];
-  if (text) {
+  if (text !== undefined) {
     const want = canon.resolve(text).unit.id;
     ref = entry.texts.find((t) => canon.resolve(t).unit.id === want);
     if (!ref) throw new Error(`${text} is not a source of ${entry.name}. Its sources: ${entry.texts.join(', ')}.`);
@@ -147,8 +149,12 @@ export function paritta(canon, { name, text, offset = 0, limit = 60 } = {}) {
     edition: 'Chaṭṭha Saṅgāyana Tipiṭaka (VRI), Pāli',
     attribution: canon.source().attribution,
     terms: canon.source().terms,
+    source: canon.source(),
     total_segments: all.length, offset, limit, returned: page.length,
     next_offset: offset + page.length < all.length ? offset + page.length : null,
+    continue_with: offset + page.length < all.length
+      ? { tool: 'paritta', name: entry.key, text: unit.id, offset: offset + page.length, limit } : null,
+    canonical_read_with: { tool: 'get_text', uid: unit.id },
     segments: page,
     notes: [...(entry.note ? [entry.note] : []), ...(passageNote ? [passageNote] : []), ...described.notes],
     english: englishLinks(described),
@@ -160,10 +166,10 @@ export function paritta(canon, { name, text, offset = 0, limit = 60 } = {}) {
 }
 
 export function register({ tool, z, canon }) {
-  tool('paritta', 'Paritta and other commonly recited texts (Maṅgala, Ratana, Karaṇīyamettā, Khandha, Mora, Dhajagga, Bojjhaṅga, Khuddakapāṭha chants and more) in Pāli from the bundled VRI edition, with their canonical citations and links to English translations. Call with no name to list the set. Works offline.', {
+  tool('paritta', 'Paritta and other commonly recited texts (Maṅgala, Ratana, Karaṇīyamettā, Khandha, Mora, Dhajagga, Bojjhaṅga, Khuddakapāṭha chants and more) in Pāli from the bundled VRI edition, with their canonical citations and links to English translations. Call with no name or text to list the set. Follow continue_with for pagination pinned to the chosen source. Works offline.', {
     name: z.string().max(100).optional().describe('Paritta name, e.g. "Ratana", "Karaṇīyamettā", "Khandha", "Mora" (diacritics optional). Omit to list all.'),
-    text: z.string().max(100).optional().describe('Choose one of the entry\'s canonical sources, e.g. "Snp 2.1" instead of the default "Kp 6", or "SN 46.16" for Bojjhaṅga.'),
-    offset: z.number().int().min(0).max(100000).default(0).describe('Segment offset for continuation.'),
+    text: z.string().trim().min(1).max(100).optional().describe('With name: choose one of the entry\'s canonical sources, e.g. "Snp 2.1" instead of the default "Kp 6", or "SN 46.16" for Bojjhaṅga. Omit for its default source.'),
+    offset: z.number().int().min(0).max(100000).default(0).describe('Offset in the selected paritta, which may be an excerpt. Use continue_with; original canonical segment numbers use a separate numbering.'),
     limit: z.number().int().min(1).max(200).default(60).describe('Segments per page.'),
   }, (args) => withNormalised(args.name, (name) => paritta(canon, { ...args, name })));
 }

@@ -63,7 +63,10 @@ function match(entries, query) {
 function textInfo(canon, id) {
   const { unit, notes } = canon.resolve(id);
   const info = canon.describe(unit, notes);
-  return { id: unit.id, citation: unit.acronym, title: unit.title || null, pts: info.pts, ...(info.approximate ? { approximate: true } : {}) };
+  return { id: unit.id, citation: unit.acronym, title: unit.title || null, pts: info.pts,
+    ...(info.approximate ? { approximate: true } : {}),
+    ...(info.alignment ? { alignment: info.alignment, notes: info.notes } : {}),
+    read_with: { tool: 'get_text', uid: unit.id } };
 }
 
 const TOPIC_NOTE = 'Topic and links from Access to Insight\'s index; each link was mapped to the canon text it names. Read a text with get_text (Pāli) or get_translation (English). The index groups texts; it is not a ruling on what they mean.';
@@ -92,10 +95,10 @@ export function topic(canon, name) {
       return { ...info, ati_reference: x.ati_reference, ati_url: x.ati_url,
         ...(key(x.ati_reference) !== key(info.citation) ? { numbering_note: `Access to Insight cites this as ${x.ati_reference}; the standard ID is ${info.id}.` } : {}) };
     }),
-    ...(t.see_also?.length ? { see_also: t.see_also.map((s) => ({ slug: s, name: bySlug.get(s)?.name })).filter((s) => s.name) } : {}),
+    ...(t.see_also?.length ? { see_also: t.see_also.map((s) => ({ slug: s, name: bySlug.get(s)?.name, read_with: { tool: 'topic', name: s } })).filter((s) => s.name) } : {}),
     ...(t.further_reading?.length ? { further_reading: t.further_reading.map((r) => ({ ...r, kind: 'Access to Insight essay or study guide (commentary, not scripture)' })) } : {}),
-    ...(list ? { dhamma_list: { slug: list.slug, name: list.name, hint: `dhamma_list("${list.slug}") gives the members and defining passage.` } } : {}),
-    ...(hits.length > 1 ? { other_matches: hits.slice(1, 8).map((h) => ({ slug: h.slug, name: h.name })) } : {}),
+    ...(list ? { dhamma_list: { slug: list.slug, name: list.name, read_with: { tool: 'dhamma_list', name: list.slug }, hint: `dhamma_list("${list.slug}") gives the members and defining passage.` } } : {}),
+    ...(hits.length > 1 ? { other_matches: hits.slice(1, 8).map((h) => ({ slug: h.slug, name: h.name, read_with: { tool: 'topic', name: h.slug } })) } : {}),
     note: TOPIC_NOTE,
     source: { name: src.name, url: t.ati_url, license: src.license, attribution: src.attribution, commit: src.commit },
   };
@@ -109,9 +112,9 @@ export function listTopics({ query, index = 'all', offset = 0, limit = 50 } = {}
   return {
     total: pool.length, offset, returned: Math.min(limit, Math.max(0, pool.length - offset)),
     next_offset: offset + limit < pool.length ? offset + limit : null,
-    topics: pool.slice(offset, offset + limit).map((t) => ({ slug: t.slug, name: t.name, index: t.index, texts: t.texts.length })),
+    topics: pool.slice(offset, offset + limit).map((t) => ({ slug: t.slug, name: t.name, index: t.index, texts: t.texts.length, read_with: { tool: 'topic', name: t.slug } })),
     hint: 'Open one with topic("<slug or name>"). Numbered teaching lists with their members are in dhamma_list.',
-    source: { name: src.name, license: src.license, attribution: src.attribution },
+    source: { name: src.name, license: src.license, attribution: src.attribution, commit: src.commit },
   };
 }
 
@@ -119,7 +122,7 @@ export function dhammaList(canon, name) {
   const data = listsIndex();
   if (!name) {
     return {
-      lists: data.lists.map((l) => ({ slug: l.slug, name: l.name, pali: l.pali, count: l.count, status: l.status })),
+      lists: data.lists.map((l) => ({ slug: l.slug, name: l.name, pali: l.pali, count: l.count, status: l.status, read_with: { tool: 'dhamma_list', name: l.slug } })),
       hint: 'Open one with dhamma_list("<slug or name>"), e.g. "five hindrances" or "four-noble-truths".',
       status_labels: data.status_labels,
     };
@@ -132,15 +135,15 @@ export function dhammaList(canon, name) {
   return {
     slug: l.slug, name: l.name, pali: l.pali, count: l.count,
     status: l.status, status_meaning: data.status_labels[l.status], ...(l.status_note ? { status_note: l.status_note } : {}),
-    members: l.members.map((m, i) => ({ n: i + 1, pali: m.pali, gloss: m.gloss, ...(m.group ? { group: m.group } : {}), ...(m.list ? { list: m.list } : {}) })),
+    members: l.members.map((m, i) => ({ n: i + 1, pali: m.pali, gloss: m.gloss, ...(m.group ? { group: m.group } : {}), ...(m.list ? { list: m.list, read_with: { tool: 'dhamma_list', name: m.list } } : {}) })),
     gloss_note: data.gloss_note,
     defined_in: l.defined_in.map((c) => ({ ...textInfo(canon, c), role: 'sets out this list (every member name checked in the VRI text)' })),
     ...(l.see_also_texts?.length ? { see_also_texts: l.see_also_texts.map((c) => textInfo(canon, c)) } : {}),
-    ...(l.related?.length ? { related_lists: l.related.map((s) => ({ slug: s, name: byslug.get(s)?.name })).filter((r) => r.name) } : {}),
-    ...(topics.length ? { topic: { slug: topics[0].slug, name: topics[0].name, hint: `topic("${topics[0].slug}") lists more texts from Access to Insight's index.` } } : {}),
-    ...(hits.length > 1 ? { other_matches: hits.slice(1, 6).map((h) => ({ slug: h.slug, name: h.name })) } : {}),
+    ...(l.related?.length ? { related_lists: l.related.map((s) => ({ slug: s, name: byslug.get(s)?.name, read_with: { tool: 'dhamma_list', name: s } })).filter((r) => r.name) } : {}),
+    ...(topics.length ? { topic: { slug: topics[0].slug, name: topics[0].name, read_with: { tool: 'topic', name: topics[0].slug }, hint: `topic("${topics[0].slug}") lists more texts from Access to Insight's index.` } } : {}),
+    ...(hits.length > 1 ? { other_matches: hits.slice(1, 6).map((h) => ({ slug: h.slug, name: h.name, read_with: { tool: 'dhamma_list', name: h.slug } })) } : {}),
     note: 'Read the defining passage with get_text before quoting it. Pāli member names are from that passage (VRI edition); English glosses are labels, not translations.',
-    source: { curated_by: 'pali-canon-mcp (server/data/dhamma_lists.json)', text: canon.source().name, terms: canon.source().terms },
+    source: { curated_by: 'pali-canon-mcp (server/data/dhamma_lists.json)', text: canon.source().name, terms: canon.source().terms, pali: canon.source() },
   };
 }
 
