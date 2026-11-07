@@ -7,6 +7,7 @@
  * contents, with every anchor checked against its page.
  */
 import bmc from '../server/data/bmc.json' with { type: 'json' };
+import { romanizeLookupInput, inputNote } from './script.mjs';
 
 const CLASS_NAMES = {
   pj: 'Pārājika', ss: 'Saṅghādisesa', ay: 'Aniyata', np: 'Nissaggiya Pācittiya',
@@ -51,7 +52,12 @@ function resolveRule(reference, canon) {
 }
 
 export function vinayaRule(reference, canon) {
-  const { unit, notes } = resolveRule(reference, canon);
+  const input = romanizeLookupInput(reference);
+  const { unit, notes, alternatives = [] } = resolveRule(input.text, canon);
+  if (alternatives.length) {
+    const candidates = [unit.acronym, ...alternatives.map(u => u.citation)].join(', ');
+    throw new Error(`"${reference}" maps to more than one canonical passage. Candidates include ${candidates}. Choose one exact bhikkhu rule, e.g. Pj 1 or Sk 2, before looking up its BMC explanation.`);
+  }
   const m = unit.id.match(/^pli-tv-(bu|bi)-vb-([a-z]+)(\d+)(-\d+)?$/);
   if (!m) throw new Error(`"${reference}" is ${unit.acronym} (${unit.id}), not a Pātimokkha rule. Use forms like Pj 1, Ss 5, Np 18, Pc 5, Sk 26 or As 1.`);
   if (m[1] === 'bi') throw new Error(`${unit.acronym} is a bhikkhunī rule. The Buddhist Monastic Code links here cover the 227 bhikkhu rules only; read the Pāli with get_text("${unit.id}").`);
@@ -73,6 +79,7 @@ export function vinayaRule(reference, canon) {
     bmcNotes.push(`The BMC explains ${CLASS_ABBR[m[2]]} ${Number(m[3])} together with ${CLASS_ABBR[m[2]]} ${entry.discussed_with.replace(/\D+/, '')}, so the link opens that shared section.`);
   }
   return {
+    ...inputNote(input),
     rule: `${CLASS_ABBR[m[2]]} ${Number(m[3])}`,
     class: CLASS_NAMES[m[2]],
     number: Number(m[3]),
@@ -111,6 +118,6 @@ export function vinayaRule(reference, canon) {
 
 export function register({ tool, z, canon }) {
   tool('vinaya_rule', 'A monk\'s (bhikkhu) Pātimokkha rule, e.g. Pj 1, Ss 5, Np 18, Pc 5, Sk 26, As 1 (227 rules): its canonical text in the Vinaya (VRI Pāli, read with get_text) and a link to the section of Ṭhānissaro Bhikkhu\'s Buddhist Monastic Code (dhammatalks.org) that explains it, with attribution. The BMC is commentary, linked only. Works offline.', {
-    rule: z.string().min(1).max(100).describe('A bhikkhu Pātimokkha rule: Pj 1–4, Ss 1–13, Ay 1–2, Np 1–30, Pc 1–92, Pd 1–4, Sk 1–75, As 1–7. Also "Bu Pc 5", "Pācittiya 5" or "pli-tv-bu-vb-pc5".'),
+    rule: z.string().min(1).max(100).describe('A bhikkhu Pātimokkha rule: Pj 1–4, Ss 1–13, Ay 1–2, Np 1–30, Pc 1–92, Pd 1–4, Sk 1–75, As 1–7. Also "Bu Pc 5", "Pācittiya 5" or "pli-tv-bu-vb-pc5". Roman or supported native-script selectors/numerals; conversion is labelled, while source descriptions remain in their original form.'),
   }, ({ rule }) => vinayaRule(rule, canon));
 }

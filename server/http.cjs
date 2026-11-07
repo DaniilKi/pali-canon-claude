@@ -24320,13 +24320,14 @@ function parseCitation(input) {
       return { kind: "pts", collection: PTS_COLLECTIONS[key4], volume: romanVolume, page: Number(pts[3]), raw };
     }
   }
-  const vin = fold2(text).replace(/vinaya\s*/, "").match(/^(bu|bhikkhu|bi|bhikkhuni)?\s*([a-z]+)\s*(\d+(?:\s*[.:-]\s*\d+)*)$/);
-  if (vin && (VINAYA_CLASS[vin[2]] || ["kd", "mv", "cv", "pvr", "khandhaka", "mahavagga", "culavagga", "cullavagga", "parivara"].includes(vin[2]))) {
+  const vin = fold2(text).replace(/vinaya\s*/, "").match(/^(bhikkhuni|bhikkhu|bu|bi)?\s*([a-z]+(?:[\s-]+[a-z]+)*)\s*(\d+(?:\s*[.:-]\s*\d+)*)$/);
+  const vinClass = vin && VINAYA_CLASS[vin[2].replace(/[\s-]+/g, "")];
+  if (vin && (vinClass || ["kd", "mv", "cv", "pvr", "khandhaka", "mahavagga", "culavagga", "cullavagga", "parivara"].includes(vin[2]))) {
     const nums2 = numbers(vin[3]);
-    if (VINAYA_CLASS[vin[2]]) {
+    if (vinClass) {
       const who = vin[1] && /^(bi|bhikkhuni)/.test(vin[1]) ? "bi" : "bu";
       const end = nums2.end === null ? "" : `-${Array.isArray(nums2.end) ? nums2.end.join(".") : nums2.end}`;
-      return { kind: "uid", uid: `pli-tv-${who}-vb-${VINAYA_CLASS[vin[2]]}${nums2.path.join(".")}${end}`, raw };
+      return { kind: "uid", uid: `pli-tv-${who}-vb-${vinClass}${nums2.path.join(".")}${end}`, raw };
     }
     const khandhaka = (n, max, label) => {
       if (nums2.path.length > 1) throw new CitationError(`${label} is cited by chapter number only (e.g. ${label.split(" ")[0]} 1); sections inside a khandhaka are reached by reading it with get_text.`);
@@ -31504,7 +31505,12 @@ function resolveRule(reference, canon) {
   }
 }
 function vinayaRule(reference, canon) {
-  const { unit, notes } = resolveRule(reference, canon);
+  const input = romanizeLookupInput(reference);
+  const { unit, notes, alternatives = [] } = resolveRule(input.text, canon);
+  if (alternatives.length) {
+    const candidates = [unit.acronym, ...alternatives.map((u) => u.citation)].join(", ");
+    throw new Error(`"${reference}" maps to more than one canonical passage. Candidates include ${candidates}. Choose one exact bhikkhu rule, e.g. Pj 1 or Sk 2, before looking up its BMC explanation.`);
+  }
   const m = unit.id.match(/^pli-tv-(bu|bi)-vb-([a-z]+)(\d+)(-\d+)?$/);
   if (!m) throw new Error(`"${reference}" is ${unit.acronym} (${unit.id}), not a P\u0101timokkha rule. Use forms like Pj 1, Ss 5, Np 18, Pc 5, Sk 26 or As 1.`);
   if (m[1] === "bi") throw new Error(`${unit.acronym} is a bhikkhun\u012B rule. The Buddhist Monastic Code links here cover the 227 bhikkhu rules only; read the P\u0101li with get_text("${unit.id}").`);
@@ -31526,6 +31532,7 @@ function vinayaRule(reference, canon) {
     bmcNotes.push(`The BMC explains ${CLASS_ABBR[m[2]]} ${Number(m[3])} together with ${CLASS_ABBR[m[2]]} ${entry3.discussed_with.replace(/\D+/, "")}, so the link opens that shared section.`);
   }
   return {
+    ...inputNote(input),
     rule: `${CLASS_ABBR[m[2]]} ${Number(m[3])}`,
     class: CLASS_NAMES[m[2]],
     number: Number(m[3]),
@@ -31561,7 +31568,7 @@ function vinayaRule(reference, canon) {
 }
 function register9({ tool, z, canon }) {
   tool("vinaya_rule", "A monk's (bhikkhu) P\u0101timokkha rule, e.g. Pj 1, Ss 5, Np 18, Pc 5, Sk 26, As 1 (227 rules): its canonical text in the Vinaya (VRI P\u0101li, read with get_text) and a link to the section of \u1E6Ch\u0101nissaro Bhikkhu's Buddhist Monastic Code (dhammatalks.org) that explains it, with attribution. The BMC is commentary, linked only. Works offline.", {
-    rule: z.string().min(1).max(100).describe('A bhikkhu P\u0101timokkha rule: Pj 1\u20134, Ss 1\u201313, Ay 1\u20132, Np 1\u201330, Pc 1\u201392, Pd 1\u20134, Sk 1\u201375, As 1\u20137. Also "Bu Pc 5", "P\u0101cittiya 5" or "pli-tv-bu-vb-pc5".')
+    rule: z.string().min(1).max(100).describe('A bhikkhu P\u0101timokkha rule: Pj 1\u20134, Ss 1\u201313, Ay 1\u20132, Np 1\u201330, Pc 1\u201392, Pd 1\u20134, Sk 1\u201375, As 1\u20137. Also "Bu Pc 5", "P\u0101cittiya 5" or "pli-tv-bu-vb-pc5". Roman or supported native-script selectors/numerals; conversion is labelled, while source descriptions remain in their original form.')
   }, ({ rule }) => vinayaRule(rule, canon));
 }
 

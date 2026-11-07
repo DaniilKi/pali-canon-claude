@@ -24,7 +24,7 @@ The server has 34 tools. Twenty-seven of them work without internet (`get_text` 
 | `search_texts` | Searches the full Pāli text and titles | No |
 | `search_source_book` | Searches one complete VRI root file, including front matter; returns exact book reading commands without assigning individual citations | No |
 | `browse_canon` | Lists the books, collections and sections | No |
-| `vinaya_rule` | A monk's Pātimokkha rule (Pj 1, Pc 5, Sk 26…): its Pāli text and a link to the section of the *Buddhist Monastic Code* that explains it | No |
+| `vinaya_rule` | A monk's Pātimokkha rule; Roman/native names or numerals, original Pāli source references and a separately attributed *Buddhist Monastic Code* explanation link | No |
 | `list_sources` | Sources, editions and licences | No |
 | `get_translation` | Reads an English translation from dhammatalks.org, Access to Insight or Ancient Buddhist Texts | Yes |
 | `compare_translations` | Shows two to four English translations side by side | Yes |

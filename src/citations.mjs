@@ -188,13 +188,14 @@ export function parseCitation(input) {
   }
 
   // Vinaya rules: "Bu Pj 1", "Bi Pc 5", "Pārājika 1", "Pj 1", "Kd 1", "Mv 1", "Cv 4", "Pvr 1.2"
-  const vin = fold(text).replace(/vinaya\s*/, '').match(/^(bu|bhikkhu|bi|bhikkhuni)?\s*([a-z]+)\s*(\d+(?:\s*[.:-]\s*\d+)*)$/);
-  if (vin && (VINAYA_CLASS[vin[2]] || ['kd', 'mv', 'cv', 'pvr', 'khandhaka', 'mahavagga', 'culavagga', 'cullavagga', 'parivara'].includes(vin[2]))) {
+  const vin = fold(text).replace(/vinaya\s*/, '').match(/^(bhikkhuni|bhikkhu|bu|bi)?\s*([a-z]+(?:[\s-]+[a-z]+)*)\s*(\d+(?:\s*[.:-]\s*\d+)*)$/);
+  const vinClass = vin && VINAYA_CLASS[vin[2].replace(/[\s-]+/g, '')];
+  if (vin && (vinClass || ['kd', 'mv', 'cv', 'pvr', 'khandhaka', 'mahavagga', 'culavagga', 'cullavagga', 'parivara'].includes(vin[2]))) {
     const nums = numbers(vin[3]);
-    if (VINAYA_CLASS[vin[2]]) {
+    if (vinClass) {
       const who = vin[1] && /^(bi|bhikkhuni)/.test(vin[1]) ? 'bi' : 'bu';
       const end = nums.end === null ? '' : `-${Array.isArray(nums.end) ? nums.end.join('.') : nums.end}`;
-      return { kind: 'uid', uid: `pli-tv-${who}-vb-${VINAYA_CLASS[vin[2]]}${nums.path.join('.')}${end}`, raw };
+      return { kind: 'uid', uid: `pli-tv-${who}-vb-${vinClass}${nums.path.join('.')}${end}`, raw };
     }
     const khandhaka = (n, max, label) => {
       if (nums.path.length > 1) throw new CitationError(`${label} is cited by chapter number only (e.g. ${label.split(' ')[0]} 1); sections inside a khandhaka are reached by reading it with get_text.`);
