@@ -1,9 +1,8 @@
 /** Network-backed providers: Digital Pāḷi Dictionary and Access to Insight (with mirrors). */
 import { fetchPublic, fetchMirrors, decodeHtml, plainText, shortText } from './http.mjs';
 import { atiMirrors, atiContent, atiNotice } from './english.mjs';
-import { load, linksFor, fold as foldPali, source as canonSource } from './canon.mjs';
-import { isPartial, partialScope } from './translation-scope.mjs';
-import { segments as canonSegments } from './canon.mjs';
+import { load, linksFor, fold as foldPali, source as canonSource, translationScope } from './canon.mjs';
+import { isPartial, isShared, isScoped } from './translation-scope.mjs';
 import { liveCache } from './cache.mjs';
 import { lookupOffline, DPD_PIN } from './analyse.mjs';
 
@@ -212,11 +211,15 @@ export function translationCoverage({ refresh = false } = {}) {
     const row = rows.get(key);
     const declared = d.translations[u.id] || [];
     const partial = declared.filter(isPartial);
-    for (const link of partial) partialScope(link, u, canonSegments(u), canonSource());
-    const own = declared.filter(link => !isPartial(link));
-    const reach = linksFor(u).links.filter(link => !isPartial(link));
+    for (const link of partial) translationScope(link, u);
+    const shared = declared.filter(isShared);
+    const reached = linksFor(u).links;
+    const own = declared.filter(link => !isScoped(link));
+    const reach = reached.filter(link => !isScoped(link));
     for (const o of [row, total]) {
       o.links += own.length;
+      o.shared_links = (o.shared_links || 0) + shared.length;
+      for (const link of shared) { o.shared_by_source ||= {}; bump(o.shared_by_source, link.source); }
       o.partial_links = (o.partial_links || 0) + partial.length;
       for (const link of partial) { o.partial_by_source ||= {}; bump(o.partial_by_source, link.source); }
       for (const l of own) {
@@ -225,6 +228,8 @@ export function translationCoverage({ refresh = false } = {}) {
       }
       if (u.kind === 'range') continue;   // grouped texts count once, through their members
       o.texts += 1;
+      o.with_shared_english = (o.with_shared_english || 0) + (reached.some(isShared) ? 1 : 0);
+      o.shared_only = (o.shared_only || 0) + (reached.some(isShared) && !reach.length ? 1 : 0);
       o.with_partial_english = (o.with_partial_english || 0) + (partial.length ? 1 : 0);
       o.partial_only = (o.partial_only || 0) + (partial.length && !reach.length ? 1 : 0);
       if (own.length) o.with_english += 1;
@@ -233,7 +238,7 @@ export function translationCoverage({ refresh = false } = {}) {
   }
   const pct = (o) => ({ ...o, percent_with_english: o.texts ? Math.round((1000 * o.with_english_including_inherited) / o.texts) / 10 : 0 });
   coverageCache = {
-    note: 'Whole-unit translation-link counts exclude partial mappings. partial_links, with_partial_english, partial_only and partial_by_source are separate; partial groups do not imply member coverage. Counts of texts (grouped ranges counted through their members) with an English translation link; links counts every link, including those on grouped ranges. "including_inherited" adds verses whose chapter is linked. content_matched_links were placed by the content-based linker (names, numbers and PTS spans in the translation compared with the Pāli) and audited; a text without a link may still have a translation we could not place with confidence.',
+    note: 'Whole-unit translation-link counts exclude partial and condensed shared-page mappings. shared_links counts each declared page once, with_shared_english counts explicitly listed members and shared_only excludes members with a whole-unit source. These are not complete translations or individual alignment. partial_links, with_partial_english, partial_only and partial_by_source are separate; partial groups do not imply member coverage. Counts of texts (grouped ranges counted through their members) with an English translation link; links counts every link, including those on grouped ranges. "including_inherited" adds verses whose chapter is linked. content_matched_links were placed by the content-based linker (names, numbers and PTS spans in the translation compared with the Pāli) and audited; a text without a link may still have a translation we could not place with confidence.',
     total: pct(total),
     collections: [...rows.values()].map(pct),
   };

@@ -17,7 +17,7 @@ export const CSV_COLUMNS = [
   'pts', 'pts_volume', 'pts_page', 'pts_end_page',
   'members', 'english_inherited_from', 'english_count', 'english_urls', 'english_translators',
   'english_references', 'english_translation_ids', 'english_licenses',
-  'partial_english_count', 'partial_english',
+  'partial_english_count', 'partial_english', 'shared_english_count', 'shared_english',
 ];
 
 const CC_BY_NC_4 = 'https://creativecommons.org/licenses/by-nc/4.0/';
@@ -92,7 +92,8 @@ export function buildIndex() {
       ...(u.members ? { members: u.members } : {}),
       english_inherited_from: via ? via.id : null,
       english_count: info.english.filter(t => !t.translation_scope).length,
-      partial_english_count: info.english.filter(t => t.translation_scope).length,
+      partial_english_count: info.english.filter(t => t.translation_scope?.kind === 'partial_unit').length,
+      shared_english_count: info.english.filter(t => t.translation_scope?.kind === 'shared_page').length,
       english: info.english.map((t) => ({
         source: t.source,
         translator: t.translator || null,
@@ -128,7 +129,8 @@ export function toCsv(index) {
   const rows = [CSV_COLUMNS.join(',')];
   for (const t of index.texts) {
     const whole = t.english.filter(e => !e.translation_scope);
-    const partial = t.english.filter(e => e.translation_scope);
+    const partial = t.english.filter(e => e.translation_scope?.kind === 'partial_unit');
+    const shared = t.english.filter(e => e.translation_scope?.kind === 'shared_page');
     const row = {
       id: t.id, citation: t.citation, title: t.title, pitaka: t.pitaka, collection: t.collection, kind: t.kind,
       approximate: t.approximate ? 'true' : 'false',
@@ -136,6 +138,8 @@ export function toCsv(index) {
       pts: t.pts?.label, pts_volume: t.pts?.volume, pts_page: t.pts?.page, pts_end_page: t.pts?.end_page,
       members: (t.members || []).join(' | '),
       english_inherited_from: t.english_inherited_from,
+      shared_english_count: shared.length,
+      shared_english: JSON.stringify(shared),
       partial_english_count: partial.length,
       partial_english: JSON.stringify(partial),
       english_count: whole.length,
@@ -161,7 +165,7 @@ export function notice(index) {
     '- `citation-index.json`: one record per text with its VRI book and paragraphs, PTS reference and English translation links.',
     '- `citation-index.csv`: the same, one row per text (multi-valued cells joined with " | "). Columns: ' + CSV_COLUMNS.join(', ') + '.',
     '',
-    'Whole-unit English counts and the legacy CSV english_* link columns exclude partial sources. JSON english entries retain translation_scope; CSV partial_english is a JSON array preserving complete scope, identity, reading commands and licence metadata. Partial links do not establish whole-unit coverage. english_inherited_from concerns whole-unit links only.',
+    'Whole-unit English counts and the legacy CSV english_* link columns exclude partial sources and condensed shared pages. shared_english is a separate JSON array retaining the full member list and unverified individual alignment; shared_english_count counts page links, not full translations. JSON english entries retain translation_scope; CSV partial_english is a JSON array preserving complete scope, identity, reading commands and licence metadata. Partial links do not establish whole-unit coverage. english_inherited_from concerns whole-unit links only.',
     '',
     '## Source and licence',
     '',

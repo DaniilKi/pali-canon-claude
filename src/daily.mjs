@@ -1,6 +1,6 @@
 // Daily text and reading plans (issue #45). Everything is chosen from the bundled VRI canon:
 // no scripture is generated, and the study-guide plans list citations and links only.
-import { isPartial } from './translation-scope.mjs';
+import { isScoped } from './translation-scope.mjs';
 import * as canonModule from './canon.mjs';
 
 const DAY_MS = 86400000;
@@ -53,15 +53,17 @@ function pools(canon) {
   const chapters = d.canon.units.filter((u) => u.collection === 'dhp' && u.kind === 'range')
     .sort((a, b) => a.book - b.book || a.start - b.start);
   const suttas = d.canon.units.filter((u) => SUTTA_POOL_COLLECTIONS.has(u.collection) && u.kind !== 'range' && !u.approximate
-    && d.translations[u.id]?.some(link => !isPartial(link)))
+    && d.translations[u.id]?.some(link => !isScoped(link)))
     .sort((a, b) => a.book - b.book || a.start - b.start);
   cache = { canon, verses, chapters, suttas, plans: new Map() };
   return cache;
 }
 
 function english(canon, u) {
-  return canon.describe(u).english.map(({ source, translator, reference, url, license, translation_id }) => ({
+  return canon.describe(u).english.map(({ source, translator, reference, url, license, translation_id, translation_scope, includes_commentary }) => ({
     source, translator, ...(reference ? { reference } : {}), url, ...(license ? { license } : {}), translation_id,
+    ...(translation_scope ? { translation_scope, whole_unit_coverage: false } : {}),
+    ...(includes_commentary ? { includes_commentary: true } : {}),
   }));
 }
 

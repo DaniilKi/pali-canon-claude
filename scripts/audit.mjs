@@ -1,7 +1,7 @@
 import { readBundled } from '../src/bundled-data.mjs';
 // Exhaustive offline audit of the bundled canon: every text, every citation form, every PTS start page, every translation link.
 import * as canon from '../src/canon.mjs';
-import { isPartial, partialScope } from '../src/translation-scope.mjs';
+import { isShared, isScoped } from '../src/translation-scope.mjs';
 import { EDITIONS, editionLabel, editionIndex, nextUnit } from '../src/editions.mjs';
 import { textSegments, parseNoteSpans, uncovered, SIGLA } from '../src/variants.mjs';
 import * as commentary from '../src/commentary.mjs';
@@ -132,16 +132,22 @@ for (let i = 1; i < spans.length; i += 1) {
 }
 // 7. Every translation link resolves back to its text by URL.
 for (const [id, links] of Object.entries(d.translations)) {
-  for (const link of links) if (isPartial(link)) {
+  for (const link of links) if (isScoped(link)) {
     try {
       const unit = d.byId.get(id);
       if (!unit) throw Error('Partial translation has no independent indexed owner.');
       canon.linksFor(unit);
-      partialScope(link, unit, canon.segments(unit), canon.source()); count('partial-translation');
+      canon.translationScope(link, unit); count(isShared(link) ? 'shared-translation' : 'partial-translation');
     } catch (error) { fail('partial-translation', `${id}: ${error.message}`); }
   }
   for (const l of links) {
     try {
+      if (isShared(l)) {
+        let rejected = false;
+        try { canon.resolve(l.url); } catch (error) { if (!/Shared-page URL/.test(error.message)) throw error; rejected = true; }
+        if (!rejected) throw Error('Shared page URL silently resolved to one canonical text.');
+        count('shared-link-url'); continue;
+      }
       const r = canon.resolve(l.url);
       if (r.unit.id !== id && !(d.translations[r.unit.id] || []).some((x) => x.url === l.url)) fail('link', `${l.url} -> ${r.unit.id} (expected ${id})`);
       count('link');

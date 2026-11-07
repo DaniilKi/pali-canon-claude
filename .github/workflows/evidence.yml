@@ -48,6 +48,8 @@ jobs:
         run: node scripts/audit-english-scope.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report english-verification-scope.report.json
       - name: Check synthetic partial translation scope and coverage offline
         run: node scripts/audit-partial-translations.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report partial-translations.report.json
+      - name: Check synthetic shared-page scope and member ambiguity offline
+        run: node scripts/audit-shared-translations.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report shared-translations.report.json
       - name: Check packaged native parallel citations and ambiguous scope offline
         run: node scripts/audit-parallels.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-parallels.report.json
       - name: Check packaged native numeral citation scanning and offsets offline
@@ -73,6 +75,7 @@ jobs:
             native-verification.report.json
             english-verification-scope.report.json
             partial-translations.report.json
+            shared-translations.report.json
             native-parallels.report.json
             native-citation-scanner.report.json
             reference-input-integrity.report.json

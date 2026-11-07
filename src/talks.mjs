@@ -7,7 +7,7 @@
 // such as SemrushBot and AhrefsBot, are disallowed from the whole site; this server is not one of them.) Requests are cached (src/cache.mjs) and spaced at least one second apart.
 import { fetchPublic, decodeHtml } from './http.mjs';
 import { liveCache } from './cache.mjs';
-import { isPartial } from './translation-scope.mjs';
+import { isScoped } from './translation-scope.mjs';
 import { createHash } from 'node:crypto';
 import { romanizeLookupInput, inputNote } from './script.mjs';
 import { parseCitation, citationId, rangeEndPath } from './citations.mjs';
@@ -73,7 +73,7 @@ export function sharedPhrase(phrase, url, canon) {
   if (!titleIndex) {
     titleIndex = new Map();
     for (const links of Object.values(canon.load().translations)) {
-      for (const l of links) if (!isPartial(l) && l.source === 'dhammatalks' && l.url && !titleIndex.has(l.url)) titleIndex.set(l.url, wordKey(titleWords(l.reference).join(' ')));
+      for (const l of links) if (!isScoped(l) && l.source === 'dhammatalks' && l.url && !titleIndex.has(l.url)) titleIndex.set(l.url, wordKey(titleWords(l.reference).join(' ')));
     }
   }
   const key = wordKey(phrase);
@@ -200,7 +200,7 @@ export async function findTalks({ query, passage, category = 'all', page = 1, li
     // Page/URL resolution can return before adding the canonical unit's own cautions.
     notes.push(...new Set([...resolutionNotes, ...canon.resolve(unit.id).notes]));
     const { links, via } = canon.linksFor(unit);
-    const dt = via ? null : links.find((l) => !isPartial(l) && l.source === 'dhammatalks');
+    const dt = via ? null : links.find((l) => !isScoped(l) && l.source === 'dhammatalks');
     const candidate = dt ? phraseFromReference(dt.reference) : null;
     const shared = candidate ? sharedPhrase(candidate, dt.url, canon) : false;
     const phrase = shared ? null : candidate;

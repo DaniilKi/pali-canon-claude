@@ -1,9 +1,9 @@
 import { parseCitation } from './citations.mjs';
-import { isPartial } from './translation-scope.mjs';
+import { isScoped } from './translation-scope.mjs';
 
 /** Existing English title metadata; dhammatalks stores its title after a citation in the legacy caption. */
 export function translationTitle(link) {
-  if (isPartial(link)) return null;
+  if (isScoped(link)) return null;
   if (link.english?.trim()) return link.english;
   if (link.source !== 'dhammatalks') return null;
   const reference = link.reference || '';

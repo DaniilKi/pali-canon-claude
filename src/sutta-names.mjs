@@ -16,6 +16,7 @@ import * as canon from './canon.mjs';
 import { CitationError, _test as citationsTest } from './citations.mjs';
 import { normalizeInput, fuzzyKey, normalizationNote } from './input.mjs';
 import { loadGlossary } from './glossary-data.mjs';
+import { isScoped } from './translation-scope.mjs';
 import { translationTitle } from './translation-titles.mjs';
 
 const fold = canon.fold;
@@ -56,6 +57,7 @@ function buildIndex() {
     const u = d.byId.get(id);
     if (!u) continue;
     for (const t of links) {
+      if (isScoped(t)) continue;
       const english = translationTitle(t);
       if (english && !/\d/.test(english)) {
         const via = `English title (${canon.sourceName(t)}, ${t.translator})`;

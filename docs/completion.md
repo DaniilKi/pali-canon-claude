@@ -355,3 +355,8 @@ Pāli fuzzy verification evidence now uses source positions rather than the firs
 ## Coverage/export follow-up — 7 November 2026
 
 Public citation JSON/CSV and documentation coverage now preserve the runtime partial-source distinction. Synthetic fixtures exercise the actual export and coverage commands with network forbidden, including mixed versions and malformed declarations. No real translation or coverage increment is introduced. The [official Iti 10–13 shared-page lead](translations/iti-shared-page-assessment.md) is a separate actionable scope problem: shared-source retrieval/verification, publisher abbreviations and individual alignment need explicit treatment before adding links for Iti 11–13.
+
+
+## Condensed shared-page capability — 7 November 2026
+
+General metadata, retrieval, quotation-verification, URL-selector, export and coverage contracts now distinguish one condensed multi-discourse page from separate complete translations. The implementation is exercised with synthetic fixtures only and preserves unverified individual alignment. Ordinary comparison/attached/widget paths refuse shared sources. The Iti 10–13 lead remains inactive until the actual complete source snapshot, abbreviation notices and source-specific declaration are reviewed. No additional English coverage is claimed. The prior export test’s Windows file-URL portability defect is corrected in this cycle; exact-commit CI must confirm the result.

@@ -1,8 +1,7 @@
 /** English translations: Ṭhānissaro Bhikkhu (dhammatalks.org), Access to Insight (with mirrors) and Ānandajoti Bhikkhu (Ancient Buddhist Texts). */
 import { fetchMirrors, plainText, decodeHtml } from './http.mjs';
-import { load, linksFor, translationId, sourceName, ANANDAJOTI_BASE, ANANDAJOTI_LICENSE } from './canon.mjs';
-import { isPartial, partialScope, scopeHash } from './translation-scope.mjs';
-import { segments, source as canonSource } from './canon.mjs';
+import { load, linksFor, translationId, sourceName, ANANDAJOTI_BASE, ANANDAJOTI_LICENSE, translationScope } from './canon.mjs';
+import { isShared, isScoped, scopeHash } from './translation-scope.mjs';
 import { liveCache } from './cache.mjs';
 import { createHash } from 'node:crypto';
 const prefixHash = (text, offset) => createHash('sha256').update(text.slice(0, offset)).digest('hex');
@@ -123,7 +122,7 @@ async function fetchDhammatalksLive(url) {
 export function available(unit) {
   return linksFor(unit).links.map((t) => ({
     translation_id: translationId(t),
-    ...(isPartial(t) ? { translation_scope: partialScope(t, unit, segments(unit), canonSource()) } : {}),
+    ...(isScoped(t) ? { translation_scope: translationScope(t, unit) } : {}),
     source: sourceName(t),
     translator: t.translator, reference: t.reference || undefined, ...(t.license ? { license: t.license } : {}), match: t.match,
     ...(t.commentary ? { includes_commentary: true } : {}),
@@ -134,7 +133,7 @@ const translatorKey = value => String(value || '').normalize('NFD').replace(/\p{
 
 /** Select only from supplied link metadata; never infer which of several translators was intended. */
 export function selectTranslation(links, which, citation) {
-  if (!which) { const full = links.filter(link => !isPartial(link)); return { link: full.find(link => link.source === 'dhammatalks') || full[0], matchingVersions: [] }; }
+  if (!which) { const full = links.filter(link => !isScoped(link)); return { link: full.find(link => link.source === 'dhammatalks') || full[0], matchingVersions: [] }; }
   if (/^(ati|dt|aj):/.test(which)) return { link: links.find(link => translationId(link) === which), matchingVersions: [] };
   const wanted = translatorKey(which);
   const exact = links.filter(link => translatorKey(link.translator) === wanted);
@@ -142,11 +141,12 @@ export function selectTranslation(links, which, citation) {
   if (new Set(matches.map(link => translatorKey(link.translator))).size > 1) {
     throw new Error(`Ambiguous translation selector "${which}" for ${citation}: it matches different translators. Use an exact translation_id: ${matches.map(link => `${translationId(link)} (${link.translator})`).join(', ')}.`);
   }
-  return { link: matches.find(link => !isPartial(link)) || matches[0], matchingVersions: matches };
+  return { link: matches.find(link => !isScoped(link)) || matches[0], matchingVersions: matches };
 }
 
 /** Fetch one translation of a text. `which` is a translation_id, an unambiguous translator name fragment, or omitted for the default. */
-export async function translation(unit, which, { offset = 0, limit = 12000, prefix_sha256: expectedPrefix, allow_partial = false, scope_sha256 } = {}) {
+export async function translation(unit, which, { offset = 0, limit = 12000, prefix_sha256: expectedPrefix, allow_partial = false, allow_shared = false, scope_sha256 } = {}) {
+  if (typeof allow_shared !== 'boolean') throw new Error('allow_shared must be a boolean.');
   if (typeof allow_partial !== 'boolean') throw new Error('allow_partial must be a boolean.');
   if (which !== undefined) {
     if (typeof which !== 'string' || !which.trim()) throw new Error('Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.');
@@ -161,13 +161,19 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
     throw new Error(`No English translation is linked for ${unit.acronym}. Read the Pāli with get_text, or see https://suttacentral.net/${unit.id} for other translations.`);
   }
   let { link, matchingVersions } = selectTranslation(links, which, unit.acronym);
-  if (!link && !which && links.some(isPartial)) throw new Error('Only partial translations are linked. Choose an exact translation_id and explicitly set allow_partial: true; no whole-unit translation was selected.');
+  if (!link && !which && links.some(isScoped)) {
+    if (links.some(isShared)) throw new Error('Only scoped shared-page/partial sources are linked. Choose an exact translation_id: allow_shared: true accepts a condensed shared page; allow_partial: true accepts a partial unit. No whole-unit translation was selected.');
+    throw new Error('Only partial translations are linked. Choose an exact translation_id and explicitly set allow_partial: true; no whole-unit translation was selected.');
+  }
   if (!link) throw new Error(`Translation "${which}" is not linked for ${unit.acronym}. Available: ${available(unit).map((a) => `${a.translation_id} (${a.translator})`).join(', ')}.`);
-  const declaredScope = partialScope(link, unit, segments(unit), canonSource());
-  if (allow_partial && !declaredScope) throw new Error('The selected source no longer has a declared partial scope. Review its mapping before requesting a whole-unit source.');
-  if (declaredScope && (!allow_partial || which !== translationId(link))) throw new Error('This translation covers only a partial unit. Use get_translation with its exact translation_id and allow_partial: true after checking translation_scope.');
-  if (declaredScope && offset > 0 && (!expectedPrefix || !scope_sha256)) throw new Error('Partial continuation requires unchanged scope_sha256 and prefix_sha256 from continue_with.');
-  if (scope_sha256 !== undefined && scope_sha256 !== declaredScope?.scope_sha256) throw new Error('The partial translation mapping changed. Restart at offset 0 after reviewing its scope.');
+  const declaredScope = translationScope(link, unit);
+  const shared = isShared(link);
+  if (allow_shared && !shared) throw new Error('The selected source no longer has a declared shared-page scope. Review its mapping before requesting another source.');
+  if (shared && (!allow_shared || allow_partial || which !== translationId(link))) throw new Error('This is a condensed shared-page source. Use get_translation with its exact translation_id and allow_shared: true after reviewing all declared text IDs; individual alignment is unverified.');
+  if (allow_partial && (!declaredScope || shared)) throw new Error('The selected source no longer has a declared partial scope. Review its mapping before requesting a whole-unit source.');
+  if (declaredScope && !shared && (!allow_partial || which !== translationId(link))) throw new Error('This translation covers only a partial unit. Use get_translation with its exact translation_id and allow_partial: true after checking translation_scope.');
+  if (declaredScope && offset > 0 && (!expectedPrefix || !scope_sha256)) throw new Error('Scoped partial/shared-page continuation requires unchanged scope_sha256 and prefix_sha256 from continue_with.');
+  if (scope_sha256 !== undefined && scope_sha256 !== declaredScope?.scope_sha256) throw new Error('The scoped translation mapping changed. Restart at offset 0 after reviewing its scope.');
   let result;
   const notes = via && !declaredScope ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   try {
@@ -178,7 +184,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
     // dhammatalks.org has no mirror; during an outage (not for a missing page) fall back to the same
     // translator's Access to Insight version of this same text.
     const outage = !error.failures || error.failures.some((f) => !/HTTP 404/.test(f));
-    const sameTranslator = !declaredScope && outage && link.source === 'dhammatalks' && links.find((l) => !isPartial(l) && l.source === 'ati' && /thanissaro/i.test(l.translator || ''));
+    const sameTranslator = !declaredScope && outage && link.source === 'dhammatalks' && links.find((l) => !isScoped(l) && l.source === 'ati' && /thanissaro/i.test(l.translator || ''));
     if (!sameTranslator) throw new Error(`Could not retrieve the translation (${error.message}). The Pāli text is still available offline with get_text; try again later or choose another translation_id.`);
     if (offset > 0) throw new Error(`Could not continue the requested translation version (${error.message}). Its character offset cannot be transferred to the earlier Access to Insight version. Retry this translation_id later, or start another translation at offset 0. The Pāli text is still available offline with get_text.`);
     try {
@@ -190,8 +196,8 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
     link = sameTranslator;
   }
   if (declaredScope) {
-    if (result.text.length > 2000000 || (result.parts_total && result.parts_read !== result.parts_total)) throw new Error('Partial source exceeds the bounded complete-text check; no excerpt was returned.');
-    if (scopeHash(result.text) !== declaredScope.text_sha256) throw new Error('The partial source text changed from its reviewed snapshot. No translation was returned.');
+    if (result.text.length > 2000000 || (result.parts_total && result.parts_read !== result.parts_total)) throw new Error('Scoped source exceeds the bounded complete-text check; no excerpt was returned.');
+    if (scopeHash(result.text) !== declaredScope.text_sha256) throw new Error('The scoped source text changed from its reviewed snapshot. No translation was returned.');
     notes.push(declaredScope.note);
   }
   if (matchingVersions.length > 1) notes.push(`Several linked versions match "${which}"; selected ${translationId(link)} (${sourceName(link)}). To choose a different version, use its exact translation_id: ${matchingVersions.map(version => translationId(version)).join(', ')}.`);
@@ -215,12 +221,12 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
   const nextOffset = offset + limit < text.length ? offset + limit : null;
   if (!complete) notes.push(`This translation is spread over ${partsTotal} pages; ${partsRead} of them ${partsRead === 1 ? 'was' : 'were'} read for this request. Use continue_with to continue with this exact translation_id and next_offset.`);
   return {
-    text_id: unit.id, citation: unit.acronym, translator: link.translator, translation_id: translationId(link),
+    ...(shared ? { text_id: null, citation: declaredScope.source_reference, requested_text_id: unit.id, requested_citation: unit.acronym } : { text_id: unit.id, citation: unit.acronym }), translator: link.translator, translation_id: translationId(link),
     ...rest, text: text.slice(offset, offset + limit), offset, limit, total_characters: complete ? text.length : null,
     next_offset: nextOffset, prefix_sha256: prefix,
     continue_with: nextOffset === null ? null : {
       name: 'get_translation',
-      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit, prefix_sha256: prefixHash(text, nextOffset), ...(declaredScope ? { allow_partial: true, scope_sha256: declaredScope.scope_sha256 } : {}) },
+      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit, prefix_sha256: prefixHash(text, nextOffset), ...(declaredScope ? { ...(shared ? { allow_shared: true } : { allow_partial: true }), scope_sha256: declaredScope.scope_sha256 } : {}) },
     },
     ...(declaredScope ? { translation_scope: declaredScope, whole_unit_coverage: false } : {}),
     match: link.match, notes,

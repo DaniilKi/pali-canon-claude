@@ -100,8 +100,10 @@ export function find(name) {
 }
 
 function englishLinks(described) {
-  return described.english.map(({ source, translator, reference, url, license, translation_id }) => ({
+  return described.english.map(({ source, translator, reference, url, license, translation_id, translation_scope, includes_commentary }) => ({
     source, translator, reference, url, ...(license ? { license } : {}), translation_id,
+    ...(translation_scope ? { translation_scope, whole_unit_coverage: false } : {}),
+    ...(includes_commentary ? { includes_commentary: true } : {}),
   }));
 }
 
@@ -163,7 +165,7 @@ export function paritta(canon, { name, text, offset = 0, limit = 60 } = {}) {
     notes: [...(entry.note ? [entry.note] : []), ...(passageNote ? [passageNote] : []), ...described.notes],
     english: englishLinks(described),
     english_note: described.english.length
-      ? 'Links only. Read one with get_translation (uid and translation_id); it returns the translator, licence and notice.'
+      ? 'Links only. Read with get_translation and the exact translation_id. Scoped sources require explicit allow_partial or allow_shared according to their metadata; they do not establish whole-unit coverage or individual alignment.'
       : `No English translation is linked for ${unit.acronym} in this tool. See https://suttacentral.net/${unit.id} for other translations.`,
     chanting_books: chantingBooks(),
   };

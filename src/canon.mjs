@@ -1,4 +1,4 @@
-import { isPartial, partialScope } from './translation-scope.mjs';
+import { isPartial, partialScope, isShared, isScoped, sharedScope } from './translation-scope.mjs';
 import { searchSegments, searchFold, searchExcerpt, searchTerms, searchReading, assertSearchQuery, isSourcePhrase } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
@@ -54,6 +54,8 @@ function mergeAnandajoti(translations) {
       source: 'anandajoti', url: ANANDAJOTI_BASE + l.path, path: l.path, ...(l.parts ? { parts: l.parts } : {}),
       translator: 'Ānandajoti Bhikkhu', english: l.title || undefined, reference: l.reference, license: 'CC BY-SA 3.0',
       match: l.match, ...(l.commentary ? { commentary: true } : {}),
+      ...(Object.hasOwn(l, 'partial_scope') ? { partial_scope: l.partial_scope } : {}),
+      ...(Object.hasOwn(l, 'shared_scope') ? { shared_scope: l.shared_scope } : {}),
     });
   }
 }
@@ -140,25 +142,48 @@ function ownersOf(links, wanted) {
   return index.get(wanted) || [];
 }
 
-/** Translation links for a text; a verse or member inherits those of the range that contains it (e.g. a Dhp chapter). */
+export function translationScope(link, unit) {
+  if (isShared(link)) return sharedScope(link, unit, load().byId, segments, source());
+  return partialScope(link, unit, segments(unit), source());
+}
+const sharedIndexes = new WeakMap();
+function sharedFor(unit, d) {
+  let index = sharedIndexes.get(d.translations);
+  if (!index) {
+    index = new Map();
+    for (const [owner, links] of Object.entries(d.translations)) for (const link of links) if (isShared(link)) {
+      const u = d.byId.get(owner);
+      if (!u) throw new CitationError('Shared-page source has no indexed owner.');
+      const scope = translationScope(link, u);
+      if (scope.owner_id !== owner || ownersOf(d.translations, translationId(link)).length !== 1) throw new CitationError('Shared-page translation_id must have one declaration on its first member; ambiguous ownership was rejected.');
+      for (const id of scope.text_ids) { if (!index.has(id)) index.set(id, []); index.get(id).push(link); }
+    }
+    sharedIndexes.set(d.translations, index);
+  }
+  const links = index.get(unit.id) || [];
+  for (const link of links) translationScope(link, unit);
+  return links;
+}
+
+/** Ordinary containing groups inherit whole links only; shared pages reach only explicitly declared members. */
 export function linksFor(u) {
   const d = load();
-  const own = d.translations[u.id];
-  if (own?.length) {
+  const shared = sharedFor(u, d);
+  const own = (d.translations[u.id] || []).filter(link => !isShared(link));
+  if (own.length) {
     for (const link of own) if (isPartial(link)) {
-      partialScope(link, u, segments(u), source());
-      const id = translationId(link);
-      const owners = ownersOf(d.translations, id);
+      translationScope(link, u);
+      const owners = ownersOf(d.translations, translationId(link));
       if (owners.length !== 1 || owners[0] !== u.id) throw new CitationError('Partial translation_id has ambiguous declarations or unit owners. Use one reviewed source scope per version; no occurrence was selected.');
     }
-    if (own.some(link => !isPartial(link))) return { links: own, via: null };
+    if (own.some(link => !isScoped(link))) return { links: [...own, ...shared], via: null };
   }
   const container = rangeContaining(u.id);
   if (container && d.translations[container.id]?.length) {
-    const links = d.translations[container.id].filter(t => !isPartial(t));
-    if (links.length) return { links: [...links, ...(own || [])], via: container };
+    const links = d.translations[container.id].filter(t => !isScoped(t));
+    if (links.length) return { links: [...links, ...own, ...shared], via: container };
   }
-  return { links: own || [], via: null };
+  return { links: [...own, ...shared], via: null };
 }
 
 /** Describe index certainty without inferring missing or abbreviated source wording. */
@@ -194,8 +219,9 @@ function unitSummary(u, extra = {}) {
     vri_paragraphs: u.vri || null,
     ...(u.approximate ? { approximate: true } : {}),
     ...(alignment ? { alignment } : {}),
-    english_available: englishLinks.filter(t => !isPartial(t)).length,
+    english_available: englishLinks.filter(t => !isScoped(t)).length,
     ...(englishLinks.some(isPartial) ? { partial_english_available: englishLinks.filter(isPartial).length } : {}),
+    ...(englishLinks.some(isShared) ? { shared_english_available: englishLinks.filter(isShared).length } : {}),
     ...extra,
   };
 }
@@ -280,7 +306,16 @@ export function resolve(reference) {
     const key = `${c.host}${c.path}`;
     const id = d.urlIndex.get(key) || d.urlIndex.get(key.replace(/^accesstoinsight\.org/, 'accesstoinsight.org'));
     if (!id) throw new CitationError('That page is not linked to a canon text in the bundled index. Give the sutta citation instead.');
+    sharedFor(d.byId.get(id), d);
     for (const link of d.translations[id] || []) {
+      if (isShared(link)) {
+        const scope = translationScope(link, d.byId.get(id));
+        const urls = [link.url, ...(link.parts || []).map(path => ANANDAJOTI_BASE + path)];
+        if (urls.some(url => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\.html?$/, '') === key)) {
+          sharedFor(d.byId.get(id), d);
+          throw new CitationError(`Shared-page URL concerns ${scope.text_ids.join(', ')}. It does not identify one canonical text; choose an exact member ID. ${scope.note}`);
+        }
+      }
       const urls = [link.url, ...(link.parts || []).map(path => ANANDAJOTI_BASE + path)];
       if (isPartial(link) && urls.some(url => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\.html?$/, '') === key)) {
         const unit = d.byId.get(id), scoped = partialScope(link, unit, segments(unit), source());
@@ -330,7 +365,7 @@ export function resolve(reference) {
   if (hit.note) notes.push(hit.note);
   const alignment = alignmentInfo(hit.unit);
   if (alignment) notes.push(alignment.note);
-  const schemes = (d.translations[hit.unit.id] || []).filter((t) => t.reference && /^(AN|SN) \d+:\d+/.test(t.reference))
+  const schemes = (d.translations[hit.unit.id] || []).filter((t) => !isScoped(t) && t.reference && /^(AN|SN) \d+:\d+/.test(t.reference))
     .map((t) => t.reference.match(/^(AN|SN) (\d+):(\d+)/)).filter(Boolean)
     .filter((m) => `${m[1].toLowerCase()}${m[2]}.${m[3]}` !== hit.unit.id);
   if (schemes.length) notes.push(`Also numbered ${schemes[0][1]} ${schemes[0][2]}.${schemes[0][3]} in the PTS-based numbering used by Ṭhānissaro Bhikkhu (dhammatalks.org) and Access to Insight.`);
@@ -402,14 +437,14 @@ export function source() {
 export function describe(u, notes = []) {
   const d = load();
   const { links: own, via } = linksFor(u);
-  if (via) notes = [...notes, own.some(isPartial) ? `Whole-unit English links cover ${via.acronym} (${via.title}); partial links have their own explicit scope.` : `English translations are of the whole ${via.acronym} (${via.title}); this text is part of it.`];
+  if (via) notes = [...notes, own.some(isScoped) ? `Whole-unit English links cover ${via.acronym} (${via.title}); scoped links have their own explicit scope.` : `English translations are of the whole ${via.acronym} (${via.title}); this text is part of it.`];
   const english = own.map((t) => ({
     source: sourceName(t),
     translator: t.translator, reference: t.reference || undefined, url: t.url,
     ...(t.license ? { license: t.license } : {}),
     translation_id: translationId(t),
     match: t.match,
-    ...(isPartial(t) ? { translation_scope: partialScope(t, u, segments(u), source()) } : {}),
+    ...(isScoped(t) ? { translation_scope: translationScope(t, u) } : {}),
     ...(t.commentary ? { includes_commentary: true } : {}),
   }));
   const blocks = bookBlocks(u);
@@ -463,7 +498,7 @@ function groupedScope(d, key, requested) {
 }
 
 function searchTitle(d, u) {
-  const english = (d.translations[u.id] || []).filter((t) => !isPartial(t)).map((t) => `${t.reference || ''} ${t.english || ''}`).join(' ');
+  const english = (d.translations[u.id] || []).filter((t) => !isScoped(t)).map((t) => `${t.reference || ''} ${t.english || ''}`).join(' ');
   return { u, text: fold(`${u.acronym} ${u.title} ${english}`) };
 }
 

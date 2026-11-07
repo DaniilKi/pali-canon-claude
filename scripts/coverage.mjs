@@ -1,7 +1,7 @@
 // Print coverage numbers by collection from the bundled data (used for docs/coverage.md).
 // Usage: node scripts/coverage.mjs [--json]
 import { pathToFileURL } from 'node:url';
-import { isPartial } from '../src/translation-scope.mjs';
+import { isPartial, isShared, isScoped } from '../src/translation-scope.mjs';
 import * as canon from '../src/canon.mjs';
 import * as parallels from '../src/parallels.mjs';
 
@@ -10,9 +10,9 @@ export function buildCoverage() {
   const { translations } = canon.load();
 
   const rows = new Map();
-  const total = { texts: 0, approximate: 0, grouped: 0, direct: 0, english: 0, dhammatalks: 0, ati: 0, anandajoti: 0, partial_texts: 0, partial_links: 0, partial_dhammatalks: 0, partial_ati: 0, partial_anandajoti: 0 };
+  const total = { texts: 0, approximate: 0, grouped: 0, direct: 0, english: 0, dhammatalks: 0, ati: 0, anandajoti: 0, partial_texts: 0, partial_links: 0, partial_dhammatalks: 0, partial_ati: 0, partial_anandajoti: 0, shared_texts: 0, shared_links: 0, shared_dhammatalks: 0, shared_ati: 0, shared_anandajoti: 0 };
   for (const u of d.units) {
-    const r = rows.get(u.collection) ?? { collection: u.collection, name: d.collections[u.collection]?.name ?? u.collection, texts: 0, approximate: 0, grouped: 0, direct: 0, english: 0, dhammatalks: 0, ati: 0, anandajoti: 0, partial_texts: 0, partial_links: 0, partial_dhammatalks: 0, partial_ati: 0, partial_anandajoti: 0 };
+    const r = rows.get(u.collection) ?? { collection: u.collection, name: d.collections[u.collection]?.name ?? u.collection, texts: 0, approximate: 0, grouped: 0, direct: 0, english: 0, dhammatalks: 0, ati: 0, anandajoti: 0, partial_texts: 0, partial_links: 0, partial_dhammatalks: 0, partial_ati: 0, partial_anandajoti: 0, shared_texts: 0, shared_links: 0, shared_dhammatalks: 0, shared_ati: 0, shared_anandajoti: 0 };
     rows.set(u.collection, r);
     r.texts++;
     if (u.approximate) r.approximate++;
@@ -20,12 +20,14 @@ export function buildCoverage() {
     const own = translations[u.id] || [];
     const reach = canon.linksFor(u).links; // Validates every partial declaration before counting.
     for (const t of own) {
-      if (isPartial(t)) { r.partial_links++; r['partial_' + t.source]++; }
+      if (isShared(t)) { r.shared_links++; r['shared_' + t.source]++; }
+      else if (isPartial(t)) { r.partial_links++; r['partial_' + t.source]++; }
       else r[t.source]++;
     }
-    if (own.some(t => !isPartial(t))) r.direct++;
-    if (reach.some(t => !isPartial(t))) r.english++;
+    if (own.some(t => !isScoped(t))) r.direct++;
+    if (reach.some(t => !isScoped(t))) r.english++;
     if (own.some(isPartial)) r.partial_texts++;
+    if (reach.some(isShared)) r.shared_texts++;
   }
   for (const r of rows.values()) for (const k of Object.keys(total)) total[k] += r[k];
   let words = 0, pts = 0;
@@ -56,6 +58,7 @@ if (import.meta.url === pathToFileURL(process.argv[1] || '').href) {
     console.log(`\nbooks ${summary.books} · words ${words} · PTS markers ${pts} · texts ${total.texts} · approximate ${total.approximate} · grouped ${total.grouped}`);
     console.log(`english: ${total.direct} texts directly, ${total.english} incl. inherited · links dhammatalks ${total.dhammatalks} + ati ${total.ati} + anandajoti ${total.anandajoti} = ${total.dhammatalks + total.ati + total.anandajoti}`);
     console.log(`partial translations: ${total.partial_texts} indexed records · ${total.partial_links} links (separate from whole-unit English coverage)`);
+    console.log(`shared pages: ${total.shared_links} declarations · ${total.shared_texts} listed members (not whole-unit coverage or separate translations)`);
     if (parallelsSummary) {
       console.log(`\nparallels: ${parallelsSummary.commentary_citations} commentary citations (${Object.entries(parallelsSummary.by_match).map(([k, v]) => `${k} ${v}`).join(', ')}) · ${parallelsSummary.shared_passages} shared passages`);
       console.log('collection	texts_with_links	cited_by_commentary	commentary_cites	shared_passages');

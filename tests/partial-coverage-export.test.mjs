@@ -75,7 +75,7 @@ test('actual coverage and release-export CLIs preserve synthetic partial scope w
   try {
     const preload = join(stage, 'fixture.mjs'), out = join(stage, 'export');
     writeFileSync(preload, `import * as canon from ${JSON.stringify(pathToFileURL(resolve('src/canon.mjs')).href)};\nimport { syntheticLink } from ${JSON.stringify(pathToFileURL(resolve('tests/helpers/partial-translation.mjs')).href)};\nconst d = canon.load(); d.translations = { ...d.translations, 'patthana1.1': [syntheticLink()] }; globalThis.fetch = () => { throw Error('Unexpected network'); };`);
-    const run = (script, args) => { const r = spawnSync(process.execPath, ['--import', preload, script, ...args], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }); assert.equal(r.status, 0, r.stderr); return r.stdout; };
+    const run = (script, args) => { const r = spawnSync(process.execPath, ['--import', pathToFileURL(preload).href, script, ...args], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }); assert.equal(r.status, 0, r.stderr); return r.stdout; };
     const before = buildCoverage(), report = JSON.parse(run('scripts/coverage.mjs', ['--json']));
     for (const field of numeric) assert.equal(report[field], before[field], field);
     assert.equal(report.partial_links, 1);
