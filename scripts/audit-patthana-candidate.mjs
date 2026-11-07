@@ -16,7 +16,8 @@ export function auditCandidate(candidate = loadCandidate()) {
   assert.equal(candidate.scope.relation, 'proper_subspan', 'The author page is not a whole-unit translation.');
   assert.equal(candidate.scope.whole_unit_translation, false);
   assert.equal(candidate.scope.whole_book_translation, false);
-  assert.equal(candidate.scope.all_24_explanations_compared, false, 'Complete-page approval needs its own evidence.');
+  assert.equal(candidate.scope.all_24_explanations_compared, true);
+  assert.equal(candidate.scope.html_boundaries_verified, false, 'A rendered-text hypothesis is not HTML/translation approval.');
   const data = canon.load(), unit = canon.resolve(candidate.vri.unit).unit;
   assert.equal(data.canon.source.commit, candidate.vri.commit);
   assert.equal(data.canon.books[unit.book].file, candidate.vri.file);
@@ -25,6 +26,7 @@ export function auditCandidate(candidate = loadCandidate()) {
   const byRef = new Map(segments.map(s => [s.ref, s]));
   assert.equal(byRef.get(candidate.vri.candidate_span.first_ref)?.text, '(1) Paccayuddeso');
   const last = segments.findIndex(s => s.ref === candidate.vri.candidate_span.last_ref);
+  const first = segments.findIndex(s => s.ref === candidate.vri.candidate_span.first_ref);
   assert.ok(last > 0 && last < segments.length - 2);
   assert.equal(segments[last + 1].ref, candidate.vri.after_span.ref);
   assert.equal(segments[last + 1].text, candidate.vri.after_span.text);
@@ -32,6 +34,10 @@ export function auditCandidate(candidate = loadCandidate()) {
   assert.equal(segments[last + 2].text, candidate.vri.following_section.title);
   assert.equal(canon.resolve(candidate.vri.next_unit).unit.id, 'patthana1.2');
   assert.notEqual(candidate.vri.next_unit, unit.id);
+  const span = normalized(segments.slice(first, last + 1).map(s => s.text).join(' '));
+  assert.equal(span.length, candidate.full_span_probe.normalized_characters);
+  assert.equal(digest(span), candidate.full_span_probe.normalized_sha256);
+  const matchingUnits = [];
   const probes = candidate.probes.map(p => {
     const target = byRef.get(p.target_ref);
     assert.ok(target, `Probe ${p.source_section} must remain inside the candidate unit.`);
@@ -40,10 +46,15 @@ export function auditCandidate(candidate = loadCandidate()) {
     assert.equal(digest(key), p.normalized_sha256, 'Target changed under the stated normalization.');
     return { ...p, key, actual: [] };
   });
-  for (const u of data.canon.units) for (const segment of canon.segments(u)) {
-    const text = normalized(segment.text);
-    for (const probe of probes) if (text.includes(probe.key)) probe.actual.push(segment.ref);
+  for (const u of data.canon.units) {
+    const pieces = [];
+    for (const segment of canon.segments(u)) {
+      const text = normalized(segment.text); pieces.push(text);
+      for (const probe of probes) if (text.includes(probe.key)) probe.actual.push(segment.ref);
+    }
+    if (pieces.join('').includes(span)) matchingUnits.push(u.id);
   }
+  assert.deepEqual(matchingUnits, candidate.full_span_probe.competing_containment_units, 'Whole-span competition changed; reassess scope.');
   for (const probe of probes) assert.deepEqual(probe.actual, probe.competing_containment_refs, 'Competing source matches changed; reassess rather than silently selecting.');
   const path = new URL(candidate.source.url).pathname;
   const active = Object.entries(data.translations).flatMap(([id, links]) => links
@@ -55,6 +66,7 @@ export function auditCandidate(candidate = loadCandidate()) {
     unit: unit.id, unit_segments: segments.length, candidate_span: candidate.vri.candidate_span,
     untranslated_following_segments: segments.length - last - 1,
     probes: probes.map(p => ({ source_section: p.source_section, normalized_sha256: p.normalized_sha256, competing_refs: p.actual })),
+    full_span_probe: { normalized_characters: span.length, normalized_sha256: digest(span), competing_units: matchingUnits, html_verified: false },
     canonical_units_checked: data.canon.units.length,
     patthana_units: units.length, patthana_units_with_english: units.filter(u => canon.linksFor(u).links.length).length,
     runtime_candidate_links: active.length, network_attempts: 0,

@@ -38,7 +38,9 @@
     "whole_unit_translation": false,
     "whole_book_translation": false,
     "source_section_numbers_are_not_repository_ids": true,
-    "all_24_explanations_compared": false
+    "all_24_explanations_compared": true,
+    "comparison_basis": "Rendered alternating-line hypothesis and normalized aggregate; not raw HTML or English extraction verification",
+    "html_boundaries_verified": false
   },
   "probes": [
     {
@@ -66,8 +68,48 @@
   ],
   "remaining_gates": [
     "Acquire/pin the author artifact through supported access; retain source notices and verify actual HTML, notes and editorial boundaries. Do not retry known denied executor access.",
-    "Compare all 24 complete Pali explanations and neighboring boundaries, retaining edition differences, before approving the full candidate span.",
+    "Confirm all 24 rendered-section boundaries and Pali/English classification against source HTML, retaining orthographic differences ignored by normalization. The 13,678-character aggregate match does not verify English, diacritics or footnote handling.",
     "Represent partial-unit translation scope explicitly in metadata, retrieval, verification and coverage counts; a whole-unit link is not justified.",
     "Complete source-policy/intended-use review and independent boundary review before runtime adoption."
-  ]
+  ],
+  "full_span_probe": {
+    "source_evidence": "Supported rendered view lines 17–1597; all lines present; alternating nonempty lines selected as a Pali-classification hypothesis",
+    "rendered_nonempty_lines": 962,
+    "selected_pali_lines": 481,
+    "normalized_characters": 13678,
+    "normalized_sha256": "2904f22000eb9f099597fddad63f15936d331c6499c4c4174f02b07af1884264",
+    "competing_containment_units": [
+      "patthana1.1"
+    ],
+    "html_artifact_pin": false
+  },
+  "legacy_whole_unit_probe": {
+    "method": "Existing AJ build word-3-gram score on the rendered alternating-line hypothesis; not adoption approval",
+    "target": {
+      "id": "patthana1.1",
+      "coverage": 0.494279176201373
+    },
+    "top": [
+      {
+        "id": "patthana1.1",
+        "coverage": 0.494279176201373
+      },
+      {
+        "id": "patthana1.18",
+        "coverage": 0.04707792207792208
+      },
+      {
+        "id": "patthana1.19",
+        "coverage": 0.03785488958990536
+      },
+      {
+        "id": "patthana24.22",
+        "coverage": 0.03048780487804878
+      },
+      {
+        "id": "patthana20.9",
+        "coverage": 0.03
+      }
+    ]
+  }
 }
