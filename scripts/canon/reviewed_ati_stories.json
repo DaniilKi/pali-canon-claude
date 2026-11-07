@@ -172,6 +172,26 @@
         ]
       },
       "mapping_note": "Whole-poem correspondence, not line-by-line alignment: ATI Thag 21 corresponds by identity and scope to Thag 21.1 (Vaṅgīsattheragāthā). ATI cites Thag 1209-1279; this VRI edition numbers the verses 1218–1288. This is the complete 71-stanza Vaṅgīsa compilation. ATI combines 1235–36 under one marker and skips a section-heading numeral; no verse is inferred missing or reconstructed. Notes link to the source publication and are not supplied as new commentary."
+    },
+    {
+      "unit_id": "sn1.42",
+      "path": "/tipitaka/sn/sn01/sn01.042.than",
+      "pali_title": "Kiṃdadasuttaṃ",
+      "english_title": "A Giver of What",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "SN 1.42",
+      "source_verses": "SN 1.42; PTS S i 32",
+      "vri_verses": "42",
+      "source_html_sha256": "004fa726cfc0107def5305af10266bf99db85072ba94a63b536ffefde9103505",
+      "pali_sha256": "dd1101b258ab7e284b472bb9689eee65f408ec39dd327158da957796b243da28",
+      "evidence": {
+        "basis": "named Kindada/Kiṃdada discourse, PTS S i 32, complete ordered question-and-answer verse sequence; not numbering alone",
+        "vri_numbered_paragraphs": 1,
+        "vri_verse_groups": 3
+      },
+      "mapping_note": "Whole-discourse verse correspondence: ATI Kindada Sutta (SN 1.42, PTS S i 32) matches Kiṃdadasuttaṃ, VRI paragraph 42. The ordered gifts of food, clothing, vehicle, lamp, residence and Dhamma identify the complete dialogue; this is not line-by-line alignment or an inference from the sutta number alone.",
+      "root_blocks_sha256": "c63a80210d3bde9d4c437ea54634923e587b8e4447637a944346154d53820ab9"
     }
   ]
 }

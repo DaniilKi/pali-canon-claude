@@ -53,6 +53,12 @@ external footnotes are not newly imported commentary. See the
 [follow-up review](docs/data/yasoja-and-vangisa.md).
 
 The `reading_plan` tool's study-guide plans list, in order, the texts cited by two of Ṭhānissaro Bhikkhu's Access to Insight study guides ([Into the Stream](https://www.accesstoinsight.org/lib/study/into_the_stream.html), © 2011 Metta Forest Monastery; [The Four Noble Truths](https://www.accesstoinsight.org/lib/study/truths.html), © 1999 Metta Forest Monastery; both CC BY-NC 4.0). Only the guides' citations and links are stored; none of their text is bundled or returned.
+SN 1.42 (Kindada) is also individually reviewed: copyright 1997 Ṭhānissaro
+Bhikkhu, CC BY-NC 4.0. The original licence/citation accompany live reading.
+Its complete question-and-answer verse dialogue is identified by title, ordered
+content and PTS S i 32, not the sutta number alone. See the
+[follow-up source record](docs/data/yasoja-commentary-and-kindada.md).
+
 ## Access to Insight indexes (bundled topic index)
 
 `server/data/topics.json` holds topic names, cross-references and links taken from Access to Insight's [General Index](https://www.accesstoinsight.org/index-subject.html) and [Numerical Index](https://www.accesstoinsight.org/index-number.html), read from commit `45fedca341497120651efa20e756b04a13e61089` of [bcbsit/ati](https://github.com/bcbsit/ati). The text of both pages is “by Access to Insight” and licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); the attribution and licence are returned with every `topic` and `list_topics` result. Only names and links are kept, and each sutta link is mapped to a canon ID by this project. Documents linked from the indexes keep their own terms.

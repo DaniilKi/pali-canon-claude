@@ -11,7 +11,7 @@ const realFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = realFetch; liveCache.clear(); });
 
 test('source-reviewed whole-text links retain exact edition identity and provenance', () => {
-  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1']);
+  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42']);
   for (const row of manifest.links) {
     const u = canon.resolve(row.unit_id).unit;
     const link = canon.load().translations[u.id].find(t => t.match === 'reviewed-story' && t.path === row.path);
@@ -25,7 +25,9 @@ test('source-reviewed whole-text links retain exact edition identity and provena
     const blocks = canon.load().canon.books[u.book].blocks.slice(u.start, u.end);
     const pali = blocks.filter(b => ['gatha1', 'gatha2', 'gatha3', 'gathalast'].includes(b[0])).map(b => b[2]).join('\n');
     assert.equal(createHash('sha256').update(pali).digest('hex'), row.pali_sha256);
-    assert.equal(blocks.filter(b => b[0] === 'hangnum').length, row.evidence.vri_stanzas);
+    if (row.root_blocks_sha256) assert.equal(createHash('sha256').update(JSON.stringify(blocks)).digest('hex'), row.root_blocks_sha256);
+    assert.equal(blocks.filter(b => b[0] === 'hangnum').length, row.evidence.vri_stanzas ?? row.evidence.vri_numbered_paragraphs);
+    if (row.evidence.vri_verse_groups) assert.equal(blocks.filter(b => b[0] === 'gathalast').length, row.evidence.vri_verse_groups);
     assert.deepEqual(link.review, { ati_commit: manifest.ati_commit, vri_commit: manifest.vri_commit,
       source_html_sha256: row.source_html_sha256, pali_sha256: row.pali_sha256 });
     const meta = canon.describe(u).english.find(t => t.translation_id === canon.translationId(link));
@@ -121,6 +123,8 @@ with tempfile.TemporaryDirectory() as tmp:
  mod.MANIFEST=root/'manifest.json';mod.MANIFEST.write_text(json.dumps(manifest))
  canon={'books':[{'blocks':[['gatha1',None,'Synthetic Pali']]}],
  'units':[{'id':'pv1','book':0,'start':0,'end':1,'title':'Fixture','vri':'1'}]}
+ row['root_blocks_sha256']=hashlib.sha256(json.dumps(canon['books'][0]['blocks'],ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
+ mod.MANIFEST.write_text(json.dumps(manifest))
  out={}; assert mod.apply_reviewed_links(out,canon,root)==['pv1']; before=copy.deepcopy(out)
  mod.apply_reviewed_links(out,canon,root);assert out==before
  second=copy.deepcopy(row);second['path']='/tipitaka/kn/pv/fixture2';second['translator']='Another synthetic translator'
@@ -128,9 +132,10 @@ with tempfile.TemporaryDirectory() as tmp:
  manifest['links'].append(second);mod.MANIFEST.write_text(json.dumps(manifest))
  mod.apply_reviewed_links(out,canon,root);assert len(out['pv1'])==2
  stable=copy.deepcopy(out);mod.apply_reviewed_links(out,canon,root);assert out==stable
- for kind in ['scope','identity','source','conflict','other_owner']:
+ for kind in ['scope','unhashed_block','identity','source','conflict','other_owner']:
   c=copy.deepcopy(canon);o=copy.deepcopy(out)
   if kind=='scope': c['books'][0]['blocks'][0][2]='Different'
+  if kind=='unhashed_block': c['books'][0]['blocks'].insert(0,['subhead',None,'Injected heading']);c['units'][0]['end']=2
   if kind=='identity': c['units'][0]['title']='Wrong'
   if kind=='source': (root/'tipitaka/kn/pv/fixture.html').write_bytes(b'Changed')
   if kind=='conflict': o['pv1'][0]['url']='https://www.accesstoinsight.org/other.html'
@@ -143,4 +148,14 @@ with tempfile.TemporaryDirectory() as tmp:
   (root/'tipitaka/kn/pv/fixture.html').write_bytes(raw)
 `], { encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
+});
+
+test('Kindada gains a complete first English choice, without linking its neighbours', () => {
+  const id = 'ati:/tipitaka/sn/sn01/sn01.042.than';
+  const links = english.available(canon.resolve('SN 1.42').unit);
+  assert.equal(links.length, 1);
+  assert.equal(links[0].translation_id, id);
+  assert.match(links[0].mapping_note, /food, clothing, vehicle, lamp, residence and Dhamma/);
+  assert.equal(canon.resolve('https://www.accesstoinsight.org/tipitaka/sn/sn01/sn01.042.than.html').unit.id, 'sn1.42');
+  for (const uid of ['sn1.41', 'sn1.43']) assert.ok(english.available(canon.resolve(uid).unit).every(l => l.translation_id !== id));
 });

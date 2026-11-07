@@ -1057,6 +1057,25 @@
         }
       ],
       "report": "yasoja-and-vangisa.md"
+    },
+    {
+      "decision": "D184",
+      "baseline": "e36bd90903905f673418cc06ce354462b0b915f7",
+      "accepted": [
+        {
+          "path": "tipitaka/sn/sn01/sn01.042.than.html",
+          "unit_id": "sn1.42",
+          "resolution": "Complete named verse dialogue, ordered gift sequence and PTS S i 32 match; CC-BY-NC notice retained."
+        }
+      ],
+      "deferred": [
+        {
+          "path": "tipitaka/sn/sn17/sn17.005.than.html",
+          "unit_id": "sn17.5",
+          "reason": "Distinctive dung-beetle analogy matches, but VRI explicitly abbreviates the framing with peyyala. Full source-scope and edition-note treatment remains unreviewed; do not claim literal full-text alignment."
+        }
+      ],
+      "report": "yasoja-commentary-and-kindada.md"
     }
   ]
 }

@@ -26,8 +26,8 @@ to the preceding story. The three known title variants are explicit pairs in
 `story_spans.py`, not fuzzy matches. Unexpected titles or missing headings stop
 the build rather than guessing. This does not change VRI wording or numbering.
 
-For the legacy bundled pair, unpack as above, download `romn/s0506m.mul.xml` and
-`romn/s0507m.mul.xml` from the **canon's pinned source commit**, then run:
+For the legacy bundled pair, unpack as above, download `romn/s0506m.mul.xml`,
+`romn/s0507m.mul.xml` and `romn/s0508m.mul.xml` from the **canon's pinned source commit**, then run:
 
 ```sh
 python3 scripts/canon/repair_story_spans.py /tmp/pali-inputs/canon.json.gz /tmp/pali-inputs/commentary.json.gz /tmp/pali-vri /tmp/canon-fixed.gz /tmp/commentary-fixed.gz
@@ -56,7 +56,7 @@ generalizes this correction to other Theragāthā poems. See the
 The legacy repair CLI now needs the same pinned `romn/s0508m.mul.xml` as well as
 the two Vv/Pv files. It reannotates changed units only and preserves existing
 commentary root-segment boundaries when refreshing assignments. It does not
-invent an alignment for Yasoja verse 243, which lacks accepted evidence.
+invent an alignment for Yasoja verse 243, which lacked accepted evidence in D183. The source rebuild follow-up below verifies that opening separately (D184).
 
 ### Reviewed ATI story links
 
@@ -188,3 +188,25 @@ python scripts/canon/diff_report.py old/ server/data/ --out report.md --json sum
 ```
 
 Files whose bytes differ but whose parsed content is the same (for example, a different gzip header) count as unchanged.
+
+### Verify and integrate Yasoja's opening commentary (D184)
+
+With the corrected canon, the unchanged `build_commentary.py` accepts the
+Thag-a1 opening passage for verse 243 (`paragraph+lemma`, 8/11 expressions).
+Use pinned `romn/s0508a1.att.xml` alongside the root XML in a working source
+directory containing only that commentary book; rebuild with the normal CLI.
+Then integrate its one reviewed addition into the unpacked complete dataset:
+
+```sh
+python3 scripts/canon/build_commentary.py /tmp/pali-vri 2d134ff9ef60f70a1eb03c9370580228811a3070 /tmp/pali-inputs/canon.json.gz /tmp/thag-a1.gz
+python3 scripts/canon/repair_yasoja_commentary.py /tmp/pali-inputs/commentary.json.gz /tmp/thag-a1.gz server/data/commentary.json.gz
+node scripts/shard-data.mjs
+node scripts/parallels/build.mjs
+npm run check
+```
+
+The integration rejects source-block/provenance drift, deleted passages, changed
+evidence and additional ownership changes. It inserts in source order and
+remaps all numeric passage references, preserving every earlier passage's
+identity. It is idempotent. No source wording or alignment thresholds change.
+The full normal builder needs no special-case alignment override.

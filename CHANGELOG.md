@@ -4,6 +4,11 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Restored Yasoja’s opening commentary using the unchanged source alignment
+  checks; existing passages retain their identity and source order. Added the
+  first English choice for SN 1.42 with individually reviewed scope, title,
+  content and PTS evidence (D184).
+
 - Restored Yasoja's opening stanza to its indexed poem (Thag 3.9), removing it
   from the preceding Vassika citation without changing source wording or accepted
   commentary. Added reviewed English links for Yasoja and the complete 71-stanza

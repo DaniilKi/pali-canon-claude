@@ -1,0 +1,30 @@
+{
+  "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "source_xml_sha256": "8e0de9cd062c353a18df365074209f524fabe3b20c8ec2e44e1ff7c28e1772e9",
+  "passages_before": 14337,
+  "passages_after": 14338,
+  "added_passage": [
+    25,
+    4941,
+    4962,
+    34,
+    243,
+    243,
+    11,
+    8,
+    "paragraph+lemma",
+    0,
+    4393
+  ],
+  "changed_commentary_identities": [
+    "thag3.9"
+  ],
+  "all_source_books_unchanged": true,
+  "all_prior_passage_identities_retained": true,
+  "all_other_unit_passage_identities_unchanged": true,
+  "coverage_and_cited_unaligned_unchanged": true,
+  "changed_translation_units": [
+    "sn1.42"
+  ],
+  "added_english_links": 1
+}
