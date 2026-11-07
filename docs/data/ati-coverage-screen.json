@@ -1213,6 +1213,70 @@
         }
       ],
       "report": "ati-signless-and-an-coverage.md"
+    },
+    {
+      "decision": "D189",
+      "baseline": "6f5165e0916bb4b9bfc1d0bfea613a3b3d171024",
+      "accepted": [
+        {
+          "unit_id": "an3.52",
+          "path": "tipitaka/an/an03/an03.052.than.html",
+          "resolution": "Individual content, PTS, version boundaries, editorial differences and full CC BY-NC notice reviewed; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "an3.89",
+          "path": "tipitaka/an/an03/an03.088.than.html",
+          "resolution": "Individual content, PTS, version boundaries, editorial differences and full CC BY-NC notice reviewed; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "an3.90",
+          "path": "tipitaka/an/an03/an03.089.than.html",
+          "resolution": "Individual content, PTS, version boundaries, editorial differences and full CC BY-NC notice reviewed; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "an4.262",
+          "path": "tipitaka/an/an04/an04.259.than.html",
+          "resolution": "Individual content, PTS, version boundaries, editorial differences and full CC BY-NC notice reviewed; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "an5.64",
+          "path": "tipitaka/an/an05/an05.064.than.html",
+          "resolution": "Individual content, PTS, version boundaries, editorial differences and full CC BY-NC notice reviewed; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "an6.102",
+          "path": "tipitaka/an/an06/an06.102.than.html",
+          "resolution": "Individual content, PTS, version boundaries, editorial differences and full CC BY-NC notice reviewed; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "an6.104",
+          "path": "tipitaka/an/an06/an06.104.than.html",
+          "resolution": "Individual content, PTS, version boundaries, editorial differences and full CC BY-NC notice reviewed; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "an7.23",
+          "path": "tipitaka/an/an07/an07.021.than.html",
+          "resolution": "Individual content, PTS, version boundaries, editorial differences and full CC BY-NC notice reviewed; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "an7.33",
+          "path": "tipitaka/an/an07/an07.032.than.html",
+          "resolution": "Individual content, PTS, version boundaries, editorial differences and full CC BY-NC notice reviewed; evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "an7.51",
+          "path": "tipitaka/an/an07/an07.048.than.html",
+          "resolution": "Individual content, PTS, version boundaries, editorial differences and full CC BY-NC notice reviewed; evidence in manifest and batch report."
+        }
+      ],
+      "deferred": [
+        {
+          "unit_id": "sn36.15",
+          "path": "tipitaka/sn/sn36/sn36.015.nypo.html",
+          "reason": "The unit has one heading and one prose segment containing all three VRI treatments. Existing partial_scope requires a proper contiguous span leaving other prose outside; it cannot isolate the shorter English treatment. Hold pending precise scoped representation or validated condensed-edition comparison; do not relabel the entire prose segment partial."
+        }
+      ],
+      "report": "ati-an-training-and-growth.md"
     }
   ]
 }

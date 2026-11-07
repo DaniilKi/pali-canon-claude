@@ -90,6 +90,14 @@ notice. The additional Ṭhānissaro pages are SN 35.197 → indexed SN 35.238
 reading; English bodies are not bundled. See the
 [source review](docs/data/ati-signless-and-an-coverage.md) for editorial scope.
 
+The ten D189 AN choices are Ṭhānissaro’s CC BY-NC 4.0 pages: AN 3.52
+(1997); ATI AN 3.88/3.89 → indexed AN 3.89/3.90 (1998); ATI AN 4.259 →
+indexed AN 4.262 (2002); AN 5.64 (2003); AN 6.102/6.104 (2004); ATI AN
+7.21/7.32/7.48 → indexed AN 7.23/7.33/7.51 (1997/2012/1997). Full source
+notices and citations remain in live reading, with edition/editorial differences
+disclosed. No English bodies are bundled. See the
+[batch review](docs/data/ati-an-training-and-growth.md).
+
 ## Access to Insight indexes (bundled topic index)
 
 `server/data/topics.json` holds topic names, cross-references and links taken from Access to Insight's [General Index](https://www.accesstoinsight.org/index-subject.html) and [Numerical Index](https://www.accesstoinsight.org/index-number.html), read from commit `45fedca341497120651efa20e756b04a13e61089` of [bcbsit/ati](https://github.com/bcbsit/ati). The text of both pages is “by Access to Insight” and licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); the attribution and licence are returned with every `topic` and `list_topics` result. Only names and links are kept, and each sutta link is mapped to a canon ID by this project. Documents linked from the indexes keep their own terms.

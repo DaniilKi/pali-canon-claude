@@ -4,6 +4,11 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Added ten first-English AN choices with independently reviewed content and
+  edition numbering. Paired trainings, female/male growth and same-titled
+  Anodhi texts retain distinct ownership. Refined SN 36.15’s scope hold: its
+  single prose segment cannot honestly be marked a proper partial span (D189).
+
 - Added seven first-English choices across SN and AN, with explicit older
   ATI numbering, condensed repetitions and editorial-note scope. Completed
   SN 40.9’s prefatory/notes review. Reviewed AN paths now require complete

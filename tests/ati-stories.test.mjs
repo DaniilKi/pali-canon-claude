@@ -6,12 +6,13 @@ import { spawnSync } from 'node:child_process';
 import * as canon from '../src/canon.mjs';
 import * as english from '../src/english.mjs';
 import { liveCache } from '../src/cache.mjs';
+import { partialScope, scopeHash } from '../src/translation-scope.mjs';
 const manifest = JSON.parse(readFileSync('scripts/canon/reviewed_ati_stories.json', 'utf8'));
 const realFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = realFetch; liveCache.clear(); });
 
 test('source-reviewed whole-text links retain exact edition identity and provenance', () => {
-  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16', 'sn7.21', 'sn22.109', 'sn22.110', 'sn22.121', 'sn25.5', 'sn47.35', 'sn40.9', 'sn22.7', 'sn35.238', 'sn55.24', 'an4.77', 'an3.136', 'an5.130']);
+  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16', 'sn7.21', 'sn22.109', 'sn22.110', 'sn22.121', 'sn25.5', 'sn47.35', 'sn40.9', 'sn22.7', 'sn35.238', 'sn55.24', 'an4.77', 'an3.136', 'an5.130', 'an3.52', 'an3.89', 'an3.90', 'an4.262', 'an5.64', 'an6.102', 'an6.104', 'an7.23', 'an7.33', 'an7.51']);
   for (const row of manifest.links) {
     const u = canon.resolve(row.unit_id).unit;
     const link = canon.load().translations[u.id].find(t => t.match === 'reviewed-story' && t.path === row.path);
@@ -313,4 +314,47 @@ with tempfile.TemporaryDirectory() as tmp:
   except ValueError:pass
   else:raise AssertionError(path)
 `],{encoding:'utf8'});assert.equal(r.status,0,r.stderr);
+});
+
+test('new AN edition numbers resolve by reviewed ownership, never a shared arithmetic offset',async()=>{
+ const rows=[['an3.89','an3.88','an03/an03.088.than'],['an3.90','an3.89','an03/an03.089.than'],['an4.262','an4.259','an04/an04.259.than'],['an7.23','an7.21','an07/an07.021.than'],['an7.33','an7.32','an07/an07.032.than'],['an7.51','an7.48','an07/an07.048.than']];
+ let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Must not fetch');};
+ for(const [right,wrong,path]of rows){
+  const id='ati:/tipitaka/an/'+path;assert.ok(english.available(canon.resolve(right).unit).some(l=>l.translation_id===id));
+  assert.equal(canon.resolve('https://www.accesstoinsight.org/tipitaka/an/'+path+'.html').unit.id,right);
+  assert.ok(english.available(canon.resolve(wrong).unit).every(l=>l.translation_id!==id));
+  await assert.rejects(english.translation(canon.resolve(wrong).unit,id));
+ }
+ assert.equal(calls,0);
+});
+
+test('the two training versions keep their distinct wisdom definition and final verse scope',async()=>{
+ const first='ati:/tipitaka/an/an03/an03.088.than',second='ati:/tipitaka/an/an03/an03.089.than';
+ const a=canon.resolve('an3.89').unit,b=canon.resolve('an3.90').unit;
+ const text=u=>canon.segments(u).map(s=>s.text).join(' ');
+ assert.match(text(a),/idaṃ dukkha/);assert.doesNotMatch(text(a),/Pajjotasseva/);
+ assert.match(text(b),/āsavānaṃ khayā/);assert.match(text(b),/Pajjotasseva nibbānaṃ/);
+ assert.match(english.available(a).find(l=>l.translation_id===first).mapping_note,/four noble truths/);
+ assert.match(english.available(b).find(l=>l.translation_id===second).mapping_note,/five concluding stanzas/);
+ let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Must not fetch');};
+ await assert.rejects(english.translation(a,second));await assert.rejects(english.translation(b,first));assert.equal(calls,0);
+});
+
+test('close growth and Anodhi versions are distinguished by actual subject and item scope',async()=>{
+ const female='ati:/tipitaka/an/an05/an05.064.than';
+ assert.match(english.available(canon.resolve('an5.64').unit).find(l=>l.translation_id===female).mapping_note,/female.*AN 5.63/);
+ const one='ati:/tipitaka/an/an06/an06.102.than',three='ati:/tipitaka/an/an06/an06.104.than';
+ assert.match(english.available(canon.resolve('an6.104').unit).find(l=>l.translation_id===three).mapping_note,/both final items remain represented/);
+ assert.match(english.available(canon.resolve('an7.33').unit).find(l=>l.path?.includes('an07.032')||l.translation_id.includes('an07.032')).mapping_note,/three circuits.*without a count/);
+ let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Must not fetch');};
+ for(const [uid,id]of [['an5.63',female],['an6.102',three],['an6.104',one],['an6.103',one],['an6.103',three]])await assert.rejects(english.translation(canon.resolve(uid).unit,id));
+ assert.equal(calls,0);
+});
+
+test('SN 36.15 cannot mislabel its single entire prose segment as a reviewed partial span',()=>{
+ const u=canon.resolve('sn36.15').unit,segs=canon.segments(u),body=segs.filter(s=>s.type!=='heading');assert.equal(body.length,1);
+ const selected=body.map(({ref,type,text})=>({ref,type,text}));
+ const source=canon.load().canon.source;
+ const link={source:'ati',path:'/tipitaka/sn/sn36/sn36.015.nypo',partial_scope:{version:1,status:'reviewed',unit_id:u.id,first_ref:body[0].ref,last_ref:body[0].ref,source_commit:source.commit,pali_sha256:scopeHash(selected),text_sha256:'0'.repeat(64)}};
+ assert.throws(()=>partialScope(link,u,segs,source),/Invalid or unreviewed partial translation scope/);
 });

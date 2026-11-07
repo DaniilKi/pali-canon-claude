@@ -572,6 +572,206 @@
         "vri_verse_groups": 1
       },
       "mapping_note": "Whole-discourse correspondence despite different titles: ATI Sampada Sutta (AN 5.130, PTS A iii 147) matches Byasanasuttaṃ, VRI paragraph 130. Both the five losses and five successes, with the first-three/final-two distinction, identify the full discourse. The indexed VRI chapter ending and recap are paratext, not separately translated works. This is not line-by-line alignment or a title/number-only inference."
+    },
+    {
+      "unit_id": "an3.52",
+      "path": "/tipitaka/an/an03/an03.052.than",
+      "pali_title": "Dutiyadvebrāhmaṇasuttaṃ",
+      "english_title": "Two People (2)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 3.52",
+      "source_verses": "AN 3.52; PTS A i 156",
+      "vri_verses": "53",
+      "source_html_sha256": "b257bb167630d9747e50aae3a087221ab6ac1d9986477cc6b404e2ec9e737679",
+      "pali_sha256": "be9227b5c25f78f7ee13a235e68c36cee8ebe46890ff1f7d5a74cdd248a57357",
+      "root_blocks_sha256": "12b765200c316eac10cc9fcf9530e3a2f564ff62992bc5378f702247496d5aa9",
+      "evidence": {
+        "basis": "Two 120-year-old brahmans, world burning with aging/illness/death, restraint as refuge and salvaged-vessel/giving verses; distinct second old-brahman discourse.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 3
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Dvejana Sutta (AN 3.52, PTS A i 156) matches Dutiyadvebrāhmaṇasuttaṃ, VRI paragraph 53. The two 120-year-old brahmans, burning-world reply and salvaged-vessel/giving verses identify the second discourse, not AN 3.51. ATI supplies a Savatthi setting and courteous-greeting frame where the indexed VRI unit begins with arrival and homage. This is not line-by-line alignment or numbering-only inference."
+    },
+    {
+      "unit_id": "an3.89",
+      "path": "/tipitaka/an/an03/an03.088.than",
+      "pali_title": "Paṭhamasikkhattayasuttaṃ",
+      "english_title": "Trainings (1)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 3.88",
+      "source_verses": "AN 3.88; PTS A i 235",
+      "vri_verses": "90",
+      "source_html_sha256": "da9e596fb9e096645d9801cc526d94c9aa2fdd907cdb5b7ff225113724c272a8",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "72c117c46e23abaafd00305e8810f53371de28c828d17f6a3fb011703fdcc42d",
+      "evidence": {
+        "basis": "Three trainings: virtue, four jhanas, discernment of four noble truths; no final training verses. Shared PTS page with next discourse cannot distinguish alone.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence with edition numbering: ATI Sikkha Sutta (AN 3.88, PTS A i 235) maps to indexed AN 3.89 (Paṭhamasikkhattayasuttaṃ), VRI paragraph 90. Its heightened-discernment definition concerns the four noble truths, unlike the release definition and final verses in indexed AN 3.90. ATI expands stock virtue/jhana formulas VRI abbreviates. Editorial cross-references retain ATI numbering and do not establish extra alignments. This is not line-by-line alignment or a general offset rule."
+    },
+    {
+      "unit_id": "an3.90",
+      "path": "/tipitaka/an/an03/an03.089.than",
+      "pali_title": "Dutiyasikkhattayasuttaṃ",
+      "english_title": "Trainings (2)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 3.89",
+      "source_verses": "AN 3.89; PTS A i 235",
+      "vri_verses": "91",
+      "source_html_sha256": "4b93bcd88dc0a69447a1935631c1312733be196ae11f0f5043d25235fbd8c97d",
+      "pali_sha256": "4aaddc56747fcaf6f0faec826d7c1f3bd66da0ffdb6c14b591b85391aadb3669",
+      "root_blocks_sha256": "f0bc62cfd9f11f98ffd93cdcd5ea3becd6213fc588720e8f39ffe1513c27e496",
+      "evidence": {
+        "basis": "Three trainings: virtue, four jhanas, ending fermentations and direct release, followed by five training stanzas and flame/unbinding conclusion.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 5
+      },
+      "mapping_note": "Whole-discourse correspondence with edition numbering: ATI Sikkha Sutta (AN 3.89, PTS A i 235) maps to indexed AN 3.90 (Dutiyasikkhattayasuttaṃ), VRI paragraph 91. Release through ending fermentations and five concluding stanzas distinguish it from indexed AN 3.89’s four-truths definition. ATI expands stock virtue/jhana formulas; its flame-image Note and cross-references are editorial and retain publisher numbering. This is not line-by-line alignment or a general offset rule."
+    },
+    {
+      "unit_id": "an4.262",
+      "path": "/tipitaka/an/an04/an04.259.than",
+      "pali_title": "Araññasuttaṃ",
+      "english_title": "A Wilderness Dweller",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 4.259",
+      "source_verses": "AN 4.259; PTS A ii 252",
+      "vri_verses": "262",
+      "source_html_sha256": "75485a06ca0be753acd1bed0c3ac5db17c44f2368f889814e2dce998a44433dc",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "442a903c632215bfcd94ec7a65994255027c36a22aa59af4731519ecb22fdbe8",
+      "evidence": {
+        "basis": "Four unsuitable wilderness qualities (sensual/hostile/harmful thought and weak discernment) contrasted with their four suitable opposites; both sections match.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence with edition numbering: ATI Arannika Sutta (AN 4.259, PTS A ii 252) matches indexed AN 4.262 (Araññasuttaṃ), VRI paragraph 262. The unsuitable/suitable thought-and-discernment contrasts establish identity, not a general +3 rule. Bracketed glosses and “See also” references are publisher/editorial material. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an5.64",
+      "path": "/tipitaka/an/an05/an05.064.than",
+      "pali_title": "Dutiyavaḍḍhisuttaṃ",
+      "english_title": "Growth",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 5.64",
+      "source_verses": "AN 5.64; PTS A iii 80",
+      "vri_verses": "64",
+      "source_html_sha256": "5205f566584a624764e5c64268d025e94858ec7e69ebe31a5a9fe5e2b9983ba7",
+      "pali_sha256": "edd26d29eb96bb5be2793d46cfed3f2c3e90ee93fa801207a99a51b26d07b7b8",
+      "root_blocks_sha256": "cbcec2e92b8985bd20ea98437b29eea79126b7e225cfc915a4eade78bc6536e8",
+      "evidence": {
+        "basis": "Female noble disciple grows in faith, virtue, learning, generosity, wisdom; female lay-disciple verse. Adjacent 5.63 concerns male disciple.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 1
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Vuddhi Sutta (AN 5.64, PTS A iii 80) matches Dutiyavaḍḍhisuttaṃ, VRI paragraph 64. Its female noble disciple, five growth qualities and female lay-disciple verse distinguish it from the neighboring male-disciple AN 5.63. This is not line-by-line alignment or a title/number-only inference."
+    },
+    {
+      "unit_id": "an6.102",
+      "path": "/tipitaka/an/an06/an06.102.than",
+      "pali_title": "Anavatthitasuttaṃ",
+      "english_title": "Without Exception (1)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 6.102",
+      "source_verses": "AN 6.102; PTS A iii 443",
+      "vri_verses": "102",
+      "source_html_sha256": "8615e7f9daed03244ca14190dd379e9bc50bd1428691c7ed8742b5f42f1b0b46",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "396d162c063c8f8e292eab3360692f63f049b9a88306f9391105012008e8f893",
+      "evidence": {
+        "basis": "Perception of impermanence in all formations; six ordered rewards from instability to foremost contemplative qualities. Distinct from 6.104 not-self list.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Anodhi Sutta (AN 6.102, PTS A iii 443) matches Anavatthitasuttaṃ, VRI paragraph 102. Impermanence in formations and six ordered rewards identify this version, not the similarly titled not-self discourse AN 6.104. The fetter Note and “See also” references are editorial, not additional coverage. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an6.104",
+      "path": "/tipitaka/an/an06/an06.104.than",
+      "pali_title": "Atammayasuttaṃ",
+      "english_title": "Without Exception (3)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 6.104",
+      "source_verses": "AN 6.104; PTS A iii 444",
+      "vri_verses": "104",
+      "source_html_sha256": "f0c366b42f0e0eca3859440ac4a87a2a03a034e256f73fc003f062acafe9dc0b",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "22a0b66712a2a8465ecea5d0f86b69792b326eb27c16fce5c1365f26fcaf9bea",
+      "evidence": {
+        "basis": "Not-self perception in all phenomena; non-identification, ending I-making/my-making, uncommon knowledge, seeing cause and causally arisen phenomena. Last two combined in English sentence.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Anodhi Sutta (AN 6.104, PTS A iii 444) matches Atammayasuttaṃ, VRI paragraph 104. Its not-self perception, non-identification and I/my-making list distinguish it from AN 6.102. English combines seeing cause and causally originated phenomena in one sentence; both final items remain represented. The uncommon-knowledge Note is commentary interpretation, not canonical speech. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an7.23",
+      "path": "/tipitaka/an/an07/an07.021.than",
+      "pali_title": "Paṭhamasattakasuttaṃ",
+      "english_title": "Conditions for No Decline Among the Monks",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 7.21",
+      "source_verses": "AN 7.21; PTS A iv 21",
+      "vri_verses": "23",
+      "source_html_sha256": "e5226603e5abeff9ab5949ef179d07197677af7444130cd26d6d684bc4d20d62",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "ef1bbd83a512196fbb839950603aed2c40fe044e90bd296e5ae4b12d134931e2",
+      "evidence": {
+        "basis": "Rajagaha Vulture Peak; seven monastic conditions: frequent/harmonious meetings, training rules, elders, craving, wilderness, welcoming good companions; conclusion.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence with edition numbering: ATI Bhikkhu-aparihaniya Sutta (AN 7.21, PTS A iv 21) maps to indexed AN 7.23 (Paṭhamasattakasuttaṃ), VRI paragraph 23. The setting, ordered seven monastic conditions and repeated growth/no-decline conclusion establish identity, not a general +2 rule. ATI’s bracketed numerals label the list; this is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an7.33",
+      "path": "/tipitaka/an/an07/an07.032.than",
+      "pali_title": "Hirigāravasutta",
+      "english_title": "A Sense of Shame",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 7.32",
+      "source_verses": "AN 7.32; PTS A iv 28",
+      "vri_verses": "33",
+      "source_html_sha256": "ca8f5615061d1e8d8c800e947cd624ef3b9d169eb2dd0f31f647ec856d41aec6",
+      "pali_sha256": "9c8c2df6948d8c2238449aebd3d84d4a8487e5d0fb4398e23ddfe7f31ae08bd2",
+      "root_blocks_sha256": "6aac07fec3a6df9f41c9e78bc34427fbf946c0a3fbedc5b587bd1c696cb5e525",
+      "evidence": {
+        "basis": "Radiant deity reports seven respects ending shame and compunction; departure and two stanzas. Distinct from heedfulness-centered neighboring text.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 2
+      },
+      "mapping_note": "Whole-discourse correspondence with edition numbering: ATI Hirima Sutta (AN 7.32, PTS A iv 28) maps to indexed AN 7.33 (Hirigāravasutta), VRI paragraph 33. The deity’s seven respects ending shame/compunction and two final stanzas establish identity. ATI specifies three circuits at departure; VRI states circumambulation without a count. Editorial cross-references retain ATI numbering. This is not line-by-line alignment or a general offset rule."
+    },
+    {
+      "unit_id": "an7.51",
+      "path": "/tipitaka/an/an07/an07.048.than",
+      "pali_title": "Saṃyogasuttaṃ",
+      "english_title": "Bondage",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 7.48",
+      "source_verses": "AN 7.48; PTS A iv 57",
+      "vri_verses": "51",
+      "source_html_sha256": "8eccc400593907d013a65d1411a4e4133a325f8ae2ec1233fd96ed13febe3e50",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "4c51c702ab28e0132cfb5a068635a4efb4d26e1b66b438870cdb416c5bde345b",
+      "evidence": {
+        "basis": "Four mirrored sections: woman/man attending inward to own sex traits and outward to others, followed by corresponding non-bondage contrasts and conclusion.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence with edition numbering: ATI Sannoga Sutta (AN 7.48, PTS A iv 57) maps to indexed AN 7.51 (Saṃyogasuttaṃ), VRI paragraph 51. Four mirrored woman/man bondage and non-bondage sections identify the discourse. ATI condenses repeated negative lists; VRI abbreviates part of its introduction. This is not line-by-line alignment or a general +3 rule."
     }
   ]
 }
