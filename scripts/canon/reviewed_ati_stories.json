@@ -852,6 +852,146 @@
         "vri_verse_groups": 3
       },
       "mapping_note": "Whole-discourse correspondence: ATI Sandha Sutta AN 11.10 maps to indexed AN 11.9 (Saddhasuttaṃ), VRI paragraph 9. The Brick Hall setting, colt/thoroughbred contrasts, hindrance/dependency lists, three homage occurrences and concluding perception explanation establish whole-discourse correspondence. ATI calls the interlocutor Sandha; VRI uses Saddha. Both use stock-list abbreviations. The two Notes are editorial glosses, not additional canonical text. No general minus-one rule is inferred. This is not line-by-line alignment. Source wording caution: in its positive thoroughbred section ATI says “obsessed with uncertainty”, while VRI has na vicikicchāparetena (not obsessed with uncertainty). The published English is preserved, not silently corrected; the two wordings are not equivalent."
+    },
+    {
+      "unit_id": "an2.9",
+      "path": "/tipitaka/an/an02/an02.009.than",
+      "pali_title": "Cariyasuttaṃ",
+      "english_title": "Guardians of the World",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 2.9",
+      "source_verses": "AN 2.9; PTS A i 51",
+      "vri_verses": "9",
+      "source_html_sha256": "eb8b081531226b4bf159bca7cdf02f5f3918ac790b7af2307cebd8a6c2ec1a7f",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "120d3c22eecc92d4ff69d67466af16ea0b9c743c67f978acbc99b7e93926340b",
+      "evidence": {
+        "basis": "Two bright guardians hiri/ottappa; kinship/respect relationships and animal promiscuity counterfactual, ending with preserved distinctions.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Lokapala Sutta AN 2.9 matches indexed AN 2.9 (Cariyasuttaṃ), VRI paragraph 9. The two bright qualities, kinship/respect relationships and animal counterfactual identify the whole discourse. English conscience/concern are translator renderings of hirī/ottappa; the explanatory Note and See also are editorial, not extra canonical scope. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an2.19",
+      "path": "/tipitaka/an/an02/an02.019.than",
+      "pali_title": "Adhikaraṇavaggo",
+      "english_title": "Skillful",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 2.19",
+      "source_verses": "AN 2.19; PTS A i 58",
+      "vri_verses": "19",
+      "source_html_sha256": "409667cf1c032ed6fde7b296d23f86d3d5bf406e85cd0aa976b8cb73e2c3cc19",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "53eadc08b929a301bf8139e9cbfbef98588c07c1a2e07ac21d21ce9dfd492064",
+      "evidence": {
+        "basis": "Both unskillful-abandoning and skillful-developing sections; possibility argument and harm/pain versus benefit/pleasure conditionals.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Kusala Sutta AN 2.19 matches indexed AN 2.19, VRI paragraph 19. Both abandoning the unskillful and developing the skillful, their possibility arguments and harm/benefit conditionals establish whole-text identity. Indexed title Adhikaraṇavaggo is the containing chapter label, not an inferred independent sutta title. See also references are editorial. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an2.24",
+      "path": "/tipitaka/an/an02/an02.025.than",
+      "pali_title": "Bālavaggo",
+      "english_title": "A Meaning to be Inferred",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 2.25",
+      "source_verses": "AN 2.25; PTS A i 60",
+      "vri_verses": "25",
+      "source_html_sha256": "673b5873cb31dab16119bd5025e613c5099c5b91176f44d37492165c4225990c",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "cefc1835e8636f7369c949f9dab5412e13fa045306aef535b466ff8fdf47802d",
+      "evidence": {
+        "basis": "Two reciprocal misrepresentations: treating inferential meaning as explicit and explicit meaning as inferential.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Neyyatha Sutta AN 2.25 maps to indexed AN 2.24, VRI paragraph 25. The reciprocal neyyattha/nītattha misrepresentation contrasts establish identity, not the shared PTS page or a general offset. Indexed title Bālavaggo is the containing chapter label. The publisher reference remains AN 2.25. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an3.39",
+      "path": "/tipitaka/an/an03/an03.038.than",
+      "pali_title": "Sukhumālasuttaṃ",
+      "english_title": "Refinement",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 3.38",
+      "source_verses": "AN 3.38; PTS A i 145",
+      "vri_verses": "39",
+      "source_html_sha256": "cedfb24a3cf500f24a32fb9b579323177b4aa1cfb04951b17b49d48c97d2ded8",
+      "pali_sha256": "270be6fbbe75a0625b69efe39254bc169565ae4bd6dc3bf5e3fed6b57961d961",
+      "root_blocks_sha256": "60e4de10b14df5e43fbed82b8ab2e46e4f059de41fbbefbf4b303f84281d8366",
+      "evidence": {
+        "basis": "Autobiographical luxury, three aging/illness/death reflections, three intoxications with misconduct and monk reversion, five closing verse groups.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 5
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Sukhamala Sutta AN 3.38 maps as a complete combined page to indexed AN 3.39 (Sukhumālasuttaṃ), VRI paragraph 39. The publisher note explains its PTS III.38/III.39 split at the triple asterisk; both parts belong to this one VRI unit. Luxury, three reflections, intoxication/misconduct and monk-reversion sections, and closing verses establish scope; indexed AN 3.38 is instead the Sakka uposatha discourse. Source wording caution: the English closing verse begins “Subject to birth”, whereas VRI begins Byādhidhammā (subject to illness). Preserve both published readings without silent correction. Translator note and See also are editorial. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an3.86",
+      "path": "/tipitaka/an/an03/an03.085.than",
+      "pali_title": "Paṭhamasikkhāsuttaṃ",
+      "english_title": "One in Training (1)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 3.85",
+      "source_verses": "AN 3.85; PTS A i 231",
+      "vri_verses": "87",
+      "source_html_sha256": "c19a9a7f2984929bcacc82cfa095f753eca696b124ed1105207ece0c7444e94f",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "894d436b0404217299d060df55eb04c11dc728818cbdda357f3f2806e2e670f7",
+      "evidence": {
+        "basis": "More than150 rules and three trainings; four accomplishments yielding stream-winner, once-returner, non-returner, arahant; partial/full conclusion.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Sekhin Sutta AN 3.85 maps to indexed AN 3.86 (Paṭhamasikkhāsuttaṃ), VRI paragraph 87. More-than-150 rules, three trainings, four ordered accomplishment/outcome sections and final partial/full conclusion distinguish it from indexed AN 3.85’s short learner inquiry and verses and AN 3.87’s expanded rebirth subclasses. The two Notes, including the historical rule-count discussion and AN 3.88 cross-reference, are editorial; no extra alignment is inferred. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an3.87",
+      "path": "/tipitaka/an/an03/an03.086.than",
+      "pali_title": "Dutiyasikkhāsuttaṃ",
+      "english_title": "One in Training (2)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 3.86",
+      "source_verses": "AN 3.86; PTS A i 232",
+      "vri_verses": "88",
+      "source_html_sha256": "3ca87d245201f511f5df8f6e81eaa5e6cdfa0f8aff79bee747534e531e335ab8",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "6e83ddd1f168b1e7e66114c41a6e6131bab12e1bc5c57f37d8e6a1386cd719df",
+      "evidence": {
+        "basis": "Same rules/trainings frame; seven-times/family-to-family/one-seed/once-returner and five nonreturner categories; final arahant and partial/full conclusion.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Sekhin Sutta AN 3.86 maps to indexed AN 3.87 (Dutiyasikkhāsuttaṃ), VRI paragraph 88. Explicit stream-entry rebirth subclasses and five non-returner subclasses distinguish this second training text from indexed AN 3.86. ATI expands repeated formulas, including a shortened VRI final accomplishment paragraph; the tool does not reconstruct Pāli. Four Notes include commentary interpretation and translator criticism, not extra canonical speech. References retain publisher numbering. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an10.13",
+      "path": "/tipitaka/an/an10/an10.013.than",
+      "pali_title": "Saṃyojanasuttaṃ",
+      "english_title": "Fetters",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 10.13",
+      "source_verses": "AN 10.13; PTS A v 17",
+      "vri_verses": "13",
+      "source_html_sha256": "06b1b326d14167c696db4b02763243dcdda9f94cf0192ea701132f0aa066c6eb",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "c361a814b8a2e7c1f922e619bbb5aafd23384726c5a0c100ef8d76323a3f44c8",
+      "evidence": {
+        "basis": "Ten fetters divided into five lower and five higher, in corresponding order.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Sanyojana Sutta AN 10.13 matches indexed AN 10.13 (Saṃyojanasuttaṃ), VRI paragraph 13. Both five-lower and five-higher fetter lists match in order. This is an additional earlier ATI choice alongside the existing dhammatalks.org version, not a newly English-covered text. PTS overlap with neighbouring unlinked units does not license links to AN 10.12 or AN 10.14. This is not line-by-line alignment."
     }
   ]
 }

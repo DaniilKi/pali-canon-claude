@@ -12,7 +12,7 @@ const realFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = realFetch; liveCache.clear(); });
 
 test('source-reviewed whole-text links retain exact edition identity and provenance', () => {
-  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16', 'sn7.21', 'sn22.109', 'sn22.110', 'sn22.121', 'sn25.5', 'sn47.35', 'sn40.9', 'sn22.7', 'sn35.238', 'sn55.24', 'an4.77', 'an3.136', 'an5.130', 'an3.52', 'an3.89', 'an3.90', 'an4.262', 'an5.64', 'an6.102', 'an6.104', 'an7.23', 'an7.33', 'an7.51', 'an3.109', 'an4.124', 'an4.173', 'an11.9']);
+  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16', 'sn7.21', 'sn22.109', 'sn22.110', 'sn22.121', 'sn25.5', 'sn47.35', 'sn40.9', 'sn22.7', 'sn35.238', 'sn55.24', 'an4.77', 'an3.136', 'an5.130', 'an3.52', 'an3.89', 'an3.90', 'an4.262', 'an5.64', 'an6.102', 'an6.104', 'an7.23', 'an7.33', 'an7.51', 'an3.109', 'an4.124', 'an4.173', 'an11.9', 'an2.9', 'an2.19', 'an2.24', 'an3.39', 'an3.86', 'an3.87', 'an10.13']);
   for (const row of manifest.links) {
     const u = canon.resolve(row.unit_id).unit;
     const link = canon.load().translations[u.id].find(t => t.match === 'reviewed-story' && t.path === row.path);
@@ -382,4 +382,47 @@ test('the second absorption discourse retains publisher abbreviations and three 
   assert.equal(sandha.evidence.vri_verse_groups, 3);
   assert.match(sandha.mapping_note, /ATI says.*obsessed with uncertainty.*VRI has na vicikicchāparetena.*not obsessed/s);
   assert.match(sandha.mapping_note, /three homage occurrences.*two Notes are editorial/);
+});
+
+test('early AN pages retain slander polarity, distinct training outcomes and individual edition numbering', async () => {
+  const cases = [
+    ['an2.9', '/tipitaka/an/an02/an02.009.than', ['an2.8', 'an2.10']],
+    ['an2.19', '/tipitaka/an/an02/an02.019.than', ['an2.20']],
+    ['an2.24', '/tipitaka/an/an02/an02.025.than', ['an2.25']],
+    ['an3.39', '/tipitaka/an/an03/an03.038.than', ['an3.38']],
+    ['an3.86', '/tipitaka/an/an03/an03.085.than', ['an3.85', 'an3.87']],
+    ['an3.87', '/tipitaka/an/an03/an03.086.than', ['an3.86']],
+    ['an10.13', '/tipitaka/an/an10/an10.013.than', ['an10.12', 'an10.14']],
+  ];
+  let calls = 0; globalThis.fetch = async () => { calls++; throw Error('Must not fetch'); };
+  for (const [uid, path, wrong] of cases) {
+    assert.ok(english.available(canon.resolve(uid).unit).some(t => t.translation_id === `ati:${path}`));
+    assert.equal(canon.resolve(`https://www.accesstoinsight.org${path}.html`).unit.id, uid);
+    for (const other of wrong) await assert.rejects(english.translation(canon.resolve(other).unit, `ati:${path}`));
+  }
+  assert.equal(calls, 0);
+});
+
+test('combined refinement edition and distinct training editorial material stay explicit; fetters primary survives', () => {
+  const note = id => manifest.links.find(r => r.unit_id === id).mapping_note;
+  assert.match(note('an3.39'), /PTS III.38\/III.39.*one VRI unit/);
+  assert.match(note('an3.39'), /Subject to birth.*Byādhidhammā.*illness/);
+  assert.match(note('an3.86'), /four ordered accomplishment.*two Notes/);
+  assert.match(note('an3.87'), /five non-returner subclasses.*Four Notes.*translator criticism/);
+  const unit = canon.resolve('an10.13').unit, links = canon.linksFor(unit).links;
+  assert.equal(links.length, 2); assert.equal(links[0].source, 'dhammatalks');
+  assert.ok(links[0].url.endsWith('/AN10_13.html'));
+  assert.equal(english.selectTranslation(links, 'ati:/tipitaka/an/an10/an10.013.than', unit.id).link.source, 'ati');
+});
+
+test('AN 2.47 omitted foremost-assembly ending cannot be hidden by whole-segment partial scope', () => {
+  const u = canon.resolve('an2.47').unit, segs = canon.segments(u);
+  assert.equal(segs.length, 2); assert.ok(segs.every(s => s.type !== 'heading'));
+  assert.match(segs[1].text.slice(828), /Imā kho.*Etadaggaṃ/s);
+  const path = '/tipitaka/an/an02/an02.046.than';
+  assert.ok(!manifest.links.some(l => l.path === path));
+  assert.ok(!Object.values(canon.load().translations).flat().some(l => l.path === path));
+  const source = canon.load().canon.source;
+  const link = {source:'ati', path, partial_scope:{version:1,status:'reviewed',unit_id:u.id,first_ref:segs[0].ref,last_ref:segs[1].ref,source_commit:source.commit,pali_sha256:scopeHash(segs.map(({ref,type,text}) => ({ref,type,text}))),text_sha256:'0'.repeat(64)}};
+  assert.throws(() => partialScope(link, u, segs, source), /Invalid or unreviewed partial translation scope/);
 });

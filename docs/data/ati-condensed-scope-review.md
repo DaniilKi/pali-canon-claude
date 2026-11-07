@@ -66,3 +66,18 @@ An independent read-only review inspected the source, contracts and consumers;
 and adds four independently verified whole-discourse choices. It does **not**
 ship a partially wired condensed feature or approve SN 36.15. Future work can
 implement this bounded contract without rediscovering the architecture.
+
+## Second concrete case from D192: substantive ending inside a segment
+
+ATI AN 2.46 (*Bombast*) maps by content to indexed AN 2.47, VRI paragraph 48,
+`s0402m1.mul.xml` blocks 120–122. Both assembly descriptions match; the final
+summary and assertion that the questioning-trained assembly is foremost are
+absent. They begin at offsets 828 and 860 within `an2.47/2` (960 characters).
+There are only two prose segments. Whole-segment partial scope cannot cover
+both descriptions while excluding the omitted ending. This page remains held,
+with source rights permitted but whole-VRI coverage unestablished.
+
+This is a second real candidate for the proposed separate page-level contract;
+it is not permission to implement only its declaration while other consumers
+still assume whole-unit or partial-span semantics. D192 instead delivers six
+new whole-unit English choices plus one alternate through existing contracts.

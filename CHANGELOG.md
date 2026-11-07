@@ -4,6 +4,10 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Add seven reviewed ATI choices (six first-English texts and one alternative),
+  preserving source wording and edition notes. Hold the Bombast page’s missing
+  intra-segment conclusion alongside SN 36.15; condensed scope stays unactivated.
+
 - Add four source-reviewed AN English choices with explicit edition mapping and
   full rights/provenance; document the complete single-unit condensed-page
   contract needed for SN 36.15, retaining its hold.

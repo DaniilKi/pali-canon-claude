@@ -1293,6 +1293,27 @@
           "reason": "A single-unit condensed-page model needs distinct opt-in, non-whole-unit counts and page-level quotation semantics across consumers; existing partial/shared contracts cannot honestly represent the three intra-segment treatments. Hold retained pending full additive implementation and evidence."
         }
       ]
+    },
+    {
+      "decision": "D192",
+      "accepted_links": 7,
+      "newly_covered_units": [
+        "an2.9",
+        "an2.19",
+        "an2.24",
+        "an3.39",
+        "an3.86",
+        "an3.87"
+      ],
+      "additional_choice_units": [
+        "an10.13"
+      ],
+      "deferred": [
+        {
+          "path": "tipitaka/an/an02/an02.046.than.html",
+          "reason": "Identity is indexed AN2.47/VRI48, but source omits final two-assembly summary and substantive foremost-assembly assertion inside an2.47/2 (offsets828/860). Current partial_scope cannot represent this intra-segment omission; no whole-unit link activated. Single-unit condensed contract or precise intra-segment scope needed."
+        }
+      ]
     }
   ]
 }
