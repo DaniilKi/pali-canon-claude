@@ -520,3 +520,14 @@ Coverage and public exports keep shared pages separate from both whole-unit and 
 ```sh
 node scripts/audit-shared-translations.mjs --server-dir <installed-package-server-directory> --report shared-translations.report.json
 ```
+
+
+### English verification source completeness
+
+Before building its comparison corpus, `verify_quote` validates a bounded complete source response from offset zero. Its existing 2,000,000-character fetch bound is not permission to compare only that prefix: non-null `next_offset`, null/unknown `total_characters`, nonzero offsets, inconsistent totals, non-string text and over-limit text produce `INCOMPLETE_ENGLISH_SOURCE`. The actual reader always provides pagination metadata; unpaginated injected test responses continue to represent single complete fixtures. No partial comparison result is inferred when a source is rejected.
+
+Complete source versions remain comparable when another fails, with explicit per-version counts and `not_retrieved` records marked `compared: false`. Rejected fallback snapshots retain actual/requested identity and provider notes. An all-incomplete scope produces an MCP error without a negative verdict. The installed synthetic audit uses a source whose quotation is present beyond the verification cap, confirms the tail remains readable through `get_translation`, checks positive-prefix refusal, mixed versions, exact-limit success and recovery through both transports. It performs no publisher requests.
+
+```sh
+node scripts/audit-english-completeness.mjs --server-dir <installed-package-server-directory> --report english-completeness.report.json
+```

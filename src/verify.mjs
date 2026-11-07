@@ -12,6 +12,7 @@ export const THRESHOLDS = { found: 0.82, close_paraphrase: 0.5 };
 const MAX_QUERY_WORDS = 120;
 // 80 fits the default scope: the 26 Dhammapada chapters from three translators (Ṭhānissaro, Buddharakkhita, Ānandajoti).
 const MAX_ENGLISH_PAGES = 80;
+const MAX_ENGLISH_SOURCE_CHARACTERS = 2000000;
 const COMMON_SKIP = 150000; // query words this frequent are ignored for retrieval (still scored)
 const DEFAULT_ENGLISH_SCOPE = { label: 'the Dhammapada (all 26 chapters)', collection: 'dhp' };
 
@@ -565,6 +566,16 @@ function englishVersion(page) {
   };
 }
 
+// A prefix is useful for reading, but cannot represent the requested complete source in quotation checking.
+function requireCompleteEnglishSource(t) {
+  if (typeof t.text !== 'string' || t.text.length > MAX_ENGLISH_SOURCE_CHARACTERS
+    || (t.offset !== undefined && t.offset !== 0) || t.next_offset != null || t.total_characters === null
+    || (t.total_characters !== undefined && (!Number.isSafeInteger(t.total_characters) || t.total_characters !== t.text.length))) {
+    const error = new Error('Incomplete English source: the response is not one bounded complete source from offset 0; no quotation was compared. Read its source URL or choose another linked version.');
+    error.code = 'INCOMPLETE_ENGLISH_SOURCE'; throw error;
+  }
+}
+
 async function verifyEnglish(text, texts, limit, fetchTranslation, includePartial, includeShared) {
   const q = words(englishFold(text));
   if (!q.length) throw new Error('The quotation has no words to match.');
@@ -572,8 +583,9 @@ async function verifyEnglish(text, texts, limit, fetchTranslation, includePartia
   if (!plan.pages.length && plan.sharedOmitted.length) throw new Error('Only scoped sources are available. Review metadata and use explicit texts with include_shared: true for condensed shared pages; no individual alignment is inferred.');
   if (!plan.pages.length && plan.partialOmitted.length) throw new Error('Only partial English sources are available. Review their metadata, then use explicit texts with include_partial: true. No whole-unit comparison was performed.');
   const fetched = await mapLimit(plan.pages, 6, async (p) => {
+    let received = p;
     try {
-      const t = await fetchTranslation(p.unit, p.translation_id, { limit: 2000000, ...(p.translation_scope ? { ...(p.translation_scope.kind === 'shared_page' ? { allow_shared: true } : { allow_partial: true }), scope_sha256: p.translation_scope.scope_sha256 } : {}) });
+      const t = await fetchTranslation(p.unit, p.translation_id, { limit: MAX_ENGLISH_SOURCE_CHARACTERS, ...(p.translation_scope ? { ...(p.translation_scope.kind === 'shared_page' ? { allow_shared: true } : { allow_partial: true }), scope_sha256: p.translation_scope.scope_sha256 } : {}) });
       if ((p.translation_scope?.scope_sha256 || null) !== (t.translation_scope?.scope_sha256 || null) || (p.translation_scope && scopeHash(p.translation_scope) !== scopeHash(t.translation_scope))) throw new Error('Retrieved translation scope differs from the planned scope; no quotation was compared.');
       if (p.translation_scope?.kind === 'shared_page' && (t.whole_unit_coverage !== false || t.text_id !== null)) throw new Error('Shared-page source claimed individual or whole-unit alignment; no quotation was compared.');
       if (p.translation_scope && (t.translation_id !== p.translation_id || t.url !== p.url
@@ -582,14 +594,16 @@ async function verifyEnglish(text, texts, limit, fetchTranslation, includePartia
       }
       if (t.whole_unit_coverage === false && !t.translation_scope) throw new Error('Partial source omitted its declared scope; no quotation was compared.');
       const actualId = t.translation_id || p.translation_id;
-      return { ...p, translation_id: actualId,
+      received = { ...p, translation_id: actualId,
         ...(actualId !== p.translation_id ? { requested_translation_id: p.translation_id } : {}),
-        text: t.text, attribution: t.attribution, license: t.license, translator: t.translator || p.translator, url: t.url || p.url, notes: t.notes };
-    } catch (error) { return { ...p, error: error.message }; }
+        translator: t.translator || p.translator, url: t.url || p.url, notes: t.notes };
+      requireCompleteEnglishSource(t);
+      return { ...received, text: t.text, attribution: t.attribution, license: t.license };
+    } catch (error) { return { ...received, error: error.message, ...(error.code === 'INCOMPLETE_ENGLISH_SOURCE' ? { error_code: error.code } : {}) }; }
   });
   const pages = fetched.filter((p) => !p.error);
   const failed = fetched.filter((p) => p.error);
-  if (!pages.length) throw new Error(`None of the translations in scope could be retrieved (${failed[0]?.error || 'no pages'}). Try again later, or check a Pāli quotation offline.`);
+  if (!pages.length) throw new Error(`None of the translations in scope could be retrieved completely (${failed[0]?.error || 'no pages'}). Try again later, or check a Pāli quotation offline.`);
   const corpus = englishCorpus(pages);
   const query = q.join(' ');
   const matches = [];
@@ -623,10 +637,11 @@ async function verifyEnglish(text, texts, limit, fetchTranslation, includePartia
     ties,
     scope: {
       language: 'english',
+      complete_source_versions_compared: pages.length, source_versions_not_compared: failed.length,
       searched: `English translations linked to ${plan.label}: ${pages.length} page(s).`,
       ...(plan.requested_texts ? { requested_texts: plan.requested_texts } : {}),
       translations_checked: pages.map((p) => ({ citation: sourceCitation(p), ...englishVersion(p) })),
-      ...(failed.length ? { not_retrieved: failed.map((p) => ({ citation: sourceCitation(p), translator: p.translator, translation_id: p.translation_id, url: p.url, error: p.error, ...scopeEvidence(p) })) } : {}),
+      ...(failed.length ? { not_retrieved: failed.map((p) => ({ citation: sourceCitation(p), ...englishVersion(p), error: p.error, compared: false, ...(p.error_code ? { error_code: p.error_code } : {}) })) } : {}),
       ...(plan.sharedOmitted.length ? { shared_translations_excluded: plan.sharedOmitted } : {}),
       ...(plan.partialOmitted.length ? { partial_translations_excluded: plan.partialOmitted } : {}),
       ...(plan.withoutEnglish.length ? { no_english_linked: plan.withoutEnglish } : {}),
@@ -706,11 +721,12 @@ export async function verifyQuote({ text, language = 'auto', texts, limit = 5, i
   const notFoundEnglish = verdict === 'not_found_in_scope' && lang === 'english';
   const note = verdict === 'not_found_in_scope' ? undefined : tieNote(result.ties);
   const sharedNote = lang === 'english' && result.scope.translations_checked?.some(p => p.translation_scope?.kind === 'shared_page') ? ' Shared-page matches and negative results concern one condensed multi-discourse source page only. They do not establish any individual discourse’s wording, completeness, alignment or absence.' : '';
+  const unavailableNote = lang === 'english' && result.scope.not_retrieved?.length ? ' Some requested source versions were not compared completely; this result does not establish their wording or absence. See scope.not_retrieved.' : '';
   const partialNote = lang === 'english' && result.scope.translations_checked?.some(p => p.translation_scope?.kind === 'partial_unit') ? ' Partial translation results apply only to their declared spans, including a negative result. Whole-unit coverage or absence and word-level Pāli alignment are not inferred.' : '';
   const containerNote = lang === 'english' && verdict !== 'not_found_in_scope' && result.matches[0]?.unverified_requested_text_ids?.length
     ? ' The match is in a linked containing source; correspondence to the narrower requested text is not verified.' : '';
   return {
-    quote, ...inputNote(input), language: lang, verdict, explanation: literal ? 'The quotation occurs as an unchanged substring in the bundled VRI canonical source shown below. Mixed-script source characters were kept, not converted or corrected. This does not establish correct spelling, a unique source or authorship.' : EXPLAIN[notFoundEnglish ? 'not_found_in_scope_english' : verdict] + containerNote + partialNote + sharedNote,
+    quote, ...inputNote(input), language: lang, verdict, explanation: literal ? 'The quotation occurs as an unchanged substring in the bundled VRI canonical source shown below. Mixed-script source characters were kept, not converted or corrected. This does not establish correct spelling, a unique source or authorship.' : EXPLAIN[notFoundEnglish ? 'not_found_in_scope_english' : verdict] + containerNote + partialNote + sharedNote + unavailableNote,
     best_similarity: best,
     ...(literal ? { source_literal: literal.source_literal } : {}),
     comparison: { method: literal ? 'literal_source_substring' : 'normalized_fuzzy', verbatim: 'not_assessed',
