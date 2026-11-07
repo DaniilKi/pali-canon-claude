@@ -45,12 +45,28 @@ try {
   }
   const mixed=await call('See AN ๓.६५; MN ๙๙๙.');assert.equal(mixed.found,2);assert.equal(mixed.resolved,0);
   const link=await call('https://suttacentral.net/mn๑๐');assert.equal(link.found,1);assert.equal(link.resolved,0);
+  const units=canon.load().canon.units;
+  for(let i=0;i<units.length;i+=250){
+   const ids=units.slice(i,i+250).map(u=>u.id),text='References: '+ids.join('; ')+'.';
+   const r=await call(text);assert.equal(r.found,ids.length);assert.equal(r.unresolved,0);
+   assert.deepEqual(r.citations.map(c=>c.text),ids);
+   for(const c of r.citations){assert.equal(text.slice(c.start,c.end),c.text);assert.equal(c.text_id,canon.resolve(c.text).unit.id);}
+  }
+  const ids=['cp1','ja526','ps3.2','ne3','pe1','dt1.1','pp1.1','ya1.1.1'];
+  for(const script of SCRIPTS){
+   const input=ids.map(id=>id.replace(/\d/g,d=>transliterate(d,'roman',script)));
+   const text='😀 '+input.join('; ')+'.',r=await call(text);
+   assert.deepEqual(r.citations.map(c=>c.text),input);assert.deepEqual(r.citations.map(c=>c.text_id),ids);
+   for(const c of r.citations)assert.equal(text.slice(c.start,c.end),c.text);
+  }
+  assert.equal((await call('An mp3 or pp3 file. Ps 23, Pe 4, Ne 2, Pp 1, Ya 2, Dt 3. xja526 ja526x ja526@example.com /ja526/path /cp1. https://evil.example/ja526')).found,0);
+  const invalid=await call('ja9999; cp9999; ps9999.1; ne9999; pe9999; dt9999.1; pp9999.1; ya9999.1');assert.equal(invalid.found,8);assert.equal(invalid.unresolved,8);
   assert.doesNotMatch(stderr,/UNEXPECTED_NETWORK_ATTEMPT/);
-  reports.push({transport:mode,requests,scripts:SCRIPTS.length,original_offsets_preserved:true,conservative_prose_rules:true,mixed_numerals_unresolved:true,literal_urls:true,ambiguous_page_alternatives_retained:true,network_attempts:0});
+  reports.push({transport:mode,requests,scripts:SCRIPTS.length,canonical_ids_checked:units.length,all_reader_ids_recognised:true,original_offsets_preserved:true,conservative_prose_rules:true,mixed_numerals_unresolved:true,literal_urls:true,ambiguous_page_alternatives_retained:true,network_attempts:0});
   await client.close();client=null;
   if(child&&child.exitCode===null&&child.signalCode===null){const ended=new Promise(r=>child.once('exit',r));child.kill();await ended;}child=null;
  }
- const report={status:'passed',cases:reports,scope:'Isolated packaged citation-scanning parity across supported numeral scripts. Original prose and offsets retained; native-script names remain outside scanner scope. Not exhaustive prose recognition, native-reader or signed-in-client acceptance.'};
+ const report={status:'passed',cases:reports,scope:'Isolated packaged citation-scanning parity across supported numeral scripts and all bundled canonical reader IDs. Original prose and offsets retained; native-script names remain outside scanner scope. Catalogue coverage is not exhaustive prose recognition, native-reader or signed-in-client acceptance.'};
  if(reportPath)await writeFile(reportPath,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
 } catch(error) {
  if(reportPath)await writeFile(reportPath,JSON.stringify({status:'failed',error:error.message})+'\n');throw error;

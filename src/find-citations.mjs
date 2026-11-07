@@ -43,7 +43,9 @@ const PTS_ABBREVIATIONS = ['DN', 'MN', 'SN', 'AN', 'D', 'M', 'S', 'A', 'Vin', 'V
   'Patis', 'Ps', 'Mil', 'Nett', 'Pet', 'Dhs', 'Vibh', 'Kv', 'Pp', 'Pug', 'Dhatuk', 'Yam', 'Khp'];
 const ROMAN = '(?:I{1,3}|IV|VI{0,2}|i{1,3}|iv|vi{0,2})';
 const VINAYA = '(?:Pj|Ss|Ay|Np|Pc|Pd|Sk|Kd|Mv|Cv|Pvr|Parajika|Sanghadisesa|Aniyata|Nissaggiya|Pacittiya|Patidesaniya|Sekhiya|Adhikaranasamatha|Khandhaka)';
-const LOWER_IDS = ['dn', 'mn', 'sn', 'an', 'kp', 'dhp', 'ud', 'iti', 'snp', 'vv', 'pv', 'thag', 'thig', 'bv', 'mnd', 'cnd', 'mil', 'kv', 'ds', 'vb', 'patthana'];
+const LOWER_IDS = ['dn', 'mn', 'sn', 'an', 'kp', 'dhp', 'ud', 'iti', 'snp', 'vv', 'pv', 'thag', 'thig', 'bv', 'cp', 'ja', 'mnd', 'cnd', 'mil', 'ne', 'pe', 'kv', 'ds', 'vb', 'patthana'];
+// These source IDs always have multiple numeric parts. Do not turn an ordinary 'pp3 file' into a citation.
+const MACHINE_ID = `(?:(?:${LOWER_IDS.join('|')})\\d+(?:\\.\\d+)*|(?:ps|dt|pp|ya)\\d+(?:\\.\\d+)+)(?:-\\d+)?(?::\\d+(?:\\.\\d+)*)?`;
 const LINK_HOSTS = /^(?:www\.)?(?:suttacentral\.net|accesstoinsight\.org|dhammatalks\.org|ancient-buddhist-texts\.net)$/i;
 const EDITION_HEAD = `(?:${Object.keys(EDITION_WORDS).sort((a, b) => b.length - a.length).join('|')})(?:\\.?\\s*ed(?:ition)?\\.?)?[\\s.:,]+`;
 const EDITION_SCOPE = [...new Set([...ABBREVIATIONS, ...FULL_NAMES, ...Object.keys(citationTables.COLLECTIONS), ...Object.keys(VINAYA_SCOPES)])]
@@ -61,7 +63,7 @@ const PATTERNS = [
   { scheme: 'vinaya', rank: 2, re: new RegExp(`${BOUND_BEFORE}Vinaya\\s(?:Mahavagga|Cul?lavagga)\\s?${NUM}${BOUND_AFTER}`, 'giu') },
   { scheme: 'number', rank: 3, re: new RegExp(`${BOUND_BEFORE}(?:${ABBREVIATIONS.join('|')})\\.?\\s?${NUM}${BOUND_AFTER}`, 'gu') },
   { scheme: 'number', rank: 3, re: new RegExp(`${BOUND_BEFORE}(?:${FULL_NAMES.join('|')})\\s${NUM}${BOUND_AFTER}`, 'giu') },
-  { scheme: 'id', rank: 4, re: new RegExp(`(?<![\\p{L}\\p{N}_/.-])(?:(?:${LOWER_IDS.join('|')})\\d+(?:\\.\\d+)*(?:-\\d+)?(?::\\d+(?:\\.\\d+)*)?|pli-tv-[a-z-]+?\\d+(?:\\.\\d+)*(?:-\\d+)?|th[ai]-ap\\d+)${BOUND_AFTER}`, 'gu') },
+  { scheme: 'id', rank: 4, re: new RegExp(`(?<![\\p{L}\\p{N}_/.-])(?:${MACHINE_ID}|pli-tv-[a-z-]+?\\d+(?:\\.\\d+)*(?:-\\d+)?|th[ai]-ap\\d+)${BOUND_AFTER}`, 'gu') },
 ];
 
 /**
@@ -165,7 +167,7 @@ export function findCitations(text, canon, { limit = MAX_RESULTS } = {}) {
 }
 
 export function register({ tool, z, canon }) {
-  tool('find_citations', 'Find every Pāli Canon citation in a piece of free text (an essay, a talk transcript, a paper\'s references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nidānavaggo), PTS pages like M i 55 or S v 420, Bilara IDs like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org / ancient-buddhist-texts.net links. Supports native numerals with Roman citation names, preserving original text and offsets; native-script names are not scanned. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Works offline.', {
+  tool('find_citations', 'Find every Pāli Canon citation in a piece of free text (an essay, a talk transcript, a paper\'s references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nidānavaggo), PTS pages like M i 55 or S v 420, canonical IDs like ja526, ps3.2 and ya1.1.1, Bilara anchors like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org / ancient-buddhist-texts.net links. Supports native numerals with Roman citation names, preserving original text and offsets; native-script names are not scanned. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Works offline.', {
     text: z.string().min(1).max(MAX_TEXT).describe('The free text to scan, up to 200,000 characters.'),
   }, ({ text }) => findCitations(text, canon));
 }
