@@ -1,5 +1,9 @@
 # Reviewed ATI coverage expansion (D182)
 
+This is the D182 checkpoint. The [D183 follow-up](yasoja-and-vangisa.md) repairs
+the recorded Yasoja boundary and resolves the full Vaṅgīsa verse scope. Its two
+links were accepted separately; this report's four-link counts remain historical.
+
 This batch builds on the [first three reviewed links](ati-story-links.md). It
 adds **four genuinely new selectable links**, covering three canonical units.
 Two units previously had no whole-text English choice in the bundled index.

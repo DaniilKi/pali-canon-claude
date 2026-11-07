@@ -129,6 +129,49 @@
         "vri_stanzas": 10
       },
       "mapping_note": "Whole-poem/discourse correspondence, not line-by-line alignment: Sn 2.6 corresponds to Snp 2.6 (Kapilasutta (dhammacariyasutta)). ATI cites Sn 274-283; this VRI edition numbers the verses 276–285. ATI uses Dhammacariya; the indexed title also records Kapila. The translation presents the discourse in prose, with translator notes."
+    },
+    {
+      "unit_id": "thag3.9",
+      "path": "/tipitaka/kn/thag/thag.03.08.than",
+      "pali_title": "Yasojattheragāthā",
+      "english_title": "Yasoja",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "Thag 3.8",
+      "source_verses": "Thag 243-245",
+      "vri_verses": "243–245",
+      "source_html_sha256": "85abe65417d786485da0d63efb119708ea7a2ddcf13aa08e17952c178b5ef1af",
+      "pali_sha256": "670e07712900fab65a13a30c98250bbc6aebccfc01db87d5e0fe6b68d8f66a16",
+      "evidence": {
+        "basis": "source-labelled complete poem, exact canonical title identity, opening/closing sequence and full stanza scope; not offset-based matching",
+        "vri_stanzas": 3
+      },
+      "mapping_note": "Whole-poem correspondence, not line-by-line alignment: ATI Thag 3.8 corresponds by identity and scope to Thag 3.9 (Yasojattheragāthā). ATI cites Thag 243-245; this VRI edition numbers the verses 243–245. ATI calls Yasoja Thag 3.8; the canonical index uses Thag 3.9. The index’s Thag 3.8 is Vassika, a different poem."
+    },
+    {
+      "unit_id": "thag21.1",
+      "path": "/tipitaka/kn/thag/thag.21.00.irel",
+      "pali_title": "Vaṅgīsattheragāthā",
+      "english_title": "Vangisa",
+      "translator": "John D. Ireland",
+      "license": "BPS",
+      "source_reference": "Thag 21",
+      "source_verses": "Thag 1209-1279",
+      "vri_verses": "1218–1288",
+      "source_html_sha256": "f9f7f3e6db2189315d15f71c449f7e8e53366f4e36da4142a460a3cce566cb33",
+      "pali_sha256": "d98c9e670768ada37747de60924cf6699a5b6d4093810d5a51ffcea51e6dd3d6",
+      "evidence": {
+        "basis": "source-labelled complete poem, exact canonical title identity, opening/closing sequence and full stanza scope; not offset-based matching",
+        "vri_stanzas": 71,
+        "numbered_source_range": [
+          1209,
+          1279
+        ],
+        "combined_source_labels": [
+          "1235–36"
+        ]
+      },
+      "mapping_note": "Whole-poem correspondence, not line-by-line alignment: ATI Thag 21 corresponds by identity and scope to Thag 21.1 (Vaṅgīsattheragāthā). ATI cites Thag 1209-1279; this VRI edition numbers the verses 1218–1288. This is the complete 71-stanza Vaṅgīsa compilation. ATI combines 1235–36 under one marker and skips a section-heading numeral; no verse is inferred missing or reconstructed. Notes link to the source publication and are not supplied as new commentary."
     }
   ]
 }

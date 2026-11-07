@@ -1,7 +1,7 @@
-"""Use explicit, title-verified VRI story headings in Vv/Pv, not verse anchors.
+"""Use title-verified VRI story headings and the reviewed Yasoja boundary.
 
 Verse anchors can select the second verse of a dialogue. Restrict this repair to
-the two books whose complete story headings match the existing citation titles.
+the two complete story books and the separately reviewed adjacent Thag pair.
 Never guess by a paragraph or story number (the headings restart by chapter).
 """
 import re
@@ -42,7 +42,35 @@ def story_spans(books, units):
             if not any(b['n'] and b['rend'] == 'hangnum' for b in blocks[start:end]):
                 raise ValueError(f'No numbered verse in {u["id"]}')
             plans.append((u, start, end))
-    # Validate both books before mutating anything.
+    thag = [i for i, book in enumerate(books) if book['file'] == 's0508m.mul.xml']
+    if thag:
+        if len(thag) != 1:
+            raise ValueError('Duplicate Theragāthā book')
+        bi = thag[0]
+        blocks = books[bi]['blocks']
+        by_id = {u['id']: u for u in units if u['book'] == bi}
+        left, right = by_id.get('thag3.8'), by_id.get('thag3.9')
+        if (not left or not right or left.get('approximate') or right.get('approximate')
+                or left.get('kind') or right.get('kind')):
+            raise ValueError('Missing or approximate Vassika/Yasoja identity')
+        def head(title):
+            found = [i for i, b in enumerate(blocks) if b['rend'] == 'subhead' and b['text'] == title]
+            if len(found) != 1:
+                raise ValueError(f'Expected unique heading: {title}')
+            return found[0]
+        start = head('8. Vassikattheragāthā')
+        split = head('9. Yasojattheragāthā')
+        end = head('10. Sāṭimattiyattheragāthā')
+        if (left['title'] != 'Vassikattheragāthā' or right['title'] != 'Yasojattheragāthā'
+                or left['start'] != start or right['end'] != end
+                or left['end'] != right['start'] or not start < split <= right['start'] < end):
+            raise ValueError('Unexpected Vassika/Yasoja bounds; review required')
+        if [b['n'] for b in blocks[start:split] if b['rend'] == 'hangnum'] != ['240', '241', '242']:
+            raise ValueError('Unexpected Vassika verse scope')
+        if [b['n'] for b in blocks[split:end] if b['rend'] == 'hangnum'] != ['243', '244', '245']:
+            raise ValueError('Unexpected Yasoja verse scope')
+        plans.extend([(left, start, split), (right, split, end)])
+    # Validate all reviewed books before mutating anything.
     for u, start, end in plans:
         if (u['start'], u['end']) != (start, end):
             changed.append(u['id'])

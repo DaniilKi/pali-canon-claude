@@ -1,0 +1,28 @@
+{
+  "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "changed_spans": [
+    "thag3.8",
+    "thag3.9"
+  ],
+  "commentary_links": {},
+  "vri_xml_sha256": "30a3a7daaf5724e1b3eee155c37427354560c3bfb92e5ae16ac5b7b6ce1255b7",
+  "baseline": "43e32f936a9d611ce18b1d89a6c72cd7b3c72b48",
+  "source_blocks_unchanged": true,
+  "commentary_data_unchanged": true,
+  "boundary": {
+    "old_common_boundary": 1231,
+    "new_common_boundary": 1227,
+    "left": "thag3.8",
+    "right": "thag3.9",
+    "vassika_verses": [
+      240,
+      241,
+      242
+    ],
+    "yasoja_verses": [
+      243,
+      244,
+      245
+    ]
+  }
+}

@@ -685,9 +685,9 @@ def main():
     heuristic_units = b.units
     units, misses, disagreements = aligned_units(b, bilara)
     b.units = units
-    story_spans(b.books, b.units)
+    corrected = set(story_spans(b.books, b.units))
     for u in b.units:
-        if u['collection'] in ('pv', 'vv'):
+        if u['collection'] in ('pv', 'vv') or u['id'] in corrected:
             paras = [p['n'] for p in b.books[u['book']]['blocks'][u['start']:u['end']] if p['n']]
             u['vri'] = paras[0] if len(paras) == 1 else f'{paras[0]}–{paras[-1]}'
     b.annotate_pages()

@@ -1039,5 +1039,24 @@
       "reason": "Pinned page and rights checked; explicit whole-poem/discourse mapping in reviewed_ati_stories.json.",
       "unit_id": "thig5.11"
     }
+  ],
+  "followup_reviews": [
+    {
+      "decision": "D183",
+      "baseline": "43e32f936a9d611ce18b1d89a6c72cd7b3c72b48",
+      "accepted": [
+        {
+          "path": "tipitaka/kn/thag/thag.03.08.than.html",
+          "unit_id": "thag3.9",
+          "resolution": "Source-verified boundary repair restores opening stanza; ATI reference 3.8 explicitly differs from indexed 3.9."
+        },
+        {
+          "path": "tipitaka/kn/thag/thag.21.00.irel.html",
+          "unit_id": "thag21.1",
+          "resolution": "All 71 numbered source verses confirmed; explicit 1235–36 combined label accounts for apparent marker gap. Section-heading numeral gap is not a missing verse."
+        }
+      ],
+      "report": "yasoja-and-vangisa.md"
+    }
   ]
 }

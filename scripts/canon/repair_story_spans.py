@@ -1,7 +1,7 @@
 """Repair an existing canon/commentary pair using its pinned VRI source files.
 
 Usage: repair_story_spans.py CANON-IN COMMENTARY-IN VRI-DIR CANON-OUT COMMENTARY-OUT
-Run after unpacking the bundled data. The two source XML files must come from
+Run after unpacking the bundled data. The three source XML files must come from
 canon.source.commit. Their complete compact content is checked before editing.
 """
 import copy
@@ -23,7 +23,7 @@ def repair(canon, commentary, root):
     books = copy.deepcopy(canon['books'])
     targets = []
     for bi, book in enumerate(books):
-        if book['file'] not in ('s0506m.mul.xml', 's0507m.mul.xml'):
+        if book['file'] not in ('s0506m.mul.xml', 's0507m.mul.xml', 's0508m.mul.xml'):
             continue
         parsed = vri.parse(os.path.join(root, 'romn', book['file']))
         compact = [[b['rend'], b['n'], b['text'], b['notes'],
@@ -33,11 +33,11 @@ def repair(canon, commentary, root):
             raise ValueError(f'Pinned VRI blocks differ: {book["file"]}')
         book['blocks'] = parsed
         targets.append(bi)
-    if len(targets) != 2:
-        raise ValueError('Expected both story books')
+    if len(targets) != 3:
+        raise ValueError('Expected Vv, Pv and Thag source books')
     changed = story_spans(books, canon['units'])
     for bi in targets:
-        units = [u for u in canon['units'] if u['book'] == bi]
+        units = [u for u in canon['units'] if u['book'] == bi and u['id'] in changed]
         b = Builder.__new__(Builder)
         b.books = [books[bi]]
         b.units = [dict(u, book=0) for u in units]
@@ -51,13 +51,18 @@ def repair(canon, commentary, root):
     remapped = {}
     for bi in targets:
         units = [u for u in canon['units'] if u['book'] == bi]
-        rootbook = RootBook(bi, canon['books'][bi], units, set())
+        book = canon['books'][bi]
+        roots = {}
         expected = {}
         for pi, passage in enumerate(commentary['passages']):
             if passage[3] != bi:
                 continue
-            if passage[9:11] != [0, len(rootbook.blocks)]:
-                raise ValueError('Unexpected segmented story commentary')
+            lo, hi = passage[9:11]
+            if not (isinstance(lo, int) and isinstance(hi, int) and 0 <= lo < hi <= len(book['blocks'])):
+                raise ValueError('Invalid commentary root segment')
+            rootbook = roots.setdefault((lo, hi), None)
+            if rootbook is None:
+                rootbook = roots[lo, hi] = RootBook(bi, book, units, set(), lo, hi)
             for u in rootbook.texts_for(passage[4], passage[5]):
                 expected.setdefault(u['id'], []).append(pi)
         for u in units:

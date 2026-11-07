@@ -4,6 +4,10 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Restored Yasoja's opening stanza to its indexed poem (Thag 3.9), removing it
+  from the preceding Vassika citation without changing source wording or accepted
+  commentary. Added reviewed English links for Yasoja and the complete 71-stanza
+  Vaṅgīsa compilation, with explicit edition differences (D183).
 - Added four more reviewed ATI links: two translations of Thig 5.11, the
   complete 55-stanza Tālapuṭa poem (Thag 19.1), and John D. Ireland's Sn 2.6.
   These give two previously unlinked canonical texts their first English

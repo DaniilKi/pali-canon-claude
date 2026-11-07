@@ -46,6 +46,18 @@ preservation checks are recorded in
 [`docs/data/story-boundary-repair.json`](../../docs/data/story-boundary-repair.json).
 Current coverage totals are unchanged.
 
+The same helper also applies the separately reviewed Vassika/Yasoja boundary:
+Thag 3.8 ends before the unique Yasoja heading, and Thag 3.9 starts there with
+verse 243. It verifies both titles, adjacency, the following heading and both
+three-verse sequences before editing. It never renumbers the citation IDs or
+generalizes this correction to other Theragāthā poems. See the
+[Yasoja/Vaṅgīsa follow-up](../../docs/data/yasoja-and-vangisa.md).
+
+The legacy repair CLI now needs the same pinned `romn/s0508m.mul.xml` as well as
+the two Vv/Pv files. It reannotates changed units only and preserves existing
+commentary root-segment boundaries when refreshing assignments. It does not
+invent an alignment for Yasoja verse 243, which lacks accepted evidence.
+
 ### Reviewed ATI story links
 
 The final `--content` pass of `build_translations.py` applies the individually reviewed
@@ -70,6 +82,10 @@ manifest. Inspect the output, install it as `server/data/translations.json`,
 then run the normal build/check gates. Changed sources, identity conflicts or
 changed story bounds fail closed and require review, not updated hashes alone.
 This command adds metadata only; it never copies English text into the package.
+For the Vaṅgīsa page, an additional source-marker check expands its explicit
+1235–36 label and requires complete, ordered coverage of ATI 1209–1279. It does
+not infer VRI alignment from those numbers or repair the publisher's heading
+numerals. Missing, repeated or reordered source verse markers fail closed.
 
 ### Repairing legacy shared-passage bounds
 

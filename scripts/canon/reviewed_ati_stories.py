@@ -7,10 +7,30 @@ Usage: reviewed_ati_stories.py CANON.gz TRANSLATIONS.json ATI-CHECKOUT OUTPUT.js
 import gzip
 import hashlib
 import json
+import re
 import sys
 from pathlib import Path
 
 MANIFEST = Path(__file__).with_suffix('.json')
+
+
+def check_numbered_verses(raw, first, last):
+    """Check an explicitly reviewed labelled source range, not a VRI alignment."""
+    match = re.search(r'<!-- BEGIN COPYRIGHTED TEXT CHUNK -->(.*?)<!-- #COPYRIGHTED_TEXT_CHUNK', raw.decode('utf-8'), re.S)
+    if not match:
+        raise ValueError('Missing source text chunk')
+    markers = re.findall(r'<small><a id="verse-([0-9]+)">[0-9]+</a>(?:-([0-9]+))?\.</small>', match[1])
+    expanded = []
+    for start, end in markers:
+        start = int(start)
+        end = int(end) if end else start
+        if end < start:
+            end += start // 100 * 100
+        if not first <= start <= end <= last:
+            raise ValueError('Source verse marker outside reviewed range')
+        expanded.extend(range(start, end + 1))
+    if expanded != list(range(first, last + 1)):
+        raise ValueError('Incomplete, duplicate or reordered source verse markers')
 
 
 def reviewed_links(canon, ati_root):
@@ -35,6 +55,8 @@ def reviewed_links(canon, ati_root):
         raw = Path(ati_root, path.lstrip('/') + '.html').read_bytes()
         if hashlib.sha256(raw).hexdigest() != row['source_html_sha256']:
             raise ValueError(f'ATI page changed; review scope and rights: {path}')
+        if row.get('evidence', {}).get('numbered_source_range'):
+            check_numbered_verses(raw, *row['evidence']['numbered_source_range'])
         links.setdefault(u['id'], []).append({
             'source': 'ati', 'english': row['english_title'], 'path': path,
             'url': 'https://www.accesstoinsight.org' + path + '.html',

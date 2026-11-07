@@ -11,7 +11,7 @@ const realFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = realFetch; liveCache.clear(); });
 
 test('source-reviewed whole-text links retain exact edition identity and provenance', () => {
-  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6']);
+  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1']);
   for (const row of manifest.links) {
     const u = canon.resolve(row.unit_id).unit;
     const link = canon.load().translations[u.id].find(t => t.match === 'reviewed-story' && t.path === row.path);
@@ -55,6 +55,20 @@ test('two independent translations of the thirty nuns remain independently selec
   assert.ok(canon.linksFor(canon.resolve('Thig 5.10').unit).links.every(l => !l.path?.includes('thig.05.11')));
 });
 
+test('Yasoja is linked to the corrected poem, never the differently numbered Vassika', async () => {
+  const id = 'ati:/tipitaka/kn/thag/thag.03.08.than';
+  const source = english.available(canon.resolve('Thag 3.9').unit).find(l => l.translation_id === id);
+  assert.ok(source);
+  assert.equal(canon.resolve('https://www.accesstoinsight.org/tipitaka/kn/thag/thag.03.08.than.html').unit.id, 'thag3.9');
+  assert.equal(canon.resolve('https://www.accesstoinsight.org/tipitaka/kn/thag/thag.21.00.irel.html').unit.id, 'thag21.1');
+  assert.match(source.mapping_note, /ATI calls Yasoja Thag 3.8.*Thag 3.9/);
+  assert.equal(english.available(canon.resolve('Thag 3.8').unit).some(l => l.translation_id === id), false);
+  let calls = 0;
+  globalThis.fetch = async () => { calls++; throw Error('Must not fetch'); };
+  await assert.rejects(english.translation(canon.resolve('Thag 3.8').unit, id));
+  assert.equal(calls, 0);
+});
+
 test('story retrieval preserves edition notes, full copyright notice and source citation through mirrors', async () => {
   for (const row of manifest.links) {
     const calls = [];
@@ -76,6 +90,21 @@ test('story retrieval preserves edition notes, full copyright notice and source 
 });
 
 const python = ['python3', 'python'].find(cmd => spawnSync(cmd, ['--version']).status === 0);
+test('source verse scopes expand explicit combined labels but reject omissions and repeats', { skip: !python }, () => {
+  const r = spawnSync(python, ['-c', `
+import sys
+sys.path.insert(0,'scripts/canon')
+from reviewed_ati_stories import check_numbered_verses
+def source(labels):return ('<!-- BEGIN COPYRIGHTED TEXT CHUNK -->'+''.join('<small><a id="verse-'+str(a)+'">'+str(a)+'</a>'+('-'+str(b) if b else '')+'.</small>' for a,b in labels)+'<!-- #COPYRIGHTED_TEXT_CHUNK -->').encode()
+check_numbered_verses(source([(1234,None),(1235,36),(1237,None)]),1234,1237)
+for labels in [[(1234,None),(1235,None),(1237,None)],[(1234,None),(1234,None),(1235,37)],[(1234,None),(1235,38)]]:
+ try:check_numbered_verses(source(labels),1234,1237)
+ except ValueError:pass
+ else:raise AssertionError(labels)
+`], { encoding: 'utf8' });
+  assert.equal(r.status, 0, r.stderr);
+});
+
 test('reviewed-link builder checks source drift, scope and conflicts before changing output', { skip: !python }, () => {
   const result = spawnSync(python, ['-c', `
 import sys,copy,json,hashlib,tempfile,pathlib

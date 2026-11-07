@@ -45,6 +45,13 @@ and full-licence requirements. These are linked through the existing live ATI
 reader, with original notices and citations retained; English bodies remain
 outside the bundle.
 
+The Yasoja follow-up links Ṭhānissaro's CC-BY-NC page and Ireland's Vaṅgīsa
+compilation (copyright 1997 John D. Ireland, from BPS Wheel 417/418). The latter
+uses the same explicit BPS free-distribution/print-limit conditions described
+above. The original notice and citation accompany every reading page; linked
+external footnotes are not newly imported commentary. See the
+[follow-up review](docs/data/yasoja-and-vangisa.md).
+
 The `reading_plan` tool's study-guide plans list, in order, the texts cited by two of Ṭhānissaro Bhikkhu's Access to Insight study guides ([Into the Stream](https://www.accesstoinsight.org/lib/study/into_the_stream.html), © 2011 Metta Forest Monastery; [The Four Noble Truths](https://www.accesstoinsight.org/lib/study/truths.html), © 1999 Metta Forest Monastery; both CC BY-NC 4.0). Only the guides' citations and links are stored; none of their text is bundled or returned.
 ## Access to Insight indexes (bundled topic index)
 

@@ -33,6 +33,23 @@ test('Pv 5 excludes and Pv 6 includes the first verse of the next dialogue', () 
   assert.equal(canon.resolve('Pv 6').unit.vri, '26–34');
 });
 
+test('Vassika does not contain Yasoja’s opening; Yasoja retains all three stanzas', () => {
+  const left = canon.resolve('Thag 3.8').unit;
+  const right = canon.resolve('Thag 3.9').unit;
+  const d = canon.load();
+  assert.equal(left.vri, '240–242');
+  assert.equal(right.vri, '243–245');
+  assert.equal(left.end, right.start);
+  assert.equal(d.canon.books[right.book].blocks[right.start][2], '9. Yasojattheragāthā');
+  const first = canon.segments(left).map(s => s.text).join(' ');
+  const second = canon.segments(right).map(s => s.text).join(' ');
+  assert.doesNotMatch(first, /Kālapabbaṅgasaṅkāso/);
+  assert.match(second, /Kālapabbaṅgasaṅkāso/);
+  assert.match(second, /Phuṭṭho ḍaṃsehi/);
+  assert.match(second, /Yathā brahmā/);
+  assert.equal(d.canon.books[right.book].blocks.slice(right.start, right.end).filter(b => b[0] === 'hangnum').length, 3);
+});
+
 test('story commentary assignments are based on contained root paragraphs', () => {
   const d = canon.load();
   const c = JSON.parse(gunzipSync(readBundled('server/data/commentary.json.gz')));
@@ -47,6 +64,38 @@ test('story commentary assignments are based on contained root paragraphs', () =
 });
 
 const python = ['python3', 'python'].find((cmd) => spawnSync(cmd, ['--version']).status === 0);
+test('builder repairs only the reviewed Yasoja boundary and refuses identity drift', { skip: !python }, () => {
+  const r = spawnSync(python, ['-c', `
+import sys,copy
+sys.path.insert(0,'scripts/canon')
+from story_spans import story_spans
+def block(r,text='',n=None):return {'rend':r,'text':text,'n':n}
+blocks=[block('subhead','8. Vassikattheragāthā')]
+for n in [240,241,242]:blocks += [block('hangnum',n=str(n)),block('gathalast','Synthetic fixture')]
+split=len(blocks);blocks += [block('subhead','9. Yasojattheragāthā')]
+for n in [243,244,245]:blocks += [block('hangnum',n=str(n)),block('gathalast','Synthetic fixture')]
+end=len(blocks);blocks += [block('subhead','10. Sāṭimattiyattheragāthā')]
+books=[{'file':'s0508m.mul.xml','blocks':blocks}]
+units=[{'id':'thag3.8','book':0,'title':'Vassikattheragāthā','start':0,'end':split+3},
+       {'id':'thag3.9','book':0,'title':'Yasojattheragāthā','start':split+3,'end':end}]
+assert story_spans(books,units)==['thag3.8','thag3.9']
+assert units[0]['end']==units[1]['start']==split
+assert story_spans(books,units)==[]
+for kind in ['title','verse','adjacency','ending']:
+ b=copy.deepcopy(books);u=copy.deepcopy(units)
+ if kind=='title':u[1]['title']='Wrong person'
+ if kind=='verse':b[0]['blocks'][split+1]['n']='999'
+ if kind=='adjacency':u[0]['end']+=1
+ if kind=='ending':u[1]['end']-=1
+ before=copy.deepcopy(u)
+ try:story_spans(b,u)
+ except ValueError:pass
+ else:raise AssertionError(kind)
+ assert u==before
+`], { encoding: 'utf8' });
+  assert.equal(r.status, 0, r.stderr);
+});
+
 test('story boundary builder refuses mismatched source identities before mutating units', { skip: !python }, () => {
   const result = spawnSync(python, ['-c', `
 import copy, sys
