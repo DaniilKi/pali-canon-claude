@@ -29390,7 +29390,8 @@ var locate2 = (unit, first, count) => ({
   text_id: unit.id,
   citation: unit.acronym,
   segment_ref: `${unit.id}/${first + 1}`,
-  get_text: { uid: unit.acronym, offset: first, limit: count }
+  get_text: { uid: unit.acronym, offset: first, limit: count },
+  read_with: { tool: "get_text", uid: unit.id, offset: first, limit: count }
 });
 var matikaCache = /* @__PURE__ */ new WeakMap();
 function buildMatika(canon = canon_exports) {
@@ -29436,7 +29437,7 @@ var stem3 = (value) => fold3(value).replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, "
 var groupStem = (heading) => stem3(heading).replace(/m$/, "").replace(/(gocchaka|duka)$/, "");
 function source3(canon) {
   const s = canon.source();
-  return { edition: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), P\u0101li", attribution: s.attribution, terms: s.terms };
+  return { edition: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), P\u0101li", attribution: s.attribution, terms: s.terms, source: s };
 }
 function groupsOf(section) {
   const groups = [];
@@ -29461,13 +29462,23 @@ function matika(section, canon = canon_exports) {
       citation: s.citation,
       vri_paragraphs: s.vri_paragraphs,
       entries: s.entries.length,
-      ...groupsOf(s).length ? { groups: groupsOf(s).map((g) => ({ heading: g.heading, dyads: `${g.from}\u2013${g.to}`, count: g.count })) } : {}
+      read_with: { tool: "abhidhamma_matika", section: s.key },
+      ...groupsOf(s).length ? { groups: groupsOf(s).map((g) => ({
+        heading: g.heading,
+        dyads: `${g.from}\u2013${g.to}`,
+        count: g.count,
+        read_with: { tool: "abhidhamma_matika", section: g.heading }
+      })) } : {}
     })),
     usage: 'Pass section "tika", "duka", "suttantika", a dyad group such as "hetugocchaka", or one entry such as "tika 5" or "duka 101". Read the full text with get_text using the returned uid and offset.'
   });
   if (section === void 0 || section === null || !String(section).trim() || stem3(section) === "all") return overview();
   const wanted = stem3(section);
-  const one = wanted.match(/^(tika|duka|triad|dyad)\s*(\d+)$/);
+  const literal2 = fold3(section).trim();
+  const one = literal2.match(/^(tika|duka|triad|dyad)\s*(\d+)$/);
+  if (!one && /^(tika|duka|triad|dyad)/.test(literal2) && /\d/.test(literal2)) {
+    throw new Error(`Invalid m\u0101tik\u0101 entry "${section}". Give a positive whole entry number, e.g. "tika 5" or "duka 101"; ranges, signs and decimals are not entry selectors.`);
+  }
   if (one) {
     const n = Number(one[2]);
     const pool = /^(tika|triad)$/.test(one[1]) ? sections.filter((s) => s.key === "tika") : sections.filter((s) => s.key !== "tika");
@@ -29476,8 +29487,8 @@ function matika(section, canon = canon_exports) {
     return { ...base, entries: [entry3] };
   }
   const aliases = { tika: ["tika", "tikamatika", "triads", "triad"], duka: ["duka", "dukamatika", "abhidhammaduka", "abhidhammadukamatika", "abhidhamma duka", "dyads", "dyad"], suttantika: ["suttantika", "suttanta", "suttantikaduka", "suttantikadukamatika", "suttanta duka", "suttanta dyads"] };
-  const compact = fold3(section).replace(/[^a-z0-9]/g, "");
-  const bySection = sections.find((s) => aliases[s.key].includes(wanted) || s.text_id.replace(/[^a-z0-9]/g, "") === compact);
+  const compact = literal2.replace(/\s+/g, "");
+  const bySection = sections.find((s) => aliases[s.key].includes(wanted) || s.text_id === compact);
   if (bySection) {
     const { entries, ...meta } = bySection;
     return { ...base, section: meta.key, heading: meta.heading, text_id: meta.text_id, citation: meta.citation, vri_paragraphs: meta.vri_paragraphs, entries };
@@ -29528,7 +29539,12 @@ function condition(name, canon = canon_exports) {
   const base = { book: "Pa\u1E6D\u1E6Dh\u0101na", ...source3(canon) };
   const withDictionary = (c, full) => {
     const term = c.name.replace(/paccayo$/i, "").toLowerCase();
-    const out = { number: c.number, name: c.name, dictionary: { tool: "lookup_pali", word: term, note: DICTIONARY_NOTE } };
+    const out = {
+      number: c.number,
+      name: c.name,
+      read_with: { tool: "patthana_condition", name: String(c.number) },
+      dictionary: { tool: "lookup_pali", word: term, note: DICTIONARY_NOTE }
+    };
     if (!full) {
       const { text, ...where } = c.definition;
       return { ...out, definition: where };
@@ -29553,10 +29569,10 @@ function condition(name, canon = canon_exports) {
   return { ...base, condition: withDictionary(found, true) };
 }
 function register10({ tool, z, canon }) {
-  tool("abhidhamma_matika", "Browse the m\u0101tik\u0101 (matrix) of the Dhammasa\u1E45ga\u1E47\u012B: the 22 triads (tika), the 100 Abhidhamma dyads (duka) in their groups and the 42 Suttanta dyads, in P\u0101li from the bundled VRI text, each with its VRI paragraph and a get_text location. Without a section it returns an overview. Works offline.", {
+  tool("abhidhamma_matika", "Browse the m\u0101tik\u0101 (matrix) of the Dhammasa\u1E45ga\u1E47\u012B: the 22 triads (tika), the 100 Abhidhamma dyads (duka) in their groups and the 42 Suttanta dyads, in P\u0101li from the bundled VRI text, each with its VRI paragraph and an exact source read_with command. Without a section it returns an overview with section and group commands. Entry selectors require a positive whole number. Works offline.", {
     section: z.string().max(60).optional().describe('"tika", "duka", "suttantika", a dyad group such as "hetugocchaka" or "\u0101sava", or one entry such as "tika 5" or "duka 101". Omit for an overview.')
   }, ({ section }) => matika(section, canon));
-  tool("patthana_condition", 'One of the 24 conditions (paccaya) of the Pa\u1E6D\u1E6Dh\u0101na: its P\u0101li name from the bundled VRI text, the location and P\u0101li text of its definition (paccayaniddesa), and the P\u0101li term to look up with lookup_pali for an English dictionary meaning. Pass "all" for the list. Works offline.', {
+  tool("patthana_condition", 'One of the 24 conditions (paccaya) of the Pa\u1E6D\u1E6Dh\u0101na: its P\u0101li name from the bundled VRI text, exact source reading commands and P\u0101li text of its definition (paccayaniddesa), and the P\u0101li term to look up with lookup_pali for an English dictionary meaning. Pass "all" for the list. Works offline.', {
     name: z.string().trim().min(1).max(60).describe('P\u0101li name (hetu, hetupaccayo, \u0101ramma\u1E47a\u2026), a number 1\u201324, or "all".')
   }, ({ name }) => withNormalised(name, (n) => condition(n, canon)));
 }

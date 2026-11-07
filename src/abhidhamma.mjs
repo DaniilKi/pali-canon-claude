@@ -32,6 +32,7 @@ const locate = (unit, first, count) => ({
   citation: unit.acronym,
   segment_ref: `${unit.id}/${first + 1}`,
   get_text: { uid: unit.acronym, offset: first, limit: count },
+  read_with: { tool: 'get_text', uid: unit.id, offset: first, limit: count },
 });
 
 // Parsed results are cached per canon object, so a different canon passed in gets its own parse.
@@ -84,7 +85,7 @@ const groupStem = (heading) => stem(heading).replace(/m$/, '').replace(/(gocchak
 
 function source(canon) {
   const s = canon.source();
-  return { edition: 'Chaṭṭha Saṅgāyana Tipiṭaka (VRI), Pāli', attribution: s.attribution, terms: s.terms };
+  return { edition: 'Chaṭṭha Saṅgāyana Tipiṭaka (VRI), Pāli', attribution: s.attribution, terms: s.terms, source: s };
 }
 
 function groupsOf(section) {
@@ -108,13 +109,20 @@ export function matika(section, canon = bundled) {
     sections: sections.map((s) => ({
       section: s.key, heading: s.heading, text_id: s.text_id, citation: s.citation, vri_paragraphs: s.vri_paragraphs,
       entries: s.entries.length,
-      ...(groupsOf(s).length ? { groups: groupsOf(s).map((g) => ({ heading: g.heading, dyads: `${g.from}–${g.to}`, count: g.count })) } : {}),
+      read_with: { tool: 'abhidhamma_matika', section: s.key },
+      ...(groupsOf(s).length ? { groups: groupsOf(s).map((g) => ({ heading: g.heading, dyads: `${g.from}–${g.to}`, count: g.count,
+        read_with: { tool: 'abhidhamma_matika', section: g.heading } })) } : {}),
     })),
     usage: 'Pass section "tika", "duka", "suttantika", a dyad group such as "hetugocchaka", or one entry such as "tika 5" or "duka 101". Read the full text with get_text using the returned uid and offset.',
   });
   if (section === undefined || section === null || !String(section).trim() || stem(section) === 'all') return overview();
   const wanted = stem(section);
-  const one = wanted.match(/^(tika|duka|triad|dyad)\s*(\d+)$/);
+  // Never turn a negative, decimal or range into a different valid entry by stripping punctuation.
+  const literal = bundled.fold(section).trim();
+  const one = literal.match(/^(tika|duka|triad|dyad)\s*(\d+)$/);
+  if (!one && /^(tika|duka|triad|dyad)/.test(literal) && /\d/.test(literal)) {
+    throw new Error(`Invalid mātikā entry "${section}". Give a positive whole entry number, e.g. "tika 5" or "duka 101"; ranges, signs and decimals are not entry selectors.`);
+  }
   if (one) {
     const n = Number(one[2]);
     const pool = /^(tika|triad)$/.test(one[1]) ? sections.filter((s) => s.key === 'tika') : sections.filter((s) => s.key !== 'tika');
@@ -123,8 +131,8 @@ export function matika(section, canon = bundled) {
     return { ...base, entries: [entry] };
   }
   const aliases = { tika: ['tika', 'tikamatika', 'triads', 'triad'], duka: ['duka', 'dukamatika', 'abhidhammaduka', 'abhidhammadukamatika', 'abhidhamma duka', 'dyads', 'dyad'], suttantika: ['suttantika', 'suttanta', 'suttantikaduka', 'suttantikadukamatika', 'suttanta duka', 'suttanta dyads'] };
-  const compact = bundled.fold(section).replace(/[^a-z0-9]/g, '');
-  const bySection = sections.find((s) => aliases[s.key].includes(wanted) || s.text_id.replace(/[^a-z0-9]/g, '') === compact);
+  const compact = literal.replace(/\s+/g, '');
+  const bySection = sections.find((s) => aliases[s.key].includes(wanted) || s.text_id === compact);
   if (bySection) {
     const { entries, ...meta } = bySection;
     return { ...base, section: meta.key, heading: meta.heading, text_id: meta.text_id, citation: meta.citation, vri_paragraphs: meta.vri_paragraphs, entries };
@@ -180,7 +188,8 @@ export function condition(name, canon = bundled) {
   const base = { book: 'Paṭṭhāna', ...source(canon) };
   const withDictionary = (c, full) => {
     const term = c.name.replace(/paccayo$/i, '').toLowerCase();
-    const out = { number: c.number, name: c.name, dictionary: { tool: 'lookup_pali', word: term, note: DICTIONARY_NOTE } };
+    const out = { number: c.number, name: c.name, read_with: { tool: 'patthana_condition', name: String(c.number) },
+      dictionary: { tool: 'lookup_pali', word: term, note: DICTIONARY_NOTE } };
     if (!full) {
       const { text, ...where } = c.definition;
       return { ...out, definition: where };
@@ -205,11 +214,11 @@ export function condition(name, canon = bundled) {
 }
 
 export function register({ tool, z, canon }) {
-  tool('abhidhamma_matika', 'Browse the mātikā (matrix) of the Dhammasaṅgaṇī: the 22 triads (tika), the 100 Abhidhamma dyads (duka) in their groups and the 42 Suttanta dyads, in Pāli from the bundled VRI text, each with its VRI paragraph and a get_text location. Without a section it returns an overview. Works offline.', {
+  tool('abhidhamma_matika', 'Browse the mātikā (matrix) of the Dhammasaṅgaṇī: the 22 triads (tika), the 100 Abhidhamma dyads (duka) in their groups and the 42 Suttanta dyads, in Pāli from the bundled VRI text, each with its VRI paragraph and an exact source read_with command. Without a section it returns an overview with section and group commands. Entry selectors require a positive whole number. Works offline.', {
     section: z.string().max(60).optional().describe('"tika", "duka", "suttantika", a dyad group such as "hetugocchaka" or "āsava", or one entry such as "tika 5" or "duka 101". Omit for an overview.'),
   }, ({ section }) => matika(section, canon));
 
-  tool('patthana_condition', 'One of the 24 conditions (paccaya) of the Paṭṭhāna: its Pāli name from the bundled VRI text, the location and Pāli text of its definition (paccayaniddesa), and the Pāli term to look up with lookup_pali for an English dictionary meaning. Pass "all" for the list. Works offline.', {
+  tool('patthana_condition', 'One of the 24 conditions (paccaya) of the Paṭṭhāna: its Pāli name from the bundled VRI text, exact source reading commands and Pāli text of its definition (paccayaniddesa), and the Pāli term to look up with lookup_pali for an English dictionary meaning. Pass "all" for the list. Works offline.', {
     name: z.string().trim().min(1).max(60).describe('Pāli name (hetu, hetupaccayo, ārammaṇa…), a number 1–24, or "all".'),
   }, ({ name }) => withNormalised(name, (n) => condition(n, canon)));
 }
