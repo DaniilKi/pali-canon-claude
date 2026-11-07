@@ -32104,11 +32104,13 @@ function paritta(canon, { name, text, offset = 0, limit = 60 } = {}) {
       chanting_books: chantingBooks()
     };
   }
-  const entry3 = find(name);
+  const input = romanizeLookupInput(name);
+  const entry3 = find(input.text);
   if (!entry3) throw new Error(`No paritta named "${name}". Available: ${PARITTA.map((e) => e.key).join(", ")}.`);
   let ref = entry3.texts[0];
-  if (text !== void 0) {
-    const want = canon.resolve(text).unit.id;
+  const textInput = text !== void 0 ? romanizeLookupInput(text) : null;
+  if (textInput) {
+    const want = canon.resolve(textInput.text).unit.id;
     ref = entry3.texts.find((t) => canon.resolve(t).unit.id === want);
     if (!ref) throw new Error(`${text} is not a source of ${entry3.name}. Its sources: ${entry3.texts.join(", ")}.`);
   }
@@ -32127,6 +32129,8 @@ function paritta(canon, { name, text, offset = 0, limit = 60 } = {}) {
   return {
     key: entry3.key,
     name: entry3.name,
+    ...inputNote(input),
+    ...textInput?.original ? { text_input_script: textInput.script, text_input_romanized: textInput.text } : {},
     text_id: unit.id,
     citation: unit.acronym,
     title: unit.title,
@@ -32152,11 +32156,14 @@ function paritta(canon, { name, text, offset = 0, limit = 60 } = {}) {
 }
 function register12({ tool, z, canon }) {
   tool("paritta", "Paritta and other commonly recited texts (Ma\u1E45gala, Ratana, Kara\u1E47\u012Byamett\u0101, Khandha, Mora, Dhajagga, Bojjha\u1E45ga, Khuddakap\u0101\u1E6Dha chants and more) in P\u0101li from the bundled VRI edition, with their canonical citations and links to English translations. Call with no name or text to list the set. Follow continue_with for pagination pinned to the chosen source. Works offline.", {
-    name: z.string().max(100).optional().describe('Paritta name, e.g. "Ratana", "Kara\u1E47\u012Byamett\u0101", "Khandha", "Mora" (diacritics optional). Omit to list all.'),
-    text: z.string().trim().min(1).max(100).optional().describe(`With name: choose one of the entry's canonical sources, e.g. "Snp 2.1" instead of the default "Kp 6", or "SN 46.16" for Bojjha\u1E45ga. Omit for its default source.`),
+    name: z.string().max(100).optional().describe('Paritta name, e.g. "Ratana", "Kara\u1E47\u012Byamett\u0101", "Khandha", "Mora" in Roman or a supported native script (conversion labelled). Diacritics optional in Roman. Omit to list all.'),
+    text: z.string().trim().min(1).max(100).optional().describe(`With name: choose one of the entry's canonical sources, e.g. "Snp 2.1" instead of the default "Kp 6", or "SN 46.16" for Bojjha\u1E45ga. Native-script citations are converted and labelled separately. Omit for its default source.`),
     offset: z.number().int().min(0).max(1e5).default(0).describe("Offset in the selected paritta, which may be an excerpt. Use continue_with; original canonical segment numbers use a separate numbering."),
     limit: z.number().int().min(1).max(200).default(60).describe("Segments per page.")
-  }, (args) => withNormalised(args.name, (name) => paritta(canon, { ...args, name })));
+  }, (args) => {
+    const input = romanizeLookupInput(args.name);
+    return input.original ? paritta(canon, args) : withNormalised(args.name, (name) => paritta(canon, { ...args, name }));
+  });
 }
 
 // src/talks.mjs

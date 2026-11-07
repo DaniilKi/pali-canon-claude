@@ -47,7 +47,7 @@ The server has 34 tools. Twenty-seven of them work without internet (`get_text` 
 | `dhamma_list` | A numbered list of the teaching (four noble truths, five aggregates…) with its Pāli members and source passage | No |
 | `abhidhamma_matika` | The mātikā (matrix) of the Dhammasaṅgaṇī in Pāli | No |
 | `patthana_condition` | One of the 24 conditions of the Paṭṭhāna, with its Pāli definition | No |
-| `paritta` | Paritta and other commonly recited texts in Pāli, with links to English | No |
+| `paritta` | Paritta and other commonly recited texts from canonical VRI sources, with links to English; names and source citations accept Roman/native input, with conversion labels (returned source text stays Roman) | No |
 | `daily_text` | A Dhammapada verse or a sutta for a given day | No |
 | `reading_plan` | Reading plans through the canon, day by day | No |
 | `uposatha` | Uposatha (observance) days between two dates for one tradition, computed, not official | No |

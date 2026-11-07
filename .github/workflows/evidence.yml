@@ -34,6 +34,8 @@ jobs:
         run: node scripts/audit-talks.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report talk-pagination.report.json
       - name: Check packaged native word and name lookups with dictionary outage offline
         run: node scripts/audit-lookups.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-lookups.report.json
+      - name: Check packaged native paritta selectors and continuations offline
+        run: node scripts/audit-paritta.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-paritta.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -44,4 +46,5 @@ jobs:
             english-prefix.report.json
             talk-pagination.report.json
             native-lookups.report.json
+            native-paritta.report.json
           if-no-files-found: warn

@@ -9,6 +9,7 @@
  */
 import { fold } from './canon.mjs';
 import { withNormalised } from './input.mjs';
+import { romanizeLookupInput, inputNote } from './script.mjs';
 
 /**
  * The set. `texts` are citations; the first is the default, the rest are canonical alternatives
@@ -118,11 +119,13 @@ export function paritta(canon, { name, text, offset = 0, limit = 60 } = {}) {
       chanting_books: chantingBooks(),
     };
   }
-  const entry = find(name);
+  const input = romanizeLookupInput(name);
+  const entry = find(input.text);
   if (!entry) throw new Error(`No paritta named "${name}". Available: ${PARITTA.map((e) => e.key).join(', ')}.`);
   let ref = entry.texts[0];
-  if (text !== undefined) {
-    const want = canon.resolve(text).unit.id;
+  const textInput = text !== undefined ? romanizeLookupInput(text) : null;
+  if (textInput) {
+    const want = canon.resolve(textInput.text).unit.id;
     ref = entry.texts.find((t) => canon.resolve(t).unit.id === want);
     if (!ref) throw new Error(`${text} is not a source of ${entry.name}. Its sources: ${entry.texts.join(', ')}.`);
   }
@@ -140,7 +143,8 @@ export function paritta(canon, { name, text, offset = 0, limit = 60 } = {}) {
   const page = all.slice(offset, offset + limit);
   return {
     key: entry.key,
-    name: entry.name,
+    name: entry.name, ...inputNote(input),
+    ...(textInput?.original ? { text_input_script: textInput.script, text_input_romanized: textInput.text } : {}),
     text_id: unit.id,
     citation: unit.acronym,
     title: unit.title,
@@ -167,9 +171,13 @@ export function paritta(canon, { name, text, offset = 0, limit = 60 } = {}) {
 
 export function register({ tool, z, canon }) {
   tool('paritta', 'Paritta and other commonly recited texts (Maṅgala, Ratana, Karaṇīyamettā, Khandha, Mora, Dhajagga, Bojjhaṅga, Khuddakapāṭha chants and more) in Pāli from the bundled VRI edition, with their canonical citations and links to English translations. Call with no name or text to list the set. Follow continue_with for pagination pinned to the chosen source. Works offline.', {
-    name: z.string().max(100).optional().describe('Paritta name, e.g. "Ratana", "Karaṇīyamettā", "Khandha", "Mora" (diacritics optional). Omit to list all.'),
-    text: z.string().trim().min(1).max(100).optional().describe('With name: choose one of the entry\'s canonical sources, e.g. "Snp 2.1" instead of the default "Kp 6", or "SN 46.16" for Bojjhaṅga. Omit for its default source.'),
+    name: z.string().max(100).optional().describe('Paritta name, e.g. "Ratana", "Karaṇīyamettā", "Khandha", "Mora" in Roman or a supported native script (conversion labelled). Diacritics optional in Roman. Omit to list all.'),
+    text: z.string().trim().min(1).max(100).optional().describe('With name: choose one of the entry\'s canonical sources, e.g. "Snp 2.1" instead of the default "Kp 6", or "SN 46.16" for Bojjhaṅga. Native-script citations are converted and labelled separately. Omit for its default source.'),
     offset: z.number().int().min(0).max(100000).default(0).describe('Offset in the selected paritta, which may be an excerpt. Use continue_with; original canonical segment numbers use a separate numbering.'),
     limit: z.number().int().min(1).max(200).default(60).describe('Segments per page.'),
-  }, (args) => withNormalised(args.name, (name) => paritta(canon, { ...args, name })));
+  }, (args) => {
+    const input = romanizeLookupInput(args.name);
+    // Native letter choices are exact input, not English-keyboard spelling guesses.
+    return input.original ? paritta(canon, args) : withNormalised(args.name, (name) => paritta(canon, { ...args, name }));
+  });
 }
