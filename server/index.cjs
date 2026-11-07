@@ -29478,7 +29478,25 @@ function segmentOwners(unit) {
 }
 function getCommentary(uid, { offset = 0, limit = 40 } = {}) {
   if (uid === "commentary" || String(uid).startsWith("commentary:")) return readBook(uid, { offset, limit });
-  const { unit, notes } = resolve(uid);
+  const anchor = String(uid).match(/^([^/]+)\/c([1-9]\d*)$/);
+  const { unit, notes } = resolve(anchor ? anchor[1] : uid);
+  if (anchor) {
+    const first = Number(anchor[2]) - 1;
+    if (!Number.isSafeInteger(first)) throw new Error(`Commentary segment does not exist for ${unit.acronym}.`);
+    const selected = commentaryFor(unit, { offset: first, limit: 1, notes });
+    if (!selected.returned) throw new Error(`Commentary segment does not exist for ${unit.acronym}.`);
+    return {
+      ...selected,
+      segment_ref: `${unit.id}/c${first + 1}`,
+      parent_total_segments: selected.total_segments,
+      total_segments: 1,
+      offset,
+      limit,
+      returned: offset === 0 ? 1 : 0,
+      next_offset: null,
+      segments: offset === 0 ? selected.segments : []
+    };
+  }
   return commentaryFor(unit, { offset, limit, notes });
 }
 function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {}) {
@@ -29531,7 +29549,7 @@ function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {}) {
   };
 }
 function register14({ tool, z, citation }) {
-  tool("get_commentary", 'Read the traditional P\u0101li commentary (A\u1E6D\u1E6Dhakath\u0101, VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition) on a text: Suma\u1E45galavil\u0101sin\u012B (DN), Papa\xF1cas\u016Bdan\u012B (MN), S\u0101ratthappak\u0101sin\u012B (SN), Manorathap\u016Bra\u1E47\u012B (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. For direct book reading without asserting root alignment, use uid "commentary" to list the included books, then a returned commentary:<VRI-file> or commentary:<VRI-file>/cN segment reference. Paginated by segment. Works offline.', {
+  tool("get_commentary", 'Read the traditional P\u0101li commentary (A\u1E6D\u1E6Dhakath\u0101, VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition) on a text: Suma\u1E45galavil\u0101sin\u012B (DN), Papa\xF1cas\u016Bdan\u012B (MN), S\u0101ratthappak\u0101sin\u012B (SN), Manorathap\u016Bra\u1E47\u012B (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. Use an emitted aligned segment ref such as "mn10/c66" to read exactly that commentary segment. For direct book reading without asserting root alignment, use uid "commentary" to list the included books, then a returned commentary:<VRI-file> or commentary:<VRI-file>/cN segment reference. Paginated by segment. Works offline.', {
     uid: citation,
     offset: z.number().int().min(0).max(1e5).default(0).describe("Segment offset for continuation."),
     limit: z.number().int().min(1).max(200).default(40).describe("Segments per page.")
@@ -30227,7 +30245,7 @@ function citationLink(l, dir) {
       on: textInfo2(l.from),
       work: l.work,
       passage_ref: l.commentary_ref,
-      read_with: { tool: "get_commentary", uid: l.from },
+      read_with: { tool: "get_commentary", uid: l.commentary_ref },
       label: "Commentary (A\u1E6D\u1E6Dhakath\u0101), not the canon"
     },
     evidence: l.evidence,

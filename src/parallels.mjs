@@ -66,7 +66,7 @@ function citationLink(l, dir) {
     how_matched: MATCH[l.match],
     commentary: {
       on: textInfo(l.from), work: l.work, passage_ref: l.commentary_ref,
-      read_with: { tool: 'get_commentary', uid: l.from },
+      read_with: { tool: 'get_commentary', uid: l.commentary_ref },
       label: 'Commentary (Aṭṭhakathā), not the canon',
     },
     evidence: l.evidence,

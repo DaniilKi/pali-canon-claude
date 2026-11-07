@@ -189,7 +189,17 @@ export function segmentOwners(unit) {
  */
 export function getCommentary(uid, { offset = 0, limit = 40 } = {}) {
   if (uid === 'commentary' || String(uid).startsWith('commentary:')) return readBook(uid, { offset, limit });
-  const { unit, notes } = canon.resolve(uid);
+  const anchor = String(uid).match(/^([^/]+)\/c([1-9]\d*)$/);
+  const { unit, notes } = canon.resolve(anchor ? anchor[1] : uid);
+  if (anchor) {
+    const first = Number(anchor[2]) - 1;
+    if (!Number.isSafeInteger(first)) throw new Error(`Commentary segment does not exist for ${unit.acronym}.`);
+    const selected = commentaryFor(unit, { offset: first, limit: 1, notes });
+    if (!selected.returned) throw new Error(`Commentary segment does not exist for ${unit.acronym}.`);
+    return { ...selected, segment_ref: `${unit.id}/c${first + 1}`, parent_total_segments: selected.total_segments,
+      total_segments: 1, offset, limit, returned: offset === 0 ? 1 : 0, next_offset: null,
+      segments: offset === 0 ? selected.segments : [] };
+  }
   return commentaryFor(unit, { offset, limit, notes });
 }
 
@@ -233,7 +243,7 @@ export function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {})
 
 /** Feature registration (src/features/index.mjs). */
 export function register({ tool, z, citation }) {
-  tool('get_commentary', 'Read the traditional Pāli commentary (Aṭṭhakathā, VRI Chaṭṭha Saṅgāyana edition) on a text: Sumaṅgalavilāsinī (DN), Papañcasūdanī (MN), Sāratthappakāsinī (SN), Manorathapūraṇī (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. For direct book reading without asserting root alignment, use uid "commentary" to list the included books, then a returned commentary:<VRI-file> or commentary:<VRI-file>/cN segment reference. Paginated by segment. Works offline.', {
+  tool('get_commentary', 'Read the traditional Pāli commentary (Aṭṭhakathā, VRI Chaṭṭha Saṅgāyana edition) on a text: Sumaṅgalavilāsinī (DN), Papañcasūdanī (MN), Sāratthappakāsinī (SN), Manorathapūraṇī (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. Use an emitted aligned segment ref such as "mn10/c66" to read exactly that commentary segment. For direct book reading without asserting root alignment, use uid "commentary" to list the included books, then a returned commentary:<VRI-file> or commentary:<VRI-file>/cN segment reference. Paginated by segment. Works offline.', {
     uid: citation,
     offset: z.number().int().min(0).max(100000).default(0).describe('Segment offset for continuation.'),
     limit: z.number().int().min(1).max(200).default(40).describe('Segments per page.'),

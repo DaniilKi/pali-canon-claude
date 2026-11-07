@@ -15,7 +15,7 @@ The actual self-contained widget HTML passed in Chromium 154.0.8037.57 on Linux 
 Repeat it with Python, Playwright and Chromium installed:
 
 ```sh
-python -m pip install playwright
+python -m pip install playwright==1.62.0
 python -m playwright install chromium
 python scripts/widget-browser-check.py --report widget-browser.report.json
 ```
@@ -23,6 +23,12 @@ python scripts/widget-browser-check.py --report widget-browser.report.json
 For an existing Chromium installation, add `--browser /path/to/chromium`. The runner works from another working directory and replaces a previous report with a running or failed status if a new check cannot complete. It loads the source widget; normal package CI separately checks the generated bundles.
 
 This is a browser acceptance check with simulated hosts. It does not establish signed-in ChatGPT behavior, mobile-app behavior, host CSP compatibility, screen-reader usability or native-reader approval. No screenshots are required or saved.
+
+## Continuous browser gate — 7 November 2026
+
+`check.yml` now has a dedicated `Chromium reader` job, using Python 3.12 and Playwright 1.62.0. It uploads `widget-browser.report.json` on success or failure. The runner overwrites a previous report before loading dependencies. It exercises the actual HTML through both simulated host bridges at both viewport widths. The offline fixture builder calls the registered widget tool over in-memory MCP: Pāli is retrieved from the bundled VRI edition, while English HTTP responses are explicitly synthetic test data.
+
+The expanded check covers Pāli page replacement, exact-ID English continuation after primary recovery, refusal of unpinned offsets and a different-version fallback, cleared English attribution on failure, and error-envelope recovery. It also checks named landmarks/headings, real Tab/Enter source-link activation, 200% zoom without horizontal overflow, and the new polite live status for page/error changes. These are automated accessibility semantics and keyboard checks; a person still needs to assess screen-reader usability. The widget resource revision is v3.
 
 ## mcpo bridge check
 

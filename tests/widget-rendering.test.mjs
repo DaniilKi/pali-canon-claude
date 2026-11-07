@@ -18,7 +18,7 @@ class Element {
 }
 
 function view(output) {
-  const elements = Object.fromEntries(['title', 'meta', 'pali', 'english', 'footer'].map((id) => [id, new Element()]));
+  const elements = Object.fromEntries(['title', 'meta', 'pali', 'english', 'footer', 'status'].map((id) => [id, new Element()]));
   const handlers = {};
   const parent = { postMessage() {} };
   const window = { parent, openai: { toolOutput: output, theme: 'light' }, addEventListener(name, callback) { handlers[name] = callback; } };
@@ -37,7 +37,7 @@ function view(output) {
 
 const fixture = () => ({
   citation: 'Fixture 1', title: 'Prior fixture', collection: 'fixture', notes: [],
-  pali: { edition: 'Fixture', attribution: 'Fixture credit', license: 'Fixture terms', segments: [{ type: 'prose', text: 'Prior fixture text' }], total_segments: 1, returned: 1, next_offset: null },
+  pali: { edition: 'Fixture', attribution: 'Fixture credit', license: 'Fixture terms', segments: [{ type: 'prose', text: 'Prior fixture text' }], offset: 0, total_segments: 1, returned: 1, next_offset: null },
   english: null, links: { suttacentral: 'https://suttacentral.net/mn10' },
 });
 
@@ -95,4 +95,18 @@ test('unknown multi-page translation totals never render literal null as a chara
   assert.match(ui.elements.english.textContent, /6000/);
   assert.match(ui.elements.english.textContent, /12000/);
   assert.doesNotMatch(ui.elements.english.textContent, /null|undefined/);
+});
+
+test('the live status announces passage pages, English continuation and errors as text', () => {
+  const data = fixture();
+  data.pali.offset = 3; data.pali.total_segments = 10;
+  data.english = { translator: 'Fixture', url: 'https://accesstoinsight.org/fixture', text: 'Fixture English', offset: 6000 };
+  const ui = view(data);
+  assert.match(ui.elements.status.textContent, /segments 4 to 4 of 10/);
+  assert.match(ui.elements.status.textContent, /English continuing from character 6000/);
+  ui.globals({ error: 'Fixture <error>' });
+  assert.match(ui.elements.status.textContent, /Could not open.*Fixture <error>/);
+  ui.globals(fixture());
+  assert.match(ui.elements.status.textContent, /segments 1 to 1 of 1/);
+  assert.doesNotMatch(ui.elements.status.textContent, /error|6000/);
 });

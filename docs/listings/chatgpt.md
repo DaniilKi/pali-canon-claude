@@ -27,12 +27,12 @@ The hosted server gains one extra tool and its page when the setting `CHATGPT_WI
 | Tool | `read_passage_widget` (read-only; fetches English live, so `openWorldHint: true`) |
 | Inputs | `uid` (an individual citation in a supported script, or source link), `translation`, `english` (true/false), `offset` and `limit` (Pāli segments), `english_offset` (English characters). Native input is labelled; the widget displays Roman Pāli and unchanged English |
 | Returns | Pāli segments with VRI paragraph and PTS page markers, VRI attribution and licence; one English translation with translator, source link, attribution and licence; numbering notes; a SuttaCentral link (link only) |
-| Page (MCP Apps standard) | `ui://pali-canon/reader-v2.html`, type `text/html;profile=mcp-app`, linked by `_meta.ui.resourceUri` |
-| Page (Apps SDK alias) | `ui://pali-canon/reader-v2.skybridge.html`, type `text/html+skybridge`, linked by `_meta["openai/outputTemplate"]` |
+| Page (MCP Apps standard) | `ui://pali-canon/reader-v3.html`, type `text/html;profile=mcp-app`, linked by `_meta.ui.resourceUri` |
+| Page (Apps SDK alias) | `ui://pali-canon/reader-v3.skybridge.html`, type `text/html+skybridge`, linked by `_meta["openai/outputTemplate"]` |
 | Content security | The page loads nothing from the internet: `connectDomains`, `resourceDomains` and `frameDomains` are all empty. Links open through ChatGPT (`openExternal`). `openai/widgetCSP.redirect_domains` lists the only link targets as trusted redirect destinations: `https://www.dhammatalks.org`, `https://dhammatalks.org`, `https://www.accesstoinsight.org`, `https://accesstoinsight.org`, `https://ancient-buddhist-texts.net` (the English sources, already on the `src/http.mjs` allowlist) and `https://suttacentral.net` (link only, never fetched). `_meta.ui.csp` has no field for this, so it is set only in the Apps SDK key. |
 | Source | [`src/chatgpt-widget.mjs`](../../src/chatgpt-widget.mjs), tests in [`tests/chatgpt-widget.test.mjs`](../../tests/chatgpt-widget.test.mjs) |
 
-When the page HTML changes in a way that could break a cached copy, raise `WIDGET_VERSION` (the current revision is `v2`)
+When the page HTML changes in a way that could break a cached copy, raise `WIDGET_VERSION` (the current revision is `v3`)
 so the addresses change, as OpenAI asks.
 
 If no English translation is linked for a text, or the reader turns English off, the view shows the Pāli
@@ -43,7 +43,7 @@ English. For a long sutta such as MN 10 the view says where each column stops; a
 tool again with `offset` (Pāli). For English, use the returned `english.continue_with` tool name and arguments: the next character offset is pinned to the exact translation ID. A non-zero `english_offset` without that ID is rejected for English while the Pāli remains readable. An outage fallback to another version cannot reuse the old character offset; restart that version from its beginning. `get_translation`
 with `offset` also returns the rest of the English as plain text, and the source page link is always shown.
 
-The `v2` page clears the previous passage, citation and source links on a failed read, including errors
+The `v3` page clears the previous passage, citation and source links on a failed read, including errors
 delivered through the Apps SDK full-result metadata or MCP Apps error envelope. The tool includes its
 error object in `structuredContent` so the Apps SDK can display it. Multi-page translations with an
 unknown total show continuation positions without inventing a total character count.

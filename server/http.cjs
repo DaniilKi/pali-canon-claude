@@ -31600,7 +31600,25 @@ function segmentOwners(unit) {
 }
 function getCommentary(uid, { offset = 0, limit = 40 } = {}) {
   if (uid === "commentary" || String(uid).startsWith("commentary:")) return readBook(uid, { offset, limit });
-  const { unit, notes } = resolve(uid);
+  const anchor = String(uid).match(/^([^/]+)\/c([1-9]\d*)$/);
+  const { unit, notes } = resolve(anchor ? anchor[1] : uid);
+  if (anchor) {
+    const first = Number(anchor[2]) - 1;
+    if (!Number.isSafeInteger(first)) throw new Error(`Commentary segment does not exist for ${unit.acronym}.`);
+    const selected = commentaryFor(unit, { offset: first, limit: 1, notes });
+    if (!selected.returned) throw new Error(`Commentary segment does not exist for ${unit.acronym}.`);
+    return {
+      ...selected,
+      segment_ref: `${unit.id}/c${first + 1}`,
+      parent_total_segments: selected.total_segments,
+      total_segments: 1,
+      offset,
+      limit,
+      returned: offset === 0 ? 1 : 0,
+      next_offset: null,
+      segments: offset === 0 ? selected.segments : []
+    };
+  }
   return commentaryFor(unit, { offset, limit, notes });
 }
 function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {}) {
@@ -31653,7 +31671,7 @@ function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {}) {
   };
 }
 function register14({ tool, z, citation }) {
-  tool("get_commentary", 'Read the traditional P\u0101li commentary (A\u1E6D\u1E6Dhakath\u0101, VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition) on a text: Suma\u1E45galavil\u0101sin\u012B (DN), Papa\xF1cas\u016Bdan\u012B (MN), S\u0101ratthappak\u0101sin\u012B (SN), Manorathap\u016Bra\u1E47\u012B (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. For direct book reading without asserting root alignment, use uid "commentary" to list the included books, then a returned commentary:<VRI-file> or commentary:<VRI-file>/cN segment reference. Paginated by segment. Works offline.', {
+  tool("get_commentary", 'Read the traditional P\u0101li commentary (A\u1E6D\u1E6Dhakath\u0101, VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition) on a text: Suma\u1E45galavil\u0101sin\u012B (DN), Papa\xF1cas\u016Bdan\u012B (MN), S\u0101ratthappak\u0101sin\u012B (SN), Manorathap\u016Bra\u1E47\u012B (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. Use an emitted aligned segment ref such as "mn10/c66" to read exactly that commentary segment. For direct book reading without asserting root alignment, use uid "commentary" to list the included books, then a returned commentary:<VRI-file> or commentary:<VRI-file>/cN segment reference. Paginated by segment. Works offline.', {
     uid: citation,
     offset: z.number().int().min(0).max(1e5).default(0).describe("Segment offset for continuation."),
     limit: z.number().int().min(1).max(200).default(40).describe("Segments per page.")
@@ -32349,7 +32367,7 @@ function citationLink(l, dir) {
       on: textInfo2(l.from),
       work: l.work,
       passage_ref: l.commentary_ref,
-      read_with: { tool: "get_commentary", uid: l.from },
+      read_with: { tool: "get_commentary", uid: l.commentary_ref },
       label: "Commentary (A\u1E6D\u1E6Dhakath\u0101), not the canon"
     },
     evidence: l.evidence,
@@ -33447,7 +33465,7 @@ function createServer2() {
 
 // src/chatgpt-widget.mjs
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v2";
+var WIDGET_VERSION = "v3";
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 var MCP_APP_MIME = "text/html;profile=mcp-app";
@@ -33607,12 +33625,14 @@ var WIDGET_HTML = `<!doctype html>
   footer { padding:10px 16px 14px; border-top:1px solid var(--line); }
   footer p { margin:4px 0; }
   a { color:var(--accent); }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
   .empty { color:var(--muted); font-style:italic; }
   @media (max-width: 640px) { .cols { grid-template-columns:1fr; } .col + .col { border-left:0; border-top:1px solid var(--line); } }
 </style>
 </head>
 <body>
 <header><h1 id="title">Loading the passage\u2026</h1><div class="meta" id="meta"></div></header>
+<p id="status" class="sr-only" role="status" aria-live="polite" aria-atomic="true">Waiting for a passage.</p>
 <main class="cols">
   <section class="col" aria-labelledby="pali-h"><h2 id="pali-h">P\u0101li</h2><div id="pali"></div></section>
   <section class="col" aria-labelledby="en-h"><h2 id="en-h">English</h2><div id="english"></div></section>
@@ -33642,6 +33662,7 @@ var WIDGET_HTML = `<!doctype html>
       if (typeof d.error !== 'string') return;
       rendered = d;
       document.getElementById('title').textContent = 'Could not open the passage';
+      document.getElementById('status').textContent = 'Could not open the passage. ' + d.error;
       ['meta', 'pali', 'english', 'footer'].forEach(function (id) { clear(document.getElementById(id)); });
       document.getElementById('pali').appendChild(el('p', 'empty', d.error));
       document.getElementById('english').appendChild(el('p', 'empty', 'Check the citation and ask to open the passage again.'));
@@ -33685,6 +33706,9 @@ var WIDGET_HTML = `<!doctype html>
     f.appendChild(el('p', '', 'P\u0101li: ' + (d.pali.edition || '') + '. ' + (d.pali.attribution || '') + ' ' + (d.pali.license || '')));
     if (d.english) f.appendChild(el('p', '', 'English: ' + (d.english.attribution || '') + ' ' + (d.english.license || '')));
     var sc = el('p', ''); sc.appendChild(document.createTextNode('Parallels and other translations: ')); sc.appendChild(link(d.links && d.links.suttacentral, 'SuttaCentral')); f.appendChild(sc);
+    document.getElementById('status').textContent = (d.citation || 'Passage') + '. ' +
+      (d.pali.returned ? 'Showing P\u0101li segments ' + (d.pali.offset + 1) + ' to ' + (d.pali.offset + d.pali.returned) + ' of ' + d.pali.total_segments + '. ' : 'No P\u0101li segments on this page. ') +
+      (d.english ? 'English ' + (d.english.offset ? 'continuing from character ' + d.english.offset : 'loaded') + '.' : (d.english_error || 'No English translation requested.'));
   }
   // Apps SDK (window.openai) path.
   function toolResult(result) {

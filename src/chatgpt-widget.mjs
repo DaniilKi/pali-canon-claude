@@ -19,7 +19,7 @@ import * as english from './english.mjs';
 import { romanizeInput, inputNote } from './script.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v2';
+export const WIDGET_VERSION = 'v3';
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 export const SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 export const MCP_APP_MIME = 'text/html;profile=mcp-app';
@@ -172,12 +172,14 @@ export const WIDGET_HTML = `<!doctype html>
   footer { padding:10px 16px 14px; border-top:1px solid var(--line); }
   footer p { margin:4px 0; }
   a { color:var(--accent); }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
   .empty { color:var(--muted); font-style:italic; }
   @media (max-width: 640px) { .cols { grid-template-columns:1fr; } .col + .col { border-left:0; border-top:1px solid var(--line); } }
 </style>
 </head>
 <body>
 <header><h1 id="title">Loading the passage…</h1><div class="meta" id="meta"></div></header>
+<p id="status" class="sr-only" role="status" aria-live="polite" aria-atomic="true">Waiting for a passage.</p>
 <main class="cols">
   <section class="col" aria-labelledby="pali-h"><h2 id="pali-h">Pāli</h2><div id="pali"></div></section>
   <section class="col" aria-labelledby="en-h"><h2 id="en-h">English</h2><div id="english"></div></section>
@@ -207,6 +209,7 @@ export const WIDGET_HTML = `<!doctype html>
       if (typeof d.error !== 'string') return;
       rendered = d;
       document.getElementById('title').textContent = 'Could not open the passage';
+      document.getElementById('status').textContent = 'Could not open the passage. ' + d.error;
       ['meta', 'pali', 'english', 'footer'].forEach(function (id) { clear(document.getElementById(id)); });
       document.getElementById('pali').appendChild(el('p', 'empty', d.error));
       document.getElementById('english').appendChild(el('p', 'empty', 'Check the citation and ask to open the passage again.'));
@@ -250,6 +253,9 @@ export const WIDGET_HTML = `<!doctype html>
     f.appendChild(el('p', '', 'Pāli: ' + (d.pali.edition || '') + '. ' + (d.pali.attribution || '') + ' ' + (d.pali.license || '')));
     if (d.english) f.appendChild(el('p', '', 'English: ' + (d.english.attribution || '') + ' ' + (d.english.license || '')));
     var sc = el('p', ''); sc.appendChild(document.createTextNode('Parallels and other translations: ')); sc.appendChild(link(d.links && d.links.suttacentral, 'SuttaCentral')); f.appendChild(sc);
+    document.getElementById('status').textContent = (d.citation || 'Passage') + '. ' +
+      (d.pali.returned ? 'Showing Pāli segments ' + (d.pali.offset + 1) + ' to ' + (d.pali.offset + d.pali.returned) + ' of ' + d.pali.total_segments + '. ' : 'No Pāli segments on this page. ') +
+      (d.english ? 'English ' + (d.english.offset ? 'continuing from character ' + d.english.offset : 'loaded') + '.' : (d.english_error || 'No English translation requested.'));
   }
   // Apps SDK (window.openai) path.
   function toolResult(result) {

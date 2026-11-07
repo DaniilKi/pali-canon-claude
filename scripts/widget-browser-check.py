@@ -1,10 +1,9 @@
-# Optional acceptance runner: pip install playwright; playwright install chromium.
+# Real-browser CI/local gate: pip install playwright==1.62.0; playwright install chromium.
 # Run from any directory; --browser can select a preinstalled Chromium.
 import argparse
 import json
 import subprocess
 from pathlib import Path
-from playwright.sync_api import sync_playwright
 
 parser = argparse.ArgumentParser(
     description="Run the actual reader HTML in Chromium with simulated host bridges; no model or signed-in ChatGPT session."
@@ -20,13 +19,12 @@ if args.report:
 
 
 def check():
+    from playwright.sync_api import sync_playwright
     payload = json.loads(
         subprocess.run(
             [
                 "node",
-                "--input-type=module",
-                "-e",
-                "import {WIDGET_HTML,readPassage} from './src/chatgpt-widget.mjs'; process.stdout.write(JSON.stringify({html:WIDGET_HTML,fixture:await readPassage({uid:'MN 10',english:false,limit:3})}));",
+                "scripts/widget-browser-fixtures.mjs",
             ],
             cwd=root,
             check=True,
@@ -41,138 +39,117 @@ def check():
     with sync_playwright() as p:
         browser = p.chromium.launch(executable_path=args.browser, headless=True)
         for width in [390, 1280]:
-            page = browser.new_page(viewport={"width": width, "height": 900})
-            page.route(
-                "**/*",
-                lambda route: (requests.append(route.request.url), route.abort()),
-            )
-            errors = []
-            page.on("pageerror", lambda e: errors.append(str(e)))
-            page.set_content(
-                "<style>body{margin:0}iframe{border:0;width:100%;height:850px}</style>"
-            )
-            page.evaluate(
-                """html => {
-              window.bridgeMessages=[];
-              const frame=document.createElement('iframe'); frame.id='reader';
-              window.addEventListener('message', ev=> {
-                window.bridgeMessages.push(ev.data);
-                if(ev.data.method==='ui/initialize') frame.contentWindow.postMessage({jsonrpc:'2.0',id:1,result:{hostContext:{theme:'dark'}}},'*');
-              });
-              frame.srcdoc=html;document.body.append(frame);
-            }""",
-                html,
-            )
-            reader = page.frame_locator("#reader")
-            page.wait_for_function(
-                "window.bridgeMessages.some(m=>m.method==='ui/notifications/initialized')"
-            )
-            assert reader.locator("html").get_attribute("data-theme") == "dark"
-            send = lambda params: page.evaluate(
-                "params=>document.querySelector('iframe').contentWindow.postMessage({jsonrpc:'2.0',method:'ui/notifications/tool-result',params},'*')",
-                params,
-            )
-            send({"structuredContent": fixture})
-            reader.locator("#title").filter(has_text="MN 10").wait_for()
-            for s in fixture["pali"]["segments"]:
-                assert s["text"] in reader.locator("#pali").inner_text()
-            assert page.frames[1].evaluate(
-                "document.documentElement.scrollWidth<=innerWidth"
-            )
-            columns = page.frames[1].evaluate(
-                "getComputedStyle(document.querySelector('main')).gridTemplateColumns.split(' ').length"
-            )
-            assert columns == (1 if width == 390 else 2)
-            reader.locator("a").click()
-            page.wait_for_function(
-                "window.bridgeMessages.some(m=>m.method==='ui/open-link')"
-            )
-            opened = page.evaluate(
-                "window.bridgeMessages.find(m=>m.method==='ui/open-link').params.url"
-            )
-            assert opened == fixture["links"]["suttacentral"]
-            send(
-                {
-                    "isError": True,
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": json.dumps(
-                                {"error": "Browser fixture error <img src=x>"}
-                            ),
-                        }
-                    ],
-                }
-            )
-            reader.locator("#title").filter(has_text="Could not open").wait_for()
-            assert (
-                "Browser fixture error <img src=x>"
-                in reader.locator("#pali").inner_text()
-            )
-            assert reader.locator("img").count() == 0
-            assert reader.locator("#footer").inner_text() == ""
-            assert (
-                fixture["pali"]["segments"][0]["text"]
-                not in reader.locator("#pali").inner_text()
-            )
-            send({"structuredContent": fixture})
-            reader.locator("#title").filter(has_text="MN 10").wait_for()
-            assert not errors, errors
-            checks.append(
-                {
-                    "bridge": "MCP Apps",
-                    "width": width,
-                    "source_segments": len(fixture["pali"]["segments"]),
-                    "checks": [
-                        "handshake",
-                        "theme",
-                        "source text",
-                        "responsive columns",
-                        "no horizontal overflow",
-                        "open-link",
-                        "plain error",
-                        "stale text cleared",
-                        "recovery",
-                        "no JS errors",
-                    ],
-                }
-            )
-            page.close()
-        page = browser.new_page()
-        page.route(
-            "**/*", lambda route: (requests.append(route.request.url), route.abort())
-        )
-        page.evaluate(
-            'fixture=>{window.openai={theme:"light",toolOutput:fixture}}', fixture
-        )
-        page.set_content(html)
-        page.locator("#title").filter(has_text="MN 10").wait_for()
-        page.evaluate(
-            "window.openai.toolOutput={error:'Apps fixture failure'};window.dispatchEvent(new Event('openai:set_globals'))"
-        )
-        page.locator("#title").filter(has_text="Could not open").wait_for()
-        assert page.locator("#footer").inner_text() == ""
-        page.evaluate(
-            'fixture=>{window.openai.toolOutput=fixture;window.dispatchEvent(new Event("openai:set_globals"))}',
-            fixture,
-        )
-        page.locator("#title").filter(has_text="MN 10").wait_for()
-        checks.append(
-            {
-                "bridge": "Apps SDK",
-                "checks": [
-                    "initial render",
-                    "globals error",
-                    "stale attribution cleared",
-                    "recovery",
-                ],
-            }
-        )
+            for bridge in ["MCP Apps", "Apps SDK"]:
+                page = browser.new_page(viewport={"width": width, "height": 900})
+                page.route("**/*", lambda route: (requests.append(route.request.url), route.abort()))
+                errors = []
+                page.on("pageerror", lambda e: errors.append(str(e)))
+                if bridge == "MCP Apps":
+                    page.set_content("<style>body{margin:0}iframe{border:0;width:100%;height:850px}</style>")
+                    page.evaluate("""html => {
+                      window.bridgeMessages=[];
+                      const frame=document.createElement('iframe'); frame.id='reader';
+                      window.addEventListener('message', ev=> {
+                        window.bridgeMessages.push(ev.data);
+                        if(ev.data.method==='ui/initialize') frame.contentWindow.postMessage({jsonrpc:'2.0',id:1,result:{hostContext:{theme:'dark'}}},'*');
+                      });
+                      frame.srcdoc=html;document.body.append(frame);
+                    }""", html)
+                    page.wait_for_function("window.bridgeMessages.some(m=>m.method==='ui/notifications/initialized')")
+                    frame = page.frames[1]
+                    send = lambda data: page.evaluate(
+                        "data=>document.querySelector('iframe').contentWindow.postMessage({jsonrpc:'2.0',method:'ui/notifications/tool-result',params:{structuredContent:data}},'*')", data)
+                else:
+                    page.evaluate("""() => {window.opened=[];window.openai={theme:'dark',openExternal:args=>window.opened.push(args.href)}}""")
+                    page.set_content(html)
+                    frame = page.main_frame
+                    send = lambda data: page.evaluate(
+                        "data=>{window.openai.toolOutput=data;window.dispatchEvent(new Event('openai:set_globals'))}", data)
+
+                def displayed(data):
+                    send(data)
+                    frame.locator("#title").filter(has_text="MN 10").wait_for()
+                    expected = data["pali"]["segments"][0]["text"]
+                    frame.wait_for_function("text=>document.querySelector('#pali').textContent.includes(text)", arg=expected)
+                    for segment in data["pali"]["segments"]:
+                        assert segment["text"] in frame.locator("#pali").inner_text()
+                    if data.get("english"):
+                        frame.wait_for_function("text=>document.querySelector('.en')?.textContent===text", arg=data["english"]["text"])
+                        assert data["english"]["license"] in frame.locator("#footer").inner_text()
+                    else:
+                        frame.wait_for_function("()=>!document.querySelector('.en')")
+
+                displayed(fixture)
+                assert frame.locator("html").get_attribute("data-theme") == "dark"
+                assert frame.get_by_role("main").count() == 1
+                assert frame.get_by_role("heading", level=1).count() == 1
+                assert frame.get_by_role("region", name="Pāli", exact=True).count() == 1
+                assert frame.get_by_role("region", name="English", exact=True).count() == 1
+                status = frame.get_by_role("status")
+                assert status.get_attribute("aria-live") == "polite"
+                assert status.get_attribute("aria-atomic") == "true"
+                assert "segments 1 to 3" in status.text_content()
+                assert frame.evaluate("document.documentElement.scrollWidth<=innerWidth")
+                columns = frame.evaluate("getComputedStyle(document.querySelector('main')).gridTemplateColumns.split(' ').length")
+                assert columns == (1 if width == 390 else 2)
+                # Check real keyboard navigation and host-routed activation, without leaving the page.
+                frame.locator("body").press("Tab")
+                assert frame.evaluate("document.activeElement.tagName") == "A"
+                frame.locator("a").press("Enter")
+                if bridge == "MCP Apps":
+                    page.wait_for_function("window.bridgeMessages.some(m=>m.method==='ui/open-link')")
+                    opened = page.evaluate("window.bridgeMessages.find(m=>m.method==='ui/open-link').params.url")
+                else:
+                    opened = page.evaluate("window.opened[0]")
+                assert opened == fixture["links"]["suttacentral"]
+                frame.evaluate("document.body.style.zoom='2'")
+                assert frame.evaluate("document.documentElement.scrollWidth<=innerWidth"), "overflow at 200% zoom"
+                frame.evaluate("document.body.style.zoom='1'")
+
+                continuation = payload["continuation"]
+                displayed(continuation["next"])
+                assert fixture["pali"]["segments"][0]["text"] not in frame.locator("#pali").inner_text()
+                assert "segments 4 to 6" in status.text_content()
+                displayed(continuation["fallback"])
+                assert "earlier version" in frame.locator("#english").inner_text()
+                displayed(continuation["pinned"])
+                assert "Continuing from character 6000" in frame.locator("#english").inner_text()
+                assert "character 6000" in status.text_content()
+                assert continuation["fallback"]["english"]["text"] not in frame.locator("#english").inner_text()
+                displayed(continuation["unpinned"])
+                assert "translation_id" in frame.locator("#english").inner_text()
+                assert "English:" not in frame.locator("#footer").inner_text()
+                displayed(continuation["primary"])
+                displayed(continuation["refused"])
+                assert continuation["refused"]["english_error"] in frame.locator("#english").inner_text()
+                assert "English:" not in frame.locator("#footer").inner_text()
+                assert continuation["primary"]["english"]["text"] not in frame.locator("#english").inner_text()
+                envelope = {"isError": True, "content": [{"type": "text", "text": json.dumps({"error": "Browser fixture error <img src=x>"})}]}
+                if bridge == "MCP Apps":
+                    page.evaluate("params=>document.querySelector('iframe').contentWindow.postMessage({jsonrpc:'2.0',method:'ui/notifications/tool-result',params},'*')", envelope)
+                else:
+                    page.evaluate("result=>{window.openai.toolOutput=undefined;window.openai.toolResponseMetadata={call_tool_result:result};window.dispatchEvent(new Event('openai:set_globals'))}", envelope)
+                frame.locator("#title").filter(has_text="Could not open").wait_for()
+                assert "Browser fixture error <img src=x>" in frame.locator("#pali").inner_text()
+                assert "Could not open" in status.text_content()
+                assert frame.locator("img").count() == 0
+                assert frame.locator("#footer").inner_text() == ""
+                if bridge == "Apps SDK":
+                    page.evaluate("window.openai.toolResponseMetadata=undefined")
+                displayed(fixture)
+                assert not errors, errors
+                checks.append({"bridge": bridge, "width": width,
+                    "checks": ["initialization", "theme", "source text", "responsive columns", "no horizontal overflow",
+                        "named landmarks and headings", "keyboard link activation", "200% zoom", "live status updates",
+                        "Pāli continuation", "English pinned continuation after primary recovery", "unpinned offset refused",
+                        "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "no JS errors"]})
+                page.close()
         assert not requests, requests
         report = {
             "status": "passed",
             "browser": "Chromium " + browser.version,
             "checks": checks,
+            "fixtures": {"pali": "bundled VRI", "english": "synthetic HTTP responses", "transport": "in-memory MCP", "simulated_fetches": payload["fixture_fetches"]},
             "scope": "Local browser with simulated host bridges; not signed-in ChatGPT acceptance",
         }
         if args.report:
