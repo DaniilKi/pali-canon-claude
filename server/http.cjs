@@ -28906,7 +28906,7 @@ function foldWithOffsets(text) {
     const ch = text[i];
     const code = ch.charCodeAt(0);
     if (code >= 128 && new RegExp("\\p{M}", "u").test(ch)) continue;
-    folded += code < 128 || code >= 55296 && code <= 57343 ? ch : ch.normalize("NFD")[0];
+    folded += code >= 128 && new RegExp("\\p{Nd}", "u").test(ch) ? romanizeInput(ch).text : code < 128 || code >= 55296 && code <= 57343 ? ch : ch.normalize("NFD")[0];
     offsets.push(i);
   }
   offsets.push(text.length);
@@ -28960,9 +28960,11 @@ function findCitations(text, canon, { limit = MAX_RESULTS } = {}) {
   const spans = scan(text, { editionBookNames: canon.load().canon.books.map((book) => book.title) });
   const citations = spans.slice(0, limit).map((span) => {
     try {
-      const { unit, notes, alternatives } = canon.resolve(span.text.normalize("NFC"));
+      const input = span.scheme === "link" ? { text: span.text } : romanizeLookupInput(span.text);
+      const { unit, notes, alternatives } = canon.resolve(input.text.normalize("NFC"));
       return {
         ...span,
+        ...inputNote(input),
         status: "resolved",
         text_id: unit.id,
         citation: unit.acronym,
@@ -28984,12 +28986,12 @@ function findCitations(text, canon, { limit = MAX_RESULTS } = {}) {
     ...spans.length > citations.length ? { truncated: true } : {},
     offsets: "start and end are UTF-16 code-unit offsets into the input, end exclusive (JavaScript String.slice).",
     citations,
-    scope: "Citations are found by pattern; a citation the scanner did not recognise is not checked. Printed edition prefixes are retained, with parenthetical book qualifiers recognised from the bundled source titles. Unresolved citations are reported, never corrected. Abbreviations that read as English in prose (single letters before a bare number, It, Ps, Pe, Ne, Pp, Ya, Dt, As) are skipped; write MN, SN, Iti, Pa\u1E6Dis and so on, or check one citation with resolve_reference.",
+    scope: "Citations are found by pattern; a citation the scanner did not recognise is not checked. Supported native numerals are accepted with Roman citation names; native-script names are not scanned. URLs retain their literal identity. Printed edition prefixes are retained, with parenthetical book qualifiers recognised from the bundled source titles. Unresolved citations are reported, never corrected. Abbreviations that read as English in prose (single letters before a bare number, It, Ps, Pe, Ne, Pp, Ya, Dt, As) are skipped; write MN, SN, Iti, Pa\u1E6Dis and so on, or check one citation with resolve_reference.",
     source: { name: source4.name, attribution: source4.attribution, terms: source4.terms }
   };
 }
 function register4({ tool, z, canon }) {
-  tool("find_citations", "Find every P\u0101li Canon citation in a piece of free text (an essay, a talk transcript, a paper's references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nid\u0101navaggo), PTS pages like M i 55 or S v 420, Bilara IDs like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org / ancient-buddhist-texts.net links. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Works offline.", {
+  tool("find_citations", "Find every P\u0101li Canon citation in a piece of free text (an essay, a talk transcript, a paper's references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nid\u0101navaggo), PTS pages like M i 55 or S v 420, Bilara IDs like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org / ancient-buddhist-texts.net links. Supports native numerals with Roman citation names, preserving original text and offsets; native-script names are not scanned. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Works offline.", {
     text: z.string().min(1).max(MAX_TEXT).describe("The free text to scan, up to 200,000 characters.")
   }, ({ text }) => findCitations(text, canon));
 }

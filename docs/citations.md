@@ -209,7 +209,7 @@ The tool explains why: an unknown abbreviation, a number past the end of a colle
 
 ## Checking every citation in a piece of text
 
-The `find_citations` tool reads a whole essay, talk transcript or reference list, finds every citation in it and checks each one, all offline. For each citation it returns where it is in the text (character offsets), the text it names (ID and title) or, if it does not resolve, the reason (for example "MN 999 is not in the canon index" or "Sn 1032 looks like a verse number"). It never corrects a citation for you.
+The `find_citations` tool reads a whole essay, talk transcript or reference list, finds every citation in it and checks each one, all offline. For each citation it returns where it is in the text (character offsets), the text it names (ID and title) or, if it does not resolve, the reason (for example "MN 999 is not in the canon index" or "Sn 1032 looks like a verse number"). It never corrects a citation for you. Supported native numerals work with Roman citation names, such as AN ๓.๖๕. Original snippets and offsets are preserved. Native-script names are not scanned; use resolve_reference for a single native citation. Mixed-script or unknown numbers are reported as unresolved, and links keep their literal URL identity.
 
 Running text is read more strictly than a single citation typed into `resolve_reference`, so that ordinary sentences are not mistaken for citations:
 

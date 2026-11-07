@@ -316,3 +316,6 @@ Next reproduced research-navigation gap: get_parallels accepts Roman AN 3.65 and
 
 
 Native parallel navigation now converts supported citations before resolution and retains graph/source evidence and pagination. Ambiguous pages and unindexed spans require exact selection; exact groups remain supported. The installed audit checks both transports across eight scripts with outbound access disabled. This adds no new relations or scholarly/native-reader acceptance (D152).
+
+
+Native decimal numerals now work with recognised Roman citation names in find_citations, with original snippets and UTF-16 offsets retained. Mixed/unknown numbers are unresolved, page alternatives remain explicit, and URLs preserve their literal identity. Native-script names remain outside the conservative free-prose scanner's scope; use resolve_reference for a single native citation. Both installed transports are checked offline (D153).

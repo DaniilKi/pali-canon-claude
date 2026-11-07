@@ -921,3 +921,10 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** get_parallels rejected native numerals and silently reduced an unindexed span or ambiguous page to one graph node.
 - **Decision.** Completely convert supported native input, label conversion separately and reject ambiguous pages/multi-text fallback spans. Preserve exact indexed groups and identical endpoints. Merge reference and canonical-ID cautions without duplicates. Keep graph evidence, source labels, reading commands, pagination and external link-only policy unchanged.
 - **Consequences.** Native citations select the same recorded relations as Roman citations; conversion establishes no new parallel or native-edition agreement. Packaged stdio/HTTP regressions run offline. Human review and actual signed-in-client acceptance remain separate.
+
+
+### D153. Scan native citation numerals without rewriting prose or URLs
+
+- **Context.** find_citations found Roman AN 3.65 and MN 10 but silently missed their Thai-numeral equivalents.
+- **Decision.** Convert supported native decimal numerals one-for-one in the scanner's offset-preserving folded view. Keep Roman citation names and their case-sensitive prose safeguards. Completely convert each textual citation before resolution, label resolved input conversion, and report mixed/unknown numbers as unresolved. Retain literal URL identity, original snippets/UTF-16 offsets, resolver cautions and ambiguous-page candidates.
+- **Consequences.** This extends numeral recognition, not native-script name recognition or unrestricted prose transliteration. Original offsets remain executable with String.slice. No new source text, URL alias or certainty about ambiguous references is introduced; installed stdio/HTTP tests disable outbound requests.

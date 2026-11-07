@@ -127,3 +127,29 @@ test('find_citations: registers one read-only, offline tool', () => {
   assert.equal(options, undefined, 'no network option: openWorldHint stays false');
   assert.equal(fn({ text: 'MN 10' }).citations[0].text_id, 'mn10');
 });
+
+
+test('native numeral citation scanning preserves original UTF-16 offsets and cautious prose rules', async () => {
+  const { SCRIPTS, transliterate } = await import('../src/script.mjs');
+  for (const script of SCRIPTS) {
+    const digits = value => transliterate(value, 'roman', script);
+    const text = `😀 See AN ${digits('3.65')}, MN ${digits('10')}, Dhp ${digits('1-20')} and S i ${digits('57')}.`;
+    const r = findCitations(text, canon);
+    assert.deepEqual(r.citations.map(c => c.text_id), ['an3.65', 'mn10', 'dhp1-20', 'sn2.22']);
+    assert.ok(r.citations[3].also_on_that_page.length);
+    for (const c of r.citations) {
+      assert.equal(text.slice(c.start, c.end), c.text);
+      assert.equal(c.input_script, ['roman', 'sinhala'].includes(script) ? undefined : script);
+    }
+    for (const prose of [`Plan A ${digits('3')} failed`, `MN ${digits('10')}th edition`, `MN ${digits('10')},${digits('000')}`, `ηMN ${digits('10')}`, `mn ${digits('10')}`]) assert.equal(findCitations(prose, canon).found, 0, prose);
+  }
+});
+
+test('native numeral scanning reports mixed or unknown references without silently changing URLs', () => {
+  const mixed = findCitations('See AN ๓.६५; MN ๙๙๙.', canon);
+  assert.equal(mixed.found, 2); assert.equal(mixed.resolved, 0);
+  assert.match(mixed.citations[0].reason, /converted completely/);
+  const link = findCitations('https://suttacentral.net/mn๑๐', canon);
+  assert.equal(link.found, 1); assert.equal(link.resolved, 0);
+  assert.equal(link.citations[0].text, 'https://suttacentral.net/mn๑๐');
+});

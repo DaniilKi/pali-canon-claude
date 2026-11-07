@@ -48,6 +48,8 @@ jobs:
         run: node scripts/audit-english-scope.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report english-verification-scope.report.json
       - name: Check packaged native parallel citations and ambiguous scope offline
         run: node scripts/audit-parallels.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-parallels.report.json
+      - name: Check packaged native numeral citation scanning and offsets offline
+        run: node scripts/audit-citation-scanner.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-citation-scanner.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -65,4 +67,5 @@ jobs:
             native-verification.report.json
             english-verification-scope.report.json
             native-parallels.report.json
+            native-citation-scanner.report.json
           if-no-files-found: warn
