@@ -7,7 +7,7 @@ import { SCRIPTS, transliterate } from '../../src/script.mjs';
 import { expectedSegments } from './study-scripts.mjs';
 
 export async function auditWidget(client, { exhaustAligned = false } = {}) {
-  const counts = { scripts: 0, selection_cases: 0, continued_pages: 0, exact_segments: 0, context_reads: 0, exact_returns: 0, postcanonical_books: 0, root_files: 0, commentary_books: 0, aligned_checked: 0, aligned_available: 0, aligned_unavailable: 0, rejected_requests: 0 };
+  const counts = { scripts: 0, selection_cases: 0, continued_pages: 0, exact_segments: 0, context_reads: 0, exact_returns: 0, commentary_context_reads: 0, commentary_exact_returns: 0, postcanonical_books: 0, root_files: 0, commentary_books: 0, aligned_checked: 0, aligned_available: 0, aligned_unavailable: 0, rejected_requests: 0 };
   const call = async args => {
     const response = await client.callTool({ name: 'read_passage_widget', arguments: args });
     assert.ok(!response.isError, JSON.stringify(response.content)); return response.structuredContent;
@@ -63,6 +63,20 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
       counts.context_reads++; counts.exact_returns++;
       counts.exact_segments++;
     }
+    for (const reference of ['mn10/c66', 'commentary:s0101a.att.xml/c2']) {
+      const exact = await call({ commentary: reference, english: false, script });
+      const context = await call(exact.pali.context_with.arguments);
+      const parent = reference.replace(/\/c\d+$/, '');
+      const index = Number(reference.match(/\/c(\d+)$/)[1]) - 1, offset = Math.max(0, index - 2);
+      const expected = commentary.getCommentary(parent, { offset, limit: index - offset + 3 });
+      assert.deepEqual(context.pali.segments, expectedSegments(expected.segments, script));
+      assert.equal(context.selection, exact.selection); assert.equal(context.text_id, undefined);
+      assert.equal(context.context_for, reference); assert.deepEqual(context.source, exact.source);
+      assert.deepEqual(context.notes, expected.notes || []); assert.equal(context.alignment_note, expected.alignment_note);
+      const returned = await call(context.pali.exact_with.arguments);
+      assert.deepEqual(returned.pali.segments, exact.pali.segments);
+      counts.commentary_context_reads++; counts.commentary_exact_returns++;
+    }
     counts.scripts++;
   }
   for (const book of post.load().books) {
@@ -85,6 +99,15 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
     const original = commentary.getCommentary(selector, { limit: 1 });
     assert.equal(page.canonical, false); assert.equal(page.content_type, 'commentary'); assert.equal(page.text_id, undefined);
     assert.deepEqual(page.pali.segments, original.segments); assert.equal(page.alignment_note, original.alignment_note);
+    const anchor = await call({ commentary: selector + '/c1', english: false });
+    if (anchor.pali.context_with) {
+      const context = await call(anchor.pali.context_with.arguments);
+      assert.equal(context.requested_on, undefined); assert.equal(context.selection, 'commentary_book');
+      assert.deepEqual(context.pali.segments, commentary.getCommentary(selector, { limit: 3 }).segments);
+      const returned = await call(context.pali.exact_with.arguments);
+      assert.deepEqual(returned.pali.segments, anchor.pali.segments);
+      counts.commentary_context_reads++; counts.commentary_exact_returns++;
+    }
     counts.commentary_books++;
   }
   for (const selector of ['mn10/c66', 'commentary:s0101a.att.xml/c2']) {
@@ -113,6 +136,8 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
     { uid: 'MN 10', segment: 'mn10/2', english_offset: 1 }, { commentary: 'MN 10', segment: 'mn10/c66' },
     { uid: 'MN 10', source_commit: '0'.repeat(40) }, { uid: 'MN 10', segment: 'mn10/2', context: 2, anchor_sha256: '0'.repeat(64) },
     { uid: 'MN 10', context: 2 }, { uid: 'MN 10', anchor_sha256: '0'.repeat(64) },
+    { commentary: 'mn10', context: 2 }, { commentary: 'mn10/c66', context: 2, anchor_sha256: '0'.repeat(64) },
+    { commentary: 'mn10/c66', context: 2, offset: 1 }, { commentary: 'mn10/c66', context: 2, english_offset: 1 },
   ]) {
     assert.equal((await client.callTool({ name: 'read_passage_widget', arguments: args })).isError, true); counts.rejected_requests++;
   }

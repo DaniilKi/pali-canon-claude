@@ -23,7 +23,7 @@ import { readBook } from './source-books.mjs';
 import { getCommentary } from './commentary.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v7';
+export const WIDGET_VERSION = 'v8';
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 export const SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 export const MCP_APP_MIME = 'text/html;profile=mcp-app';
@@ -60,11 +60,13 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
   if ([uid, book, commentary].filter(value => value !== undefined).length !== 1) throw new Error('Give exactly one of uid (canonical/post-canonical), book (complete root file), or commentary (aligned citation or direct commentary reference).');
   if (sourceCommit !== undefined && sourceCommit !== canon.source().commit) throw new Error('The requested VRI source version is no longer bundled. Reopen the selection from the current source; no continuation or context was substituted.');
   if (!Number.isInteger(context) || context < 0 || context > 20) throw new Error('Context must be an integer from 0 to 20 neighbouring segments on each side.');
-  if (segment === undefined && (context !== 0 || anchorHash !== undefined)) throw new Error('Context and anchor_sha256 require an exact segment selection.');
   if (uid !== undefined) {
     const reference = romanizeInput(uid).text;
     if (reference.startsWith('commentary:') || /^[^/]+\/c[1-9]\d*$/.test(reference)) { commentary = uid; uid = undefined; }
   }
+  const commentaryAnchor = commentary !== undefined ? romanizeInput(commentary).text.match(/^(.+)\/c([1-9]\d*)$/) : null;
+  if (segment === undefined && !commentaryAnchor && (context !== 0 || anchorHash !== undefined)) throw new Error('Context and anchor_sha256 require an exact segment selection.');
+  if (commentaryAnchor && (context !== 0 || anchorHash !== undefined) && (offset !== 0 || englishOffset !== 0)) throw new Error('Commentary context cannot be combined with continuation offsets.');
   if (translation !== undefined) {
     if (typeof translation !== 'string' || !translation.trim()) throw new Error('Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.');
     translation = translation.trim();
@@ -117,7 +119,26 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
       english: null, english_available: [], links: {},
       ...(wantEnglish || englishOffset > 0 || translation !== undefined ? { english_error: 'No English commentary translation is linked through this server for this selection. No English version or character-offset continuation is available.' } : {}),
     };
-    return widgetDisplay(result, { input, script, commentary: selector, wantEnglish, translation, limit });
+    const displayed = widgetDisplay(result, { input, script, commentary: selector, wantEnglish, translation, limit });
+    if (!commentaryAnchor || !displayed.pali.returned) {
+      if (anchorHash !== undefined) throw new Error('The exact commentary anchor is unavailable; no context was substituted.');
+      return displayed;
+    }
+    const fingerprint = createHash('sha256').update(JSON.stringify(displayed.pali.segments[0])).digest('hex');
+    if (anchorHash !== undefined && anchorHash !== fingerprint) throw new Error('The exact commentary segment has changed. Reopen it before requesting context; no neighbouring passage was substituted.');
+    const anchor = displayed.pali.segments[0].ref;
+    const parent = anchor.replace(/\/c[1-9]\d*$/, '');
+    const index = Number(commentaryAnchor[2]) - 1;
+    const args = { commentary: anchor, english: false, source_commit: displayed.source.commit, anchor_sha256: fingerprint, ...(script ? { script: scriptName(script) } : {}) };
+    if (context) {
+      const start = Math.max(0, index - context);
+      const surrounding = await readPassage({ commentary: parent, offset: start, limit: index - start + context + 1, english: false, script });
+      if (!surrounding.pali.segments.some(item => item.ref === anchor)) throw new Error('The commentary anchor is not in this source context; no neighbouring passage was substituted.');
+      return { ...surrounding, context_for: anchor, ...(displayed.english_error ? { english_error: displayed.english_error } : {}),
+        pali: { ...surrounding.pali, context_with: null, exact_with: { name: WIDGET_TOOL, arguments: args } } };
+    }
+    const parentPage = getCommentary(parent, { limit: 1 });
+    return { ...displayed, pali: { ...displayed.pali, context_with: parentPage.total_segments > 1 ? { name: WIDGET_TOOL, arguments: { ...args, context: 2 } } : null, exact_with: null } };
   }
   if (book !== undefined) {
     const page = readBook({ book, offset, limit });

@@ -133,6 +133,20 @@ def check():
                 assert "On root VRI ¶105" in frame.locator("#pali").inner_text()
                 assert frame.locator("#footer a").count() == 0
                 displayed(comment["next"])
+                displayed(comment["anchor"])
+                assert frame.locator("#pali .seg").count() == 1
+                displayed(comment["context"])
+                assert "Source context for mn10/c66" in frame.locator("#meta").inner_text()
+                assert frame.locator("#pali .seg").count() == 5
+                assert "mn10/c64" in frame.locator("#pali").inner_text()
+                assert "mn10/c68" in frame.locator("#pali").inner_text()
+                displayed(comment["returned"])
+                assert frame.locator("#pali .seg").count() == 1
+                assert "Source context for" not in frame.locator("#meta").inner_text()
+                displayed(comment["book_context"])
+                assert "Source context for commentary:" in frame.locator("#meta").inner_text()
+                assert "does not assert an alignment" in frame.locator("#pali").inner_text()
+                assert "transliterated" in frame.locator("#pali").inner_text()
                 displayed(comment["direct"])
                 assert "does not assert an alignment" in frame.locator("#pali").inner_text()
                 assert "transliterated" in frame.locator("#pali").inner_text()

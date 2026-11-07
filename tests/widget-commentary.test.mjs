@@ -58,3 +58,49 @@ test('all 47 commentary source books have a faithful unaligned widget opening', 
     assert.deepEqual(page.pali.segments, expected.segments); assert.equal(page.alignment_note, expected.alignment_note);
   }
 });
+
+test('exact commentary context and return retain aligned or complete-book scope across scripts', async () => {
+  for (const script of SCRIPTS) for (const reference of ['mn10/c66', 'commentary:s0101a.att.xml/c2']) {
+    const exact = await readPassage({ commentary: reference, english: false, script });
+    const args = exact.pali.context_with.arguments;
+    assert.equal(args.commentary, reference); assert.equal(args.script, script);
+    assert.equal(args.source_commit, exact.source.commit); assert.match(args.anchor_sha256, /^[a-f0-9]{64}$/);
+    const context = await readPassage(args);
+    assert.match((await readPassage({ ...args, english: true })).english_error, /No English commentary translation/);
+    const parent = reference.replace(/\/c\d+$/, '');
+    const index = Number(reference.match(/\/c(\d+)$/)[1]) - 1, offset = Math.max(0, index - 2);
+    const expected = commentary.getCommentary(parent, { offset, limit: index - offset + 3 });
+    assert.deepEqual(context.pali.segments, expectedSegments(expected.segments, script));
+    assert.equal(context.context_for, reference); assert.equal(context.content_type, 'commentary');
+    assert.equal(context.text_id, undefined); assert.deepEqual(context.source, exact.source);
+    assert.equal(context.selection, exact.selection); assert.equal(context.approximate, expected.approximate);
+    assert.deepEqual(context.notes, expected.notes || []);
+    if (reference.startsWith('commentary:')) { assert.equal(context.requested_on, undefined); assert.equal(context.alignment_note, exact.alignment_note); }
+    else assert.equal(context.requested_on.id, 'mn10');
+    const returned = await readPassage(context.pali.exact_with.arguments);
+    assert.deepEqual(returned.pali.segments, exact.pali.segments); assert.equal(returned.citation, exact.citation);
+  }
+});
+
+test('commentary context checks source/anchor pins and clips complete-book boundaries', async () => {
+  for (const book of commentary.load().books) {
+    const parent = `commentary:${book.file}`;
+    const exact = await readPassage({ commentary: parent + '/c1', english: false });
+    if (!exact.pali.context_with) continue;
+    const context = await readPassage(exact.pali.context_with.arguments);
+    assert.deepEqual(context.pali.segments, commentary.getCommentary(parent, { limit: 3 }).segments);
+    assert.equal(context.pali.offset, 0); assert.equal(context.requested_on, undefined);
+  }
+  const exact = await readPassage({ commentary: 'mn10/c66', english: false });
+  for (const args of [
+    { ...exact.pali.context_with.arguments, source_commit: '0'.repeat(40) },
+    { ...exact.pali.context_with.arguments, anchor_sha256: '0'.repeat(64) },
+    { ...exact.pali.context_with.arguments, offset: 1 },
+    { ...exact.pali.context_with.arguments, english_offset: 1 },
+    { commentary: 'mn10', context: 2 },
+  ]) await assert.rejects(readPassage(args));
+  const parent = commentary.getCommentary('mn10', { limit: 1 });
+  const end = await readPassage({ commentary: `mn10/c${parent.total_segments}`, english: false });
+  const context = await readPassage(end.pali.context_with.arguments);
+  assert.equal(context.pali.next_offset, null); assert.equal(context.pali.segments.at(-1).ref, end.pali.segments[0].ref);
+});

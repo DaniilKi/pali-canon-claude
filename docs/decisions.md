@@ -776,3 +776,9 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** Widget Pāli and English continuation preserved source selection and English translation ID but did not validate the expected VRI source version after a server data update.
 - **Decision.** Add source_commit to every Pāli/English widget continuation command and reject a mismatched expected commit before provider access. Existing first-page callers may omit it. A rejected stale cursor requires reopening the selection explicitly.
 - **Consequences.** This pins the VRI source version; English translation continuation retains its separate exact version check. It does not promise immutable live-provider content, citation mappings or scholarly review.
+
+### D129. Keep aligned and complete-book commentary context separate
+
+- **Context.** Exact commentary /cN anchors still lacked context/return navigation after canonical, post-canonical and root-file selections gained it. Reading a complete commentary book as if its passages were aligned to a requested root text would assert unsupported correspondence.
+- **Decision.** Attach source/script/anchor-pinned context and return commands to exact commentary selections. Resolve the parent only from the returned source ref: aligned anchors retain their root-reference commentary scope; direct book anchors retain their complete-book scope and no-root-alignment warning. Clip windows at the parent's boundaries, preserve commentary labels/notes and explicit English availability, and reject stale pins or continuation-offset conflicts. Version resources to v8.
+- **Consequences.** No new alignment, translation, source text or licence is added. Fingerprints guard the selected rendered segment rather than every neighbour. Source availability, native-reader/specialist review and signed-in host acceptance remain independent gates.

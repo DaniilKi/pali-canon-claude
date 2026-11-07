@@ -65,13 +65,18 @@ try {
   const commentaryDirect = await read({ commentary: 'commentary:s0101a.att.xml', script: 'thai', limit: 2 });
   const commentaryAbsent = await read({ commentary: 'AN 1.9', limit: 2 });
   const commentaryUncertain = await read({ commentary: 'AN 2.1', limit: 2 });
+  const commentaryAnchor = await read({ commentary: 'mn10/c66', english: false });
+  const commentaryContext = await read(commentaryAnchor.pali.context_with.arguments);
+  const commentaryReturn = await read(commentaryContext.pali.exact_with.arguments);
+  const commentaryBookAnchor = await read({ commentary: 'commentary:s0101a.att.xml/c2', script: 'thai', english: false });
+  const commentaryBookContext = await read(commentaryBookAnchor.pali.context_with.arguments);
   const beforePostFetches = fetches;
   const postFirst = await read({ uid: 'Vism 1.1', limit: 2 });
   const postNext = await read(postFirst.pali.continue_with.arguments);
   const postNative = await read({ uid: transliterate('Vism 1.1', 'roman', 'sinhala'), script: 'sinh', limit: 2 });
   const postUncertain = await read({ uid: 'Vism 1.2', limit: 2 });
   assert.equal(fetches, beforePostFetches, 'post-canonical widget must not fetch or invent English');
-  process.stdout.write(JSON.stringify({ exact, context, returned, commentary: { first: commentaryFirst, next: commentaryNext, direct: commentaryDirect, absent: commentaryAbsent, uncertain: commentaryUncertain }, source_file: { first: sourceFile, next: sourceNext }, postcanonical: { first: postFirst, next: postNext, native: postNative, uncertain: postUncertain }, html: WIDGET_HTML, fixture: first,
+  process.stdout.write(JSON.stringify({ exact, context, returned, commentary: { anchor: commentaryAnchor, context: commentaryContext, returned: commentaryReturn, book_context: commentaryBookContext, first: commentaryFirst, next: commentaryNext, direct: commentaryDirect, absent: commentaryAbsent, uncertain: commentaryUncertain }, source_file: { first: sourceFile, next: sourceNext }, postcanonical: { first: postFirst, next: postNext, native: postNative, uncertain: postUncertain }, html: WIDGET_HTML, fixture: first,
     continuation: { next, fallback, pinned, unpinned, primary, refused }, fixture_fetches: fetches }));
 } finally {
   globalThis.fetch = originalFetch;

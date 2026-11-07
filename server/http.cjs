@@ -33755,7 +33755,7 @@ function createServer2() {
 // src/chatgpt-widget.mjs
 var import_node_crypto2 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v7";
+var WIDGET_VERSION = "v8";
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 var MCP_APP_MIME = "text/html;profile=mcp-app";
@@ -33785,7 +33785,6 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
   if ([uid, book, commentary].filter((value) => value !== void 0).length !== 1) throw new Error("Give exactly one of uid (canonical/post-canonical), book (complete root file), or commentary (aligned citation or direct commentary reference).");
   if (sourceCommit !== void 0 && sourceCommit !== source().commit) throw new Error("The requested VRI source version is no longer bundled. Reopen the selection from the current source; no continuation or context was substituted.");
   if (!Number.isInteger(context) || context < 0 || context > 20) throw new Error("Context must be an integer from 0 to 20 neighbouring segments on each side.");
-  if (segment === void 0 && (context !== 0 || anchorHash !== void 0)) throw new Error("Context and anchor_sha256 require an exact segment selection.");
   if (uid !== void 0) {
     const reference = romanizeInput(uid).text;
     if (reference.startsWith("commentary:") || /^[^/]+\/c[1-9]\d*$/.test(reference)) {
@@ -33793,6 +33792,9 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
       uid = void 0;
     }
   }
+  const commentaryAnchor = commentary !== void 0 ? romanizeInput(commentary).text.match(/^(.+)\/c([1-9]\d*)$/) : null;
+  if (segment === void 0 && !commentaryAnchor && (context !== 0 || anchorHash !== void 0)) throw new Error("Context and anchor_sha256 require an exact segment selection.");
+  if (commentaryAnchor && (context !== 0 || anchorHash !== void 0) && (offset !== 0 || englishOffset !== 0)) throw new Error("Commentary context cannot be combined with continuation offsets.");
   if (translation2 !== void 0) {
     if (typeof translation2 !== "string" || !translation2.trim()) throw new Error("Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.");
     translation2 = translation2.trim();
@@ -33871,7 +33873,30 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
       links: {},
       ...wantEnglish || englishOffset > 0 || translation2 !== void 0 ? { english_error: "No English commentary translation is linked through this server for this selection. No English version or character-offset continuation is available." } : {}
     };
-    return widgetDisplay(result2, { input: input2, script, commentary: selector, wantEnglish, translation: translation2, limit });
+    const displayed = widgetDisplay(result2, { input: input2, script, commentary: selector, wantEnglish, translation: translation2, limit });
+    if (!commentaryAnchor || !displayed.pali.returned) {
+      if (anchorHash !== void 0) throw new Error("The exact commentary anchor is unavailable; no context was substituted.");
+      return displayed;
+    }
+    const fingerprint = (0, import_node_crypto2.createHash)("sha256").update(JSON.stringify(displayed.pali.segments[0])).digest("hex");
+    if (anchorHash !== void 0 && anchorHash !== fingerprint) throw new Error("The exact commentary segment has changed. Reopen it before requesting context; no neighbouring passage was substituted.");
+    const anchor = displayed.pali.segments[0].ref;
+    const parent = anchor.replace(/\/c[1-9]\d*$/, "");
+    const index4 = Number(commentaryAnchor[2]) - 1;
+    const args = { commentary: anchor, english: false, source_commit: displayed.source.commit, anchor_sha256: fingerprint, ...script ? { script: scriptName(script) } : {} };
+    if (context) {
+      const start = Math.max(0, index4 - context);
+      const surrounding = await readPassage({ commentary: parent, offset: start, limit: index4 - start + context + 1, english: false, script });
+      if (!surrounding.pali.segments.some((item) => item.ref === anchor)) throw new Error("The commentary anchor is not in this source context; no neighbouring passage was substituted.");
+      return {
+        ...surrounding,
+        context_for: anchor,
+        ...displayed.english_error ? { english_error: displayed.english_error } : {},
+        pali: { ...surrounding.pali, context_with: null, exact_with: { name: WIDGET_TOOL, arguments: args } }
+      };
+    }
+    const parentPage = getCommentary(parent, { limit: 1 });
+    return { ...displayed, pali: { ...displayed.pali, context_with: parentPage.total_segments > 1 ? { name: WIDGET_TOOL, arguments: { ...args, context: 2 } } : null, exact_with: null } };
   }
   if (book !== void 0) {
     const page2 = readBook({ book, offset, limit });
