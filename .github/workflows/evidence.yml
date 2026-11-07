@@ -30,7 +30,7 @@ jobs:
         run: node scripts/audit-widget.mjs --exhaust-aligned --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report widget-reading.report.json
       - name: Check packaged English continuation against synthetic upstream edits offline
         run: node scripts/audit-english-prefix.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report english-prefix.report.json
-      - name: Check packaged talk-search native input scope and interleaving offline
+      - name: Check packaged talk-search input passage scope and interleaving offline
         run: node scripts/audit-talks.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report talk-pagination.report.json
       - name: Check packaged native word and name lookups with dictionary outage offline
         run: node scripts/audit-lookups.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-lookups.report.json

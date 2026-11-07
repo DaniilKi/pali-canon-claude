@@ -32389,7 +32389,20 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
   let passageInfo = null;
   let terms4 = query;
   if (passage) {
-    const { unit } = canon.resolve(passage);
+    const { unit, notes: resolutionNotes = [], alternatives = [] } = canon.resolve(passage);
+    const citation = parseCitation(passage);
+    if (citation.kind === "id" && citation.end !== null && citation.end !== void 0) {
+      const first = citationId({ ...citation, end: null });
+      const last = citationId({ ...citation, path: rangeEndPath(citation), end: null });
+      if (first !== last && citationId(citation) !== unit.id) {
+        throw new Error(`"${passage}" spans multiple texts rather than one recorded source group. Choose one exact passage for talk search; the first text's translation title cannot represent the whole span.`);
+      }
+    }
+    if (alternatives.length) {
+      const candidates = [unit.acronym, ...alternatives.map((u) => u.citation)].join(", ");
+      throw new Error(`"${passage}" maps to multiple canonical passages. Candidates include ${candidates}. Choose one exact passage before searching for its translation title.`);
+    }
+    notes.push(.../* @__PURE__ */ new Set([...resolutionNotes, ...canon.resolve(unit.id).notes]));
     const { links, via } = canon.linksFor(unit);
     const dt = via ? null : links.find((l) => l.source === "dhammatalks");
     const candidate = dt ? phraseFromReference(dt.reference) : null;
@@ -32472,7 +32485,7 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
 function register13({ tool, z, citation, canon }) {
   tool("find_talks", "Find Dhamma talks by \u1E6Ch\u0101nissaro Bhikkhu on dhammatalks.org by topic (query) or by passage (a citation such as MN 118). Link-only: returns talk titles, dates and URLs from the site's own search, never talk text. Talks are commentary, not scripture.", {
     query: z.string().max(200).optional().describe('Topic keywords, e.g. "jhana", "Kalamas", "\\"right resolve\\"" (Roman or supported native P\u0101li; conversion labelled before diacritics are removed).'),
-    passage: citation.optional().describe("A passage in Roman or a supported native script (conversion labelled separately); talks containing the title of \u1E6Ch\u0101nissaro's translation are found. Combine with query to narrow."),
+    passage: citation.optional().describe("A passage in Roman or a supported native script (conversion labelled separately); talks containing the title of \u1E6Ch\u0101nissaro's translation are found. Choose one exact text or recorded source group; multi-text fallback spans and ambiguous pages are refused. Resolution/numbering cautions are retained. Combine with query to narrow."),
     category: z.enum(["all", "evening", "morning"]).default("all").describe("Evening talks, short morning talks, or both."),
     page: z.number().int().min(1).max(50).default(1).describe("Site results page to start from (20 talks per category per page). To continue a list, use cursor instead."),
     limit: z.number().int().min(1).max(20).default(10),

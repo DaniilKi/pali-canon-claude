@@ -66,8 +66,17 @@ try {
   const handwritten=await read({query:'สติ',category:'evening'});assert.equal(handwritten.searched_for,'sati');assert.equal(handwritten.input_romanized,'sati');
   const quoted=await read({query:'“สติ สมาธิ”',category:'evening'});assert.equal(quoted.searched_for,'"sati samadhi"');
   for(const value of ['สति','ส่ติ','漢sati字','ηsati'])for(const args of [{query:value},{passage:value}]){const bad=await call(args);assert.equal(bad.isError,true);assert.match(JSON.parse(bad.content[0].text).error,/converted completely/);}
+  for(const note of ['Also numbered AN 3.66'])assert.ok(passage.notes.some(n=>n.includes(note)));
+  const exact=await read({passage:'AN 3.65',category:'evening',limit:1});
+  const scopedAlias=await read({passage:'A i 189',category:'evening',limit:1,cursor:exact.next_cursor});assert.equal(scopedAlias.passage.id,'an3.65');assert.match(scopedAlias.notes.join(' '),/PTS A i 189/);assert.match(scopedAlias.notes.join(' '),/Also numbered AN 3.66/);
+  for(const script of SCRIPTS){
+   for(const [ref,reason] of [['AN 3.65-66',/spans multiple texts/],['S i 57',/multiple canonical passages/]]){const r=await call({passage:native(ref,script),category:'evening',cursor:exact.next_cursor});assert.equal(r.isError,true);assert.match(JSON.parse(r.content[0].text).error,reason);}
+   const group=await read({passage:native('AN 1.296-305',script)});assert.equal(group.passage.id,'an1.296-305');
+   const one=await read({passage:native('AN 3.65-65',script),category:'evening',limit:1});assert.equal(one.passage.id,'an3.65');assert.match(one.notes.join(' '),/identical endpoints/);assert.match(one.notes.join(' '),/Also numbered AN 3.66/);
+  }
+  const noSearch=await read({passage:'M i 1'});assert.equal(noSearch.searched_for,null);assert.match(noSearch.notes.join(' '),/PTS M i 1/);
   assert.doesNotMatch(stderr,/UNEXPECTED_NETWORK_ATTEMPT/);
-  reports.push({transport:mode,requests,changed_scope_refused:true,legacy_cursor_refused:true,round_robin_retained:true,normalized_passage_and_query:true,native_scripts:SCRIPTS.length,separate_input_provenance:true,cross_script_cursor_scope:true,native_no_search_safeguards:true,link_only_labels:true,network_attempts:0});
+  reports.push({transport:mode,requests,changed_scope_refused:true,legacy_cursor_refused:true,round_robin_retained:true,normalized_passage_and_query:true,native_scripts:SCRIPTS.length,separate_input_provenance:true,cross_script_cursor_scope:true,native_no_search_safeguards:true,multi_text_fallback_refused:true,ambiguous_pages_refused:true,resolution_numbering_notes:true,recorded_groups_preserved:true,link_only_labels:true,network_attempts:0});
   await client.close();client=null;
   if(child&&child.exitCode===null&&child.signalCode===null){const ended=new Promise(r=>child.once('exit',r));child.kill();await ended;}child=null;
  }
