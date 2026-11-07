@@ -1165,10 +1165,10 @@ var require_util = __commonJS({
     var codegen_1 = require_codegen();
     var code_1 = require_code();
     function toHash(arr) {
-      const hash = {};
+      const hash2 = {};
       for (const item of arr)
-        hash[item] = true;
-      return hash;
+        hash2[item] = true;
+      return hash2;
     }
     exports2.toHash = toHash;
     function alwaysValidSchema(it, schema) {
@@ -28923,13 +28923,16 @@ function register3({ tool, z }) {
 // src/find-citations.mjs
 var find_citations_exports = {};
 __export(find_citations_exports, {
+  MAX_REPORT_BYTES: () => MAX_REPORT_BYTES,
   MAX_RESULTS: () => MAX_RESULTS,
   MAX_TEXT: () => MAX_TEXT,
+  MAX_TOOL_RESULT_BYTES: () => MAX_TOOL_RESULT_BYTES,
   findCitations: () => findCitations,
   foldWithOffsets: () => foldWithOffsets,
   register: () => register4,
   scan: () => scan
 });
+var import_node_crypto3 = require("node:crypto");
 var BOUND_BEFORE = "(?<![\\p{L}\\p{N}_@])";
 var BOUND_AFTER = "(?![\\p{L}\\p{N}_@]|,\\d)";
 var NUM = "\\d+(?:[.:]\\d+)*(?:(?:-|\\s?[\u2013\u2014]\\s?)\\d+(?:[.:]\\d+)*)?";
@@ -29109,9 +29112,52 @@ function scan(text, { editionBookNames = [] } = {}) {
 }
 var MAX_TEXT = 2e5;
 var MAX_RESULTS = 500;
-function findCitations(text, canon, { limit = MAX_RESULTS } = {}) {
+var MAX_REPORT_BYTES = 256 * 1024;
+var MAX_TOOL_RESULT_BYTES = 1024 * 1024;
+var CURSOR_VERSION = "v1";
+var RECORD_BUDGET = MAX_REPORT_BYTES - 8192;
+var indexScopes = /* @__PURE__ */ new WeakMap();
+var hash = (value) => (0, import_node_crypto3.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
+function reportScope(text, canon) {
+  const loaded = canon.load();
+  const data5 = loaded.canon;
+  let index4 = indexScopes.get(loaded);
+  if (!index4) {
+    const digest = (0, import_node_crypto3.createHash)("sha256");
+    digest.update(JSON.stringify([data5.source, data5.collections, data5.units, [...loaded.urlIndex || []]]));
+    for (const book of data5.books) digest.update(JSON.stringify(book));
+    index4 = digest.digest("hex");
+    indexScopes.set(loaded, index4);
+  }
+  return hash([CURSOR_VERSION, index4, text]);
+}
+function cursorOffset(cursor, scope) {
+  if (cursor === void 0) return 0;
+  const m = typeof cursor === "string" && cursor.match(/^(v\d+):([a-f0-9]{64}):([1-9]\d{0,5}):([a-f0-9]{16})$/);
+  if (!m || m[1] !== CURSOR_VERSION || m[2] !== scope || m[4] !== hash([scope, Number(m[3])]).slice(0, 16)) throw new Error("Invalid citation cursor or changed text/bundled index. Restart without cursor; otherwise reuse the identical original text and next_cursor unchanged.");
+  return Number(m[3]);
+}
+function unchecked(span) {
+  return {
+    start: span.start,
+    end: span.end,
+    scheme: span.scheme,
+    status: "not_checked",
+    text_preview: span.text.slice(0, 512),
+    text_omitted: true,
+    text_length: span.text.length,
+    reason: "This citation candidate exceeds the report processing/response bound. No resolved or unresolved verdict was made. Inspect the full candidate using its offsets in the original input."
+  };
+}
+function findCitations(text, canon, { limit = MAX_RESULTS, cursor } = {}) {
+  if (typeof text !== "string" || !text.length || text.length > MAX_TEXT) throw new Error(`text must contain 1 to ${MAX_TEXT} characters.`);
+  if (!Number.isInteger(limit) || limit < 1 || limit > MAX_RESULTS) throw new Error(`limit must be an integer from 1 to ${MAX_RESULTS}.`);
+  const scope = reportScope(text, canon);
+  const offset = cursorOffset(cursor, scope);
   const spans = scan(text, { editionBookNames: canon.load().canon.books.map((book) => book.title) });
-  const citations = spans.slice(0, limit).map((span) => {
+  if (offset && offset >= spans.length) throw new Error("Citation cursor is outside this report. Restart without cursor.");
+  const resolveSpan = (span) => {
+    if (span.text.length > 2048) return unchecked(span);
     try {
       const input = span.scheme === "link" ? { text: span.text } : romanizeLookupInput(span.text);
       const { unit, notes, alternatives } = canon.resolve(input.text.normalize("NFC"));
@@ -29128,25 +29174,52 @@ function findCitations(text, canon, { limit = MAX_RESULTS } = {}) {
     } catch (error2) {
       return { ...span, status: "unresolved", reason: error2.message || "Could not resolve." };
     }
-  });
+  };
+  const citations = [];
+  let bytes = 2;
+  for (let i = offset; i < spans.length && citations.length < limit; i++) {
+    let record2 = resolveSpan(spans[i]);
+    let size = Buffer.byteLength(JSON.stringify(record2)) + 1;
+    if (size > RECORD_BUDGET) {
+      record2 = unchecked(spans[i]);
+      size = Buffer.byteLength(JSON.stringify(record2)) + 1;
+    }
+    if (bytes + size > RECORD_BUDGET) break;
+    citations.push(record2);
+    bytes += size;
+  }
   const resolved = citations.filter((c) => c.status === "resolved").length;
+  const unresolved = citations.filter((c) => c.status === "unresolved").length;
+  const next = offset + citations.length;
   const source4 = canon.source();
-  return {
+  const report = {
     found: spans.length,
+    offset,
+    limit,
     returned: citations.length,
     resolved,
-    unresolved: citations.length - resolved,
+    unresolved,
+    not_checked: citations.length - resolved - unresolved,
+    counts_scope: "resolved, unresolved and not_checked count only this returned page; found counts the whole input.",
+    next_cursor: next < spans.length ? `${CURSOR_VERSION}:${scope}:${next}:${hash([scope, next]).slice(0, 16)}` : null,
+    pagination: "Reuse the identical original text and pass next_cursor as cursor. limit may change. Citation offsets always refer to that original text. No input text is stored or echoed for continuation. truncated means this page contains only part of the report; next_cursor indicates whether later matches remain.",
+    max_report_bytes: MAX_REPORT_BYTES,
+    max_tool_result_bytes: MAX_TOOL_RESULT_BYTES,
     ...spans.length > citations.length ? { truncated: true } : {},
     offsets: "start and end are UTF-16 code-unit offsets into the input, end exclusive (JavaScript String.slice).",
     citations,
     scope: "Citations are found by pattern; a citation the scanner did not recognise is not checked. Supported native numerals are accepted with Roman citation names; native-script names are not scanned. URLs retain their literal identity. Printed edition prefixes are retained, with parenthetical book qualifiers recognised from the bundled source titles. Unresolved citations are reported, never corrected. Abbreviations that read as English in prose (single letters before a bare number, It, Ps, Pe, Ne, Pp, Ya, Dt, As) are skipped; write MN, SN, Iti, Pa\u1E6Dis and so on, or check one citation with resolve_reference.",
     source: { name: source4.name, attribution: source4.attribution, terms: source4.terms }
   };
+  if (Buffer.byteLength(JSON.stringify(report)) > MAX_REPORT_BYTES) throw new Error("Citation report metadata exceeds its response bound. No partial report was returned.");
+  return report;
 }
 function register4({ tool, z, canon }) {
-  tool("find_citations", "Find every P\u0101li Canon citation in a piece of free text (an essay, a talk transcript, a paper's references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nid\u0101navaggo), PTS pages like M i 55 or S v 420, canonical IDs like ja526, ps3.2 and ya1.1.1, Bilara anchors like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org / ancient-buddhist-texts.net links. Supports native numerals with Roman citation names, preserving original text and offsets; native-script names are not scanned. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Works offline.", {
-    text: z.string().min(1).max(MAX_TEXT).describe("The free text to scan, up to 200,000 characters.")
-  }, ({ text }) => findCitations(text, canon));
+  tool("find_citations", "Find every P\u0101li Canon citation in a piece of free text (an essay, a talk transcript, a paper's references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nid\u0101navaggo), PTS pages like M i 55 or S v 420, canonical IDs like ja526, ps3.2 and ya1.1.1, Bilara anchors like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org / ancient-buddhist-texts.net links. Supports native numerals with Roman citation names, preserving original text and offsets; native-script names are not scanned. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Paginate with next_cursor and unchanged text; counts are per page except found. Oversized candidates are marked not_checked, never verified. Works offline.", {
+    text: z.string().min(1).max(MAX_TEXT).describe("The free text to scan, up to 200,000 characters."),
+    limit: z.number().int().min(1).max(MAX_RESULTS).default(MAX_RESULTS).describe("Maximum citations on this page. Structured reports also have a 256 KiB JSON byte budget, so a page can be shorter. Counts other than found describe this page."),
+    cursor: z.string().max(100).optional().describe("Opaque next_cursor from the preceding report. Reuse the identical original text; changed input or bundled index is rejected. Do not supply an offset or edit the cursor.")
+  }, ({ text, ...options }) => findCitations(text, canon, options));
 }
 
 // src/calendar.mjs
@@ -32430,7 +32503,7 @@ __export(talks_exports, {
   searchUrl: () => searchUrl,
   sharedPhrase: () => sharedPhrase
 });
-var import_node_crypto3 = require("node:crypto");
+var import_node_crypto4 = require("node:crypto");
 var SITE = "https://www.dhammatalks.org";
 var CATEGORIES = ["evening", "morning"];
 var MIN_INTERVAL_MS = 1e3;
@@ -32586,7 +32659,7 @@ function parseCursor(cursor, categories) {
   return state;
 }
 var formatCursor = (state) => state.map((s) => `${s.category}:${s.page}:${s.offset}`).join(",");
-var cursorScope = (query, passage, category, terms4) => (0, import_node_crypto3.createHash)("sha256").update(JSON.stringify([query, passage?.id || null, category, terms4, passage?.translation_url || null])).digest("hex");
+var cursorScope = (query, passage, category, terms4) => (0, import_node_crypto4.createHash)("sha256").update(JSON.stringify([query, passage?.id || null, category, terms4, passage?.translation_url || null])).digest("hex");
 function scopedState(cursor, categories, scope) {
   const match2 = typeof cursor === "string" && cursor.match(/^v1:([a-f0-9]{64}):(.+)$/);
   if (!match2) throw new Error("Invalid or legacy talk cursor. Restart without cursor and pass the returned next_cursor unchanged.");
@@ -34133,7 +34206,7 @@ function createServer2({ executeTool } = {}) {
 }
 
 // src/chatgpt-widget.mjs
-var import_node_crypto4 = require("node:crypto");
+var import_node_crypto5 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
 var WIDGET_VERSION = "v17";
 var NAVIGATION_TIMEOUT_MS = 9e4;
@@ -34192,7 +34265,7 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
     if (!Number.isSafeInteger(index4) || index4 < 0 || index4 > 1e5) throw new Error("Give the exact segment reference from the selected reader, ending in a positive /N.");
     const exact = await readPassage({ uid, book, offset: index4, limit: 1, english: false, script });
     if (exact.pali.segments[0]?.ref !== segment) throw new Error(`Segment ${segment} does not belong to this selection. Copy its exact reference from get_text or get_post_canonical; no other segment was selected.`);
-    const fingerprint = (0, import_node_crypto4.createHash)("sha256").update(JSON.stringify(exact.pali.segments[0])).digest("hex");
+    const fingerprint = (0, import_node_crypto5.createHash)("sha256").update(JSON.stringify(exact.pali.segments[0])).digest("hex");
     if (anchorHash !== void 0 && anchorHash !== fingerprint) throw new Error("The exact source segment has changed. Reopen it before requesting context; no neighbouring passage was substituted.");
     const selector = book !== void 0 ? { book: exact.book_id } : { uid: exact.text_id || exact.citation };
     const args = { ...selector, segment, english: false, source_commit: exact.source.commit, anchor_sha256: fingerprint, ...script ? { script: scriptName(script) } : {} };
@@ -34262,7 +34335,7 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
       if (anchorHash !== void 0) throw new Error("The exact commentary anchor is unavailable; no context was substituted.");
       return displayed;
     }
-    const fingerprint = (0, import_node_crypto4.createHash)("sha256").update(JSON.stringify(displayed.pali.segments[0])).digest("hex");
+    const fingerprint = (0, import_node_crypto5.createHash)("sha256").update(JSON.stringify(displayed.pali.segments[0])).digest("hex");
     if (anchorHash !== void 0 && anchorHash !== fingerprint) throw new Error("The exact commentary segment has changed. Reopen it before requesting context; no neighbouring passage was substituted.");
     const anchor = displayed.pali.segments[0].ref;
     const parent = anchor.replace(/\/c[1-9]\d*$/, "");

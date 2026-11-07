@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { z } from 'zod';
 import * as canon from '../src/canon.mjs';
 import { findCitations, scan, foldWithOffsets, register } from '../src/find-citations.mjs';
 
@@ -117,13 +118,12 @@ test('find_citations: results are capped and the cap is reported', () => {
 
 test('find_citations: registers one read-only, offline tool', () => {
   const calls = [];
-  const z = { string: () => ({ min: () => ({ max: () => ({ describe: () => 'schema' }) }) }) };
   register({ tool: (...args) => calls.push(args), z, canon });
   assert.equal(calls.length, 1);
   const [name, description, shape, fn, options] = calls[0];
   assert.equal(name, 'find_citations');
   assert.match(description, /Works offline/);
-  assert.deepEqual(Object.keys(shape), ['text']);
+  assert.deepEqual(Object.keys(shape), ['text', 'limit', 'cursor']);
   assert.equal(options, undefined, 'no network option: openWorldHint stays false');
   assert.equal(fn({ text: 'MN 10' }).citations[0].text_id, 'mn10');
 });

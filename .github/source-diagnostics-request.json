@@ -1,4 +1,4 @@
 {
-  "reason": "Run the existing live source-health checks on development without public issue or comment writes.",
-  "reviewed_base": "c82eec1af0b289a78407845ab2cb73e13e736c9a"
+  "reason": "Verify current development head after citation-report continuation with the existing read-only live smoke, outage/mirror and rotating-link checks; no issue/comment/deployment actions.",
+  "reviewed_base": "2f634739dd8707f871512b1a6439a2c41da0ba08"
 }

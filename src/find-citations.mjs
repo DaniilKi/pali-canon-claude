@@ -21,6 +21,7 @@
 import { EDITION_WORDS, VINAYA_SCOPES, matchesEditionBook } from './editions.mjs';
 import { _test as citationTables } from './citations.mjs';
 import { romanizeInput, romanizeLookupInput, inputNote } from './script.mjs';
+import { createHash } from 'node:crypto';
 
 // Not inside a word, a number or an e-mail address.
 const BOUND_BEFORE = '(?<![\\p{L}\\p{N}_@])';
@@ -133,11 +134,54 @@ export function scan(text, { editionBookNames = [] } = {}) {
 
 export const MAX_TEXT = 200000;
 export const MAX_RESULTS = 500;
+export const MAX_REPORT_BYTES = 256 * 1024;
+export const MAX_TOOL_RESULT_BYTES = 1024 * 1024;
+// Bump this epoch when scanner/resolver semantics change; cursors are not authentication tokens.
+const CURSOR_VERSION = 'v1';
+const RECORD_BUDGET = MAX_REPORT_BYTES - 8192;
+const indexScopes = new WeakMap();
+const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+
+function reportScope(text, canon) {
+  const loaded = canon.load();
+  const data = loaded.canon;
+  let index = indexScopes.get(loaded);
+  if (!index) {
+    // Bundled data is immutable. Include indexed boundaries, not just the upstream source commit.
+    const digest = createHash('sha256');
+    digest.update(JSON.stringify([data.source, data.collections, data.units, [...(loaded.urlIndex || [])]]));
+    // Hash one book at a time to avoid another full-corpus JSON allocation.
+    for (const book of data.books) digest.update(JSON.stringify(book));
+    index = digest.digest('hex');
+    indexScopes.set(loaded, index);
+  }
+  // JSON preserves exact UTF-16 input, including lone surrogates and decomposed characters.
+  return hash([CURSOR_VERSION, index, text]);
+}
+
+function cursorOffset(cursor, scope) {
+  if (cursor === undefined) return 0;
+  const m = typeof cursor === 'string' && cursor.match(/^(v\d+):([a-f0-9]{64}):([1-9]\d{0,5}):([a-f0-9]{16})$/);
+  if (!m || m[1] !== CURSOR_VERSION || m[2] !== scope || m[4] !== hash([scope, Number(m[3])]).slice(0, 16)) throw new Error('Invalid citation cursor or changed text/bundled index. Restart without cursor; otherwise reuse the identical original text and next_cursor unchanged.');
+  return Number(m[3]);
+}
+
+function unchecked(span) {
+  return { start: span.start, end: span.end, scheme: span.scheme, status: 'not_checked',
+    text_preview: span.text.slice(0, 512), text_omitted: true, text_length: span.text.length,
+    reason: 'This citation candidate exceeds the report processing/response bound. No resolved or unresolved verdict was made. Inspect the full candidate using its offsets in the original input.' };
+}
 
 /** Find, resolve and report every citation in `text`. */
-export function findCitations(text, canon, { limit = MAX_RESULTS } = {}) {
+export function findCitations(text, canon, { limit = MAX_RESULTS, cursor } = {}) {
+  if (typeof text !== 'string' || !text.length || text.length > MAX_TEXT) throw new Error(`text must contain 1 to ${MAX_TEXT} characters.`);
+  if (!Number.isInteger(limit) || limit < 1 || limit > MAX_RESULTS) throw new Error(`limit must be an integer from 1 to ${MAX_RESULTS}.`);
+  const scope = reportScope(text, canon);
+  const offset = cursorOffset(cursor, scope);
   const spans = scan(text, { editionBookNames: canon.load().canon.books.map((book) => book.title) });
-  const citations = spans.slice(0, limit).map((span) => {
+  if (offset && offset >= spans.length) throw new Error('Citation cursor is outside this report. Restart without cursor.');
+  const resolveSpan = (span) => {
+    if (span.text.length > 2048) return unchecked(span);
     try {
       // URLs retain their literal identity; only textual citations undergo script conversion.
       const input = span.scheme === 'link' ? { text: span.text } : romanizeLookupInput(span.text);
@@ -150,24 +194,46 @@ export function findCitations(text, canon, { limit = MAX_RESULTS } = {}) {
     } catch (error) {
       return { ...span, status: 'unresolved', reason: error.message || 'Could not resolve.' };
     }
-  });
+  };
+  const citations = [];
+  let bytes = 2;
+  for (let i = offset; i < spans.length && citations.length < limit; i++) {
+    let record = resolveSpan(spans[i]);
+    let size = Buffer.byteLength(JSON.stringify(record)) + 1;
+    if (size > RECORD_BUDGET) { record = unchecked(spans[i]); size = Buffer.byteLength(JSON.stringify(record)) + 1; }
+    if (bytes + size > RECORD_BUDGET) break;
+    citations.push(record); bytes += size;
+  }
   const resolved = citations.filter((c) => c.status === 'resolved').length;
+  const unresolved = citations.filter((c) => c.status === 'unresolved').length;
+  const next = offset + citations.length;
   const source = canon.source();
-  return {
+  const report = {
     found: spans.length,
+    offset, limit,
     returned: citations.length,
     resolved,
-    unresolved: citations.length - resolved,
+    unresolved,
+    not_checked: citations.length - resolved - unresolved,
+    counts_scope: 'resolved, unresolved and not_checked count only this returned page; found counts the whole input.',
+    next_cursor: next < spans.length ? `${CURSOR_VERSION}:${scope}:${next}:${hash([scope, next]).slice(0, 16)}` : null,
+    pagination: 'Reuse the identical original text and pass next_cursor as cursor. limit may change. Citation offsets always refer to that original text. No input text is stored or echoed for continuation. truncated means this page contains only part of the report; next_cursor indicates whether later matches remain.',
+    max_report_bytes: MAX_REPORT_BYTES,
+    max_tool_result_bytes: MAX_TOOL_RESULT_BYTES,
     ...(spans.length > citations.length ? { truncated: true } : {}),
     offsets: 'start and end are UTF-16 code-unit offsets into the input, end exclusive (JavaScript String.slice).',
     citations,
     scope: 'Citations are found by pattern; a citation the scanner did not recognise is not checked. Supported native numerals are accepted with Roman citation names; native-script names are not scanned. URLs retain their literal identity. Printed edition prefixes are retained, with parenthetical book qualifiers recognised from the bundled source titles. Unresolved citations are reported, never corrected. Abbreviations that read as English in prose (single letters before a bare number, It, Ps, Pe, Ne, Pp, Ya, Dt, As) are skipped; write MN, SN, Iti, Paṭis and so on, or check one citation with resolve_reference.',
     source: { name: source.name, attribution: source.attribution, terms: source.terms },
   };
+  if (Buffer.byteLength(JSON.stringify(report)) > MAX_REPORT_BYTES) throw new Error('Citation report metadata exceeds its response bound. No partial report was returned.');
+  return report;
 }
 
 export function register({ tool, z, canon }) {
-  tool('find_citations', 'Find every Pāli Canon citation in a piece of free text (an essay, a talk transcript, a paper\'s references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nidānavaggo), PTS pages like M i 55 or S v 420, canonical IDs like ja526, ps3.2 and ya1.1.1, Bilara anchors like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org / ancient-buddhist-texts.net links. Supports native numerals with Roman citation names, preserving original text and offsets; native-script names are not scanned. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Works offline.', {
+  tool('find_citations', 'Find every Pāli Canon citation in a piece of free text (an essay, a talk transcript, a paper\'s references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nidānavaggo), PTS pages like M i 55 or S v 420, canonical IDs like ja526, ps3.2 and ya1.1.1, Bilara anchors like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org / ancient-buddhist-texts.net links. Supports native numerals with Roman citation names, preserving original text and offsets; native-script names are not scanned. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Paginate with next_cursor and unchanged text; counts are per page except found. Oversized candidates are marked not_checked, never verified. Works offline.', {
     text: z.string().min(1).max(MAX_TEXT).describe('The free text to scan, up to 200,000 characters.'),
-  }, ({ text }) => findCitations(text, canon));
+    limit: z.number().int().min(1).max(MAX_RESULTS).default(MAX_RESULTS).describe('Maximum citations on this page. Structured reports also have a 256 KiB JSON byte budget, so a page can be shorter. Counts other than found describe this page.'),
+    cursor: z.string().max(100).optional().describe('Opaque next_cursor from the preceding report. Reuse the identical original text; changed input or bundled index is rejected. Do not supply an offset or edit the cursor.'),
+  }, ({ text, ...options }) => findCitations(text, canon, options));
 }

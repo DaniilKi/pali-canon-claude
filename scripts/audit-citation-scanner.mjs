@@ -1,5 +1,6 @@
 // Audit packaged citation scanning and original offsets offline across both transports.
 import assert from 'node:assert/strict';
+import {auditCitationPagination} from './evidence/citation-pagination.mjs';
 import {cp, mkdtemp, mkdir, rm, writeFile} from 'node:fs/promises';
 import {spawn} from 'node:child_process';
 import {tmpdir} from 'node:os';
@@ -14,6 +15,7 @@ function option(name) { const i=process.argv.indexOf(name); if(i<0)return; asser
 const serverDir=option('--server-dir')||resolve('server'), reportPath=option('--report');
 let stage, child, timer, client;
 const reports=[];
+let previousCursor;
 try {
  stage=await mkdtemp(join(tmpdir(),'pali-native-scanner-'));await cp(serverDir,join(stage,'server'),{recursive:true});await mkdir(join(stage,'empty'));
  const guard=join(stage,'synthetic-provider.cjs');
@@ -61,8 +63,10 @@ try {
   }
   assert.equal((await call('An mp3 or pp3 file. Ps 23, Pe 4, Ne 2, Pp 1, Ya 2, Dt 3. xja526 ja526x ja526@example.com /ja526/path /cp1. https://evil.example/ja526')).found,0);
   const invalid=await call('ja9999; cp9999; ps9999.1; ne9999; pe9999; dt9999.1; pp9999.1; ya9999.1');assert.equal(invalid.found,8);assert.equal(invalid.unresolved,8);
+  const pagination=await auditCitationPagination(async args=>{requests++;return client.callTool({name:'find_citations',arguments:args});},{previousCursor});
+  previousCursor=pagination.first_cursor;
   assert.doesNotMatch(stderr,/UNEXPECTED_NETWORK_ATTEMPT/);
-  reports.push({transport:mode,requests,scripts:SCRIPTS.length,canonical_ids_checked:units.length,all_reader_ids_recognised:true,original_offsets_preserved:true,conservative_prose_rules:true,mixed_numerals_unresolved:true,literal_urls:true,ambiguous_page_alternatives_retained:true,network_attempts:0});
+  reports.push({transport:mode,requests,scripts:SCRIPTS.length,canonical_ids_checked:units.length,pagination,all_reader_ids_recognised:true,original_offsets_preserved:true,conservative_prose_rules:true,mixed_numerals_unresolved:true,literal_urls:true,ambiguous_page_alternatives_retained:true,network_attempts:0});
   await client.close();client=null;
   if(child&&child.exitCode===null&&child.signalCode===null){const ended=new Promise(r=>child.once('exit',r));child.kill();await ended;}child=null;
  }

@@ -223,3 +223,5 @@ Running text is read more strictly than a single citation typed into `resolve_re
 A citation written in a form the scanner does not recognise is not checked, so check doubtful ones with `resolve_reference`.
 
 `find_citations` recognises every canonical ID returned by the readers, including `cp1`, `ja526`, `ps3.2`, `ne3`, `pe1`, `dt1.1`, `pp1.1` and `ya1.1.1`. Copy the complete ID, including its numeric parts. Ordinary prose such as “Ps 23” or “pp3 file” stays outside this conservative scanner. Native numerals work with these Roman ID prefixes; native-script book names still require `resolve_reference`.
+
+For a long citation report, pass the returned `next_cursor` as `cursor` and reuse the **identical original text**. You may change `limit` (1–500). Repeat until `next_cursor` is `null`; every citation offset still points into the original text. `found` counts all matches, while resolution counts describe the current page. A page can be shorter than `limit` because of its byte budget. A candidate marked `not_checked` has no resolution verdict; inspect its offsets in your original text. Changed text or source/index data requires restarting without a cursor.
