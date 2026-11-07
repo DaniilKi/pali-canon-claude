@@ -23,7 +23,7 @@ import { readBook } from './source-books.mjs';
 import { getCommentary } from './commentary.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v12';
+export const WIDGET_VERSION = 'v13';
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 export const SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 export const MCP_APP_MIME = 'text/html;profile=mcp-app';
@@ -654,6 +654,10 @@ export const WIDGET_HTML = `<!doctype html>
       toolResult(m.params);
     } else if (m.method === 'ui/notifications/tool-input') {
       requested(m.params && m.params.arguments);
+    } else if (m.method === 'ui/notifications/tool-input-partial') {
+      // Partial arguments may change and have no request ID. A known UI read is already pending;
+      // do not mistake its streamed echo for a different selection or execute incomplete input.
+      if (!pending && !awaitingSelection) requested();
     } else if (m.method === 'ui/notifications/tool-cancelled') {
       if (pending || awaitingSelection || !rendered) render({ cancelled: true, error: 'The reading request was cancelled. Ask to open a passage again when you are ready.' });
     } else if (m.method === 'ui/notifications/host-context-changed') {

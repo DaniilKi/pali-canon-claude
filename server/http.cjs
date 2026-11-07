@@ -33755,7 +33755,7 @@ function createServer2() {
 // src/chatgpt-widget.mjs
 var import_node_crypto2 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v12";
+var WIDGET_VERSION = "v13";
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 var MCP_APP_MIME = "text/html;profile=mcp-app";
@@ -34472,6 +34472,10 @@ var WIDGET_HTML = `<!doctype html>
       toolResult(m.params);
     } else if (m.method === 'ui/notifications/tool-input') {
       requested(m.params && m.params.arguments);
+    } else if (m.method === 'ui/notifications/tool-input-partial') {
+      // Partial arguments may change and have no request ID. A known UI read is already pending;
+      // do not mistake its streamed echo for a different selection or execute incomplete input.
+      if (!pending && !awaitingSelection) requested();
     } else if (m.method === 'ui/notifications/tool-cancelled') {
       if (pending || awaitingSelection || !rendered) render({ cancelled: true, error: 'The reading request was cancelled. Ask to open a passage again when you are ready.' });
     } else if (m.method === 'ui/notifications/host-context-changed') {

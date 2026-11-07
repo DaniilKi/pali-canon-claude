@@ -44,6 +44,7 @@ def check():
                 page.route("**/*", lambda route: (requests.append(route.request.url), route.abort()))
                 errors = []
                 navigation_calls = 0
+                partial_events = 0
                 page.on("pageerror", lambda e: errors.append(str(e)))
                 if bridge == "MCP Apps":
                     page.set_content("<style>body{margin:0}iframe{border:0;width:100%;height:850px}</style>")
@@ -90,6 +91,16 @@ def check():
                     send(data)
                     verified(data)
 
+                def notify(method, params):
+                    nonlocal partial_events
+                    if method == "ui/notifications/tool-input-partial":
+                        partial_events += 1
+                    # Wait for the asynchronous notification to reach the reader before
+                    # resolving a legacy Promise (whose microtask could otherwise overtake it).
+                    before = frame.evaluate("""method=>{if(!window.testNotifications){window.testNotifications={};window.addEventListener('message',ev=>{const m=ev.data?.method;if(m)window.testNotifications[m]=(window.testNotifications[m]||0)+1})}return window.testNotifications[method]||0}""", method)
+                    page.evaluate("""x=>{const target=x.bridge==='MCP Apps'?document.querySelector('iframe').contentWindow:window;target.postMessage({jsonrpc:'2.0',method:x.method,params:x.params},'*')}""", {"bridge": bridge, "method": method, "params": params})
+                    frame.wait_for_function("x=>(window.testNotifications[x.method]||0)>x.before", arg={"method": method, "before": before})
+
                 def context_verified(data):
                     refs=[s["ref"] for s in data["pali"]["segments"]]
                     page.wait_for_function("x=>{const d=window.contextHistory.at(-1);return d?.state==='displayed'&&d.citation===x.citation&&JSON.stringify(d.pali.refs)===JSON.stringify(x.refs)}", arg={"citation": data["citation"], "refs": refs})
@@ -130,6 +141,7 @@ def check():
                         button.click()
                     assert frame.locator("#navigation").get_attribute("aria-busy") == "true"
                     assert frame.locator("#navigation button").evaluate_all("buttons=>buttons.every(b=>b.disabled)")
+                    notify("ui/notifications/tool-input-partial", {"arguments": {"uid": "Private provisional UI echo fixture"}})
                     reply(command, data)
                     verified(data)
                     frame.wait_for_function("()=>document.querySelector('#navigation').getAttribute('aria-busy')==='false'")
@@ -169,6 +181,19 @@ def check():
                 frame.evaluate("document.body.style.zoom='1'")
 
                 continuation = payload["continuation"]
+                notify("ui/notifications/tool-input-partial", {"arguments": {"uid": "Private streamed argument fixture"}})
+                notify("ui/notifications/tool-input-partial", {})
+                frame.wait_for_function("()=>document.querySelector('#status').textContent.includes('Opening')")
+                page.wait_for_function("window.contextHistory.at(-1)?.state==='loading'")
+                assert frame.locator("#navigation button").count() == 0
+                assert page.evaluate("window.navQueue.length") == 0
+                assert "Private streamed" not in json.dumps(page.evaluate("window.contextHistory"))
+                notify("ui/notifications/tool-cancelled", {})
+                frame.locator("#title").filter(has_text="Reading cancelled").wait_for()
+                page.wait_for_function("window.contextHistory.at(-1)?.state==='cancelled'")
+                notify("ui/notifications/tool-input", {"arguments": {"uid": fixture["text_id"]}})
+                displayed(fixture)
+                context_verified(fixture)
                 activate("Continue Pāli", fixture["pali"]["continue_with"], continuation["next"], keyboard=True)
                 displayed(continuation["next"])
                 assert fixture["pali"]["segments"][0]["text"] not in frame.locator("#pali").inner_text()
@@ -380,16 +405,18 @@ def check():
                 context_count = page.evaluate("window.contextHistory.length")
                 reply(source["first"]["pali"]["continue_with"], source["next"])
                 send(fixture)
+                notify("ui/notifications/tool-input-partial", {"arguments": {"uid": "Private closed fixture"}})
                 page.evaluate("""bridge=>{const target=bridge==='MCP Apps'?document.querySelector('iframe').contentWindow:window;target.postMessage({jsonrpc:'2.0',id:'again',method:'ui/resource-teardown',params:{}},'*')}""", bridge)
                 page.wait_for_function("window.teardownReplies.some(m=>m.id==='again')")
                 page.wait_for_timeout(30)
                 assert "Reader closed" in frame.locator("#title").inner_text()
                 assert page.evaluate("window.contextHistory.length") == context_count
+                assert "Private provisional" not in json.dumps(page.evaluate("window.contextHistory"))
                 assert "has not been verified" in frame.locator("#context-status").inner_text()
                 assert not errors, errors
-                checks.append({"bridge": bridge, "width": width, "navigation_calls": navigation_calls, "context_updates": page.evaluate("window.contextHistory.length"), "context_mode": ("structuredContent" if width == 390 else "text") if bridge == "MCP Apps" else "widget-state",
+                checks.append({"bridge": bridge, "width": width, "navigation_calls": navigation_calls, "partial_events": partial_events, "context_updates": page.evaluate("window.contextHistory.length"), "context_mode": ("structuredContent" if width == 390 else "text") if bridge == "MCP Apps" else "widget-state",
                     "checks": ["initialization", "theme", "source text", "responsive columns", "no horizontal overflow",
-                        "named landmarks and headings", "keyboard link activation", "200% zoom", "live status updates", "cancelled reading clears source and model state", "late cancelled replies ignored and fresh reading recovers",
+                        "named landmarks and headings", "keyboard link activation", "200% zoom", "live status updates", "streamed input loading and cancellation", "private partial arguments omitted", "partial echoes preserve pending reads", "closed reader ignores partial input", "cancelled reading clears source and model state", "late cancelled replies ignored and fresh reading recovers",
                         "Pāli continuation", "English pinned continuation after primary recovery", "unpinned offset refused",
                         "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "commentary labels and availability", "unaligned source caution", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "exact Pali segment without invented English alignment", "source-preserving context and exact return", "direct navigation controls and keyboard activation", "late success and rejection ignored", "navigation failure clears stale content", "local navigation survives globals updates", "model-context capability and modality checks", "metadata-only source context and replay commands", "late context acknowledgements coalesce to current state", "context errors leave the reader usable", "cleared reading state on error", "teardown acknowledgement and terminal cleanup", "late closed-reader replies ignored", "no invented post-canonical/source-file links", "no JS errors"]})
                 page.close()

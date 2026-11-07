@@ -818,3 +818,9 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** The reader did not handle ui/resource-teardown, although a host may wait for its response before removing the view. Pending reads/context timers and callbacks also needed a terminal lifecycle boundary.
 - **Decision.** Clear local content/state, cancel timers, invalidate navigation and queued/context callbacks, and acknowledge the original request ID. Allow repeated teardown acknowledgements, ignore untrusted frame requests and close on non-cached pagehide. When context is idle/healthy, send one best-effort closed snapshot; never race an unconfirmed older update or block closure on optional context storage. Protect reentrant closure during a setter/read result. Version resources to v12.
 - **Consequences.** No source content, rights or mapping changes. Local closure is verified; host/model context removal is not. Signed-in host lifecycle and model-delivery acceptance remain separate gates.
+
+### D136. Treat streamed arguments as advisory loading hints
+
+- **Context.** The reader ignored partial tool-input notifications. Cancellation before complete arguments could leave the prior passage marked active. Partial arguments may change and carry no correlation ID.
+- **Decision.** Mark an idle reader as loading on the first partial notification, coalesce subsequent chunks and accept cancellation. Never display, share or execute incomplete arguments. During an existing UI read, leave advisory partial echoes alone so its correlated response can complete. Complete input/results retain authority. Closed instances ignore streamed input. Version resources to v13.
+- **Consequences.** No source identity is inferred from partial data. Automated event-order tests do not establish signed-in host ordering or model delivery. No source text, rights or mapping is changed.
