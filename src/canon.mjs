@@ -1,4 +1,4 @@
-import { searchSegments, searchFold, searchExcerpt, searchTerms, searchReading, assertSearchQuery } from './search-segments.mjs';
+import { searchSegments, searchFold, searchExcerpt, searchTerms, searchReading, assertSearchQuery, isSourcePhrase } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * The bundled Pāli Canon: VRI Chaṭṭha Saṅgāyana text, standard citation IDs aligned to it,
@@ -466,6 +466,7 @@ function terms(query) {
  */
 export function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   assertSearchQuery(query);
+  if (groups?.length && isSourcePhrase(query)) throw new Error('A quoted source phrase cannot use alternative groups or English expansion. Search the complete phrase as entered.');
   const d = load();
   const filter = collection ? fold(collection).replace(/\s+/g, '') : null;
   const resolved = groupedScope(d, filter, collection);

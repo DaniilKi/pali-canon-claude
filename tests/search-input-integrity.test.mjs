@@ -5,14 +5,14 @@ import {InMemoryTransport} from '@modelcontextprotocol/sdk/inMemory.js';
 import {createServer} from '../src/server.mjs';
 import * as canon from '../src/canon.mjs';
 import {searchWithInput} from '../src/english-search.mjs';
-import {searchTerms} from '../src/search-segments.mjs';
+import {searchTerms,romanizeSearchInput} from '../src/search-segments.mjs';
 import {search as commentary} from '../src/commentary-search.mjs';
 import {search as postcanonical} from '../src/postcanonical.mjs';
 import {search as sourceBook} from '../src/source-book-search.mjs';
 import {SCRIPTS,transliterate} from '../src/script.mjs';
 
 const scopes=[['search_texts',{collection:'mn10',english:'off'}],['search_commentary',{books:['s0201a.att.xml']}],['search_post_canonical',{books:['vism']}],['search_source_book',{book:'s0201m'}]];
-const invalid=['漢sati字','ηsati','สति','"sati" 漢'];
+const invalid=['漢sati字','ηsati','สति','"sati" 漢','sati١','sati²','สติ١'];
 
 test('search tokenization and direct search APIs cannot discard unsupported query letters',async()=>{
  for(const query of invalid) {
@@ -46,7 +46,7 @@ test('quoted Roman source marks remain searchable without claiming native conver
    const r=await c.callTool({name,arguments:{query:'"saौti"',limit:1,...options}});
    assert.ok(!r.isError,JSON.stringify(r.content));assert.ok((r.structuredContent.total_matched??r.structuredContent.total_texts_matched)>0);
    assert.equal(r.structuredContent.input_script,undefined);assert.equal(r.structuredContent.query,'"saौti"');assert.match(r.structuredContent.query_note,/kept as entered.*diacritic-insensitive/);
-   for(const query of ['saौti','"ส่ติ"','"漢sati字"']) assert.equal((await c.callTool({name,arguments:{query,limit:1,...options}})).isError,true);
+   for(const query of ['saौti','"ส่ติ"']) assert.equal((await c.callTool({name,arguments:{query,limit:1,...options}})).isError,true);
   }
   const query='"Mrammaraṭṭhe mौṃjvānagare leḍītīaraññavihāravāsinā mahā therena katāyaṃ paccayuddesadīpanī."';
   const r=await c.callTool({name:'search_post_canonical',arguments:{query,books:['patthanuddesa-dipanipatha'],limit:1}});
@@ -54,4 +54,25 @@ test('quoted Roman source marks remain searchable without claiming native conver
   const hit=r.structuredContent.results[0],{tool,...args}=hit.read_with;
   const read=await c.callTool({name:tool,arguments:args});assert.ok(!read.isError);assert.ok(read.structuredContent.segments.some(s=>s.text.includes('mौṃjvānagare')));
  } finally {await c.close();await s.close();}
+});
+
+
+test('quoted foreign letters and numerals remain whole source phrases without inferred terms',async()=>{
+ const [a,b]=InMemoryTransport.createLinkedPair(),s=createServer(),c=new Client({name:'literal-controls',version:'1'});await s.connect(a);await c.connect(b);
+ try {
+  for(const [name,options]of scopes) for(const query of ['"漢sati字"','"sati١"','"sati²"']) {
+   const r=await c.callTool({name,arguments:{query,limit:1,...options}});assert.ok(!r.isError,JSON.stringify(r.content));const x=r.structuredContent;
+   assert.equal(x.query,query);assert.equal(x.query_mode,'source_phrase');assert.equal(x.total_matched??x.total_texts_matched,0);assert.equal(x.input_normalised,undefined);assert.equal(x.expanded_from_english,undefined);assert.equal(x.spelling_note,undefined);
+  }
+  for(const english of ['auto','off']) {const r=await c.callTool({name:'search_texts',arguments:{query:'"漢mindfulness字"',english,limit:1}});assert.ok(!r.isError);assert.equal(r.structuredContent.total_texts_matched,0);assert.equal(r.structuredContent.expanded_from_english,undefined);}
+  const bad=await c.callTool({name:'search_texts',arguments:{query:'"漢mindfulness字"',english:'only',limit:1}});assert.equal(bad.isError,true);assert.match(JSON.parse(bad.content[0].text).error,/cannot use English expansion/);
+  for(const query of ['"漢sati字"','"sati١"']) assert.throws(()=>canon.search(query,{collection:'mn10',groups:[['sati']]}),/cannot use alternative groups/);
+ } finally {await c.close();await s.close();}
+});
+
+
+test('supported native numeral queries still convert completely',()=>{
+ for(const script of SCRIPTS)for(const text of ['sati1','"sati1"']) {
+  const r=romanizeSearchInput(transliterate(text,'roman',script));assert.equal(r.text,text);assert.equal(r.source_phrase,undefined);
+ }
 });

@@ -62,7 +62,8 @@ export function register({ tool, z }) {
   }, async ({ book, query, script, offset, limit }) => {
     const output = scriptName(script);
     const input = romanizeSearchInput(query);
-    const result = await withNormalised(input.text, (text) => search(text, { book, offset, limit }));
+    const run = text => search(text, { book, offset, limit });
+    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run);
     const localized = localizeSearch({ ...result, ...searchInputNote(input) }, output, input);
     localized.results = localized.results.map((hit) => ({ ...hit,
       read_with: { ...hit.read_with, script: output }, context_with: { ...hit.context_with, script: output } }));

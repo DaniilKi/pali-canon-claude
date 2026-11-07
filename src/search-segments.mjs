@@ -1,30 +1,39 @@
-import { romanizeLookupInput } from './script.mjs';
+import { romanizeLookupInput, detectScript } from './script.mjs';
 /** Search the same complete stanzas retrieval renders, without joining separate paragraphs or texts. */
 const VERSE = new Set(['gatha1', 'gatha2', 'gatha3', 'gathalast']);
 
 export const searchFold = (text, fold) => fold(text).replace(/\s+/gu, ' ');
 
-/** Quoted Roman source material may contain non-Roman combining marks in the pinned edition.
- * Keep that input intact rather than inventing a native-script conversion or correcting the source. */
+const singleQuotedPhrase = text => /^"[^"]+"$|^“[^”]+”$/u.test(String(text).trim());
+const latinLetter = text => [...String(text)].some(ch => /\p{L}/u.test(ch) && /\p{Script=Latin}/u.test(ch));
+const foreignLetter = text => [...String(text)].some(ch => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch));
+const foreignNumeral = text => [...String(text)].some(ch => /\p{N}/u.test(ch) && !/[0-9]/u.test(ch));
+
+/** A complete quoted Roman-containing source phrase keeps unconverted glyphs inside the phrase. */
+export const isSourcePhrase = text => singleQuotedPhrase(text) && latinLetter(text)
+  && (detectScript(text) !== 'roman' || foreignLetter(text) || foreignNumeral(text));
+
 export function romanizeSearchInput(query) {
   const text = String(query);
-  try { return romanizeLookupInput(text); }
-  catch (error) {
-    const chars = [...text];
-    const quoted = /^"[^"]+"$|^“[^”]+”$/u.test(text.trim());
-    const roman = chars.some(ch => /\p{L}/u.test(ch) && /\p{Script=Latin}/u.test(ch))
-      && !chars.some(ch => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch));
-    if (!quoted || !roman || !chars.some(ch => /\p{M}/u.test(ch))) throw error;
-    return { text, script: 'roman', query_note: 'This quoted Roman query contains combining marks that were kept as entered, without native-script conversion. Matching remains diacritic-insensitive; this does not verify the spelling or source edition.' };
+  try {
+    const input = romanizeLookupInput(text);
+    if (foreignNumeral(input.text)) throw new Error('The search input could not be converted completely. Use ASCII digits or one supported script; a quoted source phrase keeps its original numeral characters.');
+    return input;
+  } catch (error) {
+    if (!isSourcePhrase(text)) throw error;
+    return { text, script: 'roman', source_phrase: true };
   }
 }
 
-export const searchInputNote = input => input.query_note ? { query_note: input.query_note } : {};
+export const searchInputNote = input => input.source_phrase ? {
+  query_mode: 'source_phrase',
+  query_note: 'This quoted source phrase was kept as entered, without native-script conversion or spelling/English inference. Matching remains diacritic-insensitive, case-insensitive and whitespace-insensitive; this does not verify spelling, source-edition correctness or uniqueness.',
+} : {};
 
-/** Validate before normalization/tokenization can discard unsupported letters. Native input is converted at MCP entry. */
+/** Reject characters that loose word tokenization would silently discard. */
 export function assertSearchQuery(query) {
-  if ([...String(query)].some(ch => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch))) {
-    throw new Error('Search query contains unsupported or unconverted letters. Use Roman Pāli or completely convert one supported script before searching.');
+  if ((foreignLetter(query) || foreignNumeral(query)) && !isSourcePhrase(query)) {
+    throw new Error('Search query contains unsupported or unconverted letters or numerals. Use Roman Pāli or completely convert one supported script before searching.');
   }
 }
 

@@ -7,7 +7,7 @@
  *     (aspirates, doubled consonants, ny/ñ, ṃ/n), labelled spelling_note.
  */
 import * as canon from './canon.mjs';
-import { hasSearchQuotes, assertSearchQuery } from './search-segments.mjs';
+import { hasSearchQuotes, assertSearchQuery, isSourcePhrase, searchInputNote } from './search-segments.mjs';
 import { normalizeInput, normalizationNote, spellingVariants, canonSpellings } from './input.mjs';
 import { looksEnglish, expandEnglish, paliWordsInEnglish } from './glossary.mjs';
 
@@ -47,6 +47,10 @@ function variantSearch(query, base, opts) {
 export function searchWithInput(query, { collection, limit = 10, offset = 0, english = 'auto' } = {}) {
   assertSearchQuery(query);
   const opts = { collection, limit, offset };
+  if (isSourcePhrase(query)) {
+    if (english === 'only') throw new Error('A quoted source phrase with unconverted characters cannot use English expansion. Choose english auto or off to search the phrase as entered.');
+    return { ...canon.search(query, opts), ...searchInputNote({ source_phrase: true }) };
+  }
   const n = normalizeInput(query);
   const note = normalizationNote(n);
   // A rewritten word does not stop an English question from being expanded when most of its words are left as typed.

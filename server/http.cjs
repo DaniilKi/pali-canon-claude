@@ -24301,22 +24301,29 @@ function localizePostCanonical(result, script, input) {
 // src/search-segments.mjs
 var VERSE = /* @__PURE__ */ new Set(["gatha1", "gatha2", "gatha3", "gathalast"]);
 var searchFold = (text, fold8) => fold8(text).replace(/\s+/gu, " ");
+var singleQuotedPhrase = (text) => /^"[^"]+"$|^“[^”]+”$/u.test(String(text).trim());
+var latinLetter = (text) => [...String(text)].some((ch) => new RegExp("\\p{L}", "u").test(ch) && new RegExp("\\p{Script=Latin}", "u").test(ch));
+var foreignLetter = (text) => [...String(text)].some((ch) => new RegExp("\\p{L}", "u").test(ch) && !new RegExp("\\p{Script=Latin}", "u").test(ch));
+var foreignNumeral = (text) => [...String(text)].some((ch) => new RegExp("\\p{N}", "u").test(ch) && !/[0-9]/u.test(ch));
+var isSourcePhrase = (text) => singleQuotedPhrase(text) && latinLetter(text) && (detectScript(text) !== "roman" || foreignLetter(text) || foreignNumeral(text));
 function romanizeSearchInput(query) {
   const text = String(query);
   try {
-    return romanizeLookupInput(text);
+    const input = romanizeLookupInput(text);
+    if (foreignNumeral(input.text)) throw new Error("The search input could not be converted completely. Use ASCII digits or one supported script; a quoted source phrase keeps its original numeral characters.");
+    return input;
   } catch (error2) {
-    const chars = [...text];
-    const quoted = /^"[^"]+"$|^“[^”]+”$/u.test(text.trim());
-    const roman2 = chars.some((ch) => new RegExp("\\p{L}", "u").test(ch) && new RegExp("\\p{Script=Latin}", "u").test(ch)) && !chars.some((ch) => new RegExp("\\p{L}", "u").test(ch) && !new RegExp("\\p{Script=Latin}", "u").test(ch));
-    if (!quoted || !roman2 || !chars.some((ch) => new RegExp("\\p{M}", "u").test(ch))) throw error2;
-    return { text, script: "roman", query_note: "This quoted Roman query contains combining marks that were kept as entered, without native-script conversion. Matching remains diacritic-insensitive; this does not verify the spelling or source edition." };
+    if (!isSourcePhrase(text)) throw error2;
+    return { text, script: "roman", source_phrase: true };
   }
 }
-var searchInputNote = (input) => input.query_note ? { query_note: input.query_note } : {};
+var searchInputNote = (input) => input.source_phrase ? {
+  query_mode: "source_phrase",
+  query_note: "This quoted source phrase was kept as entered, without native-script conversion or spelling/English inference. Matching remains diacritic-insensitive, case-insensitive and whitespace-insensitive; this does not verify spelling, source-edition correctness or uniqueness."
+} : {};
 function assertSearchQuery(query) {
-  if ([...String(query)].some((ch) => new RegExp("\\p{L}", "u").test(ch) && !new RegExp("\\p{Script=Latin}", "u").test(ch))) {
-    throw new Error("Search query contains unsupported or unconverted letters. Use Roman P\u0101li or completely convert one supported script before searching.");
+  if ((foreignLetter(query) || foreignNumeral(query)) && !isSourcePhrase(query)) {
+    throw new Error("Search query contains unsupported or unconverted letters or numerals. Use Roman P\u0101li or completely convert one supported script before searching.");
   }
 }
 function searchTerms(query, fold8) {
@@ -25472,6 +25479,7 @@ function terms(query) {
 }
 function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   assertSearchQuery(query);
+  if (groups?.length && isSourcePhrase(query)) throw new Error("A quoted source phrase cannot use alternative groups or English expansion. Search the complete phrase as entered.");
   const d = load();
   const filter = collection ? fold3(collection).replace(/\s+/g, "") : null;
   const resolved = groupedScope(d, filter, collection);
@@ -27144,7 +27152,8 @@ function register({ tool, z }) {
   }, async ({ query, books, section, limit, offset, script }) => {
     if (script) scriptName(script);
     const input = romanizeSearchInput(query);
-    const result = await withNormalised(input.text, (q) => search2(q, { books, section, limit, offset }));
+    const run = (q) => search2(q, { books, section, limit, offset });
+    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run);
     return localizePostCanonical({ ...result, ...searchInputNote(input) }, script, input);
   });
 }
@@ -33495,7 +33504,8 @@ function register18({ tool, z }) {
   }, async ({ query, books, offset, limit, script }) => {
     if (script) scriptName(script);
     const input = romanizeSearchInput(query);
-    const result = await withNormalised(input.text, (value) => search3(value, { books, offset, limit }));
+    const run = (value) => search3(value, { books, offset, limit });
+    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run);
     return localizeCommentary({ ...result, ...searchInputNote(input) }, script, input);
   });
 }
@@ -33583,7 +33593,8 @@ function register19({ tool, z }) {
   }, async ({ book, query, script, offset, limit }) => {
     const output = scriptName(script);
     const input = romanizeSearchInput(query);
-    const result = await withNormalised(input.text, (text) => search4(text, { book, offset, limit }));
+    const run = (text) => search4(text, { book, offset, limit });
+    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run);
     const localized = localizeSearch({ ...result, ...searchInputNote(input) }, output, input);
     localized.results = localized.results.map((hit) => ({
       ...hit,
@@ -33630,6 +33641,10 @@ function variantSearch(query, base, opts) {
 function searchWithInput(query, { collection, limit = 10, offset = 0, english: english2 = "auto" } = {}) {
   assertSearchQuery(query);
   const opts = { collection, limit, offset };
+  if (isSourcePhrase(query)) {
+    if (english2 === "only") throw new Error("A quoted source phrase with unconverted characters cannot use English expansion. Choose english auto or off to search the phrase as entered.");
+    return { ...search(query, opts), ...searchInputNote({ source_phrase: true }) };
+  }
   const n = normalizeInput(query);
   const note = normalizationNote(n);
   const wordCount = (query.match(/[A-Za-z]+/g) || []).length;
@@ -33944,7 +33959,7 @@ function createServer2() {
     offset: external_exports.number().int().min(0).max(1e5).default(0),
     script: scriptParam,
     include_post_canonical: external_exports.boolean().default(false).describe(SEARCH_OPTION_DESCRIPTION),
-    english: external_exports.enum(["auto", "off", "only"]).default("auto").describe('English queries: "auto" expands a query that looks English into P\u0101li terms from the glossary (DPD English index) and also runs the search as typed; "only" searches the expansion only; "off" never expands. Expansions are labelled expanded_from_english.')
+    english: external_exports.enum(["auto", "off", "only"]).default("auto").describe('English queries: "auto" expands a query that looks English into P\u0101li terms from the glossary (DPD English index) and also runs the search as typed; "only" searches the expansion only; "off" never expands. Expansions are labelled expanded_from_english. Unconvertible quoted source phrases require auto or off and bypass inference.')
   }, async ({ query, collection, limit, offset, script, include_post_canonical, english: english2 }) => {
     const input = romanizeSearchInput(query);
     const searched = searchWithInput(input.text, { collection, limit, offset, english: english2 });

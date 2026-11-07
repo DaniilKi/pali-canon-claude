@@ -658,7 +658,8 @@ export function register({ tool, z }) {
   }, async ({ query, books, section, limit, offset, script }) => {
     if (script) scriptName(script);
     const input = romanizeSearchInput(query);
-    const result = await withNormalised(input.text, (q) => search(q, { books, section, limit, offset }));
+    const run = q => search(q, { books, section, limit, offset });
+    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run);
     return localizePostCanonical({ ...result, ...searchInputNote(input) }, script, input);
   });
 }

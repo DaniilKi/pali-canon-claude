@@ -333,3 +333,6 @@ The D155 head's installed evidence workflow exposed a source-query regression: V
 
 
 The strict-input review examined 464,078 nonempty bundled source blocks and found 79 conversion exceptions (19 canonical, 60 post-canonical; none in the bundled commentary). verify_quote now confirms a copied canonical quotation only when its unchanged substring is located in a readable source segment, returning exact get_text commands and a distinct literal_source_substring method. It preserves glyphs rather than guessing corrections and retains source/scope/word-limit safeguards. All 19 canonical cases are tested offline in both installed transports; this does not add post-canonical quotation verification or expert/native-reader acceptance (D157).
+
+
+All seven reproduced grammar-source search failures now use labelled source_phrase mode: original ऐ, औ and ऋ glyphs remain in the query and in exact/context read-back, with eight output scripts checked. The mode also reaches the canonical Ne 37 example and combined canonical/post-canonical search, retains source labels and skips spelling/English inference. Matching remains case-, diacritic- and whitespace-insensitive; source-edition correctness is unverified. Ordinary queries now reject unsupported numerals instead of silently turning sati١ or sati² into sati. Supported native digits remain converted (D158–D159).

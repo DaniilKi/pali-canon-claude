@@ -39,6 +39,8 @@ Every citation on this page is checked by an automated test, so it resolves to a
 | "Find the phrase \"evaṃ me sutaṃ\" in the Dīgha Nikāya." | `search_texts` with a quoted phrase. Diacritics are optional: `evam me sutam` works too. |
 | "Is 'holding on to anger is like drinking poison' in the Pāli Canon?" | `search_texts` on the key Pāli and English words. The assistant reports what the texts do and do not contain, and does not invent a source. |
 
+When a copied Roman source phrase contains characters the converter cannot interpret, enclose one complete phrase in double quotes. The search keeps those characters and labels source-phrase mode, without spelling or English-word expansion. Matching still ignores case, diacritics and repeated whitespace; check the returned source rather than inferring corrected spelling. Unrecognized numerals in loose word queries are errors; a quoted source phrase keeps its numeral characters as entered.
+
 ## Words and sources
 
 | Ask | What the assistant does |
