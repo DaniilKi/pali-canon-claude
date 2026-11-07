@@ -25556,6 +25556,7 @@ function describe(u, notes = []) {
     ...t.license ? { license: t.license } : {},
     translation_id: translationId(t),
     match: t.match,
+    ...t.mapping_note ? { mapping_note: t.mapping_note } : {},
     ...isScoped(t) ? { translation_scope: translationScope(t, u) } : {},
     ...t.commentary ? { includes_commentary: true } : {}
   }));
@@ -26125,6 +26126,7 @@ function available(unit) {
     reference: t.reference || void 0,
     ...t.license ? { license: t.license } : {},
     match: t.match,
+    ...t.mapping_note ? { mapping_note: t.mapping_note } : {},
     ...t.commentary ? { includes_commentary: true } : {}
   }));
 }
@@ -26175,6 +26177,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
   if (scope_sha256 !== void 0 && scope_sha256 !== declaredScope?.scope_sha256) throw new Error("The scoped translation mapping changed. Restart at offset 0 after reviewing its scope.");
   let result;
   const notes = via && !declaredScope ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
+  if (link.mapping_note) notes.push(link.mapping_note);
   try {
     result = link.source === "ati" ? await fetchAti(link.path) : link.source === "anandajoti" ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1) : await fetchDhammatalks(link.url);
   } catch (error2) {

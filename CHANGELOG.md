@@ -4,6 +4,10 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Added three reviewed Access to Insight whole-story translation links: Pv 5,
+  Vv 16 and Vv 35. Retrieval carries edition-number/name differences and the
+  publisher's original copyright, attribution and free-distribution notice.
+  English bodies are fetched live, not bundled (D181).
 - Corrected 69 Vimānavatthu/Petavatthu citation spans and 11 commentary
   assignment lists using the pinned VRI story headings. This keeps a following
   story's opening verse out of the preceding story. All 136 stories have boundary

@@ -21,7 +21,11 @@ boundary and commentary assignment, the reported dialogue, and refusal to guess
 on mismatched identities. Full-source equality was checked before repair; the
 receipt records which other data remained unchanged.
 
-## Translation leads, not accepted new links
+## Translation leads at the D180 checkpoint
+
+The following was the status when the boundary repair was published. The
+subsequent [D181 source review](ati-story-links.md) resolved the three mappings
+and page-specific rights notices and added their whole-story links separately.
 
 The official [ATI mirror](https://github.com/bcbsit/ati/tree/45fedca341497120651efa20e756b04a13e61089/tipitaka/kn)
 contains one Pv and two Vv translated pages. This is the same already-recorded

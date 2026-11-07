@@ -29,6 +29,13 @@ The `vinaya_rule` tool links to sections of Ṭhānissaro Bhikkhu's *The Buddhis
 
 Pages are fetched live from [accesstoinsight.org](https://accesstoinsight.org/). If it is unavailable, they come from the official Barre Center for Buddhist Studies repository [bcbsit/ati](https://github.com/bcbsit/ati) (via raw.githubusercontent.com or jsDelivr), or from the [Digital Pali Reader mirror](https://github.com/digitalpalireader/accesstoinsight). Licences vary by page (CC BY-NC 4.0, BPS free-distribution terms, public domain and others), and each page's own notice is returned with its text. Do not sell ATI content. The bundled index stores PTS references, titles, translators and licence labels only.
 
+The reviewed Pv 5 link is Ṭhānissaro Bhikkhu's CC-BY-NC translation. Vv 16 and
+Vv 35 are John D. Ireland's translations, copyright 1997, from BPS Wheel
+417/418. Their page-specific notice permits free electronic redistribution,
+requires derivation/source acknowledgement and the full licence, and limits
+reprinting to 50 copies. The reading response preserves that full notice and
+source citation. No English bodies are bundled. See the [source review](docs/data/ati-story-links.md).
+
 The `reading_plan` tool's study-guide plans list, in order, the texts cited by two of Ṭhānissaro Bhikkhu's Access to Insight study guides ([Into the Stream](https://www.accesstoinsight.org/lib/study/into_the_stream.html), © 2011 Metta Forest Monastery; [The Four Noble Truths](https://www.accesstoinsight.org/lib/study/truths.html), © 1999 Metta Forest Monastery; both CC BY-NC 4.0). Only the guides' citations and links are stored; none of their text is bundled or returned.
 ## Access to Insight indexes (bundled topic index)
 

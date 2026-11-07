@@ -46,6 +46,27 @@ preservation checks are recorded in
 [`docs/data/story-boundary-repair.json`](../../docs/data/story-boundary-repair.json).
 Current coverage totals are unchanged.
 
+### Reviewed ATI story links
+
+The final `--content` pass of `build_translations.py` applies the three reviewed
+story links in `reviewed_ati_stories.json` after the general linker. It checks the
+entire upstream HTML hash (including the rights notice), root wording hash,
+title and verse scope before adding a whole-story link. These Vv/Pv edition
+numbers must not be inferred from the generic SN/AN/PTS heuristics.
+
+To add only these links to an existing translation index without refetching
+other sources:
+
+```sh
+python3 scripts/canon/reviewed_ati_stories.py /tmp/pali-inputs/canon.json.gz server/data/translations.json /tmp/pali-ati /tmp/translations-stories.json
+```
+
+Use the corrected canon and the official ATI checkout at the commit in the
+manifest. Inspect the output, install it as `server/data/translations.json`,
+then run the normal build/check gates. Changed sources, identity conflicts or
+changed story bounds fail closed and require review, not updated hashes alone.
+This command adds metadata only; it never copies English text into the package.
+
 ### Repairing legacy shared-passage bounds
 
 The builder refreshes records marked `shares_passage_with` after its final boundary clipping and before aggregating groups. Legacy indexes copied some abbreviated Vinaya records before clipping, leaving their ends past the declared owner. To repair an old bundled pair without fetching sources, unpack to a separate directory and run:

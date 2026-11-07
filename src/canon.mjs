@@ -444,6 +444,7 @@ export function describe(u, notes = []) {
     ...(t.license ? { license: t.license } : {}),
     translation_id: translationId(t),
     match: t.match,
+    ...(t.mapping_note ? { mapping_note: t.mapping_note } : {}),
     ...(isScoped(t) ? { translation_scope: translationScope(t, u) } : {}),
     ...(t.commentary ? { includes_commentary: true } : {}),
   }));

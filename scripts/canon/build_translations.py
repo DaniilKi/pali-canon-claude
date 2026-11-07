@@ -507,6 +507,8 @@ def main():
         ati_root, dt_cache = sys.argv[k + 1], sys.argv[k + 2]
         out, content_report = content_link(out, pages, canon, by_id, ati_root, dt_cache)
         report['content'] = content_report
+        from reviewed_ati_stories import apply_reviewed_links
+        report['reviewed_stories'] = apply_reviewed_links(out, canon, ati_root)
     json.dump(out, open(sys.argv[4], 'w'), ensure_ascii=False, separators=(',', ':'))
     print(json.dumps(report, indent=1))
     print('texts with translations:', len(out), 'links:', sum(len(v) for v in out.values()))

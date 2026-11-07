@@ -125,6 +125,7 @@ export function available(unit) {
     ...(isScoped(t) ? { translation_scope: translationScope(t, unit) } : {}),
     source: sourceName(t),
     translator: t.translator, reference: t.reference || undefined, ...(t.license ? { license: t.license } : {}), match: t.match,
+    ...(t.mapping_note ? { mapping_note: t.mapping_note } : {}),
     ...(t.commentary ? { includes_commentary: true } : {}),
   }));
 }
@@ -177,6 +178,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
   if (scope_sha256 !== undefined && scope_sha256 !== declaredScope?.scope_sha256) throw new Error('The scoped translation mapping changed. Restart at offset 0 after reviewing its scope.');
   let result;
   const notes = via && !declaredScope ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
+  if (link.mapping_note) notes.push(link.mapping_note);
   try {
     result = link.source === 'ati' ? await fetchAti(link.path)
       : link.source === 'anandajoti' ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1)

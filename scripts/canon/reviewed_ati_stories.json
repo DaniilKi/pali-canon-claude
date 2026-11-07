@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "ati_repository": "https://github.com/bcbsit/ati",
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "links": [
+    {
+      "unit_id": "pv5",
+      "path": "/tipitaka/kn/pv/pv.1.05.than",
+      "pali_title": "Tirokuṭṭapetavatthu",
+      "english_title": "Hungry Shades Outside the Walls",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "Pv 1.5",
+      "source_verses": "Pv 14-25",
+      "vri_verses": "14–25",
+      "source_html_sha256": "7d462c6ef7c8b764d8dd352f4b730175f7d309b2f6708334b46cef8ea11731ba",
+      "pali_sha256": "40b40cc2682c58222ad204626557dfc966aaca28548a613d541e944a83171def",
+      "evidence": {
+        "basis": "chapter/story position, title or documented name variant, ordered whole-story content and stanza count",
+        "vri_stanzas": 12
+      },
+      "mapping_note": "Whole-story correspondence, not line-by-line alignment: Pv 1.5 (Tirokudda Kanda) corresponds to Pv 5 (Tirokuṭṭapetavatthu). ATI cites Pv 14-25; this VRI edition numbers the verses 14–25."
+    },
+    {
+      "unit_id": "vv16",
+      "path": "/tipitaka/kn/vv/vv.1.16.irel",
+      "pali_title": "Sirimāvimānavatthu",
+      "english_title": "Sirima’s Mansion",
+      "translator": "John D. Ireland",
+      "license": "BPS",
+      "source_reference": "Vv 1.16",
+      "source_verses": "Vv 136-148",
+      "vri_verses": "137–149",
+      "source_html_sha256": "446402323edb177d2eb361168ea925c341f0422e21f97dfbda129309363069fd",
+      "pali_sha256": "579a59cdb0acf0f49cace7e4dab362acf130e2898168ccb0432f1bc0d867dfad",
+      "evidence": {
+        "basis": "chapter/story position, title or documented name variant, ordered whole-story content and stanza count",
+        "vri_stanzas": 13
+      },
+      "mapping_note": "Whole-story correspondence, not line-by-line alignment: Vv 1.16 (Sirima) corresponds to Vv 16 (Sirimāvimānavatthu). ATI cites Vv 136-148; this VRI edition numbers the verses 137–149."
+    },
+    {
+      "unit_id": "vv35",
+      "path": "/tipitaka/kn/vv/vv.3.07.irel",
+      "pali_title": "Pesavatīvimānavatthu",
+      "english_title": "Sesavati’s Mansion",
+      "translator": "John D. Ireland",
+      "license": "BPS",
+      "source_reference": "Vv 3.7",
+      "source_verses": "Vv 647-658",
+      "vri_verses": "646–657",
+      "source_html_sha256": "824d7bbdf808496c3235bcdab1de9febc2574f1753ab4807817540ee10fc0969",
+      "pali_sha256": "e3fe6c4c68638ac946737ac060ec0c59fde12f52de76352c21a808f04b48a6b0",
+      "evidence": {
+        "basis": "chapter/story position, title or documented name variant, ordered whole-story content and stanza count",
+        "vri_stanzas": 12
+      },
+      "mapping_note": "Whole-story correspondence, not line-by-line alignment: Vv 3.7 (Sesavati) corresponds to Vv 35 (Pesavatīvimānavatthu). ATI cites Vv 647-658; this VRI edition numbers the verses 646–657. The translator calls the woman Sesavati; the VRI title and text use Pesavatī."
+    }
+  ]
+}
