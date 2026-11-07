@@ -3,6 +3,7 @@
 // English translations, fetched live (cached) through english.mjs. The answer only ever reports
 // what the texts searched contain: it never says who did or did not say something.
 import { fold, load, resolve, segments, source, linksFor, translationId, alignmentInfo } from './canon.mjs';
+import { isPartial, partialScope, scopeHash } from './translation-scope.mjs';
 import * as englishModule from './english.mjs';
 import { romanizeLookupInput, inputNote } from './script.mjs';
 import { parseCitation, citationId, rangeEndPath } from './citations.mjs';
@@ -468,7 +469,8 @@ function englishReference(reference) {
 }
 
 /** Pages to check for an English quote: one per (text, translator), dhammatalks.org first. */
-export function englishScope(texts) {
+export function englishScope(texts, { includePartial = false } = {}) {
+  if (includePartial && !texts?.length) throw new Error('Partial English verification requires explicit texts and include_partial: true. No default collection was narrowed.');
   let units;
   let label;
   let requested;
@@ -484,38 +486,48 @@ export function englishScope(texts) {
   const pages = [];
   const byUrl = new Map();
   const withoutEnglish = [];
+  const partialOmitted = [];
   for (const [index, unit] of units.entries()) {
-    const { links, via } = linksFor(unit);
+    const { links: declaredLinks, via } = linksFor(unit);
+    const partialLinks = declaredLinks.filter(isPartial);
+    const links = includePartial ? declaredLinks : declaredLinks.filter(link => !isPartial(link));
+    if (!includePartial) for (const l of partialLinks) partialOmitted.push({ text_id: unit.id, translation_id: translationId(l), translation_scope: partialScope(l, unit, segments(unit), source()) });
     const owner = via || unit;
     const record = requested?.[index];
+    const requestNotes = record ? [...record.notes] : [];
     if (record) {
       record.translation_scope = { text_id: owner.id, citation: owner.acronym,
-        kind: !links.length ? 'unavailable' : via ? 'inherited_container' : 'direct' };
+        kind: !links.length ? (partialLinks.length ? 'partial_excluded' : 'unavailable') : links.every(isPartial) ? 'partial_unit' : via ? 'inherited_container' : 'direct',
+        ...(partialLinks.length ? { partial_scopes: partialLinks.map(l => partialScope(l, unit, segments(unit), source())) } : {}) };
       if (via) record.notes.push(`English verification for ${unit.acronym} uses its linked containing source ${owner.acronym}. A match in that source does not verify correspondence to the narrower requested text.`);
     }
     if (!links.length) { withoutEnglish.push(unit.acronym); continue; }
     const seenTranslator = new Set();
-    const sorted = [...links].sort((a, b) => (b.source === 'dhammatalks') - (a.source === 'dhammatalks'));
+    const sorted = [...links].sort((a, b) => (isPartial(a) - isPartial(b)) || (b.source === 'dhammatalks') - (a.source === 'dhammatalks'));
     for (const l of sorted) {
       const translator = l.translator || l.source;
-      const who = fold(translator).replace(/[^a-z]/g, '');
+      const declaredScope = partialScope(l, unit, segments(unit), source());
+      const who = fold(translator).replace(/[^a-z]/g, '') + (declaredScope ? ':' + declaredScope.scope_sha256 : '');
+      const pageOwner = declaredScope ? unit : owner;
       if (seenTranslator.has(who)) continue;
       seenTranslator.add(who);
-      const context = record ? { requested_text_ids: [unit.id], scope_notes: [...record.notes],
-        ...(via ? { unverified_requested_text_ids: [unit.id] } : {}) } : {};
-      const existing = byUrl.get(l.url);
+      const context = record ? { requested_text_ids: [unit.id], scope_notes: [...(declaredScope ? requestNotes : record.notes)],
+        ...(via && !declaredScope ? { unverified_requested_text_ids: [unit.id] } : {}) } : {};
+      if (declaredScope) { context.translation_scope = declaredScope; context.whole_unit_coverage = false; context.scope_notes = [...(context.scope_notes || []), declaredScope.note]; }
+      const pageKey = l.url + (declaredScope ? ':' + declaredScope.scope_sha256 : ':whole');
+      const existing = byUrl.get(pageKey);
       if (existing) {
         for (const key of ['requested_text_ids', 'unverified_requested_text_ids', 'scope_notes']) {
           if (context[key]?.length) existing[key] = [...new Set([...(existing[key] || []), ...context[key]])];
         }
         continue;
       }
-      const page = { unit: owner, translation_id: translationId(l), translator, url: l.url, ...context };
-      pages.push(page); byUrl.set(l.url, page);
+      const page = { unit: pageOwner, translation_id: translationId(l), translator, url: l.url, ...context };
+      pages.push(page); byUrl.set(pageKey, page);
     }
   }
   if (pages.length > MAX_ENGLISH_PAGES) throw new Error(`That scope needs ${pages.length} translation pages; the limit is ${MAX_ENGLISH_PAGES}. Pass fewer texts.`);
-  return { label, pages, withoutEnglish, ...(requested ? { requested_texts: requested } : {}) };
+  return { label, pages, withoutEnglish, partialOmitted, ...(requested ? { requested_texts: requested } : {}) };
 }
 
 async function mapLimit(items, n, fn) {
@@ -529,8 +541,9 @@ async function mapLimit(items, n, fn) {
 
 // Request-resolution cautions are separate from the provider's actual-version notes.
 function scopeEvidence(page) {
-  return Object.fromEntries(['requested_text_ids', 'unverified_requested_text_ids', 'scope_notes']
-    .filter(key => page[key]?.length).map(key => [key, page[key]]));
+  return { ...Object.fromEntries(['requested_text_ids', 'unverified_requested_text_ids', 'scope_notes']
+    .filter(key => page[key]?.length).map(key => [key, page[key]])),
+    ...(page.translation_scope ? { translation_scope: page.translation_scope, whole_unit_coverage: false } : {}) };
 }
 
 // Matches and checked-source records must describe the version actually read, including labelled fallback.
@@ -543,13 +556,20 @@ function englishVersion(page) {
   };
 }
 
-async function verifyEnglish(text, texts, limit, fetchTranslation) {
+async function verifyEnglish(text, texts, limit, fetchTranslation, includePartial) {
   const q = words(englishFold(text));
   if (!q.length) throw new Error('The quotation has no words to match.');
-  const plan = englishScope(texts);
+  const plan = englishScope(texts, { includePartial });
+  if (!plan.pages.length && plan.partialOmitted.length) throw new Error('Only partial English sources are available. Review their metadata, then use explicit texts with include_partial: true. No whole-unit comparison was performed.');
   const fetched = await mapLimit(plan.pages, 6, async (p) => {
     try {
-      const t = await fetchTranslation(p.unit, p.translation_id, { limit: 2000000 });
+      const t = await fetchTranslation(p.unit, p.translation_id, { limit: 2000000, ...(p.translation_scope ? { allow_partial: true, scope_sha256: p.translation_scope.scope_sha256 } : {}) });
+      if ((p.translation_scope?.scope_sha256 || null) !== (t.translation_scope?.scope_sha256 || null) || (p.translation_scope && scopeHash(p.translation_scope) !== scopeHash(t.translation_scope))) throw new Error('Retrieved translation scope differs from the planned scope; no quotation was compared.');
+      if (p.translation_scope && (t.translation_id !== p.translation_id || t.url !== p.url
+        || typeof t.text !== 'string' || scopeHash(t.text) !== p.translation_scope.text_sha256 || t.next_offset != null)) {
+        throw new Error('Partial source version/snapshot changed or is incomplete; no quotation was compared.');
+      }
+      if (t.whole_unit_coverage === false && !t.translation_scope) throw new Error('Partial source omitted its declared scope; no quotation was compared.');
       const actualId = t.translation_id || p.translation_id;
       return { ...p, translation_id: actualId,
         ...(actualId !== p.translation_id ? { requested_translation_id: p.translation_id } : {}),
@@ -593,6 +613,7 @@ async function verifyEnglish(text, texts, limit, fetchTranslation) {
       ...(plan.requested_texts ? { requested_texts: plan.requested_texts } : {}),
       translations_checked: pages.map((p) => ({ citation: p.unit.acronym, ...englishVersion(p) })),
       ...(failed.length ? { not_retrieved: failed.map((p) => ({ citation: p.unit.acronym, translator: p.translator, translation_id: p.translation_id, url: p.url, error: p.error, ...scopeEvidence(p) })) } : {}),
+      ...(plan.partialOmitted.length ? { partial_translations_excluded: plan.partialOmitted } : {}),
       ...(plan.withoutEnglish.length ? { no_english_linked: plan.withoutEnglish } : {}),
       note: 'Only these translations were compared. Popular English wordings are often older or freer translations, and two translations of the same verse can share few words: check the Pāli as well (verify_quote with language "pali").',
     },
@@ -644,7 +665,7 @@ function tieNote(ties) {
  * Verify a quotation. `language`: 'pali' | 'english' | 'auto'. `texts`: citations limiting the English scope
  * (default: the Dhammapada). `fetchTranslation` is injectable for tests (defaults to english.translation).
  */
-export async function verifyQuote({ text, language = 'auto', texts, limit = 5 }, { fetchTranslation = englishModule.translation } = {}) {
+export async function verifyQuote({ text, language = 'auto', texts, limit = 5, include_partial = false }, { fetchTranslation = englishModule.translation } = {}) {
   const quote = String(text ?? '').trim();
   if (quote.length < 8) throw new Error('Give at least a few words of the quotation.');
   let input, literal;
@@ -657,18 +678,20 @@ export async function verifyQuote({ text, language = 'auto', texts, limit = 5 },
   if (input.original && language === 'english') throw new Error('Native-script quotation input is supported as Pāli. Choose language pali or auto; English mode requires an English quotation in Roman script.');
   const comparisonText = input.text.trim();
   const lang = language === 'auto' || !language ? (input.original || literal ? 'pali' : detectLanguage(comparisonText)) : language;
+  if (include_partial && lang !== 'english') throw new Error('include_partial applies only to English quotation verification.');
   const comparisonWords = words(lang === 'pali' ? fold(comparisonText) : englishFold(comparisonText));
   if (comparisonWords.length > MAX_QUERY_WORDS) throw new Error(`Give at most ${MAX_QUERY_WORDS} words. Split a longer quotation into shorter excerpts; no partial comparison was performed.`);
   if (lang === 'pali' && !comparisonWords.length) throw new Error('The quotation has no Pāli words to match.');
-  const result = literal || (lang === 'pali' ? verifyPali(comparisonText, limit) : await verifyEnglish(comparisonText, texts, limit, fetchTranslation));
+  const result = literal || (lang === 'pali' ? verifyPali(comparisonText, limit) : await verifyEnglish(comparisonText, texts, limit, fetchTranslation, include_partial));
   const best = result.matches[0]?.similarity ?? 0;
   const verdict = literal ? 'found' : verdictFor(best);
   const notFoundEnglish = verdict === 'not_found_in_scope' && lang === 'english';
   const note = verdict === 'not_found_in_scope' ? undefined : tieNote(result.ties);
+  const partialNote = lang === 'english' && result.scope.translations_checked?.some(p => p.translation_scope?.kind === 'partial_unit') ? ' Partial translation results apply only to their declared spans, including a negative result. Whole-unit coverage or absence and word-level Pāli alignment are not inferred.' : '';
   const containerNote = lang === 'english' && verdict !== 'not_found_in_scope' && result.matches[0]?.unverified_requested_text_ids?.length
     ? ' The match is in a linked containing source; correspondence to the narrower requested text is not verified.' : '';
   return {
-    quote, ...inputNote(input), language: lang, verdict, explanation: literal ? 'The quotation occurs as an unchanged substring in the bundled VRI canonical source shown below. Mixed-script source characters were kept, not converted or corrected. This does not establish correct spelling, a unique source or authorship.' : EXPLAIN[notFoundEnglish ? 'not_found_in_scope_english' : verdict] + containerNote,
+    quote, ...inputNote(input), language: lang, verdict, explanation: literal ? 'The quotation occurs as an unchanged substring in the bundled VRI canonical source shown below. Mixed-script source characters were kept, not converted or corrected. This does not establish correct spelling, a unique source or authorship.' : EXPLAIN[notFoundEnglish ? 'not_found_in_scope_english' : verdict] + containerNote + partialNote,
     best_similarity: best,
     ...(literal ? { source_literal: literal.source_literal } : {}),
     comparison: { method: literal ? 'literal_source_substring' : 'normalized_fuzzy', verbatim: 'not_assessed',
@@ -687,6 +710,7 @@ export function register({ tool, z }) {
     text: z.string().trim().min(8).max(2000).describe('The quotation to check: Pāli in Roman or a supported native script (converted and labelled), or English in Roman script. At most 120 comparison words and 2,000 input characters; split longer quotations into shorter excerpts.'),
     language: z.enum(['auto', 'pali', 'english']).default('auto').describe('Language of the quotation; "auto" detects Roman input and treats supported native-script input as Pāli. This is mechanical transliteration, not translation. Native input with explicit English mode is refused.'),
     texts: z.array(z.string().min(1).max(300)).max(12).optional().describe('English only: exact citations or indexed source groups whose linked translations to search, in Roman or supported native script. Multi-text fallback spans and ambiguous pages are refused before fetching. Inherited containing-source matches do not verify the narrower requested text. Default: all Dhammapada chapters.'),
+    include_partial: z.boolean().default(false).describe('English only, with explicit texts: opt into separately labelled reviewed partial-unit translations. They do not establish whole-unit coverage.'),
     limit: z.number().int().min(1).max(10).default(5),
   }, (args) => verifyQuote(args), { network: true });
 }

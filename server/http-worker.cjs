@@ -22186,6 +22186,47 @@ __export(canon_exports, {
   translationId: () => translationId
 });
 
+// src/translation-scope.mjs
+var import_node_crypto = require("node:crypto");
+var scopeHash = (value) => (0, import_node_crypto.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
+var isPartial = (link) => Object.hasOwn(link, "partial_scope");
+var sha = (value) => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
+function partialScope(link, unit, segments2, source4) {
+  if (!isPartial(link)) return null;
+  const p = link.partial_scope;
+  const fail = () => {
+    throw new Error("Invalid or unreviewed partial translation scope. No whole-unit coverage or source retrieval is inferred.");
+  };
+  const fields = /* @__PURE__ */ new Set(["version", "status", "unit_id", "first_ref", "last_ref", "source_commit", "pali_sha256", "text_sha256"]);
+  if (!p || p.version !== 1 || Object.keys(p).some((k) => !fields.has(k)) || p.status !== "reviewed" || p.unit_id !== unit.id || p.source_commit !== source4.commit || !sha(p.pali_sha256) || !sha(p.text_sha256) || unit.approximate) fail();
+  const first = segments2.findIndex((s) => s.ref === p.first_ref);
+  const last = segments2.findIndex((s) => s.ref === p.last_ref);
+  if (first < 0 || last < first || first === 0 && last === segments2.length - 1) fail();
+  if (!segments2.slice(first, last + 1).some((s) => s.type !== "heading") || !segments2.some((s, i) => s.type !== "heading" && (i < first || i > last))) fail();
+  const selected = segments2.slice(first, last + 1).map(({ ref, type, text }) => ({ ref, type, text }));
+  if (scopeHash(selected) !== p.pali_sha256) fail();
+  if (!["dhammatalks", "ati", "anandajoti"].includes(link.source)) fail();
+  if (link.parts && (link.source !== "anandajoti" || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail();
+  const readPages = [];
+  for (let offset = first; offset <= last; offset += 200) readPages.push({ tool: "get_text", uid: unit.id, offset, limit: Math.min(200, last - offset + 1) });
+  return {
+    kind: "partial_unit",
+    version: 1,
+    unit_id: unit.id,
+    first_ref: p.first_ref,
+    last_ref: p.last_ref,
+    source_commit: p.source_commit,
+    pali_sha256: p.pali_sha256,
+    text_sha256: p.text_sha256,
+    scope_sha256: scopeHash({ mapping: p, source: link.source, url: link.url, path: link.path, parts: link.parts || null, translator: link.translator }),
+    whole_unit_coverage: false,
+    pali_segments: last - first + 1,
+    read_with: readPages[0],
+    ...readPages.length > 1 ? { read_pages: readPages } : {},
+    note: "Only this declared contiguous P\u0101li span has a linked translation. This is not a whole-unit translation or word-level alignment. Stop the P\u0101li reading at last_ref. Use read_pages when present; generic get_text continuation can leave this span."
+  };
+}
+
 // src/script.mjs
 var SCRIPTS = ["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"];
 var SCRIPT_NAMES = {
@@ -22869,11 +22910,11 @@ function searchExcerpt(original, needle, fold8) {
 var import_node_fs = require("node:fs");
 var import_node_path = require("node:path");
 var import_node_url = require("node:url");
-var import_node_crypto = require("node:crypto");
+var import_node_crypto2 = require("node:crypto");
 var pathString = (path) => path instanceof URL ? (0, import_node_url.fileURLToPath)(path) : path;
 var shardManifest = (path) => `${pathString(path)}.parts.json`;
 var bundledExists = (path) => (0, import_node_fs.existsSync)(path) || (0, import_node_fs.existsSync)(shardManifest(path));
-var sha256 = (bytes) => (0, import_node_crypto.createHash)("sha256").update(bytes).digest("hex");
+var sha256 = (bytes) => (0, import_node_crypto2.createHash)("sha256").update(bytes).digest("hex");
 function readBundled(path) {
   path = pathString(path);
   if ((0, import_node_fs.existsSync)(path)) return (0, import_node_fs.readFileSync)(path);
@@ -23642,13 +23683,38 @@ function ptsLabel(collection, volume, page) {
   }
   return `${abbr} ${ROMAN2[volume] || volume} ${page}`;
 }
+var translationOwners = /* @__PURE__ */ new WeakMap();
+function ownersOf(links, wanted) {
+  let index4 = translationOwners.get(links);
+  if (!index4) {
+    index4 = /* @__PURE__ */ new Map();
+    for (const [owner, entries] of Object.entries(links)) for (const entry3 of entries) {
+      const id = translationId(entry3);
+      if (!index4.has(id)) index4.set(id, []);
+      index4.get(id).push(owner);
+    }
+    translationOwners.set(links, index4);
+  }
+  return index4.get(wanted) || [];
+}
 function linksFor(u) {
   const d = load();
   const own = d.translations[u.id];
-  if (own?.length) return { links: own, via: null };
+  if (own?.length) {
+    for (const link of own) if (isPartial(link)) {
+      partialScope(link, u, segments(u), source());
+      const id = translationId(link);
+      const owners = ownersOf(d.translations, id);
+      if (owners.length !== 1 || owners[0] !== u.id) throw new CitationError("Partial translation_id has ambiguous declarations or unit owners. Use one reviewed source scope per version; no occurrence was selected.");
+    }
+    if (own.some((link) => !isPartial(link))) return { links: own, via: null };
+  }
   const container = rangeContaining(u.id);
-  if (container && d.translations[container.id]?.length) return { links: d.translations[container.id], via: container };
-  return { links: [], via: null };
+  if (container && d.translations[container.id]?.length) {
+    const links = d.translations[container.id].filter((t) => !isPartial(t));
+    if (links.length) return { links: [...links, ...own || []], via: container };
+  }
+  return { links: own || [], via: null };
 }
 function alignmentInfo(unit) {
   if (!unit) return null;
@@ -23678,6 +23744,7 @@ function alignmentInfo(unit) {
 function unitSummary(u, extra = {}) {
   const d = load();
   const alignment = alignmentInfo(u);
+  const englishLinks2 = linksFor(u).links;
   return {
     id: u.id,
     citation: u.acronym,
@@ -23688,7 +23755,8 @@ function unitSummary(u, extra = {}) {
     vri_paragraphs: u.vri || null,
     ...u.approximate ? { approximate: true } : {},
     ...alignment ? { alignment } : {},
-    english_available: linksFor(u).links.length,
+    english_available: englishLinks2.filter((t) => !isPartial(t)).length,
+    ...englishLinks2.some(isPartial) ? { partial_english_available: englishLinks2.filter(isPartial).length } : {},
     ...extra
   };
 }
@@ -23762,6 +23830,13 @@ function resolve(reference) {
     const key3 = `${c.host}${c.path}`;
     const id2 = d.urlIndex.get(key3) || d.urlIndex.get(key3.replace(/^accesstoinsight\.org/, "accesstoinsight.org"));
     if (!id2) throw new CitationError("That page is not linked to a canon text in the bundled index. Give the sutta citation instead.");
+    for (const link of d.translations[id2] || []) {
+      const urls = [link.url, ...(link.parts || []).map((path) => ANANDAJOTI_BASE + path)];
+      if (isPartial(link) && urls.some((url) => url.replace(/^https?:\/\/(www\.)?/, "").replace(/\.html?$/, "") === key3)) {
+        const unit2 = d.byId.get(id2), scoped = partialScope(link, unit2, segments(unit2), source());
+        notes.push(`This URL is a partial translation source covering ${scoped.first_ref} through ${scoped.last_ref}. Citation lookup returns its containing unit; whole-unit English coverage is not established.`);
+      }
+    }
     notes.push(c.host === "ancient-buddhist-texts.net" ? `Linked from ${c.host}: \u0100nandajoti Bhikkhu's text and translation of ${id2}.` : `Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id2}.`);
     const unit = d.byId.get(id2);
     const alignment2 = alignmentInfo(unit);
@@ -23877,7 +23952,7 @@ function source() {
 function describe(u, notes = []) {
   const d = load();
   const { links: own, via } = linksFor(u);
-  if (via) notes = [...notes, `English translations are of the whole ${via.acronym} (${via.title}); this text is part of it.`];
+  if (via) notes = [...notes, own.some(isPartial) ? `Whole-unit English links cover ${via.acronym} (${via.title}); partial links have their own explicit scope.` : `English translations are of the whole ${via.acronym} (${via.title}); this text is part of it.`];
   const english2 = own.map((t) => ({
     source: sourceName(t),
     translator: t.translator,
@@ -23886,6 +23961,7 @@ function describe(u, notes = []) {
     ...t.license ? { license: t.license } : {},
     translation_id: translationId(t),
     match: t.match,
+    ...isPartial(t) ? { translation_scope: partialScope(t, u, segments(u), source()) } : {},
     ...t.commentary ? { includes_commentary: true } : {}
   }));
   const blocks = bookBlocks(u);
@@ -23937,7 +24013,7 @@ function groupedScope(d, key3, requested) {
   };
 }
 function searchTitle(d, u) {
-  const english2 = (d.translations[u.id] || []).map((t) => `${t.reference || ""} ${t.english || ""}`).join(" ");
+  const english2 = (d.translations[u.id] || []).filter((t) => !isPartial(t)).map((t) => `${t.reference || ""} ${t.english || ""}`).join(" ");
   return { u, text: fold3(`${u.acronym} ${u.title} ${english2}`) };
 }
 function buildSearch() {
@@ -24342,8 +24418,8 @@ var liveCache = new LruCache({
 });
 
 // src/english.mjs
-var import_node_crypto2 = require("node:crypto");
-var prefixHash = (text, offset) => (0, import_node_crypto2.createHash)("sha256").update(text.slice(0, offset)).digest("hex");
+var import_node_crypto3 = require("node:crypto");
+var prefixHash = (text, offset) => (0, import_node_crypto3.createHash)("sha256").update(text.slice(0, offset)).digest("hex");
 var ATI_MIRRORS = [
   (p) => `https://accesstoinsight.org${p}.html`,
   (p) => `https://raw.githubusercontent.com/bcbsit/ati/main${p}.html`,
@@ -24448,6 +24524,7 @@ async function fetchDhammatalksLive(url) {
 function available(unit) {
   return linksFor(unit).links.map((t) => ({
     translation_id: translationId(t),
+    ...isPartial(t) ? { translation_scope: partialScope(t, unit, segments(unit), source()) } : {},
     source: sourceName(t),
     translator: t.translator,
     reference: t.reference || void 0,
@@ -24458,7 +24535,10 @@ function available(unit) {
 }
 var translatorKey = (value) => String(value || "").normalize("NFD").replace(new RegExp("\\p{M}", "gu"), "").toLowerCase();
 function selectTranslation(links, which, citation) {
-  if (!which) return { link: links.find((link) => link.source === "dhammatalks") || links[0], matchingVersions: [] };
+  if (!which) {
+    const full = links.filter((link) => !isPartial(link));
+    return { link: full.find((link) => link.source === "dhammatalks") || full[0], matchingVersions: [] };
+  }
   if (/^(ati|dt|aj):/.test(which)) return { link: links.find((link) => translationId(link) === which), matchingVersions: [] };
   const wanted = translatorKey(which);
   const exact = links.filter((link) => translatorKey(link.translator) === wanted);
@@ -24466,9 +24546,10 @@ function selectTranslation(links, which, citation) {
   if (new Set(matches.map((link) => translatorKey(link.translator))).size > 1) {
     throw new Error(`Ambiguous translation selector "${which}" for ${citation}: it matches different translators. Use an exact translation_id: ${matches.map((link) => `${translationId(link)} (${link.translator})`).join(", ")}.`);
   }
-  return { link: matches[0], matchingVersions: matches };
+  return { link: matches.find((link) => !isPartial(link)) || matches[0], matchingVersions: matches };
 }
-async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha256: expectedPrefix } = {}) {
+async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha256: expectedPrefix, allow_partial = false, scope_sha256 } = {}) {
+  if (typeof allow_partial !== "boolean") throw new Error("allow_partial must be a boolean.");
   if (which !== void 0) {
     if (typeof which !== "string" || !which.trim()) throw new Error("Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.");
     which = which.trim();
@@ -24482,14 +24563,20 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
     throw new Error(`No English translation is linked for ${unit.acronym}. Read the P\u0101li with get_text, or see https://suttacentral.net/${unit.id} for other translations.`);
   }
   let { link, matchingVersions } = selectTranslation(links, which, unit.acronym);
+  if (!link && !which && links.some(isPartial)) throw new Error("Only partial translations are linked. Choose an exact translation_id and explicitly set allow_partial: true; no whole-unit translation was selected.");
   if (!link) throw new Error(`Translation "${which}" is not linked for ${unit.acronym}. Available: ${available(unit).map((a) => `${a.translation_id} (${a.translator})`).join(", ")}.`);
+  const declaredScope = partialScope(link, unit, segments(unit), source());
+  if (allow_partial && !declaredScope) throw new Error("The selected source no longer has a declared partial scope. Review its mapping before requesting a whole-unit source.");
+  if (declaredScope && (!allow_partial || which !== translationId(link))) throw new Error("This translation covers only a partial unit. Use get_translation with its exact translation_id and allow_partial: true after checking translation_scope.");
+  if (declaredScope && offset > 0 && (!expectedPrefix || !scope_sha256)) throw new Error("Partial continuation requires unchanged scope_sha256 and prefix_sha256 from continue_with.");
+  if (scope_sha256 !== void 0 && scope_sha256 !== declaredScope?.scope_sha256) throw new Error("The partial translation mapping changed. Restart at offset 0 after reviewing its scope.");
   let result;
-  const notes = via ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
+  const notes = via && !declaredScope ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   try {
-    result = link.source === "ati" ? await fetchAti(link.path) : link.source === "anandajoti" ? await fetchAnandajoti(link, offset + limit + 1) : await fetchDhammatalks(link.url);
+    result = link.source === "ati" ? await fetchAti(link.path) : link.source === "anandajoti" ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1) : await fetchDhammatalks(link.url);
   } catch (error2) {
     const outage = !error2.failures || error2.failures.some((f) => !/HTTP 404/.test(f));
-    const sameTranslator = outage && link.source === "dhammatalks" && links.find((l) => l.source === "ati" && /thanissaro/i.test(l.translator || ""));
+    const sameTranslator = !declaredScope && outage && link.source === "dhammatalks" && links.find((l) => !isPartial(l) && l.source === "ati" && /thanissaro/i.test(l.translator || ""));
     if (!sameTranslator) throw new Error(`Could not retrieve the translation (${error2.message}). The P\u0101li text is still available offline with get_text; try again later or choose another translation_id.`);
     if (offset > 0) throw new Error(`Could not continue the requested translation version (${error2.message}). Its character offset cannot be transferred to the earlier Access to Insight version. Retry this translation_id later, or start another translation at offset 0. The P\u0101li text is still available offline with get_text.`);
     try {
@@ -24499,6 +24586,11 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
     }
     notes.push(`dhammatalks.org could not be reached (${error2.message}); showing \u1E6Ch\u0101nissaro Bhikkhu's earlier version from Access to Insight instead.`);
     link = sameTranslator;
+  }
+  if (declaredScope) {
+    if (result.text.length > 2e6 || result.parts_total && result.parts_read !== result.parts_total) throw new Error("Partial source exceeds the bounded complete-text check; no excerpt was returned.");
+    if (scopeHash(result.text) !== declaredScope.text_sha256) throw new Error("The partial source text changed from its reviewed snapshot. No translation was returned.");
+    notes.push(declaredScope.note);
   }
   if (matchingVersions.length > 1) notes.push(`Several linked versions match "${which}"; selected ${translationId(link)} (${sourceName(link)}). To choose a different version, use its exact translation_id: ${matchingVersions.map((version2) => translationId(version2)).join(", ")}.`);
   if (link.source === "anandajoti") {
@@ -24534,8 +24626,9 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
     prefix_sha256: prefix,
     continue_with: nextOffset === null ? null : {
       name: "get_translation",
-      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit, prefix_sha256: prefixHash(text, nextOffset) }
+      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit, prefix_sha256: prefixHash(text, nextOffset), ...declaredScope ? { allow_partial: true, scope_sha256: declaredScope.scope_sha256 } : {} }
     },
+    ...declaredScope ? { translation_scope: declaredScope, whole_unit_coverage: false } : {},
     match: link.match,
     notes
   };
@@ -24854,6 +24947,7 @@ function loadGlossary() {
 
 // src/translation-titles.mjs
 function translationTitle(link) {
+  if (isPartial(link)) return null;
   if (link.english?.trim()) return link.english;
   if (link.source !== "dhammatalks") return null;
   const reference = link.reference || "";
@@ -26458,8 +26552,8 @@ async function getAtiText({ path, offset = 0, limit = 12e3 }) {
 }
 var COVERAGE_SOURCES = ["dhammatalks", "ati", "anandajoti"];
 var coverageCache = null;
-function translationCoverage() {
-  if (coverageCache) return coverageCache;
+function translationCoverage({ refresh = false } = {}) {
+  if (coverageCache && !refresh) return coverageCache;
   const d = load();
   const rows = /* @__PURE__ */ new Map();
   const total = { texts: 0, with_english: 0, with_english_including_inherited: 0, links: 0, content_matched_links: 0, by_source: {} };
@@ -26482,23 +26576,33 @@ function translationCoverage() {
       });
     }
     const row = rows.get(key3);
-    const own = d.translations[u.id] || [];
-    const reach = linksFor(u).links;
+    const declared = d.translations[u.id] || [];
+    const partial2 = declared.filter(isPartial);
+    for (const link of partial2) partialScope(link, u, segments(u), source());
+    const own = declared.filter((link) => !isPartial(link));
+    const reach = linksFor(u).links.filter((link) => !isPartial(link));
     for (const o of [row, total]) {
       o.links += own.length;
+      o.partial_links = (o.partial_links || 0) + partial2.length;
+      for (const link of partial2) {
+        o.partial_by_source ||= {};
+        bump(o.partial_by_source, link.source);
+      }
       for (const l of own) {
         bump(o.by_source, COVERAGE_SOURCES.includes(l.source) ? l.source : "other");
         if (String(l.match || "").startsWith("content")) o.content_matched_links += 1;
       }
       if (u.kind === "range") continue;
       o.texts += 1;
+      o.with_partial_english = (o.with_partial_english || 0) + (partial2.length ? 1 : 0);
+      o.partial_only = (o.partial_only || 0) + (partial2.length && !reach.length ? 1 : 0);
       if (own.length) o.with_english += 1;
       if (reach.length) o.with_english_including_inherited += 1;
     }
   }
   const pct = (o) => ({ ...o, percent_with_english: o.texts ? Math.round(1e3 * o.with_english_including_inherited / o.texts) / 10 : 0 });
   coverageCache = {
-    note: 'Counts of texts (grouped ranges counted through their members) with an English translation link; links counts every link, including those on grouped ranges. "including_inherited" adds verses whose chapter is linked. content_matched_links were placed by the content-based linker (names, numbers and PTS spans in the translation compared with the P\u0101li) and audited; a text without a link may still have a translation we could not place with confidence.',
+    note: 'Whole-unit translation-link counts exclude partial mappings. partial_links, with_partial_english, partial_only and partial_by_source are separate; partial groups do not imply member coverage. Counts of texts (grouped ranges counted through their members) with an English translation link; links counts every link, including those on grouped ranges. "including_inherited" adds verses whose chapter is linked. content_matched_links were placed by the content-based linker (names, numbers and PTS spans in the translation compared with the P\u0101li) and audited; a text without a link may still have a translation we could not place with confidence.',
     total: pct(total),
     collections: [...rows.values()].map(pct)
   };
@@ -27168,7 +27272,8 @@ function englishReference(reference) {
     notes: [.../* @__PURE__ */ new Set([...notes, ...resolve(unit.id).notes])]
   } };
 }
-function englishScope(texts) {
+function englishScope(texts, { includePartial = false } = {}) {
+  if (includePartial && !texts?.length) throw new Error("Partial English verification requires explicit texts and include_partial: true. No default collection was narrowed.");
   let units;
   let label;
   let requested;
@@ -27184,15 +27289,21 @@ function englishScope(texts) {
   const pages = [];
   const byUrl = /* @__PURE__ */ new Map();
   const withoutEnglish = [];
+  const partialOmitted = [];
   for (const [index4, unit] of units.entries()) {
-    const { links, via } = linksFor(unit);
+    const { links: declaredLinks, via } = linksFor(unit);
+    const partialLinks = declaredLinks.filter(isPartial);
+    const links = includePartial ? declaredLinks : declaredLinks.filter((link) => !isPartial(link));
+    if (!includePartial) for (const l of partialLinks) partialOmitted.push({ text_id: unit.id, translation_id: translationId(l), translation_scope: partialScope(l, unit, segments(unit), source()) });
     const owner = via || unit;
     const record2 = requested?.[index4];
+    const requestNotes = record2 ? [...record2.notes] : [];
     if (record2) {
       record2.translation_scope = {
         text_id: owner.id,
         citation: owner.acronym,
-        kind: !links.length ? "unavailable" : via ? "inherited_container" : "direct"
+        kind: !links.length ? partialLinks.length ? "partial_excluded" : "unavailable" : links.every(isPartial) ? "partial_unit" : via ? "inherited_container" : "direct",
+        ...partialLinks.length ? { partial_scopes: partialLinks.map((l) => partialScope(l, unit, segments(unit), source())) } : {}
       };
       if (via) record2.notes.push(`English verification for ${unit.acronym} uses its linked containing source ${owner.acronym}. A match in that source does not verify correspondence to the narrower requested text.`);
     }
@@ -27201,31 +27312,39 @@ function englishScope(texts) {
       continue;
     }
     const seenTranslator = /* @__PURE__ */ new Set();
-    const sorted = [...links].sort((a, b) => (b.source === "dhammatalks") - (a.source === "dhammatalks"));
+    const sorted = [...links].sort((a, b) => isPartial(a) - isPartial(b) || (b.source === "dhammatalks") - (a.source === "dhammatalks"));
     for (const l of sorted) {
       const translator = l.translator || l.source;
-      const who = fold3(translator).replace(/[^a-z]/g, "");
+      const declaredScope = partialScope(l, unit, segments(unit), source());
+      const who = fold3(translator).replace(/[^a-z]/g, "") + (declaredScope ? ":" + declaredScope.scope_sha256 : "");
+      const pageOwner = declaredScope ? unit : owner;
       if (seenTranslator.has(who)) continue;
       seenTranslator.add(who);
       const context = record2 ? {
         requested_text_ids: [unit.id],
-        scope_notes: [...record2.notes],
-        ...via ? { unverified_requested_text_ids: [unit.id] } : {}
+        scope_notes: [...declaredScope ? requestNotes : record2.notes],
+        ...via && !declaredScope ? { unverified_requested_text_ids: [unit.id] } : {}
       } : {};
-      const existing = byUrl.get(l.url);
+      if (declaredScope) {
+        context.translation_scope = declaredScope;
+        context.whole_unit_coverage = false;
+        context.scope_notes = [...context.scope_notes || [], declaredScope.note];
+      }
+      const pageKey = l.url + (declaredScope ? ":" + declaredScope.scope_sha256 : ":whole");
+      const existing = byUrl.get(pageKey);
       if (existing) {
         for (const key3 of ["requested_text_ids", "unverified_requested_text_ids", "scope_notes"]) {
           if (context[key3]?.length) existing[key3] = [.../* @__PURE__ */ new Set([...existing[key3] || [], ...context[key3]])];
         }
         continue;
       }
-      const page = { unit: owner, translation_id: translationId(l), translator, url: l.url, ...context };
+      const page = { unit: pageOwner, translation_id: translationId(l), translator, url: l.url, ...context };
       pages.push(page);
-      byUrl.set(l.url, page);
+      byUrl.set(pageKey, page);
     }
   }
   if (pages.length > MAX_ENGLISH_PAGES) throw new Error(`That scope needs ${pages.length} translation pages; the limit is ${MAX_ENGLISH_PAGES}. Pass fewer texts.`);
-  return { label, pages, withoutEnglish, ...requested ? { requested_texts: requested } : {} };
+  return { label, pages, withoutEnglish, partialOmitted, ...requested ? { requested_texts: requested } : {} };
 }
 async function mapLimit(items, n, fn) {
   const out = new Array(items.length);
@@ -27239,7 +27358,10 @@ async function mapLimit(items, n, fn) {
   return out;
 }
 function scopeEvidence(page) {
-  return Object.fromEntries(["requested_text_ids", "unverified_requested_text_ids", "scope_notes"].filter((key3) => page[key3]?.length).map((key3) => [key3, page[key3]]));
+  return {
+    ...Object.fromEntries(["requested_text_ids", "unverified_requested_text_ids", "scope_notes"].filter((key3) => page[key3]?.length).map((key3) => [key3, page[key3]])),
+    ...page.translation_scope ? { translation_scope: page.translation_scope, whole_unit_coverage: false } : {}
+  };
 }
 function englishVersion(page) {
   return {
@@ -27251,13 +27373,19 @@ function englishVersion(page) {
     ...scopeEvidence(page)
   };
 }
-async function verifyEnglish(text, texts, limit, fetchTranslation) {
+async function verifyEnglish(text, texts, limit, fetchTranslation, includePartial) {
   const q = words(englishFold(text));
   if (!q.length) throw new Error("The quotation has no words to match.");
-  const plan = englishScope(texts);
+  const plan = englishScope(texts, { includePartial });
+  if (!plan.pages.length && plan.partialOmitted.length) throw new Error("Only partial English sources are available. Review their metadata, then use explicit texts with include_partial: true. No whole-unit comparison was performed.");
   const fetched = await mapLimit(plan.pages, 6, async (p) => {
     try {
-      const t = await fetchTranslation(p.unit, p.translation_id, { limit: 2e6 });
+      const t = await fetchTranslation(p.unit, p.translation_id, { limit: 2e6, ...p.translation_scope ? { allow_partial: true, scope_sha256: p.translation_scope.scope_sha256 } : {} });
+      if ((p.translation_scope?.scope_sha256 || null) !== (t.translation_scope?.scope_sha256 || null) || p.translation_scope && scopeHash(p.translation_scope) !== scopeHash(t.translation_scope)) throw new Error("Retrieved translation scope differs from the planned scope; no quotation was compared.");
+      if (p.translation_scope && (t.translation_id !== p.translation_id || t.url !== p.url || typeof t.text !== "string" || scopeHash(t.text) !== p.translation_scope.text_sha256 || t.next_offset != null)) {
+        throw new Error("Partial source version/snapshot changed or is incomplete; no quotation was compared.");
+      }
+      if (t.whole_unit_coverage === false && !t.translation_scope) throw new Error("Partial source omitted its declared scope; no quotation was compared.");
       const actualId = t.translation_id || p.translation_id;
       return {
         ...p,
@@ -27315,6 +27443,7 @@ async function verifyEnglish(text, texts, limit, fetchTranslation) {
       ...plan.requested_texts ? { requested_texts: plan.requested_texts } : {},
       translations_checked: pages.map((p) => ({ citation: p.unit.acronym, ...englishVersion(p) })),
       ...failed.length ? { not_retrieved: failed.map((p) => ({ citation: p.unit.acronym, translator: p.translator, translation_id: p.translation_id, url: p.url, error: p.error, ...scopeEvidence(p) })) } : {},
+      ...plan.partialOmitted.length ? { partial_translations_excluded: plan.partialOmitted } : {},
       ...plan.withoutEnglish.length ? { no_english_linked: plan.withoutEnglish } : {},
       note: 'Only these translations were compared. Popular English wordings are often older or freer translations, and two translations of the same verse can share few words: check the P\u0101li as well (verify_quote with language "pali").'
     }
@@ -27349,7 +27478,7 @@ function tieNote(ties) {
   if (!ties || ties.texts < 2) return void 0;
   return `This wording matches ${ties.at_least ? "at least " : ""}${ties.texts} texts equally well (a stock or repeated passage). The matches listed are the first in canon order, not a unique source: quote more of the passage, or check the text you have in mind.`;
 }
-async function verifyQuote({ text, language = "auto", texts, limit = 5 }, { fetchTranslation = translation } = {}) {
+async function verifyQuote({ text, language = "auto", texts, limit = 5, include_partial = false }, { fetchTranslation = translation } = {}) {
   const quote = String(text ?? "").trim();
   if (quote.length < 8) throw new Error("Give at least a few words of the quotation.");
   let input, literal2;
@@ -27363,21 +27492,23 @@ async function verifyQuote({ text, language = "auto", texts, limit = 5 }, { fetc
   if (input.original && language === "english") throw new Error("Native-script quotation input is supported as P\u0101li. Choose language pali or auto; English mode requires an English quotation in Roman script.");
   const comparisonText = input.text.trim();
   const lang = language === "auto" || !language ? input.original || literal2 ? "pali" : detectLanguage(comparisonText) : language;
+  if (include_partial && lang !== "english") throw new Error("include_partial applies only to English quotation verification.");
   const comparisonWords = words(lang === "pali" ? fold3(comparisonText) : englishFold(comparisonText));
   if (comparisonWords.length > MAX_QUERY_WORDS) throw new Error(`Give at most ${MAX_QUERY_WORDS} words. Split a longer quotation into shorter excerpts; no partial comparison was performed.`);
   if (lang === "pali" && !comparisonWords.length) throw new Error("The quotation has no P\u0101li words to match.");
-  const result = literal2 || (lang === "pali" ? verifyPali(comparisonText, limit) : await verifyEnglish(comparisonText, texts, limit, fetchTranslation));
+  const result = literal2 || (lang === "pali" ? verifyPali(comparisonText, limit) : await verifyEnglish(comparisonText, texts, limit, fetchTranslation, include_partial));
   const best = result.matches[0]?.similarity ?? 0;
   const verdict = literal2 ? "found" : verdictFor(best);
   const notFoundEnglish = verdict === "not_found_in_scope" && lang === "english";
   const note = verdict === "not_found_in_scope" ? void 0 : tieNote(result.ties);
+  const partialNote = lang === "english" && result.scope.translations_checked?.some((p) => p.translation_scope?.kind === "partial_unit") ? " Partial translation results apply only to their declared spans, including a negative result. Whole-unit coverage or absence and word-level P\u0101li alignment are not inferred." : "";
   const containerNote = lang === "english" && verdict !== "not_found_in_scope" && result.matches[0]?.unverified_requested_text_ids?.length ? " The match is in a linked containing source; correspondence to the narrower requested text is not verified." : "";
   return {
     quote,
     ...inputNote(input),
     language: lang,
     verdict,
-    explanation: literal2 ? "The quotation occurs as an unchanged substring in the bundled VRI canonical source shown below. Mixed-script source characters were kept, not converted or corrected. This does not establish correct spelling, a unique source or authorship." : EXPLAIN[notFoundEnglish ? "not_found_in_scope_english" : verdict] + containerNote,
+    explanation: literal2 ? "The quotation occurs as an unchanged substring in the bundled VRI canonical source shown below. Mixed-script source characters were kept, not converted or corrected. This does not establish correct spelling, a unique source or authorship." : EXPLAIN[notFoundEnglish ? "not_found_in_scope_english" : verdict] + containerNote + partialNote,
     best_similarity: best,
     ...literal2 ? { source_literal: literal2.source_literal } : {},
     comparison: {
@@ -27398,6 +27529,7 @@ function register3({ tool, z }) {
     text: z.string().trim().min(8).max(2e3).describe("The quotation to check: P\u0101li in Roman or a supported native script (converted and labelled), or English in Roman script. At most 120 comparison words and 2,000 input characters; split longer quotations into shorter excerpts."),
     language: z.enum(["auto", "pali", "english"]).default("auto").describe('Language of the quotation; "auto" detects Roman input and treats supported native-script input as P\u0101li. This is mechanical transliteration, not translation. Native input with explicit English mode is refused.'),
     texts: z.array(z.string().min(1).max(300)).max(12).optional().describe("English only: exact citations or indexed source groups whose linked translations to search, in Roman or supported native script. Multi-text fallback spans and ambiguous pages are refused before fetching. Inherited containing-source matches do not verify the narrower requested text. Default: all Dhammapada chapters."),
+    include_partial: z.boolean().default(false).describe("English only, with explicit texts: opt into separately labelled reviewed partial-unit translations. They do not establish whole-unit coverage."),
     limit: z.number().int().min(1).max(10).default(5)
   }, (args) => verifyQuote(args), { network: true });
 }
@@ -27414,7 +27546,7 @@ __export(find_citations_exports, {
   register: () => register4,
   scan: () => scan
 });
-var import_node_crypto3 = require("node:crypto");
+var import_node_crypto4 = require("node:crypto");
 var BOUND_BEFORE = "(?<![\\p{L}\\p{N}_@])";
 var BOUND_AFTER = "(?![\\p{L}\\p{N}_@]|,\\d)";
 var NUM = "\\d+(?:[.:]\\d+)*(?:(?:-|\\s?[\u2013\u2014]\\s?)\\d+(?:[.:]\\d+)*)?";
@@ -27599,13 +27731,13 @@ var MAX_TOOL_RESULT_BYTES = 1024 * 1024;
 var CURSOR_VERSION = "v1";
 var RECORD_BUDGET = MAX_REPORT_BYTES - 8192;
 var indexScopes = /* @__PURE__ */ new WeakMap();
-var hash = (value) => (0, import_node_crypto3.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
+var hash = (value) => (0, import_node_crypto4.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
 function reportScope(text, canon) {
   const loaded = canon.load();
   const data5 = loaded.canon;
   let index4 = indexScopes.get(loaded);
   if (!index4) {
-    const digest = (0, import_node_crypto3.createHash)("sha256");
+    const digest = (0, import_node_crypto4.createHash)("sha256");
     digest.update(JSON.stringify([data5.source, data5.collections, data5.units, [...loaded.urlIndex || []]]));
     for (const book of data5.books) digest.update(JSON.stringify(book));
     index4 = digest.digest("hex");
@@ -28374,7 +28506,7 @@ function pools(canon) {
   const num2 = (id) => Number(id.match(/(\d+)$/)?.[1] ?? 0);
   const verses = d.canon.units.filter((u) => u.collection === "dhp" && u.kind !== "range" && /^dhp\d+$/.test(u.id)).sort((a, b) => num2(a.id) - num2(b.id));
   const chapters = d.canon.units.filter((u) => u.collection === "dhp" && u.kind === "range").sort((a, b) => a.book - b.book || a.start - b.start);
-  const suttas = d.canon.units.filter((u) => SUTTA_POOL_COLLECTIONS.has(u.collection) && u.kind !== "range" && !u.approximate && d.translations[u.id]?.length).sort((a, b) => a.book - b.book || a.start - b.start);
+  const suttas = d.canon.units.filter((u) => SUTTA_POOL_COLLECTIONS.has(u.collection) && u.kind !== "range" && !u.approximate && d.translations[u.id]?.some((link) => !isPartial(link))).sort((a, b) => a.book - b.book || a.start - b.start);
   cache = { canon, verses, chapters, suttas, plans: /* @__PURE__ */ new Map() };
   return cache;
 }
@@ -30985,7 +31117,7 @@ __export(talks_exports, {
   searchUrl: () => searchUrl,
   sharedPhrase: () => sharedPhrase
 });
-var import_node_crypto4 = require("node:crypto");
+var import_node_crypto5 = require("node:crypto");
 var SITE = "https://www.dhammatalks.org";
 var CATEGORIES = ["evening", "morning"];
 var MIN_INTERVAL_MS = 1e3;
@@ -31071,7 +31203,7 @@ function sharedPhrase(phrase, url, canon) {
   if (!titleIndex) {
     titleIndex = /* @__PURE__ */ new Map();
     for (const links of Object.values(canon.load().translations)) {
-      for (const l of links) if (l.source === "dhammatalks" && l.url && !titleIndex.has(l.url)) titleIndex.set(l.url, wordKey(titleWords(l.reference).join(" ")));
+      for (const l of links) if (!isPartial(l) && l.source === "dhammatalks" && l.url && !titleIndex.has(l.url)) titleIndex.set(l.url, wordKey(titleWords(l.reference).join(" ")));
     }
   }
   const key3 = wordKey(phrase);
@@ -31141,7 +31273,7 @@ function parseCursor(cursor, categories) {
   return state;
 }
 var formatCursor = (state) => state.map((s) => `${s.category}:${s.page}:${s.offset}`).join(",");
-var cursorScope = (query, passage, category, terms4) => (0, import_node_crypto4.createHash)("sha256").update(JSON.stringify([query, passage?.id || null, category, terms4, passage?.translation_url || null])).digest("hex");
+var cursorScope = (query, passage, category, terms4) => (0, import_node_crypto5.createHash)("sha256").update(JSON.stringify([query, passage?.id || null, category, terms4, passage?.translation_url || null])).digest("hex");
 function scopedState(cursor, categories, scope) {
   const match2 = typeof cursor === "string" && cursor.match(/^v1:([a-f0-9]{64}):(.+)$/);
   if (!match2) throw new Error("Invalid or legacy talk cursor. Restart without cursor and pass the returned next_cursor unchanged.");
@@ -31179,7 +31311,7 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
     }
     notes.push(.../* @__PURE__ */ new Set([...resolutionNotes, ...canon.resolve(unit.id).notes]));
     const { links, via } = canon.linksFor(unit);
-    const dt = via ? null : links.find((l) => l.source === "dhammatalks");
+    const dt = via ? null : links.find((l) => !isPartial(l) && l.source === "dhammatalks");
     const candidate = dt ? phraseFromReference(dt.reference) : null;
     const shared = candidate ? sharedPhrase(candidate, dt.url, canon) : false;
     const phrase = shared ? null : candidate;
@@ -31477,15 +31609,15 @@ function passagesFor(d, unit) {
   if (!set.size && unit.members) for (const m of unit.members) for (const pi of d.units[m] || []) set.add(pi);
   return [...set].sort((x, y) => x - y);
 }
-var ownersOf = null;
+var ownersOf2 = null;
 function segmentOwners(unit) {
   const d = load3();
   if (!d) return [];
-  if (!ownersOf) {
-    ownersOf = /* @__PURE__ */ new Map();
-    for (const [id, list] of Object.entries(d.units)) for (const pi of list) (ownersOf.get(pi) || ownersOf.set(pi, []).get(pi)).push(id);
+  if (!ownersOf2) {
+    ownersOf2 = /* @__PURE__ */ new Map();
+    for (const [id, list] of Object.entries(d.units)) for (const pi of list) (ownersOf2.get(pi) || ownersOf2.set(pi, []).get(pi)).push(id);
   }
-  const owners = ownersOf;
+  const owners = ownersOf2;
   const out = [];
   for (const pi of passagesFor(d, unit)) {
     const n = passageSegments(d, pi).length;
@@ -32585,11 +32717,13 @@ function createServer({ executeTool } = {}) {
     translation: external_exports.string().trim().min(1).max(200).optional().describe('At offset 0: translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), an unambiguous translator name, or omit for the default. For continuation, use the exact translation_id returned by the previous page.'),
     offset: external_exports.number().int().min(0).max(2e6).default(0).describe("Character offset. For nonzero offsets use the previous result's continue_with arguments, including its exact translation_id; offsets cannot transfer between translation versions."),
     limit: external_exports.number().int().min(500).max(3e4).default(12e3).describe("Characters per page."),
-    prefix_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Unchanged prefix hash from continue_with. Checks the previously traversed text before applying a character offset; edits require restarting at offset 0.")
-  }, async ({ uid, translation: translation2, offset, limit, prefix_sha256 }) => {
+    prefix_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Unchanged prefix hash from continue_with. Checks the previously traversed text before applying a character offset; edits require restarting at offset 0."),
+    allow_partial: external_exports.boolean().default(false).describe("Explicitly accept the declared partial-unit scope. Partial links require an exact translation_id; defaults never select them."),
+    scope_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Unchanged partial-mapping hash from continue_with; required for partial continuation.")
+  }, async ({ uid, translation: translation2, offset, limit, prefix_sha256, allow_partial, scope_sha256 }) => {
     const input = romanizeInput(uid);
     const { unit } = resolve(input.text);
-    return { ...await translation(unit, translation2, { offset, limit, prefix_sha256 }), ...inputNote(input) };
+    return { ...await translation(unit, translation2, { offset, limit, prefix_sha256, allow_partial, scope_sha256 }), ...inputNote(input) };
   }, { network: true });
   tool("compare_translations", "Fetch two to four English translations of the same text side by side, with the P\u0101li opening for reference. Lists what is available when fewer exist.", {
     uid: citation,
@@ -32688,7 +32822,7 @@ function createServer({ executeTool } = {}) {
 }
 
 // src/chatgpt-widget.mjs
-var import_node_crypto5 = require("node:crypto");
+var import_node_crypto6 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
 var WIDGET_VERSION = "v17";
 var NAVIGATION_TIMEOUT_MS = 9e4;
@@ -32747,7 +32881,7 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
     if (!Number.isSafeInteger(index4) || index4 < 0 || index4 > 1e5) throw new Error("Give the exact segment reference from the selected reader, ending in a positive /N.");
     const exact = await readPassage({ uid, book, offset: index4, limit: 1, english: false, script });
     if (exact.pali.segments[0]?.ref !== segment) throw new Error(`Segment ${segment} does not belong to this selection. Copy its exact reference from get_text or get_post_canonical; no other segment was selected.`);
-    const fingerprint = (0, import_node_crypto5.createHash)("sha256").update(JSON.stringify(exact.pali.segments[0])).digest("hex");
+    const fingerprint = (0, import_node_crypto6.createHash)("sha256").update(JSON.stringify(exact.pali.segments[0])).digest("hex");
     if (anchorHash !== void 0 && anchorHash !== fingerprint) throw new Error("The exact source segment has changed. Reopen it before requesting context; no neighbouring passage was substituted.");
     const selector = book !== void 0 ? { book: exact.book_id } : { uid: exact.text_id || exact.citation };
     const args = { ...selector, segment, english: false, source_commit: exact.source.commit, anchor_sha256: fingerprint, ...script ? { script: scriptName(script) } : {} };
@@ -32817,7 +32951,7 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
       if (anchorHash !== void 0) throw new Error("The exact commentary anchor is unavailable; no context was substituted.");
       return displayed;
     }
-    const fingerprint = (0, import_node_crypto5.createHash)("sha256").update(JSON.stringify(displayed.pali.segments[0])).digest("hex");
+    const fingerprint = (0, import_node_crypto6.createHash)("sha256").update(JSON.stringify(displayed.pali.segments[0])).digest("hex");
     if (anchorHash !== void 0 && anchorHash !== fingerprint) throw new Error("The exact commentary segment has changed. Reopen it before requesting context; no neighbouring passage was substituted.");
     const anchor = displayed.pali.segments[0].ref;
     const parent = anchor.replace(/\/c[1-9]\d*$/, "");

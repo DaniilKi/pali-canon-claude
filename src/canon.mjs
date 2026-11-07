@@ -1,3 +1,4 @@
+import { isPartial, partialScope } from './translation-scope.mjs';
 import { searchSegments, searchFold, searchExcerpt, searchTerms, searchReading, assertSearchQuery, isSourcePhrase } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
@@ -123,14 +124,41 @@ function ptsLabel(collection, volume, page) {
   return `${abbr} ${ROMAN[volume] || volume} ${page}`;
 }
 
+// Link metadata is an immutable loaded snapshot; key caches by snapshot identity.
+const translationOwners = new WeakMap();
+function ownersOf(links, wanted) {
+  let index = translationOwners.get(links);
+  if (!index) {
+    index = new Map();
+    for (const [owner, entries] of Object.entries(links)) for (const entry of entries) {
+      const id = translationId(entry);
+      if (!index.has(id)) index.set(id, []);
+      index.get(id).push(owner);
+    }
+    translationOwners.set(links, index);
+  }
+  return index.get(wanted) || [];
+}
+
 /** Translation links for a text; a verse or member inherits those of the range that contains it (e.g. a Dhp chapter). */
 export function linksFor(u) {
   const d = load();
   const own = d.translations[u.id];
-  if (own?.length) return { links: own, via: null };
+  if (own?.length) {
+    for (const link of own) if (isPartial(link)) {
+      partialScope(link, u, segments(u), source());
+      const id = translationId(link);
+      const owners = ownersOf(d.translations, id);
+      if (owners.length !== 1 || owners[0] !== u.id) throw new CitationError('Partial translation_id has ambiguous declarations or unit owners. Use one reviewed source scope per version; no occurrence was selected.');
+    }
+    if (own.some(link => !isPartial(link))) return { links: own, via: null };
+  }
   const container = rangeContaining(u.id);
-  if (container && d.translations[container.id]?.length) return { links: d.translations[container.id], via: container };
-  return { links: [], via: null };
+  if (container && d.translations[container.id]?.length) {
+    const links = d.translations[container.id].filter(t => !isPartial(t));
+    if (links.length) return { links: [...links, ...(own || [])], via: container };
+  }
+  return { links: own || [], via: null };
 }
 
 /** Describe index certainty without inferring missing or abbreviated source wording. */
@@ -155,6 +183,7 @@ export function alignmentInfo(unit) {
 function unitSummary(u, extra = {}) {
   const d = load();
   const alignment = alignmentInfo(u);
+  const englishLinks = linksFor(u).links;
   return {
     id: u.id,
     citation: u.acronym,
@@ -165,7 +194,8 @@ function unitSummary(u, extra = {}) {
     vri_paragraphs: u.vri || null,
     ...(u.approximate ? { approximate: true } : {}),
     ...(alignment ? { alignment } : {}),
-    english_available: linksFor(u).links.length,
+    english_available: englishLinks.filter(t => !isPartial(t)).length,
+    ...(englishLinks.some(isPartial) ? { partial_english_available: englishLinks.filter(isPartial).length } : {}),
     ...extra,
   };
 }
@@ -250,6 +280,13 @@ export function resolve(reference) {
     const key = `${c.host}${c.path}`;
     const id = d.urlIndex.get(key) || d.urlIndex.get(key.replace(/^accesstoinsight\.org/, 'accesstoinsight.org'));
     if (!id) throw new CitationError('That page is not linked to a canon text in the bundled index. Give the sutta citation instead.');
+    for (const link of d.translations[id] || []) {
+      const urls = [link.url, ...(link.parts || []).map(path => ANANDAJOTI_BASE + path)];
+      if (isPartial(link) && urls.some(url => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\.html?$/, '') === key)) {
+        const unit = d.byId.get(id), scoped = partialScope(link, unit, segments(unit), source());
+        notes.push(`This URL is a partial translation source covering ${scoped.first_ref} through ${scoped.last_ref}. Citation lookup returns its containing unit; whole-unit English coverage is not established.`);
+      }
+    }
     notes.push(c.host === 'ancient-buddhist-texts.net'
       ? `Linked from ${c.host}: Ānandajoti Bhikkhu's text and translation of ${id}.`
       : `Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id}.`);
@@ -365,13 +402,14 @@ export function source() {
 export function describe(u, notes = []) {
   const d = load();
   const { links: own, via } = linksFor(u);
-  if (via) notes = [...notes, `English translations are of the whole ${via.acronym} (${via.title}); this text is part of it.`];
+  if (via) notes = [...notes, own.some(isPartial) ? `Whole-unit English links cover ${via.acronym} (${via.title}); partial links have their own explicit scope.` : `English translations are of the whole ${via.acronym} (${via.title}); this text is part of it.`];
   const english = own.map((t) => ({
     source: sourceName(t),
     translator: t.translator, reference: t.reference || undefined, url: t.url,
     ...(t.license ? { license: t.license } : {}),
     translation_id: translationId(t),
     match: t.match,
+    ...(isPartial(t) ? { translation_scope: partialScope(t, u, segments(u), source()) } : {}),
     ...(t.commentary ? { includes_commentary: true } : {}),
   }));
   const blocks = bookBlocks(u);
@@ -425,7 +463,7 @@ function groupedScope(d, key, requested) {
 }
 
 function searchTitle(d, u) {
-  const english = (d.translations[u.id] || []).map((t) => `${t.reference || ''} ${t.english || ''}`).join(' ');
+  const english = (d.translations[u.id] || []).filter((t) => !isPartial(t)).map((t) => `${t.reference || ''} ${t.english || ''}`).join(' ');
   return { u, text: fold(`${u.acronym} ${u.title} ${english}`) };
 }
 

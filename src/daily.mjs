@@ -1,5 +1,6 @@
 // Daily text and reading plans (issue #45). Everything is chosen from the bundled VRI canon:
 // no scripture is generated, and the study-guide plans list citations and links only.
+import { isPartial } from './translation-scope.mjs';
 import * as canonModule from './canon.mjs';
 
 const DAY_MS = 86400000;
@@ -52,7 +53,7 @@ function pools(canon) {
   const chapters = d.canon.units.filter((u) => u.collection === 'dhp' && u.kind === 'range')
     .sort((a, b) => a.book - b.book || a.start - b.start);
   const suttas = d.canon.units.filter((u) => SUTTA_POOL_COLLECTIONS.has(u.collection) && u.kind !== 'range' && !u.approximate
-    && d.translations[u.id]?.length)
+    && d.translations[u.id]?.some(link => !isPartial(link)))
     .sort((a, b) => a.book - b.book || a.start - b.start);
   cache = { canon, verses, chapters, suttas, plans: new Map() };
   return cache;

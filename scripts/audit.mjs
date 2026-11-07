@@ -1,6 +1,7 @@
 import { readBundled } from '../src/bundled-data.mjs';
 // Exhaustive offline audit of the bundled canon: every text, every citation form, every PTS start page, every translation link.
 import * as canon from '../src/canon.mjs';
+import { isPartial, partialScope } from '../src/translation-scope.mjs';
 import { EDITIONS, editionLabel, editionIndex, nextUnit } from '../src/editions.mjs';
 import { textSegments, parseNoteSpans, uncovered, SIGLA } from '../src/variants.mjs';
 import * as commentary from '../src/commentary.mjs';
@@ -131,6 +132,14 @@ for (let i = 1; i < spans.length; i += 1) {
 }
 // 7. Every translation link resolves back to its text by URL.
 for (const [id, links] of Object.entries(d.translations)) {
+  for (const link of links) if (isPartial(link)) {
+    try {
+      const unit = d.byId.get(id);
+      if (!unit) throw Error('Partial translation has no independent indexed owner.');
+      canon.linksFor(unit);
+      partialScope(link, unit, canon.segments(unit), canon.source()); count('partial-translation');
+    } catch (error) { fail('partial-translation', `${id}: ${error.message}`); }
+  }
   for (const l of links) {
     try {
       const r = canon.resolve(l.url);

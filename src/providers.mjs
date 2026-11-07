@@ -2,6 +2,8 @@
 import { fetchPublic, fetchMirrors, decodeHtml, plainText, shortText } from './http.mjs';
 import { atiMirrors, atiContent, atiNotice } from './english.mjs';
 import { load, linksFor, fold as foldPali, source as canonSource } from './canon.mjs';
+import { isPartial, partialScope } from './translation-scope.mjs';
+import { segments as canonSegments } from './canon.mjs';
 import { liveCache } from './cache.mjs';
 import { lookupOffline, DPD_PIN } from './analyse.mjs';
 
@@ -194,8 +196,8 @@ let coverageCache = null;
 
 /** English translation coverage per collection (#37): texts, texts with a direct link, texts reached through a
  *  containing text (verses of a linked chapter), and links per source, with how many were matched by content. */
-export function translationCoverage() {
-  if (coverageCache) return coverageCache;
+export function translationCoverage({ refresh = false } = {}) {
+  if (coverageCache && !refresh) return coverageCache;
   const d = load();
   const rows = new Map();
   const total = { texts: 0, with_english: 0, with_english_including_inherited: 0, links: 0, content_matched_links: 0, by_source: {} };
@@ -208,23 +210,30 @@ export function translationCoverage() {
         with_english_including_inherited: 0, links: 0, content_matched_links: 0, by_source: {} });
     }
     const row = rows.get(key);
-    const own = d.translations[u.id] || [];
-    const reach = linksFor(u).links;
+    const declared = d.translations[u.id] || [];
+    const partial = declared.filter(isPartial);
+    for (const link of partial) partialScope(link, u, canonSegments(u), canonSource());
+    const own = declared.filter(link => !isPartial(link));
+    const reach = linksFor(u).links.filter(link => !isPartial(link));
     for (const o of [row, total]) {
       o.links += own.length;
+      o.partial_links = (o.partial_links || 0) + partial.length;
+      for (const link of partial) { o.partial_by_source ||= {}; bump(o.partial_by_source, link.source); }
       for (const l of own) {
         bump(o.by_source, COVERAGE_SOURCES.includes(l.source) ? l.source : 'other');
         if (String(l.match || '').startsWith('content')) o.content_matched_links += 1;
       }
       if (u.kind === 'range') continue;   // grouped texts count once, through their members
       o.texts += 1;
+      o.with_partial_english = (o.with_partial_english || 0) + (partial.length ? 1 : 0);
+      o.partial_only = (o.partial_only || 0) + (partial.length && !reach.length ? 1 : 0);
       if (own.length) o.with_english += 1;
       if (reach.length) o.with_english_including_inherited += 1;
     }
   }
   const pct = (o) => ({ ...o, percent_with_english: o.texts ? Math.round((1000 * o.with_english_including_inherited) / o.texts) / 10 : 0 });
   coverageCache = {
-    note: 'Counts of texts (grouped ranges counted through their members) with an English translation link; links counts every link, including those on grouped ranges. "including_inherited" adds verses whose chapter is linked. content_matched_links were placed by the content-based linker (names, numbers and PTS spans in the translation compared with the Pāli) and audited; a text without a link may still have a translation we could not place with confidence.',
+    note: 'Whole-unit translation-link counts exclude partial mappings. partial_links, with_partial_english, partial_only and partial_by_source are separate; partial groups do not imply member coverage. Counts of texts (grouped ranges counted through their members) with an English translation link; links counts every link, including those on grouped ranges. "including_inherited" adds verses whose chapter is linked. content_matched_links were placed by the content-based linker (names, numbers and PTS spans in the translation compared with the Pāli) and audited; a text without a link may still have a translation we could not place with confidence.',
     total: pct(total),
     collections: [...rows.values()].map(pct),
   };
