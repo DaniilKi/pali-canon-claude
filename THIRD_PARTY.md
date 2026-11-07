@@ -74,6 +74,14 @@ Expanded framing, condensed repetitions and editorial notes are disclosed in
 the [scope review](docs/data/ati-introductions-and-notes.md); no English bodies
 are bundled.
 
+The D187 batch adds Walshe’s SN 7.21, SN 22.109 and SN 22.110 (copyright
+1985 BPS, Wheel 318–321; full free-distribution/acknowledgement/50-copy notice),
+and Ṭhānissaro’s SN 22.121 (1997), SN 25.5 (2004) and SN 47.35 (2012), all
+CC BY-NC 4.0. Original notices and citations remain in live readings. No English
+body is stored by the new metadata-only review-packet tool. The
+[review record](docs/data/ati-paired-discourses-and-review-workflow.md) explains
+condensed openings, repetitions and editorial Notes.
+
 ## Access to Insight indexes (bundled topic index)
 
 `server/data/topics.json` holds topic names, cross-references and links taken from Access to Insight's [General Index](https://www.accesstoinsight.org/index-subject.html) and [Numerical Index](https://www.accesstoinsight.org/index-number.html), read from commit `45fedca341497120651efa20e756b04a13e61089` of [bcbsit/ati](https://github.com/bcbsit/ati). The text of both pages is “by Access to Insight” and licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); the attribution and licence are returned with every `topic` and `list_topics` result. Only names and links are kept, and each sutta link is mapped to a canon ID by this project. Documents linked from the indexes keep their own terms.

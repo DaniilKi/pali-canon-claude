@@ -221,3 +221,21 @@ SN 1.12 by its Māra prose context; shared verses alone are insufficient.
 SN 17.5 and SN 3.7 keep VRI's explicit abbreviations and disclose differences
 from the English edition. Complete source pages are linked, not synthesized.
 See [the review](../../docs/data/ati-sn-coverage.md) for exact evidence.
+
+### Prepare the remaining ATI review queue without approving it (D187)
+
+```sh
+python3 scripts/canon/ati_review_packet.py /tmp/pali-inputs/canon.json.gz server/data/translations.json /tmp/pali-ati docs/data/ati-coverage-screen.json > /tmp/ati-review-packet.json
+```
+
+The source checkout must be clean at the manifest's pinned ATI commit; accepted
+reviews are revalidated first. This offline, read-only command emits source
+metadata, full-page hashes, licence/notice-container indicators and every
+PTS-overlapping possible unit with its current English availability. It
+omits approved/already linked pages and never copies English bodies. It
+rejects stale provenance, missing source files, duplicate paths and path
+escapes. Output candidates always remain unapproved; PTS overlap, a complete
+extent label or a licence label does not establish identity, scope or rights.
+Manually compare content and boundaries, inspect the full rights notice, then
+add an explicit manifest record and regression tests using the existing flow.
+See the [workflow assessment](../../docs/data/ati-paired-discourses-and-review-workflow.md).

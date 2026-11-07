@@ -1120,6 +1120,50 @@
         }
       ],
       "report": "ati-introductions-and-notes.md"
+    },
+    {
+      "decision": "D187",
+      "baseline": "08529b38f491ae8a84a59313d581c99c5a27625e",
+      "accepted": [
+        {
+          "unit_id": "sn7.21",
+          "path": "tipitaka/sn/sn07/sn07.021.wlsh.html",
+          "resolution": "Individually reviewed content, PTS, edition/editorial scope and page-specific rights; full evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "sn22.109",
+          "path": "tipitaka/sn/sn22/sn22.109.wlsh.html",
+          "resolution": "Individually reviewed content, PTS, edition/editorial scope and page-specific rights; full evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "sn22.110",
+          "path": "tipitaka/sn/sn22/sn22.110.wlsh.html",
+          "resolution": "Individually reviewed content, PTS, edition/editorial scope and page-specific rights; full evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "sn22.121",
+          "path": "tipitaka/sn/sn22/sn22.121.than.html",
+          "resolution": "Individually reviewed content, PTS, edition/editorial scope and page-specific rights; full evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "sn25.5",
+          "path": "tipitaka/sn/sn25/sn25.005.than.html",
+          "resolution": "Individually reviewed content, PTS, edition/editorial scope and page-specific rights; full evidence in manifest and batch report."
+        },
+        {
+          "unit_id": "sn47.35",
+          "path": "tipitaka/sn/sn47/sn47.035.than.html",
+          "resolution": "Individually reviewed content, PTS, edition/editorial scope and page-specific rights; full evidence in manifest and batch report."
+        }
+      ],
+      "deferred": [
+        {
+          "unit_id": "sn40.9",
+          "path": "tipitaka/sn/sn40/sn40.009.wlsh.html",
+          "reason": "Publisher preface summarizes earlier concentration discourses and lengthy Notes add interpretation; source inspected but full framing/editorial scope not approved in this batch."
+        }
+      ],
+      "report": "ati-paired-discourses-and-review-workflow.md"
     }
   ]
 }

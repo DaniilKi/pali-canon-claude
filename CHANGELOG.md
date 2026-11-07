@@ -4,6 +4,11 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Added six first-English SN choices with reviewed content, edition scope and
+  rights, including separately identified stream-enterer/arahant discourses.
+  Added a metadata-only, read-only ATI review-packet tool to organize remaining
+  candidates without approving mappings or permissions automatically (D187).
+
 - Added first English choices for SN 9.11, SN 1.3 and SN 12.16. Explicit
   mapping notes distinguish Walshe’s expanded introduction, condensed
   repetitions and editorial notes from the bundled Pāli and canonical speech.

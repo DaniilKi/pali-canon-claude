@@ -11,7 +11,7 @@ const realFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = realFetch; liveCache.clear(); });
 
 test('source-reviewed whole-text links retain exact edition identity and provenance', () => {
-  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16']);
+  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16', 'sn7.21', 'sn22.109', 'sn22.110', 'sn22.121', 'sn25.5', 'sn47.35']);
   for (const row of manifest.links) {
     const u = canon.resolve(row.unit_id).unit;
     const link = canon.load().translations[u.id].find(t => t.match === 'reviewed-story' && t.path === row.path);
@@ -228,4 +228,33 @@ test('expanded introductions and condensed repetitions remain explicit, with wro
     await assert.rejects(english.translation(canon.resolve(uid).unit,id));
   }
   assert.equal(calls,0);
+});
+
+test('paired attainment editions retain their distinct endings and do not splice another page', async()=>{
+ const a=english.available(canon.resolve('sn22.109').unit)[0];
+ const b=english.available(canon.resolve('sn22.110').unit)[0];
+ assert.match(a.translation_id,/sn22\.109\.wlsh$/);assert.match(b.translation_id,/sn22\.110\.wlsh$/);
+ assert.match(a.mapping_note,/stream-enterer.*SN 22.110/);
+ assert.match(b.mapping_note,/As above.*does not silently fetch or splice.*fully expanded standalone opening/);
+ let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Must not fetch');};
+ await assert.rejects(english.translation(canon.resolve('sn22.109').unit,b.translation_id));
+ await assert.rejects(english.translation(canon.resolve('sn22.110').unit,a.translation_id));
+ await assert.rejects(english.translation(canon.resolve('sn1.25').unit,b.translation_id));
+ assert.equal(calls,0);
+ for(const [uid,re] of [['sn7.21',/stage directions.*Note/],['sn22.121',/desire-passion.*…pe…/],['sn25.5',/six contacts.*SN 25.1/],['sn47.35',/feelings, thoughts and perceptions/]]){
+  const choices=english.available(canon.resolve(uid).unit);assert.equal(choices.length,1);assert.match(choices[0].mapping_note,re);
+ }
+});
+
+test('an editorial reference to a shared opening never fetches or splices the other translation',async()=>{
+ const calls=[];
+ globalThis.fetch=async url=>{
+  calls.push(String(url));assert.match(String(url),/sn22\.110\.wlsh/);
+  return new Response(`<body><div><!-- BEGIN COPYRIGHTED TEXT CHUNK -->[As above (in <a href="sn22.109.wlsh.html">SN 22.109</a>)] Synthetic arahant ending.<h2>Notes</h2>Editorial explanation.<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) --></div><div id="F_provenance">Synthetic licence.</div><div id="F_citation">Synthetic citation.</div></body>`,{status:200});
+ };
+ const out=await english.translation(canon.resolve('sn22.110').unit,'ati:/tipitaka/sn/sn22/sn22.110.wlsh');
+ assert.match(out.text,/As above.*SN 22.109.*Synthetic arahant ending/s);
+ assert.match(out.notes.join(' '),/does not silently fetch or splice/);
+ assert.equal(out.next_offset,null);assert.ok(calls.length>0);
+ assert.ok(calls.every(url=>!url.includes('sn22.109')));
 });

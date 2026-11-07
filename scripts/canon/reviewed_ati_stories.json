@@ -312,6 +312,126 @@
         "vri_verse_groups": 0
       },
       "mapping_note": "Publisher’s whole-discourse version with repetitions condensed: ATI Dhammakathiko Sutta (SN 12.16, PTS S ii 18) matches Dhammakathikasuttaṃ, VRI paragraph 16. Teaching, practising and liberation concern aging-and-death and then the dependent-origination sequence through ignorance, unlike the aggregates in same-named SN 22.115. ATI condenses the repeated sequence into a bracketed summary; VRI also abbreviates but lists its intermediate links. This is not line-by-line alignment or a fully expanded rendering of every repeated clause. The bracketed summary and numbered Notes are translator/editorial material; bundled Pāli stays unchanged."
+    },
+    {
+      "unit_id": "sn7.21",
+      "path": "/tipitaka/sn/sn07/sn07.021.wlsh",
+      "pali_title": "Saṅgāravasuttaṃ",
+      "english_title": "Sangaarava",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "source_reference": "SN 7.21",
+      "source_verses": "SN 7.21; PTS S i 182",
+      "vri_verses": "207",
+      "source_html_sha256": "9350f1935cf1db606f4a72d36d86ff1edca7d81222611e8c7d418e54ca998e0e",
+      "pali_sha256": "26247e7e02445cbee060370987784d523fe0fbe473ca41493f398dedd50e8541",
+      "root_blocks_sha256": "579023f532f81b15e0a2fc5fa921760e592cd84e18dc8601bf335c77f75df9a8",
+      "evidence": {
+        "basis": "Ananda asks Buddha to visit the water-purity brahman; evening/morning washing claim; Dhamma lake/virtue ford stanza; lay refuge ending. PTS S i 182.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 1
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Sangaarava Sutta (SN 7.21, PTS S i 182) matches Saṅgāravasuttaṃ, VRI paragraph 207. Ananda’s invitation, the brahman’s twice-daily purification claim, lake/ford verse and lay refuge ending establish identity. ATI condenses travel/greeting details and uses bracketed stage directions, an SN 7.1 cross-reference and a numbered explanatory Note. VRI also abbreviates its closing formula. These are publisher/editorial conventions, not newly generated Pāli; this is not line-by-line alignment."
+    },
+    {
+      "unit_id": "sn22.109",
+      "path": "/tipitaka/sn/sn22/sn22.109.wlsh",
+      "pali_title": "Sotāpannasuttaṃ",
+      "english_title": "The Sotaapanna ('Stream-winner')",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "source_reference": "SN 22.109",
+      "source_verses": "SN 22.109; PTS S iii 160",
+      "vri_verses": "109",
+      "source_html_sha256": "2a359543435311c3c863e9c65c8188101131b5ae3475c4fb5565766ac1659efd",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "719911cb25dd4434a9d46b6b1de99420273c3910971d48302dad56a5bff854e4",
+      "evidence": {
+        "basis": "Five clinging aggregates; arising/ceasing, gratification, danger and escape understood as they are; stream-entry assurance. PTS S iii 160. Adjacent 110 instead describes arahant release.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Sotaapanno Sutta (SN 22.109, PTS S iii 160) matches Sotāpannasuttaṃ, VRI paragraph 109. Knowledge of five aspects of the five clinging aggregates ends in the stream-enterer description, distinct from the arahant conclusion in SN 22.110. ATI lists aggregates VRI abbreviates; its bracketed setup and numbered Note are editorial. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "sn22.110",
+      "path": "/tipitaka/sn/sn22/sn22.110.wlsh",
+      "pali_title": "Arahantasuttaṃ",
+      "english_title": "The Arahant",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "source_reference": "SN 22.110",
+      "source_verses": "SN 22.110; PTS S iii 161",
+      "vri_verses": "110",
+      "source_html_sha256": "596f9cafe096819806f82b0641a14f548f860bff455625aef3a7b29514d280db",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "eb28a4d78220f7d5ce1798cdd1ce708c9e0c61b69767f3cc20102b035d88b3e1",
+      "evidence": {
+        "basis": "Five aspects of clinging aggregates; liberation without clinging; completed-life, laid-down-burden, highest-goal and destroyed-fetters formula. PTS S iii 161; distinct from 109 stream-entry ending.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Publisher’s whole-discourse version with an abbreviated opening: ATI Araham Sutta (SN 22.110, PTS S iii 161) matches Arahantasuttaṃ, VRI paragraph 110. Its “As above” opening points to SN 22.109 for the shared setup; this reader does not silently fetch or splice that page. The release-without-clinging and completed-arahant formula identify SN 22.110, not SN 22.109 or other Arahant-titled texts. The numbered Note is editorial; this is not line-by-line alignment or a fully expanded standalone opening."
+    },
+    {
+      "unit_id": "sn22.121",
+      "path": "/tipitaka/sn/sn22/sn22.121.than",
+      "pali_title": "Upādāniyasuttaṃ",
+      "english_title": "Clinging",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "SN 22.121",
+      "source_verses": "SN 22.121; PTS S iii 167",
+      "vri_verses": "121",
+      "source_html_sha256": "1e576f5c369916c7485e98c3d39ad3f4ca34efc391b3d9a5dd2a9355b93d00a5",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "5a33d26c58047cb694209b0fa69b9f7799c161b7926228f48c3ae1e60ca23ee8",
+      "evidence": {
+        "basis": "Five aggregates as clingable phenomena, each paired with desire/passion as clinging; opening and concluding definitions. PTS S iii 167.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Upadana Sutta (SN 22.121, PTS S iii 167) matches Upādāniyasuttaṃ, VRI paragraph 121. Form, feeling, perception, fabrications and consciousness are paired with desire-passion as clinging. ATI spells out repetitions VRI abbreviates with …pe…; both editions’ source text stays unchanged. This is not line-by-line alignment or numbering-only inference."
+    },
+    {
+      "unit_id": "sn25.5",
+      "path": "/tipitaka/sn/sn25/sn25.005.than",
+      "pali_title": "Samphassajāsuttaṃ",
+      "english_title": "Feeling",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "SN 25.5",
+      "source_verses": "SN 25.5; PTS S iii 226",
+      "vri_verses": "306",
+      "source_html_sha256": "2470775306d4342f1ec88bee321c850dd1212a6b3cd054c3782213c0606e8298",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "1f17ec3dcb5c58058ab525930faecc4b8bdbecbf00ee9b48d920cfe072e5c200",
+      "evidence": {
+        "basis": "Feeling born of six contacts is impermanent/changeable; faith-follower, Dhamma-follower, stream-enterer formula. PTS S iii 226; unabridged classification formula checked in VRI SN 25.1.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Vedana Sutta (SN 25.5, PTS S iii 226) matches Samphassajāsuttaṃ, VRI paragraph 306. Feelings born of six contacts identify this unit. ATI states faith-follower, Dhamma-follower and stream-enterer formulas that VRI SN 25.5 abbreviates; that sequence is explicit in VRI SN 25.1. Bundled Pāli abbreviation marks remain intact. Editorial “See also” links are not canonical speech; this is not line-by-line alignment or an expansion of missing Pāli."
+    },
+    {
+      "unit_id": "sn47.35",
+      "path": "/tipitaka/sn/sn47/sn47.035.than",
+      "pali_title": "Satisutta",
+      "english_title": "Mindful",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "SN 47.35",
+      "source_verses": "SN 47.35; PTS S v 180",
+      "vri_verses": "401",
+      "source_html_sha256": "17e3a21d0626af6f55ed5f39fe0a8a8df822064220aefd734f587c0fc5c1060e",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "dd06b718f399af926086982a9a40d2e11889bb5c3696c1d186b54c7275f6dca0",
+      "evidence": {
+        "basis": "Instruction to be mindful and clearly comprehending; four mindfulness domains then feelings, thoughts and perceptions known arising/persisting/ending; repeated instruction. PTS S v 180.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Sata Sutta (SN 47.35, PTS S v 180) matches indexed Satisutta, VRI paragraph 401. Four mindfulness domains are followed by feelings, thoughts and perceptions each known as arising, persisting and ending. This sequence and the repeated instruction distinguish it from similarly titled mindfulness texts. Both editions abbreviate repeated domains; this is not line-by-line alignment or numbering-only inference."
     }
   ]
 }
