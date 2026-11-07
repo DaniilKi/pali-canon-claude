@@ -30045,6 +30045,7 @@ __export(talks_exports, {
   searchUrl: () => searchUrl,
   sharedPhrase: () => sharedPhrase
 });
+var import_node_crypto3 = require("node:crypto");
 var SITE = "https://www.dhammatalks.org";
 var CATEGORIES = ["evening", "morning"];
 var MIN_INTERVAL_MS = 1e3;
@@ -30200,6 +30201,13 @@ function parseCursor(cursor, categories) {
   return state;
 }
 var formatCursor = (state) => state.map((s) => `${s.category}:${s.page}:${s.offset}`).join(",");
+var cursorScope = (query, passage, category, terms4) => (0, import_node_crypto3.createHash)("sha256").update(JSON.stringify([query, passage?.id || null, category, terms4, passage?.translation_url || null])).digest("hex");
+function scopedState(cursor, categories, scope) {
+  const match2 = typeof cursor === "string" && cursor.match(/^v1:([a-f0-9]{64}):(.+)$/);
+  if (!match2) throw new Error("Invalid or legacy talk cursor. Restart without cursor and pass the returned next_cursor unchanged.");
+  if (match2[1] !== scope) throw new Error("Talk cursor belongs to a different query, passage, category or source search. Restart without cursor for this search.");
+  return parseCursor(match2[2], categories);
+}
 async function findTalks({ query, passage, category = "all", page = 1, limit = 10, cursor } = {}, { canon, fetchHtml = defaultFetch } = {}) {
   query = plainTerms(query);
   page = Math.max(1, Math.trunc(Number(page) || 1));
@@ -30220,6 +30228,7 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
     const phrase = shared ? null : candidate;
     passageInfo = { id: unit.id, citation: unit.acronym, title: unit.title || null, translation_url: dt?.url ?? null, translation_title: candidate };
     if (!phrase) {
+      if (cursor !== void 0) throw new Error("Talk cursor cannot continue this passage search: no distinctive source title is available. Restart without cursor.");
       const why = via ? `${unit.acronym} has no translation page of its own on dhammatalks.org (only its chapter, ${via.acronym}, does)` : !dt ? `${unit.acronym} has no linked \u1E6Ch\u0101nissaro translation on dhammatalks.org` : shared ? `the title of \u1E6Ch\u0101nissaro's translation ("${candidate}") is also part of another of his translation titles, so it cannot single out this passage` : `the title of \u1E6Ch\u0101nissaro's translation ("${dt.reference}") is too general to identify talks about this passage`;
       return {
         source: TALKS_SOURCE,
@@ -30235,7 +30244,8 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
   } else {
     notes.push(`Matches are keyword matches found by dhammatalks.org's search (all words; "quoted phrases" allowed). Diacritics are removed because the site's search does not handle them.`);
   }
-  const state = cursor ? parseCursor(cursor, categories) : categories.map((c) => ({ category: c, page, offset: 0 }));
+  const scope = cursorScope(query, passageInfo, category, terms4);
+  const state = cursor !== void 0 ? scopedState(cursor, categories, scope) : categories.map((c) => ({ category: c, page, offset: 0 }));
   const searched = [];
   const pages = /* @__PURE__ */ new Map();
   const load5 = async (st) => {
@@ -30266,18 +30276,13 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
   const seen = /* @__PURE__ */ new Set();
   const results = [];
   while (results.length < limit && active.length) {
-    const next = [];
-    for (const st of active) {
-      if (results.length < limit) {
-        const r = (await load5(st)).results[st.offset++];
-        if (!seen.has(r.url)) {
-          seen.add(r.url);
-          results.push(r);
-        }
-      }
-      if (await remaining(st)) next.push(st);
+    const st = active.shift();
+    const r = (await load5(st)).results[st.offset++];
+    if (!seen.has(r.url)) {
+      seen.add(r.url);
+      results.push(r);
     }
-    active = next;
+    if (await remaining(st)) active.push(st);
   }
   return {
     source: TALKS_SOURCE,
@@ -30288,9 +30293,9 @@ async function findTalks({ query, passage, category = "all", page = 1, limit = 1
     results,
     returned: results.length,
     has_more: active.length > 0,
-    ...active.length ? { next_cursor: formatCursor(active) } : {},
+    ...active.length ? { next_cursor: `v1:${scope}:${formatCursor(active)}` } : {},
     search_urls: searched,
-    notes: active.length ? [...notes, "More talks match: call again with cursor set to next_cursor (same query, passage and category) to continue exactly where this list stopped."] : notes
+    notes: active.length ? [...notes, "More talks match: call again with cursor set to next_cursor (same query, passage and category) to continue. Live site ordering may change between requests; this cursor is not an immutable result snapshot."] : notes
   };
 }
 function register13({ tool, z, citation, canon }) {
@@ -30300,7 +30305,7 @@ function register13({ tool, z, citation, canon }) {
     category: z.enum(["all", "evening", "morning"]).default("all").describe("Evening talks, short morning talks, or both."),
     page: z.number().int().min(1).max(50).default(1).describe("Site results page to start from (20 talks per category per page). To continue a list, use cursor instead."),
     limit: z.number().int().min(1).max(20).default(10),
-    cursor: z.string().max(100).optional().describe("next_cursor from a previous call, to continue the same search exactly where it stopped (overrides page).")
+    cursor: z.string().max(100).optional().describe("Opaque next_cursor from a previous call. Bound to its query, resolved passage and category; pass unchanged (overrides page). Legacy/unmatched cursors require restarting without cursor.")
   }, (args) => findTalks(args, { canon }), { network: true });
 }
 

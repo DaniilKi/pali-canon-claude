@@ -7,6 +7,7 @@
 // such as SemrushBot and AhrefsBot, are disallowed from the whole site; this server is not one of them.) Requests are cached (src/cache.mjs) and spaced at least one second apart.
 import { fetchPublic, decodeHtml } from './http.mjs';
 import { liveCache } from './cache.mjs';
+import { createHash } from 'node:crypto';
 
 export const SITE = 'https://www.dhammatalks.org';
 export const CATEGORIES = ['evening', 'morning'];
@@ -148,6 +149,15 @@ export function parseCursor(cursor, categories) {
   return state;
 }
 const formatCursor = (state) => state.map((s) => `${s.category}:${s.page}:${s.offset}`).join(',');
+const cursorScope = (query, passage, category, terms) => createHash('sha256')
+  .update(JSON.stringify([query, passage?.id || null, category, terms, passage?.translation_url || null])).digest('hex');
+function scopedState(cursor, categories, scope) {
+  const match = typeof cursor === 'string' && cursor.match(/^v1:([a-f0-9]{64}):(.+)$/);
+  if (!match) throw new Error('Invalid or legacy talk cursor. Restart without cursor and pass the returned next_cursor unchanged.');
+  if (match[1] !== scope) throw new Error('Talk cursor belongs to a different query, passage, category or source search. Restart without cursor for this search.');
+  return parseCursor(match[2], categories);
+}
+
 
 /**
  * Search talks by topic (`query`) or by passage (`passage`, resolved with the bundled canon).
@@ -174,6 +184,7 @@ export async function findTalks({ query, passage, category = 'all', page = 1, li
     const phrase = shared ? null : candidate;
     passageInfo = { id: unit.id, citation: unit.acronym, title: unit.title || null, translation_url: dt?.url ?? null, translation_title: candidate };
     if (!phrase) {
+      if (cursor !== undefined) throw new Error('Talk cursor cannot continue this passage search: no distinctive source title is available. Restart without cursor.');
       const why = via ? `${unit.acronym} has no translation page of its own on dhammatalks.org (only its chapter, ${via.acronym}, does)`
         : !dt ? `${unit.acronym} has no linked Ṭhānissaro translation on dhammatalks.org`
           : shared ? `the title of Ṭhānissaro's translation ("${candidate}") is also part of another of his translation titles, so it cannot single out this passage`
@@ -187,7 +198,8 @@ export async function findTalks({ query, passage, category = 'all', page = 1, li
     notes.push('Matches are keyword matches found by dhammatalks.org\'s search (all words; "quoted phrases" allowed). Diacritics are removed because the site\'s search does not handle them.');
   }
 
-  const state = cursor ? parseCursor(cursor, categories) : categories.map((c) => ({ category: c, page, offset: 0 }));
+  const scope = cursorScope(query, passageInfo, category, terms);
+  const state = cursor !== undefined ? scopedState(cursor, categories, scope) : categories.map((c) => ({ category: c, page, offset: 0 }));
   const searched = [];
   const pages = new Map();
   const load = async (st) => {
@@ -217,15 +229,11 @@ export async function findTalks({ query, passage, category = 'all', page = 1, li
   const seen = new Set();
   const results = [];
   while (results.length < limit && active.length) {
-    const next = [];
-    for (const st of active) {
-      if (results.length < limit) {
-        const r = (await load(st)).results[st.offset++];
-        if (!seen.has(r.url)) { seen.add(r.url); results.push(r); }
-      }
-      if (await remaining(st)) next.push(st);
-    }
-    active = next;
+    const st = active.shift();
+    const r = (await load(st)).results[st.offset++];
+    if (!seen.has(r.url)) { seen.add(r.url); results.push(r); }
+    // Keep the next unserved category first, including across separate requests with odd/small limits.
+    if (await remaining(st)) active.push(st);
   }
   return {
     source: TALKS_SOURCE,
@@ -236,9 +244,9 @@ export async function findTalks({ query, passage, category = 'all', page = 1, li
     results,
     returned: results.length,
     has_more: active.length > 0,
-    ...(active.length ? { next_cursor: formatCursor(active) } : {}),
+    ...(active.length ? { next_cursor: `v1:${scope}:${formatCursor(active)}` } : {}),
     search_urls: searched,
-    notes: active.length ? [...notes, 'More talks match: call again with cursor set to next_cursor (same query, passage and category) to continue exactly where this list stopped.'] : notes,
+    notes: active.length ? [...notes, 'More talks match: call again with cursor set to next_cursor (same query, passage and category) to continue. Live site ordering may change between requests; this cursor is not an immutable result snapshot.'] : notes,
   };
 }
 
@@ -249,6 +257,6 @@ export function register({ tool, z, citation, canon }) {
     category: z.enum(['all', 'evening', 'morning']).default('all').describe('Evening talks, short morning talks, or both.'),
     page: z.number().int().min(1).max(50).default(1).describe('Site results page to start from (20 talks per category per page). To continue a list, use cursor instead.'),
     limit: z.number().int().min(1).max(20).default(10),
-    cursor: z.string().max(100).optional().describe('next_cursor from a previous call, to continue the same search exactly where it stopped (overrides page).'),
+    cursor: z.string().max(100).optional().describe('Opaque next_cursor from a previous call. Bound to its query, resolved passage and category; pass unchanged (overrides page). Legacy/unmatched cursors require restarting without cursor.'),
   }, (args) => findTalks(args, { canon }), { network: true });
 }

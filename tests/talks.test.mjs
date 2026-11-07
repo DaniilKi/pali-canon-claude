@@ -103,7 +103,7 @@ test('passage search combines with a topic and narrows to one category', async (
   assert.match(calls[0], /[?&]page=2/);
   assert.equal(r.results.length, 1);
   assert.equal(r.has_more, true);
-  assert.equal(r.next_cursor, 'morning:2:1');
+  assert.match(r.next_cursor, /^v1:[a-f0-9]{64}:morning:2:1$/);
 });
 
 test('no search runs when a passage has no distinctive translation of its own', async () => {
@@ -189,7 +189,7 @@ test('paging reaches every result: 20 per category per site page, interleaved, n
   const terms = '"To the Kalamas"';
   const { fetchHtml: f2 } = mockFetch({ [searchUrl(terms, 'evening', 1)]: sitePage('evening', 1, 20, false), [searchUrl(terms, 'morning', 1)]: sitePage('morning', 1, 0, false) });
   let p = await findTalks({ passage: 'AN 3.65', limit: 5 }, { canon, fetchHtml: f2 });
-  assert.equal(p.next_cursor, 'evening:1:5');
+  assert.match(p.next_cursor, /^v1:[a-f0-9]{64}:evening:1:5$/);
   const all = [...p.results];
   while (p.has_more) { p = await findTalks({ passage: 'AN 3.65', limit: 5, cursor: p.next_cursor }, { canon, fetchHtml: f2 }); all.push(...p.results); }
   assert.deepEqual(all.map((t) => t.title), Array.from({ length: 20 }, (_, i) => `evening p1 #${i + 1}`));
