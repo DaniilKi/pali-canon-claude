@@ -1,0 +1,78 @@
+name: Exact-head live source diagnostics
+# Separate from nightly.yml: no issue/comment/deployment steps or write permissions.
+# Path-filtered pushes run this new workflow on dev without needing a default-branch merge.
+on:
+  push:
+    branches: ['dev/pali-reliability']
+    paths:
+      - '.github/workflows/source-diagnostics.yml'
+      - 'scripts/source-diagnostics-report.mjs'
+      - '.github/source-diagnostics-request.json'
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: 'Exact 40-character commit SHA of the selected workflow ref (mismatch fails before provider access)'
+        type: string
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: source-diagnostics-${{ github.ref }}-${{ github.sha }}
+  cancel-in-progress: false
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PALI_DIAGNOSTIC_EXPECTED_SHA: ${{ inputs.expected_sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Verify exact checkout before network checks
+        run: |
+          [[ "$PALI_DIAGNOSTIC_EXPECTED_SHA" =~ ^[a-f0-9]{40}$ ]]
+          test "$(git rev-parse HEAD)" = "$PALI_DIAGNOSTIC_EXPECTED_SHA"
+          test "$GITHUB_SHA" = "$PALI_DIAGNOSTIC_EXPECTED_SHA"
+          git rev-parse HEAD HEAD:server/data
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Live smoke test
+        id: smoke
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          npm run smoke -- --live 2>&1 | tee smoke.log
+      - name: Outage and mirror test
+        id: outage
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          npm run outage 2>&1 | tee outage.log
+      - name: Translation link check (rotating daily sample)
+        id: linkcheck
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          node scripts/linkcheck.mjs 2>&1 | tee linkcheck.log
+      - name: Record every outcome and fail closed on incomplete or failed checks
+        if: always()
+        env:
+          SMOKE_OUTCOME: ${{ steps.smoke.outcome }}
+          OUTAGE_OUTCOME: ${{ steps.outage.outcome }}
+          LINKCHECK_OUTCOME: ${{ steps.linkcheck.outcome }}
+        run: node scripts/source-diagnostics-report.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: source-diagnostics-${{ github.sha }}
+          path: |
+            source-diagnostics.report.json
+            smoke.log
+            outage.log
+            linkcheck.log
+          if-no-files-found: warn
