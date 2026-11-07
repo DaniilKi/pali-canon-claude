@@ -24285,10 +24285,15 @@ function localizeSearch(result, script, input) {
   if (Array.isArray(out.title_matches)) out.title_matches = out.title_matches.map((r) => localizeUnitFields(r, s));
   return { ...out, ...scriptNote(s), ...inputNote(input) };
 }
-function localizeCommentary(commentary, script) {
+function localizeCommentary(commentary, script, input) {
   const s = script ? scriptName(script) : "roman";
-  if (s === "roman" || !commentary) return commentary;
-  return localizeText(commentary, s);
+  if (!commentary) return commentary;
+  if (s === "roman") return { ...commentary, ...inputNote(input) };
+  const out = localizeText(commentary, s, input);
+  if (!Array.isArray(commentary.segments)) delete out.segments;
+  if (out.book) out.book = localizeUnitFields(out.book, s);
+  if (Array.isArray(out.books)) out.books = out.books.map((book) => localizeUnitFields(book, s));
+  return out;
 }
 function localizePostCanonical(result, script, input) {
   const s = script ? scriptName(script) : "roman";
@@ -30469,7 +30474,11 @@ function segmentOwners(unit) {
   }
   return out;
 }
-function getCommentary(uid, { offset = 0, limit = 40 } = {}) {
+function getCommentary(uid, { offset = 0, limit = 40, script } = {}) {
+  const input = romanizeInput(uid);
+  return localizeCommentary(readCommentary(input.text, { offset, limit }), script, input);
+}
+function readCommentary(uid, { offset, limit }) {
   if (uid === "commentary" || String(uid).startsWith("commentary:")) return readBook2(uid, { offset, limit });
   const anchor = String(uid).match(/^([^/]+)\/c([1-9]\d*)$/);
   const { unit, notes } = resolve(anchor ? anchor[1] : uid);
@@ -30542,11 +30551,12 @@ function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {}) {
   };
 }
 function register15({ tool, z, citation }) {
-  tool("get_commentary", 'Read the traditional P\u0101li commentary (A\u1E6D\u1E6Dhakath\u0101, VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition) on a text: Suma\u1E45galavil\u0101sin\u012B (DN), Papa\xF1cas\u016Bdan\u012B (MN), S\u0101ratthappak\u0101sin\u012B (SN), Manorathap\u016Bra\u1E47\u012B (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. Use an emitted aligned segment ref such as "mn10/c66" to read exactly that commentary segment. For direct book reading without asserting root alignment, use uid "commentary" to list the included books, then a returned commentary:<VRI-file> or commentary:<VRI-file>/cN segment reference. Paginated by segment. Works offline.', {
+  tool("get_commentary", 'Read the traditional P\u0101li commentary (A\u1E6D\u1E6Dhakath\u0101, VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition) on a text: Suma\u1E45galavil\u0101sin\u012B (DN), Papa\xF1cas\u016Bdan\u012B (MN), S\u0101ratthappak\u0101sin\u012B (SN), Manorathap\u016Bra\u1E47\u012B (AN), the Dhammapada commentary and others. Passages are aligned to the text by VRI paragraph number and checked against the words they quote; unmatched passages are left out. Commentary is not the canon: keep it distinct when quoting. Use an emitted aligned segment ref such as "mn10/c66" to read exactly that commentary segment. For direct book reading without asserting root alignment, use uid "commentary" to list the included books, then a returned commentary:<VRI-file> or commentary:<VRI-file>/cN segment reference. Set script for supported native-script output; canonical citations may be typed in those scripts. References and source metadata remain Roman. Paginated by segment. Works offline.', {
     uid: citation,
+    script: z.string().trim().min(1).max(30).optional().describe(`${SCRIPT_DESCRIPTION} ISO codes such as sinh and mymr work too.`),
     offset: z.number().int().min(0).max(1e5).default(0).describe("Segment offset for continuation."),
     limit: z.number().int().min(1).max(200).default(40).describe("Segments per page.")
-  }, ({ uid, offset, limit }) => getCommentary(uid, { offset, limit }));
+  }, ({ uid, offset, limit, script }) => getCommentary(uid, { offset, limit, script }));
 }
 
 // src/parallels.mjs
@@ -31459,7 +31469,7 @@ function createServer() {
       const c = commentaryFor(unit, { limit: 20 });
       out.commentary = {
         ...localizeCommentary(c, script),
-        read_with: { tool: "get_commentary", uid: unit.id },
+        read_with: { tool: "get_commentary", uid: unit.id, ...script ? { script } : {} },
         ...c.available ? { opening_note: `This is the opening of the commentary (up to 20 segments${c.next_offset != null ? `, of ${c.total_segments}` : ""}). It continues with get_commentary (uid "${unit.id}", offset ${c.next_offset ?? c.total_segments}).` } : {}
       };
     }

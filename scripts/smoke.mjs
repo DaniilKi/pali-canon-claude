@@ -93,6 +93,7 @@ try {
   await call('abhidhamma_matika', { section: 'tika 1' }, (d) => assert.equal(d.entries[0].items[0].text, 'kusalā dhammā.'));
   await call('patthana_condition', { name: 'hetu' }, (d) => { assert.equal(d.condition.definition.citation, 'Paṭṭh 1.1'); assert.equal(d.condition.dictionary.tool, 'lookup_pali'); });
   if (tools.some((t) => t.name === 'get_commentary')) await call('get_commentary', { uid: 'MN 10', limit: 3 }, (d) => { assert.equal(d.available, true); assert.match(d.label, /not the canon/); assert.equal(d.commentary, 'Papañcasūdanī'); });
+  await call('get_commentary', { uid: 'MN 10', limit: 1, script: 'sinh' }, (d) => { assert.equal(d.script, 'sinhala'); assert.match(d.segments[0].text, /[\u0D80-\u0DFF]/); assert.equal(d.segments[0].ref, 'mn10/c1'); });
   const commentarySearch = await call('search_commentary', { query: 'dhamma', limit: 1 }, (d) => {
     assert.equal(d.canonical, false); assert.equal(d.content_type, 'commentary'); assert.ok(d.results.length);
   });

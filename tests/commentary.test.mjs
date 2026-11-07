@@ -93,7 +93,7 @@ test('register() adds a read-only, offline get_commentary tool', () => {
   assert.equal(tools[0].name, 'get_commentary');
   assert.equal(tools[0].opts, undefined); // network: false -> openWorldHint false
   assert.match(tools[0].description, /not the canon/);
-  assert.deepEqual(Object.keys(tools[0].schema), ['uid', 'offset', 'limit']);
+  assert.deepEqual(Object.keys(tools[0].schema), ['uid', 'script', 'offset', 'limit']);
 });
 
 test('get_commentary over MCP', async () => {

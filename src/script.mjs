@@ -412,10 +412,16 @@ export function localizeSearch(result, script, input) {
 }
 
 /** get_text commentary: true: the commentary's segments and title in `script`, by the same rules as the canon segments. */
-export function localizeCommentary(commentary, script) {
+export function localizeCommentary(commentary, script, input) {
   const s = script ? scriptName(script) : 'roman';
-  if (s === 'roman' || !commentary) return commentary;
-  return localizeText(commentary, s);
+  if (!commentary) return commentary;
+  if (s === 'roman') return { ...commentary, ...inputNote(input) };
+  const out = localizeText(commentary, s, input);
+  // A catalogue or an unavailable alignment is not an empty page of commentary.
+  if (!Array.isArray(commentary.segments)) delete out.segments;
+  if (out.book) out.book = localizeUnitFields(out.book, s);
+  if (Array.isArray(out.books)) out.books = out.books.map((book) => localizeUnitFields(book, s));
+  return out;
 }
 
 /**
