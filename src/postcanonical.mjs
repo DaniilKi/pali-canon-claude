@@ -1,4 +1,4 @@
-import { searchSegments, searchFold, searchExcerpt, searchTerms } from './search-segments.mjs';
+import { searchSegments, searchFold, searchExcerpt, searchTerms, searchReading } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * Post-canonical Pāli books of the VRI Chaṭṭha Saṅgāyana edition: the sub-commentaries (Ṭīkā) and the
@@ -389,17 +389,18 @@ function bookInfo(book) {
 const labelFor = (sel) => WORK_LABELS[sel.work] ? `${WORK_LABELS[sel.work]} ${LABELS[sel.book.section]}` : LABELS[sel.book.section];
 
 /** Group blocks into headings, prose paragraphs and whole stanzas (as canon.segments does). */
-export function segmentsOf(blocks, { includeVariants = false } = {}) {
+export function segmentsOf(blocks, { includeVariants = false, includeSourcePositions = false } = {}) {
   const out = [];
   let stanza = null;
   let pending = [];
   const flush = () => { if (stanza) { out.push(stanza); stanza = null; } };
-  for (const [rend, n, text, notes = [], pages = {}] of blocks) {
+  for (const [i, [rend, n, text, notes = [], pages = {}]] of blocks.entries()) {
     const eds = [...pending, ...Object.entries(pages).flatMap(([ed, list]) => list.map((p) => [ed, p.replace(/\.0*(\d)/, '.$1')]))];
     pending = [];
-    if (rend === 'hangnum') { flush(); stanza = { type: 'verse', vri: n, text: '', eds }; continue; }
+    if (rend === 'hangnum') { flush(); stanza = { type: 'verse', vri: n, text: '', eds, start: i, end: i + 1 }; continue; }
     if (VERSE.has(rend)) {
-      stanza ||= { type: 'verse', vri: n, text: '', eds: [] };
+      stanza ||= { type: 'verse', vri: n, text: '', eds: [], start: i, end: i + 1 };
+      stanza.end = i + 1;
       stanza.text += (stanza.text ? '\n' : '') + text;
       stanza.eds.push(...eds);
       if (includeVariants && notes.length) (stanza.variants ||= []).push(...notes);
@@ -409,13 +410,14 @@ export function segmentsOf(blocks, { includeVariants = false } = {}) {
     flush();
     if (!text) { pending = eds; continue; }
     const heading = HEADING.has(rend) || (rend === 'centre' && CENTRE_HEADING.test(text));
-    const seg = { type: heading ? 'heading' : 'prose', vri: n, text, eds };
+    const seg = { type: heading ? 'heading' : 'prose', vri: n, text, eds, start: i, end: i + 1 };
     if (includeVariants && notes.length) seg.variants = notes;
     out.push(seg);
   }
   flush();
   return out.map((s) => {
     const r = { type: s.type, text: s.text };
+    if (includeSourcePositions) r.source_blocks = [s.start, s.end];
     if (s.vri) r.vri_paragraph = s.vri;
     for (const [ed, key] of Object.entries(ED_KEYS)) {
       const list = s.eds.filter(([e]) => e === ed).map(([, p]) => p);
@@ -594,9 +596,11 @@ export async function search(query, { limit = 10, offset = 0, books, section } =
       if (total <= offset || hits.length >= limit) continue;
       const excerpt = searchExcerpt(passage.text, wanted[0], fold);
       const k = chapterAt(book, i);
+      const selection = select(citation);
+      const rendered = segmentsOf(book.blocks.slice(selection.start, selection.end), { includeSourcePositions: true });
       hits.push({ canonical: false, citation, book_id: book.id, book_title: book.title, vri_section: book.section,
         ...(k ? { chapter: book.chapters[k - 1][0] } : {}), ...(blocks[i][1] ? { match_vri_paragraph: blocks[i][1] } : {}),
-        excerpt });
+        excerpt, ...searchReading(rendered, { tool: 'get_post_canonical', citation }, i - selection.start, passage.end - selection.start, selection.citation) });
     }
   }
   return {

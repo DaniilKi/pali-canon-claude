@@ -1,4 +1,4 @@
-import { searchSegments, searchFold, searchExcerpt, searchTerms } from './search-segments.mjs';
+import { searchSegments, searchFold, searchExcerpt, searchTerms, searchReading } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * The bundled Pāli Canon: VRI Chaṭṭha Saṅgāyana text, standard citation IDs aligned to it,
@@ -305,7 +305,7 @@ function bookBlocks(u) {
 }
 
 /** Group a unit's VRI blocks into readable segments: headings, prose paragraphs and whole stanzas. */
-export function segments(u, { includeNotes = false } = {}) {
+export function segments(u, { includeNotes = false, includeSourcePositions = false } = {}) {
   const blocks = bookBlocks(u).slice(u.start, u.end);
   const out = [];
   let stanza = null;
@@ -319,15 +319,16 @@ export function segments(u, { includeNotes = false } = {}) {
     for (const ed of Object.keys(EDITIONS)) for (const at of pages[ed] || []) labels.push([ed, editionLabel(d, ed, u.book, at)]);
     return labels;
   };
-  for (const [rend, n, text, notes, pages] of blocks) {
+  for (const [i, [rend, n, text, notes, pages]] of blocks.entries()) {
     const pts = (pages.P || []).map((p) => {
       const [vol, page] = p.split('.').map(Number);
       return ptsLabel(u.collection, vol, page);
     });
     const eds = editionLabels(pages);
-    if (rend === 'hangnum') { flush(); stanza = { type: 'verse', vri: n, text: '', pts: [], eds }; continue; }
+    if (rend === 'hangnum') { flush(); stanza = { type: 'verse', vri: n, text: '', pts: [], eds, start: i, end: i + 1 }; continue; }
     if (VERSE.has(rend)) {
-      if (!stanza) stanza = { type: 'verse', vri: n, text: '', pts: [], eds: [] };
+      if (!stanza) stanza = { type: 'verse', vri: n, text: '', pts: [], eds: [], start: i, end: i + 1 };
+      stanza.end = i + 1;
       stanza.text += (stanza.text ? '\n' : '') + text;
       stanza.pts.push(...pts);
       stanza.eds.push(...eds);
@@ -338,13 +339,14 @@ export function segments(u, { includeNotes = false } = {}) {
     flush();
     if (!text) { pending = eds; continue; }
     const isHeading = HEADING.has(rend) || (rend === 'centre' && CENTRE_HEADING.test(text));
-    const seg = { type: isHeading ? 'heading' : 'prose', vri: n, text, pts, eds };
+    const seg = { type: isHeading ? 'heading' : 'prose', vri: n, text, pts, eds, start: i, end: i + 1 };
     if (includeNotes && notes.length) seg.variants = notes;
     out.push(seg);
   }
   flush();
   return out.map((s, i) => {
     const r = { ref: `${u.id}/${i + 1}`, type: s.type, text: s.text };
+    if (includeSourcePositions) r.source_blocks = [u.start + s.start, u.start + s.end];
     if (s.vri) r.vri_paragraph = s.vri;
     if (s.pts?.length) r.pts_page_begins = [...new Set(s.pts.filter(Boolean))];
     for (const [ed, meta] of Object.entries(EDITIONS)) {
@@ -480,7 +482,7 @@ export function search(query, { collection, limit = 10, offset = 0, groups } = {
   const has = (text) => wanted.every((alts) => alts.some((w) => text.includes(w)));
   const titlePool = direct ? [searchTitle(d, direct)] : s.titles;
   const matchingTitles = titlePool.filter(({ u, text }) => okCollection(u) && has(text));
-  const titleHits = matchingTitles.slice(offset, offset + limit).map(({ u }) => unitSummary(u));
+  const titleHits = matchingTitles.slice(offset, offset + limit).map(({ u }) => ({ ...unitSummary(u), read_with: { tool: 'get_text', uid: u.id } }));
   const hits = [];
   const seen = new Set();
   let total = 0;
@@ -497,7 +499,7 @@ export function search(query, { collection, limit = 10, offset = 0, groups } = {
       if (total <= offset || hits.length >= limit) continue;
       const excerpt = searchExcerpt(passage.text, wanted[0].find((w) => text.includes(w)), fold);
       hits.push({ ...unitSummary(u), match_vri_paragraph: d.canon.books[bi].blocks[k][1] || undefined,
-        excerpt });
+        excerpt, ...searchReading(segments(u, { includeSourcePositions: true }), { tool: 'get_text', uid: u.id }, passage.start, passage.end, u.id) });
     }
   }
   return {

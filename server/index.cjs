@@ -21593,6 +21593,15 @@ function searchTerms(query, fold8) {
   return [...phrases, ...words3];
 }
 var hasSearchQuotes = (query) => /["“”]/u.test(query);
+function searchReading(rendered, command, start, end, prefix) {
+  const index3 = rendered.findIndex((s) => s.source_blocks[0] <= start && s.source_blocks[1] >= end);
+  if (index3 < 0) throw new Error("Search passage has no containing source reading segment.");
+  return {
+    segment_ref: `${prefix}/${index3 + 1}`,
+    read_with: { ...command, offset: index3, limit: 1 },
+    context_with: { ...command, offset: Math.max(0, index3 - 1), limit: 3 }
+  };
+}
 function searchSegments(blocks, owner = () => null) {
   const out = [];
   let stanza = null;
@@ -22573,7 +22582,7 @@ function resolve(reference) {
 function bookBlocks(u) {
   return load().canon.books[u.book].blocks;
 }
-function segments(u, { includeNotes = false } = {}) {
+function segments(u, { includeNotes = false, includeSourcePositions = false } = {}) {
   const blocks = bookBlocks(u).slice(u.start, u.end);
   const out = [];
   let stanza = null;
@@ -22591,7 +22600,7 @@ function segments(u, { includeNotes = false } = {}) {
     for (const ed of Object.keys(EDITIONS)) for (const at of pages[ed] || []) labels.push([ed, editionLabel(d, ed, u.book, at)]);
     return labels;
   };
-  for (const [rend, n, text, notes, pages] of blocks) {
+  for (const [i, [rend, n, text, notes, pages]] of blocks.entries()) {
     const pts = (pages.P || []).map((p) => {
       const [vol, page] = p.split(".").map(Number);
       return ptsLabel(u.collection, vol, page);
@@ -22599,11 +22608,12 @@ function segments(u, { includeNotes = false } = {}) {
     const eds = editionLabels(pages);
     if (rend === "hangnum") {
       flush();
-      stanza = { type: "verse", vri: n, text: "", pts: [], eds };
+      stanza = { type: "verse", vri: n, text: "", pts: [], eds, start: i, end: i + 1 };
       continue;
     }
     if (VERSE2.has(rend)) {
-      if (!stanza) stanza = { type: "verse", vri: n, text: "", pts: [], eds: [] };
+      if (!stanza) stanza = { type: "verse", vri: n, text: "", pts: [], eds: [], start: i, end: i + 1 };
+      stanza.end = i + 1;
       stanza.text += (stanza.text ? "\n" : "") + text;
       stanza.pts.push(...pts);
       stanza.eds.push(...eds);
@@ -22617,13 +22627,14 @@ function segments(u, { includeNotes = false } = {}) {
       continue;
     }
     const isHeading = HEADING.has(rend) || rend === "centre" && CENTRE_HEADING.test(text);
-    const seg = { type: isHeading ? "heading" : "prose", vri: n, text, pts, eds };
+    const seg = { type: isHeading ? "heading" : "prose", vri: n, text, pts, eds, start: i, end: i + 1 };
     if (includeNotes && notes.length) seg.variants = notes;
     out.push(seg);
   }
   flush();
   return out.map((s, i) => {
     const r = { ref: `${u.id}/${i + 1}`, type: s.type, text: s.text };
+    if (includeSourcePositions) r.source_blocks = [u.start + s.start, u.start + s.end];
     if (s.vri) r.vri_paragraph = s.vri;
     if (s.pts?.length) r.pts_page_begins = [...new Set(s.pts.filter(Boolean))];
     for (const [ed, meta] of Object.entries(EDITIONS)) {
@@ -22740,7 +22751,7 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const has = (text) => wanted.every((alts) => alts.some((w) => text.includes(w)));
   const titlePool = direct ? [searchTitle(d, direct)] : s.titles;
   const matchingTitles = titlePool.filter(({ u, text }) => okCollection(u) && has(text));
-  const titleHits = matchingTitles.slice(offset, offset + limit).map(({ u }) => unitSummary(u));
+  const titleHits = matchingTitles.slice(offset, offset + limit).map(({ u }) => ({ ...unitSummary(u), read_with: { tool: "get_text", uid: u.id } }));
   const hits = [];
   const seen = /* @__PURE__ */ new Set();
   let total = 0;
@@ -22759,7 +22770,8 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
       hits.push({
         ...unitSummary(u),
         match_vri_paragraph: d.canon.books[bi].blocks[k][1] || void 0,
-        excerpt
+        excerpt,
+        ...searchReading(segments(u, { includeSourcePositions: true }), { tool: "get_text", uid: u.id }, passage.start, passage.end, u.id)
       });
     }
   }
@@ -29933,7 +29945,7 @@ function bookInfo2(book) {
   return { id: book.id, title: book.title, vri_file: book.file, vri_section: book.section, vri_group: book.group, canonical: false };
 }
 var labelFor = (sel) => WORK_LABELS[sel.work] ? `${WORK_LABELS[sel.work]} ${LABELS[sel.book.section]}` : LABELS[sel.book.section];
-function segmentsOf(blocks, { includeVariants = false } = {}) {
+function segmentsOf(blocks, { includeVariants = false, includeSourcePositions = false } = {}) {
   const out = [];
   let stanza = null;
   let pending = [];
@@ -29943,16 +29955,17 @@ function segmentsOf(blocks, { includeVariants = false } = {}) {
       stanza = null;
     }
   };
-  for (const [rend, n, text, notes = [], pages = {}] of blocks) {
+  for (const [i, [rend, n, text, notes = [], pages = {}]] of blocks.entries()) {
     const eds = [...pending, ...Object.entries(pages).flatMap(([ed, list]) => list.map((p) => [ed, p.replace(/\.0*(\d)/, ".$1")]))];
     pending = [];
     if (rend === "hangnum") {
       flush();
-      stanza = { type: "verse", vri: n, text: "", eds };
+      stanza = { type: "verse", vri: n, text: "", eds, start: i, end: i + 1 };
       continue;
     }
     if (VERSE4.has(rend)) {
-      stanza ||= { type: "verse", vri: n, text: "", eds: [] };
+      stanza ||= { type: "verse", vri: n, text: "", eds: [], start: i, end: i + 1 };
+      stanza.end = i + 1;
       stanza.text += (stanza.text ? "\n" : "") + text;
       stanza.eds.push(...eds);
       if (includeVariants && notes.length) (stanza.variants ||= []).push(...notes);
@@ -29965,13 +29978,14 @@ function segmentsOf(blocks, { includeVariants = false } = {}) {
       continue;
     }
     const heading = HEADING3.has(rend) || rend === "centre" && CENTRE_HEADING3.test(text);
-    const seg = { type: heading ? "heading" : "prose", vri: n, text, eds };
+    const seg = { type: heading ? "heading" : "prose", vri: n, text, eds, start: i, end: i + 1 };
     if (includeVariants && notes.length) seg.variants = notes;
     out.push(seg);
   }
   flush();
   return out.map((s) => {
     const r = { type: s.type, text: s.text };
+    if (includeSourcePositions) r.source_blocks = [s.start, s.end];
     if (s.vri) r.vri_paragraph = s.vri;
     for (const [ed, key3] of Object.entries(ED_KEYS)) {
       const list = s.eds.filter(([e]) => e === ed).map(([, p]) => p);
@@ -30137,6 +30151,8 @@ async function search2(query, { limit = 10, offset = 0, books, section } = {}) {
       if (total <= offset || hits.length >= limit) continue;
       const excerpt = searchExcerpt(passage.text, wanted[0], fold6);
       const k = chapterAt(book, i);
+      const selection = select(citation);
+      const rendered = segmentsOf(book.blocks.slice(selection.start, selection.end), { includeSourcePositions: true });
       hits.push({
         canonical: false,
         citation,
@@ -30145,7 +30161,8 @@ async function search2(query, { limit = 10, offset = 0, books, section } = {}) {
         vri_section: book.section,
         ...k ? { chapter: book.chapters[k - 1][0] } : {},
         ...blocks[i][1] ? { match_vri_paragraph: blocks[i][1] } : {},
-        excerpt
+        excerpt,
+        ...searchReading(rendered, { tool: "get_post_canonical", citation }, i - selection.start, passage.end - selection.start, selection.citation)
       });
     }
   }

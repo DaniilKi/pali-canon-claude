@@ -16,6 +16,15 @@ export function searchTerms(query, fold) {
 // Even an unmatched quote must not silently opt into loose spelling/keyword retries.
 export const hasSearchQuotes = (query) => /["“”]/u.test(query);
 
+/** Map a search passage to the reader's actual source bounds, never by repeated paragraph numbers/text. */
+export function searchReading(rendered, command, start, end, prefix) {
+  const index = rendered.findIndex((s) => s.source_blocks[0] <= start && s.source_blocks[1] >= end);
+  if (index < 0) throw new Error('Search passage has no containing source reading segment.');
+  return { segment_ref: `${prefix}/${index + 1}`,
+    read_with: { ...command, offset: index, limit: 1 },
+    context_with: { ...command, offset: Math.max(0, index - 1), limit: 3 } };
+}
+
 
 export function searchSegments(blocks, owner = () => null) {
   const out = [];
