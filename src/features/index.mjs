@@ -20,3 +20,4 @@ export * as analyse from '../analyse.mjs';
 export * as parallels from '../parallels.mjs';
 export * as glossary from '../glossary.mjs';
 export * as commentarySearch from '../commentary-search.mjs';
+export * as sourceBookSearch from '../source-book-search.mjs';

@@ -57,12 +57,12 @@ Claude quotes only what it retrieved, names the translator, and keeps four thing
 
 ## What you can ask it
 
-Pali Canon gives the AI **33 tools**, 4 prompts, 3 reference resources and 5 skills. You do not need to know their names: ask in your own words and the AI picks the right tool. The tool names are shown in `code` for anyone who wants to check. Everything works offline unless marked *(internet)*.
+Pali Canon gives the AI **34 tools**, 4 prompts, 3 reference resources and 5 skills. You do not need to know their names: ask in your own words and the AI picks the right tool. The tool names are shown in `code` for anyone who wants to check. Everything works offline unless marked *(internet)*.
 
 ### Study
 
 - **Find and read any text.** Give a citation, a PTS page or a link and get the Pāli with its references (`resolve_reference`, `get_metadata`, `get_text`). Browse the canon book by book (`browse_canon`) or search the whole Pāli text (`search_texts`).
-- **Read a complete source book.** `browse_canon` with `node: "books"` lists all 61 VRI root files. Read one with `get_text` using its `book` ID, including headings, invocations and introductory lines that sit outside individual citations. Use the returned `next_offset` to continue. [Reading and citation details](docs/citations.md#complete-vri-source-books).
+- **Read a complete source book.** `browse_canon` with `node: "books"` lists all 61 VRI root files. Read one with `get_text` using its `book` ID, including headings, invocations and introductory lines that sit outside individual citations. Use the returned `next_offset` to continue. Search the entire file, including passages outside individual citation spans, with `search_source_book`; its hits include exact reading commands. [Reading and citation details](docs/citations.md#complete-vri-source-books).
 - **Read the Pāli in your own script.** Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao or Lanna (Tai Tham), transliterated from the VRI edition; you can also type citations and search words in those scripts (`script` on `get_text`, `search_texts` and `resolve_reference`). Lao and Lanna have no VRI script edition to test against yet.
 - **Cite the Thai, Myanmar or VRI printed edition.** "Thai MN 1.103", "Myanmar Dhp 15" or "VRI SN 1.20 (Nidānavaggo)" finds the text on that page, and `get_text` marks where each edition's pages begin. See [citation formats](docs/citations.md).
 - **See where the printed editions differ.** VRI's variant notes, split into readings with the editions (Sinhala, Thai, PTS and others) that carry them (`get_text` with `variants: "structured"`).
@@ -162,7 +162,7 @@ Model-level runs, where Claude or Codex answers the questions with the server co
 
 ## Install
 
-Pick the app you use. Every option runs the same server, with the same 33 tools.
+Pick the app you use. Every option runs the same server, with the same 34 tools.
 
 ### Claude Desktop (easiest)
 
