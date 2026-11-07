@@ -200,7 +200,7 @@ export function createServer() {
 
   tool('search_texts', 'Search the full Pāli text of the Tipiṭaka (diacritics optional; all words must appear; "quoted phrases" allowed), text titles, and English translation titles. Title matches have total_title_matches and title_next_offset; use offset and limit to page them. next_offset continues Pāli-body results independently. Works offline. Pāli typed on an English keyboard (samyutta, sanyutta, Velthuis sa.myutta, Harvard-Kyoto saMyutta) is understood and labelled; an English query (e.g. "mindfulness of breathing") is expanded into Pāli terms from the glossary, labelled expanded_from_english. The query may be written in any supported script; set script for titles and excerpts in that script.', {
     query: z.string().trim().min(1).max(300),
-    collection: z.string().max(30).optional().describe('Limit to a collection or section, e.g. mn, sn, sn56, an4, dhp, vinaya.'),
+    collection: z.string().max(30).optional().describe('Limit to a collection/section (mn, sn56, an4, vinaya) or individual ID (sn12.21). An individual ID searches its supplied get_text source span with any alignment caution; a phrase match does not verify that mapping.'),
     limit: z.number().int().min(1).max(50).default(10),
     offset: z.number().int().min(0).max(100000).default(0),
     script: scriptParam,

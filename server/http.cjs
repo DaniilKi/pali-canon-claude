@@ -24821,21 +24821,26 @@ function groupedScope(d, key3, requested) {
     }
   };
 }
+function searchTitle(d, u) {
+  const english2 = (d.translations[u.id] || []).map((t) => `${t.reference || ""} ${t.english || ""}`).join(" ");
+  return { u, text: fold3(`${u.acronym} ${u.title} ${english2}`) };
+}
 function buildSearch() {
   const d = load();
   const owner = d.canon.books.map((b) => new Array(b.blocks.length).fill(null));
   const sorted = [...d.canon.units].filter((u) => !u.approximate).sort((a, b) => (b.kind === "range") - (a.kind === "range") || b.end - b.start - (a.end - a.start));
   for (const u of sorted) for (let i = u.start; i < u.end; i += 1) owner[u.book][i] = u;
   const passages = d.canon.books.map((book, bi) => searchSegments(book.blocks, (i) => owner[bi][i]).map((segment) => ({ ...segment, folded: searchFold(segment.text, fold3) })));
-  const titles = d.canon.units.filter((u) => !u.approximate).map((u) => {
-    const english2 = (d.translations[u.id] || []).map((t) => `${t.reference || ""} ${t.english || ""}`).join(" ");
-    return { u, text: fold3(`${u.acronym} ${u.title} ${english2}`) };
-  });
+  const titles = d.canon.units.filter((u) => !u.approximate).map((u) => searchTitle(d, u));
   let folded;
   d.search = { owner, passages, titles, get folded() {
     return folded ||= d.canon.books.map((book) => book.blocks.map((block) => fold3(block[2])));
   } };
   return d.search;
+}
+function requestedSpan(unit) {
+  const passages = searchSegments(bookBlocks(unit).slice(unit.start, unit.end)).map((p) => ({ ...p, start: p.start + unit.start, end: p.end + unit.start, folded: searchFold(p.text, fold3) }));
+  return { book: unit.book, passages };
 }
 function terms(query) {
   return searchTerms(query, fold3);
@@ -24846,24 +24851,28 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const resolved = groupedScope(d, filter, collection);
   const okCollection = scopePredicate(d, resolved?.unit.id || filter);
   const scopeAlignment = alignmentInfo(d.byId.get(resolved?.unit.id || filter));
+  const selected = d.byId.get(filter);
+  const direct = selected && selected.kind !== "range" && !selected.members?.length && !d.ranges.some((r) => r.unit === selected) ? selected : null;
   if (collection && (!filter || !d.canon.units.some(okCollection))) {
     throw new Error(`Unknown canonical search scope "${collection}". Use browse_canon to list collection and section IDs.`);
   }
-  const s = d.search || buildSearch();
+  const s = direct ? null : d.search || buildSearch();
   const wanted = groups?.length ? groups.map((g) => g.map((w) => searchFold(w, fold3))) : terms(query).map((w) => [w]);
   if (!wanted.length) throw new Error("Search needs at least one word of two or more letters.");
   const has = (text) => wanted.every((alts) => alts.some((w) => text.includes(w)));
-  const matchingTitles = s.titles.filter(({ u, text }) => okCollection(u) && has(text));
+  const titlePool = direct ? [searchTitle(d, direct)] : s.titles;
+  const matchingTitles = titlePool.filter(({ u, text }) => okCollection(u) && has(text));
   const titleHits = matchingTitles.slice(offset, offset + limit).map(({ u }) => unitSummary(u));
   const hits = [];
   const seen = /* @__PURE__ */ new Set();
   let total = 0;
-  for (let bi = 0; bi < s.passages.length; bi += 1) {
-    for (const passage of s.passages[bi]) {
+  const sources = direct ? [requestedSpan(direct)] : s.passages.map((passages, book) => ({ book, passages }));
+  for (const { book: bi, passages } of sources) {
+    for (const passage of passages) {
       const k = passage.start;
       const text = passage.folded;
       if (!has(text)) continue;
-      const u = s.owner[bi][k];
+      const u = direct || s.owner[bi][k];
       if (!u || !okCollection(u) || seen.has(u.id)) continue;
       seen.add(u.id);
       total += 1;
@@ -24881,6 +24890,11 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
     searched: "Full P\u0101li text of the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition (diacritics optional), text titles and English translation titles.",
     ...resolved ? { scope_resolution: resolved.metadata } : {},
     ...scopeAlignment ? { scope_alignment: scopeAlignment } : {},
+    ...direct ? { scope_source_span: {
+      text_id: direct.id,
+      approximate: !!direct.approximate,
+      note: "Search checks only the source span currently supplied by get_text for this identity. A phrase match does not verify the citation mapping; retain any alignment caution."
+    } } : {},
     title_matches: titleHits,
     total_title_matches: matchingTitles.length,
     title_next_offset: limit > 0 && offset + limit < matchingTitles.length ? offset + limit : null,
@@ -33410,7 +33424,7 @@ function createServer2() {
   }, { network: true });
   tool("search_texts", 'Search the full P\u0101li text of the Tipi\u1E6Daka (diacritics optional; all words must appear; "quoted phrases" allowed), text titles, and English translation titles. Title matches have total_title_matches and title_next_offset; use offset and limit to page them. next_offset continues P\u0101li-body results independently. Works offline. P\u0101li typed on an English keyboard (samyutta, sanyutta, Velthuis sa.myutta, Harvard-Kyoto saMyutta) is understood and labelled; an English query (e.g. "mindfulness of breathing") is expanded into P\u0101li terms from the glossary, labelled expanded_from_english. The query may be written in any supported script; set script for titles and excerpts in that script.', {
     query: external_exports.string().trim().min(1).max(300),
-    collection: external_exports.string().max(30).optional().describe("Limit to a collection or section, e.g. mn, sn, sn56, an4, dhp, vinaya."),
+    collection: external_exports.string().max(30).optional().describe("Limit to a collection/section (mn, sn56, an4, vinaya) or individual ID (sn12.21). An individual ID searches its supplied get_text source span with any alignment caution; a phrase match does not verify that mapping."),
     limit: external_exports.number().int().min(1).max(50).default(10),
     offset: external_exports.number().int().min(0).max(1e5).default(0),
     script: scriptParam,
