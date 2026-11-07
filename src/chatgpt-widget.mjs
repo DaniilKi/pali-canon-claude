@@ -259,7 +259,7 @@ export function registerChatgptWidget(server) {
       source_commit: z.string().regex(/^[a-f0-9]{40}$/).optional().describe('Expected VRI source commit from a returned cursor; a changed source fails instead of moving the reading to another version.'),
       anchor_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Expected exact source-segment fingerprint from pali.context_with/exact_with. Preserve the command unchanged; a changed segment fails rather than substituting context.'),
       script: z.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
-      translation: z.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or a translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
+      translation: z.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or an unambiguous translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
       english: z.boolean().default(true).describe('Fetch an English translation (live). false shows the Pāli only.'),
       offset: z.number().int().min(0).max(100000).default(0).describe('Pāli segment offset for continuation.'),
       limit: z.number().int().min(1).max(80).default(40).describe('Pāli segments to show.'),

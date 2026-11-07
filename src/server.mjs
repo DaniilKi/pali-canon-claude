@@ -120,7 +120,7 @@ export function createServer() {
     limit: z.number().int().min(1).max(200).default(60).describe('Segments per page.'),
     includeVariants: z.boolean().default(false).describe('Include variant readings recorded by VRI.'),
     variants: z.enum(variantsMod.VARIANT_MODES).optional().describe('Variant readings recorded by VRI: "raw" = the notes verbatim (same as includeVariants: true); "structured" = each note split into readings with the editions (sigla) that carry them, plus omissions ("( ) natthi": the passage in parentheses is absent from those editions), note kept verbatim; "none". Overrides includeVariants.'),
-    translation: z.string().trim().min(1).max(200).optional().describe('"default" for the preferred English translation, a translation_id, a translator name, or omit for Pāli only. A supplied empty selector is an error.'),
+    translation: z.string().trim().min(1).max(200).optional().describe('"default" for the preferred English translation, a translation_id, an unambiguous translator name, or omit for Pāli only. A supplied empty selector is an error.'),
     script: scriptParam,
     commentary: z.boolean().default(false).describe('Add the traditional commentary (Aṭṭhakathā) on this text, labelled as commentary, not canon.'),
   }, async ({ uid, book, offset, limit, includeVariants, variants, translation, script, commentary }) => {
@@ -163,7 +163,7 @@ export function createServer() {
 
   tool('get_translation', 'Read an English translation of a text (Ṭhānissaro Bhikkhu on dhammatalks.org, Access to Insight translators, or Ānandajoti Bhikkhu on Ancient Buddhist Texts), with attribution, license and numbering notes. Falls back to official mirrors if a site is down.', {
     uid: citation,
-    translation: z.string().trim().min(1).max(200).optional().describe('At offset 0: translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), a translator name, or omit for the default. For continuation, use the exact translation_id returned by the previous page.'),
+    translation: z.string().trim().min(1).max(200).optional().describe('At offset 0: translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), an unambiguous translator name, or omit for the default. For continuation, use the exact translation_id returned by the previous page.'),
     offset: z.number().int().min(0).max(2000000).default(0).describe('Character offset. For nonzero offsets use the previous result\'s continue_with arguments, including its exact translation_id; offsets cannot transfer between translation versions.'),
     limit: z.number().int().min(500).max(30000).default(12000).describe('Characters per page.'),
     prefix_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Unchanged prefix hash from continue_with. Checks the previously traversed text before applying a character offset; edits require restarting at offset 0.'),
@@ -175,7 +175,7 @@ export function createServer() {
 
   tool('compare_translations', 'Fetch two to four English translations of the same text side by side, with the Pāli opening for reference. Lists what is available when fewer exist.', {
     uid: citation,
-    translations: z.array(z.string().trim().min(1).max(200)).max(4).optional().describe('translation_ids or translator names; omit to compare all available (up to 4).'),
+    translations: z.array(z.string().trim().min(1).max(200)).max(4).optional().describe('translation_ids or unambiguous translator names; omit to compare all available (up to 4).'),
     limit: z.number().int().min(500).max(15000).default(6000).describe('Characters per translation.'),
   }, async ({ uid, translations, limit }) => {
     const input = romanizeInput(uid);

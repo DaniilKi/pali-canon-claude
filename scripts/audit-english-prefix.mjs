@@ -30,6 +30,18 @@ try {
    });await client.connect(new StreamableHTTPClientTransport(new URL(url)));
   }
   const read=async call=>{const r=await client.callTool(call);assert.ok(!r.isError,JSON.stringify(r.content));return r.structuredContent;};
+  // Ambiguity must be resolved before provider access; otherwise these calls also disturb
+  // the deterministic provider-edit sequence exercised by the continuation checks below.
+  const ambiguous=await client.callTool({name:'get_translation',arguments:{uid:'Dhp 1',translation:'Bhikkhu'}});
+  assert.equal(ambiguous.isError,true);assert.match(JSON.parse(ambiguous.content[0].text).error,/Ambiguous translation selector/);
+  const ambiguousAttached=await read({name:'get_text',arguments:{uid:'Dhp 1',translation:'Bhikkhu',limit:1}});
+  assert.match(ambiguousAttached.english_error,/Ambiguous/);assert.ok(ambiguousAttached.segments.length);
+  const ambiguousCompared=await read({name:'compare_translations',arguments:{uid:'Dhp 1',translations:['Bhikkhu'],limit:500}});
+  assert.match(ambiguousCompared.editions[0].error,/Ambiguous/);
+  if(mode==='http'){
+   const widget=await read({name:'read_passage_widget',arguments:{uid:'Dhp 1',translation:'Bhikkhu',limit:1}});
+   assert.equal(widget.english,null);assert.match(widget.english_error,/Ambiguous/);assert.ok(widget.pali.segments.length);
+  }
   const name=mode==='stdio'?'get_translation':'read_passage_widget';
   const first=await read({name,arguments:{uid:'MN 10',limit:mode==='stdio'?500:1}});
   const a=mode==='stdio'?first:first.english;assert.match(a.continue_with.arguments[mode==='stdio'?'prefix_sha256':'english_prefix_sha256'],/^[a-f0-9]{64}$/);
@@ -42,8 +54,10 @@ try {
   assert.match(attached.english.continue_with.arguments.prefix_sha256,/^[a-f0-9]{64}$/);await read(attached.english.continue_with);
   const compared=await read({name:'compare_translations',arguments:{uid:'MN 10',translations:['Thanissaro'],limit:500}});
   assert.match(compared.editions[0].continue_with.arguments.prefix_sha256,/^[a-f0-9]{64}$/);await read(compared.editions[0].continue_with);
+  const named=await read({name:'get_translation',arguments:{uid:'MN 10',translation:'Thanissaro',limit:500}});
+  assert.equal(named.translator,'Ṭhānissaro Bhikkhu');assert.ok(named.notes.some(note=>note.includes('selected '+named.translation_id)));
   assert.doesNotMatch(stderr,/UNEXPECTED_NETWORK_ATTEMPT/);
-  reports.push({transport:mode,cases:7,stable_continuation:true,changed_prefix_refused:true,attached_and_compared_commands:true,network_attempts:0});
+  reports.push({transport:mode,cases:mode==='stdio'?11:12,translator_selection:true,stable_continuation:true,changed_prefix_refused:true,attached_and_compared_commands:true,network_attempts:0});
   await client.close();client=null;
   if(child&&child.exitCode===null&&child.signalCode===null){const ended=new Promise(r=>child.once('exit',r));child.kill();await ended;}child=null;
  }

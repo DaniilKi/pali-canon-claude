@@ -127,7 +127,22 @@ export function available(unit) {
   }));
 }
 
-/** Fetch one translation of a text. `which` is a translation_id, a translator name fragment, or omitted for the default. */
+const translatorKey = value => String(value || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+
+/** Select only from supplied link metadata; never infer which of several translators was intended. */
+export function selectTranslation(links, which, citation) {
+  if (!which) return { link: links.find(link => link.source === 'dhammatalks') || links[0], matchingVersions: [] };
+  if (/^(ati|dt|aj):/.test(which)) return { link: links.find(link => translationId(link) === which), matchingVersions: [] };
+  const wanted = translatorKey(which);
+  const exact = links.filter(link => translatorKey(link.translator) === wanted);
+  const matches = exact.length ? exact : links.filter(link => translatorKey(link.translator).includes(wanted) || link.source.includes(wanted));
+  if (new Set(matches.map(link => translatorKey(link.translator))).size > 1) {
+    throw new Error(`Ambiguous translation selector "${which}" for ${citation}: it matches different translators. Use an exact translation_id: ${matches.map(link => `${translationId(link)} (${link.translator})`).join(', ')}.`);
+  }
+  return { link: matches[0], matchingVersions: matches };
+}
+
+/** Fetch one translation of a text. `which` is a translation_id, an unambiguous translator name fragment, or omitted for the default. */
 export async function translation(unit, which, { offset = 0, limit = 12000, prefix_sha256: expectedPrefix } = {}) {
   if (which !== undefined) {
     if (typeof which !== 'string' || !which.trim()) throw new Error('Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.');
@@ -141,17 +156,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
   if (!links.length) {
     throw new Error(`No English translation is linked for ${unit.acronym}. Read the Pāli with get_text, or see https://suttacentral.net/${unit.id} for other translations.`);
   }
-  let link;
-  if (!which) {
-    link = links.find((l) => l.source === 'dhammatalks') || links[0];
-  } else if (/^(ati|dt|aj):/.test(which)) {
-    link = links.find((l) => translationId(l) === which);
-  } else {
-    // Translator names match with or without diacritics ("Anandajoti" finds "Ānandajoti Bhikkhu").
-    const plain = (v) => String(v || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
-    const w = plain(which);
-    link = links.find((l) => plain(l.translator).includes(w) || l.source.includes(w));
-  }
+  let { link, matchingVersions } = selectTranslation(links, which, unit.acronym);
   if (!link) throw new Error(`Translation "${which}" is not linked for ${unit.acronym}. Available: ${available(unit).map((a) => `${a.translation_id} (${a.translator})`).join(', ')}.`);
   let result;
   const notes = via ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
@@ -174,6 +179,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
     notes.push(`dhammatalks.org could not be reached (${error.message}); showing Ṭhānissaro Bhikkhu's earlier version from Access to Insight instead.`);
     link = sameTranslator;
   }
+  if (matchingVersions.length > 1) notes.push(`Several linked versions match "${which}"; selected ${translationId(link)} (${sourceName(link)}). To choose a different version, use its exact translation_id: ${matchingVersions.map(version => translationId(version)).join(', ')}.`);
   if (link.source === 'anandajoti') {
     notes.push('A line-by-line edition: each Pāli line is followed by its English translation. [Note: …] marks are the translator\'s notes, not scripture.');
     if (link.commentary) notes.push('This page also translates the commentary (Aṭṭhakathā); those passages are marked "[Commentary (Aṭṭhakathā) begins]" and are commentary, not the canonical text.');

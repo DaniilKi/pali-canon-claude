@@ -24975,6 +24975,7 @@ __export(english_exports, {
   atiMirrors: () => atiMirrors,
   atiNotice: () => atiNotice,
   available: () => available,
+  selectTranslation: () => selectTranslation,
   translation: () => translation
 });
 
@@ -25349,6 +25350,18 @@ function available(unit) {
     ...t.commentary ? { includes_commentary: true } : {}
   }));
 }
+var translatorKey = (value) => String(value || "").normalize("NFD").replace(new RegExp("\\p{M}", "gu"), "").toLowerCase();
+function selectTranslation(links, which, citation) {
+  if (!which) return { link: links.find((link) => link.source === "dhammatalks") || links[0], matchingVersions: [] };
+  if (/^(ati|dt|aj):/.test(which)) return { link: links.find((link) => translationId(link) === which), matchingVersions: [] };
+  const wanted = translatorKey(which);
+  const exact = links.filter((link) => translatorKey(link.translator) === wanted);
+  const matches = exact.length ? exact : links.filter((link) => translatorKey(link.translator).includes(wanted) || link.source.includes(wanted));
+  if (new Set(matches.map((link) => translatorKey(link.translator))).size > 1) {
+    throw new Error(`Ambiguous translation selector "${which}" for ${citation}: it matches different translators. Use an exact translation_id: ${matches.map((link) => `${translationId(link)} (${link.translator})`).join(", ")}.`);
+  }
+  return { link: matches[0], matchingVersions: matches };
+}
 async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha256: expectedPrefix } = {}) {
   if (which !== void 0) {
     if (typeof which !== "string" || !which.trim()) throw new Error("Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.");
@@ -25362,16 +25375,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
   if (!links.length) {
     throw new Error(`No English translation is linked for ${unit.acronym}. Read the P\u0101li with get_text, or see https://suttacentral.net/${unit.id} for other translations.`);
   }
-  let link;
-  if (!which) {
-    link = links.find((l) => l.source === "dhammatalks") || links[0];
-  } else if (/^(ati|dt|aj):/.test(which)) {
-    link = links.find((l) => translationId(l) === which);
-  } else {
-    const plain = (v) => String(v || "").normalize("NFD").replace(new RegExp("\\p{M}", "gu"), "").toLowerCase();
-    const w = plain(which);
-    link = links.find((l) => plain(l.translator).includes(w) || l.source.includes(w));
-  }
+  let { link, matchingVersions } = selectTranslation(links, which, unit.acronym);
   if (!link) throw new Error(`Translation "${which}" is not linked for ${unit.acronym}. Available: ${available(unit).map((a) => `${a.translation_id} (${a.translator})`).join(", ")}.`);
   let result;
   const notes = via ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
@@ -25390,6 +25394,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
     notes.push(`dhammatalks.org could not be reached (${error2.message}); showing \u1E6Ch\u0101nissaro Bhikkhu's earlier version from Access to Insight instead.`);
     link = sameTranslator;
   }
+  if (matchingVersions.length > 1) notes.push(`Several linked versions match "${which}"; selected ${translationId(link)} (${sourceName(link)}). To choose a different version, use its exact translation_id: ${matchingVersions.map((version2) => translationId(version2)).join(", ")}.`);
   if (link.source === "anandajoti") {
     notes.push("A line-by-line edition: each P\u0101li line is followed by its English translation. [Note: \u2026] marks are the translator's notes, not scripture.");
     if (link.commentary) notes.push('This page also translates the commentary (A\u1E6D\u1E6Dhakath\u0101); those passages are marked "[Commentary (A\u1E6D\u1E6Dhakath\u0101) begins]" and are commentary, not the canonical text.');
@@ -33605,7 +33610,7 @@ function createServer2() {
     limit: external_exports.number().int().min(1).max(200).default(60).describe("Segments per page."),
     includeVariants: external_exports.boolean().default(false).describe("Include variant readings recorded by VRI."),
     variants: external_exports.enum(VARIANT_MODES).optional().describe('Variant readings recorded by VRI: "raw" = the notes verbatim (same as includeVariants: true); "structured" = each note split into readings with the editions (sigla) that carry them, plus omissions ("( ) natthi": the passage in parentheses is absent from those editions), note kept verbatim; "none". Overrides includeVariants.'),
-    translation: external_exports.string().trim().min(1).max(200).optional().describe('"default" for the preferred English translation, a translation_id, a translator name, or omit for P\u0101li only. A supplied empty selector is an error.'),
+    translation: external_exports.string().trim().min(1).max(200).optional().describe('"default" for the preferred English translation, a translation_id, an unambiguous translator name, or omit for P\u0101li only. A supplied empty selector is an error.'),
     script: scriptParam,
     commentary: external_exports.boolean().default(false).describe("Add the traditional commentary (A\u1E6D\u1E6Dhakath\u0101) on this text, labelled as commentary, not canon.")
   }, async ({ uid, book, offset, limit, includeVariants, variants, translation: translation2, script, commentary }) => {
@@ -33655,7 +33660,7 @@ function createServer2() {
   }, { network: true });
   tool("get_translation", "Read an English translation of a text (\u1E6Ch\u0101nissaro Bhikkhu on dhammatalks.org, Access to Insight translators, or \u0100nandajoti Bhikkhu on Ancient Buddhist Texts), with attribution, license and numbering notes. Falls back to official mirrors if a site is down.", {
     uid: citation,
-    translation: external_exports.string().trim().min(1).max(200).optional().describe('At offset 0: translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), a translator name, or omit for the default. For continuation, use the exact translation_id returned by the previous page.'),
+    translation: external_exports.string().trim().min(1).max(200).optional().describe('At offset 0: translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), an unambiguous translator name, or omit for the default. For continuation, use the exact translation_id returned by the previous page.'),
     offset: external_exports.number().int().min(0).max(2e6).default(0).describe("Character offset. For nonzero offsets use the previous result's continue_with arguments, including its exact translation_id; offsets cannot transfer between translation versions."),
     limit: external_exports.number().int().min(500).max(3e4).default(12e3).describe("Characters per page."),
     prefix_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Unchanged prefix hash from continue_with. Checks the previously traversed text before applying a character offset; edits require restarting at offset 0.")
@@ -33666,7 +33671,7 @@ function createServer2() {
   }, { network: true });
   tool("compare_translations", "Fetch two to four English translations of the same text side by side, with the P\u0101li opening for reference. Lists what is available when fewer exist.", {
     uid: citation,
-    translations: external_exports.array(external_exports.string().trim().min(1).max(200)).max(4).optional().describe("translation_ids or translator names; omit to compare all available (up to 4)."),
+    translations: external_exports.array(external_exports.string().trim().min(1).max(200)).max(4).optional().describe("translation_ids or unambiguous translator names; omit to compare all available (up to 4)."),
     limit: external_exports.number().int().min(500).max(15e3).default(6e3).describe("Characters per translation.")
   }, async ({ uid, translations, limit }) => {
     const input = romanizeInput(uid);
@@ -34088,7 +34093,7 @@ function registerChatgptWidget(server) {
       source_commit: external_exports.string().regex(/^[a-f0-9]{40}$/).optional().describe("Expected VRI source commit from a returned cursor; a changed source fails instead of moving the reading to another version."),
       anchor_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Expected exact source-segment fingerprint from pali.context_with/exact_with. Preserve the command unchanged; a changed segment fails rather than substituting context."),
       script: external_exports.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
-      translation: external_exports.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or a translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
+      translation: external_exports.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or an unambiguous translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
       english: external_exports.boolean().default(true).describe("Fetch an English translation (live). false shows the P\u0101li only."),
       offset: external_exports.number().int().min(0).max(1e5).default(0).describe("P\u0101li segment offset for continuation."),
       limit: external_exports.number().int().min(1).max(80).default(40).describe("P\u0101li segments to show."),
