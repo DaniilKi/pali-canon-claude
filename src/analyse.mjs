@@ -17,7 +17,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as canon from './canon.mjs';
 import { resolveReference } from './sutta-names.mjs';
-import { romanizeInput, inputNote } from './script.mjs';
+import { romanizeLookupInput, inputNote } from './script.mjs';
 import * as postcanonical from './postcanonical.mjs';
 import { readBook } from './source-books.mjs';
 
@@ -282,7 +282,7 @@ function selection(uid, book) {
       metadata: { selection: 'source_book', canonical: true, book_id: page.book_id, title: page.title,
         vri_file: page.vri_file, text_source: page.source } };
   }
-  const input = romanizeInput(uid);
+  const input = romanizeLookupInput(uid);
   let resolved;
   try { resolved = resolveReference(input.text); }
   catch (error) {

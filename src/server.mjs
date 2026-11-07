@@ -5,7 +5,7 @@ import * as canon from './canon.mjs';
 import * as english from './english.mjs';
 import * as providers from './providers.mjs';
 import * as features from './features/index.mjs';
-import { SCRIPT_CHOICES, SCRIPT_DESCRIPTION, romanizeInput, inputNote, localizeText, localizeSearch, localizeDescribe, localizeCommentary, localizePostCanonical } from './script.mjs';
+import { SCRIPT_CHOICES, SCRIPT_DESCRIPTION, romanizeInput, romanizeLookupInput, inputNote, localizeText, localizeSearch, localizeDescribe, localizeCommentary, localizePostCanonical } from './script.mjs';
 import * as variantsMod from './variants.mjs';
 import * as commentaryModule from './commentary.mjs';
 import * as postcanonical from './postcanonical.mjs';
@@ -92,7 +92,7 @@ export function createServer() {
     reference: citation,
     script: scriptParam,
   }, ({ reference, script }) => {
-    const input = romanizeInput(reference);
+    const input = romanizeLookupInput(reference);
     let resolved;
     try {
       resolved = resolveReference(input.text);

@@ -928,3 +928,10 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** find_citations found Roman AN 3.65 and MN 10 but silently missed their Thai-numeral equivalents.
 - **Decision.** Convert supported native decimal numerals one-for-one in the scanner's offset-preserving folded view. Keep Roman citation names and their case-sensitive prose safeguards. Completely convert each textual citation before resolution, label resolved input conversion, and report mixed/unknown numbers as unresolved. Retain literal URL identity, original snippets/UTF-16 offsets, resolver cautions and ambiguous-page candidates.
 - **Consequences.** This extends numeral recognition, not native-script name recognition or unrestricted prose transliteration. Original offsets remain executable with String.slice. No new source text, URL alias or certainty about ambiguous references is introduced; installed stdio/HTTP tests disable outbound requests.
+
+
+### D154. Reject discarded letters before resolving a passage by name
+
+- **Context.** resolve_reference returned MN 10 for 漢Satipatthana Sutta字 and ηSatipatthana Sutta because the letters-only name key discarded unsupported letters. The analysis selector shares that name resolver.
+- **Decision.** Require complete script conversion at both MCP entry points before citation/name lookup. Guard the shared name resolver against unconverted non-Latin letters before separator folding, including direct calls. Preserve supported native names, Roman spelling inference, existing shared-name conventions/cautions and post-canonical fallback.
+- **Consequences.** Unsupported or mixed input produces a recoverable error instead of evidence for an altered name. Offline package audits cover stdio/HTTP resolution and analysis across eight scripts. This is input integrity, not new source coverage or real-client acceptance.

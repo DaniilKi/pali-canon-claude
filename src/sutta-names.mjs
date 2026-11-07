@@ -93,8 +93,16 @@ export function spacedNumbers(text) {
 
 const citationOf = (u) => ({ id: u.id, citation: u.acronym, title: u.title || null });
 
+// Name keys deliberately remove separators; never let that also erase unconverted letters.
+function assertRomanName(text) {
+  if ([...String(text)].some(ch => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch))) {
+    throw new CitationError('The reference contains unsupported or unconverted characters. Use Roman or completely convert one supported Pāli script before name lookup.');
+  }
+}
+
 /** Name lookup: { unit, matched, candidates } or throws CitationError. */
 export function resolveName(text) {
+  assertRomanName(text);
   const { exact, fuzzy } = index || buildIndex();
   const q = nameKey(text);
   if (q.key.length < 3) return null;
@@ -148,6 +156,7 @@ export function resolveReference(reference) {
       return { ...r, notes: [`Read "${reference}" as ${spaced}.`, ...r.notes], matched_by: 'collection and numbers' };
     }
     if (/\d/.test(reference) || /^https?:/i.test(reference.trim())) throw error;
+    assertRomanName(reference);
     const n = normalizeInput(reference);
     const hit = resolveName(n.text);
     if (!hit) throw new CitationError(`Could not read "${reference.trim()}" as a citation, and no text in the canon has that name (Pāli titles, English translation titles and DPD sutta names were checked). Try search_texts, or a citation such as MN 10.`);

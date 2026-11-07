@@ -25818,7 +25818,13 @@ function spacedNumbers(text) {
   return `${m[1]} ${[m[2], m[3], m[4]].filter(Boolean).join(".")}`;
 }
 var citationOf = (u) => ({ id: u.id, citation: u.acronym, title: u.title || null });
+function assertRomanName(text) {
+  if ([...String(text)].some((ch) => new RegExp("\\p{L}", "u").test(ch) && !new RegExp("\\p{Script=Latin}", "u").test(ch))) {
+    throw new CitationError("The reference contains unsupported or unconverted characters. Use Roman or completely convert one supported P\u0101li script before name lookup.");
+  }
+}
 function resolveName(text) {
+  assertRomanName(text);
   const { exact, fuzzy } = index || buildIndex();
   const q = nameKey(text);
   if (q.key.length < 3) return null;
@@ -25866,6 +25872,7 @@ function resolveReference(reference) {
       return { ...r2, notes: [`Read "${reference}" as ${spaced}.`, ...r2.notes], matched_by: "collection and numbers" };
     }
     if (/\d/.test(reference) || /^https?:/i.test(reference.trim())) throw error2;
+    assertRomanName(reference);
     const n = normalizeInput(reference);
     const hit = resolveName(n.text);
     if (!hit) throw new CitationError(`Could not read "${reference.trim()}" as a citation, and no text in the canon has that name (P\u0101li titles, English translation titles and DPD sutta names were checked). Try search_texts, or a citation such as MN 10.`);
@@ -27605,7 +27612,7 @@ function selection(uid, book) {
       }
     };
   }
-  const input = romanizeInput(uid);
+  const input = romanizeLookupInput(uid);
   let resolved;
   try {
     resolved = resolveReference(input.text);
@@ -33736,7 +33743,7 @@ function createServer2() {
     reference: citation,
     script: scriptParam
   }, ({ reference, script }) => {
-    const input = romanizeInput(reference);
+    const input = romanizeLookupInput(reference);
     let resolved;
     try {
       resolved = resolveReference(input.text);

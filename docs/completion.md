@@ -319,3 +319,8 @@ Native parallel navigation now converts supported citations before resolution an
 
 
 Native decimal numerals now work with recognised Roman citation names in find_citations, with original snippets and UTF-16 offsets retained. Mixed/unknown numbers are unresolved, page alternatives remain explicit, and URLs preserve their literal identity. Native-script names remain outside the conservative free-prose scanner's scope; use resolve_reference for a single native citation. Both installed transports are checked offline (D153).
+
+
+Reference-input integrity now rejects unsupported letters before name-key folding: 漢Satipatthana Sutta字 and ηSatipatthana Sutta no longer silently select MN 10. resolve_reference and analyse_passage validate complete native conversion; valid names across eight scripts, shared-name cautions, ambiguous-page alternatives and post-canonical fallback retain their prior behavior (D154).
+
+The current managed executor has Codex CLI 0.159.2 and an existing ChatGPT login. A nonproduction ephemeral/read-only client acceptance attempt first failed on read-only client state. Temporary client state referencing the existing login allowed startup, but the inherited proxy denied the model endpoint at chatgpt.com/backend-api/codex/responses with HTTP CONNECT 403. The attempt was stopped and temporary state removed; no Pāli tool call completed. Shared desktop control tools are absent, and Claude/Gemini executables are absent. Actual client acceptance requires an approved environment permitting the signed-in client's model endpoint, or an authorized signed-in client elsewhere using this exact package. Do not count this attempt as a client pass or bypass the network policy.
