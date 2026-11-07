@@ -19,15 +19,16 @@ import * as english from './english.mjs';
 import { romanizeInput, inputNote, localizeText, scriptName, SCRIPT_DESCRIPTION } from './script.mjs';
 import * as postcanonical from './postcanonical.mjs';
 import { readBook } from './source-books.mjs';
+import { getCommentary } from './commentary.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v4';
+export const WIDGET_VERSION = 'v5';
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 export const SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 export const MCP_APP_MIME = 'text/html;profile=mcp-app';
 export const SKYBRIDGE_MIME = 'text/html+skybridge';
 
-const WIDGET_DESCRIPTION = 'Shows canonical or explicitly labelled post-canonical Pāli, or complete VRI root source files, with English where linked, with the citation, PTS page, translator, attribution and licence. Everything shown was retrieved by the tool; nothing is generated.';
+const WIDGET_DESCRIPTION = 'Shows canonical Pāli, distinctly labelled commentary or post-canonical Pāli, or complete VRI root source files, with English where linked, with the citation, PTS page, translator, attribution and licence. Everything shown was retrieved by the tool; nothing is generated.';
 
 // The widget loads nothing from the network: no scripts, styles, fonts or API calls. Links open through the host
 // (window.openai.openExternal / ui/open-link). redirect_domains marks the only link targets the widget makes as
@@ -54,13 +55,43 @@ export const TOOL_META = {
 };
 
 /** Data for the widget: Pāli segments (VRI) plus one English translation, each with its attribution. */
-export async function readPassage({ uid, book, translation, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6000, script }) {
-  if ((uid === undefined) === (book === undefined)) throw new Error('Give exactly one of uid (a canonical or post-canonical citation) or book (a complete VRI root-book ID).');
+export async function readPassage({ uid, book, commentary, translation, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6000, script }) {
+  if ([uid, book, commentary].filter(value => value !== undefined).length !== 1) throw new Error('Give exactly one of uid (canonical/post-canonical), book (complete root file), or commentary (aligned citation or direct commentary reference).');
+  if (uid !== undefined) {
+    const reference = romanizeInput(uid).text;
+    if (reference.startsWith('commentary:') || /^[^/]+\/c[1-9]\d*$/.test(reference)) { commentary = uid; uid = undefined; }
+  }
   if (translation !== undefined) {
     if (typeof translation !== 'string' || !translation.trim()) throw new Error('Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.');
     translation = translation.trim();
   }
   if (script) scriptName(script);
+  if (commentary !== undefined) {
+    const input = romanizeInput(commentary);
+    const page = getCommentary(input.text, { offset, limit });
+    if (!Array.isArray(page.segments)) throw new Error('Choose a commentary passage or book reference, not the commentary catalogue. Use get_commentary with uid commentary to list book references.');
+    if (!page.source) throw new Error(page.notes?.join(' ') || 'Bundled commentary data is unavailable.');
+    const available = page.available !== false;
+    const selector = page.segment_ref || (page.book ? page.citation : page.text_id) || input.text;
+    const result = {
+      canonical: false, content_type: 'commentary', selection: page.book ? 'commentary_book' : 'commentary_for_reference',
+      label: page.label, available, citation: page.segment_ref || page.citation || input.text,
+      title: page.commentary || page.book?.title || null, collection: 'Commentary (Aṭṭhakathā)',
+      ...(page.book ? { book: page.book } : {}), ...(page.text_id ? { requested_on: { id: page.text_id, citation: page.citation } } : {}),
+      ...(page.approximate ? { approximate: true } : {}), ...(page.alignment ? { alignment: page.alignment } : {}),
+      ...(page.alignment_note ? { alignment_note: page.alignment_note } : {}),
+      ...(page.alignment_method ? { alignment_method: page.alignment_method } : {}),
+      ...(page.passages ? { passages: page.passages } : {}),
+      source: page.source, notes: page.notes || [],
+      ...(!available ? { availability_note: 'No verified commentary alignment is available for this selection. No root text, neighbouring commentary or later work has been substituted.' } : {}),
+      pali: { edition: 'Chaṭṭha Saṅgāyana Aṭṭhakathā (VRI), Pāli', attribution: page.source.attribution,
+        license: page.source.terms, source: page.source, total_segments: page.total_segments || 0,
+        offset, limit, returned: page.returned || 0, next_offset: page.next_offset ?? null, segments: page.segments },
+      english: null, english_available: [], links: {},
+      ...(wantEnglish || englishOffset > 0 || translation !== undefined ? { english_error: 'No English commentary translation is linked through this server for this selection. No English version or character-offset continuation is available.' } : {}),
+    };
+    return widgetDisplay(result, { input, script, commentary: selector, wantEnglish, translation, limit });
+  }
   if (book !== undefined) {
     const page = readBook({ book, offset, limit });
     const result = {
@@ -148,10 +179,10 @@ export async function readPassage({ uid, book, translation, english: wantEnglish
   return widgetDisplay(result, { input, script, uid: unit.id, wantEnglish, translation, limit });
 }
 
-function widgetDisplay(result, { input, script, uid, book, wantEnglish, translation, limit }) {
+function widgetDisplay(result, { input, script, uid, book, commentary, wantEnglish, translation, limit }) {
   const { segments, ...display } = localizeText({ title: result.title, segments: result.pali.segments }, script, input);
   const version = result.english?.translation_id || translation;
-  const args = { ...(book ? { book } : { uid }), english: wantEnglish, offset: result.pali.next_offset, limit,
+  const args = { ...(commentary ? { commentary } : book ? { book } : { uid }), english: wantEnglish, offset: result.pali.next_offset, limit,
     ...(version ? { translation: version } : {}), ...(script ? { script: scriptName(script) } : {}) };
   return { ...result, ...display, pali: { ...result.pali, segments,
     continue_with: result.pali.next_offset === null ? null : { name: WIDGET_TOOL, arguments: args } } };
@@ -165,10 +196,11 @@ export function registerChatgptWidget(server) {
   }
   server.registerTool(WIDGET_TOOL, {
     title: 'Read a passage (Pāli and English)',
-    description: 'Show an individual text in a reading view: Pāli (VRI) and one English translation, with citation, PTS page, translator, attribution and licence. Use when the user wants to read a sutta or passage. Accepts canonical or post-canonical citations (e.g. Vism 1.1), including native-script input. Post-canonical texts stay explicitly labelled not the canon and have no linked English here. Set script for supported native-script Pāli display; source references stay Roman. For complete root files including front matter, give book instead of uid; file refs are not individual sutta/rule citations and have no English here. Follow pali.continue_with for selection-preserving continuation. The Pāli works offline; English is fetched live. For English continuation use the exact english.continue_with arguments from the previous result.',
+    description: 'Show an individual text in a reading view: Pāli (VRI) and one English translation, with citation, PTS page, translator, attribution and licence. Use when the user wants to read a sutta or passage. Accepts canonical or post-canonical citations (e.g. Vism 1.1), including native-script input. Post-canonical texts stay explicitly labelled not the canon and have no linked English here. Set script for supported native-script Pāli display; source references stay Roman. For complete root files including front matter, give book instead of uid; file refs are not individual sutta/rule citations and have no English here. Unambiguous commentary: book refs and /cN commentary anchors are also accepted in uid. For aligned commentary, give commentary instead of uid/book: an aligned root citation or direct commentary book/segment ref. Missing alignments remain explicitly unavailable; no text is substituted. Follow pali.continue_with for selection-preserving continuation. The Pāli works offline; English is fetched live. For English continuation use the exact english.continue_with arguments from the previous result.',
     inputSchema: {
-      uid: z.string().min(1).max(300).optional().describe('Canonical or post-canonical citation (Vism 1.1); give uid or book, not both. Other citations: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, a PTS page such as M i 55, or a suttacentral.net / accesstoinsight.org / dhammatalks.org link.'),
-      book: z.string().trim().min(1).max(100).optional().describe('Complete VRI root source file ID from browse_canon node books, including front matter. Give book instead of uid. File refs do not identify individual suttas or rules; no English is selected here.'),
+      uid: z.string().min(1).max(300).optional().describe('Canonical or post-canonical citation (Vism 1.1); choose exactly one of uid, book or commentary. Other citations: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, a PTS page such as M i 55, or a suttacentral.net / accesstoinsight.org / dhammatalks.org link.'),
+      commentary: z.string().trim().min(1).max(300).optional().describe('Commentary selection instead of uid/book: MN 10 for aligned commentary, mn10/c66 for its exact segment, or commentary:<VRI-file>[/cN] for a direct source book/segment. Commentary stays distinct from canon and later works. Use get_commentary uid commentary for the catalogue.'),
+      book: z.string().trim().min(1).max(100).optional().describe('Complete VRI root source file ID from browse_canon node books, including front matter. Give book instead of uid/commentary. File refs do not identify individual suttas or rules; no English is selected here.'),
       script: z.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
       translation: z.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or a translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
       english: z.boolean().default(true).describe('Fetch an English translation (live). false shows the Pāli only.'),
@@ -270,7 +302,7 @@ export const WIDGET_HTML = `<!doctype html>
     document.getElementById('title').textContent = (d.citation || '') + (d.title ? ' · ' + d.title : '');
     var meta = document.getElementById('meta'); clear(meta);
     if (d.selection === 'source_book') meta.appendChild(el('span', 'chip', 'Complete source file · no individual text ID'));
-    if (d.canonical === false) meta.appendChild(el('span', 'chip', 'Post-canonical · not the canon'));
+    if (d.canonical === false) meta.appendChild(el('span', 'chip', d.content_type === 'commentary' ? 'Commentary · not the canon' : 'Post-canonical · not the canon'));
     if (d.collection) meta.appendChild(el('span', 'chip', d.collection));
     if (d.pts) meta.appendChild(el('span', 'chip', 'PTS ' + d.pts));
     if (d.vri_paragraphs) meta.appendChild(el('span', 'chip', 'VRI ¶ ' + d.vri_paragraphs));
@@ -279,10 +311,14 @@ export const WIDGET_HTML = `<!doctype html>
 
     var pali = document.getElementById('pali'); clear(pali);
     if ((d.canonical === false || d.selection === 'source_book') && d.label) pali.appendChild(el('p', 'note', d.label));
+    if (d.alignment_note) pali.appendChild(el('p', 'note', d.alignment_note));
+    if (d.available === false && d.availability_note) pali.appendChild(el('p', 'empty', d.availability_note));
     if (d.script_note) pali.appendChild(el('p', 'note', d.script_note));
     (d.notes || []).forEach(function (n) { pali.appendChild(el('p', 'note', n)); });
     (d.pali.segments || []).forEach(function (s) {
       var p = el('p', 'seg ' + (s.type || 'prose'));
+      (s.commentary_pts_page_begins || []).forEach(function (pg) { p.appendChild(el('span', 'pts', 'Commentary PTS ' + pg)); });
+      if (s.comments_on_vri_paragraphs) p.appendChild(el('span', 'vri', 'On root VRI ¶' + s.comments_on_vri_paragraphs));
       (s.pts_page_begins || []).forEach(function (pg) { p.appendChild(el('span', 'pts', pg)); });
       if ((d.canonical === false || d.selection === 'source_book') && s.ref) p.appendChild(el('span', 'vri', s.ref));
       if (s.vri_paragraph) p.appendChild(el('span', 'vri', '¶' + s.vri_paragraph));
@@ -309,8 +345,8 @@ export const WIDGET_HTML = `<!doctype html>
     f.appendChild(el('p', '', 'Pāli: ' + (d.pali.edition || '') + '. ' + (d.pali.attribution || '') + ' ' + (d.pali.license || '')));
     if (d.english) f.appendChild(el('p', '', 'English: ' + (d.english.attribution || '') + ' ' + (d.english.license || '')));
     if (d.links && d.links.suttacentral) { var sc = el('p', ''); sc.appendChild(document.createTextNode('Parallels and other translations: ')); sc.appendChild(link(d.links.suttacentral, 'SuttaCentral')); f.appendChild(sc); }
-    document.getElementById('status').textContent = (d.citation || 'Passage') + '. ' + (d.canonical === false ? 'Post-canonical, not the canon. ' : d.selection === 'source_book' ? 'Complete source file, no individual text identity. ' : '') +
-      (d.pali.returned ? 'Showing Pāli segments ' + (d.pali.offset + 1) + ' to ' + (d.pali.offset + d.pali.returned) + ' of ' + d.pali.total_segments + '. ' : 'No Pāli segments on this page. ') +
+    document.getElementById('status').textContent = (d.citation || 'Passage') + '. ' + (d.canonical === false ? (d.content_type === 'commentary' ? 'Commentary, not the canon. ' : 'Post-canonical, not the canon. ') : d.selection === 'source_book' ? 'Complete source file, no individual text identity. ' : '') +
+      (d.available === false ? d.availability_note + ' ' : d.pali.returned ? 'Showing Pāli segments ' + (d.pali.offset + 1) + ' to ' + (d.pali.offset + d.pali.returned) + ' of ' + d.pali.total_segments + '. ' : 'No Pāli segments on this page. ') +
       (d.english ? 'English ' + (d.english.offset ? 'continuing from character ' + d.english.offset : 'loaded') + '.' : (d.english_error || 'No English translation requested.'));
   }
   // Apps SDK (window.openai) path.

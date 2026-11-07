@@ -746,3 +746,15 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** Complete-file reading exposed real introductions outside individual citation spans, but the widget could not show them. Treating those positions as individual sutta/rule citations would assert unsupported identities.
 - **Decision.** Add book as a mutually exclusive alternative to uid, using the existing source-file renderer. Display explicit file-selection labels and exact source refs, preserve file/script pagination, and report English unavailability without making a canonical identity or link. Verify all 61 source-file openings, the actual Vinaya introduction and both host bridges, alongside the post-canonical mode.
 - **Consequences.** Source data and citation alignment are unchanged. The file scope includes front matter and follows the source as printed. Actual client, source-rights, specialist and live-provider gates remain separate.
+
+### D124. Give hosted commentary its own selector, labels and availability contract
+
+- **Context.** The hosted reader rejected existing commentary references, while overloading its post-canonical branch would mislabel Aṭṭhakathā and blur verified/unavailable alignment. Root commentary context is not an independent canonical text identity.
+- **Decision.** Add commentary as a third mutually exclusive selector. Reuse the aligned/direct/exact commentary reader and retain source refs, notes, availability, alignment metadata and script-pinned continuation. Return requested root context separately from the commentary identity. Explicitly label commentary and its printed pages/root-paragraph context; show missing alignment without substituting text. Version resources to v5.
+- **Consequences.** No source text, English translation, rights or alignment is added. Direct books assert no root alignment. Malformed references and missing source data are errors; unavailable verified alignment is a distinct empty state. Real host, native-reader and specialist gates remain open.
+
+### D125. Exhaust installed commentary-widget availability against every root reference
+
+- **Context.** Representative view tests cannot establish that available and unavailable commentary selections remain faithful across the whole root index. A widget must not replace absent alignment with root text or neighbouring commentary.
+- **Decision.** Add an optional complete 8,544-reference sweep to the installed widget audit and enable it in CI. Compare returned availability, segments, notes, source and uncertainty with the bundled commentary reader, alongside all 47 direct books and eight-script selection/cursor cases.
+- **Consequences.** This is mechanical package/wrapper parity against current source mappings, not independent scholarly review. No alignment confidence, coverage or source rights is promoted by a passing sweep.

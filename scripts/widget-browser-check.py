@@ -124,6 +124,27 @@ def check():
                 assert continuation["refused"]["english_error"] in frame.locator("#english").inner_text()
                 assert "English:" not in frame.locator("#footer").inner_text()
                 assert continuation["primary"]["english"]["text"] not in frame.locator("#english").inner_text()
+                comment = payload["commentary"]
+                displayed(comment["first"])
+                assert "Commentary · not the canon" in frame.locator("#meta").inner_text()
+                assert "Post-canonical · not the canon" not in frame.locator("#meta").inner_text()
+                assert "Commentary, not the canon" in status.text_content()
+                assert "Commentary PTS Ps i 225" in frame.locator("#pali").inner_text()
+                assert "On root VRI ¶105" in frame.locator("#pali").inner_text()
+                assert frame.locator("#footer a").count() == 0
+                displayed(comment["next"])
+                displayed(comment["direct"])
+                assert "does not assert an alignment" in frame.locator("#pali").inner_text()
+                assert "transliterated" in frame.locator("#pali").inner_text()
+                send(comment["absent"])
+                frame.locator("#title").filter(has_text="AN 1.9").wait_for()
+                frame.wait_for_function("()=>document.querySelector('#pali').textContent.includes('No verified commentary alignment')")
+                assert frame.locator("#pali .seg").count() == 0
+                assert "No verified commentary alignment" in status.text_content()
+                assert frame.locator("#footer a").count() == 0
+                displayed(comment["uncertain"])
+                if comment["uncertain"].get("approximate"):
+                    assert "approximate mapping" in frame.locator("#meta").inner_text()
                 post = payload["postcanonical"]
                 displayed(post["first"])
                 assert "Post-canonical · not the canon" in frame.locator("#meta").inner_text()
@@ -170,7 +191,7 @@ def check():
                     "checks": ["initialization", "theme", "source text", "responsive columns", "no horizontal overflow",
                         "named landmarks and headings", "keyboard link activation", "200% zoom", "live status updates",
                         "Pāli continuation", "English pinned continuation after primary recovery", "unpinned offset refused",
-                        "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "no invented post-canonical/source-file links", "no JS errors"]})
+                        "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "commentary labels and availability", "unaligned source caution", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "no invented post-canonical/source-file links", "no JS errors"]})
                 page.close()
         assert not requests, requests
         report = {

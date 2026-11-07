@@ -28,7 +28,7 @@ try {
   });
   await client.connect(new StreamableHTTPClientTransport(new URL(url)));
   for (const uri of [WIDGET_URI, SKYBRIDGE_URI]) assert.equal((await client.readResource({ uri })).contents[0].text, WIDGET_HTML);
-  const counts = await auditWidget(client);
+  const counts = await auditWidget(client, { exhaustAligned: process.argv.includes('--exhaust-aligned') });
   assert.doesNotMatch(stderr, /UNEXPECTED_NETWORK_ATTEMPT/);
   const report = { status: 'passed', counts, resources: [WIDGET_URI, SKYBRIDGE_URI], network_attempts: 0, scope: 'Isolated installed HTTP package, retrieved widget resources and source-faithful selections/cursors; no signed-in host, LLM execution or native-reader review.' };
   if (reportPath) await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n');

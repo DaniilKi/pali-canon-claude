@@ -18,17 +18,20 @@ test('hosted MCP widget accepts labelled post-canonical/file selections and scri
     await client.connect(new StreamableHTTPClientTransport(new URL(`http://127.0.0.1:${server.address().port}/mcp`)));
     const tool = (await client.listTools()).tools.find(t => t.name === WIDGET_TOOL);
     assert.equal(tool._meta.ui.resourceUri, WIDGET_URI); assert.equal(tool._meta['openai/outputTemplate'], SKYBRIDGE_URI);
-    assert.match(WIDGET_URI, /reader-v4/);
+    assert.match(WIDGET_URI, /reader-v5/);
     for (const script of SCRIPTS) {
       const post = await call({ uid: transliterate('Vism 1.1', 'roman', script), script, limit: 2 });
       assert.equal(post.canonical, false); assert.equal(post.text_id, undefined); assert.equal(post.english, null);
       const next = await call(post.pali.continue_with.arguments);
       assert.equal(next.pali.offset, 2); assert.equal(next.citation, post.citation); assert.equal(next.canonical, false);
+      const comment = await call({ commentary: transliterate('MN 10', 'roman', script), script, limit: 2 });
+      assert.equal(comment.content_type, 'commentary'); assert.equal(comment.canonical, false); assert.equal(comment.available, true);
+      assert.equal(comment.pali.continue_with.arguments.commentary, 'mn10');
       const file = await call({ book: 'vin02m1', script, offset: 6, limit: 1 });
       assert.equal(file.selection, 'source_book'); assert.equal(file.text_id, undefined);
       assert.equal(file.pali.segments[0].ref, 'vri-book:vin02m1/7');
     }
-    for (const args of [{}, { uid: 'Vism 1.1', book: 'vin02m1' }, { book: 'unknown-book' }, { uid: 'Vism p. 3' }, { uid: 'Mahāvagga-Ṭīkā' }, { uid: 'Vism 1.1', script: 'unknown' }]) {
+    for (const args of [{}, { uid: 'Vism 1.1', book: 'vin02m1' }, { book: 'unknown-book' }, { uid: 'Vism p. 3' }, { uid: 'Mahāvagga-Ṭīkā' }, { uid: 'Vism 1.1', script: 'unknown' }, { commentary: 'MN 10', uid: 'MN 10' }, { commentary: 'commentary' }]) {
       assert.equal((await client.callTool({ name: WIDGET_TOOL, arguments: args })).isError, true);
     }
     assert.equal((await call({ uid: 'MN 10', english: false, limit: 1 })).text_id, 'mn10');
