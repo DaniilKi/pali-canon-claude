@@ -32594,9 +32594,827 @@ function createServer({ executeTool } = {}) {
   return server;
 }
 
+// src/chatgpt-widget.mjs
+var import_node_crypto4 = require("node:crypto");
+var WIDGET_TOOL = "read_passage_widget";
+var WIDGET_VERSION = "v16";
+var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
+var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
+var MCP_APP_MIME = "text/html;profile=mcp-app";
+var SKYBRIDGE_MIME = "text/html+skybridge";
+var WIDGET_DESCRIPTION = "Shows canonical P\u0101li, distinctly labelled commentary or post-canonical P\u0101li, or complete VRI root source files, with English where linked, with the citation, PTS page, translator, attribution and licence. Everything shown was retrieved by the tool; nothing is generated.";
+var REDIRECT_DOMAINS = [
+  "https://www.dhammatalks.org",
+  "https://dhammatalks.org",
+  "https://www.accesstoinsight.org",
+  "https://accesstoinsight.org",
+  "https://ancient-buddhist-texts.net",
+  "https://suttacentral.net"
+];
+var RESOURCE_META = {
+  ui: { prefersBorder: true, csp: { connectDomains: [], resourceDomains: [], frameDomains: [] } },
+  "openai/widgetDescription": WIDGET_DESCRIPTION,
+  "openai/widgetPrefersBorder": true,
+  "openai/widgetCSP": { connect_domains: [], resource_domains: [], redirect_domains: REDIRECT_DOMAINS }
+};
+var TOOL_META = {
+  ui: { resourceUri: WIDGET_URI, visibility: ["model", "app"] },
+  "openai/widgetAccessible": true,
+  "openai/outputTemplate": SKYBRIDGE_URI,
+  "openai/toolInvocation/invoking": "Opening the passage\u2026",
+  "openai/toolInvocation/invoked": "Reader updated."
+};
+async function readPassage({ uid, book, commentary, segment, context = 0, source_commit: sourceCommit, anchor_sha256: anchorHash, translation: translation2, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, english_prefix_sha256: englishPrefix, englishCharacters = 6e3, script }) {
+  if ([uid, book, commentary].filter((value) => value !== void 0).length !== 1) throw new Error("Give exactly one of uid (canonical/post-canonical), book (complete root file), or commentary (aligned citation or direct commentary reference).");
+  if (sourceCommit !== void 0 && sourceCommit !== source().commit) throw new Error("The requested VRI source version is no longer bundled. Reopen the selection from the current source; no continuation or context was substituted.");
+  if (!Number.isInteger(context) || context < 0 || context > 20) throw new Error("Context must be an integer from 0 to 20 neighbouring segments on each side.");
+  if (uid !== void 0) {
+    const reference = romanizeInput(uid).text;
+    if (reference.startsWith("commentary:") || /^[^/]+\/c[1-9]\d*$/.test(reference)) {
+      commentary = uid;
+      uid = void 0;
+    }
+  }
+  const commentaryAnchor = commentary !== void 0 ? romanizeInput(commentary).text.match(/^(.+)\/c([1-9]\d*)$/) : null;
+  if (segment === void 0 && !commentaryAnchor && (context !== 0 || anchorHash !== void 0)) throw new Error("Context and anchor_sha256 require an exact segment selection.");
+  if (commentaryAnchor && (context !== 0 || anchorHash !== void 0) && (offset !== 0 || englishOffset !== 0)) throw new Error("Commentary context cannot be combined with continuation offsets.");
+  if (englishPrefix !== void 0 && (!wantEnglish || englishOffset <= 0 || typeof englishPrefix !== "string" || !/^[a-f0-9]{64}$/.test(englishPrefix))) throw new Error("english_prefix_sha256 requires English continuation and its unchanged prefix hash.");
+  if (translation2 !== void 0) {
+    if (typeof translation2 !== "string" || !translation2.trim()) throw new Error("Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.");
+    translation2 = translation2.trim();
+  }
+  if (script) scriptName(script);
+  if (segment !== void 0) {
+    if (commentary !== void 0) throw new Error("For exact commentary, give its /cN reference in commentary instead of segment.");
+    if (offset !== 0 || englishOffset !== 0) throw new Error("An exact segment cannot be combined with P\u0101li or English continuation offsets.");
+    if (typeof segment !== "string" || segment !== segment.trim() || segment.length > 400) throw new Error("Give the exact segment reference from the selected reader.");
+    const match2 = segment.match(/^.+\/([1-9]\d*)$/);
+    const index4 = match2 ? Number(match2[1]) - 1 : -1;
+    if (!Number.isSafeInteger(index4) || index4 < 0 || index4 > 1e5) throw new Error("Give the exact segment reference from the selected reader, ending in a positive /N.");
+    const exact = await readPassage({ uid, book, offset: index4, limit: 1, english: false, script });
+    if (exact.pali.segments[0]?.ref !== segment) throw new Error(`Segment ${segment} does not belong to this selection. Copy its exact reference from get_text or get_post_canonical; no other segment was selected.`);
+    const fingerprint = (0, import_node_crypto4.createHash)("sha256").update(JSON.stringify(exact.pali.segments[0])).digest("hex");
+    if (anchorHash !== void 0 && anchorHash !== fingerprint) throw new Error("The exact source segment has changed. Reopen it before requesting context; no neighbouring passage was substituted.");
+    const selector = book !== void 0 ? { book: exact.book_id } : { uid: exact.text_id || exact.citation };
+    const args = { ...selector, segment, english: false, source_commit: exact.source.commit, anchor_sha256: fingerprint, ...script ? { script: scriptName(script) } : {} };
+    const start2 = Math.max(0, index4 - context);
+    const page2 = context ? await readPassage({ ...selector, offset: start2, limit: index4 - start2 + context + 1, english: false, script }) : exact;
+    const caution = `${context ? "This is surrounding P\u0101li from the same source selection." : "This is one exact P\u0101li source segment."} English translations are linked to whole texts, with no verified segment-level English alignment here. Read the whole citation without segment to inspect English availability.`;
+    return {
+      ...page2,
+      segment_ref: segment,
+      ...context ? { context_for: segment } : {},
+      notes: [...page2.notes || [], caution],
+      pali: {
+        ...page2.pali,
+        ...context ? {} : { next_offset: null, continue_with: null },
+        read_with: { name: WIDGET_TOOL, arguments: { ...args, ...context ? { context } : {} } },
+        context_with: !context && exact.pali.total_segments > 1 ? { name: WIDGET_TOOL, arguments: { ...args, context: 2 } } : null,
+        exact_with: context ? { name: WIDGET_TOOL, arguments: args } : null
+      },
+      ...wantEnglish || translation2 !== void 0 ? { english_error: caution } : {}
+    };
+  }
+  if (commentary !== void 0) {
+    const input2 = romanizeInput(commentary);
+    const page2 = getCommentary(input2.text, { offset, limit });
+    if (!Array.isArray(page2.segments)) throw new Error("Choose a commentary passage or book reference, not the commentary catalogue. Use get_commentary with uid commentary to list book references.");
+    if (!page2.source) throw new Error(page2.notes?.join(" ") || "Bundled commentary data is unavailable.");
+    const available2 = page2.available !== false;
+    const selector = page2.segment_ref || (page2.book ? page2.citation : page2.text_id) || input2.text;
+    const result2 = {
+      canonical: false,
+      content_type: "commentary",
+      selection: page2.book ? "commentary_book" : "commentary_for_reference",
+      label: page2.label,
+      available: available2,
+      citation: page2.segment_ref || page2.citation || input2.text,
+      title: page2.commentary || page2.book?.title || null,
+      collection: "Commentary (A\u1E6D\u1E6Dhakath\u0101)",
+      ...page2.book ? { book: page2.book } : {},
+      ...page2.text_id ? { requested_on: { id: page2.text_id, citation: page2.citation } } : {},
+      ...page2.approximate ? { approximate: true } : {},
+      ...page2.alignment ? { alignment: page2.alignment } : {},
+      ...page2.alignment_note ? { alignment_note: page2.alignment_note } : {},
+      ...page2.alignment_method ? { alignment_method: page2.alignment_method } : {},
+      ...page2.passages ? { passages: page2.passages } : {},
+      source: page2.source,
+      notes: page2.notes || [],
+      ...!available2 ? { availability_note: "No verified commentary alignment is available for this selection. No root text, neighbouring commentary or later work has been substituted." } : {},
+      pali: {
+        edition: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana A\u1E6D\u1E6Dhakath\u0101 (VRI), P\u0101li",
+        attribution: page2.source.attribution,
+        license: page2.source.terms,
+        source: page2.source,
+        total_segments: page2.total_segments || 0,
+        offset,
+        limit,
+        returned: page2.returned || 0,
+        next_offset: page2.next_offset ?? null,
+        segments: page2.segments
+      },
+      english: null,
+      english_available: [],
+      links: {},
+      ...wantEnglish || englishOffset > 0 || translation2 !== void 0 ? { english_error: "No English commentary translation is linked through this server for this selection. No English version or character-offset continuation is available." } : {}
+    };
+    const displayed = widgetDisplay(result2, { input: input2, script, commentary: selector, wantEnglish, translation: translation2, limit });
+    if (!commentaryAnchor || !displayed.pali.returned) {
+      if (anchorHash !== void 0) throw new Error("The exact commentary anchor is unavailable; no context was substituted.");
+      return displayed;
+    }
+    const fingerprint = (0, import_node_crypto4.createHash)("sha256").update(JSON.stringify(displayed.pali.segments[0])).digest("hex");
+    if (anchorHash !== void 0 && anchorHash !== fingerprint) throw new Error("The exact commentary segment has changed. Reopen it before requesting context; no neighbouring passage was substituted.");
+    const anchor = displayed.pali.segments[0].ref;
+    const parent = anchor.replace(/\/c[1-9]\d*$/, "");
+    const index4 = Number(commentaryAnchor[2]) - 1;
+    const args = { commentary: anchor, english: false, source_commit: displayed.source.commit, anchor_sha256: fingerprint, ...script ? { script: scriptName(script) } : {} };
+    if (context) {
+      const start2 = Math.max(0, index4 - context);
+      const surrounding = await readPassage({ commentary: parent, offset: start2, limit: index4 - start2 + context + 1, english: false, script });
+      if (!surrounding.pali.segments.some((item) => item.ref === anchor)) throw new Error("The commentary anchor is not in this source context; no neighbouring passage was substituted.");
+      return {
+        ...surrounding,
+        context_for: anchor,
+        ...displayed.english_error ? { english_error: displayed.english_error } : {},
+        pali: { ...surrounding.pali, read_with: { name: WIDGET_TOOL, arguments: { ...args, context } }, context_with: null, exact_with: { name: WIDGET_TOOL, arguments: args } }
+      };
+    }
+    const parentPage = getCommentary(parent, { limit: 1 });
+    return { ...displayed, pali: { ...displayed.pali, read_with: { name: WIDGET_TOOL, arguments: args }, context_with: parentPage.total_segments > 1 ? { name: WIDGET_TOOL, arguments: { ...args, context: 2 } } : null, exact_with: null } };
+  }
+  if (book !== void 0) {
+    const page2 = readBook({ book, offset, limit });
+    const result2 = {
+      canonical: true,
+      selection: "source_book",
+      book_id: page2.book_id,
+      citation: "vri-book:" + page2.book_id,
+      title: page2.title,
+      collection: "VRI root source file",
+      label: "Complete VRI root source file, including front matter. Source-file positions are not individual sutta or rule identities.",
+      source: page2.source,
+      notes: page2.notes,
+      pali: {
+        edition: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), P\u0101li",
+        attribution: page2.source.attribution,
+        license: page2.source.terms,
+        source: page2.source,
+        total_segments: page2.total_segments,
+        offset,
+        limit,
+        returned: page2.returned,
+        next_offset: page2.next_offset,
+        segments: page2.segments
+      },
+      english: null,
+      english_available: [],
+      links: {},
+      ...wantEnglish || englishOffset > 0 || translation2 !== void 0 ? { english_error: "English translation is selected by an individual citation, not a complete source file. The retrieved P\u0101li source file is shown on its own; no English character-offset continuation is available." } : {}
+    };
+    return widgetDisplay(result2, { script, book: page2.book_id, wantEnglish, translation: translation2, limit });
+  }
+  const input = romanizeInput(uid);
+  let resolved;
+  try {
+    resolved = resolve(input.text);
+  } catch (error2) {
+    if (!isPostCanonical(input.text)) throw error2;
+    const page2 = await getText(input.text, { offset, limit });
+    const result2 = {
+      canonical: false,
+      content_type: "post_canonical",
+      label: page2.label,
+      citation: page2.citation,
+      title: page2.title,
+      book: page2.book,
+      collection: "Post-canonical",
+      ...page2.approximate ? { approximate: true } : {},
+      source: page2.source,
+      notes: page2.notes,
+      pali: {
+        edition: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition (VRI), post-canonical P\u0101li",
+        attribution: page2.source.attribution,
+        license: page2.source.terms,
+        source: page2.source,
+        total_segments: page2.total_segments,
+        offset,
+        limit,
+        returned: page2.returned,
+        next_offset: page2.next_offset,
+        segments: page2.segments
+      },
+      english: null,
+      english_available: [],
+      links: {},
+      ...wantEnglish || englishOffset > 0 || translation2 !== void 0 ? { english_error: "No English translation is linked through this server for this post-canonical selection. The retrieved P\u0101li is shown on its own; no English version or character-offset continuation is available." } : {}
+    };
+    return widgetDisplay(result2, { input, script, uid: page2.citation, wantEnglish, translation: translation2, limit });
+  }
+  const { unit, notes } = resolved;
+  const described = describe(unit, notes);
+  const all = segments(unit);
+  const page = all.slice(offset, offset + limit);
+  const vri = source();
+  const result = {
+    text_id: unit.id,
+    canonical: true,
+    source: source(),
+    ...inputNote(input),
+    citation: unit.acronym,
+    title: unit.title || null,
+    collection: described.collection,
+    pts: described.pts,
+    vri_paragraphs: described.vri_paragraphs,
+    ...unit.approximate ? { approximate: true } : {},
+    pali: {
+      edition: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), P\u0101li",
+      attribution: vri.attribution,
+      license: vri.terms,
+      total_segments: all.length,
+      offset,
+      limit,
+      returned: page.length,
+      next_offset: offset + page.length < all.length ? offset + page.length : null,
+      segments: page
+    },
+    english: null,
+    english_available: available(unit),
+    notes: described.notes,
+    links: { suttacentral: described.links.suttacentral }
+  };
+  if (wantEnglish && result.english_available.length) {
+    try {
+      if (englishOffset > 0 && !/^(dt|ati|aj):/.test(translation2 || "")) {
+        throw new Error("To continue English, use the exact translation_id from the previous result (english.continue_with gives the full arguments). Character offsets cannot be transferred between versions; start at english_offset 0 to choose a new translation.");
+      }
+      const t = await translation(unit, translation2 && translation2 !== "default" ? translation2 : void 0, { offset: englishOffset, limit: englishCharacters, prefix_sha256: englishPrefix });
+      if (englishOffset > 0 && t.translation_id !== translation2) {
+        throw new Error("Cannot continue at this character offset: the requested translation is unavailable and the fallback is a different version. Retry the original translation later, or restart the fallback with english_offset 0.");
+      }
+      result.english = {
+        translator: t.translator,
+        translation_id: t.translation_id,
+        source: t.source,
+        url: t.url,
+        reference: (describe(unit).english.find((e) => e.translation_id === t.translation_id) || {}).reference,
+        fetched_from: t.fetched_from,
+        attribution: t.attribution,
+        license: t.license,
+        text: t.text,
+        prefix_sha256: t.prefix_sha256,
+        offset: t.offset,
+        total_characters: t.total_characters,
+        next_offset: t.next_offset,
+        truncated: t.next_offset !== null,
+        notes: t.notes,
+        read_with: { name: WIDGET_TOOL, arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.offset, ...t.offset > 0 ? { english_prefix_sha256: t.prefix_sha256 } : {}, ...script ? { script: scriptName(script) } : {} } },
+        continue_with: t.next_offset !== null ? {
+          name: WIDGET_TOOL,
+          arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset, english_prefix_sha256: t.continue_with.arguments.prefix_sha256, ...script ? { script: scriptName(script) } : {} }
+        } : null
+      };
+    } catch (error2) {
+      result.english_error = error2.message;
+    }
+  } else if (wantEnglish) {
+    result.english_error = `No English translation is linked for ${unit.acronym}. The P\u0101li is shown on its own; see ${described.links.suttacentral} for other translations.`;
+  }
+  return widgetDisplay(result, { input, script, uid: unit.id, wantEnglish, translation: translation2, limit });
+}
+function widgetDisplay(result, { input, script, uid, book, commentary, wantEnglish, translation: translation2, limit }) {
+  const { segments: segments2, ...display } = localizeText({ title: result.title, segments: result.pali.segments }, script, input);
+  const version2 = result.english?.translation_id || translation2;
+  const args = {
+    ...commentary ? { commentary } : book ? { book } : { uid },
+    source_commit: result.source.commit,
+    english: wantEnglish,
+    offset: result.pali.next_offset,
+    limit,
+    ...version2 ? { translation: version2 } : {},
+    ...script ? { script: scriptName(script) } : {}
+  };
+  return { ...result, ...display, pali: {
+    ...result.pali,
+    segments: segments2,
+    read_with: { name: WIDGET_TOOL, arguments: { ...args, english: false, offset: result.pali.offset } },
+    continue_with: result.pali.next_offset === null ? null : { name: WIDGET_TOOL, arguments: args }
+  } };
+}
+function registerChatgptWidget(server, { executeTool } = {}) {
+  for (const [name, uri, mimeType] of [["reader-widget", WIDGET_URI, MCP_APP_MIME], ["reader-widget-skybridge", SKYBRIDGE_URI, SKYBRIDGE_MIME]]) {
+    server.registerResource(
+      name,
+      uri,
+      { mimeType, description: WIDGET_DESCRIPTION, _meta: RESOURCE_META },
+      async (u) => ({ contents: [{ uri: u.href, mimeType, text: WIDGET_HTML, _meta: RESOURCE_META }] })
+    );
+  }
+  server.registerTool(WIDGET_TOOL, {
+    title: "Read a passage (P\u0101li and English)",
+    description: "Show an individual text in a reading view: P\u0101li (VRI) and one English translation, with citation, PTS page, translator, attribution and licence. Use when the user wants to read a sutta or passage. Accepts canonical or post-canonical citations (e.g. Vism 1.1), including native-script input. Post-canonical texts stay explicitly labelled not the canon and have no linked English here. Set script for supported native-script P\u0101li display; source references stay Roman. For complete root files including front matter, give book instead of uid; file refs are not individual sutta/rule citations and have no English here. Unambiguous commentary: book refs and /cN commentary anchors are also accepted in uid. For aligned commentary, give commentary instead of uid/book: an aligned root citation or direct commentary book/segment ref. Missing alignments remain explicitly unavailable; no text is substituted. Follow pali.continue_with for selection-preserving continuation. The P\u0101li works offline; English is fetched live. For English continuation use the exact english.continue_with arguments from the previous result.",
+    inputSchema: {
+      uid: external_exports.string().min(1).max(300).optional().describe("Canonical or post-canonical citation (Vism 1.1); choose exactly one of uid, book or commentary. Other citations: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, a PTS page such as M i 55, or a suttacentral.net / accesstoinsight.org / dhammatalks.org link."),
+      commentary: external_exports.string().trim().min(1).max(300).optional().describe("Commentary selection instead of uid/book: MN 10 for aligned commentary, mn10/c66 for its exact segment, or commentary:<VRI-file>[/cN] for a direct source book/segment. Commentary stays distinct from canon and later works. Use get_commentary uid commentary for the catalogue."),
+      book: external_exports.string().trim().min(1).max(100).optional().describe("Complete VRI root source file ID from browse_canon node books, including front matter. Give book instead of uid/commentary. File refs do not identify individual suttas or rules; no English is selected here."),
+      segment: external_exports.string().trim().min(1).max(400).optional().describe("One exact segment ref from the selected get_text/get_post_canonical reader, e.g. mn10/66, Vism 1.1/2 or vri-book:vin02m1/7. Keep uid or book as its source selection. No P\u0101li/English continuation offsets or segment-aligned English. For commentary use its exact /cN reference in commentary instead."),
+      context: external_exports.number().int().min(0).max(20).default(0).describe("With segment, include this many neighbouring P\u0101li segments on each side within the same selection. Follow pali.context_with for a source/anchor-pinned request, or pali.exact_with to return."),
+      source_commit: external_exports.string().regex(/^[a-f0-9]{40}$/).optional().describe("Expected VRI source commit from a returned cursor; a changed source fails instead of moving the reading to another version."),
+      anchor_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Expected exact source-segment fingerprint from pali.context_with/exact_with. Preserve the command unchanged; a changed segment fails rather than substituting context."),
+      script: external_exports.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
+      translation: external_exports.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or an unambiguous translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
+      english: external_exports.boolean().default(true).describe("Fetch an English translation (live). false shows the P\u0101li only."),
+      offset: external_exports.number().int().min(0).max(1e5).default(0).describe("P\u0101li segment offset for continuation."),
+      limit: external_exports.number().int().min(1).max(80).default(40).describe("P\u0101li segments to show."),
+      english_prefix_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Unchanged prefix hash from english.continue_with. Rejects continuation when preceding upstream text changed. Requires English and a positive english_offset."),
+      english_offset: external_exports.number().int().min(0).max(1e7).default(0).describe("English character offset for continuation. Use english.continue_with.arguments from the previous result: non-zero offsets require its exact translation_id, so a source recovery/outage cannot transfer offsets to another version. Shows up to 6,000 characters per call.")
+    },
+    annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
+    _meta: TOOL_META
+  }, async (args) => {
+    try {
+      if (executeTool) return await executeTool(WIDGET_TOOL, args);
+      const result = await readPassage(args);
+      return { content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result };
+    } catch (error2) {
+      if (error2 instanceof HostedToolError) {
+        const result2 = error2.response();
+        return { isError: true, content: [{ type: "text", text: JSON.stringify(result2) }], structuredContent: result2 };
+      }
+      const result = {
+        error: error2.message || "Request failed.",
+        recovery: "Check the citation with resolve_reference or browse_canon. Never invent missing text."
+      };
+      return { isError: true, content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result };
+    }
+  });
+}
+var WIDGET_HTML = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>P\u0101li Canon reader</title>
+<style>
+  :root { --bg:#fffdf8; --fg:#1f1d1a; --muted:#6b645a; --line:#e6dfd2; --accent:#8a5a14; --chip:#f3ecdf; }
+  :root[data-theme="dark"] { --bg:#1d1b18; --fg:#ece6dc; --muted:#a59d90; --line:#3a352e; --accent:#e0b66e; --chip:#2a2620; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.55 Georgia, "Times New Roman", serif; }
+  header { padding:14px 16px 10px; border-bottom:1px solid var(--line); }
+  h1 { margin:0; font-size:18px; }
+  .meta { margin-top:6px; display:flex; flex-wrap:wrap; gap:6px; font:12px/1.4 system-ui, sans-serif; }
+  .chip { background:var(--chip); border-radius:999px; padding:2px 9px; color:var(--muted); }
+  .cols { display:grid; grid-template-columns:1fr 1fr; }
+  .col { padding:12px 16px; min-width:0; }
+  .col + .col { border-left:1px solid var(--line); }
+  .col h2 { margin:0 0 8px; font:600 12px/1.4 system-ui, sans-serif; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); }
+  .seg { margin:0 0 10px; white-space:pre-wrap; overflow-wrap:anywhere; }
+  .seg.heading { font-weight:bold; }
+  .seg.verse { padding-left:12px; border-left:2px solid var(--line); }
+  .pts { font:11px/1 system-ui, sans-serif; color:var(--accent); margin-right:6px; }
+  .vri { font:11px/1 system-ui, sans-serif; color:var(--muted); margin-right:6px; }
+  .en { white-space:pre-wrap; }
+  .note, footer { font:12px/1.5 system-ui, sans-serif; color:var(--muted); }
+  .note { margin:0 0 8px; }
+  footer { padding:10px 16px 14px; border-top:1px solid var(--line); }
+  footer p { margin:4px 0; }
+  a { color:var(--accent); }
+  nav { padding:0 16px 12px; display:flex; flex-wrap:wrap; gap:8px; }
+  nav button { font:inherit; color:var(--accent); background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:8px 12px; cursor:pointer; max-width:100%; box-sizing:border-box; }
+  nav button:disabled { opacity:.6; cursor:wait; }
+  nav button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+  .empty { color:var(--muted); font-style:italic; }
+  @media (max-width: 640px) { .cols { grid-template-columns:1fr; } .col + .col { border-left:0; border-top:1px solid var(--line); } }
+</style>
+</head>
+<body>
+<header><h1 id="title" tabindex="-1">Loading the passage\u2026</h1><div class="meta" id="meta"></div></header>
+<p id="status" class="sr-only" role="status" aria-live="polite" aria-atomic="true">Waiting for a passage.</p>
+<main class="cols">
+  <section class="col" aria-labelledby="pali-h"><h2 id="pali-h">P\u0101li</h2><div id="pali"></div></section>
+  <section class="col" aria-labelledby="en-h"><h2 id="en-h">English</h2><div id="english"></div></section>
+</main>
+<nav id="navigation" aria-label="Passage navigation"></nav>
+<p id="context-status" class="note" role="note" aria-live="polite" aria-atomic="true" style="padding:0 16px">Reading-context sharing has not been established.</p>
+<p id="link-status" class="note" role="status" aria-live="polite" aria-atomic="true" style="padding:0 16px"></p>
+<footer id="footer"></footer>
+<script>
+(function () {
+  var rendered = null;
+  var closed = false;
+  var generation = 0, requestId = 2, pending = null, serverTools = false, awaitingSelection = false, lastInput, lastOutput, lastMetadata;
+  var modelCapabilities, modelChannel, modelModality, modelDesired, modelFlight, modelAccepted, modelFailure, modelRevision = 0, modelBlocked = false;
+  var linkFlight = null, hostLinks = false;
+  var sizeChannel, sizeObserver, sizeFrame, sizeHeight, sizeBlocked = false;
+  function stopSizing() {
+    if (sizeObserver) sizeObserver.disconnect();
+    sizeObserver = null;
+    if (sizeFrame != null && window.cancelAnimationFrame) window.cancelAnimationFrame(sizeFrame);
+    sizeFrame = null;
+  }
+  function queueSize() {
+    if (closed || sizeBlocked || !sizeChannel || sizeFrame != null || !window.requestAnimationFrame) return;
+    sizeFrame = window.requestAnimationFrame(function () {
+      sizeFrame = null;
+      if (closed || sizeBlocked) return;
+      // Measure intrinsic body content, not viewport/scrollHeight: the latter prevents shrinkage
+      // when the host resizes the frame to our previous height. Report height only; width is host-owned.
+      var height = Math.ceil(document.body.getBoundingClientRect().height);
+      if (!Number.isFinite(height) || height <= 0 || height === sizeHeight) return;
+      sizeHeight = height;
+      try {
+        if (sizeChannel === 'mcp') post({ jsonrpc: '2.0', method: 'ui/notifications/size-changed', params: { height: height } });
+        else {
+          var result = window.openai.notifyIntrinsicHeight(height);
+          if (result && typeof result.then === 'function') Promise.resolve(result).catch(function () { sizeBlocked = true; stopSizing(); });
+        }
+      } catch (error) { sizeBlocked = true; stopSizing(); }
+    });
+  }
+  function startSizing(channel) {
+    if (closed || sizeBlocked || sizeChannel) return;
+    sizeChannel = channel;
+    if (window.ResizeObserver) {
+      try { sizeObserver = new window.ResizeObserver(queueSize); sizeObserver.observe(document.body); }
+      catch (error) { stopSizing(); }
+    }
+    queueSize();
+  }
+  window.addEventListener('resize', queueSize);
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = String(text); return e; }
+  function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+  function modelStatus(message) { if (!closed) { document.getElementById('context-status').textContent = message; queueSize(); } }
+  function modelAdvice() { return modelDesired && modelDesired.snapshot.state === 'displayed' ? ' Tell the assistant the displayed citation.' : ' No current reading has been confirmed for the assistant.'; }
+  function vacantContext(state) { return { schema: 'pali-reader-selection-v1', widget_version: '${WIDGET_VERSION}', state: state,
+    quotation: state === 'loading' ? 'A new reading is pending; do not assume an earlier page is the requested selection.' : 'No retrieved passage is displayed. Reopen a source before quoting.' }; }
+  function readingContext(d) {
+    if (!d || !d.pali) return vacantContext(d && d.cancelled ? 'cancelled' : 'error');
+    var source = d.source || {}, book = d.book || {}, p = d.pali, e = d.english;
+    return { schema: 'pali-reader-selection-v1', widget_version: '${WIDGET_VERSION}', state: 'displayed',
+      kind: d.selection === 'source_book' ? 'source_book' : d.content_type || (d.canonical === true ? 'canonical' : 'unknown'),
+      canonical: d.canonical, selection: d.selection, citation: d.citation, text_id: d.text_id, book_id: d.book_id,
+      book: { id: book.id, uid: book.uid, file: book.file, title: book.title }, requested_on: d.requested_on,
+      segment_ref: d.segment_ref, context_for: d.context_for, script: d.script || 'roman', available: d.available,
+      approximate: !!d.approximate, alignment: d.alignment, alignment_note: d.alignment_note, alignment_method: d.alignment_method,
+      availability_note: d.availability_note, notes: d.notes || [],
+      source: { name: source.name, repository: source.repository, commit: source.commit, files: source.files, attribution: source.attribution, terms: source.terms },
+      pali: { offset: p.offset, returned: p.returned, total_segments: p.total_segments, refs: (p.segments || []).map(function (s) { return s.ref; }), read_with: p.read_with },
+      english: e ? { state: 'displayed', translation_id: e.translation_id, translator: e.translator, source: e.source, url: e.url,
+        fetched_from: e.fetched_from, prefix_sha256: e.prefix_sha256, offset: e.offset, next_offset: e.next_offset, total_characters: e.total_characters,
+        attribution: e.attribution, license: e.license, notes: e.notes || [], read_with: e.read_with }
+        : { state: 'not_displayed', note: d.english_error || 'No English translation requested.', linked_versions: (d.english_available || []).map(function (version) { return version.translation_id; }) },
+      quotation: 'Reading metadata only; no passage text is included. Retrieve read_with and verify its source, references and cautions before quoting. No scholarly or native-reader approval is implied.' };
+  }
+  function wantModelContext(snapshot) {
+    if (closed) return;
+    var key = JSON.stringify(snapshot);
+    if (!modelDesired || modelDesired.key !== key) modelDesired = { key: key, snapshot: Object.assign(JSON.parse(key), { revision: ++modelRevision }) };
+    pumpModelContext();
+  }
+  function pumpModelContext() {
+    if (closed || !modelDesired) return;
+    if (modelBlocked) { modelStatus(modelFailure + modelAdvice()); return; }
+    if (!modelChannel) {
+      function advertised(value) { return value && typeof value === 'object' && !Array.isArray(value); }
+      if (modelCapabilities && (advertised(modelCapabilities.structuredContent) || advertised(modelCapabilities.text))) {
+        modelChannel = 'mcp'; modelModality = advertised(modelCapabilities.structuredContent) ? 'structured' : 'text';
+      } else if (window.openai && typeof window.openai.setWidgetState === 'function') modelChannel = 'widget-state';
+      else { modelStatus('This host has not exposed reading-context sharing.' + modelAdvice()); return; }
+    }
+    if (modelFlight) {
+      modelStatus(modelFlight.timedOut ? 'The host has not confirmed the reading context.' + modelAdvice() : 'Updating the reading state available to the host\u2026');
+      return;
+    }
+    if (modelAccepted === modelDesired.key) return;
+    var desired = modelDesired, payload = { pali_reader: desired.snapshot };
+    if (modelChannel === 'widget-state') {
+      modelFlight = { key: desired.key };
+      try {
+        var saved = window.openai.setWidgetState({ modelContent: JSON.stringify(payload) });
+        modelFlight = null;
+        if (saved && typeof saved.then === 'function') {
+          Promise.resolve(saved).then(function () {}, function () {});
+          if (closed) return;
+          failModelContext('This host could not confirm reading-context storage. Sharing is unconfirmed.'); return;
+        }
+        if (closed) return;
+        modelAccepted = desired.key;
+        if (modelDesired.key === desired.key) modelStatus('The updated reading state was passed to the host. Model delivery is not verified.');
+        else Promise.resolve().then(pumpModelContext);
+      } catch (error) { modelFlight = null; if (!closed) failModelContext('The host could not store the reading context.'); }
+      return;
+    }
+    var flight = { id: requestId++, key: desired.key }; modelFlight = flight;
+    modelStatus('Updating the reading state available to the host\u2026');
+    flight.timer = setTimeout(function () {
+      if (closed || modelFlight !== flight) return;
+      flight.timedOut = true; modelStatus('The host has not confirmed the reading context.' + modelAdvice());
+    }, 30000);
+    post({ jsonrpc: '2.0', id: flight.id, method: 'ui/update-model-context', params: modelModality === 'structured' ? { structuredContent: payload } : { content: [{ type: 'text', text: JSON.stringify(payload) }] } });
+  }
+  function failModelContext(message) { modelBlocked = true; modelFailure = message; modelStatus(message + modelAdvice()); }
+  function modelReply(message) {
+    if (closed) return;
+    var flight = modelFlight;
+    if (!flight || message.id !== flight.id) return;
+    clearTimeout(flight.timer); modelFlight = null;
+    if (message.error) { failModelContext('The host rejected reading-context sharing.'); return; }
+    if (!message.result || typeof message.result !== 'object' || Array.isArray(message.result)) { failModelContext('The host did not confirm reading-context sharing.'); return; }
+    modelAccepted = flight.key;
+    if (modelDesired.key === flight.key) modelStatus('The host accepted the current reading state. Model delivery is not verified.');
+    else pumpModelContext();
+  }
+  function canNavigate() { return !closed && (!!(window.openai && typeof window.openai.callTool === 'function') || serverTools); }
+  function abandon() {
+    resetLink();
+    if (pending) { clearTimeout(pending.timer); pending = null; }
+    document.getElementById('navigation').setAttribute('aria-busy', 'false');
+  }
+  function navigation() {
+    queueSize();
+    var nav = document.getElementById('navigation'); clear(nav);
+    if (closed) return;
+    if (awaitingSelection) { nav.appendChild(el('p', 'note', 'Opening the requested passage\u2026')); return; }
+    if (!canNavigate() || !rendered || !rendered.pali) return;
+    if (pending) nav.appendChild(el('p', 'note', 'Loading the requested passage\u2026'));
+    var d = rendered;
+    [[d.pali.context_with, 'Surrounding P\u0101li'], [d.pali.exact_with, 'Return to exact segment'], [d.pali.continue_with, 'Continue P\u0101li'], [d.english && d.english.continue_with, 'Continue English']].forEach(function (entry) {
+      var command = entry[0];
+      if (!command || command.name !== '${WIDGET_TOOL}' || !command.arguments || typeof command.arguments !== 'object' || Array.isArray(command.arguments)) return;
+      var button = el('button', '', entry[1]); button.type = 'button'; button.disabled = !!pending;
+      button.addEventListener('click', function () { if (rendered === d) navigate(command); }); nav.appendChild(button);
+    });
+  }
+  function finish(call, result, error) {
+    if (closed || pending !== call || call.generation !== generation) return;
+    abandon();
+    var data = result && result.structuredContent, args = call.command.arguments;
+    var readable = data && data.pali && Array.isArray(data.pali.segments) &&
+      data.pali.segments.every(function (segment) { return segment && typeof segment.text === 'string'; }) &&
+      Number.isInteger(data.pali.returned) && data.pali.returned === data.pali.segments.length &&
+      Number.isInteger(data.pali.total_segments) && data.pali.total_segments >= data.pali.returned &&
+      Number.isInteger(data.pali.offset) && data.pali.offset >= 0;
+    if (!error && result && !result.isError && readable) {
+      if ((args.source_commit && (!data.source || data.source.commit !== args.source_commit)) ||
+          (args.script && (data.script || 'roman') !== args.script) ||
+          (args.book && data.book_id !== args.book) ||
+          (args.uid && data.text_id !== args.uid && data.citation !== args.uid) ||
+          (args.commentary && (data.content_type !== 'commentary' || (data.context_for !== args.commentary && data.citation !== args.commentary && !(data.requested_on && data.requested_on.id === args.commentary)))) ||
+          (args.context > 0 && data.context_for !== (args.segment || args.commentary)) ||
+          (args.english_offset > 0 && data.english && (data.english.translation_id !== args.translation || (args.english_prefix_sha256 && data.english.prefix_sha256 !== args.english_prefix_sha256)))) {
+        error = new Error('The host returned a different source, selection, script or translation version. Ask to reopen the selection.');
+      }
+    }
+    if (error) render({ error: error.message || String(error) });
+    else if (!result || (!result.isError && !readable)) render({ error: 'The host did not return a readable passage. Ask to reopen the selection.' });
+    else toolResult(result);
+    if (closed) return;
+    navigation();
+    var title = document.getElementById('title'); if (typeof title.focus === 'function') title.focus();
+  }
+  function navigate(command) {
+    if (pending || awaitingSelection || !canNavigate()) return;
+    resetLink();
+    var call = { id: requestId++, generation: generation, command: command }; pending = call;
+    document.getElementById('navigation').setAttribute('aria-busy', 'true'); navigation();
+    document.getElementById('status').textContent = 'Loading the requested passage\u2026';
+    wantModelContext(vacantContext('loading'));
+    if (closed || pending !== call) return;
+    call.timer = setTimeout(function () { finish(call, null, new Error('The host did not respond. Ask to reopen the selection.')); }, 30000);
+    try {
+      if (serverTools) post({ jsonrpc: '2.0', id: call.id, method: 'tools/call', params: command });
+      else if (window.openai && typeof window.openai.callTool === 'function') {
+        Promise.resolve(window.openai.callTool(command.name, command.arguments)).then(function (result) { finish(call, result); }, function (error) { finish(call, null, error); });
+      }
+    } catch (error) { finish(call, null, error); }
+  }
+  function post(msg) { try { window.parent.postMessage(msg, '*'); } catch (e) {} }
+  function linkStatus(text) {
+    var node = document.getElementById('link-status');
+    if (node) node.textContent = text;
+    queueSize();
+  }
+  function resetLink() {
+    if (linkFlight) clearTimeout(linkFlight.timer);
+    linkFlight = null; linkStatus('');
+  }
+  function finishLink(call, failed, accepted) {
+    if (closed || linkFlight !== call) return;
+    clearTimeout(call.timer); linkFlight = null;
+    linkStatus(failed === 'unconfirmed' ? 'The host did not confirm the link request. Opening the destination is not verified. Use the link address to open it yourself.' : failed ? 'The host could not open this link. Use the link address to open it yourself.' :
+      accepted ? 'The host accepted the link request. Opening the destination is not verified.' : 'Link request sent to the host. Opening the destination is not verified.');
+  }
+  function openLink(url) {
+    if (closed || linkFlight) return;
+    var legacy = window.openai && typeof window.openai.openExternal === 'function';
+    if (!legacy && !hostLinks) { linkStatus('Host link opening is unavailable. Use the link address to open it yourself.'); return; }
+    var call = { id: requestId++ };
+    linkFlight = call; linkStatus('Asking the host to open the link\u2026');
+    call.timer = setTimeout(function () { finishLink(call, 'unconfirmed'); }, 30000);
+    try {
+      if (legacy) {
+        var result = window.openai.openExternal({ href: url });
+        if (result && typeof result.then === 'function') Promise.resolve(result).then(function (reply) { finishLink(call, !!(reply && reply.isError)); }, function () { finishLink(call, true); });
+        else finishLink(call, !!(result && result.isError));
+      } else post({ jsonrpc: '2.0', id: call.id, method: 'ui/open-link', params: { url: url } });
+    } catch (error) { finishLink(call, true); }
+  }
+  function link(url, text) {
+    if (typeof url !== 'string' || !/^https:\\/\\//.test(url)) return el('span', '', text);
+    var a = el('a', '', text); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.addEventListener('click', function (ev) { ev.preventDefault(); openLink(url); });
+    return a;
+  }
+  function setTheme(theme) { if (theme === 'dark' || theme === 'light') document.documentElement.setAttribute('data-theme', theme); }
+  function characterPosition(at, total) { return 'character ' + at + (typeof total === 'number' && Number.isFinite(total) ? ' of ' + total : ''); }
+  function render(d) {
+    if (closed) return;
+    if (!d || typeof d !== 'object' || d === rendered) return;
+    if (!d.pali && typeof d.error !== 'string') return;
+    abandon(); generation++; awaitingSelection = false;
+    if (!d.pali) {
+      if (typeof d.error !== 'string') return;
+      rendered = d;
+      document.getElementById('title').textContent = d.cancelled ? 'Reading cancelled' : 'Could not open the passage';
+      document.getElementById('status').textContent = (d.cancelled ? 'Reading cancelled. ' : 'Could not open the passage. ') + d.error;
+      ['meta', 'pali', 'english', 'footer'].forEach(function (id) { clear(document.getElementById(id)); });
+      document.getElementById('pali').appendChild(el('p', 'empty', d.error));
+      document.getElementById('english').appendChild(el('p', 'empty', d.cancelled ? 'No translation is displayed. Ask to open a passage again when you are ready.' : 'Check the citation and ask to open the passage again.'));
+      navigation();
+      wantModelContext(readingContext(d));
+      return;
+    }
+    rendered = d;
+    document.getElementById('title').textContent = (d.citation || '') + (d.title ? ' \xB7 ' + d.title : '');
+    var meta = document.getElementById('meta'); clear(meta);
+    if (d.selection === 'source_book') meta.appendChild(el('span', 'chip', 'Complete source file \xB7 no individual text ID'));
+    if (d.canonical === false) meta.appendChild(el('span', 'chip', d.content_type === 'commentary' ? 'Commentary \xB7 not the canon' : 'Post-canonical \xB7 not the canon'));
+    if (d.collection) meta.appendChild(el('span', 'chip', d.collection));
+    if (d.context_for) meta.appendChild(el('span', 'chip', 'Source context for ' + d.context_for));
+    if (d.pts) meta.appendChild(el('span', 'chip', 'PTS ' + d.pts));
+    if (d.vri_paragraphs) meta.appendChild(el('span', 'chip', 'VRI \xB6 ' + d.vri_paragraphs));
+    if (d.english && d.english.translator) meta.appendChild(el('span', 'chip', 'Tr. ' + d.english.translator));
+    if (d.approximate) meta.appendChild(el('span', 'chip', 'approximate mapping'));
+
+    var pali = document.getElementById('pali'); clear(pali);
+    if ((d.canonical === false || d.selection === 'source_book') && d.label) pali.appendChild(el('p', 'note', d.label));
+    if (d.alignment_note) pali.appendChild(el('p', 'note', d.alignment_note));
+    if (d.available === false && d.availability_note) pali.appendChild(el('p', 'empty', d.availability_note));
+    if (d.script_note) pali.appendChild(el('p', 'note', d.script_note));
+    (d.notes || []).forEach(function (n) { pali.appendChild(el('p', 'note', n)); });
+    (d.pali.segments || []).forEach(function (s) {
+      var p = el('p', 'seg ' + (s.type || 'prose'));
+      (s.commentary_pts_page_begins || []).forEach(function (pg) { p.appendChild(el('span', 'pts', 'Commentary PTS ' + pg)); });
+      if (s.comments_on_vri_paragraphs) p.appendChild(el('span', 'vri', 'On root VRI \xB6' + s.comments_on_vri_paragraphs));
+      (s.pts_page_begins || []).forEach(function (pg) { p.appendChild(el('span', 'pts', pg)); });
+      if ((d.canonical === false || d.selection === 'source_book' || d.segment_ref) && s.ref) p.appendChild(el('span', 'vri', s.ref));
+      if (s.vri_paragraph) p.appendChild(el('span', 'vri', '\xB6' + s.vri_paragraph));
+      p.appendChild(document.createTextNode(s.text || ''));
+      pali.appendChild(p);
+    });
+    if (d.pali.next_offset != null) pali.appendChild(el('p', 'note', 'Showing ' + d.pali.returned + ' of ' + d.pali.total_segments + ' segments. Ask for more to continue from segment ' + d.pali.next_offset + '.'));
+    if (d.pali.context_with) pali.appendChild(el('p', 'note', 'Ask for surrounding P\u0101li to read this passage in its source context.'));
+    if (d.pali.exact_with) pali.appendChild(el('p', 'note', 'Ask to return to the exact selected segment.'));
+
+    var en = document.getElementById('english'); clear(en);
+    if (d.english) {
+      (d.english.notes || []).forEach(function (n) { en.appendChild(el('p', 'note', n)); });
+      var head = el('p', 'note');
+      head.appendChild(document.createTextNode((d.english.translator || 'Translator not stated') + (d.english.reference ? ' (' + d.english.reference + ')' : '') + ' \xB7 '));
+      head.appendChild(link(d.english.url, d.english.source || d.english.url));
+      en.appendChild(head);
+      en.appendChild(el('div', 'en', d.english.text || ''));
+      if (d.english.offset) en.insertBefore(el('p', 'note', 'Continuing from ' + characterPosition(d.english.offset, d.english.total_characters) + '.'), en.lastChild);
+      if (d.english.truncated) en.appendChild(el('p', 'note', 'The translation continues (' + characterPosition(d.english.next_offset, d.english.total_characters) + '). Ask for more to continue, or read the rest on the source page.'));
+    } else {
+      en.appendChild(el('p', 'empty', d.english_error || 'No English translation requested.'));
+    }
+
+    var f = document.getElementById('footer'); clear(f);
+    f.appendChild(el('p', '', 'P\u0101li: ' + (d.pali.edition || '') + '. ' + (d.pali.attribution || '') + ' ' + (d.pali.license || '')));
+    if (d.english) f.appendChild(el('p', '', 'English: ' + (d.english.attribution || '') + ' ' + (d.english.license || '')));
+    if (d.links && d.links.suttacentral) { var sc = el('p', ''); sc.appendChild(document.createTextNode('Parallels and other translations: ')); sc.appendChild(link(d.links.suttacentral, 'SuttaCentral')); f.appendChild(sc); }
+    document.getElementById('status').textContent = (d.citation || 'Passage') + '. ' + (d.canonical === false ? (d.content_type === 'commentary' ? 'Commentary, not the canon. ' : 'Post-canonical, not the canon. ') : d.selection === 'source_book' ? 'Complete source file, no individual text identity. ' : '') +
+      (d.available === false ? d.availability_note + ' ' : d.pali.returned ? 'Showing P\u0101li segments ' + (d.pali.offset + 1) + ' to ' + (d.pali.offset + d.pali.returned) + ' of ' + d.pali.total_segments + '. ' : 'No P\u0101li segments on this page. ') +
+      (d.english ? 'English ' + (d.english.offset ? 'continuing from character ' + d.english.offset : 'loaded') + '.' : (d.english_error || 'No English translation requested.'));
+    navigation();
+    wantModelContext(readingContext(d));
+  }
+  // Apps SDK (window.openai) path.
+  function toolResult(result) {
+    if (!result) return;
+    if (result.isError) {
+      var message = result.structuredContent && result.structuredContent.error;
+      if (typeof message !== 'string') {
+        var text = typeof result.content === 'string' ? { text: result.content } :
+          (Array.isArray(result.content) ? result.content.find(function (part) { return part.type === 'text'; }) : null);
+        if (text) { try { message = JSON.parse(text.text).error; } catch (e) { message = text.text; } }
+      }
+      render({ error: typeof message === 'string' ? message : 'The passage could not be loaded.' });
+      return;
+    }
+    render(result.structuredContent);
+  }
+  function fromOpenai() {
+    if (window.openai && typeof window.openai.notifyIntrinsicHeight === 'function') startSizing('sdk');
+    if (closed) return;
+    if (window.openai) {
+      setTheme(window.openai.theme);
+      var input = JSON.stringify(window.openai.toolInput || null);
+      if (lastInput !== input && rendered && window.openai.toolInput) requested(window.openai.toolInput);
+      lastInput = input;
+      var metadata = window.openai.toolResponseMetadata;
+      var output = window.openai.toolOutput, freshOutput = output !== lastOutput, freshMetadata = metadata !== lastMetadata;
+      lastOutput = output; lastMetadata = metadata;
+      var result = metadata && (metadata.mcp_tool_result || metadata.call_tool_result);
+      if (result && result.isError && (freshMetadata || !freshOutput)) {
+        if (freshMetadata || freshOutput) toolResult(result);
+      } else if (freshOutput) render(output);
+      else if (freshMetadata && result && result.structuredContent) toolResult(result);
+    }
+  }
+  function requested(args) {
+    if (closed) return;
+    function ordered(value) { return JSON.stringify(Object.keys(value || {}).sort().map(function (key) { return [key, value[key]]; })); }
+    if (pending && ordered(args) === ordered(pending.command.arguments)) return;
+    abandon(); generation++; awaitingSelection = true;
+    document.getElementById('navigation').setAttribute('aria-busy', 'true'); navigation();
+    document.getElementById('status').textContent = 'Opening the requested passage\u2026';
+    wantModelContext(vacantContext('loading'));
+  }
+  function closeReader() {
+    if (closed) return;
+    var canClear = !modelFlight && !modelBlocked, channel = modelChannel, modality = modelModality;
+    closed = true; generation++; abandon(); stopSizing();
+    if (modelFlight) clearTimeout(modelFlight.timer);
+    modelFlight = null; modelDesired = null; modelAccepted = null; rendered = null; lastOutput = null; lastMetadata = null; lastInput = null;
+    awaitingSelection = false;
+    ['meta', 'pali', 'english', 'footer', 'navigation'].forEach(function (id) { clear(document.getElementById(id)); });
+    document.getElementById('title').textContent = 'Reader closed';
+    document.getElementById('status').textContent = 'Reader closed. Open a new reader to continue.';
+    document.getElementById('context-status').textContent = 'Reader closed. Clearing host-held reading context has not been verified.';
+    if (canClear && channel) {
+      var payload = { pali_reader: Object.assign(vacantContext('closed'), { revision: ++modelRevision }) };
+      try {
+        if (channel === 'widget-state') {
+          var saved = window.openai.setWidgetState({ modelContent: JSON.stringify(payload) });
+          if (saved && typeof saved.then === 'function') Promise.resolve(saved).then(function () {}, function () {});
+        } else post({ jsonrpc: '2.0', id: requestId++, method: 'ui/update-model-context', params: modality === 'structured' ? { structuredContent: payload } : { content: [{ type: 'text', text: JSON.stringify(payload) }] } });
+      } catch (error) { /* Closure must not depend on host context storage. */ }
+    }
+  }
+  window.addEventListener('pagehide', function (event) { if (!event.persisted) closeReader(); });
+  window.addEventListener('openai:set_globals', fromOpenai);
+  // MCP Apps bridge path (JSON-RPC over postMessage).
+  window.addEventListener('message', function (ev) {
+    if (ev.source !== window.parent) return;
+    var m = ev.data; if (!m || m.jsonrpc !== '2.0') return;
+    if (m.method === 'ui/resource-teardown') {
+      closeReader();
+      if (m.id === null || typeof m.id === 'string' || (typeof m.id === 'number' && Number.isFinite(m.id))) post({ jsonrpc: '2.0', id: m.id, result: {} });
+      return;
+    }
+    if (closed) return;
+    if (m.id === 1 && m.result) {
+      modelCapabilities = m.result.hostCapabilities && m.result.hostCapabilities.updateModelContext; pumpModelContext();
+      serverTools = !!(m.result.hostCapabilities && m.result.hostCapabilities.serverTools); navigation();
+      if (m.result.hostContext) setTheme(m.result.hostContext.theme);
+      post({ jsonrpc: '2.0', method: 'ui/notifications/initialized', params: {} });
+      startSizing('mcp');
+      hostLinks = !!(m.result.hostCapabilities && m.result.hostCapabilities.openLinks);
+    } else if (linkFlight && m.id === linkFlight.id && (Object.prototype.hasOwnProperty.call(m, 'result') || m.error)) {
+      finishLink(linkFlight, m.error ? true : !m.result || typeof m.result !== 'object' || Array.isArray(m.result) ? 'unconfirmed' : !!m.result.isError, true);
+    } else if (modelFlight && m.id === modelFlight.id && (m.result || m.error)) {
+      modelReply(m);
+    } else if (pending && m.id === pending.id && (m.result || m.error)) {
+      finish(pending, m.result, m.error && new Error(m.error.message || 'The host refused the navigation request.'));
+    } else if (m.method === 'ui/notifications/tool-result') {
+      toolResult(m.params);
+    } else if (m.method === 'ui/notifications/tool-input') {
+      requested(m.params && m.params.arguments);
+    } else if (m.method === 'ui/notifications/tool-input-partial') {
+      // Partial arguments may change and have no request ID. A known UI read is already pending;
+      // do not mistake its streamed echo for a different selection or execute incomplete input.
+      if (!pending && !awaitingSelection) requested();
+    } else if (m.method === 'ui/notifications/tool-cancelled') {
+      if (pending || awaitingSelection || !rendered) render({ cancelled: true, error: 'The reading request was cancelled. Ask to open a passage again when you are ready.' });
+    } else if (m.method === 'ui/notifications/host-context-changed') {
+      setTheme(m.params && m.params.theme);
+    }
+  });
+  post({ jsonrpc: '2.0', id: 1, method: 'ui/initialize', params: { protocolVersion: '2026-01-26', clientInfo: { name: 'pali-canon-reader', version: '${WIDGET_VERSION}' }, appCapabilities: { availableDisplayModes: ['inline', 'fullscreen'] } } });
+  fromOpenai();
+})();
+</script>
+</body>
+</html>
+`;
+
 // src/http-worker.mjs
 async function start() {
   const server = createServer(), client = new Client({ name: "pali-hosted-tools", version: "1" }), [a, b] = InMemoryTransport.createLinkedPair();
+  registerChatgptWidget(server);
   await server.connect(a);
   await client.connect(b);
   import_node_worker_threads.parentPort.on("message", async ({ id, name, args }) => {

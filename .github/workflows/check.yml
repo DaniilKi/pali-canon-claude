@@ -53,7 +53,7 @@ jobs:
             --mount "type=bind,src=$RUNNER_TEMP/memory-report,dst=/report" \
             node:20-slim node /app/scripts/audit-hosted-load.mjs \
             --server-dir /package/server --clients 16 --rounds 3 --report /report/concurrency.json
-      - name: Check retained reader views and full live caches under mixed load
+      - name: Check retained reader views and the shared live cache under mixed load
         run: |
           memory=$(sed -n 's/^  memory = "\([^"]*\)"/\1/p' fly.toml)
           test -n "$memory"

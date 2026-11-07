@@ -3,10 +3,12 @@ import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {InMemoryTransport} from '@modelcontextprotocol/sdk/inMemory.js';
 import {createServer} from './server.mjs';
 import {liveCache} from './cache.mjs';
+import {registerChatgptWidget} from './chatgpt-widget.mjs';
 
 // Use the public MCP transport contract, including normal schema validation and error/source envelopes.
 async function start() {
  const server=createServer(),client=new Client({name:'pali-hosted-tools',version:'1'}),[a,b]=InMemoryTransport.createLinkedPair();
+ registerChatgptWidget(server);
  await server.connect(a);await client.connect(b);
  parentPort.on('message',async({id,name,args})=>{
   try{const result=await client.callTool({name,arguments:args},undefined,{timeout:180000});parentPort.postMessage({id,result,cache:liveCache.stats()});}

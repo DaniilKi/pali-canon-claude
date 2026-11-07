@@ -82,7 +82,7 @@ All settings are optional environment variables.
 | `HOST` | `0.0.0.0` | Network address to listen on. |
 | `RATE_LIMIT_PER_MINUTE` | `120` | Requests each visitor may make per minute. `0` turns the limit off. |
 | `TRUST_PROXY` | off | How many proxies sit in front of the server. Set to `1` on a hosting platform such as Fly.io or Render, so each visitor's real address (the one the platform adds last to `X-Forwarded-For`) is used for the rate limit. Addresses a visitor writes in that header themselves are ignored. Leave it off when the server faces the internet directly. |
-| `PALI_CANON_CACHE_MB` | `64` | Per-thread live-response cache budget. Hosted core tools and the frontend reader have separate caches (up to 128 MiB combined at the default); `0` disables both. |
+| `PALI_CANON_CACHE_MB` | `64` | Live-response cache budget. Hosted core tools and reader calls share the worker's cache; `0` disables caching. |
 | `PALI_CANON_CACHE_TTL_MINUTES` | `360` | How long a fetched page is kept (six hours). |
 | `CHATGPT_WIDGET` | off | `1` adds the ChatGPT reading view: one extra read-only tool, `read_passage_widget`, and its page. `fly.toml` and `render.yaml` turn it on. See [listings/chatgpt.md](listings/chatgpt.md). |
 
@@ -153,7 +153,7 @@ not emulate Fly's credit system. It is evidence against transferring the sustain
 shared tier, not a claim that shared Machines can never serve this application.
 
 The template now measures concurrent **requests**, with a soft routing threshold of **16** and a hard
-threshold of **64**. The application still admits at most 32 outstanding core tool calls. The old
+threshold of **64**. The application admits at most 32 outstanding tool calls, including reader calls. The old
 100-request soft threshold was above that bound; the new value is intended to prefer spare Machines
 before the core queue fills. The higher hard threshold leaves room for metadata, reader and retry
 responses; it is not a promise of 64 simultaneous heavy reads. Fly documents how these thresholds
@@ -179,16 +179,20 @@ configuration was insufficient for the reproduced full-study session.
 
 ## Uptime monitoring
 
-The installed HTTP entry keeps core tool execution in one shared worker thread. CPU-heavy searches
-share that worker and its datasets; `/healthz`, HTTP transport, resources, prompts and the hosted
-reader stay on the HTTP thread. This does not add CPU capacity. Ship **all three runtime bundles**
+The installed HTTP entry keeps core tools and reader execution in one shared worker thread. CPU-heavy searches
+share that worker and its datasets; `/healthz`, HTTP transport, resources, prompts and widget
+registration stay on the HTTP thread. This does not add CPU capacity. Ship **all three runtime bundles**
 (`index.cjs`, `http.cjs`, `http-worker.cjs`) with `server/data`; copying only `http.cjs` is insufficient.
 The npm package and Dockerfile include the complete directory. Stdio remains in one thread.
 
 Health reports the worker's bounded state and pending count, plus the cache snapshot from its last
-completed tool call; `frontend_cache` separately reports the reader's live-response cache. A crashed or unresponsive worker makes health return HTTP 503. At most 32 core
+completed tool call; `frontend_cache` remains for diagnostics but reader requests no longer populate it.
+The reader uses the same corpus objects, search state and live cache as the core tools, avoiding a
+second copy of the large post-canonical/commentary datasets in the HTTP loop. Widget resources and
+advertised metadata stay available on the HTTP thread; a reading request still needs healthy worker
+capacity. A crashed or unresponsive worker makes health return HTTP 503. At most 32
 tool calls may be outstanding; additional calls return an explicit queue-full tool error for retry.
-A 180-second dispatch deadline includes queueing and provider waits. If any core call exceeds it,
+A 180-second dispatch deadline includes queueing and provider waits. If any admitted call exceeds it,
 the watchdog rejects outstanding calls and stops the worker; the process must restart before tool
 execution can resume. This can reject a very slow provider batch too. No request is automatically replayed. A successful liveness
 probe does not promise that a slow tool has completed.
@@ -238,10 +242,11 @@ actual-provider SLA, proof of 64 simultaneous heavy calls, full-cache or signed-
 
 ### Capacity with populated caches
 
-The capacity audit can fill both live-response caches through their public reading tools, using
+The capacity audit fills the shared live-response cache through both public reading tools, using
 sixteen distinct linked URLs served by a local synthetic fetch fixture. Each page explicitly says
-it is a cache-pressure fixture, not scripture. The final fixture size leaves each 64 MiB cache at
-**99.8% of its accounted byte budget**, with no real provider requests. The two caches remain populated
+it is a cache-pressure fixture, not scripture. The final fixture size leaves the 64 MiB cache at
+**99.8% of its accounted byte budget**, with no real provider requests. The audit asserts that the
+frontend cache stays empty; reading and translation calls reuse the worker cache. It remains populated
 through the subsequent workload. Optional `--reader-caches` also opens one source-faithful widget page
 from all 109 post-canonical books, 61 root files and 47 commentary books before mixed tool requests.
 
@@ -251,18 +256,36 @@ node scripts/audit-hosted-load.mjs --clients 32 --rounds 3 --full-cache --reader
 node scripts/audit-hosted-load.mjs --clients 100 --rounds 3 --full-cache --allow-overload --report overload.json
 ```
 
-On Linux/Node 20.20.2 under one CPU and 2 GiB, without swap or external network:
+Before moving the reader into the worker, Linux/Node 20.20.2 measurements under one CPU and 2 GiB,
+without swap or external network, showed:
 
 | Workload | Result |
 |---|---|
 | 32 clients, both caches at 99.8%, all reader datasets warmed by one page from every book, 96 mixed calls | All 96 completed with the 32-call queue; all 643 health probes passed; peak RSS about 1.73 GiB |
 | 100 clients, same warmed-reader/full-cache setup, previous 64-call queue | 162 completed, 102 queue-full replies and **36 client timeouts**; healthy probes alone hid this capacity failure |
-| 100 clients, same setup, current 32-call queue | 126 completed and 174 explicit queue-full retry responses; **zero other failures**; all 677 health probes passed; queue drained and exact MN 10 recovery read succeeded; peak RSS about 1.82 GiB |
+| 100 clients, same setup, 32-call queue for core tools only | 126 completed and 174 explicit queue-full retry responses; **zero other failures**; all 677 health probes passed; queue drained and exact MN 10 recovery read succeeded; peak RSS about 1.82 GiB |
 
-The queue was reduced from 64 to 32 outstanding core calls after that reproduced failure. This
+The queue was reduced from 64 to 32 outstanding core calls after that reproduced failure. Reader
+calls now also share that bound; they cannot bypass admission or load duplicate study corpora. This
 chooses more early retry responses instead of admitting work that exceeds ordinary client deadlines;
 it adds no CPU capacity. Health remained responsive in both cases, so it must be evaluated alongside
 actual tool completion and retry counts.
+
+After sharing reader execution with the worker, the same 100-client/300-call recipe at the same
+one-CPU/2 GiB limits used **1.41 GiB peak server RSS**, compared with **1.78 GiB** immediately before
+the change (about 21% lower). The cache remained 99.8% full, the duplicate frontend cache stayed empty,
+and all 217 source books were visited. There were 97 successful reads and 203 explicit busy replies,
+with zero other failures and all 674 probes healthy. Previously 136 reads completed and 164 were busy:
+reader calls now also consume the 32-call bound, so these counts do not demonstrate higher throughput.
+The strict 32-client case completed all 96 reads without rejection, with 686 healthy probes and
+1.36 GiB peak RSS. Both samples drained the queue and completed an exact recovery read.
+
+The cold maximum stayed about **54 seconds** (54,325 ms before and 54,135 ms after), so this change
+does **not** resolve cold-search latency. Warm-round maxima in the overload sample were 6.3 and 5.7
+seconds. An isolated source-level CPU profile found first full scans spent time normalizing text,
+creating indexes and collecting garbage; retained indexes make repeated queries faster. These are
+local samples, not a latency distribution or reserved CPU. Further cold-index work and real-host
+acceptance remain open.
 
 These are instance burst measurements with the **per-IP rate limiter disabled**. The deployed default
 of 120 requests/minute/IP still applies, including initialization and metadata requests. Cold rounds

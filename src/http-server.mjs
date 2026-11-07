@@ -213,7 +213,7 @@ export function createHttpServer({
 
       for (const [key, value] of Object.entries(CORS)) res.setHeader(key, value);
       const server = createMcpServer(toolExecutor ? { executeTool: (name, args) => toolExecutor.execute(name, args) } : {});
-      if (chatgptWidget) registerChatgptWidget(server);
+      if (chatgptWidget) registerChatgptWidget(server, { executeTool: toolExecutor ? (name, args) => toolExecutor.execute(name, args) : undefined });
       const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined, enableJsonResponse: true });
       res.on('close', () => { transport.close().catch(() => {}); server.close().catch(() => {}); });
       await server.connect(transport);

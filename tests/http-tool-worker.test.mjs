@@ -4,6 +4,20 @@ import {EventEmitter} from 'node:events';
 import {HttpToolWorker} from '../src/http-tool-worker.mjs';
 import {createHttpServer} from '../src/http-server.mjs';
 class FakeWorker extends EventEmitter {sent=[];terminated=0;postMessage(m){this.sent.push(m);}async terminate(){this.terminated++;}}
+test('hosted reader shares core admission, preserves envelopes and reports restart failures',async()=>{
+ const fake=new FakeWorker(),worker=new HttpToolWorker({maxPending:1,workerFactory:()=>fake}),server=createHttpServer({rateLimitPerMinute:0,chatgptWidget:true,toolExecutor:worker});
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base=`http://127.0.0.1:${server.address().port}`;
+ const call=async(name,args)=>{const r=await fetch(base+'/mcp',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json, text/event-stream'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'tools/call',params:{name,arguments:args}})});assert.equal(r.status,200);return(await r.json()).result;};
+ try{
+  const held=call('get_text',{uid:'MN 10'});while(!fake.sent.length)await new Promise(resolve=>setImmediate(resolve));
+  const busy=await call('read_passage_widget',{uid:'Vism 1.1',script:'thai',english:false});assert.equal(busy.structuredContent.code,'HOSTED_TOOL_BUSY');assert.equal(busy.structuredContent.retryable,true);assert.equal(busy.structuredContent.retry_after_seconds,5);assert.equal(fake.sent.length,1);
+  fake.emit('message',{id:fake.sent[0].id,result:{content:[],structuredContent:{fixture:true}}});await held;
+  const read=call('read_passage_widget',{commentary:'commentary:s0101a.att.xml/c1',script:'myanmar',english:false});while(fake.sent.length<2)await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(fake.sent[1].name,'read_passage_widget');assert.equal(fake.sent[1].args.commentary,'commentary:s0101a.att.xml/c1');assert.equal(fake.sent[1].args.script,'myanmar');assert.equal(fake.sent[1].args.english,false);
+  const result={content:[{type:'text',text:'{"fixture":true}'}],structuredContent:{fixture:true},_meta:{fixture:'preserved'}};fake.emit('message',{id:fake.sent[1].id,result});assert.deepEqual(await read,result);
+  fake.emit('error',new Error('private fixture'));const failed=await call('read_passage_widget',{book:'s0101m',english:false});assert.equal(failed.structuredContent.code,'HOSTED_TOOL_UNAVAILABLE');assert.equal(failed.structuredContent.requires_restart,true);assert.deepEqual(JSON.parse(failed.content[0].text),failed.structuredContent);
+ }finally{server.closeAllConnections();await new Promise(resolve=>server.close(resolve));}
+});
 test('hosted worker preserves out-of-order source/error envelopes and bounds queued reads',async()=>{
  const fake=new FakeWorker(),worker=new HttpToolWorker({maxPending:2,workerFactory:()=>fake});
  const first=worker.execute('get_text',{uid:'MN 10'}),second=worker.execute('get_text',{uid:'missing'});

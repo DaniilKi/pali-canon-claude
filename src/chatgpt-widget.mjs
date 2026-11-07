@@ -21,6 +21,7 @@ import { romanizeInput, inputNote, localizeText, scriptName, SCRIPT_DESCRIPTION 
 import * as postcanonical from './postcanonical.mjs';
 import { readBook } from './source-books.mjs';
 import { getCommentary } from './commentary.mjs';
+import { HostedToolError } from './hosted-tool-error.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
 export const WIDGET_VERSION = 'v16';
@@ -241,8 +242,8 @@ function widgetDisplay(result, { input, script, uid, book, commentary, wantEngli
     continue_with: result.pali.next_offset === null ? null : { name: WIDGET_TOOL, arguments: args } } };
 }
 
-/** Register the widget tool and its two UI templates on an McpServer. Called by the HTTP entry only. */
-export function registerChatgptWidget(server) {
+/** Register the hosted widget on the HTTP frontend or its internal worker; stdio does not advertise it. */
+export function registerChatgptWidget(server, { executeTool } = {}) {
   for (const [name, uri, mimeType] of [['reader-widget', WIDGET_URI, MCP_APP_MIME], ['reader-widget-skybridge', SKYBRIDGE_URI, SKYBRIDGE_MIME]]) {
     server.registerResource(name, uri, { mimeType, description: WIDGET_DESCRIPTION, _meta: RESOURCE_META },
       async (u) => ({ contents: [{ uri: u.href, mimeType, text: WIDGET_HTML, _meta: RESOURCE_META }] }));
@@ -270,9 +271,14 @@ export function registerChatgptWidget(server) {
     _meta: TOOL_META,
   }, async (args) => {
     try {
+      if (executeTool) return await executeTool(WIDGET_TOOL, args);
       const result = await readPassage(args);
       return { content: [{ type: 'text', text: JSON.stringify(result) }], structuredContent: result };
     } catch (error) {
+      if (error instanceof HostedToolError) {
+        const result = error.response();
+        return { isError: true, content: [{ type: 'text', text: JSON.stringify(result) }], structuredContent: result };
+      }
       const result = {
         error: error.message || 'Request failed.',
         recovery: 'Check the citation with resolve_reference or browse_canon. Never invent missing text.',

@@ -34419,7 +34419,7 @@ function widgetDisplay(result, { input, script, uid, book, commentary, wantEngli
     continue_with: result.pali.next_offset === null ? null : { name: WIDGET_TOOL, arguments: args }
   } };
 }
-function registerChatgptWidget(server) {
+function registerChatgptWidget(server, { executeTool } = {}) {
   for (const [name, uri, mimeType] of [["reader-widget", WIDGET_URI, MCP_APP_MIME], ["reader-widget-skybridge", SKYBRIDGE_URI, SKYBRIDGE_MIME]]) {
     server.registerResource(
       name,
@@ -34451,9 +34451,14 @@ function registerChatgptWidget(server) {
     _meta: TOOL_META
   }, async (args) => {
     try {
+      if (executeTool) return await executeTool(WIDGET_TOOL, args);
       const result = await readPassage(args);
       return { content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result };
     } catch (error2) {
+      if (error2 instanceof HostedToolError) {
+        const result2 = error2.response();
+        return { isError: true, content: [{ type: "text", text: JSON.stringify(result2) }], structuredContent: result2 };
+      }
       const result = {
         error: error2.message || "Request failed.",
         recovery: "Check the citation with resolve_reference or browse_canon. Never invent missing text."
@@ -35208,7 +35213,7 @@ function createHttpServer({
       }
       for (const [key3, value] of Object.entries(CORS)) res.setHeader(key3, value);
       const server = createServer2(toolExecutor ? { executeTool: (name, args) => toolExecutor.execute(name, args) } : {});
-      if (chatgptWidget) registerChatgptWidget(server);
+      if (chatgptWidget) registerChatgptWidget(server, { executeTool: toolExecutor ? (name, args) => toolExecutor.execute(name, args) : void 0 });
       const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: void 0, enableJsonResponse: true });
       res.on("close", () => {
         transport.close().catch(() => {
