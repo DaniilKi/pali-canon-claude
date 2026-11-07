@@ -68,7 +68,7 @@ def check():
 
                 def displayed(data):
                     send(data)
-                    frame.locator("#title").filter(has_text="MN 10").wait_for()
+                    frame.locator("#title").filter(has_text=data["citation"]).wait_for()
                     expected = data["pali"]["segments"][0]["text"]
                     frame.wait_for_function("text=>document.querySelector('#pali').textContent.includes(text)", arg=expected)
                     for segment in data["pali"]["segments"]:
@@ -124,6 +124,34 @@ def check():
                 assert continuation["refused"]["english_error"] in frame.locator("#english").inner_text()
                 assert "English:" not in frame.locator("#footer").inner_text()
                 assert continuation["primary"]["english"]["text"] not in frame.locator("#english").inner_text()
+                post = payload["postcanonical"]
+                displayed(post["first"])
+                assert "Post-canonical · not the canon" in frame.locator("#meta").inner_text()
+                assert "not the canon" in frame.locator("#pali").inner_text()
+                assert "post-canonical" in frame.locator("#english").inner_text()
+                assert frame.locator("#footer a").count() == 0
+                assert "Post-canonical, not the canon" in status.text_content()
+                displayed(post["next"])
+                assert "segments 3 to 4" in status.text_content()
+                displayed(post["native"])
+                assert "transliterated" in frame.locator("#pali").inner_text()
+                assert frame.evaluate("document.documentElement.scrollWidth<=innerWidth")
+                displayed(post["uncertain"])
+                assert "approximate mapping" in frame.locator("#meta").inner_text()
+                source = payload["source_file"]
+                displayed(source["first"])
+                assert "Complete source file" in frame.locator("#meta").inner_text()
+                assert "not individual sutta or rule" in frame.locator("#pali").inner_text()
+                assert "vri-book:vin02m1/7" in frame.locator("#pali").inner_text()
+                assert "individual citation" in frame.locator("#english").inner_text()
+                assert frame.locator("#footer a").count() == 0
+                assert frame.evaluate("document.documentElement.scrollWidth<=innerWidth")
+                displayed(source["next"])
+                assert "vri-book:vin02m1/8" in frame.locator("#pali").inner_text()
+                displayed(fixture)
+                assert "Complete source file" not in frame.locator("#meta").inner_text()
+                assert "Post-canonical · not the canon" not in frame.locator("#meta").inner_text()
+                assert frame.locator("#footer a").count() == 1
                 envelope = {"isError": True, "content": [{"type": "text", "text": json.dumps({"error": "Browser fixture error <img src=x>"})}]}
                 if bridge == "MCP Apps":
                     page.evaluate("params=>document.querySelector('iframe').contentWindow.postMessage({jsonrpc:'2.0',method:'ui/notifications/tool-result',params},'*')", envelope)
@@ -142,7 +170,7 @@ def check():
                     "checks": ["initialization", "theme", "source text", "responsive columns", "no horizontal overflow",
                         "named landmarks and headings", "keyboard link activation", "200% zoom", "live status updates",
                         "Pāli continuation", "English pinned continuation after primary recovery", "unpinned offset refused",
-                        "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "no JS errors"]})
+                        "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "no invented post-canonical/source-file links", "no JS errors"]})
                 page.close()
         assert not requests, requests
         report = {

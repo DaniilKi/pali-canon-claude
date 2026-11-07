@@ -33754,12 +33754,12 @@ function createServer2() {
 
 // src/chatgpt-widget.mjs
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v3";
+var WIDGET_VERSION = "v4";
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 var MCP_APP_MIME = "text/html;profile=mcp-app";
 var SKYBRIDGE_MIME = "text/html+skybridge";
-var WIDGET_DESCRIPTION = "Shows the P\u0101li text and an English translation side by side, with the citation, PTS page, translator, attribution and licence. Everything shown was retrieved by the tool; nothing is generated.";
+var WIDGET_DESCRIPTION = "Shows canonical or explicitly labelled post-canonical P\u0101li, or complete VRI root source files, with English where linked, with the citation, PTS page, translator, attribution and licence. Everything shown was retrieved by the tool; nothing is generated.";
 var REDIRECT_DOMAINS = [
   "https://www.dhammatalks.org",
   "https://dhammatalks.org",
@@ -33780,19 +33780,90 @@ var TOOL_META = {
   "openai/toolInvocation/invoking": "Opening the passage\u2026",
   "openai/toolInvocation/invoked": "Reader updated."
 };
-async function readPassage({ uid, translation: translation2, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6e3 }) {
+async function readPassage({ uid, book, translation: translation2, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6e3, script }) {
+  if (uid === void 0 === (book === void 0)) throw new Error("Give exactly one of uid (a canonical or post-canonical citation) or book (a complete VRI root-book ID).");
   if (translation2 !== void 0) {
     if (typeof translation2 !== "string" || !translation2.trim()) throw new Error("Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.");
     translation2 = translation2.trim();
   }
+  if (script) scriptName(script);
+  if (book !== void 0) {
+    const page2 = readBook({ book, offset, limit });
+    const result2 = {
+      canonical: true,
+      selection: "source_book",
+      book_id: page2.book_id,
+      citation: "vri-book:" + page2.book_id,
+      title: page2.title,
+      collection: "VRI root source file",
+      label: "Complete VRI root source file, including front matter. Source-file positions are not individual sutta or rule identities.",
+      source: page2.source,
+      notes: page2.notes,
+      pali: {
+        edition: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), P\u0101li",
+        attribution: page2.source.attribution,
+        license: page2.source.terms,
+        source: page2.source,
+        total_segments: page2.total_segments,
+        offset,
+        limit,
+        returned: page2.returned,
+        next_offset: page2.next_offset,
+        segments: page2.segments
+      },
+      english: null,
+      english_available: [],
+      links: {},
+      ...wantEnglish || englishOffset > 0 || translation2 !== void 0 ? { english_error: "English translation is selected by an individual citation, not a complete source file. The retrieved P\u0101li source file is shown on its own; no English character-offset continuation is available." } : {}
+    };
+    return widgetDisplay(result2, { script, book: page2.book_id, wantEnglish, translation: translation2, limit });
+  }
   const input = romanizeInput(uid);
-  const { unit, notes } = resolve(input.text);
+  let resolved;
+  try {
+    resolved = resolve(input.text);
+  } catch (error2) {
+    if (!isPostCanonical(input.text)) throw error2;
+    const page2 = await getText(input.text, { offset, limit });
+    const result2 = {
+      canonical: false,
+      content_type: "post_canonical",
+      label: page2.label,
+      citation: page2.citation,
+      title: page2.title,
+      book: page2.book,
+      collection: "Post-canonical",
+      ...page2.approximate ? { approximate: true } : {},
+      source: page2.source,
+      notes: page2.notes,
+      pali: {
+        edition: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition (VRI), post-canonical P\u0101li",
+        attribution: page2.source.attribution,
+        license: page2.source.terms,
+        source: page2.source,
+        total_segments: page2.total_segments,
+        offset,
+        limit,
+        returned: page2.returned,
+        next_offset: page2.next_offset,
+        segments: page2.segments
+      },
+      english: null,
+      english_available: [],
+      links: {},
+      ...wantEnglish || englishOffset > 0 || translation2 !== void 0 ? { english_error: "No English translation is linked through this server for this post-canonical selection. The retrieved P\u0101li is shown on its own; no English version or character-offset continuation is available." } : {}
+    };
+    return widgetDisplay(result2, { input, script, uid: page2.citation, wantEnglish, translation: translation2, limit });
+  }
+  const { unit, notes } = resolved;
   const described = describe(unit, notes);
   const all = segments(unit);
   const page = all.slice(offset, offset + limit);
   const vri = source();
   const result = {
     text_id: unit.id,
+    canonical: true,
+    source: source(),
     ...inputNote(input),
     citation: unit.acronym,
     title: unit.title || null,
@@ -33842,7 +33913,7 @@ async function readPassage({ uid, translation: translation2, english: wantEnglis
         notes: t.notes,
         continue_with: t.next_offset !== null ? {
           name: WIDGET_TOOL,
-          arguments: { uid: unit.id, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset }
+          arguments: { uid: unit.id, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset, ...script ? { script: scriptName(script) } : {} }
         } : null
       };
     } catch (error2) {
@@ -33851,7 +33922,24 @@ async function readPassage({ uid, translation: translation2, english: wantEnglis
   } else if (wantEnglish) {
     result.english_error = `No English translation is linked for ${unit.acronym}. The P\u0101li is shown on its own; see ${described.links.suttacentral} for other translations.`;
   }
-  return result;
+  return widgetDisplay(result, { input, script, uid: unit.id, wantEnglish, translation: translation2, limit });
+}
+function widgetDisplay(result, { input, script, uid, book, wantEnglish, translation: translation2, limit }) {
+  const { segments: segments2, ...display } = localizeText({ title: result.title, segments: result.pali.segments }, script, input);
+  const version2 = result.english?.translation_id || translation2;
+  const args = {
+    ...book ? { book } : { uid },
+    english: wantEnglish,
+    offset: result.pali.next_offset,
+    limit,
+    ...version2 ? { translation: version2 } : {},
+    ...script ? { script: scriptName(script) } : {}
+  };
+  return { ...result, ...display, pali: {
+    ...result.pali,
+    segments: segments2,
+    continue_with: result.pali.next_offset === null ? null : { name: WIDGET_TOOL, arguments: args }
+  } };
 }
 function registerChatgptWidget(server) {
   for (const [name, uri, mimeType] of [["reader-widget", WIDGET_URI, MCP_APP_MIME], ["reader-widget-skybridge", SKYBRIDGE_URI, SKYBRIDGE_MIME]]) {
@@ -33864,9 +33952,11 @@ function registerChatgptWidget(server) {
   }
   server.registerTool(WIDGET_TOOL, {
     title: "Read a passage (P\u0101li and English)",
-    description: "Show an individual text in a reading view: P\u0101li (VRI) and one English translation, with citation, PTS page, translator, attribution and licence. Use when the user wants to read a sutta or passage. Accepts individual citations in supported scripts and source links; displayed text stays Roman. The P\u0101li works offline; English is fetched live. For English continuation use the exact english.continue_with arguments from the previous result.",
+    description: "Show an individual text in a reading view: P\u0101li (VRI) and one English translation, with citation, PTS page, translator, attribution and licence. Use when the user wants to read a sutta or passage. Accepts canonical or post-canonical citations (e.g. Vism 1.1), including native-script input. Post-canonical texts stay explicitly labelled not the canon and have no linked English here. Set script for supported native-script P\u0101li display; source references stay Roman. For complete root files including front matter, give book instead of uid; file refs are not individual sutta/rule citations and have no English here. Follow pali.continue_with for selection-preserving continuation. The P\u0101li works offline; English is fetched live. For English continuation use the exact english.continue_with arguments from the previous result.",
     inputSchema: {
-      uid: external_exports.string().min(1).max(300).describe("Any citation: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, a PTS page such as M i 55, or a suttacentral.net / accesstoinsight.org / dhammatalks.org link."),
+      uid: external_exports.string().min(1).max(300).optional().describe("Canonical or post-canonical citation (Vism 1.1); give uid or book, not both. Other citations: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, a PTS page such as M i 55, or a suttacentral.net / accesstoinsight.org / dhammatalks.org link."),
+      book: external_exports.string().trim().min(1).max(100).optional().describe("Complete VRI root source file ID from browse_canon node books, including front matter. Give book instead of uid. File refs do not identify individual suttas or rules; no English is selected here."),
+      script: external_exports.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
       translation: external_exports.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or a translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
       english: external_exports.boolean().default(true).describe("Fetch an English translation (live). false shows the P\u0101li only."),
       offset: external_exports.number().int().min(0).max(1e5).default(0).describe("P\u0101li segment offset for continuation."),
@@ -33907,7 +33997,7 @@ var WIDGET_HTML = `<!doctype html>
   .col { padding:12px 16px; min-width:0; }
   .col + .col { border-left:1px solid var(--line); }
   .col h2 { margin:0 0 8px; font:600 12px/1.4 system-ui, sans-serif; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); }
-  .seg { margin:0 0 10px; white-space:pre-wrap; }
+  .seg { margin:0 0 10px; white-space:pre-wrap; overflow-wrap:anywhere; }
   .seg.heading { font-weight:bold; }
   .seg.verse { padding-left:12px; border-left:2px solid var(--line); }
   .pts { font:11px/1 system-ui, sans-serif; color:var(--accent); margin-right:6px; }
@@ -33964,6 +34054,8 @@ var WIDGET_HTML = `<!doctype html>
     rendered = d;
     document.getElementById('title').textContent = (d.citation || '') + (d.title ? ' \xB7 ' + d.title : '');
     var meta = document.getElementById('meta'); clear(meta);
+    if (d.selection === 'source_book') meta.appendChild(el('span', 'chip', 'Complete source file \xB7 no individual text ID'));
+    if (d.canonical === false) meta.appendChild(el('span', 'chip', 'Post-canonical \xB7 not the canon'));
     if (d.collection) meta.appendChild(el('span', 'chip', d.collection));
     if (d.pts) meta.appendChild(el('span', 'chip', 'PTS ' + d.pts));
     if (d.vri_paragraphs) meta.appendChild(el('span', 'chip', 'VRI \xB6 ' + d.vri_paragraphs));
@@ -33971,10 +34063,13 @@ var WIDGET_HTML = `<!doctype html>
     if (d.approximate) meta.appendChild(el('span', 'chip', 'approximate mapping'));
 
     var pali = document.getElementById('pali'); clear(pali);
+    if ((d.canonical === false || d.selection === 'source_book') && d.label) pali.appendChild(el('p', 'note', d.label));
+    if (d.script_note) pali.appendChild(el('p', 'note', d.script_note));
     (d.notes || []).forEach(function (n) { pali.appendChild(el('p', 'note', n)); });
     (d.pali.segments || []).forEach(function (s) {
       var p = el('p', 'seg ' + (s.type || 'prose'));
       (s.pts_page_begins || []).forEach(function (pg) { p.appendChild(el('span', 'pts', pg)); });
+      if ((d.canonical === false || d.selection === 'source_book') && s.ref) p.appendChild(el('span', 'vri', s.ref));
       if (s.vri_paragraph) p.appendChild(el('span', 'vri', '\xB6' + s.vri_paragraph));
       p.appendChild(document.createTextNode(s.text || ''));
       pali.appendChild(p);
@@ -33998,8 +34093,8 @@ var WIDGET_HTML = `<!doctype html>
     var f = document.getElementById('footer'); clear(f);
     f.appendChild(el('p', '', 'P\u0101li: ' + (d.pali.edition || '') + '. ' + (d.pali.attribution || '') + ' ' + (d.pali.license || '')));
     if (d.english) f.appendChild(el('p', '', 'English: ' + (d.english.attribution || '') + ' ' + (d.english.license || '')));
-    var sc = el('p', ''); sc.appendChild(document.createTextNode('Parallels and other translations: ')); sc.appendChild(link(d.links && d.links.suttacentral, 'SuttaCentral')); f.appendChild(sc);
-    document.getElementById('status').textContent = (d.citation || 'Passage') + '. ' +
+    if (d.links && d.links.suttacentral) { var sc = el('p', ''); sc.appendChild(document.createTextNode('Parallels and other translations: ')); sc.appendChild(link(d.links.suttacentral, 'SuttaCentral')); f.appendChild(sc); }
+    document.getElementById('status').textContent = (d.citation || 'Passage') + '. ' + (d.canonical === false ? 'Post-canonical, not the canon. ' : d.selection === 'source_book' ? 'Complete source file, no individual text identity. ' : '') +
       (d.pali.returned ? 'Showing P\u0101li segments ' + (d.pali.offset + 1) + ' to ' + (d.pali.offset + d.pali.returned) + ' of ' + d.pali.total_segments + '. ' : 'No P\u0101li segments on this page. ') +
       (d.english ? 'English ' + (d.english.offset ? 'continuing from character ' + d.english.offset : 'loaded') + '.' : (d.english_error || 'No English translation requested.'));
   }

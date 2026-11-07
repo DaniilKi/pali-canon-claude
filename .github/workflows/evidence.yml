@@ -26,9 +26,13 @@ jobs:
           npm install --ignore-scripts --no-audit --no-fund "$RUNNER_TEMP"/evidence-pack/*.tgz
       - name: Follow every recorded evidence reference offline
         run: node scripts/audit-evidence.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report evidence.report.json
+      - name: Read canonical post-canonical and source-file widget selections offline
+        run: node scripts/audit-widget.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report widget-reading.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: evidence-reading-report
-          path: evidence.report.json
+          path: |
+            evidence.report.json
+            widget-reading.report.json
           if-no-files-found: warn

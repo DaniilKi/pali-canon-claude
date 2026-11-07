@@ -6,6 +6,7 @@ import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import { createServer } from '../src/server.mjs';
 import { registerChatgptWidget, WIDGET_HTML, WIDGET_TOOL } from '../src/chatgpt-widget.mjs';
 import { liveCache } from '../src/cache.mjs';
+import { transliterate } from '../src/script.mjs';
 
 const [a, b] = InMemoryTransport.createLinkedPair();
 const server = createServer();
@@ -54,7 +55,15 @@ try {
   assert.equal(refused.english, null);
   assert.match(refused.english_error, /offset|version|continu/i);
   assert.ok(refused.pali.segments.length);
-  process.stdout.write(JSON.stringify({ html: WIDGET_HTML, fixture: first,
+  const sourceFile = await read({ book: 'vin02m1', offset: 6, limit: 1 });
+  const sourceNext = await read(sourceFile.pali.continue_with.arguments);
+  const beforePostFetches = fetches;
+  const postFirst = await read({ uid: 'Vism 1.1', limit: 2 });
+  const postNext = await read(postFirst.pali.continue_with.arguments);
+  const postNative = await read({ uid: transliterate('Vism 1.1', 'roman', 'sinhala'), script: 'sinh', limit: 2 });
+  const postUncertain = await read({ uid: 'Vism 1.2', limit: 2 });
+  assert.equal(fetches, beforePostFetches, 'post-canonical widget must not fetch or invent English');
+  process.stdout.write(JSON.stringify({ source_file: { first: sourceFile, next: sourceNext }, postcanonical: { first: postFirst, next: postNext, native: postNative, uncertain: postUncertain }, html: WIDGET_HTML, fixture: first,
     continuation: { next, fallback, pinned, unpinned, primary, refused }, fixture_fetches: fetches }));
 } finally {
   globalThis.fetch = originalFetch;
