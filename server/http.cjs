@@ -28580,7 +28580,9 @@ function parseDate2(value, now = /* @__PURE__ */ new Date()) {
   if (date3 === void 0 || date3 === null || date3 === "") date3 = now.toISOString().slice(0, 10);
   const m = String(date3).trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if (!m) throw new Error(`Date "${value}" is not in YYYY-MM-DD form (for example 2026-11-01).`);
-  const ms = Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  const instant = /* @__PURE__ */ new Date(0);
+  instant.setUTCFullYear(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  const ms = instant.getTime();
   const check2 = new Date(ms).toISOString().slice(0, 10);
   if (check2 !== `${m[1]}-${m[2]}-${m[3]}`) throw new Error(`Date "${value}" does not exist.`);
   return { date: check2, dayNumber: Math.floor(ms / DAY_MS2) };
@@ -28634,7 +28636,8 @@ function dailyText(canon, { date: date3, kind = "verse" } = {}, now = /* @__PURE
     kind,
     how_chosen: kind === "sutta" ? `Fixed rotation through ${pool.length} suttas of DN, MN, SN, AN, Kp, Ud, Iti and Snp that have an English translation linked; the same date always gives the same sutta (for this data version), and every sutta comes round once in ${pool.length} days.` : `Fixed rotation through the ${pool.length} verses of the Dhammapada; the same date always gives the same verse, and every verse comes round once in ${pool.length} days.`,
     rotation: { position: position + 1, of: pool.length },
-    text: { id: u.id, citation: u.acronym, title: u.title || null, pts: described.pts, vri_paragraphs: described.vri_paragraphs }
+    text: { id: u.id, citation: u.acronym, title: u.title || null, pts: described.pts, vri_paragraphs: described.vri_paragraphs },
+    read_with: { tool: "get_text", uid: u.id }
   };
   const links = { suttacentral: described.links.suttacentral };
   if (kind === "sutta") {
@@ -33465,6 +33468,7 @@ function createServer2() {
       title: unit.title,
       edition: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), P\u0101li",
       attribution: source().attribution,
+      source: source(),
       total_segments: all.length,
       offset,
       limit,

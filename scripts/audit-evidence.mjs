@@ -11,6 +11,7 @@ import * as commentary from '../src/commentary.mjs';
 import * as parallels from '../src/parallels.mjs';
 import { checkReading, parallelPages } from './evidence/check.mjs';
 import { auditSearchCommands } from './evidence/search.mjs';
+import { auditStudyCommands } from './evidence/study.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 function option(name) {
@@ -90,9 +91,10 @@ try {
   assert.equal(counts.commentary_links, graph.citations.length);
   assert.equal(counts.shared_links, graph.shared.length);
   const search = await auditSearchCommands(call);
+  const study = await auditStudyCommands(call);
   assert.doesNotMatch(stderr, /UNEXPECTED_NETWORK_ATTEMPT/);
-  const report = { status: 'passed', counts, search, network_attempts: 0, vri_commit: canon.source().commit,
-    scope: 'All recorded commentary citation links, retained shared-passage refs and first/last-body search fixtures across all source books through an isolated installed server; does not validate inferred scholarly relationships or omitted/truncated refs.' };
+  const report = { status: 'passed', counts, search, study, network_attempts: 0, vri_commit: canon.source().commit,
+    scope: 'All recorded commentary citation links, retained shared-passage refs and source-book search fixtures and complete reading-plan/daily-rotation checks through an isolated installed server; does not validate inferred scholarly relationships or omitted/truncated refs.' };
   if (reportPath) await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report));
 } catch (error) {

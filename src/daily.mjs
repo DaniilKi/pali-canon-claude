@@ -14,7 +14,10 @@ export function parseDate(value, now = new Date()) {
   if (date === undefined || date === null || date === '') date = now.toISOString().slice(0, 10);
   const m = String(date).trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if (!m) throw new Error(`Date "${value}" is not in YYYY-MM-DD form (for example 2026-11-01).`);
-  const ms = Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  // Date.UTC interprets 00–99 as 1900–1999; set the full ISO year explicitly.
+  const instant = new Date(0);
+  instant.setUTCFullYear(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  const ms = instant.getTime();
   const check = new Date(ms).toISOString().slice(0, 10);
   if (check !== `${m[1]}-${m[2]}-${m[3]}`) throw new Error(`Date "${value}" does not exist.`);
   return { date: check, dayNumber: Math.floor(ms / DAY_MS) };
@@ -83,6 +86,7 @@ export function dailyText(canon, { date, kind = 'verse' } = {}, now = new Date()
       : `Fixed rotation through the ${pool.length} verses of the Dhammapada; the same date always gives the same verse, and every verse comes round once in ${pool.length} days.`,
     rotation: { position: position + 1, of: pool.length },
     text: { id: u.id, citation: u.acronym, title: u.title || null, pts: described.pts, vri_paragraphs: described.vri_paragraphs },
+    read_with: { tool: 'get_text', uid: u.id },
   };
   const links = { suttacentral: described.links.suttacentral };
   if (kind === 'sutta') {

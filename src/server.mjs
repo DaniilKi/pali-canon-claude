@@ -136,6 +136,7 @@ export function createServer() {
     const result = {
       text_id: unit.id, citation: unit.acronym, title: unit.title,
       edition: 'Chaṭṭha Saṅgāyana Tipiṭaka (VRI), Pāli', attribution: canon.source().attribution,
+      source: canon.source(),
       total_segments: all.length, offset, limit, returned: page.length,
       next_offset: offset + page.length < all.length ? offset + page.length : null,
       segments: page, notes, english_available: english.available(unit),
