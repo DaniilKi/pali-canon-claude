@@ -198,3 +198,33 @@ test('sutta names: a quotation next to the name that comes from another text dro
   assert.ok(link('dn2', 'dn29'));
   assert.ok(link('ne13', 'mn6'));
 });
+
+
+test('native parallel citations retain graph evidence, pagination and source cautions', async () => {
+  const { SCRIPTS, transliterate } = await import('../src/script.mjs');
+  for (const ref of ['MN 10', 'AN 3.65', 'Dhp 1-20', 'AN 1.296-305']) {
+    const baseline = parallels.getParallels(ref, { offset: 1, limit: 2 });
+    for (const script of SCRIPTS) {
+      const input = transliterate(ref, 'roman', script);
+      const result = parallels.getParallels(input, { offset: 1, limit: 2 });
+      const { input_script, input_romanized, ...graph } = result;
+      assert.deepEqual(graph, baseline, `${script}: ${ref}`);
+      assert.equal(input_script, script === 'roman' ? undefined : script);
+      if (input_script) assert.equal(input_romanized.toLowerCase(), ref.toLowerCase());
+    }
+  }
+  const page = parallels.getParallels('A i 189');
+  assert.equal(page.text_id, 'an3.65');
+  assert.match(page.notes.join(' '), /Also numbered AN 3.66/);
+  assert.match(parallels.getParallels('AN 3.65-65').notes.join(' '), /identical endpoints/);
+});
+
+test('parallel lookup refuses mixed input, ambiguous pages and unindexed spans in every script', async () => {
+  const { SCRIPTS, transliterate } = await import('../src/script.mjs');
+  for (const script of SCRIPTS) {
+    for (const ref of ['AN 3.65-66', 'S i 57']) {
+      assert.throws(() => parallels.getParallels(transliterate(ref, 'roman', script)), /spans multiple texts|multiple canonical passages/);
+    }
+  }
+  for (const ref of ['AN ๓.६५', '漢AN 3.65字', 'ηAN 3.65', 'AN 3.65-9999']) assert.throws(() => parallels.getParallels(ref));
+});

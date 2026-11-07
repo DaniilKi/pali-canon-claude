@@ -38,7 +38,7 @@ The server has 34 tools. Twenty-seven of them work without internet (`get_text` 
 | `get_post_canonical` | Reads post-canonical Pāli books (Visuddhimagga, Abhidhammatthasaṅgaha, sub-commentaries), labelled as not canon | No |
 | `search_post_canonical` | Searches the post-canonical books | No |
 | `analyse_passage` | Word-by-word analysis of canonical, post-canonical or complete-root-file Pāli using the bundled DPD subset; source labels remain distinct and unknown words are explicit | No |
-| `get_parallels` | Other texts that share a passage with this one, and texts the commentary cites, each link saying its source | No |
+| `get_parallels` | Other texts that share a passage with this one, and texts the commentary cites, each link saying its source; supported native citations work, ambiguous pages/spans require exact selection | No |
 | `glossary` | English → Pāli terms ("mindfulness" → sati) and Pāli in Roman/native scripts → short English glosses, from the Digital Pāḷi Dictionary's English index and the curated list glosses, each with its source | No |
 | `verify_quote` | Checks whether a quotation attributed to the Buddha is in the texts: Roman/native Pāli against the bundled canon offline, English against linked translations; normalized fuzzy matches with explicit exactness/scope limits and inherited-source cautions | Yes |
 | `lookup_name` | Finds source-backed title/body occurrences of a Pāli name in Roman/native scripts (Sāriputta, Sāvatthī). DPPN entries are not bundled; the response exposes that licence gate. | No |

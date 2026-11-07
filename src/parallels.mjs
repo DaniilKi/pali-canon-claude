@@ -16,6 +16,8 @@ import { gunzipSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as canon from './canon.mjs';
+import { romanizeLookupInput, inputNote } from './script.mjs';
+import { parseCitation, citationId, rangeEndPath } from './citations.mjs';
 
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
@@ -136,8 +138,21 @@ function sourceInfo(d) {
 
 /** Parallels and cross-references of a text: resolves any citation, paginated by link. */
 export function getParallels(uid, { offset = 0, limit = 25 } = {}) {
-  const { unit, notes } = canon.resolve(uid);
-  const base = { text_id: unit.id, citation: unit.acronym, title: unit.title || null };
+  const input = romanizeLookupInput(uid);
+  const { unit, notes: referenceNotes = [], alternatives = [] } = canon.resolve(input.text);
+  const citation = parseCitation(input.text);
+  if (citation.kind === 'id' && citation.end !== null && citation.end !== undefined) {
+    const first = citationId({ ...citation, end: null });
+    const last = citationId({ ...citation, path: rangeEndPath(citation), end: null });
+    if (first !== last && citationId(citation) !== unit.id) {
+      throw new Error(`"${uid}" spans multiple texts rather than one recorded source group. Request each exact text separately, or choose an indexed source group for parallels.`);
+    }
+  }
+  if (alternatives.length) {
+    throw new Error(`"${uid}" maps to multiple canonical passages. Candidates include ${[unit.acronym, ...alternatives.map(u => u.citation)].join(', ')}. Choose an exact text for parallels.`);
+  }
+  const notes = [...new Set([...referenceNotes, ...canon.resolve(unit.id).notes])];
+  const base = { text_id: unit.id, citation: unit.acronym, title: unit.title || null, ...inputNote(input) };
   const suttacentral = {
     url: `https://suttacentral.net/${unit.id}`,
     note: 'SuttaCentral lists parallels in other Buddhist traditions (Chinese, Sanskrit, Tibetan). Link only: its content is not fetched or bundled, at its request.',
@@ -168,7 +183,7 @@ export function getParallels(uid, { offset = 0, limit = 25 } = {}) {
 
 /** Feature registration (src/features/index.mjs). */
 export function register({ tool, z, citation }) {
-  tool('get_parallels', 'Find parallels and cross-references for a text, built offline from the bundled VRI edition: (1) other canonical texts the traditional commentary (Aṭṭhakathā) cites when explaining this one, or that cite it, each with the commentary passage and the words that make the citation; (2) other canonical texts that share a passage with it word for word, with the segment refs on both sides and a similarity score (stock formulae left out). Every link states its source and how it was matched; ambiguous references are left out. Also gives the SuttaCentral link for parallels in other traditions (link only). Paginated. Works offline.', {
+  tool('get_parallels', 'Find parallels and cross-references for a text, built offline from the bundled VRI edition: (1) other canonical texts the traditional commentary (Aṭṭhakathā) cites when explaining this one, or that cite it, each with the commentary passage and the words that make the citation; (2) other canonical texts that share a passage with it word for word, with the segment refs on both sides and a similarity score (stock formulae left out). Every link states its source and how it was matched; ambiguous references are left out. Also gives the SuttaCentral link for parallels in other traditions (link only). Accepts citations in supported Pāli scripts; ambiguous pages and multi-text fallback spans require an exact text or indexed group. Paginated. Works offline.', {
     uid: citation,
     limit: z.number().int().min(1).max(100).default(25).describe('Links per page.'),
     offset: z.number().int().min(0).max(100000).default(0).describe('Link offset for continuation.'),
