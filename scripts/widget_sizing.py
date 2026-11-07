@@ -62,7 +62,12 @@ def check_sizing(browser, payload):
         assert button.evaluate('e=>e===document.activeElement'), 'sizing must not steal keyboard focus'
         assert frame.get_by_role('region', name='Pāli', exact=True).count() == 1
         page.evaluate("()=>{window.cap=300;document.querySelector('iframe').style.height='300px'}")
-        button.focus(); button.scroll_into_view_if_needed()
+        frame.locator('#title').focus()
+        for _ in range(8):
+            frame.locator('body').press('Tab')
+            if button.evaluate('e=>e===document.activeElement'):
+                break
+        assert button.evaluate('e=>e===document.activeElement'), 'keyboard tab order must reach navigation'
         assert frame.evaluate('document.scrollingElement.scrollHeight>innerHeight'), 'capped host retains scrolling'
         assert button.evaluate('e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight+1}'), 'keyboard controls remain reachable in capped host'
         page.evaluate('window.cap=null')
@@ -80,6 +85,6 @@ def check_sizing(browser, payload):
         assert not errors, errors
         assert not requests, requests
         results.append({'bridge': bridge, 'height_updates': count, 'short': short, 'long': tall, 'narrow': narrow, 'enlarged': enlarged, 'error': small,
-                        'checks': ['grow and shrink', '320px reflow', '200% text size', 'stable feedback', 'focus retained', 'capped-host scrolling and reachable controls', 'teardown disconnect', 'zero network requests']})
+                        'checks': ['grow and shrink', '320px reflow', '200% text size', 'stable feedback', 'focus retained', 'capped-host scrolling and keyboard-tab reachable controls', 'teardown disconnect', 'zero network requests']})
         page.close()
     return results

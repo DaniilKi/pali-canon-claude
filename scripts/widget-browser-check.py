@@ -55,7 +55,8 @@ def check():
                       const frame=document.createElement('iframe'); frame.id='reader';
                       window.addEventListener('message', ev=> {
                         window.bridgeMessages.push(ev.data);
-                        if(ev.data.method==='ui/initialize') frame.contentWindow.postMessage({jsonrpc:'2.0',id:1,result:{hostContext:{theme:'dark'},hostCapabilities:{serverTools:{},updateModelContext:modalities}}},'*');
+                        if(ev.data.method==='ui/initialize') frame.contentWindow.postMessage({jsonrpc:'2.0',id:1,result:{hostContext:{theme:'dark'},hostCapabilities:{serverTools:{},openLinks:{},updateModelContext:modalities}}},'*');
+                        if(ev.data.method==='ui/open-link') frame.contentWindow.postMessage({jsonrpc:'2.0',id:ev.data.id,result:window.refuseLinks==='malformed'?null:window.refuseLinks?{isError:true}:{}},'*');
                         if(ev.data.method==='tools/call') window.navQueue.push(ev.data);
                         if(ev.data.method==='ui/update-model-context') {
                           const payload=ev.data.params.structuredContent||JSON.parse(ev.data.params.content[0].text);
@@ -70,7 +71,7 @@ def check():
                     send = lambda data: page.evaluate(
                         "data=>document.querySelector('iframe').contentWindow.postMessage({jsonrpc:'2.0',method:'ui/notifications/tool-result',params:{structuredContent:data}},'*')", data)
                 else:
-                    page.evaluate("""() => {window.opened=[];window.navQueue=[];window.contextHistory=[];window.widgetStateAttempts=0;window.openai={theme:'dark',openExternal:args=>window.opened.push(args.href),callTool:(name,args)=>new Promise((resolve,reject)=>window.navQueue.push({params:{name,arguments:args},resolve,reject})),setWidgetState:state=>{window.widgetStateAttempts++;if(window.widgetStateThrows)throw Error('Fixture state failure');window.openai.widgetState=state;window.contextHistory.push(JSON.parse(state.modelContent).pali_reader);window.dispatchEvent(new Event('openai:set_globals'))}}}""")
+                    page.evaluate("""() => {window.opened=[];window.navQueue=[];window.contextHistory=[];window.widgetStateAttempts=0;window.openai={theme:'dark',openExternal:args=>{if(window.refuseLinks==='async')return Promise.reject(Error('Private asynchronous link refusal fixture'));if(window.refuseLinks)throw Error('Private link refusal fixture');window.opened.push(args.href)},callTool:(name,args)=>new Promise((resolve,reject)=>window.navQueue.push({params:{name,arguments:args},resolve,reject})),setWidgetState:state=>{window.widgetStateAttempts++;if(window.widgetStateThrows)throw Error('Fixture state failure');window.openai.widgetState=state;window.contextHistory.push(JSON.parse(state.modelContent).pali_reader);window.dispatchEvent(new Event('openai:set_globals'))}}}""")
                     page.set_content(html)
                     frame = page.main_frame
                     send = lambda data: page.evaluate(
@@ -159,7 +160,7 @@ def check():
                 assert frame.get_by_role("heading", level=1).count() == 1
                 assert frame.get_by_role("region", name="Pāli", exact=True).count() == 1
                 assert frame.get_by_role("region", name="English", exact=True).count() == 1
-                status = frame.get_by_role("status")
+                status = frame.locator("#status")
                 assert status.get_attribute("aria-live") == "polite"
                 assert status.get_attribute("aria-atomic") == "true"
                 assert "segments 1 to 3" in status.text_content()
@@ -177,6 +178,16 @@ def check():
                 else:
                     opened = page.evaluate("window.opened[0]")
                 assert opened == fixture["links"]["suttacentral"]
+                frame.locator('#link-status').filter(has_text='not verified').wait_for()
+                page.evaluate('window.refuseLinks=true')
+                frame.locator('a').press('Enter')
+                frame.locator('#link-status').filter(has_text='could not open').wait_for()
+                assert fixture['pali']['segments'][0]['text'] in frame.locator('#pali').inner_text()
+                assert 'Private link refusal' not in frame.locator('#link-status').inner_text()
+                page.evaluate("window.refuseLinks=" + json.dumps('malformed' if bridge == 'MCP Apps' else 'async'))
+                frame.locator('a').press('Enter')
+                frame.locator('#link-status').filter(has_text='did not confirm' if bridge == 'MCP Apps' else 'could not open').wait_for()
+                page.evaluate('window.refuseLinks=false')
                 frame.evaluate("document.body.style.zoom='2'")
                 assert frame.evaluate("document.documentElement.scrollWidth<=innerWidth"), "overflow at 200% zoom"
                 frame.evaluate("document.body.style.zoom='1'")
@@ -417,7 +428,7 @@ def check():
                 assert not errors, errors
                 checks.append({"bridge": bridge, "width": width, "navigation_calls": navigation_calls, "partial_events": partial_events, "context_updates": page.evaluate("window.contextHistory.length"), "context_mode": ("structuredContent" if width == 390 else "text") if bridge == "MCP Apps" else "widget-state",
                     "checks": ["initialization", "theme", "source text", "responsive columns", "no horizontal overflow",
-                        "named landmarks and headings", "keyboard link activation", "200% zoom", "live status updates", "streamed input loading and cancellation", "private partial arguments omitted", "partial echoes preserve pending reads", "closed reader ignores partial input", "cancelled reading clears source and model state", "late cancelled replies ignored and fresh reading recovers",
+                        "named landmarks and headings", "keyboard link activation", "host link refusal preserves source and reports failure", "malformed MCP and rejected legacy link outcomes", "200% zoom", "live status updates", "streamed input loading and cancellation", "private partial arguments omitted", "partial echoes preserve pending reads", "closed reader ignores partial input", "cancelled reading clears source and model state", "late cancelled replies ignored and fresh reading recovers",
                         "Pāli continuation", "English pinned continuation after primary recovery", "unpinned offset refused",
                         "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "commentary labels and availability", "unaligned source caution", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "exact Pali segment without invented English alignment", "source-preserving context and exact return", "direct navigation controls and keyboard activation", "late success and rejection ignored", "navigation failure clears stale content", "local navigation survives globals updates", "model-context capability and modality checks", "metadata-only source context and replay commands", "late context acknowledgements coalesce to current state", "context errors leave the reader usable", "cleared reading state on error", "teardown acknowledgement and terminal cleanup", "late closed-reader replies ignored", "no invented post-canonical/source-file links", "no JS errors"]})
                 page.close()

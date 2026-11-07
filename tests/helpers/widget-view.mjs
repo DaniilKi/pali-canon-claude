@@ -26,8 +26,8 @@ export const fixture = (label = 'first') => ({
 });
 export const settle = () => new Promise(resolve => setImmediate(resolve));
 
-export function view(bridge, { supported = true, modelCapabilities, stateWriter, initialize = true, sizingRuntime } = {}) {
-  const elements = Object.fromEntries(['title', 'meta', 'pali', 'english', 'footer', 'status', 'navigation', 'context-status'].map(id => [id, new Element()]));
+export function view(bridge, { supported = true, modelCapabilities, stateWriter, initialize = true, sizingRuntime, openLinks = true } = {}) {
+  const elements = Object.fromEntries(['title', 'meta', 'pali', 'english', 'footer', 'status', 'navigation', 'context-status', 'link-status'].map(id => [id, new Element()]));
   const handlers = {}, calls = [], messages = [], models = [], stateUpdates = [], timers = new Map(); let timer = 0;
   const parent = { postMessage(m) { messages.push(m); if (m.method === 'tools/call') calls.push(m); if (m.method === 'ui/update-model-context') models.push(m); } };
   const window = { parent, addEventListener(name, cb) { handlers[name] = cb; } };
@@ -39,10 +39,11 @@ export function view(bridge, { supported = true, modelCapabilities, stateWriter,
     window, document, Date, setTimeout(cb) { timers.set(++timer, cb); return timer; }, clearTimeout(id) { timers.delete(id); },
   });
   const message = data => handlers.message({ source: parent, data: { jsonrpc: '2.0', ...data } });
-  const init = caps => message({ id: 1, result: { hostCapabilities: { ...(supported ? { serverTools: {} } : {}), ...(caps === undefined ? {} : { updateModelContext: caps }) } } });
+  const init = caps => message({ id: 1, result: { hostCapabilities: { ...(supported ? { serverTools: {} } : {}), ...(openLinks ? { openLinks: {} } : {}), ...(caps === undefined ? {} : { updateModelContext: caps }) } } });
   if (bridge === 'MCP Apps' && initialize) init(modelCapabilities);
   return { elements, calls, timers, messages, models, stateUpdates, window, initialize: init,
     notify(method, params = {}) { message({ method, params }); },
+    response(id, result = {}, error) { message({ id, ...(error ? { error } : { result }) }); },
     request(id, method, params = {}) { message({ id, method, params }); },
     resize() { handlers.resize(); },
     pagehide(persisted = false) { handlers.pagehide({ persisted }); },

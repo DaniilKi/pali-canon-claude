@@ -33755,7 +33755,7 @@ function createServer2() {
 // src/chatgpt-widget.mjs
 var import_node_crypto2 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v14";
+var WIDGET_VERSION = "v15";
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 var MCP_APP_MIME = "text/html;profile=mcp-app";
@@ -34147,6 +34147,7 @@ var WIDGET_HTML = `<!doctype html>
 </main>
 <nav id="navigation" aria-label="Passage navigation"></nav>
 <p id="context-status" class="note" role="note" aria-live="polite" aria-atomic="true" style="padding:0 16px">Reading-context sharing has not been established.</p>
+<p id="link-status" class="note" role="status" aria-live="polite" aria-atomic="true" style="padding:0 16px"></p>
 <footer id="footer"></footer>
 <script>
 (function () {
@@ -34154,6 +34155,7 @@ var WIDGET_HTML = `<!doctype html>
   var closed = false;
   var generation = 0, requestId = 2, pending = null, serverTools = false, awaitingSelection = false, lastInput, lastOutput, lastMetadata;
   var modelCapabilities, modelChannel, modelModality, modelDesired, modelFlight, modelAccepted, modelFailure, modelRevision = 0, modelBlocked = false;
+  var linkFlight = null, hostLinks = false;
   var sizeChannel, sizeObserver, sizeFrame, sizeHeight, sizeBlocked = false;
   function stopSizing() {
     if (sizeObserver) sizeObserver.disconnect();
@@ -34275,6 +34277,7 @@ var WIDGET_HTML = `<!doctype html>
   }
   function canNavigate() { return !closed && (!!(window.openai && typeof window.openai.callTool === 'function') || serverTools); }
   function abandon() {
+    resetLink();
     if (pending) { clearTimeout(pending.timer); pending = null; }
     document.getElementById('navigation').setAttribute('aria-busy', 'false');
   }
@@ -34322,6 +34325,7 @@ var WIDGET_HTML = `<!doctype html>
   }
   function navigate(command) {
     if (pending || awaitingSelection || !canNavigate()) return;
+    resetLink();
     var call = { id: requestId++, generation: generation, command: command }; pending = call;
     document.getElementById('navigation').setAttribute('aria-busy', 'true'); navigation();
     document.getElementById('status').textContent = 'Loading the requested passage\u2026';
@@ -34336,10 +34340,35 @@ var WIDGET_HTML = `<!doctype html>
     } catch (error) { finish(call, null, error); }
   }
   function post(msg) { try { window.parent.postMessage(msg, '*'); } catch (e) {} }
+  function linkStatus(text) {
+    var node = document.getElementById('link-status');
+    if (node) node.textContent = text;
+    queueSize();
+  }
+  function resetLink() {
+    if (linkFlight) clearTimeout(linkFlight.timer);
+    linkFlight = null; linkStatus('');
+  }
+  function finishLink(call, failed, accepted) {
+    if (closed || linkFlight !== call) return;
+    clearTimeout(call.timer); linkFlight = null;
+    linkStatus(failed === 'unconfirmed' ? 'The host did not confirm the link request. Opening the destination is not verified. Use the link address to open it yourself.' : failed ? 'The host could not open this link. Use the link address to open it yourself.' :
+      accepted ? 'The host accepted the link request. Opening the destination is not verified.' : 'Link request sent to the host. Opening the destination is not verified.');
+  }
   function openLink(url) {
-    if (closed) return;
-    if (window.openai && typeof window.openai.openExternal === 'function') { window.openai.openExternal({ href: url }); return; }
-    post({ jsonrpc: '2.0', id: Date.now(), method: 'ui/open-link', params: { url: url } });
+    if (closed || linkFlight) return;
+    var legacy = window.openai && typeof window.openai.openExternal === 'function';
+    if (!legacy && !hostLinks) { linkStatus('Host link opening is unavailable. Use the link address to open it yourself.'); return; }
+    var call = { id: requestId++ };
+    linkFlight = call; linkStatus('Asking the host to open the link\u2026');
+    call.timer = setTimeout(function () { finishLink(call, 'unconfirmed'); }, 30000);
+    try {
+      if (legacy) {
+        var result = window.openai.openExternal({ href: url });
+        if (result && typeof result.then === 'function') Promise.resolve(result).then(function (reply) { finishLink(call, !!(reply && reply.isError)); }, function () { finishLink(call, true); });
+        else finishLink(call, !!(result && result.isError));
+      } else post({ jsonrpc: '2.0', id: call.id, method: 'ui/open-link', params: { url: url } });
+    } catch (error) { finishLink(call, true); }
   }
   function link(url, text) {
     if (typeof url !== 'string' || !/^https:\\/\\//.test(url)) return el('span', '', text);
@@ -34503,6 +34532,9 @@ var WIDGET_HTML = `<!doctype html>
       if (m.result.hostContext) setTheme(m.result.hostContext.theme);
       post({ jsonrpc: '2.0', method: 'ui/notifications/initialized', params: {} });
       startSizing('mcp');
+      hostLinks = !!(m.result.hostCapabilities && m.result.hostCapabilities.openLinks);
+    } else if (linkFlight && m.id === linkFlight.id && (Object.prototype.hasOwnProperty.call(m, 'result') || m.error)) {
+      finishLink(linkFlight, m.error ? true : !m.result || typeof m.result !== 'object' || Array.isArray(m.result) ? 'unconfirmed' : !!m.result.isError, true);
     } else if (modelFlight && m.id === modelFlight.id && (m.result || m.error)) {
       modelReply(m);
     } else if (pending && m.id === pending.id && (m.result || m.error)) {

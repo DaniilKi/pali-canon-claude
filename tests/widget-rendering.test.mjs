@@ -18,7 +18,7 @@ class Element {
 }
 
 function view(output) {
-  const elements = Object.fromEntries(['title', 'meta', 'pali', 'english', 'footer', 'status', 'navigation', 'context-status'].map((id) => [id, new Element()]));
+  const elements = Object.fromEntries(['title', 'meta', 'pali', 'english', 'footer', 'status', 'navigation', 'context-status', 'link-status'].map((id) => [id, new Element()]));
   const handlers = {};
   const parent = { postMessage() {} };
   const window = { parent, openai: { toolOutput: output, theme: 'light' }, addEventListener(name, callback) { handlers[name] = callback; } };
