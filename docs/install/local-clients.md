@@ -42,9 +42,9 @@ The server has 34 tools. Twenty-seven of them work without internet (`get_text` 
 | `glossary` | English → Pāli terms ("mindfulness" → sati) and Pāli in Roman/native scripts → short English glosses, from the Digital Pāḷi Dictionary's English index and the curated list glosses, each with its source | No |
 | `verify_quote` | Checks whether a quotation attributed to the Buddha is in the texts: Pāli against the whole bundled canon (offline), English against the linked translations of the texts you name (default: the Dhammapada) | Yes |
 | `lookup_name` | Finds source-backed title/body occurrences of a Pāli name in Roman/native scripts (Sāriputta, Sāvatthī). DPPN entries are not bundled; the response exposes that licence gate. | No |
-| `topic` | Texts on a topic ("anger", "five hindrances") from Access to Insight's indexes | No |
-| `list_topics` | Browses or searches the topic index | No |
-| `dhamma_list` | A numbered list of the teaching (four noble truths, five aggregates…) with its Pāli members and source passage | No |
+| `topic` | Texts on a topic from Access to Insight's indexes; Pāli selectors accept Roman/native input with conversion labels and existing alternative matches | No |
+| `list_topics` | Browses or searches the topic index; native Pāli queries preserve filters, ranking and pagination | No |
+| `dhamma_list` | A numbered list with its Pāli members and source passage; Roman/native Pāli selectors, original gloss labels and source cautions | No |
 | `abhidhamma_matika` | The mātikā (matrix) of the Dhammasaṅgaṇī; Roman/native selectors with labelled conversion and original Roman source text | No |
 | `patthana_condition` | One of the 24 conditions of the Paṭṭhāna; Roman/native names or numbers select the original Pāli definition, with labelled conversion | No |
 | `paritta` | Paritta and other commonly recited texts from canonical VRI sources, with links to English; names and source citations accept Roman/native input, with conversion labels (returned source text stays Roman) | No |

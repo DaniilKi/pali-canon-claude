@@ -38,6 +38,8 @@ jobs:
         run: node scripts/audit-paritta.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-paritta.report.json
       - name: Check packaged native Abhidhamma selectors and source commands offline
         run: node scripts/audit-abhidhamma.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-abhidhamma.report.json
+      - name: Check packaged native topic and numbered-list selectors offline
+        run: node scripts/audit-topics.mjs --server-dir "$RUNNER_TEMP/evidence-install/node_modules/pali-canon-mcp/server" --report native-topics.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -50,4 +52,5 @@ jobs:
             native-lookups.report.json
             native-paritta.report.json
             native-abhidhamma.report.json
+            native-topics.report.json
           if-no-files-found: warn

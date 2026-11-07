@@ -27870,6 +27870,8 @@ function textInfo(canon, id) {
 }
 var TOPIC_NOTE = "Topic and links from Access to Insight's index; each link was mapped to the canon text it names. Read a text with get_text (P\u0101li) or get_translation (English). The index groups texts; it is not a ruling on what they mean.";
 function topic(canon, name) {
+  const input = romanizeLookupInput(name);
+  name = input.text;
   const all = topicsIndex().topics;
   let hits = match(all, name);
   if (!hits.length) {
@@ -27888,6 +27890,7 @@ function topic(canon, name) {
   const list = [t.name.replace(/\s*\(\d+\)$/, ""), ...names(t)].map(exact).find(Boolean) || null;
   const src = topicsIndex().source;
   return {
+    ...inputNote(input),
     topic: { slug: t.slug, name: t.name, index: t.index === "numerical" ? "Access to Insight Numerical Index" : "Access to Insight General Index", ...t.number ? { number: t.number } : {}, ...t.aliases?.length ? { aliases: t.aliases } : {}, ati_url: t.ati_url },
     texts: t.texts.map((x) => {
       const info = textInfo(canon, x.id);
@@ -27907,11 +27910,14 @@ function topic(canon, name) {
   };
 }
 function listTopics({ query, index: index4 = "all", offset = 0, limit = 50 } = {}) {
+  const input = romanizeLookupInput(query);
+  query = input.text;
   let pool = topicsIndex().topics;
   if (index4 !== "all") pool = pool.filter((t) => t.index === index4);
   if (query) pool = match(pool, query);
   const src = topicsIndex().source;
   return {
+    ...inputNote(input),
     total: pool.length,
     offset,
     returned: Math.min(limit, Math.max(0, pool.length - offset)),
@@ -27922,6 +27928,8 @@ function listTopics({ query, index: index4 = "all", offset = 0, limit = 50 } = {
   };
 }
 function dhammaList(canon, name) {
+  const input = romanizeLookupInput(name);
+  name = input.text;
   const data5 = listsIndex();
   if (!name) {
     return {
@@ -27936,6 +27944,7 @@ function dhammaList(canon, name) {
   const byslug = new Map(data5.lists.map((x) => [x.slug, x]));
   const topics = match(topicsIndex().topics.filter((t) => t.index === "numerical" && t.number === l.count), l.name.replace(/\s*\(.*\)$/, "").replace(/^\S+\s+/, ""));
   return {
+    ...inputNote(input),
     slug: l.slug,
     name: l.name,
     pali: l.pali,
@@ -27954,19 +27963,23 @@ function dhammaList(canon, name) {
     source: { curated_by: "pali-canon-mcp (server/data/dhamma_lists.json)", text: canon.source().name, terms: canon.source().terms, pali: canon.source() }
   };
 }
+function withLookupInput(value, fn) {
+  const input = romanizeLookupInput(value);
+  return input.original ? fn(value) : withNormalised(value, fn);
+}
 function register7({ tool, z, canon }) {
   tool("topic", `Texts on a topic from Access to Insight's subject and numerical indexes (e.g. "emptiness", "anger", "five hindrances"), each mapped to its canon ID with title and PTS page. Works offline.`, {
-    name: z.string().min(1).max(200).describe('A topic name or slug, e.g. "emptiness", "upekkha", "kamma", "five hindrances".')
-  }, ({ name }) => withNormalised(name, (n) => topic(canon, n)));
+    name: z.string().min(1).max(200).describe('A topic name or slug, e.g. "emptiness", "upekkha", "kamma", "five hindrances". P\u0101li selectors accept supported native scripts with labelled conversion; result labels remain in their source form.')
+  }, ({ name }) => withLookupInput(name, (n) => topic(canon, n)));
   tool("list_topics", "Browse or search the topic index (over 300 topics from Access to Insight's General and Numerical indexes). Works offline.", {
-    query: z.string().max(200).optional().describe('Words to find in topic names, e.g. "anger" or "four".'),
+    query: z.string().max(200).optional().describe('Words to find in topic names, e.g. "anger" or "four"; P\u0101li in supported native scripts is converted and labelled.'),
     index: z.enum(["all", "subject", "numerical"]).optional().describe("Which index: subject topics, numbered topics, or all (default)."),
     offset: z.number().int().min(0).optional(),
     limit: z.number().int().min(1).max(200).optional()
-  }, ({ query, index: index4, offset, limit }) => withNormalised(query, (q) => listTopics({ query: q, index: index4, offset, limit })));
+  }, ({ query, index: index4, offset, limit }) => withLookupInput(query, (q) => listTopics({ query: q, index: index4, offset, limit })));
   tool("dhamma_list", "A standard numbered list of the teaching (four noble truths, five aggregates, seven factors of awakening, ten fetters, twelve links\u2026) with its members in P\u0101li, plain-English glosses and the canonical passage that sets it out. No name lists them all. Works offline.", {
-    name: z.string().max(200).optional().describe('A list name or slug, e.g. "five hindrances", "eightfold path", "37 aids", "brahmaviharas". Omit to see every list.')
-  }, ({ name }) => withNormalised(name, (n) => dhammaList(canon, n)));
+    name: z.string().max(200).optional().describe('A list name or slug, e.g. "five hindrances", "eightfold path", "37 aids", "brahmaviharas". P\u0101li selectors accept supported native scripts with labelled conversion. Omit to see every list.')
+  }, ({ name }) => withLookupInput(name, (n) => dhammaList(canon, n)));
 }
 
 // src/dppn.mjs
