@@ -1,0 +1,1043 @@
+{
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "baseline": "29f4475ad56914ebefe90046c5235700bbce1a06",
+  "screen_definition": "Authored ATI tipitaka HTML absent from the baseline translation index; excludes index.html and SLTP. Metadata screen, not complete translation assessment.",
+  "candidates": 114,
+  "accepted_links": 4,
+  "newly_covered_units": [
+    "thig5.11",
+    "thag19.1"
+  ],
+  "rows": [
+    {
+      "path": "tipitaka/dn/dn.16.1-6.vaji.html",
+      "title": "Maha-parinibbana Sutta: Last Days of the Buddha",
+      "reference": "D ii 72",
+      "translator": "Sister Vajira & Francis Story",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/dn/dn.16.5-6.than.html",
+      "title": "Maha-parinibbana Sutta: The Great Discourse on the Total Unbinding",
+      "reference": "D ii 137",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn36/sn36.015.nypo.html",
+      "title": "Santaka Sutta: To Ananda (1)",
+      "reference": "S iv 219",
+      "translator": "Nyanaponika Thera",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn44/sn44.intro.than.html",
+      "title": "Introduction to the Avyakata Samyutta: (Undeclared-connected)",
+      "reference": "",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_an_individual_text",
+      "reason": "Introduction or whole collection; not an ordinary whole-unit link."
+    },
+    {
+      "path": "tipitaka/sn/sn47/sn47.035.than.html",
+      "title": "Sata Sutta: Mindful",
+      "reference": "S v 180",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn04/sn04.008.than.html",
+      "title": "Nandana Sutta: Delight",
+      "reference": "S i 107",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn22/sn22.110.wlsh.html",
+      "title": "Araha.m Sutta: The Arahant",
+      "reference": "S iii 161",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn22/sn22.121.than.html",
+      "title": "Upadana Sutta: Clinging",
+      "reference": "S iii 167",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn22/sn22.007.wlsh.html",
+      "title": "Upaadaaparitassanaa Sutta: Grasping and Worry",
+      "reference": "S iii 15",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn22/sn22.109.wlsh.html",
+      "title": "Sotaapanno Sutta: The Sotaapanna ('Stream-winner')",
+      "reference": "S iii 160",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn07/sn07.021.wlsh.html",
+      "title": "Sangaarava Sutta: Sangaarava",
+      "reference": "S i 182",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn09/sn09.011.than.html",
+      "title": "Ayoniso-manasikara Sutta: Inappropriate Attention",
+      "reference": "S i 203",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn03/sn03.007.than.html",
+      "title": "Atthakarana Sutta: In Judgment",
+      "reference": "S i 74",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn27/sn27.001-010.than.html",
+      "title": "Upakkilesa Samyutta: Defilements",
+      "reference": "S iii 232",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn12/sn12.016.wlsh.html",
+      "title": "Dhammakathiko Sutta: The Teacher of the Dhamma",
+      "reference": "S ii 18",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn17/sn17.005.than.html",
+      "title": "Pilahaka Sutta: The Dung Beetle",
+      "reference": "S ii 228",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn17/sn17.005.wlsh.html",
+      "title": "Piḷhika Sutta: The Dung Beetle",
+      "reference": "S ii 228",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn01/sn01.042.than.html",
+      "title": "Kindada Sutta: A Giver of What",
+      "reference": "S i 32",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn01/sn01.009.wlsh.html",
+      "title": "Maanakaamo Sutta: Vain Conceits",
+      "reference": "S i 4",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn01/sn01.003.wlsh.html",
+      "title": "Upaneyya.m Sutta: Doomed",
+      "reference": "S i 2",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn01/sn01.071.than.html",
+      "title": "Ghatva Sutta: Having Killed",
+      "reference": "S i 41",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn01/sn01.025.wlsh.html",
+      "title": "Araha.m Sutta: The Arahant",
+      "reference": "S i 14",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn35/sn35.197.than.html",
+      "title": "Asivisa Sutta: Vipers",
+      "reference": "S iv 172",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn55/sn55.024.wlsh.html",
+      "title": "Sarakaani Sutta: Sarakaani (Who Took to Drink)",
+      "reference": "S v 375",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn56/sn56.102-113.than.html",
+      "title": "Pansu Suttas: Dust",
+      "reference": "S v 474",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn15/sn15.014.than.html",
+      "title": "Mata Sutta: Mother",
+      "reference": "S ii 189",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn40/sn40.009.wlsh.html",
+      "title": "Animitto Sutta: The Signless",
+      "reference": "S iv 268",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn21/sn21.008.wlsh.html",
+      "title": "Nando Sutta: Nanda",
+      "reference": "S ii 281",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn25/sn25.005.than.html",
+      "title": "Vedana Sutta: Feeling",
+      "reference": "S iii 226",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/sn/sn02/sn02.008.wlsh.html",
+      "title": "Taayano Sutta: Taayana",
+      "reference": "S i 49",
+      "translator": "Maurice O'Connell Walshe",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an02/an02.046.than.html",
+      "title": "Ukkacita Sutta: Bombast",
+      "reference": "A i 72",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an02/an02.009.than.html",
+      "title": "Lokapala Sutta: Guardians of the World",
+      "reference": "A i 51",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an02/an02.009.irel.html",
+      "title": "Lokapala Sutta: The Bright Protectors",
+      "reference": "A i 51",
+      "translator": "John D. Ireland",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an02/an02.025.than.html",
+      "title": "Neyyatha Sutta: A Meaning to be Inferred",
+      "reference": "A i 60",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an02/an02.125-126.than.html",
+      "title": "Ghosa Suttas: Voice",
+      "reference": "A i 87",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an02/an02.019.than.html",
+      "title": "Kusala Sutta: Skillful",
+      "reference": "A i 58",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an02/an02.031.than.html",
+      "title": "Kataññu Suttas: Gratitude",
+      "reference": "A i 61",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an02/an02.119.than.html",
+      "title": "Dullabha Sutta: Hard to Find",
+      "reference": "A i 87",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an09/an09.042.than.html",
+      "title": "Pañcala Sutta: Pañcala's Verse",
+      "reference": "A iv 448",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an08/an08.059.kuma.html",
+      "title": "Pathama Atthapuggala Sutta: Eight Individuals (a)",
+      "reference": "A iv 292",
+      "translator": "Kumara Bhikkhu",
+      "license": "ATI_DEPRECATED",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an01/an01.045-046.than.html",
+      "title": "Udakarahaka Suttas: A Pool of Water",
+      "reference": "A i 9",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an01/an01.049.than.html",
+      "title": "Pabhassara Sutta: Luminous",
+      "reference": "A i 10",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an01/an01.048.than.html",
+      "title": "Lahu-parivatta Sutta: Quick to Reverse Itself",
+      "reference": "A i 10",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an01/an01.047.than.html",
+      "title": "Mudu Sutta: Soft",
+      "reference": "A i 8",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an01/an01.021-040.than.html",
+      "title": "Ekadhamma Suttas: A Single Thing",
+      "reference": "A i 5",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an10/an10.208.than.html",
+      "title": "Brahmavihara Sutta: The Sublime Attitudes",
+      "reference": "A v 299",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an10/an10.013.than.html",
+      "title": "Sanyojana Sutta: Fetters",
+      "reference": "A v 17",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an03/an03.089.than.html",
+      "title": "Sikkha Sutta: Trainings (2)",
+      "reference": "A i 235",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an03/an03.086.than.html",
+      "title": "Sekhin Sutta: One in Training (2)",
+      "reference": "A i 232",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an03/an03.088.than.html",
+      "title": "Sikkha Sutta: Trainings (1)",
+      "reference": "A i 235",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an03/an03.038.than.html",
+      "title": "Sukhamala Sutta: Refinement",
+      "reference": "A i 145",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an03/an03.100.11-15.than.html",
+      "title": "Nimitta Sutta: Themes",
+      "reference": "A i 255",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an03/an03.105.than.html",
+      "title": "Kuta Sutta: The Peak of the Roof",
+      "reference": "A i 261",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an03/an03.085.than.html",
+      "title": "Sekhin Sutta: One in Training (1)",
+      "reference": "A i 231",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an03/an03.052.than.html",
+      "title": "Dvejana Sutta: Two People (2)",
+      "reference": "A i 156",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an03/an03.134.than.html",
+      "title": "Dhamma-niyama Sutta: The Discourse on the Orderliness of the Dhamma",
+      "reference": "A i 286",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an03/an03.100.01-10.than.html",
+      "title": "Pansadhovaka Sutta: The Dirt-washer",
+      "reference": "A i 256",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an11/an11.010.than.html",
+      "title": "Sandha Sutta: To Sandha",
+      "reference": "A v 323",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an05/an05.254.than.html",
+      "title": "Macchariya Suttas: Stinginess",
+      "reference": "A iii 272",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an05/an05.064.than.html",
+      "title": "Vuddhi Sutta: Growth",
+      "reference": "A iii 80",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an05/an05.130.than.html",
+      "title": "Sampada Sutta: Being Consummate",
+      "reference": "A iii 147",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an04/an04.259.than.html",
+      "title": "Araññika Sutta: A Wilderness Dweller",
+      "reference": "A ii 252",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an04/an04.077.than.html",
+      "title": "Acintita Sutta: Unconjecturable",
+      "reference": "A ii 80",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an04/an04.124.than.html",
+      "title": "Jhana Sutta: Mental Absorption (2)",
+      "reference": "A ii 128",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an04/an04.174.than.html",
+      "title": "Kotthita Sutta: To Kotthita",
+      "reference": "A ii 161",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an07/an07.051.than.html",
+      "title": "Avyakata Sutta: Undeclared",
+      "reference": "A iv 67",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an07/an07.048.than.html",
+      "title": "Saññoga Sutta: Bondage",
+      "reference": "A iv 57",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an07/an07.021.than.html",
+      "title": "Bhikkhu-aparihaniya Sutta: Conditions for No Decline Among the Monks",
+      "reference": "A iv 21",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an07/an07.032.than.html",
+      "title": "Hirima Sutta: A Sense of Shame",
+      "reference": "A iv 28",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an06/an06.104.than.html",
+      "title": "Anodhi Sutta: Without Exception (3)",
+      "reference": "A iii 444",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/an/an06/an06.102.than.html",
+      "title": "Anodhi Sutta: Without Exception (1)",
+      "reference": "A iii 443",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/vin/cv/cv.05.06.01x.olen.html",
+      "title": "A Wish of Loving Kindness",
+      "reference": "Horner vol. 5, pp. 148-9",
+      "translator": "Andrew Olendzki",
+      "license": "ATI_DEPRECATED",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/vin/cv/cv.08x.than.html",
+      "title": "Vatta Khandhaka: Collection of Duties",
+      "reference": "Horner vol. 5, pp. 291ff.",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/vin/sv/bhikkhu-pati.html",
+      "title": "Bhikkhu Pāṭimokkha: The Bhikkhus' Code of Discipline",
+      "reference": "",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/vin/sv/bhikkhuni-pati.html",
+      "title": "Bhikkhunī Pāṭimokkha: The Bhikkhunīs' Code of Discipline",
+      "reference": "",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/vin/sv/bhikkhu-pati-intro.html",
+      "title": "Introduction to the Patimokkha Rules",
+      "reference": "",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_an_individual_text",
+      "reason": "Introduction or whole collection; not an ordinary whole-unit link."
+    },
+    {
+      "path": "tipitaka/vin/mv/mv.10.02.03-20.than.html",
+      "title": "Dighavu-kumara Vatthu: The Story of Prince Dighavu",
+      "reference": "Horner vol. 4, pp. 489-498",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/vin/mv/mv.06.40.01.than.html",
+      "title": "Vinaya-samukkamsa: The Innate Principles of the Vinaya",
+      "reference": "Horner vol. 4, p. 347",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/vin/mv/mv.08.26.01-08.than.html",
+      "title": "Kucchivikara-vatthu: The Monk with Dysentery",
+      "reference": "Horner vol. 4, pp. 431-34",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/vin/mv/mv.01.23.01-10.than.html",
+      "title": "Upatissa-pasine: Upatissa's (Sariputta's) Question",
+      "reference": "Horner vol. 4, pp. 52ff.",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/nm/nm.2.04.olen.html",
+      "title": "Guhatthaka-suttaniddeso: Upon the Tip of a Needle",
+      "reference": "Nd i 42",
+      "translator": "Andrew Olendzki",
+      "license": "ATI_DEPRECATED",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/thag/thag.19.00x.olen.html",
+      "title": "Talaputa Thera: Rain of the Deva",
+      "reference": "Thag 1137",
+      "translator": "Andrew Olendzki",
+      "license": "ATI_DEPRECATED",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/thag/thag.09.00x.olen.html",
+      "title": "Bhuta Thera: No Greater Contentment",
+      "reference": "Thag 522-526",
+      "translator": "Andrew Olendzki",
+      "license": "ATI_DEPRECATED",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/thag/thag.01.00x.than.html",
+      "title": "Single Verses: (selected passages)",
+      "reference": "Thag 1-120",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/thag/thag.21.00.irel.html",
+      "title": "Vangisa",
+      "reference": "Thag 1209-1279",
+      "translator": "John D. Ireland",
+      "license": "BPS",
+      "status": "needs_compilation_scope_review",
+      "reason": "Page presents multiple Vaṅgīsa poems with contextual introductions; establish canonical scope and noncanonical boundaries."
+    },
+    {
+      "path": "tipitaka/kn/thag/thag.01.00x.hekh.html",
+      "title": "Single Verses",
+      "reference": "Thag 1-120",
+      "translator": "Hellmuth Hecker & Sister Khema",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/thag/thag.18.00x.olen.html",
+      "title": "Maha Kassapa Thera: At Home in the Mountains",
+      "reference": "Thag 1062-6, 1068-71",
+      "translator": "Andrew Olendzki",
+      "license": "ATI_DEPRECATED",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/thag/thag.03.08.than.html",
+      "title": "Yasoja",
+      "reference": "Thag 243-245",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "blocked_by_canonical_boundary",
+      "reason": "ATI Yasoja has three stanzas; indexed thag3.9 begins after the opening stanza. Do not attach to thag3.8 by number."
+    },
+    {
+      "path": "tipitaka/kn/thag/thag.18.00.than.html",
+      "title": "Maha Kassapa",
+      "reference": "Thag 1051-90",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/thag/thag.21.00x.hekh.html",
+      "title": "Vangisa",
+      "reference": "Thag 1224-25",
+      "translator": "Hellmuth Hecker & Sister Khema",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/thag/thag.19.00.khan.html",
+      "title": "Talaputa Thera: Talaputa",
+      "reference": "Thag 1091-1145",
+      "translator": "Bhikkhu Khantipalo",
+      "license": "BPS",
+      "status": "accepted_in_this_batch",
+      "reason": "Pinned page and rights checked; explicit whole-poem/discourse mapping in reviewed_ati_stories.json.",
+      "unit_id": "thag19.1"
+    },
+    {
+      "path": "tipitaka/kn/dhp/dhp.intro.than.html",
+      "title": "The Dhammapada: A Translation",
+      "reference": "",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_an_individual_text",
+      "reason": "Introduction or whole collection; not an ordinary whole-unit link."
+    },
+    {
+      "path": "tipitaka/kn/dhp/dhp.intro.budd.html",
+      "title": "The Dhammapada: The Buddha's Path of Wisdom",
+      "reference": "",
+      "translator": "Acharya Buddharakkhita",
+      "license": "BPS",
+      "status": "not_an_individual_text",
+      "reason": "Introduction or whole collection; not an ordinary whole-unit link."
+    },
+    {
+      "path": "tipitaka/kn/dhp/dhp.13x.olen.html",
+      "title": "Lokavagga: The World",
+      "reference": "Dhp 168-174",
+      "translator": "Andrew Olendzki",
+      "license": "ATI_DEPRECATED",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/snp/snp.5.15.than.html",
+      "title": "Mogharaja-manava-puccha: Mogharaja's Question",
+      "reference": "Sn 1116-1119",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/snp/snp.5.09.than.html",
+      "title": "Todeyya-manava-puccha: Todeyya's Questions",
+      "reference": "Sn 1088-1091",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/snp/snp.5.05.than.html",
+      "title": "Dhotaka-manava-puccha: Dhotaka's Questions",
+      "reference": "Sn 1061-1068",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/snp/snp.2.06.irel.html",
+      "title": "Dhammacariya Sutta: Wrong Conduct",
+      "reference": "Sn 274-283",
+      "translator": "John D. Ireland",
+      "license": "BPS",
+      "status": "accepted_in_this_batch",
+      "reason": "Pinned page and rights checked; explicit whole-poem/discourse mapping in reviewed_ati_stories.json.",
+      "unit_id": "snp2.6"
+    },
+    {
+      "path": "tipitaka/kn/snp/snp.5.06.than.html",
+      "title": "Upasiva-manava-puccha: Upasiva's Questions",
+      "reference": "Sn 1069-1076",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/snp/snp.5.14.than.html",
+      "title": "Posala-manava-puccha: Posala's Questions",
+      "reference": "Sn 1112-1115",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/snp/snp.5.15.irel.html",
+      "title": "Mogharaja-manava-puccha: Mogharaja's Question",
+      "reference": "Sn 1116-1119",
+      "translator": "John D. Ireland",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/iti/iti.intro.than.html",
+      "title": "Itivuttaka: This Was Said by the Buddha",
+      "reference": "",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_an_individual_text",
+      "reason": "Introduction or whole collection; not an ordinary whole-unit link."
+    },
+    {
+      "path": "tipitaka/kn/iti/iti.intro.irel.html",
+      "title": "Itivuttaka: The Buddha's Sayings",
+      "reference": "",
+      "translator": "John Ireland",
+      "license": "BPS",
+      "status": "not_an_individual_text",
+      "reason": "Introduction or whole collection; not an ordinary whole-unit link."
+    },
+    {
+      "path": "tipitaka/kn/iti/iti-than.html",
+      "title": "Itivuttaka: This Was Said by the Buddha",
+      "reference": "",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_an_individual_text",
+      "reason": "Introduction or whole collection; not an ordinary whole-unit link."
+    },
+    {
+      "path": "tipitaka/kn/miln/miln.5x.olen.html",
+      "title": "The Healing Medicine of the Dhamma",
+      "reference": "Miln 335",
+      "translator": "Andrew Olendzki",
+      "license": "ATI_DEPRECATED",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/miln/miln.intro.kell.html",
+      "title": "Milindapañha: The Questions of King Milinda",
+      "reference": "",
+      "translator": "John Kelly",
+      "license": "ATI_DEPRECATED",
+      "status": "not_an_individual_text",
+      "reason": "Introduction or whole collection; not an ordinary whole-unit link."
+    },
+    {
+      "path": "tipitaka/kn/miln/miln.3x.kell.html",
+      "title": "Questions on Distinguishing Characteristics",
+      "reference": "Miln 71-72; 82-83; 84",
+      "translator": "John Kelly",
+      "license": "ATI_DEPRECATED",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/miln/miln.2x.kell.html",
+      "title": "Questions on Distinguishing Characteristics",
+      "reference": "Miln 32-33; 39; 60-62",
+      "translator": "John Kelly",
+      "license": "ATI_DEPRECATED",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/miln/miln.5x.horn.html",
+      "title": "A Question (Solved by) Inference",
+      "reference": "Miln 329-347 (abridged)",
+      "translator": "I.B. Horner",
+      "license": "BPS",
+      "status": "needs_scoped_partial_review",
+      "reason": "Explicit source excerpt or abridgment; not whole-unit coverage."
+    },
+    {
+      "path": "tipitaka/kn/khp/khp.1-9x.piya.html",
+      "title": "The Khuddakapatha",
+      "reference": "Khp 1-6,9",
+      "translator": "Piyadassi Thera",
+      "license": "BPS",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/khp/khp.1-9.than.html",
+      "title": "The Khuddakapatha",
+      "reference": "Khp 1-9",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/thig/thig.01.00x.than.html",
+      "title": "Chapter 1: The Single Verses",
+      "reference": "Thig 1-18",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "not_yet_individually_reviewed",
+      "reason": "Scope, mapping and rights must be individually checked before acceptance."
+    },
+    {
+      "path": "tipitaka/kn/thig/thig.05.11.than.html",
+      "title": "Patacara's Thirty Students",
+      "reference": "Thig 117-121",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "status": "accepted_in_this_batch",
+      "reason": "Pinned page and rights checked; explicit whole-poem/discourse mapping in reviewed_ati_stories.json.",
+      "unit_id": "thig5.11"
+    },
+    {
+      "path": "tipitaka/kn/thig/thig.05.11.hekh.html",
+      "title": "Patacara's Thirty Students",
+      "reference": "Thig 117-121",
+      "translator": "Hellmuth Hecker & Sister Khema",
+      "license": "BPS",
+      "status": "accepted_in_this_batch",
+      "reason": "Pinned page and rights checked; explicit whole-poem/discourse mapping in reviewed_ati_stories.json.",
+      "unit_id": "thig5.11"
+    }
+  ]
+}

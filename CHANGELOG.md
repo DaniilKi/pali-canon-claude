@@ -4,6 +4,10 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Added four more reviewed ATI links: two translations of Thig 5.11, the
+  complete 55-stanza Tālapuṭa poem (Thag 19.1), and John D. Ireland's Sn 2.6.
+  These give two previously unlinked canonical texts their first English
+  choices. Multiple translators are preserved rather than overwritten (D182).
 - Added three reviewed Access to Insight whole-story translation links: Pv 5,
   Vv 16 and Vv 35. Retrieval carries edition-number/name differences and the
   publisher's original copyright, attribution and free-distribution notice.

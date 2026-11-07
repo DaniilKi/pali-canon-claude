@@ -57,6 +57,78 @@
         "vri_stanzas": 12
       },
       "mapping_note": "Whole-story correspondence, not line-by-line alignment: Vv 3.7 (Sesavati) corresponds to Vv 35 (Pesavatīvimānavatthu). ATI cites Vv 647-658; this VRI edition numbers the verses 646–657. The translator calls the woman Sesavati; the VRI title and text use Pesavatī."
+    },
+    {
+      "unit_id": "thig5.11",
+      "path": "/tipitaka/kn/thig/thig.05.11.than",
+      "pali_title": "Tiṃsamattātherīgāthā",
+      "english_title": "Patacara's Thirty Students",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "Thig 5.11",
+      "source_verses": "Thig 117-121",
+      "vri_verses": "117–121",
+      "source_html_sha256": "e05560fdf623fc37bfd2723acfca5fb483fed99783128616090c1b2500affda7",
+      "pali_sha256": "38c17e5577c7e8d6a10a15798aaa5941d2721eb5ac16b58e58dc5dae0d38df9b",
+      "evidence": {
+        "basis": "source-labelled chapter/poem identity, distinctive opening/closing sequence, complete numbered-verse scope; not numerical offset inference",
+        "vri_stanzas": 5
+      },
+      "mapping_note": "Whole-poem/discourse correspondence, not line-by-line alignment: Thig 5.11 corresponds to Thig 5.11 (Tiṃsamattātherīgāthā). ATI cites Thig 117-121; this VRI edition numbers the verses 117–121. ATI names the thirty nuns as Patacara’s students; the VRI title means the group of thirty nuns."
+    },
+    {
+      "unit_id": "thig5.11",
+      "path": "/tipitaka/kn/thig/thig.05.11.hekh",
+      "pali_title": "Tiṃsamattātherīgāthā",
+      "english_title": "Patacara's Thirty Students",
+      "translator": "Hellmuth Hecker & Sister Khema",
+      "license": "BPS",
+      "source_reference": "Thig 5.11",
+      "source_verses": "Thig 117-121",
+      "vri_verses": "117–121",
+      "source_html_sha256": "59670dbf92cc47e5aa56448c5825bd464dce8842d434c03d91a5d69416001034",
+      "pali_sha256": "38c17e5577c7e8d6a10a15798aaa5941d2721eb5ac16b58e58dc5dae0d38df9b",
+      "evidence": {
+        "basis": "source-labelled chapter/poem identity, distinctive opening/closing sequence, complete numbered-verse scope; not numerical offset inference",
+        "vri_stanzas": 5
+      },
+      "mapping_note": "Whole-poem/discourse correspondence, not line-by-line alignment: Thig 5.11 corresponds to Thig 5.11 (Tiṃsamattātherīgāthā). ATI cites Thig 117-121; this VRI edition numbers the verses 117–121. ATI names the thirty nuns as Patacara’s students; the VRI title means the group of thirty nuns."
+    },
+    {
+      "unit_id": "thag19.1",
+      "path": "/tipitaka/kn/thag/thag.19.00.khan",
+      "pali_title": "Tālapuṭattheragāthā",
+      "english_title": "Talaputa",
+      "translator": "Bhikkhu Khantipalo",
+      "license": "BPS",
+      "source_reference": "Thag 19",
+      "source_verses": "Thag 1091-1145",
+      "vri_verses": "1094–1148",
+      "source_html_sha256": "938fcfb81d7ac8d0af18a0a2c73a9972b7f13c7f0a1ec355092c38b1ad2aad2f",
+      "pali_sha256": "c60808a66550800b88d944bdc02ac2f9d7be2f3b024f4afa62d9536d83cb0c03",
+      "evidence": {
+        "basis": "source-labelled chapter/poem identity, distinctive opening/closing sequence, complete numbered-verse scope; not numerical offset inference",
+        "vri_stanzas": 55
+      },
+      "mapping_note": "Whole-poem/discourse correspondence, not line-by-line alignment: Thag 19 corresponds to Thag 19.1 (Tālapuṭattheragāthā). ATI cites Thag 1091-1145; this VRI edition numbers the verses 1094–1148. The translation covers the 55 numbered poem stanzas; surrounding VRI chapter/recap material is not a separate translated work."
+    },
+    {
+      "unit_id": "snp2.6",
+      "path": "/tipitaka/kn/snp/snp.2.06.irel",
+      "pali_title": "Kapilasutta (dhammacariyasutta)",
+      "english_title": "Wrong Conduct",
+      "translator": "John D. Ireland",
+      "license": "BPS",
+      "source_reference": "Sn 2.6",
+      "source_verses": "Sn 274-283",
+      "vri_verses": "276–285",
+      "source_html_sha256": "fb4b47a1f2a82de1a9045b93a9274787f85d232a85811d30deab1603a90c479c",
+      "pali_sha256": "aa2a135fc1a34df818811abdae040b8f37f3edf2dc38fcf930a6b5d0e9fb31bb",
+      "evidence": {
+        "basis": "source-labelled chapter/poem identity, distinctive opening/closing sequence, complete numbered-verse scope; not numerical offset inference",
+        "vri_stanzas": 10
+      },
+      "mapping_note": "Whole-poem/discourse correspondence, not line-by-line alignment: Sn 2.6 corresponds to Snp 2.6 (Kapilasutta (dhammacariyasutta)). ATI cites Sn 274-283; this VRI edition numbers the verses 276–285. ATI uses Dhammacariya; the indexed title also records Kapila. The translation presents the discourse in prose, with translator notes."
     }
   ]
 }

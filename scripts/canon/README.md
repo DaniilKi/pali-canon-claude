@@ -48,11 +48,15 @@ Current coverage totals are unchanged.
 
 ### Reviewed ATI story links
 
-The final `--content` pass of `build_translations.py` applies the three reviewed
-story links in `reviewed_ati_stories.json` after the general linker. It checks the
+The final `--content` pass of `build_translations.py` applies the individually reviewed
+whole-text links in `reviewed_ati_stories.json` after the general linker. It checks the
 entire upstream HTML hash (including the rights notice), root wording hash,
-title and verse scope before adding a whole-story link. These Vv/Pv edition
+title and verse scope before adding a whole-text link. These edition-specific verse
 numbers must not be inferred from the generic SN/AN/PTS heuristics.
+
+The manifest can record multiple translators for the same unit; accepted versions
+are preserved independently. Unreviewed competing ATI destinations still stop the
+build instead of silently replacing either page.
 
 To add only these links to an existing translation index without refetching
 other sources:

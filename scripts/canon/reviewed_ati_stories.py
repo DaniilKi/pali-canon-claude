@@ -1,4 +1,4 @@
-"""Apply three source-reviewed ATI whole-story links; never infer verse offsets.
+"""Apply source-reviewed ATI whole-text links; never infer verse offsets.
 
 Only link metadata is bundled. Complete upstream HTML is verified locally at
 build time, including its notice. Revisions require a fresh scope/rights review.
@@ -17,6 +17,7 @@ def reviewed_links(canon, ati_root):
     manifest = json.loads(MANIFEST.read_text(encoding='utf-8'))
     units = {u['id']: u for u in canon['units']}
     links = {}
+    owners = {}
     for row in manifest['links']:
         u = units.get(row['unit_id'])
         if not u or u.get('approximate') or u.get('kind') or u['title'] != row['pali_title'] or u['vri'] != row['vri_verses']:
@@ -28,10 +29,13 @@ def reviewed_links(canon, ati_root):
         path = row['path']
         if '..' in path or not path.startswith('/tipitaka/kn/'):
             raise ValueError('Invalid reviewed ATI path')
+        if path in owners and owners[path] != u['id']:
+            raise ValueError(f'Reviewed whole-text page has multiple owners: {path}')
+        owners[path] = u['id']
         raw = Path(ati_root, path.lstrip('/') + '.html').read_bytes()
         if hashlib.sha256(raw).hexdigest() != row['source_html_sha256']:
             raise ValueError(f'ATI page changed; review scope and rights: {path}')
-        links[u['id']] = {
+        links.setdefault(u['id'], []).append({
             'source': 'ati', 'english': row['english_title'], 'path': path,
             'url': 'https://www.accesstoinsight.org' + path + '.html',
             'translator': row['translator'], 'license': row['license'],
@@ -39,18 +43,26 @@ def reviewed_links(canon, ati_root):
             'mapping_note': row['mapping_note'],
             'review': {'ati_commit': manifest['ati_commit'], 'vri_commit': manifest['vri_commit'],
                        'source_html_sha256': row['source_html_sha256'], 'pali_sha256': row['pali_sha256']},
-        }
+        })
     return links
 
 
 def apply_reviewed_links(out, canon, ati_root):
     accepted = reviewed_links(canon, ati_root)  # Validate everything before modifying output.
-    for uid, link in accepted.items():
+    owners = {link['url']: uid for uid, links in accepted.items() for link in links}
+    for uid, links in out.items():
+        if any(link.get('url') in owners and owners[link['url']] != uid for link in links):
+            raise ValueError(f'Reviewed whole-text page already belongs to another unit: {uid}')
+    for uid, links in accepted.items():
         existing = out.get(uid, [])
-        if any(l['source'] == 'ati' and l['url'] != link['url'] for l in existing):
+        urls = {link['url'] for link in links}
+        if len(urls) != len(links):
+            raise ValueError(f'Duplicate reviewed ATI page: {uid}')
+        if any(l['source'] == 'ati' and l['url'] not in urls for l in existing):
             raise ValueError(f'Conflicting ATI story link: {uid}')
-    for uid, link in accepted.items():
-        out[uid] = [l for l in out.get(uid, []) if l['url'] != link['url']] + [link]
+    for uid, links in accepted.items():
+        urls = {link['url'] for link in links}
+        out[uid] = [l for l in out.get(uid, []) if l['url'] not in urls] + links
     return list(accepted)
 
 

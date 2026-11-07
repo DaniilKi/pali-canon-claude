@@ -36,6 +36,15 @@ requires derivation/source acknowledgement and the full licence, and limits
 reprinting to 50 copies. The reading response preserves that full notice and
 source citation. No English bodies are bundled. See the [source review](docs/data/ati-story-links.md).
 
+The subsequent [coverage batch](docs/data/ati-coverage-expansion.md) adds the
+CC-BY-NC Thig 5.11 page by Ṭhānissaro, the BPS-licensed Hecker/Khema version
+(copyright 1982 BPS), Khantipalo's Tālapuṭa poem (copyright 1983 BPS), and
+Ireland's Dhammacariya discourse (copyright 1983 BPS). Each BPS page has its
+own full free-distribution notice with the same print-limit, acknowledgement
+and full-licence requirements. These are linked through the existing live ATI
+reader, with original notices and citations retained; English bodies remain
+outside the bundle.
+
 The `reading_plan` tool's study-guide plans list, in order, the texts cited by two of Ṭhānissaro Bhikkhu's Access to Insight study guides ([Into the Stream](https://www.accesstoinsight.org/lib/study/into_the_stream.html), © 2011 Metta Forest Monastery; [The Four Noble Truths](https://www.accesstoinsight.org/lib/study/truths.html), © 1999 Metta Forest Monastery; both CC BY-NC 4.0). Only the guides' citations and links are stored; none of their text is bundled or returned.
 ## Access to Insight indexes (bundled topic index)
 

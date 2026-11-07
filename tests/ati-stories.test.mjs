@@ -10,11 +10,11 @@ const manifest = JSON.parse(readFileSync('scripts/canon/reviewed_ati_stories.jso
 const realFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = realFetch; liveCache.clear(); });
 
-test('three source-reviewed whole-story links retain exact edition identity and provenance', () => {
-  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35']);
+test('source-reviewed whole-text links retain exact edition identity and provenance', () => {
+  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6']);
   for (const row of manifest.links) {
     const u = canon.resolve(row.unit_id).unit;
-    const link = canon.load().translations[u.id].find(t => t.match === 'reviewed-story');
+    const link = canon.load().translations[u.id].find(t => t.match === 'reviewed-story' && t.path === row.path);
     assert.ok(link);
     assert.equal(link.path, row.path);
     assert.equal(link.reference, row.source_reference);
@@ -43,6 +43,16 @@ test('Vv edition offsets and Sesavati/Pesavatī are explicit rather than numeric
   assert.match(pesavati.mapping_note, /647-658.*646–657/);
   assert.match(pesavati.mapping_note, /Sesavati.*Pesavatī/);
   assert.equal(english.available(canon.resolve('Vv 34').unit).some(l => l.translation_id.includes('vv.3.07')), false);
+});
+
+test('two independent translations of the thirty nuns remain independently selectable', () => {
+  const unit = canon.resolve('Thig 5.11').unit;
+  const links = canon.linksFor(unit).links;
+  assert.equal(links.length, 2);
+  assert.equal(english.selectTranslation(links, 'Thanissaro', unit.id).link.path, '/tipitaka/kn/thig/thig.05.11.than');
+  assert.equal(english.selectTranslation(links, 'Hecker', unit.id).link.path, '/tipitaka/kn/thig/thig.05.11.hekh');
+  for (const link of links) assert.equal(english.selectTranslation(links, canon.translationId(link), unit.id).link, link);
+  assert.ok(canon.linksFor(canon.resolve('Thig 5.10').unit).links.every(l => !l.path?.includes('thig.05.11')));
 });
 
 test('story retrieval preserves edition notes, full copyright notice and source citation through mirrors', async () => {
@@ -84,12 +94,18 @@ with tempfile.TemporaryDirectory() as tmp:
  'units':[{'id':'pv1','book':0,'start':0,'end':1,'title':'Fixture','vri':'1'}]}
  out={}; assert mod.apply_reviewed_links(out,canon,root)==['pv1']; before=copy.deepcopy(out)
  mod.apply_reviewed_links(out,canon,root);assert out==before
- for kind in ['scope','identity','source','conflict']:
+ second=copy.deepcopy(row);second['path']='/tipitaka/kn/pv/fixture2';second['translator']='Another synthetic translator'
+ (root/'tipitaka/kn/pv/fixture2.html').write_bytes(raw)
+ manifest['links'].append(second);mod.MANIFEST.write_text(json.dumps(manifest))
+ mod.apply_reviewed_links(out,canon,root);assert len(out['pv1'])==2
+ stable=copy.deepcopy(out);mod.apply_reviewed_links(out,canon,root);assert out==stable
+ for kind in ['scope','identity','source','conflict','other_owner']:
   c=copy.deepcopy(canon);o=copy.deepcopy(out)
   if kind=='scope': c['books'][0]['blocks'][0][2]='Different'
   if kind=='identity': c['units'][0]['title']='Wrong'
   if kind=='source': (root/'tipitaka/kn/pv/fixture.html').write_bytes(b'Changed')
   if kind=='conflict': o['pv1'][0]['url']='https://www.accesstoinsight.org/other.html'
+  if kind=='other_owner': o['pv2']=[copy.deepcopy(o['pv1'][0])]
   frozen=copy.deepcopy(o)
   try: mod.apply_reviewed_links(o,c,root)
   except ValueError: pass

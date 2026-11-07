@@ -1,5 +1,9 @@
 # Three reviewed ATI story translations
 
+This records the D181 batch. The [subsequent coverage review](ati-coverage-expansion.md)
+adds four more links using the same pinned-source process; the original three
+records and their edition evidence remain unchanged.
+
 These are links to existing translations, not new translations or English text
 bundled with the software. They use the existing Access to Insight provider and
 its official mirrors. The source is the BCBS ATI repository at
