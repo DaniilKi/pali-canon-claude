@@ -19,6 +19,17 @@ test('exact widget segments retain source scope, script and uncertainty without 
       assert.equal(exact.pali.returned, 1); assert.equal(exact.pali.next_offset, null); assert.equal(exact.pali.continue_with, null);
       assert.equal(exact.english, null); assert.match(exact.english_error, /no verified segment-level English alignment/);
       assert.ok(source.notes.every(note => exact.notes.includes(note)));
+      const command = exact.pali.context_with;
+      assert.equal(command.arguments.source_commit, exact.source.commit); assert.equal(command.arguments.script, script);
+      assert.match(command.arguments.anchor_sha256, /^[a-f0-9]{64}$/);
+      const context = await readPassage(command.arguments);
+      const expected = await readPassage({ ...args, offset: 0, limit: 4, english: false, script });
+      assert.deepEqual(context.pali.segments, expected.pali.segments);
+      assert.equal(context.context_for, segment); assert.equal(context.canonical, exact.canonical);
+      assert.deepEqual(context.source, exact.source); assert.equal(context.text_id, exact.text_id);
+      const returned = await readPassage(context.pali.exact_with.arguments);
+      assert.deepEqual(returned.pali.segments, exact.pali.segments);
+      if (context.pali.continue_with) assert.equal(context.pali.continue_with.arguments.source_commit, exact.source.commit);
     }
     assert.equal(attempts, 0);
   } finally { globalThis.fetch = previous; }
@@ -37,4 +48,25 @@ test('exact widget segments refuse cross-source refs, malformed selectors and co
   const last = final.pali.segments.at(-1);
   const exact = await readPassage({ uid: 'MN 10', segment: last.ref, english: false });
   assert.deepEqual(exact.pali.segments, [last]); assert.equal(exact.pali.continue_with, null);
+  const context = await readPassage(exact.pali.context_with.arguments);
+  assert.deepEqual(context.pali.segments, final.pali.segments.slice(-3));
+  assert.equal(context.pali.continue_with, null);
+});
+
+test('widget context and continuation refuse changed source/anchor before fetching English', async () => {
+  const previous = globalThis.fetch; let attempts = 0;
+  globalThis.fetch = async () => { attempts++; throw Error('Unexpected provider fetch'); };
+  try {
+    const exact = await readPassage({ uid: 'MN 10', segment: 'mn10/1', english: false });
+    const context = await readPassage(exact.pali.context_with.arguments);
+    assert.equal(context.pali.offset, 0); assert.equal(context.pali.returned, 3);
+    for (const args of [
+      { ...exact.pali.context_with.arguments, source_commit: '0'.repeat(40) },
+      { ...exact.pali.context_with.arguments, anchor_sha256: '0'.repeat(64) },
+      { uid: 'MN 10', context: 2 }, { uid: 'MN 10', anchor_sha256: '0'.repeat(64) },
+      { uid: 'MN 10', segment: 'mn10/1', context: 21 },
+      { uid: 'MN 10', source_commit: '0'.repeat(40), english_offset: 20, translation: 'dt:mn010' },
+    ]) await assert.rejects(readPassage(args));
+    assert.equal(attempts, 0);
+  } finally { globalThis.fetch = previous; }
 });

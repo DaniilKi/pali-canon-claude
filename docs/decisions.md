@@ -764,3 +764,15 @@ Format: **context** (the problem), **decision** (what we chose), **consequences*
 - **Context.** Exact source refs from canonical, post-canonical and complete-file readings could not be opened precisely in the hosted widget. A source offset alone cannot prove the intended text identity, and whole-text English is not mapped to those Pāli segment boundaries.
 - **Decision.** Accept segment alongside its uid/book selection. Read the indicated position through the existing renderer and require the returned ref to equal the requested ref exactly. Return one segment without continuation; reject missing/cross-source refs and nonzero continuation offsets. Preserve source scope, script and uncertainty, show the exact ref and state that segment-level English alignment is unavailable without fetching a whole translation. Commentary retains its existing exact /cN selector. Version UI resources to v6.
 - **Consequences.** No source content, mapping or rights changes. Exact position matching does not promote approximate canonical spans to scholarly verification. Actual-host and native-reader gates remain open.
+
+### D127. Return to an exact source anchor after reading its bounded context
+
+- **Context.** The exact-segment widget could show one passage but supplied no source-preserving route to its neighbours or back. Rebuilding citations from displayed text could lose book scope, script or uncertainty.
+- **Decision.** Supply context_with and exact_with commands using the normalized uid/book selection, exact ref, selected script, VRI source commit and SHA-256 of the displayed source segment. Context stays within that source selection, with 0–20 neighbours per side. Verify the ref, source version and fingerprint before returning context; retain source labels and English-alignment cautions. Version resources to v7.
+- **Consequences.** The fingerprint protects the selected segment, not all neighbouring blocks or scholarly alignment. No source text, licence or mapping is changed. Actual-client and native-reader/specialist acceptance remain separate.
+
+### D128. Reject hosted continuation across a changed VRI source version
+
+- **Context.** Widget Pāli and English continuation preserved source selection and English translation ID but did not validate the expected VRI source version after a server data update.
+- **Decision.** Add source_commit to every Pāli/English widget continuation command and reject a mismatched expected commit before provider access. Existing first-page callers may omit it. A rejected stale cursor requires reopening the selection explicitly.
+- **Consequences.** This pins the VRI source version; English translation continuation retains its separate exact version check. It does not promise immutable live-provider content, citation mappings or scholarly review.

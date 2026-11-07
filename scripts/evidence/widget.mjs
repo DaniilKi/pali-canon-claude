@@ -7,7 +7,7 @@ import { SCRIPTS, transliterate } from '../../src/script.mjs';
 import { expectedSegments } from './study-scripts.mjs';
 
 export async function auditWidget(client, { exhaustAligned = false } = {}) {
-  const counts = { scripts: 0, selection_cases: 0, continued_pages: 0, exact_segments: 0, postcanonical_books: 0, root_files: 0, commentary_books: 0, aligned_checked: 0, aligned_available: 0, aligned_unavailable: 0, rejected_requests: 0 };
+  const counts = { scripts: 0, selection_cases: 0, continued_pages: 0, exact_segments: 0, context_reads: 0, exact_returns: 0, postcanonical_books: 0, root_files: 0, commentary_books: 0, aligned_checked: 0, aligned_available: 0, aligned_unavailable: 0, rejected_requests: 0 };
   const call = async args => {
     const response = await client.callTool({ name: 'read_passage_widget', arguments: args });
     assert.ok(!response.isError, JSON.stringify(response.content)); return response.structuredContent;
@@ -37,6 +37,7 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
       }
       const cursor = first.pali.continue_with;
       assert.equal(cursor.name, 'read_passage_widget'); assert.equal(cursor.arguments.script, script);
+      assert.equal(cursor.arguments.source_commit, first.source.commit);
       const next = await call(cursor.arguments);
       assert.deepEqual(next.pali.segments, expectedSegments(all.slice(offset + args.limit, offset + args.limit * 2), script));
       assert.deepEqual(next.source, first.source); assert.equal(next.canonical, first.canonical);
@@ -51,6 +52,15 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
       assert.equal(exact.selection, source.selection); assert.equal(exact.canonical, source.canonical);
       assert.equal(exact.approximate, source.approximate); assert.equal(exact.pali.continue_with, null);
       assert.equal(exact.english, null); assert.match(exact.english_error, /no verified segment-level English alignment/);
+      assert.equal(exact.pali.context_with.arguments.source_commit, exact.source.commit);
+      assert.equal(exact.pali.context_with.arguments.script, script);
+      const context = await call(exact.pali.context_with.arguments);
+      const expected = await call({ ...args, offset: 0, limit: 4, english: false, script });
+      assert.deepEqual(context.pali.segments, expected.pali.segments); assert.equal(context.context_for, segment);
+      assert.deepEqual(context.source, exact.source); assert.equal(context.text_id, exact.text_id);
+      const returned = await call(context.pali.exact_with.arguments);
+      assert.deepEqual(returned.pali.segments, exact.pali.segments);
+      counts.context_reads++; counts.exact_returns++;
       counts.exact_segments++;
     }
     counts.scripts++;
@@ -101,6 +111,8 @@ export async function auditWidget(client, { exhaustAligned = false } = {}) {
     { uid: 'MN 10', segment: 'mn1/2' }, { uid: 'Vism 1.1', segment: 'Vism 1.2/2' }, { book: 'vin02m1', segment: 'mn10/7' },
     { uid: 'MN 10', segment: 'mn10/0' }, { uid: 'MN 10', segment: 'mn10/99999' }, { uid: 'MN 10', segment: 'mn10/2', offset: 1 },
     { uid: 'MN 10', segment: 'mn10/2', english_offset: 1 }, { commentary: 'MN 10', segment: 'mn10/c66' },
+    { uid: 'MN 10', source_commit: '0'.repeat(40) }, { uid: 'MN 10', segment: 'mn10/2', context: 2, anchor_sha256: '0'.repeat(64) },
+    { uid: 'MN 10', context: 2 }, { uid: 'MN 10', anchor_sha256: '0'.repeat(64) },
   ]) {
     assert.equal((await client.callTool({ name: 'read_passage_widget', arguments: args })).isError, true); counts.rejected_requests++;
   }

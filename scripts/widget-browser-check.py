@@ -175,6 +175,16 @@ def check():
                 assert "no verified segment-level English alignment" in frame.locator("#english").inner_text()
                 assert "Showing Pāli segments 66 to 66" in status.text_content()
                 assert frame.locator("#pali button").count() == 0
+                assert "Ask for surrounding Pāli" in frame.locator("#pali").inner_text()
+                displayed(payload["context"])
+                assert frame.locator("#pali .seg").count() == 5
+                assert "Source context for mn10/66" in frame.locator("#meta").inner_text()
+                assert "mn10/64" in frame.locator("#pali").inner_text()
+                assert "mn10/68" in frame.locator("#pali").inner_text()
+                assert "Ask to return to the exact" in frame.locator("#pali").inner_text()
+                displayed(payload["returned"])
+                assert frame.locator("#pali .seg").count() == 1
+                assert "Source context for" not in frame.locator("#meta").inner_text()
                 displayed(fixture)
                 assert "Complete source file" not in frame.locator("#meta").inner_text()
                 assert "Post-canonical · not the canon" not in frame.locator("#meta").inner_text()
@@ -197,7 +207,7 @@ def check():
                     "checks": ["initialization", "theme", "source text", "responsive columns", "no horizontal overflow",
                         "named landmarks and headings", "keyboard link activation", "200% zoom", "live status updates",
                         "Pāli continuation", "English pinned continuation after primary recovery", "unpinned offset refused",
-                        "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "commentary labels and availability", "unaligned source caution", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "exact Pali segment without invented English alignment", "no invented post-canonical/source-file links", "no JS errors"]})
+                        "cross-version fallback refused", "stale text and attribution cleared", "plain error", "recovery", "commentary labels and availability", "unaligned source caution", "post-canonical labels and continuation", "native Pali display", "source-file identity and front matter", "exact Pali segment without invented English alignment", "source-preserving context and exact return", "no invented post-canonical/source-file links", "no JS errors"]})
                 page.close()
         assert not requests, requests
         report = {

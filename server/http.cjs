@@ -33753,8 +33753,9 @@ function createServer2() {
 }
 
 // src/chatgpt-widget.mjs
+var import_node_crypto2 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v6";
+var WIDGET_VERSION = "v7";
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 var MCP_APP_MIME = "text/html;profile=mcp-app";
@@ -33780,8 +33781,11 @@ var TOOL_META = {
   "openai/toolInvocation/invoking": "Opening the passage\u2026",
   "openai/toolInvocation/invoked": "Reader updated."
 };
-async function readPassage({ uid, book, commentary, segment, translation: translation2, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6e3, script }) {
+async function readPassage({ uid, book, commentary, segment, context = 0, source_commit: sourceCommit, anchor_sha256: anchorHash, translation: translation2, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, englishCharacters = 6e3, script }) {
   if ([uid, book, commentary].filter((value) => value !== void 0).length !== 1) throw new Error("Give exactly one of uid (canonical/post-canonical), book (complete root file), or commentary (aligned citation or direct commentary reference).");
+  if (sourceCommit !== void 0 && sourceCommit !== source().commit) throw new Error("The requested VRI source version is no longer bundled. Reopen the selection from the current source; no continuation or context was substituted.");
+  if (!Number.isInteger(context) || context < 0 || context > 20) throw new Error("Context must be an integer from 0 to 20 neighbouring segments on each side.");
+  if (segment === void 0 && (context !== 0 || anchorHash !== void 0)) throw new Error("Context and anchor_sha256 require an exact segment selection.");
   if (uid !== void 0) {
     const reference = romanizeInput(uid).text;
     if (reference.startsWith("commentary:") || /^[^/]+\/c[1-9]\d*$/.test(reference)) {
@@ -33801,14 +33805,26 @@ async function readPassage({ uid, book, commentary, segment, translation: transl
     const match2 = segment.match(/^.+\/([1-9]\d*)$/);
     const index4 = match2 ? Number(match2[1]) - 1 : -1;
     if (!Number.isSafeInteger(index4) || index4 < 0 || index4 > 1e5) throw new Error("Give the exact segment reference from the selected reader, ending in a positive /N.");
-    const page2 = await readPassage({ uid, book, offset: index4, limit: 1, english: false, script });
-    if (page2.pali.segments[0]?.ref !== segment) throw new Error(`Segment ${segment} does not belong to this selection. Copy its exact reference from get_text or get_post_canonical; no other segment was selected.`);
-    const caution = "This is one exact P\u0101li source segment. English translations are linked to whole texts, with no verified segment-level English alignment here. Read the whole citation without segment to request English.";
+    const exact = await readPassage({ uid, book, offset: index4, limit: 1, english: false, script });
+    if (exact.pali.segments[0]?.ref !== segment) throw new Error(`Segment ${segment} does not belong to this selection. Copy its exact reference from get_text or get_post_canonical; no other segment was selected.`);
+    const fingerprint = (0, import_node_crypto2.createHash)("sha256").update(JSON.stringify(exact.pali.segments[0])).digest("hex");
+    if (anchorHash !== void 0 && anchorHash !== fingerprint) throw new Error("The exact source segment has changed. Reopen it before requesting context; no neighbouring passage was substituted.");
+    const selector = book !== void 0 ? { book: exact.book_id } : { uid: exact.text_id || exact.citation };
+    const args = { ...selector, segment, english: false, source_commit: exact.source.commit, anchor_sha256: fingerprint, ...script ? { script: scriptName(script) } : {} };
+    const start = Math.max(0, index4 - context);
+    const page2 = context ? await readPassage({ ...selector, offset: start, limit: index4 - start + context + 1, english: false, script }) : exact;
+    const caution = `${context ? "This is surrounding P\u0101li from the same source selection." : "This is one exact P\u0101li source segment."} English translations are linked to whole texts, with no verified segment-level English alignment here. Read the whole citation without segment to inspect English availability.`;
     return {
       ...page2,
       segment_ref: segment,
+      ...context ? { context_for: segment } : {},
       notes: [...page2.notes || [], caution],
-      pali: { ...page2.pali, next_offset: null, continue_with: null },
+      pali: {
+        ...page2.pali,
+        ...context ? {} : { next_offset: null, continue_with: null },
+        context_with: !context && exact.pali.total_segments > 1 ? { name: WIDGET_TOOL, arguments: { ...args, context: 2 } } : null,
+        exact_with: context ? { name: WIDGET_TOOL, arguments: args } : null
+      },
       ...wantEnglish || translation2 !== void 0 ? { english_error: caution } : {}
     };
   }
@@ -33983,7 +33999,7 @@ async function readPassage({ uid, book, commentary, segment, translation: transl
         notes: t.notes,
         continue_with: t.next_offset !== null ? {
           name: WIDGET_TOOL,
-          arguments: { uid: unit.id, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset, ...script ? { script: scriptName(script) } : {} }
+          arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset, ...script ? { script: scriptName(script) } : {} }
         } : null
       };
     } catch (error2) {
@@ -33999,6 +34015,7 @@ function widgetDisplay(result, { input, script, uid, book, commentary, wantEngli
   const version2 = result.english?.translation_id || translation2;
   const args = {
     ...commentary ? { commentary } : book ? { book } : { uid },
+    source_commit: result.source.commit,
     english: wantEnglish,
     offset: result.pali.next_offset,
     limit,
@@ -34028,6 +34045,9 @@ function registerChatgptWidget(server) {
       commentary: external_exports.string().trim().min(1).max(300).optional().describe("Commentary selection instead of uid/book: MN 10 for aligned commentary, mn10/c66 for its exact segment, or commentary:<VRI-file>[/cN] for a direct source book/segment. Commentary stays distinct from canon and later works. Use get_commentary uid commentary for the catalogue."),
       book: external_exports.string().trim().min(1).max(100).optional().describe("Complete VRI root source file ID from browse_canon node books, including front matter. Give book instead of uid/commentary. File refs do not identify individual suttas or rules; no English is selected here."),
       segment: external_exports.string().trim().min(1).max(400).optional().describe("One exact segment ref from the selected get_text/get_post_canonical reader, e.g. mn10/66, Vism 1.1/2 or vri-book:vin02m1/7. Keep uid or book as its source selection. No P\u0101li/English continuation offsets or segment-aligned English. For commentary use its exact /cN reference in commentary instead."),
+      context: external_exports.number().int().min(0).max(20).default(0).describe("With segment, include this many neighbouring P\u0101li segments on each side within the same selection. Follow pali.context_with for a source/anchor-pinned request, or pali.exact_with to return."),
+      source_commit: external_exports.string().regex(/^[a-f0-9]{40}$/).optional().describe("Expected VRI source commit from a returned cursor; a changed source fails instead of moving the reading to another version."),
+      anchor_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Expected exact source-segment fingerprint from pali.context_with/exact_with. Preserve the command unchanged; a changed segment fails rather than substituting context."),
       script: external_exports.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
       translation: external_exports.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or a translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
       english: external_exports.boolean().default(true).describe("Fetch an English translation (live). false shows the P\u0101li only."),
@@ -34129,6 +34149,7 @@ var WIDGET_HTML = `<!doctype html>
     if (d.selection === 'source_book') meta.appendChild(el('span', 'chip', 'Complete source file \xB7 no individual text ID'));
     if (d.canonical === false) meta.appendChild(el('span', 'chip', d.content_type === 'commentary' ? 'Commentary \xB7 not the canon' : 'Post-canonical \xB7 not the canon'));
     if (d.collection) meta.appendChild(el('span', 'chip', d.collection));
+    if (d.context_for) meta.appendChild(el('span', 'chip', 'Source context for ' + d.context_for));
     if (d.pts) meta.appendChild(el('span', 'chip', 'PTS ' + d.pts));
     if (d.vri_paragraphs) meta.appendChild(el('span', 'chip', 'VRI \xB6 ' + d.vri_paragraphs));
     if (d.english && d.english.translator) meta.appendChild(el('span', 'chip', 'Tr. ' + d.english.translator));
@@ -34151,6 +34172,8 @@ var WIDGET_HTML = `<!doctype html>
       pali.appendChild(p);
     });
     if (d.pali.next_offset != null) pali.appendChild(el('p', 'note', 'Showing ' + d.pali.returned + ' of ' + d.pali.total_segments + ' segments. Ask for more to continue from segment ' + d.pali.next_offset + '.'));
+    if (d.pali.context_with) pali.appendChild(el('p', 'note', 'Ask for surrounding P\u0101li to read this passage in its source context.'));
+    if (d.pali.exact_with) pali.appendChild(el('p', 'note', 'Ask to return to the exact selected segment.'));
 
     var en = document.getElementById('english'); clear(en);
     if (d.english) {
