@@ -102,6 +102,9 @@ jobs:
         if: matrix.group == 'core'
         run: |
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-browser-check.py > standalone-reader.report.json
+      - name: Check source-aware Pāli print and PDF privacy
+        if: matrix.group == 'core'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-print-check.py --report standalone-print.report.json
       - name: Audit standalone reader accessibility in both themes
         if: matrix.group == 'core'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-a11y-check.py --report standalone-a11y.report.json

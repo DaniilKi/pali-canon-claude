@@ -341,3 +341,24 @@ current. An observed position opt-out in another tab stops recording and clears
 the local pointer. There is no general personal-data merge, immediate live sync,
 account sync or atomic protection against truly simultaneous writers.
 See [reproduction, safety tests and limits](evidence/web-reader/POINTER_RECONCILIATION.md).
+
+## Print a Pāli page or save it as PDF
+
+Open a Pāli passage, then choose **Print loaded Pāli page**. Your browser's print
+window lets you choose a printer or Save as PDF where supported. Browser print
+(Ctrl+P / Command+P) uses the same source-aware view.
+
+This prints only the Pāli segments currently loaded, with the title, canonical
+or non-canonical label, segment range, source warnings, attribution, licence
+links and reading URL. It does **not** fetch or print the complete work, English,
+study panes, saved bookmarks or private notes. Open the next page separately to
+print more. Native-script output follows your chosen script; installed fonts and
+the browser determine its PDF/printer rendering. Source non-commercial terms
+continue to apply. Review the preview before sharing a PDF. Browser-added headers/footers are
+controlled by your print settings; turn them off if they expose a sensitive URL.
+
+Non-reading, loading and failed-reading screens print an explanatory message,
+not a previously opened passage. Printed sheets always use black text on white
+paper regardless of the reading theme. No files or notes are uploaded by this
+feature. Actual physical printers, Safari and tagged-PDF accessibility remain
+outside automated acceptance. See [print checks](evidence/web-reader/PRINT_PAGE.md).

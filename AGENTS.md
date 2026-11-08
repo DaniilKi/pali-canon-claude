@@ -260,3 +260,14 @@ Exact reading position is a single optional local locator, not scripture, comple
 Personal browser-data writes go through `guardedStorageWrite` (`web/local-storage-write.mjs`). Preserve the raw-snapshot comparison and sticky stale-tab refusal; never silently overwrite newer notes/marks or label a failed write durable. This guard is best-effort, not atomic cross-tab CAS/locking/sync. Keep persistent local recovery downloads, explicit reload review/cancel, unreadable-profile preservation and successful quota-retry recovery. Personal note drafts are tab-memory-only, survive in-tab navigation and join exports without implicit saving; never treat them as scripture. Run `tests/web-local-storage-write.test.mjs` and `scripts/web-reader-storage-check.py` normal/a11y/installed plus import/progress/position regressions.
 
 Reading-only writes use `guardedPositionWrite`, preserving current stored personal fields and respecting an observed `remember_position:false`. Keep its returned snapshot based on this tab’s OLD personal-data baseline, updated only for the known locator/opt-out: adopting unseen newer notes as the baseline would let a later stale edit overwrite them. `guardedStorageWrite` and progress-preview checks may tolerate ONLY a change to validated `last` metadata; preserve its observed newer value when the caller did not change it, and adopt that committed locator in tab state. No general personal-data merge, consent field, arbitrary URL, new transactional guarantee or source substitution. Run `tests/web-reading-pointer-reconciliation.test.mjs`, `scripts/web-reader-pointer-check.py` normal/a11y/installed and storage/progress/position regressions. See [pointer reconciliation evidence](docs/evidence/web-reader/POINTER_RECONCILIATION.md).
+
+
+### Pāli print boundary
+
+`web/print-page.mjs` builds a text-only snapshot of the current reading page at
+print time. Keep whole-work/English/notes exclusions, source labels/warnings,
+segment refs, source revisions and licence URLs. Never clone `#study`, saved
+screens or personal controls into print output. Invalid/loading/non-reading
+routes must not print stale scripture. `scripts/web-reader-print-check.py`
+checks actual bundled pages and PDF creation; it does not certify physical
+printers or tagged PDF accessibility.

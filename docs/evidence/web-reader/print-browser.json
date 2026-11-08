@@ -1,0 +1,74 @@
+{
+  "passed": 12,
+  "checks": [
+    {
+      "width": 390,
+      "case": "canon",
+      "segments": 1,
+      "pdf_bytes": 26606
+    },
+    {
+      "width": 390,
+      "case": "continuation",
+      "segments": 30,
+      "pdf_bytes": 45414
+    },
+    {
+      "width": 390,
+      "case": "book",
+      "segments": 30,
+      "pdf_bytes": 49459
+    },
+    {
+      "width": 390,
+      "case": "later work",
+      "segments": 30,
+      "pdf_bytes": 44936
+    },
+    {
+      "width": 390,
+      "case": "commentary",
+      "segments": 30,
+      "pdf_bytes": 57749
+    },
+    {
+      "width": 390,
+      "case": "native-script, dark theme, nonreading/error privacy, snapshot cleanup"
+    },
+    {
+      "width": 1280,
+      "case": "canon",
+      "segments": 1,
+      "pdf_bytes": 26606
+    },
+    {
+      "width": 1280,
+      "case": "continuation",
+      "segments": 30,
+      "pdf_bytes": 45414
+    },
+    {
+      "width": 1280,
+      "case": "book",
+      "segments": 30,
+      "pdf_bytes": 49459
+    },
+    {
+      "width": 1280,
+      "case": "later work",
+      "segments": 30,
+      "pdf_bytes": 44936
+    },
+    {
+      "width": 1280,
+      "case": "commentary",
+      "segments": 30,
+      "pdf_bytes": 57749
+    },
+    {
+      "width": 1280,
+      "case": "native-script, dark theme, nonreading/error privacy, snapshot cleanup"
+    }
+  ],
+  "limits": "Actual bundled source in headless Chromium. PDF signature/size and print DOM checked; no printer hardware, Safari, tagged-PDF or glyph-by-glyph visual certification."
+}
