@@ -35,7 +35,7 @@ The npm package and container include `server/web/`. The HTML, stylesheet and br
 - Open **Related texts** for canonical selections. Shared-word matching and commentary citations are labelled separately with their evidence. Reading links retain the emitted source segment or exact commentary reference. External parallels are a link only.
 - Open **Check quote** to compare a Pāli quotation with the whole bundled canonical Tipiṭaka using `verify_quote`. Roman and supported native Pāli input are accepted; English verification is not exposed in this slice. Results retain normalization, ties, scope and source terms. Open exact match starts to inspect context. A match is not proof of authorship, verbatim wording or correct spelling; a negative result concerns only the searched corpus.
 - Stop waiting for a pending reading or study request, then retry explicitly. Changing pages or study panels cancels obsolete browser waits. This does not guarantee that the server stops its work.
-- Copy a reading link, use browser back/forward, and navigate with a keyboard.
+- Resume the last visible Pāli passage with its exact reference, offset and source version. Copy a source-pinned reading link, or copy/open a passage reference directly. Turn off **Remember reading position on this device** to clear the pointer and stop recording it. Use browser back/forward and keyboard navigation.
 
 ## Storage and source boundaries
 
@@ -247,3 +247,44 @@ wrapper. Tests cover normal/failure cleanup, independent requests, deadlines,
 immediate stop, superseding navigation, abort-ignoring transports, safe retry,
 shared-source consent pins and unchanged Pāli. See [acceptance](evidence/web-reader/REQUEST_RECOVERY.md).
 No backend/provider API, source data, network policy or licence is changed.
+
+## Exact reading position
+
+Continue reading now retains a single source-pinned visible passage locator,
+rather than only the start of the last page. After scrolling settles for 350 ms,
+the first visible source segment or heading is recorded locally. Page hide also
+flushes a visible position. Ordinary in-app navigation cancels pending scroll
+sampling so the scroll needed to reach a header link does not erase the stable
+reading point. Very rapid navigation before the debounce can retain the previous
+stable position. This is viewport location, not evidence of reading/comprehension.
+
+The locator stores selection/corpus, offset, reference, source revision and any
+bounded-plan identity. It stores no scripture, notes, translation body or English
+scope consent. Opening it revalidates the source revision and exact reference;
+plan links also revalidate the current assignment/window. A changed source is
+refused before wording is displayed. **Review current source at this reference**
+explicitly removes the revision pin but keeps the reference and plan constraints;
+a missing reference still fails rather than opening nearby text. The pin detects
+reported revision changes; it is not a frozen text copy or independent source
+integrity certificate. Old unpinned bookmarks/links retain their existing rules.
+
+Passage-reference links carry the exact locator for long-press/copy/share. **Copy
+reading link** copies the stable recorded point on the current page (or its first
+source segment if no position is retained). Clipboard refusal exposes a real link
+beside the button. This does not write a new browser-history entry while scrolling;
+opening a locator is ordinary explicit navigation. English panels are not restored
+or fetched, and commentary/later-work readers retain their non-canonical mode.
+
+Disable **Remember reading position on this device** in Reading preferences to
+remove the pointer and stop automatic position writes; other saved notes and plan
+marks remain. There is no position history, account sync or automatic cross-device
+transfer; share a locator yourself. Automatic pointer writes refuse to overwrite
+browser data changed by another tab. Reload to reconcile that conflict; this is
+not transactional multi-tab sync. Storage failure preserves a warned tab-local
+resume until that tab closes. Browser storage may otherwise be cleared by the
+browser/OS, so a position is not a backup guarantee.
+
+See [baseline and acceptance](evidence/web-reader/READING_POSITION.md). Tests cover
+normal/audit/extracted-package flows, source/ref refusal, plan limits, opt-out,
+clipboard fallback, pagehide and storage/conflict cases. Physical-device,
+screen-reader and native-reader acceptance remains separate.

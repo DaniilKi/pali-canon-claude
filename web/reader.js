@@ -7,19 +7,20 @@ import { validatePaliQuote } from './quote-check.mjs';
 import { MAX_PROGRESS_BYTES, parseProgress, mergeProgress } from './progress-import.mjs';
 import { topicCatalogue, topicDetail, listCatalogue, listDetail } from './topics-study.mjs';
 import { createRequestPool } from './request-lifecycle.mjs';
+import { readingPosition, assertPositionPin } from './reading-position.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
 const view = $('view'), status = $('status');
-let serial = 0, epoch = 0, studyEpoch = 0;
+let serial = 0, epoch = 0, studyEpoch = 0, positionTimer, activePosition = null;
 const KEY = 'pali-library-v1';
-let storageOK = true, storageSnapshot;
+let storageOK = true, storageSnapshot, positionDurable = true;
 function loadLocal() { try { const raw = localStorage.getItem(KEY); storageSnapshot = raw; const x = JSON.parse(raw || '{}'); return x && typeof x === 'object' && !Array.isArray(x) ? x : {}; } catch { storageOK = false; return {}; } }
 const local = loadLocal();
 local.reading_progress = cleanProgress(local.reading_progress);
 if (!Array.isArray(local.saved)) local.saved = [];
 local.saved = local.saved.filter(x => x && typeof x.uid === 'string' && typeof x.ref === 'string' && typeof x.title === 'string').slice(0, 500);
-function persist() { try { const serialized = JSON.stringify(local); localStorage.setItem(KEY, serialized); storageSnapshot = serialized; return true; } catch { storageOK = false; status.textContent = 'Browser storage is unavailable. Changes are kept only in this tab; export your saved passages.'; return false; } }
+function persist() { try { const serialized = JSON.stringify(local); localStorage.setItem(KEY, serialized); storageSnapshot = serialized; positionDurable = true; return true; } catch { storageOK = false; status.textContent = 'Browser storage is unavailable. Changes are kept only in this tab; export your saved passages.'; return false; } }
 function el(tag, text, className) { const n = document.createElement(tag); if (text !== undefined) n.textContent = text; if (className) n.className = className; return n; }
 function button(text, fn) { const n = el('button', text); n.type = 'button'; n.addEventListener('click', fn); return n; }
 function link(text, href, className) { const n = el('a', text, className); n.href = href; return n; }
@@ -84,14 +85,30 @@ function closeFinder() { if (narrowReading.matches) { const panel = $('find-pane
 function navigateFromFinder(target) { closeFinder(); $('content').focus({ preventScroll: true }); if (location.hash === target) render(); else location.hash = target; }
 if (narrowReading.addEventListener) narrowReading.addEventListener('change', responsivePanels); else narrowReading.addListener(responsivePanels); responsivePanels();
 function focusHeading() { $('content').focus({ preventScroll: true }); }
-function updateResume() { const valid = typeof local.last === 'string' && /^#read\?/.test(local.last); $('resume').hidden = !valid || location.hash === local.last; if (valid) $('resume').href = local.last; }
+function updateResume() { const valid = local.remember_position !== false && typeof local.last === 'string' && /^#read\?/.test(local.last); $('resume').hidden = !valid || location.hash === local.last || activePosition?.token === epoch && activePosition.links.some(x => x.href === local.last); if (valid) $('resume').href = local.last; }
+function rememberPosition(href) {
+  if (local.remember_position === false || !href || local.last === href) return;
+  local.last = href; updateResume();
+  try { if (localStorage.getItem(KEY) !== storageSnapshot) { positionDurable = false; status.textContent = 'Another tab changed browser data. This reading position is kept in this tab only; reload before saving.'; return; } } catch {}
+  positionDurable = persist();
+}
+function visibleReadingPosition() { if (activePosition?.token !== epoch) return; return activePosition.links.find(x => { const rect = x.node.getBoundingClientRect(); return rect.bottom > 1 && rect.top < innerHeight; }); }
+function flushReadingPosition() {
+  clearTimeout(positionTimer); if (local.remember_position === false || activePosition?.token !== epoch) return;
+  const visible = visibleReadingPosition();
+  if (visible) rememberPosition(visible.href);
+}
+window.addEventListener('scroll', () => { clearTimeout(positionTimer); if (activePosition?.token === epoch && local.remember_position !== false) positionTimer = setTimeout(flushReadingPosition, 350); }, { passive: true });
+window.addEventListener('pagehide', flushReadingPosition);
 function preferences() {
+  $('remember-position').checked = local.remember_position !== false;
   const size = Math.max(16, Math.min(30, Number(local.font) || 21));
   document.documentElement.style.setProperty('--reading', size + 'px'); $('font-size').value = size;
   document.body.dataset.theme = local.theme === 'dark' ? 'dark' : 'light'; $('theme').value = document.body.dataset.theme;
   if ([...$('script').options].some(o => o.value === local.script)) $('script').value = local.script;
 }
 preferences(); updateResume();
+$('remember-position').addEventListener('change', e => { local.remember_position = e.target.checked; if (!e.target.checked) { clearTimeout(positionTimer); delete local.last; } persist(); if (e.target.checked) flushReadingPosition(); updateResume(); });
 $('font-size').addEventListener('input', e => { local.font = Number(e.target.value); preferences(); persist(); });
 $('theme').addEventListener('change', e => { local.theme = e.target.value; preferences(); persist(); });
 $('script').addEventListener('change', e => { local.script = e.target.value; persist(); if (location.hash.startsWith('#read') || location.hash.startsWith('#daily')) render(); });
@@ -165,6 +182,7 @@ async function read(args, token) {
   const request = { ...(kind === 'book' ? { book } : kind === 'post' ? { citation: uid } : { uid }), offset, limit: window?.limit || 30, script: $('script').value };
   const data = await tool(kind === 'commentary' ? 'get_commentary' : kind === 'post' ? 'get_post_canonical' : 'get_text', request); if (token !== epoch) return;
   if (!Array.isArray(data.segments)) throw new Error('Choose an individual book or passage to read.');
+  assertPositionPin(args, data);
   if (args.has('ref') && !data.segments.some(segment => segment.ref === args.get('ref'))) throw Error('The saved passage reference was not returned at this position. No nearby passage was substituted. Open the source from the Library or check the bookmark’s revision.');
   if (plan) validatePlanPage(data, plan, uid, window);
   if ((kind === 'post' && data.canonical !== false) || (kind === 'commentary' && !(data.canonical === false && data.content_type === 'commentary') && !(typeof data.label === 'string' && data.label.startsWith('Commentary') && data.label.includes('not the canon')))) throw new Error('This response lacks the expected non-canonical source label.');
@@ -174,27 +192,31 @@ async function read(args, token) {
   notes(data); view.append(el('p', `Segments ${offset + 1}–${offset + data.returned} of ${data.total_segments}`, 'muted'));
   const toolbar = el('div', undefined, 'toolbar');
   toolbar.append(link('Back to library', route('browse', { node: 'canon' }), 'button'));
-  const copy = button('Copy reading link', async () => { try { await navigator.clipboard.writeText(location.href); status.textContent = 'Reading link copied.'; } catch { status.textContent = 'Copy the link from your browser’s address bar.'; } });
+  const copyFallback = link('Exact reading link · open or long-press to copy', location.hash); copyFallback.hidden = true;
+  const copy = button('Copy reading link', async () => { clearTimeout(positionTimer); const href = new URL(activePosition?.links.find(x => x.href === local.last)?.href || activePosition?.links[0]?.href || location.hash, location.href).href; try { await navigator.clipboard.writeText(href); status.textContent = 'Reading link copied.'; } catch { copyFallback.href = href; copyFallback.hidden = false; status.textContent = 'Clipboard unavailable. Use the exact reading link beside the button.'; } });
   if (kind === 'canon') {
     const panel = el('details', undefined, 'study-actions'); panel.append(el('summary', 'Study & sources')); const tools = el('div', undefined, 'toolbar');
     const invoke = action => () => { if (narrowReading.matches) panel.open = false; action(); const target = $('study'); target.tabIndex = -1; target.focus(); };
-    tools.append(button('English sources', invoke(() => translations(data, uid, token))), button('Traditional commentary', invoke(() => commentary(uid, token))), button('Related texts', invoke(() => relatedTexts(data.text_id || uid, token))), copy); panel.append(tools); toolbar.append(panel);
-  } else toolbar.append(copy);
+    tools.append(button('English sources', invoke(() => translations(data, uid, token))), button('Traditional commentary', invoke(() => commentary(uid, token))), button('Related texts', invoke(() => relatedTexts(data.text_id || uid, token))), copy, copyFallback); panel.append(tools); toolbar.append(panel);
+  } else toolbar.append(copy, copyFallback);
   view.append(toolbar); responsivePanels();
   const additions = el('section'); additions.id = 'study'; additions.setAttribute('aria-live', 'polite'); view.append(additions);
-  const passages = el('section'); passages.setAttribute('aria-label', 'Pāli passage');
+  const passages = el('section'); passages.setAttribute('aria-label', 'Pāli passage'); const positions = [];
+  const positionContext = { ...readingArgs(selector), ...(plan ? { plan: plan.name, day: plan.day } : {}) };
   for (const segment of data.segments || []) {
     const part = el('article', undefined, 'segment ' + (segment.type === 'heading' ? 'heading' : '')); part.id = 'seg-' + segment.ref.replace(/[^a-z0-9-]/gi, '-');
-    const row = el('div', undefined, 'segment-label'); row.append(el('span', segment.ref + (segment.vri_paragraph ? ' · VRI ' + segment.vri_paragraph : '')));
+    let positionHref; try { positionHref = readingPosition(positionContext, data.offset + data.segments.indexOf(segment), segment.ref, data.source?.commit); } catch {}
+    const row = el('div', undefined, 'segment-label'), reference = el('span'); if (positionHref) { const exact = link(segment.ref, positionHref); exact.setAttribute('aria-label', 'Open exact passage ' + segment.ref); reference.append(exact); } else reference.textContent = segment.ref; if (segment.vri_paragraph) reference.append(document.createTextNode(' · VRI ' + segment.vri_paragraph)); row.append(reference);
     const active = local.saved.some(x => x.uid === selector && x.ref === segment.ref);
     const save = button(active ? 'Saved ✓' : 'Save passage', () => saveSegment(selector, data, segment, save, part)); save.setAttribute('aria-label', 'Save passage ' + segment.ref); save.setAttribute('aria-pressed', String(active)); const actions = el('div', undefined, 'segment-actions'); actions.append(save);
     if (kind !== 'commentary' && segment.type !== 'heading') { const study = button('Study words', () => wordStudy({ ...(kind === 'book' ? { book } : { uid: kind === 'canon' ? data.text_id || uid : uid }), segment: segment.ref, offset: 0, limit: 15 }, { ref: segment.ref, text: segment.text, source: data.source?.commit, script: $('script').value, kind }, token)); study.setAttribute('aria-label', 'Study words in ' + segment.ref); actions.append(study); }
     row.append(actions); part.classList.toggle('marked', active);
     const text = el('p', segment.text, 'passage'); text.lang = 'pi'; part.append(row, text); passages.append(part);
+    if (positionHref) positions.push({ node: part, heading: segment.type === 'heading', href: positionHref });
   }
   const next = plan && window.end !== null ? (offset + data.returned < window.end ? offset + data.returned : null) : data.next_offset;
   view.append(passages); pageControls(next, offset > (window?.start || 0) ? Math.max(window?.start || 0, offset - 30) : null, n => route('read', { ...readingArgs(selector), offset: n, ...(plan ? { plan: plan.name, day: plan.day } : {}) })); provenance(data);
-  local.last = location.hash; persist(); updateResume();
+  activePosition = { token, links: positions }; rememberPosition(positions.find(x => args.get('ref') === new URLSearchParams(x.href.split('?')[1]).get('ref'))?.href || positions[0]?.href || location.hash); updateResume();
   const savedVersion = local.saved.find(x => x.uid === selector && x.source_commit && x.source_commit !== data.source?.commit);
   if (savedVersion) view.prepend(el('p', 'This source revision differs from a saved bookmark. Check its reference before reusing your notes.', 'notice'));
   const ref = args.get('ref'); if (ref) document.getElementById('seg-' + ref.replace(/[^a-z0-9-]/gi, '-'))?.scrollIntoView({ block: 'center' });
@@ -525,10 +547,10 @@ function about() {
 }
 async function render() {
   if (location.hash === '#content' && view.childElementCount) { $('content').focus(); return; }
-  const token = ++epoch; ++studyEpoch; requests.cancelAll(); closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
+  activePosition = null; clearTimeout(positionTimer); const token = ++epoch; ++studyEpoch; requests.cancelAll(); closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
   const [page, query = ''] = location.hash.slice(1).split('?'), args = new URLSearchParams(query);
   try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
-    if (token !== epoch) return; status.textContent = storageOK ? '' : 'Browser storage is unavailable; export your personal data before closing this tab.'; focusHeading();
-  } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
+    if (token !== epoch) return; status.textContent = !storageOK ? 'Browser storage is unavailable; export your personal data before closing this tab.' : positionDurable ? '' : 'Another tab changed browser data. This reading position is kept in this tab only; reload before saving.'; focusHeading();
+  } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); if (error.code === 'READING_SOURCE_CHANGED') { const review = new URLSearchParams(args); review.delete('source'); view.append(link('Review current source at this reference', '#read?' + review, 'button')); } status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
 }
 window.addEventListener('hashchange', render); render();

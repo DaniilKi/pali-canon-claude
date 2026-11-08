@@ -1,0 +1,204 @@
+{
+  "passed": 48,
+  "outside_source_tree": false,
+  "checks": [
+    {
+      "width": 320,
+      "check": "visible source paragraph is remembered with exact ref/offset/version without rewriting URL history or showing redundant resume"
+    },
+    {
+      "width": 320,
+      "check": "pagehide flushes the current visible source position without waiting for the debounce timer"
+    },
+    {
+      "width": 320,
+      "check": "real keyboard Library/resume flow retains the stable reading point despite navigation scrolling to the header"
+    },
+    {
+      "width": 320,
+      "check": "copy shares a source-pinned locator and denied clipboard keeps a real accessible link without altering scope consent"
+    },
+    {
+      "width": 320,
+      "check": "each source reference is an exact share/open link without copying scripture into a URL"
+    },
+    {
+      "width": 320,
+      "check": "opt-out removes the last position and stays disabled across scroll, pagehide, new reads and reload"
+    },
+    {
+      "width": 320,
+      "check": "changed source pin blocks all wording until explicit review at the exact reference"
+    },
+    {
+      "width": 320,
+      "check": "a missing saved reference cannot be replaced by nearby source wording"
+    },
+    {
+      "width": 320,
+      "check": "resumed split-plan locator retains day, assigned window and exact source revision"
+    },
+    {
+      "width": 320,
+      "check": "source-book, later-work and commentary resume retain exact source pins/references and their distinct corpus modes"
+    },
+    {
+      "width": 320,
+      "check": "automatic position writes refuse to overwrite changed browser data and never fetch English or restore consent"
+    },
+    {
+      "width": 320,
+      "check": "failed storage leaves exact tab-local resume usable while durable browser data stays unchanged"
+    },
+    {
+      "width": 390,
+      "check": "visible source paragraph is remembered with exact ref/offset/version without rewriting URL history or showing redundant resume"
+    },
+    {
+      "width": 390,
+      "check": "pagehide flushes the current visible source position without waiting for the debounce timer"
+    },
+    {
+      "width": 390,
+      "check": "real keyboard Library/resume flow retains the stable reading point despite navigation scrolling to the header"
+    },
+    {
+      "width": 390,
+      "check": "copy shares a source-pinned locator and denied clipboard keeps a real accessible link without altering scope consent"
+    },
+    {
+      "width": 390,
+      "check": "each source reference is an exact share/open link without copying scripture into a URL"
+    },
+    {
+      "width": 390,
+      "check": "opt-out removes the last position and stays disabled across scroll, pagehide, new reads and reload"
+    },
+    {
+      "width": 390,
+      "check": "changed source pin blocks all wording until explicit review at the exact reference"
+    },
+    {
+      "width": 390,
+      "check": "a missing saved reference cannot be replaced by nearby source wording"
+    },
+    {
+      "width": 390,
+      "check": "resumed split-plan locator retains day, assigned window and exact source revision"
+    },
+    {
+      "width": 390,
+      "check": "source-book, later-work and commentary resume retain exact source pins/references and their distinct corpus modes"
+    },
+    {
+      "width": 390,
+      "check": "automatic position writes refuse to overwrite changed browser data and never fetch English or restore consent"
+    },
+    {
+      "width": 390,
+      "check": "failed storage leaves exact tab-local resume usable while durable browser data stays unchanged"
+    },
+    {
+      "width": 768,
+      "check": "visible source paragraph is remembered with exact ref/offset/version without rewriting URL history or showing redundant resume"
+    },
+    {
+      "width": 768,
+      "check": "pagehide flushes the current visible source position without waiting for the debounce timer"
+    },
+    {
+      "width": 768,
+      "check": "real keyboard Library/resume flow retains the stable reading point despite navigation scrolling to the header"
+    },
+    {
+      "width": 768,
+      "check": "copy shares a source-pinned locator and denied clipboard keeps a real accessible link without altering scope consent"
+    },
+    {
+      "width": 768,
+      "check": "each source reference is an exact share/open link without copying scripture into a URL"
+    },
+    {
+      "width": 768,
+      "check": "opt-out removes the last position and stays disabled across scroll, pagehide, new reads and reload"
+    },
+    {
+      "width": 768,
+      "check": "changed source pin blocks all wording until explicit review at the exact reference"
+    },
+    {
+      "width": 768,
+      "check": "a missing saved reference cannot be replaced by nearby source wording"
+    },
+    {
+      "width": 768,
+      "check": "resumed split-plan locator retains day, assigned window and exact source revision"
+    },
+    {
+      "width": 768,
+      "check": "source-book, later-work and commentary resume retain exact source pins/references and their distinct corpus modes"
+    },
+    {
+      "width": 768,
+      "check": "automatic position writes refuse to overwrite changed browser data and never fetch English or restore consent"
+    },
+    {
+      "width": 768,
+      "check": "failed storage leaves exact tab-local resume usable while durable browser data stays unchanged"
+    },
+    {
+      "width": 1280,
+      "check": "visible source paragraph is remembered with exact ref/offset/version without rewriting URL history or showing redundant resume"
+    },
+    {
+      "width": 1280,
+      "check": "pagehide flushes the current visible source position without waiting for the debounce timer"
+    },
+    {
+      "width": 1280,
+      "check": "real keyboard Library/resume flow retains the stable reading point despite navigation scrolling to the header"
+    },
+    {
+      "width": 1280,
+      "check": "copy shares a source-pinned locator and denied clipboard keeps a real accessible link without altering scope consent"
+    },
+    {
+      "width": 1280,
+      "check": "each source reference is an exact share/open link without copying scripture into a URL"
+    },
+    {
+      "width": 1280,
+      "check": "opt-out removes the last position and stays disabled across scroll, pagehide, new reads and reload"
+    },
+    {
+      "width": 1280,
+      "check": "changed source pin blocks all wording until explicit review at the exact reference"
+    },
+    {
+      "width": 1280,
+      "check": "a missing saved reference cannot be replaced by nearby source wording"
+    },
+    {
+      "width": 1280,
+      "check": "resumed split-plan locator retains day, assigned window and exact source revision"
+    },
+    {
+      "width": 1280,
+      "check": "source-book, later-work and commentary resume retain exact source pins/references and their distinct corpus modes"
+    },
+    {
+      "width": 1280,
+      "check": "automatic position writes refuse to overwrite changed browser data and never fetch English or restore consent"
+    },
+    {
+      "width": 1280,
+      "check": "failed storage leaves exact tab-local resume usable while durable browser data stays unchanged"
+    }
+  ],
+  "a11y": {
+    "scans": 0,
+    "violations": 0,
+    "results": []
+  },
+  "limits": "Actual bundled canonical, bounded plan, later-work and commentary sources. Source drift/missing ref, clipboard denial and competing browser write are controlled fixtures. Position is a debounced viewport locator, not reading/comprehension proof. English state is never persisted/retrieved by resume. No physical-device or human accessibility certification. Only audit contexts bypass CSP."
+}

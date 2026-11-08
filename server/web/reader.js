@@ -660,12 +660,12 @@
       throw Error("The quotation result is incomplete or does not match this P\u0101li request. No verdict or substitute source was displayed.");
     };
     const text3 = (x) => typeof x === "string" && x.length > 0;
-    const integer3 = (x) => Number.isSafeInteger(x) && x >= 0;
+    const integer4 = (x) => Number.isSafeInteger(x) && x >= 0;
     if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text3(data.explanation) || !text3(data.guidance) || data.scope?.language !== "pali" || !text3(data.scope.searched) || !text3(data.scope.attribution) || !text3(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text3(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text3(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail2();
     if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text3(data.citation_note))) fail2();
     for (const m of data.matches) {
       const command2 = m.read_with, span = m.source_span;
-      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text3(m.citation) || !text3(m.matched_text) || !text3(m.edition) || !text3(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command2?.tool !== "get_text" || command2.uid !== m.text_id || !integer3(command2.offset) || !integer3(command2.limit) || command2.limit < 1 || command2.limit > 200 || span?.offset !== command2.offset || span.first_segment_ref !== m.segment_ref || !integer3(span.end_offset) || span.end_offset <= span.offset || !text3(span.last_segment_ref)) fail2();
+      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text3(m.citation) || !text3(m.matched_text) || !text3(m.edition) || !text3(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command2?.tool !== "get_text" || command2.uid !== m.text_id || !integer4(command2.offset) || !integer4(command2.limit) || command2.limit < 1 || command2.limit > 200 || span?.offset !== command2.offset || span.first_segment_ref !== m.segment_ref || !integer4(span.end_offset) || span.end_offset <= span.offset || !text3(span.last_segment_ref)) fail2();
     }
     if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail2();
     return data;
@@ -733,8 +733,8 @@
       return false;
     }
   }
-  function topicSource(source) {
-    if (!string2(source?.name) || !string2(source.license) || !string2(source.attribution) || !string2(source.commit)) fail();
+  function topicSource(source2) {
+    if (!string2(source2?.name) || !string2(source2.license) || !string2(source2.attribution) || !string2(source2.commit)) fail();
   }
   function related(items, tool2) {
     if (items === void 0) return;
@@ -843,6 +843,24 @@
     };
   }
 
+  // web/reading-position.mjs
+  var string3 = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f<>]/.test(x);
+  var integer3 = (x) => Number.isSafeInteger(x) && x >= 0 && x <= 1e5;
+  var source = (x) => typeof x === "string" && /^[a-zA-Z0-9._-]{1,100}$/.test(x);
+  function readingPosition(context, offset, ref, revision) {
+    if (!context || !integer3(offset) || !string3(ref, 400) || !source(revision) || Object.keys(context).some((k) => !["uid", "book", "kind", "plan", "day"].includes(k)) || Boolean(context.uid) === Boolean(context.book) || !string3(context.uid || context.book, 300) || /https?:|javascript:|data:/i.test(context.uid || context.book) || context.kind !== void 0 && !["post", "commentary"].includes(context.kind) || context.book && context.kind || context.plan !== void 0 && (!context.uid || context.kind || !/^[a-z0-9-]{1,60}$/.test(context.plan) || !Number.isSafeInteger(context.day) || context.day < 1 || context.day > 400) || context.day !== void 0 && context.plan === void 0) throw Error("This reading position has unsupported source or reference metadata.");
+    return "#read?" + new URLSearchParams({ ...context, offset, ref, source: revision });
+  }
+  function assertPositionPin(args, data) {
+    if (!args.has("source")) return;
+    if (args.getAll("source").length !== 1 || !source(args.get("source")) || !string3(args.get("ref"), 400) || !/^\d+$/.test(args.get("offset") || "") || !integer3(Number(args.get("offset")))) throw Error("The saved reading position is incomplete. Open its source from the Library; no nearby passage was substituted.");
+    if (data.source?.commit !== args.get("source")) {
+      const error = Error("The source revision changed since this reading position was saved. Review the current source explicitly before continuing; no replacement wording was displayed.");
+      error.code = "READING_SOURCE_CHANGED";
+      throw error;
+    }
+  }
+
   // web/reader.js
   var $ = (id) => document.getElementById(id);
   var view = $("view");
@@ -850,9 +868,12 @@
   var serial = 0;
   var epoch = 0;
   var studyEpoch = 0;
+  var positionTimer;
+  var activePosition = null;
   var KEY = "pali-library-v1";
   var storageOK = true;
   var storageSnapshot;
+  var positionDurable = true;
   function loadLocal() {
     try {
       const raw = localStorage.getItem(KEY);
@@ -873,6 +894,7 @@
       const serialized = JSON.stringify(local);
       localStorage.setItem(KEY, serialized);
       storageSnapshot = serialized;
+      positionDurable = true;
       return true;
     } catch {
       storageOK = false;
@@ -1001,11 +1023,44 @@
     $("content").focus({ preventScroll: true });
   }
   function updateResume() {
-    const valid = typeof local.last === "string" && /^#read\?/.test(local.last);
-    $("resume").hidden = !valid || location.hash === local.last;
+    const valid = local.remember_position !== false && typeof local.last === "string" && /^#read\?/.test(local.last);
+    $("resume").hidden = !valid || location.hash === local.last || activePosition?.token === epoch && activePosition.links.some((x) => x.href === local.last);
     if (valid) $("resume").href = local.last;
   }
+  function rememberPosition(href) {
+    if (local.remember_position === false || !href || local.last === href) return;
+    local.last = href;
+    updateResume();
+    try {
+      if (localStorage.getItem(KEY) !== storageSnapshot) {
+        positionDurable = false;
+        status2.textContent = "Another tab changed browser data. This reading position is kept in this tab only; reload before saving.";
+        return;
+      }
+    } catch {
+    }
+    positionDurable = persist();
+  }
+  function visibleReadingPosition() {
+    if (activePosition?.token !== epoch) return;
+    return activePosition.links.find((x) => {
+      const rect = x.node.getBoundingClientRect();
+      return rect.bottom > 1 && rect.top < innerHeight;
+    });
+  }
+  function flushReadingPosition() {
+    clearTimeout(positionTimer);
+    if (local.remember_position === false || activePosition?.token !== epoch) return;
+    const visible = visibleReadingPosition();
+    if (visible) rememberPosition(visible.href);
+  }
+  window.addEventListener("scroll", () => {
+    clearTimeout(positionTimer);
+    if (activePosition?.token === epoch && local.remember_position !== false) positionTimer = setTimeout(flushReadingPosition, 350);
+  }, { passive: true });
+  window.addEventListener("pagehide", flushReadingPosition);
   function preferences() {
+    $("remember-position").checked = local.remember_position !== false;
     const size = Math.max(16, Math.min(30, Number(local.font) || 21));
     document.documentElement.style.setProperty("--reading", size + "px");
     $("font-size").value = size;
@@ -1015,6 +1070,16 @@
   }
   preferences();
   updateResume();
+  $("remember-position").addEventListener("change", (e) => {
+    local.remember_position = e.target.checked;
+    if (!e.target.checked) {
+      clearTimeout(positionTimer);
+      delete local.last;
+    }
+    persist();
+    if (e.target.checked) flushReadingPosition();
+    updateResume();
+  });
   $("font-size").addEventListener("input", (e) => {
     local.font = Number(e.target.value);
     preferences();
@@ -1141,6 +1206,7 @@
     const data = await tool(kind === "commentary" ? "get_commentary" : kind === "post" ? "get_post_canonical" : "get_text", request);
     if (token !== epoch) return;
     if (!Array.isArray(data.segments)) throw new Error("Choose an individual book or passage to read.");
+    assertPositionPin(args, data);
     if (args.has("ref") && !data.segments.some((segment) => segment.ref === args.get("ref"))) throw Error("The saved passage reference was not returned at this position. No nearby passage was substituted. Open the source from the Library or check the bookmark\u2019s revision.");
     if (plan) validatePlanPage(data, plan, uid, window2);
     if (kind === "post" && data.canonical !== false || kind === "commentary" && !(data.canonical === false && data.content_type === "commentary") && !(typeof data.label === "string" && data.label.startsWith("Commentary") && data.label.includes("not the canon"))) throw new Error("This response lacks the expected non-canonical source label.");
@@ -1153,12 +1219,18 @@
     view.append(el("p", `Segments ${offset + 1}\u2013${offset + data.returned} of ${data.total_segments}`, "muted"));
     const toolbar = el("div", void 0, "toolbar");
     toolbar.append(link("Back to library", route("browse", { node: "canon" }), "button"));
+    const copyFallback = link("Exact reading link \xB7 open or long-press to copy", location.hash);
+    copyFallback.hidden = true;
     const copy = button("Copy reading link", async () => {
+      clearTimeout(positionTimer);
+      const href = new URL(activePosition?.links.find((x) => x.href === local.last)?.href || activePosition?.links[0]?.href || location.hash, location.href).href;
       try {
-        await navigator.clipboard.writeText(location.href);
+        await navigator.clipboard.writeText(href);
         status2.textContent = "Reading link copied.";
       } catch {
-        status2.textContent = "Copy the link from your browser\u2019s address bar.";
+        copyFallback.href = href;
+        copyFallback.hidden = false;
+        status2.textContent = "Clipboard unavailable. Use the exact reading link beside the button.";
       }
     });
     if (kind === "canon") {
@@ -1172,10 +1244,10 @@
         target.tabIndex = -1;
         target.focus();
       };
-      tools.append(button("English sources", invoke(() => translations(data, uid, token))), button("Traditional commentary", invoke(() => commentary(uid, token))), button("Related texts", invoke(() => relatedTexts(data.text_id || uid, token))), copy);
+      tools.append(button("English sources", invoke(() => translations(data, uid, token))), button("Traditional commentary", invoke(() => commentary(uid, token))), button("Related texts", invoke(() => relatedTexts(data.text_id || uid, token))), copy, copyFallback);
       panel.append(tools);
       toolbar.append(panel);
-    } else toolbar.append(copy);
+    } else toolbar.append(copy, copyFallback);
     view.append(toolbar);
     responsivePanels();
     const additions = el("section");
@@ -1184,11 +1256,24 @@
     view.append(additions);
     const passages = el("section");
     passages.setAttribute("aria-label", "P\u0101li passage");
+    const positions = [];
+    const positionContext = { ...readingArgs(selector), ...plan ? { plan: plan.name, day: plan.day } : {} };
     for (const segment of data.segments || []) {
       const part = el("article", void 0, "segment " + (segment.type === "heading" ? "heading" : ""));
       part.id = "seg-" + segment.ref.replace(/[^a-z0-9-]/gi, "-");
-      const row = el("div", void 0, "segment-label");
-      row.append(el("span", segment.ref + (segment.vri_paragraph ? " \xB7 VRI " + segment.vri_paragraph : "")));
+      let positionHref;
+      try {
+        positionHref = readingPosition(positionContext, data.offset + data.segments.indexOf(segment), segment.ref, data.source?.commit);
+      } catch {
+      }
+      const row = el("div", void 0, "segment-label"), reference = el("span");
+      if (positionHref) {
+        const exact2 = link(segment.ref, positionHref);
+        exact2.setAttribute("aria-label", "Open exact passage " + segment.ref);
+        reference.append(exact2);
+      } else reference.textContent = segment.ref;
+      if (segment.vri_paragraph) reference.append(document.createTextNode(" \xB7 VRI " + segment.vri_paragraph));
+      row.append(reference);
       const active = local.saved.some((x) => x.uid === selector && x.ref === segment.ref);
       const save = button(active ? "Saved \u2713" : "Save passage", () => saveSegment(selector, data, segment, save, part));
       save.setAttribute("aria-label", "Save passage " + segment.ref);
@@ -1206,13 +1291,14 @@
       text3.lang = "pi";
       part.append(row, text3);
       passages.append(part);
+      if (positionHref) positions.push({ node: part, heading: segment.type === "heading", href: positionHref });
     }
     const next = plan && window2.end !== null ? offset + data.returned < window2.end ? offset + data.returned : null : data.next_offset;
     view.append(passages);
     pageControls(next, offset > (window2?.start || 0) ? Math.max(window2?.start || 0, offset - 30) : null, (n) => route("read", { ...readingArgs(selector), offset: n, ...plan ? { plan: plan.name, day: plan.day } : {} }));
     provenance(data);
-    local.last = location.hash;
-    persist();
+    activePosition = { token, links: positions };
+    rememberPosition(positions.find((x) => args.get("ref") === new URLSearchParams(x.href.split("?")[1]).get("ref"))?.href || positions[0]?.href || location.hash);
     updateResume();
     const savedVersion = local.saved.find((x) => x.uid === selector && x.source_commit && x.source_commit !== data.source?.commit);
     if (savedVersion) view.prepend(el("p", "This source revision differs from a saved bookmark. Check its reference before reusing your notes.", "notice"));
@@ -2001,6 +2087,8 @@
       $("content").focus();
       return;
     }
+    activePosition = null;
+    clearTimeout(positionTimer);
     const token = ++epoch;
     ++studyEpoch;
     requests.cancelAll();
@@ -2023,7 +2111,7 @@
       else if (page === "about") about();
       else await browse(args, token);
       if (token !== epoch) return;
-      status2.textContent = storageOK ? "" : "Browser storage is unavailable; export your personal data before closing this tab.";
+      status2.textContent = !storageOK ? "Browser storage is unavailable; export your personal data before closing this tab." : positionDurable ? "" : "Another tab changed browser data. This reading position is kept in this tab only; reload before saving.";
       focusHeading();
     } catch (error) {
       if (token !== epoch) return;
@@ -2031,6 +2119,11 @@
       const stopped2 = error.code === "REQUEST_STOPPED";
       heading(stopped2 ? "BROWSER WAIT STOPPED" : "UNABLE TO OPEN", stopped2 ? "Reading request stopped" : "No passage was substituted.");
       view.append(el("p", error.message, "notice"), button("Try again", render), link("Browse the library", route("browse", { node: "canon" }), "button"));
+      if (error.code === "READING_SOURCE_CHANGED") {
+        const review = new URLSearchParams(args);
+        review.delete("source");
+        view.append(link("Review current source at this reference", "#read?" + review, "button"));
+      }
       status2.textContent = stopped2 ? "Stopped waiting in this browser." : error.code === "REQUEST_DEADLINE" ? "The request timed out." : "The request failed.";
     }
   }

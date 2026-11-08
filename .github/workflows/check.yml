@@ -133,6 +133,10 @@ jobs:
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-recovery-check.py --report standalone-recovery.report.json
       - name: Audit pending-request and recovery states in both themes
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-recovery-check.py --a11y --report standalone-recovery-a11y.report.json
+      - name: Check exact reading position, sharing and source-version refusal
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-position-check.py --report standalone-position.report.json
+      - name: Audit exact reading position and privacy controls in both themes
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-position-check.py --a11y --report standalone-position-a11y.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -159,6 +163,8 @@ jobs:
             standalone-topics-a11y.report.json
             standalone-recovery.report.json
             standalone-recovery-a11y.report.json
+            standalone-position.report.json
+            standalone-position-a11y.report.json
           if-no-files-found: warn
   check:
     name: Node ${{ matrix.node }} / ${{ matrix.os }}
