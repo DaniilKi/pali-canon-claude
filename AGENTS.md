@@ -271,3 +271,14 @@ screens or personal controls into print output. Invalid/loading/non-reading
 routes must not print stale scripture. `scripts/web-reader-print-check.py`
 checks actual bundled pages and PDF creation; it does not certify physical
 printers or tagged PDF accessibility.
+
+
+### Saved-library navigation
+
+`web/saved-passages.mjs` filters browser-local metadata and current note drafts,
+with 25 visible editors per page. Search must never reach URLs, browser-tab titles or server
+requests. Keep source types distinct, unsaved/off-page drafts in exports,
+explicit guarded persistence and old source references. Filtering/paging must
+not save or drop notes. Run `tests/web-saved-passages.test.mjs` and
+`scripts/web-reader-saved-check.py` normal/a11y/installed, plus bookmark import,
+storage and cross-tab pointer regressions.

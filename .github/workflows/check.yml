@@ -123,6 +123,12 @@ jobs:
       - name: Check local bookmark restore and exact saved references
         if: matrix.group == 'personal'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-import-check.py --report standalone-import.report.json
+      - name: Check saved-library search paging and private drafts
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-saved-check.py --report standalone-saved.report.json
+      - name: Audit saved-library filters and paging in both themes
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-saved-check.py --a11y --report standalone-saved-a11y.report.json
       - name: Audit bookmark restore screens in both themes
         if: matrix.group == 'personal'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-import-check.py --a11y --report standalone-import-a11y.report.json

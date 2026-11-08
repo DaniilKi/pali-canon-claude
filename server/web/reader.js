@@ -1,4 +1,30 @@
 (() => {
+  // web/saved-passages.mjs
+  var SAVED_PAGE_SIZE = 25;
+  function savedScope(item) {
+    const uid = typeof item?.uid === "string" ? item.uid : "";
+    if (uid.startsWith("book:")) return "books";
+    if (uid.startsWith("post:")) return "post";
+    if (uid.startsWith("commentary:") || uid.startsWith("commentary-ref:")) return "commentary";
+    return "canon";
+  }
+  var savedScopeLabels = Object.freeze({ canon: "Canonical text", books: "Complete root source book", commentary: "Commentary \xB7 not canon", post: "Later work \xB7 not canon" });
+  var fold = (value) => (typeof value === "string" ? value : "").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+  function savedPage(items, drafts, { query = "", scope = "all", page = 0 } = {}) {
+    const tokens = fold(query).trim().split(/\s+/u).filter(Boolean);
+    const selected = Object.hasOwn(savedScopeLabels, scope) ? scope : "all";
+    const matches = items.filter((item) => {
+      if (selected !== "all" && savedScope(item) !== selected) return false;
+      const key2 = JSON.stringify([item.uid, item.ref]);
+      const note = drafts?.has(key2) ? drafts.get(key2) : item.note;
+      const text3 = fold([item.title, item.uid, item.ref, note].filter((x) => typeof x === "string").join(" "));
+      return tokens.every((token) => text3.includes(token));
+    });
+    const pages = Math.max(1, Math.ceil(matches.length / SAVED_PAGE_SIZE));
+    const current = Number.isSafeInteger(page) ? Math.max(0, Math.min(page, pages - 1)) : 0;
+    return { items: matches.slice(current * SAVED_PAGE_SIZE, (current + 1) * SAVED_PAGE_SIZE), total: matches.length, all: items.length, pages, page: current, start: matches.length ? current * SAVED_PAGE_SIZE + 1 : 0, end: Math.min((current + 1) * SAVED_PAGE_SIZE, matches.length) };
+  }
+
   // web/print-page.mjs
   function installPagePrinting(doc = document, win = window) {
     const view2 = doc.getElementById("view");
@@ -2251,7 +2277,9 @@
     });
     return section;
   }
+  var savedFilters = { query: "", scope: "all", page: 0 };
   function saved() {
+    const token = epoch;
     view.replaceChildren();
     heading("YOUR PERSONAL READING", "Saved passages");
     view.append(el("p", "Bookmarks and notes stay in this browser only. They are not scripture, synced, or backed up. Export them to keep a copy.", "notice"));
@@ -2259,35 +2287,112 @@
       exportPersonal(exportBookmarks(), "pali-library-bookmarks.json");
     }));
     view.append(el("p", "Unsaved note edits stay in this tab while you navigate. Save or export them before closing or reloading.", "muted"), bookmarkImporter());
-    if (!local.saved.length) view.append(el("p", "Save a passage while reading to find it here."));
-    for (const item of [...local.saved]) {
-      const box = el("article", void 0, "segment");
-      const index = Number.isSafeInteger(item.offset) && item.offset >= 0 ? item.offset : Number(item.ref.match(/\/c?(\d+)$/)?.[1] || 1) - 1;
-      box.append(link(item.title + " \xB7 " + item.ref, route("read", { ...readingArgs(item.uid), offset: Math.floor(index / 30) * 30, ref: item.ref })));
-      const label = el("label", "Your personal note");
-      const input = el("textarea");
-      input.className = "note-field";
-      input.maxLength = 4e3;
-      input.value = noteDrafts.get(noteKey(item)) ?? (typeof item.note === "string" ? item.note : "");
-      input.addEventListener("input", () => noteDrafts.set(noteKey(item), input.value));
-      label.append(input);
-      box.append(label);
-      box.append(button("Save note", () => {
-        const original = local.saved.find((x) => x.uid === item.uid && x.ref === item.ref);
-        if (original) original.note = input.value;
-        if (persist()) {
-          noteDrafts.delete(noteKey(item));
-          status2.textContent = "Personal note saved in this browser.";
-        }
-      }), button("Remove bookmark", () => {
-        noteDrafts.delete(noteKey(item));
-        local.saved = local.saved.filter((x) => !(x.uid === item.uid && x.ref === item.ref));
-        persist();
-        render();
-      }));
-      if (item.source_commit) box.append(el("small", "Saved source revision: " + item.source_commit, "muted"));
-      view.append(box);
+    const filters = el("form", void 0, "saved-filters");
+    filters.setAttribute("aria-label", "Find saved passages");
+    const searchLabel = el("label", "Search saved passages and notes"), query = el("input");
+    query.type = "search";
+    query.maxLength = 300;
+    query.value = savedFilters.query;
+    searchLabel.append(query);
+    const scopeLabel = el("label", "Saved source type"), scope = el("select");
+    scope.setAttribute("aria-label", "Saved source type");
+    for (const [value, name] of [["all", "All source types"], ...Object.entries(savedScopeLabels)]) {
+      const option = el("option", name);
+      option.value = value;
+      scope.append(option);
     }
+    scope.value = savedFilters.scope;
+    scopeLabel.append(scope);
+    const clear = button("Clear saved filters", () => {
+      if (token !== epoch) return;
+      query.value = "";
+      scope.value = "all";
+      refresh();
+      query.focus();
+    });
+    filters.append(searchLabel, scopeLabel, clear);
+    view.append(filters, el("p", "Search stays in this tab. It checks saved titles, references and personal notes, not the full scripture text.", "muted"));
+    const count = el("p");
+    count.setAttribute("role", "status");
+    count.setAttribute("aria-live", "polite");
+    count.tabIndex = -1;
+    view.append(count);
+    const results = el("section");
+    results.setAttribute("aria-label", "Saved passage results");
+    view.append(results);
+    function refresh() {
+      if (token !== epoch) return;
+      savedFilters.query = query.value;
+      savedFilters.scope = scope.value;
+      savedFilters.page = 0;
+      show();
+    }
+    filters.addEventListener("submit", (event) => {
+      event.preventDefault();
+      refresh();
+    });
+    query.addEventListener("input", refresh);
+    scope.addEventListener("change", refresh);
+    function show(moveFocus = false) {
+      if (token !== epoch) return;
+      const page = savedPage(local.saved, noteDrafts, savedFilters);
+      savedFilters.page = page.page;
+      count.textContent = page.total ? `Showing ${page.start}\u2013${page.end} of ${page.total} matching saved passages \xB7 ${page.all} saved in this tab` : `No matching saved passages \xB7 ${page.all} saved in this tab`;
+      results.replaceChildren();
+      if (!local.saved.length) results.append(el("p", "Save a passage while reading to find it here."));
+      else if (!page.total) results.append(el("p", "Try a different saved title, reference, note or source type, or clear the filters."));
+      for (const item of page.items) {
+        const box = el("article", void 0, "segment");
+        const index = Number.isSafeInteger(item.offset) && item.offset >= 0 ? item.offset : Number(item.ref.match(/\/c?(\d+)$/)?.[1] || 1) - 1;
+        box.append(el("small", savedScopeLabels[savedScope(item)], "muted"), link(item.title + " \xB7 " + item.ref, route("read", { ...readingArgs(item.uid), offset: Math.floor(index / 30) * 30, ref: item.ref })));
+        const label = el("label", "Your personal note");
+        const input = el("textarea");
+        input.className = "note-field";
+        input.maxLength = 4e3;
+        input.value = noteDrafts.get(noteKey(item)) ?? (typeof item.note === "string" ? item.note : "");
+        input.addEventListener("input", () => noteDrafts.set(noteKey(item), input.value));
+        label.append(input);
+        box.append(label);
+        box.append(button("Save note", () => {
+          if (token !== epoch) return;
+          const original = local.saved.find((x) => x.uid === item.uid && x.ref === item.ref);
+          if (original) original.note = input.value;
+          if (persist()) {
+            noteDrafts.delete(noteKey(item));
+            status2.textContent = "Personal note saved in this browser.";
+          }
+        }), button("Remove bookmark", () => {
+          if (token !== epoch) return;
+          noteDrafts.delete(noteKey(item));
+          local.saved = local.saved.filter((x) => !(x.uid === item.uid && x.ref === item.ref));
+          persist();
+          show(true);
+        }));
+        if (item.source_commit) box.append(el("small", "Saved source revision: " + item.source_commit, "muted"));
+        results.append(box);
+      }
+      if (page.pages > 1) {
+        const pager = el("nav", void 0, "pager");
+        pager.setAttribute("aria-label", "Saved passage pages");
+        if (page.page > 0) pager.append(button("Previous saved page", () => {
+          if (token !== epoch) return;
+          savedFilters.page = page.page - 1;
+          show(true);
+        }));
+        pager.append(el("span", `Page ${page.page + 1} of ${page.pages}`));
+        if (page.page + 1 < page.pages) pager.append(button("Next saved page", () => {
+          if (token !== epoch) return;
+          savedFilters.page = page.page + 1;
+          show(true);
+        }));
+        results.append(pager);
+      }
+      if (moveFocus) {
+        count.focus({ preventScroll: true });
+        count.scrollIntoView({ block: "start" });
+      }
+    }
+    show();
   }
   function about() {
     heading("A LIBRARY, NOT A TEACHER", "Read with the source in view.");
