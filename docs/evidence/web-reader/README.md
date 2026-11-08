@@ -1,5 +1,7 @@
 # Standalone web-reader evidence
 
+Use [the dev integration checkpoint](DEV_INTEGRATION.md) plus live Git refs/exact-head CI for current integration status. The feature/candidate receipts below are historical snapshots.
+
 Latest [compact-reading acceptance](COMPACT_READING.md) records measured phone fold improvements, native disclosures, responsive focus and preserved source consent; 33 browser/package checks and 16 new accessibility scans.
 
 The [daily-reading acceptance](DAILY_READING.md) adds the existing dated source rotation, exact previews and UTC refresh, with 36 browser and 36 installed-package checks plus 12 accessibility scans.

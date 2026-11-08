@@ -2,7 +2,7 @@
 
 A standalone, responsive reader is available at the HTTP server's root URL. It does not require an AI account or the ChatGPT widget. This is the first complete reading slice, not feature parity with every tool in an AI client.
 
-The isolated integration candidate combines web `492169f` with corpus `7b04173`. Actual shared-compilation consent, publisher/subject identity and licence notices are checked in [integration evidence](evidence/web-reader/INTEGRATION.md). This is not a deployment or advancement of dev/main.
+The reader includes the combined source-aware interface, study tools, reading plans, local restore, daily reading and compact phone layout, based on corpus `7b04173` and reader `5d16478`. See the [dev integration checkpoint](evidence/web-reader/DEV_INTEGRATION.md) for branch/gate verification. Older feature receipts retain their historical scope; they are not the current branch-status authority. A Git integration does not deploy a public host.
 
 ## Run it
 
