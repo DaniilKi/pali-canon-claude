@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "receipts": [
+    {
+      "check": "live Ireland exact version, complete pinned body and BPS notice",
+      "status": "passed",
+      "characters": 566,
+      "translation_id": "ati:/tipitaka/an/an02/an02.009.irel",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "text_sha256": "4b552835f83021c9b590ff997861c6bd4b70c2c2d8d20e95966ce2a20608d7b5",
+      "notice_sha256": "2efb55a7c3862733171c5137b51d37e1b403a644931d8282d8e63a5f9eaa1389"
+    },
+    {
+      "check": "live explicit two-version comparison preserves order, exact choices and separate notices",
+      "status": "passed",
+      "versions": [
+        {
+          "translation_id": "ati:/tipitaka/an/an02/an02.009.than",
+          "translator": "Thanissaro Bhikkhu",
+          "characters": 670
+        },
+        {
+          "translation_id": "ati:/tipitaka/an/an02/an02.009.irel",
+          "translator": "John D. Ireland",
+          "characters": 566
+        }
+      ]
+    }
+  ],
+  "limits": "Opt-in real publisher requests through compiled MCP server. No source bodies stored. This observed current body/notice match does not add scoped runtime hash enforcement to ordinary links."
+}

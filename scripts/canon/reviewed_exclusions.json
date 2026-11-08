@@ -48,6 +48,32 @@
         "39",
         "40"
       ]
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/iti/iti.2.042-049x.irel.html",
+      "status": "withheld-shared-page",
+      "subject_ids": [
+        "iti42"
+      ],
+      "publisher_numbered_passages": [
+        "42",
+        "43",
+        "44",
+        "49"
+      ],
+      "reason": "This BPS Group of Twos excerpt combines four noncontiguous sections and navigation. Ordinary Iti42 ownership misattributes words from other discourses; range42–49 would invent absent45–48. Withhold globally pending a separate source-specific scope contract; subject_ids records the withdrawn owner only. Preserve the independent dhammatalks Iti42 version.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/iti/iti.2.042-049x.irel.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "d2690de7fc88dbf0188f24ab085742848fd6322e00d2ba715d2807d30f1afa4e",
+        "text_sha256": "dc924c085fab69e41e0e0557908c15d0c00fff0140487af5bb1b7ec22d62e307",
+        "notice_sha256": "e3762b5523e8be8b1a600211e12dfa5a4e5901162aba8cdc76f8d5566364407c",
+        "withdrawn_owner_root_blocks_sha256": "2dc66485a9671bc15759d7d52211b0ca457a6ed322f833fcafd34e3601b63842",
+        "method": "Full pinned publisher body and complete Iti42 root reviewed independently. Four source sections42/43/44/49 are not one unit or a contiguous complete range; no remap or BPS relicensing."
+      }
     }
   ]
 }
