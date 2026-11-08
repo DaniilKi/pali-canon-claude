@@ -36,7 +36,7 @@ test('four exact primary scopes retain complete root pins, overlapping versions 
 
 test('source pages add 62 distinct shared subjects and four current shared-only records after the DT collection hold; whole coverage is not inflated',()=>{
  const d=canon.load();saved=d.translations;const before=translationCoverage({refresh:true}).total,paths=new Set(rows.map(r=>r.path));d.translations=Object.fromEntries(Object.entries(saved).map(([uid,ls])=>[uid,ls.filter(l=>!paths.has(l.path))]).filter(([,ls])=>ls.length));const after=translationCoverage({refresh:true}).total;
- for(const key of ['links','with_english','with_english_including_inherited'])assert.equal(before[key],after[key]);assert.equal(before.shared_links,after.shared_links+4);assert.equal(before.with_shared_english,after.with_shared_english+62);assert.equal(before.shared_only,after.shared_only+4);assert.equal(before.links,2573);assert.equal(before.shared_links,12);assert.equal(before.with_shared_english,110);assert.equal(before.shared_only,52);
+ for(const key of ['links','with_english','with_english_including_inherited'])assert.equal(before[key],after[key]);assert.equal(before.shared_links,after.shared_links+4);assert.equal(before.with_shared_english,after.with_shared_english+62);assert.equal(before.shared_only,after.shared_only+4);assert.equal(before.links,2569);assert.equal(before.shared_links,12);assert.equal(before.with_shared_english,110);assert.equal(before.shared_only,52);
  d.translations=saved;const exp=buildIndex();for(const id of ['iti11','iti12','iti13'])assert.equal(exp.texts.find(t=>t.id===id).english_count,0);
 });
 

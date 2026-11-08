@@ -304,7 +304,7 @@ only active source.
 
 ## Reviewed ATI verse-only partial pages
 
-D205/D206 register six sources in `reviewed_partial_pages.json`. Normal rebuilds
+D205–D207 register eight sources in `reviewed_partial_pages.json`. Normal rebuilds
 always withhold their ordinary proposals. `--content` activation verifies full
 roots, raw HTML, verse-only extraction, selected Pāli and complete notice pins
 before adding exact partial declarations. Remaining exclusions apply last.
@@ -320,3 +320,7 @@ python3 scripts/web-reader-partial-pilot-check.py --source-root /tmp/pali-ati-so
 The browser check uses local pinned snapshots, never upstream HTTP. No English
 bodies belong in repository fixtures/reports. Discontinuous or ambiguous excerpts
 remain held; never create a single contiguous declaration across omissions.
+
+## Existing ordinary ATI excerpt leads
+
+`ordinary_excerpt_packet.py CANON.gz TRANSLATIONS.json ATI-CHECKOUT` reads a clean pinned official checkout and emits metadata only. It checks every supplied ordinary ATI binding, fails on missing/escaping paths, and flags publisher extent/title/filename clues. Flags are neither errors nor approvals; an excerpt from a collection may fully translate one indexed poem. Exact prior retained snapshots are separately annotated only while source/root/link pins agree. No scripture body is returned. See `docs/data/ordinary-excerpt-review-queue.json`:28 flags, one frozen retained snapshot,27 unreviewed bindings; counts overlap the broader screen. Review complete bodies, boundaries and notices individually.

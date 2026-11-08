@@ -72,7 +72,7 @@ try {
         await call('verify_quote',{text:'Synthetic fixture only amber lantern copper window',language:'english',texts:[row.unit_id],translation_ids:[rid]},/include_partial/);
         await call('get_translation',{uid:row.unit_id,translation:rid,allow_partial:true},/source text changed/);
       }
-      const totals=(await call('list_sources',{})).translation_coverage.total;assert.equal(totals.partial_links,registry.links.length);assert.equal(totals.partial_only,1);assert.equal(totals.links,baseline.links);
+      const totals=(await call('list_sources',{})).translation_coverage.total;assert.equal(totals.partial_links,registry.links.length);assert.equal(totals.partial_only,baseline.partial_only);assert.equal(totals.links,baseline.links);
     }else if (mode === 'mixed_versions') {
       const selected = await call('get_translation', { uid }); assert.equal(selected.translation_id, 'dt:SYNTHETIC/FULL');
       const named = await call('get_translation', { uid, translation: 'Synthetic fixture translator' }); assert.equal(named.translation_id, selected.translation_id);
