@@ -281,6 +281,43 @@
         "notice_sha256": "00871cb7741e9aa3350ffb206d616de1bc8b533dcda2d44c9937fb038f2321a8",
         "extractor": "ati-freeverse-v1"
       }
+    },
+    {
+      "unit_id": "sn12.22",
+      "path": "/tipitaka/sn/sn12/sn12.022x.wlsh",
+      "translator": "Maurice O'Connell Walshe",
+      "english_title": "Dasabalaa (2) Sutta: Ten Powers — concluding exhortation only",
+      "license": "BPS-free-distribution-1985",
+      "source_reference": "SN 12.22 — concluding exhortation inside VRI22",
+      "mapping_note": "Derived excerpt from the named ATI/BPS source. Only UTF-16 characters229–977 of sn12.22/4 (end exclusive) correspond to this translation; the opening229 characters, closing colophon and all earlier paragraphs are excluded. Pāli wording is unchanged. Seven editorial notes and their inline reference markers are excluded from translation wording. Complete BPS notice and citation accompany every page; free distribution and ≤50-copy reprint conditions remain.",
+      "source_html_sha256": "3fde66df3623c9f272358965e096ebb23c2bdf95ebee229e130aa02bd3539544",
+      "root": {
+        "id": "sn12.22",
+        "title": "Dutiyadasabalasuttaṃ",
+        "vri": "22",
+        "book": 12,
+        "start": 146,
+        "end": 150,
+        "root_blocks_sha256": "ffa34ef49339c38f3778fe34d6b07d192c5495d7aa8e8dfc7c4c6f2024e8d979"
+      },
+      "partial_scope": {
+        "version": 2,
+        "status": "reviewed",
+        "unit_id": "sn12.22",
+        "first_ref": "sn12.22/4",
+        "last_ref": "sn12.22/4",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "9fd23d0b4a5df3afcc663bc71a4f9c6e08a161e70ee774d3bab0e87cfee273ad",
+        "text_sha256": "53ce0172f86ea842494f7638081eb08a036cd00ba184a43c9aa37ebb0e2d3754",
+        "notice_sha256": "58712c73f40813d0ee50854c3a500c236e9c7e40c57fe5ebc5f368660b96915a",
+        "extractor": "ati-chapter-prose-v1",
+        "subparagraph": {
+          "start_char": 229,
+          "end_char": 977,
+          "offset_unit": "utf16_code_units",
+          "segment_sha256": "1e0108c995347201fad5698c213c772e0a5af91260b2a7a09dbbfe753ab0daa5"
+        }
+      }
     }
   ]
 }

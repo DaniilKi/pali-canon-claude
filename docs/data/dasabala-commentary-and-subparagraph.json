@@ -1,0 +1,178 @@
+{
+  "baseline_commit": "682ac0d9c5a7d9b41fa50fd3c850493f95c14c64",
+  "observed_on": "2026-11-08",
+  "method": "Pinned official ATI and VRI full-source comparison; source-derived natural commentary alignment and exact original substring, never generated scripture.",
+  "commentary_repair": {
+    "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "source_xml_sha256": "552f37180939a3795ad4ebde050a0f0fb13964945f9733f7b15bd332c22dbdd0",
+    "commentary_book_sha256": "ecbe2f1817ae3c588bdc3400d397d9f903d16d639b6fd3d8fa797d9a3c6ec9d7",
+    "short_commentary_sha256": "999074c2dba5eb064b5242c1ab2db0949f0ba699872315b2315335315bff5346",
+    "root_book_sha256": "9874d3c4d8ba58f777bce5a8e722b497d85ae682690b6743f8dbf7450e3a99d7",
+    "passage": [
+      10,
+      152,
+      155,
+      12,
+      21,
+      21,
+      0,
+      0,
+      "paragraph",
+      0,
+      1427
+    ],
+    "changed": true,
+    "passage_index": 14338,
+    "input_canon_sha256": "1ba8593937abe0284f87e3d8b2a4abd1d732fcc1d6117c36d5a671e968b4d73c",
+    "input_commentary_sha256": "bd811b7548ee27455fa866b661b929cb1496f0bca51839ec646e915ca27a54e3",
+    "output_canon_sha256": "1ba8593937abe0284f87e3d8b2a4abd1d732fcc1d6117c36d5a671e968b4d73c",
+    "output_commentary_sha256": "a4efb9cd51d1092530cdf6f4e67907ac2dee965e3816af28a83c5f10c0e7d536",
+    "sn_coverage": {
+      "texts": 1954,
+      "with_commentary": 1800,
+      "cited": 1800,
+      "cited_aligned": 1800
+    }
+  },
+  "retired_sn22_hold": {
+    "source": "ati",
+    "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.022x.wlsh.html",
+    "status": "withheld-partial-unit",
+    "subject_ids": [
+      "sn12.22"
+    ],
+    "reason": "Only a late exhortation within corrected VRI22. Omits earlier ten powers/fearlessness, aggregates/dependent origination, resolve and the opening lazy-versus-energetic discussion. The source begins inside a bundled paragraph; no exact whole-segment partial mapping is approved. No other indexed English version exists.",
+    "review": {
+      "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.022x.wlsh.html",
+      "observed_on": "2026-11-08",
+      "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+      "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "source_html_sha256": "3fde66df3623c9f272358965e096ebb23c2bdf95ebee229e130aa02bd3539544",
+      "text_sha256": "3c607c3622f9900aa17a575754b84e0e543dd950782b4fe580bc41f26e564ffb",
+      "notice_sha256": "58712c73f40813d0ee50854c3a500c236e9c7e40c57fe5ebc5f368660b96915a",
+      "method": "Complete official pinned ATI bodies/notices and full indexed VRI roots reviewed individually and independently. No publisher English bodies bundled. Local snapshots do not establish current upstream freshness or deployment. D208 independently verified sourceXML and corrected the21/22 index boundary; this hold was rechecked against the current22-only root. The source still begins inside one bundled paragraph.",
+      "root_units": [
+        {
+          "id": "sn12.22",
+          "title": "Dutiyadasabalasuttaṃ",
+          "vri": "22",
+          "book": 12,
+          "start": 146,
+          "end": 150,
+          "root_blocks_sha256": "ffa34ef49339c38f3778fe34d6b07d192c5495d7aa8e8dfc7c4c6f2024e8d979"
+        }
+      ],
+      "previous_root_units": [
+        {
+          "id": "sn12.22",
+          "title": "Dutiyadasabalasuttaṃ",
+          "vri": "21–22",
+          "book": 12,
+          "start": 143,
+          "end": 150,
+          "root_blocks_sha256": "4fbe28d2b2a3d331d4b2bd0f907ac96fd3c503f22b1258e3bc14b732c80c76fa"
+        }
+      ],
+      "source_xml_sha256": "61bc83404230b7cf06142f642834c8ea69aa0f4f2cc45d201716cd1ac9a0b40a"
+    }
+  },
+  "sn22_partial": {
+    "unit_id": "sn12.22",
+    "path": "/tipitaka/sn/sn12/sn12.022x.wlsh",
+    "translator": "Maurice O'Connell Walshe",
+    "english_title": "Dasabalaa (2) Sutta: Ten Powers — concluding exhortation only",
+    "license": "BPS-free-distribution-1985",
+    "source_reference": "SN 12.22 — concluding exhortation inside VRI22",
+    "mapping_note": "Derived excerpt from the named ATI/BPS source. Only UTF-16 characters229–977 of sn12.22/4 (end exclusive) correspond to this translation; the opening229 characters, closing colophon and all earlier paragraphs are excluded. Pāli wording is unchanged. Seven editorial notes and their inline reference markers are excluded from translation wording. Complete BPS notice and citation accompany every page; free distribution and ≤50-copy reprint conditions remain.",
+    "source_html_sha256": "3fde66df3623c9f272358965e096ebb23c2bdf95ebee229e130aa02bd3539544",
+    "root": {
+      "id": "sn12.22",
+      "title": "Dutiyadasabalasuttaṃ",
+      "vri": "22",
+      "book": 12,
+      "start": 146,
+      "end": 150,
+      "root_blocks_sha256": "ffa34ef49339c38f3778fe34d6b07d192c5495d7aa8e8dfc7c4c6f2024e8d979"
+    },
+    "partial_scope": {
+      "version": 2,
+      "status": "reviewed",
+      "unit_id": "sn12.22",
+      "first_ref": "sn12.22/4",
+      "last_ref": "sn12.22/4",
+      "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "pali_sha256": "9fd23d0b4a5df3afcc663bc71a4f9c6e08a161e70ee774d3bab0e87cfee273ad",
+      "text_sha256": "53ce0172f86ea842494f7638081eb08a036cd00ba184a43c9aa37ebb0e2d3754",
+      "notice_sha256": "58712c73f40813d0ee50854c3a500c236e9c7e40c57fe5ebc5f368660b96915a",
+      "extractor": "ati-chapter-prose-v1",
+      "subparagraph": {
+        "start_char": 229,
+        "end_char": 977,
+        "offset_unit": "utf16_code_units",
+        "segment_sha256": "1e0108c995347201fad5698c213c772e0a5af91260b2a7a09dbbfe753ab0daa5"
+      }
+    }
+  },
+  "coverage": {
+    "texts": 8445,
+    "with_english": 1416,
+    "with_english_including_inherited": 1839,
+    "links": 2566,
+    "content_matched_links": 63,
+    "by_source": {
+      "dhammatalks": 1274,
+      "ati": 1139,
+      "anandajoti": 153
+    },
+    "shared_links": 12,
+    "partial_links": 10,
+    "with_shared_english": 110,
+    "shared_only": 52,
+    "with_partial_english": 10,
+    "partial_only": 4,
+    "partial_by_source": {
+      "ati": 10
+    },
+    "shared_by_source": {
+      "ati": 12
+    },
+    "percent_with_english": 21.8
+  },
+  "limits": "No whole SN12.22 English coverage or word-level alignment; no SuttaCentral use, main merge or deployment. Historical D207/D208 evidence remains unchanged.",
+  "verification": {
+    "independent_review": "Canonical files, all original commentary books/passages and all nine v1 descriptors unchanged; source/rights/scope and saved-locator guards independently reviewed.",
+    "subparagraph_and_locator_tests_passed": 6,
+    "export_and_docs_tests_passed": 25,
+    "native_partial_audit_modes_passed": 8,
+    "browser": {
+      "partial": {
+        "normal_passed": 133,
+        "a11y_passed": 133,
+        "installed_passed": 133,
+        "axe_scans": 120,
+        "axe_violations": 0
+      },
+      "bookmarks": {
+        "normal_passed": 116,
+        "a11y_passed": 116,
+        "installed_passed": 116,
+        "axe_scans": 68,
+        "axe_violations": 0
+      }
+    },
+    "full_check": {
+      "command": "npm run check",
+      "tests_passed": 1074,
+      "tests_skipped": 1,
+      "tests_failed": 0,
+      "audited_records": 8544,
+      "audit_failures": 0
+    },
+    "smoke": {
+      "tools": 34,
+      "checks_passed": 64,
+      "live_network": false
+    }
+  },
+  "export_scope": "Version2 bulk index omits literal Pāli excerpt text, retaining coordinates/hashes and text_omitted:true; native metadata must be reloaded for scope consent."
+}

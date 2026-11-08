@@ -525,48 +525,6 @@
     },
     {
       "source": "ati",
-      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.022x.wlsh.html",
-      "status": "withheld-partial-unit",
-      "subject_ids": [
-        "sn12.22"
-      ],
-      "reason": "Only a late exhortation within corrected VRI22. Omits earlier ten powers/fearlessness, aggregates/dependent origination, resolve and the opening lazy-versus-energetic discussion. The source begins inside a bundled paragraph; no exact whole-segment partial mapping is approved. No other indexed English version exists.",
-      "review": {
-        "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.022x.wlsh.html",
-        "observed_on": "2026-11-08",
-        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
-        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
-        "source_html_sha256": "3fde66df3623c9f272358965e096ebb23c2bdf95ebee229e130aa02bd3539544",
-        "text_sha256": "3c607c3622f9900aa17a575754b84e0e543dd950782b4fe580bc41f26e564ffb",
-        "notice_sha256": "58712c73f40813d0ee50854c3a500c236e9c7e40c57fe5ebc5f368660b96915a",
-        "method": "Complete official pinned ATI bodies/notices and full indexed VRI roots reviewed individually and independently. No publisher English bodies bundled. Local snapshots do not establish current upstream freshness or deployment. D208 independently verified sourceXML and corrected the21/22 index boundary; this hold was rechecked against the current22-only root. The source still begins inside one bundled paragraph.",
-        "root_units": [
-          {
-            "id": "sn12.22",
-            "title": "Dutiyadasabalasuttaṃ",
-            "vri": "22",
-            "book": 12,
-            "start": 146,
-            "end": 150,
-            "root_blocks_sha256": "ffa34ef49339c38f3778fe34d6b07d192c5495d7aa8e8dfc7c4c6f2024e8d979"
-          }
-        ],
-        "previous_root_units": [
-          {
-            "id": "sn12.22",
-            "title": "Dutiyadasabalasuttaṃ",
-            "vri": "21–22",
-            "book": 12,
-            "start": 143,
-            "end": 150,
-            "root_blocks_sha256": "4fbe28d2b2a3d331d4b2bd0f907ac96fd3c503f22b1258e3bc14b732c80c76fa"
-          }
-        ],
-        "source_xml_sha256": "61bc83404230b7cf06142f642834c8ea69aa0f4f2cc45d201716cd1ac9a0b40a"
-      }
-    },
-    {
-      "source": "ati",
       "url": "https://www.accesstoinsight.org/tipitaka/an/an06/an06.054.olen.html",
       "status": "withheld-partial-unit",
       "subject_ids": [

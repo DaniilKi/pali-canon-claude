@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * The traditional Pāli commentaries (Aṭṭhakathā) of the VRI Chaṭṭha Saṅgāyana edition, aligned to the
@@ -140,9 +141,14 @@ export function readBook(uid, { offset = 0, limit = 40 } = {}) {
     next_offset: offset + page.length < selected.length ? offset + page.length : null, segments: page };
 }
 
-function sourceInfo(d) {
+function sourceInfo(d, unit) {
   const { name, repository, commit, files, attribution, terms } = d.source;
-  return { name, repository, commit, files, attribution, terms };
+  // D209 changes SN21/c* ownership while retaining authentic edition provenance.
+  // Pin its actual tuple list so a subsequent mapping edit also requires review.
+  const mapping = unit?.id === 'sn12.21' && d.units[unit.id]?.map(i => d.passages[i]);
+  const revision = mapping && createHash('sha256').update(JSON.stringify(mapping)).digest('hex').slice(0,24);
+  return { name, repository, commit, files, attribution, terms,
+    ...(revision ? { locator_revision: `${commit}-sn21-commentary-${revision}` } : {}) };
 }
 
 function describePassage(d, pi) {
@@ -224,7 +230,7 @@ export function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {})
     return {
       ...base, available: false, total_segments: 0, segments: [],
       notes: [...notes, `No commentary passage is aligned to ${unit.acronym}. The commentary may pass over it (it often explains only the first of a run of similar texts), or its passage could not be matched with confidence: no alignment is given rather than a wrong one. Search the commentary's book in the VRI edition, or read neighbouring texts' commentary.`],
-      source: sourceInfo(d),
+      source: sourceInfo(d, unit),
     };
   }
   const all = [];
@@ -243,7 +249,7 @@ export function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {})
     notes: [...notes, ...extra],
     alignment_method: 'Each commentary passage carries the VRI paragraph number of the root text it explains; the bold words it quotes are checked against that paragraph. Passages that do not match are left out.',
     evidence_types: EVIDENCE,
-    source: sourceInfo(d),
+    source: sourceInfo(d, unit),
   };
 }
 

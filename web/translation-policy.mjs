@@ -9,8 +9,9 @@ export function scopeDescriptor(choice, requestedId) {
   if (!own(choice, 'translation_scope')) return null;
   const scope = choice.translation_scope;
   const fail = () => { throw new Error('This source has an unsupported or incomplete scope declaration. No scoped source was requested. Reload the passage and review the updated sources.'); };
-  if (!scope || scope.version !== 1 || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail();
+  if (!scope || ![1,2].includes(scope.version) || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail();
   if (scope.kind === 'shared_page') {
+    if(scope.version!==1)fail();
     const ids = scope.text_ids;
     const presentation = scope.presentation || (scope.condensed === true ? 'condensed' : null);
     if (!Array.isArray(ids) || ids.length < 2 || ids.length > 32 || ids.some(id => !nonempty(id) || id.length > 300) || new Set(ids).size !== ids.length || !ids.includes(requestedId) || scope.owner_id !== ids[0] || scope.individual_alignment_verified !== false || !nonempty(scope.source_reference) || !['condensed', 'compilation'].includes(presentation) || (presentation === 'compilation' && !sha(scope.notice_sha256)) || (own(scope, 'condensed') && scope.condensed !== (presentation === 'condensed'))) fail();
@@ -18,7 +19,9 @@ export function scopeDescriptor(choice, requestedId) {
   }
   if (scope.kind === 'partial_unit') {
     const prefix = requestedId + '/';
-    if(choice.translation_id.startsWith('ati:')&&(scope.extractor!=='ati-freeverse-v1'||!sha(scope.notice_sha256)))fail();
+    if(choice.translation_id.startsWith('ati:')&&(scope.extractor!==(scope.version===2?'ati-chapter-prose-v1':'ati-freeverse-v1')||!sha(scope.notice_sha256)))fail();
+    if(scope.version===2){const p=scope.pali_excerpt;if(!choice.translation_id.startsWith('ati:')||scope.first_ref!==scope.last_ref||!p||p.ref!==scope.first_ref||p.type!=='prose'||!nonempty(p.text)||p.text.length>2000000||p.offset_unit!=='utf16_code_units'||!sha(p.segment_sha256)||!Number.isSafeInteger(p.start_char)||!Number.isSafeInteger(p.end_char)||p.start_char<0||p.end_char<=p.start_char||p.end_char-p.start_char!==p.text.length||own(scope,'read_with')||own(scope,'read_pages'))fail();}
+    else if(own(scope,'pali_excerpt'))fail();
     if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail();
     return { kind: scope.kind, label: 'Partial-unit source', scope: JSON.parse(JSON.stringify(scope)), flags: { allow_partial: true, scope_sha256: scope.scope_sha256 } };
   }

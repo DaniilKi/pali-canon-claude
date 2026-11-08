@@ -90,3 +90,6 @@ test('actual coverage and release-export CLIs preserve synthetic partial scope w
     assert.match(readFileSync(join(out, 'citation-index-LICENSE.md'), 'utf8'), /exclude partial sources/);
   } finally { rmSync(stage, { recursive: true, force: true }); }
 });
+
+
+test('actual subparagraph exports retain exact bounds and pins without exporting Pāli wording',()=>{const index=buildIndex(),item=index.texts.find(t=>t.id==='sn12.22'),entry=item.english.find(t=>t.translation_id==='ati:/tipitaka/sn/sn12/sn12.022x.wlsh'),scope=entry.translation_scope;assert.equal(item.english_count,0);assert.equal(item.partial_english_count,1);assert.equal(scope.version,2);assert.deepEqual([scope.pali_excerpt.start_char,scope.pali_excerpt.end_char],[229,977]);assert.equal(scope.pali_excerpt.text,undefined);assert.equal(scope.pali_excerpt.text_omitted,true);assert.match(scope.pali_excerpt.segment_sha256,/^[a-f0-9]{64}$/);assert.match(scope.scope_sha256,/^[a-f0-9]{64}$/);assert.ok(!JSON.stringify(item).includes('Na, bhikkhave, hīnena'));assert.ok(!toCsv(index).includes('Na, bhikkhave, hīnena'));});

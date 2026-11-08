@@ -675,8 +675,9 @@
     const fail2 = () => {
       throw new Error("This source has an unsupported or incomplete scope declaration. No scoped source was requested. Reload the passage and review the updated sources.");
     };
-    if (!scope || scope.version !== 1 || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail2();
+    if (!scope || ![1, 2].includes(scope.version) || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail2();
     if (scope.kind === "shared_page") {
+      if (scope.version !== 1) fail2();
       const ids = scope.text_ids;
       const presentation = scope.presentation || (scope.condensed === true ? "condensed" : null);
       if (!Array.isArray(ids) || ids.length < 2 || ids.length > 32 || ids.some((id) => !nonempty(id) || id.length > 300) || new Set(ids).size !== ids.length || !ids.includes(requestedId) || scope.owner_id !== ids[0] || scope.individual_alignment_verified !== false || !nonempty(scope.source_reference) || !["condensed", "compilation"].includes(presentation) || presentation === "compilation" && !sha(scope.notice_sha256) || own(scope, "condensed") && scope.condensed !== (presentation === "condensed")) fail2();
@@ -684,7 +685,11 @@
     }
     if (scope.kind === "partial_unit") {
       const prefix = requestedId + "/";
-      if (choice.translation_id.startsWith("ati:") && (scope.extractor !== "ati-freeverse-v1" || !sha(scope.notice_sha256))) fail2();
+      if (choice.translation_id.startsWith("ati:") && (scope.extractor !== (scope.version === 2 ? "ati-chapter-prose-v1" : "ati-freeverse-v1") || !sha(scope.notice_sha256))) fail2();
+      if (scope.version === 2) {
+        const p = scope.pali_excerpt;
+        if (!choice.translation_id.startsWith("ati:") || scope.first_ref !== scope.last_ref || !p || p.ref !== scope.first_ref || p.type !== "prose" || !nonempty(p.text) || p.text.length > 2e6 || p.offset_unit !== "utf16_code_units" || !sha(p.segment_sha256) || !Number.isSafeInteger(p.start_char) || !Number.isSafeInteger(p.end_char) || p.start_char < 0 || p.end_char <= p.start_char || p.end_char - p.start_char !== p.text.length || own(scope, "read_with") || own(scope, "read_pages")) fail2();
+      } else if (own(scope, "pali_excerpt")) fail2();
       if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail2();
       return { kind: scope.kind, label: "Partial-unit source", scope: JSON.parse(JSON.stringify(scope)), flags: { allow_partial: true, scope_sha256: scope.scope_sha256 } };
     }
@@ -1574,7 +1579,16 @@
         list.append(li);
       }
       target.append(list);
-    } else target.append(el("p", "Declared P\u0101li span: " + scope.first_ref + " to " + scope.last_ref), el("p", "Only this span has a linked translation. The P\u0101li reader below still shows the selected canonical text, not an aligned or shortened English/P\u0101li pair.", "notice"));
+    } else {
+      target.append(el("p", "Declared P\u0101li span: " + scope.first_ref + " to " + scope.last_ref));
+      if (scope.version === 2) {
+        target.append(el("p", "Only part of this paragraph is translated. Exact original P\u0101li excerpt:", "notice"));
+        const quote = el("blockquote", scope.pali_excerpt.text, "passage");
+        quote.lang = "pi";
+        target.append(quote);
+        target.append(el("p", "The P\u0101li reader below includes surrounding context outside this translation. No complete paragraph or discourse translation is implied.", "notice"));
+      } else target.append(el("p", "Only this span has a linked translation. The P\u0101li reader below still shows the selected canonical text, not an aligned or shortened English/P\u0101li pair.", "notice"));
+    }
     target.append(el("p", scope.note, "notice"));
     const details = el("details");
     details.append(el("summary", "Reviewed scope version"));

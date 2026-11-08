@@ -18,19 +18,27 @@ def manifest_rows(manifest=MANIFEST):
         if not isinstance(r,dict):raise ValueError('Invalid partial page row')
         p=r.get('partial_scope',{})
         if not isinstance(p,dict):raise ValueError('Invalid partial scope record')
+        prose=(r.get('unit_id')=='sn12.22' and r.get('path')=='/tipitaka/sn/sn12/sn12.022x.wlsh' and r.get('license')=='BPS-free-distribution-1985' and r.get('translator')=="Maurice O'Connell Walshe" and p.get('version')==2 and p.get('extractor')=='ati-chapter-prose-v1')
         path_match=re.fullmatch(r'/tipitaka/(?:kn/(?P<kn>thag|snp)|(?P<mn>mn))/[a-z0-9_.-]+',r.get('path',''))
         owner_pattern=(path_match['kn']+r'\d+\.\d+' if path_match and path_match['kn'] else r'mn\d+')
-        if (not path_match or '..' in r['path']
-                or not re.fullmatch(owner_pattern,r.get('unit_id',''))
+        if ((not prose and not path_match) or '..' in r['path']
+                or (not prose and not re.fullmatch(owner_pattern,r.get('unit_id','')))
                 or r['path'] in paths or r.get('unit_id') in owners
-                or r.get('license')!='Olendzki-free-distribution-2005' or r.get('translator')!='Andrew Olendzki'
+                or (not prose and (r.get('license')!='Olendzki-free-distribution-2005' or r.get('translator')!='Andrew Olendzki'))
                 or not r.get('mapping_note') or not r.get('source_reference') or not r.get('english_title')
                 or not isinstance(r.get('root'),dict) or r['root'].get('id')!=r.get('unit_id')
-                or set(p)!=set(['version','status','unit_id','first_ref','last_ref','source_commit','pali_sha256','text_sha256','notice_sha256','extractor'])
-                or p.get('version')!=1 or p.get('status')!='reviewed' or p.get('unit_id')!=r.get('unit_id')
-                or p.get('extractor')!='ati-freeverse-v1' or p.get('source_commit')!=m.get('vri_commit')
+                or set(p)!=set(['version','status','unit_id','first_ref','last_ref','source_commit','pali_sha256','text_sha256','notice_sha256','extractor']+(['subparagraph'] if prose else []))
+                or p.get('version')!=(2 if prose else 1) or p.get('status')!='reviewed' or p.get('unit_id')!=r.get('unit_id')
+                or p.get('extractor')!=('ati-chapter-prose-v1' if prose else 'ati-freeverse-v1') or p.get('source_commit')!=m.get('vri_commit')
                 or any(not isinstance(v,str) or not re.fullmatch(r'[a-f0-9]{64}',v) for v in [r.get('source_html_sha256'),r['root'].get('root_blocks_sha256'),p.get('pali_sha256'),p.get('text_sha256'),p.get('notice_sha256')])):
             raise ValueError('Invalid or duplicate reviewed partial page')
+        if prose:
+            part=p.get('subparagraph',{})
+            if not isinstance(part,dict):raise ValueError('Invalid subparagraph declaration')
+            if (set(part)!=set(['start_char','end_char','offset_unit','segment_sha256']) or part.get('offset_unit')!='utf16_code_units'
+                or type(part.get('start_char')) is not int or type(part.get('end_char')) is not int
+                or not 0<=part['start_char']<part['end_char'] or not re.fullmatch(r'[a-f0-9]{64}',part.get('segment_sha256',''))):
+                raise ValueError('Invalid subparagraph declaration')
         paths.add(r['path']);owners.add(r['unit_id'])
     return m
 

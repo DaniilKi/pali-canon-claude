@@ -334,3 +334,15 @@ python3 scripts/canon/repair_dasabala_spans.py /tmp/current/canon.json.gz /tmp/c
 ```
 
 Check the receipt’s input dataset hashes against freshly unpacked branch inputs, independently compare the entire change scope, then install the two output gzips, shard/build and regenerate parallels. Matching source commits alone do not prove a temporary dataset is current. The helper verifies the entire source book and only known legacy/corrected states, keeps all source/commentary wording and all unrelated records, sets both `sn-dasabala-v1` locators, and removes only the false Paccaya commentary link. Unknown titles, group dependencies, source drift or commentary baselines fail before mutation. See D208.
+
+### Dasabala commentary and prose-substring follow-up (D209)
+
+Unpack the **current** branch data freshly and compare whole input hashes before integrating:
+
+```sh
+python scripts/canon/repair_dasabala_commentary.py /tmp/current/canon.json.gz /tmp/current/commentary.json.gz /tmp/pali-vri /tmp/canon-same.gz /tmp/commentary-fixed.gz
+```
+
+This source-validates all978 commentary blocks and derives the short SN12.21 passage through the existing aligner. Append only the new tuple; preserve every old passage ID, all wording, SN12.22 and Paccaya mappings. The helper is idempotent; the older D208 migration must not overwrite this restored state. Rebuild parallels after changing commentary metadata.
+
+The partial registry now contains ten sources: nine verse spans and SN12.22’s exact original substring. Version2 is currently restricted in the Python manifest to the reviewed Walshe page, BPS notice, fixed path and prose extractor. Normal proposals remain withheld until full rawHTML/text/notice/root verification succeeds. Version2 emits `pali_excerpt` and no whole-paragraph reading command; do not widen it to the context paragraph or count whole English. Run `tests/subparagraph-scope.test.mjs` plus actual-source browser normal/a11y/installed and installed native partial audits.

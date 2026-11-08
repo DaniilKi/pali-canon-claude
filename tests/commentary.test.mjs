@@ -195,8 +195,8 @@ test('paraRange reads VRI paragraph numbers like the build does', () => {
 test('texts the commentary numbers but that stay unaligned are listed, and few', () => {
   const d = commentary.load();
   assert.ok(Array.isArray(d.cited_unaligned));
-  for (const coll of ['dn', 'mn', 'dhp']) assert.equal(d.coverage[coll].cited_aligned, d.coverage[coll].cited, coll);
-  assert.equal(d.coverage.sn.cited_aligned,d.coverage.sn.cited-1);
-  assert.ok(d.cited_unaligned.includes('sn12.21'));
+  for (const coll of ['dn', 'mn', 'sn', 'dhp']) assert.equal(d.coverage[coll].cited_aligned, d.coverage[coll].cited, coll);
+  assert.ok(!d.cited_unaligned.includes('sn12.21'));
+  assert.deepEqual(d.units['sn12.21'],[14338]);
   assert.ok(d.coverage.an.cited_aligned >= d.coverage.an.cited - 1);
 });
