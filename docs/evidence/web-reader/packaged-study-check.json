@@ -1,0 +1,30 @@
+{
+  "package_smoke_passed": 6,
+  "outside_source_tree": true,
+  "checks": [
+    {
+      "width": 390,
+      "check": "packaged glossary"
+    },
+    {
+      "width": 390,
+      "check": "packaged word study and bundled renderer"
+    },
+    {
+      "width": 390,
+      "check": "packaged related-text evidence"
+    },
+    {
+      "width": 1280,
+      "check": "packaged glossary"
+    },
+    {
+      "width": 1280,
+      "check": "packaged word study and bundled renderer"
+    },
+    {
+      "width": 1280,
+      "check": "packaged related-text evidence"
+    }
+  ]
+}

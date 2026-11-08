@@ -1,6 +1,6 @@
 {
   "engine": "axe-core 4.14.0",
-  "scans": 28,
+  "scans": 44,
   "violations": 0,
   "results": [
     {
@@ -33,6 +33,24 @@
     {
       "width": 390,
       "theme": "light",
+      "route": "#glossary",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "route": "#glossary?term=mindfulness&direction=en-pa",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "light",
       "route": "#browse?node=commentary",
       "violations": [],
       "manual_review_rules": [
@@ -61,6 +79,26 @@
       "width": 390,
       "theme": "light",
       "route": "#read?kind=post&uid=Vism%201.1",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "route": "#read?uid=dhp183",
+      "study": "Study words in dhp183/1",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "route": "#read?uid=dhp183",
+      "study": "Related texts",
       "violations": [],
       "manual_review_rules": [
         "color-contrast"
@@ -96,6 +134,24 @@
     {
       "width": 390,
       "theme": "dark",
+      "route": "#glossary",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "route": "#glossary?term=mindfulness&direction=en-pa",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "dark",
       "route": "#browse?node=commentary",
       "violations": [],
       "manual_review_rules": [
@@ -124,6 +180,26 @@
       "width": 390,
       "theme": "dark",
       "route": "#read?kind=post&uid=Vism%201.1",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "route": "#read?uid=dhp183",
+      "study": "Study words in dhp183/1",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "route": "#read?uid=dhp183",
+      "study": "Related texts",
       "violations": [],
       "manual_review_rules": [
         "color-contrast"
@@ -159,6 +235,24 @@
     {
       "width": 1280,
       "theme": "light",
+      "route": "#glossary",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "route": "#glossary?term=mindfulness&direction=en-pa",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "light",
       "route": "#browse?node=commentary",
       "violations": [],
       "manual_review_rules": [
@@ -187,6 +281,26 @@
       "width": 1280,
       "theme": "light",
       "route": "#read?kind=post&uid=Vism%201.1",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "route": "#read?uid=dhp183",
+      "study": "Study words in dhp183/1",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "route": "#read?uid=dhp183",
+      "study": "Related texts",
       "violations": [],
       "manual_review_rules": [
         "color-contrast"
@@ -222,6 +336,24 @@
     {
       "width": 1280,
       "theme": "dark",
+      "route": "#glossary",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "route": "#glossary?term=mindfulness&direction=en-pa",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
       "route": "#browse?node=commentary",
       "violations": [],
       "manual_review_rules": [
@@ -250,6 +382,26 @@
       "width": 1280,
       "theme": "dark",
       "route": "#read?kind=post&uid=Vism%201.1",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "route": "#read?uid=dhp183",
+      "study": "Study words in dhp183/1",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "route": "#read?uid=dhp183",
+      "study": "Related texts",
       "violations": [],
       "manual_review_rules": [
         "color-contrast"

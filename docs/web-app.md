@@ -25,6 +25,9 @@ The npm package and container include `server/web/`. The HTML, stylesheet and br
 - Read available traditional commentary separately from the root text, including pagination. Direct commentary-book reading and search hits do not claim verified root-text alignment. Later-work and commentary bookmarks retain their corpus and exact reading position.
 - Change text size, paper/night theme and the supported Pāli transliteration script. Lao/Lanna still require native-reader validation. Installed device fonts affect glyph availability; selecting a script does not install fonts.
 - Save individual passage references and personal notes. Reopen the reading position and export bookmarks/notes as JSON.
+- Look up English or Pāli terms in the bundled glossary, including supported native-script input. Every result identifies its DPD or curated-list source; glosses are not passage translations.
+- Open **Study words** on a body segment in a canonical text, complete root book or later work. See the bundled DPD analyses, alternative parses, grammar, computed split suggestions and unknown forms. Commentary analysis is not supported by the current backend; the app does not substitute root-text analysis.
+- Open **Related texts** for canonical selections. Shared-word matching and commentary citations are labelled separately with their evidence. Reading links retain the emitted source segment or exact commentary reference. External parallels are a link only.
 - Copy a reading link, use browser back/forward, and navigate with a keyboard.
 
 ## Storage and source boundaries
@@ -39,7 +42,7 @@ There are no app accounts or server-side personal notes. The HTTP service retain
 
 The UI calls the existing schema-validated MCP tools over same-origin `/mcp` using JSON-RPC with JSON response negotiation. It has no alternate content database or arbitrary URL proxy. Tool errors, HTTP errors and finite request deadlines remain explicit. Navigation and study requests have separate generation guards: a late result cannot replace a newly selected text or study panel. Retrieved strings are inserted using DOM text nodes, never HTML.
 
-`src/web-reader.mjs` serves only four fixed routes. The build copies `web/` into `server/web/` for portable npm/container installation. The Docker build includes the source assets. Changes to `web/` must rebuild and commit `server/web/` and `server/http.cjs`.
+`src/web-reader.mjs` serves only four fixed routes. The build copies HTML/CSS from `web/` and bundles `web/reader.js` into `server/web/reader.js` for portable npm/container installation. The browser bundle imports the existing `localizeText` implementation from `src/script.mjs`, so native-script passage validation uses the same renderer as the source tool rather than a second transliterator. Unbundled HTTP-module tests also serve the checked-in compiled assets, never the raw module source. The Docker build includes the source assets. Changes to `web/` must rebuild and commit `server/web/` and `server/http.cjs`.
 
 ## Design research and priorities
 
@@ -50,7 +53,7 @@ The useful patterns from established scripture readers are calm typography, visi
 
 Next priorities, in order:
 
-1. Extend the same UI to dictionary lookup, parallels and quotation verification. Supplementary catalogues/search and reading are now implemented. Keep canonical status and uncertain mappings visible.
+1. Extend the same UI to quotation verification and additional study tools. The glossary, contextual DPD word study, related-text evidence and supplementary catalogues/search/readers are now implemented. Keep canonical status and uncertain mappings visible.
 2. Improve accessible translation comparison, exact source links and reading-position management. Test in Safari and Firefox, with screen readers and native-script readers, on physical iOS/Android devices.
 3. Add bookmark import with schema validation, device-local reading plans and optional passage highlighting. Personal reflections must never be labelled scripture.
 4. Design explicitly user-requested, versioned offline packs only after source-specific rights/storage review. Don't silently cache live translations or claim whole-corpus English coverage.
@@ -77,3 +80,10 @@ A second-pass source/behavior review found and repaired the first slice’s skip
 The supplementary search tools and data are unchanged. No new source, licence claim, data transformation, permission, content endpoint or deployment was added. Browser tests explicitly distinguish canonical, direct commentary and later-work scope. Synthetic hostile-looking text and unsafe source URLs test DOM rendering without modifying corpus data.
 
 The pinned `axe-core` dependency is **development-only**, used by `scripts/web-reader-a11y-check.py`. That audit uses a separate browser context permitting checker injection; production CSP remains restrictive and is checked separately. Its automatic WCAG-rule results and incomplete/manual-review rules are recorded. These are not a human accessibility certification or independent scholarly review.
+
+
+## Study-tool source integrity
+
+The glossary uses the existing offline `glossary` tool, not live `lookup_pali`. It supplies a limited, sourced term index rather than full dictionary articles. Word study uses `analyse_passage` on the **selected** reference and paginates words within that selection. Before displaying a result, the UI checks its segment reference, VRI source revision and actual displayed wording. For native-script reading, it renders the returned Roman segment through the same core `localizeText` function and compares that output with the passage already shown. A mismatch produces a visible retry/reload error without displaying substituted meanings. Dictionary source/version/CC BY-NC-SA terms are shown separately from VRI passage source/non-commercial terms. DPD can list several analyses; the UI does not choose a supposedly correct meaning or turn them into a translation.
+
+Related-text results use `get_parallels`. A shared-word score is not a probability or a claim of equivalent teaching. Commentary evidence is opened with `get_commentary`, explicitly labelled not canon, and its original aligned reference is preserved in bookmarks using a distinct selector. No new linkage or relationship is inferred by the interface. Results and study panels have the same stale-response guards as translations; a delayed word study cannot replace a newly requested relation panel.

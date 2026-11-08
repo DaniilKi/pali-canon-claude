@@ -1,5 +1,5 @@
 {
-  "passed": 101,
+  "passed": 173,
   "checks": [
     {
       "width": 360,
@@ -95,6 +95,78 @@
     },
     {
       "width": 360,
+      "check": "keyboard glossary lookup shows real DPD terms and licence"
+    },
+    {
+      "width": 360,
+      "check": "native-script glossary input is explicitly converted and labelled"
+    },
+    {
+      "width": 360,
+      "check": "unknown glossary terms do not receive invented meanings"
+    },
+    {
+      "width": 360,
+      "check": "keyboard word study keeps exact passage and dictionary provenance distinct"
+    },
+    {
+      "width": 360,
+      "check": "native-script passage study is matched using the shared source renderer"
+    },
+    {
+      "width": 360,
+      "check": "native-script analysis rejects changed text even with the same ref and source pin"
+    },
+    {
+      "width": 360,
+      "check": "word-study pagination retains its selected source segment"
+    },
+    {
+      "width": 360,
+      "check": "source-book word study does not invent a canonical text identity"
+    },
+    {
+      "width": 360,
+      "check": "later-work dictionary analysis retains non-canonical scope"
+    },
+    {
+      "width": 360,
+      "check": "related shared wording opens the emitted canonical segment"
+    },
+    {
+      "width": 360,
+      "check": "commentary evidence and saved links remain aligned commentary, never root text"
+    },
+    {
+      "width": 360,
+      "check": "related-link pagination retains the selected canonical text"
+    },
+    {
+      "width": 360,
+      "check": "source-mismatched word analysis fails without substituted meanings"
+    },
+    {
+      "width": 360,
+      "check": "word-study retry uses the same actual passage"
+    },
+    {
+      "width": 360,
+      "check": "late word study cannot overwrite newer related-text results"
+    },
+    {
+      "width": 360,
+      "check": "incomplete relationship response cannot masquerade as no relationships"
+    },
+    {
+      "width": 360,
+      "check": "incomplete glossary cannot masquerade as an unknown term"
+    },
+    {
+      "width": 360,
+      "check": "glossary retry recovers with actual source metadata"
+    },
+    {
+      "width": 360,
       "check": "retrieved markup and javascript URLs cannot execute"
     },
     {
@@ -195,6 +267,78 @@
     },
     {
       "width": 390,
+      "check": "keyboard glossary lookup shows real DPD terms and licence"
+    },
+    {
+      "width": 390,
+      "check": "native-script glossary input is explicitly converted and labelled"
+    },
+    {
+      "width": 390,
+      "check": "unknown glossary terms do not receive invented meanings"
+    },
+    {
+      "width": 390,
+      "check": "keyboard word study keeps exact passage and dictionary provenance distinct"
+    },
+    {
+      "width": 390,
+      "check": "native-script passage study is matched using the shared source renderer"
+    },
+    {
+      "width": 390,
+      "check": "native-script analysis rejects changed text even with the same ref and source pin"
+    },
+    {
+      "width": 390,
+      "check": "word-study pagination retains its selected source segment"
+    },
+    {
+      "width": 390,
+      "check": "source-book word study does not invent a canonical text identity"
+    },
+    {
+      "width": 390,
+      "check": "later-work dictionary analysis retains non-canonical scope"
+    },
+    {
+      "width": 390,
+      "check": "related shared wording opens the emitted canonical segment"
+    },
+    {
+      "width": 390,
+      "check": "commentary evidence and saved links remain aligned commentary, never root text"
+    },
+    {
+      "width": 390,
+      "check": "related-link pagination retains the selected canonical text"
+    },
+    {
+      "width": 390,
+      "check": "source-mismatched word analysis fails without substituted meanings"
+    },
+    {
+      "width": 390,
+      "check": "word-study retry uses the same actual passage"
+    },
+    {
+      "width": 390,
+      "check": "late word study cannot overwrite newer related-text results"
+    },
+    {
+      "width": 390,
+      "check": "incomplete relationship response cannot masquerade as no relationships"
+    },
+    {
+      "width": 390,
+      "check": "incomplete glossary cannot masquerade as an unknown term"
+    },
+    {
+      "width": 390,
+      "check": "glossary retry recovers with actual source metadata"
+    },
+    {
+      "width": 390,
       "check": "retrieved markup and javascript URLs cannot execute"
     },
     {
@@ -295,6 +439,78 @@
     },
     {
       "width": 768,
+      "check": "keyboard glossary lookup shows real DPD terms and licence"
+    },
+    {
+      "width": 768,
+      "check": "native-script glossary input is explicitly converted and labelled"
+    },
+    {
+      "width": 768,
+      "check": "unknown glossary terms do not receive invented meanings"
+    },
+    {
+      "width": 768,
+      "check": "keyboard word study keeps exact passage and dictionary provenance distinct"
+    },
+    {
+      "width": 768,
+      "check": "native-script passage study is matched using the shared source renderer"
+    },
+    {
+      "width": 768,
+      "check": "native-script analysis rejects changed text even with the same ref and source pin"
+    },
+    {
+      "width": 768,
+      "check": "word-study pagination retains its selected source segment"
+    },
+    {
+      "width": 768,
+      "check": "source-book word study does not invent a canonical text identity"
+    },
+    {
+      "width": 768,
+      "check": "later-work dictionary analysis retains non-canonical scope"
+    },
+    {
+      "width": 768,
+      "check": "related shared wording opens the emitted canonical segment"
+    },
+    {
+      "width": 768,
+      "check": "commentary evidence and saved links remain aligned commentary, never root text"
+    },
+    {
+      "width": 768,
+      "check": "related-link pagination retains the selected canonical text"
+    },
+    {
+      "width": 768,
+      "check": "source-mismatched word analysis fails without substituted meanings"
+    },
+    {
+      "width": 768,
+      "check": "word-study retry uses the same actual passage"
+    },
+    {
+      "width": 768,
+      "check": "late word study cannot overwrite newer related-text results"
+    },
+    {
+      "width": 768,
+      "check": "incomplete relationship response cannot masquerade as no relationships"
+    },
+    {
+      "width": 768,
+      "check": "incomplete glossary cannot masquerade as an unknown term"
+    },
+    {
+      "width": 768,
+      "check": "glossary retry recovers with actual source metadata"
+    },
+    {
+      "width": 768,
       "check": "retrieved markup and javascript URLs cannot execute"
     },
     {
@@ -392,6 +608,78 @@
     {
       "width": 1280,
       "check": "late translation cannot overwrite commentary"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard glossary lookup shows real DPD terms and licence"
+    },
+    {
+      "width": 1280,
+      "check": "native-script glossary input is explicitly converted and labelled"
+    },
+    {
+      "width": 1280,
+      "check": "unknown glossary terms do not receive invented meanings"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard word study keeps exact passage and dictionary provenance distinct"
+    },
+    {
+      "width": 1280,
+      "check": "native-script passage study is matched using the shared source renderer"
+    },
+    {
+      "width": 1280,
+      "check": "native-script analysis rejects changed text even with the same ref and source pin"
+    },
+    {
+      "width": 1280,
+      "check": "word-study pagination retains its selected source segment"
+    },
+    {
+      "width": 1280,
+      "check": "source-book word study does not invent a canonical text identity"
+    },
+    {
+      "width": 1280,
+      "check": "later-work dictionary analysis retains non-canonical scope"
+    },
+    {
+      "width": 1280,
+      "check": "related shared wording opens the emitted canonical segment"
+    },
+    {
+      "width": 1280,
+      "check": "commentary evidence and saved links remain aligned commentary, never root text"
+    },
+    {
+      "width": 1280,
+      "check": "related-link pagination retains the selected canonical text"
+    },
+    {
+      "width": 1280,
+      "check": "source-mismatched word analysis fails without substituted meanings"
+    },
+    {
+      "width": 1280,
+      "check": "word-study retry uses the same actual passage"
+    },
+    {
+      "width": 1280,
+      "check": "late word study cannot overwrite newer related-text results"
+    },
+    {
+      "width": 1280,
+      "check": "incomplete relationship response cannot masquerade as no relationships"
+    },
+    {
+      "width": 1280,
+      "check": "incomplete glossary cannot masquerade as an unknown term"
+    },
+    {
+      "width": 1280,
+      "check": "glossary retry recovers with actual source metadata"
     },
     {
       "width": 1280,

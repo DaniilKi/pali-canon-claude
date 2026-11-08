@@ -1,17 +1,15 @@
-# Standalone web-reader acceptance evidence
+# Standalone web-reader evidence
 
-Source base: `f0906bd` on `dev/pali-reliability`. Feature branch: `feat/standalone-web-reader`. Cloud Linux execution, 8 November 2026. This is a feature-branch acceptance record, not a deployment or human review receipt.
+The feature branch is `feat/standalone-web-reader`, based on corpus checkpoint `f0906bd`. No merge into dev/main or deployment is covered by these receipts.
 
-- `npm run check`: production bundles built; 923 tests, 922 passed, 1 skipped, 0 failed. Corpus audit: 8,544 texts, zero failures.
-- `npm run smoke`: 34 tools, 64 checks passed; live-source mode off.
-- `npm run evals`: 201 questions, 100% of non-skipped; six live-network questions skipped.
-- `node --test tests/web-reader.test.mjs`: 2 passed. Fixed route serving, CSP/headers, GET/HEAD, path rejection, unchanged real MCP response and no fetched markup execution.
-- `python scripts/web-reader-browser-check.py`: 101 assertions/journeys at 360, 390, 768 and 1280 pixels. See [machine-readable checks](browser-check.json).
-- `npm pack` plus extracted-package smoke: all three assets present, root serves the app, and packaged MCP retrieves actual Dhp 183 without checkout dependencies.
-- `git diff --check`: passed.
+Start with the [current study-tool acceptance](STUDY_TOOLS.md). It records:
 
-The full suite and browser runner were run locally in this cloud environment. CI status must be read from the feature branch after upload; it is not asserted here. No source-data rebuild, main/dev merge, hosting deployment, real-client test or upstream translation availability test was performed.
+- 922 passing tests, one skipped, zero failures; production build and 8,544-text audit passed.
+- 64 MCP smoke checks and 201 evaluation questions (six network questions skipped).
+- [173 browser checks](browser-check.json) across four widths.
+- [44 automated accessibility scans](accessibility-check.json), with manual-review limits retained.
+- [Six extracted-package browser checks](packaged-study-check.json).
 
-Browser tests include real bundled canonical and commentary text; controlled fixtures cover upstream outages, translation continuation and late translation results. They do not validate live translation access. Physical iOS/Android, Safari/Firefox, human screen-reader accessibility, native-script font/readability review, full MCP-tool feature parity, offline web packs and accounts/sync remain open. No generated scripture is used.
+The [earlier follow-up review](FOLLOWUP_REVIEW.md) records the previous supplementary-reader scope. Its [101-check browser report](browser-check-supplementary.json) and [28-scan accessibility report](accessibility-check-supplementary.json) are retained separately so historical receipts do not silently change meaning.
 
-The [follow-up review](FOLLOWUP_REVIEW.md) records supplementary-corpus support, the repaired skip link, source-preserving bookmarks and 28 automated accessibility scans. The original acceptance counts above remain separately scoped; the current browser report supersedes the initial 65-check report.
+Reports use real bundled data plus clearly identified synthetic failure fixtures. They do not claim production hosting, live upstream availability, full client/device support, human accessibility certification or scholarly review. See [the reader guide](../../web-app.md) for features, running instructions and next priorities.

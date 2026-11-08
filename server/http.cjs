@@ -35438,7 +35438,7 @@ try {
 } catch {
   here10 = (0, import_node_path11.dirname)((0, import_node_url11.fileURLToPath)(import_meta10.url));
 }
-var folder = [(0, import_node_path11.join)(here10, "web"), (0, import_node_path11.join)(here10, "../web")].find((p) => (0, import_node_fs7.existsSync)((0, import_node_path11.join)(p, "index.html")));
+var folder = [(0, import_node_path11.join)(here10, "web"), (0, import_node_path11.join)(here10, "../server/web")].find((p) => (0, import_node_fs7.existsSync)((0, import_node_path11.join)(p, "index.html")));
 var files = /* @__PURE__ */ new Map([
   ["/", ["index.html", "text/html; charset=utf-8"]],
   ["/reader", ["index.html", "text/html; charset=utf-8"]],

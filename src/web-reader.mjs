@@ -4,7 +4,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 let here;
 try { here = __dirname; } catch { here = dirname(fileURLToPath(import.meta.url)); }
-const folder = [join(here, 'web'), join(here, '../web')].find(p => existsSync(join(p, 'index.html')));
+const folder = [join(here, 'web'), join(here, '../server/web')].find(p => existsSync(join(p, 'index.html')));
 const files = new Map([
   ['/', ['index.html', 'text/html; charset=utf-8']],
   ['/reader', ['index.html', 'text/html; charset=utf-8']],

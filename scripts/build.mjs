@@ -6,6 +6,8 @@ import { dirname, resolve, relative } from 'node:path';
 shardData('server/data');
 await mkdir('server', { recursive: true });
 await cp('web', 'server/web', { recursive: true });
+// Browser study validation reuses the exact script renderer used by the text tools.
+await build({ entryPoints: ['web/reader.js'], outfile: 'server/web/reader.js', bundle: true, platform: 'browser', target: 'es2020', format: 'iife', legalComments: 'eof' });
 const common = {
   bundle: true, platform: 'node', target: 'node20', format: 'cjs', minify: false,
   banner: { js: '#!/usr/bin/env node' }, legalComments: 'eof',

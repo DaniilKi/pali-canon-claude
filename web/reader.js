@@ -1,3 +1,4 @@
+import { localizeText } from '../src/script.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
@@ -33,15 +34,26 @@ async function tool(name, args) {
 function notes(data, target = view) {
   const list = [...(data.notes || []), ...(data.approximate ? ['This source selection is approximate or abbreviated. Missing text has not been reconstructed.'] : [])];
   if (data.alignment_note) list.push(data.alignment_note);
+  if (data.alignment_method) list.push(data.alignment_method);
+  if (data.input_romanized) list.push('Input converted from ' + data.input_script + ' to Roman Pāli: ' + data.input_romanized);
+  if (data.input_normalised) list.push(typeof data.input_normalised === 'string' ? data.input_normalised : data.input_normalised.note || JSON.stringify(data.input_normalised));
   if (data.canonical === false && data.label) list.unshift(data.label);
   if (data.alignment) list.push(typeof data.alignment === 'string' ? data.alignment : JSON.stringify(data.alignment));
   if (list.length) target.append(el('div', [...new Set(list)].join('\n'), 'notice'));
 }
 function provenance(data, target = view) {
   const box = el('section', undefined, 'provenance'); box.setAttribute('aria-label', 'Source attribution');
-  box.append(el('strong', data.edition || data.label || 'Source provenance'));
-  for (const value of [data.attribution || data.source?.attribution, data.license || data.source?.terms, data.source?.commit && 'Source revision: ' + data.source.commit]) if (value) box.append(el('p', typeof value === 'string' ? value : JSON.stringify(value)));
+  box.append(el('strong', data.edition || data.dictionary?.name || data.source?.name || (typeof data.source === 'string' ? data.source : null) || data.label || 'Source provenance'));
+  const license = data.license || data.source?.terms;
+  const values = [data.attribution || data.source?.attribution, typeof license === 'string' ? license : license && [license.name, license.note, license.attribution].filter(Boolean).join(' · '), data.dictionary?.version && 'Dictionary version: ' + data.dictionary.version, data.source?.commit && 'Source revision: ' + data.source.commit];
+  for (const value of [...new Set(values.filter(Boolean))]) box.append(el('p', value));
+  if (typeof license === 'object' && license?.url) box.append(external('Licence terms', license.url));
   if (data.url) box.append(external('Read at the original source', data.url));
+  if (data.source?.inputs) {
+    const details = el('details'); details.append(el('summary', 'Source-data versions'));
+    for (const [name, meta] of Object.entries(data.source.inputs)) details.append(el('p', name + ' · ' + (meta.vri_commit || '') + ' · SHA-256 ' + (meta.sha256 || 'not supplied')));
+    box.append(details);
+  }
   target.append(box);
 }
 function heading(eyebrow, title) { view.append(el('p', eyebrow, 'eyebrow'), el('h2', title)); }
@@ -102,6 +114,7 @@ async function search(args, token) {
   if (scope !== 'canon') provenance(data);
 }
 function readingArgs(selector) {
+  if (selector.startsWith('commentary-ref:')) return { kind: 'commentary', uid: selector.slice(15) };
   if (selector.startsWith('book:')) return { book: selector.slice(5) };
   if (selector.startsWith('post:')) return { kind: 'post', uid: selector.slice(5) };
   if (selector.startsWith('commentary:')) return { kind: 'commentary', uid: selector };
@@ -119,13 +132,13 @@ async function read(args, token) {
   const request = { ...(kind === 'book' ? { book } : kind === 'post' ? { citation: uid } : { uid }), offset, limit: 30, script: $('script').value };
   const data = await tool(kind === 'commentary' ? 'get_commentary' : kind === 'post' ? 'get_post_canonical' : 'get_text', request); if (token !== epoch) return;
   if (!Array.isArray(data.segments)) throw new Error('Choose an individual book or passage to read.');
-  if (['commentary', 'post'].includes(kind) && data.canonical !== false) throw new Error('This response lacks the expected non-canonical source label.');
-  const selector = kind === 'book' ? 'book:' + book : kind === 'post' ? 'post:' + uid : kind === 'canon' ? data.text_id || uid : uid;
+  if ((kind === 'post' && data.canonical !== false) || (kind === 'commentary' && !(data.canonical === false && data.content_type === 'commentary') && !(typeof data.label === 'string' && data.label.startsWith('Commentary') && data.label.includes('not the canon')))) throw new Error('This response lacks the expected non-canonical source label.');
+  const selector = kind === 'book' ? 'book:' + book : kind === 'post' ? 'post:' + uid : kind === 'canon' ? data.text_id || uid : uid.startsWith('commentary:') ? uid : 'commentary-ref:' + uid;
   heading(kind === 'book' ? 'COMPLETE VRI SOURCE BOOK' : kind === 'commentary' ? 'TRADITIONAL COMMENTARY · NOT CANON' : kind === 'post' ? 'LATER PĀLI WORK · NOT CANON' : 'CANONICAL PĀLI', (data.citation ? data.citation + ' · ' : '') + (data.title || data.book?.title || data.book_id || uid));
   notes(data); view.append(el('p', `Segments ${offset + 1}–${offset + data.returned} of ${data.total_segments}`, 'muted'));
   const toolbar = el('div', undefined, 'toolbar');
   toolbar.append(link('Back to library', route('browse', { node: 'canon' }), 'button'));
-  if (kind === 'canon') { toolbar.append(button('English translations', () => translations(data, uid, token)), button('Traditional commentary', () => commentary(uid, token))); }
+  if (kind === 'canon') { toolbar.append(button('English translations', () => translations(data, uid, token)), button('Traditional commentary', () => commentary(uid, token)), button('Related texts', () => relatedTexts(data.text_id || uid, token))); }
   toolbar.append(button('Copy reading link', async () => { try { await navigator.clipboard.writeText(location.href); status.textContent = 'Reading link copied.'; } catch { status.textContent = 'Copy the link from your browser’s address bar.'; } })); view.append(toolbar);
   const additions = el('section'); additions.id = 'study'; additions.setAttribute('aria-live', 'polite'); view.append(additions);
   const passages = el('section'); passages.setAttribute('aria-label', 'Pāli passage');
@@ -133,7 +146,9 @@ async function read(args, token) {
     const part = el('article', undefined, 'segment ' + (segment.type === 'heading' ? 'heading' : '')); part.id = 'seg-' + segment.ref.replace(/[^a-z0-9-]/gi, '-');
     const row = el('div', undefined, 'segment-label'); row.append(el('span', segment.ref + (segment.vri_paragraph ? ' · VRI ' + segment.vri_paragraph : '')));
     const active = local.saved.some(x => x.uid === selector && x.ref === segment.ref);
-    const save = button(active ? 'Saved ✓' : 'Save passage', () => saveSegment(selector, data, segment, save, part)); save.setAttribute('aria-label', 'Save passage ' + segment.ref); save.setAttribute('aria-pressed', String(active)); row.append(save); part.classList.toggle('marked', active);
+    const save = button(active ? 'Saved ✓' : 'Save passage', () => saveSegment(selector, data, segment, save, part)); save.setAttribute('aria-label', 'Save passage ' + segment.ref); save.setAttribute('aria-pressed', String(active)); const actions = el('div', undefined, 'segment-actions'); actions.append(save);
+    if (kind !== 'commentary' && segment.type !== 'heading') { const study = button('Study words', () => wordStudy({ ...(kind === 'book' ? { book } : { uid: kind === 'canon' ? data.text_id || uid : uid }), segment: segment.ref, offset: 0, limit: 15 }, { ref: segment.ref, text: segment.text, source: data.source?.commit, script: $('script').value, kind }, token)); study.setAttribute('aria-label', 'Study words in ' + segment.ref); actions.append(study); }
+    row.append(actions); part.classList.toggle('marked', active);
     const text = el('p', segment.text, 'passage'); text.lang = 'pi'; part.append(row, text); passages.append(part);
   }
   view.append(passages); pageControls(data.next_offset, offset ? Math.max(0, offset - 30) : null, n => route('read', { ...readingArgs(selector), offset: n })); provenance(data);
@@ -166,6 +181,93 @@ async function commentary(uid, token, offset = 0) {
     provenance(data, target);
   } catch (error) { if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el('p', error.message, 'notice')); }
 }
+function studyTarget(message) {
+  const target = $('study'); target.replaceChildren(el('p', message)); target.tabIndex = -1; target.setAttribute('aria-label', 'Study tools, separate from scripture'); target.focus({ preventScroll: true }); target.scrollIntoView({ block: 'start' }); return target;
+}
+async function wordStudy(args, expected, token) {
+  const studyToken = ++studyEpoch, target = studyTarget('Looking up the selected passage in the bundled dictionary…');
+  try {
+    const data = await tool('analyse_passage', args); if (token !== epoch || studyToken !== studyEpoch) return;
+    if (data.segment?.ref !== expected.ref || data.text_source?.commit !== expected.source || localizeText({ segments: data.segment ? [data.segment] : [] }, expected.script).segments[0]?.text !== expected.text) throw new Error('The returned analysis does not match the selected source passage. Reload the passage; no other analysis was substituted.');
+    if (expected.kind === 'post' && data.canonical !== false) throw new Error('The analysis lacks its later-work source label.');
+    target.replaceChildren(el('h3', 'Word study · dictionary reference'));
+    target.append(el('p', data.guidance, 'notice')); notes(data, target);
+    target.append(el('p', 'Source segment: ' + data.segment.ref + ' · forms and analysis shown in Roman Pāli', 'muted'));
+    if (data.dictionary_coverage_note) target.append(el('p', data.dictionary_coverage_note, 'notice'));
+    const list = el('div', undefined, 'word-list');
+    for (const word of data.words || []) {
+      const item = el('article', undefined, 'word-card'); item.append(el('h4', word.surface));
+      if (word.form && word.form !== word.surface) item.append(el('p', 'Analysed form: ' + word.form, 'muted'));
+      if (word.note) item.append(el('p', word.note, 'muted'));
+      if (word.status === 'unknown') item.append(el('p', word.message || 'Unknown in this dictionary subset; no meaning is guessed.', 'notice'));
+      for (const analysis of word.analyses || []) {
+        const d = el('details'); d.open = true; d.append(el('summary', analysis.headword + (analysis.pos ? ' · ' + analysis.pos : '')));
+        if (analysis.grammar?.length) d.append(el('p', analysis.grammar.join('; '), 'muted'));
+        const meanings = el('ul'); for (const sense of analysis.meanings || []) meanings.append(el('li', sense.lemma + ': ' + sense.meaning)); d.append(meanings);
+        if (analysis.senses_total > (analysis.meanings || []).length) d.append(el('p', analysis.senses_total + ' total senses; this tool returns an excerpt.', 'muted'));
+        if (analysis.root) d.append(el('p', 'Root: ' + analysis.root.root + (analysis.root.meaning ? ' · ' + analysis.root.meaning : ''), 'muted'));
+        if (analysis.note) d.append(el('p', analysis.note)); item.append(d);
+      }
+      const splits = [word.split, ...(word.other_splits || [])].filter(Boolean); if (splits.length) item.append(el('p', 'Computed split suggestions, not a translation: ' + splits.join(' | '), 'notice'));
+      if (word.more_headwords) item.append(el('p', word.more_headwords + ' further headwords are not displayed by this tool.', 'muted'));
+      list.append(item);
+    }
+    target.append(list);
+    const pagination = el('div', undefined, 'toolbar');
+    if (args.offset > 0) pagination.append(button('← Previous words', () => wordStudy({ ...args, offset: Math.max(0, args.offset - args.limit) }, expected, token)));
+    if (data.next_offset !== null && data.next_offset !== undefined) pagination.append(button('Next words →', () => wordStudy({ ...args, offset: data.next_offset }, expected, token)));
+    target.append(pagination); provenance({ ...data, edition: 'Digital Pāḷi Dictionary · reference material', source: undefined }, target); provenance({ edition: 'Passage source, separate from dictionary', source: data.text_source }, target);
+  } catch (error) { if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el('p', error.message, 'notice'), button('Retry this word study', () => wordStudy(args, expected, token))); }
+}
+async function relatedTexts(uid, token, offset = 0) {
+  const studyToken = ++studyEpoch, target = studyTarget('Finding recorded related passages…');
+  try {
+    const data = await tool('get_parallels', { uid, offset, limit: 10 }); if (token !== epoch || studyToken !== studyEpoch) return;
+    if (typeof data.available !== 'boolean' || !Array.isArray(data.links)) throw new Error('The related-text response is incomplete. No absence of relationships can be inferred.');
+    target.replaceChildren(el('h3', 'Related texts · evidence, not interpretation')); notes(data, target);
+    if (!data.links?.length) target.append(el('p', data.available === false ? 'Related-text data is unavailable in this server copy.' : 'No related link is recorded here. That does not mean no related passage exists.', 'notice'));
+    for (const relation of data.links || []) {
+      const card = el('article', undefined, 'word-card');
+      card.append(el('p', relation.source === 'shared-passage' ? 'SHARED WORDING · MACHINE-MATCHED' : relation.source === 'commentary-citation' ? 'CITATION IN COMMENTARY · NOT CANON' : 'REFERENCE LINK · ' + relation.source, 'eyebrow'), el('h4', (relation.text?.citation || '') + ' · ' + (relation.text?.title || 'Related passage')), el('p', relation.relation), el('p', relation.how_matched, 'muted'));
+      if (relation.evidence) card.append(el('p', relation.evidence, 'notice'));
+      if (relation.score !== undefined) card.append(el('p', 'Shared-word score: ' + relation.score + ' (not a probability or doctrinal-equivalence claim)', 'muted'));
+      const actions = el('div', undefined, 'toolbar');
+      const other = relation.other_read_with;
+      if (other?.tool === 'get_text' && typeof other.uid === 'string') actions.append(link('Read shared passage', route('read', { uid: other.uid, offset: other.offset || 0, ...(relation.other_segments?.[0] ? { ref: relation.other_segments[0] } : {}) }), 'button'));
+      else if (relation.text?.id) actions.append(link('Read canonical text', route('read', { uid: relation.text.id }), 'button'));
+      if (relation.commentary?.read_with?.tool === 'get_commentary' && typeof relation.commentary.read_with.uid === 'string') actions.append(link('Read commentary evidence', route('read', { kind: 'commentary', uid: relation.commentary.read_with.uid }), 'button'));
+      card.append(actions); target.append(card);
+    }
+    const pagination = el('div', undefined, 'toolbar');
+    if (offset > 0) pagination.append(button('← Previous related links', () => relatedTexts(uid, token, Math.max(0, offset - 10))));
+    if (data.next_offset !== null && data.next_offset !== undefined) pagination.append(button('Next related links →', () => relatedTexts(uid, token, data.next_offset)));
+    target.append(pagination);
+    if (data.suttacentral_parallels?.url) { target.append(el('p', data.suttacentral_parallels.note, 'muted'), external('Explore external parallels (link only)', data.suttacentral_parallels.url)); }
+    provenance(data, target);
+  } catch (error) { if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el('p', error.message, 'notice'), button('Retry related-text lookup', () => relatedTexts(uid, token, offset))); }
+}
+async function dictionary(args, token) {
+  const term = (args.get('term') || '').trim(), direction = ['en-pa', 'pa-en'].includes(args.get('direction')) ? args.get('direction') : 'auto';
+  heading('REFERENCE MATERIAL · NOT SCRIPTURE', 'Words and meanings');
+  const form = el('form'); form.id = 'glossary-form';
+  const termLabel = el('label', 'Pāli word or English phrase'); termLabel.htmlFor = 'glossary-term'; const input = el('input'); input.id = 'glossary-term'; input.name = 'term'; input.maxLength = 100; input.required = true; input.value = term;
+  const directionLabel = el('label', 'Direction'); directionLabel.htmlFor = 'glossary-direction'; const select = el('select'); select.id = 'glossary-direction';
+  for (const [value, label] of [['auto','Both directions'],['en-pa','English → Pāli'],['pa-en','Pāli → English']]) { const option = el('option', label); option.value = value; select.append(option); } select.value = direction;
+  const submit = el('button', 'Look up'); submit.type = 'submit'; form.append(termLabel, input, directionLabel, select, submit);
+  form.addEventListener('submit', event => { event.preventDefault(); const next = route('glossary', { term: input.value.trim(), direction: select.value }); if (location.hash === next) render(); else location.hash = next; });
+  view.append(form, el('p', 'Short sourced glosses help find terms. They are not passage translations or a decision about which meaning fits the context.', 'notice'));
+  if (!term) { view.append(el('p', 'Try mindfulness, mettā or a word in a supported Pāli script. Nothing is generated.')); return; }
+  const data = await tool('glossary', { term, direction, limit: 10 }); if (token !== epoch) return;
+  if (typeof data.found !== 'number' || !data.sources?.dpd?.attribution || !data.sources?.dpd?.license || !['english_to_pali', 'pali_to_english'].some(key => Array.isArray(data[key]))) throw new Error('The glossary response is incomplete or missing its source terms. This is not a no-match result.');
+  notes(data); if (data.note) view.append(el('p', data.note, 'notice'));
+  for (const [key, title] of [['english_to_pali', 'English → Pāli'], ['pali_to_english', 'Pāli → English']]) {
+    if (!data[key]?.length) continue; view.append(el('h3', title)); const cards = el('div', undefined, 'cards');
+    for (const entry of data[key]) { const card = el('article', undefined, 'entry'); card.append(el('strong', entry.pali), el('p', entry.meaning || entry.gloss || ''), el('small', [entry.pos, entry.source].filter(Boolean).join(' · ')), link('Find this word in canonical texts', route('search', { q: entry.pali, scope: 'canon' }))); cards.append(card); } view.append(cards);
+  }
+  if (!data.found) view.append(el('p', 'No matching term was found in the bundled glossary. No meaning has been invented. Try a shorter or differently spelled term.', 'notice'));
+  if (data.sources?.dpd) provenance({ edition: data.sources.dpd.name, dictionary: data.sources.dpd, attribution: data.sources.dpd.attribution, license: data.sources.dpd.license }, view);
+  if (data.sources?.lists) view.append(el('p', data.sources.lists.name + ' · ' + data.sources.lists.note, 'provenance'));
+}
 function saved() {
   heading('YOUR PERSONAL READING', 'Saved passages'); view.append(el('p', 'Bookmarks and notes stay in this browser only. They are not scripture, synced, or backed up. Export them to keep a copy.', 'notice'));
   view.append(button('Export bookmarks and notes', () => { const blob = new Blob([JSON.stringify({ format: KEY, saved: local.saved }, null, 2)], { type: 'application/json' }), url = URL.createObjectURL(blob), a = link('', url); a.download = 'pali-library-bookmarks.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); }));
@@ -187,7 +289,7 @@ async function render() {
   if (location.hash === '#content' && view.childElementCount) { $('content').focus(); return; }
   const token = ++epoch; ++studyEpoch; view.replaceChildren(); status.textContent = 'Opening the library…';
   const [page, query = ''] = location.hash.slice(1).split('?'), args = new URLSearchParams(query);
-  try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
+  try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
     if (token !== epoch) return; status.textContent = storageOK ? '' : 'Browser storage is unavailable; export personal notes before closing this tab.'; focusHeading();
   } catch (error) { if (token !== epoch) return; view.replaceChildren(); heading('UNABLE TO OPEN', 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); status.textContent = 'The request failed.'; }
 }

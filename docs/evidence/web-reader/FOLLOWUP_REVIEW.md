@@ -16,8 +16,8 @@ Reviewed baseline: `d3e3467496ef4ba7c68013d3f2eead567faf86ce` on `feat/standalon
 - `npm run smoke`: 34 tools / 64 checks passed; no live-source claim.
 - `npm run evals`: 201 questions, 100% of non-skipped; six network questions skipped.
 - Fresh focused HTTP/asset tests: two passed after the review.
-- [Browser checks](browser-check.json): **101 checks**, 360/390/768/1280 widths. Real bundled text for corpus paths; explicitly synthetic translation-continuation, outage, stale-response and hostile-markup tests.
-- [Accessibility checks](accessibility-check.json): **28 axe-core 4.14.0 scans**, seven screens × two widths × two themes, zero detected violations for the requested WCAG A/AA tags. All 28 scans retained `color-contrast` as an incomplete/manual-review rule; zero violations is not a claim that every contrast check or accessibility question was resolved.
+- [Browser checks](browser-check-supplementary.json): **101 checks**, 360/390/768/1280 widths. Real bundled text for corpus paths; explicitly synthetic translation-continuation, outage, stale-response and hostile-markup tests.
+- [Accessibility checks](accessibility-check-supplementary.json): **28 axe-core 4.14.0 scans**, seven screens × two widths × two themes, zero detected violations for the requested WCAG A/AA tags. All 28 scans retained `color-contrast` as an incomplete/manual-review rule; zero violations is not a claim that every contrast check or accessibility question was resolved.
 - Extracted npm package, launched outside the source checkout: standalone HTML plus real canonical, exact commentary and post-canonical MCP reads passed; supplementary results retain `canonical: false`.
 - `git diff --check` and JavaScript/Python syntax checks passed.
 
