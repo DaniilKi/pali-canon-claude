@@ -109,6 +109,10 @@ jobs:
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-import-check.py --report standalone-import.report.json
       - name: Audit bookmark restore screens in both themes
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-import-check.py --a11y --report standalone-import-a11y.report.json
+      - name: Check dated daily reading and source boundaries
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-daily-check.py --report standalone-daily.report.json
+      - name: Audit dated reading screens in both themes
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-daily-check.py --a11y --report standalone-daily-a11y.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -123,6 +127,8 @@ jobs:
             standalone-plans-a11y.report.json
             standalone-import.report.json
             standalone-import-a11y.report.json
+            standalone-daily.report.json
+            standalone-daily-a11y.report.json
           if-no-files-found: warn
   check:
     name: Node ${{ matrix.node }} / ${{ matrix.os }}

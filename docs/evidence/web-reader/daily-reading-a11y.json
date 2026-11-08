@@ -1,0 +1,265 @@
+{
+  "passed": 36,
+  "outside_source_tree": false,
+  "checks": [
+    {
+      "width": 390,
+      "check": "actual dated verse, refs and VRI terms display without storing daily history"
+    },
+    {
+      "width": 390,
+      "check": "rotation explanation comes from the existing engine and retains source version"
+    },
+    {
+      "width": 390,
+      "check": "native-script preview reuses the canonical renderer and keeps collation/native-review limits explicit"
+    },
+    {
+      "width": 390,
+      "check": "verse and chapter actions open actual distinct canonical selections"
+    },
+    {
+      "width": 390,
+      "check": "keyboard date/type form presents only the sourced opening, never claims the full discourse"
+    },
+    {
+      "width": 390,
+      "check": "today re-queries engine UTC even on the same route, without a device timezone guess"
+    },
+    {
+      "width": 390,
+      "check": "nonexistent dates fail instead of quietly selecting a different day"
+    },
+    {
+      "width": 390,
+      "check": "missing source provenance prevents preview display"
+    },
+    {
+      "width": 390,
+      "check": "late daily response cannot replace newer navigation and no English body is automatically requested"
+    },
+    {
+      "width": 390,
+      "check": "actual dated verse, refs and VRI terms display without storing daily history"
+    },
+    {
+      "width": 390,
+      "check": "rotation explanation comes from the existing engine and retains source version"
+    },
+    {
+      "width": 390,
+      "check": "native-script preview reuses the canonical renderer and keeps collation/native-review limits explicit"
+    },
+    {
+      "width": 390,
+      "check": "verse and chapter actions open actual distinct canonical selections"
+    },
+    {
+      "width": 390,
+      "check": "keyboard date/type form presents only the sourced opening, never claims the full discourse"
+    },
+    {
+      "width": 390,
+      "check": "today re-queries engine UTC even on the same route, without a device timezone guess"
+    },
+    {
+      "width": 390,
+      "check": "nonexistent dates fail instead of quietly selecting a different day"
+    },
+    {
+      "width": 390,
+      "check": "missing source provenance prevents preview display"
+    },
+    {
+      "width": 390,
+      "check": "late daily response cannot replace newer navigation and no English body is automatically requested"
+    },
+    {
+      "width": 1280,
+      "check": "actual dated verse, refs and VRI terms display without storing daily history"
+    },
+    {
+      "width": 1280,
+      "check": "rotation explanation comes from the existing engine and retains source version"
+    },
+    {
+      "width": 1280,
+      "check": "native-script preview reuses the canonical renderer and keeps collation/native-review limits explicit"
+    },
+    {
+      "width": 1280,
+      "check": "verse and chapter actions open actual distinct canonical selections"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard date/type form presents only the sourced opening, never claims the full discourse"
+    },
+    {
+      "width": 1280,
+      "check": "today re-queries engine UTC even on the same route, without a device timezone guess"
+    },
+    {
+      "width": 1280,
+      "check": "nonexistent dates fail instead of quietly selecting a different day"
+    },
+    {
+      "width": 1280,
+      "check": "missing source provenance prevents preview display"
+    },
+    {
+      "width": 1280,
+      "check": "late daily response cannot replace newer navigation and no English body is automatically requested"
+    },
+    {
+      "width": 1280,
+      "check": "actual dated verse, refs and VRI terms display without storing daily history"
+    },
+    {
+      "width": 1280,
+      "check": "rotation explanation comes from the existing engine and retains source version"
+    },
+    {
+      "width": 1280,
+      "check": "native-script preview reuses the canonical renderer and keeps collation/native-review limits explicit"
+    },
+    {
+      "width": 1280,
+      "check": "verse and chapter actions open actual distinct canonical selections"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard date/type form presents only the sourced opening, never claims the full discourse"
+    },
+    {
+      "width": 1280,
+      "check": "today re-queries engine UTC even on the same route, without a device timezone guess"
+    },
+    {
+      "width": 1280,
+      "check": "nonexistent dates fail instead of quietly selecting a different day"
+    },
+    {
+      "width": 1280,
+      "check": "missing source provenance prevents preview display"
+    },
+    {
+      "width": 1280,
+      "check": "late daily response cannot replace newer navigation and no English body is automatically requested"
+    }
+  ],
+  "a11y": {
+    "scans": 12,
+    "violations": 0,
+    "results": [
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "dated verse",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "discourse preview",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "incomplete response error",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "dated verse",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "discourse preview",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "incomplete response error",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "dated verse",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "discourse preview",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "incomplete response error",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "dated verse",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "discourse preview",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "incomplete response error",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      }
+    ]
+  },
+  "limits": "Actual bundled daily engine and canonical reader. Missing-provenance and delayed-response cases are controlled fixtures. No upstream translation request, personalized recommendation, human accessibility or physical-device certification. Only audit contexts bypass CSP."
+}

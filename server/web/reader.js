@@ -320,9 +320,9 @@
     if (t.verseEnd) s = s.replace(/;(\s*)$/, `${STOP}$1`);
     return s;
   }
-  function fromRoman(text2, script, stanza) {
+  function fromRoman(text3, script, stanza) {
     const t = TABLES[script];
-    const s = romanPunctuation(text2.normalize("NFC"), t, stanza).toLowerCase();
+    const s = romanPunctuation(text3.normalize("NFC"), t, stanza).toLowerCase();
     let out = "";
     let pending = null;
     let consStart = -1;
@@ -391,10 +391,10 @@
     const prefixes = t.prefix ? /* @__PURE__ */ new Map([[t.sign.e, "e"], [t.sign.o, "o"]]) : /* @__PURE__ */ new Map();
     return REVERSE[script] = { t, cons, ind, signs, signList: byLength(signs), indList: byLength(ind), punct, expand, prefixes };
   }
-  function toRomanFrom(text2, script) {
+  function toRomanFrom(text3, script) {
     const R = reverse(script);
     const { t } = R;
-    let s = text2.normalize("NFC").replace(/[\u200c\u200d]/g, "");
+    let s = text3.normalize("NFC").replace(/[\u200c\u200d]/g, "");
     for (const [a, b] of R.expand) s = s.split(a).join(b);
     const at = (i, list) => list.find((x) => s.startsWith(x, i));
     let out = "";
@@ -445,9 +445,9 @@
     ["khmer", 6016, 6143],
     ["lanna", 6688, 6831]
   ];
-  function detectScript(text2) {
+  function detectScript(text3) {
     const counts = {};
-    for (const ch of String(text2 ?? "")) {
+    for (const ch of String(text3 ?? "")) {
       const cp = ch.codePointAt(0);
       if (cp < 2304) continue;
       for (const [name, lo, hi] of RANGES) if (cp >= lo && cp <= hi) {
@@ -463,9 +463,9 @@
     }
     return best;
   }
-  function transliterate(text2, from, to, { stanza = false } = {}) {
-    if (text2 == null) return text2;
-    const s = String(text2);
+  function transliterate(text3, from, to, { stanza = false } = {}) {
+    if (text3 == null) return text3;
+    const s = String(text3);
     const a = from === "auto" ? detectScript(s) : scriptName(from);
     const b = scriptName(to);
     if (a === b) return s;
@@ -481,9 +481,9 @@
       script_note: `P\u0101li transliterated into ${SCRIPT_NAMES[script]} by this server from the VRI Roman edition (exact letter-for-letter; punctuation follows VRI's own script editions where they exist). Citations, IDs and English are left in Roman.`
     };
   }
-  var pali = (text2, script, opts) => typeof text2 === "string" && text2 ? transliterate(text2, "roman", script, opts) : text2;
-  function verse(text2, script) {
-    const lines = text2.split("\n");
+  var pali = (text3, script, opts) => typeof text3 === "string" && text3 ? transliterate(text3, "roman", script, opts) : text3;
+  function verse(text3, script) {
+    const lines = text3.split("\n");
     return lines.map((line, i) => pali(line, script, { stanza: i === lines.length - 1 })).join("\n");
   }
   function localizeUnitFields(obj, script) {
@@ -616,10 +616,10 @@
   var string = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f]/.test(x);
   var object = (x) => x && typeof x === "object" && !Array.isArray(x);
   var identity = (x) => JSON.stringify([x.uid, x.ref]);
-  function parseBookmarks(text2) {
+  function parseBookmarks(text3) {
     let data;
     try {
-      data = JSON.parse(text2);
+      data = JSON.parse(text3);
     } catch {
       throw Error("Choose a valid JSON bookmark export. Nothing was imported.");
     }
@@ -636,6 +636,22 @@
     const seen = new Set(existing.map(identity)), added = incoming.filter((x) => !seen.has(identity(x))), skipped = incoming.length - added.length;
     if (existing.length + added.length > 500) throw Error("These new bookmarks exceed the 500-passage limit. Export/remove some saved passages, then try again. Nothing was imported.");
     return { added, skipped, saved: [...existing, ...added] };
+  }
+
+  // web/daily-reading.mjs
+  var text2 = (x) => typeof x === "string" && x.trim().length > 0;
+  function validateDaily(data, { date, kind }) {
+    const instant = typeof data?.date === "string" ? /* @__PURE__ */ new Date(data.date + "T00:00:00Z") : null;
+    if (!instant || !Number.isFinite(instant.getTime()) || !/^\d{4}-\d{2}-\d{2}$/.test(data.date) || instant.toISOString().slice(0, 10) !== data.date || data.date.startsWith("0000") || date !== void 0 && data.date !== date || !["verse", "sutta"].includes(kind) || data.kind !== kind || !text2(data.text?.id) || !text2(data.text.citation) || !/^([a-z][a-z0-9.-]*)$/.test(data.text.id) || data.read_with?.tool !== "get_text" || data.read_with.uid !== data.text.id || !text2(data.how_chosen) || !Number.isInteger(data.rotation?.position) || !Number.isInteger(data.rotation?.of) || data.rotation.position < 1 || data.rotation.position > data.rotation.of || !text2(data.source?.pali?.name) || !text2(data.source.pali.commit) || !text2(data.source.pali.attribution) || !text2(data.source.pali.terms)) throw Error("The daily selection is incomplete or does not match the requested date, kind and source. No other reading was substituted.");
+    if (data.notes !== void 0 && (!Array.isArray(data.notes) || data.notes.some((n) => typeof n !== "string"))) throw Error("The daily source notes are incomplete.");
+    if (data.chapter !== void 0 && data.chapter !== null) {
+      const range = typeof data.chapter.id === "string" && data.chapter.id.match(/^dhp(\d+)-(\d+)$/), verse2 = Number(data.text.id.slice(3));
+      if (kind !== "verse" || !range || !text2(data.chapter.citation) || verse2 < Number(range[1]) || verse2 > Number(range[2])) throw Error("The daily chapter context does not match the selected verse.");
+    }
+    if (kind === "verse") {
+      if (!/^dhp\d+$/.test(data.text.id) || !Array.isArray(data.pali) || !data.pali.length || data.pali.length > 100 || data.pali.some((s) => !text2(s.ref) || !s.ref.startsWith(data.text.id + "/") || s.type !== "verse" || !text2(s.text)) || new Set(data.pali.map((s) => s.ref)).size !== data.pali.length) throw Error("The daily verse lacks its exact referenced source text. No verse was displayed.");
+    } else if (!text2(data.first_line) || !Number.isInteger(data.segments) || data.segments < 1) throw Error("The daily discourse opening is incomplete. No full discourse was inferred from it.");
+    return data;
   }
 
   // web/reader.js
@@ -670,30 +686,30 @@
       return false;
     }
   }
-  function el(tag, text2, className) {
+  function el(tag, text3, className) {
     const n = document.createElement(tag);
-    if (text2 !== void 0) n.textContent = text2;
+    if (text3 !== void 0) n.textContent = text3;
     if (className) n.className = className;
     return n;
   }
-  function button(text2, fn) {
-    const n = el("button", text2);
+  function button(text3, fn) {
+    const n = el("button", text3);
     n.type = "button";
     n.addEventListener("click", fn);
     return n;
   }
-  function link(text2, href, className) {
-    const n = el("a", text2, className);
+  function link(text3, href, className) {
+    const n = el("a", text3, className);
     n.href = href;
     return n;
   }
-  function external(text2, url) {
+  function external(text3, url) {
     try {
       const u = new URL(url);
-      if (!["http:", "https:"].includes(u.protocol)) return el("span", text2);
-      return link(text2, u.href);
+      if (!["http:", "https:"].includes(u.protocol)) return el("span", text3);
+      return link(text3, u.href);
     } catch {
-      return el("span", text2);
+      return el("span", text3);
     }
   }
   function route(name, args = {}) {
@@ -781,7 +797,7 @@
   $("script").addEventListener("change", (e) => {
     local.script = e.target.value;
     persist();
-    if (location.hash.startsWith("#read")) render();
+    if (location.hash.startsWith("#read") || location.hash.startsWith("#daily")) render();
   });
   $("search-form").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -941,9 +957,9 @@
       }
       row.append(actions);
       part.classList.toggle("marked", active);
-      const text2 = el("p", segment.text, "passage");
-      text2.lang = "pi";
-      part.append(row, text2);
+      const text3 = el("p", segment.text, "passage");
+      text3.lang = "pi";
+      part.append(row, text3);
       passages.append(part);
     }
     const next = plan && window2.end !== null ? offset + data.returned < window2.end ? offset + data.returned : null : data.next_offset;
@@ -1206,6 +1222,67 @@
     if (data.sources?.dpd) provenance({ edition: data.sources.dpd.name, dictionary: data.sources.dpd, attribution: data.sources.dpd.attribution, license: data.sources.dpd.license }, view);
     if (data.sources?.lists) view.append(el("p", data.sources.lists.name + " \xB7 " + data.sources.lists.note, "provenance"));
   }
+  async function daily(args, token) {
+    const kind = args.get("kind") || "verse", date = args.get("date") || void 0;
+    if (!["verse", "sutta"].includes(kind)) throw Error("Choose a daily verse or discourse.");
+    const data = validateDaily(await tool("daily_text", { kind, ...date ? { date } : {} }), { date, kind });
+    if (token !== epoch) return;
+    heading("DATED SOURCE READING \xB7 UTC", kind === "verse" ? "Daily Dhammapada verse" : "Daily discourse");
+    view.append(el("p", data.date + " \xB7 fixed source rotation, not a personal recommendation. The selection may change when the underlying source index changes.", "muted"));
+    const form = el("form");
+    form.className = "daily-picker";
+    const dateLabel = el("label", "Reading date (UTC)"), dateInput = el("input");
+    dateInput.type = "date";
+    dateInput.min = "0001-01-01";
+    dateInput.max = "9999-12-31";
+    dateInput.required = true;
+    dateInput.value = data.date;
+    dateLabel.append(dateInput);
+    const kindLabel = el("label", "Reading type"), select = el("select");
+    for (const [value, title] of [["verse", "Dhammapada verse"], ["sutta", "Discourse opening"]]) {
+      const option = el("option", title);
+      option.value = value;
+      select.append(option);
+    }
+    select.value = kind;
+    select.id = "daily-kind";
+    kindLabel.htmlFor = select.id;
+    const kindField = el("div");
+    kindField.append(kindLabel, select);
+    const go = el("button", "Open dated reading");
+    go.type = "submit";
+    form.append(dateLabel, kindField, go);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (form.reportValidity()) location.hash = route("daily", { date: dateInput.value, kind: select.value });
+    });
+    view.append(form, button("Use today\u2019s UTC date", () => {
+      const target = route("daily", { kind });
+      if (location.hash === target) render();
+      else location.hash = target;
+    }));
+    const card = el("article", void 0, "daily-reading");
+    card.append(el("h3", data.text.citation + (data.text.title ? " \xB7 " + data.text.title : "")));
+    card.append(el("p", kind === "verse" ? "Referenced P\u0101li verse" : "Opening preview only \xB7 " + data.segments + " source segments in the discourse. Open the source to read the full text.", "notice"));
+    const display = localizeText({ segments: kind === "verse" ? data.pali : [{ text: data.first_line, type: "paragraph" }] }, $("script").value);
+    for (const segment of display.segments) {
+      if (segment.ref) card.append(el("small", segment.ref, "muted"));
+      const passage = el("p", segment.text, "passage");
+      passage.lang = "pi";
+      card.append(passage);
+    }
+    if (display.script) card.append(el("p", "Display transliteration from the bundled VRI Roman source; not a separate script-edition collation. " + (["lao", "lanna"].includes(display.script) ? "Native-reader validation is still pending for this script." : ""), "muted"));
+    const actions = el("div", void 0, "toolbar");
+    actions.append(link("Read P\u0101li source \xB7 " + data.text.citation, route("read", { uid: data.text.id }), "button"));
+    if (kind === "verse" && data.chapter?.id) actions.append(link("Read chapter context \xB7 " + data.chapter.citation, route("read", { uid: data.chapter.id }), "button"));
+    card.append(actions, el("p", "English sources, commentary, word study and saved passages are available in the full reader. English text is not retrieved automatically.", "muted"));
+    view.append(card);
+    notes(data);
+    const details = el("details");
+    details.append(el("summary", "How this reading was selected"), el("p", data.how_chosen), el("p", "Rotation position " + data.rotation.position + " of " + data.rotation.of + " \xB7 source revision " + data.source.pali.commit));
+    view.append(details);
+    provenance({ source: data.source.pali });
+  }
   function exportPersonal(data, filename) {
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }), url = URL.createObjectURL(blob), a = link("", url);
     a.download = filename;
@@ -1380,7 +1457,7 @@
   }
   function about() {
     heading("A LIBRARY, NOT A TEACHER", "Read with the source in view.");
-    for (const text2 of ["The bundled P\u0101li is retrieved from the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition. Scripture is never generated or reconstructed. Abbreviations and uncertain alignments stay labelled.", "English translations are available for a subset of texts and fetched only after you choose them. Translators\u2019 wording is not silently exchanged. Commentary is labelled separately from canonical text.", "VRI and several translation/dictionary sources carry non-commercial terms. This reading interface adds no permission to redistribute, translate or commercialize their work.", "Your saved passages, notes, manual reading-plan marks and preferences are stored in this browser. The app has no accounts, advertising, analytics, cloud sync or offline web download. The server may hold your IP temporarily for rate limiting; deployment providers may keep separate infrastructure logs."]) view.append(el("p", text2));
+    for (const text3 of ["The bundled P\u0101li is retrieved from the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition. Scripture is never generated or reconstructed. Abbreviations and uncertain alignments stay labelled.", "English translations are available for a subset of texts and fetched only after you choose them. Translators\u2019 wording is not silently exchanged. Commentary is labelled separately from canonical text.", "VRI and several translation/dictionary sources carry non-commercial terms. This reading interface adds no permission to redistribute, translate or commercialize their work.", "Your saved passages, notes, manual reading-plan marks and preferences are stored in this browser. The app has no accounts, advertising, analytics, cloud sync or offline web download. The server may hold your IP temporarily for rate limiting; deployment providers may keep separate infrastructure logs."]) view.append(el("p", text3));
     const links = el("div", void 0, "toolbar");
     links.append(external("Source and licence register", "https://github.com/DaniilKi/pali-canon-claude/blob/dev/pali-reliability/THIRD_PARTY.md"), external("Project and complete MCP toolset", "https://github.com/DaniilKi/pali-canon-claude"));
     view.append(links);
@@ -1399,6 +1476,7 @@
       if (page === "read") await read(args, token);
       else if (page === "search") await search(args, token);
       else if (page === "glossary") await dictionary(args, token);
+      else if (page === "daily") await daily(args, token);
       else if (page === "plans") await plans(args, token);
       else if (page === "saved") saved();
       else if (page === "about") about();

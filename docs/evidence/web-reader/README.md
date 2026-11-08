@@ -1,6 +1,8 @@
 # Standalone web-reader evidence
 
-Latest independent [bookmark restore and CI acceptance](BOOKMARK_IMPORT.md) records all four successful b15fc13 workflows and the subsequent local restore feature.
+Latest [daily-reading acceptance](DAILY_READING.md) adds the existing dated source rotation, exact previews and UTC refresh, with 36 browser and 36 installed-package checks plus 12 accessibility scans.
+
+The independent [bookmark restore and CI acceptance](BOOKMARK_IMPORT.md) records all four successful b15fc13 workflows and the subsequent local restore feature.
 
 Current [integration evidence](INTEGRATION.md) covers the isolated `integrate/web-reader-corpus-nov8` candidate: web `492169f` plus corpus `7b04173`. Dev/main and deployment remain untouched.
 

@@ -2,6 +2,7 @@ import { localizeText } from '../src/script.mjs';
 import { scopeDescriptor, validateEnglishPage } from './translation-policy.mjs';
 import { planCatalog, planDay, daySignature, cleanProgress, planWindow, validatePlanPage } from './reading-plans.mjs';
 import { MAX_IMPORT_BYTES, parseBookmarks, bookmarkMerge } from './bookmark-import.mjs';
+import { validateDaily } from './daily-reading.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
@@ -72,7 +73,7 @@ function preferences() {
 preferences(); updateResume();
 $('font-size').addEventListener('input', e => { local.font = Number(e.target.value); preferences(); persist(); });
 $('theme').addEventListener('change', e => { local.theme = e.target.value; preferences(); persist(); });
-$('script').addEventListener('change', e => { local.script = e.target.value; persist(); if (location.hash.startsWith('#read')) render(); });
+$('script').addEventListener('change', e => { local.script = e.target.value; persist(); if (location.hash.startsWith('#read') || location.hash.startsWith('#daily')) render(); });
 $('search-form').addEventListener('submit', e => { e.preventDefault(); location.hash = route('search', { q: $('query').value.trim(), scope: $('search-scope').value }); });
 document.querySelector('.skip').addEventListener('click', e => { e.preventDefault(); $('content').focus(); });
 $('reference-form').addEventListener('submit', e => { e.preventDefault(); location.hash = route('read', { uid: $('reference').value.trim() }); });
@@ -317,6 +318,23 @@ async function dictionary(args, token) {
   if (data.sources?.dpd) provenance({ edition: data.sources.dpd.name, dictionary: data.sources.dpd, attribution: data.sources.dpd.attribution, license: data.sources.dpd.license }, view);
   if (data.sources?.lists) view.append(el('p', data.sources.lists.name + ' · ' + data.sources.lists.note, 'provenance'));
 }
+async function daily(args, token) {
+  const kind = args.get('kind') || 'verse', date = args.get('date') || undefined;
+  if (!['verse', 'sutta'].includes(kind)) throw Error('Choose a daily verse or discourse.');
+  const data = validateDaily(await tool('daily_text', { kind, ...(date ? { date } : {}) }), { date, kind }); if (token !== epoch) return;
+  heading('DATED SOURCE READING · UTC', kind === 'verse' ? 'Daily Dhammapada verse' : 'Daily discourse');
+  view.append(el('p', data.date + ' · fixed source rotation, not a personal recommendation. The selection may change when the underlying source index changes.', 'muted'));
+  const form = el('form'); form.className = 'daily-picker'; const dateLabel = el('label', 'Reading date (UTC)'), dateInput = el('input'); dateInput.type = 'date'; dateInput.min = '0001-01-01'; dateInput.max = '9999-12-31'; dateInput.required = true; dateInput.value = data.date; dateLabel.append(dateInput);
+  const kindLabel = el('label', 'Reading type'), select = el('select'); for (const [value, title] of [['verse', 'Dhammapada verse'], ['sutta', 'Discourse opening']]) { const option = el('option', title); option.value = value; select.append(option); } select.value = kind; select.id = 'daily-kind'; kindLabel.htmlFor = select.id; const kindField = el('div'); kindField.append(kindLabel, select);
+  const go = el('button', 'Open dated reading'); go.type = 'submit'; form.append(dateLabel, kindField, go); form.addEventListener('submit', e => { e.preventDefault(); if (form.reportValidity()) location.hash = route('daily', { date: dateInput.value, kind: select.value }); }); view.append(form, button('Use today’s UTC date', () => { const target = route('daily', { kind }); if (location.hash === target) render(); else location.hash = target; }));
+  const card = el('article', undefined, 'daily-reading'); card.append(el('h3', data.text.citation + (data.text.title ? ' · ' + data.text.title : '')));
+  card.append(el('p', kind === 'verse' ? 'Referenced Pāli verse' : 'Opening preview only · ' + data.segments + ' source segments in the discourse. Open the source to read the full text.', 'notice'));
+  const display = localizeText({ segments: kind === 'verse' ? data.pali : [{ text: data.first_line, type: 'paragraph' }] }, $('script').value);
+  for (const segment of display.segments) { if (segment.ref) card.append(el('small', segment.ref, 'muted')); const passage = el('p', segment.text, 'passage'); passage.lang = 'pi'; card.append(passage); }
+  if (display.script) card.append(el('p', 'Display transliteration from the bundled VRI Roman source; not a separate script-edition collation. ' + (['lao', 'lanna'].includes(display.script) ? 'Native-reader validation is still pending for this script.' : ''), 'muted'));
+  const actions = el('div', undefined, 'toolbar'); actions.append(link('Read Pāli source · ' + data.text.citation, route('read', { uid: data.text.id }), 'button')); if (kind === 'verse' && data.chapter?.id) actions.append(link('Read chapter context · ' + data.chapter.citation, route('read', { uid: data.chapter.id }), 'button')); card.append(actions, el('p', 'English sources, commentary, word study and saved passages are available in the full reader. English text is not retrieved automatically.', 'muted')); view.append(card); notes(data);
+  const details = el('details'); details.append(el('summary', 'How this reading was selected'), el('p', data.how_chosen), el('p', 'Rotation position ' + data.rotation.position + ' of ' + data.rotation.of + ' · source revision ' + data.source.pali.commit)); view.append(details); provenance({ source: data.source.pali });
+}
 function exportPersonal(data, filename) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }), url = URL.createObjectURL(blob), a = link('', url); a.download = filename; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
@@ -387,7 +405,7 @@ async function render() {
   if (location.hash === '#content' && view.childElementCount) { $('content').focus(); return; }
   const token = ++epoch; ++studyEpoch; view.replaceChildren(); status.textContent = 'Opening the library…';
   const [page, query = ''] = location.hash.slice(1).split('?'), args = new URLSearchParams(query);
-  try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'plans') await plans(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
+  try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'plans') await plans(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
     if (token !== epoch) return; status.textContent = storageOK ? '' : 'Browser storage is unavailable; export your personal data before closing this tab.'; focusHeading();
   } catch (error) { if (token !== epoch) return; view.replaceChildren(); heading('UNABLE TO OPEN', 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); status.textContent = 'The request failed.'; }
 }

@@ -11,3 +11,5 @@ main:focus{outline:none}
 .plan-picker{display:flex;gap:10px;align-items:flex-end}.plan-picker input{display:block;width:110px}.entry h4{margin:0 0 16px;font:21px/1.4 Georgia,serif;overflow-wrap:anywhere}.masthead nav{flex-wrap:wrap}
 
 .import-preview{margin:18px 0;overflow-wrap:anywhere}.import-preview:empty{display:none}.import-preview h3:focus{outline:none}input[type=file]{display:block;width:100%;margin-top:8px}
+
+.daily-picker{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}.daily-picker input,.daily-picker select{display:block}.daily-reading{padding:20px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}.daily-reading .passage{margin:10px 0 20px}.daily-reading h3{overflow-wrap:anywhere}
