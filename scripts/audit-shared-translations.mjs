@@ -11,12 +11,16 @@ import { syntheticLink, syntheticHtml, syntheticText } from '../tests/helpers/pa
 import { syntheticShared, sharedIds } from '../tests/helpers/shared-translation.mjs';
 import { SCRIPTS, transliterate } from '../src/script.mjs';
 import { translationCoverage } from '../src/providers.mjs';
+import * as canon from '../src/canon.mjs';
 import { fetchRecorderSource, readFetchLedger } from '../tests/helpers/synthetic-fetch-ledger.mjs';
 function option(name) { const i = process.argv.indexOf(name); if (i < 0) return; assert.ok(process.argv[i + 1]); return resolve(process.argv[i + 1]); }
 const serverDir = option('--server-dir') || resolve('server'), reportPath = option('--report');
 let stage, child, client, timer;
 const reports = []; let previous;
 const baseline = translationCoverage().total;
+const syntheticBaseline = { ...baseline, shared_links: 0, with_shared_english: 0, shared_only: 0 };
+const actualMetadata = new Map();
+for (const row of Object.values(canon.load().translations).flat().filter(l=>l.shared_scope)) for (const id of row.shared_scope.text_ids) actualMetadata.set(id, canon.describe(canon.resolve(id).unit));
 async function close() {
   if (client) await client.close(); client = null;
   if (child && child.exitCode === null && child.signalCode === null) { const ended = new Promise(r => child.once('exit', r)); child.kill(); await ended; }
@@ -30,13 +34,20 @@ try {
   const reviewedPages = Object.values(original).flat().filter(l => l.match === 'reviewed-shared-page');
   const modes = ['stdio', 'http', 'mixed_versions', 'changed_mapping', 'changed_source', 'removed_scope', 'aj_shared_metadata', 'aj_partial_metadata', 'aj_invalid_metadata'].map(mode=>[mode,null]);
   for(const page of reviewedPages) modes.push(['reviewed_metadata',page],['reviewed_notice_downgrade',page]);
+  modes.push(['withheld_bindings',null]);
+  const exclusions=JSON.parse(await readFile(resolve('scripts/canon/reviewed_exclusions.json'),'utf8')).exclusions;
   const originalAj = JSON.parse(await readFile(join(stage, 'server/data/anandajoti.json'), 'utf8'));
   for (const [mode, reviewed] of modes) {
+    const syntheticMode = !mode.startsWith('reviewed_') && mode !== 'withheld_bindings';
     const fetchLog = join(stage, 'fixture-fetches.jsonl'); await writeFile(fetchLog, '');
     const link = syntheticShared(); if (mode === 'changed_mapping') link.reference += ' changed';
     const full = { ...link, url: link.url.replace('SHARED', 'FULL') }; delete full.shared_scope;
     const translations = { ...original };
-    if (!mode.startsWith('reviewed_')) { for (const uid of sharedIds) delete translations[uid]; translations.iti10 = [link]; }
+    if (syntheticMode) {
+      // Synthetic scopes are isolated from all real shared declarations, including overlapping Iti pages.
+      for (const [owner, entries] of Object.entries(translations)) { const kept=entries.filter(l=>!Object.hasOwn(l,'shared_scope')); if(kept.length) translations[owner]=kept; else delete translations[owner]; }
+      for (const uid of sharedIds) delete translations[uid]; translations.iti10 = [link];
+    }
     if (mode === 'mixed_versions') translations.iti11 = [full];
     if (mode === 'reviewed_notice_downgrade') {
       const bad = structuredClone(reviewed); bad.shared_scope.presentation = 'condensed'; delete bad.shared_scope.notice_sha256;
@@ -44,6 +55,7 @@ try {
     }
     if (mode === 'removed_scope') { delete translations.iti10; const removed = { ...link }; delete removed.shared_scope; translations.iti11 = [removed]; }
     const aj = { ...originalAj, links: { ...originalAj.links } };
+    if (syntheticMode) for(const [key,entry] of Object.entries(aj.links)) if(Object.hasOwn(entry,'shared_scope')) delete aj.links[key];
     if (mode.startsWith('aj_')) {
       const partial = mode === 'aj_partial_metadata'; const scoped = partial ? syntheticLink() : link;
       delete translations.iti10;
@@ -53,7 +65,7 @@ try {
     await writeFile(join(stage, 'server/data/translations.json'), JSON.stringify(translations));
     await writeFile(join(stage, 'server/data/anandajoti.json'), JSON.stringify(aj));
     const html = mode === 'changed_source' ? syntheticHtml.replace('amber', 'changed') : syntheticHtml;
-    const allowed = mode.startsWith('reviewed_') ? [reviewed.url] : [link.url, full.url];
+    const allowed = mode === 'withheld_bindings' ? [] : mode.startsWith('reviewed_') ? [reviewed.url] : [link.url, full.url];
     await writeFile(preload, `${fetchRecorderSource(fetchLog)}globalThis.fetch=async input=>{const url=String(input);if(!${JSON.stringify(allowed)}.includes(url))return rejectUnexpectedNetwork();recordSyntheticFetch(url);return new Response(${JSON.stringify(html)},{status:200,headers:{'content-type':'text/html'}})};`);
     const env = { ...process.env, PALI_CANON_CACHE_MB: '0', HOST: '127.0.0.1', PORT: '0', RATE_LIMIT_PER_MINUTE: '0', CHATGPT_WIDGET: '1' };
     let stderr = ''; client = new Client({ name: 'installed-shared-fixture', version: '1' });
@@ -76,7 +88,17 @@ try {
       assert.ok(!r.isError, JSON.stringify(r.content)); assert.deepEqual(JSON.parse(r.content[0].text), r.structuredContent); return r.structuredContent;
     };
     const id = 'dt:SYNTHETIC/SHARED', uid = 'iti11';
-    if (mode === 'reviewed_notice_downgrade') {
+    if (mode === 'withheld_bindings') {
+      for(const row of exclusions){
+        const blocked=canon.translationId({source:row.source,url:row.url,...(row.source==='ati'?{path:new URL(row.url).pathname.replace(/\.html$/,'')}: {})});
+        for(const uid of row.subject_ids){const meta=await call('get_metadata',{uid});assert.equal(meta.english.some(l=>l.translation_id===blocked),false);}
+        const uid=row.subject_ids[0];
+        await call('resolve_reference',{reference:row.url},/not linked/);
+        await call('get_translation',{uid,translation:blocked},/not linked|not available|No English/i);
+        await call('verify_quote',{text:'Synthetic fixture only amber lantern',language:'english',texts:[uid],translation_ids:[blocked],include_shared:true},/not linked|not available|No English/i);
+      }
+      assert.equal((await readFetchLedger(fetchLog)).length,0,'Withheld canonical bindings never fetch or substitute another source');
+    } else if (mode === 'reviewed_notice_downgrade') {
       await call('get_metadata', { uid: reviewed.shared_scope.owner_id }, /Invalid or unreviewed/);
       assert.equal((await readFetchLedger(fetchLog)).length, 0, 'Changing presentation cannot remove mandatory ATI notice protection');
     } else if (mode === 'reviewed_metadata') {
@@ -84,7 +106,9 @@ try {
       for (const member of members) {
         const meta = await call('get_metadata', { uid: member });
         const scope = meta.english.find(l => l.translation_id === realId).translation_scope;
-        assert.equal(meta.english_available, 0); assert.equal(meta.shared_english_available, 1);
+        const expected=actualMetadata.get(member);
+        assert.equal(meta.english_available, expected.english_available); assert.equal(meta.shared_english_available, expected.shared_english_available);
+        assert.deepEqual(meta.english.filter(l=>!l.translation_scope).map(l=>l.translation_id),expected.english.filter(l=>!l.translation_scope).map(l=>l.translation_id));
         assert.ok(['compilation','condensed'].includes(reviewed.shared_scope.presentation));
         assert.equal(scope.presentation, reviewed.shared_scope.presentation); assert.equal(scope.condensed, reviewed.shared_scope.presentation === 'condensed');
         assert.equal(scope.whole_unit_coverage, false); assert.equal(scope.individual_alignment_verified, false);
@@ -92,7 +116,7 @@ try {
       }
       const member = members.at(-1);
       await call('resolve_reference', { reference: reviewed.url }, /Shared-page URL/);
-      await call('get_translation', { uid: member }, /allow_shared/);
+      if (!actualMetadata.get(member).english_available) await call('get_translation', { uid: member }, /allow_shared/);
       await call('get_translation', { uid: member, translation: realId }, /allow_shared/);
       await call('verify_quote', { text: 'Synthetic fixture only amber lantern', language: 'english', texts: [member], translation_ids: [realId] }, /include_shared/);
       assert.equal((await readFetchLedger(fetchLog)).length, 0, 'Real metadata and missing consent must not fetch');
@@ -123,7 +147,7 @@ try {
       const selected = await call('get_translation', { uid }); assert.equal(selected.translation_id, 'dt:SYNTHETIC/FULL');
       assert.equal((await call('get_translation', { uid, translation: link.translator })).translation_id, selected.translation_id);
       const totals = (await call('list_sources', {})).translation_coverage.total;
-      assert.equal(totals.links, baseline.links); assert.equal(totals.with_english, baseline.with_english); assert.equal(totals.shared_links, (baseline.shared_links || 0) + 1); assert.equal(totals.with_shared_english, (baseline.with_shared_english || 0) + 4); assert.equal(totals.shared_only, (baseline.shared_only || 0) + 3);
+      assert.equal(totals.links, syntheticBaseline.links); assert.equal(totals.with_english, syntheticBaseline.with_english); assert.equal(totals.shared_links, (syntheticBaseline.shared_links || 0) + 1); assert.equal(totals.with_shared_english, (syntheticBaseline.with_shared_english || 0) + 4); assert.equal(totals.shared_only, (syntheticBaseline.shared_only || 0) + 3);
       const args = { text: 'amber lantern copper window', language: 'english', texts: [uid] };
       const normal = await call('verify_quote', args); assert.equal(normal.scope.shared_translations_excluded.length, 1); assert.ok(normal.matches.every(m => m.text_id === uid));
       const inclusive = await call('verify_quote', { ...args, include_shared: true }); assert.equal(inclusive.scope.translations_checked.length, 2); assert.equal(inclusive.equally_similar_texts, undefined); assert.equal(inclusive.equally_similar_sources, 2);
@@ -133,7 +157,7 @@ try {
       for (const member of sharedIds) { const meta = await call('get_metadata', { uid: member }); assert.equal(meta.english_available, 0); assert.equal(meta.shared_english_available, 1); assert.deepEqual(meta.english[0].translation_scope.text_ids, sharedIds); }
       const totals = (await call('list_sources', {})).translation_coverage.total;
       for (const k of ['links', 'with_english', 'with_english_including_inherited']) assert.equal(totals[k], baseline[k] - 1, k);
-      assert.equal(totals.shared_links, (baseline.shared_links || 0) + 1); assert.equal(totals.with_shared_english, (baseline.with_shared_english || 0) + 4); assert.equal(totals.shared_only, (baseline.shared_only || 0) + 4);
+      assert.equal(totals.shared_links, (syntheticBaseline.shared_links || 0) + 1); assert.equal(totals.with_shared_english, (syntheticBaseline.with_shared_english || 0) + 4); assert.equal(totals.shared_only, (syntheticBaseline.shared_only || 0) + 4);
       await call('resolve_reference', { reference: link.url }, /Shared-page URL.*iti10, iti11, iti12, iti13/);
       await call('get_text', { uid: link.url }, /Shared-page URL/);
       await call('get_translation', { uid }, /allow_shared/);
@@ -159,7 +183,7 @@ try {
     }
     assert.doesNotMatch(stderr, /UNEXPECTED_NETWORK_ATTEMPT/);
     assert.equal((await readFetchLedger(fetchLog)).filter(e => e.kind === 'unexpected').length, 0);
-    reports.push({ mode, ...(reviewed ? {source_path:reviewed.path} : {}), requests, status: 'passed', synthetic_provider_only: true, real_declaration_metadata: mode.startsWith('reviewed_'), real_network_attempts: 0 });
+    reports.push({ mode, ...(reviewed ? {source_path:reviewed.path} : {}), requests, status: 'passed', synthetic_provider_only: true, real_declaration_metadata: !syntheticMode, real_network_attempts: 0 });
     await close();
   }
   const report = { status: 'passed', cases: reports, scope: 'Extracted-package synthetic shared-page contracts and real reviewed-page metadata with simulated providers only. One page, explicit opt-in, no individual/whole-unit alignment, bounded pinned restart, eight input scripts, HTTP/widget and merged AJ metadata without any author-host request. Real reviewed-page metadata/consent/widget refusal/source-drift checks contain no publisher text and make no author-host request.' };

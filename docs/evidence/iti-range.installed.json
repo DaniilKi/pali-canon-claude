@@ -1,0 +1,302 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "mode": "stdio",
+      "requests": 27,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": false,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "http",
+      "requests": 29,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": false,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "mixed_versions",
+      "requests": 5,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": false,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "changed_mapping",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": false,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "changed_source",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": false,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "removed_scope",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": false,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "aj_shared_metadata",
+      "requests": 2,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": false,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "aj_partial_metadata",
+      "requests": 2,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": false,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "aj_invalid_metadata",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": false,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_metadata",
+      "source_path": "/tipitaka/kn/iti/iti.1.001-027.than",
+      "requests": 33,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_notice_downgrade",
+      "source_path": "/tipitaka/kn/iti/iti.1.001-027.than",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_metadata",
+      "source_path": "/tipitaka/kn/iti/iti.1.024-027.irel",
+      "requests": 10,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_notice_downgrade",
+      "source_path": "/tipitaka/kn/iti/iti.1.024-027.irel",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_metadata",
+      "source_path": "/tipitaka/kn/iti/iti.2.028-049.than",
+      "requests": 28,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_notice_downgrade",
+      "source_path": "/tipitaka/kn/iti/iti.2.028-049.than",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_metadata",
+      "source_path": "/tipitaka/kn/iti/iti.4.100-112.than",
+      "requests": 19,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_notice_downgrade",
+      "source_path": "/tipitaka/kn/iti/iti.4.100-112.than",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_metadata",
+      "source_path": "/tipitaka/an/an01/an01.049.than",
+      "requests": 11,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_notice_downgrade",
+      "source_path": "/tipitaka/an/an01/an01.049.than",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_metadata",
+      "source_path": "/tipitaka/an/an01/an01.045-046.than",
+      "requests": 9,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_notice_downgrade",
+      "source_path": "/tipitaka/an/an01/an01.045-046.than",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_metadata",
+      "source_path": "/tipitaka/an/an02/an02.031.than",
+      "requests": 9,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_notice_downgrade",
+      "source_path": "/tipitaka/an/an02/an02.031.than",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_metadata",
+      "source_path": "/tipitaka/an/an01/an01.021-040.than",
+      "requests": 27,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_notice_downgrade",
+      "source_path": "/tipitaka/an/an01/an01.021-040.than",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_metadata",
+      "source_path": "/tipitaka/an/an02/an02.125-126.than",
+      "requests": 9,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_notice_downgrade",
+      "source_path": "/tipitaka/an/an02/an02.125-126.than",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_metadata",
+      "source_path": "/tipitaka/an/an05/an05.254.than",
+      "requests": 13,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_notice_downgrade",
+      "source_path": "/tipitaka/an/an05/an05.254.than",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_metadata",
+      "source_path": "/tipitaka/sn/sn56/sn56.102-113.than",
+      "requests": 13,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_notice_downgrade",
+      "source_path": "/tipitaka/sn/sn56/sn56.102-113.than",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_metadata",
+      "source_path": "/tipitaka/sn/sn15/sn15.014.than",
+      "requests": 13,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "reviewed_notice_downgrade",
+      "source_path": "/tipitaka/sn/sn15/sn15.014.than",
+      "requests": 1,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    },
+    {
+      "mode": "withheld_bindings",
+      "requests": 29,
+      "status": "passed",
+      "synthetic_provider_only": true,
+      "real_declaration_metadata": true,
+      "real_network_attempts": 0
+    }
+  ],
+  "scope": "Extracted-package synthetic shared-page contracts and real reviewed-page metadata with simulated providers only. One page, explicit opt-in, no individual/whole-unit alignment, bounded pinned restart, eight input scripts, HTTP/widget and merged AJ metadata without any author-host request. Real reviewed-page metadata/consent/widget refusal/source-drift checks contain no publisher text and make no author-host request."
+}

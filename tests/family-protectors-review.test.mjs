@@ -41,7 +41,7 @@ test('both AN2.9 versions retain exact identity, distinct rights and complete ro
 });
 
 test('Iti42 collection is globally withheld while its independent DT version remains and exact selection never substitutes it',async()=>{
- const u=canon.resolve('iti42').unit;assert.deepEqual(english.available(u).map(l=>l.translation_id),['dt:KN/Iti/iti42']);assert.throws(()=>canon.resolve('https://www.accesstoinsight.org/tipitaka/kn/iti/iti.2.042-049x.irel.html'),/not linked/);let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Must not fetch');};await assert.rejects(english.translation(u,held),/not linked|not available/);await assert.rejects(verifyQuote({text:'Synthetic other-discourse quotation',language:'english',texts:['iti42'],translation_ids:[held]}),/not linked|not available/);assert.equal(calls,0);
+ const u=canon.resolve('iti42').unit;assert.deepEqual(english.available(u).filter(l=>!l.translation_scope).map(l=>l.translation_id),['dt:KN/Iti/iti42']);assert.equal(english.available(u).some(l=>l.translation_id===held),false);assert.throws(()=>canon.resolve('https://www.accesstoinsight.org/tipitaka/kn/iti/iti.2.042-049x.irel.html'),/not linked/);let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Must not fetch');};await assert.rejects(english.translation(u,held),/not linked|not available/);await assert.rejects(verifyQuote({text:'Synthetic other-discourse quotation',language:'english',texts:['iti42'],translation_ids:[held]}),/not linked|not available/);assert.equal(calls,0);
 });
 
 test('ordinary rebuild excludes the noncontiguous Iti collection globally and preserves an unrelated source',()=>{

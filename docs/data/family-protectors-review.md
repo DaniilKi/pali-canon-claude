@@ -105,3 +105,7 @@ metadata/hashes, not publisher text. Installed synthetic contracts passed25
 scenarios; smoke64 and offline evaluations195/195 passed,6live questions skipped.
 Independent source and implementation reviews passed. Full local check and
 exact-head cloud CI remain separate final integration gates.
+
+D202 follow-up: all seven range-filename leads above are now reviewed and
+resolved in the [Itivuttaka attribution audit](iti-range-binding-audit.md).
+The earlier D201 screening statements remain historical.

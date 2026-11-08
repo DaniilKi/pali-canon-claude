@@ -1,0 +1,3041 @@
+{
+  "checked_at_utc": "2026-11-08T13:09:55.905486+00:00",
+  "live": true,
+  "outside_source_tree": false,
+  "passed": 168,
+  "checks": [
+    {
+      "width": "http",
+      "page": "an1.49",
+      "check": "actual metadata preserves exact members; exact scoped retrieval refuses without consent, and ordinary alternatives remain separate"
+    },
+    {
+      "width": "http",
+      "page": "an1.49",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": "http",
+      "page": "an1.45",
+      "check": "actual metadata preserves exact members; exact scoped retrieval refuses without consent, and ordinary alternatives remain separate"
+    },
+    {
+      "width": "http",
+      "page": "an1.45",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": "http",
+      "page": "an2.32",
+      "check": "actual metadata preserves exact members; exact scoped retrieval refuses without consent, and ordinary alternatives remain separate"
+    },
+    {
+      "width": "http",
+      "page": "an2.32",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": "http",
+      "page": "an1.21",
+      "check": "actual metadata preserves exact members; exact scoped retrieval refuses without consent, and ordinary alternatives remain separate"
+    },
+    {
+      "width": "http",
+      "page": "an1.21",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": "http",
+      "page": "an2.125",
+      "check": "actual metadata preserves exact members; exact scoped retrieval refuses without consent, and ordinary alternatives remain separate"
+    },
+    {
+      "width": "http",
+      "page": "an2.125",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": "http",
+      "page": "an5.254",
+      "check": "actual metadata preserves exact members; exact scoped retrieval refuses without consent, and ordinary alternatives remain separate"
+    },
+    {
+      "width": "http",
+      "page": "an5.254",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": "http",
+      "page": "sn56.102",
+      "check": "actual metadata preserves exact members; exact scoped retrieval refuses without consent, and ordinary alternatives remain separate"
+    },
+    {
+      "width": "http",
+      "page": "sn56.102",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": "http",
+      "page": "sn15.14",
+      "check": "actual metadata preserves exact members; exact scoped retrieval refuses without consent, and ordinary alternatives remain separate"
+    },
+    {
+      "width": "http",
+      "page": "sn15.14",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": "http",
+      "page": "iti1",
+      "check": "actual metadata preserves exact members; exact scoped retrieval refuses without consent, and ordinary alternatives remain separate"
+    },
+    {
+      "width": "http",
+      "page": "iti1",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": "http",
+      "page": "iti24",
+      "check": "actual metadata preserves exact members; exact scoped retrieval refuses without consent, and ordinary alternatives remain separate"
+    },
+    {
+      "width": "http",
+      "page": "iti24",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": "http",
+      "page": "iti28",
+      "check": "actual metadata preserves exact members; exact scoped retrieval refuses without consent, and ordinary alternatives remain separate"
+    },
+    {
+      "width": "http",
+      "page": "iti28",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": "http",
+      "page": "iti100",
+      "check": "actual metadata preserves exact members; exact scoped retrieval refuses without consent, and ordinary alternatives remain separate"
+    },
+    {
+      "width": "http",
+      "page": "iti100",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": 390,
+      "page": "an1.49",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an1.49",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "an1.49",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an1.45",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an1.45",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "an1.45",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an2.32",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an2.32",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "an2.32",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an1.21",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an1.21",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "an1.21",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an2.125",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an2.125",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "an2.125",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an5.254",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an5.254",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "an5.254",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "sn56.102",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "sn56.102",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "sn56.102",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "sn15.14",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "sn15.14",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "sn15.14",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "iti1",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "iti1",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 4
+    },
+    {
+      "width": 390,
+      "page": "iti1",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "iti24",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "iti24",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "iti24",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "iti28",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "iti28",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 5
+    },
+    {
+      "width": 390,
+      "page": "iti28",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "iti100",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "iti100",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 4
+    },
+    {
+      "width": 390,
+      "page": "iti100",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an1.49",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an1.49",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "an1.49",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an1.45",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an1.45",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "an1.45",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an2.32",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an2.32",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "an2.32",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an1.21",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an1.21",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "an1.21",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an2.125",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an2.125",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "an2.125",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an5.254",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an5.254",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "an5.254",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "sn56.102",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "sn56.102",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "sn56.102",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "sn15.14",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "sn15.14",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "sn15.14",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "iti1",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "iti1",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 4
+    },
+    {
+      "width": 390,
+      "page": "iti1",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "iti24",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "iti24",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 390,
+      "page": "iti24",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "iti28",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "iti28",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 5
+    },
+    {
+      "width": 390,
+      "page": "iti28",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "iti100",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "iti100",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 4
+    },
+    {
+      "width": 390,
+      "page": "iti100",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an1.49",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an1.49",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "an1.49",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an1.45",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an1.45",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "an1.45",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an2.32",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an2.32",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "an2.32",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an1.21",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an1.21",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "an1.21",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an2.125",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an2.125",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "an2.125",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an5.254",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an5.254",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "an5.254",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "sn56.102",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "sn56.102",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "sn56.102",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "sn15.14",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "sn15.14",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "sn15.14",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "iti1",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "iti1",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 4
+    },
+    {
+      "width": 1280,
+      "page": "iti1",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "iti24",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "iti24",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "iti24",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "iti28",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "iti28",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 5
+    },
+    {
+      "width": 1280,
+      "page": "iti28",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "iti100",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "iti100",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 4
+    },
+    {
+      "width": 1280,
+      "page": "iti100",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an1.49",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an1.49",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "an1.49",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an1.45",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an1.45",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "an1.45",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an2.32",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an2.32",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "an2.32",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an1.21",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an1.21",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "an1.21",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an2.125",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an2.125",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "an2.125",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an5.254",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an5.254",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "an5.254",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "sn56.102",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "sn56.102",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "sn56.102",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "sn15.14",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "sn15.14",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "sn15.14",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "iti1",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "iti1",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 4
+    },
+    {
+      "width": 1280,
+      "page": "iti1",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "iti24",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "iti24",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 1
+    },
+    {
+      "width": 1280,
+      "page": "iti24",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "iti28",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "iti28",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 5
+    },
+    {
+      "width": 1280,
+      "page": "iti28",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "iti100",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "iti100",
+      "check": "keyboard consent and pinned continuations reconstruct exact full publisher page with complete notices and null individual identity",
+      "browser_pages": 4
+    },
+    {
+      "width": 1280,
+      "page": "iti100",
+      "check": "reloading the source requires new explicit consent"
+    }
+  ],
+  "sources": [
+    {
+      "page": "an1.49",
+      "requested_subject": "an1.52",
+      "translation_id": "ati:/tipitaka/an/an01/an01.049.than",
+      "publisher_reference": "AN 1.49–52 (shared publisher page)",
+      "members": [
+        "an1.49",
+        "an1.50",
+        "an1.51",
+        "an1.52"
+      ],
+      "characters": 3683,
+      "http_pages": 4,
+      "text_sha256": "35182e6e8d3990b8cb6ace20602277a5d409fd45c5a44b9e277ec25995084c60",
+      "notice_sha256": "3b8f3fab868dd8176bb2cce37b9e9437bdca790a6a415a0f67ee589ce099b1fe",
+      "scope_sha256": "bf2fca5a6b857f8cf313ef9f01e7e4d937088d9eb52ba3fb8890d214728f7881",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/an/an01/an01.049.than.html"
+    },
+    {
+      "page": "an1.45",
+      "requested_subject": "an1.46",
+      "translation_id": "ati:/tipitaka/an/an01/an01.045-046.than",
+      "publisher_reference": "AN 1.45–46 (shared publisher page)",
+      "members": [
+        "an1.45",
+        "an1.46"
+      ],
+      "characters": 1145,
+      "http_pages": 2,
+      "text_sha256": "7297c6cf82b7abe3f94ad8e6fdc5e8fc1c03a6b3c896a2a1bcf5fa895bef69fd",
+      "notice_sha256": "c6f4d4898e1844091dabb21aa338b492be115913f2af077c2bd57708890a8bfb",
+      "scope_sha256": "0cf6a057f1c0ded3c569a2e71beece92f0597c1d345c0fdb44df7d5856bd09fe",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/an/an01/an01.045-046.than.html"
+    },
+    {
+      "page": "an2.32",
+      "requested_subject": "an2.33",
+      "translation_id": "ati:/tipitaka/an/an02/an02.031.than",
+      "publisher_reference": "ATI AN 2.31–32; indexed AN 2.32–33 (shared page)",
+      "members": [
+        "an2.32",
+        "an2.33"
+      ],
+      "characters": 1778,
+      "http_pages": 2,
+      "text_sha256": "68448c5eba804b236080fbb41641328da982639a295de44058e070ae99bd7495",
+      "notice_sha256": "693ec730c062294a3570512540f883b863bb57f47765b3782199a9a404977d60",
+      "scope_sha256": "8c2314215302c25b00437281a3af46dc4db66599fc1591aebf7e01c9fd80a5de",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/an/an02/an02.031.than.html"
+    },
+    {
+      "page": "an1.21",
+      "requested_subject": "an1.40",
+      "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+      "publisher_reference": "AN 1.21–40 (shared publisher page)",
+      "members": [
+        "an1.21",
+        "an1.22",
+        "an1.23",
+        "an1.24",
+        "an1.25",
+        "an1.26",
+        "an1.27",
+        "an1.28",
+        "an1.29",
+        "an1.30",
+        "an1.31",
+        "an1.32",
+        "an1.33",
+        "an1.34",
+        "an1.35",
+        "an1.36",
+        "an1.37",
+        "an1.38",
+        "an1.39",
+        "an1.40"
+      ],
+      "characters": 3256,
+      "http_pages": 4,
+      "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+      "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+      "scope_sha256": "97589116d588b361438b6ea5db4d27ca2b45d8a77199be466cd6722b7c987ea6",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/an/an01/an01.021-040.than.html"
+    },
+    {
+      "page": "an2.125",
+      "requested_subject": "an2.126",
+      "translation_id": "ati:/tipitaka/an/an02/an02.125-126.than",
+      "publisher_reference": "ATI AN 2.125–126; indexed AN 2.125–126, VRI 126–127 (shared page)",
+      "members": [
+        "an2.125",
+        "an2.126"
+      ],
+      "characters": 3520,
+      "http_pages": 4,
+      "text_sha256": "a5d4d3d63f2166947cbcb1ccaa12883f6fbd90ef4445c73ff1c4441064eff8ec",
+      "notice_sha256": "d96963652b5b6f051df62ac6a54047af61d5f715b1dd3bcfdab4e62bc0b04de7",
+      "scope_sha256": "af5aba23c950eb6804eb68fd23224ce8eca392a216f5aa5e02b399656a48fa87",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/an/an02/an02.125-126.than.html"
+    },
+    {
+      "page": "an5.254",
+      "requested_subject": "an5.265-271",
+      "translation_id": "ati:/tipitaka/an/an05/an05.254.than",
+      "publisher_reference": "ATI AN 5.254–271; six primary VRI source records (shared condensed page)",
+      "members": [
+        "an5.254",
+        "an5.255",
+        "an5.256",
+        "an5.257-263",
+        "an5.264",
+        "an5.265-271"
+      ],
+      "characters": 5052,
+      "http_pages": 6,
+      "text_sha256": "aeb2a28cad2073c8f951b5616c4f7616f07e424b2bf6061604173452fd05a63b",
+      "notice_sha256": "d7bbdbfccd9919fb99adf4124f93144f67d4331d239aa8706b72251b60621abe",
+      "scope_sha256": "0c9e5a9cc76b12528f4b52dd257abea79deadc6a60174937d42a42ebb71a7791",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/an/an05/an05.254.than.html"
+    },
+    {
+      "page": "sn56.102",
+      "requested_subject": "sn56.111-113",
+      "translation_id": "ati:/tipitaka/sn/sn56/sn56.102-113.than",
+      "publisher_reference": "ATI SN 56.102–113; VRI1172–1183 in six primary source records (shared condensed page)",
+      "members": [
+        "sn56.102",
+        "sn56.103",
+        "sn56.104",
+        "sn56.105-107",
+        "sn56.108-110",
+        "sn56.111-113"
+      ],
+      "characters": 2875,
+      "http_pages": 3,
+      "text_sha256": "9cc6b0c063ab2d3220aaaf560bdd46fbb3e9d6ac3f4f54f59657cb92a0a2baf1",
+      "notice_sha256": "d2699fd2c0227a0bd2dd96514d26ae1f3b3978eb2d734ae46a1619cee5d1e8b5",
+      "scope_sha256": "c886df2095592333c1f9229741cae2d0621915df5eb02a93edfd30b2baf9d427",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/sn/sn56/sn56.102-113.than.html"
+    },
+    {
+      "page": "sn15.14",
+      "requested_subject": "sn15.19",
+      "translation_id": "ati:/tipitaka/sn/sn15/sn15.014.than",
+      "publisher_reference": "ATI SN 15.14–19; VRI137–142 (shared condensed page)",
+      "members": [
+        "sn15.14",
+        "sn15.15",
+        "sn15.16",
+        "sn15.17",
+        "sn15.18",
+        "sn15.19"
+      ],
+      "characters": 863,
+      "http_pages": 1,
+      "text_sha256": "8805282c96c3a6ea36486d7c103ec31e8aa17389cc5723809455df9160e02747",
+      "notice_sha256": "efd7ef3720a6fe4fe004ed109e578bc65eb88e130786812ad236d786df93e760",
+      "scope_sha256": "3c644d4842f7c9b83a6c1e1f82b08a2a6186df8e07612a95af7cd9252be73775",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/sn/sn15/sn15.014.than.html"
+    },
+    {
+      "page": "iti1",
+      "requested_subject": "iti27",
+      "translation_id": "ati:/tipitaka/kn/iti/iti.1.001-027.than",
+      "publisher_reference": "ATI Iti 1–27 (shared condensed page)",
+      "members": [
+        "iti1",
+        "iti2",
+        "iti3",
+        "iti4",
+        "iti5",
+        "iti6",
+        "iti7",
+        "iti8",
+        "iti9",
+        "iti10",
+        "iti11",
+        "iti12",
+        "iti13",
+        "iti14",
+        "iti15",
+        "iti16",
+        "iti17",
+        "iti18",
+        "iti19",
+        "iti20",
+        "iti21",
+        "iti22",
+        "iti23",
+        "iti24",
+        "iti25",
+        "iti26",
+        "iti27"
+      ],
+      "characters": 20842,
+      "http_pages": 21,
+      "text_sha256": "a3c9e2aebf2ff3f968e9950d309f6524a2064210313cd7581ce0363d3aaef194",
+      "notice_sha256": "7121ebb1a863ac28d050ba5bd410a3b9e8b1fe48563b0f649f3f91db682c6bb9",
+      "scope_sha256": "2c567189271c822e4a32a5e4751f3120556b88269a2a722bcbc12e429ed26937",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/kn/iti/iti.1.001-027.than.html"
+    },
+    {
+      "page": "iti24",
+      "requested_subject": "iti27",
+      "translation_id": "ati:/tipitaka/kn/iti/iti.1.024-027.irel",
+      "publisher_reference": "ATI Iti 24–27 (shared compilation page, Ireland)",
+      "members": [
+        "iti24",
+        "iti25",
+        "iti26",
+        "iti27"
+      ],
+      "characters": 4897,
+      "http_pages": 5,
+      "text_sha256": "e005de4e3c357b28b72e7463bd50cd8ea9b5819f54135a8b55cc08e7e2a1de41",
+      "notice_sha256": "5722d1fbac4d42d75d7e78001daaca566dbda2c8e3699540b47df2b93de05265",
+      "scope_sha256": "ce488e9345dab7ff9bfb8e2bab2c83e4a0e34af8604123c737bf01808d849132",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/kn/iti/iti.1.024-027.irel.html"
+    },
+    {
+      "page": "iti28",
+      "requested_subject": "iti49",
+      "translation_id": "ati:/tipitaka/kn/iti/iti.2.028-049.than",
+      "publisher_reference": "ATI Iti 28–49 (shared compilation page)",
+      "members": [
+        "iti28",
+        "iti29",
+        "iti30",
+        "iti31",
+        "iti32",
+        "iti33",
+        "iti34",
+        "iti35",
+        "iti36",
+        "iti37",
+        "iti38",
+        "iti39",
+        "iti40",
+        "iti41",
+        "iti42",
+        "iti43",
+        "iti44",
+        "iti45",
+        "iti46",
+        "iti47",
+        "iti48",
+        "iti49"
+      ],
+      "characters": 24731,
+      "http_pages": 25,
+      "text_sha256": "a6ecb0251d5b1c7d7fafb3ab35d74705289ef9763512dc3024baadad59b8d69a",
+      "notice_sha256": "229f7edbccd5a96f789e59b844d38765bcae6f05f41b136f0f4f191902f751bc",
+      "scope_sha256": "6f9da0cb72178f3630ea09a85a067906dcd5f36c9f9fb05767792775e10a3439",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/kn/iti/iti.2.028-049.than.html"
+    },
+    {
+      "page": "iti100",
+      "requested_subject": "iti112",
+      "translation_id": "ati:/tipitaka/kn/iti/iti.4.100-112.than",
+      "publisher_reference": "ATI Iti 100–112 (shared compilation page)",
+      "members": [
+        "iti100",
+        "iti101",
+        "iti102",
+        "iti103",
+        "iti104",
+        "iti105",
+        "iti106",
+        "iti107",
+        "iti108",
+        "iti109",
+        "iti110",
+        "iti111",
+        "iti112"
+      ],
+      "characters": 20955,
+      "http_pages": 21,
+      "text_sha256": "f7c0cfc6b83773ff9c9661100e92ba7f94193a5dc9a0667e85b849fc9863f331",
+      "notice_sha256": "c0181e5a9d21b6c2a34507753cb66c1e018a2d74846345307d4d919a42b6ede2",
+      "scope_sha256": "c357c9da70570e0f47e18e101485f2e6b66720e37b13dbfb1a96e81651730e6b",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/kn/iti/iti.4.100-112.than.html"
+    }
+  ],
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "ati_archive_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "a11y": {
+    "scans": 184,
+    "violations": 0,
+    "results": [
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.49",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.49",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.49",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.45",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.45",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.45",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an2.32",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an2.32",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an2.32",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.21",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.21",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.21",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an2.125",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an2.125",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an2.125",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an5.254",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an5.254",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an5.254",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "sn56.102",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "sn56.102",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "sn56.102",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "sn15.14",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "sn15.14",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "sn15.14",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti1",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti1",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti1",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti1",
+        "state": "real shared page at 6000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti1",
+        "state": "real shared page at 12000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti1",
+        "state": "real shared page at 18000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti24",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti24",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti24",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti28",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti28",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti28",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti28",
+        "state": "real shared page at 6000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti28",
+        "state": "real shared page at 12000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti28",
+        "state": "real shared page at 18000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti28",
+        "state": "real shared page at 24000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti100",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti100",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti100",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti100",
+        "state": "real shared page at 6000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti100",
+        "state": "real shared page at 12000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "iti100",
+        "state": "real shared page at 18000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.49",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.49",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.49",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.45",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.45",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.45",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an2.32",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an2.32",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an2.32",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.21",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.21",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.21",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an2.125",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an2.125",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an2.125",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an5.254",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an5.254",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an5.254",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "sn56.102",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "sn56.102",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "sn56.102",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "sn15.14",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "sn15.14",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "sn15.14",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti1",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti1",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti1",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti1",
+        "state": "real shared page at 6000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti1",
+        "state": "real shared page at 12000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti1",
+        "state": "real shared page at 18000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti24",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti24",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti24",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti28",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti28",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti28",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti28",
+        "state": "real shared page at 6000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti28",
+        "state": "real shared page at 12000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti28",
+        "state": "real shared page at 18000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti28",
+        "state": "real shared page at 24000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti100",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti100",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti100",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti100",
+        "state": "real shared page at 6000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti100",
+        "state": "real shared page at 12000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "iti100",
+        "state": "real shared page at 18000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.49",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.49",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.49",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.45",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.45",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.45",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an2.32",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an2.32",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an2.32",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.21",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.21",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.21",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an2.125",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an2.125",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an2.125",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an5.254",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an5.254",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an5.254",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "sn56.102",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "sn56.102",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "sn56.102",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "sn15.14",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "sn15.14",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "sn15.14",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti1",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti1",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti1",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti1",
+        "state": "real shared page at 6000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti1",
+        "state": "real shared page at 12000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti1",
+        "state": "real shared page at 18000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti24",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti24",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti24",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti28",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti28",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti28",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti28",
+        "state": "real shared page at 6000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti28",
+        "state": "real shared page at 12000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti28",
+        "state": "real shared page at 18000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti28",
+        "state": "real shared page at 24000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti100",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti100",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti100",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti100",
+        "state": "real shared page at 6000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti100",
+        "state": "real shared page at 12000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "iti100",
+        "state": "real shared page at 18000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.49",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.49",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.49",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.45",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.45",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.45",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an2.32",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an2.32",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an2.32",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.21",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.21",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.21",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an2.125",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an2.125",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an2.125",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an5.254",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an5.254",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an5.254",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "sn56.102",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "sn56.102",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "sn56.102",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "sn15.14",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "sn15.14",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "sn15.14",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti1",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti1",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti1",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti1",
+        "state": "real shared page at 6000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti1",
+        "state": "real shared page at 12000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti1",
+        "state": "real shared page at 18000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti24",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti24",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti24",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti28",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti28",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti28",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti28",
+        "state": "real shared page at 6000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti28",
+        "state": "real shared page at 12000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti28",
+        "state": "real shared page at 18000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti28",
+        "state": "real shared page at 24000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti100",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti100",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti100",
+        "state": "real shared page at 0",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti100",
+        "state": "real shared page at 6000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti100",
+        "state": "real shared page at 12000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "iti100",
+        "state": "real shared page at 18000",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      }
+    ]
+  },
+  "limits": "Real current approved-provider responses, through the actual worker-backed HTTP bundle and browser. No publisher text body is stored in this report. No new scholarly alignment/rights approval, human accessibility certification or physical-device claim. Audit contexts alone bypass CSP for axe-core injection."
+}

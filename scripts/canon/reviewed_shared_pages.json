@@ -482,6 +482,540 @@
           "root_blocks_sha256": "6c5f23a9a7945360839c6ccacb12e9f4f9814ba820fdf20cb3d5a9f95d190542"
         }
       ]
+    },
+    {
+      "owner_id": "iti1",
+      "path": "/tipitaka/kn/iti/iti.1.001-027.than",
+      "text_ids": [
+        "iti1",
+        "iti2",
+        "iti3",
+        "iti4",
+        "iti5",
+        "iti6",
+        "iti7",
+        "iti8",
+        "iti9",
+        "iti10",
+        "iti11",
+        "iti12",
+        "iti13",
+        "iti14",
+        "iti15",
+        "iti16",
+        "iti17",
+        "iti18",
+        "iti19",
+        "iti20",
+        "iti21",
+        "iti22",
+        "iti23",
+        "iti24",
+        "iti25",
+        "iti26",
+        "iti27"
+      ],
+      "presentation": "condensed",
+      "english_title": "Itivuttaka: Ones — shared condensed page",
+      "source_reference": "ATI Iti 1–27 (shared condensed page)",
+      "translator": "Ṭhānissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "One publisher page concerning all declared primary Itivuttaka records; sections10–13 are explicitly merged with aversion/delusion/anger/contempt and backward verse references, not omitted. Complete prose/verse topic sequences were reviewed against all roots. Preserve publisher abbreviations, notes, source typos, alternate links and navigation as page material. No individual wording, omissions or per-discourse quotation alignment is verified; never expand Pali. CC BY-NC source terms remain unchanged.",
+      "source_html_sha256": "cd9273e60bd1294b1d788871a307ae12987b52302f6f8d19bb0b15776b7bca1c",
+      "text_sha256": "a3c9e2aebf2ff3f968e9950d309f6524a2064210313cd7581ce0363d3aaef194",
+      "notice_sha256": "7121ebb1a863ac28d050ba5bd410a3b9e8b1fe48563b0f649f3f91db682c6bb9",
+      "pali_segments_sha256": "0401fb9a6f123ed66059e1d9adba027e7a55746fa6b80e0f5cb13111f6ee6aec",
+      "root_units": [
+        {
+          "id": "iti1",
+          "title": "Lobhasuttaṃ",
+          "vri": "1",
+          "root_blocks_sha256": "79594503c631186be0ee56a6930560f367563d871f0df2067e28fa621cb13218"
+        },
+        {
+          "id": "iti2",
+          "title": "Dosasutta",
+          "vri": "2",
+          "root_blocks_sha256": "3581511d382edb53d060010e7aab822917452ff6fe420e23f4c4a8262738c3c3"
+        },
+        {
+          "id": "iti3",
+          "title": "Mohasutta",
+          "vri": "3",
+          "root_blocks_sha256": "b5b644b4f6391c2a8571cfcc0c643dd77a61b517fd87336b9a9b8f0e345a906a"
+        },
+        {
+          "id": "iti4",
+          "title": "Kodhasuttaṃ",
+          "vri": "4",
+          "root_blocks_sha256": "bf546a549b0e42823f926cde334051dba29d2c9cdac346ab714df6e7039fc550"
+        },
+        {
+          "id": "iti5",
+          "title": "Makkhasuttaṃ",
+          "vri": "5",
+          "root_blocks_sha256": "92f0088ed1d4bf5f874ece4aef4d9f70f325d5ec20695ee8cd3700665fc939bb"
+        },
+        {
+          "id": "iti6",
+          "title": "Mānasutta",
+          "vri": "6",
+          "root_blocks_sha256": "35a49b3580507a6bb488a1d7a7efceee88eecf82c2948ae2ae04bbec1d07775d"
+        },
+        {
+          "id": "iti7",
+          "title": "Sabbapariññāsuttaṃ",
+          "vri": "7",
+          "root_blocks_sha256": "2935f249aeebd1785a37e242344ef37c50bcae3566bcbf40a0881fce30e5c721"
+        },
+        {
+          "id": "iti8",
+          "title": "Mānapariññāsuttaṃ",
+          "vri": "8",
+          "root_blocks_sha256": "52f254f70b60f1c3489fbe87af7a874594e4987813824155a6f0af2ece666341"
+        },
+        {
+          "id": "iti9",
+          "title": "Lobhapariññāsuttaṃ",
+          "vri": "9",
+          "root_blocks_sha256": "c1cd510f18543dc62bdfcd60dafd8a9980628312b0623d98fba70cc8bb09efc8"
+        },
+        {
+          "id": "iti10",
+          "title": "Dosapariññāsuttaṃ",
+          "vri": "10",
+          "root_blocks_sha256": "367f1ca74ee3e5653da2c16528ba19dcfa7792383cbfb58eb7f00db75297fb35"
+        },
+        {
+          "id": "iti11",
+          "title": "Mohapariññāsuttaṃ",
+          "vri": "11",
+          "root_blocks_sha256": "cf52d1e71d04437874587727c994d932b57a7bed61a6b5354bf39949b41f5012"
+        },
+        {
+          "id": "iti12",
+          "title": "Kodhapariññāsuttaṃ",
+          "vri": "12",
+          "root_blocks_sha256": "b147e9ea77571d6834e5f3f7bc85add132b9726b2c39353ba811bbedb8cc59ed"
+        },
+        {
+          "id": "iti13",
+          "title": "Makkhapariññāsuttaṃ",
+          "vri": "13",
+          "root_blocks_sha256": "89b8bf42494fdfb085987646268dd9ed51f2c954376e08cc58e737b7894cc54e"
+        },
+        {
+          "id": "iti14",
+          "title": "Avijjānīvaraṇasuttaṃ",
+          "vri": "14",
+          "root_blocks_sha256": "bb3d4879489fd8d15d8de49a262e33de4922f3dff18a33b7431bbe63af4e9598"
+        },
+        {
+          "id": "iti15",
+          "title": "Taṇhāsaṃyojanasuttaṃ",
+          "vri": "15",
+          "root_blocks_sha256": "cfabbae5864abdfcd2e450b46c9a1235b9f64268ad1a2c08e68724ec8b1ccf00"
+        },
+        {
+          "id": "iti16",
+          "title": "Paṭhamasekhasuttaṃ",
+          "vri": "16",
+          "root_blocks_sha256": "2defc9a8cc30e844ca02621e85f90e3c32a94b86b877471b6b9a0ead860307c4"
+        },
+        {
+          "id": "iti17",
+          "title": "Dutiyasekhasuttaṃ",
+          "vri": "17",
+          "root_blocks_sha256": "a04ad5c8f9a1a114661a4e9ea6f035d140e5de0049233e7376b6ab4621e7d77b"
+        },
+        {
+          "id": "iti18",
+          "title": "Saṅghabhedasuttaṃ",
+          "vri": "18",
+          "root_blocks_sha256": "f194d8a85d838727212d7fa5c9e85dc90a5586a68db44757e9a7e90d0a057905"
+        },
+        {
+          "id": "iti19",
+          "title": "Saṅghasāmaggīsuttaṃ",
+          "vri": "19",
+          "root_blocks_sha256": "1f948222cd0ea97e85b2d0d1694ed7482d616ecef4699d5a6cb941b37601cd09"
+        },
+        {
+          "id": "iti20",
+          "title": "Paduṭṭhacittasuttaṃ",
+          "vri": "20",
+          "root_blocks_sha256": "d8c37c47035d2336478d3563c0a9a82b3b751fd22d517436e0d0b1b671cbd5ac"
+        },
+        {
+          "id": "iti21",
+          "title": "Pasannacittasuttaṃ",
+          "vri": "21",
+          "root_blocks_sha256": "8a900f34cd930bf0ae17f8b20f379c1e50177d2c8e9de18680fff8f40f7d0435"
+        },
+        {
+          "id": "iti22",
+          "title": "Mettasuttaṃ",
+          "vri": "22",
+          "root_blocks_sha256": "50e75e667b9367bc69bfbd257b1cd47c0186c1c6ec4df40ce4dc5d0f2b4801b3"
+        },
+        {
+          "id": "iti23",
+          "title": "Ubhayatthasuttaṃ",
+          "vri": "23",
+          "root_blocks_sha256": "fecb878d39973cc74936df3dcdc805db1e1b8ef6f50294f2b51d5e5eeef65ed4"
+        },
+        {
+          "id": "iti24",
+          "title": "Aṭṭhipuñjasuttaṃ",
+          "vri": "24",
+          "root_blocks_sha256": "ab3b2c0a866e719c3b303fe7cba22d8eeeed35316df47bc7879fb39ff17faad2"
+        },
+        {
+          "id": "iti25",
+          "title": "Musāvādasuttaṃ",
+          "vri": "25",
+          "root_blocks_sha256": "e4e74854448047f53dd622091e73595ef9c3180d060dfea3fc9afab7ced8cc69"
+        },
+        {
+          "id": "iti26",
+          "title": "Dānasutta",
+          "vri": "26",
+          "root_blocks_sha256": "5baaf56a238d6cf8d011b2dee41dd57ec66b12bab6df3a7aba4ac6cb29e24f6e"
+        },
+        {
+          "id": "iti27",
+          "title": "Mettābhāvanāsuttaṃ",
+          "vri": "27",
+          "root_blocks_sha256": "4b972705261d83cd660c23ce0afcdd73db6d6e7acf7a1d3e44375cbdb697fa3a"
+        }
+      ]
+    },
+    {
+      "owner_id": "iti24",
+      "path": "/tipitaka/kn/iti/iti.1.024-027.irel",
+      "text_ids": [
+        "iti24",
+        "iti25",
+        "iti26",
+        "iti27"
+      ],
+      "presentation": "compilation",
+      "english_title": "Itivuttaka: Ones — Ireland shared compilation",
+      "source_reference": "ATI Iti 24–27 (shared compilation page, Ireland)",
+      "translator": "John D. Ireland",
+      "license": "BPS",
+      "mapping_note": "One publisher page concerning all declared primary Itivuttaka records. Complete prose/verse topic sequences were reviewed against all roots. Preserve publisher abbreviations, notes, source typos, alternate links and navigation as page material. No individual wording, omissions or per-discourse quotation alignment is verified; never expand Pali. Retain the complete BPS free-distribution, attribution and limited-reprint notice; these are not CC terms.",
+      "source_html_sha256": "dab7bb6268fd15ef1cae4a076da402722fdae3cf258ea567088b8a3da0c56a2a",
+      "text_sha256": "e005de4e3c357b28b72e7463bd50cd8ea9b5819f54135a8b55cc08e7e2a1de41",
+      "notice_sha256": "5722d1fbac4d42d75d7e78001daaca566dbda2c8e3699540b47df2b93de05265",
+      "pali_segments_sha256": "951e1ddd7f7ceb6c9485d139f66b0a18589991e32e358133f66ac7d209820b39",
+      "root_units": [
+        {
+          "id": "iti24",
+          "title": "Aṭṭhipuñjasuttaṃ",
+          "vri": "24",
+          "root_blocks_sha256": "ab3b2c0a866e719c3b303fe7cba22d8eeeed35316df47bc7879fb39ff17faad2"
+        },
+        {
+          "id": "iti25",
+          "title": "Musāvādasuttaṃ",
+          "vri": "25",
+          "root_blocks_sha256": "e4e74854448047f53dd622091e73595ef9c3180d060dfea3fc9afab7ced8cc69"
+        },
+        {
+          "id": "iti26",
+          "title": "Dānasutta",
+          "vri": "26",
+          "root_blocks_sha256": "5baaf56a238d6cf8d011b2dee41dd57ec66b12bab6df3a7aba4ac6cb29e24f6e"
+        },
+        {
+          "id": "iti27",
+          "title": "Mettābhāvanāsuttaṃ",
+          "vri": "27",
+          "root_blocks_sha256": "4b972705261d83cd660c23ce0afcdd73db6d6e7acf7a1d3e44375cbdb697fa3a"
+        }
+      ]
+    },
+    {
+      "owner_id": "iti28",
+      "path": "/tipitaka/kn/iti/iti.2.028-049.than",
+      "text_ids": [
+        "iti28",
+        "iti29",
+        "iti30",
+        "iti31",
+        "iti32",
+        "iti33",
+        "iti34",
+        "iti35",
+        "iti36",
+        "iti37",
+        "iti38",
+        "iti39",
+        "iti40",
+        "iti41",
+        "iti42",
+        "iti43",
+        "iti44",
+        "iti45",
+        "iti46",
+        "iti47",
+        "iti48",
+        "iti49"
+      ],
+      "presentation": "compilation",
+      "english_title": "Itivuttaka: Twos — shared compilation",
+      "source_reference": "ATI Iti 28–49 (shared compilation page)",
+      "translator": "Ṭhānissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "One publisher page concerning all declared primary Itivuttaka records. Complete prose/verse topic sequences were reviewed against all roots. Preserve publisher abbreviations, notes, source typos, alternate links and navigation as page material. No individual wording, omissions or per-discourse quotation alignment is verified; never expand Pali. CC BY-NC source terms remain unchanged.",
+      "source_html_sha256": "8d067c500550e224c8daef1c5a66363e2777f8c4bfd99f05226680dd12dbd9ea",
+      "text_sha256": "a6ecb0251d5b1c7d7fafb3ab35d74705289ef9763512dc3024baadad59b8d69a",
+      "notice_sha256": "229f7edbccd5a96f789e59b844d38765bcae6f05f41b136f0f4f191902f751bc",
+      "pali_segments_sha256": "fb62d7ec644daa9607b30d3bfed2842c27591fc57b120b5174ff59ce53efad49",
+      "root_units": [
+        {
+          "id": "iti28",
+          "title": "Dukkhavihārasuttaṃ",
+          "vri": "28",
+          "root_blocks_sha256": "5bc3b92f6f4ee7ae3d3498e84a3c8e1e0816f5271b11e508dc2dcee0499eb2de"
+        },
+        {
+          "id": "iti29",
+          "title": "Sukhavihārasuttaṃ",
+          "vri": "29",
+          "root_blocks_sha256": "8f514cb9798ef7aada504c63d02cbc93e3ed5ed8fe8a233dffe68066cac6d71a"
+        },
+        {
+          "id": "iti30",
+          "title": "Tapanīyasuttaṃ",
+          "vri": "30",
+          "root_blocks_sha256": "5c5bf5e74f4071bfe67afdec90edc38d1018cb2c54853c18cee38c313264e978"
+        },
+        {
+          "id": "iti31",
+          "title": "Atapanīyasuttaṃ",
+          "vri": "31",
+          "root_blocks_sha256": "0dc6392c304d6e2b02f9454f48350b344b542b48c85cd1f50ddeb428b5cfe385"
+        },
+        {
+          "id": "iti32",
+          "title": "Paṭhamasīlasuttaṃ",
+          "vri": "32",
+          "root_blocks_sha256": "2fddf1919748061641b3d4063d186fa6ad40b745a2e5022c01e65429e08a9fe1"
+        },
+        {
+          "id": "iti33",
+          "title": "Dutiyasīlasuttaṃ",
+          "vri": "33",
+          "root_blocks_sha256": "c280b453a332927692c182d06939bab3d2205c84e28551106b1b16f63f82b321"
+        },
+        {
+          "id": "iti34",
+          "title": "Ātāpīsuttaṃ",
+          "vri": "34",
+          "root_blocks_sha256": "824e4c59d6d6a20de41ae0f84acf733ad1a26fe07cc8528614ad75557dd2e7d9"
+        },
+        {
+          "id": "iti35",
+          "title": "Paṭhamajananakuhanasutta",
+          "vri": "35",
+          "root_blocks_sha256": "f023b3f25791a86834c4195a2536284cfe39f5185d04f85bf10aa4e7393a235d"
+        },
+        {
+          "id": "iti36",
+          "title": "Dutiyajananakuhanasutta",
+          "vri": "36",
+          "root_blocks_sha256": "2c06387cf310554d7a12a171460186cc303f190fbea5f3448edd68bea551890c"
+        },
+        {
+          "id": "iti37",
+          "title": "Somanassasuttaṃ",
+          "vri": "37",
+          "root_blocks_sha256": "39e774f6586877c39db3e6926f9635826245027b8a053b3b60f17fb0f70491cc"
+        },
+        {
+          "id": "iti38",
+          "title": "Vitakkasuttaṃ",
+          "vri": "38",
+          "root_blocks_sha256": "83a90181c06d8584d953440b2eea5f353b5378e17d908d88f6cf1711065ed680"
+        },
+        {
+          "id": "iti39",
+          "title": "Desanāsuttaṃ",
+          "vri": "39",
+          "root_blocks_sha256": "f614eb92d35c81626a34bea7920a9c7fde1f7e143ac2b83f48e11bd356dc401e"
+        },
+        {
+          "id": "iti40",
+          "title": "Vijjāsuttaṃ",
+          "vri": "40",
+          "root_blocks_sha256": "591c813cf27fd7cb3c6cb844acc0b68c35e7fc13b38d6bbf73d15f2125b31b5f"
+        },
+        {
+          "id": "iti41",
+          "title": "Paññāparihīnasuttaṃ",
+          "vri": "41",
+          "root_blocks_sha256": "bfbde06d5ab408c6ae4a2237eaca4835d83a2f8a12c3002fedd2ecd8f909c09e"
+        },
+        {
+          "id": "iti42",
+          "title": "Sukkadhammasuttaṃ",
+          "vri": "42",
+          "root_blocks_sha256": "2dc66485a9671bc15759d7d52211b0ca457a6ed322f833fcafd34e3601b63842"
+        },
+        {
+          "id": "iti43",
+          "title": "Ajātasuttaṃ",
+          "vri": "43",
+          "root_blocks_sha256": "aa23057f4b5d8ff63dcf149099b66476c7d7f256841b17ef4f6b9e088edfb356"
+        },
+        {
+          "id": "iti44",
+          "title": "Nibbānadhātusuttaṃ",
+          "vri": "44",
+          "root_blocks_sha256": "fd51ffea480d1cb8895855579bd1790ee9f2afee9a1eda45a498e880bba00103"
+        },
+        {
+          "id": "iti45",
+          "title": "Paṭisallānasuttaṃ",
+          "vri": "45",
+          "root_blocks_sha256": "37bfd09cfc08869cdecfcaf98a501436a21feed4fcb8141bc7056df347d58204"
+        },
+        {
+          "id": "iti46",
+          "title": "Sikkhānisaṃsasuttaṃ",
+          "vri": "46",
+          "root_blocks_sha256": "1533dad3f0e3de37cce2c9c34385d3627bff958ec9e82da1f824946165505f4c"
+        },
+        {
+          "id": "iti47",
+          "title": "Jāgariyasuttaṃ",
+          "vri": "47",
+          "root_blocks_sha256": "ec5af24d473df13286bac1e345b45cbf1e3ec018f5f53758f1a0bc12e456cedf"
+        },
+        {
+          "id": "iti48",
+          "title": "Āpāyikasuttaṃ",
+          "vri": "48",
+          "root_blocks_sha256": "d08be2fe7475d4c0bcfd252d2ec2c5ba4d9fda29cb2f87bf2584041fd83b8ecb"
+        },
+        {
+          "id": "iti49",
+          "title": "Diṭṭhigatasuttaṃ",
+          "vri": "49",
+          "root_blocks_sha256": "f4e1558b95413ccb9f8335127a62494497509d0abd278771451e8b0108d9ea46"
+        }
+      ]
+    },
+    {
+      "owner_id": "iti100",
+      "path": "/tipitaka/kn/iti/iti.4.100-112.than",
+      "text_ids": [
+        "iti100",
+        "iti101",
+        "iti102",
+        "iti103",
+        "iti104",
+        "iti105",
+        "iti106",
+        "iti107",
+        "iti108",
+        "iti109",
+        "iti110",
+        "iti111",
+        "iti112"
+      ],
+      "presentation": "compilation",
+      "english_title": "Itivuttaka: Fours — shared compilation",
+      "source_reference": "ATI Iti 100–112 (shared compilation page)",
+      "translator": "Ṭhānissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "One publisher page concerning all declared primary Itivuttaka records. Complete prose/verse topic sequences were reviewed against all roots. Preserve publisher abbreviations, notes, source typos, alternate links and navigation as page material. No individual wording, omissions or per-discourse quotation alignment is verified; never expand Pali. CC BY-NC source terms remain unchanged.",
+      "source_html_sha256": "b695570537a9a00a11238a849fed0480725ffe929716110e4307bc304d3ab8f3",
+      "text_sha256": "f7c0cfc6b83773ff9c9661100e92ba7f94193a5dc9a0667e85b849fc9863f331",
+      "notice_sha256": "c0181e5a9d21b6c2a34507753cb66c1e018a2d74846345307d4d919a42b6ede2",
+      "pali_segments_sha256": "4da45135f6837fc2b54a1185eb0dd586f9dc128c5fe80e18e3fe33f1d02c53c8",
+      "root_units": [
+        {
+          "id": "iti100",
+          "title": "Brāhmaṇadhammayāgasuttaṃ",
+          "vri": "100",
+          "root_blocks_sha256": "065edf2b8acc65324455b14300f809b0db17dad9d05cff47acfddfa718f1e079"
+        },
+        {
+          "id": "iti101",
+          "title": "Sulabhasuttaṃ",
+          "vri": "101",
+          "root_blocks_sha256": "0606f7fb49518fc394f7e820e8bde16769323c91a158e81a3bfd85e5b8a53565"
+        },
+        {
+          "id": "iti102",
+          "title": "Āsavakkhayasuttaṃ",
+          "vri": "102",
+          "root_blocks_sha256": "075bfd9779368f2b4690b935d41e640417581443b555c332434fbfd0578b316c"
+        },
+        {
+          "id": "iti103",
+          "title": "Samaṇabrāhmaṇasuttaṃ",
+          "vri": "103",
+          "root_blocks_sha256": "481956228e1ae0bdf54ac41a9f865c07c9f1a8a73f7d2cbe28896f969a0ffd2b"
+        },
+        {
+          "id": "iti104",
+          "title": "Sīlasampannasuttaṃ",
+          "vri": "104",
+          "root_blocks_sha256": "7eda561877b1f99d91bee0d31efb8ac715aed6b2b425ce2fd229437b62f5d7c5"
+        },
+        {
+          "id": "iti105",
+          "title": "Taṇhuppādasuttaṃ",
+          "vri": "105",
+          "root_blocks_sha256": "b9dc39a9936efa34940aa69fc1aa1cad071993109380163e1369daabdb05c76c"
+        },
+        {
+          "id": "iti106",
+          "title": "Sabrahmakasuttaṃ",
+          "vri": "106",
+          "root_blocks_sha256": "924bfa474b1a64ff09c40ffd308fb8cfc7ad124e6da84d9d21316cd872af3aec"
+        },
+        {
+          "id": "iti107",
+          "title": "Bahukārasuttaṃ",
+          "vri": "107",
+          "root_blocks_sha256": "64d0438b91f7251a47eec9852ddff6acfd76e18b6556b3e81d816edc456c2b60"
+        },
+        {
+          "id": "iti108",
+          "title": "Kuhasutta",
+          "vri": "108",
+          "root_blocks_sha256": "3b7108d0d42d1b553291bf9fc4c3109af36f62000e823d322d7d40548c6989e8"
+        },
+        {
+          "id": "iti109",
+          "title": "Nadīsotasuttaṃ",
+          "vri": "109",
+          "root_blocks_sha256": "f0a1d9ef333009d9cab63a33338ba6d60981a61618ed73c2fcfa5ae100655937"
+        },
+        {
+          "id": "iti110",
+          "title": "Carasutta",
+          "vri": "110",
+          "root_blocks_sha256": "59cad18188a3d59c2bceebb50650cb79a1fab9cdbdb173b4abb7f31c7ac47398"
+        },
+        {
+          "id": "iti111",
+          "title": "Sampannasīlasuttaṃ",
+          "vri": "111",
+          "root_blocks_sha256": "4c01ca477bf322cac8a318d2a967dd38caf7dfb9e0bdf7533a94be4b23f8f278"
+        },
+        {
+          "id": "iti112",
+          "title": "Lokasutta",
+          "vri": "112",
+          "root_blocks_sha256": "43c597043c901b6b6b811d7462d96751a6e7491a055c80ab1b80308db88bb083"
+        }
+      ]
     }
   ]
 }

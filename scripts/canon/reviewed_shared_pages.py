@@ -26,7 +26,7 @@ def manifest_rows(manifest=MANIFEST):
                 or r['path'] in paths or r.get('owner_id') in owners
                 or not 2 <= len(ids) <= 32 or len(set(ids)) != len(ids) or ids[0] != r.get('owner_id')
                 or r.get('presentation') not in ('compilation', 'condensed')
-                or r.get('license') != 'CC-BY-NC' or not r.get('translator') or not r.get('mapping_note')
+                or r.get('license') not in ('CC-BY-NC', 'BPS') or not r.get('translator') or not r.get('mapping_note')
                 or not r.get('source_reference') or len(r['source_reference']) > 200
                 or any(not SHA.fullmatch(r.get(k, '')) for k in ('source_html_sha256','text_sha256','notice_sha256','pali_segments_sha256'))):
             raise ValueError('Invalid or duplicate reviewed shared page')

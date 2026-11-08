@@ -98,6 +98,14 @@ notices and citations remain in live reading, with edition/editorial differences
 disclosed. No English bodies are bundled. See the
 [batch review](docs/data/ati-an-training-and-growth.md).
 
+D202 exposes the exact ATI Itivuttaka Ones1–27, Twos28–49 and Fours100–112
+pages as shared publisher sources, with Ṭhānissaro’s complete ©2001 CC BY-NC4.0
+notices. Ireland’s Ones24–27 compilation carries the complete ©1997 BPS notice
+(free distribution, derivative/source attribution, full licence and ≤50 reprints),
+not CC. Text/notice pins, explicit consent and page-level identities remain
+mandatory. Three other multi-discourse bindings remain withheld; no source terms
+were broadened. See [source audit](docs/data/iti-range-binding-audit.md).
+
 ## Access to Insight indexes (bundled topic index)
 
 `server/data/topics.json` holds topic names, cross-references and links taken from Access to Insight's [General Index](https://www.accesstoinsight.org/index-subject.html) and [Numerical Index](https://www.accesstoinsight.org/index-number.html), read from commit `45fedca341497120651efa20e756b04a13e61089` of [bcbsit/ati](https://github.com/bcbsit/ati). The text of both pages is “by Access to Insight” and licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); the attribution and licence are returned with every `topic` and `list_topics` result. Only names and links are kept, and each sutta link is mapped to a canon ID by this project. Documents linked from the indexes keep their own terms.
