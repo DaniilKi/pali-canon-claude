@@ -1,0 +1,315 @@
+{
+  "passed": 32,
+  "outside_source_tree": false,
+  "checks": [
+    {
+      "width": 390,
+      "check": "phone passage starts in the viewport; desktop controls remain exposed and current-page resume is hidden"
+    },
+    {
+      "width": 390,
+      "check": "keyboard-accessible finder opens the actual source and closes only on narrow layouts"
+    },
+    {
+      "width": 390,
+      "check": "study disclosure closes after selection with focus on source choices and no lost P\u0101li"
+    },
+    {
+      "width": 390,
+      "check": "largest supported reading text remains usable without horizontal overflow"
+    },
+    {
+      "width": 390,
+      "check": "resume remains available away from the current reading and reopens the same source"
+    },
+    {
+      "width": 390,
+      "check": "search uses a useful generic tab title without exposing query text in the title"
+    },
+    {
+      "width": 390,
+      "check": "exact deep-linked passage positioning survives compact layout and programmatic route focus"
+    },
+    {
+      "width": 390,
+      "check": "breakpoint changes preserve explicit scope consent and restore focus when controls collapse"
+    },
+    {
+      "width": 390,
+      "check": "phone passage starts in the viewport; desktop controls remain exposed and current-page resume is hidden"
+    },
+    {
+      "width": 390,
+      "check": "keyboard-accessible finder opens the actual source and closes only on narrow layouts"
+    },
+    {
+      "width": 390,
+      "check": "study disclosure closes after selection with focus on source choices and no lost P\u0101li"
+    },
+    {
+      "width": 390,
+      "check": "largest supported reading text remains usable without horizontal overflow"
+    },
+    {
+      "width": 390,
+      "check": "resume remains available away from the current reading and reopens the same source"
+    },
+    {
+      "width": 390,
+      "check": "search uses a useful generic tab title without exposing query text in the title"
+    },
+    {
+      "width": 390,
+      "check": "exact deep-linked passage positioning survives compact layout and programmatic route focus"
+    },
+    {
+      "width": 390,
+      "check": "breakpoint changes preserve explicit scope consent and restore focus when controls collapse"
+    },
+    {
+      "width": 1280,
+      "check": "phone passage starts in the viewport; desktop controls remain exposed and current-page resume is hidden"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard-accessible finder opens the actual source and closes only on narrow layouts"
+    },
+    {
+      "width": 1280,
+      "check": "study disclosure closes after selection with focus on source choices and no lost P\u0101li"
+    },
+    {
+      "width": 1280,
+      "check": "largest supported reading text remains usable without horizontal overflow"
+    },
+    {
+      "width": 1280,
+      "check": "resume remains available away from the current reading and reopens the same source"
+    },
+    {
+      "width": 1280,
+      "check": "search uses a useful generic tab title without exposing query text in the title"
+    },
+    {
+      "width": 1280,
+      "check": "exact deep-linked passage positioning survives compact layout and programmatic route focus"
+    },
+    {
+      "width": 1280,
+      "check": "breakpoint changes preserve explicit scope consent and restore focus when controls collapse"
+    },
+    {
+      "width": 1280,
+      "check": "phone passage starts in the viewport; desktop controls remain exposed and current-page resume is hidden"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard-accessible finder opens the actual source and closes only on narrow layouts"
+    },
+    {
+      "width": 1280,
+      "check": "study disclosure closes after selection with focus on source choices and no lost P\u0101li"
+    },
+    {
+      "width": 1280,
+      "check": "largest supported reading text remains usable without horizontal overflow"
+    },
+    {
+      "width": 1280,
+      "check": "resume remains available away from the current reading and reopens the same source"
+    },
+    {
+      "width": 1280,
+      "check": "search uses a useful generic tab title without exposing query text in the title"
+    },
+    {
+      "width": 1280,
+      "check": "exact deep-linked passage positioning survives compact layout and programmatic route focus"
+    },
+    {
+      "width": 1280,
+      "check": "breakpoint changes preserve explicit scope consent and restore focus when controls collapse"
+    }
+  ],
+  "metrics": [
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "first_passage_y": 487.5625,
+      "aside_height": 106.59375
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "first_passage_y": 487.5625,
+      "aside_height": 106.59375
+    },
+    {
+      "width": 1280,
+      "height": 900,
+      "theme": "light",
+      "first_passage_y": 439.96875,
+      "aside_height": 1011.640625
+    },
+    {
+      "width": 1280,
+      "height": 900,
+      "theme": "dark",
+      "first_passage_y": 439.96875,
+      "aside_height": 1011.640625
+    }
+  ],
+  "a11y": {
+    "scans": 16,
+    "violations": 0,
+    "results": [
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "reading chrome",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "after find",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "study controls expanded",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "scope review after resize",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "reading chrome",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "after find",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "study controls expanded",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "scope review after resize",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "reading chrome",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "after find",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "study controls expanded",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "scope review after resize",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "reading chrome",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "after find",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "study controls expanded",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "scope review after resize",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      }
+    ]
+  },
+  "limits": "Actual bundled source and shared-compilation metadata. Default text size used for fold metrics; no universal fold guarantee for all titles/heights/fonts. No English body retrieval, physical device, human accessibility or true browser-zoom certification. Only a11y contexts bypass CSP."
+}

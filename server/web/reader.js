@@ -762,17 +762,36 @@
     }
     target.append(box);
   }
-  function heading(eyebrow, title) {
+  function heading(eyebrow, title, tabTitle = title) {
     view.append(el("p", eyebrow, "eyebrow"), el("h2", title));
+    document.title = String(tabTitle).slice(0, 160) + " \xB7 P\u0101li Library";
   }
+  var narrowReading = window.matchMedia("(max-width: 760px)");
+  function responsivePanels() {
+    for (const panel of document.querySelectorAll("#find-panel, .study-actions")) {
+      const summary = panel.querySelector(":scope > summary"), active = document.activeElement;
+      panel.open = !narrowReading.matches;
+      if (narrowReading.matches && panel.contains(active) && active !== summary) summary.focus({ preventScroll: true });
+      else if (!narrowReading.matches && active === summary) panel.querySelector("input, button, a, select")?.focus({ preventScroll: true });
+    }
+  }
+  function closeFinder() {
+    if (narrowReading.matches) {
+      const panel = $("find-panel"), focused = panel.contains(document.activeElement);
+      panel.open = false;
+      if (focused) $("content").focus({ preventScroll: true });
+    }
+  }
+  if (narrowReading.addEventListener) narrowReading.addEventListener("change", responsivePanels);
+  else narrowReading.addListener(responsivePanels);
+  responsivePanels();
   function focusHeading() {
     $("content").focus({ preventScroll: true });
   }
   function updateResume() {
-    if (typeof local.last === "string" && /^#read\?/.test(local.last)) {
-      $("resume").href = local.last;
-      $("resume").hidden = false;
-    }
+    const valid = typeof local.last === "string" && /^#read\?/.test(local.last);
+    $("resume").hidden = !valid || location.hash === local.last;
+    if (valid) $("resume").href = local.last;
   }
   function preferences() {
     const size = Math.max(16, Math.min(30, Number(local.font) || 21));
@@ -853,7 +872,7 @@
     $("search-scope").value = scope;
     const offset = offsetOf(args), data = await tool(scope === "commentary" ? "search_commentary" : scope === "post" ? "search_post_canonical" : "search_texts", { query, offset, limit: 15, script: $("script").value });
     if (token !== epoch) return;
-    heading(scope === "canon" ? "SEARCH THE CANON" : scope === "commentary" ? "SEARCH COMMENTARY \xB7 NOT CANON" : "SEARCH LATER WORKS \xB7 NOT CANON", "Results for \u201C" + query + "\u201D");
+    heading(scope === "canon" ? "SEARCH THE CANON" : scope === "commentary" ? "SEARCH COMMENTARY \xB7 NOT CANON" : "SEARCH LATER WORKS \xB7 NOT CANON", "Results for \u201C" + query + "\u201D", "Search results");
     notes(data);
     if (data.expanded_from_english) view.append(el("p", "English keywords expanded into P\u0101li: " + JSON.stringify(data.expanded_from_english), "notice"));
     const seen = /* @__PURE__ */ new Set(), cards = el("div", void 0, "cards");
@@ -921,18 +940,31 @@
     view.append(el("p", `Segments ${offset + 1}\u2013${offset + data.returned} of ${data.total_segments}`, "muted"));
     const toolbar = el("div", void 0, "toolbar");
     toolbar.append(link("Back to library", route("browse", { node: "canon" }), "button"));
-    if (kind === "canon") {
-      toolbar.append(button("English sources", () => translations(data, uid, token)), button("Traditional commentary", () => commentary(uid, token)), button("Related texts", () => relatedTexts(data.text_id || uid, token)));
-    }
-    toolbar.append(button("Copy reading link", async () => {
+    const copy = button("Copy reading link", async () => {
       try {
         await navigator.clipboard.writeText(location.href);
         status.textContent = "Reading link copied.";
       } catch {
         status.textContent = "Copy the link from your browser\u2019s address bar.";
       }
-    }));
+    });
+    if (kind === "canon") {
+      const panel = el("details", void 0, "study-actions");
+      panel.append(el("summary", "Study & sources"));
+      const tools = el("div", void 0, "toolbar");
+      const invoke = (action) => () => {
+        if (narrowReading.matches) panel.open = false;
+        action();
+        const target = $("study");
+        target.tabIndex = -1;
+        target.focus();
+      };
+      tools.append(button("English sources", invoke(() => translations(data, uid, token))), button("Traditional commentary", invoke(() => commentary(uid, token))), button("Related texts", invoke(() => relatedTexts(data.text_id || uid, token))), copy);
+      panel.append(tools);
+      toolbar.append(panel);
+    } else toolbar.append(copy);
     view.append(toolbar);
+    responsivePanels();
     const additions = el("section");
     additions.id = "study";
     additions.setAttribute("aria-live", "polite");
@@ -1469,6 +1501,8 @@
     }
     const token = ++epoch;
     ++studyEpoch;
+    closeFinder();
+    updateResume();
     view.replaceChildren();
     status.textContent = "Opening the library\u2026";
     const [page, query = ""] = location.hash.slice(1).split("?"), args = new URLSearchParams(query);

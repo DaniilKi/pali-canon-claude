@@ -13,3 +13,11 @@ main:focus{outline:none}
 .import-preview{margin:18px 0;overflow-wrap:anywhere}.import-preview:empty{display:none}.import-preview h3:focus{outline:none}input[type=file]{display:block;width:100%;margin-top:8px}
 
 .daily-picker{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}.daily-picker input,.daily-picker select{display:block}.daily-reading{padding:20px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}.daily-reading .passage{margin:10px 0 20px}.daily-reading h3{overflow-wrap:anywhere}
+
+.find-panel>summary,.study-actions>summary{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:8px;background:var(--wash);color:var(--ink)}.study-actions{flex:1 1 170px;min-width:0}.study-actions>.toolbar{margin:10px 0 0}.study-actions[open]>summary{margin-bottom:10px}
+@media(min-width:761px){.find-panel>summary,.study-actions>summary{display:none}.study-actions>.toolbar{margin:0}}
+@media(max-width:760px){aside .find-panel-body>.eyebrow,aside .find-panel-body>h1,aside .find-panel-body>p:not(.eyebrow){display:none}.find-panel-body .collections{margin-bottom:12px}.study-actions>.toolbar{padding:10px;border:1px solid var(--line);border-radius:8px}.find-panel-body{padding-top:8px}}
+
+.find-panel-body>p:not(.eyebrow){color:var(--muted);font-size:14px}
+@media(max-width:760px){aside{padding-block:12px}main{padding-top:12px}#status:empty{min-height:0}.toolbar{margin-block:8px}.segment-label{margin-bottom:8px}}
+@media(min-width:761px){.study-actions,.study-actions>.toolbar{display:contents}}

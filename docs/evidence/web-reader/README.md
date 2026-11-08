@@ -1,6 +1,8 @@
 # Standalone web-reader evidence
 
-Latest [daily-reading acceptance](DAILY_READING.md) adds the existing dated source rotation, exact previews and UTC refresh, with 36 browser and 36 installed-package checks plus 12 accessibility scans.
+Latest [compact-reading acceptance](COMPACT_READING.md) records measured phone fold improvements, native disclosures, responsive focus and preserved source consent; 33 browser/package checks and 16 new accessibility scans.
+
+The [daily-reading acceptance](DAILY_READING.md) adds the existing dated source rotation, exact previews and UTC refresh, with 36 browser and 36 installed-package checks plus 12 accessibility scans.
 
 The independent [bookmark restore and CI acceptance](BOOKMARK_IMPORT.md) records all four successful b15fc13 workflows and the subsequent local restore feature.
 

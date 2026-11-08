@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Repeatable axe-core DOM audit. CSP is unchanged and tested separately; only the audit context allows injection."""
+from web_reader_test_helpers import read_tool, find_control
 import argparse, json, os, pathlib, socket, subprocess, time, urllib.request
 from playwright.sync_api import sync_playwright
 ROOT=pathlib.Path(__file__).resolve().parents[1]
@@ -28,7 +29,7 @@ try:
      data=page.evaluate("async()=>await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})")
      results.append({'width':width,'theme':theme,'route':route,'violations':[{'id':v['id'],'impact':v['impact'],'description':v['description'],'targets':[n['target'] for n in v['nodes']]} for v in data['violations']],'manual_review_rules':[v['id'] for v in data['incomplete']]})
     for label in ['Study words in dhp183/1','Related texts']:
-     page.goto(base+'/#read?uid=dhp183'); page.get_by_role('button',name=label,exact=True).wait_for(); page.get_by_role('button',name=label,exact=True).click(); page.locator('#study h3').wait_for()
+     page.goto(base+'/#read?uid=dhp183'); read_tool(page, label).wait_for(); read_tool(page, label).click(); page.locator('#study h3').wait_for()
      page.add_script_tag(path=str(ROOT/'node_modules/axe-core/axe.min.js'))
      data=page.evaluate("async()=>await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})")
      results.append({'width':width,'theme':theme,'route':'#read?uid=dhp183','study':label,'violations':[{'id':v['id'],'impact':v['impact'],'description':v['description'],'targets':[n['target'] for n in v['nodes']]} for v in data['violations']],'manual_review_rules':[v['id'] for v in data['incomplete']]})

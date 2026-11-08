@@ -61,9 +61,19 @@ function provenance(data, target = view) {
   }
   target.append(box);
 }
-function heading(eyebrow, title) { view.append(el('p', eyebrow, 'eyebrow'), el('h2', title)); }
+function heading(eyebrow, title, tabTitle = title) { view.append(el('p', eyebrow, 'eyebrow'), el('h2', title)); document.title = String(tabTitle).slice(0, 160) + ' · Pāli Library'; }
+const narrowReading = window.matchMedia('(max-width: 760px)');
+function responsivePanels() {
+  for (const panel of document.querySelectorAll('#find-panel, .study-actions')) {
+    const summary = panel.querySelector(':scope > summary'), active = document.activeElement; panel.open = !narrowReading.matches;
+    if (narrowReading.matches && panel.contains(active) && active !== summary) summary.focus({ preventScroll: true });
+    else if (!narrowReading.matches && active === summary) panel.querySelector('input, button, a, select')?.focus({ preventScroll: true });
+  }
+}
+function closeFinder() { if (narrowReading.matches) { const panel = $('find-panel'), focused = panel.contains(document.activeElement); panel.open = false; if (focused) $('content').focus({ preventScroll: true }); } }
+if (narrowReading.addEventListener) narrowReading.addEventListener('change', responsivePanels); else narrowReading.addListener(responsivePanels); responsivePanels();
 function focusHeading() { $('content').focus({ preventScroll: true }); }
-function updateResume() { if (typeof local.last === 'string' && /^#read\?/.test(local.last)) { $('resume').href = local.last; $('resume').hidden = false; } }
+function updateResume() { const valid = typeof local.last === 'string' && /^#read\?/.test(local.last); $('resume').hidden = !valid || location.hash === local.last; if (valid) $('resume').href = local.last; }
 function preferences() {
   const size = Math.max(16, Math.min(30, Number(local.font) || 21));
   document.documentElement.style.setProperty('--reading', size + 'px'); $('font-size').value = size;
@@ -106,7 +116,7 @@ async function search(args, token) {
   const query = (args.get('q') || '').trim(); if (!query) throw new Error('Enter words or a title to search.');
   const scope = ['commentary', 'post'].includes(args.get('scope')) ? args.get('scope') : 'canon'; $('search-scope').value = scope;
   const offset = offsetOf(args), data = await tool(scope === 'commentary' ? 'search_commentary' : scope === 'post' ? 'search_post_canonical' : 'search_texts', { query, offset, limit: 15, script: $('script').value }); if (token !== epoch) return;
-  heading(scope === 'canon' ? 'SEARCH THE CANON' : scope === 'commentary' ? 'SEARCH COMMENTARY · NOT CANON' : 'SEARCH LATER WORKS · NOT CANON', 'Results for “' + query + '”'); notes(data);
+  heading(scope === 'canon' ? 'SEARCH THE CANON' : scope === 'commentary' ? 'SEARCH COMMENTARY · NOT CANON' : 'SEARCH LATER WORKS · NOT CANON', 'Results for “' + query + '”', 'Search results'); notes(data);
   if (data.expanded_from_english) view.append(el('p', 'English keywords expanded into Pāli: ' + JSON.stringify(data.expanded_from_english), 'notice'));
   const seen = new Set(), cards = el('div', undefined, 'cards');
   for (const item of [...(data.title_matches || []), ...(data.results || data.matches || [])]) {
@@ -153,8 +163,13 @@ async function read(args, token) {
   notes(data); view.append(el('p', `Segments ${offset + 1}–${offset + data.returned} of ${data.total_segments}`, 'muted'));
   const toolbar = el('div', undefined, 'toolbar');
   toolbar.append(link('Back to library', route('browse', { node: 'canon' }), 'button'));
-  if (kind === 'canon') { toolbar.append(button('English sources', () => translations(data, uid, token)), button('Traditional commentary', () => commentary(uid, token)), button('Related texts', () => relatedTexts(data.text_id || uid, token))); }
-  toolbar.append(button('Copy reading link', async () => { try { await navigator.clipboard.writeText(location.href); status.textContent = 'Reading link copied.'; } catch { status.textContent = 'Copy the link from your browser’s address bar.'; } })); view.append(toolbar);
+  const copy = button('Copy reading link', async () => { try { await navigator.clipboard.writeText(location.href); status.textContent = 'Reading link copied.'; } catch { status.textContent = 'Copy the link from your browser’s address bar.'; } });
+  if (kind === 'canon') {
+    const panel = el('details', undefined, 'study-actions'); panel.append(el('summary', 'Study & sources')); const tools = el('div', undefined, 'toolbar');
+    const invoke = action => () => { if (narrowReading.matches) panel.open = false; action(); const target = $('study'); target.tabIndex = -1; target.focus(); };
+    tools.append(button('English sources', invoke(() => translations(data, uid, token))), button('Traditional commentary', invoke(() => commentary(uid, token))), button('Related texts', invoke(() => relatedTexts(data.text_id || uid, token))), copy); panel.append(tools); toolbar.append(panel);
+  } else toolbar.append(copy);
+  view.append(toolbar); responsivePanels();
   const additions = el('section'); additions.id = 'study'; additions.setAttribute('aria-live', 'polite'); view.append(additions);
   const passages = el('section'); passages.setAttribute('aria-label', 'Pāli passage');
   for (const segment of data.segments || []) {
@@ -403,7 +418,7 @@ function about() {
 }
 async function render() {
   if (location.hash === '#content' && view.childElementCount) { $('content').focus(); return; }
-  const token = ++epoch; ++studyEpoch; view.replaceChildren(); status.textContent = 'Opening the library…';
+  const token = ++epoch; ++studyEpoch; closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
   const [page, query = ''] = location.hash.slice(1).split('?'), args = new URLSearchParams(query);
   try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'plans') await plans(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
     if (token !== epoch) return; status.textContent = storageOK ? '' : 'Browser storage is unavailable; export your personal data before closing this tab.'; focusHeading();

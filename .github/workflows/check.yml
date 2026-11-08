@@ -113,6 +113,10 @@ jobs:
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-daily-check.py --report standalone-daily.report.json
       - name: Audit dated reading screens in both themes
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-daily-check.py --a11y --report standalone-daily-a11y.report.json
+      - name: Check compact phone reading and responsive focus
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-compact-check.py --report standalone-compact.report.json
+      - name: Audit compact reading disclosures in both themes
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-compact-check.py --a11y --report standalone-compact-a11y.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -129,6 +133,8 @@ jobs:
             standalone-import-a11y.report.json
             standalone-daily.report.json
             standalone-daily-a11y.report.json
+            standalone-compact.report.json
+            standalone-compact-a11y.report.json
           if-no-files-found: warn
   check:
     name: Node ${{ matrix.node }} / ${{ matrix.os }}
