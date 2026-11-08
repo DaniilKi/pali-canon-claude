@@ -1547,6 +1547,162 @@
         }
       ],
       "reason": "Exact complete-root/source/rights review, not PTS-only screening. Mother ATI scope does not lift DT hold. IrelandAN2.9adds alternative to preservedThanissaro, not firstEnglish. Whole totals netunchanged; eightsharedpages48records. Queue51/4screeningopportunities remain unapproved."
+    },
+    {
+      "decision": "D202",
+      "accepted_links": 0,
+      "newly_covered_units": [],
+      "newly_shared_only_units": [
+        "iti11",
+        "iti12",
+        "iti13"
+      ],
+      "activated_shared_pages": [
+        {
+          "owner_id": "iti1",
+          "path": "tipitaka/kn/iti/iti.1.001-027.than.html",
+          "subject_ids": [
+            "iti1",
+            "iti2",
+            "iti3",
+            "iti4",
+            "iti5",
+            "iti6",
+            "iti7",
+            "iti8",
+            "iti9",
+            "iti10",
+            "iti11",
+            "iti12",
+            "iti13",
+            "iti14",
+            "iti15",
+            "iti16",
+            "iti17",
+            "iti18",
+            "iti19",
+            "iti20",
+            "iti21",
+            "iti22",
+            "iti23",
+            "iti24",
+            "iti25",
+            "iti26",
+            "iti27"
+          ],
+          "presentation": "condensed",
+          "license": "CC-BY-NC",
+          "individual_alignment_verified": false,
+          "whole_unit_coverage": false
+        },
+        {
+          "owner_id": "iti24",
+          "path": "tipitaka/kn/iti/iti.1.024-027.irel.html",
+          "subject_ids": [
+            "iti24",
+            "iti25",
+            "iti26",
+            "iti27"
+          ],
+          "presentation": "compilation",
+          "license": "BPS",
+          "individual_alignment_verified": false,
+          "whole_unit_coverage": false
+        },
+        {
+          "owner_id": "iti28",
+          "path": "tipitaka/kn/iti/iti.2.028-049.than.html",
+          "subject_ids": [
+            "iti28",
+            "iti29",
+            "iti30",
+            "iti31",
+            "iti32",
+            "iti33",
+            "iti34",
+            "iti35",
+            "iti36",
+            "iti37",
+            "iti38",
+            "iti39",
+            "iti40",
+            "iti41",
+            "iti42",
+            "iti43",
+            "iti44",
+            "iti45",
+            "iti46",
+            "iti47",
+            "iti48",
+            "iti49"
+          ],
+          "presentation": "compilation",
+          "license": "CC-BY-NC",
+          "individual_alignment_verified": false,
+          "whole_unit_coverage": false
+        },
+        {
+          "owner_id": "iti100",
+          "path": "tipitaka/kn/iti/iti.4.100-112.than.html",
+          "subject_ids": [
+            "iti100",
+            "iti101",
+            "iti102",
+            "iti103",
+            "iti104",
+            "iti105",
+            "iti106",
+            "iti107",
+            "iti108",
+            "iti109",
+            "iti110",
+            "iti111",
+            "iti112"
+          ],
+          "presentation": "compilation",
+          "license": "CC-BY-NC",
+          "individual_alignment_verified": false,
+          "whole_unit_coverage": false
+        }
+      ],
+      "withdrawn_ordinary_bindings": [
+        {
+          "owner_id": "iti1",
+          "path": "tipitaka/kn/iti/iti.1.001-027.than.html",
+          "replacement": "reviewed shared scope"
+        },
+        {
+          "owner_id": "iti24",
+          "path": "tipitaka/kn/iti/iti.1.024-027.irel.html",
+          "replacement": "reviewed shared scope"
+        },
+        {
+          "owner_id": "iti28",
+          "path": "tipitaka/kn/iti/iti.2.028-049.than.html",
+          "replacement": "reviewed shared scope"
+        },
+        {
+          "owner_id": "iti50",
+          "path": "tipitaka/kn/iti/iti.3.050-099.than.html",
+          "replacement": "held; DT retained"
+        },
+        {
+          "owner_id": "iti72",
+          "path": "tipitaka/kn/iti/iti.3.072-090x.irel.html",
+          "replacement": "held; DT retained"
+        },
+        {
+          "owner_id": "iti100",
+          "path": "tipitaka/kn/iti/iti.4.100-112.than.html",
+          "replacement": "reviewed shared scope"
+        },
+        {
+          "owner_id": "iti106",
+          "path": "tipitaka/kn/iti/iti.4.106-112x.irel.html",
+          "replacement": "held; DT retained"
+        }
+      ],
+      "reason": "Seven source-level owner misattributions reproduced and independently reviewed; four exact shared pages, three oversized/noncontiguous holds. Whole links2588, unchangeddirect/inherited counts;12sharedpages110distinctsubjects51shared-only. No Pali/individualEnglishreconstruction. Historical51pending/4possiblefirstEnglishscreeningclues unchanged."
     }
   ]
 }

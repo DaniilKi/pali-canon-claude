@@ -74,6 +74,130 @@
         "withdrawn_owner_root_blocks_sha256": "2dc66485a9671bc15759d7d52211b0ca457a6ed322f833fcafd34e3601b63842",
         "method": "Full pinned publisher body and complete Iti42 root reviewed independently. Four source sections42/43/44/49 are not one unit or a contiguous complete range; no remap or BPS relicensing."
       }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/iti/iti.3.050-099.than.html",
+      "status": "withheld-shared-page",
+      "subject_ids": [
+        "iti50"
+      ],
+      "publisher_numbered_passages": [
+        "50",
+        "51",
+        "52",
+        "53",
+        "54",
+        "55",
+        "56",
+        "57",
+        "58",
+        "59",
+        "60",
+        "61",
+        "62",
+        "63",
+        "64",
+        "65",
+        "66",
+        "67",
+        "68",
+        "69",
+        "70",
+        "71",
+        "72",
+        "73",
+        "74",
+        "75",
+        "76",
+        "77",
+        "78",
+        "79",
+        "80",
+        "81",
+        "82",
+        "83",
+        "84",
+        "85",
+        "86",
+        "87",
+        "88",
+        "89",
+        "90",
+        "91",
+        "92",
+        "93",
+        "94",
+        "95",
+        "96",
+        "97",
+        "98",
+        "99"
+      ],
+      "reason": "The publisher page contains fifty discourses, exceeding the current32-member shared contract. Full-page ordinary ownership misattributes other discourses to this one owner. Withhold after every linking pass; no invented contiguous range, split page, member-limit increase or individual alignment is approved. Retain the independent DT owner version.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/iti/iti.3.050-099.than.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "e3ac8a98b82cb95a4310a194eeba0f7f691793ae7f42695cc08b31a1f1450f0d",
+        "text_sha256": "8bcf3ff02d7d8eb1c6458f0cad80c13cd269c112c08c14095abac55836c3db8a",
+        "notice_sha256": "83e12f7e57a3579c7513891287523fd04858bac0534c0eeadee7146839ad6f59",
+        "withdrawn_owner_root_blocks_sha256": "7327eb76efab3b01d160e46c68d2506134c8fb897d8e1283d70bd5b0cfcde21d",
+        "method": "Complete pinned publisher body, explicit section boundaries, full notice, owner/other root content reviewed independently. Exact-version source-level quotation witness reproduced the owner misattribution with fixed local provider; no installed/deployed-before claim."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/iti/iti.3.072-090x.irel.html",
+      "status": "withheld-shared-page",
+      "subject_ids": [
+        "iti72"
+      ],
+      "publisher_numbered_passages": [
+        "72",
+        "75",
+        "82",
+        "84",
+        "90"
+      ],
+      "reason": "The publisher excerpt contains only the distinct noncontiguous sections72,75,82,84,90. Full-page ordinary ownership misattributes other discourses to this one owner. Withhold after every linking pass; no invented contiguous range, split page, member-limit increase or individual alignment is approved. Retain the independent DT owner version.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/iti/iti.3.072-090x.irel.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "0edb0b62a7b26985fe0a4662f72ee417c5a2e528fabd92f311c929c2bfedf165",
+        "text_sha256": "acc6828e768f6057c8418b62169d51ca88d3740bd608bdb5a31314144f9c274f",
+        "notice_sha256": "968d69faf181f529a6eb406f1b4c56f1a8f04ba2f477e55ddba002205cedd3cf",
+        "withdrawn_owner_root_blocks_sha256": "3e58e3121415157808bdb0cfa95690aa9448a6b453c1521538e81044d3604806",
+        "method": "Complete pinned publisher body, explicit section boundaries, full notice, owner/other root content reviewed independently. Exact-version source-level quotation witness reproduced the owner misattribution with fixed local provider; no installed/deployed-before claim."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/iti/iti.4.106-112x.irel.html",
+      "status": "withheld-shared-page",
+      "subject_ids": [
+        "iti106"
+      ],
+      "publisher_numbered_passages": [
+        "106",
+        "109",
+        "112"
+      ],
+      "reason": "The publisher excerpt contains only the distinct noncontiguous sections106,109,112. Full-page ordinary ownership misattributes other discourses to this one owner. Withhold after every linking pass; no invented contiguous range, split page, member-limit increase or individual alignment is approved. Retain the independent DT owner version.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/iti/iti.4.106-112x.irel.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "405eb9a102516563ce08c204d56af004d8fa329eb84bdf076134eb4c4eb130b2",
+        "text_sha256": "ed30335d195a08a61a9a9644bcf5f5226e4dc81fb90b834a36bceb758e97e707",
+        "notice_sha256": "ecee11cb683bbee3e1dcc9a19dda13a70a5b1b618ff47fc31521740c26ab34e0",
+        "withdrawn_owner_root_blocks_sha256": "924bfa474b1a64ff09c40ffd308fb8cfc7ad124e6da84d9d21316cd872af3aec",
+        "method": "Complete pinned publisher body, explicit section boundaries, full notice, owner/other root content reviewed independently. Exact-version source-level quotation witness reproduced the owner misattribution with fixed local provider; no installed/deployed-before claim."
+      }
     }
   ]
 }

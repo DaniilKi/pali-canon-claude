@@ -227,9 +227,9 @@ Open an issue with the source, its licence or terms, where it is published, and 
 
 `search_commentary` and direct `get_commentary` book references expose all 47 commentary books already bundled from the pinned VRI source, including introductions and unaligned material. The VRI terms above are unchanged. Search results and direct book reads identify their source and explicitly do not establish root-text alignment. No English commentary translations or additional source rights are supplied by this feature.
 
-### Reviewed ATI shared publisher pages (D197, D199, D200, D201)
+### Reviewed ATI shared publisher pages (D197, D199, D200, D201, D202)
 
-Five compiled and three condensed publisher pages are separately available by explicit shared-page
+Eight compiled and four condensed publisher pages are separately available by explicit shared-page
 consent. Luminous is documented in the [pilot](data/luminous-shared-page-pilot.md).
 The [Water and Gratitude review](data/paired-shared-page-expansion.md) records
 full individual CC BY-NC 4.0 notices: Water ©2006 Ṭhānissaro Bhikkhu, revised
@@ -258,3 +258,11 @@ adds John D. Ireland’s AN2.9 version under its complete ©1997 BPS free digita
 distribution/limited reprint terms, preserving the existing Ṭhānissaro version.
 The noncontiguous Ireland Itivuttaka42/43/44/49 collection is withheld from
 ordinary Iti42 ownership; the valid dhammatalks Iti42 version remains.
+
+The [seven-page Itivuttaka audit](data/iti-range-binding-audit.md) replaces
+seven incorrect ordinary-owner bindings with four explicitly reviewed shared
+pages and three holds. Ṭhānissaro’s Ones/Twos/Fours pages retain their ©2001
+CC BY-NC4.0 notices, ATI2013-11-30. Ireland’s Ones24–27 compilation retains
+its complete ©1997 BPS notice, ATI2013-11-24, free-distribution/attribution/full-
+notice/limited-reprint conditions; it is not CC. BPS is a reviewed metadata
+label, not blanket approval for other pages. No English bodies are bundled.

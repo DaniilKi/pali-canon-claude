@@ -8,7 +8,7 @@ import {syntheticLink, syntheticText} from '../tests/helpers/partial-translation
 if(process.env.PALI_SCOPE_FIXTURES!=='1'||!process.env.PALI_SCOPE_LEDGER)throw Error('Explicit isolated test configuration required');
 const text=Array(8).fill(syntheticText).join(' '),shared=syntheticShared(),partial=syntheticLink();
 shared.shared_scope.text_sha256=scopeHash(text);partial.partial_scope.text_sha256=scopeHash(text);
-const data=canon.load();data.translations={...data.translations};for(const id of sharedIds)delete data.translations[id];
+const data=canon.load();data.translations=Object.fromEntries(Object.entries(data.translations).map(([id,links])=>[id,links.filter(l=>!Object.hasOwn(l,'shared_scope'))]).filter(([,links])=>links.length));for(const id of sharedIds)delete data.translations[id];
 data.translations[sharedIds[0]]=[shared];data.translations['patthana1.1']=[partial];
 const urls=new Set([shared.url,partial.url]);
 globalThis.fetch=async url=>{if(!urls.has(String(url)))throw Error('Unexpected network request in isolated scope fixture');appendFileSync(process.env.PALI_SCOPE_LEDGER,JSON.stringify({url:String(url)})+'\n');return new Response(`<html><head><title>Synthetic scope fixture</title></head><body><div id="sutta"><p>${text}</p></div><div class="footer">Synthetic test footer</div></body></html>`);};

@@ -54,5 +54,7 @@
     }
   ],
   "baseline_commit": "bdba4d3de177ff248da7961fcae0bb75cd6c6c11",
-  "screened_after_withholding": "/tipitaka/kn/iti/iti.2.042-049x.irel"
+  "screened_after_withholding": "/tipitaka/kn/iti/iti.2.042-049x.irel",
+  "followup_audit": "iti-range-binding-audit.json",
+  "resolution": "D202: all seven source bodies reviewed; four explicit shared pages and three holds. See follow-up for evidence and limits."
 }

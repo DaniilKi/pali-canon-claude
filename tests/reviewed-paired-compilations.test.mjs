@@ -43,8 +43,13 @@ test('all reviewed shared pages keep distinct source identities and deduplicate 
  const text='Synthetic fixture only. Amber lantern by the copper pool.',html=`<!-- BEGIN COPYRIGHTED TEXT CHUNK -->${text}<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) --><div id="F_provenance">Synthetic test-only notice, no licence grant.</div><div id="F_citation">Synthetic attribution.</div>`;
  for(const row of all){const link=structuredClone(saved[row.owner_id].find(l=>l.path===row.path));link.shared_scope.text_sha256=scopeHash(text);link.shared_scope.notice_sha256=scopeHash(english.atiNotice(html));d.translations[row.owner_id]=[link];}
  const fetched=[];globalThis.fetch=async url=>{fetched.push(String(url));return new Response(html);};
- const result=await verifyQuote({text:'Amber lantern by the copper pool',language:'english',texts:all.flatMap(r=>r.text_ids),translation_ids:all.map(r=>'ati:'+r.path),include_shared:true,limit:10});
- assert.equal(result.verdict,'found');assert.equal(result.matches.length,all.length);assert.equal(result.scope.translations_checked.length,all.length);assert.equal(fetched.length,all.length);assert.equal(new Set(fetched).size,all.length);
- assert.deepEqual(new Set(result.matches.map(m=>m.translation_id)),new Set(all.map(r=>'ati:'+r.path)));
- for(const match of result.matches){const row=all.find(r=>'ati:'+r.path===match.translation_id);assert.equal(match.text_id,null);assert.deepEqual(match.unverified_requested_text_ids,row.text_ids);assert.equal(match.whole_unit_coverage,false);}
+ for(let offset=0;offset<all.length;offset+=4){
+  const batch=all.slice(offset,offset+4),requested=[...new Set(batch.flatMap(r=>[r.text_ids[0],r.text_ids.at(-1)]))],before=fetched.length;assert.ok(requested.length<=12);
+  const result=await verifyQuote({text:'Amber lantern by the copper pool',language:'english',texts:requested,translation_ids:batch.map(r=>'ati:'+r.path),include_shared:true,limit:10});
+  assert.equal(result.verdict,'found');assert.equal(result.matches.length,batch.length);assert.equal(result.scope.translations_checked.length,batch.length);assert.equal(fetched.length-before,batch.length);assert.equal(new Set(fetched.slice(before)).size,batch.length);
+  assert.deepEqual(new Set(result.matches.map(m=>m.translation_id)),new Set(batch.map(r=>'ati:'+r.path)));
+  for(const match of result.matches){const row=batch.find(r=>'ati:'+r.path===match.translation_id);assert.equal(match.text_id,null);assert.deepEqual(match.translation_scope.text_ids,row.text_ids);assert.deepEqual(new Set(match.unverified_requested_text_ids),new Set(requested.filter(id=>row.text_ids.includes(id))));assert.equal(match.whole_unit_coverage,false);}
+ }
+ assert.equal(fetched.length,all.length);
+
 });

@@ -1,0 +1,74 @@
+{
+  "status": "all seven owner misattributions prevented",
+  "method": "Same distinctive quotation witnesses and exact publisher snapshots as before; source-level production function, explicit shared consent for approved pages; no installed/deployed network claim.",
+  "cases": [
+    {
+      "owner": "iti1",
+      "translation_id": "ati:/tipitaka/kn/iti/iti.1.001-027.than",
+      "witness_section": "iti2",
+      "quote_sha256": "1da1edf1147e1808053103f43971e6639f9b581eaad5702576e9758e9628b918",
+      "status": "page-level result only",
+      "verdict": "found",
+      "reported_text_id": null,
+      "individual_alignment_verified": false,
+      "source_fetches": 1
+    },
+    {
+      "owner": "iti24",
+      "translation_id": "ati:/tipitaka/kn/iti/iti.1.024-027.irel",
+      "witness_section": "iti25",
+      "quote_sha256": "28869cdbfb0ad4989b92ca0301a859ff2cc490678b280a99cfda8a09541ec15e",
+      "status": "page-level result only",
+      "verdict": "found",
+      "reported_text_id": null,
+      "individual_alignment_verified": false,
+      "source_fetches": 1
+    },
+    {
+      "owner": "iti28",
+      "translation_id": "ati:/tipitaka/kn/iti/iti.2.028-049.than",
+      "witness_section": "iti29",
+      "quote_sha256": "9b12cf0688cb12e290efb1c0cfe124ccb792cf7147944d88d3553776d9c41a9d",
+      "status": "page-level result only",
+      "verdict": "found",
+      "reported_text_id": null,
+      "individual_alignment_verified": false,
+      "source_fetches": 1
+    },
+    {
+      "owner": "iti50",
+      "translation_id": "ati:/tipitaka/kn/iti/iti.3.050-099.than",
+      "witness_section": "iti51",
+      "quote_sha256": "cc5f82f465b4289c21038ed400161ea1668b0281c3189f0e8bc5452d0dfa8182",
+      "status": "withheld exact source rejected before fetch",
+      "source_fetches": 0
+    },
+    {
+      "owner": "iti72",
+      "translation_id": "ati:/tipitaka/kn/iti/iti.3.072-090x.irel",
+      "witness_section": "iti75",
+      "quote_sha256": "89b1c7b70454a7a309d2277e1634ebb2eea9ecbb20200b473cbe07bb1fe4eeb2",
+      "status": "withheld exact source rejected before fetch",
+      "source_fetches": 0
+    },
+    {
+      "owner": "iti100",
+      "translation_id": "ati:/tipitaka/kn/iti/iti.4.100-112.than",
+      "witness_section": "iti101",
+      "quote_sha256": "c5be25209c03fbef18159f29ea1f2a6324ad8f98d263ab643148f772065a6dde",
+      "status": "page-level result only",
+      "verdict": "found",
+      "reported_text_id": null,
+      "individual_alignment_verified": false,
+      "source_fetches": 1
+    },
+    {
+      "owner": "iti106",
+      "translation_id": "ati:/tipitaka/kn/iti/iti.4.106-112x.irel",
+      "witness_section": "iti109",
+      "quote_sha256": "fac0aba7ee14ee6c2a08b35c044968f6fa6f093e97b77b2627f53d0b66207b4f",
+      "status": "withheld exact source rejected before fetch",
+      "source_fetches": 0
+    }
+  ]
+}
