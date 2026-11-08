@@ -1,0 +1,570 @@
+{
+  "checks_passed": 40,
+  "checks": [
+    {
+      "width": 390,
+      "check": "all shared members and limitations shown before consent, with no translation retrieval"
+    },
+    {
+      "width": 390,
+      "check": "shared source is retrieved only after exact pinned consent and remains page-level"
+    },
+    {
+      "width": 390,
+      "check": "shared continuation retains version, requested member, consent, source prefix and mapping"
+    },
+    {
+      "width": 390,
+      "check": "moving to another member requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "check": "partial span is disclosed and never retrieved with whole-unit defaults"
+    },
+    {
+      "width": 390,
+      "check": "partial continuation retains scope and version pins"
+    },
+    {
+      "width": 390,
+      "check": "shared response attributed to one discourse is rejected before display"
+    },
+    {
+      "width": 390,
+      "check": "unsafe continuation cannot switch the source to another discourse"
+    },
+    {
+      "width": 390,
+      "check": "forward compilation metadata receives distinct shared-page review, not individual-translation framing"
+    },
+    {
+      "width": 390,
+      "check": "unknown scope kinds remain withheld without a request"
+    },
+    {
+      "width": 390,
+      "check": "all shared members and limitations shown before consent, with no translation retrieval"
+    },
+    {
+      "width": 390,
+      "check": "shared source is retrieved only after exact pinned consent and remains page-level"
+    },
+    {
+      "width": 390,
+      "check": "shared continuation retains version, requested member, consent, source prefix and mapping"
+    },
+    {
+      "width": 390,
+      "check": "moving to another member requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "check": "partial span is disclosed and never retrieved with whole-unit defaults"
+    },
+    {
+      "width": 390,
+      "check": "partial continuation retains scope and version pins"
+    },
+    {
+      "width": 390,
+      "check": "shared response attributed to one discourse is rejected before display"
+    },
+    {
+      "width": 390,
+      "check": "unsafe continuation cannot switch the source to another discourse"
+    },
+    {
+      "width": 390,
+      "check": "forward compilation metadata receives distinct shared-page review, not individual-translation framing"
+    },
+    {
+      "width": 390,
+      "check": "unknown scope kinds remain withheld without a request"
+    },
+    {
+      "width": 1280,
+      "check": "all shared members and limitations shown before consent, with no translation retrieval"
+    },
+    {
+      "width": 1280,
+      "check": "shared source is retrieved only after exact pinned consent and remains page-level"
+    },
+    {
+      "width": 1280,
+      "check": "shared continuation retains version, requested member, consent, source prefix and mapping"
+    },
+    {
+      "width": 1280,
+      "check": "moving to another member requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "check": "partial span is disclosed and never retrieved with whole-unit defaults"
+    },
+    {
+      "width": 1280,
+      "check": "partial continuation retains scope and version pins"
+    },
+    {
+      "width": 1280,
+      "check": "shared response attributed to one discourse is rejected before display"
+    },
+    {
+      "width": 1280,
+      "check": "unsafe continuation cannot switch the source to another discourse"
+    },
+    {
+      "width": 1280,
+      "check": "forward compilation metadata receives distinct shared-page review, not individual-translation framing"
+    },
+    {
+      "width": 1280,
+      "check": "unknown scope kinds remain withheld without a request"
+    },
+    {
+      "width": 1280,
+      "check": "all shared members and limitations shown before consent, with no translation retrieval"
+    },
+    {
+      "width": 1280,
+      "check": "shared source is retrieved only after exact pinned consent and remains page-level"
+    },
+    {
+      "width": 1280,
+      "check": "shared continuation retains version, requested member, consent, source prefix and mapping"
+    },
+    {
+      "width": 1280,
+      "check": "moving to another member requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "check": "partial span is disclosed and never retrieved with whole-unit defaults"
+    },
+    {
+      "width": 1280,
+      "check": "partial continuation retains scope and version pins"
+    },
+    {
+      "width": 1280,
+      "check": "shared response attributed to one discourse is rejected before display"
+    },
+    {
+      "width": 1280,
+      "check": "unsafe continuation cannot switch the source to another discourse"
+    },
+    {
+      "width": 1280,
+      "check": "forward compilation metadata receives distinct shared-page review, not individual-translation framing"
+    },
+    {
+      "width": 1280,
+      "check": "unknown scope kinds remain withheld without a request"
+    }
+  ],
+  "synthetic_only": true,
+  "a11y": {
+    "scans": 44,
+    "violations": 0,
+    "results": [
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "shared consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "shared page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "partial consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "partial page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "compilation page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "shared consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "shared page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "partial consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "partial page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "compilation page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "shared consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "shared page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "partial consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "partial page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "compilation page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "shared consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "shared page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "partial consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "partial page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "compilation page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      }
+    ],
+    "limitations": "Automated DOM checks only. Audit contexts bypass CSP to inject axe-core; normal scope checks keep production CSP. Human screen-reader and contrast reviews remain."
+  },
+  "limits": "Condensed/partial use actual current MCP/backend validation with in-memory synthetic source records and a non-network publisher fixture. Compilation is a forward UI fixture, not actual backend integration or source approval."
+}

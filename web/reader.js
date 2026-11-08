@@ -1,4 +1,5 @@
 import { localizeText } from '../src/script.mjs';
+import { scopeDescriptor, validateEnglishPage } from './translation-policy.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
@@ -90,7 +91,7 @@ async function browse(args, token) {
     const href = kind === 'commentary' ? route('read', { kind, uid: item.uid }) : kind === 'post' ? route('read', { kind, uid: item.id }) : item.read_with?.book ? route('read', { book: item.read_with.book }) : item.citation ? route('read', { uid: item.id }) : route('browse', { node: item.id });
     const card = link('', href, 'entry'); card.append(el('small', kind === 'canon' ? item.citation || item.pitaka || 'Collection' : kind === 'commentary' ? 'Commentary · not canon' : 'Later work · not canon'), el('strong', item.name || item.title || item.id));
     if (item.texts !== undefined) card.append(el('p', item.texts + ' texts'));
-    if (item.english_available !== undefined) card.append(el('p', item.english_available ? 'English translation linked' : 'Pāli source text'));
+    if (item.english_available !== undefined) card.append(el('p', item.english_available ? 'English source linked' : (item.shared_english_available || item.partial_english_available) ? 'Scoped English source · review required' : 'Pāli source text'));
     cards.append(card);
   }
   view.append(cards); pageControls(data.next_offset, offset ? Math.max(0, offset - limit) : null, n => route('browse', { node, offset: n }));
@@ -138,7 +139,7 @@ async function read(args, token) {
   notes(data); view.append(el('p', `Segments ${offset + 1}–${offset + data.returned} of ${data.total_segments}`, 'muted'));
   const toolbar = el('div', undefined, 'toolbar');
   toolbar.append(link('Back to library', route('browse', { node: 'canon' }), 'button'));
-  if (kind === 'canon') { toolbar.append(button('English translations', () => translations(data, uid, token)), button('Traditional commentary', () => commentary(uid, token)), button('Related texts', () => relatedTexts(data.text_id || uid, token))); }
+  if (kind === 'canon') { toolbar.append(button('English sources', () => translations(data, uid, token)), button('Traditional commentary', () => commentary(uid, token)), button('Related texts', () => relatedTexts(data.text_id || uid, token))); }
   toolbar.append(button('Copy reading link', async () => { try { await navigator.clipboard.writeText(location.href); status.textContent = 'Reading link copied.'; } catch { status.textContent = 'Copy the link from your browser’s address bar.'; } })); view.append(toolbar);
   const additions = el('section'); additions.id = 'study'; additions.setAttribute('aria-live', 'polite'); view.append(additions);
   const passages = el('section'); passages.setAttribute('aria-label', 'Pāli passage');
@@ -157,19 +158,53 @@ async function read(args, token) {
   if (savedVersion) view.prepend(el('p', 'This source revision differs from a saved bookmark. Check its reference before reusing your notes.', 'notice'));
   const ref = args.get('ref'); if (ref) document.getElementById('seg-' + ref.replace(/[^a-z0-9-]/gi, '-'))?.scrollIntoView({ block: 'center' });
 }
-async function translations(data, uid, token) {
-  ++studyEpoch; const target = $('study'); target.replaceChildren(el('h3', 'English translations'));
-  if (!data.english_available?.length) { target.append(el('p', 'No verified English translation is linked to this text. No translation has been generated or substituted.', 'notice')); return; }
-  target.append(el('p', 'English is retrieved from the named source when selected. Paragraphs are not aligned to Pāli segments.', 'muted'));
-  for (const t of data.english_available) target.append(button([t.translator || t.translation_id, t.source, t.reference].filter(Boolean).join(' · '), () => englishPage({ uid, translation: t.translation_id }, token)));
+function scopeSummary(descriptor, target) {
+  const scope = descriptor.scope; target.append(el('h4', descriptor.label));
+  if (descriptor.kind === 'shared_page') {
+    target.append(el('p', 'Publisher reference: ' + scope.source_reference), el('p', 'One page concerns all of these texts. It is not a separately aligned full translation of the currently selected discourse.', 'notice'));
+    const list = el('ul'); for (const id of scope.text_ids) { const li = el('li'); li.append(link(id + ' · canonical Pāli', route('read', { uid: id }))); list.append(li); } target.append(list);
+  } else target.append(el('p', 'Declared Pāli span: ' + scope.first_ref + ' to ' + scope.last_ref), el('p', 'Only this span has a linked translation. The Pāli reader below still shows the selected canonical text, not an aligned or shortened English/Pāli pair.', 'notice'));
+  target.append(el('p', scope.note, 'notice'));
+  const details = el('details'); details.append(el('summary', 'Reviewed scope version')); details.append(el('p', 'Source revision: ' + scope.source_commit), el('p', 'Mapping SHA-256: ' + scope.scope_sha256)); target.append(details);
 }
-async function englishPage(args, token) {
-  const studyToken = ++studyEpoch; const target = $('study'); target.replaceChildren(el('p', 'Retrieving the selected translation…'));
+async function translations(data, uid, token) {
+  ++studyEpoch; const target = $('study'); target.replaceChildren(el('h3', 'English sources'));
+  if (!data.english_available?.length) { target.append(el('p', 'No verified English source is linked to this text. No translation has been generated or substituted.', 'notice')); return; }
+  const context = { uid: data.text_id || uid, citation: data.citation || uid, choices: JSON.parse(JSON.stringify(data.english_available)), accepted: null };
+  target.append(el('p', 'Choose a publisher’s source page. It can cover more than the current Pāli selection; paragraphs are not aligned. Shared and partial sources require a separate scope review before retrieval.', 'muted'));
+  for (const choice of context.choices) {
+    const card = el('article', undefined, 'translation-choice'); card.append(el('h4', choice.translator || choice.translation_id), el('p', [choice.source, choice.reference].filter(Boolean).join(' · '), 'muted'));
+    try {
+      if (typeof choice.translation_id !== 'string' || !/^(dt|ati|aj):.+/.test(choice.translation_id)) throw new Error('This source has no supported exact version identifier. No source was requested.');
+      const descriptor = scopeDescriptor(choice, context.uid);
+      if (descriptor) { card.append(el('p', descriptor.label + ' · not whole-unit coverage', 'notice'), button('Review ' + descriptor.label.toLowerCase(), () => reviewTranslationScope(choice, descriptor, context, token))); }
+      else card.append(button('Read source · ' + [choice.translator, choice.source, choice.reference].filter(Boolean).join(' · '), () => englishPage({ uid: context.uid, translation: choice.translation_id, limit: 6000 }, token, context)));
+    } catch (error) { card.append(el('p', error.message, 'notice')); }
+    target.append(card);
+  }
+}
+function reviewTranslationScope(choice, descriptor, context, token) {
+  ++studyEpoch; const target = studyTarget('Review the source before retrieving it.'); target.replaceChildren(el('h3', 'Review English source scope'));
+  target.append(el('p', 'Pāli selection: ' + context.citation), el('p', [choice.translator, choice.source, choice.reference].filter(Boolean).join(' · ')));
+  scopeSummary(descriptor, target);
+  const label = el('label', undefined, 'consent-row'), checkbox = el('input'); checkbox.type = 'checkbox'; checkbox.id = 'scope-consent';
+  label.append(checkbox, el('span', descriptor.kind === 'shared_page' ? 'I understand this is one shared source page with unverified individual alignment, not a full translation assigned to this one discourse.' : 'I understand this translates only the declared part of the Pāli unit, not the entire unit.'));
+  const read = button(descriptor.kind === 'shared_page' ? 'Read reviewed shared page' : 'Read reviewed partial source', () => { if (checkbox.checked && token === epoch) englishPage({ uid: context.uid, translation: choice.translation_id, limit: 6000, ...descriptor.flags }, token, { ...context, accepted: descriptor }); }); read.disabled = true;
+  checkbox.addEventListener('change', () => { read.disabled = !checkbox.checked; }); target.append(label, read);
+}
+async function englishPage(args, token, context) {
+  const studyToken = ++studyEpoch; const target = studyTarget('Retrieving the selected English source page…');
   try {
     const data = await tool('get_translation', args); if (token !== epoch || studyToken !== studyEpoch) return;
-    target.replaceChildren(el('h3', data.translator || 'English translation')); notes(data, target); target.append(el('p', data.text, 'translation')); provenance(data, target);
-    if (data.continue_with) target.append(button('Next English page →', () => englishPage(data.continue_with.arguments || data.continue_with, token)));
-  } catch (error) { if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el('p', error.message, 'notice'), button('Retry selected translation', () => englishPage(args, token))); }
+    const next = validateEnglishPage(data, args, context), actualChoice = context.choices.find(c => c.translation_id === data.translation_id);
+    target.replaceChildren(el('h3', (context.accepted?.kind === 'shared_page' ? 'Shared English source page · ' : context.accepted ? 'Partial English source · ' : 'English source page · ') + data.translator));
+    target.append(el('p', 'Pāli selection: ' + context.citation + ' · publisher reference: ' + (actualChoice.reference || data.citation), 'muted'), el('p', 'Source version: ' + data.translation_id, 'muted'));
+    if (context.accepted) scopeSummary(context.accepted, target);
+    if (data.translation_id !== args.translation) target.append(el('p', 'The server returned a different listed source version. Read its source and fallback notes before quoting.', 'notice'));
+    notes(data, target); target.append(el('p', data.text, 'translation')); provenance(data, target);
+    if (next) target.append(button('Next English page →', () => englishPage(next, token, context)));
+    target.append(button('Reload passage and review sources', render));
+  } catch (error) { if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el('p', error.message, 'notice'), button('Retry selected source', () => englishPage(args, token, context)), button('Reload passage and review sources', render)); }
 }
 async function commentary(uid, token, offset = 0) {
   const studyToken = ++studyEpoch; const target = $('study'); target.replaceChildren(el('p', 'Opening commentary…'));

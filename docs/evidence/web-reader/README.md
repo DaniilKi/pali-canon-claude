@@ -2,7 +2,9 @@
 
 The feature branch is `feat/standalone-web-reader`, based on corpus checkpoint `f0906bd`. No merge into dev/main or deployment is covered by these receipts.
 
-Start with the [current study-tool acceptance](STUDY_TOOLS.md). It records:
+Start with the [scoped-English acceptance](TRANSLATION_SCOPE.md) for the latest guard and integration limits. Its 20 normal browser checks and 44 additional accessibility scans use explicitly labelled synthetic sources; compilation remains a forward UI fixture.
+
+The [study-tool acceptance](STUDY_TOOLS.md) records the preceding slice:
 
 - 922 passing tests, one skipped, zero failures; production build and 8,544-text audit passed.
 - 64 MCP smoke checks and 201 evaluation questions (six network questions skipped).

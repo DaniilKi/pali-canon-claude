@@ -517,6 +517,58 @@
     return { ...out, ...scriptNote(s), ...inputNote(input) };
   }
 
+  // web/translation-policy.mjs
+  var own = (value, key) => value && Object.hasOwn(value, key);
+  var nonempty = (value) => typeof value === "string" && value.trim().length > 0;
+  var sha = (value) => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
+  var stable = (value) => JSON.stringify(Array.isArray(value) ? value.map((v) => JSON.parse(stable(v))) : value && typeof value === "object" ? Object.fromEntries(Object.keys(value).sort().map((k) => [k, JSON.parse(stable(value[k]))])) : value);
+  var sameScope = (a, b) => stable(a) === stable(b);
+  function scopeDescriptor(choice, requestedId) {
+    if (!own(choice, "translation_scope")) return null;
+    const scope = choice.translation_scope;
+    const fail = () => {
+      throw new Error("This source has an unsupported or incomplete scope declaration. No scoped source was requested. Reload the passage and review the updated sources.");
+    };
+    if (!scope || scope.version !== 1 || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail();
+    if (scope.kind === "shared_page") {
+      const ids = scope.text_ids;
+      const presentation = scope.presentation || (scope.condensed === true ? "condensed" : null);
+      if (!Array.isArray(ids) || ids.length < 2 || ids.length > 32 || ids.some((id) => !nonempty(id) || id.length > 300) || new Set(ids).size !== ids.length || !ids.includes(requestedId) || scope.owner_id !== ids[0] || scope.individual_alignment_verified !== false || !nonempty(scope.source_reference) || !["condensed", "compilation"].includes(presentation) || presentation === "compilation" && !sha(scope.notice_sha256) || own(scope, "condensed") && scope.condensed !== (presentation === "condensed")) fail();
+      return { kind: scope.kind, label: presentation === "compilation" ? "Shared compilation page" : "Shared condensed page", scope: JSON.parse(JSON.stringify(scope)), flags: { allow_shared: true, scope_sha256: scope.scope_sha256 } };
+    }
+    if (scope.kind === "partial_unit") {
+      const prefix = requestedId + "/";
+      if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail();
+      return { kind: scope.kind, label: "Partial-unit source", scope: JSON.parse(JSON.stringify(scope)), flags: { allow_partial: true, scope_sha256: scope.scope_sha256 } };
+    }
+    fail();
+  }
+  function validateEnglishPage(data, args, context) {
+    const offset = args.offset || 0;
+    if (!data || !nonempty(data.text) || !nonempty(data.translation_id) || !nonempty(data.translator) || !nonempty(data.attribution) || !(nonempty(data.license) || data.license && typeof data.license === "object" && nonempty(data.license.name)) || data.offset !== offset) throw new Error("The English source response is incomplete. No translation was displayed.");
+    const choice = context.choices.find((c) => c.translation_id === data.translation_id);
+    if (!choice) throw new Error("The returned English source version was not in the reviewed list. Reload the passage and review sources again.");
+    if (context.accepted) {
+      const accepted = context.accepted;
+      if (data.translation_id !== args.translation || data.whole_unit_coverage !== false || !own(data, "translation_scope") || !sameScope(data.translation_scope, accepted.scope)) throw new Error("The source scope or version changed after review. Reload the passage and give fresh consent; no scoped text was displayed.");
+      if (accepted.kind === "shared_page") {
+        if (args.allow_shared !== true || args.allow_partial === true || data.text_id !== null || data.requested_text_id !== context.uid || data.citation !== accepted.scope.source_reference) throw new Error("A shared page was incorrectly attributed to an individual discourse. No scoped text was displayed.");
+      } else if (args.allow_partial !== true || args.allow_shared === true || data.text_id !== context.uid) throw new Error("The partial source no longer matches the reviewed unit. No scoped text was displayed.");
+      if (args.scope_sha256 !== accepted.scope.scope_sha256) throw new Error("The scope consent is missing its reviewed mapping pin.");
+    } else if (own(data, "translation_scope") || data.whole_unit_coverage === false || own(choice, "translation_scope") || data.text_id !== context.uid || args.allow_shared === true || args.allow_partial === true) throw new Error("This response needs a separate scope review. No partial/shared page was displayed as a whole-text translation.");
+    if (data.next_offset === null || data.next_offset === void 0) {
+      if (data.continue_with != null) throw new Error("The source returned an inconsistent continuation. Reload its first page.");
+      return null;
+    }
+    const next = data.continue_with?.arguments;
+    if (data.continue_with?.name !== "get_translation" || !next || next.uid !== context.uid || next.translation !== data.translation_id || !Number.isSafeInteger(next.offset) || next.offset <= offset || next.offset > 2e6 || next.offset !== data.next_offset || !sha(next.prefix_sha256) || !Number.isInteger(next.limit) || next.limit < 500 || next.limit > 3e4) throw new Error("The source returned an unsafe continuation. No next-page request was made.");
+    if (context.accepted) {
+      const shared = context.accepted.kind === "shared_page";
+      if (next.scope_sha256 !== context.accepted.scope.scope_sha256 || next[shared ? "allow_shared" : "allow_partial"] !== true || next[shared ? "allow_partial" : "allow_shared"] === true) throw new Error("The next page dropped or changed its scope consent. Review the source again.");
+    } else if (next.allow_shared === true || next.allow_partial === true || own(next, "scope_sha256")) throw new Error("The next page unexpectedly changes source scope. Review it separately.");
+    return JSON.parse(JSON.stringify(next));
+  }
+
   // web/reader.js
   var $ = (id) => document.getElementById(id);
   var view = $("view");
@@ -697,7 +749,7 @@
       const card = link("", href, "entry");
       card.append(el("small", kind === "canon" ? item.citation || item.pitaka || "Collection" : kind === "commentary" ? "Commentary \xB7 not canon" : "Later work \xB7 not canon"), el("strong", item.name || item.title || item.id));
       if (item.texts !== void 0) card.append(el("p", item.texts + " texts"));
-      if (item.english_available !== void 0) card.append(el("p", item.english_available ? "English translation linked" : "P\u0101li source text"));
+      if (item.english_available !== void 0) card.append(el("p", item.english_available ? "English source linked" : item.shared_english_available || item.partial_english_available ? "Scoped English source \xB7 review required" : "P\u0101li source text"));
       cards.append(card);
     }
     view.append(cards);
@@ -769,7 +821,7 @@
     const toolbar = el("div", void 0, "toolbar");
     toolbar.append(link("Back to library", route("browse", { node: "canon" }), "button"));
     if (kind === "canon") {
-      toolbar.append(button("English translations", () => translations(data, uid, token)), button("Traditional commentary", () => commentary(uid, token)), button("Related texts", () => relatedTexts(data.text_id || uid, token)));
+      toolbar.append(button("English sources", () => translations(data, uid, token)), button("Traditional commentary", () => commentary(uid, token)), button("Related texts", () => relatedTexts(data.text_id || uid, token)));
     }
     toolbar.append(button("Copy reading link", async () => {
       try {
@@ -820,31 +872,87 @@
     const ref = args.get("ref");
     if (ref) document.getElementById("seg-" + ref.replace(/[^a-z0-9-]/gi, "-"))?.scrollIntoView({ block: "center" });
   }
+  function scopeSummary(descriptor, target) {
+    const scope = descriptor.scope;
+    target.append(el("h4", descriptor.label));
+    if (descriptor.kind === "shared_page") {
+      target.append(el("p", "Publisher reference: " + scope.source_reference), el("p", "One page concerns all of these texts. It is not a separately aligned full translation of the currently selected discourse.", "notice"));
+      const list = el("ul");
+      for (const id of scope.text_ids) {
+        const li = el("li");
+        li.append(link(id + " \xB7 canonical P\u0101li", route("read", { uid: id })));
+        list.append(li);
+      }
+      target.append(list);
+    } else target.append(el("p", "Declared P\u0101li span: " + scope.first_ref + " to " + scope.last_ref), el("p", "Only this span has a linked translation. The P\u0101li reader below still shows the selected canonical text, not an aligned or shortened English/P\u0101li pair.", "notice"));
+    target.append(el("p", scope.note, "notice"));
+    const details = el("details");
+    details.append(el("summary", "Reviewed scope version"));
+    details.append(el("p", "Source revision: " + scope.source_commit), el("p", "Mapping SHA-256: " + scope.scope_sha256));
+    target.append(details);
+  }
   async function translations(data, uid, token) {
     ++studyEpoch;
     const target = $("study");
-    target.replaceChildren(el("h3", "English translations"));
+    target.replaceChildren(el("h3", "English sources"));
     if (!data.english_available?.length) {
-      target.append(el("p", "No verified English translation is linked to this text. No translation has been generated or substituted.", "notice"));
+      target.append(el("p", "No verified English source is linked to this text. No translation has been generated or substituted.", "notice"));
       return;
     }
-    target.append(el("p", "English is retrieved from the named source when selected. Paragraphs are not aligned to P\u0101li segments.", "muted"));
-    for (const t of data.english_available) target.append(button([t.translator || t.translation_id, t.source, t.reference].filter(Boolean).join(" \xB7 "), () => englishPage({ uid, translation: t.translation_id }, token)));
+    const context = { uid: data.text_id || uid, citation: data.citation || uid, choices: JSON.parse(JSON.stringify(data.english_available)), accepted: null };
+    target.append(el("p", "Choose a publisher\u2019s source page. It can cover more than the current P\u0101li selection; paragraphs are not aligned. Shared and partial sources require a separate scope review before retrieval.", "muted"));
+    for (const choice of context.choices) {
+      const card = el("article", void 0, "translation-choice");
+      card.append(el("h4", choice.translator || choice.translation_id), el("p", [choice.source, choice.reference].filter(Boolean).join(" \xB7 "), "muted"));
+      try {
+        if (typeof choice.translation_id !== "string" || !/^(dt|ati|aj):.+/.test(choice.translation_id)) throw new Error("This source has no supported exact version identifier. No source was requested.");
+        const descriptor = scopeDescriptor(choice, context.uid);
+        if (descriptor) {
+          card.append(el("p", descriptor.label + " \xB7 not whole-unit coverage", "notice"), button("Review " + descriptor.label.toLowerCase(), () => reviewTranslationScope(choice, descriptor, context, token)));
+        } else card.append(button("Read source \xB7 " + [choice.translator, choice.source, choice.reference].filter(Boolean).join(" \xB7 "), () => englishPage({ uid: context.uid, translation: choice.translation_id, limit: 6e3 }, token, context)));
+      } catch (error) {
+        card.append(el("p", error.message, "notice"));
+      }
+      target.append(card);
+    }
   }
-  async function englishPage(args, token) {
+  function reviewTranslationScope(choice, descriptor, context, token) {
+    ++studyEpoch;
+    const target = studyTarget("Review the source before retrieving it.");
+    target.replaceChildren(el("h3", "Review English source scope"));
+    target.append(el("p", "P\u0101li selection: " + context.citation), el("p", [choice.translator, choice.source, choice.reference].filter(Boolean).join(" \xB7 ")));
+    scopeSummary(descriptor, target);
+    const label = el("label", void 0, "consent-row"), checkbox = el("input");
+    checkbox.type = "checkbox";
+    checkbox.id = "scope-consent";
+    label.append(checkbox, el("span", descriptor.kind === "shared_page" ? "I understand this is one shared source page with unverified individual alignment, not a full translation assigned to this one discourse." : "I understand this translates only the declared part of the P\u0101li unit, not the entire unit."));
+    const read2 = button(descriptor.kind === "shared_page" ? "Read reviewed shared page" : "Read reviewed partial source", () => {
+      if (checkbox.checked && token === epoch) englishPage({ uid: context.uid, translation: choice.translation_id, limit: 6e3, ...descriptor.flags }, token, { ...context, accepted: descriptor });
+    });
+    read2.disabled = true;
+    checkbox.addEventListener("change", () => {
+      read2.disabled = !checkbox.checked;
+    });
+    target.append(label, read2);
+  }
+  async function englishPage(args, token, context) {
     const studyToken = ++studyEpoch;
-    const target = $("study");
-    target.replaceChildren(el("p", "Retrieving the selected translation\u2026"));
+    const target = studyTarget("Retrieving the selected English source page\u2026");
     try {
       const data = await tool("get_translation", args);
       if (token !== epoch || studyToken !== studyEpoch) return;
-      target.replaceChildren(el("h3", data.translator || "English translation"));
+      const next = validateEnglishPage(data, args, context), actualChoice = context.choices.find((c) => c.translation_id === data.translation_id);
+      target.replaceChildren(el("h3", (context.accepted?.kind === "shared_page" ? "Shared English source page \xB7 " : context.accepted ? "Partial English source \xB7 " : "English source page \xB7 ") + data.translator));
+      target.append(el("p", "P\u0101li selection: " + context.citation + " \xB7 publisher reference: " + (actualChoice.reference || data.citation), "muted"), el("p", "Source version: " + data.translation_id, "muted"));
+      if (context.accepted) scopeSummary(context.accepted, target);
+      if (data.translation_id !== args.translation) target.append(el("p", "The server returned a different listed source version. Read its source and fallback notes before quoting.", "notice"));
       notes(data, target);
       target.append(el("p", data.text, "translation"));
       provenance(data, target);
-      if (data.continue_with) target.append(button("Next English page \u2192", () => englishPage(data.continue_with.arguments || data.continue_with, token)));
+      if (next) target.append(button("Next English page \u2192", () => englishPage(next, token, context)));
+      target.append(button("Reload passage and review sources", render));
     } catch (error) {
-      if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el("p", error.message, "notice"), button("Retry selected translation", () => englishPage(args, token)));
+      if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el("p", error.message, "notice"), button("Retry selected source", () => englishPage(args, token, context)), button("Reload passage and review sources", render));
     }
   }
   async function commentary(uid, token, offset = 0) {

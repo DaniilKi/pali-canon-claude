@@ -97,6 +97,10 @@ jobs:
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-browser-check.py > standalone-reader.report.json
       - name: Audit standalone reader accessibility in both themes
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-a11y-check.py --report standalone-a11y.report.json
+      - name: Check shared and partial translation consent with isolated synthetic sources
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-scope-check.py --report standalone-scope.report.json
+      - name: Audit scoped-source screens in both themes
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-scope-check.py --a11y --report standalone-scope-a11y.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -105,6 +109,8 @@ jobs:
             widget-browser.report.json
             standalone-reader.report.json
             standalone-a11y.report.json
+            standalone-scope.report.json
+            standalone-scope-a11y.report.json
           if-no-files-found: warn
   check:
     name: Node ${{ matrix.node }} / ${{ matrix.os }}
