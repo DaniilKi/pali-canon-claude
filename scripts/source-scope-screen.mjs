@@ -19,12 +19,22 @@ export function scopeScreen(data=canon.load(),{review={rows:[]}}={}) {
     assertRegisteredPartial(link,data.byId.get(owner),data.partialRegistry||{links:[]});
     if(isScoped(link)||link.match==='reviewed-story')continue;
     const reasons=[];
-    const extents=ranges(link.reference),publisherExtent=extents[0];
-    if(extents.length)reasons.push('publisher-reference range');
+    const u=data.byId.get(owner),rootExtent=ranges(u?.vri)[0];
+    const extents=ranges(link.reference);
+    // Only explicit verse-collection references: never interpret PTS pages,
+    // chapter:poem citations or bare numbers as individually aligned verses.
+    const single=['thag','thig','snp','pv','vv'].includes(u?.collection)
+      ? String(link.reference||'').match(/^\s*(Thag|Thig|Sn|Snp|Pv|Vv)\s+(\d+)\s*$/i) : null;
+    const prefix={thag:'thag',thig:'thig',sn:'snp',snp:'snp',pv:'pv',vv:'vv'};
+    const singleVerse=single&&prefix[single[1].toLowerCase()]===u.collection;
+    if(singleVerse)extents.push({first:Number(single[2]),last:Number(single[2]),width:1});
+    const publisherExtent=extents[0];
+    if(extents.length&&!singleVerse)reasons.push('publisher-reference range');
     if(/\d+-\d+x?\./.test(link.path||''))reasons.push('publisher-filename range');
     if(/whole-samyutta|whole-collection/.test(link.match||''))reasons.push('collection-level match');
+    if(singleVerse)reasons.push('explicit single-verse reference');
+    if(/\bexcerpt\b/i.test(link.english||''))reasons.push('publisher excerpt label');
     if(!reasons.length)continue;
-    const u=data.byId.get(owner),rootExtent=ranges(u?.vri)[0];
     const malformed=extents.some(r=>r.width<=0);
     const verse=['thag','thig','snp','pv','vv'].includes(u?.collection)&&publisherExtent&&rootExtent;
     const discontinuous=verse&&/\d\s*[,;]\s*\d/u.test(link.reference||'');

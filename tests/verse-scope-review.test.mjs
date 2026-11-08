@@ -23,9 +23,9 @@ test('fifteen primary reviews pin complete roots and source-specific notices wit
  const dantika=retained.filter(r=>r.owner==='thig3.4');assert.equal(dantika.length,2);assert.ok(dantika.some(r=>r.publisher_licence_label==='BPS'));assert.ok(dantika.some(r=>r.publisher_licence_label==='CC-BY-NC'));
 });
 
-test('remaining excerpt holds refuse retrieval while the separately reviewed Sirimanda partial needs fresh exact consent',async()=>{
+test('remaining excerpt holds refuse retrieval while the separately reviewed contiguous partials needs fresh exact consent',async()=>{
  let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Must not fetch held source');};
- assert.equal(stillHeld.length,9);
+ assert.equal(stillHeld.length,6);
  for(const r of held.filter(r=>!stillHeld.includes(r))){const u=canon.resolve(r.owner).unit,choice=english.available(u).find(l=>l.translation_id===r.translation_id);assert.equal(choice.translation_scope.kind,'partial_unit');await assert.rejects(english.translation(u,r.translation_id),/partial unit/);}
  for(const r of stillHeld){const u=canon.resolve(r.owner).unit,choices=english.available(u);assert.equal(choices.some(l=>l.translation_id===r.translation_id),false);assert.ok(choices.some(l=>l.translation_id.startsWith('dt:')&&!l.translation_scope));assert.throws(()=>canon.resolve(r.url),/not linked/);await assert.rejects(english.translation(u,r.translation_id),/not linked|not available|No English/);await assert.rejects(verifyQuote({text:'Synthetic fixture only amber lantern copper window',language:'english',texts:[r.owner],translation_ids:[r.translation_id],include_partial:true,include_shared:true}),/not linked|not available|No English/);}
  assert.equal(calls,0);
@@ -43,7 +43,7 @@ test('Somamitta owns his opening verse and Herannakani remains a complete separa
 });
 
 test('screen prioritizes narrow/discontinuous leads, normalizes abbreviated bibliography and expires stale review annotations',()=>{
- const d=canon.load(),review=structuredClone(audit),out=scopeScreen(d,{review});assert.equal(out.count,221);assert.equal(out.reviewed_retained_snapshots,5);assert.equal(out.unreviewed_leads,216);assert.ok(out.rows.filter(r=>r.review_status==='reviewed-retained-at-snapshot').every(r=>r.triage==='reviewed retained snapshot'));
+ const d=canon.load(),review=structuredClone(audit),out=scopeScreen(d,{review});assert.equal(out.count,223);assert.equal(out.reviewed_retained_snapshots,5);assert.equal(out.unreviewed_leads,218);assert.ok(out.rows.filter(r=>r.review_status==='reviewed-retained-at-snapshot').every(r=>r.triage==='reviewed retained snapshot'));
  assert.ok(!out.rows.some(r=>r.translation_id==='ati:/tipitaka/kn/thag/thag.10.02.olen'));
  review.rows[0].root.root_blocks_sha256='0'.repeat(64);let stale=scopeScreen(d,{review}).rows.find(r=>r.translation_id===review.rows[0].translation_id);assert.equal(stale.review_status,'stale-reviewed-snapshot');assert.equal(stale.triage,'inspect wider verse-reference extent');
  review.rows[0].root.root_blocks_sha256=audit.rows[0].root.root_blocks_sha256;review.rows[0].link_metadata_sha256='0'.repeat(64);stale=scopeScreen(d,{review}).rows.find(r=>r.translation_id===review.rows[0].translation_id);assert.equal(stale.review_status,'stale-reviewed-snapshot');
@@ -79,7 +79,7 @@ with tempfile.TemporaryDirectory() as tmp:
  # Prove these fixtures exercise the post-linker guard, not an earlier non-match.
  code="import sys;sys.path.insert(0,'scripts/canon');import reviewed_exclusions;reviewed_exclusions.apply_reviewed_exclusions=lambda out:(out,[]);from build_translations import main;main()"
  proc=subprocess.run([sys.executable,'-c',code,str(p/'canon.gz'),str(p/'dt.json'),str(p/'ati.json'),str(p/'out.json')],capture_output=True,text=True,encoding='utf-8');assert proc.returncode==0,proc.stderr
- unheld=json.loads((p/'out.json').read_text(encoding='utf-8'));assert sum(len(v) for v in unheld.values())==9,unheld
+ unheld=json.loads((p/'out.json').read_text(encoding='utf-8'));assert sum(len(v) for v in unheld.values())==len(held)==6,unheld
 print('passed')`,{units,held:stillHeld.map(r=>({...r,link_title:r.owner.startsWith('snp')?'Fixture Sutta: Fixture':'Fixture'}))});assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/passed/);
 });
 
@@ -117,4 +117,13 @@ test('changed unit mappings invalidate authentic old positions without falsifyin
  const other={source:canon.readingSource(canon.resolve('dhp183').unit)};assert.equal(sourceRevision(other),original.commit);assert.equal(other.source.locator_revision,undefined);assert.doesNotThrow(()=>assertPositionPin(new URLSearchParams(readingPosition({uid:'dhp183'},0,'dhp183/1',original.commit).split('?')[1]),other));
  for(const locator_revision of [null,undefined,12,'bad revision'])assert.throws(()=>sourceRevision({source:{commit:original.commit,locator_revision}}),/invalid/);
  assert.throws(()=>canon.readingSource({...u,index_revision:null}),/Invalid/);assert.throws(()=>canon.readingSource({...u,index_revision:'bad revision'}),/Invalid/);
+});
+
+test('screen catches explicit single-verse and excerpt labels without mistaking PTS pages or chapter citations for verses',()=>{
+ const l=(reference,english='fixture')=>({source:'ati',path:'/tipitaka/kn/thag/unregistered-screen-fixture',url:'https://accesstoinsight.org/tipitaka/kn/thag/unregistered-screen-fixture.html',reference,english});
+ const d=canon.load(),unit=d.byId.get('thag2.13'),screen=link=>scopeScreen({...d,translations:{'thag2.13':[link]}});
+ const single=screen(l('Thag 145'));assert.equal(single.count,1);assert.equal(single.rows[0].triage,'inspect narrower verse-reference extent');assert.deepEqual(single.rows[0].publisher_reference_extents,[{first:145,last:145,width:1}]);assert.ok(single.rows[0].reasons.includes('explicit single-verse reference'));assert.ok(!single.rows[0].reasons.includes('publisher-reference range'));
+ for(const reference of ['PTS ii 145','Thag 2:13','Thig 145','145'])assert.equal(screen(l(reference)).count,0,reference);
+ const excerpt=screen(l('Thag 2:13','A poem (excerpt)'));assert.equal(excerpt.count,1);assert.deepEqual(excerpt.rows[0].reasons,['publisher excerpt label']);assert.equal(excerpt.rows[0].triage,'metadata lead');
+ assert.equal(d.byId.get('thag2.13'),unit);assert.ok(!scopeScreen(d).rows.some(r=>r.translation_id==='ati:/tipitaka/kn/thag/thag.02.13x.olen'));
 });

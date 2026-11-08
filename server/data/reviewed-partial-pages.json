@@ -64,6 +64,130 @@
         "notice_sha256": "5bf50ef76a72ff25df8d31013e2981932d322695379ae4d980fbac5de46792a1",
         "extractor": "ati-freeverse-v1"
       }
+    },
+    {
+      "unit_id": "thag10.1",
+      "path": "/tipitaka/kn/thag/thag.10.01.olen",
+      "translator": "Andrew Olendzki",
+      "english_title": "Kaludayin Thera: Crossing the Rohini",
+      "license": "Olendzki-free-distribution-2005",
+      "source_reference": "Thag 527–529",
+      "mapping_note": "Derived verse excerpt from the named Access to Insight page. Editorial preface and notes are excluded. Complete source attribution and distribution notice accompany every excerpt. Only VRI527–529 is mapped; 530–536 remains outside this declaration.",
+      "source_html_sha256": "4fd11140e6769e571be079e4235b2819c4d7bb9fba19bbb6f75a41bbfdebf490",
+      "root": {
+        "id": "thag10.1",
+        "title": "Kāḷudāyittheragāthā",
+        "vri": "527–536",
+        "book": 34,
+        "start": 2245,
+        "end": 2279,
+        "root_blocks_sha256": "8e5c9b4c22f49eb1bd678c7dfeb989bf423cadaa7113e788a1692b60f075c602"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "thag10.1",
+        "first_ref": "thag10.1/3",
+        "last_ref": "thag10.1/5",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "e4ffb14f88c07bb0434d2cf8a6ff3af6123ae583d477324e093ba5a0e691f868",
+        "text_sha256": "e03bcf39ae735b873487dc6c9585aff1990aadde077791b4a01d719598efecf4",
+        "notice_sha256": "9db95777377af2445af21a8d68e001027c79ce1ff53db85b362bf81b6e68997a",
+        "extractor": "ati-freeverse-v1"
+      }
+    },
+    {
+      "unit_id": "thag15.2",
+      "path": "/tipitaka/kn/thag/thag.15.02.olen",
+      "translator": "Andrew Olendzki",
+      "english_title": "Udayin Thera: The Blooming Lotus",
+      "license": "Olendzki-free-distribution-2005",
+      "source_reference": "Thag 700–701",
+      "mapping_note": "Derived verse excerpt from the named Access to Insight page. Editorial preface and notes are excluded. Complete source attribution and distribution notice accompany every excerpt. Only VRI700–701 is mapped; 689–699 and702–704 remains outside this declaration.",
+      "source_html_sha256": "dd3745777a8969dd5357c05a8f232e8938c1dce075683f7f904a0a85523dc903",
+      "root": {
+        "id": "thag15.2",
+        "title": "Udāyittheragāthā",
+        "vri": "689–704",
+        "book": 34,
+        "start": 2788,
+        "end": 2842,
+        "root_blocks_sha256": "241101c63e0706bb4005ade9a4d6aa555f0d14309c7d158bc0ad5a31abca913b"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "thag15.2",
+        "first_ref": "thag15.2/13",
+        "last_ref": "thag15.2/14",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "659888c18cf548bf899e6de520f78f376574860f1569d3a72375aff5b005e898",
+        "text_sha256": "06529be4499870b9e5c2e5c70c3bc11b945fa9b6fe755dea1160fee03da16ba5",
+        "notice_sha256": "14063475589513d0f00f49a270ada9913c8479d249f607e473b179d5561836f4",
+        "extractor": "ati-freeverse-v1"
+      }
+    },
+    {
+      "unit_id": "thag16.8",
+      "path": "/tipitaka/kn/thag/thag.16.08.olen",
+      "translator": "Andrew Olendzki",
+      "english_title": "Angulimala Thera: The Moon Released",
+      "license": "Olendzki-free-distribution-2005",
+      "source_reference": "Thag 871–873",
+      "mapping_note": "Derived verse excerpt from the named Access to Insight page. Editorial preface and notes are excluded. Complete source attribution and distribution notice accompany every excerpt. Only VRI871–873 is mapped; 866–870 and874–891 remains outside this declaration.",
+      "source_html_sha256": "a4e5b3ea96e887070390c5711d32afdaef3c9381a617a48f605eadb3ae43ec37",
+      "root": {
+        "id": "thag16.8",
+        "title": "Aṅgulimālattheragāthā",
+        "vri": "866–891",
+        "book": 34,
+        "start": 3335,
+        "end": 3415,
+        "root_blocks_sha256": "2325e008b98f5ab2f1a1f223e122e2ae0b78cef501a0de03ec19a98b5e6ad808"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "thag16.8",
+        "first_ref": "thag16.8/7",
+        "last_ref": "thag16.8/9",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "b42e49222cd6b1ac3e2f8228d83787f8b470d8aba34b26a3b1aebbb9f43d819a",
+        "text_sha256": "463bd7f237559f95e49ca506581a648c1de90aaa6e1081a06985593f3688045e",
+        "notice_sha256": "3a144279ce9c66712cfd4f92cd3416cca8aa6d3e76b13e28f5ac921a401141ab",
+        "extractor": "ati-freeverse-v1"
+      }
+    },
+    {
+      "unit_id": "thag2.13",
+      "path": "/tipitaka/kn/thag/thag.02.13x.olen",
+      "translator": "Andrew Olendzki",
+      "english_title": "Heraññakani: (excerpt)",
+      "license": "Olendzki-free-distribution-2005",
+      "source_reference": "Thag 145",
+      "mapping_note": "Derived verse excerpt from the named Access to Insight page. Complete source attribution and distribution notice accompany every excerpt. Only VRI145 is mapped; verse146 remains outside this declaration. Publisher excerpt identity is preserved.",
+      "source_html_sha256": "de8c20ba5d15722d4f13aa15438f62f047451cf8c5162484aec59b619e45e1d3",
+      "root": {
+        "id": "thag2.13",
+        "title": "Heraññakānittheragāthā",
+        "vri": "145–146",
+        "book": 34,
+        "start": 807,
+        "end": 815,
+        "root_blocks_sha256": "6dae5b1ac96795c77b52c3d101602ba9dcb9ad21da07ea30e1c3a9a559dc88f2"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "thag2.13",
+        "first_ref": "thag2.13/2",
+        "last_ref": "thag2.13/2",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "7c7ee91bcafe9b2792fc1fba443aab75faa7317742a937172ffc020f7fb2c543",
+        "text_sha256": "e8481d68655e163221e1db89754ccea99ec50e52aa6737ca6e45cb292167af73",
+        "notice_sha256": "c9bf6950e9d8842ae30bb7b09d2edff81df3a3e847b8d20f8e9ef94b65b2427d",
+        "extractor": "ati-freeverse-v1"
+      }
     }
   ]
 }

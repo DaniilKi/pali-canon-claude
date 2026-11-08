@@ -304,7 +304,7 @@ only active source.
 
 ## Reviewed ATI verse-only partial pages
 
-D205 registers two sources in `reviewed_partial_pages.json`. Normal rebuilds
+D205/D206 register six sources in `reviewed_partial_pages.json`. Normal rebuilds
 always withhold their ordinary proposals. `--content` activation verifies full
 roots, raw HTML, verse-only extraction, selected Pāli and complete notice pins
 before adding exact partial declarations. Remaining exclusions apply last.
