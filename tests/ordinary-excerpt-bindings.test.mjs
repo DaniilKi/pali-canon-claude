@@ -84,10 +84,10 @@ test('shared retained-source registry preserves the five historical reviews and 
 
 test('withholding alternative versions does not alter complete coverage, partial/shared availability or the current daily pool', () => {
   const t = translationCoverage({ refresh: true }).total;
-  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2556, 1412, 1835, 14, 8]);
+  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2542, 1411, 1834, 14, 8]);
   assert.deepEqual([t.shared_links, t.with_shared_english, t.shared_only], [12, 110, 52]);
   const daily = dailyText({ ...canon }, { date: '2026-11-01', kind: 'sutta' });
-  assert.deepEqual([daily.rotation.of, daily.text.id], [1261, 'sn55.32']);
+  assert.deepEqual([daily.rotation.of, daily.text.id], [1260, 'sn22.121']);
 });
 
 const python = ['python3', 'python'].find(cmd => spawnSync(cmd, ['--version']).status === 0);

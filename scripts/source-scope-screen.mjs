@@ -33,7 +33,7 @@ export function scopeScreen(data=canon.load(),{review={rows:[]}}={}) {
     if(/\d+-\d+x?\./.test(link.path||''))reasons.push('publisher-filename range');
     if(/whole-samyutta|whole-collection/.test(link.match||''))reasons.push('collection-level match');
     if(singleVerse)reasons.push('explicit single-verse reference');
-    if(/\bexcerpt\b/i.test(link.english||''))reasons.push('publisher excerpt label');
+    if(/\bexcerpt\b/i.test([link.english,link.reference].filter(Boolean).join(' ')))reasons.push('publisher excerpt label');
     if(!reasons.length)continue;
     const malformed=extents.some(r=>r.width<=0);
     const verse=['thag','thig','snp','pv','vv'].includes(u?.collection)&&publisherExtent&&rootExtent;

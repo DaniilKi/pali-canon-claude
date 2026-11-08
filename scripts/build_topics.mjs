@@ -117,7 +117,7 @@ for (const entry of body.split(/(?=<dt\b)/i).slice(1)) {
     continue;
   }
   const { texts, reading } = links(entry);
-  if (!anchor || !texts.length || subject.some((t) => t.slug === anchor)) continue;
+  if (!anchor || (!texts.length && !reading.some(r => r.scope === 'withheld-publisher-page')) || subject.some((t) => t.slug === anchor)) continue;
   subject.push({ slug: anchor, name, index: 'subject', see_also: refs, ati_url: `${ATI}/index-subject.html#${anchor}`, texts, ...(reading.length ? { further_reading: reading } : {}) });
 }
 // Redirects ("Equanimity — see Upekkha") become aliases of the topic they point to.
@@ -142,10 +142,14 @@ for (const chapter of numberHtml.split(/(?=<h1\b)/i).slice(1)) {
     last = label;
     if (!label || /^see also:?$/i.test(label)) continue;
     const { texts, reading } = links(entry);
-    if (!texts.length) continue;
+    if (!texts.length && !reading.some(r => r.scope === 'withheld-publisher-page')) continue;
     const slug = `n${n}-${slugify(label)}`;
     const existing = numbered.find((t) => t.slug === slug);
-    if (existing) { for (const t of texts) if (!existing.texts.some((x) => x.id === t.id)) existing.texts.push(t); continue; }
+    if (existing) {
+      for (const t of texts) if (!existing.texts.some((x) => x.id === t.id)) existing.texts.push(t);
+      for (const r of reading) { const prior = existing.further_reading ||= []; if (!prior.some(x => x.url === r.url && x.scope === r.scope)) prior.push(r); }
+      continue;
+    }
     numbered.push({
       slug, name: `${label} (${n})`, index: 'numerical', number: n,
       // "Hindrances" → "five hindrances"; labels like "Assistance, kinds of" get no alias.

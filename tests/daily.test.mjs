@@ -123,14 +123,24 @@ test('splitParts keeps every part non-empty', () => {
   assert.deepEqual(splitParts([3], 1), [[0, 1]]);
 });
 
-test('study-guide plans: each Access to Insight link resolves to the recorded text through the verified link index', () => {
+test('study-guide sources have verified whole-link identities or explicit reviewed external-excerpt subjects', () => {
   const translations = canon.load().translations;
   for (const [name, guide] of Object.entries(GUIDE_DATA)) {
     assert.match(guide.url, /^https:\/\/www\.accesstoinsight\.org\/lib\/study\//);
     for (const [path, id] of guide.entries) {
       const url = `https://www.accesstoinsight.org/tipitaka/${path}.html`;
-      assert.equal(canon.resolve(url).unit.id, id, `${name} ${path}`);
-      assert.ok((translations[id] || []).some((t) => t.source === 'ati' && t.path === `/tipitaka/${path}`), `${id} links ${path}`);
+      const day = guide.entries.findIndex(([p]) => p === path) + 1;
+      const reading = readingPlan(canon,{name,day}).readings[0];
+      if (reading.guide_link.scope === 'withheld-publisher-page') {
+        assert.ok(['mn/mn.075x.than','mn/mn.095x.than'].includes(path));
+        assert.equal(reading.id,id);assert.equal(reading.guide_link.whole_unit_coverage,false);
+        assert.equal(reading.guide_link.individual_alignment_verified,false);
+        assert.match(reading.notes.join(' '),/publisher excerpt/);
+        assert.throws(()=>canon.resolve(url),/not linked/);
+      } else {
+        assert.equal(canon.resolve(url).unit.id, id, `${name} ${path}`);
+        assert.ok((translations[id] || []).some((t) => t.source === 'ati' && t.path === `/tipitaka/${path}`), `${id} links ${path}`);
+      }
     }
     const plan = readingPlan(canon, { name });
     assert.equal(plan.days, guide.entries.length);

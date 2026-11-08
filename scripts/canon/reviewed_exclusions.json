@@ -762,6 +762,481 @@
           }
         ]
       }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.021x.budd.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "mn21"
+      ],
+      "reason": "Opening Moliyaphagguna narrative and admonitions mn21/3–/7 are absent. The page translates mn21/8–/9, then silently jumps over the one-meal instruction, chariot simile and sal-grove simile mn21/10–/12 to Vedehika and subsequent teaching.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/mn/mn.021x.budd.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "mn21",
+            "book": 8,
+            "start": 719,
+            "end": 746,
+            "title": "Kakacūpamasuttaṃ",
+            "collection": "mn",
+            "acronym": "MN 21",
+            "vri": "222–233",
+            "pts": {
+              "volume": 1,
+              "page": 122,
+              "end_page": 129
+            },
+            "root_blocks_sha256": "c563b495746afba99a7cc1bf9ad99761e731d9933f8b56e18220696273cfc9dc"
+          }
+        ],
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "6135a75e631c45801462e12a29e6f2975d49e65bf75ca0f5053d0514267b118e",
+        "text_sha256": "048b828a6d543deb1e11725c9641297cccc012cf9767b96bd76ba2361fb1534b",
+        "notice_sha256": "b55346d4346c801b24757c69f30261b28f324dd562e84d2ba4bdf43ead3465f5",
+        "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.021x.than.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "mn21"
+      ],
+      "reason": "Entire opening Moliyaphagguna setting/admonitions and the one-meal, chariot and sal-grove teachings mn21/3–/12 are omitted; the source begins with Vedehika at mn21/13.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/mn/mn.021x.than.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "mn21",
+            "book": 8,
+            "start": 719,
+            "end": 746,
+            "title": "Kakacūpamasuttaṃ",
+            "collection": "mn",
+            "acronym": "MN 21",
+            "vri": "222–233",
+            "pts": {
+              "volume": 1,
+              "page": 122,
+              "end_page": 129
+            },
+            "root_blocks_sha256": "c563b495746afba99a7cc1bf9ad99761e731d9933f8b56e18220696273cfc9dc"
+          }
+        ],
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "fe4898bb69f89ab11c01aac1af1bb1c8b40adba2c1c4919d27b52c3835fa5975",
+        "text_sha256": "1ed5f659e26cabf6d610c7c402f4426eb6c450c467f28a7b6192dad0d16af11b",
+        "notice_sha256": "df438f09f0670703570e674d0690847a881361dcb40dea2c829bbc4eae991682",
+        "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.054x.than.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "mn54"
+      ],
+      "reason": "The page omits the entire opening encounter and eight-factor household-training section mn54/2–/13, and final acknowledgment/refuge mn54/40. It contains the seven sensuality similes and the three knowledges through mn54/39.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/mn/mn.054x.than.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "mn54",
+            "book": 9,
+            "start": 67,
+            "end": 108,
+            "title": "Potaliyasuttaṃ",
+            "collection": "mn",
+            "acronym": "MN 54",
+            "vri": "31–50",
+            "pts": {
+              "volume": 1,
+              "page": 359,
+              "end_page": 368
+            },
+            "root_blocks_sha256": "e74467a381dc64cd20d8937c116dbc7ea8cef9ce4bc0c1157651a122bfcb8126"
+          }
+        ],
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "edcde57d7f7920743608b1abb25b3ded7c4d33519bfea85986a9b776cd349e8a",
+        "text_sha256": "276f63ece70985258305f9633c7a6e3863330f56ff39ddda498d0323ea7ed560",
+        "notice_sha256": "de93b79f4590c638218614b4c32bdce786225ce7a17a3f214cc78f6dc6e7dea0",
+        "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.075x.than.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "mn75"
+      ],
+      "reason": "Begins with the second cured-leper simile at mn75/11. The entire substantive opening mn75/2–/10 is absent, including the encounter, sense-restraint discussion, former palace life and earlier similes. Closing conversion and attainment are present; the page is nevertheless an excerpt of the indexed discourse.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/mn/mn.075x.than.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "mn75",
+            "book": 9,
+            "start": 587,
+            "end": 614,
+            "title": "Māgaṇḍiyasuttaṃ",
+            "collection": "mn",
+            "acronym": "MN 75",
+            "vri": "207–222",
+            "pts": {
+              "volume": 1,
+              "page": 501,
+              "end_page": 513
+            },
+            "root_blocks_sha256": "f5b0ceeb528002d793c63c53ecce3a00126e100e8e2123b468fada529bc9663d"
+          }
+        ],
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "f8592ff49837c4e2f2ad5a233aa478280e76eba61a3736fe02a5db547a1a4a37",
+        "text_sha256": "2ff5d69ca8ba2960d08e5f9b9326799c1f6b68a676ab1a0f9f73f08d5c7332f4",
+        "notice_sha256": "d2bcee9e382477e04d9841e2c7e4ffef7e16b8c088476a472cc8f6f943be88fc",
+        "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.095x.nymo.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "mn95"
+      ],
+      "reason": "Starts inside mn95/9 after an explicit leading ellipsis, compresses the central truth/teacher-investigation material /9–/15, and ends with an ellipsis before the full sequence of helpful conditions and Kapāṭika’s response/refuge /16–/28. It is not a complete indexed MN95 translation.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/mn/mn.095x.nymo.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "mn95",
+            "book": 9,
+            "start": 1385,
+            "end": 1414,
+            "title": "Caṅkīsuttaṃ",
+            "collection": "mn",
+            "acronym": "MN 95",
+            "vri": "422–435",
+            "pts": {
+              "volume": 2,
+              "page": 164,
+              "end_page": 177
+            },
+            "root_blocks_sha256": "6cf9073cbffe4f7939333ef805167a0294780d68f471736247d154f5a8d5dc98"
+          }
+        ],
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "a453851c62f663a7586229d9c3aff2ef805b8100dec498baa299ba0d1ec08429",
+        "text_sha256": "beb568e993838e8e61b367247556a406423e0dd5c60f78916e591e0da0e0cfc3",
+        "notice_sha256": "3b0623395b0563a5ce0a7afe5324b0d0c2f5f7b6c905208723cf3ea51bfcd568",
+        "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.095x.than.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "mn95"
+      ],
+      "reason": "Leading ellipsis starts within mn95/6, after omission of the complete substantive opening mn95/2–/5 and the first arrival/greeting portion of /6. Subsequent discourse through the final lay refuge is present with publisher abbreviations, including compression of the repeated conditions in /18–/26. The opening omission prevents whole-unit binding.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/mn/mn.095x.than.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "mn95",
+            "book": 9,
+            "start": 1385,
+            "end": 1414,
+            "title": "Caṅkīsuttaṃ",
+            "collection": "mn",
+            "acronym": "MN 95",
+            "vri": "422–435",
+            "pts": {
+              "volume": 2,
+              "page": 164,
+              "end_page": 177
+            },
+            "root_blocks_sha256": "6cf9073cbffe4f7939333ef805167a0294780d68f471736247d154f5a8d5dc98"
+          }
+        ],
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "d0eb9840e64581674e241512d352983e46bb8ef4f13a4cd51c73479057a04176",
+        "text_sha256": "2ea08b73afeacfc4ce77956cdece48b590581afdd1eac242158cc30fbbdb08e1",
+        "notice_sha256": "1338a5c2d02497ba3b90fff53bf40fccf9d3973c089d00a69b41441ca113980e",
+        "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.031x.nypo.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "sn12.31"
+      ],
+      "reason": "Opening Ajita question, repeated verse and Sariputta’s three silences omitted; source begins with explicit ellipsis. Source retains Sariputta’s two-mode explanation but not its Ajita-verse conclusion or Buddha’s full repeated explanation; only first words of Buddha’s praise occur before final ellipsis.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.031x.nypo.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "sn12.31",
+            "title": "Bhūtasuttaṃ",
+            "vri": "31",
+            "book": 12,
+            "start": 223,
+            "end": 242,
+            "root_blocks_sha256": "ec7c9550e62c62d4448504fe56c1332aec7bde5be620d3abd46e94c915132edd"
+          }
+        ],
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "62e8de6dc9ffb7f2256b0626a61896f0bb65bb91dbc1b0733cf3b82c0aa88e94",
+        "text_sha256": "327143d2529ce9837c098fa3b2c7fd3e2b7dc33177ddcd9dabc2a1b8d19c7d69",
+        "notice_sha256": "45ab71ed1ace98ad56b53bb4a8b6e3c75b87969407102b55be2c4dd1e8ab449f",
+        "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.205x.wlsh.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "sn35.246"
+      ],
+      "reason": "Opening warning about desire/aversion/delusion and holding the mind in check at all six senses omitted. Entire lute-disassembly simile and concluding aggregate/I-mine analysis omitted. Note3 sends readers to a different anthology location for the remainder; that link is not this page’s content.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.205x.wlsh.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "sn35.246",
+            "title": "Vīṇopamasuttaṃ",
+            "vri": "246",
+            "book": 14,
+            "start": 1223,
+            "end": 1228,
+            "root_blocks_sha256": "59d3d50ae1813ae1df4af520b8e92c331df8ae83455cd66973e03981319cb8f1"
+          }
+        ],
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "c84e1dd24fe726baba59b4d620ee83acda0b58a676730c3f2d88836fb1d9536e",
+        "text_sha256": "1e6c6d01e35d2032324a086f9d608f72d68371896bf1e061d5bf1a3f7d9822d9",
+        "notice_sha256": "8afcb3acf1db94fe4fcda7d96ab0f1d2b86dadca3ad15c6f517844c9124a3c99",
+        "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.206x.wlsh.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "sn35.247"
+      ],
+      "reason": "Wounded-person/thorny-marsh simile, rebuke framing and opening full non-restraint definition absent. Six-animal teaching retained, with explicit repetition compression in post-tethered passage; this does not restore the missing opening.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.206x.wlsh.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "sn35.247",
+            "title": "Chappāṇakopamasuttaṃ",
+            "vri": "247",
+            "book": 14,
+            "start": 1228,
+            "end": 1235,
+            "root_blocks_sha256": "829d1c7317c27b03ca951c9ace7e05d18d6a4f58cbe1ef79f59ede53c115cd70"
+          }
+        ],
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "82ce131ac813be92768f1f99325feebb8e5d20a70b77ad298d89eabecca33516",
+        "text_sha256": "91834470093e6a6a5c0fc3d19bb07ee53b4024960b9de772c0082b863a334eec",
+        "notice_sha256": "d74d0acef15fae9f4f15cf4f28870449998461d4d8443622ec156dabb286d89d",
+        "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn46/sn46.053.wlsh.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "sn46.53"
+      ],
+      "reason": "Monks’ visit and substantive challenge to outside ascetics, including who can answer it, omitted. The VRI abbreviation in /2 stays unexpanded. Central fire/enlightenment-factor teaching substantially covered, with repeated explanatory sentences shortened by explicit ellipses.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn46/sn46.053.wlsh.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "sn46.53",
+            "title": "Aggisutta",
+            "vri": "234",
+            "book": 15,
+            "start": 665,
+            "end": 681,
+            "root_blocks_sha256": "586bcf5bbed9accd4f6be8dda3bf48e9b2997a8372a989f845617fb2af898477"
+          }
+        ],
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "06e4ed3da4b35a8870c14d569ea184be6eacfdbefe58735c529e94860eae7109",
+        "text_sha256": "8d47fcf25966eb0181f945252f667d2ea15447034ea4803eb3b466fea481a395",
+        "notice_sha256": "8e03d03a3c9b96f194779ac94aed31aaede96f3f8f456b1f3343ab3f953d24ef",
+        "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn46/sn46.054x.wlsh.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "sn46.54"
+      ],
+      "reason": "Haliddavasana setting, outsiders’ matching claim, monks’ report and Buddha’s challenge to outsiders entirely omitted before initial ellipsis. Four boundless-state/enlightenment-factor explanations retained with explicit as-above compression; source ends in ellipsis.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn46/sn46.054x.wlsh.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "sn46.54",
+            "title": "Mettāsahagatasuttaṃ",
+            "vri": "235",
+            "book": 15,
+            "start": 681,
+            "end": 697,
+            "root_blocks_sha256": "5af6ca5d09ea715a6e0723717dae936932745f7fdcc1062312f4c2f6a3d8c49d"
+          }
+        ],
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "54d1d34da8833983c4fc8e5a88707883a38749eb882ffdb8ace559cc483c2549",
+        "text_sha256": "43309f408fbb902360a778fcf5b9bd5bccd4b38daf5c578739f04bd95ff6513b",
+        "notice_sha256": "1c5b5141e1d964a19388a22a6a7f8b23f430c386de076aecc594a5bd906f734f",
+        "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn47/sn47.010.wlsh.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "sn47.10"
+      ],
+      "reason": "Nuns’ progress report, Ananda’s visit/response and report to Buddha omitted before initial ellipsis. Directed/undirected practice retained with other foundations compressed into editorial similarly instructions. Final teacher’s injunction, Ananda approval and chapter paratext omitted after final ellipsis; the injunction is substantive, not just a colophon.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn47/sn47.010.wlsh.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "sn47.10",
+            "title": "Bhikkhunupassayasuttaṃ",
+            "vri": "376",
+            "book": 15,
+            "start": 923,
+            "end": 938,
+            "root_blocks_sha256": "d1e8ada52bca6531980630c1aaad25292d0878b3d345b7e9c3660effbb9eeccb"
+          }
+        ],
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "3cd266762679eac1b73a42f1c609b8ee10499248151ca866e21fb4ccc7e577ba",
+        "text_sha256": "c9da2790ff3c056842ed17646a4fc731a9da249c5aab7a7391dd04cd9390f745",
+        "notice_sha256": "21543399a45cd2dfacb1ec8e8c001897179bf6531b516548473b50d0cee8edc0",
+        "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn47/sn47.010.olen.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "sn47.10"
+      ],
+      "reason": "Publisher condenses the other foundations in root /8 into an editorial footnote, and translates only the body case from /9. Full-case scope is not established. Nuns opening and final injunction ARE retained. Narrative repetition compression alone is not the hold reason; the preserved DT version also compresses that repeated narrative but explicitly translates the other-foundation cases.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn47/sn47.010.olen.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "sn47.10",
+            "title": "Bhikkhunupassayasuttaṃ",
+            "vri": "376",
+            "book": 15,
+            "start": 923,
+            "end": 938,
+            "root_blocks_sha256": "d1e8ada52bca6531980630c1aaad25292d0878b3d345b7e9c3660effbb9eeccb"
+          }
+        ],
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "702eecad7f9b67591a8067b1ab8440b48f7867befd57b7bc23b4293f8eb84e4e",
+        "text_sha256": "cc0992ea4dd107cf2ba69d16f83560830d12c18c0d60b2e506f3f0e92a4445ef",
+        "notice_sha256": "745e6399ccf545067863422cdc26f260bf62d039155f6be74a73b7cb460d580a",
+        "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
+      }
+    },
+    {
+      "source": "dhammatalks",
+      "url": "https://www.dhammatalks.org/suttas/MN/MN54.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "mn54"
+      ],
+      "reason": "Complete primary rendered body covers only the sensuality similes and three knowledges (/15–/39); it omits the opening encounter, eight factors and explanations (/2–/13), and Potaliya acknowledgment/refuge (/40). The Excerpt label agrees with the substantive body. Do not treat the retained source as a whole translation.",
+      "review": {
+        "source_url": "https://www.dhammatalks.org/suttas/MN/MN54.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "mn54",
+            "book": 9,
+            "start": 67,
+            "end": 108,
+            "title": "Potaliyasuttaṃ",
+            "collection": "mn",
+            "acronym": "MN 54",
+            "vri": "31–50",
+            "pts": {
+              "volume": 1,
+              "page": 359,
+              "end_page": 368
+            },
+            "root_blocks_sha256": "e74467a381dc64cd20d8937c116dbc7ea8cef9ce4bc0c1157651a122bfcb8126"
+          }
+        ],
+        "evidence_kind": "publisher-rendered-web",
+        "rendered_view": {
+          "total_lines": 71,
+          "first_line": 0,
+          "last_line": 70,
+          "scripture_lines": [
+            30,
+            62
+          ]
+        },
+        "method": "Complete primary publisher rendered view0–70 read via supported public web tool; exact indexed-root scope independently checked. No raw HTML/runtime text/notice hash is available or asserted. Restrictive exclusion only; no source activation. See final-excerpt-binding-review.json."
+      }
     }
   ]
 }
