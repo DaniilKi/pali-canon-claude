@@ -14,9 +14,13 @@ references, browser-local personal data and rights boundaries remain intact.
 The corpus head is an ancestor of the reader: integration requires a normal
 fast-forward, with no source/data conflict resolution or dropped corpus commits.
 
-The final checkpoint changes documentation only beyond the tested reader head.
-No additional runtime, source mapping, database, credential, permission or
-hosting configuration change is introduced here.
+Initial checkpoint `22ac074` changed documentation only beyond the tested reader.
+Its first exact-head CI found a finder-navigation assertion race. A reproducible
+same-route finder submission defect was also confirmed and repaired: both forms
+close/focus synchronously and refresh when the URL is unchanged. The corrected
+regression waits for the actual MCP response; see [finder submission acceptance](FINDER_SUBMIT.md).
+No source mapping, database, credential, permission or hosting configuration
+change is introduced by this repair.
 
 ## Verification and publication
 

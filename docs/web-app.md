@@ -128,7 +128,7 @@ Missing/mismatched date, source, selection, rotation or verse/context metadata f
 
 ## Compact phone reading
 
-On narrow screens, **Find a passage** opens the citation/search controls and collection links. Reading preferences remain directly available. **Study & sources** opens the canonical reader’s English, commentary, related-text and copy-link controls. Picking a study action closes that phone disclosure and focuses the resulting panel. Desktop search/study controls remain exposed; this uses the same controls and source APIs rather than a second mobile reader.
+On narrow screens, **Find a passage** opens the citation/search controls and collection links. Submitting either form closes the phone finder and focuses the main result region; submitting the current URL refreshes the source/results instead of leaving the drawer open. Reading preferences remain directly available. **Study & sources** opens the canonical reader’s English, commentary, related-text and copy-link controls. Picking a study action closes that phone disclosure and focuses the resulting panel. Desktop search/study controls remain exposed; this uses the same controls and source APIs rather than a second mobile reader.
 
 Disclosure state follows the responsive breakpoint and is not stored as a personal preference. When a focused control is collapsed by a breakpoint change, focus moves to its visible summary. Resizing does not recreate the source-review pane or reset existing per-view scope consent. Exact deep-linked passages retain their position. Continue-reading links appear away from the current reading, avoiding a redundant current-page action above the text.
 

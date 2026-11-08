@@ -71,6 +71,7 @@ function responsivePanels() {
   }
 }
 function closeFinder() { if (narrowReading.matches) { const panel = $('find-panel'), focused = panel.contains(document.activeElement); panel.open = false; if (focused) $('content').focus({ preventScroll: true }); } }
+function navigateFromFinder(target) { closeFinder(); $('content').focus({ preventScroll: true }); if (location.hash === target) render(); else location.hash = target; }
 if (narrowReading.addEventListener) narrowReading.addEventListener('change', responsivePanels); else narrowReading.addListener(responsivePanels); responsivePanels();
 function focusHeading() { $('content').focus({ preventScroll: true }); }
 function updateResume() { const valid = typeof local.last === 'string' && /^#read\?/.test(local.last); $('resume').hidden = !valid || location.hash === local.last; if (valid) $('resume').href = local.last; }
@@ -84,9 +85,9 @@ preferences(); updateResume();
 $('font-size').addEventListener('input', e => { local.font = Number(e.target.value); preferences(); persist(); });
 $('theme').addEventListener('change', e => { local.theme = e.target.value; preferences(); persist(); });
 $('script').addEventListener('change', e => { local.script = e.target.value; persist(); if (location.hash.startsWith('#read') || location.hash.startsWith('#daily')) render(); });
-$('search-form').addEventListener('submit', e => { e.preventDefault(); location.hash = route('search', { q: $('query').value.trim(), scope: $('search-scope').value }); });
+$('search-form').addEventListener('submit', e => { e.preventDefault(); navigateFromFinder(route('search', { q: $('query').value.trim(), scope: $('search-scope').value })); });
 document.querySelector('.skip').addEventListener('click', e => { e.preventDefault(); $('content').focus(); });
-$('reference-form').addEventListener('submit', e => { e.preventDefault(); location.hash = route('read', { uid: $('reference').value.trim() }); });
+$('reference-form').addEventListener('submit', e => { e.preventDefault(); navigateFromFinder(route('read', { uid: $('reference').value.trim() })); });
 function pageControls(next, previous, action) {
   const p = el('nav', undefined, 'pager'); p.setAttribute('aria-label', 'Pagination');
   if (previous !== null) p.append(link('← Previous page', action(previous), 'button'));

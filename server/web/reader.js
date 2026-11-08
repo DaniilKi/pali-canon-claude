@@ -782,6 +782,12 @@
       if (focused) $("content").focus({ preventScroll: true });
     }
   }
+  function navigateFromFinder(target) {
+    closeFinder();
+    $("content").focus({ preventScroll: true });
+    if (location.hash === target) render();
+    else location.hash = target;
+  }
   if (narrowReading.addEventListener) narrowReading.addEventListener("change", responsivePanels);
   else narrowReading.addListener(responsivePanels);
   responsivePanels();
@@ -820,7 +826,7 @@
   });
   $("search-form").addEventListener("submit", (e) => {
     e.preventDefault();
-    location.hash = route("search", { q: $("query").value.trim(), scope: $("search-scope").value });
+    navigateFromFinder(route("search", { q: $("query").value.trim(), scope: $("search-scope").value }));
   });
   document.querySelector(".skip").addEventListener("click", (e) => {
     e.preventDefault();
@@ -828,7 +834,7 @@
   });
   $("reference-form").addEventListener("submit", (e) => {
     e.preventDefault();
-    location.hash = route("read", { uid: $("reference").value.trim() });
+    navigateFromFinder(route("read", { uid: $("reference").value.trim() }));
   });
   function pageControls(next, previous, action) {
     const p = el("nav", void 0, "pager");
