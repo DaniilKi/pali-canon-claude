@@ -324,3 +324,5 @@ actual plan/library tools. They cover newer-note preservation, draft export,
 plan/pref/delete refusal, keyboard reload review, denied writes and malformed
 existing data. Human/device acceptance and truly simultaneous writes remain
 outside these guarantees.
+
+The snapshot guard compares the whole profile. An unrelated preference or reading-position change can therefore block a stale tab too. For now, use one writing tab or export/reload to reconcile. Separating independent records and adding atomic coordination is future work, not part of this repair.

@@ -55,3 +55,5 @@ Run `node --test tests/web-local-storage-write.test.mjs` and
 `python scripts/web-reader-storage-check.py`, also `--a11y` and extracted
 `--server-dir`. Hosted Chromium includes both modes. Exact-head CI and remote refs
 are the separate integration evidence; no deployment is made by this receipt.
+
+The snapshot guard compares the whole profile. An unrelated preference or reading-position change can therefore block a stale tab too. For now, use one writing tab or export/reload to reconcile. Separating independent records and adding atomic coordination is future work, not part of this repair.
