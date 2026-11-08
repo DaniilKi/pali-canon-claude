@@ -6,6 +6,7 @@
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { ALLOWED_HOSTS } from '../src/http.mjs';
+import { outageError } from './outage-diagnostics.mjs';
 const scenarios = [
   ['accesstoinsight.org', 'ATI site down'],
   ['accesstoinsight.org,raw.githubusercontent.com', 'ATI site + GitHub raw down'],
@@ -26,21 +27,21 @@ for (const [hosts, label, total = false] of scenarios) {
     const call = async (name, args) => { const r = await client.callTool({ name, arguments: args }, undefined, { timeout: 180000 }); const d = JSON.parse(r.content[0].text); return { err: Boolean(r.isError), d }; };
     console.log(`\n### ${label}`);
     let r = await call('get_translation', { uid: 'AN 3.65', translation: 'ati:/tipitaka/an/an03/an03.065.than' });
-    console.log(' ATI translation  :', r.err ? 'ERROR ' + r.d.error.slice(0, 120) : `ok via ${r.d.fetched_from}; ${r.d.notes.join(' ').slice(0, 90)}`);
+    console.log(' ATI translation  :', r.err ? 'ERROR ' + outageError(r.d.error) : `ok via ${r.d.fetched_from}; ${r.d.notes.join(' ').slice(0, 90)}`);
     expect(label, 'ATI translation', r, { total });
     r = await call('get_translation', { uid: 'MN 10' });
-    console.log(' default (Ṭhān.)  :', r.err ? 'ERROR ' + r.d.error.slice(0, 120) : `ok via ${r.d.fetched_from} (${r.d.source}); ${r.d.notes.join(' ').slice(0, 110)}`);
+    console.log(' default (Ṭhān.)  :', r.err ? 'ERROR ' + outageError(r.d.error) : `ok via ${r.d.fetched_from} (${r.d.source}); ${r.d.notes.join(' ').slice(0, 110)}`);
     expect(label, 'default translation', r, { total });
     r = await call('get_text', { uid: 'SN 56.11', limit: 2 });
     console.log(' Pāli text        :', r.err ? 'ERROR' : `ok, ${r.d.total_segments} segments (offline)`);
     expect(label, 'offline Pāli text', r, { online: false });
     r = await call('search_access_to_insight', { query: 'metta', limit: 2 });
     // Keep every index/mirror error: the old 120-character prefix hid the CDN failure in #107.
-    console.log(' ATI search       :', r.err ? 'ERROR ' + r.d.error : `ok ${r.d.results.length} results ${r.d.note || ''}`);
+    console.log(' ATI search       :', r.err ? 'ERROR ' + outageError(r.d.error) : `ok ${r.d.results.length} results ${r.d.note || ''}`);
     if (!r.err) console.log(' ATI index sources:', JSON.stringify(r.d.index_sources));
     expect(label, 'ATI search', r, { total });
     r = await call('lookup_pali', { word: 'metta' });
-    console.log(' dictionary       :', r.err ? 'ERROR ' + r.d.error.slice(0, 140) : `ok${r.d.offline ? ` (offline DPD ${r.d.dictionary.version}, ${r.d.entries.length} entries)` : ''}`);
+    console.log(' dictionary       :', r.err ? 'ERROR ' + outageError(r.d.error) : `ok${r.d.offline ? ` (offline DPD ${r.d.dictionary.version}, ${r.d.entries.length} entries)` : ''}`);
     // The dictionary falls back to the bundled DPD subset (#23), so it must answer even in a total outage,
     // labelled as offline, with entries and the DPD licence.
     expect(label, 'dictionary', r, { online: false });
