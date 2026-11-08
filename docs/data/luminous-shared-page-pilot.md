@@ -118,3 +118,21 @@ installed shared-audit modes passed, including actual-declaration notice downgra
 The review packet exactly reproduced its recorded SHA-256. Bundles were rebuilt
 after the notice-invariant fix. Actual publisher-text live checks are separate
 from the network-free installed audit described above.
+
+## Evidence-gate follow-up (D196)
+
+The first D195 CI evidence run failed before the shared-page audit: its daily
+pool oracle counted any nonempty translation entry, so it counted the shared
+owner as an eligible whole-unit sutta (1,272 expected versus 1,271 actual).
+Production correctly excluded it. The audit now derives eligibility independently
+from the presence of partial/shared declaration keys, without reusing the
+production classifier. It retains exact cycle size, every-member coverage,
+no-repeat and periodicity assertions. No gate or source safeguard is removed.
+
+A new regression covers ordinary, shared-only, partial-only, mixed, malformed
+scope keys, approximate and range records, plus the real compilation members.
+The complete isolated evidence audit then passed locally with zero network
+requests: all 1,271 eligible suttas, 423 daily verses, 478 plan days across four
+plans, and the other recorded-reference checks. This follow-up changes only the
+audit/tests/documentation; source data, runtime and built bundles are unchanged.
+The original failed CI run remains in history; final exact-commit CI must pass.
