@@ -282,3 +282,15 @@ explicit guarded persistence and old source references. Filtering/paging must
 not save or drop notes. Run `tests/web-saved-passages.test.mjs` and
 `scripts/web-reader-saved-check.py` normal/a11y/installed, plus bookmark import,
 storage and cross-tab pointer regressions.
+
+
+### Saved source revisions
+
+Build Saved links through `web/bookmark-location.mjs`. A known revision plus
+exact offset/ref must reach the existing pre-wording `assertPositionPin` guard.
+Never silently drop a malformed pin or guess a versioned bookmark's missing
+position. Legacy no-version records retain explicit current-source disclosure.
+Explicit current-source review must not rewrite old notes or revision metadata.
+This checks source metadata, not a historical content archive or per-segment hash.
+Run `tests/web-bookmark-location.test.mjs`, the bookmark-pin browser check
+(normal/a11y/installed), import, saved-navigation and reading-position regressions.

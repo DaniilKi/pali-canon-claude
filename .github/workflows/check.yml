@@ -78,7 +78,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal]
+        group: [core, study, personal, provenance]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -102,6 +102,12 @@ jobs:
         if: matrix.group == 'core'
         run: |
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-browser-check.py > standalone-reader.report.json
+      - name: Check saved source revisions before showing Pāli wording
+        if: matrix.group == 'provenance'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-bookmark-pin-check.py --report standalone-bookmark-pin.report.json
+      - name: Audit versioned bookmark refusals and legacy review
+        if: matrix.group == 'provenance'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-bookmark-pin-check.py --a11y --report standalone-bookmark-pin-a11y.report.json
       - name: Check source-aware Pāli print and PDF privacy
         if: matrix.group == 'core'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-print-check.py --report standalone-print.report.json
@@ -193,6 +199,11 @@ jobs:
           path: |
             widget-browser.report.json
             standalone-reader.report.json
+            standalone-print.report.json
+            standalone-saved.report.json
+            standalone-saved-a11y.report.json
+            standalone-bookmark-pin.report.json
+            standalone-bookmark-pin-a11y.report.json
             standalone-a11y.report.json
             standalone-scope.report.json
             standalone-scope-a11y.report.json
