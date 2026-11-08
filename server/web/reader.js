@@ -1,4 +1,52 @@
 (() => {
+  // web/reading-position.mjs
+  var string = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f<>]/.test(x);
+  var integer = (x) => Number.isSafeInteger(x) && x >= 0 && x <= 1e5;
+  var source = (x) => typeof x === "string" && /^[a-zA-Z0-9._-]{1,100}$/.test(x);
+  function readingPosition(context, offset, ref, revision) {
+    if (!context || !integer(offset) || !string(ref, 400) || !source(revision) || Object.keys(context).some((k) => !["uid", "book", "kind", "plan", "day"].includes(k)) || Boolean(context.uid) === Boolean(context.book) || !string(context.uid || context.book, 300) || /https?:|javascript:|data:/i.test(context.uid || context.book) || context.kind !== void 0 && !["post", "commentary"].includes(context.kind) || context.book && context.kind || context.plan !== void 0 && (!context.uid || context.kind || !/^[a-z0-9-]{1,60}$/.test(context.plan) || !Number.isSafeInteger(context.day) || context.day < 1 || context.day > 400) || context.day !== void 0 && context.plan === void 0) throw Error("This reading position has unsupported source or reference metadata.");
+    return "#read?" + new URLSearchParams({ ...context, offset, ref, source: revision });
+  }
+  function assertPositionPin(args, data) {
+    if (!args.has("source")) return;
+    if (args.getAll("source").length !== 1 || !source(args.get("source")) || !string(args.get("ref"), 400) || !/^\d+$/.test(args.get("offset") || "") || !integer(Number(args.get("offset")))) throw Error("The saved reading position is incomplete. Open its source from the Library; no nearby passage was substituted.");
+    if (data.source?.commit !== args.get("source")) {
+      const error = Error("The source revision changed since this reading position was saved. Review the current source explicitly before continuing; no replacement wording was displayed.");
+      error.code = "READING_SOURCE_CHANGED";
+      throw error;
+    }
+  }
+  function isReadingLocator(href) {
+    try {
+      if (typeof href !== "string" || href.length > 8192 || !href.startsWith("#read?")) return false;
+      const args = new URLSearchParams(href.slice(6)), keys2 = [...args.keys()];
+      if (keys2.some((k) => !["uid", "book", "kind", "plan", "day", "offset", "ref", "source"].includes(k)) || new Set(keys2).size !== keys2.length) return false;
+      const context = Object.fromEntries(["uid", "book", "kind", "plan"].filter((k) => args.has(k)).map((k) => [k, args.get(k)]));
+      if (args.has("day")) context.day = Number(args.get("day"));
+      if (args.has("offset") && !/^\d+$/.test(args.get("offset"))) return false;
+      readingPosition(context, args.has("offset") ? Number(args.get("offset")) : 0, args.has("ref") ? args.get("ref") : "legacy/1", args.has("source") ? args.get("source") : "legacy");
+      if (args.has("source")) assertPositionPin(args, { source: { commit: args.get("source") } });
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  // web/bookmark-location.mjs
+  function bookmarkLocation(item, context) {
+    if (!item || typeof item.ref !== "string" || !item.ref) throw Error("This bookmark has no valid passage reference. Export it before repairing its metadata.");
+    if (item.offset !== void 0 && (!Number.isSafeInteger(item.offset) || item.offset < 0 || item.offset > 1e5)) throw Error("This bookmark has invalid saved-position metadata. Keep/export it before reviewing its source separately.");
+    const pinned = item.source_commit !== void 0;
+    if (pinned && (!Number.isSafeInteger(item.offset) || item.offset < 0)) throw Error("This versioned bookmark has no exact saved position. Its source version was not dropped or guessed. Keep/export the bookmark and review its source separately.");
+    const index = Number.isSafeInteger(item.offset) && item.offset >= 0 ? item.offset : Number(item.ref.match(/\/c?(\d+)$/)?.[1] || 1) - 1;
+    const offset = pinned ? item.offset : Math.floor(index / 30) * 30;
+    const href = readingPosition(context, offset, item.ref, pinned ? item.source_commit : "legacy");
+    if (pinned) return { href, pinned: true, notice: "Saved source version: opening checks the revision before displaying wording." };
+    const args = new URLSearchParams(href.slice(6));
+    args.delete("source");
+    return { href: "#read?" + args, pinned: false, notice: "Legacy bookmark: no source version was saved. Opening checks its reference against the current source; this is not a saved copy of the old wording." };
+  }
+
   // web/saved-passages.mjs
   var SAVED_PAGE_SIZE = 25;
   function savedScope(item) {
@@ -705,7 +753,7 @@
   // web/bookmark-import.mjs
   var MAX_IMPORT_BYTES = 16 * 1024 * 1024;
   var keys = /* @__PURE__ */ new Set(["uid", "ref", "title", "note", "offset", "source_commit"]);
-  var string = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f]/.test(x);
+  var string2 = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f]/.test(x);
   var object = (x) => x && typeof x === "object" && !Array.isArray(x);
   var identity = (x) => JSON.stringify([x.uid, x.ref]);
   function parseBookmarks(text3) {
@@ -718,7 +766,7 @@
     if (!object(data) || data.format !== "pali-library-v1" || Object.keys(data).some((k) => !["format", "saved"].includes(k)) || !Array.isArray(data.saved) || data.saved.length > 500) throw Error("This is not a supported P\u0101li Library bookmark export (maximum 500 passages). Nothing was imported.");
     const seen = /* @__PURE__ */ new Set();
     return data.saved.map((x) => {
-      if (!object(x) || Object.keys(x).some((k) => !keys.has(k)) || !string(x.uid, 300) || !string(x.ref, 400) || !string(x.title, 1e3) || !(/^[a-z][a-z0-9.-]*$/.test(x.uid) || /^(book|post|commentary-ref|commentary):[^\r\n]+$/.test(x.uid)) || /https?:|javascript:|data:|[<>]/i.test(x.uid) || x.note !== void 0 && (typeof x.note !== "string" || x.note.length > 4e3) || x.offset !== void 0 && (!Number.isSafeInteger(x.offset) || x.offset < 0 || x.offset > 1e5) || x.source_commit !== void 0 && !string(x.source_commit, 100)) throw Error("A bookmark has unsupported fields or invalid reference, note, position or revision metadata. Nothing was imported.");
+      if (!object(x) || Object.keys(x).some((k) => !keys.has(k)) || !string2(x.uid, 300) || !string2(x.ref, 400) || !string2(x.title, 1e3) || !(/^[a-z][a-z0-9.-]*$/.test(x.uid) || /^(book|post|commentary-ref|commentary):[^\r\n]+$/.test(x.uid)) || /https?:|javascript:|data:|[<>]/i.test(x.uid) || x.note !== void 0 && (typeof x.note !== "string" || x.note.length > 4e3) || x.offset !== void 0 && (!Number.isSafeInteger(x.offset) || x.offset < 0 || x.offset > 1e5) || x.source_commit !== void 0 && !string2(x.source_commit, 100)) throw Error("A bookmark has unsupported fields or invalid reference, note, position or revision metadata. Nothing was imported.");
       if (seen.has(identity(x))) throw Error("The file contains duplicate passage references. Resolve those duplicates before importing; no notes were chosen or discarded.");
       seen.add(identity(x));
       return { uid: x.uid, ref: x.ref, title: x.title, note: x.note ?? "", ...x.offset !== void 0 ? { offset: x.offset } : {}, ...x.source_commit !== void 0 ? { source_commit: x.source_commit } : {} };
@@ -768,7 +816,7 @@
   var MAX_PROGRESS_MARKS = 1600;
   var object2 = (x) => x && typeof x === "object" && !Array.isArray(x);
   var exact = (x, keys2) => object2(x) && Object.keys(x).length === keys2.length && keys2.every((k) => Object.hasOwn(x, k));
-  var integer = (x, min, max) => Number.isSafeInteger(x) && x >= min && x <= max;
+  var integer2 = (x, min, max) => Number.isSafeInteger(x) && x >= min && x <= max;
   var key = (x) => x.name + ":" + x.day;
   function parseProgress(text3, catalog) {
     const fail2 = () => {
@@ -783,7 +831,7 @@
     if (!exact(data, ["format", "progress"]) || data.format !== "pali-library-reading-progress-v1" || !Array.isArray(data.progress) || data.progress.length > MAX_PROGRESS_MARKS) fail2();
     const plans2 = new Map(catalog.map((p) => [p.name, p.days])), seen = /* @__PURE__ */ new Set();
     return data.progress.map((mark) => {
-      if (!exact(mark, ["name", "day", "signature"]) || !plans2.has(mark.name) || !integer(mark.day, 1, plans2.get(mark.name)) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail2();
+      if (!exact(mark, ["name", "day", "signature"]) || !plans2.has(mark.name) || !integer2(mark.day, 1, plans2.get(mark.name)) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail2();
       seen.add(key(mark));
       let s;
       try {
@@ -794,7 +842,7 @@
       if (!exact(s, ["name", "day", "source", "readings"]) || s.name !== mark.name || s.day !== mark.day || typeof s.source !== "string" || !/^[a-zA-Z0-9._-]{1,100}$/.test(s.source) || !Array.isArray(s.readings) || !s.readings.length || s.readings.length > 20) fail2();
       const ids = /* @__PURE__ */ new Set();
       for (const r of s.readings) {
-        if (!exact(r, ["id", "offset", "limit", "part", "of"]) || typeof r.id !== "string" || !/^[a-z][a-z0-9.-]{0,299}$/.test(r.id) || ids.has(r.id) || !integer(r.offset, 0, 1e5) || !(r.limit === null || integer(r.limit, 1, 1e5)) || !(r.part === null && r.of === null || integer(r.part, 1, 400) && integer(r.of, r.part, 400) && r.limit !== null)) fail2();
+        if (!exact(r, ["id", "offset", "limit", "part", "of"]) || typeof r.id !== "string" || !/^[a-z][a-z0-9.-]{0,299}$/.test(r.id) || ids.has(r.id) || !integer2(r.offset, 0, 1e5) || !(r.limit === null || integer2(r.limit, 1, 1e5)) || !(r.part === null && r.of === null || integer2(r.part, 1, 400) && integer2(r.of, r.part, 400) && r.limit !== null)) fail2();
         ids.add(r.id);
       }
       const signature = JSON.stringify({ name: s.name, day: s.day, source: s.source, readings: s.readings.map((r) => ({ id: r.id, offset: r.offset, limit: r.limit, part: r.part, of: r.of })) });
@@ -808,9 +856,9 @@
   }
 
   // web/topics-study.mjs
-  var string2 = (x) => typeof x === "string" && x.length > 0;
+  var string3 = (x) => typeof x === "string" && x.length > 0;
   var slug = (x) => typeof x === "string" && /^[a-z0-9][a-z0-9_-]{0,199}$/.test(x);
-  var integer2 = (x, min = 0, max = 1e5) => Number.isSafeInteger(x) && x >= min && x <= max;
+  var integer3 = (x, min = 0, max = 1e5) => Number.isSafeInteger(x) && x >= min && x <= max;
   var fail = () => {
     throw Error("The study index is incomplete or does not match this selection. No topic, list or source was substituted.");
   };
@@ -826,57 +874,57 @@
     }
   }
   function topicSource(source2) {
-    if (!string2(source2?.name) || !string2(source2.license) || !string2(source2.attribution) || !string2(source2.commit)) fail();
+    if (!string3(source2?.name) || !string3(source2.license) || !string3(source2.attribution) || !string3(source2.commit)) fail();
   }
   function related(items, tool2) {
     if (items === void 0) return;
     if (!array(items, 500)) fail();
-    for (const x of items) if (!slug(x.slug) || !string2(x.name) || !command(x.read_with, tool2, x.slug)) fail();
+    for (const x of items) if (!slug(x.slug) || !string3(x.name) || !command(x.read_with, tool2, x.slug)) fail();
   }
   function texts(items) {
     if (!array(items, 500)) fail();
-    for (const x of items) if (!/^[a-z][a-z0-9.-]*$/.test(x.id || "") || !string2(x.citation) || x.read_with?.tool !== "get_text" || x.read_with.uid !== x.id) fail();
+    for (const x of items) if (!/^[a-z][a-z0-9.-]*$/.test(x.id || "") || !string3(x.citation) || x.read_with?.tool !== "get_text" || x.read_with.uid !== x.id) fail();
   }
   function topicCatalogue(data, { offset, limit }) {
     topicSource(data?.source);
-    if (!integer2(data.total) || data.offset !== offset || !array(data.topics, limit) || data.returned !== data.topics.length || data.returned !== Math.min(limit, Math.max(0, data.total - offset)) || data.next_offset !== (offset + limit < data.total ? offset + limit : null)) fail();
+    if (!integer3(data.total) || data.offset !== offset || !array(data.topics, limit) || data.returned !== data.topics.length || data.returned !== Math.min(limit, Math.max(0, data.total - offset)) || data.next_offset !== (offset + limit < data.total ? offset + limit : null)) fail();
     const seen = /* @__PURE__ */ new Set();
     for (const x of data.topics) {
-      if (!slug(x.slug) || seen.has(x.slug) || !string2(x.name) || !["subject", "numerical"].includes(x.index) || !integer2(x.texts) || !command(x.read_with, "topic", x.slug)) fail();
+      if (!slug(x.slug) || seen.has(x.slug) || !string3(x.name) || !["subject", "numerical"].includes(x.index) || !integer3(x.texts) || !command(x.read_with, "topic", x.slug)) fail();
       seen.add(x.slug);
     }
     return data;
   }
   function topicDetail(data, name) {
     topicSource(data?.source);
-    if (data.topic?.slug !== name || !slug(name) || !string2(data.topic.name) || !string2(data.topic.index) || !atiLink(data.topic.ati_url) || data.source.url !== data.topic.ati_url || !string2(data.note)) fail();
+    if (data.topic?.slug !== name || !slug(name) || !string3(data.topic.name) || !string3(data.topic.index) || !atiLink(data.topic.ati_url) || data.source.url !== data.topic.ati_url || !string3(data.note)) fail();
     texts(data.texts);
     related(data.see_also, "topic");
     related(data.other_matches, "topic");
-    if (data.dhamma_list && (!slug(data.dhamma_list.slug) || !string2(data.dhamma_list.name) || !command(data.dhamma_list.read_with, "dhamma_list", data.dhamma_list.slug))) fail();
-    if (data.further_reading !== void 0 && (!array(data.further_reading, 500) || data.further_reading.some((x) => !string2(x.title) || !string2(x.kind) || !atiLink(x.url)))) fail();
-    for (const x of data.texts) if (!string2(x.ati_reference) || !atiLink(x.ati_url)) fail();
+    if (data.dhamma_list && (!slug(data.dhamma_list.slug) || !string3(data.dhamma_list.name) || !command(data.dhamma_list.read_with, "dhamma_list", data.dhamma_list.slug))) fail();
+    if (data.further_reading !== void 0 && (!array(data.further_reading, 500) || data.further_reading.some((x) => !string3(x.title) || !string3(x.kind) || !atiLink(x.url)))) fail();
+    for (const x of data.texts) if (!string3(x.ati_reference) || !atiLink(x.ati_url)) fail();
     return data;
   }
   function listCatalogue(data) {
     if (!array(data?.lists, 100) || !data.lists.length) fail();
     const seen = /* @__PURE__ */ new Set();
     for (const x of data.lists) {
-      if (!slug(x.slug) || seen.has(x.slug) || !string2(x.name) || !string2(x.pali) || !integer2(x.count, 1, 100) || !status(x.status) || !string2(data.status_labels?.[x.status]) || !command(x.read_with, "dhamma_list", x.slug)) fail();
+      if (!slug(x.slug) || seen.has(x.slug) || !string3(x.name) || !string3(x.pali) || !integer3(x.count, 1, 100) || !status(x.status) || !string3(data.status_labels?.[x.status]) || !command(x.read_with, "dhamma_list", x.slug)) fail();
       seen.add(x.slug);
     }
     return data;
   }
   function listDetail(data, name) {
-    if (data?.slug !== name || !slug(name) || !string2(data.name) || !string2(data.pali) || !status(data.status) || !string2(data.status_meaning) || !string2(data.gloss_note) || !string2(data.note) || !integer2(data.count, 1, 100) || !array(data.members, 100) || !data.members.length || !string2(data.source?.curated_by) || !string2(data.source.pali?.name) || !string2(data.source.pali.commit) || !string2(data.source.pali.attribution) || !string2(data.source.pali.terms)) fail();
+    if (data?.slug !== name || !slug(name) || !string3(data.name) || !string3(data.pali) || !status(data.status) || !string3(data.status_meaning) || !string3(data.gloss_note) || !string3(data.note) || !integer3(data.count, 1, 100) || !array(data.members, 100) || !data.members.length || !string3(data.source?.curated_by) || !string3(data.source.pali?.name) || !string3(data.source.pali.commit) || !string3(data.source.pali.attribution) || !string3(data.source.pali.terms)) fail();
     for (const [i, x] of data.members.entries()) {
-      if (x.n !== i + 1 || !string2(x.pali) || !string2(x.gloss) || x.list !== void 0 && (!slug(x.list) || !command(x.read_with, "dhamma_list", x.list))) fail();
+      if (x.n !== i + 1 || !string3(x.pali) || !string3(x.gloss) || x.list !== void 0 && (!slug(x.list) || !command(x.read_with, "dhamma_list", x.list))) fail();
     }
     texts(data.defined_in);
     if (!data.defined_in.length) fail();
     texts(data.see_also_texts || []);
     related(data.related_lists, "dhamma_list");
-    if (data.topic && (!slug(data.topic.slug) || !string2(data.topic.name) || !command(data.topic.read_with, "topic", data.topic.slug))) fail();
+    if (data.topic && (!slug(data.topic.slug) || !string3(data.topic.name) || !command(data.topic.read_with, "topic", data.topic.slug))) fail();
     return data;
   }
 
@@ -933,39 +981,6 @@
         }
       }
     };
-  }
-
-  // web/reading-position.mjs
-  var string3 = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f<>]/.test(x);
-  var integer3 = (x) => Number.isSafeInteger(x) && x >= 0 && x <= 1e5;
-  var source = (x) => typeof x === "string" && /^[a-zA-Z0-9._-]{1,100}$/.test(x);
-  function readingPosition(context, offset, ref, revision) {
-    if (!context || !integer3(offset) || !string3(ref, 400) || !source(revision) || Object.keys(context).some((k) => !["uid", "book", "kind", "plan", "day"].includes(k)) || Boolean(context.uid) === Boolean(context.book) || !string3(context.uid || context.book, 300) || /https?:|javascript:|data:/i.test(context.uid || context.book) || context.kind !== void 0 && !["post", "commentary"].includes(context.kind) || context.book && context.kind || context.plan !== void 0 && (!context.uid || context.kind || !/^[a-z0-9-]{1,60}$/.test(context.plan) || !Number.isSafeInteger(context.day) || context.day < 1 || context.day > 400) || context.day !== void 0 && context.plan === void 0) throw Error("This reading position has unsupported source or reference metadata.");
-    return "#read?" + new URLSearchParams({ ...context, offset, ref, source: revision });
-  }
-  function assertPositionPin(args, data) {
-    if (!args.has("source")) return;
-    if (args.getAll("source").length !== 1 || !source(args.get("source")) || !string3(args.get("ref"), 400) || !/^\d+$/.test(args.get("offset") || "") || !integer3(Number(args.get("offset")))) throw Error("The saved reading position is incomplete. Open its source from the Library; no nearby passage was substituted.");
-    if (data.source?.commit !== args.get("source")) {
-      const error = Error("The source revision changed since this reading position was saved. Review the current source explicitly before continuing; no replacement wording was displayed.");
-      error.code = "READING_SOURCE_CHANGED";
-      throw error;
-    }
-  }
-  function isReadingLocator(href) {
-    try {
-      if (typeof href !== "string" || href.length > 8192 || !href.startsWith("#read?")) return false;
-      const args = new URLSearchParams(href.slice(6)), keys2 = [...args.keys()];
-      if (keys2.some((k) => !["uid", "book", "kind", "plan", "day", "offset", "ref", "source"].includes(k)) || new Set(keys2).size !== keys2.length) return false;
-      const context = Object.fromEntries(["uid", "book", "kind", "plan"].filter((k) => args.has(k)).map((k) => [k, args.get(k)]));
-      if (args.has("day")) context.day = Number(args.get("day"));
-      if (args.has("offset") && !/^\d+$/.test(args.get("offset"))) return false;
-      readingPosition(context, args.has("offset") ? Number(args.get("offset")) : 0, args.has("ref") ? args.get("ref") : "legacy/1", args.has("source") ? args.get("source") : "legacy");
-      if (args.has("source")) assertPositionPin(args, { source: { commit: args.get("source") } });
-      return true;
-    } catch {
-      return false;
-    }
   }
 
   // web/local-storage-write.mjs
@@ -2343,8 +2358,13 @@
       else if (!page.total) results.append(el("p", "Try a different saved title, reference, note or source type, or clear the filters."));
       for (const item of page.items) {
         const box = el("article", void 0, "segment");
-        const index = Number.isSafeInteger(item.offset) && item.offset >= 0 ? item.offset : Number(item.ref.match(/\/c?(\d+)$/)?.[1] || 1) - 1;
-        box.append(el("small", savedScopeLabels[savedScope(item)], "muted"), link(item.title + " \xB7 " + item.ref, route("read", { ...readingArgs(item.uid), offset: Math.floor(index / 30) * 30, ref: item.ref })));
+        box.append(el("small", savedScopeLabels[savedScope(item)], "muted"));
+        try {
+          const target = bookmarkLocation(item, readingArgs(item.uid));
+          box.append(link(item.title + " \xB7 " + item.ref, target.href), el("p", target.notice, "muted"));
+        } catch (error) {
+          box.append(el("strong", item.title + " \xB7 " + item.ref), el("p", "This saved reference cannot be opened safely: " + error.message, "notice"));
+        }
         const label = el("label", "Your personal note");
         const input = el("textarea");
         input.className = "note-field";

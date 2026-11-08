@@ -1,0 +1,252 @@
+{
+  "passed": 48,
+  "outside_source_tree": true,
+  "checks": [
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "canon: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "book: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "post: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "commentary: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "aligned commentary: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: dhp183"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: book:vin02m1"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: post:Vism 1.1"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: commentary:abh01a.att.xml"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: commentary-ref:mn10"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "legacy bookmark is clearly unversioned and still checks actual reference"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "invalid version metadata stays exportable without dropping pin or contacting server"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "canon: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "book: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "post: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "commentary: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "aligned commentary: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: dhp183"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: book:vin02m1"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: post:Vism 1.1"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: commentary:abh01a.att.xml"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: commentary-ref:mn10"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "legacy bookmark is clearly unversioned and still checks actual reference"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "invalid version metadata stays exportable without dropping pin or contacting server"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "canon: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "book: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "post: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "commentary: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "aligned commentary: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: dhp183"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: book:vin02m1"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: post:Vism 1.1"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: commentary:abh01a.att.xml"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: commentary-ref:mn10"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "legacy bookmark is clearly unversioned and still checks actual reference"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "invalid version metadata stays exportable without dropping pin or contacting server"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "canon: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "book: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "post: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "commentary: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "aligned commentary: saved link keeps exact revision, offset, source kind and wording"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: dhp183"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: book:vin02m1"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: post:Vism 1.1"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: commentary:abh01a.att.xml"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "changed revision refuses wording before explicit review: commentary-ref:mn10"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "legacy bookmark is clearly unversioned and still checks actual reference"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "invalid version metadata stays exportable without dropping pin or contacting server"
+    }
+  ],
+  "a11y": {
+    "scans": 0,
+    "violations": 0,
+    "results": []
+  },
+  "limits": "Actual bundled Pali in five source modes; controlled old/invalid bookmark metadata, not a real upstream text update. No archive retrieval, translation-source consent, physical-device or human screen-reader certification."
+}

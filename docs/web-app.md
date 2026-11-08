@@ -39,7 +39,7 @@ The npm package and container include `server/web/`. The HTML, stylesheet and br
 
 ## Storage and source boundaries
 
-Personal preferences, the last reading link and up to 500 saved references/notes remain in this browser's local storage. Scripture and English bodies are not downloaded into an offline web library. Data is not synced between devices, and clearing browser storage removes it. JSON export is a backup; previewed local bookmark restore is supported, while account sync is not implemented. Storage failures are reported without preventing reading. Source revisions are retained on bookmarks, and a changed revision is flagged on reopening; a bookmark is not a frozen scripture copy.
+Personal preferences, the last reading link and up to 500 saved references/notes remain in this browser's local storage. Scripture and English bodies are not downloaded into an offline web library. Data is not synced between devices, and clearing browser storage removes it. JSON export is a backup; previewed local bookmark restore is supported, while account sync is not implemented. Storage failures are reported without preventing reading. Source revisions are retained on bookmarks. Versioned bookmarks check the recorded revision before displaying wording; a changed revision requires explicit current-source review. A bookmark is not a frozen scripture copy.
 
 Canonical Pāli works **without upstream source access on the server**. That is different from the web app working without access to its server: this version has no service worker/offline browser mode. English needs an available approved live provider. All source terms and alignment/abbreviation cautions continue to apply. No SuttaCentral source is imported or fetched.
 
@@ -379,3 +379,21 @@ them durably. Clear saved filters restores the full list; exports include all
 bookmarks, not just matching ones. Source checks still happen when a reference
 is opened. This adds no cloud storage or sync, and keeps the existing cross-tab
 conflict protection.
+
+## Reopen a saved source version
+
+New bookmarks retain the source-revision metadata and exact position returned
+when you saved them. Opening one now applies the same revision/ref check as an
+exact reading-position link **before** displaying passage wording. If the
+revision changed, the app offers **Review current source at this reference**.
+That is an explicit choice to read the current source, not retrieval of an
+archived edition. It keeps the original saved revision and personal note; no
+notes are silently rebound or overwritten.
+
+Older bookmarks without a revision remain usable, labelled as unversioned and
+opening the current source. Invalid version/position metadata is shown with an
+explanation rather than dropping the pin or guessing a version. It remains
+exportable and editable as a personal note. Source checks use the revision
+metadata supplied by the existing source engine; they do not independently
+certify publisher provenance, detect every remapping under an unchanged revision,
+or make the bookmark a cryptographic snapshot of scripture.

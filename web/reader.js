@@ -1,3 +1,4 @@
+import { bookmarkLocation } from './bookmark-location.mjs';
 import { savedPage, savedScope, savedScopeLabels } from './saved-passages.mjs';
 import { installPagePrinting } from './print-page.mjs';
 import { localizeText } from '../src/script.mjs';
@@ -580,8 +581,14 @@ function saved() {
     if (!local.saved.length) results.append(el('p', 'Save a passage while reading to find it here.'));
     else if (!page.total) results.append(el('p', 'Try a different saved title, reference, note or source type, or clear the filters.'));
     for (const item of page.items) {
-      const box = el('article', undefined, 'segment'); const index = Number.isSafeInteger(item.offset) && item.offset >= 0 ? item.offset : Number(item.ref.match(/\/c?(\d+)$/)?.[1] || 1) - 1;
-      box.append(el('small', savedScopeLabels[savedScope(item)], 'muted'), link(item.title + ' · ' + item.ref, route('read', { ...readingArgs(item.uid), offset: Math.floor(index / 30) * 30, ref: item.ref })));
+      const box = el('article', undefined, 'segment');
+      box.append(el('small', savedScopeLabels[savedScope(item)], 'muted'));
+      try {
+        const target = bookmarkLocation(item, readingArgs(item.uid));
+        box.append(link(item.title + ' · ' + item.ref, target.href), el('p', target.notice, 'muted'));
+      } catch (error) {
+        box.append(el('strong', item.title + ' · ' + item.ref), el('p', 'This saved reference cannot be opened safely: ' + error.message, 'notice'));
+      }
       const label = el('label', 'Your personal note'); const input = el('textarea'); input.className = 'note-field'; input.maxLength = 4000; input.value = noteDrafts.get(noteKey(item)) ?? (typeof item.note === 'string' ? item.note : ''); input.addEventListener('input', () => noteDrafts.set(noteKey(item), input.value)); label.append(input); box.append(label);
       box.append(button('Save note', () => { if (token !== epoch) return; const original = local.saved.find(x => x.uid === item.uid && x.ref === item.ref); if (original) original.note = input.value; if (persist()) { noteDrafts.delete(noteKey(item)); status.textContent = 'Personal note saved in this browser.'; } }), button('Remove bookmark', () => { if (token !== epoch) return; noteDrafts.delete(noteKey(item)); local.saved = local.saved.filter(x => !(x.uid === item.uid && x.ref === item.ref)); persist(); show(true); }));
       if (item.source_commit) box.append(el('small', 'Saved source revision: ' + item.source_commit, 'muted')); results.append(box);
