@@ -48,6 +48,70 @@
         }
       ],
       "mapping_note": "One compiled publisher page concerning indexed AN 1.49–52, not four independently aligned translations. Four quoted passages concern defiled mind, freed mind, the uninstructed person without mind development and the instructed disciple with mind development. The complete interpretive Note, including MN 49, DN 11, MN 24 references and a fourth-jhana quotation, remains editorial and is not individually attributed to an AN member. Exact shared-page consent is required; quotation matches and absences concern the whole publisher page only. No whole-unit coverage is inferred."
+    },
+    {
+      "owner_id": "an1.45",
+      "text_ids": [
+        "an1.45",
+        "an1.46"
+      ],
+      "path": "/tipitaka/an/an01/an01.045-046.than",
+      "english_title": "A Pool of Water — shared publisher page",
+      "source_reference": "AN 1.45–46 (shared publisher page)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "presentation": "compilation",
+      "source_html_sha256": "75faa07ddb7e722fa7887d9d15fca0efe6d216c047f2fcbeef73e8d5cc97ca32",
+      "text_sha256": "7297c6cf82b7abe3f94ad8e6fdc5e8fc1c03a6b3c896a2a1bcf5fa895bef69fd",
+      "notice_sha256": "c6f4d4898e1844091dabb21aa338b492be115913f2af077c2bd57708890a8bfb",
+      "pali_segments_sha256": "3842fa2b62de5f546e83337c603df9bfa49cda6be1092221b102b7ea20cf4005",
+      "root_units": [
+        {
+          "id": "an1.45",
+          "title": "Paṇihitaacchavaggo",
+          "vri": "45",
+          "root_blocks_sha256": "21e8b78274e211f0d7d71ad765178e166fa2114ba78cd159dec9e12b6d436c63"
+        },
+        {
+          "id": "an1.46",
+          "title": "Paṇihitaacchavaggo",
+          "vri": "46",
+          "root_blocks_sha256": "108aa53d9914b95f05f75db24bd463ec0035f263442fff330e36e1c813d4be16"
+        }
+      ],
+      "mapping_note": "The publisher combines the turbid and clear pool comparisons on one page. The turbid pool, inability to see shells/gravel/fish and inability to know benefit or realize noble knowledge contrast with the clear pool and possible knowledge. Complete indexed root units 45–46 establish the subjects. Retrieval and quotation concern the full shared page, not separately aligned translations; no whole-unit coverage is inferred."
+    },
+    {
+      "owner_id": "an2.32",
+      "text_ids": [
+        "an2.32",
+        "an2.33"
+      ],
+      "path": "/tipitaka/an/an02/an02.031.than",
+      "english_title": "Gratitude — shared publisher page",
+      "source_reference": "ATI AN 2.31–32; indexed AN 2.32–33 (shared page)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "presentation": "compilation",
+      "source_html_sha256": "ee088cf5338b2b59fda67eb3374f2ee3cafc1a711c54c39319d895ee5d300626",
+      "text_sha256": "68448c5eba804b236080fbb41641328da982639a295de44058e070ae99bd7495",
+      "notice_sha256": "693ec730c062294a3570512540f883b863bb57f47765b3782199a9a404977d60",
+      "pali_segments_sha256": "3f85a870476455991af56f4308b4fc92f73d0931c8cd17e18a171c374abfef96",
+      "root_units": [
+        {
+          "id": "an2.32",
+          "title": "Samacittavagga",
+          "vri": "33",
+          "root_blocks_sha256": "42b3a5a794cdbf71667e74d9f3bb8ef8904b26fb4b5ceef1452469ab9285886f"
+        },
+        {
+          "id": "an2.33",
+          "title": "Samacittavaggo",
+          "vri": "34",
+          "root_blocks_sha256": "cc7ab0271a3323aaff14bc4c016b4a1e48f381cc3370808b53528450bf756ce1"
+        }
+      ],
+      "mapping_note": "Publisher AN 2.31–32 concerns indexed AN 2.32–33, VRI paragraphs 33–34, not indexed AN 2.31 on calm/insight. The first treatment contrasts ingratitude and gratitude; the second discusses carrying parents for a century, sovereignty, their care, and establishing conviction, virtue, generosity and discernment. Preserve the entire publisher page including II,iv,2 and See also cross-references MN 110, SN 7.14, AN 4.73, Iti 106. Those references remain editorial. Page-level consent/citations do not establish individual passage alignment or whole-unit coverage."
     }
   ]
 }

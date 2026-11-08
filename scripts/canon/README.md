@@ -289,3 +289,9 @@ editorial Note. ATI shared declarations require exact text and full-notice pins.
 Keep the whole source and use page-level/null-ID quotation semantics. Source,
 notice or scope drift fails closed; do not fix it by relabelling presentation or
 editing hashes without fresh review. See [the pilot receipt](../../docs/data/luminous-shared-page-pilot.md).
+
+D197 adds Water and Gratitude through this same reviewed shared-page flow;
+see the [paired-page receipt](../../docs/data/paired-shared-page-expansion.md).
+The installed shared audit now checks every real declaration, including mandatory
+ATI notice-pin downgrade refusal. Do not assume the first manifest entry is the
+only active source.

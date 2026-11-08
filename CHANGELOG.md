@@ -4,6 +4,12 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Add two reviewed ATI shared compilations: Water (AN 1.45–46) and Gratitude
+  (publisher AN 2.31–32, indexed AN 2.32–33). Preserve complete page/notice
+  pins, exact consent and page-level quotation. Separate shared totals are
+  three pages/eight subjects; ordinary English totals stay unchanged.
+  Exercise every real declaration in the installed-package audit.
+
 - Activate the first reviewed shared publisher page: ATI Luminous (AN 1.49–52),
   a compilation with exact-ID consent, page-level quotation results and full
   source/notice pins. Count one shared page/four subjects separately; whole-unit

@@ -30,7 +30,7 @@ test('reviewed compilation exposes one owner and four subjects while whole-unit 
  d.translations={...d.translations};delete d.translations[owner];const without=translationCoverage({refresh:true}).total;
  for(const k of ['links','with_english','with_english_including_inherited'])assert.equal(withShared[k],without[k]);
  assert.equal(withShared.shared_links,(without.shared_links||0)+1);assert.equal(withShared.with_shared_english,(without.with_shared_english||0)+4);assert.equal(withShared.shared_only,(without.shared_only||0)+4);
- assert.equal(cli.shared_links,1);assert.equal(cli.shared_texts,4);assert.equal(cli.shared_ati,1);
+ assert.equal(cli.shared_links,manifest.links.length);assert.equal(cli.shared_texts,new Set(manifest.links.flatMap(r=>r.text_ids)).size);assert.equal(cli.shared_ati,manifest.links.length);
 });
 
 test('actual compilation metadata requires exact consent and refuses URL attribution or adjacent-unit selection before fetch',async()=>{
@@ -73,7 +73,7 @@ const python=['python3','python'].find(cmd=>spawnSync(cmd,['--version']).status=
 test('reviewed shared builder verifies complete root, HTML, extracted text and notice before changing any binding',{skip:!python},()=>{
  const d=canon.load(),units=ids.map(uid=>({...canon.resolve(uid).unit,book:0,start:canon.resolve(uid).unit.start-61,end:canon.resolve(uid).unit.end-61}));
  const book={blocks:d.canon.books[canon.resolve(owner).unit.book].blocks.slice(61,67)};
- const m=structuredClone(manifest);m.links[0].source_html_sha256=createHash('sha256').update(fixtureHtml).digest('hex');m.links[0].text_sha256=scopeHash(fixtureText);m.links[0].notice_sha256=scopeHash(english.atiNotice(fixtureHtml));
+ const m=structuredClone(manifest);m.links=[m.links[0]];m.links[0].source_html_sha256=createHash('sha256').update(fixtureHtml).digest('hex');m.links[0].text_sha256=scopeHash(fixtureText);m.links[0].notice_sha256=scopeHash(english.atiNotice(fixtureHtml));
  const payload={canon:{source:d.canon.source,units,books:[book]},manifest:m,html:fixtureHtml};
  const code=`import sys,json,tempfile,pathlib,copy,hashlib
 sys.path.insert(0,'scripts/canon')

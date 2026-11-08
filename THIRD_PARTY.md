@@ -154,3 +154,13 @@ G. P. Malalasekera's DPPN (1937–38) is linked only. Its copyright or licence s
 ## Runtime dependencies
 
 The bundled server includes the Model Context Protocol TypeScript SDK and its dependencies. Their licence notices are in `server/THIRD_PARTY_LICENSES.txt`.
+
+## Reviewed ATI shared compilations (D197)
+
+Three compiled publisher pages are separately available by explicit shared-page
+consent. Luminous is documented in the [pilot](docs/data/luminous-shared-page-pilot.md).
+The [Water and Gratitude review](docs/data/paired-shared-page-expansion.md) records
+full individual CC BY-NC 4.0 notices: Water ©2006 Ṭhānissaro Bhikkhu, revised
+4 August 2010; Gratitude ©2002, revised 30 November 2013. English remains live,
+with complete source notices and citations; it is not bundled or relicensed.
+Counts and quote results concern shared pages, not individually aligned translations.

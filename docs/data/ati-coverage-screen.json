@@ -1379,6 +1379,36 @@
         }
       ],
       "reason": "One compiled publisher page is now accessible by exact-ID shared consent. Whole-unit counts are unchanged; the historical D193 whole-unit hold is not relaxed or erased. Full Note, text and notice pins preserved. Mother and single-unit condensed holds remain."
+    },
+    {
+      "decision": "D197",
+      "accepted_links": 0,
+      "newly_covered_units": [],
+      "activated_shared_pages": [
+        {
+          "owner_id": "an1.45",
+          "path": "tipitaka/an/an01/an01.045-046.than.html",
+          "subject_ids": [
+            "an1.45",
+            "an1.46"
+          ],
+          "presentation": "compilation",
+          "individual_alignment_verified": false,
+          "whole_unit_coverage": false
+        },
+        {
+          "owner_id": "an2.32",
+          "path": "tipitaka/an/an02/an02.031.than.html",
+          "subject_ids": [
+            "an2.32",
+            "an2.33"
+          ],
+          "presentation": "compilation",
+          "individual_alignment_verified": false,
+          "whole_unit_coverage": false
+        }
+      ],
+      "reason": "Two complete compiled publisher pages with exact root, source text and full notice pins. Gratitude publisher AN2.31–32 maps by content to indexed AN2.32–33/VRI33–34; nearby calm/insight not a subject. No whole-unit gains, individual quotation alignment or lifted Mother/singleton holds."
     }
   ]
 }

@@ -27,10 +27,11 @@ try {
   await cp(serverDir, join(stage, 'server'), { recursive: true }); await mkdir(join(stage, 'empty'));
   const original = JSON.parse(await readFile(join(stage, 'server/data/translations.json'), 'utf8'));
   const preload = join(stage, 'synthetic-provider.cjs');
-  const reviewed = Object.values(original).flat().find(l => l.match === 'reviewed-shared-page');
-  const modes = ['stdio', 'http', 'mixed_versions', 'changed_mapping', 'changed_source', 'removed_scope', 'aj_shared_metadata', 'aj_partial_metadata', 'aj_invalid_metadata', ...(reviewed ? ['reviewed_metadata', 'reviewed_notice_downgrade'] : [])];
+  const reviewedPages = Object.values(original).flat().filter(l => l.match === 'reviewed-shared-page');
+  const modes = ['stdio', 'http', 'mixed_versions', 'changed_mapping', 'changed_source', 'removed_scope', 'aj_shared_metadata', 'aj_partial_metadata', 'aj_invalid_metadata'].map(mode=>[mode,null]);
+  for(const page of reviewedPages) modes.push(['reviewed_metadata',page],['reviewed_notice_downgrade',page]);
   const originalAj = JSON.parse(await readFile(join(stage, 'server/data/anandajoti.json'), 'utf8'));
-  for (const mode of modes) {
+  for (const [mode, reviewed] of modes) {
     const fetchLog = join(stage, 'fixture-fetches.jsonl'); await writeFile(fetchLog, '');
     const link = syntheticShared(); if (mode === 'changed_mapping') link.reference += ' changed';
     const full = { ...link, url: link.url.replace('SHARED', 'FULL') }; delete full.shared_scope;
@@ -157,7 +158,7 @@ try {
     }
     assert.doesNotMatch(stderr, /UNEXPECTED_NETWORK_ATTEMPT/);
     assert.equal((await readFetchLedger(fetchLog)).filter(e => e.kind === 'unexpected').length, 0);
-    reports.push({ mode, requests, status: 'passed', synthetic_provider_only: true, real_declaration_metadata: mode.startsWith('reviewed_'), real_network_attempts: 0 });
+    reports.push({ mode, ...(reviewed ? {source_path:reviewed.path} : {}), requests, status: 'passed', synthetic_provider_only: true, real_declaration_metadata: mode.startsWith('reviewed_'), real_network_attempts: 0 });
     await close();
   }
   const report = { status: 'passed', cases: reports, scope: 'Extracted-package synthetic shared-page contracts and real compilation metadata with simulated providers only. One page, explicit opt-in, no individual/whole-unit alignment, bounded pinned restart, eight input scripts, HTTP/widget and merged AJ metadata without any author-host request. Real compilation metadata/consent/widget refusal/source-drift checks contain no publisher text and make no author-host request.' };
