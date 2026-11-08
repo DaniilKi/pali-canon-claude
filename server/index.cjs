@@ -32475,8 +32475,9 @@ function createServer({ executeTool } = {}) {
     scope_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Unchanged scoped-source mapping hash from continue_with; required for partial/shared-page continuation.")
   }, async ({ uid, translation: translation2, offset, limit, prefix_sha256, allow_partial, allow_shared, scope_sha256 }) => {
     const input = romanizeInput(uid);
-    const { unit } = resolve(input.text);
-    return { ...await translation(unit, translation2, { offset, limit, prefix_sha256, allow_partial, allow_shared, scope_sha256 }), ...inputNote(input) };
+    const { unit, notes } = resolve(input.text);
+    const result = await translation(unit, translation2, { offset, limit, prefix_sha256, allow_partial, allow_shared, scope_sha256 });
+    return { ...result, notes: [...notes, ...result.notes], ...inputNote(input) };
   }, { network: true });
   tool("compare_translations", "Fetch two to four English translations of the same text side by side, with the P\u0101li opening for reference. Lists what is available when fewer exist.", {
     uid: citation,

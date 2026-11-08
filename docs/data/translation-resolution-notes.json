@@ -1,0 +1,39 @@
+{
+  "baseline_commit": "8052fc165ac4581420d6332f1dd19b4de8073e38",
+  "observed_on": "2026-11-08",
+  "before": {
+    "isError": false,
+    "resolved": "sn56.105-107",
+    "resolution_note": "sn56.106 is not separately indexed; the bundled citation lookup maps it to source group SN 56.105–107 (sn56.105-107).",
+    "note_preserved": false,
+    "shared_scope": "shared_page",
+    "synthetic_provider": true
+  },
+  "after_installed": {
+    "status": "passed",
+    "outside_checkout": true,
+    "packaged_stdio": true,
+    "source_fixture": "Official pinned ATI45fedca local HTML; no upstream network",
+    "denied_without_consent_before_fetch": true,
+    "member_resolution_note_preserved": true,
+    "canonical_continuation_does_not_retain_alias_note": true,
+    "shared_page_identity_preserved": true,
+    "individual_alignment_verified": false,
+    "provider_requests": 1,
+    "scope_sha256": "c886df2095592333c1f9229741cae2d0621915df5eb02a93edfd30b2baf9d427",
+    "text_sha256": "9cc6b0c063ab2d3220aaaf560bdd46fbb3e9d6ac3f4f54f59657cb92a0a2baf1",
+    "notice_sha256": "d2699fd2c0227a0bd2dd96514d26ae1f3b3978eb2d734ae46a1619cee5d1e8b5"
+  },
+  "focused_tests": {
+    "tests": 27,
+    "passed": 27,
+    "failed": 0
+  },
+  "audit": {
+    "texts": 8544,
+    "failures": 0
+  },
+  "independent_review": "Approved: preserves both note lists in a new array without changing consent, scope, source data, continuation or cache ownership.",
+  "limits": "Fixtures use synthetic providers or official pinned local ATI HTML; no live-source request or source bodies bundled.",
+  "all_server_data_files_unchanged": true
+}
