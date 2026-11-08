@@ -439,5 +439,24 @@
       "thag15.1 Thag675"
     ]
   },
-  "independent_review": "All four complete roots/bodies/notices/pins, preserved alternatives and diff reviewed independently; no blocking findings. Documentation corrections applied."
+  "independent_review": "All four complete roots/bodies/notices/pins, preserved alternatives and diff reviewed independently; no blocking findings. Documentation corrections applied.",
+  "validation": {
+    "full_check": {
+      "tests": 1051,
+      "passed": 1050,
+      "skipped": 1,
+      "failed": 0,
+      "canonical_records_audited": 8544,
+      "audit_failures": 0
+    },
+    "smoke": {
+      "checks": 64,
+      "live": false
+    },
+    "focused_source_build_and_history": {
+      "passed": 18
+    },
+    "screen_reason_regression": "passed after final single-verse reason wording correction",
+    "notes": "Local evidence; exact-head CI is separately verified after safe dev integration. No live author-server or deployment claim."
+  }
 }
