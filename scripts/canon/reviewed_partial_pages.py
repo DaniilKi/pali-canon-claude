@@ -24,21 +24,26 @@ def manifest_rows(manifest=MANIFEST):
             ('sn22.87','/tipitaka/sn/sn22/sn22.087x.wlsh'):(1,'ati-chapter-p11-of11-v1'),
             ('sn35.244','/tipitaka/sn/sn35/sn35.203x.wlsh'):(1,'ati-chapter-p1-of4-v1'),
             ('sn56.22','/tipitaka/sn/sn56/sn56.022x.wlsh'):(1,'ati-excerpt-verse-pre-v1'),
+            ('mn54','/tipitaka/mn/mn.054x.than'):(1,'ati-chapter-p14-of24-v1'),
         }
         profile=profiles.get((r.get('unit_id'),r.get('path')))
-        walshe=bool(profile and r.get('license')=='BPS-free-distribution-1985' and r.get('translator')=="Maurice O'Connell Walshe" and (p.get('version'),p.get('extractor'))==profile)
+        walshe=bool(profile and r.get('unit_id')!='mn54' and r.get('license')=='BPS-free-distribution-1985' and r.get('translator')=="Maurice O'Connell Walshe" and (p.get('version'),p.get('extractor'))==profile)
+        thanissaro=(r.get('unit_id'),r.get('path'))==('mn54','/tipitaka/mn/mn.054x.than') and r.get('license')=='CC-BY-NC' and r.get('translator')=='Thanissaro Bhikkhu' and (p.get('version'),p.get('extractor'))==profile
+        finite=walshe or thanissaro
+        if r.get('path') in {path for _,path in profiles} and not finite:
+            raise ValueError('Invalid reserved finite source profile')
         prose=walshe and p.get('version')==2
         path_match=re.fullmatch(r'/tipitaka/(?:kn/(?P<kn>thag|snp)|(?P<mn>mn))/[a-z0-9_.-]+',r.get('path',''))
         owner_pattern=(path_match['kn']+r'\d+\.\d+' if path_match and path_match['kn'] else r'mn\d+')
-        if ((not walshe and not path_match) or '..' in r['path']
-                or (not walshe and not re.fullmatch(owner_pattern,r.get('unit_id','')))
+        if ((not finite and not path_match) or '..' in r['path']
+                or (not finite and not re.fullmatch(owner_pattern,r.get('unit_id','')))
                 or r['path'] in paths or r.get('unit_id') in owners
-                or (not walshe and (r.get('license')!='Olendzki-free-distribution-2005' or r.get('translator')!='Andrew Olendzki'))
+                or (not finite and (r.get('license')!='Olendzki-free-distribution-2005' or r.get('translator')!='Andrew Olendzki'))
                 or not r.get('mapping_note') or not r.get('source_reference') or not r.get('english_title')
                 or not isinstance(r.get('root'),dict) or r['root'].get('id')!=r.get('unit_id')
                 or set(p)!=set(['version','status','unit_id','first_ref','last_ref','source_commit','pali_sha256','text_sha256','notice_sha256','extractor']+(['subparagraph'] if prose else []))
                 or p.get('version')!=(2 if prose else 1) or p.get('status')!='reviewed' or p.get('unit_id')!=r.get('unit_id')
-                or p.get('extractor')!=(profile[1] if walshe else 'ati-freeverse-v1') or p.get('source_commit')!=m.get('vri_commit')
+                or p.get('extractor')!=(profile[1] if finite else 'ati-freeverse-v1') or p.get('source_commit')!=m.get('vri_commit')
                 or any(not isinstance(v,str) or not re.fullmatch(r'[a-f0-9]{64}',v) for v in [r.get('source_html_sha256'),r['root'].get('root_blocks_sha256'),p.get('pali_sha256'),p.get('text_sha256'),p.get('notice_sha256')])):
             raise ValueError('Invalid or duplicate reviewed partial page')
         if prose:

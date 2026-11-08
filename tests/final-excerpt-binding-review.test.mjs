@@ -17,10 +17,12 @@ import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 const json = path => JSON.parse(readFileSync(path, 'utf8'));
 const review = json('docs/data/final-excerpt-binding-review.json');
 const exclusions = json('scripts/canon/reviewed_exclusions.json');
+const retiredPartialId = 'ati:/tipitaka/mn/mn.054x.than';
+const stillHeld = review.rows.filter(row => row.translation_id !== retiredPartialId);
 const originalFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = originalFetch; liveCache.clear(); });
 
-test('fourteen exact reviewed holds preserve complete indexed roots and all remaining independent ordinary alternatives', () => {
+test('fourteen historical reviews preserve indexed roots and alternatives; only the exact MN54 ATI hold retires into a partial', () => {
   assert.equal(review.rows.length, 14);
   assert.equal(new Set(review.rows.map(r => r.translation_id)).size, 14);
   assert.equal(review.new_partial_activations, 0);
@@ -39,11 +41,21 @@ test('fourteen exact reviewed holds preserve complete indexed roots and all rema
     assert.deepEqual(choices, row.remaining_ordinary_alternatives, row.owner);
     for (const id of choices) assert.ok(row.baseline_alternatives.includes(id), 'No invented replacement: ' + id);
     const hold = exclusions.exclusions.find(e => e.source === row.source && e.url === row.url);
-    assert.ok(hold, row.translation_id);
-    assert.deepEqual(hold.subject_ids, [row.owner]);
-    assert.deepEqual(hold.review.root_units, row.root_units);
+    if (row.translation_id === retiredPartialId) {
+      assert.equal(hold, undefined, 'Only this exact hold retired for its registered narrower scope');
+      const choice = canon.describe(unit).english.find(l => l.translation_id === retiredPartialId);
+      assert.ok(choice);
+      assert.equal(choice.translation_scope.kind, 'partial_unit');
+      assert.equal(choice.translation_scope.whole_unit_coverage, false);
+      assert.deepEqual([choice.translation_scope.first_ref, choice.translation_scope.last_ref, choice.translation_scope.pali_segments], ['mn54/29', 'mn54/29', 1]);
+    } else {
+      assert.ok(hold, row.translation_id);
+      assert.deepEqual(hold.subject_ids, [row.owner]);
+      assert.deepEqual(hold.review.root_units, row.root_units);
+    }
   }
-  assert.equal(canon.describe(canon.resolve('mn54').unit).english.length, 0);
+  const mn54 = canon.describe(canon.resolve('mn54').unit);
+  assert.deepEqual([mn54.english_available, mn54.partial_english_available, mn54.english.length], [0, 1, 1]);
   assert.ok(canon.segments(canon.resolve('mn54').unit).some(s => s.type === 'prose' && s.text.length > 100), 'MN54 Pali remains available offline');
 });
 
@@ -51,7 +63,8 @@ test('every held version refuses globally before network access despite partial/
   let requests = 0;
   globalThis.fetch = async () => { requests++; throw Error('Held source fetched'); };
   const key = url => { const u = new URL(url); return u.hostname.replace(/^www\./, '') + u.pathname; };
-  for (const row of review.rows) {
+  assert.equal(stillHeld.length, 13);
+  for (const row of stillHeld) {
     for (const [owner, links] of Object.entries(canon.load().translations)) {
       assert.ok(!links.some(l => key(l.url) === key(row.url)), owner + ':' + row.translation_id);
     }
@@ -60,26 +73,41 @@ test('every held version refuses globally before network access despite partial/
       await assert.rejects(english.translation(canon.resolve(row.owner).unit, row.translation_id, flags), /not linked|not available|No English/);
     }
   }
+  const unit = canon.resolve('mn54').unit;
+  assert.equal(canon.resolve('https://www.accesstoinsight.org/tipitaka/mn/mn.054x.than.html').unit.id, unit.id);
+  await assert.rejects(english.translation(unit), /Only partial translations/);
+  await assert.rejects(english.translation(unit, retiredPartialId), /partial unit/);
+  await assert.rejects(english.translation(unit, retiredPartialId, {allow_shared:true}), /no longer has a declared shared-page scope/);
   assert.equal(requests, 0);
 });
 
 test('historical exclusions, seven retained reviews and fourteen partial descriptors remain immutable; counts distinguish whole and scoped access', () => {
   assert.equal(scopeHash(canon.load().canon), '1ba8593937abe0284f87e3d8b2a4abd1d732fcc1d6117c36d5a671e968b4d73c', 'No canonical wording, repaired boundaries or saved-position metadata changes');
-  assert.equal(exclusions.exclusions.length, 38);
+  assert.equal(exclusions.exclusions.length, 41);
   assert.equal(scopeHash(exclusions.exclusions.slice(0, 24)), '74ea8c7d11dc3de1b97e6cc86d93668577360296507dfcbfb5b4b5ddee4f5c15');
-  assert.deepEqual(exclusions.exclusions.slice(24).map(e => [e.source, e.url]).sort(), review.rows.map(r => [r.source, r.url]).sort());
+  assert.deepEqual(exclusions.exclusions.slice(24, 37).map(e => [e.source, e.url]).sort(), stillHeld.map(r => [r.source, r.url]).sort());
+  assert.deepEqual(exclusions.exclusions.slice(37).map(e => [e.source, e.url]), [
+    ['dhammatalks', 'https://www.dhammatalks.org/suttas/DN/DN21.html'],
+    ['dhammatalks', 'https://www.dhammatalks.org/suttas/DN/DN26.html'],
+    ['dhammatalks', 'https://www.dhammatalks.org/suttas/MN/MN91.html'],
+    ['ati', 'https://www.accesstoinsight.org/tipitaka/dn/dn.26.0.than.html'],
+  ]);
   const retained = json('scripts/canon/retained_ordinary_pages.json');
   assert.equal(retained.rows.length, 7);
   assert.equal(scopeHash(retained), '7a87796d81e4e3917a2e06057cf4a9269a28a3d453d27c6d729e9583a9764e55');
-  assert.equal(scopeHash(json('scripts/canon/reviewed_partial_pages.json')), '1386fcdcffbe94a4179c2ed04ecbb5f064ee2598d4f086872865aca74a3ad89e');
+  const partialRegistry = json('scripts/canon/reviewed_partial_pages.json');
+  assert.equal(partialRegistry.links.length, 15);
+  assert.equal(scopeHash({...partialRegistry, links:partialRegistry.links.slice(0, 14)}), '1386fcdcffbe94a4179c2ed04ecbb5f064ee2598d4f086872865aca74a3ad89e', 'All fourteen historical declarations and registry metadata remain unchanged');
+  assert.deepEqual([partialRegistry.links[14].unit_id, partialRegistry.links[14].path], ['mn54', '/tipitaka/mn/mn.054x.than']);
   const queue = json('docs/data/ordinary-excerpt-review-queue.json');
-  assert.deepEqual([queue.ordinary_ati_bindings_checked, queue.candidate_bindings, queue.reviewed_retained_snapshots, queue.unreviewed_bindings], [1116, 3, 3, 0]);
+  assert.deepEqual([queue.ordinary_ati_bindings_checked, queue.candidate_bindings, queue.reviewed_retained_snapshots, queue.unreviewed_bindings], [1115, 3, 3, 0]);
   assert.ok(queue.rows.every(r => r.review_status === 'reviewed-retained-at-snapshot' && r.approved === false));
   const t = translationCoverage({ refresh: true }).total;
-  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only, t.shared_links, t.with_shared_english, t.shared_only], [2542, 1411, 1834, 14, 8, 12, 110, 52]);
+  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only, t.shared_links, t.with_shared_english, t.shared_only], [2538, 1408, 1831, 15, 9, 12, 110, 52]);
   const daily = dailyText({ ...canon }, { date: '2026-11-01', kind: 'sutta' });
-  assert.deepEqual([daily.rotation.of, daily.text.id], [1260, 'sn22.121']);
+  assert.deepEqual([daily.rotation.of, daily.text.id], [1257, 'sn12.31']);
   assert.deepEqual(historicalSutta('d212'), {of:1261,id:'sn55.32'}, 'Old daily eligibility remains test metadata without restoring withdrawn sources');
+  assert.deepEqual(historicalSutta('d213'), {of:1260,id:'sn22.121'}, 'D213 daily selection remains frozen historical metadata');
 });
 
 const python = ['python3', 'python'].find(cmd => spawnSync(cmd, ['--version']).status === 0);
@@ -106,7 +134,7 @@ with tempfile.TemporaryDirectory() as d:
   incoming['wrong-owner'].append(link)
  before=copy.deepcopy(incoming)
  result,removed=run(base,incoming)
- assert len(removed)==14 and result=={'independent':[x['alternative']]}
+ assert len(removed)==13 and result=={'independent':[x['alternative']]}
  assert incoming==before and run(base,result)==(result,[])
  mutations=[lambda r:r.pop('rendered_view'),lambda r:r.update(rendered_view=None),
   lambda r:r['rendered_view'].update(first_line=1),lambda r:r['rendered_view'].update(last_line=69),
@@ -125,8 +153,8 @@ with tempfile.TemporaryDirectory() as d:
   except ValueError:pass
   else:raise AssertionError('Malformed primary-web evidence accepted')
   assert incoming==before
- print('14 held aliases blocked; 18 malformed web receipts rejected atomically')
-`], { input: JSON.stringify({ manifest: exclusions, rows: review.rows, alternative: canon.load().translations.mn21[0] }), encoding: 'utf8' });
+ print('13 still-held historical aliases blocked; 18 malformed web receipts rejected atomically')
+`], { input: JSON.stringify({ manifest: exclusions, rows: stillHeld, alternative: canon.load().translations.mn21[0] }), encoding: 'utf8' });
   assert.equal(r.status, 0, r.stderr || r.stdout);
   assert.match(r.stdout, /18 malformed web receipts rejected atomically/);
 });

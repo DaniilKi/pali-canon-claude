@@ -839,43 +839,6 @@
     },
     {
       "source": "ati",
-      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.054x.than.html",
-      "status": "withheld-partial-unit",
-      "subject_ids": [
-        "mn54"
-      ],
-      "reason": "The page omits the entire opening encounter and eight-factor household-training section mn54/2–/13, and final acknowledgment/refuge mn54/40. It contains the seven sensuality similes and the three knowledges through mn54/39.",
-      "review": {
-        "source_url": "https://www.accesstoinsight.org/tipitaka/mn/mn.054x.than.html",
-        "observed_on": "2026-11-08",
-        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
-        "root_units": [
-          {
-            "id": "mn54",
-            "book": 9,
-            "start": 67,
-            "end": 108,
-            "title": "Potaliyasuttaṃ",
-            "collection": "mn",
-            "acronym": "MN 54",
-            "vri": "31–50",
-            "pts": {
-              "volume": 1,
-              "page": 359,
-              "end_page": 368
-            },
-            "root_blocks_sha256": "e74467a381dc64cd20d8937c116dbc7ea8cef9ce4bc0c1157651a122bfcb8126"
-          }
-        ],
-        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
-        "source_html_sha256": "edcde57d7f7920743608b1abb25b3ded7c4d33519bfea85986a9b776cd349e8a",
-        "text_sha256": "276f63ece70985258305f9633c7a6e3863330f56ff39ddda498d0323ea7ed560",
-        "notice_sha256": "de93b79f4590c638218614b4c32bdce786225ce7a17a3f214cc78f6dc6e7dea0",
-        "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
-      }
-    },
-    {
-      "source": "ati",
       "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.075x.than.html",
       "status": "withheld-partial-unit",
       "subject_ids": [
@@ -1236,6 +1199,174 @@
           ]
         },
         "method": "Complete primary publisher rendered view0–70 read via supported public web tool; exact indexed-root scope independently checked. No raw HTML/runtime text/notice hash is available or asserted. Restrictive exclusion only; no source activation. See final-excerpt-binding-review.json."
+      }
+    },
+    {
+      "source": "dhammatalks",
+      "url": "https://www.dhammatalks.org/suttas/DN/DN21.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "dn21"
+      ],
+      "reason": "The primary body omits substantial opening narrative and the Gopaka teaching; its final ellipsis also removes the six advantages, praise and reward. The editorial introduction quotes the song but does not restore the missing full-discourse context.",
+      "review": {
+        "source_url": "https://www.dhammatalks.org/suttas/DN/DN21.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "dn21",
+            "book": 6,
+            "start": 1129,
+            "end": 1340,
+            "title": "Sakkapañhasuttaṃ",
+            "collection": "dn",
+            "acronym": "DN 21",
+            "vri": "344–371",
+            "pts": {
+              "volume": 2,
+              "page": 264,
+              "end_page": 289
+            },
+            "root_blocks_sha256": "ec9924ca7a3de0fa37ff83edf0d685f4204e1a87c355ffcacb3b7047a9ee17d9"
+          }
+        ],
+        "evidence_kind": "publisher-rendered-web",
+        "rendered_view": {
+          "total_lines": 259,
+          "first_line": 0,
+          "last_line": 258,
+          "scripture_lines": [
+            155,
+            247
+          ]
+        },
+        "method": "Complete primary supported rendered view and full indexed VRI root inspected; explicit unique narrative omissions verified, not inferred from title alone. No raw HTML/runtime text/full-notice hashes asserted; no live-origin freshness or activation. Detailed intro/verse/repetition and crawl-age qualifications in dt-excerpts-and-potaliya.json."
+      }
+    },
+    {
+      "source": "dhammatalks",
+      "url": "https://www.dhammatalks.org/suttas/DN/DN26.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "dn26"
+      ],
+      "reason": "Only closing /59,/61–/67 translated; substantial unique narrative /6–/58 omitted as full translation. Introduction is editorial summary with snippets. Finding rests on body comparison, not title.",
+      "review": {
+        "source_url": "https://www.dhammatalks.org/suttas/DN/DN26.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "dn26",
+            "book": 7,
+            "start": 190,
+            "end": 258,
+            "title": "Cakkavattisuttaṃ",
+            "collection": "dn",
+            "acronym": "DN 26",
+            "vri": "80–110",
+            "pts": {
+              "volume": 3,
+              "page": 58,
+              "end_page": 79
+            },
+            "root_identity_sha256": "eaf06722b0d866a1838d2332f59f08b749ffd907a59c7ac4283d303f6c5c3990",
+            "root_blocks_sha256": "43ad1e87009668b6d86de5095c52ecdb93b6b863c41dde53d06e4f2ff7fe1f95"
+          }
+        ],
+        "evidence_kind": "publisher-rendered-web",
+        "rendered_view": {
+          "total_lines": 66,
+          "first_line": 0,
+          "last_line": 65,
+          "scripture_lines": [
+            37,
+            54
+          ]
+        },
+        "method": "Complete primary supported rendered view and full indexed VRI root inspected; explicit unique narrative omissions verified, not inferred from title alone. No raw HTML/runtime text/full-notice hashes asserted; no live-origin freshness or activation. Detailed intro/verse/repetition and crawl-age qualifications in dt-excerpts-and-potaliya.json."
+      }
+    },
+    {
+      "source": "dhammatalks",
+      "url": "https://www.dhammatalks.org/suttas/MN/MN91.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "mn91"
+      ],
+      "reason": "The complete rendered publisher body represents Uttara’s deportment report only (mn91/40–/42), omitting the investigation/marks narrative before it and Brahmayu meeting, teaching and outcome after it. Excerpt metadata is only corroborative.",
+      "review": {
+        "source_url": "https://www.dhammatalks.org/suttas/MN/MN91.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "mn91",
+            "book": 9,
+            "start": 1169,
+            "end": 1253,
+            "title": "Brahmāyusuttaṃ",
+            "collection": "mn",
+            "acronym": "MN 91",
+            "vri": "383–395",
+            "pts": {
+              "volume": 2,
+              "page": 133,
+              "end_page": 146
+            },
+            "root_blocks_sha256": "9405868f21a3c64d492535b167446ab23b4a4f29847cd5beaf8c606447c0484f"
+          }
+        ],
+        "evidence_kind": "publisher-rendered-web",
+        "rendered_view": {
+          "total_lines": 48,
+          "first_line": 0,
+          "last_line": 47,
+          "scripture_lines": [
+            26,
+            44
+          ]
+        },
+        "method": "Complete primary supported rendered view and full indexed VRI root inspected; explicit unique narrative omissions verified, not inferred from title alone. No raw HTML/runtime text/full-notice hashes asserted; no live-origin freshness or activation. Detailed intro/verse/repetition and crawl-age qualifications in dt-excerpts-and-potaliya.json."
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/dn/dn.26.0.than.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "dn26"
+      ],
+      "reason": "Mātulā residence/address absent; island instruction recurs at /59 and is translated there. Repetition alone is not the hold basis. Opening Māra/no-foothold admonition is outside translated body; DT note4 quotes it as editorial context. Daḷhanemi, succession, royal duty, wheel and successors absent. Poverty, theft, punishments, worsening conduct and descending lifespans absent. Ten-year society and sword-interval narrative not fully translated. Recovery sequence and full Saṅkha/Metteyya narrative not fully translated.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/dn/dn.26.0.than.html",
+        "observed_on": "2026-11-08",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "dn26",
+            "book": 7,
+            "start": 190,
+            "end": 258,
+            "title": "Cakkavattisuttaṃ",
+            "collection": "dn",
+            "acronym": "DN 26",
+            "vri": "80–110",
+            "pts": {
+              "volume": 3,
+              "page": 58,
+              "end_page": 79
+            },
+            "root_identity_sha256": "eaf06722b0d866a1838d2332f59f08b749ffd907a59c7ac4283d303f6c5c3990",
+            "root_blocks_sha256": "43ad1e87009668b6d86de5095c52ecdb93b6b863c41dde53d06e4f2ff7fe1f95"
+          }
+        ],
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "b2e3eec36ccfe14cbbe9644b638bb216d9e60c4f0b6ac1d954d22ea38a56232e",
+        "text_sha256": "5eab5bdbd6e4daac4b75e4d9848d3f7c70822eb52e7e3e93c5431f0ce9dfcd21",
+        "notice_sha256": "6847c68d63f30ca1710ac183e11f8b473b3e3a197ab66d0aea041d0164e3ea0e",
+        "method": "Complete pinned official ATI26 body/fullnotice and entire indexed DN26 root inspected. Same partial closing scope as primary DT26, with no whole alternative. No source activation or new rights."
       }
     }
   ]
