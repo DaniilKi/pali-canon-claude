@@ -318,6 +318,130 @@
           "segment_sha256": "1e0108c995347201fad5698c213c772e0a5af91260b2a7a09dbbfe753ab0daa5"
         }
       }
+    },
+    {
+      "unit_id": "sn12.60",
+      "path": "/tipitaka/sn/sn12/sn12.060x.wlsh",
+      "translator": "Maurice O'Connell Walshe",
+      "english_title": "sn12.60 — selected paragraph only",
+      "license": "BPS-free-distribution-1985",
+      "source_reference": "S ii 92 — Chapter paragraph2 of2; the Buddha’s opening reply only.",
+      "mapping_note": "Derived excerpt from the named Access to Insight/BPS source. Chapter paragraph2 of2; the Buddha’s opening reply only. The compressed introductory frame and every later root paragraph are outside this selected translation. Other publisher material remains available at its original URL. Editorial notes and their reference markers are excluded from English wording. Complete source attribution and the page-specific ©1985 BPS notice accompany every response; free distribution, identified derivatives and ≤50-copy reprint conditions remain.",
+      "source_html_sha256": "9027f6803e34fbd5f7eff8677abb2d3ff66bab364114ebed3a1b1776edc392ff",
+      "root": {
+        "id": "sn12.60",
+        "title": "Nidānasuttaṃ",
+        "vri": "60",
+        "book": 12,
+        "start": 440,
+        "end": 452,
+        "root_blocks_sha256": "15ea22f12e04d4d48417e8c92005b39998eaab99b53fc3e547f1c0300995ca8b"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "sn12.60",
+        "first_ref": "sn12.60/3",
+        "last_ref": "sn12.60/3",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "3e91f6648b522025943d6dd67df3711ef874b963fe35b6151ec4788b3ec0403f",
+        "text_sha256": "993abfcf32d95bbe874b7e7b4332cc3f88747f370dd9bc160d189e182f39140a",
+        "notice_sha256": "2bb4a97e95813e62a50217060bc89f265862557f441ef5185fd78f586c2a1ca4",
+        "extractor": "ati-chapter-p2-of2-v1"
+      }
+    },
+    {
+      "unit_id": "sn22.87",
+      "path": "/tipitaka/sn/sn22/sn22.087x.wlsh",
+      "translator": "Maurice O'Connell Walshe",
+      "english_title": "sn22.87 — selected paragraph only",
+      "license": "BPS-free-distribution-1985",
+      "source_reference": "S iii 119 — Chapter paragraph11 of11; the Buddha’s reply about seeing Dhamma only.",
+      "mapping_note": "Derived excerpt from the named Access to Insight/BPS source. Chapter paragraph11 of11; the Buddha’s reply about seeing Dhamma only. The publisher heading, editorial summary, preceding translated dialogue and later untranslated root paragraphs are outside this deliberately narrower selection. Other publisher material remains available at its original URL. Editorial notes and their reference markers are excluded from English wording. Complete source attribution and the page-specific ©1985 BPS notice accompany every response; free distribution, identified derivatives and ≤50-copy reprint conditions remain.",
+      "source_html_sha256": "46596cc968c7265af4c75e5cc32ab6a75ef66ab8ba35665d32238686583f7c2d",
+      "root": {
+        "id": "sn22.87",
+        "title": "Vakkalisuttaṃ",
+        "vri": "87",
+        "book": 13,
+        "start": 574,
+        "end": 586,
+        "root_blocks_sha256": "5036b17b2d75cf05ceafe8314ed93a1af0b739c4be4a3fa7f6f0cda3b2229dfe"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "sn22.87",
+        "first_ref": "sn22.87/4",
+        "last_ref": "sn22.87/4",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "9383c886da9ec70aac0a205c9dccc28d98eecf4d08eb22d7b57c2934d22d2b90",
+        "text_sha256": "fc80594fce5210c579090c5cb5b42b8d3d9cdd9eb6fef6a3e9d58df8cff1f395",
+        "notice_sha256": "4be50dbaa9fbc2818333c5d295f39a62e18127f64cff34db487fc7c6bf0de148",
+        "extractor": "ati-chapter-p11-of11-v1"
+      }
+    },
+    {
+      "unit_id": "sn35.244",
+      "path": "/tipitaka/sn/sn35/sn35.203x.wlsh",
+      "translator": "Maurice O'Connell Walshe",
+      "english_title": "sn35.244 — selected paragraph only",
+      "license": "BPS-free-distribution-1985",
+      "source_reference": "S iv 188 — Chapter paragraph1 of4 only; publisher SN35.203 is indexed SN35.244 in this edition.",
+      "mapping_note": "Derived excerpt from the named Access to Insight/BPS source. Chapter paragraph1 of4 only; publisher SN35.203 is indexed SN35.244 in this edition. The ellipsis, later translated portions and condensed material are outside this deliberately narrower selection. The original publisher numbering is preserved; no renumbering or discontinuous mapping is inferred. Editorial notes and their reference markers are excluded from English wording. Complete source attribution and the page-specific ©1985 BPS notice accompany every response; free distribution, identified derivatives and ≤50-copy reprint conditions remain.",
+      "source_html_sha256": "641adf7b3fafd492cadbbc72602bce39a60b2fd8a3d55ccb74f0e4301b176a75",
+      "root": {
+        "id": "sn35.244",
+        "title": "Dukkhadhammasuttaṃ",
+        "vri": "244",
+        "book": 14,
+        "start": 1204,
+        "end": 1214,
+        "root_blocks_sha256": "4f5f27630beeab37a5495e192817b81ea1296caa17e1afe8b180d62c28f878be"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "sn35.244",
+        "first_ref": "sn35.244/2",
+        "last_ref": "sn35.244/2",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "99b63f13ddc34627f715ec02a6d95b543adb79e3ec76c4087533be7d0a700b79",
+        "text_sha256": "155cc7712dc067ff3bb484c47ab6ca05a7dbf4ecfa6f597bd91009d59959156a",
+        "notice_sha256": "603fa0f3d567e7e40d62e1d026f7a51fa33c081da2ae9567165741197b1c003a",
+        "extractor": "ati-chapter-p1-of4-v1"
+      }
+    },
+    {
+      "unit_id": "sn56.22",
+      "path": "/tipitaka/sn/sn56/sn56.022x.wlsh",
+      "translator": "Maurice O'Connell Walshe",
+      "english_title": "sn56.22 — selected closing verses only",
+      "license": "BPS-free-distribution-1985",
+      "source_reference": "S v 432 — The single excerpt-verse preformatted container; four closing stanzas only.",
+      "mapping_note": "Derived excerpt from the named Access to Insight/BPS source. The single excerpt-verse preformatted container; four closing stanzas only. Opening prose and editorial See-also links are excluded. The bundled final verse segment retains its untranslated inline colophon “dutiyaṃ;” as paratext. It is not translated and no word-level or every-token correspondence is claimed. Editorial notes and their reference markers are excluded from English wording. Complete source attribution and the page-specific ©1985 BPS notice accompany every response; free distribution, identified derivatives and ≤50-copy reprint conditions remain.",
+      "source_html_sha256": "aab4801e3ce96121fc53cfda447620a5801172cfc4430dad4e5b4d0f0c7491a1",
+      "root": {
+        "id": "sn56.22",
+        "title": "Dutiyakoṭigāmasuttaṃ",
+        "vri": "1092",
+        "book": 15,
+        "start": 2540,
+        "end": 2554,
+        "root_blocks_sha256": "32bb9f50967d699502dd5cd8d5a3890a92b96fb25ec5a64ec2d433ad23c62807"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "sn56.22",
+        "first_ref": "sn56.22/5",
+        "last_ref": "sn56.22/8",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "b7e5597c850df3e886a5fbdeb640275f1d932f59a6503b810bed4bc9be71169c",
+        "text_sha256": "045ce2b4163fef67b55dffa27b6233d06b749dd6902c2dc3c54b59e593f74dbe",
+        "notice_sha256": "72c7579ce4eaedb58202cd9880f6571542c0746d561ea4192c9e3c9245bb734b",
+        "extractor": "ati-excerpt-verse-pre-v1"
+      }
     }
   ]
 }

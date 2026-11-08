@@ -6,7 +6,8 @@ export function historicalSutta(epoch,date='2026-11-01'){
  const hash=createHash('sha256').update(JSON.stringify(epochs.baseline_entries)).digest('hex');if(hash!==epochs.baseline_entries_sha256)throw Error('Historical eligibility fixture changed');
  const valid=t=>Array.isArray(t)&&t.length===3&&typeof t[0]==='string'&&t[0].length>0&&t.slice(1).every(n=>Number.isSafeInteger(n)&&n>=0);
  if(!Array.isArray(e.add)||![...epochs.baseline_entries,...e.add].every(valid))throw Error('Invalid historical tuple');
- const entries=[...epochs.baseline_entries,...e.add].sort((a,b)=>a[1]-b[1]||a[2]-b[2]);
+ const remove=e.remove??[];if(!Array.isArray(remove)||remove.some(id=>typeof id!=='string'||!epochs.baseline_entries.some(t=>t[0]===id))||new Set(remove).size!==remove.length)throw Error('Invalid historical removal list');
+ const entries=[...epochs.baseline_entries.filter(t=>!remove.includes(t[0])),...e.add].sort((a,b)=>a[1]-b[1]||a[2]-b[2]);
  if(new Set(entries.map(e=>e[0])).size!==entries.length||entries.length!==e.expected_count)throw Error('Invalid historical eligibility fixture');
  return{of:entries.length,id:entries[cyclePosition(parseDate(date).dayNumber,entries.length)][0]};
 }

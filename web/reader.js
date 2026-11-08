@@ -281,6 +281,7 @@ function reviewTranslationScope(choice, descriptor, context, token) {
   ++studyEpoch; const target = studyTarget('Review the source before retrieving it.'); target.replaceChildren(el('h3', 'Review English source scope'));
   target.append(el('p', 'Pāli selection: ' + context.citation), el('p', [choice.translator, choice.source, choice.reference].filter(Boolean).join(' · ')));
   scopeSummary(descriptor, target);
+  if(typeof choice.mapping_note==='string'&&choice.mapping_note.trim())target.append(el('p',choice.mapping_note,'notice'));
   const label = el('label', undefined, 'consent-row'), checkbox = el('input'); checkbox.type = 'checkbox'; checkbox.id = 'scope-consent';
   label.append(checkbox, el('span', descriptor.kind === 'shared_page' ? 'I understand this is one shared source page with unverified individual alignment, not a full translation assigned to this one discourse.' : 'I understand this translates only the declared part of the Pāli unit, not the entire unit.'));
   const read = button(descriptor.kind === 'shared_page' ? 'Read reviewed shared page' : 'Read reviewed partial source', () => { if (checkbox.checked && token === epoch) englishPage({ uid: context.uid, translation: choice.translation_id, limit: 6000, ...descriptor.flags }, token, { ...context, accepted: descriptor }); }); read.disabled = true;

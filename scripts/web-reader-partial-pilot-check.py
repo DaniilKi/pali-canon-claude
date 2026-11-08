@@ -11,7 +11,7 @@ from web_reader_test_helpers import read_tool
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser();p.add_argument('--source-root',type=pathlib.Path,required=True);p.add_argument('--server-dir',type=pathlib.Path);p.add_argument('--a11y',action='store_true');p.add_argument('--report');args=p.parse_args()
 manifest=json.loads((ROOT/'scripts/canon/reviewed_partial_pages.json').read_text(encoding='utf-8'));rows=manifest['links']
-assert {r['unit_id'] for r in rows}=={'thag6.13','thag17.3','thag10.1','thag15.2','thag16.8','thag2.13','thag15.1','snp3.11','mn34','sn12.22'} and len(rows)==10
+assert {r['unit_id'] for r in rows}=={'thag6.13','thag17.3','thag10.1','thag15.2','thag16.8','thag2.13','thag15.1','snp3.11','mn34','sn12.22','sn12.60','sn22.87','sn35.244','sn56.22'} and len(rows)==14
 server_dir=args.server_dir.resolve() if args.server_dir else ROOT/'server'
 assert json.loads((server_dir/'data/reviewed-partial-pages.json').read_text(encoding='utf-8'))==manifest
 source_root=args.source_root.resolve();sources={}
@@ -61,7 +61,7 @@ try:
         assert scope['first_ref']==row['partial_scope']['first_ref'] and scope['last_ref']==row['partial_scope']['last_ref'] and scope['whole_unit_coverage'] is False
         assert scope['notice_sha256']==row['partial_scope']['notice_sha256'] and scope['extractor']==row['partial_scope']['extractor']
         assert rpc('get_translation',{'uid':uid,'translation':version}).get('isError')
-        if uid in ['thag17.3','thag15.1','mn34','sn12.22']:assert len(choices)==1 and rpc('get_translation',{'uid':uid}).get('isError')
+        if uid in ['thag17.3','thag15.1','mn34','sn12.22','sn12.60','sn22.87','sn35.244','sn56.22']:assert len(choices)==1 and rpc('get_translation',{'uid':uid}).get('isError')
         else:
             ordinary={c['translation_id'] for c in choices if not c.get('translation_scope')}
             expected_full={'snp3.11':{'dt:KN/StNp/StNp3_11','ati:/tipitaka/kn/snp/snp.3.11.than'},'thag6.13':{'dt:KN/Thag/thag6_13','ati:/tipitaka/kn/thag/thag.06.13.than'},'thag2.13':{'dt:KN/Thag/thag2_13','ati:/tipitaka/kn/thag/thag.02.13.than'},'thag10.1':{'dt:KN/Thag/thag10_1'},'thag15.2':{'dt:KN/Thag/thag15_2'},'thag16.8':{'dt:KN/Thag/thag16_8','ati:/tipitaka/kn/thag/thag.16.08.than'}}
@@ -91,7 +91,7 @@ try:
                 choice=page.locator('#study .translation-choice').filter(has_text=row['source_reference']);choice.get_by_role('button',name='Review partial-unit source',exact=True).wait_for()
                 assert len(calls)==before and len(fetches())==network_before;audit('source choices',uid)
                 choice.get_by_role('button',name='Review partial-unit source',exact=True).click();page.get_by_role('heading',name='Review English source scope',exact=True).wait_for()
-                assert scope['first_ref']+' to '+scope['last_ref'] in page.locator('#study').inner_text();assert row['source_reference'] in page.locator('#study').inner_text()
+                assert scope['first_ref']+' to '+scope['last_ref'] in page.locator('#study').inner_text();assert row['source_reference'] in page.locator('#study').inner_text();assert row['mapping_note'] in page.locator('#study').inner_text()
                 expect(page.locator('#scope-consent')).not_to_be_checked();expect(page.get_by_role('button',name='Read reviewed partial source',exact=True)).to_be_disabled();assert len(calls)==before and len(fetches())==network_before
                 assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');audit('explicit partial consent',uid)
                 checks.append({'width':width,'theme':theme,'unit':uid,'check':'exact Pali span and publisher numbering visible; default consent absent; no English retrieval'})
@@ -104,6 +104,10 @@ try:
                 assert 'Partial English source' in page.locator('#study h3').inner_text();assert calls[-1]['translation']==version and calls[-1]['allow_partial'] is True and calls[-1]['scope_sha256']==scope['scope_sha256'] and 'allow_shared' not in calls[-1]
                 if uid=='sn12.22':
                     quote=page.locator('#study blockquote');expect(quote).to_have_text(scope['pali_excerpt']['text']);assert 'Only part of this paragraph is translated.' in page.locator('#study').inner_text();assert scope['pali_excerpt']['start_char']==229 and scope['pali_excerpt']['end_char']==977;assert 'Dutiyaṃ.' not in quote.inner_text() and not quote.inner_text().startswith('Dukkhaṃ');assert 'Hiina.m:' not in payload['text'] and '[1]' not in payload['text']
+                if uid=='sn12.60':assert 'The Blessed One was once staying' not in payload['text'] and '[1]' not in payload['text']
+                if uid=='sn22.87':assert 'The Buddha visits' not in payload['text'] and 'Are you feeling better' not in payload['text'] and '[3]' not in payload['text']
+                if uid=='sn35.244':assert 'iron pot' not in payload['text'] and '...' not in payload['text'] and '[1]' not in payload['text'] and 'publisher SN35.203' in page.locator('#study').inner_text()
+                if uid=='sn56.22':assert 'See also' not in payload['text'] and 'untranslated inline colophon' in page.locator('#study').inner_text()
                 editorial=e['preface'];assert not editorial or (editorial not in payload['text'] and editorial not in page.locator('#study').inner_text())
                 if uid in ['thag15.1','snp3.11']:assert payload['text'].startswith('...') and payload['text'].endswith('...')
                 if uid=='snp3.11':assert 'VRI725' in page.locator('#study').inner_text() and scope['first_ref']=='snp3.11/44'
@@ -116,7 +120,7 @@ try:
         browser.close()
     events=fetches();assert {e['url'] for e in events}==set(sources)
     receipts=[{'unit':r['unit_id'],'translation_id':'ati:'+r['path'],'source_html_sha256':r['source_html_sha256'],'text_sha256':r['partial_scope']['text_sha256'],'notice_sha256':r['partial_scope']['notice_sha256'],'first_ref':r['partial_scope']['first_ref'],'last_ref':r['partial_scope']['last_ref']} for r in rows]
-    result={'checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'passed':len(checks),'outside_source_tree':bool(args.server_dir),'pinned_local_sources_only':True,'upstream_http_requests':0,'provider_fetches':len(events),'checks':checks,'sources':receipts,'a11y':{'scans':len(scans),'violations':sum(len(s['violations']) for s in scans),'results':scans},'limits':'Actual bundled HTTP worker and browser with ten official pinned local publisher snapshots. No upstream/live availability, new rights approval, full-unit English coverage, word-level alignment or human accessibility certification. No publisher bodies in evidence reports.'}
+    result={'checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'passed':len(checks),'outside_source_tree':bool(args.server_dir),'pinned_local_sources_only':True,'upstream_http_requests':0,'provider_fetches':len(events),'checks':checks,'sources':receipts,'a11y':{'scans':len(scans),'violations':sum(len(s['violations']) for s in scans),'results':scans},'limits':'Actual bundled HTTP worker and browser with fourteen official pinned local publisher snapshots. No upstream/live availability, new rights approval, full-unit English coverage, word-level alignment or human accessibility certification. No publisher bodies in evidence reports.'}
     text=json.dumps(result,indent=2);print(text)
     if args.report:pathlib.Path(args.report).write_text(text+'\n',encoding='utf-8')
     if result['a11y']['violations']:raise SystemExit(1)

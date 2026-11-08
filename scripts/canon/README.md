@@ -346,3 +346,9 @@ python scripts/canon/repair_dasabala_commentary.py /tmp/current/canon.json.gz /t
 This source-validates all978 commentary blocks and derives the short SN12.21 passage through the existing aligner. Append only the new tuple; preserve every old passage ID, all wording, SN12.22 and Paccaya mappings. The helper is idempotent; the older D208 migration must not overwrite this restored state. Rebuild parallels after changing commentary metadata.
 
 The partial registry now contains ten sources: nine verse spans and SN12.22’s exact original substring. Version2 is currently restricted in the Python manifest to the reviewed Walshe page, BPS notice, fixed path and prose extractor. Normal proposals remain withheld until full rawHTML/text/notice/root verification succeeds. Version2 emits `pali_excerpt` and no whole-paragraph reading command; do not widen it to the context paragraph or count whole English. Run `tests/subparagraph-scope.test.mjs` plus actual-source browser normal/a11y/installed and installed native partial audits.
+
+### Four narrower Walshe excerpts (D210)
+
+The manifest now has fourteen partial sources. Three source-specific selectors require exact chapter paragraph totals and positions; SN56.22 uses a separate strict excerpt-verse/pre container. Python activation profiles bind exact owners/paths/version/extractor and BPS notice label. Build verification still checks the full raw HTML, extracted text, complete notice, whole root and scoped Pāli. Ordinary linker proposals remain withheld globally for every registered path. No source numbering or source blocks change.
+
+Use `ordinary_excerpt_packet.py` to refresh the ordinary queue after activation: 1,135 ordinary ATI bindings,21 flags,20 unreviewed. Historical `d209` daily eligibility is test-only and never restores runtime authority. See [source evidence](../../docs/data/walshe-excerpt-batch.md).

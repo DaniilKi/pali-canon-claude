@@ -58,6 +58,6 @@ with tempfile.TemporaryDirectory() as tmp:
  proc=subprocess.run([sys.executable,'scripts/canon/build_translations.py',*args],capture_output=True,text=True,encoding='utf-8');assert proc.returncode==0,proc.stderr;assert json.loads((p/'out.json').read_text(encoding='utf-8'))=={}
  code="import sys;sys.path.insert(0,'scripts/canon');import reviewed_partial_pages;reviewed_partial_pages.withhold_partial_page_proposals=lambda out:(out,[]);from build_translations import main;main()"
  proc=subprocess.run([sys.executable,'-c',code,*args],capture_output=True,text=True,encoding='utf-8');assert proc.returncode==0,proc.stderr
- out=json.loads((p/'out.json').read_text(encoding='utf-8'));assert sum(len(v) for v in out.values())==sum(r['partial_scope']['version']==1 for r in x['rows'])==9,out;assert 'sn12.22' not in out # extended source reference is not ordinary-link approval
+ out=json.loads((p/'out.json').read_text(encoding='utf-8'));expected={r['unit_id'] for r in x['rows'] if r['partial_scope']['extractor']=='ati-freeverse-v1'}|{'sn12.60','sn22.87','sn56.22'};assert set(out)==expected and sum(len(v) for v in out.values())==12,out;assert not set(out)&{'sn12.22','sn35.244'} # extended citation / publisher numbering alone cannot approve these roots
 print('passed')`,{rows,units});assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/passed/);
 });
