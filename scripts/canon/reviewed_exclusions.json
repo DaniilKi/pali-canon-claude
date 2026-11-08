@@ -254,6 +254,306 @@
           }
         ]
       }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.3.12.irel.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "snp3.12"
+      ],
+      "reason": "Only late verses761–771; omits opening narrative, prose discussion and earlier729–760. This is a valid excerpt, not a complete-unit translation. Withhold pending exact partial-scope and notice review; preserve other independent versions and never silently substitute an exact request.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.3.12.irel.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "26f9bfcfe744eb7c163652ec831ad6289ef1795adc7cf67da82b5fd5958fa184",
+        "text_sha256": "a4512ab94dbc7cc7e4bf609d0e85f337b8d21359794e1248ca2f5042605398d5",
+        "notice_sha256": "cdbadc9938881365bca81de9590aa6eda5abf73b533686e761e8b38e0719f640",
+        "method": "Complete official BCBS source chunks, provenance notices and complete indexed VRI roots inspected with independent review. Local official snapshots supplied to production provider for before/after reproduction; no live/deployed claim. No English source bodies bundled.",
+        "root_units": [
+          {
+            "id": "snp3.12",
+            "title": "Dvayatānupassanāsuttaṃ",
+            "vri": "729–771",
+            "book": 31,
+            "start": 2477,
+            "end": 2644,
+            "root_blocks_sha256": "a95046d8907a387d5b9dff657f1a234e1f5ecfa7a86fb7dc3320d1ee0646d320"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.3.12.olen.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "snp3.12"
+      ],
+      "reason": "Only764–767 and first part of768, with editorial preface and ellipses; omits rest768,769–771 and all earlier material. This is a valid excerpt, not a complete-unit translation. Withhold pending exact partial-scope and notice review; preserve other independent versions and never silently substitute an exact request.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.3.12.olen.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "349db4cd73ba5962822ccef39fc3174ba51382a4ca6d5bce6451ef7f3bf02d8b",
+        "text_sha256": "1ea804419928780c123632f113d4d52584662ffc164bb3896e2c64821a53f5fb",
+        "notice_sha256": "5a5f52ee9b026fc9b51c9a497bd51bd4dc7ed3f3d961db086c45f8efe2d13b40",
+        "method": "Complete official BCBS source chunks, provenance notices and complete indexed VRI roots inspected with independent review. Local official snapshots supplied to production provider for before/after reproduction; no live/deployed claim. No English source bodies bundled.",
+        "root_units": [
+          {
+            "id": "snp3.12",
+            "title": "Dvayatānupassanāsuttaṃ",
+            "vri": "729–771",
+            "book": 31,
+            "start": 2477,
+            "end": 2644,
+            "root_blocks_sha256": "a95046d8907a387d5b9dff657f1a234e1f5ecfa7a86fb7dc3320d1ee0646d320"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.2.14.irel.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "snp2.14"
+      ],
+      "reason": "Skips VRI381–384 between380 and385: Eravana, Vessavana, competing ascetics and Brahmins. Publisher advertises excerpt. This is a valid excerpt, not a complete-unit translation. Withhold pending exact partial-scope and notice review; preserve other independent versions and never silently substitute an exact request.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.2.14.irel.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "c95282d6e0e55c1a9a808e6e19cd0d5e07858aae665ee77add4d435909a27941",
+        "text_sha256": "70cd73e2b8a18d67ccb814c8642d92e95c6fdfaf6084452982817baf2316bc69",
+        "notice_sha256": "4d55e85bd7224293de192ba65dc34cfb1badfb782d1b514486ec113490fa1ce4",
+        "method": "Complete official BCBS source chunks, provenance notices and complete indexed VRI roots inspected with independent review. Local official snapshots supplied to production provider for before/after reproduction; no live/deployed claim. No English source bodies bundled.",
+        "root_units": [
+          {
+            "id": "snp2.14",
+            "title": "Dhammikasuttaṃ",
+            "vri": "378–406",
+            "book": 31,
+            "start": 1287,
+            "end": 1383,
+            "root_blocks_sha256": "c381a1899ed87ff05ec4f62c6a94f825df65a7c72cf648c7534bdcd94aeb219d"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.06.13.olen.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "thag6.13"
+      ],
+      "reason": "Only448–452 plus editorial preface; omits447 covered/uncovered rain imagery. Publisher subtitle says excerpt. This is a valid excerpt, not a complete-unit translation. Withhold pending exact partial-scope and notice review; preserve other independent versions and never silently substitute an exact request.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.06.13.olen.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "a627528b0e392c49f76dca57142dead2b2e569bff0d2942719dbe0e4500009e6",
+        "text_sha256": "7c633fb07d351db423c655bc8dfd2cb8d282252b02c580133f219f580ea2dfb3",
+        "notice_sha256": "5bf50ef76a72ff25df8d31013e2981932d322695379ae4d980fbac5de46792a1",
+        "method": "Complete official BCBS source chunks, provenance notices and complete indexed VRI roots inspected with independent review. Local official snapshots supplied to production provider for before/after reproduction; no live/deployed claim. No English source bodies bundled.",
+        "root_units": [
+          {
+            "id": "thag6.13",
+            "title": "Sirimaṇḍattheragāthā",
+            "vri": "447–452",
+            "book": 34,
+            "start": 1958,
+            "end": 1978,
+            "root_blocks_sha256": "145c04d4185a9e695611c6abd17ebd6c10f9507d5888b049de2c024bbdc3701c"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thig/thig.10.01.hekh.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "thig10.1"
+      ],
+      "reason": "Discontinuous213–217,220,222–223; omits218–219 and221. Publisher advertises excerpt. This is a valid excerpt, not a complete-unit translation. Withhold pending exact partial-scope and notice review; preserve other independent versions and never silently substitute an exact request.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/thig/thig.10.01.hekh.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "c7829c6bf97bb737f47b7a05764705f19ca89bed43d9d350d5e379ce12af9ba5",
+        "text_sha256": "8dd5a3e9fd4eb253d92bdb254719ddf627f99740b7a2c403e4f596ddd1f3cb56",
+        "notice_sha256": "11bb4f3bbfee4720cdc414864d55dd823613d74d82dc02ca9226051b5c30c2fa",
+        "method": "Complete official BCBS source chunks, provenance notices and complete indexed VRI roots inspected with independent review. Local official snapshots supplied to production provider for before/after reproduction; no live/deployed claim. No English source bodies bundled.",
+        "root_units": [
+          {
+            "id": "thig10.1",
+            "title": "Kisāgotamītherīgāthā",
+            "vri": "213–223",
+            "book": 35,
+            "start": 799,
+            "end": 836,
+            "root_blocks_sha256": "6846e423552c518c70d56653d6a7cfd923bf2c9932fda68228a48238b3f2e8fe"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.2.11.irel.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "snp2.11"
+      ],
+      "reason": "Only339–344, not publisher metadata337–342. Omits opening question/answer337–338. This is a valid excerpt, not a complete-unit translation. Withhold pending exact partial-scope and notice review; preserve other independent versions and never silently substitute an exact request.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.2.11.irel.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "b64f43780c35d43c77323e99e841aa4a6923a23c0de7c10010b61068c7b44043",
+        "text_sha256": "921b12043da10c3b40a4efbc12abdabd684b638f8d15ca3ce19e62404f58582d",
+        "notice_sha256": "20b0909f6f3d8d224b92b1440db187358a5e30419046632f65a2a49b1af6e188",
+        "method": "Complete official BCBS source chunks, provenance notices and complete indexed VRI roots inspected with independent review. Local official snapshots supplied to production provider for before/after reproduction; no live/deployed claim. No English source bodies bundled.",
+        "root_units": [
+          {
+            "id": "snp2.11",
+            "title": "Rāhulasuttaṃ",
+            "vri": "337–344",
+            "book": 31,
+            "start": 1150,
+            "end": 1177,
+            "root_blocks_sha256": "98d17452038c93f0ddfdf3a9035bd24227db6831ec469cb771e9e49a42b863e4"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.4.15.olen.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "snp4.15"
+      ],
+      "reason": "Only941–945 and954–957; omits946–953 and958–960. Subtitle says excerpt despite misleading EXTENT complete metadata. This is a valid excerpt, not a complete-unit translation. Withhold pending exact partial-scope and notice review; preserve other independent versions and never silently substitute an exact request.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.4.15.olen.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "5684951e1bd19bb8ec9b8f66c38175cb2762fd65de27270c345d82f997b21b39",
+        "text_sha256": "6257d1785e50c325901e9e80eeae68fae3cbb5a682d58be9e193c31b8186150d",
+        "notice_sha256": "e6332a3837f01a858e0a03c14416672c9c04d4bc27ef45eb31419894be58f9a8",
+        "method": "Complete official BCBS source chunks, provenance notices and complete indexed VRI roots inspected with independent review. Local official snapshots supplied to production provider for before/after reproduction; no live/deployed claim. No English source bodies bundled.",
+        "root_units": [
+          {
+            "id": "snp4.15",
+            "title": "Attadaṇḍasuttaṃ",
+            "vri": "941–960",
+            "book": 31,
+            "start": 3203,
+            "end": 3266,
+            "root_blocks_sha256": "a29b401b8224b21eb1461d34aa203fae0698a8a3444746519f1029106108c7ba"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.10.01.olen.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "thag10.1"
+      ],
+      "reason": "Only527–529; omits530–536. Subtitle says excerpt despite misleading EXTENT complete metadata. This is a valid excerpt, not a complete-unit translation. Withhold pending exact partial-scope and notice review; preserve other independent versions and never silently substitute an exact request.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.10.01.olen.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "4fd11140e6769e571be079e4235b2819c4d7bb9fba19bbb6f75a41bbfdebf490",
+        "text_sha256": "ffc8c4030c564f3bc9c406b0296fbc203779d6abfbf53a26c5a408752f0410c6",
+        "notice_sha256": "9db95777377af2445af21a8d68e001027c79ce1ff53db85b362bf81b6e68997a",
+        "method": "Complete official BCBS source chunks, provenance notices and complete indexed VRI roots inspected with independent review. Local official snapshots supplied to production provider for before/after reproduction; no live/deployed claim. No English source bodies bundled.",
+        "root_units": [
+          {
+            "id": "thag10.1",
+            "title": "Kāḷudāyittheragāthā",
+            "vri": "527–536",
+            "book": 34,
+            "start": 2245,
+            "end": 2279,
+            "root_blocks_sha256": "8e5c9b4c22f49eb1bd678c7dfeb989bf423cadaa7113e788a1692b60f075c602"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.15.02.olen.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "thag15.2"
+      ],
+      "reason": "Only lotus verses700–701; omits689–699 and702–704. This is a valid excerpt, not a complete-unit translation. Withhold pending exact partial-scope and notice review; preserve other independent versions and never silently substitute an exact request.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.15.02.olen.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "dd3745777a8969dd5357c05a8f232e8938c1dce075683f7f904a0a85523dc903",
+        "text_sha256": "ee9f371ba30476eb206fe22a88e3cb14c96613b211ef0f794adea814c504018d",
+        "notice_sha256": "14063475589513d0f00f49a270ada9913c8479d249f607e473b179d5561836f4",
+        "method": "Complete official BCBS source chunks, provenance notices and complete indexed VRI roots inspected with independent review. Local official snapshots supplied to production provider for before/after reproduction; no live/deployed claim. No English source bodies bundled.",
+        "root_units": [
+          {
+            "id": "thag15.2",
+            "title": "Udāyittheragāthā",
+            "vri": "689–704",
+            "book": 34,
+            "start": 2788,
+            "end": 2842,
+            "root_blocks_sha256": "241101c63e0706bb4005ade9a4d6aa555f0d14309c7d158bc0ad5a31abca913b"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.16.08.olen.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "thag16.8"
+      ],
+      "reason": "Only moon verses871–873; omits866–870 and874–891. This is a valid excerpt, not a complete-unit translation. Withhold pending exact partial-scope and notice review; preserve other independent versions and never silently substitute an exact request.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.16.08.olen.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "a4e5b3ea96e887070390c5711d32afdaef3c9381a617a48f605eadb3ae43ec37",
+        "text_sha256": "e01baf6191151051cf94089ecf193fca943b17d25ee8512a6ea1a6986f244dfb",
+        "notice_sha256": "3a144279ce9c66712cfd4f92cd3416cca8aa6d3e76b13e28f5ac921a401141ab",
+        "method": "Complete official BCBS source chunks, provenance notices and complete indexed VRI roots inspected with independent review. Local official snapshots supplied to production provider for before/after reproduction; no live/deployed claim. No English source bodies bundled.",
+        "root_units": [
+          {
+            "id": "thag16.8",
+            "title": "Aṅgulimālattheragāthā",
+            "vri": "866–891",
+            "book": 34,
+            "start": 3335,
+            "end": 3415,
+            "root_blocks_sha256": "2325e008b98f5ab2f1a1f223e122e2ae0b78cef501a0de03ec19a98b5e6ad808"
+          }
+        ]
+      }
     }
   ]
 }
