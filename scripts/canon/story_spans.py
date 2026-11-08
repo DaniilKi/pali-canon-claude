@@ -19,6 +19,7 @@ TITLE_PAIRS = {
 def story_spans(books, units):
     changed = []
     plans = []
+    mapping_revisions = {}
     for collection, filename in [('vv', 's0506m.mul.xml'), ('pv', 's0507m.mul.xml')]:
         indexes = [i for i, book in enumerate(books) if book['file'] == filename]
         if not indexes:
@@ -88,9 +89,13 @@ def story_spans(books, units):
             if [b['n'] for b in blocks[split:end] if b['rend'] == 'hangnum'] != ['147', '148']:
                 raise ValueError('Unexpected Somamitta verse scope')
             plans.extend([(left, start, split), (right, split, end)])
+            mapping_revisions.update({left['id']: 'thag-pair-v1', right['id']: 'thag-pair-v1'})
     # Validate all reviewed books before mutating anything.
     for u, start, end in plans:
-        if (u['start'], u['end']) != (start, end):
+        revision = mapping_revisions.get(u['id'])
+        if (u['start'], u['end']) != (start, end) or (revision and u.get('index_revision') != revision):
             changed.append(u['id'])
             u.update(start=start, end=end)
+            if revision:
+                u['index_revision'] = revision
     return changed

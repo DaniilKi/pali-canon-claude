@@ -434,6 +434,16 @@ export function source() {
   return load().canon.source;
 }
 
+/** Keep VRI provenance separate from revisions to citation-to-segment ownership. */
+export function readingSource(unit) {
+  const original = source();
+  if (!Object.hasOwn(unit, 'index_revision')) return original;
+  if (typeof unit.index_revision !== 'string' || !/^[a-zA-Z0-9._-]{1,40}$/.test(unit.index_revision)) throw Error('Invalid citation mapping revision.');
+  const locator_revision = original.commit + '-' + unit.index_revision;
+  if (locator_revision.length > 100) throw Error('Unsupported citation locator revision.');
+  return { ...original, locator_revision };
+}
+
 export function describe(u, notes = []) {
   const d = load();
   const { links: own, via } = linksFor(u);
