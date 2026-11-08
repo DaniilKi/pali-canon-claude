@@ -29,6 +29,7 @@ The npm package and container include `server/web/`. The HTML, stylesheet and br
 - Open **Daily** for a dated Dhammapada verse or a discourse opening from the existing fixed rotation. Dates are UTC, not personalized; discourse previews are not full readings. Open the actual Pāli source/chapter context to continue or choose English sources.
 - Follow four sourced **Plans**: Dhammapada chapters, the Majjhima Nikāya year plan, and two link-only ATI study-guide citation orders. Split readings stop at their assigned Pāli boundary. Mark days manually, undo marks, and export/restore browser-local progress after a preview; source/assignment changes are not silently credited.
 - Save individual passage references and personal notes. Reopen the reading position, export bookmarks/notes as JSON, and restore a supported export locally after a preview. Existing notes are kept; missing source references fail rather than opening a nearby passage.
+- From **Library**, choose **Study by topic** to browse/filter the actual ATI subject and numerical indexes, or **Numbered teaching lists** for the curated reference catalogue. Index entries and English glosses are not scripture. Mapped Pāli actions use canonical IDs; publisher-number differences remain labelled. Later lists and later collective names keep their qualifications.
 - Look up English or Pāli terms in the bundled glossary, including supported native-script input. Every result identifies its DPD or curated-list source; glosses are not passage translations.
 - Open **Study words** on a body segment in a canonical text, complete root book or later work. See the bundled DPD analyses, alternative parses, grammar, computed split suggestions and unknown forms. Commentary analysis is not supported by the current backend; the app does not substitute root-text analysis.
 - Open **Related texts** for canonical selections. Shared-word matching and commentary citations are labelled separately with their evidence. Reading links retain the emitted source segment or exact commentary reference. External parallels are a link only.
@@ -183,3 +184,36 @@ Delayed file reads cannot replace a newer route. See
 [restore acceptance](evidence/web-reader/PROGRESS_RESTORE.md) and run
 `scripts/web-reader-progress-check.py` in normal, `--a11y` and extracted
 `--server-dir` modes. Source text, English consent and plan generation are unchanged.
+
+## Topics and numbered teaching lists
+
+The Library's study buttons expose `list_topics`, `topic` and `dhamma_list` without
+adding another index or generating interpretations. Topic-name filtering reuses
+the engine's matching and native Pāli conversion. Topic pages preserve the ATI
+index note, numbering/alignment cautions, cross-references, exact canonical reader
+commands and source attribution/version. Original ATI entries and further-reading
+essays are links only; essays are labelled commentary, not scripture. CC BY 4.0
+applies to the index metadata, not automatically to the linked translations.
+
+The teaching-list catalogue shows the engine's historical-status label for every
+entry. Details preserve Pāli members, editorial English-gloss cautions, source
+groups, defining passages, related lists and VRI terms. A later collective name is
+not silently promoted to an early canonical label. For example, the thirty-seven
+aids remain seven source groups, with the engine's later-name note and a visible
+explanation of the traditional total. The ten perfections retain their later-list
+qualification while linking to the actual Buddhavaṃsa source. Read the full Pāli
+or an explicitly chosen named translation before quoting; English labels are not
+passage translations.
+
+Filters are shareable URL state and appear in browser history; filter queries do
+not appear in tab titles or a separate stored search history. Topic titles identify
+public source entries. The interface adds no account, personal recommendation,
+content cache, source licence or automatic translation retrieval. This works from
+bundled index data on the server; it is not an offline browser download.
+
+`web/topics-study.mjs` checks page/selection identity, pagination, supported source
+metadata/status labels and emitted canonical reading commands before rendering.
+These structural guards do not establish new scholarly mappings or provenance.
+Tests cover every actual topic and teaching list, then browser navigation,
+keyboard filtering/retry, native input, differing publisher numbers, empty results,
+malformed commands and late responses. See [acceptance](evidence/web-reader/TOPICS_STUDY.md).

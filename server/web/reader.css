@@ -21,3 +21,5 @@ main:focus{outline:none}
 .find-panel-body>p:not(.eyebrow){color:var(--muted);font-size:14px}
 @media(max-width:760px){aside{padding-block:12px}main{padding-top:12px}#status:empty{min-height:0}.toolbar{margin-block:8px}.segment-label{margin-bottom:8px}}
 @media(min-width:761px){.study-actions,.study-actions>.toolbar{display:contents}}
+
+.topic-picker{display:flex;flex-wrap:wrap;gap:12px;align-items:end}.topic-picker input,.topic-picker select{display:block;width:100%}.topic-picker>label,.topic-picker>.topic-filter{min-width:0;flex:1 1 180px}.teaching-members{padding-left:24px}.teaching-members li{padding:14px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.teaching-members li>p{margin:6px 0}.teaching-members strong{font:var(--reading)/1.6 Georgia,serif}

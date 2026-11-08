@@ -526,22 +526,22 @@
   function scopeDescriptor(choice, requestedId) {
     if (!own(choice, "translation_scope")) return null;
     const scope = choice.translation_scope;
-    const fail = () => {
+    const fail2 = () => {
       throw new Error("This source has an unsupported or incomplete scope declaration. No scoped source was requested. Reload the passage and review the updated sources.");
     };
-    if (!scope || scope.version !== 1 || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail();
+    if (!scope || scope.version !== 1 || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail2();
     if (scope.kind === "shared_page") {
       const ids = scope.text_ids;
       const presentation = scope.presentation || (scope.condensed === true ? "condensed" : null);
-      if (!Array.isArray(ids) || ids.length < 2 || ids.length > 32 || ids.some((id) => !nonempty(id) || id.length > 300) || new Set(ids).size !== ids.length || !ids.includes(requestedId) || scope.owner_id !== ids[0] || scope.individual_alignment_verified !== false || !nonempty(scope.source_reference) || !["condensed", "compilation"].includes(presentation) || presentation === "compilation" && !sha(scope.notice_sha256) || own(scope, "condensed") && scope.condensed !== (presentation === "condensed")) fail();
+      if (!Array.isArray(ids) || ids.length < 2 || ids.length > 32 || ids.some((id) => !nonempty(id) || id.length > 300) || new Set(ids).size !== ids.length || !ids.includes(requestedId) || scope.owner_id !== ids[0] || scope.individual_alignment_verified !== false || !nonempty(scope.source_reference) || !["condensed", "compilation"].includes(presentation) || presentation === "compilation" && !sha(scope.notice_sha256) || own(scope, "condensed") && scope.condensed !== (presentation === "condensed")) fail2();
       return { kind: scope.kind, label: presentation === "compilation" ? "Shared compilation page" : "Shared condensed page", scope: JSON.parse(JSON.stringify(scope)), flags: { allow_shared: true, scope_sha256: scope.scope_sha256 } };
     }
     if (scope.kind === "partial_unit") {
       const prefix = requestedId + "/";
-      if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail();
+      if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail2();
       return { kind: scope.kind, label: "Partial-unit source", scope: JSON.parse(JSON.stringify(scope)), flags: { allow_partial: true, scope_sha256: scope.scope_sha256 } };
     }
-    fail();
+    fail2();
   }
   function validateEnglishPage(data, args, context) {
     const offset = args.offset || 0;
@@ -656,18 +656,18 @@
 
   // web/quote-check.mjs
   function validatePaliQuote(data, quote) {
-    const fail = () => {
+    const fail2 = () => {
       throw Error("The quotation result is incomplete or does not match this P\u0101li request. No verdict or substitute source was displayed.");
     };
     const text3 = (x) => typeof x === "string" && x.length > 0;
-    const integer2 = (x) => Number.isSafeInteger(x) && x >= 0;
-    if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text3(data.explanation) || !text3(data.guidance) || data.scope?.language !== "pali" || !text3(data.scope.searched) || !text3(data.scope.attribution) || !text3(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text3(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text3(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail();
-    if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text3(data.citation_note))) fail();
+    const integer3 = (x) => Number.isSafeInteger(x) && x >= 0;
+    if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text3(data.explanation) || !text3(data.guidance) || data.scope?.language !== "pali" || !text3(data.scope.searched) || !text3(data.scope.attribution) || !text3(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text3(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text3(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail2();
+    if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text3(data.citation_note))) fail2();
     for (const m of data.matches) {
-      const command = m.read_with, span = m.source_span;
-      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text3(m.citation) || !text3(m.matched_text) || !text3(m.edition) || !text3(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command?.tool !== "get_text" || command.uid !== m.text_id || !integer2(command.offset) || !integer2(command.limit) || command.limit < 1 || command.limit > 200 || span?.offset !== command.offset || span.first_segment_ref !== m.segment_ref || !integer2(span.end_offset) || span.end_offset <= span.offset || !text3(span.last_segment_ref)) fail();
+      const command2 = m.read_with, span = m.source_span;
+      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text3(m.citation) || !text3(m.matched_text) || !text3(m.edition) || !text3(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command2?.tool !== "get_text" || command2.uid !== m.text_id || !integer3(command2.offset) || !integer3(command2.limit) || command2.limit < 1 || command2.limit > 200 || span?.offset !== command2.offset || span.first_segment_ref !== m.segment_ref || !integer3(span.end_offset) || span.end_offset <= span.offset || !text3(span.last_segment_ref)) fail2();
     }
-    if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail();
+    if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail2();
     return data;
   }
 
@@ -679,30 +679,30 @@
   var integer = (x, min, max) => Number.isSafeInteger(x) && x >= min && x <= max;
   var key = (x) => x.name + ":" + x.day;
   function parseProgress(text3, catalog) {
-    const fail = () => {
+    const fail2 = () => {
       throw Error("This is not a supported reading-progress export. No marks were restored.");
     };
     let data;
     try {
       data = JSON.parse(text3);
     } catch {
-      fail();
+      fail2();
     }
-    if (!exact(data, ["format", "progress"]) || data.format !== "pali-library-reading-progress-v1" || !Array.isArray(data.progress) || data.progress.length > MAX_PROGRESS_MARKS) fail();
+    if (!exact(data, ["format", "progress"]) || data.format !== "pali-library-reading-progress-v1" || !Array.isArray(data.progress) || data.progress.length > MAX_PROGRESS_MARKS) fail2();
     const plans2 = new Map(catalog.map((p) => [p.name, p.days])), seen = /* @__PURE__ */ new Set();
     return data.progress.map((mark) => {
-      if (!exact(mark, ["name", "day", "signature"]) || !plans2.has(mark.name) || !integer(mark.day, 1, plans2.get(mark.name)) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail();
+      if (!exact(mark, ["name", "day", "signature"]) || !plans2.has(mark.name) || !integer(mark.day, 1, plans2.get(mark.name)) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail2();
       seen.add(key(mark));
       let s;
       try {
         s = JSON.parse(mark.signature);
       } catch {
-        fail();
+        fail2();
       }
-      if (!exact(s, ["name", "day", "source", "readings"]) || s.name !== mark.name || s.day !== mark.day || typeof s.source !== "string" || !/^[a-zA-Z0-9._-]{1,100}$/.test(s.source) || !Array.isArray(s.readings) || !s.readings.length || s.readings.length > 20) fail();
+      if (!exact(s, ["name", "day", "source", "readings"]) || s.name !== mark.name || s.day !== mark.day || typeof s.source !== "string" || !/^[a-zA-Z0-9._-]{1,100}$/.test(s.source) || !Array.isArray(s.readings) || !s.readings.length || s.readings.length > 20) fail2();
       const ids = /* @__PURE__ */ new Set();
       for (const r of s.readings) {
-        if (!exact(r, ["id", "offset", "limit", "part", "of"]) || typeof r.id !== "string" || !/^[a-z][a-z0-9.-]{0,299}$/.test(r.id) || ids.has(r.id) || !integer(r.offset, 0, 1e5) || !(r.limit === null || integer(r.limit, 1, 1e5)) || !(r.part === null && r.of === null || integer(r.part, 1, 400) && integer(r.of, r.part, 400) && r.limit !== null)) fail();
+        if (!exact(r, ["id", "offset", "limit", "part", "of"]) || typeof r.id !== "string" || !/^[a-z][a-z0-9.-]{0,299}$/.test(r.id) || ids.has(r.id) || !integer(r.offset, 0, 1e5) || !(r.limit === null || integer(r.limit, 1, 1e5)) || !(r.part === null && r.of === null || integer(r.part, 1, 400) && integer(r.of, r.part, 400) && r.limit !== null)) fail2();
         ids.add(r.id);
       }
       const signature = JSON.stringify({ name: s.name, day: s.day, source: s.source, readings: s.readings.map((r) => ({ id: r.id, offset: r.offset, limit: r.limit, part: r.part, of: r.of })) });
@@ -715,10 +715,83 @@
     return { progress: [...existing, ...added], added: added.length, duplicates, conflicts };
   }
 
+  // web/topics-study.mjs
+  var string2 = (x) => typeof x === "string" && x.length > 0;
+  var slug = (x) => typeof x === "string" && /^[a-z0-9][a-z0-9_-]{0,199}$/.test(x);
+  var integer2 = (x, min = 0, max = 1e5) => Number.isSafeInteger(x) && x >= min && x <= max;
+  var fail = () => {
+    throw Error("The study index is incomplete or does not match this selection. No topic, list or source was substituted.");
+  };
+  var array = (x, max) => Array.isArray(x) && x.length <= max;
+  var status = (x) => ["canonical", "canonical-later-name", "later"].includes(x);
+  var command = (x, tool2, name) => x?.tool === tool2 && x.name === name;
+  function atiLink(url) {
+    try {
+      const u = new URL(url);
+      return u.protocol === "https:" && u.hostname === "www.accesstoinsight.org" && !u.username && !u.password && !u.port;
+    } catch {
+      return false;
+    }
+  }
+  function topicSource(source) {
+    if (!string2(source?.name) || !string2(source.license) || !string2(source.attribution) || !string2(source.commit)) fail();
+  }
+  function related(items, tool2) {
+    if (items === void 0) return;
+    if (!array(items, 500)) fail();
+    for (const x of items) if (!slug(x.slug) || !string2(x.name) || !command(x.read_with, tool2, x.slug)) fail();
+  }
+  function texts(items) {
+    if (!array(items, 500)) fail();
+    for (const x of items) if (!/^[a-z][a-z0-9.-]*$/.test(x.id || "") || !string2(x.citation) || x.read_with?.tool !== "get_text" || x.read_with.uid !== x.id) fail();
+  }
+  function topicCatalogue(data, { offset, limit }) {
+    topicSource(data?.source);
+    if (!integer2(data.total) || data.offset !== offset || !array(data.topics, limit) || data.returned !== data.topics.length || data.returned !== Math.min(limit, Math.max(0, data.total - offset)) || data.next_offset !== (offset + limit < data.total ? offset + limit : null)) fail();
+    const seen = /* @__PURE__ */ new Set();
+    for (const x of data.topics) {
+      if (!slug(x.slug) || seen.has(x.slug) || !string2(x.name) || !["subject", "numerical"].includes(x.index) || !integer2(x.texts) || !command(x.read_with, "topic", x.slug)) fail();
+      seen.add(x.slug);
+    }
+    return data;
+  }
+  function topicDetail(data, name) {
+    topicSource(data?.source);
+    if (data.topic?.slug !== name || !slug(name) || !string2(data.topic.name) || !string2(data.topic.index) || !atiLink(data.topic.ati_url) || data.source.url !== data.topic.ati_url || !string2(data.note)) fail();
+    texts(data.texts);
+    related(data.see_also, "topic");
+    related(data.other_matches, "topic");
+    if (data.dhamma_list && (!slug(data.dhamma_list.slug) || !string2(data.dhamma_list.name) || !command(data.dhamma_list.read_with, "dhamma_list", data.dhamma_list.slug))) fail();
+    if (data.further_reading !== void 0 && (!array(data.further_reading, 500) || data.further_reading.some((x) => !string2(x.title) || !string2(x.kind) || !atiLink(x.url)))) fail();
+    for (const x of data.texts) if (!string2(x.ati_reference) || !atiLink(x.ati_url)) fail();
+    return data;
+  }
+  function listCatalogue(data) {
+    if (!array(data?.lists, 100) || !data.lists.length) fail();
+    const seen = /* @__PURE__ */ new Set();
+    for (const x of data.lists) {
+      if (!slug(x.slug) || seen.has(x.slug) || !string2(x.name) || !string2(x.pali) || !integer2(x.count, 1, 100) || !status(x.status) || !string2(data.status_labels?.[x.status]) || !command(x.read_with, "dhamma_list", x.slug)) fail();
+      seen.add(x.slug);
+    }
+    return data;
+  }
+  function listDetail(data, name) {
+    if (data?.slug !== name || !slug(name) || !string2(data.name) || !string2(data.pali) || !status(data.status) || !string2(data.status_meaning) || !string2(data.gloss_note) || !string2(data.note) || !integer2(data.count, 1, 100) || !array(data.members, 100) || !data.members.length || !string2(data.source?.curated_by) || !string2(data.source.pali?.name) || !string2(data.source.pali.commit) || !string2(data.source.pali.attribution) || !string2(data.source.pali.terms)) fail();
+    for (const [i, x] of data.members.entries()) {
+      if (x.n !== i + 1 || !string2(x.pali) || !string2(x.gloss) || x.list !== void 0 && (!slug(x.list) || !command(x.read_with, "dhamma_list", x.list))) fail();
+    }
+    texts(data.defined_in);
+    if (!data.defined_in.length) fail();
+    texts(data.see_also_texts || []);
+    related(data.related_lists, "dhamma_list");
+    if (data.topic && (!slug(data.topic.slug) || !string2(data.topic.name) || !command(data.topic.read_with, "topic", data.topic.slug))) fail();
+    return data;
+  }
+
   // web/reader.js
   var $ = (id) => document.getElementById(id);
   var view = $("view");
-  var status = $("status");
+  var status2 = $("status");
   var serial = 0;
   var epoch = 0;
   var studyEpoch = 0;
@@ -748,7 +821,7 @@
       return true;
     } catch {
       storageOK = false;
-      status.textContent = "Browser storage is unavailable. Changes are kept only in this tab; export your saved passages.";
+      status2.textContent = "Browser storage is unavailable. Changes are kept only in this tab; export your saved passages.";
       return false;
     }
   }
@@ -917,6 +990,7 @@
     heading("EXPLORE THE LIBRARY", kind === "commentary" ? "Traditional commentary" : kind === "post" ? "Later P\u0101li works" : data.name || "The P\u0101li Canon");
     const nav = el("div", void 0, "toolbar");
     nav.append(link("All collections", route("browse", { node: "canon" }), "button"), link("Complete source books", route("browse", { node: "books" }), "button"));
+    if (node === "canon") nav.append(link("Study by topic", "#topics", "button"), link("Numbered teaching lists", "#lists", "button"));
     view.append(nav);
     if (data.note) view.append(el("p", data.note, "muted"));
     notes(data);
@@ -949,10 +1023,10 @@
     if (data.expanded_from_english) view.append(el("p", "English keywords expanded into P\u0101li: " + JSON.stringify(data.expanded_from_english), "notice"));
     const seen = /* @__PURE__ */ new Set(), cards = el("div", void 0, "cards");
     for (const item of [...data.title_matches || [], ...data.results || data.matches || []]) {
-      const command = item.read_with || {}, id = scope === "commentary" ? command.uid : scope === "post" ? command.citation : item.id || item.text_id || item.uid;
+      const command2 = item.read_with || {}, id = scope === "commentary" ? command2.uid : scope === "post" ? command2.citation : item.id || item.text_id || item.uid;
       if (!id || seen.has(id)) continue;
       seen.add(id);
-      const a = link("", route("read", { uid: id, ...scope !== "canon" ? { kind: scope } : {}, ...command.offset !== void 0 ? { offset: command.offset } : {}, ...item.segment_ref ? { ref: item.segment_ref } : {} }), "entry");
+      const a = link("", route("read", { uid: id, ...scope !== "canon" ? { kind: scope } : {}, ...command2.offset !== void 0 ? { offset: command2.offset } : {}, ...item.segment_ref ? { ref: item.segment_ref } : {} }), "entry");
       a.append(el("small", item.citation || id), el("strong", item.title || item.book?.title || item.citation || id));
       if (item.excerpt || item.text) a.append(el("p", item.excerpt || item.text));
       cards.append(a);
@@ -975,7 +1049,7 @@
     if (found >= 0) local.saved.splice(found, 1);
     else if (local.saved.length < 500) local.saved.push({ uid: selector, ref: segment.ref, title: data.title || data.book?.title || data.citation || data.book_id, note: "", offset: data.offset + data.segments.indexOf(segment), source_commit: data.source?.commit });
     else {
-      status.textContent = "Your saved list is full (500 passages). Export it before removing entries.";
+      status2.textContent = "Your saved list is full (500 passages). Export it before removing entries.";
       return;
     }
     const active = local.saved.some((x) => x.uid === selector && x.ref === segment.ref);
@@ -1015,9 +1089,9 @@
     const copy = button("Copy reading link", async () => {
       try {
         await navigator.clipboard.writeText(location.href);
-        status.textContent = "Reading link copied.";
+        status2.textContent = "Reading link copied.";
       } catch {
-        status.textContent = "Copy the link from your browser\u2019s address bar.";
+        status2.textContent = "Copy the link from your browser\u2019s address bar.";
       }
     });
     if (kind === "canon") {
@@ -1454,7 +1528,7 @@
       const saved2 = persist();
       mark.textContent = undo ? "Mark this day read" : "Day marked \u2713 \xB7 undo";
       mark.setAttribute("aria-pressed", String(!undo));
-      status.textContent = saved2 ? undo ? "Day mark removed from this browser." : "Day marked in this browser only." : "Browser storage is unavailable. Export reading progress before closing this tab.";
+      status2.textContent = saved2 ? undo ? "Day mark removed from this browser." : "Day marked in this browser only." : "Browser storage is unavailable. Export reading progress before closing this tab.";
     });
     mark.setAttribute("aria-pressed", String(active));
     view.append(mark);
@@ -1474,6 +1548,165 @@
         view.append(omitted);
       }
     }
+    provenance({ source: data.source.pali });
+  }
+  function studyIndexNav() {
+    const nav = el("nav", void 0, "toolbar");
+    nav.setAttribute("aria-label", "Study indexes");
+    nav.append(link("All topics", "#topics", "button"), link("Numbered teaching lists", "#lists", "button"), link("Back to library", "#browse?node=canon", "button"));
+    view.append(nav);
+  }
+  function topicProvenance(data) {
+    provenance({ source: { ...data.source, terms: data.source.license }, url: data.source.url });
+  }
+  function studySourceCards(items) {
+    const cards = el("div", void 0, "cards");
+    for (const item of items) {
+      const card = el("article", void 0, "entry");
+      card.append(el("h4", item.citation + (item.title ? " \xB7 " + item.title : "")));
+      if (item.pts) card.append(el("p", "PTS: " + item.pts, "muted"));
+      if (item.numbering_note) card.append(el("p", item.numbering_note, "notice"));
+      notes(item, card);
+      if (item.role) card.append(el("p", item.role, "muted"));
+      card.append(link("Read P\u0101li \xB7 " + item.citation, route("read", { uid: item.id }), "button"));
+      if (item.ati_url) card.append(el("p", "Publisher citation: " + item.ati_reference), external("ATI linked page \xB7 separate source terms", item.ati_url));
+      cards.append(card);
+    }
+    view.append(cards);
+  }
+  async function topics(args, token) {
+    const query = (args.get("q") || "").trim(), index = args.get("index") || "all", offset = offsetOf(args), limit = 24;
+    if (!["all", "subject", "numerical"].includes(index)) throw Error("Choose a supported topic index.");
+    const data = topicCatalogue(await tool("list_topics", { ...query ? { query } : {}, index, offset, limit }), { offset, limit });
+    if (token !== epoch) return;
+    heading("EDITORIAL INDEX \xB7 NOT SCRIPTURE", "Study by topic", "Study by topic");
+    studyIndexNav();
+    view.append(el("p", "Explore Access to Insight\u2019s subject and numerical indexes, mapped to bundled canonical texts. Index entries are editorial groupings, not a ruling on what a passage means. English documents have their own terms; no translation is fetched automatically.", "notice"));
+    const form = el("form");
+    form.className = "topic-picker";
+    const label = el("label", "Find a topic"), input = el("input"), filterLabel = el("label", "Topic index"), filter = el("select"), submit = el("button", "Find topics");
+    input.value = query;
+    input.maxLength = 200;
+    label.append(input);
+    for (const [value, text3] of [["all", "All entries"], ["subject", "Subject index"], ["numerical", "Numerical index"]]) {
+      const option = el("option", text3);
+      option.value = value;
+      filter.append(option);
+    }
+    filter.value = index;
+    filter.id = "topic-index";
+    filterLabel.htmlFor = filter.id;
+    const filterField = el("div", void 0, "topic-filter");
+    filterField.append(filterLabel, filter);
+    submit.type = "submit";
+    form.append(label, filterField, submit);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      navigateFromFinder(route("topics", { ...input.value.trim() ? { q: input.value.trim() } : {}, index: filter.value }));
+    });
+    view.append(form);
+    notes(data);
+    view.append(el("p", data.total + " matching index entries \xB7 this page: " + data.returned, "muted"));
+    const cards = el("div", void 0, "cards");
+    for (const item of data.topics) {
+      const card = link("", route("topic", { name: item.slug }), "entry");
+      card.append(el("strong", item.name), el("small", (item.index === "subject" ? "Subject index" : "Numerical index") + " \xB7 " + item.texts + " mapped texts"));
+      cards.append(card);
+    }
+    view.append(cards);
+    if (!data.topics.length) view.append(el("p", "No index entry matched. Try a shorter topic name, P\u0101li term or the text search."));
+    pageControls(data.next_offset, offset ? Math.max(0, offset - limit) : null, (n) => route("topics", { ...query ? { q: query } : {}, index, offset: n }));
+    topicProvenance(data);
+  }
+  async function topicPage(args, token) {
+    const name = args.get("name"), data = topicDetail(await tool("topic", { name }), name);
+    if (token !== epoch) return;
+    heading("EDITORIAL TOPIC \xB7 NOT SCRIPTURE", data.topic.name);
+    studyIndexNav();
+    notes(data);
+    view.append(el("p", data.topic.index, "muted"), el("p", data.note, "notice"), external("Original ATI index entry", data.topic.ati_url));
+    if (data.dhamma_list) view.append(el("p", "Related numbered list:", "muted"), link(data.dhamma_list.name, route("lists", { name: data.dhamma_list.slug }), "button"));
+    view.append(el("h3", "Mapped canonical readings"));
+    if (!data.texts.length) view.append(el("p", "No safely mapped canonical link is recorded for this entry. Read the original index; no text was inferred."));
+    studySourceCards(data.texts);
+    if (data.see_also?.length) {
+      view.append(el("h3", "See also \xB7 index cross-references"));
+      for (const item of data.see_also) {
+        const p = el("p");
+        p.append(link(item.name, route("topic", { name: item.slug })));
+        view.append(p);
+      }
+    }
+    if (data.further_reading?.length) {
+      view.append(el("h3", "Further reading \xB7 commentary, not scripture"));
+      for (const item of data.further_reading) {
+        const card = el("article", void 0, "entry");
+        card.append(external(item.title, item.url), el("p", item.kind, "muted"));
+        view.append(card);
+      }
+    }
+    if (data.other_matches?.length) {
+      const more = el("details");
+      more.append(el("summary", "Other matching index entries"));
+      for (const item of data.other_matches) {
+        const p = el("p");
+        p.append(link(item.name, route("topic", { name: item.slug })));
+        more.append(p);
+      }
+      view.append(more);
+    }
+    topicProvenance(data);
+  }
+  async function teachingLists(args, token) {
+    const name = args.get("name");
+    if (!name) {
+      const data2 = listCatalogue(await tool("dhamma_list", {}));
+      if (token !== epoch) return;
+      heading("CURATED REFERENCE \xB7 NOT SCRIPTURE", "Numbered teaching lists");
+      studyIndexNav();
+      view.append(el("p", "P\u0101li member names and short English labels lead to their defining passages. A later collective name or a later list is explicitly labelled. Read the source passage before quoting.", "notice"));
+      const cards = el("div", void 0, "cards");
+      for (const item of data2.lists) {
+        const card = link("", route("lists", { name: item.slug }), "entry");
+        card.append(el("strong", item.name), el("p", item.pali), el("small", item.status + " \xB7 " + data2.status_labels[item.status]));
+        cards.append(card);
+      }
+      view.append(cards);
+      return;
+    }
+    const data = listDetail(await tool("dhamma_list", { name }), name);
+    if (token !== epoch) return;
+    heading("CURATED TEACHING LIST \xB7 READ THE SOURCE", data.name);
+    studyIndexNav();
+    notes(data);
+    view.append(el("p", data.pali, "passage"), el("p", data.status + " \xB7 " + data.status_meaning + (data.status_note ? "\n" + data.status_note : ""), "notice"), el("p", data.gloss_note, "notice"));
+    if (data.count !== data.members.length) view.append(el("p", "Traditional count: " + data.count + ". The source groups this list into " + data.members.length + " entries below; these rows are not a new enumeration.", "muted"));
+    const members = el("ol");
+    members.className = "teaching-members";
+    for (const member of data.members) {
+      const item = el("li"), pali2 = el("strong", member.pali);
+      pali2.lang = "pi";
+      item.append(pali2, el("p", member.gloss));
+      if (member.group) item.append(el("p", member.group, "muted"));
+      if (member.list) item.append(link("Open group \xB7 " + member.gloss, route("lists", { name: member.list }), "button"));
+      members.append(item);
+    }
+    view.append(members, el("h3", "Defining canonical passages"), el("p", data.note, "muted"));
+    studySourceCards(data.defined_in);
+    if (data.see_also_texts?.length) {
+      view.append(el("h3", "Additional source context"));
+      studySourceCards(data.see_also_texts);
+    }
+    if (data.related_lists?.length) {
+      view.append(el("h3", "Related curated lists"));
+      for (const item of data.related_lists) {
+        const p = el("p");
+        p.append(link(item.name, route("lists", { name: item.slug })));
+        view.append(p);
+      }
+    }
+    if (data.topic) view.append(link("ATI index topic \xB7 " + data.topic.name, route("topic", { name: data.topic.slug }), "button"));
+    view.append(el("p", "Curated by: " + data.source.curated_by, "muted"));
     provenance({ source: data.source.pali });
   }
   function progressImporter(catalog, token, updateCounts) {
@@ -1520,7 +1753,7 @@
             const done = el("h3", "Reading marks restored");
             done.tabIndex = -1;
             preview.replaceChildren(done, el("p", current.added + " new marks added. Existing marks kept. Open a plan day to review its current source and assignment.", "notice"));
-            status.textContent = durable ? "Reading marks restored in this browser only." : "Marks are restored in this tab only. Storage is unavailable; export them before closing.";
+            status2.textContent = durable ? "Reading marks restored in this browser only." : "Marks are restored in this tab only. Storage is unavailable; export them before closing.";
             done.focus();
           } catch (error) {
             failure(error);
@@ -1635,7 +1868,7 @@
               local.saved = current.saved;
               const durable = persist();
               saved();
-              status.textContent = durable ? current.added.length + " bookmarks restored in this browser. Existing notes kept." : "Bookmarks restored in this tab only. Storage is unavailable; export them before closing.";
+              status2.textContent = durable ? current.added.length + " bookmarks restored in this browser. Existing notes kept." : "Bookmarks restored in this tab only. Storage is unavailable; export them before closing.";
             } catch (error) {
               preview.replaceChildren(el("p", error.message, "notice"));
             }
@@ -1676,7 +1909,7 @@
       box.append(button("Save note", () => {
         const original = local.saved.find((x) => x.uid === item.uid && x.ref === item.ref);
         if (original) original.note = input.value;
-        if (persist()) status.textContent = "Personal note saved in this browser.";
+        if (persist()) status2.textContent = "Personal note saved in this browser.";
       }), button("Remove bookmark", () => {
         local.saved = local.saved.filter((x) => !(x.uid === item.uid && x.ref === item.ref));
         persist();
@@ -1703,7 +1936,7 @@
     closeFinder();
     updateResume();
     view.replaceChildren();
-    status.textContent = "Opening the library\u2026";
+    status2.textContent = "Opening the library\u2026";
     const [page, query = ""] = location.hash.slice(1).split("?"), args = new URLSearchParams(query);
     try {
       if (page === "read") await read(args, token);
@@ -1712,18 +1945,21 @@
       else if (page === "daily") await daily(args, token);
       else if (page === "verify") quoteChecker(token);
       else if (page === "plans") await plans(args, token);
+      else if (page === "topics") await topics(args, token);
+      else if (page === "topic") await topicPage(args, token);
+      else if (page === "lists") await teachingLists(args, token);
       else if (page === "saved") saved();
       else if (page === "about") about();
       else await browse(args, token);
       if (token !== epoch) return;
-      status.textContent = storageOK ? "" : "Browser storage is unavailable; export your personal data before closing this tab.";
+      status2.textContent = storageOK ? "" : "Browser storage is unavailable; export your personal data before closing this tab.";
       focusHeading();
     } catch (error) {
       if (token !== epoch) return;
       view.replaceChildren();
       heading("UNABLE TO OPEN", "No passage was substituted.");
       view.append(el("p", error.message, "notice"), button("Try again", render), link("Browse the library", route("browse", { node: "canon" }), "button"));
-      status.textContent = "The request failed.";
+      status2.textContent = "The request failed.";
     }
   }
   window.addEventListener("hashchange", render);

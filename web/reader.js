@@ -5,6 +5,7 @@ import { MAX_IMPORT_BYTES, parseBookmarks, bookmarkMerge } from './bookmark-impo
 import { validateDaily } from './daily-reading.mjs';
 import { validatePaliQuote } from './quote-check.mjs';
 import { MAX_PROGRESS_BYTES, parseProgress, mergeProgress } from './progress-import.mjs';
+import { topicCatalogue, topicDetail, listCatalogue, listDetail } from './topics-study.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
@@ -101,7 +102,7 @@ async function browse(args, token) {
   const kind = node === 'commentary' ? 'commentary' : node === 'post' ? 'post' : 'canon';
   const data = kind === 'commentary' ? await tool('get_commentary', { uid: 'commentary', offset, limit }) : kind === 'post' ? await tool('get_post_canonical', { offset, limit }) : await tool('browse_canon', { node, offset, limit }); if (token !== epoch) return;
   heading('EXPLORE THE LIBRARY', kind === 'commentary' ? 'Traditional commentary' : kind === 'post' ? 'Later Pāli works' : data.name || 'The Pāli Canon');
-  const nav = el('div', undefined, 'toolbar'); nav.append(link('All collections', route('browse', { node: 'canon' }), 'button'), link('Complete source books', route('browse', { node: 'books' }), 'button')); view.append(nav);
+  const nav = el('div', undefined, 'toolbar'); nav.append(link('All collections', route('browse', { node: 'canon' }), 'button'), link('Complete source books', route('browse', { node: 'books' }), 'button')); if (node === 'canon') nav.append(link('Study by topic', '#topics', 'button'), link('Numbered teaching lists', '#lists', 'button')); view.append(nav);
   if (data.note) view.append(el('p', data.note, 'muted')); notes(data);
   const cards = el('div', undefined, 'cards');
   for (const item of data.items || data.books || []) {
@@ -384,6 +385,49 @@ async function plans(args, token) {
   if (data.guide) { const guide = el('section', undefined, 'provenance'); guide.append(el('h3', 'Study guide · links only'), el('p', data.guide.cite), el('p', [data.guide.copyright, data.guide.license].filter(Boolean).join(' · ')), el('p', data.guide.note), external('Read the original study guide', data.guide.url)); view.append(guide); if (data.omitted?.length) { const omitted = el('details'); omitted.append(el('summary', 'Unplaced guide links (' + data.omitted.length + ')')); for (const item of data.omitted) omitted.append(el('p', item.reason), external('Original unplaced source link', item.url)); view.append(omitted); } }
   provenance({ source: data.source.pali });
 }
+function studyIndexNav() { const nav = el('nav', undefined, 'toolbar'); nav.setAttribute('aria-label', 'Study indexes'); nav.append(link('All topics', '#topics', 'button'), link('Numbered teaching lists', '#lists', 'button'), link('Back to library', '#browse?node=canon', 'button')); view.append(nav); }
+function topicProvenance(data) { provenance({ source: { ...data.source, terms: data.source.license }, url: data.source.url }); }
+function studySourceCards(items) {
+  const cards = el('div', undefined, 'cards');
+  for (const item of items) { const card = el('article', undefined, 'entry'); card.append(el('h4', item.citation + (item.title ? ' · ' + item.title : ''))); if (item.pts) card.append(el('p', 'PTS: ' + item.pts, 'muted')); if (item.numbering_note) card.append(el('p', item.numbering_note, 'notice')); notes(item, card); if (item.role) card.append(el('p', item.role, 'muted')); card.append(link('Read Pāli · ' + item.citation, route('read', { uid: item.id }), 'button')); if (item.ati_url) card.append(el('p', 'Publisher citation: ' + item.ati_reference), external('ATI linked page · separate source terms', item.ati_url)); cards.append(card); }
+  view.append(cards);
+}
+async function topics(args, token) {
+  const query = (args.get('q') || '').trim(), index = args.get('index') || 'all', offset = offsetOf(args), limit = 24;
+  if (!['all', 'subject', 'numerical'].includes(index)) throw Error('Choose a supported topic index.');
+  const data = topicCatalogue(await tool('list_topics', { ...(query ? { query } : {}), index, offset, limit }), { offset, limit }); if (token !== epoch) return;
+  heading('EDITORIAL INDEX · NOT SCRIPTURE', 'Study by topic', 'Study by topic'); studyIndexNav();
+  view.append(el('p', 'Explore Access to Insight’s subject and numerical indexes, mapped to bundled canonical texts. Index entries are editorial groupings, not a ruling on what a passage means. English documents have their own terms; no translation is fetched automatically.', 'notice'));
+  const form = el('form'); form.className = 'topic-picker'; const label = el('label', 'Find a topic'), input = el('input'), filterLabel = el('label', 'Topic index'), filter = el('select'), submit = el('button', 'Find topics'); input.value = query; input.maxLength = 200; label.append(input); for (const [value, text] of [['all', 'All entries'], ['subject', 'Subject index'], ['numerical', 'Numerical index']]) { const option = el('option', text); option.value = value; filter.append(option); } filter.value = index; filter.id = 'topic-index'; filterLabel.htmlFor = filter.id; const filterField = el('div', undefined, 'topic-filter'); filterField.append(filterLabel, filter); submit.type = 'submit'; form.append(label, filterField, submit); form.addEventListener('submit', e => { e.preventDefault(); navigateFromFinder(route('topics', { ...(input.value.trim() ? { q: input.value.trim() } : {}), index: filter.value })); }); view.append(form); notes(data);
+  view.append(el('p', data.total + ' matching index entries · this page: ' + data.returned, 'muted')); const cards = el('div', undefined, 'cards');
+  for (const item of data.topics) { const card = link('', route('topic', { name: item.slug }), 'entry'); card.append(el('strong', item.name), el('small', (item.index === 'subject' ? 'Subject index' : 'Numerical index') + ' · ' + item.texts + ' mapped texts')); cards.append(card); } view.append(cards); if (!data.topics.length) view.append(el('p', 'No index entry matched. Try a shorter topic name, Pāli term or the text search.'));
+  pageControls(data.next_offset, offset ? Math.max(0, offset - limit) : null, n => route('topics', { ...(query ? { q: query } : {}), index, offset: n })); topicProvenance(data);
+}
+async function topicPage(args, token) {
+  const name = args.get('name'), data = topicDetail(await tool('topic', { name }), name); if (token !== epoch) return;
+  heading('EDITORIAL TOPIC · NOT SCRIPTURE', data.topic.name); studyIndexNav(); notes(data); view.append(el('p', data.topic.index, 'muted'), el('p', data.note, 'notice'), external('Original ATI index entry', data.topic.ati_url));
+  if (data.dhamma_list) view.append(el('p', 'Related numbered list:', 'muted'), link(data.dhamma_list.name, route('lists', { name: data.dhamma_list.slug }), 'button'));
+  view.append(el('h3', 'Mapped canonical readings')); if (!data.texts.length) view.append(el('p', 'No safely mapped canonical link is recorded for this entry. Read the original index; no text was inferred.')); studySourceCards(data.texts);
+  if (data.see_also?.length) { view.append(el('h3', 'See also · index cross-references')); for (const item of data.see_also) { const p = el('p'); p.append(link(item.name, route('topic', { name: item.slug }))); view.append(p); } }
+  if (data.further_reading?.length) { view.append(el('h3', 'Further reading · commentary, not scripture')); for (const item of data.further_reading) { const card = el('article', undefined, 'entry'); card.append(external(item.title, item.url), el('p', item.kind, 'muted')); view.append(card); } }
+  if (data.other_matches?.length) { const more = el('details'); more.append(el('summary', 'Other matching index entries')); for (const item of data.other_matches) { const p = el('p'); p.append(link(item.name, route('topic', { name: item.slug }))); more.append(p); } view.append(more); } topicProvenance(data);
+}
+async function teachingLists(args, token) {
+  const name = args.get('name');
+  if (!name) {
+    const data = listCatalogue(await tool('dhamma_list', {})); if (token !== epoch) return;
+    heading('CURATED REFERENCE · NOT SCRIPTURE', 'Numbered teaching lists'); studyIndexNav(); view.append(el('p', 'Pāli member names and short English labels lead to their defining passages. A later collective name or a later list is explicitly labelled. Read the source passage before quoting.', 'notice')); const cards = el('div', undefined, 'cards');
+    for (const item of data.lists) { const card = link('', route('lists', { name: item.slug }), 'entry'); card.append(el('strong', item.name), el('p', item.pali), el('small', item.status + ' · ' + data.status_labels[item.status])); cards.append(card); } view.append(cards); return;
+  }
+  const data = listDetail(await tool('dhamma_list', { name }), name); if (token !== epoch) return;
+  heading('CURATED TEACHING LIST · READ THE SOURCE', data.name); studyIndexNav(); notes(data); view.append(el('p', data.pali, 'passage'), el('p', data.status + ' · ' + data.status_meaning + (data.status_note ? '\n' + data.status_note : ''), 'notice'), el('p', data.gloss_note, 'notice'));
+  if (data.count !== data.members.length) view.append(el('p', 'Traditional count: ' + data.count + '. The source groups this list into ' + data.members.length + ' entries below; these rows are not a new enumeration.', 'muted'));
+  const members = el('ol'); members.className = 'teaching-members';
+  for (const member of data.members) { const item = el('li'), pali = el('strong', member.pali); pali.lang = 'pi'; item.append(pali, el('p', member.gloss)); if (member.group) item.append(el('p', member.group, 'muted')); if (member.list) item.append(link('Open group · ' + member.gloss, route('lists', { name: member.list }), 'button')); members.append(item); } view.append(members, el('h3', 'Defining canonical passages'), el('p', data.note, 'muted')); studySourceCards(data.defined_in);
+  if (data.see_also_texts?.length) { view.append(el('h3', 'Additional source context')); studySourceCards(data.see_also_texts); }
+  if (data.related_lists?.length) { view.append(el('h3', 'Related curated lists')); for (const item of data.related_lists) { const p = el('p'); p.append(link(item.name, route('lists', { name: item.slug }))); view.append(p); } }
+  if (data.topic) view.append(link('ATI index topic · ' + data.topic.name, route('topic', { name: data.topic.slug }), 'button')); view.append(el('p', 'Curated by: ' + data.source.curated_by, 'muted')); provenance({ source: data.source.pali });
+}
 function progressImporter(catalog, token, updateCounts) {
   const section = el('section'), label = el('label', 'Restore reading progress from JSON'), input = el('input'), preview = el('div'); section.setAttribute('aria-label', 'Restore reading progress'); input.type = 'file'; input.accept = '.json,application/json'; label.append(input); preview.className = 'import-preview'; section.append(label, el('p', 'Choose your exported plan marks. The file stays on this device. Preview before adding marks; existing days and source signatures are kept. Maximum 16 MiB and 1,600 marks.', 'muted'), preview); let generation = 0;
   const failure = error => { const title = el('h3', 'Unable to restore reading progress'); title.tabIndex = -1; preview.replaceChildren(title, el('p', error.message, 'notice')); title.focus(); };
@@ -476,7 +520,7 @@ async function render() {
   if (location.hash === '#content' && view.childElementCount) { $('content').focus(); return; }
   const token = ++epoch; ++studyEpoch; closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
   const [page, query = ''] = location.hash.slice(1).split('?'), args = new URLSearchParams(query);
-  try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
+  try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
     if (token !== epoch) return; status.textContent = storageOK ? '' : 'Browser storage is unavailable; export your personal data before closing this tab.'; focusHeading();
   } catch (error) { if (token !== epoch) return; view.replaceChildren(); heading('UNABLE TO OPEN', 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); status.textContent = 'The request failed.'; }
 }

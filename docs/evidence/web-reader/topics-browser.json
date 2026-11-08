@@ -1,0 +1,204 @@
+{
+  "passed": 48,
+  "outside_source_tree": false,
+  "checks": [
+    {
+      "width": 320,
+      "check": "Library exposes actual paginated editorial topics with ATI source attribution and no overflow"
+    },
+    {
+      "width": 320,
+      "check": "topic pagination advances and returns without losing the index selection"
+    },
+    {
+      "width": 320,
+      "check": "keyboard topic filter retains generic query title and actual mapped texts with differing numbering cautions"
+    },
+    {
+      "width": 320,
+      "check": "topic reading action uses the mapped canonical ID rather than the publisher number"
+    },
+    {
+      "width": 320,
+      "check": "numerical index remains explicitly selected through pagination"
+    },
+    {
+      "width": 320,
+      "check": "native P\u0101li topic query retains conversion labels and original editorial topic names"
+    },
+    {
+      "width": 320,
+      "check": "missing topic names show an empty index without generating a topic or scripture"
+    },
+    {
+      "width": 320,
+      "check": "later perfections keep their historical qualification and editorial gloss limits while opening actual Buddhavamsa"
+    },
+    {
+      "width": 320,
+      "check": "grouped lists retain seven source groups and later collective-name warning instead of inventing 37 rows"
+    },
+    {
+      "width": 320,
+      "check": "malformed canonical reader commands fail before any topic cards are displayed"
+    },
+    {
+      "width": 320,
+      "check": "keyboard retry after a failed index request returns the actual selected topic"
+    },
+    {
+      "width": 320,
+      "check": "late index response cannot replace newer navigation and study navigation never auto-fetches English"
+    },
+    {
+      "width": 390,
+      "check": "Library exposes actual paginated editorial topics with ATI source attribution and no overflow"
+    },
+    {
+      "width": 390,
+      "check": "topic pagination advances and returns without losing the index selection"
+    },
+    {
+      "width": 390,
+      "check": "keyboard topic filter retains generic query title and actual mapped texts with differing numbering cautions"
+    },
+    {
+      "width": 390,
+      "check": "topic reading action uses the mapped canonical ID rather than the publisher number"
+    },
+    {
+      "width": 390,
+      "check": "numerical index remains explicitly selected through pagination"
+    },
+    {
+      "width": 390,
+      "check": "native P\u0101li topic query retains conversion labels and original editorial topic names"
+    },
+    {
+      "width": 390,
+      "check": "missing topic names show an empty index without generating a topic or scripture"
+    },
+    {
+      "width": 390,
+      "check": "later perfections keep their historical qualification and editorial gloss limits while opening actual Buddhavamsa"
+    },
+    {
+      "width": 390,
+      "check": "grouped lists retain seven source groups and later collective-name warning instead of inventing 37 rows"
+    },
+    {
+      "width": 390,
+      "check": "malformed canonical reader commands fail before any topic cards are displayed"
+    },
+    {
+      "width": 390,
+      "check": "keyboard retry after a failed index request returns the actual selected topic"
+    },
+    {
+      "width": 390,
+      "check": "late index response cannot replace newer navigation and study navigation never auto-fetches English"
+    },
+    {
+      "width": 768,
+      "check": "Library exposes actual paginated editorial topics with ATI source attribution and no overflow"
+    },
+    {
+      "width": 768,
+      "check": "topic pagination advances and returns without losing the index selection"
+    },
+    {
+      "width": 768,
+      "check": "keyboard topic filter retains generic query title and actual mapped texts with differing numbering cautions"
+    },
+    {
+      "width": 768,
+      "check": "topic reading action uses the mapped canonical ID rather than the publisher number"
+    },
+    {
+      "width": 768,
+      "check": "numerical index remains explicitly selected through pagination"
+    },
+    {
+      "width": 768,
+      "check": "native P\u0101li topic query retains conversion labels and original editorial topic names"
+    },
+    {
+      "width": 768,
+      "check": "missing topic names show an empty index without generating a topic or scripture"
+    },
+    {
+      "width": 768,
+      "check": "later perfections keep their historical qualification and editorial gloss limits while opening actual Buddhavamsa"
+    },
+    {
+      "width": 768,
+      "check": "grouped lists retain seven source groups and later collective-name warning instead of inventing 37 rows"
+    },
+    {
+      "width": 768,
+      "check": "malformed canonical reader commands fail before any topic cards are displayed"
+    },
+    {
+      "width": 768,
+      "check": "keyboard retry after a failed index request returns the actual selected topic"
+    },
+    {
+      "width": 768,
+      "check": "late index response cannot replace newer navigation and study navigation never auto-fetches English"
+    },
+    {
+      "width": 1280,
+      "check": "Library exposes actual paginated editorial topics with ATI source attribution and no overflow"
+    },
+    {
+      "width": 1280,
+      "check": "topic pagination advances and returns without losing the index selection"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard topic filter retains generic query title and actual mapped texts with differing numbering cautions"
+    },
+    {
+      "width": 1280,
+      "check": "topic reading action uses the mapped canonical ID rather than the publisher number"
+    },
+    {
+      "width": 1280,
+      "check": "numerical index remains explicitly selected through pagination"
+    },
+    {
+      "width": 1280,
+      "check": "native P\u0101li topic query retains conversion labels and original editorial topic names"
+    },
+    {
+      "width": 1280,
+      "check": "missing topic names show an empty index without generating a topic or scripture"
+    },
+    {
+      "width": 1280,
+      "check": "later perfections keep their historical qualification and editorial gloss limits while opening actual Buddhavamsa"
+    },
+    {
+      "width": 1280,
+      "check": "grouped lists retain seven source groups and later collective-name warning instead of inventing 37 rows"
+    },
+    {
+      "width": 1280,
+      "check": "malformed canonical reader commands fail before any topic cards are displayed"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard retry after a failed index request returns the actual selected topic"
+    },
+    {
+      "width": 1280,
+      "check": "late index response cannot replace newer navigation and study navigation never auto-fetches English"
+    }
+  ],
+  "a11y": {
+    "scans": 0,
+    "violations": 0,
+    "results": []
+  },
+  "limits": "Actual bundled ATI indexes, curated lists and VRI readings. Malformed command and delayed responses are controlled fixtures. No new mapping, translation, historical interpretation, source rights, physical-device or human accessibility certification. Only audit contexts bypass CSP."
+}
