@@ -27,6 +27,8 @@ from unittest.mock import patch
 sys.path.insert(0,'scripts/canon')
 from dasabala_spans import dasabala_spans,REVISION,FILE
 from repair_dasabala_spans import repair,digest
+# Node writes UTF-8 bytes to this pipe; do not use Windows' locale codec.
+sys.stdin.reconfigure(encoding='utf-8')
 payload=json.load(sys.stdin);c=payload['canon'];a=payload['commentary']
 by={u['id']:u for u in c['units']};bi=by['sn12.21']['book']
 # Explicit historical fixture, independent of whether committed data is repaired.

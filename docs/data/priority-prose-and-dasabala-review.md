@@ -77,3 +77,5 @@ Actual-source browser reproduction uses only pinned local HTML, and source/locat
 The final `npm run check` passed all1,066 tests and audited all8,544 canonical records with zero failures. The audit keeps every collection floor and allows only the explicitly documented SN12.21 gap; unexpected unaligned passages still fail.
 
 The first dev CI evidence run exposed a stale harness assumption that every external topic link was commentary. The revised assertion requires the exact withheld-page scope and label and no canonical ID or reading command, preserving essay assertions for other links. The complete installed evidence audit passed locally:11,983 reading commands,472 topics,5,322 commentary links and zero network attempts.
+
+Windows CI identified locale decoding of the test subprocess’s JSON stdin pipe (Node writes UTF-8). The fixture now explicitly decodes UTF-8; production gzip reads already did so. All three repair/locator tests passed with `PYTHONIOENCODING=cp1252 PYTHONUTF8=0`, retaining every atomic-refusal and idempotence assertion.

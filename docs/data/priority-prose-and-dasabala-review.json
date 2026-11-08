@@ -672,6 +672,13 @@
       },
       "network_attempts": 0
     },
-    "ci_followup": "First dev evidence job exposed an outdated assumption that every further-reading link is commentary. The harness now requires exact withheld-page scope/label and no id/read_with for that distinct class, retaining the original essay assertions for all other links. Full installed evidence audit passed locally."
+    "ci_followup": "First dev evidence job exposed an outdated assumption that every further-reading link is commentary. The harness now requires exact withheld-page scope/label and no id/read_with for that distinct class, retaining the original essay assertions for all other links. Full installed evidence audit passed locally.",
+    "windows_encoding_regression": {
+      "cause": "Python test JSON stdin pipe used Windows locale decoding for Node UTF-8 bytes. Production gzip inputs already specify UTF-8.",
+      "fix": "Explicit UTF-8 decoding of the test subprocess stdin before json.load; all refusal/idempotence assertions retained.",
+      "forced_locale_command": "PYTHONIOENCODING=cp1252 PYTHONUTF8=0 node --test tests/dasabala-spans.test.mjs",
+      "passed": 3,
+      "failed": 0
+    }
   }
 }
