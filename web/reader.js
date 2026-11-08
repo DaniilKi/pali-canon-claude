@@ -6,6 +6,7 @@ import { validateDaily } from './daily-reading.mjs';
 import { validatePaliQuote } from './quote-check.mjs';
 import { MAX_PROGRESS_BYTES, parseProgress, mergeProgress } from './progress-import.mjs';
 import { topicCatalogue, topicDetail, listCatalogue, listDetail } from './topics-study.mjs';
+import { createRequestPool } from './request-lifecycle.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
@@ -24,10 +25,17 @@ function button(text, fn) { const n = el('button', text); n.type = 'button'; n.a
 function link(text, href, className) { const n = el('a', text, className); n.href = href; return n; }
 function external(text, url) { try { const u = new URL(url); if (!['http:', 'https:'].includes(u.protocol)) return el('span', text); return link(text, u.href); } catch { return el('span', text); } }
 function route(name, args = {}) { return '#' + name + '?' + new URLSearchParams(args); }
-async function tool(name, args) {
-  const abort = new AbortController(); const timer = setTimeout(() => abort.abort(), 180000);
-  try {
-    const response = await fetch('/mcp', { method: 'POST', signal: abort.signal, headers: { 'Content-Type': 'application/json', Accept: 'application/json, text/event-stream' }, body: JSON.stringify({ jsonrpc: '2.0', id: ++serial, method: 'tools/call', params: { name, arguments: args } }) });
+const requestLabels = { get_text: 'Pāli reading', get_translation: 'English source', browse_canon: 'Library', get_commentary: 'Commentary', get_post_canonical: 'Later Pāli reading', reading_plan: 'Reading plan', search_texts: 'Text search', search_commentary: 'Commentary search', search_post_canonical: 'Later-work search', glossary: 'Glossary', analyse_passage: 'Word study', get_parallels: 'Related texts', daily_text: 'Daily reading', verify_quote: 'Quotation check', list_topics: 'Topic index', topic: 'Topic detail', dhamma_list: 'Teaching list' };
+const requestRows = new Map();
+const requests = createRequestPool({ onChange(entries) {
+  const active = new Set(entries.map(x => x.id));
+  for (const [id, row] of requestRows) if (!active.has(id)) { if (row.contains(document.activeElement)) (row.dataset.group === 'study' ? $('study') || $('content') : $('content')).focus({ preventScroll: true }); row.remove(); requestRows.delete(id); }
+  for (const entry of entries) if (!requestRows.has(entry.id)) { const row = el('div', undefined, 'request-row'), stop = button('Stop waiting', entry.stop); row.dataset.group = entry.group; stop.setAttribute('aria-label', 'Stop waiting for ' + entry.label); row.append(el('span', 'Waiting for ' + entry.label + '…'), stop); $('request-controls').append(row); requestRows.set(entry.id, row); }
+  $('pending-requests').hidden = entries.length === 0;
+} });
+async function tool(name, args, group = 'page') {
+  return requests.run(async signal => {
+    const response = await fetch('/mcp', { method: 'POST', signal, headers: { 'Content-Type': 'application/json', Accept: 'application/json, text/event-stream' }, body: JSON.stringify({ jsonrpc: '2.0', id: ++serial, method: 'tools/call', params: { name, arguments: args } }) });
     if (!response.ok) throw new Error(response.status === 429 ? 'Too many requests. Wait a minute, then try again.' : 'The text service is unavailable. Try again.');
     const rpc = await response.json();
     if (rpc.error) throw new Error(rpc.error.message);
@@ -36,8 +44,7 @@ async function tool(name, args) {
     const data = result.structuredContent || JSON.parse(result.content?.find(c => c.type === 'text')?.text || '{}');
     if (result.isError || data.error) throw new Error(data.error || 'This selection could not be retrieved.');
     return data;
-  } catch (error) { if (error.name === 'AbortError') throw new Error('The request timed out. Try again; no replacement passage was selected.'); throw error; }
-  finally { clearTimeout(timer); }
+  }, { group, label: requestLabels[name] || 'Reading request' });
 }
 function notes(data, target = view) {
   const list = [...(data.notes || []), ...(data.approximate ? ['This source selection is approximate or abbreviated. Missing text has not been reconstructed.'] : [])];
@@ -202,7 +209,7 @@ function scopeSummary(descriptor, target) {
   const details = el('details'); details.append(el('summary', 'Reviewed scope version')); details.append(el('p', 'Source revision: ' + scope.source_commit), el('p', 'Mapping SHA-256: ' + scope.scope_sha256)); target.append(details);
 }
 async function translations(data, uid, token) {
-  ++studyEpoch; const target = $('study'); target.replaceChildren(el('h3', 'English sources'));
+  ++studyEpoch; requests.cancelGroup('study'); const target = $('study'); target.replaceChildren(el('h3', 'English sources'));
   if (!data.english_available?.length) { target.append(el('p', 'No verified English source is linked to this text. No translation has been generated or substituted.', 'notice')); return; }
   const context = { uid: data.text_id || uid, citation: data.citation || uid, choices: JSON.parse(JSON.stringify(data.english_available)), accepted: null };
   target.append(el('p', 'Choose a publisher’s source page. It can cover more than the current Pāli selection; paragraphs are not aligned. Shared and partial sources require a separate scope review before retrieval.', 'muted'));
@@ -229,7 +236,7 @@ function reviewTranslationScope(choice, descriptor, context, token) {
 async function englishPage(args, token, context) {
   const studyToken = ++studyEpoch; const target = studyTarget('Retrieving the selected English source page…');
   try {
-    const data = await tool('get_translation', args); if (token !== epoch || studyToken !== studyEpoch) return;
+    const data = await tool('get_translation', args, 'study'); if (token !== epoch || studyToken !== studyEpoch) return;
     const next = validateEnglishPage(data, args, context), actualChoice = context.choices.find(c => c.translation_id === data.translation_id);
     target.replaceChildren(el('h3', (context.accepted?.kind === 'shared_page' ? 'Shared English source page · ' : context.accepted ? 'Partial English source · ' : 'English source page · ') + data.translator));
     target.append(el('p', 'Pāli selection: ' + context.citation + ' · publisher reference: ' + (actualChoice.reference || data.citation), 'muted'), el('p', 'Source version: ' + data.translation_id, 'muted'));
@@ -241,8 +248,8 @@ async function englishPage(args, token, context) {
   } catch (error) { if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el('p', error.message, 'notice'), button('Retry selected source', () => englishPage(args, token, context)), button('Reload passage and review sources', render)); }
 }
 async function commentary(uid, token, offset = 0) {
-  const studyToken = ++studyEpoch; const target = $('study'); target.replaceChildren(el('p', 'Opening commentary…'));
-  try { const data = await tool('get_commentary', { uid, offset, limit: 20, script: $('script').value }); if (token !== epoch || studyToken !== studyEpoch) return;
+  const studyToken = ++studyEpoch; requests.cancelGroup('study'); const target = $('study'); target.replaceChildren(el('p', 'Opening commentary…'));
+  try { const data = await tool('get_commentary', { uid, offset, limit: 20, script: $('script').value }, 'study'); if (token !== epoch || studyToken !== studyEpoch) return;
     target.replaceChildren(el('h3', 'Traditional commentary · not canonical root text')); notes(data, target);
     for (const segment of data.segments || []) target.append(el('p', segment.text, 'passage'));
     if (data.next_offset !== null && data.next_offset !== undefined) target.append(button('Next commentary page →', () => commentary(uid, token, data.next_offset)));
@@ -251,12 +258,12 @@ async function commentary(uid, token, offset = 0) {
   } catch (error) { if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el('p', error.message, 'notice')); }
 }
 function studyTarget(message) {
-  const target = $('study'); target.replaceChildren(el('p', message)); target.tabIndex = -1; target.setAttribute('aria-label', 'Study tools, separate from scripture'); target.focus({ preventScroll: true }); target.scrollIntoView({ block: 'start' }); return target;
+  requests.cancelGroup('study'); const target = $('study'); target.replaceChildren(el('p', message)); target.tabIndex = -1; target.setAttribute('aria-label', 'Study tools, separate from scripture'); target.focus({ preventScroll: true }); target.scrollIntoView({ block: 'start' }); return target;
 }
 async function wordStudy(args, expected, token) {
   const studyToken = ++studyEpoch, target = studyTarget('Looking up the selected passage in the bundled dictionary…');
   try {
-    const data = await tool('analyse_passage', args); if (token !== epoch || studyToken !== studyEpoch) return;
+    const data = await tool('analyse_passage', args, 'study'); if (token !== epoch || studyToken !== studyEpoch) return;
     if (data.segment?.ref !== expected.ref || data.text_source?.commit !== expected.source || localizeText({ segments: data.segment ? [data.segment] : [] }, expected.script).segments[0]?.text !== expected.text) throw new Error('The returned analysis does not match the selected source passage. Reload the passage; no other analysis was substituted.');
     if (expected.kind === 'post' && data.canonical !== false) throw new Error('The analysis lacks its later-work source label.');
     target.replaceChildren(el('h3', 'Word study · dictionary reference'));
@@ -291,7 +298,7 @@ async function wordStudy(args, expected, token) {
 async function relatedTexts(uid, token, offset = 0) {
   const studyToken = ++studyEpoch, target = studyTarget('Finding recorded related passages…');
   try {
-    const data = await tool('get_parallels', { uid, offset, limit: 10 }); if (token !== epoch || studyToken !== studyEpoch) return;
+    const data = await tool('get_parallels', { uid, offset, limit: 10 }, 'study'); if (token !== epoch || studyToken !== studyEpoch) return;
     if (typeof data.available !== 'boolean' || !Array.isArray(data.links)) throw new Error('The related-text response is incomplete. No absence of relationships can be inferred.');
     target.replaceChildren(el('h3', 'Related texts · evidence, not interpretation')); notes(data, target);
     if (!data.links?.length) target.append(el('p', data.available === false ? 'Related-text data is unavailable in this server copy.' : 'No related link is recorded here. That does not mean no related passage exists.', 'notice'));
@@ -518,10 +525,10 @@ function about() {
 }
 async function render() {
   if (location.hash === '#content' && view.childElementCount) { $('content').focus(); return; }
-  const token = ++epoch; ++studyEpoch; closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
+  const token = ++epoch; ++studyEpoch; requests.cancelAll(); closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
   const [page, query = ''] = location.hash.slice(1).split('?'), args = new URLSearchParams(query);
   try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
     if (token !== epoch) return; status.textContent = storageOK ? '' : 'Browser storage is unavailable; export your personal data before closing this tab.'; focusHeading();
-  } catch (error) { if (token !== epoch) return; view.replaceChildren(); heading('UNABLE TO OPEN', 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); status.textContent = 'The request failed.'; }
+  } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
 }
 window.addEventListener('hashchange', render); render();

@@ -788,6 +788,61 @@
     return data;
   }
 
+  // web/request-lifecycle.mjs
+  var REQUEST_TIMEOUT_MS = 18e4;
+  function stopped(reason) {
+    const error = new Error(reason === "deadline" ? "The request timed out. Try again; no replacement passage was selected." : reason === "user" ? "Stopped waiting in this browser. The server may still finish; no replacement passage was selected." : "This request was superseded by your new selection.");
+    error.code = reason === "deadline" ? "REQUEST_DEADLINE" : reason === "user" ? "REQUEST_STOPPED" : "REQUEST_SUPERSEDED";
+    return error;
+  }
+  function createRequestPool({ onChange = () => {
+  }, timeoutMs = REQUEST_TIMEOUT_MS, setTimer = setTimeout, clearTimer = clearTimeout } = {}) {
+    const pending = /* @__PURE__ */ new Map();
+    let serial2 = 0;
+    const emit = () => onChange([...pending.values()].map((x) => ({ id: x.id, group: x.group, label: x.label, stop: () => x.cancel("user") })));
+    return {
+      get size() {
+        return pending.size;
+      },
+      cancelAll(reason = "navigation") {
+        for (const x of [...pending.values()]) x.cancel(reason);
+      },
+      cancelGroup(group, reason = "superseded") {
+        for (const x of [...pending.values()]) if (x.group === group) x.cancel(reason);
+      },
+      async run(task, { group = "page", label = "Reading request" } = {}) {
+        const controller = new AbortController();
+        let active = true, reason, rejectStop;
+        const stop = new Promise((_, reject) => {
+          rejectStop = reject;
+        });
+        const entry = { id: ++serial2, group, label, cancel(why) {
+          if (!active) return false;
+          active = false;
+          reason = why;
+          rejectStop(stopped(why));
+          controller.abort();
+          pending.delete(entry.id);
+          emit();
+          return true;
+        } };
+        const timer = setTimer(() => entry.cancel("deadline"), timeoutMs);
+        pending.set(entry.id, entry);
+        emit();
+        try {
+          return await Promise.race([Promise.resolve().then(() => {
+            if (!active) throw stopped(reason);
+            return task(controller.signal);
+          }), stop]);
+        } finally {
+          active = false;
+          clearTimer(timer);
+          if (pending.delete(entry.id)) emit();
+        }
+      }
+    };
+  }
+
   // web/reader.js
   var $ = (id) => document.getElementById(id);
   var view = $("view");
@@ -854,11 +909,28 @@
   function route(name, args = {}) {
     return "#" + name + "?" + new URLSearchParams(args);
   }
-  async function tool(name, args) {
-    const abort = new AbortController();
-    const timer = setTimeout(() => abort.abort(), 18e4);
-    try {
-      const response = await fetch("/mcp", { method: "POST", signal: abort.signal, headers: { "Content-Type": "application/json", Accept: "application/json, text/event-stream" }, body: JSON.stringify({ jsonrpc: "2.0", id: ++serial, method: "tools/call", params: { name, arguments: args } }) });
+  var requestLabels = { get_text: "P\u0101li reading", get_translation: "English source", browse_canon: "Library", get_commentary: "Commentary", get_post_canonical: "Later P\u0101li reading", reading_plan: "Reading plan", search_texts: "Text search", search_commentary: "Commentary search", search_post_canonical: "Later-work search", glossary: "Glossary", analyse_passage: "Word study", get_parallels: "Related texts", daily_text: "Daily reading", verify_quote: "Quotation check", list_topics: "Topic index", topic: "Topic detail", dhamma_list: "Teaching list" };
+  var requestRows = /* @__PURE__ */ new Map();
+  var requests = createRequestPool({ onChange(entries) {
+    const active = new Set(entries.map((x) => x.id));
+    for (const [id, row] of requestRows) if (!active.has(id)) {
+      if (row.contains(document.activeElement)) (row.dataset.group === "study" ? $("study") || $("content") : $("content")).focus({ preventScroll: true });
+      row.remove();
+      requestRows.delete(id);
+    }
+    for (const entry of entries) if (!requestRows.has(entry.id)) {
+      const row = el("div", void 0, "request-row"), stop = button("Stop waiting", entry.stop);
+      row.dataset.group = entry.group;
+      stop.setAttribute("aria-label", "Stop waiting for " + entry.label);
+      row.append(el("span", "Waiting for " + entry.label + "\u2026"), stop);
+      $("request-controls").append(row);
+      requestRows.set(entry.id, row);
+    }
+    $("pending-requests").hidden = entries.length === 0;
+  } });
+  async function tool(name, args, group = "page") {
+    return requests.run(async (signal) => {
+      const response = await fetch("/mcp", { method: "POST", signal, headers: { "Content-Type": "application/json", Accept: "application/json, text/event-stream" }, body: JSON.stringify({ jsonrpc: "2.0", id: ++serial, method: "tools/call", params: { name, arguments: args } }) });
       if (!response.ok) throw new Error(response.status === 429 ? "Too many requests. Wait a minute, then try again." : "The text service is unavailable. Try again.");
       const rpc = await response.json();
       if (rpc.error) throw new Error(rpc.error.message);
@@ -867,12 +939,7 @@
       const data = result.structuredContent || JSON.parse(result.content?.find((c) => c.type === "text")?.text || "{}");
       if (result.isError || data.error) throw new Error(data.error || "This selection could not be retrieved.");
       return data;
-    } catch (error) {
-      if (error.name === "AbortError") throw new Error("The request timed out. Try again; no replacement passage was selected.");
-      throw error;
-    } finally {
-      clearTimeout(timer);
-    }
+    }, { group, label: requestLabels[name] || "Reading request" });
   }
   function notes(data, target = view) {
     const list = [...data.notes || [], ...data.approximate ? ["This source selection is approximate or abbreviated. Missing text has not been reconstructed."] : []];
@@ -1173,6 +1240,7 @@
   }
   async function translations(data, uid, token) {
     ++studyEpoch;
+    requests.cancelGroup("study");
     const target = $("study");
     target.replaceChildren(el("h3", "English sources"));
     if (!data.english_available?.length) {
@@ -1219,7 +1287,7 @@
     const studyToken = ++studyEpoch;
     const target = studyTarget("Retrieving the selected English source page\u2026");
     try {
-      const data = await tool("get_translation", args);
+      const data = await tool("get_translation", args, "study");
       if (token !== epoch || studyToken !== studyEpoch) return;
       const next = validateEnglishPage(data, args, context), actualChoice = context.choices.find((c) => c.translation_id === data.translation_id);
       target.replaceChildren(el("h3", (context.accepted?.kind === "shared_page" ? "Shared English source page \xB7 " : context.accepted ? "Partial English source \xB7 " : "English source page \xB7 ") + data.translator));
@@ -1237,10 +1305,11 @@
   }
   async function commentary(uid, token, offset = 0) {
     const studyToken = ++studyEpoch;
+    requests.cancelGroup("study");
     const target = $("study");
     target.replaceChildren(el("p", "Opening commentary\u2026"));
     try {
-      const data = await tool("get_commentary", { uid, offset, limit: 20, script: $("script").value });
+      const data = await tool("get_commentary", { uid, offset, limit: 20, script: $("script").value }, "study");
       if (token !== epoch || studyToken !== studyEpoch) return;
       target.replaceChildren(el("h3", "Traditional commentary \xB7 not canonical root text"));
       notes(data, target);
@@ -1253,6 +1322,7 @@
     }
   }
   function studyTarget(message) {
+    requests.cancelGroup("study");
     const target = $("study");
     target.replaceChildren(el("p", message));
     target.tabIndex = -1;
@@ -1264,7 +1334,7 @@
   async function wordStudy(args, expected, token) {
     const studyToken = ++studyEpoch, target = studyTarget("Looking up the selected passage in the bundled dictionary\u2026");
     try {
-      const data = await tool("analyse_passage", args);
+      const data = await tool("analyse_passage", args, "study");
       if (token !== epoch || studyToken !== studyEpoch) return;
       if (data.segment?.ref !== expected.ref || data.text_source?.commit !== expected.source || localizeText({ segments: data.segment ? [data.segment] : [] }, expected.script).segments[0]?.text !== expected.text) throw new Error("The returned analysis does not match the selected source passage. Reload the passage; no other analysis was substituted.");
       if (expected.kind === "post" && data.canonical !== false) throw new Error("The analysis lacks its later-work source label.");
@@ -1312,7 +1382,7 @@
   async function relatedTexts(uid, token, offset = 0) {
     const studyToken = ++studyEpoch, target = studyTarget("Finding recorded related passages\u2026");
     try {
-      const data = await tool("get_parallels", { uid, offset, limit: 10 });
+      const data = await tool("get_parallels", { uid, offset, limit: 10 }, "study");
       if (token !== epoch || studyToken !== studyEpoch) return;
       if (typeof data.available !== "boolean" || !Array.isArray(data.links)) throw new Error("The related-text response is incomplete. No absence of relationships can be inferred.");
       target.replaceChildren(el("h3", "Related texts \xB7 evidence, not interpretation"));
@@ -1933,6 +2003,7 @@
     }
     const token = ++epoch;
     ++studyEpoch;
+    requests.cancelAll();
     closeFinder();
     updateResume();
     view.replaceChildren();
@@ -1957,9 +2028,10 @@
     } catch (error) {
       if (token !== epoch) return;
       view.replaceChildren();
-      heading("UNABLE TO OPEN", "No passage was substituted.");
+      const stopped2 = error.code === "REQUEST_STOPPED";
+      heading(stopped2 ? "BROWSER WAIT STOPPED" : "UNABLE TO OPEN", stopped2 ? "Reading request stopped" : "No passage was substituted.");
       view.append(el("p", error.message, "notice"), button("Try again", render), link("Browse the library", route("browse", { node: "canon" }), "button"));
-      status2.textContent = "The request failed.";
+      status2.textContent = stopped2 ? "Stopped waiting in this browser." : error.code === "REQUEST_DEADLINE" ? "The request timed out." : "The request failed.";
     }
   }
   window.addEventListener("hashchange", render);

@@ -1,0 +1,156 @@
+{
+  "passed": 36,
+  "outside_source_tree": false,
+  "checks": [
+    {
+      "width": 320,
+      "check": "keyboard stop aborts the current browser request, clears controls/deadline and gives a precise non-substitution state"
+    },
+    {
+      "width": 320,
+      "check": "explicit retry retrieves the same actual P\u0101li once; stopping does not auto-retry"
+    },
+    {
+      "width": 320,
+      "check": "late valid commentary from an abort-ignoring transport cannot replace the stopped state or the P\u0101li source"
+    },
+    {
+      "width": 320,
+      "check": "switching study panels aborts the superseded browser wait without fetching English or losing source text"
+    },
+    {
+      "width": 320,
+      "check": "stopping/retrying a reviewed shared source retains exact consent pins and never substitutes or changes the visible P\u0101li"
+    },
+    {
+      "width": 320,
+      "check": "new route aborts the obsolete browser wait and retains only the selected view"
+    },
+    {
+      "width": 320,
+      "check": "controlled invocation of the unchanged three-minute deadline is distinct from user stop and clears pending controls"
+    },
+    {
+      "width": 320,
+      "check": "quotation stop restores the submit control, keeps the editable input and exposes no quote in request labels/storage"
+    },
+    {
+      "width": 320,
+      "check": "a stopped quotation can be explicitly retried against the real engine"
+    },
+    {
+      "width": 390,
+      "check": "keyboard stop aborts the current browser request, clears controls/deadline and gives a precise non-substitution state"
+    },
+    {
+      "width": 390,
+      "check": "explicit retry retrieves the same actual P\u0101li once; stopping does not auto-retry"
+    },
+    {
+      "width": 390,
+      "check": "late valid commentary from an abort-ignoring transport cannot replace the stopped state or the P\u0101li source"
+    },
+    {
+      "width": 390,
+      "check": "switching study panels aborts the superseded browser wait without fetching English or losing source text"
+    },
+    {
+      "width": 390,
+      "check": "stopping/retrying a reviewed shared source retains exact consent pins and never substitutes or changes the visible P\u0101li"
+    },
+    {
+      "width": 390,
+      "check": "new route aborts the obsolete browser wait and retains only the selected view"
+    },
+    {
+      "width": 390,
+      "check": "controlled invocation of the unchanged three-minute deadline is distinct from user stop and clears pending controls"
+    },
+    {
+      "width": 390,
+      "check": "quotation stop restores the submit control, keeps the editable input and exposes no quote in request labels/storage"
+    },
+    {
+      "width": 390,
+      "check": "a stopped quotation can be explicitly retried against the real engine"
+    },
+    {
+      "width": 768,
+      "check": "keyboard stop aborts the current browser request, clears controls/deadline and gives a precise non-substitution state"
+    },
+    {
+      "width": 768,
+      "check": "explicit retry retrieves the same actual P\u0101li once; stopping does not auto-retry"
+    },
+    {
+      "width": 768,
+      "check": "late valid commentary from an abort-ignoring transport cannot replace the stopped state or the P\u0101li source"
+    },
+    {
+      "width": 768,
+      "check": "switching study panels aborts the superseded browser wait without fetching English or losing source text"
+    },
+    {
+      "width": 768,
+      "check": "stopping/retrying a reviewed shared source retains exact consent pins and never substitutes or changes the visible P\u0101li"
+    },
+    {
+      "width": 768,
+      "check": "new route aborts the obsolete browser wait and retains only the selected view"
+    },
+    {
+      "width": 768,
+      "check": "controlled invocation of the unchanged three-minute deadline is distinct from user stop and clears pending controls"
+    },
+    {
+      "width": 768,
+      "check": "quotation stop restores the submit control, keeps the editable input and exposes no quote in request labels/storage"
+    },
+    {
+      "width": 768,
+      "check": "a stopped quotation can be explicitly retried against the real engine"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard stop aborts the current browser request, clears controls/deadline and gives a precise non-substitution state"
+    },
+    {
+      "width": 1280,
+      "check": "explicit retry retrieves the same actual P\u0101li once; stopping does not auto-retry"
+    },
+    {
+      "width": 1280,
+      "check": "late valid commentary from an abort-ignoring transport cannot replace the stopped state or the P\u0101li source"
+    },
+    {
+      "width": 1280,
+      "check": "switching study panels aborts the superseded browser wait without fetching English or losing source text"
+    },
+    {
+      "width": 1280,
+      "check": "stopping/retrying a reviewed shared source retains exact consent pins and never substitutes or changes the visible P\u0101li"
+    },
+    {
+      "width": 1280,
+      "check": "new route aborts the obsolete browser wait and retains only the selected view"
+    },
+    {
+      "width": 1280,
+      "check": "controlled invocation of the unchanged three-minute deadline is distinct from user stop and clears pending controls"
+    },
+    {
+      "width": 1280,
+      "check": "quotation stop restores the submit control, keeps the editable input and exposes no quote in request labels/storage"
+    },
+    {
+      "width": 1280,
+      "check": "a stopped quotation can be explicitly retried against the real engine"
+    }
+  ],
+  "a11y": {
+    "scans": 0,
+    "violations": 0,
+    "results": []
+  },
+  "limits": "Actual bundled P\u0101li/commentary/quotation results and real shared-scope metadata; held MCP requests, an abort-ignoring fetch and explicit deadline-callback invocation are controlled fixtures. No live English body fetched; no claim that client stop cancels backend jobs. No physical-device/human accessibility certification. Only audit contexts bypass CSP."
+}

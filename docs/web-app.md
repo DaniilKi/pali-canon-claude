@@ -34,6 +34,7 @@ The npm package and container include `server/web/`. The HTML, stylesheet and br
 - Open **Study words** on a body segment in a canonical text, complete root book or later work. See the bundled DPD analyses, alternative parses, grammar, computed split suggestions and unknown forms. Commentary analysis is not supported by the current backend; the app does not substitute root-text analysis.
 - Open **Related texts** for canonical selections. Shared-word matching and commentary citations are labelled separately with their evidence. Reading links retain the emitted source segment or exact commentary reference. External parallels are a link only.
 - Open **Check quote** to compare a Pāli quotation with the whole bundled canonical Tipiṭaka using `verify_quote`. Roman and supported native Pāli input are accepted; English verification is not exposed in this slice. Results retain normalization, ties, scope and source terms. Open exact match starts to inspect context. A match is not proof of authorship, verbatim wording or correct spelling; a negative result concerns only the searched corpus.
+- Stop waiting for a pending reading or study request, then retry explicitly. Changing pages or study panels cancels obsolete browser waits. This does not guarantee that the server stops its work.
 - Copy a reading link, use browser back/forward, and navigate with a keyboard.
 
 ## Storage and source boundaries
@@ -217,3 +218,32 @@ These structural guards do not establish new scholarly mappings or provenance.
 Tests cover every actual topic and teaching list, then browser navigation,
 keyboard filtering/retry, native input, differing publisher numbers, empty results,
 malformed commands and late responses. See [acceptance](evidence/web-reader/TOPICS_STUDY.md).
+
+## Slow-request controls and recovery
+
+A pending request has a keyboard-accessible **Stop waiting** control with a short
+reading/study label. The sticky controls remain available while scrolling. Labels
+do not include quotations, filter terms, notes or raw API arguments. Controls
+and timers disappear when their request finishes, fails or is stopped. Focus
+returns to the reading area or the study panel when its active stop button is
+removed; completing a different request does not rebuild the remaining controls.
+
+Stopping aborts this browser's fetch and settles the UI wait even if a transport
+ignores abort. It does **not** promise to cancel a server job or undo a request
+already received. The existing three-minute browser deadline stays finite and
+is distinguished from user cancellation. Neither stopping nor a timeout selects
+replacement scripture, starts an automatic retry or changes source permissions.
+Use the visible retry action or select the study tool again when ready.
+
+New navigation cancels obsolete browser requests. A new study panel cancels old
+study waits while keeping the current Pāli reading intact. Existing navigation
+and source-validation guards remain active. Stopping a reviewed English source
+keeps exact version/scope consent pins for an explicit retry in the current view;
+it does not silently switch versions or fetch another source. Navigating away
+still invalidates the view and its ephemeral consent.
+
+The implementation is `web/request-lifecycle.mjs` plus the same-origin tool
+wrapper. Tests cover normal/failure cleanup, independent requests, deadlines,
+immediate stop, superseding navigation, abort-ignoring transports, safe retry,
+shared-source consent pins and unchanged Pāli. See [acceptance](evidence/web-reader/REQUEST_RECOVERY.md).
+No backend/provider API, source data, network policy or licence is changed.

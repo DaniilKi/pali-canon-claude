@@ -1,0 +1,10 @@
+{
+  "baseline": "85249eade91b4d02ef53126b362c1ee53ec8f1b0",
+  "fixture": "Actual baseline compiled assets; controlled POST held before any source response. No live provider or source-body claim.",
+  "status": "Opening the library\u2026",
+  "visible_stop_controls": 0,
+  "request_deadlines_ms": [
+    180000
+  ],
+  "source_passages_displayed": 0
+}
