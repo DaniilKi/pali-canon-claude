@@ -860,18 +860,79 @@
       throw error;
     }
   }
+  function isReadingLocator(href) {
+    try {
+      if (typeof href !== "string" || href.length > 8192 || !href.startsWith("#read?")) return false;
+      const args = new URLSearchParams(href.slice(6)), keys2 = [...args.keys()];
+      if (keys2.some((k) => !["uid", "book", "kind", "plan", "day", "offset", "ref", "source"].includes(k)) || new Set(keys2).size !== keys2.length) return false;
+      const context = Object.fromEntries(["uid", "book", "kind", "plan"].filter((k) => args.has(k)).map((k) => [k, args.get(k)]));
+      if (args.has("day")) context.day = Number(args.get("day"));
+      if (args.has("offset") && !/^\d+$/.test(args.get("offset"))) return false;
+      readingPosition(context, args.has("offset") ? Number(args.get("offset")) : 0, args.has("ref") ? args.get("ref") : "legacy/1", args.has("source") ? args.get("source") : "legacy");
+      if (args.has("source")) assertPositionPin(args, { source: { commit: args.get("source") } });
+      return true;
+    } catch {
+      return false;
+    }
+  }
 
   // web/local-storage-write.mjs
+  var own2 = (x, k) => Object.hasOwn(x, k);
+  function profile(raw) {
+    const x = raw === null ? {} : JSON.parse(raw);
+    if (!x || typeof x !== "object" || Array.isArray(x)) throw Error("Unsupported browser data");
+    return x;
+  }
+  function conflict() {
+    const e = Error("Another tab changed browser data. No stored data was overwritten.");
+    e.code = "BROWSER_DATA_CHANGED";
+    return e;
+  }
+  function withoutPosition(x) {
+    const { last, ...rest } = x;
+    return JSON.stringify(rest);
+  }
+  var pointerOK = (x) => !own2(x, "last") || isReadingLocator(x.last);
+  function readingPointerOnlyChange(expected, actual) {
+    try {
+      if (!(expected === null || typeof expected === "string") || !(actual === null || typeof actual === "string")) return false;
+      const a = profile(expected), b = profile(actual);
+      return pointerOK(a) && pointerOK(b) && withoutPosition(a) === withoutPosition(b);
+    } catch {
+      return false;
+    }
+  }
   function guardedStorageWrite({ expected, value, read: read2, write }) {
     const actual = read2();
-    if (!(expected === null || typeof expected === "string") || actual !== expected) {
-      const error = Error("Another tab changed browser data. No stored data was overwritten.");
-      error.code = "BROWSER_DATA_CHANGED";
-      throw error;
-    }
     if (typeof value !== "string") throw Error("Browser data could not be serialized.");
-    write(value);
-    return value;
+    let committed = value;
+    if (!(expected === null || typeof expected === "string") || actual !== expected) {
+      if (!readingPointerOnlyChange(expected, actual)) throw conflict();
+      const base = profile(expected), current = profile(actual), incoming = profile(value);
+      if (!pointerOK(incoming)) throw conflict();
+      if (own2(base, "last") === own2(incoming, "last") && base.last === incoming.last) {
+        if (own2(current, "last")) incoming.last = current.last;
+        else delete incoming.last;
+      }
+      committed = JSON.stringify(incoming);
+    }
+    if (read2() !== actual) throw conflict();
+    write(committed);
+    return committed;
+  }
+  function guardedPositionWrite({ expected, locator, read: read2, write }) {
+    if (!isReadingLocator(locator)) throw Error("Unsupported reading locator");
+    const actual = read2(), current = profile(actual), baseline = profile(expected);
+    if (!pointerOK(current) || !pointerOK(baseline)) throw conflict();
+    if (current.remember_position === false) {
+      baseline.remember_position = false;
+      delete baseline.last;
+      return { snapshot: JSON.stringify(baseline), disabled: true };
+    }
+    const committed = JSON.stringify({ ...current, last: locator }), snapshot = JSON.stringify({ ...baseline, last: locator });
+    if (read2() !== actual) throw conflict();
+    write(committed);
+    return { snapshot, disabled: false };
   }
 
   // web/reader.js
@@ -887,6 +948,7 @@
   var storageOK = true;
   var storageSnapshot;
   var positionDurable = true;
+  var positionWarning = "";
   var storageConflict = false;
   var storageReadFailed = false;
   var noteDrafts = /* @__PURE__ */ new Map();
@@ -945,7 +1007,15 @@
         status2.textContent = storageWarning();
         return false;
       }
-      storageSnapshot = guardedStorageWrite({ expected: storageSnapshot, value: JSON.stringify(local), read: () => localStorage.getItem(KEY), write: (value) => localStorage.setItem(KEY, value) });
+      const serialized = JSON.stringify(local);
+      storageSnapshot = guardedStorageWrite({ expected: storageSnapshot, value: serialized, read: () => localStorage.getItem(KEY), write: (value) => localStorage.setItem(KEY, value) });
+      if (storageSnapshot !== serialized) {
+        const saved2 = JSON.parse(storageSnapshot);
+        if (Object.hasOwn(saved2, "last")) local.last = saved2.last;
+        else delete local.last;
+        updateResume();
+      }
+      positionWarning = "";
       storageOK = true;
       positionDurable = true;
       $("storage-recovery").hidden = true;
@@ -1087,17 +1157,32 @@
     if (local.remember_position === false || !href || local.last === href) return;
     local.last = href;
     updateResume();
-    try {
-      if (localStorage.getItem(KEY) !== storageSnapshot) {
-        positionDurable = false;
-        storageConflict = true;
-        showStorageRecovery();
-        status2.textContent = storageWarning();
-        return;
-      }
-    } catch {
+    if (storageReadFailed) {
+      positionDurable = false;
+      showStorageRecovery();
+      status2.textContent = storageWarning();
+      return;
     }
-    positionDurable = persist();
+    try {
+      const result = guardedPositionWrite({ expected: storageSnapshot, locator: href, read: () => localStorage.getItem(KEY), write: (value) => localStorage.setItem(KEY, value) });
+      storageSnapshot = result.snapshot;
+      if (result.disabled) {
+        local.remember_position = false;
+        delete local.last;
+        $("remember-position").checked = false;
+        updateResume();
+      }
+      positionDurable = true;
+      positionWarning = "";
+    } catch (error) {
+      positionDurable = false;
+      if (error.code === "BROWSER_DATA_CHANGED") positionWarning = "Reading position is kept in this tab only because browser data changed while saving. No notes were replaced.";
+      else {
+        storageOK = false;
+        showStorageRecovery();
+      }
+      status2.textContent = positionWarning || storageWarning();
+    }
   }
   function visibleReadingPosition() {
     if (activePosition?.token !== epoch) return;
@@ -1952,14 +2037,14 @@
           snapshot = localStorage.getItem(KEY);
         } catch {
         }
-        if (snapshot !== void 0 && snapshot !== storageSnapshot) throw Error("Browser data changed in another tab. Reload this page before restoring; no marks were restored.");
+        if (snapshot !== void 0 && !readingPointerOnlyChange(storageSnapshot, snapshot)) throw Error("Browser data changed in another tab. Reload this page before restoring; no marks were restored.");
         const incoming = parseProgress(text3, catalog), merge = mergeProgress(local.reading_progress, incoming), title = el("h3", "Review reading progress");
         title.tabIndex = -1;
         preview.replaceChildren(title, el("p", file.name), el("p", merge.added + " new marks \xB7 " + merge.duplicates + " already saved \xB7 " + merge.conflicts + " conflicting days kept as they are.", "notice"), el("p", "Imported marks are self-reported. Their saved assignments and source revisions are retained, not verified against every current plan day. Open a day to check whether its mark still applies.", "muted"));
         if (merge.added) preview.append(button("Add " + merge.added + " reading marks", () => {
           if (request !== generation || token !== epoch) return;
           try {
-            if (snapshot !== void 0 && localStorage.getItem(KEY) !== snapshot) throw Error("Browser data changed while previewing this file. Reload this page and preview again; no marks were restored.");
+            if (snapshot !== void 0 && !readingPointerOnlyChange(snapshot, localStorage.getItem(KEY))) throw Error("Browser data changed while previewing this file. Reload this page and preview again; no marks were restored.");
             const current = mergeProgress(local.reading_progress, incoming);
             local.reading_progress = current.progress;
             const durable = persist();
@@ -2174,7 +2259,7 @@
       else if (page === "about") about();
       else await browse(args, token);
       if (token !== epoch) return;
-      status2.textContent = storageConflict || !storageOK || !positionDurable ? storageWarning() : "";
+      status2.textContent = storageConflict || !storageOK ? storageWarning() : !positionDurable ? positionWarning || storageWarning() : "";
       focusHeading();
     } catch (error) {
       if (token !== epoch) return;

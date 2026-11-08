@@ -292,8 +292,9 @@ screen-reader and native-reader acceptance remains separate.
 ## Stale-tab saves and recovery
 
 Browser-data saves now compare the currently stored raw snapshot with the one
-this tab last loaded or saved. If another tab changed it, the stale save is
-refused before writing. The tab remains blocked from later writes until reload;
+this tab last loaded or saved. If another tab changed personal data, the stale save is
+refused before writing. A validated reading-locator-only change is handled
+separately, as described below. After a private-data conflict, the tab remains blocked from later personal writes until reload;
 changing a preference, deleting a bookmark or marking a plan day cannot silently
 replace the newer profile. Notes, plan marks and source attribution are not
 automatically merged or chosen between. This synchronous optimistic check is
@@ -325,4 +326,18 @@ plan/pref/delete refusal, keyboard reload review, denied writes and malformed
 existing data. Human/device acceptance and truly simultaneous writes remain
 outside these guarantees.
 
-The snapshot guard compares the whole profile. An unrelated preference or reading-position change can therefore block a stale tab too. For now, use one writing tab or export/reload to reconcile. Separating independent records and adding atomic coordination is future work, not part of this repair.
+### Reading in another tab
+
+Opening or scrolling a text in another tab no longer blocks an otherwise current
+note save or progress-file preview/confirmation. The exception is narrow: only a
+validated `last` reading locator may differ. The save preserves the newer locator
+when this tab did not change it. Changes to notes, plan marks, preferences or
+unknown fields still require recovery/reload rather than automatic merging.
+
+Automatic position recording writes only that locator into the currently stored
+profile, preserving newer notes/marks/preferences. It retains this tab’s old
+personal-data baseline, so reading cannot make a later stale note edit appear
+current. An observed position opt-out in another tab stops recording and clears
+the local pointer. There is no general personal-data merge, immediate live sync,
+account sync or atomic protection against truly simultaneous writers.
+See [reproduction, safety tests and limits](evidence/web-reader/POINTER_RECONCILIATION.md).

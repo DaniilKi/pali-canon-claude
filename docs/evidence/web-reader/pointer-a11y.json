@@ -1,0 +1,317 @@
+{
+  "passed": 32,
+  "outside_source_tree": false,
+  "checks": [
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "keyboard note save accepts only a newer validated locator and preserves it"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "later save adopts the observed locator rather than resurrecting the old one"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "reader-only scroll preserves the newer external personal note"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "reading-only save never falsely rebases unseen notes; stale private edit still refuses"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "another tab\u2019s opt-out stops stale reading writes without replacing newer notes"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "local progress preview tolerates only the newer reading locator without mutating personal marks"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "progress confirmation preserves a second locator change during preview and existing notes"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "phone/tablet/desktop layout has no overflow, script errors or automatic English retrieval"
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "check": "keyboard note save accepts only a newer validated locator and preserves it"
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "check": "later save adopts the observed locator rather than resurrecting the old one"
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "check": "reader-only scroll preserves the newer external personal note"
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "check": "reading-only save never falsely rebases unseen notes; stale private edit still refuses"
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "check": "another tab\u2019s opt-out stops stale reading writes without replacing newer notes"
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "check": "local progress preview tolerates only the newer reading locator without mutating personal marks"
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "check": "progress confirmation preserves a second locator change during preview and existing notes"
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "check": "phone/tablet/desktop layout has no overflow, script errors or automatic English retrieval"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "keyboard note save accepts only a newer validated locator and preserves it"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "later save adopts the observed locator rather than resurrecting the old one"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "reader-only scroll preserves the newer external personal note"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "reading-only save never falsely rebases unseen notes; stale private edit still refuses"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "another tab\u2019s opt-out stops stale reading writes without replacing newer notes"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "local progress preview tolerates only the newer reading locator without mutating personal marks"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "progress confirmation preserves a second locator change during preview and existing notes"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "phone/tablet/desktop layout has no overflow, script errors or automatic English retrieval"
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "check": "keyboard note save accepts only a newer validated locator and preserves it"
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "check": "later save adopts the observed locator rather than resurrecting the old one"
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "check": "reader-only scroll preserves the newer external personal note"
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "check": "reading-only save never falsely rebases unseen notes; stale private edit still refuses"
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "check": "another tab\u2019s opt-out stops stale reading writes without replacing newer notes"
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "check": "local progress preview tolerates only the newer reading locator without mutating personal marks"
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "check": "progress confirmation preserves a second locator change during preview and existing notes"
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "check": "phone/tablet/desktop layout has no overflow, script errors or automatic English retrieval"
+    }
+  ],
+  "a11y": {
+    "scans": 16,
+    "violations": 0,
+    "results": [
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "successful note after other-tab reading",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "reader after newer external note",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "stale private save remains blocked",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "progress preview after locator change",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "successful note after other-tab reading",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "reader after newer external note",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "stale private save remains blocked",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "progress preview after locator change",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "successful note after other-tab reading",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "reader after newer external note",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "stale private save remains blocked",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "progress preview after locator change",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "successful note after other-tab reading",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "reader after newer external note",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "stale private save remains blocked",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "progress preview after locator change",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      }
+    ]
+  },
+  "limits": "Two real same-origin Chromium tabs, real P\u0101li APIs, synthetic personal notes. Valid locator-only reconciliation and explicit reading-only writes, not general record merging, atomic CAS, account sync or protection against genuinely simultaneous writes. No physical-device or human accessibility certification; only audit contexts bypass CSP."
+}

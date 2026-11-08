@@ -165,6 +165,12 @@ jobs:
       - name: Audit exact reading position and privacy controls in both themes
         if: matrix.group == 'personal'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-position-check.py --a11y --report standalone-position-a11y.report.json
+      - name: Check reading-only cross-tab reconciliation and stale-note protection
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-pointer-check.py --report standalone-pointer.report.json
+      - name: Audit cross-tab note, reading and import flows in both themes
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-pointer-check.py --a11y --report standalone-pointer-a11y.report.json
       - name: Check stale-tab saves and personal-data recovery downloads
         if: matrix.group == 'personal'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-storage-check.py --report standalone-storage.report.json
@@ -199,6 +205,8 @@ jobs:
             standalone-recovery-a11y.report.json
             standalone-position.report.json
             standalone-position-a11y.report.json
+            standalone-pointer.report.json
+            standalone-pointer-a11y.report.json
             standalone-storage.report.json
             standalone-storage-a11y.report.json
           if-no-files-found: warn

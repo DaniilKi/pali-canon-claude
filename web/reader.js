@@ -8,14 +8,14 @@ import { MAX_PROGRESS_BYTES, parseProgress, mergeProgress } from './progress-imp
 import { topicCatalogue, topicDetail, listCatalogue, listDetail } from './topics-study.mjs';
 import { createRequestPool } from './request-lifecycle.mjs';
 import { readingPosition, assertPositionPin } from './reading-position.mjs';
-import { guardedStorageWrite } from './local-storage-write.mjs';
+import { guardedStorageWrite, guardedPositionWrite, readingPointerOnlyChange } from './local-storage-write.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
 const view = $('view'), status = $('status');
 let serial = 0, epoch = 0, studyEpoch = 0, positionTimer, activePosition = null;
 const KEY = 'pali-library-v1';
-let storageOK = true, storageSnapshot, positionDurable = true, storageConflict = false, storageReadFailed = false;
+let storageOK = true, storageSnapshot, positionDurable = true, positionWarning = '', storageConflict = false, storageReadFailed = false;
 const noteDrafts = new Map(), noteKey = item => JSON.stringify([item.uid, item.ref]);
 function loadLocal() { try { const raw = localStorage.getItem(KEY); storageSnapshot = raw; const x = JSON.parse(raw || '{}'); if (!x || typeof x !== 'object' || Array.isArray(x)) throw Error('Unsupported browser data'); return x; } catch { storageOK = false; storageReadFailed = true; return {}; } }
 const local = loadLocal();
@@ -33,8 +33,9 @@ function showStorageRecovery() {
 function persist() {
   try {
     if (storageConflict || storageReadFailed) { showStorageRecovery(); status.textContent = storageWarning(); return false; }
-    storageSnapshot = guardedStorageWrite({ expected: storageSnapshot, value: JSON.stringify(local), read: () => localStorage.getItem(KEY), write: value => localStorage.setItem(KEY, value) });
-    storageOK = true; positionDurable = true; $('storage-recovery').hidden = true; return true;
+    const serialized = JSON.stringify(local); storageSnapshot = guardedStorageWrite({ expected: storageSnapshot, value: serialized, read: () => localStorage.getItem(KEY), write: value => localStorage.setItem(KEY, value) });
+    if (storageSnapshot !== serialized) { const saved = JSON.parse(storageSnapshot); if (Object.hasOwn(saved, 'last')) local.last = saved.last; else delete local.last; updateResume(); }
+    positionWarning = ''; storageOK = true; positionDurable = true; $('storage-recovery').hidden = true; return true;
   } catch (error) { if (error.code === 'BROWSER_DATA_CHANGED') storageConflict = true; else storageOK = false; showStorageRecovery(); status.textContent = storageWarning(); return false; }
 }
 function el(tag, text, className) { const n = document.createElement(tag); if (text !== undefined) n.textContent = text; if (className) n.className = className; return n; }
@@ -105,8 +106,12 @@ function updateResume() { const valid = local.remember_position !== false && typ
 function rememberPosition(href) {
   if (local.remember_position === false || !href || local.last === href) return;
   local.last = href; updateResume();
-  try { if (localStorage.getItem(KEY) !== storageSnapshot) { positionDurable = false; storageConflict = true; showStorageRecovery(); status.textContent = storageWarning(); return; } } catch {}
-  positionDurable = persist();
+  if (storageReadFailed) { positionDurable = false; showStorageRecovery(); status.textContent = storageWarning(); return; }
+  try {
+    const result = guardedPositionWrite({ expected: storageSnapshot, locator: href, read: () => localStorage.getItem(KEY), write: value => localStorage.setItem(KEY, value) }); storageSnapshot = result.snapshot;
+    if (result.disabled) { local.remember_position = false; delete local.last; $('remember-position').checked = false; updateResume(); }
+    positionDurable = true; positionWarning = '';
+  } catch (error) { positionDurable = false; if (error.code === 'BROWSER_DATA_CHANGED') positionWarning = 'Reading position is kept in this tab only because browser data changed while saving. No notes were replaced.'; else { storageOK = false; showStorageRecovery(); } status.textContent = positionWarning || storageWarning(); }
 }
 function visibleReadingPosition() { if (activePosition?.token !== epoch) return; return activePosition.links.find(x => { const rect = x.node.getBoundingClientRect(); return rect.bottom > 1 && rect.top < innerHeight; }); }
 function flushReadingPosition() {
@@ -483,13 +488,13 @@ function progressImporter(catalog, token, updateCounts) {
       const text = await file.text(); if (request !== generation || token !== epoch) return;
       if (new TextEncoder().encode(text).length > MAX_PROGRESS_BYTES) throw Error('Choose a progress export no larger than 16 MiB. Nothing was restored.');
       let snapshot; try { snapshot = localStorage.getItem(KEY); } catch {}
-      if (snapshot !== undefined && snapshot !== storageSnapshot) throw Error('Browser data changed in another tab. Reload this page before restoring; no marks were restored.');
+      if (snapshot !== undefined && !readingPointerOnlyChange(storageSnapshot, snapshot)) throw Error('Browser data changed in another tab. Reload this page before restoring; no marks were restored.');
       const incoming = parseProgress(text, catalog), merge = mergeProgress(local.reading_progress, incoming), title = el('h3', 'Review reading progress'); title.tabIndex = -1;
       preview.replaceChildren(title, el('p', file.name), el('p', merge.added + ' new marks · ' + merge.duplicates + ' already saved · ' + merge.conflicts + ' conflicting days kept as they are.', 'notice'), el('p', 'Imported marks are self-reported. Their saved assignments and source revisions are retained, not verified against every current plan day. Open a day to check whether its mark still applies.', 'muted'));
       if (merge.added) preview.append(button('Add ' + merge.added + ' reading marks', () => {
         if (request !== generation || token !== epoch) return;
         try {
-          if (snapshot !== undefined && localStorage.getItem(KEY) !== snapshot) throw Error('Browser data changed while previewing this file. Reload this page and preview again; no marks were restored.');
+          if (snapshot !== undefined && !readingPointerOnlyChange(snapshot, localStorage.getItem(KEY))) throw Error('Browser data changed while previewing this file. Reload this page and preview again; no marks were restored.');
           const current = mergeProgress(local.reading_progress, incoming); local.reading_progress = current.progress; const durable = persist(); updateCounts();
           const done = el('h3', 'Reading marks restored'); done.tabIndex = -1; preview.replaceChildren(done, el('p', current.added + ' new marks added. Existing marks kept. Open a plan day to review its current source and assignment.', 'notice')); status.textContent = durable ? 'Reading marks restored in this browser only.' : storageWarning(); done.focus();
         } catch (error) { failure(error); }
@@ -566,7 +571,7 @@ async function render() {
   activePosition = null; clearTimeout(positionTimer); const token = ++epoch; ++studyEpoch; requests.cancelAll(); closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
   const [page, query = ''] = location.hash.slice(1).split('?'), args = new URLSearchParams(query);
   try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
-    if (token !== epoch) return; status.textContent = storageConflict || !storageOK || !positionDurable ? storageWarning() : ''; focusHeading();
+    if (token !== epoch) return; status.textContent = storageConflict || !storageOK ? storageWarning() : !positionDurable ? positionWarning || storageWarning() : ''; focusHeading();
   } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); if (error.code === 'READING_SOURCE_CHANGED') { const review = new URLSearchParams(args); review.delete('source'); view.append(link('Review current source at this reference', '#read?' + review, 'button')); } status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
 }
 window.addEventListener('hashchange', render); render();

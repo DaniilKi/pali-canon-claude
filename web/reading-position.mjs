@@ -11,3 +11,16 @@ export function assertPositionPin(args,data) {
  if(args.getAll('source').length!==1||!source(args.get('source'))||!string(args.get('ref'),400)||!/^\d+$/.test(args.get('offset')||'')||!integer(Number(args.get('offset'))))throw Error('The saved reading position is incomplete. Open its source from the Library; no nearby passage was substituted.');
  if(data.source?.commit!==args.get('source')){const error=Error('The source revision changed since this reading position was saved. Review the current source explicitly before continuing; no replacement wording was displayed.');error.code='READING_SOURCE_CHANGED';throw error;}
 }
+/** Recognize only the locator grammar this reader understands; never consent, note or arbitrary URL fields. */
+export function isReadingLocator(href) {
+ try {
+  if(typeof href!=='string'||href.length>8192||!href.startsWith('#read?'))return false;
+  const args=new URLSearchParams(href.slice(6)),keys=[...args.keys()];
+  if(keys.some(k=>!['uid','book','kind','plan','day','offset','ref','source'].includes(k))||new Set(keys).size!==keys.length)return false;
+  const context=Object.fromEntries(['uid','book','kind','plan'].filter(k=>args.has(k)).map(k=>[k,args.get(k)]));if(args.has('day'))context.day=Number(args.get('day'));
+  if(args.has('offset')&&!/^\d+$/.test(args.get('offset')))return false;
+  readingPosition(context,args.has('offset')?Number(args.get('offset')):0,args.has('ref')?args.get('ref'):'legacy/1',args.has('source')?args.get('source'):'legacy');
+  if(args.has('source'))assertPositionPin(args,{source:{commit:args.get('source')}});
+  return true;
+ }catch{return false;}
+}

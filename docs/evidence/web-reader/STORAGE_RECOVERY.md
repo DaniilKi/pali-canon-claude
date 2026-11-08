@@ -88,3 +88,10 @@ They bring the active test tab to the foreground and bound frame waiting; no
 contrast rule, assertion or audit is disabled. The formerly failing bookmark
 audit passed locally (16 scans, zero violations). New exact-head hosted CI is
 required for this candidate; historical cancelled/failed runs remain unchanged.
+
+## Later refinement
+
+The original whole-profile policy below was deliberately conservative and also
+blocked saves after reading-only updates. The [reading-pointer reconciliation
+repair](POINTER_RECONCILIATION.md) narrows that behavior without merging notes or
+relaxing stale private-data refusal. This receipt remains the historical baseline.
