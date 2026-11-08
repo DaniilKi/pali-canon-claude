@@ -1,0 +1,209 @@
+{
+  "baseline_commit": "4934f86e1eafa8f747581a7430fe3b75e94fc69e",
+  "observed_on": "2026-11-08",
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "method": "Independent complete publisher body/notice and VRI-root review from official pinned source checkout. Metadata/hashes only; no English bodies bundled; no live/deployed claim.",
+  "rows": [
+    {
+      "owner": "thag10.2",
+      "path": "/tipitaka/kn/thag/thag.10.02.olen",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.10.02.olen.html",
+      "decision": "hold",
+      "reason": "537–541 and544–545; missing542–543,546.",
+      "root": {
+        "id": "thag10.2",
+        "title": "Ekavihāriyattheragāthā",
+        "vri": "537–546",
+        "book": 34,
+        "start": 2279,
+        "end": 2311,
+        "root_blocks_sha256": "168ed7d7cc376253b20e52c61822be3cc3a091df882e040b600243b92133f9ac"
+      },
+      "before_link": {
+        "source": "ati",
+        "english": "The Lonely Forest Dweller",
+        "path": "/tipitaka/kn/thag/thag.10.02.olen",
+        "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.10.02.olen.html",
+        "translator": "Andrew Olendzki",
+        "license": "ATI_DEPRECATED",
+        "reference": "Thag 537-41;544-5",
+        "pali_title": "Ekavihariya Thera",
+        "match": "number+title"
+      },
+      "source_html_sha256": "61b13432b35841306895f328048536f9167fdfd9395737ac820d941a42dd0e85",
+      "whole_chunk_sha256": "c57affda8bffd075db196db3b5f015229b461a5e49ab1c38ecaad89820aa6152",
+      "notice_sha256": "6ace1f9154f0ea773ee6286bd6058e3022944e9632e9cef479bfc5a5830c68fe"
+    },
+    {
+      "owner": "thag17.3",
+      "path": "/tipitaka/kn/thag/thag.17.03.hekh",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.17.03.hekh.html",
+      "decision": "hold",
+      "reason": "Discontinuous1027–1032,1037–1039,1042,1049; finalstanza qualifications/extinction wording cannot be assigned to one exact finalverse.",
+      "root": {
+        "id": "thag17.3",
+        "title": "Ānandattheragāthā",
+        "vri": "1017–1053",
+        "book": 34,
+        "start": 3808,
+        "end": 3920,
+        "root_blocks_sha256": "e6e0ffa380dadb80c1eb503b6ea3205576373c104f3206548b640f61d7f00a87"
+      },
+      "before_link": {
+        "source": "ati",
+        "english": "Ananda",
+        "path": "/tipitaka/kn/thag/thag.17.03.hekh",
+        "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.17.03.hekh.html",
+        "translator": "Hellmuth Hecker & Sister Khema",
+        "license": "BPS",
+        "reference": "Thag 1024-29;1034-36;1046;1049",
+        "match": "number+title"
+      },
+      "source_html_sha256": "1c6cbc8a56310d1ce8aecca0871001f3ced3fb537f96348a03be48de16f7444b",
+      "whole_chunk_sha256": "73a53f9728b3c68794745a6afe9ac379d3fe9e645fcb0009843de953f5890e18",
+      "notice_sha256": "d45a1af48e7fbc6d3df378079c3cbac1e03bb4d87bd4dd5a1842f6402d71949c"
+    },
+    {
+      "owner": "thag17.3",
+      "path": "/tipitaka/kn/thag/thag.17.03.olen",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.17.03.olen.html",
+      "decision": "partial",
+      "reason": "Selectedpoem VRI1037–1039, source labels1034–1036 preserved. Editorialpreface (including otherquotedverses1044–1047) excluded.",
+      "root": {
+        "id": "thag17.3",
+        "title": "Ānandattheragāthā",
+        "vri": "1017–1053",
+        "book": 34,
+        "start": 3808,
+        "end": 3920,
+        "root_blocks_sha256": "e6e0ffa380dadb80c1eb503b6ea3205576373c104f3206548b640f61d7f00a87"
+      },
+      "before_link": {
+        "source": "ati",
+        "english": "Ananda Alone",
+        "path": "/tipitaka/kn/thag/thag.17.03.olen",
+        "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.17.03.olen.html",
+        "translator": "Andrew Olendzki",
+        "license": "ATI_DEPRECATED",
+        "reference": "Thag 1034-36",
+        "pali_title": "Ananda Thera",
+        "match": "number+title"
+      },
+      "source_html_sha256": "16e0af4565c573069cc87b9e3ce7c60f9085ecb380fb9bee4b07645bcb9e1aaa",
+      "whole_chunk_sha256": "6e88f75a028fb41abb09ca9eeb956a6fb864677a2e1211f71132b594f966c6e0",
+      "notice_sha256": "2b7220a363cb883cba96d5c61ced4758a38e2c41ddd7de7e4fe0137ab41f4e06"
+    },
+    {
+      "owner": "thag6.13",
+      "path": "/tipitaka/kn/thag/thag.06.13.olen",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.06.13.olen.html",
+      "decision": "partial",
+      "reason": "Restore only448–452; opening447 remains untranslated. Editorialpreface excluded.",
+      "root": {
+        "id": "thag6.13",
+        "title": "Sirimaṇḍattheragāthā",
+        "vri": "447–452",
+        "book": 34,
+        "start": 1958,
+        "end": 1978,
+        "root_blocks_sha256": "145c04d4185a9e695611c6abd17ebd6c10f9507d5888b049de2c024bbdc3701c"
+      },
+      "before_link": null,
+      "source_html_sha256": "a627528b0e392c49f76dca57142dead2b2e569bff0d2942719dbe0e4500009e6",
+      "whole_chunk_sha256": "7c633fb07d351db423c655bc8dfd2cb8d282252b02c580133f219f580ea2dfb3",
+      "notice_sha256": "5bf50ef76a72ff25df8d31013e2981932d322695379ae4d980fbac5de46792a1"
+    }
+  ],
+  "retired_exclusion": {
+    "source": "ati",
+    "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.06.13.olen.html",
+    "status": "withheld-partial-unit",
+    "subject_ids": [
+      "thag6.13"
+    ],
+    "reason": "Only448–452 plus editorial preface; omits447 covered/uncovered rain imagery. Publisher subtitle says excerpt. This is a valid excerpt, not a complete-unit translation. Withhold pending exact partial-scope and notice review; preserve other independent versions and never silently substitute an exact request.",
+    "review": {
+      "source_url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.06.13.olen.html",
+      "observed_on": "2026-11-08",
+      "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+      "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "source_html_sha256": "a627528b0e392c49f76dca57142dead2b2e569bff0d2942719dbe0e4500009e6",
+      "text_sha256": "7c633fb07d351db423c655bc8dfd2cb8d282252b02c580133f219f580ea2dfb3",
+      "notice_sha256": "5bf50ef76a72ff25df8d31013e2981932d322695379ae4d980fbac5de46792a1",
+      "method": "Complete official BCBS source chunks, provenance notices and complete indexed VRI roots inspected with independent review. Local official snapshots supplied to production provider for before/after reproduction; no live/deployed claim. No English source bodies bundled.",
+      "root_units": [
+        {
+          "id": "thag6.13",
+          "title": "Sirimaṇḍattheragāthā",
+          "vri": "447–452",
+          "book": 34,
+          "start": 1958,
+          "end": 1978,
+          "root_blocks_sha256": "145c04d4185a9e695611c6abd17ebd6c10f9507d5888b049de2c024bbdc3701c"
+        }
+      ]
+    }
+  },
+  "reproduction": {
+    "rows": [
+      {
+        "unit": "thag17.3",
+        "translation_id": "ati:/tipitaka/kn/thag/thag.17.03.olen",
+        "characters": 417,
+        "text_sha256": "2eb76d74b0879ddb9d12fcb51cbf713bd48c5a6bfc293998fe4996e50efa318a",
+        "pages": 6,
+        "full_notice_on_every_page": true,
+        "verse_probe": "found",
+        "editorial_preface_90_word_probe": "not_found_in_scope",
+        "scope": {
+          "first_ref": "thag17.3/22",
+          "last_ref": "thag17.3/24"
+        },
+        "provider": "Official pinned local HTML supplied to production provider; no upstream HTTP"
+      },
+      {
+        "unit": "thag6.13",
+        "translation_id": "ati:/tipitaka/kn/thag/thag.06.13.olen",
+        "characters": 624,
+        "text_sha256": "cc63734845748e1bad61fde48f854b109786cbb356a46b043daa1d001d795c23",
+        "pages": 8,
+        "full_notice_on_every_page": true,
+        "verse_probe": "found",
+        "editorial_preface_90_word_probe": "not_found_in_scope",
+        "scope": {
+          "first_ref": "thag6.13/3",
+          "last_ref": "thag6.13/7"
+        },
+        "provider": "Official pinned local HTML supplied to production provider; no upstream HTTP"
+      }
+    ],
+    "intercepted_fetches": 2,
+    "upstream_http_requests": 0
+  },
+  "coverage_after": {
+    "texts": 8445,
+    "with_english": 1421,
+    "with_english_including_inherited": 1844,
+    "links": 2574,
+    "content_matched_links": 64,
+    "by_source": {
+      "dhammatalks": 1274,
+      "ati": 1147,
+      "anandajoti": 153
+    },
+    "shared_links": 12,
+    "partial_links": 2,
+    "with_shared_english": 110,
+    "shared_only": 52,
+    "with_partial_english": 2,
+    "partial_only": 1,
+    "shared_by_source": {
+      "ati": 12
+    },
+    "partial_by_source": {
+      "ati": 2
+    },
+    "percent_with_english": 21.8
+  }
+}

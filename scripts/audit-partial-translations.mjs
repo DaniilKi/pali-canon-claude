@@ -1,4 +1,4 @@
-// Install-only synthetic declarations and provider responses; no source is activated in the repository.
+// Installed synthetic contracts plus real reviewed metadata; no live author requests.
 import assert from 'node:assert/strict';
 import { cp, mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
@@ -8,6 +8,7 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 import { syntheticLink, syntheticHtml, syntheticText } from '../tests/helpers/partial-translation.mjs';
+import {atiPartial,html as atiHtml,verse as atiVerse,editorial as atiEditorial} from '../tests/helpers/ati-partial.mjs';
 import { translationCoverage } from '../src/providers.mjs';
 function option(name) { const i = process.argv.indexOf(name); if (i < 0) return; assert.ok(process.argv[i + 1]); return resolve(process.argv[i + 1]); }
 const serverDir = option('--server-dir') || resolve('server'), reportPath = option('--report');
@@ -24,12 +25,18 @@ try {
   await cp(serverDir, join(stage, 'server'), { recursive: true }); await mkdir(join(stage, 'empty'));
   const original = JSON.parse(await readFile(join(stage, 'server/data/translations.json'), 'utf8'));
   const preload = join(stage, 'synthetic-provider.cjs');
-  for (const mode of ['stdio', 'http', 'mixed_versions', 'changed_mapping', 'changed_source']) {
-    const link = mode === 'changed_mapping' ? syntheticLink('patthana1.1', 5, 9) : syntheticLink();
+  for (const mode of ['stdio', 'http', 'mixed_versions', 'changed_mapping', 'changed_source', 'ati', 'registered_metadata', 'registered_downgrade']) {
+    const registered=mode.startsWith('registered_');
+    const registry=JSON.parse(await readFile(join(stage,'server/data/reviewed-partial-pages.json'),'utf8'));
+    const link = mode === 'ati' ? atiPartial() : mode === 'changed_mapping' ? syntheticLink('patthana1.1', 5, 9) : syntheticLink();
+    const expectedText=mode==='ati'?atiVerse:syntheticText;
     const full = { ...link, url: link.url.replace('PARTIAL', 'FULL') }; delete full.partial_scope;
-    await writeFile(join(stage, 'server/data/translations.json'), JSON.stringify({ ...original, 'patthana1.1': mode === 'mixed_versions' ? [link, full] : [link] }));
-    const html = mode === 'changed_source' ? syntheticHtml.replace('amber', 'changed') : syntheticHtml;
-    await writeFile(preload, `globalThis.fetch=async input=>{const url=String(input);if(!${JSON.stringify([link.url, full.url])}.includes(url)){console.error('UNEXPECTED_NETWORK_ATTEMPT');throw Error('UNEXPECTED_NETWORK_ATTEMPT')}return new Response(${JSON.stringify(html)},{status:200,headers:{'content-type':'text/html'}})};`);
+    const translations=registered?structuredClone(original):{...original,'patthana1.1':mode==='mixed_versions'?[link,full]:[link]};
+    if(mode==='registered_downgrade'){const row=registry.links[0];delete translations[row.unit_id].find(l=>l.path===row.path).partial_scope;}
+    await writeFile(join(stage,'server/data/translations.json'),JSON.stringify(translations));
+    const html = mode === 'ati'||registered ? atiHtml : mode === 'changed_source' ? syntheticHtml.replace('amber', 'changed') : syntheticHtml;
+    const allowed=registered?registry.links.map(r=>'https://accesstoinsight.org'+r.path+'.html'):[link.url,full.url];
+    await writeFile(preload, `globalThis.fetch=async input=>{const url=String(input);if(!${JSON.stringify(allowed)}.includes(url)){console.error('UNEXPECTED_NETWORK_ATTEMPT');throw Error('UNEXPECTED_NETWORK_ATTEMPT')}return new Response(${JSON.stringify(html)},{status:200,headers:{'content-type':'text/html'}})};`);
     const env = { ...process.env, PALI_CANON_CACHE_MB: '0', HOST: '127.0.0.1', PORT: '0', RATE_LIMIT_PER_MINUTE: '0' };
     let stderr = ''; client = new Client({ name: 'installed-partial-fixture', version: '1' });
     if (mode === 'stdio') {
@@ -50,8 +57,23 @@ try {
       if (error) { assert.equal(r.isError, true); assert.match(r.content[0].text, error); return; }
       assert.ok(!r.isError, JSON.stringify(r.content)); assert.deepEqual(JSON.parse(r.content[0].text), r.structuredContent); return r.structuredContent;
     };
-    const id = 'dt:SYNTHETIC/PARTIAL', uid = 'patthana1.1';
-    if (mode === 'mixed_versions') {
+    const id = mode==='ati'?'ati:'+link.path:'dt:SYNTHETIC/PARTIAL', uid = 'patthana1.1';
+    if(mode==='ati'&&previous){await call('get_translation',previous,/not linked|not available/);previous=null;}
+    if(mode==='registered_downgrade'){
+      const row=registry.links[0],rid='ati:'+row.path;
+      await call('get_metadata',{uid:row.unit_id},/Registered partial/);
+      await call('get_translation',{uid:row.unit_id,translation:rid,allow_partial:true},/Registered partial/);
+      await call('resolve_reference',{reference:'https://accesstoinsight.org'+row.path+'.html'},/Registered partial/);
+      await call('list_sources',{},/Registered partial/);
+    }else if(mode==='registered_metadata'){
+      for(const row of registry.links){const rid='ati:'+row.path,meta=await call('get_metadata',{uid:row.unit_id}),choice=meta.english.find(l=>l.translation_id===rid);assert.equal(choice.translation_scope.kind,'partial_unit');assert.equal(choice.translation_scope.notice_sha256,row.partial_scope.notice_sha256);assert.equal(choice.translation_scope.extractor,'ati-freeverse-v1');assert.equal(meta.english_available,row.unit_id==='thag17.3'?0:2);
+        await call('get_translation',{uid:row.unit_id,translation:rid},/partial unit/);
+        const attached=await call('get_text',{uid:row.unit_id,translation:rid,limit:1});assert.match(attached.english_error,/partial unit/);assert.equal(attached.english,undefined);
+        await call('verify_quote',{text:'Synthetic fixture only amber lantern copper window',language:'english',texts:[row.unit_id],translation_ids:[rid]},/include_partial/);
+        await call('get_translation',{uid:row.unit_id,translation:rid,allow_partial:true},/source text changed/);
+      }
+      const totals=(await call('list_sources',{})).translation_coverage.total;assert.equal(totals.partial_links,2);assert.equal(totals.partial_only,1);assert.equal(totals.links,baseline.links);
+    }else if (mode === 'mixed_versions') {
       const selected = await call('get_translation', { uid }); assert.equal(selected.translation_id, 'dt:SYNTHETIC/FULL');
       const named = await call('get_translation', { uid, translation: 'Synthetic fixture translator' }); assert.equal(named.translation_id, selected.translation_id);
       const totals = (await call('list_sources', {})).translation_coverage.total;
@@ -82,10 +104,10 @@ try {
       await call('get_translation', { uid }, /Only partial/);
       await call('get_translation', { uid, translation: id }, /partial unit/);
       const first = await call('get_translation', { uid, translation: id, allow_partial: true, limit: 500 });
-      assert.equal(first.text, syntheticText.slice(0, 500)); assert.equal(first.whole_unit_coverage, false);
+      assert.equal(first.text, expectedText.slice(0, 500)); assert.equal(first.whole_unit_coverage, false);
       assert.deepEqual(first.translation_scope.read_with, { tool: 'get_text', uid, offset: 5, limit: 4 });
       const next = await call('get_translation', first.continue_with.arguments);
-      assert.equal(next.text, syntheticText.slice(500, 1000)); assert.deepEqual(next.translation_scope, first.translation_scope);
+      assert.equal(next.text, expectedText.slice(500, 1000)); assert.deepEqual(next.translation_scope, first.translation_scope);
       await call('get_translation', { ...first.continue_with.arguments, scope_sha256: '0'.repeat(64) }, /mapping changed/);
       await call('get_translation', { ...first.continue_with.arguments, allow_partial: false }, /partial unit/);
       if (previous) { const resumed = await call('get_translation', previous); assert.equal(resumed.text, next.text); assert.deepEqual(resumed.translation_scope, next.translation_scope); }
@@ -95,14 +117,15 @@ try {
       const verified = await call('verify_quote', { ...args, include_partial: true });
       assert.equal(verified.verdict, 'found'); assert.equal(verified.matches[0].whole_unit_coverage, false);
       assert.equal(verified.matches[0].translation_scope.first_ref, 'patthana1.1/6');
+      if(mode==='ati'){const omitted=await call('verify_quote',{...args,text:atiEditorial,include_partial:true});assert.equal(omitted.verdict,'not_found_in_scope');}
       const negative = await call('verify_quote', { ...args, text: 'Purple zeppelin reaches distant synthetic harbor', include_partial: true });
       assert.equal(negative.verdict, 'not_found_in_scope'); assert.match(negative.explanation, /Partial translation.*negative result/);
     }
     assert.doesNotMatch(stderr, /UNEXPECTED_NETWORK_ATTEMPT/);
-    reports.push({ mode, requests, status: 'passed', synthetic_fixture_only: true, real_network_attempts: 0 });
+    reports.push({ mode, requests, status: 'passed', synthetic_provider_only:true,real_declaration_metadata:registered,real_network_attempts:0 });
     await close();
   }
-  const report = { status: 'passed', cases: reports, scope: 'Extracted-package synthetic metadata/provider fixtures only. Explicit partial retrieval, source/mapping pins, verification, coverage and restart guards. No real translation adopted, fetched or approved.' };
+  const report = { status: 'passed', cases: reports, scope: 'Extracted-package synthetic providers plus real registered declarations. Explicit partial retrieval, source/mapping pins, verification, coverage and restart guards. Real declarations are checked as metadata or refused on simulated source drift; no live author request or new approval.' };
   if (reportPath) await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n'); console.log(JSON.stringify(report));
 } catch (error) {
   if (reportPath) await writeFile(reportPath, JSON.stringify({ status: 'failed', error: error.message }, null, 2) + '\n'); throw error;

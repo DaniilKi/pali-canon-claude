@@ -301,3 +301,22 @@ see the [paired-page receipt](../../docs/data/paired-shared-page-expansion.md).
 The installed shared audit now checks every real declaration, including mandatory
 ATI notice-pin downgrade refusal. Do not assume the first manifest entry is the
 only active source.
+
+## Reviewed ATI verse-only partial pages
+
+D205 registers two sources in `reviewed_partial_pages.json`. Normal rebuilds
+always withhold their ordinary proposals. `--content` activation verifies full
+roots, raw HTML, verse-only extraction, selected Pāli and complete notice pins
+before adding exact partial declarations. Remaining exclusions apply last.
+`npm run build` copies the manifest into packaged data for runtime downgrade
+protection; do not hand-edit the packaged registry.
+
+```sh
+node scripts/canon/verify_partial_html.mjs scripts/canon/reviewed_partial_pages.json /tmp/pali-ati-source
+python3 scripts/canon/reviewed_partial_pages.py /tmp/pali-inputs/canon.json.gz /tmp/translations.json /tmp/pali-ati-source /tmp/translations-partial.json
+python3 scripts/web-reader-partial-pilot-check.py --source-root /tmp/pali-ati-source --report /tmp/partial-pilot.json
+```
+
+The browser check uses local pinned snapshots, never upstream HTTP. No English
+bodies belong in repository fixtures/reports. Discontinuous or ambiguous excerpts
+remain held; never create a single contiguous declaration across omissions.

@@ -52,9 +52,12 @@ Translation links follow the project's strict rules: no link is better than a wr
 | `CC-BY-NC` | Access to Insight | CC BY-NC (Creative Commons Attribution-NonCommercial) | Creative Commons Attribution-NonCommercial; the page states the version (4.0 on the pages we checked) |
 | `BPS` | Access to Insight | BPS free-distribution terms (Buddhist Publication Society) | Copies free of charge, reprints of no more than 50 copies, derivatives marked as such, the licence text included; otherwise all rights reserved |
 | `ATI_DEPRECATED` | Access to Insight | Access to Insight free-distribution licence (older, not Creative Commons) | Copies free of charge, derivatives marked as such, the licence text included; otherwise all rights reserved |
+| `Olendzki-free-distribution-2005` | Reviewed ATI verse excerpts | Andrew Olendzki ©2005 free-distribution notice (not Creative Commons) | Copies free of charge, source/derivatives identified and complete licence retained; the full pinned page notice governs |
 | `CC BY-SA 3.0` | Ancient Buddhist Texts (Ānandajoti Bhikkhu) | CC BY-SA 3.0 (Creative Commons Attribution-ShareAlike 3.0 Unported) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/); the site's Copyright Notice gives 3.0 Unported, its page footers link 4.0. Share-alike: reuse keeps the same licence and credits Ānandajoti Bhikkhu |
 
 `ATI_DEPRECATED` is Access to Insight's own name for its older free-distribution licence; it does not mean the page is withdrawn. Each Access to Insight page carries its full licence notice, and that notice governs. Read it before you reuse a page.
+
+`Olendzki-free-distribution-2005` is an internal identifier for the two pinned source notices in the [partial pilot](data/thag-excerpt-review.md), not a publisher licence name or a new grant. Partial-source exports retain their separate scope and notice hash; they do not establish whole-unit English coverage.
 
 ## Licence
 

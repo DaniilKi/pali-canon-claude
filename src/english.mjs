@@ -2,6 +2,7 @@
 import { fetchMirrors, plainText, decodeHtml } from './http.mjs';
 import { load, linksFor, translationId, sourceName, ANANDAJOTI_BASE, ANANDAJOTI_LICENSE, translationScope } from './canon.mjs';
 import { isShared, isScoped, scopeHash } from './translation-scope.mjs';
+import { atiVerseExcerpt } from './ati-excerpt.mjs';
 import { liveCache } from './cache.mjs';
 import { createHash } from 'node:crypto';
 const prefixHash = (text, offset) => createHash('sha256').update(text.slice(0, offset)).digest('hex');
@@ -104,6 +105,15 @@ async function fetchAtiLive(path) {
   };
 }
 
+// Separate cache keys prevent a whole article from standing in for a reviewed verse excerpt.
+const fetchAtiPartial = (path) => liveCache.wrap(`ati-verse-partial:${path}`, async () => {
+  const {body,url,mirror}=await fetchMirrors(atiMirrors(path));
+  const notice=atiNotice(body);
+  return {source:'Access to Insight',url:`https://accesstoinsight.org${path}.html`,fetched_from:MIRROR_NAMES[mirror],fetched_url:url,
+    title:plainText(body.match(/<title\b[^>]*>([^]*?)<\/title>/i)?.[1]??''),text:atiVerseExcerpt(body),
+    attribution:notice.citation,license:notice.licensing};
+});
+
 async function fetchDhammatalksLive(url) {
   const { body } = await fetchMirrors([url]);
   const start = body.search(/<div\b[^>]*id=["']sutta["']/i);
@@ -180,7 +190,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
   const notes = via && !declaredScope ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   if (link.mapping_note) notes.push(link.mapping_note);
   try {
-    result = link.source === 'ati' ? await fetchAti(link.path)
+    result = link.source === 'ati' ? await (declaredScope?.kind === 'partial_unit' ? fetchAtiPartial(link.path) : fetchAti(link.path))
       : link.source === 'anandajoti' ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1)
         : await fetchDhammatalks(link.url);
   } catch (error) {
@@ -201,7 +211,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
   if (declaredScope) {
     if (result.text.length > 2000000 || (result.parts_total && result.parts_read !== result.parts_total)) throw new Error('Scoped source exceeds the bounded complete-text check; no excerpt was returned.');
     if (scopeHash(result.text) !== declaredScope.text_sha256) throw new Error('The scoped source text changed from its reviewed snapshot. No translation was returned.');
-    if (shared && declaredScope.notice_sha256 && scopeHash({ licensing: result.license, citation: result.attribution }) !== declaredScope.notice_sha256) throw new Error('The shared source notice changed from its reviewed snapshot. No translation was returned.');
+    if (declaredScope.notice_sha256 && scopeHash({ licensing: result.license, citation: result.attribution }) !== declaredScope.notice_sha256) throw new Error(`The ${shared ? 'shared' : 'partial'} source notice changed from its reviewed snapshot. No translation was returned.`);
     notes.push(declaredScope.note);
   }
   if (matchingVersions.length > 1) notes.push(`Several linked versions match "${which}"; selected ${translationId(link)} (${sourceName(link)}). To choose a different version, use its exact translation_id: ${matchingVersions.map(version => translationId(version)).join(', ')}.`);

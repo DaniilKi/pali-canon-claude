@@ -22188,6 +22188,36 @@ __export(canon_exports, {
   translationScope: () => translationScope
 });
 
+// src/partial-source-registry.mjs
+var stable = (value) => JSON.stringify(Array.isArray(value) ? value.map((v) => JSON.parse(stable(v))) : value && typeof value === "object" ? Object.fromEntries(Object.keys(value).sort().map((k) => [k, JSON.parse(stable(value[k]))])) : value);
+function reviewedPartialLink(row, registry2) {
+  return {
+    source: "ati",
+    path: row.path,
+    url: "https://accesstoinsight.org" + row.path + ".html",
+    english: row.english_title,
+    translator: row.translator,
+    license: row.license,
+    reference: row.source_reference,
+    match: "reviewed-partial-page",
+    mapping_note: row.mapping_note,
+    review: { ati_commit: registry2.ati_commit, vri_commit: registry2.vri_commit, source_html_sha256: row.source_html_sha256 },
+    partial_scope: row.partial_scope
+  };
+}
+function assertRegisteredPartial(link, unit, registry2) {
+  let key3;
+  try {
+    const u = new URL(link.url);
+    key3 = u.hostname.replace(/^www\./, "") + u.pathname;
+  } catch {
+  }
+  const row = registry2.links.find((r) => link.path === r.path || key3 === "accesstoinsight.org" + r.path + ".html");
+  if (!row) return;
+  const expected = reviewedPartialLink(row, registry2);
+  if (unit.id !== row.unit_id || stable(link) !== stable(expected)) throw Error("Registered partial source lost or changed its reviewed mapping. No whole-unit source or retrieval is inferred.");
+}
+
 // src/translation-scope.mjs
 var import_node_crypto = require("node:crypto");
 var scopeHash = (value) => (0, import_node_crypto.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
@@ -22199,7 +22229,7 @@ function partialScope(link, unit, segments2, source4) {
   const fail = () => {
     throw new Error("Invalid or unreviewed partial translation scope. No whole-unit coverage or source retrieval is inferred.");
   };
-  const fields = /* @__PURE__ */ new Set(["version", "status", "unit_id", "first_ref", "last_ref", "source_commit", "pali_sha256", "text_sha256"]);
+  const fields = /* @__PURE__ */ new Set(["version", "status", "unit_id", "first_ref", "last_ref", "source_commit", "pali_sha256", "text_sha256", "notice_sha256", "extractor"]);
   if (!p || p.version !== 1 || Object.keys(p).some((k) => !fields.has(k)) || p.status !== "reviewed" || p.unit_id !== unit.id || p.source_commit !== source4.commit || !sha(p.pali_sha256) || !sha(p.text_sha256) || unit.approximate) fail();
   const first = segments2.findIndex((s) => s.ref === p.first_ref);
   const last = segments2.findIndex((s) => s.ref === p.last_ref);
@@ -22208,6 +22238,9 @@ function partialScope(link, unit, segments2, source4) {
   const selected = segments2.slice(first, last + 1).map(({ ref, type, text }) => ({ ref, type, text }));
   if (scopeHash(selected) !== p.pali_sha256) fail();
   if (!["dhammatalks", "ati", "anandajoti"].includes(link.source)) fail();
+  if (link.source === "ati") {
+    if (p.extractor !== "ati-freeverse-v1" || !sha(p.notice_sha256) || typeof link.path !== "string" || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes("..") || link.url !== "https://accesstoinsight.org" + link.path + ".html") fail();
+  } else if (Object.hasOwn(p, "extractor") || Object.hasOwn(p, "notice_sha256")) fail();
   if (link.parts && (link.source !== "anandajoti" || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail();
   const readPages = [];
   for (let offset = first; offset <= last; offset += 200) readPages.push({ tool: "get_text", uid: unit.id, offset, limit: Math.min(200, last - offset + 1) });
@@ -22220,6 +22253,7 @@ function partialScope(link, unit, segments2, source4) {
     source_commit: p.source_commit,
     pali_sha256: p.pali_sha256,
     text_sha256: p.text_sha256,
+    ...link.source === "ati" ? { extractor: p.extractor, notice_sha256: p.notice_sha256 } : {},
     scope_sha256: scopeHash({ mapping: p, source: link.source, url: link.url, path: link.path, parts: link.parts || null, translator: link.translator }),
     whole_unit_coverage: false,
     pali_segments: last - first + 1,
@@ -23696,6 +23730,8 @@ function load() {
   const canon = JSON.parse((0, import_node_zlib.gunzipSync)(readBundled(dataPath("canon.json.gz"))).toString("utf8"));
   const translations = JSON.parse((0, import_node_fs2.readFileSync)(dataPath("translations.json"), "utf8"));
   mergeAnandajoti(translations);
+  const partialRegistry = JSON.parse((0, import_node_fs2.readFileSync)(dataPath("reviewed-partial-pages.json"), "utf8"));
+  if (partialRegistry.version !== 1 || partialRegistry.vri_commit !== canon.source.commit || !Array.isArray(partialRegistry.links) || !partialRegistry.links.length) throw Error("Invalid registered partial source metadata.");
   const byId = /* @__PURE__ */ new Map();
   for (const u of canon.units) if (!byId.has(u.id)) byId.set(u.id, u);
   const ranges = [];
@@ -23710,7 +23746,7 @@ function load() {
       for (const part of link.parts || []) urlIndex.set(`ancient-buddhist-texts.net${part}`.replace(/\.html?$/, ""), id);
     }
   }
-  data = { canon, byId, ranges, translations, urlIndex, search: null };
+  data = { canon, byId, ranges, translations, urlIndex, partialRegistry, search: null };
   return data;
 }
 function sectionOf(id) {
@@ -23743,6 +23779,7 @@ function ownersOf(links, wanted) {
   return index4.get(wanted) || [];
 }
 function translationScope(link, unit) {
+  assertRegisteredPartial(link, unit, load().partialRegistry);
   if (isShared(link)) return sharedScope(link, unit, load().byId, segments, source());
   return partialScope(link, unit, segments(unit), source());
 }
@@ -23771,6 +23808,7 @@ function linksFor(u) {
   const d = load();
   const shared = sharedFor(u, d);
   const own = (d.translations[u.id] || []).filter((link) => !isShared(link));
+  for (const link of own) assertRegisteredPartial(link, u, d.partialRegistry);
   if (own.length) {
     for (const link of own) if (isPartial(link)) {
       translationScope(link, u);
@@ -23903,6 +23941,7 @@ function resolve(reference) {
     if (!id2) throw new CitationError("That page is not linked to a canon text in the bundled index. Give the sutta citation instead.");
     sharedFor(d.byId.get(id2), d);
     for (const link of d.translations[id2] || []) {
+      assertRegisteredPartial(link, d.byId.get(id2), d.partialRegistry);
       if (isShared(link)) {
         const scope = translationScope(link, d.byId.get(id2));
         const urls2 = [link.url, ...(link.parts || []).map((path) => ANANDAJOTI_BASE + path)];
@@ -24412,6 +24451,26 @@ function shortText(value, limit = 1600) {
   return text.length > limit ? `${text.slice(0, limit)}\u2026 [excerpt shortened]` : text;
 }
 
+// src/ati-excerpt.mjs
+function atiVerseExcerpt(html) {
+  const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
+  const fail = () => {
+    throw Error("The reviewed ATI verse extraction structure changed. No excerpt was returned.");
+  };
+  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) fail();
+  const start2 = html.indexOf(begin) + begin.length, stop = html.indexOf(end);
+  if (stop <= start2) fail();
+  const chunk = html.slice(start2, stop), opens = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])freeverse\1[^>]*>/gi)];
+  if (opens.length !== 1) fail();
+  const from = opens[0].index + opens[0][0].length, to = chunk.indexOf("</div>", from);
+  if (to < from) fail();
+  const verse2 = chunk.slice(from, to);
+  if (/<\/?div\b|<script\b|<style\b/i.test(verse2)) fail();
+  const text = plainText(verse2);
+  if (!text) fail();
+  return text;
+}
+
 // src/cache.mjs
 var num = (value, fallback) => Number.isFinite(Number(value)) && String(value ?? "").trim() !== "" ? Number(value) : fallback;
 var LruCache = class {
@@ -24594,6 +24653,20 @@ async function fetchAtiLive(path) {
     license: notice.licensing || "See the page for its copyright and distribution terms."
   };
 }
+var fetchAtiPartial = (path) => liveCache.wrap(`ati-verse-partial:${path}`, async () => {
+  const { body, url, mirror } = await fetchMirrors(atiMirrors(path));
+  const notice = atiNotice(body);
+  return {
+    source: "Access to Insight",
+    url: `https://accesstoinsight.org${path}.html`,
+    fetched_from: MIRROR_NAMES[mirror],
+    fetched_url: url,
+    title: plainText(body.match(/<title\b[^>]*>([^]*?)<\/title>/i)?.[1] ?? ""),
+    text: atiVerseExcerpt(body),
+    attribution: notice.citation,
+    license: notice.licensing
+  };
+});
 async function fetchDhammatalksLive(url) {
   const { body } = await fetchMirrors([url]);
   const start2 = body.search(/<div\b[^>]*id=["']sutta["']/i);
@@ -24672,7 +24745,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
   const notes = via && !declaredScope ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   if (link.mapping_note) notes.push(link.mapping_note);
   try {
-    result = link.source === "ati" ? await fetchAti(link.path) : link.source === "anandajoti" ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1) : await fetchDhammatalks(link.url);
+    result = link.source === "ati" ? await (declaredScope?.kind === "partial_unit" ? fetchAtiPartial(link.path) : fetchAti(link.path)) : link.source === "anandajoti" ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1) : await fetchDhammatalks(link.url);
   } catch (error2) {
     const outage = !error2.failures || error2.failures.some((f) => !/HTTP 404/.test(f));
     const sameTranslator = allow_fallback && !declaredScope && outage && link.source === "dhammatalks" && links.find((l) => !isScoped(l) && l.source === "ati" && /thanissaro/i.test(l.translator || ""));
@@ -24689,7 +24762,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
   if (declaredScope) {
     if (result.text.length > 2e6 || result.parts_total && result.parts_read !== result.parts_total) throw new Error("Scoped source exceeds the bounded complete-text check; no excerpt was returned.");
     if (scopeHash(result.text) !== declaredScope.text_sha256) throw new Error("The scoped source text changed from its reviewed snapshot. No translation was returned.");
-    if (shared && declaredScope.notice_sha256 && scopeHash({ licensing: result.license, citation: result.attribution }) !== declaredScope.notice_sha256) throw new Error("The shared source notice changed from its reviewed snapshot. No translation was returned.");
+    if (declaredScope.notice_sha256 && scopeHash({ licensing: result.license, citation: result.attribution }) !== declaredScope.notice_sha256) throw new Error(`The ${shared ? "shared" : "partial"} source notice changed from its reviewed snapshot. No translation was returned.`);
     notes.push(declaredScope.note);
   }
   if (matchingVersions.length > 1) notes.push(`Several linked versions match "${which}"; selected ${translationId(link)} (${sourceName(link)}). To choose a different version, use its exact translation_id: ${matchingVersions.map((version2) => translationId(version2)).join(", ")}.`);
@@ -28682,6 +28755,7 @@ var cache = null;
 function pools(canon) {
   if (cache?.canon === canon) return cache;
   const d = canon.load();
+  for (const u of d.canon.units) for (const link of d.translations[u.id] || []) assertRegisteredPartial(link, u, d.partialRegistry || { links: [] });
   const num2 = (id) => Number(id.match(/(\d+)$/)?.[1] ?? 0);
   const verses = d.canon.units.filter((u) => u.collection === "dhp" && u.kind !== "range" && /^dhp\d+$/.test(u.id)).sort((a, b) => num2(a.id) - num2(b.id));
   const chapters = d.canon.units.filter((u) => u.collection === "dhp" && u.kind === "range").sort((a, b) => a.book - b.book || a.start - b.start);

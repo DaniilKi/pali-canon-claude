@@ -8,7 +8,7 @@ export function partialScope(link, unit, segments, source) {
   if (!isPartial(link)) return null;
   const p = link.partial_scope;
   const fail = () => { throw new Error('Invalid or unreviewed partial translation scope. No whole-unit coverage or source retrieval is inferred.'); };
-  const fields = new Set(['version', 'status', 'unit_id', 'first_ref', 'last_ref', 'source_commit', 'pali_sha256', 'text_sha256']);
+  const fields = new Set(['version', 'status', 'unit_id', 'first_ref', 'last_ref', 'source_commit', 'pali_sha256', 'text_sha256', 'notice_sha256', 'extractor']);
   if (!p || p.version !== 1 || Object.keys(p).some(k => !fields.has(k)) || p.status !== 'reviewed' || p.unit_id !== unit.id || p.source_commit !== source.commit
     || !sha(p.pali_sha256) || !sha(p.text_sha256) || unit.approximate) fail();
   const first = segments.findIndex(s => s.ref === p.first_ref);
@@ -18,11 +18,18 @@ export function partialScope(link, unit, segments, source) {
   const selected = segments.slice(first, last + 1).map(({ ref, type, text }) => ({ ref, type, text }));
   if (scopeHash(selected) !== p.pali_sha256) fail();
   if (!['dhammatalks', 'ati', 'anandajoti'].includes(link.source)) fail();
+  if (link.source === 'ati') {
+    if (p.extractor !== 'ati-freeverse-v1' || !sha(p.notice_sha256) || typeof link.path !== 'string'
+      || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes('..')
+      || link.url !== 'https://accesstoinsight.org' + link.path + '.html') fail();
+  } else if (Object.hasOwn(p, 'extractor') || Object.hasOwn(p, 'notice_sha256')) fail();
+
   if (link.parts && (link.source !== 'anandajoti' || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail();
   const readPages = [];
   for (let offset = first; offset <= last; offset += 200) readPages.push({ tool: 'get_text', uid: unit.id, offset, limit: Math.min(200, last - offset + 1) });
   return { kind: 'partial_unit', version: 1, unit_id: unit.id, first_ref: p.first_ref, last_ref: p.last_ref,
     source_commit: p.source_commit, pali_sha256: p.pali_sha256, text_sha256: p.text_sha256,
+    ...(link.source === 'ati' ? {extractor:p.extractor,notice_sha256:p.notice_sha256} : {}),
     scope_sha256: scopeHash({ mapping: p, source: link.source, url: link.url, path: link.path, parts: link.parts || null, translator: link.translator }), whole_unit_coverage: false,
     pali_segments: last - first + 1, read_with: readPages[0],
     ...(readPages.length > 1 ? { read_pages: readPages } : {}),

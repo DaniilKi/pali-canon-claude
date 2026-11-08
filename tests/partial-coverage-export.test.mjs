@@ -78,7 +78,10 @@ test('actual coverage and release-export CLIs preserve synthetic partial scope w
     const run = (script, args) => { const r = spawnSync(process.execPath, ['--import', pathToFileURL(preload).href, script, ...args], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }); assert.equal(r.status, 0, r.stderr); return r.stdout; };
     const before = buildCoverage(), report = JSON.parse(run('scripts/coverage.mjs', ['--json']));
     for (const field of numeric) assert.equal(report[field], before[field], field);
-    assert.equal(report.partial_links, 1);
+    assert.equal(report.partial_links, before.partial_links + 1);
+    assert.equal(report.partial_texts, before.partial_texts + 1);
+    assert.equal(report.partial_ati, before.partial_ati);
+    assert.equal(report.partial_dhammatalks, before.partial_dhammatalks + 1);
     run('scripts/export-index.mjs', ['--out', out]);
     const t = record(JSON.parse(readFileSync(join(out, 'citation-index.json'), 'utf8')));
     assert.equal(t.english_count, 0); assert.equal(t.partial_english_count, 1);

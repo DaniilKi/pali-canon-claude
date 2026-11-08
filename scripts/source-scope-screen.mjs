@@ -1,3 +1,4 @@
+import {assertRegisteredPartial} from '../src/partial-source-registry.mjs';
 // Offline metadata leads. This never approves, withholds, fetches or changes a source.
 import {pathToFileURL} from 'node:url';
 import {readFileSync,existsSync} from 'node:fs';
@@ -15,6 +16,7 @@ const ranges=value=>[...String(value||'').matchAll(/(\d+)\s*[-–—]\s*(\d+)/gu
 export function scopeScreen(data=canon.load(),{review={rows:[]}}={}) {
   const rows=[];
   for(const [owner,links] of Object.entries(data.translations))for(const link of links){
+    assertRegisteredPartial(link,data.byId.get(owner),data.partialRegistry||{links:[]});
     if(isScoped(link)||link.match==='reviewed-story')continue;
     const reasons=[];
     const extents=ranges(link.reference),publisherExtent=extents[0];

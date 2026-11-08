@@ -4,6 +4,7 @@ import { chmod, mkdir, readFile, readdir, writeFile, cp } from 'node:fs/promises
 import { dirname, resolve, relative } from 'node:path';
 
 shardData('server/data');
+await cp('scripts/canon/reviewed_partial_pages.json','server/data/reviewed-partial-pages.json');
 await mkdir('server', { recursive: true });
 await mkdir('server/web', { recursive: true });
 await cp('web/index.html', 'server/web/index.html');

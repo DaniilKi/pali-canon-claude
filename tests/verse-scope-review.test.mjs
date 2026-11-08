@@ -9,6 +9,7 @@ import {verifyQuote} from '../src/verify.mjs';
 import {scopeScreen,mappingFingerprint} from '../scripts/source-scope-screen.mjs';
 const audit=JSON.parse(readFileSync('docs/data/verse-scope-review.json','utf8'));
 const held=audit.rows.filter(r=>r.decision==='withhold-partial-unit'),retained=audit.rows.filter(r=>r.decision==='retain');
+const stillHeld=held.filter(r=>JSON.parse(readFileSync('scripts/canon/reviewed_exclusions.json','utf8')).exclusions.some(e=>e.url===r.url));
 const sha=v=>createHash('sha256').update(v).digest('hex');
 const originalFetch=globalThis.fetch;
 afterEach(()=>{globalThis.fetch=originalFetch;});
@@ -22,9 +23,11 @@ test('fifteen primary reviews pin complete roots and source-specific notices wit
  const dantika=retained.filter(r=>r.owner==='thig3.4');assert.equal(dantika.length,2);assert.ok(dantika.some(r=>r.publisher_licence_label==='BPS'));assert.ok(dantika.some(r=>r.publisher_licence_label==='CC-BY-NC'));
 });
 
-test('all ten excerpt versions refuse exact retrieval, URLs and quote verification before fetch while independent sources remain',async()=>{
+test('remaining excerpt holds refuse retrieval while the separately reviewed Sirimanda partial needs fresh exact consent',async()=>{
  let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Must not fetch held source');};
- for(const r of held){const u=canon.resolve(r.owner).unit,choices=english.available(u);assert.equal(choices.some(l=>l.translation_id===r.translation_id),false);assert.ok(choices.some(l=>l.translation_id.startsWith('dt:')&&!l.translation_scope));assert.throws(()=>canon.resolve(r.url),/not linked/);await assert.rejects(english.translation(u,r.translation_id),/not linked|not available|No English/);await assert.rejects(verifyQuote({text:'Synthetic fixture only amber lantern copper window',language:'english',texts:[r.owner],translation_ids:[r.translation_id],include_partial:true,include_shared:true}),/not linked|not available|No English/);}
+ assert.equal(stillHeld.length,9);
+ for(const r of held.filter(r=>!stillHeld.includes(r))){const u=canon.resolve(r.owner).unit,choice=english.available(u).find(l=>l.translation_id===r.translation_id);assert.equal(choice.translation_scope.kind,'partial_unit');await assert.rejects(english.translation(u,r.translation_id),/partial unit/);}
+ for(const r of stillHeld){const u=canon.resolve(r.owner).unit,choices=english.available(u);assert.equal(choices.some(l=>l.translation_id===r.translation_id),false);assert.ok(choices.some(l=>l.translation_id.startsWith('dt:')&&!l.translation_scope));assert.throws(()=>canon.resolve(r.url),/not linked/);await assert.rejects(english.translation(u,r.translation_id),/not linked|not available|No English/);await assert.rejects(verifyQuote({text:'Synthetic fixture only amber lantern copper window',language:'english',texts:[r.owner],translation_ids:[r.translation_id],include_partial:true,include_shared:true}),/not linked|not available|No English/);}
  assert.equal(calls,0);
  for(const id of ['snp3.12','thag6.13','thig10.1','snp4.15','thag16.8'])assert.ok(english.available(canon.resolve(id).unit).some(l=>l.translation_id.startsWith('ati:')&&/than/i.test(l.translation_id)&&!l.translation_scope));
 });
@@ -40,20 +43,20 @@ test('Somamitta owns his opening verse and Herannakani remains a complete separa
 });
 
 test('screen prioritizes narrow/discontinuous leads, normalizes abbreviated bibliography and expires stale review annotations',()=>{
- const d=canon.load(),review=structuredClone(audit),out=scopeScreen(d,{review});assert.equal(out.count,224);assert.equal(out.reviewed_retained_snapshots,5);assert.equal(out.unreviewed_leads,219);assert.ok(out.rows.filter(r=>r.review_status==='reviewed-retained-at-snapshot').every(r=>r.triage==='reviewed retained snapshot'));
- const abbreviated=out.rows.find(r=>r.translation_id==='ati:/tipitaka/kn/thag/thag.10.02.olen');assert.equal(abbreviated.triage,'inspect discontinuous verse-reference extent');assert.deepEqual(abbreviated.publisher_reference_extents.map(x=>[x.first,x.last]),[[537,541],[544,545]]);
+ const d=canon.load(),review=structuredClone(audit),out=scopeScreen(d,{review});assert.equal(out.count,221);assert.equal(out.reviewed_retained_snapshots,5);assert.equal(out.unreviewed_leads,216);assert.ok(out.rows.filter(r=>r.review_status==='reviewed-retained-at-snapshot').every(r=>r.triage==='reviewed retained snapshot'));
+ assert.ok(!out.rows.some(r=>r.translation_id==='ati:/tipitaka/kn/thag/thag.10.02.olen'));
  review.rows[0].root.root_blocks_sha256='0'.repeat(64);let stale=scopeScreen(d,{review}).rows.find(r=>r.translation_id===review.rows[0].translation_id);assert.equal(stale.review_status,'stale-reviewed-snapshot');assert.equal(stale.triage,'inspect wider verse-reference extent');
  review.rows[0].root.root_blocks_sha256=audit.rows[0].root.root_blocks_sha256;review.rows[0].link_metadata_sha256='0'.repeat(64);stale=scopeScreen(d,{review}).rows.find(r=>r.translation_id===review.rows[0].translation_id);assert.equal(stale.review_status,'stale-reviewed-snapshot');
- const synthetic={canon:{source:{commit:'fixture'}},byId:new Map([['x',{id:'x',collection:'thig',vri:'1–20',book:0,start:0,end:2}],['y',{id:'y',collection:'thig',vri:'1–20',book:0,start:2,end:4}]]),translations:{x:[{source:'ati',path:'/tipitaka/kn/thig/fixture',url:'https://accesstoinsight.org/tipitaka/kn/thig/fixture.html',reference:'Thig 3–5'}],y:[{source:'ati',path:'/tipitaka/kn/thig/fixture2',url:'https://accesstoinsight.org/tipitaka/kn/thig/fixture2.html',reference:'Thig 1–4, 9–12'}]}};
- const s=scopeScreen(synthetic);assert.equal(s.rows[0].triage,'inspect discontinuous verse-reference extent');assert.equal(s.rows[1].triage,'inspect narrower verse-reference extent');assert.equal(s.reviewed_retained_snapshots,0);
+ const synthetic={canon:{source:{commit:'fixture'}},byId:new Map([['x',{id:'x',collection:'thig',vri:'1–20',book:0,start:0,end:2}],['y',{id:'y',collection:'thig',vri:'1–20',book:0,start:2,end:4}]]),translations:{x:[{source:'ati',path:'/tipitaka/kn/thig/fixture',url:'https://accesstoinsight.org/tipitaka/kn/thig/fixture.html',reference:'Thig 3–5'}],y:[{source:'ati',path:'/tipitaka/kn/thig/fixture2',url:'https://accesstoinsight.org/tipitaka/kn/thig/fixture2.html',reference:'Thig 537–41;544–5'}]}};
+ const s=scopeScreen(synthetic);assert.equal(s.rows[0].triage,'inspect discontinuous verse-reference extent');assert.deepEqual(s.rows[0].publisher_reference_extents.map(r=>[r.first,r.last]),[[537,541],[544,545]]);assert.equal(s.rows[1].triage,'inspect narrower verse-reference extent');assert.equal(s.reviewed_retained_snapshots,0);
 });
 
 test('partial holds are narrowly validated, global and immutable and survive ordinary linker rebuilds',{skip:!python},()=>{
- const units=[...new Set(held.map(r=>r.owner))].map(id=>canon.resolve(id).unit);
+ const units=[...new Set(stillHeld.map(r=>r.owner))].map(id=>canon.resolve(id).unit);
  const r=run(`import json,sys,copy,tempfile,pathlib,gzip,subprocess
 sys.path.insert(0,'scripts/canon')
 from reviewed_exclusions import apply_reviewed_exclusions,MANIFEST
-x=json.load(sys.stdin);held=x['held'];a={row['owner']:[{'source':'ati','url':row['url']+'?alternate=1','partial_scope':{}}] for row in held};a['unrelated']=[{'source':'ati','url':'https://accesstoinsight.org/tipitaka/kn/thig/thig.03.04.rhyc.html'}];before=copy.deepcopy(a);out,removed=apply_reviewed_exclusions(a);assert a==before and len(out)==1 and 'unrelated' in out;assert apply_reviewed_exclusions(out)==(out,[])
+x=json.load(sys.stdin);held=x['held'];a={str(i):[{'source':'ati','url':row['url']+'?alternate=1','partial_scope':{}}] for i,row in enumerate(held)};a['unrelated']=[{'source':'ati','url':'https://accesstoinsight.org/tipitaka/kn/thig/thig.03.04.rhyc.html'}];before=copy.deepcopy(a);out,removed=apply_reviewed_exclusions(a);assert a==before and len(out)==1 and 'unrelated' in out;assert apply_reviewed_exclusions(out)==(out,[])
 m=json.loads(MANIFEST.read_text(encoding='utf-8'));index=next(i for i,row in enumerate(m['exclusions']) if row['status']=='withheld-partial-unit')
 with tempfile.TemporaryDirectory() as tmp:
  p=pathlib.Path(tmp)
@@ -76,8 +79,8 @@ with tempfile.TemporaryDirectory() as tmp:
  # Prove these fixtures exercise the post-linker guard, not an earlier non-match.
  code="import sys;sys.path.insert(0,'scripts/canon');import reviewed_exclusions;reviewed_exclusions.apply_reviewed_exclusions=lambda out:(out,[]);from build_translations import main;main()"
  proc=subprocess.run([sys.executable,'-c',code,str(p/'canon.gz'),str(p/'dt.json'),str(p/'ati.json'),str(p/'out.json')],capture_output=True,text=True,encoding='utf-8');assert proc.returncode==0,proc.stderr
- unheld=json.loads((p/'out.json').read_text(encoding='utf-8'));assert sum(len(v) for v in unheld.values())==10,unheld
-print('passed')`,{units,held:held.map(r=>({...r,link_title:r.owner.startsWith('snp')?'Fixture Sutta: Fixture':'Fixture'}))});assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/passed/);
+ unheld=json.loads((p/'out.json').read_text(encoding='utf-8'));assert sum(len(v) for v in unheld.values())==9,unheld
+print('passed')`,{units,held:stillHeld.map(r=>({...r,link_title:r.owner.startsWith('snp')?'Fixture Sutta: Fixture':'Fixture'}))});assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/passed/);
 });
 
 test('reviewed adjacent-pair repair is idempotent and refuses drift before any pending span edits',{skip:!python},()=>{

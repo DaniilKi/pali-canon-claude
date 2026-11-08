@@ -23,8 +23,9 @@ export const CSV_COLUMNS = [
 const CC_BY_NC_4 = 'https://creativecommons.org/licenses/by-nc/4.0/';
 
 /**
- * Readable names for the licence labels on translation links. The Access to Insight codes are the
- * page's own LICENSE field (checked against the notices on accesstoinsight.org pages, November 2026).
+ * Readable names for the licence labels on translation links. Legacy Access to Insight codes follow the
+ * page's own LICENSE field; reviewed source-specific codes identify pinned full notices
+ * without inventing a publisher licence name or a new grant (reviewed November 2026).
  * A code not listed here is exported with license_name null: read the page's own notice.
  */
 export const LICENSE_LABELS = {
@@ -50,6 +51,12 @@ export const LICENSE_LABELS = {
     terms: 'copies free of charge, derivatives marked as such, licence text included; otherwise all rights reserved',
     url: null,
     used_by: 'Access to Insight',
+  },
+  'Olendzki-free-distribution-2005': {
+    name: 'Andrew Olendzki ©2005 free-distribution notice (not Creative Commons)',
+    terms: 'copies free of charge, source and derivatives identified, complete licence text retained; otherwise all rights reserved; see each pinned page notice',
+    url: null,
+    used_by: 'Access to Insight reviewed Olendzki verse excerpts',
   },
   'CC BY-SA 3.0': {
     name: 'CC BY-SA 3.0 (Creative Commons Attribution-ShareAlike 3.0 Unported)',
