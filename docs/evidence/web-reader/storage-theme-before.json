@@ -1,0 +1,13 @@
+{
+  "minimum_contrast": 1.0477248253467,
+  "samples": 60,
+  "worst_sample": {
+    "theme": "dark",
+    "frame": 0,
+    "selector": "#search-form button",
+    "ratio": 1.0477248253467,
+    "color": "rgb(229, 234, 223)",
+    "background": "rgb(238, 238, 228)"
+  },
+  "scope": "Actual computed text/background colours on search/citation buttons during both live theme changes, no-preference motion mode."
+}

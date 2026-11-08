@@ -548,3 +548,5 @@ node scripts/audit-translation-versions.mjs --server-dir <installed-package-serv
 The packaged synthetic gate checks reachable-current/earlier selection, multiple versions of one translator, primary outage, same-version mirrors, invalid/missing/wrong-text selections, eight reference scripts and partial/shared consent over stdio/HTTP. No publisher requests or source declarations are introduced.
 
 The first real shared-page pilot is [AN 1.49–52](data/luminous-shared-page-pilot.md). The [paired-page expansion](data/paired-shared-page-expansion.md) adds Water and Gratitude: three declarations/eight subjects are counted separately from whole-unit English. The [standalone web-reader assessment](web-app-next-slice.md) defines the next browser slice without assuming deployment or complete English coverage.
+
+Theme changes keep foreground/background updates simultaneous; only border colour animates. The storage/recovery browser runner samples finder-button contrast through both theme transitions to catch transient failures as well as steady-state axe results.

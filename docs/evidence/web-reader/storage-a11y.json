@@ -1,38 +1,10 @@
 {
-  "passed": 32,
+  "passed": 36,
   "outside_source_tree": false,
   "checks": [
     {
       "width": 390,
-      "check": "unsaved personal-note draft survives in-tab navigation without silently saving it"
-    },
-    {
-      "width": 390,
-      "check": "ordinary local export includes the unsaved draft without upload or storage mutation"
-    },
-    {
-      "width": 390,
-      "check": "stale tab cannot overwrite a newer note or claim durable success"
-    },
-    {
-      "width": 390,
-      "check": "persistent recovery panel downloads the latest in-memory draft after navigation while preserving the other tab\u2019s saved note"
-    },
-    {
-      "width": 390,
-      "check": "stale plan marks stay recoverable in memory without deleting newer stored marks"
-    },
-    {
-      "width": 390,
-      "check": "conflict remains sticky across preferences and deletion so later actions cannot overwrite stored data"
-    },
-    {
-      "width": 390,
-      "check": "keyboard reload review explains loss of tab-only changes and cancellation preserves all stored data"
-    },
-    {
-      "width": 390,
-      "check": "explicit reload returns to the intact newer stored data without automatic merging or English retrieval"
+      "check": "both live theme changes keep finder-button text above 4.5 contrast on every sampled animation frame"
     },
     {
       "width": 390,
@@ -67,6 +39,46 @@
       "check": "explicit reload returns to the intact newer stored data without automatic merging or English retrieval"
     },
     {
+      "width": 390,
+      "check": "both live theme changes keep finder-button text above 4.5 contrast on every sampled animation frame"
+    },
+    {
+      "width": 390,
+      "check": "unsaved personal-note draft survives in-tab navigation without silently saving it"
+    },
+    {
+      "width": 390,
+      "check": "ordinary local export includes the unsaved draft without upload or storage mutation"
+    },
+    {
+      "width": 390,
+      "check": "stale tab cannot overwrite a newer note or claim durable success"
+    },
+    {
+      "width": 390,
+      "check": "persistent recovery panel downloads the latest in-memory draft after navigation while preserving the other tab\u2019s saved note"
+    },
+    {
+      "width": 390,
+      "check": "stale plan marks stay recoverable in memory without deleting newer stored marks"
+    },
+    {
+      "width": 390,
+      "check": "conflict remains sticky across preferences and deletion so later actions cannot overwrite stored data"
+    },
+    {
+      "width": 390,
+      "check": "keyboard reload review explains loss of tab-only changes and cancellation preserves all stored data"
+    },
+    {
+      "width": 390,
+      "check": "explicit reload returns to the intact newer stored data without automatic merging or English retrieval"
+    },
+    {
+      "width": 1280,
+      "check": "both live theme changes keep finder-button text above 4.5 contrast on every sampled animation frame"
+    },
+    {
       "width": 1280,
       "check": "unsaved personal-note draft survives in-tab navigation without silently saving it"
     },
@@ -100,6 +112,10 @@
     },
     {
       "width": 1280,
+      "check": "both live theme changes keep finder-button text above 4.5 contrast on every sampled animation frame"
+    },
+    {
+      "width": 1280,
       "check": "unsaved personal-note draft survives in-tab navigation without silently saving it"
     },
     {
@@ -129,6 +145,32 @@
     {
       "width": 1280,
       "check": "explicit reload returns to the intact newer stored data without automatic merging or English retrieval"
+    }
+  ],
+  "theme_frame_metrics": [
+    {
+      "width": 390,
+      "initial_theme": "light",
+      "samples": 60,
+      "minimum_ratio": 9.571851525298298
+    },
+    {
+      "width": 390,
+      "initial_theme": "dark",
+      "samples": 60,
+      "minimum_ratio": 9.571851525298298
+    },
+    {
+      "width": 1280,
+      "initial_theme": "light",
+      "samples": 60,
+      "minimum_ratio": 9.571851525298298
+    },
+    {
+      "width": 1280,
+      "initial_theme": "dark",
+      "samples": 60,
+      "minimum_ratio": 9.571851525298298
     }
   ],
   "a11y": {

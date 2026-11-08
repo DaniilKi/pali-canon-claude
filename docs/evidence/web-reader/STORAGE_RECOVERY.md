@@ -35,10 +35,10 @@ clear that warning. Scripture, source revision/scope rules and APIs are unchange
 
 ## Evidence
 
-- [34 browser checks](storage-browser.json), widths 320/390/768/1280.
-- [34 extracted-package checks](storage-package.json), outside the source tree.
+- [38 browser checks](storage-browser.json), widths 320/390/768/1280.
+- [38 extracted-package checks](storage-package.json), outside the source tree.
 - [12 accessibility scans](storage-a11y.json), phone/desktop and light/night,
-  zero detected violations, with 32 functional checks.
+  zero detected violations, with 36 functional checks.
 - Unit tests verify current/empty snapshots, stale/unknown refusal without a
   write callback, and read/write-denial propagation.
 - Existing regressions passed: bookmark import 34, progress restore 44,
@@ -73,3 +73,18 @@ The original `reader-browser` job ID and `Chromium reader` status name are
 preserved as an always-run aggregate requiring every matrix group to succeed.
 Branch-protection inspection returned GitHub 403 (integration lacks that read);
 no rule was changed, and the existing status interface was retained defensively.
+
+## Theme-transition accessibility repair
+
+The first partitioned [package run 42467641862](https://github.com/DaniilKi/pali-canon-claude/actions/runs/42467641862)
+exposed a real `color-contrast` failure during the existing dark-theme bookmark
+audit. Foreground changed immediately while the shared button background animated,
+briefly producing light-on-light text. A [computed-colour reproduction](storage-theme-before.json)
+measured 1.05:1 minimum. The nonessential background-colour transition is removed;
+border animation remains. The [same probe after repair](storage-theme-after.json)
+measured 9.57:1 minimum. Storage browser tests now sample both live theme changes
+over animation frames on every viewport/theme case, requiring at least 4.5:1.
+They bring the active test tab to the foreground and bound frame waiting; no
+contrast rule, assertion or audit is disabled. The formerly failing bookmark
+audit passed locally (16 scans, zero violations). New exact-head hosted CI is
+required for this candidate; historical cancelled/failed runs remain unchanged.
