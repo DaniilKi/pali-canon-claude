@@ -1,0 +1,284 @@
+{
+  "passed": 32,
+  "checks": [
+    {
+      "width": 390,
+      "check": "local file previews new and duplicate counts without mutation or upload"
+    },
+    {
+      "width": 390,
+      "check": "cancel leaves existing personal data unchanged"
+    },
+    {
+      "width": 390,
+      "check": "keyboard-confirmed restore preserves old notes, renders imported markup inertly and survives reload"
+    },
+    {
+      "width": 390,
+      "check": "exported restored records round-trip without creating duplicates"
+    },
+    {
+      "width": 390,
+      "check": "foreign, malformed and conflicting-duplicate files fail before mutation"
+    },
+    {
+      "width": 390,
+      "check": "imported later-work and commentary selectors keep their actual non-canonical reading modes"
+    },
+    {
+      "width": 390,
+      "check": "stale or invalid saved reference cannot silently open a nearby source passage"
+    },
+    {
+      "width": 390,
+      "check": "late file reads cannot replace a newer reading route"
+    },
+    {
+      "width": 390,
+      "check": "local file previews new and duplicate counts without mutation or upload"
+    },
+    {
+      "width": 390,
+      "check": "cancel leaves existing personal data unchanged"
+    },
+    {
+      "width": 390,
+      "check": "keyboard-confirmed restore preserves old notes, renders imported markup inertly and survives reload"
+    },
+    {
+      "width": 390,
+      "check": "exported restored records round-trip without creating duplicates"
+    },
+    {
+      "width": 390,
+      "check": "foreign, malformed and conflicting-duplicate files fail before mutation"
+    },
+    {
+      "width": 390,
+      "check": "imported later-work and commentary selectors keep their actual non-canonical reading modes"
+    },
+    {
+      "width": 390,
+      "check": "stale or invalid saved reference cannot silently open a nearby source passage"
+    },
+    {
+      "width": 390,
+      "check": "late file reads cannot replace a newer reading route"
+    },
+    {
+      "width": 1280,
+      "check": "local file previews new and duplicate counts without mutation or upload"
+    },
+    {
+      "width": 1280,
+      "check": "cancel leaves existing personal data unchanged"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard-confirmed restore preserves old notes, renders imported markup inertly and survives reload"
+    },
+    {
+      "width": 1280,
+      "check": "exported restored records round-trip without creating duplicates"
+    },
+    {
+      "width": 1280,
+      "check": "foreign, malformed and conflicting-duplicate files fail before mutation"
+    },
+    {
+      "width": 1280,
+      "check": "imported later-work and commentary selectors keep their actual non-canonical reading modes"
+    },
+    {
+      "width": 1280,
+      "check": "stale or invalid saved reference cannot silently open a nearby source passage"
+    },
+    {
+      "width": 1280,
+      "check": "late file reads cannot replace a newer reading route"
+    },
+    {
+      "width": 1280,
+      "check": "local file previews new and duplicate counts without mutation or upload"
+    },
+    {
+      "width": 1280,
+      "check": "cancel leaves existing personal data unchanged"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard-confirmed restore preserves old notes, renders imported markup inertly and survives reload"
+    },
+    {
+      "width": 1280,
+      "check": "exported restored records round-trip without creating duplicates"
+    },
+    {
+      "width": 1280,
+      "check": "foreign, malformed and conflicting-duplicate files fail before mutation"
+    },
+    {
+      "width": 1280,
+      "check": "imported later-work and commentary selectors keep their actual non-canonical reading modes"
+    },
+    {
+      "width": 1280,
+      "check": "stale or invalid saved reference cannot silently open a nearby source passage"
+    },
+    {
+      "width": 1280,
+      "check": "late file reads cannot replace a newer reading route"
+    }
+  ],
+  "a11y": {
+    "scans": 16,
+    "violations": 0,
+    "results": [
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "saved before import",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "preview",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "restored personal notes",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "invalid file",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "saved before import",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "preview",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "restored personal notes",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "invalid file",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "saved before import",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "preview",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "restored personal notes",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "invalid file",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "saved before import",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "preview",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "restored personal notes",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "invalid file",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      }
+    ]
+  },
+  "limits": "Synthetic local personal files/notes and failure fixtures; actual existing reader tools open imported selectors. No file upload, account sync, scripture/source validation during preview, physical-device or human accessibility certification. Only audit contexts bypass CSP."
+}

@@ -9,3 +9,5 @@ main:focus{outline:none}
 .translation-choice{padding:16px;border:1px solid var(--line);border-radius:9px;margin:12px 0;overflow-wrap:anywhere}.translation-choice h4{margin:0;font:22px Georgia,serif}.consent-row{display:flex;align-items:flex-start;gap:12px;margin:20px 0;color:var(--ink)}.consent-row input{min-width:22px;min-height:22px;margin-top:3px}.consent-row span{flex:1}#study h4{overflow-wrap:anywhere}#study details p{overflow-wrap:anywhere}
 
 .plan-picker{display:flex;gap:10px;align-items:flex-end}.plan-picker input{display:block;width:110px}.entry h4{margin:0 0 16px;font:21px/1.4 Georgia,serif;overflow-wrap:anywhere}.masthead nav{flex-wrap:wrap}
+
+.import-preview{margin:18px 0;overflow-wrap:anywhere}.import-preview:empty{display:none}.import-preview h3:focus{outline:none}input[type=file]{display:block;width:100%;margin-top:8px}

@@ -1,6 +1,7 @@
 import { localizeText } from '../src/script.mjs';
 import { scopeDescriptor, validateEnglishPage } from './translation-policy.mjs';
 import { planCatalog, planDay, daySignature, cleanProgress, planWindow, validatePlanPage } from './reading-plans.mjs';
+import { MAX_IMPORT_BYTES, parseBookmarks, bookmarkMerge } from './bookmark-import.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
@@ -142,6 +143,7 @@ async function read(args, token) {
   const request = { ...(kind === 'book' ? { book } : kind === 'post' ? { citation: uid } : { uid }), offset, limit: window?.limit || 30, script: $('script').value };
   const data = await tool(kind === 'commentary' ? 'get_commentary' : kind === 'post' ? 'get_post_canonical' : 'get_text', request); if (token !== epoch) return;
   if (!Array.isArray(data.segments)) throw new Error('Choose an individual book or passage to read.');
+  if (args.has('ref') && !data.segments.some(segment => segment.ref === args.get('ref'))) throw Error('The saved passage reference was not returned at this position. No nearby passage was substituted. Open the source from the Library or check the bookmark’s revision.');
   if (plan) validatePlanPage(data, plan, uid, window);
   if ((kind === 'post' && data.canonical !== false) || (kind === 'commentary' && !(data.canonical === false && data.content_type === 'commentary') && !(typeof data.label === 'string' && data.label.startsWith('Commentary') && data.label.includes('not the canon')))) throw new Error('This response lacks the expected non-canonical source label.');
   const selector = kind === 'book' ? 'book:' + book : kind === 'post' ? 'post:' + uid : kind === 'canon' ? data.text_id || uid : uid.startsWith('commentary:') ? uid : 'commentary-ref:' + uid;
@@ -344,9 +346,29 @@ async function plans(args, token) {
   if (data.guide) { const guide = el('section', undefined, 'provenance'); guide.append(el('h3', 'Study guide · links only'), el('p', data.guide.cite), el('p', [data.guide.copyright, data.guide.license].filter(Boolean).join(' · ')), el('p', data.guide.note), external('Read the original study guide', data.guide.url)); view.append(guide); if (data.omitted?.length) { const omitted = el('details'); omitted.append(el('summary', 'Unplaced guide links (' + data.omitted.length + ')')); for (const item of data.omitted) omitted.append(el('p', item.reason), external('Original unplaced source link', item.url)); view.append(omitted); } }
   provenance({ source: data.source.pali });
 }
+function bookmarkImporter() {
+  const token = epoch, section = el('section'); section.setAttribute('aria-label', 'Restore bookmark export'); const label = el('label', 'Restore bookmarks and notes from a JSON export'), input = el('input'); input.type = 'file'; input.accept = '.json,application/json'; label.append(input); section.append(label, el('p', 'Files stay on this device. Preview first; existing bookmarks and notes are kept. References are checked against the source only when opened. Maximum file size: 16 MiB.', 'muted'));
+  const preview = el('div'); preview.className = 'import-preview'; preview.setAttribute('aria-live', 'polite'); section.append(preview); let generation = 0;
+  input.addEventListener('change', async () => {
+    const file = input.files[0], request = ++generation; input.value = ''; if (!file) return; preview.replaceChildren(el('p', 'Reading the local export…'));
+    try {
+      if (file.size > MAX_IMPORT_BYTES) throw Error('This file exceeds 16 MiB. Nothing was imported.');
+      const incoming = parseBookmarks(await file.text()); if (request !== generation || token !== epoch) return;
+      const merge = bookmarkMerge(local.saved, incoming), title = el('h3', 'Review bookmark import'); title.tabIndex = -1;
+      preview.replaceChildren(title, el('p', file.name), el('p', merge.added.length + ' new bookmarks · ' + merge.skipped + ' already saved. Existing notes will not be overwritten.', 'notice'));
+      if (merge.added.length) {
+        const list = el('ul'); for (const item of merge.added.slice(0, 10)) list.append(el('li', item.title + ' · ' + item.ref)); preview.append(list); if (merge.added.length > 10) preview.append(el('p', 'And ' + (merge.added.length - 10) + ' more.'));
+        preview.append(button('Add ' + merge.added.length + ' new bookmarks', () => { if (token !== epoch || request !== generation) return; try { const current = bookmarkMerge(local.saved, incoming); local.saved = current.saved; const durable = persist(); saved(); status.textContent = durable ? current.added.length + ' bookmarks restored in this browser. Existing notes kept.' : 'Bookmarks restored in this tab only. Storage is unavailable; export them before closing.'; } catch (error) { preview.replaceChildren(el('p', error.message, 'notice')); } }));
+      } else preview.append(el('p', 'There are no new passages to add.'));
+      preview.append(button('Cancel import', () => { ++generation; preview.replaceChildren(); input.focus(); })); title.focus();
+    } catch (error) { if (request === generation && token === epoch) preview.replaceChildren(el('p', error.message, 'notice')); }
+  }); return section;
+}
 function saved() {
+  view.replaceChildren();
   heading('YOUR PERSONAL READING', 'Saved passages'); view.append(el('p', 'Bookmarks and notes stay in this browser only. They are not scripture, synced, or backed up. Export them to keep a copy.', 'notice'));
   view.append(button('Export bookmarks and notes', () => { exportPersonal({ format: KEY, saved: local.saved }, 'pali-library-bookmarks.json'); }));
+  view.append(bookmarkImporter());
   if (!local.saved.length) view.append(el('p', 'Save a passage while reading to find it here.'));
   for (const item of [...local.saved]) {
     const box = el('article', undefined, 'segment'); const index = Number.isSafeInteger(item.offset) && item.offset >= 0 ? item.offset : Number(item.ref.match(/\/c?(\d+)$/)?.[1] || 1) - 1;

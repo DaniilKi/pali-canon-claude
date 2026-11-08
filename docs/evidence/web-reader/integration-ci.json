@@ -1,0 +1,41 @@
+{
+  "commit": "b15fc1385aa0979ef4d15548d5e6cad376d47f6c",
+  "workflows": [
+    {
+      "id": 42441183243,
+      "name": "Evidence reading commands",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/42441183243",
+      "head_sha": "b15fc1385aa0979ef4d15548d5e6cad376d47f6c",
+      "updated_at": "2026-11-08T03:12:23Z"
+    },
+    {
+      "id": 42441183272,
+      "name": "npx install",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/42441183272",
+      "head_sha": "b15fc1385aa0979ef4d15548d5e6cad376d47f6c",
+      "updated_at": "2026-11-08T03:05:53Z"
+    },
+    {
+      "id": 42441183315,
+      "name": "Read the full bundled corpus",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/42441183315",
+      "head_sha": "b15fc1385aa0979ef4d15548d5e6cad376d47f6c",
+      "updated_at": "2026-11-08T03:05:57Z"
+    },
+    {
+      "id": 42441183302,
+      "name": "Check package",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/42441183302",
+      "head_sha": "b15fc1385aa0979ef4d15548d5e6cad376d47f6c",
+      "updated_at": "2026-11-08T03:10:42Z"
+    }
+  ]
+}

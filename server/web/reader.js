@@ -123,7 +123,7 @@
     "h",
     "\u1E37"
   ];
-  var zip = (keys, chars) => Object.fromEntries(keys.map((k, i) => [k, chars[i]]));
+  var zip = (keys2, chars) => Object.fromEntries(keys2.map((k, i) => [k, chars[i]]));
   var TABLES = {
     devanagari: {
       c: [..."\u0915\u0916\u0917\u0918\u0919\u091A\u091B\u091C\u091D\u091E\u091F\u0920\u0921\u0922\u0923\u0924\u0925\u0926\u0927\u0928\u092A\u092B\u092C\u092D\u092E\u092F\u0930\u0932\u0935\u0938\u0939\u0933"],
@@ -610,6 +610,34 @@
     if (data.text_id !== uid || data.source?.commit !== plan.source.pali.commit || data.offset !== window2.offset || !Array.isArray(data.segments) || data.returned !== data.segments.length || !data.returned || data.returned > window2.limit || window2.end !== null && data.returned !== window2.limit) throw Error("The P\u0101li response does not match the selected plan span and source revision. No plan passage was displayed.");
   }
 
+  // web/bookmark-import.mjs
+  var MAX_IMPORT_BYTES = 16 * 1024 * 1024;
+  var keys = /* @__PURE__ */ new Set(["uid", "ref", "title", "note", "offset", "source_commit"]);
+  var string = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f]/.test(x);
+  var object = (x) => x && typeof x === "object" && !Array.isArray(x);
+  var identity = (x) => JSON.stringify([x.uid, x.ref]);
+  function parseBookmarks(text2) {
+    let data;
+    try {
+      data = JSON.parse(text2);
+    } catch {
+      throw Error("Choose a valid JSON bookmark export. Nothing was imported.");
+    }
+    if (!object(data) || data.format !== "pali-library-v1" || Object.keys(data).some((k) => !["format", "saved"].includes(k)) || !Array.isArray(data.saved) || data.saved.length > 500) throw Error("This is not a supported P\u0101li Library bookmark export (maximum 500 passages). Nothing was imported.");
+    const seen = /* @__PURE__ */ new Set();
+    return data.saved.map((x) => {
+      if (!object(x) || Object.keys(x).some((k) => !keys.has(k)) || !string(x.uid, 300) || !string(x.ref, 400) || !string(x.title, 1e3) || !(/^[a-z][a-z0-9.-]*$/.test(x.uid) || /^(book|post|commentary-ref|commentary):[^\r\n]+$/.test(x.uid)) || /https?:|javascript:|data:|[<>]/i.test(x.uid) || x.note !== void 0 && (typeof x.note !== "string" || x.note.length > 4e3) || x.offset !== void 0 && (!Number.isSafeInteger(x.offset) || x.offset < 0 || x.offset > 1e5) || x.source_commit !== void 0 && !string(x.source_commit, 100)) throw Error("A bookmark has unsupported fields or invalid reference, note, position or revision metadata. Nothing was imported.");
+      if (seen.has(identity(x))) throw Error("The file contains duplicate passage references. Resolve those duplicates before importing; no notes were chosen or discarded.");
+      seen.add(identity(x));
+      return { uid: x.uid, ref: x.ref, title: x.title, note: x.note ?? "", ...x.offset !== void 0 ? { offset: x.offset } : {}, ...x.source_commit !== void 0 ? { source_commit: x.source_commit } : {} };
+    });
+  }
+  function bookmarkMerge(existing, incoming) {
+    const seen = new Set(existing.map(identity)), added = incoming.filter((x) => !seen.has(identity(x))), skipped = incoming.length - added.length;
+    if (existing.length + added.length > 500) throw Error("These new bookmarks exceed the 500-passage limit. Export/remove some saved passages, then try again. Nothing was imported.");
+    return { added, skipped, saved: [...existing, ...added] };
+  }
+
   // web/reader.js
   var $ = (id) => document.getElementById(id);
   var view = $("view");
@@ -865,6 +893,7 @@
     const data = await tool(kind === "commentary" ? "get_commentary" : kind === "post" ? "get_post_canonical" : "get_text", request);
     if (token !== epoch) return;
     if (!Array.isArray(data.segments)) throw new Error("Choose an individual book or passage to read.");
+    if (args.has("ref") && !data.segments.some((segment) => segment.ref === args.get("ref"))) throw Error("The saved passage reference was not returned at this position. No nearby passage was substituted. Open the source from the Library or check the bookmark\u2019s revision.");
     if (plan) validatePlanPage(data, plan, uid, window2);
     if (kind === "post" && data.canonical !== false || kind === "commentary" && !(data.canonical === false && data.content_type === "commentary") && !(typeof data.label === "string" && data.label.startsWith("Commentary") && data.label.includes("not the canon"))) throw new Error("This response lacks the expected non-canonical source label.");
     const selector = kind === "book" ? "book:" + book : kind === "post" ? "post:" + uid : kind === "canon" ? data.text_id || uid : uid.startsWith("commentary:") ? uid : "commentary-ref:" + uid;
@@ -1261,12 +1290,69 @@
     }
     provenance({ source: data.source.pali });
   }
+  function bookmarkImporter() {
+    const token = epoch, section = el("section");
+    section.setAttribute("aria-label", "Restore bookmark export");
+    const label = el("label", "Restore bookmarks and notes from a JSON export"), input = el("input");
+    input.type = "file";
+    input.accept = ".json,application/json";
+    label.append(input);
+    section.append(label, el("p", "Files stay on this device. Preview first; existing bookmarks and notes are kept. References are checked against the source only when opened. Maximum file size: 16 MiB.", "muted"));
+    const preview = el("div");
+    preview.className = "import-preview";
+    preview.setAttribute("aria-live", "polite");
+    section.append(preview);
+    let generation = 0;
+    input.addEventListener("change", async () => {
+      const file = input.files[0], request = ++generation;
+      input.value = "";
+      if (!file) return;
+      preview.replaceChildren(el("p", "Reading the local export\u2026"));
+      try {
+        if (file.size > MAX_IMPORT_BYTES) throw Error("This file exceeds 16 MiB. Nothing was imported.");
+        const incoming = parseBookmarks(await file.text());
+        if (request !== generation || token !== epoch) return;
+        const merge = bookmarkMerge(local.saved, incoming), title = el("h3", "Review bookmark import");
+        title.tabIndex = -1;
+        preview.replaceChildren(title, el("p", file.name), el("p", merge.added.length + " new bookmarks \xB7 " + merge.skipped + " already saved. Existing notes will not be overwritten.", "notice"));
+        if (merge.added.length) {
+          const list = el("ul");
+          for (const item of merge.added.slice(0, 10)) list.append(el("li", item.title + " \xB7 " + item.ref));
+          preview.append(list);
+          if (merge.added.length > 10) preview.append(el("p", "And " + (merge.added.length - 10) + " more."));
+          preview.append(button("Add " + merge.added.length + " new bookmarks", () => {
+            if (token !== epoch || request !== generation) return;
+            try {
+              const current = bookmarkMerge(local.saved, incoming);
+              local.saved = current.saved;
+              const durable = persist();
+              saved();
+              status.textContent = durable ? current.added.length + " bookmarks restored in this browser. Existing notes kept." : "Bookmarks restored in this tab only. Storage is unavailable; export them before closing.";
+            } catch (error) {
+              preview.replaceChildren(el("p", error.message, "notice"));
+            }
+          }));
+        } else preview.append(el("p", "There are no new passages to add."));
+        preview.append(button("Cancel import", () => {
+          ++generation;
+          preview.replaceChildren();
+          input.focus();
+        }));
+        title.focus();
+      } catch (error) {
+        if (request === generation && token === epoch) preview.replaceChildren(el("p", error.message, "notice"));
+      }
+    });
+    return section;
+  }
   function saved() {
+    view.replaceChildren();
     heading("YOUR PERSONAL READING", "Saved passages");
     view.append(el("p", "Bookmarks and notes stay in this browser only. They are not scripture, synced, or backed up. Export them to keep a copy.", "notice"));
     view.append(button("Export bookmarks and notes", () => {
       exportPersonal({ format: KEY, saved: local.saved }, "pali-library-bookmarks.json");
     }));
+    view.append(bookmarkImporter());
     if (!local.saved.length) view.append(el("p", "Save a passage while reading to find it here."));
     for (const item of [...local.saved]) {
       const box = el("article", void 0, "segment");

@@ -1,5 +1,7 @@
 # Standalone web-reader evidence
 
+Latest independent [bookmark restore and CI acceptance](BOOKMARK_IMPORT.md) records all four successful b15fc13 workflows and the subsequent local restore feature.
+
 Current [integration evidence](INTEGRATION.md) covers the isolated `integrate/web-reader-corpus-nov8` candidate: web `492169f` plus corpus `7b04173`. Dev/main and deployment remain untouched.
 
 Earlier feature receipts below describe `feat/standalone-web-reader` at corpus checkpoint `f0906bd`; their original limits are historical, not rewritten as later successes.
