@@ -73,7 +73,7 @@ jobs:
           name: hosted-memory-report
           path: ${{ runner.temp }}/memory-report/*.json
           if-no-files-found: warn
-  reader-browser:
+  reader-browser-group:
     name: Chromium reader / ${{ matrix.group }}
     strategy:
       fail-fast: false
@@ -202,6 +202,17 @@ jobs:
             standalone-storage.report.json
             standalone-storage-a11y.report.json
           if-no-files-found: warn
+  reader-browser:
+    name: Chromium reader
+    needs: reader-browser-group
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Require every browser group to succeed
+        env:
+          BROWSER_RESULT: ${{ needs['reader-browser-group'].result }}
+        run: test "$BROWSER_RESULT" = success
   check:
     name: Node ${{ matrix.node }} / ${{ matrix.os }}
     runs-on: ${{ matrix.os }}

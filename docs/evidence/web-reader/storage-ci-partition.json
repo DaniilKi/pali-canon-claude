@@ -7,5 +7,8 @@
   },
   "timeout_minutes_per_group": 10,
   "fail_fast": false,
-  "artifact_name": "widget-browser-report-${{ matrix.group }}"
+  "artifact_name": "widget-browser-report-${{ matrix.group }}",
+  "preserved_aggregate_job": "reader-browser",
+  "preserved_aggregate_status_name": "Chromium reader",
+  "aggregate_requires": "all browser groups successful"
 }

@@ -68,3 +68,8 @@ browser groups in parallel, retaining every original command and artifact, with
 the same 10-minute per-group limit and no disabled assertions. See
 [partition validation](storage-ci-partition.json). New exact-head CI is required;
 the old timeout is not reinterpreted as success.
+
+The original `reader-browser` job ID and `Chromium reader` status name are
+preserved as an always-run aggregate requiring every matrix group to succeed.
+Branch-protection inspection returned GitHub 403 (integration lacks that read);
+no rule was changed, and the existing status interface was retained defensively.
