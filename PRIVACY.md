@@ -1,10 +1,10 @@
 # Privacy policy
 
-**Pali Canon for Claude** · effective 1 November 2026
+**Pali Canon for Claude** · effective 8 November 2026
 
 This page explains, in plain English, what happens to your information when you use this tool. The short version: **we do not collect your questions, your citations or anything that identifies you.**
 
-The tool can be used in two ways, and they are covered separately below.
+The local and hosted servers are covered below, followed by the standalone browser reader.
 
 ## 1. On your own computer (local mode)
 
@@ -15,9 +15,10 @@ This is how the tool runs today: as a Claude Desktop extension, a Claude Code pl
 - **Some requests go to public websites.** When you ask for an English translation or a dictionary entry, the tool fetches that page from the site that publishes it:
   - [dhammatalks.org](https://www.dhammatalks.org) (Ṭhānissaro Bhikkhu's translations),
   - [Access to Insight](https://www.accesstoinsight.org) and its official mirrors on GitHub and jsDelivr,
+  - [Ancient Buddhist Texts](https://ancient-buddhist-texts.net) (Ānandajoti Bhikkhu’s translations),
   - the [Digital Pāḷi Dictionary](https://www.dpdict.net).
 
-  These are the only sites the tool can contact; the list is fixed in the code. The request contains only what is needed to fetch the page (for example, the address of a sutta or the Pāli word you looked up) and a label naming this tool. Like any website, those sites and mirrors may keep ordinary web server logs, such as your internet address and the page requested. Their own privacy policies apply to those logs.
+  Approved source and mirror destinations are restricted by the fixed allowlist in `src/http.mjs`; see the current [source register](docs/sources.md). The request contains only what is needed to fetch the page (for example, the address of a sutta or the Pāli word you looked up) and a label naming this tool. Like any website, those sites and mirrors may keep ordinary web server logs, such as your internet address and the page requested. Their own privacy policies apply to those logs.
 - **Your AI app has its own policy.** Your conversation with Claude (or another assistant) is handled by that app's provider under its own privacy policy. This tool does not see or store your conversation; it only receives the specific lookups the assistant asks it to make.
 
 ## 2. Hosted version (hosted mode)
@@ -31,6 +32,17 @@ A hosted version, so the tool works in Claude on the web and phone without insta
 - **Translation and dictionary lookups** still go from the hosted server to the public websites listed above, so those sites see the hosted server's address, not yours.
 
 If someone else runs their own copy of this open-source server, their own privacy policy applies, not this one.
+
+## 3. Standalone browser reader
+
+The optional reader at the HTTP server’s root works without an AI account. It sends browse, search and reading requests to the same server, so the hosted-mode protections and deployment-provider limitations above apply when that server is remote.
+
+- **Personal reading stays in your browser.** Bookmarked passage references, personal notes, the last reading link, theme, font size and script preferences are saved in this browser’s local storage. They are not sent to the MCP server or synced to an account. Anyone with access to this browser profile may be able to read them.
+- **You control the saved data.** Individual bookmarks can be removed. Removing a bookmark also removes its note. Browser site-data controls can erase the local data. JSON export saves the selected bookmarks and notes as a file on your device; you decide where that file goes. Clearing browser data, private browsing or disabled storage may prevent persistence.
+- **No silent offline library.** This slice does not install a service worker or persist scripture/English bodies into an offline web collection. Normal browser caching is still controlled by the browser and response headers.
+- **No new tracking.** The reader loads no third-party scripts, fonts or analytics. Selecting a translation asks the server to retrieve the named source; opening an external source link visits that publisher directly under its own policy. The reader’s response sets a no-referrer policy.
+
+See the [reader guide](docs/web-app.md) for the current feature and storage limits.
 
 ## Children
 

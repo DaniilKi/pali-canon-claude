@@ -14,7 +14,8 @@ It needs no login, because everything it serves is public scripture and openly l
 |---|---|
 | `/mcp` | The connection point for AI apps (the "MCP endpoint", using the *Streamable HTTP* standard). |
 | `/healthz` | A status check. Returns `"status": "ok"` and simple counts, for uptime monitors. |
-| `/` | A one-line description. |
+| `/` or `/reader` | The standalone Pāli Library reader: browsing, search, reading and browser-local bookmarks. See [web-reader guide](web-app.md). |
+| `/reader.js`, `/reader.css` | First-party reader assets. |
 
 ## Privacy
 
