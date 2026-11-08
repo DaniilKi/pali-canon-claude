@@ -1307,7 +1307,7 @@ The standalone-web record used branch-local D195 before integration; D198 avoids
 - **Evidence.** Three high-risk Thag leads are incomplete after independent complete-body/root review. Ānanda had no other whole English version; correct that claim rather than assuming alternatives exist. Hecker/Khema's final blended stanza has no approved exact alignment.
 - **Pilot.** Activate only Olendzki Ānanda1037–1039 and Sirimaṇḍa448–452 through a pinned single-verse-container extractor. Exclude prefaces, retain publisher numbering and complete non-CC notices. Exact partial consent, text/Pāli/notice pins and bounded continuations remain mandatory; separate article/partial caches. Retire only Sirimaṇḍa's exact hold.
 - **Downgrade prevention.** A packaged authoritative registry rejects loss of the entire partial container. Build proposals are always withheld; only verified content activation may add the two mappings. Existing independent versions and saved-position safeguards remain.
-- **Counts.** Ordinary2574; whole1447/direct1870inherited, grouped1421/1844. Partial2/partial-only1; shared12/110subjects/52shared-only unchanged. Daily1269/SN5.3 unchanged. Screen221entries includes5retained snapshots and 216unreviewed leads. [Evidence and limits](data/thag-excerpt-review.md).
+- **Counts.** Ordinary2574; whole1447/direct1870inherited, grouped1421/1844. Partial2/partial-only1; shared12/110subjects/52shared-only unchanged. Daily1269/SN5.3 unchanged. Screen221entries includes5retained snapshots and216unreviewed leads. [Evidence and limits](data/thag-excerpt-review.md).
 
 ## D206 — Restore four precisely scoped Olendzki excerpts and screen single-verse metadata (2026-11-08)
 
