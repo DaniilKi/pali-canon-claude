@@ -1274,6 +1274,12 @@
     ["snp5.18",31,3896]
   ],
   "epochs": {
+    "d209": {
+      "add": [],
+      "remove": ["an6.54", "an10.27", "mn34"],
+      "expected_count": 1265,
+      "expected_nov1": "dn32"
+    },
     "d207": {
       "add": [],
       "expected_count": 1268,

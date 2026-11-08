@@ -685,7 +685,7 @@
     }
     if (scope.kind === "partial_unit") {
       const prefix = requestedId + "/";
-      if (choice.translation_id.startsWith("ati:") && (scope.extractor !== (scope.version === 2 ? "ati-chapter-prose-v1" : "ati-freeverse-v1") || !sha(scope.notice_sha256))) fail2();
+      if (choice.translation_id.startsWith("ati:") && (!(scope.version === 2 ? scope.extractor === "ati-chapter-prose-v1" : ["ati-freeverse-v1", "ati-chapter-p2-of2-v1", "ati-chapter-p11-of11-v1", "ati-chapter-p1-of4-v1", "ati-excerpt-verse-pre-v1"].includes(scope.extractor)) || !sha(scope.notice_sha256))) fail2();
       if (scope.version === 2) {
         const p = scope.pali_excerpt;
         if (!choice.translation_id.startsWith("ati:") || scope.first_ref !== scope.last_ref || !p || p.ref !== scope.first_ref || p.type !== "prose" || !nonempty(p.text) || p.text.length > 2e6 || p.offset_unit !== "utf16_code_units" || !sha(p.segment_sha256) || !Number.isSafeInteger(p.start_char) || !Number.isSafeInteger(p.end_char) || p.start_char < 0 || p.end_char <= p.start_char || p.end_char - p.start_char !== p.text.length || own(scope, "read_with") || own(scope, "read_pages")) fail2();
@@ -1627,6 +1627,7 @@
     target.replaceChildren(el("h3", "Review English source scope"));
     target.append(el("p", "P\u0101li selection: " + context.citation), el("p", [choice.translator, choice.source, choice.reference].filter(Boolean).join(" \xB7 ")));
     scopeSummary(descriptor, target);
+    if (typeof choice.mapping_note === "string" && choice.mapping_note.trim()) target.append(el("p", choice.mapping_note, "notice"));
     const label = el("label", void 0, "consent-row"), checkbox = el("input");
     checkbox.type = "checkbox";
     checkbox.id = "scope-consent";

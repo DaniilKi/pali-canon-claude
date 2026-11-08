@@ -3,13 +3,13 @@
   "approvals_changed": false,
   "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
   "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
-  "ordinary_ati_bindings_checked": 1139,
-  "candidate_bindings": 25,
+  "ordinary_ati_bindings_checked": 1135,
+  "candidate_bindings": 21,
   "reviewed_retained_snapshots": 1,
-  "unreviewed_bindings": 24,
+  "unreviewed_bindings": 20,
   "reason_counts": {
-    "publisher excerpt filename marker": 19,
-    "publisher extent excerpt": 25
+    "publisher excerpt filename marker": 15,
+    "publisher extent excerpt": 21
   },
   "warning": "Metadata clues only, not errors or approvals. A collection excerpt can fully cover one indexed poem. EXTENT=complete is not evidence of completeness. Other-version counts concern only the supplied index, not every external provider. Frozen source hashes do not prove upstream freshness.",
   "rows": [
@@ -407,39 +407,6 @@
       ]
     },
     {
-      "owner": "sn12.60",
-      "path": "/tipitaka/sn/sn12/sn12.060x.wlsh",
-      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.060x.wlsh.html",
-      "translator": "Maurice O'Connell Walshe",
-      "reference": "S ii 92",
-      "publisher_extent": "excerpt",
-      "publisher_subtitle": "Aananda's Mistake",
-      "publisher_secondary_subtitle": "",
-      "source_html_sha256": "9027f6803e34fbd5f7eff8677abb2d3ff66bab364114ebed3a1b1776edc392ff",
-      "indexed_root": {
-        "id": "sn12.60",
-        "title": "Nidānasuttaṃ",
-        "vri": "60",
-        "book": 12,
-        "start": 440,
-        "end": 452,
-        "kind": null,
-        "approximate": null
-      },
-      "other_versions_in_supplied_index": [],
-      "reasons": [
-        "publisher extent excerpt",
-        "publisher excerpt filename marker"
-      ],
-      "approved": false,
-      "review_status": "unreviewed",
-      "review_required": [
-        "complete body and indexed boundaries",
-        "page-specific full licence",
-        "independent alternatives and source scope"
-      ]
-    },
-    {
       "owner": "sn22.84",
       "path": "/tipitaka/sn/sn22/sn22.084x.wlsh",
       "url": "https://www.accesstoinsight.org/tipitaka/sn/sn22/sn22.084x.wlsh.html",
@@ -476,39 +443,6 @@
       ]
     },
     {
-      "owner": "sn22.87",
-      "path": "/tipitaka/sn/sn22/sn22.087x.wlsh",
-      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn22/sn22.087x.wlsh.html",
-      "translator": "Maurice O'Connell Walshe",
-      "reference": "S iii 119",
-      "publisher_extent": "excerpt",
-      "publisher_subtitle": "Vakkali",
-      "publisher_secondary_subtitle": "",
-      "source_html_sha256": "46596cc968c7265af4c75e5cc32ab6a75ef66ab8ba35665d32238686583f7c2d",
-      "indexed_root": {
-        "id": "sn22.87",
-        "title": "Vakkalisuttaṃ",
-        "vri": "87",
-        "book": 13,
-        "start": 574,
-        "end": 586,
-        "kind": null,
-        "approximate": null
-      },
-      "other_versions_in_supplied_index": [],
-      "reasons": [
-        "publisher extent excerpt",
-        "publisher excerpt filename marker"
-      ],
-      "approved": false,
-      "review_status": "unreviewed",
-      "review_required": [
-        "complete body and indexed boundaries",
-        "page-specific full licence",
-        "independent alternatives and source scope"
-      ]
-    },
-    {
       "owner": "sn22.89",
       "path": "/tipitaka/sn/sn22/sn22.089x.wlsh",
       "url": "https://www.accesstoinsight.org/tipitaka/sn/sn22/sn22.089x.wlsh.html",
@@ -532,39 +466,6 @@
         "https://www.dhammatalks.org/suttas/SN/SN22_89.html",
         "https://www.accesstoinsight.org/tipitaka/sn/sn22/sn22.089.than.html"
       ],
-      "reasons": [
-        "publisher extent excerpt",
-        "publisher excerpt filename marker"
-      ],
-      "approved": false,
-      "review_status": "unreviewed",
-      "review_required": [
-        "complete body and indexed boundaries",
-        "page-specific full licence",
-        "independent alternatives and source scope"
-      ]
-    },
-    {
-      "owner": "sn35.244",
-      "path": "/tipitaka/sn/sn35/sn35.203x.wlsh",
-      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.203x.wlsh.html",
-      "translator": "Maurice O'Connell Walshe",
-      "reference": "S iv 188",
-      "publisher_extent": "excerpt",
-      "publisher_subtitle": "Things Productive of Suffering",
-      "publisher_secondary_subtitle": "",
-      "source_html_sha256": "641adf7b3fafd492cadbbc72602bce39a60b2fd8a3d55ccb74f0e4301b176a75",
-      "indexed_root": {
-        "id": "sn35.244",
-        "title": "Dukkhadhammasuttaṃ",
-        "vri": "244",
-        "book": 14,
-        "start": 1204,
-        "end": 1214,
-        "kind": null,
-        "approximate": null
-      },
-      "other_versions_in_supplied_index": [],
       "reasons": [
         "publisher extent excerpt",
         "publisher excerpt filename marker"
@@ -744,39 +645,6 @@
       ],
       "reasons": [
         "publisher extent excerpt"
-      ],
-      "approved": false,
-      "review_status": "unreviewed",
-      "review_required": [
-        "complete body and indexed boundaries",
-        "page-specific full licence",
-        "independent alternatives and source scope"
-      ]
-    },
-    {
-      "owner": "sn56.22",
-      "path": "/tipitaka/sn/sn56/sn56.022x.wlsh",
-      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn56/sn56.022x.wlsh.html",
-      "translator": "Maurice O'Connell Walshe",
-      "reference": "S v 432",
-      "publisher_extent": "excerpt",
-      "publisher_subtitle": "Knowledge",
-      "publisher_secondary_subtitle": "",
-      "source_html_sha256": "aab4801e3ce96121fc53cfda447620a5801172cfc4430dad4e5b4d0f0c7491a1",
-      "indexed_root": {
-        "id": "sn56.22",
-        "title": "Dutiyakoṭigāmasuttaṃ",
-        "vri": "1092",
-        "book": 15,
-        "start": 2540,
-        "end": 2554,
-        "kind": null,
-        "approximate": null
-      },
-      "other_versions_in_supplied_index": [],
-      "reasons": [
-        "publisher extent excerpt",
-        "publisher excerpt filename marker"
       ],
       "approved": false,
       "review_status": "unreviewed",

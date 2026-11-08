@@ -23738,6 +23738,268 @@ function assertRegisteredPartial(link, unit, registry2) {
 
 // src/translation-scope.mjs
 var import_node_crypto = require("node:crypto");
+
+// src/http.mjs
+var ALLOWED = [
+  { host: "accesstoinsight.org" },
+  { host: "www.accesstoinsight.org" },
+  { host: "www.dhammatalks.org" },
+  { host: "dhammatalks.org" },
+  { host: "www.dpdict.net" },
+  { host: "dpdict.net" },
+  { host: "raw.githubusercontent.com", prefixes: ["/bcbsit/ati/", "/digitalpalireader/accesstoinsight/"] },
+  { host: "cdn.jsdelivr.net", prefixes: ["/gh/bcbsit/ati@"] },
+  // Ānandajoti Bhikkhu's text-and-translation pages only (CC BY-SA); nothing else on the site is fetched.
+  { host: "ancient-buddhist-texts.net", prefixes: ["/Texts-and-Translations/"] }
+];
+var ALLOWED_HOSTS = ALLOWED.map((r) => r.host);
+var MAX_BYTES = 6 * 1024 * 1024;
+var USER_AGENT = "pali-canon-claude/2.0 (scripture study; read-only; https://github.com/DaniilKi/pali-canon-claude)";
+function allowed(url) {
+  if (url.protocol !== "https:" || url.port || url.username || url.password) return false;
+  const rule = ALLOWED.find((r) => r.host === url.hostname);
+  if (!rule) return false;
+  return !rule.prefixes || rule.prefixes.some((p) => url.pathname.startsWith(p));
+}
+var wait = (ms) => new Promise((r) => setTimeout(r, ms));
+var HttpError = class extends Error {
+  constructor(message, status, retryable) {
+    super(message);
+    this.status = status;
+    this.retryable = retryable;
+  }
+};
+var SIMULATED_OUTAGE = new Set(String(process.env.PALI_CANON_SIMULATE_OUTAGE || "").split(",").map((h) => h.trim()).filter(Boolean));
+async function fetchOnce(url, { json: json2, timeout }) {
+  let target = new URL(url);
+  if (SIMULATED_OUTAGE.has(target.hostname)) throw new HttpError(`${target.hostname} unreachable (simulated outage)`, 503, true);
+  const signal = AbortSignal.timeout(timeout);
+  for (let redirects = 0; redirects <= 4; redirects += 1) {
+    if (!allowed(target)) throw new HttpError("Provider URL is outside the supported public sources.", 0, false);
+    let response;
+    try {
+      response = await fetch(target, { redirect: "manual", signal, headers: { "User-Agent": USER_AGENT, Accept: json2 ? "application/json" : "text/html,text/plain" } });
+    } catch (error2) {
+      throw new HttpError(`${target.hostname} unreachable (${error2.cause?.code || error2.name || "network error"})`, 0, true);
+    }
+    if ([301, 302, 303, 307, 308].includes(response.status)) {
+      await response.body?.cancel();
+      const location = response.headers.get("location");
+      if (!location) throw new HttpError("Redirect without destination.", response.status, false);
+      target = new URL(location, target);
+      continue;
+    }
+    if (!response.ok) {
+      await response.body?.cancel();
+      const retryable = response.status >= 500 || response.status === 429;
+      throw new HttpError(`${target.hostname} returned HTTP ${response.status}`, response.status, retryable);
+    }
+    if (Number(response.headers.get("content-length")) > MAX_BYTES) {
+      await response.body?.cancel();
+      throw new HttpError("Response too large.", response.status, false);
+    }
+    const reader = response.body.getReader();
+    const chunks = [];
+    let bytes = 0;
+    try {
+      for (; ; ) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        bytes += value.byteLength;
+        if (bytes > MAX_BYTES) throw new HttpError("Response exceeded the 6 MB limit.", 200, false);
+        chunks.push(value);
+      }
+    } catch (error2) {
+      try {
+        await reader.cancel();
+      } catch {
+      }
+      if (error2 instanceof HttpError) throw error2;
+      throw new HttpError(`${target.hostname} response body interrupted (${error2.cause?.code || error2.name || "stream error"})`, 0, true);
+    } finally {
+      reader.releaseLock();
+    }
+    const body = Buffer.concat(chunks).toString("utf8");
+    if (!json2) return body;
+    try {
+      return JSON.parse(body);
+    } catch {
+      throw new HttpError(`${target.hostname} returned invalid JSON.`, 200, true);
+    }
+  }
+  throw new HttpError("Too many redirects.", 0, false);
+}
+async function fetchPublic(url, { json: json2 = true, retries = 2, timeout = 2e4 } = {}) {
+  let last;
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try {
+      return await fetchOnce(url, { json: json2, timeout });
+    } catch (error2) {
+      last = error2;
+      if (!error2.retryable || attempt === retries) break;
+      await wait(400 * 3 ** attempt);
+    }
+  }
+  throw last;
+}
+async function fetchMirrors(urls, { json: json2 = false, timeout = 15e3, mirrorRetries = 0 } = {}) {
+  const failures = [];
+  for (const [index4, url] of urls.entries()) {
+    try {
+      return { body: await fetchPublic(url, { json: json2, retries: index4 === 0 ? 1 : mirrorRetries, timeout }), url, mirror: index4 };
+    } catch (error3) {
+      failures.push(`${new URL(url).hostname}: ${error3.message}`);
+      if (error3.status === 404 && index4 === urls.length - 1) break;
+    }
+  }
+  const error2 = new Error(`All sources failed \u2014 ${failures.join("; ")}`);
+  error2.failures = failures;
+  throw error2;
+}
+var ENTITIES = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+  nbsp: " ",
+  ndash: "\u2013",
+  mdash: "\u2014",
+  hellip: "\u2026",
+  lsquo: "\u2018",
+  rsquo: "\u2019",
+  ldquo: "\u201C",
+  rdquo: "\u201D",
+  bull: "\u2022",
+  copy: "\xA9",
+  middot: "\xB7",
+  ensp: " ",
+  emsp: " ",
+  thinsp: " ",
+  aacute: "\xE1",
+  eacute: "\xE9",
+  iacute: "\xED",
+  oacute: "\xF3",
+  uacute: "\xFA",
+  ntilde: "\xF1",
+  Ntilde: "\xD1"
+};
+function decodeHtml(value) {
+  return String(value ?? "").replace(/&(#x[\da-f]+|#\d+|[a-z][a-z\d]+);/gi, (whole, key3) => {
+    if (key3.startsWith("#")) {
+      const point = key3[1].toLowerCase() === "x" ? parseInt(key3.slice(2), 16) : Number(key3.slice(1));
+      return point > 0 && point <= 1114111 ? String.fromCodePoint(point) : whole;
+    }
+    return ENTITIES[key3] ?? whole;
+  });
+}
+function plainText(html) {
+  return decodeHtml(String(html ?? "").replace(/<!--[^]*?-->/g, "").replace(/<(script|style|svg|nav|noscript)\b[^>]*>[^]*?<\/\1\s*>/gi, "").replace(/<br\b[^>]*>/gi, "\n").replace(/<\/(p|div|h[1-6]|li|dt|dd|blockquote|tr|section|article)>/gi, "\n").replace(/<(span|a|sup)\b[^>]*class=["'][^"']*\b(ref|pts|pagenum|pagebreak|anchor|seg)\b[^"']*["'][^>]*>[^<]*<\/\1>/gi, " ").replace(/<[^>]*>/g, "")).replace(/[ \t]+/g, " ").replace(/ *\n */g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+function shortText(value, limit = 1600) {
+  const text = plainText(value);
+  return text.length > limit ? `${text.slice(0, limit)}\u2026 [excerpt shortened]` : text;
+}
+
+// src/ati-excerpt.mjs
+function atiVerseExcerpt(html) {
+  const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
+  const fail = () => {
+    throw Error("The reviewed ATI verse extraction structure changed. No excerpt was returned.");
+  };
+  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) fail();
+  const start = html.indexOf(begin) + begin.length, stop = html.indexOf(end);
+  if (stop <= start) fail();
+  const chunk = html.slice(start, stop), opens = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])freeverse\1[^>]*>/gi)];
+  if (opens.length !== 1) fail();
+  const from = opens[0].index + opens[0][0].length, to = chunk.indexOf("</div>", from);
+  if (to < from) fail();
+  const verse2 = chunk.slice(from, to);
+  if (/<\/?div\b|<script\b|<style\b/i.test(verse2)) fail();
+  const text = plainText(verse2);
+  if (!text) fail();
+  return text;
+}
+function atiChapterProse(html) {
+  const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
+  const fail = () => {
+    throw Error("The reviewed ATI prose extraction structure changed. No excerpt was returned.");
+  };
+  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) fail();
+  const from = html.indexOf(begin) + begin.length, to = html.indexOf(end);
+  if (to <= from) fail();
+  const chunk = html.slice(from, to), opens = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
+  if (opens.length !== 1) fail();
+  const start = opens[0].index + opens[0][0].length, notes = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])notes\1[^>]*>/gi)];
+  if (notes.length !== 1) fail();
+  const stop = notes[0].index;
+  if (stop <= start || chunk.indexOf("</div>", start) < stop) fail();
+  const body = chunk.slice(start, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
+  if (paragraphs.length !== 1 || /<\/?(?:div|script|style|dl|ol|ul)\b/i.test(body) || body.replace(paragraphs[0][0], "").trim()) fail();
+  const text = plainText(paragraphs[0][1].replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi, ""));
+  if (!text) fail();
+  return text;
+}
+function atiPartialExcerpt(html, extractor) {
+  if (extractor === "ati-freeverse-v1") return atiVerseExcerpt(html);
+  if (extractor === "ati-chapter-prose-v1") return atiChapterProse(html);
+  if (extractor === "ati-chapter-p2-of2-v1") return chapterParagraph(html, 2, 2);
+  if (extractor === "ati-chapter-p11-of11-v1") return chapterParagraph(html, 11, 11, "Seeing the Dhamma");
+  if (extractor === "ati-chapter-p1-of4-v1") return chapterParagraph(html, 4, 1);
+  if (extractor === "ati-excerpt-verse-pre-v1") return excerptVersePre(html);
+  throw Error("Unsupported ATI partial extractor. No excerpt was returned.");
+}
+var ATI_SEGMENT_EXTRACTORS = Object.freeze([
+  "ati-freeverse-v1",
+  "ati-chapter-p2-of2-v1",
+  "ati-chapter-p11-of11-v1",
+  "ati-chapter-p1-of4-v1",
+  "ati-excerpt-verse-pre-v1"
+]);
+function copyrightedChunk(html) {
+  const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
+  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) throw Error("The reviewed ATI selection extraction structure changed. No excerpt was returned.");
+  const start = html.indexOf(begin) + begin.length, stop = html.indexOf(end);
+  if (stop <= start) throw Error("The reviewed ATI selection extraction structure changed. No excerpt was returned.");
+  return html.slice(start, stop);
+}
+function chapterParagraph(html, total, selected, heading) {
+  const fail = () => {
+    throw Error("The reviewed ATI paragraph selection extraction structure changed. No excerpt was returned.");
+  };
+  const chunk = copyrightedChunk(html), chapters = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)], notes = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])notes\1[^>]*>/gi)];
+  if (chapters.length !== 1 || notes.length !== 1) fail();
+  const start = chapters[0].index + chapters[0][0].length, stop = notes[0].index;
+  if (stop <= start || chunk.indexOf("</div>", start) < stop) fail();
+  const body = chunk.slice(start, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
+  if (paragraphs.length !== total || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body)) fail();
+  let remainder = body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim();
+  if (heading) {
+    if (remainder !== `<h4>${heading}</h4>`) fail();
+  } else if (remainder) fail();
+  const chosen = paragraphs[selected - 1][1];
+  if (/<\/?p\b/i.test(chosen)) fail();
+  const text = plainText(chosen.replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi, ""));
+  if (!text) fail();
+  return text;
+}
+function excerptVersePre(html) {
+  const fail = () => {
+    throw Error("The reviewed ATI preformatted verse extraction structure changed. No excerpt was returned.");
+  };
+  const chunk = copyrightedChunk(html), opens = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])excerpt verse\1[^>]*>/gi)];
+  const chapters = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
+  if (opens.length !== 1 || chapters.length !== 1 || chapters[0].index >= opens[0].index || [...chunk.matchAll(/<pre\b/gi)].length !== 1) fail();
+  const start = opens[0].index + opens[0][0].length, stop = chunk.indexOf("</div>", start);
+  if (stop < start) fail();
+  const body = chunk.slice(start, stop), pres = [...body.matchAll(/<pre\b[^>]*>([^]*?)<\/pre>/gi)];
+  if (pres.length !== 1 || body.replace(pres[0][0], "").trim() || /<[^>]*>/.test(pres[0][1])) fail();
+  const text = plainText(pres[0][1]);
+  if (!text) fail();
+  return text;
+}
+
+// src/translation-scope.mjs
 var scopeHash = (value) => (0, import_node_crypto.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
 var isPartial = (link) => Object.hasOwn(link, "partial_scope");
 var sha = (value) => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
@@ -23765,7 +24027,7 @@ function partialScope(link, unit, segments2, source4) {
   if (scopeHash(selected) !== p.pali_sha256) fail();
   if (!["dhammatalks", "ati", "anandajoti"].includes(link.source)) fail();
   if (link.source === "ati") {
-    if (p.extractor !== (p.version === 2 ? "ati-chapter-prose-v1" : "ati-freeverse-v1") || !sha(p.notice_sha256) || typeof link.path !== "string" || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes("..") || link.url !== "https://accesstoinsight.org" + link.path + ".html") fail();
+    if (!(p.version === 2 ? p.extractor === "ati-chapter-prose-v1" : ATI_SEGMENT_EXTRACTORS.includes(p.extractor)) || !sha(p.notice_sha256) || typeof link.path !== "string" || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes("..") || link.url !== "https://accesstoinsight.org" + link.path + ".html") fail();
   } else if (Object.hasOwn(p, "extractor") || Object.hasOwn(p, "notice_sha256")) fail();
   if (link.parts && (link.source !== "anandajoti" || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail();
   const readPages = [];
@@ -25814,213 +26076,6 @@ __export(english_exports, {
   selectTranslation: () => selectTranslation,
   translation: () => translation
 });
-
-// src/http.mjs
-var ALLOWED = [
-  { host: "accesstoinsight.org" },
-  { host: "www.accesstoinsight.org" },
-  { host: "www.dhammatalks.org" },
-  { host: "dhammatalks.org" },
-  { host: "www.dpdict.net" },
-  { host: "dpdict.net" },
-  { host: "raw.githubusercontent.com", prefixes: ["/bcbsit/ati/", "/digitalpalireader/accesstoinsight/"] },
-  { host: "cdn.jsdelivr.net", prefixes: ["/gh/bcbsit/ati@"] },
-  // Ānandajoti Bhikkhu's text-and-translation pages only (CC BY-SA); nothing else on the site is fetched.
-  { host: "ancient-buddhist-texts.net", prefixes: ["/Texts-and-Translations/"] }
-];
-var ALLOWED_HOSTS = ALLOWED.map((r) => r.host);
-var MAX_BYTES = 6 * 1024 * 1024;
-var USER_AGENT = "pali-canon-claude/2.0 (scripture study; read-only; https://github.com/DaniilKi/pali-canon-claude)";
-function allowed(url) {
-  if (url.protocol !== "https:" || url.port || url.username || url.password) return false;
-  const rule = ALLOWED.find((r) => r.host === url.hostname);
-  if (!rule) return false;
-  return !rule.prefixes || rule.prefixes.some((p) => url.pathname.startsWith(p));
-}
-var wait = (ms) => new Promise((r) => setTimeout(r, ms));
-var HttpError = class extends Error {
-  constructor(message, status, retryable) {
-    super(message);
-    this.status = status;
-    this.retryable = retryable;
-  }
-};
-var SIMULATED_OUTAGE = new Set(String(process.env.PALI_CANON_SIMULATE_OUTAGE || "").split(",").map((h) => h.trim()).filter(Boolean));
-async function fetchOnce(url, { json: json2, timeout }) {
-  let target = new URL(url);
-  if (SIMULATED_OUTAGE.has(target.hostname)) throw new HttpError(`${target.hostname} unreachable (simulated outage)`, 503, true);
-  const signal = AbortSignal.timeout(timeout);
-  for (let redirects = 0; redirects <= 4; redirects += 1) {
-    if (!allowed(target)) throw new HttpError("Provider URL is outside the supported public sources.", 0, false);
-    let response;
-    try {
-      response = await fetch(target, { redirect: "manual", signal, headers: { "User-Agent": USER_AGENT, Accept: json2 ? "application/json" : "text/html,text/plain" } });
-    } catch (error2) {
-      throw new HttpError(`${target.hostname} unreachable (${error2.cause?.code || error2.name || "network error"})`, 0, true);
-    }
-    if ([301, 302, 303, 307, 308].includes(response.status)) {
-      await response.body?.cancel();
-      const location = response.headers.get("location");
-      if (!location) throw new HttpError("Redirect without destination.", response.status, false);
-      target = new URL(location, target);
-      continue;
-    }
-    if (!response.ok) {
-      await response.body?.cancel();
-      const retryable = response.status >= 500 || response.status === 429;
-      throw new HttpError(`${target.hostname} returned HTTP ${response.status}`, response.status, retryable);
-    }
-    if (Number(response.headers.get("content-length")) > MAX_BYTES) {
-      await response.body?.cancel();
-      throw new HttpError("Response too large.", response.status, false);
-    }
-    const reader = response.body.getReader();
-    const chunks = [];
-    let bytes = 0;
-    try {
-      for (; ; ) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        bytes += value.byteLength;
-        if (bytes > MAX_BYTES) throw new HttpError("Response exceeded the 6 MB limit.", 200, false);
-        chunks.push(value);
-      }
-    } catch (error2) {
-      try {
-        await reader.cancel();
-      } catch {
-      }
-      if (error2 instanceof HttpError) throw error2;
-      throw new HttpError(`${target.hostname} response body interrupted (${error2.cause?.code || error2.name || "stream error"})`, 0, true);
-    } finally {
-      reader.releaseLock();
-    }
-    const body = Buffer.concat(chunks).toString("utf8");
-    if (!json2) return body;
-    try {
-      return JSON.parse(body);
-    } catch {
-      throw new HttpError(`${target.hostname} returned invalid JSON.`, 200, true);
-    }
-  }
-  throw new HttpError("Too many redirects.", 0, false);
-}
-async function fetchPublic(url, { json: json2 = true, retries = 2, timeout = 2e4 } = {}) {
-  let last;
-  for (let attempt = 0; attempt <= retries; attempt += 1) {
-    try {
-      return await fetchOnce(url, { json: json2, timeout });
-    } catch (error2) {
-      last = error2;
-      if (!error2.retryable || attempt === retries) break;
-      await wait(400 * 3 ** attempt);
-    }
-  }
-  throw last;
-}
-async function fetchMirrors(urls, { json: json2 = false, timeout = 15e3, mirrorRetries = 0 } = {}) {
-  const failures = [];
-  for (const [index4, url] of urls.entries()) {
-    try {
-      return { body: await fetchPublic(url, { json: json2, retries: index4 === 0 ? 1 : mirrorRetries, timeout }), url, mirror: index4 };
-    } catch (error3) {
-      failures.push(`${new URL(url).hostname}: ${error3.message}`);
-      if (error3.status === 404 && index4 === urls.length - 1) break;
-    }
-  }
-  const error2 = new Error(`All sources failed \u2014 ${failures.join("; ")}`);
-  error2.failures = failures;
-  throw error2;
-}
-var ENTITIES = {
-  amp: "&",
-  lt: "<",
-  gt: ">",
-  quot: '"',
-  apos: "'",
-  nbsp: " ",
-  ndash: "\u2013",
-  mdash: "\u2014",
-  hellip: "\u2026",
-  lsquo: "\u2018",
-  rsquo: "\u2019",
-  ldquo: "\u201C",
-  rdquo: "\u201D",
-  bull: "\u2022",
-  copy: "\xA9",
-  middot: "\xB7",
-  ensp: " ",
-  emsp: " ",
-  thinsp: " ",
-  aacute: "\xE1",
-  eacute: "\xE9",
-  iacute: "\xED",
-  oacute: "\xF3",
-  uacute: "\xFA",
-  ntilde: "\xF1",
-  Ntilde: "\xD1"
-};
-function decodeHtml(value) {
-  return String(value ?? "").replace(/&(#x[\da-f]+|#\d+|[a-z][a-z\d]+);/gi, (whole, key3) => {
-    if (key3.startsWith("#")) {
-      const point = key3[1].toLowerCase() === "x" ? parseInt(key3.slice(2), 16) : Number(key3.slice(1));
-      return point > 0 && point <= 1114111 ? String.fromCodePoint(point) : whole;
-    }
-    return ENTITIES[key3] ?? whole;
-  });
-}
-function plainText(html) {
-  return decodeHtml(String(html ?? "").replace(/<!--[^]*?-->/g, "").replace(/<(script|style|svg|nav|noscript)\b[^>]*>[^]*?<\/\1\s*>/gi, "").replace(/<br\b[^>]*>/gi, "\n").replace(/<\/(p|div|h[1-6]|li|dt|dd|blockquote|tr|section|article)>/gi, "\n").replace(/<(span|a|sup)\b[^>]*class=["'][^"']*\b(ref|pts|pagenum|pagebreak|anchor|seg)\b[^"']*["'][^>]*>[^<]*<\/\1>/gi, " ").replace(/<[^>]*>/g, "")).replace(/[ \t]+/g, " ").replace(/ *\n */g, "\n").replace(/\n{3,}/g, "\n\n").trim();
-}
-function shortText(value, limit = 1600) {
-  const text = plainText(value);
-  return text.length > limit ? `${text.slice(0, limit)}\u2026 [excerpt shortened]` : text;
-}
-
-// src/ati-excerpt.mjs
-function atiVerseExcerpt(html) {
-  const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
-  const fail = () => {
-    throw Error("The reviewed ATI verse extraction structure changed. No excerpt was returned.");
-  };
-  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) fail();
-  const start = html.indexOf(begin) + begin.length, stop = html.indexOf(end);
-  if (stop <= start) fail();
-  const chunk = html.slice(start, stop), opens = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])freeverse\1[^>]*>/gi)];
-  if (opens.length !== 1) fail();
-  const from = opens[0].index + opens[0][0].length, to = chunk.indexOf("</div>", from);
-  if (to < from) fail();
-  const verse2 = chunk.slice(from, to);
-  if (/<\/?div\b|<script\b|<style\b/i.test(verse2)) fail();
-  const text = plainText(verse2);
-  if (!text) fail();
-  return text;
-}
-function atiChapterProse(html) {
-  const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
-  const fail = () => {
-    throw Error("The reviewed ATI prose extraction structure changed. No excerpt was returned.");
-  };
-  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) fail();
-  const from = html.indexOf(begin) + begin.length, to = html.indexOf(end);
-  if (to <= from) fail();
-  const chunk = html.slice(from, to), opens = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
-  if (opens.length !== 1) fail();
-  const start = opens[0].index + opens[0][0].length, notes = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])notes\1[^>]*>/gi)];
-  if (notes.length !== 1) fail();
-  const stop = notes[0].index;
-  if (stop <= start || chunk.indexOf("</div>", start) < stop) fail();
-  const body = chunk.slice(start, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
-  if (paragraphs.length !== 1 || /<\/?(?:div|script|style|dl|ol|ul)\b/i.test(body) || body.replace(paragraphs[0][0], "").trim()) fail();
-  const text = plainText(paragraphs[0][1].replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi, ""));
-  if (!text) fail();
-  return text;
-}
-function atiPartialExcerpt(html, extractor) {
-  if (extractor === "ati-freeverse-v1") return atiVerseExcerpt(html);
-  if (extractor === "ati-chapter-prose-v1") return atiChapterProse(html);
-  throw Error("Unsupported ATI partial extractor. No excerpt was returned.");
-}
 
 // src/cache.mjs
 var num = (value, fallback) => Number.isFinite(Number(value)) && String(value ?? "").trim() !== "" ? Number(value) : fallback;

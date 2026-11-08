@@ -102,7 +102,7 @@ Every tool only reads; none can change anything. The full technical list is in [
 
 | Part of the canon | What it is | Texts | English linked |
 |---|---|---:|---|
-| **Sutta Piṭaka** | Discourses of the Buddha and his disciples: the long, middle-length, connected and numbered collections (DN, MN, SN, AN) and the Khuddaka Nikāya (Dhammapada, Sutta Nipāta, Theragāthā, Jātaka and more) | 6,999 | 1,819 texts (DN, MN, SN, AN, Dhp, Ud, Iti, Snp, Thag, Thig, Khp) |
+| **Sutta Piṭaka** | Discourses of the Buddha and his disciples: the long, middle-length, connected and numbered collections (DN, MN, SN, AN) and the Khuddaka Nikāya (Dhammapada, Sutta Nipāta, Theragāthā, Jātaka and more) | 6,999 | 1,857 texts (DN, MN, SN, AN, Dhp, Ud, Iti, Snp, Thag, Thig, Khp) |
 | **Vinaya Piṭaka** | Monastic discipline: the rules for monks and nuns and their origin stories, the Khandhakas and the Parivāra | 443 | not yet |
 | **Abhidhamma Piṭaka** | Systematic analysis of mind and matter: seven books from the Dhammasaṅgaṇī to the Paṭṭhāna | 1,102 | 4 texts (parts of the Dhammasaṅgaṇī and Vibhaṅga) |
 | **Total** | | **8,544** | |
@@ -147,7 +147,7 @@ Considered and **not used** (with reasons), and the sources **planned** next, ar
 - **Citation metadata cross-check.** The existing audit compares 1,190 Access to Insight canonical page entries and their PTS hints with our mapping. This checks citation metadata, not every English page’s completeness or individual discourse scope; source-level reviews remain necessary.
 - **Standalone browser reading.** The bundled HTTP server includes a responsive scripture and study reader, without an AI account. See [how to run it and its source/storage boundaries](docs/web-app.md). Phone and remote access require a reachable host; the documentation site is separate.
 - **Shared publisher pages stay separate.** Twelve reviewed ATI pages (eight compilations and four condensed pages) concern 110 actual indexed source records. Some are original Pāli range records, not separate individually translated passages. Explicit consent, complete notices and page-level quotation results preserve that distinction. See [the range review](docs/data/condensed-primary-ranges.md) [Mother/Protectors review](docs/data/family-protectors-review.md) and [seven-page attribution audit](docs/data/iti-range-binding-audit.md).
-- **Translations are linked only with strong evidence.** A translation is attached only when its title, number or PTS page matches unambiguously, or an individually reviewed story correspondence establishes its scope. We prefer no link to a wrong link. The current index has 2,566 ordinary link records, including 63 content-based placements. Their recorded evidence and automatic audit are not a complete semantic review of every source page. Unsafe bindings discovered during review are withheld; see [the latest source and boundary review](docs/data/priority-prose-and-dasabala-review.md).
+- **Translations are linked only with strong evidence.** A translation is attached only when its title, number or PTS page matches unambiguously, or an individually reviewed story correspondence establishes its scope. We prefer no link to a wrong link. The current index has 2,562 ordinary link records, including 63 content-based placements. Their recorded evidence and automatic audit are not a complete semantic review of every source page. Unsafe bindings discovered during review are withheld; see [the latest source and boundary review](docs/data/priority-prose-and-dasabala-review.md).
 - **Independent review.** A separate reviewer checked about 110 citations and every PTS lookup in its sample. The problems it found were fixed and are now permanent tests.
 - **Outage drills.** We simulate each website going down and confirm that the backups take over and the Pāli still works.
 
@@ -276,7 +276,7 @@ You do not need Pāli letters. Type the way your keyboard lets you, and every an
 
 ## What it does not do yet
 
-- Whole-unit English is linked for 1,865 texts, about a fifth of the canon. Nine separately scoped excerpts require explicit partial-source consent. The Vinaya, nearly all of the Abhidhamma and much of the Khuddaka Nikāya have no English yet.
+- Whole-unit English is linked for 1,861 texts, about a fifth of the canon. Fourteen separately scoped excerpts require explicit partial-source consent. The Vinaya, nearly all of the Abhidhamma and much of the Khuddaka Nikāya have no English yet.
 - The commentaries (Aṭṭhakathā) and sub-commentaries (Ṭīkā) are not included yet.
 - Other scripts are transliterated by this server from the Roman edition, not taken from printed script editions. Lao and Lanna have not yet been checked against a printed edition or by native readers.
 - Translations and the dictionary need internet; the Pāli does not.
@@ -334,4 +334,6 @@ With gratitude to the Vipassana Research Institute; Ṭhānissaro Bhikkhu and Me
 
 *Sabbadānaṃ dhammadānaṃ jināti*: the gift of the Dhamma surpasses all gifts (Dhp 354).
 
-The [Dasabala follow-up](docs/data/dasabala-commentary-and-subparagraph.md) restores SN12.21’s own short commentary and provides SN12.22’s concluding exhortation as an exact, consent-scoped substring. Nine verse excerpts plus this prose excerpt are ten partial sources; none adds whole-unit English coverage.
+The [Dasabala follow-up](docs/data/dasabala-commentary-and-subparagraph.md) restores SN12.21’s own short commentary and provides SN12.22’s concluding exhortation as an exact, consent-scoped substring. At D209, nine verse excerpts plus this prose excerpt made ten partial sources; none adds whole-unit English coverage.
+
+The [four-page Walshe review](docs/data/walshe-excerpt-batch.md) replaces four whole-discourse claims with precise, consent-scoped selections. There are now fourteen partial sources and eight partial-only units. Original publisher numbering, complete BPS notices and unchanged Pāli remain available.

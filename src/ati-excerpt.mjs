@@ -32,5 +32,47 @@ export function atiChapterProse(html) {
 export function atiPartialExcerpt(html,extractor) {
   if(extractor==='ati-freeverse-v1')return atiVerseExcerpt(html);
   if(extractor==='ati-chapter-prose-v1')return atiChapterProse(html);
+  if(extractor==='ati-chapter-p2-of2-v1')return chapterParagraph(html,2,2);
+  if(extractor==='ati-chapter-p11-of11-v1')return chapterParagraph(html,11,11,'Seeing the Dhamma');
+  if(extractor==='ati-chapter-p1-of4-v1')return chapterParagraph(html,4,1);
+  if(extractor==='ati-excerpt-verse-pre-v1')return excerptVersePre(html);
   throw Error('Unsupported ATI partial extractor. No excerpt was returned.');
+}
+
+// Reviewed finite source structures, never caller-supplied HTML selectors.
+export const ATI_SEGMENT_EXTRACTORS = Object.freeze([
+  'ati-freeverse-v1', 'ati-chapter-p2-of2-v1', 'ati-chapter-p11-of11-v1',
+  'ati-chapter-p1-of4-v1', 'ati-excerpt-verse-pre-v1',
+]);
+function copyrightedChunk(html) {
+  const begin='<!-- BEGIN COPYRIGHTED TEXT CHUNK -->',end='<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->';
+  if(typeof html!=='string'||html.split(begin).length!==2||html.split(end).length!==2)throw Error('The reviewed ATI selection extraction structure changed. No excerpt was returned.');
+  const start=html.indexOf(begin)+begin.length,stop=html.indexOf(end);
+  if(stop<=start)throw Error('The reviewed ATI selection extraction structure changed. No excerpt was returned.');
+  return html.slice(start,stop);
+}
+function chapterParagraph(html,total,selected,heading) {
+  const fail=()=>{throw Error('The reviewed ATI paragraph selection extraction structure changed. No excerpt was returned.');};
+  const chunk=copyrightedChunk(html),chapters=[...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)],notes=[...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])notes\1[^>]*>/gi)];
+  if(chapters.length!==1||notes.length!==1)fail();
+  const start=chapters[0].index+chapters[0][0].length,stop=notes[0].index;
+  if(stop<=start||chunk.indexOf('</div>',start)<stop)fail();
+  const body=chunk.slice(start,stop),paragraphs=[...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
+  if(paragraphs.length!==total||/<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body))fail();
+  let remainder=body.replace(/<p\b[^>]*>[^]*?<\/p>/gi,'').trim();
+  if(heading){if(remainder!==`<h4>${heading}</h4>`)fail();}else if(remainder)fail();
+  const chosen=paragraphs[selected-1][1];
+  if(/<\/?p\b/i.test(chosen))fail();
+  const text=plainText(chosen.replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi,''));
+  if(!text)fail();return text;
+}
+function excerptVersePre(html) {
+  const fail=()=>{throw Error('The reviewed ATI preformatted verse extraction structure changed. No excerpt was returned.');};
+  const chunk=copyrightedChunk(html),opens=[...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])excerpt verse\1[^>]*>/gi)];
+  const chapters=[...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
+  if(opens.length!==1||chapters.length!==1||chapters[0].index>=opens[0].index||[...chunk.matchAll(/<pre\b/gi)].length!==1)fail();
+  const start=opens[0].index+opens[0][0].length,stop=chunk.indexOf('</div>',start);if(stop<start)fail();
+  const body=chunk.slice(start,stop),pres=[...body.matchAll(/<pre\b[^>]*>([^]*?)<\/pre>/gi)];
+  if(pres.length!==1||body.replace(pres[0][0],'').trim()||/<[^>]*>/.test(pres[0][1]))fail();
+  const text=plainText(pres[0][1]);if(!text)fail();return text;
 }

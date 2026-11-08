@@ -50,7 +50,7 @@ export const LICENSE_LABELS = {
     name: 'Buddhist Publication Society ©1985 free-distribution notice (not Creative Commons)',
     terms: 'copies free of charge, reprints of no more than 50 copies, source and derivatives identified, complete licence text retained; otherwise all rights reserved; see the pinned Walshe page notice',
     url: null,
-    used_by: 'Access to Insight reviewed SN12.22 Walshe prose excerpt',
+    used_by: 'Access to Insight reviewed Walshe excerpts',
   },
   ATI_DEPRECATED: {
     name: 'Access to Insight free-distribution licence (older, not Creative Commons)',
@@ -125,6 +125,7 @@ export function buildIndex() {
         translation_id: t.translation_id,
         license: t.license || (t.source === 'dhammatalks.org' ? 'CC BY-NC 4.0' : null),
         match: t.match,
+        ...(t.mapping_note ? { mapping_note: t.mapping_note } : {}),
         ...(t.translation_scope ? { translation_scope: exportScope(t.translation_scope), whole_unit_coverage: false } : {}),
       })).map((e) => ({ ...e, license_name: licenseName(e.license) })),
     };
