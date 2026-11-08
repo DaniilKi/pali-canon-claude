@@ -3,6 +3,7 @@ import { scopeDescriptor, validateEnglishPage } from './translation-policy.mjs';
 import { planCatalog, planDay, daySignature, cleanProgress, planWindow, validatePlanPage } from './reading-plans.mjs';
 import { MAX_IMPORT_BYTES, parseBookmarks, bookmarkMerge } from './bookmark-import.mjs';
 import { validateDaily } from './daily-reading.mjs';
+import { validatePaliQuote } from './quote-check.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
@@ -380,6 +381,32 @@ async function plans(args, token) {
   if (data.guide) { const guide = el('section', undefined, 'provenance'); guide.append(el('h3', 'Study guide · links only'), el('p', data.guide.cite), el('p', [data.guide.copyright, data.guide.license].filter(Boolean).join(' · ')), el('p', data.guide.note), external('Read the original study guide', data.guide.url)); view.append(guide); if (data.omitted?.length) { const omitted = el('details'); omitted.append(el('summary', 'Unplaced guide links (' + data.omitted.length + ')')); for (const item of data.omitted) omitted.append(el('p', item.reason), external('Original unplaced source link', item.url)); view.append(omitted); } }
   provenance({ source: data.source.pali });
 }
+function quoteChecker(token) {
+  heading('CHECK AGAINST SOURCE TEXT', 'Check a Pāli quotation');
+  view.append(el('p', 'Pāli only · Roman or a supported Pāli script · up to 2,000 characters and 120 comparison words. English checking is not offered here; no translations are fetched.', 'notice'), el('p', 'Your quotation is sent to this server for matching, but is not put in the URL, browser storage or page title. Hosting infrastructure may keep request logs. A match does not establish authorship or exact spelling.', 'muted'));
+  const form = el('form'), label = el('label', 'Pāli quotation'), input = el('textarea'), submit = el('button', 'Check bundled Pāli'), result = el('section');
+  input.id = 'quote-input'; input.className = 'note-field'; input.minLength = 8; input.maxLength = 2000; input.required = true; input.spellcheck = false; label.htmlFor = input.id; submit.type = 'submit'; form.append(label, input, submit); result.id = 'quote-result'; result.tabIndex = -1; result.setAttribute('aria-label', 'Quotation comparison result'); view.append(form, result);
+  let generation = 0;
+  form.addEventListener('submit', async event => {
+    event.preventDefault(); const request = ++generation, quote = input.value.trim(); result.replaceChildren(el('p', 'Comparing with bundled canonical Pāli…')); result.setAttribute('aria-busy', 'true'); submit.disabled = true;
+    try {
+      const data = await tool('verify_quote', { text: quote, language: 'pali', limit: 5 }); if (token !== epoch || request !== generation) return;
+      validatePaliQuote(data, quote);
+      const labels = { found: 'Matching wording found', close_paraphrase: 'Similar wording found', not_found_in_scope: 'Not found in the searched scope' };
+      result.replaceChildren(el('h3', labels[data.verdict]), el('p', 'Submitted quotation', 'muted'), el('p', quote, 'translation'), el('p', data.explanation, 'notice'), el('p', data.scope.searched), el('p', data.comparison.note), el('p', data.guidance, 'muted')); notes(data, result);
+      if (data.citation_note) result.append(el('p', data.citation_note, 'notice'));
+      if (data.verdict === 'not_found_in_scope' && data.matches.length) result.append(el('h4', 'Lower-scoring candidates · not verified matches'));
+      for (const match of data.matches) {
+        const card = el('article', undefined, 'word-card'); card.append(el('h4', match.citation + (match.title ? ' · ' + match.title : '')), el('p', match.matched_text, 'passage'), el('p', 'Source span: ' + match.source_span.first_segment_ref + ' to ' + match.source_span.last_segment_ref, 'muted'));
+        if (match.matched_text_truncated) card.append(el('p', 'Excerpt shortened by the source tool. Open the source for the complete context.', 'notice'));
+        card.append(el('p', data.comparison.method === 'literal_source_substring' ? 'Unchanged source substring located; source correctness and authorship are not established.' : 'Normalized similarity: ' + match.similarity + ' (0–1), not a probability of truth or authorship.', 'muted'));
+        card.querySelector('.passage').lang = 'pi'; notes(match, card); card.append(link('Open source at match start · ' + match.citation, route('read', { uid: match.text_id, offset: match.read_with.offset, ref: match.segment_ref }), 'button')); result.append(card);
+      }
+      result.append(el('p', data.thresholds.measure, 'muted')); provenance({ edition: 'Bundled canonical Pāli comparison', attribution: data.scope.attribution, license: data.scope.terms }, result); result.focus({ preventScroll: true }); result.scrollIntoView({ block: 'start' });
+    } catch (error) { if (token !== epoch || request !== generation) return; result.replaceChildren(el('h3', 'Unable to check this quotation'), el('p', error.message, 'notice')); result.focus({ preventScroll: true }); }
+    finally { if (token === epoch && request === generation) { submit.disabled = false; result.removeAttribute('aria-busy'); } }
+  });
+}
 function bookmarkImporter() {
   const token = epoch, section = el('section'); section.setAttribute('aria-label', 'Restore bookmark export'); const label = el('label', 'Restore bookmarks and notes from a JSON export'), input = el('input'); input.type = 'file'; input.accept = '.json,application/json'; label.append(input); section.append(label, el('p', 'Files stay on this device. Preview first; existing bookmarks and notes are kept. References are checked against the source only when opened. Maximum file size: 16 MiB.', 'muted'));
   const preview = el('div'); preview.className = 'import-preview'; preview.setAttribute('aria-live', 'polite'); section.append(preview); let generation = 0;
@@ -421,7 +448,7 @@ async function render() {
   if (location.hash === '#content' && view.childElementCount) { $('content').focus(); return; }
   const token = ++epoch; ++studyEpoch; closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
   const [page, query = ''] = location.hash.slice(1).split('?'), args = new URLSearchParams(query);
-  try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'plans') await plans(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
+  try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
     if (token !== epoch) return; status.textContent = storageOK ? '' : 'Browser storage is unavailable; export your personal data before closing this tab.'; focusHeading();
   } catch (error) { if (token !== epoch) return; view.replaceChildren(); heading('UNABLE TO OPEN', 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); status.textContent = 'The request failed.'; }
 }

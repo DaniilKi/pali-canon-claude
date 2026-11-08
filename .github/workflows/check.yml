@@ -117,6 +117,10 @@ jobs:
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-compact-check.py --report standalone-compact.report.json
       - name: Audit compact reading disclosures in both themes
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-compact-check.py --a11y --report standalone-compact-a11y.report.json
+      - name: Check Pāli quotation matching and exact source links
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-quote-check.py --report standalone-quote.report.json
+      - name: Audit quotation checker in both themes
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-quote-check.py --a11y --report standalone-quote-a11y.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -135,6 +139,8 @@ jobs:
             standalone-daily-a11y.report.json
             standalone-compact.report.json
             standalone-compact-a11y.report.json
+            standalone-quote.report.json
+            standalone-quote-a11y.report.json
           if-no-files-found: warn
   check:
     name: Node ${{ matrix.node }} / ${{ matrix.os }}

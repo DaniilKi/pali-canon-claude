@@ -1,0 +1,156 @@
+{
+  "passed": 36,
+  "outside_source_tree": true,
+  "checks": [
+    {
+      "width": 320,
+      "check": "keyboard-labelled P\u0101li-only form is discoverable and fits the viewport"
+    },
+    {
+      "width": 320,
+      "check": "actual source wording, repeated-source caution and terms are retained without storing the quotation"
+    },
+    {
+      "width": 320,
+      "check": "candidate reading link opens the exact canonical match start"
+    },
+    {
+      "width": 320,
+      "check": "native P\u0101li input retains engine conversion labels and Roman source evidence"
+    },
+    {
+      "width": 320,
+      "check": "negative result remains limited to canonical texts searched and never claims a fake quotation"
+    },
+    {
+      "width": 320,
+      "check": "engine word limit is enforced without an invented verdict and form remains usable"
+    },
+    {
+      "width": 320,
+      "check": "missing scope metadata fails closed without rendering a verdict or match"
+    },
+    {
+      "width": 320,
+      "check": "untrusted result strings stay inert text under normal production CSP"
+    },
+    {
+      "width": 320,
+      "check": "late comparison cannot replace newer navigation and no live English is requested"
+    },
+    {
+      "width": 390,
+      "check": "keyboard-labelled P\u0101li-only form is discoverable and fits the viewport"
+    },
+    {
+      "width": 390,
+      "check": "actual source wording, repeated-source caution and terms are retained without storing the quotation"
+    },
+    {
+      "width": 390,
+      "check": "candidate reading link opens the exact canonical match start"
+    },
+    {
+      "width": 390,
+      "check": "native P\u0101li input retains engine conversion labels and Roman source evidence"
+    },
+    {
+      "width": 390,
+      "check": "negative result remains limited to canonical texts searched and never claims a fake quotation"
+    },
+    {
+      "width": 390,
+      "check": "engine word limit is enforced without an invented verdict and form remains usable"
+    },
+    {
+      "width": 390,
+      "check": "missing scope metadata fails closed without rendering a verdict or match"
+    },
+    {
+      "width": 390,
+      "check": "untrusted result strings stay inert text under normal production CSP"
+    },
+    {
+      "width": 390,
+      "check": "late comparison cannot replace newer navigation and no live English is requested"
+    },
+    {
+      "width": 768,
+      "check": "keyboard-labelled P\u0101li-only form is discoverable and fits the viewport"
+    },
+    {
+      "width": 768,
+      "check": "actual source wording, repeated-source caution and terms are retained without storing the quotation"
+    },
+    {
+      "width": 768,
+      "check": "candidate reading link opens the exact canonical match start"
+    },
+    {
+      "width": 768,
+      "check": "native P\u0101li input retains engine conversion labels and Roman source evidence"
+    },
+    {
+      "width": 768,
+      "check": "negative result remains limited to canonical texts searched and never claims a fake quotation"
+    },
+    {
+      "width": 768,
+      "check": "engine word limit is enforced without an invented verdict and form remains usable"
+    },
+    {
+      "width": 768,
+      "check": "missing scope metadata fails closed without rendering a verdict or match"
+    },
+    {
+      "width": 768,
+      "check": "untrusted result strings stay inert text under normal production CSP"
+    },
+    {
+      "width": 768,
+      "check": "late comparison cannot replace newer navigation and no live English is requested"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard-labelled P\u0101li-only form is discoverable and fits the viewport"
+    },
+    {
+      "width": 1280,
+      "check": "actual source wording, repeated-source caution and terms are retained without storing the quotation"
+    },
+    {
+      "width": 1280,
+      "check": "candidate reading link opens the exact canonical match start"
+    },
+    {
+      "width": 1280,
+      "check": "native P\u0101li input retains engine conversion labels and Roman source evidence"
+    },
+    {
+      "width": 1280,
+      "check": "negative result remains limited to canonical texts searched and never claims a fake quotation"
+    },
+    {
+      "width": 1280,
+      "check": "engine word limit is enforced without an invented verdict and form remains usable"
+    },
+    {
+      "width": 1280,
+      "check": "missing scope metadata fails closed without rendering a verdict or match"
+    },
+    {
+      "width": 1280,
+      "check": "untrusted result strings stay inert text under normal production CSP"
+    },
+    {
+      "width": 1280,
+      "check": "late comparison cannot replace newer navigation and no live English is requested"
+    }
+  ],
+  "a11y": {
+    "scans": 0,
+    "violations": 0,
+    "results": []
+  },
+  "limits": "Real bundled P\u0101li matching; malformed, hostile and late responses are labelled controlled fixtures. English quote matching is intentionally not exposed. No human accessibility, physical-device or authorship certification. Only axe audit contexts bypass CSP."
+}

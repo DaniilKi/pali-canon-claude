@@ -654,6 +654,23 @@
     return data;
   }
 
+  // web/quote-check.mjs
+  function validatePaliQuote(data, quote) {
+    const fail = () => {
+      throw Error("The quotation result is incomplete or does not match this P\u0101li request. No verdict or substitute source was displayed.");
+    };
+    const text3 = (x) => typeof x === "string" && x.length > 0;
+    const integer = (x) => Number.isSafeInteger(x) && x >= 0;
+    if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text3(data.explanation) || !text3(data.guidance) || data.scope?.language !== "pali" || !text3(data.scope.searched) || !text3(data.scope.attribution) || !text3(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text3(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text3(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail();
+    if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text3(data.citation_note))) fail();
+    for (const m of data.matches) {
+      const command = m.read_with, span = m.source_span;
+      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text3(m.citation) || !text3(m.matched_text) || !text3(m.edition) || !text3(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command?.tool !== "get_text" || command.uid !== m.text_id || !integer(command.offset) || !integer(command.limit) || command.limit < 1 || command.limit > 200 || span?.offset !== command.offset || span.first_segment_ref !== m.segment_ref || !integer(span.end_offset) || span.end_offset <= span.offset || !text3(span.last_segment_ref)) fail();
+    }
+    if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail();
+    return data;
+  }
+
   // web/reader.js
   var $ = (id) => document.getElementById(id);
   var view = $("view");
@@ -1405,6 +1422,65 @@
     }
     provenance({ source: data.source.pali });
   }
+  function quoteChecker(token) {
+    heading("CHECK AGAINST SOURCE TEXT", "Check a P\u0101li quotation");
+    view.append(el("p", "P\u0101li only \xB7 Roman or a supported P\u0101li script \xB7 up to 2,000 characters and 120 comparison words. English checking is not offered here; no translations are fetched.", "notice"), el("p", "Your quotation is sent to this server for matching, but is not put in the URL, browser storage or page title. Hosting infrastructure may keep request logs. A match does not establish authorship or exact spelling.", "muted"));
+    const form = el("form"), label = el("label", "P\u0101li quotation"), input = el("textarea"), submit = el("button", "Check bundled P\u0101li"), result = el("section");
+    input.id = "quote-input";
+    input.className = "note-field";
+    input.minLength = 8;
+    input.maxLength = 2e3;
+    input.required = true;
+    input.spellcheck = false;
+    label.htmlFor = input.id;
+    submit.type = "submit";
+    form.append(label, input, submit);
+    result.id = "quote-result";
+    result.tabIndex = -1;
+    result.setAttribute("aria-label", "Quotation comparison result");
+    view.append(form, result);
+    let generation = 0;
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const request = ++generation, quote = input.value.trim();
+      result.replaceChildren(el("p", "Comparing with bundled canonical P\u0101li\u2026"));
+      result.setAttribute("aria-busy", "true");
+      submit.disabled = true;
+      try {
+        const data = await tool("verify_quote", { text: quote, language: "pali", limit: 5 });
+        if (token !== epoch || request !== generation) return;
+        validatePaliQuote(data, quote);
+        const labels = { found: "Matching wording found", close_paraphrase: "Similar wording found", not_found_in_scope: "Not found in the searched scope" };
+        result.replaceChildren(el("h3", labels[data.verdict]), el("p", "Submitted quotation", "muted"), el("p", quote, "translation"), el("p", data.explanation, "notice"), el("p", data.scope.searched), el("p", data.comparison.note), el("p", data.guidance, "muted"));
+        notes(data, result);
+        if (data.citation_note) result.append(el("p", data.citation_note, "notice"));
+        if (data.verdict === "not_found_in_scope" && data.matches.length) result.append(el("h4", "Lower-scoring candidates \xB7 not verified matches"));
+        for (const match of data.matches) {
+          const card = el("article", void 0, "word-card");
+          card.append(el("h4", match.citation + (match.title ? " \xB7 " + match.title : "")), el("p", match.matched_text, "passage"), el("p", "Source span: " + match.source_span.first_segment_ref + " to " + match.source_span.last_segment_ref, "muted"));
+          if (match.matched_text_truncated) card.append(el("p", "Excerpt shortened by the source tool. Open the source for the complete context.", "notice"));
+          card.append(el("p", data.comparison.method === "literal_source_substring" ? "Unchanged source substring located; source correctness and authorship are not established." : "Normalized similarity: " + match.similarity + " (0\u20131), not a probability of truth or authorship.", "muted"));
+          card.querySelector(".passage").lang = "pi";
+          notes(match, card);
+          card.append(link("Open source at match start \xB7 " + match.citation, route("read", { uid: match.text_id, offset: match.read_with.offset, ref: match.segment_ref }), "button"));
+          result.append(card);
+        }
+        result.append(el("p", data.thresholds.measure, "muted"));
+        provenance({ edition: "Bundled canonical P\u0101li comparison", attribution: data.scope.attribution, license: data.scope.terms }, result);
+        result.focus({ preventScroll: true });
+        result.scrollIntoView({ block: "start" });
+      } catch (error) {
+        if (token !== epoch || request !== generation) return;
+        result.replaceChildren(el("h3", "Unable to check this quotation"), el("p", error.message, "notice"));
+        result.focus({ preventScroll: true });
+      } finally {
+        if (token === epoch && request === generation) {
+          submit.disabled = false;
+          result.removeAttribute("aria-busy");
+        }
+      }
+    });
+  }
   function bookmarkImporter() {
     const token = epoch, section = el("section");
     section.setAttribute("aria-label", "Restore bookmark export");
@@ -1517,6 +1593,7 @@
       else if (page === "search") await search(args, token);
       else if (page === "glossary") await dictionary(args, token);
       else if (page === "daily") await daily(args, token);
+      else if (page === "verify") quoteChecker(token);
       else if (page === "plans") await plans(args, token);
       else if (page === "saved") saved();
       else if (page === "about") about();

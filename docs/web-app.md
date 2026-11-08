@@ -2,7 +2,7 @@
 
 A standalone, responsive reader is available at the HTTP server's root URL. It does not require an AI account or the ChatGPT widget. This is the first complete reading slice, not feature parity with every tool in an AI client.
 
-The reader includes the combined source-aware interface, study tools, reading plans, local restore, daily reading and compact phone layout, based on corpus `7b04173` and reader `5d16478`. See the [dev integration checkpoint](evidence/web-reader/DEV_INTEGRATION.md) for branch/gate verification. Older feature receipts retain their historical scope; they are not the current branch-status authority. A Git integration does not deploy a public host.
+The reader includes the combined source-aware interface, study tools, reading plans, local restore, daily reading and compact phone layout, based on corpus `7b04173` and integrated reader `6e44c1c`, with the Pāli quotation checker described in [its acceptance receipt](evidence/web-reader/QUOTE_CHECK.md). See the [dev integration checkpoint](evidence/web-reader/DEV_INTEGRATION.md) for branch/gate verification. Older feature receipts retain their historical scope; they are not the current branch-status authority. A Git integration does not deploy a public host.
 
 ## Run it
 
@@ -32,11 +32,12 @@ The npm package and container include `server/web/`. The HTML, stylesheet and br
 - Look up English or Pāli terms in the bundled glossary, including supported native-script input. Every result identifies its DPD or curated-list source; glosses are not passage translations.
 - Open **Study words** on a body segment in a canonical text, complete root book or later work. See the bundled DPD analyses, alternative parses, grammar, computed split suggestions and unknown forms. Commentary analysis is not supported by the current backend; the app does not substitute root-text analysis.
 - Open **Related texts** for canonical selections. Shared-word matching and commentary citations are labelled separately with their evidence. Reading links retain the emitted source segment or exact commentary reference. External parallels are a link only.
+- Open **Check quote** to compare a Pāli quotation with the whole bundled canonical Tipiṭaka using `verify_quote`. Roman and supported native Pāli input are accepted; English verification is not exposed in this slice. Results retain normalization, ties, scope and source terms. Open exact match starts to inspect context. A match is not proof of authorship, verbatim wording or correct spelling; a negative result concerns only the searched corpus.
 - Copy a reading link, use browser back/forward, and navigate with a keyboard.
 
 ## Storage and source boundaries
 
-Personal preferences, the last reading link and up to 500 saved references/notes remain in this browser's local storage. Scripture and English bodies are not downloaded into an offline web library. Data is not synced between devices, and clearing browser storage removes it. JSON export is a backup; import and account sync are not implemented. Storage failures are reported without preventing reading. Source revisions are retained on bookmarks, and a changed revision is flagged on reopening; a bookmark is not a frozen scripture copy.
+Personal preferences, the last reading link and up to 500 saved references/notes remain in this browser's local storage. Scripture and English bodies are not downloaded into an offline web library. Data is not synced between devices, and clearing browser storage removes it. JSON export is a backup; previewed local bookmark restore is supported, while account sync is not implemented. Storage failures are reported without preventing reading. Source revisions are retained on bookmarks, and a changed revision is flagged on reopening; a bookmark is not a frozen scripture copy.
 
 Canonical Pāli works **without upstream source access on the server**. That is different from the web app working without access to its server: this version has no service worker/offline browser mode. English needs an available approved live provider. All source terms and alignment/abbreviation cautions continue to apply. No SuttaCentral source is imported or fetched.
 
@@ -57,7 +58,7 @@ The useful patterns from established scripture readers are calm typography, visi
 
 Next priorities, in order:
 
-1. Extend the same UI to quotation verification and additional study tools. The glossary, contextual DPD word study, related-text evidence and supplementary catalogues/search/readers are now implemented. Keep canonical status and uncertain mappings visible.
+1. Extend the same UI to additional study tools. Pāli quotation checking, the glossary, contextual DPD word study, related-text evidence and supplementary catalogues/search/readers are now implemented. Keep canonical status and uncertain mappings visible.
 2. Improve accessible translation comparison, exact source links and reading-position management. Test in Safari and Firefox, with screen readers and native-script readers, on physical iOS/Android devices.
 3. Add optional passage highlighting and reading-progress import. Bookmark/notes restore now has bounded schema validation, preview and an additive merge. Personal reflections must never be labelled scripture.
 4. Design explicitly user-requested, versioned offline packs only after source-specific rights/storage review. Don't silently cache live translations or claim whole-corpus English coverage.
@@ -133,3 +134,27 @@ On narrow screens, **Find a passage** opens the citation/search controls and col
 Disclosure state follows the responsive breakpoint and is not stored as a personal preference. When a focused control is collapsed by a breakpoint change, focus moves to its visible summary. Resizing does not recreate the source-review pane or reset existing per-view scope consent. Exact deep-linked passages retain their position. Continue-reading links appear away from the current reading, avoiding a redundant current-page action above the text.
 
 Browser tab titles identify the current source/view; search uses a generic title and personal notes are never put into a title. On two measured default-font phone viewports, the first passage moved from below the viewport into view; this is not a universal fold guarantee for all devices, fonts, titles or text-size choices. See [measurements and acceptance](evidence/web-reader/COMPACT_READING.md).
+
+## Pāli quotation checker
+
+**Check quote** uses the existing `verify_quote` engine with explicit `language: pali`
+and five results. This bounded interface never chooses English mode, fetches translations,
+or adds a separate matching algorithm. It accepts up to 2,000 characters; the engine also
+checks its 120-comparison-word limit after native-script conversion. Native input is a
+Pāli transliteration assumption, not translation of a regional language.
+
+The request is sent to the same server, not stored in browser-local notes or a shareable
+URL. The page title stays generic. Infrastructure may retain request logs. Results show
+the submitted quotation, actual source wording, normalization or literal-source method,
+stock-passage ties, searched scope, terms and the engine's explanation. Similarity is
+not a probability of truth. Lower-scoring negative candidates are labelled accordingly.
+Source links retain the exact segment start and offset, with ordinary context/pagination;
+they do not claim every displayed segment belongs to the matching excerpt. No source
+words are rewritten or generated. `web/quote-check.mjs` rejects request/scope mismatches
+and invalid reading commands before any verdict or source excerpt is displayed.
+
+The UI currently has no English scope/version picker for this tool. Existing English
+reading and its explicit partial/shared consent remain separate and unchanged. Keyboard,
+small-screen, malformed-result, delayed-navigation and no-live-English regressions are in
+`scripts/web-reader-quote-check.py`; run normal, `--a11y` and extracted `--server-dir` modes.
+The automated accessibility scans are not a substitute for screen-reader or device review.
