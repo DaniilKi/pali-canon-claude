@@ -1470,6 +1470,44 @@
         }
       ],
       "reason": "Two complete source pages pinned as shared compilations only. AN1.21–40 mind pairs; indexed AN2.125–126/VRI126–127 voice and attention, not indexed AN2.123–124. Complete CC BY-NC notices preserved. One mis-scoped ordinary link removed. 55 queued pages, 8 with first-English screening possibilities; not approvals."
+    },
+    {
+      "decision": "D200",
+      "accepted_links": 0,
+      "newly_covered_units": [],
+      "activated_shared_pages": [
+        {
+          "owner_id": "an5.254",
+          "path": "tipitaka/an/an05/an05.254.than.html",
+          "subject_ids": [
+            "an5.254",
+            "an5.255",
+            "an5.256",
+            "an5.257-263",
+            "an5.264",
+            "an5.265-271"
+          ],
+          "presentation": "condensed",
+          "individual_alignment_verified": false,
+          "whole_unit_coverage": false
+        },
+        {
+          "owner_id": "sn56.102",
+          "path": "tipitaka/sn/sn56/sn56.102-113.than.html",
+          "subject_ids": [
+            "sn56.102",
+            "sn56.103",
+            "sn56.104",
+            "sn56.105-107",
+            "sn56.108-110",
+            "sn56.111-113"
+          ],
+          "presentation": "condensed",
+          "individual_alignment_verified": false,
+          "whole_unit_coverage": false
+        }
+      ],
+      "reason": "Two condensed CC BY-NC publisher pages with complete root/English/notice pins. Twelve primary source records include five original VRI peyyala ranges; not thirty newly translated individuals. No schema expansion, Pali reconstruction or lifted holds. Queue53 pages/6 possible first-English screening opportunities, not approvals."
     }
   ]
 }

@@ -38,12 +38,12 @@ for(const row of rows){
 test('Gratitude retains publisher numbering separate from indexed subjects and adjacent calm/insight',()=>{
  const row=rows.find(r=>r.owner_id==='an2.32');assert.deepEqual(row.text_ids,['an2.32','an2.33']);assert.deepEqual(row.root_units.map(r=>r.vri),['33','34']);assert.match(row.source_reference,/ATI AN 2.31–32; indexed AN 2.32–33/);assert.ok(!english.available(canon.resolve('an2.31').unit).some(l=>l.path===row.path));
 });
-test('all reviewed compilations keep distinct source identities and deduplicate each pair during mixed verification',async()=>{
+test('all reviewed shared pages keep distinct source identities and deduplicate each scope during mixed verification',async()=>{
  const all=JSON.parse(readFileSync('scripts/canon/reviewed_shared_pages.json')).links,d=canon.load();saved=d.translations;d.translations={...saved};
  const text='Synthetic fixture only. Amber lantern by the copper pool.',html=`<!-- BEGIN COPYRIGHTED TEXT CHUNK -->${text}<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) --><div id="F_provenance">Synthetic test-only notice, no licence grant.</div><div id="F_citation">Synthetic attribution.</div>`;
  for(const row of all){const link=structuredClone(saved[row.owner_id].find(l=>l.path===row.path));link.shared_scope.text_sha256=scopeHash(text);link.shared_scope.notice_sha256=scopeHash(english.atiNotice(html));d.translations[row.owner_id]=[link];}
  const fetched=[];globalThis.fetch=async url=>{fetched.push(String(url));return new Response(html);};
- const result=await verifyQuote({text:'Amber lantern by the copper pool',language:'english',texts:all.flatMap(r=>r.text_ids),translation_ids:all.map(r=>'ati:'+r.path),include_shared:true});
+ const result=await verifyQuote({text:'Amber lantern by the copper pool',language:'english',texts:all.flatMap(r=>r.text_ids),translation_ids:all.map(r=>'ati:'+r.path),include_shared:true,limit:10});
  assert.equal(result.verdict,'found');assert.equal(result.matches.length,all.length);assert.equal(result.scope.translations_checked.length,all.length);assert.equal(fetched.length,all.length);assert.equal(new Set(fetched).size,all.length);
  assert.deepEqual(new Set(result.matches.map(m=>m.translation_id)),new Set(all.map(r=>'ati:'+r.path)));
  for(const match of result.matches){const row=all.find(r=>'ati:'+r.path===match.translation_id);assert.equal(match.text_id,null);assert.deepEqual(match.unverified_requested_text_ids,row.text_ids);assert.equal(match.whole_unit_coverage,false);}

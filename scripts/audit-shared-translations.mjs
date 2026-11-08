@@ -85,7 +85,8 @@ try {
         const meta = await call('get_metadata', { uid: member });
         const scope = meta.english.find(l => l.translation_id === realId).translation_scope;
         assert.equal(meta.english_available, 0); assert.equal(meta.shared_english_available, 1);
-        assert.equal(scope.presentation, 'compilation'); assert.equal(scope.condensed, false);
+        assert.ok(['compilation','condensed'].includes(reviewed.shared_scope.presentation));
+        assert.equal(scope.presentation, reviewed.shared_scope.presentation); assert.equal(scope.condensed, reviewed.shared_scope.presentation === 'condensed');
         assert.equal(scope.whole_unit_coverage, false); assert.equal(scope.individual_alignment_verified, false);
         assert.deepEqual(scope.text_ids, members); assert.ok(scope.notice_sha256);
       }
@@ -161,7 +162,7 @@ try {
     reports.push({ mode, ...(reviewed ? {source_path:reviewed.path} : {}), requests, status: 'passed', synthetic_provider_only: true, real_declaration_metadata: mode.startsWith('reviewed_'), real_network_attempts: 0 });
     await close();
   }
-  const report = { status: 'passed', cases: reports, scope: 'Extracted-package synthetic shared-page contracts and real compilation metadata with simulated providers only. One page, explicit opt-in, no individual/whole-unit alignment, bounded pinned restart, eight input scripts, HTTP/widget and merged AJ metadata without any author-host request. Real compilation metadata/consent/widget refusal/source-drift checks contain no publisher text and make no author-host request.' };
+  const report = { status: 'passed', cases: reports, scope: 'Extracted-package synthetic shared-page contracts and real reviewed-page metadata with simulated providers only. One page, explicit opt-in, no individual/whole-unit alignment, bounded pinned restart, eight input scripts, HTTP/widget and merged AJ metadata without any author-host request. Real reviewed-page metadata/consent/widget refusal/source-drift checks contain no publisher text and make no author-host request.' };
   if (reportPath) await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n'); console.log(JSON.stringify(report));
 } catch (error) {
   if (reportPath) await writeFile(reportPath, JSON.stringify({ status: 'failed', error: error.message }, null, 2) + '\n'); throw error;
