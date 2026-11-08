@@ -582,6 +582,186 @@
           }
         ]
       }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.143x.olen.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "mn143"
+      ],
+      "reason": "Teaching/table and tears dialogue are followed only by death/rebirth and explicit ellipsis. Later deva visit, four verses, Buddha’s repeated report and Ananda identification are absent (root /18–/31). Early narrative is compressed; not a complete indexed discourse. Its element table also omits space and consciousness from the six-element teaching in root /13; the immaterial-sphere row is a different category. Preserve independent indexed alternatives; no automatic substitution or narrower scope activation.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/mn/mn.143x.olen.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "17886d5bb6fc38d6fb3d7e132bbd888b9d3a63b6311b8180d413c930b5921285",
+        "text_sha256": "f087735731e4f2fd6694bfb84dd6736b359898bdd2c3efa69e909fd8bcf1ce8a",
+        "notice_sha256": "c0c87a3f90630e3b51f439f591a07be74b61c9e0e7d24333177c064e1123ea79",
+        "method": "Complete frozen official ATI bodies, full notices and complete bundled VRI roots examined with independent review. Local ATI alternatives independently inspected; DT alternatives indexed only. Hashes of JSON values use compact UTF8 JSON; source_html_sha256 hashes raw HTML. No English source bodies bundled. No source freshness or every-token equivalence claim.",
+        "root_units": [
+          {
+            "id": "mn143",
+            "title": "Anāthapiṇḍikovādasuttaṃ",
+            "vri": "383–388",
+            "book": 10,
+            "start": 1246,
+            "end": 1286,
+            "root_blocks_sha256": "72a2bd9410846be1a8d33a577031c1dcb446c3c9e669fe6c4222de9066f76358"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.1.04.olen.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "snp1.4"
+      ],
+      "reason": "Contains verses76–80 and initial narrative/food offer, then an ellipsis. Omits refusal verses81–82, food disposal, conversion and ordination/attainment ending (/12–/17). Header76–82 does not establish body completeness. Editorial Buddha-replies label inside verse container prevents automatic activation under existing verse selector. Preserve independent indexed alternatives; no automatic substitution or narrower scope activation.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.1.04.olen.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "6cb8714f1326dcf159241faef6b28f632ed9e765256db441402aeefd2f478e61",
+        "text_sha256": "342698967720c12e4fd01815e474d3d6afc044ff459af9c083617a6e3b286ba4",
+        "notice_sha256": "002aefc38cac7d28b767c771ae59064143dad8b8bedfbc083eff06f6d38e2d5c",
+        "method": "Complete frozen official ATI bodies, full notices and complete bundled VRI roots examined with independent review. Local ATI alternatives independently inspected; DT alternatives indexed only. Hashes of JSON values use compact UTF8 JSON; source_html_sha256 hashes raw HTML. No English source bodies bundled. No source freshness or every-token equivalence claim.",
+        "root_units": [
+          {
+            "id": "snp1.4",
+            "title": "Kasibhāradvājasuttaṃ",
+            "vri": "76–82",
+            "book": 31,
+            "start": 249,
+            "end": 281,
+            "root_blocks_sha256": "b6a700f26da9d99e2590f1e1ad20523b26613f6b373ce50e922e7ffcf05d2231"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.017x.wlsh.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "sn12.17"
+      ],
+      "reason": "Opening residence/alms narrative, greetings and repeated requests for permission replaced by editorial introductory summary. Question recap abbreviated with editorial as-and-so-on instruction. Dependent-origination chain shortened by explicit cross-reference to a different discourse; no automatic linked-source completion. Refuge/ordination request, four-month probation/four-year offer, admission and full attainment conclusion replaced by a final editorial summary. Preserve independent indexed alternatives; no automatic substitution or narrower scope activation.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.017x.wlsh.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "456102786a1b35d5381aa5f9ea43c83a694fc5c64e06575fe00deaac17326be4",
+        "text_sha256": "bace265fc633d3985353b92518a822d5cf28f88b754a418334656ca68770c2bb",
+        "notice_sha256": "af0725ed4d9fa7a31008f4ed321d7cbf00a4e87974009f221287479ffcfcc00d",
+        "method": "Complete frozen official ATI bodies, full notices and complete bundled VRI roots examined with independent review. Local ATI alternatives independently inspected; DT alternatives indexed only. Hashes of JSON values use compact UTF8 JSON; source_html_sha256 hashes raw HTML. No English source bodies bundled. No source freshness or every-token equivalence claim.",
+        "root_units": [
+          {
+            "id": "sn12.17",
+            "book": 12,
+            "start": 109,
+            "end": 119,
+            "title": "Acelakassapasuttaṃ",
+            "vri": "17",
+            "root_blocks_sha256": "dcff50b32ba2ad53635d9c5431cc14f4ba0fec755ccd1f32a9ae998def29c501"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.023x.wlsh.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "sn12.23"
+      ],
+      "reason": "Rain/mountain-clefts/ponds/rivers/ocean simile entirely absent. Final simile-linked repeated conditional sequence absent. Publisher note1 sends readers elsewhere for the final part; link is not returned as this page’s translation. Preserve independent indexed alternatives; no automatic substitution or narrower scope activation.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.023x.wlsh.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "9e9c902d78d05a74c7d7c0b7ab96ca93758974fec5eee3325007a4d44644dc0a",
+        "text_sha256": "1ed92ea2817935b4746832fc43b747e9f4698890f038ccc32e43a93fb6c44661",
+        "notice_sha256": "1704f7fa9143261efef3bb1879d70dce63856792b39e0e3635a14ef24e4b0adc",
+        "method": "Complete frozen official ATI bodies, full notices and complete bundled VRI roots examined with independent review. Local ATI alternatives independently inspected; DT alternatives indexed only. Hashes of JSON values use compact UTF8 JSON; source_html_sha256 hashes raw HTML. No English source bodies bundled. No source freshness or every-token equivalence claim.",
+        "root_units": [
+          {
+            "id": "sn12.23",
+            "book": 12,
+            "start": 150,
+            "end": 159,
+            "title": "Upanisasuttaṃ",
+            "vri": "23",
+            "root_blocks_sha256": "4c18013510e51c6b88a40cb201e658d55d8a138f4cac28235bd5db0a69c8a116"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn22/sn22.084x.wlsh.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "sn22.84"
+      ],
+      "reason": "Residence/report/summoning narrative replaced by short editorial framing; the source framing is not a literal substitute for these source paragraphs. Buddha’s questions and answers about passion/nonpassion, aggregate change, impermanence and liberation omitted as catechizing summary. Preserve independent indexed alternatives; no automatic substitution or narrower scope activation.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn22/sn22.084x.wlsh.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "805a1a3cc7df9754e887d6049f016aa51d323a9dd7874e78898b6b2c26e66adc",
+        "text_sha256": "e95f578519c9cb41812eccb86a022017d718e62beb632629d78825945fb083d1",
+        "notice_sha256": "aa836ab929f96b5a571b9f43651b4466fbc7b73089f2b8ec71ca6341d0d26b5a",
+        "method": "Complete frozen official ATI bodies, full notices and complete bundled VRI roots examined with independent review. Local ATI alternatives independently inspected; DT alternatives indexed only. Hashes of JSON values use compact UTF8 JSON; source_html_sha256 hashes raw HTML. No English source bodies bundled. No source freshness or every-token equivalence claim.",
+        "root_units": [
+          {
+            "id": "sn22.84",
+            "book": 13,
+            "start": 519,
+            "end": 531,
+            "title": "Tissasuttaṃ",
+            "vri": "84",
+            "root_blocks_sha256": "2d89702f9134ae0cd54131ccd855ebfc4722b958df1d2fc14167d20a75eeb512"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn22/sn22.089x.wlsh.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "sn22.89"
+      ],
+      "reason": "Illness setting and Dasaka messenger exchanges largely compressed into editorial framing and selected dialogue; not complete source narrative. Repeated application of cloth simile explicitly abbreviated with editorial as-above instruction. Elders’ statement that questioning was not meant to trouble Khemaka and praise of his explanation omitted. Closing approval formula omitted although attainment outcome retained. Preserve independent indexed alternatives; no automatic substitution or narrower scope activation.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn22/sn22.089x.wlsh.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "7b5e9d0b993636922f1c826a2935a70a440f428b985f63bb1aaa7eb1f04512af",
+        "text_sha256": "51ca67f0f08f5debd10def266f28d6dd79b4b77eb1bee25104cdbf9b898fea3f",
+        "notice_sha256": "bf9f9187167c6bd5c25971fbeb0b38a31469b400c1d45a960fbaf7fc30b6bb3f",
+        "method": "Complete frozen official ATI bodies, full notices and complete bundled VRI roots examined with independent review. Local ATI alternatives independently inspected; DT alternatives indexed only. Hashes of JSON values use compact UTF8 JSON; source_html_sha256 hashes raw HTML. No English source bodies bundled. No source freshness or every-token equivalence claim.",
+        "root_units": [
+          {
+            "id": "sn22.89",
+            "book": 13,
+            "start": 592,
+            "end": 607,
+            "title": "Khemakasuttaṃ",
+            "vri": "89",
+            "root_blocks_sha256": "95fc1c1fbffc141c8f912b59ca872e6a3c9c97117ce6f26507ca48e4ea154de6"
+          }
+        ]
+      }
     }
   ]
 }

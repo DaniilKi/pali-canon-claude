@@ -49,7 +49,7 @@ export function scopeScreen(data=canon.load(),{review={rows:[]}}={}) {
     if(prior){
       // A snapshot annotation is never evidence that the current upstream remains unchanged.
       const book=data.canon.books?.[u?.book];
-      const current=review.vri_commit===data.canon.source.commit&&prior.link_metadata_sha256===mappingFingerprint(owner,link)&&book&&prior.root?.id===owner&&prior.root?.root_blocks_sha256===sha(JSON.stringify(book.blocks.slice(u.start,u.end)));
+      const current=review.vri_commit===data.canon.source.commit&&prior.link_metadata_sha256===mappingFingerprint(owner,link)&&book&&['id','title','vri','book','start','end'].every(k=>prior.root?.[k]===u?.[k])&&prior.root?.root_blocks_sha256===sha(JSON.stringify(book.blocks.slice(u.start,u.end)));
       reviewStatus=current?'reviewed-retained-at-snapshot':'stale-reviewed-snapshot';
       if(current)triage='reviewed retained snapshot';
     }
@@ -65,7 +65,7 @@ export function scopeScreen(data=canon.load(),{review={rows:[]}}={}) {
     warning:'Metadata leads only. Publisher numbering can differ from indexed IDs; a primary record may contain several VRI sections, and chapter/range sources may be legitimate. Read complete publisher content and root boundaries before any change. No body, licence or individual alignment approval is inferred. Review annotations describe frozen snapshots, not current upstream freshness.',rows};
 }
 if(import.meta.url===pathToFileURL(process.argv[1]||'').href){
-  const flag=process.argv.indexOf('--review'),file=flag<0?new URL('../docs/data/verse-scope-review.json',import.meta.url):process.argv[flag+1];
+  const flag=process.argv.indexOf('--review'),file=flag<0?new URL('./canon/retained_ordinary_pages.json',import.meta.url):process.argv[flag+1];
   if(flag>=0&&!file)throw Error('--review requires a JSON review file');
   const review=flag>=0||existsSync(file)?JSON.parse(readFileSync(file,'utf8')):{rows:[]};
   console.log(JSON.stringify(scopeScreen(canon.load(),{review}),null,2));

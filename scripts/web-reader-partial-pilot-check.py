@@ -46,10 +46,13 @@ try:
         try:urllib.request.urlopen(base+'/healthz',timeout=1);ready=True;break
         except Exception:time.sleep(.1)
     assert ready,'Bundled HTTP server did not become ready'
-    for uid,held in [('dn21','/tipitaka/dn/dn.21.2x.than'),('an6.54','/tipitaka/an/an06/an06.054.olen'),('an10.27','/tipitaka/an/an10/an10.027x.nypo')]:
+    holds=[('dn21','/tipitaka/dn/dn.21.2x.than',1),('an6.54','/tipitaka/an/an06/an06.054.olen',0),('an10.27','/tipitaka/an/an10/an10.027x.nypo',0)]
+    batch=json.loads((ROOT/'docs/data/ordinary-excerpt-bindings-review.json').read_text(encoding='utf-8'))
+    holds.extend((r['owner'],r['path'],len(r['merged_ordinary_alternatives'])) for r in batch['rows'] if r['decision']=='hold-whole-binding-partial-unit')
+    for uid,held,remaining in holds:
         before=len(fetches());meta=tool('get_metadata',{'uid':uid});version='ati:'+held
         assert all(c['translation_id']!=version for c in meta['english'])
-        assert meta['english_available']==(1 if uid=='dn21' else 0)
+        assert meta['english_available']==remaining
         assert rpc('get_translation',{'uid':uid,'translation':version,'allow_partial':True}).get('isError')
         assert rpc('resolve_reference',{'reference':'https://www.accesstoinsight.org'+held+'.html'}).get('isError')
         assert tool('get_text',{'uid':uid,'limit':1})['segments']

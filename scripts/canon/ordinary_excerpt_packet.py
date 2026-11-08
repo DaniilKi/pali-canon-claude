@@ -89,6 +89,6 @@ if __name__ == '__main__':
     expected = manifest_rows()
     require_checkout(source, expected['ati_commit'])
     canon = json.load(gzip.open(ci, 'rt', encoding='utf-8'))
-    prior_file = Path(__file__).resolve().parents[2] / 'docs/data/verse-scope-review.json'
+    prior_file = Path(__file__).with_name('retained_ordinary_pages.json')
     prior = json.loads(prior_file.read_text(encoding='utf-8'))
     print(json.dumps(packet(canon, json.loads(Path(ti).read_text(encoding='utf-8')), source, expected, prior), ensure_ascii=False, indent=2))

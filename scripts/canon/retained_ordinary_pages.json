@@ -1,0 +1,270 @@
+{
+  "version": 1,
+  "reviewed_on": "2026-11-08",
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "purpose": "Metadata triage only: frozen retained snapshots, never source activation, retrieval authority, live freshness or new rights approval. Historical retain records are copied unchanged; all original review reports remain preserved.",
+  "rows": [
+    {
+      "owner": "thig2.3",
+      "translation_id": "ati:/tipitaka/kn/thig/thig.02.03.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thig/thig.02.03.than.html",
+      "path": "/tipitaka/kn/thig/thig.02.03.than",
+      "decision": "retain",
+      "reason": "Complete Sumangala Mother poem23–24; broader publisher header19–38 does not describe scripture body.",
+      "publisher_reference": "Thig 19-38",
+      "publisher_licence_label": "CC-BY-NC",
+      "source_html_sha256": "1398e96bbce97cafbd5396c8bffbfa19eea554eeaf54214224a9b4f893372986",
+      "text_sha256": "17ef52d5691020a2f37040144847583521b58f607564a02b2b87d4461b9fd4bc",
+      "notice_sha256": "b4aefaf2e80c373b766cdb836a31d40c5fb3194ea4d737634a450925c160d8aa",
+      "notice_characters": 456,
+      "link_metadata_sha256": "363b64aba531c382dcf0ac8de20e35dca566461d18ced6a7f129ceeac9dcdacf",
+      "root": {
+        "id": "thig2.3",
+        "title": "Sumaṅgalamātātherīgāthā",
+        "vri": "23–24",
+        "book": 35,
+        "start": 115,
+        "end": 123,
+        "root_blocks_sha256": "e02340c167ad2370636b432621664fe0ea29c87e92be1d5a78163d1c9f11f9ee"
+      }
+    },
+    {
+      "owner": "thig3.4",
+      "translation_id": "ati:/tipitaka/kn/thig/thig.03.04.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thig/thig.03.04.than.html",
+      "path": "/tipitaka/kn/thig/thig.03.04.than",
+      "decision": "retain",
+      "reason": "Complete Dantika poem48–50; publisher header39–62 is not body extent.",
+      "publisher_reference": "Thig 39-62",
+      "publisher_licence_label": "CC-BY-NC",
+      "source_html_sha256": "c49096b858d53d44bb3059b8ee8cfab632386766b5a5492fc2588c9347df68c8",
+      "text_sha256": "53f7ffb8956ae61c4f2fdda0a5093ce29f0bd8bff7c2a0e54b43c1d12b4dd788",
+      "notice_sha256": "68784a09a960e8ccbdad429afd636bafbdbd590e8706dfe31cdf3ac32c35b11a",
+      "notice_characters": 451,
+      "link_metadata_sha256": "3faf42740044b71cd530d793011c32ed8bc5b99669a05ba0c5068af1c8fd2319",
+      "root": {
+        "id": "thig3.4",
+        "title": "Dantikātherīgāthā",
+        "vri": "48–50",
+        "book": 35,
+        "start": 220,
+        "end": 231,
+        "root_blocks_sha256": "18c1c30056e3e8c78ce202f05d3d684a93ab031b16b18ba204263c0d6926462d"
+      }
+    },
+    {
+      "owner": "thig3.4",
+      "translation_id": "ati:/tipitaka/kn/thig/thig.03.04.rhyc",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thig/thig.03.04.rhyc.html",
+      "path": "/tipitaka/kn/thig/thig.03.04.rhyc",
+      "decision": "retain",
+      "reason": "Independent complete Dantika rendering48–50; retain source-specific BPS1983 notice.",
+      "publisher_reference": "Thig 39-62",
+      "publisher_licence_label": "BPS",
+      "source_html_sha256": "181d059e8371a59881dc99b9c53063d1fa9165232a79d92b108cd67223744c79",
+      "text_sha256": "6b83aaa0aed113102a70940b0e323bf9a99b1e10fd80af2123f82d10b96ee5b5",
+      "notice_sha256": "dc4687488ba43b78681e4f053e217815e968df1f3b2901731c3f0af778d2cac2",
+      "notice_characters": 871,
+      "link_metadata_sha256": "347b87a15f30cd94db8466f75784fca466d85ce2d6d0a4670616c25575a51791",
+      "root": {
+        "id": "thig3.4",
+        "title": "Dantikātherīgāthā",
+        "vri": "48–50",
+        "book": 35,
+        "start": 220,
+        "end": 231,
+        "root_blocks_sha256": "18c1c30056e3e8c78ce202f05d3d684a93ab031b16b18ba204263c0d6926462d"
+      }
+    },
+    {
+      "owner": "thig6.4",
+      "translation_id": "ati:/tipitaka/kn/thig/thig.06.04.hekh",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thig/thig.06.04.hekh.html",
+      "path": "/tipitaka/kn/thig/thig.06.04.hekh",
+      "decision": "retain",
+      "reason": "Complete Sujata145–150 despite publisher header133–138; do not remap to thig6.2.",
+      "publisher_reference": "Thig 133-138",
+      "publisher_licence_label": "BPS",
+      "source_html_sha256": "a5bd6705945f2764f8dac48f3540f856d300acde506066bcac9b259e3f3762ba",
+      "text_sha256": "81ddf8a17a8433ed983f17ea3400aabe1349c706a4b159656b4d378877466d2c",
+      "notice_sha256": "44443cfa1dc110bbd973db08fa9853fe788eac87e75ccd916978be716a683cda",
+      "notice_characters": 895,
+      "link_metadata_sha256": "744103ec72700f13ae1124d9b8249c327d39b5f33f5062e5488756196ea674f7",
+      "root": {
+        "id": "thig6.4",
+        "title": "Sujātātherīgāthā",
+        "vri": "145–150",
+        "book": 35,
+        "start": 567,
+        "end": 587,
+        "root_blocks_sha256": "ebeefcebecffe5116bebbbfd4a5baadf309fd74355082f6ddd8aa63b820a7f26"
+      }
+    },
+    {
+      "owner": "thag2.13",
+      "translation_id": "ati:/tipitaka/kn/thag/thag.02.13.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.02.13.than.html",
+      "path": "/tipitaka/kn/thag/thag.02.13.than",
+      "decision": "retain",
+      "reason": "Publisher correctly covers145–146. Indexed owner wrongly included Somamitta heading/verse147; retain after repairing root boundary, not as a partial publisher.",
+      "publisher_reference": "Thag 145-146",
+      "publisher_licence_label": "CC-BY-NC",
+      "source_html_sha256": "cdefda404b0e9014eb8facad7220078be00076a3529cf14061d9c209ea1a1197",
+      "text_sha256": "1198ceb14c8d23c9b711e184fb1c15de94899eeb796ce7ea426c72a9d3bddd3f",
+      "notice_sha256": "6a8ff2123bb2faced5dcc74d2ca3332b7b6a60f0991b7050fdff0a3949795dec",
+      "notice_characters": 441,
+      "link_metadata_sha256": "363632c4b331ff71617038911ac9e7862f481cf15f91412d8f904e3887f4027a",
+      "root": {
+        "id": "thag2.13",
+        "title": "Heraññakānittheragāthā",
+        "vri": "145–146",
+        "book": 34,
+        "start": 807,
+        "end": 815,
+        "root_blocks_sha256": "6dae5b1ac96795c77b52c3d101602ba9dcb9ad21da07ea30e1c3a9a559dc88f2"
+      },
+      "root_before_repair": {
+        "id": "thag2.13",
+        "title": "Heraññakānittheragāthā",
+        "vri": "145–147",
+        "book": 34,
+        "start": 807,
+        "end": 820,
+        "root_blocks_sha256": "976934a690549f9aaab294f95d537b7e86bd84657e04b1862d45c68b042166c3"
+      }
+    },
+    {
+      "owner": "an3.35",
+      "path": "/tipitaka/an/an03/an03.034.than",
+      "translation_id": "ati:/tipitaka/an/an03/an03.034.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/an/an03/an03.034.than.html",
+      "decision": "retain",
+      "reason": "Complete Hatthaka discourse including both closing stanzas. Publisher AN3.34 corresponds by content to VRI AN3.35; collection/excerpt metadata alone does not show an incomplete unit. Initial recitation formula and closing colophon are paratext, not a claim of word-level equivalence.",
+      "original_link": {
+        "source": "ati",
+        "english": "To Hatthaka",
+        "path": "/tipitaka/an/an03/an03.034.than",
+        "url": "https://www.accesstoinsight.org/tipitaka/an/an03/an03.034.than.html",
+        "translator": "Thanissaro Bhikkhu",
+        "license": "CC-BY-NC",
+        "reference": "A i 136",
+        "pali_title": "Hatthaka Sutta",
+        "match": "pts-start+title"
+      },
+      "link_metadata_sha256": "54ea99df98e3dbdc084c5b186246ca7b91f49c9f14dfbab829675f13e38b9294",
+      "source_html_sha256": "81b8607103e12e2107dfe2e6d8ad037d6977f4fce79efa6d2cce753e0511e1d3",
+      "text_sha256": "8157a167596e25fafca66181cfcbf17ab0e361df02204c806c21ec60c961e2a8",
+      "notice_sha256": "bc738c0319cff7c022e443d295e011b433bc1a33ea80f20cc4a7d05f39bfbf42",
+      "notice_characters": 457,
+      "root": {
+        "id": "an3.35",
+        "title": "Hatthakasuttaṃ",
+        "vri": "35",
+        "book": 18,
+        "start": 242,
+        "end": 254,
+        "root_blocks_sha256": "b18194f2c9a37e861c3962603d1bc724c85a5fd548e0694191e9da8ab183f3b0"
+      },
+      "root_units": [
+        {
+          "id": "an3.35",
+          "title": "Hatthakasuttaṃ",
+          "vri": "35",
+          "book": 18,
+          "start": 242,
+          "end": 254,
+          "root_blocks_sha256": "b18194f2c9a37e861c3962603d1bc724c85a5fd548e0694191e9da8ab183f3b0"
+        }
+      ],
+      "merged_ordinary_alternatives": [
+        "dt:AN/AN3_35"
+      ],
+      "rights": {
+        "copyright": "©1999 Thanissaro Bhikkhu",
+        "license": "CC BY-NC4.0",
+        "revision": "30November2013",
+        "provenance": "File provided by translator.",
+        "notice_retained": true
+      },
+      "observations": [
+        "Complete Alavi cattle-track/leaf-bed opening and winter objection; comfortable-house comparison; passion, aversion and delusion teaching; both closing stanzas present.",
+        "Publisher AN3.34 versus indexed AN3.35 is an edition difference, not wrong ownership; complete content/title/PTS agree.",
+        "Untranslated closing numbering colophon is paratext; no every-token alignment claim."
+      ],
+      "local_alternative_reviews": [],
+      "limits": [
+        "Frozen local official ATI source review; not live-upstream freshness certification.",
+        "Existing DT alternatives only checked as indexed metadata; no network fetch.",
+        "No new partial selector activation or word-level alignment."
+      ],
+      "independent_review_agreed": true
+    },
+    {
+      "owner": "thig3.5",
+      "path": "/tipitaka/kn/thig/thig.03.05.than",
+      "translation_id": "ati:/tipitaka/kn/thig/thig.03.05.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thig/thig.03.05.than.html",
+      "decision": "retain",
+      "reason": "Complete Ubbiri poem51–53; collection-level extent metadata is not the body extent. Closing author signature is paratext, not a claim of every-token alignment.",
+      "original_link": {
+        "source": "ati",
+        "english": "Groups of Three Verses",
+        "path": "/tipitaka/kn/thig/thig.03.05.than",
+        "url": "https://www.accesstoinsight.org/tipitaka/kn/thig/thig.03.05.than.html",
+        "translator": "Thanissaro Bhikkhu",
+        "license": "CC-BY-NC",
+        "reference": "Thig 51-53",
+        "pali_title": "Ubbiri",
+        "match": "number+title"
+      },
+      "link_metadata_sha256": "56c917e492f93b7cdcefaf49f97b5fa0dc5eead00fd78bf58e78ac381dcc3256",
+      "source_html_sha256": "43936baea2cc35de7214f4b0205f9efa934ea1a564f95e300d612771c463e7c5",
+      "text_sha256": "055b4fa292ae7aee0d9b6cfeb9d0111d36215906a508227d0874e6983afa4233",
+      "notice_sha256": "1a87422cb2ba4c9aea60d07ac08f8cd3242c7c57fe7d9fef5b7d9f1d293a2266",
+      "notice_characters": 457,
+      "root": {
+        "id": "thig3.5",
+        "title": "Ubbiritherīgāthā",
+        "vri": "51–53",
+        "book": 35,
+        "start": 231,
+        "end": 243,
+        "root_blocks_sha256": "83948539d23829acda57b7704f69f059e28c2acf2abd58f21782d0a90ef6a97c"
+      },
+      "root_units": [
+        {
+          "id": "thig3.5",
+          "title": "Ubbiritherīgāthā",
+          "vri": "51–53",
+          "book": 35,
+          "start": 231,
+          "end": 243,
+          "root_blocks_sha256": "83948539d23829acda57b7704f69f059e28c2acf2abd58f21782d0a90ef6a97c"
+        }
+      ],
+      "merged_ordinary_alternatives": [
+        "dt:KN/Thig/thig3_5"
+      ],
+      "rights": {
+        "copyright": "©1997 Thanissaro Bhikkhu",
+        "license": "CC BY-NC4.0",
+        "revision": "4August2010",
+        "provenance": "File provided by translator.",
+        "notice_retained": true
+      },
+      "observations": [
+        "All three indexed verses51–53 are present: lament over Jiva/84000 daughters, removed grief-arrow, and final refuge/unbinding stanza.",
+        "The excerpt/Groups-of-Three label concerns the surrounding collection; it does not establish missing material from this individual poem.",
+        "Final Ubbiri attribution is colophon paratext, not a missing stanza."
+      ],
+      "local_alternative_reviews": [],
+      "limits": [
+        "Frozen local official ATI source review; not live-upstream freshness certification.",
+        "Existing DT alternatives only checked as indexed metadata; no network fetch.",
+        "No new partial selector activation or word-level alignment."
+      ],
+      "independent_review_agreed": true
+    }
+  ]
+}

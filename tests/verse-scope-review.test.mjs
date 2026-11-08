@@ -43,7 +43,7 @@ test('Somamitta owns his opening verse and Herannakani remains a complete separa
 });
 
 test('screen prioritizes narrow/discontinuous leads, normalizes abbreviated bibliography and expires stale review annotations',()=>{
- const d=canon.load(),review=structuredClone(audit),out=scopeScreen(d,{review});assert.equal(out.count,221);assert.equal(out.reviewed_retained_snapshots,5);assert.equal(out.unreviewed_leads,216);assert.ok(out.rows.filter(r=>r.review_status==='reviewed-retained-at-snapshot').every(r=>r.triage==='reviewed retained snapshot'));
+ const d=canon.load(),review=structuredClone(audit),out=scopeScreen(d,{review});assert.equal(out.count,220);assert.equal(out.reviewed_retained_snapshots,5);assert.equal(out.unreviewed_leads,215);assert.ok(out.rows.filter(r=>r.review_status==='reviewed-retained-at-snapshot').every(r=>r.triage==='reviewed retained snapshot'));
  assert.ok(!out.rows.some(r=>r.translation_id==='ati:/tipitaka/kn/thag/thag.10.02.olen'));
  review.rows[0].root.root_blocks_sha256='0'.repeat(64);let stale=scopeScreen(d,{review}).rows.find(r=>r.translation_id===review.rows[0].translation_id);assert.equal(stale.review_status,'stale-reviewed-snapshot');assert.equal(stale.triage,'inspect wider verse-reference extent');
  review.rows[0].root.root_blocks_sha256=audit.rows[0].root.root_blocks_sha256;review.rows[0].link_metadata_sha256='0'.repeat(64);stale=scopeScreen(d,{review}).rows.find(r=>r.translation_id===review.rows[0].translation_id);assert.equal(stale.review_status,'stale-reviewed-snapshot');
