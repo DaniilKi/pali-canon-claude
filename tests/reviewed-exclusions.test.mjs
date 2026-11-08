@@ -12,10 +12,13 @@ afterEach(() => { globalThis.fetch = originalFetch; liveCache.clear(); });
 const python = ['python3', 'python'].find(cmd => spawnSync(cmd, ['--version']).status === 0);
 const run = (code, input) => spawnSync(python, ['-c', code], {encoding:'utf8', input: JSON.stringify(input), env:{...process.env,PYTHONUTF8:'1'}});
 
-test('the shared Mother page is no longer an individually selectable or verifiable SN 15.14 source', async () => {
+test('the held dhammatalks Mother page remains unavailable beside the separate scoped ATI source', async () => {
   const u = canon.resolve('sn15.14').unit;
   assert.ok(canon.segments(u).some(s => s.text.includes('namātābhūtapubbo')));
-  assert.deepEqual(english.available(u), []);
+  const choices=english.available(u);
+  assert.equal(choices.some(l=>l.translation_id==='dt:SN/SN15_14'),false);
+  assert.ok(choices.every(l=>l.translation_scope?.kind==='shared_page'));
+  assert.ok(choices.some(l=>l.translation_id==='ati:/tipitaka/sn/sn15/sn15.014.than'));
   const url = 'https://www.dhammatalks.org/suttas/SN/SN15_14.html';
   assert.throws(() => canon.resolve(url), /not linked/);
   let calls = 0; globalThis.fetch = async () => { calls++; throw Error('Must not fetch'); };

@@ -1,0 +1,58 @@
+{
+  "screening_only": true,
+  "warning": "Filename ranges are leads only; chapter/group links can be legitimate. No body/scope judgement or adoption.",
+  "count": 7,
+  "rows": [
+    {
+      "owner": "iti1",
+      "path": "/tipitaka/kn/iti/iti.1.001-027.than",
+      "match": "number",
+      "reference": "Iti 1-19",
+      "license": "CC-BY-NC"
+    },
+    {
+      "owner": "iti24",
+      "path": "/tipitaka/kn/iti/iti.1.024-027.irel",
+      "match": "number",
+      "reference": "Iti 17-19",
+      "license": "BPS"
+    },
+    {
+      "owner": "iti28",
+      "path": "/tipitaka/kn/iti/iti.2.028-049.than",
+      "match": "number",
+      "reference": "Iti 22-43",
+      "license": "CC-BY-NC"
+    },
+    {
+      "owner": "iti50",
+      "path": "/tipitaka/kn/iti/iti.3.050-099.than",
+      "match": "number",
+      "reference": "Iti 44-98",
+      "license": "CC-BY-NC"
+    },
+    {
+      "owner": "iti72",
+      "path": "/tipitaka/kn/iti/iti.3.072-090x.irel",
+      "match": "number",
+      "reference": "Iti 61, 64, 75, 78, 87",
+      "license": "BPS"
+    },
+    {
+      "owner": "iti100",
+      "path": "/tipitaka/kn/iti/iti.4.100-112.than",
+      "match": "number",
+      "reference": "Iti 101-121",
+      "license": "CC-BY-NC"
+    },
+    {
+      "owner": "iti106",
+      "path": "/tipitaka/kn/iti/iti.4.106-112x.irel",
+      "match": "number",
+      "reference": "Iti 109, 114, 121",
+      "license": "BPS"
+    }
+  ],
+  "baseline_commit": "bdba4d3de177ff248da7961fcae0bb75cd6c6c11",
+  "screened_after_withholding": "/tipitaka/kn/iti/iti.2.042-049x.irel"
+}

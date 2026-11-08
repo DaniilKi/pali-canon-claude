@@ -422,6 +422,66 @@
           "root_blocks_sha256": "36e0a58867713ce4bc1372dfa0df1fdff612d6230213f3483c7d7848e69ac12b"
         }
       ]
+    },
+    {
+      "owner_id": "sn15.14",
+      "path": "/tipitaka/sn/sn15/sn15.014.than",
+      "text_ids": [
+        "sn15.14",
+        "sn15.15",
+        "sn15.16",
+        "sn15.17",
+        "sn15.18",
+        "sn15.19"
+      ],
+      "presentation": "condensed",
+      "english_title": "Mother — shared condensed publisher page",
+      "source_reference": "ATI SN 15.14–19; VRI137–142 (shared condensed page)",
+      "translator": "Ṭhānissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "One publisher page combines mother/father/brother/sister/son/daughter discourses with shared framing, ellipses and one conclusion. Complete VRI roots137–142 establish the family sequence, not individual English wording. Preserve publisher expansions and abbreviations without reconstructing Pali. All six actual source records are explicit; no whole-unit or per-discourse quotation alignment is inferred. This ATI review does not authorize or restore the separately held dhammatalks Mother source.",
+      "source_html_sha256": "6e98ec6aa3b0bf2bbf5198d1f24d3fa34a69c2d176f1909c157b8089f181c8b6",
+      "text_sha256": "8805282c96c3a6ea36486d7c103ec31e8aa17389cc5723809455df9160e02747",
+      "notice_sha256": "efd7ef3720a6fe4fe004ed109e578bc65eb88e130786812ad236d786df93e760",
+      "pali_segments_sha256": "ed802e79ebce944be4199cfae9388de5559507badada26e30aaf951ce59492a2",
+      "root_units": [
+        {
+          "id": "sn15.14",
+          "title": "Mātusutta",
+          "vri": "137",
+          "root_blocks_sha256": "4cf08787a4b2233e8bb6b02a3dda0ab515ecfd840c53cf569da88e1701667f80"
+        },
+        {
+          "id": "sn15.15",
+          "title": "Pitusutta",
+          "vri": "138",
+          "root_blocks_sha256": "ff2d63be6a0107372ff501b8f8ff542a48a178d6b773dad56851c84ecd5a51f9"
+        },
+        {
+          "id": "sn15.16",
+          "title": "Bhātusuttaṃ",
+          "vri": "139",
+          "root_blocks_sha256": "813d761fa93faedc4a907b785a86b80262930d8625e7014bfe8dd4668722ac9b"
+        },
+        {
+          "id": "sn15.17",
+          "title": "Bhaginisuttaṃ",
+          "vri": "140",
+          "root_blocks_sha256": "7e63446f2f509bbc0d88053e4a95f72baf5b5bcf155a80f3c4763dd974c61ae0"
+        },
+        {
+          "id": "sn15.18",
+          "title": "Puttasuttaṃ",
+          "vri": "141",
+          "root_blocks_sha256": "51581359bb8da102a4052157c673d8c9be5eb4eb2afa4b5e0c88875802b8ed6d"
+        },
+        {
+          "id": "sn15.19",
+          "title": "Dhītusuttaṃ",
+          "vri": "142",
+          "root_blocks_sha256": "6c5f23a9a7945360839c6ccacb12e9f4f9814ba820fdf20cb3d5a9f95d190542"
+        }
+      ]
     }
   ]
 }

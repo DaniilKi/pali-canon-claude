@@ -1508,6 +1508,45 @@
         }
       ],
       "reason": "Two condensed CC BY-NC publisher pages with complete root/English/notice pins. Twelve primary source records include five original VRI peyyala ranges; not thirty newly translated individuals. No schema expansion, Pali reconstruction or lifted holds. Queue53 pages/6 possible first-English screening opportunities, not approvals."
+    },
+    {
+      "decision": "D201",
+      "accepted_links": 1,
+      "newly_covered_units": [],
+      "added_whole_versions": [
+        {
+          "unit_id": "an2.9",
+          "path": "tipitaka/an/an02/an02.009.irel.html",
+          "translator": "John D. Ireland",
+          "license": "BPS",
+          "first_english": false
+        }
+      ],
+      "activated_shared_pages": [
+        {
+          "owner_id": "sn15.14",
+          "path": "tipitaka/sn/sn15/sn15.014.than.html",
+          "subject_ids": [
+            "sn15.14",
+            "sn15.15",
+            "sn15.16",
+            "sn15.17",
+            "sn15.18",
+            "sn15.19"
+          ],
+          "presentation": "condensed",
+          "individual_alignment_verified": false,
+          "whole_unit_coverage": false
+        }
+      ],
+      "withdrawn_ordinary_bindings": [
+        {
+          "owner_id": "iti42",
+          "path": "tipitaka/kn/iti/iti.2.042-049x.irel.html",
+          "reason": "Noncontiguous42/43/44/49 collection is not individualIti42; validDTversionpreserved."
+        }
+      ],
+      "reason": "Exact complete-root/source/rights review, not PTS-only screening. Mother ATI scope does not lift DT hold. IrelandAN2.9adds alternative to preservedThanissaro, not firstEnglish. Whole totals netunchanged; eightsharedpages48records. Queue51/4screeningopportunities remain unapproved."
     }
   ]
 }
