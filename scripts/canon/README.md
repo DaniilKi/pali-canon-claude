@@ -253,3 +253,15 @@ D188 packets also retain prior scope-hold notes from the ledger so reviewers
 can address known gaps rather than repeat discovery. Historical holds remain
 context, not automatic vetoes or approvals. An empty ledger is valid and
 requires no source-path query.
+
+### Reviewed scope exclusions (D194)
+
+`build_translations.py` applies `reviewed_exclusions.py` **after every linker**,
+with or without `--content`. The manifest currently withholds the dhammatalks
+SN 15.14–19 Mother page from ordinary individual ownership. All six Pāli units
+remain. `apply_reviewed_exclusions(out)` returns a new mapping and a removal
+report; invalid/missing manifest fails, and rerunning is idempotent. The hold
+applies globally, including another owner or added scope fields. Do not delete
+it to recover headline coverage. Lift it only through a source-specific reviewed
+shared-page integration with explicit consent, quotation and export/count tests.
+See [exact-source evidence and validation](../../docs/data/mother-scope-quarantine-and-alternates.md).

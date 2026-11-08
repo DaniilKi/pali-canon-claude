@@ -509,6 +509,8 @@ def main():
         report['content'] = content_report
         from reviewed_ati_stories import apply_reviewed_links
         report['reviewed_stories'] = apply_reviewed_links(out, canon, ati_root)
+    from reviewed_exclusions import apply_reviewed_exclusions
+    out, report['reviewed_exclusions'] = apply_reviewed_exclusions(out)
     json.dump(out, open(sys.argv[4], 'w'), ensure_ascii=False, separators=(',', ':'))
     print(json.dumps(report, indent=1))
     print('texts with translations:', len(out), 'links:', sum(len(v) for v in out.values()))

@@ -4,6 +4,11 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Correct the ordinary SN 15.14 binding: its current source covers six discourses.
+  Withhold it with a final build guard until safe shared integration. Add three
+  reviewed alternatives, preserving original choices and full BPS/CC notices;
+  report zero first-English gains and the corrected whole-unit coverage.
+
 - Add four first-English AN choices with explicit PTS/paragraph differences and
   preserved abbreviations; hold the Luminous and Mother multi-discourse pages
   for reviewed shared-page integration, keeping earlier scope holds intact.

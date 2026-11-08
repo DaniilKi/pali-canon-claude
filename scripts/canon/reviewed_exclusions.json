@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "exclusions": [
+    {
+      "source": "dhammatalks",
+      "url": "https://www.dhammatalks.org/suttas/SN/SN15_14.html",
+      "status": "withheld-shared-page",
+      "subject_ids": [
+        "sn15.14",
+        "sn15.15",
+        "sn15.16",
+        "sn15.17",
+        "sn15.18",
+        "sn15.19"
+      ],
+      "reason": "The official page combines SN15.14–19 with one common framing/conclusion. Ordinary SN15.14 ownership lets page-level words from other family discourses appear individually aligned. Withhold until reviewed shared-page integration is complete.",
+      "review": {
+        "source_url": "https://www.dhammatalks.org/suttas/SN/SN15_14.html",
+        "observed_on": "2026-11-08",
+        "method": "Official publisher page title and complete short body inspected through supported web access. No full HTML or exact extracted-English hash asserted.",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_blocks_sha256": "0dfdcd6efeed68fba40501998b5095a82c11cb86938fa33ef5244809dccc26c6"
+      }
+    }
+  ]
+}

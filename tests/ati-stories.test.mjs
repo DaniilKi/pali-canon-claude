@@ -12,7 +12,7 @@ const realFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = realFetch; liveCache.clear(); });
 
 test('source-reviewed whole-text links retain exact edition identity and provenance', () => {
-  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16', 'sn7.21', 'sn22.109', 'sn22.110', 'sn22.121', 'sn25.5', 'sn47.35', 'sn40.9', 'sn22.7', 'sn35.238', 'sn55.24', 'an4.77', 'an3.136', 'an5.130', 'an3.52', 'an3.89', 'an3.90', 'an4.262', 'an5.64', 'an6.102', 'an6.104', 'an7.23', 'an7.33', 'an7.51', 'an3.109', 'an4.124', 'an4.173', 'an11.9', 'an2.9', 'an2.19', 'an2.24', 'an3.39', 'an3.86', 'an3.87', 'an10.13', 'an1.47', 'an1.48', 'an2.119', 'an10.219']);
+  assert.deepEqual(manifest.links.map(r => r.unit_id), ['pv5', 'vv16', 'vv35', 'thig5.11', 'thig5.11', 'thag19.1', 'snp2.6', 'thag3.9', 'thag21.1', 'sn1.42', 'sn4.8', 'sn17.5', 'sn3.7', 'sn9.11', 'sn1.3', 'sn12.16', 'sn7.21', 'sn22.109', 'sn22.110', 'sn22.121', 'sn25.5', 'sn47.35', 'sn40.9', 'sn22.7', 'sn35.238', 'sn55.24', 'an4.77', 'an3.136', 'an5.130', 'an3.52', 'an3.89', 'an3.90', 'an4.262', 'an5.64', 'an6.102', 'an6.104', 'an7.23', 'an7.33', 'an7.51', 'an3.109', 'an4.124', 'an4.173', 'an11.9', 'an2.9', 'an2.19', 'an2.24', 'an3.39', 'an3.86', 'an3.87', 'an10.13', 'an1.47', 'an1.48', 'an2.119', 'an10.219', 'sn1.71', 'sn17.5', 'an7.54']);
   for (const row of manifest.links) {
     const u = canon.resolve(row.unit_id).unit;
     const link = canon.load().translations[u.id].find(t => t.match === 'reviewed-story' && t.path === row.path);
@@ -167,7 +167,7 @@ test('reviewed SN choices distinguish repeated verses and preserve abbreviation 
     ['sn17.5', '/tipitaka/sn/sn17/sn17.005.than', /VRI abbreviates.*SN 17.1/],
     ['sn3.7', '/tipitaka/sn/sn03/sn03.007.than', /VRI abbreviates.*ATI spells it out/]];
   for (const [uid, path, note] of cases) {
-    const links = english.available(canon.resolve(uid).unit);
+    const links = english.available(canon.resolve(uid).unit).filter(l => l.translation_id === `ati:${path}`);
     assert.equal(links.length, 1);
     assert.equal(links[0].translation_id, `ati:${path}`);
     assert.match(links[0].mapping_note, note);
@@ -457,4 +457,31 @@ test('four-text Luminous and six-text Mother pages remain withheld as ordinary i
     assert.ok(!manifest.links.some(r => r.path === path));
     assert.ok(!Object.values(canon.load().translations).flat().some(l => l.path === path));
   }
+});
+
+test('three alternate versions retain current choices and reject neighbouring text owners before fetch', async () => {
+  const cases = [
+    ['sn1.71','/tipitaka/sn/sn01/sn01.071.than',['sn1.70','sn1.72'],'dhammatalks'],
+    ['sn17.5','/tipitaka/sn/sn17/sn17.005.wlsh',['sn17.4'],'ati'],
+    ['an7.54','/tipitaka/an/an07/an07.051.than',['an7.51','an7.53'],'dhammatalks'],
+  ];
+  let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Must not fetch');};
+  for(const[uid,path,wrong,first]of cases){
+    const u=canon.resolve(uid).unit,links=canon.linksFor(u).links;
+    assert.equal(links.length,2);assert.equal(links[0].source,first);
+    assert.equal(english.selectTranslation(links,`ati:${path}`,uid).link.path,path);
+    assert.equal(canon.resolve(`https://www.accesstoinsight.org${path}.html`).unit.id,uid);
+    for(const other of wrong)await assert.rejects(english.translation(canon.resolve(other).unit,`ati:${path}`));
+  }
+  assert.equal(calls,0);
+});
+
+test('alternate edition omissions, source typo and BPS terms are disclosed rather than silently corrected',()=>{
+ const row=path=>manifest.links.find(r=>r.path===path);
+ const w=row('/tipitaka/sn/sn17/sn17.005.wlsh');assert.equal(w.license,'BPS');assert.match(w.mapping_note,/50-print-copy.*not CC/);
+ assert.match(row('/tipitaka/sn/sn01/sn01.071.than').mapping_note,/omits the Sāvatthī setting formula/);
+ const note=row('/tipitaka/an/an07/an07.051.than').mapping_note;
+ assert.match(note,/omits VRI’s final causal restatement.*no new assertion is lost/);
+ assert.match(note,/both does and doesn’t after death.*omits “exist”/);
+ assert.ok(!manifest.links.some(r=>r.path==='/tipitaka/sn/sn01/sn01.025.wlsh'));
 });

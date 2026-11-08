@@ -1072,6 +1072,66 @@
         "vri_verse_groups": 0
       },
       "mapping_note": "Whole-discourse correspondence: ATI Brahmavihara Sutta AN 10.208 maps to indexed AN 10.219 (Karajakāyasuttaṃ), VRI paragraph 219. The action-results opening, goodwill/equanimity pervasion and youth dialogues, woman/man and action-born body passages, and non-returning conclusions establish scope. Both published editions abbreviate compassion and appreciation; the tool does not expand them. The opening also occurs in adjacent AN 10.218, but that unit continues with misconduct/conduct lists rather than these sublime-attitude dialogues. Two Notes, including Woodward’s patchwork observation and the east gloss, are editorial. No general +11 offset is inferred. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "sn1.71",
+      "path": "/tipitaka/sn/sn01/sn01.071.than",
+      "pali_title": "Chetvāsuttaṃ",
+      "english_title": "Having Killed",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "SN 1.71",
+      "source_verses": "SN 1.71; PTS S i 41",
+      "vri_verses": "71",
+      "source_html_sha256": "72b28f6feb63585fdc7377e3ab3919321622e67a7929645d844d29585302b584",
+      "pali_sha256": "f7c848c51325ef24329a8983b9253eb3fd5bd4743f8dfce7f2568e71f9b3f838",
+      "root_blocks_sha256": "071371707f238e035a2bdf167d0832ebbefeffb6f55c8b33955818b494daa878",
+      "evidence": {
+        "basis": "Question/reply about killing anger, honeyed crest and poisonous root; correct anger stanza, not nearby identity by PTS.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 2
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Ghatva Sutta SN 1.71 matches indexed SN 1.71 (Chetvāsuttaṃ), VRI paragraph 71. Complete killing-anger question/reply and honeyed-crest/poisonous-root imagery establish identity. ATI omits the Sāvatthī setting formula; the speaker label is editorial. This is an alternate alongside the existing dhammatalks version, not first-English coverage. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "sn17.5",
+      "path": "/tipitaka/sn/sn17/sn17.005.wlsh",
+      "pali_title": "Mīḷhakasuttaṃ",
+      "english_title": "The Dung Beetle",
+      "translator": "Maurice O’Connell Walshe",
+      "license": "BPS",
+      "source_reference": "SN 17.5",
+      "source_verses": "SN 17.5; PTS S ii 228",
+      "vri_verses": "161",
+      "source_html_sha256": "597ad5fb518b4c51279f66c03138ab0b6980153dc909d3c3dd6d52ddb3e2409e",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "e3a02269512eb6e11b2008b28b9d35c16d0888983cbc9d1e318245f1640b4a28",
+      "evidence": {
+        "basis": "Dung-beetle comparison, boast, four requisites, harm to sufferer and training conclusion; framing formulas abbreviated in VRI.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Piḷhika Sutta SN 17.5, translated by Maurice O’Connell Walshe, matches indexed SN 17.5 (Mīḷhakasuttaṃ), VRI paragraph 161. Dung-beetle analogy, boasting, four requisites, harm and training conclusion establish whole-discourse scope. English spells out framing formulas abbreviated by VRI. Two Notes on the creature’s name and ārāma are editorial. Retain the full BPS free-distribution, derivative-attribution, complete-notice and 50-print-copy conditions; these are not CC terms. Existing Ṭhānissaro ATI choice remains first. This is not line-by-line alignment."
+    },
+    {
+      "unit_id": "an7.54",
+      "path": "/tipitaka/an/an07/an07.051.than",
+      "pali_title": "Abyākatasuttaṃ",
+      "english_title": "Undeclared",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_reference": "AN 7.51",
+      "source_verses": "AN 7.51; PTS A iv 67",
+      "vri_verses": "54",
+      "source_html_sha256": "2c17d71da79c8efc710ca1478cc69b2288a32cadc2f8cd07d612fb7150ae8e19",
+      "pali_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_blocks_sha256": "bdaf4c92aff74c7813b76a904b1292ff0b20b76f5795d839d28244bb5ff003e0",
+      "evidence": {
+        "basis": "Four undeclared positions, view and anguish analyses, cessation/path and final unshaken-knowing conclusion; last causal restatement omitted.",
+        "vri_numbered_paragraphs": 0,
+        "vri_verse_groups": 0
+      },
+      "mapping_note": "Whole-discourse correspondence: ATI Avyakata Sutta AN 7.51 maps to indexed AN 7.54 (Abyākatasuttaṃ), VRI paragraph 54. The four positions, view/anguish analyses and unshaken-knowing conclusion establish identity, not PTS overlap with Nandamātā AN 7.53. ATI omits VRI’s final causal restatement of the opening question and supplied explanation; no new assertion is lost, unlike AN 2.47’s foremost-assembly statement. Publisher wording caution: its final-paragraph phrase “both does and doesn’t after death” omits “exist”; preserve the source without silent correction. The two explanatory/manuscript Notes and cross-references are editorial. Existing dhammatalks choice remains first. This is not line-by-line alignment."
     }
   ]
 }

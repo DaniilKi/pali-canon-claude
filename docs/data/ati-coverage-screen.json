@@ -1334,6 +1334,30 @@
           "reason": "Mother source explicitly combines SN15.14–19 (mother/father/brother/sister/son/daughter) with common framing and ellipses. Keep withheld as an ordinary individual ATI link. Existing DT entry at SN 15.14 has reference SN 15:14–19, warranting separate exact-source scope review; its body was not assumed identical to ATI."
         }
       ]
+    },
+    {
+      "decision": "D194",
+      "accepted_links": 3,
+      "newly_covered_units": [],
+      "additional_choice_units": [
+        "sn1.71",
+        "sn17.5",
+        "an7.54"
+      ],
+      "withheld_existing": [
+        {
+          "unit_id": "sn15.14",
+          "source": "dhammatalks",
+          "url": "https://www.dhammatalks.org/suttas/SN/SN15_14.html",
+          "reason": "Exact official current page title/body confirms six-unit scope SN15.14–19. Remove ordinary one-unit binding and apply global reviewed post-linker exclusion; do not activate a scoped replacement before full source/consumer review."
+        }
+      ],
+      "deferred": [
+        {
+          "path": "tipitaka/sn/sn01/sn01.025.wlsh.html",
+          "reason": "Walshe version omits initial canonical question/answer, condenses/reorders later conceit exchange; no whole-unit link approved. Interpretive Notes do not restore missing canonical scope."
+        }
+      ]
     }
   ]
 }

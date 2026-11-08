@@ -1,0 +1,38 @@
+{
+  "review_packet_only": true,
+  "approvals_changed": false,
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "summary": {
+    "ledger_pages": 114,
+    "pending_pages": 60,
+    "pages_with_first_english_possibilities": 13,
+    "publisher_extents": {
+      "complete": 43,
+      "excerpt": 17
+    }
+  },
+  "warning": "PTS overlap, extent and licence labels are screening clues only. No content, scope or permission is approved. No English body is included.",
+  "decision": "D194",
+  "baseline_commit": "578f44918e59105acf1ebca86fc84864c6d83882",
+  "added_english_links": 3,
+  "newly_linked_units": [],
+  "additional_choice_units": [
+    "sn1.71",
+    "sn17.5",
+    "an7.54"
+  ],
+  "withheld_existing_units": [
+    "sn15.14"
+  ],
+  "packet_sha256": "367957ed46ae38c03b9f646735455f8a3ff7e2bf88ccbbe222fbb8c94f5ccd89",
+  "input_sha256": {
+    "scripts/canon/ati_review_packet.py": "ca7725d3326f54abb929ebf67053da14a4762ba3700c01351f06633dd386ee20",
+    "scripts/canon/reviewed_ati_stories.json": "362aa2e2389be4e35e219c2a395b68f6b2b9a0f758ae6c1723578beb58eac0da",
+    "scripts/canon/reviewed_exclusions.py": "5573383694322ab8f97542d3864879a05966f468721dfd992073708a8a9d1ed3",
+    "scripts/canon/reviewed_exclusions.json": "69123262b70010999cbe1dbbee63ae6ccab4c00bbfb17a0f1ef784adc0e6aa08",
+    "server/data/translations.json": "da415d917bba10d541ce69fe71d9c36892fe748a37699ec598aa5efeb753af83",
+    "docs/data/ati-coverage-screen.json": "a6645aa67765702331b8e679c1c989eb6ba08f430a51b158fbd5a6d1128bfef7",
+    "scripts/canon/build_translations.py": "01a8f14ae8931dd2ecbaef910bd612b5cf204e40d59632f9c5f1ecdd19044a5f"
+  }
+}
