@@ -3,49 +3,16 @@
   "approvals_changed": false,
   "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
   "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
-  "ordinary_ati_bindings_checked": 1142,
-  "candidate_bindings": 28,
+  "ordinary_ati_bindings_checked": 1139,
+  "candidate_bindings": 25,
   "reviewed_retained_snapshots": 1,
-  "unreviewed_bindings": 27,
+  "unreviewed_bindings": 24,
   "reason_counts": {
-    "publisher excerpt filename marker": 21,
-    "publisher extent excerpt": 28
+    "publisher excerpt filename marker": 19,
+    "publisher extent excerpt": 25
   },
   "warning": "Metadata clues only, not errors or approvals. A collection excerpt can fully cover one indexed poem. EXTENT=complete is not evidence of completeness. Other-version counts concern only the supplied index, not every external provider. Frozen source hashes do not prove upstream freshness.",
   "rows": [
-    {
-      "owner": "an10.27",
-      "path": "/tipitaka/an/an10/an10.027x.nypo",
-      "url": "https://www.accesstoinsight.org/tipitaka/an/an10/an10.027x.nypo.html",
-      "translator": "Nyanaponika Thera",
-      "reference": "A v 48",
-      "publisher_extent": "excerpt",
-      "publisher_subtitle": "The Great Questions",
-      "publisher_secondary_subtitle": "",
-      "source_html_sha256": "008715d4db521b9f7fb520eb6f98036f8393024f574a9faaa2eaee1eb7a34c5e",
-      "indexed_root": {
-        "id": "an10.27",
-        "title": "Paṭhamamahāpañhāsuttaṃ",
-        "vri": "27",
-        "book": 25,
-        "start": 213,
-        "end": 233,
-        "kind": null,
-        "approximate": null
-      },
-      "other_versions_in_supplied_index": [],
-      "reasons": [
-        "publisher extent excerpt",
-        "publisher excerpt filename marker"
-      ],
-      "approved": false,
-      "review_status": "unreviewed",
-      "review_required": [
-        "complete body and indexed boundaries",
-        "page-specific full licence",
-        "independent alternatives and source scope"
-      ]
-    },
     {
       "owner": "an3.35",
       "path": "/tipitaka/an/an03/an03.034.than",
@@ -69,38 +36,6 @@
       "other_versions_in_supplied_index": [
         "https://www.dhammatalks.org/suttas/AN/AN3_35.html"
       ],
-      "reasons": [
-        "publisher extent excerpt"
-      ],
-      "approved": false,
-      "review_status": "unreviewed",
-      "review_required": [
-        "complete body and indexed boundaries",
-        "page-specific full licence",
-        "independent alternatives and source scope"
-      ]
-    },
-    {
-      "owner": "an6.54",
-      "path": "/tipitaka/an/an06/an06.054.olen",
-      "url": "https://www.accesstoinsight.org/tipitaka/an/an06/an06.054.olen.html",
-      "translator": "Andrew Olendzki",
-      "reference": "A iii 366",
-      "publisher_extent": "excerpt",
-      "publisher_subtitle": "Dhammika",
-      "publisher_secondary_subtitle": "",
-      "source_html_sha256": "6378878b65793ccb376a3253908026a22e2b1566a5349de90144511c93f1afb2",
-      "indexed_root": {
-        "id": "an6.54",
-        "title": "Dhammikasuttaṃ",
-        "vri": "54",
-        "book": 21,
-        "start": 446,
-        "end": 491,
-        "kind": null,
-        "approximate": null
-      },
-      "other_versions_in_supplied_index": [],
       "reasons": [
         "publisher extent excerpt"
       ],
@@ -208,39 +143,6 @@
         "https://www.dhammatalks.org/suttas/MN/MN21.html",
         "https://www.accesstoinsight.org/tipitaka/mn/mn.021x.budd.html"
       ],
-      "reasons": [
-        "publisher extent excerpt",
-        "publisher excerpt filename marker"
-      ],
-      "approved": false,
-      "review_status": "unreviewed",
-      "review_required": [
-        "complete body and indexed boundaries",
-        "page-specific full licence",
-        "independent alternatives and source scope"
-      ]
-    },
-    {
-      "owner": "mn34",
-      "path": "/tipitaka/mn/mn.034x.olen",
-      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.034x.olen.html",
-      "translator": "Andrew Olendzki",
-      "reference": "M i 225",
-      "publisher_extent": "excerpt",
-      "publisher_subtitle": "The Shorter Discourse on the Cowherd",
-      "publisher_secondary_subtitle": "",
-      "source_html_sha256": "3a09006ff392ee8efa2f9e7533ebed061d998d68759fe9cef3f693ccb4b7ec67",
-      "indexed_root": {
-        "id": "mn34",
-        "title": "Cūḷagopālakasuttaṃ",
-        "vri": "350–352",
-        "book": 8,
-        "start": 1169,
-        "end": 1187,
-        "kind": null,
-        "approximate": null
-      },
-      "other_versions_in_supplied_index": [],
       "reasons": [
         "publisher extent excerpt",
         "publisher excerpt filename marker"

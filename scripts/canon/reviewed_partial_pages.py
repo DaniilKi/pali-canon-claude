@@ -18,9 +18,10 @@ def manifest_rows(manifest=MANIFEST):
         if not isinstance(r,dict):raise ValueError('Invalid partial page row')
         p=r.get('partial_scope',{})
         if not isinstance(p,dict):raise ValueError('Invalid partial scope record')
-        path_match=re.fullmatch(r'/tipitaka/kn/(thag|snp)/[a-z0-9_.-]+',r.get('path',''))
+        path_match=re.fullmatch(r'/tipitaka/(?:kn/(?P<kn>thag|snp)|(?P<mn>mn))/[a-z0-9_.-]+',r.get('path',''))
+        owner_pattern=(path_match['kn']+r'\d+\.\d+' if path_match and path_match['kn'] else r'mn\d+')
         if (not path_match or '..' in r['path']
-                or not re.fullmatch(path_match[1]+r'\d+\.\d+',r.get('unit_id',''))
+                or not re.fullmatch(owner_pattern,r.get('unit_id',''))
                 or r['path'] in paths or r.get('unit_id') in owners
                 or r.get('license')!='Olendzki-free-distribution-2005' or r.get('translator')!='Andrew Olendzki'
                 or not r.get('mapping_note') or not r.get('source_reference') or not r.get('english_title')

@@ -530,7 +530,7 @@
       "subject_ids": [
         "sn12.22"
       ],
-      "reason": "Only a late exhortation from the second indexed VRI section22. Omits section21 and22 earlier ten powers/fearlessness, aggregates/dependent origination, resolve and lazy-versus-energetic discussion. Source begins inside a bundled segment; no exact whole-segment partial declaration is approved. No other indexed English version exists.",
+      "reason": "Only a late exhortation within corrected VRI22. Omits earlier ten powers/fearlessness, aggregates/dependent origination, resolve and the opening lazy-versus-energetic discussion. The source begins inside a bundled paragraph; no exact whole-segment partial mapping is approved. No other indexed English version exists.",
       "review": {
         "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.022x.wlsh.html",
         "observed_on": "2026-11-08",
@@ -539,8 +539,19 @@
         "source_html_sha256": "3fde66df3623c9f272358965e096ebb23c2bdf95ebee229e130aa02bd3539544",
         "text_sha256": "3c607c3622f9900aa17a575754b84e0e543dd950782b4fe580bc41f26e564ffb",
         "notice_sha256": "58712c73f40813d0ee50854c3a500c236e9c7e40c57fe5ebc5f368660b96915a",
-        "method": "Complete official pinned ATI bodies/notices and full indexed VRI roots reviewed individually and independently. No publisher English bodies bundled. Local snapshots do not establish current upstream freshness or deployment.",
+        "method": "Complete official pinned ATI bodies/notices and full indexed VRI roots reviewed individually and independently. No publisher English bodies bundled. Local snapshots do not establish current upstream freshness or deployment. D208 independently verified sourceXML and corrected the21/22 index boundary; this hold was rechecked against the current22-only root. The source still begins inside one bundled paragraph.",
         "root_units": [
+          {
+            "id": "sn12.22",
+            "title": "Dutiyadasabalasuttaṃ",
+            "vri": "22",
+            "book": 12,
+            "start": 146,
+            "end": 150,
+            "root_blocks_sha256": "ffa34ef49339c38f3778fe34d6b07d192c5495d7aa8e8dfc7c4c6f2024e8d979"
+          }
+        ],
+        "previous_root_units": [
           {
             "id": "sn12.22",
             "title": "Dutiyadasabalasuttaṃ",
@@ -549,6 +560,67 @@
             "start": 143,
             "end": 150,
             "root_blocks_sha256": "4fbe28d2b2a3d331d4b2bd0f907ac96fd3c503f22b1258e3bc14b732c80c76fa"
+          }
+        ],
+        "source_xml_sha256": "61bc83404230b7cf06142f642834c8ea69aa0f4f2cc45d201716cd1ac9a0b40a"
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/an/an06/an06.054.olen.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "an6.54"
+      ],
+      "reason": "Discontinuous bird and royal-tree excerpts omit Dhammika narrative, applications, six teachers and closing material. Source begins/ends inside bundled paragraphs and includes extensive editorial notes. No single whole-segment contiguous scope is approved.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/an/an06/an06.054.olen.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "6378878b65793ccb376a3253908026a22e2b1566a5349de90144511c93f1afb2",
+        "text_sha256": "c92c0a4b60878501c79cc1b6b7fba2d3bcd71c029677dde1f8d4e5b0460d903d",
+        "notice_sha256": "bca344171e1a5d1d3bfc8aa81a83a0ca2bbb9f954745cd8c67b432243135d8e4",
+        "method": "Complete pinned official ATI pages/notices, complete indexed VRI roots and all merged-provider alternatives inspected independently. No publisher English bodies bundled; frozen-source evidence, not upstream freshness or deployment.",
+        "root_units": [
+          {
+            "id": "an6.54",
+            "title": "Dhammikasuttaṃ",
+            "vri": "54",
+            "book": 21,
+            "start": 446,
+            "end": 491,
+            "root_blocks_sha256": "913a66c1e6c579b53e516c72f2098272695cdd706ed813de91ab9fc1ec60b8e6"
+          }
+        ]
+      }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/an/an10/an10.027x.nypo.html",
+      "status": "withheld-partial-unit",
+      "subject_ids": [
+        "an10.27"
+      ],
+      "reason": "Only the one-nutriment teaching inside paragraph11; omits its formal opening/closing frames, initial narrative and questions2–10. No whole-segment partial mapping is approved.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/an/an10/an10.027x.nypo.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "source_html_sha256": "008715d4db521b9f7fb520eb6f98036f8393024f574a9faaa2eaee1eb7a34c5e",
+        "text_sha256": "83a9550b2a3ae26bc37e29c7fb556fda3bc92794b242d1f3ed6fbc8d863ccdf1",
+        "notice_sha256": "b3309dda88fbad14cb7bcef511c3b8bfc29a7995135bbba8e7b85ab6b79ba9f3",
+        "method": "Complete pinned official ATI pages/notices, complete indexed VRI roots and all merged-provider alternatives inspected independently. No publisher English bodies bundled; frozen-source evidence, not upstream freshness or deployment.",
+        "root_units": [
+          {
+            "id": "an10.27",
+            "title": "Paṭhamamahāpañhāsuttaṃ",
+            "vri": "27",
+            "book": 25,
+            "start": 213,
+            "end": 233,
+            "root_blocks_sha256": "915ef6ccc7d23a4a5eca5c902bb8b433f42ed9427bf0942d3001ba4e3d6151b6"
           }
         ]
       }

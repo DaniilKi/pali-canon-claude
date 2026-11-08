@@ -15,7 +15,7 @@ with tempfile.TemporaryDirectory() as tmp:
  original={'wrong-owner':[{'source':'ati','path':x['row']['path'],'url':'https://accesstoinsight.org'+x['row']['path']+'.html?bypass=1','shared_scope':{}}],'unrelated':[{'source':'ati','url':'https://accesstoinsight.org/tipitaka/kn/thag/unrelated.html'}]};before=copy.deepcopy(original)
  out,report=apply_reviewed_partial_links(original,x['canon'],root,manifest);assert original==before and set(out)==set(['unrelated','thag6.13']);assert apply_reviewed_partial_links(out,x['canon'],root,manifest)[0]==out
  withheld,removed=withhold_partial_page_proposals(out,manifest);assert list(withheld)==['unrelated'] and len(removed)==1
- for kind in ['root','pali','notice','extractor','entire-unit','traversal','duplicate','html','escape','collection','unsupported-collection']:
+ for kind in ['root','pali','notice','extractor','entire-unit','traversal','duplicate','html','escape','collection','unsupported-collection','mn-owner-mismatch']:
   bad=copy.deepcopy(x['manifest']);row=bad['links'][0]
   if kind=='root':row['root']['title']='Wrong identity'
   if kind=='pali':row['partial_scope']['pali_sha256']='0'*64
@@ -23,6 +23,7 @@ with tempfile.TemporaryDirectory() as tmp:
   if kind=='extractor':row['partial_scope']['extractor']='whole-page'
   if kind=='entire-unit':row['partial_scope']['first_ref']='thag6.13/1';row['partial_scope']['last_ref']='thag6.13/8'
   if kind=='traversal':row['path']='/tipitaka/kn/thag/../escape'
+  if kind=='mn-owner-mismatch':row['path']='/tipitaka/mn/synthetic-fixture'
   if kind=='collection':row['path']='/tipitaka/kn/snp/synthetic-fixture'
   if kind=='unsupported-collection':row['path']='/tipitaka/kn/thig/synthetic-fixture'
   if kind=='duplicate':bad['links'].append(copy.deepcopy(row))
@@ -57,6 +58,6 @@ with tempfile.TemporaryDirectory() as tmp:
  proc=subprocess.run([sys.executable,'scripts/canon/build_translations.py',*args],capture_output=True,text=True,encoding='utf-8');assert proc.returncode==0,proc.stderr;assert json.loads((p/'out.json').read_text(encoding='utf-8'))=={}
  code="import sys;sys.path.insert(0,'scripts/canon');import reviewed_partial_pages;reviewed_partial_pages.withhold_partial_page_proposals=lambda out:(out,[]);from build_translations import main;main()"
  proc=subprocess.run([sys.executable,'-c',code,*args],capture_output=True,text=True,encoding='utf-8');assert proc.returncode==0,proc.stderr
- out=json.loads((p/'out.json').read_text(encoding='utf-8'));assert sum(len(v) for v in out.values())==len(x['rows'])==8,out
+ out=json.loads((p/'out.json').read_text(encoding='utf-8'));assert sum(len(v) for v in out.values())==len(x['rows'])==9,out
 print('passed')`,{rows,units});assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/passed/);
 });

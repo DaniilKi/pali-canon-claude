@@ -44,7 +44,7 @@ test('all approximate records distinguish explicit sharing from unverified align
     assert.ok(notes.includes(summary.alignment.note), unit.id);
     kinds[expected] += 1;
   }
-  assert.deepEqual(kinds, { shared_passage: 199, unverified_alignment: 67 });
+  assert.deepEqual(kinds, { shared_passage: 199, unverified_alignment: 66 });
   assert.equal(canon.describe(canon.resolve('mn1').unit).alignment, undefined);
 });
 

@@ -250,6 +250,37 @@
         "notice_sha256": "88687c27dc9ebaa3e83669410a9d708ad44855bde804ae3f11c9c4402d8d1f07",
         "extractor": "ati-freeverse-v1"
       }
+    },
+    {
+      "unit_id": "mn34",
+      "path": "/tipitaka/mn/mn.034x.olen",
+      "translator": "Andrew Olendzki",
+      "english_title": "Culagopalika Sutta: The Shorter Discourse on the Cowherd",
+      "license": "Olendzki-free-distribution-2005",
+      "source_reference": "MN34 concluding three verses (within VRI352)",
+      "mapping_note": "Derived verse excerpt from the named Access to Insight page. Only the three concluding verses mn34/12–mn34/14 are mapped; the preceding prose narrative and similes are excluded. The translator note after the poem is editorial and is excluded. Complete page-specific attribution and distribution notice accompany every excerpt.",
+      "source_html_sha256": "3a09006ff392ee8efa2f9e7533ebed061d998d68759fe9cef3f693ccb4b7ec67",
+      "root": {
+        "id": "mn34",
+        "title": "Cūḷagopālakasuttaṃ",
+        "vri": "350–352",
+        "book": 8,
+        "start": 1169,
+        "end": 1187,
+        "root_blocks_sha256": "dce86d4b9a4ddc5d2c1959d9bfe216cd717a71434c3a30dc85e38d8925683f23"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mn34",
+        "first_ref": "mn34/12",
+        "last_ref": "mn34/14",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "501abde8e92364dc75cbfc0ef8198f6e960bcba8a9504f21e93c5f04eaee421a",
+        "text_sha256": "ceacf7a42afc017e599151614e69e7e4a7c7b3cc822dc9331c00bfde252f140e",
+        "notice_sha256": "00871cb7741e9aa3350ffb206d616de1bc8b533dcda2d44c9937fb038f2321a8",
+        "extractor": "ati-freeverse-v1"
+      }
     }
   ]
 }
