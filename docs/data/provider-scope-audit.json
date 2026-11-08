@@ -1,0 +1,164 @@
+{
+  "baseline_commit": "e3b65815daae077b96f1eac0b6d2a7deb17dcd15",
+  "observed_on": "2026-11-08",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "method": "Complete primary rendered publisher pages and all six complete VRI roots reviewed independently. Direct raw DT fetch unavailable in this environment; no raw HTML, extraction, notice or live-runtime source pin is claimed. No English source bodies bundled.",
+  "cases": [
+    {
+      "owner": "iti10",
+      "translation_id": "dt:KN/Iti/iti10",
+      "url": "https://www.dhammatalks.org/suttas/KN/Iti/iti10.html",
+      "reference": "10—13 Itivuttaka",
+      "decision": "withhold ordinary single-unit binding",
+      "scope": "Four distinct primary records: aversion, delusion, anger and contempt; verses refer to sections2–5. Do not attach all wording to Iti10. Existing ATI Ones shared scope remains independently available with explicit consent.",
+      "root_units": [
+        {
+          "id": "iti10",
+          "title": "Dosapariññāsuttaṃ",
+          "vri": "10",
+          "book": 30,
+          "start": 68,
+          "end": 79,
+          "root_blocks_sha256": "367f1ca74ee3e5653da2c16528ba19dcfa7792383cbfb58eb7f00db75297fb35"
+        },
+        {
+          "id": "iti11",
+          "title": "Mohapariññāsuttaṃ",
+          "vri": "11",
+          "book": 30,
+          "start": 79,
+          "end": 87,
+          "root_blocks_sha256": "cf52d1e71d04437874587727c994d932b57a7bed61a6b5354bf39949b41f5012"
+        },
+        {
+          "id": "iti12",
+          "title": "Kodhapariññāsuttaṃ",
+          "vri": "12",
+          "book": 30,
+          "start": 87,
+          "end": 94,
+          "root_blocks_sha256": "b147e9ea77571d6834e5f3f7bc85add132b9726b2c39353ba811bbedb8cc59ed"
+        },
+        {
+          "id": "iti13",
+          "title": "Makkhapariññāsuttaṃ",
+          "vri": "13",
+          "book": 30,
+          "start": 94,
+          "end": 101,
+          "root_blocks_sha256": "89b8bf42494fdfb085987646268dd9ed51f2c954376e08cc58e737b7894cc54e"
+        }
+      ]
+    },
+    {
+      "owner": "an3.47",
+      "translation_id": "dt:AN/AN3_47",
+      "url": "https://www.dhammatalks.org/suttas/AN/AN3_47.html",
+      "reference": "AN 3:47–48 Fabricated",
+      "decision": "retain existing ordinary binding",
+      "scope": "Indexed an3.47 contains complete VRI47–48 fabricated/unfabricated sections. Next indexed an3.48 contains VRI49 Mountain; publisher and indexed numbering differ. No extra binding or split.",
+      "root_units": [
+        {
+          "id": "an3.47",
+          "title": "Saṅkhatalakkhaṇasuttaṃ",
+          "vri": "47–48",
+          "book": 18,
+          "start": 367,
+          "end": 371,
+          "root_blocks_sha256": "3077b231390dad86b3b5106f90b659b9c09c0b775dd2e1faab961ca521438cab"
+        },
+        {
+          "id": "an3.48",
+          "title": "Pabbatarājasuttaṃ",
+          "vri": "49",
+          "book": 18,
+          "start": 371,
+          "end": 383,
+          "root_blocks_sha256": "97dc21e82e76c5bae9daf734fb9d1929a7e5e8eb95cc79d54a87ae7573abe315"
+        }
+      ]
+    }
+  ],
+  "rights": {
+    "notice_url": "https://www.dhammatalks.org/",
+    "observation": "DT site states Creative Commons Attribution-NonCommercial4.0 and regards any sale as commercial. Existing rights restrictions remain; no new copying or shared-page runtime approval."
+  },
+  "coverage_after": {
+    "ordinary_links": 2587,
+    "dhammatalks": 1274,
+    "ati": 1160,
+    "anandajoti": 153,
+    "direct_indexed": 1448,
+    "including_inherited": 1871,
+    "runtime_direct": 1422,
+    "runtime_including_inherited": 1845,
+    "shared_pages": 12,
+    "shared_subject_records": 110,
+    "shared_only": 52
+  },
+  "screen": {
+    "command": "node scripts/source-scope-screen.mjs",
+    "screening_only": true,
+    "metadata_leads": 234,
+    "priority_leads": [
+      {
+        "owner": "thig2.3",
+        "translation_id": "ati:/tipitaka/kn/thig/thig.02.03.than",
+        "source": "ati",
+        "url": "https://www.accesstoinsight.org/tipitaka/kn/thig/thig.02.03.than.html",
+        "reference": "Thig 19-38",
+        "triage": "inspect wider verse-reference extent",
+        "indexed_root": {
+          "id": "thig2.3",
+          "title": "Sumaṅgalamātātherīgāthā",
+          "vri": "23–24",
+          "book": 35,
+          "start": 115,
+          "end": 123,
+          "kind": null,
+          "members": [],
+          "approximate": false
+        }
+      },
+      {
+        "owner": "thig3.4",
+        "translation_id": "ati:/tipitaka/kn/thig/thig.03.04.rhyc",
+        "source": "ati",
+        "url": "https://www.accesstoinsight.org/tipitaka/kn/thig/thig.03.04.rhyc.html",
+        "reference": "Thig 39-62",
+        "triage": "inspect wider verse-reference extent",
+        "indexed_root": {
+          "id": "thig3.4",
+          "title": "Dantikātherīgāthā",
+          "vri": "48–50",
+          "book": 35,
+          "start": 220,
+          "end": 231,
+          "kind": null,
+          "members": [],
+          "approximate": false
+        }
+      },
+      {
+        "owner": "thig3.4",
+        "translation_id": "ati:/tipitaka/kn/thig/thig.03.04.than",
+        "source": "ati",
+        "url": "https://www.accesstoinsight.org/tipitaka/kn/thig/thig.03.04.than.html",
+        "reference": "Thig 39-62",
+        "triage": "inspect wider verse-reference extent",
+        "indexed_root": {
+          "id": "thig3.4",
+          "title": "Dantikātherīgāthā",
+          "vri": "48–50",
+          "book": 35,
+          "start": 220,
+          "end": 231,
+          "kind": null,
+          "members": [],
+          "approximate": false
+        }
+      }
+    ],
+    "warning": "Edition and chapter/verse differences are not errors by themselves. These three leads are not reviewed findings or approved additions."
+  }
+}

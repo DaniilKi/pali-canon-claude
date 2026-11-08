@@ -198,6 +198,62 @@
         "withdrawn_owner_root_blocks_sha256": "924bfa474b1a64ff09c40ffd308fb8cfc7ad124e6da84d9d21316cd872af3aec",
         "method": "Complete pinned publisher body, explicit section boundaries, full notice, owner/other root content reviewed independently. Exact-version source-level quotation witness reproduced the owner misattribution with fixed local provider; no installed/deployed-before claim."
       }
+    },
+    {
+      "source": "dhammatalks",
+      "url": "https://www.dhammatalks.org/suttas/KN/Iti/iti10.html",
+      "status": "withheld-shared-page",
+      "subject_ids": [
+        "iti10",
+        "iti11",
+        "iti12",
+        "iti13"
+      ],
+      "reason": "The primary publisher page explicitly combines aversion/delusion/anger/contempt discourses10–13 and refers their verses to2–5. Complete VRI roots are separately indexedIti10/11/12/13. OrdinaryIti10 ownership misattributes the combined page. Withhold pending exact source-specific shared integration; do not infer raw extraction/runtime hashes from rendered web text. Keep the separately reviewed ATI Ones shared scope, never silently substitute it for an exact DT request.",
+      "review": {
+        "source_url": "https://www.dhammatalks.org/suttas/KN/Iti/iti10.html",
+        "observed_on": "2026-11-08",
+        "method": "Complete primary publisher rendered webpage read through supported web access and compared with all four complete VRI roots; independent review confirmed. Raw DT retrieval via configured allowed runtime was unavailable. No raw HTML or exact runtime English/notice hash asserted, no fabricated snapshot and no deployed-runtime reproduction claim.",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "root_units": [
+          {
+            "id": "iti10",
+            "title": "Dosapariññāsuttaṃ",
+            "vri": "10",
+            "book": 30,
+            "start": 68,
+            "end": 79,
+            "root_blocks_sha256": "367f1ca74ee3e5653da2c16528ba19dcfa7792383cbfb58eb7f00db75297fb35"
+          },
+          {
+            "id": "iti11",
+            "title": "Mohapariññāsuttaṃ",
+            "vri": "11",
+            "book": 30,
+            "start": 79,
+            "end": 87,
+            "root_blocks_sha256": "cf52d1e71d04437874587727c994d932b57a7bed61a6b5354bf39949b41f5012"
+          },
+          {
+            "id": "iti12",
+            "title": "Kodhapariññāsuttaṃ",
+            "vri": "12",
+            "book": 30,
+            "start": 87,
+            "end": 94,
+            "root_blocks_sha256": "b147e9ea77571d6834e5f3f7bc85add132b9726b2c39353ba811bbedb8cc59ed"
+          },
+          {
+            "id": "iti13",
+            "title": "Makkhapariññāsuttaṃ",
+            "vri": "13",
+            "book": 30,
+            "start": 94,
+            "end": 101,
+            "root_blocks_sha256": "89b8bf42494fdfb085987646268dd9ed51f2c954376e08cc58e737b7894cc54e"
+          }
+        ]
+      }
     }
   ]
 }

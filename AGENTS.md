@@ -21,8 +21,8 @@ Give AI assistants the complete Theravāda scripture (the Pāli Tipiṭaka) so t
 ## Current state (v2.1.0, November 2026)
 
 - 8,544 citable texts across 61 VRI books; 1,259 grouped members; 266 approximate; 11,964 PTS page markers; about 2.8 million words.
-- 2,588 English links (1,275 dhammatalks.org, 1,160 Access to Insight, 153 Ancient Buddhist Texts by Ānandajoti Bhikkhu; 64 placed by the content-based linker, D57), covering 1,449 texts directly and 1,872 including inherited verse links (`list_sources` `translation_coverage` counts ranges through their members: 1,423 and 1,846). No English for the Vinaya; the Abhidhamma has four texts (Ds 1.1, Ds 1.3, Vb 6, Vb 7).
-- Twelve additional shared ATI publisher pages (eight compilations and four condensed pages) concern 110 actual indexed source records. These include five primary VRI peyyāla range records, not invented individual members. They are excluded from whole-unit totals and require exact-ID `allow_shared` / `include_shared` consent, page-level/null-ID results and text/notice pins. `reviewed_shared_pages.json` plus the Node/Python build verifies scope; the separate dhammatalks Mother and Woodward holds, four unsupported Itivuttaka page holds, and single-unit condensed holds remain. See D195, D197, D199, D200, D201 and D202; never count source-group children as separately translated texts.
+- 2,587 English links (1,274 dhammatalks.org, 1,160 Access to Insight, 153 Ancient Buddhist Texts by Ānandajoti Bhikkhu; 64 placed by the content-based linker, D57), covering 1,448 texts directly and 1,871 including inherited verse links (`list_sources` `translation_coverage` counts ranges through their members: 1,422 and 1,845). No English for the Vinaya; the Abhidhamma has four texts (Ds 1.1, Ds 1.3, Vb 6, Vb 7).
+- Twelve additional shared ATI publisher pages (eight compilations and four condensed pages) concern 110 actual indexed source records. These include five primary VRI peyyāla range records, not invented individual members. They are excluded from whole-unit totals and require exact-ID `allow_shared` / `include_shared` consent, page-level/null-ID results and text/notice pins. `reviewed_shared_pages.json` plus the Node/Python build verifies scope; the separate dhammatalks Mother and Woodward holds, five unsupported Itivuttaka page holds, and single-unit condensed holds remain. See D195, D197, D199, D200, D201, D202 and D203; never count source-group children as separately translated texts.
 - Data-lane features in the core tools: Thai/Myanmar/VRI edition pages (56,050 markers) in `get_text` segments and `describe`, and accepted as citations such as "Thai MN 1.103" (`src/editions.mjs`, D51); structured variant readings with `get_text` `variants: "structured"` (`src/variants.mjs`, D52; `includeVariants` still means raw); a `script` option on `get_text`, `search_texts` and `resolve_reference` for Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao and Lanna, with input in any of them accepted (`src/script.mjs`, D50). Lao and Lanna have no VRI edition to test against and await a native-reader check (HANDOFF).
 - 34 MCP tools (11 core in `src/server.mjs` + 23 from feature modules), 3 resources (`pali://sources`, `pali://canon-guide`, `pali://pronunciation`), 4 prompts (`study_passage`, `compare_translations`, `topic_research`, `memorise_passage`); 5 skills (`study`, `compare`, `pali-word`, `method`, `memorise`). The hosted HTTP server adds a 35th tool, `read_passage_widget`, when `CHATGPT_WIDGET=1` (on in `fly.toml` and `render.yaml`). `npm run smoke` prints the live counts.
 - Feature registry (`src/features/index.mjs`, one line per module): `verify` (verify_quote), `findCitations` (find_citations), `calendar` (uposatha, festivals), `daily` (daily_text, reading_plan), `topics` (topic, list_topics, dhamma_list), `dppn` (lookup_name), `vinayaBmc` (vinaya_rule), `abhidhamma` (abhidhamma_matika, patthana_condition), `pronunciation` (pali://pronunciation resource), `paritta` (paritta), `talks` (find_talks), `memorise` (memorise_passage prompt), `commentary` (get_commentary, including direct book references), `commentarySearch` (search_commentary), `sourceBookSearch` (search_source_book), `postCanonical` (get_post_canonical, search_post_canonical), `analyse` (analyse_passage), `parallels` (get_parallels), `glossary` (glossary). `scripts/expected-tools.mjs` derives the exact tool names from these files; tests and smoke compare against it, never a hard-coded count.
@@ -294,3 +294,17 @@ Explicit current-source review must not rewrite old notes or revision metadata.
 This checks source metadata, not a historical content archive or per-segment hash.
 Run `tests/web-bookmark-location.test.mjs`, the bookmark-pin browser check
 (normal/a11y/installed), import, saved-navigation and reading-position regressions.
+
+### Ordinary provider scope triage
+
+Use `node scripts/source-scope-screen.mjs` for offline metadata leads (D203).
+A range or edition-number difference is not a finding: compare complete publisher
+content and complete indexed roots. Preserve the valid AN3.47/VRI47–48 control;
+DT Iti10 combines four roots and stays held pending exact shared integration.
+Do not invent raw HTTP/extraction pins from rendered web text. Keep the
+independent ATI consent-scoped access and reject exact held versions before fetch.
+Run provider-scope and Iti range tests plus the installed shared audit. Its
+synthetic coverage baseline must follow actual removed ordinary sources, not a
+hard-coded assumption that Iti10 has a whole-unit link. Daily choices depend on
+the corrected eligible source pool; do not change the algorithm to preserve a
+stale dated fixture. Historical review counts stay historical.

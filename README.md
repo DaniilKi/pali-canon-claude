@@ -147,7 +147,7 @@ Considered and **not used** (with reasons), and the sources **planned** next, ar
 - **Citation metadata cross-check.** The existing audit compares 1,190 Access to Insight canonical page entries and their PTS hints with our mapping. This checks citation metadata, not every English page’s completeness or individual discourse scope; source-level reviews remain necessary.
 - **Standalone browser reading.** The bundled HTTP server includes a responsive scripture and study reader, without an AI account. See [how to run it and its source/storage boundaries](docs/web-app.md). Phone and remote access require a reachable host; the documentation site is separate.
 - **Shared publisher pages stay separate.** Twelve reviewed ATI pages (eight compilations and four condensed pages) concern 110 actual indexed source records. Some are original Pāli range records, not separate individually translated passages. Explicit consent, complete notices and page-level quotation results preserve that distinction. See [the range review](docs/data/condensed-primary-ranges.md) [Mother/Protectors review](docs/data/family-protectors-review.md) and [seven-page attribution audit](docs/data/iti-range-binding-audit.md).
-- **Translations are linked only with strong evidence.** A translation is attached only when its title, number or PTS page matches unambiguously, or an individually reviewed story correspondence establishes its scope. We prefer no link to a wrong link. The current index has 2,588 ordinary link records, including 64 content-based placements. Their recorded evidence and automatic audit are not a complete semantic review of every source page. Unsafe bindings discovered during review are withheld; see [the latest scope repair](docs/data/family-protectors-review.md).
+- **Translations are linked only with strong evidence.** A translation is attached only when its title, number or PTS page matches unambiguously, or an individually reviewed story correspondence establishes its scope. We prefer no link to a wrong link. The current index has 2,587 ordinary link records, including 64 content-based placements. Their recorded evidence and automatic audit are not a complete semantic review of every source page. Unsafe bindings discovered during review are withheld; see [the latest scope repair](docs/data/provider-scope-audit.md).
 - **Independent review.** A separate reviewer checked about 110 citations and every PTS lookup in its sample. The problems it found were fixed and are now permanent tests.
 - **Outage drills.** We simulate each website going down and confirm that the backups take over and the Pāli still works.
 
@@ -276,7 +276,7 @@ You do not need Pāli letters. Type the way your keyboard lets you, and every an
 
 ## What it does not do yet
 
-- English is linked for 1,872 texts, about a fifth of the canon. The Vinaya, nearly all of the Abhidhamma and much of the Khuddaka Nikāya have no English yet.
+- English is linked for 1,871 texts, about a fifth of the canon. The Vinaya, nearly all of the Abhidhamma and much of the Khuddaka Nikāya have no English yet.
 - The commentaries (Aṭṭhakathā) and sub-commentaries (Ṭīkā) are not included yet.
 - Other scripts are transliterated by this server from the Roman edition, not taken from printed script editions. Lao and Lanna have not yet been checked against a printed edition or by native readers.
 - Translations and the dictionary need internet; the Pāli does not.
