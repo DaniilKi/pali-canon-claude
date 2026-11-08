@@ -20,9 +20,9 @@ Give AI assistants the complete Theravāda scripture (the Pāli Tipiṭaka) so t
 
 ## Current state (v2.1.0, November 2026)
 
-- 8,544 citable texts across 61 VRI books; 1,259 grouped members; 266 approximate; 11,964 PTS page markers; about 2.8 million words.
-- 2,569 English links (1,274 dhammatalks.org, 1,142 Access to Insight, 153 Ancient Buddhist Texts by Ānandajoti Bhikkhu; 63 currently placed by the content-based linker, D57), covering 1,445 texts directly and 1,868 including inherited verse links (`list_sources` `translation_coverage` counts ranges through their members: 1,419 and 1,842). No English for the Vinaya; the Abhidhamma has four texts (Ds 1.1, Ds 1.3, Vb 6, Vb 7).
-- Eight reviewed ATI verse excerpts concern Ānanda1037–1039, Sirimaṇḍa448–452, Kāḷudāyin527–529, Udāyin700–701, Aṅgulimāla871–873, Heraññakāni145, Aññāsi-Koṇḍañña675 and Nālaka725. Ānanda and Aññāsi-Koṇḍañña are partial-only; none counts as a whole translation. `reviewed_partial_pages.json` controls activation and the packaged registry prevents whole-container downgrades. Exact consent, verse-only extraction, complete-notice and text/Pāli pins are mandatory (D205–D207).
+- 8,544 citable texts across 61 VRI books; 1,259 grouped members; 265 approximate; 11,964 PTS page markers; about 2.8 million words.
+- 2,566 English links (1,274 dhammatalks.org, 1,139 Access to Insight, 153 Ancient Buddhist Texts by Ānandajoti Bhikkhu; 63 currently placed by the content-based linker, D57), covering 1,442 texts directly and 1,865 including inherited verse links (`list_sources` `translation_coverage` counts ranges through their members: 1,416 and 1,839). No English for the Vinaya; the Abhidhamma has four texts (Ds 1.1, Ds 1.3, Vb 6, Vb 7).
+- Nine reviewed ATI verse excerpts concern Ānanda1037–1039, Sirimaṇḍa448–452, Kāḷudāyin527–529, Udāyin700–701, Aṅgulimāla871–873, Heraññakāni145, Aññāsi-Koṇḍañña675 , Nālaka725 and MN34’s three concluding verses. Ānanda, Aññāsi-Koṇḍañña and MN34 are partial-only; none counts as a whole translation. `reviewed_partial_pages.json` controls activation and the packaged registry prevents whole-container downgrades. Exact consent, verse-only extraction, complete-notice and text/Pāli pins are mandatory (D205–D208).
 - Twelve additional shared ATI publisher pages (eight compilations and four condensed pages) concern 110 actual indexed source records. These include five primary VRI peyyāla range records, not invented individual members. They are excluded from whole-unit totals and require exact-ID `allow_shared` / `include_shared` consent, page-level/null-ID results and text/notice pins. `reviewed_shared_pages.json` plus the Node/Python build verifies scope; the separate dhammatalks Mother and Woodward holds, five unsupported Itivuttaka page holds, and single-unit condensed holds remain. See D195, D197, D199, D200, D201, D202, D203, D204 and D205; never count source-group children as separately translated texts.
 - Data-lane features in the core tools: Thai/Myanmar/VRI edition pages (56,050 markers) in `get_text` segments and `describe`, and accepted as citations such as "Thai MN 1.103" (`src/editions.mjs`, D51); structured variant readings with `get_text` `variants: "structured"` (`src/variants.mjs`, D52; `includeVariants` still means raw); a `script` option on `get_text`, `search_texts` and `resolve_reference` for Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao and Lanna, with input in any of them accepted (`src/script.mjs`, D50). Lao and Lanna have no VRI edition to test against and await a native-reader check (HANDOFF).
 - 34 MCP tools (11 core in `src/server.mjs` + 23 from feature modules), 3 resources (`pali://sources`, `pali://canon-guide`, `pali://pronunciation`), 4 prompts (`study_passage`, `compare_translations`, `topic_research`, `memorise_passage`); 5 skills (`study`, `compare`, `pali-word`, `method`, `memorise`). The hosted HTTP server adds a 35th tool, `read_passage_widget`, when `CHATGPT_WIDGET=1` (on in `fly.toml` and `render.yaml`). `npm run smoke` prints the live counts.
@@ -333,7 +333,7 @@ locator/index revision fields): its provenance hash depends on the full dataset.
 
 ### Reviewed ATI partial pages
 
-Use `reviewed_partial_pages.py` and its source verifier for all eight registered
+Use `reviewed_partial_pages.py` and its source verifier for all nine registered
 verse-only mappings. Never restore any as an ordinary link or loosen a
 contiguous span to absorb missing/discontinuous verses. Keep the authoritative
 registry in sync through the build. ATI partial scope must retain the extractor,
@@ -348,3 +348,7 @@ Kāḷudāyin, Udāyin and Aṅgulimāla retired in D206. The remaining original
 holds and later exclusions still apply; the manifest is authoritative. No whole
 Ānanda or Aññāsi-Koṇḍañña version exists
 in the index after correcting its two excerpt links.
+
+### Reviewed Dasabala citation boundary
+
+D208 source-verifies SN12.21[143,146) and SN12.22[146,150) in `s0302m.mul.xml`; both use `sn-dasabala-v1` locator revisions. SN12.21 is no longer an approximate duplicate of SN12.20. Preserve every source block and authentic VRI commit. Use `dasabala_spans.py` at the end of source indexing or `repair_dasabala_spans.py` with freshly unpacked current canon/commentary inputs, checking dataset hashes against the branch before integration. An old temporary input with the same VRI commit can still regress earlier index repairs. Remove only the false SN12.21→Paccaya commentary association; its actual short commentary is cited but unaligned. Walshe’s tail still starts inside a paragraph, so its hold remains. Rebuild parallels after canon/commentary metadata changes. Historical daily fixtures store eligibility IDs, not authority to restore withheld translations. See [D208 evidence](docs/data/priority-prose-and-dasabala-review.md).

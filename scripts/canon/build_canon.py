@@ -23,6 +23,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 import vri  # noqa: E402
 from shared_spans import synchronise_shared_spans  # noqa: E402
 from story_spans import story_spans  # noqa: E402
+from dasabala_spans import dasabala_spans  # noqa: E402
 
 BOOKS = OrderedDict([
     # file: (collection, pitaka)
@@ -686,6 +687,7 @@ def main():
     units, misses, disagreements = aligned_units(b, bilara)
     b.units = units
     corrected = set(story_spans(b.books, b.units))
+    corrected.update(dasabala_spans(b.books, b.units))
     for u in b.units:
         if u['collection'] in ('pv', 'vv') or u['id'] in corrected:
             paras = [p['n'] for p in b.books[u['book']]['blocks'][u['start']:u['end']] if p['n']]

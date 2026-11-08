@@ -15,12 +15,15 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve as resolvePath, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as canon from '../src/canon.mjs';
+import {heldTopicReference} from './topic-source-links.mjs';
 
 const ATI_COMMIT = '45fedca341497120651efa20e756b04a13e61089';
 const RAW = `https://raw.githubusercontent.com/bcbsit/ati/${ATI_COMMIT}/`;
 const ATI = 'https://www.accesstoinsight.org';
 const root = resolvePath(dirname(fileURLToPath(import.meta.url)), '..');
-const out = resolvePath(root, 'server', 'data', 'topics.json');
+const outputAt=process.argv.indexOf('--output');
+if(outputAt>=0&&!process.argv[outputAt+1])throw Error('--output requires a file path');
+const out = outputAt>=0?resolvePath(process.argv[outputAt+1]):resolvePath(root, 'server', 'data', 'topics.json');
 
 const ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', mdash: '—', ndash: '–', hellip: '…', lsquo: '‘', rsquo: '’', ldquo: '“', rdquo: '”' };
 const decode = (s) => s
@@ -79,6 +82,8 @@ function links(html) {
       const label = text(labelHtml);
       if (/^(https?:|mailto:|index-)/.test(href)) continue;
       if (href.startsWith('tipitaka/')) {
+        const held=heldTopicReference(`${ATI}/${href}`,label);
+        if(held){if(!reading.some(r=>r.url===held.url&&r.scope===held.scope))reading.push(held);continue;}
         const unit = resolveAti(href, label);
         if (!unit) { unresolved.set(href, label); continue; }
         if (seen.has(unit.id)) continue;

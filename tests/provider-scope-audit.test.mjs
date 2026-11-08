@@ -1,3 +1,4 @@
+import{historicalSutta}from'./helpers/daily-epochs.mjs';
 import {test,afterEach} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -48,8 +49,7 @@ with tempfile.TemporaryDirectory() as tmp:
 print('passed')`],{encoding:'utf8',input:JSON.stringify(units),env:{...process.env,PYTHONUTF8:'1'}});assert.equal(p.status,0,p.stderr);assert.match(p.stdout,/passed/);
 });
 
-test('daily data-version pool excludes Iti10 while preserving the previous schedule under an isolated old-data fixture',()=>{
- const now=canon.load(),oldSn=JSON.parse(readFileSync('docs/data/nalaka-kondanna-scope-review.json','utf8')).rows.find(r=>r.owner==='sn12.22').before_link;const d={...now,translations:{...now.translations,'sn12.22':[oldSn]}};const current=dailyText({...canon,load:()=>d},{date:'2026-11-01',kind:'sutta'});assert.equal(current.rotation.of,1269);assert.equal(current.text.id,'sn5.3');
- const prior={...d,translations:{...d.translations,iti10:[{source:'dhammatalks',url:'https://www.dhammatalks.org/suttas/KN/Iti/iti10.html',translator:'Ṭhānissaro Bhikkhu',reference:'10—13 Itivuttaka',match:'number'}]}};
- const restored=dailyText({...canon,load:()=>prior},{date:'2026-11-01',kind:'sutta'});assert.equal(restored.rotation.of,1270);assert.equal(restored.text.id,'snp2.7');
+test('D203 historical eligibility snapshots preserve both sides of its source correction without restoring held runtime links',()=>{
+ assert.deepEqual(historicalSutta('d203_after'),{of:1269,id:'sn5.3'});
+ assert.deepEqual(historicalSutta('d203_before'),{of:1270,id:'snp2.7'});
 });

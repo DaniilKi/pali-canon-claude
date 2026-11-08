@@ -2051,7 +2051,7 @@
       }
     }
     if (data.further_reading?.length) {
-      view.append(el("h3", "Further reading \xB7 commentary, not scripture"));
+      view.append(el("h3", "External publisher links"));
       for (const item of data.further_reading) {
         const card = el("article", void 0, "entry");
         card.append(external(item.title, item.url), el("p", item.kind, "muted"));

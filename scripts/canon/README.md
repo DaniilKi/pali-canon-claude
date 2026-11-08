@@ -304,7 +304,7 @@ only active source.
 
 ## Reviewed ATI verse-only partial pages
 
-D205–D207 register eight sources in `reviewed_partial_pages.json`. Normal rebuilds
+D205–D208 register nine sources in `reviewed_partial_pages.json`. Normal rebuilds
 always withhold their ordinary proposals. `--content` activation verifies full
 roots, raw HTML, verse-only extraction, selected Pāli and complete notice pins
 before adding exact partial declarations. Remaining exclusions apply last.
@@ -323,4 +323,14 @@ remain held; never create a single contiguous declaration across omissions.
 
 ## Existing ordinary ATI excerpt leads
 
-`ordinary_excerpt_packet.py CANON.gz TRANSLATIONS.json ATI-CHECKOUT` reads a clean pinned official checkout and emits metadata only. It checks every supplied ordinary ATI binding, fails on missing/escaping paths, and flags publisher extent/title/filename clues. Flags are neither errors nor approvals; an excerpt from a collection may fully translate one indexed poem. Exact prior retained snapshots are separately annotated only while source/root/link pins agree. No scripture body is returned. See `docs/data/ordinary-excerpt-review-queue.json`:28 flags, one frozen retained snapshot,27 unreviewed bindings; counts overlap the broader screen. Review complete bodies, boundaries and notices individually.
+`ordinary_excerpt_packet.py CANON.gz TRANSLATIONS.json ATI-CHECKOUT` reads a clean pinned official checkout and emits metadata only. It checks every supplied ordinary ATI binding, fails on missing/escaping paths, and flags publisher extent/title/filename clues. Flags are neither errors nor approvals; an excerpt from a collection may fully translate one indexed poem. Exact prior retained snapshots are separately annotated only while source/root/link pins agree. No scripture body is returned. See `docs/data/ordinary-excerpt-review-queue.json`:25 flags, one frozen retained snapshot,24 unreviewed bindings; counts overlap the broader screen. Review complete bodies, boundaries and notices individually.
+
+## Reviewed SN12.21/22 index repair
+
+`dasabala_spans.py` runs after the story corrections during source indexing. For the legacy bundle, freshly unpack **the current branch**, fetch `romn/s0302m.mul.xml` from the pinned VRI commit, then run:
+
+```sh
+python3 scripts/canon/repair_dasabala_spans.py /tmp/current/canon.json.gz /tmp/current/commentary.json.gz /tmp/pali-vri /tmp/canon-fixed.gz /tmp/commentary-fixed.gz
+```
+
+Check the receipt’s input dataset hashes against freshly unpacked branch inputs, independently compare the entire change scope, then install the two output gzips, shard/build and regenerate parallels. Matching source commits alone do not prove a temporary dataset is current. The helper verifies the entire source book and only known legacy/corrected states, keeps all source/commentary wording and all unrelated records, sets both `sn-dasabala-v1` locators, and removes only the false Paccaya commentary link. Unknown titles, group dependencies, source drift or commentary baselines fail before mutation. See D208.

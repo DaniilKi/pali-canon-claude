@@ -30705,7 +30705,7 @@ function topic(canon, name) {
       };
     }),
     ...t.see_also?.length ? { see_also: t.see_also.map((s) => ({ slug: s, name: bySlug.get(s)?.name, read_with: { tool: "topic", name: s } })).filter((s) => s.name) } : {},
-    ...t.further_reading?.length ? { further_reading: t.further_reading.map((r) => ({ ...r, kind: "Access to Insight essay or study guide (commentary, not scripture)" })) } : {},
+    ...t.further_reading?.length ? { further_reading: t.further_reading.map((r) => ({ ...r, kind: r.scope === "withheld-publisher-page" ? "External publisher page; automatic canonical mapping withheld after source review. Not an available whole-unit translation." : "Access to Insight essay or study guide (commentary, not scripture)" })) } : {},
     ...list ? { dhamma_list: { slug: list.slug, name: list.name, read_with: { tool: "dhamma_list", name: list.slug }, hint: `dhamma_list("${list.slug}") gives the members and defining passage.` } } : {},
     ...hits.length > 1 ? { other_matches: hits.slice(1, 8).map((h) => ({ slug: h.slug, name: h.name, read_with: { tool: "topic", name: h.slug } })) } : {},
     note: TOPIC_NOTE,

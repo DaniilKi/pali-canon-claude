@@ -462,7 +462,7 @@ async function topicPage(args, token) {
   if (data.dhamma_list) view.append(el('p', 'Related numbered list:', 'muted'), link(data.dhamma_list.name, route('lists', { name: data.dhamma_list.slug }), 'button'));
   view.append(el('h3', 'Mapped canonical readings')); if (!data.texts.length) view.append(el('p', 'No safely mapped canonical link is recorded for this entry. Read the original index; no text was inferred.')); studySourceCards(data.texts);
   if (data.see_also?.length) { view.append(el('h3', 'See also · index cross-references')); for (const item of data.see_also) { const p = el('p'); p.append(link(item.name, route('topic', { name: item.slug }))); view.append(p); } }
-  if (data.further_reading?.length) { view.append(el('h3', 'Further reading · commentary, not scripture')); for (const item of data.further_reading) { const card = el('article', undefined, 'entry'); card.append(external(item.title, item.url), el('p', item.kind, 'muted')); view.append(card); } }
+  if (data.further_reading?.length) { view.append(el('h3', 'External publisher links')); for (const item of data.further_reading) { const card = el('article', undefined, 'entry'); card.append(external(item.title, item.url), el('p', item.kind, 'muted')); view.append(card); } }
   if (data.other_matches?.length) { const more = el('details'); more.append(el('summary', 'Other matching index entries')); for (const item of data.other_matches) { const p = el('p'); p.append(link(item.name, route('topic', { name: item.slug }))); more.append(p); } view.append(more); } topicProvenance(data);
 }
 async function teachingLists(args, token) {
