@@ -861,6 +861,19 @@
     }
   }
 
+  // web/local-storage-write.mjs
+  function guardedStorageWrite({ expected, value, read: read2, write }) {
+    const actual = read2();
+    if (!(expected === null || typeof expected === "string") || actual !== expected) {
+      const error = Error("Another tab changed browser data. No stored data was overwritten.");
+      error.code = "BROWSER_DATA_CHANGED";
+      throw error;
+    }
+    if (typeof value !== "string") throw Error("Browser data could not be serialized.");
+    write(value);
+    return value;
+  }
+
   // web/reader.js
   var $ = (id) => document.getElementById(id);
   var view = $("view");
@@ -874,14 +887,20 @@
   var storageOK = true;
   var storageSnapshot;
   var positionDurable = true;
+  var storageConflict = false;
+  var storageReadFailed = false;
+  var noteDrafts = /* @__PURE__ */ new Map();
+  var noteKey = (item) => JSON.stringify([item.uid, item.ref]);
   function loadLocal() {
     try {
       const raw = localStorage.getItem(KEY);
       storageSnapshot = raw;
       const x = JSON.parse(raw || "{}");
-      return x && typeof x === "object" && !Array.isArray(x) ? x : {};
+      if (!x || typeof x !== "object" || Array.isArray(x)) throw Error("Unsupported browser data");
+      return x;
     } catch {
       storageOK = false;
+      storageReadFailed = true;
       return {};
     }
   }
@@ -889,16 +908,53 @@
   local.reading_progress = cleanProgress(local.reading_progress);
   if (!Array.isArray(local.saved)) local.saved = [];
   local.saved = local.saved.filter((x) => x && typeof x.uid === "string" && typeof x.ref === "string" && typeof x.title === "string").slice(0, 500);
+  function storageWarning() {
+    return storageConflict ? "Another tab changed browser data. Changes are kept in this tab only; no saved data was overwritten. Export reading progress and bookmarks/notes before reloading." : "Browser storage is unavailable. Changes are kept in this tab only. Export reading progress and bookmarks/notes before closing.";
+  }
+  function exportBookmarks() {
+    return { format: KEY, saved: local.saved.map((item) => {
+      return noteDrafts.has(noteKey(item)) ? { ...item, note: noteDrafts.get(noteKey(item)) } : item;
+    }) };
+  }
+  function showStorageRecovery() {
+    const panel = $("storage-recovery");
+    if (!panel.hidden) {
+      panel.querySelector("p").textContent = storageWarning();
+      return;
+    }
+    panel.hidden = false;
+    panel.replaceChildren(el("h2", "Keep this tab\u2019s changes"), el("p", storageWarning()), el("p", "Recovery files include this tab\u2019s unsaved note edits. Existing saved data is kept. After reloading, compare conflicting notes manually; import keeps existing notes on duplicate passages.", "muted"));
+    const actions = el("div", void 0, "toolbar");
+    actions.append(button("Download this tab\u2019s bookmarks and notes", () => exportPersonal(exportBookmarks(), "pali-library-bookmarks.json")), button("Download this tab\u2019s reading progress", () => exportPersonal({ format: "pali-library-reading-progress-v1", progress: local.reading_progress }, "pali-library-reading-progress.json")));
+    const review = el("div");
+    actions.append(button("Review reload options", () => {
+      const title = el("h3", "Export before reloading");
+      title.tabIndex = -1;
+      review.replaceChildren(title, el("p", "Reloading replaces changes kept only in this tab with stored browser data. Download both recovery files first.", "notice"), button("Cancel reload", () => {
+        review.replaceChildren();
+        actions.querySelector("button:last-child").focus();
+      }), button("Reload stored browser data", () => location.reload()));
+      title.focus();
+    }));
+    panel.append(actions, review);
+  }
   function persist() {
     try {
-      const serialized = JSON.stringify(local);
-      localStorage.setItem(KEY, serialized);
-      storageSnapshot = serialized;
+      if (storageConflict || storageReadFailed) {
+        showStorageRecovery();
+        status2.textContent = storageWarning();
+        return false;
+      }
+      storageSnapshot = guardedStorageWrite({ expected: storageSnapshot, value: JSON.stringify(local), read: () => localStorage.getItem(KEY), write: (value) => localStorage.setItem(KEY, value) });
+      storageOK = true;
       positionDurable = true;
+      $("storage-recovery").hidden = true;
       return true;
-    } catch {
-      storageOK = false;
-      status2.textContent = "Browser storage is unavailable. Changes are kept only in this tab; export your saved passages.";
+    } catch (error) {
+      if (error.code === "BROWSER_DATA_CHANGED") storageConflict = true;
+      else storageOK = false;
+      showStorageRecovery();
+      status2.textContent = storageWarning();
       return false;
     }
   }
@@ -1034,7 +1090,9 @@
     try {
       if (localStorage.getItem(KEY) !== storageSnapshot) {
         positionDurable = false;
-        status2.textContent = "Another tab changed browser data. This reading position is kept in this tab only; reload before saving.";
+        storageConflict = true;
+        showStorageRecovery();
+        status2.textContent = storageWarning();
         return;
       }
     } catch {
@@ -1684,7 +1742,7 @@
       const saved2 = persist();
       mark.textContent = undo ? "Mark this day read" : "Day marked \u2713 \xB7 undo";
       mark.setAttribute("aria-pressed", String(!undo));
-      status2.textContent = saved2 ? undo ? "Day mark removed from this browser." : "Day marked in this browser only." : "Browser storage is unavailable. Export reading progress before closing this tab.";
+      status2.textContent = saved2 ? undo ? "Day mark removed from this browser." : "Day marked in this browser only." : storageWarning();
     });
     mark.setAttribute("aria-pressed", String(active));
     view.append(mark);
@@ -1909,7 +1967,7 @@
             const done = el("h3", "Reading marks restored");
             done.tabIndex = -1;
             preview.replaceChildren(done, el("p", current.added + " new marks added. Existing marks kept. Open a plan day to review its current source and assignment.", "notice"));
-            status2.textContent = durable ? "Reading marks restored in this browser only." : "Marks are restored in this tab only. Storage is unavailable; export them before closing.";
+            status2.textContent = durable ? "Reading marks restored in this browser only." : storageWarning();
             done.focus();
           } catch (error) {
             failure(error);
@@ -2024,7 +2082,7 @@
               local.saved = current.saved;
               const durable = persist();
               saved();
-              status2.textContent = durable ? current.added.length + " bookmarks restored in this browser. Existing notes kept." : "Bookmarks restored in this tab only. Storage is unavailable; export them before closing.";
+              status2.textContent = durable ? current.added.length + " bookmarks restored in this browser. Existing notes kept." : storageWarning();
             } catch (error) {
               preview.replaceChildren(el("p", error.message, "notice"));
             }
@@ -2047,9 +2105,9 @@
     heading("YOUR PERSONAL READING", "Saved passages");
     view.append(el("p", "Bookmarks and notes stay in this browser only. They are not scripture, synced, or backed up. Export them to keep a copy.", "notice"));
     view.append(button("Export bookmarks and notes", () => {
-      exportPersonal({ format: KEY, saved: local.saved }, "pali-library-bookmarks.json");
+      exportPersonal(exportBookmarks(), "pali-library-bookmarks.json");
     }));
-    view.append(bookmarkImporter());
+    view.append(el("p", "Unsaved note edits stay in this tab while you navigate. Save or export them before closing or reloading.", "muted"), bookmarkImporter());
     if (!local.saved.length) view.append(el("p", "Save a passage while reading to find it here."));
     for (const item of [...local.saved]) {
       const box = el("article", void 0, "segment");
@@ -2059,14 +2117,19 @@
       const input = el("textarea");
       input.className = "note-field";
       input.maxLength = 4e3;
-      input.value = typeof item.note === "string" ? item.note : "";
+      input.value = noteDrafts.get(noteKey(item)) ?? (typeof item.note === "string" ? item.note : "");
+      input.addEventListener("input", () => noteDrafts.set(noteKey(item), input.value));
       label.append(input);
       box.append(label);
       box.append(button("Save note", () => {
         const original = local.saved.find((x) => x.uid === item.uid && x.ref === item.ref);
         if (original) original.note = input.value;
-        if (persist()) status2.textContent = "Personal note saved in this browser.";
+        if (persist()) {
+          noteDrafts.delete(noteKey(item));
+          status2.textContent = "Personal note saved in this browser.";
+        }
       }), button("Remove bookmark", () => {
+        noteDrafts.delete(noteKey(item));
         local.saved = local.saved.filter((x) => !(x.uid === item.uid && x.ref === item.ref));
         persist();
         render();
@@ -2111,7 +2174,7 @@
       else if (page === "about") about();
       else await browse(args, token);
       if (token !== epoch) return;
-      status2.textContent = !storageOK ? "Browser storage is unavailable; export your personal data before closing this tab." : positionDurable ? "" : "Another tab changed browser data. This reading position is kept in this tab only; reload before saving.";
+      status2.textContent = storageConflict || !storageOK || !positionDurable ? storageWarning() : "";
       focusHeading();
     } catch (error) {
       if (token !== epoch) return;

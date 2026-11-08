@@ -288,3 +288,39 @@ See [baseline and acceptance](evidence/web-reader/READING_POSITION.md). Tests co
 normal/audit/extracted-package flows, source/ref refusal, plan limits, opt-out,
 clipboard fallback, pagehide and storage/conflict cases. Physical-device,
 screen-reader and native-reader acceptance remains separate.
+
+## Stale-tab saves and recovery
+
+Browser-data saves now compare the currently stored raw snapshot with the one
+this tab last loaded or saved. If another tab changed it, the stale save is
+refused before writing. The tab remains blocked from later writes until reload;
+changing a preference, deleting a bookmark or marking a plan day cannot silently
+replace the newer profile. Notes, plan marks and source attribution are not
+automatically merged or chosen between. This synchronous optimistic check is
+best-effort; it is not atomic compare-and-swap, transactional multi-tab storage,
+a lock against simultaneous/noncooperating writers, or cross-device sync.
+
+**Keep this tab’s changes** offers local recovery downloads for bookmarks/notes
+and plan marks. These include this tab's pending edits, not the newer other-tab
+version. Reload has a separate review/cancel step explaining that tab-only
+changes will be discarded. Download recovery first, then reload the intact stored
+data and compare conflicts manually. Existing bookmark import keeps the stored
+note on duplicate keys; a conflicting recovered note may need manual copying.
+Exports are not uploaded. Keep these personal files private like your own notes.
+
+Unsaved note drafts survive navigation within the same tab in memory. They are
+not silently persisted by reading-position/preference writes. Save note commits
+an edit only when storage is current; ordinary and recovery exports include the
+latest unsaved drafts. Closing/reloading discards unsaved/unexported drafts. This
+is not a durable draft database or an account backup. Removing a bookmark also
+removes its in-tab draft. Quota/permission failure keeps recovery available;
+a successful retry can clear that warning. Initially unreadable/malformed stored
+profiles are never replaced by empty defaults; preserving them does not repair
+corrupted data, which may require manual browser-data recovery.
+
+See [baseline and acceptance](evidence/web-reader/STORAGE_RECOVERY.md). Tests use
+two actual same-origin tabs with explicitly synthetic private-note fixtures and
+actual plan/library tools. They cover newer-note preservation, draft export,
+plan/pref/delete refusal, keyboard reload review, denied writes and malformed
+existing data. Human/device acceptance and truly simultaneous writes remain
+outside these guarantees.

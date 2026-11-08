@@ -8,19 +8,35 @@ import { MAX_PROGRESS_BYTES, parseProgress, mergeProgress } from './progress-imp
 import { topicCatalogue, topicDetail, listCatalogue, listDetail } from './topics-study.mjs';
 import { createRequestPool } from './request-lifecycle.mjs';
 import { readingPosition, assertPositionPin } from './reading-position.mjs';
+import { guardedStorageWrite } from './local-storage-write.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
 const view = $('view'), status = $('status');
 let serial = 0, epoch = 0, studyEpoch = 0, positionTimer, activePosition = null;
 const KEY = 'pali-library-v1';
-let storageOK = true, storageSnapshot, positionDurable = true;
-function loadLocal() { try { const raw = localStorage.getItem(KEY); storageSnapshot = raw; const x = JSON.parse(raw || '{}'); return x && typeof x === 'object' && !Array.isArray(x) ? x : {}; } catch { storageOK = false; return {}; } }
+let storageOK = true, storageSnapshot, positionDurable = true, storageConflict = false, storageReadFailed = false;
+const noteDrafts = new Map(), noteKey = item => JSON.stringify([item.uid, item.ref]);
+function loadLocal() { try { const raw = localStorage.getItem(KEY); storageSnapshot = raw; const x = JSON.parse(raw || '{}'); if (!x || typeof x !== 'object' || Array.isArray(x)) throw Error('Unsupported browser data'); return x; } catch { storageOK = false; storageReadFailed = true; return {}; } }
 const local = loadLocal();
 local.reading_progress = cleanProgress(local.reading_progress);
 if (!Array.isArray(local.saved)) local.saved = [];
 local.saved = local.saved.filter(x => x && typeof x.uid === 'string' && typeof x.ref === 'string' && typeof x.title === 'string').slice(0, 500);
-function persist() { try { const serialized = JSON.stringify(local); localStorage.setItem(KEY, serialized); storageSnapshot = serialized; positionDurable = true; return true; } catch { storageOK = false; status.textContent = 'Browser storage is unavailable. Changes are kept only in this tab; export your saved passages.'; return false; } }
+function storageWarning() { return storageConflict ? 'Another tab changed browser data. Changes are kept in this tab only; no saved data was overwritten. Export reading progress and bookmarks/notes before reloading.' : 'Browser storage is unavailable. Changes are kept in this tab only. Export reading progress and bookmarks/notes before closing.'; }
+function exportBookmarks() { return { format: KEY, saved: local.saved.map(item => { return noteDrafts.has(noteKey(item)) ? { ...item, note: noteDrafts.get(noteKey(item)) } : item; }) }; }
+function showStorageRecovery() {
+  const panel = $('storage-recovery'); if (!panel.hidden) { panel.querySelector('p').textContent = storageWarning(); return; } panel.hidden = false;
+  panel.replaceChildren(el('h2', 'Keep this tab’s changes'), el('p', storageWarning()), el('p', 'Recovery files include this tab’s unsaved note edits. Existing saved data is kept. After reloading, compare conflicting notes manually; import keeps existing notes on duplicate passages.', 'muted'));
+  const actions = el('div', undefined, 'toolbar'); actions.append(button('Download this tab’s bookmarks and notes', () => exportPersonal(exportBookmarks(), 'pali-library-bookmarks.json')), button('Download this tab’s reading progress', () => exportPersonal({ format: 'pali-library-reading-progress-v1', progress: local.reading_progress }, 'pali-library-reading-progress.json')));
+  const review = el('div'); actions.append(button('Review reload options', () => { const title = el('h3', 'Export before reloading'); title.tabIndex = -1; review.replaceChildren(title, el('p', 'Reloading replaces changes kept only in this tab with stored browser data. Download both recovery files first.', 'notice'), button('Cancel reload', () => { review.replaceChildren(); actions.querySelector('button:last-child').focus(); }), button('Reload stored browser data', () => location.reload())); title.focus(); })); panel.append(actions, review);
+}
+function persist() {
+  try {
+    if (storageConflict || storageReadFailed) { showStorageRecovery(); status.textContent = storageWarning(); return false; }
+    storageSnapshot = guardedStorageWrite({ expected: storageSnapshot, value: JSON.stringify(local), read: () => localStorage.getItem(KEY), write: value => localStorage.setItem(KEY, value) });
+    storageOK = true; positionDurable = true; $('storage-recovery').hidden = true; return true;
+  } catch (error) { if (error.code === 'BROWSER_DATA_CHANGED') storageConflict = true; else storageOK = false; showStorageRecovery(); status.textContent = storageWarning(); return false; }
+}
 function el(tag, text, className) { const n = document.createElement(tag); if (text !== undefined) n.textContent = text; if (className) n.className = className; return n; }
 function button(text, fn) { const n = el('button', text); n.type = 'button'; n.addEventListener('click', fn); return n; }
 function link(text, href, className) { const n = el('a', text, className); n.href = href; return n; }
@@ -89,7 +105,7 @@ function updateResume() { const valid = local.remember_position !== false && typ
 function rememberPosition(href) {
   if (local.remember_position === false || !href || local.last === href) return;
   local.last = href; updateResume();
-  try { if (localStorage.getItem(KEY) !== storageSnapshot) { positionDurable = false; status.textContent = 'Another tab changed browser data. This reading position is kept in this tab only; reload before saving.'; return; } } catch {}
+  try { if (localStorage.getItem(KEY) !== storageSnapshot) { positionDurable = false; storageConflict = true; showStorageRecovery(); status.textContent = storageWarning(); return; } } catch {}
   positionDurable = persist();
 }
 function visibleReadingPosition() { if (activePosition?.token !== epoch) return; return activePosition.links.find(x => { const rect = x.node.getBoundingClientRect(); return rect.bottom > 1 && rect.top < innerHeight; }); }
@@ -409,7 +425,7 @@ async function plans(args, token) {
   }
   const signature = daySignature(data), prior = local.reading_progress.find(x => x.name === name && x.day === day), active = prior?.signature === signature;
   if (prior && !active) view.append(el('p', 'This day was marked against a different assignment or source revision. Review it before marking the current day.', 'notice'));
-  const mark = button(active ? 'Day marked ✓ · undo' : 'Mark this day read', () => { const current = local.reading_progress.find(x => x.name === name && x.day === day), undo = current?.signature === signature; local.reading_progress = local.reading_progress.filter(x => !(x.name === name && x.day === day)); if (!undo) local.reading_progress.push({ name, day, signature }); const saved = persist(); mark.textContent = undo ? 'Mark this day read' : 'Day marked ✓ · undo'; mark.setAttribute('aria-pressed', String(!undo)); status.textContent = saved ? (undo ? 'Day mark removed from this browser.' : 'Day marked in this browser only.') : 'Browser storage is unavailable. Export reading progress before closing this tab.'; }); mark.setAttribute('aria-pressed', String(active)); view.append(mark);
+  const mark = button(active ? 'Day marked ✓ · undo' : 'Mark this day read', () => { const current = local.reading_progress.find(x => x.name === name && x.day === day), undo = current?.signature === signature; local.reading_progress = local.reading_progress.filter(x => !(x.name === name && x.day === day)); if (!undo) local.reading_progress.push({ name, day, signature }); const saved = persist(); mark.textContent = undo ? 'Mark this day read' : 'Day marked ✓ · undo'; mark.setAttribute('aria-pressed', String(!undo)); status.textContent = saved ? (undo ? 'Day mark removed from this browser.' : 'Day marked in this browser only.') : storageWarning(); }); mark.setAttribute('aria-pressed', String(active)); view.append(mark);
   const daysNav = el('nav', undefined, 'pager'); daysNav.setAttribute('aria-label', 'Plan days'); if (day > 1) daysNav.append(link('← Previous day', route('plans', { name, day: day - 1 }), 'button')); if (day < data.days) daysNav.append(link('Next day →', route('plans', { name, day: day + 1 }), 'button')); view.append(daysNav);
   if (data.guide) { const guide = el('section', undefined, 'provenance'); guide.append(el('h3', 'Study guide · links only'), el('p', data.guide.cite), el('p', [data.guide.copyright, data.guide.license].filter(Boolean).join(' · ')), el('p', data.guide.note), external('Read the original study guide', data.guide.url)); view.append(guide); if (data.omitted?.length) { const omitted = el('details'); omitted.append(el('summary', 'Unplaced guide links (' + data.omitted.length + ')')); for (const item of data.omitted) omitted.append(el('p', item.reason), external('Original unplaced source link', item.url)); view.append(omitted); } }
   provenance({ source: data.source.pali });
@@ -475,7 +491,7 @@ function progressImporter(catalog, token, updateCounts) {
         try {
           if (snapshot !== undefined && localStorage.getItem(KEY) !== snapshot) throw Error('Browser data changed while previewing this file. Reload this page and preview again; no marks were restored.');
           const current = mergeProgress(local.reading_progress, incoming); local.reading_progress = current.progress; const durable = persist(); updateCounts();
-          const done = el('h3', 'Reading marks restored'); done.tabIndex = -1; preview.replaceChildren(done, el('p', current.added + ' new marks added. Existing marks kept. Open a plan day to review its current source and assignment.', 'notice')); status.textContent = durable ? 'Reading marks restored in this browser only.' : 'Marks are restored in this tab only. Storage is unavailable; export them before closing.'; done.focus();
+          const done = el('h3', 'Reading marks restored'); done.tabIndex = -1; preview.replaceChildren(done, el('p', current.added + ' new marks added. Existing marks kept. Open a plan day to review its current source and assignment.', 'notice')); status.textContent = durable ? 'Reading marks restored in this browser only.' : storageWarning(); done.focus();
         } catch (error) { failure(error); }
       })); else preview.append(el('p', 'No new marks to add.'));
       preview.append(button('Cancel progress import', () => { ++generation; preview.replaceChildren(); input.focus(); })); title.focus();
@@ -520,7 +536,7 @@ function bookmarkImporter() {
       preview.replaceChildren(title, el('p', file.name), el('p', merge.added.length + ' new bookmarks · ' + merge.skipped + ' already saved. Existing notes will not be overwritten.', 'notice'));
       if (merge.added.length) {
         const list = el('ul'); for (const item of merge.added.slice(0, 10)) list.append(el('li', item.title + ' · ' + item.ref)); preview.append(list); if (merge.added.length > 10) preview.append(el('p', 'And ' + (merge.added.length - 10) + ' more.'));
-        preview.append(button('Add ' + merge.added.length + ' new bookmarks', () => { if (token !== epoch || request !== generation) return; try { const current = bookmarkMerge(local.saved, incoming); local.saved = current.saved; const durable = persist(); saved(); status.textContent = durable ? current.added.length + ' bookmarks restored in this browser. Existing notes kept.' : 'Bookmarks restored in this tab only. Storage is unavailable; export them before closing.'; } catch (error) { preview.replaceChildren(el('p', error.message, 'notice')); } }));
+        preview.append(button('Add ' + merge.added.length + ' new bookmarks', () => { if (token !== epoch || request !== generation) return; try { const current = bookmarkMerge(local.saved, incoming); local.saved = current.saved; const durable = persist(); saved(); status.textContent = durable ? current.added.length + ' bookmarks restored in this browser. Existing notes kept.' : storageWarning(); } catch (error) { preview.replaceChildren(el('p', error.message, 'notice')); } }));
       } else preview.append(el('p', 'There are no new passages to add.'));
       preview.append(button('Cancel import', () => { ++generation; preview.replaceChildren(); input.focus(); })); title.focus();
     } catch (error) { if (request === generation && token === epoch) preview.replaceChildren(el('p', error.message, 'notice')); }
@@ -529,14 +545,14 @@ function bookmarkImporter() {
 function saved() {
   view.replaceChildren();
   heading('YOUR PERSONAL READING', 'Saved passages'); view.append(el('p', 'Bookmarks and notes stay in this browser only. They are not scripture, synced, or backed up. Export them to keep a copy.', 'notice'));
-  view.append(button('Export bookmarks and notes', () => { exportPersonal({ format: KEY, saved: local.saved }, 'pali-library-bookmarks.json'); }));
-  view.append(bookmarkImporter());
+  view.append(button('Export bookmarks and notes', () => { exportPersonal(exportBookmarks(), 'pali-library-bookmarks.json'); }));
+  view.append(el('p', 'Unsaved note edits stay in this tab while you navigate. Save or export them before closing or reloading.', 'muted'), bookmarkImporter());
   if (!local.saved.length) view.append(el('p', 'Save a passage while reading to find it here.'));
   for (const item of [...local.saved]) {
     const box = el('article', undefined, 'segment'); const index = Number.isSafeInteger(item.offset) && item.offset >= 0 ? item.offset : Number(item.ref.match(/\/c?(\d+)$/)?.[1] || 1) - 1;
     box.append(link(item.title + ' · ' + item.ref, route('read', { ...readingArgs(item.uid), offset: Math.floor(index / 30) * 30, ref: item.ref })));
-    const label = el('label', 'Your personal note'); const input = el('textarea'); input.className = 'note-field'; input.maxLength = 4000; input.value = typeof item.note === 'string' ? item.note : ''; label.append(input); box.append(label);
-    box.append(button('Save note', () => { const original = local.saved.find(x => x.uid === item.uid && x.ref === item.ref); if (original) original.note = input.value; if (persist()) status.textContent = 'Personal note saved in this browser.'; }), button('Remove bookmark', () => { local.saved = local.saved.filter(x => !(x.uid === item.uid && x.ref === item.ref)); persist(); render(); }));
+    const label = el('label', 'Your personal note'); const input = el('textarea'); input.className = 'note-field'; input.maxLength = 4000; input.value = noteDrafts.get(noteKey(item)) ?? (typeof item.note === 'string' ? item.note : ''); input.addEventListener('input', () => noteDrafts.set(noteKey(item), input.value)); label.append(input); box.append(label);
+    box.append(button('Save note', () => { const original = local.saved.find(x => x.uid === item.uid && x.ref === item.ref); if (original) original.note = input.value; if (persist()) { noteDrafts.delete(noteKey(item)); status.textContent = 'Personal note saved in this browser.'; } }), button('Remove bookmark', () => { noteDrafts.delete(noteKey(item)); local.saved = local.saved.filter(x => !(x.uid === item.uid && x.ref === item.ref)); persist(); render(); }));
     if (item.source_commit) box.append(el('small', 'Saved source revision: ' + item.source_commit, 'muted')); view.append(box);
   }
 }
@@ -550,7 +566,7 @@ async function render() {
   activePosition = null; clearTimeout(positionTimer); const token = ++epoch; ++studyEpoch; requests.cancelAll(); closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
   const [page, query = ''] = location.hash.slice(1).split('?'), args = new URLSearchParams(query);
   try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
-    if (token !== epoch) return; status.textContent = !storageOK ? 'Browser storage is unavailable; export your personal data before closing this tab.' : positionDurable ? '' : 'Another tab changed browser data. This reading position is kept in this tab only; reload before saving.'; focusHeading();
+    if (token !== epoch) return; status.textContent = storageConflict || !storageOK || !positionDurable ? storageWarning() : ''; focusHeading();
   } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); if (error.code === 'READING_SOURCE_CHANGED') { const review = new URLSearchParams(args); review.delete('source'); view.append(link('Review current source at this reference', '#read?' + review, 'button')); } status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
 }
 window.addEventListener('hashchange', render); render();

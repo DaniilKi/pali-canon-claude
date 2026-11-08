@@ -1,0 +1,148 @@
+{
+  "passed": 34,
+  "outside_source_tree": false,
+  "checks": [
+    {
+      "width": 320,
+      "check": "unsaved personal-note draft survives in-tab navigation without silently saving it"
+    },
+    {
+      "width": 320,
+      "check": "ordinary local export includes the unsaved draft without upload or storage mutation"
+    },
+    {
+      "width": 320,
+      "check": "stale tab cannot overwrite a newer note or claim durable success"
+    },
+    {
+      "width": 320,
+      "check": "persistent recovery panel downloads the latest in-memory draft after navigation while preserving the other tab\u2019s saved note"
+    },
+    {
+      "width": 320,
+      "check": "stale plan marks stay recoverable in memory without deleting newer stored marks"
+    },
+    {
+      "width": 320,
+      "check": "conflict remains sticky across preferences and deletion so later actions cannot overwrite stored data"
+    },
+    {
+      "width": 320,
+      "check": "keyboard reload review explains loss of tab-only changes and cancellation preserves all stored data"
+    },
+    {
+      "width": 320,
+      "check": "explicit reload returns to the intact newer stored data without automatic merging or English retrieval"
+    },
+    {
+      "width": 390,
+      "check": "unsaved personal-note draft survives in-tab navigation without silently saving it"
+    },
+    {
+      "width": 390,
+      "check": "ordinary local export includes the unsaved draft without upload or storage mutation"
+    },
+    {
+      "width": 390,
+      "check": "stale tab cannot overwrite a newer note or claim durable success"
+    },
+    {
+      "width": 390,
+      "check": "persistent recovery panel downloads the latest in-memory draft after navigation while preserving the other tab\u2019s saved note"
+    },
+    {
+      "width": 390,
+      "check": "stale plan marks stay recoverable in memory without deleting newer stored marks"
+    },
+    {
+      "width": 390,
+      "check": "conflict remains sticky across preferences and deletion so later actions cannot overwrite stored data"
+    },
+    {
+      "width": 390,
+      "check": "keyboard reload review explains loss of tab-only changes and cancellation preserves all stored data"
+    },
+    {
+      "width": 390,
+      "check": "explicit reload returns to the intact newer stored data without automatic merging or English retrieval"
+    },
+    {
+      "width": 768,
+      "check": "unsaved personal-note draft survives in-tab navigation without silently saving it"
+    },
+    {
+      "width": 768,
+      "check": "ordinary local export includes the unsaved draft without upload or storage mutation"
+    },
+    {
+      "width": 768,
+      "check": "stale tab cannot overwrite a newer note or claim durable success"
+    },
+    {
+      "width": 768,
+      "check": "persistent recovery panel downloads the latest in-memory draft after navigation while preserving the other tab\u2019s saved note"
+    },
+    {
+      "width": 768,
+      "check": "stale plan marks stay recoverable in memory without deleting newer stored marks"
+    },
+    {
+      "width": 768,
+      "check": "conflict remains sticky across preferences and deletion so later actions cannot overwrite stored data"
+    },
+    {
+      "width": 768,
+      "check": "keyboard reload review explains loss of tab-only changes and cancellation preserves all stored data"
+    },
+    {
+      "width": 768,
+      "check": "explicit reload returns to the intact newer stored data without automatic merging or English retrieval"
+    },
+    {
+      "width": 1280,
+      "check": "unsaved personal-note draft survives in-tab navigation without silently saving it"
+    },
+    {
+      "width": 1280,
+      "check": "ordinary local export includes the unsaved draft without upload or storage mutation"
+    },
+    {
+      "width": 1280,
+      "check": "stale tab cannot overwrite a newer note or claim durable success"
+    },
+    {
+      "width": 1280,
+      "check": "persistent recovery panel downloads the latest in-memory draft after navigation while preserving the other tab\u2019s saved note"
+    },
+    {
+      "width": 1280,
+      "check": "stale plan marks stay recoverable in memory without deleting newer stored marks"
+    },
+    {
+      "width": 1280,
+      "check": "conflict remains sticky across preferences and deletion so later actions cannot overwrite stored data"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard reload review explains loss of tab-only changes and cancellation preserves all stored data"
+    },
+    {
+      "width": 1280,
+      "check": "explicit reload returns to the intact newer stored data without automatic merging or English retrieval"
+    },
+    {
+      "width": "storage-denied",
+      "check": "a denied write stays recoverable and a later successful retry clears the warning"
+    },
+    {
+      "width": "malformed-existing",
+      "check": "an unreadable stored profile is never replaced by an empty default profile"
+    }
+  ],
+  "a11y": {
+    "scans": 0,
+    "violations": 0,
+    "results": []
+  },
+  "limits": "Two real same-origin browser tabs with explicitly synthetic personal notes. Plan/library APIs are actual. Quota denial and malformed existing profile are labelled fixtures. The synchronous snapshot check is best-effort, not atomic compare-and-swap, distributed locking, automatic merge or account sync. Note drafts live in tab memory until saved/exported. No physical-device or human accessibility certification. Only audit contexts bypass CSP."
+}
