@@ -46,18 +46,21 @@ try:
         try:urllib.request.urlopen(base+'/healthz',timeout=1);ready=True;break
         except Exception:time.sleep(.1)
     assert ready,'Bundled HTTP server did not become ready'
-    holds=[('dn21','/tipitaka/dn/dn.21.2x.than',1),('an6.54','/tipitaka/an/an06/an06.054.olen',0),('an10.27','/tipitaka/an/an10/an10.027x.nypo',0)]
+    old_holds=[('dn21','/tipitaka/dn/dn.21.2x.than',1),('an6.54','/tipitaka/an/an06/an06.054.olen',0),('an10.27','/tipitaka/an/an10/an10.027x.nypo',0)]
+    holds=[(uid,'ati:'+path,'https://www.accesstoinsight.org'+path+'.html',remaining) for uid,path,remaining in old_holds]
     batch=json.loads((ROOT/'docs/data/ordinary-excerpt-bindings-review.json').read_text(encoding='utf-8'))
-    holds.extend((r['owner'],r['path'],len(r['merged_ordinary_alternatives'])) for r in batch['rows'] if r['decision']=='hold-whole-binding-partial-unit')
-    for uid,held,remaining in holds:
-        before=len(fetches());meta=tool('get_metadata',{'uid':uid});version='ati:'+held
+    holds.extend((r['owner'],'ati:'+r['path'],r['url'],len(r['merged_ordinary_alternatives'])) for r in batch['rows'] if r['decision']=='hold-whole-binding-partial-unit')
+    final_batch=json.loads((ROOT/'docs/data/final-excerpt-binding-review.json').read_text(encoding='utf-8'))
+    holds.extend((r['owner'],r['translation_id'],r['url'],len(r['remaining_ordinary_alternatives'])) for r in final_batch['rows'])
+    for uid,version,url,remaining in holds:
+        before=len(fetches());meta=tool('get_metadata',{'uid':uid})
         assert all(c['translation_id']!=version for c in meta['english'])
         assert meta['english_available']==remaining
         assert rpc('get_translation',{'uid':uid,'translation':version,'allow_partial':True}).get('isError')
-        assert rpc('resolve_reference',{'reference':'https://www.accesstoinsight.org'+held+'.html'}).get('isError')
+        assert rpc('resolve_reference',{'reference':url}).get('isError')
         assert tool('get_text',{'uid':uid,'limit':1})['segments']
         assert len(fetches())==before
-        checks.append({'width':'http','unit':uid,'check':'held exact source and URL refuse before fetch; Pali and remaining indexed alternative are preserved'})
+        checks.append({'width':'http','unit':uid,'check':'held exact source and URL refuse before fetch; Pali and remaining indexed alternatives are preserved'})
     scopes={}
     for row in rows:
         uid=row['unit_id'];version='ati:'+row['path'];before=len(fetches());data=tool('get_text',{'uid':uid,'limit':1});choices=data['english_available'];choice=next(c for c in choices if c['translation_id']==version);scope=choice['translation_scope'];scopes[uid]=scope

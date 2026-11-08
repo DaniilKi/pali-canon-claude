@@ -30548,6 +30548,58 @@ var GUIDES = {
   }
 };
 var GUIDE_DATA = GUIDES;
+var REVIEWED_GUIDE_EXCERPTS = {
+  "mn/mn.075x.than": {
+    "id": "mn75",
+    "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "root": {
+      "id": "mn75",
+      "title": "M\u0101ga\u1E47\u1E0Diyasutta\u1E43",
+      "vri": "207\u2013222",
+      "book": 9,
+      "start": 587,
+      "end": 614,
+      "root_blocks_sha256": "f5b0ceeb528002d793c63c53ecce3a00126e100e8e2123b468fada529bc9663d"
+    },
+    "reference": "M i 501",
+    "translator": "Thanissaro Bhikkhu"
+  },
+  "mn/mn.095x.than": {
+    "id": "mn95",
+    "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "root": {
+      "id": "mn95",
+      "title": "Ca\u1E45k\u012Bsutta\u1E43",
+      "vri": "422\u2013435",
+      "book": 9,
+      "start": 1385,
+      "end": 1414,
+      "root_blocks_sha256": "6cf9073cbffe4f7939333ef805167a0294780d68f471736247d154f5a8d5dc98"
+    },
+    "reference": "M ii 164",
+    "translator": "Thanissaro Bhikkhu"
+  }
+};
+function reviewedGuideExcerpt(canon, path, id) {
+  const proof = REVIEWED_GUIDE_EXCERPTS[path];
+  if (!proof) return null;
+  const { unit, notes } = canon.resolve(id), d = canon.load(), root = proof.root;
+  if (proof.id !== id || d.canon.source.commit !== proof.source_commit || !["id", "title", "vri", "book", "start", "end"].every((k) => unit[k] === root[k]) || scopeHash(d.canon.books[unit.book].blocks.slice(unit.start, unit.end)) !== root.root_blocks_sha256) {
+    throw Error("The reviewed study-guide excerpt subject changed. No replacement assignment was made.");
+  }
+  return { unit, extra: {
+    guide_link: {
+      url: `${ATI2}/tipitaka/${path}.html`,
+      reference: proof.reference,
+      translator: proof.translator,
+      scope: "withheld-publisher-page",
+      whole_unit_coverage: false,
+      individual_alignment_verified: false
+    },
+    notes: [...notes, "The guide cites a publisher excerpt, not an available whole-unit translation. Its subject identity is separately reviewed; the original P\u0101li assignment and external link are preserved. English wording is not individually aligned."],
+    get_text: { uid: id }
+  } };
+}
 var PLAN_INFO = {
   "dhammapada-26-days": { title: "The Dhammapada in 26 days", description: "One chapter (vagga) of the Dhammapada a day, in order: 26 chapters, 423 verses." },
   "mn-year": { title: "The Majjhima Nik\u0101ya in a year", description: "All 152 Middle-Length Discourses over 365 days, in order. Long suttas are split by segment so each day has a similar amount of P\u0101li." },
@@ -30590,7 +30642,10 @@ function splitParts(lengths, p) {
 }
 function buildPlan(canon, name) {
   const p = pools(canon);
-  if (p.plans.has(name)) return p.plans.get(name);
+  if (p.plans.has(name)) {
+    if (GUIDES[name]) for (const [path, id] of GUIDES[name].entries) reviewedGuideExcerpt(canon, path, id);
+    return p.plans.get(name);
+  }
   const d = canon.load();
   let days;
   if (name === "dhammapada-26-days") {
@@ -30616,6 +30671,8 @@ function buildPlan(canon, name) {
     });
   } else if (GUIDES[name]) {
     days = GUIDES[name].entries.map(([path, id]) => {
+      const reviewed = reviewedGuideExcerpt(canon, path, id);
+      if (reviewed) return [reviewed];
       const url = `${ATI2}/tipitaka/${path}.html`;
       const { unit, notes } = canon.resolve(url);
       if (unit.id !== id) throw new Error(`Study-guide link ${url} resolves to ${unit.id}, expected ${id}.`);

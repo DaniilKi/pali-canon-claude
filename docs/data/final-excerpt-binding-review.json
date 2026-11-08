@@ -1,0 +1,2583 @@
+{
+  "baseline_commit": "12201ecf93d0d0c977c493ccd34db9128cca8fa9",
+  "observed_on": "2026-11-08",
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "method": "Complete pinned ATI bodies, notices and whole indexed VRI roots reviewed by specialists and parent, with independent artifact review. Four DT alternatives also assessed through complete primary rendered web views; these provide no rawHTML/runtime extractor/notice hash or runtime availability proof. No source body bundled.",
+  "original_queue_bindings_reviewed": 12,
+  "additional_bindings_reviewed": 2,
+  "withheld_bindings": 14,
+  "new_partial_activations": 0,
+  "canonical_and_commentary_unchanged": true,
+  "rows": [
+    {
+      "owner": "mn21",
+      "path": "/tipitaka/mn/mn.021x.budd",
+      "translation_id": "ati:/tipitaka/mn/mn.021x.budd",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.021x.budd.html",
+      "decision": "hold-whole-binding-partial-unit",
+      "reason": "Opening Moliyaphagguna narrative and admonitions mn21/3–/7 are absent. The page translates mn21/8–/9, then silently jumps over the one-meal instruction, chariot simile and sal-grove simile mn21/10–/12 to Vedehika and subsequent teaching.",
+      "original_link": {
+        "source": "ati",
+        "english": "The Parable of the Saw",
+        "path": "/tipitaka/mn/mn.021x.budd",
+        "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.021x.budd.html",
+        "translator": "Acharya Buddharakkhita",
+        "license": "BPS",
+        "reference": "M i 122",
+        "pali_title": "Kakacupama Sutta",
+        "match": "number+title"
+      },
+      "link_metadata_sha256": "f348707a63adea4eea47689c5bdc97298e828b92532b12b1b179913bc834cc12",
+      "source_html_sha256": "6135a75e631c45801462e12a29e6f2975d49e65bf75ca0f5053d0514267b118e",
+      "copyright_chunk_html_sha256": "29b56a6ff430f76e4f42e2ba651eeaeb9738a3b3205f31a05031d03ac63695d1",
+      "text_sha256": "048b828a6d543deb1e11725c9641297cccc012cf9767b96bd76ba2361fb1534b",
+      "notice_sha256": "b55346d4346c801b24757c69f30261b28f324dd562e84d2ba4bdf43ead3465f5",
+      "notice_characters": 1201,
+      "hash_semantics": "source_html_sha256 hashes raw HTML bytes; copyright_chunk_html_sha256 hashes raw UTF8 atiContent chunk; remaining hashes SHA256(JSON.stringify(value)). text_sha256 uses exact runtime plainText(atiContent(html)) including notes/editorial content. link_metadata_sha256 hashes original_link in its original property order. root_blocks_sha256 hashes complete indexed block slice.",
+      "root": {
+        "id": "mn21",
+        "book": 8,
+        "start": 719,
+        "end": 746,
+        "title": "Kakacūpamasuttaṃ",
+        "collection": "mn",
+        "acronym": "MN 21",
+        "vri": "222–233",
+        "pts": {
+          "volume": 1,
+          "page": 122,
+          "end_page": 129
+        },
+        "root_blocks_sha256": "c563b495746afba99a7cc1bf9ad99761e731d9933f8b56e18220696273cfc9dc"
+      },
+      "root_units": [
+        {
+          "id": "mn21",
+          "book": 8,
+          "start": 719,
+          "end": 746,
+          "title": "Kakacūpamasuttaṃ",
+          "collection": "mn",
+          "acronym": "MN 21",
+          "vri": "222–233",
+          "pts": {
+            "volume": 1,
+            "page": 122,
+            "end_page": 129
+          },
+          "root_blocks_sha256": "c563b495746afba99a7cc1bf9ad99761e731d9933f8b56e18220696273cfc9dc"
+        }
+      ],
+      "complete_root_segments": 27,
+      "omissions": [
+        {
+          "refs": "mn21/3–/7",
+          "detail": "Residence, excessive association with nuns, complaints, summons, admission, and instructions about criticism/striking of nuns entirely absent; leading ellipsis is not replacement text."
+        },
+        {
+          "refs": "mn21/10–/12",
+          "detail": "One-meal teaching and health benefits, responsive monks/chariot simile, and sal-grove cultivation simile entirely absent between translated mn21/9 and /13."
+        }
+      ],
+      "complete_refs": [
+        "mn21/8–/9",
+        "mn21/13–/19",
+        "mn21/24–/26"
+      ],
+      "represented_refs": [
+        "mn21/8–/9",
+        "mn21/13–/26"
+      ],
+      "observations": [
+        "Publisher body starts at mn21/8 (criticism of Phagguna himself), continues /9, then covers the Vedehika story /13–/17, admonishability /18, speech/goodwill /19, four similes /20–/23, saw /24, recollection instruction /25 and closing approval /26.",
+        "Buddharakkhita applies general goodwill wording in the earth/space/Ganges/catskin refrains rather than preserving each simile-specific awareness term found in mn21/20–/23. Thus the represented tail is not claimed as every-token alignment.",
+        "The indexed headings /1–/2 and colophon /27 are paratext; withholding rests on missing substantive prose, not those labels."
+      ],
+      "local_alternative_reviews": [
+        {
+          "path": "/tipitaka/mn/mn.021x.than",
+          "translation_id": "ati:/tipitaka/mn/mn.021x.than",
+          "decision": "hold-whole-binding-partial-unit",
+          "source_html_sha256": "fe4898bb69f89ab11c01aac1af1bb1c8b40adba2c1c4919d27b52c3835fa5975",
+          "extracted_plain_text_sha256": "1ed5f659e26cabf6d610c7c402f4426eb6c450c467f28a7b6192dad0d16af11b",
+          "text_sha256": "1ed5f659e26cabf6d610c7c402f4426eb6c450c467f28a7b6192dad0d16af11b",
+          "notice_sha256": "df438f09f0670703570e674d0690847a881361dcb40dea2c829bbc4eae991682",
+          "link_metadata_sha256": "f267b071166b948aed2d2835b33a96d3086b897bca4767be86287676c790b79b",
+          "review_extent": "Complete official local body and full individual notice read against complete indexed root via src/canon.mjs; independent of page EXTENT or filename.",
+          "observation": "Entire opening Moliyaphagguna setting/admonitions and the one-meal, chariot and sal-grove teachings mn21/3–/12 are omitted; the source begins with Vedehika at mn21/13."
+        }
+      ],
+      "alternative_observation": "The sole indexed local ATI alternative is the other reviewed MN21 excerpt, also incomplete. DT alternative checked as metadata only.",
+      "rights": {
+        "copyright": "©1987 Buddhist Publication Society",
+        "license": "BPS individual notice",
+        "conditions": [
+          "Copies/reformatted/reprinted/republished/redistributed versions available free of charge.",
+          "Reprints in quantities of no more than 50 copies.",
+          "Derivatives including translations identified as derived from this source.",
+          "Full licence text included in copies/derivatives; otherwise all rights reserved.",
+          "Linked documents may have other restrictions."
+        ],
+        "revision": "10 November 2013",
+        "provenance": "Positive Response: How to Meet Evil With Good, Acharya Buddharakkhita, Bodhi Leaves No.109, BPS, Kandy 1987; volunteer print transcription by permission of BPS. Header ATI edition copyright2006 differs from source copyright1987; complete runtime footer notice identifies both provenance and governing BPS rights.",
+        "notice_retained": true
+      },
+      "partial_selector_review": {
+        "existing_selectors": [
+          {
+            "extractor": "ati-chapter-prose-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-freeverse-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p2-of2-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p11-of11-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p1-of4-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-excerpt-verse-pre-v1",
+            "result": "rejected-structure"
+          }
+        ],
+        "existing_clean_selector_available": false,
+        "new_partial_activations": 0,
+        "potential": "The two initial substantive P elements separately correspond to complete mn21/8 and /9; contiguous later narrative selections are possible subjects for a NEW review. None fits existing finite extractors. The represented /20–/23 refrains need narrower correspondence review; do not approve the whole tail by inference."
+      },
+      "limits": [
+        "Frozen clean official ATI commit45fedca341497120651efa20e756b04a13e61089 only; no live upstream freshness certification.",
+        "Complete source bodies/notices and full indexed roots read; no reliance on filename, PTS start or EXTENT as proof of incomplete scope.",
+        "DT alternatives checked as indexed metadata only; no fetched DT or SuttaCentral bodies.",
+        "No repository edit, English body bundle, invented/expanded scripture, source-selector activation, root boundary or saved-note change."
+      ],
+      "source_structure": {
+        "copyrighted_chunk_count": 1,
+        "chapter_count": 1,
+        "notes_count": 0,
+        "paragraph_count": 39
+      },
+      "source": "ati",
+      "baseline_alternatives": [
+        "dt:MN/MN21",
+        "ati:/tipitaka/mn/mn.021x.than"
+      ],
+      "remaining_ordinary_alternatives": [
+        "dt:MN/MN21"
+      ],
+      "link_metadata_hash_input": "original_link"
+    },
+    {
+      "owner": "mn21",
+      "path": "/tipitaka/mn/mn.021x.than",
+      "translation_id": "ati:/tipitaka/mn/mn.021x.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.021x.than.html",
+      "decision": "hold-whole-binding-partial-unit",
+      "reason": "Entire opening Moliyaphagguna setting/admonitions and the one-meal, chariot and sal-grove teachings mn21/3–/12 are omitted; the source begins with Vedehika at mn21/13.",
+      "original_link": {
+        "source": "ati",
+        "english": "The Simile of the Saw",
+        "path": "/tipitaka/mn/mn.021x.than",
+        "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.021x.than.html",
+        "translator": "Thanissaro Bhikkhu",
+        "license": "CC-BY-NC",
+        "reference": "M i 122",
+        "pali_title": "Kakacupama Sutta",
+        "match": "number+title"
+      },
+      "link_metadata_sha256": "f267b071166b948aed2d2835b33a96d3086b897bca4767be86287676c790b79b",
+      "source_html_sha256": "fe4898bb69f89ab11c01aac1af1bb1c8b40adba2c1c4919d27b52c3835fa5975",
+      "copyright_chunk_html_sha256": "010bb4b4811633fdaa735e01e2792286379b240823dc96549f2eb03ff2ce5403",
+      "text_sha256": "1ed5f659e26cabf6d610c7c402f4426eb6c450c467f28a7b6192dad0d16af11b",
+      "notice_sha256": "df438f09f0670703570e674d0690847a881361dcb40dea2c829bbc4eae991682",
+      "notice_characters": 730,
+      "hash_semantics": "source_html_sha256 hashes raw HTML bytes; copyright_chunk_html_sha256 hashes raw UTF8 atiContent chunk; remaining hashes SHA256(JSON.stringify(value)). text_sha256 uses exact runtime plainText(atiContent(html)) including notes/editorial content. link_metadata_sha256 hashes original_link in its original property order. root_blocks_sha256 hashes complete indexed block slice.",
+      "root": {
+        "id": "mn21",
+        "book": 8,
+        "start": 719,
+        "end": 746,
+        "title": "Kakacūpamasuttaṃ",
+        "collection": "mn",
+        "acronym": "MN 21",
+        "vri": "222–233",
+        "pts": {
+          "volume": 1,
+          "page": 122,
+          "end_page": 129
+        },
+        "root_blocks_sha256": "c563b495746afba99a7cc1bf9ad99761e731d9933f8b56e18220696273cfc9dc"
+      },
+      "root_units": [
+        {
+          "id": "mn21",
+          "book": 8,
+          "start": 719,
+          "end": 746,
+          "title": "Kakacūpamasuttaṃ",
+          "collection": "mn",
+          "acronym": "MN 21",
+          "vri": "222–233",
+          "pts": {
+            "volume": 1,
+            "page": 122,
+            "end_page": 129
+          },
+          "root_blocks_sha256": "c563b495746afba99a7cc1bf9ad99761e731d9933f8b56e18220696273cfc9dc"
+        }
+      ],
+      "complete_root_segments": 27,
+      "omissions": [
+        {
+          "refs": "mn21/3–/9",
+          "detail": "Residence, association with nuns, complaints, summons, admission and all four tailored criticism/striking training instructions absent."
+        },
+        {
+          "refs": "mn21/10–/12",
+          "detail": "One-meal teaching and health benefits, responsive monks/chariot simile, and sal-grove cultivation simile absent."
+        }
+      ],
+      "complete_refs": [
+        "mn21/13–/26"
+      ],
+      "represented_refs": [
+        "mn21/13–/26"
+      ],
+      "observations": [
+        "Complete page body begins with leading ellipsis and the Vedehika story, corresponding to mn21/13–/17; it continues /18 admonishability, /19 speech/goodwill, /20–/23 four similes including differentiated earth/space/Ganges/catskin refrains, /24 saw, /25 remembrance and /26 approval.",
+        "No omitted opening is supplied by an internal link or editorial summary. Full tail does not make this page a complete indexed MN21.",
+        "Indexed headings /1–/2 and closing numbering colophon /27 are paratext; substantive omission /3–/12 is decisive."
+      ],
+      "local_alternative_reviews": [
+        {
+          "path": "/tipitaka/mn/mn.021x.budd",
+          "translation_id": "ati:/tipitaka/mn/mn.021x.budd",
+          "decision": "hold-whole-binding-partial-unit",
+          "source_html_sha256": "6135a75e631c45801462e12a29e6f2975d49e65bf75ca0f5053d0514267b118e",
+          "extracted_plain_text_sha256": "048b828a6d543deb1e11725c9641297cccc012cf9767b96bd76ba2361fb1534b",
+          "text_sha256": "048b828a6d543deb1e11725c9641297cccc012cf9767b96bd76ba2361fb1534b",
+          "notice_sha256": "b55346d4346c801b24757c69f30261b28f324dd562e84d2ba4bdf43ead3465f5",
+          "link_metadata_sha256": "f348707a63adea4eea47689c5bdc97298e828b92532b12b1b179913bc834cc12",
+          "review_extent": "Complete official local body and full individual notice read against complete indexed root via src/canon.mjs; independent of page EXTENT or filename.",
+          "observation": "Opening Moliyaphagguna narrative and admonitions mn21/3–/7 are absent. The page translates mn21/8–/9, then silently jumps over the one-meal instruction, chariot simile and sal-grove simile mn21/10–/12 to Vedehika and subsequent teaching."
+        }
+      ],
+      "alternative_observation": "The sole indexed local ATI alternative is the other reviewed MN21 excerpt, also incomplete. DT alternative checked as metadata only.",
+      "rights": {
+        "copyright": "©1997 Thanissaro Bhikkhu",
+        "license": "CC BY-NC4.0",
+        "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "conditions": [
+          "Attribution and noncommercial reuse under stated CC BY-NC4.0 licence.",
+          "Preserve complete individual source notice/citation, licence link, attribution and provenance.",
+          "Linked documents may have other restrictions."
+        ],
+        "revision": "30 November 2013",
+        "provenance": "Transcribed from a file provided by translator; ATI BCBS Edition. Upstream page warns an updated version exists on dhammatalks.org; that version is independent and was not fetched.",
+        "notice_retained": true
+      },
+      "partial_selector_review": {
+        "existing_selectors": [
+          {
+            "extractor": "ati-chapter-prose-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-freeverse-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p2-of2-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p11-of11-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p1-of4-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-excerpt-verse-pre-v1",
+            "result": "rejected-structure"
+          }
+        ],
+        "existing_clean_selector_available": false,
+        "new_partial_activations": 0,
+        "potential": "Several source paragraphs correspond to complete prose segments, including mn21/18 and /19. The page has 40 P elements (including leading ellipsis), no notes division, and does not fit any current finite extractor; any new choice requires separate source-specific structure/rights/root review."
+      },
+      "limits": [
+        "Frozen clean official ATI commit45fedca341497120651efa20e756b04a13e61089 only; no live upstream freshness certification.",
+        "Complete source bodies/notices and full indexed roots read; no reliance on filename, PTS start or EXTENT as proof of incomplete scope.",
+        "DT alternatives checked as indexed metadata only; no fetched DT or SuttaCentral bodies.",
+        "No repository edit, English body bundle, invented/expanded scripture, source-selector activation, root boundary or saved-note change."
+      ],
+      "source_structure": {
+        "copyrighted_chunk_count": 1,
+        "chapter_count": 1,
+        "notes_count": 0,
+        "paragraph_count": 40
+      },
+      "source": "ati",
+      "baseline_alternatives": [
+        "dt:MN/MN21",
+        "ati:/tipitaka/mn/mn.021x.budd"
+      ],
+      "remaining_ordinary_alternatives": [
+        "dt:MN/MN21"
+      ],
+      "link_metadata_hash_input": "original_link"
+    },
+    {
+      "owner": "mn54",
+      "path": "/tipitaka/mn/mn.054x.than",
+      "translation_id": "ati:/tipitaka/mn/mn.054x.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.054x.than.html",
+      "decision": "hold-whole-binding-partial-unit",
+      "reason": "The page omits the entire opening encounter and eight-factor household-training section mn54/2–/13, and final acknowledgment/refuge mn54/40. It contains the seven sensuality similes and the three knowledges through mn54/39.",
+      "original_link": {
+        "source": "ati",
+        "english": "To Potaliya",
+        "path": "/tipitaka/mn/mn.054x.than",
+        "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.054x.than.html",
+        "translator": "Thanissaro Bhikkhu",
+        "license": "CC-BY-NC",
+        "reference": "M i 359",
+        "pali_title": "Potaliya Sutta",
+        "match": "number+title"
+      },
+      "link_metadata_sha256": "d6099ca6ee6f63b52618b0314e6c05f5eaadfc175521ae09fbedc75f7e3e8295",
+      "source_html_sha256": "edcde57d7f7920743608b1abb25b3ded7c4d33519bfea85986a9b776cd349e8a",
+      "copyright_chunk_html_sha256": "485f6cc476ec28d9463ac9b753febccfb989144407dff1cc13546980d2090cac",
+      "text_sha256": "276f63ece70985258305f9633c7a6e3863330f56ff39ddda498d0323ea7ed560",
+      "notice_sha256": "de93b79f4590c638218614b4c32bdce786225ce7a17a3f214cc78f6dc6e7dea0",
+      "notice_characters": 706,
+      "hash_semantics": "source_html_sha256 hashes raw HTML bytes; copyright_chunk_html_sha256 hashes raw UTF8 atiContent chunk; remaining hashes SHA256(JSON.stringify(value)). text_sha256 uses exact runtime plainText(atiContent(html)) including notes/editorial content. link_metadata_sha256 hashes original_link in its original property order. root_blocks_sha256 hashes complete indexed block slice.",
+      "root": {
+        "id": "mn54",
+        "book": 9,
+        "start": 67,
+        "end": 108,
+        "title": "Potaliyasuttaṃ",
+        "collection": "mn",
+        "acronym": "MN 54",
+        "vri": "31–50",
+        "pts": {
+          "volume": 1,
+          "page": 359,
+          "end_page": 368
+        },
+        "root_blocks_sha256": "e74467a381dc64cd20d8937c116dbc7ea8cef9ce4bc0c1157651a122bfcb8126"
+      },
+      "root_units": [
+        {
+          "id": "mn54",
+          "book": 9,
+          "start": 67,
+          "end": 108,
+          "title": "Potaliyasuttaṃ",
+          "collection": "mn",
+          "acronym": "MN 54",
+          "vri": "31–50",
+          "pts": {
+            "volume": 1,
+            "page": 359,
+            "end_page": 368
+          },
+          "root_blocks_sha256": "e74467a381dc64cd20d8937c116dbc7ea8cef9ce4bc0c1157651a122bfcb8126"
+        }
+      ],
+      "complete_root_segments": 41,
+      "omissions": [
+        {
+          "refs": "mn54/2–/13",
+          "detail": "Apana setting, Potaliya taking offence at householder address, wealth-transfer account, request, eight abandonment factors and their full explanations, and transition to complete cutting-off absent."
+        },
+        {
+          "refs": "mn54/40",
+          "detail": "Question whether Potaliya has achieved such cutting-off, his admission, changed evaluation of other ascetics/monks, praise, and refuge/lay-follower declaration absent."
+        },
+        {
+          "refs": "mn54/34",
+          "detail": "Two repeated descriptions of the fruitful tree upon sight are represented by explicit source ellipses, although the substantive tree-danger simile is present."
+        }
+      ],
+      "complete_refs": [
+        "mn54/15–/29",
+        "mn54/35–/39"
+      ],
+      "represented_refs": [
+        "mn54/15–/39"
+      ],
+      "observations": [
+        "Source begins at mn54/15, not at the opening household exchange. Seven similes and applications are represented through /36; past lives /37, divine eye /38 and release plus cutting-off conclusion /39 are retained. The preliminary suspicion that second-half household training was missing is incorrect.",
+        "Full publisher note comparing MN137 and commentary interpretations is editorial material, separate from scripture. Runtime text hash includes it; no new extraction is approved.",
+        "At mn54/31 the indexed Pali affirmative answer is translated as a negative in the borrowed-goods exchange; this is a source translation difference, not an omitted unit or licence problem. Avoid certifying exact verbal equivalence or selecting that exchange without further review.",
+        "Heading /14 and final numbered colophon /41 are paratext; decisive missing prose is /2–/13 and /40. The root preserves its own peyyala in applications/knowledges; this review does not expand it."
+      ],
+      "local_alternative_reviews": [],
+      "alternative_observation": "No other indexed ATI alternative. DT MN54 reference itself says Excerpt; preserve as unreviewed indexed metadata, not newly approved complete coverage.",
+      "rights": {
+        "copyright": "©2003 Thanissaro Bhikkhu",
+        "license": "CC BY-NC4.0",
+        "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "conditions": [
+          "Attribution and noncommercial reuse under stated CC BY-NC4.0 licence.",
+          "Preserve complete individual source notice/citation, licence link, attribution and provenance.",
+          "Linked documents may have other restrictions."
+        ],
+        "revision": "30 November 2013",
+        "provenance": "Transcribed from a file provided by translator; ATI BCBS Edition. Upstream page warns an updated version exists on dhammatalks.org; that version is independent and was not fetched.",
+        "notice_retained": true
+      },
+      "partial_selector_review": {
+        "existing_selectors": [
+          {
+            "extractor": "ati-chapter-prose-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-freeverse-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p2-of2-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p11-of11-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p1-of4-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-excerpt-verse-pre-v1",
+            "result": "rejected-structure"
+          }
+        ],
+        "existing_clean_selector_available": false,
+        "new_partial_activations": 0,
+        "potential": "The dream simile/application at mn54/29 is one self-contained publisher P; other complete passages may be review candidates. Current page has 24 P elements before/in its notes-containing chapter, incompatible with existing fixed paragraph selectors. No existing selector works and no activation is proposed."
+      },
+      "limits": [
+        "Frozen clean official ATI commit45fedca341497120651efa20e756b04a13e61089 only; no live upstream freshness certification.",
+        "Complete source bodies/notices and full indexed roots read; no reliance on filename, PTS start or EXTENT as proof of incomplete scope.",
+        "DT alternatives checked as indexed metadata only; no fetched DT or SuttaCentral bodies.",
+        "No repository edit, English body bundle, invented/expanded scripture, source-selector activation, root boundary or saved-note change."
+      ],
+      "source_structure": {
+        "copyrighted_chunk_count": 1,
+        "chapter_count": 1,
+        "notes_count": 1,
+        "paragraph_count": 24
+      },
+      "source": "ati",
+      "baseline_alternatives": [
+        "dt:MN/MN54"
+      ],
+      "remaining_ordinary_alternatives": [],
+      "link_metadata_hash_input": "original_link"
+    },
+    {
+      "owner": "mn75",
+      "path": "/tipitaka/mn/mn.075x.than",
+      "translation_id": "ati:/tipitaka/mn/mn.075x.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.075x.than.html",
+      "decision": "hold-whole-binding-partial-unit",
+      "reason": "Begins with the second cured-leper simile at mn75/11. The entire substantive opening mn75/2–/10 is absent, including the encounter, sense-restraint discussion, former palace life and earlier similes. Closing conversion and attainment are present; the page is nevertheless an excerpt of the indexed discourse.",
+      "original_link": {
+        "source": "ati",
+        "english": "To Magandiya",
+        "path": "/tipitaka/mn/mn.075x.than",
+        "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.075x.than.html",
+        "translator": "Thanissaro Bhikkhu",
+        "license": "CC-BY-NC",
+        "reference": "M i 501",
+        "pali_title": "Magandiya Sutta",
+        "match": "number+title"
+      },
+      "link_metadata_sha256": "dd31ed009c402c1dba8ff1aadcc0f4e2dc512df024a67c61610ec973d1d37399",
+      "source_html_sha256": "f8592ff49837c4e2f2ad5a233aa478280e76eba61a3736fe02a5db547a1a4a37",
+      "copyright_chunk_html_sha256": "428fc0baf5b177687f347a061c489f341fde8c3a293ae49065308afc45ebe8aa",
+      "text_sha256": "2ff5d69ca8ba2960d08e5f9b9326799c1f6b68a676ab1a0f9f73f08d5c7332f4",
+      "notice_sha256": "d2bcee9e382477e04d9841e2c7e4ffef7e16b8c088476a472cc8f6f943be88fc",
+      "notice_characters": 459,
+      "hash_semantics": "source_html_sha256 and copyright_chunk_html_sha256 hash raw UTF8 strings; text_sha256 hashes JSON.stringify(plainText(atiContent(html))); notice_sha256 hashes JSON.stringify(atiNotice(html)); link and root-block hashes use Node JSON.stringify without canonical key reordering.",
+      "root": {
+        "id": "mn75",
+        "book": 9,
+        "start": 587,
+        "end": 614,
+        "title": "Māgaṇḍiyasuttaṃ",
+        "collection": "mn",
+        "acronym": "MN 75",
+        "vri": "207–222",
+        "pts": {
+          "volume": 1,
+          "page": 501,
+          "end_page": 513
+        },
+        "root_blocks_sha256": "f5b0ceeb528002d793c63c53ecce3a00126e100e8e2123b468fada529bc9663d"
+      },
+      "root_units": [
+        {
+          "id": "mn75",
+          "book": 9,
+          "start": 587,
+          "end": 614,
+          "title": "Māgaṇḍiyasuttaṃ",
+          "collection": "mn",
+          "acronym": "MN 75",
+          "vri": "207–222",
+          "pts": {
+            "volume": 1,
+            "page": 501,
+            "end_page": 513
+          },
+          "root_blocks_sha256": "f5b0ceeb528002d793c63c53ecce3a00126e100e8e2123b468fada529bc9663d"
+        }
+      ],
+      "complete_root_segments": 25,
+      "omissions": [
+        {
+          "refs": "mn75/2–/3",
+          "detail": "Residence/alms/forest narrative, Māgaṇḍiya and Bhāradvāja discussion of the straw bed and destroyer allegation, Buddha hearing their discussion and Māgaṇḍiya arrival are absent."
+        },
+        {
+          "refs": "mn75/4–/5",
+          "detail": "Sense-restraint exchange and inquiry about a person who has understood and abandoned craving for sense objects are absent."
+        },
+        {
+          "refs": "mn75/6–/8",
+          "detail": "Buddha’s former palace life and abandoning sensual pleasures, householder reborn among the Thirty-three and comparison between human and divine pleasures are absent."
+        },
+        {
+          "refs": "mn75/9–/10",
+          "detail": "Earlier cured-leper simile, comparison with a second leper, and accompanying application to abandoned sensuality are absent. The body starts at the next simile /11, not this earlier occurrence."
+        },
+        {
+          "refs": "mn75/21–/22",
+          "detail": "Later blindness similes abbreviate repeated lists: the source’s shortened lists omit the repeated pink/uneven-places/stars wording found in the indexed root. In /22 the hearing of praise for white cloth and search for it are also compressed out. These do not restore missing opening scope."
+        }
+      ],
+      "local_alternative_reviews": [],
+      "rights": {
+        "copyright": "©1998 Thanissaro Bhikkhu",
+        "license": "CC BY-NC 4.0",
+        "conditions": [
+          "Noncommercial reuse only.",
+          "Attribute the translator and source; preserve copyright and licence notice/link.",
+          "Identify modifications/derivatives; do not imply endorsement.",
+          "Linked documents may have separate restrictions."
+        ],
+        "revision": "30 November 2013",
+        "provenance": "Transcribed from a file provided by the translator. Complete individual source footer reviewed; header ©2008 is not the individual work copyright.",
+        "notice_retained": true
+      },
+      "observations": [
+        "Complete 25-segment indexed root read, including headings and final colophon; 27 original source blocks are pinned without alteration.",
+        "First publisher paragraph covers /11 and the opening question of /12. Repetition of a leper episode earlier in the root was distinguished by the two men dragging the cured man toward the coals.",
+        "Body continues through /12–/24: present-past fire perception, sensuality, health/nibbāna stanzas, blind-man/cloth treatment, dependent-arising/cessation teaching, refuge, probation, ordination and arahant attainment.",
+        "No claim that every word in the /11–/24 span is translated: source abbreviations in /21–/22 remain material to any later narrower review. Final /25 numbering colophon is paratext.",
+        "There are no additional indexed ATI alternatives for MN75; existing DT is metadata only."
+      ],
+      "finite_selector_review": {
+        "paragraphs": 33,
+        "body_paragraphs": 33,
+        "chapter": 1,
+        "notes": 0,
+        "freeverse": 3,
+        "existing_finite_opportunities": [],
+        "detail": "All existing finite selectors reject this page. In particular ati-freeverse-v1 requires exactly one freeverse container, while this source contains three. No existing chapter selector permits this structure. A later source-specific selector could investigate the complete standalone sixth P corresponding to /13 or twenty-ninth P corresponding to /23, but neither is approved or activated here.",
+        "checks": [
+          {
+            "extractor": "ati-freeverse-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p2-of2-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p11-of11-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p1-of4-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-excerpt-verse-pre-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-prose-v1",
+            "result": "rejected-structure"
+          }
+        ],
+        "new_activation": false
+      },
+      "limits": [
+        "Frozen clean official ATI checkout at pinned commit; no live upstream freshness certification.",
+        "All indexed local ATI alternatives reviewed; DT alternatives checked only as existing metadata, without fetching.",
+        "No repository edits, scripture reconstruction, English body bundling, source expansion or new partial-selector activation.",
+        "This independent source review supplies metadata evidence only; final integration/agreement remains with the parent reviewer."
+      ],
+      "source": "ati",
+      "baseline_alternatives": [
+        "dt:MN/MN75"
+      ],
+      "remaining_ordinary_alternatives": [
+        "dt:MN/MN75"
+      ],
+      "link_metadata_hash_input": "original_link"
+    },
+    {
+      "owner": "mn95",
+      "path": "/tipitaka/mn/mn.095x.nymo",
+      "translation_id": "ati:/tipitaka/mn/mn.095x.nymo",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.095x.nymo.html",
+      "decision": "hold-whole-binding-partial-unit",
+      "reason": "Starts inside mn95/9 after an explicit leading ellipsis, compresses the central truth/teacher-investigation material /9–/15, and ends with an ellipsis before the full sequence of helpful conditions and Kapāṭika’s response/refuge /16–/28. It is not a complete indexed MN95 translation.",
+      "original_link": {
+        "source": "ati",
+        "english": "With Canki",
+        "path": "/tipitaka/mn/mn.095x.nymo",
+        "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.095x.nymo.html",
+        "translator": "Ñanamoli Thera",
+        "license": "BPS",
+        "reference": "M ii 164",
+        "pali_title": "Canki Sutta",
+        "match": "number+title"
+      },
+      "link_metadata_sha256": "ed8636a1e09b4231f0ab8ab1e29ff7c581230fda65267af545f2240b5f195810",
+      "source_html_sha256": "a453851c62f663a7586229d9c3aff2ef805b8100dec498baa299ba0d1ec08429",
+      "copyright_chunk_html_sha256": "3687c37ca66d699a63c0f69c0799313a747c204b91327f1d0b890529438cebc1",
+      "text_sha256": "beb568e993838e8e61b367247556a406423e0dd5c60f78916e591e0da0e0cfc3",
+      "notice_sha256": "3b0623395b0563a5ce0a7afe5324b0d0c2f5f7b6c905208723cf3ea51bfcd568",
+      "notice_characters": 868,
+      "hash_semantics": "source_html_sha256 and copyright_chunk_html_sha256 hash raw UTF8 strings; text_sha256 hashes JSON.stringify(plainText(atiContent(html))); notice_sha256 hashes JSON.stringify(atiNotice(html)); link and root-block hashes use Node JSON.stringify without canonical key reordering.",
+      "root": {
+        "id": "mn95",
+        "book": 9,
+        "start": 1385,
+        "end": 1414,
+        "title": "Caṅkīsuttaṃ",
+        "collection": "mn",
+        "acronym": "MN 95",
+        "vri": "422–435",
+        "pts": {
+          "volume": 2,
+          "page": 164,
+          "end_page": 177
+        },
+        "root_blocks_sha256": "6cf9073cbffe4f7939333ef805167a0294780d68f471736247d154f5a8d5dc98"
+      },
+      "root_units": [
+        {
+          "id": "mn95",
+          "book": 9,
+          "start": 1385,
+          "end": 1414,
+          "title": "Caṅkīsuttaṃ",
+          "collection": "mn",
+          "acronym": "MN 95",
+          "vri": "422–435",
+          "pts": {
+            "volume": 2,
+            "page": 164,
+            "end_page": 177
+          },
+          "root_blocks_sha256": "6cf9073cbffe4f7939333ef805167a0294780d68f471736247d154f5a8d5dc98"
+        }
+      ],
+      "complete_root_segments": 29,
+      "omissions": [
+        {
+          "refs": "mn95/2–/8",
+          "detail": "Entire arrival at Opāsāda, Caṅkī’s estate and villagers’ visit, debate with brahmins over who should visit whom, meeting, Kapāṭika’s interruption/permission, Vedic-truth question and replies concerning teachers and seers are absent."
+        },
+        {
+          "refs": "mn95/9 (opening)",
+          "detail": "Blind-men simile, groundless-faith question, appeal to oral tradition and transition from faith to tradition are absent; source starts at the five things with a leading ellipsis."
+        },
+        {
+          "refs": "mn95/9–/10",
+          "detail": "Five kinds and truth-safeguarding treatment are compressed into the first publisher P; direct question, repeated formulas and distinct applications are summarized with preference-and-the-rest wording."
+        },
+        {
+          "refs": "mn95/11–/13",
+          "detail": "Separate progressive investigations of greed, aversion and delusion and their individual bodily/verbal/Dhamma conclusions are merged into one composite paragraph; not three complete indexed paragraphs."
+        },
+        {
+          "refs": "mn95/14–/15",
+          "detail": "One publisher P combines the confidence-to-realization chain and final-arrival explanation. Kapāṭika’s acknowledgments/questions and repeated Buddha formulas are compressed; not a full-paragraph literal alignment."
+        },
+        {
+          "refs": "mn95/16–/28",
+          "detail": "Questions and answers about the helpful conditions from exertion back to confidence, final approval, changed attitude toward contemplatives and lay refuge are absent after the explicit terminal ellipsis."
+        }
+      ],
+      "local_alternative_reviews": [
+        {
+          "path": "/tipitaka/mn/mn.095x.than",
+          "translation_id": "ati:/tipitaka/mn/mn.095x.than",
+          "decision": "hold-whole-binding-partial-unit",
+          "source_html_sha256": "d0eb9840e64581674e241512d352983e46bb8ef4f13a4cd51c73479057a04176",
+          "copyright_chunk_html_sha256": "b5ff50c95ea4e42fdcf15ffbc3e1ba09978e33325728828647f18904ebeaa3be",
+          "text_sha256": "2ea08b73afeacfc4ce77956cdece48b590581afdd1eac242158cc30fbbdb08e1",
+          "notice_sha256": "1338a5c2d02497ba3b90fff53bf40fccf9d3973c089d00a69b41441ca113980e",
+          "notice_characters": 453,
+          "review_extent": "Complete local ATI body and full individual notice read against complete indexed MN95 root. This alternative also has a substantive opening omission; not a retained whole-unit alternative. No current live availability claim.",
+          "reason": "Leading ellipsis starts within mn95/6, after omission of the complete substantive opening mn95/2–/5 and the first arrival/greeting portion of /6. Subsequent discourse through the final lay refuge is present with publisher abbreviations, including compression of the repeated conditions in /18–/26. The opening omission prevents whole-unit binding."
+        }
+      ],
+      "rights": {
+        "copyright": "©1981 Buddhist Publication Society",
+        "license": "Individual BPS free-distribution licence; not Creative Commons.",
+        "conditions": [
+          "All distributed copies free of charge.",
+          "Reprinting limited to no more than 50 copies.",
+          "Derivatives must clearly identify this source document.",
+          "Full text of the individual licence included in copies and derivatives; otherwise all rights reserved.",
+          "Linked documents may have separate restrictions."
+        ],
+        "revision": "30 June 2010",
+        "provenance": "From Three Cardinal Discourses of the Buddha (WH 17), translated from the Pali by Ñanamoli Thera (Kandy: Buddhist Publication Society, 1981). Used with permission. Complete individual footer reviewed; header ©1993 is not the work copyright.",
+        "notice_retained": true
+      },
+      "observations": [
+        "Complete 29-segment MN95 root read, including opening narrative, all conditions and closing response; all 29 original blocks pinned unchanged.",
+        "Only three substantive publisher paragraphs, plus a fourth paragraph containing a terminal ellipsis. Leading and trailing ellipses are consistent with directly observed substantive omissions.",
+        "The other indexed ATI MN95 version by Thanissaro was read in full. It contains considerably more material including /16–/28, but itself omits the opening and therefore also requires a whole-binding hold.",
+        "No clean whole indexed paragraph is certified by treating this composite summary as a contiguous paragraph selection. Source ownership is correct MN95; the scope is partial.",
+        "Existing DT alternative is checked as indexed metadata only."
+      ],
+      "finite_selector_review": {
+        "paragraphs": 4,
+        "body_paragraphs": 4,
+        "chapter": 1,
+        "notes": 0,
+        "freeverse": 0,
+        "existing_finite_opportunities": [],
+        "detail": "All existing finite selectors reject the source. It has four P elements but no required notes boundary, so ati-chapter-p1-of4-v1 rejects; moreover the first P combines/compresses /9–/10 and begins with ellipsis. Existing selectors cannot turn it into a complete source-aligned paragraph.",
+        "checks": [
+          {
+            "extractor": "ati-freeverse-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p2-of2-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p11-of11-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p1-of4-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-excerpt-verse-pre-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-prose-v1",
+            "result": "rejected-structure"
+          }
+        ],
+        "new_activation": false
+      },
+      "limits": [
+        "Frozen clean official ATI checkout at pinned commit; no live upstream freshness certification.",
+        "All indexed local ATI alternatives reviewed; DT alternatives checked only as existing metadata, without fetching.",
+        "No repository edits, scripture reconstruction, English body bundling, source expansion or new partial-selector activation.",
+        "This independent source review supplies metadata evidence only; final integration/agreement remains with the parent reviewer."
+      ],
+      "source": "ati",
+      "baseline_alternatives": [
+        "dt:MN/MN95",
+        "ati:/tipitaka/mn/mn.095x.than"
+      ],
+      "remaining_ordinary_alternatives": [
+        "dt:MN/MN95"
+      ],
+      "link_metadata_hash_input": "original_link"
+    },
+    {
+      "owner": "mn95",
+      "path": "/tipitaka/mn/mn.095x.than",
+      "translation_id": "ati:/tipitaka/mn/mn.095x.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.095x.than.html",
+      "decision": "hold-whole-binding-partial-unit",
+      "reason": "Leading ellipsis starts within mn95/6, after omission of the complete substantive opening mn95/2–/5 and the first arrival/greeting portion of /6. Subsequent discourse through the final lay refuge is present with publisher abbreviations, including compression of the repeated conditions in /18–/26. The opening omission prevents whole-unit binding.",
+      "original_link": {
+        "source": "ati",
+        "english": "With Canki",
+        "path": "/tipitaka/mn/mn.095x.than",
+        "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.095x.than.html",
+        "translator": "Thanissaro Bhikkhu",
+        "license": "CC-BY-NC",
+        "reference": "M ii 164",
+        "pali_title": "Canki Sutta",
+        "match": "number+title"
+      },
+      "link_metadata_sha256": "41509b4fb18863ae5a27c9e333ac86df79c8af5586b2db109168f5aa7c506914",
+      "source_html_sha256": "d0eb9840e64581674e241512d352983e46bb8ef4f13a4cd51c73479057a04176",
+      "copyright_chunk_html_sha256": "b5ff50c95ea4e42fdcf15ffbc3e1ba09978e33325728828647f18904ebeaa3be",
+      "text_sha256": "2ea08b73afeacfc4ce77956cdece48b590581afdd1eac242158cc30fbbdb08e1",
+      "notice_sha256": "1338a5c2d02497ba3b90fff53bf40fccf9d3973c089d00a69b41441ca113980e",
+      "notice_characters": 453,
+      "hash_semantics": "source_html_sha256 and copyright_chunk_html_sha256 hash raw UTF8 strings; text_sha256 hashes JSON.stringify(plainText(atiContent(html))); notice_sha256 hashes JSON.stringify(atiNotice(html)); link and root-block hashes use Node JSON.stringify without canonical key reordering.",
+      "root": {
+        "id": "mn95",
+        "book": 9,
+        "start": 1385,
+        "end": 1414,
+        "title": "Caṅkīsuttaṃ",
+        "collection": "mn",
+        "acronym": "MN 95",
+        "vri": "422–435",
+        "pts": {
+          "volume": 2,
+          "page": 164,
+          "end_page": 177
+        },
+        "root_blocks_sha256": "6cf9073cbffe4f7939333ef805167a0294780d68f471736247d154f5a8d5dc98"
+      },
+      "root_units": [
+        {
+          "id": "mn95",
+          "book": 9,
+          "start": 1385,
+          "end": 1414,
+          "title": "Caṅkīsuttaṃ",
+          "collection": "mn",
+          "acronym": "MN 95",
+          "vri": "422–435",
+          "pts": {
+            "volume": 2,
+            "page": 164,
+            "end_page": 177
+          },
+          "root_blocks_sha256": "6cf9073cbffe4f7939333ef805167a0294780d68f471736247d154f5a8d5dc98"
+        }
+      ],
+      "complete_root_segments": 29,
+      "omissions": [
+        {
+          "refs": "mn95/2–/3",
+          "detail": "Buddha’s arrival/residence at Opāsāda, Caṅkī’s estate, villagers hearing the Buddha’s reputation, their movement to the grove and Caṅkī’s messenger are absent."
+        },
+        {
+          "refs": "mn95/4–/5",
+          "detail": "Five hundred brahmins’ objections to Caṅkī visiting and his extensive reply enumerating reasons to visit the Buddha are entirely absent."
+        },
+        {
+          "refs": "mn95/6 (opening)",
+          "detail": "Caṅkī coming with the large brahmin group, greeting the Buddha and sitting to one side are absent; source begins at the Buddha already conversing with senior brahmins."
+        },
+        {
+          "refs": "mn95/18–/26",
+          "detail": "Repeated helpful-condition questions and explanatory formulas are abbreviated with ellipses. Each condition is named, but full root reiterations that it is the most helpful and that because it occurs the next occurs are not all reproduced."
+        }
+      ],
+      "local_alternative_reviews": [
+        {
+          "path": "/tipitaka/mn/mn.095x.nymo",
+          "translation_id": "ati:/tipitaka/mn/mn.095x.nymo",
+          "decision": "hold-whole-binding-partial-unit",
+          "source_html_sha256": "a453851c62f663a7586229d9c3aff2ef805b8100dec498baa299ba0d1ec08429",
+          "copyright_chunk_html_sha256": "3687c37ca66d699a63c0f69c0799313a747c204b91327f1d0b890529438cebc1",
+          "text_sha256": "beb568e993838e8e61b367247556a406423e0dd5c60f78916e591e0da0e0cfc3",
+          "notice_sha256": "3b0623395b0563a5ce0a7afe5324b0d0c2f5f7b6c905208723cf3ea51bfcd568",
+          "notice_characters": 868,
+          "review_extent": "Complete local ATI body and full individual notice read against complete indexed MN95 root. This alternative also has a substantive opening omission; not a retained whole-unit alternative. No current live availability claim.",
+          "reason": "Starts inside mn95/9 after an explicit leading ellipsis, compresses the central truth/teacher-investigation material /9–/15, and ends with an ellipsis before the full sequence of helpful conditions and Kapāṭika’s response/refuge /16–/28. It is not a complete indexed MN95 translation."
+        }
+      ],
+      "rights": {
+        "copyright": "©1999 Thanissaro Bhikkhu",
+        "license": "CC BY-NC 4.0",
+        "conditions": [
+          "Noncommercial reuse only.",
+          "Attribute the translator and source; preserve copyright and licence notice/link.",
+          "Identify modifications/derivatives; do not imply endorsement.",
+          "Linked documents may have separate restrictions."
+        ],
+        "revision": "30 November 2013",
+        "provenance": "Transcribed from a file provided by the translator. Complete individual footer reviewed.",
+        "notice_retained": true
+      },
+      "observations": [
+        "Complete 29-segment MN95 indexed root read; all 29 source blocks pinned unchanged.",
+        "After its partial /6 opening, body includes Kapāṭika encounter, Vedic-authority tests, blind-men simile, five grounds/safeguarding, three separate teacher investigations, confidence-to-realization chain, final attainment, helpful-condition discussion and Kapāṭika’s final approval/refuge /28.",
+        "Repeated material in /8 and /10 is also abbreviated in publisher style. This review does not interpret an ellipsis itself as proof of incompleteness; concrete absent narrative /2–/5 and initial /6 establishes the hold.",
+        "Two translator footnotes and See also links are editorial matter inside the copyrighted chunk; current runtime text hash includes them. They must not be treated as scripture by any later narrower extraction.",
+        "The other indexed ATI MN95 version, Ñanamoli, was read completely including its individual BPS notice. It also requires a whole-binding hold; it is not a whole alternative. Existing DT is metadata only.",
+        "Final /29 colophon is paratext; the finding does not rely on its absence."
+      ],
+      "finite_selector_review": {
+        "paragraphs": 52,
+        "body_paragraphs": 51,
+        "chapter": 1,
+        "notes": 1,
+        "freeverse": 0,
+        "existing_finite_opportunities": [],
+        "detail": "All existing finite selectors reject: 51 body Ps before notes plus one See also P do not match the 1/2/4/11-P profiles. No freeverse/preformatted verse container. Potential complete ranges would need separate source-specific finite extraction and fresh rights/scope review; none approved or activated here.",
+        "checks": [
+          {
+            "extractor": "ati-freeverse-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p2-of2-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p11-of11-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-p1-of4-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-excerpt-verse-pre-v1",
+            "result": "rejected-structure"
+          },
+          {
+            "extractor": "ati-chapter-prose-v1",
+            "result": "rejected-structure"
+          }
+        ],
+        "new_activation": false
+      },
+      "limits": [
+        "Frozen clean official ATI checkout at pinned commit; no live upstream freshness certification.",
+        "All indexed local ATI alternatives reviewed; DT alternatives checked only as existing metadata, without fetching.",
+        "No repository edits, scripture reconstruction, English body bundling, source expansion or new partial-selector activation.",
+        "This independent source review supplies metadata evidence only; final integration/agreement remains with the parent reviewer."
+      ],
+      "source": "ati",
+      "baseline_alternatives": [
+        "dt:MN/MN95",
+        "ati:/tipitaka/mn/mn.095x.nymo"
+      ],
+      "remaining_ordinary_alternatives": [
+        "dt:MN/MN95"
+      ],
+      "link_metadata_hash_input": "original_link"
+    },
+    {
+      "owner": "sn12.31",
+      "path": "/tipitaka/sn/sn12/sn12.031x.nypo",
+      "original_link": {
+        "source": "ati",
+        "english": "This Has Come Into Being",
+        "path": "/tipitaka/sn/sn12/sn12.031x.nypo",
+        "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.031x.nypo.html",
+        "translator": "Nyanaponika Thera",
+        "license": "BPS",
+        "reference": "S ii 47",
+        "pali_title": "Bhutamidam Sutta",
+        "match": "number+title"
+      },
+      "link_metadata_sha256": "2ac66609d7b3afaa3575de7c4928b41dab85df44a4069ab8c0679ba4c17e6f89",
+      "source_html_sha256": "62e8de6dc9ffb7f2256b0626a61896f0bb65bb91dbc1b0733cf3b82c0aa88e94",
+      "copyright_chunk_html_sha256": "ee4d5fb80747e65048132bd86aac19c2a0e3c07157605187123da4de05a1b5a7",
+      "text_sha256": "327143d2529ce9837c098fa3b2c7fd3e2b7dc33177ddcd9dabc2a1b8d19c7d69",
+      "notice_sha256": "45ab71ed1ace98ad56b53bb4a8b6e3c75b87969407102b55be2c4dd1e8ab449f",
+      "root_units": [
+        {
+          "id": "sn12.31",
+          "title": "Bhūtasuttaṃ",
+          "vri": "31",
+          "book": 12,
+          "start": 223,
+          "end": 242,
+          "root_blocks_sha256": "ec7c9550e62c62d4448504fe56c1332aec7bde5be620d3abd46e94c915132edd"
+        }
+      ],
+      "rights": {
+        "copyright": "©1981 Buddhist Publication Society.",
+        "conditions": [
+          "Copies free of charge",
+          "Source/derivatives identified",
+          "Complete licence retained",
+          "At most50reprints where BPS notice states it"
+        ],
+        "full_notice_pinned": true
+      },
+      "decision": "hold-whole-binding-partial-unit",
+      "observations": [
+        {
+          "refs": "sn12.31/3–/7",
+          "detail": "Opening Ajita question, repeated verse and Sariputta’s three silences omitted; source begins with explicit ellipsis."
+        },
+        {
+          "refs": "sn12.31/9–/15",
+          "detail": "Source retains Sariputta’s two-mode explanation but not its Ajita-verse conclusion or Buddha’s full repeated explanation; only first words of Buddha’s praise occur before final ellipsis."
+        }
+      ],
+      "partial_selector_assessment": "No existing extractor fits. A separately reviewed finite selection of chapter paragraphs2–5of10 would align to complete root /8; no activation or selector approval here.",
+      "local_alternative_reviews": [
+        {
+          "owner": "sn12.31",
+          "path": "/tipitaka/sn/sn12/sn12.031.than",
+          "original_link": {
+            "source": "ati",
+            "english": "This Has Come Into Being",
+            "path": "/tipitaka/sn/sn12/sn12.031.than",
+            "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.031.than.html",
+            "translator": "Thanissaro Bhikkhu",
+            "license": "CC-BY-NC",
+            "reference": "S ii 47",
+            "pali_title": "Bhutamidam Sutta",
+            "match": "number+title"
+          },
+          "link_metadata_sha256": "82204a5ec728f9dbd97e2fe20cb325013e145f5899e365d61b9a2a4fa8d59063",
+          "source_html_sha256": "122f0cc18ae6e7c1ffaabfb7f28b061c20e23168f5e072d3c07c192d53f22425",
+          "copyright_chunk_html_sha256": "2dd1eb2aefabd8bfc37550eb16d8f90c7632ec10bb0bc91516a259f6327184a1",
+          "text_sha256": "021dd03de28c200f8e9a207ed93a4e9348fb77dd9ce985e9e7ad099b0843f87a",
+          "notice_sha256": "d75124afdb5ed71f658e793a753132a7b4036d20c5e14d5c07f95defbbb328ff",
+          "root_units": [
+            {
+              "id": "sn12.31",
+              "title": "Bhūtasuttaṃ",
+              "vri": "31",
+              "book": 12,
+              "start": 223,
+              "end": 242,
+              "root_blocks_sha256": "ec7c9550e62c62d4448504fe56c1332aec7bde5be620d3abd46e94c915132edd"
+            }
+          ],
+          "rights": {
+            "copyright": "©1998 Thanissaro Bhikkhu.",
+            "conditions": [
+              "Copies free of charge",
+              "Source/derivatives identified",
+              "Complete licence retained",
+              "At most50reprints where BPS notice states it"
+            ],
+            "full_notice_pinned": true
+          },
+          "merged_ordinary_alternatives": [
+            "dt:SN/SN12_31",
+            "ati:/tipitaka/sn/sn12/sn12.031x.nypo"
+          ],
+          "decision": "retain-at-reviewed-snapshot",
+          "review_extent": "Complete official local body and notice read against complete indexed root; no live freshness claim."
+        }
+      ],
+      "page_specific_rights": {
+        "copyright": "©1981 and ©1999 Buddhist Publication Society",
+        "provenance": "The Four Nutriments of Life,1981; separate©1999BPS statement,usedwithpermission; revised30November2013."
+      },
+      "limits": [
+        "Exact version hold only; do not infer all alternatives are complete from catalogue presence.",
+        "No new partial scope or selector activation.",
+        "DT ordinary choices are metadata-only observations, not live fetched.",
+        "Publisher numbering differs for SN35.205/206 versus indexed246/247; preserve rather than silently remap."
+      ],
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.031x.nypo.html",
+      "translation_id": "ati:/tipitaka/sn/sn12/sn12.031x.nypo",
+      "root": {
+        "id": "sn12.31",
+        "title": "Bhūtasuttaṃ",
+        "vri": "31",
+        "book": 12,
+        "start": 223,
+        "end": 242,
+        "root_blocks_sha256": "ec7c9550e62c62d4448504fe56c1332aec7bde5be620d3abd46e94c915132edd"
+      },
+      "baseline_alternatives": [
+        "dt:SN/SN12_31",
+        "ati:/tipitaka/sn/sn12/sn12.031.than"
+      ],
+      "reason": "Opening Ajita question, repeated verse and Sariputta’s three silences omitted; source begins with explicit ellipsis. Source retains Sariputta’s two-mode explanation but not its Ajita-verse conclusion or Buddha’s full repeated explanation; only first words of Buddha’s praise occur before final ellipsis.",
+      "remaining_ordinary_alternatives": [
+        "dt:SN/SN12_31",
+        "ati:/tipitaka/sn/sn12/sn12.031.than"
+      ],
+      "link_metadata_hash_input": "{owner,link}"
+    },
+    {
+      "owner": "sn35.246",
+      "path": "/tipitaka/sn/sn35/sn35.205x.wlsh",
+      "original_link": {
+        "source": "ati",
+        "english": "The Lute",
+        "path": "/tipitaka/sn/sn35/sn35.205x.wlsh",
+        "url": "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.205x.wlsh.html",
+        "translator": "Maurice O'Connell Walshe",
+        "license": "BPS",
+        "reference": "S iv 195",
+        "pali_title": "Vii.naa Sutta",
+        "match": "pts-start+number"
+      },
+      "link_metadata_sha256": "ffbca459592f6ba1eb1b4dbd7b483c5ec7360b522f2f3e789dfced2e9477fc3c",
+      "source_html_sha256": "c84e1dd24fe726baba59b4d620ee83acda0b58a676730c3f2d88836fb1d9536e",
+      "copyright_chunk_html_sha256": "0bafbbef4a18ef51825e24c2214f8dc785efbe8c8b200f426fee7dbde46143b2",
+      "text_sha256": "1e6c6d01e35d2032324a086f9d608f72d68371896bf1e061d5bf1a3f7d9822d9",
+      "notice_sha256": "8afcb3acf1db94fe4fcda7d96ab0f1d2b86dadca3ad15c6f517844c9124a3c99",
+      "root_units": [
+        {
+          "id": "sn35.246",
+          "title": "Vīṇopamasuttaṃ",
+          "vri": "246",
+          "book": 14,
+          "start": 1223,
+          "end": 1228,
+          "root_blocks_sha256": "59d3d50ae1813ae1df4af520b8e92c331df8ae83455cd66973e03981319cb8f1"
+        }
+      ],
+      "rights": {
+        "copyright": "©1985 Buddhist Publication Society.",
+        "conditions": [
+          "Copies free of charge",
+          "Source/derivatives identified",
+          "Complete licence retained",
+          "At most50reprints where BPS notice states it"
+        ],
+        "full_notice_pinned": true
+      },
+      "decision": "hold-whole-binding-partial-unit",
+      "observations": [
+        {
+          "refs": "sn35.246/2",
+          "detail": "Opening warning about desire/aversion/delusion and holding the mind in check at all six senses omitted."
+        },
+        {
+          "refs": "sn35.246/5",
+          "detail": "Entire lute-disassembly simile and concluding aggregate/I-mine analysis omitted. Note3 sends readers to a different anthology location for the remainder; that link is not this page’s content."
+        }
+      ],
+      "partial_selector_assessment": "Root /3 corresponds to chapter paragraph1of2. Current p2of2 profile forbids the actual The Ox heading and selects a different paragraph, so must not reuse it; a new exact heading/profile review would be needed.",
+      "local_alternative_reviews": [
+        {
+          "owner": "sn35.246",
+          "path": "/tipitaka/sn/sn35/sn35.205.than",
+          "original_link": {
+            "source": "ati",
+            "english": "The Lute",
+            "path": "/tipitaka/sn/sn35/sn35.205.than",
+            "url": "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.205.than.html",
+            "translator": "Thanissaro Bhikkhu",
+            "license": "CC-BY-NC",
+            "reference": "S iv 195",
+            "pali_title": "Vina Sutta",
+            "match": "pts-start+number"
+          },
+          "link_metadata_sha256": "91e894fe3f470a12fb8d9b13fa67a3ae15d5adaca743ae62def5c3d184b2de12",
+          "source_html_sha256": "e0ba6fc00f6e39d5da1ed7c7e008d1cf2581098663a924b03ab3067eec9f9f8c",
+          "copyright_chunk_html_sha256": "93b062c2b06efab35c385db2e850649eaacaaa04b10d7545d99a8b19ae4f4bd2",
+          "text_sha256": "bd64db1c88c52383508f288fc7d0f082d0b6f780611a685473e5e73c1be333fa",
+          "notice_sha256": "812d5edce68ebff5af0bebf0e119b1a67275fb7074e8e9b16c8b30537958caf3",
+          "root_units": [
+            {
+              "id": "sn35.246",
+              "title": "Vīṇopamasuttaṃ",
+              "vri": "246",
+              "book": 14,
+              "start": 1223,
+              "end": 1228,
+              "root_blocks_sha256": "59d3d50ae1813ae1df4af520b8e92c331df8ae83455cd66973e03981319cb8f1"
+            }
+          ],
+          "rights": {
+            "copyright": "©1998 Thanissaro Bhikkhu.",
+            "conditions": [
+              "Copies free of charge",
+              "Source/derivatives identified",
+              "Complete licence retained",
+              "At most50reprints where BPS notice states it"
+            ],
+            "full_notice_pinned": true
+          },
+          "merged_ordinary_alternatives": [
+            "ati:/tipitaka/sn/sn35/sn35.205x.wlsh"
+          ],
+          "decision": "retain-at-reviewed-snapshot",
+          "review_extent": "Complete official local body and notice read against complete indexed root; no live freshness claim."
+        }
+      ],
+      "limits": [
+        "Exact version hold only; do not infer all alternatives are complete from catalogue presence.",
+        "No new partial scope or selector activation.",
+        "DT ordinary choices are metadata-only observations, not live fetched.",
+        "Publisher numbering differs for SN35.205/206 versus indexed246/247; preserve rather than silently remap."
+      ],
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.205x.wlsh.html",
+      "translation_id": "ati:/tipitaka/sn/sn35/sn35.205x.wlsh",
+      "root": {
+        "id": "sn35.246",
+        "title": "Vīṇopamasuttaṃ",
+        "vri": "246",
+        "book": 14,
+        "start": 1223,
+        "end": 1228,
+        "root_blocks_sha256": "59d3d50ae1813ae1df4af520b8e92c331df8ae83455cd66973e03981319cb8f1"
+      },
+      "baseline_alternatives": [
+        "ati:/tipitaka/sn/sn35/sn35.205.than"
+      ],
+      "reason": "Opening warning about desire/aversion/delusion and holding the mind in check at all six senses omitted. Entire lute-disassembly simile and concluding aggregate/I-mine analysis omitted. Note3 sends readers to a different anthology location for the remainder; that link is not this page’s content.",
+      "remaining_ordinary_alternatives": [
+        "ati:/tipitaka/sn/sn35/sn35.205.than"
+      ],
+      "link_metadata_hash_input": "{owner,link}"
+    },
+    {
+      "owner": "sn35.247",
+      "path": "/tipitaka/sn/sn35/sn35.206x.wlsh",
+      "original_link": {
+        "source": "ati",
+        "english": "The Six Animals",
+        "path": "/tipitaka/sn/sn35/sn35.206x.wlsh",
+        "url": "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.206x.wlsh.html",
+        "translator": "Maurice O'Connell Walshe",
+        "license": "BPS",
+        "reference": "S iv 198",
+        "pali_title": "Chapaa.na Sutta",
+        "match": "pts-start+number"
+      },
+      "link_metadata_sha256": "0b395544f2a7aae4dbe4c45db6e1d6a47cd4f441b2b1133313d06d9f77bd23f3",
+      "source_html_sha256": "82ce131ac813be92768f1f99325feebb8e5d20a70b77ad298d89eabecca33516",
+      "copyright_chunk_html_sha256": "bf9636368fdcdda80f1ba3b27d1497a15908524a122219dc13db2a6acf611615",
+      "text_sha256": "91834470093e6a6a5c0fc3d19bb07ee53b4024960b9de772c0082b863a334eec",
+      "notice_sha256": "d74d0acef15fae9f4f15cf4f28870449998461d4d8443622ec156dabb286d89d",
+      "root_units": [
+        {
+          "id": "sn35.247",
+          "title": "Chappāṇakopamasuttaṃ",
+          "vri": "247",
+          "book": 14,
+          "start": 1228,
+          "end": 1235,
+          "root_blocks_sha256": "829d1c7317c27b03ca951c9ace7e05d18d6a4f58cbe1ef79f59ede53c115cd70"
+        }
+      ],
+      "rights": {
+        "copyright": "©1985 Buddhist Publication Society.",
+        "conditions": [
+          "Copies free of charge",
+          "Source/derivatives identified",
+          "Complete licence retained",
+          "At most50reprints where BPS notice states it"
+        ],
+        "full_notice_pinned": true
+      },
+      "decision": "hold-whole-binding-partial-unit",
+      "observations": [
+        {
+          "refs": "sn35.247/2–/3",
+          "detail": "Wounded-person/thorny-marsh simile, rebuke framing and opening full non-restraint definition absent."
+        },
+        {
+          "refs": "sn35.247/4–/7",
+          "detail": "Six-animal teaching retained, with explicit repetition compression in post-tethered passage; this does not restore the missing opening."
+        }
+      ],
+      "partial_selector_assessment": "Final chapter paragraph4of4 corresponds to complete /7 apart from untranslated numbering colophon. Current p1of4 selects only part of /4, so cannot be reused; separate finite p4 selection and colophon disclosure needed.",
+      "local_alternative_reviews": [
+        {
+          "owner": "sn35.247",
+          "path": "/tipitaka/sn/sn35/sn35.206.than",
+          "original_link": {
+            "source": "ati",
+            "english": "The Six Animals",
+            "path": "/tipitaka/sn/sn35/sn35.206.than",
+            "url": "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.206.than.html",
+            "translator": "Thanissaro Bhikkhu",
+            "license": "CC-BY-NC",
+            "reference": "S iv 198",
+            "pali_title": "Chappana Sutta",
+            "match": "number+title"
+          },
+          "link_metadata_sha256": "379db228bcf3b1b1d28e736d7f7909eac170fbd928cf70118b7809b31cf4ace3",
+          "source_html_sha256": "a71437963469fd65b600cc6c7faa02c8d2a4d8f6449624eff0344b6b00337357",
+          "copyright_chunk_html_sha256": "545fbd1a1615a5d76bae009ce75aef61c1a27d55fae02c9da7135674314d372f",
+          "text_sha256": "b048d3b198683f39514182b653f2d41711d6b664e1d0079119f33b0427b2ae78",
+          "notice_sha256": "bd7935ea1dbd29796de992b58b87c1d45b8f29a62a3224915968654bedd44b71",
+          "root_units": [
+            {
+              "id": "sn35.247",
+              "title": "Chappāṇakopamasuttaṃ",
+              "vri": "247",
+              "book": 14,
+              "start": 1228,
+              "end": 1235,
+              "root_blocks_sha256": "829d1c7317c27b03ca951c9ace7e05d18d6a4f58cbe1ef79f59ede53c115cd70"
+            }
+          ],
+          "rights": {
+            "copyright": "©1997 Thanissaro Bhikkhu.",
+            "conditions": [
+              "Copies free of charge",
+              "Source/derivatives identified",
+              "Complete licence retained",
+              "At most50reprints where BPS notice states it"
+            ],
+            "full_notice_pinned": true
+          },
+          "merged_ordinary_alternatives": [
+            "ati:/tipitaka/sn/sn35/sn35.206x.wlsh"
+          ],
+          "decision": "retain-at-reviewed-snapshot",
+          "review_extent": "Complete official local body and notice read against complete indexed root; no live freshness claim."
+        }
+      ],
+      "limits": [
+        "Exact version hold only; do not infer all alternatives are complete from catalogue presence.",
+        "No new partial scope or selector activation.",
+        "DT ordinary choices are metadata-only observations, not live fetched.",
+        "Publisher numbering differs for SN35.205/206 versus indexed246/247; preserve rather than silently remap."
+      ],
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.206x.wlsh.html",
+      "translation_id": "ati:/tipitaka/sn/sn35/sn35.206x.wlsh",
+      "root": {
+        "id": "sn35.247",
+        "title": "Chappāṇakopamasuttaṃ",
+        "vri": "247",
+        "book": 14,
+        "start": 1228,
+        "end": 1235,
+        "root_blocks_sha256": "829d1c7317c27b03ca951c9ace7e05d18d6a4f58cbe1ef79f59ede53c115cd70"
+      },
+      "baseline_alternatives": [
+        "ati:/tipitaka/sn/sn35/sn35.206.than"
+      ],
+      "reason": "Wounded-person/thorny-marsh simile, rebuke framing and opening full non-restraint definition absent. Six-animal teaching retained, with explicit repetition compression in post-tethered passage; this does not restore the missing opening.",
+      "remaining_ordinary_alternatives": [
+        "ati:/tipitaka/sn/sn35/sn35.206.than"
+      ],
+      "link_metadata_hash_input": "{owner,link}"
+    },
+    {
+      "owner": "sn46.53",
+      "path": "/tipitaka/sn/sn46/sn46.053.wlsh",
+      "original_link": {
+        "source": "ati",
+        "english": "Fire",
+        "path": "/tipitaka/sn/sn46/sn46.053.wlsh",
+        "url": "https://www.accesstoinsight.org/tipitaka/sn/sn46/sn46.053.wlsh.html",
+        "translator": "Maurice O'Connell Walshe",
+        "license": "BPS",
+        "reference": "S v 112",
+        "pali_title": "Aggi Sutta",
+        "match": "number+title"
+      },
+      "link_metadata_sha256": "da80485d98f2b686714750a2e03800d29c5801fb3af0a81867c3eedcdd0ac6a3",
+      "source_html_sha256": "06e4ed3da4b35a8870c14d569ea184be6eacfdbefe58735c529e94860eae7109",
+      "copyright_chunk_html_sha256": "7d0d00e665e4563571c87293197694c51aa959e54be7426ba7e2ac162289beba",
+      "text_sha256": "8d47fcf25966eb0181f945252f667d2ea15447034ea4803eb3b466fea481a395",
+      "notice_sha256": "8e03d03a3c9b96f194779ac94aed31aaede96f3f8f456b1f3343ab3f953d24ef",
+      "root_units": [
+        {
+          "id": "sn46.53",
+          "title": "Aggisutta",
+          "vri": "234",
+          "book": 15,
+          "start": 665,
+          "end": 681,
+          "root_blocks_sha256": "586bcf5bbed9accd4f6be8dda3bf48e9b2997a8372a989f845617fb2af898477"
+        }
+      ],
+      "rights": {
+        "copyright": "©1985 Buddhist Publication Society.",
+        "conditions": [
+          "Copies free of charge",
+          "Source/derivatives identified",
+          "Complete licence retained",
+          "At most50reprints where BPS notice states it"
+        ],
+        "full_notice_pinned": true
+      },
+      "decision": "hold-whole-binding-partial-unit",
+      "observations": [
+        {
+          "refs": "sn46.53/2–/4",
+          "detail": "Monks’ visit and substantive challenge to outside ascetics, including who can answer it, omitted. The VRI abbreviation in /2 stays unexpanded."
+        },
+        {
+          "refs": "sn46.53/5–/16",
+          "detail": "Central fire/enlightenment-factor teaching substantially covered, with repeated explanatory sentences shortened by explicit ellipses."
+        }
+      ],
+      "partial_selector_assessment": "First chapter paragraph of17 aligns to complete /5. No current finite paragraph selector has this count; new source-specific profile would be required. Broader /5–/16 extraction would require a separate complete-source review of condensed repetitions.",
+      "local_alternative_reviews": [
+        {
+          "owner": "sn46.53",
+          "path": "/tipitaka/sn/sn46/sn46.053.than",
+          "original_link": {
+            "source": "ati",
+            "english": "Fire",
+            "path": "/tipitaka/sn/sn46/sn46.053.than",
+            "url": "https://www.accesstoinsight.org/tipitaka/sn/sn46/sn46.053.than.html",
+            "translator": "Thanissaro Bhikkhu",
+            "license": "CC-BY-NC",
+            "reference": "S v 112",
+            "pali_title": "Aggi Sutta",
+            "match": "number+title"
+          },
+          "link_metadata_sha256": "34c1da80c7b801943031921ae3d2f9b74267b6a7de2235ff83f6ea0d55aa43ba",
+          "source_html_sha256": "383f39c36fa61305f6402c2d536c98ac6f8ec8ac53073ba36f0ef73afc9a1543",
+          "copyright_chunk_html_sha256": "1f9ccf7f09450c4787ba556591c2026895161e652cea39f806e139f82b6e862e",
+          "text_sha256": "13deb0f071e08ec552867f90ff956410a7050e44eb838e9efeb3d0b2f053064b",
+          "notice_sha256": "05fe3910fa56b91d7c5d94814df275da20ad28179ab2f99cfe91187191eae69c",
+          "root_units": [
+            {
+              "id": "sn46.53",
+              "title": "Aggisutta",
+              "vri": "234",
+              "book": 15,
+              "start": 665,
+              "end": 681,
+              "root_blocks_sha256": "586bcf5bbed9accd4f6be8dda3bf48e9b2997a8372a989f845617fb2af898477"
+            }
+          ],
+          "rights": {
+            "copyright": "©2012 Thanissaro Bhikkhu.",
+            "conditions": [
+              "Copies free of charge",
+              "Source/derivatives identified",
+              "Complete licence retained",
+              "At most50reprints where BPS notice states it"
+            ],
+            "full_notice_pinned": true
+          },
+          "merged_ordinary_alternatives": [
+            "dt:SN/SN46_53",
+            "ati:/tipitaka/sn/sn46/sn46.053.wlsh"
+          ],
+          "decision": "retain-at-reviewed-snapshot",
+          "review_extent": "Complete official local body and notice read against complete indexed root; no live freshness claim."
+        }
+      ],
+      "limits": [
+        "Exact version hold only; do not infer all alternatives are complete from catalogue presence.",
+        "No new partial scope or selector activation.",
+        "DT ordinary choices are metadata-only observations, not live fetched.",
+        "Publisher numbering differs for SN35.205/206 versus indexed246/247; preserve rather than silently remap."
+      ],
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn46/sn46.053.wlsh.html",
+      "translation_id": "ati:/tipitaka/sn/sn46/sn46.053.wlsh",
+      "root": {
+        "id": "sn46.53",
+        "title": "Aggisutta",
+        "vri": "234",
+        "book": 15,
+        "start": 665,
+        "end": 681,
+        "root_blocks_sha256": "586bcf5bbed9accd4f6be8dda3bf48e9b2997a8372a989f845617fb2af898477"
+      },
+      "baseline_alternatives": [
+        "dt:SN/SN46_53",
+        "ati:/tipitaka/sn/sn46/sn46.053.than"
+      ],
+      "reason": "Monks’ visit and substantive challenge to outside ascetics, including who can answer it, omitted. The VRI abbreviation in /2 stays unexpanded. Central fire/enlightenment-factor teaching substantially covered, with repeated explanatory sentences shortened by explicit ellipses.",
+      "remaining_ordinary_alternatives": [
+        "dt:SN/SN46_53",
+        "ati:/tipitaka/sn/sn46/sn46.053.than"
+      ],
+      "link_metadata_hash_input": "{owner,link}"
+    },
+    {
+      "owner": "sn46.54",
+      "path": "/tipitaka/sn/sn46/sn46.054x.wlsh",
+      "original_link": {
+        "source": "ati",
+        "english": "The Brahma-viharas",
+        "path": "/tipitaka/sn/sn46/sn46.054x.wlsh",
+        "url": "https://www.accesstoinsight.org/tipitaka/sn/sn46/sn46.054x.wlsh.html",
+        "translator": "Maurice O'Connell Walshe",
+        "license": "BPS",
+        "reference": "S v 115",
+        "pali_title": "Mettam Sutta",
+        "match": "pts-start+number"
+      },
+      "link_metadata_sha256": "f63c0c12b659889424d9d6d5a4b924e6f4a5525665dd55c2937429fd1ae9f227",
+      "source_html_sha256": "54d1d34da8833983c4fc8e5a88707883a38749eb882ffdb8ace559cc483c2549",
+      "copyright_chunk_html_sha256": "c47479fc797072b418e60a0e6cb27af61cf6284867df08ae460d4e31692ea9a2",
+      "text_sha256": "43309f408fbb902360a778fcf5b9bd5bccd4b38daf5c578739f04bd95ff6513b",
+      "notice_sha256": "1c5b5141e1d964a19388a22a6a7f8b23f430c386de076aecc594a5bd906f734f",
+      "root_units": [
+        {
+          "id": "sn46.54",
+          "title": "Mettāsahagatasuttaṃ",
+          "vri": "235",
+          "book": 15,
+          "start": 681,
+          "end": 697,
+          "root_blocks_sha256": "5af6ca5d09ea715a6e0723717dae936932745f7fdcc1062312f4c2f6a3d8c49d"
+        }
+      ],
+      "rights": {
+        "copyright": "©1985 Buddhist Publication Society.",
+        "conditions": [
+          "Copies free of charge",
+          "Source/derivatives identified",
+          "Complete licence retained",
+          "At most50reprints where BPS notice states it"
+        ],
+        "full_notice_pinned": true
+      },
+      "decision": "hold-whole-binding-partial-unit",
+      "observations": [
+        {
+          "refs": "sn46.54/2–/12",
+          "detail": "Haliddavasana setting, outsiders’ matching claim, monks’ report and Buddha’s challenge to outsiders entirely omitted before initial ellipsis."
+        },
+        {
+          "refs": "sn46.54/13–/16",
+          "detail": "Four boundless-state/enlightenment-factor explanations retained with explicit as-above compression; source ends in ellipsis."
+        }
+      ],
+      "partial_selector_assessment": "Potential contiguous /13–/16 partial needs a reviewed finite multi-paragraph extraction excluding leading/trailing ellipses and notes. Current single-paragraph/verse selectors do not cover that source structure. No activation approved here.",
+      "local_alternative_reviews": [
+        {
+          "owner": "sn46.54",
+          "path": "/tipitaka/sn/sn46/sn46.054.than",
+          "original_link": {
+            "source": "ati",
+            "english": "Good Will",
+            "path": "/tipitaka/sn/sn46/sn46.054.than",
+            "url": "https://www.accesstoinsight.org/tipitaka/sn/sn46/sn46.054.than.html",
+            "translator": "Thanissaro Bhikkhu",
+            "license": "CC-BY-NC",
+            "reference": "S v 115",
+            "pali_title": "Metta Sutta",
+            "match": "number+title"
+          },
+          "link_metadata_sha256": "27c2cfbde7742569224a4ce9f2f82674ad6e9b5332c7f733579820fb3afd85d4",
+          "source_html_sha256": "0424ce9821145c287ca25a929a2598d0169495fea1e645f300844bb1b02625f4",
+          "copyright_chunk_html_sha256": "dfdc64a355e523686dd3af7198bb79446673e9948f174bbc48c774390fdeaa50",
+          "text_sha256": "a1ae735d86d77a3a0651834b9f17520bc602f6a816f48482574d9d6c7e4042c6",
+          "notice_sha256": "e605e49d443b07797085106a6f8e75eb10f6c4dffc79a567c8db86cdc2aa55d7",
+          "root_units": [
+            {
+              "id": "sn46.54",
+              "title": "Mettāsahagatasuttaṃ",
+              "vri": "235",
+              "book": 15,
+              "start": 681,
+              "end": 697,
+              "root_blocks_sha256": "5af6ca5d09ea715a6e0723717dae936932745f7fdcc1062312f4c2f6a3d8c49d"
+            }
+          ],
+          "rights": {
+            "copyright": "©2012 Thanissaro Bhikkhu.",
+            "conditions": [
+              "Copies free of charge",
+              "Source/derivatives identified",
+              "Complete licence retained",
+              "At most50reprints where BPS notice states it"
+            ],
+            "full_notice_pinned": true
+          },
+          "merged_ordinary_alternatives": [
+            "dt:SN/SN46_54",
+            "ati:/tipitaka/sn/sn46/sn46.054x.wlsh"
+          ],
+          "decision": "retain-at-reviewed-snapshot",
+          "review_extent": "Complete official local body and notice read against complete indexed root; no live freshness claim."
+        }
+      ],
+      "limits": [
+        "Exact version hold only; do not infer all alternatives are complete from catalogue presence.",
+        "No new partial scope or selector activation.",
+        "DT ordinary choices are metadata-only observations, not live fetched.",
+        "Publisher numbering differs for SN35.205/206 versus indexed246/247; preserve rather than silently remap."
+      ],
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn46/sn46.054x.wlsh.html",
+      "translation_id": "ati:/tipitaka/sn/sn46/sn46.054x.wlsh",
+      "root": {
+        "id": "sn46.54",
+        "title": "Mettāsahagatasuttaṃ",
+        "vri": "235",
+        "book": 15,
+        "start": 681,
+        "end": 697,
+        "root_blocks_sha256": "5af6ca5d09ea715a6e0723717dae936932745f7fdcc1062312f4c2f6a3d8c49d"
+      },
+      "baseline_alternatives": [
+        "dt:SN/SN46_54",
+        "ati:/tipitaka/sn/sn46/sn46.054.than"
+      ],
+      "reason": "Haliddavasana setting, outsiders’ matching claim, monks’ report and Buddha’s challenge to outsiders entirely omitted before initial ellipsis. Four boundless-state/enlightenment-factor explanations retained with explicit as-above compression; source ends in ellipsis.",
+      "remaining_ordinary_alternatives": [
+        "dt:SN/SN46_54",
+        "ati:/tipitaka/sn/sn46/sn46.054.than"
+      ],
+      "link_metadata_hash_input": "{owner,link}"
+    },
+    {
+      "owner": "sn47.10",
+      "path": "/tipitaka/sn/sn47/sn47.010.wlsh",
+      "original_link": {
+        "source": "ati",
+        "english": "Mindfulness",
+        "path": "/tipitaka/sn/sn47/sn47.010.wlsh",
+        "url": "https://www.accesstoinsight.org/tipitaka/sn/sn47/sn47.010.wlsh.html",
+        "translator": "Maurice O'Connell Walshe",
+        "license": "BPS",
+        "reference": "S v 154",
+        "pali_title": "Bhikkhunivasako Sutta",
+        "match": "pts-start+number"
+      },
+      "link_metadata_sha256": "f0952d554b129e521a3e083af02cd9c75af1fb9cf6dc0c6d831a92878d988bea",
+      "source_html_sha256": "3cd266762679eac1b73a42f1c609b8ee10499248151ca866e21fb4ccc7e577ba",
+      "copyright_chunk_html_sha256": "57c4178301821694a80920ba7acaff80cba908f3c1f808c152cb6ef34e505781",
+      "text_sha256": "c9da2790ff3c056842ed17646a4fc731a9da249c5aab7a7391dd04cd9390f745",
+      "notice_sha256": "21543399a45cd2dfacb1ec8e8c001897179bf6531b516548473b50d0cee8edc0",
+      "root_units": [
+        {
+          "id": "sn47.10",
+          "title": "Bhikkhunupassayasuttaṃ",
+          "vri": "376",
+          "book": 15,
+          "start": 923,
+          "end": 938,
+          "root_blocks_sha256": "d1e8ada52bca6531980630c1aaad25292d0878b3d345b7e9c3660effbb9eeccb"
+        }
+      ],
+      "rights": {
+        "copyright": "©1985 Buddhist Publication Society.",
+        "conditions": [
+          "Copies free of charge",
+          "Source/derivatives identified",
+          "Complete licence retained",
+          "At most50reprints where BPS notice states it"
+        ],
+        "full_notice_pinned": true
+      },
+      "decision": "hold-whole-binding-partial-unit",
+      "observations": [
+        {
+          "refs": "sn47.10/2–/6",
+          "detail": "Nuns’ progress report, Ananda’s visit/response and report to Buddha omitted before initial ellipsis."
+        },
+        {
+          "refs": "sn47.10/7–/9",
+          "detail": "Directed/undirected practice retained with other foundations compressed into editorial similarly instructions."
+        },
+        {
+          "refs": "sn47.10/10–/14",
+          "detail": "Final teacher’s injunction, Ananda approval and chapter paratext omitted after final ellipsis; the injunction is substantive, not just a colophon."
+        }
+      ],
+      "partial_selector_assessment": "No current selector fits: first real paragraph includes /7 plus editorial compression of /8; later paragraphs partition /9. Any narrower source extraction needs a new reviewed profile/boundary.",
+      "local_alternative_reviews": [
+        {
+          "owner": "sn47.10",
+          "path": "/tipitaka/sn/sn47/sn47.010.olen",
+          "original_link": {
+            "source": "ati",
+            "english": "Directed and Undirected Meditation",
+            "path": "/tipitaka/sn/sn47/sn47.010.olen",
+            "url": "https://www.accesstoinsight.org/tipitaka/sn/sn47/sn47.010.olen.html",
+            "translator": "Andrew Olendzki",
+            "license": "ATI_DEPRECATED",
+            "reference": "S v 154",
+            "pali_title": "Bhikkhunupassaya Sutta",
+            "match": "number+title"
+          },
+          "link_metadata_sha256": "3db2a017c9c79675558eab7f3d87fc8913aed08ec8c6da6ad32f33188915336d",
+          "source_html_sha256": "702eecad7f9b67591a8067b1ab8440b48f7867befd57b7bc23b4293f8eb84e4e",
+          "copyright_chunk_html_sha256": "2a4a737a517cb37e968c8b30aee0c436e1c075291fdab5668add8ea367279bbe",
+          "text_sha256": "cc0992ea4dd107cf2ba69d16f83560830d12c18c0d60b2e506f3f0e92a4445ef",
+          "notice_sha256": "745e6399ccf545067863422cdc26f260bf62d039155f6be74a73b7cb460d580a",
+          "root_units": [
+            {
+              "id": "sn47.10",
+              "title": "Bhikkhunupassayasuttaṃ",
+              "vri": "376",
+              "book": 15,
+              "start": 923,
+              "end": 938,
+              "root_blocks_sha256": "d1e8ada52bca6531980630c1aaad25292d0878b3d345b7e9c3660effbb9eeccb"
+            }
+          ],
+          "rights": {
+            "copyright": "©2005 Andrew Olendzki.",
+            "conditions": [
+              "Copies free of charge",
+              "Source/derivatives identified",
+              "Complete licence retained",
+              "At most50reprints where BPS notice states it"
+            ],
+            "full_notice_pinned": true
+          },
+          "merged_ordinary_alternatives": [
+            "dt:SN/SN47_10",
+            "ati:/tipitaka/sn/sn47/sn47.010.wlsh"
+          ],
+          "decision": "additional-scope-concern-see-additional-findings",
+          "review_extent": "Complete official local body and notice read against complete indexed root; no live freshness claim."
+        }
+      ],
+      "limits": [
+        "Exact version hold only; do not infer all alternatives are complete from catalogue presence.",
+        "No new partial scope or selector activation.",
+        "DT ordinary choices are metadata-only observations, not live fetched.",
+        "Publisher numbering differs for SN35.205/206 versus indexed246/247; preserve rather than silently remap."
+      ],
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn47/sn47.010.wlsh.html",
+      "translation_id": "ati:/tipitaka/sn/sn47/sn47.010.wlsh",
+      "root": {
+        "id": "sn47.10",
+        "title": "Bhikkhunupassayasuttaṃ",
+        "vri": "376",
+        "book": 15,
+        "start": 923,
+        "end": 938,
+        "root_blocks_sha256": "d1e8ada52bca6531980630c1aaad25292d0878b3d345b7e9c3660effbb9eeccb"
+      },
+      "baseline_alternatives": [
+        "dt:SN/SN47_10",
+        "ati:/tipitaka/sn/sn47/sn47.010.olen"
+      ],
+      "reason": "Nuns’ progress report, Ananda’s visit/response and report to Buddha omitted before initial ellipsis. Directed/undirected practice retained with other foundations compressed into editorial similarly instructions. Final teacher’s injunction, Ananda approval and chapter paratext omitted after final ellipsis; the injunction is substantive, not just a colophon.",
+      "remaining_ordinary_alternatives": [
+        "dt:SN/SN47_10"
+      ],
+      "link_metadata_hash_input": "{owner,link}"
+    },
+    {
+      "owner": "sn47.10",
+      "path": "/tipitaka/sn/sn47/sn47.010.olen",
+      "original_link": {
+        "source": "ati",
+        "english": "Directed and Undirected Meditation",
+        "path": "/tipitaka/sn/sn47/sn47.010.olen",
+        "url": "https://www.accesstoinsight.org/tipitaka/sn/sn47/sn47.010.olen.html",
+        "translator": "Andrew Olendzki",
+        "license": "ATI_DEPRECATED",
+        "reference": "S v 154",
+        "pali_title": "Bhikkhunupassaya Sutta",
+        "match": "number+title"
+      },
+      "link_metadata_sha256": "3db2a017c9c79675558eab7f3d87fc8913aed08ec8c6da6ad32f33188915336d",
+      "source_html_sha256": "702eecad7f9b67591a8067b1ab8440b48f7867befd57b7bc23b4293f8eb84e4e",
+      "copyright_chunk_html_sha256": "2a4a737a517cb37e968c8b30aee0c436e1c075291fdab5668add8ea367279bbe",
+      "text_sha256": "cc0992ea4dd107cf2ba69d16f83560830d12c18c0d60b2e506f3f0e92a4445ef",
+      "notice_sha256": "745e6399ccf545067863422cdc26f260bf62d039155f6be74a73b7cb460d580a",
+      "root_units": [
+        {
+          "id": "sn47.10",
+          "title": "Bhikkhunupassayasuttaṃ",
+          "vri": "376",
+          "book": 15,
+          "start": 923,
+          "end": 938,
+          "root_blocks_sha256": "d1e8ada52bca6531980630c1aaad25292d0878b3d345b7e9c3660effbb9eeccb"
+        }
+      ],
+      "rights": {
+        "copyright": "©2005 Andrew Olendzki",
+        "conditions": [
+          "Copies free of charge",
+          "Source/derivatives identified",
+          "Complete licence retained; no50-copy restriction stated"
+        ],
+        "provenance": "File provided by translator; revised30November2013."
+      },
+      "decision": "hold-whole-binding-partial-unit",
+      "observations": [
+        {
+          "refs": "sn47.10/4–/6",
+          "detail": "Ananda’s return/report and Buddha’s approval replaced by editorial bracketed summary."
+        },
+        {
+          "refs": "sn47.10/8",
+          "detail": "Other three foundations’ directed practice reduced to an editorial repetition footnote."
+        },
+        {
+          "refs": "sn47.10/9",
+          "detail": "Only the body example of undirected practice appears; the full repeated feeling/mind/mental-state clauses are not translated individually."
+        },
+        {
+          "refs": "sn47.10/11–/14",
+          "detail": "Final approval and chapter paratext absent."
+        }
+      ],
+      "positive_coverage": [
+        "Retains nuns’ progress opening /2–/3, unlike Walshe.",
+        "Retains full directed-body teaching /7 and final teacher injunction /10.",
+        "Contains the core directed/undirected teaching; this recommendation concerns condensed narrative/repetition scope, not absence of all substantive instruction."
+      ],
+      "metadata_warning": "EXTENTcomplete, but publisher in-body comment explicitly identifies an excerpt/mini-essay; body review, not that label alone, grounds concern.",
+      "partial_selector_assessment": "Final chapter paragraph6of6 corresponds to /10 and could be reviewed as a future bounded selection. No current selector fits; no activation here.",
+      "limits": [
+        "Separate unflagged alternative finding, not silently counted among original six.",
+        "Only indexed DT alternative remains after both ATI holds; not independently live-fetched.",
+        "Conservative scope assessment: repeated content is compressed and framing summarized; do not describe all teaching as missing."
+      ],
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn47/sn47.010.olen.html",
+      "translation_id": "ati:/tipitaka/sn/sn47/sn47.010.olen",
+      "root": {
+        "id": "sn47.10",
+        "title": "Bhikkhunupassayasuttaṃ",
+        "vri": "376",
+        "book": 15,
+        "start": 923,
+        "end": 938,
+        "root_blocks_sha256": "d1e8ada52bca6531980630c1aaad25292d0878b3d345b7e9c3660effbb9eeccb"
+      },
+      "baseline_alternatives": [
+        "dt:SN/SN47_10",
+        "ati:/tipitaka/sn/sn47/sn47.010.wlsh"
+      ],
+      "reason": "Publisher condenses the other foundations in root /8 into an editorial footnote, and translates only the body case from /9. Full-case scope is not established. Nuns opening and final injunction ARE retained. Narrative repetition compression alone is not the hold reason; the preserved DT version also compresses that repeated narrative but explicitly translates the other-foundation cases.",
+      "remaining_ordinary_alternatives": [
+        "dt:SN/SN47_10"
+      ],
+      "link_metadata_hash_input": "{owner,link}"
+    },
+    {
+      "owner": "mn54",
+      "translation_id": "dt:MN/MN54",
+      "url": "https://www.dhammatalks.org/suttas/MN/MN54.html",
+      "original_link": {
+        "source": "dhammatalks",
+        "url": "https://www.dhammatalks.org/suttas/MN/MN54.html",
+        "translator": "Ṭhānissaro Bhikkhu",
+        "reference": "MN 54 To Potaliya (Excerpt)",
+        "match": "number+title"
+      },
+      "link_metadata_sha256": "1e70bdf8881d22e8c1072ac179cd50d4eb40c2b0052996d29565a90bf4acabde",
+      "root_units": [
+        {
+          "id": "mn54",
+          "book": 9,
+          "start": 67,
+          "end": 108,
+          "title": "Potaliyasuttaṃ",
+          "collection": "mn",
+          "acronym": "MN 54",
+          "vri": "31–50",
+          "pts": {
+            "volume": 1,
+            "page": 359,
+            "end_page": 368
+          },
+          "root_blocks_sha256": "e74467a381dc64cd20d8937c116dbc7ea8cef9ce4bc0c1157651a122bfcb8126"
+        }
+      ],
+      "decision": "hold-whole-binding-partial-unit",
+      "decision_basis": "Substantive omissions confirmed from complete body, independently of Excerpt label.",
+      "web_view": {
+        "total_lines": 71,
+        "read_extent": "0–70",
+        "title_lines": "24–25",
+        "editorial_intro_lines": "27–29",
+        "scripture_lines": "30–62",
+        "notes_lines": "64–67",
+        "see_also_lines": "68"
+      },
+      "alignment": [
+        {
+          "root_refs": "mn54/15–/18",
+          "web_lines": "30–32",
+          "content": "Bones"
+        },
+        {
+          "root_refs": "mn54/19–/21",
+          "web_lines": "33–36",
+          "content": "Flesh"
+        },
+        {
+          "root_refs": "mn54/22–/24",
+          "web_lines": "37–40",
+          "content": "Torch"
+        },
+        {
+          "root_refs": "mn54/25–/28",
+          "web_lines": "41–43",
+          "content": "Embers"
+        },
+        {
+          "root_refs": "mn54/29",
+          "web_lines": "44–45",
+          "content": "Dream"
+        },
+        {
+          "root_refs": "mn54/30–/33",
+          "web_lines": "46–48",
+          "content": "Borrowed goods"
+        },
+        {
+          "root_refs": "mn54/34–/36",
+          "web_lines": "49–55",
+          "content": "Fruit tree, repeated descriptions abbreviated"
+        },
+        {
+          "root_refs": "mn54/37–/39",
+          "web_lines": "56–62",
+          "content": "Three knowledges and cutting-off conclusion"
+        }
+      ],
+      "substantive_omissions": [
+        {
+          "refs": "mn54/2–/13",
+          "evidence_lines": "24–30",
+          "detail": "Opening encounter, household-affairs exchange, eight factors, explanations and transition absent before first bones simile."
+        },
+        {
+          "refs": "mn54/40",
+          "evidence_lines": "60–70",
+          "detail": "Potaliya acknowledgment, changed assessment, praise and refuge absent after conclusion; only notes and links follow."
+        }
+      ],
+      "paratext_refs_not_counted_as_missing_translation": [
+        "mn54/1 and /14 headings",
+        "mn54/41 numbered colophon"
+      ],
+      "edition_observation": {
+        "root_ref": "mn54/31",
+        "web_lines": "47,67",
+        "detail": "Note2 explains negative reply follows Thai edition; Burmese/PTS have affirmative. This clarifies ATI difference, not a translation-error finding."
+      },
+      "ati_comparison": "Same substantive partial span /15–/39 as ATI54; source-specific notes differ.",
+      "source": "dhammatalks",
+      "reason": "Complete primary rendered body covers only the sensuality similes and three knowledges (/15–/39); it omits the opening encounter, eight factors and explanations (/2–/13), and Potaliya acknowledgment/refuge (/40). The Excerpt label agrees with the substantive body. Do not treat the retained source as a whole translation.",
+      "baseline_alternatives": [
+        "ati:/tipitaka/mn/mn.054x.than"
+      ],
+      "root": {
+        "id": "mn54",
+        "book": 9,
+        "start": 67,
+        "end": 108,
+        "title": "Potaliyasuttaṃ",
+        "collection": "mn",
+        "acronym": "MN 54",
+        "vri": "31–50",
+        "pts": {
+          "volume": 1,
+          "page": 359,
+          "end_page": 368
+        },
+        "root_blocks_sha256": "e74467a381dc64cd20d8937c116dbc7ea8cef9ce4bc0c1157651a122bfcb8126"
+      },
+      "remaining_ordinary_alternatives": [],
+      "link_metadata_hash_input": "original_link"
+    }
+  ],
+  "primary_web_alternative_reviews": {
+    "early_mn": {
+      "observed_on": "2026-11-08",
+      "baseline_commit": "12201ecf93d0d0c977c493ccd34db9128cca8fa9",
+      "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "method": "Complete primary DT pages read using supported tools.web__run open views, compared against complete indexed VRI roots already read through src/canon.mjs. Primary pages reported crawled today. Metadata summaries and source line locators only; no scripture bodies saved.",
+      "rights": {
+        "source_url": "https://www.dhammatalks.org/",
+        "web_view_total_lines": 413,
+        "attribution_evidence": {
+          "lines": "24",
+          "summary": "Site identifies Thanissaro Bhikkhu as translator/author unless otherwise noted."
+        },
+        "copyright_evidence": {
+          "lines": "400–405",
+          "summary": "Site-wide notice states CC Attribution-NonCommercial4.0 (labelled Unported on site), with older free-distribution wording and newer explicit CC tags. Copyright holder treats any sale, including nonprofit sales, as commercial."
+        },
+        "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "sutta_page_footer_observation": "Neither complete rendered sutta view exposes an individual copyright/licence footer; no page-specific rights notice or copyright year inferred.",
+        "unavailable_guessed_rights_paths": [
+          "https://www.dhammatalks.org/copyright.html",
+          "https://www.dhammatalks.org/copyrights.html"
+        ],
+        "rights_limits": "Observed primary global notice only; preserve attribution, source URL, licence link and noncommercial restriction. This is not a raw-notice extraction pin."
+      },
+      "rows": [
+        {
+          "owner": "mn21",
+          "translation_id": "dt:MN/MN21",
+          "url": "https://www.dhammatalks.org/suttas/MN/MN21.html",
+          "original_link": {
+            "source": "dhammatalks",
+            "url": "https://www.dhammatalks.org/suttas/MN/MN21.html",
+            "translator": "Ṭhānissaro Bhikkhu",
+            "reference": "MN 21 The Simile of the Saw",
+            "match": "number+title"
+          },
+          "link_metadata_sha256": "c1592fee73e383c3fa8330921a93a83bf0b83dc30772dbe1c48d0b5f443b2cec",
+          "root_units": [
+            {
+              "id": "mn21",
+              "book": 8,
+              "start": 719,
+              "end": 746,
+              "title": "Kakacūpamasuttaṃ",
+              "collection": "mn",
+              "acronym": "MN 21",
+              "vri": "222–233",
+              "pts": {
+                "volume": 1,
+                "page": 122,
+                "end_page": 129
+              },
+              "root_blocks_sha256": "c563b495746afba99a7cc1bf9ad99761e731d9933f8b56e18220696273cfc9dc"
+            }
+          ],
+          "decision": "retain",
+          "decision_basis": "Complete substantive scope in the observed primary web view; no raw publisher/runtime pin implied.",
+          "web_view": {
+            "total_lines": 124,
+            "read_extent": "0–123 (initial open0–112, follow-up84–123)",
+            "title_lines": "24–25",
+            "scripture_lines": "26–120",
+            "closing_lines": "112–120",
+            "see_also_lines": "121"
+          },
+          "alignment": [
+            {
+              "root_refs": "mn21/3",
+              "web_lines": "26–29",
+              "content": "Residence, entanglement and complaint"
+            },
+            {
+              "root_refs": "mn21/4–/5",
+              "web_lines": "30–39",
+              "content": "Summons and admission"
+            },
+            {
+              "root_refs": "mn21/6–/9",
+              "web_lines": "40–44",
+              "content": "Four tailored admonitions"
+            },
+            {
+              "root_refs": "mn21/10",
+              "web_lines": "45–46",
+              "content": "Single-meal instruction"
+            },
+            {
+              "root_refs": "mn21/11–/12",
+              "web_lines": "47–49",
+              "content": "Chariot and sal-forest similes"
+            },
+            {
+              "root_refs": "mn21/13–/17",
+              "web_lines": "50–83",
+              "content": "Vedehika narrative"
+            },
+            {
+              "root_refs": "mn21/18–/19",
+              "web_lines": "84–89",
+              "content": "Admonishability and speech"
+            },
+            {
+              "root_refs": "mn21/20–/23",
+              "web_lines": "90–111",
+              "content": "Four similes and differentiated refrains"
+            },
+            {
+              "root_refs": "mn21/24–/26",
+              "web_lines": "112–120",
+              "content": "Saw, remembrance and approval"
+            }
+          ],
+          "substantive_omissions": [],
+          "paratext_refs_not_counted_as_missing_translation": [
+            "mn21/1–/2 headings",
+            "mn21/27 numbered colophon"
+          ],
+          "ati_comparison": "Current DT contains /3–/12 missing from ATI Thanissaro, and /3–/7 plus /10–/12 missing from ATI Buddharakkhita. It remains an independent source/version."
+        },
+        {
+          "owner": "mn54",
+          "translation_id": "dt:MN/MN54",
+          "url": "https://www.dhammatalks.org/suttas/MN/MN54.html",
+          "original_link": {
+            "source": "dhammatalks",
+            "url": "https://www.dhammatalks.org/suttas/MN/MN54.html",
+            "translator": "Ṭhānissaro Bhikkhu",
+            "reference": "MN 54 To Potaliya (Excerpt)",
+            "match": "number+title"
+          },
+          "link_metadata_sha256": "1e70bdf8881d22e8c1072ac179cd50d4eb40c2b0052996d29565a90bf4acabde",
+          "root_units": [
+            {
+              "id": "mn54",
+              "book": 9,
+              "start": 67,
+              "end": 108,
+              "title": "Potaliyasuttaṃ",
+              "collection": "mn",
+              "acronym": "MN 54",
+              "vri": "31–50",
+              "pts": {
+                "volume": 1,
+                "page": 359,
+                "end_page": 368
+              },
+              "root_blocks_sha256": "e74467a381dc64cd20d8937c116dbc7ea8cef9ce4bc0c1157651a122bfcb8126"
+            }
+          ],
+          "decision": "hold-whole-binding-partial-unit",
+          "decision_basis": "Substantive omissions confirmed from complete body, independently of Excerpt label.",
+          "web_view": {
+            "total_lines": 71,
+            "read_extent": "0–70",
+            "title_lines": "24–25",
+            "editorial_intro_lines": "27–29",
+            "scripture_lines": "30–62",
+            "notes_lines": "64–67",
+            "see_also_lines": "68"
+          },
+          "alignment": [
+            {
+              "root_refs": "mn54/15–/18",
+              "web_lines": "30–32",
+              "content": "Bones"
+            },
+            {
+              "root_refs": "mn54/19–/21",
+              "web_lines": "33–36",
+              "content": "Flesh"
+            },
+            {
+              "root_refs": "mn54/22–/24",
+              "web_lines": "37–40",
+              "content": "Torch"
+            },
+            {
+              "root_refs": "mn54/25–/28",
+              "web_lines": "41–43",
+              "content": "Embers"
+            },
+            {
+              "root_refs": "mn54/29",
+              "web_lines": "44–45",
+              "content": "Dream"
+            },
+            {
+              "root_refs": "mn54/30–/33",
+              "web_lines": "46–48",
+              "content": "Borrowed goods"
+            },
+            {
+              "root_refs": "mn54/34–/36",
+              "web_lines": "49–55",
+              "content": "Fruit tree, repeated descriptions abbreviated"
+            },
+            {
+              "root_refs": "mn54/37–/39",
+              "web_lines": "56–62",
+              "content": "Three knowledges and cutting-off conclusion"
+            }
+          ],
+          "substantive_omissions": [
+            {
+              "refs": "mn54/2–/13",
+              "evidence_lines": "24–30",
+              "detail": "Opening encounter, household-affairs exchange, eight factors, explanations and transition absent before first bones simile."
+            },
+            {
+              "refs": "mn54/40",
+              "evidence_lines": "60–70",
+              "detail": "Potaliya acknowledgment, changed assessment, praise and refuge absent after conclusion; only notes and links follow."
+            }
+          ],
+          "paratext_refs_not_counted_as_missing_translation": [
+            "mn54/1 and /14 headings",
+            "mn54/41 numbered colophon"
+          ],
+          "edition_observation": {
+            "root_ref": "mn54/31",
+            "web_lines": "47,67",
+            "detail": "Note2 explains negative reply follows Thai edition; Burmese/PTS have affirmative. This clarifies ATI difference, not a translation-error finding."
+          },
+          "ati_comparison": "Same substantive partial span /15–/39 as ATI54; source-specific notes differ.",
+          "source": "dhammatalks",
+          "reason": "Complete primary rendered body covers only the sensuality similes and three knowledges (/15–/39); it omits the opening encounter, eight factors and explanations (/2–/13), and Potaliya acknowledgment/refuge (/40). The Excerpt label agrees with the substantive body. Do not treat the retained source as a whole translation.",
+          "baseline_alternatives": [
+            "ati:/tipitaka/mn/mn.054x.than"
+          ],
+          "root": {
+            "id": "mn54",
+            "book": 9,
+            "start": 67,
+            "end": 108,
+            "title": "Potaliyasuttaṃ",
+            "collection": "mn",
+            "acronym": "MN 54",
+            "vri": "31–50",
+            "pts": {
+              "volume": 1,
+              "page": 359,
+              "end_page": 368
+            },
+            "root_blocks_sha256": "e74467a381dc64cd20d8937c116dbc7ea8cef9ce4bc0c1157651a122bfcb8126"
+          },
+          "remaining_ordinary_alternatives": []
+        }
+      ],
+      "limits": [
+        "Web-rendered evidence has provider line locators, not raw HTML bytes, full underlying DOM, HTTP headers, source commits or runtime extractor output.",
+        "No source_html_sha256, runtime text_sha256 or notice_sha256 invented from web rendering. Root and link hashes originate only from authenticated local indexed metadata.",
+        "Source can change after observation; this report grants neither selector activation nor frozen-source freshness annotation.",
+        "No shell network fetch, SuttaCentral access, repo edits, scripture expansion or saved English bodies."
+      ],
+      "canonical_and_commentary_unchanged": true,
+      "new_partial_activations": 0
+    },
+    "late_mn": {
+      "observed_on": "2026-11-08",
+      "baseline_commit": "12201ecf93d0d0c977c493ccd34db9128cca8fa9",
+      "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "method": "Supported web tool opened complete rendered primary pages, including notes, against already-read complete indexed roots. Metadata only; no raw HTML fetched, runtime extraction verified, hashes invented or source text bundled.",
+      "rows": [
+        {
+          "owner": "mn75",
+          "translation_id": "dt:MN/MN75",
+          "source_url": "https://www.dhammatalks.org/suttas/MN/MN75.html",
+          "observed_on": "2026-11-08",
+          "rendered_total_lines": 184,
+          "rendered_lines_read": "0–183 (complete)",
+          "translation_body_lines": "27–160",
+          "editorial_notes_lines": "161–181",
+          "decision": "retain-at-rendered-snapshot",
+          "root_blocks_sha256": "f5b0ceeb528002d793c63c53ecce3a00126e100e8e2123b468fada529bc9663d",
+          "coverage": [
+            {
+              "refs": "mn75/2–/3",
+              "lines": "27–42",
+              "finding": "Residence, alms, bed dispute, hearing, encounter."
+            },
+            {
+              "refs": "mn75/4–/5",
+              "lines": "43–61",
+              "finding": "Sense restraint and abandoned craving."
+            },
+            {
+              "refs": "mn75/6–/10",
+              "lines": "63–81",
+              "finding": "Palaces, heavenly comparison, earlier leper and application."
+            },
+            {
+              "refs": "mn75/11–/20",
+              "lines": "82–139",
+              "finding": "Later leper, health stanzas, blind-man cloth and application."
+            },
+            {
+              "refs": "mn75/21–/24",
+              "lines": "140–160",
+              "finding": "Treatment, aggregates, cessation, refuge, probation, ordination and attainment."
+            }
+          ],
+          "observations": [
+            "Substantial ATI-missing opening /2–/10 is present.",
+            "Publisher abbreviates repetitions: /22 omits hearing praise/search from repeated cloth setup, already given /17. Repeated aggregate clauses also elided. No word-level completeness certification.",
+            "Final /25 colophon is paratext. Subject-matter scope covers the discourse; repeated narrative compression remains disclosed."
+          ],
+          "rights": {
+            "individual_notice_visible": false,
+            "finding": "Complete rendered page shows no individual copyright/licence notice; no new rights verification claimed."
+          }
+        },
+        {
+          "owner": "mn95",
+          "translation_id": "dt:MN/MN95",
+          "source_url": "https://www.dhammatalks.org/suttas/MN/MN95.html",
+          "observed_on": "2026-11-08",
+          "rendered_total_lines": 204,
+          "rendered_lines_read": "0–203 (complete)",
+          "translation_body_lines": "26–179",
+          "editorial_notes_lines": "180–201",
+          "decision": "retain-at-rendered-snapshot",
+          "root_blocks_sha256": "6cf9073cbffe4f7939333ef805167a0294780d68f471736247d154f5a8d5dc98",
+          "coverage": [
+            {
+              "refs": "mn95/2–/3",
+              "lines": "26–36",
+              "finding": "Arrival, villagers and messenger."
+            },
+            {
+              "refs": "mn95/4–/5",
+              "lines": "37–94",
+              "finding": "Brahmin objections and Caṅkī’s reply."
+            },
+            {
+              "refs": "mn95/6–/10",
+              "lines": "95–121",
+              "finding": "Arrival/greetings, Kapāṭika, Vedic authority, blind men and safeguarding."
+            },
+            {
+              "refs": "mn95/11–/15",
+              "lines": "122–134",
+              "finding": "Three separate investigations, realization and final attainment."
+            },
+            {
+              "refs": "mn95/16–/28",
+              "lines": "135–179",
+              "finding": "All helpful conditions, final response and lay refuge."
+            }
+          ],
+          "observations": [
+            "Both ATI-missing opening /2–/5 and initial /6 greeting are present; Ñanamoli-missing /16–/28 is present.",
+            "Repeated /18–/26 positive/because/therefore formulas are abbreviated; every condition and negative dependency remain. No word-level completeness certification.",
+            "Notes distinguish edition elisions in /4–/5; they agree with bundled Burmese repetition marks. Final /29 colophon is paratext."
+          ],
+          "rights": {
+            "individual_notice_visible": false,
+            "finding": "Complete rendered page shows no individual copyright/licence notice; no new rights verification claimed."
+          }
+        }
+      ],
+      "limits": [
+        "Rendered primary-source evidence only; not raw-HTML, runtime plainText/extraction, source-pin or direct live-availability proof.",
+        "Retain means complete discourse subject-matter scope with explicitly disclosed publisher repetition abbreviations; stricter every-clause alignment is not certified.",
+        "No source, metadata, selector or rights activation; no repository edits. Existing DT licences and runtime guards remain authoritative."
+      ]
+    },
+    "sn47_10": {
+      "observed_on": "2026-11-08",
+      "url": "https://www.dhammatalks.org/suttas/SN/SN47_10.html",
+      "method": "Supported web open of primary publisher; no shell fetch, mirror or SuttaCentral.",
+      "rendered_total_lines": 55,
+      "decision": "retain-current-DT-whole-binding-at-observed-snapshot",
+      "rendered_scope": {
+        "26–31": "Nuns, report and approval.",
+        "32–35": "Directed body practice plus other-foundation case.",
+        "36–39": "Undirected body practice plus other-foundation clauses.",
+        "40–42": "Final instruction and approval."
+      },
+      "root": "sn47.10",
+      "scope_limits": [
+        "The repeated report is parenthetically condensed; this alone does not establish incomplete scope.",
+        "Olendzki has fewer explicit practice cases, despite a repetition footnote; preserve that distinction.",
+        "Chapter summary is paratext.",
+        "No word-level alignment or lasting upstream freshness claim."
+      ],
+      "raw_html_sha256": null,
+      "text_sha256": null,
+      "notice_sha256": null,
+      "hash_reason": "Rendered evidence only; no raw-byte or extractor hash invented.",
+      "rights": "Existing DT terms remain. Rendered response did not expose a full licence notice; no new permission inferred."
+    }
+  },
+  "coverage_after": {
+    "direct": 1437,
+    "english": 1860,
+    "dhammatalks": 1273,
+    "ati": 1116,
+    "anandajoti": 153,
+    "partial_texts": 14,
+    "partial_links": 14,
+    "shared_texts": 110,
+    "shared_links": 12
+  },
+  "ordinary_links_after": 2542,
+  "grouped_whole_coverage_after": {
+    "direct": 1411,
+    "inherited": 1834
+  },
+  "daily_after": {
+    "eligible": 1260,
+    "fixed_date": "2026-11-01",
+    "sutta": "sn22.121"
+  },
+  "queue_after": {
+    "ordinary_ati_checked": 1116,
+    "flags": 3,
+    "frozen_retains": 3,
+    "unreviewed": 0
+  },
+  "next_work": {
+    "unreviewed_dt_metadata_leads": [
+      "dn21",
+      "dn26",
+      "mn91"
+    ],
+    "potential_partial_source": "MN54 dream analogy root/29; separate source-specific review required; not approved"
+  },
+  "dataset_integrity": {
+    "server/data/translations.json": {
+      "before_sha256": "4b341c331529f85f8e5ededf45c4cb499202b235686c182bd410ddc783c02bf6",
+      "after_sha256": "01685b05f1d069d74147d865b5be39fa79c52c6cbee934ef99e80045ca94de90",
+      "unchanged": false
+    },
+    "server/data/canon.json.gz.parts.json": {
+      "before_sha256": "b8be1878471e6dfc3e858da22cc62c0868cba2b2912e7056619b233830afbe66",
+      "after_sha256": "b8be1878471e6dfc3e858da22cc62c0868cba2b2912e7056619b233830afbe66",
+      "unchanged": true
+    },
+    "server/data/commentary.json.gz.parts.json": {
+      "before_sha256": "9b916a8387d3e87d15634e19038959eb51c5dda155b8abe57b608ed7766398e7",
+      "after_sha256": "9b916a8387d3e87d15634e19038959eb51c5dda155b8abe57b608ed7766398e7",
+      "unchanged": true
+    },
+    "server/data/parallels.json.gz": {
+      "before_sha256": "7d97b150665f47cebcaf505b4de4d9bae2f54e6a346f2ab4bf294dd5074bf7b6",
+      "after_sha256": "7d97b150665f47cebcaf505b4de4d9bae2f54e6a346f2ab4bf294dd5074bf7b6",
+      "unchanged": true
+    },
+    "scripts/canon/reviewed_partial_pages.json": {
+      "before_sha256": "167eb5551a00ca2cd524bd034b12a3900df9eb10a4e6084b90dc3c15c8378c36",
+      "after_sha256": "167eb5551a00ca2cd524bd034b12a3900df9eb10a4e6084b90dc3c15c8378c36",
+      "unchanged": true
+    },
+    "server/data/reviewed-partial-pages.json": {
+      "before_sha256": "167eb5551a00ca2cd524bd034b12a3900df9eb10a4e6084b90dc3c15c8378c36",
+      "after_sha256": "167eb5551a00ca2cd524bd034b12a3900df9eb10a4e6084b90dc3c15c8378c36",
+      "unchanged": true
+    },
+    "scripts/canon/retained_ordinary_pages.json": {
+      "before_sha256": "b468c15c0a56a5bcee6ab6bf7040f8778ab8e5fde47b8844cf2d762ac7be7c31",
+      "after_sha256": "b468c15c0a56a5bcee6ab6bf7040f8778ab8e5fde47b8844cf2d762ac7be7c31",
+      "unchanged": true
+    },
+    "server/data/topics.json": {
+      "before_sha256": "9d35a5114ab234bb47dc138cf81f33728bdb0bd7f43df73bb942b13061ccb3a0",
+      "after_sha256": "7f9a1b39be922f00f3e153cdb30dd160450473a7b14d7fcbb4f4fb484eb46608",
+      "unchanged": false
+    }
+  },
+  "hash_serialization_note": "Independent receipts use SHA256(compact UTF8 JSON). link_metadata_hash_input explicitly distinguishes original_link from {owner,link}; neither is an HTML or content hash. Raw source/text/notice/root pins retain their individually recorded semantics.",
+  "verification": {
+    "focused_existing_tests": {
+      "passed": 37,
+      "optional_skips": 1
+    },
+    "focused_new_and_note_guards": {
+      "passed": 9,
+      "failed": 0
+    },
+    "source_probe": {
+      "status": "passed",
+      "withheld_ati_pages": 13,
+      "retained_local_alternatives": 5,
+      "provider_requests": 18,
+      "upstream_http_requests": 0,
+      "all_raw_text_notice_and_root_pins_verified": true,
+      "generic_pages_remain_available_without_canonical_unit_claim": true,
+      "whole_binding_refusal_preserved_after_generic_page_cache": true,
+      "limits": "Source modules and official pinned local ATI fixtures, not live publisher freshness/runtime DT availability or installed-browser evidence. No source body saved. DT rendered-view receipt has no invented raw/extractor/notice hashes."
+    },
+    "smoke": {
+      "tools": 34,
+      "checks": 64,
+      "live": false,
+      "status": "passed"
+    },
+    "independent_review": "Fourteen scope decisions and implementation reviewed; corrected a swapped six-animals/lute summary label. No implementation blockers. Source hash inputs explicitly documented to preserve independent receipt serialization.",
+    "full_check": {
+      "status": "passed",
+      "tests": 1102,
+      "passed": 1100,
+      "skipped": 2,
+      "failures": 0,
+      "audit_texts": 8544,
+      "audit_failures": 0,
+      "optional_skips": [
+        "Live provider quote check in offline mode",
+        "Exact old implementation comparison; mandatory frozen descriptors still checked"
+      ]
+    },
+    "partial_browser": {
+      "browser-normal": {
+        "passed": 205,
+        "a11y_scans": 0,
+        "a11y_violations": 0,
+        "outside_source_tree": false
+      },
+      "browser-a11y": {
+        "passed": 205,
+        "a11y_scans": 168,
+        "a11y_violations": 0,
+        "outside_source_tree": false
+      },
+      "partial-installed-final": {
+        "passed": 205,
+        "a11y_scans": 0,
+        "a11y_violations": 0,
+        "outside_source_tree": true
+      }
+    },
+    "plans_browser": {
+      "plans-normal": {
+        "passed": 53,
+        "a11y_scans": 0,
+        "a11y_violations": 0,
+        "outside_source_tree": false
+      },
+      "plans-a11y": {
+        "passed": 52,
+        "a11y_scans": 20,
+        "a11y_violations": 0,
+        "outside_source_tree": false
+      },
+      "plans-installed": {
+        "passed": 53,
+        "a11y_scans": 0,
+        "a11y_violations": 0,
+        "outside_source_tree": true
+      }
+    },
+    "topics_browser": {
+      "topics-normal": {
+        "passed": 56,
+        "a11y_scans": 0,
+        "a11y_violations": 0,
+        "outside_source_tree": false
+      },
+      "topics-a11y": {
+        "passed": 56,
+        "a11y_scans": 24,
+        "a11y_violations": 0,
+        "outside_source_tree": false
+      },
+      "topics-installed": {
+        "passed": 56,
+        "a11y_scans": 0,
+        "a11y_violations": 0,
+        "outside_source_tree": true
+      }
+    },
+    "installed_partial_audit": {
+      "status": "passed",
+      "modes": 8,
+      "scope": "Extracted-package synthetic providers plus real registered declarations. Explicit partial retrieval, source/mapping pins, verification, coverage and restart guards. Real declarations are checked as metadata or refused on simulated source drift; no live author request or new approval."
+    },
+    "final_build_matches_installed_server": true,
+    "guide_review": "Independent review reproduced a cached-plan pin bypass; repaired revalidation before cached returns. Original warmed same-canon source/root drift now rejects; original50source/path assignments frozen at12201ec hash. Focused guide15/15 passed."
+  },
+  "integration_repairs": {
+    "guide_subjects": [
+      "mn75",
+      "mn95"
+    ],
+    "guide_days_unchanged": 50,
+    "subject_gate": "Exact id/title/vri/book/start/end/full-root/source-commit pins; revalidated on cached guide returns; no whole translation or word-level alignment",
+    "topic_references_externalized": 10,
+    "topics_preserved": 472,
+    "untouched_topics": 462,
+    "initial_full_check": "Seven stale-integration failures in study-guide URL resolution, topic index and dated daily eval. Fixed actual plan/topic behavior, preserved assignments/progress, updated only current daily expected output; no skipped/disabled assertions.",
+    "focused_integration_tests": {
+      "passed": 44,
+      "failed": 0
+    }
+  }
+}

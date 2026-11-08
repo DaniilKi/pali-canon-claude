@@ -44,12 +44,36 @@ def apply_reviewed_exclusions(out, manifest=MANIFEST):
         if row['status'] == 'withheld-partial-unit':
             review = row['review']
             roots = review.get('root_units') if isinstance(review, dict) else None
-            if (source != 'ati' or len(row['subject_ids']) != 1
+            if (len(row['subject_ids']) != 1
                     or not isinstance(roots, list) or len(roots) != 1
                     or not isinstance(roots[0], dict) or roots[0].get('id') != row['subject_ids'][0]
-                    or not valid_sha(roots[0].get('root_blocks_sha256'))
-                    or any(not valid_sha(review.get(pin))
-                           for pin in ('source_html_sha256', 'text_sha256', 'notice_sha256'))):
+                    or not valid_sha(roots[0].get('root_blocks_sha256'))):
+                raise ValueError('Invalid reviewed partial-unit exclusion')
+            if source == 'ati':
+                if any(not valid_sha(review.get(pin))
+                       for pin in ('source_html_sha256', 'text_sha256', 'notice_sha256')):
+                    raise ValueError('Invalid reviewed partial-unit exclusion')
+            elif source == 'dhammatalks':
+                # A restrictive hold is not source activation. Supported primary-web
+                # observations cannot truthfully supply raw HTML/extractor hashes.
+                view = review.get('rendered_view', {})
+                if not isinstance(view, dict):
+                    raise ValueError('Invalid rendered-web partial-unit exclusion')
+                total, first, last = (view.get(k) for k in ('total_lines', 'first_line', 'last_line'))
+                scripture = view.get('scripture_lines')
+                if (review.get('evidence_kind') != 'publisher-rendered-web'
+                        or review.get('source_url') != row['url']
+                        or not re.fullmatch(r'[0-9a-f]{40}', str(review.get('vri_commit', '')))
+                        or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', str(review.get('observed_on', '')))
+                        or any(type(n) is not int for n in (total, first, last))
+                        or total <= 0 or first != 0 or last != total - 1
+                        or not isinstance(scripture, list) or len(scripture) != 2
+                        or any(type(n) is not int for n in scripture)
+                        or not (first <= scripture[0] <= scripture[1] <= last)
+                        or not isinstance(review.get('method'), str) or not review['method'].strip()
+                        or any(pin in review for pin in ('source_html_sha256', 'text_sha256', 'notice_sha256'))):
+                    raise ValueError('Invalid rendered-web partial-unit exclusion')
+            else:
                 raise ValueError('Invalid reviewed partial-unit exclusion')
         blocked[key] = row
     # Validate the complete manifest before constructing a fresh output. Inputs stay intact.

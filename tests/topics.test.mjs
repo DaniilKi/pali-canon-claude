@@ -8,7 +8,7 @@ import * as features from '../src/features/index.mjs';
 const d = canon.load();
 const textOf = (u) => canon.fold(d.canon.books[u.book].blocks.slice(u.start, u.end).map((b) => b[2]).join(' '));
 
-test('topic index: at least 300 topics, each with texts, from a pinned CC BY source', () => {
+test('topic index: at least 300 topics, each with canonical texts or explicitly withheld publisher links, from a pinned CC BY source', () => {
   const data = topicsIndex();
   assert.ok(data.topics.length >= 300, `${data.topics.length} topics`);
   assert.match(data.source.commit, /^[0-9a-f]{40}$/);
@@ -16,7 +16,7 @@ test('topic index: at least 300 topics, each with texts, from a pinned CC BY sou
   assert.match(data.source.attribution, /Access to Insight/);
   const slugs = new Set();
   for (const t of data.topics) {
-    assert.ok(t.texts.length > 0, t.slug);
+    assert.ok(t.texts.length > 0 || t.further_reading?.some(r => r.scope === 'withheld-publisher-page'), t.slug);
     assert.ok(!slugs.has(t.slug), `duplicate ${t.slug}`);
     slugs.add(t.slug);
     assert.match(t.ati_url, /^https:\/\/www\.accesstoinsight\.org\/index-(subject|number)\.html#/);
