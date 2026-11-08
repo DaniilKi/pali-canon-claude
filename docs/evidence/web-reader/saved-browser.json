@@ -1,0 +1,232 @@
+{
+  "passed": 44,
+  "outside_source_tree": false,
+  "checks": [
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "bounded editors, count and responsive source labels"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "pagination keeps unsaved notes and moves keyboard focus visibly"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "unsaved drafts searched locally without URL or title disclosure"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "accent-insensitive saved metadata search"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "source types remain distinct and labelled noncanonical"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "hostile or unmatched query stays inert"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "filter changes never write profile or call server"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "export retains all 500 bookmarks and off-page drafts"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "explicit save remains durable"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "filtered reference opens actual source unchanged"
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "check": "navigation preserves tab filters, removal restores visible focus"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "bounded editors, count and responsive source labels"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "pagination keeps unsaved notes and moves keyboard focus visibly"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "unsaved drafts searched locally without URL or title disclosure"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "accent-insensitive saved metadata search"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "source types remain distinct and labelled noncanonical"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "hostile or unmatched query stays inert"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "filter changes never write profile or call server"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "export retains all 500 bookmarks and off-page drafts"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "explicit save remains durable"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "filtered reference opens actual source unchanged"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "navigation preserves tab filters, removal restores visible focus"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "bounded editors, count and responsive source labels"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "pagination keeps unsaved notes and moves keyboard focus visibly"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "unsaved drafts searched locally without URL or title disclosure"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "accent-insensitive saved metadata search"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "source types remain distinct and labelled noncanonical"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "hostile or unmatched query stays inert"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "filter changes never write profile or call server"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "export retains all 500 bookmarks and off-page drafts"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "explicit save remains durable"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "filtered reference opens actual source unchanged"
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "check": "navigation preserves tab filters, removal restores visible focus"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "bounded editors, count and responsive source labels"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "pagination keeps unsaved notes and moves keyboard focus visibly"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "unsaved drafts searched locally without URL or title disclosure"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "accent-insensitive saved metadata search"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "source types remain distinct and labelled noncanonical"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "hostile or unmatched query stays inert"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "filter changes never write profile or call server"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "export retains all 500 bookmarks and off-page drafts"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "explicit save remains durable"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "filtered reference opens actual source unchanged"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "navigation preserves tab filters, removal restores visible focus"
+    }
+  ],
+  "a11y": {
+    "scans": 0,
+    "violations": 0,
+    "results": []
+  },
+  "limits": "Synthetic personal bookmarks/notes, actual Dhp 183 source. Chromium widths emulate devices; no real-client or human screen-reader certification."
+}

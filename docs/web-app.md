@@ -362,3 +362,20 @@ not a previously opened passage. Printed sheets always use black text on white
 paper regardless of the reading theme. No files or notes are uploaded by this
 feature. Actual physical printers, Safari and tagged-PDF accessibility remain
 outside automated acceptance. See [print checks](evidence/web-reader/PRINT_PAGE.md).
+
+## Find a saved passage
+
+**Saved** now displays at most 25 note editors at a time, with Previous/Next
+saved-page controls. Search saved titles, references and notes; a search such as
+`metta` also matches `mettā`. This searches personal bookmark metadata, not the
+full scripture or English translations. A source filter distinguishes canonical
+texts, complete root source books, commentary and later works.
+
+Search and filter choices remain in tab memory only, never in the URL, page title
+or server requests. Leaving Saved and returning keeps that tab's choices; a
+reload resets them. Unsaved note drafts survive filtering and paging, and join
+exports even when off the visible page. **Save note** is still required to write
+them durably. Clear saved filters restores the full list; exports include all
+bookmarks, not just matching ones. Source checks still happen when a reference
+is opened. This adds no cloud storage or sync, and keeps the existing cross-tab
+conflict protection.

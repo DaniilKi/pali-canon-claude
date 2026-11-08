@@ -45,3 +45,8 @@ main:focus{outline:none}
   .print-segment{border-top:1px solid #aaa;padding-top:8pt}
   .print-provenance{border-top:1px solid black;margin-top:20pt;padding-top:8pt}
 }
+
+.saved-filters{display:flex;flex-wrap:wrap;gap:12px;align-items:end}
+.saved-filters label{flex:1 1 200px;min-width:0}
+.saved-filters input,.saved-filters select{display:block;width:100%;margin-top:6px}
+[aria-label="Saved passage results"] .segment>a{display:block;overflow-wrap:anywhere;margin:8px 0}
