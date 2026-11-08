@@ -227,9 +227,9 @@ Open an issue with the source, its licence or terms, where it is published, and 
 
 `search_commentary` and direct `get_commentary` book references expose all 47 commentary books already bundled from the pinned VRI source, including introductions and unaligned material. The VRI terms above are unchanged. Search results and direct book reads identify their source and explicitly do not establish root-text alignment. No English commentary translations or additional source rights are supplied by this feature.
 
-### Reviewed ATI shared compilations (D197, D199)
+### Reviewed ATI shared publisher pages (D197, D199, D200)
 
-Five compiled publisher pages are separately available by explicit shared-page
+Five compiled and two condensed publisher pages are separately available by explicit shared-page
 consent. Luminous is documented in the [pilot](data/luminous-shared-page-pilot.md).
 The [Water and Gratitude review](data/paired-shared-page-expansion.md) records
 full individual CC BY-NC 4.0 notices: Water ©2006 Ṭhānissaro Bhikkhu, revised
@@ -243,3 +243,10 @@ ATI revision 30 November 2013, CC BY-NC 4.0. Voice includes a translator’s
 editorial note; it is not individually aligned root speech. The older BPS Woodward
 Untamed excerpt is withheld globally as mis-scoped; this does not relicense it
 or approve a replacement mapping.
+
+The [condensed primary-range review](data/condensed-primary-ranges.md) adds
+Macchariya/Stinginess (©2004 Ṭhānissaro, ATI revision30 November2013) and
+Pansu/Dust (©2011, revision10 December2011), both explicit CC BY-NC4.0. Each
+concerns six actual source records, including original grouped peyyāla ranges.
+The translator’s ellipses and editorial framing are preserved; no individual
+alignment or Pāli expansion is inferred.

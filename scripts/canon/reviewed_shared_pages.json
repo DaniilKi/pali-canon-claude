@@ -302,6 +302,126 @@
         }
       ],
       "mapping_note": "One publisher page concerns indexed AN 2.125–126, VRI paragraphs 126–127: wrong view from another voice plus inappropriate attention, and right view from another voice plus appropriate attention. Do not assign it to indexed AN 2.123–124 on passion/aversion because an internal historical numbering comment mentions 123–124. Preserve the complete translator Note discussing Woodward, MN 43, Mv I.23.5, AN IX.36 and MN 140 as editorial material, not extra canonical members or individually aligned wording. Retrieval/verification concern the full shared page with explicit consent; no whole-unit coverage is inferred."
+    },
+    {
+      "owner_id": "an5.254",
+      "path": "/tipitaka/an/an05/an05.254.than",
+      "text_ids": [
+        "an5.254",
+        "an5.255",
+        "an5.256",
+        "an5.257-263",
+        "an5.264",
+        "an5.265-271"
+      ],
+      "presentation": "condensed",
+      "english_title": "Stinginess — shared condensed publisher page",
+      "source_reference": "ATI AN 5.254–271; six primary VRI source records (shared condensed page)",
+      "translator": "Ṭhānissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Publisher compilation condenses AN5.254–271: five stinginess forms; their abandoning; first jhana and the primary 257–263 attainment group; then replaces Dhamma-stinginess with ingratitude in264 and primary265–271 group. The six declared IDs are actual contiguous VRI source records, including two original peyyala ranges, not eighteen individually aligned texts. Translator note, ellipses and combined attainment contrasts remain publisher material; do not expand Pali or infer per-discourse English wording.",
+      "source_html_sha256": "ce2e49bdd55fe07f46a7df3e0a7547c16773fcbf5f93cfd0e0cba715a0114c53",
+      "text_sha256": "aeb2a28cad2073c8f951b5616c4f7616f07e424b2bf6061604173452fd05a63b",
+      "notice_sha256": "d7bbdbfccd9919fb99adf4124f93144f67d4331d239aa8706b72251b60621abe",
+      "pali_segments_sha256": "60a7de904ef489aa923941ea5da67e5add65a338b60713e34b211c40ff0f4243",
+      "root_units": [
+        {
+          "id": "an5.254",
+          "title": "Pañcamacchariyasuttaṃ",
+          "vri": "254",
+          "root_blocks_sha256": "fa3006df0984fa4388758a514bea9446486f1d5fa044bd67ef9454f7e6f2ab98"
+        },
+        {
+          "id": "an5.255",
+          "title": "Macchariyappahānasuttaṃ",
+          "vri": "255",
+          "root_blocks_sha256": "8204f328f3aa1b578bf6157f11c3d7ec5c1e4cb0e55e02d04bf38014bdf45004"
+        },
+        {
+          "id": "an5.256",
+          "title": "Paṭhamajhānasuttaṃ",
+          "vri": "256",
+          "root_blocks_sha256": "f04e9fdd5ec18d0d494be5a7f858dbebd15921e1b9c8e0edca66c74eddea0ff9"
+        },
+        {
+          "id": "an5.257-263",
+          "title": "Dutiyajhānasuttādisattakaṃ",
+          "vri": "257-263",
+          "root_blocks_sha256": "c151b543fdc7bc29e2c583e3b0a7320712b9c441444d9115d95513ec6395930f"
+        },
+        {
+          "id": "an5.264",
+          "title": "Aparapaṭhamajhānasuttaṃ",
+          "vri": "264",
+          "root_blocks_sha256": "f2db331abf84463cfa2d2e1795e40afcce7afaf06f3238a7566d654bb4465983"
+        },
+        {
+          "id": "an5.265-271",
+          "title": "Aparadutiyajhānasuttādisattakaṃ",
+          "vri": "265-271",
+          "root_blocks_sha256": "a1a9a48e03401357a35987dbc89e74225f48e8d2f38efb2ecacee3ab1ac88148"
+        }
+      ]
+    },
+    {
+      "owner_id": "sn56.102",
+      "path": "/tipitaka/sn/sn56/sn56.102-113.than",
+      "text_ids": [
+        "sn56.102",
+        "sn56.103",
+        "sn56.104",
+        "sn56.105-107",
+        "sn56.108-110",
+        "sn56.111-113"
+      ],
+      "presentation": "condensed",
+      "english_title": "Dust — shared condensed publisher page",
+      "source_reference": "ATI SN 56.102–113; VRI1172–1183 in six primary source records (shared condensed page)",
+      "translator": "Ṭhānissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "The dust analogy compares human-to-human versus hell/animal/ghost rebirth, human-to-deva versus those destinations, deva-to-deva versus those destinations, then deva-to-human versus those destinations. Six contiguous primary VRI records include three original peyyala ranges105–107/108–110/111–113; these are not twelve independently aligned leaf texts. Preserve source ellipses, repeated framing and four-truths conclusion as publisher wording, not reconstructed VRI segments. Exclude the following hell-origin group114–116 and later ranges.",
+      "source_html_sha256": "322fc8b357567cff07a7782686add5ec6a0fe401a911509a993ee9d9354cdc2a",
+      "text_sha256": "9cc6b0c063ab2d3220aaaf560bdd46fbb3e9d6ac3f4f54f59657cb92a0a2baf1",
+      "notice_sha256": "d2699fd2c0227a0bd2dd96514d26ae1f3b3978eb2d734ae46a1619cee5d1e8b5",
+      "pali_segments_sha256": "94406ba6700743612e2235e829407c469efde2065e6f270a97484b5f64df1209",
+      "root_units": [
+        {
+          "id": "sn56.102",
+          "title": "Manussacutinirayasuttaṃ",
+          "vri": "1172",
+          "root_blocks_sha256": "779c8a21826ed7fc5ad22a44552c311521eebac7911895b962e10088e9dbcc23"
+        },
+        {
+          "id": "sn56.103",
+          "title": "Manussacutitiracchānasuttaṃ",
+          "vri": "1173",
+          "root_blocks_sha256": "7065b0aee584733963a70c8af390d3a50e2dd99e53649505a20f51c602384131"
+        },
+        {
+          "id": "sn56.104",
+          "title": "Manussacutipettivisayasuttaṃ",
+          "vri": "1174",
+          "root_blocks_sha256": "3305cf24e146def7d281782d80f09be43ec4b47df377261a64dc8168505be951"
+        },
+        {
+          "id": "sn56.105-107",
+          "title": "Manussacutidevanirayādisutta",
+          "vri": "1175-1177",
+          "root_blocks_sha256": "43046bfd0428aab45cc3552a0d8d28b51782ea325571dac49af3c411f8a61fdb"
+        },
+        {
+          "id": "sn56.108-110",
+          "title": "Devacutinirayādisuttaṃ",
+          "vri": "1178-1180",
+          "root_blocks_sha256": "3e5d5a0f7dbcb8cfc3ca614b8ffd501dfc4c7bcf56e85b5e5ddc4ead8e838244"
+        },
+        {
+          "id": "sn56.111-113",
+          "title": "Devamanussanirayādisuttaṃ",
+          "vri": "1181-1183",
+          "root_blocks_sha256": "36e0a58867713ce4bc1372dfa0df1fdff612d6230213f3483c7d7848e69ac12b"
+        }
+      ]
     }
   ]
 }
