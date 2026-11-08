@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import * as canon from '../../src/canon.mjs';
 import { GUIDE_DATA } from '../../src/daily.mjs';
+import {createHash} from 'node:crypto';
 
 const DAY = 86400000;
 const json = value => JSON.parse(JSON.stringify(value));
@@ -60,8 +61,40 @@ export async function readAssignment(call, args, unit) {
   return { pages, segments: end - start, start, end };
 }
 
+// Independent frozen D213 oracle, not the production subject-gate helper.
+const EXCERPT_SUBJECTS = {
+  'mn/mn.075x.than': ['mn75','f5b0ceeb528002d793c63c53ecce3a00126e100e8e2123b468fada529bc9663d'],
+  'mn/mn.095x.than': ['mn95','6cf9073cbffe4f7939333ef805167a0294780d68f471736247d154f5a8d5dc98'],
+};
+export function checkGuideLink(reading, path, id) {
+  const url = `https://www.accesstoinsight.org/tipitaka/${path}.html`;
+  assert.equal(reading.guide_link.url,url);assert.equal(reading.id,id);
+  const reviewed = EXCERPT_SUBJECTS[path];
+  if (reviewed) {
+    assert.equal(id,reviewed[0]);
+    assert.equal(canon.source().commit,'2d134ff9ef60f70a1eb03c9370580228811a3070');
+    const u=canon.resolve(id).unit;
+    assert.equal(createHash('sha256').update(JSON.stringify(canon.load().canon.books[u.book].blocks.slice(u.start,u.end))).digest('hex'),reviewed[1]);
+    assert.equal(reading.guide_link.scope,'withheld-publisher-page');
+    assert.equal(reading.guide_link.whole_unit_coverage,false);
+    assert.equal(reading.guide_link.individual_alignment_verified,false);
+    assert.equal(reading.guide_link.translator,'Thanissaro Bhikkhu');
+    assert.match(reading.notes.join(' '),/publisher excerpt.*not an available whole-unit translation/);
+    assert.throws(()=>canon.resolve(url),/not linked/);
+    assert.ok(!(canon.load().translations[id]||[]).some(l=>l.path==='/tipitaka/'+path),'Held guide page must not regain translation authority');
+    assert.ok(reading.english.every(l=>l.url.replace('https://www.','https://')!==url.replace('https://www.','https://')));
+    return 'external-excerpt';
+  }
+  assert.equal(reading.guide_link.scope,undefined,'No unreviewed external-only guide exception');
+  assert.equal(canon.resolve(url).unit.id,id);
+  const link=(canon.load().translations[id]||[]).find(t=>t.source==='ati'&&t.path===`/tipitaka/${path}`);
+  assert.ok(link,'Guide URL must be in the verified translation index');
+  assert.equal(reading.guide_link.translator,link.translator);
+  return 'indexed';
+}
+
 export async function auditStudyCommands(call) {
-  const counts = { plans: 0, plan_days: 0, plan_readings: 0, plan_pages: 0, guide_links: 0,
+  const counts = { plans: 0, plan_days: 0, plan_readings: 0, plan_pages: 0, guide_links: 0, guide_external_excerpts: 0,
     verse_days: 0, sutta_days: 0, daily_pages: 0, period_checks: 0, iso_date_edges: 0 };
   const catalog = await call('reading_plan', {});
   assert.ok(catalog.plans.length >= 4);
@@ -104,13 +137,7 @@ export async function auditStudyCommands(call) {
         } else if (plan.name === 'dhammapada-26-days') dhpMembers.push(...unit.members);
         if (GUIDE_DATA[plan.name]) {
           const [path, id] = GUIDE_DATA[plan.name].entries[day - 1];
-          const url = `https://www.accesstoinsight.org/tipitaka/${path}.html`;
-          assert.equal(reading.guide_link.url, url);
-          assert.equal(reading.id, id);
-          assert.equal(canon.resolve(url).unit.id, id);
-          const link = canon.load().translations[id].find(t => t.source === 'ati' && t.path === `/tipitaka/${path}`);
-          assert.ok(link, 'Guide URL must be in the verified translation index');
-          assert.equal(reading.guide_link.translator, link.translator);
+          if (checkGuideLink(reading,path,id)==='external-excerpt') counts.guide_external_excerpts++;
           counts.guide_links++;
         }
       }
@@ -118,6 +145,7 @@ export async function auditStudyCommands(call) {
     }
     counts.plans++;
   }
+  assert.equal(counts.guide_external_excerpts,2,'Both reviewed excerpt subjects must be audited');
   assert.equal(mnCoverage.size, 152);
   for (let n = 1; n <= 152; n++) assert.equal(mnCoverage.get(`mn${n}`), segments(canon.resolve(`mn${n}`).unit).length);
   assert.deepEqual(dhpMembers, Array.from({ length: 423 }, (_, i) => `dhp${i + 1}`));

@@ -2562,7 +2562,53 @@
       "scope": "Extracted-package synthetic providers plus real registered declarations. Explicit partial retrieval, source/mapping pins, verification, coverage and restart guards. Real declarations are checked as metadata or refused on simulated source drift; no live author request or new approval."
     },
     "final_build_matches_installed_server": true,
-    "guide_review": "Independent review reproduced a cached-plan pin bypass; repaired revalidation before cached returns. Original warmed same-canon source/root drift now rejects; original50source/path assignments frozen at12201ec hash. Focused guide15/15 passed."
+    "guide_review": "Independent review reproduced a cached-plan pin bypass; repaired revalidation before cached returns. Original warmed same-canon source/root drift now rejects; original50source/path assignments frozen at12201ec hash. Focused guide15/15 passed.",
+    "installed_evidence_audit": {
+      "status": "passed",
+      "counts": {
+        "owners": 2018,
+        "commentary_links": 5322,
+        "commentary_segments": 3263,
+        "shared_links": 1518,
+        "shared_segments": 8720,
+        "reading_commands": 11983
+      },
+      "study": {
+        "plans": 4,
+        "plan_days": 478,
+        "plan_readings": 478,
+        "plan_pages": 488,
+        "guide_links": 87,
+        "guide_external_excerpts": 2,
+        "verse_days": 423,
+        "sutta_days": 1260,
+        "daily_pages": 1726,
+        "period_checks": 4,
+        "iso_date_edges": 6
+      },
+      "navigation": {
+        "topic_catalogue_pages": 13,
+        "topics": 472,
+        "topic_text_refs": 1374,
+        "topic_edges": 450,
+        "lists": 37,
+        "list_text_refs": 102,
+        "list_edges": 63,
+        "parittas": 23,
+        "paritta_sources": 29,
+        "paritta_pages": 90,
+        "canonical_readings": 729,
+        "canonical_pages": 757
+      },
+      "network_attempts": 0,
+      "scope": "All recorded commentary citation links, retained shared-passage refs and source-book search fixtures and complete study/topic/list/paritta/Vinaya/Abhidhamma navigation and MCP prompt/resource contract checks through an isolated installed server; does not validate inferred scholarly relationships or omitted/truncated refs."
+    },
+    "evidence_oracle_repair": {
+      "reason": "First exact-head CI evidence auditor still required retired guide URLs in the whole-translation index. Updated independent frozen oracle to verify exactly the2 reviewed external excerpt subjects, their roots/scope/absence from active bindings, and all remaining indexed guide sources. No assertion disabled.",
+      "focused_tests": 17,
+      "fault_tests": 2,
+      "independent_review": "Approved exact2 subject/root/source oracle plus87refs, flags, subject/URL substitutions and unknown missing-source rejection."
+    }
   },
   "integration_repairs": {
     "guide_subjects": [
