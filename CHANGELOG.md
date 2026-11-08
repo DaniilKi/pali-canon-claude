@@ -4,6 +4,19 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Prepare an isolated standalone-reader integration candidate: responsive source-aware browsing, commentary/later works, glossary/word study/related evidence, bounded reading plans and browser-local notes/progress. Exercise the three actual shared compilations with explicit page-level consent and complete source notices. No dev/main merge or deployment is implied.
+
+- Add two reviewed ATI shared compilations: Water (AN 1.45–46) and Gratitude
+  (publisher AN 2.31–32, indexed AN 2.32–33). Preserve complete page/notice
+  pins, exact consent and page-level quotation. Separate shared totals are
+  three pages/eight subjects; ordinary English totals stay unchanged.
+  Exercise every real declaration in the installed-package audit.
+
+- Activate the first reviewed shared publisher page: ATI Luminous (AN 1.49–52),
+  a compilation with exact-ID consent, page-level quotation results and full
+  source/notice pins. Count one shared page/four subjects separately; whole-unit
+  coverage stays unchanged. Document the next standalone web-reader slice.
+
 - Correct the ordinary SN 15.14 binding: its current source covers six discourses.
   Withhold it with a final build guard until safe shared integration. Add three
   reviewed alternatives, preserving original choices and full BPS/CC notices;

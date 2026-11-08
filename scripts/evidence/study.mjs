@@ -11,6 +11,17 @@ const segments = unit => {
   if (!cache.has(unit.id)) cache.set(unit.id, canon.segments(unit));
   return cache.get(unit.id);
 };
+// Independent audit oracle: declarations with either scope key are never ordinary sources.
+// Do not reuse the production scope classifier: this audit must detect a classifier regression.
+export function expectedDailyPools(d) {
+  return {
+    verse: d.canon.units.filter(u => u.collection === 'dhp' && /^dhp\d+$/.test(u.id) && u.kind !== 'range'),
+    sutta: d.canon.units.filter(u => ['dn','mn','sn','an','kp','ud','iti','snp'].includes(u.collection)
+      && u.kind !== 'range' && !u.approximate
+      && d.translations[u.id]?.some(link => !Object.hasOwn(link, 'partial_scope') && !Object.hasOwn(link, 'shared_scope'))),
+  };
+}
+
 function sourceCard(card) {
   assert.deepEqual(card.pali, { name: source().name, attribution: source().attribution, terms: source().terms, commit: source().commit });
 }
@@ -111,11 +122,7 @@ export async function auditStudyCommands(call) {
   for (let n = 1; n <= 152; n++) assert.equal(mnCoverage.get(`mn${n}`), segments(canon.resolve(`mn${n}`).unit).length);
   assert.deepEqual(dhpMembers, Array.from({ length: 423 }, (_, i) => `dhp${i + 1}`));
   const d = canon.load();
-  const pools = {
-    verse: d.canon.units.filter(u => u.collection === 'dhp' && /^dhp\d+$/.test(u.id) && u.kind !== 'range'),
-    sutta: d.canon.units.filter(u => ['dn','mn','sn','an','kp','ud','iti','snp'].includes(u.collection)
-      && u.kind !== 'range' && !u.approximate && d.translations[u.id]?.length),
-  };
+  const pools = expectedDailyPools(d);
   // Consecutive dates cross leap day and year boundaries; coverage and periodicity are checked
   // independently of the production permutation's step/position calculation.
   const beginning = Date.parse('2024-01-01T00:00:00Z');

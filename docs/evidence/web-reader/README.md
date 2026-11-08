@@ -1,6 +1,8 @@
 # Standalone web-reader evidence
 
-The feature branch is `feat/standalone-web-reader`, based on corpus checkpoint `f0906bd`. No merge into dev/main or deployment is covered by these receipts.
+Current [integration evidence](INTEGRATION.md) covers the isolated `integrate/web-reader-corpus-nov8` candidate: web `492169f` plus corpus `7b04173`. Dev/main and deployment remain untouched.
+
+Earlier feature receipts below describe `feat/standalone-web-reader` at corpus checkpoint `f0906bd`; their original limits are historical, not rewritten as later successes.
 
 Start with the [reading-plan acceptance](READING_PLANS.md): four existing schedules, bounded Pāli reading and local manual progress; 49 browser checks plus 49 extracted-package checks and 16 new accessibility scans.
 

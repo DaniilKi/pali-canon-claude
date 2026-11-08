@@ -24,6 +24,12 @@ def packet(canon, translations, root, ledger, manifest):
     approved = {r['path'].lstrip('/') + '.html' for r in manifest['links']}
     current = {l.get('path', '').lstrip('/') + '.html' for links in translations.values()
                for l in links if l.get('source') == 'ati'}
+    shared_members = {}
+    for links in translations.values():
+        for link in links:
+            if 'shared_scope' in link:
+                for uid in link['shared_scope']['text_ids']:
+                    shared_members.setdefault(uid, []).append(link.get('reference', ''))
     prior_holds = {}
     for review in ledger.get('followup_reviews', []):
         for held in review.get('deferred', []):
@@ -56,7 +62,9 @@ def packet(canon, translations, root, ledger, manifest):
                         and p.get('page', 0) <= page <= p.get('end_page', p.get('page', 0))):
                     candidates.append({'unit_id': u['id'], 'pali_title': u['title'],
                         'pts_start_matches': p['page'] == page,
-                        'has_english': bool(translations.get(u['id'])),
+                        'has_english': any('partial_scope' not in l and 'shared_scope' not in l for l in translations.get(u['id'], [])),
+                        'has_shared_english': bool(shared_members.get(u['id'])),
+                        'shared_page_references': shared_members.get(u['id'], []),
                         'approximate': bool(u.get('approximate')), 'kind': u.get('kind')})
         candidates.sort(key=lambda u: (u['has_english'], not u['pts_start_matches'], u['unit_id']))
         extent = meta('EXTENT')
@@ -110,5 +118,12 @@ if __name__ == '__main__':
     reviewed_links(canon, root)  # Existing accepted evidence must still validate.
     ledger = json.loads(Path(li).read_text(encoding='utf-8'))
     require_ledger_sources(root, ledger)
-    report = packet(canon, json.loads(Path(ti).read_text(encoding='utf-8')), root, ledger, manifest)
+    from reviewed_shared_pages import reviewed_shared_links
+    shared = reviewed_shared_links(canon, root)
+    translations = json.loads(Path(ti).read_text(encoding='utf-8'))
+    for uid, links in translations.items():
+        for link in links:
+            if 'shared_scope' in link and link != shared.get(uid):
+                raise ValueError('Unreviewed or changed active shared-page declaration: '+uid)
+    report = packet(canon, translations, root, ledger, manifest)
     print(json.dumps(report, ensure_ascii=False, indent=2))

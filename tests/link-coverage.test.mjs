@@ -3,6 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import * as canon from '../src/canon.mjs';
 import { listSources, translationCoverage } from '../src/providers.mjs';
+import { isScoped } from '../src/translation-scope.mjs';
 
 const d = canon.load();
 const CONTENT = new Set(['content-pts+names', 'content-number+names', 'content-title+number']);
@@ -21,7 +22,8 @@ test('list_sources reports English coverage per collection, and the rows add up 
   for (const field of ['texts', 'with_english', 'with_english_including_inherited', 'links', 'content_matched_links']) {
     assert.equal(cov.collections.reduce((n, r) => n + r[field], 0), cov.total[field], field);
   }
-  assert.equal(cov.total.links, allLinks.length);
+  assert.equal(cov.total.links, allLinks.filter(l => !isScoped(l)).length);
+  assert.equal(cov.total.links + (cov.total.partial_links || 0) + (cov.total.shared_links || 0), allLinks.length);
   assert.equal(cov.total.content_matched_links, allLinks.filter((l) => CONTENT.has(l.match)).length);
   assert.equal(cov.total.texts, d.canon.units.filter((u) => u.kind !== 'range').length);
   assert.equal(byKey.dhp.with_english_including_inherited, byKey.dhp.texts, 'every Dhp verse inherits its chapter link');

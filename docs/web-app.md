@@ -2,6 +2,8 @@
 
 A standalone, responsive reader is available at the HTTP server's root URL. It does not require an AI account or the ChatGPT widget. This is the first complete reading slice, not feature parity with every tool in an AI client.
 
+The isolated integration candidate combines web `492169f` with corpus `7b04173`. Actual shared-compilation consent, publisher/subject identity and licence notices are checked in [integration evidence](evidence/web-reader/INTEGRATION.md). This is not a deployment or advancement of dev/main.
+
 ## Run it
 
 From the repository, using Node 20 or newer:
@@ -93,7 +95,7 @@ Related-text results use `get_parallels`. A shared-word score is not a probabili
 
 The browser consumes the backend’s `translation_scope`; it does not approve source rights or create mappings. Consent applies to the reviewed source version and complete scope disclosure for the current Pāli selection. It is not stored in bookmarks/preferences and must be given again after navigation or reload. Unknown declarations are withheld. Missing provenance, a changed scope/version, a shared page attributed to one discourse, or an unsafe continuation is an error before text is displayed. Ordinary unscoped responses retain exact canonical identity; a listed backend fallback is visibly labelled using the returned version.
 
-The current corpus design was inspected at `a09d7ba`, including compilation presentation and notice pins. This feature branch retains corpus baseline `f0906bd`; it has not merged the other session’s work. Condensed/partial browser tests use actual existing backend validation with isolated synthetic source bindings. Compilation is a separately labelled forward UI fixture, **not** an actual-source/backend integration claim. See [scope acceptance](evidence/web-reader/TRANSLATION_SCOPE.md). After integration, test the real newly approved records and their exact rights/scope metadata before claiming shared-source support is released.
+The original [scope acceptance](evidence/web-reader/TRANSLATION_SCOPE.md) used corpus `f0906bd` and a labelled forward compilation fixture. That receipt remains historical. The isolated candidate now includes corpus `7b04173` and tests the three actual reviewed shared compilations through the worker-backed server and browser, with exact source/notice hashes and page-level identities. See [integration evidence](evidence/web-reader/INTEGRATION.md). This does not establish new individual wording alignment or publish the candidate to dev/main.
 
 Repeat the isolated guards with `python scripts/web-reader-scope-check.py --report /tmp/scope.json`. Add `--a11y` for the separate automated audit in both themes (that context alone bypasses CSP to inject axe-core). No publisher network access or committed corpus modifications are involved.
 

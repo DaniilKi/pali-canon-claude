@@ -1,0 +1,697 @@
+{
+  "passed": 173,
+  "checks": [
+    {
+      "width": 360,
+      "check": "real catalogue and no horizontal overflow"
+    },
+    {
+      "width": 360,
+      "check": "collection navigation"
+    },
+    {
+      "width": 360,
+      "check": "exact real passage and attribution"
+    },
+    {
+      "width": 360,
+      "check": "skip link focuses reading without replacing the passage"
+    },
+    {
+      "width": 360,
+      "check": "bookmark and note persist after reload"
+    },
+    {
+      "width": 360,
+      "check": "native script and night theme"
+    },
+    {
+      "width": 360,
+      "check": "largest text setting has no horizontal overflow"
+    },
+    {
+      "width": 360,
+      "check": "commentary kept distinct from root"
+    },
+    {
+      "width": 360,
+      "check": "translation selection without a remote fetch"
+    },
+    {
+      "width": 360,
+      "check": "real canonical search"
+    },
+    {
+      "width": 360,
+      "check": "complete source-book pagination"
+    },
+    {
+      "width": 360,
+      "check": "all 47 commentary books are reachable through catalogue pagination"
+    },
+    {
+      "width": 360,
+      "check": "commentary book reading preserves non-canonical and unaligned scope"
+    },
+    {
+      "width": 360,
+      "check": "direct commentary-book continuation retains selection"
+    },
+    {
+      "width": 360,
+      "check": "commentary search and bookmark reopen the identical exact source segment"
+    },
+    {
+      "width": 360,
+      "check": "all 109 later works are reachable through catalogue pagination"
+    },
+    {
+      "width": 360,
+      "check": "later work reading preserves scope and attribution"
+    },
+    {
+      "width": 360,
+      "check": "later-work search opens its returned citation rather than a canonical lookalike"
+    },
+    {
+      "width": 360,
+      "check": "invalid citation fails visibly without substitution"
+    },
+    {
+      "width": 360,
+      "check": "HTTP outage and recoverable error"
+    },
+    {
+      "width": 360,
+      "check": "retry returns real passage"
+    },
+    {
+      "width": 360,
+      "check": "translation continuation preserves exact selector and source-prefix guard"
+    },
+    {
+      "width": 360,
+      "check": "late translation cannot overwrite commentary"
+    },
+    {
+      "width": 360,
+      "check": "keyboard glossary lookup shows real DPD terms and licence"
+    },
+    {
+      "width": 360,
+      "check": "native-script glossary input is explicitly converted and labelled"
+    },
+    {
+      "width": 360,
+      "check": "unknown glossary terms do not receive invented meanings"
+    },
+    {
+      "width": 360,
+      "check": "keyboard word study keeps exact passage and dictionary provenance distinct"
+    },
+    {
+      "width": 360,
+      "check": "native-script passage study is matched using the shared source renderer"
+    },
+    {
+      "width": 360,
+      "check": "native-script analysis rejects changed text even with the same ref and source pin"
+    },
+    {
+      "width": 360,
+      "check": "word-study pagination retains its selected source segment"
+    },
+    {
+      "width": 360,
+      "check": "source-book word study does not invent a canonical text identity"
+    },
+    {
+      "width": 360,
+      "check": "later-work dictionary analysis retains non-canonical scope"
+    },
+    {
+      "width": 360,
+      "check": "related shared wording opens the emitted canonical segment"
+    },
+    {
+      "width": 360,
+      "check": "commentary evidence and saved links remain aligned commentary, never root text"
+    },
+    {
+      "width": 360,
+      "check": "related-link pagination retains the selected canonical text"
+    },
+    {
+      "width": 360,
+      "check": "source-mismatched word analysis fails without substituted meanings"
+    },
+    {
+      "width": 360,
+      "check": "word-study retry uses the same actual passage"
+    },
+    {
+      "width": 360,
+      "check": "late word study cannot overwrite newer related-text results"
+    },
+    {
+      "width": 360,
+      "check": "incomplete relationship response cannot masquerade as no relationships"
+    },
+    {
+      "width": 360,
+      "check": "incomplete glossary cannot masquerade as an unknown term"
+    },
+    {
+      "width": 360,
+      "check": "glossary retry recovers with actual source metadata"
+    },
+    {
+      "width": 360,
+      "check": "retrieved markup and javascript URLs cannot execute"
+    },
+    {
+      "width": 360,
+      "check": "keyboard navigation activates the saved-passage screen"
+    },
+    {
+      "width": 390,
+      "check": "real catalogue and no horizontal overflow"
+    },
+    {
+      "width": 390,
+      "check": "collection navigation"
+    },
+    {
+      "width": 390,
+      "check": "exact real passage and attribution"
+    },
+    {
+      "width": 390,
+      "check": "skip link focuses reading without replacing the passage"
+    },
+    {
+      "width": 390,
+      "check": "bookmark and note persist after reload"
+    },
+    {
+      "width": 390,
+      "check": "native script and night theme"
+    },
+    {
+      "width": 390,
+      "check": "largest text setting has no horizontal overflow"
+    },
+    {
+      "width": 390,
+      "check": "commentary kept distinct from root"
+    },
+    {
+      "width": 390,
+      "check": "translation selection without a remote fetch"
+    },
+    {
+      "width": 390,
+      "check": "real canonical search"
+    },
+    {
+      "width": 390,
+      "check": "complete source-book pagination"
+    },
+    {
+      "width": 390,
+      "check": "all 47 commentary books are reachable through catalogue pagination"
+    },
+    {
+      "width": 390,
+      "check": "commentary book reading preserves non-canonical and unaligned scope"
+    },
+    {
+      "width": 390,
+      "check": "direct commentary-book continuation retains selection"
+    },
+    {
+      "width": 390,
+      "check": "commentary search and bookmark reopen the identical exact source segment"
+    },
+    {
+      "width": 390,
+      "check": "all 109 later works are reachable through catalogue pagination"
+    },
+    {
+      "width": 390,
+      "check": "later work reading preserves scope and attribution"
+    },
+    {
+      "width": 390,
+      "check": "later-work search opens its returned citation rather than a canonical lookalike"
+    },
+    {
+      "width": 390,
+      "check": "invalid citation fails visibly without substitution"
+    },
+    {
+      "width": 390,
+      "check": "HTTP outage and recoverable error"
+    },
+    {
+      "width": 390,
+      "check": "retry returns real passage"
+    },
+    {
+      "width": 390,
+      "check": "translation continuation preserves exact selector and source-prefix guard"
+    },
+    {
+      "width": 390,
+      "check": "late translation cannot overwrite commentary"
+    },
+    {
+      "width": 390,
+      "check": "keyboard glossary lookup shows real DPD terms and licence"
+    },
+    {
+      "width": 390,
+      "check": "native-script glossary input is explicitly converted and labelled"
+    },
+    {
+      "width": 390,
+      "check": "unknown glossary terms do not receive invented meanings"
+    },
+    {
+      "width": 390,
+      "check": "keyboard word study keeps exact passage and dictionary provenance distinct"
+    },
+    {
+      "width": 390,
+      "check": "native-script passage study is matched using the shared source renderer"
+    },
+    {
+      "width": 390,
+      "check": "native-script analysis rejects changed text even with the same ref and source pin"
+    },
+    {
+      "width": 390,
+      "check": "word-study pagination retains its selected source segment"
+    },
+    {
+      "width": 390,
+      "check": "source-book word study does not invent a canonical text identity"
+    },
+    {
+      "width": 390,
+      "check": "later-work dictionary analysis retains non-canonical scope"
+    },
+    {
+      "width": 390,
+      "check": "related shared wording opens the emitted canonical segment"
+    },
+    {
+      "width": 390,
+      "check": "commentary evidence and saved links remain aligned commentary, never root text"
+    },
+    {
+      "width": 390,
+      "check": "related-link pagination retains the selected canonical text"
+    },
+    {
+      "width": 390,
+      "check": "source-mismatched word analysis fails without substituted meanings"
+    },
+    {
+      "width": 390,
+      "check": "word-study retry uses the same actual passage"
+    },
+    {
+      "width": 390,
+      "check": "late word study cannot overwrite newer related-text results"
+    },
+    {
+      "width": 390,
+      "check": "incomplete relationship response cannot masquerade as no relationships"
+    },
+    {
+      "width": 390,
+      "check": "incomplete glossary cannot masquerade as an unknown term"
+    },
+    {
+      "width": 390,
+      "check": "glossary retry recovers with actual source metadata"
+    },
+    {
+      "width": 390,
+      "check": "retrieved markup and javascript URLs cannot execute"
+    },
+    {
+      "width": 390,
+      "check": "keyboard navigation activates the saved-passage screen"
+    },
+    {
+      "width": 768,
+      "check": "real catalogue and no horizontal overflow"
+    },
+    {
+      "width": 768,
+      "check": "collection navigation"
+    },
+    {
+      "width": 768,
+      "check": "exact real passage and attribution"
+    },
+    {
+      "width": 768,
+      "check": "skip link focuses reading without replacing the passage"
+    },
+    {
+      "width": 768,
+      "check": "bookmark and note persist after reload"
+    },
+    {
+      "width": 768,
+      "check": "native script and night theme"
+    },
+    {
+      "width": 768,
+      "check": "largest text setting has no horizontal overflow"
+    },
+    {
+      "width": 768,
+      "check": "commentary kept distinct from root"
+    },
+    {
+      "width": 768,
+      "check": "translation selection without a remote fetch"
+    },
+    {
+      "width": 768,
+      "check": "real canonical search"
+    },
+    {
+      "width": 768,
+      "check": "complete source-book pagination"
+    },
+    {
+      "width": 768,
+      "check": "all 47 commentary books are reachable through catalogue pagination"
+    },
+    {
+      "width": 768,
+      "check": "commentary book reading preserves non-canonical and unaligned scope"
+    },
+    {
+      "width": 768,
+      "check": "direct commentary-book continuation retains selection"
+    },
+    {
+      "width": 768,
+      "check": "commentary search and bookmark reopen the identical exact source segment"
+    },
+    {
+      "width": 768,
+      "check": "all 109 later works are reachable through catalogue pagination"
+    },
+    {
+      "width": 768,
+      "check": "later work reading preserves scope and attribution"
+    },
+    {
+      "width": 768,
+      "check": "later-work search opens its returned citation rather than a canonical lookalike"
+    },
+    {
+      "width": 768,
+      "check": "invalid citation fails visibly without substitution"
+    },
+    {
+      "width": 768,
+      "check": "HTTP outage and recoverable error"
+    },
+    {
+      "width": 768,
+      "check": "retry returns real passage"
+    },
+    {
+      "width": 768,
+      "check": "translation continuation preserves exact selector and source-prefix guard"
+    },
+    {
+      "width": 768,
+      "check": "late translation cannot overwrite commentary"
+    },
+    {
+      "width": 768,
+      "check": "keyboard glossary lookup shows real DPD terms and licence"
+    },
+    {
+      "width": 768,
+      "check": "native-script glossary input is explicitly converted and labelled"
+    },
+    {
+      "width": 768,
+      "check": "unknown glossary terms do not receive invented meanings"
+    },
+    {
+      "width": 768,
+      "check": "keyboard word study keeps exact passage and dictionary provenance distinct"
+    },
+    {
+      "width": 768,
+      "check": "native-script passage study is matched using the shared source renderer"
+    },
+    {
+      "width": 768,
+      "check": "native-script analysis rejects changed text even with the same ref and source pin"
+    },
+    {
+      "width": 768,
+      "check": "word-study pagination retains its selected source segment"
+    },
+    {
+      "width": 768,
+      "check": "source-book word study does not invent a canonical text identity"
+    },
+    {
+      "width": 768,
+      "check": "later-work dictionary analysis retains non-canonical scope"
+    },
+    {
+      "width": 768,
+      "check": "related shared wording opens the emitted canonical segment"
+    },
+    {
+      "width": 768,
+      "check": "commentary evidence and saved links remain aligned commentary, never root text"
+    },
+    {
+      "width": 768,
+      "check": "related-link pagination retains the selected canonical text"
+    },
+    {
+      "width": 768,
+      "check": "source-mismatched word analysis fails without substituted meanings"
+    },
+    {
+      "width": 768,
+      "check": "word-study retry uses the same actual passage"
+    },
+    {
+      "width": 768,
+      "check": "late word study cannot overwrite newer related-text results"
+    },
+    {
+      "width": 768,
+      "check": "incomplete relationship response cannot masquerade as no relationships"
+    },
+    {
+      "width": 768,
+      "check": "incomplete glossary cannot masquerade as an unknown term"
+    },
+    {
+      "width": 768,
+      "check": "glossary retry recovers with actual source metadata"
+    },
+    {
+      "width": 768,
+      "check": "retrieved markup and javascript URLs cannot execute"
+    },
+    {
+      "width": 768,
+      "check": "keyboard navigation activates the saved-passage screen"
+    },
+    {
+      "width": 1280,
+      "check": "real catalogue and no horizontal overflow"
+    },
+    {
+      "width": 1280,
+      "check": "collection navigation"
+    },
+    {
+      "width": 1280,
+      "check": "exact real passage and attribution"
+    },
+    {
+      "width": 1280,
+      "check": "skip link focuses reading without replacing the passage"
+    },
+    {
+      "width": 1280,
+      "check": "bookmark and note persist after reload"
+    },
+    {
+      "width": 1280,
+      "check": "native script and night theme"
+    },
+    {
+      "width": 1280,
+      "check": "largest text setting has no horizontal overflow"
+    },
+    {
+      "width": 1280,
+      "check": "commentary kept distinct from root"
+    },
+    {
+      "width": 1280,
+      "check": "translation selection without a remote fetch"
+    },
+    {
+      "width": 1280,
+      "check": "real canonical search"
+    },
+    {
+      "width": 1280,
+      "check": "complete source-book pagination"
+    },
+    {
+      "width": 1280,
+      "check": "all 47 commentary books are reachable through catalogue pagination"
+    },
+    {
+      "width": 1280,
+      "check": "commentary book reading preserves non-canonical and unaligned scope"
+    },
+    {
+      "width": 1280,
+      "check": "direct commentary-book continuation retains selection"
+    },
+    {
+      "width": 1280,
+      "check": "commentary search and bookmark reopen the identical exact source segment"
+    },
+    {
+      "width": 1280,
+      "check": "all 109 later works are reachable through catalogue pagination"
+    },
+    {
+      "width": 1280,
+      "check": "later work reading preserves scope and attribution"
+    },
+    {
+      "width": 1280,
+      "check": "later-work search opens its returned citation rather than a canonical lookalike"
+    },
+    {
+      "width": 1280,
+      "check": "invalid citation fails visibly without substitution"
+    },
+    {
+      "width": 1280,
+      "check": "HTTP outage and recoverable error"
+    },
+    {
+      "width": 1280,
+      "check": "retry returns real passage"
+    },
+    {
+      "width": 1280,
+      "check": "translation continuation preserves exact selector and source-prefix guard"
+    },
+    {
+      "width": 1280,
+      "check": "late translation cannot overwrite commentary"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard glossary lookup shows real DPD terms and licence"
+    },
+    {
+      "width": 1280,
+      "check": "native-script glossary input is explicitly converted and labelled"
+    },
+    {
+      "width": 1280,
+      "check": "unknown glossary terms do not receive invented meanings"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard word study keeps exact passage and dictionary provenance distinct"
+    },
+    {
+      "width": 1280,
+      "check": "native-script passage study is matched using the shared source renderer"
+    },
+    {
+      "width": 1280,
+      "check": "native-script analysis rejects changed text even with the same ref and source pin"
+    },
+    {
+      "width": 1280,
+      "check": "word-study pagination retains its selected source segment"
+    },
+    {
+      "width": 1280,
+      "check": "source-book word study does not invent a canonical text identity"
+    },
+    {
+      "width": 1280,
+      "check": "later-work dictionary analysis retains non-canonical scope"
+    },
+    {
+      "width": 1280,
+      "check": "related shared wording opens the emitted canonical segment"
+    },
+    {
+      "width": 1280,
+      "check": "commentary evidence and saved links remain aligned commentary, never root text"
+    },
+    {
+      "width": 1280,
+      "check": "related-link pagination retains the selected canonical text"
+    },
+    {
+      "width": 1280,
+      "check": "source-mismatched word analysis fails without substituted meanings"
+    },
+    {
+      "width": 1280,
+      "check": "word-study retry uses the same actual passage"
+    },
+    {
+      "width": 1280,
+      "check": "late word study cannot overwrite newer related-text results"
+    },
+    {
+      "width": 1280,
+      "check": "incomplete relationship response cannot masquerade as no relationships"
+    },
+    {
+      "width": 1280,
+      "check": "incomplete glossary cannot masquerade as an unknown term"
+    },
+    {
+      "width": 1280,
+      "check": "glossary retry recovers with actual source metadata"
+    },
+    {
+      "width": 1280,
+      "check": "retrieved markup and javascript URLs cannot execute"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard navigation activates the saved-passage screen"
+    },
+    {
+      "width": "all",
+      "check": "disabled browser storage does not break reader or claim persistence"
+    }
+  ]
+}

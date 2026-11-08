@@ -607,7 +607,7 @@ async function verifyEnglish(text, texts, limit, fetchTranslation, includePartia
   const q = words(englishFold(text));
   if (!q.length) throw new Error('The quotation has no words to match.');
   const plan = englishScope(texts, { includePartial, includeShared, translationIds });
-  if (!plan.pages.length && plan.sharedOmitted.length) throw new Error('Only scoped sources are available. Review metadata and use explicit texts with include_shared: true for condensed shared pages; no individual alignment is inferred.');
+  if (!plan.pages.length && plan.sharedOmitted.length) throw new Error('Only scoped sources are available. Review metadata and use explicit texts with include_shared: true for shared publisher pages; no individual alignment is inferred.');
   if (!plan.pages.length && plan.partialOmitted.length) throw new Error('Only partial English sources are available. Review their metadata, then use explicit texts with include_partial: true. No whole-unit comparison was performed.');
   const fetched = await mapLimit(plan.pages, 6, async (p) => {
     let received = p;
@@ -753,7 +753,7 @@ export async function verifyQuote({ text, language = 'auto', texts, limit = 5, i
   const verdict = literal ? 'found' : verdictFor(best);
   const notFoundEnglish = verdict === 'not_found_in_scope' && lang === 'english';
   const note = verdict === 'not_found_in_scope' ? undefined : tieNote(result.ties);
-  const sharedNote = lang === 'english' && result.scope.translations_checked?.some(p => p.translation_scope?.kind === 'shared_page') ? ' Shared-page matches and negative results concern one condensed multi-discourse source page only. They do not establish any individual discourse’s wording, completeness, alignment or absence.' : '';
+  const sharedNote = lang === 'english' && result.scope.translations_checked?.some(p => p.translation_scope?.kind === 'shared_page') ? ' Shared-page matches and negative results concern the declared multi-discourse source pages only. They do not establish any individual discourse’s wording, completeness, alignment or absence.' : '';
   const unavailableNote = lang === 'english' && result.scope.not_retrieved?.length ? ' Some requested source versions were not compared completely; this result does not establish their wording or absence. See scope.not_retrieved.' : '';
   const partialNote = lang === 'english' && result.scope.translations_checked?.some(p => p.translation_scope?.kind === 'partial_unit') ? ' Partial translation results apply only to their declared spans, including a negative result. Whole-unit coverage or absence and word-level Pāli alignment are not inferred.' : '';
   const containerNote = lang === 'english' && verdict !== 'not_found_in_scope' && result.matches[0]?.unverified_requested_text_ids?.length
@@ -779,7 +779,7 @@ export function register({ tool, z }) {
     language: z.enum(['auto', 'pali', 'english']).default('auto').describe('Language of the quotation; "auto" detects Roman input and treats supported native-script input as Pāli. This is mechanical transliteration, not translation. Native input with explicit English mode is refused.'),
     texts: z.array(z.string().min(1).max(300)).max(12).optional().describe('English only: exact citations or indexed source groups whose linked translations to search, in Roman or supported native script. Multi-text fallback spans and ambiguous pages are refused before fetching. Inherited containing-source matches do not verify the narrower requested text. Default: all Dhammapada chapters.'),
     translation_ids: z.array(z.string().trim().min(1).max(400)).min(1).max(MAX_ENGLISH_PAGES).optional().describe('English only, with explicit texts: exact translation_id values from get_metadata. Select a linked version for every requested text. Every listed version is checked; unavailable versions are not replaced. Partial/shared sources still require their explicit opt-ins. Omit for the preferred page per translator.'),
-    include_shared: z.boolean().default(false).describe('English only, with explicit texts: compare one separately labelled condensed multi-discourse source page. No individual alignment or whole-unit translation is inferred.'),
+    include_shared: z.boolean().default(false).describe('English only, with explicit texts: compare one separately labelled multi-discourse publisher page (compilation or condensed). No individual alignment or whole-unit translation is inferred.'),
     include_partial: z.boolean().default(false).describe('English only, with explicit texts: opt into separately labelled reviewed partial-unit translations. They do not establish whole-unit coverage.'),
     limit: z.number().int().min(1).max(10).default(5),
   }, (args) => verifyQuote(args), { network: true });

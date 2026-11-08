@@ -1,0 +1,641 @@
+{
+  "checked_at_utc": "2026-11-08T02:59:57.352360+00:00",
+  "live": true,
+  "passed": 42,
+  "checks": [
+    {
+      "width": "http",
+      "page": "an1.49",
+      "check": "actual metadata preserves exact members; ordinary and exact-without-consent retrieval refuse"
+    },
+    {
+      "width": "http",
+      "page": "an1.49",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": "http",
+      "page": "an1.45",
+      "check": "actual metadata preserves exact members; ordinary and exact-without-consent retrieval refuse"
+    },
+    {
+      "width": "http",
+      "page": "an1.45",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": "http",
+      "page": "an2.32",
+      "check": "actual metadata preserves exact members; ordinary and exact-without-consent retrieval refuse"
+    },
+    {
+      "width": "http",
+      "page": "an2.32",
+      "check": "real English continuation reconstructs pinned full page and notice without individual attribution"
+    },
+    {
+      "width": 390,
+      "page": "an1.49",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an1.49",
+      "check": "keyboard consent retrieves and renders the exact pinned real page and full notice with page-level identity"
+    },
+    {
+      "width": 390,
+      "page": "an1.49",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an1.45",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an1.45",
+      "check": "keyboard consent retrieves and renders the exact pinned real page and full notice with page-level identity"
+    },
+    {
+      "width": 390,
+      "page": "an1.45",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an2.32",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an2.32",
+      "check": "keyboard consent retrieves and renders the exact pinned real page and full notice with page-level identity"
+    },
+    {
+      "width": 390,
+      "page": "an2.32",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an1.49",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an1.49",
+      "check": "keyboard consent retrieves and renders the exact pinned real page and full notice with page-level identity"
+    },
+    {
+      "width": 390,
+      "page": "an1.49",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an1.45",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an1.45",
+      "check": "keyboard consent retrieves and renders the exact pinned real page and full notice with page-level identity"
+    },
+    {
+      "width": 390,
+      "page": "an1.45",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 390,
+      "page": "an2.32",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 390,
+      "page": "an2.32",
+      "check": "keyboard consent retrieves and renders the exact pinned real page and full notice with page-level identity"
+    },
+    {
+      "width": 390,
+      "page": "an2.32",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an1.49",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an1.49",
+      "check": "keyboard consent retrieves and renders the exact pinned real page and full notice with page-level identity"
+    },
+    {
+      "width": 1280,
+      "page": "an1.49",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an1.45",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an1.45",
+      "check": "keyboard consent retrieves and renders the exact pinned real page and full notice with page-level identity"
+    },
+    {
+      "width": 1280,
+      "page": "an1.45",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an2.32",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an2.32",
+      "check": "keyboard consent retrieves and renders the exact pinned real page and full notice with page-level identity"
+    },
+    {
+      "width": 1280,
+      "page": "an2.32",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an1.49",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an1.49",
+      "check": "keyboard consent retrieves and renders the exact pinned real page and full notice with page-level identity"
+    },
+    {
+      "width": 1280,
+      "page": "an1.49",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an1.45",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an1.45",
+      "check": "keyboard consent retrieves and renders the exact pinned real page and full notice with page-level identity"
+    },
+    {
+      "width": 1280,
+      "page": "an1.45",
+      "check": "reloading the source requires new explicit consent"
+    },
+    {
+      "width": 1280,
+      "page": "an2.32",
+      "check": "no English request before consent; exact publisher reference and all actual members displayed"
+    },
+    {
+      "width": 1280,
+      "page": "an2.32",
+      "check": "keyboard consent retrieves and renders the exact pinned real page and full notice with page-level identity"
+    },
+    {
+      "width": 1280,
+      "page": "an2.32",
+      "check": "reloading the source requires new explicit consent"
+    }
+  ],
+  "sources": [
+    {
+      "page": "an1.49",
+      "requested_subject": "an1.52",
+      "translation_id": "ati:/tipitaka/an/an01/an01.049.than",
+      "publisher_reference": "AN 1.49\u201352 (shared publisher page)",
+      "members": [
+        "an1.49",
+        "an1.50",
+        "an1.51",
+        "an1.52"
+      ],
+      "characters": 3683,
+      "http_pages": 4,
+      "text_sha256": "35182e6e8d3990b8cb6ace20602277a5d409fd45c5a44b9e277ec25995084c60",
+      "notice_sha256": "3b8f3fab868dd8176bb2cce37b9e9437bdca790a6a415a0f67ee589ce099b1fe",
+      "scope_sha256": "bf2fca5a6b857f8cf313ef9f01e7e4d937088d9eb52ba3fb8890d214728f7881",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/an/an01/an01.049.than.html"
+    },
+    {
+      "page": "an1.45",
+      "requested_subject": "an1.46",
+      "translation_id": "ati:/tipitaka/an/an01/an01.045-046.than",
+      "publisher_reference": "AN 1.45\u201346 (shared publisher page)",
+      "members": [
+        "an1.45",
+        "an1.46"
+      ],
+      "characters": 1145,
+      "http_pages": 2,
+      "text_sha256": "7297c6cf82b7abe3f94ad8e6fdc5e8fc1c03a6b3c896a2a1bcf5fa895bef69fd",
+      "notice_sha256": "c6f4d4898e1844091dabb21aa338b492be115913f2af077c2bd57708890a8bfb",
+      "scope_sha256": "0cf6a057f1c0ded3c569a2e71beece92f0597c1d345c0fdb44df7d5856bd09fe",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/an/an01/an01.045-046.than.html"
+    },
+    {
+      "page": "an2.32",
+      "requested_subject": "an2.33",
+      "translation_id": "ati:/tipitaka/an/an02/an02.031.than",
+      "publisher_reference": "ATI AN 2.31\u201332; indexed AN 2.32\u201333 (shared page)",
+      "members": [
+        "an2.32",
+        "an2.33"
+      ],
+      "characters": 1778,
+      "http_pages": 2,
+      "text_sha256": "68448c5eba804b236080fbb41641328da982639a295de44058e070ae99bd7495",
+      "notice_sha256": "693ec730c062294a3570512540f883b863bb57f47765b3782199a9a404977d60",
+      "scope_sha256": "8c2314215302c25b00437281a3af46dc4db66599fc1591aebf7e01c9fd80a5de",
+      "fetched_from": "BCBS official repository (GitHub)",
+      "fetched_url": "https://raw.githubusercontent.com/bcbsit/ati/main/tipitaka/an/an02/an02.031.than.html"
+    }
+  ],
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "ati_archive_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "a11y": {
+    "scans": 36,
+    "violations": 0,
+    "results": [
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.49",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.49",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.49",
+        "state": "real compiled page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.45",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.45",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an1.45",
+        "state": "real compiled page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an2.32",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an2.32",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "page": "an2.32",
+        "state": "real compiled page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.49",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.49",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.49",
+        "state": "real compiled page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.45",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.45",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an1.45",
+        "state": "real compiled page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an2.32",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an2.32",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "page": "an2.32",
+        "state": "real compiled page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.49",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.49",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.49",
+        "state": "real compiled page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.45",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.45",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an1.45",
+        "state": "real compiled page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an2.32",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an2.32",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "page": "an2.32",
+        "state": "real compiled page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.49",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.49",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.49",
+        "state": "real compiled page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.45",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.45",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an1.45",
+        "state": "real compiled page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an2.32",
+        "state": "source choices",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an2.32",
+        "state": "explicit consent",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "page": "an2.32",
+        "state": "real compiled page",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      }
+    ]
+  },
+  "limits": "Real current approved-provider responses, through the actual worker-backed HTTP bundle and browser. No publisher text body is stored in this report. No new scholarly alignment/rights approval, human accessibility certification or physical-device claim. Audit contexts alone bypass CSP for axe-core injection."
+}

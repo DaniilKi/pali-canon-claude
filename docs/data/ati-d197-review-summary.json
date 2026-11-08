@@ -1,0 +1,45 @@
+{
+  "review_packet_only": true,
+  "approvals_changed": false,
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "summary": {
+    "ledger_pages": 114,
+    "pending_pages": 57,
+    "pages_with_first_english_possibilities": 10,
+    "publisher_extents": {
+      "complete": 40,
+      "excerpt": 17
+    }
+  },
+  "warning": "PTS overlap, extent and licence labels are screening clues only. No content, scope or permission is approved. No English body is included.",
+  "decision": "D197",
+  "baseline_commit": "a09d7ba901e8978cfd5637f150a993e922de16c6",
+  "added_whole_english_links": 0,
+  "newly_whole_english_units": [],
+  "added_shared_pages": 2,
+  "added_shared_subjects": [
+    "an1.45",
+    "an1.46",
+    "an2.32",
+    "an2.33"
+  ],
+  "whole_coverage": {
+    "links": 2596,
+    "direct": 1450,
+    "including_inherited": 1873
+  },
+  "shared_coverage": {
+    "pages": 3,
+    "subjects": 8,
+    "shared_only": 8
+  },
+  "packet_sha256": "e8926c282f9ec4fedb8d02e8466afafbacdab6a1af1c3d0db62ae69dc8c207a5",
+  "input_sha256": {
+    "scripts/canon/reviewed_shared_pages.json": "ffce742067bca3b22dc5b994eaf81e32dbf122c358fd26ab90341782ad8cc71b",
+    "scripts/canon/reviewed_shared_pages.py": "1b14acd370d6504879183f122dd9f1629fac7b0e88ec4910e71aaefaffaf9ca6",
+    "scripts/canon/verify_shared_html.mjs": "7d54d21018b79124cab50cda72e7535145381422b14640787b32910c955da5b8",
+    "server/data/translations.json": "02e0c424f617320b85cfe38e4639611acee206436f597d10c980ba522cfd5fde",
+    "docs/data/ati-coverage-screen.json": "fbcebfa6b650d0c83133a22f4c1f36374c245e8c05dbd2a3f430e5eb718174da"
+  }
+}

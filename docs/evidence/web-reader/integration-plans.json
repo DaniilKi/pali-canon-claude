@@ -1,0 +1,208 @@
+{
+  "passed": 49,
+  "outside_source_tree": false,
+  "checks": [
+    {
+      "width": 360,
+      "check": "all four real plans visible with browser-local manual-progress limits"
+    },
+    {
+      "width": 360,
+      "check": "manual mark is keyboard-operable and survives reload"
+    },
+    {
+      "width": 360,
+      "check": "complete chapter opens actual P\u0101li and returns to the marked plan day"
+    },
+    {
+      "width": 360,
+      "check": "selected MN part starts at exact engine assignment and never exposes an earlier page"
+    },
+    {
+      "width": 360,
+      "check": "plan pagination stops exactly at assigned end, without entering another day"
+    },
+    {
+      "width": 360,
+      "check": "tampered out-of-span reading URL fails without substituting a different passage"
+    },
+    {
+      "width": 360,
+      "check": "study guide remains link-only with author, rights and unplaced-link limitations"
+    },
+    {
+      "width": 360,
+      "check": "progress exports only local manual marks with assignment/source signature"
+    },
+    {
+      "width": 360,
+      "check": "missing plan source provenance fails before a reading or completion control is shown"
+    },
+    {
+      "width": 360,
+      "check": "historical mark is not silently credited to a changed source revision"
+    },
+    {
+      "width": 360,
+      "check": "manual completion can be undone"
+    },
+    {
+      "width": 360,
+      "check": "plans neither retrieve English bodies nor transmit personal progress"
+    },
+    {
+      "width": 390,
+      "check": "all four real plans visible with browser-local manual-progress limits"
+    },
+    {
+      "width": 390,
+      "check": "manual mark is keyboard-operable and survives reload"
+    },
+    {
+      "width": 390,
+      "check": "complete chapter opens actual P\u0101li and returns to the marked plan day"
+    },
+    {
+      "width": 390,
+      "check": "selected MN part starts at exact engine assignment and never exposes an earlier page"
+    },
+    {
+      "width": 390,
+      "check": "plan pagination stops exactly at assigned end, without entering another day"
+    },
+    {
+      "width": 390,
+      "check": "tampered out-of-span reading URL fails without substituting a different passage"
+    },
+    {
+      "width": 390,
+      "check": "study guide remains link-only with author, rights and unplaced-link limitations"
+    },
+    {
+      "width": 390,
+      "check": "progress exports only local manual marks with assignment/source signature"
+    },
+    {
+      "width": 390,
+      "check": "missing plan source provenance fails before a reading or completion control is shown"
+    },
+    {
+      "width": 390,
+      "check": "historical mark is not silently credited to a changed source revision"
+    },
+    {
+      "width": 390,
+      "check": "manual completion can be undone"
+    },
+    {
+      "width": 390,
+      "check": "plans neither retrieve English bodies nor transmit personal progress"
+    },
+    {
+      "width": 768,
+      "check": "all four real plans visible with browser-local manual-progress limits"
+    },
+    {
+      "width": 768,
+      "check": "manual mark is keyboard-operable and survives reload"
+    },
+    {
+      "width": 768,
+      "check": "complete chapter opens actual P\u0101li and returns to the marked plan day"
+    },
+    {
+      "width": 768,
+      "check": "selected MN part starts at exact engine assignment and never exposes an earlier page"
+    },
+    {
+      "width": 768,
+      "check": "plan pagination stops exactly at assigned end, without entering another day"
+    },
+    {
+      "width": 768,
+      "check": "tampered out-of-span reading URL fails without substituting a different passage"
+    },
+    {
+      "width": 768,
+      "check": "study guide remains link-only with author, rights and unplaced-link limitations"
+    },
+    {
+      "width": 768,
+      "check": "progress exports only local manual marks with assignment/source signature"
+    },
+    {
+      "width": 768,
+      "check": "missing plan source provenance fails before a reading or completion control is shown"
+    },
+    {
+      "width": 768,
+      "check": "historical mark is not silently credited to a changed source revision"
+    },
+    {
+      "width": 768,
+      "check": "manual completion can be undone"
+    },
+    {
+      "width": 768,
+      "check": "plans neither retrieve English bodies nor transmit personal progress"
+    },
+    {
+      "width": 1280,
+      "check": "all four real plans visible with browser-local manual-progress limits"
+    },
+    {
+      "width": 1280,
+      "check": "manual mark is keyboard-operable and survives reload"
+    },
+    {
+      "width": 1280,
+      "check": "complete chapter opens actual P\u0101li and returns to the marked plan day"
+    },
+    {
+      "width": 1280,
+      "check": "selected MN part starts at exact engine assignment and never exposes an earlier page"
+    },
+    {
+      "width": 1280,
+      "check": "plan pagination stops exactly at assigned end, without entering another day"
+    },
+    {
+      "width": 1280,
+      "check": "tampered out-of-span reading URL fails without substituting a different passage"
+    },
+    {
+      "width": 1280,
+      "check": "study guide remains link-only with author, rights and unplaced-link limitations"
+    },
+    {
+      "width": 1280,
+      "check": "progress exports only local manual marks with assignment/source signature"
+    },
+    {
+      "width": 1280,
+      "check": "missing plan source provenance fails before a reading or completion control is shown"
+    },
+    {
+      "width": 1280,
+      "check": "historical mark is not silently credited to a changed source revision"
+    },
+    {
+      "width": 1280,
+      "check": "manual completion can be undone"
+    },
+    {
+      "width": 1280,
+      "check": "plans neither retrieve English bodies nor transmit personal progress"
+    },
+    {
+      "width": "storage-disabled",
+      "check": "failed storage never claims durable progress and tab-local marks remain exportable"
+    }
+  ],
+  "a11y": {
+    "scans": 0,
+    "violations": 0,
+    "results": []
+  },
+  "limitations": "Real bundled reading plans; missing-provenance failure is a synthetic response. No upstream source fetch, human accessibility review or physical-device certification. Only a11y contexts bypass CSP for checker injection."
+}

@@ -175,7 +175,7 @@ export function createServer({executeTool} = {}) {
     limit: z.number().int().min(500).max(30000).default(12000).describe('Characters per page.'),
     prefix_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Unchanged prefix hash from continue_with. Checks the previously traversed text before applying a character offset; edits require restarting at offset 0.'),
     allow_partial: z.boolean().default(false).describe('Explicitly accept the declared partial-unit scope. Partial links require an exact translation_id; defaults never select them.'),
-    allow_shared: z.boolean().default(false).describe('Explicitly accept one condensed multi-discourse source page; exact translation_id required. It is not separate full translations or verified member alignment.'),
+    allow_shared: z.boolean().default(false).describe('Explicitly accept one multi-discourse publisher page (compilation or condensed); exact translation_id required. It does not establish separate verified full translations or member alignment.'),
     scope_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Unchanged scoped-source mapping hash from continue_with; required for partial/shared-page continuation.'),
   }, async ({ uid, translation, offset, limit, prefix_sha256, allow_partial, allow_shared, scope_sha256 }) => {
     const input = romanizeInput(uid);

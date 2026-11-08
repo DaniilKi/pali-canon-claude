@@ -43,10 +43,10 @@ export function sharedScope(link, unit, byId, readSegments, source) {
       : link.source === 'ati' ? typeof link.path === 'string' && link.url === `https://accesstoinsight.org${link.path}.html`
         : link.source === 'anandajoti' && typeof link.path === 'string' && link.url === 'https://ancient-buddhist-texts.net' + encodeURI(link.path));
   const fail = () => { throw new Error('Invalid or unreviewed shared-page translation scope. No individual alignment or whole-unit coverage is inferred.'); };
-  const fields = new Set(['version', 'status', 'owner_id', 'text_ids', 'presentation', 'alignment', 'source_commit', 'pali_sha256', 'text_sha256']);
+  const fields = new Set(['version', 'status', 'owner_id', 'text_ids', 'presentation', 'alignment', 'source_commit', 'pali_sha256', 'text_sha256', 'notice_sha256']);
   if (!sourceUrl || isPartial(link) || !p || p.version !== 1 || p.status !== 'reviewed' || Object.keys(p).some(k => !fields.has(k))
-    || p.presentation !== 'condensed' || p.alignment !== 'unverified' || p.source_commit !== source.commit
-    || !sha(p.pali_sha256) || !sha(p.text_sha256) || !Array.isArray(p.text_ids) || p.text_ids.length < 2 || p.text_ids.length > 32
+    || !['condensed', 'compilation'].includes(p.presentation) || p.alignment !== 'unverified' || p.source_commit !== source.commit
+    || !sha(p.pali_sha256) || !sha(p.text_sha256) || (p.notice_sha256 !== undefined && (!sha(p.notice_sha256) || link.source !== 'ati')) || ((p.presentation === 'compilation' || link.source === 'ati') && !sha(p.notice_sha256)) || !Array.isArray(p.text_ids) || p.text_ids.length < 2 || p.text_ids.length > 32
     || new Set(p.text_ids).size !== p.text_ids.length || p.owner_id !== p.text_ids[0] || !p.text_ids.includes(unit.id)
     || typeof link.reference !== 'string' || !link.reference.trim() || link.reference.length > 200) fail();
   const units = p.text_ids.map(id => byId.get(id));
@@ -60,7 +60,8 @@ export function sharedScope(link, unit, byId, readSegments, source) {
   return { kind: 'shared_page', version: 1, owner_id: p.owner_id, text_ids: [...p.text_ids], source_reference: link.reference,
     source_commit: p.source_commit, pali_sha256: p.pali_sha256, text_sha256: p.text_sha256,
     scope_sha256: scopeHash({ mapping: p, source: link.source, url: link.url, path: link.path, parts: link.parts || null, translator: link.translator, reference: link.reference }),
-    condensed: true, individual_alignment_verified: false, whole_unit_coverage: false,
+    ...(p.notice_sha256 ? { notice_sha256: p.notice_sha256 } : {}),
+    presentation: p.presentation, condensed: p.presentation === 'condensed', individual_alignment_verified: false, whole_unit_coverage: false,
     pali_readings: units.map(u => ({ tool: 'get_text', uid: u.id, offset: 0, limit: 200 })),
-    note: 'This is one condensed source page concerning all listed texts, not separate full translations. Individual wording, omissions and cross-referenced verses are not aligned to any one discourse. A page-level quotation match or absence does not establish a match or absence in an individual text. Do not expand the publisher’s abbreviations.' };
+    note: 'This is one ' + (p.presentation === 'compilation' ? 'compiled' : 'condensed') + ' source page concerning all listed texts, not separate verified full-unit translations. Individual wording, omissions and cross-referenced verses have no verified per-discourse alignment in this API. A page-level quotation match or absence does not establish a match or absence in an individual text. Do not expand the publisher’s abbreviations.' };
 }

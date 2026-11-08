@@ -23760,8 +23760,8 @@ function sharedScope(link, unit, byId, readSegments, source4) {
   const fail = () => {
     throw new Error("Invalid or unreviewed shared-page translation scope. No individual alignment or whole-unit coverage is inferred.");
   };
-  const fields = /* @__PURE__ */ new Set(["version", "status", "owner_id", "text_ids", "presentation", "alignment", "source_commit", "pali_sha256", "text_sha256"]);
-  if (!sourceUrl || isPartial(link) || !p || p.version !== 1 || p.status !== "reviewed" || Object.keys(p).some((k) => !fields.has(k)) || p.presentation !== "condensed" || p.alignment !== "unverified" || p.source_commit !== source4.commit || !sha(p.pali_sha256) || !sha(p.text_sha256) || !Array.isArray(p.text_ids) || p.text_ids.length < 2 || p.text_ids.length > 32 || new Set(p.text_ids).size !== p.text_ids.length || p.owner_id !== p.text_ids[0] || !p.text_ids.includes(unit.id) || typeof link.reference !== "string" || !link.reference.trim() || link.reference.length > 200) fail();
+  const fields = /* @__PURE__ */ new Set(["version", "status", "owner_id", "text_ids", "presentation", "alignment", "source_commit", "pali_sha256", "text_sha256", "notice_sha256"]);
+  if (!sourceUrl || isPartial(link) || !p || p.version !== 1 || p.status !== "reviewed" || Object.keys(p).some((k) => !fields.has(k)) || !["condensed", "compilation"].includes(p.presentation) || p.alignment !== "unverified" || p.source_commit !== source4.commit || !sha(p.pali_sha256) || !sha(p.text_sha256) || p.notice_sha256 !== void 0 && (!sha(p.notice_sha256) || link.source !== "ati") || (p.presentation === "compilation" || link.source === "ati") && !sha(p.notice_sha256) || !Array.isArray(p.text_ids) || p.text_ids.length < 2 || p.text_ids.length > 32 || new Set(p.text_ids).size !== p.text_ids.length || p.owner_id !== p.text_ids[0] || !p.text_ids.includes(unit.id) || typeof link.reference !== "string" || !link.reference.trim() || link.reference.length > 200) fail();
   const units = p.text_ids.map((id) => byId.get(id));
   if (units.some((u, i) => !u || u.approximate || u.kind === "range" || u.members?.length || u.book !== units[0].book || u.collection !== units[0].collection || i && units[i - 1].end !== u.start)) fail();
   const selected = units.map((u) => ({ id: u.id, segments: readSegments(u).map(({ ref, type, text }) => ({ ref, type, text })) }));
@@ -23777,11 +23777,13 @@ function sharedScope(link, unit, byId, readSegments, source4) {
     pali_sha256: p.pali_sha256,
     text_sha256: p.text_sha256,
     scope_sha256: scopeHash({ mapping: p, source: link.source, url: link.url, path: link.path, parts: link.parts || null, translator: link.translator, reference: link.reference }),
-    condensed: true,
+    ...p.notice_sha256 ? { notice_sha256: p.notice_sha256 } : {},
+    presentation: p.presentation,
+    condensed: p.presentation === "condensed",
     individual_alignment_verified: false,
     whole_unit_coverage: false,
     pali_readings: units.map((u) => ({ tool: "get_text", uid: u.id, offset: 0, limit: 200 })),
-    note: "This is one condensed source page concerning all listed texts, not separate full translations. Individual wording, omissions and cross-referenced verses are not aligned to any one discourse. A page-level quotation match or absence does not establish a match or absence in an individual text. Do not expand the publisher\u2019s abbreviations."
+    note: "This is one " + (p.presentation === "compilation" ? "compiled" : "condensed") + " source page concerning all listed texts, not separate verified full-unit translations. Individual wording, omissions and cross-referenced verses have no verified per-discourse alignment in this API. A page-level quotation match or absence does not establish a match or absence in an individual text. Do not expand the publisher\u2019s abbreviations."
   };
 }
 
@@ -26163,14 +26165,14 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
   }
   let { link, matchingVersions } = selectTranslation(links, which, unit.acronym);
   if (!link && !which && links.some(isScoped)) {
-    if (links.some(isShared)) throw new Error("Only scoped shared-page/partial sources are linked. Choose an exact translation_id: allow_shared: true accepts a condensed shared page; allow_partial: true accepts a partial unit. No whole-unit translation was selected.");
+    if (links.some(isShared)) throw new Error("Only scoped shared-page/partial sources are linked. Choose an exact translation_id: allow_shared: true accepts a shared publisher page; allow_partial: true accepts a partial unit. No whole-unit translation was selected.");
     throw new Error("Only partial translations are linked. Choose an exact translation_id and explicitly set allow_partial: true; no whole-unit translation was selected.");
   }
   if (!link) throw new Error(`Translation "${which}" is not linked for ${unit.acronym}. Available: ${available(unit).map((a) => `${a.translation_id} (${a.translator})`).join(", ")}.`);
   const declaredScope = translationScope(link, unit);
   const shared = isShared(link);
   if (allow_shared && !shared) throw new Error("The selected source no longer has a declared shared-page scope. Review its mapping before requesting another source.");
-  if (shared && (!allow_shared || allow_partial || which !== translationId(link))) throw new Error("This is a condensed shared-page source. Use get_translation with its exact translation_id and allow_shared: true after reviewing all declared text IDs; individual alignment is unverified.");
+  if (shared && (!allow_shared || allow_partial || which !== translationId(link))) throw new Error("This is a shared-page source. Use get_translation with its exact translation_id and allow_shared: true after reviewing all declared text IDs; individual alignment is unverified.");
   if (allow_partial && (!declaredScope || shared)) throw new Error("The selected source no longer has a declared partial scope. Review its mapping before requesting a whole-unit source.");
   if (declaredScope && !shared && (!allow_partial || which !== translationId(link))) throw new Error("This translation covers only a partial unit. Use get_translation with its exact translation_id and allow_partial: true after checking translation_scope.");
   if (declaredScope && offset > 0 && (!expectedPrefix || !scope_sha256)) throw new Error("Scoped partial/shared-page continuation requires unchanged scope_sha256 and prefix_sha256 from continue_with.");
@@ -26196,6 +26198,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
   if (declaredScope) {
     if (result.text.length > 2e6 || result.parts_total && result.parts_read !== result.parts_total) throw new Error("Scoped source exceeds the bounded complete-text check; no excerpt was returned.");
     if (scopeHash(result.text) !== declaredScope.text_sha256) throw new Error("The scoped source text changed from its reviewed snapshot. No translation was returned.");
+    if (shared && declaredScope.notice_sha256 && scopeHash({ licensing: result.license, citation: result.attribution }) !== declaredScope.notice_sha256) throw new Error("The shared source notice changed from its reviewed snapshot. No translation was returned.");
     notes.push(declaredScope.note);
   }
   if (matchingVersions.length > 1) notes.push(`Several linked versions match "${which}"; selected ${translationId(link)} (${sourceName(link)}). To choose a different version, use its exact translation_id: ${matchingVersions.map((version2) => translationId(version2)).join(", ")}.`);
@@ -28217,7 +28220,7 @@ function translationCoverage({ refresh = false } = {}) {
   }
   const pct = (o) => ({ ...o, percent_with_english: o.texts ? Math.round(1e3 * o.with_english_including_inherited / o.texts) / 10 : 0 });
   coverageCache = {
-    note: 'Whole-unit translation-link counts exclude partial and condensed shared-page mappings. shared_links counts each declared page once, with_shared_english counts explicitly listed members and shared_only excludes members with a whole-unit source. These are not complete translations or individual alignment. partial_links, with_partial_english, partial_only and partial_by_source are separate; partial groups do not imply member coverage. Counts of texts (grouped ranges counted through their members) with an English translation link; links counts every link, including those on grouped ranges. "including_inherited" adds verses whose chapter is linked. content_matched_links were placed by the content-based linker (names, numbers and PTS spans in the translation compared with the P\u0101li) and audited; a text without a link may still have a translation we could not place with confidence.',
+    note: 'Whole-unit translation-link counts exclude partial and shared-page mappings. shared_links counts each declared page once, with_shared_english counts explicitly listed members and shared_only excludes members with a whole-unit source. These counts do not establish complete individual translations or alignment. partial_links, with_partial_english, partial_only and partial_by_source are separate; partial groups do not imply member coverage. Counts of texts (grouped ranges counted through their members) with an English translation link; links counts every link, including those on grouped ranges. "including_inherited" adds verses whose chapter is linked. content_matched_links were placed by the content-based linker (names, numbers and PTS spans in the translation compared with the P\u0101li) and audited; a text without a link may still have a translation we could not place with confidence.',
     total: pct(total),
     collections: [...rows.values()].map(pct)
   };
@@ -29041,7 +29044,7 @@ async function verifyEnglish(text, texts, limit, fetchTranslation, includePartia
   const q = words(englishFold(text));
   if (!q.length) throw new Error("The quotation has no words to match.");
   const plan = englishScope(texts, { includePartial, includeShared, translationIds });
-  if (!plan.pages.length && plan.sharedOmitted.length) throw new Error("Only scoped sources are available. Review metadata and use explicit texts with include_shared: true for condensed shared pages; no individual alignment is inferred.");
+  if (!plan.pages.length && plan.sharedOmitted.length) throw new Error("Only scoped sources are available. Review metadata and use explicit texts with include_shared: true for shared publisher pages; no individual alignment is inferred.");
   if (!plan.pages.length && plan.partialOmitted.length) throw new Error("Only partial English sources are available. Review their metadata, then use explicit texts with include_partial: true. No whole-unit comparison was performed.");
   const fetched = await mapLimit(plan.pages, 6, async (p) => {
     let received = p;
@@ -29182,7 +29185,7 @@ async function verifyQuote({ text, language = "auto", texts, limit = 5, include_
   const verdict = literal2 ? "found" : verdictFor(best);
   const notFoundEnglish = verdict === "not_found_in_scope" && lang === "english";
   const note = verdict === "not_found_in_scope" ? void 0 : tieNote(result.ties);
-  const sharedNote = lang === "english" && result.scope.translations_checked?.some((p) => p.translation_scope?.kind === "shared_page") ? " Shared-page matches and negative results concern one condensed multi-discourse source page only. They do not establish any individual discourse\u2019s wording, completeness, alignment or absence." : "";
+  const sharedNote = lang === "english" && result.scope.translations_checked?.some((p) => p.translation_scope?.kind === "shared_page") ? " Shared-page matches and negative results concern the declared multi-discourse source pages only. They do not establish any individual discourse\u2019s wording, completeness, alignment or absence." : "";
   const unavailableNote = lang === "english" && result.scope.not_retrieved?.length ? " Some requested source versions were not compared completely; this result does not establish their wording or absence. See scope.not_retrieved." : "";
   const partialNote = lang === "english" && result.scope.translations_checked?.some((p) => p.translation_scope?.kind === "partial_unit") ? " Partial translation results apply only to their declared spans, including a negative result. Whole-unit coverage or absence and word-level P\u0101li alignment are not inferred." : "";
   const containerNote = lang === "english" && verdict !== "not_found_in_scope" && result.matches[0]?.unverified_requested_text_ids?.length ? " The match is in a linked containing source; correspondence to the narrower requested text is not verified." : "";
@@ -29213,7 +29216,7 @@ function register3({ tool, z }) {
     language: z.enum(["auto", "pali", "english"]).default("auto").describe('Language of the quotation; "auto" detects Roman input and treats supported native-script input as P\u0101li. This is mechanical transliteration, not translation. Native input with explicit English mode is refused.'),
     texts: z.array(z.string().min(1).max(300)).max(12).optional().describe("English only: exact citations or indexed source groups whose linked translations to search, in Roman or supported native script. Multi-text fallback spans and ambiguous pages are refused before fetching. Inherited containing-source matches do not verify the narrower requested text. Default: all Dhammapada chapters."),
     translation_ids: z.array(z.string().trim().min(1).max(400)).min(1).max(MAX_ENGLISH_PAGES).optional().describe("English only, with explicit texts: exact translation_id values from get_metadata. Select a linked version for every requested text. Every listed version is checked; unavailable versions are not replaced. Partial/shared sources still require their explicit opt-ins. Omit for the preferred page per translator."),
-    include_shared: z.boolean().default(false).describe("English only, with explicit texts: compare one separately labelled condensed multi-discourse source page. No individual alignment or whole-unit translation is inferred."),
+    include_shared: z.boolean().default(false).describe("English only, with explicit texts: compare one separately labelled multi-discourse publisher page (compilation or condensed). No individual alignment or whole-unit translation is inferred."),
     include_partial: z.boolean().default(false).describe("English only, with explicit texts: opt into separately labelled reviewed partial-unit translations. They do not establish whole-unit coverage."),
     limit: z.number().int().min(1).max(10).default(5)
   }, (args) => verifyQuote(args), { network: true });
@@ -34408,7 +34411,7 @@ function createServer2({ executeTool } = {}) {
     limit: external_exports.number().int().min(500).max(3e4).default(12e3).describe("Characters per page."),
     prefix_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Unchanged prefix hash from continue_with. Checks the previously traversed text before applying a character offset; edits require restarting at offset 0."),
     allow_partial: external_exports.boolean().default(false).describe("Explicitly accept the declared partial-unit scope. Partial links require an exact translation_id; defaults never select them."),
-    allow_shared: external_exports.boolean().default(false).describe("Explicitly accept one condensed multi-discourse source page; exact translation_id required. It is not separate full translations or verified member alignment."),
+    allow_shared: external_exports.boolean().default(false).describe("Explicitly accept one multi-discourse publisher page (compilation or condensed); exact translation_id required. It does not establish separate verified full translations or member alignment."),
     scope_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Unchanged scoped-source mapping hash from continue_with; required for partial/shared-page continuation.")
   }, async ({ uid, translation: translation2, offset, limit, prefix_sha256, allow_partial, allow_shared, scope_sha256 }) => {
     const input = romanizeInput(uid);
