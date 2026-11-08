@@ -404,6 +404,7 @@
       "audit_failures": 0
     },
     "shared_baseline_tests_passed": 6,
-    "smoke_checks_passed": 64
+    "smoke_checks_passed": 64,
+    "optional_comparison": "Exact-baseline local comparison passed before integration. If that checkout advances, only the optional comparison is skipped; mandatory frozen scope hashes still execute on every platform."
   }
 }
