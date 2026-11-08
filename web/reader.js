@@ -10,7 +10,7 @@ import { validatePaliQuote } from './quote-check.mjs';
 import { MAX_PROGRESS_BYTES, parseProgress, mergeProgress } from './progress-import.mjs';
 import { topicCatalogue, topicDetail, listCatalogue, listDetail } from './topics-study.mjs';
 import { createRequestPool } from './request-lifecycle.mjs';
-import { readingPosition, assertPositionPin } from './reading-position.mjs';
+import { readingPosition, assertPositionPin, sourceRevision } from './reading-position.mjs';
 import { guardedStorageWrite, guardedPositionWrite, readingPointerOnlyChange } from './local-storage-write.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
@@ -190,7 +190,7 @@ function readingArgs(selector) {
 function saveSegment(selector, data, segment, control, container) {
   const found = local.saved.findIndex(x => x.uid === selector && x.ref === segment.ref);
   if (found >= 0) local.saved.splice(found, 1);
-  else if (local.saved.length < 500) local.saved.push({ uid: selector, ref: segment.ref, title: data.title || data.book?.title || data.citation || data.book_id, note: '', offset: data.offset + data.segments.indexOf(segment), source_commit: data.source?.commit });
+  else if (local.saved.length < 500) local.saved.push({ uid: selector, ref: segment.ref, title: data.title || data.book?.title || data.citation || data.book_id, note: '', offset: data.offset + data.segments.indexOf(segment), source_commit: sourceRevision(data) });
   else { status.textContent = 'Your saved list is full (500 passages). Export it before removing entries.'; return; }
   const active = local.saved.some(x => x.uid === selector && x.ref === segment.ref); control.textContent = active ? 'Saved ✓' : 'Save passage'; control.setAttribute('aria-pressed', String(active)); container.classList.toggle('marked', active); persist();
 }
@@ -229,7 +229,7 @@ async function read(args, token) {
   const positionContext = { ...readingArgs(selector), ...(plan ? { plan: plan.name, day: plan.day } : {}) };
   for (const segment of data.segments || []) {
     const part = el('article', undefined, 'segment ' + (segment.type === 'heading' ? 'heading' : '')); part.id = 'seg-' + segment.ref.replace(/[^a-z0-9-]/gi, '-');
-    let positionHref; try { positionHref = readingPosition(positionContext, data.offset + data.segments.indexOf(segment), segment.ref, data.source?.commit); } catch {}
+    let positionHref; try { positionHref = readingPosition(positionContext, data.offset + data.segments.indexOf(segment), segment.ref, sourceRevision(data)); } catch {}
     const row = el('div', undefined, 'segment-label'), reference = el('span'); if (positionHref) { const exact = link(segment.ref, positionHref); exact.setAttribute('aria-label', 'Open exact passage ' + segment.ref); reference.append(exact); } else reference.textContent = segment.ref; if (segment.vri_paragraph) reference.append(document.createTextNode(' · VRI ' + segment.vri_paragraph)); row.append(reference);
     const active = local.saved.some(x => x.uid === selector && x.ref === segment.ref);
     const save = button(active ? 'Saved ✓' : 'Save passage', () => saveSegment(selector, data, segment, save, part)); save.setAttribute('aria-label', 'Save passage ' + segment.ref); save.setAttribute('aria-pressed', String(active)); const actions = el('div', undefined, 'segment-actions'); actions.append(save);
@@ -241,7 +241,7 @@ async function read(args, token) {
   const next = plan && window.end !== null ? (offset + data.returned < window.end ? offset + data.returned : null) : data.next_offset;
   view.append(passages); pageControls(next, offset > (window?.start || 0) ? Math.max(window?.start || 0, offset - 30) : null, n => route('read', { ...readingArgs(selector), offset: n, ...(plan ? { plan: plan.name, day: plan.day } : {}) })); provenance(data);
   activePosition = { token, links: positions }; rememberPosition(positions.find(x => args.get('ref') === new URLSearchParams(x.href.split('?')[1]).get('ref'))?.href || positions[0]?.href || location.hash); updateResume();
-  const savedVersion = local.saved.find(x => x.uid === selector && x.source_commit && x.source_commit !== data.source?.commit);
+  const savedVersion = local.saved.find(x => x.uid === selector && x.source_commit && x.source_commit !== sourceRevision(data));
   if (savedVersion) view.prepend(el('p', 'This source revision differs from a saved bookmark. Check its reference before reusing your notes.', 'notice'));
   const ref = args.get('ref'); if (ref) document.getElementById('seg-' + ref.replace(/[^a-z0-9-]/gi, '-'))?.scrollIntoView({ block: 'center' });
 }

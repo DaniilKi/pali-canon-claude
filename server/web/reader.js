@@ -3,6 +3,12 @@
   var string = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f<>]/.test(x);
   var integer = (x) => Number.isSafeInteger(x) && x >= 0 && x <= 1e5;
   var source = (x) => typeof x === "string" && /^[a-zA-Z0-9._-]{1,100}$/.test(x);
+  function sourceRevision(data) {
+    const mapped = Boolean(data.source && Object.hasOwn(data.source, "locator_revision"));
+    const value = mapped ? data.source.locator_revision : data.source?.commit;
+    if ((mapped || value !== void 0) && !source(value)) throw Error("The source has invalid reading-position revision metadata.");
+    return value;
+  }
   function readingPosition(context, offset, ref, revision) {
     if (!context || !integer(offset) || !string(ref, 400) || !source(revision) || Object.keys(context).some((k) => !["uid", "book", "kind", "plan", "day"].includes(k)) || Boolean(context.uid) === Boolean(context.book) || !string(context.uid || context.book, 300) || /https?:|javascript:|data:/i.test(context.uid || context.book) || context.kind !== void 0 && !["post", "commentary"].includes(context.kind) || context.book && context.kind || context.plan !== void 0 && (!context.uid || context.kind || !/^[a-z0-9-]{1,60}$/.test(context.plan) || !Number.isSafeInteger(context.day) || context.day < 1 || context.day > 400) || context.day !== void 0 && context.plan === void 0) throw Error("This reading position has unsupported source or reference metadata.");
     return "#read?" + new URLSearchParams({ ...context, offset, ref, source: revision });
@@ -10,8 +16,8 @@
   function assertPositionPin(args, data) {
     if (!args.has("source")) return;
     if (args.getAll("source").length !== 1 || !source(args.get("source")) || !string(args.get("ref"), 400) || !/^\d+$/.test(args.get("offset") || "") || !integer(Number(args.get("offset")))) throw Error("The saved reading position is incomplete. Open its source from the Library; no nearby passage was substituted.");
-    if (data.source?.commit !== args.get("source")) {
-      const error = Error("The source revision changed since this reading position was saved. Review the current source explicitly before continuing; no replacement wording was displayed.");
+    if (sourceRevision(data) !== args.get("source")) {
+      const error = Error("The source or citation mapping revision changed since this reading position was saved. Review the current source explicitly before continuing; no replacement wording was displayed.");
       error.code = "READING_SOURCE_CHANGED";
       throw error;
     }
@@ -1429,7 +1435,7 @@
   function saveSegment(selector, data, segment, control, container) {
     const found = local.saved.findIndex((x) => x.uid === selector && x.ref === segment.ref);
     if (found >= 0) local.saved.splice(found, 1);
-    else if (local.saved.length < 500) local.saved.push({ uid: selector, ref: segment.ref, title: data.title || data.book?.title || data.citation || data.book_id, note: "", offset: data.offset + data.segments.indexOf(segment), source_commit: data.source?.commit });
+    else if (local.saved.length < 500) local.saved.push({ uid: selector, ref: segment.ref, title: data.title || data.book?.title || data.citation || data.book_id, note: "", offset: data.offset + data.segments.indexOf(segment), source_commit: sourceRevision(data) });
     else {
       status2.textContent = "Your saved list is full (500 passages). Export it before removing entries.";
       return;
@@ -1513,7 +1519,7 @@
       part.id = "seg-" + segment.ref.replace(/[^a-z0-9-]/gi, "-");
       let positionHref;
       try {
-        positionHref = readingPosition(positionContext, data.offset + data.segments.indexOf(segment), segment.ref, data.source?.commit);
+        positionHref = readingPosition(positionContext, data.offset + data.segments.indexOf(segment), segment.ref, sourceRevision(data));
       } catch {
       }
       const row = el("div", void 0, "segment-label"), reference = el("span");
@@ -1550,7 +1556,7 @@
     activePosition = { token, links: positions };
     rememberPosition(positions.find((x) => args.get("ref") === new URLSearchParams(x.href.split("?")[1]).get("ref"))?.href || positions[0]?.href || location.hash);
     updateResume();
-    const savedVersion = local.saved.find((x) => x.uid === selector && x.source_commit && x.source_commit !== data.source?.commit);
+    const savedVersion = local.saved.find((x) => x.uid === selector && x.source_commit && x.source_commit !== sourceRevision(data));
     if (savedVersion) view.prepend(el("p", "This source revision differs from a saved bookmark. Check its reference before reusing your notes.", "notice"));
     const ref = args.get("ref");
     if (ref) document.getElementById("seg-" + ref.replace(/[^a-z0-9-]/gi, "-"))?.scrollIntoView({ block: "center" });

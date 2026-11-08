@@ -318,3 +318,13 @@ Heraññakāni/Somamitta now split at source block815, so Somamitta owns147–14
 Use the existing pinned-source story repair and rebuild parallels after any
 reviewed root-boundary change. Run verse-scope, story-boundary, provider-scope
 and installed shared audits; never edit source wording or guess new boundaries.
+
+For the repaired Thag pair, `source.commit` remains authentic VRI provenance.
+`source.locator_revision` pins changed citation/segment ownership. Use
+`sourceRevision(data)` for bookmark/reading/resume pins, keep word-study source
+checks on the real edition commit, and never rewrite old notes/pins. Preserve
+`index_revision` in future source builds. Run the actual bookmark-pin browser
+check (normal/a11y/installed) for mapping changes, not just synthetic commit drift.
+
+Regenerate the parallels artifact after canon metadata changes too (including
+locator/index revision fields): its provenance hash depends on the full dataset.

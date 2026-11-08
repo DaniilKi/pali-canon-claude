@@ -23696,6 +23696,7 @@ __export(canon_exports, {
   fold: () => fold3,
   linksFor: () => linksFor,
   load: () => load,
+  readingSource: () => readingSource,
   resolve: () => resolve,
   search: () => search,
   segments: () => segments,
@@ -25545,6 +25546,14 @@ function segments(u, { includeNotes = false, includeSourcePositions = false } = 
 }
 function source() {
   return load().canon.source;
+}
+function readingSource(unit) {
+  const original = source();
+  if (!Object.hasOwn(unit, "index_revision")) return original;
+  if (typeof unit.index_revision !== "string" || !/^[a-zA-Z0-9._-]{1,40}$/.test(unit.index_revision)) throw Error("Invalid citation mapping revision.");
+  const locator_revision = original.commit + "-" + unit.index_revision;
+  if (locator_revision.length > 100) throw Error("Unsupported citation locator revision.");
+  return { ...original, locator_revision };
 }
 function describe(u, notes = []) {
   const d = load();
@@ -34375,7 +34384,7 @@ function createServer2({ executeTool } = {}) {
       title: unit.title,
       edition: "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), P\u0101li",
       attribution: source().attribution,
-      source: source(),
+      source: readingSource(unit),
       total_segments: all.length,
       offset,
       limit,
@@ -34740,7 +34749,7 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
   const result = {
     text_id: unit.id,
     canonical: true,
-    source: source(),
+    source: readingSource(unit),
     ...inputNote(input),
     citation: unit.acronym,
     title: unit.title || null,

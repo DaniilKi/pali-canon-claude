@@ -104,3 +104,14 @@ for kind in ['title','verse','adjacency','approximate','missing']:
  assert z['units']==before
 print('passed')`,input);assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/passed/);
 });
+
+test('changed unit mappings invalidate authentic old positions without falsifying the VRI edition or altering unrelated pins',async()=>{
+ const {sourceRevision,readingPosition,assertPositionPin}=await import('../web/reading-position.mjs');
+ const original=structuredClone(canon.source()),u=canon.resolve('thag2.14').unit,data={source:canon.readingSource(u)};
+ assert.equal(u.index_revision,'thag-pair-v1');assert.equal(data.source.commit,original.commit);assert.equal(sourceRevision(data),original.commit+'-thag-pair-v1');assert.deepEqual(canon.source(),original);
+ for(const [index,ref] of [[0,'thag2.14/1'],[1,'thag2.14/2']]){const pin=new URLSearchParams(readingPosition({uid:u.id},index,ref,original.commit).split('?')[1]);assert.throws(()=>assertPositionPin(pin,data),e=>e.code==='READING_SOURCE_CHANGED');assert.equal(pin.get('source'),original.commit);assert.equal(pin.get('ref'),ref);}
+ for(const id of ['thag2.13','thag2.14']){const current={source:canon.readingSource(canon.resolve(id).unit)},pin=new URLSearchParams(readingPosition({uid:id},0,id+'/1',sourceRevision(current)).split('?')[1]);assert.doesNotThrow(()=>assertPositionPin(pin,current));assert.equal(current.source.commit,original.commit);}
+ const other={source:canon.readingSource(canon.resolve('dhp183').unit)};assert.equal(sourceRevision(other),original.commit);assert.equal(other.source.locator_revision,undefined);assert.doesNotThrow(()=>assertPositionPin(new URLSearchParams(readingPosition({uid:'dhp183'},0,'dhp183/1',original.commit).split('?')[1]),other));
+ for(const locator_revision of [null,undefined,12,'bad revision'])assert.throws(()=>sourceRevision({source:{commit:original.commit,locator_revision}}),/invalid/);
+ assert.throws(()=>canon.readingSource({...u,index_revision:null}),/Invalid/);assert.throws(()=>canon.readingSource({...u,index_revision:'bad revision'}),/Invalid/);
+});

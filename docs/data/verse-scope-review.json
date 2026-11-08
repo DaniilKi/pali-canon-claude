@@ -399,12 +399,24 @@
         "page": 20,
         "end_page": 20
       },
-      "root_blocks_sha256": "8e2fe7c620fb1e21285664b5e5d0c6c8c97c30e999c40d34c026e1e3b31d0557"
+      "root_blocks_sha256": "8e2fe7c620fb1e21285664b5e5d0c6c8c97c30e999c40d34c026e1e3b31d0557",
+      "index_revision": "thag-pair-v1"
     },
     "pinned_xml_sha256": {
       "s0506m.mul.xml": "667955d2ff764ea89c7c7759e4d40474b7c8c0f87fb18b43e85e13fb611e2116",
       "s0507m.mul.xml": "d640893ab1eeef5256865e499c8b47c8719c4b9c259e9d85c45ccb6a475854d3",
       "s0508m.mul.xml": "30a3a7daaf5724e1b3eee155c37427354560c3bfb92e5ae16ac5b7b6ce1255b7"
+    },
+    "locator_revision": {
+      "units": [
+        "thag2.13",
+        "thag2.14"
+      ],
+      "index_revision": "thag-pair-v1",
+      "authentic_edition_commit_unchanged": true,
+      "old_pins_require_explicit_review": true,
+      "notes_not_migrated": true,
+      "explicit_invalid_revision_rejected": true
     }
   },
   "before_reproduction": [

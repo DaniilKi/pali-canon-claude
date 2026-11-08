@@ -185,7 +185,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
   const page = all.slice(offset, offset + limit);
   const vri = canon.source();
   const result = {
-    text_id: unit.id, canonical: true, source: canon.source(), ...inputNote(input),
+    text_id: unit.id, canonical: true, source: canon.readingSource(unit), ...inputNote(input),
     citation: unit.acronym,
     title: unit.title || null,
     collection: described.collection,

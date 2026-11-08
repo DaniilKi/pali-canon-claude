@@ -35,12 +35,40 @@ try:
                 item=profile(page)['saved'][-1];assert item['source_commit'] and isinstance(item['offset'],int);marks.append(item);wording[item['uid']]=text
                 saved(page);link=bookmark_link(page,item);params=dict(urllib.parse.parse_qsl(link.get_attribute('href').split('?',1)[1]));assert params['source']==item['source_commit'] and params['ref']==item['ref'] and int(params['offset'])==item['offset']
                 link.focus();page.keyboard.press('Enter');page.locator('.passage').first.wait_for();loaded(page);assert page.locator('section[aria-label="Pāli passage"] .passage').first.inner_text()==text;assert page.locator('.segment-label a').first.inner_text()==item['ref'];passed(kind+': saved link keeps exact revision, offset, source kind and wording')
+            authentic_commit='2d134ff9ef60f70a1eb03c9370580228811a3070'
+            assert marks[0]['uid']=='dhp183' and marks[0]['source_commit']==authentic_commit
+            passed('unrelated canonical bookmark retains the authentic VRI commit without a mapping revision')
+            for uid,index,verse in [('thag2.13',1,'145'),('thag2.14',2,'148')]:
+                page.goto(base+'/#read?uid='+uid);part=page.locator('section[aria-label="Pāli passage"] .segment').nth(index);part.wait_for();loaded(page)
+                reference=part.locator('.segment-label a').first.inner_text();text=part.locator('.passage').inner_text();assert reference==uid+'/'+str(index+1)
+                part.get_by_role('button',name='Save passage '+reference,exact=True).click();item=profile(page)['saved'][-1]
+                assert item['source_commit']==authentic_commit+'-thag-pair-v1' and item['offset']==index
+                marks.append(item);wording[item['uid']]=text
+                saved(page);link=bookmark_link(page,item);params=dict(urllib.parse.parse_qsl(link.get_attribute('href').split('?',1)[1]));assert params['source']==item['source_commit'] and int(params['offset'])==index
+                link.focus();page.keyboard.press('Enter');page.locator('.passage').first.wait_for();loaded(page)
+                assert page.locator('.segment-label a').first.inner_text()==reference;assert page.locator('section[aria-label="Pāli passage"] .passage').first.inner_text()==text
+                assert authentic_commit in page.locator('#view').inner_text()
+                passed(uid+': fresh mapping-revision bookmark restores exact verse '+verse+' while preserving VRI provenance')
             saved(page);assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');audit(page,'current source-pinned saved records');assert not errors,errors;context.close()
+            # Authentic pre-repair locators: /1 meant verse148 and /2 its closing prose.
+            # Both refs still exist after repair, so reference presence alone cannot protect notes.
+            previous_pair=[{'uid':'thag2.14','ref':'thag2.14/'+str(index+1),'title':'Pre-repair Somamitta '+str(index+1),'note':'Private pre-repair note '+str(index+1),'offset':index,'source_commit':authentic_commit} for index in [0,1]]
+            context=seeded(browser,width,theme,previous_pair);page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+            for item in previous_pair:
+                saved(page);bookmark_link(page,item).click();page.get_by_role('heading',name='No passage was substituted.',exact=True).wait_for()
+                assert page.locator('.passage').count()==0 and page.locator('section[aria-label="Pāli passage"]').count()==0
+                assert 'source or citation mapping revision changed' in page.locator('#view').inner_text();assert item['note'] not in page.locator('#view').inner_text()
+                assert profile(page)['saved']==previous_pair;audit(page,'actual repaired mapping refuses '+item['ref'])
+                passed(item['ref']+': authentic pre-repair pin refuses changed meaning before wording and preserves notes')
+            saved(page)
+            with page.expect_download() as download:page.get_by_role('button',name='Export bookmarks and notes',exact=True).click()
+            exported=json.loads(pathlib.Path(download.value.path()).read_text(encoding='utf-8'));assert exported['saved']==previous_pair;assert profile(page)['saved']==previous_pair
+            assert not errors,errors;passed('both authentic pre-repair notes, offsets, references and pins remain unchanged in local storage and export');context.close()
             # Synthetic OLD metadata simulates a corpus upgrade. Actual text is not changed.
             old=[{**m,'source_commit':'controlled-old-revision','note':'Synthetic private source note'} for m in marks]
             context=seeded(browser,width,theme,old);page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
             for item in old:
-                saved(page);bookmark_link(page,item).click();page.get_by_role('heading',name='No passage was substituted.',exact=True).wait_for();assert page.locator('.passage').count()==0;assert 'source revision changed' in page.locator('#view').inner_text();assert 'Synthetic private source note' not in page.locator('#view').inner_text()
+                saved(page);bookmark_link(page,item).click();page.get_by_role('heading',name='No passage was substituted.',exact=True).wait_for();assert page.locator('.passage').count()==0;assert 'source or citation mapping revision changed' in page.locator('#view').inner_text();assert 'Synthetic private source note' not in page.locator('#view').inner_text()
                 audit(page,'revision drift refusal '+item['uid']);review=page.get_by_role('link',name='Review current source at this reference',exact=True);review.focus();page.keyboard.press('Enter');page.locator('.passage').first.wait_for();loaded(page)
                 assert page.locator('.segment-label a').first.inner_text()==item['ref'];assert page.locator('section[aria-label="Pāli passage"] .passage').first.inner_text()==wording[item['uid']];assert 'source=' not in page.url
                 persisted=next(m for m in profile(page)['saved'] if m['uid']==item['uid']);assert persisted['source_commit']=='controlled-old-revision' and persisted['note']==item['note'];passed('changed revision refuses wording before explicit review: '+item['uid'])
@@ -51,7 +79,7 @@ try:
             with page.expect_download() as download:page.get_by_role('button',name='Export bookmarks and notes',exact=True).click()
             exported=json.loads(pathlib.Path(download.value.path()).read_text());assert exported['saved']==invalid;assert profile(page)['saved']==invalid;passed('invalid version metadata stays exportable without dropping pin or contacting server');context.close()
         browser.close()
-    data={'passed':len(checks),'outside_source_tree':bool(args.server_dir),'checks':checks,'a11y':{'scans':len(scans),'violations':sum(len(x['violations']) for x in scans),'results':scans},'limits':'Actual bundled Pali in five source modes; controlled old/invalid bookmark metadata, not a real upstream text update. No archive retrieval, translation-source consent, physical-device or human screen-reader certification.'}
+    data={'passed':len(checks),'outside_source_tree':bool(args.server_dir),'checks':checks,'a11y':{'scans':len(scans),'violations':sum(len(x['violations']) for x in scans),'results':scans},'limits':'Actual bundled Pali in five source modes, fresh repaired-unit locator revisions and authentic pre-repair Somamitta references; other old/invalid metadata is controlled. The repaired index changes reference meaning without changing VRI wording/commit. No archive retrieval, translation-source consent, physical-device or human screen-reader certification.'}
     text=json.dumps(data,indent=2);print(text)
     if args.report:pathlib.Path(args.report).write_text(text+'\n')
     if data['a11y']['violations']:raise SystemExit(1)
