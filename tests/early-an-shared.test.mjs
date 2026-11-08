@@ -66,11 +66,11 @@ from reviewed_exclusions import apply_reviewed_exclusions,MANIFEST
 url='https://www.accesstoinsight.org/tipitaka/an/an01/an01.031-040x.wood.html'
 a={'an1.31':[{'source':'ati','url':url}],'wrong':[{'source':'dhammatalks','url':url.replace('https://www.','http://')+'?bypass=1','shared_scope':{}}],'safe':[{'source':'ati','url':'https://accesstoinsight.org/tipitaka/an/an01/an01.021-040.than.html'}]}
 old=copy.deepcopy(a);out,removed=apply_reviewed_exclusions(a);assert a==old and len(removed)==2 and list(out)==['safe'];assert apply_reviewed_exclusions(out)==(out,[])
-m=json.loads(MANIFEST.read_text());index=next(i for i,r in enumerate(m['exclusions']) if r['source']=='ati')
+m=json.loads(MANIFEST.read_text(encoding='utf-8'));index=next(i for i,r in enumerate(m['exclusions']) if r['source']=='ati')
 with tempfile.TemporaryDirectory() as tmp:
  p=pathlib.Path(tmp)/'manifest.json'
  for fields in [{'source':'dhammatalks'},{'url':url.replace('/tipitaka/','/lib/')},{'url':url+'?x=1'},{'url':'https://unreviewed.invalid/page.html'}]:
-  x=copy.deepcopy(m);x['exclusions'][index].update(fields);p.write_text(json.dumps(x))
+  x=copy.deepcopy(m);x['exclusions'][index].update(fields);p.write_text(json.dumps(x),encoding='utf-8')
   try:apply_reviewed_exclusions(a,p)
   except ValueError:pass
   else:raise AssertionError('Invalid hold accepted')
