@@ -24,12 +24,17 @@ def apply_reviewed_exclusions(out, manifest=MANIFEST):
     for row in data['exclusions']:
         p = urlsplit(row.get('url', ''))
         key = source_key(row.get('url', ''))
-        if (row.get('source') != 'dhammatalks' or row.get('status') != 'withheld-shared-page'
-                or p.scheme != 'https' or p.hostname not in ('www.dhammatalks.org', 'dhammatalks.org')
+        source = row.get('source')
+        hosts, pattern = {
+            'dhammatalks': (('www.dhammatalks.org', 'dhammatalks.org'), r'/suttas/[A-Za-z0-9_/.-]+\.html'),
+            'ati': (('www.accesstoinsight.org', 'accesstoinsight.org'), r'/tipitaka/[a-z0-9_/.-]+\.html'),
+        }.get(source, ((), r'(?!)'))
+        if (source not in ('dhammatalks', 'ati') or row.get('status') != 'withheld-shared-page'
+                or p.scheme != 'https' or p.hostname not in hosts
                 or p.username or p.password or p.port or p.query or p.fragment
-                or not re.fullmatch(r'/suttas/[A-Za-z0-9_/.-]+\.html', p.path)
+                or not re.fullmatch(pattern, p.path)
                 or key in blocked or not row.get('reason') or not row.get('review')
-                or not isinstance(row.get('subject_ids'), list) or len(row['subject_ids']) < 2
+                or not isinstance(row.get('subject_ids'), list) or len(row['subject_ids']) < 1
                 or len(set(row['subject_ids'])) != len(row['subject_ids'])):
             raise ValueError('Invalid or duplicate reviewed exclusion')
         blocked[key] = row

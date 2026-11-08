@@ -1409,6 +1409,67 @@
         }
       ],
       "reason": "Two complete compiled publisher pages with exact root, source text and full notice pins. Gratitude publisher AN2.31–32 maps by content to indexed AN2.32–33/VRI33–34; nearby calm/insight not a subject. No whole-unit gains, individual quotation alignment or lifted Mother/singleton holds."
+    },
+    {
+      "decision": "D199",
+      "accepted_links": 0,
+      "newly_covered_units": [],
+      "activated_shared_pages": [
+        {
+          "owner_id": "an1.21",
+          "path": "tipitaka/an/an01/an01.021-040.than.html",
+          "subject_ids": [
+            "an1.21",
+            "an1.22",
+            "an1.23",
+            "an1.24",
+            "an1.25",
+            "an1.26",
+            "an1.27",
+            "an1.28",
+            "an1.29",
+            "an1.30",
+            "an1.31",
+            "an1.32",
+            "an1.33",
+            "an1.34",
+            "an1.35",
+            "an1.36",
+            "an1.37",
+            "an1.38",
+            "an1.39",
+            "an1.40"
+          ],
+          "presentation": "compilation",
+          "individual_alignment_verified": false,
+          "whole_unit_coverage": false
+        },
+        {
+          "owner_id": "an2.125",
+          "path": "tipitaka/an/an02/an02.125-126.than.html",
+          "subject_ids": [
+            "an2.125",
+            "an2.126"
+          ],
+          "presentation": "compilation",
+          "individual_alignment_verified": false,
+          "whole_unit_coverage": false
+        }
+      ],
+      "withdrawn_ordinary_bindings": [
+        {
+          "owner_id": "an1.31",
+          "path": "tipitaka/an/an01/an01.031-040x.wood.html",
+          "reason": "Publisher-labelled excerpt combines historical numbered passages; not a whole individual translation of indexed AN1.31. Global post-linker hold, no automatic remap."
+        }
+      ],
+      "deferred": [
+        {
+          "path": "tipitaka/an/an01/an01.031-040x.wood.html",
+          "reason": "BPS excerpt: historical numbering/editorial scope unresolved; exact ordinary AN1.31 binding withdrawn. Six publisher labels are not six approved canonical subjects."
+        }
+      ],
+      "reason": "Two complete source pages pinned as shared compilations only. AN1.21–40 mind pairs; indexed AN2.125–126/VRI126–127 voice and attention, not indexed AN2.123–124. Complete CC BY-NC notices preserved. One mis-scoped ordinary link removed. 55 queued pages, 8 with first-English screening possibilities; not approvals."
     }
   ]
 }

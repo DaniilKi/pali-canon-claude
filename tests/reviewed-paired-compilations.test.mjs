@@ -9,7 +9,8 @@ import {verifyQuote} from '../src/verify.mjs';
 import {liveCache} from '../src/cache.mjs';
 import {translationCoverage} from '../src/providers.mjs';
 import {buildIndex} from '../scripts/export-index.mjs';
-const rows=JSON.parse(readFileSync('scripts/canon/reviewed_shared_pages.json')).links.slice(1);
+const rows=JSON.parse(readFileSync('scripts/canon/reviewed_shared_pages.json')).links.filter(r=>['an1.45','an2.32'].includes(r.owner_id));
+test('paired-page fixture retains both reviewed Water and Gratitude owners',()=>assert.deepEqual(rows.map(r=>r.owner_id),['an1.45','an2.32']));
 const fetchOriginal=globalThis.fetch;let saved;
 afterEach(()=>{if(saved)canon.load().translations=saved;saved=undefined;globalThis.fetch=fetchOriginal;liveCache.clear();translationCoverage({refresh:true});});
 for(const row of rows){

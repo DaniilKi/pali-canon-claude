@@ -112,6 +112,196 @@
         }
       ],
       "mapping_note": "Publisher AN 2.31–32 concerns indexed AN 2.32–33, VRI paragraphs 33–34, not indexed AN 2.31 on calm/insight. The first treatment contrasts ingratitude and gratitude; the second discusses carrying parents for a century, sovereignty, their care, and establishing conviction, virtue, generosity and discernment. Preserve the entire publisher page including II,iv,2 and See also cross-references MN 110, SN 7.14, AN 4.73, Iti 106. Those references remain editorial. Page-level consent/citations do not establish individual passage alignment or whole-unit coverage."
+    },
+    {
+      "owner_id": "an1.21",
+      "text_ids": [
+        "an1.21",
+        "an1.22",
+        "an1.23",
+        "an1.24",
+        "an1.25",
+        "an1.26",
+        "an1.27",
+        "an1.28",
+        "an1.29",
+        "an1.30",
+        "an1.31",
+        "an1.32",
+        "an1.33",
+        "an1.34",
+        "an1.35",
+        "an1.36",
+        "an1.37",
+        "an1.38",
+        "an1.39",
+        "an1.40"
+      ],
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "english_title": "A Single Thing — shared publisher page",
+      "source_reference": "AN 1.21–40 (shared publisher page)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "presentation": "compilation",
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+      "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+      "pali_segments_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+      "root_units": [
+        {
+          "id": "an1.21",
+          "title": "Akammaniyavagga",
+          "vri": "21",
+          "root_blocks_sha256": "255f2bcee4e759ecc3cfd5c1dec6d5eee99c060210fbce33a2c6eeff2d4af11e"
+        },
+        {
+          "id": "an1.22",
+          "title": "Akammaniyavaggo",
+          "vri": "22",
+          "root_blocks_sha256": "759ead403aa9feaf473686fe7b222bb5a050f154cae0afd47f9ca7fb9708835c"
+        },
+        {
+          "id": "an1.23",
+          "title": "Akammaniyavaggo",
+          "vri": "23",
+          "root_blocks_sha256": "84b7abdf67ad590b46694387bfe9b52b470a445efb129e0b83d4891e472dc623"
+        },
+        {
+          "id": "an1.24",
+          "title": "Akammaniyavaggo",
+          "vri": "24",
+          "root_blocks_sha256": "8d2a8ce81e5be12c77fb22bb8759dc25ec5066855655a450af07692def8a73c2"
+        },
+        {
+          "id": "an1.25",
+          "title": "Akammaniyavaggo",
+          "vri": "25",
+          "root_blocks_sha256": "10056011a2f60c5d3ac106c9cc6d6ba17095778841849bd80c7a88edc087f4f6"
+        },
+        {
+          "id": "an1.26",
+          "title": "Akammaniyavaggo",
+          "vri": "26",
+          "root_blocks_sha256": "4535a9c97d214857c198950017b461ca2cff4205645eaf14057ed67ec355b58e"
+        },
+        {
+          "id": "an1.27",
+          "title": "Akammaniyavaggo",
+          "vri": "27",
+          "root_blocks_sha256": "2d183255e9c048909fff298c4c0fc53d13c5779f856194f72c8f885e003495d2"
+        },
+        {
+          "id": "an1.28",
+          "title": "Akammaniyavaggo",
+          "vri": "28",
+          "root_blocks_sha256": "5bfb26082183fc0372b41ec696591b59472df52fea8e8377de53ab2b91924940"
+        },
+        {
+          "id": "an1.29",
+          "title": "Akammaniyavaggo",
+          "vri": "29",
+          "root_blocks_sha256": "a09f66811ba67261365a8eb5e9ae5f9aba241123a8fdc73436b327f22fb6010e"
+        },
+        {
+          "id": "an1.30",
+          "title": "Akammaniyavaggo",
+          "vri": "30",
+          "root_blocks_sha256": "3d29f2475d84c8277625baabafee7054738b8b2798910afe698dad338014005a"
+        },
+        {
+          "id": "an1.31",
+          "title": "Adantavagga",
+          "vri": "31",
+          "root_blocks_sha256": "def27c98d5deee32ddf503e24cbbbc5d4f8f246e2914b1cf825ee192fdf4bbda"
+        },
+        {
+          "id": "an1.32",
+          "title": "Adantavaggo",
+          "vri": "32",
+          "root_blocks_sha256": "62649d7c16efefa5ae2e680551176a862851dd5c08cd58911203b20975052ab9"
+        },
+        {
+          "id": "an1.33",
+          "title": "Adantavaggo",
+          "vri": "33",
+          "root_blocks_sha256": "386e7e0d023a709bce7007ca8296d54de6084bca82885dd371f31d145042001b"
+        },
+        {
+          "id": "an1.34",
+          "title": "Adantavaggo",
+          "vri": "34",
+          "root_blocks_sha256": "d1709551b5f5cabf8e0e5345ead0692f27811aded2eb6acafe722c61eaaa8dac"
+        },
+        {
+          "id": "an1.35",
+          "title": "Adantavaggo",
+          "vri": "35",
+          "root_blocks_sha256": "e4a8d7d7daf3818721da25fd4e673284c66ce3d4aa2dc7cd97bd974656d5509e"
+        },
+        {
+          "id": "an1.36",
+          "title": "Adantavaggo",
+          "vri": "36",
+          "root_blocks_sha256": "940c5d0fc0eebcde385de9fd00d722b645f823b8c6dacad365207a795641c01a"
+        },
+        {
+          "id": "an1.37",
+          "title": "Adantavaggo",
+          "vri": "37",
+          "root_blocks_sha256": "dcfa5dc32c015bddbc2c567958f4afc0d03447a767a649db83f8c3731ff25563"
+        },
+        {
+          "id": "an1.38",
+          "title": "Adantavaggo",
+          "vri": "38",
+          "root_blocks_sha256": "278bbfdb3bbae260f7ba89ff57e2f0595095075789cd8c43ec1aa2c79bb82053"
+        },
+        {
+          "id": "an1.39",
+          "title": "Adantavaggo",
+          "vri": "39",
+          "root_blocks_sha256": "830676b1cac888737c815c135250268d8b889226c8e8d62f1a272f3fb3619ad6"
+        },
+        {
+          "id": "an1.40",
+          "title": "Adantavaggo",
+          "vri": "40",
+          "root_blocks_sha256": "f36e00b259a83df4cb7305d186accac91cf41dc38a6dcc605efb4b8fd6965e48"
+        }
+      ],
+      "mapping_note": "One publisher page contains twenty numbered treatments concerning indexed AN 1.21–40, VRI 21–40, across the Akammaniya and Adanta chapters. It contrasts undeveloped/developed, uncultivated/cultivated, untamed/tamed, unguarded/guarded, unprotected/protected and unrestrained/restrained mind, including combined qualities in 39–40. Preserve chapter paratext and the source edition; no words or repetitions are reconstructed. The API exposes the full compiled page with explicit consent, not individually aligned translations. Grouped range aliases and neighbouring texts are not added as subjects; no whole-unit coverage is inferred."
+    },
+    {
+      "owner_id": "an2.125",
+      "text_ids": [
+        "an2.125",
+        "an2.126"
+      ],
+      "path": "/tipitaka/an/an02/an02.125-126.than",
+      "english_title": "Voice — shared publisher page",
+      "source_reference": "ATI AN 2.125–126; indexed AN 2.125–126, VRI 126–127 (shared page)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "presentation": "compilation",
+      "source_html_sha256": "df8584c8489b6cb76b34d8578ff06261a6092f4860216cea6bd6efbde2cccfdb",
+      "text_sha256": "a5d4d3d63f2166947cbcb1ccaa12883f6fbd90ef4445c73ff1c4441064eff8ec",
+      "notice_sha256": "d96963652b5b6f051df62ac6a54047af61d5f715b1dd3bcfdab4e62bc0b04de7",
+      "pali_segments_sha256": "01f88254cf733cc057f51d936a8203e51e447a5c711bfac3c7209ac269f44318",
+      "root_units": [
+        {
+          "id": "an2.125",
+          "title": "1. Āsāduppajahavaggo",
+          "vri": "126",
+          "root_blocks_sha256": "116b49764bc4e618f546bf7e8c370d0419bf62fc0f7ab2a656852557063031f5"
+        },
+        {
+          "id": "an2.126",
+          "title": "1. Āsāduppajahavaggo",
+          "vri": "127",
+          "root_blocks_sha256": "1712705eecbb99f5895c430d2f38ebc3e308151a05136948d4340a04ac55f1fa"
+        }
+      ],
+      "mapping_note": "One publisher page concerns indexed AN 2.125–126, VRI paragraphs 126–127: wrong view from another voice plus inappropriate attention, and right view from another voice plus appropriate attention. Do not assign it to indexed AN 2.123–124 on passion/aversion because an internal historical numbering comment mentions 123–124. Preserve the complete translator Note discussing Woodward, MN 43, Mv I.23.5, AN IX.36 and MN 140 as editorial material, not extra canonical members or individually aligned wording. Retrieval/verification concern the full shared page with explicit consent; no whole-unit coverage is inferred."
     }
   ]
 }
