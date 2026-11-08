@@ -2,3 +2,5 @@
 
 /* Programmatic route focus should not draw a frame around the entire reading area. */
 main:focus{outline:none}
+/* Long source references and compound Pāli titles must not force narrow screens to scroll sideways. */
+.entry,h2,h3{overflow-wrap:anywhere}.segment-label span{min-width:0;overflow-wrap:anywhere}.segment-label button{flex-shrink:0}

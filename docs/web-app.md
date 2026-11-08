@@ -18,11 +18,11 @@ The npm package and container include `server/web/`. The HTML, stylesheet and br
 
 ## What you can do
 
-- Browse the canonical collections and all complete root source books, including front matter.
-- Search canonical Pāli bodies and Pāli/English titles using the existing search tool. English query expansion is labelled, not presented as full English-translation search.
+- Browse the canonical collections and all complete root source books, including front matter. Separate catalogues expose all 47 bundled commentary books and 109 later Pāli works; both are visibly labelled **not canon**.
+- Choose a search scope: canonical texts, commentary, or later works. Supplementary searches open the exact selection returned by their existing tools without reinterpreting it as a canonical citation. Search canonical Pāli bodies and Pāli/English titles using the existing search tool. English query expansion is labelled, not presented as full English-translation search.
 - Open a citation directly and read the exact source segments with visible references and source terms. Continue long texts and books page by page.
 - Choose a linked English translator, with live retrieval and unchanged continuation arguments. Failed retrieval is displayed; no replacement text is generated.
-- Read available traditional commentary separately from the root text, including pagination.
+- Read available traditional commentary separately from the root text, including pagination. Direct commentary-book reading and search hits do not claim verified root-text alignment. Later-work and commentary bookmarks retain their corpus and exact reading position.
 - Change text size, paper/night theme and the supported Pāli transliteration script. Lao/Lanna still require native-reader validation. Installed device fonts affect glyph availability; selecting a script does not install fonts.
 - Save individual passage references and personal notes. Reopen the reading position and export bookmarks/notes as JSON.
 - Copy a reading link, use browser back/forward, and navigate with a keyboard.
@@ -50,7 +50,7 @@ The useful patterns from established scripture readers are calm typography, visi
 
 Next priorities, in order:
 
-1. Extend the same UI to post-canonical and direct commentary catalogues/search, dictionary, parallels and quotation verification. Keep canonical status and uncertain mappings visible.
+1. Extend the same UI to dictionary lookup, parallels and quotation verification. Supplementary catalogues/search and reading are now implemented. Keep canonical status and uncertain mappings visible.
 2. Improve accessible translation comparison, exact source links and reading-position management. Test in Safari and Firefox, with screen readers and native-script readers, on physical iOS/Android devices.
 3. Add bookmark import with schema validation, device-local reading plans and optional passage highlighting. Personal reflections must never be labelled scripture.
 4. Design explicitly user-requested, versioned offline packs only after source-specific rights/storage review. Don't silently cache live translations or claim whole-corpus English coverage.
@@ -64,6 +64,16 @@ npm run smoke
 npm run evals
 node --test tests/web-reader.test.mjs
 python scripts/web-reader-browser-check.py
+python scripts/web-reader-a11y-check.py
 ```
 
 The browser runner requires Python Playwright and Chromium (set `PALI_BROWSER` to the installed executable if needed). It starts/stops its own local built server. Real Pāli and commentary are tested against the bundled corpus; upstream translation outages and late-response tests are explicitly synthetic. Browser screenshots are written to `/tmp/pali-web-reader/`. No live-source translation availability or human accessibility certification is implied by these checks.
+
+
+## Follow-up review
+
+A second-pass source/behavior review found and repaired the first slice’s skip-link routing defect: keyboard “Skip to reading” now focuses the current passage rather than navigating away. Supplementary-source bookmarks now keep the selected corpus and a selection-relative offset, including exact commentary segment references; no global segment number is applied to a one-segment selection. Long source references and Pāli titles wrap on narrow screens.
+
+The supplementary search tools and data are unchanged. No new source, licence claim, data transformation, permission, content endpoint or deployment was added. Browser tests explicitly distinguish canonical, direct commentary and later-work scope. Synthetic hostile-looking text and unsafe source URLs test DOM rendering without modifying corpus data.
+
+The pinned `axe-core` dependency is **development-only**, used by `scripts/web-reader-a11y-check.py`. That audit uses a separate browser context permitting checker injection; production CSP remains restrictive and is checked separately. Its automatic WCAG-rule results and incomplete/manual-review rules are recorded. These are not a human accessibility certification or independent scholarly review.

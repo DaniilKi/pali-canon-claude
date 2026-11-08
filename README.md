@@ -43,7 +43,7 @@ Christians and Muslims already have many AI study tools, from Bible and Quran se
 
 ## Standalone web reader
 
-You can also browse and read without an AI client. Run `npm run build` and `npm run serve`, then open **http://localhost:8080/**. The responsive reader includes canonical browsing/search, complete source books, linked English choices, commentary, reading preferences and browser-local bookmarks/notes. It is not deployed by this branch and does not yet provide offline browser downloads or account sync. See the [web-reader guide and next priorities](docs/web-app.md).
+You can also browse and read without an AI client. Run `npm run build` and `npm run serve`, then open **http://localhost:8080/**. The responsive reader includes separate canonical, commentary and later-work browsing/search, complete source books, linked English choices, reading preferences and browser-local bookmarks/notes. It is not deployed by this branch and does not yet provide offline browser downloads or account sync. See the [web-reader guide and next priorities](docs/web-app.md).
 
 ## What it does
 

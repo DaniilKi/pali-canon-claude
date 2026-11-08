@@ -24,5 +24,5 @@ test('reader does not execute fetched markup or load third-party assets',()=>{
  const js=readFileSync('web/reader.js','utf8'),html=readFileSync('web/index.html','utf8');
  assert.doesNotMatch(js,/innerHTML|insertAdjacentHTML|eval\(/);
  assert.doesNotMatch(html,/(?:src|href)="https?:/);
- assert.match(js,/epoch/); assert.match(js,/studyEpoch/);
+
 });

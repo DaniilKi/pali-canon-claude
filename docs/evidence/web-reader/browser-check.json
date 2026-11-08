@@ -1,5 +1,5 @@
 {
-  "passed": 65,
+  "passed": 101,
   "checks": [
     {
       "width": 360,
@@ -15,6 +15,10 @@
     },
     {
       "width": 360,
+      "check": "skip link focuses reading without replacing the passage"
+    },
+    {
+      "width": 360,
       "check": "bookmark and note persist after reload"
     },
     {
@@ -43,6 +47,34 @@
     },
     {
       "width": 360,
+      "check": "all 47 commentary books are reachable through catalogue pagination"
+    },
+    {
+      "width": 360,
+      "check": "commentary book reading preserves non-canonical and unaligned scope"
+    },
+    {
+      "width": 360,
+      "check": "direct commentary-book continuation retains selection"
+    },
+    {
+      "width": 360,
+      "check": "commentary search and bookmark reopen the identical exact source segment"
+    },
+    {
+      "width": 360,
+      "check": "all 109 later works are reachable through catalogue pagination"
+    },
+    {
+      "width": 360,
+      "check": "later work reading preserves scope and attribution"
+    },
+    {
+      "width": 360,
+      "check": "later-work search opens its returned citation rather than a canonical lookalike"
+    },
+    {
+      "width": 360,
       "check": "invalid citation fails visibly without substitution"
     },
     {
@@ -60,6 +92,10 @@
     {
       "width": 360,
       "check": "late translation cannot overwrite commentary"
+    },
+    {
+      "width": 360,
+      "check": "retrieved markup and javascript URLs cannot execute"
     },
     {
       "width": 360,
@@ -79,6 +115,10 @@
     },
     {
       "width": 390,
+      "check": "skip link focuses reading without replacing the passage"
+    },
+    {
+      "width": 390,
       "check": "bookmark and note persist after reload"
     },
     {
@@ -107,6 +147,34 @@
     },
     {
       "width": 390,
+      "check": "all 47 commentary books are reachable through catalogue pagination"
+    },
+    {
+      "width": 390,
+      "check": "commentary book reading preserves non-canonical and unaligned scope"
+    },
+    {
+      "width": 390,
+      "check": "direct commentary-book continuation retains selection"
+    },
+    {
+      "width": 390,
+      "check": "commentary search and bookmark reopen the identical exact source segment"
+    },
+    {
+      "width": 390,
+      "check": "all 109 later works are reachable through catalogue pagination"
+    },
+    {
+      "width": 390,
+      "check": "later work reading preserves scope and attribution"
+    },
+    {
+      "width": 390,
+      "check": "later-work search opens its returned citation rather than a canonical lookalike"
+    },
+    {
+      "width": 390,
       "check": "invalid citation fails visibly without substitution"
     },
     {
@@ -124,6 +192,10 @@
     {
       "width": 390,
       "check": "late translation cannot overwrite commentary"
+    },
+    {
+      "width": 390,
+      "check": "retrieved markup and javascript URLs cannot execute"
     },
     {
       "width": 390,
@@ -143,6 +215,10 @@
     },
     {
       "width": 768,
+      "check": "skip link focuses reading without replacing the passage"
+    },
+    {
+      "width": 768,
       "check": "bookmark and note persist after reload"
     },
     {
@@ -171,6 +247,34 @@
     },
     {
       "width": 768,
+      "check": "all 47 commentary books are reachable through catalogue pagination"
+    },
+    {
+      "width": 768,
+      "check": "commentary book reading preserves non-canonical and unaligned scope"
+    },
+    {
+      "width": 768,
+      "check": "direct commentary-book continuation retains selection"
+    },
+    {
+      "width": 768,
+      "check": "commentary search and bookmark reopen the identical exact source segment"
+    },
+    {
+      "width": 768,
+      "check": "all 109 later works are reachable through catalogue pagination"
+    },
+    {
+      "width": 768,
+      "check": "later work reading preserves scope and attribution"
+    },
+    {
+      "width": 768,
+      "check": "later-work search opens its returned citation rather than a canonical lookalike"
+    },
+    {
+      "width": 768,
       "check": "invalid citation fails visibly without substitution"
     },
     {
@@ -188,6 +292,10 @@
     {
       "width": 768,
       "check": "late translation cannot overwrite commentary"
+    },
+    {
+      "width": 768,
+      "check": "retrieved markup and javascript URLs cannot execute"
     },
     {
       "width": 768,
@@ -207,6 +315,10 @@
     },
     {
       "width": 1280,
+      "check": "skip link focuses reading without replacing the passage"
+    },
+    {
+      "width": 1280,
       "check": "bookmark and note persist after reload"
     },
     {
@@ -235,6 +347,34 @@
     },
     {
       "width": 1280,
+      "check": "all 47 commentary books are reachable through catalogue pagination"
+    },
+    {
+      "width": 1280,
+      "check": "commentary book reading preserves non-canonical and unaligned scope"
+    },
+    {
+      "width": 1280,
+      "check": "direct commentary-book continuation retains selection"
+    },
+    {
+      "width": 1280,
+      "check": "commentary search and bookmark reopen the identical exact source segment"
+    },
+    {
+      "width": 1280,
+      "check": "all 109 later works are reachable through catalogue pagination"
+    },
+    {
+      "width": 1280,
+      "check": "later work reading preserves scope and attribution"
+    },
+    {
+      "width": 1280,
+      "check": "later-work search opens its returned citation rather than a canonical lookalike"
+    },
+    {
+      "width": 1280,
       "check": "invalid citation fails visibly without substitution"
     },
     {
@@ -252,6 +392,10 @@
     {
       "width": 1280,
       "check": "late translation cannot overwrite commentary"
+    },
+    {
+      "width": 1280,
+      "check": "retrieved markup and javascript URLs cannot execute"
     },
     {
       "width": 1280,

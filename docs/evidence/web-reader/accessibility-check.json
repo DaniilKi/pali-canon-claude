@@ -1,0 +1,260 @@
+{
+  "engine": "axe-core 4.14.0",
+  "scans": 28,
+  "violations": 0,
+  "results": [
+    {
+      "width": 390,
+      "theme": "light",
+      "route": "#browse?node=canon",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "route": "#read?uid=dhp183",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "route": "#saved",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "route": "#browse?node=commentary",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "route": "#browse?node=post",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "route": "#read?kind=commentary&uid=commentary%3Aabh01a.att.xml",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "route": "#read?kind=post&uid=Vism%201.1",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "route": "#browse?node=canon",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "route": "#read?uid=dhp183",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "route": "#saved",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "route": "#browse?node=commentary",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "route": "#browse?node=post",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "route": "#read?kind=commentary&uid=commentary%3Aabh01a.att.xml",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "route": "#read?kind=post&uid=Vism%201.1",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "route": "#browse?node=canon",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "route": "#read?uid=dhp183",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "route": "#saved",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "route": "#browse?node=commentary",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "route": "#browse?node=post",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "route": "#read?kind=commentary&uid=commentary%3Aabh01a.att.xml",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "route": "#read?kind=post&uid=Vism%201.1",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "route": "#browse?node=canon",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "route": "#read?uid=dhp183",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "route": "#saved",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "route": "#browse?node=commentary",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "route": "#browse?node=post",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "route": "#read?kind=commentary&uid=commentary%3Aabh01a.att.xml",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "route": "#read?kind=post&uid=Vism%201.1",
+      "violations": [],
+      "manual_review_rules": [
+        "color-contrast"
+      ]
+    }
+  ],
+  "limitations": "Automated DOM checks only; not human accessibility certification. The audit context bypasses CSP to inject the checker; production policy is covered independently."
+}

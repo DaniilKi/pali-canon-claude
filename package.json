@@ -45,6 +45,7 @@
   "devDependencies": {
     "@anthropic-ai/mcpb": "2.1.2",
     "@modelcontextprotocol/sdk": "1.32.2",
+    "axe-core": "4.14.0",
     "esbuild": "0.28.2",
     "zod": "^3.25.76"
   },
