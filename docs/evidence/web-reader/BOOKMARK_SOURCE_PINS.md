@@ -61,3 +61,17 @@ Repeat with `python scripts/web-reader-bookmark-pin-check.py`, optionally
 screen-reader acceptance and actual publisher revision transitions remain
 unverified. No main merge or deployment is part of this change. Hosted exact-head
 CI is a separate integration result.
+
+
+## Long-metadata recovery follow-up
+
+An adversarial 500-character invalid saved title (within the supported title
+bound) exposed a 5,354px document on a 320px viewport. Recovery rows now inherit
+`overflow-wrap:anywhere`, scoped only to Saved results. The bookmark-pin runner
+explicitly checks viewport bounds for real current records and invalid long
+metadata while retaining refusal, no-request and exact-export assertions.
+Rebuild, five targeted unit/CI-contract tests, the 48-case browser and installed
+package checks, 28 accessibility scans and 44 saved-library checks pass. Full
+engine gates above are retained because this follow-up changes only scoped CSS
+and test fixtures. Independent read-only review confirmed that wrapping does not
+change source wording, notes or export data. Final exact-head CI is still required.
