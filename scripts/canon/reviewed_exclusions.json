@@ -21,6 +21,33 @@
         "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
         "root_blocks_sha256": "0dfdcd6efeed68fba40501998b5095a82c11cb86938fa33ef5244809dccc26c6"
       }
+    },
+    {
+      "source": "ati",
+      "url": "https://www.accesstoinsight.org/tipitaka/an/an01/an01.031-040x.wood.html",
+      "status": "withheld-shared-page",
+      "subject_ids": [
+        "an1.31"
+      ],
+      "reason": "Publisher-labelled excerpt combines six historically numbered passages and is not a complete individual translation of indexed AN1.31. Initial tractable/intractable wording disagrees with the indexed AN1.31 great-harm/untamed wording. Numbering and range labels alone cannot establish member alignment; all mappings to this source remain withheld pending a separate content/scope review. subject_ids records the withdrawn binding only; publisher_numbered_passages are unaligned historical labels, not approved canonical IDs.",
+      "review": {
+        "source_url": "https://www.accesstoinsight.org/tipitaka/an/an01/an01.031-040x.wood.html",
+        "observed_on": "2026-11-08",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "71fe483534af0048376bf5d5f9a4b31c373b04f8ed10289b7efb9ad0a01439c3",
+        "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "method": "Inspected full pinned official BCBS HTML and current canonical root. Excerpt headings, ALT_ID and historical numbering warning conflict with full individual ownership. Independent read-only review agreed HOLD, not automatic remap. No English body bundled.",
+        "text_sha256": "c121e1bd3369c058aacc228c881285dc48834d5d60b264b4c1f77b1250a81f14",
+        "notice_sha256": "6f86cb1d553d38360602bc95699ddb6875399fa0c50ef9ed6c45d63bd060bd51"
+      },
+      "publisher_numbered_passages": [
+        "31",
+        "32",
+        "33",
+        "34",
+        "39",
+        "40"
+      ]
     }
   ]
 }

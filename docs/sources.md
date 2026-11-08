@@ -227,12 +227,19 @@ Open an issue with the source, its licence or terms, where it is published, and 
 
 `search_commentary` and direct `get_commentary` book references expose all 47 commentary books already bundled from the pinned VRI source, including introductions and unaligned material. The VRI terms above are unchanged. Search results and direct book reads identify their source and explicitly do not establish root-text alignment. No English commentary translations or additional source rights are supplied by this feature.
 
-### Reviewed ATI shared compilations (D197)
+### Reviewed ATI shared compilations (D197, D199)
 
-Three compiled publisher pages are separately available by explicit shared-page
+Five compiled publisher pages are separately available by explicit shared-page
 consent. Luminous is documented in the [pilot](data/luminous-shared-page-pilot.md).
 The [Water and Gratitude review](data/paired-shared-page-expansion.md) records
 full individual CC BY-NC 4.0 notices: Water ©2006 Ṭhānissaro Bhikkhu, revised
 4 August 2010; Gratitude ©2002, revised 30 November 2013. English remains live,
 with complete source notices and citations; it is not bundled or relicensed.
 Counts and quote results concern shared pages, not individually aligned translations.
+
+The [early AN review](data/early-an-shared-page-expansion.md) adds the twenty-passage
+A Single Thing page and two-passage Voice page, both ©2006 Ṭhānissaro Bhikkhu,
+ATI revision 30 November 2013, CC BY-NC 4.0. Voice includes a translator’s
+editorial note; it is not individually aligned root speech. The older BPS Woodward
+Untamed excerpt is withheld globally as mis-scoped; this does not relicense it
+or approve a replacement mapping.
