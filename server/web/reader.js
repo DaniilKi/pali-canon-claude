@@ -684,6 +684,7 @@
     }
     if (scope.kind === "partial_unit") {
       const prefix = requestedId + "/";
+      if (choice.translation_id.startsWith("ati:") && (scope.extractor !== "ati-freeverse-v1" || !sha(scope.notice_sha256))) fail2();
       if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail2();
       return { kind: scope.kind, label: "Partial-unit source", scope: JSON.parse(JSON.stringify(scope)), flags: { allow_partial: true, scope_sha256: scope.scope_sha256 } };
     }

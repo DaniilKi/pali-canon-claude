@@ -1,3 +1,4 @@
+import {assertRegisteredPartial} from './partial-source-registry.mjs';
 import { isPartial, partialScope, isShared, isScoped, sharedScope } from './translation-scope.mjs';
 import { searchSegments, searchFold, searchExcerpt, searchTerms, searchReading, assertSearchQuery, isSourcePhrase } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
@@ -88,6 +89,8 @@ export function load() {
   const canon = JSON.parse(gunzipSync(readBundled(dataPath('canon.json.gz'))).toString('utf8'));
   const translations = JSON.parse(readFileSync(dataPath('translations.json'), 'utf8'));
   mergeAnandajoti(translations);
+  const partialRegistry=JSON.parse(readFileSync(dataPath('reviewed-partial-pages.json'),'utf8'));
+  if(partialRegistry.version!==1||partialRegistry.vri_commit!==canon.source.commit||!Array.isArray(partialRegistry.links)||!partialRegistry.links.length)throw Error('Invalid registered partial source metadata.');
   const byId = new Map();
   for (const u of canon.units) if (!byId.has(u.id)) byId.set(u.id, u);
   const ranges = [];
@@ -103,7 +106,7 @@ export function load() {
       for (const part of link.parts || []) urlIndex.set(`ancient-buddhist-texts.net${part}`.replace(/\.html?$/, ''), id);
     }
   }
-  data = { canon, byId, ranges, translations, urlIndex, search: null };
+  data = { canon, byId, ranges, translations, urlIndex, partialRegistry, search: null };
   return data;
 }
 
@@ -143,6 +146,7 @@ function ownersOf(links, wanted) {
 }
 
 export function translationScope(link, unit) {
+  assertRegisteredPartial(link,unit,load().partialRegistry);
   if (isShared(link)) return sharedScope(link, unit, load().byId, segments, source());
   return partialScope(link, unit, segments(unit), source());
 }
@@ -170,6 +174,7 @@ export function linksFor(u) {
   const d = load();
   const shared = sharedFor(u, d);
   const own = (d.translations[u.id] || []).filter(link => !isShared(link));
+  for(const link of own)assertRegisteredPartial(link,u,d.partialRegistry);
   if (own.length) {
     for (const link of own) if (isPartial(link)) {
       translationScope(link, u);
@@ -308,6 +313,7 @@ export function resolve(reference) {
     if (!id) throw new CitationError('That page is not linked to a canon text in the bundled index. Give the sutta citation instead.');
     sharedFor(d.byId.get(id), d);
     for (const link of d.translations[id] || []) {
+      assertRegisteredPartial(link,d.byId.get(id),d.partialRegistry);
       if (isShared(link)) {
         const scope = translationScope(link, d.byId.get(id));
         const urls = [link.url, ...(link.parts || []).map(path => ANANDAJOTI_BASE + path)];

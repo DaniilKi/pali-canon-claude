@@ -21,8 +21,9 @@ Give AI assistants the complete Theravāda scripture (the Pāli Tipiṭaka) so t
 ## Current state (v2.1.0, November 2026)
 
 - 8,544 citable texts across 61 VRI books; 1,259 grouped members; 266 approximate; 11,964 PTS page markers; about 2.8 million words.
-- 2,577 English links (1,274 dhammatalks.org, 1,150 Access to Insight, 153 Ancient Buddhist Texts by Ānandajoti Bhikkhu; 64 placed by the content-based linker, D57), covering 1,448 texts directly and 1,871 including inherited verse links (`list_sources` `translation_coverage` counts ranges through their members: 1,422 and 1,845). No English for the Vinaya; the Abhidhamma has four texts (Ds 1.1, Ds 1.3, Vb 6, Vb 7).
-- Twelve additional shared ATI publisher pages (eight compilations and four condensed pages) concern 110 actual indexed source records. These include five primary VRI peyyāla range records, not invented individual members. They are excluded from whole-unit totals and require exact-ID `allow_shared` / `include_shared` consent, page-level/null-ID results and text/notice pins. `reviewed_shared_pages.json` plus the Node/Python build verifies scope; the separate dhammatalks Mother and Woodward holds, five unsupported Itivuttaka page holds, and single-unit condensed holds remain. See D195, D197, D199, D200, D201, D202, D203 and D204; never count source-group children as separately translated texts.
+- 2,574 English links (1,274 dhammatalks.org, 1,147 Access to Insight, 153 Ancient Buddhist Texts by Ānandajoti Bhikkhu; 64 placed by the content-based linker, D57), covering 1,447 texts directly and 1,870 including inherited verse links (`list_sources` `translation_coverage` counts ranges through their members: 1,421 and 1,844). No English for the Vinaya; the Abhidhamma has four texts (Ds 1.1, Ds 1.3, Vb 6, Vb 7).
+- Two reviewed ATI verse excerpts concern Ānanda1037–1039 and Sirimaṇḍa448–452. Only the former is partial-only; neither counts as a whole translation. `reviewed_partial_pages.json` controls activation and the packaged registry prevents whole-container downgrades. Exact consent, verse-only extraction, complete-notice and text/Pāli pins are mandatory (D205).
+- Twelve additional shared ATI publisher pages (eight compilations and four condensed pages) concern 110 actual indexed source records. These include five primary VRI peyyāla range records, not invented individual members. They are excluded from whole-unit totals and require exact-ID `allow_shared` / `include_shared` consent, page-level/null-ID results and text/notice pins. `reviewed_shared_pages.json` plus the Node/Python build verifies scope; the separate dhammatalks Mother and Woodward holds, five unsupported Itivuttaka page holds, and single-unit condensed holds remain. See D195, D197, D199, D200, D201, D202, D203, D204 and D205; never count source-group children as separately translated texts.
 - Data-lane features in the core tools: Thai/Myanmar/VRI edition pages (56,050 markers) in `get_text` segments and `describe`, and accepted as citations such as "Thai MN 1.103" (`src/editions.mjs`, D51); structured variant readings with `get_text` `variants: "structured"` (`src/variants.mjs`, D52; `includeVariants` still means raw); a `script` option on `get_text`, `search_texts` and `resolve_reference` for Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao and Lanna, with input in any of them accepted (`src/script.mjs`, D50). Lao and Lanna have no VRI edition to test against and await a native-reader check (HANDOFF).
 - 34 MCP tools (11 core in `src/server.mjs` + 23 from feature modules), 3 resources (`pali://sources`, `pali://canon-guide`, `pali://pronunciation`), 4 prompts (`study_passage`, `compare_translations`, `topic_research`, `memorise_passage`); 5 skills (`study`, `compare`, `pali-word`, `method`, `memorise`). The hosted HTTP server adds a 35th tool, `read_passage_widget`, when `CHATGPT_WIDGET=1` (on in `fly.toml` and `render.yaml`). `npm run smoke` prints the live counts.
 - Feature registry (`src/features/index.mjs`, one line per module): `verify` (verify_quote), `findCitations` (find_citations), `calendar` (uposatha, festivals), `daily` (daily_text, reading_plan), `topics` (topic, list_topics, dhamma_list), `dppn` (lookup_name), `vinayaBmc` (vinaya_rule), `abhidhamma` (abhidhamma_matika, patthana_condition), `pronunciation` (pali://pronunciation resource), `paritta` (paritta), `talks` (find_talks), `memorise` (memorise_passage prompt), `commentary` (get_commentary, including direct book references), `commentarySearch` (search_commentary), `sourceBookSearch` (search_source_book), `postCanonical` (get_post_canonical, search_post_canonical), `analyse` (analyse_passage), `parallels` (get_parallels), `glossary` (glossary). `scripts/expected-tools.mjs` derives the exact tool names from these files; tests and smoke compare against it, never a hard-coded count.
@@ -309,8 +310,9 @@ hard-coded assumption that Iti10 has a whole-unit link. Daily choices depend on
 the corrected eligible source pool; do not change the algorithm to preserve a
 stale dated fixture. Historical review counts stay historical.
 
-D204: ten ATI excerpt bindings are held as partial units, preserving other
-versions. Do not remove these holds to recover counts. Inspect complete bodies,
+D204 recorded ten ATI excerpt holds, preserving other versions. D205 retired
+only Sirimaṇḍa’s exact hold for a pinned partial source; the current exclusion
+manifest remains authoritative. Do not remove these holds to recover counts. Inspect complete bodies,
 not just EXTENT flags or PTS headers. The screen annotates frozen retained
 reviews only when link/root/commit pins match; it never grants retrieval or
 upstream freshness. Bibliographic abbreviated range ends affect triage only.
@@ -328,3 +330,19 @@ check (normal/a11y/installed) for mapping changes, not just synthetic commit dri
 
 Regenerate the parallels artifact after canon metadata changes too (including
 locator/index revision fields): its provenance hash depends on the full dataset.
+
+### Reviewed ATI partial pages
+
+Use `reviewed_partial_pages.py` and its source verifier for the two approved
+verse-only mappings. Never restore either as an ordinary link or loosen a
+contiguous span to absorb missing/discontinuous verses. Keep the authoritative
+registry in sync through the build. ATI partial scope must retain the extractor,
+canonical path/URL, text/Pāli and complete-notice pins. Removing the entire
+container must fail through registry validation, not silently create coverage.
+The article and partial caches are distinct. Editorial material is not scripture.
+Run partial-pilot/build tests, existing partial tests and the installed partial
+audit; the actual-source browser check requires the pinned local ATI checkout.
+Reports must distinguish frozen-source, synthetic-provider and live evidence.
+D204's ten holds are historical: only Sirimaṇḍa's exact hold was retired for
+the D205 pilot; the remaining holds still apply. No Ānanda whole version exists
+in the index after correcting its two excerpt links.

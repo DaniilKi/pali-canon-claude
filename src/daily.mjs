@@ -1,3 +1,4 @@
+import {assertRegisteredPartial} from './partial-source-registry.mjs';
 // Daily text and reading plans (issue #45). Everything is chosen from the bundled VRI canon:
 // no scripture is generated, and the study-guide plans list citations and links only.
 import { isScoped } from './translation-scope.mjs';
@@ -47,6 +48,7 @@ let cache = null;
 function pools(canon) {
   if (cache?.canon === canon) return cache;
   const d = canon.load();
+  for(const u of d.canon.units)for(const link of d.translations[u.id]||[])assertRegisteredPartial(link,u,d.partialRegistry||{links:[]});
   const num = (id) => Number(id.match(/(\d+)$/)?.[1] ?? 0);
   const verses = d.canon.units.filter((u) => u.collection === 'dhp' && u.kind !== 'range' && /^dhp\d+$/.test(u.id))
     .sort((a, b) => num(a.id) - num(b.id));

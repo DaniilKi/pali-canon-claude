@@ -513,6 +513,10 @@ def main():
     out, report['shared_page_proposals_withheld'] = withhold_shared_page_proposals(out)
     if '--content' in sys.argv:
         out, report['reviewed_shared_pages'] = apply_reviewed_shared_links(out, canon, ati_root)
+    from reviewed_partial_pages import withhold_partial_page_proposals, apply_reviewed_partial_links
+    out, report['partial_page_proposals_withheld'] = withhold_partial_page_proposals(out)
+    if '--content' in sys.argv:
+        out, report['reviewed_partial_pages'] = apply_reviewed_partial_links(out, canon, ati_root)
     from reviewed_exclusions import apply_reviewed_exclusions
     out, report['reviewed_exclusions'] = apply_reviewed_exclusions(out)
     json.dump(out, open(sys.argv[4], 'w'), ensure_ascii=False, separators=(',', ':'))
