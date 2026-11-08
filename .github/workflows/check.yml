@@ -91,11 +91,17 @@ jobs:
       - run: python -m playwright install --with-deps chromium
       - name: Check reader layout, continuation and accessibility semantics offline
         run: python scripts/widget-browser-check.py --report widget-browser.report.json
+      - name: Check standalone web reader against real bundled text
+        run: |
+          npm run build
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-browser-check.py > standalone-reader.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: widget-browser-report
-          path: widget-browser.report.json
+          path: |
+            widget-browser.report.json
+            standalone-reader.report.json
           if-no-files-found: warn
   check:
     name: Node ${{ matrix.node }} / ${{ matrix.os }}

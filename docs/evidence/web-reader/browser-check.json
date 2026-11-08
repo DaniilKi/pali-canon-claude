@@ -1,0 +1,265 @@
+{
+  "passed": 65,
+  "checks": [
+    {
+      "width": 360,
+      "check": "real catalogue and no horizontal overflow"
+    },
+    {
+      "width": 360,
+      "check": "collection navigation"
+    },
+    {
+      "width": 360,
+      "check": "exact real passage and attribution"
+    },
+    {
+      "width": 360,
+      "check": "bookmark and note persist after reload"
+    },
+    {
+      "width": 360,
+      "check": "native script and night theme"
+    },
+    {
+      "width": 360,
+      "check": "largest text setting has no horizontal overflow"
+    },
+    {
+      "width": 360,
+      "check": "commentary kept distinct from root"
+    },
+    {
+      "width": 360,
+      "check": "translation selection without a remote fetch"
+    },
+    {
+      "width": 360,
+      "check": "real canonical search"
+    },
+    {
+      "width": 360,
+      "check": "complete source-book pagination"
+    },
+    {
+      "width": 360,
+      "check": "invalid citation fails visibly without substitution"
+    },
+    {
+      "width": 360,
+      "check": "HTTP outage and recoverable error"
+    },
+    {
+      "width": 360,
+      "check": "retry returns real passage"
+    },
+    {
+      "width": 360,
+      "check": "translation continuation preserves exact selector and source-prefix guard"
+    },
+    {
+      "width": 360,
+      "check": "late translation cannot overwrite commentary"
+    },
+    {
+      "width": 360,
+      "check": "keyboard navigation activates the saved-passage screen"
+    },
+    {
+      "width": 390,
+      "check": "real catalogue and no horizontal overflow"
+    },
+    {
+      "width": 390,
+      "check": "collection navigation"
+    },
+    {
+      "width": 390,
+      "check": "exact real passage and attribution"
+    },
+    {
+      "width": 390,
+      "check": "bookmark and note persist after reload"
+    },
+    {
+      "width": 390,
+      "check": "native script and night theme"
+    },
+    {
+      "width": 390,
+      "check": "largest text setting has no horizontal overflow"
+    },
+    {
+      "width": 390,
+      "check": "commentary kept distinct from root"
+    },
+    {
+      "width": 390,
+      "check": "translation selection without a remote fetch"
+    },
+    {
+      "width": 390,
+      "check": "real canonical search"
+    },
+    {
+      "width": 390,
+      "check": "complete source-book pagination"
+    },
+    {
+      "width": 390,
+      "check": "invalid citation fails visibly without substitution"
+    },
+    {
+      "width": 390,
+      "check": "HTTP outage and recoverable error"
+    },
+    {
+      "width": 390,
+      "check": "retry returns real passage"
+    },
+    {
+      "width": 390,
+      "check": "translation continuation preserves exact selector and source-prefix guard"
+    },
+    {
+      "width": 390,
+      "check": "late translation cannot overwrite commentary"
+    },
+    {
+      "width": 390,
+      "check": "keyboard navigation activates the saved-passage screen"
+    },
+    {
+      "width": 768,
+      "check": "real catalogue and no horizontal overflow"
+    },
+    {
+      "width": 768,
+      "check": "collection navigation"
+    },
+    {
+      "width": 768,
+      "check": "exact real passage and attribution"
+    },
+    {
+      "width": 768,
+      "check": "bookmark and note persist after reload"
+    },
+    {
+      "width": 768,
+      "check": "native script and night theme"
+    },
+    {
+      "width": 768,
+      "check": "largest text setting has no horizontal overflow"
+    },
+    {
+      "width": 768,
+      "check": "commentary kept distinct from root"
+    },
+    {
+      "width": 768,
+      "check": "translation selection without a remote fetch"
+    },
+    {
+      "width": 768,
+      "check": "real canonical search"
+    },
+    {
+      "width": 768,
+      "check": "complete source-book pagination"
+    },
+    {
+      "width": 768,
+      "check": "invalid citation fails visibly without substitution"
+    },
+    {
+      "width": 768,
+      "check": "HTTP outage and recoverable error"
+    },
+    {
+      "width": 768,
+      "check": "retry returns real passage"
+    },
+    {
+      "width": 768,
+      "check": "translation continuation preserves exact selector and source-prefix guard"
+    },
+    {
+      "width": 768,
+      "check": "late translation cannot overwrite commentary"
+    },
+    {
+      "width": 768,
+      "check": "keyboard navigation activates the saved-passage screen"
+    },
+    {
+      "width": 1280,
+      "check": "real catalogue and no horizontal overflow"
+    },
+    {
+      "width": 1280,
+      "check": "collection navigation"
+    },
+    {
+      "width": 1280,
+      "check": "exact real passage and attribution"
+    },
+    {
+      "width": 1280,
+      "check": "bookmark and note persist after reload"
+    },
+    {
+      "width": 1280,
+      "check": "native script and night theme"
+    },
+    {
+      "width": 1280,
+      "check": "largest text setting has no horizontal overflow"
+    },
+    {
+      "width": 1280,
+      "check": "commentary kept distinct from root"
+    },
+    {
+      "width": 1280,
+      "check": "translation selection without a remote fetch"
+    },
+    {
+      "width": 1280,
+      "check": "real canonical search"
+    },
+    {
+      "width": 1280,
+      "check": "complete source-book pagination"
+    },
+    {
+      "width": 1280,
+      "check": "invalid citation fails visibly without substitution"
+    },
+    {
+      "width": 1280,
+      "check": "HTTP outage and recoverable error"
+    },
+    {
+      "width": 1280,
+      "check": "retry returns real passage"
+    },
+    {
+      "width": 1280,
+      "check": "translation continuation preserves exact selector and source-prefix guard"
+    },
+    {
+      "width": 1280,
+      "check": "late translation cannot overwrite commentary"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard navigation activates the saved-passage screen"
+    },
+    {
+      "width": "all",
+      "check": "disabled browser storage does not break reader or claim persistence"
+    }
+  ]
+}

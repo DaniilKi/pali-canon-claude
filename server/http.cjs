@@ -8001,8 +8001,8 @@ var Response$1 = class Response$12 {
   #body;
   #init;
   [getResponseCache]() {
-    const cache2 = this[cacheKey];
-    const liveHeaders = cache2 && cache2[2] instanceof Headers ? cache2[2] : void 0;
+    const cache3 = this[cacheKey];
+    const liveHeaders = cache3 && cache3[2] instanceof Headers ? cache3[2] : void 0;
     delete this[cacheKey];
     return this[responseCache] ||= new GlobalResponse(this.#body, liveHeaders ? {
       status: this.#init?.status,
@@ -8030,10 +8030,10 @@ var Response$1 = class Response$12 {
     ];
   }
   get headers() {
-    const cache2 = this[cacheKey];
-    if (cache2) {
-      if (!(cache2[2] instanceof Headers)) cache2[2] = new Headers(cache2[2] || (cache2[1] === null ? void 0 : { "content-type": defaultContentType }));
-      return cache2[2];
+    const cache3 = this[cacheKey];
+    if (cache3) {
+      if (!(cache3[2] instanceof Headers)) cache3[2] = new Headers(cache3[2] || (cache3[1] === null ? void 0 : { "content-type": defaultContentType }));
+      return cache3[2];
     }
     return this[getResponseCache]().headers;
   }
@@ -27060,8 +27060,8 @@ function select(reference) {
   return sel && settle(sel, sel.book.blocks);
 }
 function sourceInfo(d) {
-  const { name, repository, commit, files, attribution: attribution2, terms: terms4 } = d.source;
-  return { name, repository, commit, files, attribution: attribution2, terms: terms4 };
+  const { name, repository, commit, files: files2, attribution: attribution2, terms: terms4 } = d.source;
+  return { name, repository, commit, files: files2, attribution: attribution2, terms: terms4 };
 }
 function bookInfo(book) {
   return { id: book.id, title: book.title, vri_file: book.file, vri_section: book.section, vri_group: book.group, canonical: false };
@@ -28462,7 +28462,7 @@ function findWindows(corpus, qwords, { keep = KEEP_WINDOWS } = {}) {
   return picked;
 }
 function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.length } = {}) {
-  const join11 = corpus.compounds ? "" : " ";
+  const join12 = corpus.compounds ? "" : " ";
   const Q = trigrams(corpus.compounds ? query.replace(/ /g, "") : query);
   const qlen = qwords.length;
   const variantSets = qwords.map((w) => new Set(corpus.variants(w).map((v) => v.id)));
@@ -28480,7 +28480,7 @@ function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.len
       const b = a + len;
       if (b > max) continue;
       const ids = corpus.tokens.subarray(a, b);
-      const dice = similarity(Q, Array.from(ids, (id) => corpus.vocab[id]).join(join11));
+      const dice = similarity(Q, Array.from(ids, (id) => corpus.vocab[id]).join(join12));
       if (dice <= best.sim) continue;
       const present = new Set(ids);
       const joined = corpus.compounds ? Array.from(ids, (id) => corpus.vocab[id]).join("") : "";
@@ -33277,8 +33277,8 @@ function readBook2(uid, { offset = 0, limit = 40 } = {}) {
   };
 }
 function sourceInfo2(d) {
-  const { name, repository, commit, files, attribution: attribution2, terms: terms4 } = d.source;
-  return { name, repository, commit, files, attribution: attribution2, terms: terms4 };
+  const { name, repository, commit, files: files2, attribution: attribution2, terms: terms4 } = d.source;
+  return { name, repository, commit, files: files2, attribution: attribution2, terms: terms4 };
 }
 function describePassage(d, pi) {
   const [bi, , , rootBook, a, b, checked, hits, evidence] = d.passages[pi];
@@ -33919,7 +33919,7 @@ function search3(query, { books, offset = 0, limit = 10 } = {}) {
       });
     }
   }
-  const { name, repository, commit, files, attribution: attribution2, terms: licence } = data5.source;
+  const { name, repository, commit, files: files2, attribution: attribution2, terms: licence } = data5.source;
   return {
     query,
     canonical: false,
@@ -33933,7 +33933,7 @@ function search3(query, { books, offset = 0, limit = 10 } = {}) {
     next_offset: offset + results.length < total ? offset + results.length : null,
     results,
     alignment_note: "Search covers the included commentary books, including material with no verified root-text alignment. A hit does not establish which canonical passage it explains.",
-    source: { name, repository, commit, files, attribution: attribution2, terms: licence }
+    source: { name, repository, commit, files: files2, attribution: attribution2, terms: licence }
   };
 }
 function register18({ tool, z }) {
@@ -35427,6 +35427,42 @@ var HttpToolWorker = class {
   }
 };
 
+// src/web-reader.mjs
+var import_node_fs7 = require("node:fs");
+var import_node_path11 = require("node:path");
+var import_node_url11 = require("node:url");
+var import_meta10 = {};
+var here10;
+try {
+  here10 = __dirname;
+} catch {
+  here10 = (0, import_node_path11.dirname)((0, import_node_url11.fileURLToPath)(import_meta10.url));
+}
+var folder = [(0, import_node_path11.join)(here10, "web"), (0, import_node_path11.join)(here10, "../web")].find((p) => (0, import_node_fs7.existsSync)((0, import_node_path11.join)(p, "index.html")));
+var files = /* @__PURE__ */ new Map([
+  ["/", ["index.html", "text/html; charset=utf-8"]],
+  ["/reader", ["index.html", "text/html; charset=utf-8"]],
+  ["/reader.js", ["reader.js", "text/javascript; charset=utf-8"]],
+  ["/reader.css", ["reader.css", "text/css; charset=utf-8"]]
+]);
+var cache2 = /* @__PURE__ */ new Map();
+function serveReader(req, res, path) {
+  const file = files.get(path);
+  if (!file || !["GET", "HEAD"].includes(req.method)) return false;
+  if (!folder) throw new Error("Reader assets missing; rebuild the server.");
+  if (!cache2.has(file[0])) cache2.set(file[0], (0, import_node_fs7.readFileSync)((0, import_node_path11.join)(folder, file[0])));
+  res.writeHead(200, {
+    "Content-Type": file[1],
+    "Cache-Control": "no-cache",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "no-referrer",
+    "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
+  });
+  res.end(req.method === "HEAD" ? void 0 : cache2.get(file[0]));
+  return true;
+}
+
 // src/http-server.mjs
 var MAX_BODY = 1024 * 1024;
 var MCP_METHODS = new Set([...ClientRequestSchema.options, ...ClientNotificationSchema.options].map((schema) => schema.shape.method.value));
@@ -35582,11 +35618,7 @@ function createHttpServer({
         });
         return;
       }
-      if (path === "/" && (req.method === "GET" || req.method === "HEAD")) {
-        send(res, 200, `P\u0101li Canon MCP server ${VERSION}. Connect an MCP client to /mcp (Streamable HTTP). Health: /healthz. Source: https://github.com/DaniilKi/pali-canon-claude
-`);
-        return;
-      }
+      if (serveReader(req, res, path)) return;
       if (path !== "/mcp") {
         send(res, 404, "Not found. The MCP endpoint is /mcp.");
         return;

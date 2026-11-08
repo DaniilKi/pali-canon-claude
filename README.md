@@ -17,6 +17,7 @@ Pali Canon for Claude gives Claude the complete Pāli Tipiṭaka, the scripture 
 - [Our approach](#our-approach)
 - [Sources at a glance](#sources-at-a-glance)
 - [How accuracy is checked](#how-accuracy-is-checked)
+- [Standalone web reader](docs/web-app.md)
 - [Install](#install)
 - [Using it well](#using-it-well)
 - [Typing Pāli on an English keyboard](#typing-pāli-on-an-english-keyboard)
@@ -39,6 +40,10 @@ Christians and Muslims already have many AI study tools, from Bible and Quran se
 - repeat popular quotes that are not in the texts at all.
 
 **Our mission** is to bring the rigour of traditional and academic Buddhist scholarship together with the best openly available Pāli and Theravāda resources, in one modern tool built for AI. We started with Claude. The same tool now also works in Codex, Gemini CLI and code editors, with ChatGPT and a hosted web version next. All the while we are building a **proven, verifiable repository of knowledge**: every passage comes from a named source and every claim can be checked.
+
+## Standalone web reader
+
+You can also browse and read without an AI client. Run `npm run build` and `npm run serve`, then open **http://localhost:8080/**. The responsive reader includes canonical browsing/search, complete source books, linked English choices, commentary, reading preferences and browser-local bookmarks/notes. It is not deployed by this branch and does not yet provide offline browser downloads or account sync. See the [web-reader guide and next priorities](docs/web-app.md).
 
 ## What it does
 

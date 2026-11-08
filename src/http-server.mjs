@@ -17,6 +17,7 @@ import { liveCache } from './cache.mjs';
 import { load } from './canon.mjs';
 import { registerChatgptWidget, WIDGET_TOOL } from './chatgpt-widget.mjs';
 import { HttpToolWorker } from './http-tool-worker.mjs';
+import { serveReader } from './web-reader.mjs';
 
 const MAX_BODY = 1024 * 1024;
 // Derive protocol labels from the installed SDK; arbitrary request strings must not become permanent keys.
@@ -173,10 +174,7 @@ export function createHttpServer({
         return;
       }
 
-      if (path === '/' && (req.method === 'GET' || req.method === 'HEAD')) {
-        send(res, 200, `Pāli Canon MCP server ${VERSION}. Connect an MCP client to /mcp (Streamable HTTP). Health: /healthz. Source: https://github.com/DaniilKi/pali-canon-claude\n`);
-        return;
-      }
+      if (serveReader(req, res, path)) return;
 
       if (path !== '/mcp') { send(res, 404, 'Not found. The MCP endpoint is /mcp.'); return; }
 

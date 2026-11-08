@@ -1,10 +1,11 @@
 import { shardData } from './shard-data.mjs';
 import { build } from 'esbuild';
-import { chmod, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { chmod, mkdir, readFile, readdir, writeFile, cp } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 
 shardData('server/data');
 await mkdir('server', { recursive: true });
+await cp('web', 'server/web', { recursive: true });
 const common = {
   bundle: true, platform: 'node', target: 'node20', format: 'cjs', minify: false,
   banner: { js: '#!/usr/bin/env node' }, legalComments: 'eof',

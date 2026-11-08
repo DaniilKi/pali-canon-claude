@@ -222,3 +222,7 @@ Human documentation is for **non-technical readers first**: plain English, short
 | [scripts/canon/README.md](scripts/canon/README.md) | Data pipeline commands |
 | [docs/archive/v1-research.md](docs/archive/v1-research.md) | Superseded v1 research (historical) |
 | [THIRD_PARTY.md](THIRD_PARTY.md), [CONTRIBUTING.md](CONTRIBUTING.md) | Licences; contribution guide |
+
+## Standalone web reader
+
+The HTTP root and `/reader` serve the first standalone reading interface from `web/` through `src/web-reader.mjs`. It calls existing MCP tools; do not fork the corpus or bypass provider/schema/attribution rules. Build copies assets into `server/web/` (commit them), with Docker/npm packaging coverage. See [docs/web-app.md](docs/web-app.md). Run `tests/web-reader.test.mjs` plus `scripts/web-reader-browser-check.py` when changing the interface. Browser-local bookmarks are personal data, not scripture; there is no offline PWA or account sync yet.

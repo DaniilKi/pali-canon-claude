@@ -1204,3 +1204,11 @@ D184 validation also exposed the expected daily-sutta pool shift after adding an
 - **Rebuild safety.** An unconditional final reviewed-exclusion pass follows every linker, including normal and `--content` builds. Globally withhold the known URL, including wrong-owner/scoped-field attempts, until deliberately retired after complete shared integration. Invalid manifest fails; input stays immutable/idempotent; control source survives actual ordinary builder regression. Canonical refresh does not automatically lift the hold.
 - **Alternates.** ATI SN 1.71 (Ṭhānissaro), SN 17.5 (Walshe/BPS) and AN 7.51→indexed7.54 (Ṭhānissaro), with full source/root pins and checked rights. Preserve original first choices, omitted setting/repeated-summary notes and publisher typo caution. Walshe’s free/50-print-copy/derivative/full-notice conditions are returned intact, never relabelled CC. Hold Walshe SN 1.25's absent initial exchange and condensed later exchange.
 - **Honest counts.** Three choices plus one quarantine = net+2 links, zero first-English gains, direct/inherited counts down one. Totals2,596 /1,450 /1,873; provider1,424/1,847; queue60/13 potential gaps. Daily fixture MN28 follows corrected eligible pool, with unchanged algorithm. Main/deployment untouched.
+
+
+### D195. Add a standalone web-reader slice without a second corpus or content API
+
+- The existing stateless HTTP server serves first-party responsive assets at `/` and `/reader`, with fixed routes, same-origin MCP calls and restrictive CSP. MCP client/widget contracts remain unchanged.
+- Canonical browse/search, source books, Pāli pagination, explicit live English selection, labelled commentary, script/theme/font preferences and local bookmarks/notes are implemented. Content is DOM text, never injected HTML. Navigation and study requests independently reject stale results.
+- Personal data remains browser-local with JSON export. No accounts, sync, service worker, translation cache, new content source, paid feature, deployment or main/dev merge. App assets are included in the npm/container build.
+- Desktop/phone browser checks use real bundled content plus labelled synthetic outage/race fixtures. Safari/Firefox, physical devices, screen-reader/native-script review, broader tool UI and source-specific offline rights remain separate acceptance work.
