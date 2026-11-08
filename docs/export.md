@@ -62,3 +62,9 @@ Translation links follow the project's strict rules: no link is better than a wr
 ## Licence
 
 The Pāli titles and page markers come from the Chaṭṭha Saṅgāyana Tipiṭaka of the Vipassana Research Institute, which VRI makes freely available **for non-commercial use with attribution**. Credit: *Vipassana Research Institute (VRI), Chaṭṭha Saṅgāyana Tipiṭaka, www.tipitaka.org*. Linked translations stay with their publishers and keep their own licences (dhammatalks.org: CC BY-NC 4.0; Access to Insight: varies by page, labelled on each link; Ancient Buddhist Texts: CC BY-SA 3.0). Do not sell this data or the content it points to. Citation numbering follows the public scheme also used by SuttaCentral; no SuttaCentral content is included. Details: [THIRD_PARTY.md](../THIRD_PARTY.md).
+
+D209 follow-up: SN12.22 Walshe is restored only as the exact229:977 substring of `sn12.22/4`, with explicit version2 partial scope, original ©1985 BPS full notice and ≤50-copy reprint limit. Its seven editorial notes are excluded from translation wording. There are ten partial sources/four partial-only units, with unchanged whole-English counts. SN12.21 receives only its own source-backed short commentary. See [scope and rights evidence](data/dasabala-commentary-and-subparagraph.md).
+
+`BPS-free-distribution-1985`: Buddhist Publication Society ©1985 free-distribution notice (not Creative Commons). This internal identifier names the pinned SN12.22 Walshe notice; copies must be free, reprints limited to50, derivatives/source identified, and the complete notice retained. It creates no new grant.
+
+Version2 prose-substring entries retain exact character bounds, paragraph and scope hashes, and `pali_excerpt.text_omitted: true`; literal Pāli excerpt wording is excluded from JSON and CSV. Reload native source metadata for an actual scope review. A bulk index does not establish source consent or whole translation coverage.

@@ -23747,24 +23747,32 @@ function partialScope(link, unit, segments2, source4) {
   const fail = () => {
     throw new Error("Invalid or unreviewed partial translation scope. No whole-unit coverage or source retrieval is inferred.");
   };
-  const fields = /* @__PURE__ */ new Set(["version", "status", "unit_id", "first_ref", "last_ref", "source_commit", "pali_sha256", "text_sha256", "notice_sha256", "extractor"]);
-  if (!p || p.version !== 1 || Object.keys(p).some((k) => !fields.has(k)) || p.status !== "reviewed" || p.unit_id !== unit.id || p.source_commit !== source4.commit || !sha(p.pali_sha256) || !sha(p.text_sha256) || unit.approximate) fail();
+  const fields = /* @__PURE__ */ new Set(["version", "status", "unit_id", "first_ref", "last_ref", "source_commit", "pali_sha256", "text_sha256", "notice_sha256", "extractor", "subparagraph"]);
+  if (!p || ![1, 2].includes(p.version) || Object.keys(p).some((k) => !fields.has(k)) || p.status !== "reviewed" || p.unit_id !== unit.id || p.source_commit !== source4.commit || !sha(p.pali_sha256) || !sha(p.text_sha256) || unit.approximate) fail();
   const first = segments2.findIndex((s) => s.ref === p.first_ref);
   const last = segments2.findIndex((s) => s.ref === p.last_ref);
   if (first < 0 || last < first || first === 0 && last === segments2.length - 1) fail();
   if (!segments2.slice(first, last + 1).some((s) => s.type !== "heading") || !segments2.some((s, i) => s.type !== "heading" && (i < first || i > last))) fail();
   const selected = segments2.slice(first, last + 1).map(({ ref, type, text }) => ({ ref, type, text }));
+  let excerpt;
+  if (p.version === 2) {
+    const part = p.subparagraph, seg = selected[0];
+    if (link.source !== "ati" || p.extractor !== "ati-chapter-prose-v1" || first !== last || seg.type !== "prose" || !part || Object.keys(part).sort().join(",") !== "end_char,offset_unit,segment_sha256,start_char" || part.offset_unit !== "utf16_code_units" || !sha(part.segment_sha256) || scopeHash(seg) !== part.segment_sha256 || !Number.isSafeInteger(part.start_char) || !Number.isSafeInteger(part.end_char) || part.start_char < 0 || part.end_char <= part.start_char || part.end_char > seg.text.length || part.start_char === 0 && part.end_char === seg.text.length) fail();
+    for (const at of [part.start_char, part.end_char]) if (at > 0 && at < seg.text.length && /[\uD800-\uDBFF]/.test(seg.text[at - 1]) && /[\uDC00-\uDFFF]/.test(seg.text[at])) fail();
+    seg.text = seg.text.slice(part.start_char, part.end_char);
+    excerpt = { ...seg, ...part };
+  } else if (Object.hasOwn(p, "subparagraph")) fail();
   if (scopeHash(selected) !== p.pali_sha256) fail();
   if (!["dhammatalks", "ati", "anandajoti"].includes(link.source)) fail();
   if (link.source === "ati") {
-    if (p.extractor !== "ati-freeverse-v1" || !sha(p.notice_sha256) || typeof link.path !== "string" || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes("..") || link.url !== "https://accesstoinsight.org" + link.path + ".html") fail();
+    if (p.extractor !== (p.version === 2 ? "ati-chapter-prose-v1" : "ati-freeverse-v1") || !sha(p.notice_sha256) || typeof link.path !== "string" || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes("..") || link.url !== "https://accesstoinsight.org" + link.path + ".html") fail();
   } else if (Object.hasOwn(p, "extractor") || Object.hasOwn(p, "notice_sha256")) fail();
   if (link.parts && (link.source !== "anandajoti" || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail();
   const readPages = [];
   for (let offset = first; offset <= last; offset += 200) readPages.push({ tool: "get_text", uid: unit.id, offset, limit: Math.min(200, last - offset + 1) });
   return {
     kind: "partial_unit",
-    version: 1,
+    version: p.version,
     unit_id: unit.id,
     first_ref: p.first_ref,
     last_ref: p.last_ref,
@@ -23775,9 +23783,9 @@ function partialScope(link, unit, segments2, source4) {
     scope_sha256: scopeHash({ mapping: p, source: link.source, url: link.url, path: link.path, parts: link.parts || null, translator: link.translator }),
     whole_unit_coverage: false,
     pali_segments: last - first + 1,
-    read_with: readPages[0],
+    ...excerpt ? { pali_excerpt: excerpt } : { read_with: readPages[0] },
     ...readPages.length > 1 ? { read_pages: readPages } : {},
-    note: "Only this declared contiguous P\u0101li span has a linked translation. This is not a whole-unit translation or word-level alignment. Stop the P\u0101li reading at last_ref. Use read_pages when present; generic get_text continuation can leave this span."
+    note: excerpt ? "Only the exact P\u0101li substring in pali_excerpt has a linked translation. Offsets use UTF-16 code units in the pinned original segment; the surrounding paragraph and entire discourse are not translated. The ordinary P\u0101li reader shows context, not this excerpt alone. This is not word-level alignment." : "Only this declared contiguous P\u0101li span has a linked translation. This is not a whole-unit translation or word-level alignment. Stop the P\u0101li reading at last_ref. Use read_pages when present; generic get_text continuation can leave this span."
   };
 }
 var isShared = (link) => Object.hasOwn(link, "shared_scope");
@@ -25988,6 +25996,31 @@ function atiVerseExcerpt(html) {
   if (!text) fail();
   return text;
 }
+function atiChapterProse(html) {
+  const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
+  const fail = () => {
+    throw Error("The reviewed ATI prose extraction structure changed. No excerpt was returned.");
+  };
+  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) fail();
+  const from = html.indexOf(begin) + begin.length, to = html.indexOf(end);
+  if (to <= from) fail();
+  const chunk = html.slice(from, to), opens = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
+  if (opens.length !== 1) fail();
+  const start = opens[0].index + opens[0][0].length, notes = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])notes\1[^>]*>/gi)];
+  if (notes.length !== 1) fail();
+  const stop = notes[0].index;
+  if (stop <= start || chunk.indexOf("</div>", start) < stop) fail();
+  const body = chunk.slice(start, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
+  if (paragraphs.length !== 1 || /<\/?(?:div|script|style|dl|ol|ul)\b/i.test(body) || body.replace(paragraphs[0][0], "").trim()) fail();
+  const text = plainText(paragraphs[0][1].replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi, ""));
+  if (!text) fail();
+  return text;
+}
+function atiPartialExcerpt(html, extractor) {
+  if (extractor === "ati-freeverse-v1") return atiVerseExcerpt(html);
+  if (extractor === "ati-chapter-prose-v1") return atiChapterProse(html);
+  throw Error("Unsupported ATI partial extractor. No excerpt was returned.");
+}
 
 // src/cache.mjs
 var num = (value, fallback) => Number.isFinite(Number(value)) && String(value ?? "").trim() !== "" ? Number(value) : fallback;
@@ -26171,7 +26204,7 @@ async function fetchAtiLive(path) {
     license: notice.licensing || "See the page for its copyright and distribution terms."
   };
 }
-var fetchAtiPartial = (path) => liveCache.wrap(`ati-verse-partial:${path}`, async () => {
+var fetchAtiPartial = (path, extractor) => liveCache.wrap(`ati-partial:${extractor}:${path}`, async () => {
   const { body, url, mirror } = await fetchMirrors(atiMirrors(path));
   const notice = atiNotice(body);
   return {
@@ -26180,7 +26213,7 @@ var fetchAtiPartial = (path) => liveCache.wrap(`ati-verse-partial:${path}`, asyn
     fetched_from: MIRROR_NAMES[mirror],
     fetched_url: url,
     title: plainText(body.match(/<title\b[^>]*>([^]*?)<\/title>/i)?.[1] ?? ""),
-    text: atiVerseExcerpt(body),
+    text: atiPartialExcerpt(body, extractor),
     attribution: notice.citation,
     license: notice.licensing
   };
@@ -26263,7 +26296,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
   const notes = via && !declaredScope ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   if (link.mapping_note) notes.push(link.mapping_note);
   try {
-    result = link.source === "ati" ? await (declaredScope?.kind === "partial_unit" ? fetchAtiPartial(link.path) : fetchAti(link.path)) : link.source === "anandajoti" ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1) : await fetchDhammatalks(link.url);
+    result = link.source === "ati" ? await (declaredScope?.kind === "partial_unit" ? fetchAtiPartial(link.path, declaredScope.extractor) : fetchAti(link.path)) : link.source === "anandajoti" ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1) : await fetchDhammatalks(link.url);
   } catch (error2) {
     const outage = !error2.failures || error2.failures.some((f) => !/HTTP 404/.test(f));
     const sameTranslator = allow_fallback && !declaredScope && outage && link.source === "dhammatalks" && links.find((l) => !isScoped(l) && l.source === "ati" && /thanissaro/i.test(l.translator || ""));
@@ -33214,6 +33247,7 @@ __export(commentary_exports, {
   register: () => register15,
   segmentOwners: () => segmentOwners
 });
+var import_node_crypto6 = require("node:crypto");
 var import_node_zlib5 = require("node:zlib");
 var import_node_path8 = require("node:path");
 var import_node_url8 = require("node:url");
@@ -33362,9 +33396,19 @@ function readBook2(uid, { offset = 0, limit = 40 } = {}) {
     segments: page
   };
 }
-function sourceInfo2(d) {
+function sourceInfo2(d, unit) {
   const { name, repository, commit, files: files2, attribution: attribution2, terms: terms4 } = d.source;
-  return { name, repository, commit, files: files2, attribution: attribution2, terms: terms4 };
+  const mapping = unit?.id === "sn12.21" && d.units[unit.id]?.map((i) => d.passages[i]);
+  const revision = mapping && (0, import_node_crypto6.createHash)("sha256").update(JSON.stringify(mapping)).digest("hex").slice(0, 24);
+  return {
+    name,
+    repository,
+    commit,
+    files: files2,
+    attribution: attribution2,
+    terms: terms4,
+    ...revision ? { locator_revision: `${commit}-sn21-commentary-${revision}` } : {}
+  };
 }
 function describePassage(d, pi) {
   const [bi, , , rootBook, a, b, checked, hits, evidence] = d.passages[pi];
@@ -33450,7 +33494,7 @@ function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {}) {
       total_segments: 0,
       segments: [],
       notes: [...notes, `No commentary passage is aligned to ${unit.acronym}. The commentary may pass over it (it often explains only the first of a run of similar texts), or its passage could not be matched with confidence: no alignment is given rather than a wrong one. Search the commentary's book in the VRI edition, or read neighbouring texts' commentary.`],
-      source: sourceInfo2(d)
+      source: sourceInfo2(d, unit)
     };
   }
   const all = [];
@@ -33473,7 +33517,7 @@ function commentaryFor(unit, { offset = 0, limit = 40, notes = [] } = {}) {
     notes: [...notes, ...extra],
     alignment_method: "Each commentary passage carries the VRI paragraph number of the root text it explains; the bold words it quotes are checked against that paragraph. Passages that do not match are left out.",
     evidence_types: EVIDENCE,
-    source: sourceInfo2(d)
+    source: sourceInfo2(d, unit)
   };
 }
 function register15({ tool, z, citation }) {
@@ -34598,7 +34642,7 @@ function createServer2({ executeTool } = {}) {
 }
 
 // src/chatgpt-widget.mjs
-var import_node_crypto6 = require("node:crypto");
+var import_node_crypto7 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
 var WIDGET_VERSION = "v17";
 var NAVIGATION_TIMEOUT_MS = 9e4;
@@ -34657,7 +34701,7 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
     if (!Number.isSafeInteger(index4) || index4 < 0 || index4 > 1e5) throw new Error("Give the exact segment reference from the selected reader, ending in a positive /N.");
     const exact = await readPassage({ uid, book, offset: index4, limit: 1, english: false, script });
     if (exact.pali.segments[0]?.ref !== segment) throw new Error(`Segment ${segment} does not belong to this selection. Copy its exact reference from get_text or get_post_canonical; no other segment was selected.`);
-    const fingerprint = (0, import_node_crypto6.createHash)("sha256").update(JSON.stringify(exact.pali.segments[0])).digest("hex");
+    const fingerprint = (0, import_node_crypto7.createHash)("sha256").update(JSON.stringify(exact.pali.segments[0])).digest("hex");
     if (anchorHash !== void 0 && anchorHash !== fingerprint) throw new Error("The exact source segment has changed. Reopen it before requesting context; no neighbouring passage was substituted.");
     const selector = book !== void 0 ? { book: exact.book_id } : { uid: exact.text_id || exact.citation };
     const args = { ...selector, segment, english: false, source_commit: exact.source.commit, anchor_sha256: fingerprint, ...script ? { script: scriptName(script) } : {} };
@@ -34727,7 +34771,7 @@ async function readPassage({ uid, book, commentary, segment, context = 0, source
       if (anchorHash !== void 0) throw new Error("The exact commentary anchor is unavailable; no context was substituted.");
       return displayed;
     }
-    const fingerprint = (0, import_node_crypto6.createHash)("sha256").update(JSON.stringify(displayed.pali.segments[0])).digest("hex");
+    const fingerprint = (0, import_node_crypto7.createHash)("sha256").update(JSON.stringify(displayed.pali.segments[0])).digest("hex");
     if (anchorHash !== void 0 && anchorHash !== fingerprint) throw new Error("The exact commentary segment has changed. Reopen it before requesting context; no neighbouring passage was substituted.");
     const anchor = displayed.pali.segments[0].ref;
     const parent = anchor.replace(/\/c[1-9]\d*$/, "");

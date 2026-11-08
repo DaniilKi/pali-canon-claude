@@ -32,10 +32,16 @@ try:
             for route,kind in [('uid=dhp183','canon'),('book=vin02m1&offset=6','book'),('kind=post&uid=Vism%201.1','post'),('kind=commentary&uid=commentary%3Aabh01a.att.xml','commentary'),('kind=commentary&uid=mn10','aligned commentary')]:
                 page.goto(base+'/#read?'+route);part=page.locator('section[aria-label="Pāli passage"] .segment').first;part.wait_for();loaded(page)
                 reference=part.locator('.segment-label a').first.inner_text();text=part.locator('.passage').inner_text();part.get_by_role('button',name='Save passage '+reference,exact=True).click()
-                item=profile(page)['saved'][-1];assert item['source_commit'] and isinstance(item['offset'],int);marks.append(item);wording[item['uid']]=text
+                item=profile(page)['saved'][-1];assert item['source_commit'] and isinstance(item['offset'],int);marks.append(item);wording[(item.get('kind','canon'),item['uid'])]=text
                 saved(page);link=bookmark_link(page,item);params=dict(urllib.parse.parse_qsl(link.get_attribute('href').split('?',1)[1]));assert params['source']==item['source_commit'] and params['ref']==item['ref'] and int(params['offset'])==item['offset']
                 link.focus();page.keyboard.press('Enter');page.locator('.passage').first.wait_for();loaded(page);assert page.locator('section[aria-label="Pāli passage"] .passage').first.inner_text()==text;assert page.locator('.segment-label a').first.inner_text()==item['ref'];passed(kind+': saved link keeps exact revision, offset, source kind and wording')
             authentic_commit='2d134ff9ef60f70a1eb03c9370580228811a3070'
+            page.goto(base+'/#read?kind=commentary&uid=sn12.21&offset=2');part=page.locator('section[aria-label="Pāli passage"] .segment').first;part.wait_for();loaded(page)
+            reference=part.locator('.segment-label a').first.inner_text();text=part.locator('.passage').inner_text();part.get_by_role('button',name='Save passage '+reference,exact=True).click();item=profile(page)['saved'][-1]
+            assert item['source_commit'].startswith(authentic_commit+'-sn21-commentary-') and item['offset']==2 and item['ref']=='sn12.21/c3'
+            marks.append(item);wording[(item.get('kind','canon'),item['uid'])]=text;saved(page);bookmark_link(page,item).click();page.locator('.passage').first.wait_for();loaded(page)
+            assert page.locator('section[aria-label="Pāli passage"] .passage').first.inner_text()==text
+            passed('restored SN21 commentary saves and restores its own mapping revision, exact short paragraph and authentic edition')
             assert marks[0]['uid']=='dhp183' and marks[0]['source_commit']==authentic_commit
             passed('unrelated canonical bookmark retains the authentic VRI commit without a mapping revision')
             for uid,index,verse,revision in [('thag2.13',1,'145','thag-pair-v1'),('thag2.14',2,'148','thag-pair-v1'),('sn12.21',2,'21','sn-dasabala-v1'),('sn12.22',1,'22','sn-dasabala-v1')]:
@@ -43,7 +49,7 @@ try:
                 reference=part.locator('.segment-label a').first.inner_text();text=part.locator('.passage').inner_text();assert reference==uid+'/'+str(index+1)
                 part.get_by_role('button',name='Save passage '+reference,exact=True).click();item=profile(page)['saved'][-1]
                 assert item['source_commit']==authentic_commit+'-'+revision and item['offset']==index
-                marks.append(item);wording[item['uid']]=text
+                marks.append(item);wording[(item.get('kind','canon'),item['uid'])]=text
                 saved(page);link=bookmark_link(page,item);params=dict(urllib.parse.parse_qsl(link.get_attribute('href').split('?',1)[1]));assert params['source']==item['source_commit'] and int(params['offset'])==index
                 link.focus();page.keyboard.press('Enter');page.locator('.passage').first.wait_for();loaded(page)
                 assert page.locator('.segment-label a').first.inner_text()==reference;assert page.locator('section[aria-label="Pāli passage"] .passage').first.inner_text()==text
@@ -54,6 +60,7 @@ try:
             # Both refs still exist after repair, so reference presence alone cannot protect notes.
             previous_pair=[{'uid':'thag2.14','ref':'thag2.14/'+str(index+1),'title':'Pre-repair Somamitta '+str(index+1),'note':'Private pre-repair note '+str(index+1),'offset':index,'source_commit':authentic_commit} for index in [0,1]]
             previous_pair += [{'uid':uid,'ref':uid+'/'+str(index+1),'title':'Pre-repair '+uid,'note':'Private pre-repair '+uid+' note','offset':index,'source_commit':authentic_commit} for uid,index in [('sn12.21',0),('sn12.22',1)]]
+            previous_pair.append({'uid':'sn12.21','kind':'commentary','ref':'sn12.21/c3','title':'Authentic old SN21 commentary','offset':2,'source_commit':authentic_commit,'note':'Private note on the old incorrectly associated Paccaya commentary'})
             context=seeded(browser,width,theme,previous_pair);page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
             for item in previous_pair:
                 saved(page);bookmark_link(page,item).click();page.get_by_role('heading',name='No passage was substituted.',exact=True).wait_for()
@@ -71,8 +78,8 @@ try:
             for item in old:
                 saved(page);bookmark_link(page,item).click();page.get_by_role('heading',name='No passage was substituted.',exact=True).wait_for();assert page.locator('.passage').count()==0;assert 'source or citation mapping revision changed' in page.locator('#view').inner_text();assert 'Synthetic private source note' not in page.locator('#view').inner_text()
                 audit(page,'revision drift refusal '+item['uid']);review=page.get_by_role('link',name='Review current source at this reference',exact=True);review.focus();page.keyboard.press('Enter');page.locator('.passage').first.wait_for();loaded(page)
-                assert page.locator('.segment-label a').first.inner_text()==item['ref'];assert page.locator('section[aria-label="Pāli passage"] .passage').first.inner_text()==wording[item['uid']];assert 'source=' not in page.url
-                persisted=next(m for m in profile(page)['saved'] if m['uid']==item['uid']);assert persisted['source_commit']=='controlled-old-revision' and persisted['note']==item['note'];passed('changed revision refuses wording before explicit review: '+item['uid'])
+                assert page.locator('.segment-label a').first.inner_text()==item['ref'];assert page.locator('section[aria-label="Pāli passage"] .passage').first.inner_text()==wording[(item.get('kind','canon'),item['uid'])];assert 'source=' not in page.url
+                persisted=next(m for m in profile(page)['saved'] if m['uid']==item['uid'] and m.get('kind')==item.get('kind'));assert persisted['source_commit']=='controlled-old-revision' and persisted['note']==item['note'];passed('changed revision refuses wording before explicit review: '+item['uid'])
             assert not errors,errors;context.close()
             legacy={k:v for k,v in marks[0].items() if k not in ['source_commit','offset']};context=seeded(browser,width,theme,[legacy]);page=context.new_page();saved(page);assert 'no source version was saved' in page.locator('#view').inner_text();link=bookmark_link(page,legacy);assert 'source=' not in link.get_attribute('href');link.click();page.locator('.passage').first.wait_for();loaded(page);assert page.locator('.segment-label a').first.inner_text()==legacy['ref'];passed('legacy bookmark is clearly unversioned and still checks actual reference');context.close()
             invalid=[{**marks[0],'title':'Synthetic missing position','offset':None},{**marks[0],'title':'Synthetic invalid pin '+'X'*500,'source_commit':'https://invalid.example'}];context=seeded(browser,width,theme,invalid);page=context.new_page();requests=[];page.on('request',lambda r:requests.append(r.url) if r.method=='POST' else None);saved(page)

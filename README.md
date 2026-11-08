@@ -333,3 +333,5 @@ The [docs site](https://daniilki.github.io/pali-canon-claude/) shows these pages
 With gratitude to the Vipassana Research Institute; Ṭhānissaro Bhikkhu and Metta Forest Monastery; the Barre Center for Buddhist Studies and John Bullitt for Access to Insight; Bodhirasa Bhikkhu and the Digital Pāḷi Dictionary team; the Pali Text Society; and SuttaCentral, whose numbering we follow and whose wishes we respect.
 
 *Sabbadānaṃ dhammadānaṃ jināti*: the gift of the Dhamma surpasses all gifts (Dhp 354).
+
+The [Dasabala follow-up](docs/data/dasabala-commentary-and-subparagraph.md) restores SN12.21’s own short commentary and provides SN12.22’s concluding exhortation as an exact, consent-scoped substring. Nine verse excerpts plus this prose excerpt are ten partial sources; none adds whole-unit English coverage.

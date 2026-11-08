@@ -250,7 +250,14 @@ function scopeSummary(descriptor, target) {
   if (descriptor.kind === 'shared_page') {
     target.append(el('p', 'Publisher reference: ' + scope.source_reference), el('p', 'One page concerns all of these texts. It is not a separately aligned full translation of the currently selected discourse.', 'notice'));
     const list = el('ul'); for (const id of scope.text_ids) { const li = el('li'); li.append(link(id + ' · canonical Pāli', route('read', { uid: id }))); list.append(li); } target.append(list);
-  } else target.append(el('p', 'Declared Pāli span: ' + scope.first_ref + ' to ' + scope.last_ref), el('p', 'Only this span has a linked translation. The Pāli reader below still shows the selected canonical text, not an aligned or shortened English/Pāli pair.', 'notice'));
+  } else {
+    target.append(el('p', 'Declared Pāli span: ' + scope.first_ref + ' to ' + scope.last_ref));
+    if(scope.version===2){
+      target.append(el('p', 'Only part of this paragraph is translated. Exact original Pāli excerpt:', 'notice'));
+      const quote=el('blockquote',scope.pali_excerpt.text,'passage');quote.lang='pi';target.append(quote);
+      target.append(el('p','The Pāli reader below includes surrounding context outside this translation. No complete paragraph or discourse translation is implied.','notice'));
+    }else target.append(el('p', 'Only this span has a linked translation. The Pāli reader below still shows the selected canonical text, not an aligned or shortened English/Pāli pair.', 'notice'));
+  }
   target.append(el('p', scope.note, 'notice'));
   const details = el('details'); details.append(el('summary', 'Reviewed scope version')); details.append(el('p', 'Source revision: ' + scope.source_commit), el('p', 'Mapping SHA-256: ' + scope.scope_sha256)); target.append(details);
 }

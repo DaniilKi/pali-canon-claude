@@ -46,6 +46,12 @@ export const LICENSE_LABELS = {
     url: null,
     used_by: 'Access to Insight',
   },
+  'BPS-free-distribution-1985': {
+    name: 'Buddhist Publication Society ©1985 free-distribution notice (not Creative Commons)',
+    terms: 'copies free of charge, reprints of no more than 50 copies, source and derivatives identified, complete licence text retained; otherwise all rights reserved; see the pinned Walshe page notice',
+    url: null,
+    used_by: 'Access to Insight reviewed SN12.22 Walshe prose excerpt',
+  },
   ATI_DEPRECATED: {
     name: 'Access to Insight free-distribution licence (older, not Creative Commons)',
     terms: 'copies free of charge, derivatives marked as such, licence text included; otherwise all rights reserved',
@@ -65,6 +71,16 @@ export const LICENSE_LABELS = {
     used_by: 'Ancient Buddhist Texts (Ānandajoti Bhikkhu)',
   },
 };
+
+// Bulk indexes carry scope coordinates and pins, never literal scripture wording.
+function exportScope(scope) {
+  const copy = structuredClone(scope);
+  if(copy.version===2 && copy.kind==='partial_unit' && copy.pali_excerpt) {
+    delete copy.pali_excerpt.text;
+    copy.pali_excerpt.text_omitted = true;
+  }
+  return copy;
+}
 
 export const licenseName = (code) => (code && LICENSE_LABELS[code] ? LICENSE_LABELS[code].name : null);
 
@@ -109,7 +125,7 @@ export function buildIndex() {
         translation_id: t.translation_id,
         license: t.license || (t.source === 'dhammatalks.org' ? 'CC BY-NC 4.0' : null),
         match: t.match,
-        ...(t.translation_scope ? { translation_scope: t.translation_scope, whole_unit_coverage: false } : {}),
+        ...(t.translation_scope ? { translation_scope: exportScope(t.translation_scope), whole_unit_coverage: false } : {}),
       })).map((e) => ({ ...e, license_name: licenseName(e.license) })),
     };
   });

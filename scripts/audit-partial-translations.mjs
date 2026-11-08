@@ -66,11 +66,11 @@ try {
       await call('resolve_reference',{reference:'https://accesstoinsight.org'+row.path+'.html'},/Registered partial/);
       await call('list_sources',{},/Registered partial/);
     }else if(mode==='registered_metadata'){
-      for(const row of registry.links){const rid='ati:'+row.path,meta=await call('get_metadata',{uid:row.unit_id}),choice=meta.english.find(l=>l.translation_id===rid);assert.equal(choice.translation_scope.kind,'partial_unit');assert.equal(choice.translation_scope.notice_sha256,row.partial_scope.notice_sha256);assert.equal(choice.translation_scope.extractor,'ati-freeverse-v1');assert.equal(meta.english_available,original[row.unit_id].filter(l=>!l.partial_scope&&!l.shared_scope).length);
+      for(const row of registry.links){const rid='ati:'+row.path,meta=await call('get_metadata',{uid:row.unit_id}),choice=meta.english.find(l=>l.translation_id===rid);assert.equal(choice.translation_scope.kind,'partial_unit');assert.equal(choice.translation_scope.notice_sha256,row.partial_scope.notice_sha256);assert.equal(choice.translation_scope.extractor,row.partial_scope.extractor);assert.equal(meta.english_available,original[row.unit_id].filter(l=>!l.partial_scope&&!l.shared_scope).length);
         await call('get_translation',{uid:row.unit_id,translation:rid},/partial unit/);
         const attached=await call('get_text',{uid:row.unit_id,translation:rid,limit:1});assert.match(attached.english_error,/partial unit/);assert.equal(attached.english,undefined);
         await call('verify_quote',{text:'Synthetic fixture only amber lantern copper window',language:'english',texts:[row.unit_id],translation_ids:[rid]},/include_partial/);
-        await call('get_translation',{uid:row.unit_id,translation:rid,allow_partial:true},/source text changed/);
+        await call('get_translation',{uid:row.unit_id,translation:rid,allow_partial:true},row.partial_scope.version===2?/extraction structure changed/:/source text changed/);
       }
       const totals=(await call('list_sources',{})).translation_coverage.total;assert.equal(totals.partial_links,registry.links.length);assert.equal(totals.partial_only,baseline.partial_only);assert.equal(totals.links,baseline.links);
     }else if (mode === 'mixed_versions') {

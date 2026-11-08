@@ -2,7 +2,7 @@
 import { fetchMirrors, plainText, decodeHtml } from './http.mjs';
 import { load, linksFor, translationId, sourceName, ANANDAJOTI_BASE, ANANDAJOTI_LICENSE, translationScope } from './canon.mjs';
 import { isShared, isScoped, scopeHash } from './translation-scope.mjs';
-import { atiVerseExcerpt } from './ati-excerpt.mjs';
+import { atiPartialExcerpt } from './ati-excerpt.mjs';
 import { liveCache } from './cache.mjs';
 import { createHash } from 'node:crypto';
 const prefixHash = (text, offset) => createHash('sha256').update(text.slice(0, offset)).digest('hex');
@@ -106,11 +106,11 @@ async function fetchAtiLive(path) {
 }
 
 // Separate cache keys prevent a whole article from standing in for a reviewed verse excerpt.
-const fetchAtiPartial = (path) => liveCache.wrap(`ati-verse-partial:${path}`, async () => {
+const fetchAtiPartial = (path,extractor) => liveCache.wrap(`ati-partial:${extractor}:${path}`, async () => {
   const {body,url,mirror}=await fetchMirrors(atiMirrors(path));
   const notice=atiNotice(body);
   return {source:'Access to Insight',url:`https://accesstoinsight.org${path}.html`,fetched_from:MIRROR_NAMES[mirror],fetched_url:url,
-    title:plainText(body.match(/<title\b[^>]*>([^]*?)<\/title>/i)?.[1]??''),text:atiVerseExcerpt(body),
+    title:plainText(body.match(/<title\b[^>]*>([^]*?)<\/title>/i)?.[1]??''),text:atiPartialExcerpt(body,extractor),
     attribution:notice.citation,license:notice.licensing};
 });
 
@@ -190,7 +190,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
   const notes = via && !declaredScope ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   if (link.mapping_note) notes.push(link.mapping_note);
   try {
-    result = link.source === 'ati' ? await (declaredScope?.kind === 'partial_unit' ? fetchAtiPartial(link.path) : fetchAti(link.path))
+    result = link.source === 'ati' ? await (declaredScope?.kind === 'partial_unit' ? fetchAtiPartial(link.path,declaredScope.extractor) : fetchAti(link.path))
       : link.source === 'anandajoti' ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1)
         : await fetchDhammatalks(link.url);
   } catch (error) {

@@ -8,18 +8,31 @@ export function partialScope(link, unit, segments, source) {
   if (!isPartial(link)) return null;
   const p = link.partial_scope;
   const fail = () => { throw new Error('Invalid or unreviewed partial translation scope. No whole-unit coverage or source retrieval is inferred.'); };
-  const fields = new Set(['version', 'status', 'unit_id', 'first_ref', 'last_ref', 'source_commit', 'pali_sha256', 'text_sha256', 'notice_sha256', 'extractor']);
-  if (!p || p.version !== 1 || Object.keys(p).some(k => !fields.has(k)) || p.status !== 'reviewed' || p.unit_id !== unit.id || p.source_commit !== source.commit
+  const fields = new Set(['version', 'status', 'unit_id', 'first_ref', 'last_ref', 'source_commit', 'pali_sha256', 'text_sha256', 'notice_sha256', 'extractor', 'subparagraph']);
+  if (!p || ![1,2].includes(p.version) || Object.keys(p).some(k => !fields.has(k)) || p.status !== 'reviewed' || p.unit_id !== unit.id || p.source_commit !== source.commit
     || !sha(p.pali_sha256) || !sha(p.text_sha256) || unit.approximate) fail();
   const first = segments.findIndex(s => s.ref === p.first_ref);
   const last = segments.findIndex(s => s.ref === p.last_ref);
   if (first < 0 || last < first || (first === 0 && last === segments.length - 1)) fail();
   if (!segments.slice(first, last + 1).some(s => s.type !== 'heading') || !segments.some((s, i) => s.type !== 'heading' && (i < first || i > last))) fail();
   const selected = segments.slice(first, last + 1).map(({ ref, type, text }) => ({ ref, type, text }));
+  let excerpt;
+  if(p.version===2) {
+    const part=p.subparagraph,seg=selected[0];
+    if(link.source!=='ati'||p.extractor!=='ati-chapter-prose-v1'||first!==last||seg.type!=='prose'||!part
+      ||Object.keys(part).sort().join(',')!=='end_char,offset_unit,segment_sha256,start_char'
+      ||part.offset_unit!=='utf16_code_units'||!sha(part.segment_sha256)||scopeHash(seg)!==part.segment_sha256
+      ||!Number.isSafeInteger(part.start_char)||!Number.isSafeInteger(part.end_char)||part.start_char<0
+      ||part.end_char<=part.start_char||part.end_char>seg.text.length||(part.start_char===0&&part.end_char===seg.text.length))fail();
+    // Reject a boundary through a surrogate pair; source offsets use JavaScript UTF-16 indexing.
+    for(const at of [part.start_char,part.end_char])if(at>0&&at<seg.text.length&&/[\uD800-\uDBFF]/.test(seg.text[at-1])&&/[\uDC00-\uDFFF]/.test(seg.text[at]))fail();
+    seg.text=seg.text.slice(part.start_char,part.end_char);
+    excerpt={...seg,...part};
+  } else if(Object.hasOwn(p,'subparagraph'))fail();
   if (scopeHash(selected) !== p.pali_sha256) fail();
   if (!['dhammatalks', 'ati', 'anandajoti'].includes(link.source)) fail();
   if (link.source === 'ati') {
-    if (p.extractor !== 'ati-freeverse-v1' || !sha(p.notice_sha256) || typeof link.path !== 'string'
+    if (p.extractor !== (p.version===2?'ati-chapter-prose-v1':'ati-freeverse-v1') || !sha(p.notice_sha256) || typeof link.path !== 'string'
       || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes('..')
       || link.url !== 'https://accesstoinsight.org' + link.path + '.html') fail();
   } else if (Object.hasOwn(p, 'extractor') || Object.hasOwn(p, 'notice_sha256')) fail();
@@ -27,13 +40,13 @@ export function partialScope(link, unit, segments, source) {
   if (link.parts && (link.source !== 'anandajoti' || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail();
   const readPages = [];
   for (let offset = first; offset <= last; offset += 200) readPages.push({ tool: 'get_text', uid: unit.id, offset, limit: Math.min(200, last - offset + 1) });
-  return { kind: 'partial_unit', version: 1, unit_id: unit.id, first_ref: p.first_ref, last_ref: p.last_ref,
+  return { kind: 'partial_unit', version: p.version, unit_id: unit.id, first_ref: p.first_ref, last_ref: p.last_ref,
     source_commit: p.source_commit, pali_sha256: p.pali_sha256, text_sha256: p.text_sha256,
     ...(link.source === 'ati' ? {extractor:p.extractor,notice_sha256:p.notice_sha256} : {}),
     scope_sha256: scopeHash({ mapping: p, source: link.source, url: link.url, path: link.path, parts: link.parts || null, translator: link.translator }), whole_unit_coverage: false,
-    pali_segments: last - first + 1, read_with: readPages[0],
+    pali_segments: last - first + 1, ...(excerpt?{pali_excerpt:excerpt}:{read_with:readPages[0]}),
     ...(readPages.length > 1 ? { read_pages: readPages } : {}),
-    note: 'Only this declared contiguous Pāli span has a linked translation. This is not a whole-unit translation or word-level alignment. Stop the Pāli reading at last_ref. Use read_pages when present; generic get_text continuation can leave this span.' };
+    note: excerpt ? 'Only the exact Pāli substring in pali_excerpt has a linked translation. Offsets use UTF-16 code units in the pinned original segment; the surrounding paragraph and entire discourse are not translated. The ordinary Pāli reader shows context, not this excerpt alone. This is not word-level alignment.' : 'Only this declared contiguous Pāli span has a linked translation. This is not a whole-unit translation or word-level alignment. Stop the Pāli reading at last_ref. Use read_pages when present; generic get_text continuation can leave this span.' };
 }
 
 export const isShared = link => Object.hasOwn(link, 'shared_scope');
