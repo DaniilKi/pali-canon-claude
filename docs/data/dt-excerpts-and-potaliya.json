@@ -1,0 +1,1067 @@
+{
+  "baseline_commit": "cec5c6f60045b30a27d1a1255e284fa8f8c47af9",
+  "observed_on": "2026-11-08",
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "method": "Complete supported primary DT rendered views and whole bundled VRI roots; individual ATI26 raw/body/full-notice review; independent MN54paragraph14of24/root29/full-notice review. Web views are not raw/runtime freshness receipts; no English source bodies bundled.",
+  "withheld_bindings": 4,
+  "partial_activations": 1,
+  "rows": [
+    {
+      "observed_on": "2026-11-08",
+      "owner": "dn21",
+      "translation_id": "dt:DN/DN21",
+      "source": "dhammatalks",
+      "url": "https://www.dhammatalks.org/suttas/DN/DN21.html",
+      "source_url": "https://www.dhammatalks.org/suttas/DN/DN21.html",
+      "original_link": {
+        "source": "dhammatalks",
+        "url": "https://www.dhammatalks.org/suttas/DN/DN21.html",
+        "translator": "Ṭhānissaro Bhikkhu",
+        "reference": "DN 21 Sakka’s Questions (Excerpt)",
+        "match": "number+title"
+      },
+      "link_metadata_sha256": "c0a3c39d55d3ef49c1cdbf26589250d0372737a1b4f63c7606caa94c963eaf83",
+      "link_fingerprint_semantics": "SHA256(JSON.stringify({owner,link})) preserving original link property order",
+      "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "root_units": [
+        {
+          "id": "dn21",
+          "book": 6,
+          "start": 1129,
+          "end": 1340,
+          "title": "Sakkapañhasuttaṃ",
+          "collection": "dn",
+          "acronym": "DN 21",
+          "vri": "344–371",
+          "pts": {
+            "volume": 2,
+            "page": 264,
+            "end_page": 289
+          },
+          "root_blocks_sha256": "ec9924ca7a3de0fa37ff83edf0d685f4204e1a87c355ffcacb3b7047a9ee17d9"
+        }
+      ],
+      "decision": "hold-whole-binding-partial-unit",
+      "reason": "The primary body omits substantial opening narrative and the Gopaka teaching; its final ellipsis also removes the six advantages, praise and reward. The editorial introduction quotes the song but does not restore the missing full-discourse context.",
+      "evidence_kind": "publisher-rendered-web",
+      "rendered_view": {
+        "total_lines": 259,
+        "first_line": 0,
+        "last_line": 258,
+        "scripture_lines": [
+          155,
+          247
+        ]
+      },
+      "method": "Complete supported public web open of exact primary publisher URL, lines0–258, compared with all124 rendered VRI root segments. No shell fetch, raw HTML, source-site JavaScript, SuttaCentral or invented web hashes.",
+      "positive_coverage": [
+        {
+          "refs": "dn21/57–/96",
+          "web_lines": [
+            155,
+            241
+          ],
+          "detail": "Conflict-cause chain, feeling training, conduct, sense restraint, diversity of doctrines, liberation, prior teachers and devas/asuras contrast; original sense-formula abbreviations preserved."
+        },
+        {
+          "refs": "dn21/122–/123",
+          "web_lines": [
+            244,
+            247
+          ],
+          "detail": "Triple homage, Dhamma-eye event and title explanation retained."
+        },
+        {
+          "refs": "dn21/8–/21",
+          "web_lines": [
+            33,
+            150
+          ],
+          "detail": "Song translated in editorial introduction, not absent. Introductory frame is commentary, not complete canonical first-half translation."
+        }
+      ],
+      "substantive_omissions": [
+        {
+          "refs": "dn21/2–/5,/7",
+          "web_lines": [
+            30,
+            32
+          ],
+          "detail": "Setting, summons, arrival and Pañcasikha performance setup not translated; introductory paraphrase is not replacement canonical text."
+        },
+        {
+          "refs": "dn21/22–/30",
+          "web_lines": [
+            30,
+            32,
+            152
+          ],
+          "detail": "Buddha/musician exchange, composition history, courtship sequel, entrance and prior-visit exchange absent."
+        },
+        {
+          "refs": "dn21/32–/55",
+          "web_lines": [
+            152,
+            155
+          ],
+          "detail": "Gopaka narrative and verses plus Buddha readiness/permission verses absent before main question begins."
+        },
+        {
+          "refs": "dn21/97–/121",
+          "web_lines": [
+            241,
+            244
+          ],
+          "detail": "Explicit ellipsis removes six advantages, future-birth verses, praise verses and Pañcasikha reward."
+        }
+      ],
+      "paratext_not_counted_as_substantive_omissions": [
+        "Headings /1,/6,/26,/31,/56,/66,/72,/79,/94",
+        "Concluding numbered colophon /124"
+      ],
+      "indexed_ordinary_alternatives": [],
+      "partial_or_shared_indexed_alternatives": [],
+      "alternatives_reviewed": [
+        {
+          "source": "ati",
+          "url": "https://www.accesstoinsight.org/tipitaka/dn/dn.21.2x.than.html",
+          "path": "/tipitaka/dn/dn.21.2x.than",
+          "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+          "source_html_sha256": "b1f875c5cf24c46edffdf62be3b499e7e17d4da9d9f276596fde37acafddba0f",
+          "copyright_chunk_html_sha256": "a9d309bc0aef669e4951d8201bcdf1e8eb100618cd209c9a7435bcffe844ab45",
+          "text_sha256": "e63269c0de7e5f6261469979df6f94be81de3a7a50fc4cf78f9fe2b03a8b93b4",
+          "notice_sha256": "bd33d757254528cd7539acb112c73b304c51b4e959c32161113a3876a614146c",
+          "decision": "preserve-existing-D207-hold",
+          "scope": "Complete local copyrighted chunk begins at root57, covers57–96 then122–123; same omitted first-half material and six-advantages/praise/reward tail. No independent complete alternative.",
+          "rights": {
+            "copyright": "©1999 Thanissaro Bhikkhu",
+            "publisher": "Access to Insight (BCBS Edition)",
+            "revision": "30 November2013",
+            "license": "CC BY-NC4.0 International",
+            "provenance": "File supplied by translator; complete F_provenance and F_citation inspected."
+          }
+        }
+      ],
+      "rights": {
+        "primary_page_notice_observed": false,
+        "sitewide_existing_policy": "Existing DT attribution and CC BY-NC4.0 policy remain; copyright holder treats any sale, including nonprofit sales, as commercial. No new permission or source activation inferred.",
+        "supporting_primary_homepage": "https://www.dhammatalks.org/",
+        "author_evidence": "Primary homepage identifies Thanissaro as author/translator unless noted.",
+        "sitewide_notice_search_evidence": "Official origin.dhammatalks.org homepage search result exposes sitewide Copyright panel, observed2026-11-08; direct individual DN21 rendered view did not expose a complete licence notice.",
+        "limits": "No raw HTML/runtime extraction/full-notice hashes claimed for primary DT web page; local ATI page hashes concern only the separate pinned ATI source."
+      },
+      "limits": [
+        "Content scope review, not token alignment or translator-error judgment.",
+        "No unreviewed external alternative assumed complete.",
+        "Existing ATI hold remains; no partial source activation or locator change.",
+        "Source snapshots do not guarantee lasting upstream freshness."
+      ]
+    },
+    {
+      "baseline_commit": "cec5c6f60045b30a27d1a1255e284fa8f8c47af9",
+      "observed_on": "2026-11-08",
+      "owner": "dn26",
+      "translation_id": "dt:DN/DN26",
+      "url": "https://www.dhammatalks.org/suttas/DN/DN26.html",
+      "source": "dhammatalks",
+      "original_link": {
+        "source": "dhammatalks",
+        "url": "https://www.dhammatalks.org/suttas/DN/DN26.html",
+        "translator": "Ṭhānissaro Bhikkhu",
+        "reference": "DN 26 The Wheel-turning Emperor (Excerpt)",
+        "match": "number+title"
+      },
+      "link_metadata_hash_input": "{owner,link}",
+      "link_metadata_sha256": "debe2a859d79cbc1494bd8612add1783887d042554366a4433177c646e21e5a2",
+      "original_link_hash_input": "link",
+      "original_link_sha256": "c02dd401d35ac15221ba22a6662a33553ad32671198a12ab1c1bc3f0ffee9869",
+      "fingerprint_semantics": "SHA256 of UTF8 Node JSON.stringify(value), preserving original property order; owner/link fingerprint uses object insertion order owner then link. No invented DT source-body hash.",
+      "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "root": {
+        "id": "dn26",
+        "book": 7,
+        "start": 190,
+        "end": 258,
+        "title": "Cakkavattisuttaṃ",
+        "collection": "dn",
+        "acronym": "DN 26",
+        "vri": "80–110",
+        "pts": {
+          "volume": 3,
+          "page": 58,
+          "end_page": 79
+        },
+        "root_identity_sha256": "eaf06722b0d866a1838d2332f59f08b749ffd907a59c7ac4283d303f6c5c3990",
+        "root_blocks_sha256": "43ad1e87009668b6d86de5095c52ecdb93b6b863c41dde53d06e4f2ff7fe1f95"
+      },
+      "root_units": [
+        {
+          "id": "dn26",
+          "book": 7,
+          "start": 190,
+          "end": 258,
+          "title": "Cakkavattisuttaṃ",
+          "collection": "dn",
+          "acronym": "DN 26",
+          "vri": "80–110",
+          "pts": {
+            "volume": 3,
+            "page": 58,
+            "end_page": 79
+          },
+          "root_identity_sha256": "eaf06722b0d866a1838d2332f59f08b749ffd907a59c7ac4283d303f6c5c3990",
+          "root_blocks_sha256": "43ad1e87009668b6d86de5095c52ecdb93b6b863c41dde53d06e4f2ff7fe1f95"
+        }
+      ],
+      "complete_root_segments": 68,
+      "root_block_count": 68,
+      "decision": "hold-whole-binding-partial-unit",
+      "reason": "Only closing /59,/61–/67 translated; substantial unique narrative /6–/58 omitted as full translation. Introduction is editorial summary with snippets. Finding rests on body comparison, not title.",
+      "web_view": {
+        "source_url": "https://www.dhammatalks.org/suttas/DN/DN26.html",
+        "observed_on": "2026-11-08",
+        "method": "Supported tools.web__run open; complete rendered primary page.",
+        "total_lines": 66,
+        "read_extent": "0–65",
+        "title_lines": "26–27",
+        "editorial_intro_lines": "28–34",
+        "scripture_lines": "37–54",
+        "notes_lines": "56–63",
+        "raw_html_obtained": false,
+        "runtime_extraction_verified": false,
+        "raw_text_notice_hashes_claimed": false
+      },
+      "alignment": [
+        {
+          "root_refs": "dn26/59",
+          "web_lines": "37–39",
+          "content": "Islands/mindfulness"
+        },
+        {
+          "root_refs": "dn26/61",
+          "web_lines": "40",
+          "content": "Five increases"
+        },
+        {
+          "root_refs": "dn26/62",
+          "web_lines": "41–42",
+          "content": "Lifespan/powers"
+        },
+        {
+          "root_refs": "dn26/63",
+          "web_lines": "43",
+          "content": "Beauty/discipline"
+        },
+        {
+          "root_refs": "dn26/64",
+          "web_lines": "44–45",
+          "content": "Pleasure/jhānas"
+        },
+        {
+          "root_refs": "dn26/65",
+          "web_lines": "46–50",
+          "content": "Wealth/brahmavihāras"
+        },
+        {
+          "root_refs": "dn26/66–/67",
+          "web_lines": "51–54",
+          "content": "Strength/liberation/Māra/conclusion"
+        }
+      ],
+      "substantive_omissions": [
+        {
+          "refs": "dn26/3 (opening setting and address)",
+          "detail": "Mātulā residence/address absent; island instruction recurs at /59 and is translated there. Repetition alone is not the hold basis."
+        },
+        {
+          "refs": "dn26/4",
+          "detail": "Opening Māra/no-foothold admonition is outside translated body; DT note4 quotes it as editorial context."
+        },
+        {
+          "refs": "dn26/6–/24",
+          "detail": "Daḷhanemi, succession, royal duty, wheel and successors absent."
+        },
+        {
+          "refs": "dn26/26–/42",
+          "detail": "Poverty, theft, punishments, worsening conduct and descending lifespans absent."
+        },
+        {
+          "refs": "dn26/44–/49",
+          "detail": "Ten-year society and sword-interval narrative not fully translated."
+        },
+        {
+          "refs": "dn26/51–/58",
+          "detail": "Recovery sequence and full Saṅkha/Metteyya narrative not fully translated."
+        }
+      ],
+      "repetition_and_paratext": {
+        "repeated_opening_instruction": "dn26/3 repeats /59; not a unique omitted teaching.",
+        "publisher_abbreviations": "Mindfulness /59, iddhipādas /62 and compassion/joy /65 abbreviate repetitions; no expansion performed.",
+        "headings": "dn26/1,/2,/5,/10,/12,/19,/25,/43,/50,/54,/56,/60",
+        "numbered_colophon": "dn26/68",
+        "editorial_limit": "Introduction quotes parts /45,/47; summaries and notes do not fill full narrative omissions."
+      },
+      "baseline_alternatives": [
+        "ati:/tipitaka/dn/dn.26.0.than"
+      ],
+      "merged_ordinary_alternatives": [
+        "ati:/tipitaka/dn/dn.26.0.than"
+      ],
+      "local_alternative_reviews": [
+        {
+          "owner": "dn26",
+          "translation_id": "ati:/tipitaka/dn/dn.26.0.than",
+          "path": "/tipitaka/dn/dn.26.0.than",
+          "url": "https://www.accesstoinsight.org/tipitaka/dn/dn.26.0.than.html",
+          "original_link": {
+            "source": "ati",
+            "english": "The Wheel-turning Emperor",
+            "path": "/tipitaka/dn/dn.26.0.than",
+            "url": "https://www.accesstoinsight.org/tipitaka/dn/dn.26.0.than.html",
+            "translator": "Thanissaro Bhikkhu",
+            "license": "CC-BY-NC",
+            "reference": "D iii 58",
+            "pali_title": "Cakkavatti Sutta",
+            "match": "number+title"
+          },
+          "link_metadata_hash_input": "{owner,link}",
+          "link_metadata_sha256": "382a8d1cbb59f6b72daa7aedec988a057dcaed85eaf12de6bc68c7687724736c",
+          "original_link_sha256": "c50432f9d7f0e002a64aa0e96f77b989e9f6d8063e1ce1f0bb31a0896aa8ccca",
+          "original_link_hash_input": "link",
+          "decision": "hold-whole-binding-partial-unit",
+          "review_extent": "Complete local copyrighted chunk, introduction, translation, all four notes and individual footer read against all 68 root segments.",
+          "source_html_sha256": "b2e3eec36ccfe14cbbe9644b638bb216d9e60c4f0b6ac1d954d22ea38a56232e",
+          "text_sha256": "5eab5bdbd6e4daac4b75e4d9848d3f7c70822eb52e7e3e93c5431f0ce9dfcd21",
+          "notice_sha256": "6847c68d63f30ca1710ac183e11f8b473b3e3a197ab66d0aea041d0164e3ea0e",
+          "notice_characters": 474,
+          "hash_semantics": "Raw HTML SHA hashes UTF8 file bytes; text SHA hashes Node JSON.stringify(plainText(atiContent(html))); notice SHA hashes Node JSON.stringify(atiNotice(html)).",
+          "root_units": [
+            {
+              "id": "dn26",
+              "book": 7,
+              "start": 190,
+              "end": 258,
+              "title": "Cakkavattisuttaṃ",
+              "collection": "dn",
+              "acronym": "DN 26",
+              "vri": "80–110",
+              "pts": {
+                "volume": 3,
+                "page": 58,
+                "end_page": 79
+              },
+              "root_identity_sha256": "eaf06722b0d866a1838d2332f59f08b749ffd907a59c7ac4283d303f6c5c3990",
+              "root_blocks_sha256": "43ad1e87009668b6d86de5095c52ecdb93b6b863c41dde53d06e4f2ff7fe1f95"
+            }
+          ],
+          "substantive_omissions": [
+            {
+              "refs": "dn26/3 (opening setting and address)",
+              "detail": "Mātulā residence/address absent; island instruction recurs at /59 and is translated there. Repetition alone is not the hold basis."
+            },
+            {
+              "refs": "dn26/4",
+              "detail": "Opening Māra/no-foothold admonition is outside translated body; DT note4 quotes it as editorial context."
+            },
+            {
+              "refs": "dn26/6–/24",
+              "detail": "Daḷhanemi, succession, royal duty, wheel and successors absent."
+            },
+            {
+              "refs": "dn26/26–/42",
+              "detail": "Poverty, theft, punishments, worsening conduct and descending lifespans absent."
+            },
+            {
+              "refs": "dn26/44–/49",
+              "detail": "Ten-year society and sword-interval narrative not fully translated."
+            },
+            {
+              "refs": "dn26/51–/58",
+              "detail": "Recovery sequence and full Saṅkha/Metteyya narrative not fully translated."
+            }
+          ],
+          "covered_root_refs": [
+            "dn26/59",
+            "dn26/61–/67"
+          ],
+          "observations": [
+            "Only indexed ATI alternative; no uninspected ATI alternatives remain.",
+            "Same closing selection; preface summarizes omitted narrative and embeds snippets, not full source-aligned translation.",
+            "No excerpt title label is necessary for this directly observed omission finding."
+          ],
+          "rights": {
+            "copyright": "©2002 Thanissaro Bhikkhu",
+            "license": "CC BY-NC 4.0 International",
+            "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+            "revision": "30 November 2013",
+            "provenance": "Transcribed from a file provided by the translator.",
+            "conditions": [
+              "Noncommercial use with attribution and licence notice/link.",
+              "Identify modifications; do not imply endorsement.",
+              "Linked documents may have separate restrictions."
+            ],
+            "complete_individual_notice_read": true
+          },
+          "source_snapshot_commit": "45fedca341497120651efa20e756b04a13e61089",
+          "live_freshness_claim": false,
+          "source": "ati",
+          "reason": "Mātulā residence/address absent; island instruction recurs at /59 and is translated there. Repetition alone is not the hold basis. Opening Māra/no-foothold admonition is outside translated body; DT note4 quotes it as editorial context. Daḷhanemi, succession, royal duty, wheel and successors absent. Poverty, theft, punishments, worsening conduct and descending lifespans absent. Ten-year society and sword-interval narrative not fully translated. Recovery sequence and full Saṅkha/Metteyya narrative not fully translated."
+        }
+      ],
+      "confirmed_whole_alternatives": [],
+      "metadata_only_alternatives": [],
+      "remaining_ordinary_alternatives": [],
+      "rights": {
+        "individual_DN26_notice_visible": false,
+        "primary_global_notice": {
+          "url": "https://www.dhammatalks.org/",
+          "observed_on": "2026-11-08",
+          "web_view_total_lines": 413,
+          "read_notice_lines": "400–405",
+          "license": "Site-wide CC BY-NC 4.0 declaration; links to 4.0 licence.",
+          "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+          "conditions": [
+            "Attribution, source and licence link retained.",
+            "Noncommercial only; author treats every sale, including nonprofit fundraising, as commercial.",
+            "Changes identified; no endorsement implied."
+          ],
+          "notice_scope": "Global publisher declaration, not an individual raw DN26 notice pin."
+        },
+        "unavailable_lookup": "The guessed /copyright.html path was unavailable in supported web; primary homepage supplied actual declaration. No shell fetch attempted.",
+        "new_rights_or_activation_approval": false
+      },
+      "limits": [
+        "Primary DT evidence is rendered-web only: no rawHTML/runtime text/notice pins or direct-runtime availability proof.",
+        "ATI evidence is frozen official clean local snapshot; no current upstream freshness claim.",
+        "All indexed alternatives examined; neither DT nor ATI supplies a whole-discourse version.",
+        "No scripture reconstruction, SuttaCentral fetch, source activation, repository edits, commit or push.",
+        "No independent whole-unit English translation remains among these indexed versions; full Pāli stays intact."
+      ],
+      "verification": {
+        "original_link_source": "git show cec5c6f60045b30a27d1a1255e284fa8f8c47af9:server/data/translations.json",
+        "complete_root_read": "All 68 segments /1–/68 read; all 68 original blocks hashed.",
+        "ati_checkout_clean": true,
+        "ati_checkout_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "new_partial_activations": 0
+      },
+      "uncertainties": [
+        "No scope ambiguity identified. Rendered DT observations do not certify raw/runtime extraction or live availability."
+      ]
+    },
+    {
+      "owner": "mn91",
+      "source": "dhammatalks",
+      "translation_id": "dt:MN/MN91",
+      "url": "https://www.dhammatalks.org/suttas/MN/MN91.html",
+      "original_link": {
+        "source": "dhammatalks",
+        "url": "https://www.dhammatalks.org/suttas/MN/MN91.html",
+        "translator": "Ṭhānissaro Bhikkhu",
+        "reference": "MN 91 To Brahmāyu (Excerpt)",
+        "match": "number+title"
+      },
+      "link_metadata_hash_input": "original_link",
+      "link_metadata_sha256": "0c3f4a5b647b2b2dec5f2774b9bc69b18d5fc84a2a9c04617cc8a7392ca465de",
+      "input_fingerprint": {
+        "path": "server/data/translations.json",
+        "baseline_commit": "cec5c6f60045b30a27d1a1255e284fa8f8c47af9",
+        "sha256": "01685b05f1d069d74147d865b5be39fa79c52c6cbee934ef99e80045ca94de90",
+        "semantics": "SHA256 raw committed file bytes; link_metadata_sha256 is SHA256(JSON.stringify(original_link)) with original property order."
+      },
+      "root": {
+        "id": "mn91",
+        "book": 9,
+        "start": 1169,
+        "end": 1253,
+        "title": "Brahmāyusuttaṃ",
+        "collection": "mn",
+        "acronym": "MN 91",
+        "vri": "383–395",
+        "pts": {
+          "volume": 2,
+          "page": 133,
+          "end_page": 146
+        },
+        "root_blocks_sha256": "9405868f21a3c64d492535b167446ab23b4a4f29847cd5beaf8c606447c0484f"
+      },
+      "root_units": [
+        {
+          "id": "mn91",
+          "book": 9,
+          "start": 1169,
+          "end": 1253,
+          "title": "Brahmāyusuttaṃ",
+          "collection": "mn",
+          "acronym": "MN 91",
+          "vri": "383–395",
+          "pts": {
+            "volume": 2,
+            "page": 133,
+            "end_page": 146
+          },
+          "root_blocks_sha256": "9405868f21a3c64d492535b167446ab23b4a4f29847cd5beaf8c606447c0484f"
+        }
+      ],
+      "complete_root_blocks": 84,
+      "complete_root_segments": 72,
+      "root_read_extent": "All indexed segments mn91/1–/72, including substantive prose/verse, headings, approval and colophon, read in full from src/canon.mjs.",
+      "decision": "hold-whole-binding-partial-unit",
+      "reason": "The complete rendered publisher body represents Uttara’s deportment report only (mn91/40–/42), omitting the investigation/marks narrative before it and Brahmayu meeting, teaching and outcome after it. Excerpt metadata is only corroborative.",
+      "observed_on": "2026-11-08",
+      "web_view": {
+        "source_url": "https://www.dhammatalks.org/suttas/MN/MN91.html",
+        "total_lines": 48,
+        "complete_view_first_line": 0,
+        "complete_view_last_line": 47,
+        "read_extent": "0–47",
+        "title_lines": "24–25",
+        "scripture_first_line": 26,
+        "scripture_last_line": 44,
+        "scripture_lines": "26–44",
+        "editorial_framing": "Bracketed introduction at26 identifies speakers; not source narrative.",
+        "see_also_lines": "45",
+        "footer_lines": "47",
+        "provider_crawl_label": "6 days ago",
+        "evidence_kind": "Supported web tool rendered primary-page view; complete exposed page read, not a raw-source or runtime-extraction receipt."
+      },
+      "coverage": [
+        {
+          "root_refs": "mn91/40",
+          "web_lines": "26–34",
+          "content": "Walking, looking, sitting, bowl washing and receiving/eating food."
+        },
+        {
+          "root_refs": "mn91/41",
+          "web_lines": "35–41",
+          "content": "Purpose of eating, postmeal conduct, robes, meditation and teaching conduct."
+        },
+        {
+          "root_refs": "mn91/42",
+          "web_lines": "41–44",
+          "content": "Eight voice qualities and closing observation report."
+        }
+      ],
+      "represented_refs": [
+        "mn91/40–/42"
+      ],
+      "substantive_omissions": [
+        {
+          "refs": "mn91/3–/6",
+          "detail": "Videha setting, Brahmayu hearing of Gotama, instruction to Uttara, examination of signs, seven-month observation and return conversation absent."
+        },
+        {
+          "refs": "mn91/7–/39",
+          "detail": "Uttara’s report of the32great-man marks absent; root’s own abbreviated repetitions remain unexpanded."
+        },
+        {
+          "refs": "mn91/43–/53",
+          "detail": "Brahmayu’s devotional response and wish to meet, Mithila arrival, messenger protocol, visit and examination absent."
+        },
+        {
+          "refs": "mn91/54–/68",
+          "detail": "Verses requesting confirmation of signs, Buddha demonstration/reply, questions on religious attainments, answers and homage absent."
+        },
+        {
+          "refs": "mn91/69–/70",
+          "detail": "Gradual teaching/four truths, Dhamma-eye/refuge, invitation/week’s hospitality, death report and non-returner outcome absent."
+        }
+      ],
+      "nondecisive_formula_omission": {
+        "refs": "mn91/71",
+        "detail": "Closing approval formula absent; hold rests on the substantive narrative and teaching above."
+      },
+      "repetition_and_paratext": {
+        "web_line37": "Ellipses occur around repeated after-meal transitions; corresponding bowl placement, silent pause and appreciation clauses remain represented. No additional substantive omission assigned solely from these ellipses.",
+        "root_headings_and_colophon": [
+          "mn91/1–/2",
+          "mn91/72"
+        ],
+        "limits": "Scope comparison does not certify every-token equivalence or erase edition/translation differences. Brahmayu homage /44–/46 is in-source narrated action, not an opening paratext invocation."
+      },
+      "baseline_alternatives": [],
+      "remaining_ordinary_alternatives": [],
+      "local_alternative_reviews": [],
+      "alternative_check": {
+        "merged_runtime_sources": [
+          "dt:MN/MN91"
+        ],
+        "indexed_ati_alternatives": 0,
+        "indexed_anandajoti_alternatives": 0,
+        "ati_checkout_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "ati_checkout_clean": true,
+        "local_mn91_file_inventory": "rg --files pinned ATI tipitaka/mn | rg 091|91 returned no path.",
+        "conclusion": "No indexed local ATI alternative exists to inspect; no filename91 candidate exists in pinned MN directory. No assertion about unindexed passages in other publisher works."
+      },
+      "rights": {
+        "primary_global_url": "https://www.dhammatalks.org/",
+        "global_notice_lines": "400–405",
+        "global_view_total_lines": 413,
+        "observed_notice_summary": "Site-wide CC Attribution-NonCommercial4.0 notice (site labels it Unported), with older free-distribution wording acknowledged. Copyright holder regards all sales, including nonprofit sales, as commercial.",
+        "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "translator": "Ṭhānissaro Bhikkhu",
+        "page_notice_visibility": "Complete48line rendered MN91 page exposes no individual copyright/licence footer or year; none inferred.",
+        "obligations": [
+          "Preserve translator attribution, source URL and CC licence link.",
+          "Noncommercial use; do not sell source-derived content."
+        ],
+        "limits": "Primary global rights evidence only; not a complete page-specific raw notice hash."
+      },
+      "limits": [
+        "Complete primary rendered view plus complete indexed VRI root read; omitted material established by content, not title/Excerpt label alone.",
+        "Web provider reports cached crawl6days old; observation does not certify live origin-byte freshness.",
+        "No raw HTML, runtime text or notice hashes fabricated from rendered web text.",
+        "Original link and full-root hashes derive from actual local input values with Node JSON.stringify, not rendered source wording.",
+        "No source bodies saved in repository, source selector activated, scripture reconstructed, SuttaCentral fetched, canonical/notes altered, commit or push."
+      ]
+    },
+    {
+      "owner": "dn26",
+      "translation_id": "ati:/tipitaka/dn/dn.26.0.than",
+      "path": "/tipitaka/dn/dn.26.0.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/dn/dn.26.0.than.html",
+      "original_link": {
+        "source": "ati",
+        "english": "The Wheel-turning Emperor",
+        "path": "/tipitaka/dn/dn.26.0.than",
+        "url": "https://www.accesstoinsight.org/tipitaka/dn/dn.26.0.than.html",
+        "translator": "Thanissaro Bhikkhu",
+        "license": "CC-BY-NC",
+        "reference": "D iii 58",
+        "pali_title": "Cakkavatti Sutta",
+        "match": "number+title"
+      },
+      "link_metadata_hash_input": "{owner,link}",
+      "link_metadata_sha256": "382a8d1cbb59f6b72daa7aedec988a057dcaed85eaf12de6bc68c7687724736c",
+      "original_link_sha256": "c50432f9d7f0e002a64aa0e96f77b989e9f6d8063e1ce1f0bb31a0896aa8ccca",
+      "original_link_hash_input": "link",
+      "decision": "hold-whole-binding-partial-unit",
+      "review_extent": "Complete local copyrighted chunk, introduction, translation, all four notes and individual footer read against all 68 root segments.",
+      "source_html_sha256": "b2e3eec36ccfe14cbbe9644b638bb216d9e60c4f0b6ac1d954d22ea38a56232e",
+      "text_sha256": "5eab5bdbd6e4daac4b75e4d9848d3f7c70822eb52e7e3e93c5431f0ce9dfcd21",
+      "notice_sha256": "6847c68d63f30ca1710ac183e11f8b473b3e3a197ab66d0aea041d0164e3ea0e",
+      "notice_characters": 474,
+      "hash_semantics": "Raw HTML SHA hashes UTF8 file bytes; text SHA hashes Node JSON.stringify(plainText(atiContent(html))); notice SHA hashes Node JSON.stringify(atiNotice(html)).",
+      "root_units": [
+        {
+          "id": "dn26",
+          "book": 7,
+          "start": 190,
+          "end": 258,
+          "title": "Cakkavattisuttaṃ",
+          "collection": "dn",
+          "acronym": "DN 26",
+          "vri": "80–110",
+          "pts": {
+            "volume": 3,
+            "page": 58,
+            "end_page": 79
+          },
+          "root_identity_sha256": "eaf06722b0d866a1838d2332f59f08b749ffd907a59c7ac4283d303f6c5c3990",
+          "root_blocks_sha256": "43ad1e87009668b6d86de5095c52ecdb93b6b863c41dde53d06e4f2ff7fe1f95"
+        }
+      ],
+      "substantive_omissions": [
+        {
+          "refs": "dn26/3 (opening setting and address)",
+          "detail": "Mātulā residence/address absent; island instruction recurs at /59 and is translated there. Repetition alone is not the hold basis."
+        },
+        {
+          "refs": "dn26/4",
+          "detail": "Opening Māra/no-foothold admonition is outside translated body; DT note4 quotes it as editorial context."
+        },
+        {
+          "refs": "dn26/6–/24",
+          "detail": "Daḷhanemi, succession, royal duty, wheel and successors absent."
+        },
+        {
+          "refs": "dn26/26–/42",
+          "detail": "Poverty, theft, punishments, worsening conduct and descending lifespans absent."
+        },
+        {
+          "refs": "dn26/44–/49",
+          "detail": "Ten-year society and sword-interval narrative not fully translated."
+        },
+        {
+          "refs": "dn26/51–/58",
+          "detail": "Recovery sequence and full Saṅkha/Metteyya narrative not fully translated."
+        }
+      ],
+      "covered_root_refs": [
+        "dn26/59",
+        "dn26/61–/67"
+      ],
+      "observations": [
+        "Only indexed ATI alternative; no uninspected ATI alternatives remain.",
+        "Same closing selection; preface summarizes omitted narrative and embeds snippets, not full source-aligned translation.",
+        "No excerpt title label is necessary for this directly observed omission finding."
+      ],
+      "rights": {
+        "copyright": "©2002 Thanissaro Bhikkhu",
+        "license": "CC BY-NC 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "revision": "30 November 2013",
+        "provenance": "Transcribed from a file provided by the translator.",
+        "conditions": [
+          "Noncommercial use with attribution and licence notice/link.",
+          "Identify modifications; do not imply endorsement.",
+          "Linked documents may have separate restrictions."
+        ],
+        "complete_individual_notice_read": true
+      },
+      "source_snapshot_commit": "45fedca341497120651efa20e756b04a13e61089",
+      "live_freshness_claim": false,
+      "source": "ati",
+      "reason": "Mātulā residence/address absent; island instruction recurs at /59 and is translated there. Repetition alone is not the hold basis. Opening Māra/no-foothold admonition is outside translated body; DT note4 quotes it as editorial context. Daḷhanemi, succession, royal duty, wheel and successors absent. Poverty, theft, punishments, worsening conduct and descending lifespans absent. Ten-year society and sword-interval narrative not fully translated. Recovery sequence and full Saṅkha/Metteyya narrative not fully translated."
+    }
+  ],
+  "mn54": {
+    "manifest": {
+      "unit_id": "mn54",
+      "path": "/tipitaka/mn/mn.054x.than",
+      "translator": "Thanissaro Bhikkhu",
+      "english_title": "Potaliya Sutta: dream analogy (partial)",
+      "license": "CC-BY-NC",
+      "source_reference": "MN54, publisher chapter paragraph14of24 only; VRI46, mn54/29",
+      "mapping_note": "Derived prose selection from the named Access to Insight page: only chapter paragraph14of24, the dream analogy and its application, corresponds to mn54/29. Neighboring similes, notes and the edition-sensitive borrowed-goods reply are excluded. The original VRI paragraph contains …pe…; preserve that abbreviation. The publisher supplies its English refrain; no Pāli is expanded or reconstructed, and word-level alignment is not claimed. This is not a whole MN54 translation. Complete ©2003 Thanissaro Bhikkhu attribution and CC BY-NC4.0 notice accompany the selection.",
+      "source_html_sha256": "edcde57d7f7920743608b1abb25b3ded7c4d33519bfea85986a9b776cd349e8a",
+      "root": {
+        "id": "mn54",
+        "title": "Potaliyasuttaṃ",
+        "vri": "31–50",
+        "book": 9,
+        "start": 67,
+        "end": 108,
+        "root_blocks_sha256": "e74467a381dc64cd20d8937c116dbc7ea8cef9ce4bc0c1157651a122bfcb8126"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mn54",
+        "first_ref": "mn54/29",
+        "last_ref": "mn54/29",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "588bf5cc717614cb2549544048afb004a8ce74a84ff5bb3c337477b38bd7ca49",
+        "text_sha256": "97f15d626ea59743f3fac2e56c85a34cfb59084157e5eed22ab14503140986f1",
+        "notice_sha256": "de93b79f4590c638218614b4c32bdce786225ce7a17a3f214cc78f6dc6e7dea0",
+        "extractor": "ati-chapter-p14-of24-v1"
+      }
+    },
+    "previous_partial_descriptors": [
+      {
+        "unit_id": "thag17.3",
+        "descriptor_sha256": "134f44703c4a40d95692554a9d2b288e69fac78476f418cf0f9fd8016501ae1d"
+      },
+      {
+        "unit_id": "thag6.13",
+        "descriptor_sha256": "a1e4b3aa8425afb8b0405600bebc5fb149b30631ea0cda37a098911309ab88cf"
+      },
+      {
+        "unit_id": "thag10.1",
+        "descriptor_sha256": "56c6ed79d556a30fe77c557225f8570e65de70d5b2f09d9f06e6a69493ce741c"
+      },
+      {
+        "unit_id": "thag15.2",
+        "descriptor_sha256": "63e531afec51bf43f7b32235edc66127d8f1b3cc3766c62c5483b6c7d99acd7c"
+      },
+      {
+        "unit_id": "thag16.8",
+        "descriptor_sha256": "3b32c33b18dff19c7d9e5ecede5fab2fba864a7a8acc9eda9bd866cdff4f1cf4"
+      },
+      {
+        "unit_id": "thag2.13",
+        "descriptor_sha256": "2ef0d8cf97a652892b6da0c8ff66017b8d004172f7f92ce626bc038d5bc97bcb"
+      },
+      {
+        "unit_id": "thag15.1",
+        "descriptor_sha256": "819b999b03a0c15c5ad76bfa08456262104bac5093681f32b1d4253e9b3af4ba"
+      },
+      {
+        "unit_id": "snp3.11",
+        "descriptor_sha256": "b7912f6fddf21db799813bde7815c5596620fa7d7623a9296a32a82c2ad539fc"
+      },
+      {
+        "unit_id": "mn34",
+        "descriptor_sha256": "c9faf73a9da654b75a3334ebded1f44b2f1acdcba805299ea4f8d9850c05ef55"
+      },
+      {
+        "unit_id": "sn12.22",
+        "descriptor_sha256": "b5ba881f5596dd30e6e9dae6be1447fbcbc5b0e932e640d1c3510235d7c5c45b"
+      },
+      {
+        "unit_id": "sn12.60",
+        "descriptor_sha256": "6bee468dfbd858381168e4f3d1fe172cc00cba8103c9ed47927e7b63248f295e"
+      },
+      {
+        "unit_id": "sn22.87",
+        "descriptor_sha256": "a08cd3adf56a21186e7f0f358eebce63d69d4a37f8eed4b1c6c353bbbb9dae3c"
+      },
+      {
+        "unit_id": "sn35.244",
+        "descriptor_sha256": "e5e918911a944ba79f54b86c39ecad494ab3dd3f5766d113fff390e19255f54f"
+      },
+      {
+        "unit_id": "sn56.22",
+        "descriptor_sha256": "3b871a04755cc4809d9e13da47f19c32ddd23cd7a3fc899ab806988458e1b239"
+      }
+    ],
+    "selected_english_characters": 646,
+    "selected_pali_segments": 1
+  },
+  "mn54_independent_review": {
+    "observed_on": "2026-11-08",
+    "decision": "approve-bounded-source-specific-partial-proposal-only",
+    "source": "ati",
+    "owner": "mn54",
+    "path": "/tipitaka/mn/mn.054x.than",
+    "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.054x.than.html",
+    "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+    "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "version": 1,
+    "extractor": "ati-chapter-p14-of24-v1",
+    "publisher_structure": {
+      "copyright_chunks": 1,
+      "chapter_divs": 1,
+      "paragraphs_before_notes": 24,
+      "selected_one_based": 14,
+      "first_paragraph_is_ellipsis": true,
+      "selected_has_note_marker": false,
+      "selected_characters": 646
+    },
+    "scope": {
+      "first_ref": "mn54/29",
+      "last_ref": "mn54/29",
+      "first_offset": 28,
+      "last_offset": 28,
+      "whole_rendered_segments": 1,
+      "kind": "partial_unit",
+      "whole_unit_coverage": false,
+      "word_level_alignment_verified": false
+    },
+    "pins": {
+      "source_html_sha256": "edcde57d7f7920743608b1abb25b3ded7c4d33519bfea85986a9b776cd349e8a",
+      "text_sha256": "97f15d626ea59743f3fac2e56c85a34cfb59084157e5eed22ab14503140986f1",
+      "notice_sha256": "de93b79f4590c638218614b4c32bdce786225ce7a17a3f214cc78f6dc6e7dea0",
+      "pali_sha256": "588bf5cc717614cb2549544048afb004a8ce74a84ff5bb3c337477b38bd7ca49",
+      "segment_sha256": "f112324130fc28a6c4e759b9e63a5b7f98cddad04248e979c09a6270dd24cede",
+      "root_blocks_sha256": "e74467a381dc64cd20d8937c116dbc7ea8cef9ce4bc0c1157651a122bfcb8126"
+    },
+    "source_scope_evidence": [
+      "P14 includes dream parks, forests, terrain and lakes, disappearance upon waking, sensuality/dream comparison, suffering/drawbacks and equanimity refrain. This is the complete substantive scope of original root29.",
+      "P13 concludes the previous ember-pit simile (/28); P15 starts borrowed goods (/30), so selecting P14 does not include either neighboring simile.",
+      "Original root29 contains peyyala abbreviation …pe…; publisher writes out its refrain. Preserve original Pali unchanged, retain the abbreviation and disclose expansion in source translation; no generated Pali or word-level correspondence.",
+      "Borrowed-goods edition variant occurs at root31 and publisher P16; neither is selected."
+    ],
+    "rights": {
+      "copyright": "©2003 Thanissaro Bhikkhu",
+      "publisher": "Access to Insight (BCBS Edition)",
+      "license": "CC BY-NC4.0 International",
+      "source": "File supplied by translator",
+      "revision": "30 November2013",
+      "requirements": [
+        "Attribute translator and publisher.",
+        "Retain full individual notice and citation on every returned scope/continuation.",
+        "Identify deliberately selected excerpt and preserve existing noncommercial source restrictions.",
+        "No unrestricted rights inferred for linked documents."
+      ]
+    },
+    "activation_requirements": [
+      "Finite exact owner/path/licence/version/extractor profile; no caller-selected selectors.",
+      "Exactly one copyrighted chunk/chapter and24 chapter paragraphs before notes; reject structural drift before output.",
+      "Pin full raw HTML at build and selected English/full notice/whole root/scoped Pali; retain runtime notice/text checks and exact consent/registry downgrade guards.",
+      "Retire ONLY exact ATI54 D213 exclusion after reviewed activation; keep DT54 hold.",
+      "All previous14 descriptors unchanged. Do not count this as whole English or restore daily whole-English eligibility."
+    ],
+    "limitations": [
+      "Metadata-only source review: no implementation or activation performed by this reviewer.",
+      "No English source body stored in repository or this receipt.",
+      "No unseen alternate edition or upstream freshness claim."
+    ]
+  },
+  "retired_exclusion": {
+    "source": "ati",
+    "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.054x.than.html",
+    "status": "withheld-partial-unit",
+    "subject_ids": [
+      "mn54"
+    ],
+    "reason": "The page omits the entire opening encounter and eight-factor household-training section mn54/2–/13, and final acknowledgment/refuge mn54/40. It contains the seven sensuality similes and the three knowledges through mn54/39.",
+    "review": {
+      "source_url": "https://www.accesstoinsight.org/tipitaka/mn/mn.054x.than.html",
+      "observed_on": "2026-11-08",
+      "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "root_units": [
+        {
+          "id": "mn54",
+          "book": 9,
+          "start": 67,
+          "end": 108,
+          "title": "Potaliyasuttaṃ",
+          "collection": "mn",
+          "acronym": "MN 54",
+          "vri": "31–50",
+          "pts": {
+            "volume": 1,
+            "page": 359,
+            "end_page": 368
+          },
+          "root_blocks_sha256": "e74467a381dc64cd20d8937c116dbc7ea8cef9ce4bc0c1157651a122bfcb8126"
+        }
+      ],
+      "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+      "source_html_sha256": "edcde57d7f7920743608b1abb25b3ded7c4d33519bfea85986a9b776cd349e8a",
+      "text_sha256": "276f63ece70985258305f9633c7a6e3863330f56ff39ddda498d0323ea7ed560",
+      "notice_sha256": "de93b79f4590c638218614b4c32bdce786225ce7a17a3f214cc78f6dc6e7dea0",
+      "method": "Complete pinned official ATI body/notice and full indexed root inspected; metadata pins use raw HTML SHA256 or SHA256 compact UTF8 JSON of runtime extracted text/complete notice/root blocks. Exact omitted/condensed scopes in final-excerpt-binding-review.json. No new source activation or rights approval."
+    }
+  },
+  "removed_bindings": [
+    {
+      "unit_id": "dn21",
+      "url": "https://www.dhammatalks.org/suttas/DN/DN21.html",
+      "reason": "The primary body omits substantial opening narrative and the Gopaka teaching; its final ellipsis also removes the six advantages, praise and reward. The editorial introduction quotes the song but does not restore the missing full-discourse context."
+    },
+    {
+      "unit_id": "dn26",
+      "url": "https://www.dhammatalks.org/suttas/DN/DN26.html",
+      "reason": "Only closing /59,/61–/67 translated; substantial unique narrative /6–/58 omitted as full translation. Introduction is editorial summary with snippets. Finding rests on body comparison, not title."
+    },
+    {
+      "unit_id": "dn26",
+      "url": "https://www.accesstoinsight.org/tipitaka/dn/dn.26.0.than.html",
+      "reason": "Mātulā residence/address absent; island instruction recurs at /59 and is translated there. Repetition alone is not the hold basis. Opening Māra/no-foothold admonition is outside translated body; DT note4 quotes it as editorial context. Daḷhanemi, succession, royal duty, wheel and successors absent. Poverty, theft, punishments, worsening conduct and descending lifespans absent. Ten-year society and sword-interval narrative not fully translated. Recovery sequence and full Saṅkha/Metteyya narrative not fully translated."
+    },
+    {
+      "unit_id": "mn91",
+      "url": "https://www.dhammatalks.org/suttas/MN/MN91.html",
+      "reason": "The complete rendered publisher body represents Uttara’s deportment report only (mn91/40–/42), omitting the investigation/marks narrative before it and Brahmayu meeting, teaching and outcome after it. Excerpt metadata is only corroborative."
+    }
+  ],
+  "measured": {
+    "ordinary_links": 2538,
+    "dhammatalks": 1270,
+    "ati": 1115,
+    "anandajoti": 153,
+    "whole_direct": 1434,
+    "whole_inherited": 1857,
+    "runtime_grouped_direct": 1408,
+    "runtime_grouped_inherited": 1831,
+    "partial_sources": 15,
+    "partial_only": 9,
+    "shared_sources": 12,
+    "shared_subject_records": 110,
+    "shared_only": 52,
+    "daily_pool": 1257,
+    "daily_2026_11_01": "sn12.31",
+    "canonical_texts": 8544,
+    "broader_metadata_leads": 220,
+    "broader_metadata_retained": 6,
+    "broader_metadata_unreviewed": 214
+  },
+  "limits": "Rendered DT web views document substantive scope, not fresh runtime bytes or full page-specific notice hashes. MN54 source review activates only its exact dream paragraph. No whole-catalogue certification or complete English coverage. Prior14 descriptors, canonical/commentary/parallels and user-data schemas unchanged.",
+  "independent_review": {
+    "scope_review": "Three independent source-review lanes; MN54 second complete source/root/rights review; final read-only source/evidence and adversarial implementation reviews.",
+    "implementation_findings_fixed": [
+      "Browser finite-selector allowlist initially omitted the new selector.",
+      "Known finite source paths initially could downgrade to a generic profile by coordinated owner/translator/licence/extractor changes; paths are now reserved independently of owner."
+    ],
+    "documentation_findings_fixed": [
+      "Stale MN/SN/Sutta English subtotals corrected against measured buildCoverage, independently of headline changes.",
+      "Current-state AGENTS counts reconciled; historical decision/evidence totals preserved."
+    ],
+    "limits": "Independent AI-assisted reviews, not specialist philological certification or live publisher freshness."
+  },
+  "validation": {
+    "partial-browser": {
+      "report_sha256": "17af0fe3bc0475a672087c473b730a3a7e5d100245535cd5c1d39dd022ae99e1",
+      "passed": 221,
+      "a11y_scans": 0,
+      "a11y_violations": 0
+    },
+    "partial-installed": {
+      "report_sha256": "388d6a8feb63bcbca1d9ca6acedad9abc42bf787a1122cce24c1d993bac2d491",
+      "passed": 221,
+      "a11y_scans": 0,
+      "a11y_violations": 0
+    },
+    "topics-browser": {
+      "report_sha256": "e50a60626982261f8688f3d5208b66501e683920dcd374017984a1413de710a2",
+      "passed": 64,
+      "a11y_scans": 0,
+      "a11y_violations": 0
+    },
+    "topics-a11y": {
+      "report_sha256": "07cda23a4124c058d584d60d5fe63eb2766b5ea21611008ffa938b5392a4e5f1",
+      "passed": 64,
+      "a11y_scans": 32,
+      "a11y_violations": 0
+    },
+    "topics-installed": {
+      "report_sha256": "550b93d38103966d865f4668d08bea18bc1c2bb7bb99abf2d638ff6ed445e1cd",
+      "passed": 64,
+      "a11y_scans": 0,
+      "a11y_violations": 0
+    },
+    "native-partial": {
+      "report_sha256": "31074777140a3a4e8e090b298b262bd582f9fa7d47a4752aacbae8d898fe9eda",
+      "status": "passed",
+      "modes": 8
+    },
+    "evidence-installed": {
+      "report_sha256": "7aaeab248c510144e6fe104cac1bbac587231f25e08341261f30858d1e50aa62",
+      "status": "passed",
+      "network_attempts": 0,
+      "counts": {
+        "owners": 2018,
+        "commentary_links": 5322,
+        "commentary_segments": 3263,
+        "shared_links": 1518,
+        "shared_segments": 8720,
+        "reading_commands": 11983
+      },
+      "study": {
+        "plans": 4,
+        "plan_days": 478,
+        "plan_readings": 478,
+        "plan_pages": 488,
+        "guide_links": 87,
+        "guide_external_excerpts": 2,
+        "verse_days": 423,
+        "sutta_days": 1257,
+        "daily_pages": 1719,
+        "period_checks": 4,
+        "iso_date_edges": 6
+      },
+      "navigation": {
+        "topic_catalogue_pages": 13,
+        "topics": 472,
+        "topic_text_refs": 1364,
+        "topic_edges": 450,
+        "lists": 37,
+        "list_text_refs": 102,
+        "list_edges": 63,
+        "parittas": 23,
+        "paritta_sources": 29,
+        "paritta_pages": 90,
+        "canonical_readings": 728,
+        "canonical_pages": 754
+      }
+    },
+    "partial-a11y": {
+      "report_sha256": "5d7beeb99cf2b49356b9de613220afb18ce25954d6e89c1f030b17846e8031f1",
+      "passed": 221,
+      "a11y_scans": 180,
+      "a11y_violations": 0
+    },
+    "npm-run-check": {
+      "status": "passed",
+      "tests": 1113,
+      "passed": 1111,
+      "failed": 0,
+      "unchanged_optional_skips": 2,
+      "audited_texts": 8544,
+      "audit_failures": 0,
+      "log_sha256": "b108d3d7420fd3f5aa2f90ecf40c841158ea5959bc8a0baf002e93314da3f301"
+    }
+  }
+}

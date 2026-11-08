@@ -35,6 +35,7 @@ export function atiPartialExcerpt(html,extractor) {
   if(extractor==='ati-chapter-p2-of2-v1')return chapterParagraph(html,2,2);
   if(extractor==='ati-chapter-p11-of11-v1')return chapterParagraph(html,11,11,'Seeing the Dhamma');
   if(extractor==='ati-chapter-p1-of4-v1')return chapterParagraph(html,4,1);
+  if(extractor==='ati-chapter-p14-of24-v1')return chapterParagraph(html,24,14);
   if(extractor==='ati-excerpt-verse-pre-v1')return excerptVersePre(html);
   throw Error('Unsupported ATI partial extractor. No excerpt was returned.');
 }
@@ -42,7 +43,7 @@ export function atiPartialExcerpt(html,extractor) {
 // Reviewed finite source structures, never caller-supplied HTML selectors.
 export const ATI_SEGMENT_EXTRACTORS = Object.freeze([
   'ati-freeverse-v1', 'ati-chapter-p2-of2-v1', 'ati-chapter-p11-of11-v1',
-  'ati-chapter-p1-of4-v1', 'ati-excerpt-verse-pre-v1',
+  'ati-chapter-p1-of4-v1', 'ati-excerpt-verse-pre-v1', 'ati-chapter-p14-of24-v1',
 ]);
 function copyrightedChunk(html) {
   const begin='<!-- BEGIN COPYRIGHTED TEXT CHUNK -->',end='<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->';

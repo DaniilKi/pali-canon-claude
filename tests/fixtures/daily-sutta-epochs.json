@@ -1305,6 +1305,12 @@
       "remove": ["an6.54", "an10.27", "mn34", "sn12.60", "sn22.87", "sn35.244", "sn56.22"],
       "expected_count": 1261,
       "expected_nov1": "sn55.32"
+    },
+    "d213": {
+      "add": [],
+      "remove": ["an6.54", "an10.27", "mn34", "sn12.60", "sn22.87", "sn35.244", "sn56.22", "mn54"],
+      "expected_count": 1260,
+      "expected_nov1": "sn22.121"
     }
   },
   "limits": "Frozen eligibility metadata only. This is not authority to restore withheld sources or historical scripture. Exact revision/source consent remains mandatory at runtime."

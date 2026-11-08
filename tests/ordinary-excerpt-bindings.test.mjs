@@ -68,6 +68,7 @@ test('shared retained-source registry preserves the five historical reviews and 
   assert.deepEqual(retained.rows.slice(5), keep);
   const d = canon.load();
   const current = scopeScreen(d, { review: retained });
+  assert.deepEqual([current.count, current.reviewed_retained_snapshots, current.unreviewed_leads], [220, 6, 214]);
   const selected = current.rows.find(r => r.owner === 'thig3.5' && r.translation_id === 'ati:/tipitaka/kn/thig/thig.03.05.than');
   assert.equal(selected.review_status, 'reviewed-retained-at-snapshot');
   for (const field of ['title', 'vri']) {
@@ -82,12 +83,12 @@ test('shared retained-source registry preserves the five historical reviews and 
   assert.match(readFileSync('scripts/canon/ordinary_excerpt_packet.py', 'utf8'), /Path\(__file__\)\.with_name\('retained_ordinary_pages\.json'\)/);
 });
 
-test('withholding alternative versions does not alter complete coverage, partial/shared availability or the current daily pool', () => {
+test('current coverage counts whole and scoped availability separately after D214 source review', () => {
   const t = translationCoverage({ refresh: true }).total;
-  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2542, 1411, 1834, 14, 8]);
+  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2538, 1408, 1831, 15, 9]);
   assert.deepEqual([t.shared_links, t.with_shared_english, t.shared_only], [12, 110, 52]);
   const daily = dailyText({ ...canon }, { date: '2026-11-01', kind: 'sutta' });
-  assert.deepEqual([daily.rotation.of, daily.text.id], [1260, 'sn22.121']);
+  assert.deepEqual([daily.rotation.of, daily.text.id], [1257, 'sn12.31']);
 });
 
 const python = ['python3', 'python'].find(cmd => spawnSync(cmd, ['--version']).status === 0);

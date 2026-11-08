@@ -442,6 +442,37 @@
         "notice_sha256": "72c7579ce4eaedb58202cd9880f6571542c0746d561ea4192c9e3c9245bb734b",
         "extractor": "ati-excerpt-verse-pre-v1"
       }
+    },
+    {
+      "unit_id": "mn54",
+      "path": "/tipitaka/mn/mn.054x.than",
+      "translator": "Thanissaro Bhikkhu",
+      "english_title": "Potaliya Sutta: dream analogy (partial)",
+      "license": "CC-BY-NC",
+      "source_reference": "MN54, publisher chapter paragraph14of24 only; VRI46, mn54/29",
+      "mapping_note": "Derived prose selection from the named Access to Insight page: only chapter paragraph14of24, the dream analogy and its application, corresponds to mn54/29. Neighboring similes, notes and the edition-sensitive borrowed-goods reply are excluded. The original VRI paragraph contains …pe…; preserve that abbreviation. The publisher supplies its English refrain; no Pāli is expanded or reconstructed, and word-level alignment is not claimed. This is not a whole MN54 translation. Complete ©2003 Thanissaro Bhikkhu attribution and CC BY-NC4.0 notice accompany the selection.",
+      "source_html_sha256": "edcde57d7f7920743608b1abb25b3ded7c4d33519bfea85986a9b776cd349e8a",
+      "root": {
+        "id": "mn54",
+        "title": "Potaliyasuttaṃ",
+        "vri": "31–50",
+        "book": 9,
+        "start": 67,
+        "end": 108,
+        "root_blocks_sha256": "e74467a381dc64cd20d8937c116dbc7ea8cef9ce4bc0c1157651a122bfcb8126"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mn54",
+        "first_ref": "mn54/29",
+        "last_ref": "mn54/29",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "588bf5cc717614cb2549544048afb004a8ce74a84ff5bb3c337477b38bd7ca49",
+        "text_sha256": "97f15d626ea59743f3fac2e56c85a34cfb59084157e5eed22ab14503140986f1",
+        "notice_sha256": "de93b79f4590c638218614b4c32bdce786225ce7a17a3f214cc78f6dc6e7dea0",
+        "extractor": "ati-chapter-p14-of24-v1"
+      }
     }
   ]
 }
