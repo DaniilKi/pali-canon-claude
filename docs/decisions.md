@@ -1287,3 +1287,10 @@ The standalone-web record used branch-local D195 before integration; D198 avoids
 - **Harness.** Isolate synthetic Iti scopes from real overlapping declarations; real installed cases preserve ordinary DT choices and distinguish overlapping shared versions. Add packaged withheld-binding checks, public-limit-sized mixed-source batches and complete live browser continuation reconstruction. No production UI/API change.
 - **Honest counts.** Ordinary links2595→2588 (ATI1167→1160), direct1449/inherited1872 unchanged. Shared8→12 pages,48→110 distinct subject records,48→51 shared-only. Four scopes add66 associations across62 distinct subjects; onlyIti11–13 are newly shared-only, never first-whole-English translations. Historical queue51/4 screening opportunities unchanged. Seven range leads resolved; other source reviews remain open.
 - **Evidence.** See [audit](data/iti-range-binding-audit.md). No Pāli/source-body bundle changes, main merge or deployment.
+
+### D203 — Review publisher ranges against complete indexed roots
+
+- **Problem.** The remaining DT Iti10 ordinary binding returned a combined10–13 page as one discourse. A superficially similar AN3:47–48 title is valid because the indexed AN3.47 root contains both complete VRI sections.
+- **Decision.** Hold DT Iti10 through the existing URL-level post-linker exclusions and retain AN3.47 unchanged. Preserve independently reviewed ATI scoped access, exact-version refusal and rights. Rendered primary review establishes boundaries, not raw runtime source pins; DT shared integration remains pending.
+- **Repeatability.** Add a read-only ordinary-source metadata screen with explicit screening-only output and root-boundary context, plus source-scope regression tests. Wider verse ranges remain unverified leads, not coverage approvals.
+- **Honest counts.** Ordinary2587, direct1448/inherited1871; grouped1422/1845. Shared12 pages/110 actual subject records/52 shared-only. Daily eligible1270→1269; refresh one dated evaluation with an isolated old-data negative control. No algorithm change or whole-translation gain. [Evidence and limitations](data/provider-scope-audit.md).

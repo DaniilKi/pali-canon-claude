@@ -18,7 +18,7 @@ const serverDir = option('--server-dir') || resolve('server'), reportPath = opti
 let stage, child, client, timer;
 const reports = []; let previous;
 const baseline = translationCoverage().total;
-const syntheticBaseline = { ...baseline, shared_links: 0, with_shared_english: 0, shared_only: 0 };
+let syntheticBaseline;
 const actualMetadata = new Map();
 for (const row of Object.values(canon.load().translations).flat().filter(l=>l.shared_scope)) for (const id of row.shared_scope.text_ids) actualMetadata.set(id, canon.describe(canon.resolve(id).unit));
 async function close() {
@@ -30,6 +30,10 @@ try {
   stage = await mkdtemp(join(tmpdir(), 'pali-partial-fixture-'));
   await cp(serverDir, join(stage, 'server'), { recursive: true }); await mkdir(join(stage, 'empty'));
   const original = JSON.parse(await readFile(join(stage, 'server/data/translations.json'), 'utf8'));
+  const removedLinks=sharedIds.reduce((n,id)=>n+(original[id]||[]).filter(l=>!Object.hasOwn(l,'shared_scope')&&!Object.hasOwn(l,'partial_scope')).length,0);
+  const removedTexts=sharedIds.filter(id=>canon.describe(canon.resolve(id).unit).english_available>0).length;
+  assert.ok(removedTexts<=removedLinks,'Synthetic primary Iti fixtures must not retain an inherited/AJ whole source');
+  syntheticBaseline={...baseline,links:baseline.links-removedLinks,with_english:baseline.with_english-removedTexts,with_english_including_inherited:baseline.with_english_including_inherited-removedTexts,shared_links:0,with_shared_english:0,shared_only:0};
   const preload = join(stage, 'synthetic-provider.cjs');
   const reviewedPages = Object.values(original).flat().filter(l => l.match === 'reviewed-shared-page');
   const modes = ['stdio', 'http', 'mixed_versions', 'changed_mapping', 'changed_source', 'removed_scope', 'aj_shared_metadata', 'aj_partial_metadata', 'aj_invalid_metadata'].map(mode=>[mode,null]);
@@ -147,7 +151,7 @@ try {
       const selected = await call('get_translation', { uid }); assert.equal(selected.translation_id, 'dt:SYNTHETIC/FULL');
       assert.equal((await call('get_translation', { uid, translation: link.translator })).translation_id, selected.translation_id);
       const totals = (await call('list_sources', {})).translation_coverage.total;
-      assert.equal(totals.links, syntheticBaseline.links); assert.equal(totals.with_english, syntheticBaseline.with_english); assert.equal(totals.shared_links, (syntheticBaseline.shared_links || 0) + 1); assert.equal(totals.with_shared_english, (syntheticBaseline.with_shared_english || 0) + 4); assert.equal(totals.shared_only, (syntheticBaseline.shared_only || 0) + 3);
+      assert.equal(totals.links, syntheticBaseline.links+1); assert.equal(totals.with_english, syntheticBaseline.with_english+1); assert.equal(totals.shared_links, (syntheticBaseline.shared_links || 0) + 1); assert.equal(totals.with_shared_english, (syntheticBaseline.with_shared_english || 0) + 4); assert.equal(totals.shared_only, (syntheticBaseline.shared_only || 0) + 3);
       const args = { text: 'amber lantern copper window', language: 'english', texts: [uid] };
       const normal = await call('verify_quote', args); assert.equal(normal.scope.shared_translations_excluded.length, 1); assert.ok(normal.matches.every(m => m.text_id === uid));
       const inclusive = await call('verify_quote', { ...args, include_shared: true }); assert.equal(inclusive.scope.translations_checked.length, 2); assert.equal(inclusive.equally_similar_texts, undefined); assert.equal(inclusive.equally_similar_sources, 2);
@@ -156,7 +160,7 @@ try {
     } else {
       for (const member of sharedIds) { const meta = await call('get_metadata', { uid: member }); assert.equal(meta.english_available, 0); assert.equal(meta.shared_english_available, 1); assert.deepEqual(meta.english[0].translation_scope.text_ids, sharedIds); }
       const totals = (await call('list_sources', {})).translation_coverage.total;
-      for (const k of ['links', 'with_english', 'with_english_including_inherited']) assert.equal(totals[k], baseline[k] - 1, k);
+      for (const k of ['links', 'with_english', 'with_english_including_inherited']) assert.equal(totals[k], syntheticBaseline[k], k);
       assert.equal(totals.shared_links, (syntheticBaseline.shared_links || 0) + 1); assert.equal(totals.with_shared_english, (syntheticBaseline.with_shared_english || 0) + 4); assert.equal(totals.shared_only, (syntheticBaseline.shared_only || 0) + 4);
       await call('resolve_reference', { reference: link.url }, /Shared-page URL.*iti10, iti11, iti12, iti13/);
       await call('get_text', { uid: link.url }, /Shared-page URL/);
