@@ -645,6 +645,33 @@
       "tests_failed": 0,
       "canonical_records_audited": 8544,
       "audit_failures": 0
-    }
+    },
+    "installed_evidence_audit": {
+      "status": "passed",
+      "counts": {
+        "owners": 2018,
+        "commentary_links": 5322,
+        "commentary_segments": 3263,
+        "shared_links": 1518,
+        "shared_segments": 8720,
+        "reading_commands": 11983
+      },
+      "navigation": {
+        "topic_catalogue_pages": 13,
+        "topics": 472,
+        "topic_text_refs": 1384,
+        "topic_edges": 450,
+        "lists": 37,
+        "list_text_refs": 102,
+        "list_edges": 63,
+        "parittas": 23,
+        "paritta_sources": 29,
+        "paritta_pages": 90,
+        "canonical_readings": 734,
+        "canonical_pages": 762
+      },
+      "network_attempts": 0
+    },
+    "ci_followup": "First dev evidence job exposed an outdated assumption that every further-reading link is commentary. The harness now requires exact withheld-page scope/label and no id/read_with for that distinct class, retaining the original essay assertions for all other links. Full installed evidence audit passed locally."
   }
 }

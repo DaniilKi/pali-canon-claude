@@ -64,7 +64,14 @@ export async function auditNavigation(call) {
     assert.equal(actual.further_reading?.length || 0, raw.further_reading?.length || 0);
     for (const [i,e] of (actual.further_reading || []).entries()) {
       assert.equal(e.url, raw.further_reading[i].url);
-      assert.match(e.kind, /commentary, not scripture/);
+      if (raw.further_reading[i].scope === 'withheld-publisher-page') {
+        assert.equal(e.scope, 'withheld-publisher-page');
+        assert.equal(e.kind, 'External publisher page; automatic canonical mapping withheld after source review. Not an available whole-unit translation.');
+        assert.equal(e.read_with, undefined);
+        assert.equal(e.id, undefined);
+      } else {
+        assert.match(e.kind, /commentary, not scripture/);
+      }
     }
     counts.topics++;
   }
