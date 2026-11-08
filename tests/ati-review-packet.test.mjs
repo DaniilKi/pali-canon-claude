@@ -68,3 +68,18 @@ with tempfile.TemporaryDirectory() as tmp:
   else:raise AssertionError('untracked ledger source accepted')
 `],{encoding:'utf8'});assert.equal(r.status,0,r.stderr);
 });
+
+test('review screening never counts a shared owner or its reached members as whole-unit English',{skip:!python},()=>{
+ const r=spawnSync(python,['-c',`
+import sys,json,tempfile,pathlib
+sys.path.insert(0,'scripts/canon')
+from ati_review_packet import packet
+with tempfile.TemporaryDirectory() as tmp:
+ root=pathlib.Path(tmp);p=root/'tipitaka/sn/sn01/fixture.html';p.parent.mkdir(parents=True);p.write_text('[MY_TITLE]={Fixture} [PTS_ID]={S i 2} [EXTENT]={complete}')
+ c={'source':{'commit':'vri'},'units':[{'id':'sn1.2','title':'One','collection':'sn','pts':{'volume':1,'page':2,'end_page':2}},{'id':'sn1.3','title':'Two','collection':'sn','pts':{'volume':1,'page':2,'end_page':2}}]}
+ links={'sn1.2':[{'source':'ati','path':'/tipitaka/sn/other','reference':'Shared fixture','shared_scope':{'text_ids':['sn1.2','sn1.3']}}]}
+ row=packet(c,links,root,{'rows':[{'path':'tipitaka/sn/sn01/fixture.html'}]},{'ati_commit':'ati','vri_commit':'vri','links':[]})['rows'][0]
+ assert row['first_english_possibilities']==2
+ assert all(not u['has_english'] and u['has_shared_english'] and u['shared_page_references']==['Shared fixture'] for u in row['possible_pts_matches'])
+print('passed')`],{encoding:'utf8'});assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/passed/);
+});

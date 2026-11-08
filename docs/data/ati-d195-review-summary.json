@@ -1,0 +1,46 @@
+{
+  "review_packet_only": true,
+  "approvals_changed": false,
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "summary": {
+    "ledger_pages": 114,
+    "pending_pages": 59,
+    "pages_with_first_english_possibilities": 12,
+    "publisher_extents": {
+      "complete": 42,
+      "excerpt": 17
+    }
+  },
+  "warning": "PTS overlap, extent and licence labels are screening clues only. No content, scope or permission is approved. No English body is included.",
+  "decision": "D195",
+  "baseline_commit": "f0906bdc8ca28709ab76508dfa29ab2e43f8cd3b",
+  "added_whole_english_links": 0,
+  "newly_whole_english_units": [],
+  "added_shared_pages": 1,
+  "shared_subjects": [
+    "an1.49",
+    "an1.50",
+    "an1.51",
+    "an1.52"
+  ],
+  "whole_coverage": {
+    "links": 2596,
+    "direct": 1450,
+    "including_inherited": 1873
+  },
+  "packet_sha256": "44c4597c5da40197f778d1a1cacb7e6f7f62206bb729a0f00b3b3af70a0a3632",
+  "input_sha256": {
+    "scripts/canon/ati_review_packet.py": "07234fca8eae1f1d14d53d93f2e02a716c6e8cb2329f017cb0478fbeb460a0d6",
+    "scripts/canon/reviewed_ati_stories.json": "362aa2e2389be4e35e219c2a395b68f6b2b9a0f758ae6c1723578beb58eac0da",
+    "scripts/canon/reviewed_shared_pages.py": "1b14acd370d6504879183f122dd9f1629fac7b0e88ec4910e71aaefaffaf9ca6",
+    "scripts/canon/reviewed_shared_pages.json": "b28240f8a98f341d1b2a45da9e9a03e76f69984dbaed15aa9a88c87f7637201c",
+    "scripts/canon/verify_shared_html.mjs": "7d54d21018b79124cab50cda72e7535145381422b14640787b32910c955da5b8",
+    "scripts/canon/build_translations.py": "7d516831e5b84e53ed3e6227b2009adb867419447c49ca048b9fd0cfeeb6a757",
+    "server/data/translations.json": "985d2160055e237c221e2f8449742f0d4077a8024b9c94052206dd62a15a4279",
+    "docs/data/ati-coverage-screen.json": "a993f90b9937d627a113df1c48217a2ee1402569f5b79d2e1cc8f34ee16c55b8",
+    "src/translation-scope.mjs": "f4db183929fd7cf421b384ff3ebd0da3ffd3c7279102be8bed5624af0751a6d9",
+    "src/english.mjs": "2b571a9e77f28a7cb5be270c2eaab6705329a593954c8f41e89f591d0abb8064",
+    "src/verify.mjs": "b36f5c39b9616be04745f0bc3df4983a179bb0bff7e50254420aa647042e2d41"
+  }
+}

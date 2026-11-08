@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "links": [
+    {
+      "owner_id": "an1.49",
+      "text_ids": [
+        "an1.49",
+        "an1.50",
+        "an1.51",
+        "an1.52"
+      ],
+      "path": "/tipitaka/an/an01/an01.049.than",
+      "english_title": "Luminous — shared publisher page",
+      "source_reference": "AN 1.49–52 (shared publisher page)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "presentation": "compilation",
+      "source_html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+      "text_sha256": "35182e6e8d3990b8cb6ace20602277a5d409fd45c5a44b9e277ec25995084c60",
+      "notice_sha256": "3b8f3fab868dd8176bb2cce37b9e9437bdca790a6a415a0f67ee589ce099b1fe",
+      "pali_segments_sha256": "5c98023f2f97b51c5ea9ef76b4a031ac9725ec8cecee8fbacc0f2c0ecf3f77a0",
+      "root_units": [
+        {
+          "id": "an1.49",
+          "title": "Paṇihitaacchavaggo",
+          "vri": "49",
+          "root_blocks_sha256": "32e0cf65219331cd3065f5066a25d862d0413b9b562b9e7daf8fa8f76668ede9"
+        },
+        {
+          "id": "an1.50",
+          "title": "Paṇihitaacchavaggo",
+          "vri": "50",
+          "root_blocks_sha256": "0abbf89c4709ec29b40eff8f601e867ed5e248d6109b8c76a215621edfc8b997"
+        },
+        {
+          "id": "an1.51",
+          "title": "Accharāsaṅghātavagga",
+          "vri": "51",
+          "root_blocks_sha256": "fbb4492966f6ee3a7481903ff0e60c965b5d3551fe6698e1efdd3ec0a22e6e0d"
+        },
+        {
+          "id": "an1.52",
+          "title": "Accharāsaṅghātavaggo",
+          "vri": "52",
+          "root_blocks_sha256": "851dd7a4be6d3a4e6eb10937b6e29d4b1a44587869f33c9fa107868e1c52f84f"
+        }
+      ],
+      "mapping_note": "One compiled publisher page concerning indexed AN 1.49–52, not four independently aligned translations. Four quoted passages concern defiled mind, freed mind, the uninstructed person without mind development and the instructed disciple with mind development. The complete interpretive Note, including MN 49, DN 11, MN 24 references and a fourth-jhana quotation, remains editorial and is not individually attributed to an AN member. Exact shared-page consent is required; quotation matches and absences concern the whole publisher page only. No whole-unit coverage is inferred."
+    }
+  ]
+}

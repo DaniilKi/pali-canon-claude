@@ -1,6 +1,6 @@
 # Rebuilding the canon data
 
-`server/data/canon.json.gz` (Pāli text + citation index) and `server/data/translations.json` (translation links) are generated. Python 3.10+ and git are needed; nothing here runs at user install time.
+`server/data/canon.json.gz` (Pāli text + citation index) and `server/data/translations.json` (translation links) are generated. Python 3.10+, git and Node 20+ (for shared-source extraction verification) are needed; nothing here runs at user install time.
 
 ## Bundled shards and Python build inputs
 
@@ -265,3 +265,27 @@ applies globally, including another owner or added scope fields. Do not delete
 it to recover headline coverage. Lift it only through a source-specific reviewed
 shared-page integration with explicit consent, quotation and export/count tests.
 See [exact-source evidence and validation](../../docs/data/mother-scope-quarantine-and-alternates.md).
+
+### Reviewed shared publisher pages (D195)
+
+`reviewed_shared_pages.json` is separate from the whole-text manifest. The normal
+builder strips automatic proposals for those known pages. With `--content`,
+`reviewed_shared_pages.py` validates all records first, verifies complete root
+blocks and exact independent/contiguous members, and calls Node 20+
+`verify_shared_html.mjs` to check the complete HTML, runtime-extracted English
+and full notice/citation hashes. It installs one declaration on the first member.
+The runtime/corpus audit also verifies normalized segment scope. Mother exclusions
+still run last. These are separate shared counts, never whole-unit English gains.
+
+For a standalone reviewed data update (distinct output path):
+
+```sh
+python3 scripts/canon/reviewed_shared_pages.py /tmp/pali-inputs/canon.json.gz server/data/translations.json /tmp/pali-ati /tmp/translations-shared.json
+node scripts/canon/verify_shared_html.mjs scripts/canon/reviewed_shared_pages.json /tmp/pali-ati
+```
+
+The first real declaration is a compilation for AN 1.49–52, with a complete
+editorial Note. ATI shared declarations require exact text and full-notice pins.
+Keep the whole source and use page-level/null-ID quotation semantics. Source,
+notice or scope drift fails closed; do not fix it by relabelling presentation or
+editing hashes without fresh review. See [the pilot receipt](../../docs/data/luminous-shared-page-pilot.md).

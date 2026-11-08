@@ -140,6 +140,8 @@ Considered and **not used** (with reasons), and the sources **planned** next, ar
 
 - **Every text, every release.** An automatic audit checks all 8,544 texts: each resolves by its citation, has text, does not overlap its neighbours, and its PTS page leads back to it. Result: 0 failures.
 - **Checked against an independent edition.** All 1,190 canonical pages of Access to Insight and their PTS citations were compared with our mapping: 0 problems.
+- **Standalone browser reading is the next slice.** The existing embedded reader needs a host app; the documentation site is not a scripture browser. See the [web-app assessment and implementation boundary](docs/web-app-next-slice.md).
+- **Shared publisher pages stay separate.** One reviewed ATI compilation concerns AN 1.49–52. Explicit shared-page reading and quotation checking preserve its full Note and licence; results do not claim individual passage alignment or four complete translations. See [the pilot](docs/data/luminous-shared-page-pilot.md).
 - **Translations are linked only with strong evidence.** A translation is attached only when its title, number or PTS page matches unambiguously, or an individually reviewed story correspondence establishes its scope. We prefer no link to a wrong link. 2,596 links pass this test (64 of them placed by comparing the names in the English with the Pāli, each audited).
 - **Independent review.** A separate reviewer checked about 110 citations and every PTS lookup in its sample. The problems it found were fixed and are now permanent tests.
 - **Outage drills.** We simulate each website going down and confirm that the backups take over and the Pāli still works.

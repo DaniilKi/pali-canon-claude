@@ -17,7 +17,7 @@ import { syntheticHtml, syntheticText, syntheticLink } from './helpers/partial-t
 const originalFetch = globalThis.fetch; let saved, savedUrls;
 function install(link = syntheticShared()) {
   const d = canon.load(); saved ||= d.translations;
-  d.translations = { ...d.translations };
+  d.translations = Object.fromEntries(Object.entries(d.translations).map(([id, links]) => [id, links.filter(l => !Object.hasOwn(l, 'shared_scope'))]).filter(([, links]) => links.length));
   for (const id of sharedIds) delete d.translations[id];
   if (link) d.translations[sharedIds[0]] = [link];
   return canon.resolve('iti11').unit;
@@ -59,7 +59,7 @@ test('shared verification deduplicates the page and never attributes a match to 
   assert.deepEqual(plan.pages[0].unverified_requested_text_ids, ['iti11', 'iti13']);
   const result = await verifyQuote({ ...args, include_shared: true }); assert.equal(result.verdict, 'found');
   for (const item of [result.matches[0], result.scope.translations_checked[0]]) { assert.equal(item.citation, 'Synthetic condensed shared page'); assert.deepEqual(item.translation_scope.text_ids, sharedIds); assert.deepEqual(item.unverified_requested_text_ids, ['iti11', 'iti13']); assert.equal(item.whole_unit_coverage, false); }
-  assert.equal(result.matches[0].text_id, null); assert.match(result.explanation, /condensed multi-discourse source page only/);
+  assert.equal(result.matches[0].text_id, null); assert.match(result.explanation, /declared multi-discourse source pages only/);
   const negative = await verifyQuote({ ...args, text: 'velvet otters weave purple hammocks', include_shared: true }); assert.equal(negative.verdict, 'not_found_in_scope'); assert.match(negative.explanation, /do not establish any individual/);
   const fetched = await english.translation(canon.resolve('iti11').unit, canon.translationId(syntheticShared()), { allow_shared: true, limit: 2000000 });
   for (const override of [{ text_id: 'iti11' }, { whole_unit_coverage: true }, { translation_scope: undefined }, { text: fetched.text + ' changed' }]) await assert.rejects(verifyQuote({ ...args, include_shared: true }, { fetchTranslation: async () => ({ ...fetched, ...override }) }), /alignment|scope|snapshot/);

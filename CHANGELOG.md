@@ -4,6 +4,11 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Activate the first reviewed shared publisher page: ATI Luminous (AN 1.49–52),
+  a compilation with exact-ID consent, page-level quotation results and full
+  source/notice pins. Count one shared page/four subjects separately; whole-unit
+  coverage stays unchanged. Document the next standalone web-reader slice.
+
 - Correct the ordinary SN 15.14 binding: its current source covers six discourses.
   Withhold it with a final build guard until safe shared integration. Add three
   reviewed alternatives, preserving original choices and full BPS/CC notices;

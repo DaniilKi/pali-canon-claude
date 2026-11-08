@@ -1358,6 +1358,27 @@
           "reason": "Walshe version omits initial canonical question/answer, condenses/reorders later conceit exchange; no whole-unit link approved. Interpretive Notes do not restore missing canonical scope."
         }
       ]
+    },
+    {
+      "decision": "D195",
+      "accepted_links": 0,
+      "newly_covered_units": [],
+      "activated_shared_pages": [
+        {
+          "owner_id": "an1.49",
+          "path": "tipitaka/an/an01/an01.049.than.html",
+          "subject_ids": [
+            "an1.49",
+            "an1.50",
+            "an1.51",
+            "an1.52"
+          ],
+          "presentation": "compilation",
+          "individual_alignment_verified": false,
+          "whole_unit_coverage": false
+        }
+      ],
+      "reason": "One compiled publisher page is now accessible by exact-ID shared consent. Whole-unit counts are unchanged; the historical D193 whole-unit hold is not relaxed or erased. Full Note, text and notice pins preserved. Mother and single-unit condensed holds remain."
     }
   ]
 }

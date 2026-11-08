@@ -1,4 +1,4 @@
-// Install-only synthetic declarations and provider responses; no source is activated in the repository.
+// Installed-package shared contracts: synthetic providers plus real declaration metadata, never live author requests.
 import assert from 'node:assert/strict';
 import { cp, mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
@@ -11,6 +11,7 @@ import { syntheticLink, syntheticHtml, syntheticText } from '../tests/helpers/pa
 import { syntheticShared, sharedIds } from '../tests/helpers/shared-translation.mjs';
 import { SCRIPTS, transliterate } from '../src/script.mjs';
 import { translationCoverage } from '../src/providers.mjs';
+import { fetchRecorderSource, readFetchLedger } from '../tests/helpers/synthetic-fetch-ledger.mjs';
 function option(name) { const i = process.argv.indexOf(name); if (i < 0) return; assert.ok(process.argv[i + 1]); return resolve(process.argv[i + 1]); }
 const serverDir = option('--server-dir') || resolve('server'), reportPath = option('--report');
 let stage, child, client, timer;
@@ -26,13 +27,20 @@ try {
   await cp(serverDir, join(stage, 'server'), { recursive: true }); await mkdir(join(stage, 'empty'));
   const original = JSON.parse(await readFile(join(stage, 'server/data/translations.json'), 'utf8'));
   const preload = join(stage, 'synthetic-provider.cjs');
+  const reviewed = Object.values(original).flat().find(l => l.match === 'reviewed-shared-page');
+  const modes = ['stdio', 'http', 'mixed_versions', 'changed_mapping', 'changed_source', 'removed_scope', 'aj_shared_metadata', 'aj_partial_metadata', 'aj_invalid_metadata', ...(reviewed ? ['reviewed_metadata', 'reviewed_notice_downgrade'] : [])];
   const originalAj = JSON.parse(await readFile(join(stage, 'server/data/anandajoti.json'), 'utf8'));
-  for (const mode of ['stdio', 'http', 'mixed_versions', 'changed_mapping', 'changed_source', 'removed_scope', 'aj_shared_metadata', 'aj_partial_metadata', 'aj_invalid_metadata']) {
+  for (const mode of modes) {
+    const fetchLog = join(stage, 'fixture-fetches.jsonl'); await writeFile(fetchLog, '');
     const link = syntheticShared(); if (mode === 'changed_mapping') link.reference += ' changed';
     const full = { ...link, url: link.url.replace('SHARED', 'FULL') }; delete full.shared_scope;
-    const translations = { ...original }; for (const uid of sharedIds) delete translations[uid];
-    translations.iti10 = [link];
+    const translations = { ...original };
+    if (!mode.startsWith('reviewed_')) { for (const uid of sharedIds) delete translations[uid]; translations.iti10 = [link]; }
     if (mode === 'mixed_versions') translations.iti11 = [full];
+    if (mode === 'reviewed_notice_downgrade') {
+      const bad = structuredClone(reviewed); bad.shared_scope.presentation = 'condensed'; delete bad.shared_scope.notice_sha256;
+      translations[reviewed.shared_scope.owner_id] = [bad];
+    }
     if (mode === 'removed_scope') { delete translations.iti10; const removed = { ...link }; delete removed.shared_scope; translations.iti11 = [removed]; }
     const aj = { ...originalAj, links: { ...originalAj.links } };
     if (mode.startsWith('aj_')) {
@@ -44,7 +52,8 @@ try {
     await writeFile(join(stage, 'server/data/translations.json'), JSON.stringify(translations));
     await writeFile(join(stage, 'server/data/anandajoti.json'), JSON.stringify(aj));
     const html = mode === 'changed_source' ? syntheticHtml.replace('amber', 'changed') : syntheticHtml;
-    await writeFile(preload, `globalThis.fetch=async input=>{const url=String(input);if(!${JSON.stringify([link.url, full.url])}.includes(url)){console.error('UNEXPECTED_NETWORK_ATTEMPT');throw Error('UNEXPECTED_NETWORK_ATTEMPT')}return new Response(${JSON.stringify(html)},{status:200,headers:{'content-type':'text/html'}})};`);
+    const allowed = mode.startsWith('reviewed_') ? [reviewed.url] : [link.url, full.url];
+    await writeFile(preload, `${fetchRecorderSource(fetchLog)}globalThis.fetch=async input=>{const url=String(input);if(!${JSON.stringify(allowed)}.includes(url))return rejectUnexpectedNetwork();recordSyntheticFetch(url);return new Response(${JSON.stringify(html)},{status:200,headers:{'content-type':'text/html'}})};`);
     const env = { ...process.env, PALI_CANON_CACHE_MB: '0', HOST: '127.0.0.1', PORT: '0', RATE_LIMIT_PER_MINUTE: '0', CHATGPT_WIDGET: '1' };
     let stderr = ''; client = new Client({ name: 'installed-shared-fixture', version: '1' });
     if (mode === 'stdio') {
@@ -66,7 +75,33 @@ try {
       assert.ok(!r.isError, JSON.stringify(r.content)); assert.deepEqual(JSON.parse(r.content[0].text), r.structuredContent); return r.structuredContent;
     };
     const id = 'dt:SYNTHETIC/SHARED', uid = 'iti11';
-    if (mode === 'aj_invalid_metadata') {
+    if (mode === 'reviewed_notice_downgrade') {
+      await call('get_metadata', { uid: reviewed.shared_scope.owner_id }, /Invalid or unreviewed/);
+      assert.equal((await readFetchLedger(fetchLog)).length, 0, 'Changing presentation cannot remove mandatory ATI notice protection');
+    } else if (mode === 'reviewed_metadata') {
+      const realId = 'ati:' + reviewed.path, members = reviewed.shared_scope.text_ids;
+      for (const member of members) {
+        const meta = await call('get_metadata', { uid: member });
+        const scope = meta.english.find(l => l.translation_id === realId).translation_scope;
+        assert.equal(meta.english_available, 0); assert.equal(meta.shared_english_available, 1);
+        assert.equal(scope.presentation, 'compilation'); assert.equal(scope.condensed, false);
+        assert.equal(scope.whole_unit_coverage, false); assert.equal(scope.individual_alignment_verified, false);
+        assert.deepEqual(scope.text_ids, members); assert.ok(scope.notice_sha256);
+      }
+      const member = members.at(-1);
+      await call('resolve_reference', { reference: reviewed.url }, /Shared-page URL/);
+      await call('get_translation', { uid: member }, /allow_shared/);
+      await call('get_translation', { uid: member, translation: realId }, /allow_shared/);
+      await call('verify_quote', { text: 'Synthetic fixture only amber lantern', language: 'english', texts: [member], translation_ids: [realId] }, /include_shared/);
+      assert.equal((await readFetchLedger(fetchLog)).length, 0, 'Real metadata and missing consent must not fetch');
+      const widget = await call('read_passage_widget', { uid: member, translation: realId, english: true, limit: 1 });
+      assert.match(widget.english_error, /shared-page/); assert.equal(widget.english, null);
+      assert.equal((await readFetchLedger(fetchLog)).length, 0);
+      await call('get_translation', { uid: member, translation: realId, allow_shared: true }, /source text changed/);
+      assert.equal((await readFetchLedger(fetchLog)).filter(e => e.kind === 'fetch').length, 1, 'Changed source comparison uses only the simulated provider');
+      const totals = (await call('list_sources', {})).translation_coverage.total;
+      for (const field of ['links', 'with_english', 'with_english_including_inherited', 'shared_links', 'with_shared_english', 'shared_only']) assert.equal(totals[field], baseline[field]);
+    } else if (mode === 'aj_invalid_metadata') {
       await call('get_metadata', { uid }, /Invalid or unreviewed/);
     } else if (mode.startsWith('aj_')) {
       const target = mode === 'aj_partial_metadata' ? 'patthana1.1' : uid;
@@ -86,7 +121,7 @@ try {
       const selected = await call('get_translation', { uid }); assert.equal(selected.translation_id, 'dt:SYNTHETIC/FULL');
       assert.equal((await call('get_translation', { uid, translation: link.translator })).translation_id, selected.translation_id);
       const totals = (await call('list_sources', {})).translation_coverage.total;
-      assert.equal(totals.links, baseline.links); assert.equal(totals.with_english, baseline.with_english); assert.equal(totals.shared_links, 1); assert.equal(totals.with_shared_english, 4); assert.equal(totals.shared_only, 3);
+      assert.equal(totals.links, baseline.links); assert.equal(totals.with_english, baseline.with_english); assert.equal(totals.shared_links, (baseline.shared_links || 0) + 1); assert.equal(totals.with_shared_english, (baseline.with_shared_english || 0) + 4); assert.equal(totals.shared_only, (baseline.shared_only || 0) + 3);
       const args = { text: 'amber lantern copper window', language: 'english', texts: [uid] };
       const normal = await call('verify_quote', args); assert.equal(normal.scope.shared_translations_excluded.length, 1); assert.ok(normal.matches.every(m => m.text_id === uid));
       const inclusive = await call('verify_quote', { ...args, include_shared: true }); assert.equal(inclusive.scope.translations_checked.length, 2); assert.equal(inclusive.equally_similar_texts, undefined); assert.equal(inclusive.equally_similar_sources, 2);
@@ -96,7 +131,7 @@ try {
       for (const member of sharedIds) { const meta = await call('get_metadata', { uid: member }); assert.equal(meta.english_available, 0); assert.equal(meta.shared_english_available, 1); assert.deepEqual(meta.english[0].translation_scope.text_ids, sharedIds); }
       const totals = (await call('list_sources', {})).translation_coverage.total;
       for (const k of ['links', 'with_english', 'with_english_including_inherited']) assert.equal(totals[k], baseline[k] - 1, k);
-      assert.equal(totals.shared_links, 1); assert.equal(totals.with_shared_english, 4); assert.equal(totals.shared_only, 4);
+      assert.equal(totals.shared_links, (baseline.shared_links || 0) + 1); assert.equal(totals.with_shared_english, (baseline.with_shared_english || 0) + 4); assert.equal(totals.shared_only, (baseline.shared_only || 0) + 4);
       await call('resolve_reference', { reference: link.url }, /Shared-page URL.*iti10, iti11, iti12, iti13/);
       await call('get_text', { uid: link.url }, /Shared-page URL/);
       await call('get_translation', { uid }, /allow_shared/);
@@ -121,10 +156,11 @@ try {
       for (const script of SCRIPTS) { const read = await call('get_translation', { uid: transliterate(uid, 'roman', script), translation: id, allow_shared: true, limit: 500 }); assert.equal(read.text_id, null); assert.equal(read.requested_text_id, uid); assert.deepEqual(read.translation_scope, first.translation_scope); }
     }
     assert.doesNotMatch(stderr, /UNEXPECTED_NETWORK_ATTEMPT/);
-    reports.push({ mode, requests, status: 'passed', synthetic_fixture_only: true, real_network_attempts: 0 });
+    assert.equal((await readFetchLedger(fetchLog)).filter(e => e.kind === 'unexpected').length, 0);
+    reports.push({ mode, requests, status: 'passed', synthetic_provider_only: true, real_declaration_metadata: mode.startsWith('reviewed_'), real_network_attempts: 0 });
     await close();
   }
-  const report = { status: 'passed', cases: reports, scope: 'Extracted-package synthetic shared-page metadata and simulated provider only. One page, explicit opt-in, no individual/whole-unit alignment, bounded pinned restart, eight input scripts, HTTP/widget and merged AJ metadata without any author-host request. No real shared source activated.' };
+  const report = { status: 'passed', cases: reports, scope: 'Extracted-package synthetic shared-page contracts and real compilation metadata with simulated providers only. One page, explicit opt-in, no individual/whole-unit alignment, bounded pinned restart, eight input scripts, HTTP/widget and merged AJ metadata without any author-host request. Real compilation metadata/consent/widget refusal/source-drift checks contain no publisher text and make no author-host request.' };
   if (reportPath) await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n'); console.log(JSON.stringify(report));
 } catch (error) {
   if (reportPath) await writeFile(reportPath, JSON.stringify({ status: 'failed', error: error.message }, null, 2) + '\n'); throw error;

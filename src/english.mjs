@@ -164,14 +164,14 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
   }
   let { link, matchingVersions } = selectTranslation(links, which, unit.acronym);
   if (!link && !which && links.some(isScoped)) {
-    if (links.some(isShared)) throw new Error('Only scoped shared-page/partial sources are linked. Choose an exact translation_id: allow_shared: true accepts a condensed shared page; allow_partial: true accepts a partial unit. No whole-unit translation was selected.');
+    if (links.some(isShared)) throw new Error('Only scoped shared-page/partial sources are linked. Choose an exact translation_id: allow_shared: true accepts a shared publisher page; allow_partial: true accepts a partial unit. No whole-unit translation was selected.');
     throw new Error('Only partial translations are linked. Choose an exact translation_id and explicitly set allow_partial: true; no whole-unit translation was selected.');
   }
   if (!link) throw new Error(`Translation "${which}" is not linked for ${unit.acronym}. Available: ${available(unit).map((a) => `${a.translation_id} (${a.translator})`).join(', ')}.`);
   const declaredScope = translationScope(link, unit);
   const shared = isShared(link);
   if (allow_shared && !shared) throw new Error('The selected source no longer has a declared shared-page scope. Review its mapping before requesting another source.');
-  if (shared && (!allow_shared || allow_partial || which !== translationId(link))) throw new Error('This is a condensed shared-page source. Use get_translation with its exact translation_id and allow_shared: true after reviewing all declared text IDs; individual alignment is unverified.');
+  if (shared && (!allow_shared || allow_partial || which !== translationId(link))) throw new Error('This is a shared-page source. Use get_translation with its exact translation_id and allow_shared: true after reviewing all declared text IDs; individual alignment is unverified.');
   if (allow_partial && (!declaredScope || shared)) throw new Error('The selected source no longer has a declared partial scope. Review its mapping before requesting a whole-unit source.');
   if (declaredScope && !shared && (!allow_partial || which !== translationId(link))) throw new Error('This translation covers only a partial unit. Use get_translation with its exact translation_id and allow_partial: true after checking translation_scope.');
   if (declaredScope && offset > 0 && (!expectedPrefix || !scope_sha256)) throw new Error('Scoped partial/shared-page continuation requires unchanged scope_sha256 and prefix_sha256 from continue_with.');
@@ -201,6 +201,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
   if (declaredScope) {
     if (result.text.length > 2000000 || (result.parts_total && result.parts_read !== result.parts_total)) throw new Error('Scoped source exceeds the bounded complete-text check; no excerpt was returned.');
     if (scopeHash(result.text) !== declaredScope.text_sha256) throw new Error('The scoped source text changed from its reviewed snapshot. No translation was returned.');
+    if (shared && declaredScope.notice_sha256 && scopeHash({ licensing: result.license, citation: result.attribution }) !== declaredScope.notice_sha256) throw new Error('The shared source notice changed from its reviewed snapshot. No translation was returned.');
     notes.push(declaredScope.note);
   }
   if (matchingVersions.length > 1) notes.push(`Several linked versions match "${which}"; selected ${translationId(link)} (${sourceName(link)}). To choose a different version, use its exact translation_id: ${matchingVersions.map(version => translationId(version)).join(', ')}.`);

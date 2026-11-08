@@ -165,7 +165,7 @@ export function notice(index) {
     '- `citation-index.json`: one record per text with its VRI book and paragraphs, PTS reference and English translation links.',
     '- `citation-index.csv`: the same, one row per text (multi-valued cells joined with " | "). Columns: ' + CSV_COLUMNS.join(', ') + '.',
     '',
-    'Whole-unit English counts and the legacy CSV english_* link columns exclude partial sources and condensed shared pages. shared_english is a separate JSON array retaining the full member list and unverified individual alignment; shared_english_count counts page links, not full translations. JSON english entries retain translation_scope; CSV partial_english is a JSON array preserving complete scope, identity, reading commands and licence metadata. Partial links do not establish whole-unit coverage. english_inherited_from concerns whole-unit links only.',
+    'Whole-unit English counts and the legacy CSV english_* link columns exclude partial sources and shared pages. shared_english is a separate JSON array retaining the full member list and unverified individual alignment; shared_english_count counts page links, not full translations. JSON english entries retain translation_scope; CSV partial_english is a JSON array preserving complete scope, identity, reading commands and licence metadata. Partial links do not establish whole-unit coverage. english_inherited_from concerns whole-unit links only.',
     '',
     '## Source and licence',
     '',

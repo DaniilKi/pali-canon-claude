@@ -455,7 +455,7 @@ test('reviewed PTS discrepancy, paragraph numbering and abbreviated sublime atti
 test('four-text Luminous and six-text Mother pages remain withheld as ordinary individual ATI translations', () => {
   for (const path of ['/tipitaka/an/an01/an01.049.than', '/tipitaka/sn/sn15/sn15.014.than']) {
     assert.ok(!manifest.links.some(r => r.path === path));
-    assert.ok(!Object.values(canon.load().translations).flat().some(l => l.path === path));
+    assert.ok(!Object.values(canon.load().translations).flat().some(l => l.path === path && !Object.hasOwn(l, 'shared_scope')));
   }
 });
 
