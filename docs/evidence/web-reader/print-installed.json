@@ -1,0 +1,75 @@
+{
+  "passed": 12,
+  "outside_source_tree": true,
+  "checks": [
+    {
+      "width": 390,
+      "case": "canon",
+      "segments": 1,
+      "pdf_bytes": 26606
+    },
+    {
+      "width": 390,
+      "case": "continuation",
+      "segments": 30,
+      "pdf_bytes": 45415
+    },
+    {
+      "width": 390,
+      "case": "book",
+      "segments": 30,
+      "pdf_bytes": 49460
+    },
+    {
+      "width": 390,
+      "case": "later work",
+      "segments": 30,
+      "pdf_bytes": 44937
+    },
+    {
+      "width": 390,
+      "case": "commentary",
+      "segments": 30,
+      "pdf_bytes": 57750
+    },
+    {
+      "width": 390,
+      "case": "native-script, dark theme, nonreading/error privacy, snapshot cleanup"
+    },
+    {
+      "width": 1280,
+      "case": "canon",
+      "segments": 1,
+      "pdf_bytes": 26606
+    },
+    {
+      "width": 1280,
+      "case": "continuation",
+      "segments": 30,
+      "pdf_bytes": 45415
+    },
+    {
+      "width": 1280,
+      "case": "book",
+      "segments": 30,
+      "pdf_bytes": 49460
+    },
+    {
+      "width": 1280,
+      "case": "later work",
+      "segments": 30,
+      "pdf_bytes": 44937
+    },
+    {
+      "width": 1280,
+      "case": "commentary",
+      "segments": 30,
+      "pdf_bytes": 57750
+    },
+    {
+      "width": 1280,
+      "case": "native-script, dark theme, nonreading/error privacy, snapshot cleanup"
+    }
+  ],
+  "limits": "Actual bundled source in headless Chromium. PDF signature/size and print DOM checked; no printer hardware, Safari, tagged-PDF or glyph-by-glyph visual certification."
+}

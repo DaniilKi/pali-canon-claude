@@ -1,4 +1,70 @@
 (() => {
+  // web/print-page.mjs
+  function installPagePrinting(doc = document, win = window) {
+    const view2 = doc.getElementById("view");
+    const sheet = doc.createElement("article");
+    sheet.id = "print-document";
+    sheet.setAttribute("aria-hidden", "true");
+    doc.body.append(sheet);
+    const add = (parent, tag, text3, className) => {
+      const node = doc.createElement(tag);
+      node.textContent = text3;
+      if (className) node.className = className;
+      parent.append(node);
+      return node;
+    };
+    const routes = /* @__PURE__ */ new WeakMap();
+    const reading = () => win.location.hash.startsWith("#read?") && view2.querySelector('section[aria-label="P\u0101li passage"]');
+    function prepare() {
+      sheet.replaceChildren();
+      const passage = reading();
+      const attribution = view2.querySelector(":scope > .provenance");
+      if (!passage || routes.get(passage) !== win.location.hash || !passage.querySelector(".segment .passage") || !attribution) {
+        add(sheet, "h1", "No P\u0101li page ready to print");
+        add(sheet, "p", "Open a P\u0101li passage and wait for its source attribution before printing. Personal notes and other screens are not printed.");
+        return false;
+      }
+      add(sheet, "p", view2.querySelector(":scope > .eyebrow")?.textContent || "P\u0101li Library");
+      add(sheet, "h1", view2.querySelector(":scope > h2")?.textContent || "P\u0101li passage");
+      add(sheet, "p", "Loaded P\u0101li page only \u2014 not necessarily the complete work. English, study material, bookmarks and personal notes are excluded.", "print-scope");
+      const range = [...view2.querySelectorAll(":scope > p.muted")].find((node) => node.textContent.startsWith("Segments "));
+      if (range) add(sheet, "p", range.textContent, "print-scope");
+      for (const notice of view2.querySelectorAll(":scope > .notice")) add(sheet, "p", notice.textContent, "print-scope");
+      for (const segment of passage.querySelectorAll(":scope > .segment")) {
+        const block = add(sheet, "section", "", "print-segment");
+        add(block, "p", segment.querySelector(".segment-label span")?.textContent || "", "print-reference");
+        const text3 = add(block, "p", segment.querySelector(".passage")?.textContent || "", "print-passage");
+        text3.lang = "pi";
+      }
+      const source2 = add(sheet, "section", "", "print-provenance");
+      add(source2, "h2", "Source and terms");
+      for (const part of attribution.children) add(source2, "p", part.textContent);
+      for (const anchor of attribution.querySelectorAll("a[href]")) add(source2, "p", anchor.textContent + ": " + anchor.href);
+      const url = new URL(win.location.href);
+      url.search = "";
+      add(source2, "p", "Reading page: " + url.href);
+      return true;
+    }
+    function update() {
+      const passage = reading();
+      if (passage && !routes.has(passage)) routes.set(passage, win.location.hash);
+      const toolbar = view2.querySelector(":scope > .toolbar");
+      if (!passage || !toolbar || toolbar.querySelector("[data-print-page]")) return;
+      const target = toolbar.querySelector(".study-actions > .toolbar") || toolbar;
+      const control = add(target, "button", "Print loaded P\u0101li page");
+      control.type = "button";
+      control.dataset.printPage = "";
+      control.addEventListener("click", () => {
+        if (prepare()) win.print();
+      });
+    }
+    new win.MutationObserver(update).observe(view2, { childList: true, subtree: true });
+    win.addEventListener("beforeprint", prepare);
+    win.addEventListener("afterprint", () => sheet.replaceChildren());
+    win.addEventListener("hashchange", () => sheet.replaceChildren());
+    update();
+  }
+
   // src/script.mjs
   var SCRIPTS = ["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"];
   var SCRIPT_NAMES = {
@@ -2275,6 +2341,7 @@
       status2.textContent = stopped2 ? "Stopped waiting in this browser." : error.code === "REQUEST_DEADLINE" ? "The request timed out." : "The request failed.";
     }
   }
+  installPagePrinting();
   window.addEventListener("hashchange", render);
   render();
 })();
