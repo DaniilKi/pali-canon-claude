@@ -266,3 +266,7 @@ CC BY-NC4.0 notices, ATI2013-11-30. Ireland’s Ones24–27 compilation retains
 its complete ©1997 BPS notice, ATI2013-11-24, free-distribution/attribution/full-
 notice/limited-reprint conditions; it is not CC. BPS is a reviewed metadata
 label, not blanket approval for other pages. No English bodies are bundled.
+
+## Reviewed ATI verse excerpts (D205–D206)
+
+Six Olendzki pages are separately scoped verse excerpts: Ānanda1037–1039, Sirimaṇḍa448–452, Kāḷudāyin527–529, Udāyin700–701, Aṅgulimāla871–873 and Heraññakāni145. Each complete ©2005 Andrew Olendzki notice was individually reviewed: free distribution, clear derived-source identification and full licence retention are required; this is not Creative Commons or a new grant. Runtime returns the full page-specific notice/citation with every excerpt and excludes editorial prefaces. English bodies are not bundled. Whole-unit coverage, source freshness and word-level alignment are not inferred. See [the initial pilot](data/thag-excerpt-review.md) and [four-page review](data/olendzki-excerpt-expansion.md) for source boundaries, pins and limits.

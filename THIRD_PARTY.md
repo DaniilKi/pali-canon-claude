@@ -172,3 +172,7 @@ full individual CC BY-NC 4.0 notices: Water ©2006 Ṭhānissaro Bhikkhu, revise
 4 August 2010; Gratitude ©2002, revised 30 November 2013. English remains live,
 with complete source notices and citations; it is not bundled or relicensed.
 Counts and quote results concern shared pages, not individually aligned translations.
+
+## Reviewed ATI verse excerpts (D205–D206)
+
+Six Olendzki pages are separately scoped verse excerpts: Ānanda1037–1039, Sirimaṇḍa448–452, Kāḷudāyin527–529, Udāyin700–701, Aṅgulimāla871–873 and Heraññakāni145. Each complete ©2005 Andrew Olendzki notice was individually reviewed: free distribution, clear derived-source identification and full licence retention are required; this is not Creative Commons or a new grant. Runtime returns the full page-specific notice/citation with every excerpt and excludes editorial prefaces. English bodies are not bundled. Whole-unit coverage, source freshness and word-level alignment are not inferred. See [the initial pilot](docs/data/thag-excerpt-review.md) and [four-page review](docs/data/olendzki-excerpt-expansion.md) for source boundaries, pins and limits.

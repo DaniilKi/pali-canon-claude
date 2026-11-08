@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Actual two-page ATI pilot through bundled HTTP/browser, using pinned local HTML only.
+"""Actual reviewed ATI excerpts through bundled HTTP/browser, using pinned local HTML only.
 
 No publisher body is written to reports or repository files. All upstream fetches
 are intercepted in the server/worker process; this is not live-source evidence.
@@ -11,7 +11,7 @@ from web_reader_test_helpers import read_tool
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser();p.add_argument('--source-root',type=pathlib.Path,required=True);p.add_argument('--server-dir',type=pathlib.Path);p.add_argument('--a11y',action='store_true');p.add_argument('--report');args=p.parse_args()
 manifest=json.loads((ROOT/'scripts/canon/reviewed_partial_pages.json').read_text(encoding='utf-8'));rows=manifest['links']
-assert {r['unit_id'] for r in rows}=={'thag6.13','thag17.3'} and len(rows)==2
+assert {r['unit_id'] for r in rows}=={'thag6.13','thag17.3','thag10.1','thag15.2','thag16.8','thag2.13'} and len(rows)==6
 server_dir=args.server_dir.resolve() if args.server_dir else ROOT/'server'
 assert json.loads((server_dir/'data/reviewed-partial-pages.json').read_text(encoding='utf-8'))==manifest
 source_root=args.source_root.resolve();sources={}
@@ -20,7 +20,7 @@ for row in rows:
     assert hashlib.sha256(path.read_bytes()).hexdigest()==row['source_html_sha256']
     sources['https://accesstoinsight.org'+row['path']+'.html']=str(path)
 # Expected wording/notice remains in process memory, never in an evidence artifact.
-extract="""import{readFileSync}from'node:fs';import{atiVerseExcerpt}from'./src/ati-excerpt.mjs';import{atiNotice}from'./src/english.mjs';const paths=JSON.parse(readFileSync(0,'utf8'));console.log(JSON.stringify(Object.fromEntries(Object.entries(paths).map(([url,path])=>{const h=readFileSync(path,'utf8');return[url,{text:atiVerseExcerpt(h),notice:atiNotice(h)}]}))));"""
+extract="""import{readFileSync}from'node:fs';import{atiVerseExcerpt}from'./src/ati-excerpt.mjs';import{atiNotice}from'./src/english.mjs';import{plainText}from'./src/http.mjs';const paths=JSON.parse(readFileSync(0,'utf8'));console.log(JSON.stringify(Object.fromEntries(Object.entries(paths).map(([url,path])=>{const h=readFileSync(path,'utf8');return[url,{text:atiVerseExcerpt(h),notice:atiNotice(h),preface:plainText(h.slice(h.indexOf('<!-- BEGIN COPYRIGHTED TEXT CHUNK -->')+37,h.indexOf('<div class=\"freeverse\">')))}]}))));"""
 expected=json.loads(subprocess.check_output(['node','--input-type=module','-e',extract],input=json.dumps(sources).encode(),cwd=ROOT))
 def digest(value):return hashlib.sha256(json.dumps(value,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
 for row in rows:
@@ -53,7 +53,10 @@ try:
         assert scope['notice_sha256']==row['partial_scope']['notice_sha256'] and scope['extractor']=='ati-freeverse-v1'
         assert rpc('get_translation',{'uid':uid,'translation':version}).get('isError')
         if uid=='thag17.3':assert len(choices)==1 and rpc('get_translation',{'uid':uid}).get('isError')
-        else:assert {'dt:KN/Thag/thag6_13','ati:/tipitaka/kn/thag/thag.06.13.than'}.issubset({c['translation_id'] for c in choices if not c.get('translation_scope')})
+        else:
+            ordinary={c['translation_id'] for c in choices if not c.get('translation_scope')}
+            expected_full={'thag6.13':{'dt:KN/Thag/thag6_13','ati:/tipitaka/kn/thag/thag.06.13.than'},'thag2.13':{'dt:KN/Thag/thag2_13','ati:/tipitaka/kn/thag/thag.02.13.than'},'thag10.1':{'dt:KN/Thag/thag10_1'},'thag15.2':{'dt:KN/Thag/thag15_2'},'thag16.8':{'dt:KN/Thag/thag16_8','ati:/tipitaka/kn/thag/thag.16.08.than'}}
+            assert ordinary==expected_full[uid]
         assert len(fetches())==before
         checks.append({'width':'http','unit':uid,'check':'exact pilot requires consent before fetch; whole alternatives and partial-only identity remain distinct'})
     with sync_playwright() as pw:
@@ -90,7 +93,7 @@ try:
                 assert digest({'licensing':payload['license'],'citation':payload['attribution']})==row['partial_scope']['notice_sha256']
                 assert e['notice']['licensing'] in page.locator('#study .provenance').text_content() and e['notice']['citation'] in page.locator('#study .provenance').text_content()
                 assert 'Partial English source' in page.locator('#study h3').inner_text();assert calls[-1]['translation']==version and calls[-1]['allow_partial'] is True and calls[-1]['scope_sha256']==scope['scope_sha256'] and 'allow_shared' not in calls[-1]
-                editorial="Ananda was the Buddha's cousin" if uid=='thag17.3' else 'These powerful words echo';assert editorial not in payload['text'] and editorial not in page.locator('#study').inner_text()
+                editorial=e['preface'];assert not editorial or (editorial not in payload['text'] and editorial not in page.locator('#study').inner_text())
                 if uid=='thag17.3':assert all(label in payload['text'] for label in ['1034.','1035.','1036.']) and 'VRI1037–1039' in page.locator('#study').inner_text()
                 assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');audit('pinned verse-only partial source',uid)
                 checks.append({'width':width,'theme':theme,'unit':uid,'check':'keyboard consent renders entire pinned verse excerpt and complete notice; preface excluded and partial identity preserved'})
@@ -100,7 +103,7 @@ try:
         browser.close()
     events=fetches();assert {e['url'] for e in events}==set(sources)
     receipts=[{'unit':r['unit_id'],'translation_id':'ati:'+r['path'],'source_html_sha256':r['source_html_sha256'],'text_sha256':r['partial_scope']['text_sha256'],'notice_sha256':r['partial_scope']['notice_sha256'],'first_ref':r['partial_scope']['first_ref'],'last_ref':r['partial_scope']['last_ref']} for r in rows]
-    result={'checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'passed':len(checks),'outside_source_tree':bool(args.server_dir),'pinned_local_sources_only':True,'upstream_http_requests':0,'provider_fetches':len(events),'checks':checks,'sources':receipts,'a11y':{'scans':len(scans),'violations':sum(len(s['violations']) for s in scans),'results':scans},'limits':'Actual bundled HTTP worker and browser with two official pinned local publisher snapshots. No upstream/live availability, new rights approval, full-unit English coverage, word-level alignment or human accessibility certification. No publisher bodies in evidence reports.'}
+    result={'checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'passed':len(checks),'outside_source_tree':bool(args.server_dir),'pinned_local_sources_only':True,'upstream_http_requests':0,'provider_fetches':len(events),'checks':checks,'sources':receipts,'a11y':{'scans':len(scans),'violations':sum(len(s['violations']) for s in scans),'results':scans},'limits':'Actual bundled HTTP worker and browser with six official pinned local publisher snapshots. No upstream/live availability, new rights approval, full-unit English coverage, word-level alignment or human accessibility certification. No publisher bodies in evidence reports.'}
     text=json.dumps(result,indent=2);print(text)
     if args.report:pathlib.Path(args.report).write_text(text+'\n',encoding='utf-8')
     if result['a11y']['violations']:raise SystemExit(1)

@@ -5,12 +5,12 @@ let saved;function install(owner,links){const d=canon.load();saved||=d.translati
 function provider(body=html){let calls=[];globalThis.fetch=async input=>{calls.push(String(input));assert.equal(String(input),'https://accesstoinsight.org/tipitaka/kn/thag/synthetic-fixture.html');return new Response(body,{status:200});};return calls;}
 afterEach(()=>{if(saved)canon.load().translations=saved;saved=undefined;globalThis.fetch=originalFetch;liveCache.clear();translationCoverage({refresh:true});});
 
-test('two pinned verse-only pilots are separately counted and Ananda has partial-only English rather than a fabricated whole version',()=>{
- assert.deepEqual(JSON.parse(readFileSync('server/data/reviewed-partial-pages.json','utf8')),manifest);assert.equal(manifest.links.length,2);
+test('six pinned verse-only sources are separately counted and Ananda has partial-only English rather than a fabricated whole version',()=>{
+ assert.deepEqual(JSON.parse(readFileSync('server/data/reviewed-partial-pages.json','utf8')),manifest);assert.equal(manifest.links.length,6);
  for(const r of manifest.links){const u=canon.resolve(r.unit_id).unit,s=canon.describe(u).english.find(l=>l.translation_id==='ati:'+r.path).translation_scope;assert.equal(s.kind,'partial_unit');assert.equal(s.extractor,'ati-freeverse-v1');assert.equal(s.notice_sha256,r.partial_scope.notice_sha256);assert.equal(s.whole_unit_coverage,false);assert.deepEqual([s.first_ref,s.last_ref],[r.partial_scope.first_ref,r.partial_scope.last_ref]);assert.equal(createHash('sha256').update(JSON.stringify(canon.load().canon.books[u.book].blocks.slice(u.start,u.end))).digest('hex'),r.root.root_blocks_sha256);}
  const a=canon.describe(canon.resolve('thag17.3').unit);assert.equal(a.english_available,0);assert.equal(a.partial_english_available,1);assert.equal(a.english.length,1);assert.equal(a.english[0].translation_scope.pali_segments,3);
  const b=canon.describe(canon.resolve('thag6.13').unit);assert.equal(b.english_available,2);assert.equal(b.partial_english_available,1);
- const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.with_partial_english,t.partial_only],[2574,1421,1844,2,2,1]);const d=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.equal(d.rotation.of,1269);assert.equal(d.text.id,'sn5.3');
+ const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.with_partial_english,t.partial_only],[2573,1421,1844,6,6,1]);const d=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.equal(d.rotation.of,1269);assert.equal(d.text.id,'sn5.3');
 });
 
 test('known pilot sources cannot lose their entire partial container, acquire another owner or downgrade notice/extraction fields',async()=>{
@@ -45,4 +45,12 @@ test('notice/text pins are checked before wording, including cached and fresh co
 
 test('an ATI partial declaration cannot omit notice/extractor metadata or use an unreviewed URL',()=>{
  const l=atiPartial();for(const mutate of [x=>{delete x.partial_scope.notice_sha256;},x=>{delete x.partial_scope.extractor;},x=>{x.partial_scope.notice_sha256='bad';},x=>{x.url=x.url.replace('https:','http:');},x=>{x.url+='?query=1';},x=>{x.path='/tipitaka/../escape';}]){const bad=structuredClone(l);mutate(bad);const u=install('patthana1.1',[bad]);assert.throws(()=>english.available(u),/Invalid or unreviewed/);}
+});
+
+const expansion=JSON.parse(readFileSync('docs/data/olendzki-excerpt-expansion.json','utf8'));
+test('four newly reviewed pages retain exact verse boundaries, full-root pins and all prior complete alternatives',()=>{
+ assert.deepEqual(expansion.rows.map(r=>[r.owner,r.manifest.partial_scope.first_ref,r.manifest.partial_scope.last_ref]),[['thag10.1','thag10.1/3','thag10.1/5'],['thag15.2','thag15.2/13','thag15.2/14'],['thag16.8','thag16.8/7','thag16.8/9'],['thag2.13','thag2.13/2','thag2.13/2']]);
+ const exclusions=JSON.parse(readFileSync('scripts/canon/reviewed_exclusions.json','utf8'));
+ for(const r of expansion.rows){const row=manifest.links.find(l=>l.unit_id===r.owner);assert.deepEqual(row,r.manifest);const u=canon.resolve(r.owner).unit,choices=canon.describe(u).english,choice=choices.find(l=>l.translation_id==='ati:'+row.path);assert.equal(choice.translation_scope.kind,'partial_unit');assert.equal(choice.translation_scope.pali_segments,r.pali_segments);assert.equal(choice.translation_scope.whole_unit_coverage,false);assert.deepEqual(choices.filter(l=>!l.translation_scope).map(l=>l.translation_id),r.ordinary_alternatives_before);assert.ok(!exclusions.exclusions.some(e=>e.url===r.source_url));const selected=canon.segments(u).filter(s=>s.ref===row.partial_scope.first_ref||s.ref===row.partial_scope.last_ref);assert.deepEqual(selected.map(s=>s.vri_paragraph),r.owner==='thag2.13'?['145']:r.selected_vri_verses.split('–'));}
+ assert.equal(expansion.rows.filter(r=>r.before_link).length,1);assert.equal(expansion.rows.find(r=>r.owner==='thag2.13').before_link.reference,'Thag 145');
 });

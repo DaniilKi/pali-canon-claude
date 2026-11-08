@@ -42,7 +42,7 @@ with tempfile.TemporaryDirectory() as tmp:
 print('passed')`,{html,row,manifest:m,canon:{source:canon.source(),units:[u],books}});assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/passed/);
 });
 
-test('ordinary rebuilds cannot recreate either registered pilot as a whole source without approved content activation',{skip:!python},()=>{
+test('ordinary rebuilds cannot recreate any registered source as a whole source without approved content activation',{skip:!python},()=>{
  const rows=JSON.parse(readFileSync('scripts/canon/reviewed_partial_pages.json','utf8')).links,units=rows.map(r=>canon.resolve(r.unit_id).unit);
  const r=run(`import sys,json,pathlib,tempfile,gzip,subprocess
 x=json.load(sys.stdin)
@@ -55,6 +55,6 @@ with tempfile.TemporaryDirectory() as tmp:
  proc=subprocess.run([sys.executable,'scripts/canon/build_translations.py',*args],capture_output=True,text=True,encoding='utf-8');assert proc.returncode==0,proc.stderr;assert json.loads((p/'out.json').read_text(encoding='utf-8'))=={}
  code="import sys;sys.path.insert(0,'scripts/canon');import reviewed_partial_pages;reviewed_partial_pages.withhold_partial_page_proposals=lambda out:(out,[]);from build_translations import main;main()"
  proc=subprocess.run([sys.executable,'-c',code,*args],capture_output=True,text=True,encoding='utf-8');assert proc.returncode==0,proc.stderr
- out=json.loads((p/'out.json').read_text(encoding='utf-8'));assert sum(len(v) for v in out.values())==2,out
+ out=json.loads((p/'out.json').read_text(encoding='utf-8'));assert sum(len(v) for v in out.values())==len(x['rows'])==6,out
 print('passed')`,{rows,units});assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/passed/);
 });
