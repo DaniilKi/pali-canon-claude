@@ -50,3 +50,5 @@ main:focus{outline:none}
 .saved-filters label{flex:1 1 200px;min-width:0}
 .saved-filters input,.saved-filters select{display:block;width:100%;margin-top:6px}
 [aria-label="Saved passage results"] .segment>a{display:block;overflow-wrap:anywhere;margin:8px 0}
+/* Recovery metadata can contain long titles or pins; keep all Saved rows within the viewport. */
+[aria-label="Saved passage results"] .segment{overflow-wrap:anywhere}
