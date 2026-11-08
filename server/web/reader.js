@@ -320,9 +320,9 @@
     if (t.verseEnd) s = s.replace(/;(\s*)$/, `${STOP}$1`);
     return s;
   }
-  function fromRoman(text, script, stanza) {
+  function fromRoman(text2, script, stanza) {
     const t = TABLES[script];
-    const s = romanPunctuation(text.normalize("NFC"), t, stanza).toLowerCase();
+    const s = romanPunctuation(text2.normalize("NFC"), t, stanza).toLowerCase();
     let out = "";
     let pending = null;
     let consStart = -1;
@@ -391,10 +391,10 @@
     const prefixes = t.prefix ? /* @__PURE__ */ new Map([[t.sign.e, "e"], [t.sign.o, "o"]]) : /* @__PURE__ */ new Map();
     return REVERSE[script] = { t, cons, ind, signs, signList: byLength(signs), indList: byLength(ind), punct, expand, prefixes };
   }
-  function toRomanFrom(text, script) {
+  function toRomanFrom(text2, script) {
     const R = reverse(script);
     const { t } = R;
-    let s = text.normalize("NFC").replace(/[\u200c\u200d]/g, "");
+    let s = text2.normalize("NFC").replace(/[\u200c\u200d]/g, "");
     for (const [a, b] of R.expand) s = s.split(a).join(b);
     const at = (i, list) => list.find((x) => s.startsWith(x, i));
     let out = "";
@@ -445,9 +445,9 @@
     ["khmer", 6016, 6143],
     ["lanna", 6688, 6831]
   ];
-  function detectScript(text) {
+  function detectScript(text2) {
     const counts = {};
-    for (const ch of String(text ?? "")) {
+    for (const ch of String(text2 ?? "")) {
       const cp = ch.codePointAt(0);
       if (cp < 2304) continue;
       for (const [name, lo, hi] of RANGES) if (cp >= lo && cp <= hi) {
@@ -463,9 +463,9 @@
     }
     return best;
   }
-  function transliterate(text, from, to, { stanza = false } = {}) {
-    if (text == null) return text;
-    const s = String(text);
+  function transliterate(text2, from, to, { stanza = false } = {}) {
+    if (text2 == null) return text2;
+    const s = String(text2);
     const a = from === "auto" ? detectScript(s) : scriptName(from);
     const b = scriptName(to);
     if (a === b) return s;
@@ -481,9 +481,9 @@
       script_note: `P\u0101li transliterated into ${SCRIPT_NAMES[script]} by this server from the VRI Roman edition (exact letter-for-letter; punctuation follows VRI's own script editions where they exist). Citations, IDs and English are left in Roman.`
     };
   }
-  var pali = (text, script, opts) => typeof text === "string" && text ? transliterate(text, "roman", script, opts) : text;
-  function verse(text, script) {
-    const lines = text.split("\n");
+  var pali = (text2, script, opts) => typeof text2 === "string" && text2 ? transliterate(text2, "roman", script, opts) : text2;
+  function verse(text2, script) {
+    const lines = text2.split("\n");
     return lines.map((line, i) => pali(line, script, { stanza: i === lines.length - 1 })).join("\n");
   }
   function localizeUnitFields(obj, script) {
@@ -569,6 +569,47 @@
     return JSON.parse(JSON.stringify(next));
   }
 
+  // web/reading-plans.mjs
+  var nameOK = (n) => typeof n === "string" && /^[a-z0-9-]{1,60}$/.test(n);
+  var text = (x) => typeof x === "string" && x.trim().length > 0;
+  function planCatalog(data) {
+    if (!Array.isArray(data?.plans) || !data.plans.length || data.plans.length > 20 || new Set(data.plans.map((p) => p.name)).size !== data.plans.length || data.plans.some((p) => !nameOK(p.name) || !text(p.title) || !text(p.description) || !Number.isInteger(p.days) || p.days < 1 || p.days > 400)) throw Error("The reading-plan catalogue is incomplete. No plan was substituted.");
+    return data.plans;
+  }
+  function planDay(data, name, day) {
+    if (!nameOK(name) || data?.name !== name || data.day !== day || !Number.isInteger(day) || day < 1 || !Number.isInteger(data.days) || data.days < day || data.days > 400 || !text(data.title) || !text(data.source?.pali?.commit) || !text(data.source.pali.attribution) || !text(data.source.pali.terms) || !Array.isArray(data.readings) || !data.readings.length || data.readings.length > 20) throw Error("The selected plan day is incomplete or changed. No reading was substituted.");
+    for (const r of data.readings) {
+      const a = r.get_text;
+      if (!text(r.id) || !text(r.citation) || !a || a.uid !== r.id || Object.keys(a).some((k) => !["uid", "offset", "limit"].includes(k)) || a.offset !== void 0 && (!Number.isInteger(a.offset) || a.offset < 0 || a.offset > 1e5) || a.limit !== void 0 && (!Number.isInteger(a.limit) || a.limit < 1 || a.limit > 1e5) || a.offset !== void 0 && a.limit === void 0 || r.part !== void 0 && (!Number.isInteger(r.part) || !Number.isInteger(r.of) || r.part < 1 || r.part > r.of || a.limit === void 0)) throw Error("The plan contains an unsupported reading span. No reading was substituted.");
+    }
+    if (new Set(data.readings.map((r) => r.id)).size !== data.readings.length) throw Error("The plan contains ambiguous duplicate reading selections.");
+    return data;
+  }
+  function daySignature(data) {
+    return JSON.stringify({ name: data.name, day: data.day, source: data.source.pali.commit, readings: data.readings.map((r) => ({ id: r.id, offset: r.get_text.offset ?? 0, limit: r.get_text.limit ?? null, part: r.part ?? null, of: r.of ?? null })) });
+  }
+  function cleanProgress(value) {
+    if (!Array.isArray(value)) return [];
+    const seen = /* @__PURE__ */ new Set();
+    return value.filter((x) => {
+      const key = x?.name + ":" + x?.day;
+      if (!x || !nameOK(x.name) || !Number.isInteger(x.day) || x.day < 1 || x.day > 400 || typeof x.signature !== "string" || x.signature.length > 12e3 || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).slice(0, 1600);
+  }
+  function planWindow(data, uid, requestedOffset) {
+    const reading = data.readings.find((r) => r.id === uid);
+    if (!reading) throw Error("This text is not in the selected plan day.");
+    const start = reading.get_text.offset ?? 0, end = reading.get_text.limit === void 0 ? null : start + reading.get_text.limit;
+    const offset = requestedOffset ?? start;
+    if (!Number.isInteger(offset) || offset < start || end !== null && offset >= end) throw Error("This reading position is outside the selected plan day. Return to the plan to open its assigned span.");
+    return { start, end, offset, limit: end === null ? 30 : Math.min(30, end - offset) };
+  }
+  function validatePlanPage(data, plan, uid, window2) {
+    if (data.text_id !== uid || data.source?.commit !== plan.source.pali.commit || data.offset !== window2.offset || !Array.isArray(data.segments) || data.returned !== data.segments.length || !data.returned || data.returned > window2.limit || window2.end !== null && data.returned !== window2.limit) throw Error("The P\u0101li response does not match the selected plan span and source revision. No plan passage was displayed.");
+  }
+
   // web/reader.js
   var $ = (id) => document.getElementById(id);
   var view = $("view");
@@ -588,6 +629,7 @@
     }
   }
   var local = loadLocal();
+  local.reading_progress = cleanProgress(local.reading_progress);
   if (!Array.isArray(local.saved)) local.saved = [];
   local.saved = local.saved.filter((x) => x && typeof x.uid === "string" && typeof x.ref === "string" && typeof x.title === "string").slice(0, 500);
   function persist() {
@@ -600,30 +642,30 @@
       return false;
     }
   }
-  function el(tag, text, className) {
+  function el(tag, text2, className) {
     const n = document.createElement(tag);
-    if (text !== void 0) n.textContent = text;
+    if (text2 !== void 0) n.textContent = text2;
     if (className) n.className = className;
     return n;
   }
-  function button(text, fn) {
-    const n = el("button", text);
+  function button(text2, fn) {
+    const n = el("button", text2);
     n.type = "button";
     n.addEventListener("click", fn);
     return n;
   }
-  function link(text, href, className) {
-    const n = el("a", text, className);
+  function link(text2, href, className) {
+    const n = el("a", text2, className);
     n.href = href;
     return n;
   }
-  function external(text, url) {
+  function external(text2, url) {
     try {
       const u = new URL(url);
-      if (!["http:", "https:"].includes(u.protocol)) return el("span", text);
-      return link(text, u.href);
+      if (!["http:", "https:"].includes(u.protocol)) return el("span", text2);
+      return link(text2, u.href);
     } catch {
-      return el("span", text);
+      return el("span", text2);
     }
   }
   function route(name, args = {}) {
@@ -808,14 +850,28 @@
     persist();
   }
   async function read(args, token) {
-    const book = args.get("book"), uid = args.get("uid") || "dhp183", offset = offsetOf(args), kind = book ? "book" : ["commentary", "post"].includes(args.get("kind")) ? args.get("kind") : "canon";
-    const request = { ...kind === "book" ? { book } : kind === "post" ? { citation: uid } : { uid }, offset, limit: 30, script: $("script").value };
+    const book = args.get("book"), uid = args.get("uid") || "dhp183";
+    let offset = offsetOf(args), plan = null, window2 = null;
+    if (args.has("plan")) {
+      if (book || args.has("kind")) throw Error("Reading plans require their canonical text selection.");
+      const name = args.get("plan"), day = Number(args.get("day"));
+      plan = planDay(await tool("reading_plan", { name, day }), name, day);
+      if (token !== epoch) return;
+      window2 = planWindow(plan, uid, args.has("offset") ? Number(args.get("offset")) : void 0);
+      offset = window2.offset;
+    }
+    const kind = book ? "book" : ["commentary", "post"].includes(args.get("kind")) ? args.get("kind") : "canon";
+    const request = { ...kind === "book" ? { book } : kind === "post" ? { citation: uid } : { uid }, offset, limit: window2?.limit || 30, script: $("script").value };
     const data = await tool(kind === "commentary" ? "get_commentary" : kind === "post" ? "get_post_canonical" : "get_text", request);
     if (token !== epoch) return;
     if (!Array.isArray(data.segments)) throw new Error("Choose an individual book or passage to read.");
+    if (plan) validatePlanPage(data, plan, uid, window2);
     if (kind === "post" && data.canonical !== false || kind === "commentary" && !(data.canonical === false && data.content_type === "commentary") && !(typeof data.label === "string" && data.label.startsWith("Commentary") && data.label.includes("not the canon"))) throw new Error("This response lacks the expected non-canonical source label.");
     const selector = kind === "book" ? "book:" + book : kind === "post" ? "post:" + uid : kind === "canon" ? data.text_id || uid : uid.startsWith("commentary:") ? uid : "commentary-ref:" + uid;
     heading(kind === "book" ? "COMPLETE VRI SOURCE BOOK" : kind === "commentary" ? "TRADITIONAL COMMENTARY \xB7 NOT CANON" : kind === "post" ? "LATER P\u0100LI WORK \xB7 NOT CANON" : "CANONICAL P\u0100LI", (data.citation ? data.citation + " \xB7 " : "") + (data.title || data.book?.title || data.book_id || uid));
+    if (plan) {
+      view.append(link("\u2190 Return to plan day " + plan.day, route("plans", { name: plan.name, day: plan.day }), "button"), el("p", plan.title + " \xB7 day " + plan.day + (window2.end === null ? " \xB7 complete selected text" : " \xB7 assigned segments " + (window2.start + 1) + "\u2013" + window2.end) + ". English sources and related material may cover more than this assignment; they are not aligned to this part.", "notice"));
+    }
     notes(data);
     view.append(el("p", `Segments ${offset + 1}\u2013${offset + data.returned} of ${data.total_segments}`, "muted"));
     const toolbar = el("div", void 0, "toolbar");
@@ -856,13 +912,14 @@
       }
       row.append(actions);
       part.classList.toggle("marked", active);
-      const text = el("p", segment.text, "passage");
-      text.lang = "pi";
-      part.append(row, text);
+      const text2 = el("p", segment.text, "passage");
+      text2.lang = "pi";
+      part.append(row, text2);
       passages.append(part);
     }
+    const next = plan && window2.end !== null ? offset + data.returned < window2.end ? offset + data.returned : null : data.next_offset;
     view.append(passages);
-    pageControls(data.next_offset, offset ? Math.max(0, offset - 30) : null, (n) => route("read", { ...readingArgs(selector), offset: n }));
+    pageControls(next, offset > (window2?.start || 0) ? Math.max(window2?.start || 0, offset - 30) : null, (n) => route("read", { ...readingArgs(selector), offset: n, ...plan ? { plan: plan.name, day: plan.day } : {} }));
     provenance(data);
     local.last = location.hash;
     persist();
@@ -1120,14 +1177,95 @@
     if (data.sources?.dpd) provenance({ edition: data.sources.dpd.name, dictionary: data.sources.dpd, attribution: data.sources.dpd.attribution, license: data.sources.dpd.license }, view);
     if (data.sources?.lists) view.append(el("p", data.sources.lists.name + " \xB7 " + data.sources.lists.note, "provenance"));
   }
+  function exportPersonal(data, filename) {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }), url = URL.createObjectURL(blob), a = link("", url);
+    a.download = filename;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1e3);
+  }
+  async function plans(args, token) {
+    const name = args.get("name");
+    if (!name) {
+      const catalog = planCatalog(await tool("reading_plan", {}));
+      if (token !== epoch) return;
+      heading("AT YOUR OWN PACE", "Reading plans");
+      view.append(el("p", "Follow the existing sourced reading orders. Day numbers are steps, not deadlines. Marks record your choice only; they do not prove comprehension or completion of every passage.", "notice"));
+      const cards = el("div", void 0, "cards");
+      for (const plan of catalog) {
+        const card = link("", route("plans", { name: plan.name, day: 1 }), "entry");
+        card.append(el("strong", plan.title), el("p", plan.description), el("small", plan.days + " days \xB7 " + local.reading_progress.filter((x) => x.name === plan.name).length + " saved day marks"));
+        cards.append(card);
+      }
+      view.append(cards);
+      view.append(el("p", "Progress stays in this browser only. A changed assignment or source revision requires review; saved marks are not automatically transferred.", "muted"), button("Export reading progress", () => exportPersonal({ format: "pali-library-reading-progress-v1", progress: local.reading_progress }, "pali-library-reading-progress.json")));
+      return;
+    }
+    const day = Number(args.get("day") || 1), data = planDay(await tool("reading_plan", { name, day }), name, day);
+    if (token !== epoch) return;
+    heading("SOURCED READING ORDER", data.title);
+    view.append(link("\u2190 All reading plans", "#plans", "button"), el("p", data.description, "muted"), el("h3", "Day " + day + " of " + data.days));
+    const form = el("form");
+    form.className = "plan-picker";
+    const label = el("label", "Go to day"), input = el("input");
+    input.type = "number";
+    input.min = "1";
+    input.max = String(data.days);
+    input.value = day;
+    input.required = true;
+    label.append(input);
+    const submit = el("button", "Go");
+    submit.type = "submit";
+    form.append(label, submit);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (form.reportValidity()) location.hash = route("plans", { name, day: input.value });
+    });
+    view.append(form);
+    for (const reading of data.readings) {
+      const card = el("article", void 0, "entry");
+      card.append(el("h4", reading.citation + (reading.title ? " \xB7 " + reading.title : "")));
+      if (reading.part) card.append(el("p", "Part " + reading.part + " of " + reading.of + " \xB7 assigned P\u0101li segments " + ((reading.get_text.offset || 0) + 1) + "\u2013" + ((reading.get_text.offset || 0) + reading.get_text.limit), "notice"));
+      notes(reading, card);
+      card.append(link("Read assigned P\u0101li \xB7 " + reading.citation, route("read", { uid: reading.id, plan: name, day, ...reading.get_text.offset !== void 0 ? { offset: reading.get_text.offset } : {} }), "button"));
+      if (reading.guide_link?.url) card.append(el("p", "The guide\u2019s cited English source (external; its own scope and terms apply):"), external(reading.guide_link.reference || "Publisher\u2019s source page", reading.guide_link.url));
+      view.append(card);
+    }
+    const signature = daySignature(data), prior = local.reading_progress.find((x) => x.name === name && x.day === day), active = prior?.signature === signature;
+    if (prior && !active) view.append(el("p", "This day was marked against a different assignment or source revision. Review it before marking the current day.", "notice"));
+    const mark = button(active ? "Day marked \u2713 \xB7 undo" : "Mark this day read", () => {
+      const current = local.reading_progress.find((x) => x.name === name && x.day === day), undo = current?.signature === signature;
+      local.reading_progress = local.reading_progress.filter((x) => !(x.name === name && x.day === day));
+      if (!undo) local.reading_progress.push({ name, day, signature });
+      const saved2 = persist();
+      mark.textContent = undo ? "Mark this day read" : "Day marked \u2713 \xB7 undo";
+      mark.setAttribute("aria-pressed", String(!undo));
+      status.textContent = saved2 ? undo ? "Day mark removed from this browser." : "Day marked in this browser only." : "Browser storage is unavailable. Export reading progress before closing this tab.";
+    });
+    mark.setAttribute("aria-pressed", String(active));
+    view.append(mark);
+    const daysNav = el("nav", void 0, "pager");
+    daysNav.setAttribute("aria-label", "Plan days");
+    if (day > 1) daysNav.append(link("\u2190 Previous day", route("plans", { name, day: day - 1 }), "button"));
+    if (day < data.days) daysNav.append(link("Next day \u2192", route("plans", { name, day: day + 1 }), "button"));
+    view.append(daysNav);
+    if (data.guide) {
+      const guide = el("section", void 0, "provenance");
+      guide.append(el("h3", "Study guide \xB7 links only"), el("p", data.guide.cite), el("p", [data.guide.copyright, data.guide.license].filter(Boolean).join(" \xB7 ")), el("p", data.guide.note), external("Read the original study guide", data.guide.url));
+      view.append(guide);
+      if (data.omitted?.length) {
+        const omitted = el("details");
+        omitted.append(el("summary", "Unplaced guide links (" + data.omitted.length + ")"));
+        for (const item of data.omitted) omitted.append(el("p", item.reason), external("Original unplaced source link", item.url));
+        view.append(omitted);
+      }
+    }
+    provenance({ source: data.source.pali });
+  }
   function saved() {
     heading("YOUR PERSONAL READING", "Saved passages");
     view.append(el("p", "Bookmarks and notes stay in this browser only. They are not scripture, synced, or backed up. Export them to keep a copy.", "notice"));
     view.append(button("Export bookmarks and notes", () => {
-      const blob = new Blob([JSON.stringify({ format: KEY, saved: local.saved }, null, 2)], { type: "application/json" }), url = URL.createObjectURL(blob), a = link("", url);
-      a.download = "pali-library-bookmarks.json";
-      a.click();
-      setTimeout(() => URL.revokeObjectURL(url), 1e3);
+      exportPersonal({ format: KEY, saved: local.saved }, "pali-library-bookmarks.json");
     }));
     if (!local.saved.length) view.append(el("p", "Save a passage while reading to find it here."));
     for (const item of [...local.saved]) {
@@ -1156,7 +1294,7 @@
   }
   function about() {
     heading("A LIBRARY, NOT A TEACHER", "Read with the source in view.");
-    for (const text of ["The bundled P\u0101li is retrieved from the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition. Scripture is never generated or reconstructed. Abbreviations and uncertain alignments stay labelled.", "English translations are available for a subset of texts and fetched only after you choose them. Translators\u2019 wording is not silently exchanged. Commentary is labelled separately from canonical text.", "VRI and several translation/dictionary sources carry non-commercial terms. This reading interface adds no permission to redistribute, translate or commercialize their work.", "Your saved passages, notes and preferences are stored in this browser. The app has no accounts, advertising, analytics, cloud sync or offline web download. The server may hold your IP temporarily for rate limiting; deployment providers may keep separate infrastructure logs."]) view.append(el("p", text));
+    for (const text2 of ["The bundled P\u0101li is retrieved from the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition. Scripture is never generated or reconstructed. Abbreviations and uncertain alignments stay labelled.", "English translations are available for a subset of texts and fetched only after you choose them. Translators\u2019 wording is not silently exchanged. Commentary is labelled separately from canonical text.", "VRI and several translation/dictionary sources carry non-commercial terms. This reading interface adds no permission to redistribute, translate or commercialize their work.", "Your saved passages, notes, manual reading-plan marks and preferences are stored in this browser. The app has no accounts, advertising, analytics, cloud sync or offline web download. The server may hold your IP temporarily for rate limiting; deployment providers may keep separate infrastructure logs."]) view.append(el("p", text2));
     const links = el("div", void 0, "toolbar");
     links.append(external("Source and licence register", "https://github.com/DaniilKi/pali-canon-claude/blob/dev/pali-reliability/THIRD_PARTY.md"), external("Project and complete MCP toolset", "https://github.com/DaniilKi/pali-canon-claude"));
     view.append(links);
@@ -1175,11 +1313,12 @@
       if (page === "read") await read(args, token);
       else if (page === "search") await search(args, token);
       else if (page === "glossary") await dictionary(args, token);
+      else if (page === "plans") await plans(args, token);
       else if (page === "saved") saved();
       else if (page === "about") about();
       else await browse(args, token);
       if (token !== epoch) return;
-      status.textContent = storageOK ? "" : "Browser storage is unavailable; export personal notes before closing this tab.";
+      status.textContent = storageOK ? "" : "Browser storage is unavailable; export your personal data before closing this tab.";
       focusHeading();
     } catch (error) {
       if (token !== epoch) return;

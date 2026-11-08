@@ -1,0 +1,348 @@
+{
+  "passed": 48,
+  "checks": [
+    {
+      "width": 390,
+      "check": "all four real plans visible with browser-local manual-progress limits"
+    },
+    {
+      "width": 390,
+      "check": "manual mark is keyboard-operable and survives reload"
+    },
+    {
+      "width": 390,
+      "check": "complete chapter opens actual P\u0101li and returns to the marked plan day"
+    },
+    {
+      "width": 390,
+      "check": "selected MN part starts at exact engine assignment and never exposes an earlier page"
+    },
+    {
+      "width": 390,
+      "check": "plan pagination stops exactly at assigned end, without entering another day"
+    },
+    {
+      "width": 390,
+      "check": "tampered out-of-span reading URL fails without substituting a different passage"
+    },
+    {
+      "width": 390,
+      "check": "study guide remains link-only with author, rights and unplaced-link limitations"
+    },
+    {
+      "width": 390,
+      "check": "progress exports only local manual marks with assignment/source signature"
+    },
+    {
+      "width": 390,
+      "check": "missing plan source provenance fails before a reading or completion control is shown"
+    },
+    {
+      "width": 390,
+      "check": "historical mark is not silently credited to a changed source revision"
+    },
+    {
+      "width": 390,
+      "check": "manual completion can be undone"
+    },
+    {
+      "width": 390,
+      "check": "plans neither retrieve English bodies nor transmit personal progress"
+    },
+    {
+      "width": 390,
+      "check": "all four real plans visible with browser-local manual-progress limits"
+    },
+    {
+      "width": 390,
+      "check": "manual mark is keyboard-operable and survives reload"
+    },
+    {
+      "width": 390,
+      "check": "complete chapter opens actual P\u0101li and returns to the marked plan day"
+    },
+    {
+      "width": 390,
+      "check": "selected MN part starts at exact engine assignment and never exposes an earlier page"
+    },
+    {
+      "width": 390,
+      "check": "plan pagination stops exactly at assigned end, without entering another day"
+    },
+    {
+      "width": 390,
+      "check": "tampered out-of-span reading URL fails without substituting a different passage"
+    },
+    {
+      "width": 390,
+      "check": "study guide remains link-only with author, rights and unplaced-link limitations"
+    },
+    {
+      "width": 390,
+      "check": "progress exports only local manual marks with assignment/source signature"
+    },
+    {
+      "width": 390,
+      "check": "missing plan source provenance fails before a reading or completion control is shown"
+    },
+    {
+      "width": 390,
+      "check": "historical mark is not silently credited to a changed source revision"
+    },
+    {
+      "width": 390,
+      "check": "manual completion can be undone"
+    },
+    {
+      "width": 390,
+      "check": "plans neither retrieve English bodies nor transmit personal progress"
+    },
+    {
+      "width": 1280,
+      "check": "all four real plans visible with browser-local manual-progress limits"
+    },
+    {
+      "width": 1280,
+      "check": "manual mark is keyboard-operable and survives reload"
+    },
+    {
+      "width": 1280,
+      "check": "complete chapter opens actual P\u0101li and returns to the marked plan day"
+    },
+    {
+      "width": 1280,
+      "check": "selected MN part starts at exact engine assignment and never exposes an earlier page"
+    },
+    {
+      "width": 1280,
+      "check": "plan pagination stops exactly at assigned end, without entering another day"
+    },
+    {
+      "width": 1280,
+      "check": "tampered out-of-span reading URL fails without substituting a different passage"
+    },
+    {
+      "width": 1280,
+      "check": "study guide remains link-only with author, rights and unplaced-link limitations"
+    },
+    {
+      "width": 1280,
+      "check": "progress exports only local manual marks with assignment/source signature"
+    },
+    {
+      "width": 1280,
+      "check": "missing plan source provenance fails before a reading or completion control is shown"
+    },
+    {
+      "width": 1280,
+      "check": "historical mark is not silently credited to a changed source revision"
+    },
+    {
+      "width": 1280,
+      "check": "manual completion can be undone"
+    },
+    {
+      "width": 1280,
+      "check": "plans neither retrieve English bodies nor transmit personal progress"
+    },
+    {
+      "width": 1280,
+      "check": "all four real plans visible with browser-local manual-progress limits"
+    },
+    {
+      "width": 1280,
+      "check": "manual mark is keyboard-operable and survives reload"
+    },
+    {
+      "width": 1280,
+      "check": "complete chapter opens actual P\u0101li and returns to the marked plan day"
+    },
+    {
+      "width": 1280,
+      "check": "selected MN part starts at exact engine assignment and never exposes an earlier page"
+    },
+    {
+      "width": 1280,
+      "check": "plan pagination stops exactly at assigned end, without entering another day"
+    },
+    {
+      "width": 1280,
+      "check": "tampered out-of-span reading URL fails without substituting a different passage"
+    },
+    {
+      "width": 1280,
+      "check": "study guide remains link-only with author, rights and unplaced-link limitations"
+    },
+    {
+      "width": 1280,
+      "check": "progress exports only local manual marks with assignment/source signature"
+    },
+    {
+      "width": 1280,
+      "check": "missing plan source provenance fails before a reading or completion control is shown"
+    },
+    {
+      "width": 1280,
+      "check": "historical mark is not silently credited to a changed source revision"
+    },
+    {
+      "width": 1280,
+      "check": "manual completion can be undone"
+    },
+    {
+      "width": 1280,
+      "check": "plans neither retrieve English bodies nor transmit personal progress"
+    }
+  ],
+  "a11y": {
+    "scans": 16,
+    "violations": 0,
+    "results": [
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "catalogue",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "day",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "bounded reading",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "state": "guide and omissions",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "catalogue",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "day",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "bounded reading",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "state": "guide and omissions",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "catalogue",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "day",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "bounded reading",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "light",
+        "state": "guide and omissions",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "catalogue",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "day",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "bounded reading",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      },
+      {
+        "width": 1280,
+        "theme": "dark",
+        "state": "guide and omissions",
+        "violations": [],
+        "manual_review_rules": [
+          "color-contrast"
+        ]
+      }
+    ]
+  },
+  "limitations": "Real bundled reading plans; missing-provenance failure is a synthetic response. No upstream source fetch, human accessibility review or physical-device certification. Only a11y contexts bypass CSP for checker injection."
+}

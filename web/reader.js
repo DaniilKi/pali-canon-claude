@@ -1,5 +1,6 @@
 import { localizeText } from '../src/script.mjs';
 import { scopeDescriptor, validateEnglishPage } from './translation-policy.mjs';
+import { planCatalog, planDay, daySignature, cleanProgress, planWindow, validatePlanPage } from './reading-plans.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
@@ -9,6 +10,7 @@ const KEY = 'pali-library-v1';
 let storageOK = true;
 function loadLocal() { try { const x = JSON.parse(localStorage.getItem(KEY) || '{}'); return x && typeof x === 'object' && !Array.isArray(x) ? x : {}; } catch { storageOK = false; return {}; } }
 const local = loadLocal();
+local.reading_progress = cleanProgress(local.reading_progress);
 if (!Array.isArray(local.saved)) local.saved = [];
 local.saved = local.saved.filter(x => x && typeof x.uid === 'string' && typeof x.ref === 'string' && typeof x.title === 'string').slice(0, 500);
 function persist() { try { localStorage.setItem(KEY, JSON.stringify(local)); return true; } catch { storageOK = false; status.textContent = 'Browser storage is unavailable. Changes are kept only in this tab; export your saved passages.'; return false; } }
@@ -129,13 +131,22 @@ function saveSegment(selector, data, segment, control, container) {
   const active = local.saved.some(x => x.uid === selector && x.ref === segment.ref); control.textContent = active ? 'Saved ✓' : 'Save passage'; control.setAttribute('aria-pressed', String(active)); container.classList.toggle('marked', active); persist();
 }
 async function read(args, token) {
-  const book = args.get('book'), uid = args.get('uid') || 'dhp183', offset = offsetOf(args), kind = book ? 'book' : ['commentary', 'post'].includes(args.get('kind')) ? args.get('kind') : 'canon';
-  const request = { ...(kind === 'book' ? { book } : kind === 'post' ? { citation: uid } : { uid }), offset, limit: 30, script: $('script').value };
+  const book = args.get('book'), uid = args.get('uid') || 'dhp183'; let offset = offsetOf(args), plan = null, window = null;
+  if (args.has('plan')) {
+    if (book || args.has('kind')) throw Error('Reading plans require their canonical text selection.');
+    const name = args.get('plan'), day = Number(args.get('day'));
+    plan = planDay(await tool('reading_plan', { name, day }), name, day); if (token !== epoch) return;
+    window = planWindow(plan, uid, args.has('offset') ? Number(args.get('offset')) : undefined); offset = window.offset;
+  }
+  const kind = book ? 'book' : ['commentary', 'post'].includes(args.get('kind')) ? args.get('kind') : 'canon';
+  const request = { ...(kind === 'book' ? { book } : kind === 'post' ? { citation: uid } : { uid }), offset, limit: window?.limit || 30, script: $('script').value };
   const data = await tool(kind === 'commentary' ? 'get_commentary' : kind === 'post' ? 'get_post_canonical' : 'get_text', request); if (token !== epoch) return;
   if (!Array.isArray(data.segments)) throw new Error('Choose an individual book or passage to read.');
+  if (plan) validatePlanPage(data, plan, uid, window);
   if ((kind === 'post' && data.canonical !== false) || (kind === 'commentary' && !(data.canonical === false && data.content_type === 'commentary') && !(typeof data.label === 'string' && data.label.startsWith('Commentary') && data.label.includes('not the canon')))) throw new Error('This response lacks the expected non-canonical source label.');
   const selector = kind === 'book' ? 'book:' + book : kind === 'post' ? 'post:' + uid : kind === 'canon' ? data.text_id || uid : uid.startsWith('commentary:') ? uid : 'commentary-ref:' + uid;
   heading(kind === 'book' ? 'COMPLETE VRI SOURCE BOOK' : kind === 'commentary' ? 'TRADITIONAL COMMENTARY · NOT CANON' : kind === 'post' ? 'LATER PĀLI WORK · NOT CANON' : 'CANONICAL PĀLI', (data.citation ? data.citation + ' · ' : '') + (data.title || data.book?.title || data.book_id || uid));
+  if (plan) { view.append(link('← Return to plan day ' + plan.day, route('plans', { name: plan.name, day: plan.day }), 'button'), el('p', plan.title + ' · day ' + plan.day + (window.end === null ? ' · complete selected text' : ' · assigned segments ' + (window.start + 1) + '–' + window.end) + '. English sources and related material may cover more than this assignment; they are not aligned to this part.', 'notice')); }
   notes(data); view.append(el('p', `Segments ${offset + 1}–${offset + data.returned} of ${data.total_segments}`, 'muted'));
   const toolbar = el('div', undefined, 'toolbar');
   toolbar.append(link('Back to library', route('browse', { node: 'canon' }), 'button'));
@@ -152,7 +163,8 @@ async function read(args, token) {
     row.append(actions); part.classList.toggle('marked', active);
     const text = el('p', segment.text, 'passage'); text.lang = 'pi'; part.append(row, text); passages.append(part);
   }
-  view.append(passages); pageControls(data.next_offset, offset ? Math.max(0, offset - 30) : null, n => route('read', { ...readingArgs(selector), offset: n })); provenance(data);
+  const next = plan && window.end !== null ? (offset + data.returned < window.end ? offset + data.returned : null) : data.next_offset;
+  view.append(passages); pageControls(next, offset > (window?.start || 0) ? Math.max(window?.start || 0, offset - 30) : null, n => route('read', { ...readingArgs(selector), offset: n, ...(plan ? { plan: plan.name, day: plan.day } : {}) })); provenance(data);
   local.last = location.hash; persist(); updateResume();
   const savedVersion = local.saved.find(x => x.uid === selector && x.source_commit && x.source_commit !== data.source?.commit);
   if (savedVersion) view.prepend(el('p', 'This source revision differs from a saved bookmark. Check its reference before reusing your notes.', 'notice'));
@@ -303,9 +315,38 @@ async function dictionary(args, token) {
   if (data.sources?.dpd) provenance({ edition: data.sources.dpd.name, dictionary: data.sources.dpd, attribution: data.sources.dpd.attribution, license: data.sources.dpd.license }, view);
   if (data.sources?.lists) view.append(el('p', data.sources.lists.name + ' · ' + data.sources.lists.note, 'provenance'));
 }
+function exportPersonal(data, filename) {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }), url = URL.createObjectURL(blob), a = link('', url); a.download = filename; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+async function plans(args, token) {
+  const name = args.get('name');
+  if (!name) {
+    const catalog = planCatalog(await tool('reading_plan', {})); if (token !== epoch) return;
+    heading('AT YOUR OWN PACE', 'Reading plans');
+    view.append(el('p', 'Follow the existing sourced reading orders. Day numbers are steps, not deadlines. Marks record your choice only; they do not prove comprehension or completion of every passage.', 'notice'));
+    const cards = el('div', undefined, 'cards');
+    for (const plan of catalog) { const card = link('', route('plans', { name: plan.name, day: 1 }), 'entry'); card.append(el('strong', plan.title), el('p', plan.description), el('small', plan.days + ' days · ' + local.reading_progress.filter(x => x.name === plan.name).length + ' saved day marks')); cards.append(card); } view.append(cards);
+    view.append(el('p', 'Progress stays in this browser only. A changed assignment or source revision requires review; saved marks are not automatically transferred.', 'muted'), button('Export reading progress', () => exportPersonal({ format: 'pali-library-reading-progress-v1', progress: local.reading_progress }, 'pali-library-reading-progress.json'))); return;
+  }
+  const day = Number(args.get('day') || 1), data = planDay(await tool('reading_plan', { name, day }), name, day); if (token !== epoch) return;
+  heading('SOURCED READING ORDER', data.title); view.append(link('← All reading plans', '#plans', 'button'), el('p', data.description, 'muted'), el('h3', 'Day ' + day + ' of ' + data.days));
+  const form = el('form'); form.className = 'plan-picker'; const label = el('label', 'Go to day'), input = el('input'); input.type = 'number'; input.min = '1'; input.max = String(data.days); input.value = day; input.required = true; label.append(input); const submit = el('button', 'Go'); submit.type = 'submit'; form.append(label, submit); form.addEventListener('submit', e => { e.preventDefault(); if (form.reportValidity()) location.hash = route('plans', { name, day: input.value }); }); view.append(form);
+  for (const reading of data.readings) {
+    const card = el('article', undefined, 'entry'); card.append(el('h4', reading.citation + (reading.title ? ' · ' + reading.title : '')));
+    if (reading.part) card.append(el('p', 'Part ' + reading.part + ' of ' + reading.of + ' · assigned Pāli segments ' + ((reading.get_text.offset || 0) + 1) + '–' + ((reading.get_text.offset || 0) + reading.get_text.limit), 'notice'));
+    notes(reading, card); card.append(link('Read assigned Pāli · ' + reading.citation, route('read', { uid: reading.id, plan: name, day, ...(reading.get_text.offset !== undefined ? { offset: reading.get_text.offset } : {}) }), 'button'));
+    if (reading.guide_link?.url) card.append(el('p', 'The guide’s cited English source (external; its own scope and terms apply):'), external(reading.guide_link.reference || 'Publisher’s source page', reading.guide_link.url)); view.append(card);
+  }
+  const signature = daySignature(data), prior = local.reading_progress.find(x => x.name === name && x.day === day), active = prior?.signature === signature;
+  if (prior && !active) view.append(el('p', 'This day was marked against a different assignment or source revision. Review it before marking the current day.', 'notice'));
+  const mark = button(active ? 'Day marked ✓ · undo' : 'Mark this day read', () => { const current = local.reading_progress.find(x => x.name === name && x.day === day), undo = current?.signature === signature; local.reading_progress = local.reading_progress.filter(x => !(x.name === name && x.day === day)); if (!undo) local.reading_progress.push({ name, day, signature }); const saved = persist(); mark.textContent = undo ? 'Mark this day read' : 'Day marked ✓ · undo'; mark.setAttribute('aria-pressed', String(!undo)); status.textContent = saved ? (undo ? 'Day mark removed from this browser.' : 'Day marked in this browser only.') : 'Browser storage is unavailable. Export reading progress before closing this tab.'; }); mark.setAttribute('aria-pressed', String(active)); view.append(mark);
+  const daysNav = el('nav', undefined, 'pager'); daysNav.setAttribute('aria-label', 'Plan days'); if (day > 1) daysNav.append(link('← Previous day', route('plans', { name, day: day - 1 }), 'button')); if (day < data.days) daysNav.append(link('Next day →', route('plans', { name, day: day + 1 }), 'button')); view.append(daysNav);
+  if (data.guide) { const guide = el('section', undefined, 'provenance'); guide.append(el('h3', 'Study guide · links only'), el('p', data.guide.cite), el('p', [data.guide.copyright, data.guide.license].filter(Boolean).join(' · ')), el('p', data.guide.note), external('Read the original study guide', data.guide.url)); view.append(guide); if (data.omitted?.length) { const omitted = el('details'); omitted.append(el('summary', 'Unplaced guide links (' + data.omitted.length + ')')); for (const item of data.omitted) omitted.append(el('p', item.reason), external('Original unplaced source link', item.url)); view.append(omitted); } }
+  provenance({ source: data.source.pali });
+}
 function saved() {
   heading('YOUR PERSONAL READING', 'Saved passages'); view.append(el('p', 'Bookmarks and notes stay in this browser only. They are not scripture, synced, or backed up. Export them to keep a copy.', 'notice'));
-  view.append(button('Export bookmarks and notes', () => { const blob = new Blob([JSON.stringify({ format: KEY, saved: local.saved }, null, 2)], { type: 'application/json' }), url = URL.createObjectURL(blob), a = link('', url); a.download = 'pali-library-bookmarks.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); }));
+  view.append(button('Export bookmarks and notes', () => { exportPersonal({ format: KEY, saved: local.saved }, 'pali-library-bookmarks.json'); }));
   if (!local.saved.length) view.append(el('p', 'Save a passage while reading to find it here.'));
   for (const item of [...local.saved]) {
     const box = el('article', undefined, 'segment'); const index = Number.isSafeInteger(item.offset) && item.offset >= 0 ? item.offset : Number(item.ref.match(/\/c?(\d+)$/)?.[1] || 1) - 1;
@@ -317,15 +358,15 @@ function saved() {
 }
 function about() {
   heading('A LIBRARY, NOT A TEACHER', 'Read with the source in view.');
-  for (const text of ['The bundled Pāli is retrieved from the VRI Chaṭṭha Saṅgāyana edition. Scripture is never generated or reconstructed. Abbreviations and uncertain alignments stay labelled.', 'English translations are available for a subset of texts and fetched only after you choose them. Translators’ wording is not silently exchanged. Commentary is labelled separately from canonical text.', 'VRI and several translation/dictionary sources carry non-commercial terms. This reading interface adds no permission to redistribute, translate or commercialize their work.', 'Your saved passages, notes and preferences are stored in this browser. The app has no accounts, advertising, analytics, cloud sync or offline web download. The server may hold your IP temporarily for rate limiting; deployment providers may keep separate infrastructure logs.']) view.append(el('p', text));
+  for (const text of ['The bundled Pāli is retrieved from the VRI Chaṭṭha Saṅgāyana edition. Scripture is never generated or reconstructed. Abbreviations and uncertain alignments stay labelled.', 'English translations are available for a subset of texts and fetched only after you choose them. Translators’ wording is not silently exchanged. Commentary is labelled separately from canonical text.', 'VRI and several translation/dictionary sources carry non-commercial terms. This reading interface adds no permission to redistribute, translate or commercialize their work.', 'Your saved passages, notes, manual reading-plan marks and preferences are stored in this browser. The app has no accounts, advertising, analytics, cloud sync or offline web download. The server may hold your IP temporarily for rate limiting; deployment providers may keep separate infrastructure logs.']) view.append(el('p', text));
   const links = el('div', undefined, 'toolbar'); links.append(external('Source and licence register', 'https://github.com/DaniilKi/pali-canon-claude/blob/dev/pali-reliability/THIRD_PARTY.md'), external('Project and complete MCP toolset', 'https://github.com/DaniilKi/pali-canon-claude')); view.append(links);
 }
 async function render() {
   if (location.hash === '#content' && view.childElementCount) { $('content').focus(); return; }
   const token = ++epoch; ++studyEpoch; view.replaceChildren(); status.textContent = 'Opening the library…';
   const [page, query = ''] = location.hash.slice(1).split('?'), args = new URLSearchParams(query);
-  try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
-    if (token !== epoch) return; status.textContent = storageOK ? '' : 'Browser storage is unavailable; export personal notes before closing this tab.'; focusHeading();
+  try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'plans') await plans(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
+    if (token !== epoch) return; status.textContent = storageOK ? '' : 'Browser storage is unavailable; export your personal data before closing this tab.'; focusHeading();
   } catch (error) { if (token !== epoch) return; view.replaceChildren(); heading('UNABLE TO OPEN', 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); status.textContent = 'The request failed.'; }
 }
 window.addEventListener('hashchange', render); render();

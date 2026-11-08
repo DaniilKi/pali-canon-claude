@@ -2,7 +2,9 @@
 
 The feature branch is `feat/standalone-web-reader`, based on corpus checkpoint `f0906bd`. No merge into dev/main or deployment is covered by these receipts.
 
-Start with the [scoped-English acceptance](TRANSLATION_SCOPE.md) for the latest guard and integration limits. Its 20 normal browser checks and 44 additional accessibility scans use explicitly labelled synthetic sources; compilation remains a forward UI fixture.
+Start with the [reading-plan acceptance](READING_PLANS.md): four existing schedules, bounded Pāli reading and local manual progress; 49 browser checks plus 49 extracted-package checks and 16 new accessibility scans.
+
+See the [scoped-English acceptance](TRANSLATION_SCOPE.md) for translation guards and integration limits. Its 20 normal browser checks and 44 additional accessibility scans use explicitly labelled synthetic sources; compilation remains a forward UI fixture.
 
 The [study-tool acceptance](STUDY_TOOLS.md) records the preceding slice:
 
