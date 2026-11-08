@@ -102,3 +102,13 @@ with exact text/notice pins, complete3,256/3,520-character bodies, null individu
 IDs and `whole_unit_coverage:false`. Direct Node networking without the required
 proxy reported DNS errors; those are environment setup failures, not source
 outage evidence.
+
+The worker-backed live browser acceptance passed70 checks for all five actual
+compilations at390/1280px in light/dark themes, including consent, full pinned
+page/notice rendering, no horizontal overflow and fresh consent on reload.
+The metadata-only [browser receipt](../evidence/shared-early-an.browser.json)
+contains exact source pins and automated accessibility findings/limitations.
+Installed synthetic contracts passed19 scenarios with no author-host requests;
+smoke64 and offline evaluations195/195 passed (6live questions skipped).
+Independent source and implementation reviews passed, including reproduction
+of the daily-pool evaluation change by restoring only the old binding in memory.
