@@ -1,0 +1,11 @@
+{
+  "preserved_browser_commands": 25,
+  "groups": {
+    "core": 9,
+    "study": 8,
+    "personal": 8
+  },
+  "timeout_minutes_per_group": 10,
+  "fail_fast": false,
+  "artifact_name": "widget-browser-report-${{ matrix.group }}"
+}

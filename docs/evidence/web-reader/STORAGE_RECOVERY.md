@@ -57,3 +57,14 @@ Run `node --test tests/web-local-storage-write.test.mjs` and
 are the separate integration evidence; no deployment is made by this receipt.
 
 The snapshot guard compares the whole profile. An unrelated preference or reading-position change can therefore block a stale tab too. For now, use one writing tab or export/reload to reconcile. Separating independent records and adding atomic coordination is future work, not part of this repair.
+
+## Hosted CI budget repair
+
+Initial exact-head [package run 42466702350](https://github.com/DaniilKi/pali-canon-claude/actions/runs/42466702350)
+was cancelled at the Chromium job's 10-minute deadline during the last storage
+accessibility step. All earlier browser steps and platform jobs passed; the
+receipt remains in history. The workflow now runs independent core/study/personal
+browser groups in parallel, retaining every original command and artifact, with
+the same 10-minute per-group limit and no disabled assertions. See
+[partition validation](storage-ci-partition.json). New exact-head CI is required;
+the old timeout is not reinterpreted as success.
