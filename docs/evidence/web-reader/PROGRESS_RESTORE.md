@@ -8,6 +8,7 @@ one-way-backup gap with a manual, local file workflow. It is not account sync.
 ## Behavior and boundaries
 
 - Preview first, with new/duplicate/conflicting-day counts; cancel changes nothing.
+  Keyboard focus moves to errors after invalid files or refused confirmation.
 - Add only missing plan-day keys. Existing conflicting marks and source pins win.
 - Validate the entire file and nested signature, supported plan/day identity,
   canonical command shape, source identifier, uniqueness and capacity before mutation.

@@ -1485,6 +1485,12 @@
     preview.className = "import-preview";
     section.append(label, el("p", "Choose your exported plan marks. The file stays on this device. Preview before adding marks; existing days and source signatures are kept. Maximum 16 MiB and 1,600 marks.", "muted"), preview);
     let generation = 0;
+    const failure = (error) => {
+      const title = el("h3", "Unable to restore reading progress");
+      title.tabIndex = -1;
+      preview.replaceChildren(title, el("p", error.message, "notice"));
+      title.focus();
+    };
     input.addEventListener("change", async () => {
       const request = ++generation, file = input.files?.[0];
       preview.replaceChildren();
@@ -1517,7 +1523,7 @@
             status.textContent = durable ? "Reading marks restored in this browser only." : "Marks are restored in this tab only. Storage is unavailable; export them before closing.";
             done.focus();
           } catch (error) {
-            preview.replaceChildren(el("p", error.message, "notice"));
+            failure(error);
           }
         }));
         else preview.append(el("p", "No new marks to add."));
@@ -1528,7 +1534,7 @@
         }));
         title.focus();
       } catch (error) {
-        if (request === generation && token === epoch) preview.replaceChildren(el("p", error.message, "notice"));
+        if (request === generation && token === epoch) failure(error);
       }
     });
     return section;

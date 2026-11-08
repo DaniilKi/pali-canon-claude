@@ -386,6 +386,7 @@ async function plans(args, token) {
 }
 function progressImporter(catalog, token, updateCounts) {
   const section = el('section'), label = el('label', 'Restore reading progress from JSON'), input = el('input'), preview = el('div'); section.setAttribute('aria-label', 'Restore reading progress'); input.type = 'file'; input.accept = '.json,application/json'; label.append(input); preview.className = 'import-preview'; section.append(label, el('p', 'Choose your exported plan marks. The file stays on this device. Preview before adding marks; existing days and source signatures are kept. Maximum 16 MiB and 1,600 marks.', 'muted'), preview); let generation = 0;
+  const failure = error => { const title = el('h3', 'Unable to restore reading progress'); title.tabIndex = -1; preview.replaceChildren(title, el('p', error.message, 'notice')); title.focus(); };
   input.addEventListener('change', async () => {
     const request = ++generation, file = input.files?.[0]; preview.replaceChildren(); if (!file) return;
     try {
@@ -402,10 +403,10 @@ function progressImporter(catalog, token, updateCounts) {
           if (snapshot !== undefined && localStorage.getItem(KEY) !== snapshot) throw Error('Browser data changed while previewing this file. Reload this page and preview again; no marks were restored.');
           const current = mergeProgress(local.reading_progress, incoming); local.reading_progress = current.progress; const durable = persist(); updateCounts();
           const done = el('h3', 'Reading marks restored'); done.tabIndex = -1; preview.replaceChildren(done, el('p', current.added + ' new marks added. Existing marks kept. Open a plan day to review its current source and assignment.', 'notice')); status.textContent = durable ? 'Reading marks restored in this browser only.' : 'Marks are restored in this tab only. Storage is unavailable; export them before closing.'; done.focus();
-        } catch (error) { preview.replaceChildren(el('p', error.message, 'notice')); }
+        } catch (error) { failure(error); }
       })); else preview.append(el('p', 'No new marks to add.'));
       preview.append(button('Cancel progress import', () => { ++generation; preview.replaceChildren(); input.focus(); })); title.focus();
-    } catch (error) { if (request === generation && token === epoch) preview.replaceChildren(el('p', error.message, 'notice')); }
+    } catch (error) { if (request === generation && token === epoch) failure(error); }
   }); return section;
 }
 function quoteChecker(token) {
