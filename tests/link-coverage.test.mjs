@@ -66,9 +66,12 @@ test('reviewed content links point at the right text despite different numbering
   assert.ok(!linked('snp5.1', cases[7][1]));
 });
 
-test('two translations of one sutta on Access to Insight count as one page (x suffix)', () => {
+test('reviewed SN22.84 excerpt is withheld while its complete ATI alternative remains linked', () => {
   const ids = (d.translations['sn22.84'] || []).filter((l) => l.source === 'ati').map((l) => l.path);
-  assert.deepEqual(ids.sort(), ['/tipitaka/sn/sn22/sn22.084.than', '/tipitaka/sn/sn22/sn22.084x.wlsh']);
+  // D211 establishes that the old x-suffixed version omits the aggregate catechesis.
+  assert.deepEqual(ids.sort(), ['/tipitaka/sn/sn22/sn22.084.than']);
+  assert.ok(!linked('sn22.84', 'https://www.accesstoinsight.org/tipitaka/sn/sn22/sn22.084x.wlsh.html'));
+  assert.ok(linked('sn22.84', 'https://www.dhammatalks.org/suttas/SN/SN22_84.html'));
 });
 
 test('no SN or AN link rests on the page number alone', () => {

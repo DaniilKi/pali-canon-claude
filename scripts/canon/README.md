@@ -323,7 +323,7 @@ remain held; never create a single contiguous declaration across omissions.
 
 ## Existing ordinary ATI excerpt leads
 
-`ordinary_excerpt_packet.py CANON.gz TRANSLATIONS.json ATI-CHECKOUT` reads a clean pinned official checkout and emits metadata only. It checks every supplied ordinary ATI binding, fails on missing/escaping paths, and flags publisher extent/title/filename clues. Flags are neither errors nor approvals; an excerpt from a collection may fully translate one indexed poem. Exact prior retained snapshots are separately annotated only while source/root/link pins agree. No scripture body is returned. See `docs/data/ordinary-excerpt-review-queue.json`:25 flags, one frozen retained snapshot,24 unreviewed bindings; counts overlap the broader screen. Review complete bodies, boundaries and notices individually.
+`ordinary_excerpt_packet.py CANON.gz TRANSLATIONS.json ATI-CHECKOUT` reads a clean pinned official checkout and emits metadata only. It checks every supplied ordinary ATI binding, fails on missing/escaping paths, and flags publisher extent/title/filename clues. Flags are neither errors nor approvals; an excerpt from a collection may fully translate one indexed poem. Exact prior retained snapshots are separately annotated only while source/root/link pins agree. No scripture body is returned. See `docs/data/ordinary-excerpt-review-queue.json`:15 flags, three frozen retained snapshots,12 unreviewed bindings; counts overlap the broader screen. Review complete bodies, boundaries and notices individually.
 
 ## Reviewed SN12.21/22 index repair
 
@@ -351,4 +351,9 @@ The partial registry now contains ten sources: nine verse spans and SN12.22’s 
 
 The manifest now has fourteen partial sources. Three source-specific selectors require exact chapter paragraph totals and positions; SN56.22 uses a separate strict excerpt-verse/pre container. Python activation profiles bind exact owners/paths/version/extractor and BPS notice label. Build verification still checks the full raw HTML, extracted text, complete notice, whole root and scoped Pāli. Ordinary linker proposals remain withheld globally for every registered path. No source numbering or source blocks change.
 
-Use `ordinary_excerpt_packet.py` to refresh the ordinary queue after activation: 1,135 ordinary ATI bindings,21 flags,20 unreviewed. Historical `d209` daily eligibility is test-only and never restores runtime authority. See [source evidence](../../docs/data/walshe-excerpt-batch.md).
+At D210, `ordinary_excerpt_packet.py` reported 1,135 ordinary ATI bindings,21 flags,20 unreviewed; see D211 below for the current queue. Historical `d209` daily eligibility is test-only and never restores runtime authority. See [source evidence](../../docs/data/walshe-excerpt-batch.md).
+
+
+### Ordinary excerpt-binding review memory (D211)
+
+Both `ordinary_excerpt_packet.py` and the Node reference screen default to `scripts/canon/retained_ordinary_pages.json`. It contains five historical retain records copied unchanged plus AN3.35Than and Thig3.5Than. This is metadata-only frozen evidence, not a runtime registry or source activation. Source/root/link drift invalidates hints; the Python packet also requires the clean pinned ATI checkout. Node does not read publisher HTML or certify upstream freshness. Historical reports remain immutable. Six newly confirmed incomplete pages are globally withheld by `reviewed_exclusions.json`, including wrong-owner and fake-scope proposals, without removing independent alternatives. After D211 the local queue checks1,129 ordinary bindings and reports15 flags/3 retained/12 unreviewed. No partial extractor was added. [Evidence](../../docs/data/ordinary-excerpt-bindings-review.md).
