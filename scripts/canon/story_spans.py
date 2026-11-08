@@ -1,7 +1,7 @@
 """Use title-verified VRI story headings and the reviewed Yasoja boundary.
 
 Verse anchors can select the second verse of a dialogue. Restrict this repair to
-the two complete story books and the separately reviewed adjacent Thag pair.
+the two complete story books and separately reviewed adjacent Thag pairs.
 Never guess by a paragraph or story number (the headings restart by chapter).
 """
 import re
@@ -70,6 +70,24 @@ def story_spans(books, units):
         if [b['n'] for b in blocks[split:end] if b['rend'] == 'hangnum'] != ['243', '244', '245']:
             raise ValueError('Unexpected Yasoja verse scope')
         plans.extend([(left, start, split), (right, split, end)])
+        # Heraññakāni ends before Somamitta's heading, not at his second verse.
+        left, right = by_id.get('thag2.13'), by_id.get('thag2.14')
+        if left or right:
+            if (not left or not right or left.get('approximate') or right.get('approximate')
+                    or left.get('kind') or right.get('kind')):
+                raise ValueError('Missing or approximate Herannakani/Somamitta identity')
+            start = head('3. Heraññakānittheragāthā')
+            split = head('4. Somamittattheragāthā')
+            end = head('5. Sabbamittattheragāthā')
+            if (left['title'] != 'Heraññakānittheragāthā' or right['title'] != 'Somamittattheragāthā'
+                    or left['start'] != start or right['end'] != end
+                    or left['end'] != right['start'] or not start < split <= right['start'] < end):
+                raise ValueError('Unexpected Herannakani/Somamitta bounds; review required')
+            if [b['n'] for b in blocks[start:split] if b['rend'] == 'hangnum'] != ['145', '146']:
+                raise ValueError('Unexpected Herannakani verse scope')
+            if [b['n'] for b in blocks[split:end] if b['rend'] == 'hangnum'] != ['147', '148']:
+                raise ValueError('Unexpected Somamitta verse scope')
+            plans.extend([(left, start, split), (right, split, end)])
     # Validate all reviewed books before mutating anything.
     for u, start, end in plans:
         if (u['start'], u['end']) != (start, end):

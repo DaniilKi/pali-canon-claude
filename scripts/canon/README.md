@@ -17,7 +17,7 @@ For the embedding experiment, set `PALI_CANON_DATA_DIR` to that directory. Pytho
 
 ## Rebuild from pinned sources
 
-### Vv/Pv story headings
+### Reviewed story and adjacent-poem headings
 
 The final build now snaps all 136 Vimānavatthu/Petavatthu units to explicit
 VRI story headings, after checking citation order and the full titles. Verse
@@ -25,6 +25,12 @@ anchors alone could start in the middle of a dialogue and give its first verse
 to the preceding story. The three known title variants are explicit pairs in
 `story_spans.py`, not fuzzy matches. Unexpected titles or missing headings stop
 the build rather than guessing. This does not change VRI wording or numbering.
+
+D204 also repairs the explicitly reviewed Heraññakāni/Somamitta pair: Thag2.13
+ends before source block815 and Thag2.14 begins there, retaining verses147–148
+under Somamitta. Exact titles, headings and complete verse sequences must match.
+No source wording changes. See `docs/data/verse-scope-review.md` and
+`tests/verse-scope-review.test.mjs`.
 
 For the legacy bundled pair, unpack as above, download `romn/s0506m.mul.xml`,
 `romn/s0507m.mul.xml` and `romn/s0508m.mul.xml` from the **canon's pinned source commit**, then run:
