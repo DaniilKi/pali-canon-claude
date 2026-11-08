@@ -1,0 +1,541 @@
+{
+  "baseline_commit": "64de73ea2d3921c2ab97567a4c68ab5cda2dd1ae",
+  "observed_on": "2026-11-08",
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "method": "Complete official pinned ATI bodies/notices and full indexed VRI roots reviewed individually and independently. No publisher English bodies bundled. Local snapshots do not establish current upstream freshness or deployment.",
+  "coverage_before": {
+    "texts": 8445,
+    "with_english": 1421,
+    "with_english_including_inherited": 1844,
+    "links": 2573,
+    "content_matched_links": 64,
+    "by_source": {
+      "dhammatalks": 1274,
+      "ati": 1146,
+      "anandajoti": 153
+    },
+    "shared_links": 12,
+    "partial_links": 6,
+    "with_shared_english": 110,
+    "shared_only": 52,
+    "with_partial_english": 6,
+    "partial_only": 1,
+    "shared_by_source": {
+      "ati": 12
+    },
+    "partial_by_source": {
+      "ati": 6
+    },
+    "percent_with_english": 21.8
+  },
+  "daily_before": {
+    "date": "2026-11-01",
+    "kind": "sutta",
+    "rotation": {
+      "position": 200,
+      "of": 1269
+    },
+    "text": {
+      "id": "sn5.3",
+      "citation": "SN 5.3",
+      "title": "Kisāgotamīsuttaṃ",
+      "pts": "S i 129–130",
+      "vri_paragraphs": "164"
+    },
+    "read_with": {
+      "tool": "get_text",
+      "uid": "sn5.3",
+      "note": "Read the whole Pāli text (and an English translation) with get_text."
+    },
+    "source": {
+      "pali": {
+        "name": "Chaṭṭha Saṅgāyana Tipiṭaka (VRI)",
+        "attribution": "Vipassana Research Institute (VRI), Chaṭṭha Saṅgāyana Tipiṭaka, www.tipitaka.org",
+        "terms": "Made freely available by VRI for non-commercial use with attribution.",
+        "commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    }
+  },
+  "rows": [
+    {
+      "owner": "thag15.1",
+      "decision": "correct-to-reviewed-partial",
+      "source_url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.15.01.olen.html",
+      "omitted_vri_verses": "673–674 and676–688",
+      "selected_vri_verse": "675",
+      "manifest": {
+        "unit_id": "thag15.1",
+        "path": "/tipitaka/kn/thag/thag.15.01.olen",
+        "translator": "Andrew Olendzki",
+        "english_title": "Aññakondañña Thera: Aññakondañña",
+        "license": "Olendzki-free-distribution-2005",
+        "source_reference": "Thag 675",
+        "mapping_note": "Derived verse excerpt from the named Access to Insight page. Complete source attribution and distribution notice accompany every excerpt. Only VRI675 is mapped;673–674 and676–688 remain outside this declaration. Publisher ellipses are preserved.",
+        "source_html_sha256": "290f88f633639a5b4494791dc37bab1063450d8af5239c9b72709db63f1df1b3",
+        "root": {
+          "id": "thag15.1",
+          "title": "Aññāsikoṇḍaññattheragāthā",
+          "vri": "673–688",
+          "book": 34,
+          "start": 2739,
+          "end": 2788,
+          "root_blocks_sha256": "9034f18a584f4d0e4fe1e57d6268a9f9267bd3bdccea76d371d12798b0876f76"
+        },
+        "partial_scope": {
+          "version": 1,
+          "status": "reviewed",
+          "unit_id": "thag15.1",
+          "first_ref": "thag15.1/5",
+          "last_ref": "thag15.1/5",
+          "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+          "pali_sha256": "cf793a089ea70d89cfc746aeb793957d4f763d3d0f183e7643fbf3cb1362650c",
+          "text_sha256": "1cbeae5ede51654bfdf359e0a6fe978e9f127fbb031c4b878057373597b68f1b",
+          "notice_sha256": "9468bdc97426f85662a25bcee622134c5828b1cb10ae9e25f714812e9e485f5d",
+          "extractor": "ati-freeverse-v1"
+        }
+      },
+      "characters": 153,
+      "before_link": {
+        "source": "ati",
+        "english": "Aññakondañña",
+        "path": "/tipitaka/kn/thag/thag.15.01.olen",
+        "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.15.01.olen.html",
+        "translator": "Andrew Olendzki",
+        "license": "ATI_DEPRECATED",
+        "reference": "Thag 675",
+        "pali_title": "Aññakondañña Thera",
+        "match": "number"
+      },
+      "ordinary_alternatives": []
+    },
+    {
+      "owner": "snp3.11",
+      "decision": "correct-to-reviewed-partial",
+      "source_url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.3.11.olen.html",
+      "omitted_vri_verses": "684–724 and726–728",
+      "selected_vri_verse": "725",
+      "manifest": {
+        "unit_id": "snp3.11",
+        "path": "/tipitaka/kn/snp/snp.3.11.olen",
+        "translator": "Andrew Olendzki",
+        "english_title": "Nalaka Sutta: Gurgling Loudly",
+        "license": "Olendzki-free-distribution-2005",
+        "source_reference": "Sn 720 (publisher numbering; VRI725)",
+        "mapping_note": "Derived verse excerpt from the named Access to Insight page. Complete source attribution and distribution notice accompany every excerpt. Only the water-streams verse VRI725 is mapped. Publisher Sn720 is preserved as publisher numbering; it is not VRI720. All other verses are excluded; publisher ellipses are preserved.",
+        "source_html_sha256": "1ee1e5af1dbc5f830081819b96f7d1ebc49c3a40e1981e4d1a325bffeaeaa261",
+        "root": {
+          "id": "snp3.11",
+          "title": "Nālakasuttaṃ",
+          "vri": "684–728",
+          "book": 31,
+          "start": 2337,
+          "end": 2477,
+          "root_blocks_sha256": "0c090d02d9101db4b9c124e612ba6fbd2daf657679074b630bf985e26284235e"
+        },
+        "partial_scope": {
+          "version": 1,
+          "status": "reviewed",
+          "unit_id": "snp3.11",
+          "first_ref": "snp3.11/44",
+          "last_ref": "snp3.11/44",
+          "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+          "pali_sha256": "ed3bce16973a0a171613a695a22a6b10dc39474dd69e43bea50260732e457ba4",
+          "text_sha256": "66d1c9e05bdb5fdd4cfd73037d53c430af8a33713cbca0c3ab24a5793527d37f",
+          "notice_sha256": "88687c27dc9ebaa3e83669410a9d708ad44855bde804ae3f11c9c4402d8d1f07",
+          "extractor": "ati-freeverse-v1"
+        }
+      },
+      "characters": 136,
+      "before_link": {
+        "source": "ati",
+        "english": "Gurgling Loudly",
+        "path": "/tipitaka/kn/snp/snp.3.11.olen",
+        "url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.3.11.olen.html",
+        "translator": "Andrew Olendzki",
+        "license": "ATI_DEPRECATED",
+        "reference": "Sn 720",
+        "pali_title": "Nalaka Sutta",
+        "match": "number+title"
+      },
+      "ordinary_alternatives": [
+        "dt:KN/StNp/StNp3_11",
+        "ati:/tipitaka/kn/snp/snp.3.11.than"
+      ]
+    },
+    {
+      "owner": "dn21",
+      "path": "/tipitaka/dn/dn.21.2x.than",
+      "decision": "withhold-incomplete-unit",
+      "before_link": {
+        "source": "ati",
+        "english": "Sakka's Questions",
+        "path": "/tipitaka/dn/dn.21.2x.than",
+        "url": "https://www.accesstoinsight.org/tipitaka/dn/dn.21.2x.than.html",
+        "translator": "Thanissaro Bhikkhu",
+        "license": "CC-BY-NC",
+        "reference": "D ii 276",
+        "pali_title": "Sakka-pañha Sutta",
+        "match": "number+title"
+      },
+      "exclusion": {
+        "source": "ati",
+        "url": "https://www.accesstoinsight.org/tipitaka/dn/dn.21.2x.than.html",
+        "status": "withheld-partial-unit",
+        "subject_ids": [
+          "dn21"
+        ],
+        "reason": "Incomplete and discontinuous: begins with VRI357 after omitting344–356; later ellipsis omits369 benefits,370 verses and371 opening reward. No contiguous partial mapping is approved. Existing dhammatalks version remains, without a new completeness review.",
+        "review": {
+          "source_url": "https://www.accesstoinsight.org/tipitaka/dn/dn.21.2x.than.html",
+          "observed_on": "2026-11-08",
+          "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+          "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+          "source_html_sha256": "b1f875c5cf24c46edffdf62be3b499e7e17d4da9d9f276596fde37acafddba0f",
+          "text_sha256": "e63269c0de7e5f6261469979df6f94be81de3a7a50fc4cf78f9fe2b03a8b93b4",
+          "notice_sha256": "bd33d757254528cd7539acb112c73b304c51b4e959c32161113a3876a614146c",
+          "method": "Complete official pinned ATI bodies/notices and full indexed VRI roots reviewed individually and independently. No publisher English bodies bundled. Local snapshots do not establish current upstream freshness or deployment.",
+          "root_units": [
+            {
+              "id": "dn21",
+              "title": "Sakkapañhasuttaṃ",
+              "vri": "344–371",
+              "book": 6,
+              "start": 1129,
+              "end": 1340,
+              "root_blocks_sha256": "ec9924ca7a3de0fa37ff83edf0d685f4204e1a87c355ffcacb3b7047a9ee17d9"
+            }
+          ]
+        }
+      },
+      "ordinary_alternatives": [
+        "dt:DN/DN21"
+      ]
+    },
+    {
+      "owner": "sn12.22",
+      "path": "/tipitaka/sn/sn12/sn12.022x.wlsh",
+      "decision": "withhold-incomplete-unit",
+      "before_link": {
+        "source": "ati",
+        "english": "Ten Powers",
+        "path": "/tipitaka/sn/sn12/sn12.022x.wlsh",
+        "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.022x.wlsh.html",
+        "translator": "Maurice O'Connell Walshe",
+        "license": "BPS",
+        "reference": "S ii 28",
+        "pali_title": "Dasabalaa (2) Sutta",
+        "match": "content-pts+names",
+        "evidence": [
+          "appamadena",
+          "dasabala",
+          "mandapeyyam",
+          "sampadetu"
+        ]
+      },
+      "exclusion": {
+        "source": "ati",
+        "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.022x.wlsh.html",
+        "status": "withheld-partial-unit",
+        "subject_ids": [
+          "sn12.22"
+        ],
+        "reason": "Only a late exhortation from the second indexed VRI section22. Omits section21 and22 earlier ten powers/fearlessness, aggregates/dependent origination, resolve and lazy-versus-energetic discussion. Source begins inside a bundled segment; no exact whole-segment partial declaration is approved. No other indexed English version exists.",
+        "review": {
+          "source_url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.022x.wlsh.html",
+          "observed_on": "2026-11-08",
+          "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+          "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+          "source_html_sha256": "3fde66df3623c9f272358965e096ebb23c2bdf95ebee229e130aa02bd3539544",
+          "text_sha256": "3c607c3622f9900aa17a575754b84e0e543dd950782b4fe580bc41f26e564ffb",
+          "notice_sha256": "58712c73f40813d0ee50854c3a500c236e9c7e40c57fe5ebc5f368660b96915a",
+          "method": "Complete official pinned ATI bodies/notices and full indexed VRI roots reviewed individually and independently. No publisher English bodies bundled. Local snapshots do not establish current upstream freshness or deployment.",
+          "root_units": [
+            {
+              "id": "sn12.22",
+              "title": "Dutiyadasabalasuttaṃ",
+              "vri": "21–22",
+              "book": 12,
+              "start": 143,
+              "end": 150,
+              "root_blocks_sha256": "4fbe28d2b2a3d331d4b2bd0f907ac96fd3c503f22b1258e3bc14b732c80c76fa"
+            }
+          ]
+        }
+      },
+      "ordinary_alternatives": []
+    },
+    {
+      "owner": "snp3.11",
+      "path": "/tipitaka/kn/snp/snp.3.11.than",
+      "decision": "retain-complete-at-snapshot",
+      "reason": "Complete45-verse body covers Asita vision/prediction, Nalaka approach, complete sage instructions and concluding water/pot/speech verses. Publisher679–723 corresponds to VRI684–728, not an omission. Notes/cross-references are editorial. Retention does not establish current upstream freshness.",
+      "root": {
+        "id": "snp3.11",
+        "title": "Nālakasuttaṃ",
+        "vri": "684–728",
+        "book": 31,
+        "start": 2337,
+        "end": 2477,
+        "root_blocks_sha256": "0c090d02d9101db4b9c124e612ba6fbd2daf657679074b630bf985e26284235e"
+      },
+      "link": {
+        "source": "ati",
+        "english": "To Nalaka",
+        "path": "/tipitaka/kn/snp/snp.3.11.than",
+        "url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.3.11.than.html",
+        "translator": "Thanissaro Bhikkhu",
+        "license": "CC-BY-NC",
+        "reference": "Sn 679-723",
+        "pali_title": "Nalaka Sutta",
+        "match": "number+title"
+      },
+      "link_metadata_sha256": "4a6339ceda76db9b0a4e7386386216b0b605338241386bc6025ef288aeb1cb3b",
+      "source_html_sha256": "e3d17c2ef11fdd6673c1ea4e34f69f2ab54898374e40e6bf250595c45194dc93",
+      "text_sha256": "1d3b77b59809c3eae886fe23f1c2026aabac9546bd3c388a233be015c255810d",
+      "notice_sha256": "6a14053ee208b36f5903557a7e941a03623817a4b19c7b497ea444f8391f91ef"
+    }
+  ],
+  "coverage_after": {
+    "texts": 8445,
+    "with_english": 1419,
+    "with_english_including_inherited": 1842,
+    "links": 2569,
+    "content_matched_links": 63,
+    "by_source": {
+      "dhammatalks": 1274,
+      "ati": 1142,
+      "anandajoti": 153
+    },
+    "shared_links": 12,
+    "partial_links": 8,
+    "with_shared_english": 110,
+    "shared_only": 52,
+    "with_partial_english": 8,
+    "partial_only": 2,
+    "shared_by_source": {
+      "ati": 12
+    },
+    "partial_by_source": {
+      "ati": 8
+    },
+    "percent_with_english": 21.8
+  },
+  "daily_after": {
+    "date": "2026-11-01",
+    "kind": "sutta",
+    "rotation": {
+      "position": 979,
+      "of": 1268
+    },
+    "text": {
+      "id": "an10.92",
+      "citation": "AN 10.92",
+      "title": "Bhayasuttaṃ",
+      "pts": "A v 182–184",
+      "vri_paragraphs": "92"
+    },
+    "read_with": {
+      "tool": "get_text",
+      "uid": "an10.92",
+      "note": "Read the whole Pāli text (and an English translation) with get_text."
+    },
+    "source": {
+      "pali": {
+        "name": "Chaṭṭha Saṅgāyana Tipiṭaka (VRI)",
+        "attribution": "Vipassana Research Institute (VRI), Chaṭṭha Saṅgāyana Tipiṭaka, www.tipitaka.org",
+        "terms": "Made freely available by VRI for non-commercial use with attribution.",
+        "commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    }
+  },
+  "metadata_screen_after": {
+    "count": 221,
+    "reviewed_retained_snapshots": 5,
+    "unreviewed_leads": 216
+  },
+  "local_excerpt_packet_after": {
+    "candidate_bindings": 28,
+    "ordinary_ati_bindings_checked": 1142,
+    "reviewed_retained_snapshots": 1,
+    "unreviewed_bindings": 27,
+    "reason_counts": {
+      "publisher excerpt filename marker": 21,
+      "publisher extent excerpt": 28
+    }
+  },
+  "reproduction": {
+    "rows": [
+      {
+        "unit": "thag17.3",
+        "translation_id": "ati:/tipitaka/kn/thag/thag.17.03.olen",
+        "characters": 417,
+        "text_sha256": "2eb76d74b0879ddb9d12fcb51cbf713bd48c5a6bfc293998fe4996e50efa318a",
+        "pages": 6,
+        "full_notice_on_every_page": true,
+        "verse_probe": "found",
+        "editorial_preface_90_word_probe": "not_found_in_scope",
+        "scope": {
+          "first_ref": "thag17.3/22",
+          "last_ref": "thag17.3/24"
+        },
+        "provider": "Official pinned local HTML supplied to production provider; no upstream HTTP"
+      },
+      {
+        "unit": "thag6.13",
+        "translation_id": "ati:/tipitaka/kn/thag/thag.06.13.olen",
+        "characters": 624,
+        "text_sha256": "cc63734845748e1bad61fde48f854b109786cbb356a46b043daa1d001d795c23",
+        "pages": 8,
+        "full_notice_on_every_page": true,
+        "verse_probe": "found",
+        "editorial_preface_90_word_probe": "not_found_in_scope",
+        "scope": {
+          "first_ref": "thag6.13/3",
+          "last_ref": "thag6.13/7"
+        },
+        "provider": "Official pinned local HTML supplied to production provider; no upstream HTTP"
+      },
+      {
+        "unit": "thag10.1",
+        "translation_id": "ati:/tipitaka/kn/thag/thag.10.01.olen",
+        "characters": 560,
+        "text_sha256": "e03bcf39ae735b873487dc6c9585aff1990aadde077791b4a01d719598efecf4",
+        "pages": 7,
+        "full_notice_on_every_page": true,
+        "verse_probe": "found",
+        "editorial_preface_90_word_probe": "not_found_in_scope",
+        "scope": {
+          "first_ref": "thag10.1/3",
+          "last_ref": "thag10.1/5"
+        },
+        "provider": "Official pinned local HTML supplied to production provider; no upstream HTTP"
+      },
+      {
+        "unit": "thag15.2",
+        "translation_id": "ati:/tipitaka/kn/thag/thag.15.02.olen",
+        "characters": 259,
+        "text_sha256": "06529be4499870b9e5c2e5c70c3bc11b945fa9b6fe755dea1160fee03da16ba5",
+        "pages": 4,
+        "full_notice_on_every_page": true,
+        "verse_probe": "found",
+        "editorial_preface_90_word_probe": "not_found_in_scope",
+        "scope": {
+          "first_ref": "thag15.2/13",
+          "last_ref": "thag15.2/14"
+        },
+        "provider": "Official pinned local HTML supplied to production provider; no upstream HTTP"
+      },
+      {
+        "unit": "thag16.8",
+        "translation_id": "ati:/tipitaka/kn/thag/thag.16.08.olen",
+        "characters": 442,
+        "text_sha256": "463bd7f237559f95e49ca506581a648c1de90aaa6e1081a06985593f3688045e",
+        "pages": 6,
+        "full_notice_on_every_page": true,
+        "verse_probe": "found",
+        "editorial_preface_90_word_probe": "not_found_in_scope",
+        "scope": {
+          "first_ref": "thag16.8/7",
+          "last_ref": "thag16.8/9"
+        },
+        "provider": "Official pinned local HTML supplied to production provider; no upstream HTTP"
+      },
+      {
+        "unit": "thag2.13",
+        "translation_id": "ati:/tipitaka/kn/thag/thag.02.13x.olen",
+        "characters": 130,
+        "text_sha256": "e8481d68655e163221e1db89754ccea99ec50e52aa6737ca6e45cb292167af73",
+        "pages": 2,
+        "full_notice_on_every_page": true,
+        "verse_probe": "found",
+        "editorial_preface_90_word_probe": "not-applicable-no-preface",
+        "scope": {
+          "first_ref": "thag2.13/2",
+          "last_ref": "thag2.13/2"
+        },
+        "provider": "Official pinned local HTML supplied to production provider; no upstream HTTP"
+      },
+      {
+        "unit": "thag15.1",
+        "translation_id": "ati:/tipitaka/kn/thag/thag.15.01.olen",
+        "characters": 153,
+        "text_sha256": "1cbeae5ede51654bfdf359e0a6fe978e9f127fbb031c4b878057373597b68f1b",
+        "pages": 2,
+        "full_notice_on_every_page": true,
+        "verse_probe": "found",
+        "editorial_preface_90_word_probe": "not-applicable-no-preface",
+        "scope": {
+          "first_ref": "thag15.1/5",
+          "last_ref": "thag15.1/5"
+        },
+        "provider": "Official pinned local HTML supplied to production provider; no upstream HTTP"
+      },
+      {
+        "unit": "snp3.11",
+        "translation_id": "ati:/tipitaka/kn/snp/snp.3.11.olen",
+        "characters": 136,
+        "text_sha256": "66d1c9e05bdb5fdd4cfd73037d53c430af8a33713cbca0c3ab24a5793527d37f",
+        "pages": 2,
+        "full_notice_on_every_page": true,
+        "verse_probe": "found",
+        "editorial_preface_90_word_probe": "not-applicable-no-preface",
+        "scope": {
+          "first_ref": "snp3.11/44",
+          "last_ref": "snp3.11/44"
+        },
+        "provider": "Official pinned local HTML supplied to production provider; no upstream HTTP"
+      }
+    ],
+    "intercepted_fetches": 8,
+    "upstream_http_requests": 0
+  },
+  "browser": {
+    "normal": {
+      "passed": 106,
+      "provider_fetches": 32,
+      "upstream_http_requests": 0,
+      "a11y_scans": 0,
+      "a11y_violations": 0
+    },
+    "accessibility": {
+      "passed": 106,
+      "provider_fetches": 32,
+      "upstream_http_requests": 0,
+      "a11y_scans": 96,
+      "a11y_violations": 0
+    },
+    "extracted_npm_package": {
+      "passed": 106,
+      "provider_fetches": 32,
+      "upstream_http_requests": 0,
+      "a11y_scans": 0,
+      "a11y_violations": 0
+    }
+  },
+  "installed_partial_audit": {
+    "status": "passed",
+    "modes": 8,
+    "upstream_http_requests": 0
+  },
+  "independent_review": "All five source decisions, complete roots/bodies/notice pins and implementation/diff reviewed independently; SUBTITLE2 screening fix applied and regression passed. No remaining blocking finding.",
+  "validation": {
+    "full_check": {
+      "tests": 1057,
+      "passed": 1056,
+      "skipped": 1,
+      "failed": 0,
+      "canonical_records_audited": 8544,
+      "audit_failures": 0
+    },
+    "smoke": {
+      "checks": 64,
+      "live": false
+    },
+    "new_source_and_packet_tests": {
+      "passed": 6
+    },
+    "first_full_run": "One outdated daily-evaluation expectation failed after the documented data-version eligibility change; corrected to verified AN10.92 and strengthened with rotation.of1268, then reran full check successfully. No test disabled.",
+    "notes": "Exact-head CI is separately verified after safe dev integration. No live author-server availability or deployment claim."
+  }
+}

@@ -1,0 +1,992 @@
+{
+  "review_packet_only": true,
+  "approvals_changed": false,
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "ordinary_ati_bindings_checked": 1142,
+  "candidate_bindings": 28,
+  "reviewed_retained_snapshots": 1,
+  "unreviewed_bindings": 27,
+  "reason_counts": {
+    "publisher excerpt filename marker": 21,
+    "publisher extent excerpt": 28
+  },
+  "warning": "Metadata clues only, not errors or approvals. A collection excerpt can fully cover one indexed poem. EXTENT=complete is not evidence of completeness. Other-version counts concern only the supplied index, not every external provider. Frozen source hashes do not prove upstream freshness.",
+  "rows": [
+    {
+      "owner": "an10.27",
+      "path": "/tipitaka/an/an10/an10.027x.nypo",
+      "url": "https://www.accesstoinsight.org/tipitaka/an/an10/an10.027x.nypo.html",
+      "translator": "Nyanaponika Thera",
+      "reference": "A v 48",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "The Great Questions",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "008715d4db521b9f7fb520eb6f98036f8393024f574a9faaa2eaee1eb7a34c5e",
+      "indexed_root": {
+        "id": "an10.27",
+        "title": "Paṭhamamahāpañhāsuttaṃ",
+        "vri": "27",
+        "book": 25,
+        "start": 213,
+        "end": 233,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "an3.35",
+      "path": "/tipitaka/an/an03/an03.034.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/an/an03/an03.034.than.html",
+      "translator": "Thanissaro Bhikkhu",
+      "reference": "A i 136",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "To Hatthaka",
+      "publisher_secondary_subtitle": "On Sleeping Well in the Cold Forest",
+      "source_html_sha256": "81b8607103e12e2107dfe2e6d8ad037d6977f4fce79efa6d2cce753e0511e1d3",
+      "indexed_root": {
+        "id": "an3.35",
+        "title": "Hatthakasuttaṃ",
+        "vri": "35",
+        "book": 18,
+        "start": 242,
+        "end": 254,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/AN/AN3_35.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "an6.54",
+      "path": "/tipitaka/an/an06/an06.054.olen",
+      "url": "https://www.accesstoinsight.org/tipitaka/an/an06/an06.054.olen.html",
+      "translator": "Andrew Olendzki",
+      "reference": "A iii 366",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "Dhammika",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "6378878b65793ccb376a3253908026a22e2b1566a5349de90144511c93f1afb2",
+      "indexed_root": {
+        "id": "an6.54",
+        "title": "Dhammikasuttaṃ",
+        "vri": "54",
+        "book": 21,
+        "start": 446,
+        "end": 491,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [],
+      "reasons": [
+        "publisher extent excerpt"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "mn143",
+      "path": "/tipitaka/mn/mn.143x.olen",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.143x.olen.html",
+      "translator": "Andrew Olendzki",
+      "reference": "M iii 258",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "Advice to A Dying Man",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "17886d5bb6fc38d6fb3d7e132bbd888b9d3a63b6311b8180d413c930b5921285",
+      "indexed_root": {
+        "id": "mn143",
+        "title": "Anāthapiṇḍikovādasuttaṃ",
+        "vri": "383–388",
+        "book": 10,
+        "start": 1246,
+        "end": 1286,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/MN/MN143.html",
+        "https://www.accesstoinsight.org/tipitaka/mn/mn.143.than.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "mn21",
+      "path": "/tipitaka/mn/mn.021x.budd",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.021x.budd.html",
+      "translator": "Acharya Buddharakkhita",
+      "reference": "M i 122",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "The Parable of the Saw",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "6135a75e631c45801462e12a29e6f2975d49e65bf75ca0f5053d0514267b118e",
+      "indexed_root": {
+        "id": "mn21",
+        "title": "Kakacūpamasuttaṃ",
+        "vri": "222–233",
+        "book": 8,
+        "start": 719,
+        "end": 746,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/MN/MN21.html",
+        "https://www.accesstoinsight.org/tipitaka/mn/mn.021x.than.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "mn21",
+      "path": "/tipitaka/mn/mn.021x.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.021x.than.html",
+      "translator": "Thanissaro Bhikkhu",
+      "reference": "M i 122",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "The Simile of the Saw",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "fe4898bb69f89ab11c01aac1af1bb1c8b40adba2c1c4919d27b52c3835fa5975",
+      "indexed_root": {
+        "id": "mn21",
+        "title": "Kakacūpamasuttaṃ",
+        "vri": "222–233",
+        "book": 8,
+        "start": 719,
+        "end": 746,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/MN/MN21.html",
+        "https://www.accesstoinsight.org/tipitaka/mn/mn.021x.budd.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "mn34",
+      "path": "/tipitaka/mn/mn.034x.olen",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.034x.olen.html",
+      "translator": "Andrew Olendzki",
+      "reference": "M i 225",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "The Shorter Discourse on the Cowherd",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "3a09006ff392ee8efa2f9e7533ebed061d998d68759fe9cef3f693ccb4b7ec67",
+      "indexed_root": {
+        "id": "mn34",
+        "title": "Cūḷagopālakasuttaṃ",
+        "vri": "350–352",
+        "book": 8,
+        "start": 1169,
+        "end": 1187,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "mn54",
+      "path": "/tipitaka/mn/mn.054x.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.054x.than.html",
+      "translator": "Thanissaro Bhikkhu",
+      "reference": "M i 359",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "To Potaliya",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "edcde57d7f7920743608b1abb25b3ded7c4d33519bfea85986a9b776cd349e8a",
+      "indexed_root": {
+        "id": "mn54",
+        "title": "Potaliyasuttaṃ",
+        "vri": "31–50",
+        "book": 9,
+        "start": 67,
+        "end": 108,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/MN/MN54.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "mn75",
+      "path": "/tipitaka/mn/mn.075x.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.075x.than.html",
+      "translator": "Thanissaro Bhikkhu",
+      "reference": "M i 501",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "To Magandiya",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "f8592ff49837c4e2f2ad5a233aa478280e76eba61a3736fe02a5db547a1a4a37",
+      "indexed_root": {
+        "id": "mn75",
+        "title": "Māgaṇḍiyasuttaṃ",
+        "vri": "207–222",
+        "book": 9,
+        "start": 587,
+        "end": 614,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/MN/MN75.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "mn95",
+      "path": "/tipitaka/mn/mn.095x.nymo",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.095x.nymo.html",
+      "translator": "Ñanamoli Thera",
+      "reference": "M ii 164",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "With Canki",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "a453851c62f663a7586229d9c3aff2ef805b8100dec498baa299ba0d1ec08429",
+      "indexed_root": {
+        "id": "mn95",
+        "title": "Caṅkīsuttaṃ",
+        "vri": "422–435",
+        "book": 9,
+        "start": 1385,
+        "end": 1414,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/MN/MN95.html",
+        "https://www.accesstoinsight.org/tipitaka/mn/mn.095x.than.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "mn95",
+      "path": "/tipitaka/mn/mn.095x.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/mn/mn.095x.than.html",
+      "translator": "Thanissaro Bhikkhu",
+      "reference": "M ii 164",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "With Canki",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "d0eb9840e64581674e241512d352983e46bb8ef4f13a4cd51c73479057a04176",
+      "indexed_root": {
+        "id": "mn95",
+        "title": "Caṅkīsuttaṃ",
+        "vri": "422–435",
+        "book": 9,
+        "start": 1385,
+        "end": 1414,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/MN/MN95.html",
+        "https://www.accesstoinsight.org/tipitaka/mn/mn.095x.nymo.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "sn12.17",
+      "path": "/tipitaka/sn/sn12/sn12.017x.wlsh",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.017x.wlsh.html",
+      "translator": "Maurice O'Connell Walshe",
+      "reference": "S ii 18",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "Naked Kassapa",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "456102786a1b35d5381aa5f9ea43c83a694fc5c64e06575fe00deaac17326be4",
+      "indexed_root": {
+        "id": "sn12.17",
+        "title": "Acelakassapasuttaṃ",
+        "vri": "17",
+        "book": 12,
+        "start": 109,
+        "end": 119,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/SN/SN12_17.html",
+        "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.017.than.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "sn12.23",
+      "path": "/tipitaka/sn/sn12/sn12.023x.wlsh",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.023x.wlsh.html",
+      "translator": "Maurice O'Connell Walshe",
+      "reference": "S ii 29",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "Upanisaa",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "9e9c902d78d05a74c7d7c0b7ab96ca93758974fec5eee3325007a4d44644dc0a",
+      "indexed_root": {
+        "id": "sn12.23",
+        "title": "Upanisasuttaṃ",
+        "vri": "23",
+        "book": 12,
+        "start": 150,
+        "end": 159,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/SN/SN12_23.html",
+        "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.023.bodh.html",
+        "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.023.than.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "sn12.31",
+      "path": "/tipitaka/sn/sn12/sn12.031x.nypo",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.031x.nypo.html",
+      "translator": "Nyanaponika Thera",
+      "reference": "S ii 47",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "This Has Come Into Being",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "62e8de6dc9ffb7f2256b0626a61896f0bb65bb91dbc1b0733cf3b82c0aa88e94",
+      "indexed_root": {
+        "id": "sn12.31",
+        "title": "Bhūtasuttaṃ",
+        "vri": "31",
+        "book": 12,
+        "start": 223,
+        "end": 242,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/SN/SN12_31.html",
+        "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.031.than.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "sn12.60",
+      "path": "/tipitaka/sn/sn12/sn12.060x.wlsh",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn12/sn12.060x.wlsh.html",
+      "translator": "Maurice O'Connell Walshe",
+      "reference": "S ii 92",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "Aananda's Mistake",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "9027f6803e34fbd5f7eff8677abb2d3ff66bab364114ebed3a1b1776edc392ff",
+      "indexed_root": {
+        "id": "sn12.60",
+        "title": "Nidānasuttaṃ",
+        "vri": "60",
+        "book": 12,
+        "start": 440,
+        "end": 452,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "sn22.84",
+      "path": "/tipitaka/sn/sn22/sn22.084x.wlsh",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn22/sn22.084x.wlsh.html",
+      "translator": "Maurice O'Connell Walshe",
+      "reference": "S iii 106",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "Tissa the Waverer",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "805a1a3cc7df9754e887d6049f016aa51d323a9dd7874e78898b6b2c26e66adc",
+      "indexed_root": {
+        "id": "sn22.84",
+        "title": "Tissasuttaṃ",
+        "vri": "84",
+        "book": 13,
+        "start": 519,
+        "end": 531,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/SN/SN22_84.html",
+        "https://www.accesstoinsight.org/tipitaka/sn/sn22/sn22.084.than.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "sn22.87",
+      "path": "/tipitaka/sn/sn22/sn22.087x.wlsh",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn22/sn22.087x.wlsh.html",
+      "translator": "Maurice O'Connell Walshe",
+      "reference": "S iii 119",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "Vakkali",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "46596cc968c7265af4c75e5cc32ab6a75ef66ab8ba35665d32238686583f7c2d",
+      "indexed_root": {
+        "id": "sn22.87",
+        "title": "Vakkalisuttaṃ",
+        "vri": "87",
+        "book": 13,
+        "start": 574,
+        "end": 586,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "sn22.89",
+      "path": "/tipitaka/sn/sn22/sn22.089x.wlsh",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn22/sn22.089x.wlsh.html",
+      "translator": "Maurice O'Connell Walshe",
+      "reference": "S iii 126",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "Khemaka",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "7b5e9d0b993636922f1c826a2935a70a440f428b985f63bb1aaa7eb1f04512af",
+      "indexed_root": {
+        "id": "sn22.89",
+        "title": "Khemakasuttaṃ",
+        "vri": "89",
+        "book": 13,
+        "start": 592,
+        "end": 607,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/SN/SN22_89.html",
+        "https://www.accesstoinsight.org/tipitaka/sn/sn22/sn22.089.than.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "sn35.244",
+      "path": "/tipitaka/sn/sn35/sn35.203x.wlsh",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.203x.wlsh.html",
+      "translator": "Maurice O'Connell Walshe",
+      "reference": "S iv 188",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "Things Productive of Suffering",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "641adf7b3fafd492cadbbc72602bce39a60b2fd8a3d55ccb74f0e4301b176a75",
+      "indexed_root": {
+        "id": "sn35.244",
+        "title": "Dukkhadhammasuttaṃ",
+        "vri": "244",
+        "book": 14,
+        "start": 1204,
+        "end": 1214,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "sn35.246",
+      "path": "/tipitaka/sn/sn35/sn35.205x.wlsh",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.205x.wlsh.html",
+      "translator": "Maurice O'Connell Walshe",
+      "reference": "S iv 195",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "The Lute",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "c84e1dd24fe726baba59b4d620ee83acda0b58a676730c3f2d88836fb1d9536e",
+      "indexed_root": {
+        "id": "sn35.246",
+        "title": "Vīṇopamasuttaṃ",
+        "vri": "246",
+        "book": 14,
+        "start": 1223,
+        "end": 1228,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.205.than.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "sn35.247",
+      "path": "/tipitaka/sn/sn35/sn35.206x.wlsh",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.206x.wlsh.html",
+      "translator": "Maurice O'Connell Walshe",
+      "reference": "S iv 198",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "The Six Animals",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "82ce131ac813be92768f1f99325feebb8e5d20a70b77ad298d89eabecca33516",
+      "indexed_root": {
+        "id": "sn35.247",
+        "title": "Chappāṇakopamasuttaṃ",
+        "vri": "247",
+        "book": 14,
+        "start": 1228,
+        "end": 1235,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.accesstoinsight.org/tipitaka/sn/sn35/sn35.206.than.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "sn46.53",
+      "path": "/tipitaka/sn/sn46/sn46.053.wlsh",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn46/sn46.053.wlsh.html",
+      "translator": "Maurice O'Connell Walshe",
+      "reference": "S v 112",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "Fire",
+      "publisher_secondary_subtitle": "Right and Wrong Times",
+      "source_html_sha256": "06e4ed3da4b35a8870c14d569ea184be6eacfdbefe58735c529e94860eae7109",
+      "indexed_root": {
+        "id": "sn46.53",
+        "title": "Aggisutta",
+        "vri": "234",
+        "book": 15,
+        "start": 665,
+        "end": 681,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/SN/SN46_53.html",
+        "https://www.accesstoinsight.org/tipitaka/sn/sn46/sn46.053.than.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "sn46.54",
+      "path": "/tipitaka/sn/sn46/sn46.054x.wlsh",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn46/sn46.054x.wlsh.html",
+      "translator": "Maurice O'Connell Walshe",
+      "reference": "S v 115",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "The Brahma-viharas",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "54d1d34da8833983c4fc8e5a88707883a38749eb882ffdb8ace559cc483c2549",
+      "indexed_root": {
+        "id": "sn46.54",
+        "title": "Mettāsahagatasuttaṃ",
+        "vri": "235",
+        "book": 15,
+        "start": 681,
+        "end": 697,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/SN/SN46_54.html",
+        "https://www.accesstoinsight.org/tipitaka/sn/sn46/sn46.054.than.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "sn47.10",
+      "path": "/tipitaka/sn/sn47/sn47.010.wlsh",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn47/sn47.010.wlsh.html",
+      "translator": "Maurice O'Connell Walshe",
+      "reference": "S v 154",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "Mindfulness",
+      "publisher_secondary_subtitle": "from The Nuns' Lodging",
+      "source_html_sha256": "3cd266762679eac1b73a42f1c609b8ee10499248151ca866e21fb4ccc7e577ba",
+      "indexed_root": {
+        "id": "sn47.10",
+        "title": "Bhikkhunupassayasuttaṃ",
+        "vri": "376",
+        "book": 15,
+        "start": 923,
+        "end": 938,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/SN/SN47_10.html",
+        "https://www.accesstoinsight.org/tipitaka/sn/sn47/sn47.010.olen.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "sn56.22",
+      "path": "/tipitaka/sn/sn56/sn56.022x.wlsh",
+      "url": "https://www.accesstoinsight.org/tipitaka/sn/sn56/sn56.022x.wlsh.html",
+      "translator": "Maurice O'Connell Walshe",
+      "reference": "S v 432",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "Knowledge",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "aab4801e3ce96121fc53cfda447620a5801172cfc4430dad4e5b4d0f0c7491a1",
+      "indexed_root": {
+        "id": "sn56.22",
+        "title": "Dutiyakoṭigāmasuttaṃ",
+        "vri": "1092",
+        "book": 15,
+        "start": 2540,
+        "end": 2554,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [],
+      "reasons": [
+        "publisher extent excerpt",
+        "publisher excerpt filename marker"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "snp1.4",
+      "path": "/tipitaka/kn/snp/snp.1.04.olen",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.1.04.olen.html",
+      "translator": "Andrew Olendzki",
+      "reference": "Sn 76-82",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "To the Plowing Bharadvaja",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "6cb8714f1326dcf159241faef6b28f632ed9e765256db441402aeefd2f478e61",
+      "indexed_root": {
+        "id": "snp1.4",
+        "title": "Kasibhāradvājasuttaṃ",
+        "vri": "76–82",
+        "book": 31,
+        "start": 249,
+        "end": 281,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/KN/StNp/StNp1_4.html",
+        "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.1.04.piya.html",
+        "https://www.accesstoinsight.org/tipitaka/kn/snp/snp.1.04.than.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "thig2.3",
+      "path": "/tipitaka/kn/thig/thig.02.03.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thig/thig.02.03.than.html",
+      "translator": "Thanissaro Bhikkhu",
+      "reference": "Thig 19-38",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "Pairs of Verses",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "1398e96bbce97cafbd5396c8bffbfa19eea554eeaf54214224a9b4f893372986",
+      "indexed_root": {
+        "id": "thig2.3",
+        "title": "Sumaṅgalamātātherīgāthā",
+        "vri": "23–24",
+        "book": 35,
+        "start": 115,
+        "end": 123,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/KN/Thig/thig2_3.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt"
+      ],
+      "approved": false,
+      "review_status": "reviewed-retained-at-snapshot",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    },
+    {
+      "owner": "thig3.5",
+      "path": "/tipitaka/kn/thig/thig.03.05.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thig/thig.03.05.than.html",
+      "translator": "Thanissaro Bhikkhu",
+      "reference": "Thig 51-53",
+      "publisher_extent": "excerpt",
+      "publisher_subtitle": "Groups of Three Verses",
+      "publisher_secondary_subtitle": "",
+      "source_html_sha256": "43936baea2cc35de7214f4b0205f9efa934ea1a564f95e300d612771c463e7c5",
+      "indexed_root": {
+        "id": "thig3.5",
+        "title": "Ubbiritherīgāthā",
+        "vri": "51–53",
+        "book": 35,
+        "start": 231,
+        "end": 243,
+        "kind": null,
+        "approximate": null
+      },
+      "other_versions_in_supplied_index": [
+        "https://www.dhammatalks.org/suttas/KN/Thig/thig3_5.html"
+      ],
+      "reasons": [
+        "publisher extent excerpt"
+      ],
+      "approved": false,
+      "review_status": "unreviewed",
+      "review_required": [
+        "complete body and indexed boundaries",
+        "page-specific full licence",
+        "independent alternatives and source scope"
+      ]
+    }
+  ]
+}

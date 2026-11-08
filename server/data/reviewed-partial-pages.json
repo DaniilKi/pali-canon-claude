@@ -188,6 +188,68 @@
         "notice_sha256": "c9bf6950e9d8842ae30bb7b09d2edff81df3a3e847b8d20f8e9ef94b65b2427d",
         "extractor": "ati-freeverse-v1"
       }
+    },
+    {
+      "unit_id": "thag15.1",
+      "path": "/tipitaka/kn/thag/thag.15.01.olen",
+      "translator": "Andrew Olendzki",
+      "english_title": "Aññakondañña Thera: Aññakondañña",
+      "license": "Olendzki-free-distribution-2005",
+      "source_reference": "Thag 675",
+      "mapping_note": "Derived verse excerpt from the named Access to Insight page. Complete source attribution and distribution notice accompany every excerpt. Only VRI675 is mapped;673–674 and676–688 remain outside this declaration. Publisher ellipses are preserved.",
+      "source_html_sha256": "290f88f633639a5b4494791dc37bab1063450d8af5239c9b72709db63f1df1b3",
+      "root": {
+        "id": "thag15.1",
+        "title": "Aññāsikoṇḍaññattheragāthā",
+        "vri": "673–688",
+        "book": 34,
+        "start": 2739,
+        "end": 2788,
+        "root_blocks_sha256": "9034f18a584f4d0e4fe1e57d6268a9f9267bd3bdccea76d371d12798b0876f76"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "thag15.1",
+        "first_ref": "thag15.1/5",
+        "last_ref": "thag15.1/5",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "cf793a089ea70d89cfc746aeb793957d4f763d3d0f183e7643fbf3cb1362650c",
+        "text_sha256": "1cbeae5ede51654bfdf359e0a6fe978e9f127fbb031c4b878057373597b68f1b",
+        "notice_sha256": "9468bdc97426f85662a25bcee622134c5828b1cb10ae9e25f714812e9e485f5d",
+        "extractor": "ati-freeverse-v1"
+      }
+    },
+    {
+      "unit_id": "snp3.11",
+      "path": "/tipitaka/kn/snp/snp.3.11.olen",
+      "translator": "Andrew Olendzki",
+      "english_title": "Nalaka Sutta: Gurgling Loudly",
+      "license": "Olendzki-free-distribution-2005",
+      "source_reference": "Sn 720 (publisher numbering; VRI725)",
+      "mapping_note": "Derived verse excerpt from the named Access to Insight page. Complete source attribution and distribution notice accompany every excerpt. Only the water-streams verse VRI725 is mapped. Publisher Sn720 is preserved as publisher numbering; it is not VRI720. All other verses are excluded; publisher ellipses are preserved.",
+      "source_html_sha256": "1ee1e5af1dbc5f830081819b96f7d1ebc49c3a40e1981e4d1a325bffeaeaa261",
+      "root": {
+        "id": "snp3.11",
+        "title": "Nālakasuttaṃ",
+        "vri": "684–728",
+        "book": 31,
+        "start": 2337,
+        "end": 2477,
+        "root_blocks_sha256": "0c090d02d9101db4b9c124e612ba6fbd2daf657679074b630bf985e26284235e"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "snp3.11",
+        "first_ref": "snp3.11/44",
+        "last_ref": "snp3.11/44",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "ed3bce16973a0a171613a695a22a6b10dc39474dd69e43bea50260732e457ba4",
+        "text_sha256": "66d1c9e05bdb5fdd4cfd73037d53c430af8a33713cbca0c3ab24a5793527d37f",
+        "notice_sha256": "88687c27dc9ebaa3e83669410a9d708ad44855bde804ae3f11c9c4402d8d1f07",
+        "extractor": "ati-freeverse-v1"
+      }
     }
   ]
 }

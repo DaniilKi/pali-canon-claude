@@ -49,7 +49,7 @@ print('passed')`],{encoding:'utf8',input:JSON.stringify(units),env:{...process.e
 });
 
 test('daily data-version pool excludes Iti10 while preserving the previous schedule under an isolated old-data fixture',()=>{
- const d=canon.load();const current=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.equal(current.rotation.of,1269);assert.equal(current.text.id,'sn5.3');
+ const now=canon.load(),oldSn=JSON.parse(readFileSync('docs/data/nalaka-kondanna-scope-review.json','utf8')).rows.find(r=>r.owner==='sn12.22').before_link;const d={...now,translations:{...now.translations,'sn12.22':[oldSn]}};const current=dailyText({...canon,load:()=>d},{date:'2026-11-01',kind:'sutta'});assert.equal(current.rotation.of,1269);assert.equal(current.text.id,'sn5.3');
  const prior={...d,translations:{...d.translations,iti10:[{source:'dhammatalks',url:'https://www.dhammatalks.org/suttas/KN/Iti/iti10.html',translator:'Ṭhānissaro Bhikkhu',reference:'10—13 Itivuttaka',match:'number'}]}};
  const restored=dailyText({...canon,load:()=>prior},{date:'2026-11-01',kind:'sutta'});assert.equal(restored.rotation.of,1270);assert.equal(restored.text.id,'snp2.7');
 });
