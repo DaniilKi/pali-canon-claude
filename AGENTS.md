@@ -369,3 +369,8 @@ SN12.60 P2/2 maps only `/3`; SN22.87 P11/11 maps only `/4`; SN35.244 P1/4 maps o
 ### Ordinary excerpt review memory (D211)
 
 Current ordinary links are2,556 (ATI1,129), with unchanged whole-covered units and14 partial sources/eight partial-only. The ordinary local queue now has12 unreviewed bindings. Preserve six new global exact-source holds (MN143/Snp1.4 Olendzki; SN12.17/SN12.23/SN22.84/SN22.89 Walshe) and their valid alternatives. Do not activate partial extraction from these pages without separate scope/rights/structure review. `retained_ordinary_pages.json` is metadata triage memory only, never runtime source authority; Python and Node default to it. Preserve five historical retain rows unchanged. Node does not inspect publisher HTML; Python requires the pinned clean checkout. Root identity/blocks and link drift must expire annotations. Full Pāli, notes/locators, old reports and existing partial/shared declarations stay intact. Run new binding guards and actual-source browser controls for all six held versions. [Evidence](docs/data/ordinary-excerpt-bindings-review.md).
+
+
+### English citation-resolution notes (D212)
+
+`get_translation` must preserve both `canon.resolve` notes and the provider’s notes in a fresh array. A member such as `sn56.106` resolves to the existing primary record `sn56.105-107`; report that explanation without inventing an individual translation. Never mutate cached provider notes or transfer alias-specific notes to canonical continuation requests. Preserve explicit shared/partial consent and all source pins. Run `tests/translation-resolution-notes.test.mjs` alongside translation-selection and scoped-source guards. [Evidence](docs/data/translation-resolution-notes.md).

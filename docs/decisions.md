@@ -1347,3 +1347,8 @@ Source review replaces four whole-discourse claims with pinned version1 partial 
 ## D211 — Review eight ordinary excerpt leads and preserve frozen retain memory (2026-11-08)
 
 Complete source/root/notice review retains AN3.35Ṭhānissaro (publisher3.34) and Ubbiri Thig3.5 as complete substantive units despite excerpt metadata. Withhold only six inaccurate whole bindings: Olendzki MN143/Snp1.4 and Walshe SN12.17/SN12.23/SN22.84/SN22.89. Independently inspected local alternatives remain indexed; no automatic substitution, reconstruction or new partial scope. Share a metadata-only frozen retain registry between Python and Node triage, copying five historical rows unchanged and adding two. Source/root/link drift expires annotations; no freshness, activation or rights approval follows. Queue12 unreviewed; ordinary links2,556 while whole-covered units,14 partial sources,8 partial-only units and1,261 daily eligibility remain unchanged. Canonical/commentary/parallel data and saved locators remain unchanged. [Evidence](data/ordinary-excerpt-bindings-review.md).
+
+
+## D212 — Preserve resolver notes through get_translation (2026-11-08)
+
+The English tool handler discarded `canon.resolve` notes despite selecting the right unit. Append resolver and provider notes into a new response array, retaining grouped-member and alternate-numbering explanations without mutating cached source data. No source data, text, rights, consent or continuation changes. Canonical continuations must not carry an earlier member-specific alias note. Actual MCP regression tests and an extracted-package test with the pinned ATI shared page verify the boundary; complete-suite checks run on the exact dev commit. [Evidence](data/translation-resolution-notes.md).
