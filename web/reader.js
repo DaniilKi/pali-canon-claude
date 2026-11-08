@@ -4,19 +4,20 @@ import { planCatalog, planDay, daySignature, cleanProgress, planWindow, validate
 import { MAX_IMPORT_BYTES, parseBookmarks, bookmarkMerge } from './bookmark-import.mjs';
 import { validateDaily } from './daily-reading.mjs';
 import { validatePaliQuote } from './quote-check.mjs';
+import { MAX_PROGRESS_BYTES, parseProgress, mergeProgress } from './progress-import.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
 const view = $('view'), status = $('status');
 let serial = 0, epoch = 0, studyEpoch = 0;
 const KEY = 'pali-library-v1';
-let storageOK = true;
-function loadLocal() { try { const x = JSON.parse(localStorage.getItem(KEY) || '{}'); return x && typeof x === 'object' && !Array.isArray(x) ? x : {}; } catch { storageOK = false; return {}; } }
+let storageOK = true, storageSnapshot;
+function loadLocal() { try { const raw = localStorage.getItem(KEY); storageSnapshot = raw; const x = JSON.parse(raw || '{}'); return x && typeof x === 'object' && !Array.isArray(x) ? x : {}; } catch { storageOK = false; return {}; } }
 const local = loadLocal();
 local.reading_progress = cleanProgress(local.reading_progress);
 if (!Array.isArray(local.saved)) local.saved = [];
 local.saved = local.saved.filter(x => x && typeof x.uid === 'string' && typeof x.ref === 'string' && typeof x.title === 'string').slice(0, 500);
-function persist() { try { localStorage.setItem(KEY, JSON.stringify(local)); return true; } catch { storageOK = false; status.textContent = 'Browser storage is unavailable. Changes are kept only in this tab; export your saved passages.'; return false; } }
+function persist() { try { const serialized = JSON.stringify(local); localStorage.setItem(KEY, serialized); storageSnapshot = serialized; return true; } catch { storageOK = false; status.textContent = 'Browser storage is unavailable. Changes are kept only in this tab; export your saved passages.'; return false; } }
 function el(tag, text, className) { const n = document.createElement(tag); if (text !== undefined) n.textContent = text; if (className) n.className = className; return n; }
 function button(text, fn) { const n = el('button', text); n.type = 'button'; n.addEventListener('click', fn); return n; }
 function link(text, href, className) { const n = el('a', text, className); n.href = href; return n; }
@@ -361,8 +362,10 @@ async function plans(args, token) {
     const catalog = planCatalog(await tool('reading_plan', {})); if (token !== epoch) return;
     heading('AT YOUR OWN PACE', 'Reading plans');
     view.append(el('p', 'Follow the existing sourced reading orders. Day numbers are steps, not deadlines. Marks record your choice only; they do not prove comprehension or completion of every passage.', 'notice'));
-    const cards = el('div', undefined, 'cards');
-    for (const plan of catalog) { const card = link('', route('plans', { name: plan.name, day: 1 }), 'entry'); card.append(el('strong', plan.title), el('p', plan.description), el('small', plan.days + ' days · ' + local.reading_progress.filter(x => x.name === plan.name).length + ' saved day marks')); cards.append(card); } view.append(cards);
+    const cards = el('div', undefined, 'cards'), counts = new Map();
+    for (const plan of catalog) { const card = link('', route('plans', { name: plan.name, day: 1 }), 'entry'); card.append(el('strong', plan.title), el('p', plan.description), el('small', plan.days + ' days · ' + local.reading_progress.filter(x => x.name === plan.name).length + ' saved day marks')); counts.set(plan.name, card.querySelector('small')); cards.append(card); } view.append(cards);
+    const updateCounts = () => { for (const plan of catalog) counts.get(plan.name).textContent = plan.days + ' days · ' + local.reading_progress.filter(x => x.name === plan.name).length + ' saved day marks'; };
+    view.append(progressImporter(catalog, token, updateCounts));
     view.append(el('p', 'Progress stays in this browser only. A changed assignment or source revision requires review; saved marks are not automatically transferred.', 'muted'), button('Export reading progress', () => exportPersonal({ format: 'pali-library-reading-progress-v1', progress: local.reading_progress }, 'pali-library-reading-progress.json'))); return;
   }
   const day = Number(args.get('day') || 1), data = planDay(await tool('reading_plan', { name, day }), name, day); if (token !== epoch) return;
@@ -380,6 +383,30 @@ async function plans(args, token) {
   const daysNav = el('nav', undefined, 'pager'); daysNav.setAttribute('aria-label', 'Plan days'); if (day > 1) daysNav.append(link('← Previous day', route('plans', { name, day: day - 1 }), 'button')); if (day < data.days) daysNav.append(link('Next day →', route('plans', { name, day: day + 1 }), 'button')); view.append(daysNav);
   if (data.guide) { const guide = el('section', undefined, 'provenance'); guide.append(el('h3', 'Study guide · links only'), el('p', data.guide.cite), el('p', [data.guide.copyright, data.guide.license].filter(Boolean).join(' · ')), el('p', data.guide.note), external('Read the original study guide', data.guide.url)); view.append(guide); if (data.omitted?.length) { const omitted = el('details'); omitted.append(el('summary', 'Unplaced guide links (' + data.omitted.length + ')')); for (const item of data.omitted) omitted.append(el('p', item.reason), external('Original unplaced source link', item.url)); view.append(omitted); } }
   provenance({ source: data.source.pali });
+}
+function progressImporter(catalog, token, updateCounts) {
+  const section = el('section'), label = el('label', 'Restore reading progress from JSON'), input = el('input'), preview = el('div'); section.setAttribute('aria-label', 'Restore reading progress'); input.type = 'file'; input.accept = '.json,application/json'; label.append(input); preview.className = 'import-preview'; section.append(label, el('p', 'Choose your exported plan marks. The file stays on this device. Preview before adding marks; existing days and source signatures are kept. Maximum 16 MiB and 1,600 marks.', 'muted'), preview); let generation = 0;
+  input.addEventListener('change', async () => {
+    const request = ++generation, file = input.files?.[0]; preview.replaceChildren(); if (!file) return;
+    try {
+      if (file.size > MAX_PROGRESS_BYTES) throw Error('Choose a progress export no larger than 16 MiB. Nothing was restored.');
+      const text = await file.text(); if (request !== generation || token !== epoch) return;
+      if (new TextEncoder().encode(text).length > MAX_PROGRESS_BYTES) throw Error('Choose a progress export no larger than 16 MiB. Nothing was restored.');
+      let snapshot; try { snapshot = localStorage.getItem(KEY); } catch {}
+      if (snapshot !== undefined && snapshot !== storageSnapshot) throw Error('Browser data changed in another tab. Reload this page before restoring; no marks were restored.');
+      const incoming = parseProgress(text, catalog), merge = mergeProgress(local.reading_progress, incoming), title = el('h3', 'Review reading progress'); title.tabIndex = -1;
+      preview.replaceChildren(title, el('p', file.name), el('p', merge.added + ' new marks · ' + merge.duplicates + ' already saved · ' + merge.conflicts + ' conflicting days kept as they are.', 'notice'), el('p', 'Imported marks are self-reported. Their saved assignments and source revisions are retained, not verified against every current plan day. Open a day to check whether its mark still applies.', 'muted'));
+      if (merge.added) preview.append(button('Add ' + merge.added + ' reading marks', () => {
+        if (request !== generation || token !== epoch) return;
+        try {
+          if (snapshot !== undefined && localStorage.getItem(KEY) !== snapshot) throw Error('Browser data changed while previewing this file. Reload this page and preview again; no marks were restored.');
+          const current = mergeProgress(local.reading_progress, incoming); local.reading_progress = current.progress; const durable = persist(); updateCounts();
+          const done = el('h3', 'Reading marks restored'); done.tabIndex = -1; preview.replaceChildren(done, el('p', current.added + ' new marks added. Existing marks kept. Open a plan day to review its current source and assignment.', 'notice')); status.textContent = durable ? 'Reading marks restored in this browser only.' : 'Marks are restored in this tab only. Storage is unavailable; export them before closing.'; done.focus();
+        } catch (error) { preview.replaceChildren(el('p', error.message, 'notice')); }
+      })); else preview.append(el('p', 'No new marks to add.'));
+      preview.append(button('Cancel progress import', () => { ++generation; preview.replaceChildren(); input.focus(); })); title.focus();
+    } catch (error) { if (request === generation && token === epoch) preview.replaceChildren(el('p', error.message, 'notice')); }
+  }); return section;
 }
 function quoteChecker(token) {
   heading('CHECK AGAINST SOURCE TEXT', 'Check a Pāli quotation');

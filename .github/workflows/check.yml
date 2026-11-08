@@ -121,6 +121,10 @@ jobs:
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-quote-check.py --report standalone-quote.report.json
       - name: Audit quotation checker in both themes
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-quote-check.py --a11y --report standalone-quote-a11y.report.json
+      - name: Check local reading-progress restore and source-signature preservation
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-progress-check.py --report standalone-progress.report.json
+      - name: Audit reading-progress restore in both themes
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-progress-check.py --a11y --report standalone-progress-a11y.report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -141,6 +145,8 @@ jobs:
             standalone-compact-a11y.report.json
             standalone-quote.report.json
             standalone-quote-a11y.report.json
+            standalone-progress.report.json
+            standalone-progress-a11y.report.json
           if-no-files-found: warn
   check:
     name: Node ${{ matrix.node }} / ${{ matrix.os }}

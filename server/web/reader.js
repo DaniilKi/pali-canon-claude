@@ -49,8 +49,8 @@
     tai_tham: "lanna"
   };
   function scriptName(name) {
-    const key = String(name ?? "").trim().toLowerCase();
-    const found = ALIASES[key];
+    const key2 = String(name ?? "").trim().toLowerCase();
+    const found = ALIASES[key2];
     if (!found) throw new Error(`Unknown script "${name}". Available: ${SCRIPTS.join(", ")}.`);
     return found;
   }
@@ -518,7 +518,7 @@
   }
 
   // web/translation-policy.mjs
-  var own = (value, key) => value && Object.hasOwn(value, key);
+  var own = (value, key2) => value && Object.hasOwn(value, key2);
   var nonempty = (value) => typeof value === "string" && value.trim().length > 0;
   var sha = (value) => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
   var stable = (value) => JSON.stringify(Array.isArray(value) ? value.map((v) => JSON.parse(stable(v))) : value && typeof value === "object" ? Object.fromEntries(Object.keys(value).sort().map((k) => [k, JSON.parse(stable(value[k]))])) : value);
@@ -592,9 +592,9 @@
     if (!Array.isArray(value)) return [];
     const seen = /* @__PURE__ */ new Set();
     return value.filter((x) => {
-      const key = x?.name + ":" + x?.day;
-      if (!x || !nameOK(x.name) || !Number.isInteger(x.day) || x.day < 1 || x.day > 400 || typeof x.signature !== "string" || x.signature.length > 12e3 || seen.has(key)) return false;
-      seen.add(key);
+      const key2 = x?.name + ":" + x?.day;
+      if (!x || !nameOK(x.name) || !Number.isInteger(x.day) || x.day < 1 || x.day > 400 || typeof x.signature !== "string" || x.signature.length > 12e3 || seen.has(key2)) return false;
+      seen.add(key2);
       return true;
     }).slice(0, 1600);
   }
@@ -660,15 +660,59 @@
       throw Error("The quotation result is incomplete or does not match this P\u0101li request. No verdict or substitute source was displayed.");
     };
     const text3 = (x) => typeof x === "string" && x.length > 0;
-    const integer = (x) => Number.isSafeInteger(x) && x >= 0;
+    const integer2 = (x) => Number.isSafeInteger(x) && x >= 0;
     if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text3(data.explanation) || !text3(data.guidance) || data.scope?.language !== "pali" || !text3(data.scope.searched) || !text3(data.scope.attribution) || !text3(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text3(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text3(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail();
     if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text3(data.citation_note))) fail();
     for (const m of data.matches) {
       const command = m.read_with, span = m.source_span;
-      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text3(m.citation) || !text3(m.matched_text) || !text3(m.edition) || !text3(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command?.tool !== "get_text" || command.uid !== m.text_id || !integer(command.offset) || !integer(command.limit) || command.limit < 1 || command.limit > 200 || span?.offset !== command.offset || span.first_segment_ref !== m.segment_ref || !integer(span.end_offset) || span.end_offset <= span.offset || !text3(span.last_segment_ref)) fail();
+      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text3(m.citation) || !text3(m.matched_text) || !text3(m.edition) || !text3(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command?.tool !== "get_text" || command.uid !== m.text_id || !integer2(command.offset) || !integer2(command.limit) || command.limit < 1 || command.limit > 200 || span?.offset !== command.offset || span.first_segment_ref !== m.segment_ref || !integer2(span.end_offset) || span.end_offset <= span.offset || !text3(span.last_segment_ref)) fail();
     }
     if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail();
     return data;
+  }
+
+  // web/progress-import.mjs
+  var MAX_PROGRESS_BYTES = 16 * 1024 * 1024;
+  var MAX_PROGRESS_MARKS = 1600;
+  var object2 = (x) => x && typeof x === "object" && !Array.isArray(x);
+  var exact = (x, keys2) => object2(x) && Object.keys(x).length === keys2.length && keys2.every((k) => Object.hasOwn(x, k));
+  var integer = (x, min, max) => Number.isSafeInteger(x) && x >= min && x <= max;
+  var key = (x) => x.name + ":" + x.day;
+  function parseProgress(text3, catalog) {
+    const fail = () => {
+      throw Error("This is not a supported reading-progress export. No marks were restored.");
+    };
+    let data;
+    try {
+      data = JSON.parse(text3);
+    } catch {
+      fail();
+    }
+    if (!exact(data, ["format", "progress"]) || data.format !== "pali-library-reading-progress-v1" || !Array.isArray(data.progress) || data.progress.length > MAX_PROGRESS_MARKS) fail();
+    const plans2 = new Map(catalog.map((p) => [p.name, p.days])), seen = /* @__PURE__ */ new Set();
+    return data.progress.map((mark) => {
+      if (!exact(mark, ["name", "day", "signature"]) || !plans2.has(mark.name) || !integer(mark.day, 1, plans2.get(mark.name)) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail();
+      seen.add(key(mark));
+      let s;
+      try {
+        s = JSON.parse(mark.signature);
+      } catch {
+        fail();
+      }
+      if (!exact(s, ["name", "day", "source", "readings"]) || s.name !== mark.name || s.day !== mark.day || typeof s.source !== "string" || !/^[a-zA-Z0-9._-]{1,100}$/.test(s.source) || !Array.isArray(s.readings) || !s.readings.length || s.readings.length > 20) fail();
+      const ids = /* @__PURE__ */ new Set();
+      for (const r of s.readings) {
+        if (!exact(r, ["id", "offset", "limit", "part", "of"]) || typeof r.id !== "string" || !/^[a-z][a-z0-9.-]{0,299}$/.test(r.id) || ids.has(r.id) || !integer(r.offset, 0, 1e5) || !(r.limit === null || integer(r.limit, 1, 1e5)) || !(r.part === null && r.of === null || integer(r.part, 1, 400) && integer(r.of, r.part, 400) && r.limit !== null)) fail();
+        ids.add(r.id);
+      }
+      const signature = JSON.stringify({ name: s.name, day: s.day, source: s.source, readings: s.readings.map((r) => ({ id: r.id, offset: r.offset, limit: r.limit, part: r.part, of: r.of })) });
+      return { name: mark.name, day: mark.day, signature };
+    });
+  }
+  function mergeProgress(existing, incoming) {
+    const byKey = new Map(existing.map((x) => [key(x), x])), added = incoming.filter((x) => !byKey.has(key(x))), duplicates = incoming.filter((x) => byKey.get(key(x))?.signature === x.signature).length, conflicts = incoming.length - added.length - duplicates;
+    if (existing.length + added.length > MAX_PROGRESS_MARKS) throw Error("These marks exceed the 1,600-mark limit. Export your current progress before changing it. Nothing was restored.");
+    return { progress: [...existing, ...added], added: added.length, duplicates, conflicts };
   }
 
   // web/reader.js
@@ -680,9 +724,12 @@
   var studyEpoch = 0;
   var KEY = "pali-library-v1";
   var storageOK = true;
+  var storageSnapshot;
   function loadLocal() {
     try {
-      const x = JSON.parse(localStorage.getItem(KEY) || "{}");
+      const raw = localStorage.getItem(KEY);
+      storageSnapshot = raw;
+      const x = JSON.parse(raw || "{}");
       return x && typeof x === "object" && !Array.isArray(x) ? x : {};
     } catch {
       storageOK = false;
@@ -695,7 +742,9 @@
   local.saved = local.saved.filter((x) => x && typeof x.uid === "string" && typeof x.ref === "string" && typeof x.title === "string").slice(0, 500);
   function persist() {
     try {
-      localStorage.setItem(KEY, JSON.stringify(local));
+      const serialized = JSON.stringify(local);
+      localStorage.setItem(KEY, serialized);
+      storageSnapshot = serialized;
       return true;
     } catch {
       storageOK = false;
@@ -1259,14 +1308,14 @@
     }
     const data = await tool("glossary", { term, direction, limit: 10 });
     if (token !== epoch) return;
-    if (typeof data.found !== "number" || !data.sources?.dpd?.attribution || !data.sources?.dpd?.license || !["english_to_pali", "pali_to_english"].some((key) => Array.isArray(data[key]))) throw new Error("The glossary response is incomplete or missing its source terms. This is not a no-match result.");
+    if (typeof data.found !== "number" || !data.sources?.dpd?.attribution || !data.sources?.dpd?.license || !["english_to_pali", "pali_to_english"].some((key2) => Array.isArray(data[key2]))) throw new Error("The glossary response is incomplete or missing its source terms. This is not a no-match result.");
     notes(data);
     if (data.note) view.append(el("p", data.note, "notice"));
-    for (const [key, title] of [["english_to_pali", "English \u2192 P\u0101li"], ["pali_to_english", "P\u0101li \u2192 English"]]) {
-      if (!data[key]?.length) continue;
+    for (const [key2, title] of [["english_to_pali", "English \u2192 P\u0101li"], ["pali_to_english", "P\u0101li \u2192 English"]]) {
+      if (!data[key2]?.length) continue;
       view.append(el("h3", title));
       const cards = el("div", void 0, "cards");
-      for (const entry of data[key]) {
+      for (const entry of data[key2]) {
         const card = el("article", void 0, "entry");
         card.append(el("strong", entry.pali), el("p", entry.meaning || entry.gloss || ""), el("small", [entry.pos, entry.source].filter(Boolean).join(" \xB7 ")), link("Find this word in canonical texts", route("search", { q: entry.pali, scope: "canon" })));
         cards.append(card);
@@ -1351,13 +1400,18 @@
       if (token !== epoch) return;
       heading("AT YOUR OWN PACE", "Reading plans");
       view.append(el("p", "Follow the existing sourced reading orders. Day numbers are steps, not deadlines. Marks record your choice only; they do not prove comprehension or completion of every passage.", "notice"));
-      const cards = el("div", void 0, "cards");
+      const cards = el("div", void 0, "cards"), counts = /* @__PURE__ */ new Map();
       for (const plan of catalog) {
         const card = link("", route("plans", { name: plan.name, day: 1 }), "entry");
         card.append(el("strong", plan.title), el("p", plan.description), el("small", plan.days + " days \xB7 " + local.reading_progress.filter((x) => x.name === plan.name).length + " saved day marks"));
+        counts.set(plan.name, card.querySelector("small"));
         cards.append(card);
       }
       view.append(cards);
+      const updateCounts = () => {
+        for (const plan of catalog) counts.get(plan.name).textContent = plan.days + " days \xB7 " + local.reading_progress.filter((x) => x.name === plan.name).length + " saved day marks";
+      };
+      view.append(progressImporter(catalog, token, updateCounts));
       view.append(el("p", "Progress stays in this browser only. A changed assignment or source revision requires review; saved marks are not automatically transferred.", "muted"), button("Export reading progress", () => exportPersonal({ format: "pali-library-reading-progress-v1", progress: local.reading_progress }, "pali-library-reading-progress.json")));
       return;
     }
@@ -1421,6 +1475,63 @@
       }
     }
     provenance({ source: data.source.pali });
+  }
+  function progressImporter(catalog, token, updateCounts) {
+    const section = el("section"), label = el("label", "Restore reading progress from JSON"), input = el("input"), preview = el("div");
+    section.setAttribute("aria-label", "Restore reading progress");
+    input.type = "file";
+    input.accept = ".json,application/json";
+    label.append(input);
+    preview.className = "import-preview";
+    section.append(label, el("p", "Choose your exported plan marks. The file stays on this device. Preview before adding marks; existing days and source signatures are kept. Maximum 16 MiB and 1,600 marks.", "muted"), preview);
+    let generation = 0;
+    input.addEventListener("change", async () => {
+      const request = ++generation, file = input.files?.[0];
+      preview.replaceChildren();
+      if (!file) return;
+      try {
+        if (file.size > MAX_PROGRESS_BYTES) throw Error("Choose a progress export no larger than 16 MiB. Nothing was restored.");
+        const text3 = await file.text();
+        if (request !== generation || token !== epoch) return;
+        if (new TextEncoder().encode(text3).length > MAX_PROGRESS_BYTES) throw Error("Choose a progress export no larger than 16 MiB. Nothing was restored.");
+        let snapshot;
+        try {
+          snapshot = localStorage.getItem(KEY);
+        } catch {
+        }
+        if (snapshot !== void 0 && snapshot !== storageSnapshot) throw Error("Browser data changed in another tab. Reload this page before restoring; no marks were restored.");
+        const incoming = parseProgress(text3, catalog), merge = mergeProgress(local.reading_progress, incoming), title = el("h3", "Review reading progress");
+        title.tabIndex = -1;
+        preview.replaceChildren(title, el("p", file.name), el("p", merge.added + " new marks \xB7 " + merge.duplicates + " already saved \xB7 " + merge.conflicts + " conflicting days kept as they are.", "notice"), el("p", "Imported marks are self-reported. Their saved assignments and source revisions are retained, not verified against every current plan day. Open a day to check whether its mark still applies.", "muted"));
+        if (merge.added) preview.append(button("Add " + merge.added + " reading marks", () => {
+          if (request !== generation || token !== epoch) return;
+          try {
+            if (snapshot !== void 0 && localStorage.getItem(KEY) !== snapshot) throw Error("Browser data changed while previewing this file. Reload this page and preview again; no marks were restored.");
+            const current = mergeProgress(local.reading_progress, incoming);
+            local.reading_progress = current.progress;
+            const durable = persist();
+            updateCounts();
+            const done = el("h3", "Reading marks restored");
+            done.tabIndex = -1;
+            preview.replaceChildren(done, el("p", current.added + " new marks added. Existing marks kept. Open a plan day to review its current source and assignment.", "notice"));
+            status.textContent = durable ? "Reading marks restored in this browser only." : "Marks are restored in this tab only. Storage is unavailable; export them before closing.";
+            done.focus();
+          } catch (error) {
+            preview.replaceChildren(el("p", error.message, "notice"));
+          }
+        }));
+        else preview.append(el("p", "No new marks to add."));
+        preview.append(button("Cancel progress import", () => {
+          ++generation;
+          preview.replaceChildren();
+          input.focus();
+        }));
+        title.focus();
+      } catch (error) {
+        if (request === generation && token === epoch) preview.replaceChildren(el("p", error.message, "notice"));
+      }
+    });
+    return section;
   }
   function quoteChecker(token) {
     heading("CHECK AGAINST SOURCE TEXT", "Check a P\u0101li quotation");

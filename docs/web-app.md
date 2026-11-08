@@ -27,7 +27,7 @@ The npm package and container include `server/web/`. The HTML, stylesheet and br
 - Read available traditional commentary separately from the root text, including pagination. Direct commentary-book reading and search hits do not claim verified root-text alignment. Later-work and commentary bookmarks retain their corpus and exact reading position.
 - Change text size, paper/night theme and the supported Pāli transliteration script. Lao/Lanna still require native-reader validation. Installed device fonts affect glyph availability; selecting a script does not install fonts.
 - Open **Daily** for a dated Dhammapada verse or a discourse opening from the existing fixed rotation. Dates are UTC, not personalized; discourse previews are not full readings. Open the actual Pāli source/chapter context to continue or choose English sources.
-- Follow four sourced **Plans**: Dhammapada chapters, the Majjhima Nikāya year plan, and two link-only ATI study-guide citation orders. Split readings stop at their assigned Pāli boundary. Mark days manually, undo marks, and export browser-local progress; source/assignment changes are not silently credited.
+- Follow four sourced **Plans**: Dhammapada chapters, the Majjhima Nikāya year plan, and two link-only ATI study-guide citation orders. Split readings stop at their assigned Pāli boundary. Mark days manually, undo marks, and export/restore browser-local progress after a preview; source/assignment changes are not silently credited.
 - Save individual passage references and personal notes. Reopen the reading position, export bookmarks/notes as JSON, and restore a supported export locally after a preview. Existing notes are kept; missing source references fail rather than opening a nearby passage.
 - Look up English or Pāli terms in the bundled glossary, including supported native-script input. Every result identifies its DPD or curated-list source; glosses are not passage translations.
 - Open **Study words** on a body segment in a canonical text, complete root book or later work. See the bundled DPD analyses, alternative parses, grammar, computed split suggestions and unknown forms. Commentary analysis is not supported by the current backend; the app does not substitute root-text analysis.
@@ -60,7 +60,7 @@ Next priorities, in order:
 
 1. Extend the same UI to additional study tools. Pāli quotation checking, the glossary, contextual DPD word study, related-text evidence and supplementary catalogues/search/readers are now implemented. Keep canonical status and uncertain mappings visible.
 2. Improve accessible translation comparison, exact source links and reading-position management. Test in Safari and Firefox, with screen readers and native-script readers, on physical iOS/Android devices.
-3. Add optional passage highlighting and reading-progress import. Bookmark/notes restore now has bounded schema validation, preview and an additive merge. Personal reflections must never be labelled scripture.
+3. Add optional passage highlighting. Previewed reading-progress restore is now supported. Bookmark/notes restore now has bounded schema validation, preview and an additive merge. Personal reflections must never be labelled scripture.
 4. Design explicitly user-requested, versioned offline packs only after source-specific rights/storage review. Don't silently cache live translations or claim whole-corpus English coverage.
 5. Audio, cross-device accounts/sync, reminders, community features and native app-store distribution require separate rights, privacy, security and operating-cost decisions. No synthesized sacred narration is provided by this slice.
 
@@ -107,7 +107,7 @@ Open **Plans** in the header. The existing `reading_plan` engine supplies all fo
 
 When an assignment covers part of a discourse, its reading link carries the plan name/day and source identity. The reader re-requests the engine assignment, validates the selected text and source pin, and paginates strictly within its Pāli segment bounds. Out-of-span URLs or changed/incomplete source responses fail before display. Whole-text English and related materials are explicitly distinguished from this assigned Pāli part. Ordinary reading outside a plan remains available in Library. Bookmarks preserve exact passage references; reopening one is ordinary reading, not a claim to remain inside the plan assignment.
 
-Day marks are self-reported, stored only in this browser and individually reversible. They are bound to the day’s text IDs, offsets/limits and VRI revision. A changed assignment/source does not inherit a previous completed state. Catalogue counts are labelled saved marks, not verified current completion. Export progress from the Plans list; clearing site data loses it. There is no progress import, sync, cloud backup or automatic inference of comprehension. If storage fails, tab-local marks remain exportable and the interface warns that they are not durable.
+Day marks are self-reported, stored only in this browser and individually reversible. They are bound to the day’s text IDs, offsets/limits and VRI revision. A changed assignment/source does not inherit a previous completed state. Catalogue counts are labelled saved marks, not verified current completion. Export progress from the Plans list; clearing site data loses it. Progress restore is previewed and additive; there is no sync, cloud backup or automatic inference of comprehension. If storage fails, tab-local marks remain exportable and the interface warns that they are not durable.
 
 Run `python scripts/web-reader-plans-check.py --report /tmp/plans.json` and add `--a11y` for the separate audit. The same runner accepts `--server-dir /path/to/extracted/package/server` to test an installed bundle from outside the checkout. See [reading-plan evidence](evidence/web-reader/READING_PLANS.md).
 
@@ -115,7 +115,7 @@ Run `python scripts/web-reader-plans-check.py --report /tmp/plans.json` and add 
 
 In **Saved**, choose a Pāli Library bookmark JSON export. The browser reads it locally and shows new/duplicate counts before anything changes. Confirm to add new `(source selector, passage reference)` keys; existing notes and revisions are retained. Cancel makes no changes. The entire file is refused if it is malformed, has duplicate references within itself, unsupported fields, invalid values, over 500 records, exceeds 16 MiB or would exceed the current 500-bookmark capacity. No partial import or silent truncation occurs.
 
-This restores personal reading metadata, not scripture or proof of source authenticity. Imported titles/notes render as inert text. Exact passage references are checked when opened; missing/stale references fail explicitly with no nearby-text substitution. Commentary and later-work selectors keep their non-canonical reader modes. Browser storage failure gives a tab-only warning; export remains available. There is no file upload, account sync or reading-progress restore in this slice. See [acceptance and checkpoint CI](evidence/web-reader/BOOKMARK_IMPORT.md).
+This restores personal reading metadata, not scripture or proof of source authenticity. Imported titles/notes render as inert text. Exact passage references are checked when opened; missing/stale references fail explicitly with no nearby-text substitution. Commentary and later-work selectors keep their non-canonical reader modes. Browser storage failure gives a tab-only warning; export remains available. There is no file upload or account sync; plan-progress exports have their own separate restore control in Plans. See [acceptance and checkpoint CI](evidence/web-reader/BOOKMARK_IMPORT.md).
 
 ## Daily reading
 
@@ -158,3 +158,28 @@ reading and its explicit partial/shared consent remain separate and unchanged. K
 small-screen, malformed-result, delayed-navigation and no-live-English regressions are in
 `scripts/web-reader-quote-check.py`; run normal, `--a11y` and extracted `--server-dir` modes.
 The automated accessibility scans are not a substitute for screen-reader or device review.
+
+## Restore reading progress
+
+In **Plans**, choose a reading-progress JSON export, review the additions, then
+confirm. Cancel changes nothing. The file is read on your device, never uploaded.
+Export it from one browser and transfer that file yourself to restore on another.
+This is a manual backup/restore workflow, not automatic sync or an account.
+
+The parser checks every mark and its nested assignment/source signature. It
+accepts only the current catalogue's plan names and day ranges. Foreign exports,
+unknown plans, duplicate days, invalid commands/metadata, extra fields, files over
+16 MiB and totals over 1,600 marks fail atomically. Existing marks win on duplicate
+or conflicting days; conflict counts are shown before confirmation. Restoring an
+older signature does not replace it with the current source/assignment. A stale
+mark is visibly inactive when its day opens. Saved counts remain personal marks,
+not verified completion; imported files are not evidence that reading occurred.
+If browser data changes during preview, confirmation refuses to overwrite it and
+asks for a fresh preview after reload. This is not transactional multi-tab sync.
+
+If browser storage fails, restored marks remain in this tab with an explicit
+warning and can still be exported. Clearing site data loses unexported progress.
+Delayed file reads cannot replace a newer route. See
+[restore acceptance](evidence/web-reader/PROGRESS_RESTORE.md) and run
+`scripts/web-reader-progress-check.py` in normal, `--a11y` and extracted
+`--server-dir` modes. Source text, English consent and plan generation are unchanged.

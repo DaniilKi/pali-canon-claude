@@ -1,0 +1,188 @@
+{
+  "passed": 44,
+  "outside_source_tree": true,
+  "checks": [
+    {
+      "width": 320,
+      "check": "local file preview shows additions/conflicts without upload, mutation or executable filename"
+    },
+    {
+      "width": 320,
+      "check": "keyboard cancellation leaves every existing mark unchanged"
+    },
+    {
+      "width": 320,
+      "check": "confirmed additive restore persists, updates catalogue counts and preserves conflicting local source pins"
+    },
+    {
+      "width": 320,
+      "check": "restored marks export losslessly for another device"
+    },
+    {
+      "width": 320,
+      "check": "current signatures activate their manual mark while stale source revisions remain uncredited with a visible warning"
+    },
+    {
+      "width": 320,
+      "check": "foreign, duplicate and unknown-plan files are refused atomically"
+    },
+    {
+      "width": 320,
+      "check": "oversized files are refused before parsing with no partial import"
+    },
+    {
+      "width": 320,
+      "check": "reimport is idempotent and never overwrites existing source signatures"
+    },
+    {
+      "width": 320,
+      "check": "changed browser data invalidates preview and requires reload before another import"
+    },
+    {
+      "width": 320,
+      "check": "delayed local-file read cannot replace a newer route or mutate progress"
+    },
+    {
+      "width": 320,
+      "check": "storage failure warns about tab-only marks and keeps the in-memory recovery export available"
+    },
+    {
+      "width": 390,
+      "check": "local file preview shows additions/conflicts without upload, mutation or executable filename"
+    },
+    {
+      "width": 390,
+      "check": "keyboard cancellation leaves every existing mark unchanged"
+    },
+    {
+      "width": 390,
+      "check": "confirmed additive restore persists, updates catalogue counts and preserves conflicting local source pins"
+    },
+    {
+      "width": 390,
+      "check": "restored marks export losslessly for another device"
+    },
+    {
+      "width": 390,
+      "check": "current signatures activate their manual mark while stale source revisions remain uncredited with a visible warning"
+    },
+    {
+      "width": 390,
+      "check": "foreign, duplicate and unknown-plan files are refused atomically"
+    },
+    {
+      "width": 390,
+      "check": "oversized files are refused before parsing with no partial import"
+    },
+    {
+      "width": 390,
+      "check": "reimport is idempotent and never overwrites existing source signatures"
+    },
+    {
+      "width": 390,
+      "check": "changed browser data invalidates preview and requires reload before another import"
+    },
+    {
+      "width": 390,
+      "check": "delayed local-file read cannot replace a newer route or mutate progress"
+    },
+    {
+      "width": 390,
+      "check": "storage failure warns about tab-only marks and keeps the in-memory recovery export available"
+    },
+    {
+      "width": 768,
+      "check": "local file preview shows additions/conflicts without upload, mutation or executable filename"
+    },
+    {
+      "width": 768,
+      "check": "keyboard cancellation leaves every existing mark unchanged"
+    },
+    {
+      "width": 768,
+      "check": "confirmed additive restore persists, updates catalogue counts and preserves conflicting local source pins"
+    },
+    {
+      "width": 768,
+      "check": "restored marks export losslessly for another device"
+    },
+    {
+      "width": 768,
+      "check": "current signatures activate their manual mark while stale source revisions remain uncredited with a visible warning"
+    },
+    {
+      "width": 768,
+      "check": "foreign, duplicate and unknown-plan files are refused atomically"
+    },
+    {
+      "width": 768,
+      "check": "oversized files are refused before parsing with no partial import"
+    },
+    {
+      "width": 768,
+      "check": "reimport is idempotent and never overwrites existing source signatures"
+    },
+    {
+      "width": 768,
+      "check": "changed browser data invalidates preview and requires reload before another import"
+    },
+    {
+      "width": 768,
+      "check": "delayed local-file read cannot replace a newer route or mutate progress"
+    },
+    {
+      "width": 768,
+      "check": "storage failure warns about tab-only marks and keeps the in-memory recovery export available"
+    },
+    {
+      "width": 1280,
+      "check": "local file preview shows additions/conflicts without upload, mutation or executable filename"
+    },
+    {
+      "width": 1280,
+      "check": "keyboard cancellation leaves every existing mark unchanged"
+    },
+    {
+      "width": 1280,
+      "check": "confirmed additive restore persists, updates catalogue counts and preserves conflicting local source pins"
+    },
+    {
+      "width": 1280,
+      "check": "restored marks export losslessly for another device"
+    },
+    {
+      "width": 1280,
+      "check": "current signatures activate their manual mark while stale source revisions remain uncredited with a visible warning"
+    },
+    {
+      "width": 1280,
+      "check": "foreign, duplicate and unknown-plan files are refused atomically"
+    },
+    {
+      "width": 1280,
+      "check": "oversized files are refused before parsing with no partial import"
+    },
+    {
+      "width": 1280,
+      "check": "reimport is idempotent and never overwrites existing source signatures"
+    },
+    {
+      "width": 1280,
+      "check": "changed browser data invalidates preview and requires reload before another import"
+    },
+    {
+      "width": 1280,
+      "check": "delayed local-file read cannot replace a newer route or mutate progress"
+    },
+    {
+      "width": 1280,
+      "check": "storage failure warns about tab-only marks and keeps the in-memory recovery export available"
+    }
+  ],
+  "a11y": {
+    "scans": 0,
+    "violations": 0,
+    "results": []
+  },
+  "limits": "Actual engine plan assignments/signatures. Old revision, invalid/oversized filenames/files, storage failure and delayed File.text are controlled fixtures. No cloud sync, scripture import, verified completion, physical-device or human accessibility claim. Only audit contexts bypass CSP."
+}
