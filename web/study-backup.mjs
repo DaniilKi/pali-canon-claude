@@ -2,6 +2,7 @@
 import { MAX_IMPORT_BYTES, parseBookmarks, bookmarkMerge } from './bookmark-import.mjs';
 import { MAX_PROGRESS_BYTES, parseProgressMetadata, parseProgress, mergeProgress } from './progress-import.mjs';
 import { isReadingLocator } from './reading-position.mjs';
+import { applyBackupNoteChoices } from './backup-note-conflicts.mjs';
 
 export const MAX_STUDY_BACKUP_BYTES = 32 * 1024 * 1024;
 const FORMAT = 'pali-library-study-backup-v1';
@@ -43,7 +44,7 @@ export function parseStudyBackup(text) {
 }
 
 /** Additive candidate only. Resume and preferences are deliberately never applied here. */
-export function mergeStudyBackup(current, incoming, catalog) {
+export function mergeStudyBackup(current, incoming, catalog, choices) {
   if (!object(current) || Object.keys(current).some(field => !['saved', 'progress', 'drafts'].includes(field)) || !Array.isArray(current.saved) || !Array.isArray(current.progress) || current.drafts !== undefined && !(current.drafts instanceof Map)) throw Error('Unsupported current personal-study metadata. Nothing was restored.');
   const validatedCurrent = createStudyBackup({ saved: current.saved, progress: current.progress, resume: null });
   const validatedIncoming = validate(incoming, true);
@@ -65,7 +66,13 @@ export function mergeStudyBackup(current, incoming, catalog) {
     const prior = existing.get(key(item));
     if (prior) { if (JSON.stringify(prior) === JSON.stringify(item)) bookmarkDuplicates++; else bookmarkConflicts++; }
   }
-  return { saved: clone(bookmarks.saved), progress: clone(marks.progress), bookmarkAdded: bookmarks.added.length, bookmarkDuplicates, bookmarkConflicts, progressAdded: marks.added, progressDuplicates: marks.duplicates, progressConflicts: marks.conflicts };
+  const result = { saved: clone(bookmarks.saved), progress: clone(marks.progress), bookmarkAdded: bookmarks.added.length, bookmarkDuplicates, bookmarkConflicts, progressAdded: marks.added, progressDuplicates: marks.duplicates, progressConflicts: marks.conflicts };
+  if (choices !== undefined) {
+    const notes = applyBackupNoteChoices(current.saved, validatedIncoming.saved, current.drafts ?? new Map(), choices);
+    result.saved = clone([...notes.saved, ...bookmarks.added]);
+    result.notesReplaced = notes.notesReplaced; result.replacedNoteKeys = notes.replacedNoteKeys;
+  }
+  return result;
 }
 
 /** A local rollback snapshot only; no persistence or preference/locator changes. */

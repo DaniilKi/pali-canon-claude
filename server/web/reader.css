@@ -70,3 +70,6 @@ main:focus{outline:none}
 
 /* Keep the first source passage visible on small screens; expand navigation explicitly. */
 .source-position-panel{flex-basis:100%;min-width:0;margin-block:8px}.source-position-panel .source-position{margin-block:12px}
+
+/* Private note comparisons never become source or translation content. */
+.backup-note-review{margin-block:20px;min-width:0;overflow-wrap:anywhere}.backup-note-difference{border-top:1px solid var(--line);padding-block:16px}.backup-note-difference h5{font-size:16px;margin:0 0 10px}.backup-note-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.backup-note-columns textarea{display:block;width:100%;min-height:120px;white-space:pre-wrap;font:16px/1.5 system-ui,sans-serif;margin-top:6px}.backup-note-choice{display:flex;gap:10px;align-items:flex-start;margin-top:12px}.backup-note-choice input{flex:0 0 auto;width:24px;min-height:24px;margin-top:2px}@media(max-width:760px){.backup-note-columns{grid-template-columns:minmax(0,1fr)}}

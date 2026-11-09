@@ -17,6 +17,7 @@ import { comparisonChoices, comparisonSelection, validateComparisonPage } from '
 import { passageNoteKey, passageNoteState, passageNoteRemovalNeedsConfirmation, passageNoteTransaction, restorePassageNoteTransaction } from './passage-notes.mjs';
 import { readingPagePosition, assertPageRequest, assertPagePin, readingPageBounds, readingJumpOffset } from './reading-navigation.mjs';
 import { savedPassageHighlighted } from './saved-highlights.mjs';
+import { reviewBackupNoteConflicts } from './backup-note-conflicts.mjs';
 import { MAX_STUDY_BACKUP_BYTES, createStudyBackup, parseStudyBackup, mergeStudyBackup } from './study-backup.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
@@ -637,7 +638,7 @@ function studyBackup(token) {
   view.append(el('p', 'Download saved references, personal notes (including unsaved edits), plan marks and an optional reading position. This file includes personal data: keep it somewhere private. The source-text library, accounts and browser preferences are excluded; your own notes are included.', 'notice'), button('Download study backup', downloadStudyBackup));
   const section = el('section'), label = el('label', 'Restore study backup from JSON'), input = el('input'), preview = el('section', undefined, 'import-preview');
   input.type = 'file'; input.accept = '.json,application/json'; label.append(input); preview.setAttribute('aria-label', 'Study backup preview'); preview.setAttribute('aria-live', 'polite');
-  section.append(label, el('p', 'The file stays on this device. Maximum 32 MiB. Preview before applying: existing notes, drafts, source pins and conflicting marks are kept. This is an additive restore, not account sync or an atomic cross-tab transaction.', 'muted'), preview); view.append(section, link('Saved passages and individual exports', '#saved', 'button'), link('Reading plans and individual exports', '#plans', 'button'));
+  section.append(label, el('p', 'The file stays on this device. Maximum 32 MiB. Preview before applying: notes and drafts are kept by default; replacements require explicit eligible choices. Source pins and conflicting marks are kept. This is an additive restore, not account sync or an atomic cross-tab transaction.', 'muted'), preview); view.append(section, link('Saved passages and individual exports', '#saved', 'button'), link('Reading plans and individual exports', '#plans', 'button'));
   let generation = 0;
   const active = request => token === epoch && request === generation && section.isConnected;
   const personalState = () => JSON.stringify({ saved: local.saved, progress: local.reading_progress, drafts: [...noteDrafts], rememberPresent: Object.hasOwn(local, 'remember_position'), remember: local.remember_position });
@@ -665,12 +666,48 @@ function studyBackup(token) {
       if (!active(request)) return;
       if (personalState() !== state) throw Error('Personal study data changed while preparing this preview. Choose the file again. Nothing was restored.');
       const merged = mergeStudyBackup({ saved: local.saved, progress: local.reading_progress, drafts: noteDrafts }, incoming, catalog);
+      const noteRows = reviewBackupNoteConflicts(local.saved, incoming.saved, noteDrafts), choices = new Set();
+      let applying = false, applied = false, lockReview = () => {};
       const title = el('h3', 'Review study backup'); title.tabIndex = -1;
-      preview.replaceChildren(title, el('p', 'Local file: ' + filename, 'muted'), el('p', `Saved passages: ${merged.bookmarkAdded} new · ${merged.bookmarkDuplicates} duplicates · ${merged.bookmarkConflicts} conflicts kept`), el('p', `Plan marks: ${merged.progressAdded} new · ${merged.progressDuplicates} duplicates · ${merged.progressConflicts} conflicts kept`), el('p', 'Existing notes, drafts and source pins win on a duplicate reference. Existing plan marks win on a conflicting day. Review conflicts manually; no source identity is upgraded.', 'muted'));
+      preview.replaceChildren(title, el('p', 'Local file: ' + filename, 'muted'), el('p', `Saved passages: ${merged.bookmarkAdded} new · ${merged.bookmarkDuplicates} duplicates · ${merged.bookmarkConflicts} conflicts kept`), el('p', `Plan marks: ${merged.progressAdded} new · ${merged.progressDuplicates} duplicates · ${merged.progressConflicts} conflicts kept`), el('p', 'Existing notes and drafts are kept unless you explicitly select an eligible incoming note below. Source pins, titles and existing conflicting plan marks are always kept; no source identity is upgraded.', 'muted'));
+      const savedCount = preview.children[2];
+      if (noteRows.length) {
+        const review = el('section', undefined, 'backup-note-review'); review.setAttribute('aria-label', 'Review personal note differences');
+        const count = el('p'), rows = el('div'), selection = el('p'); count.setAttribute('role', 'status'); count.tabIndex = -1; selection.setAttribute('role', 'status');
+        const clear = button('Clear incoming note choices', () => { if (!validReview()) return; choices.clear(); draw(); });
+        review.append(el('h4', 'Personal note differences · not scripture'), el('p', 'Current notes include unsaved edits in this tab. Only matching, source-pinned positions allow replacement. Selecting an empty incoming note clears the old note and its draft after a confirmed save. Download your current backup first if you want to keep both versions.', 'notice'), button('Download current study backup', downloadStudyBackup), selection, clear, count, rows); preview.append(review);
+        let page = 0;
+        function validReview() { return active(request) && review.isConnected && !applying && !applied; }
+        const identity = item => noteKey(item);
+        const metadata = item => `${item.uid} · ${item.ref} · source revision: ${item.source_commit ?? 'unpinned legacy'} · source offset: ${item.offset ?? 'not recorded'}`;
+        function draw(moveFocus = false) {
+          if (!active(request) || !review.isConnected) return;
+          selection.textContent = choices.size + ' incoming notes selected'; clear.disabled = applied || applying || !choices.size;
+          savedCount.textContent = choices.size ? `Saved passages: ${merged.bookmarkAdded} new · ${merged.bookmarkDuplicates} duplicates · ${merged.bookmarkConflicts} original conflicts · ${choices.size} incoming notes selected; all other metadata kept` : `Saved passages: ${merged.bookmarkAdded} new · ${merged.bookmarkDuplicates} duplicates · ${merged.bookmarkConflicts} conflicts kept`;
+          const start = page * 10, end = Math.min(noteRows.length, start + 10); count.textContent = `Showing note differences ${start + 1}–${end} of ${noteRows.length}`; rows.replaceChildren();
+          for (const row of noteRows.slice(start, end)) {
+            const current = local.saved.find(item => identity(item) === row.key), incomingRecord = incoming.saved.find(item => identity(item) === row.key), card = el('article', undefined, 'backup-note-difference'); card.setAttribute('aria-label', 'Note difference ' + row.uid + ' · ' + row.ref);
+            card.append(el('h5', row.uid + ' · ' + row.ref), el('p', 'Current reference: ' + metadata(current), 'muted'), el('p', 'Incoming reference: ' + metadata(incomingRecord), 'muted'), el('p', row.eligible ? 'Same source revision and position. Only the note text may be replaced.' : 'Read-only difference: ' + row.reason, row.eligible ? 'muted' : 'notice'));
+            const columns = el('div', undefined, 'backup-note-columns');
+            for (const [name, text] of [['Note before restore (including draft)', row.currentNote], ['Incoming personal note', row.incomingNote]]) { const label = el('label', name + ' · ' + row.uid + ' · ' + row.ref), field = el('textarea'); field.readOnly = true; field.value = text; label.append(field); columns.append(label); }
+            card.append(columns);
+            if (row.eligible) {
+              const label = el('label', undefined, 'backup-note-choice'), choose = el('input'); choose.type = 'checkbox'; choose.checked = choices.has(row.key); choose.disabled = applied || applying; label.append(choose, document.createTextNode('Use incoming note for ' + row.uid + ' · ' + row.ref));
+              choose.addEventListener('change', () => { if (!validReview()) { choose.checked = choices.has(row.key); return; } if (choose.checked) choices.add(row.key); else choices.delete(row.key); selection.textContent = choices.size + ' incoming notes selected'; clear.disabled = !choices.size; savedCount.textContent = choices.size ? `Saved passages: ${merged.bookmarkAdded} new · ${merged.bookmarkDuplicates} duplicates · ${merged.bookmarkConflicts} original conflicts · ${choices.size} incoming notes selected; all other metadata kept` : `Saved passages: ${merged.bookmarkAdded} new · ${merged.bookmarkDuplicates} duplicates · ${merged.bookmarkConflicts} conflicts kept`; }); card.append(label);
+              if (row.incomingNote === '') card.append(el('p', 'The incoming note is empty. Selecting it will clear the current note, including its unsaved draft, only after the restore is saved.', 'notice'));
+            }
+            rows.append(card);
+          }
+          const pager = el('nav', undefined, 'pager'); pager.setAttribute('aria-label', 'Note difference pages');
+          if (page > 0) { const previous = button('Previous note differences', () => { if (!validReview()) return; --page; draw(true); }); previous.disabled = applied || applying; pager.append(previous); }
+          if (end < noteRows.length) { const next = button('Next note differences', () => { if (!validReview()) return; ++page; draw(true); }); next.disabled = applied || applying; pager.append(next); }
+          rows.append(pager); if (moveFocus) count.focus({ preventScroll: true });
+        }
+        draw(); lockReview = () => { selection.textContent = choices.size + ' incoming notes applied'; if (choices.size) savedCount.textContent = `Saved passages: ${merged.bookmarkAdded} new · ${merged.bookmarkDuplicates} duplicates · ${merged.bookmarkConflicts} original conflicts · ${choices.size} incoming notes applied; reference metadata kept`; for (const control of review.querySelectorAll('input, button')) if (control.textContent !== 'Download current study backup') control.disabled = true; };
+      }
       const resumeLabel = el('label', undefined, 'backup-resume'), resume = el('input'); resume.type = 'checkbox'; resume.checked = false; resume.disabled = !incoming.resume || local.remember_position === false; resumeLabel.append(resume, document.createTextNode('Restore incoming reading position')); preview.append(resumeLabel);
       if (local.remember_position === false) preview.append(el('p', 'Remember reading position is off. Restoring a position is disabled; your privacy preference will not change.', 'muted'));
       if (incoming.resume) { preview.append(link('Open incoming reading position', incoming.resume), el('p', 'Opening is your choice. Source-pinned positions are checked by the reader before displaying wording. Restoring does not open a passage.', 'muted')); if (!new URLSearchParams(incoming.resume.slice(6)).has('source')) preview.append(el('p', 'Legacy reading position: its source revision was not recorded. It stays unpinned and is not upgraded.', 'notice')); }
-      let applying = false, applied = false;
       const apply = button('Apply study backup', () => {
         if (!active(request) || applying || applied) return;
         try {
@@ -679,16 +716,18 @@ function studyBackup(token) {
           if (currentRaw !== raw && !readingPointerOnlyChange(raw, currentRaw)) throw Error('Browser data changed since preview. Nothing was restored.');
           if (resume.checked && (currentRaw !== raw || Object.hasOwn(local, 'last') !== localLastPresent || local.last !== localLast)) throw Error('The reading position changed since preview. Preview the file again before restoring its position.');
           if (resume.checked && (local.remember_position === false || !incoming.resume)) throw Error('Restoring the reading position is no longer available.');
+          const finalMerged = mergeStudyBackup({ saved: local.saved, progress: local.reading_progress, drafts: noteDrafts }, incoming, catalog, [...choices]);
           const beforeSaved = local.saved, beforeProgress = local.reading_progress, beforeLastPresent = Object.hasOwn(local, 'last'), beforeLast = local.last, beforeStorageSnapshot = storageSnapshot;
           applying = true; apply.disabled = true;
-          local.saved = merged.saved; local.reading_progress = merged.progress;
+          local.saved = finalMerged.saved; local.reading_progress = finalMerged.progress;
           if (resume.checked) { local.last = incoming.resume; storageSnapshot = currentRaw; }
           if (!persist()) {
             local.saved = beforeSaved; local.reading_progress = beforeProgress; storageSnapshot = beforeStorageSnapshot; if (beforeLastPresent) local.last = beforeLast; else delete local.last; updateResume();
             throw Error('The study backup was not confirmed saved. This tab’s original study data and drafts remain available. Keep the file and export your data before reloading. ' + storageWarning());
           }
-          applied = true; resume.disabled = true; updateResume();
-          const done = el('h3', 'Study backup restored in this browser'); done.tabIndex = -1; preview.append(done, el('p', 'Existing personal data and preferences were kept. No passage was opened.')); done.focus();
+          for (const key of finalMerged.replacedNoteKeys) noteDrafts.delete(key);
+          applied = true; resume.disabled = true; lockReview(); updateResume();
+          const done = el('h3', 'Study backup restored in this browser'); done.tabIndex = -1; preview.append(done, el('p', finalMerged.notesReplaced ? `${finalMerged.notesReplaced} selected incoming personal notes replaced their current text and drafts. Existing reference metadata, other notes, conflicting marks and preferences were kept. No passage was opened.` : 'Existing personal data and preferences were kept. No passage was opened.')); done.focus();
         } catch (error) { preview.append(el('p', error.message, 'notice')); status.textContent = storageConflict || !storageOK ? storageWarning() : error.message; }
         finally { applying = false; apply.disabled = applied; }
       });
