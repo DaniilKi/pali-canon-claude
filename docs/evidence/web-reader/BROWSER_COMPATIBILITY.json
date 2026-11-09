@@ -1,0 +1,82 @@
+{
+  "decision": "D221",
+  "baseline_commit": "91246037171f9d1f060d2a2e55e72c01515a169d",
+  "observed_on": "2026-11-09",
+  "feature": "cross-engine installed study acceptance and legacy progress restore",
+  "source_dataset_or_licence_changes": false,
+  "storage_schema_changed": false,
+  "main_or_deployment_changed": false,
+  "runtime_repairs": [
+    "Permit exact raw equality before pointer-only-change checks in progress preview/apply.",
+    "Capture File then clear progress input for same-file retry.",
+    "Preserve conditional storage read when snapshot unavailable and explicit in-tab recovery."
+  ],
+  "local_validation": {
+    "latest_progress_browser_normal": 52,
+    "latest_progress_browser_installed": 52,
+    "prior_intermediate_a11y_not_final_acceptance": true,
+    "compatibility_chromium": {
+      "checks": 44,
+      "status": "passed",
+      "engine": {
+        "requested": "chromium",
+        "playwright": "1.62.0",
+        "actual": "chromium",
+        "version": "155.0.8059.79",
+        "executable": "/usr/bin/chromium",
+        "executable_kind": "explicit/system",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36"
+      },
+      "production_csp_intact": true
+    },
+    "full_check": {
+      "tests": 1184,
+      "passed": 1182,
+      "failed": 0,
+      "existing_optional_skips": 2,
+      "audit_texts": 8544,
+      "audit_failures": 0
+    },
+    "docs_and_artifact_tests": 21,
+    "smoke": {
+      "tools": 34,
+      "checks": 64
+    },
+    "offline_evals": {
+      "passed": 195,
+      "live_skipped": 6
+    },
+    "package_server_tree_matches_tested_assets": true
+  },
+  "review": {
+    "independent_runtime_review": "accepted",
+    "independent_harness_review": "accepted after waiting for full delayed response body"
+  },
+  "ci": {
+    "required_engines": [
+      "firefox",
+      "webkit"
+    ],
+    "installed_package": true,
+    "normal_csp_intact_and_separate_a11y": true,
+    "exact_integrated_head_results": "Must be verified separately; no pre-commit success claim."
+  },
+  "local_engine_access": {
+    "chromium": "system 155.0.8059.79",
+    "firefox": "not installed",
+    "webkit": "not installed",
+    "official_firefox_archive_probe": "CONNECT HTTP 403 under enforced local policy; not retried via alternate route"
+  },
+  "limitations": [
+    "Engine-level Linux WebKit is not released Safari or physical-device certification.",
+    "Viewport and keyboard checks do not certify native file picker, on-screen keyboard, assistive technology or glyph shaping.",
+    "No offline web library or account sync; personal data stays local.",
+    "No broader source-coverage claim; Paṭṭhāna assessment remains blocked."
+  ],
+  "local_test_followups": [
+    {
+      "observation": "Initial exact wrapping-label selector could not locate the script select despite correct UI rendering.",
+      "action": "Use the actual labelled combobox role; retain visibility and exact source-codepoint assertions. No application defect inferred."
+    }
+  ]
+}

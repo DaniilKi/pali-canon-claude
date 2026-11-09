@@ -296,7 +296,7 @@ jobs:
           if-no-files-found: warn
   reader-browser:
     name: Chromium reader
-    needs: reader-browser-group
+    needs: [reader-browser-group, reader-compat]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 1
@@ -304,7 +304,49 @@ jobs:
       - name: Require every browser group to succeed
         env:
           BROWSER_RESULT: ${{ needs['reader-browser-group'].result }}
-        run: test "$BROWSER_RESULT" = success
+          COMPAT_RESULT: ${{ needs['reader-compat'].result }}
+        run: |
+          test "$BROWSER_RESULT" = success
+          test "$COMPAT_RESULT" = success
+  reader-compat:
+    name: Study compatibility / ${{ matrix.engine }}
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [firefox, webkit]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci --no-audit --no-fund
+      - run: python -m pip install playwright==1.62.0
+      - name: Install the official selected Playwright engine and dependencies
+        run: python -m playwright install --with-deps ${{ matrix.engine }}
+      - name: Build and pack the standalone reader
+        run: |
+          npm run build
+          mkdir -p "$RUNNER_TEMP/compat-package"
+          npm pack --pack-destination "$RUNNER_TEMP/compat-package"
+          tar -xzf "$RUNNER_TEMP/compat-package/"*.tgz -C "$RUNNER_TEMP/compat-package"
+      - name: Check installed study workflows in the selected browser engine
+        run: python scripts/web-reader-compat-check.py --engine ${{ matrix.engine }} --server-dir "$RUNNER_TEMP/compat-package/package/server" --report installed-compat.report.json
+      - name: Audit installed study semantics in both themes
+        run: python scripts/web-reader-compat-check.py --engine ${{ matrix.engine }} --server-dir "$RUNNER_TEMP/compat-package/package/server" --a11y --report installed-compat-a11y.report.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reader-compat-${{ matrix.engine }}
+          path: |
+            installed-compat.report.json
+            installed-compat-a11y.report.json
+          if-no-files-found: warn
   check:
     name: Node ${{ matrix.node }} / ${{ matrix.os }}
     runs-on: ${{ matrix.os }}

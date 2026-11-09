@@ -748,19 +748,22 @@ function progressImporter(catalog, token, updateCounts) {
   const section = el('section'), label = el('label', 'Restore reading progress from JSON'), input = el('input'), preview = el('div'); section.setAttribute('aria-label', 'Restore reading progress'); input.type = 'file'; input.accept = '.json,application/json'; label.append(input); preview.className = 'import-preview'; section.append(label, el('p', 'Choose your exported plan marks. The file stays on this device. Preview before adding marks; existing days and source signatures are kept. Maximum 16 MiB and 1,600 marks.', 'muted'), preview); let generation = 0;
   const failure = error => { const title = el('h3', 'Unable to restore reading progress'); title.tabIndex = -1; preview.replaceChildren(title, el('p', error.message, 'notice')); title.focus(); };
   input.addEventListener('change', async () => {
-    const request = ++generation, file = input.files?.[0]; preview.replaceChildren(); if (!file) return;
+    const request = ++generation, file = input.files?.[0]; input.value = ''; preview.replaceChildren(); if (!file) return;
     try {
       if (file.size > MAX_PROGRESS_BYTES) throw Error('Choose a progress export no larger than 16 MiB. Nothing was restored.');
       const text = await file.text(); if (request !== generation || token !== epoch) return;
       if (new TextEncoder().encode(text).length > MAX_PROGRESS_BYTES) throw Error('Choose a progress export no larger than 16 MiB. Nothing was restored.');
       let snapshot; try { snapshot = localStorage.getItem(KEY); } catch {}
-      if (snapshot !== undefined && !readingPointerOnlyChange(storageSnapshot, snapshot)) throw Error('Browser data changed in another tab. Reload this page before restoring; no marks were restored.');
+      if (snapshot !== undefined && snapshot !== storageSnapshot && !readingPointerOnlyChange(storageSnapshot, snapshot)) throw Error('Browser data changed in another tab. Reload this page before restoring; no marks were restored.');
       const incoming = parseProgress(text, catalog), merge = mergeProgress(local.reading_progress, incoming), title = el('h3', 'Review reading progress'); title.tabIndex = -1;
       preview.replaceChildren(title, el('p', file.name), el('p', merge.added + ' new marks · ' + merge.duplicates + ' already saved · ' + merge.conflicts + ' conflicting days kept as they are.', 'notice'), el('p', 'Imported marks are self-reported. Their saved assignments and source revisions are retained, not verified against every current plan day. Open a day to check whether its mark still applies.', 'muted'));
       if (merge.added) preview.append(button('Add ' + merge.added + ' reading marks', () => {
         if (request !== generation || token !== epoch) return;
         try {
-          if (snapshot !== undefined && !readingPointerOnlyChange(snapshot, localStorage.getItem(KEY))) throw Error('Browser data changed while previewing this file. Reload this page and preview again; no marks were restored.');
+          if (snapshot !== undefined) {
+            const currentRaw = localStorage.getItem(KEY);
+            if (currentRaw !== snapshot && !readingPointerOnlyChange(snapshot, currentRaw)) throw Error('Browser data changed while previewing this file. Reload this page and preview again; no marks were restored.');
+          }
           const current = mergeProgress(local.reading_progress, incoming); local.reading_progress = current.progress; const durable = persist(); updateCounts();
           const done = el('h3', 'Reading marks restored'); done.tabIndex = -1; preview.replaceChildren(done, el('p', current.added + ' new marks added. Existing marks kept. Open a plan day to review its current source and assignment.', 'notice')); status.textContent = durable ? 'Reading marks restored in this browser only.' : storageWarning(); done.focus();
         } catch (error) { failure(error); }
