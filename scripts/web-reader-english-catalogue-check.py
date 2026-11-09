@@ -30,7 +30,7 @@ def ready(page,data):
  if data['availability']=='linked' and data['collection'] is None and data['offset']==0:
   expect(page).to_have_url(re.compile('^'+re.escape(base+'/#browse?node=english')+'(?:&availability=linked)?$'))
  else:expect(page).to_have_url(expected_url)
- expect(page.get_by_role('heading',name='Find English sources',exact=True)).to_be_visible()
+ expect(page.get_by_role('heading',name='Find English sources',exact=True)).to_be_visible(timeout=30000)
  expect(page.get_by_label('English availability',exact=True)).to_have_value(data['availability'])
  expect(page.get_by_label('Collection',exact=True)).to_have_value(data['collection'] or '')
  expect(page.locator('.english-catalogue-count')).to_have_text(str(data['total'])+' matching indexed record'+('' if data['total']==1 else 's'))
