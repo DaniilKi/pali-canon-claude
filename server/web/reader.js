@@ -2511,7 +2511,7 @@
       open.disabled = true;
       error.setAttribute("role", "alert");
       error.hidden = true;
-      form.append(label, open, el("p", menu.scope === "work" ? "Chapters of the selected work, including its source volumes where applicable. Choose a chapter, then open it." : "Chapters in this source file only. This list does not combine chapters from other files or works.", "muted"), error);
+      form.append(label, open, el("p", menu.scope === "work" ? "Chapters of the selected work, including its source volumes where applicable. Choose a chapter, then open it." : "Headings in this source file, including any appended works. Numbering belongs to the file.", "muted"), error);
       select.addEventListener("change", () => {
         if (alive() && form.isConnected) open.disabled = !select.value;
       });

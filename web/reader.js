@@ -365,7 +365,7 @@ function attachChapterNavigation(data, args, host, token) {
     const placeholder = el('option', 'Choose a chapter'); placeholder.value = ''; select.append(placeholder);
     for (const row of menu.chapters) { const option = el('option', row.citation + ' · ' + row.title); option.value = row.citation; select.append(option); }
     label.append(select); open.type = 'submit'; open.disabled = true; error.setAttribute('role', 'alert'); error.hidden = true;
-    form.append(label, open, el('p', menu.scope === 'work' ? 'Chapters of the selected work, including its source volumes where applicable. Choose a chapter, then open it.' : 'Chapters in this source file only. This list does not combine chapters from other files or works.', 'muted'), error);
+    form.append(label, open, el('p', menu.scope === 'work' ? 'Chapters of the selected work, including its source volumes where applicable. Choose a chapter, then open it.' : 'Headings in this source file, including any appended works. Numbering belongs to the file.', 'muted'), error);
     select.addEventListener('change', () => { if (alive() && form.isConnected) open.disabled = !select.value; });
     form.addEventListener('submit', event => {
       event.preventDefault(); if (!alive() || !form.isConnected || !select.value) return;
