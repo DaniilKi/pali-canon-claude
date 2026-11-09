@@ -64,7 +64,7 @@ The useful patterns from established scripture readers are calm typography, visi
 Next priorities, in order:
 
 1. Extend the same UI to additional study tools. Pāli quotation checking, the glossary, contextual DPD word study, related-text evidence and supplementary catalogues/search/readers are now implemented. Keep canonical status and uncertain mappings visible.
-2. Ordinary-source comparison, exact source links and versioned reading positions are implemented. Test in Safari and Firefox, with screen readers and native-script readers, on physical iOS/Android devices.
+2. Ordinary-source comparison, exact source links and versioned reading positions are implemented. A dedicated installed-package Firefox/WebKit journey now complements Chromium acceptance; see [recorded compatibility scope](evidence/web-reader/BROWSER_COMPATIBILITY.md). Physical Safari/iOS/Android, screen-reader and native-reader review remain separate.
 3. Add optional passage highlighting. Previewed reading-progress restore is now supported. Bookmark/notes restore now has bounded schema validation, preview and an additive merge. Personal reflections must never be labelled scripture.
 4. Design explicitly user-requested, versioned offline packs only after source-specific rights/storage review. Don't silently cache live translations or claim whole-corpus English coverage.
 5. Audio, cross-device accounts/sync, reminders, community features and native app-store distribution require separate rights, privacy, security and operating-cost decisions. No synthesized sacred narration is provided by this slice.

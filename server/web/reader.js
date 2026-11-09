@@ -2935,6 +2935,7 @@
     };
     input.addEventListener("change", async () => {
       const request2 = ++generation, file = input.files?.[0];
+      input.value = "";
       preview.replaceChildren();
       if (!file) return;
       try {
@@ -2947,14 +2948,17 @@
           snapshot = localStorage.getItem(KEY);
         } catch {
         }
-        if (snapshot !== void 0 && !readingPointerOnlyChange(storageSnapshot, snapshot)) throw Error("Browser data changed in another tab. Reload this page before restoring; no marks were restored.");
+        if (snapshot !== void 0 && snapshot !== storageSnapshot && !readingPointerOnlyChange(storageSnapshot, snapshot)) throw Error("Browser data changed in another tab. Reload this page before restoring; no marks were restored.");
         const incoming = parseProgress(text5, catalog), merge = mergeProgress(local.reading_progress, incoming), title = el("h3", "Review reading progress");
         title.tabIndex = -1;
         preview.replaceChildren(title, el("p", file.name), el("p", merge.added + " new marks \xB7 " + merge.duplicates + " already saved \xB7 " + merge.conflicts + " conflicting days kept as they are.", "notice"), el("p", "Imported marks are self-reported. Their saved assignments and source revisions are retained, not verified against every current plan day. Open a day to check whether its mark still applies.", "muted"));
         if (merge.added) preview.append(button("Add " + merge.added + " reading marks", () => {
           if (request2 !== generation || token !== epoch) return;
           try {
-            if (snapshot !== void 0 && !readingPointerOnlyChange(snapshot, localStorage.getItem(KEY))) throw Error("Browser data changed while previewing this file. Reload this page and preview again; no marks were restored.");
+            if (snapshot !== void 0) {
+              const currentRaw = localStorage.getItem(KEY);
+              if (currentRaw !== snapshot && !readingPointerOnlyChange(snapshot, currentRaw)) throw Error("Browser data changed while previewing this file. Reload this page and preview again; no marks were restored.");
+            }
             const current = mergeProgress(local.reading_progress, incoming);
             local.reading_progress = current.progress;
             const durable = persist();
