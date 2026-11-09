@@ -154,7 +154,7 @@ try:
                 context.add_init_script("if(!localStorage.getItem('pali-library-v1'))localStorage.setItem('pali-library-v1'," + json.dumps(json.dumps(seed)) + ");" +
                     "Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async()=>{throw Error('Controlled clipboard denial')}}});" +
                     "window.compatIgnoreNextAbort=false;window.compatHeld=0;window.compatHeldBodyComplete=false;const compatFetch=window.fetch.bind(window);window.fetch=(url,options)=>{" +
-                    "if(window.compatIgnoreNextAbort&&options?.signal&&JSON.parse(options.body||'{}').params?.name==='get_text'){window.compatIgnoreNextAbort=false;const {signal,...rest}=options;return compatFetch(url,rest).then(async response=>{await response.clone().text();window.compatHeldBodyComplete=true;return response})}return compatFetch(url,options)};")
+                    "if(window.compatIgnoreNextAbort&&options?.signal&&JSON.parse(options.body||'{}').params?.name==='get_text'){window.compatIgnoreNextAbort=false;const {signal,...rest}=options;return compatFetch(url,rest).then(async response=>{await response.clone().text();window.compatHeldBodyComplete=true;document.documentElement.setAttribute('data-compat-held-body-complete','true');return response})}return compatFetch(url,options)};")
                 state = {'calls': [], 'forbidden': [], 'errors': [], 'hold': False, 'held': []}
 
                 def intercept(route):
@@ -172,7 +172,7 @@ try:
                             route.abort()
                         elif state['hold'] and name == 'get_text' and arguments.get('uid') == 'mn10':
                             state['held'].append(route)
-                            request.frame.evaluate('window.compatHeld++')
+                            request.frame.evaluate("document.documentElement.setAttribute('data-compat-held',String(++window.compatHeld))")
                         else:
                             route.continue_()
                     else:
@@ -440,10 +440,11 @@ try:
             context, page, state = environment()
             page.goto(base + '/#saved')
             expect(page.get_by_role('heading', name='Saved passages', exact=True)).to_be_visible()
-            page.evaluate('window.compatIgnoreNextAbort=true')
+            # Fixture-only root markers reset before this request, outside source content.
+            page.evaluate("()=>{window.compatIgnoreNextAbort=true;window.compatHeld=0;window.compatHeldBodyComplete=false;document.documentElement.setAttribute('data-compat-held','0');document.documentElement.setAttribute('data-compat-held-body-complete','false')}")
             state['hold'] = True
             page.goto(base + '/#read?uid=mn10')
-            page.wait_for_function('window.compatHeld===1')
+            expect(page.locator('html')).to_have_attribute('data-compat-held', '1')
             stop = page.get_by_role('button', name='Stop waiting for Pāli reading', exact=True)
             stop.focus()
             page.keyboard.press('Enter')
@@ -454,7 +455,7 @@ try:
             with page.expect_response(lambda response: response.request.method == 'POST' and response.url.endswith('/mcp')):
                 route.fulfill(status=200, content_type='application/json', body=json.dumps(
                     {'jsonrpc': '2.0', 'id': route.request.post_data_json['id'], 'result': {'structuredContent': late_pali}}))
-            page.wait_for_function('window.compatHeldBodyComplete===true')
+            expect(page.locator('html')).to_have_attribute('data-compat-held-body-complete', 'true')
             page.evaluate('()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))')
             expect(page.get_by_role('heading', name='Saved passages', exact=True)).to_be_visible()
             expect(page.locator('.passage')).to_have_count(0)

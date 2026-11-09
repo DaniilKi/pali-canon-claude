@@ -60,5 +60,30 @@
     "No new source coverage; Paṭṭhāna raw evidence still unavailable."
   ],
   "main_merge": false,
-  "deployment": false
+  "deployment": false,
+  "first_integrated_ci": {
+    "commit": "c866fbb9e2459ea1ccb3e073547ff5da301d4f83",
+    "run": 42568929156,
+    "firefox_normal": "Failed after38 checks at CSP-blocked harness wait_for_function eval; accessibility skipped.",
+    "navigation": {
+      "normal": 33,
+      "a11y": 65,
+      "installed": 33,
+      "scans": 56,
+      "violations": 0
+    },
+    "webkit": {
+      "normal": 52,
+      "a11y": 52,
+      "scans": 16,
+      "violations": 0
+    }
+  },
+  "harness_repair": {
+    "product_or_csp_changed": false,
+    "fix": "Observable reset root attributes instead of eval polling; preserve count and completed cloned response body semantics.",
+    "independent_review": "accepted",
+    "local_chromium_normal": 52,
+    "fresh_exact_head_ci_required": true
+  }
 }
