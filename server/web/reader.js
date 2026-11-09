@@ -56,10 +56,10 @@
   // web/saved-passages.mjs
   var SAVED_PAGE_SIZE = 25;
   function savedScope(item) {
-    const uid = typeof item?.uid === "string" ? item.uid : "";
-    if (uid.startsWith("book:")) return "books";
-    if (uid.startsWith("post:")) return "post";
-    if (uid.startsWith("commentary:") || uid.startsWith("commentary-ref:")) return "commentary";
+    const uid2 = typeof item?.uid === "string" ? item.uid : "";
+    if (uid2.startsWith("book:")) return "books";
+    if (uid2.startsWith("post:")) return "post";
+    if (uid2.startsWith("commentary:") || uid2.startsWith("commentary-ref:")) return "commentary";
     return "canon";
   }
   var savedScopeLabels = Object.freeze({ canon: "Canonical text", books: "Complete root source book", commentary: "Commentary \xB7 not canon", post: "Later work \xB7 not canon" });
@@ -71,8 +71,8 @@
       if (selected !== "all" && savedScope(item) !== selected) return false;
       const key2 = JSON.stringify([item.uid, item.ref]);
       const note = drafts?.has(key2) ? drafts.get(key2) : item.note;
-      const text4 = fold([item.title, item.uid, item.ref, note].filter((x) => typeof x === "string").join(" "));
-      return tokens.every((token) => text4.includes(token));
+      const text5 = fold([item.title, item.uid, item.ref, note].filter((x) => typeof x === "string").join(" "));
+      return tokens.every((token) => text5.includes(token));
     });
     const pages = Math.max(1, Math.ceil(matches.length / SAVED_PAGE_SIZE));
     const current = Number.isSafeInteger(page) ? Math.max(0, Math.min(page, pages - 1)) : 0;
@@ -86,9 +86,9 @@
     sheet.id = "print-document";
     sheet.setAttribute("aria-hidden", "true");
     doc.body.append(sheet);
-    const add = (parent, tag, text4, className) => {
+    const add = (parent, tag, text5, className) => {
       const node = doc.createElement(tag);
-      node.textContent = text4;
+      node.textContent = text5;
       if (className) node.className = className;
       parent.append(node);
       return node;
@@ -113,8 +113,8 @@
       for (const segment of passage.querySelectorAll(":scope > .segment")) {
         const block = add(sheet, "section", "", "print-segment");
         add(block, "p", segment.querySelector(".segment-label span")?.textContent || "", "print-reference");
-        const text4 = add(block, "p", segment.querySelector(".passage")?.textContent || "", "print-passage");
-        text4.lang = "pi";
+        const text5 = add(block, "p", segment.querySelector(".passage")?.textContent || "", "print-passage");
+        text5.lang = "pi";
       }
       const source2 = add(sheet, "section", "", "print-provenance");
       add(source2, "h2", "Source and terms");
@@ -466,9 +466,9 @@
     if (t.verseEnd) s = s.replace(/;(\s*)$/, `${STOP}$1`);
     return s;
   }
-  function fromRoman(text4, script, stanza) {
+  function fromRoman(text5, script, stanza) {
     const t = TABLES[script];
-    const s = romanPunctuation(text4.normalize("NFC"), t, stanza).toLowerCase();
+    const s = romanPunctuation(text5.normalize("NFC"), t, stanza).toLowerCase();
     let out = "";
     let pending = null;
     let consStart = -1;
@@ -537,10 +537,10 @@
     const prefixes = t.prefix ? /* @__PURE__ */ new Map([[t.sign.e, "e"], [t.sign.o, "o"]]) : /* @__PURE__ */ new Map();
     return REVERSE[script] = { t, cons, ind, signs, signList: byLength(signs), indList: byLength(ind), punct, expand, prefixes };
   }
-  function toRomanFrom(text4, script) {
+  function toRomanFrom(text5, script) {
     const R = reverse(script);
     const { t } = R;
-    let s = text4.normalize("NFC").replace(/[\u200c\u200d]/g, "");
+    let s = text5.normalize("NFC").replace(/[\u200c\u200d]/g, "");
     for (const [a, b] of R.expand) s = s.split(a).join(b);
     const at = (i, list) => list.find((x) => s.startsWith(x, i));
     let out = "";
@@ -591,9 +591,9 @@
     ["khmer", 6016, 6143],
     ["lanna", 6688, 6831]
   ];
-  function detectScript(text4) {
+  function detectScript(text5) {
     const counts = {};
-    for (const ch of String(text4 ?? "")) {
+    for (const ch of String(text5 ?? "")) {
       const cp = ch.codePointAt(0);
       if (cp < 2304) continue;
       for (const [name, lo, hi] of RANGES) if (cp >= lo && cp <= hi) {
@@ -609,9 +609,9 @@
     }
     return best;
   }
-  function transliterate(text4, from, to, { stanza = false } = {}) {
-    if (text4 == null) return text4;
-    const s = String(text4);
+  function transliterate(text5, from, to, { stanza = false } = {}) {
+    if (text5 == null) return text5;
+    const s = String(text5);
     const a = from === "auto" ? detectScript(s) : scriptName(from);
     const b = scriptName(to);
     if (a === b) return s;
@@ -627,9 +627,9 @@
       script_note: `P\u0101li transliterated into ${SCRIPT_NAMES[script]} by this server from the VRI Roman edition (exact letter-for-letter; punctuation follows VRI's own script editions where they exist). Citations, IDs and English are left in Roman.`
     };
   }
-  var pali = (text4, script, opts) => typeof text4 === "string" && text4 ? transliterate(text4, "roman", script, opts) : text4;
-  function verse(text4, script) {
-    const lines = text4.split("\n");
+  var pali = (text5, script, opts) => typeof text5 === "string" && text5 ? transliterate(text5, "roman", script, opts) : text5;
+  function verse(text5, script) {
+    const lines = text5.split("\n");
     return lines.map((line, i) => pali(line, script, { stanza: i === lines.length - 1 })).join("\n");
   }
   function localizeUnitFields(obj, script) {
@@ -750,16 +750,16 @@
       return true;
     }).slice(0, 1600);
   }
-  function planWindow(data, uid, requestedOffset) {
-    const reading = data.readings.find((r) => r.id === uid);
+  function planWindow(data, uid2, requestedOffset) {
+    const reading = data.readings.find((r) => r.id === uid2);
     if (!reading) throw Error("This text is not in the selected plan day.");
     const start = reading.get_text.offset ?? 0, end = reading.get_text.limit === void 0 ? null : start + reading.get_text.limit;
     const offset = requestedOffset ?? start;
     if (!Number.isInteger(offset) || offset < start || end !== null && offset >= end) throw Error("This reading position is outside the selected plan day. Return to the plan to open its assigned span.");
     return { start, end, offset, limit: end === null ? 30 : Math.min(30, end - offset) };
   }
-  function validatePlanPage(data, plan, uid, window2) {
-    if (data.text_id !== uid || data.source?.commit !== plan.source.pali.commit || data.offset !== window2.offset || !Array.isArray(data.segments) || data.returned !== data.segments.length || !data.returned || data.returned > window2.limit || window2.end !== null && data.returned !== window2.limit) throw Error("The P\u0101li response does not match the selected plan span and source revision. No plan passage was displayed.");
+  function validatePlanPage(data, plan, uid2, window2) {
+    if (data.text_id !== uid2 || data.source?.commit !== plan.source.pali.commit || data.offset !== window2.offset || !Array.isArray(data.segments) || data.returned !== data.segments.length || !data.returned || data.returned > window2.limit || window2.end !== null && data.returned !== window2.limit) throw Error("The P\u0101li response does not match the selected plan span and source revision. No plan passage was displayed.");
   }
 
   // web/bookmark-import.mjs
@@ -768,10 +768,10 @@
   var string2 = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f]/.test(x);
   var object = (x) => x && typeof x === "object" && !Array.isArray(x);
   var identity = (x) => JSON.stringify([x.uid, x.ref]);
-  function parseBookmarks(text4) {
+  function parseBookmarks(text5) {
     let data;
     try {
-      data = JSON.parse(text4);
+      data = JSON.parse(text5);
     } catch {
       throw Error("Choose a valid JSON bookmark export. Nothing was imported.");
     }
@@ -811,13 +811,13 @@
     const fail3 = () => {
       throw Error("The quotation result is incomplete or does not match this P\u0101li request. No verdict or substitute source was displayed.");
     };
-    const text4 = (x) => typeof x === "string" && x.length > 0;
+    const text5 = (x) => typeof x === "string" && x.length > 0;
     const integer4 = (x) => Number.isSafeInteger(x) && x >= 0;
-    if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text4(data.explanation) || !text4(data.guidance) || data.scope?.language !== "pali" || !text4(data.scope.searched) || !text4(data.scope.attribution) || !text4(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text4(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text4(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail3();
-    if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text4(data.citation_note))) fail3();
+    if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text5(data.explanation) || !text5(data.guidance) || data.scope?.language !== "pali" || !text5(data.scope.searched) || !text5(data.scope.attribution) || !text5(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text5(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text5(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail3();
+    if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text5(data.citation_note))) fail3();
     for (const m of data.matches) {
       const command2 = m.read_with, span = m.source_span;
-      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text4(m.citation) || !text4(m.matched_text) || !text4(m.edition) || !text4(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command2?.tool !== "get_text" || command2.uid !== m.text_id || !integer4(command2.offset) || !integer4(command2.limit) || command2.limit < 1 || command2.limit > 200 || span?.offset !== command2.offset || span.first_segment_ref !== m.segment_ref || !integer4(span.end_offset) || span.end_offset <= span.offset || !text4(span.last_segment_ref)) fail3();
+      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text5(m.citation) || !text5(m.matched_text) || !text5(m.edition) || !text5(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command2?.tool !== "get_text" || command2.uid !== m.text_id || !integer4(command2.offset) || !integer4(command2.limit) || command2.limit < 1 || command2.limit > 200 || span?.offset !== command2.offset || span.first_segment_ref !== m.segment_ref || !integer4(span.end_offset) || span.end_offset <= span.offset || !text5(span.last_segment_ref)) fail3();
     }
     if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail3();
     return data;
@@ -830,13 +830,13 @@
   var exact = (x, keys2) => object2(x) && Object.keys(x).length === keys2.length && keys2.every((k) => Object.hasOwn(x, k));
   var integer2 = (x, min, max) => Number.isSafeInteger(x) && x >= min && x <= max;
   var key = (x) => x.name + ":" + x.day;
-  function parseProgress(text4, catalog) {
+  function parseProgress(text5, catalog) {
     const fail3 = () => {
       throw Error("This is not a supported reading-progress export. No marks were restored.");
     };
     let data;
     try {
-      data = JSON.parse(text4);
+      data = JSON.parse(text5);
     } catch {
       fail3();
     }
@@ -1064,7 +1064,7 @@
   var count = (x) => Number.isSafeInteger(x) && x >= 0;
   var id = (x) => typeof x === "string" && /^[a-z][a-z0-9.-]{0,199}$/.test(x);
   var collectionId = (x) => typeof x === "string" && /^[a-z]{1,30}$/.test(x);
-  var belongs = (uid, collection) => collection === "vinaya" ? uid.startsWith("pli-tv-") : collection === "ap" ? /^(tha|thi)-ap[0-9]/.test(uid) : new RegExp("^" + collection + "[0-9]").test(uid);
+  var belongs = (uid2, collection) => collection === "vinaya" ? uid2.startsWith("pli-tv-") : collection === "ap" ? /^(tha|thi)-ap[0-9]/.test(uid2) : new RegExp("^" + collection + "[0-9]").test(uid2);
   function englishBrowseCandidate(args) {
     const normalized = (x) => String(x).normalize("NFD").replace(/\p{M}/gu, "").replace(/\s+/gu, "").toLowerCase();
     return args.has("availability") || args.has("collection") || args.getAll("node").some((value) => normalized(value) === "english");
@@ -1115,6 +1115,60 @@
       seen.add(item.id);
     }
     return data;
+  }
+
+  // web/translation-comparison.mjs
+  var object4 = (x) => x !== null && typeof x === "object" && !Array.isArray(x);
+  var own3 = (x, key2) => Object.hasOwn(x, key2);
+  var text4 = (x) => typeof x === "string" && x.trim().length > 0;
+  var uid = (x) => typeof x === "string" && x.trim() === x && /^[a-z][a-z0-9.-]{0,199}$/.test(x);
+  var sha2 = (x) => typeof x === "string" && /^[0-9a-f]{64}$/.test(x);
+  var clone = (x) => JSON.parse(JSON.stringify(x));
+  var failure = () => {
+    throw Error("The comparison selection or source response is invalid. No comparison translation was displayed.");
+  };
+  var sourceId = (x) => typeof x === "string" && x.trim() === x && !/[\x00-\x1f\x7f]/.test(x) && x.length <= 200 && !x.includes("..") && !/\.html?$/.test(x) && (/^dt:[A-Za-z0-9_./-]+$/.test(x) || /^ati:\/(?:tipitaka|lib|ptf|noncanon)\/[a-z0-9/._-]+$/.test(x) || /^aj:[A-Za-z0-9_./ -]+$/.test(x) && x.trim() === x);
+  function comparisonChoices(choices, requestedId) {
+    if (!uid(requestedId) || !Array.isArray(choices)) failure();
+    const seen = /* @__PURE__ */ new Set(), ordinary = [];
+    for (const choice of choices) {
+      if (!object4(choice)) failure();
+      if (text4(choice.translation_id)) {
+        if (seen.has(choice.translation_id)) failure();
+        seen.add(choice.translation_id);
+      }
+      if ("translation_scope" in choice || choice.whole_unit_coverage === false) continue;
+      if (!sourceId(choice.translation_id) || !text4(choice.translator) || choice.translator.length > 300 || own3(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== true) failure();
+      ordinary.push(clone(choice));
+    }
+    return ordinary;
+  }
+  function comparisonSelection(ids, choices, requestedId) {
+    const ordinary = comparisonChoices(choices, requestedId);
+    if (!Array.isArray(ids) || ids.length < 2 || ids.length > 4 || new Set(ids).size !== ids.length || ids.some((id2) => !sourceId(id2) || !ordinary.some((choice) => choice.translation_id === id2))) failure();
+    return [...ids];
+  }
+  var requestKeys = /* @__PURE__ */ new Set(["uid", "translation", "offset", "limit", "prefix_sha256"]);
+  function request(args, requestedId, choice, expectedLimit) {
+    if (!object4(args) || Object.keys(args).some((key2) => !requestKeys.has(key2)) || args.uid !== requestedId || args.translation !== choice.translation_id || !sourceId(args.translation) || !Number.isSafeInteger(args.limit) || args.limit < 500 || args.limit > 3e4 || expectedLimit !== void 0 && args.limit !== expectedLimit) failure();
+    const offset = own3(args, "offset") ? args.offset : 0;
+    if (!Number.isSafeInteger(offset) || offset < 0 || offset > 2e6 || offset === 0 && own3(args, "prefix_sha256") || offset > 0 && !sha2(args.prefix_sha256)) failure();
+    return offset;
+  }
+  function validateComparisonPage(data, args, context) {
+    if (!object4(context) || !uid(context.uid) || context.accepted != null) failure();
+    const ordinary = comparisonChoices(context.choices, context.uid);
+    const choice = ordinary.find((choice2) => choice2.translation_id === args?.translation);
+    if (!choice) failure();
+    const offset = request(args, context.uid, choice);
+    if (!object4(data) || data.translation_id !== args.translation) throw Error("A different English source was returned for this comparison column. No translation was displayed.");
+    if (data.translator !== choice.translator || data.limit !== args.limit || !sha2(data.prefix_sha256) || offset > 0 && data.prefix_sha256 !== args.prefix_sha256 || "translation_scope" in data || data.whole_unit_coverage === false || typeof data.text !== "string" || data.text.length > args.limit || offset + data.text.length > 2e6 || !own3(data, "next_offset") || data.next_offset !== null && !Number.isSafeInteger(data.next_offset)) failure();
+    const next = validateEnglishPage(data, args, { uid: context.uid, choices: [choice], accepted: null });
+    if (next === null) return null;
+    if (!object4(data.continue_with) || Object.keys(data.continue_with).sort().join(",") !== "arguments,name") failure();
+    const nextOffset = request(next, context.uid, choice, args.limit);
+    if (data.text.length !== args.limit || nextOffset !== offset + data.text.length) failure();
+    return clone(next);
   }
 
   // web/reader.js
@@ -1210,30 +1264,30 @@
       return false;
     }
   }
-  function el(tag, text4, className) {
+  function el(tag, text5, className) {
     const n = document.createElement(tag);
-    if (text4 !== void 0) n.textContent = text4;
+    if (text5 !== void 0) n.textContent = text5;
     if (className) n.className = className;
     return n;
   }
-  function button(text4, fn) {
-    const n = el("button", text4);
+  function button(text5, fn) {
+    const n = el("button", text5);
     n.type = "button";
     n.addEventListener("click", fn);
     return n;
   }
-  function link(text4, href, className) {
-    const n = el("a", text4, className);
+  function link(text5, href, className) {
+    const n = el("a", text5, className);
     n.href = href;
     return n;
   }
-  function external(text4, url) {
+  function external(text5, url) {
     try {
       const u = new URL(url);
-      if (!["http:", "https:"].includes(u.protocol)) return el("span", text4);
-      return link(text4, u.href);
+      if (!["http:", "https:"].includes(u.protocol)) return el("span", text5);
+      return link(text5, u.href);
     } catch {
-      return el("span", text4);
+      return el("span", text5);
     }
   }
   function route(name, args = {}) {
@@ -1258,7 +1312,7 @@
     }
     $("pending-requests").hidden = entries.length === 0;
   } });
-  async function tool(name, args, group = "page") {
+  async function tool(name, args, group = "page", requestLabel = requestLabels[name] || "Reading request") {
     return requests.run(async (signal) => {
       const response = await fetch("/mcp", { method: "POST", signal, headers: { "Content-Type": "application/json", Accept: "application/json, text/event-stream" }, body: JSON.stringify({ jsonrpc: "2.0", id: ++serial, method: "tools/call", params: { name, arguments: args } }) });
       if (!response.ok) throw new Error(response.status === 429 ? "Too many requests. Wait a minute, then try again." : "The text service is unavailable. Try again.");
@@ -1269,7 +1323,7 @@
       const data = result.structuredContent || JSON.parse(result.content?.find((c) => c.type === "text")?.text || "{}");
       if (result.isError || data.error) throw new Error(data.error || "This selection could not be retrieved.");
       return data;
-    }, { group, label: requestLabels[name] || "Reading request" });
+    }, { group, label: requestLabel });
   }
   function notes(data, target = view) {
     const list = [...data.notes || [], ...data.approximate ? ["This source selection is approximate or abbreviated. Missing text has not been reconstructed."] : []];
@@ -1467,8 +1521,8 @@
   }
   async function browseEnglish(args, token) {
     const selection = englishSelection(args);
-    const request = { node: "english", availability: selection.availability, offset: selection.offset, limit: selection.limit, ...selection.collection === null ? {} : { collection: selection.collection } };
-    const response = await tool("browse_canon", request);
+    const request2 = { node: "english", availability: selection.availability, offset: selection.offset, limit: selection.limit, ...selection.collection === null ? {} : { collection: selection.collection } };
+    const response = await tool("browse_canon", request2);
     if (token !== epoch) return;
     const data = englishCatalogue(response, selection);
     heading("EXPLORE THE LIBRARY", "Find English sources");
@@ -1579,27 +1633,27 @@
     persist();
   }
   async function read(args, token) {
-    const book = args.get("book"), uid = args.get("uid") || "dhp183";
+    const book = args.get("book"), uid2 = args.get("uid") || "dhp183";
     let offset = offsetOf(args), plan = null, window2 = null;
     if (args.has("plan")) {
       if (book || args.has("kind")) throw Error("Reading plans require their canonical text selection.");
       const name = args.get("plan"), day = Number(args.get("day"));
       plan = planDay(await tool("reading_plan", { name, day }), name, day);
       if (token !== epoch) return;
-      window2 = planWindow(plan, uid, args.has("offset") ? Number(args.get("offset")) : void 0);
+      window2 = planWindow(plan, uid2, args.has("offset") ? Number(args.get("offset")) : void 0);
       offset = window2.offset;
     }
     const kind = book ? "book" : ["commentary", "post"].includes(args.get("kind")) ? args.get("kind") : "canon";
-    const request = { ...kind === "book" ? { book } : kind === "post" ? { citation: uid } : { uid }, offset, limit: window2?.limit || 30, script: $("script").value };
-    const data = await tool(kind === "commentary" ? "get_commentary" : kind === "post" ? "get_post_canonical" : "get_text", request);
+    const request2 = { ...kind === "book" ? { book } : kind === "post" ? { citation: uid2 } : { uid: uid2 }, offset, limit: window2?.limit || 30, script: $("script").value };
+    const data = await tool(kind === "commentary" ? "get_commentary" : kind === "post" ? "get_post_canonical" : "get_text", request2);
     if (token !== epoch) return;
     if (!Array.isArray(data.segments)) throw new Error("Choose an individual book or passage to read.");
     assertPositionPin(args, data);
     if (args.has("ref") && !data.segments.some((segment) => segment.ref === args.get("ref"))) throw Error("The saved passage reference was not returned at this position. No nearby passage was substituted. Open the source from the Library or check the bookmark\u2019s revision.");
-    if (plan) validatePlanPage(data, plan, uid, window2);
+    if (plan) validatePlanPage(data, plan, uid2, window2);
     if (kind === "post" && data.canonical !== false || kind === "commentary" && !(data.canonical === false && data.content_type === "commentary") && !(typeof data.label === "string" && data.label.startsWith("Commentary") && data.label.includes("not the canon"))) throw new Error("This response lacks the expected non-canonical source label.");
-    const selector = kind === "book" ? "book:" + book : kind === "post" ? "post:" + uid : kind === "canon" ? data.text_id || uid : uid.startsWith("commentary:") ? uid : "commentary-ref:" + uid;
-    heading(kind === "book" ? "COMPLETE VRI SOURCE BOOK" : kind === "commentary" ? "TRADITIONAL COMMENTARY \xB7 NOT CANON" : kind === "post" ? "LATER P\u0100LI WORK \xB7 NOT CANON" : "CANONICAL P\u0100LI", (data.citation ? data.citation + " \xB7 " : "") + (data.title || data.book?.title || data.book_id || uid));
+    const selector = kind === "book" ? "book:" + book : kind === "post" ? "post:" + uid2 : kind === "canon" ? data.text_id || uid2 : uid2.startsWith("commentary:") ? uid2 : "commentary-ref:" + uid2;
+    heading(kind === "book" ? "COMPLETE VRI SOURCE BOOK" : kind === "commentary" ? "TRADITIONAL COMMENTARY \xB7 NOT CANON" : kind === "post" ? "LATER P\u0100LI WORK \xB7 NOT CANON" : "CANONICAL P\u0100LI", (data.citation ? data.citation + " \xB7 " : "") + (data.title || data.book?.title || data.book_id || uid2));
     if (plan) {
       view.append(link("\u2190 Return to plan day " + plan.day, route("plans", { name: plan.name, day: plan.day }), "button"), el("p", plan.title + " \xB7 day " + plan.day + (window2.end === null ? " \xB7 complete selected text" : " \xB7 assigned segments " + (window2.start + 1) + "\u2013" + window2.end) + ". English sources and related material may cover more than this assignment; they are not aligned to this part.", "notice"));
     }
@@ -1632,7 +1686,7 @@
         target.tabIndex = -1;
         target.focus();
       };
-      tools.append(button("English sources", invoke(() => translations(data, uid, token))), button("Traditional commentary", invoke(() => commentary(uid, token))), button("Related texts", invoke(() => relatedTexts(data.text_id || uid, token))), copy, copyFallback);
+      tools.append(button("English sources", invoke(() => translations(data, uid2, token))), button("Traditional commentary", invoke(() => commentary(uid2, token))), button("Related texts", invoke(() => relatedTexts(data.text_id || uid2, token))), copy, copyFallback);
       panel.append(tools);
       toolbar.append(panel);
     } else toolbar.append(copy, copyFallback);
@@ -1669,15 +1723,15 @@
       const actions = el("div", void 0, "segment-actions");
       actions.append(save);
       if (kind !== "commentary" && segment.type !== "heading") {
-        const study = button("Study words", () => wordStudy({ ...kind === "book" ? { book } : { uid: kind === "canon" ? data.text_id || uid : uid }, segment: segment.ref, offset: 0, limit: 15 }, { ref: segment.ref, text: segment.text, source: data.source?.commit, script: $("script").value, kind }, token));
+        const study = button("Study words", () => wordStudy({ ...kind === "book" ? { book } : { uid: kind === "canon" ? data.text_id || uid2 : uid2 }, segment: segment.ref, offset: 0, limit: 15 }, { ref: segment.ref, text: segment.text, source: data.source?.commit, script: $("script").value, kind }, token));
         study.setAttribute("aria-label", "Study words in " + segment.ref);
         actions.append(study);
       }
       row.append(actions);
       part.classList.toggle("marked", active);
-      const text4 = el("p", segment.text, "passage");
-      text4.lang = "pi";
-      part.append(row, text4);
+      const text5 = el("p", segment.text, "passage");
+      text5.lang = "pi";
+      part.append(row, text5);
       passages.append(part);
       if (positionHref) positions.push({ node: part, heading: segment.type === "heading", href: positionHref });
     }
@@ -1721,8 +1775,8 @@
     details.append(el("p", "Source revision: " + scope.source_commit), el("p", "Mapping SHA-256: " + scope.scope_sha256));
     target.append(details);
   }
-  async function translations(data, uid, token) {
-    ++studyEpoch;
+  async function translations(data, uid2, token) {
+    const pickerToken = ++studyEpoch;
     requests.cancelGroup("study");
     const target = $("study");
     target.replaceChildren(el("h3", "English sources"));
@@ -1730,14 +1784,51 @@
       target.append(el("p", "No verified English source is linked to this text. No translation has been generated or substituted.", "notice"));
       return;
     }
-    const context = { uid: data.text_id || uid, citation: data.citation || uid, choices: JSON.parse(JSON.stringify(data.english_available)), accepted: null };
+    const context = { uid: data.text_id || uid2, citation: data.citation || uid2, choices: JSON.parse(JSON.stringify(data.english_available)), accepted: null };
     target.append(el("p", "Choose a publisher\u2019s source page. It can cover more than the current P\u0101li selection; paragraphs are not aligned. Shared and partial sources require a separate scope review before retrieval.", "muted"));
+    const selected = /* @__PURE__ */ new Set(), comparisonInputs = [];
+    let ordinary = [];
+    try {
+      ordinary = comparisonChoices(context.choices, context.uid);
+    } catch (error) {
+      target.append(el("p", error.message, "notice"));
+    }
+    const comparison = el("section", void 0, "comparison-selection");
+    comparison.setAttribute("aria-label", "Compare English source versions");
+    const selectionStatus = el("p", "Select 2\u20134 ordinary source versions. No English is fetched until you press Compare.", "muted");
+    selectionStatus.setAttribute("role", "status");
+    const compare = button("Compare selected sources", () => {
+      if (token === epoch && pickerToken === studyEpoch) compareEnglishSources([...selected], token, context);
+    });
+    compare.disabled = true;
+    comparison.append(el("p", "Shared and partial sources are excluded from comparison. Use their individual scope review and consent controls.", "notice"), selectionStatus, compare);
+    if (ordinary.length >= 2) target.append(comparison);
+    else target.append(el("p", "Comparison requires at least two ordinary source versions. Shared and partial sources keep their individual review and consent controls.", "muted"));
+    function updateComparison() {
+      compare.disabled = selected.size < 2 || selected.size > 4;
+      selectionStatus.textContent = selected.size + " of 4 source versions selected. Select 2\u20134 to compare; selections alone do not retrieve English.";
+      for (const input of comparisonInputs) input.disabled = !input.checked && selected.size >= 4;
+    }
     for (const choice of context.choices) {
       const card = el("article", void 0, "translation-choice");
       card.append(el("h4", choice.translator || choice.translation_id), el("p", [choice.source, choice.reference].filter(Boolean).join(" \xB7 "), "muted"));
       try {
         if (typeof choice.translation_id !== "string" || !/^(dt|ati|aj):.+/.test(choice.translation_id)) throw new Error("This source has no supported exact version identifier. No source was requested.");
         const descriptor = scopeDescriptor(choice, context.uid);
+        if (!descriptor && ordinary.length >= 2 && ordinary.some((c) => c.translation_id === choice.translation_id)) {
+          const label = el("label", void 0, "comparison-checkbox"), input = el("input");
+          input.type = "checkbox";
+          input.value = choice.translation_id;
+          label.append(input, el("span", "Compare \xB7 " + [choice.translator, choice.source, choice.reference, choice.translation_id].filter(Boolean).join(" \xB7 ")));
+          input.addEventListener("change", () => {
+            if (token !== epoch || pickerToken !== studyEpoch) return;
+            if (input.checked) selected.add(choice.translation_id);
+            else selected.delete(choice.translation_id);
+            updateComparison();
+          });
+          comparisonInputs.push(input);
+          card.append(label);
+        }
         if (descriptor) {
           card.append(el("p", descriptor.label + " \xB7 not whole-unit coverage", "notice"), button("Review " + descriptor.label.toLowerCase(), () => reviewTranslationScope(choice, descriptor, context, token)));
         } else card.append(button("Read source \xB7 " + [choice.translator, choice.source, choice.reference].filter(Boolean).join(" \xB7 "), () => englishPage({ uid: context.uid, translation: choice.translation_id, limit: 6e3 }, token, context)));
@@ -1745,6 +1836,82 @@
         card.append(el("p", error.message, "notice"));
       }
       target.append(card);
+    }
+  }
+  function compareEnglishSources(selected, token, context) {
+    if (token !== epoch) return;
+    let ids;
+    try {
+      ids = comparisonSelection(selected, context.choices, context.uid);
+    } catch (error) {
+      $("study").append(el("p", error.message, "notice"));
+      return;
+    }
+    const studyToken = ++studyEpoch, target = studyTarget("Opening the explicitly selected source comparison\u2026");
+    target.replaceChildren(el("h3", "Compare English sources"), el("p", "These are separate publisher pages, not aligned paragraphs or translations of only the displayed P\u0101li passage. Each source may extend beyond your current reading-plan assignment. Review each source\u2019s notes, reference and licence before quoting.", "notice"));
+    target.append(button("Choose English sources", () => {
+      if (token === epoch && studyToken === studyEpoch) translations({ text_id: context.uid, citation: context.citation, english_available: context.choices }, context.uid, token);
+    }));
+    const grid = el("div", void 0, "comparison-grid");
+    target.append(grid);
+    let focusIntent = 0;
+    for (const id2 of ids) {
+      const choice = context.choices.find((c) => c.translation_id === id2), panel = el("article", void 0, "comparison-panel");
+      panel.setAttribute("aria-label", "English comparison source \xB7 " + id2);
+      panel.setAttribute("aria-busy", "false");
+      panel.append(el("h4", [choice.translator, choice.source, choice.reference].filter(Boolean).join(" \xB7 ")), el("p", "Source version: " + id2, "muted"));
+      const message = el("p", "No English requested yet.", "comparison-panel-status");
+      message.setAttribute("role", "status");
+      message.setAttribute("aria-label", "Comparison status \xB7 " + id2);
+      const progress = el("p", void 0, "comparison-progress"), body = el("div", void 0, "comparison-panel-body"), actions = el("div", void 0, "toolbar comparison-actions");
+      panel.append(message, progress, body, actions);
+      grid.append(panel);
+      const state = { serial: 0, busy: false };
+      const current = () => token === epoch && studyToken === studyEpoch && panel.isConnected;
+      async function loadPage(args, moveFocus = false) {
+        if (!current() || state.busy) return;
+        const requestSerial = ++state.serial, focusTicket = moveFocus ? ++focusIntent : null;
+        state.busy = true;
+        panel.setAttribute("aria-busy", "true");
+        const ownsFocus = () => moveFocus && focusTicket === focusIntent && (panel.contains(document.activeElement) || document.activeElement === document.body);
+        for (const control of actions.querySelectorAll("button")) control.disabled = true;
+        message.textContent = "Retrieving this exact source page\u2026";
+        const sameRequest = () => current() && requestSerial === state.serial;
+        try {
+          const data = await tool("get_translation", args, "study", "English comparison " + id2);
+          if (!sameRequest()) return;
+          const next = validateComparisonPage(data, args, { uid: context.uid, choices: [choice], accepted: null });
+          const content = el("div");
+          notes(data, content);
+          content.append(el("p", data.text, "translation"));
+          provenance(data, content);
+          body.replaceChildren(content);
+          progress.textContent = "English characters " + (data.offset + 1) + "\u2013" + (data.offset + data.text.length) + (next ? " \xB7 more pages available" : " \xB7 end of this source");
+          message.textContent = "Selected source page loaded.";
+          actions.replaceChildren();
+          if (next) actions.append(button("Next English page \u2192", () => loadPage(next, true)));
+          if (ownsFocus()) {
+            progress.tabIndex = -1;
+            progress.focus({ preventScroll: true });
+          }
+        } catch (error) {
+          if (!sameRequest()) return;
+          message.textContent = error.message + (body.textContent ? " The previously loaded page remains shown." : "");
+          actions.replaceChildren(button("Retry this source page", () => loadPage(args, true)));
+          if (!body.textContent) progress.textContent = "No source text has been displayed.";
+          if (ownsFocus()) {
+            message.tabIndex = -1;
+            message.focus({ preventScroll: true });
+          }
+        } finally {
+          if (sameRequest()) {
+            state.busy = false;
+            panel.setAttribute("aria-busy", "false");
+            for (const control of actions.querySelectorAll("button")) control.disabled = false;
+          }
+        }
+      }
+      loadPage({ uid: context.uid, translation: id2, limit: 6e3 });
     }
   }
   function reviewTranslationScope(choice, descriptor, context, token) {
@@ -1787,18 +1954,18 @@
       if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el("p", error.message, "notice"), button("Retry selected source", () => englishPage(args, token, context)), button("Reload passage and review sources", render));
     }
   }
-  async function commentary(uid, token, offset = 0) {
+  async function commentary(uid2, token, offset = 0) {
     const studyToken = ++studyEpoch;
     requests.cancelGroup("study");
     const target = $("study");
     target.replaceChildren(el("p", "Opening commentary\u2026"));
     try {
-      const data = await tool("get_commentary", { uid, offset, limit: 20, script: $("script").value }, "study");
+      const data = await tool("get_commentary", { uid: uid2, offset, limit: 20, script: $("script").value }, "study");
       if (token !== epoch || studyToken !== studyEpoch) return;
       target.replaceChildren(el("h3", "Traditional commentary \xB7 not canonical root text"));
       notes(data, target);
       for (const segment of data.segments || []) target.append(el("p", segment.text, "passage"));
-      if (data.next_offset !== null && data.next_offset !== void 0) target.append(button("Next commentary page \u2192", () => commentary(uid, token, data.next_offset)));
+      if (data.next_offset !== null && data.next_offset !== void 0) target.append(button("Next commentary page \u2192", () => commentary(uid2, token, data.next_offset)));
       if (data.available === false || !data.segments?.length) target.append(el("p", "No verified aligned commentary is available for this selection.", "notice"));
       provenance(data, target);
     } catch (error) {
@@ -1863,10 +2030,10 @@
       if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el("p", error.message, "notice"), button("Retry this word study", () => wordStudy(args, expected, token)));
     }
   }
-  async function relatedTexts(uid, token, offset = 0) {
+  async function relatedTexts(uid2, token, offset = 0) {
     const studyToken = ++studyEpoch, target = studyTarget("Finding recorded related passages\u2026");
     try {
-      const data = await tool("get_parallels", { uid, offset, limit: 10 }, "study");
+      const data = await tool("get_parallels", { uid: uid2, offset, limit: 10 }, "study");
       if (token !== epoch || studyToken !== studyEpoch) return;
       if (typeof data.available !== "boolean" || !Array.isArray(data.links)) throw new Error("The related-text response is incomplete. No absence of relationships can be inferred.");
       target.replaceChildren(el("h3", "Related texts \xB7 evidence, not interpretation"));
@@ -1886,15 +2053,15 @@
         target.append(card);
       }
       const pagination = el("div", void 0, "toolbar");
-      if (offset > 0) pagination.append(button("\u2190 Previous related links", () => relatedTexts(uid, token, Math.max(0, offset - 10))));
-      if (data.next_offset !== null && data.next_offset !== void 0) pagination.append(button("Next related links \u2192", () => relatedTexts(uid, token, data.next_offset)));
+      if (offset > 0) pagination.append(button("\u2190 Previous related links", () => relatedTexts(uid2, token, Math.max(0, offset - 10))));
+      if (data.next_offset !== null && data.next_offset !== void 0) pagination.append(button("Next related links \u2192", () => relatedTexts(uid2, token, data.next_offset)));
       target.append(pagination);
       if (data.suttacentral_parallels?.url) {
         target.append(el("p", data.suttacentral_parallels.note, "muted"), external("Explore external parallels (link only)", data.suttacentral_parallels.url));
       }
       provenance(data, target);
     } catch (error) {
-      if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el("p", error.message, "notice"), button("Retry related-text lookup", () => relatedTexts(uid, token, offset)));
+      if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el("p", error.message, "notice"), button("Retry related-text lookup", () => relatedTexts(uid2, token, offset)));
     }
   }
   async function dictionary(args, token) {
@@ -2142,8 +2309,8 @@
     input.value = query;
     input.maxLength = 200;
     label.append(input);
-    for (const [value, text4] of [["all", "All entries"], ["subject", "Subject index"], ["numerical", "Numerical index"]]) {
-      const option = el("option", text4);
+    for (const [value, text5] of [["all", "All entries"], ["subject", "Subject index"], ["numerical", "Numerical index"]]) {
+      const option = el("option", text5);
       option.value = value;
       filter.append(option);
     }
@@ -2272,32 +2439,32 @@
     preview.className = "import-preview";
     section.append(label, el("p", "Choose your exported plan marks. The file stays on this device. Preview before adding marks; existing days and source signatures are kept. Maximum 16 MiB and 1,600 marks.", "muted"), preview);
     let generation = 0;
-    const failure = (error) => {
+    const failure2 = (error) => {
       const title = el("h3", "Unable to restore reading progress");
       title.tabIndex = -1;
       preview.replaceChildren(title, el("p", error.message, "notice"));
       title.focus();
     };
     input.addEventListener("change", async () => {
-      const request = ++generation, file = input.files?.[0];
+      const request2 = ++generation, file = input.files?.[0];
       preview.replaceChildren();
       if (!file) return;
       try {
         if (file.size > MAX_PROGRESS_BYTES) throw Error("Choose a progress export no larger than 16 MiB. Nothing was restored.");
-        const text4 = await file.text();
-        if (request !== generation || token !== epoch) return;
-        if (new TextEncoder().encode(text4).length > MAX_PROGRESS_BYTES) throw Error("Choose a progress export no larger than 16 MiB. Nothing was restored.");
+        const text5 = await file.text();
+        if (request2 !== generation || token !== epoch) return;
+        if (new TextEncoder().encode(text5).length > MAX_PROGRESS_BYTES) throw Error("Choose a progress export no larger than 16 MiB. Nothing was restored.");
         let snapshot;
         try {
           snapshot = localStorage.getItem(KEY);
         } catch {
         }
         if (snapshot !== void 0 && !readingPointerOnlyChange(storageSnapshot, snapshot)) throw Error("Browser data changed in another tab. Reload this page before restoring; no marks were restored.");
-        const incoming = parseProgress(text4, catalog), merge = mergeProgress(local.reading_progress, incoming), title = el("h3", "Review reading progress");
+        const incoming = parseProgress(text5, catalog), merge = mergeProgress(local.reading_progress, incoming), title = el("h3", "Review reading progress");
         title.tabIndex = -1;
         preview.replaceChildren(title, el("p", file.name), el("p", merge.added + " new marks \xB7 " + merge.duplicates + " already saved \xB7 " + merge.conflicts + " conflicting days kept as they are.", "notice"), el("p", "Imported marks are self-reported. Their saved assignments and source revisions are retained, not verified against every current plan day. Open a day to check whether its mark still applies.", "muted"));
         if (merge.added) preview.append(button("Add " + merge.added + " reading marks", () => {
-          if (request !== generation || token !== epoch) return;
+          if (request2 !== generation || token !== epoch) return;
           try {
             if (snapshot !== void 0 && !readingPointerOnlyChange(snapshot, localStorage.getItem(KEY))) throw Error("Browser data changed while previewing this file. Reload this page and preview again; no marks were restored.");
             const current = mergeProgress(local.reading_progress, incoming);
@@ -2310,7 +2477,7 @@
             status2.textContent = durable ? "Reading marks restored in this browser only." : storageWarning();
             done.focus();
           } catch (error) {
-            failure(error);
+            failure2(error);
           }
         }));
         else preview.append(el("p", "No new marks to add."));
@@ -2321,7 +2488,7 @@
         }));
         title.focus();
       } catch (error) {
-        if (request === generation && token === epoch) failure(error);
+        if (request2 === generation && token === epoch) failure2(error);
       }
     });
     return section;
@@ -2346,13 +2513,13 @@
     let generation = 0;
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      const request = ++generation, quote = input.value.trim();
+      const request2 = ++generation, quote = input.value.trim();
       result.replaceChildren(el("p", "Comparing with bundled canonical P\u0101li\u2026"));
       result.setAttribute("aria-busy", "true");
       submit.disabled = true;
       try {
         const data = await tool("verify_quote", { text: quote, language: "pali", limit: 5 });
-        if (token !== epoch || request !== generation) return;
+        if (token !== epoch || request2 !== generation) return;
         validatePaliQuote(data, quote);
         const labels = { found: "Matching wording found", close_paraphrase: "Similar wording found", not_found_in_scope: "Not found in the searched scope" };
         result.replaceChildren(el("h3", labels[data.verdict]), el("p", "Submitted quotation", "muted"), el("p", quote, "translation"), el("p", data.explanation, "notice"), el("p", data.scope.searched), el("p", data.comparison.note), el("p", data.guidance, "muted"));
@@ -2374,11 +2541,11 @@
         result.focus({ preventScroll: true });
         result.scrollIntoView({ block: "start" });
       } catch (error) {
-        if (token !== epoch || request !== generation) return;
+        if (token !== epoch || request2 !== generation) return;
         result.replaceChildren(el("h3", "Unable to check this quotation"), el("p", error.message, "notice"));
         result.focus({ preventScroll: true });
       } finally {
-        if (token === epoch && request === generation) {
+        if (token === epoch && request2 === generation) {
           submit.disabled = false;
           result.removeAttribute("aria-busy");
         }
@@ -2399,14 +2566,14 @@
     section.append(preview);
     let generation = 0;
     input.addEventListener("change", async () => {
-      const file = input.files[0], request = ++generation;
+      const file = input.files[0], request2 = ++generation;
       input.value = "";
       if (!file) return;
       preview.replaceChildren(el("p", "Reading the local export\u2026"));
       try {
         if (file.size > MAX_IMPORT_BYTES) throw Error("This file exceeds 16 MiB. Nothing was imported.");
         const incoming = parseBookmarks(await file.text());
-        if (request !== generation || token !== epoch) return;
+        if (request2 !== generation || token !== epoch) return;
         const merge = bookmarkMerge(local.saved, incoming), title = el("h3", "Review bookmark import");
         title.tabIndex = -1;
         preview.replaceChildren(title, el("p", file.name), el("p", merge.added.length + " new bookmarks \xB7 " + merge.skipped + " already saved. Existing notes will not be overwritten.", "notice"));
@@ -2416,7 +2583,7 @@
           preview.append(list);
           if (merge.added.length > 10) preview.append(el("p", "And " + (merge.added.length - 10) + " more."));
           preview.append(button("Add " + merge.added.length + " new bookmarks", () => {
-            if (token !== epoch || request !== generation) return;
+            if (token !== epoch || request2 !== generation) return;
             try {
               const current = bookmarkMerge(local.saved, incoming);
               local.saved = current.saved;
@@ -2435,7 +2602,7 @@
         }));
         title.focus();
       } catch (error) {
-        if (request === generation && token === epoch) preview.replaceChildren(el("p", error.message, "notice"));
+        if (request2 === generation && token === epoch) preview.replaceChildren(el("p", error.message, "notice"));
       }
     });
     return section;
@@ -2564,7 +2731,7 @@
   }
   function about() {
     heading("A LIBRARY, NOT A TEACHER", "Read with the source in view.");
-    for (const text4 of ["The bundled P\u0101li is retrieved from the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition. Scripture is never generated or reconstructed. Abbreviations and uncertain alignments stay labelled.", "English translations are available for a subset of texts and fetched only after you choose them. Translators\u2019 wording is not silently exchanged. Commentary is labelled separately from canonical text.", "VRI and several translation/dictionary sources carry non-commercial terms. This reading interface adds no permission to redistribute, translate or commercialize their work.", "Your saved passages, notes, manual reading-plan marks and preferences are stored in this browser. The app has no accounts, advertising, analytics, cloud sync or offline web download. The server may hold your IP temporarily for rate limiting; deployment providers may keep separate infrastructure logs."]) view.append(el("p", text4));
+    for (const text5 of ["The bundled P\u0101li is retrieved from the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition. Scripture is never generated or reconstructed. Abbreviations and uncertain alignments stay labelled.", "English translations are available for a subset of texts and fetched only after you choose them. Translators\u2019 wording is not silently exchanged. Commentary is labelled separately from canonical text.", "VRI and several translation/dictionary sources carry non-commercial terms. This reading interface adds no permission to redistribute, translate or commercialize their work.", "Your saved passages, notes, manual reading-plan marks and preferences are stored in this browser. The app has no accounts, advertising, analytics, cloud sync or offline web download. The server may hold your IP temporarily for rate limiting; deployment providers may keep separate infrastructure logs."]) view.append(el("p", text5));
     const links = el("div", void 0, "toolbar");
     links.append(external("Source and licence register", "https://github.com/DaniilKi/pali-canon-claude/blob/dev/pali-reliability/THIRD_PARTY.md"), external("Project and complete MCP toolset", "https://github.com/DaniilKi/pali-canon-claude"));
     view.append(links);

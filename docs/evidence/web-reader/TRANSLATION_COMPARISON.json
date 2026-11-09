@@ -1,0 +1,74 @@
+{
+  "decision": "D218",
+  "baseline_commit": "fd1b50b70efd9d43c249cfdb7d6b0b386164c556",
+  "observed_on": "2026-11-09",
+  "feature": "explicit-web-ordinary-source-comparison",
+  "source_changes": false,
+  "dataset_changes": false,
+  "licence_approvals": false,
+  "main_merge_or_deployment": false,
+  "metadata_scope": {
+    "confirmed_primary_records_checked": 8180,
+    "records_with_two_or_more_ordinary_source_choices": 1204,
+    "format_errors": 0,
+    "not_claimed": "Independent translators, full individual English correspondence, source accuracy approval or word-level alignment."
+  },
+  "local_validation": {
+    "new_policy_tests": 9,
+    "new_and_existing_policy_tests": 20,
+    "full_check": {
+      "tests": 1161,
+      "passed": 1159,
+      "failed": 0,
+      "existing_optional_skips": 2,
+      "audit_texts": 8544,
+      "audit_failures": 0
+    },
+    "smoke": {
+      "tools": 34,
+      "checks": 64
+    },
+    "evals": {
+      "passed": 195,
+      "live_skipped": 6,
+      "failed": 0
+    },
+    "existing_reader_regression": 173,
+    "actual_pinned_partial_regression": {
+      "sources": 18,
+      "checks": 260
+    }
+  },
+  "browser": {
+    "normal": {
+      "checks": 60,
+      "scans": 0,
+      "violations": 0
+    },
+    "installed": {
+      "checks": 60,
+      "scans": 0,
+      "violations": 0
+    },
+    "a11y": {
+      "checks": 120,
+      "scans": 40,
+      "violations": 0
+    }
+  },
+  "review": {
+    "cross_review_completed": true,
+    "outstanding_concrete_findings": 0,
+    "reproduced_and_fixed": [
+      "320px large-font unbroken-token overflow in existing single-source body.",
+      "Delayed comparison success/error could steal focus from another source."
+    ]
+  },
+  "ci": "Required on exact integrated head; GitHub checks provide the final external receipt.",
+  "limits": [
+    "All new comparison English responses and full notices are explicit synthetic contract fixtures; actual Pali and metadata are bundled.",
+    "No live-publisher freshness, translation accuracy, new rights approval, physical-device or human accessibility certification.",
+    "Shared/partial comparison remains unavailable; existing individual review and consent are preserved.",
+    "Patthana remains assessment-only."
+  ]
+}

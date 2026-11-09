@@ -13,6 +13,7 @@ import { createRequestPool } from './request-lifecycle.mjs';
 import { readingPosition, assertPositionPin, sourceRevision } from './reading-position.mjs';
 import { guardedStorageWrite, guardedPositionWrite, readingPointerOnlyChange } from './local-storage-write.mjs';
 import { ENGLISH_AVAILABILITY, englishBrowseCandidate, englishSelection, englishRoute, englishCatalogue, englishBadges } from './english-catalogue.mjs';
+import { comparisonChoices, comparisonSelection, validateComparisonPage } from './translation-comparison.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
@@ -55,7 +56,7 @@ const requests = createRequestPool({ onChange(entries) {
   for (const entry of entries) if (!requestRows.has(entry.id)) { const row = el('div', undefined, 'request-row'), stop = button('Stop waiting', entry.stop); row.dataset.group = entry.group; stop.setAttribute('aria-label', 'Stop waiting for ' + entry.label); row.append(el('span', 'Waiting for ' + entry.label + '…'), stop); $('request-controls').append(row); requestRows.set(entry.id, row); }
   $('pending-requests').hidden = entries.length === 0;
 } });
-async function tool(name, args, group = 'page') {
+async function tool(name, args, group = 'page', requestLabel = requestLabels[name] || 'Reading request') {
   return requests.run(async signal => {
     const response = await fetch('/mcp', { method: 'POST', signal, headers: { 'Content-Type': 'application/json', Accept: 'application/json, text/event-stream' }, body: JSON.stringify({ jsonrpc: '2.0', id: ++serial, method: 'tools/call', params: { name, arguments: args } }) });
     if (!response.ok) throw new Error(response.status === 429 ? 'Too many requests. Wait a minute, then try again.' : 'The text service is unavailable. Try again.');
@@ -66,7 +67,7 @@ async function tool(name, args, group = 'page') {
     const data = result.structuredContent || JSON.parse(result.content?.find(c => c.type === 'text')?.text || '{}');
     if (result.isError || data.error) throw new Error(data.error || 'This selection could not be retrieved.');
     return data;
-  }, { group, label: requestLabels[name] || 'Reading request' });
+  }, { group, label: requestLabel });
 }
 function notes(data, target = view) {
   const list = [...(data.notes || []), ...(data.approximate ? ['This source selection is approximate or abbreviated. Missing text has not been reconstructed.'] : [])];
@@ -295,19 +296,89 @@ function scopeSummary(descriptor, target) {
   const details = el('details'); details.append(el('summary', 'Reviewed scope version')); details.append(el('p', 'Source revision: ' + scope.source_commit), el('p', 'Mapping SHA-256: ' + scope.scope_sha256)); target.append(details);
 }
 async function translations(data, uid, token) {
-  ++studyEpoch; requests.cancelGroup('study'); const target = $('study'); target.replaceChildren(el('h3', 'English sources'));
+  const pickerToken = ++studyEpoch; requests.cancelGroup('study'); const target = $('study'); target.replaceChildren(el('h3', 'English sources'));
   if (!data.english_available?.length) { target.append(el('p', 'No verified English source is linked to this text. No translation has been generated or substituted.', 'notice')); return; }
   const context = { uid: data.text_id || uid, citation: data.citation || uid, choices: JSON.parse(JSON.stringify(data.english_available)), accepted: null };
   target.append(el('p', 'Choose a publisher’s source page. It can cover more than the current Pāli selection; paragraphs are not aligned. Shared and partial sources require a separate scope review before retrieval.', 'muted'));
+  const selected = new Set(), comparisonInputs = [];
+  let ordinary = [];
+  try { ordinary = comparisonChoices(context.choices, context.uid); }
+  catch (error) { target.append(el('p', error.message, 'notice')); }
+  const comparison = el('section', undefined, 'comparison-selection'); comparison.setAttribute('aria-label', 'Compare English source versions');
+  const selectionStatus = el('p', 'Select 2–4 ordinary source versions. No English is fetched until you press Compare.', 'muted'); selectionStatus.setAttribute('role', 'status');
+  const compare = button('Compare selected sources', () => { if (token === epoch && pickerToken === studyEpoch) compareEnglishSources([...selected], token, context); }); compare.disabled = true;
+  comparison.append(el('p', 'Shared and partial sources are excluded from comparison. Use their individual scope review and consent controls.', 'notice'), selectionStatus, compare);
+  if (ordinary.length >= 2) target.append(comparison);
+  else target.append(el('p', 'Comparison requires at least two ordinary source versions. Shared and partial sources keep their individual review and consent controls.', 'muted'));
+  function updateComparison() {
+    compare.disabled = selected.size < 2 || selected.size > 4;
+    selectionStatus.textContent = selected.size + ' of 4 source versions selected. Select 2–4 to compare; selections alone do not retrieve English.';
+    for (const input of comparisonInputs) input.disabled = !input.checked && selected.size >= 4;
+  }
   for (const choice of context.choices) {
     const card = el('article', undefined, 'translation-choice'); card.append(el('h4', choice.translator || choice.translation_id), el('p', [choice.source, choice.reference].filter(Boolean).join(' · '), 'muted'));
     try {
       if (typeof choice.translation_id !== 'string' || !/^(dt|ati|aj):.+/.test(choice.translation_id)) throw new Error('This source has no supported exact version identifier. No source was requested.');
       const descriptor = scopeDescriptor(choice, context.uid);
+      if (!descriptor && ordinary.length >= 2 && ordinary.some(c => c.translation_id === choice.translation_id)) {
+        const label = el('label', undefined, 'comparison-checkbox'), input = el('input'); input.type = 'checkbox'; input.value = choice.translation_id;
+        label.append(input, el('span', 'Compare · ' + [choice.translator, choice.source, choice.reference, choice.translation_id].filter(Boolean).join(' · ')));
+        input.addEventListener('change', () => { if (token !== epoch || pickerToken !== studyEpoch) return; if (input.checked) selected.add(choice.translation_id); else selected.delete(choice.translation_id); updateComparison(); });
+        comparisonInputs.push(input); card.append(label);
+      }
       if (descriptor) { card.append(el('p', descriptor.label + ' · not whole-unit coverage', 'notice'), button('Review ' + descriptor.label.toLowerCase(), () => reviewTranslationScope(choice, descriptor, context, token))); }
       else card.append(button('Read source · ' + [choice.translator, choice.source, choice.reference].filter(Boolean).join(' · '), () => englishPage({ uid: context.uid, translation: choice.translation_id, limit: 6000 }, token, context)));
     } catch (error) { card.append(el('p', error.message, 'notice')); }
     target.append(card);
+  }
+}
+function compareEnglishSources(selected, token, context) {
+  if (token !== epoch) return;
+  let ids;
+  try { ids = comparisonSelection(selected, context.choices, context.uid); }
+  catch (error) { $('study').append(el('p', error.message, 'notice')); return; }
+  const studyToken = ++studyEpoch, target = studyTarget('Opening the explicitly selected source comparison…');
+  target.replaceChildren(el('h3', 'Compare English sources'), el('p', 'These are separate publisher pages, not aligned paragraphs or translations of only the displayed Pāli passage. Each source may extend beyond your current reading-plan assignment. Review each source’s notes, reference and licence before quoting.', 'notice'));
+  target.append(button('Choose English sources', () => { if (token === epoch && studyToken === studyEpoch) translations({ text_id: context.uid, citation: context.citation, english_available: context.choices }, context.uid, token); }));
+  const grid = el('div', undefined, 'comparison-grid'); target.append(grid);
+  let focusIntent = 0;
+  for (const id of ids) {
+    const choice = context.choices.find(c => c.translation_id === id), panel = el('article', undefined, 'comparison-panel');
+    panel.setAttribute('aria-label', 'English comparison source · ' + id); panel.setAttribute('aria-busy', 'false');
+    panel.append(el('h4', [choice.translator, choice.source, choice.reference].filter(Boolean).join(' · ')), el('p', 'Source version: ' + id, 'muted'));
+    const message = el('p', 'No English requested yet.', 'comparison-panel-status'); message.setAttribute('role', 'status'); message.setAttribute('aria-label', 'Comparison status · ' + id);
+    const progress = el('p', undefined, 'comparison-progress'), body = el('div', undefined, 'comparison-panel-body'), actions = el('div', undefined, 'toolbar comparison-actions');
+    panel.append(message, progress, body, actions); grid.append(panel);
+    const state = { serial: 0, busy: false };
+    const current = () => token === epoch && studyToken === studyEpoch && panel.isConnected;
+    async function loadPage(args, moveFocus = false) {
+      if (!current() || state.busy) return;
+      const requestSerial = ++state.serial, focusTicket = moveFocus ? ++focusIntent : null; state.busy = true; panel.setAttribute('aria-busy', 'true');
+      const ownsFocus = () => moveFocus && focusTicket === focusIntent && (panel.contains(document.activeElement) || document.activeElement === document.body);
+      for (const control of actions.querySelectorAll('button')) control.disabled = true;
+      message.textContent = 'Retrieving this exact source page…';
+      const sameRequest = () => current() && requestSerial === state.serial;
+      try {
+        const data = await tool('get_translation', args, 'study', 'English comparison ' + id); if (!sameRequest()) return;
+        const next = validateComparisonPage(data, args, { uid: context.uid, choices: [choice], accepted: null });
+        const content = el('div'); notes(data, content); content.append(el('p', data.text, 'translation')); provenance(data, content);
+        body.replaceChildren(content);
+        progress.textContent = 'English characters ' + (data.offset + 1) + '–' + (data.offset + data.text.length) + (next ? ' · more pages available' : ' · end of this source');
+        message.textContent = 'Selected source page loaded.';
+        actions.replaceChildren();
+        if (next) actions.append(button('Next English page →', () => loadPage(next, true)));
+        if (ownsFocus()) { progress.tabIndex = -1; progress.focus({ preventScroll: true }); }
+      } catch (error) {
+        if (!sameRequest()) return;
+        message.textContent = error.message + (body.textContent ? ' The previously loaded page remains shown.' : '');
+        actions.replaceChildren(button('Retry this source page', () => loadPage(args, true)));
+        if (!body.textContent) progress.textContent = 'No source text has been displayed.';
+        if (ownsFocus()) { message.tabIndex = -1; message.focus({ preventScroll: true }); }
+      } finally {
+        if (sameRequest()) { state.busy = false; panel.setAttribute('aria-busy', 'false'); for (const control of actions.querySelectorAll('button')) control.disabled = false; }
+      }
+    }
+    loadPage({ uid: context.uid, translation: id, limit: 6000 });
   }
 }
 function reviewTranslationScope(choice, descriptor, context, token) {

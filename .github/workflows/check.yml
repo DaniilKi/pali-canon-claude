@@ -78,7 +78,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance]
+        group: [core, study, personal, provenance, comparison]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -169,6 +169,19 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/english-package"
           tar -xzf "$RUNNER_TEMP/english-package/"*.tgz -C "$RUNNER_TEMP/english-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-english-catalogue-check.py --server-dir "$RUNNER_TEMP/english-package/package/server" --report installed-english-catalogue.report.json
+      - name: Check explicit English-source comparison and independent continuations
+        if: matrix.group == 'comparison'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-comparison-check.py --report standalone-comparison.report.json
+      - name: Audit English comparison in both themes
+        if: matrix.group == 'comparison'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-comparison-check.py --a11y --report standalone-comparison-a11y.report.json
+      - name: Check installed English comparison outside the source tree
+        if: matrix.group == 'comparison'
+        run: |
+          mkdir -p "$RUNNER_TEMP/comparison-package"
+          npm pack --pack-destination "$RUNNER_TEMP/comparison-package"
+          tar -xzf "$RUNNER_TEMP/comparison-package/"*.tgz -C "$RUNNER_TEMP/comparison-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-comparison-check.py --server-dir "$RUNNER_TEMP/comparison-package/package/server" --report installed-comparison.report.json
       - name: Check local reading-progress restore and source-signature preservation
         if: matrix.group == 'personal'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-progress-check.py --report standalone-progress.report.json
@@ -231,6 +244,9 @@ jobs:
             installed-english-catalogue.report.json
             standalone-english-catalogue.report.json
             standalone-english-catalogue-a11y.report.json
+            standalone-comparison.report.json
+            standalone-comparison-a11y.report.json
+            installed-comparison.report.json
             standalone-quote.report.json
             standalone-quote-a11y.report.json
             standalone-progress.report.json

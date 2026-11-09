@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Real bundled-corpus browser journeys; no remote text source required. python scripts/web-reader-browser-check.py"""
 from web_reader_test_helpers import read_tool, find_control
-import json, os, pathlib, socket, subprocess, time, urllib.request
+import json, os, pathlib, re, socket, subprocess, time, urllib.request
 from playwright.sync_api import sync_playwright, expect
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 with socket.socket() as sock:
@@ -65,7 +65,7 @@ try:
     result={'text_id':'dhp183','translator':'Synthetic pagination fixture','text':'FIXTURE FIRST PAGE','translation_id':args['translation'],'license':'Synthetic test data','attribution':'Synthetic test attribution','offset':0,'next_offset':500,'continue_with':{'name':'get_translation','arguments':continuation}}
     if args.get('offset')==500: result={'text_id':'dhp183','translator':'Synthetic pagination fixture','text':'FIXTURE SECOND PAGE','translation_id':args['translation'],'license':'Synthetic test data','attribution':'Synthetic test attribution','offset':500,'next_offset':None}
     route.fulfill(status=200,content_type='application/json',body=json.dumps({'jsonrpc':'2.0','id':data['id'],'result':{'structuredContent':result}}))
-   page.route('**/mcp',paged_translation); read_tool(page, 'English sources').click(); page.locator('#study button').first.click(); page.locator('#study .translation').filter(has_text='FIXTURE FIRST PAGE').wait_for()
+   page.route('**/mcp',paged_translation); read_tool(page, 'English sources').click(); page.get_by_role('button',name=re.compile(r'^Read source · ')).first.click(); page.locator('#study .translation').filter(has_text='FIXTURE FIRST PAGE').wait_for()
    page.get_by_role('button',name='Next English page →',exact=True).click(); page.locator('#study .translation').filter(has_text='FIXTURE SECOND PAGE').wait_for(); assert translation_requests[-1]==continuation; passed(width,'translation continuation preserves exact selector and source-prefix guard')
    page.unroute('**/mcp')
    # Intercept selected translation, switch studies, then resolve it. Stale result must not replace commentary.
@@ -75,7 +75,7 @@ try:
     data=route.request.post_data_json
     if data.get('params',{}).get('name')=='get_translation': pending.append(route)
     else: route.continue_()
-   page.route('**/mcp',hold_translation); page.locator('#study button').first.click(); page.wait_for_timeout(100)
+   page.route('**/mcp',hold_translation); page.get_by_role('button',name=re.compile(r'^Read source · ')).first.click(); page.wait_for_timeout(100)
    read_tool(page, 'Traditional commentary').click(); page.locator('#study .passage').first.wait_for()
    assert len(pending)==1
    pending[0].fulfill(status=200,content_type='application/json',body=json.dumps({'jsonrpc':'2.0','id':1,'result':{'structuredContent':{'text':'STALE TRANSLATION FIXTURE','translator':'Synthetic'}}}))
