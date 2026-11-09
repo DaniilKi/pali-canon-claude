@@ -76,3 +76,8 @@ main:focus{outline:none}
 
 /* Whole-file search remains separate from canonical citation search. */
 .book-search-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;align-items:end;flex-basis:100%;min-width:0;max-width:720px}.book-search-form label{min-width:0}.book-search-form input{display:block;width:100%;margin-top:5px}.book-search-form [role=alert]{grid-column:1/-1;overflow-wrap:anywhere}.book-catalogue-card{min-width:0}.book-catalogue-card>.button{display:inline-block;margin-top:10px}.book-search-results{min-width:0;overflow-wrap:anywhere}.book-search-results h3{font-size:18px;overflow-wrap:anywhere}.book-search-results .button{display:inline-block;margin:10px 8px 0 0}
+
+/* Source context and chapter choices live inside the existing reading tools. */
+.source-context,.chapter-navigation{flex-basis:100%;min-width:0;overflow-wrap:anywhere}.source-context h3{font-size:19px;margin:12px 0}.reading-context-status{font-size:13px;line-height:1.5;margin-block:4px;overflow-wrap:anywhere}.chapter-picker{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;align-items:end;max-width:720px;margin-block:12px}.chapter-picker label{min-width:0}.chapter-picker select{display:block;width:100%;margin-top:5px}.chapter-picker p{grid-column:1/-1;margin:0;font-size:13px;overflow-wrap:anywhere}
+/* Keep the position count close to the compact source status; intervening warnings keep their spacing. */
+.reading-context-status + p.muted{margin-top:8px}

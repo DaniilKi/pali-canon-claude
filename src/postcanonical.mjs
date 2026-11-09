@@ -430,11 +430,17 @@ export function segmentsOf(blocks, { includeVariants = false, includeSourcePosit
 }
 
 function summary(d, sel) {
+  const logical = sel.work === 'vism' || sel.work === 'abhidh-s';
+  const hasChapters = sel.work === 'vism' ? vismChapters(d).length > 0
+    : sel.work === 'abhidh-s' ? sel.book.chapters.some(([, start]) => start < workEnd(sel.book, 0)) : sel.book.chapters.length > 0;
   return {
     canonical: false, label: labelFor(sel), citation: sel.citation, title: sel.title, kind: sel.kind,
     ...(sel.chapter ? { chapter: sel.chapter } : {}), ...(sel.paragraph ? { vri_paragraph: sel.paragraph } : {}),
     ...(sel.approximate ? { approximate: true } : {}),
     book: bookInfo(sel.book), ...(sel.chapters ? { chapters: sel.chapters } : {}),
+    ...(hasChapters ? { chapter_index: { scope: logical ? 'work' : 'source_file', read_with: {
+      tool: 'get_post_canonical', citation: sel.work === 'vism' ? 'Vism' : sel.work === 'abhidh-s' ? 'Abhidh-s' : sel.book.id, offset: 0, limit: 1,
+    } } } : {}),
     notes: sel.notes || [], source: sourceInfo(d),
   };
 }

@@ -17,6 +17,7 @@ import { comparisonChoices, comparisonSelection, validateComparisonPage } from '
 import { passageNoteKey, passageNoteState, passageNoteRemovalNeedsConfirmation, passageNoteTransaction, restorePassageNoteTransaction } from './passage-notes.mjs';
 import { readingPagePosition, assertPageRequest, assertPagePin, readingPageBounds, readingJumpOffset } from './reading-navigation.mjs';
 import { savedPassageHighlighted } from './saved-highlights.mjs';
+import { validateChapterIndex, validateChapterMenu, chapterLink, readingIntro } from './reading-chapters.mjs';
 import { bookSearchSelection, bookSearchRoute, bookSearchCatalogue, validateBookSearchPage, bookSearchHitLinks } from './book-search.mjs';
 import { reviewBackupNoteConflicts } from './backup-note-conflicts.mjs';
 import { MAX_STUDY_BACKUP_BYTES, createStudyBackup, parseStudyBackup, mergeStudyBackup } from './study-backup.mjs';
@@ -349,6 +350,52 @@ function attachPassageNote(selector, data, segment, container, control, token) {
   });
   show();
 }
+function attachChapterNavigation(data, args, host, token) {
+  const section = el('section', undefined, 'chapter-navigation'); section.setAttribute('aria-label', 'Source chapters');
+  let generation = 0, authority;
+  const alive = () => token === epoch && section.isConnected;
+  const warning = error => {
+    const message = el('p', error.message, 'notice'); message.setAttribute('role', 'alert'); section.replaceChildren(message);
+    if (error.code === 'READING_SOURCE_CHANGED') { const review = new URLSearchParams(args); review.delete('source'); review.delete('page_source'); section.append(link('Review current reading source', '#read?' + review, 'button')); }
+  };
+  function show(menu, focusOwned = false) {
+    if (!alive()) return;
+    const form = el('form', undefined, 'chapter-picker'), label = el('label', menu.scope === 'work' ? 'Chapter in this work' : 'Chapter in this source file'), select = el('select'), open = el('button', 'Open chapter'), error = el('p');
+    form.setAttribute('aria-label', 'Chapter navigation'); form.noValidate = true;
+    const placeholder = el('option', 'Choose a chapter'); placeholder.value = ''; select.append(placeholder);
+    for (const row of menu.chapters) { const option = el('option', row.citation + ' · ' + row.title); option.value = row.citation; select.append(option); }
+    label.append(select); open.type = 'submit'; open.disabled = true; error.setAttribute('role', 'alert'); error.hidden = true;
+    form.append(label, open, el('p', menu.scope === 'work' ? 'Chapters of the selected work, including its source volumes where applicable. Choose a chapter, then open it.' : 'Chapters in this source file only. This list does not combine chapters from other files or works.', 'muted'), error);
+    select.addEventListener('change', () => { if (alive() && form.isConnected) open.disabled = !select.value; });
+    form.addEventListener('submit', event => {
+      event.preventDefault(); if (!alive() || !form.isConnected || !select.value) return;
+      try { const row = menu.chapters.find(value => value.citation === select.value), href = chapterLink(row, menu); error.hidden = true; select.removeAttribute('aria-invalid'); if (location.hash === href) render(); else location.hash = href; }
+      catch (failure) { error.textContent = failure.message; error.hidden = false; select.setAttribute('aria-invalid', 'true'); select.focus({ preventScroll: true }); }
+    });
+    section.replaceChildren(form); if (focusOwned) select.focus({ preventScroll: true });
+  }
+  async function load(trigger) {
+    if (!alive() || !trigger.isConnected) return;
+    const focusOwned = document.activeElement === trigger, ticket = ++generation, pending = el('p', 'Loading chapter list…', 'muted'); pending.setAttribute('role', 'status'); pending.tabIndex = -1; section.replaceChildren(pending); if (focusOwned) pending.focus({ preventScroll: true });
+    try {
+      const command = authority.read_with;
+      const root = await tool(command.tool, { citation: command.citation, offset: command.offset, limit: command.limit, script: $('script').value }, 'study', 'Chapter list');
+      if (!alive() || generation !== ticket) return;
+      show(validateChapterMenu(data, root), document.activeElement === pending);
+    } catch (error) {
+      if (!alive() || generation !== ticket) return;
+      const retainedFocus = document.activeElement === pending; warning(error); const retry = button('Retry chapter list', () => load(retry)); section.append(retry); if (retainedFocus) retry.focus({ preventScroll: true });
+    }
+  }
+  host.append(section);
+  try {
+    authority = validateChapterIndex(data);
+    if (!authority && Array.isArray(data.chapters) && data.chapters.length === 0) section.remove();
+    else if (Object.hasOwn(data, 'chapters')) show(validateChapterMenu(data, data));
+    else if (authority) { const choose = button('Choose chapter', () => load(choose)); section.append(choose); }
+    else section.remove();
+  } catch (error) { warning(error); }
+}
 async function read(args, token) {
   assertPageRequest(args);
   const book = args.get('book'), uid = args.get('uid') || 'dhp183'; let offset = offsetOf(args), plan = null, window = null;
@@ -369,7 +416,8 @@ async function read(args, token) {
   const selector = kind === 'book' ? 'book:' + book : kind === 'post' ? 'post:' + uid : kind === 'canon' ? data.text_id || uid : uid.startsWith('commentary:') ? uid : 'commentary-ref:' + uid;
   heading(kind === 'book' ? 'COMPLETE VRI SOURCE BOOK' : kind === 'commentary' ? 'TRADITIONAL COMMENTARY · NOT CANON' : kind === 'post' ? 'LATER PĀLI WORK · NOT CANON' : 'CANONICAL PĀLI', (data.citation ? data.citation + ' · ' : '') + (data.title || data.book?.title || data.book_id || uid));
   if (plan) { view.append(link('← Return to plan day ' + plan.day, route('plans', { name: plan.name, day: plan.day }), 'button'), el('p', plan.title + ' · day ' + plan.day + (window.end === null ? ' · complete selected text' : ' · assigned segments ' + (window.start + 1) + '–' + window.end) + '. English sources and related material may cover more than this assignment; they are not aligned to this part.', 'notice')); }
-  notes(data); view.append(el('p', `Segments ${offset + 1}–${offset + data.returned} of ${data.total_segments}`, 'muted'));
+  let intro; try { intro = readingIntro(data, kind); } catch { intro = { critical: data, context: [], status: null }; }
+  if (intro.status) view.append(el('p', intro.status, 'muted reading-context-status')); notes(intro.critical); view.append(el('p', `Segments ${offset + 1}–${offset + data.returned} of ${data.total_segments}`, 'muted'));
   const toolbar = el('div', undefined, 'toolbar'); let sourceTools;
   toolbar.append(link('Back to library', route('browse', { node: 'canon' }), 'button'));
   const copyFallback = link('Exact reading link · open or long-press to copy', location.hash); copyFallback.hidden = true;
@@ -380,6 +428,8 @@ async function read(args, token) {
     tools.append(button('English sources', invoke(() => translations(data, uid, token))), button('Traditional commentary', invoke(() => commentary(uid, token))), button('Related texts', invoke(() => relatedTexts(data.text_id || uid, token))), copy, copyFallback); panel.append(tools); toolbar.append(panel);
   } else { const panel = el('details', undefined, 'study-actions'); sourceTools = el('div', undefined, 'toolbar'); sourceTools.append(copy, copyFallback); panel.append(el('summary', 'Reading tools'), sourceTools); toolbar.append(panel); }
   view.append(toolbar); responsivePanels();
+  if (intro.context.length) { const context = el('section', undefined, 'source-context'); context.setAttribute('aria-label', 'Source context'); context.append(el('h3', 'Source context')); for (const original of intro.context) context.append(el('p', original, 'notice')); sourceTools.append(context); }
+  if (kind === 'post') attachChapterNavigation(data, args, sourceTools, token);
   const positionContext = { ...readingArgs(selector), ...(plan ? { plan: plan.name, day: plan.day } : {}) };
   let navigation = null;
   try {

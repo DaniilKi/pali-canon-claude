@@ -27379,6 +27379,8 @@ function segmentsOf(blocks, { includeVariants = false, includeSourcePositions = 
   });
 }
 function summary(d, sel) {
+  const logical = sel.work === "vism" || sel.work === "abhidh-s";
+  const hasChapters = sel.work === "vism" ? vismChapters(d).length > 0 : sel.work === "abhidh-s" ? sel.book.chapters.some(([, start]) => start < workEnd(sel.book, 0)) : sel.book.chapters.length > 0;
   return {
     canonical: false,
     label: labelFor(sel),
@@ -27390,6 +27392,12 @@ function summary(d, sel) {
     ...sel.approximate ? { approximate: true } : {},
     book: bookInfo(sel.book),
     ...sel.chapters ? { chapters: sel.chapters } : {},
+    ...hasChapters ? { chapter_index: { scope: logical ? "work" : "source_file", read_with: {
+      tool: "get_post_canonical",
+      citation: sel.work === "vism" ? "Vism" : sel.work === "abhidh-s" ? "Abhidh-s" : sel.book.id,
+      offset: 0,
+      limit: 1
+    } } } : {},
     notes: sel.notes || [],
     source: sourceInfo(d)
   };

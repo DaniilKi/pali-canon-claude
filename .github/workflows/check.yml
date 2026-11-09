@@ -78,7 +78,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch]
+        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters]
     runs-on: ubuntu-latest
     timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts') && 20 || 10 }}
     steps:
@@ -266,6 +266,19 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/booksearch-package"
           tar -xzf "$RUNNER_TEMP/booksearch-package/"*.tgz -C "$RUNNER_TEMP/booksearch-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-book-search-check.py --server-dir "$RUNNER_TEMP/booksearch-package/package/server" --report installed-booksearch.report.json
+      - name: Check existing chapter menus and compact source context
+        if: matrix.group == 'chapters'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-chapters-check.py --report standalone-chapters.report.json
+      - name: Audit chapter menus and source context in both themes
+        if: matrix.group == 'chapters'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-chapters-check.py --a11y --report standalone-chapters-a11y.report.json
+      - name: Check installed chapter menus outside the source tree
+        if: matrix.group == 'chapters'
+        run: |
+          mkdir -p "$RUNNER_TEMP/chapters-package"
+          npm pack --pack-destination "$RUNNER_TEMP/chapters-package"
+          tar -xzf "$RUNNER_TEMP/chapters-package/"*.tgz -C "$RUNNER_TEMP/chapters-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-chapters-check.py --server-dir "$RUNNER_TEMP/chapters-package/package/server" --report installed-chapters.report.json
       - name: Check editorial topic and teaching-list source navigation
         if: matrix.group == 'study'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-topics-check.py --report standalone-topics.report.json
@@ -340,6 +353,9 @@ jobs:
             standalone-booksearch.report.json
             standalone-booksearch-a11y.report.json
             installed-booksearch.report.json
+            standalone-chapters.report.json
+            standalone-chapters-a11y.report.json
+            installed-chapters.report.json
             standalone-comparison.report.json
             standalone-comparison-a11y.report.json
             installed-comparison.report.json

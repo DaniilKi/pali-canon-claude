@@ -1,0 +1,201 @@
+{
+  "decision": "D226",
+  "baseline_commit": "7f37bbc262a4dcb006d3fe7d6061a16f995cdb99",
+  "feature": "authoritative chapter menus and compact source context",
+  "source_data_changed": false,
+  "selection_bounds_changed": false,
+  "tool_inputs_or_count_changed": false,
+  "additive_postcanonical_metadata": [
+    "chapter_index"
+  ],
+  "personal_schema_or_paragraph_locator_changed": false,
+  "focused_new_policy_tests": 10,
+  "existing_focused_post_tests": 5,
+  "full_local_check": {
+    "tests": 1229,
+    "passed": 1227,
+    "failed": 0,
+    "existing_optional_skips": 2,
+    "audit_texts": 8544,
+    "audit_failures": 0
+  },
+  "browser_validation": {
+    "browser-normal": {
+      "passed": 38,
+      "engine": {
+        "actual": "chromium",
+        "version": "155.0.8059.79"
+      },
+      "outside_source_tree": false,
+      "scans": 0,
+      "violations": 0
+    },
+    "browser-a11y": {
+      "passed": 70,
+      "engine": {
+        "actual": "chromium",
+        "version": "155.0.8059.79"
+      },
+      "outside_source_tree": false,
+      "scans": 43,
+      "violations": 0
+    },
+    "browser-installed": {
+      "passed": 38,
+      "engine": {
+        "actual": "chromium",
+        "version": "155.0.8059.79"
+      },
+      "outside_source_tree": true,
+      "scans": 0,
+      "violations": 0
+    },
+    "compat-normal": {
+      "passed": 64,
+      "engine": {
+        "requested": "chromium",
+        "playwright": "1.62.0",
+        "actual": "chromium",
+        "version": "155.0.8059.79",
+        "executable": "/usr/bin/chromium",
+        "executable_kind": "explicit/system",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36"
+      },
+      "outside_source_tree": false,
+      "scans": 0,
+      "violations": 0
+    }
+  },
+  "geometry": {
+    "profile": {
+      "font": 21,
+      "remember_position": false,
+      "saved": []
+    },
+    "baseline_runtime": "byte-exact D225 packaged reader/CSS independently checked against git baseline",
+    "baseline": [
+      {
+        "case": "root vin02m1",
+        "width": 320,
+        "height": 700,
+        "first_source_y": 951.421875,
+        "first_source_line_height": 34.56,
+        "first_full_source_line_fits": false,
+        "first_nonheading_y": 2299.359375,
+        "scroll_y": 0,
+        "tools_open": false
+      },
+      {
+        "case": "logical Vism",
+        "width": 320,
+        "height": 700,
+        "first_source_y": 1009.8125,
+        "first_source_line_height": 34.56,
+        "first_full_source_line_fits": false,
+        "first_nonheading_y": 1930.625,
+        "scroll_y": 0,
+        "tools_open": false
+      },
+      {
+        "case": "root vin02m1",
+        "width": 390,
+        "height": 844,
+        "first_source_y": 807.859375,
+        "first_source_line_height": 34.56,
+        "first_full_source_line_fits": true,
+        "first_nonheading_y": 2123.796875,
+        "scroll_y": 0,
+        "tools_open": false
+      },
+      {
+        "case": "logical Vism",
+        "width": 390,
+        "height": 844,
+        "first_source_y": 866.25,
+        "first_source_line_height": 34.56,
+        "first_full_source_line_fits": false,
+        "first_nonheading_y": 1755.0625,
+        "scroll_y": 0,
+        "tools_open": false
+      }
+    ],
+    "final": [
+      {
+        "case": "root vin02m1",
+        "width": 320,
+        "height": 700,
+        "first_source_y": 640.953125,
+        "first_source_line_height": 34.56,
+        "first_full_source_line_fits": true,
+        "first_nonheading_y": 1988.890625,
+        "scroll_y": 0,
+        "tools_open": false
+      },
+      {
+        "case": "logical Vism",
+        "width": 320,
+        "height": 700,
+        "first_source_y": 657.453125,
+        "first_source_line_height": 34.56,
+        "first_full_source_line_fits": true,
+        "first_nonheading_y": 1578.265625,
+        "scroll_y": 0,
+        "tools_open": false
+      },
+      {
+        "case": "root vin02m1",
+        "width": 390,
+        "height": 844,
+        "first_source_y": 586.953125,
+        "first_source_line_height": 34.56,
+        "first_full_source_line_fits": true,
+        "first_nonheading_y": 1902.890625,
+        "scroll_y": 0,
+        "tools_open": false
+      },
+      {
+        "case": "logical Vism",
+        "width": 390,
+        "height": 844,
+        "first_source_y": 603.453125,
+        "first_source_line_height": 34.56,
+        "first_full_source_line_fits": true,
+        "first_nonheading_y": 1492.265625,
+        "scroll_y": 0,
+        "tools_open": false
+      }
+    ],
+    "first_printed_source_line_budget_preserved": true,
+    "actual_source_headings_preserved": true,
+    "old_baseline_37_8_field": "body line height only, superseded by identical-probe source-heading 34.56 for comparisons"
+  },
+  "docs_and_ci_artifact_tests": 21,
+  "source_print_pdf_regression": {
+    "passed": 12,
+    "stage": "before final reading-only adjacent-margin repair; print policy and print CSS unchanged afterward; final new chapter journeys recheck exact source/context/private print exclusion"
+  },
+  "smoke": {
+    "tools": 34,
+    "checks": 64
+  },
+  "offline_evals": {
+    "passed": 195,
+    "live_skipped": 6
+  },
+  "package_parity_files": 36,
+  "review": {
+    "helper_and_ui": "accepted after native title_roman support and owned keyboard focus",
+    "harness": "accepted after role-combobox selector, changed-revision transient-title check, actual private print and correct hard-reload draft boundary"
+  },
+  "ci": "Final exact integrated-head full/installed/Firefox/WebKit acceptance required separately.",
+  "limits": [
+    "Work chapter menus and physical source-file headings retain different scopes.",
+    "First nonheading prose remains later when actual printed source headings precede it.",
+    "No universal above-fold guarantee for all fonts/titles/works/devices.",
+    "Hard reload clears unsaved tab drafts as documented; saved notes and pins remain.",
+    "Physical-device, native font-shaping and human screen-reader acceptance remain separate.",
+    "Source coverage and Patthana raw-author-artifact access unchanged."
+  ],
+  "main_merge": false,
+  "deployment": false
+}
