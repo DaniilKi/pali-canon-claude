@@ -118,6 +118,12 @@ try:
                        {'citation' if navigation_tool == 'get_post_canonical' else 'uid': navigation_source['context']['uid']})
     navigation_page = tool(navigation_tool, {**navigation_args, 'offset': navigation_offset, 'limit': 30, 'script': 'roman'})
     native = tool('get_text', {'uid': 'dhp183', 'offset': 0, 'limit': 30, 'script': 'sinhala'})
+    book_native_start = tool('get_text', {'book': 'vin02m1', 'offset': 0, 'limit': 30, 'script': 'sinhala'})
+    book_native_phrase = tool('get_text', {'book': 'vin02m1', 'offset': 6, 'limit': 1, 'script': 'sinhala'})['segments'][0]
+    book_native_query = '"' + book_native_phrase['text'] + '"'
+    book_search_page = tool('search_source_book', {'book': 'vin02m1', 'query': book_native_query, 'offset': 0, 'limit': 15, 'script': 'sinhala'})
+    assert book_search_page['total_matched'] == 1 and book_search_page['results'][0]['ref'] == book_native_phrase['ref']
+    book_native_match = tool('get_text', {'book': 'vin02m1', 'offset': 6, 'limit': 30, 'script': 'sinhala'})
     late_pali = tool('get_text', {'uid': 'mn10', 'offset': 0, 'limit': 30, 'script': 'roman'})
     catalog = tool('reading_plan', {})
     plan = next(p for p in catalog['plans'] if p['days'] >= 2)
@@ -146,11 +152,13 @@ try:
                 checks.append({'width': width, 'theme': theme, 'check': name})
                 print(f'{args.engine} {width}px {theme}: {name}', flush=True)
 
-            def environment(saved=None, marks=None, last=None):
+            def environment(saved=None, marks=None, last=None, script=None):
                 context = browser.new_context(viewport={'width': width, 'height': 900}, bypass_csp=args.a11y)
                 seed = {'theme': theme, 'font': 30, 'remember_position': False, 'saved': copy.deepcopy(saved or []), 'reading_progress': copy.deepcopy(marks or [])}
                 if last is not None:
                     seed['last'] = last
+                if script is not None:
+                    seed['script'] = script
                 context.add_init_script("if(!localStorage.getItem('pali-library-v1'))localStorage.setItem('pali-library-v1'," + json.dumps(json.dumps(seed)) + ");" +
                     "Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async()=>{throw Error('Controlled clipboard denial')}}});" +
                     "window.compatIgnoreNextAbort=false;window.compatHeld=0;window.compatHeldBodyComplete=false;const compatFetch=window.fetch.bind(window);window.fetch=(url,options)=>{" +
@@ -167,7 +175,7 @@ try:
                         params = payload.get('params', {})
                         state['calls'].append(copy.deepcopy(params))
                         name, arguments = params.get('name'), params.get('arguments', {})
-                        if name not in {'get_text', 'get_commentary', 'get_post_canonical', 'browse_canon', 'reading_plan'} or name == 'get_text' and 'translation' in arguments or name == 'reading_plan' and arguments:
+                        if name not in {'get_text', 'get_commentary', 'get_post_canonical', 'browse_canon', 'reading_plan', 'search_source_book'} or name == 'get_text' and 'translation' in arguments or name == 'reading_plan' and arguments:
                             state['forbidden'].append(params)
                             route.abort()
                         elif state['hold'] and name == 'get_text' and arguments.get('uid') == 'mn10':
@@ -445,6 +453,29 @@ try:
             assert profile(page)['saved'][0]['note'].encode() == incoming_note['note'].encode() and len(state['calls']) == before_calls
             privacy(page, state)
             passed('duplicate personal-note restore keeps current by default; an explicit keyboard choice replaces only raw note text while pins/title/marks/private state stay and no MCP request occurs')
+            context.close()
+
+            # Complete source-file search includes front matter and keeps source pins.
+            context, page, state = environment(saved=[{**canonical['mark'], 'note': PRIVATE + 'book search private note'}], script='sinhala')
+            page.goto(base + '/#read?book=vin02m1')
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in book_native_start['segments']])
+            original_profile = copy.deepcopy(profile(page)); outer = page.locator('.study-actions')
+            if outer.get_attribute('open') is None: outer.locator('summary').focus(); page.keyboard.press('Enter')
+            form = page.get_by_role('form', name='Source book search', exact=True); query_field = form.get_by_label('Search this source book', exact=True)
+            before = len(state['calls']); query_field.fill(''); query_field.press('Enter'); expect(form.get_by_role('alert')).to_be_visible(); expect(query_field).to_be_focused(); assert len(state['calls']) == before
+            query_field.fill(book_native_query); query_field.press('Enter')
+            expect(page).to_have_url(base + '/#book-search?' + urllib.parse.urlencode({'book': 'vin02m1', 'q': book_native_query, 'source': revision(book_native_start)}))
+            expect(page.locator('.book-search-results h3')).to_have_text([r['ref'] for r in book_search_page['results']])
+            excerpts = page.locator('.book-search-results .passage'); expect(excerpts).to_have_text([r['excerpt'] for r in book_search_page['results']]); assert excerpts.all_text_contents() == [r['excerpt'] for r in book_search_page['results']]
+            assert state['calls'][-1] == {'name': 'search_source_book', 'arguments': {'book': 'vin02m1', 'query': book_native_query, 'offset': 0, 'limit': 15, 'script': 'sinhala'}}
+            audit(page, state, 'native complete-root-book search and exact source pin')
+            match = page.get_by_role('link', name='Read match · ' + book_native_phrase['ref'], exact=True)
+            pinned_match = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(match.get_attribute('href')).fragment.split('?', 1)[1]))
+            assert pinned_match == {'book': 'vin02m1', 'offset': '6', 'ref': book_native_phrase['ref'], 'source': revision(book_native_start)}
+            match.click(); expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in book_native_match['segments']])
+            assert page.locator('section[aria-label="Pāli passage"] .passage').all_text_contents() == [s['text'] for s in book_native_match['segments']]
+            assert profile(page) == original_profile; privacy(page, state)
+            passed('native-script complete-book search finds actual front matter through phone keyboard controls and opens the exact source/ref pin without global search, English retrieval or private-note writes')
             context.close()
 
             # The narrow legacy-progress fix is exercised in each real engine.

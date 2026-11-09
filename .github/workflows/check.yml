@@ -78,7 +78,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation]
+        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch]
     runs-on: ubuntu-latest
     timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts') && 20 || 10 }}
     steps:
@@ -253,6 +253,19 @@ jobs:
       - name: Audit reading-progress restore in both themes
         if: matrix.group == 'personal'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-progress-check.py --a11y --report standalone-progress-a11y.report.json
+      - name: Check complete source-book search and exact source reading
+        if: matrix.group == 'booksearch'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-book-search-check.py --report standalone-booksearch.report.json
+      - name: Audit complete source-book search in both themes
+        if: matrix.group == 'booksearch'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-book-search-check.py --a11y --report standalone-booksearch-a11y.report.json
+      - name: Check installed complete source-book search outside the source tree
+        if: matrix.group == 'booksearch'
+        run: |
+          mkdir -p "$RUNNER_TEMP/booksearch-package"
+          npm pack --pack-destination "$RUNNER_TEMP/booksearch-package"
+          tar -xzf "$RUNNER_TEMP/booksearch-package/"*.tgz -C "$RUNNER_TEMP/booksearch-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-book-search-check.py --server-dir "$RUNNER_TEMP/booksearch-package/package/server" --report installed-booksearch.report.json
       - name: Check editorial topic and teaching-list source navigation
         if: matrix.group == 'study'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-topics-check.py --report standalone-topics.report.json
@@ -324,6 +337,9 @@ jobs:
             standalone-navigation.report.json
             standalone-navigation-a11y.report.json
             installed-navigation.report.json
+            standalone-booksearch.report.json
+            standalone-booksearch-a11y.report.json
+            installed-booksearch.report.json
             standalone-comparison.report.json
             standalone-comparison-a11y.report.json
             installed-comparison.report.json
