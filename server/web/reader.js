@@ -1277,6 +1277,17 @@
     return clone2(transaction.before);
   }
 
+  // web/saved-highlights.mjs
+  function savedPassageHighlighted(saved2, context, enabled = true) {
+    if (enabled === false) return false;
+    try {
+      const state = passageNoteState(saved2, context);
+      return Boolean(state.eligible && !state.legacy && state.item && Object.hasOwn(state.item, "source_commit") && state.item.source_commit === context.source_commit && Object.hasOwn(state.item, "offset") && state.item.offset === context.offset);
+    } catch {
+      return false;
+    }
+  }
+
   // web/study-backup.mjs
   var MAX_STUDY_BACKUP_BYTES = 32 * 1024 * 1024;
   var FORMAT = "pali-library-study-backup-v1";
@@ -1371,6 +1382,11 @@
   var storageReadFailed = false;
   var noteDrafts = /* @__PURE__ */ new Map();
   var noteKey = passageNoteKey;
+  var highlightTargets = [];
+  function refreshPersonalHighlights() {
+    highlightTargets = highlightTargets.filter((target) => target.token === epoch && target.node.isConnected);
+    for (const target of highlightTargets) target.node.classList.toggle("personal-highlight", savedPassageHighlighted(local.saved, target.context, local.highlight_saved !== false));
+  }
   function loadLocal() {
     try {
       const raw = localStorage.getItem(KEY);
@@ -1622,6 +1638,7 @@
   window.addEventListener("pagehide", flushReadingPosition);
   function preferences() {
     $("remember-position").checked = local.remember_position !== false;
+    $("highlight-saved").checked = local.highlight_saved !== false;
     const size = Math.max(16, Math.min(30, Number(local.font) || 21));
     document.documentElement.style.setProperty("--reading", size + "px");
     $("font-size").value = size;
@@ -1640,6 +1657,11 @@
     persist();
     if (e.target.checked) flushReadingPosition();
     updateResume();
+  });
+  $("highlight-saved").addEventListener("change", (e) => {
+    local.highlight_saved = e.target.checked;
+    persist();
+    refreshPersonalHighlights();
   });
   $("font-size").addEventListener("input", (e) => {
     local.font = Number(e.target.value);
@@ -1811,6 +1833,7 @@
     local.saved = transaction.saved;
     if (persist()) {
       replaceNoteDrafts(transaction.drafts);
+      refreshPersonalHighlights();
       return true;
     }
     if (!keepNewBookmark) {
@@ -1818,6 +1841,7 @@
       local.saved = before.saved;
       replaceNoteDrafts(before.drafts);
     }
+    refreshPersonalHighlights();
     status2.textContent = storageWarning();
     return false;
   }
@@ -1913,6 +1937,7 @@
       region.append(el("p", "This source has no safe note reference: " + error.message, "notice"), link("See saved bookmark and note", "#saved"));
       return;
     }
+    highlightTargets.push({ node: container, context, token });
     const key3 = noteKey(context);
     open = noteDrafts.has(key3) || Boolean(savedRecord(context)?.note);
     function mark() {
@@ -1920,6 +1945,7 @@
       control.textContent = active ? "Saved \u2713" : "Save passage";
       control.setAttribute("aria-pressed", String(active));
       container.classList.toggle("marked", active);
+      container.classList.toggle("personal-highlight", savedPassageHighlighted(local.saved, context, local.highlight_saved !== false));
     }
     function ensure() {
       const change = passageNoteTransaction(local.saved, noteDrafts, context, { type: "ensure" });
@@ -3216,6 +3242,7 @@
       return;
     }
     activePosition = null;
+    highlightTargets = [];
     clearTimeout(positionTimer);
     const token = ++epoch;
     ++studyEpoch;

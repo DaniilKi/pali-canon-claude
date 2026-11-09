@@ -11,6 +11,7 @@ import importlib.metadata
 import json
 import os
 import pathlib
+import re
 import socket
 import subprocess
 import time
@@ -268,6 +269,27 @@ try:
             before = len(state['calls'])
             field.fill(unicode_note)
             privacy(page, state)
+            # Critical cross-engine highlight path only; the dedicated suite owns
+            # the legacy/stale/duplicate metadata matrix.
+            part = region.locator('xpath=..')
+            expect(part).to_have_class(re.compile(r'\bpersonal-highlight\b'))
+            if preferences.get_attribute('open') is None:
+                preferences.locator('summary').click()
+            highlight = page.locator('#highlight-saved')
+            highlight.focus()
+            before_highlight = profile(page)
+            body = part.locator('.passage').element_handle()
+            body_html = body.inner_html()
+            for enabled in [False, True]:
+                page.keyboard.press('Space')
+                expect(highlight).to_be_checked() if enabled else expect(highlight).not_to_be_checked()
+                expect(highlight).to_be_focused()
+                assert part.evaluate('(e)=>e.classList.contains("personal-highlight")') == enabled
+                assert body.evaluate('(e)=>e.isConnected') and body.inner_html() == body_html
+                expect(field).to_have_value(unicode_note)
+                assert profile(page) == {**before_highlight, 'highlight_saved': enabled}
+                assert len(state['calls']) == before
+            passed('live verified-source highlight off/on preserves the existing Pāli node, typed draft, keyboard focus and other private data without an API call')
             region.get_by_role('button', name='Save note', exact=True).focus()
             page.keyboard.press('Enter')
             expect(page.locator('#status')).to_contain_text('Personal note saved')

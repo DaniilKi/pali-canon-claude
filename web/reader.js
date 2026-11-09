@@ -15,6 +15,7 @@ import { guardedStorageWrite, guardedPositionWrite, readingPointerOnlyChange } f
 import { ENGLISH_AVAILABILITY, englishBrowseCandidate, englishSelection, englishRoute, englishCatalogue, englishBadges } from './english-catalogue.mjs';
 import { comparisonChoices, comparisonSelection, validateComparisonPage } from './translation-comparison.mjs';
 import { passageNoteKey, passageNoteState, passageNoteRemovalNeedsConfirmation, passageNoteTransaction, restorePassageNoteTransaction } from './passage-notes.mjs';
+import { savedPassageHighlighted } from './saved-highlights.mjs';
 import { MAX_STUDY_BACKUP_BYTES, createStudyBackup, parseStudyBackup, mergeStudyBackup } from './study-backup.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
@@ -24,6 +25,11 @@ let serial = 0, epoch = 0, studyEpoch = 0, positionTimer, activePosition = null;
 const KEY = 'pali-library-v1';
 let storageOK = true, storageSnapshot, positionDurable = true, positionWarning = '', storageConflict = false, storageReadFailed = false;
 const noteDrafts = new Map(), noteKey = passageNoteKey;
+let highlightTargets = [];
+function refreshPersonalHighlights() {
+  highlightTargets = highlightTargets.filter(target => target.token === epoch && target.node.isConnected);
+  for (const target of highlightTargets) target.node.classList.toggle('personal-highlight', savedPassageHighlighted(local.saved, target.context, local.highlight_saved !== false));
+}
 function loadLocal() { try { const raw = localStorage.getItem(KEY); storageSnapshot = raw; const x = JSON.parse(raw || '{}'); if (!x || typeof x !== 'object' || Array.isArray(x)) throw Error('Unsupported browser data'); return x; } catch { storageOK = false; storageReadFailed = true; return {}; } }
 const local = loadLocal();
 local.reading_progress = cleanProgress(local.reading_progress);
@@ -130,6 +136,7 @@ window.addEventListener('scroll', () => { clearTimeout(positionTimer); if (activ
 window.addEventListener('pagehide', flushReadingPosition);
 function preferences() {
   $('remember-position').checked = local.remember_position !== false;
+  $('highlight-saved').checked = local.highlight_saved !== false;
   const size = Math.max(16, Math.min(30, Number(local.font) || 21));
   document.documentElement.style.setProperty('--reading', size + 'px'); $('font-size').value = size;
   document.body.dataset.theme = local.theme === 'dark' ? 'dark' : 'light'; $('theme').value = document.body.dataset.theme;
@@ -137,6 +144,7 @@ function preferences() {
 }
 preferences(); updateResume();
 $('remember-position').addEventListener('change', e => { local.remember_position = e.target.checked; if (!e.target.checked) { clearTimeout(positionTimer); delete local.last; } persist(); if (e.target.checked) flushReadingPosition(); updateResume(); });
+$('highlight-saved').addEventListener('change', e => { local.highlight_saved = e.target.checked; persist(); refreshPersonalHighlights(); });
 $('font-size').addEventListener('input', e => { local.font = Number(e.target.value); preferences(); persist(); });
 $('theme').addEventListener('change', e => { local.theme = e.target.value; preferences(); persist(); });
 $('script').addEventListener('change', e => { local.script = e.target.value; persist(); if (location.hash.startsWith('#read') || location.hash.startsWith('#daily')) render(); });
@@ -229,9 +237,9 @@ const sameSavedRecord = (expected, token) => token === epoch && JSON.stringify(s
 function replaceNoteDrafts(drafts) { noteDrafts.clear(); for (const [key, value] of drafts) noteDrafts.set(key, value); }
 function commitNoteChange(transaction, keepNewBookmark = false) {
   local.saved = transaction.saved;
-  if (persist()) { replaceNoteDrafts(transaction.drafts); return true; }
+  if (persist()) { replaceNoteDrafts(transaction.drafts); refreshPersonalHighlights(); return true; }
   if (!keepNewBookmark) { const before = restorePassageNoteTransaction(transaction); local.saved = before.saved; replaceNoteDrafts(before.drafts); }
-  status.textContent = storageWarning(); return false;
+  refreshPersonalHighlights(); status.textContent = storageWarning(); return false;
 }
 function personalNoteEditor(item, context, token, { mode = 'reading', onSaved = () => {}, onClose } = {}) {
   let expected = copySavedRecord(item);
@@ -277,8 +285,9 @@ function attachPassageNote(selector, data, segment, container, control, token) {
   let context, open = false;
   try { context = { uid: selector, ref: segment.ref, title: data.title || data.book?.title || data.citation || data.book_id || selector, offset: data.offset + data.segments.indexOf(segment), source_commit: sourceRevision(data) }; }
   catch (error) { region.append(el('p', 'This source has no safe note reference: ' + error.message, 'notice'), link('See saved bookmark and note', '#saved')); return; }
+  highlightTargets.push({ node: container, context, token });
   const key = noteKey(context); open = noteDrafts.has(key) || Boolean(savedRecord(context)?.note);
-  function mark() { const active = Boolean(savedRecord(context)); control.textContent = active ? 'Saved ✓' : 'Save passage'; control.setAttribute('aria-pressed', String(active)); container.classList.toggle('marked', active); }
+  function mark() { const active = Boolean(savedRecord(context)); control.textContent = active ? 'Saved ✓' : 'Save passage'; control.setAttribute('aria-pressed', String(active)); container.classList.toggle('marked', active); container.classList.toggle('personal-highlight', savedPassageHighlighted(local.saved, context, local.highlight_saved !== false)); }
   function ensure() {
     const change = passageNoteTransaction(local.saved, noteDrafts, context, { type: 'ensure' });
     const durable = commitNoteChange(change, true); mark();
@@ -878,7 +887,7 @@ function about() {
 }
 async function render() {
   if (location.hash === '#content' && view.childElementCount) { $('content').focus(); return; }
-  activePosition = null; clearTimeout(positionTimer); const token = ++epoch; ++studyEpoch; requests.cancelAll(); closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
+  activePosition = null; highlightTargets = []; clearTimeout(positionTimer); const token = ++epoch; ++studyEpoch; requests.cancelAll(); closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
   const [page, query = ''] = location.hash.slice(1).split('?'), args = new URLSearchParams(query);
   try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'backup') studyBackup(token); else if (page === 'about') about(); else await browse(args, token);
     if (token !== epoch) return; status.textContent = storageConflict || !storageOK ? storageWarning() : !positionDurable ? positionWarning || storageWarning() : ''; focusHeading();
