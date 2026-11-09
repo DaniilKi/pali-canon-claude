@@ -78,7 +78,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison]
+        group: [core, study, personal, provenance, comparison, notes]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -182,6 +182,19 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/comparison-package"
           tar -xzf "$RUNNER_TEMP/comparison-package/"*.tgz -C "$RUNNER_TEMP/comparison-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-comparison-check.py --server-dir "$RUNNER_TEMP/comparison-package/package/server" --report installed-comparison.report.json
+      - name: Check in-context private notes and safe removal across source types
+        if: matrix.group == 'notes'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-notes-check.py --report standalone-notes.report.json
+      - name: Audit passage-note editing and removal in both themes
+        if: matrix.group == 'notes'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-notes-check.py --a11y --report standalone-notes-a11y.report.json
+      - name: Check installed passage-note workflows outside the source tree
+        if: matrix.group == 'notes'
+        run: |
+          mkdir -p "$RUNNER_TEMP/notes-package"
+          npm pack --pack-destination "$RUNNER_TEMP/notes-package"
+          tar -xzf "$RUNNER_TEMP/notes-package/"*.tgz -C "$RUNNER_TEMP/notes-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-notes-check.py --server-dir "$RUNNER_TEMP/notes-package/package/server" --report installed-notes.report.json
       - name: Check local reading-progress restore and source-signature preservation
         if: matrix.group == 'personal'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-progress-check.py --report standalone-progress.report.json
@@ -244,6 +257,9 @@ jobs:
             installed-english-catalogue.report.json
             standalone-english-catalogue.report.json
             standalone-english-catalogue-a11y.report.json
+            standalone-notes.report.json
+            standalone-notes-a11y.report.json
+            installed-notes.report.json
             standalone-comparison.report.json
             standalone-comparison-a11y.report.json
             installed-comparison.report.json

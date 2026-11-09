@@ -14,6 +14,7 @@ import { readingPosition, assertPositionPin, sourceRevision } from './reading-po
 import { guardedStorageWrite, guardedPositionWrite, readingPointerOnlyChange } from './local-storage-write.mjs';
 import { ENGLISH_AVAILABILITY, englishBrowseCandidate, englishSelection, englishRoute, englishCatalogue, englishBadges } from './english-catalogue.mjs';
 import { comparisonChoices, comparisonSelection, validateComparisonPage } from './translation-comparison.mjs';
+import { passageNoteKey, passageNoteState, passageNoteRemovalNeedsConfirmation, passageNoteTransaction, restorePassageNoteTransaction } from './passage-notes.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
@@ -21,7 +22,7 @@ const view = $('view'), status = $('status');
 let serial = 0, epoch = 0, studyEpoch = 0, positionTimer, activePosition = null;
 const KEY = 'pali-library-v1';
 let storageOK = true, storageSnapshot, positionDurable = true, positionWarning = '', storageConflict = false, storageReadFailed = false;
-const noteDrafts = new Map(), noteKey = item => JSON.stringify([item.uid, item.ref]);
+const noteDrafts = new Map(), noteKey = passageNoteKey;
 function loadLocal() { try { const raw = localStorage.getItem(KEY); storageSnapshot = raw; const x = JSON.parse(raw || '{}'); if (!x || typeof x !== 'object' || Array.isArray(x)) throw Error('Unsupported browser data'); return x; } catch { storageOK = false; storageReadFailed = true; return {}; } }
 const local = loadLocal();
 local.reading_progress = cleanProgress(local.reading_progress);
@@ -221,12 +222,84 @@ function readingArgs(selector) {
   if (selector.startsWith('commentary:')) return { kind: 'commentary', uid: selector };
   return { uid: selector };
 }
-function saveSegment(selector, data, segment, control, container) {
-  const found = local.saved.findIndex(x => x.uid === selector && x.ref === segment.ref);
-  if (found >= 0) local.saved.splice(found, 1);
-  else if (local.saved.length < 500) local.saved.push({ uid: selector, ref: segment.ref, title: data.title || data.book?.title || data.citation || data.book_id, note: '', offset: data.offset + data.segments.indexOf(segment), source_commit: sourceRevision(data) });
-  else { status.textContent = 'Your saved list is full (500 passages). Export it before removing entries.'; return; }
-  const active = local.saved.some(x => x.uid === selector && x.ref === segment.ref); control.textContent = active ? 'Saved ✓' : 'Save passage'; control.setAttribute('aria-pressed', String(active)); container.classList.toggle('marked', active); persist();
+const copySavedRecord = item => item === undefined ? undefined : JSON.parse(JSON.stringify(item));
+const savedRecord = item => local.saved.find(x => x.uid === item.uid && x.ref === item.ref);
+const sameSavedRecord = (expected, token) => token === epoch && JSON.stringify(savedRecord(expected)) === JSON.stringify(expected);
+function replaceNoteDrafts(drafts) { noteDrafts.clear(); for (const [key, value] of drafts) noteDrafts.set(key, value); }
+function commitNoteChange(transaction, keepNewBookmark = false) {
+  local.saved = transaction.saved;
+  if (persist()) { replaceNoteDrafts(transaction.drafts); return true; }
+  if (!keepNewBookmark) { const before = restorePassageNoteTransaction(transaction); local.saved = before.saved; replaceNoteDrafts(before.drafts); }
+  status.textContent = storageWarning(); return false;
+}
+function personalNoteEditor(item, context, token, { mode = 'reading', onSaved = () => {}, onClose } = {}) {
+  let expected = copySavedRecord(item);
+  const editor = el('div', undefined, 'personal-note-editor'), label = el('label', mode === 'saved' ? 'Your personal note' : 'Your personal note for ' + item.ref), input = el('textarea');
+  input.className = 'note-field'; input.maxLength = 4000; input.value = noteDrafts.get(noteKey(item)) ?? (typeof item.note === 'string' ? item.note : ''); label.append(input);
+  const message = el('p', noteDrafts.has(noteKey(item)) ? 'Unsaved personal note in this tab.' : 'Personal note · not scripture.', 'muted'); message.setAttribute('role', 'status');
+  const valid = () => editor.isConnected && sameSavedRecord(expected, token);
+  input.addEventListener('input', () => { if (!valid()) { message.textContent = 'This bookmark changed. Reopen it before editing; no note was overwritten.'; return; } noteDrafts.set(noteKey(expected), input.value); message.textContent = 'Unsaved personal note in this tab. Save or export before closing this browser tab.'; });
+  const controls = el('div', undefined, 'toolbar');
+  controls.append(button('Save note', () => {
+    if (!valid()) { message.textContent = 'This bookmark changed. Reopen it before saving; no note was overwritten.'; return; }
+    try {
+      const change = passageNoteTransaction(local.saved, noteDrafts, context, { type: 'save', mode, note: input.value });
+      const durable = commitNoteChange(change); expected = copySavedRecord(savedRecord(item));
+      message.textContent = durable ? 'Personal note saved in this browser.' : 'Not saved to browser storage. Your draft remains in this tab; export it before reloading.';
+      if (durable) status.textContent = 'Personal note saved in this browser.';
+      onSaved(durable);
+    } catch (error) { message.textContent = error.message; }
+  }));
+  if (onClose) controls.append(button('Close note editor', () => { if (token === epoch) onClose(); }));
+  editor.append(label, message, controls); return editor;
+}
+function removePersonalBookmark(item, token, host, trigger, onRemoved) {
+  if (!sameSavedRecord(item, token)) { status.textContent = 'This bookmark changed. Review it again before removing it.'; return; }
+  const snapshot = copySavedRecord(item), key = noteKey(item), hadDraft = noteDrafts.has(key), draft = noteDrafts.get(key);
+  const valid = () => host.isConnected && sameSavedRecord(snapshot, token) && noteDrafts.has(key) === hadDraft && noteDrafts.get(key) === draft;
+  function remove(confirmed) {
+    if (!valid()) { status.textContent = 'The bookmark or draft changed. Cancel removal and review it again; nothing was removed.'; return; }
+    try {
+      const change = passageNoteTransaction(local.saved, noteDrafts, { uid: item.uid, ref: item.ref }, { type: 'remove', mode: 'saved', confirmed });
+      if (commitNoteChange(change)) { status.textContent = 'Bookmark removed from this browser.'; onRemoved(); }
+    } catch (error) { status.textContent = error.message; }
+  }
+  if (!passageNoteRemovalNeedsConfirmation(item, noteDrafts)) { remove(false); return; }
+  host.querySelector('.note-removal-confirmation')?.remove();
+  const confirmation = el('div', undefined, 'note-removal-confirmation'); confirmation.setAttribute('role', 'group'); confirmation.setAttribute('aria-label', 'Confirm bookmark and note removal');
+  const cancel = button('Cancel removal', () => { if (token !== epoch) return; confirmation.remove(); if (trigger.isConnected) trigger.focus({ preventScroll: true }); });
+  confirmation.append(el('p', 'Remove this saved reference and its stored or unsaved personal note? Export first if you want to keep them.', 'notice'), cancel, button('Remove bookmark and note', () => remove(true)));
+  host.append(confirmation); cancel.focus({ preventScroll: true });
+}
+function attachPassageNote(selector, data, segment, container, control, token) {
+  const region = el('section', undefined, 'personal-note'); region.setAttribute('aria-label', 'Personal note for ' + segment.ref); container.append(region);
+  let context, open = false;
+  try { context = { uid: selector, ref: segment.ref, title: data.title || data.book?.title || data.citation || data.book_id || selector, offset: data.offset + data.segments.indexOf(segment), source_commit: sourceRevision(data) }; }
+  catch (error) { region.append(el('p', 'This source has no safe note reference: ' + error.message, 'notice'), link('See saved bookmark and note', '#saved')); return; }
+  const key = noteKey(context); open = noteDrafts.has(key) || Boolean(savedRecord(context)?.note);
+  function mark() { const active = Boolean(savedRecord(context)); control.textContent = active ? 'Saved ✓' : 'Save passage'; control.setAttribute('aria-pressed', String(active)); container.classList.toggle('marked', active); }
+  function ensure() {
+    const change = passageNoteTransaction(local.saved, noteDrafts, context, { type: 'ensure' });
+    const durable = commitNoteChange(change, true); mark();
+    if (durable) status.textContent = 'Passage reference saved. Personal notes remain separate from scripture.';
+    return savedRecord(context);
+  }
+  function show() {
+    if (token !== epoch) return;
+    region.replaceChildren(); mark(); const state = passageNoteState(local.saved, context);
+    if (!state.eligible) { region.append(el('p', state.reason + ' No personal note was associated with this reading.', 'notice'), link('See saved bookmark and note', '#saved')); return; }
+    if (state.warning) region.append(el('p', state.warning, 'notice'));
+    if (open && state.item) {
+      region.append(el('p', 'Personal note · not scripture. Only the saved reference and your note are stored in this browser, not the source text.', 'muted'), personalNoteEditor(state.item, context, token, { onSaved: mark, onClose: () => { open = false; show(); region.querySelector('button')?.focus({ preventScroll: true }); } }));
+    } else region.append(button(state.item ? 'View/edit personal note' : 'Add personal note', () => { if (token !== epoch) return; try { if (!savedRecord(context)) ensure(); open = true; show(); region.querySelector('textarea')?.focus({ preventScroll: true }); } catch (error) { status.textContent = error.message; } }));
+  }
+  control.addEventListener('click', () => {
+    if (token !== epoch) return;
+    const current = savedRecord(context);
+    if (current) removePersonalBookmark(current, token, region, control, () => { open = false; show(); control.focus({ preventScroll: true }); });
+    else try { ensure(); show(); } catch (error) { status.textContent = error.message; }
+  });
+  show();
 }
 async function read(args, token) {
   const book = args.get('book'), uid = args.get('uid') || 'dhp183'; let offset = offsetOf(args), plan = null, window = null;
@@ -266,10 +339,10 @@ async function read(args, token) {
     let positionHref; try { positionHref = readingPosition(positionContext, data.offset + data.segments.indexOf(segment), segment.ref, sourceRevision(data)); } catch {}
     const row = el('div', undefined, 'segment-label'), reference = el('span'); if (positionHref) { const exact = link(segment.ref, positionHref); exact.setAttribute('aria-label', 'Open exact passage ' + segment.ref); reference.append(exact); } else reference.textContent = segment.ref; if (segment.vri_paragraph) reference.append(document.createTextNode(' · VRI ' + segment.vri_paragraph)); row.append(reference);
     const active = local.saved.some(x => x.uid === selector && x.ref === segment.ref);
-    const save = button(active ? 'Saved ✓' : 'Save passage', () => saveSegment(selector, data, segment, save, part)); save.setAttribute('aria-label', 'Save passage ' + segment.ref); save.setAttribute('aria-pressed', String(active)); const actions = el('div', undefined, 'segment-actions'); actions.append(save);
+    const save = button(active ? 'Saved ✓' : 'Save passage', () => {}); save.setAttribute('aria-label', 'Save passage ' + segment.ref); save.setAttribute('aria-pressed', String(active)); const actions = el('div', undefined, 'segment-actions'); actions.append(save);
     if (kind !== 'commentary' && segment.type !== 'heading') { const study = button('Study words', () => wordStudy({ ...(kind === 'book' ? { book } : { uid: kind === 'canon' ? data.text_id || uid : uid }), segment: segment.ref, offset: 0, limit: 15 }, { ref: segment.ref, text: segment.text, source: data.source?.commit, script: $('script').value, kind }, token)); study.setAttribute('aria-label', 'Study words in ' + segment.ref); actions.append(study); }
     row.append(actions); part.classList.toggle('marked', active);
-    const text = el('p', segment.text, 'passage'); text.lang = 'pi'; part.append(row, text); passages.append(part);
+    const text = el('p', segment.text, 'passage'); text.lang = 'pi'; part.append(row, text); attachPassageNote(selector, data, segment, part, save, token); passages.append(part);
     if (positionHref) positions.push({ node: part, heading: segment.type === 'heading', href: positionHref });
   }
   const next = plan && window.end !== null ? (offset + data.returned < window.end ? offset + data.returned : null) : data.next_offset;
@@ -677,7 +750,7 @@ function saved() {
   const clear = button('Clear saved filters', () => { if (token !== epoch) return; query.value = ''; scope.value = 'all'; refresh(); query.focus(); });
   filters.append(searchLabel, scopeLabel, clear);
   view.append(filters, el('p', 'Search stays in this tab. It checks saved titles, references and personal notes, not the full scripture text.', 'muted'));
-  const count = el('p'); count.setAttribute('role', 'status'); count.setAttribute('aria-live', 'polite'); count.tabIndex = -1; view.append(count);
+  const count = el('p'); count.id = 'saved-count'; count.setAttribute('role', 'status'); count.setAttribute('aria-live', 'polite'); count.tabIndex = -1; view.append(count);
   const results = el('section'); results.setAttribute('aria-label', 'Saved passage results'); view.append(results);
   function refresh() {
     if (token !== epoch) return;
@@ -701,8 +774,8 @@ function saved() {
       } catch (error) {
         box.append(el('strong', item.title + ' · ' + item.ref), el('p', 'This saved reference cannot be opened safely: ' + error.message, 'notice'));
       }
-      const label = el('label', 'Your personal note'); const input = el('textarea'); input.className = 'note-field'; input.maxLength = 4000; input.value = noteDrafts.get(noteKey(item)) ?? (typeof item.note === 'string' ? item.note : ''); input.addEventListener('input', () => noteDrafts.set(noteKey(item), input.value)); label.append(input); box.append(label);
-      box.append(button('Save note', () => { if (token !== epoch) return; const original = local.saved.find(x => x.uid === item.uid && x.ref === item.ref); if (original) original.note = input.value; if (persist()) { noteDrafts.delete(noteKey(item)); status.textContent = 'Personal note saved in this browser.'; } }), button('Remove bookmark', () => { if (token !== epoch) return; noteDrafts.delete(noteKey(item)); local.saved = local.saved.filter(x => !(x.uid === item.uid && x.ref === item.ref)); persist(); show(true); }));
+      box.append(personalNoteEditor(item, { uid: item.uid, ref: item.ref }, token, { mode: 'saved' }));
+      const remove = button('Remove bookmark', () => removePersonalBookmark(savedRecord(item) || item, token, box, remove, () => show(true))); box.append(remove);
       if (item.source_commit) box.append(el('small', 'Saved source revision: ' + item.source_commit, 'muted')); results.append(box);
     }
     if (page.pages > 1) {

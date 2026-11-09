@@ -1,0 +1,74 @@
+{
+  "decision": "D219",
+  "baseline_commit": "70036b4bdab030b128f586e3fed00ff754500fa1",
+  "observed_on": "2026-11-09",
+  "feature": "source-aware-in-context-personal-notes",
+  "source_dataset_or_licence_changes": false,
+  "storage_format_changed": false,
+  "main_or_deployment_changed": false,
+  "local_validation": {
+    "new_policy_tests": 11,
+    "new_and_existing_bookmark_policy_tests": 21,
+    "full_check": {
+      "tests": 1172,
+      "passed": 1170,
+      "failed": 0,
+      "existing_optional_skips": 2,
+      "audit_texts": 8544,
+      "audit_failures": 0
+    },
+    "existing_saved_browser_checks": 44,
+    "existing_storage_browser_checks": 38,
+    "existing_reader_checks": 173,
+    "smoke": {
+      "tools": 34,
+      "checks": 64
+    },
+    "evals": {
+      "passed": 195,
+      "live_skipped": 6
+    }
+  },
+  "browser": {
+    "normal": {
+      "checks": 64,
+      "scans": 0,
+      "violations": 0
+    },
+    "installed": {
+      "checks": 64,
+      "scans": 0,
+      "violations": 0
+    },
+    "a11y": {
+      "checks": 128,
+      "scans": 136,
+      "violations": 0
+    }
+  },
+  "review": {
+    "independent_policy_and_ui_cross_review": true,
+    "outstanding_concrete_findings": 0,
+    "resolved": [
+      "Removed new native structuredClone dependency to preserve ES2020 browser baseline.",
+      "Blocked deeply malformed note metadata without cloning it into a reading error."
+    ]
+  },
+  "local_test_followups": [
+    {
+      "observation": "Existing dictionary next-page assertion reached its5second default while failure DOM snapshot already contained the correct next-page data.",
+      "action": "Kept exact content assertion and restored bounded30second readiness."
+    },
+    {
+      "observation": "Existing malformed-profile plan pointer click timed out after scroll readiness.",
+      "action": "Isolated unchanged pointer-click probe passed, then full storage regression passed38checks. No general product or transport root cause inferred."
+    }
+  ],
+  "ci": "Exact integrated-head GitHub checks are required separately.",
+  "limitations": [
+    "Private notes use existing best-effort localStorage guards, not atomic cross-tab or cross-device sync.",
+    "Typed notes, quota failures and changed-version fixtures are synthetic; Pali references and baseline pins are actual bundled metadata.",
+    "No source-body storage, publisher English retrieval, new rights approval, physical-device or human screen-reader certification.",
+    "Patthana remains assessment-only."
+  ]
+}

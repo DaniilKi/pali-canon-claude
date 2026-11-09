@@ -9,9 +9,9 @@
     if ((mapped || value !== void 0) && !source(value)) throw Error("The source has invalid reading-position revision metadata.");
     return value;
   }
-  function readingPosition(context, offset, ref, revision) {
-    if (!context || !integer(offset) || !string(ref, 400) || !source(revision) || Object.keys(context).some((k) => !["uid", "book", "kind", "plan", "day"].includes(k)) || Boolean(context.uid) === Boolean(context.book) || !string(context.uid || context.book, 300) || /https?:|javascript:|data:/i.test(context.uid || context.book) || context.kind !== void 0 && !["post", "commentary"].includes(context.kind) || context.book && context.kind || context.plan !== void 0 && (!context.uid || context.kind || !/^[a-z0-9-]{1,60}$/.test(context.plan) || !Number.isSafeInteger(context.day) || context.day < 1 || context.day > 400) || context.day !== void 0 && context.plan === void 0) throw Error("This reading position has unsupported source or reference metadata.");
-    return "#read?" + new URLSearchParams({ ...context, offset, ref, source: revision });
+  function readingPosition(context, offset, ref, revision2) {
+    if (!context || !integer(offset) || !string(ref, 400) || !source(revision2) || Object.keys(context).some((k) => !["uid", "book", "kind", "plan", "day"].includes(k)) || Boolean(context.uid) === Boolean(context.book) || !string(context.uid || context.book, 300) || /https?:|javascript:|data:/i.test(context.uid || context.book) || context.kind !== void 0 && !["post", "commentary"].includes(context.kind) || context.book && context.kind || context.plan !== void 0 && (!context.uid || context.kind || !/^[a-z0-9-]{1,60}$/.test(context.plan) || !Number.isSafeInteger(context.day) || context.day < 1 || context.day > 400) || context.day !== void 0 && context.plan === void 0) throw Error("This reading position has unsupported source or reference metadata.");
+    return "#read?" + new URLSearchParams({ ...context, offset, ref, source: revision2 });
   }
   function assertPositionPin(args, data) {
     if (!args.has("source")) return;
@@ -1171,6 +1171,107 @@
     return clone(next);
   }
 
+  // web/passage-notes.mjs
+  var own4 = (value, key2) => Object.hasOwn(value, key2);
+  var object5 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var position = (value) => Number.isSafeInteger(value) && value >= 0 && value <= 1e5;
+  var revision = (value) => typeof value === "string" && /^[A-Za-z0-9._-]{1,100}$/.test(value);
+  function clone2(value, depth = 0) {
+    if (depth > 32) throw Error("Personal-note metadata is nested too deeply. Keep/export it before repairing it.");
+    if (value instanceof Map) return new Map([...value].map(([key2, item]) => [clone2(key2, depth + 1), clone2(item, depth + 1)]));
+    if (Array.isArray(value)) return value.map((item) => clone2(item, depth + 1));
+    if (object5(value)) return Object.fromEntries(Object.entries(value).map(([key2, item]) => [key2, clone2(item, depth + 1)]));
+    return value;
+  }
+  var noteText = (value) => {
+    if (typeof value !== "string" || value.length > 4e3) throw Error("Personal notes must be text of at most 4,000 characters.");
+    return value;
+  };
+  function bookmarkShape(item) {
+    parseBookmarks(JSON.stringify({ format: "pali-library-v1", saved: [item] }));
+    if (own4(item, "offset") && !position(item.offset)) throw Error("This bookmark has invalid saved-position metadata.");
+    if (own4(item, "source_commit") && (!revision(item.source_commit) || !position(item.offset))) throw Error("This bookmark has invalid saved revision or position metadata.");
+  }
+  function currentContext(context) {
+    if (!object5(context) || Object.keys(context).some((key2) => !["uid", "ref", "title", "offset", "source_commit"].includes(key2))) throw Error("This passage has unsupported personal-note reference metadata.");
+    bookmarkShape({ ...context, note: "" });
+    if (!position(context.offset) || !revision(context.source_commit)) throw Error("This passage has no valid current position and source revision.");
+  }
+  function passageNoteKey(item) {
+    if (!object5(item) || typeof item.uid !== "string" || !item.uid || typeof item.ref !== "string" || !item.ref) throw Error("A personal note needs an exact source selector and passage reference.");
+    return JSON.stringify([item.uid, item.ref]);
+  }
+  function passageNoteState(saved2, context) {
+    if (!Array.isArray(saved2)) throw Error("Saved passages must be an array.");
+    let key2, item = null;
+    try {
+      currentContext(context);
+      key2 = passageNoteKey(context);
+      const matches = saved2.filter((value) => object5(value) && value.uid === context.uid && value.ref === context.ref);
+      if (matches.length > 1) throw Error("Duplicate saved references need review in Saved before editing a note here.");
+      item = matches[0] ?? null;
+      if (item) bookmarkShape(item);
+      if (item && own4(item, "source_commit") && item.source_commit !== context.source_commit) throw Error("The saved source revision differs. Review or edit this personal note in Saved; it was not associated with the current passage.");
+      const legacy = Boolean(item && !own4(item, "source_commit"));
+      return { eligible: true, reason: null, warning: legacy ? "Unversioned bookmark: no source revision was saved. Check the reference before using this personal note; editing leaves it unversioned." : null, legacy, item: clone2(item), key: key2 };
+    } catch (error) {
+      return { eligible: false, reason: error.message, warning: null, legacy: false, item: null, key: key2 ?? null };
+    }
+  }
+  function createPassageBookmark(context) {
+    currentContext(context);
+    return { uid: context.uid, ref: context.ref, title: context.title, note: "", offset: context.offset, source_commit: context.source_commit };
+  }
+  function passageNoteRemovalNeedsConfirmation(item, drafts) {
+    if (!(drafts instanceof Map)) throw Error("Personal-note drafts must be a Map.");
+    const key2 = passageNoteKey(item);
+    const stored = item.note === void 0 ? "" : noteText(item.note);
+    const draft = drafts.has(key2) ? noteText(drafts.get(key2)) : "";
+    return stored.length > 0 || draft.length > 0;
+  }
+  function passageNoteTransaction(saved2, drafts, context, operation) {
+    if (!(drafts instanceof Map) || !object5(operation) || Object.keys(operation).some((key3) => !["type", "note", "confirmed", "mode"].includes(key3)) || !["ensure", "save", "remove"].includes(operation.type) || own4(operation, "mode") && !["reading", "saved"].includes(operation.mode)) throw Error("Unsupported personal-note change.");
+    let state;
+    if (operation.mode === "saved") {
+      if (!Array.isArray(saved2) || !object5(context) || Object.keys(context).some((key3) => !["uid", "ref"].includes(key3)) || operation.type === "ensure") throw Error("Saved note edits require an exact existing bookmark identity.");
+      parseBookmarks(JSON.stringify({ format: "pali-library-v1", saved: [{ ...context, title: "Personal bookmark", note: "" }] }));
+      const matches = saved2.filter((item) => object5(item) && item.uid === context.uid && item.ref === context.ref);
+      if (matches.length !== 1) throw Error("Saved note edits require one exact existing bookmark.");
+      state = { eligible: true, key: passageNoteKey(context), item: clone2(matches[0]) };
+    } else state = passageNoteState(saved2, context);
+    if (!state.eligible) throw Error(state.reason);
+    const { key: key2 } = state;
+    if (drafts.has(key2)) noteText(drafts.get(key2));
+    if (operation.type !== "save" && own4(operation, "note")) throw Error("Only saving a personal note accepts note text.");
+    if (own4(operation, "confirmed") && typeof operation.confirmed !== "boolean") throw Error("Removal confirmation must be explicit.");
+    const note = operation.type === "save" ? noteText(operation.note) : void 0;
+    if (operation.type === "remove" && !state.item) throw Error("This exact passage is not saved.");
+    if (operation.type === "remove" && passageNoteRemovalNeedsConfirmation(state.item, drafts) && operation.confirmed !== true) {
+      const error = Error("Confirm removal of this bookmark and its personal note first.");
+      error.code = "NOTE_CONFIRMATION_REQUIRED";
+      throw error;
+    }
+    if (!state.item && saved2.length >= 500) throw Error("Your saved list is full (500 passages). Export or remove passages before adding a note.");
+    const before = { saved: clone2(saved2), drafts: clone2(drafts) };
+    if (operation.type === "save") before.drafts.set(key2, note);
+    const result = { saved: clone2(saved2), drafts: clone2(drafts), before, item: null, removed: operation.type === "remove" };
+    const index = result.saved.findIndex((item) => object5(item) && item.uid === context.uid && item.ref === context.ref);
+    if (operation.type === "remove") result.saved.splice(index, 1);
+    else {
+      const item = state.item ?? createPassageBookmark(context);
+      if (operation.type === "save") item.note = note;
+      if (index < 0) result.saved.push(item);
+      else result.saved[index] = item;
+      result.item = clone2(item);
+    }
+    if (operation.type !== "ensure") result.drafts.delete(key2);
+    return result;
+  }
+  function restorePassageNoteTransaction(transaction) {
+    if (!object5(transaction?.before) || !Array.isArray(transaction.before.saved) || !(transaction.before.drafts instanceof Map)) throw Error("No personal-note transaction snapshot is available.");
+    return clone2(transaction.before);
+  }
+
   // web/reader.js
   var $ = (id2) => document.getElementById(id2);
   var view = $("view");
@@ -1188,7 +1289,7 @@
   var storageConflict = false;
   var storageReadFailed = false;
   var noteDrafts = /* @__PURE__ */ new Map();
-  var noteKey = (item) => JSON.stringify([item.uid, item.ref]);
+  var noteKey = passageNoteKey;
   function loadLocal() {
     try {
       const raw = localStorage.getItem(KEY);
@@ -1618,19 +1719,178 @@
     if (selector.startsWith("commentary:")) return { kind: "commentary", uid: selector };
     return { uid: selector };
   }
-  function saveSegment(selector, data, segment, control, container) {
-    const found = local.saved.findIndex((x) => x.uid === selector && x.ref === segment.ref);
-    if (found >= 0) local.saved.splice(found, 1);
-    else if (local.saved.length < 500) local.saved.push({ uid: selector, ref: segment.ref, title: data.title || data.book?.title || data.citation || data.book_id, note: "", offset: data.offset + data.segments.indexOf(segment), source_commit: sourceRevision(data) });
-    else {
-      status2.textContent = "Your saved list is full (500 passages). Export it before removing entries.";
+  var copySavedRecord = (item) => item === void 0 ? void 0 : JSON.parse(JSON.stringify(item));
+  var savedRecord = (item) => local.saved.find((x) => x.uid === item.uid && x.ref === item.ref);
+  var sameSavedRecord = (expected, token) => token === epoch && JSON.stringify(savedRecord(expected)) === JSON.stringify(expected);
+  function replaceNoteDrafts(drafts) {
+    noteDrafts.clear();
+    for (const [key2, value] of drafts) noteDrafts.set(key2, value);
+  }
+  function commitNoteChange(transaction, keepNewBookmark = false) {
+    local.saved = transaction.saved;
+    if (persist()) {
+      replaceNoteDrafts(transaction.drafts);
+      return true;
+    }
+    if (!keepNewBookmark) {
+      const before = restorePassageNoteTransaction(transaction);
+      local.saved = before.saved;
+      replaceNoteDrafts(before.drafts);
+    }
+    status2.textContent = storageWarning();
+    return false;
+  }
+  function personalNoteEditor(item, context, token, { mode = "reading", onSaved = () => {
+  }, onClose } = {}) {
+    let expected = copySavedRecord(item);
+    const editor = el("div", void 0, "personal-note-editor"), label = el("label", mode === "saved" ? "Your personal note" : "Your personal note for " + item.ref), input = el("textarea");
+    input.className = "note-field";
+    input.maxLength = 4e3;
+    input.value = noteDrafts.get(noteKey(item)) ?? (typeof item.note === "string" ? item.note : "");
+    label.append(input);
+    const message = el("p", noteDrafts.has(noteKey(item)) ? "Unsaved personal note in this tab." : "Personal note \xB7 not scripture.", "muted");
+    message.setAttribute("role", "status");
+    const valid = () => editor.isConnected && sameSavedRecord(expected, token);
+    input.addEventListener("input", () => {
+      if (!valid()) {
+        message.textContent = "This bookmark changed. Reopen it before editing; no note was overwritten.";
+        return;
+      }
+      noteDrafts.set(noteKey(expected), input.value);
+      message.textContent = "Unsaved personal note in this tab. Save or export before closing this browser tab.";
+    });
+    const controls = el("div", void 0, "toolbar");
+    controls.append(button("Save note", () => {
+      if (!valid()) {
+        message.textContent = "This bookmark changed. Reopen it before saving; no note was overwritten.";
+        return;
+      }
+      try {
+        const change = passageNoteTransaction(local.saved, noteDrafts, context, { type: "save", mode, note: input.value });
+        const durable = commitNoteChange(change);
+        expected = copySavedRecord(savedRecord(item));
+        message.textContent = durable ? "Personal note saved in this browser." : "Not saved to browser storage. Your draft remains in this tab; export it before reloading.";
+        if (durable) status2.textContent = "Personal note saved in this browser.";
+        onSaved(durable);
+      } catch (error) {
+        message.textContent = error.message;
+      }
+    }));
+    if (onClose) controls.append(button("Close note editor", () => {
+      if (token === epoch) onClose();
+    }));
+    editor.append(label, message, controls);
+    return editor;
+  }
+  function removePersonalBookmark(item, token, host, trigger, onRemoved) {
+    if (!sameSavedRecord(item, token)) {
+      status2.textContent = "This bookmark changed. Review it again before removing it.";
       return;
     }
-    const active = local.saved.some((x) => x.uid === selector && x.ref === segment.ref);
-    control.textContent = active ? "Saved \u2713" : "Save passage";
-    control.setAttribute("aria-pressed", String(active));
-    container.classList.toggle("marked", active);
-    persist();
+    const snapshot = copySavedRecord(item), key2 = noteKey(item), hadDraft = noteDrafts.has(key2), draft = noteDrafts.get(key2);
+    const valid = () => host.isConnected && sameSavedRecord(snapshot, token) && noteDrafts.has(key2) === hadDraft && noteDrafts.get(key2) === draft;
+    function remove(confirmed) {
+      if (!valid()) {
+        status2.textContent = "The bookmark or draft changed. Cancel removal and review it again; nothing was removed.";
+        return;
+      }
+      try {
+        const change = passageNoteTransaction(local.saved, noteDrafts, { uid: item.uid, ref: item.ref }, { type: "remove", mode: "saved", confirmed });
+        if (commitNoteChange(change)) {
+          status2.textContent = "Bookmark removed from this browser.";
+          onRemoved();
+        }
+      } catch (error) {
+        status2.textContent = error.message;
+      }
+    }
+    if (!passageNoteRemovalNeedsConfirmation(item, noteDrafts)) {
+      remove(false);
+      return;
+    }
+    host.querySelector(".note-removal-confirmation")?.remove();
+    const confirmation = el("div", void 0, "note-removal-confirmation");
+    confirmation.setAttribute("role", "group");
+    confirmation.setAttribute("aria-label", "Confirm bookmark and note removal");
+    const cancel = button("Cancel removal", () => {
+      if (token !== epoch) return;
+      confirmation.remove();
+      if (trigger.isConnected) trigger.focus({ preventScroll: true });
+    });
+    confirmation.append(el("p", "Remove this saved reference and its stored or unsaved personal note? Export first if you want to keep them.", "notice"), cancel, button("Remove bookmark and note", () => remove(true)));
+    host.append(confirmation);
+    cancel.focus({ preventScroll: true });
+  }
+  function attachPassageNote(selector, data, segment, container, control, token) {
+    const region = el("section", void 0, "personal-note");
+    region.setAttribute("aria-label", "Personal note for " + segment.ref);
+    container.append(region);
+    let context, open = false;
+    try {
+      context = { uid: selector, ref: segment.ref, title: data.title || data.book?.title || data.citation || data.book_id || selector, offset: data.offset + data.segments.indexOf(segment), source_commit: sourceRevision(data) };
+    } catch (error) {
+      region.append(el("p", "This source has no safe note reference: " + error.message, "notice"), link("See saved bookmark and note", "#saved"));
+      return;
+    }
+    const key2 = noteKey(context);
+    open = noteDrafts.has(key2) || Boolean(savedRecord(context)?.note);
+    function mark() {
+      const active = Boolean(savedRecord(context));
+      control.textContent = active ? "Saved \u2713" : "Save passage";
+      control.setAttribute("aria-pressed", String(active));
+      container.classList.toggle("marked", active);
+    }
+    function ensure() {
+      const change = passageNoteTransaction(local.saved, noteDrafts, context, { type: "ensure" });
+      const durable = commitNoteChange(change, true);
+      mark();
+      if (durable) status2.textContent = "Passage reference saved. Personal notes remain separate from scripture.";
+      return savedRecord(context);
+    }
+    function show() {
+      if (token !== epoch) return;
+      region.replaceChildren();
+      mark();
+      const state = passageNoteState(local.saved, context);
+      if (!state.eligible) {
+        region.append(el("p", state.reason + " No personal note was associated with this reading.", "notice"), link("See saved bookmark and note", "#saved"));
+        return;
+      }
+      if (state.warning) region.append(el("p", state.warning, "notice"));
+      if (open && state.item) {
+        region.append(el("p", "Personal note \xB7 not scripture. Only the saved reference and your note are stored in this browser, not the source text.", "muted"), personalNoteEditor(state.item, context, token, { onSaved: mark, onClose: () => {
+          open = false;
+          show();
+          region.querySelector("button")?.focus({ preventScroll: true });
+        } }));
+      } else region.append(button(state.item ? "View/edit personal note" : "Add personal note", () => {
+        if (token !== epoch) return;
+        try {
+          if (!savedRecord(context)) ensure();
+          open = true;
+          show();
+          region.querySelector("textarea")?.focus({ preventScroll: true });
+        } catch (error) {
+          status2.textContent = error.message;
+        }
+      }));
+    }
+    control.addEventListener("click", () => {
+      if (token !== epoch) return;
+      const current = savedRecord(context);
+      if (current) removePersonalBookmark(current, token, region, control, () => {
+        open = false;
+        show();
+        control.focus({ preventScroll: true });
+      });
+      else try {
+        ensure();
+        show();
+      } catch (error) {
+        status2.textContent = error.message;
+      }
+    });
+    show();
   }
   async function read(args, token) {
     const book = args.get("book"), uid2 = args.get("uid") || "dhp183";
@@ -1717,7 +1977,8 @@
       if (segment.vri_paragraph) reference.append(document.createTextNode(" \xB7 VRI " + segment.vri_paragraph));
       row.append(reference);
       const active = local.saved.some((x) => x.uid === selector && x.ref === segment.ref);
-      const save = button(active ? "Saved \u2713" : "Save passage", () => saveSegment(selector, data, segment, save, part));
+      const save = button(active ? "Saved \u2713" : "Save passage", () => {
+      });
       save.setAttribute("aria-label", "Save passage " + segment.ref);
       save.setAttribute("aria-pressed", String(active));
       const actions = el("div", void 0, "segment-actions");
@@ -1732,6 +1993,7 @@
       const text5 = el("p", segment.text, "passage");
       text5.lang = "pi";
       part.append(row, text5);
+      attachPassageNote(selector, data, segment, part, save, token);
       passages.append(part);
       if (positionHref) positions.push({ node: part, heading: segment.type === "heading", href: positionHref });
     }
@@ -2643,6 +2905,7 @@
     filters.append(searchLabel, scopeLabel, clear);
     view.append(filters, el("p", "Search stays in this tab. It checks saved titles, references and personal notes, not the full scripture text.", "muted"));
     const count2 = el("p");
+    count2.id = "saved-count";
     count2.setAttribute("role", "status");
     count2.setAttribute("aria-live", "polite");
     count2.tabIndex = -1;
@@ -2680,29 +2943,9 @@
         } catch (error) {
           box.append(el("strong", item.title + " \xB7 " + item.ref), el("p", "This saved reference cannot be opened safely: " + error.message, "notice"));
         }
-        const label = el("label", "Your personal note");
-        const input = el("textarea");
-        input.className = "note-field";
-        input.maxLength = 4e3;
-        input.value = noteDrafts.get(noteKey(item)) ?? (typeof item.note === "string" ? item.note : "");
-        input.addEventListener("input", () => noteDrafts.set(noteKey(item), input.value));
-        label.append(input);
-        box.append(label);
-        box.append(button("Save note", () => {
-          if (token !== epoch) return;
-          const original = local.saved.find((x) => x.uid === item.uid && x.ref === item.ref);
-          if (original) original.note = input.value;
-          if (persist()) {
-            noteDrafts.delete(noteKey(item));
-            status2.textContent = "Personal note saved in this browser.";
-          }
-        }), button("Remove bookmark", () => {
-          if (token !== epoch) return;
-          noteDrafts.delete(noteKey(item));
-          local.saved = local.saved.filter((x) => !(x.uid === item.uid && x.ref === item.ref));
-          persist();
-          show(true);
-        }));
+        box.append(personalNoteEditor(item, { uid: item.uid, ref: item.ref }, token, { mode: "saved" }));
+        const remove = button("Remove bookmark", () => removePersonalBookmark(savedRecord(item) || item, token, box, remove, () => show(true)));
+        box.append(remove);
         if (item.source_commit) box.append(el("small", "Saved source revision: " + item.source_commit, "muted"));
         results.append(box);
       }
