@@ -197,5 +197,51 @@
     "Source coverage and Patthana raw-author-artifact access unchanged."
   ],
   "main_merge": false,
-  "deployment": false
+  "deployment": false,
+  "first_integrated_ci": {
+    "commit": "7bd068594d499552fbefff6098d9dee047f4583e",
+    "check_run": 42585745941,
+    "chapters": {
+      "normal": 38,
+      "a11y": 70,
+      "installed": 38,
+      "scans": 43,
+      "violations": 0
+    },
+    "firefox": {
+      "version": "153.0",
+      "normal": 64,
+      "a11y": 64,
+      "scans": 28,
+      "violations": 0
+    },
+    "webkit": {
+      "version": "26.5",
+      "passed_before_failure": 13,
+      "a11y": "not run after normal failure",
+      "failure": "strict horizontal overflow at390px/light/font30 with valid native chapter menu; product CSS defect"
+    }
+  },
+  "layout_repair": {
+    "fix": "Opened phone tools occupy full row; chapter selector/button stack in one column with bounded select width.",
+    "source_or_font_or_closed_fold_changed": false,
+    "strict_overflow_assertion_weakened": false,
+    "diagnostics": "On failure only, at most10 content-free element geometry/class/id records; no text, values or HTML.",
+    "source_file_guidance": "Explicitly acknowledges appended works in physical files.",
+    "full_local_unit_check_stage": "before CSS-only repair; backend/policy unchanged afterward; exact integrated CI reruns full suite",
+    "targeted_local_validation": {
+      "compat-layout-normal": {
+        "passed": 64,
+        "violations": 0
+      },
+      "chapters-layout-normal": {
+        "passed": 38,
+        "violations": 0
+      },
+      "compact-layout-normal": {
+        "passed": 45,
+        "violations": 0
+      }
+    }
+  }
 }

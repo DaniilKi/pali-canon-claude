@@ -37,7 +37,7 @@ with socket.socket() as sock:
     sock.bind(('127.0.0.1', 0))
     port = sock.getsockname()[1]
 base = f'http://127.0.0.1:{port}'
-checks, scans, source_receipts = [], [], []
+checks, scans, source_receipts, layout_failures = [], [], [], []
 engine_info = {'requested': args.engine, 'playwright': importlib.metadata.version('playwright')}
 server = subprocess.Popen(['node', str(server_dir / 'http.cjs')], cwd='/tmp' if args.server_dir else ROOT,
                           env={**os.environ, 'PORT': str(port), 'HOST': '127.0.0.1', 'RATE_LIMIT_PER_MINUTE': '0'},
@@ -82,7 +82,7 @@ def url(context):
 def report(status, error_type=None):
     result = {'status': status, 'passed': len(checks), 'checks': checks, 'engine': engine_info,
               'outside_source_tree': bool(args.server_dir), 'duration_seconds': round(time.monotonic() - started, 2),
-              'actual_sources': source_receipts,
+              'actual_sources': source_receipts, 'layout_failures': layout_failures,
               'a11y': {'scans': len(scans), 'violations': sum(len(s['violations']) for s in scans), 'results': scans},
               'limits': 'Actual bundled canonical/root-book/direct-commentary/post-canonical text, identities, revisions and plan signatures. Notes are synthetic UTF-8/private markup fixtures. Clipboard denial, controlled old source pin, retained stale file/callback and a held real-data response with abort-ignoring transport are explicit fixtures. No publisher English fetch or source activation. Source codepoints and layout are checked, not OS glyph shaping or human screen-reader output. Desktop Firefox/WebKit engines are not physical Firefox devices, iOS/Safari, Mobile Files, OS clipboard or printer certification. Axe contexts alone bypass CSP; normal contexts preserve production CSP.'}
     if error_type:
@@ -204,7 +204,16 @@ try:
 
             def audit(page, state, label):
                 privacy(page, state)
-                assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'), f'{args.engine} {width}px {theme}: {label} overflow'
+                geometry = page.evaluate("""()=>{const viewport=innerWidth,documentWidth=document.documentElement.scrollWidth;
+                    if(documentWidth<=viewport)return {viewport,documentWidth};
+                    const offenders=[...document.querySelectorAll('body *')].map(e=>{const r=e.getBoundingClientRect();
+                    return {tag:e.tagName.toLowerCase(),id:e.id.slice(0,160),class:typeof e.className==='string'?e.className.slice(0,160):'',
+                    left:r.left,right:r.right,width:r.width,clientWidth:e.clientWidth,scrollWidth:e.scrollWidth,minWidth:getComputedStyle(e).minWidth}})
+                    .filter(r=>r.width>0&&(r.right>viewport||r.left<0)).sort((a,b)=>b.right-a.right).slice(0,10);
+                    return {viewport,documentWidth,offenders}}""")
+                if geometry['documentWidth'] > geometry['viewport']:
+                    layout_failures.append({'width': width, 'theme': theme, 'state': label, **geometry})
+                assert geometry['documentWidth'] <= geometry['viewport'], f'{args.engine} {width}px {theme}: {label} overflow: {json.dumps(geometry)}'
                 if args.a11y:
                     page.add_script_tag(path=str(ROOT / 'node_modules/axe-core/axe.min.js'))
                     d = page.evaluate("async()=>await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})")

@@ -81,3 +81,5 @@ main:focus{outline:none}
 .source-context,.chapter-navigation{flex-basis:100%;min-width:0;overflow-wrap:anywhere}.source-context h3{font-size:19px;margin:12px 0}.reading-context-status{font-size:13px;line-height:1.5;margin-block:4px;overflow-wrap:anywhere}.chapter-picker{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;align-items:end;max-width:720px;margin-block:12px}.chapter-picker label{min-width:0}.chapter-picker select{display:block;width:100%;margin-top:5px}.chapter-picker p{grid-column:1/-1;margin:0;font-size:13px;overflow-wrap:anywhere}
 /* Keep the position count close to the compact source status; intervening warnings keep their spacing. */
 .reading-context-status + p.muted{margin-top:8px}
+/* Open phone tools need a full row; native chapter selectors must not share a narrow track with their button. */
+@media(max-width:760px){.study-actions[open]{flex-basis:100%}.chapter-picker{grid-template-columns:minmax(0,1fr)}.chapter-picker select{min-width:0;max-width:100%}.chapter-picker button{width:100%}}
