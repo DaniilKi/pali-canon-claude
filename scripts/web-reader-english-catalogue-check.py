@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actual bundled English-link discovery; metadata never authorizes English retrieval."""
-import argparse,copy,json,os,pathlib,socket,subprocess,time,urllib.request,urllib.parse
-from playwright.sync_api import sync_playwright
+import argparse,copy,json,os,pathlib,re,socket,subprocess,time,urllib.request,urllib.parse
+from playwright.sync_api import sync_playwright,expect
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser();p.add_argument('--report');p.add_argument('--a11y',action='store_true');p.add_argument('--package-dir',type=pathlib.Path);p.add_argument('--server-dir',type=pathlib.Path);args=p.parse_args()
 assert not(args.package_dir and args.server_dir)
@@ -23,7 +23,22 @@ def href(availability='linked',collection=None,offset=0):
  if collection:query['collection']=collection
  if offset:query['offset']=offset
  return base+'/#browse?'+urllib.parse.urlencode(query)
-def ready(page):page.get_by_role('heading',name='Find English sources',exact=True).wait_for();page.locator('#status').filter(has_text='Opening').wait_for(state='hidden')
+def ready(page,data):
+ # A hash change may return while the previous identical heading is still mounted.
+ # Wait for the exact selected URL and complete response content, not that heading alone.
+ expected_url=href(data['availability'],data['collection'],data['offset'])
+ if data['availability']=='linked' and data['collection'] is None and data['offset']==0:
+  expect(page).to_have_url(re.compile('^'+re.escape(base+'/#browse?node=english')+'(?:&availability=linked)?$'))
+ else:expect(page).to_have_url(expected_url)
+ expect(page.get_by_role('heading',name='Find English sources',exact=True)).to_be_visible()
+ expect(page.get_by_label('English availability',exact=True)).to_have_value(data['availability'])
+ expect(page.get_by_label('Collection',exact=True)).to_have_value(data['collection'] or '')
+ expect(page.locator('.english-catalogue-count')).to_have_text(str(data['total'])+' matching indexed record'+('' if data['total']==1 else 's'))
+ expect(page.locator('.cards .entry strong')).to_have_text([x['title'] for x in data['items']])
+ if not data['total']:expect(page.get_by_text('No matching records in this index',exact=False)).to_be_visible()
+ elif data['offset']>=data['total']:expect(page.get_by_text('This page is beyond the matching records.',exact=True)).to_be_visible()
+ else:expect(page.get_by_text('Showing '+str(data['offset']+1)+'–'+str(data['offset']+len(data['items']))+' of '+str(data['total']),exact=True)).to_be_visible()
+ page.locator('#status').filter(has_text='Opening').wait_for(state='hidden')
 try:
  for _ in range(100):
   try:urllib.request.urlopen(base+'/healthz',timeout=1);break
@@ -43,6 +58,7 @@ try:
  while at is not None:
   data=catalogue('scoped',offset=at);scoped_pages.append(data);at=data['next_offset']
  empty_collection=next(c['id'] for c in linked['collections'] if catalogue('linked',collection=c['id'])['total']==0)
+ empty=catalogue('linked',collection=empty_collection);beyond=catalogue('whole',offset=100000,collection='dhp')
  with sync_playwright() as pw:
   browser=pw.chromium.launch(executable_path=os.environ.get('PALI_BROWSER','/usr/bin/chromium'),headless=True)
   cases=[(w,t) for w in [320,390,768,1280] for t in (['light','dark'] if args.a11y else ['light'])]
@@ -61,20 +77,20 @@ try:
     page.add_script_tag(path=str(ROOT/'node_modules/axe-core/axe.min.js'))
     d=page.evaluate("async()=>await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})")
     scans.append({'width':width,'theme':theme,'state':state,'violations':[{'id':v['id'],'targets':[n['target'] for n in v['nodes']]} for v in d['violations']]})
-   page.goto(base+'/#browse?node=canon');page.get_by_role('link',name='Find English sources',exact=True).click();ready(page)
+   page.goto(base+'/#browse?node=canon');page.get_by_role('link',name='Find English sources',exact=True).click();ready(page,linked)
    before=page.evaluate("localStorage.getItem('pali-library-v1')")
-   assert page.locator('.cards .entry strong').all_text_contents()==[x['title'] for x in linked['items']]
+   expect(page.locator('.cards .entry strong')).to_have_text([x['title'] for x in linked['items']])
    assert str(linked['total']) in page.locator('.english-catalogue-count').inner_text();assert 'not a guarantee' in page.locator('#view').inner_text();audit('default catalogue');passed('Library link opens actual metadata catalogue with counts, completeness caution and no overflow')
-   page.get_by_role('link',name='Next page →',exact=True).click();ready(page);assert 'offset=40' in page.url
-   assert page.locator('.cards .entry strong').all_text_contents()==[x['title'] for x in second['items']]
-   page.go_back();ready(page);assert page.locator('.cards .entry strong').all_text_contents()==[x['title'] for x in linked['items']];passed('hash pagination and browser back preserve actual record pages')
-   page.get_by_label('English availability',exact=True).select_option('none');page.get_by_label('Collection',exact=True).select_option('sn');page.get_by_role('button',name='Apply',exact=True).focus();page.keyboard.press('Enter');ready(page)
-   assert page.url.endswith('availability=none&collection=sn');assert page.locator('.cards .entry strong').all_text_contents()==[x['title'] for x in none['items']]
-   page.reload();ready(page);assert page.get_by_label('English availability',exact=True).input_value()=='none';assert page.get_by_label('Collection',exact=True).input_value()=='sn';audit('filtered catalogue');passed('keyboard Apply resets offset and reload preserves both exact filters')
+   page.get_by_role('link',name='Next page →',exact=True).click();ready(page,second);expect(page).to_have_url(href(offset=40))
+   expect(page.locator('.cards .entry strong')).to_have_text([x['title'] for x in second['items']])
+   page.go_back();ready(page,linked);expect(page.locator('.cards .entry strong')).to_have_text([x['title'] for x in linked['items']]);passed('hash pagination and browser back preserve actual record pages')
+   page.get_by_label('English availability',exact=True).select_option('none');page.get_by_label('Collection',exact=True).select_option('sn');page.get_by_role('button',name='Apply',exact=True).focus();page.keyboard.press('Enter');ready(page,none)
+   expect(page).to_have_url(href('none','sn'));expect(page.locator('.cards .entry strong')).to_have_text([x['title'] for x in none['items']])
+   page.reload();ready(page,none);expect(page.get_by_label('English availability',exact=True)).to_have_value('none');expect(page.get_by_label('Collection',exact=True)).to_have_value('sn');audit('filtered catalogue');passed('keyboard Apply resets offset and reload preserves both exact filters')
    discovered=[]
    for data in scoped_pages:
-    page.goto(href('scoped',offset=data['offset']));ready(page)
-    assert page.locator('.cards .entry strong').all_text_contents()==[x['title'] for x in data['items']]
+    page.goto(href('scoped',offset=data['offset']));ready(page,data)
+    expect(page.locator('.cards .entry strong')).to_have_text([x['title'] for x in data['items']])
     for card,item in zip(page.locator('.cards .entry').all(),data['items']):
      assert card.get_attribute('href')=='#read?uid='+urllib.parse.quote(item['id'],safe='')
      label=card.inner_text();assert 'review required' in label
@@ -82,10 +98,10 @@ try:
      if item.get('shared_english_available'):assert 'shared' in label.lower()
     discovered.extend(x['id'] for x in data['items'])
    assert len(discovered)==scoped['total'];audit('scoped catalogue');passed('every scoped-only matching record is reachable with partial/shared review badges; all registered partials exist in linked catalogue')
-   page.goto(href('whole','dhp'));ready(page);assert 'Linked through' in page.locator('#view').inner_text();audit('inherited chapter cue');passed('whole-link filter labels inherited chapter context without inventing individual alignment')
-   page.goto(href('linked',empty_collection));ready(page);page.get_by_text('No matching records in this index',exact=False).wait_for();assert page.locator('.cards .entry').count()==0;assert 'elsewhere' in page.locator('#view').inner_text()
-   page.goto(href('whole','dhp',100000));ready(page);page.get_by_text('This page is beyond the matching records.',exact=True).wait_for();assert page.get_by_text('No matching records in this index',exact=False).count()==0
-   page.get_by_role('link',name='Return to first matching page',exact=True).click();ready(page);assert 'offset=' not in page.url;audit('first matching page');passed('empty-index matches differ from out-of-range pages, with exact-filter first-page recovery')
+   page.goto(href('whole','dhp'));ready(page,whole);assert 'Linked through' in page.locator('#view').inner_text();audit('inherited chapter cue');passed('whole-link filter labels inherited chapter context without inventing individual alignment')
+   page.goto(href('linked',empty_collection));ready(page,empty);page.get_by_text('No matching records in this index',exact=False).wait_for();assert page.locator('.cards .entry').count()==0;assert 'elsewhere' in page.locator('#view').inner_text()
+   page.goto(href('whole','dhp',100000));ready(page,beyond);page.get_by_text('This page is beyond the matching records.',exact=True).wait_for();assert page.get_by_text('No matching records in this index',exact=False).count()==0
+   page.get_by_role('link',name='Return to first matching page',exact=True).click();ready(page,whole);expect(page).to_have_url(href('whole','dhp'));audit('first matching page');passed('empty-index matches differ from out-of-range pages, with exact-filter first-page recovery')
    # Explicit metadata fixture checks the combined badge; no fixture English is retrieved.
    combined=copy.deepcopy(scoped);combined['items'][0]['partial_english_available']=1;combined['items'][0]['shared_english_available']=1
    def reply(route,data):
@@ -93,14 +109,14 @@ try:
    def both(route):
     if route.request.post_data_json.get('params',{}).get('arguments',{}).get('node')=='english':reply(route,combined)
     else:route.continue_()
-   page.route('**/mcp',both);page.goto(href('scoped'));ready(page);page.get_by_text('Partial and shared sources · review required',exact=True).first.wait_for();page.unroute('**/mcp');passed('controlled mixed-scope metadata displays combined review badge without retrieval')
+   page.route('**/mcp',both);page.goto(href('scoped'));ready(page,combined);page.get_by_text('Partial and shared sources · review required',exact=True).first.wait_for();page.unroute('**/mcp');passed('controlled mixed-scope metadata displays combined review badge without retrieval')
    bad=copy.deepcopy(linked);bad['items'][0]['read_with']={'tool':'get_translation','uid':bad['items'][0]['id']}
    def malformed(route):
     if route.request.post_data_json.get('params',{}).get('arguments',{}).get('node')=='english':reply(route,bad)
     else:route.continue_()
    page.route('**/mcp',malformed);page.goto(href());page.get_by_role('heading',name='No passage was substituted.',exact=True).wait_for();assert page.locator('.cards').count()==0;page.unroute('**/mcp');audit('malformed catalogue refused');passed('unsafe source command refuses before rendering any catalogue cards')
    for query in ['node=English','node=%20english%20','node=eng%20lish','node=eng%09lish','node=%C3%89nglish','node=canon&node=english','node=english&node=canon','node=books&availability=none','node=post&collection=sn']:
-    count=len(calls);page.goto(base+'/#browse?'+query);page.get_by_role('heading',name='No passage was substituted.',exact=True).wait_for();assert page.locator('.cards').count()==0;assert len(calls)==count
+    count=len(calls);old_heading=page.locator('#view h2').element_handle();page.goto(base+'/#browse?'+query);old_heading.wait_for_element_state('hidden');expect(page).to_have_url(base+'/#browse?'+query);expect(page.get_by_role('heading',name='No passage was substituted.',exact=True)).to_be_visible();expect(page.locator('.cards')).to_have_count(0);assert len(calls)==count
    passed('noncanonical aliases, duplicate nodes and off-route filters refuse before any request or silent filter drop')
    page.goto(base+'/#browse?node=canon');page.get_by_role('heading',name='The Pāli Canon',exact=True).wait_for()
    held=[]
@@ -110,11 +126,11 @@ try:
    page.route('**/mcp',delay)
    with page.expect_request(lambda r:r.method=='POST' and r.url.endswith('/mcp') and r.post_data_json.get('params',{}).get('arguments',{}).get('node')=='english'):page.goto(href())
    page.get_by_role('link',name='Library',exact=True).click();page.get_by_role('heading',name='The Pāli Canon',exact=True).wait_for();assert held;reply(held[0],linked);page.unroute('**/mcp');assert page.get_by_role('heading',name='Find English sources',exact=True).count()==0;passed('delayed catalogue response cannot replace newer library navigation')
-   page.goto(href('scoped'));ready(page);selected=scoped['items'][0]['id'];page.locator('.cards .entry').first.click();page.locator('.passage').first.wait_for();assert urllib.parse.parse_qs(page.url.split('?',1)[1])['uid']==[selected]
+   page.goto(href('scoped'));ready(page,scoped);selected=scoped['items'][0]['id'];page.locator('.cards .entry').first.click();page.locator('.passage').first.wait_for();assert urllib.parse.parse_qs(page.url.split('?',1)[1])['uid']==[selected]
    assert any(c['name']=='get_text' and c['arguments'].get('uid')==selected for c in calls);assert not any(c['name']=='get_translation' for c in calls)
    assert page.evaluate("localStorage.getItem('pali-library-v1')")==before;assert not errors,errors;passed('card opens exact Pali UID without automatic English retrieval or personal-data changes')
    for node in ['books','commentary','post']:
-    page.goto(base+'/#browse?node='+node);page.locator('#status').filter(has_text='Opening').wait_for(state='hidden');assert page.get_by_label('English availability',exact=True).count()==0
+    page.goto(base+'/#browse?node='+node);expect(page.get_by_label('English availability',exact=True)).to_have_count(0);page.locator('#status').filter(has_text='Opening').wait_for(state='hidden')
    passed('English filters remain absent from source books/commentary/later-work views');context.close()
   browser.close()
  result={'passed':len(checks),'checks':checks,'installed':bool(args.package_dir or args.server_dir),'linked_registered_partials_verified':len(partial_ids),'scoped_records_verified':scoped['total'],'a11y':{'scans':len(scans),'violations':sum(len(x['violations']) for x in scans),'results':scans},'limits':'Actual bundled metadata/Pali navigation; mixed-scope, unsafe-command and delayed responses are explicit controlled fixtures. No English source requests, mapping approvals, live publisher or physical-device certification. Seeded reading-position saving disabled to isolate catalogue storage behavior.'}
