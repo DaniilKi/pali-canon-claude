@@ -124,6 +124,10 @@ try:
     book_search_page = tool('search_source_book', {'book': 'vin02m1', 'query': book_native_query, 'offset': 0, 'limit': 15, 'script': 'sinhala'})
     assert book_search_page['total_matched'] == 1 and book_search_page['results'][0]['ref'] == book_native_phrase['ref']
     book_native_match = tool('get_text', {'book': 'vin02m1', 'offset': 6, 'limit': 30, 'script': 'sinhala'})
+    chapter_child = tool('get_post_canonical', {'citation': 'Vism ch. 12', 'offset': 0, 'limit': 30, 'script': 'sinhala'})
+    chapter_root = tool('get_post_canonical', {'citation': 'Vism', 'offset': 0, 'limit': 1, 'script': 'sinhala'})
+    chapter_last = tool('get_post_canonical', {'citation': chapter_root['chapters'][22]['citation'], 'offset': 0, 'limit': 30, 'script': 'sinhala'})
+    assert chapter_child['book']['id'] == 'visuddhimagga-2' and chapter_root['book']['id'] == 'visuddhimagga-1' and len(chapter_root['chapters']) == 23
     late_pali = tool('get_text', {'uid': 'mn10', 'offset': 0, 'limit': 30, 'script': 'roman'})
     catalog = tool('reading_plan', {})
     plan = next(p for p in catalog['plans'] if p['days'] >= 2)
@@ -476,6 +480,39 @@ try:
             assert page.locator('section[aria-label="Pāli passage"] .passage').all_text_contents() == [s['text'] for s in book_native_match['segments']]
             assert profile(page) == original_profile; privacy(page, state)
             passed('native-script complete-book search finds actual front matter through phone keyboard controls and opens the exact source/ref pin without global search, English retrieval or private-note writes')
+            context.close()
+
+            # A selected native chapter exposes its cross-volume parent only on demand.
+            chapter_mark = {'uid': 'post:' + chapter_child['citation'], 'ref': chapter_child['segments'][0]['ref'], 'offset': 0,
+                            'source_commit': revision(chapter_child), 'title': chapter_child['title'], 'note': PRIVATE + 'chapter draft source'}
+            context, page, state = environment(saved=[chapter_mark], script='sinhala')
+            child_url = base + '/#read?' + urllib.parse.urlencode({'kind': 'post', 'uid': chapter_child['citation']})
+            page.goto(child_url)
+            expect(page.locator('#view > h2')).to_have_text(chapter_child['citation'] + ' · ' + chapter_child['title'])
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in chapter_child['segments']])
+            original_profile = copy.deepcopy(profile(page)); page.reload()
+            expect(page).to_have_url(child_url)
+            expect(page.locator('#view > h2')).to_have_text(chapter_child['citation'] + ' · ' + chapter_child['title'])
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in chapter_child['segments']])
+            assert not any(c['arguments'].get('limit') == 1 for c in state['calls'])
+            outer = page.locator('.study-actions')
+            if outer.get_attribute('open') is None: outer.locator('summary').focus(); page.keyboard.press('Enter')
+            before = len(state['calls']); page.get_by_role('button', name='Choose chapter', exact=True).focus(); page.keyboard.press('Enter')
+            select = page.get_by_role('form', name='Chapter navigation', exact=True).get_by_role('combobox', name='Chapter in this work', exact=True)
+            expect(select).to_be_focused()
+            expect(select.locator('option')).to_have_text(['Choose a chapter'] + [r['citation'] + ' · ' + r['title'] for r in chapter_root['chapters']])
+            assert select.locator('option').evaluate_all('(items)=>items.map(x=>x.value)') == [''] + [r['citation'] for r in chapter_root['chapters']]
+            assert state['calls'][before:] == [{'name': 'get_post_canonical', 'arguments': {'citation': 'Vism', 'offset': 0, 'limit': 1, 'script': 'sinhala'}}]
+            select.select_option(chapter_last['citation']); expect(select).to_have_value(chapter_last['citation']); assert len(state['calls']) == before + 1
+            audit(page, state, 'native existing chapter23 menu with explicit cross-volume work authority')
+            page.get_by_role('button', name='Open chapter', exact=True).focus(); page.keyboard.press('Enter')
+            expected_url = base + '/#read?' + urllib.parse.urlencode({'kind': 'post', 'uid': chapter_last['citation'], 'offset': 0, 'page_source': revision(chapter_root)})
+            expect(page).to_have_url(expected_url)
+            expect(page.locator('#view > h2')).to_have_text(chapter_last['citation'] + ' · ' + chapter_last['title'])
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in chapter_last['segments']])
+            assert page.locator('section[aria-label="Pāli passage"] .passage').all_text_contents() == [s['text'] for s in chapter_last['segments']]
+            assert profile(page) == original_profile; privacy(page, state)
+            passed('native Vism chapter12 reload never fetches a menu automatically; explicit parent work authority exposes23 exact literal chapters and opens23 with a revision-only pin without private changes')
             context.close()
 
             # The narrow legacy-progress fix is exercised in each real engine.

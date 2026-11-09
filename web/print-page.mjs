@@ -28,7 +28,9 @@ export function installPagePrinting(doc = document, win = window) {
     add(sheet, 'p', 'Loaded Pāli page only — not necessarily the complete work. English, study material, bookmarks and personal notes are excluded.', 'print-scope');
     const range = [...view.querySelectorAll(':scope > p.muted')].find(node => node.textContent.startsWith('Segments '));
     if (range) add(sheet, 'p', range.textContent, 'print-scope');
-    for (const notice of view.querySelectorAll(':scope > .notice')) add(sheet, 'p', notice.textContent, 'print-scope');
+    // Approved source background stays in the reading tools on phones, but remains in the printed scope.
+    // Keep this path narrow: never collect study panels, chapter options or personal-note descendants.
+    for (const notice of view.querySelectorAll(':scope > .notice, :scope > .toolbar .study-actions > .toolbar > .source-context > .notice')) add(sheet, 'p', notice.textContent, 'print-scope');
     for (const segment of passage.querySelectorAll(':scope > .segment')) {
       const block = add(sheet, 'section', '', 'print-segment');
       add(block, 'p', segment.querySelector('.segment-label span')?.textContent || '', 'print-reference');

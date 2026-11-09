@@ -72,7 +72,7 @@ Next priorities, in order:
 4. Design explicitly user-requested, versioned offline packs only after source-specific rights/storage review. Don't silently cache live translations or claim whole-corpus English coverage.
 5. Audio, cross-device accounts/sync, reminders, community features and native app-store distribution require separate rights, privacy, security and operating-cost decisions. No synthesized sacred narration is provided by this slice.
 
-The next identified unblocked reading gaps are exposing existing chapter metadata for long later works and compacting long source-book introductions on phones while retaining scope and licence access. Source-book search is implemented; these two follow-ups are not. They should take precedence over further small backup refinements.
+Later-work chapter navigation and compact source context are now implemented; see [scope, phone measurements and acceptance](evidence/web-reader/CHAPTER_READING_CONTEXT.md). Logical-work menus remain distinct from physical source-file headings. Original background explanations remain inside Reading tools and in source printing, while critical/unknown warnings stay visible. Every actual printed heading and passage remains intact. Further work should prioritize demonstrated reading/source gaps rather than further small backup refinements.
 
 ## Verification
 
