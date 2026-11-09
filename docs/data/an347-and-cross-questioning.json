@@ -1,0 +1,1148 @@
+{
+  "baseline_commit": "88d1be2e62daa82971ddb48ed0ee25d2a67c50fe",
+  "observed_on": "2026-11-09",
+  "decision": "D215",
+  "method": "Complete primary rendered DT AN3.47–48 and complete actual indexed roots; independent pinned official ATI body/individual notice and root reviews; exact finite-selector and subparagraph activation. No publisher English bodies bundled.",
+  "an347_review": {
+    "baseline_commit": "88d1be2e62daa82971ddb48ed0ee25d2a67c50fe",
+    "observed_on": "2026-11-09",
+    "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+    "ati_checkout_clean": true,
+    "method": "Independent read-only complete supported primary web view and complete bundled indexed roots; full local indexed ATI alternatives and individual notices also inspected. No source bodies in repository.",
+    "owner": "an3.47",
+    "translation_id": "dt:AN/AN3_47",
+    "url": "https://www.dhammatalks.org/suttas/AN/AN3_47.html",
+    "original_link": {
+      "source": "dhammatalks",
+      "url": "https://www.dhammatalks.org/suttas/AN/AN3_47.html",
+      "translator": "Ṭhānissaro Bhikkhu",
+      "reference": "AN 3:47–48 Fabricated",
+      "match": "number+title"
+    },
+    "link_metadata_sha256": "33635fe31b704cace0225ce145b38709c0833f49ba4f73669d51d579047e188e",
+    "link_metadata_hash_input": "original_link",
+    "input_fingerprint": {
+      "path": "server/data/translations.json",
+      "sha256": "48007b4b75744bcae2dd6958c94b2a8e87f1b991873d611ec2c1364d439945c9",
+      "semantics": "Raw file SHA256; original_link uses SHA256(JSON.stringify(original_link)) with original property order."
+    },
+    "root_units": [
+      {
+        "id": "an3.47",
+        "book": 18,
+        "start": 367,
+        "end": 371,
+        "title": "Saṅkhatalakkhaṇasuttaṃ",
+        "collection": "an",
+        "acronym": "AN 3.47",
+        "vri": "47–48",
+        "pts": {
+          "volume": 1,
+          "page": 152,
+          "end_page": 152
+        },
+        "root_blocks_sha256": "3077b231390dad86b3b5106f90b659b9c09c0b775dd2e1faab961ca521438cab",
+        "complete_root_segments": 4
+      },
+      {
+        "id": "an3.48",
+        "book": 18,
+        "start": 371,
+        "end": 383,
+        "title": "Pabbatarājasuttaṃ",
+        "collection": "an",
+        "acronym": "AN 3.48",
+        "vri": "49",
+        "pts": {
+          "volume": 1,
+          "page": 152,
+          "end_page": 153
+        },
+        "root_blocks_sha256": "97dc21e82e76c5bae9daf734fb9d1929a7e5e8eb95cc79d54a87ae7573abe315",
+        "complete_root_segments": 7
+      }
+    ],
+    "root": {
+      "id": "an3.47",
+      "book": 18,
+      "start": 367,
+      "end": 371,
+      "title": "Saṅkhatalakkhaṇasuttaṃ",
+      "collection": "an",
+      "acronym": "AN 3.47",
+      "vri": "47–48",
+      "pts": {
+        "volume": 1,
+        "page": 152,
+        "end_page": 152
+      },
+      "root_blocks_sha256": "3077b231390dad86b3b5106f90b659b9c09c0b775dd2e1faab961ca521438cab",
+      "complete_root_segments": 4
+    },
+    "boundary_finding": {
+      "primary": "an3.47 is one indexed four-block record[367,371), containing VRI47 fabricated and VRI48 unfabricated sections.",
+      "adjacent": "an3.48 begins exactly at371 and ends383; its VRI49 subject is the mountain, not the unfabricated section.",
+      "identity_consequence": "Publisher DT47–48 matches one existing indexed record. Do not create another indexed unit or map its unfabricated half onto bundled an3.48.",
+      "control_root_role": "an3.48 is a separately pinned adjacent-boundary control, not a subject covered by DT AN3_47. Both roots share book18; an3.47.end===an3.48.start===371."
+    },
+    "decision": "retain",
+    "recommendation": "Retain the ordinary DT AN3_47 binding solely under an3.47 and preserve the adjacent mountain bindings. No hold, shared/partial conversion, coverage increase, source substitution or root remapping is justified by this complete-content review.",
+    "web_view": {
+      "source_url": "https://www.dhammatalks.org/suttas/AN/AN3_47.html",
+      "total_lines": 46,
+      "first_line": 0,
+      "last_line": 45,
+      "read_extent": "0–45",
+      "scripture_lines": [
+        27,
+        41
+      ],
+      "title_lines": [
+        24,
+        25
+      ],
+      "first_rendering_lines": [
+        27,
+        32
+      ],
+      "alternative_label_line": 34,
+      "alternative_rendering_lines": [
+        36,
+        41
+      ],
+      "see_also_line": 43,
+      "provider_crawl_label": "today",
+      "evidence_kind": "publisher-rendered-web"
+    },
+    "alignment": [
+      {
+        "root_ref": "an3.47/2",
+        "vri": "47",
+        "first_rendering_lines": [
+          27,
+          29
+        ],
+        "alternative_rendering_lines": [
+          36,
+          38
+        ],
+        "scope": "Complete fabricated-characteristics statement."
+      },
+      {
+        "root_ref": "an3.47/4",
+        "vri": "48",
+        "first_rendering_lines": [
+          31,
+          32
+        ],
+        "alternative_rendering_lines": [
+          39,
+          41
+        ],
+        "scope": "Complete unfabricated-characteristics statement."
+      }
+    ],
+    "substantive_omissions": [],
+    "paratext": [
+      "an3.47/1 and /3 are headings; numbered closing markers in /2 and /4 are untranslated paratext."
+    ],
+    "individual_alignment_limits": "This verifies complete indexed-unit scope, not word-level correspondence or separately approved extraction for either VRI paragraph. Inline alternative wording repeats the same two teachings; it is neither another canonical unit nor a second source/version binding.",
+    "adjacent_primary_control": {
+      "owner": "an3.48",
+      "url": "https://www.dhammatalks.org/suttas/AN/AN3_49.html",
+      "original_link": {
+        "source": "dhammatalks",
+        "url": "https://www.dhammatalks.org/suttas/AN/AN3_49.html",
+        "translator": "Ṭhānissaro Bhikkhu",
+        "reference": "AN 3:49 A Mountain",
+        "match": "ati-title-confirmed"
+      },
+      "web_view": {
+        "total_lines": 72,
+        "first_line": 0,
+        "last_line": 71,
+        "read_extent": "0–71",
+        "scripture_lines": [
+          27,
+          67
+        ],
+        "provider_crawl_label": "2 months ago"
+      },
+      "alignment": [
+        {
+          "root_refs": "an3.48/2–/3",
+          "web_lines": [
+            27,
+            28
+          ],
+          "scope": "Mountain/household prose."
+        },
+        {
+          "root_refs": "an3.48/4–/5",
+          "web_lines": [
+            30,
+            49
+          ],
+          "scope": "Dependent-growth stanzas."
+        },
+        {
+          "root_ref": "an3.48/6",
+          "web_lines": [
+            51,
+            57
+          ],
+          "scope": "Following good conduct."
+        },
+        {
+          "root_ref": "an3.48/7",
+          "web_lines": [
+            59,
+            67
+          ],
+          "scope": "Dhamma and good destination."
+        }
+      ],
+      "decision": "retain-at-observed-view",
+      "substantive_omissions": []
+    },
+    "existing_links": {
+      "an3_47": [
+        "dt:AN/AN3_47",
+        "ati:/tipitaka/an/an03/an03.047.than"
+      ],
+      "an3_48": [
+        "dt:AN/AN3_49",
+        "ati:/tipitaka/an/an03/an03.048.than"
+      ],
+      "dt47_url_resolves_to": "an3.47",
+      "dt47_available_for_an3_48": false,
+      "independent_alternatives_preserved": true
+    },
+    "local_alternative_reviews": [
+      {
+        "owner": "an3.47",
+        "translation_id": "ati:/tipitaka/an/an03/an03.047.than",
+        "original_link": {
+          "source": "ati",
+          "english": "Fabricated",
+          "path": "/tipitaka/an/an03/an03.047.than",
+          "url": "https://www.accesstoinsight.org/tipitaka/an/an03/an03.047.than.html",
+          "translator": "Thanissaro Bhikkhu",
+          "license": "CC-BY-NC",
+          "reference": "A i 152",
+          "pali_title": "Sankhata Sutta",
+          "match": "number+title"
+        },
+        "link_metadata_sha256": "cb685b4ee7f4d6e1ec2fa5c9ddbc17d046fba94d1e4fe8123f197a9f99b2d73b",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "59c67e966c0df74bf51e26c83d232bd117c8da64b8ec512b0555f6e59a556e87",
+        "text_sha256": "aabc30adb11b1435914325966112c3fae38239202a9bfc06ee035fdae615b2c8",
+        "notice_sha256": "8545f9f5eef54e01bdc367c879f85c3d755243b5effa4034e918384d323e2c1e",
+        "review_extent": "Complete local official body and individual footer/provenance/licence/citation read against complete owner root.",
+        "decision": "retain-at-reviewed-snapshot",
+        "scope": "Both fabricated/unfabricated sections plus alternative renderings, matching entire bundled an3.47.",
+        "rights": {
+          "copyright": "©2001 Thanissaro Bhikkhu",
+          "license": "CC BY-NC4.0",
+          "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+          "provenance": "Transcribed from translator-provided file.",
+          "revision": "3 July 2010",
+          "complete_notice_read": true
+        }
+      },
+      {
+        "owner": "an3.48",
+        "translation_id": "ati:/tipitaka/an/an03/an03.048.than",
+        "original_link": {
+          "source": "ati",
+          "english": "A Mountain",
+          "path": "/tipitaka/an/an03/an03.048.than",
+          "url": "https://www.accesstoinsight.org/tipitaka/an/an03/an03.048.than.html",
+          "translator": "Thanissaro Bhikkhu",
+          "license": "CC-BY-NC",
+          "reference": "A i 152",
+          "pali_title": "Pabbata Sutta",
+          "match": "number+title"
+        },
+        "link_metadata_sha256": "427ff67d69718f9dba6b37d970b5e920fd4ce48574a3ebe9703ed18ad9278279",
+        "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+        "source_html_sha256": "acf17a4206b6e6892f5c88780c8bc865cfd8430c3a5b32d962aaa7738cc5eb96",
+        "text_sha256": "ba76c1bf41011e31ebfb1175cbba60085473d0245c0c426b68082ee0ccb30a70",
+        "notice_sha256": "e42d94acbe1ad3a71b62377ca23c16e8355831c40f17f69e57a8911f979bff55",
+        "review_extent": "Complete local official body and individual footer/provenance/licence/citation read against complete owner root.",
+        "decision": "retain-at-reviewed-snapshot",
+        "scope": "Mountain/dependent household similes and all four indexed stanzas, matching bundled an3.48.",
+        "rights": {
+          "copyright": "©2001 Thanissaro Bhikkhu",
+          "license": "CC BY-NC4.0",
+          "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+          "provenance": "Transcribed from translator-provided file.",
+          "revision": "30 November 2013",
+          "complete_notice_read": true
+        }
+      }
+    ],
+    "rights": {
+      "primary_global_url": "https://www.dhammatalks.org/",
+      "global_notice_lines": [
+        400,
+        405
+      ],
+      "global_view_total_lines": 413,
+      "global_notice_summary": "Site-wide CC Attribution-NonCommercial4.0 terms; site uses Unported label and links BY-NC4.0. Author treats any sale, including nonprofit sales, as commercial.",
+      "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+      "translator": "Ṭhānissaro Bhikkhu",
+      "individual_primary_notice_limit": "Complete rendered DT page exposes no individual copyright/licence year or full page-specific notice. Global terms are evidence; no raw-notice pin is asserted.",
+      "obligations": [
+        "Preserve named translator, source provenance and licence link.",
+        "Noncommercial use; no sale.",
+        "ATI alternatives carry their own complete individual notices."
+      ]
+    },
+    "hash_semantics": "Local root and link/text/notice value hashes use SHA256(JSON.stringify(value)). Raw local ATI HTML and translation-input files hash actual bytes. No rendered DT HTML/text/notice hash is asserted.",
+    "limits": [
+      "Complete content/title/ownership comparison, not a generic approval of combined publisher labels.",
+      "Supported web views lack raw origin bytes, runtime extraction output or a frozen DT source revision; provider crawl age is recorded.",
+      "No fabricated raw-web pins, SuttaCentral access, scripture expansion, new finite selector, repository edit, commit or push."
+    ],
+    "historical_review": {
+      "decision": "D203 retained existing ordinary binding; contemporary complete-source recheck agrees.",
+      "decision_date": "2026-11-08",
+      "baseline_commit": "e3b65815daae077b96f1eac0b6d2a7deb17dcd15",
+      "evidence_json": "docs/data/provider-scope-audit.json",
+      "evidence_markdown": "docs/data/provider-scope-audit.md",
+      "regression_test": "tests/provider-scope-audit.test.mjs",
+      "both_root_block_pins_unchanged": true,
+      "coverage_delta": 0
+    },
+    "triage_annotation_recommendation": {
+      "kind": "Separate metadata-only DT retained-snapshot memory.",
+      "must_pin": [
+        "Exact owner an3.47 and translation_id dt:AN/AN3_47.",
+        "Exact original_link JSON fingerprint, including URL/translator/reference/match.",
+        "Authentic VRI source commit and complete owner identity/block hash.",
+        "Separate adjacent-control an3.48 identity/block hash and contiguous boundary371.",
+        "Complete supported rendered-view metadata0–45, scripture27–41, observed date and crawl qualification."
+      ],
+      "limits": [
+        "Expire annotation on source/link/root/boundary drift.",
+        "Do not claim raw source/text/notice pins, live freshness, runtime authority, partial/shared activation or new coverage.",
+        "Keep adjacent control explicitly distinct from mapped subjects.",
+        "Preserve entire existing ATI retained registry and historical reports unchanged."
+      ]
+    }
+  },
+  "an_candidates_review": {
+    "observed_on": "2026-11-09",
+    "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+    "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "method": "Complete official local source HTML copyrighted chunks, per-page entire notices/citations, complete actual indexed roots and adjacent disambiguating candidates read. No number-only remapping, SuttaCentral or English source bodies copied into repository.",
+    "rows": [
+      {
+        "owner": "an2.47",
+        "path": "/tipitaka/an/an02/an02.046.than",
+        "source_url": "https://www.accesstoinsight.org/tipitaka/an/an02/an02.046.than.html",
+        "decision": "hold-whole-binding; precise-first-three-paragraph-partial-candidate",
+        "current_bindings": [],
+        "root_units": [
+          {
+            "id": "an2.47",
+            "book": 17,
+            "start": 120,
+            "end": 122,
+            "title": "Parisavaggo",
+            "collection": "an",
+            "acronym": "AN 2.47",
+            "vri": "48",
+            "pts": {
+              "volume": 1,
+              "page": 72,
+              "end_page": 73
+            },
+            "root_blocks_sha256": "2c5b73ec6967c7dadac9c41702c7915a830ce1f5f89254c4a6895b0085cc30e5"
+          }
+        ],
+        "pins": {
+          "source_html_sha256": "e24d1e08bc4a3400a0c3294fe871c388805ab11ba71ef1a7116080073067163b",
+          "copyright_chunk_html_sha256": "092332bb475b39ccf30f9c60fcc5c59b8e93fb27e7ee3b95cebc57ef744ba4ef",
+          "body_text_sha256": "b1d4fff5fc9475e7309e74739ec501161b9ac270729c06188392327db8d9339b",
+          "notice_sha256": "b807df6c991234ca37c9e7304d2519adb29bba3b0b3c604ddde855c1679269e5",
+          "selected_first_three_paragraph_text_sha256": "211ed2cbe1a6b1f47368f02be7b1d3589e168f2fc49ee08f65425687750a30cd",
+          "selected_pali_sha256": "75d0a2165da01508f27de8961bad4bcd951d0969944373dbe1eef40eafc1fab0"
+        },
+        "paragraphs": 5,
+        "selected_candidate": {
+          "publisher_paragraphs": [
+            1,
+            3
+          ],
+          "first_ref": "an2.47/1",
+          "last_ref": "an2.47/1",
+          "pali_segments": 1,
+          "english_characters": 1171,
+          "proposal_only": true,
+          "needs_new_finite_source_specific_extractor": true
+        },
+        "root_summary": [
+          {
+            "ref": "an2.47/1",
+            "type": "prose",
+            "characters": 972
+          },
+          {
+            "ref": "an2.47/2",
+            "type": "prose",
+            "characters": 960
+          }
+        ],
+        "notice_characters": 737,
+        "omission_offsets": {
+          "ref": "an2.47/2",
+          "offset_unit": "utf16_code_units",
+          "summary_start": 828,
+          "foremost_assembly_start": 860,
+          "end": 960
+        },
+        "identity_evidence": [
+          "Both contrasting assemblies and their reversed listening/questioning conduct match indexed AN2.47/VRI48, not AN2.46/VRI47 (biases) or AN2.45 (noble/ignoble assemblies).",
+          "PublisherAN2.46/Ai72 is edition numbering; number alone would give a wrong match. Full adjacent roots45–48 checked."
+        ],
+        "whole_scope_omissions": [
+          {
+            "ref": "an2.47/2",
+            "start_char": 828,
+            "end_char": 960,
+            "detail": "Closing two-assembly recap plus substantive assertion of the questioning-trained assembly as foremost are absent."
+          }
+        ],
+        "prior_review": "D192/D193 whole-binding hold remains correct. Old statement that partial architecture cannot represent within-segment spans predates version2, but complete-page scope spans one full segment plus only a prefix of another, so must not claim entire page as v1 contiguous segments or v2 one-substring.",
+        "precise_recommendation": "Prefer minimal version1 partial restricted to sourceP1–P3 of5, complete an2.47/1 only. This intentionally omits translated second-assembly material, available on external publisher page. A new strict source-specific first-three-paragraph extractor is required because existing profiles require one selectedP and notes; do not relax existing selectors.",
+        "structure_constraints": [
+          "Exactly one copyrighted chunk, one chapter,5 chapter paragraphs, no notes container.",
+          "SelectP1–P3 only; reject unexpected nested containers/extra or missing paragraphs, headings, scripts and duplicate chunks/chapters."
+        ],
+        "rights": {
+          "copyright": "©2010 Thanissaro Bhikkhu",
+          "license": "CC BY-NC4.0 International",
+          "publisher": "Access to Insight (BCBS Edition)",
+          "provenance": "File supplied by translator",
+          "revision": "4 August2010",
+          "requirements": [
+            "Attribute original translator/publisher/source.",
+            "Full individual notice and citation accompany every selection/continuation.",
+            "Identify derived selection; preserve noncommercial restriction."
+          ]
+        },
+        "alternatives_reviewed": {
+          "current_merged_index": [],
+          "adjacent_owner_ids_checked": [
+            "an2.45",
+            "an2.46",
+            "an2.47",
+            "an2.48"
+          ],
+          "external_DT_link_present_in_publisher_chrome": "https://www.dhammatalks.org/suttas/AN/AN2_46.html",
+          "external_DT_body_reviewed": false,
+          "limitation": "Updated-version banner is not evidence of a complete alternative; no DT adoption or completeness claim."
+        },
+        "limits": [
+          "No complete-unit activation; original root2 omission remains.",
+          "No proposed single-unit condensed page contract is adopted.",
+          "No automatic first-English coverage from PTS overlap or publisher complete extent."
+        ],
+        "preferred_precise_candidate": {
+          "version": 2,
+          "extractor_proposal": "finite chapter paragraph5of5; no notes container",
+          "first_ref": "an2.47/2",
+          "last_ref": "an2.47/2",
+          "subparagraph": {
+            "start_char": 66,
+            "end_char": 827,
+            "offset_unit": "utf16_code_units",
+            "segment_sha256": "5bccbccfb20a424bce18386962f6a81878ea519f704a0efe1bd439215e7cf4de"
+          },
+          "pali_sha256": "82a7d160e7bf63bbee0b6bfec5697cf5e3aca10a8da453f8380cd5f49a1a55a0",
+          "text_sha256": "7d4165eabc5efb9313f54131c026849d6ef6421956bd716fbb4ed54232e3c0e8",
+          "notice_sha256": "b807df6c991234ca37c9e7304d2519adb29bba3b0b3c604ddde855c1679269e5",
+          "english_characters": 892,
+          "pali_characters": 761,
+          "selection_evidence": [
+            "Starts exactly at Idha after second-assembly question, sourceP5 begins the corresponding case.",
+            "Ends immediately after final definition period, excluding inter-sentence space and both omitted final assertions.",
+            "Full CC BY-NC4.0 individual notice/citation inspected, copyright2010 Thanissaro, translator supplied file,4August2010revision.",
+            "PublisherAN2.46 maps by both assembly descriptions to indexedAN2.47/VRI48; disclose mismatch rather than rename publisher."
+          ],
+          "limits": [
+            "No whole-unit coverage, no full-paragraph read_with; original context may be separately labelled.",
+            "Requires finite no-notes selector with exact5P/chapter/chunk structure and strict owner/path/licence/translator profile.",
+            "Keep default refusal, explicit allow_partial, full notice on every continuation, registry downgrade guards and all existing descriptors."
+          ]
+        }
+      },
+      {
+        "owner": "an8.59",
+        "path": "/tipitaka/an/an08/an08.059.kuma",
+        "source_url": "https://www.accesstoinsight.org/tipitaka/an/an08/an08.059.kuma.html",
+        "decision": "hold-whole-binding; precise-first-three-paragraph-partial-candidate",
+        "current_bindings": [],
+        "root_units": [
+          {
+            "id": "an8.59",
+            "book": 23,
+            "start": 766,
+            "end": 772,
+            "title": "Paṭhamapuggalasuttaṃ",
+            "collection": "an",
+            "acronym": "AN 8.59",
+            "vri": "59",
+            "pts": {
+              "volume": 4,
+              "page": 292,
+              "end_page": 292
+            },
+            "root_blocks_sha256": "12e423bc7720d85776e75648d9d6cb9080e591a6505fa5ee119d7d96ce574871"
+          }
+        ],
+        "pins": {
+          "source_html_sha256": "1f4d40c00f3077695f7cddeaa5d4011e8fdadac3ef05e4bcf4f040c444801c53",
+          "copyright_chunk_html_sha256": "4240e2e6d75638bb611402ab4a52af8a8882ab8ebecb4a1178d1884ced7d6d43",
+          "body_text_sha256": "f041b679d6042e0c8e642992298b425b9d1fc5c60ce867b4b152835d225437a2",
+          "notice_sha256": "0955a1bdc92e7af801df3ba8f471ff4f59c41ad575f63b515ae6a176124b45c5",
+          "selected_first_three_paragraph_text_sha256": "83ed330bbffd61cc88ef8dfc68955adb56438d693e7021e0c099bd1dee7d000b",
+          "selected_pali_sha256": "5c7dd9ab1438bbf37bf86689a1dec9454ef6d3be8613cc6862b8df3947e21873"
+        },
+        "paragraphs": 4,
+        "selected_candidate": {
+          "publisher_paragraphs": [
+            1,
+            3
+          ],
+          "first_ref": "an8.59/2",
+          "last_ref": "an8.59/2",
+          "pali_segments": 1,
+          "english_characters": 807,
+          "proposal_only": true,
+          "needs_new_finite_source_specific_extractor": true
+        },
+        "root_summary": [
+          {
+            "ref": "an8.59/1",
+            "type": "heading",
+            "characters": 23
+          },
+          {
+            "ref": "an8.59/2",
+            "type": "prose",
+            "characters": 385
+          },
+          {
+            "ref": "an8.59/3",
+            "type": "verse",
+            "characters": 87
+          },
+          {
+            "ref": "an8.59/4",
+            "type": "verse",
+            "characters": 114
+          }
+        ],
+        "notice_characters": 930,
+        "identity_evidence": [
+          "Full eight-person sequence matches first-persons prose an8.59/2. Primary page title says first (Pathama) with BJT title provenance recorded in HTML comment; publisherAN8.59 and Aiv292 corroborate.",
+          "Adjacent an8.58 concerns eight qualities rather than eight persons; an8.60 second-persons prose is largely repeated/abbreviated but has distinct second title and different following stanza. Prose alone is not unique identity proof."
+        ],
+        "whole_scope_omissions": [
+          {
+            "refs": "an8.59/3–/4",
+            "detail": "Both substantive closing stanzas on four practitioners/four fruit-attainers and great fruit of Sangha gifts are omitted; final publisherP4 is an explicit ellipsis."
+          }
+        ],
+        "precise_recommendation": "Safe bounded version1 partial proposal: sourceP1–P3 of4 corresponds exactly to the entire original prose segment an8.59/2; exclude final ellipsisP4 and do not claim two untranslated stanzas. Requires new finite source-specific selector and Kumara licence/profile rather than reusing Walshe/Olendzki or treating ATI_DEPRECATED as rights denial.",
+        "source_expansion_disclosure": "Root2 contains original …pe… in concluding offering formula; publisher spells out the refrain. Preserve original Pali abbreviation and avoid word-level correspondence claims.",
+        "structure_constraints": [
+          "Exactly one copyrighted chunk/chapter,4 paragraphs,no notes.",
+          "Return only first3 paragraphs, preserving all eight persons in source order.",
+          "Full actual notice/citation outside chunk remain mandatory; do not invent a missing notes container."
+        ],
+        "rights": {
+          "copyright": "©2010 Kumara Bhikkhu",
+          "license": "Per-page free-distribution and identified-derivatives permission; ATI_DEPRECATED is a metadata code, not the actual grant.",
+          "publisher": "Access to Insight (BCBS Edition)",
+          "provenance": "File supplied by translator",
+          "revision": "2 November2013",
+          "requirements": [
+            "Copies and derivatives must be free of charge.",
+            "Clearly identify derivatives as derived from this source document.",
+            "Include the complete licence in every copy/derivative and preserve attribution/citation.",
+            "Other linked documents may carry different restrictions."
+          ],
+          "fifty_copy_limit": false,
+          "creative_commons_not_asserted": true
+        },
+        "alternatives_reviewed": {
+          "current_merged_index": [],
+          "adjacent_owner_ids_checked": [
+            "an8.58",
+            "an8.59",
+            "an8.60"
+          ],
+          "other_external_whole_versions_not_reviewed": true
+        },
+        "limits": [
+          "No whole AN8.59 translation; omitted stanzas substantive.",
+          "Strong title/body/adjacent-root evidence supports first source; do not multiply identical prose across adjacent records.",
+          "No source activation, new rights enum or automatic schema extension performed."
+        ]
+      }
+    ],
+    "hash_semantics": "Raw and copyrighted-chunk hashes are SHA256 UTF8 bytes; body/selectedEnglish/notice/root/Pali hashes use SHA256(JSON.stringify(value)). All hashes concern pinned local official ATI and current complete actual root, not fetched upstream freshness."
+  },
+  "sn_candidates_review": {
+    "baseline_commit": "88d1be2e62daa82971ddb48ed0ee25d2a67c50fe",
+    "observed_on": "2026-11-09",
+    "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+    "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "method": "Read complete actual ATI bodies, notes, individual provenance/licence/citation notices and complete actual current canonical units plus PTS neighbors. Earlier ledger followups and hold docs read before decision. No number-only mapping.",
+    "rows": [
+      {
+        "owner": "sn36.15",
+        "path": "/tipitaka/sn/sn36/sn36.015.nypo",
+        "url": "https://www.accesstoinsight.org/tipitaka/sn/sn36/sn36.015.nypo.html",
+        "translation_id": "ati:/tipitaka/sn/sn36/sn36.015.nypo",
+        "decision": "preserve-followup-hold-no-first-English-binding",
+        "approved": false,
+        "newly_covered_units": [],
+        "prior_followups": [
+          "D188",
+          "D189",
+          "D191"
+        ],
+        "source_html_sha256": "300433ba256941343ae0891202c139dd57c3456b881476fe48a2e6c879933438",
+        "text_sha256": "dc0c99dafa0921098bc34adb2005fdc4e8ef5d3cc751b520ec623dfb8e983e01",
+        "notice_sha256": "b58cc58a86a64f10454468d11fa9fc3391ad43fac20e9728f6ec18903d0ad4ac",
+        "notice_characters": 901,
+        "hash_semantics": "Raw HTML SHA256 hashes UTF8 file bytes. Extracted text SHA256 uses Node JSON.stringify(plainText(atiContent(html))); complete notice SHA256 uses Node JSON.stringify(atiNotice(html)); root blocks SHA256 uses Node JSON.stringify(all original block tuples in exact indexed span).",
+        "root_units": [
+          {
+            "id": "sn36.15",
+            "book": 14,
+            "start": 1356,
+            "end": 1358,
+            "title": "Paṭhamaānandasuttaṃ",
+            "collection": "sn",
+            "acronym": "SN 36.15",
+            "vri": "263",
+            "pts": {
+              "volume": 4,
+              "page": 219,
+              "end_page": 221
+            },
+            "root_blocks_sha256": "2fdc1b9ac79dfe7f89becfa83822551cfd41aadb37ef7ee2b135e8aecc5ada55",
+            "complete_segments": 2
+          }
+        ],
+        "neighbor_root_reviews": [
+          {
+            "root": {
+              "id": "sn36.13",
+              "book": 14,
+              "start": 1352,
+              "end": 1354,
+              "title": "Dutiyaākāsasuttaṃ",
+              "collection": "sn",
+              "acronym": "SN 36.13",
+              "vri": "261",
+              "pts": {
+                "volume": 4,
+                "page": 219,
+                "end_page": 219
+              },
+              "root_blocks_sha256": "09a7b464d5bb838941c17fa2356234813b9d05bb1a143b35d8493289fd8618e6",
+              "complete_segments": 2
+            },
+            "scope_match": false
+          },
+          {
+            "root": {
+              "id": "sn36.14",
+              "book": 14,
+              "start": 1354,
+              "end": 1356,
+              "title": "Agārasuttaṃ",
+              "collection": "sn",
+              "acronym": "SN 36.14",
+              "vri": "262",
+              "pts": {
+                "volume": 4,
+                "page": 219,
+                "end_page": 219
+              },
+              "root_blocks_sha256": "fe9b9c51022dc0c797ed735bfe518581d657ad5d4bc480675176f523b2a5bd9b",
+              "complete_segments": 2
+            },
+            "scope_match": false
+          }
+        ],
+        "current_merged_alternatives": [],
+        "individual_rights": {
+          "copyright": "©1983 Buddhist Publication Society",
+          "license": "Individual BPS free-distribution licence; not Creative Commons.",
+          "requirements": [
+            "Copies distributed free of charge.",
+            "Reprinting limited to no more than 50 copies.",
+            "Derivatives clearly identify original source document.",
+            "Entire individual licence included in copies/derivatives; otherwise rights reserved.",
+            "Linked documents may have separate restrictions."
+          ],
+          "revision": "30 November 2013",
+          "provenance": "Contemplation of Feeling: The Discourse-grouping on the Feelings (WH303), Nyanaponika Thera, BPS1983, used with permission.",
+          "complete_individual_notice_and_citation_read": true
+        },
+        "finite_selector_probes": [
+          {
+            "extractor": "ati-freeverse-v1",
+            "result": "structure-rejected",
+            "approved": false
+          },
+          {
+            "extractor": "ati-chapter-p2-of2-v1",
+            "result": "structure-rejected",
+            "approved": false
+          },
+          {
+            "extractor": "ati-chapter-p11-of11-v1",
+            "result": "structure-rejected",
+            "approved": false
+          },
+          {
+            "extractor": "ati-chapter-p1-of4-v1",
+            "result": "structure-rejected",
+            "approved": false
+          },
+          {
+            "extractor": "ati-excerpt-verse-pre-v1",
+            "result": "structure-rejected",
+            "approved": false
+          },
+          {
+            "extractor": "ati-chapter-p14-of24-v1",
+            "result": "structure-rejected",
+            "approved": false
+          },
+          {
+            "extractor": "ati-chapter-prose-v1",
+            "result": "structure-rejected",
+            "approved": false
+          }
+        ],
+        "content_identity_evidence": [
+          "Ānanda approach and inquiry, three feelings, contact origin/cessation, noble eightfold path, and gratification/danger/escape match sn36.15/2 specifically.",
+          "sn36.13 is a wind-in-space simile; sn36.14 is a guest-house simile. Neither is the subject of this source, despite shared PTS S iv219."
+        ],
+        "complete_root_observations": [
+          "One heading and one prose segment /2, 1940 UTF16 code units; root body read in full with all source abbreviations intact.",
+          "Root /2 separately introduces nirodho, vūpasamo and paṭippassaddhi treatments. English P5 supplies one gradual sequence, uses stilled/ceased/quietened vocabulary and has no distinct second and third treatment. No exact assignment of the English sequence to only one VRI treatment is asserted.",
+          "Root abbreviated intermediate jhāna repetitions remain abbreviated; source supplies expanded English steps. No Pāli expanded."
+        ],
+        "notes_observations": [
+          "Two notes gloss saṅkhāra and matter/form; they do not supply the absent separate treatment structure."
+        ],
+        "first_english_conclusion": "Correct identity is currently uncovered sn36.15, but whole-VRI coverage remains unestablished. No binding to uncovered sn36.13 is justified.",
+        "narrow_partial_possibility": {
+          "status": "future-proposal-only",
+          "source_selection": "First four of exactly five chapter Ps before notes; excludes gradual-sequence P5 and all notes.",
+          "context_ref": "sn36.15/2",
+          "offset_unit": "utf16_code_units",
+          "start_char": 0,
+          "end_char": 794,
+          "context_segment_sha256": "39f3172013f8571b82c6c89edd7d55780eeaeb480d477917b8174c25c83a88c2",
+          "selected_pali_sha256": "5a4376f9ef8b063db4161a0619b9dcc5090e2721ec8448b9e51c55b4cae88530",
+          "selected_english_sha256": "176cc221edb6bed91497483d6990e8120583062822f74754176b4545af7ba9fa",
+          "selected_english_characters": 1128,
+          "contract_blocker": "Even version2 currently requires a nonheading segment outside selected first/last refs, so this one-prose unit fails before substring validation; v2 also only permits ati-chapter-prose-v1, which requires a single source P. Requires separately reviewed additive contract/profile and tests; no activation or whole-prose relabelling."
+        }
+      },
+      {
+        "owner": "sn1.25",
+        "path": "/tipitaka/sn/sn01/sn01.025.wlsh",
+        "url": "https://www.accesstoinsight.org/tipitaka/sn/sn01/sn01.025.wlsh.html",
+        "translation_id": "ati:/tipitaka/sn/sn01/sn01.025.wlsh",
+        "decision": "preserve-followup-hold-no-first-English-binding",
+        "approved": false,
+        "newly_covered_units": [],
+        "prior_followups": [
+          "D194"
+        ],
+        "source_html_sha256": "6a6d6cad0a6cf06d37a875353ba52fc067ec34b9afb435fbb5d1ee24644e94ec",
+        "text_sha256": "4b51632de15451bbbde1645bebb999be4fe8e9193db6f4c7682dddc871fd5283",
+        "notice_sha256": "bc149072df2b8f3d627021e67885b7c9747448a8ff6c7bb36c4f37f2f531ebaf",
+        "notice_characters": 1092,
+        "hash_semantics": "Raw HTML SHA256 hashes UTF8 file bytes. Extracted text SHA256 uses Node JSON.stringify(plainText(atiContent(html))); complete notice SHA256 uses Node JSON.stringify(atiNotice(html)); root blocks SHA256 uses Node JSON.stringify(all original block tuples in exact indexed span).",
+        "root_units": [
+          {
+            "id": "sn1.25",
+            "book": 11,
+            "start": 233,
+            "end": 257,
+            "title": "Arahantasuttaṃ",
+            "collection": "sn",
+            "acronym": "SN 1.25",
+            "vri": "25",
+            "pts": {
+              "volume": 1,
+              "page": 14,
+              "end_page": 15
+            },
+            "root_blocks_sha256": "b5061838f25e22d0c6a5e892b9d8c0cb297ceb345e0e6b5c37f4399eaa21da36",
+            "complete_segments": 6
+          }
+        ],
+        "neighbor_root_reviews": [
+          {
+            "root": {
+              "id": "sn1.24",
+              "book": 11,
+              "start": 224,
+              "end": 233,
+              "title": "Manonivāraṇasuttaṃ",
+              "collection": "sn",
+              "acronym": "SN 1.24",
+              "vri": "24",
+              "pts": {
+                "volume": 1,
+                "page": 14,
+                "end_page": 14
+              },
+              "root_blocks_sha256": "0ac11572a2006ab8288e5970660cba91313ba008ea31185e14c15a4aa49e7b0f",
+              "complete_segments": 4
+            },
+            "scope_match": false
+          }
+        ],
+        "current_merged_alternatives": [
+          {
+            "translation_id": "dt:SN/SN1_25",
+            "link": {
+              "source": "dhammatalks",
+              "url": "https://www.dhammatalks.org/suttas/SN/SN1_25.html",
+              "translator": "Ṭhānissaro Bhikkhu",
+              "reference": "SN 1:25 An Arahant",
+              "match": "number+title"
+            },
+            "link_metadata_hash_input": "{owner,link}",
+            "link_metadata_sha256": "0f138a51efeb25cc35f8c6be898701810140ac536f9c3d7b93e69183917baee0",
+            "review": "Indexed metadata only; not fetched or newly certified complete."
+          }
+        ],
+        "individual_rights": {
+          "copyright": "©1985 Buddhist Publication Society",
+          "license": "Individual BPS free-distribution licence; not Creative Commons.",
+          "requirements": [
+            "Copies distributed free of charge.",
+            "Reprinting limited to no more than 50 copies.",
+            "Derivatives clearly identify original source document.",
+            "Entire individual licence included in copies/derivatives; otherwise rights reserved.",
+            "Linked documents may have separate restrictions."
+          ],
+          "revision": "30 November 2013",
+          "provenance": "Samyutta Nikaya: An Anthology (WH318–321), M.O’C.Walshe, BPS1985; print transcription2007 under ATI project and BPS arrangement; minor ATI style revisions; Velthuis convention.",
+          "complete_individual_notice_and_citation_read": true
+        },
+        "finite_selector_probes": [
+          {
+            "extractor": "ati-freeverse-v1",
+            "extracts_characters": 551,
+            "approved": false
+          },
+          {
+            "extractor": "ati-chapter-p2-of2-v1",
+            "result": "structure-rejected",
+            "approved": false
+          },
+          {
+            "extractor": "ati-chapter-p11-of11-v1",
+            "result": "structure-rejected",
+            "approved": false
+          },
+          {
+            "extractor": "ati-chapter-p1-of4-v1",
+            "result": "structure-rejected",
+            "approved": false
+          },
+          {
+            "extractor": "ati-excerpt-verse-pre-v1",
+            "result": "structure-rejected",
+            "approved": false
+          },
+          {
+            "extractor": "ati-chapter-p14-of24-v1",
+            "result": "structure-rejected",
+            "approved": false
+          },
+          {
+            "extractor": "ati-chapter-prose-v1",
+            "result": "structure-rejected",
+            "approved": false
+          }
+        ],
+        "content_identity_evidence": [
+          "Arahant whose work is done, taints ended and final body; I/mine expressions, absence of conceit/bonds, and worldly conventions uniquely correspond to sn1.25.",
+          "sn1.24 asks about restraining the mind and suffering, followed by the Buddha’s correction. None of that distinct question/answer is present."
+        ],
+        "complete_root_observations": [
+          "All six root segments read, including five verse segments /2–/6 and heading.",
+          "Source combines the opening four lines repeated in /2 and /4 with the conceit question placed afterward, followed by final answer /5–/6. It does not separately translate initial question/answer /2–/3.",
+          "Much of /2–/3’s wording/assertion recurs in the later exchange; the prior hold concerns compressed/reordered exchange scope. No new unique doctrinal omission beyond that compression is claimed."
+        ],
+        "notes_observations": [
+          "Note1 explicitly discloses an emendation by Rhys Davids and commentary-based imagining interpretation. This is editorial interpretation, not an omitted canonical exchange.",
+          "Note2 quotes DN9 on conventional designations; it is not a replacement SN1.25 initial answer."
+        ],
+        "first_english_conclusion": "Uncovered sn1.24 is a false PTS-neighbor lead. Correct sn1.25 already has indexed DT English. No first-English addition even if a future alternative-scope review changes the prior whole-binding decision.",
+        "narrow_partial_possibility": {
+          "status": "future-proposal-only-redundant-alternate",
+          "root_refs": [
+            "sn1.25/5",
+            "sn1.25/6"
+          ],
+          "source_selection": "Only verse lines after the second speaker marker and before the closing freeverse div, stripping the two note markers and excluding speaker labels/notes.",
+          "contract_blocker": "Existing freeverse extractor returns the entire combined container, including both editorial speaker labels and merged question/ellipsis. A new exact finite speaker-tail selector and source/notice/root/scope pins would be required; no activation."
+        }
+      }
+    ],
+    "new_bindings": 0,
+    "new_partial_activations": 0,
+    "limits": [
+      "No product/repository edits, source bodies bundled, commit, SuttaCentral fetch or scripture reconstruction.",
+      "Frozen official ATI snapshot, not current-source availability or upstream freshness evidence.",
+      "Existing merged alternatives checked as metadata only; neither candidate can provide a new exact whole-unit English mapping.",
+      "Narrower selections are metadata proposals requiring independent contract, rights, source-profile and consumer review."
+    ]
+  },
+  "activation": {
+    "manifest": {
+      "unit_id": "an2.47",
+      "path": "/tipitaka/an/an02/an02.046.than",
+      "translator": "Thanissaro Bhikkhu",
+      "english_title": "Assembly trained in cross-questioning (partial)",
+      "license": "CC-BY-NC",
+      "source_reference": "Publisher AN2.46, paragraph5of5 only; indexed AN2.47, VRI48, part of an2.47/2",
+      "mapping_note": "Derived prose selection from the named Access to Insight source: only chapter paragraph5of5, the assembly trained in cross-questioning, corresponds to the exact displayed substring inside an2.47/2. The preceding question, first assembly, final two-assembly recap and foremost-assembly assertion are outside this selection. Publisher AN2.46 corresponds by content to indexed AN2.47/VRI48; do not resolve it to the differently numbered neighboring unit. This is neither a complete paragraph nor a whole discourse translation; no word-level alignment is claimed. Original Pāli remains unchanged. Complete ©2010 Thanissaro Bhikkhu attribution and CC BY-NC4.0 terms accompany the selection.",
+      "source_html_sha256": "e24d1e08bc4a3400a0c3294fe871c388805ab11ba71ef1a7116080073067163b",
+      "root": {
+        "id": "an2.47",
+        "title": "Parisavaggo",
+        "vri": "48",
+        "book": 17,
+        "start": 120,
+        "end": 122,
+        "root_blocks_sha256": "2c5b73ec6967c7dadac9c41702c7915a830ce1f5f89254c4a6895b0085cc30e5"
+      },
+      "partial_scope": {
+        "version": 2,
+        "status": "reviewed",
+        "unit_id": "an2.47",
+        "first_ref": "an2.47/2",
+        "last_ref": "an2.47/2",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "82a7d160e7bf63bbee0b6bfec5697cf5e3aca10a8da453f8380cd5f49a1a55a0",
+        "text_sha256": "7d4165eabc5efb9313f54131c026849d6ef6421956bd716fbb4ed54232e3c0e8",
+        "notice_sha256": "b807df6c991234ca37c9e7304d2519adb29bba3b0b3c604ddde855c1679269e5",
+        "extractor": "ati-chapter-p5-of5-no-notes-v1",
+        "subparagraph": {
+          "start_char": 66,
+          "end_char": 827,
+          "offset_unit": "utf16_code_units",
+          "segment_sha256": "5bccbccfb20a424bce18386962f6a81878ea519f704a0efe1bd439215e7cf4de"
+        }
+      }
+    },
+    "previous_partial_descriptors": [
+      {
+        "unit_id": "thag17.3",
+        "descriptor_sha256": "134f44703c4a40d95692554a9d2b288e69fac78476f418cf0f9fd8016501ae1d"
+      },
+      {
+        "unit_id": "thag6.13",
+        "descriptor_sha256": "a1e4b3aa8425afb8b0405600bebc5fb149b30631ea0cda37a098911309ab88cf"
+      },
+      {
+        "unit_id": "thag10.1",
+        "descriptor_sha256": "56c6ed79d556a30fe77c557225f8570e65de70d5b2f09d9f06e6a69493ce741c"
+      },
+      {
+        "unit_id": "thag15.2",
+        "descriptor_sha256": "63e531afec51bf43f7b32235edc66127d8f1b3cc3766c62c5483b6c7d99acd7c"
+      },
+      {
+        "unit_id": "thag16.8",
+        "descriptor_sha256": "3b32c33b18dff19c7d9e5ecede5fab2fba864a7a8acc9eda9bd866cdff4f1cf4"
+      },
+      {
+        "unit_id": "thag2.13",
+        "descriptor_sha256": "2ef0d8cf97a652892b6da0c8ff66017b8d004172f7f92ce626bc038d5bc97bcb"
+      },
+      {
+        "unit_id": "thag15.1",
+        "descriptor_sha256": "819b999b03a0c15c5ad76bfa08456262104bac5093681f32b1d4253e9b3af4ba"
+      },
+      {
+        "unit_id": "snp3.11",
+        "descriptor_sha256": "b7912f6fddf21db799813bde7815c5596620fa7d7623a9296a32a82c2ad539fc"
+      },
+      {
+        "unit_id": "mn34",
+        "descriptor_sha256": "c9faf73a9da654b75a3334ebded1f44b2f1acdcba805299ea4f8d9850c05ef55"
+      },
+      {
+        "unit_id": "sn12.22",
+        "descriptor_sha256": "b5ba881f5596dd30e6e9dae6be1447fbcbc5b0e932e640d1c3510235d7c5c45b"
+      },
+      {
+        "unit_id": "sn12.60",
+        "descriptor_sha256": "6bee468dfbd858381168e4f3d1fe172cc00cba8103c9ed47927e7b63248f295e"
+      },
+      {
+        "unit_id": "sn22.87",
+        "descriptor_sha256": "a08cd3adf56a21186e7f0f358eebce63d69d4a37f8eed4b1c6c353bbbb9dae3c"
+      },
+      {
+        "unit_id": "sn35.244",
+        "descriptor_sha256": "e5e918911a944ba79f54b86c39ecad494ab3dd3f5766d113fff390e19255f54f"
+      },
+      {
+        "unit_id": "sn56.22",
+        "descriptor_sha256": "3b871a04755cc4809d9e13da47f19c32ddd23cd7a3fc899ab806988458e1b239"
+      },
+      {
+        "unit_id": "mn54",
+        "descriptor_sha256": "89c620cbe88fce082b63df8f436a73fc7c1da8e8893dccbc5fcaf57598a2ff96"
+      }
+    ],
+    "selected_english_characters": 892,
+    "selected_pali_characters": 761
+  },
+  "measured": {
+    "ordinary_links": 2538,
+    "dhammatalks": 1270,
+    "ati": 1115,
+    "anandajoti": 153,
+    "whole_direct_indexed": 1434,
+    "whole_inherited_indexed": 1857,
+    "whole_direct_runtime": 1408,
+    "whole_inherited_runtime": 1831,
+    "partial_sources": 16,
+    "partial_only": 10,
+    "shared_pages": 12,
+    "shared_subject_records": 110,
+    "shared_only": 52,
+    "daily_pool": 1257,
+    "canonical_records": 8544,
+    "screen_leads": 220,
+    "screen_reviewed_retained_with_rendered": 7,
+    "screen_unreviewed_with_rendered": 213
+  },
+  "limits": "Rendered DT triage memory does not assert raw HTML/runtime extraction/full-notice hashes, live freshness, source activation or new coverage. AN2.47 source activation is only P5of5, not the complete discourse or surrounding paragraph. All prior source reviews remain historical and existing fifteen partial descriptors unchanged.",
+  "coverage_packet_before": {
+    "ledger_pages": 114,
+    "pending_pages": 51,
+    "pages_with_first_english_possibilities": 4,
+    "publisher_extents": {
+      "complete": 34,
+      "excerpt": 17
+    }
+  },
+  "coverage_packet_after": {
+    "ledger_pages": 114,
+    "pending_pages": 50,
+    "pages_with_first_english_possibilities": 3,
+    "publisher_extents": {
+      "complete": 33,
+      "excerpt": 17
+    }
+  },
+  "updated_dt_an246": {
+    "url": "https://www.dhammatalks.org/suttas/AN/AN2_46.html",
+    "observed_on": "2026-11-09",
+    "tool_result": "Supported web open returned Internal Error / inaccessible; current target not reviewed. No absence, scope, completeness or general outage inferred."
+  },
+  "validation": {
+    "partial-browser": {
+      "report_sha256": "97f443247dec67cce32afd83a6274ed4c8ed6f2b0bb2d7d98c5e49ea80ca6d6b",
+      "passed": 234,
+      "a11y_violations": 0
+    },
+    "partial-installed": {
+      "report_sha256": "98c452dab8d8b3820219bcd76890c99776501ad77f5bc5d17b2a7354b9059421",
+      "passed": 234,
+      "a11y_violations": 0
+    },
+    "native-partial": {
+      "report_sha256": "b00a830375516394e975baf2e940e93e46ec91fb8cbdbef82bda3f3d6a1edd01",
+      "status": "passed",
+      "modes": 8
+    },
+    "evidence-installed": {
+      "status": "passed",
+      "report_sha256": "7aaeab248c510144e6fe104cac1bbac587231f25e08341261f30858d1e50aa62",
+      "counts": {
+        "owners": 2018,
+        "commentary_links": 5322,
+        "commentary_segments": 3263,
+        "shared_links": 1518,
+        "shared_segments": 8720,
+        "reading_commands": 11983
+      },
+      "study": {
+        "plans": 4,
+        "plan_days": 478,
+        "plan_readings": 478,
+        "plan_pages": 488,
+        "guide_links": 87,
+        "guide_external_excerpts": 2,
+        "verse_days": 423,
+        "sutta_days": 1257,
+        "daily_pages": 1719,
+        "period_checks": 4,
+        "iso_date_edges": 6
+      },
+      "navigation": {
+        "topic_catalogue_pages": 13,
+        "topics": 472,
+        "topic_text_refs": 1364,
+        "topic_edges": 450,
+        "lists": 37,
+        "list_text_refs": 102,
+        "list_edges": 63,
+        "parittas": 23,
+        "paritta_sources": 29,
+        "paritta_pages": 90,
+        "canonical_readings": 728,
+        "canonical_pages": 754
+      },
+      "network_attempts": 0
+    },
+    "npm-run-check": {
+      "status": "passed",
+      "tests": 1124,
+      "passed": 1122,
+      "failed": 0,
+      "unchanged_optional_skips": 2,
+      "audited_texts": 8544,
+      "audit_failures": 0,
+      "log_sha256": "afe5449550e9c2fb43d90306a3d71b8f9465d73ff023958cecbda41d3d3900f9"
+    },
+    "partial-a11y": {
+      "report_sha256": "3388c151579724ae17fa1740f0c029c806e266038b466ad9cdbb40b14b3a0430",
+      "passed": 234,
+      "a11y_scans": 192,
+      "a11y_violations": 0
+    }
+  },
+  "independent_review": {
+    "source_lanes": 3,
+    "implementation_findings": "No blocking issue after independent adversarial finite-source/profile/consent/continuation tests and read-only rendered-memory/documentation review.",
+    "limits": "Independent AI-assisted source and implementation reviews, not specialist philological or human accessibility certification."
+  }
+}

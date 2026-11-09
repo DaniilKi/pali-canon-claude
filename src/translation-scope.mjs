@@ -1,6 +1,6 @@
 // A declaration is reviewed data, not an automatic alignment or rights approval.
 import { createHash } from 'node:crypto';
-import { ATI_SEGMENT_EXTRACTORS } from './ati-excerpt.mjs';
+import { ATI_SEGMENT_EXTRACTORS, ATI_SUBPARAGRAPH_EXTRACTORS } from './ati-excerpt.mjs';
 export const scopeHash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 export const isPartial = link => Object.hasOwn(link, 'partial_scope');
 const sha = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
@@ -20,7 +20,7 @@ export function partialScope(link, unit, segments, source) {
   let excerpt;
   if(p.version===2) {
     const part=p.subparagraph,seg=selected[0];
-    if(link.source!=='ati'||p.extractor!=='ati-chapter-prose-v1'||first!==last||seg.type!=='prose'||!part
+    if(link.source!=='ati'||!ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor)||first!==last||seg.type!=='prose'||!part
       ||Object.keys(part).sort().join(',')!=='end_char,offset_unit,segment_sha256,start_char'
       ||part.offset_unit!=='utf16_code_units'||!sha(part.segment_sha256)||scopeHash(seg)!==part.segment_sha256
       ||!Number.isSafeInteger(part.start_char)||!Number.isSafeInteger(part.end_char)||part.start_char<0
@@ -33,7 +33,7 @@ export function partialScope(link, unit, segments, source) {
   if (scopeHash(selected) !== p.pali_sha256) fail();
   if (!['dhammatalks', 'ati', 'anandajoti'].includes(link.source)) fail();
   if (link.source === 'ati') {
-    if (!(p.version===2?p.extractor==='ati-chapter-prose-v1':ATI_SEGMENT_EXTRACTORS.includes(p.extractor)) || !sha(p.notice_sha256) || typeof link.path !== 'string'
+    if (!(p.version===2?ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor):ATI_SEGMENT_EXTRACTORS.includes(p.extractor)) || !sha(p.notice_sha256) || typeof link.path !== 'string'
       || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes('..')
       || link.url !== 'https://accesstoinsight.org' + link.path + '.html') fail();
   } else if (Object.hasOwn(p, 'extractor') || Object.hasOwn(p, 'notice_sha256')) fail();

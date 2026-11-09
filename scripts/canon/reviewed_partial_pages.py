@@ -25,14 +25,15 @@ def manifest_rows(manifest=MANIFEST):
             ('sn35.244','/tipitaka/sn/sn35/sn35.203x.wlsh'):(1,'ati-chapter-p1-of4-v1'),
             ('sn56.22','/tipitaka/sn/sn56/sn56.022x.wlsh'):(1,'ati-excerpt-verse-pre-v1'),
             ('mn54','/tipitaka/mn/mn.054x.than'):(1,'ati-chapter-p14-of24-v1'),
+            ('an2.47','/tipitaka/an/an02/an02.046.than'):(2,'ati-chapter-p5-of5-no-notes-v1'),
         }
         profile=profiles.get((r.get('unit_id'),r.get('path')))
-        walshe=bool(profile and r.get('unit_id')!='mn54' and r.get('license')=='BPS-free-distribution-1985' and r.get('translator')=="Maurice O'Connell Walshe" and (p.get('version'),p.get('extractor'))==profile)
-        thanissaro=(r.get('unit_id'),r.get('path'))==('mn54','/tipitaka/mn/mn.054x.than') and r.get('license')=='CC-BY-NC' and r.get('translator')=='Thanissaro Bhikkhu' and (p.get('version'),p.get('extractor'))==profile
+        walshe=bool(profile and r.get('path','').endswith('.wlsh') and r.get('license')=='BPS-free-distribution-1985' and r.get('translator')=="Maurice O'Connell Walshe" and (p.get('version'),p.get('extractor'))==profile)
+        thanissaro=bool(profile and r.get('unit_id') in ('mn54','an2.47')) and r.get('license')=='CC-BY-NC' and r.get('translator')=='Thanissaro Bhikkhu' and (p.get('version'),p.get('extractor'))==profile
         finite=walshe or thanissaro
         if r.get('path') in {path for _,path in profiles} and not finite:
             raise ValueError('Invalid reserved finite source profile')
-        prose=walshe and p.get('version')==2
+        prose=finite and p.get('version')==2
         path_match=re.fullmatch(r'/tipitaka/(?:kn/(?P<kn>thag|snp)|(?P<mn>mn))/[a-z0-9_.-]+',r.get('path',''))
         owner_pattern=(path_match['kn']+r'\d+\.\d+' if path_match and path_match['kn'] else r'mn\d+')
         if ((not finite and not path_match) or '..' in r['path']

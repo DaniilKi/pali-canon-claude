@@ -32,6 +32,7 @@ export function atiChapterProse(html) {
 export function atiPartialExcerpt(html,extractor) {
   if(extractor==='ati-freeverse-v1')return atiVerseExcerpt(html);
   if(extractor==='ati-chapter-prose-v1')return atiChapterProse(html);
+  if(extractor==='ati-chapter-p5-of5-no-notes-v1')return chapterLastParagraphWithoutNotes(html);
   if(extractor==='ati-chapter-p2-of2-v1')return chapterParagraph(html,2,2);
   if(extractor==='ati-chapter-p11-of11-v1')return chapterParagraph(html,11,11,'Seeing the Dhamma');
   if(extractor==='ati-chapter-p1-of4-v1')return chapterParagraph(html,4,1);
@@ -39,6 +40,8 @@ export function atiPartialExcerpt(html,extractor) {
   if(extractor==='ati-excerpt-verse-pre-v1')return excerptVersePre(html);
   throw Error('Unsupported ATI partial extractor. No excerpt was returned.');
 }
+
+export const ATI_SUBPARAGRAPH_EXTRACTORS = Object.freeze(['ati-chapter-prose-v1', 'ati-chapter-p5-of5-no-notes-v1']);
 
 // Reviewed finite source structures, never caller-supplied HTML selectors.
 export const ATI_SEGMENT_EXTRACTORS = Object.freeze([
@@ -76,4 +79,18 @@ function excerptVersePre(html) {
   const body=chunk.slice(start,stop),pres=[...body.matchAll(/<pre\b[^>]*>([^]*?)<\/pre>/gi)];
   if(pres.length!==1||body.replace(pres[0][0],'').trim()||/<[^>]*>/.test(pres[0][1]))fail();
   const text=plainText(pres[0][1]);if(!text)fail();return text;
+}
+
+/** Exact five-paragraph chapter, with no notes or other source containers. */
+function chapterLastParagraphWithoutNotes(html) {
+  const fail=()=>{throw Error('The reviewed ATI five-paragraph extraction structure changed. No excerpt was returned.');};
+  const chunk=copyrightedChunk(html),chapters=[...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
+  if(chapters.length!==1)fail();
+  const start=chapters[0].index+chapters[0][0].length,stop=chunk.indexOf('</div>',start);
+  if(stop<start||chunk.slice(0,chapters[0].index).trim()||chunk.slice(stop+6).trim()!=='</div>')fail();
+  const body=chunk.slice(start,stop),paragraphs=[...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
+  if(paragraphs.length!==5||/<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body)||body.replace(/<p\b[^>]*>[^]*?<\/p>/gi,'').trim())fail();
+  const chosen=paragraphs[4][1];if(/<\/?p\b/i.test(chosen))fail();
+  const text=plainText(chosen.replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi,''));
+  if(!text)fail();return text;
 }

@@ -421,7 +421,15 @@ test('AN 2.47 omitted foremost-assembly ending cannot be hidden by whole-segment
   assert.match(segs[1].text.slice(828), /Imā kho.*Etadaggaṃ/s);
   const path = '/tipitaka/an/an02/an02.046.than';
   assert.ok(!manifest.links.some(l => l.path === path));
-  assert.ok(!Object.values(canon.load().translations).flat().some(l => l.path === path));
+  const actual = canon.describe(u);
+  assert.equal(actual.english_available, 0);
+  assert.equal(actual.partial_english_available, 1);
+  const choice = actual.english.find(l => l.translation_id === 'ati:' + path);
+  assert.ok(choice);
+  assert.deepEqual([choice.translation_scope.version, choice.translation_scope.first_ref, choice.translation_scope.last_ref, choice.translation_scope.whole_unit_coverage], [2, 'an2.47/2', 'an2.47/2', false]);
+  assert.deepEqual([choice.translation_scope.pali_excerpt.start_char, choice.translation_scope.pali_excerpt.end_char], [66, 827]);
+  assert.equal(choice.translation_scope.pali_excerpt.text, segs[1].text.slice(66, 827));
+  assert.ok(!choice.translation_scope.pali_excerpt.text.includes('Imā kho'));
   const source = canon.load().canon.source;
   const link = {source:'ati', path, partial_scope:{version:1,status:'reviewed',unit_id:u.id,first_ref:segs[0].ref,last_ref:segs[1].ref,source_commit:source.commit,pali_sha256:scopeHash(segs.map(({ref,type,text}) => ({ref,type,text}))),text_sha256:'0'.repeat(64)}};
   assert.throws(() => partialScope(link, u, segs, source), /Invalid or unreviewed partial translation scope/);
