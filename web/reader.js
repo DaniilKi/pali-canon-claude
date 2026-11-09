@@ -17,6 +17,7 @@ import { comparisonChoices, comparisonSelection, validateComparisonPage } from '
 import { passageNoteKey, passageNoteState, passageNoteRemovalNeedsConfirmation, passageNoteTransaction, restorePassageNoteTransaction } from './passage-notes.mjs';
 import { readingPagePosition, assertPageRequest, assertPagePin, readingPageBounds, readingJumpOffset } from './reading-navigation.mjs';
 import { savedPassageHighlighted } from './saved-highlights.mjs';
+import { bookSearchSelection, bookSearchRoute, bookSearchCatalogue, validateBookSearchPage, bookSearchHitLinks } from './book-search.mjs';
 import { reviewBackupNoteConflicts } from './backup-note-conflicts.mjs';
 import { MAX_STUDY_BACKUP_BYTES, createStudyBackup, parseStudyBackup, mergeStudyBackup } from './study-backup.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
@@ -58,7 +59,7 @@ function button(text, fn) { const n = el('button', text); n.type = 'button'; n.a
 function link(text, href, className) { const n = el('a', text, className); n.href = href; return n; }
 function external(text, url) { try { const u = new URL(url); if (!['http:', 'https:'].includes(u.protocol)) return el('span', text); return link(text, u.href); } catch { return el('span', text); } }
 function route(name, args = {}) { return '#' + name + '?' + new URLSearchParams(args); }
-const requestLabels = { get_text: 'Pāli reading', get_translation: 'English source', browse_canon: 'Library', get_commentary: 'Commentary', get_post_canonical: 'Later Pāli reading', reading_plan: 'Reading plan', search_texts: 'Text search', search_commentary: 'Commentary search', search_post_canonical: 'Later-work search', glossary: 'Glossary', analyse_passage: 'Word study', get_parallels: 'Related texts', daily_text: 'Daily reading', verify_quote: 'Quotation check', list_topics: 'Topic index', topic: 'Topic detail', dhamma_list: 'Teaching list' };
+const requestLabels = { get_text: 'Pāli reading', get_translation: 'English source', browse_canon: 'Library', get_commentary: 'Commentary', get_post_canonical: 'Later Pāli reading', reading_plan: 'Reading plan', search_texts: 'Text search', search_source_book: 'Source-book search', search_commentary: 'Commentary search', search_post_canonical: 'Later-work search', glossary: 'Glossary', analyse_passage: 'Word study', get_parallels: 'Related texts', daily_text: 'Daily reading', verify_quote: 'Quotation check', list_topics: 'Topic index', topic: 'Topic detail', dhamma_list: 'Teaching list' };
 const requestRows = new Map();
 const requests = createRequestPool({ onChange(entries) {
   const active = new Set(entries.map(x => x.id));
@@ -173,7 +174,10 @@ async function browse(args, token) {
     const card = link('', href, 'entry'); card.append(el('small', kind === 'canon' ? item.citation || item.pitaka || 'Collection' : kind === 'commentary' ? 'Commentary · not canon' : 'Later work · not canon'), el('strong', item.name || item.title || item.id));
     if (item.texts !== undefined) card.append(el('p', item.texts + ' texts'));
     if (item.english_available !== undefined) card.append(el('p', item.english_available ? 'English source linked' : (item.shared_english_available || item.partial_english_available) ? 'Scoped English source · review required' : 'Pāli source text'));
-    cards.append(card);
+    if (node === 'books' && kind === 'canon' && item.read_with?.tool === 'get_text' && item.read_with.book === item.id) {
+      try { const searchHref = bookSearchRoute({ book: item.id, query: '', offset: 0, limit: 15, source: null }), wrapper = el('article', undefined, 'book-catalogue-card'); wrapper.append(card, link('Search this source book', searchHref, 'button')); cards.append(wrapper); }
+      catch { cards.append(card); }
+    } else cards.append(card);
   }
   view.append(cards); pageControls(data.next_offset, offset ? Math.max(0, offset - limit) : null, n => route('browse', { node, offset: n }));
   if (kind !== 'canon') provenance(data);
@@ -210,6 +214,38 @@ async function browseEnglish(args, token) {
   pageControls(data.next_offset, selection.offset > 0 && selection.offset < data.total ? Math.max(0, selection.offset - selection.limit) : null, offset => englishRoute(selection, offset));
 }
 function offsetOf(args) { const n = Number(args.get('offset') || 0); return Number.isSafeInteger(n) && n >= 0 && n <= 100000 ? n : 0; }
+function bookSearchForm(selection, token) {
+  const form = el('form', undefined, 'book-search-form'), label = el('label', 'Search this source book'), input = el('input'), submit = el('button', 'Search book'), error = el('p');
+  form.setAttribute('aria-label', 'Source book search'); form.noValidate = true; input.type = 'search'; input.maxLength = 500; input.value = selection.query; label.append(input); submit.type = 'submit'; error.setAttribute('role', 'alert'); error.hidden = true;
+  form.append(label, submit, error);
+  form.addEventListener('submit', event => {
+    event.preventDefault(); if (token !== epoch || !form.isConnected) return;
+    try { const query = input.value.trim(); if (!query) throw Error('Enter a Pāli search query.'); const href = bookSearchRoute({ ...selection, query, offset: 0 }); error.hidden = true; input.removeAttribute('aria-invalid'); if (location.hash === href) render(); else location.hash = href; }
+    catch (failure) { error.textContent = failure.message; error.hidden = false; input.setAttribute('aria-invalid', 'true'); input.focus({ preventScroll: true }); }
+  }); return form;
+}
+async function bookSearch(args, token) {
+  const selection = bookSearchSelection(args);
+  if (!selection.query) {
+    const catalogue = await tool('browse_canon', { node: 'books', offset: 0, limit: 200 }); if (token !== epoch) return;
+    const book = bookSearchCatalogue(catalogue, selection);
+    heading('COMPLETE VRI SOURCE FILE', 'Search · ' + book.title, 'Source-book search');
+    view.append(el('p', catalogue.note, 'notice'), bookSearchForm(selection, token), link('Read this source book', selection.source ? readingPagePosition({ book: selection.book }, 0, selection.source) : route('read', { book: selection.book }), 'button'), el('p', 'Search and reading results show the actual source attribution and licence terms. Source-file references are not standard discourse or rule citations. English translations are not searched.', 'muted')); return;
+  }
+  const response = await tool('search_source_book', { book: selection.book, query: selection.query, offset: selection.offset, limit: 15, script: $('script').value }); if (token !== epoch) return;
+  const data = validateBookSearchPage(response, selection), pinned = { ...selection, source: sourceRevision(data) };
+  heading('COMPLETE VRI SOURCE FILE', 'Search · ' + data.book.title, 'Source-book search');
+  view.append(bookSearchForm(pinned, token), el('p', 'Search query: ' + selection.query, 'muted'), el('p', data.citation_note, 'notice')); notes(data); if (data.query_note) view.append(el('p', 'Search interpretation: ' + data.query_note, 'notice')); if (data.script_note) view.append(el('p', 'Script display: ' + data.script_note, 'notice'));
+  const count = el('p', data.returned ? `Matching source segments: ${data.total_matched} · showing ${data.offset + 1}–${data.offset + data.returned}` : data.total_matched ? `This page is beyond the ${data.total_matched} matching source segments.` : 'No matching source segments in this book. Try a different Pāli word or phrase.'); count.setAttribute('role', 'status'); view.append(count); if (!data.returned && data.total_matched) view.append(link('First search results', bookSearchRoute(pinned, 0), 'button'));
+  const results = el('section', undefined, 'book-search-results'); results.setAttribute('aria-label', 'Source book search results');
+  for (const hit of data.results) {
+    const locations = bookSearchHitLinks(data, hit, selection), card = el('article', undefined, 'segment');
+    card.append(el('h3', hit.ref), el('p', `Source position ${hit.segment} · ${hit.type}`, 'muted'));
+    const excerpt = el('p', hit.excerpt, 'passage'); excerpt.lang = 'pi'; card.append(el('p', 'Search excerpt · open the source to read its context.', 'muted'), excerpt, link('Read match · ' + hit.ref, locations.read, 'button'));
+    if (locations.context) card.append(link('Read surrounding source · ' + hit.ref, locations.context, 'button')); results.append(card);
+  }
+  view.append(results); pageControls(data.next_offset, selection.offset > 0 ? Math.max(0, selection.offset - 15) : null, offset => bookSearchRoute(pinned, offset)); provenance(data);
+}
 async function search(args, token) {
   const query = (args.get('q') || '').trim(); if (!query) throw new Error('Enter words or a title to search.');
   const scope = ['commentary', 'post'].includes(args.get('scope')) ? args.get('scope') : 'canon'; $('search-scope').value = scope;
@@ -361,6 +397,10 @@ async function read(args, token) {
     });
     const panel = el('section', undefined, 'source-position-panel'); panel.append(form); sourceTools.append(panel);
   } catch { view.append(el('p', 'Source-position navigation is unavailable because this page has incomplete or unsupported position/revision metadata. The loaded source remains below; no destination was guessed.', 'notice')); }
+  if (kind === 'book') {
+    try { const selection = { book: data.book_id, query: '', offset: 0, limit: 15, source: sourceRevision(data) }; bookSearchRoute(selection); sourceTools.append(bookSearchForm(selection, token)); }
+    catch { sourceTools.append(el('p', 'Search is unavailable because this source book has incomplete identity or revision metadata.', 'notice')); }
+  }
   const additions = el('section'); additions.id = 'study'; additions.setAttribute('aria-live', 'polite'); view.append(additions);
   const passages = el('section'); passages.setAttribute('aria-label', 'Pāli passage'); const positions = [];
   for (const segment of data.segments || []) {
@@ -951,9 +991,9 @@ async function render() {
   if (location.hash === '#content' && view.childElementCount) { $('content').focus(); return; }
   activePosition = null; highlightTargets = []; clearTimeout(positionTimer); const token = ++epoch; ++studyEpoch; requests.cancelAll(); closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
   const hash = location.hash.slice(1), queryIndex = hash.indexOf('?'), page = queryIndex < 0 ? hash : hash.slice(0, queryIndex), args = new URLSearchParams(queryIndex < 0 ? '' : hash.slice(queryIndex + 1));
-  try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'backup') studyBackup(token); else if (page === 'about') about(); else await browse(args, token);
+  try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'book-search') await bookSearch(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'backup') studyBackup(token); else if (page === 'about') about(); else await browse(args, token);
     if (token !== epoch) return; status.textContent = storageConflict || !storageOK ? storageWarning() : !positionDurable ? positionWarning || storageWarning() : ''; focusHeading();
-  } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); if (error.code === 'READING_SOURCE_CHANGED') { const review = new URLSearchParams(args); review.delete('source'); review.delete('page_source'); view.append(link(args.has('page_source') ? 'Review current source at this position' : 'Review current source at this reference', '#read?' + review, 'button')); } status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
+  } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); if (error.code === 'READING_SOURCE_CHANGED') { const review = new URLSearchParams(args); review.delete('source'); review.delete('page_source'); view.append(link(page === 'book-search' ? 'Review current source book search' : args.has('page_source') ? 'Review current source at this position' : 'Review current source at this reference', (page === 'book-search' ? '#book-search?' : '#read?') + review, 'button')); } status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
 }
 installPagePrinting();
 window.addEventListener('hashchange', render); render();

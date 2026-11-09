@@ -1429,3 +1429,10 @@ Add strict one-based source-position jumps using actual work and plan-window bou
 Combined backups previously retained conflicting local notes without a readable way to compare incoming text. Add paginated, local-only review with default-off choices for exact saved source/position matches. Validate the full selection before mutation, replace only note text, and preserve metadata, unselected drafts and conflicting progress. The old three-argument merge contract and individual additive restore remain unchanged.
 
 Recompute selected merges after existing private/raw/resume preflights. Clear selected drafts only after confirmed persistence; on failure restore previous arrays, locator and storage baseline while keeping drafts/choices. Readonly textarea display never supplies persisted bytes. Matching saved metadata does not authenticate a current source version; normal opening still verifies it. Keep the existing format, limits, local backup warning and optional download before replacement; do not introduce automatic sync or persistent undo. [Evidence](evidence/web-reader/BACKUP_NOTE_CONFLICTS.md).
+
+
+## D225 — Search complete source files from the reader
+
+The existing source-book search reaches genuine printed front matter that global unit search excludes, but the web reader offered only sequential book reading. Expose the existing tool through book-specific forms and an exact catalogue route, retaining source-file identity and all matching segments. This advances access within already bundled sources; it adds no source coverage or citation inference.
+
+Distinguish result offsets from source positions. Strictly validate every returned reading/context command, source revision and pagination count before excerpts. Pin result continuation to the actual source revision; changed versions require explicit review. Use exact paragraph pins for matches and page pins for preceding context. Keep the form in the current responsive disclosure, ordinary reading anchors and private data unchanged. No backend tool, scripture data, source licence or persistent schema changes. [Evidence](evidence/web-reader/SOURCE_BOOK_SEARCH.md).

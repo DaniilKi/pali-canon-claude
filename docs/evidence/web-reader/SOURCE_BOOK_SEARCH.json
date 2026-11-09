@@ -1,0 +1,105 @@
+{
+  "decision": "D225",
+  "baseline_commit": "ed57d3344b4424c6ec66f70436da4d20c6e43b9d",
+  "feature": "exact complete source-book search in the web reader",
+  "baseline": {
+    "books": 61,
+    "global_quote_matches": 0,
+    "source_book_quote_matches": 1,
+    "exact_ref": "vri-book:vin02m1/7",
+    "read_offset": 6,
+    "vin01m_segments": 2407,
+    "repeated_phrase_matches": 40,
+    "reader_search_form_count": 0
+  },
+  "source_data_changed": false,
+  "tool_or_personal_schema_changed": false,
+  "whole_translation_coverage_changed": false,
+  "focused_policy_tests": 11,
+  "full_local_check": {
+    "tests": 1219,
+    "passed": 1217,
+    "failed": 0,
+    "existing_optional_skips": 2,
+    "audit_texts": 8544,
+    "audit_failures": 0
+  },
+  "browser_validation": {
+    "browser-normal": {
+      "passed": 31,
+      "engine": {
+        "actual": "chromium",
+        "version": "155.0.8059.79"
+      },
+      "outside_source_tree": false,
+      "scans": 0,
+      "violations": 0
+    },
+    "browser-a11y": {
+      "passed": 55,
+      "engine": {
+        "actual": "chromium",
+        "version": "155.0.8059.79"
+      },
+      "outside_source_tree": false,
+      "scans": 42,
+      "violations": 0
+    },
+    "browser-installed": {
+      "passed": 31,
+      "engine": {
+        "actual": "chromium",
+        "version": "155.0.8059.79"
+      },
+      "outside_source_tree": true,
+      "scans": 0,
+      "violations": 0
+    },
+    "compat-normal": {
+      "passed": 60,
+      "engine": {
+        "requested": "chromium",
+        "playwright": "1.62.0",
+        "actual": "chromium",
+        "version": "155.0.8059.79",
+        "executable": "/usr/bin/chromium",
+        "executable_kind": "explicit/system",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36"
+      },
+      "outside_source_tree": false,
+      "scans": 0,
+      "violations": 0
+    },
+    "compact-normal": {
+      "passed": 45,
+      "engine": null,
+      "outside_source_tree": false,
+      "scans": 0,
+      "violations": 0
+    }
+  },
+  "docs_and_ci_artifact_tests": 21,
+  "smoke": {
+    "tools": 34,
+    "checks": 64
+  },
+  "offline_evals": {
+    "passed": 195,
+    "live_skipped": 6
+  },
+  "package_parity_files": 33,
+  "review": {
+    "helper_and_ui": "accepted",
+    "harness": "accepted after count-only transient-excerpt observer; existing delayed-body completion barrier preserved"
+  },
+  "ci": "Final exact integrated-head full/installed/Firefox/WebKit acceptance required separately.",
+  "limits": [
+    "Source-file references do not infer individual discourse or rule identity.",
+    "Native source codepoint checks do not prove OS glyph shaping.",
+    "Long complete-book introductions may need phone scrolling; no universal above-fold guarantee.",
+    "Source coverage and Patthana raw-author-artifact blocker unchanged.",
+    "Physical-device and human accessibility acceptance remain separate."
+  ],
+  "main_merge": false,
+  "deployment": false
+}

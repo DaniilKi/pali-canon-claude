@@ -75,8 +75,8 @@
       if (selected !== "all" && savedScope(item) !== selected) return false;
       const key4 = JSON.stringify([item.uid, item.ref]);
       const note2 = drafts?.has(key4) ? drafts.get(key4) : item.note;
-      const text5 = fold([item.title, item.uid, item.ref, note2].filter((x) => typeof x === "string").join(" "));
-      return tokens.every((token) => text5.includes(token));
+      const text6 = fold([item.title, item.uid, item.ref, note2].filter((x) => typeof x === "string").join(" "));
+      return tokens.every((token) => text6.includes(token));
     });
     const pages = Math.max(1, Math.ceil(matches.length / SAVED_PAGE_SIZE));
     const current = Number.isSafeInteger(page) ? Math.max(0, Math.min(page, pages - 1)) : 0;
@@ -90,9 +90,9 @@
     sheet.id = "print-document";
     sheet.setAttribute("aria-hidden", "true");
     doc.body.append(sheet);
-    const add = (parent, tag, text5, className) => {
+    const add = (parent, tag, text6, className) => {
       const node = doc.createElement(tag);
-      node.textContent = text5;
+      node.textContent = text6;
       if (className) node.className = className;
       parent.append(node);
       return node;
@@ -117,16 +117,16 @@
       for (const segment of passage.querySelectorAll(":scope > .segment")) {
         const block = add(sheet, "section", "", "print-segment");
         add(block, "p", segment.querySelector(".segment-label span")?.textContent || "", "print-reference");
-        const text5 = add(block, "p", segment.querySelector(".passage")?.textContent || "", "print-passage");
-        text5.lang = "pi";
+        const text6 = add(block, "p", segment.querySelector(".passage")?.textContent || "", "print-passage");
+        text6.lang = "pi";
       }
-      const source2 = add(sheet, "section", "", "print-provenance");
-      add(source2, "h2", "Source and terms");
-      for (const part of attribution.children) add(source2, "p", part.textContent);
-      for (const anchor of attribution.querySelectorAll("a[href]")) add(source2, "p", anchor.textContent + ": " + anchor.href);
+      const source3 = add(sheet, "section", "", "print-provenance");
+      add(source3, "h2", "Source and terms");
+      for (const part of attribution.children) add(source3, "p", part.textContent);
+      for (const anchor of attribution.querySelectorAll("a[href]")) add(source3, "p", anchor.textContent + ": " + anchor.href);
       const url = new URL(win.location.href);
       url.search = "";
-      add(source2, "p", "Reading page: " + url.href);
+      add(source3, "p", "Reading page: " + url.href);
       return true;
     }
     function update() {
@@ -470,9 +470,9 @@
     if (t.verseEnd) s = s.replace(/;(\s*)$/, `${STOP}$1`);
     return s;
   }
-  function fromRoman(text5, script, stanza) {
+  function fromRoman(text6, script, stanza) {
     const t = TABLES[script];
-    const s = romanPunctuation(text5.normalize("NFC"), t, stanza).toLowerCase();
+    const s = romanPunctuation(text6.normalize("NFC"), t, stanza).toLowerCase();
     let out = "";
     let pending = null;
     let consStart = -1;
@@ -541,10 +541,10 @@
     const prefixes = t.prefix ? /* @__PURE__ */ new Map([[t.sign.e, "e"], [t.sign.o, "o"]]) : /* @__PURE__ */ new Map();
     return REVERSE[script] = { t, cons, ind, signs, signList: byLength(signs), indList: byLength(ind), punct, expand, prefixes };
   }
-  function toRomanFrom(text5, script) {
+  function toRomanFrom(text6, script) {
     const R = reverse(script);
     const { t } = R;
-    let s = text5.normalize("NFC").replace(/[\u200c\u200d]/g, "");
+    let s = text6.normalize("NFC").replace(/[\u200c\u200d]/g, "");
     for (const [a, b] of R.expand) s = s.split(a).join(b);
     const at = (i, list) => list.find((x) => s.startsWith(x, i));
     let out = "";
@@ -595,9 +595,9 @@
     ["khmer", 6016, 6143],
     ["lanna", 6688, 6831]
   ];
-  function detectScript(text5) {
+  function detectScript(text6) {
     const counts = {};
-    for (const ch of String(text5 ?? "")) {
+    for (const ch of String(text6 ?? "")) {
       const cp = ch.codePointAt(0);
       if (cp < 2304) continue;
       for (const [name, lo, hi] of RANGES) if (cp >= lo && cp <= hi) {
@@ -613,14 +613,27 @@
     }
     return best;
   }
-  function transliterate(text5, from, to, { stanza = false } = {}) {
-    if (text5 == null) return text5;
-    const s = String(text5);
+  function transliterate(text6, from, to, { stanza = false } = {}) {
+    if (text6 == null) return text6;
+    const s = String(text6);
     const a = from === "auto" ? detectScript(s) : scriptName(from);
     const b = scriptName(to);
     if (a === b) return s;
     const roman = a === "roman" ? s : toRomanFrom(s, a);
     return b === "roman" ? roman : fromRoman(roman, b, stanza);
+  }
+  function romanizeInput(text6) {
+    const s = String(text6 ?? "");
+    const script = detectScript(s);
+    if (script === "roman") return { text: s, script };
+    return { text: toRomanFrom(s, script).normalize("NFC"), script, original: s };
+  }
+  function romanizeLookupInput(text6) {
+    const input = romanizeInput(text6);
+    if (detectScript(input.text) !== "roman" || [...input.text].some((ch) => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch))) {
+      throw new Error("The lookup input could not be converted completely. Use P\u0101li in Roman or one supported script, without mixed or unsupported characters.");
+    }
+    return input;
   }
   function inputNote(input) {
     return input?.original ? { input_script: input.script, input_romanized: input.text } : {};
@@ -631,9 +644,9 @@
       script_note: `P\u0101li transliterated into ${SCRIPT_NAMES[script]} by this server from the VRI Roman edition (exact letter-for-letter; punctuation follows VRI's own script editions where they exist). Citations, IDs and English are left in Roman.`
     };
   }
-  var pali = (text5, script, opts) => typeof text5 === "string" && text5 ? transliterate(text5, "roman", script, opts) : text5;
-  function verse(text5, script) {
-    const lines = text5.split("\n");
+  var pali = (text6, script, opts) => typeof text6 === "string" && text6 ? transliterate(text6, "roman", script, opts) : text6;
+  function verse(text6, script) {
+    const lines = text6.split("\n");
     return lines.map((line, i) => pali(line, script, { stanza: i === lines.length - 1 })).join("\n");
   }
   function localizeUnitFields(obj, script) {
@@ -676,28 +689,28 @@
   function scopeDescriptor(choice, requestedId) {
     if (!own(choice, "translation_scope")) return null;
     const scope = choice.translation_scope;
-    const fail3 = () => {
+    const fail4 = () => {
       throw new Error("This source has an unsupported or incomplete scope declaration. No scoped source was requested. Reload the passage and review the updated sources.");
     };
-    if (!scope || ![1, 2].includes(scope.version) || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail3();
+    if (!scope || ![1, 2].includes(scope.version) || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail4();
     if (scope.kind === "shared_page") {
-      if (scope.version !== 1) fail3();
+      if (scope.version !== 1) fail4();
       const ids = scope.text_ids;
       const presentation = scope.presentation || (scope.condensed === true ? "condensed" : null);
-      if (!Array.isArray(ids) || ids.length < 2 || ids.length > 32 || ids.some((id2) => !nonempty(id2) || id2.length > 300) || new Set(ids).size !== ids.length || !ids.includes(requestedId) || scope.owner_id !== ids[0] || scope.individual_alignment_verified !== false || !nonempty(scope.source_reference) || !["condensed", "compilation"].includes(presentation) || presentation === "compilation" && !sha(scope.notice_sha256) || own(scope, "condensed") && scope.condensed !== (presentation === "condensed")) fail3();
+      if (!Array.isArray(ids) || ids.length < 2 || ids.length > 32 || ids.some((id2) => !nonempty(id2) || id2.length > 300) || new Set(ids).size !== ids.length || !ids.includes(requestedId) || scope.owner_id !== ids[0] || scope.individual_alignment_verified !== false || !nonempty(scope.source_reference) || !["condensed", "compilation"].includes(presentation) || presentation === "compilation" && !sha(scope.notice_sha256) || own(scope, "condensed") && scope.condensed !== (presentation === "condensed")) fail4();
       return { kind: scope.kind, label: presentation === "compilation" ? "Shared compilation page" : "Shared condensed page", scope: JSON.parse(JSON.stringify(scope)), flags: { allow_shared: true, scope_sha256: scope.scope_sha256 } };
     }
     if (scope.kind === "partial_unit") {
       const prefix = requestedId + "/";
-      if (choice.translation_id.startsWith("ati:") && (!(scope.version === 2 ? ["ati-chapter-prose-v1", "ati-chapter-p5-of5-no-notes-v1", "ati-chapter-p1to4-of5-notes-v1"].includes(scope.extractor) : ["ati-freeverse-v1", "ati-chapter-p2-of2-v1", "ati-chapter-p11-of11-v1", "ati-chapter-p1-of4-v1", "ati-chapter-p14-of24-v1", "ati-excerpt-verse-pre-v1", "ati-chapter-p1to3-of4-ellipsis-v1"].includes(scope.extractor)) || !sha(scope.notice_sha256))) fail3();
+      if (choice.translation_id.startsWith("ati:") && (!(scope.version === 2 ? ["ati-chapter-prose-v1", "ati-chapter-p5-of5-no-notes-v1", "ati-chapter-p1to4-of5-notes-v1"].includes(scope.extractor) : ["ati-freeverse-v1", "ati-chapter-p2-of2-v1", "ati-chapter-p11-of11-v1", "ati-chapter-p1-of4-v1", "ati-chapter-p14-of24-v1", "ati-excerpt-verse-pre-v1", "ati-chapter-p1to3-of4-ellipsis-v1"].includes(scope.extractor)) || !sha(scope.notice_sha256))) fail4();
       if (scope.version === 2) {
         const p = scope.pali_excerpt;
-        if (!choice.translation_id.startsWith("ati:") || scope.first_ref !== scope.last_ref || !p || p.ref !== scope.first_ref || p.type !== "prose" || !nonempty(p.text) || p.text.length > 2e6 || p.offset_unit !== "utf16_code_units" || !sha(p.segment_sha256) || !Number.isSafeInteger(p.start_char) || !Number.isSafeInteger(p.end_char) || p.start_char < 0 || p.end_char <= p.start_char || p.end_char - p.start_char !== p.text.length || own(scope, "read_with") || own(scope, "read_pages")) fail3();
-      } else if (own(scope, "pali_excerpt")) fail3();
-      if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail3();
+        if (!choice.translation_id.startsWith("ati:") || scope.first_ref !== scope.last_ref || !p || p.ref !== scope.first_ref || p.type !== "prose" || !nonempty(p.text) || p.text.length > 2e6 || p.offset_unit !== "utf16_code_units" || !sha(p.segment_sha256) || !Number.isSafeInteger(p.start_char) || !Number.isSafeInteger(p.end_char) || p.start_char < 0 || p.end_char <= p.start_char || p.end_char - p.start_char !== p.text.length || own(scope, "read_with") || own(scope, "read_pages")) fail4();
+      } else if (own(scope, "pali_excerpt")) fail4();
+      if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail4();
       return { kind: scope.kind, label: "Partial-unit source", scope: JSON.parse(JSON.stringify(scope)), flags: { allow_partial: true, scope_sha256: scope.scope_sha256 } };
     }
-    fail3();
+    fail4();
   }
   function validateEnglishPage(data, args, context) {
     const offset = args.offset || 0;
@@ -772,10 +785,10 @@
   var string2 = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f]/.test(x);
   var object = (x) => x && typeof x === "object" && !Array.isArray(x);
   var identity = (x) => JSON.stringify([x.uid, x.ref]);
-  function parseBookmarks(text5) {
+  function parseBookmarks(text6) {
     let data;
     try {
-      data = JSON.parse(text5);
+      data = JSON.parse(text6);
     } catch {
       throw Error("Choose a valid JSON bookmark export. Nothing was imported.");
     }
@@ -812,18 +825,18 @@
 
   // web/quote-check.mjs
   function validatePaliQuote(data, quote) {
-    const fail3 = () => {
+    const fail4 = () => {
       throw Error("The quotation result is incomplete or does not match this P\u0101li request. No verdict or substitute source was displayed.");
     };
-    const text5 = (x) => typeof x === "string" && x.length > 0;
-    const integer5 = (x) => Number.isSafeInteger(x) && x >= 0;
-    if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text5(data.explanation) || !text5(data.guidance) || data.scope?.language !== "pali" || !text5(data.scope.searched) || !text5(data.scope.attribution) || !text5(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text5(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text5(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail3();
-    if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text5(data.citation_note))) fail3();
+    const text6 = (x) => typeof x === "string" && x.length > 0;
+    const integer6 = (x) => Number.isSafeInteger(x) && x >= 0;
+    if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text6(data.explanation) || !text6(data.guidance) || data.scope?.language !== "pali" || !text6(data.scope.searched) || !text6(data.scope.attribution) || !text6(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text6(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text6(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail4();
+    if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text6(data.citation_note))) fail4();
     for (const m of data.matches) {
-      const command2 = m.read_with, span = m.source_span;
-      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text5(m.citation) || !text5(m.matched_text) || !text5(m.edition) || !text5(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command2?.tool !== "get_text" || command2.uid !== m.text_id || !integer5(command2.offset) || !integer5(command2.limit) || command2.limit < 1 || command2.limit > 200 || span?.offset !== command2.offset || span.first_segment_ref !== m.segment_ref || !integer5(span.end_offset) || span.end_offset <= span.offset || !text5(span.last_segment_ref)) fail3();
+      const command3 = m.read_with, span = m.source_span;
+      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text6(m.citation) || !text6(m.matched_text) || !text6(m.edition) || !text6(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command3?.tool !== "get_text" || command3.uid !== m.text_id || !integer6(command3.offset) || !integer6(command3.limit) || command3.limit < 1 || command3.limit > 200 || span?.offset !== command3.offset || span.first_segment_ref !== m.segment_ref || !integer6(span.end_offset) || span.end_offset <= span.offset || !text6(span.last_segment_ref)) fail4();
     }
-    if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail3();
+    if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail4();
     return data;
   }
 
@@ -834,39 +847,39 @@
   var exact = (x, keys2) => object2(x) && Object.keys(x).length === keys2.length && keys2.every((k) => Object.hasOwn(x, k));
   var integer2 = (x, min, max) => Number.isSafeInteger(x) && x >= min && x <= max;
   var key = (x) => x.name + ":" + x.day;
-  function parseProgressMetadata(text5) {
-    const fail3 = () => {
+  function parseProgressMetadata(text6) {
+    const fail4 = () => {
       throw Error("This is not a supported reading-progress export. No marks were restored.");
     };
     let data;
     try {
-      data = JSON.parse(text5);
+      data = JSON.parse(text6);
     } catch {
-      fail3();
+      fail4();
     }
-    if (!exact(data, ["format", "progress"]) || data.format !== "pali-library-reading-progress-v1" || !Array.isArray(data.progress) || data.progress.length > MAX_PROGRESS_MARKS) fail3();
+    if (!exact(data, ["format", "progress"]) || data.format !== "pali-library-reading-progress-v1" || !Array.isArray(data.progress) || data.progress.length > MAX_PROGRESS_MARKS) fail4();
     const seen = /* @__PURE__ */ new Set();
     return data.progress.map((mark) => {
-      if (!exact(mark, ["name", "day", "signature"]) || typeof mark.name !== "string" || !/^[a-z0-9-]{1,60}$/.test(mark.name) || !integer2(mark.day, 1, 400) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail3();
+      if (!exact(mark, ["name", "day", "signature"]) || typeof mark.name !== "string" || !/^[a-z0-9-]{1,60}$/.test(mark.name) || !integer2(mark.day, 1, 400) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail4();
       seen.add(key(mark));
       let s;
       try {
         s = JSON.parse(mark.signature);
       } catch {
-        fail3();
+        fail4();
       }
-      if (!exact(s, ["name", "day", "source", "readings"]) || s.name !== mark.name || s.day !== mark.day || typeof s.source !== "string" || !/^[a-zA-Z0-9._-]{1,100}$/.test(s.source) || !Array.isArray(s.readings) || !s.readings.length || s.readings.length > 20) fail3();
+      if (!exact(s, ["name", "day", "source", "readings"]) || s.name !== mark.name || s.day !== mark.day || typeof s.source !== "string" || !/^[a-zA-Z0-9._-]{1,100}$/.test(s.source) || !Array.isArray(s.readings) || !s.readings.length || s.readings.length > 20) fail4();
       const ids = /* @__PURE__ */ new Set();
       for (const r of s.readings) {
-        if (!exact(r, ["id", "offset", "limit", "part", "of"]) || typeof r.id !== "string" || !/^[a-z][a-z0-9.-]{0,299}$/.test(r.id) || ids.has(r.id) || !integer2(r.offset, 0, 1e5) || !(r.limit === null || integer2(r.limit, 1, 1e5)) || !(r.part === null && r.of === null || integer2(r.part, 1, 400) && integer2(r.of, r.part, 400) && r.limit !== null)) fail3();
+        if (!exact(r, ["id", "offset", "limit", "part", "of"]) || typeof r.id !== "string" || !/^[a-z][a-z0-9.-]{0,299}$/.test(r.id) || ids.has(r.id) || !integer2(r.offset, 0, 1e5) || !(r.limit === null || integer2(r.limit, 1, 1e5)) || !(r.part === null && r.of === null || integer2(r.part, 1, 400) && integer2(r.of, r.part, 400) && r.limit !== null)) fail4();
         ids.add(r.id);
       }
       const signature = JSON.stringify({ name: s.name, day: s.day, source: s.source, readings: s.readings.map((r) => ({ id: r.id, offset: r.offset, limit: r.limit, part: r.part, of: r.of })) });
       return { name: mark.name, day: mark.day, signature };
     });
   }
-  function parseProgress(text5, catalog) {
-    const progress = parseProgressMetadata(text5), plans2 = new Map(catalog.map((p) => [p.name, p.days]));
+  function parseProgress(text6, catalog) {
+    const progress = parseProgressMetadata(text6), plans2 = new Map(catalog.map((p) => [p.name, p.days]));
     if (progress.some((mark) => !plans2.has(mark.name) || !integer2(mark.day, 1, plans2.get(mark.name)))) throw Error("This is not a supported reading-progress export. No marks were restored.");
     return progress;
   }
@@ -894,8 +907,8 @@
       return false;
     }
   }
-  function topicSource(source2) {
-    if (!string3(source2?.name) || !string3(source2.license) || !string3(source2.attribution) || !string3(source2.commit)) fail();
+  function topicSource(source3) {
+    if (!string3(source3?.name) || !string3(source3.license) || !string3(source3.attribution) || !string3(source3.commit)) fail();
   }
   function related(items, tool2) {
     if (items === void 0) return;
@@ -1088,10 +1101,10 @@
     if (!Object.hasOwn(ENGLISH_AVAILABILITY, availability) || collection !== null && !collectionId(collection) || !/^(0|[1-9]\d*)$/.test(raw) || !count(Number(raw))) fail2();
     return { availability, collection, offset: Number(raw), limit: 40 };
   }
-  function englishRoute(selection, offset = selection.offset) {
-    if (!Object.hasOwn(ENGLISH_AVAILABILITY, selection.availability) || selection.collection !== null && !collectionId(selection.collection) || !count(offset)) fail2();
-    const q = new URLSearchParams({ node: "english", availability: selection.availability });
-    if (selection.collection !== null) q.set("collection", selection.collection);
+  function englishRoute(selection2, offset = selection2.offset) {
+    if (!Object.hasOwn(ENGLISH_AVAILABILITY, selection2.availability) || selection2.collection !== null && !collectionId(selection2.collection) || !count(offset)) fail2();
+    const q = new URLSearchParams({ node: "english", availability: selection2.availability });
+    if (selection2.collection !== null) q.set("collection", selection2.collection);
     if (offset) q.set("offset", String(offset));
     return "#browse?" + q;
   }
@@ -1099,24 +1112,24 @@
     const partial = item.partial_english_available || 0, shared = item.shared_english_available || 0;
     return [...item.english_available ? ["Whole-unit or chapter link"] : [], ...partial && shared ? ["Partial and shared sources \xB7 review required"] : partial ? ["Partial source \xB7 review required"] : shared ? ["Shared page \xB7 review required"] : [], ...!item.english_available && !partial && !shared ? ["No indexed English link"] : []];
   }
-  function englishCatalogue(data, selection) {
-    if (!object3(data) || data.catalogue !== true || data.node !== "english" || data.name !== "Find English sources" || data.availability !== selection.availability || data.collection !== selection.collection || data.offset !== selection.offset || data.limit !== selection.limit || !count(data.total) || !text3(data.note) || !Array.isArray(data.collections) || data.collections.length > 100 || !Array.isArray(data.items) || data.items.length > selection.limit) fail2();
+  function englishCatalogue(data, selection2) {
+    if (!object3(data) || data.catalogue !== true || data.node !== "english" || data.name !== "Find English sources" || data.availability !== selection2.availability || data.collection !== selection2.collection || data.offset !== selection2.offset || data.limit !== selection2.limit || !count(data.total) || !text3(data.note) || !Array.isArray(data.collections) || data.collections.length > 100 || !Array.isArray(data.items) || data.items.length > selection2.limit) fail2();
     const collections = /* @__PURE__ */ new Set();
     for (const c of data.collections) {
       if (!object3(c) || !collectionId(c.id) || collections.has(c.id) || !text3(c.name)) fail2();
       collections.add(c.id);
     }
-    if (!collections.size || selection.collection !== null && !collections.has(selection.collection)) fail2();
-    const expected = Math.min(selection.limit, Math.max(0, data.total - selection.offset));
-    if (data.items.length !== expected || data.next_offset !== (selection.offset + selection.limit < data.total ? selection.offset + selection.limit : null)) fail2();
+    if (!collections.size || selection2.collection !== null && !collections.has(selection2.collection)) fail2();
+    const expected = Math.min(selection2.limit, Math.max(0, data.total - selection2.offset));
+    if (data.items.length !== expected || data.next_offset !== (selection2.offset + selection2.limit < data.total ? selection2.offset + selection2.limit : null)) fail2();
     const seen = /* @__PURE__ */ new Set();
     for (const item of data.items) {
-      if (!object3(item) || !id(item.id) || seen.has(item.id) || !text3(item.citation) || !text3(item.title) || !text3(item.collection) || !collections.has(item.collection_id) || !belongs(item.id, item.collection_id) || selection.collection !== null && item.collection_id !== selection.collection || item.approximate || item.kind === "range" || !count(item.english_available)) fail2();
+      if (!object3(item) || !id(item.id) || seen.has(item.id) || !text3(item.citation) || !text3(item.title) || !text3(item.collection) || !collections.has(item.collection_id) || !belongs(item.id, item.collection_id) || selection2.collection !== null && item.collection_id !== selection2.collection || item.approximate || item.kind === "range" || !count(item.english_available)) fail2();
       for (const k of ["partial_english_available", "shared_english_available"]) if (Object.hasOwn(item, k) && !count(item[k])) fail2();
       const cmd = item.read_with;
       if (!object3(cmd) || Object.keys(cmd).sort().join(",") !== "tool,uid" || cmd.tool !== "get_text" || cmd.uid !== item.id) fail2();
       const whole = item.english_available > 0, scoped = (item.partial_english_available || 0) + (item.shared_english_available || 0) > 0;
-      if (selection.availability === "linked" && !whole && !scoped || selection.availability === "whole" && !whole || selection.availability === "scoped" && (whole || !scoped) || selection.availability === "none" && (whole || scoped)) fail2();
+      if (selection2.availability === "linked" && !whole && !scoped || selection2.availability === "whole" && !whole || selection2.availability === "scoped" && (whole || !scoped) || selection2.availability === "none" && (whole || scoped)) fail2();
       if (Object.hasOwn(item, "source_context")) {
         const context = item.source_context;
         if (!object3(context) || Object.keys(context).sort().join(",") !== "citation,id,kind,title" || context.kind !== "containing_group" || !id(context.id) || !belongs(context.id, item.collection_id) || context.id === item.id || !text3(context.citation) || !text3(context.title) || !whole) fail2();
@@ -1291,11 +1304,11 @@
   var invalid = () => {
     throw Error("This source page has incomplete or unsupported navigation metadata. No passage was substituted.");
   };
-  function readingPagePosition(context, offset, source2) {
+  function readingPagePosition(context, offset, source3) {
     assertReadingContext(context);
     if (!integer4(offset, 0, 1e5)) invalid();
-    revision2(source2);
-    return "#read?" + new URLSearchParams({ ...context, offset, page_source: source2 });
+    revision2(source3);
+    return "#read?" + new URLSearchParams({ ...context, offset, page_source: source3 });
   }
   function assertPageRequest(args) {
     if (!args.has("page_source")) return;
@@ -1331,9 +1344,9 @@
     if (start >= end || end > data.total_segments || data.offset < start || data.offset + data.returned > end) invalid();
     return { start, end, current: data.offset };
   }
-  function readingJumpOffset(text5, data, window2 = null) {
-    if (typeof text5 !== "string" || !/^[1-9][0-9]*$/.test(text5)) throw Error("Enter a source position using whole decimal digits only.");
-    const position2 = Number(text5), bounds = readingPageBounds(data, window2);
+  function readingJumpOffset(text6, data, window2 = null) {
+    if (typeof text6 !== "string" || !/^[1-9][0-9]*$/.test(text6)) throw Error("Enter a source position using whole decimal digits only.");
+    const position2 = Number(text6), bounds = readingPageBounds(data, window2);
     if (!integer4(position2, 1, 100001) || position2 - 1 < bounds.start || position2 - 1 >= bounds.end) throw Error("That source position is outside the current reading bounds.");
     return position2 - 1;
   }
@@ -1349,8 +1362,154 @@
     }
   }
 
-  // web/backup-note-conflicts.mjs
+  // src/search-segments.mjs
+  var singleQuotedPhrase = (text6) => /^"[^"]+"$|^“[^”]+”$/u.test(String(text6).trim());
+  var latinLetter = (text6) => [...String(text6)].some((ch) => /\p{L}/u.test(ch) && /\p{Script=Latin}/u.test(ch));
+  var foreignLetter = (text6) => [...String(text6)].some((ch) => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch));
+  var foreignNumeral = (text6) => [...String(text6)].some((ch) => /\p{N}/u.test(ch) && !/[0-9]/u.test(ch));
+  var isSourcePhrase = (text6) => singleQuotedPhrase(text6) && latinLetter(text6) && (detectScript(text6) !== "roman" || foreignLetter(text6) || foreignNumeral(text6));
+  function romanizeSearchInput(query) {
+    const text6 = String(query);
+    try {
+      const input = romanizeLookupInput(text6);
+      if (foreignNumeral(input.text)) throw new Error("The search input could not be converted completely. Use ASCII digits or one supported script; a quoted source phrase keeps its original numeral characters.");
+      return input;
+    } catch (error) {
+      if (!isSourcePhrase(text6)) throw error;
+      return { text: text6, script: "roman", source_phrase: true };
+    }
+  }
+  var hasSearchPhrase = (query) => /"[^"]+"|“[^”]+”/u.test(query);
+
+  // web/book-search.mjs
   var object6 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var own5 = (value, key4) => Object.hasOwn(value, key4);
+  var integer5 = (value, min, max) => Number.isSafeInteger(value) && value >= min && value <= max;
+  var text5 = (value, max = 4e3) => typeof value === "string" && value.trim().length > 0 && value.length <= max;
+  var bookId = (value) => typeof value === "string" && value.length <= 100 && /^(?:vin[0-9]{2}m[0-9]*|s[0-9]{4}m[0-9]*(?:\.nrf\.xml)?|abh[0-9]{2}m[0-9]*)$/.test(value);
+  var fileFor = (book) => book.endsWith(".nrf.xml") ? book : book + ".mul.xml";
+  var scripts = /* @__PURE__ */ new Set(["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"]);
+  var keysOnly = (value, keys2) => object6(value) && Object.keys(value).every((key4) => keys2.includes(key4));
+  var fail3 = () => {
+    throw Error("The complete source-book search does not match this selection. No source or reading position was substituted.");
+  };
+  function safeRevision(value) {
+    if (typeof value !== "string" || sourceRevision({ source: { commit: value } }) !== value) fail3();
+    return value;
+  }
+  function selection(value) {
+    if (!keysOnly(value, ["book", "query", "offset", "limit", "source"]) || !bookId(value.book) || typeof value.query !== "string" || value.query !== value.query.trim() || value.query.length > 500 || !integer5(value.offset, 0, 1e6) || value.limit !== 15 || !value.query && value.offset !== 0) fail3();
+    if (value.source !== null) safeRevision(value.source);
+    return value;
+  }
+  function bookSearchSelection(args) {
+    for (const key4 of args.keys()) if (!["book", "q", "offset", "source"].includes(key4) || args.getAll(key4).length !== 1) fail3();
+    const raw = args.has("offset") ? args.get("offset") : "0";
+    if (!/^(0|[1-9][0-9]*)$/.test(raw)) fail3();
+    return selection({ book: args.get("book"), query: (args.get("q") ?? "").trim(), offset: Number(raw), limit: 15, source: args.has("source") ? args.get("source") : null });
+  }
+  function bookSearchRoute(value, offset = value.offset) {
+    selection(value);
+    selection({ ...value, offset });
+    const args = new URLSearchParams({ book: value.book });
+    if (value.query) args.set("q", value.query);
+    if (offset) args.set("offset", String(offset));
+    if (value.source !== null) args.set("source", value.source);
+    return "#book-search?" + args;
+  }
+  function bookSearchCatalogue(data, selected) {
+    selection(selected);
+    if (selected.query || !object6(data) || data.node !== "books" || data.name !== "Complete VRI source books" || !integer5(data.total, 1, 200) || data.offset !== 0 || data.limit !== 200 || data.next_offset !== null || !Array.isArray(data.items) || data.items.length !== data.total || !text5(data.note)) fail3();
+    const seen = /* @__PURE__ */ new Set();
+    let result;
+    for (const item of data.items) {
+      if (!object6(item) || !bookId(item.id) || seen.has(item.id) || !text5(item.title, 1e3) || !text5(item.collection, 30) || !["vinaya", "sutta", "abhidhamma"].includes(item.pitaka) || item.vri_file !== fileFor(item.id) || !keysOnly(item.read_with, ["tool", "book"]) || Object.keys(item.read_with).length !== 2 || item.read_with.tool !== "get_text" || item.read_with.book !== item.id) fail3();
+      seen.add(item.id);
+      if (item.id === selected.book) result = item;
+    }
+    if (!result) fail3();
+    return JSON.parse(JSON.stringify(result));
+  }
+  function source2(data, selected) {
+    const value = data.source;
+    if (!keysOnly(value, ["name", "repository", "commit", "attribution", "terms", "locator_revision"]) || value.name !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI)" || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text5(value.attribution, 1e4) || !text5(value.terms, 1e4) || data.attribution !== value.attribution) fail3();
+    safeRevision(value.commit);
+    const revision3 = safeRevision(sourceRevision(data));
+    if (selected.source !== null && selected.source !== revision3) {
+      const error = Error("The source revision changed since this complete-book search was opened. Review the current source explicitly; no replacement excerpt was displayed.");
+      error.code = "READING_SOURCE_CHANGED";
+      throw error;
+    }
+    return revision3;
+  }
+  function command2(value, book, offset, limit, outputScript) {
+    if (!keysOnly(value, ["tool", "book", "offset", "limit", "script"]) || value.tool !== "get_text" || value.book !== book || value.offset !== offset || value.limit !== limit || own5(value, "script") && !scripts.has(value.script) || outputScript && value.script !== outputScript) fail3();
+  }
+  function queryProvenance(data, selected) {
+    const input = romanizeSearchInput(selected.query), base = input.text;
+    if (input.original) {
+      if (data.input_script !== input.script || data.input_romanized !== base) fail3();
+    } else if (own5(data, "input_script") || own5(data, "input_romanized")) fail3();
+    const phrase = data.query_mode;
+    if (input.source_phrase && phrase !== "source_phrase") fail3();
+    if (phrase === "source_phrase" && !input.source_phrase || phrase === "as_typed_phrase" && (!hasSearchPhrase(base) || input.source_phrase)) fail3();
+    if (phrase !== void 0) {
+      if (data.query !== base || own5(data, "input_normalised")) fail3();
+      return;
+    }
+    if (!own5(data, "input_normalised")) {
+      if (data.query !== base) fail3();
+      return;
+    }
+    const normalized = data.input_normalised;
+    if (!keysOnly(normalized, ["original", "read_as", "scheme", "changes", "note"]) || normalized.original !== base || normalized.read_as !== data.query || !["ascii", "unicode", "velthuis", "harvard-kyoto"].includes(normalized.scheme) || !text5(normalized.note, 1e4) || !Array.isArray(normalized.changes) || !integer5(normalized.changes.length, 1, 500)) fail3();
+    for (const change of normalized.changes) {
+      if (!keysOnly(change, ["from", "to", "rule", "label"]) || !text5(change.from, 500) || !text5(change.to, 500) || !text5(change.rule, 100) || own5(change, "label") && !text5(change.label, 1e3) || !base.normalize("NFC").includes(change.from.normalize("NFC")) || !data.query.normalize("NFC").includes(change.to.normalize("NFC"))) fail3();
+    }
+  }
+  function hit(item, data) {
+    const allowed = ["ref", "book_id", "title", "title_roman", "segment", "type", "vri_paragraph", "pts_page_begins", "thai_page_begins", "myanmar_page_begins", "vri_page_begins", "excerpt", "read_with", "context_with"];
+    if (!keysOnly(item, allowed) || item.book_id !== data.book.id || !integer5(item.segment, 1, data.total_segments) || item.ref !== `vri-book:${data.book.id}/${item.segment}` || !text5(item.title, 1e3) || !["heading", "prose", "verse"].includes(item.type) || !text5(item.excerpt, 4e3)) fail3();
+    if (own5(item, "title_roman") ? item.title_roman !== data.book.title : item.title !== data.book.title) fail3();
+    const offset = item.segment - 1;
+    if (!integer5(offset, 0, 1e5)) fail3();
+    command2(item.read_with, data.book.id, offset, 1, data.script);
+    if (own5(item, "context_with")) command2(item.context_with, data.book.id, Math.max(0, offset - 1), 3, data.script);
+    if (own5(item, "vri_paragraph") && !text5(item.vri_paragraph, 100)) fail3();
+    for (const field of ["pts_page_begins", "thai_page_begins", "myanmar_page_begins", "vri_page_begins"]) if (own5(item, field) && (!Array.isArray(item[field]) || item[field].length > 100 || item[field].some((value) => !text5(value, 200)))) fail3();
+  }
+  function validateBookSearchPage(data, selected) {
+    selection(selected);
+    const allowed = ["query", "selection", "canonical", "book", "total_segments", "total_matched", "offset", "limit", "returned", "next_offset", "results", "citation_note", "source", "attribution", "notes", "input_script", "input_romanized", "input_normalised", "query_mode", "query_note", "script", "script_note"];
+    if (!selected.query || !keysOnly(data, allowed) || data.selection !== "source_book" || data.canonical !== true || !keysOnly(data.book, ["id", "title", "collection", "vri_file"]) || data.book.id !== selected.book || data.book.vri_file !== fileFor(selected.book) || !text5(data.book.title, 1e3) || !text5(data.book.collection, 30) || !text5(data.query, 500) || !integer5(data.total_segments, 1, 100001) || !integer5(data.total_matched, 0, data.total_segments) || data.offset !== selected.offset || data.limit !== 15 || !integer5(data.returned, 0, 15) || !Array.isArray(data.results) || data.results.length !== data.returned || data.returned !== Math.min(15, Math.max(0, data.total_matched - data.offset)) || data.next_offset !== (data.offset + data.returned < data.total_matched ? data.offset + data.returned : null) || !text5(data.citation_note)) fail3();
+    source2(data, selected);
+    if (own5(data, "script") && !scripts.has(data.script)) fail3();
+    for (const field of ["script_note", "query_note", "input_romanized"]) if (own5(data, field) && !text5(data[field], field === "input_romanized" ? 500 : 1e4)) fail3();
+    if (own5(data, "input_script") && !scripts.has(data.input_script)) fail3();
+    if (own5(data, "query_mode") && !["source_phrase", "as_typed_phrase"].includes(data.query_mode)) fail3();
+    if (own5(data, "notes") && (!Array.isArray(data.notes) || data.notes.length > 50 || data.notes.some((value) => !text5(value, 1e4)))) fail3();
+    if (own5(data, "input_normalised") && !object6(data.input_normalised)) fail3();
+    queryProvenance(data, selected);
+    const seen = /* @__PURE__ */ new Set();
+    let previous = 0;
+    for (const item of data.results) {
+      hit(item, data);
+      if (seen.has(item.ref) || item.segment <= previous) fail3();
+      seen.add(item.ref);
+      previous = item.segment;
+    }
+    return JSON.parse(JSON.stringify(data));
+  }
+  function bookSearchHitLinks(data, item, selected) {
+    const checked = validateBookSearchPage(data, selected);
+    const found = checked.results.find((value) => value.ref === item?.ref);
+    if (!found || JSON.stringify(found) !== JSON.stringify(item)) fail3();
+    const revision3 = sourceRevision(checked), context = { book: checked.book.id };
+    return { read: readingPosition(context, found.read_with.offset, found.ref, revision3), context: own5(found, "context_with") ? readingPagePosition(context, found.context_with.offset, revision3) : null };
+  }
+
+  // web/backup-note-conflicts.mjs
+  var object7 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   var fields = /* @__PURE__ */ new Set(["uid", "ref", "title", "note", "offset", "source_commit"]);
   var key2 = (item) => JSON.stringify([item.uid, item.ref]);
   function note(value) {
@@ -1361,7 +1520,7 @@
     if (!Array.isArray(items) || items.length > 500) throw Error("Unsupported saved passages for personal-note conflict review.");
     const result = /* @__PURE__ */ new Map();
     for (const item of items) {
-      if (!object6(item) || typeof item.uid !== "string" || typeof item.ref !== "string") throw Error("Personal-note conflict review needs exact saved identities.");
+      if (!object7(item) || typeof item.uid !== "string" || typeof item.ref !== "string") throw Error("Personal-note conflict review needs exact saved identities.");
       const identity2 = key2(item), matches = result.get(identity2) ?? [];
       matches.push(item);
       result.set(identity2, matches);
@@ -1423,9 +1582,9 @@
   // web/study-backup.mjs
   var MAX_STUDY_BACKUP_BYTES = 32 * 1024 * 1024;
   var FORMAT = "pali-library-study-backup-v1";
-  var object7 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
-  var exact2 = (value, keys2) => object7(value) && Object.keys(value).length === keys2.length && keys2.every((key4) => Object.hasOwn(value, key4));
-  var bytes = (text5) => new TextEncoder().encode(text5).length;
+  var object8 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var exact2 = (value, keys2) => object8(value) && Object.keys(value).length === keys2.length && keys2.every((key4) => Object.hasOwn(value, key4));
+  var bytes = (text6) => new TextEncoder().encode(text6).length;
   var clone3 = (value) => JSON.parse(JSON.stringify(value));
   var key3 = (item) => JSON.stringify([item.uid, item.ref]);
   function jsonData(value, depth = 0) {
@@ -1435,16 +1594,16 @@
       for (const item of value) jsonData(item, depth + 1);
       return;
     }
-    if (object7(value) && [Object.prototype, null].includes(Object.getPrototypeOf(value))) {
+    if (object8(value) && [Object.prototype, null].includes(Object.getPrototypeOf(value))) {
       for (const item of Object.values(value)) jsonData(item, depth + 1);
       return;
     }
     throw Error("Study backups accept only supported JSON metadata. Nothing was restored.");
   }
   function component(value, format, field, max) {
-    const text5 = JSON.stringify({ format, [field]: value });
-    if (bytes(text5) > max) throw Error("A study-backup component exceeds the 16 MiB limit. Nothing was restored.");
-    return text5;
+    const text6 = JSON.stringify({ format, [field]: value });
+    if (bytes(text6) > max) throw Error("A study-backup component exceeds the 16 MiB limit. Nothing was restored.");
+    return text6;
   }
   function validate(data, canonicalizeProgress) {
     if (!exact2(data, ["format", "saved", "progress", "resume"]) || data.format !== FORMAT || !Array.isArray(data.saved) || !Array.isArray(data.progress) || !(data.resume === null || isReadingLocator(data.resume))) throw Error("This is not a supported study backup. Nothing was restored.");
@@ -1458,18 +1617,18 @@
     if (!exact2(data, ["saved", "progress", "resume"])) throw Error("Choose only saved passages, progress and an optional reading locator for backup.");
     return validate({ format: FORMAT, ...data }, false);
   }
-  function parseStudyBackup(text5) {
-    if (typeof text5 !== "string" || bytes(text5) > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
+  function parseStudyBackup(text6) {
+    if (typeof text6 !== "string" || bytes(text6) > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
     let data;
     try {
-      data = JSON.parse(text5);
+      data = JSON.parse(text6);
     } catch {
       throw Error("Choose a valid JSON study backup. Nothing was restored.");
     }
     return validate(data, true);
   }
   function mergeStudyBackup(current, incoming, catalog, choices) {
-    if (!object7(current) || Object.keys(current).some((field) => !["saved", "progress", "drafts"].includes(field)) || !Array.isArray(current.saved) || !Array.isArray(current.progress) || current.drafts !== void 0 && !(current.drafts instanceof Map)) throw Error("Unsupported current personal-study metadata. Nothing was restored.");
+    if (!object8(current) || Object.keys(current).some((field) => !["saved", "progress", "drafts"].includes(field)) || !Array.isArray(current.saved) || !Array.isArray(current.progress) || current.drafts !== void 0 && !(current.drafts instanceof Map)) throw Error("Unsupported current personal-study metadata. Nothing was restored.");
     const validatedCurrent = createStudyBackup({ saved: current.saved, progress: current.progress, resume: null });
     const validatedIncoming = validate(incoming, true);
     let progress = validatedIncoming.progress;
@@ -1601,36 +1760,36 @@
       return false;
     }
   }
-  function el(tag, text5, className) {
+  function el(tag, text6, className) {
     const n = document.createElement(tag);
-    if (text5 !== void 0) n.textContent = text5;
+    if (text6 !== void 0) n.textContent = text6;
     if (className) n.className = className;
     return n;
   }
-  function button(text5, fn) {
-    const n = el("button", text5);
+  function button(text6, fn) {
+    const n = el("button", text6);
     n.type = "button";
     n.addEventListener("click", fn);
     return n;
   }
-  function link(text5, href, className) {
-    const n = el("a", text5, className);
+  function link(text6, href, className) {
+    const n = el("a", text6, className);
     n.href = href;
     return n;
   }
-  function external(text5, url) {
+  function external(text6, url) {
     try {
       const u = new URL(url);
-      if (!["http:", "https:"].includes(u.protocol)) return el("span", text5);
-      return link(text5, u.href);
+      if (!["http:", "https:"].includes(u.protocol)) return el("span", text6);
+      return link(text6, u.href);
     } catch {
-      return el("span", text5);
+      return el("span", text6);
     }
   }
   function route(name, args = {}) {
     return "#" + name + "?" + new URLSearchParams(args);
   }
-  var requestLabels = { get_text: "P\u0101li reading", get_translation: "English source", browse_canon: "Library", get_commentary: "Commentary", get_post_canonical: "Later P\u0101li reading", reading_plan: "Reading plan", search_texts: "Text search", search_commentary: "Commentary search", search_post_canonical: "Later-work search", glossary: "Glossary", analyse_passage: "Word study", get_parallels: "Related texts", daily_text: "Daily reading", verify_quote: "Quotation check", list_topics: "Topic index", topic: "Topic detail", dhamma_list: "Teaching list" };
+  var requestLabels = { get_text: "P\u0101li reading", get_translation: "English source", browse_canon: "Library", get_commentary: "Commentary", get_post_canonical: "Later P\u0101li reading", reading_plan: "Reading plan", search_texts: "Text search", search_source_book: "Source-book search", search_commentary: "Commentary search", search_post_canonical: "Later-work search", glossary: "Glossary", analyse_passage: "Word study", get_parallels: "Related texts", daily_text: "Daily reading", verify_quote: "Quotation check", list_topics: "Topic index", topic: "Topic detail", dhamma_list: "Teaching list" };
   var requestRows = /* @__PURE__ */ new Map();
   var requests = createRequestPool({ onChange(entries) {
     const active = new Set(entries.map((x) => x.id));
@@ -1856,18 +2015,26 @@
       card.append(el("small", kind === "canon" ? item.citation || item.pitaka || "Collection" : kind === "commentary" ? "Commentary \xB7 not canon" : "Later work \xB7 not canon"), el("strong", item.name || item.title || item.id));
       if (item.texts !== void 0) card.append(el("p", item.texts + " texts"));
       if (item.english_available !== void 0) card.append(el("p", item.english_available ? "English source linked" : item.shared_english_available || item.partial_english_available ? "Scoped English source \xB7 review required" : "P\u0101li source text"));
-      cards.append(card);
+      if (node === "books" && kind === "canon" && item.read_with?.tool === "get_text" && item.read_with.book === item.id) {
+        try {
+          const searchHref = bookSearchRoute({ book: item.id, query: "", offset: 0, limit: 15, source: null }), wrapper = el("article", void 0, "book-catalogue-card");
+          wrapper.append(card, link("Search this source book", searchHref, "button"));
+          cards.append(wrapper);
+        } catch {
+          cards.append(card);
+        }
+      } else cards.append(card);
     }
     view.append(cards);
     pageControls(data.next_offset, offset ? Math.max(0, offset - limit) : null, (n) => route("browse", { node, offset: n }));
     if (kind !== "canon") provenance(data);
   }
   async function browseEnglish(args, token) {
-    const selection = englishSelection(args);
-    const request2 = { node: "english", availability: selection.availability, offset: selection.offset, limit: selection.limit, ...selection.collection === null ? {} : { collection: selection.collection } };
+    const selection2 = englishSelection(args);
+    const request2 = { node: "english", availability: selection2.availability, offset: selection2.offset, limit: selection2.limit, ...selection2.collection === null ? {} : { collection: selection2.collection } };
     const response = await tool("browse_canon", request2);
     if (token !== epoch) return;
-    const data = englishCatalogue(response, selection);
+    const data = englishCatalogue(response, selection2);
     heading("EXPLORE THE LIBRARY", "Find English sources");
     const nav = el("nav", void 0, "toolbar");
     nav.setAttribute("aria-label", "Library views");
@@ -1884,7 +2051,7 @@
       option.value = value;
       availability.append(option);
     }
-    availability.value = selection.availability;
+    availability.value = selection2.availability;
     const collectionLabel = el("label", "Collection"), collection = el("select");
     collection.id = "english-collection";
     collection.name = "collection";
@@ -1897,7 +2064,7 @@
       option.value = item.id;
       collection.append(option);
     }
-    collection.value = selection.collection || "";
+    collection.value = selection2.collection || "";
     const apply = el("button", "Apply");
     apply.type = "submit";
     form.append(availabilityLabel, availability, collectionLabel, collection, apply);
@@ -1911,8 +2078,8 @@
     });
     view.append(form, el("p", data.total + " matching indexed record" + (data.total === 1 ? "" : "s"), "english-catalogue-count"), el("p", data.note, "notice"), el("p", "A link is not a guarantee of a complete individual English translation. Review the publisher reference and any scope before retrieving English.", "muted"));
     if (!data.total) view.append(el("p", "No matching records in this index for these filters. This does not mean that no translation exists elsewhere.", "notice"));
-    else if (selection.offset >= data.total) view.append(el("p", "This page is beyond the matching records."), link("Return to first matching page", englishRoute(selection, 0), "button"));
-    else view.append(el("p", "Showing " + (selection.offset + 1) + "\u2013" + (selection.offset + data.items.length) + " of " + data.total, "muted"));
+    else if (selection2.offset >= data.total) view.append(el("p", "This page is beyond the matching records."), link("Return to first matching page", englishRoute(selection2, 0), "button"));
+    else view.append(el("p", "Showing " + (selection2.offset + 1) + "\u2013" + (selection2.offset + data.items.length) + " of " + data.total, "muted"));
     const cards = el("div", void 0, "cards");
     for (const item of data.items) {
       const card = link("", route("read", { uid: item.id }), "entry");
@@ -1922,11 +2089,80 @@
       cards.append(card);
     }
     view.append(cards);
-    pageControls(data.next_offset, selection.offset > 0 && selection.offset < data.total ? Math.max(0, selection.offset - selection.limit) : null, (offset) => englishRoute(selection, offset));
+    pageControls(data.next_offset, selection2.offset > 0 && selection2.offset < data.total ? Math.max(0, selection2.offset - selection2.limit) : null, (offset) => englishRoute(selection2, offset));
   }
   function offsetOf(args) {
     const n = Number(args.get("offset") || 0);
     return Number.isSafeInteger(n) && n >= 0 && n <= 1e5 ? n : 0;
+  }
+  function bookSearchForm(selection2, token) {
+    const form = el("form", void 0, "book-search-form"), label = el("label", "Search this source book"), input = el("input"), submit = el("button", "Search book"), error = el("p");
+    form.setAttribute("aria-label", "Source book search");
+    form.noValidate = true;
+    input.type = "search";
+    input.maxLength = 500;
+    input.value = selection2.query;
+    label.append(input);
+    submit.type = "submit";
+    error.setAttribute("role", "alert");
+    error.hidden = true;
+    form.append(label, submit, error);
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (token !== epoch || !form.isConnected) return;
+      try {
+        const query = input.value.trim();
+        if (!query) throw Error("Enter a P\u0101li search query.");
+        const href = bookSearchRoute({ ...selection2, query, offset: 0 });
+        error.hidden = true;
+        input.removeAttribute("aria-invalid");
+        if (location.hash === href) render();
+        else location.hash = href;
+      } catch (failure2) {
+        error.textContent = failure2.message;
+        error.hidden = false;
+        input.setAttribute("aria-invalid", "true");
+        input.focus({ preventScroll: true });
+      }
+    });
+    return form;
+  }
+  async function bookSearch(args, token) {
+    const selection2 = bookSearchSelection(args);
+    if (!selection2.query) {
+      const catalogue = await tool("browse_canon", { node: "books", offset: 0, limit: 200 });
+      if (token !== epoch) return;
+      const book = bookSearchCatalogue(catalogue, selection2);
+      heading("COMPLETE VRI SOURCE FILE", "Search \xB7 " + book.title, "Source-book search");
+      view.append(el("p", catalogue.note, "notice"), bookSearchForm(selection2, token), link("Read this source book", selection2.source ? readingPagePosition({ book: selection2.book }, 0, selection2.source) : route("read", { book: selection2.book }), "button"), el("p", "Search and reading results show the actual source attribution and licence terms. Source-file references are not standard discourse or rule citations. English translations are not searched.", "muted"));
+      return;
+    }
+    const response = await tool("search_source_book", { book: selection2.book, query: selection2.query, offset: selection2.offset, limit: 15, script: $("script").value });
+    if (token !== epoch) return;
+    const data = validateBookSearchPage(response, selection2), pinned2 = { ...selection2, source: sourceRevision(data) };
+    heading("COMPLETE VRI SOURCE FILE", "Search \xB7 " + data.book.title, "Source-book search");
+    view.append(bookSearchForm(pinned2, token), el("p", "Search query: " + selection2.query, "muted"), el("p", data.citation_note, "notice"));
+    notes(data);
+    if (data.query_note) view.append(el("p", "Search interpretation: " + data.query_note, "notice"));
+    if (data.script_note) view.append(el("p", "Script display: " + data.script_note, "notice"));
+    const count2 = el("p", data.returned ? `Matching source segments: ${data.total_matched} \xB7 showing ${data.offset + 1}\u2013${data.offset + data.returned}` : data.total_matched ? `This page is beyond the ${data.total_matched} matching source segments.` : "No matching source segments in this book. Try a different P\u0101li word or phrase.");
+    count2.setAttribute("role", "status");
+    view.append(count2);
+    if (!data.returned && data.total_matched) view.append(link("First search results", bookSearchRoute(pinned2, 0), "button"));
+    const results = el("section", void 0, "book-search-results");
+    results.setAttribute("aria-label", "Source book search results");
+    for (const hit2 of data.results) {
+      const locations = bookSearchHitLinks(data, hit2, selection2), card = el("article", void 0, "segment");
+      card.append(el("h3", hit2.ref), el("p", `Source position ${hit2.segment} \xB7 ${hit2.type}`, "muted"));
+      const excerpt = el("p", hit2.excerpt, "passage");
+      excerpt.lang = "pi";
+      card.append(el("p", "Search excerpt \xB7 open the source to read its context.", "muted"), excerpt, link("Read match \xB7 " + hit2.ref, locations.read, "button"));
+      if (locations.context) card.append(link("Read surrounding source \xB7 " + hit2.ref, locations.context, "button"));
+      results.append(card);
+    }
+    view.append(results);
+    pageControls(data.next_offset, selection2.offset > 0 ? Math.max(0, selection2.offset - 15) : null, (offset) => bookSearchRoute(pinned2, offset));
+    provenance(data);
   }
   async function search(args, token) {
     const query = (args.get("q") || "").trim();
@@ -1940,10 +2176,10 @@
     if (data.expanded_from_english) view.append(el("p", "English keywords expanded into P\u0101li: " + JSON.stringify(data.expanded_from_english), "notice"));
     const seen = /* @__PURE__ */ new Set(), cards = el("div", void 0, "cards");
     for (const item of [...data.title_matches || [], ...data.results || data.matches || []]) {
-      const command2 = item.read_with || {}, id2 = scope === "commentary" ? command2.uid : scope === "post" ? command2.citation : item.id || item.text_id || item.uid;
+      const command3 = item.read_with || {}, id2 = scope === "commentary" ? command3.uid : scope === "post" ? command3.citation : item.id || item.text_id || item.uid;
       if (!id2 || seen.has(id2)) continue;
       seen.add(id2);
-      const a = link("", route("read", { uid: id2, ...scope !== "canon" ? { kind: scope } : {}, ...command2.offset !== void 0 ? { offset: command2.offset } : {}, ...item.segment_ref ? { ref: item.segment_ref } : {} }), "entry");
+      const a = link("", route("read", { uid: id2, ...scope !== "canon" ? { kind: scope } : {}, ...command3.offset !== void 0 ? { offset: command3.offset } : {}, ...item.segment_ref ? { ref: item.segment_ref } : {} }), "entry");
       a.append(el("small", item.citation || id2), el("strong", item.title || item.book?.title || item.citation || id2));
       if (item.excerpt || item.text) a.append(el("p", item.excerpt || item.text));
       cards.append(a);
@@ -2253,6 +2489,15 @@
     } catch {
       view.append(el("p", "Source-position navigation is unavailable because this page has incomplete or unsupported position/revision metadata. The loaded source remains below; no destination was guessed.", "notice"));
     }
+    if (kind === "book") {
+      try {
+        const selection2 = { book: data.book_id, query: "", offset: 0, limit: 15, source: sourceRevision(data) };
+        bookSearchRoute(selection2);
+        sourceTools.append(bookSearchForm(selection2, token));
+      } catch {
+        sourceTools.append(el("p", "Search is unavailable because this source book has incomplete identity or revision metadata.", "notice"));
+      }
+    }
     const additions = el("section");
     additions.id = "study";
     additions.setAttribute("aria-live", "polite");
@@ -2290,9 +2535,9 @@
       }
       row.append(actions);
       part.classList.toggle("marked", active);
-      const text5 = el("p", segment.text, "passage");
-      text5.lang = "pi";
-      part.append(row, text5);
+      const text6 = el("p", segment.text, "passage");
+      text6.lang = "pi";
+      part.append(row, text6);
       attachPassageNote(selector, data, segment, part, save, token);
       passages.append(part);
       if (positionHref) positions.push({ node: part, heading: segment.type === "heading", href: positionHref });
@@ -2834,7 +3079,7 @@
             return active(request2) && review.isConnected && !applying && !applied;
           }, draw = function(moveFocus = false) {
             if (!active(request2) || !review.isConnected) return;
-            selection.textContent = choices.size + " incoming notes selected";
+            selection2.textContent = choices.size + " incoming notes selected";
             clear.disabled = applied || applying || !choices.size;
             savedCount.textContent = choices.size ? `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} original conflicts \xB7 ${choices.size} incoming notes selected; all other metadata kept` : `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} conflicts kept`;
             const start = page * 10, end = Math.min(noteRows.length, start + 10);
@@ -2845,10 +3090,10 @@
               card.setAttribute("aria-label", "Note difference " + row.uid + " \xB7 " + row.ref);
               card.append(el("h5", row.uid + " \xB7 " + row.ref), el("p", "Current reference: " + metadata(current), "muted"), el("p", "Incoming reference: " + metadata(incomingRecord), "muted"), el("p", row.eligible ? "Same source revision and position. Only the note text may be replaced." : "Read-only difference: " + row.reason, row.eligible ? "muted" : "notice"));
               const columns = el("div", void 0, "backup-note-columns");
-              for (const [name, text5] of [["Note before restore (including draft)", row.currentNote], ["Incoming personal note", row.incomingNote]]) {
+              for (const [name, text6] of [["Note before restore (including draft)", row.currentNote], ["Incoming personal note", row.incomingNote]]) {
                 const label2 = el("label", name + " \xB7 " + row.uid + " \xB7 " + row.ref), field = el("textarea");
                 field.readOnly = true;
-                field.value = text5;
+                field.value = text6;
                 label2.append(field);
                 columns.append(label2);
               }
@@ -2866,7 +3111,7 @@
                   }
                   if (choose.checked) choices.add(row.key);
                   else choices.delete(row.key);
-                  selection.textContent = choices.size + " incoming notes selected";
+                  selection2.textContent = choices.size + " incoming notes selected";
                   clear.disabled = !choices.size;
                   savedCount.textContent = choices.size ? `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} original conflicts \xB7 ${choices.size} incoming notes selected; all other metadata kept` : `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} conflicts kept`;
                 });
@@ -2900,23 +3145,23 @@
           };
           const review = el("section", void 0, "backup-note-review");
           review.setAttribute("aria-label", "Review personal note differences");
-          const count2 = el("p"), rows = el("div"), selection = el("p");
+          const count2 = el("p"), rows = el("div"), selection2 = el("p");
           count2.setAttribute("role", "status");
           count2.tabIndex = -1;
-          selection.setAttribute("role", "status");
+          selection2.setAttribute("role", "status");
           const clear = button("Clear incoming note choices", () => {
             if (!validReview()) return;
             choices.clear();
             draw();
           });
-          review.append(el("h4", "Personal note differences \xB7 not scripture"), el("p", "Current notes include unsaved edits in this tab. Only matching, source-pinned positions allow replacement. Selecting an empty incoming note clears the old note and its draft after a confirmed save. Download your current backup first if you want to keep both versions.", "notice"), button("Download current study backup", downloadStudyBackup), selection, clear, count2, rows);
+          review.append(el("h4", "Personal note differences \xB7 not scripture"), el("p", "Current notes include unsaved edits in this tab. Only matching, source-pinned positions allow replacement. Selecting an empty incoming note clears the old note and its draft after a confirmed save. Download your current backup first if you want to keep both versions.", "notice"), button("Download current study backup", downloadStudyBackup), selection2, clear, count2, rows);
           preview.append(review);
           let page = 0;
           const identity2 = (item) => noteKey(item);
           const metadata = (item) => `${item.uid} \xB7 ${item.ref} \xB7 source revision: ${item.source_commit ?? "unpinned legacy"} \xB7 source offset: ${item.offset ?? "not recorded"}`;
           draw();
           lockReview = () => {
-            selection.textContent = choices.size + " incoming notes applied";
+            selection2.textContent = choices.size + " incoming notes applied";
             if (choices.size) savedCount.textContent = `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} original conflicts \xB7 ${choices.size} incoming notes applied; reference metadata kept`;
             for (const control of review.querySelectorAll("input, button")) if (control.textContent !== "Download current study backup") control.disabled = true;
           };
@@ -2989,10 +3234,10 @@
       if (!file) return;
       try {
         if (file.size > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
-        const text5 = await file.text();
+        const text6 = await file.text();
         if (!active(request2)) return;
-        if (new TextEncoder().encode(text5).length > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
-        const incoming = parseStudyBackup(text5);
+        if (new TextEncoder().encode(text6).length > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
+        const incoming = parseStudyBackup(text6);
         await prepare(incoming, request2, file.name);
       } catch (error) {
         failure2(error, request2, null, file.name);
@@ -3121,8 +3366,8 @@
     input.value = query;
     input.maxLength = 200;
     label.append(input);
-    for (const [value, text5] of [["all", "All entries"], ["subject", "Subject index"], ["numerical", "Numerical index"]]) {
-      const option = el("option", text5);
+    for (const [value, text6] of [["all", "All entries"], ["subject", "Subject index"], ["numerical", "Numerical index"]]) {
+      const option = el("option", text6);
       option.value = value;
       filter.append(option);
     }
@@ -3264,16 +3509,16 @@
       if (!file) return;
       try {
         if (file.size > MAX_PROGRESS_BYTES) throw Error("Choose a progress export no larger than 16 MiB. Nothing was restored.");
-        const text5 = await file.text();
+        const text6 = await file.text();
         if (request2 !== generation || token !== epoch) return;
-        if (new TextEncoder().encode(text5).length > MAX_PROGRESS_BYTES) throw Error("Choose a progress export no larger than 16 MiB. Nothing was restored.");
+        if (new TextEncoder().encode(text6).length > MAX_PROGRESS_BYTES) throw Error("Choose a progress export no larger than 16 MiB. Nothing was restored.");
         let snapshot;
         try {
           snapshot = localStorage.getItem(KEY);
         } catch {
         }
         if (snapshot !== void 0 && snapshot !== storageSnapshot && !readingPointerOnlyChange(storageSnapshot, snapshot)) throw Error("Browser data changed in another tab. Reload this page before restoring; no marks were restored.");
-        const incoming = parseProgress(text5, catalog), merge = mergeProgress(local.reading_progress, incoming), title = el("h3", "Review reading progress");
+        const incoming = parseProgress(text6, catalog), merge = mergeProgress(local.reading_progress, incoming), title = el("h3", "Review reading progress");
         title.tabIndex = -1;
         preview.replaceChildren(title, el("p", file.name), el("p", merge.added + " new marks \xB7 " + merge.duplicates + " already saved \xB7 " + merge.conflicts + " conflicting days kept as they are.", "notice"), el("p", "Imported marks are self-reported. Their saved assignments and source revisions are retained, not verified against every current plan day. Open a day to check whether its mark still applies.", "muted"));
         if (merge.added) preview.append(button("Add " + merge.added + " reading marks", () => {
@@ -3529,7 +3774,7 @@
   }
   function about() {
     heading("A LIBRARY, NOT A TEACHER", "Read with the source in view.");
-    for (const text5 of ["The bundled P\u0101li is retrieved from the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition. Scripture is never generated or reconstructed. Abbreviations and uncertain alignments stay labelled.", "English translations are available for a subset of texts and fetched only after you choose them. Translators\u2019 wording is not silently exchanged. Commentary is labelled separately from canonical text.", "VRI and several translation/dictionary sources carry non-commercial terms. This reading interface adds no permission to redistribute, translate or commercialize their work.", "Your saved passages, notes, manual reading-plan marks and preferences are stored in this browser. The app has no accounts, advertising, analytics, cloud sync or offline web download. The server may hold your IP temporarily for rate limiting; deployment providers may keep separate infrastructure logs."]) view.append(el("p", text5));
+    for (const text6 of ["The bundled P\u0101li is retrieved from the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition. Scripture is never generated or reconstructed. Abbreviations and uncertain alignments stay labelled.", "English translations are available for a subset of texts and fetched only after you choose them. Translators\u2019 wording is not silently exchanged. Commentary is labelled separately from canonical text.", "VRI and several translation/dictionary sources carry non-commercial terms. This reading interface adds no permission to redistribute, translate or commercialize their work.", "Your saved passages, notes, manual reading-plan marks and preferences are stored in this browser. The app has no accounts, advertising, analytics, cloud sync or offline web download. The server may hold your IP temporarily for rate limiting; deployment providers may keep separate infrastructure logs."]) view.append(el("p", text6));
     const links = el("div", void 0, "toolbar");
     links.append(external("Source and licence register", "https://github.com/DaniilKi/pali-canon-claude/blob/dev/pali-reliability/THIRD_PARTY.md"), external("Project and complete MCP toolset", "https://github.com/DaniilKi/pali-canon-claude"));
     view.append(links);
@@ -3553,6 +3798,7 @@
     try {
       if (page === "read") await read(args, token);
       else if (page === "search") await search(args, token);
+      else if (page === "book-search") await bookSearch(args, token);
       else if (page === "glossary") await dictionary(args, token);
       else if (page === "daily") await daily(args, token);
       else if (page === "verify") quoteChecker(token);
@@ -3577,7 +3823,7 @@
         const review = new URLSearchParams(args);
         review.delete("source");
         review.delete("page_source");
-        view.append(link(args.has("page_source") ? "Review current source at this position" : "Review current source at this reference", "#read?" + review, "button"));
+        view.append(link(page === "book-search" ? "Review current source book search" : args.has("page_source") ? "Review current source at this position" : "Review current source at this reference", (page === "book-search" ? "#book-search?" : "#read?") + review, "button"));
       }
       status2.textContent = stopped2 ? "Stopped waiting in this browser." : error.code === "REQUEST_DEADLINE" ? "The request timed out." : "The request failed.";
     }

@@ -10,6 +10,7 @@ test('every browser-group JSON report is retained as a CI artifact',()=>{
  assert.ok(selected?.includes('highlights'),'source-aware highlight acceptance is selected');
  assert.ok(selected?.includes('navigation'),'source-pinned navigation acceptance is selected');
  assert.ok(selected?.includes('conflicts'),'local note-conflict acceptance is selected');
+ assert.ok(selected?.includes('booksearch'),'complete source-book search acceptance is selected');
  for(const condition of group.matchAll(/matrix\.group == '([^']+)'/g))assert.ok(selected.includes(condition[1]),`browser group ${condition[1]} has steps but is never selected`);
  const produced=new Set([...group.matchAll(/--report\s+([\w.-]+\.report\.json)/g)].map(x=>x[1]));
  for(const x of group.matchAll(/>\s+([\w.-]+\.report\.json)/g))produced.add(x[1]);
