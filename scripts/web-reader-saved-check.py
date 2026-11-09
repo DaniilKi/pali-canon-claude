@@ -39,12 +39,12 @@ try:
             results.locator('textarea').first.fill('Uncommitted draft unique words')
             page.get_by_role('button',name='Next saved page',exact=True).click();assert 'Page 2 of 20' in results.inner_text()
             assert page.evaluate("document.activeElement.getAttribute('role')")=='status'
-            expect(page.get_by_role('status').last).to_be_in_viewport()
+            expect(page.locator('#saved-count')).to_be_in_viewport()
             results.locator('textarea').first.fill('Second-page unsaved reflection')
             page.get_by_role('button',name='Previous saved page',exact=True).click();assert results.locator('textarea').first.input_value()=='Uncommitted draft unique words';passed('pagination keeps unsaved notes and moves keyboard focus visibly')
             query.fill('unique words');query.press('Enter');expect(results.locator('textarea')).to_have_count(1);assert results.locator('textarea').input_value()=='Uncommitted draft unique words';assert '#saved'==page.evaluate('location.hash');assert 'unique words' not in page.title();audit('private draft filter');passed('unsaved drafts searched locally without URL or title disclosure')
             query.fill('metta');expect(results.locator('textarea')).to_have_count(1);assert 'Mettā practice' in results.inner_text();passed('accent-insensitive saved metadata search')
-            query.fill('');scope.select_option('commentary');assert '125 matching' in page.get_by_role('status').last.inner_text();assert all('Commentary · not canon' in t for t in results.locator('article').all_text_contents());audit('commentary filter');passed('source types remain distinct and labelled noncanonical')
+            query.fill('');scope.select_option('commentary');assert '125 matching' in page.locator('#saved-count').inner_text();assert all('Commentary · not canon' in t for t in results.locator('article').all_text_contents());audit('commentary filter');passed('source types remain distinct and labelled noncanonical')
             query.fill('<img src=x onerror=alert(1)>');expect(results.locator('textarea')).to_have_count(0);assert page.locator('#view img').count()==0;audit('no matches');passed('hostile or unmatched query stays inert')
             assert page.evaluate("localStorage.getItem('pali-library-v1')")==raw and not requests
             page.get_by_role('button',name='Clear saved filters',exact=True).click();expect(query).to_be_focused();assert results.locator('textarea').first.input_value()=='Uncommitted draft unique words';passed('filter changes never write profile or call server')
@@ -54,7 +54,7 @@ try:
             query.fill('unique words');results.get_by_role('button',name='Save note',exact=True).click();assert json.loads(page.evaluate("localStorage.getItem('pali-library-v1')"))['saved'][0]['note']=='Uncommitted draft unique words';passed('explicit save remains durable')
             results.get_by_role('link',name='Buddhavaggo · dhp183/1',exact=True).click();page.locator('.passage').filter(has_text='Sabbapāpassa').wait_for();passed('filtered reference opens actual source unchanged')
             page.get_by_role('link',name='Saved',exact=True).click();expect(query).to_have_value('unique words');expect(results.locator('textarea')).to_have_count(1)
-            results.get_by_role('button',name='Remove bookmark',exact=True).click();assert results.locator('textarea').count()==0 and '499 saved' in page.get_by_role('status').last.inner_text();assert page.evaluate("document.activeElement.getAttribute('role')")=='status';passed('navigation preserves tab filters, removal restores visible focus')
+            results.get_by_role('button',name='Remove bookmark',exact=True).click();expect(results.get_by_role('button',name='Remove bookmark and note',exact=True)).to_be_visible();results.get_by_role('button',name='Remove bookmark and note',exact=True).click();assert results.locator('textarea').count()==0 and '499 saved' in page.locator('#saved-count').inner_text();assert page.evaluate("document.activeElement.getAttribute('role')")=='status';passed('navigation preserves tab filters, removal restores visible focus')
             assert not errors,errors;context.close()
         browser.close()
     data={'passed':len(checks),'outside_source_tree':bool(args.server_dir),'checks':checks,'a11y':{'scans':len(scans),'violations':sum(len(x['violations']) for x in scans),'results':scans},'limits':'Synthetic personal bookmarks/notes, actual Dhp 183 source. Chromium widths emulate devices; no real-client or human screen-reader certification.'}
