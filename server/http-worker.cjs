@@ -22425,6 +22425,7 @@ function atiChapterProse(html) {
 function atiPartialExcerpt(html, extractor) {
   if (extractor === "ati-freeverse-v1") return atiVerseExcerpt(html);
   if (extractor === "ati-chapter-prose-v1") return atiChapterProse(html);
+  if (extractor === "ati-chapter-p5-of5-no-notes-v1") return chapterLastParagraphWithoutNotes(html);
   if (extractor === "ati-chapter-p2-of2-v1") return chapterParagraph(html, 2, 2);
   if (extractor === "ati-chapter-p11-of11-v1") return chapterParagraph(html, 11, 11, "Seeing the Dhamma");
   if (extractor === "ati-chapter-p1-of4-v1") return chapterParagraph(html, 4, 1);
@@ -22432,6 +22433,7 @@ function atiPartialExcerpt(html, extractor) {
   if (extractor === "ati-excerpt-verse-pre-v1") return excerptVersePre(html);
   throw Error("Unsupported ATI partial extractor. No excerpt was returned.");
 }
+var ATI_SUBPARAGRAPH_EXTRACTORS = Object.freeze(["ati-chapter-prose-v1", "ati-chapter-p5-of5-no-notes-v1"]);
 var ATI_SEGMENT_EXTRACTORS = Object.freeze([
   "ati-freeverse-v1",
   "ati-chapter-p2-of2-v1",
@@ -22482,6 +22484,22 @@ function excerptVersePre(html) {
   if (!text) fail();
   return text;
 }
+function chapterLastParagraphWithoutNotes(html) {
+  const fail = () => {
+    throw Error("The reviewed ATI five-paragraph extraction structure changed. No excerpt was returned.");
+  };
+  const chunk = copyrightedChunk(html), chapters = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
+  if (chapters.length !== 1) fail();
+  const start2 = chapters[0].index + chapters[0][0].length, stop = chunk.indexOf("</div>", start2);
+  if (stop < start2 || chunk.slice(0, chapters[0].index).trim() || chunk.slice(stop + 6).trim() !== "</div>") fail();
+  const body = chunk.slice(start2, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
+  if (paragraphs.length !== 5 || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body) || body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim()) fail();
+  const chosen = paragraphs[4][1];
+  if (/<\/?p\b/i.test(chosen)) fail();
+  const text = plainText(chosen.replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi, ""));
+  if (!text) fail();
+  return text;
+}
 
 // src/translation-scope.mjs
 var scopeHash = (value) => (0, import_node_crypto.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
@@ -22503,7 +22521,7 @@ function partialScope(link, unit, segments2, source4) {
   let excerpt;
   if (p.version === 2) {
     const part = p.subparagraph, seg = selected[0];
-    if (link.source !== "ati" || p.extractor !== "ati-chapter-prose-v1" || first !== last || seg.type !== "prose" || !part || Object.keys(part).sort().join(",") !== "end_char,offset_unit,segment_sha256,start_char" || part.offset_unit !== "utf16_code_units" || !sha(part.segment_sha256) || scopeHash(seg) !== part.segment_sha256 || !Number.isSafeInteger(part.start_char) || !Number.isSafeInteger(part.end_char) || part.start_char < 0 || part.end_char <= part.start_char || part.end_char > seg.text.length || part.start_char === 0 && part.end_char === seg.text.length) fail();
+    if (link.source !== "ati" || !ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor) || first !== last || seg.type !== "prose" || !part || Object.keys(part).sort().join(",") !== "end_char,offset_unit,segment_sha256,start_char" || part.offset_unit !== "utf16_code_units" || !sha(part.segment_sha256) || scopeHash(seg) !== part.segment_sha256 || !Number.isSafeInteger(part.start_char) || !Number.isSafeInteger(part.end_char) || part.start_char < 0 || part.end_char <= part.start_char || part.end_char > seg.text.length || part.start_char === 0 && part.end_char === seg.text.length) fail();
     for (const at of [part.start_char, part.end_char]) if (at > 0 && at < seg.text.length && /[\uD800-\uDBFF]/.test(seg.text[at - 1]) && /[\uDC00-\uDFFF]/.test(seg.text[at])) fail();
     seg.text = seg.text.slice(part.start_char, part.end_char);
     excerpt = { ...seg, ...part };
@@ -22511,7 +22529,7 @@ function partialScope(link, unit, segments2, source4) {
   if (scopeHash(selected) !== p.pali_sha256) fail();
   if (!["dhammatalks", "ati", "anandajoti"].includes(link.source)) fail();
   if (link.source === "ati") {
-    if (!(p.version === 2 ? p.extractor === "ati-chapter-prose-v1" : ATI_SEGMENT_EXTRACTORS.includes(p.extractor)) || !sha(p.notice_sha256) || typeof link.path !== "string" || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes("..") || link.url !== "https://accesstoinsight.org" + link.path + ".html") fail();
+    if (!(p.version === 2 ? ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor) : ATI_SEGMENT_EXTRACTORS.includes(p.extractor)) || !sha(p.notice_sha256) || typeof link.path !== "string" || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes("..") || link.url !== "https://accesstoinsight.org" + link.path + ".html") fail();
   } else if (Object.hasOwn(p, "extractor") || Object.hasOwn(p, "notice_sha256")) fail();
   if (link.parts && (link.source !== "anandajoti" || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail();
   const readPages = [];

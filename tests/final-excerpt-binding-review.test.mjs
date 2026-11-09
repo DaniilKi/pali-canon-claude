@@ -96,14 +96,14 @@ test('historical exclusions, seven retained reviews and fourteen partial descrip
   assert.equal(retained.rows.length, 7);
   assert.equal(scopeHash(retained), '7a87796d81e4e3917a2e06057cf4a9269a28a3d453d27c6d729e9583a9764e55');
   const partialRegistry = json('scripts/canon/reviewed_partial_pages.json');
-  assert.equal(partialRegistry.links.length, 15);
+  assert.equal(partialRegistry.links.length, 16);
   assert.equal(scopeHash({...partialRegistry, links:partialRegistry.links.slice(0, 14)}), '1386fcdcffbe94a4179c2ed04ecbb5f064ee2598d4f086872865aca74a3ad89e', 'All fourteen historical declarations and registry metadata remain unchanged');
   assert.deepEqual([partialRegistry.links[14].unit_id, partialRegistry.links[14].path], ['mn54', '/tipitaka/mn/mn.054x.than']);
   const queue = json('docs/data/ordinary-excerpt-review-queue.json');
   assert.deepEqual([queue.ordinary_ati_bindings_checked, queue.candidate_bindings, queue.reviewed_retained_snapshots, queue.unreviewed_bindings], [1115, 3, 3, 0]);
   assert.ok(queue.rows.every(r => r.review_status === 'reviewed-retained-at-snapshot' && r.approved === false));
   const t = translationCoverage({ refresh: true }).total;
-  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only, t.shared_links, t.with_shared_english, t.shared_only], [2538, 1408, 1831, 15, 9, 12, 110, 52]);
+  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only, t.shared_links, t.with_shared_english, t.shared_only], [2538, 1408, 1831, 16, 10, 12, 110, 52]);
   const daily = dailyText({ ...canon }, { date: '2026-11-01', kind: 'sutta' });
   assert.deepEqual([daily.rotation.of, daily.text.id], [1257, 'sn12.31']);
   assert.deepEqual(historicalSutta('d212'), {of:1261,id:'sn55.32'}, 'Old daily eligibility remains test metadata without restoring withdrawn sources');

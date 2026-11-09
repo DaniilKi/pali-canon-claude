@@ -5,6 +5,7 @@ import {readFileSync,existsSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import * as canon from '../src/canon.mjs';
 import {isScoped} from '../src/translation-scope.mjs';
+import {validateRenderedReview,renderedReviewFor} from './rendered-source-reviews.mjs';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 export const mappingFingerprint=(owner,link)=>sha(JSON.stringify({owner,link}));
 const ranges=value=>[...String(value||'').matchAll(/(\d+)\s*[-–—]\s*(\d+)/gu)].map(m=>{
@@ -13,7 +14,8 @@ const ranges=value=>[...String(value||'').matchAll(/(\d+)\s*[-–—]\s*(\d+)/gu
   if(m[2].length<m[1].length){const base=10**m[2].length;last=Math.floor(first/base)*base+last;if(last<first)last+=base;}
   return{first,last,width:last-first+1};
 });
-export function scopeScreen(data=canon.load(),{review={rows:[]}}={}) {
+export function scopeScreen(data=canon.load(),{review={rows:[]},renderedReview={rows:[]}}={}) {
+  validateRenderedReview(renderedReview);
   const rows=[];
   for(const [owner,links] of Object.entries(data.translations))for(const link of links){
     assertRegisteredPartial(link,data.byId.get(owner),data.partialRegistry||{links:[]});
@@ -45,16 +47,18 @@ export function scopeScreen(data=canon.load(),{review={rows:[]}}={}) {
     if(discontinuous)reasons.push('discontinuous publisher-reference ranges');
     if(narrower)reasons.push('narrower verse-reference extent');
     const id=canon.translationId(link),prior=review.rows?.find(r=>r.owner===owner&&r.translation_id===id&&r.decision==='retain');
-    let reviewStatus='unreviewed';
+    let reviewStatus='unreviewed',snapshotMetadata={};
     if(prior){
       // A snapshot annotation is never evidence that the current upstream remains unchanged.
       const book=data.canon.books?.[u?.book];
       const current=review.vri_commit===data.canon.source.commit&&prior.link_metadata_sha256===mappingFingerprint(owner,link)&&book&&['id','title','vri','book','start','end'].every(k=>prior.root?.[k]===u?.[k])&&prior.root?.root_blocks_sha256===sha(JSON.stringify(book.blocks.slice(u.start,u.end)));
       reviewStatus=current?'reviewed-retained-at-snapshot':'stale-reviewed-snapshot';
-      if(current)triage='reviewed retained snapshot';
+      if(current){triage='reviewed retained snapshot';snapshotMetadata={reviewed_on:review.reviewed_on,review_source_commit:review.ati_commit,review_note:'Frozen source review only; no current-upstream freshness, runtime scope or new rights approval.'};}
     }
+    const rendered=renderedReviewFor(data,owner,link,renderedReview);
+    if(rendered){const{status,...metadata}=rendered;reviewStatus=status;snapshotMetadata=metadata;if(status==='reviewed-retained-at-snapshot')triage='reviewed retained snapshot';}
     rows.push({owner,translation_id:id,source:link.source,url:link.url,reference:link.reference||null,match:link.match||null,reasons,triage,review_status:reviewStatus,
-      ...(reviewStatus==='reviewed-retained-at-snapshot'?{reviewed_on:review.reviewed_on,review_source_commit:review.ati_commit,review_note:'Frozen source review only; no current-upstream freshness, runtime scope or new rights approval.'}:{}),
+      ...snapshotMetadata,
       ...(verse&&(wider||narrower||discontinuous)?{publisher_reference_extents:extents,indexed_vri_extent:rootExtent,extent_warning:'Verse numbering, headers and editions can differ; extent differences alone do not prove an error.'}:{}),
       indexed_root:u?{id:u.id,title:u.title,vri:u.vri||null,book:u.book,start:u.start,end:u.end,kind:u.kind||null,members:u.members||[],approximate:!!u.approximate}:null});
   }
@@ -68,5 +72,8 @@ if(import.meta.url===pathToFileURL(process.argv[1]||'').href){
   const flag=process.argv.indexOf('--review'),file=flag<0?new URL('./canon/retained_ordinary_pages.json',import.meta.url):process.argv[flag+1];
   if(flag>=0&&!file)throw Error('--review requires a JSON review file');
   const review=flag>=0||existsSync(file)?JSON.parse(readFileSync(file,'utf8')):{rows:[]};
-  console.log(JSON.stringify(scopeScreen(canon.load(),{review}),null,2));
+  const renderedFlag=process.argv.indexOf('--rendered-review'),renderedFile=renderedFlag<0?new URL('./canon/retained_rendered_pages.json',import.meta.url):process.argv[renderedFlag+1];
+  if(renderedFlag>=0&&!renderedFile)throw Error('--rendered-review requires a JSON review file');
+  const renderedReview=renderedFlag>=0||existsSync(renderedFile)?JSON.parse(readFileSync(renderedFile,'utf8')):{rows:[]};
+  console.log(JSON.stringify(scopeScreen(canon.load(),{review,renderedReview}),null,2));
 }

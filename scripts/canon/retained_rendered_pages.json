@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "evidence_kind": "publisher-rendered-web",
+  "reviewed_on": "2026-11-09",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "purpose": "Separate DT rendered-observation memory for offline metadata triage. Exact link, owner, complete root and adjacent-control drift expires the annotation; no retrieval authority or new coverage.",
+  "runtime_authority": false,
+  "current_upstream_freshness_verified": false,
+  "new_coverage": 0,
+  "rows": [
+    {
+      "owner": "an3.47",
+      "translation_id": "dt:AN/AN3_47",
+      "source": "dhammatalks",
+      "url": "https://www.dhammatalks.org/suttas/AN/AN3_47.html",
+      "decision": "retain",
+      "original_link": {
+        "source": "dhammatalks",
+        "url": "https://www.dhammatalks.org/suttas/AN/AN3_47.html",
+        "translator": "Ṭhānissaro Bhikkhu",
+        "reference": "AN 3:47–48 Fabricated",
+        "match": "number+title"
+      },
+      "link_metadata_sha256": "a2c9366c7144f68d955a62e1c27fbe74116338dba7ec33abfafbd940d2d12961",
+      "root": {
+        "id": "an3.47",
+        "book": 18,
+        "start": 367,
+        "end": 371,
+        "title": "Saṅkhatalakkhaṇasuttaṃ",
+        "collection": "an",
+        "acronym": "AN 3.47",
+        "vri": "47–48",
+        "pts": {
+          "volume": 1,
+          "page": 152,
+          "end_page": 152
+        },
+        "root_blocks_sha256": "3077b231390dad86b3b5106f90b659b9c09c0b775dd2e1faab961ca521438cab"
+      },
+      "boundary_control": {
+        "role": "adjacent-boundary-control",
+        "relation": "immediately-after",
+        "root": {
+          "id": "an3.48",
+          "book": 18,
+          "start": 371,
+          "end": 383,
+          "title": "Pabbatarājasuttaṃ",
+          "collection": "an",
+          "acronym": "AN 3.48",
+          "vri": "49",
+          "pts": {
+            "volume": 1,
+            "page": 152,
+            "end_page": 153
+          },
+          "root_blocks_sha256": "97dc21e82e76c5bae9daf734fb9d1929a7e5e8eb95cc79d54a87ae7573abe315"
+        }
+      },
+      "rendered_view": {
+        "evidence_kind": "publisher-rendered-web",
+        "source_url": "https://www.dhammatalks.org/suttas/AN/AN3_47.html",
+        "observed_on": "2026-11-09",
+        "total_lines": 46,
+        "first_line": 0,
+        "last_line": 45,
+        "scripture_lines": [
+          27,
+          41
+        ],
+        "primary_rendering_lines": [
+          27,
+          32
+        ],
+        "alternative_rendering_lines": [
+          36,
+          41
+        ],
+        "alternative_label_line": 34,
+        "crawl_observation": "Supported primary view reported crawled today. This is a historical observation, not current-upstream freshness verification."
+      },
+      "observations": [
+        "Both primary and alternative renderings cover the fabricated/unfabricated statements already contained in indexed an3.47 (VRI47–48).",
+        "The next indexed an3.48 is VRI49 Mountain, pinned solely as an adjacent-boundary control. It is not a subject covered by this page.",
+        "The alternative rendering repeats the same content; no extra binding, source, coverage or word-level alignment follows."
+      ],
+      "rights": {
+        "notice_url": "https://www.dhammatalks.org/",
+        "notice_lines": [
+          400,
+          405
+        ],
+        "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "observation": "Site-wide CC Attribution-NonCommercial4.0 terms; site uses Unported label and links BY-NC4.0. Author treats any sale, including nonprofit sales, as commercial.",
+        "individual_notice_limit": "Complete rendered DT page exposes no individual copyright/licence year or full page-specific notice. Global terms are evidence; no raw-notice pin is asserted."
+      },
+      "historical_review": {
+        "decision": "D203",
+        "reviewed_on": "2026-11-08",
+        "evidence_json": "docs/data/provider-scope-audit.json",
+        "evidence_markdown": "docs/data/provider-scope-audit.md",
+        "regression_test": "tests/provider-scope-audit.test.mjs",
+        "observation": "The contemporary complete-view/root review agrees with the original retention. Both historical root block pins remain unchanged; coverage delta is zero."
+      },
+      "limits": [
+        "Metadata triage memory only; never a runtime registry, source activation or live freshness certificate.",
+        "No raw publisher HTML, runtime extraction or individual full-notice hash is available from this rendered observation.",
+        "Complete indexed-unit scope was reviewed; no individual English-word alignment or narrower extraction is approved.",
+        "Preserve the existing ATI registry and all historical reports unchanged."
+      ]
+    }
+  ]
+}

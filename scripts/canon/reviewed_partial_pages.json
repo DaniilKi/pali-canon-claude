@@ -473,6 +473,43 @@
         "notice_sha256": "de93b79f4590c638218614b4c32bdce786225ce7a17a3f214cc78f6dc6e7dea0",
         "extractor": "ati-chapter-p14-of24-v1"
       }
+    },
+    {
+      "unit_id": "an2.47",
+      "path": "/tipitaka/an/an02/an02.046.than",
+      "translator": "Thanissaro Bhikkhu",
+      "english_title": "Assembly trained in cross-questioning (partial)",
+      "license": "CC-BY-NC",
+      "source_reference": "Publisher AN2.46, paragraph5of5 only; indexed AN2.47, VRI48, part of an2.47/2",
+      "mapping_note": "Derived prose selection from the named Access to Insight source: only chapter paragraph5of5, the assembly trained in cross-questioning, corresponds to the exact displayed substring inside an2.47/2. The preceding question, first assembly, final two-assembly recap and foremost-assembly assertion are outside this selection. Publisher AN2.46 corresponds by content to indexed AN2.47/VRI48; do not resolve it to the differently numbered neighboring unit. This is neither a complete paragraph nor a whole discourse translation; no word-level alignment is claimed. Original Pāli remains unchanged. Complete ©2010 Thanissaro Bhikkhu attribution and CC BY-NC4.0 terms accompany the selection.",
+      "source_html_sha256": "e24d1e08bc4a3400a0c3294fe871c388805ab11ba71ef1a7116080073067163b",
+      "root": {
+        "id": "an2.47",
+        "title": "Parisavaggo",
+        "vri": "48",
+        "book": 17,
+        "start": 120,
+        "end": 122,
+        "root_blocks_sha256": "2c5b73ec6967c7dadac9c41702c7915a830ce1f5f89254c4a6895b0085cc30e5"
+      },
+      "partial_scope": {
+        "version": 2,
+        "status": "reviewed",
+        "unit_id": "an2.47",
+        "first_ref": "an2.47/2",
+        "last_ref": "an2.47/2",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "82a7d160e7bf63bbee0b6bfec5697cf5e3aca10a8da453f8380cd5f49a1a55a0",
+        "text_sha256": "7d4165eabc5efb9313f54131c026849d6ef6421956bd716fbb4ed54232e3c0e8",
+        "notice_sha256": "b807df6c991234ca37c9e7304d2519adb29bba3b0b3c604ddde855c1679269e5",
+        "extractor": "ati-chapter-p5-of5-no-notes-v1",
+        "subparagraph": {
+          "start_char": 66,
+          "end_char": 827,
+          "offset_unit": "utf16_code_units",
+          "segment_sha256": "5bccbccfb20a424bce18386962f6a81878ea519f704a0efe1bd439215e7cf4de"
+        }
+      }
     }
   ]
 }

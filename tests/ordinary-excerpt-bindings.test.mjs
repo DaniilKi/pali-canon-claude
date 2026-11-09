@@ -79,13 +79,16 @@ test('shared retained-source registry preserves the five historical reviews and 
   }
   const cli = spawnSync(process.execPath, ['scripts/source-scope-screen.mjs'], { encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 });
   assert.equal(cli.status, 0, cli.stderr);
-  assert.deepEqual(JSON.parse(cli.stdout), current);
+  const renderedReview = JSON.parse(readFileSync('scripts/canon/retained_rendered_pages.json', 'utf8'));
+  const cliCurrent = scopeScreen(d, {review: retained, renderedReview});
+  assert.deepEqual([cliCurrent.count, cliCurrent.reviewed_retained_snapshots, cliCurrent.unreviewed_leads], [220, 7, 213]);
+  assert.deepEqual(JSON.parse(cli.stdout), cliCurrent);
   assert.match(readFileSync('scripts/canon/ordinary_excerpt_packet.py', 'utf8'), /Path\(__file__\)\.with_name\('retained_ordinary_pages\.json'\)/);
 });
 
 test('current coverage counts whole and scoped availability separately after D214 source review', () => {
   const t = translationCoverage({ refresh: true }).total;
-  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2538, 1408, 1831, 15, 9]);
+  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2538, 1408, 1831, 16, 10]);
   assert.deepEqual([t.shared_links, t.with_shared_english, t.shared_only], [12, 110, 52]);
   const daily = dailyText({ ...canon }, { date: '2026-11-01', kind: 'sutta' });
   assert.deepEqual([daily.rotation.of, daily.text.id], [1257, 'sn12.31']);

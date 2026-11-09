@@ -111,7 +111,7 @@ test('four actual source declarations preserve exact reviewed Pali, complete not
   assert.match(canon.segments(canon.resolve('sn56.22').unit).at(-1).text, /dutiyaṃ;$/);
   assert.match(report.rows.find(r => r.owner === 'sn35.244').manifest.source_reference, /publisher SN35.203.*SN35.244/);
   const t = translationCoverage({ refresh: true }).total;
-  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2538, 1408, 1831, 15, 9]);
+  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2538, 1408, 1831, 16, 10]);
   assert.deepEqual(historicalSutta('d209'), { of: 1265, id: 'dn32' });
 });
 
