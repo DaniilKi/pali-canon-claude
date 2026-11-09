@@ -96,3 +96,26 @@ test('actual subparagraph exports retain exact bounds and pins without exporting
 
 
 test('actual narrower Walshe exports preserve omissions and untranslated-colophon notes without claiming whole English',()=>{const index=buildIndex();for(const id of ['sn12.60','sn22.87','sn35.244','sn56.22']){const item=index.texts.find(t=>t.id===id),entry=item.english[0],native=canon.describe(canon.resolve(id).unit).english[0];assert.equal(item.english_count,0);assert.equal(item.partial_english_count,1);assert.equal(entry.mapping_note,native.mapping_note);assert.equal(entry.translation_scope.whole_unit_coverage,false);}const stanza=index.texts.find(t=>t.id==='sn56.22');assert.match(stanza.english[0].mapping_note,/untranslated inline colophon/);assert.ok(toCsv(index).includes('untranslated inline colophon'));});
+
+test('Kumara and BPS1983 exports retain distinct non-CC rights and exact SN36.15 prefix metadata without Pali wording',()=>{
+ const index=buildIndex(),csv=toCsv(index),records=parseCsv(csv),col=name=>CSV_COLUMNS.indexOf(name);
+ for(const [id,license,author,year]of[['an8.59','Kumara-free-distribution-2010','Kumara Bhikkhu','2010'],['sn36.15','BPS-free-distribution-1983','Nyanaponika Thera','1983']]){
+  const item=index.texts.find(t=>t.id===id),entry=item.english[0],r=records.find(r=>r[0]===id);
+  assert.equal(item.english_count,0);assert.equal(item.partial_english_count,1);assert.equal(entry.license,license);assert.equal(entry.translator,author);
+  assert.match(entry.license_name,new RegExp(year));assert.match(entry.license_name,/free-distribution notice \(not Creative Commons\)/);
+  assert.equal(entry.license_url,undefined);assert.equal(entry.whole_unit_coverage,false);
+  assert.deepEqual(JSON.parse(r[col('partial_english')]),[entry]);assert.equal(r[col('english_urls')],'');assert.equal(r[col('english_licenses')],'');
+  assert.match(entry.mapping_note,/copies must be free|Copies must be free/);assert.match(entry.mapping_note,/derivatives identified/);assert.match(entry.mapping_note,/complete licence retained/);
+ }
+ const kumara=index.texts.find(t=>t.id==='an8.59').english[0];assert.match(kumara.mapping_note,/No Creative Commons or 50-copy limit is inferred/);assert.doesNotMatch(kumara.license_name,/50/);
+ const item=index.texts.find(t=>t.id==='sn36.15'),entry=item.english[0],scope=entry.translation_scope;
+ assert.match(entry.mapping_note,/printed reprints are limited to 50 copies/);
+ assert.equal(scope.version,2);assert.deepEqual([scope.first_ref,scope.last_ref],['sn36.15/2','sn36.15/2']);
+ assert.deepEqual([scope.pali_excerpt.start_char,scope.pali_excerpt.end_char,scope.pali_excerpt.offset_unit],[0,794,'utf16_code_units']);
+ assert.equal(scope.pali_excerpt.segment_sha256,'39f3172013f8571b82c6c89edd7d55780eeaeb480d477917b8174c25c83a88c2');
+ assert.equal(scope.pali_excerpt.text,undefined);assert.equal(scope.pali_excerpt.text_omitted,true);assert.equal(scope.read_with,undefined);assert.equal(scope.read_pages,undefined);
+ assert.equal(scope.notice_sha256,'b58cc58a86a64f10454468d11fa9fc3391ad43fac20e9728f6ec18903d0ad4ac');
+ const native=canon.describe(canon.resolve('sn36.15').unit).english[0].translation_scope;
+ assert.equal(scope.scope_sha256,native.scope_sha256);assert.equal(scope.pali_sha256,native.pali_sha256);
+ assert.ok(!JSON.stringify(item).includes(native.pali_excerpt.text));assert.ok(!csv.includes(native.pali_excerpt.text));
+});

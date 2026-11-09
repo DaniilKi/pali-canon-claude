@@ -22426,6 +22426,8 @@ function atiPartialExcerpt(html, extractor) {
   if (extractor === "ati-freeverse-v1") return atiVerseExcerpt(html);
   if (extractor === "ati-chapter-prose-v1") return atiChapterProse(html);
   if (extractor === "ati-chapter-p5-of5-no-notes-v1") return chapterLastParagraphWithoutNotes(html);
+  if (extractor === "ati-chapter-p1to3-of4-ellipsis-v1") return chapterProseBeforeEllipsis(html);
+  if (extractor === "ati-chapter-p1to4-of5-notes-v1") return chapterProsePrefixBeforeNotes(html);
   if (extractor === "ati-chapter-p2-of2-v1") return chapterParagraph(html, 2, 2);
   if (extractor === "ati-chapter-p11-of11-v1") return chapterParagraph(html, 11, 11, "Seeing the Dhamma");
   if (extractor === "ati-chapter-p1-of4-v1") return chapterParagraph(html, 4, 1);
@@ -22433,14 +22435,15 @@ function atiPartialExcerpt(html, extractor) {
   if (extractor === "ati-excerpt-verse-pre-v1") return excerptVersePre(html);
   throw Error("Unsupported ATI partial extractor. No excerpt was returned.");
 }
-var ATI_SUBPARAGRAPH_EXTRACTORS = Object.freeze(["ati-chapter-prose-v1", "ati-chapter-p5-of5-no-notes-v1"]);
+var ATI_SUBPARAGRAPH_EXTRACTORS = Object.freeze(["ati-chapter-prose-v1", "ati-chapter-p5-of5-no-notes-v1", "ati-chapter-p1to4-of5-notes-v1"]);
 var ATI_SEGMENT_EXTRACTORS = Object.freeze([
   "ati-freeverse-v1",
   "ati-chapter-p2-of2-v1",
   "ati-chapter-p11-of11-v1",
   "ati-chapter-p1-of4-v1",
   "ati-excerpt-verse-pre-v1",
-  "ati-chapter-p14-of24-v1"
+  "ati-chapter-p14-of24-v1",
+  "ati-chapter-p1to3-of4-ellipsis-v1"
 ]);
 function copyrightedChunk(html) {
   const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
@@ -22484,21 +22487,44 @@ function excerptVersePre(html) {
   if (!text) fail();
   return text;
 }
-function chapterLastParagraphWithoutNotes(html) {
+function chapterParagraphsWithoutNotes(html, total) {
   const fail = () => {
-    throw Error("The reviewed ATI five-paragraph extraction structure changed. No excerpt was returned.");
+    throw Error("The reviewed ATI no-notes paragraph extraction structure changed. No excerpt was returned.");
   };
   const chunk = copyrightedChunk(html), chapters = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
   if (chapters.length !== 1) fail();
   const start2 = chapters[0].index + chapters[0][0].length, stop = chunk.indexOf("</div>", start2);
   if (stop < start2 || chunk.slice(0, chapters[0].index).trim() || chunk.slice(stop + 6).trim() !== "</div>") fail();
   const body = chunk.slice(start2, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
-  if (paragraphs.length !== 5 || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body) || body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim()) fail();
-  const chosen = paragraphs[4][1];
-  if (/<\/?p\b/i.test(chosen)) fail();
-  const text = plainText(chosen.replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi, ""));
-  if (!text) fail();
-  return text;
+  if (paragraphs.length !== total || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body) || body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim() || paragraphs.some((p) => /<\/?p\b/i.test(p[1]))) fail();
+  return paragraphs.map((p) => p[1]);
+}
+var selectedProse = (paragraphs) => {
+  const texts = paragraphs.map((p) => plainText(p.replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi, "")));
+  if (texts.some((t) => !t)) throw Error("The reviewed ATI prose extraction structure changed. No excerpt was returned.");
+  return texts.join("\n\n");
+};
+function chapterLastParagraphWithoutNotes(html) {
+  return selectedProse(chapterParagraphsWithoutNotes(html, 5).slice(4));
+}
+function chapterProseBeforeEllipsis(html) {
+  const paragraphs = chapterParagraphsWithoutNotes(html, 4);
+  if (plainText(paragraphs[3]) !== "...") throw Error("The reviewed ATI final ellipsis structure changed. No excerpt was returned.");
+  return selectedProse(paragraphs.slice(0, 3));
+}
+function chapterProsePrefixBeforeNotes(html) {
+  const fail = () => {
+    throw Error("The reviewed ATI five-paragraph notes extraction structure changed. No excerpt was returned.");
+  };
+  const chunk = copyrightedChunk(html), chapters = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)], notes = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])notes\1[^>]*>/gi)];
+  if (chapters.length !== 1 || notes.length !== 1) fail();
+  const start2 = chapters[0].index + chapters[0][0].length, stop = notes[0].index;
+  if (stop <= start2 || chunk.slice(0, chapters[0].index).trim() || chunk.indexOf("</div>", start2) < stop) fail();
+  const tail = chunk.slice(stop + notes[0][0].length), notesEnd = tail.indexOf("</div>");
+  if (notesEnd < 0 || /<\/?(?:div|script|style|pre)\b/i.test(tail.slice(0, notesEnd)) || !/^\s*<\/div>\s*<\/div>\s*$/.test(tail.slice(notesEnd + 6))) fail();
+  const body = chunk.slice(start2, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
+  if (paragraphs.length !== 5 || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body) || body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim() || paragraphs.some((p) => /<\/?p\b/i.test(p[1]))) fail();
+  return selectedProse(paragraphs.slice(0, 4).map((p) => p[1]));
 }
 
 // src/translation-scope.mjs
@@ -22515,15 +22541,18 @@ function partialScope(link, unit, segments2, source4) {
   if (!p || ![1, 2].includes(p.version) || Object.keys(p).some((k) => !fields.has(k)) || p.status !== "reviewed" || p.unit_id !== unit.id || p.source_commit !== source4.commit || !sha(p.pali_sha256) || !sha(p.text_sha256) || unit.approximate) fail();
   const first = segments2.findIndex((s) => s.ref === p.first_ref);
   const last = segments2.findIndex((s) => s.ref === p.last_ref);
-  if (first < 0 || last < first || first === 0 && last === segments2.length - 1) fail();
-  if (!segments2.slice(first, last + 1).some((s) => s.type !== "heading") || !segments2.some((s, i) => s.type !== "heading" && (i < first || i > last))) fail();
+  if (first < 0 || last < first || p.version === 1 && first === 0 && last === segments2.length - 1) fail();
+  if (!segments2.slice(first, last + 1).some((s) => s.type !== "heading") || p.version === 1 && !segments2.some((s, i) => s.type !== "heading" && (i < first || i > last))) fail();
   const selected = segments2.slice(first, last + 1).map(({ ref, type, text }) => ({ ref, type, text }));
   let excerpt;
   if (p.version === 2) {
     const part = p.subparagraph, seg = selected[0];
     if (link.source !== "ati" || !ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor) || first !== last || seg.type !== "prose" || !part || Object.keys(part).sort().join(",") !== "end_char,offset_unit,segment_sha256,start_char" || part.offset_unit !== "utf16_code_units" || !sha(part.segment_sha256) || scopeHash(seg) !== part.segment_sha256 || !Number.isSafeInteger(part.start_char) || !Number.isSafeInteger(part.end_char) || part.start_char < 0 || part.end_char <= part.start_char || part.end_char > seg.text.length || part.start_char === 0 && part.end_char === seg.text.length) fail();
     for (const at of [part.start_char, part.end_char]) if (at > 0 && at < seg.text.length && /[\uD800-\uDBFF]/.test(seg.text[at - 1]) && /[\uDC00-\uDFFF]/.test(seg.text[at])) fail();
-    seg.text = seg.text.slice(part.start_char, part.end_char);
+    const selectedText = seg.text.slice(part.start_char, part.end_char);
+    const outsideBody = segments2.some((s, i) => s.type !== "heading" && (i < first || i > last) && s.text.trim());
+    if (!selectedText.trim() || !outsideBody && !(seg.text.slice(0, part.start_char) + seg.text.slice(part.end_char)).trim()) fail();
+    seg.text = selectedText;
     excerpt = { ...seg, ...part };
   } else if (Object.hasOwn(p, "subparagraph")) fail();
   if (scopeHash(selected) !== p.pali_sha256) fail();

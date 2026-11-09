@@ -1,0 +1,514 @@
+{
+  "decision": "D216",
+  "baseline_commit": "52c6bb3636ae5f5dc367dc79b7918913eef17a09",
+  "observed_on": "2026-11-09",
+  "method": "Independent complete pinned official ATI bodies, exact source structures, full individual rights/citations and complete actual VRI roots. Metadata and hashes only; no publisher English bodies bundled.",
+  "an859_review": {
+    "baseline_commit": "52c6bb3",
+    "observed_on": "2026-11-09",
+    "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+    "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "owner": "an8.59",
+    "path": "/tipitaka/an/an08/an08.059.kuma",
+    "source_url": "https://www.accesstoinsight.org/tipitaka/an/an08/an08.059.kuma.html",
+    "proposed_translation_id": "ati:/tipitaka/an/an08/an08.059.kuma",
+    "decision": "approve-bounded-prose-only-partial-scope-subject-to-strict-implementation",
+    "root": {
+      "id": "an8.59",
+      "book": 23,
+      "start": 766,
+      "end": 772,
+      "title": "Paṭhamapuggalasuttaṃ",
+      "collection": "an",
+      "acronym": "AN 8.59",
+      "vri": "59",
+      "pts": {
+        "volume": 4,
+        "page": 292,
+        "end_page": 292
+      },
+      "root_blocks_sha256": "12e423bc7720d85776e75648d9d6cb9080e591a6505fa5ee119d7d96ce574871"
+    },
+    "selected_scope": {
+      "version": 1,
+      "first_ref": "an8.59/2",
+      "last_ref": "an8.59/2",
+      "pali_segments": 1,
+      "pali_characters": 385,
+      "english_characters": 807,
+      "whole_unit_coverage": false,
+      "word_level_alignment_verified": false
+    },
+    "source_structure": {
+      "copyrighted_chunks": 1,
+      "chapter_divs": 1,
+      "paragraphs": 4,
+      "selected_one_based": [
+        1,
+        3
+      ],
+      "final_paragraph": "ellipsis only",
+      "notes_containers": 0,
+      "verse_containers": 0,
+      "freeverse_containers": 0,
+      "outer_shape": "One chapter wrapper followed by its closing div and the copyrighted-text outer closing div before end marker; only whitespace outside chapter."
+    },
+    "pins": {
+      "source_html_sha256": "1f4d40c00f3077695f7cddeaa5d4011e8fdadac3ef05e4bcf4f040c444801c53",
+      "copyright_chunk_html_sha256": "4240e2e6d75638bb611402ab4a52af8a8882ab8ebecb4a1178d1884ced7d6d43",
+      "full_body_text_sha256": "f041b679d6042e0c8e642992298b425b9d1fc5c60ce867b4b152835d225437a2",
+      "selected_text_sha256": "83ed330bbffd61cc88ef8dfc68955adb56438d693e7021e0c099bd1dee7d000b",
+      "notice_sha256": "0955a1bdc92e7af801df3ba8f471ff4f59c41ad575f63b515ae6a176124b45c5",
+      "selected_pali_sha256": "5c7dd9ab1438bbf37bf86689a1dec9454ef6d3be8613cc6862b8df3947e21873",
+      "root_blocks_sha256": "12e423bc7720d85776e75648d9d6cb9080e591a6505fa5ee119d7d96ce574871"
+    },
+    "identity_evidence": [
+      "Complete eight-person sequence and opening/concluding offering formulas match full original an8.59/2.",
+      "Primary page title explicitly first (Pathama Atthapuggala), notes its Pali title taken from BJT edition, publisherAN8.59 and PTS Aiv292 corroborate. Title/body/adjacent-root evidence rather than number-only mapping.",
+      "AN8.58 concerns eight qualities, not eight individuals; AN8.60 is second-persons discourse with repeated/abbreviated prose and distinct second title/verses. Do not multiply this source onto its neighbor."
+    ],
+    "omissions": [
+      {
+        "refs": "an8.59/3–/4",
+        "kind": "substantive stanzas",
+        "detail": "Both concluding stanzas—four practitioners/four fruit-attainers and fruit of gifts to the Sangha—are absent. Source final ellipsis does not translate them."
+      },
+      {
+        "refs": "an8.59/1",
+        "kind": "heading",
+        "detail": "Do not classify the heading as omitted substantive teaching."
+      }
+    ],
+    "source_expansion_disclosure": "Original VRI prose2 contains …pe… in closing offering formula; English writes out its refrain. Preserve Pali abbreviation unchanged, identify publisher expansion and avoid word-level alignment claims.",
+    "rights": {
+      "copyright": "©2010 Kumara Bhikkhu",
+      "publisher": "Access to Insight (BCBS Edition)",
+      "revision": "2 November2013",
+      "provenance": "Transcribed from a file provided by the translator",
+      "grant": "Page-specific free copying/reformatting/reprinting/republication/redistribution in any medium subject to stated conditions.",
+      "conditions": [
+        "Copies must be available free of charge.",
+        "Clearly identify derivatives, including translations, as derived from this source document.",
+        "Include the full licence in all copies or derivatives.",
+        "Preserve translator/source attribution and suggested citation.",
+        "Linked documents may carry other restrictions."
+      ],
+      "creative_commons_inferred": false,
+      "fifty_copy_limit_present": false,
+      "metadata_code": "ATI_DEPRECATED is a legacy metadata value, not replacement licence wording or a prohibition."
+    },
+    "implementation_constraints": [
+      "New finite exact source-specific first3-of4-paragraph no-notes extractor; actual body has NO verse container, so do not expect or fabricate one.",
+      "Require exactly one copyrighted chunk and one chapter,4 paragraphs; P4 must remain the expected ellipsis. ReturnP1–P3 only.",
+      "Reject missing/extra paragraphs, nested/duplicate wrappers, scripts/styles/headings, unexpected outside content and notes/verse containers.",
+      "Bind exact owner/path/Kumara/actual free-distribution licence/version1/extractor profile; reserve path independently of owner to prevent family downgrade.",
+      "Raw build HTML/fullroot/selectedEnglish/Pali/full individual notice pins; explicit exact allow_partial and continuation source/prefix/scope/notice guards.",
+      "No whole-English or daily eligibility increase; no silent substitution or original Pali/locator changes."
+    ],
+    "alternatives": {
+      "current_indexed_choices": [],
+      "adjacent_roots_reviewed": [
+        "an8.58",
+        "an8.60"
+      ],
+      "external_versions_not_exhaustively_reviewed": true
+    },
+    "limits": [
+      "Read-only independent source review; no product files modified or source activated.",
+      "No English body copied into this metadata receipt or repository.",
+      "Frozen local source pins do not establish current upstream freshness.",
+      "Not word-level alignment or certification of every translator/source."
+    ],
+    "hash_semantics": "RawHTML/copyrightchunk hashes use rawUTF8bytes; text/notice/root/Pali hashes use SHA256(JSON.stringify(value)). Selected English is runtime plainText of first3 whole P nodes, preserving normal paragraph separation."
+  },
+  "sn3615_review": {
+    "baseline_commit": "52c6bb3636ae5f5dc367dc79b7918913eef17a09",
+    "observed_on": "2026-11-09",
+    "owner": "sn36.15",
+    "source": "ati",
+    "path": "/tipitaka/sn/sn36/sn36.015.nypo",
+    "url": "https://accesstoinsight.org/tipitaka/sn/sn36/sn36.015.nypo.html",
+    "translation_id": "ati:/tipitaka/sn/sn36/sn36.015.nypo",
+    "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+    "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "decision": "approve-source-and-exact-prefix-proposal-only-no-activation",
+    "whole_unit_coverage": false,
+    "method": "Complete pinned official source body, both notes, individual provenance/licence/citation and complete actual root read. Recomputed finite source structure, prefix, runtime whole-page and complete-notice hashes with current code; compared frozen prior receipt. No product edits.",
+    "root": {
+      "id": "sn36.15",
+      "book": 14,
+      "start": 1356,
+      "end": 1358,
+      "title": "Paṭhamaānandasuttaṃ",
+      "collection": "sn",
+      "acronym": "SN 36.15",
+      "vri": "263",
+      "pts": {
+        "volume": 4,
+        "page": 219,
+        "end_page": 221
+      },
+      "root_blocks_sha256": "2fdc1b9ac79dfe7f89becfa83822551cfd41aadb37ef7ee2b135e8aecc5ada55"
+    },
+    "complete_root_segments": 2,
+    "complete_root_blocks": 2,
+    "source_structure": {
+      "copyright_begin_markers": 1,
+      "copyright_end_markers": 1,
+      "chapter_divs": 1,
+      "notes_divs": 1,
+      "paragraphs_before_notes": 5,
+      "selected_paragraphs_one_based": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_note_markers": 0,
+      "unselected_paragraphs_one_based": [
+        5
+      ],
+      "unselected_notes": 2,
+      "selected_english_characters": 1128,
+      "selected_text_join": "Runtime plainText of each selected source P inner HTML joined with two LF characters; no leading/trailing text added."
+    },
+    "scope": {
+      "version": 2,
+      "first_ref": "sn36.15/2",
+      "last_ref": "sn36.15/2",
+      "start_char": 0,
+      "end_char": 794,
+      "offset_unit": "utf16_code_units",
+      "original_context_characters": 1940,
+      "original_following_transition_offset": 795,
+      "excluded_separator_characters": 1,
+      "selected_pali_characters": 794,
+      "pali_segments": 1,
+      "proper_substring": true,
+      "remaining_trimmed_pali_characters": 1145
+    },
+    "pins": {
+      "source_html_sha256": "300433ba256941343ae0891202c139dd57c3456b881476fe48a2e6c879933438",
+      "runtime_text_sha256": "dc0c99dafa0921098bc34adb2005fdc4e8ef5d3cc751b520ec623dfb8e983e01",
+      "notice_sha256": "b58cc58a86a64f10454468d11fa9fc3391ad43fac20e9728f6ec18903d0ad4ac",
+      "root_blocks_sha256": "2fdc1b9ac79dfe7f89becfa83822551cfd41aadb37ef7ee2b135e8aecc5ada55",
+      "context_segment_sha256": "39f3172013f8571b82c6c89edd7d55780eeaeb480d477917b8174c25c83a88c2",
+      "pali_sha256": "5a4376f9ef8b063db4161a0619b9dcc5090e2721ec8448b9e51c55b4cae88530",
+      "text_sha256": "176cc221edb6bed91497483d6990e8120583062822f74754176b4545af7ba9fa"
+    },
+    "hash_semantics": "source_html_sha256 uses raw UTF8 HTML bytes. Every other SHA256 uses Node JSON.stringify(value): runtime_text is plainText(atiContent(html)), notice is complete atiNotice(html), root blocks are every original tuple in full span, context is exact {ref,type,text}, selected Pali is one-element [{ref,type,text}] with substring text, selected English is four plainText Ps joined with two LF characters.",
+    "scope_evidence": [
+      "P1 covers Ānanda approach/seating and transition to question. P2 covers the complete inquiry about feelings, origin/cessation/path, gratification/danger/escape.",
+      "P3 covers three feelings, contact origin/cessation and noble eightfold path. P4 covers gratification, impermanence/change danger, and abandoning desire/lust as escape.",
+      "The selected root prefix ends at the complete escape sentence before the next separate introduction of gradual formations cessation. It excludes all three nirodha/vūpasama/paṭippassaddhi treatments and final numbering colophon.",
+      "Root noble-path list retains its original …pe… abbreviation; publisher gives all eight English factors. Do not expand Pāli or claim every-token correspondence.",
+      "P5 and its two note markers are excluded. Notes gloss formations and form/matter and do not add selected scripture."
+    ],
+    "rights": {
+      "copyright": "©1983 Buddhist Publication Society",
+      "translator": "Nyanaponika Thera",
+      "publisher": "Access to Insight (BCBS Edition)",
+      "license": "Individual BPS free-distribution licence; not Creative Commons.",
+      "revision": "30 November 2013",
+      "provenance": "Contemplation of Feeling: The Discourse-grouping on the Feelings (WH303), Nyanaponika Thera, BPS1983. Used with permission.",
+      "requirements": [
+        "Distribute copies free of charge.",
+        "Reprinting limited to no more than 50 copies.",
+        "Clearly identify derivatives as derived from this source document.",
+        "Include the complete individual licence in every copy/derivative, including returned continuations; preserve citation and attribution.",
+        "Linked documents may carry other restrictions; no unrestricted rights inferred."
+      ],
+      "complete_individual_notice_read": true,
+      "front_header_year": 1998,
+      "front_header_year_scope": "ATI edition/header year; not the work copyright or an independent rights grant.",
+      "individual_copyright_year": 1983,
+      "proposed_exact_profile_license": "BPS-free-distribution-1983",
+      "copyright_distinction": "F_sourceCopy and complete individual provenance identify ©1983 Buddhist Publication Society. H_copyright says1998 for ATI edition context; use1983 for the individual BPS source profile. No Creative Commons grant applies."
+    },
+    "contract_review": {
+      "current_sole_body_v2_refusal_confirmed": true,
+      "minimal_safe_exception": "Retain the existing version1 requirement for nonheading material outside selected refs. Permit its absence only after validated version2 establishes exactly one selected prose context with a nonempty proper substring, complete original-context hash, selected-substring hash and substantial unchanged nonwhitespace text remaining outside that substring. Keep the existing first/last/index, source, commit, integer UTF16 and surrogate-pair checks. The exact reviewed finite source profile and registry must still bind this path/owner/Nyanaponika/BPS notice/extractor; never admit a whole segment or whole source.",
+      "finite_extractor_requirements": [
+        "Add a new source-specific version2-only profile for exactly one copyrighted chunk/chapter and exactly five Ps before exactly one notes boundary. Select only Ps1–4; no caller-provided ranges.",
+        "Reject added/deleted/reordered containers, headings, extra Ps, script/style/pre/nested source markup and missing/duplicate notes before any text return. Strip no translation wording; keep whole-page notice separate.",
+        "Reserve exact source path across all owners; prevent licence/translator/extractor/version downgrades. Pin raw HTML at build and exact selected English/complete notice/context/root/subparagraph at runtime and registry.",
+        "Reject full-segment and whitespace-only exclusion boundaries; retain version1 whole-body rejection and every prior16 source descriptor unchanged.",
+        "Expose exact Pāli excerpt and surrounding-context warning, require fresh exact-source partial consent, keep prefix/scope continuation pins and count this only as partial English."
+      ],
+      "required_regressions": [
+        "Actual SN36.15 v1 whole-body/whole-unit rejection unchanged.",
+        "v2 missing/invalid subparagraph, full context, non-prose/multiple contexts, stale context hash, wrong Pali hash and surrogate split rejected.",
+        "Exact new path with wrong owner, licence, translator, extractor or version rejected.",
+        "Finite source drift and text/complete-notice drift rejected before wording; editorial P5/notes cannot verify as scripture.",
+        "Valid exact-prefix v2 works with sole-prose unit without changing other scope descriptors or whole-unit/daily eligibility."
+      ],
+      "proposed_four_paragraph_extractor_implemented": false
+    },
+    "risks_and_limits": [
+      "This is a source/scope proposal; parent must implement and verify any additive exception/profile before activation.",
+      "Do not relabel the entire SN36.15 prose paragraph partial or approve its one-sequence English body as a whole-VRI translation.",
+      "Frozen ATI snapshot only; no live freshness/availability certification.",
+      "Publisher salutations and expanded path wording reflect translation conventions, not word-level Pāli alignment.",
+      "No SuttaCentral fetch, scripture reconstruction, English bodies in repository, core edits or commit."
+    ]
+  },
+  "activation": {
+    "previous_partial_descriptors": [
+      {
+        "unit_id": "thag17.3",
+        "descriptor_sha256": "134f44703c4a40d95692554a9d2b288e69fac78476f418cf0f9fd8016501ae1d"
+      },
+      {
+        "unit_id": "thag6.13",
+        "descriptor_sha256": "a1e4b3aa8425afb8b0405600bebc5fb149b30631ea0cda37a098911309ab88cf"
+      },
+      {
+        "unit_id": "thag10.1",
+        "descriptor_sha256": "56c6ed79d556a30fe77c557225f8570e65de70d5b2f09d9f06e6a69493ce741c"
+      },
+      {
+        "unit_id": "thag15.2",
+        "descriptor_sha256": "63e531afec51bf43f7b32235edc66127d8f1b3cc3766c62c5483b6c7d99acd7c"
+      },
+      {
+        "unit_id": "thag16.8",
+        "descriptor_sha256": "3b32c33b18dff19c7d9e5ecede5fab2fba864a7a8acc9eda9bd866cdff4f1cf4"
+      },
+      {
+        "unit_id": "thag2.13",
+        "descriptor_sha256": "2ef0d8cf97a652892b6da0c8ff66017b8d004172f7f92ce626bc038d5bc97bcb"
+      },
+      {
+        "unit_id": "thag15.1",
+        "descriptor_sha256": "819b999b03a0c15c5ad76bfa08456262104bac5093681f32b1d4253e9b3af4ba"
+      },
+      {
+        "unit_id": "snp3.11",
+        "descriptor_sha256": "b7912f6fddf21db799813bde7815c5596620fa7d7623a9296a32a82c2ad539fc"
+      },
+      {
+        "unit_id": "mn34",
+        "descriptor_sha256": "c9faf73a9da654b75a3334ebded1f44b2f1acdcba805299ea4f8d9850c05ef55"
+      },
+      {
+        "unit_id": "sn12.22",
+        "descriptor_sha256": "b5ba881f5596dd30e6e9dae6be1447fbcbc5b0e932e640d1c3510235d7c5c45b"
+      },
+      {
+        "unit_id": "sn12.60",
+        "descriptor_sha256": "6bee468dfbd858381168e4f3d1fe172cc00cba8103c9ed47927e7b63248f295e"
+      },
+      {
+        "unit_id": "sn22.87",
+        "descriptor_sha256": "a08cd3adf56a21186e7f0f358eebce63d69d4a37f8eed4b1c6c353bbbb9dae3c"
+      },
+      {
+        "unit_id": "sn35.244",
+        "descriptor_sha256": "e5e918911a944ba79f54b86c39ecad494ab3dd3f5766d113fff390e19255f54f"
+      },
+      {
+        "unit_id": "sn56.22",
+        "descriptor_sha256": "3b871a04755cc4809d9e13da47f19c32ddd23cd7a3fc899ab806988458e1b239"
+      },
+      {
+        "unit_id": "mn54",
+        "descriptor_sha256": "89c620cbe88fce082b63df8f436a73fc7c1da8e8893dccbc5fcaf57598a2ff96"
+      },
+      {
+        "unit_id": "an2.47",
+        "descriptor_sha256": "1a924104ce91357885b419bc1cbc77537ecba26914b8a9142a21cdc815135401"
+      }
+    ],
+    "activations": [
+      {
+        "manifest": {
+          "unit_id": "an8.59",
+          "path": "/tipitaka/an/an08/an08.059.kuma",
+          "translator": "Kumara Bhikkhu",
+          "english_title": "Eight individuals: prose teaching (partial)",
+          "license": "Kumara-free-distribution-2010",
+          "source_reference": "AN8.59, publisher paragraphs1–3of4 only; VRI59, an8.59/2",
+          "mapping_note": "Derived prose selection from the named Access to Insight/Kumara source: only paragraphs1–3of4, the eight-individuals prose teaching, correspond to an8.59/2. The publisher’s final ellipsis and both substantive closing stanzas are excluded. Original VRI prose retains …pe…; the publisher supplies its English refrain, with no Pāli expansion or word-level alignment claimed. This is not a whole AN8.59 translation. Complete ©2010 Kumara Bhikkhu notice and citation accompany the selection: copies must be free of charge, derivatives identified and the complete licence retained. No Creative Commons or 50-copy limit is inferred.",
+          "source_html_sha256": "1f4d40c00f3077695f7cddeaa5d4011e8fdadac3ef05e4bcf4f040c444801c53",
+          "root": {
+            "id": "an8.59",
+            "title": "Paṭhamapuggalasuttaṃ",
+            "vri": "59",
+            "book": 23,
+            "start": 766,
+            "end": 772,
+            "root_blocks_sha256": "12e423bc7720d85776e75648d9d6cb9080e591a6505fa5ee119d7d96ce574871"
+          },
+          "partial_scope": {
+            "version": 1,
+            "status": "reviewed",
+            "unit_id": "an8.59",
+            "first_ref": "an8.59/2",
+            "last_ref": "an8.59/2",
+            "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+            "pali_sha256": "5c7dd9ab1438bbf37bf86689a1dec9454ef6d3be8613cc6862b8df3947e21873",
+            "text_sha256": "83ed330bbffd61cc88ef8dfc68955adb56438d693e7021e0c099bd1dee7d000b",
+            "notice_sha256": "0955a1bdc92e7af801df3ba8f471ff4f59c41ad575f63b515ae6a176124b45c5",
+            "extractor": "ati-chapter-p1to3-of4-ellipsis-v1"
+          }
+        },
+        "english_characters": 807,
+        "pali_characters": 385
+      },
+      {
+        "manifest": {
+          "unit_id": "sn36.15",
+          "path": "/tipitaka/sn/sn36/sn36.015.nypo",
+          "translator": "Nyanaponika Thera",
+          "english_title": "To Ānanda: feelings opening (partial)",
+          "license": "BPS-free-distribution-1983",
+          "source_reference": "SN36.15, publisher paragraphs1–4of5 only; VRI263, part of sn36.15/2",
+          "mapping_note": "Derived prose selection from the named Access to Insight/BPS source: only chapter paragraphs1–4of5, the opening discussion of feelings, correspond to the exact displayed prefix within sn36.15/2. The later cessation sequences, compressed by the publisher, and both editorial notes are excluded. This is neither a complete Pāli paragraph nor a whole discourse translation; no word-level alignment is claimed. Original Pāli remains unchanged. Complete ©1983 Buddhist Publication Society provenance and Nyanaponika Thera citation accompany the selection. Copies must be free, derivatives identified and the complete licence retained; printed reprints are limited to 50 copies. The front-page 1998 ATI-edition date does not replace the source’s 1983 copyright.",
+          "source_html_sha256": "300433ba256941343ae0891202c139dd57c3456b881476fe48a2e6c879933438",
+          "root": {
+            "id": "sn36.15",
+            "title": "Paṭhamaānandasuttaṃ",
+            "vri": "263",
+            "book": 14,
+            "start": 1356,
+            "end": 1358,
+            "root_blocks_sha256": "2fdc1b9ac79dfe7f89becfa83822551cfd41aadb37ef7ee2b135e8aecc5ada55"
+          },
+          "partial_scope": {
+            "version": 2,
+            "status": "reviewed",
+            "unit_id": "sn36.15",
+            "first_ref": "sn36.15/2",
+            "last_ref": "sn36.15/2",
+            "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+            "pali_sha256": "5a4376f9ef8b063db4161a0619b9dcc5090e2721ec8448b9e51c55b4cae88530",
+            "text_sha256": "176cc221edb6bed91497483d6990e8120583062822f74754176b4545af7ba9fa",
+            "notice_sha256": "b58cc58a86a64f10454468d11fa9fc3391ad43fac20e9728f6ec18903d0ad4ac",
+            "extractor": "ati-chapter-p1to4-of5-notes-v1",
+            "subparagraph": {
+              "start_char": 0,
+              "end_char": 794,
+              "offset_unit": "utf16_code_units",
+              "segment_sha256": "39f3172013f8571b82c6c89edd7d55780eeaeb480d477917b8174c25c83a88c2"
+            }
+          }
+        },
+        "english_characters": 1128,
+        "pali_characters": 794
+      }
+    ]
+  },
+  "scope_contract_change": {
+    "version1": "Whole segment/full-unit and outside substantive-body guards unchanged.",
+    "version2": "Exact one-prose proper nonblank substring with original complete-segment hash, UTF16/surrogate checks, selected-Pali hash and finite v2 extractor; when no body segment lies outside, the excluded original context must contain nonwhitespace. No full-body-minus-whitespace partial."
+  },
+  "measured": {
+    "ordinary_links": 2538,
+    "whole_direct_indexed": 1434,
+    "whole_inherited_indexed": 1857,
+    "whole_direct_runtime": 1408,
+    "whole_inherited_runtime": 1831,
+    "partial_sources": 18,
+    "partial_only": 12,
+    "shared_pages": 12,
+    "shared_subject_records": 110,
+    "shared_only": 52,
+    "daily_pool": 1257,
+    "canonical_records": 8544,
+    "screen_leads": 220,
+    "reviewed_retained": 7,
+    "unreviewed_leads": 213
+  },
+  "coverage_packet_after": {
+    "ledger_pages": 114,
+    "pending_pages": 48,
+    "pages_with_first_english_possibilities": 1,
+    "publisher_extents": {
+      "complete": 32,
+      "excerpt": 16
+    }
+  },
+  "limits": "Only two precise partial selections activated. Original Pali, IDs/locators, prior16 declarations, whole-translation coverage and old evidence reports remain unchanged. Raw HTML/full-root build pins and selected runtime text/notice/prefix/scope pins do not certify unselected upstream wording, word-level alignment, a complete English catalogue or live availability.",
+  "validation": {
+    "partial-browser": {
+      "report_sha256": "4cd65a8cf9c20a149d16e7feb140bb337bc1fa00b9c10d8bf3b3ae6f55dd21d1",
+      "passed": 260,
+      "a11y_scans": 0,
+      "a11y_violations": 0
+    },
+    "partial-a11y": {
+      "report_sha256": "e2dbce4807d9bdc6e065fe28b5e3119ce9d225c794583abd9ab45f6bc78b74f6",
+      "passed": 260,
+      "a11y_scans": 216,
+      "a11y_violations": 0
+    },
+    "partial-installed": {
+      "report_sha256": "99b6ded80fa95aa5a72bb482d1503db1ea254d1a2a8498b8b4593df4c12db91a",
+      "passed": 260,
+      "a11y_scans": 0,
+      "a11y_violations": 0
+    },
+    "native-partial": {
+      "report_sha256": "ee4ca13b78649fcf398a3c055bae79156397c26ddf8246136e0831ddb7cccb92",
+      "status": "passed",
+      "modes": 11
+    },
+    "evidence-installed": {
+      "report_sha256": "7aaeab248c510144e6fe104cac1bbac587231f25e08341261f30858d1e50aa62",
+      "status": "passed",
+      "network_attempts": 0,
+      "counts": {
+        "owners": 2018,
+        "commentary_links": 5322,
+        "commentary_segments": 3263,
+        "shared_links": 1518,
+        "shared_segments": 8720,
+        "reading_commands": 11983
+      },
+      "study": {
+        "plans": 4,
+        "plan_days": 478,
+        "plan_readings": 478,
+        "plan_pages": 488,
+        "guide_links": 87,
+        "guide_external_excerpts": 2,
+        "verse_days": 423,
+        "sutta_days": 1257,
+        "daily_pages": 1719,
+        "period_checks": 4,
+        "iso_date_edges": 6
+      },
+      "navigation": {
+        "topic_catalogue_pages": 13,
+        "topics": 472,
+        "topic_text_refs": 1364,
+        "topic_edges": 450,
+        "lists": 37,
+        "list_text_refs": 102,
+        "list_edges": 63,
+        "parittas": 23,
+        "paritta_sources": 29,
+        "paritta_pages": 90,
+        "canonical_readings": 728,
+        "canonical_pages": 754
+      }
+    },
+    "canonical-audit": {
+      "audited_texts": 8544,
+      "failures": 0,
+      "log_sha256": "942d3271f2c8019828fd5e3e79649c242123ce13816096017c7bd47b2c87d0cf"
+    },
+    "targeted-tests": {
+      "new_source_guards_passed": 13,
+      "corrected_ati_stories_passed": 30,
+      "export_and_docs_passed": 19,
+      "full_final_gate": "Exact integrated-head CI; initial full-local run exposed the legacy SN absence assertion and missing export labels documentation, both corrected and individually rerun."
+    }
+  },
+  "independent_review": {
+    "source_lanes": 2,
+    "architecture_lane": 1,
+    "final_read_only_review": "No material blockers: source scopes/notices, sole-body guards, exact profiles, exports, prior16 preservation and synthetic-vs-live limits checked independently.",
+    "limits": "AI-assisted independent reviews, not philological or human accessibility certification."
+  }
+}

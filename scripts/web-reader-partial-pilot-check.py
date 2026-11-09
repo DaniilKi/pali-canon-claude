@@ -11,7 +11,7 @@ from web_reader_test_helpers import read_tool
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser();p.add_argument('--source-root',type=pathlib.Path,required=True);p.add_argument('--server-dir',type=pathlib.Path);p.add_argument('--a11y',action='store_true');p.add_argument('--report');args=p.parse_args()
 manifest=json.loads((ROOT/'scripts/canon/reviewed_partial_pages.json').read_text(encoding='utf-8'));rows=manifest['links']
-assert {r['unit_id'] for r in rows}=={'thag6.13','thag17.3','thag10.1','thag15.2','thag16.8','thag2.13','thag15.1','snp3.11','mn34','sn12.22','sn12.60','sn22.87','sn35.244','sn56.22','mn54','an2.47'} and len(rows)==16
+assert {r['unit_id'] for r in rows}=={'thag6.13','thag17.3','thag10.1','thag15.2','thag16.8','thag2.13','thag15.1','snp3.11','mn34','sn12.22','sn12.60','sn22.87','sn35.244','sn56.22','mn54','an2.47','an8.59','sn36.15'} and len(rows)==18
 server_dir=args.server_dir.resolve() if args.server_dir else ROOT/'server'
 assert json.loads((server_dir/'data/reviewed-partial-pages.json').read_text(encoding='utf-8'))==manifest
 source_root=args.source_root.resolve();sources={}
@@ -73,7 +73,7 @@ try:
         assert scope['first_ref']==row['partial_scope']['first_ref'] and scope['last_ref']==row['partial_scope']['last_ref'] and scope['whole_unit_coverage'] is False
         assert scope['notice_sha256']==row['partial_scope']['notice_sha256'] and scope['extractor']==row['partial_scope']['extractor']
         assert rpc('get_translation',{'uid':uid,'translation':version}).get('isError')
-        if uid in ['thag17.3','thag15.1','mn34','sn12.22','sn12.60','sn22.87','sn35.244','sn56.22','mn54','an2.47']:assert len(choices)==1 and rpc('get_translation',{'uid':uid}).get('isError')
+        if uid in ['thag17.3','thag15.1','mn34','sn12.22','sn12.60','sn22.87','sn35.244','sn56.22','mn54','an2.47','an8.59','sn36.15']:assert len(choices)==1 and rpc('get_translation',{'uid':uid}).get('isError')
         else:
             ordinary={c['translation_id'] for c in choices if not c.get('translation_scope')}
             expected_full={'snp3.11':{'dt:KN/StNp/StNp3_11','ati:/tipitaka/kn/snp/snp.3.11.than'},'thag6.13':{'dt:KN/Thag/thag6_13','ati:/tipitaka/kn/thag/thag.06.13.than'},'thag2.13':{'dt:KN/Thag/thag2_13','ati:/tipitaka/kn/thag/thag.02.13.than'},'thag10.1':{'dt:KN/Thag/thag10_1'},'thag15.2':{'dt:KN/Thag/thag15_2'},'thag16.8':{'dt:KN/Thag/thag16_8','ati:/tipitaka/kn/thag/thag.16.08.than'}}
@@ -114,6 +114,17 @@ try:
                 assert digest({'licensing':payload['license'],'citation':payload['attribution']})==row['partial_scope']['notice_sha256']
                 assert e['notice']['licensing'] in page.locator('#study .provenance').text_content() and e['notice']['citation'] in page.locator('#study .provenance').text_content()
                 assert 'Partial English source' in page.locator('#study h3').inner_text();assert calls[-1]['translation']==version and calls[-1]['allow_partial'] is True and calls[-1]['scope_sha256']==scope['scope_sha256'] and 'allow_shared' not in calls[-1]
+                if uid=='an8.59':
+                    assert len(payload['text'])==807 and '...' not in payload['text'] and scope['first_ref']==scope['last_ref']=='an8.59/2'
+                    assert '…pe…' in row['mapping_note'] and 'Kumara' in payload['attribution'] and '2010' in payload['license']
+                    assert 'no more than 50' not in payload['license'] and 'Creative Commons' not in payload['license']
+                if uid=='sn36.15':
+                    quote=page.locator('#study blockquote');expect(quote).to_have_text(scope['pali_excerpt']['text'])
+                    assert len(payload['text'])==1128 and len(quote.inner_text())==794
+                    assert scope['pali_excerpt']['start_char']==0 and scope['pali_excerpt']['end_char']==794
+                    assert 'Only part of this paragraph is translated.' in page.locator('#study').inner_text()
+                    assert 'gradual cessation of conditioned phenomena' not in payload['text']
+                    assert '1983' in payload['license'] and 'no more than 50' in payload['license'] and 'Creative Commons' not in payload['license']
                 if uid=='an2.47':
                     quote=page.locator('#study blockquote');expect(quote).to_have_text(scope['pali_excerpt']['text'])
                     assert len(payload['text'])==892 and len(quote.inner_text())==761
@@ -141,7 +152,7 @@ try:
         browser.close()
     events=fetches();assert {e['url'] for e in events}==set(sources)
     receipts=[{'unit':r['unit_id'],'translation_id':'ati:'+r['path'],'source_html_sha256':r['source_html_sha256'],'text_sha256':r['partial_scope']['text_sha256'],'notice_sha256':r['partial_scope']['notice_sha256'],'first_ref':r['partial_scope']['first_ref'],'last_ref':r['partial_scope']['last_ref']} for r in rows]
-    result={'checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'passed':len(checks),'outside_source_tree':bool(args.server_dir),'pinned_local_sources_only':True,'upstream_http_requests':0,'provider_fetches':len(events),'checks':checks,'sources':receipts,'a11y':{'scans':len(scans),'violations':sum(len(s['violations']) for s in scans),'results':scans},'limits':'Actual bundled HTTP worker and browser with sixteen official pinned local publisher snapshots. No upstream/live availability, new rights approval, full-unit English coverage, word-level alignment or human accessibility certification. No publisher bodies in evidence reports.'}
+    result={'checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'passed':len(checks),'outside_source_tree':bool(args.server_dir),'pinned_local_sources_only':True,'upstream_http_requests':0,'provider_fetches':len(events),'checks':checks,'sources':receipts,'a11y':{'scans':len(scans),'violations':sum(len(s['violations']) for s in scans),'results':scans},'limits':'Actual bundled HTTP worker and browser with eighteen official pinned local publisher snapshots. No upstream/live availability, new rights approval, full-unit English coverage, word-level alignment or human accessibility certification. No publisher bodies in evidence reports.'}
     text=json.dumps(result,indent=2);print(text)
     if args.report:pathlib.Path(args.report).write_text(text+'\n',encoding='utf-8')
     if result['a11y']['violations']:raise SystemExit(1)

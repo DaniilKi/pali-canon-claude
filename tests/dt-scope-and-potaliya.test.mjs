@@ -36,7 +36,7 @@ test('three primary DT and one ATI whole bindings are held globally while comple
 });
 
 test('MN54 restores only one pinned partial dream paragraph, preserves fourteen prior descriptors and retires only its ATI hold',()=>{
- assert.equal(report.measured.partial_sources,15,'Frozen D214 count');assert.equal(manifest.links.length,16);const historicalManifest={...manifest,links:manifest.links.filter(r=>r.unit_id!=='an2.47')};assert.equal(historicalManifest.links.length,15,'Only the later AN2.47 addition is outside the D214 registry');assert.deepEqual(historicalManifest.links.find(r=>r.unit_id==='mn54'),row);
+ assert.equal(report.measured.partial_sources,15,'Frozen D214 count');assert.equal(manifest.links.length,18);const historicalManifest={...manifest,links:manifest.links.filter(r=>!['an2.47','an8.59','sn36.15'].includes(r.unit_id))};assert.equal(historicalManifest.links.length,15,'Only the later AN2.47/AN8.59/SN36.15 additions are outside the D214 registry');assert.deepEqual(historicalManifest.links.find(r=>r.unit_id==='mn54'),row);
  assert.equal(scopeHash({...historicalManifest,links:historicalManifest.links.filter(r=>r.unit_id!=='mn54')}),'1386fcdcffbe94a4179c2ed04ecbb5f064ee2598d4f086872865aca74a3ad89e','Previous14 source declarations and manifest provenance are unchanged');
  assert.equal(report.mn54.previous_partial_descriptors.length,14);
  for(const old of report.mn54.previous_partial_descriptors)assert.equal(scopeHash(manifest.links.find(r=>r.unit_id===old.unit_id)),old.descriptor_sha256,old.unit_id);
@@ -58,7 +58,7 @@ test('MN54 restores only one pinned partial dream paragraph, preserves fourteen 
  assert.ok(!exclusions.some(r=>r.url===report.retired_exclusion.url));
  assert.ok(exclusions.some(r=>r.url==='https://www.dhammatalks.org/suttas/MN/MN54.html'));
  const t=translationCoverage({refresh:true}).total;
- assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links,t.with_shared_english,t.shared_only],[2538,1408,1831,16,10,12,110,52]);
+ assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links,t.with_shared_english,t.shared_only],[2538,1408,1831,18,12,12,110,52]);
  const d=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([d.rotation.of,d.text.id],[1257,'sn12.31']);
 });
 
