@@ -333,15 +333,15 @@ async function read(args, token) {
   heading(kind === 'book' ? 'COMPLETE VRI SOURCE BOOK' : kind === 'commentary' ? 'TRADITIONAL COMMENTARY · NOT CANON' : kind === 'post' ? 'LATER PĀLI WORK · NOT CANON' : 'CANONICAL PĀLI', (data.citation ? data.citation + ' · ' : '') + (data.title || data.book?.title || data.book_id || uid));
   if (plan) { view.append(link('← Return to plan day ' + plan.day, route('plans', { name: plan.name, day: plan.day }), 'button'), el('p', plan.title + ' · day ' + plan.day + (window.end === null ? ' · complete selected text' : ' · assigned segments ' + (window.start + 1) + '–' + window.end) + '. English sources and related material may cover more than this assignment; they are not aligned to this part.', 'notice')); }
   notes(data); view.append(el('p', `Segments ${offset + 1}–${offset + data.returned} of ${data.total_segments}`, 'muted'));
-  const toolbar = el('div', undefined, 'toolbar');
+  const toolbar = el('div', undefined, 'toolbar'); let sourceTools;
   toolbar.append(link('Back to library', route('browse', { node: 'canon' }), 'button'));
   const copyFallback = link('Exact reading link · open or long-press to copy', location.hash); copyFallback.hidden = true;
   const copy = button('Copy reading link', async () => { clearTimeout(positionTimer); const href = new URL(activePosition?.links.find(x => x.href === local.last)?.href || activePosition?.links[0]?.href || location.hash, location.href).href; try { await navigator.clipboard.writeText(href); status.textContent = 'Reading link copied.'; } catch { copyFallback.href = href; copyFallback.hidden = false; status.textContent = 'Clipboard unavailable. Use the exact reading link beside the button.'; } });
   if (kind === 'canon') {
-    const panel = el('details', undefined, 'study-actions'); panel.append(el('summary', 'Study & sources')); const tools = el('div', undefined, 'toolbar');
+    const panel = el('details', undefined, 'study-actions'); panel.append(el('summary', 'Study & sources')); const tools = el('div', undefined, 'toolbar'); sourceTools = tools;
     const invoke = action => () => { if (narrowReading.matches) panel.open = false; action(); const target = $('study'); target.tabIndex = -1; target.focus(); };
     tools.append(button('English sources', invoke(() => translations(data, uid, token))), button('Traditional commentary', invoke(() => commentary(uid, token))), button('Related texts', invoke(() => relatedTexts(data.text_id || uid, token))), copy, copyFallback); panel.append(tools); toolbar.append(panel);
-  } else toolbar.append(copy, copyFallback);
+  } else { const panel = el('details', undefined, 'study-actions'); sourceTools = el('div', undefined, 'toolbar'); sourceTools.append(copy, copyFallback); panel.append(el('summary', 'Reading tools'), sourceTools); toolbar.append(panel); }
   view.append(toolbar); responsivePanels();
   const positionContext = { ...readingArgs(selector), ...(plan ? { plan: plan.name, day: plan.day } : {}) };
   let navigation = null;
@@ -358,7 +358,7 @@ async function read(args, token) {
       try { const jump = readingJumpOffset(input.value, data, window), href = readingPagePosition(positionContext, jump, revision); error.hidden = true; input.removeAttribute('aria-invalid'); if (location.hash === href) render(); else location.hash = href; }
       catch (failure) { error.textContent = failure.message; error.hidden = false; input.setAttribute('aria-invalid', 'true'); input.focus({ preventScroll: true }); }
     });
-    view.append(form);
+    const panel = el('section', undefined, 'source-position-panel'); panel.append(form); sourceTools.append(panel);
   } catch { view.append(el('p', 'Source-position navigation is unavailable because this page has incomplete or unsupported position/revision metadata. The loaded source remains below; no destination was guessed.', 'notice')); }
   const additions = el('section'); additions.id = 'study'; additions.setAttribute('aria-live', 'polite'); view.append(additions);
   const passages = el('section'); passages.setAttribute('aria-label', 'Pāli passage'); const positions = [];
