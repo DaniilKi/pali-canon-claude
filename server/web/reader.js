@@ -46,12 +46,12 @@
   function bookmarkLocation(item, context) {
     if (!item || typeof item.ref !== "string" || !item.ref) throw Error("This bookmark has no valid passage reference. Export it before repairing its metadata.");
     if (item.offset !== void 0 && (!Number.isSafeInteger(item.offset) || item.offset < 0 || item.offset > 1e5)) throw Error("This bookmark has invalid saved-position metadata. Keep/export it before reviewing its source separately.");
-    const pinned = item.source_commit !== void 0;
-    if (pinned && (!Number.isSafeInteger(item.offset) || item.offset < 0)) throw Error("This versioned bookmark has no exact saved position. Its source version was not dropped or guessed. Keep/export the bookmark and review its source separately.");
+    const pinned2 = item.source_commit !== void 0;
+    if (pinned2 && (!Number.isSafeInteger(item.offset) || item.offset < 0)) throw Error("This versioned bookmark has no exact saved position. Its source version was not dropped or guessed. Keep/export the bookmark and review its source separately.");
     const index = Number.isSafeInteger(item.offset) && item.offset >= 0 ? item.offset : Number(item.ref.match(/\/c?(\d+)$/)?.[1] || 1) - 1;
-    const offset = pinned ? item.offset : Math.floor(index / 30) * 30;
-    const href = readingPosition(context, offset, item.ref, pinned ? item.source_commit : "legacy");
-    if (pinned) return { href, pinned: true, notice: "Saved source version: opening checks the revision before displaying wording." };
+    const offset = pinned2 ? item.offset : Math.floor(index / 30) * 30;
+    const href = readingPosition(context, offset, item.ref, pinned2 ? item.source_commit : "legacy");
+    if (pinned2) return { href, pinned: true, notice: "Saved source version: opening checks the revision before displaying wording." };
     const args = new URLSearchParams(href.slice(6));
     args.delete("source");
     return { href: "#read?" + args, pinned: false, notice: "Legacy bookmark: no source version was saved. Opening checks its reference against the current source; this is not a saved copy of the old wording." };
@@ -73,9 +73,9 @@
     const selected = Object.hasOwn(savedScopeLabels, scope) ? scope : "all";
     const matches = items.filter((item) => {
       if (selected !== "all" && savedScope(item) !== selected) return false;
-      const key3 = JSON.stringify([item.uid, item.ref]);
-      const note = drafts?.has(key3) ? drafts.get(key3) : item.note;
-      const text5 = fold([item.title, item.uid, item.ref, note].filter((x) => typeof x === "string").join(" "));
+      const key4 = JSON.stringify([item.uid, item.ref]);
+      const note2 = drafts?.has(key4) ? drafts.get(key4) : item.note;
+      const text5 = fold([item.title, item.uid, item.ref, note2].filter((x) => typeof x === "string").join(" "));
       return tokens.every((token) => text5.includes(token));
     });
     const pages = Math.max(1, Math.ceil(matches.length / SAVED_PAGE_SIZE));
@@ -199,8 +199,8 @@
     tai_tham: "lanna"
   };
   function scriptName(name) {
-    const key3 = String(name ?? "").trim().toLowerCase();
-    const found = ALIASES[key3];
+    const key4 = String(name ?? "").trim().toLowerCase();
+    const found = ALIASES[key4];
     if (!found) throw new Error(`Unknown script "${name}". Available: ${SCRIPTS.join(", ")}.`);
     return found;
   }
@@ -668,7 +668,7 @@
   }
 
   // web/translation-policy.mjs
-  var own = (value, key3) => value && Object.hasOwn(value, key3);
+  var own = (value, key4) => value && Object.hasOwn(value, key4);
   var nonempty = (value) => typeof value === "string" && value.trim().length > 0;
   var sha = (value) => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
   var stable = (value) => JSON.stringify(Array.isArray(value) ? value.map((v) => JSON.parse(stable(v))) : value && typeof value === "object" ? Object.fromEntries(Object.keys(value).sort().map((k) => [k, JSON.parse(stable(value[k]))])) : value);
@@ -748,9 +748,9 @@
     if (!Array.isArray(value)) return [];
     const seen = /* @__PURE__ */ new Set();
     return value.filter((x) => {
-      const key3 = x?.name + ":" + x?.day;
-      if (!x || !nameOK(x.name) || !Number.isInteger(x.day) || x.day < 1 || x.day > 400 || typeof x.signature !== "string" || x.signature.length > 12e3 || seen.has(key3)) return false;
-      seen.add(key3);
+      const key4 = x?.name + ":" + x?.day;
+      if (!x || !nameOK(x.name) || !Number.isInteger(x.day) || x.day < 1 || x.day > 400 || typeof x.signature !== "string" || x.signature.length > 12e3 || seen.has(key4)) return false;
+      seen.add(key4);
       return true;
     }).slice(0, 1600);
   }
@@ -951,9 +951,9 @@
 
   // web/request-lifecycle.mjs
   var REQUEST_TIMEOUT_MS = 18e4;
-  function stopped(reason) {
-    const error = new Error(reason === "deadline" ? "The request timed out. Try again; no replacement passage was selected." : reason === "user" ? "Stopped waiting in this browser. The server may still finish; no replacement passage was selected." : "This request was superseded by your new selection.");
-    error.code = reason === "deadline" ? "REQUEST_DEADLINE" : reason === "user" ? "REQUEST_STOPPED" : "REQUEST_SUPERSEDED";
+  function stopped(reason2) {
+    const error = new Error(reason2 === "deadline" ? "The request timed out. Try again; no replacement passage was selected." : reason2 === "user" ? "Stopped waiting in this browser. The server may still finish; no replacement passage was selected." : "This request was superseded by your new selection.");
+    error.code = reason2 === "deadline" ? "REQUEST_DEADLINE" : reason2 === "user" ? "REQUEST_STOPPED" : "REQUEST_SUPERSEDED";
     return error;
   }
   function createRequestPool({ onChange = () => {
@@ -965,22 +965,22 @@
       get size() {
         return pending.size;
       },
-      cancelAll(reason = "navigation") {
-        for (const x of [...pending.values()]) x.cancel(reason);
+      cancelAll(reason2 = "navigation") {
+        for (const x of [...pending.values()]) x.cancel(reason2);
       },
-      cancelGroup(group, reason = "superseded") {
-        for (const x of [...pending.values()]) if (x.group === group) x.cancel(reason);
+      cancelGroup(group, reason2 = "superseded") {
+        for (const x of [...pending.values()]) if (x.group === group) x.cancel(reason2);
       },
       async run(task, { group = "page", label = "Reading request" } = {}) {
         const controller = new AbortController();
-        let active = true, reason, rejectStop;
+        let active = true, reason2, rejectStop;
         const stop = new Promise((_, reject) => {
           rejectStop = reject;
         });
         const entry = { id: ++serial2, group, label, cancel(why) {
           if (!active) return false;
           active = false;
-          reason = why;
+          reason2 = why;
           rejectStop(stopped(why));
           controller.abort();
           pending.delete(entry.id);
@@ -992,7 +992,7 @@
         emit();
         try {
           return await Promise.race([Promise.resolve().then(() => {
-            if (!active) throw stopped(reason);
+            if (!active) throw stopped(reason2);
             return task(controller.signal);
           }), stop]);
         } finally {
@@ -1128,7 +1128,7 @@
 
   // web/translation-comparison.mjs
   var object4 = (x) => x !== null && typeof x === "object" && !Array.isArray(x);
-  var own3 = (x, key3) => Object.hasOwn(x, key3);
+  var own3 = (x, key4) => Object.hasOwn(x, key4);
   var text4 = (x) => typeof x === "string" && x.trim().length > 0;
   var uid = (x) => typeof x === "string" && x.trim() === x && /^[a-z][a-z0-9.-]{0,199}$/.test(x);
   var sha2 = (x) => typeof x === "string" && /^[0-9a-f]{64}$/.test(x);
@@ -1159,7 +1159,7 @@
   }
   var requestKeys = /* @__PURE__ */ new Set(["uid", "translation", "offset", "limit", "prefix_sha256"]);
   function request(args, requestedId, choice, expectedLimit) {
-    if (!object4(args) || Object.keys(args).some((key3) => !requestKeys.has(key3)) || args.uid !== requestedId || args.translation !== choice.translation_id || !sourceId(args.translation) || !Number.isSafeInteger(args.limit) || args.limit < 500 || args.limit > 3e4 || expectedLimit !== void 0 && args.limit !== expectedLimit) failure();
+    if (!object4(args) || Object.keys(args).some((key4) => !requestKeys.has(key4)) || args.uid !== requestedId || args.translation !== choice.translation_id || !sourceId(args.translation) || !Number.isSafeInteger(args.limit) || args.limit < 500 || args.limit > 3e4 || expectedLimit !== void 0 && args.limit !== expectedLimit) failure();
     const offset = own3(args, "offset") ? args.offset : 0;
     if (!Number.isSafeInteger(offset) || offset < 0 || offset > 2e6 || offset === 0 && own3(args, "prefix_sha256") || offset > 0 && !sha2(args.prefix_sha256)) failure();
     return offset;
@@ -1181,15 +1181,15 @@
   }
 
   // web/passage-notes.mjs
-  var own4 = (value, key3) => Object.hasOwn(value, key3);
+  var own4 = (value, key4) => Object.hasOwn(value, key4);
   var object5 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   var position = (value) => Number.isSafeInteger(value) && value >= 0 && value <= 1e5;
   var revision = (value) => typeof value === "string" && /^[A-Za-z0-9._-]{1,100}$/.test(value);
   function clone2(value, depth = 0) {
     if (depth > 32) throw Error("Personal-note metadata is nested too deeply. Keep/export it before repairing it.");
-    if (value instanceof Map) return new Map([...value].map(([key3, item]) => [clone2(key3, depth + 1), clone2(item, depth + 1)]));
+    if (value instanceof Map) return new Map([...value].map(([key4, item]) => [clone2(key4, depth + 1), clone2(item, depth + 1)]));
     if (Array.isArray(value)) return value.map((item) => clone2(item, depth + 1));
-    if (object5(value)) return Object.fromEntries(Object.entries(value).map(([key3, item]) => [key3, clone2(item, depth + 1)]));
+    if (object5(value)) return Object.fromEntries(Object.entries(value).map(([key4, item]) => [key4, clone2(item, depth + 1)]));
     return value;
   }
   var noteText = (value) => {
@@ -1202,7 +1202,7 @@
     if (own4(item, "source_commit") && (!revision(item.source_commit) || !position(item.offset))) throw Error("This bookmark has invalid saved revision or position metadata.");
   }
   function currentContext(context) {
-    if (!object5(context) || Object.keys(context).some((key3) => !["uid", "ref", "title", "offset", "source_commit"].includes(key3))) throw Error("This passage has unsupported personal-note reference metadata.");
+    if (!object5(context) || Object.keys(context).some((key4) => !["uid", "ref", "title", "offset", "source_commit"].includes(key4))) throw Error("This passage has unsupported personal-note reference metadata.");
     bookmarkShape({ ...context, note: "" });
     if (!position(context.offset) || !revision(context.source_commit)) throw Error("This passage has no valid current position and source revision.");
   }
@@ -1212,19 +1212,19 @@
   }
   function passageNoteState(saved2, context) {
     if (!Array.isArray(saved2)) throw Error("Saved passages must be an array.");
-    let key3, item = null;
+    let key4, item = null;
     try {
       currentContext(context);
-      key3 = passageNoteKey(context);
+      key4 = passageNoteKey(context);
       const matches = saved2.filter((value) => object5(value) && value.uid === context.uid && value.ref === context.ref);
       if (matches.length > 1) throw Error("Duplicate saved references need review in Saved before editing a note here.");
       item = matches[0] ?? null;
       if (item) bookmarkShape(item);
       if (item && own4(item, "source_commit") && item.source_commit !== context.source_commit) throw Error("The saved source revision differs. Review or edit this personal note in Saved; it was not associated with the current passage.");
       const legacy = Boolean(item && !own4(item, "source_commit"));
-      return { eligible: true, reason: null, warning: legacy ? "Unversioned bookmark: no source revision was saved. Check the reference before using this personal note; editing leaves it unversioned." : null, legacy, item: clone2(item), key: key3 };
+      return { eligible: true, reason: null, warning: legacy ? "Unversioned bookmark: no source revision was saved. Check the reference before using this personal note; editing leaves it unversioned." : null, legacy, item: clone2(item), key: key4 };
     } catch (error) {
-      return { eligible: false, reason: error.message, warning: null, legacy: false, item: null, key: key3 ?? null };
+      return { eligible: false, reason: error.message, warning: null, legacy: false, item: null, key: key4 ?? null };
     }
   }
   function createPassageBookmark(context) {
@@ -1233,27 +1233,27 @@
   }
   function passageNoteRemovalNeedsConfirmation(item, drafts) {
     if (!(drafts instanceof Map)) throw Error("Personal-note drafts must be a Map.");
-    const key3 = passageNoteKey(item);
+    const key4 = passageNoteKey(item);
     const stored = item.note === void 0 ? "" : noteText(item.note);
-    const draft = drafts.has(key3) ? noteText(drafts.get(key3)) : "";
+    const draft = drafts.has(key4) ? noteText(drafts.get(key4)) : "";
     return stored.length > 0 || draft.length > 0;
   }
   function passageNoteTransaction(saved2, drafts, context, operation) {
-    if (!(drafts instanceof Map) || !object5(operation) || Object.keys(operation).some((key4) => !["type", "note", "confirmed", "mode"].includes(key4)) || !["ensure", "save", "remove"].includes(operation.type) || own4(operation, "mode") && !["reading", "saved"].includes(operation.mode)) throw Error("Unsupported personal-note change.");
+    if (!(drafts instanceof Map) || !object5(operation) || Object.keys(operation).some((key5) => !["type", "note", "confirmed", "mode"].includes(key5)) || !["ensure", "save", "remove"].includes(operation.type) || own4(operation, "mode") && !["reading", "saved"].includes(operation.mode)) throw Error("Unsupported personal-note change.");
     let state;
     if (operation.mode === "saved") {
-      if (!Array.isArray(saved2) || !object5(context) || Object.keys(context).some((key4) => !["uid", "ref"].includes(key4)) || operation.type === "ensure") throw Error("Saved note edits require an exact existing bookmark identity.");
+      if (!Array.isArray(saved2) || !object5(context) || Object.keys(context).some((key5) => !["uid", "ref"].includes(key5)) || operation.type === "ensure") throw Error("Saved note edits require an exact existing bookmark identity.");
       parseBookmarks(JSON.stringify({ format: "pali-library-v1", saved: [{ ...context, title: "Personal bookmark", note: "" }] }));
       const matches = saved2.filter((item) => object5(item) && item.uid === context.uid && item.ref === context.ref);
       if (matches.length !== 1) throw Error("Saved note edits require one exact existing bookmark.");
       state = { eligible: true, key: passageNoteKey(context), item: clone2(matches[0]) };
     } else state = passageNoteState(saved2, context);
     if (!state.eligible) throw Error(state.reason);
-    const { key: key3 } = state;
-    if (drafts.has(key3)) noteText(drafts.get(key3));
+    const { key: key4 } = state;
+    if (drafts.has(key4)) noteText(drafts.get(key4));
     if (operation.type !== "save" && own4(operation, "note")) throw Error("Only saving a personal note accepts note text.");
     if (own4(operation, "confirmed") && typeof operation.confirmed !== "boolean") throw Error("Removal confirmation must be explicit.");
-    const note = operation.type === "save" ? noteText(operation.note) : void 0;
+    const note2 = operation.type === "save" ? noteText(operation.note) : void 0;
     if (operation.type === "remove" && !state.item) throw Error("This exact passage is not saved.");
     if (operation.type === "remove" && passageNoteRemovalNeedsConfirmation(state.item, drafts) && operation.confirmed !== true) {
       const error = Error("Confirm removal of this bookmark and its personal note first.");
@@ -1262,18 +1262,18 @@
     }
     if (!state.item && saved2.length >= 500) throw Error("Your saved list is full (500 passages). Export or remove passages before adding a note.");
     const before = { saved: clone2(saved2), drafts: clone2(drafts) };
-    if (operation.type === "save") before.drafts.set(key3, note);
+    if (operation.type === "save") before.drafts.set(key4, note2);
     const result = { saved: clone2(saved2), drafts: clone2(drafts), before, item: null, removed: operation.type === "remove" };
     const index = result.saved.findIndex((item) => object5(item) && item.uid === context.uid && item.ref === context.ref);
     if (operation.type === "remove") result.saved.splice(index, 1);
     else {
       const item = state.item ?? createPassageBookmark(context);
-      if (operation.type === "save") item.note = note;
+      if (operation.type === "save") item.note = note2;
       if (index < 0) result.saved.push(item);
       else result.saved[index] = item;
       result.item = clone2(item);
     }
-    if (operation.type !== "ensure") result.drafts.delete(key3);
+    if (operation.type !== "ensure") result.drafts.delete(key4);
     return result;
   }
   function restorePassageNoteTransaction(transaction) {
@@ -1300,9 +1300,9 @@
   function assertPageRequest(args) {
     if (!args.has("page_source")) return;
     const keys2 = [...args.keys()];
-    if (keys2.some((key3) => !pageKeys.has(key3)) || new Set(keys2).size !== keys2.length || args.getAll("page_source").length !== 1 || args.getAll("offset").length !== 1 || !/^(0|[1-9][0-9]*)$/.test(args.get("offset") || "") || !integer4(Number(args.get("offset")), 0, 1e5)) invalid();
+    if (keys2.some((key4) => !pageKeys.has(key4)) || new Set(keys2).size !== keys2.length || args.getAll("page_source").length !== 1 || args.getAll("offset").length !== 1 || !/^(0|[1-9][0-9]*)$/.test(args.get("offset") || "") || !integer4(Number(args.get("offset")), 0, 1e5)) invalid();
     revision2(args.get("page_source"));
-    const context = Object.fromEntries(["uid", "book", "kind", "plan"].filter((key3) => args.has(key3)).map((key3) => [key3, args.get(key3)]));
+    const context = Object.fromEntries(["uid", "book", "kind", "plan"].filter((key4) => args.has(key4)).map((key4) => [key4, args.get(key4)]));
     if (args.has("day")) {
       if (!/^[1-9][0-9]*$/.test(args.get("day") || "")) invalid();
       context.day = Number(args.get("day"));
@@ -1349,14 +1349,85 @@
     }
   }
 
+  // web/backup-note-conflicts.mjs
+  var object6 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var fields = /* @__PURE__ */ new Set(["uid", "ref", "title", "note", "offset", "source_commit"]);
+  var key2 = (item) => JSON.stringify([item.uid, item.ref]);
+  function note(value) {
+    if (typeof value !== "string" || value.length > 4e3) throw Error("Personal-note conflict review needs text of at most 4,000 characters.");
+    return value;
+  }
+  function groups(items) {
+    if (!Array.isArray(items) || items.length > 500) throw Error("Unsupported saved passages for personal-note conflict review.");
+    const result = /* @__PURE__ */ new Map();
+    for (const item of items) {
+      if (!object6(item) || typeof item.uid !== "string" || typeof item.ref !== "string") throw Error("Personal-note conflict review needs exact saved identities.");
+      const identity2 = key2(item), matches = result.get(identity2) ?? [];
+      matches.push(item);
+      result.set(identity2, matches);
+    }
+    return result;
+  }
+  function validRecord(item) {
+    try {
+      if (Object.keys(item).some((field) => !fields.has(field) || item[field] === void 0)) return false;
+      parseBookmarks(JSON.stringify({ format: "pali-library-v1", saved: [item] }));
+      return true;
+    } catch {
+      return false;
+    }
+  }
+  function pinned(item) {
+    try {
+      return Object.hasOwn(item, "source_commit") && typeof item.source_commit === "string" && sourceRevision({ source: { commit: item.source_commit } }) === item.source_commit && Object.hasOwn(item, "offset") && Number.isSafeInteger(item.offset) && item.offset >= 0 && item.offset <= 1e5;
+    } catch {
+      return false;
+    }
+  }
+  function reason(current, incoming) {
+    if (current.length !== 1 || incoming.length !== 1) return "Duplicate saved identities need manual review; no personal note was chosen.";
+    if (!validRecord(current[0]) || !validRecord(incoming[0])) return "Unsupported bookmark metadata prevents an automatic personal-note replacement.";
+    if (!pinned(current[0]) || !pinned(incoming[0])) return "Both bookmarks need a valid saved source revision and exact offset; legacy references stay unchanged.";
+    if (current[0].source_commit !== incoming[0].source_commit) return "The saved source revisions differ; no source pin will be upgraded.";
+    if (current[0].offset !== incoming[0].offset) return "The saved source offsets differ; no nearby passage will be substituted.";
+    if (typeof incoming[0].note !== "string") return "The incoming bookmark has no explicit personal-note text to replace with.";
+    return null;
+  }
+  function reviewBackupNoteConflicts(currentSaved, incomingSaved, drafts = /* @__PURE__ */ new Map()) {
+    if (!(drafts instanceof Map)) throw Error("Personal-note drafts must be a Map.");
+    const current = groups(currentSaved), incoming = groups(incomingSaved), rows = [];
+    for (const [identity2, incomingItems] of incoming) {
+      const currentItems = current.get(identity2);
+      if (!currentItems) continue;
+      const currentNote = drafts.has(identity2) ? note(drafts.get(identity2)) : note(currentItems[0].note === void 0 ? "" : currentItems[0].note);
+      const differing = incomingItems.find((item) => note(item.note === void 0 ? "" : item.note) !== currentNote);
+      if (!differing) continue;
+      const why = reason(currentItems, incomingItems);
+      rows.push({ key: identity2, uid: differing.uid, ref: differing.ref, currentNote, incomingNote: note(differing.note === void 0 ? "" : differing.note), eligible: why === null, reason: why });
+    }
+    return rows;
+  }
+  function applyBackupNoteChoices(currentSaved, incomingSaved, drafts, choices) {
+    if (!Array.isArray(choices) || choices.length > 500 || choices.some((identity2) => typeof identity2 !== "string") || new Set(choices).size !== choices.length) throw Error("Choose each supported personal-note conflict at most once. Nothing was restored.");
+    const rows = new Map(reviewBackupNoteConflicts(currentSaved, incomingSaved, drafts).map((row) => [row.key, row]));
+    for (const identity2 of choices) {
+      const row = rows.get(identity2);
+      if (!row || !row.eligible) throw Error("A selected personal-note conflict is unknown or no longer eligible. Nothing was restored.");
+    }
+    const selected = new Set(choices), incoming = new Map(incomingSaved.map((item) => [key2(item), item]));
+    const saved2 = JSON.parse(JSON.stringify(currentSaved));
+    for (const item of saved2) if (selected.has(key2(item))) item.note = incoming.get(key2(item)).note;
+    return { saved: saved2, notesReplaced: choices.length, replacedNoteKeys: [...choices] };
+  }
+
   // web/study-backup.mjs
   var MAX_STUDY_BACKUP_BYTES = 32 * 1024 * 1024;
   var FORMAT = "pali-library-study-backup-v1";
-  var object6 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
-  var exact2 = (value, keys2) => object6(value) && Object.keys(value).length === keys2.length && keys2.every((key3) => Object.hasOwn(value, key3));
+  var object7 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var exact2 = (value, keys2) => object7(value) && Object.keys(value).length === keys2.length && keys2.every((key4) => Object.hasOwn(value, key4));
   var bytes = (text5) => new TextEncoder().encode(text5).length;
   var clone3 = (value) => JSON.parse(JSON.stringify(value));
-  var key2 = (item) => JSON.stringify([item.uid, item.ref]);
+  var key3 = (item) => JSON.stringify([item.uid, item.ref]);
   function jsonData(value, depth = 0) {
     if (depth > 12) throw Error("Unsupported nested study-backup metadata. Nothing was restored.");
     if (value === null || typeof value === "string" || typeof value === "boolean" || typeof value === "number" && Number.isFinite(value)) return;
@@ -1364,7 +1435,7 @@
       for (const item of value) jsonData(item, depth + 1);
       return;
     }
-    if (object6(value) && [Object.prototype, null].includes(Object.getPrototypeOf(value))) {
+    if (object7(value) && [Object.prototype, null].includes(Object.getPrototypeOf(value))) {
       for (const item of Object.values(value)) jsonData(item, depth + 1);
       return;
     }
@@ -1397,8 +1468,8 @@
     }
     return validate(data, true);
   }
-  function mergeStudyBackup(current, incoming, catalog) {
-    if (!object6(current) || Object.keys(current).some((field) => !["saved", "progress", "drafts"].includes(field)) || !Array.isArray(current.saved) || !Array.isArray(current.progress) || current.drafts !== void 0 && !(current.drafts instanceof Map)) throw Error("Unsupported current personal-study metadata. Nothing was restored.");
+  function mergeStudyBackup(current, incoming, catalog, choices) {
+    if (!object7(current) || Object.keys(current).some((field) => !["saved", "progress", "drafts"].includes(field)) || !Array.isArray(current.saved) || !Array.isArray(current.progress) || current.drafts !== void 0 && !(current.drafts instanceof Map)) throw Error("Unsupported current personal-study metadata. Nothing was restored.");
     const validatedCurrent = createStudyBackup({ saved: current.saved, progress: current.progress, resume: null });
     const validatedIncoming = validate(incoming, true);
     let progress = validatedIncoming.progress;
@@ -1407,22 +1478,29 @@
       progress = parseProgress(component(progress, "pali-library-reading-progress-v1", "progress", MAX_PROGRESS_BYTES), catalog);
     }
     const effective = validatedCurrent.saved.map((item) => {
-      if (!current.drafts?.has(key2(item))) return item;
-      const note = current.drafts.get(key2(item));
-      if (typeof note !== "string" || note.length > 4e3) throw Error("A current personal-note draft exceeds the supported note format. Nothing was restored.");
-      return { ...item, note };
+      if (!current.drafts?.has(key3(item))) return item;
+      const note2 = current.drafts.get(key3(item));
+      if (typeof note2 !== "string" || note2.length > 4e3) throw Error("A current personal-note draft exceeds the supported note format. Nothing was restored.");
+      return { ...item, note: note2 };
     });
     const bookmarks = bookmarkMerge(current.saved, validatedIncoming.saved), marks = mergeProgress(current.progress, progress);
-    const existing = new Map(effective.map((item) => [key2(item), item]));
+    const existing = new Map(effective.map((item) => [key3(item), item]));
     let bookmarkDuplicates = 0, bookmarkConflicts = 0;
     for (const item of validatedIncoming.saved) {
-      const prior = existing.get(key2(item));
+      const prior = existing.get(key3(item));
       if (prior) {
         if (JSON.stringify(prior) === JSON.stringify(item)) bookmarkDuplicates++;
         else bookmarkConflicts++;
       }
     }
-    return { saved: clone3(bookmarks.saved), progress: clone3(marks.progress), bookmarkAdded: bookmarks.added.length, bookmarkDuplicates, bookmarkConflicts, progressAdded: marks.added, progressDuplicates: marks.duplicates, progressConflicts: marks.conflicts };
+    const result = { saved: clone3(bookmarks.saved), progress: clone3(marks.progress), bookmarkAdded: bookmarks.added.length, bookmarkDuplicates, bookmarkConflicts, progressAdded: marks.added, progressDuplicates: marks.duplicates, progressConflicts: marks.conflicts };
+    if (choices !== void 0) {
+      const notes2 = applyBackupNoteChoices(current.saved, validatedIncoming.saved, current.drafts ?? /* @__PURE__ */ new Map(), choices);
+      result.saved = clone3([...notes2.saved, ...bookmarks.added]);
+      result.notesReplaced = notes2.notesReplaced;
+      result.replacedNoteKeys = notes2.replacedNoteKeys;
+    }
+    return result;
   }
 
   // web/reader.js
@@ -1888,7 +1966,7 @@
   var sameSavedRecord = (expected, token) => token === epoch && JSON.stringify(savedRecord(expected)) === JSON.stringify(expected);
   function replaceNoteDrafts(drafts) {
     noteDrafts.clear();
-    for (const [key3, value] of drafts) noteDrafts.set(key3, value);
+    for (const [key4, value] of drafts) noteDrafts.set(key4, value);
   }
   function commitNoteChange(transaction, keepNewBookmark = false) {
     local.saved = transaction.saved;
@@ -1953,8 +2031,8 @@
       status2.textContent = "This bookmark changed. Review it again before removing it.";
       return;
     }
-    const snapshot = copySavedRecord(item), key3 = noteKey(item), hadDraft = noteDrafts.has(key3), draft = noteDrafts.get(key3);
-    const valid = () => host.isConnected && sameSavedRecord(snapshot, token) && noteDrafts.has(key3) === hadDraft && noteDrafts.get(key3) === draft;
+    const snapshot = copySavedRecord(item), key4 = noteKey(item), hadDraft = noteDrafts.has(key4), draft = noteDrafts.get(key4);
+    const valid = () => host.isConnected && sameSavedRecord(snapshot, token) && noteDrafts.has(key4) === hadDraft && noteDrafts.get(key4) === draft;
     function remove(confirmed) {
       if (!valid()) {
         status2.textContent = "The bookmark or draft changed. Cancel removal and review it again; nothing was removed.";
@@ -1999,8 +2077,8 @@
       return;
     }
     highlightTargets.push({ node: container, context, token });
-    const key3 = noteKey(context);
-    open = noteDrafts.has(key3) || Boolean(savedRecord(context)?.note);
+    const key4 = noteKey(context);
+    open = noteDrafts.has(key4) || Boolean(savedRecord(context)?.note);
     function mark() {
       const active = Boolean(savedRecord(context));
       control.textContent = active ? "Saved \u2713" : "Save passage";
@@ -2594,14 +2672,14 @@
     }
     const data = await tool("glossary", { term, direction, limit: 10 });
     if (token !== epoch) return;
-    if (typeof data.found !== "number" || !data.sources?.dpd?.attribution || !data.sources?.dpd?.license || !["english_to_pali", "pali_to_english"].some((key3) => Array.isArray(data[key3]))) throw new Error("The glossary response is incomplete or missing its source terms. This is not a no-match result.");
+    if (typeof data.found !== "number" || !data.sources?.dpd?.attribution || !data.sources?.dpd?.license || !["english_to_pali", "pali_to_english"].some((key4) => Array.isArray(data[key4]))) throw new Error("The glossary response is incomplete or missing its source terms. This is not a no-match result.");
     notes(data);
     if (data.note) view.append(el("p", data.note, "notice"));
-    for (const [key3, title] of [["english_to_pali", "English \u2192 P\u0101li"], ["pali_to_english", "P\u0101li \u2192 English"]]) {
-      if (!data[key3]?.length) continue;
+    for (const [key4, title] of [["english_to_pali", "English \u2192 P\u0101li"], ["pali_to_english", "P\u0101li \u2192 English"]]) {
+      if (!data[key4]?.length) continue;
       view.append(el("h3", title));
       const cards = el("div", void 0, "cards");
-      for (const entry of data[key3]) {
+      for (const entry of data[key4]) {
         const card = el("article", void 0, "entry");
         card.append(el("strong", entry.pali), el("p", entry.meaning || entry.gloss || ""), el("small", [entry.pos, entry.source].filter(Boolean).join(" \xB7 ")), link("Find this word in canonical texts", route("search", { q: entry.pali, scope: "canon" })));
         cards.append(card);
@@ -2697,7 +2775,7 @@
     label.append(input);
     preview.setAttribute("aria-label", "Study backup preview");
     preview.setAttribute("aria-live", "polite");
-    section.append(label, el("p", "The file stays on this device. Maximum 32 MiB. Preview before applying: existing notes, drafts, source pins and conflicting marks are kept. This is an additive restore, not account sync or an atomic cross-tab transaction.", "muted"), preview);
+    section.append(label, el("p", "The file stays on this device. Maximum 32 MiB. Preview before applying: notes and drafts are kept by default; replacements require explicit eligible choices. Source pins and conflicting marks are kept. This is an additive restore, not account sync or an atomic cross-tab transaction.", "muted"), preview);
     view.append(section, link("Saved passages and individual exports", "#saved", "button"), link("Reading plans and individual exports", "#plans", "button"));
     let generation = 0;
     const active = (request2) => token === epoch && request2 === generation && section.isConnected;
@@ -2744,9 +2822,105 @@
         if (!active(request2)) return;
         if (personalState() !== state) throw Error("Personal study data changed while preparing this preview. Choose the file again. Nothing was restored.");
         const merged = mergeStudyBackup({ saved: local.saved, progress: local.reading_progress, drafts: noteDrafts }, incoming, catalog);
+        const noteRows = reviewBackupNoteConflicts(local.saved, incoming.saved, noteDrafts), choices = /* @__PURE__ */ new Set();
+        let applying = false, applied = false, lockReview = () => {
+        };
         const title = el("h3", "Review study backup");
         title.tabIndex = -1;
-        preview.replaceChildren(title, el("p", "Local file: " + filename, "muted"), el("p", `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} conflicts kept`), el("p", `Plan marks: ${merged.progressAdded} new \xB7 ${merged.progressDuplicates} duplicates \xB7 ${merged.progressConflicts} conflicts kept`), el("p", "Existing notes, drafts and source pins win on a duplicate reference. Existing plan marks win on a conflicting day. Review conflicts manually; no source identity is upgraded.", "muted"));
+        preview.replaceChildren(title, el("p", "Local file: " + filename, "muted"), el("p", `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} conflicts kept`), el("p", `Plan marks: ${merged.progressAdded} new \xB7 ${merged.progressDuplicates} duplicates \xB7 ${merged.progressConflicts} conflicts kept`), el("p", "Existing notes and drafts are kept unless you explicitly select an eligible incoming note below. Source pins, titles and existing conflicting plan marks are always kept; no source identity is upgraded.", "muted"));
+        const savedCount = preview.children[2];
+        if (noteRows.length) {
+          let validReview = function() {
+            return active(request2) && review.isConnected && !applying && !applied;
+          }, draw = function(moveFocus = false) {
+            if (!active(request2) || !review.isConnected) return;
+            selection.textContent = choices.size + " incoming notes selected";
+            clear.disabled = applied || applying || !choices.size;
+            savedCount.textContent = choices.size ? `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} original conflicts \xB7 ${choices.size} incoming notes selected; all other metadata kept` : `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} conflicts kept`;
+            const start = page * 10, end = Math.min(noteRows.length, start + 10);
+            count2.textContent = `Showing note differences ${start + 1}\u2013${end} of ${noteRows.length}`;
+            rows.replaceChildren();
+            for (const row of noteRows.slice(start, end)) {
+              const current = local.saved.find((item) => identity2(item) === row.key), incomingRecord = incoming.saved.find((item) => identity2(item) === row.key), card = el("article", void 0, "backup-note-difference");
+              card.setAttribute("aria-label", "Note difference " + row.uid + " \xB7 " + row.ref);
+              card.append(el("h5", row.uid + " \xB7 " + row.ref), el("p", "Current reference: " + metadata(current), "muted"), el("p", "Incoming reference: " + metadata(incomingRecord), "muted"), el("p", row.eligible ? "Same source revision and position. Only the note text may be replaced." : "Read-only difference: " + row.reason, row.eligible ? "muted" : "notice"));
+              const columns = el("div", void 0, "backup-note-columns");
+              for (const [name, text5] of [["Note before restore (including draft)", row.currentNote], ["Incoming personal note", row.incomingNote]]) {
+                const label2 = el("label", name + " \xB7 " + row.uid + " \xB7 " + row.ref), field = el("textarea");
+                field.readOnly = true;
+                field.value = text5;
+                label2.append(field);
+                columns.append(label2);
+              }
+              card.append(columns);
+              if (row.eligible) {
+                const label2 = el("label", void 0, "backup-note-choice"), choose = el("input");
+                choose.type = "checkbox";
+                choose.checked = choices.has(row.key);
+                choose.disabled = applied || applying;
+                label2.append(choose, document.createTextNode("Use incoming note for " + row.uid + " \xB7 " + row.ref));
+                choose.addEventListener("change", () => {
+                  if (!validReview()) {
+                    choose.checked = choices.has(row.key);
+                    return;
+                  }
+                  if (choose.checked) choices.add(row.key);
+                  else choices.delete(row.key);
+                  selection.textContent = choices.size + " incoming notes selected";
+                  clear.disabled = !choices.size;
+                  savedCount.textContent = choices.size ? `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} original conflicts \xB7 ${choices.size} incoming notes selected; all other metadata kept` : `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} conflicts kept`;
+                });
+                card.append(label2);
+                if (row.incomingNote === "") card.append(el("p", "The incoming note is empty. Selecting it will clear the current note, including its unsaved draft, only after the restore is saved.", "notice"));
+              }
+              rows.append(card);
+            }
+            const pager = el("nav", void 0, "pager");
+            pager.setAttribute("aria-label", "Note difference pages");
+            if (page > 0) {
+              const previous = button("Previous note differences", () => {
+                if (!validReview()) return;
+                --page;
+                draw(true);
+              });
+              previous.disabled = applied || applying;
+              pager.append(previous);
+            }
+            if (end < noteRows.length) {
+              const next = button("Next note differences", () => {
+                if (!validReview()) return;
+                ++page;
+                draw(true);
+              });
+              next.disabled = applied || applying;
+              pager.append(next);
+            }
+            rows.append(pager);
+            if (moveFocus) count2.focus({ preventScroll: true });
+          };
+          const review = el("section", void 0, "backup-note-review");
+          review.setAttribute("aria-label", "Review personal note differences");
+          const count2 = el("p"), rows = el("div"), selection = el("p");
+          count2.setAttribute("role", "status");
+          count2.tabIndex = -1;
+          selection.setAttribute("role", "status");
+          const clear = button("Clear incoming note choices", () => {
+            if (!validReview()) return;
+            choices.clear();
+            draw();
+          });
+          review.append(el("h4", "Personal note differences \xB7 not scripture"), el("p", "Current notes include unsaved edits in this tab. Only matching, source-pinned positions allow replacement. Selecting an empty incoming note clears the old note and its draft after a confirmed save. Download your current backup first if you want to keep both versions.", "notice"), button("Download current study backup", downloadStudyBackup), selection, clear, count2, rows);
+          preview.append(review);
+          let page = 0;
+          const identity2 = (item) => noteKey(item);
+          const metadata = (item) => `${item.uid} \xB7 ${item.ref} \xB7 source revision: ${item.source_commit ?? "unpinned legacy"} \xB7 source offset: ${item.offset ?? "not recorded"}`;
+          draw();
+          lockReview = () => {
+            selection.textContent = choices.size + " incoming notes applied";
+            if (choices.size) savedCount.textContent = `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} original conflicts \xB7 ${choices.size} incoming notes applied; reference metadata kept`;
+            for (const control of review.querySelectorAll("input, button")) if (control.textContent !== "Download current study backup") control.disabled = true;
+          };
+        }
         const resumeLabel = el("label", void 0, "backup-resume"), resume = el("input");
         resume.type = "checkbox";
         resume.checked = false;
@@ -2758,7 +2932,6 @@
           preview.append(link("Open incoming reading position", incoming.resume), el("p", "Opening is your choice. Source-pinned positions are checked by the reader before displaying wording. Restoring does not open a passage.", "muted"));
           if (!new URLSearchParams(incoming.resume.slice(6)).has("source")) preview.append(el("p", "Legacy reading position: its source revision was not recorded. It stays unpinned and is not upgraded.", "notice"));
         }
-        let applying = false, applied = false;
         const apply = button("Apply study backup", () => {
           if (!active(request2) || applying || applied) return;
           try {
@@ -2767,11 +2940,12 @@
             if (currentRaw !== raw && !readingPointerOnlyChange(raw, currentRaw)) throw Error("Browser data changed since preview. Nothing was restored.");
             if (resume.checked && (currentRaw !== raw || Object.hasOwn(local, "last") !== localLastPresent || local.last !== localLast)) throw Error("The reading position changed since preview. Preview the file again before restoring its position.");
             if (resume.checked && (local.remember_position === false || !incoming.resume)) throw Error("Restoring the reading position is no longer available.");
+            const finalMerged = mergeStudyBackup({ saved: local.saved, progress: local.reading_progress, drafts: noteDrafts }, incoming, catalog, [...choices]);
             const beforeSaved = local.saved, beforeProgress = local.reading_progress, beforeLastPresent = Object.hasOwn(local, "last"), beforeLast = local.last, beforeStorageSnapshot = storageSnapshot;
             applying = true;
             apply.disabled = true;
-            local.saved = merged.saved;
-            local.reading_progress = merged.progress;
+            local.saved = finalMerged.saved;
+            local.reading_progress = finalMerged.progress;
             if (resume.checked) {
               local.last = incoming.resume;
               storageSnapshot = currentRaw;
@@ -2785,12 +2959,14 @@
               updateResume();
               throw Error("The study backup was not confirmed saved. This tab\u2019s original study data and drafts remain available. Keep the file and export your data before reloading. " + storageWarning());
             }
+            for (const key4 of finalMerged.replacedNoteKeys) noteDrafts.delete(key4);
             applied = true;
             resume.disabled = true;
+            lockReview();
             updateResume();
             const done = el("h3", "Study backup restored in this browser");
             done.tabIndex = -1;
-            preview.append(done, el("p", "Existing personal data and preferences were kept. No passage was opened."));
+            preview.append(done, el("p", finalMerged.notesReplaced ? `${finalMerged.notesReplaced} selected incoming personal notes replaced their current text and drafts. Existing reference metadata, other notes, conflicting marks and preferences were kept. No passage was opened.` : "Existing personal data and preferences were kept. No passage was opened."));
             done.focus();
           } catch (error) {
             preview.append(el("p", error.message, "notice"));

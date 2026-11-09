@@ -1,0 +1,103 @@
+{
+  "decision": "D224",
+  "baseline_commit": "d32876720709e34c9b04d64b57ce98f178991c93",
+  "feature": "explicit local same-source study-backup note conflict review",
+  "source_dataset_changed": false,
+  "personal_or_transfer_format_changed": false,
+  "default_import_changed": false,
+  "local_validation": {
+    "browser-normal": {
+      "passed": 39,
+      "engine": {
+        "actual": "chromium",
+        "version": "155.0.8059.79"
+      },
+      "outside_source_tree": false,
+      "a11y_scans": 0,
+      "a11y_violations": 0
+    },
+    "browser-a11y": {
+      "passed": 75,
+      "engine": {
+        "actual": "chromium",
+        "version": "155.0.8059.79"
+      },
+      "outside_source_tree": false,
+      "a11y_scans": 57,
+      "a11y_violations": 0
+    },
+    "browser-installed": {
+      "passed": 39,
+      "engine": {
+        "actual": "chromium",
+        "version": "155.0.8059.79"
+      },
+      "outside_source_tree": true,
+      "a11y_scans": 0,
+      "a11y_violations": 0
+    },
+    "compat-normal": {
+      "passed": 56,
+      "engine": {
+        "requested": "chromium",
+        "playwright": "1.62.0",
+        "actual": "chromium",
+        "version": "155.0.8059.79",
+        "executable": "/usr/bin/chromium",
+        "executable_kind": "explicit/system",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36"
+      },
+      "outside_source_tree": false,
+      "a11y_scans": 0,
+      "a11y_violations": 0
+    },
+    "backup-normal": {
+      "passed": 79,
+      "engine": null,
+      "outside_source_tree": false,
+      "a11y_scans": 0,
+      "a11y_violations": 0
+    },
+    "compact-normal": {
+      "passed": 45,
+      "engine": null,
+      "outside_source_tree": false,
+      "a11y_scans": 0,
+      "a11y_violations": 0
+    }
+  },
+  "full_check": {
+    "tests": 1208,
+    "passed": 1206,
+    "failed": 0,
+    "existing_optional_skips": 2,
+    "audit_texts": 8544,
+    "audit_failures": 0
+  },
+  "focused_policy_tests": 21,
+  "docs_and_ci_artifact_tests": 21,
+  "smoke": {
+    "tools": 34,
+    "checks": 64
+  },
+  "offline_evals": {
+    "passed": 195,
+    "live_skipped": 6
+  },
+  "package_parity_files": 33,
+  "review": {
+    "policy_and_ui": "accepted",
+    "harness": "accepted after explicit old catalogue response-body completion barrier",
+    "cancel_fixture": "exact empty DOM assertion retained instead of inaccessible empty section role"
+  },
+  "ci": "Final exact integrated-head full, installed and cross-engine checks required separately.",
+  "limits": [
+    "Matching saved metadata is not fresh source verification.",
+    "No persistent undo: download current backup before replacing old notes.",
+    "Optimistic storage guard is not atomic multi-tab synchronization.",
+    "Automated engines/scans do not certify physical devices, native glyph shaping or human screen-reader use.",
+    "Source coverage unchanged; Patthana raw artifact remains unavailable."
+  ],
+  "main_merge": false,
+  "deployment": false
+}

@@ -412,6 +412,41 @@ try:
             passed('real local file can be selected again after Cancel; keyboard additive restore preserves exact data and sends only constant reading_plan({})')
             context.close()
 
+            # Explicit duplicate-note choices are local and preserve exact saved metadata.
+            original_note = {**canonical['mark'], 'note': PRIVATE + 'existing duplicate note'}
+            incoming_note = {**original_note, 'title': PRIVATE + 'incoming title must stay unused',
+                             'note': PRIVATE + 'incoming ā\u0301\r\n😀 <script>window.compatInjected=true</script>'}
+            context, page, state = environment([original_note], progress[:1])
+            page.goto(base + '/#backup')
+            expect(page.get_by_role('heading', name='Study backup', exact=True)).to_be_visible()
+            original_profile = copy.deepcopy(profile(page)); before_calls = len(state['calls'])
+            note_file = compact({'format': 'pali-library-study-backup-v1', 'saved': [incoming_note], 'progress': [], 'resume': None}).encode()
+            def duplicate_note_preview():
+                field = page.get_by_label('Restore study backup from JSON', exact=True)
+                field.set_input_files({'name': PRIVATE + 'duplicate-note.json', 'mimeType': 'application/json', 'buffer': note_file})
+                expect(field).to_have_value('')
+                expect(page.get_by_role('heading', name='Review study backup', exact=True)).to_be_visible()
+                choice = page.get_by_label('Use incoming note for ' + original_note['uid'] + ' · ' + original_note['ref'], exact=True)
+                expect(choice).not_to_be_checked()
+                expect(page.get_by_label('Incoming personal note · ' + original_note['uid'] + ' · ' + original_note['ref'], exact=True)).to_have_value(incoming_note['note'].replace('\r\n', '\n'))
+                return choice
+            duplicate_note_preview()
+            page.get_by_role('button', name='Apply study backup', exact=True).click()
+            expect(page.get_by_role('heading', name='Study backup restored in this browser', exact=True)).to_be_visible()
+            assert profile(page) == original_profile
+            choice = duplicate_note_preview(); raw_before = page.evaluate('localStorage.getItem("pali-library-v1")')
+            choice.focus(); page.keyboard.press('Space'); expect(choice).to_be_checked()
+            assert page.evaluate('localStorage.getItem("pali-library-v1")') == raw_before
+            audit(page, state, 'explicit source-pinned personal-note choice remains local and unchecked by default')
+            page.get_by_role('button', name='Apply study backup', exact=True).focus(); page.keyboard.press('Enter')
+            expect(page.get_by_role('heading', name='Study backup restored in this browser', exact=True)).to_be_visible()
+            expected_note = {**original_note, 'note': incoming_note['note']}
+            assert profile(page) == {**original_profile, 'saved': [expected_note]}
+            assert profile(page)['saved'][0]['note'].encode() == incoming_note['note'].encode() and len(state['calls']) == before_calls
+            privacy(page, state)
+            passed('duplicate personal-note restore keeps current by default; an explicit keyboard choice replaces only raw note text while pins/title/marks/private state stay and no MCP request occurs')
+            context.close()
+
             # The narrow legacy-progress fix is exercised in each real engine.
             context, page, state = environment(saved=[canonical['mark']], marks=progress[:1], last='mn10')
             page.goto(base + '/#plans')
