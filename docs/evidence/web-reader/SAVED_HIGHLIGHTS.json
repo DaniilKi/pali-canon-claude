@@ -1,0 +1,85 @@
+{
+  "decision": "D222",
+  "baseline_commit": "9c289995ff39115b1f609a7200b98f6633ba3727",
+  "feature": "optional source-aware personal saved-passage highlighting",
+  "baseline_reproduction": {
+    "baseline": "9c289995ff39115b1f609a7200b98f6633ba3727",
+    "fixture": "synthetic stale bookmark on actual bundled Dhp 183",
+    "ref": "dhp183/1",
+    "current_source": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "marked_count": 1,
+    "background": "rgb(238, 238, 228)",
+    "stale_note_refused": true
+  },
+  "source_dataset_changed": false,
+  "saved_reference_or_transfer_format_changed": false,
+  "optional_profile_preference_added": {
+    "name": "highlight_saved",
+    "default": true
+  },
+  "policy": {
+    "requires": [
+      "one valid reference",
+      "exact selector",
+      "exact paragraph ref",
+      "exact source revision",
+      "exact offset"
+    ],
+    "excludes": [
+      "legacy unpinned",
+      "stale source",
+      "wrong offset",
+      "duplicate identity",
+      "malformed metadata"
+    ],
+    "changes_source_text": false,
+    "persists_source_body": false
+  },
+  "local_validation": {
+    "new_policy_tests": 6,
+    "new_and_existing_note_policy_tests": 17,
+    "expanded_compatibility_chromium_normal": 48,
+    "docs_and_artifact_tests": 21,
+    "smoke": {
+      "tools": 34,
+      "checks": 64
+    },
+    "offline_evals": {
+      "passed": 195,
+      "live_skipped": 6
+    },
+    "full_check": {
+      "tests": 1190,
+      "passed": 1188,
+      "failed": 0,
+      "existing_optional_skips": 2,
+      "audit_texts": 8544,
+      "audit_failures": 0
+    },
+    "highlights_normal": 45,
+    "highlights_installed": 45,
+    "highlights_a11y": {
+      "checks": 89,
+      "scans": 40,
+      "violations": 0
+    },
+    "package_tree_and_readme_privacy_match": true
+  },
+  "review": {
+    "independent_helper_and_frontend_review": "accepted",
+    "outstanding_material_findings": 0,
+    "test_strengthening": [
+      "Compare printed source strings without whitespace normalization.",
+      "Exercise forced-color inset outline once with unchanged geometry."
+    ]
+  },
+  "ci": "Final integrated-head checks required separately.",
+  "limits": [
+    "Whole saved passages, not arbitrary word ranges.",
+    "Local preference is not exported in personal transfer formats.",
+    "Automated checks do not certify physical devices, native glyph shaping or human accessibility.",
+    "No source expansion; Paṭṭhāna raw evidence remains unavailable."
+  ],
+  "main_merge": false,
+  "deployment": false
+}

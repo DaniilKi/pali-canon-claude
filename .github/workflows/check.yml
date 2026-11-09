@@ -78,7 +78,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup]
+        group: [core, study, personal, provenance, comparison, notes, backup, highlights]
     runs-on: ubuntu-latest
     timeout-minutes: ${{ matrix.group == 'backup' && 20 || 10 }}
     steps:
@@ -208,6 +208,19 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/backup-package"
           tar -xzf "$RUNNER_TEMP/backup-package/"*.tgz -C "$RUNNER_TEMP/backup-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-backup-check.py --server-dir "$RUNNER_TEMP/backup-package/package/server" --report installed-backup.report.json
+      - name: Check source-pinned saved-passage highlights and live preference safety
+        if: matrix.group == 'highlights'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-highlights-check.py --report standalone-highlights.report.json
+      - name: Audit saved-passage highlights in both themes
+        if: matrix.group == 'highlights'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-highlights-check.py --a11y --report standalone-highlights-a11y.report.json
+      - name: Check installed source-aware highlights outside the source tree
+        if: matrix.group == 'highlights'
+        run: |
+          mkdir -p "$RUNNER_TEMP/highlights-package"
+          npm pack --pack-destination "$RUNNER_TEMP/highlights-package"
+          tar -xzf "$RUNNER_TEMP/highlights-package/"*.tgz -C "$RUNNER_TEMP/highlights-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-highlights-check.py --server-dir "$RUNNER_TEMP/highlights-package/package/server" --report installed-highlights.report.json
       - name: Check local reading-progress restore and source-signature preservation
         if: matrix.group == 'personal'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-progress-check.py --report standalone-progress.report.json
@@ -276,6 +289,9 @@ jobs:
             standalone-notes.report.json
             standalone-notes-a11y.report.json
             installed-notes.report.json
+            standalone-highlights.report.json
+            standalone-highlights-a11y.report.json
+            installed-highlights.report.json
             standalone-comparison.report.json
             standalone-comparison-a11y.report.json
             installed-comparison.report.json

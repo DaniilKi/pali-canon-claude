@@ -6,6 +6,9 @@ test('every browser-group JSON report is retained as a CI artifact',()=>{
  const source=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  assert.ok(group,'browser matrix exists');
+ const selected=group.match(/group:\s*\[([^\]]+)\]/)?.[1].split(',').map(x=>x.trim());
+ assert.ok(selected?.includes('highlights'),'source-aware highlight acceptance is selected');
+ for(const condition of group.matchAll(/matrix\.group == '([^']+)'/g))assert.ok(selected.includes(condition[1]),`browser group ${condition[1]} has steps but is never selected`);
  const produced=new Set([...group.matchAll(/--report\s+([\w.-]+\.report\.json)/g)].map(x=>x[1]));
  for(const x of group.matchAll(/>\s+([\w.-]+\.report\.json)/g))produced.add(x[1]);
  const paths=group.split('          path: |')[1]?.split('          if-no-files-found:')[0];
