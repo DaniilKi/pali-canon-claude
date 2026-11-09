@@ -1,0 +1,64 @@
+{
+  "decision": "D223",
+  "baseline_commit": "7e2f18da64ebe0a5aae89d56b46f9b4d0fec4dbd",
+  "feature": "revision-pinned source pages and bounded source-position jumps",
+  "baseline_reproduction": {
+    "baseline": "7e2f18da64ebe0a5aae89d56b46f9b4d0fec4dbd",
+    "fixture": "actual MN10 next page with ONLY synthetic changed revision metadata; Pali wording unchanged",
+    "initial_source": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "initial_ref": "mn10/2",
+    "initial_offset": 1,
+    "next_href": "#read?uid=mn10&offset=31",
+    "next_has_source_guard": false,
+    "changed_revision_displayed_without_review": true,
+    "next_source_field_changed": "commit"
+  },
+  "source_dataset_changed": false,
+  "personal_or_transfer_format_changed": false,
+  "new_transient_url_parameter": "page_source",
+  "bookmark_source_ref_grammar_weakened": false,
+  "local_validation": {
+    "new_policy_tests": 8,
+    "new_and_existing_locator_policy_tests": 15,
+    "pre_final_router_hardening_full_check": {
+      "tests": 1198,
+      "passed": 1196,
+      "failed": 0,
+      "existing_optional_skips": 2,
+      "audit_texts": 8544,
+      "audit_failures": 0
+    },
+    "final_parser_build_navigation_normal": 33,
+    "final_parser_build_compatibility_normal": 52,
+    "pre_final_parser_diagnostics_not_final_acceptance": {
+      "navigation_a11y": 65,
+      "scans": 56,
+      "violations": 0,
+      "installed": 33
+    },
+    "docs_and_artifact_tests": 21,
+    "smoke": {
+      "tools": 34,
+      "checks": 64
+    },
+    "offline_evals": {
+      "passed": 195,
+      "live_skipped": 6
+    }
+  },
+  "review": {
+    "independent_helper_and_ui_review": "accepted",
+    "harness_review": "accepted after forcing each corrupt fixture to execute its own request",
+    "last_router_repair": "Keep full query after first question mark so malformed pin suffix reaches validation."
+  },
+  "ci": "Final exact integrated-head full suite, packaged and engine checks required separately.",
+  "limits": [
+    "Source positions are not traditional citation numbers.",
+    "Offsets remain capped at 100000; unsupported navigation metadata is not guessed.",
+    "Page-only links cannot be personal resume locators; actual returned paragraphs generate exact source/ref pins.",
+    "Automated checks do not certify physical devices, native shaping or human accessibility.",
+    "No new source coverage; Paṭṭhāna raw evidence still unavailable."
+  ],
+  "main_merge": false,
+  "deployment": false
+}

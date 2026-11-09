@@ -9,8 +9,13 @@ export function sourceRevision(data) {
  if((mapped||value!==undefined)&&!source(value))throw Error('The source has invalid reading-position revision metadata.');
  return value;
 }
+/** Shared source selection grammar for paragraph locators and transient page routes. */
+export function assertReadingContext(context) {
+ if(!context||Object.keys(context).some(k=>!['uid','book','kind','plan','day'].includes(k))||Boolean(context.uid)===Boolean(context.book)||!string(context.uid||context.book,300)||/https?:|javascript:|data:/i.test(context.uid||context.book)||context.kind!==undefined&&!['post','commentary'].includes(context.kind)||context.book&&context.kind||context.plan!==undefined&&(!context.uid||context.kind||!/^[a-z0-9-]{1,60}$/.test(context.plan)||!Number.isSafeInteger(context.day)||context.day<1||context.day>400)||context.day!==undefined&&context.plan===undefined)throw Error('This reading position has unsupported source or reference metadata.');
+}
 export function readingPosition(context, offset, ref, revision) {
- if(!context||!integer(offset)||!string(ref,400)||!source(revision)||Object.keys(context).some(k=>!['uid','book','kind','plan','day'].includes(k))||Boolean(context.uid)===Boolean(context.book)||!string(context.uid||context.book,300)||/https?:|javascript:|data:/i.test(context.uid||context.book)||context.kind!==undefined&&!['post','commentary'].includes(context.kind)||context.book&&context.kind||context.plan!==undefined&&(!context.uid||context.kind||!/^[a-z0-9-]{1,60}$/.test(context.plan)||!Number.isSafeInteger(context.day)||context.day<1||context.day>400)||context.day!==undefined&&context.plan===undefined)throw Error('This reading position has unsupported source or reference metadata.');
+ assertReadingContext(context);
+ if(!integer(offset)||!string(ref,400)||!source(revision))throw Error('This reading position has unsupported source or reference metadata.');
  return '#read?'+new URLSearchParams({...context,offset,ref,source:revision});
 }
 export function assertPositionPin(args,data) {

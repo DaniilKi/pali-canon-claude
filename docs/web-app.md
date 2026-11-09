@@ -40,6 +40,8 @@ The npm package and container include `server/web/`. The HTML, stylesheet and br
 - Stop waiting for a pending reading or study request, then retry explicitly. Changing pages or study panels cancels obsolete browser waits. This does not guarantee that the server stops its work.
 - Resume the last visible Pāli passage with its exact reference, offset and source version. Copy a source-pinned reading link, or copy/open a passage reference directly. Turn off **Remember reading position on this device** to clear the pointer and stop recording it. Use browser back/forward and keyboard navigation.
 
+Source-reading pages also offer revision-pinned Next/Previous and **Go to source position**, bounded by the actual work or current plan assignment. Positions are not traditional citation numbers; exact saved-paragraph links keep their separate reference pins. See [navigation scope and validation](evidence/web-reader/SOURCE_NAVIGATION.md).
+
 ## Storage and source boundaries
 
 Personal preferences, the last reading link and up to 500 saved references/notes remain in this browser's local storage. Scripture and English bodies are not downloaded into an offline web library. Data is not synced between devices, and clearing browser storage removes it. JSON export is a backup; previewed local bookmark restore is supported, while account sync is not implemented. Storage failures are reported without preventing reading. Source revisions are retained on bookmarks. Versioned bookmarks check the recorded revision before displaying wording; a changed revision requires explicit current-source review. A bookmark is not a frozen scripture copy.

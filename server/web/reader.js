@@ -9,9 +9,13 @@
     if ((mapped || value !== void 0) && !source(value)) throw Error("The source has invalid reading-position revision metadata.");
     return value;
   }
-  function readingPosition(context, offset, ref, revision2) {
-    if (!context || !integer(offset) || !string(ref, 400) || !source(revision2) || Object.keys(context).some((k) => !["uid", "book", "kind", "plan", "day"].includes(k)) || Boolean(context.uid) === Boolean(context.book) || !string(context.uid || context.book, 300) || /https?:|javascript:|data:/i.test(context.uid || context.book) || context.kind !== void 0 && !["post", "commentary"].includes(context.kind) || context.book && context.kind || context.plan !== void 0 && (!context.uid || context.kind || !/^[a-z0-9-]{1,60}$/.test(context.plan) || !Number.isSafeInteger(context.day) || context.day < 1 || context.day > 400) || context.day !== void 0 && context.plan === void 0) throw Error("This reading position has unsupported source or reference metadata.");
-    return "#read?" + new URLSearchParams({ ...context, offset, ref, source: revision2 });
+  function assertReadingContext(context) {
+    if (!context || Object.keys(context).some((k) => !["uid", "book", "kind", "plan", "day"].includes(k)) || Boolean(context.uid) === Boolean(context.book) || !string(context.uid || context.book, 300) || /https?:|javascript:|data:/i.test(context.uid || context.book) || context.kind !== void 0 && !["post", "commentary"].includes(context.kind) || context.book && context.kind || context.plan !== void 0 && (!context.uid || context.kind || !/^[a-z0-9-]{1,60}$/.test(context.plan) || !Number.isSafeInteger(context.day) || context.day < 1 || context.day > 400) || context.day !== void 0 && context.plan === void 0) throw Error("This reading position has unsupported source or reference metadata.");
+  }
+  function readingPosition(context, offset, ref, revision3) {
+    assertReadingContext(context);
+    if (!integer(offset) || !string(ref, 400) || !source(revision3)) throw Error("This reading position has unsupported source or reference metadata.");
+    return "#read?" + new URLSearchParams({ ...context, offset, ref, source: revision3 });
   }
   function assertPositionPin(args, data) {
     if (!args.has("source")) return;
@@ -812,12 +816,12 @@
       throw Error("The quotation result is incomplete or does not match this P\u0101li request. No verdict or substitute source was displayed.");
     };
     const text5 = (x) => typeof x === "string" && x.length > 0;
-    const integer4 = (x) => Number.isSafeInteger(x) && x >= 0;
+    const integer5 = (x) => Number.isSafeInteger(x) && x >= 0;
     if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text5(data.explanation) || !text5(data.guidance) || data.scope?.language !== "pali" || !text5(data.scope.searched) || !text5(data.scope.attribution) || !text5(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text5(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text5(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail3();
     if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text5(data.citation_note))) fail3();
     for (const m of data.matches) {
       const command2 = m.read_with, span = m.source_span;
-      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text5(m.citation) || !text5(m.matched_text) || !text5(m.edition) || !text5(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command2?.tool !== "get_text" || command2.uid !== m.text_id || !integer4(command2.offset) || !integer4(command2.limit) || command2.limit < 1 || command2.limit > 200 || span?.offset !== command2.offset || span.first_segment_ref !== m.segment_ref || !integer4(span.end_offset) || span.end_offset <= span.offset || !text5(span.last_segment_ref)) fail3();
+      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text5(m.citation) || !text5(m.matched_text) || !text5(m.edition) || !text5(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command2?.tool !== "get_text" || command2.uid !== m.text_id || !integer5(command2.offset) || !integer5(command2.limit) || command2.limit < 1 || command2.limit > 200 || span?.offset !== command2.offset || span.first_segment_ref !== m.segment_ref || !integer5(span.end_offset) || span.end_offset <= span.offset || !text5(span.last_segment_ref)) fail3();
     }
     if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail3();
     return data;
@@ -1275,6 +1279,63 @@
   function restorePassageNoteTransaction(transaction) {
     if (!object5(transaction?.before) || !Array.isArray(transaction.before.saved) || !(transaction.before.drafts instanceof Map)) throw Error("No personal-note transaction snapshot is available.");
     return clone2(transaction.before);
+  }
+
+  // web/reading-navigation.mjs
+  var integer4 = (value, min, max) => Number.isSafeInteger(value) && value >= min && value <= max;
+  var pageKeys = /* @__PURE__ */ new Set(["uid", "book", "kind", "plan", "day", "offset", "page_source"]);
+  function revision2(value) {
+    if (typeof value !== "string" || sourceRevision({ source: { commit: value } }) !== value) throw Error("This page has no valid source revision.");
+    return value;
+  }
+  var invalid = () => {
+    throw Error("This source page has incomplete or unsupported navigation metadata. No passage was substituted.");
+  };
+  function readingPagePosition(context, offset, source2) {
+    assertReadingContext(context);
+    if (!integer4(offset, 0, 1e5)) invalid();
+    revision2(source2);
+    return "#read?" + new URLSearchParams({ ...context, offset, page_source: source2 });
+  }
+  function assertPageRequest(args) {
+    if (!args.has("page_source")) return;
+    const keys2 = [...args.keys()];
+    if (keys2.some((key3) => !pageKeys.has(key3)) || new Set(keys2).size !== keys2.length || args.getAll("page_source").length !== 1 || args.getAll("offset").length !== 1 || !/^(0|[1-9][0-9]*)$/.test(args.get("offset") || "") || !integer4(Number(args.get("offset")), 0, 1e5)) invalid();
+    revision2(args.get("page_source"));
+    const context = Object.fromEntries(["uid", "book", "kind", "plan"].filter((key3) => args.has(key3)).map((key3) => [key3, args.get(key3)]));
+    if (args.has("day")) {
+      if (!/^[1-9][0-9]*$/.test(args.get("day") || "")) invalid();
+      context.day = Number(args.get("day"));
+    }
+    assertReadingContext(context);
+  }
+  function assertPagePin(args, data) {
+    if (!args.has("page_source")) return;
+    assertPageRequest(args);
+    if (sourceRevision(data) !== args.get("page_source")) {
+      const error = Error("The source or citation mapping revision changed since this page link was opened. Review the current source explicitly before continuing; no replacement wording was displayed.");
+      error.code = "READING_SOURCE_CHANGED";
+      throw error;
+    }
+    readingPageBounds(data);
+    if (data.offset !== Number(args.get("offset"))) invalid();
+  }
+  function readingPageBounds(data, window2 = null) {
+    if (!data || !integer4(data.total_segments, 1, 100001) || !integer4(data.offset, 0, 1e5) || !integer4(data.returned, 1, 100001) || data.offset + data.returned > data.total_segments || !Array.isArray(data.segments) || data.segments.length !== data.returned || data.next_offset !== (data.offset + data.returned < data.total_segments ? data.offset + data.returned : null)) invalid();
+    let start = 0, end = data.total_segments;
+    if (window2 !== null) {
+      if (!window2 || !integer4(window2.start, 0, 1e5) || !(window2.end === null || integer4(window2.end, 1, 100001)) || !integer4(window2.offset, 0, 1e5) || !integer4(window2.limit, 1, 1e5) || window2.offset !== data.offset || data.returned > window2.limit) invalid();
+      start = window2.start;
+      end = window2.end === null ? data.total_segments : window2.end;
+    }
+    if (start >= end || end > data.total_segments || data.offset < start || data.offset + data.returned > end) invalid();
+    return { start, end, current: data.offset };
+  }
+  function readingJumpOffset(text5, data, window2 = null) {
+    if (typeof text5 !== "string" || !/^[1-9][0-9]*$/.test(text5)) throw Error("Enter a source position using whole decimal digits only.");
+    const position2 = Number(text5), bounds = readingPageBounds(data, window2);
+    if (!integer4(position2, 1, 100001) || position2 - 1 < bounds.start || position2 - 1 >= bounds.end) throw Error("That source position is outside the current reading bounds.");
+    return position2 - 1;
   }
 
   // web/saved-highlights.mjs
@@ -2000,6 +2061,7 @@
     show();
   }
   async function read(args, token) {
+    assertPageRequest(args);
     const book = args.get("book"), uid2 = args.get("uid") || "dhp183";
     let offset = offsetOf(args), plan = null, window2 = null;
     if (args.has("plan")) {
@@ -2016,6 +2078,7 @@
     if (token !== epoch) return;
     if (!Array.isArray(data.segments)) throw new Error("Choose an individual book or passage to read.");
     assertPositionPin(args, data);
+    assertPagePin(args, data);
     if (args.has("ref") && !data.segments.some((segment) => segment.ref === args.get("ref"))) throw Error("The saved passage reference was not returned at this position. No nearby passage was substituted. Open the source from the Library or check the bookmark\u2019s revision.");
     if (plan) validatePlanPage(data, plan, uid2, window2);
     if (kind === "post" && data.canonical !== false || kind === "commentary" && !(data.canonical === false && data.content_type === "commentary") && !(typeof data.label === "string" && data.label.startsWith("Commentary") && data.label.includes("not the canon"))) throw new Error("This response lacks the expected non-canonical source label.");
@@ -2059,6 +2122,49 @@
     } else toolbar.append(copy, copyFallback);
     view.append(toolbar);
     responsivePanels();
+    const positionContext = { ...readingArgs(selector), ...plan ? { plan: plan.name, day: plan.day } : {} };
+    let navigation = null;
+    try {
+      const bounds = readingPageBounds(data, window2), revision3 = sourceRevision(data);
+      readingPagePosition(positionContext, bounds.current, revision3);
+      navigation = { bounds, revision: revision3 };
+      const form = el("form", void 0, "source-position"), label = el("label", "Go to source position"), input = el("input"), submit = el("button", "Go"), help = el("p", `Position in this work, not a citation number. Available positions ${bounds.start + 1}\u2013${bounds.end}.`, "muted"), error = el("p");
+      form.setAttribute("aria-label", "Source position navigation");
+      form.noValidate = true;
+      input.type = "text";
+      input.inputMode = "numeric";
+      input.maxLength = 32;
+      input.value = String(bounds.current + 1);
+      input.required = true;
+      const suffix = String(++serial);
+      help.id = "source-position-help-" + suffix;
+      error.id = "source-position-error-" + suffix;
+      error.setAttribute("role", "alert");
+      error.hidden = true;
+      input.setAttribute("aria-describedby", help.id + " " + error.id);
+      label.append(input);
+      submit.type = "submit";
+      form.append(label, submit, help, error);
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (token !== epoch || !form.isConnected) return;
+        try {
+          const jump = readingJumpOffset(input.value, data, window2), href = readingPagePosition(positionContext, jump, revision3);
+          error.hidden = true;
+          input.removeAttribute("aria-invalid");
+          if (location.hash === href) render();
+          else location.hash = href;
+        } catch (failure2) {
+          error.textContent = failure2.message;
+          error.hidden = false;
+          input.setAttribute("aria-invalid", "true");
+          input.focus({ preventScroll: true });
+        }
+      });
+      view.append(form);
+    } catch {
+      view.append(el("p", "Source-position navigation is unavailable because this page has incomplete or unsupported position/revision metadata. The loaded source remains below; no destination was guessed.", "notice"));
+    }
     const additions = el("section");
     additions.id = "study";
     additions.setAttribute("aria-live", "polite");
@@ -2066,7 +2172,6 @@
     const passages = el("section");
     passages.setAttribute("aria-label", "P\u0101li passage");
     const positions = [];
-    const positionContext = { ...readingArgs(selector), ...plan ? { plan: plan.name, day: plan.day } : {} };
     for (const segment of data.segments || []) {
       const part = el("article", void 0, "segment " + (segment.type === "heading" ? "heading" : ""));
       part.id = "seg-" + segment.ref.replace(/[^a-z0-9-]/gi, "-");
@@ -2104,14 +2209,21 @@
       passages.append(part);
       if (positionHref) positions.push({ node: part, heading: segment.type === "heading", href: positionHref });
     }
-    const next = plan && window2.end !== null ? offset + data.returned < window2.end ? offset + data.returned : null : data.next_offset;
     view.append(passages);
-    pageControls(next, offset > (window2?.start || 0) ? Math.max(window2?.start || 0, offset - 30) : null, (n) => route("read", { ...readingArgs(selector), offset: n, ...plan ? { plan: plan.name, day: plan.day } : {} }));
+    if (navigation) {
+      const { bounds, revision: revision3 } = navigation, next = data.next_offset !== null && data.next_offset < bounds.end ? data.next_offset : null;
+      pageControls(next, bounds.current > bounds.start ? Math.max(bounds.start, bounds.current - 30) : null, (n) => readingPagePosition(positionContext, n, revision3));
+    }
     provenance(data);
     activePosition = { token, links: positions };
     rememberPosition(positions.find((x) => args.get("ref") === new URLSearchParams(x.href.split("?")[1]).get("ref"))?.href || positions[0]?.href || location.hash);
     updateResume();
-    const savedVersion = local.saved.find((x) => x.uid === selector && x.source_commit && x.source_commit !== sourceRevision(data));
+    let savedRevision;
+    try {
+      savedRevision = sourceRevision(data);
+    } catch {
+    }
+    const savedVersion = savedRevision === void 0 ? null : local.saved.find((x) => x.uid === selector && x.source_commit && x.source_commit !== savedRevision);
     if (savedVersion) view.prepend(el("p", "This source revision differs from a saved bookmark. Check its reference before reusing your notes.", "notice"));
     const ref = args.get("ref");
     if (ref) document.getElementById("seg-" + ref.replace(/[^a-z0-9-]/gi, "-"))?.scrollIntoView({ block: "center" });
@@ -3251,7 +3363,7 @@
     updateResume();
     view.replaceChildren();
     status2.textContent = "Opening the library\u2026";
-    const [page, query = ""] = location.hash.slice(1).split("?"), args = new URLSearchParams(query);
+    const hash = location.hash.slice(1), queryIndex = hash.indexOf("?"), page = queryIndex < 0 ? hash : hash.slice(0, queryIndex), args = new URLSearchParams(queryIndex < 0 ? "" : hash.slice(queryIndex + 1));
     try {
       if (page === "read") await read(args, token);
       else if (page === "search") await search(args, token);
@@ -3278,7 +3390,8 @@
       if (error.code === "READING_SOURCE_CHANGED") {
         const review = new URLSearchParams(args);
         review.delete("source");
-        view.append(link("Review current source at this reference", "#read?" + review, "button"));
+        review.delete("page_source");
+        view.append(link(args.has("page_source") ? "Review current source at this position" : "Review current source at this reference", "#read?" + review, "button"));
       }
       status2.textContent = stopped2 ? "Stopped waiting in this browser." : error.code === "REQUEST_DEADLINE" ? "The request timed out." : "The request failed.";
     }
