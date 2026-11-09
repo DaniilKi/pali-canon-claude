@@ -12,6 +12,7 @@ import { topicCatalogue, topicDetail, listCatalogue, listDetail } from './topics
 import { createRequestPool } from './request-lifecycle.mjs';
 import { readingPosition, assertPositionPin, sourceRevision } from './reading-position.mjs';
 import { guardedStorageWrite, guardedPositionWrite, readingPointerOnlyChange } from './local-storage-write.mjs';
+import { ENGLISH_AVAILABILITY, englishBrowseCandidate, englishSelection, englishRoute, englishCatalogue, englishBadges } from './english-catalogue.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
@@ -146,11 +147,12 @@ function pageControls(next, previous, action) {
   view.append(p);
 }
 async function browse(args, token) {
+  if (englishBrowseCandidate(args)) return browseEnglish(args, token);
   const node = args.get('node') || 'canon', offset = offsetOf(args), limit = 40;
   const kind = node === 'commentary' ? 'commentary' : node === 'post' ? 'post' : 'canon';
   const data = kind === 'commentary' ? await tool('get_commentary', { uid: 'commentary', offset, limit }) : kind === 'post' ? await tool('get_post_canonical', { offset, limit }) : await tool('browse_canon', { node, offset, limit }); if (token !== epoch) return;
   heading('EXPLORE THE LIBRARY', kind === 'commentary' ? 'Traditional commentary' : kind === 'post' ? 'Later Pāli works' : data.name || 'The Pāli Canon');
-  const nav = el('div', undefined, 'toolbar'); nav.append(link('All collections', route('browse', { node: 'canon' }), 'button'), link('Complete source books', route('browse', { node: 'books' }), 'button')); if (node === 'canon') nav.append(link('Study by topic', '#topics', 'button'), link('Numbered teaching lists', '#lists', 'button')); view.append(nav);
+  const nav = el('div', undefined, 'toolbar'); nav.append(link('All collections', route('browse', { node: 'canon' }), 'button'), link('Complete source books', route('browse', { node: 'books' }), 'button'), link('Find English sources', '#browse?node=english', 'button')); if (node === 'canon') nav.append(link('Study by topic', '#topics', 'button'), link('Numbered teaching lists', '#lists', 'button')); view.append(nav);
   if (data.note) view.append(el('p', data.note, 'muted')); notes(data);
   const cards = el('div', undefined, 'cards');
   for (const item of data.items || data.books || []) {
@@ -162,6 +164,37 @@ async function browse(args, token) {
   }
   view.append(cards); pageControls(data.next_offset, offset ? Math.max(0, offset - limit) : null, n => route('browse', { node, offset: n }));
   if (kind !== 'canon') provenance(data);
+}
+async function browseEnglish(args, token) {
+  const selection = englishSelection(args);
+  const request = { node: 'english', availability: selection.availability, offset: selection.offset, limit: selection.limit, ...(selection.collection === null ? {} : { collection: selection.collection }) };
+  const response = await tool('browse_canon', request); if (token !== epoch) return;
+  const data = englishCatalogue(response, selection);
+  heading('EXPLORE THE LIBRARY', 'Find English sources');
+  const nav = el('nav', undefined, 'toolbar'); nav.setAttribute('aria-label', 'Library views');
+  nav.append(link('All collections', '#browse?node=canon', 'button'), link('Complete source books', '#browse?node=books', 'button')); view.append(nav);
+  const form = el('form', undefined, 'english-catalogue-filters'); form.setAttribute('aria-label', 'English source filters');
+  const availabilityLabel = el('label', 'English availability'), availability = el('select'); availability.id = 'english-availability'; availability.name = 'availability'; availabilityLabel.htmlFor = availability.id;
+  for (const [value, title] of Object.entries(ENGLISH_AVAILABILITY)) { const option = el('option', title); option.value = value; availability.append(option); } availability.value = selection.availability;
+  const collectionLabel = el('label', 'Collection'), collection = el('select'); collection.id = 'english-collection'; collection.name = 'collection'; collectionLabel.htmlFor = collection.id;
+  const all = el('option', 'All collections'); all.value = ''; collection.append(all);
+  for (const item of data.collections) { const option = el('option', item.name); option.value = item.id; collection.append(option); } collection.value = selection.collection || '';
+  const apply = el('button', 'Apply'); apply.type = 'submit';
+  form.append(availabilityLabel, availability, collectionLabel, collection, apply);
+  form.addEventListener('submit', event => { event.preventDefault(); if (token !== epoch) return; const href = englishRoute({ availability: availability.value, collection: collection.value || null }, 0); focusHeading(); if (location.hash === href) render(); else location.hash = href; });
+  view.append(form, el('p', data.total + ' matching indexed record' + (data.total === 1 ? '' : 's'), 'english-catalogue-count'), el('p', data.note, 'notice'), el('p', 'A link is not a guarantee of a complete individual English translation. Review the publisher reference and any scope before retrieving English.', 'muted'));
+  if (!data.total) view.append(el('p', 'No matching records in this index for these filters. This does not mean that no translation exists elsewhere.', 'notice'));
+  else if (selection.offset >= data.total) view.append(el('p', 'This page is beyond the matching records.'), link('Return to first matching page', englishRoute(selection, 0), 'button'));
+  else view.append(el('p', 'Showing ' + (selection.offset + 1) + '–' + (selection.offset + data.items.length) + ' of ' + data.total, 'muted'));
+  const cards = el('div', undefined, 'cards');
+  for (const item of data.items) {
+    const card = link('', route('read', { uid: item.id }), 'entry'); card.append(el('small', item.citation + ' · ' + item.collection), el('strong', item.title));
+    for (const badge of englishBadges(item)) card.append(el('p', badge, 'source-badge'));
+    if (item.source_context) card.append(el('p', 'Linked through ' + item.source_context.citation + ' · ' + item.source_context.title + '. The containing chapter or group link does not establish a separately aligned translation.', 'muted'));
+    cards.append(card);
+  }
+  view.append(cards);
+  pageControls(data.next_offset, selection.offset > 0 && selection.offset < data.total ? Math.max(0, selection.offset - selection.limit) : null, offset => englishRoute(selection, offset));
 }
 function offsetOf(args) { const n = Number(args.get('offset') || 0); return Number.isSafeInteger(n) && n >= 0 && n <= 100000 ? n : 0; }
 async function search(args, token) {

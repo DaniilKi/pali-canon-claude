@@ -232,11 +232,19 @@ export function createServer({executeTool} = {}) {
     return out;
   });
 
-  tool('browse_canon', 'Browse the Tipiṭaka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja…), a section (sn56, an4, kv1), an exact text ID (mn1) or a recorded group ID (dhp1-20). Exact IDs exclude similarly numbered siblings; groups list their recorded members. Use "books" for the complete VRI root-file catalogue and get_text book IDs, including front matter outside individual citation spans. Works offline.', {
+  tool('browse_canon', 'Browse the Tipiṭaka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja…), a section (sn56, an4, kv1), an exact text ID (mn1) or a recorded group ID (dhp1-20). Exact IDs exclude similarly numbered siblings; groups list their recorded members. Use "english" to find existing English source choices for canonical records with confirmed locations; its availability and exact collection filters do not fetch English or approve completeness. Use "books" for the complete VRI root-file catalogue and get_text book IDs, including front matter outside individual citation spans. Works offline.', z.object({
     node: z.string().max(60).default('canon'),
     offset: z.number().int().min(0).max(100000).default(0),
     limit: z.number().int().min(1).max(200).default(60),
-  }, ({ node, offset, limit }) => node.trim().toLowerCase() === 'books' ? sourceBooks.catalogue({ offset, limit }) : canon.browse(node, { offset, limit }));
+    availability: z.enum(['linked', 'whole', 'scoped', 'none']).optional().describe('Only for node "english": linked (default) includes whole or scoped choices; whole has an ordinary link, possibly to a containing chapter; scoped has partial/shared choices and no ordinary link; none has no linked choice.'),
+    collection: z.string().max(30).optional().describe('Only for node "english": an exact collection ID from its collections options (e.g. mn or sn). No section, text ID or alias.'),
+  }).strict(), ({ node, ...options }) => {
+    if (node.trim().toLowerCase() === 'books') {
+      if (['availability', 'collection'].some(k => Object.hasOwn(options, k))) throw new Error('English availability and collection filters require browse_canon node "english".');
+      return sourceBooks.catalogue(options);
+    }
+    return canon.browse(node, options);
+  });
 
   tool('lookup_pali', 'Look up a Pāli word in the Digital Pāḷi Dictionary (grammar, roots, meanings). Diacritics are optional: "nibbana" also offers nibbāna, labelled inferred_spelling; Velthuis and Harvard-Kyoto are understood for Roman input. Supported native-script Pāli is converted and labelled before lookup, with no keyboard-spelling inference. Dictionary glosses are reference material, not scripture.', {
     word: z.string().trim().min(1).max(100), limit: z.number().int().min(1).max(10).default(5),

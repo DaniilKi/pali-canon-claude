@@ -610,9 +610,41 @@ export function search(query, { collection, limit = 10, offset = 0, groups } = {
 
 // ---- browsing -------------------------------------------------------------
 
-export function browse(node = 'canon', { offset = 0, limit = 60 } = {}) {
+export function browse(node = 'canon', options = {}) {
+  const { offset = 0, limit = 60 } = options;
   const d = load();
   const key = fold(node).replace(/\s+/g, '');
+  if (key !== 'english' && ['availability', 'collection'].some(k => Object.hasOwn(options, k))) {
+    throw new Error('English availability and collection filters require browse_canon node "english".');
+  }
+  if (key === 'english') {
+    if (Object.keys(options).some(k => !['offset', 'limit', 'availability', 'collection'].includes(k))) throw new Error('Unknown English source catalogue option.');
+    if (!Number.isSafeInteger(offset) || offset < 0 || offset > 100000 || !Number.isSafeInteger(limit) || limit < 1 || limit > 200) throw new Error('English source catalogue requires offset 0–100000 and limit 1–200.');
+    const availability = options.availability === undefined ? 'linked' : options.availability;
+    const collection = options.collection === undefined ? null : options.collection;
+    if (!['linked', 'whole', 'scoped', 'none'].includes(availability)) throw new Error('Unknown English availability. Choose linked, whole, scoped or none.');
+    if (options.collection !== undefined && !COLLECTION_ORDER.includes(collection)) throw new Error('Unknown English catalogue collection. Use an exact collection ID from its collections options; sections and aliases are not accepted.');
+    const eligible = d.canon.units.filter(u => !u.approximate && u.kind !== 'range' && (collection === null || u.collection === collection));
+    eligible.sort((a, b) => a.book - b.book || a.start - b.start || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+    const matches = [];
+    for (const unit of eligible) {
+      const { links, via } = linksFor(unit);
+      const whole = links.some(link => !isScoped(link));
+      const scoped = !whole && links.some(link => isPartial(link) || isShared(link));
+      if (availability === 'linked' ? whole || scoped : availability === 'whole' ? whole : availability === 'scoped' ? scoped : !whole && !scoped) matches.push({ unit, via });
+    }
+    return {
+      catalogue: true, node: 'english', name: 'Find English sources', availability, collection,
+      collections: COLLECTION_ORDER.map(id => ({ id, name: COLLECTION_NAMES[id] })),
+      offset, limit, total: matches.length,
+      items: matches.slice(offset, offset + limit).map(({ unit, via }) => unitSummary(unit, {
+        collection_id: unit.collection, read_with: { tool: 'get_text', uid: unit.id },
+        ...(via ? { source_context: { kind: 'containing_group', id: via.id, citation: via.acronym, title: via.title || null } } : {}),
+      })),
+      next_offset: offset + limit < matches.length ? offset + limit : null,
+      note: 'Only existing canonical records with confirmed locations are listed. Counts describe linked English choices and scopes; an ordinary source can cover a containing chapter. Scoped choices require explicit source consent. These links do not guarantee complete individual English correspondence.',
+    };
+  }
   const page = (items) => ({ total: items.length, offset, limit, next_offset: offset + limit < items.length ? offset + limit : null, items: items.slice(offset, offset + limit) });
   const resolved = groupedScope(d, key, node);
   if (resolved) {

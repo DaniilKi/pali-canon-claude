@@ -26065,9 +26065,48 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
     tip: total === 0 && !matchingTitles.length ? 'Search P\u0101li words (e.g. "satipatthana", "anapanassati") or an English title word. For English topics also try search_access_to_insight.' : void 0
   };
 }
-function browse(node = "canon", { offset = 0, limit = 60 } = {}) {
+function browse(node = "canon", options = {}) {
+  const { offset = 0, limit = 60 } = options;
   const d = load();
   const key3 = fold3(node).replace(/\s+/g, "");
+  if (key3 !== "english" && ["availability", "collection"].some((k) => Object.hasOwn(options, k))) {
+    throw new Error('English availability and collection filters require browse_canon node "english".');
+  }
+  if (key3 === "english") {
+    if (Object.keys(options).some((k) => !["offset", "limit", "availability", "collection"].includes(k))) throw new Error("Unknown English source catalogue option.");
+    if (!Number.isSafeInteger(offset) || offset < 0 || offset > 1e5 || !Number.isSafeInteger(limit) || limit < 1 || limit > 200) throw new Error("English source catalogue requires offset 0\u2013100000 and limit 1\u2013200.");
+    const availability = options.availability === void 0 ? "linked" : options.availability;
+    const collection2 = options.collection === void 0 ? null : options.collection;
+    if (!["linked", "whole", "scoped", "none"].includes(availability)) throw new Error("Unknown English availability. Choose linked, whole, scoped or none.");
+    if (options.collection !== void 0 && !COLLECTION_ORDER.includes(collection2)) throw new Error("Unknown English catalogue collection. Use an exact collection ID from its collections options; sections and aliases are not accepted.");
+    const eligible = d.canon.units.filter((u) => !u.approximate && u.kind !== "range" && (collection2 === null || u.collection === collection2));
+    eligible.sort((a, b) => a.book - b.book || a.start - b.start || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+    const matches = [];
+    for (const unit of eligible) {
+      const { links, via } = linksFor(unit);
+      const whole = links.some((link) => !isScoped(link));
+      const scoped = !whole && links.some((link) => isPartial(link) || isShared(link));
+      if (availability === "linked" ? whole || scoped : availability === "whole" ? whole : availability === "scoped" ? scoped : !whole && !scoped) matches.push({ unit, via });
+    }
+    return {
+      catalogue: true,
+      node: "english",
+      name: "Find English sources",
+      availability,
+      collection: collection2,
+      collections: COLLECTION_ORDER.map((id) => ({ id, name: COLLECTION_NAMES[id] })),
+      offset,
+      limit,
+      total: matches.length,
+      items: matches.slice(offset, offset + limit).map(({ unit, via }) => unitSummary(unit, {
+        collection_id: unit.collection,
+        read_with: { tool: "get_text", uid: unit.id },
+        ...via ? { source_context: { kind: "containing_group", id: via.id, citation: via.acronym, title: via.title || null } } : {}
+      })),
+      next_offset: offset + limit < matches.length ? offset + limit : null,
+      note: "Only existing canonical records with confirmed locations are listed. Counts describe linked English choices and scopes; an ordinary source can cover a containing chapter. Scoped choices require explicit source consent. These links do not guarantee complete individual English correspondence."
+    };
+  }
   const page = (items) => ({ total: items.length, offset, limit, next_offset: offset + limit < items.length ? offset + limit : null, items: items.slice(offset, offset + limit) });
   const resolved = groupedScope(d, key3, node);
   if (resolved) {
@@ -34760,11 +34799,19 @@ function createServer2({ executeTool } = {}) {
     if (out.post_canonical && !out.post_canonical.error) out.post_canonical = localizePostCanonical(out.post_canonical, script);
     return out;
   });
-  tool("browse_canon", 'Browse the Tipi\u1E6Daka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja\u2026), a section (sn56, an4, kv1), an exact text ID (mn1) or a recorded group ID (dhp1-20). Exact IDs exclude similarly numbered siblings; groups list their recorded members. Use "books" for the complete VRI root-file catalogue and get_text book IDs, including front matter outside individual citation spans. Works offline.', {
+  tool("browse_canon", 'Browse the Tipi\u1E6Daka: "canon", "sutta", "vinaya", "abhidhamma", a collection (dn, mn, sn, an, dhp, thag, ja\u2026), a section (sn56, an4, kv1), an exact text ID (mn1) or a recorded group ID (dhp1-20). Exact IDs exclude similarly numbered siblings; groups list their recorded members. Use "english" to find existing English source choices for canonical records with confirmed locations; its availability and exact collection filters do not fetch English or approve completeness. Use "books" for the complete VRI root-file catalogue and get_text book IDs, including front matter outside individual citation spans. Works offline.', external_exports.object({
     node: external_exports.string().max(60).default("canon"),
     offset: external_exports.number().int().min(0).max(1e5).default(0),
-    limit: external_exports.number().int().min(1).max(200).default(60)
-  }, ({ node, offset, limit }) => node.trim().toLowerCase() === "books" ? catalogue({ offset, limit }) : browse(node, { offset, limit }));
+    limit: external_exports.number().int().min(1).max(200).default(60),
+    availability: external_exports.enum(["linked", "whole", "scoped", "none"]).optional().describe('Only for node "english": linked (default) includes whole or scoped choices; whole has an ordinary link, possibly to a containing chapter; scoped has partial/shared choices and no ordinary link; none has no linked choice.'),
+    collection: external_exports.string().max(30).optional().describe('Only for node "english": an exact collection ID from its collections options (e.g. mn or sn). No section, text ID or alias.')
+  }).strict(), ({ node, ...options }) => {
+    if (node.trim().toLowerCase() === "books") {
+      if (["availability", "collection"].some((k) => Object.hasOwn(options, k))) throw new Error('English availability and collection filters require browse_canon node "english".');
+      return catalogue(options);
+    }
+    return browse(node, options);
+  });
   tool("lookup_pali", 'Look up a P\u0101li word in the Digital P\u0101\u1E37i Dictionary (grammar, roots, meanings). Diacritics are optional: "nibbana" also offers nibb\u0101na, labelled inferred_spelling; Velthuis and Harvard-Kyoto are understood for Roman input. Supported native-script P\u0101li is converted and labelled before lookup, with no keyboard-spelling inference. Dictionary glosses are reference material, not scripture.', {
     word: external_exports.string().trim().min(1).max(100),
     limit: external_exports.number().int().min(1).max(10).default(5)
