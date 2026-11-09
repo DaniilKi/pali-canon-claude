@@ -52,6 +52,18 @@ export const LICENSE_LABELS = {
     url: null,
     used_by: 'Access to Insight reviewed Walshe excerpts',
   },
+  'BPS-free-distribution-1983': {
+    name: 'Buddhist Publication Society ©1983 free-distribution notice (not Creative Commons)',
+    terms: 'copies free of charge, reprints of no more than 50 copies, derivatives identified, complete licence text retained; otherwise all rights reserved; see the pinned Nyanaponika page notice',
+    url: null,
+    used_by: 'Access to Insight reviewed Nyanaponika excerpts',
+  },
+  'Kumara-free-distribution-2010': {
+    name: 'Kumara Bhikkhu ©2010 free-distribution notice (not Creative Commons)',
+    terms: 'copies free of charge, derivatives identified, complete licence text retained; otherwise all rights reserved; see the pinned Kumara page notice',
+    url: null,
+    used_by: 'Access to Insight reviewed Kumara excerpts',
+  },
   ATI_DEPRECATED: {
     name: 'Access to Insight free-distribution licence (older, not Creative Commons)',
     terms: 'copies free of charge, derivatives marked as such, licence text included; otherwise all rights reserved',

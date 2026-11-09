@@ -33,6 +33,8 @@ export function atiPartialExcerpt(html,extractor) {
   if(extractor==='ati-freeverse-v1')return atiVerseExcerpt(html);
   if(extractor==='ati-chapter-prose-v1')return atiChapterProse(html);
   if(extractor==='ati-chapter-p5-of5-no-notes-v1')return chapterLastParagraphWithoutNotes(html);
+  if(extractor==='ati-chapter-p1to3-of4-ellipsis-v1')return chapterProseBeforeEllipsis(html);
+  if(extractor==='ati-chapter-p1to4-of5-notes-v1')return chapterProsePrefixBeforeNotes(html);
   if(extractor==='ati-chapter-p2-of2-v1')return chapterParagraph(html,2,2);
   if(extractor==='ati-chapter-p11-of11-v1')return chapterParagraph(html,11,11,'Seeing the Dhamma');
   if(extractor==='ati-chapter-p1-of4-v1')return chapterParagraph(html,4,1);
@@ -41,12 +43,12 @@ export function atiPartialExcerpt(html,extractor) {
   throw Error('Unsupported ATI partial extractor. No excerpt was returned.');
 }
 
-export const ATI_SUBPARAGRAPH_EXTRACTORS = Object.freeze(['ati-chapter-prose-v1', 'ati-chapter-p5-of5-no-notes-v1']);
+export const ATI_SUBPARAGRAPH_EXTRACTORS = Object.freeze(['ati-chapter-prose-v1', 'ati-chapter-p5-of5-no-notes-v1', 'ati-chapter-p1to4-of5-notes-v1']);
 
 // Reviewed finite source structures, never caller-supplied HTML selectors.
 export const ATI_SEGMENT_EXTRACTORS = Object.freeze([
   'ati-freeverse-v1', 'ati-chapter-p2-of2-v1', 'ati-chapter-p11-of11-v1',
-  'ati-chapter-p1-of4-v1', 'ati-excerpt-verse-pre-v1', 'ati-chapter-p14-of24-v1',
+  'ati-chapter-p1-of4-v1', 'ati-excerpt-verse-pre-v1', 'ati-chapter-p14-of24-v1', 'ati-chapter-p1to3-of4-ellipsis-v1',
 ]);
 function copyrightedChunk(html) {
   const begin='<!-- BEGIN COPYRIGHTED TEXT CHUNK -->',end='<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->';
@@ -81,16 +83,39 @@ function excerptVersePre(html) {
   const text=plainText(pres[0][1]);if(!text)fail();return text;
 }
 
-/** Exact five-paragraph chapter, with no notes or other source containers. */
-function chapterLastParagraphWithoutNotes(html) {
-  const fail=()=>{throw Error('The reviewed ATI five-paragraph extraction structure changed. No excerpt was returned.');};
+/** Finite no-notes chapter parser, called only with source-reviewed constants. */
+function chapterParagraphsWithoutNotes(html,total) {
+  const fail=()=>{throw Error('The reviewed ATI no-notes paragraph extraction structure changed. No excerpt was returned.');};
   const chunk=copyrightedChunk(html),chapters=[...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
   if(chapters.length!==1)fail();
   const start=chapters[0].index+chapters[0][0].length,stop=chunk.indexOf('</div>',start);
   if(stop<start||chunk.slice(0,chapters[0].index).trim()||chunk.slice(stop+6).trim()!=='</div>')fail();
   const body=chunk.slice(start,stop),paragraphs=[...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
-  if(paragraphs.length!==5||/<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body)||body.replace(/<p\b[^>]*>[^]*?<\/p>/gi,'').trim())fail();
-  const chosen=paragraphs[4][1];if(/<\/?p\b/i.test(chosen))fail();
-  const text=plainText(chosen.replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi,''));
-  if(!text)fail();return text;
+  if(paragraphs.length!==total||/<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body)||body.replace(/<p\b[^>]*>[^]*?<\/p>/gi,'').trim()||paragraphs.some(p=>/<\/?p\b/i.test(p[1])))fail();
+  return paragraphs.map(p=>p[1]);
+}
+const selectedProse=paragraphs=>{
+  const texts=paragraphs.map(p=>plainText(p.replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi,'')));
+  if(texts.some(t=>!t))throw Error('The reviewed ATI prose extraction structure changed. No excerpt was returned.');
+  return texts.join('\n\n');
+};
+function chapterLastParagraphWithoutNotes(html) {
+  return selectedProse(chapterParagraphsWithoutNotes(html,5).slice(4));
+}
+function chapterProseBeforeEllipsis(html) {
+  const paragraphs=chapterParagraphsWithoutNotes(html,4);
+  if(plainText(paragraphs[3])!=='...')throw Error('The reviewed ATI final ellipsis structure changed. No excerpt was returned.');
+  return selectedProse(paragraphs.slice(0,3));
+}
+function chapterProsePrefixBeforeNotes(html) {
+  const fail=()=>{throw Error('The reviewed ATI five-paragraph notes extraction structure changed. No excerpt was returned.');};
+  const chunk=copyrightedChunk(html),chapters=[...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)],notes=[...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])notes\1[^>]*>/gi)];
+  if(chapters.length!==1||notes.length!==1)fail();
+  const start=chapters[0].index+chapters[0][0].length,stop=notes[0].index;
+  if(stop<=start||chunk.slice(0,chapters[0].index).trim()||chunk.indexOf('</div>',start)<stop)fail();
+  const tail=chunk.slice(stop+notes[0][0].length),notesEnd=tail.indexOf('</div>');
+  if(notesEnd<0||/<\/?(?:div|script|style|pre)\b/i.test(tail.slice(0,notesEnd))||!/^\s*<\/div>\s*<\/div>\s*$/.test(tail.slice(notesEnd+6)))fail();
+  const body=chunk.slice(start,stop),paragraphs=[...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
+  if(paragraphs.length!==5||/<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body)||body.replace(/<p\b[^>]*>[^]*?<\/p>/gi,'').trim()||paragraphs.some(p=>/<\/?p\b/i.test(p[1])))fail();
+  return selectedProse(paragraphs.slice(0,4).map(p=>p[1]));
 }

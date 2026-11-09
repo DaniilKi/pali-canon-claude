@@ -21,8 +21,11 @@ function install(){const d=canon.load();saved||=d.translations;const link={...st
 
 test('AN2.47 partial pins exact original substring and preserves fifteen prior sources and whole-unit eligibility',()=>{
  assert.equal(scopeHash(canon.load().canon),'1ba8593937abe0284f87e3d8b2a4abd1d732fcc1d6117c36d5a671e968b4d73c');
- assert.equal(manifest.links.length,16);
- assert.equal(scopeHash({...manifest,links:manifest.links.filter(r=>r.unit_id!=='an2.47')}),'7c590a66710c9ef8c53c26dae18fd54381f2f33403c7f32f56c685a17961357c');
+ assert.equal(manifest.links.length,18);
+ const d215Manifest={...manifest,links:manifest.links.filter(r=>!['an8.59','sn36.15'].includes(r.unit_id))};
+ assert.equal(d215Manifest.links.length,16,'Frozen D215 registry excludes only the two later additions');
+ assert.equal(scopeHash(d215Manifest),'0026bf4c52b68dd0e5f4e749902d9530ccc4c8fd5579c848e2263b65c584d006');
+ assert.equal(scopeHash({...manifest,links:manifest.links.filter(r=>!['an2.47','an8.59','sn36.15'].includes(r.unit_id))}),'7c590a66710c9ef8c53c26dae18fd54381f2f33403c7f32f56c685a17961357c');
  assert.deepEqual(json('server/data/reviewed-partial-pages.json'),manifest);
  const u=canon.resolve('an2.47').unit,meta=canon.describe(u),choice=meta.english[0],scope=choice.translation_scope;
  assert.deepEqual([u.vri,meta.english_available,meta.partial_english_available,meta.english.length],['48',0,1,1]);
@@ -42,7 +45,7 @@ test('AN2.47 partial pins exact original substring and preserves fifteen prior s
  assert.equal(scopeDescriptor(choice,u.id).flags.allow_partial,true);
  const bad=structuredClone(choice);bad.translation_scope.version=1;delete bad.translation_scope.pali_excerpt;
  assert.throws(()=>scopeDescriptor(bad,u.id),/unsupported|incomplete/);
- const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links,t.with_shared_english,t.shared_only],[2538,1408,1831,16,10,12,110,52]);
+ const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links,t.with_shared_english,t.shared_only],[2538,1408,1831,18,12,12,110,52]);
  const d=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([d.rotation.of,d.text.id],[1257,'sn12.31']);
 });
 

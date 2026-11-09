@@ -18,19 +18,22 @@ def manifest_rows(manifest=MANIFEST):
         if not isinstance(r,dict):raise ValueError('Invalid partial page row')
         p=r.get('partial_scope',{})
         if not isinstance(p,dict):raise ValueError('Invalid partial scope record')
+        # Exact source/owner/licence/translator/version/selector families; no suffix inference.
+        walshe='BPS-free-distribution-1985',"Maurice O'Connell Walshe"
+        thanissaro='CC-BY-NC','Thanissaro Bhikkhu'
         profiles={
-            ('sn12.22','/tipitaka/sn/sn12/sn12.022x.wlsh'):(2,'ati-chapter-prose-v1'),
-            ('sn12.60','/tipitaka/sn/sn12/sn12.060x.wlsh'):(1,'ati-chapter-p2-of2-v1'),
-            ('sn22.87','/tipitaka/sn/sn22/sn22.087x.wlsh'):(1,'ati-chapter-p11-of11-v1'),
-            ('sn35.244','/tipitaka/sn/sn35/sn35.203x.wlsh'):(1,'ati-chapter-p1-of4-v1'),
-            ('sn56.22','/tipitaka/sn/sn56/sn56.022x.wlsh'):(1,'ati-excerpt-verse-pre-v1'),
-            ('mn54','/tipitaka/mn/mn.054x.than'):(1,'ati-chapter-p14-of24-v1'),
-            ('an2.47','/tipitaka/an/an02/an02.046.than'):(2,'ati-chapter-p5-of5-no-notes-v1'),
+            ('sn12.22','/tipitaka/sn/sn12/sn12.022x.wlsh'):(2,'ati-chapter-prose-v1',*walshe),
+            ('sn12.60','/tipitaka/sn/sn12/sn12.060x.wlsh'):(1,'ati-chapter-p2-of2-v1',*walshe),
+            ('sn22.87','/tipitaka/sn/sn22/sn22.087x.wlsh'):(1,'ati-chapter-p11-of11-v1',*walshe),
+            ('sn35.244','/tipitaka/sn/sn35/sn35.203x.wlsh'):(1,'ati-chapter-p1-of4-v1',*walshe),
+            ('sn56.22','/tipitaka/sn/sn56/sn56.022x.wlsh'):(1,'ati-excerpt-verse-pre-v1',*walshe),
+            ('mn54','/tipitaka/mn/mn.054x.than'):(1,'ati-chapter-p14-of24-v1',*thanissaro),
+            ('an2.47','/tipitaka/an/an02/an02.046.than'):(2,'ati-chapter-p5-of5-no-notes-v1',*thanissaro),
+            ('an8.59','/tipitaka/an/an08/an08.059.kuma'):(1,'ati-chapter-p1to3-of4-ellipsis-v1','Kumara-free-distribution-2010','Kumara Bhikkhu'),
+            ('sn36.15','/tipitaka/sn/sn36/sn36.015.nypo'):(2,'ati-chapter-p1to4-of5-notes-v1','BPS-free-distribution-1983','Nyanaponika Thera'),
         }
         profile=profiles.get((r.get('unit_id'),r.get('path')))
-        walshe=bool(profile and r.get('path','').endswith('.wlsh') and r.get('license')=='BPS-free-distribution-1985' and r.get('translator')=="Maurice O'Connell Walshe" and (p.get('version'),p.get('extractor'))==profile)
-        thanissaro=bool(profile and r.get('unit_id') in ('mn54','an2.47')) and r.get('license')=='CC-BY-NC' and r.get('translator')=='Thanissaro Bhikkhu' and (p.get('version'),p.get('extractor'))==profile
-        finite=walshe or thanissaro
+        finite=bool(profile and (p.get('version'),p.get('extractor'),r.get('license'),r.get('translator'))==profile)
         if r.get('path') in {path for _,path in profiles} and not finite:
             raise ValueError('Invalid reserved finite source profile')
         prose=finite and p.get('version')==2

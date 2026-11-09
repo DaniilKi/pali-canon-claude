@@ -1,0 +1,37 @@
+# Eight individuals and feelings: two exact partial readings (D216)
+
+Reviewed against dev `52c6bb3636ae5f5dc367dc79b7918913eef17a09` on9November2026. [Detailed evidence](eight-individuals-and-feelings-prefix.json) preserves independent source/root/notice reviews and all activation pins. Both sources were read from clean official ATI snapshot `45fedca341497120651efa20e756b04a13e61089`, against unchanged VRI `2d134ff9ef60f70a1eb03c9370580228811a3070`. No publisher English bodies are bundled.
+
+## AN8.59: prose only, with Kumara’s own licence
+
+[Pathama Atthapuggala, translated by Kumara Bhikkhu](https://www.accesstoinsight.org/tipitaka/an/an08/an08.059.kuma.html), has exactly4source paragraphs, no notes and no verse container. Paragraphs1–3 translate the eight-individuals prose teaching, corresponding to the whole original `an8.59/2`:385Pāli characters and807English characters. Paragraph4is an ellipsis; **two substantive closing stanzas remain untranslated**. The original prose retains `…pe…`; the publisher supplies the English refrain. No Pāli is expanded and no word-level correspondence is claimed.
+
+The finite version1 selector `ati-chapter-p1to3-of4-ellipsis-v1` requires the exact chapter/outer closures and4paragraph structure, with the final paragraph an ellipsis. It returns only the first3paragraphs. It cannot become a version2 substring selector or a whole-discourse binding. Other sources and neighbouring roots were checked independently; number alone was not the mapping evidence.
+
+The individual **©2010 Kumara Bhikkhu** notice permits copying/reformatting/reprinting/redistribution when copies are free, derivatives identify their source and the complete licence is included. Other linked documents may have other restrictions. The page was revised in2013; that does not change the copyright year. **Neither Creative Commons nor a50-copy cap is inferred.** `Kumara-free-distribution-2010` names this pinned profile, not a new grant. Full notice and citation accompany every returned selection, and export metadata gives a readable non-CC label.
+
+## SN36.15: an exact opening prefix, with BPS terms
+
+[Nyanaponika Thera’s To Ānanda(1)](https://www.accesstoinsight.org/tipitaka/sn/sn36/sn36.015.nypo.html) has5chapter paragraphs followed by2editorial notes. Only paragraphs1–4 are selected:1,128English characters about feelings, origin/cessation, the path, gratification, danger and escape. They correspond to original `sn36.15/2` UTF-16substring **[0,794)**. The complete original paragraph is1,940characters;1,145characters of omitted trimmed context remain after the separating space.
+
+The later paragraph compresses three separately introduced cessation sequences in the VRI root into one. It and both notes are excluded; no whole-paragraph or whole-discourse translation is claimed. Wrong PTS-neighbour candidates were excluded by complete content comparison. The exact finite version2 selector `ati-chapter-p1to4-of5-notes-v1` requires the5paragraph/chapter/notes structure and closed copyrighted chunk, and returns only the first4paragraphs.
+
+This unit has one heading and one body paragraph. The old scope validator required an untranslated body segment elsewhere, making every exact substring of such a unit impossible. Version2 now admits a **proper nonblank substring** only after checking its original complete paragraph, bounds, surrogate-safe UTF-16 offsets, selected Pāli hash and finite selector. With no other body segment outside, omitted same-paragraph context must contain nonwhitespace. Dropping only trailing blanks cannot disguise a whole translation. Version1 full-unit/outside-body guards remain unchanged. No original text, ID, locator or personal-data format changes.
+
+The actual rights grant is **©1983 Buddhist Publication Society**, with Nyanaponika Thera credited. The front-page1998ATI-edition date is not the source copyright year. Free copies, identified derivatives and the complete licence are required; printed reprints are limited to50copies. Full provenance/citation remains attached at every page/continuation. `BPS-free-distribution-1983` is distinct from the existing1985Walshe profile and is not Creative Commons.
+
+## Guarded activation and measured coverage
+
+Each known page has an exact path/owner/translator/licence/version/selector profile. Reserved paths cannot fall through to generic Olendzki or another copyright family. Build verification pins raw HTML and complete roots; runtime scope checks pin original context/selected Pāli, selected English and full notice. Retrieval and continuation require exact partial consent, version and source-prefix/scope pins. Structural, selected-wording, notice and scope drift refuses before output. Unselected wording is not re-certified.
+
+All previous16partial declarations remain unchanged. Ordinary whole links remain2,538; direct/inherited indexed whole coverage1,434/1,857 (grouped runtime1,408/1,831). Partial sources increase16→18 and partial-only units10→12. Shared12pages/110subject records/52shared-only, daily eligibility1,257 and8,544canonical records stay unchanged. No new complete English translation is counted.
+
+The refreshed original114-page ATI packet now has48pending pages and1possible first-English lead. That remaining PTS-overlap lead, Walshe SN1.25, was independently checked at D215 and does not translate the uncovered neighbouring SN1.24; it is not an approved addition. The broader220-reference screen still has213unreviewed leads; most are publisher-reference ranges, often valid. Neither queue means that the whole catalogue is certified or that the pending count equals proven defects.
+
+## Validation and next work
+
+Tests cover frozen previous declarations, exact rights families, malformed source structures, sole-body v1 refusals/v2 proper-substring acceptance, whitespace and surrogate boundaries, exact source consent, notice/prefix/scope continuation and no fallback. Export checks retain exact scope/pins while omitting Pāli wording. Installed positive synthetic stdio/HTTP/restart cases check the new contract; actual pinned-source browser runs exercise full notices, exact displayed selection, keyboard/fresh consent, responsive layout and both themes. These are local-fixture checks, not upstream freshness or human accessibility certification. Exact-head GitHub CI is separate release evidence.
+
+Further first-English sourcing should move beyond interpreting the remaining packet’s PTS overlaps as approvals. Useful next work is a source-backed assessment of the already identified Paṭṭhāna opening or other rights-cleared translations, while individually reviewing the broader catalogue. Do not reactivate the compressed whole pages, invent verse wording, expand peyyāla or fetch SuttaCentral material.
+
+Local validation:13new source/contract tests passed; corrected historical source guards passed30/30 and export/site checks19/19. The8,544-text audit found0failures. Normal, accessibility and installed-package actual-source browser runs passed260checks each;216light/dark accessibility scans found0automated violations. All11native installed modes passed, including3positive sole-body stdio/HTTP/restart/cache-separation modes. The installed cross-tool audit passed11,983reading commands,478plan days,472topics and0network attempts. The final full package gate runs on the exact integrated commit in CI; local debug failures from the obsolete SN absence assertion and missing licence documentation were corrected and rerun at their focused scope.

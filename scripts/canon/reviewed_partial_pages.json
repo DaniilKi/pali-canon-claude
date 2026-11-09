@@ -510,6 +510,74 @@
           "segment_sha256": "5bccbccfb20a424bce18386962f6a81878ea519f704a0efe1bd439215e7cf4de"
         }
       }
+    },
+    {
+      "unit_id": "an8.59",
+      "path": "/tipitaka/an/an08/an08.059.kuma",
+      "translator": "Kumara Bhikkhu",
+      "english_title": "Eight individuals: prose teaching (partial)",
+      "license": "Kumara-free-distribution-2010",
+      "source_reference": "AN8.59, publisher paragraphs1–3of4 only; VRI59, an8.59/2",
+      "mapping_note": "Derived prose selection from the named Access to Insight/Kumara source: only paragraphs1–3of4, the eight-individuals prose teaching, correspond to an8.59/2. The publisher’s final ellipsis and both substantive closing stanzas are excluded. Original VRI prose retains …pe…; the publisher supplies its English refrain, with no Pāli expansion or word-level alignment claimed. This is not a whole AN8.59 translation. Complete ©2010 Kumara Bhikkhu notice and citation accompany the selection: copies must be free of charge, derivatives identified and the complete licence retained. No Creative Commons or 50-copy limit is inferred.",
+      "source_html_sha256": "1f4d40c00f3077695f7cddeaa5d4011e8fdadac3ef05e4bcf4f040c444801c53",
+      "root": {
+        "id": "an8.59",
+        "title": "Paṭhamapuggalasuttaṃ",
+        "vri": "59",
+        "book": 23,
+        "start": 766,
+        "end": 772,
+        "root_blocks_sha256": "12e423bc7720d85776e75648d9d6cb9080e591a6505fa5ee119d7d96ce574871"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an8.59",
+        "first_ref": "an8.59/2",
+        "last_ref": "an8.59/2",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "5c7dd9ab1438bbf37bf86689a1dec9454ef6d3be8613cc6862b8df3947e21873",
+        "text_sha256": "83ed330bbffd61cc88ef8dfc68955adb56438d693e7021e0c099bd1dee7d000b",
+        "notice_sha256": "0955a1bdc92e7af801df3ba8f471ff4f59c41ad575f63b515ae6a176124b45c5",
+        "extractor": "ati-chapter-p1to3-of4-ellipsis-v1"
+      }
+    },
+    {
+      "unit_id": "sn36.15",
+      "path": "/tipitaka/sn/sn36/sn36.015.nypo",
+      "translator": "Nyanaponika Thera",
+      "english_title": "To Ānanda: feelings opening (partial)",
+      "license": "BPS-free-distribution-1983",
+      "source_reference": "SN36.15, publisher paragraphs1–4of5 only; VRI263, part of sn36.15/2",
+      "mapping_note": "Derived prose selection from the named Access to Insight/BPS source: only chapter paragraphs1–4of5, the opening discussion of feelings, correspond to the exact displayed prefix within sn36.15/2. The later cessation sequences, compressed by the publisher, and both editorial notes are excluded. This is neither a complete Pāli paragraph nor a whole discourse translation; no word-level alignment is claimed. Original Pāli remains unchanged. Complete ©1983 Buddhist Publication Society provenance and Nyanaponika Thera citation accompany the selection. Copies must be free, derivatives identified and the complete licence retained; printed reprints are limited to 50 copies. The front-page 1998 ATI-edition date does not replace the source’s 1983 copyright.",
+      "source_html_sha256": "300433ba256941343ae0891202c139dd57c3456b881476fe48a2e6c879933438",
+      "root": {
+        "id": "sn36.15",
+        "title": "Paṭhamaānandasuttaṃ",
+        "vri": "263",
+        "book": 14,
+        "start": 1356,
+        "end": 1358,
+        "root_blocks_sha256": "2fdc1b9ac79dfe7f89becfa83822551cfd41aadb37ef7ee2b135e8aecc5ada55"
+      },
+      "partial_scope": {
+        "version": 2,
+        "status": "reviewed",
+        "unit_id": "sn36.15",
+        "first_ref": "sn36.15/2",
+        "last_ref": "sn36.15/2",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "5a4376f9ef8b063db4161a0619b9dcc5090e2721ec8448b9e51c55b4cae88530",
+        "text_sha256": "176cc221edb6bed91497483d6990e8120583062822f74754176b4545af7ba9fa",
+        "notice_sha256": "b58cc58a86a64f10454468d11fa9fc3391ad43fac20e9728f6ec18903d0ad4ac",
+        "extractor": "ati-chapter-p1to4-of5-notes-v1",
+        "subparagraph": {
+          "start_char": 0,
+          "end_char": 794,
+          "offset_unit": "utf16_code_units",
+          "segment_sha256": "39f3172013f8571b82c6c89edd7d55780eeaeb480d477917b8174c25c83a88c2"
+        }
+      }
     }
   ]
 }

@@ -273,7 +273,7 @@ test('reviewed edition-number differences never attach the source to the numeric
  assert.equal(calls,0);
 });
 
-test('earlier-concentration preface is editorial, and the shorter Ananda source remains unapproved',async()=>{
+test('earlier-concentration preface is editorial, and the shorter Ananda source has no whole approval beyond its exact partial prefix',async()=>{
  const id='ati:/tipitaka/sn/sn40/sn40.009.wlsh';
  const source=english.available(canon.resolve('sn40.9').unit).find(x=>x.translation_id===id);assert.ok(source);
  assert.match(source.mapping_note,/earlier eight discourses.*not translated here.*eight numbered Notes/s);
@@ -285,7 +285,18 @@ test('earlier-concentration preface is editorial, and the shorter Ananda source 
  assert.equal(calls,0);
  const held='/tipitaka/sn/sn36/sn36.015.nypo';
  assert.ok(manifest.links.every(r=>r.path!==held));
- assert.ok(english.available(canon.resolve('sn36.15').unit).every(x=>x.translation_id!==`ati:${held}`));
+ const unit=canon.resolve('sn36.15').unit,meta=canon.describe(unit),partial=english.available(unit).find(x=>x.translation_id===`ati:${held}`);
+ assert.ok(partial);assert.equal(meta.english_available,0);assert.equal(meta.partial_english_available,1);
+ const scope=partial.translation_scope;
+ assert.equal(scope.kind,'partial_unit');assert.equal(scope.version,2);assert.equal(scope.whole_unit_coverage,false);
+ assert.deepEqual([scope.first_ref,scope.last_ref,scope.pali_excerpt.start_char,scope.pali_excerpt.end_char],['sn36.15/2','sn36.15/2',0,794]);
+ assert.equal(scope.pali_excerpt.text,canon.segments(unit).find(s=>s.ref==='sn36.15/2').text.slice(0,794));
+ assert.doesNotMatch(scope.pali_excerpt.text,/anupubbasaṅkhārānaṃ (nirodho|vūpasamo|paṭippassaddhi)/);
+ assert.equal(scope.read_with,undefined);assert.equal(scope.read_pages,undefined);
+ await assert.rejects(english.translation(unit),/Only partial/);
+ await assert.rejects(english.translation(unit,`ati:${held}`),/partial/);
+ await assert.rejects(english.translation(unit,`ati:${held}`,{allow_shared:true}),/shared-page scope/);
+ assert.equal(calls,0,'Neither editorial prefaces nor implicit whole/shared requests authorize fetching the partial');
  const u=canon.resolve('sn36.15').unit;const b=canon.load().canon.books[u.book].blocks.slice(u.start,u.end).map(x=>x[2]).join(' ');
  assert.match(b,/anupubbasaṅkhārānaṃ nirodho/);assert.match(b,/anupubbasaṅkhārānaṃ vūpasamo/);assert.match(b,/anupubbasaṅkhārānaṃ paṭippassaddhi/);
 });
