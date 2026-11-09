@@ -1,0 +1,73 @@
+{
+  "decision": "D220",
+  "baseline": "aa78dd6814f1e17b86f19fbeceea0b8e2eeb7da8",
+  "date": "2026-11-09",
+  "feature": "local study backup and additive restore",
+  "format": "pali-library-study-backup-v1",
+  "scope": {
+    "private_file_only": true,
+    "source_dataset_changed": false,
+    "storage_schema_changed": false,
+    "main_merge": false,
+    "deployment": false,
+    "restore_service_request": {
+      "tool": "reading_plan",
+      "arguments": {}
+    }
+  },
+  "local_validation": {
+    "full_check": {
+      "tests": 1183,
+      "pass": 1181,
+      "fail": 0,
+      "skipped": 2
+    },
+    "text_audit": {
+      "texts": 8544,
+      "failures": 0
+    },
+    "backup_policy": {
+      "pass": 11
+    },
+    "backup_browser": {
+      "normal": 79,
+      "installed": 79,
+      "a11y": {
+        "checks": 155,
+        "scans": 64,
+        "violations": 0
+      }
+    },
+    "existing_progress_browser": 44,
+    "existing_bookmark_import_browser": 34,
+    "smoke": {
+      "tools": 34,
+      "checks": 64
+    },
+    "offline_evals": {
+      "passed": 195,
+      "skipped_live": 6
+    },
+    "docs_and_artifact_retention_tests": 20,
+    "package_runtime_matches_tested_tree": true,
+    "independent_helper_and_legacy_policy_tests": 25
+  },
+  "review_fixes": [
+    "Restore old raw storage baseline after failed opted-in resume so later saves cannot resurrect stale pointer.",
+    "Check disabled resume eligibility before staging any arrays.",
+    "Allow unchanged raw legacy locator without treating it as unseen peer mutation.",
+    "Reject changed private state and retire stale file/catalogue/route callbacks."
+  ],
+  "limits": [
+    "System Chromium 155 automated checks only; Firefox/WebKit binaries not installed.",
+    "No physical iOS/Android, native Files picker, or human accessibility certification.",
+    "Best-effort localStorage guard, not atomic cross-tab transaction or account sync.",
+    "Export includes this tab data, not unseen peer-tab changes.",
+    "Source coverage unchanged; Paṭṭhāna raw-source assessment remains blocked."
+  ],
+  "ci": "Verify final integrated commit separately; not claimed by pre-commit evidence.",
+  "review": {
+    "independent_frontend_and_helper_review": true,
+    "outstanding_material_findings": 0
+  }
+}

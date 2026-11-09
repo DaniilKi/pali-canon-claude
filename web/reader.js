@@ -10,11 +10,12 @@ import { validatePaliQuote } from './quote-check.mjs';
 import { MAX_PROGRESS_BYTES, parseProgress, mergeProgress } from './progress-import.mjs';
 import { topicCatalogue, topicDetail, listCatalogue, listDetail } from './topics-study.mjs';
 import { createRequestPool } from './request-lifecycle.mjs';
-import { readingPosition, assertPositionPin, sourceRevision } from './reading-position.mjs';
+import { readingPosition, assertPositionPin, sourceRevision, isReadingLocator } from './reading-position.mjs';
 import { guardedStorageWrite, guardedPositionWrite, readingPointerOnlyChange } from './local-storage-write.mjs';
 import { ENGLISH_AVAILABILITY, englishBrowseCandidate, englishSelection, englishRoute, englishCatalogue, englishBadges } from './english-catalogue.mjs';
 import { comparisonChoices, comparisonSelection, validateComparisonPage } from './translation-comparison.mjs';
 import { passageNoteKey, passageNoteState, passageNoteRemovalNeedsConfirmation, passageNoteTransaction, restorePassageNoteTransaction } from './passage-notes.mjs';
+import { MAX_STUDY_BACKUP_BYTES, createStudyBackup, parseStudyBackup, mergeStudyBackup } from './study-backup.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
 const $ = id => document.getElementById(id);
@@ -33,7 +34,7 @@ function exportBookmarks() { return { format: KEY, saved: local.saved.map(item =
 function showStorageRecovery() {
   const panel = $('storage-recovery'); if (!panel.hidden) { panel.querySelector('p').textContent = storageWarning(); return; } panel.hidden = false;
   panel.replaceChildren(el('h2', 'Keep this tab’s changes'), el('p', storageWarning()), el('p', 'Recovery files include this tab’s unsaved note edits. Existing saved data is kept. After reloading, compare conflicting notes manually; import keeps existing notes on duplicate passages.', 'muted'));
-  const actions = el('div', undefined, 'toolbar'); actions.append(button('Download this tab’s bookmarks and notes', () => exportPersonal(exportBookmarks(), 'pali-library-bookmarks.json')), button('Download this tab’s reading progress', () => exportPersonal({ format: 'pali-library-reading-progress-v1', progress: local.reading_progress }, 'pali-library-reading-progress.json')));
+  const actions = el('div', undefined, 'toolbar'); actions.append(button('Download study backup', downloadStudyBackup), button('Download this tab’s bookmarks and notes', () => exportPersonal(exportBookmarks(), 'pali-library-bookmarks.json')), button('Download this tab’s reading progress', () => exportPersonal({ format: 'pali-library-reading-progress-v1', progress: local.reading_progress }, 'pali-library-reading-progress.json')));
   const review = el('div'); actions.append(button('Review reload options', () => { const title = el('h3', 'Export before reloading'); title.tabIndex = -1; review.replaceChildren(title, el('p', 'Reloading replaces changes kept only in this tab with stored browser data. Download both recovery files first.', 'notice'), button('Cancel reload', () => { review.replaceChildren(); actions.querySelector('button:last-child').focus(); }), button('Reload stored browser data', () => location.reload())); title.focus(); })); panel.append(actions, review);
 }
 function persist() {
@@ -595,11 +596,88 @@ async function daily(args, token) {
 function exportPersonal(data, filename) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }), url = URL.createObjectURL(blob), a = link('', url); a.download = filename; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
+function downloadStudyBackup() {
+  try { const omitted = local.remember_position !== false && Object.hasOwn(local, 'last') && !isReadingLocator(local.last); exportPersonal(createStudyBackup({ saved: exportBookmarks().saved, progress: local.reading_progress, resume: local.remember_position !== false && isReadingLocator(local.last) ? local.last : null }), 'pali-library-study-backup.json'); if (omitted) status.textContent = 'Study backup downloaded. The unsupported reading position was omitted; saved passages, personal notes and plan marks were included. Browser data was not changed.'; }
+  catch (error) { status.textContent = error.message + ' Individual bookmark and progress exports remain available in Saved, Plans and browser recovery.'; }
+}
+function studyBackup(token) {
+  heading('PERSONAL DATA · ON THIS DEVICE', 'Study backup');
+  view.append(el('p', 'Download saved references, personal notes (including unsaved edits), plan marks and an optional reading position. This file includes personal data: keep it somewhere private. The source-text library, accounts and browser preferences are excluded; your own notes are included.', 'notice'), button('Download study backup', downloadStudyBackup));
+  const section = el('section'), label = el('label', 'Restore study backup from JSON'), input = el('input'), preview = el('section', undefined, 'import-preview');
+  input.type = 'file'; input.accept = '.json,application/json'; label.append(input); preview.setAttribute('aria-label', 'Study backup preview'); preview.setAttribute('aria-live', 'polite');
+  section.append(label, el('p', 'The file stays on this device. Maximum 32 MiB. Preview before applying: existing notes, drafts, source pins and conflicting marks are kept. This is an additive restore, not account sync or an atomic cross-tab transaction.', 'muted'), preview); view.append(section, link('Saved passages and individual exports', '#saved', 'button'), link('Reading plans and individual exports', '#plans', 'button'));
+  let generation = 0;
+  const active = request => token === epoch && request === generation && section.isConnected;
+  const personalState = () => JSON.stringify({ saved: local.saved, progress: local.reading_progress, drafts: [...noteDrafts], rememberPresent: Object.hasOwn(local, 'remember_position'), remember: local.remember_position });
+  function storageNow() {
+    if (storageConflict || storageReadFailed) throw Error(storageWarning());
+    let raw; try { raw = localStorage.getItem(KEY); } catch { storageOK = false; showStorageRecovery(); throw Error(storageWarning()); }
+    if (raw !== storageSnapshot && !readingPointerOnlyChange(storageSnapshot, raw)) { storageConflict = true; showStorageRecovery(); throw Error(storageWarning()); }
+    return raw;
+  }
+  function failure(error, request, retry, filename) {
+    if (!active(request)) return;
+    const title = el('h3', 'Unable to restore study backup'); title.tabIndex = -1;
+    preview.replaceChildren(title, el('p', error.message, 'notice'));
+    if (filename) preview.append(el('p', 'Local file: ' + filename, 'muted'));
+    if (retry) preview.append(button('Retry plan verification', retry));
+    preview.append(button('Cancel restore', cancel)); title.focus();
+  }
+  function cancel() { ++generation; input.value = ''; preview.replaceChildren(); input.focus(); }
+  async function prepare(incoming, request, filename) {
+    if (!active(request)) return;
+    try {
+      const state = personalState(), raw = storageNow(), localLastPresent = Object.hasOwn(local, 'last'), localLast = local.last;
+      preview.replaceChildren(el('p', incoming.progress.length ? 'Verifying current reading-plan assignments…' : 'Preparing local preview…'));
+      const catalog = incoming.progress.length ? planCatalog(await tool('reading_plan', {})) : [];
+      if (!active(request)) return;
+      if (personalState() !== state) throw Error('Personal study data changed while preparing this preview. Choose the file again. Nothing was restored.');
+      const merged = mergeStudyBackup({ saved: local.saved, progress: local.reading_progress, drafts: noteDrafts }, incoming, catalog);
+      const title = el('h3', 'Review study backup'); title.tabIndex = -1;
+      preview.replaceChildren(title, el('p', 'Local file: ' + filename, 'muted'), el('p', `Saved passages: ${merged.bookmarkAdded} new · ${merged.bookmarkDuplicates} duplicates · ${merged.bookmarkConflicts} conflicts kept`), el('p', `Plan marks: ${merged.progressAdded} new · ${merged.progressDuplicates} duplicates · ${merged.progressConflicts} conflicts kept`), el('p', 'Existing notes, drafts and source pins win on a duplicate reference. Existing plan marks win on a conflicting day. Review conflicts manually; no source identity is upgraded.', 'muted'));
+      const resumeLabel = el('label', undefined, 'backup-resume'), resume = el('input'); resume.type = 'checkbox'; resume.checked = false; resume.disabled = !incoming.resume || local.remember_position === false; resumeLabel.append(resume, document.createTextNode('Restore incoming reading position')); preview.append(resumeLabel);
+      if (local.remember_position === false) preview.append(el('p', 'Remember reading position is off. Restoring a position is disabled; your privacy preference will not change.', 'muted'));
+      if (incoming.resume) { preview.append(link('Open incoming reading position', incoming.resume), el('p', 'Opening is your choice. Source-pinned positions are checked by the reader before displaying wording. Restoring does not open a passage.', 'muted')); if (!new URLSearchParams(incoming.resume.slice(6)).has('source')) preview.append(el('p', 'Legacy reading position: its source revision was not recorded. It stays unpinned and is not upgraded.', 'notice')); }
+      let applying = false, applied = false;
+      const apply = button('Apply study backup', () => {
+        if (!active(request) || applying || applied) return;
+        try {
+          if (personalState() !== state) throw Error('Personal study data changed since preview. Choose the file again. Nothing was restored.');
+          const currentRaw = storageNow();
+          if (currentRaw !== raw && !readingPointerOnlyChange(raw, currentRaw)) throw Error('Browser data changed since preview. Nothing was restored.');
+          if (resume.checked && (currentRaw !== raw || Object.hasOwn(local, 'last') !== localLastPresent || local.last !== localLast)) throw Error('The reading position changed since preview. Preview the file again before restoring its position.');
+          if (resume.checked && (local.remember_position === false || !incoming.resume)) throw Error('Restoring the reading position is no longer available.');
+          const beforeSaved = local.saved, beforeProgress = local.reading_progress, beforeLastPresent = Object.hasOwn(local, 'last'), beforeLast = local.last, beforeStorageSnapshot = storageSnapshot;
+          applying = true; apply.disabled = true;
+          local.saved = merged.saved; local.reading_progress = merged.progress;
+          if (resume.checked) { local.last = incoming.resume; storageSnapshot = currentRaw; }
+          if (!persist()) {
+            local.saved = beforeSaved; local.reading_progress = beforeProgress; storageSnapshot = beforeStorageSnapshot; if (beforeLastPresent) local.last = beforeLast; else delete local.last; updateResume();
+            throw Error('The study backup was not confirmed saved. This tab’s original study data and drafts remain available. Keep the file and export your data before reloading. ' + storageWarning());
+          }
+          applied = true; resume.disabled = true; updateResume();
+          const done = el('h3', 'Study backup restored in this browser'); done.tabIndex = -1; preview.append(done, el('p', 'Existing personal data and preferences were kept. No passage was opened.')); done.focus();
+        } catch (error) { preview.append(el('p', error.message, 'notice')); status.textContent = storageConflict || !storageOK ? storageWarning() : error.message; }
+        finally { applying = false; apply.disabled = applied; }
+      });
+      preview.append(apply, button('Cancel restore', cancel)); title.focus();
+    } catch (error) { failure(error, request, incoming.progress.length ? () => prepare(incoming, ++generation, filename) : null, filename); }
+  }
+  input.addEventListener('change', async () => {
+    const request = ++generation, file = input.files?.[0]; input.value = ''; preview.replaceChildren(); if (!file) return;
+    try {
+      if (file.size > MAX_STUDY_BACKUP_BYTES) throw Error('Choose a study backup no larger than 32 MiB. Nothing was restored.');
+      const text = await file.text(); if (!active(request)) return;
+      if (new TextEncoder().encode(text).length > MAX_STUDY_BACKUP_BYTES) throw Error('Choose a study backup no larger than 32 MiB. Nothing was restored.');
+      const incoming = parseStudyBackup(text); await prepare(incoming, request, file.name);
+    } catch (error) { failure(error, request, null, file.name); }
+  });
+}
 async function plans(args, token) {
   const name = args.get('name');
   if (!name) {
     const catalog = planCatalog(await tool('reading_plan', {})); if (token !== epoch) return;
-    heading('AT YOUR OWN PACE', 'Reading plans');
+    heading('AT YOUR OWN PACE', 'Reading plans'); view.append(link('Study backup', '#backup', 'button'));
     view.append(el('p', 'Follow the existing sourced reading orders. Day numbers are steps, not deadlines. Marks record your choice only; they do not prove comprehension or completion of every passage.', 'notice'));
     const cards = el('div', undefined, 'cards'), counts = new Map();
     for (const plan of catalog) { const card = link('', route('plans', { name: plan.name, day: 1 }), 'entry'); card.append(el('strong', plan.title), el('p', plan.description), el('small', plan.days + ' days · ' + local.reading_progress.filter(x => x.name === plan.name).length + ' saved day marks')); counts.set(plan.name, card.querySelector('small')); cards.append(card); } view.append(cards);
@@ -740,6 +818,7 @@ function saved() {
   const token = epoch;
   view.replaceChildren();
   heading('YOUR PERSONAL READING', 'Saved passages'); view.append(el('p', 'Bookmarks and notes stay in this browser only. They are not scripture, synced, or backed up. Export them to keep a copy.', 'notice'));
+  view.append(link('Study backup', '#backup', 'button'));
   view.append(button('Export bookmarks and notes', () => { exportPersonal(exportBookmarks(), 'pali-library-bookmarks.json'); }));
   view.append(el('p', 'Unsaved note edits stay in this tab while you navigate. Save or export them before closing or reloading.', 'muted'), bookmarkImporter());
   const filters = el('form', undefined, 'saved-filters'); filters.setAttribute('aria-label', 'Find saved passages');
@@ -798,7 +877,7 @@ async function render() {
   if (location.hash === '#content' && view.childElementCount) { $('content').focus(); return; }
   activePosition = null; clearTimeout(positionTimer); const token = ++epoch; ++studyEpoch; requests.cancelAll(); closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
   const [page, query = ''] = location.hash.slice(1).split('?'), args = new URLSearchParams(query);
-  try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'about') about(); else await browse(args, token);
+  try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'backup') studyBackup(token); else if (page === 'about') about(); else await browse(args, token);
     if (token !== epoch) return; status.textContent = storageConflict || !storageOK ? storageWarning() : !positionDurable ? positionWarning || storageWarning() : ''; focusHeading();
   } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); if (error.code === 'READING_SOURCE_CHANGED') { const review = new URLSearchParams(args); review.delete('source'); view.append(link('Review current source at this reference', '#read?' + review, 'button')); } status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
 }

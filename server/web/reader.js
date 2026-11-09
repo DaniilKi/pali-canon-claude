@@ -69,8 +69,8 @@
     const selected = Object.hasOwn(savedScopeLabels, scope) ? scope : "all";
     const matches = items.filter((item) => {
       if (selected !== "all" && savedScope(item) !== selected) return false;
-      const key2 = JSON.stringify([item.uid, item.ref]);
-      const note = drafts?.has(key2) ? drafts.get(key2) : item.note;
+      const key3 = JSON.stringify([item.uid, item.ref]);
+      const note = drafts?.has(key3) ? drafts.get(key3) : item.note;
       const text5 = fold([item.title, item.uid, item.ref, note].filter((x) => typeof x === "string").join(" "));
       return tokens.every((token) => text5.includes(token));
     });
@@ -195,8 +195,8 @@
     tai_tham: "lanna"
   };
   function scriptName(name) {
-    const key2 = String(name ?? "").trim().toLowerCase();
-    const found = ALIASES[key2];
+    const key3 = String(name ?? "").trim().toLowerCase();
+    const found = ALIASES[key3];
     if (!found) throw new Error(`Unknown script "${name}". Available: ${SCRIPTS.join(", ")}.`);
     return found;
   }
@@ -664,7 +664,7 @@
   }
 
   // web/translation-policy.mjs
-  var own = (value, key2) => value && Object.hasOwn(value, key2);
+  var own = (value, key3) => value && Object.hasOwn(value, key3);
   var nonempty = (value) => typeof value === "string" && value.trim().length > 0;
   var sha = (value) => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
   var stable = (value) => JSON.stringify(Array.isArray(value) ? value.map((v) => JSON.parse(stable(v))) : value && typeof value === "object" ? Object.fromEntries(Object.keys(value).sort().map((k) => [k, JSON.parse(stable(value[k]))])) : value);
@@ -744,9 +744,9 @@
     if (!Array.isArray(value)) return [];
     const seen = /* @__PURE__ */ new Set();
     return value.filter((x) => {
-      const key2 = x?.name + ":" + x?.day;
-      if (!x || !nameOK(x.name) || !Number.isInteger(x.day) || x.day < 1 || x.day > 400 || typeof x.signature !== "string" || x.signature.length > 12e3 || seen.has(key2)) return false;
-      seen.add(key2);
+      const key3 = x?.name + ":" + x?.day;
+      if (!x || !nameOK(x.name) || !Number.isInteger(x.day) || x.day < 1 || x.day > 400 || typeof x.signature !== "string" || x.signature.length > 12e3 || seen.has(key3)) return false;
+      seen.add(key3);
       return true;
     }).slice(0, 1600);
   }
@@ -830,7 +830,7 @@
   var exact = (x, keys2) => object2(x) && Object.keys(x).length === keys2.length && keys2.every((k) => Object.hasOwn(x, k));
   var integer2 = (x, min, max) => Number.isSafeInteger(x) && x >= min && x <= max;
   var key = (x) => x.name + ":" + x.day;
-  function parseProgress(text5, catalog) {
+  function parseProgressMetadata(text5) {
     const fail3 = () => {
       throw Error("This is not a supported reading-progress export. No marks were restored.");
     };
@@ -841,9 +841,9 @@
       fail3();
     }
     if (!exact(data, ["format", "progress"]) || data.format !== "pali-library-reading-progress-v1" || !Array.isArray(data.progress) || data.progress.length > MAX_PROGRESS_MARKS) fail3();
-    const plans2 = new Map(catalog.map((p) => [p.name, p.days])), seen = /* @__PURE__ */ new Set();
+    const seen = /* @__PURE__ */ new Set();
     return data.progress.map((mark) => {
-      if (!exact(mark, ["name", "day", "signature"]) || !plans2.has(mark.name) || !integer2(mark.day, 1, plans2.get(mark.name)) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail3();
+      if (!exact(mark, ["name", "day", "signature"]) || typeof mark.name !== "string" || !/^[a-z0-9-]{1,60}$/.test(mark.name) || !integer2(mark.day, 1, 400) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail3();
       seen.add(key(mark));
       let s;
       try {
@@ -860,6 +860,11 @@
       const signature = JSON.stringify({ name: s.name, day: s.day, source: s.source, readings: s.readings.map((r) => ({ id: r.id, offset: r.offset, limit: r.limit, part: r.part, of: r.of })) });
       return { name: mark.name, day: mark.day, signature };
     });
+  }
+  function parseProgress(text5, catalog) {
+    const progress = parseProgressMetadata(text5), plans2 = new Map(catalog.map((p) => [p.name, p.days]));
+    if (progress.some((mark) => !plans2.has(mark.name) || !integer2(mark.day, 1, plans2.get(mark.name)))) throw Error("This is not a supported reading-progress export. No marks were restored.");
+    return progress;
   }
   function mergeProgress(existing, incoming) {
     const byKey = new Map(existing.map((x) => [key(x), x])), added = incoming.filter((x) => !byKey.has(key(x))), duplicates = incoming.filter((x) => byKey.get(key(x))?.signature === x.signature).length, conflicts = incoming.length - added.length - duplicates;
@@ -1119,7 +1124,7 @@
 
   // web/translation-comparison.mjs
   var object4 = (x) => x !== null && typeof x === "object" && !Array.isArray(x);
-  var own3 = (x, key2) => Object.hasOwn(x, key2);
+  var own3 = (x, key3) => Object.hasOwn(x, key3);
   var text4 = (x) => typeof x === "string" && x.trim().length > 0;
   var uid = (x) => typeof x === "string" && x.trim() === x && /^[a-z][a-z0-9.-]{0,199}$/.test(x);
   var sha2 = (x) => typeof x === "string" && /^[0-9a-f]{64}$/.test(x);
@@ -1150,7 +1155,7 @@
   }
   var requestKeys = /* @__PURE__ */ new Set(["uid", "translation", "offset", "limit", "prefix_sha256"]);
   function request(args, requestedId, choice, expectedLimit) {
-    if (!object4(args) || Object.keys(args).some((key2) => !requestKeys.has(key2)) || args.uid !== requestedId || args.translation !== choice.translation_id || !sourceId(args.translation) || !Number.isSafeInteger(args.limit) || args.limit < 500 || args.limit > 3e4 || expectedLimit !== void 0 && args.limit !== expectedLimit) failure();
+    if (!object4(args) || Object.keys(args).some((key3) => !requestKeys.has(key3)) || args.uid !== requestedId || args.translation !== choice.translation_id || !sourceId(args.translation) || !Number.isSafeInteger(args.limit) || args.limit < 500 || args.limit > 3e4 || expectedLimit !== void 0 && args.limit !== expectedLimit) failure();
     const offset = own3(args, "offset") ? args.offset : 0;
     if (!Number.isSafeInteger(offset) || offset < 0 || offset > 2e6 || offset === 0 && own3(args, "prefix_sha256") || offset > 0 && !sha2(args.prefix_sha256)) failure();
     return offset;
@@ -1172,15 +1177,15 @@
   }
 
   // web/passage-notes.mjs
-  var own4 = (value, key2) => Object.hasOwn(value, key2);
+  var own4 = (value, key3) => Object.hasOwn(value, key3);
   var object5 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   var position = (value) => Number.isSafeInteger(value) && value >= 0 && value <= 1e5;
   var revision = (value) => typeof value === "string" && /^[A-Za-z0-9._-]{1,100}$/.test(value);
   function clone2(value, depth = 0) {
     if (depth > 32) throw Error("Personal-note metadata is nested too deeply. Keep/export it before repairing it.");
-    if (value instanceof Map) return new Map([...value].map(([key2, item]) => [clone2(key2, depth + 1), clone2(item, depth + 1)]));
+    if (value instanceof Map) return new Map([...value].map(([key3, item]) => [clone2(key3, depth + 1), clone2(item, depth + 1)]));
     if (Array.isArray(value)) return value.map((item) => clone2(item, depth + 1));
-    if (object5(value)) return Object.fromEntries(Object.entries(value).map(([key2, item]) => [key2, clone2(item, depth + 1)]));
+    if (object5(value)) return Object.fromEntries(Object.entries(value).map(([key3, item]) => [key3, clone2(item, depth + 1)]));
     return value;
   }
   var noteText = (value) => {
@@ -1193,7 +1198,7 @@
     if (own4(item, "source_commit") && (!revision(item.source_commit) || !position(item.offset))) throw Error("This bookmark has invalid saved revision or position metadata.");
   }
   function currentContext(context) {
-    if (!object5(context) || Object.keys(context).some((key2) => !["uid", "ref", "title", "offset", "source_commit"].includes(key2))) throw Error("This passage has unsupported personal-note reference metadata.");
+    if (!object5(context) || Object.keys(context).some((key3) => !["uid", "ref", "title", "offset", "source_commit"].includes(key3))) throw Error("This passage has unsupported personal-note reference metadata.");
     bookmarkShape({ ...context, note: "" });
     if (!position(context.offset) || !revision(context.source_commit)) throw Error("This passage has no valid current position and source revision.");
   }
@@ -1203,19 +1208,19 @@
   }
   function passageNoteState(saved2, context) {
     if (!Array.isArray(saved2)) throw Error("Saved passages must be an array.");
-    let key2, item = null;
+    let key3, item = null;
     try {
       currentContext(context);
-      key2 = passageNoteKey(context);
+      key3 = passageNoteKey(context);
       const matches = saved2.filter((value) => object5(value) && value.uid === context.uid && value.ref === context.ref);
       if (matches.length > 1) throw Error("Duplicate saved references need review in Saved before editing a note here.");
       item = matches[0] ?? null;
       if (item) bookmarkShape(item);
       if (item && own4(item, "source_commit") && item.source_commit !== context.source_commit) throw Error("The saved source revision differs. Review or edit this personal note in Saved; it was not associated with the current passage.");
       const legacy = Boolean(item && !own4(item, "source_commit"));
-      return { eligible: true, reason: null, warning: legacy ? "Unversioned bookmark: no source revision was saved. Check the reference before using this personal note; editing leaves it unversioned." : null, legacy, item: clone2(item), key: key2 };
+      return { eligible: true, reason: null, warning: legacy ? "Unversioned bookmark: no source revision was saved. Check the reference before using this personal note; editing leaves it unversioned." : null, legacy, item: clone2(item), key: key3 };
     } catch (error) {
-      return { eligible: false, reason: error.message, warning: null, legacy: false, item: null, key: key2 ?? null };
+      return { eligible: false, reason: error.message, warning: null, legacy: false, item: null, key: key3 ?? null };
     }
   }
   function createPassageBookmark(context) {
@@ -1224,24 +1229,24 @@
   }
   function passageNoteRemovalNeedsConfirmation(item, drafts) {
     if (!(drafts instanceof Map)) throw Error("Personal-note drafts must be a Map.");
-    const key2 = passageNoteKey(item);
+    const key3 = passageNoteKey(item);
     const stored = item.note === void 0 ? "" : noteText(item.note);
-    const draft = drafts.has(key2) ? noteText(drafts.get(key2)) : "";
+    const draft = drafts.has(key3) ? noteText(drafts.get(key3)) : "";
     return stored.length > 0 || draft.length > 0;
   }
   function passageNoteTransaction(saved2, drafts, context, operation) {
-    if (!(drafts instanceof Map) || !object5(operation) || Object.keys(operation).some((key3) => !["type", "note", "confirmed", "mode"].includes(key3)) || !["ensure", "save", "remove"].includes(operation.type) || own4(operation, "mode") && !["reading", "saved"].includes(operation.mode)) throw Error("Unsupported personal-note change.");
+    if (!(drafts instanceof Map) || !object5(operation) || Object.keys(operation).some((key4) => !["type", "note", "confirmed", "mode"].includes(key4)) || !["ensure", "save", "remove"].includes(operation.type) || own4(operation, "mode") && !["reading", "saved"].includes(operation.mode)) throw Error("Unsupported personal-note change.");
     let state;
     if (operation.mode === "saved") {
-      if (!Array.isArray(saved2) || !object5(context) || Object.keys(context).some((key3) => !["uid", "ref"].includes(key3)) || operation.type === "ensure") throw Error("Saved note edits require an exact existing bookmark identity.");
+      if (!Array.isArray(saved2) || !object5(context) || Object.keys(context).some((key4) => !["uid", "ref"].includes(key4)) || operation.type === "ensure") throw Error("Saved note edits require an exact existing bookmark identity.");
       parseBookmarks(JSON.stringify({ format: "pali-library-v1", saved: [{ ...context, title: "Personal bookmark", note: "" }] }));
       const matches = saved2.filter((item) => object5(item) && item.uid === context.uid && item.ref === context.ref);
       if (matches.length !== 1) throw Error("Saved note edits require one exact existing bookmark.");
       state = { eligible: true, key: passageNoteKey(context), item: clone2(matches[0]) };
     } else state = passageNoteState(saved2, context);
     if (!state.eligible) throw Error(state.reason);
-    const { key: key2 } = state;
-    if (drafts.has(key2)) noteText(drafts.get(key2));
+    const { key: key3 } = state;
+    if (drafts.has(key3)) noteText(drafts.get(key3));
     if (operation.type !== "save" && own4(operation, "note")) throw Error("Only saving a personal note accepts note text.");
     if (own4(operation, "confirmed") && typeof operation.confirmed !== "boolean") throw Error("Removal confirmation must be explicit.");
     const note = operation.type === "save" ? noteText(operation.note) : void 0;
@@ -1253,7 +1258,7 @@
     }
     if (!state.item && saved2.length >= 500) throw Error("Your saved list is full (500 passages). Export or remove passages before adding a note.");
     const before = { saved: clone2(saved2), drafts: clone2(drafts) };
-    if (operation.type === "save") before.drafts.set(key2, note);
+    if (operation.type === "save") before.drafts.set(key3, note);
     const result = { saved: clone2(saved2), drafts: clone2(drafts), before, item: null, removed: operation.type === "remove" };
     const index = result.saved.findIndex((item) => object5(item) && item.uid === context.uid && item.ref === context.ref);
     if (operation.type === "remove") result.saved.splice(index, 1);
@@ -1264,12 +1269,88 @@
       else result.saved[index] = item;
       result.item = clone2(item);
     }
-    if (operation.type !== "ensure") result.drafts.delete(key2);
+    if (operation.type !== "ensure") result.drafts.delete(key3);
     return result;
   }
   function restorePassageNoteTransaction(transaction) {
     if (!object5(transaction?.before) || !Array.isArray(transaction.before.saved) || !(transaction.before.drafts instanceof Map)) throw Error("No personal-note transaction snapshot is available.");
     return clone2(transaction.before);
+  }
+
+  // web/study-backup.mjs
+  var MAX_STUDY_BACKUP_BYTES = 32 * 1024 * 1024;
+  var FORMAT = "pali-library-study-backup-v1";
+  var object6 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var exact2 = (value, keys2) => object6(value) && Object.keys(value).length === keys2.length && keys2.every((key3) => Object.hasOwn(value, key3));
+  var bytes = (text5) => new TextEncoder().encode(text5).length;
+  var clone3 = (value) => JSON.parse(JSON.stringify(value));
+  var key2 = (item) => JSON.stringify([item.uid, item.ref]);
+  function jsonData(value, depth = 0) {
+    if (depth > 12) throw Error("Unsupported nested study-backup metadata. Nothing was restored.");
+    if (value === null || typeof value === "string" || typeof value === "boolean" || typeof value === "number" && Number.isFinite(value)) return;
+    if (Array.isArray(value)) {
+      for (const item of value) jsonData(item, depth + 1);
+      return;
+    }
+    if (object6(value) && [Object.prototype, null].includes(Object.getPrototypeOf(value))) {
+      for (const item of Object.values(value)) jsonData(item, depth + 1);
+      return;
+    }
+    throw Error("Study backups accept only supported JSON metadata. Nothing was restored.");
+  }
+  function component(value, format, field, max) {
+    const text5 = JSON.stringify({ format, [field]: value });
+    if (bytes(text5) > max) throw Error("A study-backup component exceeds the 16 MiB limit. Nothing was restored.");
+    return text5;
+  }
+  function validate(data, canonicalizeProgress) {
+    if (!exact2(data, ["format", "saved", "progress", "resume"]) || data.format !== FORMAT || !Array.isArray(data.saved) || !Array.isArray(data.progress) || !(data.resume === null || isReadingLocator(data.resume))) throw Error("This is not a supported study backup. Nothing was restored.");
+    jsonData(data);
+    if (bytes(JSON.stringify(data)) > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
+    const saved2 = parseBookmarks(component(data.saved, "pali-library-v1", "saved", MAX_IMPORT_BYTES));
+    const normalized = parseProgressMetadata(component(data.progress, "pali-library-reading-progress-v1", "progress", MAX_PROGRESS_BYTES));
+    return { format: FORMAT, saved: saved2, progress: canonicalizeProgress ? normalized : clone3(data.progress), resume: data.resume };
+  }
+  function createStudyBackup(data) {
+    if (!exact2(data, ["saved", "progress", "resume"])) throw Error("Choose only saved passages, progress and an optional reading locator for backup.");
+    return validate({ format: FORMAT, ...data }, false);
+  }
+  function parseStudyBackup(text5) {
+    if (typeof text5 !== "string" || bytes(text5) > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
+    let data;
+    try {
+      data = JSON.parse(text5);
+    } catch {
+      throw Error("Choose a valid JSON study backup. Nothing was restored.");
+    }
+    return validate(data, true);
+  }
+  function mergeStudyBackup(current, incoming, catalog) {
+    if (!object6(current) || Object.keys(current).some((field) => !["saved", "progress", "drafts"].includes(field)) || !Array.isArray(current.saved) || !Array.isArray(current.progress) || current.drafts !== void 0 && !(current.drafts instanceof Map)) throw Error("Unsupported current personal-study metadata. Nothing was restored.");
+    const validatedCurrent = createStudyBackup({ saved: current.saved, progress: current.progress, resume: null });
+    const validatedIncoming = validate(incoming, true);
+    let progress = validatedIncoming.progress;
+    if (progress.length) {
+      if (!Array.isArray(catalog) || !catalog.length) throw Error("Current reading-plan metadata is required before restoring marks. Nothing was restored.");
+      progress = parseProgress(component(progress, "pali-library-reading-progress-v1", "progress", MAX_PROGRESS_BYTES), catalog);
+    }
+    const effective = validatedCurrent.saved.map((item) => {
+      if (!current.drafts?.has(key2(item))) return item;
+      const note = current.drafts.get(key2(item));
+      if (typeof note !== "string" || note.length > 4e3) throw Error("A current personal-note draft exceeds the supported note format. Nothing was restored.");
+      return { ...item, note };
+    });
+    const bookmarks = bookmarkMerge(current.saved, validatedIncoming.saved), marks = mergeProgress(current.progress, progress);
+    const existing = new Map(effective.map((item) => [key2(item), item]));
+    let bookmarkDuplicates = 0, bookmarkConflicts = 0;
+    for (const item of validatedIncoming.saved) {
+      const prior = existing.get(key2(item));
+      if (prior) {
+        if (JSON.stringify(prior) === JSON.stringify(item)) bookmarkDuplicates++;
+        else bookmarkConflicts++;
+      }
+    }
+    return { saved: clone3(bookmarks.saved), progress: clone3(marks.progress), bookmarkAdded: bookmarks.added.length, bookmarkDuplicates, bookmarkConflicts, progressAdded: marks.added, progressDuplicates: marks.duplicates, progressConflicts: marks.conflicts };
   }
 
   // web/reader.js
@@ -1324,7 +1405,7 @@
     panel.hidden = false;
     panel.replaceChildren(el("h2", "Keep this tab\u2019s changes"), el("p", storageWarning()), el("p", "Recovery files include this tab\u2019s unsaved note edits. Existing saved data is kept. After reloading, compare conflicting notes manually; import keeps existing notes on duplicate passages.", "muted"));
     const actions = el("div", void 0, "toolbar");
-    actions.append(button("Download this tab\u2019s bookmarks and notes", () => exportPersonal(exportBookmarks(), "pali-library-bookmarks.json")), button("Download this tab\u2019s reading progress", () => exportPersonal({ format: "pali-library-reading-progress-v1", progress: local.reading_progress }, "pali-library-reading-progress.json")));
+    actions.append(button("Download study backup", downloadStudyBackup), button("Download this tab\u2019s bookmarks and notes", () => exportPersonal(exportBookmarks(), "pali-library-bookmarks.json")), button("Download this tab\u2019s reading progress", () => exportPersonal({ format: "pali-library-reading-progress-v1", progress: local.reading_progress }, "pali-library-reading-progress.json")));
     const review = el("div");
     actions.append(button("Review reload options", () => {
       const title = el("h3", "Export before reloading");
@@ -1724,7 +1805,7 @@
   var sameSavedRecord = (expected, token) => token === epoch && JSON.stringify(savedRecord(expected)) === JSON.stringify(expected);
   function replaceNoteDrafts(drafts) {
     noteDrafts.clear();
-    for (const [key2, value] of drafts) noteDrafts.set(key2, value);
+    for (const [key3, value] of drafts) noteDrafts.set(key3, value);
   }
   function commitNoteChange(transaction, keepNewBookmark = false) {
     local.saved = transaction.saved;
@@ -1787,8 +1868,8 @@
       status2.textContent = "This bookmark changed. Review it again before removing it.";
       return;
     }
-    const snapshot = copySavedRecord(item), key2 = noteKey(item), hadDraft = noteDrafts.has(key2), draft = noteDrafts.get(key2);
-    const valid = () => host.isConnected && sameSavedRecord(snapshot, token) && noteDrafts.has(key2) === hadDraft && noteDrafts.get(key2) === draft;
+    const snapshot = copySavedRecord(item), key3 = noteKey(item), hadDraft = noteDrafts.has(key3), draft = noteDrafts.get(key3);
+    const valid = () => host.isConnected && sameSavedRecord(snapshot, token) && noteDrafts.has(key3) === hadDraft && noteDrafts.get(key3) === draft;
     function remove(confirmed) {
       if (!valid()) {
         status2.textContent = "The bookmark or draft changed. Cancel removal and review it again; nothing was removed.";
@@ -1832,8 +1913,8 @@
       region.append(el("p", "This source has no safe note reference: " + error.message, "notice"), link("See saved bookmark and note", "#saved"));
       return;
     }
-    const key2 = noteKey(context);
-    open = noteDrafts.has(key2) || Boolean(savedRecord(context)?.note);
+    const key3 = noteKey(context);
+    open = noteDrafts.has(key3) || Boolean(savedRecord(context)?.note);
     function mark() {
       const active = Boolean(savedRecord(context));
       control.textContent = active ? "Saved \u2713" : "Save passage";
@@ -1970,9 +2051,9 @@
       }
       const row = el("div", void 0, "segment-label"), reference = el("span");
       if (positionHref) {
-        const exact2 = link(segment.ref, positionHref);
-        exact2.setAttribute("aria-label", "Open exact passage " + segment.ref);
-        reference.append(exact2);
+        const exact3 = link(segment.ref, positionHref);
+        exact3.setAttribute("aria-label", "Open exact passage " + segment.ref);
+        reference.append(exact3);
       } else reference.textContent = segment.ref;
       if (segment.vri_paragraph) reference.append(document.createTextNode(" \xB7 VRI " + segment.vri_paragraph));
       row.append(reference);
@@ -2365,14 +2446,14 @@
     }
     const data = await tool("glossary", { term, direction, limit: 10 });
     if (token !== epoch) return;
-    if (typeof data.found !== "number" || !data.sources?.dpd?.attribution || !data.sources?.dpd?.license || !["english_to_pali", "pali_to_english"].some((key2) => Array.isArray(data[key2]))) throw new Error("The glossary response is incomplete or missing its source terms. This is not a no-match result.");
+    if (typeof data.found !== "number" || !data.sources?.dpd?.attribution || !data.sources?.dpd?.license || !["english_to_pali", "pali_to_english"].some((key3) => Array.isArray(data[key3]))) throw new Error("The glossary response is incomplete or missing its source terms. This is not a no-match result.");
     notes(data);
     if (data.note) view.append(el("p", data.note, "notice"));
-    for (const [key2, title] of [["english_to_pali", "English \u2192 P\u0101li"], ["pali_to_english", "P\u0101li \u2192 English"]]) {
-      if (!data[key2]?.length) continue;
+    for (const [key3, title] of [["english_to_pali", "English \u2192 P\u0101li"], ["pali_to_english", "P\u0101li \u2192 English"]]) {
+      if (!data[key3]?.length) continue;
       view.append(el("h3", title));
       const cards = el("div", void 0, "cards");
-      for (const entry of data[key2]) {
+      for (const entry of data[key3]) {
         const card = el("article", void 0, "entry");
         card.append(el("strong", entry.pali), el("p", entry.meaning || entry.gloss || ""), el("small", [entry.pos, entry.source].filter(Boolean).join(" \xB7 ")), link("Find this word in canonical texts", route("search", { q: entry.pali, scope: "canon" })));
         cards.append(card);
@@ -2450,12 +2531,157 @@
     a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1e3);
   }
+  function downloadStudyBackup() {
+    try {
+      const omitted = local.remember_position !== false && Object.hasOwn(local, "last") && !isReadingLocator(local.last);
+      exportPersonal(createStudyBackup({ saved: exportBookmarks().saved, progress: local.reading_progress, resume: local.remember_position !== false && isReadingLocator(local.last) ? local.last : null }), "pali-library-study-backup.json");
+      if (omitted) status2.textContent = "Study backup downloaded. The unsupported reading position was omitted; saved passages, personal notes and plan marks were included. Browser data was not changed.";
+    } catch (error) {
+      status2.textContent = error.message + " Individual bookmark and progress exports remain available in Saved, Plans and browser recovery.";
+    }
+  }
+  function studyBackup(token) {
+    heading("PERSONAL DATA \xB7 ON THIS DEVICE", "Study backup");
+    view.append(el("p", "Download saved references, personal notes (including unsaved edits), plan marks and an optional reading position. This file includes personal data: keep it somewhere private. The source-text library, accounts and browser preferences are excluded; your own notes are included.", "notice"), button("Download study backup", downloadStudyBackup));
+    const section = el("section"), label = el("label", "Restore study backup from JSON"), input = el("input"), preview = el("section", void 0, "import-preview");
+    input.type = "file";
+    input.accept = ".json,application/json";
+    label.append(input);
+    preview.setAttribute("aria-label", "Study backup preview");
+    preview.setAttribute("aria-live", "polite");
+    section.append(label, el("p", "The file stays on this device. Maximum 32 MiB. Preview before applying: existing notes, drafts, source pins and conflicting marks are kept. This is an additive restore, not account sync or an atomic cross-tab transaction.", "muted"), preview);
+    view.append(section, link("Saved passages and individual exports", "#saved", "button"), link("Reading plans and individual exports", "#plans", "button"));
+    let generation = 0;
+    const active = (request2) => token === epoch && request2 === generation && section.isConnected;
+    const personalState = () => JSON.stringify({ saved: local.saved, progress: local.reading_progress, drafts: [...noteDrafts], rememberPresent: Object.hasOwn(local, "remember_position"), remember: local.remember_position });
+    function storageNow() {
+      if (storageConflict || storageReadFailed) throw Error(storageWarning());
+      let raw;
+      try {
+        raw = localStorage.getItem(KEY);
+      } catch {
+        storageOK = false;
+        showStorageRecovery();
+        throw Error(storageWarning());
+      }
+      if (raw !== storageSnapshot && !readingPointerOnlyChange(storageSnapshot, raw)) {
+        storageConflict = true;
+        showStorageRecovery();
+        throw Error(storageWarning());
+      }
+      return raw;
+    }
+    function failure2(error, request2, retry, filename) {
+      if (!active(request2)) return;
+      const title = el("h3", "Unable to restore study backup");
+      title.tabIndex = -1;
+      preview.replaceChildren(title, el("p", error.message, "notice"));
+      if (filename) preview.append(el("p", "Local file: " + filename, "muted"));
+      if (retry) preview.append(button("Retry plan verification", retry));
+      preview.append(button("Cancel restore", cancel));
+      title.focus();
+    }
+    function cancel() {
+      ++generation;
+      input.value = "";
+      preview.replaceChildren();
+      input.focus();
+    }
+    async function prepare(incoming, request2, filename) {
+      if (!active(request2)) return;
+      try {
+        const state = personalState(), raw = storageNow(), localLastPresent = Object.hasOwn(local, "last"), localLast = local.last;
+        preview.replaceChildren(el("p", incoming.progress.length ? "Verifying current reading-plan assignments\u2026" : "Preparing local preview\u2026"));
+        const catalog = incoming.progress.length ? planCatalog(await tool("reading_plan", {})) : [];
+        if (!active(request2)) return;
+        if (personalState() !== state) throw Error("Personal study data changed while preparing this preview. Choose the file again. Nothing was restored.");
+        const merged = mergeStudyBackup({ saved: local.saved, progress: local.reading_progress, drafts: noteDrafts }, incoming, catalog);
+        const title = el("h3", "Review study backup");
+        title.tabIndex = -1;
+        preview.replaceChildren(title, el("p", "Local file: " + filename, "muted"), el("p", `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} conflicts kept`), el("p", `Plan marks: ${merged.progressAdded} new \xB7 ${merged.progressDuplicates} duplicates \xB7 ${merged.progressConflicts} conflicts kept`), el("p", "Existing notes, drafts and source pins win on a duplicate reference. Existing plan marks win on a conflicting day. Review conflicts manually; no source identity is upgraded.", "muted"));
+        const resumeLabel = el("label", void 0, "backup-resume"), resume = el("input");
+        resume.type = "checkbox";
+        resume.checked = false;
+        resume.disabled = !incoming.resume || local.remember_position === false;
+        resumeLabel.append(resume, document.createTextNode("Restore incoming reading position"));
+        preview.append(resumeLabel);
+        if (local.remember_position === false) preview.append(el("p", "Remember reading position is off. Restoring a position is disabled; your privacy preference will not change.", "muted"));
+        if (incoming.resume) {
+          preview.append(link("Open incoming reading position", incoming.resume), el("p", "Opening is your choice. Source-pinned positions are checked by the reader before displaying wording. Restoring does not open a passage.", "muted"));
+          if (!new URLSearchParams(incoming.resume.slice(6)).has("source")) preview.append(el("p", "Legacy reading position: its source revision was not recorded. It stays unpinned and is not upgraded.", "notice"));
+        }
+        let applying = false, applied = false;
+        const apply = button("Apply study backup", () => {
+          if (!active(request2) || applying || applied) return;
+          try {
+            if (personalState() !== state) throw Error("Personal study data changed since preview. Choose the file again. Nothing was restored.");
+            const currentRaw = storageNow();
+            if (currentRaw !== raw && !readingPointerOnlyChange(raw, currentRaw)) throw Error("Browser data changed since preview. Nothing was restored.");
+            if (resume.checked && (currentRaw !== raw || Object.hasOwn(local, "last") !== localLastPresent || local.last !== localLast)) throw Error("The reading position changed since preview. Preview the file again before restoring its position.");
+            if (resume.checked && (local.remember_position === false || !incoming.resume)) throw Error("Restoring the reading position is no longer available.");
+            const beforeSaved = local.saved, beforeProgress = local.reading_progress, beforeLastPresent = Object.hasOwn(local, "last"), beforeLast = local.last, beforeStorageSnapshot = storageSnapshot;
+            applying = true;
+            apply.disabled = true;
+            local.saved = merged.saved;
+            local.reading_progress = merged.progress;
+            if (resume.checked) {
+              local.last = incoming.resume;
+              storageSnapshot = currentRaw;
+            }
+            if (!persist()) {
+              local.saved = beforeSaved;
+              local.reading_progress = beforeProgress;
+              storageSnapshot = beforeStorageSnapshot;
+              if (beforeLastPresent) local.last = beforeLast;
+              else delete local.last;
+              updateResume();
+              throw Error("The study backup was not confirmed saved. This tab\u2019s original study data and drafts remain available. Keep the file and export your data before reloading. " + storageWarning());
+            }
+            applied = true;
+            resume.disabled = true;
+            updateResume();
+            const done = el("h3", "Study backup restored in this browser");
+            done.tabIndex = -1;
+            preview.append(done, el("p", "Existing personal data and preferences were kept. No passage was opened."));
+            done.focus();
+          } catch (error) {
+            preview.append(el("p", error.message, "notice"));
+            status2.textContent = storageConflict || !storageOK ? storageWarning() : error.message;
+          } finally {
+            applying = false;
+            apply.disabled = applied;
+          }
+        });
+        preview.append(apply, button("Cancel restore", cancel));
+        title.focus();
+      } catch (error) {
+        failure2(error, request2, incoming.progress.length ? () => prepare(incoming, ++generation, filename) : null, filename);
+      }
+    }
+    input.addEventListener("change", async () => {
+      const request2 = ++generation, file = input.files?.[0];
+      input.value = "";
+      preview.replaceChildren();
+      if (!file) return;
+      try {
+        if (file.size > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
+        const text5 = await file.text();
+        if (!active(request2)) return;
+        if (new TextEncoder().encode(text5).length > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
+        const incoming = parseStudyBackup(text5);
+        await prepare(incoming, request2, file.name);
+      } catch (error) {
+        failure2(error, request2, null, file.name);
+      }
+    });
+  }
   async function plans(args, token) {
     const name = args.get("name");
     if (!name) {
       const catalog = planCatalog(await tool("reading_plan", {}));
       if (token !== epoch) return;
       heading("AT YOUR OWN PACE", "Reading plans");
+      view.append(link("Study backup", "#backup", "button"));
       view.append(el("p", "Follow the existing sourced reading orders. Day numbers are steps, not deadlines. Marks record your choice only; they do not prove comprehension or completion of every passage.", "notice"));
       const cards = el("div", void 0, "cards"), counts = /* @__PURE__ */ new Map();
       for (const plan of catalog) {
@@ -2875,6 +3101,7 @@
     view.replaceChildren();
     heading("YOUR PERSONAL READING", "Saved passages");
     view.append(el("p", "Bookmarks and notes stay in this browser only. They are not scripture, synced, or backed up. Export them to keep a copy.", "notice"));
+    view.append(link("Study backup", "#backup", "button"));
     view.append(button("Export bookmarks and notes", () => {
       exportPersonal(exportBookmarks(), "pali-library-bookmarks.json");
     }));
@@ -3005,6 +3232,7 @@
       else if (page === "topic") await topicPage(args, token);
       else if (page === "lists") await teachingLists(args, token);
       else if (page === "saved") saved();
+      else if (page === "backup") studyBackup(token);
       else if (page === "about") about();
       else await browse(args, token);
       if (token !== epoch) return;
