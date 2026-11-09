@@ -1,0 +1,327 @@
+{
+  "decision": "D217",
+  "observed_on": "2026-11-09",
+  "baseline_commit": "872cfe56e81e5463b00ebbafee3b6a16e7e01be1",
+  "source_access_review": {
+    "schema": "patthana-source-access-review-v1",
+    "observed_on": "2026-11-09",
+    "baseline_commit": "872cfe56e81e5463b00ebbafee3b6a16e7e01be1",
+    "status": "blocked-source-artifact-acquisition",
+    "inputs": [
+      {
+        "path": "docs/translations/patthana-opening-assessment.md",
+        "sha256": "88bbee41da0258ade948fd2256a7faa4b1b39e1470c7f5639780984474b0374b"
+      },
+      {
+        "path": "docs/translations/candidates/paccayuddesaniddesa.json",
+        "sha256": "a80c8c76fbb7fde202a0ab332ba690ac41c7cafbb8f6d4b2573686c9b23d37b7"
+      }
+    ],
+    "scope": "Bounded primary-link and public GitHub-metadata research for an author-controlled exact publisher HTML artifact. No translation activation or renewed source/alignment review.",
+    "candidate": {
+      "url": "https://ancient-buddhist-texts.net/Texts-and-Translations/Short-Pieces/Paccayuddesaniddesa.htm",
+      "title": "Paccayuddesaniddesa",
+      "translator": "Ānandajoti Bhikkhu",
+      "target_unit": "patthana1.1",
+      "proposed_first_ref": "patthana1.1/6",
+      "proposed_last_ref": "patthana1.1/63",
+      "assessment_only": true
+    },
+    "access_policy": {
+      "executor_network": "Package/GitHub hosts only; known publisher-access restriction was not retried.",
+      "supported_web": "Primary publisher rendered views are accessible; this capability exposes rendered content/links, not raw HTML bytes.",
+      "github_connector": "Public repository metadata, directory/tree and UTF8 repository-file access available through supported GitHub tools.",
+      "prohibited_workarounds_not_used": [
+        "Executor fetch to ABT, alternate publisher host/address or redirect route.",
+        "Third-party mirror, proxy, archive scrape or renderer-as-raw-HTML substitution.",
+        "SuttaCentral page/repository access or derivation."
+      ]
+    },
+    "primary_observations": [
+      {
+        "url": "https://ancient-buddhist-texts.net/Texts-and-Translations/Short-Pieces/Paccayuddesaniddesa.htm",
+        "evidence_kind": "publisher-rendered-web",
+        "total_lines": 1602,
+        "header_lines": [
+          2,
+          11
+        ],
+        "download_link_lines": [
+          13,
+          13
+        ],
+        "final_update_line": 1599,
+        "observations": [
+          "Rendered title/translator and downloadable PDF/MOBI/EPUB links remain exposed.",
+          "The view reports October2013 update text.",
+          "No raw HTML artifact, parser classification or footnote fidelity was acquired or certified."
+        ],
+        "raw_artifact_acquired": false
+      },
+      {
+        "url": "https://ancient-buddhist-texts.net/",
+        "evidence_kind": "publisher-rendered-web",
+        "total_lines": 907,
+        "observation": "Rendered homepage GitHub-text search found no match; no author-to-GitHub provenance link was established. This is not proof that no repository exists."
+      }
+    ],
+    "github_observations": [
+      {
+        "query": "ancient-buddhist-texts",
+        "capability": "github_search_repositories",
+        "result": "Results were third-party project names; no verified author-controlled exact-page source identified. No source bodies acquired from those results."
+      },
+      {
+        "query": "Anandajoti",
+        "capability": "github_search_repositories",
+        "result": "Name-matching public account/repository identified, but author identity not established merely from username."
+      },
+      {
+        "url": "https://github.com/Anandajoti",
+        "evidence_kind": "public GitHub profile rendered view",
+        "total_lines": 149,
+        "repository_lines": [
+          131,
+          137
+        ],
+        "public_repositories_shown": [
+          "Anandajoti/anandajoti.github.io",
+          "Anandajoti/parthopdas.github.io"
+        ],
+        "author_control_verified": false
+      },
+      {
+        "repository": "Anandajoti/anandajoti.github.io",
+        "default_branch": "master",
+        "tree_url": "https://api.github.com/repos/Anandajoti/anandajoti.github.io/git/trees/master?recursive=1",
+        "tree_sha": "ce90f67e2af1c7d1ef0241f22ce1540266e7a721",
+        "tree_truncated": false,
+        "tree_entries": [
+          {
+            "path": "README.md",
+            "size": 23,
+            "git_blob_sha": "5609304200208b202298bd6a02235f516f278632"
+          }
+        ],
+        "result": "The complete current default-branch tree has only README.md; no publisher HTML or exact candidate page. README contains only the repository title. No linkage to the primary author/site was established."
+      },
+      {
+        "repository": "Anandajoti/parthopdas.github.io",
+        "metadata_url": "https://api.github.com/repos/Anandajoti/parthopdas.github.io",
+        "fork": true,
+        "parent": "parthopdas/parthopdas.github.io",
+        "source": "parthopdas/parthopdas.github.io",
+        "description": "laughing-memory",
+        "homepage": null,
+        "result": "Unrelated fork metadata, not evidence of a publisher-controlled ABT source. Repository bodies were not acquired."
+      },
+      {
+        "query": "Paccayuddesaniddesa",
+        "capability": "github_search_repositories",
+        "page": 1,
+        "per_page": 10,
+        "result_count": 0,
+        "result": "No repository-name/description result. This does not establish absence from all code, private repositories, historical branches or other account names."
+      }
+    ],
+    "third_party_result_handling": {
+      "result_classes": [
+        "Catalogue entry for candidate.",
+        "Third-party PDF/archive/mirror repositories."
+      ],
+      "action": "Not opened or acquired as replacement publisher source. Search hits do not establish author control, exact-file provenance or source independence.",
+      "incidental_search_limits": "Incidental SuttaCentral-related search hits were not opened, used or followed."
+    },
+    "artifact": {
+      "author_html_bytes_acquired": false,
+      "author_html_sha256": null,
+      "full_extracted_text_sha256": null,
+      "raw_notice_sha256": null,
+      "html_boundaries_verified": false,
+      "footnote_extraction_verified": false,
+      "provenance_verified_github_artifact": false
+    },
+    "blocker": {
+      "action": "Acquire and pin exact author HTML for Paccayuddesaniddesa.htm.",
+      "state": "stopped-blocked",
+      "reason": "Known executor ABT-access restriction plus no verified author-controlled exact HTML copy located through supported GitHub capabilities. Supported web rendering does not expose raw source bytes or reproducible markup/footnote boundaries.",
+      "not_a_rights_denial": "Existing assessment records positive author CC BY-SA3.0 rights evidence; this access review neither revokes it nor assumes a further permission letter is required.",
+      "uncertainty": "Bounded negative search is not proof that no legitimate author repository exists."
+    },
+    "permitted_next_steps": [
+      "Keep candidate assessment-only until exact author artifact and provenance become available through supported access.",
+      "A verified author-controlled repository or author-provided exact HTML artifact could satisfy this acquisition gate if independently inspected and hashed.",
+      "Continue independent reader work without source activation or fabricated source pins."
+    ],
+    "changes": {
+      "repository_edits": false,
+      "source_activation": false,
+      "source_body_in_repository": false,
+      "canonical_or_notes_changes": false,
+      "commit_or_push": false
+    },
+    "limits": [
+      "Local input hashes identify existing assessment files only; Git tree/blob identifiers identify repository metadata/README only. None is a hash of the publisher HTML.",
+      "No new source-text correctness, licence variation, complete-note extraction or runtime alignment approval follows.",
+      "No executor publisher fetch was attempted in this task."
+    ]
+  },
+  "local_candidate_audit": {
+    "status": "passed",
+    "source_url": "https://ancient-buddhist-texts.net/Texts-and-Translations/Short-Pieces/Paccayuddesaniddesa.htm",
+    "adoption": "assessment_only",
+    "unit": "patthana1.1",
+    "unit_segments": 139,
+    "candidate_span": {
+      "first_ref": "patthana1.1/6",
+      "last_ref": "patthana1.1/63"
+    },
+    "untranslated_following_segments": 76,
+    "probes": [
+      {
+        "source_section": "enumeration",
+        "normalized_sha256": "c3a1160040e09be46b2a9778337d36e43280a5e8c9b7d587f9e8bf9255d9bcc0",
+        "competing_refs": [
+          "patthana1.1/7"
+        ]
+      },
+      {
+        "source_section": "root-condition-explanation",
+        "normalized_sha256": "beefe7a68833d1f0fc1156cf00ddb7aa641926f689ad89475f959b2af5690744",
+        "competing_refs": [
+          "patthana1.1/9"
+        ]
+      }
+    ],
+    "full_span_probe": {
+      "normalized_characters": 13678,
+      "normalized_sha256": "2904f22000eb9f099597fddad63f15936d331c6499c4c4174f02b07af1884264",
+      "competing_units": [
+        "patthana1.1"
+      ],
+      "html_verified": false
+    },
+    "canonical_units_checked": 8544,
+    "patthana_units": 728,
+    "patthana_units_with_english": 0,
+    "runtime_candidate_links": 0,
+    "network_attempts": 0,
+    "scope": "Local VRI boundary/digest and adoption-state guard only. No source HTML reacquired; no translation fidelity, complete-page mapping or rights approval is inferred."
+  },
+  "reader": {
+    "node": "english",
+    "tool": "browse_canon",
+    "availability": [
+      "linked",
+      "whole",
+      "scoped",
+      "none"
+    ],
+    "scope": "Existing canonical records with confirmed locations, excluding synthetic kind:range groups. Ordinary links can refer to containing chapters; metadata does not prove individual completeness.",
+    "snapshot_counts": {
+      "eligible_records": 8180,
+      "linked": 1894,
+      "whole": 1830,
+      "scoped_only": 64,
+      "none": 6286,
+      "partial_source_owners_discoverable": 18,
+      "partial_only_records": 12,
+      "shared_only_records": 52
+    },
+    "counts_are_not": "Global whole-translation coverage, distinct source pages, proof of alignment, or absence of translations elsewhere.",
+    "source_changes": false,
+    "automatic_english_fetch": false,
+    "personal_storage_changes": false,
+    "read_command": {
+      "tool": "get_text",
+      "uid": "exact-existing-id"
+    }
+  },
+  "unchanged_coverage": {
+    "canonical_units": 8544,
+    "approximate_units": 265,
+    "ordinary_links": 2538,
+    "whole_covered_direct": 1434,
+    "whole_covered_inherited": 1857,
+    "runtime_grouped_direct": 1408,
+    "runtime_grouped_inherited": 1831,
+    "reviewed_partial_sources": 18,
+    "partial_only_units": 12,
+    "reviewed_shared_pages": 12,
+    "shared_subject_records": 110,
+    "shared_only_records": 52,
+    "daily_eligible": 1257
+  },
+  "validation": {
+    "status": "local-gates-passed-exact-head-ci-required",
+    "independent_review": {
+      "reviewer": "separate-source-and-reader-review-agent",
+      "found_and_fixed": [
+        "Noncanonical English-node aliases bypassed strict catalogue validation.",
+        "Apadana valid tha-ap/thi-ap IDs were initially rejected.",
+        "Tablet filter form overflow at768px corrected."
+      ],
+      "outstanding_concrete_findings": 0
+    },
+    "browser": {
+      "normal_checks": 48,
+      "installed_checks": 48,
+      "a11y_checks": 96,
+      "a11y_scans": 48,
+      "a11y_violations": 0,
+      "widths": [
+        320,
+        390,
+        768,
+        1280
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "existing_reader_regression_checks": 173
+    },
+    "installed_evidence": {
+      "status": "passed",
+      "reading_commands": 11983,
+      "plan_days": 478,
+      "topics": 472,
+      "network_attempts": 0
+    },
+    "installed_corpus": {
+      "status": "passed",
+      "canonical_texts": 8544,
+      "canonical_segments": 134380,
+      "commentary_books": 47,
+      "postcanonical_books": 109,
+      "network_attempts": 0,
+      "failures": 0
+    },
+    "candidate_guard": {
+      "status": "passed",
+      "canonical_units_checked": 8544,
+      "patthana_units": 728,
+      "runtime_candidate_links": 0,
+      "network_attempts": 0
+    },
+    "limitations": [
+      "Publisher raw HTML acquisition remains stopped-blocked; no source activated.",
+      "Browser automation and axe checks do not certify human accessibility or physical devices.",
+      "Exact-head CI is separately required before reporting integration complete.",
+      "No main merge or deployment."
+    ],
+    "full_check": {
+      "status": "passed",
+      "tests": 1152,
+      "passed": 1150,
+      "failed": 0,
+      "skipped": 2,
+      "skip_reasons": [
+        "Optional live dhammatalks quotation unavailable under executor network policy.",
+        "Optional historical worktree comparison unavailable/advanced; frozen descriptor hashes still mandatory."
+      ],
+      "canonical_audit_texts": 8544,
+      "canonical_audit_failures": 0
+    }
+  }
+}

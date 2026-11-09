@@ -156,6 +156,19 @@ jobs:
       - name: Audit quotation checker in both themes
         if: matrix.group == 'study'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-quote-check.py --a11y --report standalone-quote-a11y.report.json
+      - name: Check English-source catalogue filters and exact reading links
+        if: matrix.group == 'study'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-english-catalogue-check.py --report standalone-english-catalogue.report.json
+      - name: Audit English-source catalogue in both themes
+        if: matrix.group == 'study'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-english-catalogue-check.py --a11y --report standalone-english-catalogue-a11y.report.json
+      - name: Check the installed English-source catalogue outside the source tree
+        if: matrix.group == 'study'
+        run: |
+          mkdir -p "$RUNNER_TEMP/english-package"
+          npm pack --pack-destination "$RUNNER_TEMP/english-package"
+          tar -xzf "$RUNNER_TEMP/english-package/"*.tgz -C "$RUNNER_TEMP/english-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-english-catalogue-check.py --server-dir "$RUNNER_TEMP/english-package/package/server" --report installed-english-catalogue.report.json
       - name: Check local reading-progress restore and source-signature preservation
         if: matrix.group == 'personal'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-progress-check.py --report standalone-progress.report.json
@@ -215,6 +228,9 @@ jobs:
             standalone-daily-a11y.report.json
             standalone-compact.report.json
             standalone-compact-a11y.report.json
+            installed-english-catalogue.report.json
+            standalone-english-catalogue.report.json
+            standalone-english-catalogue-a11y.report.json
             standalone-quote.report.json
             standalone-quote-a11y.report.json
             standalone-progress.report.json

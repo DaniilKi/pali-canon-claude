@@ -71,8 +71,8 @@
       if (selected !== "all" && savedScope(item) !== selected) return false;
       const key2 = JSON.stringify([item.uid, item.ref]);
       const note = drafts?.has(key2) ? drafts.get(key2) : item.note;
-      const text3 = fold([item.title, item.uid, item.ref, note].filter((x) => typeof x === "string").join(" "));
-      return tokens.every((token) => text3.includes(token));
+      const text4 = fold([item.title, item.uid, item.ref, note].filter((x) => typeof x === "string").join(" "));
+      return tokens.every((token) => text4.includes(token));
     });
     const pages = Math.max(1, Math.ceil(matches.length / SAVED_PAGE_SIZE));
     const current = Number.isSafeInteger(page) ? Math.max(0, Math.min(page, pages - 1)) : 0;
@@ -86,9 +86,9 @@
     sheet.id = "print-document";
     sheet.setAttribute("aria-hidden", "true");
     doc.body.append(sheet);
-    const add = (parent, tag, text3, className) => {
+    const add = (parent, tag, text4, className) => {
       const node = doc.createElement(tag);
-      node.textContent = text3;
+      node.textContent = text4;
       if (className) node.className = className;
       parent.append(node);
       return node;
@@ -113,8 +113,8 @@
       for (const segment of passage.querySelectorAll(":scope > .segment")) {
         const block = add(sheet, "section", "", "print-segment");
         add(block, "p", segment.querySelector(".segment-label span")?.textContent || "", "print-reference");
-        const text3 = add(block, "p", segment.querySelector(".passage")?.textContent || "", "print-passage");
-        text3.lang = "pi";
+        const text4 = add(block, "p", segment.querySelector(".passage")?.textContent || "", "print-passage");
+        text4.lang = "pi";
       }
       const source2 = add(sheet, "section", "", "print-provenance");
       add(source2, "h2", "Source and terms");
@@ -466,9 +466,9 @@
     if (t.verseEnd) s = s.replace(/;(\s*)$/, `${STOP}$1`);
     return s;
   }
-  function fromRoman(text3, script, stanza) {
+  function fromRoman(text4, script, stanza) {
     const t = TABLES[script];
-    const s = romanPunctuation(text3.normalize("NFC"), t, stanza).toLowerCase();
+    const s = romanPunctuation(text4.normalize("NFC"), t, stanza).toLowerCase();
     let out = "";
     let pending = null;
     let consStart = -1;
@@ -537,10 +537,10 @@
     const prefixes = t.prefix ? /* @__PURE__ */ new Map([[t.sign.e, "e"], [t.sign.o, "o"]]) : /* @__PURE__ */ new Map();
     return REVERSE[script] = { t, cons, ind, signs, signList: byLength(signs), indList: byLength(ind), punct, expand, prefixes };
   }
-  function toRomanFrom(text3, script) {
+  function toRomanFrom(text4, script) {
     const R = reverse(script);
     const { t } = R;
-    let s = text3.normalize("NFC").replace(/[\u200c\u200d]/g, "");
+    let s = text4.normalize("NFC").replace(/[\u200c\u200d]/g, "");
     for (const [a, b] of R.expand) s = s.split(a).join(b);
     const at = (i, list) => list.find((x) => s.startsWith(x, i));
     let out = "";
@@ -591,9 +591,9 @@
     ["khmer", 6016, 6143],
     ["lanna", 6688, 6831]
   ];
-  function detectScript(text3) {
+  function detectScript(text4) {
     const counts = {};
-    for (const ch of String(text3 ?? "")) {
+    for (const ch of String(text4 ?? "")) {
       const cp = ch.codePointAt(0);
       if (cp < 2304) continue;
       for (const [name, lo, hi] of RANGES) if (cp >= lo && cp <= hi) {
@@ -609,9 +609,9 @@
     }
     return best;
   }
-  function transliterate(text3, from, to, { stanza = false } = {}) {
-    if (text3 == null) return text3;
-    const s = String(text3);
+  function transliterate(text4, from, to, { stanza = false } = {}) {
+    if (text4 == null) return text4;
+    const s = String(text4);
     const a = from === "auto" ? detectScript(s) : scriptName(from);
     const b = scriptName(to);
     if (a === b) return s;
@@ -627,9 +627,9 @@
       script_note: `P\u0101li transliterated into ${SCRIPT_NAMES[script]} by this server from the VRI Roman edition (exact letter-for-letter; punctuation follows VRI's own script editions where they exist). Citations, IDs and English are left in Roman.`
     };
   }
-  var pali = (text3, script, opts) => typeof text3 === "string" && text3 ? transliterate(text3, "roman", script, opts) : text3;
-  function verse(text3, script) {
-    const lines = text3.split("\n");
+  var pali = (text4, script, opts) => typeof text4 === "string" && text4 ? transliterate(text4, "roman", script, opts) : text4;
+  function verse(text4, script) {
+    const lines = text4.split("\n");
     return lines.map((line, i) => pali(line, script, { stanza: i === lines.length - 1 })).join("\n");
   }
   function localizeUnitFields(obj, script) {
@@ -672,28 +672,28 @@
   function scopeDescriptor(choice, requestedId) {
     if (!own(choice, "translation_scope")) return null;
     const scope = choice.translation_scope;
-    const fail2 = () => {
+    const fail3 = () => {
       throw new Error("This source has an unsupported or incomplete scope declaration. No scoped source was requested. Reload the passage and review the updated sources.");
     };
-    if (!scope || ![1, 2].includes(scope.version) || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail2();
+    if (!scope || ![1, 2].includes(scope.version) || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail3();
     if (scope.kind === "shared_page") {
-      if (scope.version !== 1) fail2();
+      if (scope.version !== 1) fail3();
       const ids = scope.text_ids;
       const presentation = scope.presentation || (scope.condensed === true ? "condensed" : null);
-      if (!Array.isArray(ids) || ids.length < 2 || ids.length > 32 || ids.some((id) => !nonempty(id) || id.length > 300) || new Set(ids).size !== ids.length || !ids.includes(requestedId) || scope.owner_id !== ids[0] || scope.individual_alignment_verified !== false || !nonempty(scope.source_reference) || !["condensed", "compilation"].includes(presentation) || presentation === "compilation" && !sha(scope.notice_sha256) || own(scope, "condensed") && scope.condensed !== (presentation === "condensed")) fail2();
+      if (!Array.isArray(ids) || ids.length < 2 || ids.length > 32 || ids.some((id2) => !nonempty(id2) || id2.length > 300) || new Set(ids).size !== ids.length || !ids.includes(requestedId) || scope.owner_id !== ids[0] || scope.individual_alignment_verified !== false || !nonempty(scope.source_reference) || !["condensed", "compilation"].includes(presentation) || presentation === "compilation" && !sha(scope.notice_sha256) || own(scope, "condensed") && scope.condensed !== (presentation === "condensed")) fail3();
       return { kind: scope.kind, label: presentation === "compilation" ? "Shared compilation page" : "Shared condensed page", scope: JSON.parse(JSON.stringify(scope)), flags: { allow_shared: true, scope_sha256: scope.scope_sha256 } };
     }
     if (scope.kind === "partial_unit") {
       const prefix = requestedId + "/";
-      if (choice.translation_id.startsWith("ati:") && (!(scope.version === 2 ? ["ati-chapter-prose-v1", "ati-chapter-p5-of5-no-notes-v1", "ati-chapter-p1to4-of5-notes-v1"].includes(scope.extractor) : ["ati-freeverse-v1", "ati-chapter-p2-of2-v1", "ati-chapter-p11-of11-v1", "ati-chapter-p1-of4-v1", "ati-chapter-p14-of24-v1", "ati-excerpt-verse-pre-v1", "ati-chapter-p1to3-of4-ellipsis-v1"].includes(scope.extractor)) || !sha(scope.notice_sha256))) fail2();
+      if (choice.translation_id.startsWith("ati:") && (!(scope.version === 2 ? ["ati-chapter-prose-v1", "ati-chapter-p5-of5-no-notes-v1", "ati-chapter-p1to4-of5-notes-v1"].includes(scope.extractor) : ["ati-freeverse-v1", "ati-chapter-p2-of2-v1", "ati-chapter-p11-of11-v1", "ati-chapter-p1-of4-v1", "ati-chapter-p14-of24-v1", "ati-excerpt-verse-pre-v1", "ati-chapter-p1to3-of4-ellipsis-v1"].includes(scope.extractor)) || !sha(scope.notice_sha256))) fail3();
       if (scope.version === 2) {
         const p = scope.pali_excerpt;
-        if (!choice.translation_id.startsWith("ati:") || scope.first_ref !== scope.last_ref || !p || p.ref !== scope.first_ref || p.type !== "prose" || !nonempty(p.text) || p.text.length > 2e6 || p.offset_unit !== "utf16_code_units" || !sha(p.segment_sha256) || !Number.isSafeInteger(p.start_char) || !Number.isSafeInteger(p.end_char) || p.start_char < 0 || p.end_char <= p.start_char || p.end_char - p.start_char !== p.text.length || own(scope, "read_with") || own(scope, "read_pages")) fail2();
-      } else if (own(scope, "pali_excerpt")) fail2();
-      if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail2();
+        if (!choice.translation_id.startsWith("ati:") || scope.first_ref !== scope.last_ref || !p || p.ref !== scope.first_ref || p.type !== "prose" || !nonempty(p.text) || p.text.length > 2e6 || p.offset_unit !== "utf16_code_units" || !sha(p.segment_sha256) || !Number.isSafeInteger(p.start_char) || !Number.isSafeInteger(p.end_char) || p.start_char < 0 || p.end_char <= p.start_char || p.end_char - p.start_char !== p.text.length || own(scope, "read_with") || own(scope, "read_pages")) fail3();
+      } else if (own(scope, "pali_excerpt")) fail3();
+      if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail3();
       return { kind: scope.kind, label: "Partial-unit source", scope: JSON.parse(JSON.stringify(scope)), flags: { allow_partial: true, scope_sha256: scope.scope_sha256 } };
     }
-    fail2();
+    fail3();
   }
   function validateEnglishPage(data, args, context) {
     const offset = args.offset || 0;
@@ -768,10 +768,10 @@
   var string2 = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f]/.test(x);
   var object = (x) => x && typeof x === "object" && !Array.isArray(x);
   var identity = (x) => JSON.stringify([x.uid, x.ref]);
-  function parseBookmarks(text3) {
+  function parseBookmarks(text4) {
     let data;
     try {
-      data = JSON.parse(text3);
+      data = JSON.parse(text4);
     } catch {
       throw Error("Choose a valid JSON bookmark export. Nothing was imported.");
     }
@@ -808,18 +808,18 @@
 
   // web/quote-check.mjs
   function validatePaliQuote(data, quote) {
-    const fail2 = () => {
+    const fail3 = () => {
       throw Error("The quotation result is incomplete or does not match this P\u0101li request. No verdict or substitute source was displayed.");
     };
-    const text3 = (x) => typeof x === "string" && x.length > 0;
+    const text4 = (x) => typeof x === "string" && x.length > 0;
     const integer4 = (x) => Number.isSafeInteger(x) && x >= 0;
-    if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text3(data.explanation) || !text3(data.guidance) || data.scope?.language !== "pali" || !text3(data.scope.searched) || !text3(data.scope.attribution) || !text3(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text3(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text3(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail2();
-    if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text3(data.citation_note))) fail2();
+    if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text4(data.explanation) || !text4(data.guidance) || data.scope?.language !== "pali" || !text4(data.scope.searched) || !text4(data.scope.attribution) || !text4(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text4(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text4(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail3();
+    if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text4(data.citation_note))) fail3();
     for (const m of data.matches) {
       const command2 = m.read_with, span = m.source_span;
-      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text3(m.citation) || !text3(m.matched_text) || !text3(m.edition) || !text3(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command2?.tool !== "get_text" || command2.uid !== m.text_id || !integer4(command2.offset) || !integer4(command2.limit) || command2.limit < 1 || command2.limit > 200 || span?.offset !== command2.offset || span.first_segment_ref !== m.segment_ref || !integer4(span.end_offset) || span.end_offset <= span.offset || !text3(span.last_segment_ref)) fail2();
+      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text4(m.citation) || !text4(m.matched_text) || !text4(m.edition) || !text4(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command2?.tool !== "get_text" || command2.uid !== m.text_id || !integer4(command2.offset) || !integer4(command2.limit) || command2.limit < 1 || command2.limit > 200 || span?.offset !== command2.offset || span.first_segment_ref !== m.segment_ref || !integer4(span.end_offset) || span.end_offset <= span.offset || !text4(span.last_segment_ref)) fail3();
     }
-    if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail2();
+    if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail3();
     return data;
   }
 
@@ -830,31 +830,31 @@
   var exact = (x, keys2) => object2(x) && Object.keys(x).length === keys2.length && keys2.every((k) => Object.hasOwn(x, k));
   var integer2 = (x, min, max) => Number.isSafeInteger(x) && x >= min && x <= max;
   var key = (x) => x.name + ":" + x.day;
-  function parseProgress(text3, catalog) {
-    const fail2 = () => {
+  function parseProgress(text4, catalog) {
+    const fail3 = () => {
       throw Error("This is not a supported reading-progress export. No marks were restored.");
     };
     let data;
     try {
-      data = JSON.parse(text3);
+      data = JSON.parse(text4);
     } catch {
-      fail2();
+      fail3();
     }
-    if (!exact(data, ["format", "progress"]) || data.format !== "pali-library-reading-progress-v1" || !Array.isArray(data.progress) || data.progress.length > MAX_PROGRESS_MARKS) fail2();
+    if (!exact(data, ["format", "progress"]) || data.format !== "pali-library-reading-progress-v1" || !Array.isArray(data.progress) || data.progress.length > MAX_PROGRESS_MARKS) fail3();
     const plans2 = new Map(catalog.map((p) => [p.name, p.days])), seen = /* @__PURE__ */ new Set();
     return data.progress.map((mark) => {
-      if (!exact(mark, ["name", "day", "signature"]) || !plans2.has(mark.name) || !integer2(mark.day, 1, plans2.get(mark.name)) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail2();
+      if (!exact(mark, ["name", "day", "signature"]) || !plans2.has(mark.name) || !integer2(mark.day, 1, plans2.get(mark.name)) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail3();
       seen.add(key(mark));
       let s;
       try {
         s = JSON.parse(mark.signature);
       } catch {
-        fail2();
+        fail3();
       }
-      if (!exact(s, ["name", "day", "source", "readings"]) || s.name !== mark.name || s.day !== mark.day || typeof s.source !== "string" || !/^[a-zA-Z0-9._-]{1,100}$/.test(s.source) || !Array.isArray(s.readings) || !s.readings.length || s.readings.length > 20) fail2();
+      if (!exact(s, ["name", "day", "source", "readings"]) || s.name !== mark.name || s.day !== mark.day || typeof s.source !== "string" || !/^[a-zA-Z0-9._-]{1,100}$/.test(s.source) || !Array.isArray(s.readings) || !s.readings.length || s.readings.length > 20) fail3();
       const ids = /* @__PURE__ */ new Set();
       for (const r of s.readings) {
-        if (!exact(r, ["id", "offset", "limit", "part", "of"]) || typeof r.id !== "string" || !/^[a-z][a-z0-9.-]{0,299}$/.test(r.id) || ids.has(r.id) || !integer2(r.offset, 0, 1e5) || !(r.limit === null || integer2(r.limit, 1, 1e5)) || !(r.part === null && r.of === null || integer2(r.part, 1, 400) && integer2(r.of, r.part, 400) && r.limit !== null)) fail2();
+        if (!exact(r, ["id", "offset", "limit", "part", "of"]) || typeof r.id !== "string" || !/^[a-z][a-z0-9.-]{0,299}$/.test(r.id) || ids.has(r.id) || !integer2(r.offset, 0, 1e5) || !(r.limit === null || integer2(r.limit, 1, 1e5)) || !(r.part === null && r.of === null || integer2(r.part, 1, 400) && integer2(r.of, r.part, 400) && r.limit !== null)) fail3();
         ids.add(r.id);
       }
       const signature = JSON.stringify({ name: s.name, day: s.day, source: s.source, readings: s.readings.map((r) => ({ id: r.id, offset: r.offset, limit: r.limit, part: r.part, of: r.of })) });
@@ -1054,8 +1054,71 @@
     return { snapshot, disabled: false };
   }
 
+  // web/english-catalogue.mjs
+  var ENGLISH_AVAILABILITY = Object.freeze({ linked: "All English links", whole: "Whole-unit or chapter links", scoped: "Scoped English only", none: "No English links" });
+  var fail2 = () => {
+    throw Error("The English source catalogue does not match this selection. No filter or source was substituted.");
+  };
+  var object3 = (x) => x !== null && typeof x === "object" && !Array.isArray(x);
+  var text3 = (x) => typeof x === "string" && x.trim().length > 0 && x.length <= 2e3;
+  var count = (x) => Number.isSafeInteger(x) && x >= 0;
+  var id = (x) => typeof x === "string" && /^[a-z][a-z0-9.-]{0,199}$/.test(x);
+  var collectionId = (x) => typeof x === "string" && /^[a-z]{1,30}$/.test(x);
+  var belongs = (uid, collection) => collection === "vinaya" ? uid.startsWith("pli-tv-") : collection === "ap" ? /^(tha|thi)-ap[0-9]/.test(uid) : new RegExp("^" + collection + "[0-9]").test(uid);
+  function englishBrowseCandidate(args) {
+    const normalized = (x) => String(x).normalize("NFD").replace(/\p{M}/gu, "").replace(/\s+/gu, "").toLowerCase();
+    return args.has("availability") || args.has("collection") || args.getAll("node").some((value) => normalized(value) === "english");
+  }
+  function englishSelection(args) {
+    const keys2 = ["node", "availability", "collection", "offset"];
+    for (const k of args.keys()) if (!keys2.includes(k) || args.getAll(k).length !== 1) fail2();
+    if (args.get("node") !== "english") fail2();
+    const availability = args.has("availability") ? args.get("availability") : "linked";
+    const collection = args.has("collection") ? args.get("collection") : null;
+    const raw = args.has("offset") ? args.get("offset") : "0";
+    if (!Object.hasOwn(ENGLISH_AVAILABILITY, availability) || collection !== null && !collectionId(collection) || !/^(0|[1-9]\d*)$/.test(raw) || !count(Number(raw))) fail2();
+    return { availability, collection, offset: Number(raw), limit: 40 };
+  }
+  function englishRoute(selection, offset = selection.offset) {
+    if (!Object.hasOwn(ENGLISH_AVAILABILITY, selection.availability) || selection.collection !== null && !collectionId(selection.collection) || !count(offset)) fail2();
+    const q = new URLSearchParams({ node: "english", availability: selection.availability });
+    if (selection.collection !== null) q.set("collection", selection.collection);
+    if (offset) q.set("offset", String(offset));
+    return "#browse?" + q;
+  }
+  function englishBadges(item) {
+    const partial = item.partial_english_available || 0, shared = item.shared_english_available || 0;
+    return [...item.english_available ? ["Whole-unit or chapter link"] : [], ...partial && shared ? ["Partial and shared sources \xB7 review required"] : partial ? ["Partial source \xB7 review required"] : shared ? ["Shared page \xB7 review required"] : [], ...!item.english_available && !partial && !shared ? ["No indexed English link"] : []];
+  }
+  function englishCatalogue(data, selection) {
+    if (!object3(data) || data.catalogue !== true || data.node !== "english" || data.name !== "Find English sources" || data.availability !== selection.availability || data.collection !== selection.collection || data.offset !== selection.offset || data.limit !== selection.limit || !count(data.total) || !text3(data.note) || !Array.isArray(data.collections) || data.collections.length > 100 || !Array.isArray(data.items) || data.items.length > selection.limit) fail2();
+    const collections = /* @__PURE__ */ new Set();
+    for (const c of data.collections) {
+      if (!object3(c) || !collectionId(c.id) || collections.has(c.id) || !text3(c.name)) fail2();
+      collections.add(c.id);
+    }
+    if (!collections.size || selection.collection !== null && !collections.has(selection.collection)) fail2();
+    const expected = Math.min(selection.limit, Math.max(0, data.total - selection.offset));
+    if (data.items.length !== expected || data.next_offset !== (selection.offset + selection.limit < data.total ? selection.offset + selection.limit : null)) fail2();
+    const seen = /* @__PURE__ */ new Set();
+    for (const item of data.items) {
+      if (!object3(item) || !id(item.id) || seen.has(item.id) || !text3(item.citation) || !text3(item.title) || !text3(item.collection) || !collections.has(item.collection_id) || !belongs(item.id, item.collection_id) || selection.collection !== null && item.collection_id !== selection.collection || item.approximate || item.kind === "range" || !count(item.english_available)) fail2();
+      for (const k of ["partial_english_available", "shared_english_available"]) if (Object.hasOwn(item, k) && !count(item[k])) fail2();
+      const cmd = item.read_with;
+      if (!object3(cmd) || Object.keys(cmd).sort().join(",") !== "tool,uid" || cmd.tool !== "get_text" || cmd.uid !== item.id) fail2();
+      const whole = item.english_available > 0, scoped = (item.partial_english_available || 0) + (item.shared_english_available || 0) > 0;
+      if (selection.availability === "linked" && !whole && !scoped || selection.availability === "whole" && !whole || selection.availability === "scoped" && (whole || !scoped) || selection.availability === "none" && (whole || scoped)) fail2();
+      if (Object.hasOwn(item, "source_context")) {
+        const context = item.source_context;
+        if (!object3(context) || Object.keys(context).sort().join(",") !== "citation,id,kind,title" || context.kind !== "containing_group" || !id(context.id) || !belongs(context.id, item.collection_id) || context.id === item.id || !text3(context.citation) || !text3(context.title) || !whole) fail2();
+      }
+      seen.add(item.id);
+    }
+    return data;
+  }
+
   // web/reader.js
-  var $ = (id) => document.getElementById(id);
+  var $ = (id2) => document.getElementById(id2);
   var view = $("view");
   var status2 = $("status");
   var serial = 0;
@@ -1147,30 +1210,30 @@
       return false;
     }
   }
-  function el(tag, text3, className) {
+  function el(tag, text4, className) {
     const n = document.createElement(tag);
-    if (text3 !== void 0) n.textContent = text3;
+    if (text4 !== void 0) n.textContent = text4;
     if (className) n.className = className;
     return n;
   }
-  function button(text3, fn) {
-    const n = el("button", text3);
+  function button(text4, fn) {
+    const n = el("button", text4);
     n.type = "button";
     n.addEventListener("click", fn);
     return n;
   }
-  function link(text3, href, className) {
-    const n = el("a", text3, className);
+  function link(text4, href, className) {
+    const n = el("a", text4, className);
     n.href = href;
     return n;
   }
-  function external(text3, url) {
+  function external(text4, url) {
     try {
       const u = new URL(url);
-      if (!["http:", "https:"].includes(u.protocol)) return el("span", text3);
-      return link(text3, u.href);
+      if (!["http:", "https:"].includes(u.protocol)) return el("span", text4);
+      return link(text4, u.href);
     } catch {
-      return el("span", text3);
+      return el("span", text4);
     }
   }
   function route(name, args = {}) {
@@ -1180,10 +1243,10 @@
   var requestRows = /* @__PURE__ */ new Map();
   var requests = createRequestPool({ onChange(entries) {
     const active = new Set(entries.map((x) => x.id));
-    for (const [id, row] of requestRows) if (!active.has(id)) {
+    for (const [id2, row] of requestRows) if (!active.has(id2)) {
       if (row.contains(document.activeElement)) (row.dataset.group === "study" ? $("study") || $("content") : $("content")).focus({ preventScroll: true });
       row.remove();
-      requestRows.delete(id);
+      requestRows.delete(id2);
     }
     for (const entry of entries) if (!requestRows.has(entry.id)) {
       const row = el("div", void 0, "request-row"), stop = button("Stop waiting", entry.stop);
@@ -1377,13 +1440,14 @@
     view.append(p);
   }
   async function browse(args, token) {
+    if (englishBrowseCandidate(args)) return browseEnglish(args, token);
     const node = args.get("node") || "canon", offset = offsetOf(args), limit = 40;
     const kind = node === "commentary" ? "commentary" : node === "post" ? "post" : "canon";
     const data = kind === "commentary" ? await tool("get_commentary", { uid: "commentary", offset, limit }) : kind === "post" ? await tool("get_post_canonical", { offset, limit }) : await tool("browse_canon", { node, offset, limit });
     if (token !== epoch) return;
     heading("EXPLORE THE LIBRARY", kind === "commentary" ? "Traditional commentary" : kind === "post" ? "Later P\u0101li works" : data.name || "The P\u0101li Canon");
     const nav = el("div", void 0, "toolbar");
-    nav.append(link("All collections", route("browse", { node: "canon" }), "button"), link("Complete source books", route("browse", { node: "books" }), "button"));
+    nav.append(link("All collections", route("browse", { node: "canon" }), "button"), link("Complete source books", route("browse", { node: "books" }), "button"), link("Find English sources", "#browse?node=english", "button"));
     if (node === "canon") nav.append(link("Study by topic", "#topics", "button"), link("Numbered teaching lists", "#lists", "button"));
     view.append(nav);
     if (data.note) view.append(el("p", data.note, "muted"));
@@ -1401,6 +1465,68 @@
     pageControls(data.next_offset, offset ? Math.max(0, offset - limit) : null, (n) => route("browse", { node, offset: n }));
     if (kind !== "canon") provenance(data);
   }
+  async function browseEnglish(args, token) {
+    const selection = englishSelection(args);
+    const request = { node: "english", availability: selection.availability, offset: selection.offset, limit: selection.limit, ...selection.collection === null ? {} : { collection: selection.collection } };
+    const response = await tool("browse_canon", request);
+    if (token !== epoch) return;
+    const data = englishCatalogue(response, selection);
+    heading("EXPLORE THE LIBRARY", "Find English sources");
+    const nav = el("nav", void 0, "toolbar");
+    nav.setAttribute("aria-label", "Library views");
+    nav.append(link("All collections", "#browse?node=canon", "button"), link("Complete source books", "#browse?node=books", "button"));
+    view.append(nav);
+    const form = el("form", void 0, "english-catalogue-filters");
+    form.setAttribute("aria-label", "English source filters");
+    const availabilityLabel = el("label", "English availability"), availability = el("select");
+    availability.id = "english-availability";
+    availability.name = "availability";
+    availabilityLabel.htmlFor = availability.id;
+    for (const [value, title] of Object.entries(ENGLISH_AVAILABILITY)) {
+      const option = el("option", title);
+      option.value = value;
+      availability.append(option);
+    }
+    availability.value = selection.availability;
+    const collectionLabel = el("label", "Collection"), collection = el("select");
+    collection.id = "english-collection";
+    collection.name = "collection";
+    collectionLabel.htmlFor = collection.id;
+    const all = el("option", "All collections");
+    all.value = "";
+    collection.append(all);
+    for (const item of data.collections) {
+      const option = el("option", item.name);
+      option.value = item.id;
+      collection.append(option);
+    }
+    collection.value = selection.collection || "";
+    const apply = el("button", "Apply");
+    apply.type = "submit";
+    form.append(availabilityLabel, availability, collectionLabel, collection, apply);
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (token !== epoch) return;
+      const href = englishRoute({ availability: availability.value, collection: collection.value || null }, 0);
+      focusHeading();
+      if (location.hash === href) render();
+      else location.hash = href;
+    });
+    view.append(form, el("p", data.total + " matching indexed record" + (data.total === 1 ? "" : "s"), "english-catalogue-count"), el("p", data.note, "notice"), el("p", "A link is not a guarantee of a complete individual English translation. Review the publisher reference and any scope before retrieving English.", "muted"));
+    if (!data.total) view.append(el("p", "No matching records in this index for these filters. This does not mean that no translation exists elsewhere.", "notice"));
+    else if (selection.offset >= data.total) view.append(el("p", "This page is beyond the matching records."), link("Return to first matching page", englishRoute(selection, 0), "button"));
+    else view.append(el("p", "Showing " + (selection.offset + 1) + "\u2013" + (selection.offset + data.items.length) + " of " + data.total, "muted"));
+    const cards = el("div", void 0, "cards");
+    for (const item of data.items) {
+      const card = link("", route("read", { uid: item.id }), "entry");
+      card.append(el("small", item.citation + " \xB7 " + item.collection), el("strong", item.title));
+      for (const badge of englishBadges(item)) card.append(el("p", badge, "source-badge"));
+      if (item.source_context) card.append(el("p", "Linked through " + item.source_context.citation + " \xB7 " + item.source_context.title + ". The containing chapter or group link does not establish a separately aligned translation.", "muted"));
+      cards.append(card);
+    }
+    view.append(cards);
+    pageControls(data.next_offset, selection.offset > 0 && selection.offset < data.total ? Math.max(0, selection.offset - selection.limit) : null, (offset) => englishRoute(selection, offset));
+  }
   function offsetOf(args) {
     const n = Number(args.get("offset") || 0);
     return Number.isSafeInteger(n) && n >= 0 && n <= 1e5 ? n : 0;
@@ -1417,11 +1543,11 @@
     if (data.expanded_from_english) view.append(el("p", "English keywords expanded into P\u0101li: " + JSON.stringify(data.expanded_from_english), "notice"));
     const seen = /* @__PURE__ */ new Set(), cards = el("div", void 0, "cards");
     for (const item of [...data.title_matches || [], ...data.results || data.matches || []]) {
-      const command2 = item.read_with || {}, id = scope === "commentary" ? command2.uid : scope === "post" ? command2.citation : item.id || item.text_id || item.uid;
-      if (!id || seen.has(id)) continue;
-      seen.add(id);
-      const a = link("", route("read", { uid: id, ...scope !== "canon" ? { kind: scope } : {}, ...command2.offset !== void 0 ? { offset: command2.offset } : {}, ...item.segment_ref ? { ref: item.segment_ref } : {} }), "entry");
-      a.append(el("small", item.citation || id), el("strong", item.title || item.book?.title || item.citation || id));
+      const command2 = item.read_with || {}, id2 = scope === "commentary" ? command2.uid : scope === "post" ? command2.citation : item.id || item.text_id || item.uid;
+      if (!id2 || seen.has(id2)) continue;
+      seen.add(id2);
+      const a = link("", route("read", { uid: id2, ...scope !== "canon" ? { kind: scope } : {}, ...command2.offset !== void 0 ? { offset: command2.offset } : {}, ...item.segment_ref ? { ref: item.segment_ref } : {} }), "entry");
+      a.append(el("small", item.citation || id2), el("strong", item.title || item.book?.title || item.citation || id2));
       if (item.excerpt || item.text) a.append(el("p", item.excerpt || item.text));
       cards.append(a);
     }
@@ -1549,9 +1675,9 @@
       }
       row.append(actions);
       part.classList.toggle("marked", active);
-      const text3 = el("p", segment.text, "passage");
-      text3.lang = "pi";
-      part.append(row, text3);
+      const text4 = el("p", segment.text, "passage");
+      text4.lang = "pi";
+      part.append(row, text4);
       passages.append(part);
       if (positionHref) positions.push({ node: part, heading: segment.type === "heading", href: positionHref });
     }
@@ -1573,9 +1699,9 @@
     if (descriptor.kind === "shared_page") {
       target.append(el("p", "Publisher reference: " + scope.source_reference), el("p", "One page concerns all of these texts. It is not a separately aligned full translation of the currently selected discourse.", "notice"));
       const list = el("ul");
-      for (const id of scope.text_ids) {
+      for (const id2 of scope.text_ids) {
         const li = el("li");
-        li.append(link(id + " \xB7 canonical P\u0101li", route("read", { uid: id })));
+        li.append(link(id2 + " \xB7 canonical P\u0101li", route("read", { uid: id2 })));
         list.append(li);
       }
       target.append(list);
@@ -2016,8 +2142,8 @@
     input.value = query;
     input.maxLength = 200;
     label.append(input);
-    for (const [value, text3] of [["all", "All entries"], ["subject", "Subject index"], ["numerical", "Numerical index"]]) {
-      const option = el("option", text3);
+    for (const [value, text4] of [["all", "All entries"], ["subject", "Subject index"], ["numerical", "Numerical index"]]) {
+      const option = el("option", text4);
       option.value = value;
       filter.append(option);
     }
@@ -2158,16 +2284,16 @@
       if (!file) return;
       try {
         if (file.size > MAX_PROGRESS_BYTES) throw Error("Choose a progress export no larger than 16 MiB. Nothing was restored.");
-        const text3 = await file.text();
+        const text4 = await file.text();
         if (request !== generation || token !== epoch) return;
-        if (new TextEncoder().encode(text3).length > MAX_PROGRESS_BYTES) throw Error("Choose a progress export no larger than 16 MiB. Nothing was restored.");
+        if (new TextEncoder().encode(text4).length > MAX_PROGRESS_BYTES) throw Error("Choose a progress export no larger than 16 MiB. Nothing was restored.");
         let snapshot;
         try {
           snapshot = localStorage.getItem(KEY);
         } catch {
         }
         if (snapshot !== void 0 && !readingPointerOnlyChange(storageSnapshot, snapshot)) throw Error("Browser data changed in another tab. Reload this page before restoring; no marks were restored.");
-        const incoming = parseProgress(text3, catalog), merge = mergeProgress(local.reading_progress, incoming), title = el("h3", "Review reading progress");
+        const incoming = parseProgress(text4, catalog), merge = mergeProgress(local.reading_progress, incoming), title = el("h3", "Review reading progress");
         title.tabIndex = -1;
         preview.replaceChildren(title, el("p", file.name), el("p", merge.added + " new marks \xB7 " + merge.duplicates + " already saved \xB7 " + merge.conflicts + " conflicting days kept as they are.", "notice"), el("p", "Imported marks are self-reported. Their saved assignments and source revisions are retained, not verified against every current plan day. Open a day to check whether its mark still applies.", "muted"));
         if (merge.added) preview.append(button("Add " + merge.added + " reading marks", () => {
@@ -2349,11 +2475,11 @@
     });
     filters.append(searchLabel, scopeLabel, clear);
     view.append(filters, el("p", "Search stays in this tab. It checks saved titles, references and personal notes, not the full scripture text.", "muted"));
-    const count = el("p");
-    count.setAttribute("role", "status");
-    count.setAttribute("aria-live", "polite");
-    count.tabIndex = -1;
-    view.append(count);
+    const count2 = el("p");
+    count2.setAttribute("role", "status");
+    count2.setAttribute("aria-live", "polite");
+    count2.tabIndex = -1;
+    view.append(count2);
     const results = el("section");
     results.setAttribute("aria-label", "Saved passage results");
     view.append(results);
@@ -2374,7 +2500,7 @@
       if (token !== epoch) return;
       const page = savedPage(local.saved, noteDrafts, savedFilters);
       savedFilters.page = page.page;
-      count.textContent = page.total ? `Showing ${page.start}\u2013${page.end} of ${page.total} matching saved passages \xB7 ${page.all} saved in this tab` : `No matching saved passages \xB7 ${page.all} saved in this tab`;
+      count2.textContent = page.total ? `Showing ${page.start}\u2013${page.end} of ${page.total} matching saved passages \xB7 ${page.all} saved in this tab` : `No matching saved passages \xB7 ${page.all} saved in this tab`;
       results.replaceChildren();
       if (!local.saved.length) results.append(el("p", "Save a passage while reading to find it here."));
       else if (!page.total) results.append(el("p", "Try a different saved title, reference, note or source type, or clear the filters."));
@@ -2430,15 +2556,15 @@
         results.append(pager);
       }
       if (moveFocus) {
-        count.focus({ preventScroll: true });
-        count.scrollIntoView({ block: "start" });
+        count2.focus({ preventScroll: true });
+        count2.scrollIntoView({ block: "start" });
       }
     }
     show();
   }
   function about() {
     heading("A LIBRARY, NOT A TEACHER", "Read with the source in view.");
-    for (const text3 of ["The bundled P\u0101li is retrieved from the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition. Scripture is never generated or reconstructed. Abbreviations and uncertain alignments stay labelled.", "English translations are available for a subset of texts and fetched only after you choose them. Translators\u2019 wording is not silently exchanged. Commentary is labelled separately from canonical text.", "VRI and several translation/dictionary sources carry non-commercial terms. This reading interface adds no permission to redistribute, translate or commercialize their work.", "Your saved passages, notes, manual reading-plan marks and preferences are stored in this browser. The app has no accounts, advertising, analytics, cloud sync or offline web download. The server may hold your IP temporarily for rate limiting; deployment providers may keep separate infrastructure logs."]) view.append(el("p", text3));
+    for (const text4 of ["The bundled P\u0101li is retrieved from the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition. Scripture is never generated or reconstructed. Abbreviations and uncertain alignments stay labelled.", "English translations are available for a subset of texts and fetched only after you choose them. Translators\u2019 wording is not silently exchanged. Commentary is labelled separately from canonical text.", "VRI and several translation/dictionary sources carry non-commercial terms. This reading interface adds no permission to redistribute, translate or commercialize their work.", "Your saved passages, notes, manual reading-plan marks and preferences are stored in this browser. The app has no accounts, advertising, analytics, cloud sync or offline web download. The server may hold your IP temporarily for rate limiting; deployment providers may keep separate infrastructure logs."]) view.append(el("p", text4));
     const links = el("div", void 0, "toolbar");
     links.append(external("Source and licence register", "https://github.com/DaniilKi/pali-canon-claude/blob/dev/pali-reliability/THIRD_PARTY.md"), external("Project and complete MCP toolset", "https://github.com/DaniilKi/pali-canon-claude"));
     view.append(links);

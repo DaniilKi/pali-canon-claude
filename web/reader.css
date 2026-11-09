@@ -52,3 +52,5 @@ main:focus{outline:none}
 [aria-label="Saved passage results"] .segment>a{display:block;overflow-wrap:anywhere;margin:8px 0}
 /* Recovery metadata can contain long titles or pins; keep all Saved rows within the viewport. */
 [aria-label="Saved passage results"] .segment{overflow-wrap:anywhere}
+/* English source discovery uses only catalogue metadata until the reader chooses a source. */
+.english-catalogue-filters{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:10px;align-items:center}.english-catalogue-filters label{grid-row:1}.english-catalogue-filters select,.english-catalogue-filters button{grid-row:2}.english-catalogue-filters select{min-width:0;width:100%}.source-badge{font-size:13px}.english-catalogue-count{font-weight:600}@media(max-width:760px){.english-catalogue-filters{grid-template-columns:minmax(0,1fr)}.english-catalogue-filters label,.english-catalogue-filters select,.english-catalogue-filters button{grid-row:auto}.english-catalogue-filters button{width:100%}}
