@@ -64,3 +64,6 @@ main:focus{outline:none}
 
 /* A personal bookmark marker around the source block; source wording is unchanged. */
 .segment.personal-highlight{background:var(--wash);box-shadow:inset 3px 0 0 var(--accent)}#highlight-saved-help{font-size:12px;line-height:1.5;margin-top:-8px;overflow-wrap:anywhere}@media(forced-colors:active){.segment.personal-highlight{outline:3px solid Highlight;outline-offset:-3px;box-shadow:none}}
+
+/* Source offsets are separate from citation numbers and remain inside the loaded work. */
+.source-position{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;align-items:end;max-width:560px}.source-position label{min-width:0}.source-position input{display:block;width:100%;margin-top:5px}.source-position p{grid-column:1/-1;margin:0;font-size:13px;overflow-wrap:anywhere}.source-position [role=alert]{color:var(--ink);border-inline-start:3px solid var(--accent);padding-inline-start:10px}

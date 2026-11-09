@@ -111,6 +111,12 @@ try:
                make_case('direct commentary', {'kind': 'commentary', 'uid': commentary_id}, 'get_commentary', {'uid': commentary_id}, commentary_id),
                make_case('post-canonical', {'kind': 'post', 'uid': post_id}, 'get_post_canonical', {'citation': post_id}, 'post:' + post_id)]
     canonical, root_book = sources[:2]
+    navigation_source = next(s for s in sources if s['data'].get('next_offset') is not None and s['data']['total_segments'] > s['data']['next_offset'] + 1)
+    navigation_offset = navigation_source['data']['next_offset']
+    navigation_tool = 'get_text' if 'book' in navigation_source['context'] or 'kind' not in navigation_source['context'] else 'get_commentary' if navigation_source['context']['kind'] == 'commentary' else 'get_post_canonical'
+    navigation_args = ({'book': navigation_source['context']['book']} if 'book' in navigation_source['context'] else
+                       {'citation' if navigation_tool == 'get_post_canonical' else 'uid': navigation_source['context']['uid']})
+    navigation_page = tool(navigation_tool, {**navigation_args, 'offset': navigation_offset, 'limit': 30, 'script': 'roman'})
     native = tool('get_text', {'uid': 'dhp183', 'offset': 0, 'limit': 30, 'script': 'sinhala'})
     late_pali = tool('get_text', {'uid': 'mn10', 'offset': 0, 'limit': 30, 'script': 'roman'})
     catalog = tool('reading_plan', {})
@@ -193,9 +199,9 @@ try:
                     scans.append({'width': width, 'theme': theme, 'state': label,
                                   'violations': [{'id': v['id'], 'targets': [n['target'] for n in v['nodes']]} for v in d['violations']]})
 
-            def ready(page, source, data=None):
+            def ready(page, source, data=None, expected_url=None):
                 data = data or source['data']
-                expect(page).to_have_url(url(source['context']))
+                expect(page).to_have_url(expected_url or url(source['context']))
                 title = data.get('title') or data.get('book', {}).get('title') or data.get('book_id')
                 expect(page.locator('#view > h2')).to_have_text((data['citation'] + ' · ' if data.get('citation') else '') + title)
                 text = page.locator('section[aria-label="Pāli passage"] .segment .passage')
@@ -232,6 +238,35 @@ try:
                     expect(page.locator('#view > .eyebrow')).to_contain_text('NOT CANON')
                 privacy(page, state)
                 passed(source['label'] + ': actual source wording/codepoints and exact revision/ref/offset survive keyboard bookmarking')
+
+            page.goto(url(navigation_source['context']))
+            ready(page, navigation_source)
+            navigation_ref = navigation_source['mark']['ref']
+            navigation_region = page.get_by_role('region', name='Personal note for ' + navigation_ref, exact=True)
+            navigation_region.get_by_role('button', name='View/edit personal note', exact=True).click()
+            navigation_draft = PRIVATE + 'retained through source-position navigation'
+            navigation_field = navigation_region.get_by_label('Your personal note for ' + navigation_ref, exact=True)
+            navigation_field.fill(navigation_draft)
+            form = page.get_by_role('form', name='Source position navigation', exact=True)
+            position = form.get_by_label('Go to source position', exact=True)
+            before_calls, before_url = len(state['calls']), page.url
+            position.fill('0'); form.get_by_role('button', name='Go', exact=True).click()
+            expect(form.get_by_role('alert')).to_be_visible(); expect(position).to_be_focused()
+            expect(navigation_field).to_have_value(navigation_draft)
+            assert len(state['calls']) == before_calls and page.url == before_url
+            position.fill(str(navigation_offset + 1)); position.press('Enter')
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in navigation_page['segments']])
+            fields = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(page.url).fragment.split('?', 1)[1]))
+            assert fields == {**navigation_source['context'], 'offset': str(navigation_offset), 'page_source': revision(navigation_source['data'])}
+            previous = page.get_by_role('link', name='← Previous page', exact=True)
+            previous_href = previous.get_attribute('href')
+            previous_fields = dict(urllib.parse.parse_qsl(previous_href.split('?', 1)[1]))
+            assert previous_fields == {**navigation_source['context'], 'offset': '0', 'page_source': revision(navigation_source['data'])}
+            previous.focus(); page.keyboard.press('Enter')
+            ready(page, navigation_source, expected_url=base + '/' + previous_href)
+            expect(navigation_region.get_by_label('Your personal note for ' + navigation_ref, exact=True)).to_have_value(navigation_draft)
+            privacy(page, state)
+            passed('source-position jump and Previous use actual revision-only page pins; invalid input sends no request and the private draft survives returning to its actual ref')
 
             page.goto(url(canonical['context']))
             ready(page, canonical)

@@ -15,6 +15,7 @@ import { guardedStorageWrite, guardedPositionWrite, readingPointerOnlyChange } f
 import { ENGLISH_AVAILABILITY, englishBrowseCandidate, englishSelection, englishRoute, englishCatalogue, englishBadges } from './english-catalogue.mjs';
 import { comparisonChoices, comparisonSelection, validateComparisonPage } from './translation-comparison.mjs';
 import { passageNoteKey, passageNoteState, passageNoteRemovalNeedsConfirmation, passageNoteTransaction, restorePassageNoteTransaction } from './passage-notes.mjs';
+import { readingPagePosition, assertPageRequest, assertPagePin, readingPageBounds, readingJumpOffset } from './reading-navigation.mjs';
 import { savedPassageHighlighted } from './saved-highlights.mjs';
 import { MAX_STUDY_BACKUP_BYTES, createStudyBackup, parseStudyBackup, mergeStudyBackup } from './study-backup.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
@@ -312,6 +313,7 @@ function attachPassageNote(selector, data, segment, container, control, token) {
   show();
 }
 async function read(args, token) {
+  assertPageRequest(args);
   const book = args.get('book'), uid = args.get('uid') || 'dhp183'; let offset = offsetOf(args), plan = null, window = null;
   if (args.has('plan')) {
     if (book || args.has('kind')) throw Error('Reading plans require their canonical text selection.');
@@ -323,7 +325,7 @@ async function read(args, token) {
   const request = { ...(kind === 'book' ? { book } : kind === 'post' ? { citation: uid } : { uid }), offset, limit: window?.limit || 30, script: $('script').value };
   const data = await tool(kind === 'commentary' ? 'get_commentary' : kind === 'post' ? 'get_post_canonical' : 'get_text', request); if (token !== epoch) return;
   if (!Array.isArray(data.segments)) throw new Error('Choose an individual book or passage to read.');
-  assertPositionPin(args, data);
+  assertPositionPin(args, data); assertPagePin(args, data);
   if (args.has('ref') && !data.segments.some(segment => segment.ref === args.get('ref'))) throw Error('The saved passage reference was not returned at this position. No nearby passage was substituted. Open the source from the Library or check the bookmark’s revision.');
   if (plan) validatePlanPage(data, plan, uid, window);
   if ((kind === 'post' && data.canonical !== false) || (kind === 'commentary' && !(data.canonical === false && data.content_type === 'commentary') && !(typeof data.label === 'string' && data.label.startsWith('Commentary') && data.label.includes('not the canon')))) throw new Error('This response lacks the expected non-canonical source label.');
@@ -341,9 +343,25 @@ async function read(args, token) {
     tools.append(button('English sources', invoke(() => translations(data, uid, token))), button('Traditional commentary', invoke(() => commentary(uid, token))), button('Related texts', invoke(() => relatedTexts(data.text_id || uid, token))), copy, copyFallback); panel.append(tools); toolbar.append(panel);
   } else toolbar.append(copy, copyFallback);
   view.append(toolbar); responsivePanels();
+  const positionContext = { ...readingArgs(selector), ...(plan ? { plan: plan.name, day: plan.day } : {}) };
+  let navigation = null;
+  try {
+    const bounds = readingPageBounds(data, window), revision = sourceRevision(data);
+    // Validate the current route before offering any new offset or guessed reference.
+    readingPagePosition(positionContext, bounds.current, revision);
+    navigation = { bounds, revision };
+    const form = el('form', undefined, 'source-position'), label = el('label', 'Go to source position'), input = el('input'), submit = el('button', 'Go'), help = el('p', `Position in this work, not a citation number. Available positions ${bounds.start + 1}–${bounds.end}.`, 'muted'), error = el('p');
+    form.setAttribute('aria-label', 'Source position navigation'); form.noValidate = true; input.type = 'text'; input.inputMode = 'numeric'; input.maxLength = 32; input.value = String(bounds.current + 1); input.required = true;
+    const suffix = String(++serial); help.id = 'source-position-help-' + suffix; error.id = 'source-position-error-' + suffix; error.setAttribute('role', 'alert'); error.hidden = true; input.setAttribute('aria-describedby', help.id + ' ' + error.id); label.append(input); submit.type = 'submit'; form.append(label, submit, help, error);
+    form.addEventListener('submit', event => {
+      event.preventDefault(); if (token !== epoch || !form.isConnected) return;
+      try { const jump = readingJumpOffset(input.value, data, window), href = readingPagePosition(positionContext, jump, revision); error.hidden = true; input.removeAttribute('aria-invalid'); if (location.hash === href) render(); else location.hash = href; }
+      catch (failure) { error.textContent = failure.message; error.hidden = false; input.setAttribute('aria-invalid', 'true'); input.focus({ preventScroll: true }); }
+    });
+    view.append(form);
+  } catch { view.append(el('p', 'Source-position navigation is unavailable because this page has incomplete or unsupported position/revision metadata. The loaded source remains below; no destination was guessed.', 'notice')); }
   const additions = el('section'); additions.id = 'study'; additions.setAttribute('aria-live', 'polite'); view.append(additions);
   const passages = el('section'); passages.setAttribute('aria-label', 'Pāli passage'); const positions = [];
-  const positionContext = { ...readingArgs(selector), ...(plan ? { plan: plan.name, day: plan.day } : {}) };
   for (const segment of data.segments || []) {
     const part = el('article', undefined, 'segment ' + (segment.type === 'heading' ? 'heading' : '')); part.id = 'seg-' + segment.ref.replace(/[^a-z0-9-]/gi, '-');
     let positionHref; try { positionHref = readingPosition(positionContext, data.offset + data.segments.indexOf(segment), segment.ref, sourceRevision(data)); } catch {}
@@ -355,10 +373,15 @@ async function read(args, token) {
     const text = el('p', segment.text, 'passage'); text.lang = 'pi'; part.append(row, text); attachPassageNote(selector, data, segment, part, save, token); passages.append(part);
     if (positionHref) positions.push({ node: part, heading: segment.type === 'heading', href: positionHref });
   }
-  const next = plan && window.end !== null ? (offset + data.returned < window.end ? offset + data.returned : null) : data.next_offset;
-  view.append(passages); pageControls(next, offset > (window?.start || 0) ? Math.max(window?.start || 0, offset - 30) : null, n => route('read', { ...readingArgs(selector), offset: n, ...(plan ? { plan: plan.name, day: plan.day } : {}) })); provenance(data);
+  view.append(passages);
+  if (navigation) {
+    const { bounds, revision } = navigation, next = data.next_offset !== null && data.next_offset < bounds.end ? data.next_offset : null;
+    pageControls(next, bounds.current > bounds.start ? Math.max(bounds.start, bounds.current - 30) : null, n => readingPagePosition(positionContext, n, revision));
+  }
+  provenance(data);
   activePosition = { token, links: positions }; rememberPosition(positions.find(x => args.get('ref') === new URLSearchParams(x.href.split('?')[1]).get('ref'))?.href || positions[0]?.href || location.hash); updateResume();
-  const savedVersion = local.saved.find(x => x.uid === selector && x.source_commit && x.source_commit !== sourceRevision(data));
+  let savedRevision; try { savedRevision = sourceRevision(data); } catch {}
+  const savedVersion = savedRevision === undefined ? null : local.saved.find(x => x.uid === selector && x.source_commit && x.source_commit !== savedRevision);
   if (savedVersion) view.prepend(el('p', 'This source revision differs from a saved bookmark. Check its reference before reusing your notes.', 'notice'));
   const ref = args.get('ref'); if (ref) document.getElementById('seg-' + ref.replace(/[^a-z0-9-]/gi, '-'))?.scrollIntoView({ block: 'center' });
 }
@@ -888,10 +911,10 @@ function about() {
 async function render() {
   if (location.hash === '#content' && view.childElementCount) { $('content').focus(); return; }
   activePosition = null; highlightTargets = []; clearTimeout(positionTimer); const token = ++epoch; ++studyEpoch; requests.cancelAll(); closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
-  const [page, query = ''] = location.hash.slice(1).split('?'), args = new URLSearchParams(query);
+  const hash = location.hash.slice(1), queryIndex = hash.indexOf('?'), page = queryIndex < 0 ? hash : hash.slice(0, queryIndex), args = new URLSearchParams(queryIndex < 0 ? '' : hash.slice(queryIndex + 1));
   try { if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'backup') studyBackup(token); else if (page === 'about') about(); else await browse(args, token);
     if (token !== epoch) return; status.textContent = storageConflict || !storageOK ? storageWarning() : !positionDurable ? positionWarning || storageWarning() : ''; focusHeading();
-  } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); if (error.code === 'READING_SOURCE_CHANGED') { const review = new URLSearchParams(args); review.delete('source'); view.append(link('Review current source at this reference', '#read?' + review, 'button')); } status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
+  } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); if (error.code === 'READING_SOURCE_CHANGED') { const review = new URLSearchParams(args); review.delete('source'); review.delete('page_source'); view.append(link(args.has('page_source') ? 'Review current source at this position' : 'Review current source at this reference', '#read?' + review, 'button')); } status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
 }
 installPagePrinting();
 window.addEventListener('hashchange', render); render();

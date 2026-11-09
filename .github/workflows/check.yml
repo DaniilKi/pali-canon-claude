@@ -78,7 +78,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup, highlights]
+        group: [core, study, personal, provenance, comparison, notes, backup, highlights, navigation]
     runs-on: ubuntu-latest
     timeout-minutes: ${{ matrix.group == 'backup' && 20 || 10 }}
     steps:
@@ -224,6 +224,19 @@ jobs:
       - name: Check local reading-progress restore and source-signature preservation
         if: matrix.group == 'personal'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-progress-check.py --report standalone-progress.report.json
+      - name: Check source-pinned page navigation and bounded source-position jumps
+        if: matrix.group == 'navigation'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-navigation-check.py --report standalone-navigation.report.json
+      - name: Audit source-position navigation in both themes
+        if: matrix.group == 'navigation'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-navigation-check.py --a11y --report standalone-navigation-a11y.report.json
+      - name: Check installed source-position navigation outside the source tree
+        if: matrix.group == 'navigation'
+        run: |
+          mkdir -p "$RUNNER_TEMP/navigation-package"
+          npm pack --pack-destination "$RUNNER_TEMP/navigation-package"
+          tar -xzf "$RUNNER_TEMP/navigation-package/"*.tgz -C "$RUNNER_TEMP/navigation-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-navigation-check.py --server-dir "$RUNNER_TEMP/navigation-package/package/server" --report installed-navigation.report.json
       - name: Audit reading-progress restore in both themes
         if: matrix.group == 'personal'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-progress-check.py --a11y --report standalone-progress-a11y.report.json
@@ -292,6 +305,9 @@ jobs:
             standalone-highlights.report.json
             standalone-highlights-a11y.report.json
             installed-highlights.report.json
+            standalone-navigation.report.json
+            standalone-navigation-a11y.report.json
+            installed-navigation.report.json
             standalone-comparison.report.json
             standalone-comparison-a11y.report.json
             installed-comparison.report.json
