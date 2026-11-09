@@ -85,5 +85,34 @@
     "independent_review": "accepted",
     "local_chromium_normal": 52,
     "fresh_exact_head_ci_required": true
+  },
+  "second_integrated_ci": {
+    "commit": "44e0e70c32d1e712a846c07f936182b8c7acf625",
+    "run": 42569503713,
+    "navigation": {
+      "normal": 33,
+      "a11y": 65,
+      "installed": 33,
+      "scans": 56,
+      "violations": 0
+    },
+    "firefox_and_webkit": {
+      "normal_each": 52,
+      "a11y_each": 52,
+      "scans_each": 16,
+      "violations": 0
+    },
+    "core_failure": "Existing compact-reader first full-line visibility failed at320x700 because the form added too much chrome."
+  },
+  "mobile_layout_repair": {
+    "source_guards_or_csp_changed": false,
+    "fix": "Reuse single existing tools disclosure, collapsed on phones and expanded on desktop.",
+    "original_fold_assertion_preserved": true,
+    "compact_normal": 45,
+    "first_pali_y_at_320x700": 661.953125,
+    "navigation_normal": 33,
+    "compatibility_normal": 52,
+    "independent_review": "accepted",
+    "fresh_exact_head_ci_required": true
   }
 }

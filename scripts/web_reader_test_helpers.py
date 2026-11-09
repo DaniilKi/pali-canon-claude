@@ -11,3 +11,11 @@ def find_control(page, selector):
     if panel.count() and panel.get_attribute('open') is None:
         panel.locator('summary').click()
     return page.locator(selector)
+
+def source_position(page):
+    page.locator('#status').filter(has_text='Opening').wait_for(state='hidden')
+    panel = page.locator('.source-position-panel')
+    outer = page.locator('.study-actions')
+    if panel.count() and outer.count() and outer.get_attribute('open') is None:
+        outer.locator(':scope > summary').click()
+    return page.get_by_role('form', name='Source position navigation', exact=True)

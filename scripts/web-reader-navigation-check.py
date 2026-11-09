@@ -2,7 +2,7 @@
 """Actual multi-page source navigation; old pins and malformed responses are fixtures."""
 import argparse, copy, json, os, pathlib, socket, subprocess, time, urllib.parse, urllib.request
 from playwright.sync_api import expect, sync_playwright
-from web_reader_test_helpers import read_tool
+from web_reader_test_helpers import read_tool, source_position
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 PRIVATE = 'PRIVATE_NAVIGATION_'
@@ -124,7 +124,7 @@ try:
                 expect(page.get_by_text(f"Segments {data['offset'] + 1}–{data['offset'] + data['returned']} of {data['total_segments']}", exact=True)).to_be_visible()
                 expect(page.get_by_label('Go to source position', exact=True)).to_have_value(str(data['offset'] + 1))
                 expect(page.locator('#status').filter(has_text='Opening')).to_have_count(0)
-            def navigation(page): return page.get_by_role('form', name='Source position navigation', exact=True)
+            def navigation(page): return source_position(page)
             def jump(page, position):
                 control = navigation(page).get_by_label('Go to source position', exact=True)
                 control.fill(str(position)); control.press('Enter')

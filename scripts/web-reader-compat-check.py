@@ -18,7 +18,7 @@ import time
 import urllib.parse
 
 from playwright.sync_api import expect, sync_playwright
-from web_reader_test_helpers import read_tool
+from web_reader_test_helpers import read_tool, source_position
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -247,7 +247,7 @@ try:
             navigation_draft = PRIVATE + 'retained through source-position navigation'
             navigation_field = navigation_region.get_by_label('Your personal note for ' + navigation_ref, exact=True)
             navigation_field.fill(navigation_draft)
-            form = page.get_by_role('form', name='Source position navigation', exact=True)
+            form = source_position(page)
             position = form.get_by_label('Go to source position', exact=True)
             before_calls, before_url = len(state['calls']), page.url
             position.fill('0'); form.get_by_role('button', name='Go', exact=True).click()

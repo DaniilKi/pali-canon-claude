@@ -2090,6 +2090,7 @@
     notes(data);
     view.append(el("p", `Segments ${offset + 1}\u2013${offset + data.returned} of ${data.total_segments}`, "muted"));
     const toolbar = el("div", void 0, "toolbar");
+    let sourceTools;
     toolbar.append(link("Back to library", route("browse", { node: "canon" }), "button"));
     const copyFallback = link("Exact reading link \xB7 open or long-press to copy", location.hash);
     copyFallback.hidden = true;
@@ -2109,6 +2110,7 @@
       const panel = el("details", void 0, "study-actions");
       panel.append(el("summary", "Study & sources"));
       const tools = el("div", void 0, "toolbar");
+      sourceTools = tools;
       const invoke = (action) => () => {
         if (narrowReading.matches) panel.open = false;
         action();
@@ -2119,7 +2121,13 @@
       tools.append(button("English sources", invoke(() => translations(data, uid2, token))), button("Traditional commentary", invoke(() => commentary(uid2, token))), button("Related texts", invoke(() => relatedTexts(data.text_id || uid2, token))), copy, copyFallback);
       panel.append(tools);
       toolbar.append(panel);
-    } else toolbar.append(copy, copyFallback);
+    } else {
+      const panel = el("details", void 0, "study-actions");
+      sourceTools = el("div", void 0, "toolbar");
+      sourceTools.append(copy, copyFallback);
+      panel.append(el("summary", "Reading tools"), sourceTools);
+      toolbar.append(panel);
+    }
     view.append(toolbar);
     responsivePanels();
     const positionContext = { ...readingArgs(selector), ...plan ? { plan: plan.name, day: plan.day } : {} };
@@ -2161,7 +2169,9 @@
           input.focus({ preventScroll: true });
         }
       });
-      view.append(form);
+      const panel = el("section", void 0, "source-position-panel");
+      panel.append(form);
+      sourceTools.append(panel);
     } catch {
       view.append(el("p", "Source-position navigation is unavailable because this page has incomplete or unsupported position/revision metadata. The loaded source remains below; no destination was guessed.", "notice"));
     }
