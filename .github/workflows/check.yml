@@ -78,9 +78,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes]
+        group: [core, study, personal, provenance, comparison, notes, backup]
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: ${{ matrix.group == 'backup' && 20 || 10 }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -195,6 +195,19 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/notes-package"
           tar -xzf "$RUNNER_TEMP/notes-package/"*.tgz -C "$RUNNER_TEMP/notes-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-notes-check.py --server-dir "$RUNNER_TEMP/notes-package/package/server" --report installed-notes.report.json
+      - name: Check local study-backup transfer and interrupted restore guards
+        if: matrix.group == 'backup'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-backup-check.py --report standalone-backup.report.json
+      - name: Audit study-backup controls and previews in both themes
+        if: matrix.group == 'backup'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-backup-check.py --a11y --report standalone-backup-a11y.report.json
+      - name: Check installed study-backup workflows outside the source tree
+        if: matrix.group == 'backup'
+        run: |
+          mkdir -p "$RUNNER_TEMP/backup-package"
+          npm pack --pack-destination "$RUNNER_TEMP/backup-package"
+          tar -xzf "$RUNNER_TEMP/backup-package/"*.tgz -C "$RUNNER_TEMP/backup-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-backup-check.py --server-dir "$RUNNER_TEMP/backup-package/package/server" --report installed-backup.report.json
       - name: Check local reading-progress restore and source-signature preservation
         if: matrix.group == 'personal'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-progress-check.py --report standalone-progress.report.json
@@ -257,6 +270,9 @@ jobs:
             installed-english-catalogue.report.json
             standalone-english-catalogue.report.json
             standalone-english-catalogue-a11y.report.json
+            standalone-backup.report.json
+            standalone-backup-a11y.report.json
+            installed-backup.report.json
             standalone-notes.report.json
             standalone-notes-a11y.report.json
             installed-notes.report.json

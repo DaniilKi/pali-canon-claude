@@ -5,13 +5,14 @@ const object = x => x && typeof x === 'object' && !Array.isArray(x);
 const exact = (x, keys) => object(x) && Object.keys(x).length === keys.length && keys.every(k => Object.hasOwn(x,k));
 const integer = (x,min,max) => Number.isSafeInteger(x) && x >= min && x <= max;
 const key = x => x.name + ':' + x.day;
-export function parseProgress(text, catalog) {
+/** Shape/signature validation only; this does not recognize plans or certify assignments. */
+export function parseProgressMetadata(text) {
   const fail = () => { throw Error('This is not a supported reading-progress export. No marks were restored.'); };
   let data; try { data=JSON.parse(text); } catch { fail(); }
   if (!exact(data,['format','progress']) || data.format !== 'pali-library-reading-progress-v1' || !Array.isArray(data.progress) || data.progress.length > MAX_PROGRESS_MARKS) fail();
-  const plans = new Map(catalog.map(p => [p.name,p.days])), seen=new Set();
+  const seen=new Set();
   return data.progress.map(mark => {
-    if (!exact(mark,['name','day','signature']) || !plans.has(mark.name) || !integer(mark.day,1,plans.get(mark.name)) || typeof mark.signature !== 'string' || mark.signature.length > 12000 || seen.has(key(mark))) fail();
+    if (!exact(mark,['name','day','signature']) || typeof mark.name !== 'string' || !/^[a-z0-9-]{1,60}$/.test(mark.name) || !integer(mark.day,1,400) || typeof mark.signature !== 'string' || mark.signature.length > 12000 || seen.has(key(mark))) fail();
     seen.add(key(mark)); let s; try { s=JSON.parse(mark.signature); } catch { fail(); }
     if (!exact(s,['name','day','source','readings']) || s.name !== mark.name || s.day !== mark.day || typeof s.source !== 'string' || !/^[a-zA-Z0-9._-]{1,100}$/.test(s.source) || !Array.isArray(s.readings) || !s.readings.length || s.readings.length > 20) fail();
     const ids = new Set();
@@ -23,6 +24,11 @@ export function parseProgress(text, catalog) {
     const signature=JSON.stringify({name:s.name,day:s.day,source:s.source,readings:s.readings.map(r=>({id:r.id,offset:r.offset,limit:r.limit,part:r.part,of:r.of}))});
     return {name:mark.name,day:mark.day,signature};
   });
+}
+export function parseProgress(text, catalog) {
+  const progress = parseProgressMetadata(text), plans = new Map(catalog.map(p => [p.name,p.days]));
+  if (progress.some(mark => !plans.has(mark.name) || !integer(mark.day,1,plans.get(mark.name)))) throw Error('This is not a supported reading-progress export. No marks were restored.');
+  return progress;
 }
 export function mergeProgress(existing,incoming) {
   const byKey=new Map(existing.map(x=>[key(x),x])), added=incoming.filter(x=>!byKey.has(key(x))), duplicates=incoming.filter(x=>byKey.get(key(x))?.signature === x.signature).length, conflicts=incoming.length-added.length-duplicates;
