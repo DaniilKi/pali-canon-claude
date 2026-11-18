@@ -124,6 +124,13 @@ try:
     book_search_page = tool('search_source_book', {'book': 'vin02m1', 'query': book_native_query, 'offset': 0, 'limit': 15, 'script': 'sinhala'})
     assert book_search_page['total_matched'] == 1 and book_search_page['results'][0]['ref'] == book_native_phrase['ref']
     book_native_match = tool('get_text', {'book': 'vin02m1', 'offset': 6, 'limit': 30, 'script': 'sinhala'})
+    source_heading_first = tool('search_source_book', {'book': 'vin02m1', 'query': '', 'headings_only': True, 'offset': 0, 'limit': 15, 'script': 'sinhala'})
+    source_heading_second = tool('search_source_book', {'book': 'vin02m1', 'query': '', 'headings_only': True, 'offset': 15, 'limit': 15, 'script': 'sinhala'})
+    source_heading_phrase = tool('get_text', {'book': 'vin02m1', 'offset': 1005, 'limit': 1, 'script': 'sinhala'})['segments'][0]
+    source_heading_query = '"' + source_heading_phrase['text'] + '"'
+    source_heading_filtered = tool('search_source_book', {'book': 'vin02m1', 'query': source_heading_query, 'headings_only': True, 'offset': 0, 'limit': 15, 'script': 'sinhala'})
+    source_heading_text = tool('get_text', {'book': 'vin02m1', 'offset': 1005, 'limit': 30, 'script': 'sinhala'})
+    assert source_heading_first['total_headings'] == 480 and source_heading_filtered['results'][0]['ref'] == 'vri-book:vin02m1/1006'
     chapter_child = tool('get_post_canonical', {'citation': 'Vism ch. 12', 'offset': 0, 'limit': 30, 'script': 'sinhala'})
     chapter_root = tool('get_post_canonical', {'citation': 'Vism', 'offset': 0, 'limit': 1, 'script': 'sinhala'})
     chapter_last = tool('get_post_canonical', {'citation': chapter_root['chapters'][22]['citation'], 'offset': 0, 'limit': 30, 'script': 'sinhala'})
@@ -505,6 +512,50 @@ try:
             assert page.locator('section[aria-label="Pāli passage"] .passage').all_text_contents() == [s['text'] for s in book_native_match['segments']]
             assert profile(page) == original_profile; privacy(page, state)
             passed('native-script complete-book search finds actual front matter through phone keyboard controls and opens the exact source/ref pin without global search, English retrieval or private-note writes')
+            context.close()
+
+            # Printed headings remain literal source-file positions, with an explicit mode.
+            context, page, state = environment(saved=[{**canonical['mark'], 'note': PRIVATE + 'printed-heading private note'}], script='sinhala')
+            saved(page); heading_draft = PRIVATE + 'printed-heading unsaved ā😀'
+            page.get_by_label('Your personal note', exact=True).fill(heading_draft)
+            original_profile = copy.deepcopy(profile(page)); original_raw = page.evaluate('localStorage.getItem("pali-library-v1")')
+            page.goto(base + '/#read?book=vin02m1')
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in book_native_start['segments']])
+            outer = page.locator('.study-actions')
+            if outer.get_attribute('open') is None: outer.locator('summary').focus(); page.keyboard.press('Enter')
+            before = len(state['calls']); heading_link = page.get_by_role('link', name='Browse source headings', exact=True)
+            assert dict(urllib.parse.parse_qsl(heading_link.get_attribute('href').split('?', 1)[1])) == {'book': 'vin02m1', 'mode': 'headings', 'source': revision(book_native_start)}
+            heading_link.focus(); page.keyboard.press('Enter')
+            expect(page.locator('#view > h2')).to_have_text('Headings · ' + source_heading_first['book']['title'])
+            heading_region = page.get_by_role('region', name='Printed source headings', exact=True)
+            expect(heading_region.locator('.passage')).to_have_text([r['excerpt'] for r in source_heading_first['results']])
+            assert heading_region.locator('.passage').all_text_contents() == [r['excerpt'] for r in source_heading_first['results']]
+            assert state['calls'][before:] == [{'name': 'search_source_book', 'arguments': {'book': 'vin02m1', 'query': '', 'headings_only': True, 'offset': 0, 'limit': 15, 'script': 'sinhala'}}]
+            expect(page.locator('#view')).to_contain_text(source_heading_first['heading_note'])
+            assert page.title() == 'Source headings · Pāli Library'
+            field = page.get_by_label('Filter printed headings', exact=True); field.fill(source_heading_query); field.press('Enter')
+            expect(heading_region.locator('.passage')).to_have_text([r['excerpt'] for r in source_heading_filtered['results']])
+            expect(page.locator('#view')).to_contain_text(source_heading_filtered['input_romanized'])
+            exact_link = page.get_by_role('link', name='Open heading · vri-book:vin02m1/1006', exact=True)
+            assert dict(urllib.parse.parse_qsl(exact_link.get_attribute('href').split('?', 1)[1])) == {'book': 'vin02m1', 'offset': '1005', 'ref': 'vri-book:vin02m1/1006', 'source': revision(source_heading_filtered)}
+            audit(page, state, 'native literal printed-heading browse and source-derived filter')
+            exact_link.focus(); page.keyboard.press('Enter')
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in source_heading_text['segments']])
+            assert page.locator('section[aria-label="Pāli passage"] .passage').all_text_contents() == [s['text'] for s in source_heading_text['segments']]
+            page.go_back(); expect(page.get_by_label('Filter printed headings', exact=True)).to_have_value(source_heading_query)
+            reset = page.get_by_role('link', name='All source headings', exact=True)
+            assert dict(urllib.parse.parse_qsl(reset.get_attribute('href').split('?', 1)[1])) == {'book': 'vin02m1', 'mode': 'headings', 'source': revision(source_heading_first)}
+            reset.focus(); page.keyboard.press('Enter'); expect(heading_region.locator('.passage')).to_have_text([r['excerpt'] for r in source_heading_first['results']])
+            page.get_by_role('link', name='Next page →', exact=True).focus(); page.keyboard.press('Enter')
+            expect(heading_region.locator('.passage')).to_have_text([r['excerpt'] for r in source_heading_second['results']])
+            assert dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(page.url).fragment.split('?', 1)[1])) == {'book': 'vin02m1', 'mode': 'headings', 'offset': '15', 'source': revision(source_heading_first)}
+            audit(page, state, 'heading reset and next page retain actual revision and mode')
+            before = len(state['calls']); page.goto(base + '/#book-search?book=vin02m1&mode=headings&mode=headings')
+            expect(page.get_by_role('heading', name='No passage was substituted.', exact=True)).to_be_visible(); assert len(state['calls']) == before
+            saved(page); expect(page.get_by_label('Your personal note', exact=True)).to_have_value(heading_draft)
+            assert profile(page) == original_profile and page.evaluate('localStorage.getItem("pali-library-v1")') == original_raw
+            privacy(page, state)
+            passed('keyboard printed-heading browse/filter opens actual native source segment1006; reset and pagination preserve mode/revision, duplicate-mode route calls no MCP and private draft/storage stay unchanged')
             context.close()
 
             # Citation lookup preserves resolver identity and cautions before any reading.

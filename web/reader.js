@@ -178,7 +178,7 @@ async function browse(args, token) {
     if (item.texts !== undefined) card.append(el('p', item.texts + ' texts'));
     if (item.english_available !== undefined) card.append(el('p', item.english_available ? 'English source linked' : (item.shared_english_available || item.partial_english_available) ? 'Scoped English source · review required' : 'Pāli source text'));
     if (node === 'books' && kind === 'canon' && item.read_with?.tool === 'get_text' && item.read_with.book === item.id) {
-      try { const searchHref = bookSearchRoute({ book: item.id, query: '', offset: 0, limit: 15, source: null }), wrapper = el('article', undefined, 'book-catalogue-card'); wrapper.append(card, link('Search this source book', searchHref, 'button')); cards.append(wrapper); }
+      try { const selected = { book: item.id, query: '', offset: 0, limit: 15, source: null }, searchHref = bookSearchRoute(selected), wrapper = el('article', undefined, 'book-catalogue-card'); wrapper.append(card, link('Search this source book', searchHref, 'button'), link('Source headings', bookSearchRoute({ ...selected, headings_only: true }), 'button')); cards.append(wrapper); }
       catch { cards.append(card); }
     } else cards.append(card);
   }
@@ -243,33 +243,43 @@ async function resolveCitation(args, token, rawQuery) {
   view.append(result); provenance(data);
 }
 function bookSearchForm(selection, token) {
-  const form = el('form', undefined, 'book-search-form'), label = el('label', 'Search this source book'), input = el('input'), submit = el('button', 'Search book'), error = el('p');
+  const form = el('form', undefined, 'book-search-form'), label = el('label', selection.headings_only ? 'Filter printed headings' : 'Search this source book'), input = el('input'), submit = el('button', selection.headings_only ? 'Find headings' : 'Search book'), error = el('p');
   form.setAttribute('aria-label', 'Source book search'); form.noValidate = true; input.type = 'search'; input.maxLength = 500; input.value = selection.query; label.append(input); submit.type = 'submit'; error.setAttribute('role', 'alert'); error.hidden = true;
   form.append(label, submit, error);
   form.addEventListener('submit', event => {
     event.preventDefault(); if (token !== epoch || !form.isConnected) return;
-    try { const query = input.value.trim(); if (!query) throw Error('Enter a Pāli search query.'); const href = bookSearchRoute({ ...selection, query, offset: 0 }); error.hidden = true; input.removeAttribute('aria-invalid'); if (location.hash === href) render(); else location.hash = href; }
+    try { const query = input.value.trim(); if (!query && !selection.headings_only) throw Error('Enter a Pāli search query.'); const href = bookSearchRoute({ ...selection, query, offset: 0 }); error.hidden = true; input.removeAttribute('aria-invalid'); if (location.hash === href) render(); else location.hash = href; }
     catch (failure) { error.textContent = failure.message; error.hidden = false; input.setAttribute('aria-invalid', 'true'); input.focus({ preventScroll: true }); }
   }); return form;
 }
-async function bookSearch(args, token) {
-  const selection = bookSearchSelection(args);
-  if (!selection.query) {
+function bookSearchModeLink(selection) {
+  const normal = { book: selection.book, query: '', offset: 0, limit: 15, source: selection.source };
+  return link(selection.headings_only ? 'Search full source' : 'Browse source headings', bookSearchRoute(selection.headings_only ? normal : { ...normal, headings_only: true }), 'button');
+}
+async function bookSearch(args, token, rawQuery) {
+  const selection = bookSearchSelection(args, rawQuery), headings = selection.headings_only === true;
+  if (!selection.query && !headings) {
     const catalogue = await tool('browse_canon', { node: 'books', offset: 0, limit: 200 }); if (token !== epoch) return;
     const book = bookSearchCatalogue(catalogue, selection);
     heading('COMPLETE VRI SOURCE FILE', 'Search · ' + book.title, 'Source-book search');
-    view.append(el('p', catalogue.note, 'notice'), bookSearchForm(selection, token), link('Read this source book', selection.source ? readingPagePosition({ book: selection.book }, 0, selection.source) : route('read', { book: selection.book }), 'button'), el('p', 'Search and reading results show the actual source attribution and licence terms. Source-file references are not standard discourse or rule citations. English translations are not searched.', 'muted')); return;
+    view.append(el('p', catalogue.note, 'notice'), bookSearchForm(selection, token), bookSearchModeLink(selection), link('Read this source book', selection.source ? readingPagePosition({ book: selection.book }, 0, selection.source) : route('read', { book: selection.book }), 'button'), el('p', 'Search and reading results show the actual source attribution and licence terms. Source-file references are not standard discourse or rule citations. English translations are not searched.', 'muted')); return;
   }
-  const response = await tool('search_source_book', { book: selection.book, query: selection.query, offset: selection.offset, limit: 15, script: $('script').value }); if (token !== epoch) return;
+  const response = await tool('search_source_book', { book: selection.book, query: selection.query, offset: selection.offset, limit: 15, script: $('script').value, ...(headings ? { headings_only: true } : {}) }); if (token !== epoch) return;
   const data = validateBookSearchPage(response, selection), pinned = { ...selection, source: sourceRevision(data) };
-  heading('COMPLETE VRI SOURCE FILE', 'Search · ' + data.book.title, 'Source-book search');
-  view.append(bookSearchForm(pinned, token), el('p', 'Search query: ' + selection.query, 'muted'), el('p', data.citation_note, 'notice')); notes(data); if (data.query_note) view.append(el('p', 'Search interpretation: ' + data.query_note, 'notice')); if (data.script_note) view.append(el('p', 'Script display: ' + data.script_note, 'notice'));
-  const count = el('p', data.returned ? `Matching source segments: ${data.total_matched} · showing ${data.offset + 1}–${data.offset + data.returned}` : data.total_matched ? `This page is beyond the ${data.total_matched} matching source segments.` : 'No matching source segments in this book. Try a different Pāli word or phrase.'); count.setAttribute('role', 'status'); view.append(count); if (!data.returned && data.total_matched) view.append(link('First search results', bookSearchRoute(pinned, 0), 'button'));
-  const results = el('section', undefined, 'book-search-results'); results.setAttribute('aria-label', 'Source book search results');
+  heading('COMPLETE VRI SOURCE FILE', (headings ? 'Headings · ' : 'Search · ') + data.book.title, headings ? 'Source headings' : 'Source-book search');
+  view.append(bookSearchForm(pinned, token), bookSearchModeLink(pinned));
+  if (selection.query) view.append(el('p', (headings ? 'Heading filter: ' : 'Search query: ') + selection.query, 'muted'));
+  if (headings) {
+    view.append(el('p', data.heading_note, 'notice'));
+    if (selection.query) view.append(link('All source headings', bookSearchRoute({ ...pinned, query: '', offset: 0 }), 'button'));
+  }
+  view.append(el('p', data.citation_note, 'notice')); notes(data); if (data.query_note) view.append(el('p', 'Search interpretation: ' + data.query_note, 'notice')); if (data.script_note) view.append(el('p', 'Script display: ' + data.script_note, 'notice'));
+  const count = el('p', headings ? (data.returned ? `Printed source headings: ${data.total_headings} · ${data.total_matched} matching · showing ${data.offset + 1}–${data.offset + data.returned}` : data.total_matched ? `This page is beyond the ${data.total_matched} matching printed headings.` : 'No matching printed headings in this source book.') : data.returned ? `Matching source segments: ${data.total_matched} · showing ${data.offset + 1}–${data.offset + data.returned}` : data.total_matched ? `This page is beyond the ${data.total_matched} matching source segments.` : 'No matching source segments in this book. Try a different Pāli word or phrase.'); count.setAttribute('role', 'status'); view.append(count); if (!data.returned && data.total_matched) view.append(link(headings ? 'First source headings' : 'First search results', bookSearchRoute(pinned, 0), 'button'));
+  const results = el('section', undefined, 'book-search-results'); results.setAttribute('aria-label', headings ? 'Printed source headings' : 'Source book search results');
   for (const hit of data.results) {
     const locations = bookSearchHitLinks(data, hit, selection), card = el('article', undefined, 'segment');
     card.append(el('h3', hit.ref), el('p', `Source position ${hit.segment} · ${hit.type}`, 'muted'));
-    const excerpt = el('p', hit.excerpt, 'passage'); excerpt.lang = 'pi'; card.append(el('p', 'Search excerpt · open the source to read its context.', 'muted'), excerpt, link('Read match · ' + hit.ref, locations.read, 'button'));
+    const excerpt = el('p', hit.excerpt, 'passage'); excerpt.lang = 'pi'; card.append(el('p', headings ? 'Printed source heading · open its source to continue reading.' : 'Search excerpt · open the source to read its context.', 'muted'), excerpt, link((headings ? 'Open heading · ' : 'Read match · ') + hit.ref, locations.read, 'button'));
     if (locations.context) card.append(link('Read surrounding source · ' + hit.ref, locations.context, 'button')); results.append(card);
   }
   view.append(results); pageControls(data.next_offset, selection.offset > 0 ? Math.max(0, selection.offset - 15) : null, offset => bookSearchRoute(pinned, offset)); provenance(data);
@@ -506,7 +516,7 @@ async function read(args, token) {
     const panel = el('section', undefined, 'source-position-panel'); panel.append(form); sourceTools.append(panel);
   } catch { view.append(el('p', 'Source-position navigation is unavailable because this page has incomplete or unsupported position/revision metadata. The loaded source remains below; no destination was guessed.', 'notice')); }
   if (kind === 'book') {
-    try { const selection = { book: data.book_id, query: '', offset: 0, limit: 15, source: sourceRevision(data) }; bookSearchRoute(selection); sourceTools.append(bookSearchForm(selection, token)); }
+    try { const selection = { book: data.book_id, query: '', offset: 0, limit: 15, source: sourceRevision(data) }; bookSearchRoute(selection); sourceTools.append(bookSearchForm(selection, token), link('Browse source headings', bookSearchRoute({ ...selection, headings_only: true }), 'button')); }
     catch { sourceTools.append(el('p', 'Search is unavailable because this source book has incomplete identity or revision metadata.', 'notice')); }
   }
   const additions = el('section'); additions.id = 'study'; additions.setAttribute('aria-live', 'polite'); view.append(additions);
@@ -1099,7 +1109,7 @@ async function render() {
   if (location.hash === '#content' && view.childElementCount) { $('content').focus(); return; }
   activePosition = null; highlightTargets = []; clearTimeout(positionTimer); const token = ++epoch; ++studyEpoch; requests.cancelAll(); closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
   const hash = location.hash.slice(1), queryIndex = hash.indexOf('?'), page = queryIndex < 0 ? hash : hash.slice(0, queryIndex), args = new URLSearchParams(queryIndex < 0 ? '' : hash.slice(queryIndex + 1));
-  try { if (page === 'resolve') await resolveCitation(args, token, queryIndex < 0 ? '' : hash.slice(queryIndex + 1)); else if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token, queryIndex < 0 ? '' : hash.slice(queryIndex + 1)); else if (page === 'book-search') await bookSearch(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'backup') studyBackup(token); else if (page === 'about') about(); else await browse(args, token);
+  try { if (page === 'resolve') await resolveCitation(args, token, queryIndex < 0 ? '' : hash.slice(queryIndex + 1)); else if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token, queryIndex < 0 ? '' : hash.slice(queryIndex + 1)); else if (page === 'book-search') await bookSearch(args, token, queryIndex < 0 ? '' : hash.slice(queryIndex + 1)); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'backup') studyBackup(token); else if (page === 'about') about(); else await browse(args, token);
     if (token !== epoch) return; status.textContent = storageConflict || !storageOK ? storageWarning() : !positionDurable ? positionWarning || storageWarning() : ''; focusHeading();
   } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); if (error.code === 'READING_SOURCE_CHANGED') { const review = new URLSearchParams(args); review.delete('source'); review.delete('page_source'); view.append(link(page === 'book-search' ? 'Review current source book search' : args.has('page_source') ? 'Review current source at this position' : 'Review current source at this reference', (page === 'book-search' ? '#book-search?' : '#read?') + review, 'button')); } status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
 }

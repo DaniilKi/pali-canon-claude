@@ -1,6 +1,7 @@
 /** Search complete bundled root files without assigning their hits to individual citations. */
 import { sourceRevision, readingPosition } from './reading-position.mjs';
 import { readingPagePosition } from './reading-navigation.mjs';
+import { foldNiggahita } from '../src/pali-unicode.mjs';
 import { romanizeSearchInput, hasSearchPhrase } from '../src/search-segments.mjs';
 
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -17,21 +18,24 @@ function safeRevision(value) {
   return value;
 }
 function selection(value) {
-  if (!keysOnly(value, ['book', 'query', 'offset', 'limit', 'source']) || !bookId(value.book) || typeof value.query !== 'string' || value.query !== value.query.trim() || value.query.length > 500 || !integer(value.offset, 0, 1000000) || value.limit !== 15 || !value.query && value.offset !== 0) fail();
+  if (!keysOnly(value, ['book', 'query', 'offset', 'limit', 'source', 'headings_only']) || !bookId(value.book) || typeof value.query !== 'string' || value.query !== value.query.trim() || value.query.length > 500 || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(value.query) || !integer(value.offset, 0, 1000000) || value.limit !== 15 || !value.query && value.offset !== 0 && !value.headings_only || own(value, 'headings_only') && value.headings_only !== true) fail();
   if (value.source !== null) safeRevision(value.source);
   return value;
 }
 
-export function bookSearchSelection(args) {
-  for (const key of args.keys()) if (!['book', 'q', 'offset', 'source'].includes(key) || args.getAll(key).length !== 1) fail();
+export function bookSearchSelection(args, rawQuery) {
+  if (rawQuery !== undefined) { try { decodeURIComponent(rawQuery.replace(/\+/g, ' ')); } catch { fail(); } }
+  if (args.has('mode') && args.get('mode') !== 'headings') fail();
+  for (const key of args.keys()) if (!['book', 'q', 'offset', 'source', 'mode'].includes(key) || args.getAll(key).length !== 1) fail();
   const raw = args.has('offset') ? args.get('offset') : '0';
   if (!/^(0|[1-9][0-9]*)$/.test(raw)) fail();
-  return selection({ book: args.get('book'), query: (args.get('q') ?? '').trim(), offset: Number(raw), limit: 15, source: args.has('source') ? args.get('source') : null });
+  return selection({ book: args.get('book'), query: (args.get('q') ?? '').trim(), offset: Number(raw), limit: 15, source: args.has('source') ? args.get('source') : null, ...(args.has('mode') ? { headings_only: true } : {}) });
 }
 export function bookSearchRoute(value, offset = value.offset) {
   selection(value);
   selection({ ...value, offset });
   const args = new URLSearchParams({ book: value.book });
+  if (value.headings_only) args.set('mode', 'headings');
   if (value.query) args.set('q', value.query);
   if (offset) args.set('offset', String(offset));
   if (value.source !== null) args.set('source', value.source);
@@ -41,7 +45,7 @@ export function bookSearchRoute(value, offset = value.offset) {
 /** The catalogue has no source revision; it verifies only an exact existing book selection. */
 export function bookSearchCatalogue(data, selected) {
   selection(selected);
-  if (selected.query || !object(data) || data.node !== 'books' || data.name !== 'Complete VRI source books' || !integer(data.total, 1, 200) || data.offset !== 0 || data.limit !== 200 || data.next_offset !== null || !Array.isArray(data.items) || data.items.length !== data.total || !text(data.note)) fail();
+  if (selected.query || selected.headings_only || !object(data) || data.node !== 'books' || data.name !== 'Complete VRI source books' || !integer(data.total, 1, 200) || data.offset !== 0 || data.limit !== 200 || data.next_offset !== null || !Array.isArray(data.items) || data.items.length !== data.total || !text(data.note)) fail();
   const seen = new Set(); let result;
   for (const item of data.items) {
     if (!object(item) || !bookId(item.id) || seen.has(item.id) || !text(item.title, 1000) || !text(item.collection, 30) || !['vinaya', 'sutta', 'abhidhamma'].includes(item.pitaka) || item.vri_file !== fileFor(item.id) || !keysOnly(item.read_with, ['tool', 'book']) || Object.keys(item.read_with).length !== 2 || item.read_with.tool !== 'get_text' || item.read_with.book !== item.id) fail();
@@ -76,7 +80,7 @@ function queryProvenance(data, selected) {
     if (data.query !== base || own(data, 'input_normalised')) fail();
     return;
   }
-  if (!own(data, 'input_normalised')) { if (data.query !== base) fail(); return; }
+  if (!own(data, 'input_normalised')) { if (![base, base.normalize('NFC'), foldNiggahita(base.normalize('NFC'))].includes(data.query)) fail(); return; }
   const normalized = data.input_normalised;
   if (!keysOnly(normalized, ['original', 'read_as', 'scheme', 'changes', 'note']) || normalized.original !== base || normalized.read_as !== data.query || !['ascii', 'unicode', 'velthuis', 'harvard-kyoto'].includes(normalized.scheme) || !text(normalized.note, 10000) || !Array.isArray(normalized.changes) || !integer(normalized.changes.length, 1, 500)) fail();
   for (const change of normalized.changes) {
@@ -97,8 +101,13 @@ function hit(item, data) {
 
 export function validateBookSearchPage(data, selected) {
   selection(selected);
-  const allowed = ['query', 'selection', 'canonical', 'book', 'total_segments', 'total_matched', 'offset', 'limit', 'returned', 'next_offset', 'results', 'citation_note', 'source', 'attribution', 'notes', 'input_script', 'input_romanized', 'input_normalised', 'query_mode', 'query_note', 'script', 'script_note'];
-  if (!selected.query || !keysOnly(data, allowed) || data.selection !== 'source_book' || data.canonical !== true || !keysOnly(data.book, ['id', 'title', 'collection', 'vri_file']) || data.book.id !== selected.book || data.book.vri_file !== fileFor(selected.book) || !text(data.book.title, 1000) || !text(data.book.collection, 30) || !text(data.query, 500) || !integer(data.total_segments, 1, 100001) || !integer(data.total_matched, 0, data.total_segments) || data.offset !== selected.offset || data.limit !== 15 || !integer(data.returned, 0, 15) || !Array.isArray(data.results) || data.results.length !== data.returned || data.returned !== Math.min(15, Math.max(0, data.total_matched - data.offset)) || data.next_offset !== (data.offset + data.returned < data.total_matched ? data.offset + data.returned : null) || !text(data.citation_note)) fail();
+  const allowed = ['query', 'selection', 'canonical', 'book', 'total_segments', 'total_matched', 'offset', 'limit', 'returned', 'next_offset', 'results', 'citation_note', 'source', 'attribution', 'notes', 'input_script', 'input_romanized', 'input_normalised', 'query_mode', 'query_note', 'script', 'script_note', 'headings_only', 'total_headings', 'heading_note'];
+  const headings = selected.headings_only === true, emptyBrowse = headings && !selected.query;
+  if ((!selected.query && !headings) || !keysOnly(data, allowed) || data.selection !== 'source_book' || data.canonical !== true || !keysOnly(data.book, ['id', 'title', 'collection', 'vri_file']) || data.book.id !== selected.book || data.book.vri_file !== fileFor(selected.book) || !text(data.book.title, 1000) || !text(data.book.collection, 30) || !(emptyBrowse ? data.query === '' : text(data.query, 500)) || !integer(data.total_segments, 1, 100001) || !integer(data.total_matched, 0, data.total_segments) || data.offset !== selected.offset || data.limit !== 15 || !integer(data.returned, 0, 15) || !Array.isArray(data.results) || data.results.length !== data.returned || data.returned !== Math.min(15, Math.max(0, data.total_matched - data.offset)) || data.next_offset !== (data.offset + data.returned < data.total_matched ? data.offset + data.returned : null) || !text(data.citation_note)) fail();
+  if (headings) {
+    if (data.headings_only !== true || !integer(data.total_headings, 0, data.total_segments) || data.total_matched > data.total_headings || emptyBrowse && data.total_matched !== data.total_headings || !text(data.heading_note, 10000)) fail();
+    if (emptyBrowse && ['input_script', 'input_romanized', 'input_normalised', 'query_mode', 'query_note'].some(key => own(data, key))) fail();
+  } else if (['headings_only', 'total_headings', 'heading_note'].some(key => own(data, key))) fail();
   source(data, selected);
   if (own(data, 'script') && !scripts.has(data.script)) fail();
   for (const field of ['script_note', 'query_note', 'input_romanized']) if (own(data, field) && !text(data[field], field === 'input_romanized' ? 500 : 10000)) fail();
@@ -110,6 +119,7 @@ export function validateBookSearchPage(data, selected) {
   const seen = new Set(); let previous = 0;
   for (const item of data.results) {
     hit(item, data);
+    if (headings && item.type !== 'heading') fail();
     if (seen.has(item.ref) || item.segment <= previous) fail();
     seen.add(item.ref); previous = item.segment;
   }

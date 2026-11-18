@@ -232,3 +232,10 @@ For a long citation report, pass the returned `next_cursor` as `cursor` and reus
 Canonical `search_texts` returns original edition provenance on the response and each title/body hit’s actual `source` metadata. A repaired citation mapping can have `source.locator_revision` different from the plain edition `source.commit`. Follow the emitted `read_with` command, then compare its hit revision (`locator_revision ?? commit`) with the returned `get_text` revision before treating the wording as that prior match. The command schema is unchanged; it does not enforce an atomic historical read. Retain alignment and approximation cautions.
 
 The browser performs this check before showing wording: body matches use exact revision/reference/offset links; title matches use revision-pinned source-page links without inventing a matched paragraph. Result pagination is not an immutable global-index snapshot. See [implementation and limits](evidence/web-reader/CANONICAL_SEARCH_PINS.md).
+
+
+## Printed source-file headings
+
+To explore an existing complete VRI root file without knowing a term or numeric position, call `search_source_book` with `book`, `query: ""` and `headings_only: true`. Continue using the returned result `next_offset`; actual reading offsets remain in each row's `read_with` and `context_with` commands. A nonempty query filters only printed heading segments through the existing Pāli query rules. Omitted/false mode remains ordinary text search and still rejects an empty query.
+
+These are literal source-file headings, including invocations and colophons, rather than an inferred canonical chapter hierarchy. Repeated labels have distinct actual references and remain separate. Retain original source terms and source-position/version metadata; resolve a standard sutta/rule citation separately when needed. See [scope and evidence](evidence/web-reader/SOURCE_HEADINGS.md).

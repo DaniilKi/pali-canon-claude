@@ -34327,13 +34327,17 @@ function index3(book) {
   }
   return entry3;
 }
-function search4(query, { book, offset = 0, limit = 10 } = {}) {
+function search4(query, { book, offset = 0, limit = 10, headings_only = false } = {}) {
+  if (typeof headings_only !== "boolean") throw new Error("headings_only must be a boolean.");
   const wanted = searchTerms(query, fold3);
-  if (!wanted.length) throw new Error("Source-book search needs at least one word of two or more letters.");
+  const browseHeadings = headings_only && typeof query === "string" && !query.trim();
+  if (!wanted.length && !browseHeadings) throw new Error("Source-book search needs at least one word of two or more letters.");
   const { page, folded } = index3(book);
+  const totalHeadings = headings_only ? page.segments.filter((segment) => segment.type === "heading").length : null;
   const results = [];
   let total = 0;
   for (let i = 0; i < folded.length; i += 1) {
+    if (headings_only && page.segments[i].type !== "heading") continue;
     if (!wanted.every((term) => folded[i].includes(term))) continue;
     total += 1;
     if (total <= offset || results.length >= limit) continue;
@@ -34346,7 +34350,7 @@ function search4(query, { book, offset = 0, limit = 10 } = {}) {
       segment: i + 1,
       type: segment.type,
       ...location,
-      excerpt: searchExcerpt(segment.text, wanted[0], fold3),
+      excerpt: headings_only ? segment.text : searchExcerpt(segment.text, wanted[0], fold3),
       read_with: { tool: "get_text", book: page.book_id, offset: i, limit: 1 },
       context_with: { tool: "get_text", book: page.book_id, offset: Math.max(0, i - 1), limit: 3 }
     });
@@ -34355,6 +34359,11 @@ function search4(query, { book, offset = 0, limit = 10 } = {}) {
     query,
     selection: "source_book",
     canonical: true,
+    ...headings_only ? {
+      headings_only: true,
+      total_headings: totalHeadings,
+      heading_note: "Printed headings from this VRI source file, including invocations and colophons. They are not a canonical chapter hierarchy or individual sutta/rule identities."
+    } : {},
     book: { id: page.book_id, title: page.title, collection: page.collection, vri_file: page.vri_file },
     total_segments: page.total_segments,
     total_matched: total,
@@ -34369,18 +34378,19 @@ function search4(query, { book, offset = 0, limit = 10 } = {}) {
   };
 }
 function register19({ tool, z }) {
-  tool("search_source_book", 'Search a complete bundled VRI root book, including headings and front matter outside individual citation spans. Choose a book ID from browse_canon node "books" (e.g. vin02m1). P\u0101li search: diacritics optional, all words must match one rendered segment or complete stanza; "quoted phrases" accept line breaks. Each match has exact get_text book-mode commands for reading and context. Source-file references are not standard sutta/rule citations. Supports native-script queries/output and English-keyboard P\u0101li; does not search English translations. Works offline.', {
+  tool("search_source_book", 'Search a complete bundled VRI root book, including headings and front matter outside individual citation spans. Choose a book ID from browse_canon node "books" (e.g. vin02m1). P\u0101li search: diacritics optional, all words must match one rendered segment or complete stanza; "quoted phrases" accept line breaks. Set headings_only true to search printed source headings, or browse them with an empty query; these headings include invocations and colophons, not an inferred canonical chapter hierarchy. Each match has exact get_text book-mode commands for reading and context. Source-file references are not standard sutta/rule citations. Supports native-script queries/output and English-keyboard P\u0101li; does not search English translations. Works offline.', {
     book: z.string().trim().min(1).max(100).describe('An exact complete-root-book ID or VRI filename from browse_canon node "books". This is a source file, not an individual sutta or rule.'),
-    query: z.string().trim().min(1).max(500),
+    query: z.string().trim().max(500).describe("P\u0101li words or a quoted phrase. Empty only when headings_only is true, to browse the actual printed source headings."),
+    headings_only: z.boolean().default(false).describe("Limit to rendered source heading segments. With an empty query, browse all printed headings in source order. These are not inferred canonical chapters."),
     script: z.string().max(30).default("roman").describe(SCRIPT_DESCRIPTION),
     offset: z.number().int().min(0).max(1e6).default(0).describe("Offset within matching segments; continue using next_offset. read_with offsets refer to the source book instead."),
     limit: z.number().int().min(1).max(50).default(10)
-  }, async ({ book, query, script, offset, limit }) => {
+  }, async ({ book, query, headings_only, script, offset, limit }) => {
     const output = scriptName(script);
-    const input = romanizeSearchInput(query);
-    const run = (text) => search4(text, { book, offset, limit });
-    const result = input.source_phrase ? await run(input.text) : await withNormalised(input.text, run, { preferSource: hasSearchPhrase(input.text) });
-    const localized = localizeSearch({ ...result, ...searchInputNote(input) }, output, input);
+    const input = headings_only && !query ? null : romanizeSearchInput(query);
+    const run = (text) => search4(text, { book, offset, limit, headings_only });
+    const result = !input ? await run(query) : input.source_phrase ? await run(input.text) : await withNormalised(input.text, run, { preferSource: hasSearchPhrase(input.text) });
+    const localized = localizeSearch({ ...result, ...input ? searchInputNote(input) : {} }, output, input ?? void 0);
     localized.results = localized.results.map((hit) => ({
       ...hit,
       read_with: { ...hit.read_with, script: output },
