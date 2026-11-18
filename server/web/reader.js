@@ -75,12 +75,12 @@
       if (selected !== "all" && savedScope(item) !== selected) return false;
       const key4 = JSON.stringify([item.uid, item.ref]);
       const note2 = drafts?.has(key4) ? drafts.get(key4) : item.note;
-      const text10 = fold([item.title, item.uid, item.ref, note2].filter((x) => typeof x === "string").join(" "));
-      return tokens.every((token) => text10.includes(token));
+      const text11 = fold([item.title, item.uid, item.ref, note2].filter((x) => typeof x === "string").join(" "));
+      return tokens.every((token) => text11.includes(token));
     });
-    const pages2 = Math.max(1, Math.ceil(matches.length / SAVED_PAGE_SIZE));
-    const current = Number.isSafeInteger(page) ? Math.max(0, Math.min(page, pages2 - 1)) : 0;
-    return { items: matches.slice(current * SAVED_PAGE_SIZE, (current + 1) * SAVED_PAGE_SIZE), total: matches.length, all: items.length, pages: pages2, page: current, start: matches.length ? current * SAVED_PAGE_SIZE + 1 : 0, end: Math.min((current + 1) * SAVED_PAGE_SIZE, matches.length) };
+    const pages3 = Math.max(1, Math.ceil(matches.length / SAVED_PAGE_SIZE));
+    const current = Number.isSafeInteger(page) ? Math.max(0, Math.min(page, pages3 - 1)) : 0;
+    return { items: matches.slice(current * SAVED_PAGE_SIZE, (current + 1) * SAVED_PAGE_SIZE), total: matches.length, all: items.length, pages: pages3, page: current, start: matches.length ? current * SAVED_PAGE_SIZE + 1 : 0, end: Math.min((current + 1) * SAVED_PAGE_SIZE, matches.length) };
   }
 
   // web/print-page.mjs
@@ -90,9 +90,9 @@
     sheet.id = "print-document";
     sheet.setAttribute("aria-hidden", "true");
     doc.body.append(sheet);
-    const add = (parent, tag, text10, className) => {
+    const add = (parent, tag, text11, className) => {
       const node = doc.createElement(tag);
-      node.textContent = text10;
+      node.textContent = text11;
       if (className) node.className = className;
       parent.append(node);
       return node;
@@ -117,16 +117,16 @@
       for (const segment of passage.querySelectorAll(":scope > .segment")) {
         const block = add(sheet, "section", "", "print-segment");
         add(block, "p", segment.querySelector(".segment-label span")?.textContent || "", "print-reference");
-        const text10 = add(block, "p", segment.querySelector(".passage")?.textContent || "", "print-passage");
-        text10.lang = "pi";
+        const text11 = add(block, "p", segment.querySelector(".passage")?.textContent || "", "print-passage");
+        text11.lang = "pi";
       }
-      const source6 = add(sheet, "section", "", "print-provenance");
-      add(source6, "h2", "Source and terms");
-      for (const part of attribution.children) add(source6, "p", part.textContent);
-      for (const anchor of attribution.querySelectorAll("a[href]")) add(source6, "p", anchor.textContent + ": " + anchor.href);
+      const source7 = add(sheet, "section", "", "print-provenance");
+      add(source7, "h2", "Source and terms");
+      for (const part of attribution.children) add(source7, "p", part.textContent);
+      for (const anchor of attribution.querySelectorAll("a[href]")) add(source7, "p", anchor.textContent + ": " + anchor.href);
       const url = new URL(win.location.href);
       url.search = "";
-      add(source6, "p", "Reading page: " + url.href);
+      add(source7, "p", "Reading page: " + url.href);
       return true;
     }
     function update() {
@@ -470,9 +470,9 @@
     if (t.verseEnd) s = s.replace(/;(\s*)$/, `${STOP}$1`);
     return s;
   }
-  function fromRoman(text10, script, stanza) {
+  function fromRoman(text11, script, stanza) {
     const t = TABLES[script];
-    const s = romanPunctuation(text10.normalize("NFC"), t, stanza).toLowerCase();
+    const s = romanPunctuation(text11.normalize("NFC"), t, stanza).toLowerCase();
     let out = "";
     let pending = null;
     let consStart = -1;
@@ -541,10 +541,10 @@
     const prefixes = t.prefix ? /* @__PURE__ */ new Map([[t.sign.e, "e"], [t.sign.o, "o"]]) : /* @__PURE__ */ new Map();
     return REVERSE[script] = { t, cons, ind, signs, signList: byLength(signs), indList: byLength(ind), punct, expand, prefixes };
   }
-  function toRomanFrom(text10, script) {
+  function toRomanFrom(text11, script) {
     const R = reverse(script);
     const { t } = R;
-    let s = text10.normalize("NFC").replace(/[\u200c\u200d]/g, "");
+    let s = text11.normalize("NFC").replace(/[\u200c\u200d]/g, "");
     for (const [a, b] of R.expand) s = s.split(a).join(b);
     const at = (i, list) => list.find((x) => s.startsWith(x, i));
     let out = "";
@@ -595,9 +595,9 @@
     ["khmer", 6016, 6143],
     ["lanna", 6688, 6831]
   ];
-  function detectScript(text10) {
+  function detectScript(text11) {
     const counts = {};
-    for (const ch of String(text10 ?? "")) {
+    for (const ch of String(text11 ?? "")) {
       const cp = ch.codePointAt(0);
       if (cp < 2304) continue;
       for (const [name, lo, hi] of RANGES) if (cp >= lo && cp <= hi) {
@@ -613,23 +613,23 @@
     }
     return best;
   }
-  function transliterate(text10, from, to, { stanza = false } = {}) {
-    if (text10 == null) return text10;
-    const s = String(text10);
+  function transliterate(text11, from, to, { stanza = false } = {}) {
+    if (text11 == null) return text11;
+    const s = String(text11);
     const a = from === "auto" ? detectScript(s) : scriptName(from);
     const b = scriptName(to);
     if (a === b) return s;
     const roman = a === "roman" ? s : toRomanFrom(s, a);
     return b === "roman" ? roman : fromRoman(roman, b, stanza);
   }
-  function romanizeInput(text10) {
-    const s = String(text10 ?? "");
+  function romanizeInput(text11) {
+    const s = String(text11 ?? "");
     const script = detectScript(s);
     if (script === "roman") return { text: s, script };
     return { text: toRomanFrom(s, script).normalize("NFC"), script, original: s };
   }
-  function romanizeLookupInput(text10) {
-    const input = romanizeInput(text10);
+  function romanizeLookupInput(text11) {
+    const input = romanizeInput(text11);
     if (detectScript(input.text) !== "roman" || [...input.text].some((ch) => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch))) {
       throw new Error("The lookup input could not be converted completely. Use P\u0101li in Roman or one supported script, without mixed or unsupported characters.");
     }
@@ -644,9 +644,9 @@
       script_note: `P\u0101li transliterated into ${SCRIPT_NAMES[script]} by this server from the VRI Roman edition (exact letter-for-letter; punctuation follows VRI's own script editions where they exist). Citations, IDs and English are left in Roman.`
     };
   }
-  var pali = (text10, script, opts) => typeof text10 === "string" && text10 ? transliterate(text10, "roman", script, opts) : text10;
-  function verse(text10, script) {
-    const lines = text10.split("\n");
+  var pali = (text11, script, opts) => typeof text11 === "string" && text11 ? transliterate(text11, "roman", script, opts) : text11;
+  function verse(text11, script) {
+    const lines = text11.split("\n");
     return lines.map((line, i) => pali(line, script, { stanza: i === lines.length - 1 })).join("\n");
   }
   function localizeUnitFields(obj, script) {
@@ -689,28 +689,28 @@
   function scopeDescriptor(choice, requestedId) {
     if (!own(choice, "translation_scope")) return null;
     const scope = choice.translation_scope;
-    const fail8 = () => {
+    const fail9 = () => {
       throw new Error("This source has an unsupported or incomplete scope declaration. No scoped source was requested. Reload the passage and review the updated sources.");
     };
-    if (!scope || ![1, 2].includes(scope.version) || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail8();
+    if (!scope || ![1, 2].includes(scope.version) || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail9();
     if (scope.kind === "shared_page") {
-      if (scope.version !== 1) fail8();
+      if (scope.version !== 1) fail9();
       const ids = scope.text_ids;
       const presentation = scope.presentation || (scope.condensed === true ? "condensed" : null);
-      if (!Array.isArray(ids) || ids.length < 2 || ids.length > 32 || ids.some((id4) => !nonempty(id4) || id4.length > 300) || new Set(ids).size !== ids.length || !ids.includes(requestedId) || scope.owner_id !== ids[0] || scope.individual_alignment_verified !== false || !nonempty(scope.source_reference) || !["condensed", "compilation"].includes(presentation) || presentation === "compilation" && !sha(scope.notice_sha256) || own(scope, "condensed") && scope.condensed !== (presentation === "condensed")) fail8();
+      if (!Array.isArray(ids) || ids.length < 2 || ids.length > 32 || ids.some((id5) => !nonempty(id5) || id5.length > 300) || new Set(ids).size !== ids.length || !ids.includes(requestedId) || scope.owner_id !== ids[0] || scope.individual_alignment_verified !== false || !nonempty(scope.source_reference) || !["condensed", "compilation"].includes(presentation) || presentation === "compilation" && !sha(scope.notice_sha256) || own(scope, "condensed") && scope.condensed !== (presentation === "condensed")) fail9();
       return { kind: scope.kind, label: presentation === "compilation" ? "Shared compilation page" : "Shared condensed page", scope: JSON.parse(JSON.stringify(scope)), flags: { allow_shared: true, scope_sha256: scope.scope_sha256 } };
     }
     if (scope.kind === "partial_unit") {
       const prefix = requestedId + "/";
-      if (choice.translation_id.startsWith("ati:") && (!(scope.version === 2 ? ["ati-chapter-prose-v1", "ati-chapter-p5-of5-no-notes-v1", "ati-chapter-p1to4-of5-notes-v1"].includes(scope.extractor) : ["ati-freeverse-v1", "ati-chapter-p2-of2-v1", "ati-chapter-p11-of11-v1", "ati-chapter-p1-of4-v1", "ati-chapter-p14-of24-v1", "ati-excerpt-verse-pre-v1", "ati-chapter-p1to3-of4-ellipsis-v1"].includes(scope.extractor)) || !sha(scope.notice_sha256))) fail8();
+      if (choice.translation_id.startsWith("ati:") && (!(scope.version === 2 ? ["ati-chapter-prose-v1", "ati-chapter-p5-of5-no-notes-v1", "ati-chapter-p1to4-of5-notes-v1"].includes(scope.extractor) : ["ati-freeverse-v1", "ati-chapter-p2-of2-v1", "ati-chapter-p11-of11-v1", "ati-chapter-p1-of4-v1", "ati-chapter-p14-of24-v1", "ati-excerpt-verse-pre-v1", "ati-chapter-p1to3-of4-ellipsis-v1"].includes(scope.extractor)) || !sha(scope.notice_sha256))) fail9();
       if (scope.version === 2) {
         const p = scope.pali_excerpt;
-        if (!choice.translation_id.startsWith("ati:") || scope.first_ref !== scope.last_ref || !p || p.ref !== scope.first_ref || p.type !== "prose" || !nonempty(p.text) || p.text.length > 2e6 || p.offset_unit !== "utf16_code_units" || !sha(p.segment_sha256) || !Number.isSafeInteger(p.start_char) || !Number.isSafeInteger(p.end_char) || p.start_char < 0 || p.end_char <= p.start_char || p.end_char - p.start_char !== p.text.length || own(scope, "read_with") || own(scope, "read_pages")) fail8();
-      } else if (own(scope, "pali_excerpt")) fail8();
-      if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail8();
+        if (!choice.translation_id.startsWith("ati:") || scope.first_ref !== scope.last_ref || !p || p.ref !== scope.first_ref || p.type !== "prose" || !nonempty(p.text) || p.text.length > 2e6 || p.offset_unit !== "utf16_code_units" || !sha(p.segment_sha256) || !Number.isSafeInteger(p.start_char) || !Number.isSafeInteger(p.end_char) || p.start_char < 0 || p.end_char <= p.start_char || p.end_char - p.start_char !== p.text.length || own(scope, "read_with") || own(scope, "read_pages")) fail9();
+      } else if (own(scope, "pali_excerpt")) fail9();
+      if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail9();
       return { kind: scope.kind, label: "Partial-unit source", scope: JSON.parse(JSON.stringify(scope)), flags: { allow_partial: true, scope_sha256: scope.scope_sha256 } };
     }
-    fail8();
+    fail9();
   }
   function validateEnglishPage(data, args, context) {
     const offset = args.offset || 0;
@@ -785,10 +785,10 @@
   var string2 = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f]/.test(x);
   var object = (x) => x && typeof x === "object" && !Array.isArray(x);
   var identity = (x) => JSON.stringify([x.uid, x.ref]);
-  function parseBookmarks(text10) {
+  function parseBookmarks(text11) {
     let data;
     try {
-      data = JSON.parse(text10);
+      data = JSON.parse(text11);
     } catch {
       throw Error("Choose a valid JSON bookmark export. Nothing was imported.");
     }
@@ -825,18 +825,18 @@
 
   // web/quote-check.mjs
   function validatePaliQuote(data, quote) {
-    const fail8 = () => {
+    const fail9 = () => {
       throw Error("The quotation result is incomplete or does not match this P\u0101li request. No verdict or substitute source was displayed.");
     };
-    const text10 = (x) => typeof x === "string" && x.length > 0;
-    const integer8 = (x) => Number.isSafeInteger(x) && x >= 0;
-    if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text10(data.explanation) || !text10(data.guidance) || data.scope?.language !== "pali" || !text10(data.scope.searched) || !text10(data.scope.attribution) || !text10(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text10(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text10(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail8();
-    if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text10(data.citation_note))) fail8();
+    const text11 = (x) => typeof x === "string" && x.length > 0;
+    const integer9 = (x) => Number.isSafeInteger(x) && x >= 0;
+    if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text11(data.explanation) || !text11(data.guidance) || data.scope?.language !== "pali" || !text11(data.scope.searched) || !text11(data.scope.attribution) || !text11(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text11(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text11(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail9();
+    if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text11(data.citation_note))) fail9();
     for (const m of data.matches) {
-      const command5 = m.read_with, span = m.source_span;
-      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text10(m.citation) || !text10(m.matched_text) || !text10(m.edition) || !text10(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command5?.tool !== "get_text" || command5.uid !== m.text_id || !integer8(command5.offset) || !integer8(command5.limit) || command5.limit < 1 || command5.limit > 200 || span?.offset !== command5.offset || span.first_segment_ref !== m.segment_ref || !integer8(span.end_offset) || span.end_offset <= span.offset || !text10(span.last_segment_ref)) fail8();
+      const command6 = m.read_with, span = m.source_span;
+      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text11(m.citation) || !text11(m.matched_text) || !text11(m.edition) || !text11(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command6?.tool !== "get_text" || command6.uid !== m.text_id || !integer9(command6.offset) || !integer9(command6.limit) || command6.limit < 1 || command6.limit > 200 || span?.offset !== command6.offset || span.first_segment_ref !== m.segment_ref || !integer9(span.end_offset) || span.end_offset <= span.offset || !text11(span.last_segment_ref)) fail9();
     }
-    if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail8();
+    if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail9();
     return data;
   }
 
@@ -847,39 +847,39 @@
   var exact = (x, keys2) => object2(x) && Object.keys(x).length === keys2.length && keys2.every((k) => Object.hasOwn(x, k));
   var integer2 = (x, min, max) => Number.isSafeInteger(x) && x >= min && x <= max;
   var key = (x) => x.name + ":" + x.day;
-  function parseProgressMetadata(text10) {
-    const fail8 = () => {
+  function parseProgressMetadata(text11) {
+    const fail9 = () => {
       throw Error("This is not a supported reading-progress export. No marks were restored.");
     };
     let data;
     try {
-      data = JSON.parse(text10);
+      data = JSON.parse(text11);
     } catch {
-      fail8();
+      fail9();
     }
-    if (!exact(data, ["format", "progress"]) || data.format !== "pali-library-reading-progress-v1" || !Array.isArray(data.progress) || data.progress.length > MAX_PROGRESS_MARKS) fail8();
+    if (!exact(data, ["format", "progress"]) || data.format !== "pali-library-reading-progress-v1" || !Array.isArray(data.progress) || data.progress.length > MAX_PROGRESS_MARKS) fail9();
     const seen = /* @__PURE__ */ new Set();
     return data.progress.map((mark) => {
-      if (!exact(mark, ["name", "day", "signature"]) || typeof mark.name !== "string" || !/^[a-z0-9-]{1,60}$/.test(mark.name) || !integer2(mark.day, 1, 400) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail8();
+      if (!exact(mark, ["name", "day", "signature"]) || typeof mark.name !== "string" || !/^[a-z0-9-]{1,60}$/.test(mark.name) || !integer2(mark.day, 1, 400) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail9();
       seen.add(key(mark));
       let s;
       try {
         s = JSON.parse(mark.signature);
       } catch {
-        fail8();
+        fail9();
       }
-      if (!exact(s, ["name", "day", "source", "readings"]) || s.name !== mark.name || s.day !== mark.day || typeof s.source !== "string" || !/^[a-zA-Z0-9._-]{1,100}$/.test(s.source) || !Array.isArray(s.readings) || !s.readings.length || s.readings.length > 20) fail8();
+      if (!exact(s, ["name", "day", "source", "readings"]) || s.name !== mark.name || s.day !== mark.day || typeof s.source !== "string" || !/^[a-zA-Z0-9._-]{1,100}$/.test(s.source) || !Array.isArray(s.readings) || !s.readings.length || s.readings.length > 20) fail9();
       const ids = /* @__PURE__ */ new Set();
       for (const r of s.readings) {
-        if (!exact(r, ["id", "offset", "limit", "part", "of"]) || typeof r.id !== "string" || !/^[a-z][a-z0-9.-]{0,299}$/.test(r.id) || ids.has(r.id) || !integer2(r.offset, 0, 1e5) || !(r.limit === null || integer2(r.limit, 1, 1e5)) || !(r.part === null && r.of === null || integer2(r.part, 1, 400) && integer2(r.of, r.part, 400) && r.limit !== null)) fail8();
+        if (!exact(r, ["id", "offset", "limit", "part", "of"]) || typeof r.id !== "string" || !/^[a-z][a-z0-9.-]{0,299}$/.test(r.id) || ids.has(r.id) || !integer2(r.offset, 0, 1e5) || !(r.limit === null || integer2(r.limit, 1, 1e5)) || !(r.part === null && r.of === null || integer2(r.part, 1, 400) && integer2(r.of, r.part, 400) && r.limit !== null)) fail9();
         ids.add(r.id);
       }
       const signature = JSON.stringify({ name: s.name, day: s.day, source: s.source, readings: s.readings.map((r) => ({ id: r.id, offset: r.offset, limit: r.limit, part: r.part, of: r.of })) });
       return { name: mark.name, day: mark.day, signature };
     });
   }
-  function parseProgress(text10, catalog) {
-    const progress = parseProgressMetadata(text10), plans2 = new Map(catalog.map((p) => [p.name, p.days]));
+  function parseProgress(text11, catalog) {
+    const progress = parseProgressMetadata(text11), plans2 = new Map(catalog.map((p) => [p.name, p.days]));
     if (progress.some((mark) => !plans2.has(mark.name) || !integer2(mark.day, 1, plans2.get(mark.name)))) throw Error("This is not a supported reading-progress export. No marks were restored.");
     return progress;
   }
@@ -907,8 +907,8 @@
       return false;
     }
   }
-  function topicSource(source6) {
-    if (!string3(source6?.name) || !string3(source6.license) || !string3(source6.attribution) || !string3(source6.commit)) fail();
+  function topicSource(source7) {
+    if (!string3(source7?.name) || !string3(source7.license) || !string3(source7.attribution) || !string3(source7.commit)) fail();
   }
   function related(items, tool2) {
     if (items === void 0) return;
@@ -1101,10 +1101,10 @@
     if (!Object.hasOwn(ENGLISH_AVAILABILITY, availability) || collection !== null && !collectionId(collection) || !/^(0|[1-9]\d*)$/.test(raw) || !count(Number(raw))) fail2();
     return { availability, collection, offset: Number(raw), limit: 40 };
   }
-  function englishRoute(selection4, offset = selection4.offset) {
-    if (!Object.hasOwn(ENGLISH_AVAILABILITY, selection4.availability) || selection4.collection !== null && !collectionId(selection4.collection) || !count(offset)) fail2();
-    const q = new URLSearchParams({ node: "english", availability: selection4.availability });
-    if (selection4.collection !== null) q.set("collection", selection4.collection);
+  function englishRoute(selection5, offset = selection5.offset) {
+    if (!Object.hasOwn(ENGLISH_AVAILABILITY, selection5.availability) || selection5.collection !== null && !collectionId(selection5.collection) || !count(offset)) fail2();
+    const q = new URLSearchParams({ node: "english", availability: selection5.availability });
+    if (selection5.collection !== null) q.set("collection", selection5.collection);
     if (offset) q.set("offset", String(offset));
     return "#browse?" + q;
   }
@@ -1112,24 +1112,24 @@
     const partial = item.partial_english_available || 0, shared = item.shared_english_available || 0;
     return [...item.english_available ? ["Whole-unit or chapter link"] : [], ...partial && shared ? ["Partial and shared sources \xB7 review required"] : partial ? ["Partial source \xB7 review required"] : shared ? ["Shared page \xB7 review required"] : [], ...!item.english_available && !partial && !shared ? ["No indexed English link"] : []];
   }
-  function englishCatalogue(data, selection4) {
-    if (!object3(data) || data.catalogue !== true || data.node !== "english" || data.name !== "Find English sources" || data.availability !== selection4.availability || data.collection !== selection4.collection || data.offset !== selection4.offset || data.limit !== selection4.limit || !count(data.total) || !text3(data.note) || !Array.isArray(data.collections) || data.collections.length > 100 || !Array.isArray(data.items) || data.items.length > selection4.limit) fail2();
+  function englishCatalogue(data, selection5) {
+    if (!object3(data) || data.catalogue !== true || data.node !== "english" || data.name !== "Find English sources" || data.availability !== selection5.availability || data.collection !== selection5.collection || data.offset !== selection5.offset || data.limit !== selection5.limit || !count(data.total) || !text3(data.note) || !Array.isArray(data.collections) || data.collections.length > 100 || !Array.isArray(data.items) || data.items.length > selection5.limit) fail2();
     const collections = /* @__PURE__ */ new Set();
     for (const c of data.collections) {
       if (!object3(c) || !collectionId(c.id) || collections.has(c.id) || !text3(c.name)) fail2();
       collections.add(c.id);
     }
-    if (!collections.size || selection4.collection !== null && !collections.has(selection4.collection)) fail2();
-    const expected = Math.min(selection4.limit, Math.max(0, data.total - selection4.offset));
-    if (data.items.length !== expected || data.next_offset !== (selection4.offset + selection4.limit < data.total ? selection4.offset + selection4.limit : null)) fail2();
+    if (!collections.size || selection5.collection !== null && !collections.has(selection5.collection)) fail2();
+    const expected = Math.min(selection5.limit, Math.max(0, data.total - selection5.offset));
+    if (data.items.length !== expected || data.next_offset !== (selection5.offset + selection5.limit < data.total ? selection5.offset + selection5.limit : null)) fail2();
     const seen = /* @__PURE__ */ new Set();
     for (const item of data.items) {
-      if (!object3(item) || !id(item.id) || seen.has(item.id) || !text3(item.citation) || !text3(item.title) || !text3(item.collection) || !collections.has(item.collection_id) || !belongs(item.id, item.collection_id) || selection4.collection !== null && item.collection_id !== selection4.collection || item.approximate || item.kind === "range" || !count(item.english_available)) fail2();
+      if (!object3(item) || !id(item.id) || seen.has(item.id) || !text3(item.citation) || !text3(item.title) || !text3(item.collection) || !collections.has(item.collection_id) || !belongs(item.id, item.collection_id) || selection5.collection !== null && item.collection_id !== selection5.collection || item.approximate || item.kind === "range" || !count(item.english_available)) fail2();
       for (const k of ["partial_english_available", "shared_english_available"]) if (Object.hasOwn(item, k) && !count(item[k])) fail2();
       const cmd = item.read_with;
       if (!object3(cmd) || Object.keys(cmd).sort().join(",") !== "tool,uid" || cmd.tool !== "get_text" || cmd.uid !== item.id) fail2();
       const whole = item.english_available > 0, scoped = (item.partial_english_available || 0) + (item.shared_english_available || 0) > 0;
-      if (selection4.availability === "linked" && !whole && !scoped || selection4.availability === "whole" && !whole || selection4.availability === "scoped" && (whole || !scoped) || selection4.availability === "none" && (whole || scoped)) fail2();
+      if (selection5.availability === "linked" && !whole && !scoped || selection5.availability === "whole" && !whole || selection5.availability === "scoped" && (whole || !scoped) || selection5.availability === "none" && (whole || scoped)) fail2();
       if (Object.hasOwn(item, "source_context")) {
         const context = item.source_context;
         if (!object3(context) || Object.keys(context).sort().join(",") !== "citation,id,kind,title" || context.kind !== "containing_group" || !id(context.id) || !belongs(context.id, item.collection_id) || context.id === item.id || !text3(context.citation) || !text3(context.title) || !whole) fail2();
@@ -1167,7 +1167,7 @@
   }
   function comparisonSelection(ids, choices, requestedId) {
     const ordinary = comparisonChoices(choices, requestedId);
-    if (!Array.isArray(ids) || ids.length < 2 || ids.length > 4 || new Set(ids).size !== ids.length || ids.some((id4) => !sourceId(id4) || !ordinary.some((choice) => choice.translation_id === id4))) failure();
+    if (!Array.isArray(ids) || ids.length < 2 || ids.length > 4 || new Set(ids).size !== ids.length || ids.some((id5) => !sourceId(id5) || !ordinary.some((choice) => choice.translation_id === id5))) failure();
     return [...ids];
   }
   var requestKeys = /* @__PURE__ */ new Set(["uid", "translation", "offset", "limit", "prefix_sha256"]);
@@ -1304,11 +1304,11 @@
   var invalid = () => {
     throw Error("This source page has incomplete or unsupported navigation metadata. No passage was substituted.");
   };
-  function readingPagePosition(context, offset, source6) {
+  function readingPagePosition(context, offset, source7) {
     assertReadingContext(context);
     if (!integer4(offset, 0, 1e5)) invalid();
-    revision2(source6);
-    return "#read?" + new URLSearchParams({ ...context, offset, page_source: source6 });
+    revision2(source7);
+    return "#read?" + new URLSearchParams({ ...context, offset, page_source: source7 });
   }
   function assertPageRequest(args) {
     if (!args.has("page_source")) return;
@@ -1344,9 +1344,9 @@
     if (start >= end || end > data.total_segments || data.offset < start || data.offset + data.returned > end) invalid();
     return { start, end, current: data.offset };
   }
-  function readingJumpOffset(text10, data, window2 = null) {
-    if (typeof text10 !== "string" || !/^[1-9][0-9]*$/.test(text10)) throw Error("Enter a source position using whole decimal digits only.");
-    const position2 = Number(text10), bounds = readingPageBounds(data, window2);
+  function readingJumpOffset(text11, data, window2 = null) {
+    if (typeof text11 !== "string" || !/^[1-9][0-9]*$/.test(text11)) throw Error("Enter a source position using whole decimal digits only.");
+    const position2 = Number(text11), bounds = readingPageBounds(data, window2);
     if (!integer4(position2, 1, 100001) || position2 - 1 < bounds.start || position2 - 1 >= bounds.end) throw Error("That source position is outside the current reading bounds.");
     return position2 - 1;
   }
@@ -1381,16 +1381,16 @@
   }
   function validateChapterIndex(data) {
     if (!object6(data) || !own5(data, "chapter_index")) return null;
-    const pin = revision3(data), index = data.chapter_index, command5 = index?.read_with;
-    if (!exact2(index, ["scope", "read_with"]) || !["work", "source_file"].includes(index.scope) || !exact2(command5, ["tool", "citation", "offset", "limit"]) || command5.tool !== "get_post_canonical" || !text5(command5.citation, 200) || command5.offset !== 0 || command5.limit !== 1) fail3();
+    const pin = revision3(data), index = data.chapter_index, command6 = index?.read_with;
+    if (!exact2(index, ["scope", "read_with"]) || !["work", "source_file"].includes(index.scope) || !exact2(command6, ["tool", "citation", "offset", "limit"]) || command6.tool !== "get_post_canonical" || !text5(command6.citation, 200) || command6.offset !== 0 || command6.limit !== 1) fail3();
     if (index.scope === "source_file") {
-      if (command5.citation !== data.book.id || !(data.citation === data.book.id || data.citation.startsWith(data.book.id + " "))) fail3();
-    } else if (command5.citation === "Vism") {
+      if (command6.citation !== data.book.id || !(data.citation === data.book.id || data.citation.startsWith(data.book.id + " "))) fail3();
+    } else if (command6.citation === "Vism") {
       if (!["visuddhimagga-1", "visuddhimagga-2"].includes(data.book.id) || !/^Vism(?:$| ch\. [1-9][0-9]*$| [1-9][0-9]*\.[1-9][0-9]*$| §[1-9][0-9]*$)/.test(data.citation)) fail3();
-    } else if (command5.citation === "Abhidh-s") {
+    } else if (command6.citation === "Abhidh-s") {
       if (data.book.id !== "abhidhammatthasangaho" || !/^Abhidh-s(?:$| [1-9][0-9]*(?:\.[1-9][0-9]*)?$)/.test(data.citation)) fail3();
     } else fail3();
-    return { scope: index.scope, read_with: { ...command5 }, revision: pin, book_id: data.book.id };
+    return { scope: index.scope, read_with: { ...command6 }, revision: pin, book_id: data.book.id };
   }
   function validateChapterMenu(current, root) {
     const selected = validateChapterIndex(current), parent = validateChapterIndex(root);
@@ -1678,8 +1678,8 @@
   };
   var CitationError = class extends Error {
   };
-  function numbers(text10) {
-    const cleaned = text10.replace(/[–—−]/g, "-").replace(/\s*([.:,-])\s*/g, "$1").trim();
+  function numbers(text11) {
+    const cleaned = text11.replace(/[–—−]/g, "-").replace(/\s*([.:,-])\s*/g, "$1").trim();
     const m = cleaned.match(/^(\d+(?:[.:,]\d+)*)(?:-(\d+(?:[.:]\d+)*))?$/);
     if (!m) return null;
     const path = m[1].split(/[.:,]/).map((n) => Number(n));
@@ -1716,8 +1716,8 @@
     }
     return { kind: "url", host, path: url.pathname.replace(/\.html?$/, ""), raw };
   }
-  function parseEditionPage(raw, text10) {
-    const head = text10.match(/^([A-Za-z]+)(?:\.?\s*(ed(?:ition)?)\.?)?[\s.:,]+(.*)$/);
+  function parseEditionPage(raw, text11) {
+    const head = text11.match(/^([A-Za-z]+)(?:\.?\s*(ed(?:ition)?)\.?)?[\s.:,]+(.*)$/);
     if (!head) return null;
     const edition = EDITION_WORDS[fold2(head[1] + (head[2] || ""))] || EDITION_WORDS[fold2(head[1])];
     if (!edition) return null;
@@ -1755,20 +1755,20 @@
     const raw = input.trim();
     if (raw.length > 300) throw new CitationError("Citation is too long.");
     if (/^https?:\/\//i.test(raw)) return parseUrl(raw);
-    let text10 = raw.replace(/[‐‑–—−]/g, "-").replace(/\s+/g, " ");
-    text10 = text10.replace(/^PTS[:\s]+/i, "");
-    const edition = parseEditionPage(raw, text10);
+    let text11 = raw.replace(/[‐‑–—−]/g, "-").replace(/\s+/g, " ");
+    text11 = text11.replace(/^PTS[:\s]+/i, "");
+    const edition = parseEditionPage(raw, text11);
     if (edition) return edition;
-    const seg = text10.match(/^([a-z][a-z-]*\d+(?:\.\d+)*(?:-\d+)?):([\d.]+)$/);
+    const seg = text11.match(/^([a-z][a-z-]*\d+(?:\.\d+)*(?:-\d+)?):([\d.]+)$/);
     if (seg) {
       const inner = parseCitation(seg[1]);
       return { ...inner, segment: seg[2], raw };
     }
-    const sc = text10.match(/^([a-z][a-z-]*?)(\d+(?:\.\d+)*(?:-\d+)?)(?::([\d.]+))?$/);
+    const sc = text11.match(/^([a-z][a-z-]*?)(\d+(?:\.\d+)*(?:-\d+)?)(?::([\d.]+))?$/);
     if (sc && /^(pli-tv-|tha-ap|thi-ap)/.test(sc[1] + sc[2])) return { kind: "uid", uid: (sc[1] + sc[2]).toLowerCase(), raw };
-    const ati = text10.match(/^(dn|mn|sn|an|snp|ud|iti|thag|thig|khp|dhp)\.?(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.[a-z]+)?$/i);
-    if (ati && /^(dn|mn)\./i.test(text10)) return { kind: "id", collection: ati[1].toLowerCase(), path: [Number(ati[2])], end: null, raw };
-    const pts = text10.match(/^([A-Za-zāīūṭḍṇḷñṅṃ]+(?: I{1,2})?)(?:\.\s*|\s+)([IVXivx]+)(?:\.\s*|\s+)(\d+)$/);
+    const ati = text11.match(/^(dn|mn|sn|an|snp|ud|iti|thag|thig|khp|dhp)\.?(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.[a-z]+)?$/i);
+    if (ati && /^(dn|mn)\./i.test(text11)) return { kind: "id", collection: ati[1].toLowerCase(), path: [Number(ati[2])], end: null, raw };
+    const pts = text11.match(/^([A-Za-zāīūṭḍṇḷñṅṃ]+(?: I{1,2})?)(?:\.\s*|\s+)([IVXivx]+)(?:\.\s*|\s+)(\d+)$/);
     if (pts) {
       const key5 = fold2(pts[1]).replace(/\./g, "");
       const romanVolume = ROMAN[pts[2].toLowerCase()] || null;
@@ -1779,7 +1779,7 @@
         return { kind: "pts", collection: PTS_COLLECTIONS[key5], volume: romanVolume, page: Number(pts[3]), raw };
       }
     }
-    const vin = fold2(text10).replace(/vinaya\s*/, "").match(/^(bhikkhuni|bhikkhu|bu|bi)?\s*([a-z]+(?:[\s-]+[a-z]+)*)\s*(\d+(?:\s*[.:-]\s*\d+)*)$/);
+    const vin = fold2(text11).replace(/vinaya\s*/, "").match(/^(bhikkhuni|bhikkhu|bu|bi)?\s*([a-z]+(?:[\s-]+[a-z]+)*)\s*(\d+(?:\s*[.:-]\s*\d+)*)$/);
     const vinClass = vin && VINAYA_CLASS[vin[2].replace(/[\s-]+/g, "")];
     if (vin && (vinClass || ["kd", "mv", "cv", "pvr", "khandhaka", "mahavagga", "culavagga", "cullavagga", "parivara"].includes(vin[2]))) {
       const nums2 = numbers(vin[3]);
@@ -1802,7 +1802,7 @@
       if (["kd", "khandhaka"].includes(vin[2])) return { kind: "uid", uid: `pli-tv-kd${khandhaka(nums2.path[0], 22, "Kd (Khandhaka)")}`, raw };
       return { kind: "uid", uid: `pli-tv-pvr${nums2.path.join(".")}`, raw };
     }
-    const m = text10.match(/^([A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ .-]+?)\.?\s*(\d[\d\s.:,-]*)$/);
+    const m = text11.match(/^([A-Za-zāīūṭḍṇḷñṅṃĀĪŪṬḌṆḶÑṄṂ .-]+?)\.?\s*(\d[\d\s.:,-]*)$/);
     if (!m) throw new CitationError(`Could not read "${raw}". Use forms like MN 10, SN 56.11, AN 3.65, Dhp 183, Snp 1.8, Thag 1.1, Pj 1 or M i 55.`);
     const name = m[1].trim();
     if (/\s[ivxIVX]+$/.test(name)) throw new CitationError(`"${raw}" looks like a PTS volume/page reference for a collection that is not cited that way. Cite it by number instead.`);
@@ -1838,20 +1838,20 @@
   var foldNiggahita = (value) => value.replace(/ṁ/g, "\u1E43").replace(/Ṁ/g, "\u1E42");
 
   // src/search-segments.mjs
-  var singleQuotedPhrase = (text10) => /^"[^"]+"$|^“[^”]+”$/u.test(String(text10).trim());
-  var latinLetter = (text10) => [...String(text10)].some((ch) => /\p{L}/u.test(ch) && /\p{Script=Latin}/u.test(ch));
-  var foreignLetter = (text10) => [...String(text10)].some((ch) => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch));
-  var foreignNumeral = (text10) => [...String(text10)].some((ch) => /\p{N}/u.test(ch) && !/[0-9]/u.test(ch));
-  var isSourcePhrase = (text10) => singleQuotedPhrase(text10) && latinLetter(text10) && (detectScript(text10) !== "roman" || foreignLetter(text10) || foreignNumeral(text10));
+  var singleQuotedPhrase = (text11) => /^"[^"]+"$|^“[^”]+”$/u.test(String(text11).trim());
+  var latinLetter = (text11) => [...String(text11)].some((ch) => /\p{L}/u.test(ch) && /\p{Script=Latin}/u.test(ch));
+  var foreignLetter = (text11) => [...String(text11)].some((ch) => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch));
+  var foreignNumeral = (text11) => [...String(text11)].some((ch) => /\p{N}/u.test(ch) && !/[0-9]/u.test(ch));
+  var isSourcePhrase = (text11) => singleQuotedPhrase(text11) && latinLetter(text11) && (detectScript(text11) !== "roman" || foreignLetter(text11) || foreignNumeral(text11));
   function romanizeSearchInput(query) {
-    const text10 = String(query);
+    const text11 = String(query);
     try {
-      const input = romanizeLookupInput(text10);
+      const input = romanizeLookupInput(text11);
       if (foreignNumeral(input.text)) throw new Error("The search input could not be converted completely. Use ASCII digits or one supported script; a quoted source phrase keeps its original numeral characters.");
       return input;
     } catch (error) {
-      if (!isSourcePhrase(text10)) throw error;
-      return { text: text10, script: "roman", source_phrase: true };
+      if (!isSourcePhrase(text11)) throw error;
+      return { text: text11, script: "roman", source_phrase: true };
     }
   }
   var hasSearchPhrase = (query) => /"[^"]+"|“[^”]+”/u.test(query);
@@ -1901,46 +1901,46 @@
       fail4();
     }
   }
-  function identity2(hit3) {
-    if (!object7(hit3) || !text6(hit3.id, 200) || !text6(hit3.citation, 300) || !text6(hit3.title, 1e3) || !text6(hit3.collection, 200)) fail4();
-    let id4;
+  function identity2(hit4) {
+    if (!object7(hit4) || !text6(hit4.id, 200) || !text6(hit4.citation, 300) || !text6(hit4.title, 1e3) || !text6(hit4.collection, 200)) fail4();
+    let id5;
     try {
-      const parsed = parseCitation(hit3.citation);
-      id4 = parsed.kind === "uid" ? parsed.uid : parsed.kind === "id" ? citationId(parsed) : null;
+      const parsed = parseCitation(hit4.citation);
+      id5 = parsed.kind === "uid" ? parsed.uid : parsed.kind === "id" ? citationId(parsed) : null;
     } catch {
       fail4();
     }
-    if (id4 !== hit3.id) fail4();
-    if (own6(hit3, "canonical") && hit3.canonical !== true) fail4();
-    if (own6(hit3, "title_roman") && !text6(hit3.title_roman, 1e3)) fail4();
+    if (id5 !== hit4.id) fail4();
+    if (own6(hit4, "canonical") && hit4.canonical !== true) fail4();
+    if (own6(hit4, "title_roman") && !text6(hit4.title_roman, 1e3)) fail4();
   }
-  function command2(command5, hit3, script, body = false, context = false) {
-    if (!keysOnly(command5, ["tool", "uid", "offset", "limit", "script"]) || command5.tool !== "get_text" || command5.uid !== hit3.id || own6(command5, "script") && command5.script !== script) fail4();
-    if (script !== "roman" && command5.script !== script) fail4();
+  function command2(command6, hit4, script, body = false, context = false) {
+    if (!keysOnly(command6, ["tool", "uid", "offset", "limit", "script"]) || command6.tool !== "get_text" || command6.uid !== hit4.id || own6(command6, "script") && command6.script !== script) fail4();
+    if (script !== "roman" && command6.script !== script) fail4();
     if (body) {
-      const offset = context ? Math.max(0, hit3.read_with.offset - 1) : command5.offset;
-      if (!integer5(command5.offset, 0, 1e5) || command5.offset !== offset || command5.limit !== (context ? 3 : 1)) fail4();
-    } else if (own6(command5, "offset") || own6(command5, "limit")) fail4();
+      const offset = context ? Math.max(0, hit4.read_with.offset - 1) : command6.offset;
+      if (!integer5(command6.offset, 0, 1e5) || command6.offset !== offset || command6.limit !== (context ? 3 : 1)) fail4();
+    } else if (own6(command6, "offset") || own6(command6, "limit")) fail4();
   }
-  function checkHit(hit3, edition, selected, body) {
-    identity2(hit3);
-    source2(hit3.source, edition);
-    command2(hit3.read_with, hit3, selected.script, body);
+  function checkHit(hit4, edition, selected, body) {
+    identity2(hit4);
+    source2(hit4.source, edition);
+    command2(hit4.read_with, hit4, selected.script, body);
     if (body) {
-      if (!text6(hit3.excerpt, 4e3) || hit3.segment_ref !== `${hit3.id}/${hit3.read_with.offset + 1}`) fail4();
-      command2(hit3.context_with, hit3, selected.script, true, true);
-    } else if (own6(hit3, "segment_ref") || own6(hit3, "excerpt") || own6(hit3, "context_with")) fail4();
-    if (own6(hit3, "approximate") && typeof hit3.approximate !== "boolean") fail4();
-    if (own6(hit3, "alignment") && (!object7(hit3.alignment) || !text6(hit3.alignment.note))) fail4();
-    for (const key4 of ["english_available", "partial_english_available", "shared_english_available"]) if (own6(hit3, key4) && !integer5(hit3[key4])) fail4();
+      if (!text6(hit4.excerpt, 4e3) || hit4.segment_ref !== `${hit4.id}/${hit4.read_with.offset + 1}`) fail4();
+      command2(hit4.context_with, hit4, selected.script, true, true);
+    } else if (own6(hit4, "segment_ref") || own6(hit4, "excerpt") || own6(hit4, "context_with")) fail4();
+    if (own6(hit4, "approximate") && typeof hit4.approximate !== "boolean") fail4();
+    if (own6(hit4, "alignment") && (!object7(hit4.alignment) || !text6(hit4.alignment.note))) fail4();
+    for (const key4 of ["english_available", "partial_english_available", "shared_english_available"]) if (own6(hit4, key4) && !integer5(hit4[key4])) fail4();
   }
   function stream(items, total, next, data, selected, body) {
     if (!integer5(total) || !Array.isArray(items) || items.length !== Math.min(selected.limit, Math.max(0, total - selected.offset)) || next !== (selected.offset + selected.limit < total ? selected.offset + selected.limit : null)) fail4();
     const seen = /* @__PURE__ */ new Set();
-    for (const hit3 of items) {
-      checkHit(hit3, data.source, selected, body);
-      if (seen.has(hit3.id)) fail4();
-      seen.add(hit3.id);
+    for (const hit4 of items) {
+      checkHit(hit4, data.source, selected, body);
+      if (seen.has(hit4.id)) fail4();
+      seen.add(hit4.id);
     }
   }
   function queryProvenance(data, selected) {
@@ -1975,14 +1975,14 @@
     for (const key4 of ["script", "script_note", "query_mode", "query_note", "spelling_note", "input_script", "input_romanized", "input_normalised", "notes", "expanded_from_english", "english_words_ignored"]) if (own6(data, key4)) result[key4] = JSON.parse(JSON.stringify(data[key4]));
     return result;
   }
-  function cloneHit(hit3) {
+  function cloneHit(hit4) {
     const result = {};
-    for (const key4 of ["id", "citation", "title", "title_roman", "collection", "covers", "pts", "approximate", "alignment", "source", "excerpt", "segment_ref", "read_with", "context_with"]) if (own6(hit3, key4) && hit3[key4] !== void 0) result[key4] = JSON.parse(JSON.stringify(hit3[key4]));
+    for (const key4 of ["id", "citation", "title", "title_roman", "collection", "covers", "pts", "approximate", "alignment", "source", "excerpt", "segment_ref", "read_with", "context_with"]) if (own6(hit4, key4) && hit4[key4] !== void 0) result[key4] = JSON.parse(JSON.stringify(hit4[key4]));
     return result;
   }
-  function canonicalSearchLink(hit3, body = false) {
-    const rev = revision4(sourceRevision(hit3));
-    return body ? readingPosition({ uid: hit3.id }, hit3.read_with.offset, hit3.segment_ref, rev) : readingPagePosition({ uid: hit3.id }, 0, rev);
+  function canonicalSearchLink(hit4, body = false) {
+    const rev = revision4(sourceRevision(hit4));
+    return body ? readingPosition({ uid: hit4.id }, hit4.read_with.offset, hit4.segment_ref, rev) : readingPagePosition({ uid: hit4.id }, 0, rev);
   }
 
   // web/book-search.mjs
@@ -2055,30 +2055,30 @@
     }
     return revision5;
   }
-  function command3(value, book2, offset, limit, outputScript2) {
-    if (!keysOnly2(value, ["tool", "book", "offset", "limit", "script"]) || value.tool !== "get_text" || value.book !== book2 || value.offset !== offset || value.limit !== limit || own7(value, "script") && !scripts.has(value.script) || outputScript2 && value.script !== outputScript2) fail5();
+  function command3(value, book2, offset, limit, outputScript3) {
+    if (!keysOnly2(value, ["tool", "book", "offset", "limit", "script"]) || value.tool !== "get_text" || value.book !== book2 || value.offset !== offset || value.limit !== limit || own7(value, "script") && !scripts.has(value.script) || outputScript3 && value.script !== outputScript3) fail5();
   }
   function queryProvenance2(data, selected, reject = fail5) {
-    const fail8 = reject;
+    const fail9 = reject;
     const input = romanizeSearchInput(selected.query), base = input.text;
     if (input.original) {
-      if (data.input_script !== input.script || data.input_romanized !== base) fail8();
-    } else if (own7(data, "input_script") || own7(data, "input_romanized")) fail8();
+      if (data.input_script !== input.script || data.input_romanized !== base) fail9();
+    } else if (own7(data, "input_script") || own7(data, "input_romanized")) fail9();
     const phrase = data.query_mode;
-    if (input.source_phrase && phrase !== "source_phrase") fail8();
-    if (phrase === "source_phrase" && !input.source_phrase || phrase === "as_typed_phrase" && (!hasSearchPhrase(base) || input.source_phrase)) fail8();
+    if (input.source_phrase && phrase !== "source_phrase") fail9();
+    if (phrase === "source_phrase" && !input.source_phrase || phrase === "as_typed_phrase" && (!hasSearchPhrase(base) || input.source_phrase)) fail9();
     if (phrase !== void 0) {
-      if (data.query !== base || own7(data, "input_normalised")) fail8();
+      if (data.query !== base || own7(data, "input_normalised")) fail9();
       return;
     }
     if (!own7(data, "input_normalised")) {
-      if (![base, base.normalize("NFC"), foldNiggahita(base.normalize("NFC"))].includes(data.query)) fail8();
+      if (![base, base.normalize("NFC"), foldNiggahita(base.normalize("NFC"))].includes(data.query)) fail9();
       return;
     }
     const normalized = data.input_normalised;
-    if (!keysOnly2(normalized, ["original", "read_as", "scheme", "changes", "note"]) || normalized.original !== base || normalized.read_as !== data.query || !["ascii", "unicode", "velthuis", "harvard-kyoto"].includes(normalized.scheme) || !text7(normalized.note, 1e4) || !Array.isArray(normalized.changes) || !integer6(normalized.changes.length, 1, 500)) fail8();
+    if (!keysOnly2(normalized, ["original", "read_as", "scheme", "changes", "note"]) || normalized.original !== base || normalized.read_as !== data.query || !["ascii", "unicode", "velthuis", "harvard-kyoto"].includes(normalized.scheme) || !text7(normalized.note, 1e4) || !Array.isArray(normalized.changes) || !integer6(normalized.changes.length, 1, 500)) fail9();
     for (const change of normalized.changes) {
-      if (!keysOnly2(change, ["from", "to", "rule", "label"]) || !text7(change.from, 500) || !text7(change.to, 500) || !text7(change.rule, 100) || own7(change, "label") && !text7(change.label, 1e3) || !base.normalize("NFC").includes(change.from.normalize("NFC")) || !data.query.normalize("NFC").includes(change.to.normalize("NFC"))) fail8();
+      if (!keysOnly2(change, ["from", "to", "rule", "label"]) || !text7(change.from, 500) || !text7(change.to, 500) || !text7(change.rule, 100) || own7(change, "label") && !text7(change.label, 1e3) || !base.normalize("NFC").includes(change.from.normalize("NFC")) || !data.query.normalize("NFC").includes(change.to.normalize("NFC"))) fail9();
     }
   }
   function hit(item, data) {
@@ -2255,13 +2255,190 @@
     return clone4(response);
   }
 
-  // web/citation-resolution.mjs
+  // web/post-search.mjs
   var object10 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   var own9 = (value, key4) => Object.hasOwn(value, key4);
-  var text9 = (value, max = 1e3) => typeof value === "string" && value.trim().length > 0 && value.length <= max && !/[\u0000-\u001f\u007f<>]/.test(value);
-  var id3 = (value) => typeof value === "string" && /^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$/.test(value) && value.length <= 200;
-  var citation = (value) => text9(value, 300) && !/https?:|javascript:|data:/i.test(value);
+  var keysOnly4 = (value, keys2) => object10(value) && Object.keys(value).every((key4) => keys2.includes(key4));
+  var integer8 = (value, min, max) => Number.isSafeInteger(value) && value >= min && value <= max;
+  var text9 = (value, max = 1e4) => typeof value === "string" && value.trim().length > 0 && value.length <= max && !/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(value);
+  var id3 = (value) => typeof value === "string" && /^[a-z][a-z0-9-]{0,99}$/.test(value);
+  var scripts3 = /* @__PURE__ */ new Set(["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"]);
+  var clone5 = (value) => JSON.parse(JSON.stringify(value));
+  var equal2 = (a, b) => object10(a) && object10(b) && Object.keys(a).length === Object.keys(b).length && Object.keys(a).every((key4) => own9(b, key4) && a[key4] === b[key4]);
   var fail7 = () => {
+    throw Error("The post-canonical search or surrounding context does not match this selection. No source or reading position was substituted.");
+  };
+  var searchLabel = "Post-canonical books (VRI \u1E6C\u012Bk\u0101 and A\xF1\xF1a sections), not the canon. Results are kept separate from canonical search results.";
+  var labels = {
+    "\u1E6C\u012Bk\u0101": "Post-canonical, not the canon: a book from the VRI \u1E6C\u012Bk\u0101 section (sub-commentaries on the canon and its commentaries, and Abhidhamma and Vinaya manuals). Keep it distinct from the root text and from the commentary (A\u1E6D\u1E6Dhakath\u0101) when quoting.",
+    "A\xF1\xF1a": 'Post-canonical, not the canon: a book from the VRI "A\xF1\xF1a" (other books) section, such as the Visuddhimagga, its Mah\u0101\u1E6D\u012Bk\u0101, chronicles, grammars and later P\u0101li works. Keep it distinct from the canonical texts when quoting.'
+  };
+  function selection4(value) {
+    if (!keysOnly4(value, ["query", "offset", "limit", "script"]) || !text9(value.query, 300) || value.query !== value.query.trim() || !integer8(value.offset, 0, 1e5) || value.limit !== 15 || !scripts3.has(value.script)) fail7();
+    if (romanizeSearchInput(value.query).text.length < 2) fail7();
+    return value;
+  }
+  function postSearchSelection(args, script, rawQuery) {
+    if (rawQuery !== void 0) {
+      try {
+        decodeURIComponent(rawQuery.replace(/\+/g, " "));
+      } catch {
+        fail7();
+      }
+    }
+    for (const key4 of args.keys()) if (!["scope", "q", "offset"].includes(key4) || args.getAll(key4).length !== 1) fail7();
+    if (args.get("scope") !== "post") fail7();
+    const offset = args.has("offset") ? args.get("offset") : "0";
+    if (!/^(0|[1-9][0-9]*)$/.test(offset)) fail7();
+    return selection4({ query: (args.get("q") ?? "").trim(), offset: Number(offset), limit: 15, script });
+  }
+  function source5(data) {
+    const value = data.source;
+    if (!keysOnly4(value, ["name", "repository", "commit", "files", "attribution", "terms", "locator_revision"]) || value.name !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI): \u1E6C\u012Bk\u0101 and A\xF1\xF1a (post-canonical) books" || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || value.files !== "romn/*.tik.xml, romn/*.nrf.xml (except s0518m, s0520m), romn/e0101n.mul.xml, e0102n.mul.xml, e0103n.att.xml, e0104n.att.xml; titles from tipitaka.org/romn/tree.json" || !text9(value.attribution) || !text9(value.terms) || !text9(value.commit, 100)) fail7();
+    try {
+      if (sourceRevision({ source: { commit: value.commit } }) !== value.commit || !text9(sourceRevision(data), 100)) fail7();
+    } catch {
+      fail7();
+    }
+  }
+  function outputScript2(data, selected) {
+    if (selected.script === "roman" ? own9(data, "script") || own9(data, "script_note") : data.script !== selected.script || !text9(data.script_note)) fail7();
+  }
+  function nativeTitle(value, key4, script) {
+    if (!text9(value[key4], 1e3) || (script === "roman" ? own9(value, key4 + "_roman") : !text9(value[key4 + "_roman"], 1e3) || value[key4] !== transliterate(value[key4 + "_roman"], "roman", script))) fail7();
+  }
+  function citationScope(citation2, book2) {
+    if (!id3(book2) || !text9(citation2, 200)) fail7();
+    let match;
+    if (match = /^Vism (?:§([1-9][0-9]{0,2})|ch\. ([1-9][0-9]?))$/.exec(citation2)) {
+      if (!["visuddhimagga-1", "visuddhimagga-2"].includes(book2) || match[1] && (Number(match[1]) > 896 || book2 !== `visuddhimagga-${Number(match[1]) <= 364 ? 1 : 2}`) || match[2] && (Number(match[2]) > 23 || book2 !== `visuddhimagga-${Number(match[2]) <= 11 ? 1 : 2}`)) fail7();
+      return { work: "Vism", kind: match[1] ? "paragraph" : "chapter", chapter: match[2] ? Number(match[2]) : null, paragraph: match[1] ? Number(match[1]) : null };
+    }
+    if (match = /^Abhidh-s ([1-9])(?:\.([1-9][0-9]*))?$/.exec(citation2)) {
+      if (book2 !== "abhidhammatthasangaho") fail7();
+      return { work: "Abhidh-s", kind: match[2] ? "paragraph" : "chapter", chapter: Number(match[1]), paragraph: match[2] ? Number(match[2]) : null };
+    }
+    if (citation2 === book2) return { work: null, kind: "book", chapter: null };
+    if (citation2.startsWith(book2 + " ") && (match = /^(?:([1-9][0-9]*)(?:\.([1-9][0-9]*))?|§([1-9][0-9]*))$/.exec(citation2.slice(book2.length + 1)))) return { work: null, kind: match[2] || match[3] ? "paragraph" : "chapter", chapter: match[1] ? Number(match[1]) : null, paragraph: match[2] || match[3] ? Number(match[2] || match[3]) : null };
+    fail7();
+  }
+  function command5(value, citation2, offset, limit, selected) {
+    if (!keysOnly4(value, ["tool", "citation", "offset", "limit", "script"]) || value.tool !== "get_post_canonical" || value.citation !== citation2 || value.offset !== offset || value.limit !== limit || own9(value, "script") && value.script !== selected.script || selected.script !== "roman" && value.script !== selected.script) fail7();
+  }
+  function hit3(item, selected) {
+    if (!keysOnly4(item, ["canonical", "citation", "book_id", "book_title", "book_title_roman", "vri_section", "chapter", "match_vri_paragraph", "excerpt", "segment_ref", "read_with", "context_with"]) || item.canonical !== false || !own9(labels, item.vri_section) || !text9(item.excerpt, 4e3)) fail7();
+    const scope = citationScope(item.citation, item.book_id);
+    if (scope.work && item.vri_section !== (scope.work === "Vism" ? "A\xF1\xF1a" : "\u1E6C\u012Bk\u0101")) fail7();
+    nativeTitle(item, "book_title", selected.script);
+    for (const field of ["chapter", "match_vri_paragraph"]) if (own9(item, field) && !text9(item[field], field === "chapter" ? 1e3 : 100)) fail7();
+    if (!integer8(item.read_with?.offset, 0, 1e5) || item.segment_ref !== `${item.citation}/${item.read_with.offset + 1}`) fail7();
+    command5(item.read_with, item.citation, item.read_with.offset, 1, selected);
+    command5(item.context_with, item.citation, Math.max(0, item.read_with.offset - 1), 3, selected);
+  }
+  function validatePostSearch(data, selected) {
+    selection4(selected);
+    if (!keysOnly4(data, ["query", "canonical", "label", "searched", "results", "total_matched", "offset", "limit", "next_offset", "source", "script", "script_note", "input_script", "input_romanized", "input_normalised", "query_mode", "query_note"]) || !text9(data.query, 2e3) || data.canonical !== false || data.label !== searchLabel || data.searched !== "109 post-canonical books" || !integer8(data.total_matched, 0, 1e6) || data.offset !== selected.offset || data.limit !== 15 || !Array.isArray(data.results) || data.results.length !== Math.min(15, Math.max(0, data.total_matched - data.offset)) || data.next_offset !== (data.offset + 15 < data.total_matched ? data.offset + 15 : null)) fail7();
+    source5(data);
+    outputScript2(data, selected);
+    if (own9(data, "query_mode") && !["source_phrase", "as_typed_phrase"].includes(data.query_mode) || own9(data, "query_note") && !text9(data.query_note) || own9(data, "input_script") && !scripts3.has(data.input_script) || own9(data, "input_romanized") && !text9(data.input_romanized, 2e3)) fail7();
+    queryProvenance2(data, selected, fail7);
+    const seen = /* @__PURE__ */ new Set(), books = /* @__PURE__ */ new Map();
+    for (const item of data.results) {
+      hit3(item, selected);
+      const identity3 = { title: item.book_title, roman: item.book_title_roman, section: item.vri_section };
+      if (seen.has(item.citation) || books.has(item.book_id) && !equal2(books.get(item.book_id), identity3)) fail7();
+      seen.add(item.citation);
+      books.set(item.book_id, identity3);
+    }
+    return clone5(data);
+  }
+  function member2(data, item, selected) {
+    const checked = validatePostSearch(data, selected), found = checked.results.find((value) => value.citation === item?.citation);
+    if (!found || JSON.stringify(found) !== JSON.stringify(item)) fail7();
+    return { checked, found };
+  }
+  function postSearchHitLinks(data, item, selected) {
+    const { checked, found } = member2(data, item, selected);
+    const href = readingPosition({ kind: "post", uid: found.citation }, found.read_with.offset, found.segment_ref, sourceRevision(checked));
+    return { read: href, continue: href };
+  }
+  function postContextCommand(data, item, selected) {
+    const { found } = member2(data, item, selected);
+    return { citation: found.context_with.citation, offset: found.context_with.offset, limit: 3, script: selected.script };
+  }
+  function pages2(segment) {
+    if (own9(segment, "vri_paragraph") && !text9(segment.vri_paragraph, 100)) fail7();
+    for (const key4 of ["pts_page_begins", "thai_page_begins", "myanmar_page_begins", "vri_page_begins"]) if (own9(segment, key4) && (!Array.isArray(segment[key4]) || segment[key4].length > 100 || segment[key4].some((page) => !text9(page, 200)))) fail7();
+  }
+  function validatePostContext(response, data, item, selected) {
+    const { checked, found } = member2(data, item, selected), scope = citationScope(found.citation, found.book_id), offset = found.context_with.offset;
+    if (!keysOnly4(response, ["canonical", "label", "citation", "title", "title_roman", "kind", "chapter", "vri_paragraph", "approximate", "book", "chapters", "chapter_index", "notes", "source", "edition", "attribution", "total_segments", "offset", "limit", "returned", "next_offset", "segments", "continue_with", "script", "script_note"]) || response.canonical !== false) fail7();
+    source5(response);
+    if (!equal2(response.source, checked.source)) {
+      const error = Error("The post-canonical source changed since this search was opened. Run the search again to review the current source; no replacement context was displayed.");
+      error.code = "READING_SOURCE_CHANGED";
+      throw error;
+    }
+    outputScript2(response, selected);
+    const book2 = response.book;
+    if (!keysOnly4(book2, ["id", "title", "title_roman", "vri_file", "vri_section", "vri_group", "canonical"]) || book2.id !== found.book_id || book2.canonical !== false || book2.vri_section !== found.vri_section || !text9(book2.vri_file, 100) || !/^[a-z0-9][a-z0-9_.-]*\.(?:mul|tik|nrf|att)\.xml$/.test(book2.vri_file) || !Array.isArray(book2.vri_group) || book2.vri_group.length > 100 || book2.vri_group.some((group) => !text9(group, 1e3))) fail7();
+    nativeTitle(book2, "title", selected.script);
+    nativeTitle(response, "title", selected.script);
+    if (found.book_id === "visuddhimagga-1" && book2.vri_file !== "e0101n.mul.xml" || found.book_id === "visuddhimagga-2" && book2.vri_file !== "e0102n.mul.xml" || found.book_id === "abhidhammatthasangaho" && book2.vri_file !== "abh07t.nrf.xml") fail7();
+    if (book2.title !== found.book_title || book2.title_roman !== found.book_title_roman || response.citation !== found.citation || response.kind !== scope.kind || response.label !== (scope.work === "Vism" ? 'Visuddhimagga ("The Path of Purification"), a post-canonical manual traditionally attributed to Buddhaghosa. Not the canon. ' : scope.work === "Abhidh-s" ? "Abhidhammatthasa\u1E45gaha, a post-canonical Abhidhamma manual traditionally attributed to \u0100cariya Anuruddha. Not the canon. " : "") + labels[found.vri_section] || response.edition !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), P\u0101li" || response.attribution !== response.source.attribution) fail7();
+    if (own9(response, "chapter") && !integer8(response.chapter, 1, 1e5) || scope.chapter !== null && response.chapter !== scope.chapter || own9(response, "vri_paragraph") && !text9(response.vri_paragraph, 100) || own9(response, "approximate") && typeof response.approximate !== "boolean" || !Array.isArray(response.notes) || response.notes.length > 100 || response.notes.some((note2) => !text9(note2))) fail7();
+    if (scope.paragraph !== void 0 && scope.paragraph !== null) {
+      const paragraph = /^([1-9][0-9]*)(?:\s*[-–]\s*[1-9][0-9]*)?$/.exec(response.vri_paragraph);
+      if (!paragraph || Number(paragraph[1]) !== scope.paragraph) fail7();
+      if (scope.work === "Vism") {
+        const volume = found.book_id === "visuddhimagga-1" ? 1 : 2;
+        const warning = `VRI paragraph ${response.vri_paragraph} (volume ${volume}). VRI numbers the Visuddhimagga's paragraphs continuously, 1\u2013896, and VRI's own cross-references write it "visuddhi. ${volume}.${scope.paragraph}" (volume.paragraph); this is not \xD1\u0101\u1E47amoli's chapter.paragraph numbering.`;
+        if (!response.notes.includes(warning) || own9(response, "chapter") && (!integer8(response.chapter, 1, 23) || (response.chapter <= 11 ? 1 : 2) !== volume)) fail7();
+      } else if (scope.work === "Abhidh-s" && !response.notes.includes("Sections are VRI's paragraph numbers, which restart in each chapter. Other editions and translations (for example Bhikkhu Bodhi's Comprehensive Manual of Abhidhamma) number their sections themselves; check the text before citing their numbers.")) fail7();
+    }
+    if (scope.work && !own9(response, "chapter_index") || scope.kind === "paragraph" && own9(response, "chapter") && own9(found, "chapter") && response.title !== found.chapter) fail7();
+    if (own9(response, "chapter_index")) {
+      const index = validateChapterIndex(response);
+      if (!index || index.scope !== (scope.work ? "work" : "source_file") || index.read_with.citation !== (scope.work || found.book_id)) fail7();
+    }
+    if (own9(response, "chapters")) {
+      if (!Array.isArray(response.chapters) || response.chapters.length > 1e3) fail7();
+      for (const [i, row] of response.chapters.entries()) {
+        if (!keysOnly4(row, ["citation", "title", "title_roman"]) || row.citation !== `${scope.work === "Vism" ? "Vism ch." : scope.work || found.book_id} ${i + 1}`) fail7();
+        nativeTitle(row, "title", selected.script);
+      }
+    }
+    if (!integer8(response.total_segments, found.read_with.offset + 1, 100001) || response.offset !== offset || response.limit !== 3 || !integer8(response.returned, 1, 3) || !Array.isArray(response.segments) || response.segments.length !== response.returned || response.returned !== Math.min(3, response.total_segments - offset) || response.next_offset !== (offset + response.returned < response.total_segments ? offset + response.returned : null)) fail7();
+    if (own9(response, "continue_with")) {
+      if (response.next_offset === null) {
+        if (response.continue_with !== null) fail7();
+      } else {
+        const value = response.continue_with;
+        if (!keysOnly4(value, ["tool", "citation", "offset", "limit", "includeVariants", "script"]) || value.includeVariants !== false) fail7();
+        const { includeVariants, ...rest } = value;
+        command5(rest, found.citation, response.next_offset, 3, selected);
+      }
+    }
+    let matches = 0;
+    response.segments.forEach((segment, i) => {
+      if (!keysOnly4(segment, ["ref", "type", "text", "vri_paragraph", "pts_page_begins", "thai_page_begins", "myanmar_page_begins", "vri_page_begins"]) || segment.ref !== `${found.citation}/${offset + i + 1}` || !["heading", "prose", "verse"].includes(segment.type) || !text9(segment.text, 1e5)) fail7();
+      pages2(segment);
+      if (segment.ref === found.segment_ref) {
+        matches += 1;
+        if (own9(found, "match_vri_paragraph") && segment.vri_paragraph !== found.match_vri_paragraph) fail7();
+      }
+    });
+    if (matches !== 1) fail7();
+    return clone5(response);
+  }
+
+  // web/citation-resolution.mjs
+  var object11 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var own10 = (value, key4) => Object.hasOwn(value, key4);
+  var text10 = (value, max = 1e3) => typeof value === "string" && value.trim().length > 0 && value.length <= max && !/[\u0000-\u001f\u007f<>]/.test(value);
+  var id4 = (value) => typeof value === "string" && /^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$/.test(value) && value.length <= 200;
+  var citation = (value) => text10(value, 300) && !/https?:|javascript:|data:/i.test(value);
+  var fail8 = () => {
     throw Error("Citation lookup returned incomplete or unsupported source metadata. No passage was substituted.");
   };
   function citationSelection(args, rawQuery) {
@@ -2273,11 +2450,11 @@
       }
     }
     const keys2 = [...args.keys()];
-    if (keys2.length !== 1 || keys2[0] !== "reference" || !text9(args.get("reference"), 300)) throw Error("Give one citation or title only. Reading positions, source pins and other fields cannot be added to a citation lookup.");
+    if (keys2.length !== 1 || keys2[0] !== "reference" || !text10(args.get("reference"), 300)) throw Error("Give one citation or title only. Reading positions, source pins and other fields cannot be added to a citation lookup.");
     return args.get("reference").trim();
   }
   function canonicalIdentity(row) {
-    if (!id3(row.id) || !citation(row.citation)) return false;
+    if (!id4(row.id) || !citation(row.citation)) return false;
     try {
       const parsed = parseCitation(row.citation);
       return (parsed.kind === "uid" ? parsed.uid : parsed.kind === "id" ? citationId(parsed) : null) === row.id;
@@ -2285,75 +2462,75 @@
       return false;
     }
   }
-  function source5(data, post) {
+  function source6(data, post) {
     const value = data.source;
     const name = post ? "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI): \u1E6C\u012Bk\u0101 and A\xF1\xF1a (post-canonical) books" : "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI)";
-    if (!object10(value) || value.name !== name || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text9(value.commit, 100) || !text9(value.attribution, 1e4) || !text9(value.terms, 1e4)) fail7();
+    if (!object11(value) || value.name !== name || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text10(value.commit, 100) || !text10(value.attribution, 1e4) || !text10(value.terms, 1e4)) fail8();
     try {
       sourceRevision({ source: { commit: value.commit } });
       sourceRevision(data);
     } catch {
-      fail7();
+      fail8();
     }
-    return { name: value.name, repository: value.repository, commit: value.commit, attribution: value.attribution, terms: value.terms, ...own9(value, "locator_revision") ? { locator_revision: value.locator_revision } : {} };
+    return { name: value.name, repository: value.repository, commit: value.commit, attribution: value.attribution, terms: value.terms, ...own10(value, "locator_revision") ? { locator_revision: value.locator_revision } : {} };
   }
   function alternatives(data, key4) {
-    if (!own9(data, key4)) return [];
-    if (!Array.isArray(data[key4]) || data[key4].length > 100) fail7();
+    if (!own10(data, key4)) return [];
+    if (!Array.isArray(data[key4]) || data[key4].length > 100) fail8();
     const seen = /* @__PURE__ */ new Set();
     return data[key4].map((row) => {
-      if (!object10(row) || !canonicalIdentity(row) || !text9(row.title) || seen.has(row.id) || own9(row, "canonical") && row.canonical !== true || own9(row, "read_with")) fail7();
+      if (!object11(row) || !canonicalIdentity(row) || !text10(row.title) || seen.has(row.id) || own10(row, "canonical") && row.canonical !== true || own10(row, "read_with")) fail8();
       seen.add(row.id);
-      if (own9(row, "matched_name") && !text9(row.matched_name) || own9(row, "title_roman") && !text9(row.title_roman)) fail7();
-      return { id: row.id, citation: row.citation, title: row.title, ...own9(row, "matched_name") ? { matched_name: row.matched_name } : {}, ...own9(row, "title_roman") ? { title_roman: row.title_roman } : {}, href: "#read?" + new URLSearchParams({ uid: row.id }) };
+      if (own10(row, "matched_name") && !text10(row.matched_name) || own10(row, "title_roman") && !text10(row.title_roman)) fail8();
+      return { id: row.id, citation: row.citation, title: row.title, ...own10(row, "matched_name") ? { matched_name: row.matched_name } : {}, ...own10(row, "title_roman") ? { title_roman: row.title_roman } : {}, href: "#read?" + new URLSearchParams({ uid: row.id }) };
     });
   }
   function validateCitationResolution(data, script = "roman") {
-    if (!SCRIPTS.includes(script) || !object10(data) || !citation(data.citation) || !text9(data.title) || !Array.isArray(data.notes) || data.notes.length > 100 || data.notes.some((note2) => !text9(note2, 1e4)) || own9(data, "approximate") && typeof data.approximate !== "boolean" || own9(data, "canonical") && ![true, false].includes(data.canonical)) fail7();
+    if (!SCRIPTS.includes(script) || !object11(data) || !citation(data.citation) || !text10(data.title) || !Array.isArray(data.notes) || data.notes.length > 100 || data.notes.some((note2) => !text10(note2, 1e4)) || own10(data, "approximate") && typeof data.approximate !== "boolean" || own10(data, "canonical") && ![true, false].includes(data.canonical)) fail8();
     const post = data.canonical === false;
     let context;
     if (post) {
-      const command5 = data.read_with;
-      if (!text9(data.label, 1e4) || !object10(data.book) || data.book.canonical !== false || !id3(data.book.id) || !text9(data.book.title) || !object10(command5) || Object.keys(command5).some((key4) => !["tool", "citation", "script"].includes(key4)) || command5.tool !== "get_post_canonical" || command5.citation !== data.citation || own9(command5, "script") && command5.script !== script || own9(data, "also_named") || own9(data, "also_on_that_page")) fail7();
-      context = { kind: "post", uid: command5.citation };
+      const command6 = data.read_with;
+      if (!text10(data.label, 1e4) || !object11(data.book) || data.book.canonical !== false || !id4(data.book.id) || !text10(data.book.title) || !object11(command6) || Object.keys(command6).some((key4) => !["tool", "citation", "script"].includes(key4)) || command6.tool !== "get_post_canonical" || command6.citation !== data.citation || own10(command6, "script") && command6.script !== script || own10(data, "also_named") || own10(data, "also_on_that_page")) fail8();
+      context = { kind: "post", uid: command6.citation };
     } else {
-      if (!canonicalIdentity(data) || own9(data, "read_with") || own9(data, "label") || own9(data, "book")) fail7();
+      if (!canonicalIdentity(data) || own10(data, "read_with") || own10(data, "label") || own10(data, "book")) fail8();
       context = { uid: data.id };
     }
-    const checked = { citation: data.citation, title: data.title, canonical: !post, notes: [...data.notes], source: source5(data, post), href: "#read?" + new URLSearchParams(context), also_named: alternatives(data, "also_named"), also_on_that_page: alternatives(data, "also_on_that_page") };
+    const checked = { citation: data.citation, title: data.title, canonical: !post, notes: [...data.notes], source: source6(data, post), href: "#read?" + new URLSearchParams(context), also_named: alternatives(data, "also_named"), also_on_that_page: alternatives(data, "also_on_that_page") };
     for (const key4 of ["title_roman", "input_script", "input_romanized", "script", "script_note", "matched_by"]) {
-      if (own9(data, key4)) {
-        if (!text9(data[key4], 2e3)) fail7();
+      if (own10(data, key4)) {
+        if (!text10(data[key4], 2e3)) fail8();
         checked[key4] = data[key4];
       }
     }
-    if (own9(data, "script") && data.script !== script || own9(data, "input_script") && !SCRIPTS.includes(data.input_script) || own9(data, "input_romanized") !== own9(data, "input_script")) fail7();
-    if (own9(data, "input_normalised")) {
-      if (!text9(data.input_normalised, 4e3) && !(object10(data.input_normalised) && text9(data.input_normalised.note, 4e3))) fail7();
+    if (own10(data, "script") && data.script !== script || own10(data, "input_script") && !SCRIPTS.includes(data.input_script) || own10(data, "input_romanized") !== own10(data, "input_script")) fail8();
+    if (own10(data, "input_normalised")) {
+      if (!text10(data.input_normalised, 4e3) && !(object11(data.input_normalised) && text10(data.input_normalised.note, 4e3))) fail8();
       checked.input_normalised = typeof data.input_normalised === "string" ? data.input_normalised : data.input_normalised.note;
     }
-    if (own9(data, "name_match")) {
+    if (own10(data, "name_match")) {
       const match = data.name_match;
-      if (!object10(match) || !["query", "matched_name", "via", "match"].every((key4) => text9(match[key4], 1e3))) fail7();
+      if (!object11(match) || !["query", "matched_name", "via", "match"].every((key4) => text10(match[key4], 1e3))) fail8();
       checked.name_match = { query: match.query, matched_name: match.matched_name, via: match.via, match: match.match };
     }
-    for (const key4 of ["alignment_note", "alignment_method"]) if (own9(data, key4)) {
-      if (!text9(data[key4], 4e3)) fail7();
+    for (const key4 of ["alignment_note", "alignment_method"]) if (own10(data, key4)) {
+      if (!text10(data[key4], 4e3)) fail8();
       checked[key4] = data[key4];
     }
-    if (own9(data, "alignment")) {
-      if (!text9(data.alignment, 4e3) && !object10(data.alignment)) fail7();
+    if (own10(data, "alignment")) {
+      if (!text10(data.alignment, 4e3) && !object11(data.alignment)) fail8();
       const value = JSON.stringify(data.alignment);
-      if (value.length > 1e4) fail7();
+      if (value.length > 1e4) fail8();
       checked.alignment = JSON.parse(value);
     }
     if (post) checked.label = data.label;
-    if (own9(data, "approximate")) checked.approximate = data.approximate;
+    if (own10(data, "approximate")) checked.approximate = data.approximate;
     return checked;
   }
 
   // web/backup-note-conflicts.mjs
-  var object11 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var object12 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   var fields = /* @__PURE__ */ new Set(["uid", "ref", "title", "note", "offset", "source_commit"]);
   var key2 = (item) => JSON.stringify([item.uid, item.ref]);
   function note(value) {
@@ -2364,7 +2541,7 @@
     if (!Array.isArray(items) || items.length > 500) throw Error("Unsupported saved passages for personal-note conflict review.");
     const result = /* @__PURE__ */ new Map();
     for (const item of items) {
-      if (!object11(item) || typeof item.uid !== "string" || typeof item.ref !== "string") throw Error("Personal-note conflict review needs exact saved identities.");
+      if (!object12(item) || typeof item.uid !== "string" || typeof item.ref !== "string") throw Error("Personal-note conflict review needs exact saved identities.");
       const identity3 = key2(item), matches = result.get(identity3) ?? [];
       matches.push(item);
       result.set(identity3, matches);
@@ -2426,10 +2603,10 @@
   // web/study-backup.mjs
   var MAX_STUDY_BACKUP_BYTES = 32 * 1024 * 1024;
   var FORMAT = "pali-library-study-backup-v1";
-  var object12 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
-  var exact3 = (value, keys2) => object12(value) && Object.keys(value).length === keys2.length && keys2.every((key4) => Object.hasOwn(value, key4));
-  var bytes = (text10) => new TextEncoder().encode(text10).length;
-  var clone5 = (value) => JSON.parse(JSON.stringify(value));
+  var object13 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var exact3 = (value, keys2) => object13(value) && Object.keys(value).length === keys2.length && keys2.every((key4) => Object.hasOwn(value, key4));
+  var bytes = (text11) => new TextEncoder().encode(text11).length;
+  var clone6 = (value) => JSON.parse(JSON.stringify(value));
   var key3 = (item) => JSON.stringify([item.uid, item.ref]);
   function jsonData(value, depth = 0) {
     if (depth > 12) throw Error("Unsupported nested study-backup metadata. Nothing was restored.");
@@ -2438,16 +2615,16 @@
       for (const item of value) jsonData(item, depth + 1);
       return;
     }
-    if (object12(value) && [Object.prototype, null].includes(Object.getPrototypeOf(value))) {
+    if (object13(value) && [Object.prototype, null].includes(Object.getPrototypeOf(value))) {
       for (const item of Object.values(value)) jsonData(item, depth + 1);
       return;
     }
     throw Error("Study backups accept only supported JSON metadata. Nothing was restored.");
   }
   function component(value, format, field, max) {
-    const text10 = JSON.stringify({ format, [field]: value });
-    if (bytes(text10) > max) throw Error("A study-backup component exceeds the 16 MiB limit. Nothing was restored.");
-    return text10;
+    const text11 = JSON.stringify({ format, [field]: value });
+    if (bytes(text11) > max) throw Error("A study-backup component exceeds the 16 MiB limit. Nothing was restored.");
+    return text11;
   }
   function validate(data, canonicalizeProgress) {
     if (!exact3(data, ["format", "saved", "progress", "resume"]) || data.format !== FORMAT || !Array.isArray(data.saved) || !Array.isArray(data.progress) || !(data.resume === null || isReadingLocator(data.resume))) throw Error("This is not a supported study backup. Nothing was restored.");
@@ -2455,24 +2632,24 @@
     if (bytes(JSON.stringify(data)) > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
     const saved2 = parseBookmarks(component(data.saved, "pali-library-v1", "saved", MAX_IMPORT_BYTES));
     const normalized = parseProgressMetadata(component(data.progress, "pali-library-reading-progress-v1", "progress", MAX_PROGRESS_BYTES));
-    return { format: FORMAT, saved: saved2, progress: canonicalizeProgress ? normalized : clone5(data.progress), resume: data.resume };
+    return { format: FORMAT, saved: saved2, progress: canonicalizeProgress ? normalized : clone6(data.progress), resume: data.resume };
   }
   function createStudyBackup(data) {
     if (!exact3(data, ["saved", "progress", "resume"])) throw Error("Choose only saved passages, progress and an optional reading locator for backup.");
     return validate({ format: FORMAT, ...data }, false);
   }
-  function parseStudyBackup(text10) {
-    if (typeof text10 !== "string" || bytes(text10) > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
+  function parseStudyBackup(text11) {
+    if (typeof text11 !== "string" || bytes(text11) > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
     let data;
     try {
-      data = JSON.parse(text10);
+      data = JSON.parse(text11);
     } catch {
       throw Error("Choose a valid JSON study backup. Nothing was restored.");
     }
     return validate(data, true);
   }
   function mergeStudyBackup(current, incoming, catalog, choices) {
-    if (!object12(current) || Object.keys(current).some((field) => !["saved", "progress", "drafts"].includes(field)) || !Array.isArray(current.saved) || !Array.isArray(current.progress) || current.drafts !== void 0 && !(current.drafts instanceof Map)) throw Error("Unsupported current personal-study metadata. Nothing was restored.");
+    if (!object13(current) || Object.keys(current).some((field) => !["saved", "progress", "drafts"].includes(field)) || !Array.isArray(current.saved) || !Array.isArray(current.progress) || current.drafts !== void 0 && !(current.drafts instanceof Map)) throw Error("Unsupported current personal-study metadata. Nothing was restored.");
     const validatedCurrent = createStudyBackup({ saved: current.saved, progress: current.progress, resume: null });
     const validatedIncoming = validate(incoming, true);
     let progress = validatedIncoming.progress;
@@ -2496,10 +2673,10 @@
         else bookmarkConflicts++;
       }
     }
-    const result = { saved: clone5(bookmarks.saved), progress: clone5(marks.progress), bookmarkAdded: bookmarks.added.length, bookmarkDuplicates, bookmarkConflicts, progressAdded: marks.added, progressDuplicates: marks.duplicates, progressConflicts: marks.conflicts };
+    const result = { saved: clone6(bookmarks.saved), progress: clone6(marks.progress), bookmarkAdded: bookmarks.added.length, bookmarkDuplicates, bookmarkConflicts, progressAdded: marks.added, progressDuplicates: marks.duplicates, progressConflicts: marks.conflicts };
     if (choices !== void 0) {
       const notes2 = applyBackupNoteChoices(current.saved, validatedIncoming.saved, current.drafts ?? /* @__PURE__ */ new Map(), choices);
-      result.saved = clone5([...notes2.saved, ...bookmarks.added]);
+      result.saved = clone6([...notes2.saved, ...bookmarks.added]);
       result.notesReplaced = notes2.notesReplaced;
       result.replacedNoteKeys = notes2.replacedNoteKeys;
     }
@@ -2507,7 +2684,7 @@
   }
 
   // web/reader.js
-  var $ = (id4) => document.getElementById(id4);
+  var $ = (id5) => document.getElementById(id5);
   var view = $("view");
   var status2 = $("status");
   var serial = 0;
@@ -2604,30 +2781,30 @@
       return false;
     }
   }
-  function el(tag, text10, className) {
+  function el(tag, text11, className) {
     const n = document.createElement(tag);
-    if (text10 !== void 0) n.textContent = text10;
+    if (text11 !== void 0) n.textContent = text11;
     if (className) n.className = className;
     return n;
   }
-  function button(text10, fn) {
-    const n = el("button", text10);
+  function button(text11, fn) {
+    const n = el("button", text11);
     n.type = "button";
     n.addEventListener("click", fn);
     return n;
   }
-  function link(text10, href, className) {
-    const n = el("a", text10, className);
+  function link(text11, href, className) {
+    const n = el("a", text11, className);
     n.href = href;
     return n;
   }
-  function external(text10, url) {
+  function external(text11, url) {
     try {
       const u = new URL(url);
-      if (!["http:", "https:"].includes(u.protocol)) return el("span", text10);
-      return link(text10, u.href);
+      if (!["http:", "https:"].includes(u.protocol)) return el("span", text11);
+      return link(text11, u.href);
     } catch {
-      return el("span", text10);
+      return el("span", text11);
     }
   }
   function route(name, args = {}) {
@@ -2637,10 +2814,10 @@
   var requestRows = /* @__PURE__ */ new Map();
   var requests = createRequestPool({ onChange(entries) {
     const active = new Set(entries.map((x) => x.id));
-    for (const [id4, row] of requestRows) if (!active.has(id4)) {
+    for (const [id5, row] of requestRows) if (!active.has(id5)) {
       if (row.contains(document.activeElement)) (row.dataset.group === "study" ? $("study") || $("content") : $("content")).focus({ preventScroll: true });
       row.remove();
-      requestRows.delete(id4);
+      requestRows.delete(id5);
     }
     for (const entry of entries) if (!requestRows.has(entry.id)) {
       const row = el("div", void 0, "request-row"), stop = button("Stop waiting", entry.stop);
@@ -2874,11 +3051,11 @@
     if (kind !== "canon") provenance(data);
   }
   async function browseEnglish(args, token) {
-    const selection4 = englishSelection(args);
-    const request2 = { node: "english", availability: selection4.availability, offset: selection4.offset, limit: selection4.limit, ...selection4.collection === null ? {} : { collection: selection4.collection } };
+    const selection5 = englishSelection(args);
+    const request2 = { node: "english", availability: selection5.availability, offset: selection5.offset, limit: selection5.limit, ...selection5.collection === null ? {} : { collection: selection5.collection } };
     const response = await tool("browse_canon", request2);
     if (token !== epoch) return;
-    const data = englishCatalogue(response, selection4);
+    const data = englishCatalogue(response, selection5);
     heading("EXPLORE THE LIBRARY", "Find English sources");
     const nav = el("nav", void 0, "toolbar");
     nav.setAttribute("aria-label", "Library views");
@@ -2895,7 +3072,7 @@
       option.value = value;
       availability.append(option);
     }
-    availability.value = selection4.availability;
+    availability.value = selection5.availability;
     const collectionLabel = el("label", "Collection"), collection = el("select");
     collection.id = "english-collection";
     collection.name = "collection";
@@ -2908,7 +3085,7 @@
       option.value = item.id;
       collection.append(option);
     }
-    collection.value = selection4.collection || "";
+    collection.value = selection5.collection || "";
     const apply = el("button", "Apply");
     apply.type = "submit";
     form.append(availabilityLabel, availability, collectionLabel, collection, apply);
@@ -2922,8 +3099,8 @@
     });
     view.append(form, el("p", data.total + " matching indexed record" + (data.total === 1 ? "" : "s"), "english-catalogue-count"), el("p", data.note, "notice"), el("p", "A link is not a guarantee of a complete individual English translation. Review the publisher reference and any scope before retrieving English.", "muted"));
     if (!data.total) view.append(el("p", "No matching records in this index for these filters. This does not mean that no translation exists elsewhere.", "notice"));
-    else if (selection4.offset >= data.total) view.append(el("p", "This page is beyond the matching records."), link("Return to first matching page", englishRoute(selection4, 0), "button"));
-    else view.append(el("p", "Showing " + (selection4.offset + 1) + "\u2013" + (selection4.offset + data.items.length) + " of " + data.total, "muted"));
+    else if (selection5.offset >= data.total) view.append(el("p", "This page is beyond the matching records."), link("Return to first matching page", englishRoute(selection5, 0), "button"));
+    else view.append(el("p", "Showing " + (selection5.offset + 1) + "\u2013" + (selection5.offset + data.items.length) + " of " + data.total, "muted"));
     const cards = el("div", void 0, "cards");
     for (const item of data.items) {
       const card = link("", route("read", { uid: item.id }), "entry");
@@ -2933,7 +3110,7 @@
       cards.append(card);
     }
     view.append(cards);
-    pageControls(data.next_offset, selection4.offset > 0 && selection4.offset < data.total ? Math.max(0, selection4.offset - selection4.limit) : null, (offset) => englishRoute(selection4, offset));
+    pageControls(data.next_offset, selection5.offset > 0 && selection5.offset < data.total ? Math.max(0, selection5.offset - selection5.limit) : null, (offset) => englishRoute(selection5, offset));
   }
   function offsetOf(args) {
     const n = Number(args.get("offset") || 0);
@@ -2970,13 +3147,13 @@
     view.append(result);
     provenance(data);
   }
-  function bookSearchForm(selection4, token) {
-    const form = el("form", void 0, "book-search-form"), label2 = el("label", selection4.headings_only ? "Filter printed headings" : "Search this source book"), input = el("input"), submit = el("button", selection4.headings_only ? "Find headings" : "Search book"), error = el("p");
+  function bookSearchForm(selection5, token) {
+    const form = el("form", void 0, "book-search-form"), label2 = el("label", selection5.headings_only ? "Filter printed headings" : "Search this source book"), input = el("input"), submit = el("button", selection5.headings_only ? "Find headings" : "Search book"), error = el("p");
     form.setAttribute("aria-label", "Source book search");
     form.noValidate = true;
     input.type = "search";
     input.maxLength = 500;
-    input.value = selection4.query;
+    input.value = selection5.query;
     label2.append(input);
     submit.type = "submit";
     error.setAttribute("role", "alert");
@@ -2987,8 +3164,8 @@
       if (token !== epoch || !form.isConnected) return;
       try {
         const query = input.value.trim();
-        if (!query && !selection4.headings_only) throw Error("Enter a P\u0101li search query.");
-        const href = bookSearchRoute({ ...selection4, query, offset: 0 });
+        if (!query && !selection5.headings_only) throw Error("Enter a P\u0101li search query.");
+        const href = bookSearchRoute({ ...selection5, query, offset: 0 });
         error.hidden = true;
         input.removeAttribute("aria-invalid");
         if (location.hash === href) render();
@@ -3002,29 +3179,29 @@
     });
     return form;
   }
-  function bookSearchModeLink(selection4) {
-    const normal = { book: selection4.book, query: "", offset: 0, limit: 15, source: selection4.source };
-    return link(selection4.headings_only ? "Search full source" : "Browse source headings", bookSearchRoute(selection4.headings_only ? normal : { ...normal, headings_only: true }), "button");
+  function bookSearchModeLink(selection5) {
+    const normal = { book: selection5.book, query: "", offset: 0, limit: 15, source: selection5.source };
+    return link(selection5.headings_only ? "Search full source" : "Browse source headings", bookSearchRoute(selection5.headings_only ? normal : { ...normal, headings_only: true }), "button");
   }
   async function bookSearch(args, token, rawQuery) {
-    const selection4 = bookSearchSelection(args, rawQuery), headings = selection4.headings_only === true;
-    if (!selection4.query && !headings) {
+    const selection5 = bookSearchSelection(args, rawQuery), headings = selection5.headings_only === true;
+    if (!selection5.query && !headings) {
       const catalogue = await tool("browse_canon", { node: "books", offset: 0, limit: 200 });
       if (token !== epoch) return;
-      const book2 = bookSearchCatalogue(catalogue, selection4);
+      const book2 = bookSearchCatalogue(catalogue, selection5);
       heading("COMPLETE VRI SOURCE FILE", "Search \xB7 " + book2.title, "Source-book search");
-      view.append(el("p", catalogue.note, "notice"), bookSearchForm(selection4, token), bookSearchModeLink(selection4), link("Read this source book", selection4.source ? readingPagePosition({ book: selection4.book }, 0, selection4.source) : route("read", { book: selection4.book }), "button"), el("p", "Search and reading results show the actual source attribution and licence terms. Source-file references are not standard discourse or rule citations. English translations are not searched.", "muted"));
+      view.append(el("p", catalogue.note, "notice"), bookSearchForm(selection5, token), bookSearchModeLink(selection5), link("Read this source book", selection5.source ? readingPagePosition({ book: selection5.book }, 0, selection5.source) : route("read", { book: selection5.book }), "button"), el("p", "Search and reading results show the actual source attribution and licence terms. Source-file references are not standard discourse or rule citations. English translations are not searched.", "muted"));
       return;
     }
-    const response = await tool("search_source_book", { book: selection4.book, query: selection4.query, offset: selection4.offset, limit: 15, script: $("script").value, ...headings ? { headings_only: true } : {} });
+    const response = await tool("search_source_book", { book: selection5.book, query: selection5.query, offset: selection5.offset, limit: 15, script: $("script").value, ...headings ? { headings_only: true } : {} });
     if (token !== epoch) return;
-    const data = validateBookSearchPage(response, selection4), pinned2 = { ...selection4, source: sourceRevision(data) };
+    const data = validateBookSearchPage(response, selection5), pinned2 = { ...selection5, source: sourceRevision(data) };
     heading("COMPLETE VRI SOURCE FILE", (headings ? "Headings \xB7 " : "Search \xB7 ") + data.book.title, headings ? "Source headings" : "Source-book search");
     view.append(bookSearchForm(pinned2, token), bookSearchModeLink(pinned2));
-    if (selection4.query) view.append(el("p", (headings ? "Heading filter: " : "Search query: ") + selection4.query, "muted"));
+    if (selection5.query) view.append(el("p", (headings ? "Heading filter: " : "Search query: ") + selection5.query, "muted"));
     if (headings) {
       view.append(el("p", data.heading_note, "notice"));
-      if (selection4.query) view.append(link("All source headings", bookSearchRoute({ ...pinned2, query: "", offset: 0 }), "button"));
+      if (selection5.query) view.append(link("All source headings", bookSearchRoute({ ...pinned2, query: "", offset: 0 }), "button"));
     }
     view.append(el("p", data.citation_note, "notice"));
     notes(data);
@@ -3036,17 +3213,17 @@
     if (!data.returned && data.total_matched) view.append(link(headings ? "First source headings" : "First search results", bookSearchRoute(pinned2, 0), "button"));
     const results = el("section", void 0, "book-search-results");
     results.setAttribute("aria-label", headings ? "Printed source headings" : "Source book search results");
-    for (const hit3 of data.results) {
-      const locations = bookSearchHitLinks(data, hit3, selection4), card = el("article", void 0, "segment");
-      card.append(el("h3", hit3.ref), el("p", `Source position ${hit3.segment} \xB7 ${hit3.type}`, "muted"));
-      const excerpt = el("p", hit3.excerpt, "passage");
+    for (const hit4 of data.results) {
+      const locations = bookSearchHitLinks(data, hit4, selection5), card = el("article", void 0, "segment");
+      card.append(el("h3", hit4.ref), el("p", `Source position ${hit4.segment} \xB7 ${hit4.type}`, "muted"));
+      const excerpt = el("p", hit4.excerpt, "passage");
       excerpt.lang = "pi";
-      card.append(el("p", headings ? "Printed source heading \xB7 open its source to continue reading." : "Search excerpt \xB7 open the source to read its context.", "muted"), excerpt, link((headings ? "Open heading \xB7 " : "Read match \xB7 ") + hit3.ref, locations.read, "button"));
-      if (locations.context) card.append(link("Read surrounding source \xB7 " + hit3.ref, locations.context, "button"));
+      card.append(el("p", headings ? "Printed source heading \xB7 open its source to continue reading." : "Search excerpt \xB7 open the source to read its context.", "muted"), excerpt, link((headings ? "Open heading \xB7 " : "Read match \xB7 ") + hit4.ref, locations.read, "button"));
+      if (locations.context) card.append(link("Read surrounding source \xB7 " + hit4.ref, locations.context, "button"));
       results.append(card);
     }
     view.append(results);
-    pageControls(data.next_offset, selection4.offset > 0 ? Math.max(0, selection4.offset - 15) : null, (offset) => bookSearchRoute(pinned2, offset));
+    pageControls(data.next_offset, selection5.offset > 0 ? Math.max(0, selection5.offset - 15) : null, (offset) => bookSearchRoute(pinned2, offset));
     provenance(data);
   }
   async function searchCanon(args, token, rawQuery) {
@@ -3096,8 +3273,17 @@
     notes(data);
     for (const key4 of ["query_note", "script_note"]) if (data[key4]) view.append(el("p", data[key4], "notice"));
     view.append(el("p", "Search excerpts are shortened. Open the surrounding source to read the match in context. Source positions are not canonical passage numbers.", "muted"));
-    const results = el("section", void 0, "commentary-search-results");
-    results.setAttribute("aria-label", "Commentary search results");
+    sourceSearchResults(data, selected, token, "commentary");
+    pageControls(data.next_offset, selected.offset ? Math.max(0, selected.offset - selected.limit) : null, (offset) => route("search", { q: selected.query, scope: "commentary", offset }));
+    provenance(data);
+  }
+  function sourceSearchResults(data, selected, token, scope) {
+    const commentary2 = scope === "commentary", paneLabel = commentary2 ? "Surrounding commentary context" : "Surrounding later-work context";
+    const hitLinks = commentary2 ? commentarySearchHitLinks : postSearchHitLinks, contextCommand = commentary2 ? commentaryContextCommand : postContextCommand, validateContext = commentary2 ? validateCommentaryContext : validatePostContext;
+    const matchRef = (hit4) => commentary2 ? hit4.citation : hit4.segment_ref, continueLabel = commentary2 ? "Continue from match in source book" : "Continue from match in source selection";
+    const pageMarkers = commentary2 ? [["commentary_pts_page_begins", "Commentary PTS page begins"]] : [["pts_page_begins", "PTS page begins"], ["thai_page_begins", "Thai edition page begins"], ["myanmar_page_begins", "Myanmar edition page begins"], ["vri_page_begins", "VRI edition page begins"]];
+    const results = el("section", void 0, "source-search-results " + scope + "-search-results");
+    results.setAttribute("aria-label", commentary2 ? "Commentary search results" : "Later-work search results");
     let active = null, generation = 0;
     function closeContext(refocus = true) {
       const previous = active;
@@ -3118,33 +3304,34 @@
       requests.cancelGroup("study");
       const current = () => token === epoch && request2 === generation && active === state && state.pane.isConnected;
       if (!current()) return;
-      const title = el("h3", "Surrounding commentary context"), close = button("Close context", () => {
+      const title = el("h3", paneLabel), close = button("Close context", () => {
         if (current()) closeContext();
       });
       state.pane.replaceChildren(title, el("p", "Loading this match\u2019s surrounding source\u2026", "muted"), close);
       state.pane.setAttribute("aria-busy", "true");
       try {
-        const context = await tool("get_commentary", commentaryContextCommand(data, state.hit, selected), "study", "Commentary source context");
+        const context = await tool(commentary2 ? "get_commentary" : "get_post_canonical", contextCommand(data, state.hit, selected), "study", commentary2 ? "Commentary source context" : "Later-work source context");
         if (!current()) return;
-        const checked = validateCommentaryContext(context, data, state.hit, selected), focus = ownsFocus(state);
-        state.pane.replaceChildren(title, close, el("p", checked.book.title + " \xB7 " + checked.commentary, "muted"));
+        const checked = validateContext(context, data, state.hit, selected), focus = ownsFocus(state);
+        state.pane.replaceChildren(title, close, el("p", checked.book.title + " \xB7 " + (commentary2 ? checked.commentary : checked.citation), "muted"));
         notes(checked, state.pane);
         if (checked.script_note) state.pane.append(el("p", checked.script_note, "notice"));
-        state.pane.append(el("p", `Source positions ${checked.offset + 1}\u2013${checked.offset + checked.returned} of ${checked.total_segments}. This preview preserves the source\u2019s surrounding-context boundary.`, "muted"));
+        state.pane.append(el("p", `Source positions ${checked.offset + 1}\u2013${checked.offset + checked.returned} of ${checked.total_segments} in this source selection. This preview preserves the source\u2019s surrounding-context boundary.`, "muted"));
         for (const segment of checked.segments) {
-          const block = el("article", void 0, "segment");
+          const block = el("article", void 0, "segment " + segment.type);
           block.append(el("h4", segment.ref));
-          if (segment.ref === state.hit.citation) {
+          if (segment.ref === matchRef(state.hit)) {
             block.classList.add("search-match");
             block.append(el("p", "Search match", "source-badge"));
           }
-          if (segment.commentary_pts_page_begins?.length) block.append(el("p", "Commentary PTS page begins: " + segment.commentary_pts_page_begins.join(", "), "muted"));
+          for (const [key4, label2] of pageMarkers) if (segment[key4]?.length) block.append(el("p", label2 + ": " + segment[key4].join(", "), "muted"));
+          if (segment.vri_paragraph) block.append(el("p", "VRI paragraph: " + segment.vri_paragraph, "muted"));
           const passage = el("p", segment.text, "passage");
           passage.lang = "pi";
           block.append(passage);
           state.pane.append(block);
         }
-        state.pane.append(link("Continue from match in source book", state.locations.continue, "button"), el("p", "Opens the full commentary book at the match. Its direct source-book positions are distinct from aligned canonical commentary and separately saved exact-match references.", "muted"));
+        state.pane.append(link(continueLabel, state.locations.continue, "button"), el("p", commentary2 ? "Opens the full commentary book at the match. Its direct source-book positions are distinct from aligned canonical commentary and separately saved exact-match references." : "Opens the current source selection from the match. Chapter, passage and volume boundaries remain as selected; this does not open a different book or edition.", "muted"));
         provenance(checked, state.pane);
         if (focus) state.pane.focus({ preventScroll: true });
       } catch (error) {
@@ -3154,7 +3341,7 @@
         state.pane.replaceChildren(title, message, button("Retry context", () => {
           if (current()) loadContext(state);
         }), close);
-        if (error.code === "READING_SOURCE_CHANGED") state.pane.append(button("Run commentary search again", () => {
+        if (error.code === "READING_SOURCE_CHANGED") state.pane.append(button(commentary2 ? "Run commentary search again" : "Run later-work search again", () => {
           if (current()) render();
         }));
         if (focus) state.pane.focus({ preventScroll: true });
@@ -3162,23 +3349,23 @@
         if (current()) state.pane.removeAttribute("aria-busy");
       }
     }
-    for (const hit3 of data.results) {
-      const locations = commentarySearchHitLinks(data, hit3, selected), card = el("article", void 0, "commentary-search-result"), exact4 = link("", locations.read, "entry");
-      exact4.append(el("small", hit3.citation), el("strong", hit3.book.title));
-      const excerpt = el("p", hit3.excerpt, "search-excerpt");
+    for (const hit4 of data.results) {
+      const locations = hitLinks(data, hit4, selected), card = el("article", void 0, scope + "-search-result"), exact4 = link("", locations.read, "entry");
+      exact4.append(el("small", hit4.citation), el("strong", commentary2 ? hit4.book.title : hit4.book_title));
+      const excerpt = el("p", hit4.excerpt, "search-excerpt");
       excerpt.lang = "pi";
       exact4.append(excerpt);
       const trigger = button("Read surrounding context", () => {
         if (token !== epoch || !card.isConnected) return;
         closeContext(false);
-        const pane = el("section", void 0, "commentary-context");
+        const pane = el("section", void 0, "source-search-context " + scope + "-context");
         pane.id = "study";
         pane.tabIndex = -1;
-        pane.setAttribute("aria-label", "Surrounding commentary context");
+        pane.setAttribute("aria-label", paneLabel);
         card.append(pane);
         trigger.setAttribute("aria-expanded", "true");
         trigger.setAttribute("aria-controls", "study");
-        active = { pane, trigger, hit: hit3, locations };
+        active = { pane, trigger, hit: hit4, locations };
         loadContext(active);
       });
       trigger.setAttribute("aria-expanded", "false");
@@ -3187,39 +3374,27 @@
     }
     view.append(results);
     if (!data.results.length) view.append(el("p", "No matches on this page. Try a shorter phrase or P\u0101li keywords."));
-    pageControls(data.next_offset, selected.offset ? Math.max(0, selected.offset - selected.limit) : null, (offset) => route("search", { q: selected.query, scope: "commentary", offset }));
+  }
+  async function searchPost(args, token, rawQuery) {
+    const selected = postSearchSelection(args, $("script").value, rawQuery);
+    $("search-scope").value = "post";
+    const response = await tool("search_post_canonical", selected);
+    if (token !== epoch) return;
+    const data = validatePostSearch(response, selected);
+    heading("SEARCH LATER WORKS \xB7 NOT CANON", "Results for \u201C" + selected.query + "\u201D", "Later-work search");
+    notes(data);
+    for (const key4 of ["query_note", "script_note"]) if (data[key4]) view.append(el("p", data[key4], "notice"));
+    view.append(el("p", "Search excerpts are shortened. Open the surrounding source to read the match in context. Source positions belong to the current later-work selection, not a canonical text.", "muted"));
+    sourceSearchResults(data, selected, token, "post");
+    pageControls(data.next_offset, selected.offset ? Math.max(0, selected.offset - selected.limit) : null, (offset) => route("search", { q: selected.query, scope: "post", offset }));
     provenance(data);
   }
   async function search(args, token, rawQuery) {
     const requestedScope = args.get("scope") ?? "canon";
     if (requestedScope === "canon") return searchCanon(args, token, rawQuery);
     if (requestedScope === "commentary") return searchCommentary(args, token, rawQuery);
-    if (!["commentary", "post"].includes(requestedScope)) throw Error("Choose a supported search scope.");
-    for (const key4 of args.keys()) if (!["q", "scope", "offset"].includes(key4) || args.getAll(key4).length !== 1) throw Error("This search URL has unsupported or duplicate fields.");
-    const query = (args.get("q") || "").trim();
-    if (!query) throw new Error("Enter words or a title to search.");
-    const scope = ["commentary", "post"].includes(args.get("scope")) ? args.get("scope") : "canon";
-    $("search-scope").value = scope;
-    const offset = offsetOf(args), data = await tool(scope === "commentary" ? "search_commentary" : scope === "post" ? "search_post_canonical" : "search_texts", { query, offset, limit: 15, script: $("script").value });
-    if (token !== epoch) return;
-    heading(scope === "canon" ? "SEARCH THE CANON" : scope === "commentary" ? "SEARCH COMMENTARY \xB7 NOT CANON" : "SEARCH LATER WORKS \xB7 NOT CANON", "Results for \u201C" + query + "\u201D", "Search results");
-    notes(data);
-    if (data.expanded_from_english) view.append(el("p", "English keywords expanded into P\u0101li: " + JSON.stringify(data.expanded_from_english), "notice"));
-    const seen = /* @__PURE__ */ new Set(), cards = el("div", void 0, "cards");
-    for (const item of [...data.title_matches || [], ...data.results || data.matches || []]) {
-      const command5 = item.read_with || {}, id4 = scope === "commentary" ? command5.uid : scope === "post" ? command5.citation : item.id || item.text_id || item.uid;
-      if (!id4 || seen.has(id4)) continue;
-      seen.add(id4);
-      const a = link("", route("read", { uid: id4, ...scope !== "canon" ? { kind: scope } : {}, ...command5.offset !== void 0 ? { offset: command5.offset } : {}, ...item.segment_ref ? { ref: item.segment_ref } : {} }), "entry");
-      a.append(el("small", item.citation || id4), el("strong", item.title || item.book?.title || item.citation || id4));
-      if (item.excerpt || item.text) a.append(el("p", item.excerpt || item.text));
-      cards.append(a);
-    }
-    view.append(cards);
-    if (!seen.size) view.append(el("p", "No matches on this page. Try a citation, a shorter phrase, or P\u0101li keywords."));
-    const next = [data.next_offset, data.title_next_offset].filter((x) => x !== null && x !== void 0);
-    pageControls(next.length ? Math.min(...next) : null, offset ? Math.max(0, offset - 15) : null, (n) => route("search", { q: query, scope, offset: n }));
-    if (scope !== "canon") provenance(data);
+    if (requestedScope === "post") return searchPost(args, token, rawQuery);
+    throw Error("Choose a supported search scope.");
   }
   function readingArgs(selector) {
     if (selector.startsWith("commentary-ref:")) return { kind: "commentary", uid: selector.slice(15) };
@@ -3470,8 +3645,8 @@
       section.replaceChildren(pending);
       if (focusOwned) pending.focus({ preventScroll: true });
       try {
-        const command5 = authority.read_with;
-        const root = await tool(command5.tool, { citation: command5.citation, offset: command5.offset, limit: command5.limit, script: $("script").value }, "study", "Chapter list");
+        const command6 = authority.read_with;
+        const root = await tool(command6.tool, { citation: command6.citation, offset: command6.offset, limit: command6.limit, script: $("script").value }, "study", "Chapter list");
         if (!alive() || generation !== ticket) return;
         show(validateChapterMenu(data, root), document.activeElement === pending);
       } catch (error) {
@@ -3628,9 +3803,9 @@
     }
     if (kind === "book") {
       try {
-        const selection4 = { book: data.book_id, query: "", offset: 0, limit: 15, source: sourceRevision(data) };
-        bookSearchRoute(selection4);
-        sourceTools.append(bookSearchForm(selection4, token), link("Browse source headings", bookSearchRoute({ ...selection4, headings_only: true }), "button"));
+        const selection5 = { book: data.book_id, query: "", offset: 0, limit: 15, source: sourceRevision(data) };
+        bookSearchRoute(selection5);
+        sourceTools.append(bookSearchForm(selection5, token), link("Browse source headings", bookSearchRoute({ ...selection5, headings_only: true }), "button"));
       } catch {
         sourceTools.append(el("p", "Search is unavailable because this source book has incomplete identity or revision metadata.", "notice"));
       }
@@ -3672,9 +3847,9 @@
       }
       row.append(actions);
       part.classList.toggle("marked", active);
-      const text10 = el("p", segment.text, "passage");
-      text10.lang = "pi";
-      part.append(row, text10);
+      const text11 = el("p", segment.text, "passage");
+      text11.lang = "pi";
+      part.append(row, text11);
       attachPassageNote(selector, data, segment, part, save, token);
       passages.append(part);
       if (positionHref) positions.push({ node: part, heading: segment.type === "heading", href: positionHref });
@@ -3704,9 +3879,9 @@
     if (descriptor.kind === "shared_page") {
       target.append(el("p", "Publisher reference: " + scope.source_reference), el("p", "One page concerns all of these texts. It is not a separately aligned full translation of the currently selected discourse.", "notice"));
       const list = el("ul");
-      for (const id4 of scope.text_ids) {
+      for (const id5 of scope.text_ids) {
         const li = el("li");
-        li.append(link(id4 + " \xB7 canonical P\u0101li", route("read", { uid: id4 })));
+        li.append(link(id5 + " \xB7 canonical P\u0101li", route("read", { uid: id5 })));
         list.append(li);
       }
       target.append(list);
@@ -3806,14 +3981,14 @@
     const grid = el("div", void 0, "comparison-grid");
     target.append(grid);
     let focusIntent = 0;
-    for (const id4 of ids) {
-      const choice = context.choices.find((c) => c.translation_id === id4), panel = el("article", void 0, "comparison-panel");
-      panel.setAttribute("aria-label", "English comparison source \xB7 " + id4);
+    for (const id5 of ids) {
+      const choice = context.choices.find((c) => c.translation_id === id5), panel = el("article", void 0, "comparison-panel");
+      panel.setAttribute("aria-label", "English comparison source \xB7 " + id5);
       panel.setAttribute("aria-busy", "false");
-      panel.append(el("h4", [choice.translator, choice.source, choice.reference].filter(Boolean).join(" \xB7 ")), el("p", "Source version: " + id4, "muted"));
+      panel.append(el("h4", [choice.translator, choice.source, choice.reference].filter(Boolean).join(" \xB7 ")), el("p", "Source version: " + id5, "muted"));
       const message = el("p", "No English requested yet.", "comparison-panel-status");
       message.setAttribute("role", "status");
-      message.setAttribute("aria-label", "Comparison status \xB7 " + id4);
+      message.setAttribute("aria-label", "Comparison status \xB7 " + id5);
       const progress = el("p", void 0, "comparison-progress"), body = el("div", void 0, "comparison-panel-body"), actions = el("div", void 0, "toolbar comparison-actions");
       panel.append(message, progress, body, actions);
       grid.append(panel);
@@ -3829,7 +4004,7 @@
         message.textContent = "Retrieving this exact source page\u2026";
         const sameRequest = () => current() && requestSerial === state.serial;
         try {
-          const data = await tool("get_translation", args, "study", "English comparison " + id4);
+          const data = await tool("get_translation", args, "study", "English comparison " + id5);
           if (!sameRequest()) return;
           const next = validateComparisonPage(data, args, { uid: context.uid, choices: [choice], accepted: null });
           const content = el("div");
@@ -3862,7 +4037,7 @@
           }
         }
       }
-      loadPage({ uid: context.uid, translation: id4, limit: 6e3 });
+      loadPage({ uid: context.uid, translation: id5, limit: 6e3 });
     }
   }
   function reviewTranslationScope(choice, descriptor, context, token) {
@@ -4216,7 +4391,7 @@
             return active(request2) && review.isConnected && !applying && !applied;
           }, draw = function(moveFocus = false) {
             if (!active(request2) || !review.isConnected) return;
-            selection4.textContent = choices.size + " incoming notes selected";
+            selection5.textContent = choices.size + " incoming notes selected";
             clear.disabled = applied || applying || !choices.size;
             savedCount.textContent = choices.size ? `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} original conflicts \xB7 ${choices.size} incoming notes selected; all other metadata kept` : `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} conflicts kept`;
             const start = page * 10, end = Math.min(noteRows.length, start + 10);
@@ -4227,10 +4402,10 @@
               card.setAttribute("aria-label", "Note difference " + row.uid + " \xB7 " + row.ref);
               card.append(el("h5", row.uid + " \xB7 " + row.ref), el("p", "Current reference: " + metadata(current), "muted"), el("p", "Incoming reference: " + metadata(incomingRecord), "muted"), el("p", row.eligible ? "Same source revision and position. Only the note text may be replaced." : "Read-only difference: " + row.reason, row.eligible ? "muted" : "notice"));
               const columns = el("div", void 0, "backup-note-columns");
-              for (const [name, text10] of [["Note before restore (including draft)", row.currentNote], ["Incoming personal note", row.incomingNote]]) {
+              for (const [name, text11] of [["Note before restore (including draft)", row.currentNote], ["Incoming personal note", row.incomingNote]]) {
                 const label3 = el("label", name + " \xB7 " + row.uid + " \xB7 " + row.ref), field = el("textarea");
                 field.readOnly = true;
-                field.value = text10;
+                field.value = text11;
                 label3.append(field);
                 columns.append(label3);
               }
@@ -4248,7 +4423,7 @@
                   }
                   if (choose.checked) choices.add(row.key);
                   else choices.delete(row.key);
-                  selection4.textContent = choices.size + " incoming notes selected";
+                  selection5.textContent = choices.size + " incoming notes selected";
                   clear.disabled = !choices.size;
                   savedCount.textContent = choices.size ? `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} original conflicts \xB7 ${choices.size} incoming notes selected; all other metadata kept` : `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} conflicts kept`;
                 });
@@ -4282,23 +4457,23 @@
           };
           const review = el("section", void 0, "backup-note-review");
           review.setAttribute("aria-label", "Review personal note differences");
-          const count2 = el("p"), rows = el("div"), selection4 = el("p");
+          const count2 = el("p"), rows = el("div"), selection5 = el("p");
           count2.setAttribute("role", "status");
           count2.tabIndex = -1;
-          selection4.setAttribute("role", "status");
+          selection5.setAttribute("role", "status");
           const clear = button("Clear incoming note choices", () => {
             if (!validReview()) return;
             choices.clear();
             draw();
           });
-          review.append(el("h4", "Personal note differences \xB7 not scripture"), el("p", "Current notes include unsaved edits in this tab. Only matching, source-pinned positions allow replacement. Selecting an empty incoming note clears the old note and its draft after a confirmed save. Download your current backup first if you want to keep both versions.", "notice"), button("Download current study backup", downloadStudyBackup), selection4, clear, count2, rows);
+          review.append(el("h4", "Personal note differences \xB7 not scripture"), el("p", "Current notes include unsaved edits in this tab. Only matching, source-pinned positions allow replacement. Selecting an empty incoming note clears the old note and its draft after a confirmed save. Download your current backup first if you want to keep both versions.", "notice"), button("Download current study backup", downloadStudyBackup), selection5, clear, count2, rows);
           preview.append(review);
           let page = 0;
           const identity3 = (item) => noteKey(item);
           const metadata = (item) => `${item.uid} \xB7 ${item.ref} \xB7 source revision: ${item.source_commit ?? "unpinned legacy"} \xB7 source offset: ${item.offset ?? "not recorded"}`;
           draw();
           lockReview = () => {
-            selection4.textContent = choices.size + " incoming notes applied";
+            selection5.textContent = choices.size + " incoming notes applied";
             if (choices.size) savedCount.textContent = `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} original conflicts \xB7 ${choices.size} incoming notes applied; reference metadata kept`;
             for (const control of review.querySelectorAll("input, button")) if (control.textContent !== "Download current study backup") control.disabled = true;
           };
@@ -4371,10 +4546,10 @@
       if (!file2) return;
       try {
         if (file2.size > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
-        const text10 = await file2.text();
+        const text11 = await file2.text();
         if (!active(request2)) return;
-        if (new TextEncoder().encode(text10).length > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
-        const incoming = parseStudyBackup(text10);
+        if (new TextEncoder().encode(text11).length > MAX_STUDY_BACKUP_BYTES) throw Error("Choose a study backup no larger than 32 MiB. Nothing was restored.");
+        const incoming = parseStudyBackup(text11);
         await prepare(incoming, request2, file2.name);
       } catch (error) {
         failure2(error, request2, null, file2.name);
@@ -4503,8 +4678,8 @@
     input.value = query;
     input.maxLength = 200;
     label2.append(input);
-    for (const [value, text10] of [["all", "All entries"], ["subject", "Subject index"], ["numerical", "Numerical index"]]) {
-      const option = el("option", text10);
+    for (const [value, text11] of [["all", "All entries"], ["subject", "Subject index"], ["numerical", "Numerical index"]]) {
+      const option = el("option", text11);
       option.value = value;
       filter.append(option);
     }
@@ -4598,12 +4773,12 @@
     if (data.count !== data.members.length) view.append(el("p", "Traditional count: " + data.count + ". The source groups this list into " + data.members.length + " entries below; these rows are not a new enumeration.", "muted"));
     const members = el("ol");
     members.className = "teaching-members";
-    for (const member2 of data.members) {
-      const item = el("li"), pali2 = el("strong", member2.pali);
+    for (const member3 of data.members) {
+      const item = el("li"), pali2 = el("strong", member3.pali);
       pali2.lang = "pi";
-      item.append(pali2, el("p", member2.gloss));
-      if (member2.group) item.append(el("p", member2.group, "muted"));
-      if (member2.list) item.append(link("Open group \xB7 " + member2.gloss, route("lists", { name: member2.list }), "button"));
+      item.append(pali2, el("p", member3.gloss));
+      if (member3.group) item.append(el("p", member3.group, "muted"));
+      if (member3.list) item.append(link("Open group \xB7 " + member3.gloss, route("lists", { name: member3.list }), "button"));
       members.append(item);
     }
     view.append(members, el("h3", "Defining canonical passages"), el("p", data.note, "muted"));
@@ -4646,16 +4821,16 @@
       if (!file2) return;
       try {
         if (file2.size > MAX_PROGRESS_BYTES) throw Error("Choose a progress export no larger than 16 MiB. Nothing was restored.");
-        const text10 = await file2.text();
+        const text11 = await file2.text();
         if (request2 !== generation || token !== epoch) return;
-        if (new TextEncoder().encode(text10).length > MAX_PROGRESS_BYTES) throw Error("Choose a progress export no larger than 16 MiB. Nothing was restored.");
+        if (new TextEncoder().encode(text11).length > MAX_PROGRESS_BYTES) throw Error("Choose a progress export no larger than 16 MiB. Nothing was restored.");
         let snapshot;
         try {
           snapshot = localStorage.getItem(KEY);
         } catch {
         }
         if (snapshot !== void 0 && snapshot !== storageSnapshot && !readingPointerOnlyChange(storageSnapshot, snapshot)) throw Error("Browser data changed in another tab. Reload this page before restoring; no marks were restored.");
-        const incoming = parseProgress(text10, catalog), merge = mergeProgress(local.reading_progress, incoming), title = el("h3", "Review reading progress");
+        const incoming = parseProgress(text11, catalog), merge = mergeProgress(local.reading_progress, incoming), title = el("h3", "Review reading progress");
         title.tabIndex = -1;
         preview.replaceChildren(title, el("p", file2.name), el("p", merge.added + " new marks \xB7 " + merge.duplicates + " already saved \xB7 " + merge.conflicts + " conflicting days kept as they are.", "notice"), el("p", "Imported marks are self-reported. Their saved assignments and source revisions are retained, not verified against every current plan day. Open a day to check whether its mark still applies.", "muted"));
         if (merge.added) preview.append(button("Add " + merge.added + " reading marks", () => {
@@ -4719,8 +4894,8 @@
         const data = await tool("verify_quote", { text: quote, language: "pali", limit: 5 });
         if (token !== epoch || request2 !== generation) return;
         validatePaliQuote(data, quote);
-        const labels = { found: "Matching wording found", close_paraphrase: "Similar wording found", not_found_in_scope: "Not found in the searched scope" };
-        result.replaceChildren(el("h3", labels[data.verdict]), el("p", "Submitted quotation", "muted"), el("p", quote, "translation"), el("p", data.explanation, "notice"), el("p", data.scope.searched), el("p", data.comparison.note), el("p", data.guidance, "muted"));
+        const labels2 = { found: "Matching wording found", close_paraphrase: "Similar wording found", not_found_in_scope: "Not found in the searched scope" };
+        result.replaceChildren(el("h3", labels2[data.verdict]), el("p", "Submitted quotation", "muted"), el("p", quote, "translation"), el("p", data.explanation, "notice"), el("p", data.scope.searched), el("p", data.comparison.note), el("p", data.guidance, "muted"));
         notes(data, result);
         if (data.citation_note) result.append(el("p", data.citation_note, "notice"));
         if (data.verdict === "not_found_in_scope" && data.matches.length) result.append(el("h4", "Lower-scoring candidates \xB7 not verified matches"));
@@ -4818,11 +4993,11 @@
     view.append(el("p", "Unsaved note edits stay in this tab while you navigate. Save or export them before closing or reloading.", "muted"), bookmarkImporter());
     const filters = el("form", void 0, "saved-filters");
     filters.setAttribute("aria-label", "Find saved passages");
-    const searchLabel = el("label", "Search saved passages and notes"), query = el("input");
+    const searchLabel2 = el("label", "Search saved passages and notes"), query = el("input");
     query.type = "search";
     query.maxLength = 300;
     query.value = savedFilters.query;
-    searchLabel.append(query);
+    searchLabel2.append(query);
     const scopeLabel = el("label", "Saved source type"), scope = el("select");
     scope.setAttribute("aria-label", "Saved source type");
     for (const [value, name] of [["all", "All source types"], ...Object.entries(savedScopeLabels)]) {
@@ -4839,7 +5014,7 @@
       refresh();
       query.focus();
     });
-    filters.append(searchLabel, scopeLabel, clear);
+    filters.append(searchLabel2, scopeLabel, clear);
     view.append(filters, el("p", "Search stays in this tab. It checks saved titles, references and personal notes, not the full scripture text.", "muted"));
     const count2 = el("p");
     count2.id = "saved-count";
@@ -4911,7 +5086,7 @@
   }
   function about() {
     heading("A LIBRARY, NOT A TEACHER", "Read with the source in view.");
-    for (const text10 of ["The bundled P\u0101li is retrieved from the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition. Scripture is never generated or reconstructed. Abbreviations and uncertain alignments stay labelled.", "English translations are available for a subset of texts and fetched only after you choose them. Translators\u2019 wording is not silently exchanged. Commentary is labelled separately from canonical text.", "VRI and several translation/dictionary sources carry non-commercial terms. This reading interface adds no permission to redistribute, translate or commercialize their work.", "Your saved passages, notes, manual reading-plan marks and preferences are stored in this browser. The app has no accounts, advertising, analytics, cloud sync or offline web download. The server may hold your IP temporarily for rate limiting; deployment providers may keep separate infrastructure logs."]) view.append(el("p", text10));
+    for (const text11 of ["The bundled P\u0101li is retrieved from the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition. Scripture is never generated or reconstructed. Abbreviations and uncertain alignments stay labelled.", "English translations are available for a subset of texts and fetched only after you choose them. Translators\u2019 wording is not silently exchanged. Commentary is labelled separately from canonical text.", "VRI and several translation/dictionary sources carry non-commercial terms. This reading interface adds no permission to redistribute, translate or commercialize their work.", "Your saved passages, notes, manual reading-plan marks and preferences are stored in this browser. The app has no accounts, advertising, analytics, cloud sync or offline web download. The server may hold your IP temporarily for rate limiting; deployment providers may keep separate infrastructure logs."]) view.append(el("p", text11));
     const links = el("div", void 0, "toolbar");
     links.append(external("Source and licence register", "https://github.com/DaniilKi/pali-canon-claude/blob/dev/pali-reliability/THIRD_PARTY.md"), external("Project and complete MCP toolset", "https://github.com/DaniilKi/pali-canon-claude"));
     view.append(links);

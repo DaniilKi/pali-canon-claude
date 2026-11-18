@@ -20,6 +20,7 @@ import { savedPassageHighlighted } from './saved-highlights.mjs';
 import { validateChapterIndex, validateChapterMenu, chapterLink, readingIntro } from './reading-chapters.mjs';
 import { canonicalSearchSelection, canonicalSearchRoute, validateCanonicalSearch, canonicalSearchLink } from './canonical-search.mjs';
 import { commentarySearchSelection, validateCommentarySearch, commentarySearchHitLinks, commentaryContextCommand, validateCommentaryContext } from './commentary-search.mjs';
+import { postSearchSelection, validatePostSearch, postSearchHitLinks, postContextCommand, validatePostContext } from './post-search.mjs';
 import { bookSearchSelection, bookSearchRoute, bookSearchCatalogue, validateBookSearchPage, bookSearchHitLinks } from './book-search.mjs';
 import { citationSelection, validateCitationResolution } from './citation-resolution.mjs';
 import { reviewBackupNoteConflicts } from './backup-note-conflicts.mjs';
@@ -320,7 +321,15 @@ async function searchCommentary(args, token, rawQuery) {
   heading('SEARCH COMMENTARY · NOT CANON', 'Results for “' + selected.query + '”', 'Commentary search'); notes(data);
   for (const key of ['query_note', 'script_note']) if (data[key]) view.append(el('p', data[key], 'notice'));
   view.append(el('p', 'Search excerpts are shortened. Open the surrounding source to read the match in context. Source positions are not canonical passage numbers.', 'muted'));
-  const results = el('section', undefined, 'commentary-search-results'); results.setAttribute('aria-label', 'Commentary search results');
+  sourceSearchResults(data, selected, token, 'commentary');
+  pageControls(data.next_offset, selected.offset ? Math.max(0, selected.offset - selected.limit) : null, offset => route('search', { q: selected.query, scope: 'commentary', offset })); provenance(data);
+}
+function sourceSearchResults(data, selected, token, scope) {
+  const commentary = scope === 'commentary', paneLabel = commentary ? 'Surrounding commentary context' : 'Surrounding later-work context';
+  const hitLinks = commentary ? commentarySearchHitLinks : postSearchHitLinks, contextCommand = commentary ? commentaryContextCommand : postContextCommand, validateContext = commentary ? validateCommentaryContext : validatePostContext;
+  const matchRef = hit => commentary ? hit.citation : hit.segment_ref, continueLabel = commentary ? 'Continue from match in source book' : 'Continue from match in source selection';
+  const pageMarkers = commentary ? [['commentary_pts_page_begins', 'Commentary PTS page begins']] : [['pts_page_begins', 'PTS page begins'], ['thai_page_begins', 'Thai edition page begins'], ['myanmar_page_begins', 'Myanmar edition page begins'], ['vri_page_begins', 'VRI edition page begins']];
+  const results = el('section', undefined, 'source-search-results ' + scope + '-search-results'); results.setAttribute('aria-label', commentary ? 'Commentary search results' : 'Later-work search results');
   let active = null, generation = 0;
   function closeContext(refocus = true) {
     const previous = active; if (!previous) return;
@@ -332,67 +341,66 @@ async function searchCommentary(args, token, rawQuery) {
     const request = ++generation; requests.cancelGroup('study');
     const current = () => token === epoch && request === generation && active === state && state.pane.isConnected;
     if (!current()) return;
-    const title = el('h3', 'Surrounding commentary context'), close = button('Close context', () => { if (current()) closeContext(); });
+    const title = el('h3', paneLabel), close = button('Close context', () => { if (current()) closeContext(); });
     state.pane.replaceChildren(title, el('p', 'Loading this match’s surrounding source…', 'muted'), close); state.pane.setAttribute('aria-busy', 'true');
     try {
-      const context = await tool('get_commentary', commentaryContextCommand(data, state.hit, selected), 'study', 'Commentary source context'); if (!current()) return;
-      const checked = validateCommentaryContext(context, data, state.hit, selected), focus = ownsFocus(state);
-      state.pane.replaceChildren(title, close, el('p', checked.book.title + ' · ' + checked.commentary, 'muted'));
+      const context = await tool(commentary ? 'get_commentary' : 'get_post_canonical', contextCommand(data, state.hit, selected), 'study', commentary ? 'Commentary source context' : 'Later-work source context'); if (!current()) return;
+      const checked = validateContext(context, data, state.hit, selected), focus = ownsFocus(state);
+      state.pane.replaceChildren(title, close, el('p', checked.book.title + ' · ' + (commentary ? checked.commentary : checked.citation), 'muted'));
       notes(checked, state.pane); if (checked.script_note) state.pane.append(el('p', checked.script_note, 'notice'));
-      state.pane.append(el('p', `Source positions ${checked.offset + 1}–${checked.offset + checked.returned} of ${checked.total_segments}. This preview preserves the source’s surrounding-context boundary.`, 'muted'));
+      state.pane.append(el('p', `Source positions ${checked.offset + 1}–${checked.offset + checked.returned} of ${checked.total_segments} in this source selection. This preview preserves the source’s surrounding-context boundary.`, 'muted'));
       for (const segment of checked.segments) {
-        const block = el('article', undefined, 'segment');
+        const block = el('article', undefined, 'segment ' + segment.type);
         block.append(el('h4', segment.ref));
-        if (segment.ref === state.hit.citation) { block.classList.add('search-match'); block.append(el('p', 'Search match', 'source-badge')); }
-        if (segment.commentary_pts_page_begins?.length) block.append(el('p', 'Commentary PTS page begins: ' + segment.commentary_pts_page_begins.join(', '), 'muted'));
+        if (segment.ref === matchRef(state.hit)) { block.classList.add('search-match'); block.append(el('p', 'Search match', 'source-badge')); }
+        for (const [key, label] of pageMarkers) if (segment[key]?.length) block.append(el('p', label + ': ' + segment[key].join(', '), 'muted'));
+        if (segment.vri_paragraph) block.append(el('p', 'VRI paragraph: ' + segment.vri_paragraph, 'muted'));
         const passage = el('p', segment.text, 'passage'); passage.lang = 'pi'; block.append(passage); state.pane.append(block);
       }
-      state.pane.append(link('Continue from match in source book', state.locations.continue, 'button'), el('p', 'Opens the full commentary book at the match. Its direct source-book positions are distinct from aligned canonical commentary and separately saved exact-match references.', 'muted'));
+      state.pane.append(link(continueLabel, state.locations.continue, 'button'), el('p', commentary ? 'Opens the full commentary book at the match. Its direct source-book positions are distinct from aligned canonical commentary and separately saved exact-match references.' : 'Opens the current source selection from the match. Chapter, passage and volume boundaries remain as selected; this does not open a different book or edition.', 'muted'));
       provenance(checked, state.pane); if (focus) state.pane.focus({ preventScroll: true });
     } catch (error) {
       if (!current()) return;
       const focus = ownsFocus(state), message = el('p', error.message, 'notice'); message.setAttribute('role', 'alert');
       state.pane.replaceChildren(title, message, button('Retry context', () => { if (current()) loadContext(state); }), close);
-      if (error.code === 'READING_SOURCE_CHANGED') state.pane.append(button('Run commentary search again', () => { if (current()) render(); }));
+      if (error.code === 'READING_SOURCE_CHANGED') state.pane.append(button(commentary ? 'Run commentary search again' : 'Run later-work search again', () => { if (current()) render(); }));
       if (focus) state.pane.focus({ preventScroll: true });
     } finally { if (current()) state.pane.removeAttribute('aria-busy'); }
   }
   for (const hit of data.results) {
-    const locations = commentarySearchHitLinks(data, hit, selected), card = el('article', undefined, 'commentary-search-result'), exact = link('', locations.read, 'entry');
-    exact.append(el('small', hit.citation), el('strong', hit.book.title)); const excerpt = el('p', hit.excerpt, 'search-excerpt'); excerpt.lang = 'pi'; exact.append(excerpt);
+    const locations = hitLinks(data, hit, selected), card = el('article', undefined, scope + '-search-result'), exact = link('', locations.read, 'entry');
+    exact.append(el('small', hit.citation), el('strong', commentary ? hit.book.title : hit.book_title)); const excerpt = el('p', hit.excerpt, 'search-excerpt'); excerpt.lang = 'pi'; exact.append(excerpt);
     const trigger = button('Read surrounding context', () => {
       if (token !== epoch || !card.isConnected) return;
       closeContext(false);
-      const pane = el('section', undefined, 'commentary-context'); pane.id = 'study'; pane.tabIndex = -1; pane.setAttribute('aria-label', 'Surrounding commentary context');
+      const pane = el('section', undefined, 'source-search-context ' + scope + '-context'); pane.id = 'study'; pane.tabIndex = -1; pane.setAttribute('aria-label', paneLabel);
       card.append(pane); trigger.setAttribute('aria-expanded', 'true'); trigger.setAttribute('aria-controls', 'study');
       active = { pane, trigger, hit, locations }; loadContext(active);
     });
     trigger.setAttribute('aria-expanded', 'false'); card.append(exact, trigger); results.append(card);
   }
   view.append(results); if (!data.results.length) view.append(el('p', 'No matches on this page. Try a shorter phrase or Pāli keywords.'));
-  pageControls(data.next_offset, selected.offset ? Math.max(0, selected.offset - selected.limit) : null, offset => route('search', { q: selected.query, scope: 'commentary', offset })); provenance(data);
 }
+async function searchPost(args, token, rawQuery) {
+  const selected = postSearchSelection(args, $('script').value, rawQuery);
+  $('search-scope').value = 'post';
+  const response = await tool('search_post_canonical', selected); if (token !== epoch) return;
+  const data = validatePostSearch(response, selected);
+  heading('SEARCH LATER WORKS · NOT CANON', 'Results for “' + selected.query + '”', 'Later-work search'); notes(data);
+  for (const key of ['query_note', 'script_note']) if (data[key]) view.append(el('p', data[key], 'notice'));
+  view.append(el('p', 'Search excerpts are shortened. Open the surrounding source to read the match in context. Source positions belong to the current later-work selection, not a canonical text.', 'muted'));
+  sourceSearchResults(data, selected, token, 'post');
+  pageControls(data.next_offset, selected.offset ? Math.max(0, selected.offset - selected.limit) : null, offset => route('search', { q: selected.query, scope: 'post', offset })); provenance(data);
+}
+
 async function search(args, token, rawQuery) {
   const requestedScope = args.get('scope') ?? 'canon';
   if (requestedScope === 'canon') return searchCanon(args, token, rawQuery);
   if (requestedScope === 'commentary') return searchCommentary(args, token, rawQuery);
-  if (!['commentary', 'post'].includes(requestedScope)) throw Error('Choose a supported search scope.');
-  for (const key of args.keys()) if (!['q', 'scope', 'offset'].includes(key) || args.getAll(key).length !== 1) throw Error('This search URL has unsupported or duplicate fields.');
-  const query = (args.get('q') || '').trim(); if (!query) throw new Error('Enter words or a title to search.');
-  const scope = ['commentary', 'post'].includes(args.get('scope')) ? args.get('scope') : 'canon'; $('search-scope').value = scope;
-  const offset = offsetOf(args), data = await tool(scope === 'commentary' ? 'search_commentary' : scope === 'post' ? 'search_post_canonical' : 'search_texts', { query, offset, limit: 15, script: $('script').value }); if (token !== epoch) return;
-  heading(scope === 'canon' ? 'SEARCH THE CANON' : scope === 'commentary' ? 'SEARCH COMMENTARY · NOT CANON' : 'SEARCH LATER WORKS · NOT CANON', 'Results for “' + query + '”', 'Search results'); notes(data);
-  if (data.expanded_from_english) view.append(el('p', 'English keywords expanded into Pāli: ' + JSON.stringify(data.expanded_from_english), 'notice'));
-  const seen = new Set(), cards = el('div', undefined, 'cards');
-  for (const item of [...(data.title_matches || []), ...(data.results || data.matches || [])]) {
-    const command = item.read_with || {}, id = scope === 'commentary' ? command.uid : scope === 'post' ? command.citation : item.id || item.text_id || item.uid; if (!id || seen.has(id)) continue; seen.add(id);
-    const a = link('', route('read', { uid: id, ...(scope !== 'canon' ? { kind: scope } : {}), ...(command.offset !== undefined ? { offset: command.offset } : {}), ...(item.segment_ref ? { ref: item.segment_ref } : {}) }), 'entry'); a.append(el('small', item.citation || id), el('strong', item.title || item.book?.title || item.citation || id));
-    if (item.excerpt || item.text) a.append(el('p', item.excerpt || item.text)); cards.append(a);
-  }
-  view.append(cards); if (!seen.size) view.append(el('p', 'No matches on this page. Try a citation, a shorter phrase, or Pāli keywords.'));
-  const next = [data.next_offset, data.title_next_offset].filter(x => x !== null && x !== undefined); pageControls(next.length ? Math.min(...next) : null, offset ? Math.max(0, offset - 15) : null, n => route('search', { q: query, scope, offset: n }));
-  if (scope !== 'canon') provenance(data);
+  if (requestedScope === 'post') return searchPost(args, token, rawQuery);
+  throw Error('Choose a supported search scope.');
 }
+
 function readingArgs(selector) {
   if (selector.startsWith('commentary-ref:')) return { kind: 'commentary', uid: selector.slice(15) };
   if (selector.startsWith('book:')) return { book: selector.slice(5) };

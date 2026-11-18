@@ -157,6 +157,12 @@ try:
     commentary_context = tool('get_commentary', commentary_command)
     commentary_exact = tool('get_commentary', {k: v for k, v in commentary_hit['read_with'].items() if k != 'tool'})
     assert commentary_context['segments'][1]['ref'] == commentary_hit['citation'] and commentary_exact['returned'] == 1
+    post_search = tool('search_post_canonical', {'query': 'sati', 'offset': 0, 'limit': 15, 'script': 'sinhala'})
+    post_hit = post_search['results'][0]
+    post_command = {k: v for k, v in post_hit['context_with'].items() if k != 'tool'}
+    post_context = tool('get_post_canonical', post_command)
+    post_reader = tool('get_post_canonical', {**{k: v for k, v in post_hit['read_with'].items() if k != 'tool'}, 'limit': 30})
+    assert post_context['segments'][1]['ref'] == post_hit['segment_ref']
     late_pali = tool('get_text', {'uid': 'mn10', 'offset': 0, 'limit': 30, 'script': 'roman'})
     catalog = tool('reading_plan', {})
     plan = next(p for p in catalog['plans'] if p['days'] >= 2)
@@ -208,7 +214,7 @@ try:
                         params = payload.get('params', {})
                         state['calls'].append(copy.deepcopy(params))
                         name, arguments = params.get('name'), params.get('arguments', {})
-                        if name not in {'get_text', 'get_commentary', 'get_post_canonical', 'browse_canon', 'reading_plan', 'search_source_book', 'resolve_reference', 'search_texts', 'search_commentary'} or name == 'get_text' and 'translation' in arguments or name == 'reading_plan' and arguments:
+                        if name not in {'get_text', 'get_commentary', 'get_post_canonical', 'browse_canon', 'reading_plan', 'search_source_book', 'resolve_reference', 'search_texts', 'search_commentary', 'search_post_canonical'} or name == 'get_text' and 'translation' in arguments or name == 'reading_plan' and arguments:
                             state['forbidden'].append(params)
                             route.abort()
                         elif state['hold'] and name == 'get_text' and arguments.get('uid') == 'mn10':
@@ -688,6 +694,39 @@ try:
             assert page.evaluate('localStorage.getItem("pali-library-v1")') == original_raw
             audit(page, state, 'commentary context and exact reader leave private draft local')
             passed('keyboard native commentary context retains three literal source paragraphs and source warning, closes to the same result, and keeps exact single-paragraph reading plus private draft')
+            context.close()
+
+            # Native later-work context keeps its selected citation and ordinary reader page size.
+            context, page, state = environment(saved=[{**canonical['mark'], 'note': PRIVATE + 'later-work saved note'}], script='sinhala')
+            saved(page); post_draft = PRIVATE + 'later-work unsaved ā😀'
+            page.get_by_label('Your personal note', exact=True).fill(post_draft)
+            original_raw = page.evaluate('localStorage.getItem("pali-library-v1")')
+            page.goto(base + '/#search?q=sati&scope=post')
+            rows = page.locator('section[aria-label="Later-work search results"] .post-search-result')
+            expect(rows).to_have_count(len(post_search['results']))
+            before = len(state['calls']); trigger = rows.first.get_by_role('button', name='Read surrounding context', exact=True)
+            trigger.focus(); page.keyboard.press('Enter')
+            pane = page.get_by_role('region', name='Surrounding later-work context', exact=True)
+            passages = pane.locator('article.segment .passage')
+            expect(passages).to_have_text([s['text'] for s in post_context['segments']])
+            assert passages.all_text_contents() == [s['text'] for s in post_context['segments']]
+            assert state['calls'][before:] == [{'name': 'get_post_canonical', 'arguments': post_command}]
+            expect(pane).to_be_focused(); expect(pane).to_contain_text(post_context['label'])
+            expect(pane).to_contain_text(post_context['source']['terms'])
+            expect(pane.locator('.search-match')).to_contain_text(post_hit['segment_ref'])
+            expect(pane.locator('.personal-highlight')).to_have_count(0)
+            continuation = pane.get_by_role('link', name='Continue from match in source selection', exact=True)
+            assert continuation.get_attribute('href') == rows.first.locator('.entry').get_attribute('href')
+            audit(page, state, 'native later-work inline context, exact source words and selected citation')
+            pane.get_by_role('button', name='Close context', exact=True).focus(); page.keyboard.press('Enter')
+            expect(pane).to_have_count(0); expect(trigger).to_be_focused()
+            rows.first.locator('.entry').focus(); page.keyboard.press('Enter')
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in post_reader['segments']])
+            assert page.locator('section[aria-label="Pāli passage"] .passage').all_text_contents() == [s['text'] for s in post_reader['segments']]
+            saved(page); expect(page.get_by_label('Your personal note', exact=True)).to_have_value(post_draft)
+            assert page.evaluate('localStorage.getItem("pali-library-v1")') == original_raw
+            audit(page, state, 'later-work context and selected reader preserve private draft')
+            passed('keyboard Sinhala later-work context retains exact selected-citation words, closes to its trigger, opens the normal pinned reader page and preserves private draft')
             context.close()
 
             # A selected native chapter exposes its cross-volume parent only on demand.

@@ -1450,3 +1450,10 @@ On phones, move only exact known background into existing Reading tools. Preserv
 Expose the existing commentary search context command as an explicit inline preview, preserving its original book, offset and limit3. Keep the single-paragraph exact link and add a separate source-pinned full-book continuation at the actual match. Search results, direct source-book positions and aligned canonical commentary remain distinct; never merge their bookmark or note identities automatically.
 
 Validate source/revision/terms, query interpretation, literal commands, native metadata and consecutive source refs before displaying wording. Preserve not-canon, numbering and unaligned-book qualifications. Refuse stale/malformed context inline; explicit fresh search is the review path. Use existing request cancellation, generation/epoch and owned-focus guards without private writes or a new route/storage schema. No tool or source coverage expansion. [Evidence](evidence/web-reader/COMMENTARY_SEARCH_CONTEXT.md).
+
+
+## D231 — Source-pinned later-work search within literal selection bounds
+
+Replace the last legacy web search path with a pure post-canonical validator and source-pinned reading links. Expose the existing context command without widening its citation: volume, chapter, numbered passage and whole-file selections retain their own boundaries. Preserve the Saṅgaha/Vibhāvinī distinction even when they share a physical VRI file. Exact links pin the real match start; the ordinary reader still uses its existing page length within that selection.
+
+Reuse the commentary preview lifecycle for cancellation, stale-response refusal, owned focus and private draft preservation, while keeping corpus-specific validators/commands/source metadata separate. Retain every numbering/approximation/source-rights warning and actual page/paragraph marker. No new source, inference, tool or personal schema. Give the previously installation-starved personal-data group and the new three-pass later-work group sufficient CI setup time, retaining every assertion. [Evidence](evidence/web-reader/POST_SEARCH_CONTEXT.md).
