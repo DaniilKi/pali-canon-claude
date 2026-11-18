@@ -25,7 +25,7 @@ try:
    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
    passed(width,'real catalogue and no horizontal overflow')
    page.locator('.entry').filter(has_text='Dīgha Nikāya').click(); page.locator('.entry').filter(has_text='Brahmajālasuttaṃ').wait_for(); passed(width,'collection navigation')
-   find_control(page, '#reference').fill('Dhp 183'); page.locator('#reference-form button').click()
+   find_control(page, '#reference').fill('Dhp 183'); page.locator('#reference-form button').click(); page.get_by_role('link',name='Read Pāli',exact=True).click()
    page.locator('.passage').filter(has_text='Sabbapāpassa akaraṇaṃ').wait_for(); assert 'VRI' in page.locator('.provenance').inner_text(); assert 'non-commercial' in page.locator('.provenance').inner_text(); passed(width,'exact real passage and attribution')
    original_hash=page.evaluate('location.hash'); page.locator('.skip').focus(); page.keyboard.press('Enter'); assert page.evaluate('location.hash')==original_hash; assert 'Sabbapāpassa' in page.locator('.passage').inner_text(); passed(width,'skip link focuses reading without replacing the passage')
    page.get_by_role('button',name='Save passage dhp183/1',exact=True).click(); page.get_by_role('link',name='Saved',exact=True).click(); page.get_by_role('heading',name='Saved passages').wait_for()

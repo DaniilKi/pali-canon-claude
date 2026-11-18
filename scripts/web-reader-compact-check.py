@@ -35,13 +35,14 @@ try:
    if narrow:finder.locator('summary').focus();page.keyboard.press('Enter');expect(find_control(page,'#reference')).to_be_visible()
    else:expect(page.locator('#reference')).to_be_visible()
    find_control(page,'#reference').fill('Dhp 183')
-   with page.expect_response(lambda r:r.request.method=='POST' and r.url.endswith('/mcp') and r.request.post_data_json.get('params',{}).get('name')=='get_text' and r.request.post_data_json['params']['arguments'].get('uid')=='Dhp 183'):
+   with page.expect_response(lambda r:r.request.method=='POST' and r.url.endswith('/mcp') and r.request.post_data_json.get('params',{}).get('name')=='resolve_reference'):
     page.locator('#reference-form button').click()
-   expect(page.locator('main h2')).to_contain_text('Dhp 183');loaded(page);assert (finder.get_attribute('open') is None)==narrow;assert page.evaluate('document.activeElement.id')=='content';audit('after find');passed(width,'keyboard-accessible finder opens the actual source and closes only on narrow layouts')
-   before=len([c for c in calls if c['name']=='get_text']);find_control(page,'#reference').fill('Dhp 183')
-   with page.expect_response(lambda r:r.request.method=='POST' and r.url.endswith('/mcp') and r.request.post_data_json.get('params',{}).get('name')=='get_text'):
+   page.get_by_role('link',name='Read Pāli',exact=True).wait_for();loaded(page);assert (finder.get_attribute('open') is None)==narrow;assert page.evaluate('document.activeElement.id')=='content';audit('citation resolved');passed(width,'keyboard-accessible finder resolves the actual citation and closes only on narrow layouts')
+   before=len([c for c in calls if c['name']=='resolve_reference']);find_control(page,'#reference').fill('Dhp 183')
+   with page.expect_response(lambda r:r.request.method=='POST' and r.url.endswith('/mcp') and r.request.post_data_json.get('params',{}).get('name')=='resolve_reference'):
     page.locator('#reference-form button').click()
-   expect(page.locator('main h2')).to_contain_text('Dhp 183');loaded(page);assert (finder.get_attribute('open') is None)==narrow;assert page.evaluate('document.activeElement.id')=='content';assert len([c for c in calls if c['name']=='get_text'])==before+1;passed(width,'same-route reference submission closes the phone finder and refreshes the actual source')
+   page.get_by_role('link',name='Read Pāli',exact=True).wait_for();loaded(page);assert (finder.get_attribute('open') is None)==narrow;assert page.evaluate('document.activeElement.id')=='content';assert len([c for c in calls if c['name']=='resolve_reference'])==before+1;passed(width,'same-route reference submission refreshes resolution and closes the phone finder')
+   page.get_by_role('link',name='Read Pāli',exact=True).click();expect(page.locator('main h2')).to_contain_text('Dhp 183');loaded(page);panel=page.locator('.study-actions')
    if narrow:panel.locator('summary').focus();page.keyboard.press('Enter')
    expect(read_tool(page,'English sources')).to_be_visible();audit('study controls expanded');read_tool(page,'English sources').click();page.get_by_role('heading',name='English sources',exact=True).wait_for();assert not narrow or panel.get_attribute('open') is None;assert page.evaluate('document.activeElement.id')=='study';assert page.locator('.passage').first.inner_text().startswith('Sabbapāpassa');passed(width,'study disclosure closes after selection with focus on source choices and no lost Pāli')
    page.get_by_text('Reading preferences',exact=True).click();page.locator('#font-size').fill('30');page.locator('#font-size').dispatch_event('input');assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');page.locator('#font-size').fill('21');page.locator('#font-size').dispatch_event('input');passed(width,'largest supported reading text remains usable without horizontal overflow')

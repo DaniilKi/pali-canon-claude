@@ -128,6 +128,13 @@ try:
     chapter_root = tool('get_post_canonical', {'citation': 'Vism', 'offset': 0, 'limit': 1, 'script': 'sinhala'})
     chapter_last = tool('get_post_canonical', {'citation': chapter_root['chapters'][22]['citation'], 'offset': 0, 'limit': 30, 'script': 'sinhala'})
     assert chapter_child['book']['id'] == 'visuddhimagga-2' and chapter_root['book']['id'] == 'visuddhimagga-1' and len(chapter_root['chapters']) == 23
+    citation_post = tool('resolve_reference', {'reference': 'Vism I.1', 'script': 'sinhala'})
+    citation_post_text = tool('get_post_canonical', {'citation': citation_post['read_with']['citation'], 'offset': 0, 'limit': 30, 'script': 'sinhala'})
+    citation_name = tool('resolve_reference', {'reference': 'Satipatthana Sutta', 'script': 'sinhala'})
+    citation_range = tool('resolve_reference', {'reference': 'MN10-12', 'script': 'sinhala'})
+    citation_alternative = citation_name['also_named'][-1]
+    citation_alternative_text = tool('get_text', {'uid': citation_alternative['id'], 'offset': 0, 'limit': 30, 'script': 'sinhala'})
+    assert citation_post['canonical'] is False and citation_post['citation'] == 'Vism 1.1' and len(citation_name['also_named']) == 2
     late_pali = tool('get_text', {'uid': 'mn10', 'offset': 0, 'limit': 30, 'script': 'roman'})
     catalog = tool('reading_plan', {})
     plan = next(p for p in catalog['plans'] if p['days'] >= 2)
@@ -179,7 +186,7 @@ try:
                         params = payload.get('params', {})
                         state['calls'].append(copy.deepcopy(params))
                         name, arguments = params.get('name'), params.get('arguments', {})
-                        if name not in {'get_text', 'get_commentary', 'get_post_canonical', 'browse_canon', 'reading_plan', 'search_source_book'} or name == 'get_text' and 'translation' in arguments or name == 'reading_plan' and arguments:
+                        if name not in {'get_text', 'get_commentary', 'get_post_canonical', 'browse_canon', 'reading_plan', 'search_source_book', 'resolve_reference'} or name == 'get_text' and 'translation' in arguments or name == 'reading_plan' and arguments:
                             state['forbidden'].append(params)
                             route.abort()
                         elif state['hold'] and name == 'get_text' and arguments.get('uid') == 'mn10':
@@ -489,6 +496,53 @@ try:
             assert page.locator('section[aria-label="Pāli passage"] .passage').all_text_contents() == [s['text'] for s in book_native_match['segments']]
             assert profile(page) == original_profile; privacy(page, state)
             passed('native-script complete-book search finds actual front matter through phone keyboard controls and opens the exact source/ref pin without global search, English retrieval or private-note writes')
+            context.close()
+
+            # Citation lookup preserves resolver identity and cautions before any reading.
+            context, page, state = environment(saved=[{**canonical['mark'], 'note': PRIVATE + 'citation private note'}], script='sinhala')
+            saved(page)
+            citation_draft = PRIVATE + 'citation unsaved ā😀'
+            page.get_by_label('Your personal note', exact=True).fill(citation_draft)
+            original_profile = copy.deepcopy(profile(page)); original_raw = page.evaluate('localStorage.getItem("pali-library-v1")')
+            panel = page.locator('#find-panel')
+            if panel.get_attribute('open') is None: panel.locator('summary').focus(); page.keyboard.press('Enter')
+            before = len(state['calls']); page.locator('#reference').fill('Vism I.1'); page.locator('#reference').press('Enter')
+            expect(page).to_have_url(base + '/#resolve?' + urllib.parse.urlencode({'reference': 'Vism I.1'}))
+            expect(page.locator('#view > h2')).to_have_text(citation_post['citation'] + ' · ' + citation_post['title'])
+            card = page.locator('.citation-resolution'); expect(card).to_contain_text('Later Pāli work · not canon')
+            expect(card).to_contain_text(citation_post['label'])
+            for note in citation_post['notes']: expect(card).to_contain_text(note)
+            assert page.title() == 'Citation lookup · Pāli Library'
+            expect(page.locator('section[aria-label="Pāli passage"]')).to_have_count(0)
+            assert state['calls'][before:] == [{'name': 'resolve_reference', 'arguments': {'reference': 'Vism I.1', 'script': 'sinhala'}}]
+            read_link = page.get_by_role('link', name='Read Pāli', exact=True)
+            assert dict(urllib.parse.parse_qsl(read_link.get_attribute('href').split('?', 1)[1])) == {'kind': 'post', 'uid': citation_post['read_with']['citation']}
+            audit(page, state, 'native citation lookup preserves later-work label and exact resolver notes')
+            read_link.focus(); page.keyboard.press('Enter')
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in citation_post_text['segments']])
+            assert page.locator('section[aria-label="Pāli passage"] .passage').all_text_contents() == [s['text'] for s in citation_post_text['segments']]
+            for reference, data in [('MN10-12', citation_range), ('Satipatthana Sutta', citation_name)]:
+                before = len(state['calls']); page.goto(base + '/#resolve?' + urllib.parse.urlencode({'reference': reference}))
+                expect(page.locator('#view > h2')).to_have_text(data['citation'] + ' · ' + data['title'])
+                for note in data['notes']: expect(page.locator('.citation-resolution')).to_contain_text(note)
+                assert state['calls'][before:] == [{'name': 'resolve_reference', 'arguments': {'reference': reference, 'script': 'sinhala'}}]
+                expect(page.locator('section[aria-label="Pāli passage"]')).to_have_count(0)
+            alternatives = page.get_by_role('region', name='Other texts with this name', exact=True)
+            expect(alternatives.locator('.entry')).to_have_count(len(citation_name['also_named']))
+            alternative_link = alternatives.locator('.entry').filter(has_text=citation_alternative['citation'])
+            expect(alternative_link).to_contain_text(citation_alternative['title'])
+            assert dict(urllib.parse.parse_qsl(alternative_link.get_attribute('href').split('?', 1)[1])) == {'uid': citation_alternative['id']}
+            audit(page, state, 'same-name alternatives and multi-text range warning before reading')
+            alternative_link.focus(); page.keyboard.press('Enter')
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in citation_alternative_text['segments']])
+            assert page.locator('section[aria-label="Pāli passage"] .passage').all_text_contents() == [s['text'] for s in citation_alternative_text['segments']]
+            before = len(state['calls']); page.goto(base + '/#resolve?reference=MN10&reference=MN11')
+            expect(page.get_by_role('heading', name='No passage was substituted.', exact=True)).to_be_visible()
+            assert len(state['calls']) == before
+            saved(page); expect(page.get_by_label('Your personal note', exact=True)).to_have_value(citation_draft)
+            assert profile(page) == original_profile and page.evaluate('localStorage.getItem("pali-library-v1")') == original_raw
+            audit(page, state, 'citation keyboard flow leaves exact personal note and draft local')
+            passed('keyboard citation lookup retains actual native titles, not-canon and multi-text warnings; explicit normalized post/alternative links read exact Pāli, duplicate routes call no MCP and private state stays unchanged')
             context.close()
 
             # A selected native chapter exposes its cross-volume parent only on demand.
