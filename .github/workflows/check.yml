@@ -78,7 +78,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters]
+        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations]
     runs-on: ubuntu-latest
     timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts') && 20 || 10 }}
     steps:
@@ -279,6 +279,19 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/chapters-package"
           tar -xzf "$RUNNER_TEMP/chapters-package/"*.tgz -C "$RUNNER_TEMP/chapters-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-chapters-check.py --server-dir "$RUNNER_TEMP/chapters-package/package/server" --report installed-chapters.report.json
+      - name: Check citation resolution and exact reading dispatch
+        if: matrix.group == 'citations'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-citation-check.py --report standalone-citations.report.json
+      - name: Audit citation resolution in both themes
+        if: matrix.group == 'citations'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-citation-check.py --a11y --report standalone-citations-a11y.report.json
+      - name: Check citation resolution from the isolated npm package
+        if: matrix.group == 'citations'
+        run: |
+          mkdir -p "$RUNNER_TEMP/citations-package"
+          npm pack --pack-destination "$RUNNER_TEMP/citations-package"
+          tar -xzf "$RUNNER_TEMP/citations-package/"*.tgz -C "$RUNNER_TEMP/citations-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-citation-check.py --server-dir "$RUNNER_TEMP/citations-package/package/server" --report installed-citations.report.json
       - name: Check editorial topic and teaching-list source navigation
         if: matrix.group == 'study'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-topics-check.py --report standalone-topics.report.json
@@ -356,6 +369,9 @@ jobs:
             standalone-chapters.report.json
             standalone-chapters-a11y.report.json
             installed-chapters.report.json
+            standalone-citations.report.json
+            standalone-citations-a11y.report.json
+            installed-citations.report.json
             standalone-comparison.report.json
             standalone-comparison-a11y.report.json
             installed-comparison.report.json
