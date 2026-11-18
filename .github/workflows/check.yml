@@ -78,7 +78,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings]
+        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary]
     runs-on: ubuntu-latest
     timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts') && 20 || 10 }}
     steps:
@@ -318,6 +318,19 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/headings-package"
           tar -xzf "$RUNNER_TEMP/headings-package/"*.tgz -C "$RUNNER_TEMP/headings-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-headings-check.py --server-dir "$RUNNER_TEMP/headings-package/package/server" --report installed-headings.report.json
+      - name: Check exact commentary matches and bounded source context
+        if: matrix.group == 'commentary'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-commentary-context-check.py --report standalone-commentary.report.json
+      - name: Audit commentary source context in both themes
+        if: matrix.group == 'commentary'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-commentary-context-check.py --a11y --report standalone-commentary-a11y.report.json
+      - name: Check commentary context from the isolated npm package
+        if: matrix.group == 'commentary'
+        run: |
+          mkdir -p "$RUNNER_TEMP/commentary-package"
+          npm pack --pack-destination "$RUNNER_TEMP/commentary-package"
+          tar -xzf "$RUNNER_TEMP/commentary-package/"*.tgz -C "$RUNNER_TEMP/commentary-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-commentary-context-check.py --server-dir "$RUNNER_TEMP/commentary-package/package/server" --report installed-commentary.report.json
       - name: Check editorial topic and teaching-list source navigation
         if: matrix.group == 'study'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-topics-check.py --report standalone-topics.report.json
@@ -404,6 +417,9 @@ jobs:
             standalone-headings.report.json
             standalone-headings-a11y.report.json
             installed-headings.report.json
+            standalone-commentary.report.json
+            standalone-commentary-a11y.report.json
+            installed-commentary.report.json
             standalone-comparison.report.json
             standalone-comparison-a11y.report.json
             installed-comparison.report.json

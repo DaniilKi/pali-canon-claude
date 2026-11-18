@@ -151,6 +151,12 @@ try:
     search_native_title = next(r for r in search_native['title_matches'] if r['id'] == 'mn10')
     search_native_title_text = tool('get_text', {'uid': 'mn10', 'offset': 0, 'limit': 30, 'script': 'sinhala'})
     assert search_pin_hit['segment_ref'] == 'sn12.21/3' and revision(search_pin_hit) != search_pin['source']['commit']
+    commentary_search = tool('search_commentary', {'query': 'sati', 'offset': 0, 'limit': 15, 'script': 'sinhala'})
+    commentary_hit = commentary_search['results'][0]
+    commentary_command = {k: v for k, v in commentary_hit['context_with'].items() if k != 'tool'}
+    commentary_context = tool('get_commentary', commentary_command)
+    commentary_exact = tool('get_commentary', {k: v for k, v in commentary_hit['read_with'].items() if k != 'tool'})
+    assert commentary_context['segments'][1]['ref'] == commentary_hit['citation'] and commentary_exact['returned'] == 1
     late_pali = tool('get_text', {'uid': 'mn10', 'offset': 0, 'limit': 30, 'script': 'roman'})
     catalog = tool('reading_plan', {})
     plan = next(p for p in catalog['plans'] if p['days'] >= 2)
@@ -202,7 +208,7 @@ try:
                         params = payload.get('params', {})
                         state['calls'].append(copy.deepcopy(params))
                         name, arguments = params.get('name'), params.get('arguments', {})
-                        if name not in {'get_text', 'get_commentary', 'get_post_canonical', 'browse_canon', 'reading_plan', 'search_source_book', 'resolve_reference', 'search_texts'} or name == 'get_text' and 'translation' in arguments or name == 'reading_plan' and arguments:
+                        if name not in {'get_text', 'get_commentary', 'get_post_canonical', 'browse_canon', 'reading_plan', 'search_source_book', 'resolve_reference', 'search_texts', 'search_commentary'} or name == 'get_text' and 'translation' in arguments or name == 'reading_plan' and arguments:
                             state['forbidden'].append(params)
                             route.abort()
                         elif state['hold'] and name == 'get_text' and arguments.get('uid') == 'mn10':
@@ -650,6 +656,38 @@ try:
             assert profile(page) == original_profile and page.evaluate('localStorage.getItem("pali-library-v1")') == original_raw
             audit(page, state, 'search source pins leave personal notes and draft unchanged')
             passed('keyboard canonical search reads actual revised SN12.21/3, old edition-only pin refuses wording until explicit review, native title/body duplicate IDs remain independently readable and private state stays unchanged')
+            context.close()
+
+            # Commentary context has its own inline lifecycle and retains the exact single-paragraph path.
+            context, page, state = environment(saved=[{**canonical['mark'], 'note': PRIVATE + 'commentary private note'}], script='sinhala')
+            saved(page); commentary_draft = PRIVATE + 'commentary unsaved ā😀'
+            page.get_by_label('Your personal note', exact=True).fill(commentary_draft)
+            original_raw = page.evaluate('localStorage.getItem("pali-library-v1")')
+            search_url = base + '/#search?q=sati&scope=commentary'; page.goto(search_url)
+            rows = page.locator('section[aria-label="Commentary search results"] .commentary-search-result')
+            expect(rows).to_have_count(len(commentary_search['results']))
+            before = len(state['calls']); trigger = rows.first.get_by_role('button', name='Read surrounding context', exact=True)
+            trigger.focus(); page.keyboard.press('Enter')
+            pane = page.get_by_role('region', name='Surrounding commentary context', exact=True)
+            passages = pane.locator('article.segment .passage')
+            expect(passages).to_have_text([s['text'] for s in commentary_context['segments']])
+            assert passages.all_text_contents() == [s['text'] for s in commentary_context['segments']]
+            assert state['calls'][before:] == [{'name': 'get_commentary', 'arguments': commentary_command}]
+            expect(pane).to_be_focused(); expect(pane).to_contain_text(commentary_context['alignment_note'])
+            expect(pane).to_contain_text(commentary_context['source']['terms']); expect(pane.locator('.search-match')).to_contain_text('Search match')
+            expect(pane.locator('.personal-highlight')).to_have_count(0)
+            continue_link = pane.get_by_role('link', name='Continue from match in source book', exact=True)
+            assert dict(urllib.parse.parse_qsl(continue_link.get_attribute('href').split('?', 1)[1])) == {'kind': 'commentary', 'uid': commentary_hit['book']['uid'], 'offset': str(commentary_hit['segment'] - 1), 'ref': commentary_hit['citation'], 'source': revision(commentary_context)}
+            audit(page, state, 'native commentary inline context, warnings and exact source positions')
+            pane.get_by_role('button', name='Close context', exact=True).focus(); page.keyboard.press('Enter')
+            expect(pane).to_have_count(0); expect(trigger).to_be_focused(); expect(rows).to_have_count(len(commentary_search['results']))
+            exact = rows.first.locator('.entry'); exact.focus(); page.keyboard.press('Enter')
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in commentary_exact['segments']])
+            expect(page.locator('section[aria-label="Pāli passage"] .segment')).to_have_count(1)
+            saved(page); expect(page.get_by_label('Your personal note', exact=True)).to_have_value(commentary_draft)
+            assert page.evaluate('localStorage.getItem("pali-library-v1")') == original_raw
+            audit(page, state, 'commentary context and exact reader leave private draft local')
+            passed('keyboard native commentary context retains three literal source paragraphs and source warning, closes to the same result, and keeps exact single-paragraph reading plus private draft')
             context.close()
 
             # A selected native chapter exposes its cross-volume parent only on demand.

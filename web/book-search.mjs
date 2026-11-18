@@ -68,7 +68,9 @@ function source(data, selected) {
 function command(value, book, offset, limit, outputScript) {
   if (!keysOnly(value, ['tool', 'book', 'offset', 'limit', 'script']) || value.tool !== 'get_text' || value.book !== book || value.offset !== offset || value.limit !== limit || own(value, 'script') && !scripts.has(value.script) || outputScript && value.script !== outputScript) fail();
 }
-function queryProvenance(data, selected) {
+/** Shared finite query equivalences; lexical inference must remain explicitly backend-labelled. */
+export function queryProvenance(data, selected, reject = fail) {
+  const fail = reject;
   const input = romanizeSearchInput(selected.query), base = input.text;
   if (input.original) {
     if (data.input_script !== input.script || data.input_romanized !== base) fail();
