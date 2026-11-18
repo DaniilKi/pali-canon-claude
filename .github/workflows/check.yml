@@ -78,7 +78,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins]
+        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings]
     runs-on: ubuntu-latest
     timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts') && 20 || 10 }}
     steps:
@@ -305,6 +305,19 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/searchpins-package"
           tar -xzf "$RUNNER_TEMP/searchpins-package/"*.tgz -C "$RUNNER_TEMP/searchpins-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-search-pins-check.py --server-dir "$RUNNER_TEMP/searchpins-package/package/server" --report installed-searchpins.report.json
+      - name: Check printed source-heading browsing and exact reading
+        if: matrix.group == 'headings'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-headings-check.py --report standalone-headings.report.json
+      - name: Audit printed heading filters and navigation in both themes
+        if: matrix.group == 'headings'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-headings-check.py --a11y --report standalone-headings-a11y.report.json
+      - name: Check heading browsing from the isolated npm package
+        if: matrix.group == 'headings'
+        run: |
+          mkdir -p "$RUNNER_TEMP/headings-package"
+          npm pack --pack-destination "$RUNNER_TEMP/headings-package"
+          tar -xzf "$RUNNER_TEMP/headings-package/"*.tgz -C "$RUNNER_TEMP/headings-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-headings-check.py --server-dir "$RUNNER_TEMP/headings-package/package/server" --report installed-headings.report.json
       - name: Check editorial topic and teaching-list source navigation
         if: matrix.group == 'study'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-topics-check.py --report standalone-topics.report.json
@@ -388,6 +401,9 @@ jobs:
             standalone-searchpins.report.json
             standalone-searchpins-a11y.report.json
             installed-searchpins.report.json
+            standalone-headings.report.json
+            standalone-headings-a11y.report.json
+            installed-headings.report.json
             standalone-comparison.report.json
             standalone-comparison-a11y.report.json
             installed-comparison.report.json
