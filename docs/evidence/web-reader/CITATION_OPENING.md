@@ -31,3 +31,9 @@ The seven focused route/actual-MCP/metadata tests passed. Independent read-only 
 - MCP smoke: 34 tools, 64 checks. Offline evaluations: 195 pass, six network questions skipped. No new live publisher content was fetched by browser acceptance.
 
 The first isolated-package attempt did not start because npm's default cache directory was unwritable and no archive had been created. Repacking with a writable temporary cache succeeded; the final installed-package result above uses that actual extracted archive. This was a harness setup failure, not a product or source-coverage result. Exact-head CI is checked externally after pushing the integration candidate; this receipt does not claim a future run's success.
+
+### First-candidate CI timing repair
+
+The first integration commit `1389e90` passed the new citation job and WebKit compatibility job but reproduced a pre-existing chapter-harness race at source review: old and current pages have identical headings and wording, so a readiness assertion could pass on the old DOM immediately before hash navigation cleared it. This reproduced locally at the same assertion. Independent review confirmed the missing fresh-response barrier.
+
+The harness now awaits the exact current-source `get_post_canonical` response and the exact unpinned review URL (including `offset=0`) before checking every Pāli codepoint and unchanged private state. All original assertions remain. The corrected local chapter journey passed 38 checks. No product/source behavior changed in this repair; final exact-head CI must validate the corrected tree rather than treating first-candidate success in other jobs as final acceptance.

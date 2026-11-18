@@ -265,7 +265,13 @@ try:
                 expect(page.get_by_role('form', name='Chapter navigation', exact=True)).to_have_count(0)
                 ready(page, child); review = page.get_by_role('link', name='Review current reading source', exact=True)
                 assert fields(base + '/' + review.get_attribute('href')) == {'kind': 'post', 'uid': child['citation'], 'offset': '0'}
-                state['mode'] = None; review.click(); ready(page, child); unchanged(page, state, raw)
+                state['mode'] = None
+                # The old and reviewed source have the same title/body. Await this exact fresh
+                # response before asserting codepoints, rather than accepting the old DOM
+                # just before the hashchange render clears it.
+                with page.expect_response(lambda r: r.request.method == 'POST' and r.url.endswith('/mcp') and r.request.post_data_json.get('params') == {'name': 'get_post_canonical', 'arguments': {'citation': child['citation'], 'offset': 0, 'limit': 30, 'script': 'roman'}}):
+                    review.click()
+                ready(page, child, href(child['citation']) + '&offset=0'); unchanged(page, state, raw)
                 passed('changed parent revision never replaces current source wording or saved pins; explicit review removes only the page pin while keeping the literal current citation')
                 tools(page); state['mode'] = 'error'; before = len(state['calls']); page.get_by_role('button', name='Choose chapter', exact=True).focus(); page.keyboard.press('Enter')
                 expect(page.get_by_role('button', name='Retry chapter list', exact=True)).to_be_focused(); ready(page, child)
