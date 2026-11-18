@@ -115,3 +115,17 @@ test('post-canonical option paths preserve canonical selection and provenance wi
   assert.equal(mixed.post_canonical.canonical, false); assert.ok(mixed.post_canonical.results.length); assert.notEqual(mixed.post_canonical.source.name, mixed.source.name);
   await assertReadingSources(mixed);
 });
+
+test('group aliases keep their original request selection while all resolved source results stay equal', async () => {
+  for (const alias of ['an1.300', 'sn46.150', 'an10.208', 'sn46.121']) {
+    const { unit } = canon.resolve(alias);
+    const query = 'bhikkhave', actual = await call('search_texts', { query, collection: alias, english: 'off' });
+    const direct = await call('search_texts', { query, collection: unit.id, english: 'off' });
+    const { scope_resolution, selection: requestedSelection, ...actualResult } = actual;
+    const { selection: directSelection, ...directResult } = direct;
+    assert.deepEqual(requestedSelection, selection(query, { collection: alias, english: 'off' }));
+    assert.deepEqual(directSelection, selection(query, { collection: unit.id, english: 'off' }));
+    assert.deepEqual(actualResult, directResult);
+    assert.equal(scope_resolution.requested, alias); assert.equal(scope_resolution.resolved_id, unit.id);
+  }
+});

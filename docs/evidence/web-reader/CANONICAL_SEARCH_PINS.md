@@ -39,3 +39,10 @@ Final local and exact-head CI acceptance is recorded externally after the final 
 - MCP smoke: 34 tools, 64 checks. Offline evaluations: 195 pass, six network questions skipped.
 
 The first local full run's native-metadata contract failure and initial harness same-URL failure are preserved as diagnosis, not relabelled as acceptance. The final results above use corrected assertions and the final runtime build. Exact-head CI remains a separate release gate, checked externally rather than promised by this document.
+
+
+### First-candidate CI contract repair
+
+Candidate `e89c1d8` passed the search/browser compatibility jobs but its Linux Node20 installed-corpus audit caught another original-request comparison: alias `an1.300` and resolved group `an1.297-305` intentionally have different `selection.collection` values. The old audit compared the complete responses as identical except for scope resolution. The audit now asserts both complete seven-field request selections explicitly, then compares all remaining result/source/command/caution fields unchanged. Existing scope-resolution and browse assertions remain. A new actual-MCP regression covers four aliases; the 13 backend/web tests pass. Independent review confirmed no weakening of the original source assertions.
+
+The complete corrected isolated-package corpus audit passed locally with 8,544 canonical texts, 134,380 canonical segments, 47 direct commentary books and 109 later-work books; zero failures and zero network attempts. This repair changes tests/audit documentation only. The final CI tree adds one regression (1,249 tests expected); earlier local full-suite counts remain their actual 1,248-test run rather than being relabelled.
