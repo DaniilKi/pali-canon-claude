@@ -20,6 +20,7 @@
  * table of matko/emacs-pali-velthuis (Unlicense).
  */
 import * as canon from './canon.mjs';
+import { foldNiggahita } from './pali-unicode.mjs';
 
 export const fold = canon.fold;
 
@@ -203,7 +204,7 @@ const ALIAS_LABEL = 'Sanskrit or English loan form of the Pāli word';
  * 'velthuis', 'harvard-kyoto', 'doubled vowels', 'anglicised', 'alias'.
  */
 export function normalizeWord(token) {
-  const w = String(token).normalize('NFC').replace(/ṁ/g, 'ṃ').replace(/Ṁ/g, 'Ṃ');
+  const w = foldNiggahita(String(token).normalize('NFC'));
   if (!/[A-Za-z]/.test(w) || /\d/.test(w)) return { word: w, rule: null };
   const letters = (w.match(/[A-Za-zāīūṅñṭḍṇḷṃĀĪŪṄÑṬḌṆḶṂ]/g) || []).length;
   // "ed.Norman", "cf.Nyanaponika": an abbreviation and a name, not Velthuis (Velthuis capitals never follow a small letter).
@@ -270,7 +271,7 @@ export function normalizeInput(text) {
     from = end + 1;
   }
   out += normalizeTokens(nfc.slice(from));
-  out = out.replace(/ṁ/g, 'ṃ').replace(/Ṁ/g, 'Ṃ');
+  out = foldNiggahita(out);
   const rules = [...new Set(changes.map((c) => c.rule))];
   const scheme = rules.includes('velthuis') ? 'velthuis' : rules.includes('harvard-kyoto') ? 'harvard-kyoto'
     : /[āīūṅñṭḍṇḷṃ]/i.test(out) ? 'unicode' : 'ascii';

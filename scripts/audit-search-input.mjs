@@ -45,6 +45,7 @@ try {
     const query=transliterate(phrase,'roman',script),r=await call(name,{query,offset,limit:1,...options});assert.ok(!r.isError,JSON.stringify(r.content));
     assert.deepEqual(JSON.parse(r.content[0].text),r.structuredContent);
     const {input_script,input_romanized,...result}=r.structuredContent,key=phrase+offset;
+    if(name==='search_texts'){assert.deepEqual(result.selection,{query,offset,limit:1,collection:'mn10',script:'roman',english:'off',include_post_canonical:false});delete result.selection;}
     if(script==='roman') baselines.set(key,result);else {assert.deepEqual(result,baselines.get(key));assert.equal(input_script,script);assert.equal(input_romanized,phrase);}
     assert.ok((result.total_matched??result.total_texts_matched)>0);
    }

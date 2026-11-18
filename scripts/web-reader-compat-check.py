@@ -135,6 +135,15 @@ try:
     citation_alternative = citation_name['also_named'][-1]
     citation_alternative_text = tool('get_text', {'uid': citation_alternative['id'], 'offset': 0, 'limit': 30, 'script': 'sinhala'})
     assert citation_post['canonical'] is False and citation_post['citation'] == 'Vism 1.1' and len(citation_name['also_named']) == 2
+    search_pin_query = '"dasabalasamannāgato, bhikkhave, tathāgato catūhi ca vesārajjehi"'
+    search_pin = tool('search_texts', {'query': search_pin_query, 'offset': 0, 'limit': 15, 'script': 'sinhala'})
+    search_pin_hit = next(r for r in search_pin['results'] if r['id'] == 'sn12.21')
+    search_pin_text = tool('get_text', {'uid': 'sn12.21', 'offset': search_pin_hit['read_with']['offset'], 'limit': 30, 'script': 'sinhala'})
+    search_native_query = 'සතිපට්ඨාන'
+    search_native = tool('search_texts', {'query': search_native_query, 'offset': 0, 'limit': 15, 'script': 'sinhala'})
+    search_native_title = next(r for r in search_native['title_matches'] if r['id'] == 'mn10')
+    search_native_title_text = tool('get_text', {'uid': 'mn10', 'offset': 0, 'limit': 30, 'script': 'sinhala'})
+    assert search_pin_hit['segment_ref'] == 'sn12.21/3' and revision(search_pin_hit) != search_pin['source']['commit']
     late_pali = tool('get_text', {'uid': 'mn10', 'offset': 0, 'limit': 30, 'script': 'roman'})
     catalog = tool('reading_plan', {})
     plan = next(p for p in catalog['plans'] if p['days'] >= 2)
@@ -186,7 +195,7 @@ try:
                         params = payload.get('params', {})
                         state['calls'].append(copy.deepcopy(params))
                         name, arguments = params.get('name'), params.get('arguments', {})
-                        if name not in {'get_text', 'get_commentary', 'get_post_canonical', 'browse_canon', 'reading_plan', 'search_source_book', 'resolve_reference'} or name == 'get_text' and 'translation' in arguments or name == 'reading_plan' and arguments:
+                        if name not in {'get_text', 'get_commentary', 'get_post_canonical', 'browse_canon', 'reading_plan', 'search_source_book', 'resolve_reference', 'search_texts'} or name == 'get_text' and 'translation' in arguments or name == 'reading_plan' and arguments:
                             state['forbidden'].append(params)
                             route.abort()
                         elif state['hold'] and name == 'get_text' and arguments.get('uid') == 'mn10':
@@ -543,6 +552,53 @@ try:
             assert profile(page) == original_profile and page.evaluate('localStorage.getItem("pali-library-v1")') == original_raw
             audit(page, state, 'citation keyboard flow leaves exact personal note and draft local')
             passed('keyboard citation lookup retains actual native titles, not-canon and multi-text warnings; explicit normalized post/alternative links read exact Pāli, duplicate routes call no MCP and private state stays unchanged')
+            context.close()
+
+            # Each canonical search stream opens its own real revision in every engine.
+            context, page, state = environment(saved=[{**canonical['mark'], 'note': PRIVATE + 'search pin private note'}], script='sinhala')
+            saved(page); search_draft = PRIVATE + 'search pin unsaved ā😀'
+            page.get_by_label('Your personal note', exact=True).fill(search_draft)
+            original_profile = copy.deepcopy(profile(page)); original_raw = page.evaluate('localStorage.getItem("pali-library-v1")')
+            panel = page.locator('#find-panel')
+            if panel.get_attribute('open') is None: panel.locator('summary').focus(); page.keyboard.press('Enter')
+            before = len(state['calls']); page.locator('#query').fill(search_pin_query); page.locator('#query').press('Enter')
+            expect(page.locator('#view > h2')).to_have_text('Results for “' + search_pin_query + '”')
+            passages = page.get_by_role('region', name='Matching Pāli passages', exact=True)
+            expect(passages.locator('.search-excerpt')).to_have_text([r['excerpt'] for r in search_pin['results']])
+            assert passages.locator('.search-excerpt').all_text_contents() == [r['excerpt'] for r in search_pin['results']]
+            assert state['calls'][before:] == [{'name': 'search_texts', 'arguments': {'query': search_pin_query, 'offset': 0, 'limit': 15, 'script': 'sinhala'}}]
+            exact_link = passages.locator('.entry').filter(has_text=search_pin_hit['citation'])
+            exact_fields = dict(urllib.parse.parse_qsl(exact_link.get_attribute('href').split('?', 1)[1]))
+            assert exact_fields == {'uid': 'sn12.21', 'offset': '2', 'ref': 'sn12.21/3', 'source': revision(search_pin_hit)}
+            audit(page, state, 'actual repaired native search hit revision')
+            exact_link.focus(); page.keyboard.press('Enter')
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in search_pin_text['segments']])
+            assert page.locator('section[aria-label="Pāli passage"] .passage').all_text_contents() == [s['text'] for s in search_pin_text['segments']]
+            old_fields = {**exact_fields, 'source': search_pin['source']['commit']}
+            page.goto(base + '/#read?' + urllib.parse.urlencode(old_fields))
+            expect(page.get_by_role('heading', name='No passage was substituted.', exact=True)).to_be_visible()
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_count(0)
+            page.get_by_role('link', name='Review current source at this reference', exact=True).focus(); page.keyboard.press('Enter')
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in search_pin_text['segments']])
+            page.goto(base + '/#search?' + urllib.parse.urlencode({'q': search_native_query, 'scope': 'canon'}))
+            expect(page.locator('#view > h2')).to_have_text('Results for “' + search_native_query + '”')
+            expect(page.locator('#view')).to_contain_text(search_native['input_romanized'])
+            titles = page.get_by_role('region', name='Matching titles', exact=True); passages = page.get_by_role('region', name='Matching Pāli passages', exact=True)
+            expect(titles.locator('.entry')).to_have_count(len(search_native['title_matches'])); expect(passages.locator('.entry')).to_have_count(len(search_native['results']))
+            for region in [titles, passages]:
+                assert any(dict(urllib.parse.parse_qsl(a.get_attribute('href').split('?', 1)[1]))['uid'] == 'mn10' for a in region.locator('.entry').all())
+            title_link = titles.locator('.entry').filter(has_text=search_native_title['citation'])
+            assert dict(urllib.parse.parse_qsl(title_link.get_attribute('href').split('?', 1)[1])) == {'uid': 'mn10', 'offset': '0', 'page_source': revision(search_native_title)}
+            audit(page, state, 'actual native title and body duplicate identity retained')
+            title_link.focus(); page.keyboard.press('Enter')
+            expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in search_native_title_text['segments']])
+            assert page.locator('section[aria-label="Pāli passage"] .passage').all_text_contents() == [s['text'] for s in search_native_title_text['segments']]
+            before = len(state['calls']); page.goto(base + '/#search?q=metta&q=dhamma&scope=canon')
+            expect(page.get_by_role('heading', name='No passage was substituted.', exact=True)).to_be_visible(); assert len(state['calls']) == before
+            saved(page); expect(page.get_by_label('Your personal note', exact=True)).to_have_value(search_draft)
+            assert profile(page) == original_profile and page.evaluate('localStorage.getItem("pali-library-v1")') == original_raw
+            audit(page, state, 'search source pins leave personal notes and draft unchanged')
+            passed('keyboard canonical search reads actual revised SN12.21/3, old edition-only pin refuses wording until explicit review, native title/body duplicate IDs remain independently readable and private state stays unchanged')
             context.close()
 
             # A selected native chapter exposes its cross-volume parent only on demand.

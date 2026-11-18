@@ -24502,7 +24502,7 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   const has = (text) => wanted.every((alts) => alts.some((w) => text.includes(w)));
   const titlePool = direct ? [searchTitle(d, direct)] : s.titles;
   const matchingTitles = titlePool.filter(({ u, text }) => okCollection(u) && has(text));
-  const titleHits = matchingTitles.slice(offset, offset + limit).map(({ u }) => ({ ...unitSummary(u), read_with: { tool: "get_text", uid: u.id } }));
+  const titleHits = matchingTitles.slice(offset, offset + limit).map(({ u }) => ({ ...unitSummary(u), source: readingSource(u), read_with: { tool: "get_text", uid: u.id } }));
   const hits = [];
   const seen = /* @__PURE__ */ new Set();
   let total = 0;
@@ -24520,6 +24520,7 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
       const excerpt = searchExcerpt(passage.text, wanted[0].find((w) => text.includes(w)), fold3);
       hits.push({
         ...unitSummary(u),
+        source: readingSource(u),
         match_vri_paragraph: d.canon.books[bi].blocks[k][1] || void 0,
         excerpt,
         ...searchReading(segments(u, { includeSourcePositions: true }), { tool: "get_text", uid: u.id }, passage.start, passage.end, u.id)
@@ -24529,6 +24530,7 @@ function search(query, { collection, limit = 10, offset = 0, groups } = {}) {
   return {
     query,
     searched: "Full P\u0101li text of the VRI Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana edition (diacritics optional), text titles and English translation titles.",
+    source: source(),
     ...resolved ? { scope_resolution: resolved.metadata } : {},
     ...scopeAlignment ? { scope_alignment: scopeAlignment } : {},
     ...direct ? { scope_source_span: {
@@ -25013,6 +25015,9 @@ var import_node_zlib4 = require("node:zlib");
 var import_node_path5 = require("node:path");
 var import_node_url5 = require("node:url");
 
+// src/pali-unicode.mjs
+var foldNiggahita = (value) => value.replace(/ṁ/g, "\u1E43").replace(/Ṁ/g, "\u1E42");
+
 // src/input.mjs
 var fold4 = fold3;
 var VELTHUIS = [
@@ -25166,7 +25171,7 @@ var ALIASES2 = {
 };
 var ALIAS_LABEL = "Sanskrit or English loan form of the P\u0101li word";
 function normalizeWord(token) {
-  const w = String(token).normalize("NFC").replace(/ṁ/g, "\u1E43").replace(/Ṁ/g, "\u1E42");
+  const w = foldNiggahita(String(token).normalize("NFC"));
   if (!/[A-Za-z]/.test(w) || /\d/.test(w)) return { word: w, rule: null };
   const letters = (w.match(/[A-Za-zāīūṅñṭḍṇḷṃĀĪŪṄÑṬḌṆḶṂ]/g) || []).length;
   if (VELTHUIS_MARK.test(w) && letters >= 4 && !/[a-z]\.[TDNML][a-z]/.test(w)) return { word: fromVelthuis(w), rule: "velthuis" };
@@ -25230,7 +25235,7 @@ function normalizeInput(text) {
     from = end + 1;
   }
   out += normalizeTokens(nfc.slice(from));
-  out = out.replace(/ṁ/g, "\u1E43").replace(/Ṁ/g, "\u1E42");
+  out = foldNiggahita(out);
   const rules = [...new Set(changes.map((c) => c.rule))];
   const scheme = rules.includes("velthuis") ? "velthuis" : rules.includes("harvard-kyoto") ? "harvard-kyoto" : /[āīūṅñṭḍṇḷṃ]/i.test(out) ? "unicode" : "ascii";
   return { text: out, original, changed: changes.length > 0, scheme, changes };
@@ -33279,9 +33284,10 @@ function createServer({ executeTool } = {}) {
     include_post_canonical: external_exports.boolean().default(false).describe(SEARCH_OPTION_DESCRIPTION),
     english: external_exports.enum(["auto", "off", "only"]).default("auto").describe('English queries: "auto" expands a query that looks English into P\u0101li terms from the glossary (DPD English index) and also runs the search as typed; "only" searches the expansion only; "off" never expands. Expansions are labelled expanded_from_english. Unconvertible quoted source phrases require auto or off and bypass inference.')
   }, async ({ query, collection, limit, offset, script, include_post_canonical, english: english2 }) => {
+    const selection2 = { query, offset, limit, collection: collection ?? null, script: scriptName(script ?? "roman"), english: english2, include_post_canonical };
     const input = romanizeSearchInput(query);
     const searched = searchWithInput(input.text, { collection, limit, offset, english: english2 });
-    const result = localizeSearch({ ...searched, ...searchInputNote(input) }, script, input);
+    const result = { ...localizeSearch({ ...searched, ...searchInputNote(input) }, script, input), selection: selection2 };
     if (include_post_canonical && collection) {
       return { ...result, post_canonical: { canonical: false, searched: false, results: [], note: `Not searched: collection "${collection}" limits the search to that part of the canon. Search the post-canonical books without collection, or with search_post_canonical.` } };
     }

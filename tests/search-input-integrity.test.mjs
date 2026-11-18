@@ -31,6 +31,7 @@ test('all four MCP search tools reject incomplete conversion and preserve native
    for(const script of SCRIPTS) {
     const r=await c.callTool({name,arguments:{query:transliterate('sati','roman',script),limit:1,...options}});assert.ok(!r.isError,JSON.stringify(r.content));
     const {input_script,input_romanized,...result}=r.structuredContent;
+    if(name==='search_texts'){assert.deepEqual(result.selection,{query:transliterate('sati','roman',script),offset:0,limit:1,collection:'mn10',script:'roman',english:'off',include_post_canonical:false});delete result.selection;}
     if(script==='roman') baseline=result;else {assert.deepEqual(result,baseline);assert.equal(input_script,script);assert.equal(input_romanized,'sati');}
     assert.ok((result.total_matched??result.total_texts_matched)>0);
    }
