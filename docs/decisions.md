@@ -1443,3 +1443,10 @@ Distinguish result offsets from source positions. Strictly validate every return
 Existing complete later-work responses have chapter lists, but chapter selections lack parent authority. Add only a small chapter_index command/scope based on backend selection, preserving logical-work versus physical-file boundaries. Explicitly load the parent menu when needed after navigation/reload, verify source revision and every returned literal row, and open chapter pages with existing source pins. Do not infer parents from similar titles or expose appended works as Saṅgaha chapters.
 
 On phones, move only exact known background into existing Reading tools. Preserve complete originals and narrowly include them in source printing; keep status and critical/unknown warnings visible. The exact verified Vism opening gets a compact visible volume1/chapters1–11of23 summary, with full original context accessible. Retain every actual source heading and paragraph. Measure the first printed source line separately from later body prose; never weaken the viewport assertion by skipping source. No new tool, source, licence or personal schema. [Evidence](evidence/web-reader/CHAPTER_READING_CONTEXT.md).
+
+
+## D230 — Bounded commentary search context
+
+Expose the existing commentary search context command as an explicit inline preview, preserving its original book, offset and limit3. Keep the single-paragraph exact link and add a separate source-pinned full-book continuation at the actual match. Search results, direct source-book positions and aligned canonical commentary remain distinct; never merge their bookmark or note identities automatically.
+
+Validate source/revision/terms, query interpretation, literal commands, native metadata and consecutive source refs before displaying wording. Preserve not-canon, numbering and unaligned-book qualifications. Refuse stale/malformed context inline; explicit fresh search is the review path. Use existing request cancellation, generation/epoch and owned-focus guards without private writes or a new route/storage schema. No tool or source coverage expansion. [Evidence](evidence/web-reader/COMMENTARY_SEARCH_CONTEXT.md).
