@@ -574,7 +574,7 @@ export function search(query, { collection, limit = 10, offset = 0, groups } = {
   const has = (text) => wanted.every((alts) => alts.some((w) => text.includes(w)));
   const titlePool = direct ? [searchTitle(d, direct)] : s.titles;
   const matchingTitles = titlePool.filter(({ u, text }) => okCollection(u) && has(text));
-  const titleHits = matchingTitles.slice(offset, offset + limit).map(({ u }) => ({ ...unitSummary(u), read_with: { tool: 'get_text', uid: u.id } }));
+  const titleHits = matchingTitles.slice(offset, offset + limit).map(({ u }) => ({ ...unitSummary(u), source: readingSource(u), read_with: { tool: 'get_text', uid: u.id } }));
   const hits = [];
   const seen = new Set();
   let total = 0;
@@ -590,12 +590,12 @@ export function search(query, { collection, limit = 10, offset = 0, groups } = {
       total += 1;
       if (total <= offset || hits.length >= limit) continue;
       const excerpt = searchExcerpt(passage.text, wanted[0].find((w) => text.includes(w)), fold);
-      hits.push({ ...unitSummary(u), match_vri_paragraph: d.canon.books[bi].blocks[k][1] || undefined,
+      hits.push({ ...unitSummary(u), source: readingSource(u), match_vri_paragraph: d.canon.books[bi].blocks[k][1] || undefined,
         excerpt, ...searchReading(segments(u, { includeSourcePositions: true }), { tool: 'get_text', uid: u.id }, passage.start, passage.end, u.id) });
     }
   }
   return {
-    query, searched: 'Full Pāli text of the VRI Chaṭṭha Saṅgāyana edition (diacritics optional), text titles and English translation titles.',
+    query, searched: 'Full Pāli text of the VRI Chaṭṭha Saṅgāyana edition (diacritics optional), text titles and English translation titles.', source: source(),
     ...(resolved ? { scope_resolution: resolved.metadata } : {}),
     ...(scopeAlignment ? { scope_alignment: scopeAlignment } : {}),
     ...(direct ? { scope_source_span: { text_id: direct.id, approximate: !!direct.approximate,

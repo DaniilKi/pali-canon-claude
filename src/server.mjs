@@ -5,7 +5,7 @@ import * as canon from './canon.mjs';
 import * as english from './english.mjs';
 import * as providers from './providers.mjs';
 import * as features from './features/index.mjs';
-import { SCRIPT_CHOICES, SCRIPT_DESCRIPTION, romanizeInput, romanizeLookupInput, inputNote, localizeText, localizeSearch, localizeDescribe, localizeCommentary, localizePostCanonical } from './script.mjs';
+import { SCRIPT_CHOICES, SCRIPT_DESCRIPTION, scriptName, romanizeInput, romanizeLookupInput, inputNote, localizeText, localizeSearch, localizeDescribe, localizeCommentary, localizePostCanonical } from './script.mjs';
 import * as variantsMod from './variants.mjs';
 import * as commentaryModule from './commentary.mjs';
 import * as postcanonical from './postcanonical.mjs';
@@ -221,9 +221,10 @@ export function createServer({executeTool} = {}) {
     include_post_canonical: z.boolean().default(false).describe(postcanonical.SEARCH_OPTION_DESCRIPTION),
     english: z.enum(['auto', 'off', 'only']).default('auto').describe('English queries: "auto" expands a query that looks English into Pāli terms from the glossary (DPD English index) and also runs the search as typed; "only" searches the expansion only; "off" never expands. Expansions are labelled expanded_from_english. Unconvertible quoted source phrases require auto or off and bypass inference.'),
   }, async ({ query, collection, limit, offset, script, include_post_canonical, english }) => {
+    const selection = { query, offset, limit, collection: collection ?? null, script: scriptName(script ?? 'roman'), english, include_post_canonical };
     const input = romanizeSearchInput(query);
     const searched = searchWithInput(input.text, { collection, limit, offset, english });
-    const result = localizeSearch({ ...searched, ...searchInputNote(input) }, script, input);
+    const result = { ...localizeSearch({ ...searched, ...searchInputNote(input) }, script, input), selection };
     if (include_post_canonical && collection) {
       return { ...result, post_canonical: { canonical: false, searched: false, results: [], note: `Not searched: collection "${collection}" limits the search to that part of the canon. Search the post-canonical books without collection, or with search_post_canonical.` } };
     }

@@ -18,6 +18,7 @@ import { passageNoteKey, passageNoteState, passageNoteRemovalNeedsConfirmation, 
 import { readingPagePosition, assertPageRequest, assertPagePin, readingPageBounds, readingJumpOffset } from './reading-navigation.mjs';
 import { savedPassageHighlighted } from './saved-highlights.mjs';
 import { validateChapterIndex, validateChapterMenu, chapterLink, readingIntro } from './reading-chapters.mjs';
+import { canonicalSearchSelection, canonicalSearchRoute, validateCanonicalSearch, canonicalSearchLink } from './canonical-search.mjs';
 import { bookSearchSelection, bookSearchRoute, bookSearchCatalogue, validateBookSearchPage, bookSearchHitLinks } from './book-search.mjs';
 import { citationSelection, validateCitationResolution } from './citation-resolution.mjs';
 import { reviewBackupNoteConflicts } from './backup-note-conflicts.mjs';
@@ -273,7 +274,38 @@ async function bookSearch(args, token) {
   }
   view.append(results); pageControls(data.next_offset, selection.offset > 0 ? Math.max(0, selection.offset - 15) : null, offset => bookSearchRoute(pinned, offset)); provenance(data);
 }
-async function search(args, token) {
+async function searchCanon(args, token, rawQuery) {
+  const selected = canonicalSearchSelection(args, $('script').value, rawQuery);
+  $('search-scope').value = 'canon';
+  const response = await tool('search_texts', { query: selected.query, offset: selected.offset, limit: selected.limit, script: selected.script }); if (token !== epoch) return;
+  const data = validateCanonicalSearch(response, selected);
+  heading('SEARCH THE CANON', 'Results for “' + selected.query + '”', 'Search results'); notes(data);
+  for (const key of ['query_note', 'spelling_note', 'script_note']) if (data[key]) view.append(el('p', data[key], 'notice'));
+  if (data.expanded_from_english) view.append(el('p', 'English keywords expanded into Pāli: ' + JSON.stringify(data.expanded_from_english), 'notice'));
+  if (data.english_words_ignored) view.append(el('p', data.english_words_ignored.note, 'notice'));
+  for (const [key, title, body] of [['title_matches', 'Matching titles', false], ['results', 'Matching Pāli passages', true]]) {
+    if (!data[key].length) continue;
+    const section = el('section'); section.setAttribute('aria-label', title); section.append(el('h3', title));
+    const cards = el('div', undefined, 'cards');
+    for (const item of data[key]) {
+      const card = link('', canonicalSearchLink(item, body), 'entry'); card.append(el('small', item.citation), el('strong', item.title));
+      if (body) { const excerpt = el('p', item.excerpt, 'search-excerpt'); excerpt.lang = 'pi'; card.append(excerpt); }
+      if (item.alignment) card.append(el('p', item.alignment.note, 'notice'));
+      if (item.approximate) card.append(el('p', 'This location is approximate. Retain its numbering and alignment cautions when reading or citing it.', 'notice'));
+      cards.append(card);
+    }
+    section.append(cards); view.append(section);
+  }
+  if (!data.title_matches.length && !data.results.length) view.append(el('p', 'No matches on this page. Try a citation, a shorter phrase, or Pāli keywords.'));
+  const next = [data.next_offset, data.title_next_offset].filter(value => value !== null);
+  pageControls(next.length ? Math.min(...next) : null, selected.offset ? Math.max(0, selected.offset - selected.limit) : null, offset => canonicalSearchRoute(selected, offset));
+  provenance(data);
+}
+async function search(args, token, rawQuery) {
+  const requestedScope = args.get('scope') ?? 'canon';
+  if (requestedScope === 'canon') return searchCanon(args, token, rawQuery);
+  if (!['commentary', 'post'].includes(requestedScope)) throw Error('Choose a supported search scope.');
+  for (const key of args.keys()) if (!['q', 'scope', 'offset'].includes(key) || args.getAll(key).length !== 1) throw Error('This search URL has unsupported or duplicate fields.');
   const query = (args.get('q') || '').trim(); if (!query) throw new Error('Enter words or a title to search.');
   const scope = ['commentary', 'post'].includes(args.get('scope')) ? args.get('scope') : 'canon'; $('search-scope').value = scope;
   const offset = offsetOf(args), data = await tool(scope === 'commentary' ? 'search_commentary' : scope === 'post' ? 'search_post_canonical' : 'search_texts', { query, offset, limit: 15, script: $('script').value }); if (token !== epoch) return;
@@ -1067,7 +1099,7 @@ async function render() {
   if (location.hash === '#content' && view.childElementCount) { $('content').focus(); return; }
   activePosition = null; highlightTargets = []; clearTimeout(positionTimer); const token = ++epoch; ++studyEpoch; requests.cancelAll(); closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
   const hash = location.hash.slice(1), queryIndex = hash.indexOf('?'), page = queryIndex < 0 ? hash : hash.slice(0, queryIndex), args = new URLSearchParams(queryIndex < 0 ? '' : hash.slice(queryIndex + 1));
-  try { if (page === 'resolve') await resolveCitation(args, token, queryIndex < 0 ? '' : hash.slice(queryIndex + 1)); else if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token); else if (page === 'book-search') await bookSearch(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'backup') studyBackup(token); else if (page === 'about') about(); else await browse(args, token);
+  try { if (page === 'resolve') await resolveCitation(args, token, queryIndex < 0 ? '' : hash.slice(queryIndex + 1)); else if (page === 'read') await read(args, token); else if (page === 'search') await search(args, token, queryIndex < 0 ? '' : hash.slice(queryIndex + 1)); else if (page === 'book-search') await bookSearch(args, token); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'backup') studyBackup(token); else if (page === 'about') about(); else await browse(args, token);
     if (token !== epoch) return; status.textContent = storageConflict || !storageOK ? storageWarning() : !positionDurable ? positionWarning || storageWarning() : ''; focusHeading();
   } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', render), link('Browse the library', route('browse', { node: 'canon' }), 'button')); if (error.code === 'READING_SOURCE_CHANGED') { const review = new URLSearchParams(args); review.delete('source'); review.delete('page_source'); view.append(link(page === 'book-search' ? 'Review current source book search' : args.has('page_source') ? 'Review current source at this position' : 'Review current source at this reference', (page === 'book-search' ? '#book-search?' : '#read?') + review, 'button')); } status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
 }

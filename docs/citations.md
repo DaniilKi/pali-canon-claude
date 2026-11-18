@@ -225,3 +225,10 @@ A citation written in a form the scanner does not recognise is not checked, so c
 `find_citations` recognises every canonical ID returned by the readers, including `cp1`, `ja526`, `ps3.2`, `ne3`, `pe1`, `dt1.1`, `pp1.1` and `ya1.1.1`. Copy the complete ID, including its numeric parts. Ordinary prose such as “Ps 23” or “pp3 file” stays outside this conservative scanner. Native numerals work with these Roman ID prefixes; native-script book names still require `resolve_reference`.
 
 For a long citation report, pass the returned `next_cursor` as `cursor` and reuse the **identical original text**. You may change `limit` (1–500). Repeat until `next_cursor` is `null`; every citation offset still points into the original text. `found` counts all matches, while resolution counts describe the current page. A page can be shorter than `limit` because of its byte budget. A candidate marked `not_checked` has no resolution verdict; inspect its offsets in your original text. Changed text or source/index data requires restarting without a cursor.
+
+
+## Search-result source revisions
+
+Canonical `search_texts` returns original edition provenance on the response and each title/body hit’s actual `source` metadata. A repaired citation mapping can have `source.locator_revision` different from the plain edition `source.commit`. Follow the emitted `read_with` command, then compare its hit revision (`locator_revision ?? commit`) with the returned `get_text` revision before treating the wording as that prior match. The command schema is unchanged; it does not enforce an atomic historical read. Retain alignment and approximation cautions.
+
+The browser performs this check before showing wording: body matches use exact revision/reference/offset links; title matches use revision-pinned source-page links without inventing a matched paragraph. Result pagination is not an immutable global-index snapshot. See [implementation and limits](evidence/web-reader/CANONICAL_SEARCH_PINS.md).
