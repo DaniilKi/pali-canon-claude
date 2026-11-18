@@ -78,9 +78,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary]
+        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch]
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts') && 20 || 10 }}
+    timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch') && 20 || 10 }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -331,6 +331,19 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/commentary-package"
           tar -xzf "$RUNNER_TEMP/commentary-package/"*.tgz -C "$RUNNER_TEMP/commentary-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-commentary-context-check.py --server-dir "$RUNNER_TEMP/commentary-package/package/server" --report installed-commentary.report.json
+      - name: Check source-pinned later-work matches and bounded context
+        if: matrix.group == 'postsearch'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-post-search-check.py --report standalone-postsearch.report.json
+      - name: Audit later-work source context in both themes
+        if: matrix.group == 'postsearch'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-post-search-check.py --a11y --report standalone-postsearch-a11y.report.json
+      - name: Check later-work context from the isolated npm package
+        if: matrix.group == 'postsearch'
+        run: |
+          mkdir -p "$RUNNER_TEMP/postsearch-package"
+          npm pack --pack-destination "$RUNNER_TEMP/postsearch-package"
+          tar -xzf "$RUNNER_TEMP/postsearch-package/"*.tgz -C "$RUNNER_TEMP/postsearch-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-post-search-check.py --server-dir "$RUNNER_TEMP/postsearch-package/package/server" --report installed-postsearch.report.json
       - name: Check editorial topic and teaching-list source navigation
         if: matrix.group == 'study'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-topics-check.py --report standalone-topics.report.json
@@ -420,6 +433,9 @@ jobs:
             standalone-commentary.report.json
             standalone-commentary-a11y.report.json
             installed-commentary.report.json
+            standalone-postsearch.report.json
+            standalone-postsearch-a11y.report.json
+            installed-postsearch.report.json
             standalone-comparison.report.json
             standalone-comparison-a11y.report.json
             installed-comparison.report.json
