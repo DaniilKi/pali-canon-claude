@@ -17,6 +17,7 @@ import { z } from 'zod';
 import { createHash } from 'node:crypto';
 import * as canon from './canon.mjs';
 import * as english from './english.mjs';
+import { APADANA_BASE, APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_PROFILES, APADANA_TRANSLATOR } from './apadana-profiles.mjs';
 import { romanizeInput, inputNote, localizeText, scriptName, SCRIPT_DESCRIPTION } from './script.mjs';
 import * as postcanonical from './postcanonical.mjs';
 import { readBook } from './source-books.mjs';
@@ -32,16 +33,22 @@ export const SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge
 export const MCP_APP_MIME = 'text/html;profile=mcp-app';
 export const SKYBRIDGE_MIME = 'text/html+skybridge';
 
+const APADANA_PINS = ['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256'];
+const WIDGET_APADANA = Object.fromEntries(Object.entries(APADANA_PROFILES).map(([id, p]) => [id, {
+  translation_id: canon.translationId(p), url: p.url, fetched_url: p.raw_url, note_count: p.note_count,
+  ...Object.fromEntries(APADANA_PINS.map(key => [key, p[key]])),
+}]));
+
 const WIDGET_DESCRIPTION = 'Shows canonical Pāli, distinctly labelled commentary or post-canonical Pāli, or complete VRI root source files, with English where linked, with the citation, PTS page, translator, attribution and licence. Everything shown was retrieved by the tool; nothing is generated.';
 
 // The widget loads nothing from the network: no scripts, styles, fonts or API calls. Links open through the host
 // (window.openai.openExternal / ui/open-link). redirect_domains marks the only link targets the widget makes as
 // trusted openExternal destinations: the English sources already on the src/http.mjs allowlist, and
-// suttacentral.net (link only, never fetched). `_meta.ui.csp` has no equivalent field, so it is set only here.
+// dedicated publisher/terms links (Apadāna and Creative Commons) plus SuttaCentral (all link-only). `_meta.ui.csp` has no equivalent field, so it is set only here.
 export const REDIRECT_DOMAINS = [
   'https://www.dhammatalks.org', 'https://dhammatalks.org',
   'https://www.accesstoinsight.org', 'https://accesstoinsight.org',
-  'https://ancient-buddhist-texts.net',
+  'https://ancient-buddhist-texts.net', 'https://apadanatranslation.com', 'https://creativecommons.org',
   'https://suttacentral.net',
 ];
 export const RESOURCE_META = {
@@ -60,7 +67,7 @@ export const TOOL_META = {
 };
 
 /** Data for the widget: Pāli segments (VRI) plus one English translation, each with its attribution. */
-export async function readPassage({ uid, book, commentary, segment, context = 0, source_commit: sourceCommit, anchor_sha256: anchorHash, translation, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, english_prefix_sha256: englishPrefix, englishCharacters = 6000, script }) {
+export async function readPassage({ uid, book, commentary, segment, context = 0, source_commit: sourceCommit, anchor_sha256: anchorHash, translation, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, english_prefix_sha256: englishPrefix, english_translation_revision: englishRevision, englishCharacters = 6000, script }) {
   if ([uid, book, commentary].filter(value => value !== undefined).length !== 1) throw new Error('Give exactly one of uid (canonical/post-canonical), book (complete root file), or commentary (aligned citation or direct commentary reference).');
   if (sourceCommit !== undefined && sourceCommit !== canon.source().commit) throw new Error('The requested VRI source version is no longer bundled. Reopen the selection from the current source; no continuation or context was substituted.');
   if (!Number.isInteger(context) || context < 0 || context > 20) throw new Error('Context must be an integer from 0 to 20 neighbouring segments on each side.');
@@ -71,6 +78,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
   const commentaryAnchor = commentary !== undefined ? romanizeInput(commentary).text.match(/^(.+)\/c([1-9]\d*)$/) : null;
   if (segment === undefined && !commentaryAnchor && (context !== 0 || anchorHash !== undefined)) throw new Error('Context and anchor_sha256 require an exact segment selection.');
   if (commentaryAnchor && (context !== 0 || anchorHash !== undefined) && (offset !== 0 || englishOffset !== 0)) throw new Error('Commentary context cannot be combined with continuation offsets.');
+  if (englishRevision !== undefined && (!wantEnglish || typeof englishRevision !== 'string' || !/^[a-f0-9]{40}$/.test(englishRevision))) throw new Error('Use the exact English source revision returned by the selected Apadāna source.');
   if (englishPrefix !== undefined && (!wantEnglish || englishOffset <= 0 || typeof englishPrefix !== 'string' || !/^[a-f0-9]{64}$/.test(englishPrefix))) throw new Error('english_prefix_sha256 requires English continuation and its unchanged prefix hash.');
   if (translation !== undefined) {
     if (typeof translation !== 'string' || !translation.trim()) throw new Error('Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.');
@@ -207,22 +215,23 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
   };
   if (wantEnglish && result.english_available.length) {
     try {
-      if (englishOffset > 0 && !/^(dt|ati|aj):/.test(translation || '')) {
+      if (englishOffset > 0 && !/^(dt|ati|aj|ap):/.test(translation || '')) {
         throw new Error('To continue English, use the exact translation_id from the previous result (english.continue_with gives the full arguments). Character offsets cannot be transferred between versions; start at english_offset 0 to choose a new translation.');
       }
-      const t = await english.translation(unit, translation && translation !== 'default' ? translation : undefined, { offset: englishOffset, limit: englishCharacters, prefix_sha256: englishPrefix });
+      const t = await english.translation(unit, translation && translation !== 'default' ? translation : undefined, { offset: englishOffset, limit: englishCharacters, prefix_sha256: englishPrefix, translation_revision: englishRevision });
       if (englishOffset > 0 && t.translation_id !== translation) {
         throw new Error('Cannot continue at this character offset: the requested translation is unavailable and the fallback is a different version. Retry the original translation later, or restart the fallback with english_offset 0.');
       }
       result.english = {
         translator: t.translator, translation_id: t.translation_id, source: t.source, url: t.url,
         reference: (canon.describe(unit).english.find((e) => e.translation_id === t.translation_id) || {}).reference,
+        ...(t.translation_revision ? { translation_revision: t.translation_revision, translator_notes: t.translator_notes, publisher_paratext: t.publisher_paratext, license_url: t.license_url, changes: t.changes, fetched_url: t.fetched_url, ...Object.fromEntries(APADANA_PINS.map(key => [key, t[key]])) } : {}),
         fetched_from: t.fetched_from, attribution: t.attribution, license: t.license,
         text: t.text, prefix_sha256: t.prefix_sha256, offset: t.offset, total_characters: t.total_characters, next_offset: t.next_offset, truncated: t.next_offset !== null, notes: t.notes,
-        read_with: { name: WIDGET_TOOL, arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.offset, ...(t.offset > 0 ? { english_prefix_sha256: t.prefix_sha256 } : {}), ...(script ? { script: scriptName(script) } : {}) } },
+        read_with: { name: WIDGET_TOOL, arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.offset, ...(t.translation_revision ? { english_translation_revision: t.translation_revision } : {}), ...(t.offset > 0 ? { english_prefix_sha256: t.prefix_sha256 } : {}), ...(script ? { script: scriptName(script) } : {}) } },
         continue_with: t.next_offset !== null ? {
           name: WIDGET_TOOL,
-          arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset, english_prefix_sha256: t.continue_with.arguments.prefix_sha256, ...(script ? { script: scriptName(script) } : {}) },
+          arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset, english_prefix_sha256: t.continue_with.arguments.prefix_sha256, ...(t.translation_revision ? { english_translation_revision: t.translation_revision } : {}), ...(script ? { script: scriptName(script) } : {}) },
         } : null,
       };
     } catch (error) {
@@ -266,6 +275,7 @@ export function registerChatgptWidget(server, { executeTool } = {}) {
       english: z.boolean().default(true).describe('Fetch an English translation (live). false shows the Pāli only.'),
       offset: z.number().int().min(0).max(100000).default(0).describe('Pāli segment offset for continuation.'),
       limit: z.number().int().min(1).max(80).default(40).describe('Pāli segments to show.'),
+      english_translation_revision: z.string().regex(/^[a-f0-9]{40}$/).optional().describe('Exact source revision for a pinned Apadāna selection or continuation.'),
       english_prefix_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Unchanged prefix hash from english.continue_with. Rejects continuation when preceding upstream text changed. Requires English and a positive english_offset.'),
       english_offset: z.number().int().min(0).max(10000000).default(0).describe('English character offset for continuation. Use english.continue_with.arguments from the previous result: non-zero offsets require its exact translation_id, so a source recovery/outage cannot transfer offsets to another version. Shows up to 6,000 characters per call.'),
     },
@@ -403,7 +413,7 @@ export const WIDGET_HTML = `<!doctype html>
       source: { name: source.name, repository: source.repository, commit: source.commit, files: source.files, attribution: source.attribution, terms: source.terms },
       pali: { offset: p.offset, returned: p.returned, total_segments: p.total_segments, refs: (p.segments || []).map(function (s) { return s.ref; }), read_with: p.read_with },
       english: e ? { state: 'displayed', translation_id: e.translation_id, translator: e.translator, source: e.source, url: e.url,
-        fetched_from: e.fetched_from, prefix_sha256: e.prefix_sha256, offset: e.offset, next_offset: e.next_offset, total_characters: e.total_characters,
+        translation_revision: e.translation_revision, fetched_from: e.fetched_from, prefix_sha256: e.prefix_sha256, offset: e.offset, next_offset: e.next_offset, total_characters: e.total_characters,
         attribution: e.attribution, license: e.license, notes: e.notes || [], read_with: e.read_with }
         : { state: 'not_displayed', note: d.english_error || 'No English translation requested.', linked_versions: (d.english_available || []).map(function (version) { return version.translation_id; }) },
       quotation: 'Reading metadata only; no passage text is included. Retrieve read_with and verify its source, references and cautions before quoting. No scholarly or native-reader approval is implied.' };
@@ -513,6 +523,7 @@ export const WIDGET_HTML = `<!doctype html>
           (args.uid && data.text_id !== args.uid && data.citation !== args.uid) ||
           (args.commentary && (data.content_type !== 'commentary' || (data.context_for !== args.commentary && data.citation !== args.commentary && !(data.requested_on && data.requested_on.id === args.commentary)))) ||
           (args.context > 0 && data.context_for !== (args.segment || args.commentary)) ||
+          (args.english_translation_revision && data.english && args.english_translation_revision !== data.english.translation_revision) ||
           (args.english_offset > 0 && data.english && (data.english.translation_id !== args.translation || (args.english_prefix_sha256 && data.english.prefix_sha256 !== args.english_prefix_sha256)))) {
         error = new Error('The host returned a different source, selection, script or translation version. Ask to reopen the selection.');
       }
@@ -579,6 +590,20 @@ export const WIDGET_HTML = `<!doctype html>
   }
   function setTheme(theme) { if (theme === 'dark' || theme === 'light') document.documentElement.setAttribute('data-theme', theme); }
   function characterPosition(at, total) { return 'character ' + at + (typeof total === 'number' && Number.isFinite(total) ? ' of ' + total : ''); }
+  function checkedApadana(d) {
+    var e = d.english, checked = e && (e.source === 'apadana' || typeof e.translation_revision !== 'undefined' || typeof e.translation_id === 'string' && e.translation_id.toLowerCase().indexOf('ap:') === 0 || typeof e.url === 'string' && e.url.indexOf('${APADANA_BASE}/') === 0);
+    if (!checked) return d;
+    var profiles = ${JSON.stringify(WIDGET_APADANA)}, p = Object.prototype.hasOwnProperty.call(profiles, d.text_id) && profiles[d.text_id];
+    if (p && e.source === 'apadana' && e.translation_id === p.translation_id && e.url === p.url && e.fetched_url === p.fetched_url &&
+        e.translation_revision === '${APADANA_COMMIT}' && e.license === '${APADANA_LICENSE}' && e.license_url === '${APADANA_LICENSE_URL}' &&
+        e.translator === '${APADANA_TRANSLATOR}' && typeof e.attribution === 'string' && e.attribution.trim() &&
+        typeof e.text === 'string' && e.text.trim() && typeof e.changes === 'string' && e.changes.trim() &&
+        typeof e.publisher_paratext === 'string' && e.publisher_paratext.length <= 50000 && Boolean(e.publisher_paratext.trim()) === (d.text_id === 'thi-ap1') &&
+        Array.isArray(e.translator_notes) && e.translator_notes.length === p.note_count &&
+        e.translator_notes.every(function (note, i) { return note && note.number === i + 1 && typeof note.text === 'string' && note.text.length <= 50000 && note.text.trim(); }) &&
+        ${JSON.stringify(APADANA_PINS)}.every(function (key) { return e[key] === p[key]; })) return d;
+    return Object.assign({}, d, { english: null, english_error: 'Apadāna publisher identity, terms or source pins changed. No English was displayed.' });
+  }
   function render(d) {
     if (closed) return;
     if (!d || typeof d !== 'object' || d === rendered) return;
@@ -596,6 +621,7 @@ export const WIDGET_HTML = `<!doctype html>
       wantModelContext(readingContext(d));
       return;
     }
+    d = checkedApadana(d);
     rendered = d;
     document.getElementById('title').textContent = (d.citation || '') + (d.title ? ' · ' + d.title : '');
     var meta = document.getElementById('meta'); clear(meta);
@@ -633,10 +659,24 @@ export const WIDGET_HTML = `<!doctype html>
       (d.english.notes || []).forEach(function (n) { en.appendChild(el('p', 'note', n)); });
       var head = el('p', 'note');
       head.appendChild(document.createTextNode((d.english.translator || 'Translator not stated') + (d.english.reference ? ' (' + d.english.reference + ')' : '') + ' · '));
-      head.appendChild(link(d.english.url, d.english.source || d.english.url));
+      head.appendChild(link(d.english.url, d.english.source === 'apadana' ? 'Legends of the Buddhist Saints (Apadāna)' : d.english.source || d.english.url));
       en.appendChild(head);
       en.appendChild(el('div', 'en', d.english.text || ''));
       if (d.english.offset) en.insertBefore(el('p', 'note', 'Continuing from ' + characterPosition(d.english.offset, d.english.total_characters) + '.'), en.lastChild);
+      if (d.english.translation_revision) {
+        en.appendChild(el('p', 'note', 'Publisher revision: ' + d.english.translation_revision));
+        if (d.english.changes) en.appendChild(el('p', 'note', d.english.changes));
+        if (d.english.publisher_paratext) {
+          en.appendChild(el('h3', '', 'Publisher preface · editorial, not poem text'));
+          en.appendChild(el('p', 'en', d.english.publisher_paratext));
+        }
+        if (d.english.translator_notes && d.english.translator_notes.length) {
+          en.appendChild(el('h3', '', 'Translator’s notes · editorial, not poem text'));
+          var noteList = el('ol', '');
+          d.english.translator_notes.forEach(function (n) { var li = el('li', '', n.text); li.value = n.number; noteList.appendChild(li); });
+          en.appendChild(noteList);
+        }
+      }
       if (d.english.truncated) en.appendChild(el('p', 'note', 'The translation continues (' + characterPosition(d.english.next_offset, d.english.total_characters) + '). Ask for more to continue, or read the rest on the source page.'));
     } else {
       en.appendChild(el('p', 'empty', d.english_error || 'No English translation requested.'));
@@ -645,6 +685,7 @@ export const WIDGET_HTML = `<!doctype html>
     var f = document.getElementById('footer'); clear(f);
     f.appendChild(el('p', '', 'Pāli: ' + (d.pali.edition || '') + '. ' + (d.pali.attribution || '') + ' ' + (d.pali.license || '')));
     if (d.english) f.appendChild(el('p', '', 'English: ' + (d.english.attribution || '') + ' ' + (d.english.license || '')));
+    if (d.english && d.english.license_url) { var license = el('p', ''); license.appendChild(link(d.english.license_url, 'English licence terms')); f.appendChild(license); }
     if (d.links && d.links.suttacentral) { var sc = el('p', ''); sc.appendChild(document.createTextNode('Parallels and other translations: ')); sc.appendChild(link(d.links.suttacentral, 'SuttaCentral')); f.appendChild(sc); }
     document.getElementById('status').textContent = (d.citation || 'Passage') + '. ' + (d.canonical === false ? (d.content_type === 'commentary' ? 'Commentary, not the canon. ' : 'Post-canonical, not the canon. ') : d.selection === 'source_book' ? 'Complete source file, no individual text identity. ' : '') +
       (d.available === false ? d.availability_note + ' ' : d.pali.returned ? 'Showing Pāli segments ' + (d.pali.offset + 1) + ' to ' + (d.pali.offset + d.pali.returned) + ' of ' + d.pali.total_segments + '. ' : 'No Pāli segments on this page. ') +

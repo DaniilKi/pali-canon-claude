@@ -168,19 +168,20 @@ export function createServer({executeTool} = {}) {
     return out;
   }, { network: true });
 
-  tool('get_translation', 'Read an English translation of a text (Ṭhānissaro Bhikkhu on dhammatalks.org, Access to Insight translators, or Ānandajoti Bhikkhu on Ancient Buddhist Texts), with attribution, license and numbering notes. Falls back to official mirrors if a site is down.', {
+  tool('get_translation', 'Read an English translation of a text (Ṭhānissaro Bhikkhu on dhammatalks.org, Access to Insight translators, Ānandajoti Bhikkhu on Ancient Buddhist Texts, or Jonathan S. Walters and Whitman College for selected Therī Apadānas), with attribution, license and numbering notes. Fallback is source-specific; the Apadāna has no substitute.', {
     uid: citation,
     translation: z.string().trim().min(1).max(200).optional().describe('At offset 0: translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), an unambiguous translator name, or omit for the default. For continuation, use the exact translation_id returned by the previous page.'),
     offset: z.number().int().min(0).max(2000000).default(0).describe('Character offset. For nonzero offsets use the previous result\'s continue_with arguments, including its exact translation_id; offsets cannot transfer between translation versions.'),
     limit: z.number().int().min(500).max(30000).default(12000).describe('Characters per page.'),
     prefix_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Unchanged prefix hash from continue_with. Checks the previously traversed text before applying a character offset; edits require restarting at offset 0.'),
+    translation_revision: z.string().regex(/^[a-f0-9]{40}$/).optional().describe('Exact publisher revision from an Apadāna continuation or the selected source metadata.'),
     allow_partial: z.boolean().default(false).describe('Explicitly accept the declared partial-unit scope. Partial links require an exact translation_id; defaults never select them.'),
     allow_shared: z.boolean().default(false).describe('Explicitly accept one multi-discourse publisher page (compilation or condensed); exact translation_id required. It does not establish separate verified full translations or member alignment.'),
     scope_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Unchanged scoped-source mapping hash from continue_with; required for partial/shared-page continuation.'),
-  }, async ({ uid, translation, offset, limit, prefix_sha256, allow_partial, allow_shared, scope_sha256 }) => {
+  }, async ({ uid, translation, offset, limit, prefix_sha256, allow_partial, allow_shared, scope_sha256, translation_revision }) => {
     const input = romanizeInput(uid);
     const { unit, notes } = canon.resolve(input.text);
-    const result = await english.translation(unit, translation, { offset, limit, prefix_sha256, allow_partial, allow_shared, scope_sha256 });
+    const result = await english.translation(unit, translation, { offset, limit, prefix_sha256, allow_partial, allow_shared, scope_sha256, translation_revision });
     return { ...result, notes: [...notes, ...result.notes], ...inputNote(input) };
   }, { network: true });
 

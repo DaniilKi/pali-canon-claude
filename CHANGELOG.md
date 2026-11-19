@@ -4,6 +4,8 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Add seven first whole-unit English links for Therī Apadāna poems from Jonathan S. Walters and Whitman College. Fetch reviewed Markdown only from its pinned official revision, keep notes and editorial material separate, honour CC BY-NC-SA 4.0 and bundle metadata only. Whole links become 2,590; daily eligibility is unchanged (D241).
+
 - Add ten reviewed individual whole-substantive AN choices from four existing shared pages, preserving all previous choices/consent and source pins. Internal selection IDs remain distinct from real publisher URLs; retain exact note ownership, numbering, omissions and AN 2.33's edition-variant warning. Whole links become 2,583; these are ten first whole mappings and zero first English-access gains (D240).
 - Add expanded text-spacing regressions for reading, private drafts, Save/Discard, source navigation and consent at 320/390/1280 in both themes. Local and extracted-package checks pass;24 axe scans report zero violations. These are emulated checks, not physical-device or human assistive acceptance.
 

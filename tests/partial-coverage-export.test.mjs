@@ -25,7 +25,7 @@ function parseCsv(text) {
   return rows;
 }
 const record = index => index.texts.find(t => t.id === 'patthana1.1');
-const numeric = ['direct', 'english', 'dhammatalks', 'ati', 'anandajoti'];
+const numeric = ['direct', 'english', 'dhammatalks', 'ati', 'anandajoti', 'apadana'];
 
 test('documentation coverage counts partial-only and mixed sources separately from whole-unit links', () => {
   const before = buildCoverage(); const partial = syntheticLink(); install([partial]);

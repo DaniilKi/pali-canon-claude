@@ -68,7 +68,7 @@ test('shared retained-source registry preserves the five historical reviews and 
   assert.deepEqual(retained.rows.slice(5), keep);
   const d = canon.load();
   const current = scopeScreen(d, { review: retained });
-  assert.deepEqual([current.count, current.reviewed_retained_snapshots, current.unreviewed_leads], [220, 6, 214]);
+  assert.deepEqual([current.count, current.reviewed_retained_snapshots, current.unreviewed_leads], [227, 6, 221]);
   const selected = current.rows.find(r => r.owner === 'thig3.5' && r.translation_id === 'ati:/tipitaka/kn/thig/thig.03.05.than');
   assert.equal(selected.review_status, 'reviewed-retained-at-snapshot');
   for (const field of ['title', 'vri']) {
@@ -81,14 +81,14 @@ test('shared retained-source registry preserves the five historical reviews and 
   assert.equal(cli.status, 0, cli.stderr);
   const renderedReview = JSON.parse(readFileSync('scripts/canon/retained_rendered_pages.json', 'utf8'));
   const cliCurrent = scopeScreen(d, {review: retained, renderedReview});
-  assert.deepEqual([cliCurrent.count, cliCurrent.reviewed_retained_snapshots, cliCurrent.unreviewed_leads], [220, 7, 213]);
+  assert.deepEqual([cliCurrent.count, cliCurrent.reviewed_retained_snapshots, cliCurrent.unreviewed_leads], [227, 7, 220]);
   assert.deepEqual(JSON.parse(cli.stdout), cliCurrent);
   assert.match(readFileSync('scripts/canon/ordinary_excerpt_packet.py', 'utf8'), /Path\(__file__\)\.with_name\('retained_ordinary_pages\.json'\)/);
 });
 
 test('current coverage counts whole and scoped availability separately after D214 source review', () => {
   const t = translationCoverage({ refresh: true }).total;
-  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2583, 1453, 1876, 22, 16]);
+  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2590, 1460, 1883, 22, 16]);
   assert.deepEqual([t.shared_links, t.with_shared_english, t.shared_only], [12, 110, 22]);
   const daily = dailyText({ ...canon }, { date: '2026-11-01', kind: 'sutta' });
   assert.deepEqual([daily.rotation.of, daily.text.id], [1288, 'sn11.22']);

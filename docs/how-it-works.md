@@ -60,7 +60,7 @@ These run before every release, and the build, tests and audit also run on every
 ## Safety and privacy by design
 
 - The server only reads. It cannot write files, run commands or change accounts.
-- It contacts a **fixed list of hosts**: dhammatalks.org, Access to Insight, the Digital Pāḷi Dictionary, the translation pages of Ancient Buddhist Texts, and the official mirrors. Redirects are re-checked against the list, so it cannot be used to reach other sites.
+- It contacts a **fixed list of hosts**: dhammatalks.org, Access to Insight, the Digital Pāḷi Dictionary, the translation pages of Ancient Buddhist Texts, approved mirrors and seven exact Markdown paths at the pinned official Apadāna revision. Redirects are re-checked against the list, so it cannot be used to reach other sites.
 - Responses are size-limited, retried with backoff, and labelled with where they came from (including when a mirror was used).
 - Retrieved text is treated as data, never as instructions to Claude.
 

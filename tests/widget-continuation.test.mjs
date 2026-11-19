@@ -49,3 +49,26 @@ test('a pinned English continuation refuses an outage fallback to another versio
   assert.equal(next.english, null);
   assert.match(next.english_error, /continu|version|offset/i);
 });
+
+const officialApadana = process.env.APADANA_OFFICIAL_CHECKOUT;
+test('an Apadāna widget continuation carries both source revision and exact prefix', {skip: !officialApadana}, async () => {
+  const { readFileSync } = await import('node:fs');
+  const { join } = await import('node:path');
+  const { APADANA_COMMIT, APADANA_PROFILES } = await import('../src/apadana-profiles.mjs');
+  const uid = 'thi-ap1', translation = 'ap:chapter-4/poem-001';
+  globalThis.fetch = async url => {
+    assert.equal(url.href, APADANA_PROFILES[uid].raw_url);
+    return new Response(readFileSync(join(officialApadana, 'src/_poems/chapter-4/poem-001.md')));
+  };
+  const first = await readPassage({uid, translation, englishCharacters: 500});
+  assert.equal(first.english.translation_revision, APADANA_COMMIT);
+  assert.equal(first.english.translator_notes.length, 22);
+  assert.ok(first.english.publisher_paratext);
+  assert.equal(first.english.continue_with.arguments.english_translation_revision, APADANA_COMMIT);
+  const next = await readPassage(first.english.continue_with.arguments);
+  assert.equal(next.english.translation_revision, APADANA_COMMIT);
+  assert.equal(next.english.offset, first.english.next_offset);
+  const changed = await readPassage({...first.english.continue_with.arguments, english_translation_revision: 'f'.repeat(40)});
+  assert.equal(changed.english, null);
+  assert.match(changed.english_error, /revision changed/);
+});

@@ -15,7 +15,7 @@
  *     "It 27 times", "Ps 23" (Psalm 23) and "As 5 people" are not citations here;
  *     the one-letter forms are still read as PTS volume/page ("M i 55", "S v 420");
  *   - a number glued to letters ("MN 10th") or followed by ",000" is not a citation;
- *   - links count only for suttacentral.net, accesstoinsight.org, dhammatalks.org and ancient-buddhist-texts.net.
+ *   - links count only for suttacentral.net, accesstoinsight.org, dhammatalks.org, ancient-buddhist-texts.net and reviewed apadanatranslation.com pages.
  */
 
 import { EDITION_WORDS, VINAYA_SCOPES, matchesEditionBook } from './editions.mjs';
@@ -47,7 +47,7 @@ const VINAYA = '(?:Pj|Ss|Ay|Np|Pc|Pd|Sk|Kd|Mv|Cv|Pvr|Parajika|Sanghadisesa|Aniya
 const LOWER_IDS = ['dn', 'mn', 'sn', 'an', 'kp', 'dhp', 'ud', 'iti', 'snp', 'vv', 'pv', 'thag', 'thig', 'bv', 'cp', 'ja', 'mnd', 'cnd', 'mil', 'ne', 'pe', 'kv', 'ds', 'vb', 'patthana'];
 // These source IDs always have multiple numeric parts. Do not turn an ordinary 'pp3 file' into a citation.
 const MACHINE_ID = `(?:(?:${LOWER_IDS.join('|')})\\d+(?:\\.\\d+)*|(?:ps|dt|pp|ya)\\d+(?:\\.\\d+)+)(?:-\\d+)?(?::\\d+(?:\\.\\d+)*)?`;
-const LINK_HOSTS = /^(?:www\.)?(?:suttacentral\.net|accesstoinsight\.org|dhammatalks\.org|ancient-buddhist-texts\.net)$/i;
+const LINK_HOSTS = /^(?:www\.)?(?:suttacentral\.net|accesstoinsight\.org|dhammatalks\.org|ancient-buddhist-texts\.net|apadanatranslation\.com)$/i;
 const EDITION_HEAD = `(?:${Object.keys(EDITION_WORDS).sort((a, b) => b.length - a.length).join('|')})(?:\\.?\\s*ed(?:ition)?\\.?)?[\\s.:,]+`;
 const EDITION_SCOPE = [...new Set([...ABBREVIATIONS, ...FULL_NAMES, ...Object.keys(citationTables.COLLECTIONS), ...Object.keys(VINAYA_SCOPES)])]
   .sort((a, b) => b.length - a.length).join('|');
@@ -231,7 +231,7 @@ export function findCitations(text, canon, { limit = MAX_RESULTS, cursor } = {})
 }
 
 export function register({ tool, z, canon }) {
-  tool('find_citations', 'Find every Pāli Canon citation in a piece of free text (an essay, a talk transcript, a paper\'s references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nidānavaggo), PTS pages like M i 55 or S v 420, canonical IDs like ja526, ps3.2 and ya1.1.1, Bilara anchors like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org / ancient-buddhist-texts.net links. Supports native numerals with Roman citation names, preserving original text and offsets; native-script names are not scanned. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Paginate with next_cursor and unchanged text; counts are per page except found. Oversized candidates are marked not_checked, never verified. Works offline.', {
+  tool('find_citations', 'Find every Pāli Canon citation in a piece of free text (an essay, a talk transcript, a paper\'s references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nidānavaggo), PTS pages like M i 55 or S v 420, canonical IDs like ja526, ps3.2 and ya1.1.1, Bilara anchors like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org / ancient-buddhist-texts.net / reviewed apadanatranslation.com links. Supports native numerals with Roman citation names, preserving original text and offsets; native-script names are not scanned. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Paginate with next_cursor and unchanged text; counts are per page except found. Oversized candidates are marked not_checked, never verified. Works offline.', {
     text: z.string().min(1).max(MAX_TEXT).describe('The free text to scan, up to 200,000 characters.'),
     limit: z.number().int().min(1).max(MAX_RESULTS).default(MAX_RESULTS).describe('Maximum citations on this page. Structured reports also have a 256 KiB JSON byte budget, so a page can be shorter. Counts other than found describe this page.'),
     cursor: z.string().max(100).optional().describe('Opaque next_cursor from the preceding report. Reuse the identical original text; changed input or bundled index is rejected. Do not supply an offset or edit the cursor.'),

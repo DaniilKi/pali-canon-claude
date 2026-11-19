@@ -134,14 +134,14 @@ test('HTTP endpoint without CHATGPT_WIDGET keeps exactly the server tools', asyn
   }
 });
 
-test('redirect_domains lists only allowlisted English sources and link-only suttacentral.net; no new fetch hosts', () => {
+test('redirect_domains lists only allowlisted English sources and explicit link-only sources; no new fetch hosts', () => {
   assert.deepEqual(RESOURCE_META['openai/widgetCSP'].connect_domains, []);
   assert.deepEqual(RESOURCE_META['openai/widgetCSP'].resource_domains, []);
   for (const origin of REDIRECT_DOMAINS) {
     const u = new URL(origin);
     assert.equal(u.protocol, 'https:');
     assert.equal(u.pathname, '/');
-    assert.ok(ALLOWED_HOSTS.includes(u.hostname) || u.hostname === 'suttacentral.net', `${origin} is an allowlisted or link-only host`);
+    assert.ok(ALLOWED_HOSTS.includes(u.hostname) || ['suttacentral.net', 'apadanatranslation.com', 'creativecommons.org'].includes(u.hostname), `${origin} is an allowlisted or link-only host`);
   }
-  assert.ok(!ALLOWED_HOSTS.includes('suttacentral.net'), 'SuttaCentral stays link-only');
+  for (const host of ['suttacentral.net', 'apadanatranslation.com', 'creativecommons.org']) assert.ok(!ALLOWED_HOSTS.includes(host), host + ' stays link-only');
 });

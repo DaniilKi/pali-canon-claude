@@ -10,9 +10,9 @@ export function buildCoverage() {
   const { translations } = canon.load();
 
   const rows = new Map();
-  const total = { texts: 0, approximate: 0, grouped: 0, direct: 0, english: 0, dhammatalks: 0, ati: 0, anandajoti: 0, partial_texts: 0, partial_links: 0, partial_dhammatalks: 0, partial_ati: 0, partial_anandajoti: 0, shared_texts: 0, shared_links: 0, shared_dhammatalks: 0, shared_ati: 0, shared_anandajoti: 0 };
+  const total = { texts: 0, approximate: 0, grouped: 0, direct: 0, english: 0, dhammatalks: 0, ati: 0, anandajoti: 0, apadana: 0, partial_texts: 0, partial_links: 0, partial_dhammatalks: 0, partial_ati: 0, partial_anandajoti: 0, shared_texts: 0, shared_links: 0, shared_dhammatalks: 0, shared_ati: 0, shared_anandajoti: 0 };
   for (const u of d.units) {
-    const r = rows.get(u.collection) ?? { collection: u.collection, name: d.collections[u.collection]?.name ?? u.collection, texts: 0, approximate: 0, grouped: 0, direct: 0, english: 0, dhammatalks: 0, ati: 0, anandajoti: 0, partial_texts: 0, partial_links: 0, partial_dhammatalks: 0, partial_ati: 0, partial_anandajoti: 0, shared_texts: 0, shared_links: 0, shared_dhammatalks: 0, shared_ati: 0, shared_anandajoti: 0 };
+    const r = rows.get(u.collection) ?? { collection: u.collection, name: d.collections[u.collection]?.name ?? u.collection, texts: 0, approximate: 0, grouped: 0, direct: 0, english: 0, dhammatalks: 0, ati: 0, anandajoti: 0, apadana: 0, partial_texts: 0, partial_links: 0, partial_dhammatalks: 0, partial_ati: 0, partial_anandajoti: 0, shared_texts: 0, shared_links: 0, shared_dhammatalks: 0, shared_ati: 0, shared_anandajoti: 0 };
     rows.set(u.collection, r);
     r.texts++;
     if (u.approximate) r.approximate++;
@@ -53,10 +53,10 @@ if (import.meta.url === pathToFileURL(process.argv[1] || '').href) {
   const { words, pts_page_markers: pts } = summary;
   if (process.argv.includes('--json')) console.log(JSON.stringify(summary, null, 2));
   else {
-    console.log('collection\ttexts\tapprox\tgrouped\tenglish(texts)\tdhammatalks\tati\tanandajoti');
-    for (const r of rows) console.log([r.collection, r.texts, r.approximate, r.grouped, r.english, r.dhammatalks, r.ati, r.anandajoti].join('\t'));
+    console.log('collection\ttexts\tapprox\tgrouped\tenglish(texts)\tdhammatalks\tati\tanandajoti\tapadana');
+    for (const r of rows) console.log([r.collection, r.texts, r.approximate, r.grouped, r.english, r.dhammatalks, r.ati, r.anandajoti, r.apadana].join('\t'));
     console.log(`\nbooks ${summary.books} · words ${words} · PTS markers ${pts} · texts ${total.texts} · approximate ${total.approximate} · grouped ${total.grouped}`);
-    console.log(`english: ${total.direct} texts directly, ${total.english} incl. inherited · links dhammatalks ${total.dhammatalks} + ati ${total.ati} + anandajoti ${total.anandajoti} = ${total.dhammatalks + total.ati + total.anandajoti}`);
+    console.log(`english: ${total.direct} texts directly, ${total.english} incl. inherited · links dhammatalks ${total.dhammatalks} + ati ${total.ati} + anandajoti ${total.anandajoti} + apadana ${total.apadana} = ${total.dhammatalks + total.ati + total.anandajoti + total.apadana}`);
     console.log(`partial translations: ${total.partial_texts} indexed records · ${total.partial_links} links (separate from whole-unit English coverage)`);
     console.log(`shared pages: ${total.shared_links} declarations · ${total.shared_texts} listed members (not whole-unit coverage or separate translations)`);
     if (parallelsSummary) {

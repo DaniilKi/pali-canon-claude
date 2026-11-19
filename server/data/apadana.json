@@ -1,0 +1,252 @@
+{
+  "version": 1,
+  "source": {
+    "name": "Legends of the Buddhist Saints (Apadāna)",
+    "site": "https://apadanatranslation.com/",
+    "repository": "https://github.com/apadana-translation/apadana-site",
+    "commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "translator": "Jonathan S. Walters",
+    "publisher": "Jonathan S. Walters and Whitman College",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "notice_url": "https://apadanatranslation.com/about/",
+    "checked": "2026-11-19",
+    "rights_artifacts": [
+      {
+        "path": "LICENSE.md",
+        "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
+      },
+      {
+        "path": "src/_pages/about.md",
+        "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352"
+      },
+      {
+        "path": "src/_includes/site/footer.njk",
+        "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4"
+      },
+      {
+        "path": "src/_includes/layouts/epub-metadata.xml",
+        "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f"
+      },
+      {
+        "path": "src/_data/site.json",
+        "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa"
+      },
+      {
+        "path": "src/_poems/_poems.json",
+        "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
+      }
+    ],
+    "rights_note": "Explicit translation grant in About, LICENSE.md, footer and ePub metadata is CC BY-NC-SA 4.0. Conflicting generic CC-BY site.json does not relax those terms. No warranty or endorsement is implied.",
+    "policy": "Live only, seven finite whole-poem mappings; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI."
+  },
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "held": {
+    "thi-ap4": "Bundled VRI unit also owns the next heading and stanza37 (blocks6629–6651); poem4 alone is not its whole unit.",
+    "thi-ap5": "Bundled VRI unit starts at stanza38 (blocks6651–6675); publisher poem5 starts37. Repair/review ownership separately, not by loosening whole coverage.",
+    "thi-ap10": "Separate chapter summary and its note8 need independent selection and root-scope review. 601 publisher poems do not establish 603 VRI-unit coverage."
+  },
+  "links": {
+    "thi-ap1": {
+      "id": "thi-ap1",
+      "poem": 1,
+      "verses": [
+        1,
+        19
+      ],
+      "note_count": 22,
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-001/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-001/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-001.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Sumedhā",
+      "reference": "Therī Apadāna 1; publisher verses 1–19",
+      "raw_sha256": "991b5f4b2b56a5c501a5360032339619274c6340e844c498d7e0c9416e97e855",
+      "body_sha256": "e1deb7546c3710c718fe032d81f9afe8d7a16c608fca9d765e5bda2a85c995d2",
+      "notes_sha256": "4e26b19bcda68d059f70a2989ec43b1f4cc12ffba6a7274f25232db13d81c821",
+      "paratext_sha256": "226030c23cf0f56a7ff463f39a2fa26d543fe8526b98d482f66a722b80302535",
+      "root_sha256": "4417e8981c281ed284efb907df388f95b50352a4cfd9ac2141c819250a642f82",
+      "mapping_notes": [
+        "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyyāla remains abbreviated; publisher expands repeated stanzas.",
+        "Invocation and chapter preface are publisher paratext, not substantive poem stanzas."
+      ],
+      "english": "Sumedhā",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "thi-ap2": {
+      "id": "thi-ap2",
+      "poem": 2,
+      "verses": [
+        20,
+        25
+      ],
+      "note_count": 6,
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-002/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-002/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-002.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Mekhalādāyikā",
+      "reference": "Therī Apadāna 2; publisher verses 20–25",
+      "raw_sha256": "eff753b7c329e57894f6e601e6fc3941ffd2b361b2c2d7bdb1e2dc76363fb3d1",
+      "body_sha256": "11c3144cff01460fed4fd759f9805d657da50b06bf1a89cb8b080bdac65d6f4a",
+      "notes_sha256": "320a107958260e7f9528a6fef39e94120d6c9ca509056067efcf1360c36d7045",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "21c0602267dc7fb2b47ea9b057233b1679778ced388c30cc057d875bf4df09b2",
+      "mapping_notes": [
+        "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyyāla remains abbreviated; publisher expands repeated stanzas."
+      ],
+      "english": "Mekhalādāyikā",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "thi-ap3": {
+      "id": "thi-ap3",
+      "poem": 3,
+      "verses": [
+        26,
+        30
+      ],
+      "note_count": 2,
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-003/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-003/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-003.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Maṇḍapadāyikā",
+      "reference": "Therī Apadāna 3; publisher verses 26–30",
+      "raw_sha256": "917d69a2f1e064ac2bbcf29373214844af5cae023960c551934b7c47a7c630ad",
+      "body_sha256": "1a8ff14e72fa1771acd59d6207cd5403421f36ab7aa9a85bfe0d8fadd06a69d9",
+      "notes_sha256": "c2a15194f466a8f929aa4ccb34643e6e63957722790339ae19dfb48bf7aaecec",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "a839c51970c212fc5d2ecc8045f059b599ab2a9b1604841fb0a8146e77a1c26a",
+      "mapping_notes": [
+        "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyyāla remains abbreviated; publisher expands repeated stanzas.",
+        "Verse26: publisher robes vs VRI three robes."
+      ],
+      "english": "Maṇḍapadāyikā",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "thi-ap6": {
+      "id": "thi-ap6",
+      "poem": 6,
+      "verses": [
+        46,
+        59
+      ],
+      "note_count": 8,
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-006/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-006/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-006.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ekapiṇḍadāyikā",
+      "reference": "Therī Apadāna 6; publisher verses 46–59",
+      "raw_sha256": "638655719b428169df431f96decaf6edc144f24b180a5b0c6bfc8463532f18b2",
+      "body_sha256": "ab27b118990068d04fa913b4008300439a2ea21af612d15973a269f8015ecc49",
+      "notes_sha256": "254463635ff0d36277c038cf3cea249e190438482f5cc1cfdf549a6c0aca3b48",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "b43d3e52f25dded0a3328f13892ef085f619114ea9bf6f90534b3d8fc2454878",
+      "mapping_notes": [
+        "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyyāla remains abbreviated; publisher expands repeated stanzas.",
+        "Verse51: publisher blue lotus/mahānela vs VRI pair of cloths; translator note6 records the edition difference."
+      ],
+      "english": "Ekapiṇḍadāyikā",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "thi-ap7": {
+      "id": "thi-ap7",
+      "poem": 7,
+      "verses": [
+        60,
+        70
+      ],
+      "note_count": 4,
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-007/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-007/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-007.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Kaṭacchubhikkhadāyikā",
+      "reference": "Therī Apadāna 7; publisher verses 60–70",
+      "raw_sha256": "5d6b59e89a412da94f71d43b9c580431e6933f58624048c1ba2f1d48e0021a35",
+      "body_sha256": "8591cbb67ec83420320cda0cdc4b3eac149a2ac120b3382e059f1a92cb983fb0",
+      "notes_sha256": "db3b2dbf2de356bf961a7e80c7e0364c437898e35b493a546ec17b0c8b8789c2",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "9896a9cead5994e6ef49ece34dc30dd03e42c7b5c81f39dca8079baef7877108",
+      "mapping_notes": [
+        "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyyāla remains abbreviated; publisher expands repeated stanzas."
+      ],
+      "english": "Kaṭacchubhikkhadāyikā",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "thi-ap8": {
+      "id": "thi-ap8",
+      "poem": 8,
+      "verses": [
+        71,
+        90
+      ],
+      "note_count": 14,
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-008/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-008/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-008.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Sattuppalamālikāya",
+      "reference": "Therī Apadāna 8; publisher verses 71–90",
+      "raw_sha256": "2cc66fe4525f8482ecd138b67984b1665371526bc004485bcfe44e37aa55d79c",
+      "body_sha256": "46db0ce32894b40c193f8b5b5b83f42885a7e3733f05f92b1280fe181abd14d3",
+      "notes_sha256": "867890223e60963d78ec4a04b92df764470132f0711f38b703c7a20ce6b6d1ea",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "f5b4ead53dafba4dcf409c20c8baeca54ff3df56306932813ead09a02c50a782",
+      "mapping_notes": [
+        "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyyāla remains abbreviated; publisher expands repeated stanzas.",
+        "Verse71: publisher follows BJTS journey reading; VRI root differs."
+      ],
+      "english": "Sattuppalamālikāya",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "thi-ap9": {
+      "id": "thi-ap9",
+      "poem": 9,
+      "verses": [
+        91,
+        115
+      ],
+      "note_count": 14,
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-009/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-009/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-009.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Pañcadīpikā",
+      "reference": "Therī Apadāna 9; publisher verses 91–115",
+      "raw_sha256": "739f3c437aca5774b48d8f6bf25563301dde919bcf25a8ce44693243d8594016",
+      "body_sha256": "df06b3d79c75b5a60039e0397aa6ff360bbdcbd540644698061ebf178818865c",
+      "notes_sha256": "aaf80c212d4fb79af81b8a6ace856009ef4457dc14003f4c301b654b8ea78d6e",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "e0ffdb846c3174017d22ef7cdd3095b4af1391d80694b90ea0b8f8fd13fb9ce0",
+      "mapping_notes": [
+        "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyyāla remains abbreviated; publisher expands repeated stanzas.",
+        "Verse99: publisher PTS hundred-by-sixty leagues vs VRI/BJTS sixty-by-thirty; translator note8 preserves the difference."
+      ],
+      "english": "Pañcadīpikā",
+      "match": "individually-reviewed-whole-poem"
+    }
+  }
+}

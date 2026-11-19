@@ -3,6 +3,8 @@
 // English translations, fetched live (cached) through english.mjs. The answer only ever reports
 // what the texts searched contain: it never says who did or did not say something.
 import { fold, load, resolve, segments, source, linksFor, translationId, alignmentInfo, translationScope } from './canon.mjs';
+import { APADANA_LICENSE_URL } from './apadana-profiles.mjs';
+import { quotationText } from './apadana.mjs';
 import { isPartial, isShared, isScoped, scopeHash } from './translation-scope.mjs';
 import * as englishModule from './english.mjs';
 import { romanizeLookupInput, inputNote } from './script.mjs';
@@ -472,7 +474,7 @@ function englishReference(reference) {
 function exactTranslationIds(value) {
   if (value === undefined) return null;
   if (!Array.isArray(value) || !value.length || value.length > MAX_ENGLISH_PAGES
-    || value.some(id => typeof id !== 'string' || !id.trim() || id.trim().length > 400 || !/^(ati:\/|dt:|aj:)/.test(id.trim()))) {
+    || value.some(id => typeof id !== 'string' || !id.trim() || id.trim().length > 400 || !/^(ati:\/|dt:|aj:|ap:)/.test(id.trim()))) {
     throw new Error('translation_ids must be a nonempty array of at most 80 exact translation IDs from get_metadata. Translator names and source URLs are not version selectors.');
   }
   return [...new Set(value.map(id => id.trim()))];
@@ -556,7 +558,7 @@ export function englishScope(texts, { includePartial = false, includeShared = fa
         }
         continue;
       }
-      const page = { unit: pageOwner, translation_id: translationId(l), translator, url: l.url, ...context };
+      const page = { unit: pageOwner, translation_id: translationId(l), translator, url: l.url, ...(l.source === 'apadana' ? { translation_revision: l.translation_revision } : {}), ...context };
       pages.push(page); byUrl.set(pageKey, page);
     }
   }
@@ -587,6 +589,7 @@ const sourceCitation = page => page.translation_scope?.kind === 'shared_page' ? 
 function englishVersion(page) {
   return {
     translator: page.translator, translation_id: page.translation_id, url: page.url,
+    ...(page.translation_revision ? { translation_revision: page.translation_revision, licence_url: APADANA_LICENSE_URL, comparison_extent: 'Numbered substantive publisher stanzas only; preface, headings, colophons and translator notes were not compared.' } : {}),
     ...(page.requested_translation_id ? { requested_translation_id: page.requested_translation_id } : {}),
     ...(page.notes?.length ? { notes: page.notes } : {}),
     ...scopeEvidence(page),
@@ -612,7 +615,7 @@ async function verifyEnglish(text, texts, limit, fetchTranslation, includePartia
   const fetched = await mapLimit(plan.pages, 6, async (p) => {
     let received = p;
     try {
-      const t = await fetchTranslation(p.unit, p.translation_id, { limit: MAX_ENGLISH_SOURCE_CHARACTERS, ...(plan.exactVersions ? { allow_fallback: false } : {}), ...(p.translation_scope ? { ...(p.translation_scope.kind === 'shared_page' ? { allow_shared: true } : { allow_partial: true }), scope_sha256: p.translation_scope.scope_sha256 } : {}) });
+      const t = await fetchTranslation(p.unit, p.translation_id, { limit: MAX_ENGLISH_SOURCE_CHARACTERS, ...(plan.exactVersions || p.translation_revision ? { allow_fallback: false } : {}), ...(p.translation_revision ? { translation_revision: p.translation_revision } : {}), ...(p.translation_scope ? { ...(p.translation_scope.kind === 'shared_page' ? { allow_shared: true } : { allow_partial: true }), scope_sha256: p.translation_scope.scope_sha256 } : {}) });
       if ((p.translation_scope?.scope_sha256 || null) !== (t.translation_scope?.scope_sha256 || null) || (p.translation_scope && scopeHash(p.translation_scope) !== scopeHash(t.translation_scope))) throw new Error('Retrieved translation scope differs from the planned scope; no quotation was compared.');
       if (p.translation_scope?.kind === 'shared_page' && (t.whole_unit_coverage !== false || t.text_id !== null)) throw new Error('Shared-page source claimed individual or whole-unit alignment; no quotation was compared.');
       if (p.translation_scope && (t.translation_id !== p.translation_id || t.url !== p.url
@@ -629,7 +632,8 @@ async function verifyEnglish(text, texts, limit, fetchTranslation, includePartia
         error.code = 'UNEXPECTED_TRANSLATION_VERSION'; throw error;
       }
       requireCompleteEnglishSource(t);
-      return { ...received, text: t.text, attribution: t.attribution, license: t.license };
+      if (p.translation_revision && (t.translation_id !== p.translation_id || t.url !== p.url || t.translator !== p.translator || t.translation_revision !== p.translation_revision)) throw Error('Pinned Apadāna identity changed; no quotation was compared.');
+      return { ...received, text: p.translation_revision ? quotationText(t) : t.text, attribution: t.attribution, license: t.license };
     } catch (error) { return { ...received, error: error.message, ...(['INCOMPLETE_ENGLISH_SOURCE', 'UNEXPECTED_TRANSLATION_VERSION'].includes(error.code) ? { error_code: error.code } : {}) }; }
   });
   const pages = fetched.filter((p) => !p.error);

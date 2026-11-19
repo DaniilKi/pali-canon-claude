@@ -21,6 +21,7 @@ This is how the tool runs today: as a Claude Desktop extension, a Claude Code pl
   - [dhammatalks.org](https://www.dhammatalks.org) (Ṭhānissaro Bhikkhu's translations),
   - [Access to Insight](https://www.accesstoinsight.org) and its official mirrors on GitHub and jsDelivr,
   - [Ancient Buddhist Texts](https://ancient-buddhist-texts.net) (Ānandajoti Bhikkhu’s translations),
+  - [the official Apadāna repository](https://github.com/apadana-translation/apadana-site) via GitHub’s raw-file host (pinned Markdown paths for seven Jonathan S. Walters translations),
   - the [Digital Pāḷi Dictionary](https://www.dpdict.net).
 
   Approved source and mirror destinations are restricted by the fixed allowlist in `src/http.mjs`; see the current [source register](docs/sources.md). The request contains only what is needed to fetch the page (for example, the address of a sutta or the Pāli word you looked up) and a label naming this tool. Like any website, those sites and mirrors may keep ordinary web server logs, such as your internet address and the page requested. Their own privacy policies apply to those logs.

@@ -1,6 +1,6 @@
 # Coverage
 
-What Pali Canon for Claude contains in version 2.1.0, computed directly from the bundled data (`server/data/canon.json.gz`, `server/data/translations.json` and `server/data/anandajoti.json`).
+What Pali Canon for Claude contains in version 2.1.0, computed directly from the bundled data (`server/data/canon.json.gz`, `server/data/translations.json`, `server/data/anandajoti.json` and `server/data/apadana.json`).
 
 ## Summary
 
@@ -17,7 +17,7 @@ What Pali Canon for Claude contains in version 2.1.0, computed directly from the
 | Thai, Myanmar and VRI page markers | 56,050 (21,781 Thai, 16,687 Myanmar, 17,582 VRI), shown in `get_text` and accepted as citations such as "Thai MN 1.103"; 56,048 resolve back to a text containing the marker |
 | Variant readings | 18,725 VRI notes; 16,632 (88.8%) give at least one reading attributed to editions by siglum (`get_text` `variants: "structured"`) |
 | Scripts | Roman, plus Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao and Lanna by transliteration. The first five are tested against VRI's own script editions; Lao and Lanna have no VRI edition and are tested by round trip only |
-| English translation links | 2,583 links covering 1,479 texts directly, 1,902 including verses that share their chapter's translation (63 of them placed by the content-based linker, [#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)). `list_sources` reports the same per collection as `translation_coverage`, counting grouped ranges through their members (1,453 and 1,876 of 8,445) |
+| English translation links | 2,590 links covering 1,486 texts directly, 1,909 including verses that share their chapter's translation (63 of them placed by the content-based linker, [#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)). `list_sources` reports the same per collection as `translation_coverage`, counting grouped ranges through their members (1,460 and 1,883 of 8,445) |
 | Commentary (Aṭṭhakathā) | VRI commentaries aligned to the texts by VRI paragraph number (`get_commentary`, `get_text` `commentary: true`): DN 34/34, MN 152/152, SN 1,800/1,954, AN 1,598/2,085, Dhp 449/449, Ja 512/547, Vinaya 370/443 texts; every text the commentary numbers is aligned except 8 known exceptions. `server/data/commentary.json.gz`, 10.8 MB |
 | Post-canonical books | All 109 VRI Ṭīkā and Añña books (Visuddhimagga, its Mahāṭīkā, Abhidhammatthasaṅgaha, Mahāvaṃsa and the sub-commentaries), labelled `canonical: false` (`get_post_canonical`, `search_post_canonical`). `server/data/postcanonical.json.gz`, 14.5 MB |
 | Word analysis | Digital Pāḷi Dictionary v0.4.20261026 subset: 89,763 headwords, 753 roots and the word forms of the bundled texts; 99.73% of words in the citable text passages are known (`analyse_passage`, offline `lookup_pali`). `server/data/dpd.json.gz`, 5.3 MB |
@@ -46,7 +46,7 @@ All 61 root files can also be read from beginning to end using `get_text` with a
 | Petavatthu | Pv | 51 | | | 1 |
 | Theragāthā | Thag | 264 | | | 107 |
 | Therīgāthā | Thig | 73 | | | 36 |
-| Apadāna (Thera and Therī) | Ap | 603 | | | — |
+| Apadāna (Thera and Therī) | Ap | 603 | | | 7 |
 | Buddhavaṃsa | Bv | 29 | | | — |
 | Cariyāpiṭaka | Cp | 35 | | | — |
 | Jātaka (the verses of the 547 birth stories) | Ja | 547 | | | — |
@@ -91,6 +91,7 @@ Whole-unit counts exclude partial-unit and shared-page translation mappings. `np
 | Ṭhānissaro Bhikkhu, dhammatalks.org | 1,270 | Current versions of his translations |
 | Access to Insight | 1,160 | Ṭhānissaro's earlier versions (879) and about 25 other translators, among them Maurice Walshe, John D. Ireland, Andrew Olendzki, Acharya Buddharakkhita, Nyanaponika Thera, Piyadassi Thera, Ñāṇamoli Thera and Bhikkhu Bodhi; each page keeps its own licence notice |
 | Ānandajoti Bhikkhu, Ancient Buddhist Texts | 153 | Line-by-line Pāli and English (CC BY-SA 3.0): Udāna, Dhammapada chapters, most of the Pārāyanavagga, the Bhikkhunīsaṃyutta, DN 16, several MN, SN and AN suttas, two parts of the Dhammasaṅgaṇī mātikā and Vibhaṅga 6–7. Each link is checked against the Pāli on the page |
+| Jonathan S. Walters, Whitman College | 7 | First whole-unit English for seven Therī Apadāna poems; live from pinned publisher Markdown (CC BY-NC-SA 4.0), without bundled wording or notes |
 
 A translation is linked only on strong evidence: a matching number and title, a PTS start page that identifies exactly one text, or a confirmed title. When the evidence is ambiguous we leave the text unlinked, so some texts that do have a translation online are not linked yet. A second, content-based pass ([#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)) places a page only when rare names in the English occur in exactly one nearby Pāli text, or its Pāli title names exactly one; each such link stores its evidence and is audited.
 
@@ -179,4 +180,9 @@ D239 adds twenty first whole-substantive AN selections, AN 1.21–40, while reta
 
 ### Ten additional individual AN mappings (D240)
 
-Ten whole-substantive selections from four existing shared pages now open independently: AN 1.45–46, 1.49–52, indexed 2.32–33 and 2.125–126. These are **ten first whole-unit mappings and zero first English-access records**. Current whole links are **2,583** (DT 1,270 / ATI 1,160 / ABT 153), direct/inherited **1,479 / 1,902**, grouped **1,453 / 1,876**, AN English **418**, Sutta English **1,898** and daily eligibility **1,288**. Shared declarations/subjects remain **12 / 110**, shared-only records become **22**; partial links/partial-only records remain **22 / 16**. The whole-section registry grows 35→45 without changing its earlier entries or the five old AN shared choices. No whole Vinaya gain is claimed. Historical figures above retain their decision-specific baselines. [Independent source pins, exact scopes and edition differences](data/an-ten-reviewed-selections.md).
+Ten whole-substantive selections from four existing shared pages now open independently: AN 1.45–46, 1.49–52, indexed 2.32–33 and 2.125–126. These are **ten first whole-unit mappings and zero first English-access records**. At D240, whole links were **2,583** (DT 1,270 / ATI 1,160 / ABT 153), direct/inherited **1,479 / 1,902**, grouped **1,453 / 1,876**, AN English **418**, Sutta English **1,898** and daily eligibility **1,288**. Shared declarations/subjects remain **12 / 110**, shared-only records become **22**; partial links/partial-only records remain **22 / 16**. The whole-section registry grows 35→45 without changing its earlier entries or the five old AN shared choices. No whole Vinaya gain is claimed. Historical figures above retain their decision-specific baselines. [Independent source pins, exact scopes and edition differences](data/an-ten-reviewed-selections.md).
+
+
+### Walters Apadāna pilot
+
+Seven of the 603 indexed Apadāna units now have a whole-poem English link for the first time. Whole links: **2,590** (DT 1,270 / ATI 1,160 / ABT 153 / Walters 7). Indexed direct/inherited: **1,486 / 1,909**; grouped: **1,460 / 1,883**. Daily eligibility stays **1,288**. Partial and shared counts do not change. This measures seven reviewed mappings, not complete coverage of the publisher's edition. [Source and boundary evidence](evidence/apadana/RECOVERY.md).

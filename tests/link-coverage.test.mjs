@@ -19,6 +19,9 @@ test('list_sources reports English coverage per collection, and the rows add up 
   for (const k of ['dn', 'mn', 'sn', 'an', 'dhp', 'snp', 'vinaya', 'patthana']) assert.ok(byKey[k], `row for ${k}`);
   assert.equal(byKey.sn.name, 'Saṃyutta Nikāya');
   assert.equal(byKey.vinaya.with_english, 0, 'no English for the Vinaya');
+  assert.equal(byKey.ap.with_english, 7, 'seven exact Therī Apadāna poems');
+  assert.equal(byKey.ap.with_english_including_inherited, 7, 'no Apadāna inheritance');
+  assert.equal(cov.total.by_source.apadana, 7, 'Walters source count');
   for (const field of ['texts', 'with_english', 'with_english_including_inherited', 'links', 'content_matched_links']) {
     assert.equal(cov.collections.reduce((n, r) => n + r[field], 0), cov.total[field], field);
   }

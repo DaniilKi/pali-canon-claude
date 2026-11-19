@@ -1,5 +1,21 @@
 import {translatorNotes,sectionSourceUnit,milindaSourceUnit,anTenSourceUnit,validateSectionIdentity,validateSectionDescriptor} from './milinda-sources.mjs';
 
+import { APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_TRANSLATOR, APADANA_PROFILES } from '../src/apadana-profiles.mjs';
+
+export const apadanaId = uid => APADANA_PROFILES[uid]?.path ? 'ap:' + APADANA_PROFILES[uid].path.replace(/^\/text\/|\/$/g, '') : undefined;
+export const apadanaFamily = id => typeof id === 'string' && /^ap:/i.test(id.trim());
+const isApadana = value => apadanaFamily(value?.translation_id) || value?.source === 'apadana' || value?.source === 'Legends of the Buddhist Saints (Apadāna)' || own(value, 'translation_revision') || own(value, 'publisher_paratext');
+
+export function validateApadanaChoice(value, uid) {
+  if (!isApadana(value)) return;
+  const profile = APADANA_PROFILES[uid];
+  if (!profile || value.translation_id !== apadanaId(uid) || value.translation_revision !== APADANA_COMMIT
+    || value.translator !== APADANA_TRANSLATOR || value.license !== APADANA_LICENSE || value.url !== profile.url
+    || own(value, 'translation_scope') || own(value, 'source_section') || value.whole_unit_coverage === false) {
+    throw Error('The pinned Apadāna source identity or terms changed. No English source was displayed.');
+  }
+}
+
 /** Browser display/consent guards for backend-validated metadata. Not source, rights or alignment approval. */
 const own = (value, key) => value && Object.hasOwn(value, key);
 const nonempty = value => typeof value === 'string' && value.trim().length > 0;
@@ -16,6 +32,7 @@ function medicineFamily(id) {
 }
 
 export function scopeDescriptor(choice, requestedId) {
+  validateApadanaChoice(choice, requestedId);
   validateSectionIdentity(choice);
   if (sectionSourceUnit(choice?.translation_id)) {
     validateSectionDescriptor(choice);
@@ -59,6 +76,21 @@ export function validateEnglishPage(data, args, context) {
   if (!data || !nonempty(data.text) || !nonempty(data.translation_id) || !nonempty(data.translator) || !nonempty(data.attribution) || !(nonempty(data.license) || (data.license && typeof data.license === 'object' && nonempty(data.license.name))) || data.offset !== offset) throw new Error('The English source response is incomplete. No translation was displayed.');
   const choice = context.choices.find(c => c.translation_id === data.translation_id);
   if (!choice) throw new Error('The returned English source version was not in the reviewed list. Reload the passage and review sources again.');
+  validateApadanaChoice(choice, context.uid);
+  if (isApadana(choice) || isApadana(data) || apadanaFamily(args.translation)) {
+    validateApadanaChoice(data, context.uid);
+    if (!isApadana(choice) || !isApadana(data) || args.translation !== choice.translation_id
+      || args.translation_revision !== APADANA_COMMIT || data.source !== 'apadana'
+      || ['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256'].some(key => data[key] !== APADANA_PROFILES[context.uid][key])
+      || data.fetched_url !== APADANA_PROFILES[context.uid].raw_url || data.license_url !== APADANA_LICENSE_URL
+      || !nonempty(data.changes) || data.changes.length > 2000
+      || typeof data.publisher_paratext !== 'string' || data.publisher_paratext.length > 50000
+      || Boolean(data.publisher_paratext.trim()) !== (context.uid === 'thi-ap1')
+      || !Array.isArray(data.translator_notes) || data.translator_notes.length !== APADANA_PROFILES[context.uid].note_count
+      || (offset > 0 && (!sha(args.prefix_sha256) || data.prefix_sha256 !== args.prefix_sha256))) {
+      throw Error('The pinned Apadāna source response does not match its reviewed identity. No English was displayed.');
+    }
+  }
   if(medicineFamily(choice.translation_id) || choice.translation_scope?.extractor===MEDICINE_EXTRACTOR)scopeDescriptor(choice,context.uid);
   if (sectionSourceUnit(data.translation_id) && (!own(choice, 'source_section') || !sameScope(data.source_section, choice.source_section) || data.source_section?.unit_id !== context.uid || !anTenSourceUnit(data.translation_id) && data.source_section?.anchor !== data.translation_id.split('#')[1] || data.source_section?.status !== 'reviewed')) throw new Error(milindaSourceUnit(data.translation_id) ? 'The reviewed question identity changed. Reload the passage and review sources again; no English was displayed.' : 'The reviewed discourse identity changed. Reload the passage and review sources again; no English was displayed.');
   if (context.accepted) {
@@ -75,6 +107,7 @@ export function validateEnglishPage(data, args, context) {
   }
   const next = data.continue_with?.arguments;
   if (data.continue_with?.name !== 'get_translation' || !next || next.uid !== context.uid || next.translation !== data.translation_id || !Number.isSafeInteger(next.offset) || next.offset <= offset || next.offset > 2000000 || next.offset !== data.next_offset || !sha(next.prefix_sha256) || !Number.isInteger(next.limit) || next.limit < 500 || next.limit > 30000) throw new Error('The source returned an unsafe continuation. No next-page request was made.');
+  if (isApadana(choice) ? next.translation_revision !== APADANA_COMMIT : own(next, 'translation_revision')) throw Error('The next page changed or dropped the pinned translation revision.');
   if (context.accepted) {
     const shared = context.accepted.kind === 'shared_page';
     if (next.scope_sha256 !== context.accepted.scope.scope_sha256 || next[shared ? 'allow_shared' : 'allow_partial'] !== true || next[shared ? 'allow_partial' : 'allow_shared'] === true) throw new Error('The next page dropped or changed its scope consent. Review the source again.');

@@ -1,3 +1,5 @@
+import { isApadanaRawUrl } from './apadana-profiles.mjs';
+
 // Public read-only providers. Fixed host allowlist, bounded responses, retries and mirror fallback.
 const ALLOWED = [
   { host: 'accesstoinsight.org' }, { host: 'www.accesstoinsight.org' },
@@ -17,6 +19,7 @@ function allowed(url) {
   if (url.protocol !== 'https:' || url.port || url.username || url.password) return false;
   const rule = ALLOWED.find((r) => r.host === url.hostname);
   if (!rule) return false;
+  if (url.hostname === 'raw.githubusercontent.com' && isApadanaRawUrl(url.href)) return true;
   return !rule.prefixes || rule.prefixes.some((p) => url.pathname.startsWith(p));
 }
 
@@ -33,8 +36,10 @@ async function fetchOnce(url, { json, timeout }) {
   let target = new URL(url);
   if (SIMULATED_OUTAGE.has(target.hostname)) throw new HttpError(`${target.hostname} unreachable (simulated outage)`, 503, true);
   const signal = AbortSignal.timeout(timeout);
+  const exactApadana = isApadanaRawUrl(target.href);
   for (let redirects = 0; redirects <= 4; redirects += 1) {
     if (!allowed(target)) throw new HttpError('Provider URL is outside the supported public sources.', 0, false);
+    if (isApadanaRawUrl(target.href) && !exactApadana) throw new HttpError('Redirect entry into a pinned Apadāna source is not allowed.', 0, false);
     let response;
     try {
       response = await fetch(target, { redirect: 'manual', signal, headers: { 'User-Agent': USER_AGENT, Accept: json ? 'application/json' : 'text/html,text/plain' } });
@@ -43,6 +48,7 @@ async function fetchOnce(url, { json, timeout }) {
     }
     if ([301, 302, 303, 307, 308].includes(response.status)) {
       await response.body?.cancel();
+      if (exactApadana) throw new HttpError('The pinned Apadāna source must not redirect.', response.status, false);
       const location = response.headers.get('location');
       if (!location) throw new HttpError('Redirect without destination.', response.status, false);
       target = new URL(location, target);

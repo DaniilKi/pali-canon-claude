@@ -7,6 +7,7 @@ import { liveCache } from './cache.mjs';
 import { createHash } from 'node:crypto';
 import { extractAtiSection } from './ati-sections.mjs';
 import { sectionHash, validateSectionRegistry } from './ati-section-registry.mjs';
+import { translation as fetchApadana, validateLink as validateApadanaLink } from './apadana.mjs';
 const prefixHash = (text, offset) => createHash('sha256').update(text.slice(0, offset)).digest('hex');
 
 const ATI_MIRRORS = [
@@ -156,6 +157,7 @@ export function available(unit) {
     ...(isScoped(t) ? { translation_scope: translationScope(t, unit) } : {}),
     source: sourceName(t),
     translator: t.translator, reference: t.reference || undefined, ...(t.license ? { license: t.license } : {}), match: t.match,
+    ...(t.source === 'apadana' ? { url: t.url, translation_revision: t.translation_revision, note_count: t.note_count } : {}),
     ...(t.mapping_note ? { mapping_note: t.mapping_note } : {}),
     ...(t.section ? { source_section: JSON.parse(JSON.stringify(t.section)) } : {}),
     ...(t.commentary ? { includes_commentary: true } : {}),
@@ -167,7 +169,7 @@ const translatorKey = value => String(value || '').normalize('NFD').replace(/\p{
 /** Select only from supplied link metadata; never infer which of several translators was intended. */
 export function selectTranslation(links, which, citation) {
   if (!which) { const full = links.filter(link => !isScoped(link)); return { link: full.find(link => link.source === 'dhammatalks') || full[0], matchingVersions: [] }; }
-  if (/^(ati|dt|aj):/.test(which)) return { link: links.find(link => translationId(link) === which), matchingVersions: [] };
+  if (/^(ati|dt|aj|ap):/.test(which)) return { link: links.find(link => translationId(link) === which), matchingVersions: [] };
   const wanted = translatorKey(which);
   const exact = links.filter(link => translatorKey(link.translator) === wanted);
   const matches = exact.length ? exact : links.filter(link => translatorKey(link.translator).includes(wanted) || link.source.includes(wanted));
@@ -178,7 +180,7 @@ export function selectTranslation(links, which, citation) {
 }
 
 /** Fetch one translation of a text. `which` is a translation_id, an unambiguous translator name fragment, or omitted for the default. */
-export async function translation(unit, which, { offset = 0, limit = 12000, prefix_sha256: expectedPrefix, allow_partial = false, allow_shared = false, allow_fallback = true, scope_sha256 } = {}) {
+export async function translation(unit, which, { offset = 0, limit = 12000, prefix_sha256: expectedPrefix, allow_partial = false, allow_shared = false, allow_fallback = true, scope_sha256, translation_revision } = {}) {
   if (typeof allow_fallback !== 'boolean') throw new Error('allow_fallback must be a boolean.');
   if (typeof allow_shared !== 'boolean') throw new Error('allow_shared must be a boolean.');
   if (typeof allow_partial !== 'boolean') throw new Error('allow_partial must be a boolean.');
@@ -186,7 +188,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
     if (typeof which !== 'string' || !which.trim()) throw new Error('Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.');
     which = which.trim();
   }
-  if (offset > 0 && !/^(ati|dt|aj):/.test(which || '')) {
+  if (offset > 0 && !/^(ati|dt|aj|ap):/.test(which || '')) {
     throw new Error('Translation continuation requires the exact translation_id returned by the previous page. Use its continue_with arguments; a default or translator name can select a different version after an outage.');
   }
   if (expectedPrefix !== undefined && (typeof expectedPrefix !== 'string' || !/^[a-f0-9]{64}$/.test(expectedPrefix) || offset <= 0)) throw new Error('prefix_sha256 requires a positive continuation offset and the unchanged SHA-256 from continue_with.');
@@ -200,6 +202,12 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
     throw new Error('Only partial translations are linked. Choose an exact translation_id and explicitly set allow_partial: true; no whole-unit translation was selected.');
   }
   if (!link) throw new Error(`Translation "${which}" is not linked for ${unit.acronym}. Available: ${available(unit).map((a) => `${a.translation_id} (${a.translator})`).join(', ')}.`);
+  if (link.source === 'apadana') {
+    const book = load().canon.books[unit.book];
+    validateApadanaLink(link, unit.id, unit, book);
+    if (offset > 0 && (!expectedPrefix || !translation_revision)) throw Error('Apadāna continuation requires unchanged translation_revision and prefix_sha256 from continue_with.');
+  }
+  if (translation_revision !== undefined && (link.source !== 'apadana' || translation_revision !== link.translation_revision)) throw Error('The pinned English source revision changed. Reload its metadata and restart at offset 0.');
   const declaredScope = translationScope(link, unit);
   const shared = isShared(link);
   if (allow_shared && !shared) throw new Error('The selected source no longer has a declared shared-page scope. Review its mapping before requesting another source.');
@@ -211,11 +219,13 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
   let result;
   const notes = via && !declaredScope ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   if (link.mapping_note) notes.push(link.mapping_note);
+  if (link.source === 'apadana') notes.push(...link.mapping_notes);
   let sectionRow = reviewedSectionFor(link, unit);
   try {
     result = link.source === 'ati' ? await (sectionRow ? fetchAtiSection(link, sectionRow) : declaredScope?.kind === 'partial_unit' ? fetchAtiPartial(link.path,declaredScope.extractor) : fetchAti(link.path))
       : link.source === 'anandajoti' ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1)
-        : await fetchDhammatalks(link.url);
+        : link.source === 'apadana' ? await fetchApadana(link)
+          : await fetchDhammatalks(link.url);
   } catch (error) {
     // dhammatalks.org has no mirror; during an outage (not for a missing page) fall back to the same
     // translator's Access to Insight version of this same text.
@@ -251,7 +261,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
     notes.push('A line-by-line edition: each Pāli line is followed by its English translation. [Note: …] marks are the translator\'s notes, not scripture.');
     if (link.commentary) notes.push('This page also translates the commentary (Aṭṭhakathā); those passages are marked "[Commentary (Aṭṭhakathā) begins]" and are commentary, not the canonical text.');
   }
-  if (result.fetched_from !== result.source && !['dhammatalks.org', 'accesstoinsight.org', 'ancient-buddhist-texts.net'].includes(result.fetched_from)) {
+  if (link.source !== 'apadana' && result.fetched_from !== result.source && !['dhammatalks.org', 'accesstoinsight.org', 'ancient-buddhist-texts.net'].includes(result.fetched_from)) {
     notes.push(`The primary site was unavailable; text served from ${result.fetched_from}, an identical copy of the archive.`);
   }
   const theirs = (link.reference || '').match(/^(AN|SN) (\d+):(\d+)/);
@@ -272,7 +282,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
     next_offset: nextOffset, prefix_sha256: prefix,
     continue_with: nextOffset === null ? null : {
       name: 'get_translation',
-      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit, prefix_sha256: prefixHash(text, nextOffset), ...(declaredScope ? { ...(shared ? { allow_shared: true } : { allow_partial: true }), scope_sha256: declaredScope.scope_sha256 } : {}) },
+      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit, prefix_sha256: prefixHash(text, nextOffset), ...(link.source === 'apadana' ? { translation_revision: link.translation_revision } : {}), ...(declaredScope ? { ...(shared ? { allow_shared: true } : { allow_partial: true }), scope_sha256: declaredScope.scope_sha256 } : {}) },
     },
     ...(declaredScope ? { translation_scope: declaredScope, whole_unit_coverage: false } : {}),
     ...(sectionRow ? { source_section: JSON.parse(JSON.stringify(sectionRow.section)), translator_notes: result.translator_notes.map(note => ({ ...note })) } : {}),

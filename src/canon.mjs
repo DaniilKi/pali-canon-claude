@@ -1,3 +1,5 @@
+import { APADANA_BASE, APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_PROFILES, APADANA_TRANSLATOR } from './apadana-profiles.mjs';
+import { validateLink as validateApadanaLink } from './apadana.mjs';
 import {assertRegisteredPartial} from './partial-source-registry.mjs';
 import { assertRegisteredSection, validateSectionRegistry, retainedAtiShared } from './ati-section-registry.mjs';
 import { isAtiSectionPath, ATI_SECTION_PROFILES, ATI_RETAINED_SHARED_BINDINGS } from './ati-section-profiles.mjs';
@@ -47,6 +49,21 @@ export const ANANDAJOTI_BASE = 'https://ancient-buddhist-texts.net';
 export const ANANDAJOTI_LICENSE = 'CC BY-SA 3.0 — Ānandajoti Bhikkhu, Ancient Buddhist Texts (ancient-buddhist-texts.net). The site’s Copyright Notice (2013) gives CC BY-SA 3.0 Unported; its page footers link CC BY-SA 4.0. Share-alike: reuse must keep the same licence and credit Ānandajoti Bhikkhu.';
 let anandajotiSource = null;
 
+function mergeApadana(translations, canon) {
+  const declared = JSON.parse(readFileSync(dataPath('apadana.json'), 'utf8'));
+  if (declared.version !== 1 || declared.vri_commit !== canon.source.commit || declared.source?.commit !== APADANA_COMMIT
+    || declared.source.license !== APADANA_LICENSE || declared.source.license_url !== APADANA_LICENSE_URL
+    || declared.source.translator !== APADANA_TRANSLATOR || declared.source.site !== APADANA_BASE + '/'
+    || Object.keys(declared.links ?? {}).sort().join() !== Object.keys(APADANA_PROFILES).sort().join()) throw Error('The Apadāna review does not match the reviewed rights, bundled VRI edition or poem set.');
+  for (const [id, link] of Object.entries(declared.links)) {
+    const unit = canon.units.find(unit => unit.id === id);
+    const book = unit && canon.books[unit.book];
+    if (!unit || !book || unit.kind === 'range' || unit.approximate) throw Error('A reviewed Apadāna owner is missing or not an exact individual unit.');
+    validateApadanaLink(link, id, unit, book);
+    (translations[id] ||= []).push(link);
+  }
+}
+
 function mergeAnandajoti(translations) {
   let file;
   try { file = dataPath('anandajoti.json'); } catch { return; }
@@ -69,13 +86,15 @@ export function anandajotiInfo() {
   return anandajotiSource;
 }
 
-const SOURCE_NAMES = { dhammatalks: 'dhammatalks.org', ati: 'Access to Insight', anandajoti: 'Ancient Buddhist Texts (Ānandajoti Bhikkhu)' };
+const SOURCE_NAMES = { apadana: 'Legends of the Buddhist Saints (Apadāna)', dhammatalks: 'dhammatalks.org', ati: 'Access to Insight', anandajoti: 'Ancient Buddhist Texts (Ānandajoti Bhikkhu)' };
 /** Display name of a translation link's source. */
 export const sourceName = (t) => SOURCE_NAMES[t.source] || t.source;
-/** Stable translation_id of a link: dt:<path>, ati:<path> or aj:<path>. */
+/** Stable translation_id of a link: dt:<path>, ati:<path>, aj:<path> or ap:<path>. */
 export function translationId(t) {
   if (t.source === 'ati') return `ati:${t.path}${t.section?.selection_id ? '::selection:' + t.section.selection_id : t.section ? '#' + t.section.anchor : ''}`;
   if (t.source === 'anandajoti') return `aj:${t.path.replace(/^\/Texts-and-Translations\//, '').replace(/\.htm$/, '')}`;
+  if (t.source === 'apadana') return `ap:${t.path.replace(/^\/text\/|\/$/g, '')}`;
+  if (t.source !== 'dhammatalks') throw Error('Unsupported English translation provider.');
   return `dt:${t.url.split('/suttas/')[1].replace(/\.html$/, '')}`;
 }
 
@@ -91,6 +110,7 @@ export function load() {
   const canon = JSON.parse(gunzipSync(readBundled(dataPath('canon.json.gz'))).toString('utf8'));
   const translations = JSON.parse(readFileSync(dataPath('translations.json'), 'utf8'));
   mergeAnandajoti(translations);
+  mergeApadana(translations, canon);
   const partialRegistry=JSON.parse(readFileSync(dataPath('reviewed-partial-pages.json'),'utf8'));
   if(partialRegistry.version!==1||partialRegistry.vri_commit!==canon.source.commit||!Array.isArray(partialRegistry.links)||!partialRegistry.links.length)throw Error('Invalid registered partial source metadata.');
   const byId = new Map();
@@ -200,6 +220,9 @@ function requireRetainedForMember(unit, d) {
 export function linksFor(u) {
   const d = load();
   requireRetainedForMember(u, d);
+  const apadanaLinks = (d.translations[u.id] || []).filter(link => link.source === 'apadana' || link.url?.startsWith(APADANA_BASE + '/'));
+  if (apadanaLinks.length !== (Object.hasOwn(APADANA_PROFILES, u.id) ? 1 : 0)) throw new CitationError('The reviewed Apadāna declaration is missing, duplicated or has another owner.');
+  for (const link of apadanaLinks) validateApadanaLink(link, u.id, u, d.canon.books[u.book]);
   for (const link of d.translations[u.id] || []) assertRegisteredSection(link, u, d.sectionRegistry);
   const requiredSection = d.sectionRegistry.links.find(row => row.unit_id === u.id);
   if (requiredSection && (d.translations[u.id] || []).filter(link => link.section?.anchor === requiredSection.anchor).length !== 1) throw new CitationError('Registered ATI question binding is missing or duplicated. No whole-page translation was inferred.');
@@ -216,7 +239,7 @@ export function linksFor(u) {
   }
   const container = rangeContaining(u.id);
   if (container && d.translations[container.id]?.length) {
-    const links = d.translations[container.id].filter(t => !isScoped(t));
+    const links = d.translations[container.id].filter(t => !isScoped(t) && t.source !== 'apadana');
     if (links.length) return { links: [...links, ...own, ...shared], via: container };
   }
   return { links: [...own, ...shared], via: null };
@@ -368,6 +391,7 @@ export function resolve(reference) {
     }
     notes.push(c.host === 'ancient-buddhist-texts.net'
       ? `Linked from ${c.host}: Ānandajoti Bhikkhu's text and translation of ${id}.`
+      : c.host === 'apadanatranslation.com' ? `Linked from the reviewed Apadāna publisher page for ${id}.`
       : `Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id}.`);
     const unit = d.byId.get(id);
     const alignment = alignmentInfo(unit);
@@ -507,6 +531,7 @@ export function describe(u, notes = []) {
     ...(t.license ? { license: t.license } : {}),
     translation_id: translationId(t),
     match: t.match,
+    ...(t.source === 'apadana' ? { translation_revision: t.translation_revision, note_count: t.note_count } : {}),
     ...(t.mapping_note ? { mapping_note: t.mapping_note } : {}),
     ...(t.section ? { source_section: JSON.parse(JSON.stringify(t.section)) } : {}),
     ...(isScoped(t) ? { translation_scope: translationScope(t, u) } : {}),

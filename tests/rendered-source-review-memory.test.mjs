@@ -109,10 +109,10 @@ test('CLI loads separate memories while API defaults and all seven ATI rows rema
   assert.equal(createHash('sha256').update(bytes).digest('hex'),'b468c15c0a56a5bcee6ab6bf7040f8778ab8e5fde47b8844cf2d762ac7be7c31');
   assert.equal(ati.rows.length,7);assert.deepEqual(bytes,atiBytes);
   const api=scopeScreen(canon.load(),{review:ati});
-  assert.deepEqual([api.count,api.reviewed_retained_snapshots,api.unreviewed_leads],[220,6,214]);
+  assert.deepEqual([api.count,api.reviewed_retained_snapshots,api.unreviewed_leads],[227,6,221]);
   assert.equal(selected(api).review_status,'unreviewed');
   const both=scopeScreen(canon.load(),{review:ati,renderedReview:memory});
-  assert.deepEqual([both.count,both.reviewed_retained_snapshots,both.unreviewed_leads],[220,7,213]);
+  assert.deepEqual([both.count,both.reviewed_retained_snapshots,both.unreviewed_leads],[227,7,220]);
   assert.deepEqual(both.rows.filter(r=>r.source==='ati'),api.rows.filter(r=>r.source==='ati'));
   const cli=spawnSync(process.execPath,['scripts/source-scope-screen.mjs'],{encoding:'utf8',maxBuffer:4*1024*1024});
   assert.equal(cli.status,0,cli.stderr);assert.deepEqual(JSON.parse(cli.stdout),both);

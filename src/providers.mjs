@@ -195,7 +195,7 @@ export async function getAtiText({ path, offset = 0, limit = 12000 }) {
   };
 }
 
-const COVERAGE_SOURCES = ['dhammatalks', 'ati', 'anandajoti'];
+const COVERAGE_SOURCES = ['dhammatalks', 'ati', 'anandajoti', 'apadana'];
 let coverageCache = null;
 
 /** English translation coverage per collection (#37): texts, texts with a direct link, texts reached through a
@@ -277,6 +277,9 @@ export function listSources() {
         version: '45fedca341497120651efa20e756b04a13e61089', license: 'CC BY 4.0', attribution: '“General Index” and “Numerical Index”, by Access to Insight (BCBS Edition).' },
       { id: 'dhamma-lists', name: 'Numbered lists (pali-canon-mcp curation)', role: 'dhamma_list: standard lists with defining passages; Pāli from the bundled VRI text, English glosses written for the index (not translations).', license: 'MIT (curation); Pāli under VRI terms' },
       { id: 'bmc', name: 'The Buddhist Monastic Code, Vol. I — Ṭhānissaro Bhikkhu (dhammatalks.org)', role: 'Linked only: vinaya_rule links each bhikkhu Pātimokkha rule to the section that explains it (commentary). Section URLs bundled; no text fetched or stored.', url: 'https://www.dhammatalks.org/vinaya/bmc/Section0000.html', license: 'CC BY-NC 4.0' },
+      { id: 'apadana', name: 'Legends of the Buddhist Saints (Apadāna) — Jonathan S. Walters and Whitman College',
+        role: 'Seven reviewed whole Therī Apadāna English translations (live pinned publisher files); translation_id prefix ap:. Metadata only is bundled. No source substitution.',
+        url: 'https://apadanatranslation.com/', license: 'CC BY-NC-SA 4.0', notice: 'https://apadanatranslation.com/about/' },
       { id: 'dppn', name: 'Dictionary of Pāli Proper Names (G. P. Malalasekera, 1937–38)', role: 'Proper-name lookup (lookup_name). Linked only: entries not bundled while the licence is unconfirmed (#32).', url: 'https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm', license: 'Unconfirmed; probably in copyright. Nothing bundled.' },
       { id: 'calendar', name: 'Uposatha and festival calendar (computed)', role: 'Offline uposatha and festival dates for Thai Mahānikāya, Thai Dhammayut, Myanmar and Sri Lanka, computed from published rules; not official announcements.',
         code: ['splendidmoons (MIT, © 2023 Gambhiro Bhikkhu)', 'pythaidate (MIT, © 2023 Mark Hollow)', 'mmcal ceMmDateTime.js (MIT, © 2018 Yan Naing Aye)', 'Meeus, Astronomical Algorithms (2nd ed.)'], docs: 'https://github.com/DaniilKi/pali-canon-claude/blob/main/docs/calendar.md' },

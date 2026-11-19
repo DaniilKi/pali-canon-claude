@@ -1,0 +1,391 @@
+{
+  "base": "2f224e6e2d1d819e0feb3d9f05733dbf700b765a",
+  "recovery_checkpoint": "76e04b00a613158cf63d784a56e3fe7f78548265",
+  "integration_checkpoint": "566c2f47baec021ccc9e68399eacf3e51482bda3",
+  "source_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "live_artifact_check": {
+    "mode": "live official pinned artifacts",
+    "check": true,
+    "source_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "roots": [
+      "thi-ap1",
+      "thi-ap2",
+      "thi-ap3",
+      "thi-ap6",
+      "thi-ap7",
+      "thi-ap8",
+      "thi-ap9"
+    ],
+    "rights_artifacts": 6,
+    "bundled_translation_bodies": 0,
+    "pins": {
+      "thi-ap1": {
+        "raw": "991b5f4b2b56a5c501a5360032339619274c6340e844c498d7e0c9416e97e855",
+        "body": "e1deb7546c3710c718fe032d81f9afe8d7a16c608fca9d765e5bda2a85c995d2",
+        "notes": "4e26b19bcda68d059f70a2989ec43b1f4cc12ffba6a7274f25232db13d81c821",
+        "paratext": "226030c23cf0f56a7ff463f39a2fa26d543fe8526b98d482f66a722b80302535",
+        "root": "4417e8981c281ed284efb907df388f95b50352a4cfd9ac2141c819250a642f82"
+      },
+      "thi-ap2": {
+        "raw": "eff753b7c329e57894f6e601e6fc3941ffd2b361b2c2d7bdb1e2dc76363fb3d1",
+        "body": "11c3144cff01460fed4fd759f9805d657da50b06bf1a89cb8b080bdac65d6f4a",
+        "notes": "320a107958260e7f9528a6fef39e94120d6c9ca509056067efcf1360c36d7045",
+        "paratext": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root": "21c0602267dc7fb2b47ea9b057233b1679778ced388c30cc057d875bf4df09b2"
+      },
+      "thi-ap3": {
+        "raw": "917d69a2f1e064ac2bbcf29373214844af5cae023960c551934b7c47a7c630ad",
+        "body": "1a8ff14e72fa1771acd59d6207cd5403421f36ab7aa9a85bfe0d8fadd06a69d9",
+        "notes": "c2a15194f466a8f929aa4ccb34643e6e63957722790339ae19dfb48bf7aaecec",
+        "paratext": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root": "a839c51970c212fc5d2ecc8045f059b599ab2a9b1604841fb0a8146e77a1c26a"
+      },
+      "thi-ap6": {
+        "raw": "638655719b428169df431f96decaf6edc144f24b180a5b0c6bfc8463532f18b2",
+        "body": "ab27b118990068d04fa913b4008300439a2ea21af612d15973a269f8015ecc49",
+        "notes": "254463635ff0d36277c038cf3cea249e190438482f5cc1cfdf549a6c0aca3b48",
+        "paratext": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root": "b43d3e52f25dded0a3328f13892ef085f619114ea9bf6f90534b3d8fc2454878"
+      },
+      "thi-ap7": {
+        "raw": "5d6b59e89a412da94f71d43b9c580431e6933f58624048c1ba2f1d48e0021a35",
+        "body": "8591cbb67ec83420320cda0cdc4b3eac149a2ac120b3382e059f1a92cb983fb0",
+        "notes": "db3b2dbf2de356bf961a7e80c7e0364c437898e35b493a546ec17b0c8b8789c2",
+        "paratext": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root": "9896a9cead5994e6ef49ece34dc30dd03e42c7b5c81f39dca8079baef7877108"
+      },
+      "thi-ap8": {
+        "raw": "2cc66fe4525f8482ecd138b67984b1665371526bc004485bcfe44e37aa55d79c",
+        "body": "46db0ce32894b40c193f8b5b5b83f42885a7e3733f05f92b1280fe181abd14d3",
+        "notes": "867890223e60963d78ec4a04b92df764470132f0711f38b703c7a20ce6b6d1ea",
+        "paratext": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root": "f5b4ead53dafba4dcf409c20c8baeca54ff3df56306932813ead09a02c50a782"
+      },
+      "thi-ap9": {
+        "raw": "739f3c437aca5774b48d8f6bf25563301dde919bcf25a8ce44693243d8594016",
+        "body": "df06b3d79c75b5a60039e0397aa6ff360bbdcbd540644698061ebf178818865c",
+        "notes": "aaf80c212d4fb79af81b8a6ace856009ef4457dc14003f4c301b654b8ea78d6e",
+        "paratext": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root": "e0ffdb846c3174017d22ef7cdd3095b4af1391d80694b90ea0b8f8fd13fb9ce0"
+      }
+    }
+  },
+  "live_runtime": {
+    "live_official_runtime": true,
+    "requests": 7,
+    "checks": [
+      {
+        "id": "thi-ap1",
+        "translation_id": "ap:chapter-4/poem-001",
+        "source": "apadana",
+        "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+        "raw_sha256": "991b5f4b2b56a5c501a5360032339619274c6340e844c498d7e0c9416e97e855",
+        "body_sha256": "e1deb7546c3710c718fe032d81f9afe8d7a16c608fca9d765e5bda2a85c995d2",
+        "notes_sha256": "4e26b19bcda68d059f70a2989ec43b1f4cc12ffba6a7274f25232db13d81c821",
+        "root_sha256": "4417e8981c281ed284efb907df388f95b50352a4cfd9ac2141c819250a642f82",
+        "characters": 2950,
+        "quote_characters": 2487,
+        "note_count": 22
+      },
+      {
+        "id": "thi-ap2",
+        "translation_id": "ap:chapter-4/poem-002",
+        "source": "apadana",
+        "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+        "raw_sha256": "eff753b7c329e57894f6e601e6fc3941ffd2b361b2c2d7bdb1e2dc76363fb3d1",
+        "body_sha256": "11c3144cff01460fed4fd759f9805d657da50b06bf1a89cb8b080bdac65d6f4a",
+        "notes_sha256": "320a107958260e7f9528a6fef39e94120d6c9ca509056067efcf1360c36d7045",
+        "root_sha256": "21c0602267dc7fb2b47ea9b057233b1679778ced388c30cc057d875bf4df09b2",
+        "characters": 1033,
+        "quote_characters": 800,
+        "note_count": 6
+      },
+      {
+        "id": "thi-ap3",
+        "translation_id": "ap:chapter-4/poem-003",
+        "source": "apadana",
+        "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+        "raw_sha256": "917d69a2f1e064ac2bbcf29373214844af5cae023960c551934b7c47a7c630ad",
+        "body_sha256": "1a8ff14e72fa1771acd59d6207cd5403421f36ab7aa9a85bfe0d8fadd06a69d9",
+        "notes_sha256": "c2a15194f466a8f929aa4ccb34643e6e63957722790339ae19dfb48bf7aaecec",
+        "root_sha256": "a839c51970c212fc5d2ecc8045f059b599ab2a9b1604841fb0a8146e77a1c26a",
+        "characters": 820,
+        "quote_characters": 634,
+        "note_count": 2
+      },
+      {
+        "id": "thi-ap6",
+        "translation_id": "ap:chapter-4/poem-006",
+        "source": "apadana",
+        "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+        "raw_sha256": "638655719b428169df431f96decaf6edc144f24b180a5b0c6bfc8463532f18b2",
+        "body_sha256": "ab27b118990068d04fa913b4008300439a2ea21af612d15973a269f8015ecc49",
+        "notes_sha256": "254463635ff0d36277c038cf3cea249e190438482f5cc1cfdf549a6c0aca3b48",
+        "root_sha256": "b43d3e52f25dded0a3328f13892ef085f619114ea9bf6f90534b3d8fc2454878",
+        "characters": 2210,
+        "quote_characters": 1887,
+        "note_count": 8
+      },
+      {
+        "id": "thi-ap7",
+        "translation_id": "ap:chapter-4/poem-007",
+        "source": "apadana",
+        "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+        "raw_sha256": "5d6b59e89a412da94f71d43b9c580431e6933f58624048c1ba2f1d48e0021a35",
+        "body_sha256": "8591cbb67ec83420320cda0cdc4b3eac149a2ac120b3382e059f1a92cb983fb0",
+        "notes_sha256": "db3b2dbf2de356bf961a7e80c7e0364c437898e35b493a546ec17b0c8b8789c2",
+        "root_sha256": "9896a9cead5994e6ef49ece34dc30dd03e42c7b5c81f39dca8079baef7877108",
+        "characters": 1780,
+        "quote_characters": 1498,
+        "note_count": 4
+      },
+      {
+        "id": "thi-ap8",
+        "translation_id": "ap:chapter-4/poem-008",
+        "source": "apadana",
+        "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+        "raw_sha256": "2cc66fe4525f8482ecd138b67984b1665371526bc004485bcfe44e37aa55d79c",
+        "body_sha256": "46db0ce32894b40c193f8b5b5b83f42885a7e3733f05f92b1280fe181abd14d3",
+        "notes_sha256": "867890223e60963d78ec4a04b92df764470132f0711f38b703c7a20ce6b6d1ea",
+        "root_sha256": "f5b4ead53dafba4dcf409c20c8baeca54ff3df56306932813ead09a02c50a782",
+        "characters": 3081,
+        "quote_characters": 2633,
+        "note_count": 14
+      },
+      {
+        "id": "thi-ap9",
+        "translation_id": "ap:chapter-4/poem-009",
+        "source": "apadana",
+        "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+        "raw_sha256": "739f3c437aca5774b48d8f6bf25563301dde919bcf25a8ce44693243d8594016",
+        "body_sha256": "df06b3d79c75b5a60039e0397aa6ff360bbdcbd540644698061ebf178818865c",
+        "notes_sha256": "aaf80c212d4fb79af81b8a6ace856009ef4457dc14003f4c301b654b8ea78d6e",
+        "root_sha256": "e0ffdb846c3174017d22ef7cdd3095b4af1391d80694b90ea0b8f8fd13fb9ce0",
+        "characters": 3857,
+        "quote_characters": 3364,
+        "note_count": 14
+      }
+    ]
+  },
+  "mcp_only_rebuilt": {
+    "passed": 2,
+    "checks": [
+      {
+        "check": "MCP 500-character continuation preserves version, owner and prefix",
+        "pages": 6
+      },
+      {
+        "check": "All seven official whole sources match body, notes, paratext, root and revision pins"
+      }
+    ],
+    "sources": [
+      {
+        "uid": "thi-ap1",
+        "transport": "mcp",
+        "characters": 2950,
+        "note_count": 22,
+        "raw_sha256": "991b5f4b2b56a5c501a5360032339619274c6340e844c498d7e0c9416e97e855",
+        "body_sha256": "e1deb7546c3710c718fe032d81f9afe8d7a16c608fca9d765e5bda2a85c995d2",
+        "notes_sha256": "4e26b19bcda68d059f70a2989ec43b1f4cc12ffba6a7274f25232db13d81c821",
+        "paratext_sha256": "226030c23cf0f56a7ff463f39a2fa26d543fe8526b98d482f66a722b80302535",
+        "root_sha256": "4417e8981c281ed284efb907df388f95b50352a4cfd9ac2141c819250a642f82"
+      },
+      {
+        "uid": "thi-ap2",
+        "transport": "mcp",
+        "characters": 1033,
+        "note_count": 6,
+        "raw_sha256": "eff753b7c329e57894f6e601e6fc3941ffd2b361b2c2d7bdb1e2dc76363fb3d1",
+        "body_sha256": "11c3144cff01460fed4fd759f9805d657da50b06bf1a89cb8b080bdac65d6f4a",
+        "notes_sha256": "320a107958260e7f9528a6fef39e94120d6c9ca509056067efcf1360c36d7045",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "21c0602267dc7fb2b47ea9b057233b1679778ced388c30cc057d875bf4df09b2"
+      },
+      {
+        "uid": "thi-ap3",
+        "transport": "mcp",
+        "characters": 820,
+        "note_count": 2,
+        "raw_sha256": "917d69a2f1e064ac2bbcf29373214844af5cae023960c551934b7c47a7c630ad",
+        "body_sha256": "1a8ff14e72fa1771acd59d6207cd5403421f36ab7aa9a85bfe0d8fadd06a69d9",
+        "notes_sha256": "c2a15194f466a8f929aa4ccb34643e6e63957722790339ae19dfb48bf7aaecec",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "a839c51970c212fc5d2ecc8045f059b599ab2a9b1604841fb0a8146e77a1c26a"
+      },
+      {
+        "uid": "thi-ap6",
+        "transport": "mcp",
+        "characters": 2210,
+        "note_count": 8,
+        "raw_sha256": "638655719b428169df431f96decaf6edc144f24b180a5b0c6bfc8463532f18b2",
+        "body_sha256": "ab27b118990068d04fa913b4008300439a2ea21af612d15973a269f8015ecc49",
+        "notes_sha256": "254463635ff0d36277c038cf3cea249e190438482f5cc1cfdf549a6c0aca3b48",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "b43d3e52f25dded0a3328f13892ef085f619114ea9bf6f90534b3d8fc2454878"
+      },
+      {
+        "uid": "thi-ap7",
+        "transport": "mcp",
+        "characters": 1780,
+        "note_count": 4,
+        "raw_sha256": "5d6b59e89a412da94f71d43b9c580431e6933f58624048c1ba2f1d48e0021a35",
+        "body_sha256": "8591cbb67ec83420320cda0cdc4b3eac149a2ac120b3382e059f1a92cb983fb0",
+        "notes_sha256": "db3b2dbf2de356bf961a7e80c7e0364c437898e35b493a546ec17b0c8b8789c2",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "9896a9cead5994e6ef49ece34dc30dd03e42c7b5c81f39dca8079baef7877108"
+      },
+      {
+        "uid": "thi-ap8",
+        "transport": "mcp",
+        "characters": 3081,
+        "note_count": 14,
+        "raw_sha256": "2cc66fe4525f8482ecd138b67984b1665371526bc004485bcfe44e37aa55d79c",
+        "body_sha256": "46db0ce32894b40c193f8b5b5b83f42885a7e3733f05f92b1280fe181abd14d3",
+        "notes_sha256": "867890223e60963d78ec4a04b92df764470132f0711f38b703c7a20ce6b6d1ea",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "f5b4ead53dafba4dcf409c20c8baeca54ff3df56306932813ead09a02c50a782"
+      },
+      {
+        "uid": "thi-ap9",
+        "transport": "mcp",
+        "characters": 3857,
+        "note_count": 14,
+        "raw_sha256": "739f3c437aca5774b48d8f6bf25563301dde919bcf25a8ce44693243d8594016",
+        "body_sha256": "df06b3d79c75b5a60039e0397aa6ff360bbdcbd540644698061ebf178818865c",
+        "notes_sha256": "aaf80c212d4fb79af81b8a6ace856009ef4457dc14003f4c301b654b8ea78d6e",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "e0ffdb846c3174017d22ef7cdd3095b4af1391d80694b90ea0b8f8fd13fb9ce0"
+      }
+    ],
+    "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "outside_source_tree": false,
+    "browser_mode": "not run",
+    "pinned_provider_reads": 13,
+    "upstream_provider_requests": 0,
+    "a11y": {
+      "scans": 0,
+      "violations": 0,
+      "results": []
+    },
+    "limits": "Actual MCP and, in browser mode, Chromium with pinned official bytes injected only at provider transport. No live publisher availability, new rights or scholarly approval, physical-device or human accessibility certification. Reports contain no publisher bodies, notes or private drafts."
+  },
+  "mcp_only_extracted_package": {
+    "passed": 2,
+    "checks": [
+      {
+        "check": "MCP 500-character continuation preserves version, owner and prefix",
+        "pages": 6
+      },
+      {
+        "check": "All seven official whole sources match body, notes, paratext, root and revision pins"
+      }
+    ],
+    "sources": [
+      {
+        "uid": "thi-ap1",
+        "transport": "mcp",
+        "characters": 2950,
+        "note_count": 22,
+        "raw_sha256": "991b5f4b2b56a5c501a5360032339619274c6340e844c498d7e0c9416e97e855",
+        "body_sha256": "e1deb7546c3710c718fe032d81f9afe8d7a16c608fca9d765e5bda2a85c995d2",
+        "notes_sha256": "4e26b19bcda68d059f70a2989ec43b1f4cc12ffba6a7274f25232db13d81c821",
+        "paratext_sha256": "226030c23cf0f56a7ff463f39a2fa26d543fe8526b98d482f66a722b80302535",
+        "root_sha256": "4417e8981c281ed284efb907df388f95b50352a4cfd9ac2141c819250a642f82"
+      },
+      {
+        "uid": "thi-ap2",
+        "transport": "mcp",
+        "characters": 1033,
+        "note_count": 6,
+        "raw_sha256": "eff753b7c329e57894f6e601e6fc3941ffd2b361b2c2d7bdb1e2dc76363fb3d1",
+        "body_sha256": "11c3144cff01460fed4fd759f9805d657da50b06bf1a89cb8b080bdac65d6f4a",
+        "notes_sha256": "320a107958260e7f9528a6fef39e94120d6c9ca509056067efcf1360c36d7045",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "21c0602267dc7fb2b47ea9b057233b1679778ced388c30cc057d875bf4df09b2"
+      },
+      {
+        "uid": "thi-ap3",
+        "transport": "mcp",
+        "characters": 820,
+        "note_count": 2,
+        "raw_sha256": "917d69a2f1e064ac2bbcf29373214844af5cae023960c551934b7c47a7c630ad",
+        "body_sha256": "1a8ff14e72fa1771acd59d6207cd5403421f36ab7aa9a85bfe0d8fadd06a69d9",
+        "notes_sha256": "c2a15194f466a8f929aa4ccb34643e6e63957722790339ae19dfb48bf7aaecec",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "a839c51970c212fc5d2ecc8045f059b599ab2a9b1604841fb0a8146e77a1c26a"
+      },
+      {
+        "uid": "thi-ap6",
+        "transport": "mcp",
+        "characters": 2210,
+        "note_count": 8,
+        "raw_sha256": "638655719b428169df431f96decaf6edc144f24b180a5b0c6bfc8463532f18b2",
+        "body_sha256": "ab27b118990068d04fa913b4008300439a2ea21af612d15973a269f8015ecc49",
+        "notes_sha256": "254463635ff0d36277c038cf3cea249e190438482f5cc1cfdf549a6c0aca3b48",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "b43d3e52f25dded0a3328f13892ef085f619114ea9bf6f90534b3d8fc2454878"
+      },
+      {
+        "uid": "thi-ap7",
+        "transport": "mcp",
+        "characters": 1780,
+        "note_count": 4,
+        "raw_sha256": "5d6b59e89a412da94f71d43b9c580431e6933f58624048c1ba2f1d48e0021a35",
+        "body_sha256": "8591cbb67ec83420320cda0cdc4b3eac149a2ac120b3382e059f1a92cb983fb0",
+        "notes_sha256": "db3b2dbf2de356bf961a7e80c7e0364c437898e35b493a546ec17b0c8b8789c2",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "9896a9cead5994e6ef49ece34dc30dd03e42c7b5c81f39dca8079baef7877108"
+      },
+      {
+        "uid": "thi-ap8",
+        "transport": "mcp",
+        "characters": 3081,
+        "note_count": 14,
+        "raw_sha256": "2cc66fe4525f8482ecd138b67984b1665371526bc004485bcfe44e37aa55d79c",
+        "body_sha256": "46db0ce32894b40c193f8b5b5b83f42885a7e3733f05f92b1280fe181abd14d3",
+        "notes_sha256": "867890223e60963d78ec4a04b92df764470132f0711f38b703c7a20ce6b6d1ea",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "f5b4ead53dafba4dcf409c20c8baeca54ff3df56306932813ead09a02c50a782"
+      },
+      {
+        "uid": "thi-ap9",
+        "transport": "mcp",
+        "characters": 3857,
+        "note_count": 14,
+        "raw_sha256": "739f3c437aca5774b48d8f6bf25563301dde919bcf25a8ce44693243d8594016",
+        "body_sha256": "df06b3d79c75b5a60039e0397aa6ff360bbdcbd540644698061ebf178818865c",
+        "notes_sha256": "aaf80c212d4fb79af81b8a6ace856009ef4457dc14003f4c301b654b8ea78d6e",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "e0ffdb846c3174017d22ef7cdd3095b4af1391d80694b90ea0b8f8fd13fb9ce0"
+      }
+    ],
+    "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "outside_source_tree": true,
+    "browser_mode": "not run",
+    "pinned_provider_reads": 13,
+    "upstream_provider_requests": 0,
+    "a11y": {
+      "scans": 0,
+      "violations": 0,
+      "results": []
+    },
+    "limits": "Actual MCP and, in browser mode, Chromium with pinned official bytes injected only at provider transport. No live publisher availability, new rights or scholarly approval, physical-device or human accessibility certification. Reports contain no publisher bodies, notes or private drafts."
+  },
+  "smoke": {
+    "tools": 34,
+    "checks": 64,
+    "live": false,
+    "passed": true
+  },
+  "evals": {
+    "questions": 201,
+    "score_percent": 100,
+    "live_questions_skipped": 6
+  },
+  "browser": {
+    "normal": "blocked",
+    "a11y": "blocked",
+    "reason": "Chromium startup: process_singleton_posix.cc:297 socket() EPERM"
+  },
+  "publication": "local only; no remote writes, deployment, merge or outreach"
+}

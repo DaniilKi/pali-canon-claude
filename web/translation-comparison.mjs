@@ -1,5 +1,5 @@
 /** Exact ordinary-version comparison guards. No source retrieval or scope approval. */
-import {validateEnglishPage} from './translation-policy.mjs';
+import {validateEnglishPage, validateApadanaChoice, apadanaFamily, apadanaId} from './translation-policy.mjs';
 import {sectionSourceUnit,isSectionPageId,validateSectionDescriptor} from './milinda-sources.mjs';
 
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
@@ -12,6 +12,7 @@ const failure=()=>{throw Error('The comparison selection or source response is i
 const sourceId=x=>typeof x==='string'&&x.trim()===x&&!/[\x00-\x1f\x7f]/.test(x)&&x.length<=200&&!x.includes('..')&&!/\.html?$/.test(x)&&(
   /^dt:[A-Za-z0-9_./-]+$/.test(x)||
   (/^ati:\/(?:tipitaka|lib|ptf|noncanon)\/[a-z0-9/._-]+$/.test(x)&&!isSectionPageId(x))||Boolean(sectionSourceUnit(x))||
+  apadanaFamily(x)||
   /^aj:[A-Za-z0-9_./ -]+$/.test(x)&&x.trim()===x
 );
 
@@ -26,9 +27,10 @@ export function comparisonChoices(choices,requestedId){
     }
     // Presence is decisive, including null/undefined or inherited declarations.
     if('translation_scope' in choice||choice.whole_unit_coverage===false)continue;
-    if(!sourceId(choice.translation_id)||sectionSourceUnit(choice.translation_id)&&sectionSourceUnit(choice.translation_id)!==requestedId||!text(choice.translator)||choice.translator.length>300
+    if(!sourceId(choice.translation_id)||apadanaFamily(choice.translation_id)&&choice.translation_id!==apadanaId(requestedId)||sectionSourceUnit(choice.translation_id)&&sectionSourceUnit(choice.translation_id)!==requestedId||!text(choice.translator)||choice.translator.length>300
       ||own(choice,'whole_unit_coverage')&&choice.whole_unit_coverage!==true)failure();
     validateSectionDescriptor(choice);
+    validateApadanaChoice(choice, requestedId);
     ordinary.push(clone(choice));
   }
   return ordinary;
@@ -41,9 +43,10 @@ export function comparisonSelection(ids,choices,requestedId){
   return [...ids];
 }
 
-const requestKeys=new Set(['uid','translation','offset','limit','prefix_sha256']);
+const requestKeys=new Set(['uid','translation','offset','limit','prefix_sha256','translation_revision']);
 function request(args,requestedId,choice,expectedLimit){
   if(!object(args)||Object.keys(args).some(key=>!requestKeys.has(key))||args.uid!==requestedId
+    ||(apadanaFamily(choice.translation_id) ? args.translation_revision!==choice.translation_revision : own(args,'translation_revision'))
     ||args.translation!==choice.translation_id||!sourceId(args.translation)
     ||!Number.isSafeInteger(args.limit)||args.limit<500||args.limit>30000
     ||expectedLimit!==undefined&&args.limit!==expectedLimit)failure();

@@ -21585,6 +21585,496 @@ __export(canon_exports, {
   translationScope: () => translationScope
 });
 
+// src/apadana-profiles.mjs
+var APADANA_COMMIT = "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4";
+var APADANA_BASE = "https://apadanatranslation.com";
+var APADANA_LICENSE = "CC BY-NC-SA 4.0";
+var APADANA_LICENSE_URL = "https://creativecommons.org/licenses/by-nc-sa/4.0/";
+var APADANA_TRANSLATOR = "Jonathan S. Walters";
+var deepFreeze = (value) => {
+  if (value && typeof value === "object") {
+    for (const child of Object.values(value)) deepFreeze(child);
+    Object.freeze(value);
+  }
+  return value;
+};
+var APADANA_PROFILES = deepFreeze({
+  "thi-ap1": {
+    "id": "thi-ap1",
+    "poem": 1,
+    "verses": [
+      1,
+      19
+    ],
+    "note_count": 22,
+    "source": "apadana",
+    "path": "/text/chapter-4/poem-001/",
+    "url": "https://apadanatranslation.com/text/chapter-4/poem-001/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-001.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Sumedh\u0101",
+    "reference": "Ther\u012B Apad\u0101na 1; publisher verses 1\u201319",
+    "raw_sha256": "991b5f4b2b56a5c501a5360032339619274c6340e844c498d7e0c9416e97e855",
+    "body_sha256": "e1deb7546c3710c718fe032d81f9afe8d7a16c608fca9d765e5bda2a85c995d2",
+    "notes_sha256": "4e26b19bcda68d059f70a2989ec43b1f4cc12ffba6a7274f25232db13d81c821",
+    "paratext_sha256": "226030c23cf0f56a7ff463f39a2fa26d543fe8526b98d482f66a722b80302535",
+    "root_sha256": "4417e8981c281ed284efb907df388f95b50352a4cfd9ac2141c819250a642f82",
+    "mapping_notes": [
+      "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas.",
+      "Invocation and chapter preface are publisher paratext, not substantive poem stanzas."
+    ]
+  },
+  "thi-ap2": {
+    "id": "thi-ap2",
+    "poem": 2,
+    "verses": [
+      20,
+      25
+    ],
+    "note_count": 6,
+    "source": "apadana",
+    "path": "/text/chapter-4/poem-002/",
+    "url": "https://apadanatranslation.com/text/chapter-4/poem-002/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-002.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Mekhal\u0101d\u0101yik\u0101",
+    "reference": "Ther\u012B Apad\u0101na 2; publisher verses 20\u201325",
+    "raw_sha256": "eff753b7c329e57894f6e601e6fc3941ffd2b361b2c2d7bdb1e2dc76363fb3d1",
+    "body_sha256": "11c3144cff01460fed4fd759f9805d657da50b06bf1a89cb8b080bdac65d6f4a",
+    "notes_sha256": "320a107958260e7f9528a6fef39e94120d6c9ca509056067efcf1360c36d7045",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "21c0602267dc7fb2b47ea9b057233b1679778ced388c30cc057d875bf4df09b2",
+    "mapping_notes": [
+      "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas."
+    ]
+  },
+  "thi-ap3": {
+    "id": "thi-ap3",
+    "poem": 3,
+    "verses": [
+      26,
+      30
+    ],
+    "note_count": 2,
+    "source": "apadana",
+    "path": "/text/chapter-4/poem-003/",
+    "url": "https://apadanatranslation.com/text/chapter-4/poem-003/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-003.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Ma\u1E47\u1E0Dapad\u0101yik\u0101",
+    "reference": "Ther\u012B Apad\u0101na 3; publisher verses 26\u201330",
+    "raw_sha256": "917d69a2f1e064ac2bbcf29373214844af5cae023960c551934b7c47a7c630ad",
+    "body_sha256": "1a8ff14e72fa1771acd59d6207cd5403421f36ab7aa9a85bfe0d8fadd06a69d9",
+    "notes_sha256": "c2a15194f466a8f929aa4ccb34643e6e63957722790339ae19dfb48bf7aaecec",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "a839c51970c212fc5d2ecc8045f059b599ab2a9b1604841fb0a8146e77a1c26a",
+    "mapping_notes": [
+      "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas.",
+      "Verse26: publisher robes vs VRI three robes."
+    ]
+  },
+  "thi-ap6": {
+    "id": "thi-ap6",
+    "poem": 6,
+    "verses": [
+      46,
+      59
+    ],
+    "note_count": 8,
+    "source": "apadana",
+    "path": "/text/chapter-4/poem-006/",
+    "url": "https://apadanatranslation.com/text/chapter-4/poem-006/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-006.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Ekapi\u1E47\u1E0Dad\u0101yik\u0101",
+    "reference": "Ther\u012B Apad\u0101na 6; publisher verses 46\u201359",
+    "raw_sha256": "638655719b428169df431f96decaf6edc144f24b180a5b0c6bfc8463532f18b2",
+    "body_sha256": "ab27b118990068d04fa913b4008300439a2ea21af612d15973a269f8015ecc49",
+    "notes_sha256": "254463635ff0d36277c038cf3cea249e190438482f5cc1cfdf549a6c0aca3b48",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "b43d3e52f25dded0a3328f13892ef085f619114ea9bf6f90534b3d8fc2454878",
+    "mapping_notes": [
+      "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas.",
+      "Verse51: publisher blue lotus/mah\u0101nela vs VRI pair of cloths; translator note6 records the edition difference."
+    ]
+  },
+  "thi-ap7": {
+    "id": "thi-ap7",
+    "poem": 7,
+    "verses": [
+      60,
+      70
+    ],
+    "note_count": 4,
+    "source": "apadana",
+    "path": "/text/chapter-4/poem-007/",
+    "url": "https://apadanatranslation.com/text/chapter-4/poem-007/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-007.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Ka\u1E6Dacchubhikkhad\u0101yik\u0101",
+    "reference": "Ther\u012B Apad\u0101na 7; publisher verses 60\u201370",
+    "raw_sha256": "5d6b59e89a412da94f71d43b9c580431e6933f58624048c1ba2f1d48e0021a35",
+    "body_sha256": "8591cbb67ec83420320cda0cdc4b3eac149a2ac120b3382e059f1a92cb983fb0",
+    "notes_sha256": "db3b2dbf2de356bf961a7e80c7e0364c437898e35b493a546ec17b0c8b8789c2",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "9896a9cead5994e6ef49ece34dc30dd03e42c7b5c81f39dca8079baef7877108",
+    "mapping_notes": [
+      "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas."
+    ]
+  },
+  "thi-ap8": {
+    "id": "thi-ap8",
+    "poem": 8,
+    "verses": [
+      71,
+      90
+    ],
+    "note_count": 14,
+    "source": "apadana",
+    "path": "/text/chapter-4/poem-008/",
+    "url": "https://apadanatranslation.com/text/chapter-4/poem-008/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-008.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Sattuppalam\u0101lik\u0101ya",
+    "reference": "Ther\u012B Apad\u0101na 8; publisher verses 71\u201390",
+    "raw_sha256": "2cc66fe4525f8482ecd138b67984b1665371526bc004485bcfe44e37aa55d79c",
+    "body_sha256": "46db0ce32894b40c193f8b5b5b83f42885a7e3733f05f92b1280fe181abd14d3",
+    "notes_sha256": "867890223e60963d78ec4a04b92df764470132f0711f38b703c7a20ce6b6d1ea",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "f5b4ead53dafba4dcf409c20c8baeca54ff3df56306932813ead09a02c50a782",
+    "mapping_notes": [
+      "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas.",
+      "Verse71: publisher follows BJTS journey reading; VRI root differs."
+    ]
+  },
+  "thi-ap9": {
+    "id": "thi-ap9",
+    "poem": 9,
+    "verses": [
+      91,
+      115
+    ],
+    "note_count": 14,
+    "source": "apadana",
+    "path": "/text/chapter-4/poem-009/",
+    "url": "https://apadanatranslation.com/text/chapter-4/poem-009/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-009.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Pa\xF1cad\u012Bpik\u0101",
+    "reference": "Ther\u012B Apad\u0101na 9; publisher verses 91\u2013115",
+    "raw_sha256": "739f3c437aca5774b48d8f6bf25563301dde919bcf25a8ce44693243d8594016",
+    "body_sha256": "df06b3d79c75b5a60039e0397aa6ff360bbdcbd540644698061ebf178818865c",
+    "notes_sha256": "aaf80c212d4fb79af81b8a6ace856009ef4457dc14003f4c301b654b8ea78d6e",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "e0ffdb846c3174017d22ef7cdd3095b4af1391d80694b90ea0b8f8fd13fb9ce0",
+    "mapping_notes": [
+      "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas.",
+      "Verse99: publisher PTS hundred-by-sixty leagues vs VRI/BJTS sixty-by-thirty; translator note8 preserves the difference."
+    ]
+  }
+});
+var APADANA_RIGHTS = deepFreeze([
+  {
+    "path": "LICENSE.md",
+    "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
+  },
+  {
+    "path": "src/_pages/about.md",
+    "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352"
+  },
+  {
+    "path": "src/_includes/site/footer.njk",
+    "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4"
+  },
+  {
+    "path": "src/_includes/layouts/epub-metadata.xml",
+    "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f"
+  },
+  {
+    "path": "src/_data/site.json",
+    "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa"
+  },
+  {
+    "path": "src/_poems/_poems.json",
+    "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
+  }
+]);
+var isApadanaRawUrl = (value) => Object.values(APADANA_PROFILES).some((p) => p.raw_url === String(value));
+
+// src/apadana.mjs
+var import_node_crypto = require("node:crypto");
+
+// src/http.mjs
+var ALLOWED = [
+  { host: "accesstoinsight.org" },
+  { host: "www.accesstoinsight.org" },
+  { host: "www.dhammatalks.org" },
+  { host: "dhammatalks.org" },
+  { host: "www.dpdict.net" },
+  { host: "dpdict.net" },
+  { host: "raw.githubusercontent.com", prefixes: ["/bcbsit/ati/", "/digitalpalireader/accesstoinsight/"] },
+  { host: "cdn.jsdelivr.net", prefixes: ["/gh/bcbsit/ati@"] },
+  // Ānandajoti Bhikkhu's text-and-translation pages only (CC BY-SA); nothing else on the site is fetched.
+  { host: "ancient-buddhist-texts.net", prefixes: ["/Texts-and-Translations/"] }
+];
+var ALLOWED_HOSTS = ALLOWED.map((r) => r.host);
+var MAX_BYTES = 6 * 1024 * 1024;
+var USER_AGENT = "pali-canon-claude/2.0 (scripture study; read-only; https://github.com/DaniilKi/pali-canon-claude)";
+function allowed(url) {
+  if (url.protocol !== "https:" || url.port || url.username || url.password) return false;
+  const rule = ALLOWED.find((r) => r.host === url.hostname);
+  if (!rule) return false;
+  if (url.hostname === "raw.githubusercontent.com" && isApadanaRawUrl(url.href)) return true;
+  return !rule.prefixes || rule.prefixes.some((p) => url.pathname.startsWith(p));
+}
+var wait = (ms) => new Promise((r) => setTimeout(r, ms));
+var HttpError = class extends Error {
+  constructor(message, status, retryable) {
+    super(message);
+    this.status = status;
+    this.retryable = retryable;
+  }
+};
+var SIMULATED_OUTAGE = new Set(String(process.env.PALI_CANON_SIMULATE_OUTAGE || "").split(",").map((h) => h.trim()).filter(Boolean));
+async function fetchOnce(url, { json, timeout }) {
+  let target = new URL(url);
+  if (SIMULATED_OUTAGE.has(target.hostname)) throw new HttpError(`${target.hostname} unreachable (simulated outage)`, 503, true);
+  const signal = AbortSignal.timeout(timeout);
+  const exactApadana = isApadanaRawUrl(target.href);
+  for (let redirects = 0; redirects <= 4; redirects += 1) {
+    if (!allowed(target)) throw new HttpError("Provider URL is outside the supported public sources.", 0, false);
+    if (isApadanaRawUrl(target.href) && !exactApadana) throw new HttpError("Redirect entry into a pinned Apad\u0101na source is not allowed.", 0, false);
+    let response;
+    try {
+      response = await fetch(target, { redirect: "manual", signal, headers: { "User-Agent": USER_AGENT, Accept: json ? "application/json" : "text/html,text/plain" } });
+    } catch (error2) {
+      throw new HttpError(`${target.hostname} unreachable (${error2.cause?.code || error2.name || "network error"})`, 0, true);
+    }
+    if ([301, 302, 303, 307, 308].includes(response.status)) {
+      await response.body?.cancel();
+      if (exactApadana) throw new HttpError("The pinned Apad\u0101na source must not redirect.", response.status, false);
+      const location = response.headers.get("location");
+      if (!location) throw new HttpError("Redirect without destination.", response.status, false);
+      target = new URL(location, target);
+      continue;
+    }
+    if (!response.ok) {
+      await response.body?.cancel();
+      const retryable = response.status >= 500 || response.status === 429;
+      throw new HttpError(`${target.hostname} returned HTTP ${response.status}`, response.status, retryable);
+    }
+    if (Number(response.headers.get("content-length")) > MAX_BYTES) {
+      await response.body?.cancel();
+      throw new HttpError("Response too large.", response.status, false);
+    }
+    const reader = response.body.getReader();
+    const chunks = [];
+    let bytes = 0;
+    try {
+      for (; ; ) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        bytes += value.byteLength;
+        if (bytes > MAX_BYTES) throw new HttpError("Response exceeded the 6 MB limit.", 200, false);
+        chunks.push(value);
+      }
+    } catch (error2) {
+      try {
+        await reader.cancel();
+      } catch {
+      }
+      if (error2 instanceof HttpError) throw error2;
+      throw new HttpError(`${target.hostname} response body interrupted (${error2.cause?.code || error2.name || "stream error"})`, 0, true);
+    } finally {
+      reader.releaseLock();
+    }
+    const body = Buffer.concat(chunks).toString("utf8");
+    if (!json) return body;
+    try {
+      return JSON.parse(body);
+    } catch {
+      throw new HttpError(`${target.hostname} returned invalid JSON.`, 200, true);
+    }
+  }
+  throw new HttpError("Too many redirects.", 0, false);
+}
+async function fetchPublic(url, { json = true, retries = 2, timeout = 2e4 } = {}) {
+  let last;
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try {
+      return await fetchOnce(url, { json, timeout });
+    } catch (error2) {
+      last = error2;
+      if (!error2.retryable || attempt === retries) break;
+      await wait(400 * 3 ** attempt);
+    }
+  }
+  throw last;
+}
+async function fetchMirrors(urls, { json = false, timeout = 15e3, mirrorRetries = 0 } = {}) {
+  const failures = [];
+  for (const [index4, url] of urls.entries()) {
+    try {
+      return { body: await fetchPublic(url, { json, retries: index4 === 0 ? 1 : mirrorRetries, timeout }), url, mirror: index4 };
+    } catch (error3) {
+      failures.push(`${new URL(url).hostname}: ${error3.message}`);
+      if (error3.status === 404 && index4 === urls.length - 1) break;
+    }
+  }
+  const error2 = new Error(`All sources failed \u2014 ${failures.join("; ")}`);
+  error2.failures = failures;
+  throw error2;
+}
+var ENTITIES = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+  nbsp: " ",
+  ndash: "\u2013",
+  mdash: "\u2014",
+  hellip: "\u2026",
+  lsquo: "\u2018",
+  rsquo: "\u2019",
+  ldquo: "\u201C",
+  rdquo: "\u201D",
+  bull: "\u2022",
+  copy: "\xA9",
+  middot: "\xB7",
+  ensp: " ",
+  emsp: " ",
+  thinsp: " ",
+  aacute: "\xE1",
+  eacute: "\xE9",
+  iacute: "\xED",
+  oacute: "\xF3",
+  uacute: "\xFA",
+  ntilde: "\xF1",
+  Ntilde: "\xD1"
+};
+function decodeHtml(value) {
+  return String(value ?? "").replace(/&(#x[\da-f]+|#\d+|[a-z][a-z\d]+);/gi, (whole, key3) => {
+    if (key3.startsWith("#")) {
+      const point = key3[1].toLowerCase() === "x" ? parseInt(key3.slice(2), 16) : Number(key3.slice(1));
+      return point > 0 && point <= 1114111 ? String.fromCodePoint(point) : whole;
+    }
+    return ENTITIES[key3] ?? whole;
+  });
+}
+function plainText(html) {
+  return decodeHtml(String(html ?? "").replace(/<!--[^]*?-->/g, "").replace(/<(script|style|svg|nav|noscript)\b[^>]*>[^]*?<\/\1\s*>/gi, "").replace(/<br\b[^>]*>/gi, "\n").replace(/<\/(p|div|h[1-6]|li|dt|dd|blockquote|tr|section|article)>/gi, "\n").replace(/<(span|a|sup)\b[^>]*class=["'][^"']*\b(ref|pts|pagenum|pagebreak|anchor|seg)\b[^"']*["'][^>]*>[^<]*<\/\1>/gi, " ").replace(/<[^>]*>/g, "")).replace(/[ \t]+/g, " ").replace(/ *\n */g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+function shortText(value, limit = 1600) {
+  const text2 = plainText(value);
+  return text2.length > limit ? `${text2.slice(0, limit)}\u2026 [excerpt shortened]` : text2;
+}
+
+// src/apadana.mjs
+var digest = (value) => (0, import_node_crypto.createHash)("sha256").update(value).digest("hex");
+var fail = () => {
+  throw new Error("Apad\u0101na source metadata or content differs from the reviewed pinned publication.");
+};
+var rootDigest = (unit, book) => digest(JSON.stringify({ id: unit.id, book: unit.book, start: unit.start, end: unit.end, blocks: book.blocks.slice(unit.start, unit.end) }));
+function plainMarkdown(value) {
+  let text2 = String(value).replace(/\[([^\[\]]*)\]\{\.diacritics data-state=on\}\[([^\[\]]*)\]\{\.no-diacritics data-state=off\}/g, "$1");
+  if (/\{\.(?:no-)?diacritics\b/.test(text2)) fail();
+  text2 = text2.replace(/\[\^(\d+)\]/g, "[Note $1]").replace(/<abbr title="[^"]*">([^<>]*)<\/abbr>/g, "$1");
+  if (/[<>]/.test(text2)) fail();
+  text2 = decodeHtml(text2).replace(/\\([\\`*{}\[\]()#+.!_>-])/g, "$1").replace(/^#{1,3}\s+/gm, "").replace(/\*([^*\n]+)\*/g, "$1").replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+  return text2;
+}
+function parseApadana(raw, profile) {
+  if (typeof raw !== "string" || raw.includes("\r") || !profile) fail();
+  const front = raw.match(/^---\n([^]*?)\n---\n/);
+  if (!front) fail();
+  const title = front[1].match(/^title: (.+)$/m)?.[1];
+  if (!title || !new RegExp(`^order: ${profile.poem}$`, "m").test(front[1]) || !/^category: chapter-4$/m.test(front[1])) fail();
+  const rest = raw.slice(front[0].length).trim();
+  const notesAt = rest.search(/^\[\^\d+\]:/m);
+  if (notesAt < 0) fail();
+  const poem = rest.slice(0, notesAt).trim(), definitions = rest.slice(notesAt);
+  const entries = [...definitions.matchAll(/^\[\^(\d+)\]:[ \t]*([^]*?)(?=^\[\^\d+\]:|(?![^]))/gm)];
+  if (!entries.length || entries[0].index !== 0) fail();
+  const translator_notes = entries.map((entry3, index4) => {
+    if (Number(entry3[1]) !== index4 + 1 || !entry3[2].trim()) fail();
+    return { number: Number(entry3[1]), text: plainMarkdown(entry3[2]) };
+  });
+  if (translator_notes.length !== profile.note_count) fail();
+  const references = [...poem.matchAll(/\[\^(\d+)\]/g)].map((m) => Number(m[1]));
+  if (references.some((n) => !translator_notes[n - 1]) || translator_notes.some((n) => !references.includes(n.number))) fail();
+  const headings = [...poem.matchAll(/^### /gm)];
+  if (headings.length !== 1) fail();
+  const split = headings[0].index;
+  if (profile.poem === 1 !== split > 0) fail();
+  const publisher_paratext = plainMarkdown(poem.slice(0, split));
+  const text2 = plainMarkdown(poem.slice(split));
+  const paragraphs = text2.split(/\n\n+/);
+  const stanzas = paragraphs.flatMap((p) => {
+    const match2 = p.match(/\((\d+)\)\s*\[(\d+)\](?:\[Note \d+\])*$/);
+    return match2 ? [{ local: Number(match2[1]), global: Number(match2[2]), text: p }] : [];
+  });
+  const [first, last] = profile.verses;
+  if (stanzas.length !== last - first + 1 || stanzas.some((s, i) => s.local !== i + 1 || s.global !== first + i)) fail();
+  if (paragraphs.length !== stanzas.length + 3 || !paragraphs[0].startsWith(`[${profile.poem}. `) || !/^Thus indeed /.test(paragraphs.at(-2)) || !/legend of .*is finished\.\]?(?:\[Note \d+\])?$/.test(paragraphs.at(-1))) fail();
+  return { title, text: text2, translator_notes, publisher_paratext };
+}
+function validateLink(link, id, unit, book) {
+  const profile = Object.values(APADANA_PROFILES).find((p) => p.path === link?.path);
+  if (!profile || id !== void 0 && (id !== profile.id || !unit || !book)) fail();
+  for (const key3 of ["source", "path", "url", "raw_url", "translator", "license", "translation_revision", "raw_sha256", "body_sha256", "notes_sha256", "paratext_sha256", "root_sha256", "note_count"]) {
+    if (link[key3] !== profile[key3]) fail();
+  }
+  if (["partial_scope", "shared_scope", "section", "parts"].some((key3) => Object.hasOwn(link, key3))) fail();
+  for (const key3 of ["title", "reference", "mapping_notes"]) if (JSON.stringify(link[key3]) !== JSON.stringify(profile[key3])) fail();
+  if (link.english !== void 0 && link.english !== profile.title) fail();
+  if (unit && (!book || unit.id !== profile.id || rootDigest(unit, book) !== profile.root_sha256)) fail();
+  return profile;
+}
+function quotationText(result) {
+  return String(result.text || "").split(/\n\n+/).filter((p) => /\(\d+\)\s*\[\d+\](?:\[Note \d+\])*$/.test(p)).map((p) => p.replace(/\[Note \d+\]/g, "").replace(/\s*\(\d+\)\s*\[\d+\]\s*$/, "")).join("\n\n");
+}
+async function translation(link) {
+  const profile = validateLink(link);
+  const raw = await fetchPublic(profile.raw_url, { json: false });
+  if (digest(raw) !== profile.raw_sha256) fail();
+  const result = parseApadana(raw, profile);
+  if (digest(result.text) !== profile.body_sha256 || digest(JSON.stringify(result.translator_notes)) !== profile.notes_sha256 || digest(result.publisher_paratext) !== profile.paratext_sha256) fail();
+  return {
+    ...result,
+    source: "apadana",
+    url: profile.url,
+    fetched_from: "official pinned repository",
+    fetched_url: profile.raw_url,
+    translator: APADANA_TRANSLATOR,
+    attribution: "Jonathan S. Walters and Whitman College, Legends of the Buddhist Saints. No endorsement is implied.",
+    license: APADANA_LICENSE,
+    license_url: APADANA_LICENSE_URL,
+    translation_revision: APADANA_COMMIT,
+    raw_sha256: profile.raw_sha256,
+    body_sha256: profile.body_sha256,
+    notes_sha256: profile.notes_sha256,
+    paratext_sha256: profile.paratext_sha256,
+    root_sha256: profile.root_sha256,
+    mapping_notes: [...profile.mapping_notes],
+    changes: "Presentation extraction: retain diacritics; remove alternate no-diacritic display, Markdown and abbreviation markup; preserve interpolations and both numbering systems; label and separate translator notes and publisher preface. No translation wording is generated."
+  };
+}
+
 // src/partial-source-registry.mjs
 var stable = (value) => JSON.stringify(Array.isArray(value) ? value.map((v) => JSON.parse(stable(v))) : value && typeof value === "object" ? Object.fromEntries(Object.keys(value).sort().map((k) => [k, JSON.parse(stable(value[k]))])) : value);
 function reviewedPartialLink(row, registry2) {
@@ -21619,7 +22109,7 @@ function assertRegisteredPartial(link, unit, registry2) {
 }
 
 // src/ati-section-registry.mjs
-var import_node_crypto = require("node:crypto");
+var import_node_crypto2 = require("node:crypto");
 
 // src/ati-section-profiles.mjs
 var ATI_SECTION_PROFILE = "ati-kelly-milinda-v1";
@@ -22003,19 +22493,19 @@ var ATI_RETAINED_SHARED_BINDINGS = Object.freeze([
 ].map((row) => Object.freeze(row)));
 
 // src/ati-section-registry.mjs
-var sectionHash = (value) => (0, import_node_crypto.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
+var sectionHash = (value) => (0, import_node_crypto2.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
 var stable2 = (value) => JSON.stringify(Array.isArray(value) ? value.map((v) => JSON.parse(stable2(v))) : value && typeof value === "object" ? Object.fromEntries(Object.keys(value).sort().map((k) => [k, JSON.parse(stable2(value[k]))])) : value);
 var sha = (value) => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
 var text = (value) => typeof value === "string" && value.trim().length > 0 && value.length <= 1e4;
 var exactKeys = (value, keys) => value && typeof value === "object" && !Array.isArray(value) && Object.keys(value).sort().join(",") === [...keys].sort().join(",");
-var fail = () => {
+var fail2 = () => {
   throw Error("Registered ATI question sections lost or changed their reviewed source, selector or root. No whole-page translation or coverage was inferred.");
 };
 function retainedAtiShared(link, unit) {
   const expected = ATI_RETAINED_SHARED_BINDINGS.find((row) => row.owner === unit?.id && row.path === link?.path);
   if (!expected) return false;
   try {
-    return (0, import_node_crypto.createHash)("sha256").update(stable2(link)).digest("hex") === expected.sha256;
+    return (0, import_node_crypto2.createHash)("sha256").update(stable2(link)).digest("hex") === expected.sha256;
   } catch {
     return false;
   }
@@ -22036,39 +22526,39 @@ function reviewedSectionLink(row, registry2) {
   };
 }
 function validateSectionRegistry(registry2, corpus, translations, readSegments) {
-  if (!exactKeys(registry2, ["version", "ati_commit", "vri_commit", "links"]) || registry2.version !== 1 || registry2.ati_commit !== ATI_SECTION_COMMIT || registry2.vri_commit !== corpus.source.commit || !Array.isArray(registry2.links) || registry2.links.length !== ATI_SECTION_PROFILES.length || typeof readSegments !== "function") fail();
+  if (!exactKeys(registry2, ["version", "ati_commit", "vri_commit", "links"]) || registry2.version !== 1 || registry2.ati_commit !== ATI_SECTION_COMMIT || registry2.vri_commit !== corpus.source.commit || !Array.isArray(registry2.links) || registry2.links.length !== ATI_SECTION_PROFILES.length || typeof readSegments !== "function") fail2();
   const units = new Map(corpus.units.map((unit) => [unit.id, unit])), seen = /* @__PURE__ */ new Set();
   for (const row of registry2.links) {
-    if (!exactKeys(row, ["unit_id", "path", "anchor", "english_title", "source_reference", "translator", "license", "mapping_note", "root", "source_html_sha256", "untranslated_paratext", "section"])) fail();
+    if (!exactKeys(row, ["unit_id", "path", "anchor", "english_title", "source_reference", "translator", "license", "mapping_note", "root", "source_html_sha256", "untranslated_paratext", "section"])) fail2();
     const profile = ATI_SECTION_PROFILES.find((value) => value.unit_id === row.unit_id), p = row.section, root = row.root, unit = units.get(row.unit_id);
     const selection2 = profile?.profile === AN_TEN_SECTION_PROFILE;
-    if (!profile || seen.has(row.unit_id) || row.path !== profile.path || row.anchor !== profile.anchor || row.source_html_sha256 !== profile.source_html_sha256 || row.translator !== profile.translator || row.license !== profile.license || !text(row.english_title) || !text(row.source_reference) || !text(row.mapping_note) || !unit || unit.collection !== profile.collection || unit.approximate || unit.kind || unit.members) fail();
+    if (!profile || seen.has(row.unit_id) || row.path !== profile.path || row.anchor !== profile.anchor || row.source_html_sha256 !== profile.source_html_sha256 || row.translator !== profile.translator || row.license !== profile.license || !text(row.english_title) || !text(row.source_reference) || !text(row.mapping_note) || !unit || unit.collection !== profile.collection || unit.approximate || unit.kind || unit.members) fail2();
     seen.add(row.unit_id);
-    if (!exactKeys(root, ["id", "book", "start", "end", "title", "vri", "root_blocks_sha256"]) || ["id", "book", "start", "end", "title", "vri"].some((key3) => root[key3] !== unit[key3]) || !sha(root.root_blocks_sha256) || sectionHash(corpus.books[unit.book].blocks.slice(unit.start, unit.end)) !== root.root_blocks_sha256) fail();
-    if (!exactKeys(p, ["version", "status", "unit_id", "profile", "anchor", "heading", "paragraph_count", "note_count", "section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256", "first_ref", "last_ref", "source_commit", ...selection2 ? ["selection_id"] : []]) || p.version !== 1 || p.status !== "reviewed" || p.unit_id !== unit.id || p.profile !== profile.profile || p.anchor !== row.anchor || p.heading !== (selection2 ? null : profile.label || row.source_reference) || p.paragraph_count !== profile.paragraphs || p.note_count !== profile.notes || p.source_commit !== registry2.vri_commit || ["section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256"].some((key3) => !sha(p[key3]))) fail();
+    if (!exactKeys(root, ["id", "book", "start", "end", "title", "vri", "root_blocks_sha256"]) || ["id", "book", "start", "end", "title", "vri"].some((key3) => root[key3] !== unit[key3]) || !sha(root.root_blocks_sha256) || sectionHash(corpus.books[unit.book].blocks.slice(unit.start, unit.end)) !== root.root_blocks_sha256) fail2();
+    if (!exactKeys(p, ["version", "status", "unit_id", "profile", "anchor", "heading", "paragraph_count", "note_count", "section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256", "first_ref", "last_ref", "source_commit", ...selection2 ? ["selection_id"] : []]) || p.version !== 1 || p.status !== "reviewed" || p.unit_id !== unit.id || p.profile !== profile.profile || p.anchor !== row.anchor || p.heading !== (selection2 ? null : profile.label || row.source_reference) || p.paragraph_count !== profile.paragraphs || p.note_count !== profile.notes || p.source_commit !== registry2.vri_commit || ["section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256"].some((key3) => !sha(p[key3]))) fail2();
     const segments2 = readSegments(unit).map(({ ref, type, text: text2 }) => ({ ref, type, text: text2 })), first = segments2.findIndex((segment) => segment.ref === p.first_ref), last = segments2.findIndex((segment) => segment.ref === p.last_ref);
-    if (sectionHash(segments2.slice(first, last + 1)) !== p.pali_sha256 || !Array.isArray(row.untranslated_paratext) || !selection2 && !row.untranslated_paratext.length) fail();
+    if (sectionHash(segments2.slice(first, last + 1)) !== p.pali_sha256 || !Array.isArray(row.untranslated_paratext) || !selection2 && !row.untranslated_paratext.length) fail2();
     if (selection2) {
-      if (p.selection_id !== profile.selection_id || p.selection_id !== unit.id || row.english_title !== profile.parent_title || first !== profile.first_ref_number - 1 || last !== profile.last_ref_number - 1 || first < 0 || last < first || segments2.slice(first, last + 1).some((segment) => segment.type !== "prose")) fail();
+      if (p.selection_id !== profile.selection_id || p.selection_id !== unit.id || row.english_title !== profile.parent_title || first !== profile.first_ref_number - 1 || last !== profile.last_ref_number - 1 || first < 0 || last < first || segments2.slice(first, last + 1).some((segment) => segment.type !== "prose")) fail2();
       const paratext = [...profile.inline_paratext ? [{ ref: segments2[first].ref, text: profile.inline_paratext }] : [], ...segments2.filter((_, i) => i < first || i > last).map(({ ref, text: text2 }) => ({ ref, text: text2 }))];
-      if (profile.inline_paratext && !segments2[first].text.endsWith(" " + profile.inline_paratext) || stable2(paratext) !== stable2(profile.paratext) || stable2(paratext) !== stable2(row.untranslated_paratext)) fail();
+      if (profile.inline_paratext && !segments2[first].text.endsWith(" " + profile.inline_paratext) || stable2(paratext) !== stable2(profile.paratext) || stable2(paratext) !== stable2(row.untranslated_paratext)) fail2();
     } else if (profile.profile === AN_MIND_SECTION_PROFILE) {
       const at = profile.first_ref_number - 1, body = segments2[at];
-      if (first !== at || last !== at || body?.type !== "prose" || !body.text.endsWith(" " + profile.inline_paratext) || segments2.length !== profile.first_ref_number + (profile.tail_paratext ? 1 : 0)) fail();
-      if (profile.root_heading && (segments2[0]?.type !== "heading" || segments2[0].text !== profile.root_heading)) fail();
-      if (profile.tail_paratext && segments2.at(-1).text !== profile.tail_paratext) fail();
+      if (first !== at || last !== at || body?.type !== "prose" || !body.text.endsWith(" " + profile.inline_paratext) || segments2.length !== profile.first_ref_number + (profile.tail_paratext ? 1 : 0)) fail2();
+      if (profile.root_heading && (segments2[0]?.type !== "heading" || segments2[0].text !== profile.root_heading)) fail2();
+      if (profile.tail_paratext && segments2.at(-1).text !== profile.tail_paratext) fail2();
       const paratext = [{ ref: body.ref, text: profile.inline_paratext }, ...segments2.filter((_, i) => i !== at).map(({ ref, text: text2 }) => ({ ref, text: text2 }))];
-      if (stable2(paratext) !== stable2(row.untranslated_paratext)) fail();
-    } else if (first !== 1 || last < first || segments2[0].type !== "heading" || segments2.slice(first, last + 1).some((segment) => segment.type !== "prose")) fail();
+      if (stable2(paratext) !== stable2(row.untranslated_paratext)) fail2();
+    } else if (first !== 1 || last < first || segments2[0].type !== "heading" || segments2.slice(first, last + 1).some((segment) => segment.type !== "prose")) fail2();
     else if (profile.inline_paratext) {
-      if (segments2.length !== 2 || first !== 1 || last !== 1 || !segments2[1].text.endsWith(" " + profile.inline_paratext) || stable2(row.untranslated_paratext) !== stable2([{ ref: segments2[1].ref, text: profile.inline_paratext }])) fail();
-    } else if (stable2(segments2.slice(last + 1).map(({ ref, text: text2 }) => ({ ref, text: text2 }))) !== stable2(row.untranslated_paratext)) fail();
+      if (segments2.length !== 2 || first !== 1 || last !== 1 || !segments2[1].text.endsWith(" " + profile.inline_paratext) || stable2(row.untranslated_paratext) !== stable2([{ ref: segments2[1].ref, text: profile.inline_paratext }])) fail2();
+    } else if (stable2(segments2.slice(last + 1).map(({ ref, text: text2 }) => ({ ref, text: text2 }))) !== stable2(row.untranslated_paratext)) fail2();
   }
   for (const [owner, links] of Object.entries(translations)) for (const link of links) assertRegisteredSection(link, units.get(owner), registry2);
-  for (const binding of ATI_RETAINED_SHARED_BINDINGS) if ((translations[binding.owner] || []).filter((link) => link.path === binding.path && retainedAtiShared(link, units.get(binding.owner))).length !== 1) fail();
+  for (const binding of ATI_RETAINED_SHARED_BINDINGS) if ((translations[binding.owner] || []).filter((link) => link.path === binding.path && retainedAtiShared(link, units.get(binding.owner))).length !== 1) fail2();
   for (const row of registry2.links) {
     const expected = stable2(reviewedSectionLink(row, registry2));
-    if ((translations[row.unit_id] || []).filter((link) => stable2(link) === expected).length !== 1) fail();
+    if ((translations[row.unit_id] || []).filter((link) => stable2(link) === expected).length !== 1) fail2();
   }
   return registry2;
 }
@@ -22081,220 +22571,58 @@ function assertRegisteredSection(link, unit, registry2) {
   } catch {
   }
   if (!Object.hasOwn(link, "section") && !isAtiSectionPath(link.path) && !isAtiSectionPath(path)) return;
-  if (!registry2 || !Array.isArray(registry2.links)) fail();
+  if (!registry2 || !Array.isArray(registry2.links)) fail2();
   const row = registry2.links.find((value) => value.unit_id === unit?.id && value.path === link.path && value.anchor === link.section?.anchor && value.section.selection_id === link.section?.selection_id);
-  if (!row) fail();
+  if (!row) fail2();
   let actual;
   try {
     actual = stable2(link);
   } catch {
-    fail();
+    fail2();
   }
-  if (actual !== stable2(reviewedSectionLink(row, registry2))) fail();
+  if (actual !== stable2(reviewedSectionLink(row, registry2))) fail2();
 }
 
 // src/translation-scope.mjs
-var import_node_crypto2 = require("node:crypto");
-
-// src/http.mjs
-var ALLOWED = [
-  { host: "accesstoinsight.org" },
-  { host: "www.accesstoinsight.org" },
-  { host: "www.dhammatalks.org" },
-  { host: "dhammatalks.org" },
-  { host: "www.dpdict.net" },
-  { host: "dpdict.net" },
-  { host: "raw.githubusercontent.com", prefixes: ["/bcbsit/ati/", "/digitalpalireader/accesstoinsight/"] },
-  { host: "cdn.jsdelivr.net", prefixes: ["/gh/bcbsit/ati@"] },
-  // Ānandajoti Bhikkhu's text-and-translation pages only (CC BY-SA); nothing else on the site is fetched.
-  { host: "ancient-buddhist-texts.net", prefixes: ["/Texts-and-Translations/"] }
-];
-var ALLOWED_HOSTS = ALLOWED.map((r) => r.host);
-var MAX_BYTES = 6 * 1024 * 1024;
-var USER_AGENT = "pali-canon-claude/2.0 (scripture study; read-only; https://github.com/DaniilKi/pali-canon-claude)";
-function allowed(url) {
-  if (url.protocol !== "https:" || url.port || url.username || url.password) return false;
-  const rule = ALLOWED.find((r) => r.host === url.hostname);
-  if (!rule) return false;
-  return !rule.prefixes || rule.prefixes.some((p) => url.pathname.startsWith(p));
-}
-var wait = (ms) => new Promise((r) => setTimeout(r, ms));
-var HttpError = class extends Error {
-  constructor(message, status, retryable) {
-    super(message);
-    this.status = status;
-    this.retryable = retryable;
-  }
-};
-var SIMULATED_OUTAGE = new Set(String(process.env.PALI_CANON_SIMULATE_OUTAGE || "").split(",").map((h) => h.trim()).filter(Boolean));
-async function fetchOnce(url, { json, timeout }) {
-  let target = new URL(url);
-  if (SIMULATED_OUTAGE.has(target.hostname)) throw new HttpError(`${target.hostname} unreachable (simulated outage)`, 503, true);
-  const signal = AbortSignal.timeout(timeout);
-  for (let redirects = 0; redirects <= 4; redirects += 1) {
-    if (!allowed(target)) throw new HttpError("Provider URL is outside the supported public sources.", 0, false);
-    let response;
-    try {
-      response = await fetch(target, { redirect: "manual", signal, headers: { "User-Agent": USER_AGENT, Accept: json ? "application/json" : "text/html,text/plain" } });
-    } catch (error2) {
-      throw new HttpError(`${target.hostname} unreachable (${error2.cause?.code || error2.name || "network error"})`, 0, true);
-    }
-    if ([301, 302, 303, 307, 308].includes(response.status)) {
-      await response.body?.cancel();
-      const location = response.headers.get("location");
-      if (!location) throw new HttpError("Redirect without destination.", response.status, false);
-      target = new URL(location, target);
-      continue;
-    }
-    if (!response.ok) {
-      await response.body?.cancel();
-      const retryable = response.status >= 500 || response.status === 429;
-      throw new HttpError(`${target.hostname} returned HTTP ${response.status}`, response.status, retryable);
-    }
-    if (Number(response.headers.get("content-length")) > MAX_BYTES) {
-      await response.body?.cancel();
-      throw new HttpError("Response too large.", response.status, false);
-    }
-    const reader = response.body.getReader();
-    const chunks = [];
-    let bytes = 0;
-    try {
-      for (; ; ) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        bytes += value.byteLength;
-        if (bytes > MAX_BYTES) throw new HttpError("Response exceeded the 6 MB limit.", 200, false);
-        chunks.push(value);
-      }
-    } catch (error2) {
-      try {
-        await reader.cancel();
-      } catch {
-      }
-      if (error2 instanceof HttpError) throw error2;
-      throw new HttpError(`${target.hostname} response body interrupted (${error2.cause?.code || error2.name || "stream error"})`, 0, true);
-    } finally {
-      reader.releaseLock();
-    }
-    const body = Buffer.concat(chunks).toString("utf8");
-    if (!json) return body;
-    try {
-      return JSON.parse(body);
-    } catch {
-      throw new HttpError(`${target.hostname} returned invalid JSON.`, 200, true);
-    }
-  }
-  throw new HttpError("Too many redirects.", 0, false);
-}
-async function fetchPublic(url, { json = true, retries = 2, timeout = 2e4 } = {}) {
-  let last;
-  for (let attempt = 0; attempt <= retries; attempt += 1) {
-    try {
-      return await fetchOnce(url, { json, timeout });
-    } catch (error2) {
-      last = error2;
-      if (!error2.retryable || attempt === retries) break;
-      await wait(400 * 3 ** attempt);
-    }
-  }
-  throw last;
-}
-async function fetchMirrors(urls, { json = false, timeout = 15e3, mirrorRetries = 0 } = {}) {
-  const failures = [];
-  for (const [index4, url] of urls.entries()) {
-    try {
-      return { body: await fetchPublic(url, { json, retries: index4 === 0 ? 1 : mirrorRetries, timeout }), url, mirror: index4 };
-    } catch (error3) {
-      failures.push(`${new URL(url).hostname}: ${error3.message}`);
-      if (error3.status === 404 && index4 === urls.length - 1) break;
-    }
-  }
-  const error2 = new Error(`All sources failed \u2014 ${failures.join("; ")}`);
-  error2.failures = failures;
-  throw error2;
-}
-var ENTITIES = {
-  amp: "&",
-  lt: "<",
-  gt: ">",
-  quot: '"',
-  apos: "'",
-  nbsp: " ",
-  ndash: "\u2013",
-  mdash: "\u2014",
-  hellip: "\u2026",
-  lsquo: "\u2018",
-  rsquo: "\u2019",
-  ldquo: "\u201C",
-  rdquo: "\u201D",
-  bull: "\u2022",
-  copy: "\xA9",
-  middot: "\xB7",
-  ensp: " ",
-  emsp: " ",
-  thinsp: " ",
-  aacute: "\xE1",
-  eacute: "\xE9",
-  iacute: "\xED",
-  oacute: "\xF3",
-  uacute: "\xFA",
-  ntilde: "\xF1",
-  Ntilde: "\xD1"
-};
-function decodeHtml(value) {
-  return String(value ?? "").replace(/&(#x[\da-f]+|#\d+|[a-z][a-z\d]+);/gi, (whole, key3) => {
-    if (key3.startsWith("#")) {
-      const point = key3[1].toLowerCase() === "x" ? parseInt(key3.slice(2), 16) : Number(key3.slice(1));
-      return point > 0 && point <= 1114111 ? String.fromCodePoint(point) : whole;
-    }
-    return ENTITIES[key3] ?? whole;
-  });
-}
-function plainText(html) {
-  return decodeHtml(String(html ?? "").replace(/<!--[^]*?-->/g, "").replace(/<(script|style|svg|nav|noscript)\b[^>]*>[^]*?<\/\1\s*>/gi, "").replace(/<br\b[^>]*>/gi, "\n").replace(/<\/(p|div|h[1-6]|li|dt|dd|blockquote|tr|section|article)>/gi, "\n").replace(/<(span|a|sup)\b[^>]*class=["'][^"']*\b(ref|pts|pagenum|pagebreak|anchor|seg)\b[^"']*["'][^>]*>[^<]*<\/\1>/gi, " ").replace(/<[^>]*>/g, "")).replace(/[ \t]+/g, " ").replace(/ *\n */g, "\n").replace(/\n{3,}/g, "\n\n").trim();
-}
-function shortText(value, limit = 1600) {
-  const text2 = plainText(value);
-  return text2.length > limit ? `${text2.slice(0, limit)}\u2026 [excerpt shortened]` : text2;
-}
+var import_node_crypto3 = require("node:crypto");
 
 // src/ati-excerpt.mjs
 function atiVerseExcerpt(html) {
   const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
-  const fail3 = () => {
+  const fail4 = () => {
     throw Error("The reviewed ATI verse extraction structure changed. No excerpt was returned.");
   };
-  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) fail3();
+  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) fail4();
   const start = html.indexOf(begin) + begin.length, stop = html.indexOf(end);
-  if (stop <= start) fail3();
+  if (stop <= start) fail4();
   const chunk = html.slice(start, stop), opens = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])freeverse\1[^>]*>/gi)];
-  if (opens.length !== 1) fail3();
+  if (opens.length !== 1) fail4();
   const from = opens[0].index + opens[0][0].length, to = chunk.indexOf("</div>", from);
-  if (to < from) fail3();
+  if (to < from) fail4();
   const verse2 = chunk.slice(from, to);
-  if (/<\/?div\b|<script\b|<style\b/i.test(verse2)) fail3();
+  if (/<\/?div\b|<script\b|<style\b/i.test(verse2)) fail4();
   const text2 = plainText(verse2);
-  if (!text2) fail3();
+  if (!text2) fail4();
   return text2;
 }
 function atiChapterProse(html) {
   const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
-  const fail3 = () => {
+  const fail4 = () => {
     throw Error("The reviewed ATI prose extraction structure changed. No excerpt was returned.");
   };
-  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) fail3();
+  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) fail4();
   const from = html.indexOf(begin) + begin.length, to = html.indexOf(end);
-  if (to <= from) fail3();
+  if (to <= from) fail4();
   const chunk = html.slice(from, to), opens = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
-  if (opens.length !== 1) fail3();
+  if (opens.length !== 1) fail4();
   const start = opens[0].index + opens[0][0].length, notes = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])notes\1[^>]*>/gi)];
-  if (notes.length !== 1) fail3();
+  if (notes.length !== 1) fail4();
   const stop = notes[0].index;
-  if (stop <= start || chunk.indexOf("</div>", start) < stop) fail3();
+  if (stop <= start || chunk.indexOf("</div>", start) < stop) fail4();
   const body = chunk.slice(start, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
-  if (paragraphs.length !== 1 || /<\/?(?:div|script|style|dl|ol|ul)\b/i.test(body) || body.replace(paragraphs[0][0], "").trim()) fail3();
+  if (paragraphs.length !== 1 || /<\/?(?:div|script|style|dl|ol|ul)\b/i.test(body) || body.replace(paragraphs[0][0], "").trim()) fail4();
   const text2 = plainText(paragraphs[0][1].replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi, ""));
-  if (!text2) fail3();
+  if (!text2) fail4();
   return text2;
 }
 function atiPartialExcerpt(html, extractor) {
@@ -22329,34 +22657,34 @@ var ATI_SEGMENT_EXTRACTORS = Object.freeze([
   "ati-milinda-medicine-two-verses-v1"
 ]);
 function milindaMedicineVerses(html) {
-  const fail3 = () => {
+  const fail4 = () => {
     throw Error("The reviewed ATI Milinda two-verse extraction structure changed. No excerpt was returned.");
   };
   const chunk = copyrightedChunk(html).trim();
   const body = chunk.match(/^<div class=(["'])preface\1>\s*<h1>Translator's note<\/h1>\s*<p>([^]*?)<\/p>\s*<p>([^]*?)<\/p>\s*<p>([^]*?)<\/p>\s*<\/div>\s*<div class=(["'])chapter\5>\s*<div class=(["'])freeverse\6>([^]*?)<p class=(["'])cite\8>([^]*?)<\/p>\s*<\/div>\s*<\/div>\s*<\/div>$/);
-  if (!body) fail3();
+  if (!body) fail4();
   const [, , first, second, third, , , verse2, , citation] = body;
-  if (/[<>]/.test(first + second + verse2 + citation) || !plainText(first) || !plainText(second) || plainText(citation) !== "\u2014 Miln 335") fail3();
+  if (/[<>]/.test(first + second + verse2 + citation) || !plainText(first) || !plainText(second) || plainText(citation) !== "\u2014 Miln 335") fail4();
   let open = false, count = 0;
   for (const [tag] of third.matchAll(/<[^>]*>/g)) {
     if (tag === "<i>" && !open) {
       open = true;
       count++;
     } else if (tag === "</i>" && open) open = false;
-    else fail3();
+    else fail4();
   }
-  if (open || count !== 4 || /[<>]/.test(third.replace(/<\/?i>/g, "")) || !plainText(third) || [...third.matchAll(/<i>([^]*?)<\/i>/g)].some((m) => !plainText(m[1]))) fail3();
+  if (open || count !== 4 || /[<>]/.test(third.replace(/<\/?i>/g, "")) || !plainText(third) || [...third.matchAll(/<i>([^]*?)<\/i>/g)].some((m) => !plainText(m[1]))) fail4();
   const text2 = plainText(verse2), stanzas = text2.split("\n\n");
-  if (stanzas.length !== 2 || stanzas.some((s, i) => s.split("\n").length !== [4, 5][i] || s.split("\n").some((line) => !line.trim()))) fail3();
+  if (stanzas.length !== 2 || stanzas.some((s, i) => s.split("\n").length !== [4, 5][i] || s.split("\n").some((line) => !line.trim()))) fail4();
   return text2;
 }
 function upatissaChapter(html) {
-  const fail3 = () => {
+  const fail4 = () => {
     throw Error("The reviewed ATI Upatissa mixed-body extraction structure changed. No excerpt was returned.");
   };
   const chunk = copyrightedChunk(html).trim();
   const chapter = chunk.match(/^<div class=(["'])chapter\1>([^]*)<\/div>\s*<\/div>$/);
-  if (!chapter) fail3();
+  if (!chapter) fail4();
   const sequence = [...Array(8).fill("p"), "verse", "p", "verse", "p", "verse", ...Array(9).fill("p"), "verse", "p", "verse", "p", "verse"];
   const anchorsByParagraph = /* @__PURE__ */ new Map([[1, ["sanjaya", "rajagaha", "sariputta", "moggallana"]], [2, ["assaji"]], [10, ["saristream"]], [21, ["moggstream"]]]);
   let rest = chapter[2], paragraph = 0;
@@ -22364,7 +22692,7 @@ function upatissaChapter(html) {
   for (const kind of sequence) {
     rest = rest.trimStart();
     const child = kind === "p" ? rest.match(/^<p>([^]*?)<\/p>/) : rest.match(/^<div class=(["'])freeverse\1>([^]*?)<\/div>/);
-    if (!child) fail3();
+    if (!child) fail4();
     const body = child[kind === "p" ? 1 : 2], expected = kind === "p" ? anchorsByParagraph.get(++paragraph) || [] : [];
     let active = false, count = 0;
     for (const [tag] of body.matchAll(/<[^>]*>/g)) {
@@ -22372,15 +22700,15 @@ function upatissaChapter(html) {
         active = true;
         count++;
       } else if (active && tag === "</a>") active = false;
-      else fail3();
+      else fail4();
     }
-    if (active || count !== expected.length || /[<>]/.test(body.replace(/<[^>]*>/g, ""))) fail3();
+    if (active || count !== expected.length || /[<>]/.test(body.replace(/<[^>]*>/g, ""))) fail4();
     const text2 = plainText(body);
-    if (!text2) fail3();
+    if (!text2) fail4();
     texts.push(text2);
     rest = rest.slice(child[0].length);
   }
-  if (rest.trim()) fail3();
+  if (rest.trim()) fail4();
   return texts.join("\n\n");
 }
 function copyrightedChunk(html) {
@@ -22391,50 +22719,50 @@ function copyrightedChunk(html) {
   return html.slice(start, stop);
 }
 function chapterParagraph(html, total, selected, heading) {
-  const fail3 = () => {
+  const fail4 = () => {
     throw Error("The reviewed ATI paragraph selection extraction structure changed. No excerpt was returned.");
   };
   const chunk = copyrightedChunk(html), chapters = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)], notes = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])notes\1[^>]*>/gi)];
-  if (chapters.length !== 1 || notes.length !== 1) fail3();
+  if (chapters.length !== 1 || notes.length !== 1) fail4();
   const start = chapters[0].index + chapters[0][0].length, stop = notes[0].index;
-  if (stop <= start || chunk.indexOf("</div>", start) < stop) fail3();
+  if (stop <= start || chunk.indexOf("</div>", start) < stop) fail4();
   const body = chunk.slice(start, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
-  if (paragraphs.length !== total || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body)) fail3();
+  if (paragraphs.length !== total || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body)) fail4();
   let remainder = body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim();
   if (heading) {
-    if (remainder !== `<h4>${heading}</h4>`) fail3();
-  } else if (remainder) fail3();
+    if (remainder !== `<h4>${heading}</h4>`) fail4();
+  } else if (remainder) fail4();
   const chosen = paragraphs[selected - 1][1];
-  if (/<\/?p\b/i.test(chosen)) fail3();
+  if (/<\/?p\b/i.test(chosen)) fail4();
   const text2 = plainText(chosen.replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi, ""));
-  if (!text2) fail3();
+  if (!text2) fail4();
   return text2;
 }
 function excerptVersePre(html) {
-  const fail3 = () => {
+  const fail4 = () => {
     throw Error("The reviewed ATI preformatted verse extraction structure changed. No excerpt was returned.");
   };
   const chunk = copyrightedChunk(html), opens = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])excerpt verse\1[^>]*>/gi)];
   const chapters = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
-  if (opens.length !== 1 || chapters.length !== 1 || chapters[0].index >= opens[0].index || [...chunk.matchAll(/<pre\b/gi)].length !== 1) fail3();
+  if (opens.length !== 1 || chapters.length !== 1 || chapters[0].index >= opens[0].index || [...chunk.matchAll(/<pre\b/gi)].length !== 1) fail4();
   const start = opens[0].index + opens[0][0].length, stop = chunk.indexOf("</div>", start);
-  if (stop < start) fail3();
+  if (stop < start) fail4();
   const body = chunk.slice(start, stop), pres = [...body.matchAll(/<pre\b[^>]*>([^]*?)<\/pre>/gi)];
-  if (pres.length !== 1 || body.replace(pres[0][0], "").trim() || /<[^>]*>/.test(pres[0][1])) fail3();
+  if (pres.length !== 1 || body.replace(pres[0][0], "").trim() || /<[^>]*>/.test(pres[0][1])) fail4();
   const text2 = plainText(pres[0][1]);
-  if (!text2) fail3();
+  if (!text2) fail4();
   return text2;
 }
 function chapterParagraphsWithoutNotes(html, total) {
-  const fail3 = () => {
+  const fail4 = () => {
     throw Error("The reviewed ATI no-notes paragraph extraction structure changed. No excerpt was returned.");
   };
   const chunk = copyrightedChunk(html), chapters = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
-  if (chapters.length !== 1) fail3();
+  if (chapters.length !== 1) fail4();
   const start = chapters[0].index + chapters[0][0].length, stop = chunk.indexOf("</div>", start);
-  if (stop < start || chunk.slice(0, chapters[0].index).trim() || chunk.slice(stop + 6).trim() !== "</div>") fail3();
+  if (stop < start || chunk.slice(0, chapters[0].index).trim() || chunk.slice(stop + 6).trim() !== "</div>") fail4();
   const body = chunk.slice(start, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
-  if (paragraphs.length !== total || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body) || body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim() || paragraphs.some((p) => /<\/?p\b/i.test(p[1]))) fail3();
+  if (paragraphs.length !== total || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body) || body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim() || paragraphs.some((p) => /<\/?p\b/i.test(p[1]))) fail4();
   return paragraphs.map((p) => p[1]);
 }
 var selectedProse = (paragraphs) => {
@@ -22444,7 +22772,7 @@ var selectedProse = (paragraphs) => {
 };
 function vinayaChapterProse(html, total) {
   const paragraphs = chapterParagraphsWithoutNotes(html, total);
-  const fail3 = () => {
+  const fail4 = () => {
     throw Error("The reviewed ATI Vinaya inline extraction structure changed. No excerpt was returned.");
   };
   for (const paragraph of paragraphs) {
@@ -22452,9 +22780,9 @@ function vinayaChapterProse(html, total) {
     for (const [tag] of paragraph.matchAll(/<[^>]*>/g)) {
       if (total === 22 && !anchor && /^<a id=(["'])(?:ananda|patient|nurse)\1>$/.test(tag)) anchor = true;
       else if (anchor && tag === "</a>") anchor = false;
-      else fail3();
+      else fail4();
     }
-    if (anchor) fail3();
+    if (anchor) fail4();
   }
   return selectedProse(paragraphs);
 }
@@ -22467,57 +22795,57 @@ function chapterProseBeforeEllipsis(html) {
   return selectedProse(paragraphs.slice(0, 3));
 }
 function chapterProsePrefixBeforeNotes(html) {
-  const fail3 = () => {
+  const fail4 = () => {
     throw Error("The reviewed ATI five-paragraph notes extraction structure changed. No excerpt was returned.");
   };
   const chunk = copyrightedChunk(html), chapters = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)], notes = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])notes\1[^>]*>/gi)];
-  if (chapters.length !== 1 || notes.length !== 1) fail3();
+  if (chapters.length !== 1 || notes.length !== 1) fail4();
   const start = chapters[0].index + chapters[0][0].length, stop = notes[0].index;
-  if (stop <= start || chunk.slice(0, chapters[0].index).trim() || chunk.indexOf("</div>", start) < stop) fail3();
+  if (stop <= start || chunk.slice(0, chapters[0].index).trim() || chunk.indexOf("</div>", start) < stop) fail4();
   const tail = chunk.slice(stop + notes[0][0].length), notesEnd = tail.indexOf("</div>");
-  if (notesEnd < 0 || /<\/?(?:div|script|style|pre)\b/i.test(tail.slice(0, notesEnd)) || !/^\s*<\/div>\s*<\/div>\s*$/.test(tail.slice(notesEnd + 6))) fail3();
+  if (notesEnd < 0 || /<\/?(?:div|script|style|pre)\b/i.test(tail.slice(0, notesEnd)) || !/^\s*<\/div>\s*<\/div>\s*$/.test(tail.slice(notesEnd + 6))) fail4();
   const body = chunk.slice(start, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
-  if (paragraphs.length !== 5 || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body) || body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim() || paragraphs.some((p) => /<\/?p\b/i.test(p[1]))) fail3();
+  if (paragraphs.length !== 5 || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body) || body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim() || paragraphs.some((p) => /<\/?p\b/i.test(p[1]))) fail4();
   return selectedProse(paragraphs.slice(0, 4).map((p) => p[1]));
 }
 
 // src/translation-scope.mjs
-var scopeHash = (value) => (0, import_node_crypto2.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
+var scopeHash = (value) => (0, import_node_crypto3.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
 var isPartial = (link) => Object.hasOwn(link, "partial_scope");
 var sha2 = (value) => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
 function partialScope(link, unit, segments2, source4) {
   if (!isPartial(link)) return null;
   const p = link.partial_scope;
-  const fail3 = () => {
+  const fail4 = () => {
     throw new Error("Invalid or unreviewed partial translation scope. No whole-unit coverage or source retrieval is inferred.");
   };
   const fields = /* @__PURE__ */ new Set(["version", "status", "unit_id", "first_ref", "last_ref", "source_commit", "pali_sha256", "text_sha256", "notice_sha256", "extractor", "subparagraph"]);
-  if (!p || ![1, 2].includes(p.version) || Object.keys(p).some((k) => !fields.has(k)) || p.status !== "reviewed" || p.unit_id !== unit.id || p.source_commit !== source4.commit || !sha2(p.pali_sha256) || !sha2(p.text_sha256) || unit.approximate) fail3();
+  if (!p || ![1, 2].includes(p.version) || Object.keys(p).some((k) => !fields.has(k)) || p.status !== "reviewed" || p.unit_id !== unit.id || p.source_commit !== source4.commit || !sha2(p.pali_sha256) || !sha2(p.text_sha256) || unit.approximate) fail4();
   const first = segments2.findIndex((s) => s.ref === p.first_ref);
   const last = segments2.findIndex((s) => s.ref === p.last_ref);
-  if (first < 0 || last < first || p.version === 1 && first === 0 && last === segments2.length - 1) fail3();
-  if (!segments2.slice(first, last + 1).some((s) => s.type !== "heading") || p.version === 1 && !segments2.some((s, i) => s.type !== "heading" && (i < first || i > last))) fail3();
+  if (first < 0 || last < first || p.version === 1 && first === 0 && last === segments2.length - 1) fail4();
+  if (!segments2.slice(first, last + 1).some((s) => s.type !== "heading") || p.version === 1 && !segments2.some((s, i) => s.type !== "heading" && (i < first || i > last))) fail4();
   const selected = segments2.slice(first, last + 1).map(({ ref, type, text: text2 }) => ({ ref, type, text: text2 }));
   let excerpt;
   if (p.version === 2) {
     const part = p.subparagraph, seg = selected[0];
-    if (link.source !== "ati" || !ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor) || first !== last || seg.type !== "prose" || !part || Object.keys(part).sort().join(",") !== "end_char,offset_unit,segment_sha256,start_char" || part.offset_unit !== "utf16_code_units" || !sha2(part.segment_sha256) || scopeHash(seg) !== part.segment_sha256 || !Number.isSafeInteger(part.start_char) || !Number.isSafeInteger(part.end_char) || part.start_char < 0 || part.end_char <= part.start_char || part.end_char > seg.text.length || part.start_char === 0 && part.end_char === seg.text.length) fail3();
-    for (const at of [part.start_char, part.end_char]) if (at > 0 && at < seg.text.length && /[\uD800-\uDBFF]/.test(seg.text[at - 1]) && /[\uDC00-\uDFFF]/.test(seg.text[at])) fail3();
+    if (link.source !== "ati" || !ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor) || first !== last || seg.type !== "prose" || !part || Object.keys(part).sort().join(",") !== "end_char,offset_unit,segment_sha256,start_char" || part.offset_unit !== "utf16_code_units" || !sha2(part.segment_sha256) || scopeHash(seg) !== part.segment_sha256 || !Number.isSafeInteger(part.start_char) || !Number.isSafeInteger(part.end_char) || part.start_char < 0 || part.end_char <= part.start_char || part.end_char > seg.text.length || part.start_char === 0 && part.end_char === seg.text.length) fail4();
+    for (const at of [part.start_char, part.end_char]) if (at > 0 && at < seg.text.length && /[\uD800-\uDBFF]/.test(seg.text[at - 1]) && /[\uDC00-\uDFFF]/.test(seg.text[at])) fail4();
     const selectedText = seg.text.slice(part.start_char, part.end_char);
     const outsideBody = segments2.some((s, i) => s.type !== "heading" && (i < first || i > last) && s.text.trim());
-    if (!selectedText.trim() || !outsideBody && !(seg.text.slice(0, part.start_char) + seg.text.slice(part.end_char)).trim()) fail3();
+    if (!selectedText.trim() || !outsideBody && !(seg.text.slice(0, part.start_char) + seg.text.slice(part.end_char)).trim()) fail4();
     seg.text = selectedText;
     excerpt = { ...seg, ...part };
-  } else if (Object.hasOwn(p, "subparagraph")) fail3();
-  if (scopeHash(selected) !== p.pali_sha256) fail3();
-  if (!["dhammatalks", "ati", "anandajoti"].includes(link.source)) fail3();
+  } else if (Object.hasOwn(p, "subparagraph")) fail4();
+  if (scopeHash(selected) !== p.pali_sha256) fail4();
+  if (!["dhammatalks", "ati", "anandajoti"].includes(link.source)) fail4();
   if (link.source === "ati") {
-    if (!(p.version === 2 ? ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor) : ATI_SEGMENT_EXTRACTORS.includes(p.extractor)) || !sha2(p.notice_sha256) || typeof link.path !== "string" || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes("..") || link.url !== "https://accesstoinsight.org" + link.path + ".html") fail3();
+    if (!(p.version === 2 ? ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor) : ATI_SEGMENT_EXTRACTORS.includes(p.extractor)) || !sha2(p.notice_sha256) || typeof link.path !== "string" || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes("..") || link.url !== "https://accesstoinsight.org" + link.path + ".html") fail4();
     if (p.extractor === "ati-milinda-medicine-two-verses-v1" || link.path.startsWith("/tipitaka/kn/miln/")) {
-      if (unit.id !== "mil6.4.1" || link.path !== "/tipitaka/kn/miln/miln.5x.olen" || p.version !== 1 || p.extractor !== "ati-milinda-medicine-two-verses-v1" || p.first_ref !== "mil6.4.1/20" || p.last_ref !== "mil6.4.1/21" || link.translator !== "Andrew Olendzki" || link.license !== "Olendzki-free-distribution-2005") fail3();
+      if (unit.id !== "mil6.4.1" || link.path !== "/tipitaka/kn/miln/miln.5x.olen" || p.version !== 1 || p.extractor !== "ati-milinda-medicine-two-verses-v1" || p.first_ref !== "mil6.4.1/20" || p.last_ref !== "mil6.4.1/21" || link.translator !== "Andrew Olendzki" || link.license !== "Olendzki-free-distribution-2005") fail4();
     }
-  } else if (Object.hasOwn(p, "extractor") || Object.hasOwn(p, "notice_sha256")) fail3();
-  if (link.parts && (link.source !== "anandajoti" || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail3();
+  } else if (Object.hasOwn(p, "extractor") || Object.hasOwn(p, "notice_sha256")) fail4();
+  if (link.parts && (link.source !== "anandajoti" || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail4();
   const readPages = [];
   for (let offset = first; offset <= last; offset += 200) readPages.push({ tool: "get_text", uid: unit.id, offset, limit: Math.min(200, last - offset + 1) });
   return {
@@ -22550,16 +22878,16 @@ function sharedScope(link, unit, byId, readSegments, source4) {
     throw new Error("Invalid shared-page source URL.");
   }
   const sourceUrl = url.protocol === "https:" && !url.username && !url.password && !url.search && !url.hash && !url.port && (link.source === "dhammatalks" ? ["www.dhammatalks.org", "dhammatalks.org"].includes(url.hostname) && /^\/suttas\/.+\.html$/.test(url.pathname) : link.source === "ati" ? typeof link.path === "string" && link.url === `https://accesstoinsight.org${link.path}.html` : link.source === "anandajoti" && typeof link.path === "string" && link.url === "https://ancient-buddhist-texts.net" + encodeURI(link.path));
-  const fail3 = () => {
+  const fail4 = () => {
     throw new Error("Invalid or unreviewed shared-page translation scope. No individual alignment or whole-unit coverage is inferred.");
   };
   const fields = /* @__PURE__ */ new Set(["version", "status", "owner_id", "text_ids", "presentation", "alignment", "source_commit", "pali_sha256", "text_sha256", "notice_sha256"]);
-  if (!sourceUrl || isPartial(link) || !p || p.version !== 1 || p.status !== "reviewed" || Object.keys(p).some((k) => !fields.has(k)) || !["condensed", "compilation"].includes(p.presentation) || p.alignment !== "unverified" || p.source_commit !== source4.commit || !sha2(p.pali_sha256) || !sha2(p.text_sha256) || p.notice_sha256 !== void 0 && (!sha2(p.notice_sha256) || link.source !== "ati") || (p.presentation === "compilation" || link.source === "ati") && !sha2(p.notice_sha256) || !Array.isArray(p.text_ids) || p.text_ids.length < 2 || p.text_ids.length > 32 || new Set(p.text_ids).size !== p.text_ids.length || p.owner_id !== p.text_ids[0] || !p.text_ids.includes(unit.id) || typeof link.reference !== "string" || !link.reference.trim() || link.reference.length > 200) fail3();
+  if (!sourceUrl || isPartial(link) || !p || p.version !== 1 || p.status !== "reviewed" || Object.keys(p).some((k) => !fields.has(k)) || !["condensed", "compilation"].includes(p.presentation) || p.alignment !== "unverified" || p.source_commit !== source4.commit || !sha2(p.pali_sha256) || !sha2(p.text_sha256) || p.notice_sha256 !== void 0 && (!sha2(p.notice_sha256) || link.source !== "ati") || (p.presentation === "compilation" || link.source === "ati") && !sha2(p.notice_sha256) || !Array.isArray(p.text_ids) || p.text_ids.length < 2 || p.text_ids.length > 32 || new Set(p.text_ids).size !== p.text_ids.length || p.owner_id !== p.text_ids[0] || !p.text_ids.includes(unit.id) || typeof link.reference !== "string" || !link.reference.trim() || link.reference.length > 200) fail4();
   const units = p.text_ids.map((id) => byId.get(id));
-  if (units.some((u, i) => !u || u.approximate || u.kind === "range" || u.members?.length || u.book !== units[0].book || u.collection !== units[0].collection || i && units[i - 1].end !== u.start)) fail3();
+  if (units.some((u, i) => !u || u.approximate || u.kind === "range" || u.members?.length || u.book !== units[0].book || u.collection !== units[0].collection || i && units[i - 1].end !== u.start)) fail4();
   const selected = units.map((u) => ({ id: u.id, segments: readSegments(u).map(({ ref, type, text: text2 }) => ({ ref, type, text: text2 })) }));
-  if (selected.some((u) => !u.segments.some((s) => s.type !== "heading")) || selected.reduce((n, u) => n + u.segments.length, 0) > 2e4 || selected.reduce((n, u) => n + u.segments.reduce((v, s) => v + s.text.length, 0), 0) > 2e6 || scopeHash(selected) !== p.pali_sha256) fail3();
-  if (!["dhammatalks", "ati", "anandajoti"].includes(link.source) || link.parts && (link.source !== "anandajoti" || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail3();
+  if (selected.some((u) => !u.segments.some((s) => s.type !== "heading")) || selected.reduce((n, u) => n + u.segments.length, 0) > 2e4 || selected.reduce((n, u) => n + u.segments.reduce((v, s) => v + s.text.length, 0), 0) > 2e6 || scopeHash(selected) !== p.pali_sha256) fail4();
+  if (!["dhammatalks", "ati", "anandajoti"].includes(link.source) || link.parts && (link.source !== "anandajoti" || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail4();
   return {
     kind: "shared_page",
     version: 1,
@@ -23263,11 +23591,11 @@ function searchExcerpt(original, needle, fold8) {
 var import_node_fs = require("node:fs");
 var import_node_path = require("node:path");
 var import_node_url = require("node:url");
-var import_node_crypto3 = require("node:crypto");
+var import_node_crypto4 = require("node:crypto");
 var pathString = (path) => path instanceof URL ? (0, import_node_url.fileURLToPath)(path) : path;
 var shardManifest = (path) => `${pathString(path)}.parts.json`;
 var bundledExists = (path) => (0, import_node_fs.existsSync)(path) || (0, import_node_fs.existsSync)(shardManifest(path));
-var sha256 = (bytes) => (0, import_node_crypto3.createHash)("sha256").update(bytes).digest("hex");
+var sha256 = (bytes) => (0, import_node_crypto4.createHash)("sha256").update(bytes).digest("hex");
 function readBundled(path) {
   path = pathString(path);
   if ((0, import_node_fs.existsSync)(path)) return (0, import_node_fs.readFileSync)(path);
@@ -23728,6 +24056,7 @@ function numbers(text2) {
   }
   return { path, end };
 }
+var APADANA_PAGES = new Set(Object.values(APADANA_PROFILES).map((profile) => profile.url));
 function parseUrl(raw) {
   let url;
   try {
@@ -23736,8 +24065,12 @@ function parseUrl(raw) {
     throw new CitationError("That link is not a valid URL.");
   }
   const host = url.hostname.replace(/^www\./, "");
+  if (host === "apadanatranslation.com") {
+    if (!APADANA_PAGES.has(raw)) throw new CitationError("Use the exact reviewed Apad\u0101na publisher page URL.");
+    return { kind: "url", host, path: url.pathname, raw };
+  }
   if (!["suttacentral.net", "accesstoinsight.org", "dhammatalks.org", "ancient-buddhist-texts.net"].includes(host) || !/^https?:$/.test(url.protocol)) {
-    throw new CitationError("Links are understood for suttacentral.net, accesstoinsight.org, dhammatalks.org and ancient-buddhist-texts.net only.");
+    throw new CitationError("Links are understood for suttacentral.net, accesstoinsight.org, dhammatalks.org, ancient-buddhist-texts.net and reviewed apadanatranslation.com pages only.");
   }
   if (host === "ancient-buddhist-texts.net") {
     let path2 = url.pathname;
@@ -23959,6 +24292,17 @@ var data = null;
 var ANANDAJOTI_BASE = "https://ancient-buddhist-texts.net";
 var ANANDAJOTI_LICENSE = "CC BY-SA 3.0 \u2014 \u0100nandajoti Bhikkhu, Ancient Buddhist Texts (ancient-buddhist-texts.net). The site\u2019s Copyright Notice (2013) gives CC BY-SA 3.0 Unported; its page footers link CC BY-SA 4.0. Share-alike: reuse must keep the same licence and credit \u0100nandajoti Bhikkhu.";
 var anandajotiSource = null;
+function mergeApadana(translations, canon) {
+  const declared = JSON.parse((0, import_node_fs2.readFileSync)(dataPath("apadana.json"), "utf8"));
+  if (declared.version !== 1 || declared.vri_commit !== canon.source.commit || declared.source?.commit !== APADANA_COMMIT || declared.source.license !== APADANA_LICENSE || declared.source.license_url !== APADANA_LICENSE_URL || declared.source.translator !== APADANA_TRANSLATOR || declared.source.site !== APADANA_BASE + "/" || Object.keys(declared.links ?? {}).sort().join() !== Object.keys(APADANA_PROFILES).sort().join()) throw Error("The Apad\u0101na review does not match the reviewed rights, bundled VRI edition or poem set.");
+  for (const [id, link] of Object.entries(declared.links)) {
+    const unit = canon.units.find((unit2) => unit2.id === id);
+    const book = unit && canon.books[unit.book];
+    if (!unit || !book || unit.kind === "range" || unit.approximate) throw Error("A reviewed Apad\u0101na owner is missing or not an exact individual unit.");
+    validateLink(link, id, unit, book);
+    (translations[id] ||= []).push(link);
+  }
+}
 function mergeAnandajoti(translations) {
   let file;
   try {
@@ -23989,11 +24333,13 @@ function anandajotiInfo() {
   load();
   return anandajotiSource;
 }
-var SOURCE_NAMES = { dhammatalks: "dhammatalks.org", ati: "Access to Insight", anandajoti: "Ancient Buddhist Texts (\u0100nandajoti Bhikkhu)" };
+var SOURCE_NAMES = { apadana: "Legends of the Buddhist Saints (Apad\u0101na)", dhammatalks: "dhammatalks.org", ati: "Access to Insight", anandajoti: "Ancient Buddhist Texts (\u0100nandajoti Bhikkhu)" };
 var sourceName = (t) => SOURCE_NAMES[t.source] || t.source;
 function translationId(t) {
   if (t.source === "ati") return `ati:${t.path}${t.section?.selection_id ? "::selection:" + t.section.selection_id : t.section ? "#" + t.section.anchor : ""}`;
   if (t.source === "anandajoti") return `aj:${t.path.replace(/^\/Texts-and-Translations\//, "").replace(/\.htm$/, "")}`;
+  if (t.source === "apadana") return `ap:${t.path.replace(/^\/text\/|\/$/g, "")}`;
+  if (t.source !== "dhammatalks") throw Error("Unsupported English translation provider.");
   return `dt:${t.url.split("/suttas/")[1].replace(/\.html$/, "")}`;
 }
 function dataPath(name) {
@@ -24007,6 +24353,7 @@ function load() {
   const canon = JSON.parse((0, import_node_zlib.gunzipSync)(readBundled(dataPath("canon.json.gz"))).toString("utf8"));
   const translations = JSON.parse((0, import_node_fs2.readFileSync)(dataPath("translations.json"), "utf8"));
   mergeAnandajoti(translations);
+  mergeApadana(translations, canon);
   const partialRegistry = JSON.parse((0, import_node_fs2.readFileSync)(dataPath("reviewed-partial-pages.json"), "utf8"));
   if (partialRegistry.version !== 1 || partialRegistry.vri_commit !== canon.source.commit || !Array.isArray(partialRegistry.links) || !partialRegistry.links.length) throw Error("Invalid registered partial source metadata.");
   const byId = /* @__PURE__ */ new Map();
@@ -24102,6 +24449,9 @@ function requireRetainedForMember(unit, d) {
 function linksFor(u) {
   const d = load();
   requireRetainedForMember(u, d);
+  const apadanaLinks = (d.translations[u.id] || []).filter((link) => link.source === "apadana" || link.url?.startsWith(APADANA_BASE + "/"));
+  if (apadanaLinks.length !== (Object.hasOwn(APADANA_PROFILES, u.id) ? 1 : 0)) throw new CitationError("The reviewed Apad\u0101na declaration is missing, duplicated or has another owner.");
+  for (const link of apadanaLinks) validateLink(link, u.id, u, d.canon.books[u.book]);
   for (const link of d.translations[u.id] || []) assertRegisteredSection(link, u, d.sectionRegistry);
   const requiredSection = d.sectionRegistry.links.find((row) => row.unit_id === u.id);
   if (requiredSection && (d.translations[u.id] || []).filter((link) => link.section?.anchor === requiredSection.anchor).length !== 1) throw new CitationError("Registered ATI question binding is missing or duplicated. No whole-page translation was inferred.");
@@ -24118,7 +24468,7 @@ function linksFor(u) {
   }
   const container = rangeContaining(u.id);
   if (container && d.translations[container.id]?.length) {
-    const links = d.translations[container.id].filter((t) => !isScoped(t));
+    const links = d.translations[container.id].filter((t) => !isScoped(t) && t.source !== "apadana");
     if (links.length) return { links: [...links, ...own, ...shared], via: container };
   }
   return { links: [...own, ...shared], via: null };
@@ -24263,7 +24613,7 @@ function resolve(reference) {
         notes.push(`This URL is a partial translation source covering ${scoped.first_ref} through ${scoped.last_ref}. Citation lookup returns its containing unit; whole-unit English coverage is not established.`);
       }
     }
-    notes.push(c.host === "ancient-buddhist-texts.net" ? `Linked from ${c.host}: \u0100nandajoti Bhikkhu's text and translation of ${id2}.` : `Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id2}.`);
+    notes.push(c.host === "ancient-buddhist-texts.net" ? `Linked from ${c.host}: \u0100nandajoti Bhikkhu's text and translation of ${id2}.` : c.host === "apadanatranslation.com" ? `Linked from the reviewed Apad\u0101na publisher page for ${id2}.` : `Linked from ${c.host}. Note that ${c.host} numbers some SN/AN texts by the older PTS scheme; the standard ID is ${id2}.`);
     const unit = d.byId.get(id2);
     const alignment2 = alignmentInfo(unit);
     if (alignment2) notes.push(alignment2.note);
@@ -24406,6 +24756,7 @@ function describe(u, notes = []) {
     ...t.license ? { license: t.license } : {},
     translation_id: translationId(t),
     match: t.match,
+    ...t.source === "apadana" ? { translation_revision: t.translation_revision, note_count: t.note_count } : {},
     ...t.mapping_note ? { mapping_note: t.mapping_note } : {},
     ...t.section ? { source_section: JSON.parse(JSON.stringify(t.section)) } : {},
     ...isScoped(t) ? { translation_scope: translationScope(t, u) } : {},
@@ -24646,7 +24997,7 @@ __export(english_exports, {
   atiNotice: () => atiNotice,
   available: () => available,
   selectTranslation: () => selectTranslation,
-  translation: () => translation
+  translation: () => translation2
 });
 
 // src/cache.mjs
@@ -24744,12 +25095,12 @@ var liveCache = new LruCache({
 });
 
 // src/english.mjs
-var import_node_crypto5 = require("node:crypto");
+var import_node_crypto6 = require("node:crypto");
 
 // src/ati-sections.mjs
-var import_node_crypto4 = require("node:crypto");
-var rawHash = (value) => (0, import_node_crypto4.createHash)("sha256").update(value).digest("hex");
-var fail2 = () => {
+var import_node_crypto5 = require("node:crypto");
+var rawHash = (value) => (0, import_node_crypto5.createHash)("sha256").update(value).digest("hex");
+var fail3 = () => {
   throw Error("The reviewed ATI question text, structure, notes or source changed. No question translation was returned.");
 };
 var elements = (node) => node.children.filter((value) => typeof value !== "string");
@@ -24764,20 +25115,20 @@ function parse3(chunk) {
     const close = token.match(/^<\/([a-z0-9]+)>$/);
     if (close) {
       if (stack.length === 1) {
-        if (close[1] !== "div" || ++trailing !== 1) fail2();
+        if (close[1] !== "div" || ++trailing !== 1) fail3();
         continue;
       }
       const node2 = stack.pop();
-      if (node2.tag !== close[1]) fail2();
+      if (node2.tag !== close[1]) fail3();
       node2.close = match2.index;
       node2.end = at;
       continue;
     }
     const start = token.match(/^<([a-z0-9]+)((?:\s+[a-zA-Z][a-zA-Z0-9_-]*\s*=\s*(?:"[^"]*"|'[^']*'))*)\s*>$/);
-    if (!start) fail2();
+    if (!start) fail3();
     const attrs = {};
     for (const attribute of start[2].matchAll(/([a-zA-Z][a-zA-Z0-9_-]*)\s*=\s*(["'])(.*?)\2/g)) {
-      if (Object.hasOwn(attrs, attribute[1])) fail2();
+      if (Object.hasOwn(attrs, attribute[1])) fail3();
       attrs[attribute[1]] = attribute[3];
     }
     const node = { tag: start[1], attrs, children: [], start: match2.index, inside: at };
@@ -24785,70 +25136,70 @@ function parse3(chunk) {
     stack.push(node);
   }
   stack.at(-1).children.push(chunk.slice(at));
-  if (stack.length !== 1 || trailing !== 1) fail2();
+  if (stack.length !== 1 || trailing !== 1) fail3();
   return root;
 }
 var withoutNoteTags = (html) => html.replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/g, "");
 function extractAtiSection(html, row) {
   const profile = ATI_SECTION_PROFILES.find((value) => value.unit_id === row?.unit_id), p = row?.section;
-  if (!profile || row.path !== profile.path || row.anchor !== profile.anchor || p?.profile !== profile.profile || p.anchor !== row.anchor || p.paragraph_count !== profile.paragraphs || p.note_count !== profile.notes || typeof html !== "string" || row.source_html_sha256 !== profile.source_html_sha256 || rawHash(html) !== row.source_html_sha256) fail2();
+  if (!profile || row.path !== profile.path || row.anchor !== profile.anchor || p?.profile !== profile.profile || p.anchor !== row.anchor || p.paragraph_count !== profile.paragraphs || p.note_count !== profile.notes || typeof html !== "string" || row.source_html_sha256 !== profile.source_html_sha256 || rawHash(html) !== row.source_html_sha256) fail3();
   const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
-  if (html.split(begin).length !== 2 || html.split(end).length !== 2 || html.indexOf(end) <= html.indexOf(begin)) fail2();
+  if (html.split(begin).length !== 2 || html.split(end).length !== 2 || html.indexOf(end) <= html.indexOf(begin)) fail3();
   const chunk = html.slice(html.indexOf(begin) + begin.length, html.indexOf(end)), root = parse3(chunk), chapters = elements(root);
   if (profile.profile === AN_TEN_SECTION_PROFILE) return finiteTreatment(root, chapters, chunk, row, profile);
   if (profile.profile === AN_MIND_SECTION_PROFILE) return numberedMindParagraph(root, chapters, chunk, row, profile);
-  if (root.children.some((value) => typeof value === "string" && value.trim()) || chapters.length !== (profile.profile === SN27_SECTION_PROFILE || profile.path.includes("2x") ? 10 : 6) || chapters.some((node) => node.tag !== "div" || JSON.stringify(node.attrs) !== '{"class":"chapter"}')) fail2();
+  if (root.children.some((value) => typeof value === "string" && value.trim()) || chapters.length !== (profile.profile === SN27_SECTION_PROFILE || profile.path.includes("2x") ? 10 : 6) || chapters.some((node) => node.tag !== "div" || JSON.stringify(node.attrs) !== '{"class":"chapter"}')) fail3();
   if (profile.profile === SN27_SECTION_PROFILE) {
     for (const [i, chapter2] of chapters.entries()) {
       const children2 = elements(chapter2), heading2 = children2[0], body = children2[1], anchor = heading2 && elements(heading2)[0];
-      if (chapter2.children.some((value) => typeof value === "string" && value.trim()) || children2.length !== 2 || heading2.tag !== "h1" || Object.keys(heading2.attrs).length || elements(heading2).length !== 1 || heading2.children.some((value) => typeof value === "string" && value.trim()) || anchor?.tag !== "a" || JSON.stringify(anchor.attrs) !== JSON.stringify({ id: `sn27.${String(i + 1).padStart(3, "0")}` }) || elements(anchor).length || body.tag !== "p" || Object.keys(body.attrs).length || elements(body).length) fail2();
+      if (chapter2.children.some((value) => typeof value === "string" && value.trim()) || children2.length !== 2 || heading2.tag !== "h1" || Object.keys(heading2.attrs).length || elements(heading2).length !== 1 || heading2.children.some((value) => typeof value === "string" && value.trim()) || anchor?.tag !== "a" || JSON.stringify(anchor.attrs) !== JSON.stringify({ id: `sn27.${String(i + 1).padStart(3, "0")}` }) || elements(anchor).length || body.tag !== "p" || Object.keys(body.attrs).length || elements(body).length) fail3();
     }
   }
   const matches = chapters.filter((chapter2) => descendants(chapter2).some((node) => node.tag === "a" && node.attrs.id === row.anchor));
-  if (matches.length !== 1) fail2();
+  if (matches.length !== 1) fail3();
   const chapter = matches[0], children = elements(chapter), heading = children[0];
-  if (rawHash(chunk.slice(chapter.start, chapter.end)) !== p.section_html_sha256 || heading?.tag !== "h1" || chapter.children.some((value) => typeof value === "string" && value.trim())) fail2();
+  if (rawHash(chunk.slice(chapter.start, chapter.end)) !== p.section_html_sha256 || heading?.tag !== "h1" || chapter.children.some((value) => typeof value === "string" && value.trim())) fail3();
   const paragraphs = children.filter((node) => node.tag === "p"), notes = children.filter((node) => node.tag === "div");
-  if (paragraphs.length !== profile.paragraphs || notes.length !== (profile.notes ? 1 : 0) || children.length !== 1 + paragraphs.length + notes.length || notes.some((node) => JSON.stringify(node.attrs) !== '{"class":"notes"}')) fail2();
-  for (const node of descendants(chapter)) if (!["div", "h1", "a", "span", "p", "dl", "dt", "dd", "i"].includes(node.tag)) fail2();
+  if (paragraphs.length !== profile.paragraphs || notes.length !== (profile.notes ? 1 : 0) || children.length !== 1 + paragraphs.length + notes.length || notes.some((node) => JSON.stringify(node.attrs) !== '{"class":"notes"}')) fail3();
+  for (const node of descendants(chapter)) if (!["div", "h1", "a", "span", "p", "dl", "dt", "dd", "i"].includes(node.tag)) fail3();
   const title = plainText(withoutNoteTags(chunk.slice(heading.inside, heading.close)));
-  if (title !== p.heading) fail2();
+  if (title !== p.heading) fail3();
   const text2 = paragraphs.map((node) => plainText(withoutNoteTags(chunk.slice(node.inside, node.close)))).join("\n\n");
-  if (paragraphs.some((node) => !plainText(withoutNoteTags(chunk.slice(node.inside, node.close))))) fail2();
+  if (paragraphs.some((node) => !plainText(withoutNoteTags(chunk.slice(node.inside, node.close))))) fail3();
   const translator_notes = [];
   if (notes.length) {
     const children2 = elements(notes[0]), dl = children2[1];
-    if (children2.length !== 2 || children2[0].tag !== "h1" || !/^Notes?$/.test(plainText(chunk.slice(children2[0].inside, children2[0].close))) || dl.tag !== "dl") fail2();
+    if (children2.length !== 2 || children2[0].tag !== "h1" || !/^Notes?$/.test(plainText(chunk.slice(children2[0].inside, children2[0].close))) || dl.tag !== "dl") fail3();
     const rows2 = elements(dl);
-    if (rows2.length !== profile.notes * 2) fail2();
+    if (rows2.length !== profile.notes * 2) fail3();
     for (let i = 0; i < profile.notes; i++) {
       const dt = rows2[i * 2], dd = rows2[i * 2 + 1], number4 = i + 1;
-      if (dt.tag !== "dt" || dd.tag !== "dd" || plainText(chunk.slice(dt.inside, dt.close)) !== `${number4}.`) fail2();
+      if (dt.tag !== "dt" || dd.tag !== "dd" || plainText(chunk.slice(dt.inside, dt.close)) !== `${number4}.`) fail3();
       const note = plainText(chunk.slice(dd.inside, dd.close));
-      if (!note) fail2();
+      if (!note) fail3();
       translator_notes.push({ number: number4, text: note });
     }
     const markers = descendants(chapter).filter((node) => node.tag === "a" && node.attrs.class === "noteTag");
-    if (markers.length !== profile.notes || markers.some((node, i) => node.attrs.id !== `fnt-${row.unit_id.slice(3)}-${i + 1}` || node.attrs.href !== `${profile.path.split("/").at(-1)}.html#fn-${row.unit_id.slice(3)}-${i + 1}`)) fail2();
+    if (markers.length !== profile.notes || markers.some((node, i) => node.attrs.id !== `fnt-${row.unit_id.slice(3)}-${i + 1}` || node.attrs.href !== `${profile.path.split("/").at(-1)}.html#fn-${row.unit_id.slice(3)}-${i + 1}`)) fail3();
   }
-  if (sectionHash(text2) !== p.text_sha256 || sectionHash(translator_notes) !== p.notes_sha256) fail2();
+  if (sectionHash(text2) !== p.text_sha256 || sectionHash(translator_notes) !== p.notes_sha256) fail3();
   return { text: text2, translator_notes, title };
 }
 function numberedMindParagraph(root, chapters, chunk, row, profile) {
-  if (root.children.some((value) => typeof value === "string" && value.trim()) || chapters.length !== 2) fail2();
+  if (root.children.some((value) => typeof value === "string" && value.trim()) || chapters.length !== 2) fail3();
   const paragraphs = [];
   for (const chapter of chapters) {
-    if (chapter.tag !== "div" || JSON.stringify(chapter.attrs) !== '{"class":"chapter"}' || chapter.children.some((value) => typeof value === "string" && value.trim()) || elements(chapter).length !== 10) fail2();
+    if (chapter.tag !== "div" || JSON.stringify(chapter.attrs) !== '{"class":"chapter"}' || chapter.children.some((value) => typeof value === "string" && value.trim()) || elements(chapter).length !== 10) fail3();
     for (const paragraph of elements(chapter)) {
       const number4 = paragraphs.length + 21, anchors2 = elements(paragraph), anchor = anchors2[0];
-      if (paragraph.tag !== "p" || Object.keys(paragraph.attrs).length || anchors2.length !== 1 || anchor.tag !== "a" || JSON.stringify(anchor.attrs) !== JSON.stringify({ id: `sutta-${number4}` }) || elements(anchor).length || plainText(chunk.slice(anchor.inside, anchor.close)) !== String(number4) || chunk.slice(paragraph.inside, anchor.start).trim()) fail2();
+      if (paragraph.tag !== "p" || Object.keys(paragraph.attrs).length || anchors2.length !== 1 || anchor.tag !== "a" || JSON.stringify(anchor.attrs) !== JSON.stringify({ id: `sutta-${number4}` }) || elements(anchor).length || plainText(chunk.slice(anchor.inside, anchor.close)) !== String(number4) || chunk.slice(paragraph.inside, anchor.start).trim()) fail3();
       const body = chunk.slice(anchor.end, paragraph.close).match(/^\.\s+([^]*)$/);
-      if (!body || /[<>]/.test(body[1])) fail2();
+      if (!body || /[<>]/.test(body[1])) fail3();
       paragraphs.push({ paragraph, anchor, text: plainText(body[1]) });
     }
   }
   const selected = paragraphs.find((value) => value.anchor.attrs.id === row.anchor), p = row.section;
-  if (!selected || !selected.text || rawHash(chunk.slice(selected.paragraph.start, selected.paragraph.end)) !== p.section_html_sha256 || p.heading !== profile.label || sectionHash(selected.text) !== p.text_sha256 || sectionHash([]) !== p.notes_sha256) fail2();
+  if (!selected || !selected.text || rawHash(chunk.slice(selected.paragraph.start, selected.paragraph.end)) !== p.section_html_sha256 || p.heading !== profile.label || sectionHash(selected.text) !== p.text_sha256 || sectionHash([]) !== p.notes_sha256) fail3();
   return { text: selected.text, translator_notes: [], title: p.heading };
 }
 function finiteTreatment(root, chapters, chunk, row, profile) {
@@ -24857,70 +25208,70 @@ function finiteTreatment(root, chapters, chunk, row, profile) {
   const noText = (node) => !node.children.some((value) => typeof value === "string" && value.trim());
   const pool = profile.path.endsWith("an01.045-046.than"), luminous = profile.path.endsWith("an01.049.than");
   const gratitude = profile.path.endsWith("an02.031.than"), voice = profile.path.endsWith("an02.125-126.than");
-  if (![pool, luminous, gratitude, voice].some(Boolean) || row.section.selection_id !== profile.unit_id || row.section.heading !== null || row.english_title !== profile.parent_title || !noText(root) || chapters.length !== (pool ? 2 : 1) || chapters.some((node) => node.tag !== "div" || !exactAttrs(node, { class: "chapter" }) || !noText(node))) fail2();
+  if (![pool, luminous, gratitude, voice].some(Boolean) || row.section.selection_id !== profile.unit_id || row.section.heading !== null || row.english_title !== profile.parent_title || !noText(root) || chapters.length !== (pool ? 2 : 1) || chapters.some((node) => node.tag !== "div" || !exactAttrs(node, { class: "chapter" }) || !noText(node))) fail3();
   const paragraphs = chapters.flatMap((chapter2) => elements(chapter2).filter((node) => node.tag === "p"));
-  if (paragraphs.length !== (pool || voice ? 2 : 4) || paragraphs.some((node) => Object.keys(node.attrs).length)) fail2();
+  if (paragraphs.length !== (pool || voice ? 2 : 4) || paragraphs.some((node) => Object.keys(node.attrs).length)) fail3();
   const extras = chapters.flatMap((chapter2) => elements(chapter2).filter((node) => node.tag !== "p"));
-  if (extras.length !== (pool ? 0 : 1) || !pool && (extras[0].tag !== "div" || !exactAttrs(extras[0], { class: gratitude ? "seeAlso" : "notes" }))) fail2();
-  if (pool && chapters.some((chapter2) => elements(chapter2).length !== 1) || !pool && (elements(chapters[0]).length !== paragraphs.length + 1 || elements(chapters[0]).at(-1) !== extras[0])) fail2();
+  if (extras.length !== (pool ? 0 : 1) || !pool && (extras[0].tag !== "div" || !exactAttrs(extras[0], { class: gratitude ? "seeAlso" : "notes" }))) fail3();
+  if (pool && chapters.some((chapter2) => elements(chapter2).length !== 1) || !pool && (elements(chapters[0]).length !== paragraphs.length + 1 || elements(chapters[0]).at(-1) !== extras[0])) fail3();
   const alts = ["{I,v,9}", "{I,v,10}", "{I,vi,1}", "{I,vi,2}"];
   for (const [i, paragraph] of paragraphs.entries()) {
     const children = elements(paragraph), markers = children.filter((node) => node.tag === "a");
     if (pool) {
-      if (children.length || !new RegExp("^" + (i + 45) + "\\.\\s+").test(plainText(inside(paragraph)))) fail2();
+      if (children.length || !new RegExp("^" + (i + 45) + "\\.\\s+").test(plainText(inside(paragraph)))) fail3();
       continue;
     }
     if (luminous || voice) {
-      if (markers.length !== (i === 0 ? 1 : 0) || children.length !== (luminous ? i === 0 ? 2 : 1 : i === 0 ? 1 : 0)) fail2();
+      if (markers.length !== (i === 0 ? 1 : 0) || children.length !== (luminous ? i === 0 ? 2 : 1 : i === 0 ? 1 : 0)) fail3();
       if (i === 0) {
         const marker = markers[0];
-        if (!exactAttrs(marker, { class: "noteTag", href: profile.path.split("/").at(-1) + ".html#fn-1", id: "fnt-1" }) || elements(marker).length || plainText(inside(marker)) !== "[1]") fail2();
+        if (!exactAttrs(marker, { class: "noteTag", href: profile.path.split("/").at(-1) + ".html#fn-1", id: "fnt-1" }) || elements(marker).length || plainText(inside(marker)) !== "[1]") fail3();
       }
       if (luminous) {
         const alt = children.at(-1);
-        if (alt.tag !== "span" || !exactAttrs(alt, { class: "altID" }) || elements(alt).length || inside(alt) !== alts[i]) fail2();
+        if (alt.tag !== "span" || !exactAttrs(alt, { class: "altID" }) || elements(alt).length || inside(alt) !== alts[i]) fail3();
       }
     } else if (gratitude) {
       if (i < 3) {
-        if (children.length) fail2();
+        if (children.length) fail3();
       } else {
         const alt = children[0], anchor = alt && elements(alt)[0];
-        if (children.length !== 1 || alt.tag !== "span" || !exactAttrs(alt, { class: "altID" }) || elements(alt).length !== 1 || anchor.tag !== "a" || !exactAttrs(anchor, { id: "s32" }) || elements(anchor).length || inside(alt) !== '{<a id="s32">II,iv,2</a>}') fail2();
+        if (children.length !== 1 || alt.tag !== "span" || !exactAttrs(alt, { class: "altID" }) || elements(alt).length !== 1 || anchor.tag !== "a" || !exactAttrs(anchor, { id: "s32" }) || elements(anchor).length || inside(alt) !== '{<a id="s32">II,iv,2</a>}') fail3();
       }
     }
   }
   let note;
   if (luminous || voice) {
     const nodes = elements(extras[0]), h = nodes[0], dl = nodes[1], entries = dl && elements(dl), dt = entries?.[0], dd = entries?.[1], back = dt && elements(dt)[0];
-    if (nodes.length !== 2 || h.tag !== "h1" || !exactAttrs(h, {}) || elements(h).length || inside(h) !== "Note" || dl.tag !== "dl" || !exactAttrs(dl, {}) || !noText(dl) || entries.length !== 2 || dt.tag !== "dt" || !exactAttrs(dt, {}) || elements(dt).length !== 1 || back.tag !== "a" || !exactAttrs(back, { href: profile.path.split("/").at(-1) + ".html#fnt-1", id: "fn-1" }) || elements(back).length || inside(back) !== "1" || plainText(inside(dt)) !== "1." || dd.tag !== "dd" || !exactAttrs(dd, {})) fail2();
-    for (const node of descendants(dd)) if (!["dd", "p", "i", "a"].includes(node.tag) || node.tag !== "a" && Object.keys(node.attrs).length || node.tag === "a" && (Object.keys(node.attrs).join(",") !== "href" || !/^\.\.\//.test(node.attrs.href))) fail2();
-    if (elements(dd).filter((node) => node.tag === "p").length !== 3 || luminous && !noText(dd)) fail2();
+    if (nodes.length !== 2 || h.tag !== "h1" || !exactAttrs(h, {}) || elements(h).length || inside(h) !== "Note" || dl.tag !== "dl" || !exactAttrs(dl, {}) || !noText(dl) || entries.length !== 2 || dt.tag !== "dt" || !exactAttrs(dt, {}) || elements(dt).length !== 1 || back.tag !== "a" || !exactAttrs(back, { href: profile.path.split("/").at(-1) + ".html#fnt-1", id: "fn-1" }) || elements(back).length || inside(back) !== "1" || plainText(inside(dt)) !== "1." || dd.tag !== "dd" || !exactAttrs(dd, {})) fail3();
+    for (const node of descendants(dd)) if (!["dd", "p", "i", "a"].includes(node.tag) || node.tag !== "a" && Object.keys(node.attrs).length || node.tag === "a" && (Object.keys(node.attrs).join(",") !== "href" || !/^\.\.\//.test(node.attrs.href))) fail3();
+    if (elements(dd).filter((node) => node.tag === "p").length !== 3 || luminous && !noText(dd)) fail3();
     note = { number: 1, text: plainText(inside(dd)) };
-    if (!note.text) fail2();
+    if (!note.text) fail3();
   }
   if (gratitude) {
     const nodes = elements(extras[0]);
-    if (nodes.length !== 1 || nodes[0].tag !== "p" || Object.keys(nodes[0].attrs).length || !noText(extras[0])) fail2();
+    if (nodes.length !== 1 || nodes[0].tag !== "p" || Object.keys(nodes[0].attrs).length || !noText(extras[0])) fail3();
     const links = elements(nodes[0]), expected = ["../../mn/mn.110.than.html", "../../sn/sn07/sn07.014.than.html", "../an04/an04.073.than.html", "../../kn/iti/iti.4.100-112.than.html#iti-106"];
-    if (links.length !== 4 || links.some((link, i) => link.tag !== "a" || !exactAttrs(link, { href: expected[i] }) || elements(link).length)) fail2();
+    if (links.length !== 4 || links.some((link, i) => link.tag !== "a" || !exactAttrs(link, { href: expected[i] }) || elements(link).length)) fail3();
   }
   const chapter = chapters[profile.chapter - 1], chosen = elements(chapter).filter((node) => node.tag === "p").slice(profile.paragraph_first - 1, profile.paragraph_last);
-  if (chosen.length !== profile.paragraphs || rawHash(chunk.slice(chosen[0].start, chosen.at(-1).end)) !== row.section.section_html_sha256) fail2();
+  if (chosen.length !== profile.paragraphs || rawHash(chunk.slice(chosen[0].start, chosen.at(-1).end)) !== row.section.section_html_sha256) fail3();
   const text2 = chosen.map((node) => {
     let body = inside(node).replace(/<span class="altID">[^]*?<\/span>/g, "");
     body = withoutNoteTags(body);
     body = plainText(body);
     if (pool) body = body.replace(new RegExp("^" + (profile.unit_id.endsWith(".45") ? 45 : 46) + "\\.\\s+"), "");
-    if (!body) fail2();
+    if (!body) fail3();
     return body;
   }).join("\n\n");
   const translator_notes = profile.notes ? [note] : [];
-  if (translator_notes.some((value) => !value) || sectionHash(text2) !== row.section.text_sha256 || sectionHash(translator_notes) !== row.section.notes_sha256) fail2();
+  if (translator_notes.some((value) => !value) || sectionHash(text2) !== row.section.text_sha256 || sectionHash(translator_notes) !== row.section.notes_sha256) fail3();
   return { text: text2, translator_notes, title: profile.parent_title };
 }
 
 // src/english.mjs
-var prefixHash = (text2, offset) => (0, import_node_crypto5.createHash)("sha256").update(text2.slice(0, offset)).digest("hex");
+var prefixHash = (text2, offset) => (0, import_node_crypto6.createHash)("sha256").update(text2.slice(0, offset)).digest("hex");
 var ATI_MIRRORS = [
   (p) => `https://accesstoinsight.org${p}.html`,
   (p) => `https://raw.githubusercontent.com/bcbsit/ati/main${p}.html`,
@@ -25067,6 +25418,7 @@ function available(unit) {
     reference: t.reference || void 0,
     ...t.license ? { license: t.license } : {},
     match: t.match,
+    ...t.source === "apadana" ? { url: t.url, translation_revision: t.translation_revision, note_count: t.note_count } : {},
     ...t.mapping_note ? { mapping_note: t.mapping_note } : {},
     ...t.section ? { source_section: JSON.parse(JSON.stringify(t.section)) } : {},
     ...t.commentary ? { includes_commentary: true } : {}
@@ -25078,7 +25430,7 @@ function selectTranslation(links, which, citation) {
     const full = links.filter((link) => !isScoped(link));
     return { link: full.find((link) => link.source === "dhammatalks") || full[0], matchingVersions: [] };
   }
-  if (/^(ati|dt|aj):/.test(which)) return { link: links.find((link) => translationId(link) === which), matchingVersions: [] };
+  if (/^(ati|dt|aj|ap):/.test(which)) return { link: links.find((link) => translationId(link) === which), matchingVersions: [] };
   const wanted = translatorKey(which);
   const exact = links.filter((link) => translatorKey(link.translator) === wanted);
   const matches = exact.length ? exact : links.filter((link) => translatorKey(link.translator).includes(wanted) || link.source.includes(wanted));
@@ -25087,7 +25439,7 @@ function selectTranslation(links, which, citation) {
   }
   return { link: matches.find((link) => !isScoped(link)) || matches[0], matchingVersions: matches };
 }
-async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha256: expectedPrefix, allow_partial = false, allow_shared = false, allow_fallback = true, scope_sha256 } = {}) {
+async function translation2(unit, which, { offset = 0, limit = 12e3, prefix_sha256: expectedPrefix, allow_partial = false, allow_shared = false, allow_fallback = true, scope_sha256, translation_revision } = {}) {
   if (typeof allow_fallback !== "boolean") throw new Error("allow_fallback must be a boolean.");
   if (typeof allow_shared !== "boolean") throw new Error("allow_shared must be a boolean.");
   if (typeof allow_partial !== "boolean") throw new Error("allow_partial must be a boolean.");
@@ -25095,7 +25447,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
     if (typeof which !== "string" || !which.trim()) throw new Error("Translation selector cannot be empty or blank. Omit it for the default, or use an available translation_id or translator name.");
     which = which.trim();
   }
-  if (offset > 0 && !/^(ati|dt|aj):/.test(which || "")) {
+  if (offset > 0 && !/^(ati|dt|aj|ap):/.test(which || "")) {
     throw new Error("Translation continuation requires the exact translation_id returned by the previous page. Use its continue_with arguments; a default or translator name can select a different version after an outage.");
   }
   if (expectedPrefix !== void 0 && (typeof expectedPrefix !== "string" || !/^[a-f0-9]{64}$/.test(expectedPrefix) || offset <= 0)) throw new Error("prefix_sha256 requires a positive continuation offset and the unchanged SHA-256 from continue_with.");
@@ -25109,6 +25461,12 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
     throw new Error("Only partial translations are linked. Choose an exact translation_id and explicitly set allow_partial: true; no whole-unit translation was selected.");
   }
   if (!link) throw new Error(`Translation "${which}" is not linked for ${unit.acronym}. Available: ${available(unit).map((a) => `${a.translation_id} (${a.translator})`).join(", ")}.`);
+  if (link.source === "apadana") {
+    const book = load().canon.books[unit.book];
+    validateLink(link, unit.id, unit, book);
+    if (offset > 0 && (!expectedPrefix || !translation_revision)) throw Error("Apad\u0101na continuation requires unchanged translation_revision and prefix_sha256 from continue_with.");
+  }
+  if (translation_revision !== void 0 && (link.source !== "apadana" || translation_revision !== link.translation_revision)) throw Error("The pinned English source revision changed. Reload its metadata and restart at offset 0.");
   const declaredScope = translationScope(link, unit);
   const shared = isShared(link);
   if (allow_shared && !shared) throw new Error("The selected source no longer has a declared shared-page scope. Review its mapping before requesting another source.");
@@ -25120,9 +25478,10 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
   let result;
   const notes = via && !declaredScope ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   if (link.mapping_note) notes.push(link.mapping_note);
+  if (link.source === "apadana") notes.push(...link.mapping_notes);
   let sectionRow = reviewedSectionFor(link, unit);
   try {
-    result = link.source === "ati" ? await (sectionRow ? fetchAtiSection(link, sectionRow) : declaredScope?.kind === "partial_unit" ? fetchAtiPartial(link.path, declaredScope.extractor) : fetchAti(link.path)) : link.source === "anandajoti" ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1) : await fetchDhammatalks(link.url);
+    result = link.source === "ati" ? await (sectionRow ? fetchAtiSection(link, sectionRow) : declaredScope?.kind === "partial_unit" ? fetchAtiPartial(link.path, declaredScope.extractor) : fetchAti(link.path)) : link.source === "anandajoti" ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1) : link.source === "apadana" ? await translation(link) : await fetchDhammatalks(link.url);
   } catch (error2) {
     const outage = !error2.failures || error2.failures.some((f) => !/HTTP 404/.test(f));
     const sameTranslator = allow_fallback && !declaredScope && outage && link.source === "dhammatalks" && links.find((l) => !isScoped(l) && l.source === "ati" && /thanissaro/i.test(l.translator || ""));
@@ -25153,7 +25512,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
     notes.push("A line-by-line edition: each P\u0101li line is followed by its English translation. [Note: \u2026] marks are the translator's notes, not scripture.");
     if (link.commentary) notes.push('This page also translates the commentary (A\u1E6D\u1E6Dhakath\u0101); those passages are marked "[Commentary (A\u1E6D\u1E6Dhakath\u0101) begins]" and are commentary, not the canonical text.');
   }
-  if (result.fetched_from !== result.source && !["dhammatalks.org", "accesstoinsight.org", "ancient-buddhist-texts.net"].includes(result.fetched_from)) {
+  if (link.source !== "apadana" && result.fetched_from !== result.source && !["dhammatalks.org", "accesstoinsight.org", "ancient-buddhist-texts.net"].includes(result.fetched_from)) {
     notes.push(`The primary site was unavailable; text served from ${result.fetched_from}, an identical copy of the archive.`);
   }
   const theirs = (link.reference || "").match(/^(AN|SN) (\d+):(\d+)/);
@@ -25181,7 +25540,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
     prefix_sha256: prefix,
     continue_with: nextOffset === null ? null : {
       name: "get_translation",
-      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit, prefix_sha256: prefixHash(text2, nextOffset), ...declaredScope ? { ...shared ? { allow_shared: true } : { allow_partial: true }, scope_sha256: declaredScope.scope_sha256 } : {} }
+      arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit, prefix_sha256: prefixHash(text2, nextOffset), ...link.source === "apadana" ? { translation_revision: link.translation_revision } : {}, ...declaredScope ? { ...shared ? { allow_shared: true } : { allow_partial: true }, scope_sha256: declaredScope.scope_sha256 } : {} }
     },
     ...declaredScope ? { translation_scope: declaredScope, whole_unit_coverage: false } : {},
     ...sectionRow ? { source_section: JSON.parse(JSON.stringify(sectionRow.section)), translator_notes: result.translator_notes.map((note) => ({ ...note })) } : {},
@@ -27119,7 +27478,7 @@ async function getAtiText({ path, offset = 0, limit = 12e3 }) {
     licensing: notice.licensing || "See the page for its terms."
   };
 }
-var COVERAGE_SOURCES = ["dhammatalks", "ati", "anandajoti"];
+var COVERAGE_SOURCES = ["dhammatalks", "ati", "anandajoti", "apadana"];
 var coverageCache = null;
 function translationCoverage({ refresh = false } = {}) {
   if (coverageCache && !refresh) return coverageCache;
@@ -27271,6 +27630,14 @@ function listSources() {
       },
       { id: "dhamma-lists", name: "Numbered lists (pali-canon-mcp curation)", role: "dhamma_list: standard lists with defining passages; P\u0101li from the bundled VRI text, English glosses written for the index (not translations).", license: "MIT (curation); P\u0101li under VRI terms" },
       { id: "bmc", name: "The Buddhist Monastic Code, Vol. I \u2014 \u1E6Ch\u0101nissaro Bhikkhu (dhammatalks.org)", role: "Linked only: vinaya_rule links each bhikkhu P\u0101timokkha rule to the section that explains it (commentary). Section URLs bundled; no text fetched or stored.", url: "https://www.dhammatalks.org/vinaya/bmc/Section0000.html", license: "CC BY-NC 4.0" },
+      {
+        id: "apadana",
+        name: "Legends of the Buddhist Saints (Apad\u0101na) \u2014 Jonathan S. Walters and Whitman College",
+        role: "Seven reviewed whole Ther\u012B Apad\u0101na English translations (live pinned publisher files); translation_id prefix ap:. Metadata only is bundled. No source substitution.",
+        url: "https://apadanatranslation.com/",
+        license: "CC BY-NC-SA 4.0",
+        notice: "https://apadanatranslation.com/about/"
+      },
       { id: "dppn", name: "Dictionary of P\u0101li Proper Names (G. P. Malalasekera, 1937\u201338)", role: "Proper-name lookup (lookup_name). Linked only: entries not bundled while the licence is unconfirmed (#32).", url: "https://ancient-buddhist-texts.net/Textual-Studies/DPPN/index.htm", license: "Unconfirmed; probably in copyright. Nothing bundled." },
       {
         id: "calendar",
@@ -27853,7 +28220,7 @@ function englishReference(reference) {
 }
 function exactTranslationIds(value) {
   if (value === void 0) return null;
-  if (!Array.isArray(value) || !value.length || value.length > MAX_ENGLISH_PAGES || value.some((id) => typeof id !== "string" || !id.trim() || id.trim().length > 400 || !/^(ati:\/|dt:|aj:)/.test(id.trim()))) {
+  if (!Array.isArray(value) || !value.length || value.length > MAX_ENGLISH_PAGES || value.some((id) => typeof id !== "string" || !id.trim() || id.trim().length > 400 || !/^(ati:\/|dt:|aj:|ap:)/.test(id.trim()))) {
     throw new Error("translation_ids must be a nonempty array of at most 80 exact translation IDs from get_metadata. Translator names and source URLs are not version selectors.");
   }
   return [...new Set(value.map((id) => id.trim()))];
@@ -27948,7 +28315,7 @@ function englishScope(texts, { includePartial = false, includeShared = false, tr
         }
         continue;
       }
-      const page2 = { unit: pageOwner, translation_id: translationId(l), translator, url: l.url, ...context };
+      const page2 = { unit: pageOwner, translation_id: translationId(l), translator, url: l.url, ...l.source === "apadana" ? { translation_revision: l.translation_revision } : {}, ...context };
       pages.push(page2);
       byUrl.set(pageKey, page2);
     }
@@ -27988,6 +28355,7 @@ function englishVersion(page2) {
     translator: page2.translator,
     translation_id: page2.translation_id,
     url: page2.url,
+    ...page2.translation_revision ? { translation_revision: page2.translation_revision, licence_url: APADANA_LICENSE_URL, comparison_extent: "Numbered substantive publisher stanzas only; preface, headings, colophons and translator notes were not compared." } : {},
     ...page2.requested_translation_id ? { requested_translation_id: page2.requested_translation_id } : {},
     ...page2.notes?.length ? { notes: page2.notes } : {},
     ...scopeEvidence(page2)
@@ -28009,7 +28377,7 @@ async function verifyEnglish(text2, texts, limit, fetchTranslation, includeParti
   const fetched = await mapLimit(plan.pages, 6, async (p) => {
     let received = p;
     try {
-      const t = await fetchTranslation(p.unit, p.translation_id, { limit: MAX_ENGLISH_SOURCE_CHARACTERS, ...plan.exactVersions ? { allow_fallback: false } : {}, ...p.translation_scope ? { ...p.translation_scope.kind === "shared_page" ? { allow_shared: true } : { allow_partial: true }, scope_sha256: p.translation_scope.scope_sha256 } : {} });
+      const t = await fetchTranslation(p.unit, p.translation_id, { limit: MAX_ENGLISH_SOURCE_CHARACTERS, ...plan.exactVersions || p.translation_revision ? { allow_fallback: false } : {}, ...p.translation_revision ? { translation_revision: p.translation_revision } : {}, ...p.translation_scope ? { ...p.translation_scope.kind === "shared_page" ? { allow_shared: true } : { allow_partial: true }, scope_sha256: p.translation_scope.scope_sha256 } : {} });
       if ((p.translation_scope?.scope_sha256 || null) !== (t.translation_scope?.scope_sha256 || null) || p.translation_scope && scopeHash(p.translation_scope) !== scopeHash(t.translation_scope)) throw new Error("Retrieved translation scope differs from the planned scope; no quotation was compared.");
       if (p.translation_scope?.kind === "shared_page" && (t.whole_unit_coverage !== false || t.text_id !== null)) throw new Error("Shared-page source claimed individual or whole-unit alignment; no quotation was compared.");
       if (p.translation_scope && (t.translation_id !== p.translation_id || t.url !== p.url || typeof t.text !== "string" || scopeHash(t.text) !== p.translation_scope.text_sha256 || t.next_offset != null)) {
@@ -28031,7 +28399,8 @@ async function verifyEnglish(text2, texts, limit, fetchTranslation, includeParti
         throw error2;
       }
       requireCompleteEnglishSource(t);
-      return { ...received, text: t.text, attribution: t.attribution, license: t.license };
+      if (p.translation_revision && (t.translation_id !== p.translation_id || t.url !== p.url || t.translator !== p.translator || t.translation_revision !== p.translation_revision)) throw Error("Pinned Apad\u0101na identity changed; no quotation was compared.");
+      return { ...received, text: p.translation_revision ? quotationText(t) : t.text, attribution: t.attribution, license: t.license };
     } catch (error2) {
       return { ...received, error: error2.message, ...["INCOMPLETE_ENGLISH_SOURCE", "UNEXPECTED_TRANSLATION_VERSION"].includes(error2.code) ? { error_code: error2.code } : {} };
     }
@@ -28119,7 +28488,7 @@ function tieNote(ties) {
   if (ties.sources) return `This wording matches ${ties.at_least ? "at least " : ""}${ties.texts} source versions equally well. This is not a count of individually aligned canonical texts. Compare the complete source scopes; the listed matches may be limited.`;
   return `This wording matches ${ties.at_least ? "at least " : ""}${ties.texts} texts equally well (a stock or repeated passage). The matches listed are the first in canon order, not a unique source: quote more of the passage, or check the text you have in mind.`;
 }
-async function verifyQuote({ text: text2, language = "auto", texts, limit = 5, include_partial = false, include_shared = false, translation_ids }, { fetchTranslation = translation } = {}) {
+async function verifyQuote({ text: text2, language = "auto", texts, limit = 5, include_partial = false, include_shared = false, translation_ids }, { fetchTranslation = translation2 } = {}) {
   const quote = String(text2 ?? "").trim();
   if (quote.length < 8) throw new Error("Give at least a few words of the quotation.");
   let input, literal2;
@@ -28194,7 +28563,7 @@ __export(find_citations_exports, {
   register: () => register4,
   scan: () => scan
 });
-var import_node_crypto6 = require("node:crypto");
+var import_node_crypto7 = require("node:crypto");
 var BOUND_BEFORE = "(?<![\\p{L}\\p{N}_@])";
 var BOUND_AFTER = "(?![\\p{L}\\p{N}_@]|,\\d)";
 var NUM = "\\d+(?:[.:]\\d+)*(?:(?:-|\\s?[\u2013\u2014]\\s?)\\d+(?:[.:]\\d+)*)?";
@@ -28303,7 +28672,7 @@ var ROMAN4 = "(?:I{1,3}|IV|VI{0,2}|i{1,3}|iv|vi{0,2})";
 var VINAYA = "(?:Pj|Ss|Ay|Np|Pc|Pd|Sk|Kd|Mv|Cv|Pvr|Parajika|Sanghadisesa|Aniyata|Nissaggiya|Pacittiya|Patidesaniya|Sekhiya|Adhikaranasamatha|Khandhaka)";
 var LOWER_IDS = ["dn", "mn", "sn", "an", "kp", "dhp", "ud", "iti", "snp", "vv", "pv", "thag", "thig", "bv", "cp", "ja", "mnd", "cnd", "mil", "ne", "pe", "kv", "ds", "vb", "patthana"];
 var MACHINE_ID = `(?:(?:${LOWER_IDS.join("|")})\\d+(?:\\.\\d+)*|(?:ps|dt|pp|ya)\\d+(?:\\.\\d+)+)(?:-\\d+)?(?::\\d+(?:\\.\\d+)*)?`;
-var LINK_HOSTS = /^(?:www\.)?(?:suttacentral\.net|accesstoinsight\.org|dhammatalks\.org|ancient-buddhist-texts\.net)$/i;
+var LINK_HOSTS = /^(?:www\.)?(?:suttacentral\.net|accesstoinsight\.org|dhammatalks\.org|ancient-buddhist-texts\.net|apadanatranslation\.com)$/i;
 var EDITION_HEAD = `(?:${Object.keys(EDITION_WORDS).sort((a, b) => b.length - a.length).join("|")})(?:\\.?\\s*ed(?:ition)?\\.?)?[\\s.:,]+`;
 var EDITION_SCOPE = [.../* @__PURE__ */ new Set([...ABBREVIATIONS, ...FULL_NAMES, ...Object.keys(_test.COLLECTIONS), ...Object.keys(VINAYA_SCOPES)])].sort((a, b) => b.length - a.length).join("|");
 var EDITION_PAGE = `(?:${ROMAN4}(?:\\.\\s*|\\s+))?(?:(?:volume|vol)\\.?\\s*)?\\d+(?:(?:\\s*[.:,]\\s*|\\s+(?:(?:pages?|pp|p)\\.?\\s*)?)\\d+)*(?:\\s*[-\u2013\u2014]\\s*\\d+(?:[.:]\\d+)*)?`;
@@ -28379,16 +28748,16 @@ var MAX_TOOL_RESULT_BYTES = 1024 * 1024;
 var CURSOR_VERSION = "v1";
 var RECORD_BUDGET = MAX_REPORT_BYTES - 8192;
 var indexScopes = /* @__PURE__ */ new WeakMap();
-var hash = (value) => (0, import_node_crypto6.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
+var hash = (value) => (0, import_node_crypto7.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
 function reportScope(text2, canon) {
   const loaded = canon.load();
   const data5 = loaded.canon;
   let index4 = indexScopes.get(loaded);
   if (!index4) {
-    const digest = (0, import_node_crypto6.createHash)("sha256");
-    digest.update(JSON.stringify([data5.source, data5.collections, data5.units, [...loaded.urlIndex || []]]));
-    for (const book of data5.books) digest.update(JSON.stringify(book));
-    index4 = digest.digest("hex");
+    const digest2 = (0, import_node_crypto7.createHash)("sha256");
+    digest2.update(JSON.stringify([data5.source, data5.collections, data5.units, [...loaded.urlIndex || []]]));
+    for (const book of data5.books) digest2.update(JSON.stringify(book));
+    index4 = digest2.digest("hex");
     indexScopes.set(loaded, index4);
   }
   return hash([CURSOR_VERSION, index4, text2]);
@@ -28477,7 +28846,7 @@ function findCitations(text2, canon, { limit = MAX_RESULTS, cursor } = {}) {
   return report;
 }
 function register4({ tool, z, canon }) {
-  tool("find_citations", "Find every P\u0101li Canon citation in a piece of free text (an essay, a talk transcript, a paper's references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nid\u0101navaggo), PTS pages like M i 55 or S v 420, canonical IDs like ja526, ps3.2 and ya1.1.1, Bilara anchors like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org / ancient-buddhist-texts.net links. Supports native numerals with Roman citation names, preserving original text and offsets; native-script names are not scanned. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Paginate with next_cursor and unchanged text; counts are per page except found. Oversized candidates are marked not_checked, never verified. Works offline.", {
+  tool("find_citations", "Find every P\u0101li Canon citation in a piece of free text (an essay, a talk transcript, a paper's references) and check each one against the bundled canon. Mixed schemes are understood: MN 10, SN 56:11, AN 3.65, Dhp 183, Snp 1.8, Pj 1, Kd 1, printed edition pages like Thai MN 1.103 or VRI SN 1.20 (Nid\u0101navaggo), PTS pages like M i 55 or S v 420, canonical IDs like ja526, ps3.2 and ya1.1.1, Bilara anchors like sn56.11:5.1, and suttacentral.net / accesstoinsight.org / dhammatalks.org / ancient-buddhist-texts.net / reviewed apadanatranslation.com links. Supports native numerals with Roman citation names, preserving original text and offsets; native-script names are not scanned. Returns each citation with its character offsets, the text it names (ID, title) or, when it does not resolve, the reason. Paginate with next_cursor and unchanged text; counts are per page except found. Oversized candidates are marked not_checked, never verified. Works offline.", {
     text: z.string().min(1).max(MAX_TEXT).describe("The free text to scan, up to 200,000 characters."),
     limit: z.number().int().min(1).max(MAX_RESULTS).default(MAX_RESULTS).describe("Maximum citations on this page. Structured reports also have a 256 KiB JSON byte budget, so a page can be shorter. Counts other than found describe this page."),
     cursor: z.string().max(100).optional().describe("Opaque next_cursor from the preceding report. Reuse the identical original text; changed input or bundled index is rejected. Do not supply an offset or edit the cursor.")
@@ -31828,7 +32197,7 @@ __export(talks_exports, {
   searchUrl: () => searchUrl,
   sharedPhrase: () => sharedPhrase
 });
-var import_node_crypto7 = require("node:crypto");
+var import_node_crypto8 = require("node:crypto");
 var SITE = "https://www.dhammatalks.org";
 var CATEGORIES = ["evening", "morning"];
 var MIN_INTERVAL_MS = 1e3;
@@ -31984,7 +32353,7 @@ function parseCursor(cursor, categories) {
   return state;
 }
 var formatCursor = (state) => state.map((s) => `${s.category}:${s.page}:${s.offset}`).join(",");
-var cursorScope = (query, passage, category, terms4) => (0, import_node_crypto7.createHash)("sha256").update(JSON.stringify([query, passage?.id || null, category, terms4, passage?.translation_url || null])).digest("hex");
+var cursorScope = (query, passage, category, terms4) => (0, import_node_crypto8.createHash)("sha256").update(JSON.stringify([query, passage?.id || null, category, terms4, passage?.translation_url || null])).digest("hex");
 function scopedState(cursor, categories, scope) {
   const match2 = typeof cursor === "string" && cursor.match(/^v1:([a-f0-9]{64}):(.+)$/);
   if (!match2) throw new Error("Invalid or legacy talk cursor. Restart without cursor and pass the returned next_cursor unchanged.");
@@ -32150,7 +32519,7 @@ __export(commentary_exports, {
   register: () => register15,
   segmentOwners: () => segmentOwners
 });
-var import_node_crypto8 = require("node:crypto");
+var import_node_crypto9 = require("node:crypto");
 var import_node_zlib5 = require("node:zlib");
 var import_node_path8 = require("node:path");
 var import_node_url8 = require("node:url");
@@ -32302,7 +32671,7 @@ function readBook2(uid, { offset = 0, limit = 40 } = {}) {
 function sourceInfo2(d, unit) {
   const { name, repository, commit, files, attribution: attribution2, terms: terms4 } = d.source;
   const mapping = unit?.id === "sn12.21" && d.units[unit.id]?.map((i) => d.passages[i]);
-  const revision = mapping && (0, import_node_crypto8.createHash)("sha256").update(JSON.stringify(mapping)).digest("hex").slice(0, 24);
+  const revision = mapping && (0, import_node_crypto9.createHash)("sha256").update(JSON.stringify(mapping)).digest("hex").slice(0, 24);
   return {
     name,
     repository,
@@ -33399,10 +33768,10 @@ function createServer({ executeTool } = {}) {
     translation: external_exports.string().trim().min(1).max(200).optional().describe('"default" for the preferred English translation, a translation_id, an unambiguous translator name, or omit for P\u0101li only. A supplied empty selector is an error.'),
     script: scriptParam,
     commentary: external_exports.boolean().default(false).describe("Add the traditional commentary (A\u1E6D\u1E6Dhakath\u0101) on this text, labelled as commentary, not canon.")
-  }, async ({ uid, book, offset, limit, includeVariants, variants, translation: translation2, script, commentary }) => {
+  }, async ({ uid, book, offset, limit, includeVariants, variants, translation: translation3, script, commentary }) => {
     if (uid === void 0 === (book === void 0)) throw new Error('Give exactly one of uid (an individual citation) or book (an ID from browse_canon with node "books").');
     if (book !== void 0) {
-      if (translation2 !== void 0 || commentary) throw new Error("English translations and aligned commentary require an individual uid. Read the source book with book, then use a standard citation with uid for those options.");
+      if (translation3 !== void 0 || commentary) throw new Error("English translations and aligned commentary require an individual uid. Read the source book with book, then use a standard citation with uid for those options.");
       return localizeText(readBook({ book, offset, limit, includeVariants, variants }), script);
     }
     const input = romanizeInput(uid);
@@ -33426,9 +33795,9 @@ function createServer({ executeTool } = {}) {
       english_available: available(unit)
     };
     if (variantMode === "structured") Object.assign(result, structuredInfo(page2));
-    if (translation2) {
+    if (translation3) {
       try {
-        result.english = await translation(unit, translation2 === "default" ? void 0 : translation2);
+        result.english = await translation2(unit, translation3 === "default" ? void 0 : translation3);
       } catch (error2) {
         result.english_error = error2.message;
       }
@@ -33444,19 +33813,20 @@ function createServer({ executeTool } = {}) {
     }
     return out;
   }, { network: true });
-  tool("get_translation", "Read an English translation of a text (\u1E6Ch\u0101nissaro Bhikkhu on dhammatalks.org, Access to Insight translators, or \u0100nandajoti Bhikkhu on Ancient Buddhist Texts), with attribution, license and numbering notes. Falls back to official mirrors if a site is down.", {
+  tool("get_translation", "Read an English translation of a text (\u1E6Ch\u0101nissaro Bhikkhu on dhammatalks.org, Access to Insight translators, \u0100nandajoti Bhikkhu on Ancient Buddhist Texts, or Jonathan S. Walters and Whitman College for selected Ther\u012B Apad\u0101nas), with attribution, license and numbering notes. Fallback is source-specific; the Apad\u0101na has no substitute.", {
     uid: citation,
     translation: external_exports.string().trim().min(1).max(200).optional().describe('At offset 0: translation_id from get_metadata (e.g. "dt:MN/MN10", "ati:/tipitaka/mn/mn.010.nysa" or "aj:Udana/1-Bodhivaggo-10"), an unambiguous translator name, or omit for the default. For continuation, use the exact translation_id returned by the previous page.'),
     offset: external_exports.number().int().min(0).max(2e6).default(0).describe("Character offset. For nonzero offsets use the previous result's continue_with arguments, including its exact translation_id; offsets cannot transfer between translation versions."),
     limit: external_exports.number().int().min(500).max(3e4).default(12e3).describe("Characters per page."),
     prefix_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Unchanged prefix hash from continue_with. Checks the previously traversed text before applying a character offset; edits require restarting at offset 0."),
+    translation_revision: external_exports.string().regex(/^[a-f0-9]{40}$/).optional().describe("Exact publisher revision from an Apad\u0101na continuation or the selected source metadata."),
     allow_partial: external_exports.boolean().default(false).describe("Explicitly accept the declared partial-unit scope. Partial links require an exact translation_id; defaults never select them."),
     allow_shared: external_exports.boolean().default(false).describe("Explicitly accept one multi-discourse publisher page (compilation or condensed); exact translation_id required. It does not establish separate verified full translations or member alignment."),
     scope_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Unchanged scoped-source mapping hash from continue_with; required for partial/shared-page continuation.")
-  }, async ({ uid, translation: translation2, offset, limit, prefix_sha256, allow_partial, allow_shared, scope_sha256 }) => {
+  }, async ({ uid, translation: translation3, offset, limit, prefix_sha256, allow_partial, allow_shared, scope_sha256, translation_revision }) => {
     const input = romanizeInput(uid);
     const { unit, notes } = resolve(input.text);
-    const result = await translation(unit, translation2, { offset, limit, prefix_sha256, allow_partial, allow_shared, scope_sha256 });
+    const result = await translation2(unit, translation3, { offset, limit, prefix_sha256, allow_partial, allow_shared, scope_sha256, translation_revision });
     return { ...result, notes: [...notes, ...result.notes], ...inputNote(input) };
   }, { network: true });
   tool("compare_translations", "Fetch two to four English translations of the same text side by side, with the P\u0101li opening for reference. Lists what is available when fewer exist.", {
@@ -33472,7 +33842,7 @@ function createServer({ executeTool } = {}) {
     const editions = [];
     for (const w of wanted.slice(0, 4)) {
       try {
-        const t = await translation(unit, w, { limit });
+        const t = await translation2(unit, w, { limit });
         if (seen.has(t.translation_id)) continue;
         seen.add(t.translation_id);
         editions.push(t);

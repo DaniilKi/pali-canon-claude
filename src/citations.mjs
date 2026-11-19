@@ -1,3 +1,4 @@
+import { APADANA_PROFILES } from './apadana-profiles.mjs';
 /**
  * Parse how people actually cite the Pāli Canon into a normalised request.
  *
@@ -81,12 +82,18 @@ function numbers(text) {
   return { path, end };
 }
 
+const APADANA_PAGES = new Set(Object.values(APADANA_PROFILES).map(profile => profile.url));
+
 function parseUrl(raw) {
   let url;
   try { url = new URL(raw); } catch { throw new CitationError('That link is not a valid URL.'); }
   const host = url.hostname.replace(/^www\./, '');
+  if (host === 'apadanatranslation.com') {
+    if (!APADANA_PAGES.has(raw)) throw new CitationError('Use the exact reviewed Apadāna publisher page URL.');
+    return { kind: 'url', host, path: url.pathname, raw };
+  }
   if (!['suttacentral.net', 'accesstoinsight.org', 'dhammatalks.org', 'ancient-buddhist-texts.net'].includes(host) || !/^https?:$/.test(url.protocol)) {
-    throw new CitationError('Links are understood for suttacentral.net, accesstoinsight.org, dhammatalks.org and ancient-buddhist-texts.net only.');
+    throw new CitationError('Links are understood for suttacentral.net, accesstoinsight.org, dhammatalks.org, ancient-buddhist-texts.net and reviewed apadanatranslation.com pages only.');
   }
   // Ancient Buddhist Texts paths are case-sensitive, so the case is kept; the .htm extension is dropped, as the link index stores paths without it.
   // Some page names contain spaces ("02-At the-Palace.htm"); the index stores them decoded.

@@ -39,7 +39,7 @@ test('AN8.59 preserves exact original prose, omitted stanzas and its own rights 
  assert.equal(scopeDescriptor(choice,unit.id).flags.allow_partial,true);
  const bad=structuredClone(choice);bad.translation_scope.version=2;
  assert.throws(()=>scopeDescriptor(bad,unit.id),/unsupported|incomplete/);
- const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links,t.with_shared_english,t.shared_only],[2583,1453,1876,22,16,12,110,22]);
+ const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links,t.with_shared_english,t.shared_only],[2590,1460,1883,22,16,12,110,22]);
  const d=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([d.rotation.of,d.text.id],[1288,'sn11.22']);
 });
 

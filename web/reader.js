@@ -205,19 +205,27 @@ function notes(data, target = view) {
 function translatorNoteSection(data, target, level) {
   const owned = translatorNotes(data); if (!owned.length) return;
   const section = el('section'); section.setAttribute('aria-label', 'Translator’s notes');
-  section.append(el('h' + level, anTenSourceUnit(data.translation_id) ? 'Translator’s notes · editorial, not canonical discourse text' : 'Translator’s notes · not translated question text'));
+  section.append(el('h' + level, data.translation_id.startsWith('ap:') || anTenSourceUnit(data.translation_id) ? 'Translator’s notes · editorial, not canonical discourse text' : 'Translator’s notes · not translated question text'));
   const list = el('ol');
   for (const note of owned) { const item = el('li'); item.value = note.number; item.append(el('p', note.text, 'translator-note')); list.append(item); }
   section.append(list); target.append(section);
 }
 
+function publisherParatext(data, target, level) {
+  if (!data.translation_id?.startsWith('ap:') || !data.publisher_paratext) return;
+  const section = el('section');
+  section.append(el('h' + level, 'Publisher preface · editorial, not poem text'), el('p', data.publisher_paratext, 'translation'));
+  target.append(section);
+}
+
 function provenance(data, target = view) {
   const box = el('section', undefined, 'provenance'); box.setAttribute('aria-label', 'Source attribution');
-  box.append(el('strong', data.edition || data.dictionary?.name || data.source?.name || (typeof data.source === 'string' ? data.source : null) || data.label || 'Source provenance'));
+  box.append(el('strong', (data.source === 'apadana' ? 'Legends of the Buddhist Saints (Apadāna)' : data.edition) || data.dictionary?.name || data.source?.name || (typeof data.source === 'string' ? data.source : null) || data.label || 'Source provenance'));
   const license = data.license || data.source?.terms;
-  const values = [data.attribution || data.source?.attribution, typeof license === 'string' ? license : license && [license.name, license.note, license.attribution].filter(Boolean).join(' · '), data.dictionary?.version && 'Dictionary version: ' + data.dictionary.version, data.source?.commit && 'Source revision: ' + data.source.commit];
+  const values = [data.changes, data.attribution || data.source?.attribution, typeof license === 'string' ? license : license && [license.name, license.note, license.attribution].filter(Boolean).join(' · '), data.dictionary?.version && 'Dictionary version: ' + data.dictionary.version, (data.translation_revision || data.source?.commit) && 'Source revision: ' + (data.translation_revision || data.source.commit)];
   for (const value of [...new Set(values.filter(Boolean))]) box.append(el('p', value));
   if (typeof license === 'object' && license?.url) box.append(external('Licence terms', license.url));
+  if (data.license_url) box.append(external('Licence terms', data.license_url));
   if (data.url) box.append(external('Read at the original source', data.url));
   if (data.source?.inputs) {
     const details = el('details'); details.append(el('summary', 'Source-data versions'));
@@ -797,7 +805,7 @@ async function translations(data, uid, token) {
   for (const choice of context.choices) {
     const card = el('article', undefined, 'translation-choice'); card.append(el('h4', choice.translator || choice.translation_id), el('p', [choice.source, choice.reference].filter(Boolean).join(' · '), 'muted'));
     try {
-      if (typeof choice.translation_id !== 'string' || !/^(dt|ati|aj):.+/.test(choice.translation_id)) throw new Error('This source has no supported exact version identifier. No source was requested.');
+      if (typeof choice.translation_id !== 'string' || !/^(dt|ati|aj|ap):.+/.test(choice.translation_id)) throw new Error('This source has no supported exact version identifier. No source was requested.');
       const descriptor = scopeDescriptor(choice, context.uid);
       if (!descriptor && ordinary.length >= 2 && ordinary.some(c => c.translation_id === choice.translation_id)) {
         const label = el('label', undefined, 'comparison-checkbox'), input = el('input'); input.type = 'checkbox'; input.value = choice.translation_id;
@@ -806,7 +814,7 @@ async function translations(data, uid, token) {
         comparisonInputs.push(input); card.append(label);
       }
       if (descriptor) { card.append(el('p', descriptor.label + ' · not whole-unit coverage', 'notice'), button('Review ' + descriptor.label.toLowerCase(), () => reviewTranslationScope(choice, descriptor, context, token))); }
-      else card.append(button('Read source · ' + [choice.translator, choice.source, choice.reference].filter(Boolean).join(' · '), () => englishPage({ uid: context.uid, translation: choice.translation_id, limit: 6000 }, token, context)));
+      else card.append(button('Read source · ' + [choice.translator, choice.source, choice.reference].filter(Boolean).join(' · '), () => englishPage({ uid: context.uid, translation: choice.translation_id, limit: 6000, ...(choice.translation_revision ? { translation_revision: choice.translation_revision } : {}) }, token, context)));
     } catch (error) { card.append(el('p', error.message, 'notice')); }
     target.append(card);
   }
@@ -840,7 +848,7 @@ function compareEnglishSources(selected, token, context) {
       try {
         const data = await tool('get_translation', args, 'study', 'English comparison ' + id); if (!sameRequest()) return;
         const next = validateComparisonPage(data, args, { uid: context.uid, choices: [choice], accepted: null });
-        const content = el('div'); notes(data, content); content.append(el('p', data.text, 'translation')); translatorNoteSection(data, content, 5); provenance(data, content);
+        const content = el('div'); notes(data, content); content.append(el('p', data.text, 'translation')); translatorNoteSection(data, content, 5); publisherParatext(data, content, 5); provenance(data, content);
         body.replaceChildren(content);
         progress.textContent = 'English characters ' + (data.offset + 1) + '–' + (data.offset + data.text.length) + (next ? ' · more pages available' : ' · end of this source');
         message.textContent = 'Selected source page loaded.';
@@ -857,7 +865,7 @@ function compareEnglishSources(selected, token, context) {
         if (sameRequest()) { state.busy = false; panel.setAttribute('aria-busy', 'false'); for (const control of actions.querySelectorAll('button')) control.disabled = false; }
       }
     }
-    loadPage({ uid: context.uid, translation: id, limit: 6000 });
+    loadPage({ uid: context.uid, translation: id, limit: 6000, ...(choice.translation_revision ? { translation_revision: choice.translation_revision } : {}) });
   }
 }
 function reviewTranslationScope(choice, descriptor, context, token) {
@@ -879,11 +887,12 @@ async function englishPage(args, token, context) {
     target.append(el('p', 'Pāli selection: ' + context.citation + ' · publisher reference: ' + (actualChoice.reference || data.citation), 'muted'), el('p', 'Source version: ' + data.translation_id, 'muted source-version'));
     if (context.accepted) scopeSummary(context.accepted, target);
     if (data.translation_id !== args.translation) target.append(el('p', 'The server returned a different listed source version. Read its source and fallback notes before quoting.', 'notice'));
+    if (data.translation_id.startsWith('ap:')) target.append(el('p', 'Whole reviewed poem; publisher and VRI verse numbering may differ. Translator notes and any publisher preface are editorial, not poem text.', 'notice'));
     if (milindaSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive question selection. Other questions on the publisher page and untranslated Pāli paratext are outside this English selection.', 'notice'));
     else if (anTenSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive discourse selected from exact paragraphs on the parent publisher page. The publisher title names that page; no individual publisher heading is supplied. Other discourses and untranslated Pāli paratext remain outside this selection. Any owned translator’s notes are editorial, not canonical discourse text. This is not word-by-word alignment.', 'notice'));
     else if (numberedSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive numbered treatment selection. The printed number identifies this treatment; the publisher title names the complete page. Other treatments, untranslated Pāli paratext and forms of address are outside this English selection. This is not word-by-word alignment.', 'notice'));
     else if (sectionSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive discourse selection. Other discourses on the publisher page and untranslated Pāli paratext are outside this English selection.', 'notice'));
-    notes(data, target); target.append(el('p', data.text, 'translation')); translatorNoteSection(data, target, 4); provenance(data, target);
+    notes(data, target); target.append(el('p', data.text, 'translation')); translatorNoteSection(data, target, 4); publisherParatext(data, target, 4); provenance(data, target);
     if (next) target.append(button('Next English page →', () => englishPage(next, token, context)));
     target.append(button('Reload passage and review sources', render));
   } catch (error) { if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el('p', error.message, 'notice'), button('Retry selected source', () => englishPage(args, token, context)), button('Reload passage and review sources', render)); }

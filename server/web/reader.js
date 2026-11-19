@@ -1082,7 +1082,245 @@
     return notes2.map((note2) => ({ number: note2.number, text: note2.text }));
   }
 
+  // src/apadana-profiles.mjs
+  var APADANA_COMMIT = "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4";
+  var APADANA_LICENSE = "CC BY-NC-SA 4.0";
+  var APADANA_LICENSE_URL = "https://creativecommons.org/licenses/by-nc-sa/4.0/";
+  var APADANA_TRANSLATOR = "Jonathan S. Walters";
+  var deepFreeze = (value) => {
+    if (value && typeof value === "object") {
+      for (const child of Object.values(value)) deepFreeze(child);
+      Object.freeze(value);
+    }
+    return value;
+  };
+  var APADANA_PROFILES = deepFreeze({
+    "thi-ap1": {
+      "id": "thi-ap1",
+      "poem": 1,
+      "verses": [
+        1,
+        19
+      ],
+      "note_count": 22,
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-001/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-001/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-001.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Sumedh\u0101",
+      "reference": "Ther\u012B Apad\u0101na 1; publisher verses 1\u201319",
+      "raw_sha256": "991b5f4b2b56a5c501a5360032339619274c6340e844c498d7e0c9416e97e855",
+      "body_sha256": "e1deb7546c3710c718fe032d81f9afe8d7a16c608fca9d765e5bda2a85c995d2",
+      "notes_sha256": "4e26b19bcda68d059f70a2989ec43b1f4cc12ffba6a7274f25232db13d81c821",
+      "paratext_sha256": "226030c23cf0f56a7ff463f39a2fa26d543fe8526b98d482f66a722b80302535",
+      "root_sha256": "4417e8981c281ed284efb907df388f95b50352a4cfd9ac2141c819250a642f82",
+      "mapping_notes": [
+        "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas.",
+        "Invocation and chapter preface are publisher paratext, not substantive poem stanzas."
+      ]
+    },
+    "thi-ap2": {
+      "id": "thi-ap2",
+      "poem": 2,
+      "verses": [
+        20,
+        25
+      ],
+      "note_count": 6,
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-002/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-002/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-002.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Mekhal\u0101d\u0101yik\u0101",
+      "reference": "Ther\u012B Apad\u0101na 2; publisher verses 20\u201325",
+      "raw_sha256": "eff753b7c329e57894f6e601e6fc3941ffd2b361b2c2d7bdb1e2dc76363fb3d1",
+      "body_sha256": "11c3144cff01460fed4fd759f9805d657da50b06bf1a89cb8b080bdac65d6f4a",
+      "notes_sha256": "320a107958260e7f9528a6fef39e94120d6c9ca509056067efcf1360c36d7045",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "21c0602267dc7fb2b47ea9b057233b1679778ced388c30cc057d875bf4df09b2",
+      "mapping_notes": [
+        "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas."
+      ]
+    },
+    "thi-ap3": {
+      "id": "thi-ap3",
+      "poem": 3,
+      "verses": [
+        26,
+        30
+      ],
+      "note_count": 2,
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-003/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-003/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-003.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ma\u1E47\u1E0Dapad\u0101yik\u0101",
+      "reference": "Ther\u012B Apad\u0101na 3; publisher verses 26\u201330",
+      "raw_sha256": "917d69a2f1e064ac2bbcf29373214844af5cae023960c551934b7c47a7c630ad",
+      "body_sha256": "1a8ff14e72fa1771acd59d6207cd5403421f36ab7aa9a85bfe0d8fadd06a69d9",
+      "notes_sha256": "c2a15194f466a8f929aa4ccb34643e6e63957722790339ae19dfb48bf7aaecec",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "a839c51970c212fc5d2ecc8045f059b599ab2a9b1604841fb0a8146e77a1c26a",
+      "mapping_notes": [
+        "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas.",
+        "Verse26: publisher robes vs VRI three robes."
+      ]
+    },
+    "thi-ap6": {
+      "id": "thi-ap6",
+      "poem": 6,
+      "verses": [
+        46,
+        59
+      ],
+      "note_count": 8,
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-006/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-006/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-006.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ekapi\u1E47\u1E0Dad\u0101yik\u0101",
+      "reference": "Ther\u012B Apad\u0101na 6; publisher verses 46\u201359",
+      "raw_sha256": "638655719b428169df431f96decaf6edc144f24b180a5b0c6bfc8463532f18b2",
+      "body_sha256": "ab27b118990068d04fa913b4008300439a2ea21af612d15973a269f8015ecc49",
+      "notes_sha256": "254463635ff0d36277c038cf3cea249e190438482f5cc1cfdf549a6c0aca3b48",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "b43d3e52f25dded0a3328f13892ef085f619114ea9bf6f90534b3d8fc2454878",
+      "mapping_notes": [
+        "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas.",
+        "Verse51: publisher blue lotus/mah\u0101nela vs VRI pair of cloths; translator note6 records the edition difference."
+      ]
+    },
+    "thi-ap7": {
+      "id": "thi-ap7",
+      "poem": 7,
+      "verses": [
+        60,
+        70
+      ],
+      "note_count": 4,
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-007/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-007/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-007.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ka\u1E6Dacchubhikkhad\u0101yik\u0101",
+      "reference": "Ther\u012B Apad\u0101na 7; publisher verses 60\u201370",
+      "raw_sha256": "5d6b59e89a412da94f71d43b9c580431e6933f58624048c1ba2f1d48e0021a35",
+      "body_sha256": "8591cbb67ec83420320cda0cdc4b3eac149a2ac120b3382e059f1a92cb983fb0",
+      "notes_sha256": "db3b2dbf2de356bf961a7e80c7e0364c437898e35b493a546ec17b0c8b8789c2",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "9896a9cead5994e6ef49ece34dc30dd03e42c7b5c81f39dca8079baef7877108",
+      "mapping_notes": [
+        "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas."
+      ]
+    },
+    "thi-ap8": {
+      "id": "thi-ap8",
+      "poem": 8,
+      "verses": [
+        71,
+        90
+      ],
+      "note_count": 14,
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-008/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-008/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-008.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Sattuppalam\u0101lik\u0101ya",
+      "reference": "Ther\u012B Apad\u0101na 8; publisher verses 71\u201390",
+      "raw_sha256": "2cc66fe4525f8482ecd138b67984b1665371526bc004485bcfe44e37aa55d79c",
+      "body_sha256": "46db0ce32894b40c193f8b5b5b83f42885a7e3733f05f92b1280fe181abd14d3",
+      "notes_sha256": "867890223e60963d78ec4a04b92df764470132f0711f38b703c7a20ce6b6d1ea",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "f5b4ead53dafba4dcf409c20c8baeca54ff3df56306932813ead09a02c50a782",
+      "mapping_notes": [
+        "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas.",
+        "Verse71: publisher follows BJTS journey reading; VRI root differs."
+      ]
+    },
+    "thi-ap9": {
+      "id": "thi-ap9",
+      "poem": 9,
+      "verses": [
+        91,
+        115
+      ],
+      "note_count": 14,
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-009/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-009/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-009.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Pa\xF1cad\u012Bpik\u0101",
+      "reference": "Ther\u012B Apad\u0101na 9; publisher verses 91\u2013115",
+      "raw_sha256": "739f3c437aca5774b48d8f6bf25563301dde919bcf25a8ce44693243d8594016",
+      "body_sha256": "df06b3d79c75b5a60039e0397aa6ff360bbdcbd540644698061ebf178818865c",
+      "notes_sha256": "aaf80c212d4fb79af81b8a6ace856009ef4457dc14003f4c301b654b8ea78d6e",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "e0ffdb846c3174017d22ef7cdd3095b4af1391d80694b90ea0b8f8fd13fb9ce0",
+      "mapping_notes": [
+        "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas.",
+        "Verse99: publisher PTS hundred-by-sixty leagues vs VRI/BJTS sixty-by-thirty; translator note8 preserves the difference."
+      ]
+    }
+  });
+  var APADANA_RIGHTS = deepFreeze([
+    {
+      "path": "LICENSE.md",
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f"
+    },
+    {
+      "path": "src/_data/site.json",
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
+    }
+  ]);
+
   // web/translation-policy.mjs
+  var apadanaId = (uid2) => APADANA_PROFILES[uid2]?.path ? "ap:" + APADANA_PROFILES[uid2].path.replace(/^\/text\/|\/$/g, "") : void 0;
+  var apadanaFamily = (id5) => typeof id5 === "string" && /^ap:/i.test(id5.trim());
+  var isApadana = (value) => apadanaFamily(value?.translation_id) || value?.source === "apadana" || value?.source === "Legends of the Buddhist Saints (Apad\u0101na)" || own3(value, "translation_revision") || own3(value, "publisher_paratext");
+  function validateApadanaChoice(value, uid2) {
+    if (!isApadana(value)) return;
+    const profile2 = APADANA_PROFILES[uid2];
+    if (!profile2 || value.translation_id !== apadanaId(uid2) || value.translation_revision !== APADANA_COMMIT || value.translator !== APADANA_TRANSLATOR || value.license !== APADANA_LICENSE || value.url !== profile2.url || own3(value, "translation_scope") || own3(value, "source_section") || value.whole_unit_coverage === false) {
+      throw Error("The pinned Apad\u0101na source identity or terms changed. No English source was displayed.");
+    }
+  }
   var own3 = (value, key4) => value && Object.hasOwn(value, key4);
   var nonempty = (value) => typeof value === "string" && value.trim().length > 0;
   var sha = (value) => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
@@ -1100,6 +1338,7 @@
     return decoded.trim().split(/[?#]/, 1)[0].replace(/\.html?$/i, "").toLowerCase() === MEDICINE_ID;
   }
   function scopeDescriptor(choice, requestedId) {
+    validateApadanaChoice(choice, requestedId);
     validateSectionIdentity(choice);
     if (sectionSourceUnit(choice?.translation_id)) {
       validateSectionDescriptor(choice);
@@ -1148,6 +1387,13 @@
     if (!data || !nonempty(data.text) || !nonempty(data.translation_id) || !nonempty(data.translator) || !nonempty(data.attribution) || !(nonempty(data.license) || data.license && typeof data.license === "object" && nonempty(data.license.name)) || data.offset !== offset) throw new Error("The English source response is incomplete. No translation was displayed.");
     const choice = context.choices.find((c) => c.translation_id === data.translation_id);
     if (!choice) throw new Error("The returned English source version was not in the reviewed list. Reload the passage and review sources again.");
+    validateApadanaChoice(choice, context.uid);
+    if (isApadana(choice) || isApadana(data) || apadanaFamily(args.translation)) {
+      validateApadanaChoice(data, context.uid);
+      if (!isApadana(choice) || !isApadana(data) || args.translation !== choice.translation_id || args.translation_revision !== APADANA_COMMIT || data.source !== "apadana" || ["raw_sha256", "body_sha256", "notes_sha256", "paratext_sha256", "root_sha256"].some((key4) => data[key4] !== APADANA_PROFILES[context.uid][key4]) || data.fetched_url !== APADANA_PROFILES[context.uid].raw_url || data.license_url !== APADANA_LICENSE_URL || !nonempty(data.changes) || data.changes.length > 2e3 || typeof data.publisher_paratext !== "string" || data.publisher_paratext.length > 5e4 || Boolean(data.publisher_paratext.trim()) !== (context.uid === "thi-ap1") || !Array.isArray(data.translator_notes) || data.translator_notes.length !== APADANA_PROFILES[context.uid].note_count || offset > 0 && (!sha(args.prefix_sha256) || data.prefix_sha256 !== args.prefix_sha256)) {
+        throw Error("The pinned Apad\u0101na source response does not match its reviewed identity. No English was displayed.");
+      }
+    }
     if (medicineFamily(choice.translation_id) || choice.translation_scope?.extractor === MEDICINE_EXTRACTOR) scopeDescriptor(choice, context.uid);
     if (sectionSourceUnit(data.translation_id) && (!own3(choice, "source_section") || !sameScope(data.source_section, choice.source_section) || data.source_section?.unit_id !== context.uid || !anTenSourceUnit(data.translation_id) && data.source_section?.anchor !== data.translation_id.split("#")[1] || data.source_section?.status !== "reviewed")) throw new Error(milindaSourceUnit(data.translation_id) ? "The reviewed question identity changed. Reload the passage and review sources again; no English was displayed." : "The reviewed discourse identity changed. Reload the passage and review sources again; no English was displayed.");
     if (context.accepted) {
@@ -1164,6 +1410,7 @@
     }
     const next = data.continue_with?.arguments;
     if (data.continue_with?.name !== "get_translation" || !next || next.uid !== context.uid || next.translation !== data.translation_id || !Number.isSafeInteger(next.offset) || next.offset <= offset || next.offset > 2e6 || next.offset !== data.next_offset || !sha(next.prefix_sha256) || !Number.isInteger(next.limit) || next.limit < 500 || next.limit > 3e4) throw new Error("The source returned an unsafe continuation. No next-page request was made.");
+    if (isApadana(choice) ? next.translation_revision !== APADANA_COMMIT : own3(next, "translation_revision")) throw Error("The next page changed or dropped the pinned translation revision.");
     if (context.accepted) {
       const shared = context.accepted.kind === "shared_page";
       if (next.scope_sha256 !== context.accepted.scope.scope_sha256 || next[shared ? "allow_shared" : "allow_partial"] !== true || next[shared ? "allow_partial" : "allow_shared"] === true) throw new Error("The next page dropped or changed its scope consent. Review the source again.");
@@ -1554,7 +1801,7 @@
   var failure2 = () => {
     throw Error("The comparison selection or source response is invalid. No comparison translation was displayed.");
   };
-  var sourceId = (x) => typeof x === "string" && x.trim() === x && !/[\x00-\x1f\x7f]/.test(x) && x.length <= 200 && !x.includes("..") && !/\.html?$/.test(x) && (/^dt:[A-Za-z0-9_./-]+$/.test(x) || /^ati:\/(?:tipitaka|lib|ptf|noncanon)\/[a-z0-9/._-]+$/.test(x) && !isSectionPageId(x) || Boolean(sectionSourceUnit(x)) || /^aj:[A-Za-z0-9_./ -]+$/.test(x) && x.trim() === x);
+  var sourceId = (x) => typeof x === "string" && x.trim() === x && !/[\x00-\x1f\x7f]/.test(x) && x.length <= 200 && !x.includes("..") && !/\.html?$/.test(x) && (/^dt:[A-Za-z0-9_./-]+$/.test(x) || /^ati:\/(?:tipitaka|lib|ptf|noncanon)\/[a-z0-9/._-]+$/.test(x) && !isSectionPageId(x) || Boolean(sectionSourceUnit(x)) || apadanaFamily(x) || /^aj:[A-Za-z0-9_./ -]+$/.test(x) && x.trim() === x);
   function comparisonChoices(choices, requestedId) {
     if (!uid(requestedId) || !Array.isArray(choices)) failure2();
     const seen = /* @__PURE__ */ new Set(), ordinary = [];
@@ -1565,8 +1812,9 @@
         seen.add(choice.translation_id);
       }
       if ("translation_scope" in choice || choice.whole_unit_coverage === false) continue;
-      if (!sourceId(choice.translation_id) || sectionSourceUnit(choice.translation_id) && sectionSourceUnit(choice.translation_id) !== requestedId || !text4(choice.translator) || choice.translator.length > 300 || own5(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== true) failure2();
+      if (!sourceId(choice.translation_id) || apadanaFamily(choice.translation_id) && choice.translation_id !== apadanaId(requestedId) || sectionSourceUnit(choice.translation_id) && sectionSourceUnit(choice.translation_id) !== requestedId || !text4(choice.translator) || choice.translator.length > 300 || own5(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== true) failure2();
       validateSectionDescriptor(choice);
+      validateApadanaChoice(choice, requestedId);
       ordinary.push(clone2(choice));
     }
     return ordinary;
@@ -1576,9 +1824,9 @@
     if (!Array.isArray(ids) || ids.length < 2 || ids.length > 4 || new Set(ids).size !== ids.length || ids.some((id5) => !sourceId(id5) || !ordinary.some((choice) => choice.translation_id === id5))) failure2();
     return [...ids];
   }
-  var requestKeys = /* @__PURE__ */ new Set(["uid", "translation", "offset", "limit", "prefix_sha256"]);
+  var requestKeys = /* @__PURE__ */ new Set(["uid", "translation", "offset", "limit", "prefix_sha256", "translation_revision"]);
   function request(args, requestedId, choice, expectedLimit) {
-    if (!object6(args) || Object.keys(args).some((key4) => !requestKeys.has(key4)) || args.uid !== requestedId || args.translation !== choice.translation_id || !sourceId(args.translation) || !Number.isSafeInteger(args.limit) || args.limit < 500 || args.limit > 3e4 || expectedLimit !== void 0 && args.limit !== expectedLimit) failure2();
+    if (!object6(args) || Object.keys(args).some((key4) => !requestKeys.has(key4)) || args.uid !== requestedId || (apadanaFamily(choice.translation_id) ? args.translation_revision !== choice.translation_revision : own5(args, "translation_revision")) || args.translation !== choice.translation_id || !sourceId(args.translation) || !Number.isSafeInteger(args.limit) || args.limit < 500 || args.limit > 3e4 || expectedLimit !== void 0 && args.limit !== expectedLimit) failure2();
     const offset = own5(args, "offset") ? args.offset : 0;
     if (!Number.isSafeInteger(offset) || offset < 0 || offset > 2e6 || offset === 0 && own5(args, "prefix_sha256") || offset > 0 && !sha2(args.prefix_sha256)) failure2();
     return offset;
@@ -2374,6 +2622,7 @@
     }
     return { path, end };
   }
+  var APADANA_PAGES = new Set(Object.values(APADANA_PROFILES).map((profile2) => profile2.url));
   function parseUrl(raw) {
     let url;
     try {
@@ -2382,8 +2631,12 @@
       throw new CitationError("That link is not a valid URL.");
     }
     const host = url.hostname.replace(/^www\./, "");
+    if (host === "apadanatranslation.com") {
+      if (!APADANA_PAGES.has(raw)) throw new CitationError("Use the exact reviewed Apad\u0101na publisher page URL.");
+      return { kind: "url", host, path: url.pathname, raw };
+    }
     if (!["suttacentral.net", "accesstoinsight.org", "dhammatalks.org", "ancient-buddhist-texts.net"].includes(host) || !/^https?:$/.test(url.protocol)) {
-      throw new CitationError("Links are understood for suttacentral.net, accesstoinsight.org, dhammatalks.org and ancient-buddhist-texts.net only.");
+      throw new CitationError("Links are understood for suttacentral.net, accesstoinsight.org, dhammatalks.org, ancient-buddhist-texts.net and reviewed apadanatranslation.com pages only.");
     }
     if (host === "ancient-buddhist-texts.net") {
       let path2 = url.pathname;
@@ -3766,7 +4019,7 @@
     if (!owned.length) return;
     const section = el("section");
     section.setAttribute("aria-label", "Translator\u2019s notes");
-    section.append(el("h" + level, anTenSourceUnit(data.translation_id) ? "Translator\u2019s notes \xB7 editorial, not canonical discourse text" : "Translator\u2019s notes \xB7 not translated question text"));
+    section.append(el("h" + level, data.translation_id.startsWith("ap:") || anTenSourceUnit(data.translation_id) ? "Translator\u2019s notes \xB7 editorial, not canonical discourse text" : "Translator\u2019s notes \xB7 not translated question text"));
     const list = el("ol");
     for (const note2 of owned) {
       const item = el("li");
@@ -3777,14 +4030,21 @@
     section.append(list);
     target.append(section);
   }
+  function publisherParatext(data, target, level) {
+    if (!data.translation_id?.startsWith("ap:") || !data.publisher_paratext) return;
+    const section = el("section");
+    section.append(el("h" + level, "Publisher preface \xB7 editorial, not poem text"), el("p", data.publisher_paratext, "translation"));
+    target.append(section);
+  }
   function provenance(data, target = view) {
     const box = el("section", void 0, "provenance");
     box.setAttribute("aria-label", "Source attribution");
-    box.append(el("strong", data.edition || data.dictionary?.name || data.source?.name || (typeof data.source === "string" ? data.source : null) || data.label || "Source provenance"));
+    box.append(el("strong", (data.source === "apadana" ? "Legends of the Buddhist Saints (Apad\u0101na)" : data.edition) || data.dictionary?.name || data.source?.name || (typeof data.source === "string" ? data.source : null) || data.label || "Source provenance"));
     const license = data.license || data.source?.terms;
-    const values = [data.attribution || data.source?.attribution, typeof license === "string" ? license : license && [license.name, license.note, license.attribution].filter(Boolean).join(" \xB7 "), data.dictionary?.version && "Dictionary version: " + data.dictionary.version, data.source?.commit && "Source revision: " + data.source.commit];
+    const values = [data.changes, data.attribution || data.source?.attribution, typeof license === "string" ? license : license && [license.name, license.note, license.attribution].filter(Boolean).join(" \xB7 "), data.dictionary?.version && "Dictionary version: " + data.dictionary.version, (data.translation_revision || data.source?.commit) && "Source revision: " + (data.translation_revision || data.source.commit)];
     for (const value of [...new Set(values.filter(Boolean))]) box.append(el("p", value));
     if (typeof license === "object" && license?.url) box.append(external("Licence terms", license.url));
+    if (data.license_url) box.append(external("Licence terms", data.license_url));
     if (data.url) box.append(external("Read at the original source", data.url));
     if (data.source?.inputs) {
       const details = el("details");
@@ -4908,7 +5168,7 @@
       const card = el("article", void 0, "translation-choice");
       card.append(el("h4", choice.translator || choice.translation_id), el("p", [choice.source, choice.reference].filter(Boolean).join(" \xB7 "), "muted"));
       try {
-        if (typeof choice.translation_id !== "string" || !/^(dt|ati|aj):.+/.test(choice.translation_id)) throw new Error("This source has no supported exact version identifier. No source was requested.");
+        if (typeof choice.translation_id !== "string" || !/^(dt|ati|aj|ap):.+/.test(choice.translation_id)) throw new Error("This source has no supported exact version identifier. No source was requested.");
         const descriptor = scopeDescriptor(choice, context.uid);
         if (!descriptor && ordinary.length >= 2 && ordinary.some((c) => c.translation_id === choice.translation_id)) {
           const label2 = el("label", void 0, "comparison-checkbox"), input = el("input");
@@ -4926,7 +5186,7 @@
         }
         if (descriptor) {
           card.append(el("p", descriptor.label + " \xB7 not whole-unit coverage", "notice"), button("Review " + descriptor.label.toLowerCase(), () => reviewTranslationScope(choice, descriptor, context, token)));
-        } else card.append(button("Read source \xB7 " + [choice.translator, choice.source, choice.reference].filter(Boolean).join(" \xB7 "), () => englishPage({ uid: context.uid, translation: choice.translation_id, limit: 6e3 }, token, context)));
+        } else card.append(button("Read source \xB7 " + [choice.translator, choice.source, choice.reference].filter(Boolean).join(" \xB7 "), () => englishPage({ uid: context.uid, translation: choice.translation_id, limit: 6e3, ...choice.translation_revision ? { translation_revision: choice.translation_revision } : {} }, token, context)));
       } catch (error) {
         card.append(el("p", error.message, "notice"));
       }
@@ -4980,6 +5240,7 @@
           notes(data, content);
           content.append(el("p", data.text, "translation"));
           translatorNoteSection(data, content, 5);
+          publisherParatext(data, content, 5);
           provenance(data, content);
           body.replaceChildren(content);
           progress.textContent = "English characters " + (data.offset + 1) + "\u2013" + (data.offset + data.text.length) + (next ? " \xB7 more pages available" : " \xB7 end of this source");
@@ -5007,7 +5268,7 @@
           }
         }
       }
-      loadPage({ uid: context.uid, translation: id5, limit: 6e3 });
+      loadPage({ uid: context.uid, translation: id5, limit: 6e3, ...choice.translation_revision ? { translation_revision: choice.translation_revision } : {} });
     }
   }
   function reviewTranslationScope(choice, descriptor, context, token) {
@@ -5041,6 +5302,7 @@
       target.append(el("p", "P\u0101li selection: " + context.citation + " \xB7 publisher reference: " + (actualChoice.reference || data.citation), "muted"), el("p", "Source version: " + data.translation_id, "muted source-version"));
       if (context.accepted) scopeSummary(context.accepted, target);
       if (data.translation_id !== args.translation) target.append(el("p", "The server returned a different listed source version. Read its source and fallback notes before quoting.", "notice"));
+      if (data.translation_id.startsWith("ap:")) target.append(el("p", "Whole reviewed poem; publisher and VRI verse numbering may differ. Translator notes and any publisher preface are editorial, not poem text.", "notice"));
       if (milindaSourceUnit(data.translation_id)) target.append(el("p", "Complete substantive question selection. Other questions on the publisher page and untranslated P\u0101li paratext are outside this English selection.", "notice"));
       else if (anTenSourceUnit(data.translation_id)) target.append(el("p", "Complete substantive discourse selected from exact paragraphs on the parent publisher page. The publisher title names that page; no individual publisher heading is supplied. Other discourses and untranslated P\u0101li paratext remain outside this selection. Any owned translator\u2019s notes are editorial, not canonical discourse text. This is not word-by-word alignment.", "notice"));
       else if (numberedSourceUnit(data.translation_id)) target.append(el("p", "Complete substantive numbered treatment selection. The printed number identifies this treatment; the publisher title names the complete page. Other treatments, untranslated P\u0101li paratext and forms of address are outside this English selection. This is not word-by-word alignment.", "notice"));
@@ -5048,6 +5310,7 @@
       notes(data, target);
       target.append(el("p", data.text, "translation"));
       translatorNoteSection(data, target, 4);
+      publisherParatext(data, target, 4);
       provenance(data, target);
       if (next) target.append(button("Next English page \u2192", () => englishPage(next, token, context)));
       target.append(button("Reload passage and review sources", render));
