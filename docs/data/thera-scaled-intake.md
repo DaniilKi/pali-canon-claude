@@ -63,3 +63,11 @@ Pilots also reproduced actual client integrity defects for new apparatus and inj
 - [CI configuration review](../evidence/apadana/THERA_SCALED_CI_CONFIGURATION_REVIEW.json)
 
 These review receipts explicitly distinguish source, implementation, package and configured CI evidence from final exact-commit CI and human acceptance. Failed pilot logs remain preserved outside the repository with the release records; no failed check is reported as passed.
+
+## CI follow-up: strict widget identity and bounded setup
+
+The first staged commit `62fc22f` did not pass CI. The installed widget differed from source HTML because esbuild changed local names and formatting inside an imported function serialized with `toString()`. The repair freezes the unchanged original helper source as a build-time literal; direct source execution uses that same original source. The strict complete-resource equality audit remains unchanged. A real esbuild negative control reproduces the mismatch without the define, while the defined build produces exact source HTML despite conflicting surrounding names.
+
+Other first-run setup failures were a missing read-only helper input in the isolated source-load container, a shallow checkout missing the immutable historical baseline, and one missed current whitelist in the older three-poem harness. Their repairs retain the existing network/memory/accessibility/source checks, fetch just the exact baseline commit, and use the independently approved current IDs while preserving the historical owned cohort. No source approval, canonical wording, extraction boundary or helper algorithm was changed by these repairs.
+
+The first package and its complete nine-mode browser acceptance remain preserved as evidence for that earlier runtime. The rebuilt package receives fresh source/client checks, the original strict installed-widget audit, appropriate local browser checks and all required exact-final-commit CI jobs. Old-runtime receipts are not relabelled as new-runtime acceptance. Physical-device, human assistive and specialist acceptance remain separate.

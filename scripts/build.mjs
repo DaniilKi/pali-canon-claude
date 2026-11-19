@@ -1,5 +1,6 @@
 import { shardData } from './shard-data.mjs';
 import { build } from 'esbuild';
+import { contentSha256 } from '../web/content-sha256.mjs';
 import { chmod, mkdir, readFile, readdir, writeFile, cp } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 
@@ -17,6 +18,9 @@ const common = {
   banner: { js: '#!/usr/bin/env node' }, legalComments: 'eof',
   // CJS output avoids import-meta/dynamic-require issues in bundled SDK dependencies.
   supported: { 'top-level-await': false }, metafile: true,
+  // Freeze before bundling: compiler-local names and formatting must not alter
+  // the exact widget HTML shared by source and every packaged transport.
+  define: { __PALI_WIDGET_HASH_SOURCE__: JSON.stringify(contentSha256.toString()) },
 };
 // server/index.cjs: stdio transport (Claude Desktop, Claude Code). server/http.cjs: Streamable HTTP (hosted /mcp).
 const results = [

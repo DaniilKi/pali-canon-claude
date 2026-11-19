@@ -34,6 +34,10 @@ export const SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge
 export const MCP_APP_MIME = 'text/html;profile=mcp-app';
 export const SKYBRIDGE_MIME = 'text/html+skybridge';
 
+// Unbundled imports use the original function. Production bundles receive the
+// same source literal before compiler formatting or local-name changes.
+const WIDGET_HASH_SOURCE = typeof __PALI_WIDGET_HASH_SOURCE__ === 'string' ? __PALI_WIDGET_HASH_SOURCE__ : contentSha256.toString();
+
 const APADANA_PINS = ['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256'];
 const PINNED_NEW_PARATEXT_IDS = ["tha-ap44","tha-ap63","tha-ap64","tha-ap65","tha-ap66","tha-ap67","tha-ap68","tha-ap69","tha-ap70","tha-ap71","tha-ap73","tha-ap74","tha-ap75","tha-ap76","tha-ap77","tha-ap78","tha-ap79","tha-ap80","tha-ap81","tha-ap82","tha-ap83","tha-ap84","tha-ap85","tha-ap86","tha-ap87","tha-ap88","tha-ap89","tha-ap90","tha-ap91","tha-ap92","tha-ap93","tha-ap94","tha-ap95","tha-ap96","tha-ap97","tha-ap98","tha-ap99","tha-ap100","tha-ap101","tha-ap102"];
 const WIDGET_APADANA = Object.fromEntries(Object.entries(APADANA_PROFILES).map(([id, p]) => [id, {
@@ -647,7 +651,7 @@ export const WIDGET_HTML = `<!doctype html>
   }
   function checkedContentHash(text, expected) {
     try {
-      var hash = ${contentSha256.toString()};
+      var hash = ${WIDGET_HASH_SOURCE};
       return hash(text) === expected;
     } catch (error) { return false; }
   }

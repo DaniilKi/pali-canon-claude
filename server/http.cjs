@@ -55603,112 +55603,6 @@ function createServer2({ executeTool } = {}) {
 
 // src/chatgpt-widget.mjs
 var import_node_crypto10 = require("node:crypto");
-
-// web/content-sha256.mjs
-function contentSha256(text2) {
-  if (typeof text2 !== "string" || text2.length > 1e5 || typeof TextEncoder !== "function") throw Error("Editorial content integrity checking is unavailable.");
-  const input = new TextEncoder().encode(text2), length = input.length;
-  const bytes = new Uint8Array(Math.ceil((length + 9) / 64) * 64);
-  bytes.set(input);
-  bytes[length] = 128;
-  const view = new DataView(bytes.buffer);
-  view.setUint32(bytes.length - 8, Math.floor(length / 536870912));
-  view.setUint32(bytes.length - 4, length * 8 >>> 0);
-  const constants2 = [
-    1116352408,
-    1899447441,
-    3049323471,
-    3921009573,
-    961987163,
-    1508970993,
-    2453635748,
-    2870763221,
-    3624381080,
-    310598401,
-    607225278,
-    1426881987,
-    1925078388,
-    2162078206,
-    2614888103,
-    3248222580,
-    3835390401,
-    4022224774,
-    264347078,
-    604807628,
-    770255983,
-    1249150122,
-    1555081692,
-    1996064986,
-    2554220882,
-    2821834349,
-    2952996808,
-    3210313671,
-    3336571891,
-    3584528711,
-    113926993,
-    338241895,
-    666307205,
-    773529912,
-    1294757372,
-    1396182291,
-    1695183700,
-    1986661051,
-    2177026350,
-    2456956037,
-    2730485921,
-    2820302411,
-    3259730800,
-    3345764771,
-    3516065817,
-    3600352804,
-    4094571909,
-    275423344,
-    430227734,
-    506948616,
-    659060556,
-    883997877,
-    958139571,
-    1322822218,
-    1537002063,
-    1747873779,
-    1955562222,
-    2024104815,
-    2227730452,
-    2361852424,
-    2428436474,
-    2756734187,
-    3204031479,
-    3329325298
-  ];
-  const state = [1779033703, 3144134277, 1013904242, 2773480762, 1359893119, 2600822924, 528734635, 1541459225];
-  const words3 = new Uint32Array(64), rotate = (value, n) => value >>> n | value << 32 - n;
-  for (let offset = 0; offset < bytes.length; offset += 64) {
-    for (let i = 0; i < 16; i++) words3[i] = view.getUint32(offset + 4 * i);
-    for (let i = 16; i < 64; i++) {
-      const x = words3[i - 15], y = words3[i - 2];
-      const s0 = rotate(x, 7) ^ rotate(x, 18) ^ x >>> 3, s1 = rotate(y, 17) ^ rotate(y, 19) ^ y >>> 10;
-      words3[i] = words3[i - 16] + s0 + words3[i - 7] + s1 >>> 0;
-    }
-    let [a, b, c, d, e, f, g, h] = state;
-    for (let i = 0; i < 64; i++) {
-      const sum1 = rotate(e, 6) ^ rotate(e, 11) ^ rotate(e, 25), choice = e & f ^ ~e & g;
-      const first = h + sum1 + choice + constants2[i] + words3[i] >>> 0;
-      const sum0 = rotate(a, 2) ^ rotate(a, 13) ^ rotate(a, 22), majority = a & b ^ a & c ^ b & c;
-      h = g;
-      g = f;
-      f = e;
-      e = d + first >>> 0;
-      d = c;
-      c = b;
-      b = a;
-      a = first + sum0 + majority >>> 0;
-    }
-    for (const [i, value] of [a, b, c, d, e, f, g, h].entries()) state[i] = state[i] + value >>> 0;
-  }
-  return state.map((value) => value.toString(16).padStart(8, "0")).join("");
-}
-
-// src/chatgpt-widget.mjs
 var WIDGET_TOOL = "read_passage_widget";
 var WIDGET_VERSION = "v25";
 var NAVIGATION_TIMEOUT_MS = 9e4;
@@ -55716,6 +55610,7 @@ var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
 var MCP_APP_MIME = "text/html;profile=mcp-app";
 var SKYBRIDGE_MIME = "text/html+skybridge";
+var WIDGET_HASH_SOURCE = true ? "function contentSha256(text) {\n  if (typeof text !== 'string' || text.length > 100000 || typeof TextEncoder !== 'function') throw Error('Editorial content integrity checking is unavailable.');\n  const input = new TextEncoder().encode(text), length = input.length;\n  const bytes = new Uint8Array(Math.ceil((length + 9) / 64) * 64);\n  bytes.set(input); bytes[length] = 0x80;\n  const view = new DataView(bytes.buffer);\n  view.setUint32(bytes.length - 8, Math.floor(length / 0x20000000));\n  view.setUint32(bytes.length - 4, (length * 8) >>> 0);\n  const constants = [\n    0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,\n    0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,\n    0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,\n    0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,\n    0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,\n    0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,\n    0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,\n    0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2,\n  ];\n  const state = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];\n  const words = new Uint32Array(64), rotate = (value, n) => (value >>> n) | (value << (32 - n));\n  for (let offset = 0; offset < bytes.length; offset += 64) {\n    for (let i = 0; i < 16; i++) words[i] = view.getUint32(offset + 4 * i);\n    for (let i = 16; i < 64; i++) {\n      const x = words[i - 15], y = words[i - 2];\n      const s0 = rotate(x, 7) ^ rotate(x, 18) ^ (x >>> 3), s1 = rotate(y, 17) ^ rotate(y, 19) ^ (y >>> 10);\n      words[i] = (words[i - 16] + s0 + words[i - 7] + s1) >>> 0;\n    }\n    let [a,b,c,d,e,f,g,h] = state;\n    for (let i = 0; i < 64; i++) {\n      const sum1 = rotate(e, 6) ^ rotate(e, 11) ^ rotate(e, 25), choice = (e & f) ^ (~e & g);\n      const first = (h + sum1 + choice + constants[i] + words[i]) >>> 0;\n      const sum0 = rotate(a, 2) ^ rotate(a, 13) ^ rotate(a, 22), majority = (a & b) ^ (a & c) ^ (b & c);\n      h=g; g=f; f=e; e=(d+first)>>>0; d=c; c=b; b=a; a=(first+sum0+majority)>>>0;\n    }\n    for (const [i,value] of [a,b,c,d,e,f,g,h].entries()) state[i] = (state[i] + value) >>> 0;\n  }\n  return state.map(value => value.toString(16).padStart(8, '0')).join('');\n}" : contentSha256.toString();
 var APADANA_PINS = ["raw_sha256", "body_sha256", "notes_sha256", "paratext_sha256", "root_sha256"];
 var PINNED_NEW_PARATEXT_IDS = ["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102"];
 var WIDGET_APADANA = Object.fromEntries(Object.entries(APADANA_PROFILES).map(([id, p]) => [id, {
@@ -56423,7 +56318,7 @@ var WIDGET_HTML = `<!doctype html>
   }
   function checkedContentHash(text, expected) {
     try {
-      var hash = ${contentSha256.toString()};
+      var hash = ${WIDGET_HASH_SOURCE};
       return hash(text) === expected;
     } catch (error) { return false; }
   }

@@ -334,3 +334,25 @@ test('scaled Therā groups require five sealed independent source inputs and all
   assert.doesNotMatch(commands,/--live|curl |wget |https:\/\/apadanatranslation\.com/,'publisher inputs stay pinned and offline during validation');
  }
 });
+
+
+test('isolated mixed-load reader source imports include only the shared integrity helper as a read-only input',()=>{
+ const workflow=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');
+ const step=workflow.split('      - name: Check retained reader views and the shared live cache under mixed load')[1].split('      - uses:')[0];
+ assert.match(step,/--mount "type=bind,src=\$GITHUB_WORKSPACE\/web\/content-sha256\.mjs,dst=\/app\/web\/content-sha256\.mjs,readonly"/);
+ assert.match(step,/--network none/);assert.match(step,/--cap-drop ALL/);assert.match(step,/--security-opt no-new-privileges/);
+ assert.match(step,/--full-cache --reader-caches --reader-ui/);
+ const widget=readFileSync(new URL('../src/chatgpt-widget.mjs',import.meta.url),'utf8');
+ assert.match(widget,/from ['"]\.\.\/web\/content-sha256\.mjs['"]/);
+});
+
+
+test('scaled preservation jobs fetch only their exact historical baseline before source checks',()=>{
+ const workflow=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');
+ const step=namedStep(workflow,'Fetch exact reviewed Apadāna baseline for independent preservation checks');
+ assert.match(step,/if: matrix\.group == 'apadanatherascaled61' \|\| matrix\.group == 'apadanatherascaled81' \|\| matrix\.group == 'apadanatheraeditorial'/);
+ assert.match(step,/git fetch --no-tags --depth=1 origin 64a336789ab5f4f02964ff3023ea6b26b330e406/);
+ assert.match(step,/git cat-file -e 64a336789ab5f4f02964ff3023ea6b26b330e406\^\{commit\}/);
+ assert.doesNotMatch(step,/--unshallow|fetch-depth: 0|git reset|git checkout/);
+ assert.ok(workflow.indexOf(step)<workflow.indexOf('      - name: Validate scaled Therā 61-80'),'baseline is present before the independent preservation gate');
+});

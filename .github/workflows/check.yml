@@ -63,6 +63,7 @@ jobs:
             --mount "type=bind,src=$GITHUB_WORKSPACE/scripts,dst=/app/scripts,readonly" \
             --mount "type=bind,src=$GITHUB_WORKSPACE/node_modules,dst=/app/node_modules,readonly" \
             --mount "type=bind,src=$GITHUB_WORKSPACE/src,dst=/app/src,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/web/content-sha256.mjs,dst=/app/web/content-sha256.mjs,readonly" \
             --mount "type=bind,src=$GITHUB_WORKSPACE/tests,dst=/app/tests,readonly" \
             --mount "type=bind,src=$RUNNER_TEMP/memory-report,dst=/report" \
             node:20-slim node /app/scripts/audit-hosted-load.mjs \
@@ -83,6 +84,11 @@ jobs:
     timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety' || matrix.group == 'milinda' || matrix.group == 'annumbered' || matrix.group == 'milindapartial' || matrix.group == 'anten' || matrix.group == 'apadana' || matrix.group == 'apadananext' || matrix.group == 'apadanathird' || matrix.group == 'apadanafourth' || matrix.group == 'apadanathera' || matrix.group == 'apadanatheranext' || matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanaedition' || matrix.group == 'thagsixteen' || matrix.group == 'textspacing') && 20 || 10 }}
     steps:
       - uses: actions/checkout@v4
+      - name: Fetch exact reviewed Apadāna baseline for independent preservation checks
+        if: matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial'
+        run: |
+          git fetch --no-tags --depth=1 origin 64a336789ab5f4f02964ff3023ea6b26b330e406
+          git cat-file -e 64a336789ab5f4f02964ff3023ea6b26b330e406^{commit}
       - uses: actions/setup-node@v4
         with:
           node-version: 20
