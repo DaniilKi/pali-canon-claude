@@ -706,6 +706,44 @@
     return { ...out, ...scriptNote(s), ...inputNote(input) };
   }
 
+  // web/milinda-sources.mjs
+  var units = /* @__PURE__ */ new Map([
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-1-08", { unit: "mil3.1.8", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-1-14", { unit: "mil3.1.15", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-08", { unit: "mil3.3.8", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-9", { unit: "mil3.3.9", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-10", { unit: "mil3.3.10", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-11", { unit: "mil3.3.11", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-12", { unit: "mil3.3.12", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-13", { unit: "mil3.3.13", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-14", { unit: "mil3.3.14", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-5-05", { unit: "mil3.5.5", notes: 2 }],
+    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-5-06", { unit: "mil3.5.6", notes: 1 }],
+    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-5-07", { unit: "mil3.5.7", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-7-05", { unit: "mil3.7.5", notes: 1 }],
+    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-7-08", { unit: "mil3.7.8", notes: 0 }]
+  ]);
+  var milindaSourceUnit = (id5) => units.get(id5)?.unit;
+  function validateMilindaDescriptor(value) {
+    const profile2 = units.get(value.translation_id);
+    if (!profile2) return;
+    const section = value.source_section;
+    if (!section || section.version !== 1 || section.status !== "reviewed" || section.unit_id !== profile2.unit || section.anchor !== value.translation_id.split("#")[1] || section.note_count !== profile2.notes) throw Error("The reviewed question descriptor or translator-note count is invalid. No English source was displayed.");
+  }
+  var isMilindaPageId = (id5) => /^ati:\/tipitaka\/kn\/miln\/miln\.[23]x\.kell$/.test(id5);
+  function translatorNotes(data) {
+    validateMilindaDescriptor(data);
+    if (!Object.hasOwn(data, "translator_notes")) {
+      if (milindaSourceUnit(data.translation_id)) throw Error("The selected question is missing its translator-note declaration.");
+      return [];
+    }
+    const notes2 = data.translator_notes;
+    if (!Array.isArray(notes2) || notes2.length > 32 || notes2.some((note2, i) => !note2 || typeof note2 !== "object" || Array.isArray(note2) || Object.keys(note2).sort().join(",") !== "number,text" || note2.number !== i + 1 || typeof note2.text !== "string" || !note2.text.trim() || note2.text.length > 5e4)) throw Error("The translator-note declaration is invalid. No English source was displayed.");
+    const profile2 = units.get(data.translation_id);
+    if (profile2 && notes2.length !== profile2.notes) throw Error("The reviewed question translator-note count changed. No English source was displayed.");
+    return notes2.map((note2) => ({ number: note2.number, text: note2.text }));
+  }
+
   // web/translation-policy.mjs
   var own = (value, key4) => value && Object.hasOwn(value, key4);
   var nonempty = (value) => typeof value === "string" && value.trim().length > 0;
@@ -740,9 +778,14 @@
   }
   function validateEnglishPage(data, args, context) {
     const offset = args.offset || 0;
+    if (data && typeof data === "object") {
+      translatorNotes(data);
+      if (milindaSourceUnit(data.translation_id) && milindaSourceUnit(data.translation_id) !== context.uid) throw Error("The question source belongs to a different P\u0101li selection. No English was displayed.");
+    }
     if (!data || !nonempty(data.text) || !nonempty(data.translation_id) || !nonempty(data.translator) || !nonempty(data.attribution) || !(nonempty(data.license) || data.license && typeof data.license === "object" && nonempty(data.license.name)) || data.offset !== offset) throw new Error("The English source response is incomplete. No translation was displayed.");
     const choice = context.choices.find((c) => c.translation_id === data.translation_id);
     if (!choice) throw new Error("The returned English source version was not in the reviewed list. Reload the passage and review sources again.");
+    if (milindaSourceUnit(data.translation_id) && (!own(choice, "source_section") || !sameScope(data.source_section, choice.source_section) || data.source_section?.unit_id !== context.uid || data.source_section?.anchor !== data.translation_id.split("#")[1] || data.source_section?.status !== "reviewed")) throw new Error("The reviewed question identity changed. Reload the passage and review sources again; no English was displayed.");
     if (context.accepted) {
       const accepted = context.accepted;
       if (data.translation_id !== args.translation || data.whole_unit_coverage !== false || !own(data, "translation_scope") || !sameScope(data.translation_scope, accepted.scope)) throw new Error("The source scope or version changed after review. Reload the passage and give fresh consent; no scoped text was displayed.");
@@ -1175,7 +1218,7 @@
   var failure = () => {
     throw Error("The comparison selection or source response is invalid. No comparison translation was displayed.");
   };
-  var sourceId = (x) => typeof x === "string" && x.trim() === x && !/[\x00-\x1f\x7f]/.test(x) && x.length <= 200 && !x.includes("..") && !/\.html?$/.test(x) && (/^dt:[A-Za-z0-9_./-]+$/.test(x) || /^ati:\/(?:tipitaka|lib|ptf|noncanon)\/[a-z0-9/._-]+$/.test(x) || /^aj:[A-Za-z0-9_./ -]+$/.test(x) && x.trim() === x);
+  var sourceId = (x) => typeof x === "string" && x.trim() === x && !/[\x00-\x1f\x7f]/.test(x) && x.length <= 200 && !x.includes("..") && !/\.html?$/.test(x) && (/^dt:[A-Za-z0-9_./-]+$/.test(x) || /^ati:\/(?:tipitaka|lib|ptf|noncanon)\/[a-z0-9/._-]+$/.test(x) && !isMilindaPageId(x) || Boolean(milindaSourceUnit(x)) || /^aj:[A-Za-z0-9_./ -]+$/.test(x) && x.trim() === x);
   function comparisonChoices(choices, requestedId) {
     if (!uid(requestedId) || !Array.isArray(choices)) failure();
     const seen = /* @__PURE__ */ new Set(), ordinary = [];
@@ -1186,7 +1229,8 @@
         seen.add(choice.translation_id);
       }
       if ("translation_scope" in choice || choice.whole_unit_coverage === false) continue;
-      if (!sourceId(choice.translation_id) || !text4(choice.translator) || choice.translator.length > 300 || own3(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== true) failure();
+      if (!sourceId(choice.translation_id) || milindaSourceUnit(choice.translation_id) && milindaSourceUnit(choice.translation_id) !== requestedId || !text4(choice.translator) || choice.translator.length > 300 || own3(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== true) failure();
+      validateMilindaDescriptor(choice);
       ordinary.push(clone(choice));
     }
     return ordinary;
@@ -1740,7 +1784,7 @@
       if (!/^[a-z][a-z0-9.-]*$/.test(first)) throw new CitationError("Unrecognised SuttaCentral link.");
       return { kind: "uid", uid: first, raw, via: "suttacentral.net" };
     }
-    return { kind: "url", host, path: url.pathname.replace(/\.html?$/, ""), raw };
+    return { kind: "url", host, path: url.pathname.replace(/\.html?$/, ""), ...host === "accesstoinsight.org" && /^\/tipitaka\/kn\/miln\/miln\.[23]x\.kell\.html$/.test(url.pathname) && url.hash ? { fragment: url.hash.slice(1) } : {}, raw };
   }
   function parseEditionPage(raw, text11) {
     const head = text11.match(/^([A-Za-z]+)(?:\.?\s*(ed(?:ition)?)\.?)?[\s.:,]+(.*)$/);
@@ -2881,6 +2925,22 @@
     if (data.alignment) list.push(typeof data.alignment === "string" ? data.alignment : JSON.stringify(data.alignment));
     if (list.length) target.append(el("div", [...new Set(list)].join("\n"), "notice"));
   }
+  function translatorNoteSection(data, target, level) {
+    const owned = translatorNotes(data);
+    if (!owned.length) return;
+    const section = el("section");
+    section.setAttribute("aria-label", "Translator\u2019s notes");
+    section.append(el("h" + level, "Translator\u2019s notes \xB7 not translated question text"));
+    const list = el("ol");
+    for (const note2 of owned) {
+      const item = el("li");
+      item.value = note2.number;
+      item.append(el("p", note2.text, "translator-note"));
+      list.append(item);
+    }
+    section.append(list);
+    target.append(section);
+  }
   function provenance(data, target = view) {
     const box = el("section", void 0, "provenance");
     box.setAttribute("aria-label", "Source attribution");
@@ -4016,7 +4076,7 @@
       return;
     }
     const studyToken = ++studyEpoch, target = studyTarget("Opening the explicitly selected source comparison\u2026");
-    target.replaceChildren(el("h3", "Compare English sources"), el("p", "These are separate publisher pages, not aligned paragraphs or translations of only the displayed P\u0101li passage. Each source may extend beyond your current reading-plan assignment. Review each source\u2019s notes, reference and licence before quoting.", "notice"));
+    target.replaceChildren(el("h3", "Compare English sources"), el("p", "These are separate source versions, not aligned paragraphs or translations of only the displayed P\u0101li passage. Each source may extend beyond your current reading-plan assignment. Review each source\u2019s notes, reference and licence before quoting.", "notice"));
     target.append(button("Choose English sources", () => {
       if (token === epoch && studyToken === studyEpoch) translations({ text_id: context.uid, citation: context.citation, english_available: context.choices }, context.uid, token);
     }));
@@ -4052,6 +4112,7 @@
           const content = el("div");
           notes(data, content);
           content.append(el("p", data.text, "translation"));
+          translatorNoteSection(data, content, 5);
           provenance(data, content);
           body.replaceChildren(content);
           progress.textContent = "English characters " + (data.offset + 1) + "\u2013" + (data.offset + data.text.length) + (next ? " \xB7 more pages available" : " \xB7 end of this source");
@@ -4109,12 +4170,14 @@
       const data = await tool("get_translation", args, "study");
       if (token !== epoch || studyToken !== studyEpoch) return;
       const next = validateEnglishPage(data, args, context), actualChoice = context.choices.find((c) => c.translation_id === data.translation_id);
-      target.replaceChildren(el("h3", (context.accepted?.kind === "shared_page" ? "Shared English source page \xB7 " : context.accepted ? "Partial English source \xB7 " : "English source page \xB7 ") + data.translator));
+      target.replaceChildren(el("h3", (context.accepted?.kind === "shared_page" ? "Shared English source page \xB7 " : context.accepted ? "Partial English source \xB7 " : milindaSourceUnit(data.translation_id) ? "English question source \xB7 " : "English source page \xB7 ") + data.translator));
       target.append(el("p", "P\u0101li selection: " + context.citation + " \xB7 publisher reference: " + (actualChoice.reference || data.citation), "muted"), el("p", "Source version: " + data.translation_id, "muted"));
       if (context.accepted) scopeSummary(context.accepted, target);
       if (data.translation_id !== args.translation) target.append(el("p", "The server returned a different listed source version. Read its source and fallback notes before quoting.", "notice"));
+      if (milindaSourceUnit(data.translation_id)) target.append(el("p", "Complete substantive question selection. Other questions on the publisher page and untranslated P\u0101li paratext are outside this English selection.", "notice"));
       notes(data, target);
       target.append(el("p", data.text, "translation"));
+      translatorNoteSection(data, target, 4);
       provenance(data, target);
       if (next) target.append(button("Next English page \u2192", () => englishPage(next, token, context)));
       target.append(button("Reload passage and review sources", render));

@@ -517,6 +517,10 @@ def main():
     out, report['partial_page_proposals_withheld'] = withhold_partial_page_proposals(out)
     if '--content' in sys.argv:
         out, report['reviewed_partial_pages'] = apply_reviewed_partial_links(out, canon, ati_root)
+    from reviewed_ati_sections import withhold_section_page_proposals, apply_reviewed_section_links
+    out, report['section_page_proposals_withheld'] = withhold_section_page_proposals(out)
+    if '--content' in sys.argv:
+        out, report['reviewed_ati_sections'] = apply_reviewed_section_links(out, canon, ati_root)
     from reviewed_exclusions import apply_reviewed_exclusions
     out, report['reviewed_exclusions'] = apply_reviewed_exclusions(out)
     json.dump(out, open(sys.argv[4], 'w'), ensure_ascii=False, separators=(',', ':'))

@@ -377,3 +377,27 @@ PALI_UPATISSA_SOURCE_ROOT=/tmp/pali-ati PALI_VINAYA_PARTIALS_SOURCE_DIR=/tmp/pal
 ```
 
 Inspect the entire output delta before installation; preserve all previous owner values and scope pins. Build and audit after installation, commit generated server files, and pass exact-head CI before advancing dev. Sources are fetched on demand, never bundled in npm/browser reports. Do not substitute an HTML rendering for raw-source provenance or treat optional local fixtures as live-source availability checks.
+
+### Reviewed whole-question anthology sections
+
+`reviewed_ati_sections.json` records the finite Kelly Milinda question profiles;
+`server/data/reviewed-ati-sections.json` is its identical packaged runtime copy.
+These are whole substantive questions, separate from partial/shared manifests.
+The ordinary build withholds proposals for both parent pages, then activates
+only the fourteen independently reviewed bindings after checking complete roots,
+actual pinned source bytes, extraction, owned notes and complete notices.
+`verify_section_html.mjs` shares the runtime extractor; no English bodies enter
+the data package. Missing evidence is a failure, not permission to use the
+whole anthology or overwrite another source.
+
+For an additive update against a pinned local official ATI checkout, unpack the
+canonical shards as above, then write to a **different** output path:
+
+```sh
+python scripts/canon/reviewed_ati_sections.py /tmp/pali-inputs/canon.json.gz server/data/translations.json /path/to/official-ati /tmp/translations-with-questions.json
+PALI_ATI_SECTIONS_SOURCE_DIR=/path/to/official-ati node --test tests/ati-sections-build.test.mjs tests/milinda-sections.test.mjs
+```
+
+Review the resulting diff before replacing generated data. Source revisions,
+rights or wording changes require a new independent scope review, not updated
+hashes alone. See [sources and boundaries](../../docs/data/milinda-reviewed-questions.md).

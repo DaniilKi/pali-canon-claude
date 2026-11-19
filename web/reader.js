@@ -5,6 +5,7 @@ import { createSourcePassage } from './source-passage.mjs';
 import { scriptRefreshEligible, retainBookSearchDraft } from './script-refresh.mjs';
 import { localizeText } from '../src/script.mjs';
 import { scopeDescriptor, validateEnglishPage } from './translation-policy.mjs';
+import { translatorNotes, milindaSourceUnit } from './milinda-sources.mjs';
 import { planCatalog, planDay, daySignature, cleanProgress, planWindow, validatePlanPage } from './reading-plans.mjs';
 import { MAX_IMPORT_BYTES, parseBookmarks, bookmarkMerge } from './bookmark-import.mjs';
 import { validateDaily } from './daily-reading.mjs';
@@ -99,6 +100,15 @@ function notes(data, target = view) {
   if (data.alignment) list.push(typeof data.alignment === 'string' ? data.alignment : JSON.stringify(data.alignment));
   if (list.length) target.append(el('div', [...new Set(list)].join('\n'), 'notice'));
 }
+function translatorNoteSection(data, target, level) {
+  const owned = translatorNotes(data); if (!owned.length) return;
+  const section = el('section'); section.setAttribute('aria-label', 'Translator’s notes');
+  section.append(el('h' + level, 'Translator’s notes · not translated question text'));
+  const list = el('ol');
+  for (const note of owned) { const item = el('li'); item.value = note.number; item.append(el('p', note.text, 'translator-note')); list.append(item); }
+  section.append(list); target.append(section);
+}
+
 function provenance(data, target = view) {
   const box = el('section', undefined, 'provenance'); box.setAttribute('aria-label', 'Source attribution');
   box.append(el('strong', data.edition || data.dictionary?.name || data.source?.name || (typeof data.source === 'string' ? data.source : null) || data.label || 'Source provenance'));
@@ -689,7 +699,7 @@ function compareEnglishSources(selected, token, context) {
   try { ids = comparisonSelection(selected, context.choices, context.uid); }
   catch (error) { $('study').append(el('p', error.message, 'notice')); return; }
   const studyToken = ++studyEpoch, target = studyTarget('Opening the explicitly selected source comparison…');
-  target.replaceChildren(el('h3', 'Compare English sources'), el('p', 'These are separate publisher pages, not aligned paragraphs or translations of only the displayed Pāli passage. Each source may extend beyond your current reading-plan assignment. Review each source’s notes, reference and licence before quoting.', 'notice'));
+  target.replaceChildren(el('h3', 'Compare English sources'), el('p', 'These are separate source versions, not aligned paragraphs or translations of only the displayed Pāli passage. Each source may extend beyond your current reading-plan assignment. Review each source’s notes, reference and licence before quoting.', 'notice'));
   target.append(button('Choose English sources', () => { if (token === epoch && studyToken === studyEpoch) translations({ text_id: context.uid, citation: context.citation, english_available: context.choices }, context.uid, token); }));
   const grid = el('div', undefined, 'comparison-grid'); target.append(grid);
   let focusIntent = 0;
@@ -712,7 +722,7 @@ function compareEnglishSources(selected, token, context) {
       try {
         const data = await tool('get_translation', args, 'study', 'English comparison ' + id); if (!sameRequest()) return;
         const next = validateComparisonPage(data, args, { uid: context.uid, choices: [choice], accepted: null });
-        const content = el('div'); notes(data, content); content.append(el('p', data.text, 'translation')); provenance(data, content);
+        const content = el('div'); notes(data, content); content.append(el('p', data.text, 'translation')); translatorNoteSection(data, content, 5); provenance(data, content);
         body.replaceChildren(content);
         progress.textContent = 'English characters ' + (data.offset + 1) + '–' + (data.offset + data.text.length) + (next ? ' · more pages available' : ' · end of this source');
         message.textContent = 'Selected source page loaded.';
@@ -747,11 +757,12 @@ async function englishPage(args, token, context) {
   try {
     const data = await tool('get_translation', args, 'study'); if (token !== epoch || studyToken !== studyEpoch) return;
     const next = validateEnglishPage(data, args, context), actualChoice = context.choices.find(c => c.translation_id === data.translation_id);
-    target.replaceChildren(el('h3', (context.accepted?.kind === 'shared_page' ? 'Shared English source page · ' : context.accepted ? 'Partial English source · ' : 'English source page · ') + data.translator));
+    target.replaceChildren(el('h3', (context.accepted?.kind === 'shared_page' ? 'Shared English source page · ' : context.accepted ? 'Partial English source · ' : milindaSourceUnit(data.translation_id) ? 'English question source · ' : 'English source page · ') + data.translator));
     target.append(el('p', 'Pāli selection: ' + context.citation + ' · publisher reference: ' + (actualChoice.reference || data.citation), 'muted'), el('p', 'Source version: ' + data.translation_id, 'muted'));
     if (context.accepted) scopeSummary(context.accepted, target);
     if (data.translation_id !== args.translation) target.append(el('p', 'The server returned a different listed source version. Read its source and fallback notes before quoting.', 'notice'));
-    notes(data, target); target.append(el('p', data.text, 'translation')); provenance(data, target);
+    if (milindaSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive question selection. Other questions on the publisher page and untranslated Pāli paratext are outside this English selection.', 'notice'));
+    notes(data, target); target.append(el('p', data.text, 'translation')); translatorNoteSection(data, target, 4); provenance(data, target);
     if (next) target.append(button('Next English page →', () => englishPage(next, token, context)));
     target.append(button('Reload passage and review sources', render));
   } catch (error) { if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el('p', error.message, 'notice'), button('Retry selected source', () => englishPage(args, token, context)), button('Reload passage and review sources', render)); }

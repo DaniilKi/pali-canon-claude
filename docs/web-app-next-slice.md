@@ -97,3 +97,18 @@ audio/chanting links and optional cross-device sync. Each needs its own rights,
 accessibility and behavior evidence. The current project supplies many tool
 capabilities, but none implies those browser features, accounts, complete audio,
 all-English coverage or a deployed public endpoint already exist.
+
+## Reproduced follow-up reading risks, 19 November 2026
+
+Parallel tests against `7ec5da4` confirmed two uncorrected workflows while the
+Milinda coverage slice was prepared. Prioritize the private-draft loss first:
+following the current same-tab external source/licence link unloads tab memory,
+and a fresh reopening loses its unsaved note. Saved data and in-app navigation
+controls passed; browser Back/BFCache behavior is unverified. Preserve local-only
+privacy and explicit saving when repairing this flow.
+
+A delayed ordinary reading response also takes focus from an input the reader
+focused while waiting; the next keystroke misses that input at both phone and
+desktop widths. Completion should retain user-moved focus. Existing special
+Stop/script-refresh focus cases are controls, not coverage of this ordinary
+completion case. [Reproduction scope and evidence](data/milinda-reviewed-questions.md).

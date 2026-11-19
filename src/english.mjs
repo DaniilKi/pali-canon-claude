@@ -1,10 +1,12 @@
 /** English translations: Ṭhānissaro Bhikkhu (dhammatalks.org), Access to Insight (with mirrors) and Ānandajoti Bhikkhu (Ancient Buddhist Texts). */
 import { fetchMirrors, plainText, decodeHtml } from './http.mjs';
-import { load, linksFor, translationId, sourceName, ANANDAJOTI_BASE, ANANDAJOTI_LICENSE, translationScope } from './canon.mjs';
+import { load, linksFor, translationId, sourceName, ANANDAJOTI_BASE, ANANDAJOTI_LICENSE, translationScope, segmentsFromCorpus } from './canon.mjs';
 import { isShared, isScoped, scopeHash } from './translation-scope.mjs';
 import { atiPartialExcerpt } from './ati-excerpt.mjs';
 import { liveCache } from './cache.mjs';
 import { createHash } from 'node:crypto';
+import { extractAtiSection } from './ati-sections.mjs';
+import { sectionHash, validateSectionRegistry } from './ati-section-registry.mjs';
 const prefixHash = (text, offset) => createHash('sha256').update(text.slice(0, offset)).digest('hex');
 
 const ATI_MIRRORS = [
@@ -114,6 +116,15 @@ const fetchAtiPartial = (path,extractor) => liveCache.wrap(`ati-partial:${extrac
     attribution:notice.citation,license:notice.licensing};
 });
 
+// A reviewed question is independent of both the whole anthology and every other question.
+const fetchAtiSection = (link, row) => liveCache.wrap(`ati-section:${sectionHash({ review: link.review, section: link.section })}`, async () => {
+  const { body, url, mirror } = await fetchMirrors(atiMirrors(row.path));
+  const selected = extractAtiSection(body, row), notice = atiNotice(body);
+  if (!notice.licensing || !notice.citation || sectionHash(notice) !== row.section.notice_sha256) throw Error('The reviewed ATI question copyright or attribution notice changed. No translation was returned.');
+  return { source: 'Access to Insight', url: link.url, fetched_from: MIRROR_NAMES[mirror], fetched_url: url,
+    ...selected, attribution: notice.citation, license: notice.licensing };
+});
+
 async function fetchDhammatalksLive(url) {
   const { body } = await fetchMirrors([url]);
   const start = body.search(/<div\b[^>]*id=["']sutta["']/i);
@@ -136,6 +147,7 @@ export function available(unit) {
     source: sourceName(t),
     translator: t.translator, reference: t.reference || undefined, ...(t.license ? { license: t.license } : {}), match: t.match,
     ...(t.mapping_note ? { mapping_note: t.mapping_note } : {}),
+    ...(t.section ? { source_section: JSON.parse(JSON.stringify(t.section)) } : {}),
     ...(t.commentary ? { includes_commentary: true } : {}),
   }));
 }
@@ -189,8 +201,16 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
   let result;
   const notes = via && !declaredScope ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   if (link.mapping_note) notes.push(link.mapping_note);
+  let sectionRow;
+  if (link.section) {
+    const snapshot = load();
+    // Recheck the complete registry/root/binding snapshot even before a cached section is used.
+    validateSectionRegistry(snapshot.sectionRegistry, snapshot.canon, snapshot.translations, unit => segmentsFromCorpus(unit, snapshot.canon));
+    sectionRow = snapshot.sectionRegistry.links.find(row => row.unit_id === unit.id && row.anchor === link.section.anchor);
+    if (!sectionRow) throw Error('The reviewed ATI question has no exact owner. No translation was returned.');
+  }
   try {
-    result = link.source === 'ati' ? await (declaredScope?.kind === 'partial_unit' ? fetchAtiPartial(link.path,declaredScope.extractor) : fetchAti(link.path))
+    result = link.source === 'ati' ? await (sectionRow ? fetchAtiSection(link, sectionRow) : declaredScope?.kind === 'partial_unit' ? fetchAtiPartial(link.path,declaredScope.extractor) : fetchAti(link.path))
       : link.source === 'anandajoti' ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1)
         : await fetchDhammatalks(link.url);
   } catch (error) {
@@ -243,6 +263,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
       arguments: { uid: unit.id, translation: translationId(link), offset: nextOffset, limit, prefix_sha256: prefixHash(text, nextOffset), ...(declaredScope ? { ...(shared ? { allow_shared: true } : { allow_partial: true }), scope_sha256: declaredScope.scope_sha256 } : {}) },
     },
     ...(declaredScope ? { translation_scope: declaredScope, whole_unit_coverage: false } : {}),
+    ...(sectionRow ? { source_section: JSON.parse(JSON.stringify(sectionRow.section)), translator_notes: result.translator_notes.map(note => ({ ...note })) } : {}),
     match: link.match, notes,
   };
 }

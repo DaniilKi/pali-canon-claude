@@ -1,3 +1,5 @@
+import {translatorNotes,milindaSourceUnit} from './milinda-sources.mjs';
+
 /** Browser display/consent guards for backend-validated metadata. Not source, rights or alignment approval. */
 const own = (value, key) => value && Object.hasOwn(value, key);
 const nonempty = value => typeof value === 'string' && value.trim().length > 0;
@@ -31,9 +33,14 @@ export function scopeDescriptor(choice, requestedId) {
 /** Validate identity/scope before rendering; return only a checked same-source continuation. */
 export function validateEnglishPage(data, args, context) {
   const offset = args.offset || 0;
+  if (data && typeof data === 'object') {
+    translatorNotes(data);
+    if (milindaSourceUnit(data.translation_id) && milindaSourceUnit(data.translation_id) !== context.uid) throw Error('The question source belongs to a different Pāli selection. No English was displayed.');
+  }
   if (!data || !nonempty(data.text) || !nonempty(data.translation_id) || !nonempty(data.translator) || !nonempty(data.attribution) || !(nonempty(data.license) || (data.license && typeof data.license === 'object' && nonempty(data.license.name))) || data.offset !== offset) throw new Error('The English source response is incomplete. No translation was displayed.');
   const choice = context.choices.find(c => c.translation_id === data.translation_id);
   if (!choice) throw new Error('The returned English source version was not in the reviewed list. Reload the passage and review sources again.');
+  if (milindaSourceUnit(data.translation_id) && (!own(choice, 'source_section') || !sameScope(data.source_section, choice.source_section) || data.source_section?.unit_id !== context.uid || data.source_section?.anchor !== data.translation_id.split('#')[1] || data.source_section?.status !== 'reviewed')) throw new Error('The reviewed question identity changed. Reload the passage and review sources again; no English was displayed.');
   if (context.accepted) {
     const accepted = context.accepted;
     if (data.translation_id !== args.translation || data.whole_unit_coverage !== false || !own(data, 'translation_scope') || !sameScope(data.translation_scope, accepted.scope)) throw new Error('The source scope or version changed after review. Reload the passage and give fresh consent; no scoped text was displayed.');

@@ -99,7 +99,7 @@ function parseUrl(raw) {
     if (!/^[a-z][a-z0-9.-]*$/.test(first)) throw new CitationError('Unrecognised SuttaCentral link.');
     return { kind: 'uid', uid: first, raw, via: 'suttacentral.net' };
   }
-  return { kind: 'url', host, path: url.pathname.replace(/\.html?$/, ''), raw };
+  return { kind: 'url', host, path: url.pathname.replace(/\.html?$/, ''), ...(host === 'accesstoinsight.org' && /^\/tipitaka\/kn\/miln\/miln\.[23]x\.kell\.html$/.test(url.pathname) && url.hash ? { fragment: url.hash.slice(1) } : {}), raw };
 }
 
 /**

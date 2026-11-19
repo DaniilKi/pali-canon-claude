@@ -1485,3 +1485,29 @@ Ship the stronger reproducible accessibility improvement instead. Exact source t
 A bounded permitted-upstream review establishes that the known DPR dhammatalks repository cannot supply Mahāvagga VII: its complete pinned1,323-entry tree has no Vinaya/Mahāvagga files. Publisher/index observations remain positive reuse/provenance evidence, not raw-body or complete-notice pins. Preserve Khematto authorship, the Royal Thai/VRI comparison gate and all existing source holds. Activate nothing by inferring a source from an organizational name. [Follow-up](data/mahavagga-vii-upstream-followup.md).
 
 Make independently useful progress on a reproduced12/12 cross-device defect: script selection persisted while search/lookup results remained Roman. Refresh only existing script-aware routes with their executed arguments/pins and validators, preserving finder query/scope/panels and owned focus. Scope the known raw source-book input/selection snapshot to its exact route, including rapid refresh and interrupted retries; valid explicit submission supersedes it. Static personal/forms views retain their lifecycle. No generic form capture, extra persistent schema, source cache, route grammar, frozen global index, inferred scripture or automatic English retrieval. Use existing epoch cancellation to prevent obsolete bodies from winning. Test the first observed interaction before a bounded normal/a11y/isolated-npm matrix, then official engines and exact-commit CI. [Acceptance](evidence/web-reader/SCRIPT_REFRESH.md).
+
+
+## D236 — Add finite whole-question sources without whole-anthology substitution
+
+Independent full-body/root/adjacent-source review approves 14 substantive Kelly
+Milindapañha questions across two official ATI pages, previously without indexed
+English. Disclose untranslated titles/ordinal colophons, the final chapter/count
+paratext and Wisdom’s compressed repeated closing label. Publisher II.1.14 maps
+to VRI Mil3.1.15; use actual body anchors, not a faulty contents link or invented
+number normalization.
+
+A separate finite reviewed section registry preserves ordinary whole-question
+selection without abusing partial/shared consent semantics. Reserve both parent
+paths against whole-page downgrades; enforce complete binding/root and
+text/notes/notice/structure pins. Version IDs include the verified anchor,
+unanchored anthology lookup is ambiguous, and caches/continuations cannot
+substitute another section. Retain all four original translator notes and the
+complete ©2005 John Kelly free-distribution notice (not CC); no translation body
+is bundled. Preserve all previous links,21 partial descriptors and rights holds.
+
+Coverage gains14: ordinary links2,552; indexed1,448/1,871;
+grouped1,422/1,845. Partial/shared/daily counts and canonical wording are unchanged.
+Two independently reproduced reader risks (external-link loss of tab-memory
+notes on fresh reopening and delayed navigation focus theft) remain explicitly
+open; this corpus batch does not claim to repair them.
+[Source evidence, boundaries and validation](data/milinda-reviewed-questions.md).

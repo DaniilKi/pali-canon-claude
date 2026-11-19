@@ -287,3 +287,14 @@ D233 adds one further precise Vinaya selection, ATI Mv1.23.1–10 at `pli-tv-kd1
 D234’s [complete Vinaya source survey](data/vinaya-complete-source-survey.md) records positive modern and older-edition reuse evidence plus exact remaining artifact/edition/scope blockers. Khematto’s Royal Thai Mahāvagga requires its own attribution and separation of included commentary; it is not covered by simply reusing the Ṭhānissaro sutta extractor. No new provider, translation body or whole-unit coverage is activated.
 
 The [MvVII permitted-upstream follow-up](data/mahavagga-vii-upstream-followup.md) pins the known DPR repository metadata and establishes that its complete tree contains no Vinaya/Mahāvagga source. No publisher-backed upstream was found in the bounded metadata search; no translation rehost or blocked-host workaround was used. Positive publisher rights remain distinct from missing official raw/index/full-notice and full-recension verification. No source is activated.
+
+
+D236 adds John Kelly’s first 14 indexed Milindapañha question translations,
+selected from two official ATI anthology pages. The entire substantive questions
+were independently compared with the complete Pāli roots and adjacent controls;
+untranslated paratext, Wisdom’s compressed repetition and differing numbering
+remain disclosed. Complete ©2005 Kelly free-distribution notices and all four
+translator notes accompany retrieval; these terms are not Creative Commons.
+Finite question extraction, original body anchors and source/root/notice pins
+prevent a whole anthology from standing in for one question. No English bodies
+are bundled. [Evidence, rights and limitations](data/milinda-reviewed-questions.md).

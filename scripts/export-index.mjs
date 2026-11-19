@@ -70,6 +70,12 @@ export const LICENSE_LABELS = {
     url: null,
     used_by: 'Access to Insight',
   },
+  'Kelly-free-distribution-2005': {
+    name: 'John Kelly ©2005 free-distribution notice (not Creative Commons)',
+    terms: 'copies free of charge in any medium, source and derivatives identified, complete licence text retained; otherwise all rights reserved; see each pinned Kelly page notice',
+    url: null,
+    used_by: 'Access to Insight reviewed Milindapañha questions',
+  },
   'Olendzki-free-distribution-2005': {
     name: 'Andrew Olendzki ©2005 free-distribution notice (not Creative Commons)',
     terms: 'copies free of charge, source and derivatives identified, complete licence text retained; otherwise all rights reserved; see each pinned page notice',
@@ -138,6 +144,7 @@ export function buildIndex() {
         license: t.license || (t.source === 'dhammatalks.org' ? 'CC BY-NC 4.0' : null),
         match: t.match,
         ...(t.mapping_note ? { mapping_note: t.mapping_note } : {}),
+        ...(t.source_section ? { source_section: structuredClone(t.source_section), whole_unit_coverage: true } : {}),
         ...(t.translation_scope ? { translation_scope: exportScope(t.translation_scope), whole_unit_coverage: false } : {}),
       })).map((e) => ({ ...e, license_name: licenseName(e.license) })),
     };

@@ -239,3 +239,17 @@ The browser performs this check before showing wording: body matches use exact r
 To explore an existing complete VRI root file without knowing a term or numeric position, call `search_source_book` with `book`, `query: ""` and `headings_only: true`. Continue using the returned result `next_offset`; actual reading offsets remain in each row's `read_with` and `context_with` commands. A nonempty query filters only printed heading segments through the existing Pāli query rules. Omitted/false mode remains ordinary text search and still rejects an empty query.
 
 These are literal source-file headings, including invocations and colophons, rather than an inferred canonical chapter hierarchy. Repeated labels have distinct actual references and remain separate. Retain original source terms and source-position/version metadata; resolve a standard sutta/rule citation separately when needed. See [scope and evidence](evidence/web-reader/SOURCE_HEADINGS.md).
+
+## Individual questions on a shared publisher page
+
+Kelly’s Milindapañha anthologies contain multiple distinct questions. A verified
+body anchor selects just that question; for example,
+`https://www.accesstoinsight.org/tipitaka/kn/miln/miln.2x.kell.html#miln-2-1-14`
+resolves to **Mil 3.1.15**, despite the publisher’s II.1.14 label. A bare anthology
+URL or unreviewed anchor cannot choose an arbitrary question. Ordinary ATI URLs
+outside these two reviewed anthology pages keep their existing behavior.
+
+Use the exact `translation_id` returned in metadata and continuation arguments.
+Do not manufacture a fragment by changing the citation number. The substantive
+question, original notes, complete notice and untranslated-paratext caveat stay
+together. See [the fourteen-question review](data/milinda-reviewed-questions.md).
