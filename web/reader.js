@@ -101,7 +101,7 @@ function confirmDraftDiscard(host, entry, action, returnFocus) {
   host.querySelector('.draft-discard-confirmation')?.remove();
   const group = el('div', undefined, 'draft-discard-confirmation'); group.setAttribute('role', 'group'); group.setAttribute('aria-label', 'Confirm unsaved draft discard');
   const cancel = button('Cancel discard', () => { group.remove(); if (returnFocus?.isConnected) returnFocus.focus({ preventScroll: true }); });
-  group.append(el('p', 'Discard only this unsaved draft? The saved note and other recovered drafts are kept. Download a copy first if you want it.', 'notice'), cancel, button('Discard this recovered draft', () => {
+  group.append(el('p', entry ? 'Discard only this unsaved draft? The saved note and other recovered drafts are kept. Download a copy first if you want it.' : 'Discard this tab’s ENTIRE unreadable recovery record? It may contain several old drafts. Download it first if you want to keep it. Saved notes and current in-memory edits are kept.', 'notice'), cancel, button('Discard this recovered draft', () => {
     if (action()) return;
     const warning = el('p', 'Draft not discarded. Its recovery copy could not be cleared or the draft changed. Keep or export it before trying again.', 'notice'); warning.setAttribute('role', 'alert'); group.append(warning);
   })); host.append(group); cancel.focus({ preventScroll: true });

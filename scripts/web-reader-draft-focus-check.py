@@ -8,7 +8,7 @@ import argparse,copy,hashlib,json,os,pathlib,re,socket,subprocess,time,urllib.pa
 from playwright.sync_api import expect,sync_playwright,Error as PlaywrightError
 from web_reader_test_helpers import find_control
 ROOT=pathlib.Path(__file__).resolve().parents[1];KEY='pali-library-v1';JOURNAL='pali-library-note-drafts-v1';PRIVATE='PRIVATE_DRAFT_FOCUS_ā😀';RECOVERY='Unsaved draft recovery'
-p=argparse.ArgumentParser(description=__doc__);p.add_argument('--report');p.add_argument('--a11y',action='store_true');p.add_argument('--server-dir',type=pathlib.Path);p.add_argument('--debug',action='store_true');p.add_argument('--capacity-only',action='store_true');p.add_argument('--focus-only',type=int,choices=[390,1280],help='Run only focused response ownership diagnostics at one width');args=p.parse_args()
+p=argparse.ArgumentParser(description=__doc__);p.add_argument('--report');p.add_argument('--a11y',action='store_true');p.add_argument('--server-dir',type=pathlib.Path);p.add_argument('--debug',action='store_true');p.add_argument('--capacity-only',action='store_true');p.add_argument('--malformed-only',action='store_true');p.add_argument('--focus-only',type=int,choices=[390,1280],help='Run only focused response ownership diagnostics at one width');args=p.parse_args()
 server_dir=args.server_dir.resolve() if args.server_dir else ROOT/'server'
 with socket.socket() as sock:sock.bind(('127.0.0.1',0));port=sock.getsockname()[1]
 base=f'http://127.0.0.1:{port}';checks=[];scans=[];receipts=[]
@@ -27,7 +27,7 @@ try:
  mark={'uid':'dhp183','ref':dhp['segments'][0]['ref'],'offset':0,'source_commit':revision(dhp),'title':dhp['title'],'note':PRIVATE+' durable'}
  with sync_playwright() as pw:
   browser=pw.chromium.launch(executable_path=os.environ.get('PALI_BROWSER','/usr/bin/chromium'),headless=True);expect.set_options(timeout=15000)
-  contexts=[(390,'light')] if args.capacity_only else [(args.focus_only,'light')] if args.focus_only else [(390,'light')] if args.debug else [(390,'light'),(1280,'light')]+([(390,'dark'),(1280,'dark')] if args.a11y else [])
+  contexts=[(390,'light')] if args.capacity_only or args.malformed_only else [(args.focus_only,'light')] if args.focus_only else [(390,'light')] if args.debug else [(390,'light'),(1280,'light')]+([(390,'dark'),(1280,'dark')] if args.a11y else [])
   for width,theme in contexts:
    def passed(label):checks.append({'width':width,'theme':theme,'check':label});print(f'{width}px {theme}: {label}',flush=True)
    def environment(failure=None,mark_override=None):
@@ -77,7 +77,7 @@ try:
     if args.a11y:
      page.add_script_tag(path=str(ROOT/'node_modules/axe-core/axe.min.js'));data=page.evaluate("async()=>await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})");scans.append({'width':width,'theme':theme,'state':label,'violations':[{'id':v['id'],'targets':[n['target'] for n in v['nodes']]} for v in data['violations']]})
    def recovery(page):return page.get_by_role('region',name=RECOVERY,exact=True)
-   if width==390 and theme=='light' and not args.debug and not args.focus_only:
+   if width==390 and theme=='light' and not args.debug and not args.focus_only and not args.malformed_only:
     fixture_code="import{readFileSync}from'node:fs';import{capacityFixture}from'./scripts/web-reader-draft-fixtures.mjs';const mark=JSON.parse(readFileSync(0,'utf8'));console.log(JSON.stringify(capacityFixture(mark)));"
     fixture=json.loads(subprocess.check_output(['node','--input-type=module','-e',fixture_code],cwd=ROOT,input=json.dumps(mark).encode()))
     context,page,state,attach=environment(mark_override=fixture['mark']);session=context.new_cdp_session(page);session.send('Page.enable')
@@ -106,7 +106,7 @@ try:
     audit(page,state,'capacity rejection warning and exact-base discard cleanup');passed('synthetic memory-session capacity: unrelated discard keeps unjournaled-edit warning; active Discard clears older exact-base recovery without reviving it on reload or deleting other bases')
     session.detach();context.close()
    if args.capacity_only:continue
-   if not args.focus_only:
+   if not args.focus_only and not args.malformed_only:
     # Real source link and reload boundary; the external destination is inert test transport.
     context,page,state,attach=environment();saved(page);draft=PRIVATE+' reload';note(page).fill(draft)
     assert entries(page)==[{'bookmark':mark,'draft':draft}] and local(page)['saved']==[mark]
@@ -135,7 +135,8 @@ try:
     new_local=local(a);new_local['saved']=[];a.evaluate('x=>localStorage.setItem(x.key,JSON.stringify(x.data))',{'key':KEY,'data':new_local});a.reload();expect(recovery(a)).to_be_visible();expect(note(a)).to_have_count(0);assert local(a)['saved']==[];assert export(a,'Download recovered notes')['entries']==[{'bookmark':mark,'draft':draft_a}]
     audit(a,state,'missing-base quarantine');passed('missing saved bookmark leaves the original draft recoverable and exportable without recreating a bookmark');context.close()
     if theme=='dark':continue
-    for failure in ['blocked','quota','malformed']:
+   if not args.focus_only and theme=='light':
+    for failure in (['malformed'] if args.malformed_only else ['blocked','quota','malformed']):
      context,page,state,attach=environment(failure);saved(page);old_raw=journal_raw(page);value=PRIVATE+' '+failure;note(page).fill(value);page.keyboard.press('End');expect(recovery(page)).to_be_visible();expect(recovery(page)).to_contain_text(re.compile('export|download',re.I))
      assert journal_raw(page)==old_raw and local(page)['saved']==[mark];assert export(page)['saved'][0]['note']==value
      if failure=='malformed':
@@ -145,8 +146,16 @@ try:
      try:page.goto(base+'/?unsafe-leave=1#saved')
      except PlaywrightError:pass
      assert state['cancel_leave'] is False and 'beforeunload' in state['dialogs'] and page.url==old_url;expect(note(page)).to_have_value(value)
+     if failure=='malformed' and width==390:
+      page.get_by_role('button',name='Discard unreadable recovery',exact=True).click();confirmation=page.get_by_role('group',name='Confirm unsaved draft discard',exact=True)
+      expect(confirmation).to_contain_text('ENTIRE unreadable recovery record');expect(confirmation).to_contain_text('several old drafts');confirmation.get_by_role('button',name='Cancel discard',exact=True).click()
+      assert journal_raw(page)==old_raw;expect(note(page)).to_have_value(value)
+      page.get_by_role('button',name='Discard unreadable recovery',exact=True).click();page.get_by_role('button',name='Discard this recovered draft',exact=True).click()
+      assert entries(page)==[{'bookmark':mark,'draft':value}] and local(page)['saved']==[mark];expect(note(page)).to_have_value(value)
+      page.reload();expect(note(page)).to_have_value(value);assert entries(page)==[{'bookmark':mark,'draft':value}] and local(page)['saved']==[mark]
      page.goto(base+'/#about');saved(page);expect(note(page)).to_have_value(value)
      audit(page,state,failure+' recovery failure preserves raw journal and memory');passed(failure+': visible session-recovery warning, unchanged old raw data, memory/export and unsafe-leave guard');context.close()
+   if args.malformed_only:continue
    # Actual held MCP source responses: subsequent user focus owns completion and errors.
    context,page,state,attach=environment();saved(page);note(page).fill(PRIVATE+' focus')
    def hold(mode='success',ignore=False):

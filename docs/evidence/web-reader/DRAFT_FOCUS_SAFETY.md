@@ -120,3 +120,12 @@ Existing regressions passed: core173,compact45,script-refresh24,storage38 and
 note-editing64. Documentation/export checks passed19. Independent code review
 found and resolved both capacity/base-clearing and stale-warning defects. Dev
 advances only after successful CI on the exact reviewed integration commit.
+
+The first integration CI exposed two obsolete browser expectations: chapters
+and backup-conflict tests assumed that reload discarded unsaved notes. Those
+checks now assert exact recovered draft text alongside unchanged durable saved
+records. Backup checks also retain selected-draft retirement and recovery of
+unselected drafts. No source, privacy or menu assertion was removed, and the
+journal is not cleared merely to make a reused test page appear fresh. The
+malformed-record path additionally confirms the scope of discarding an entire
+unreadable record while preserving current edits and saved notes.

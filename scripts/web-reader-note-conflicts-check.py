@@ -186,8 +186,12 @@ try:
             assert profile(page)['saved'][0]['note'].encode() == incoming[0]['note'].encode() and '\r\n' in profile(page)['saved'][0]['note']
             passed('keyboard-selected incoming raw Unicode/CRLF and explicit empty clearing replace only note strings; selected empty/nonempty drafts retire after save while unselected drafts and all metadata persist')
             page.reload(); expect(page.get_by_role('heading', name='Study backup', exact=True)).to_be_visible()
-            assert download(page) == backup(expected, marks[:1], current_resume); privacy(page, state)
-            passed('reload retains the exact confirmed incoming note bytes and existing source metadata without source/catalogue requests')
+            assert profile(page) == {**seed, 'saved': expected}
+            assert download(page) == backup(effective(expected, remaining), marks[:1], current_resume)
+            recovered = page.evaluate("JSON.parse(sessionStorage.getItem('pali-library-note-drafts-v1') || '{\"entries\":[]}').entries")
+            assert {identity(entry['bookmark']): entry['draft'] for entry in recovered} == remaining
+            privacy(page, state)
+            passed('reload retains confirmed incoming saved-note bytes and source metadata, retires selected drafts and restores only unselected session drafts without source/catalogue requests')
             context.close()
 
             # Selections survive pagination, including a later-page actual book ref.

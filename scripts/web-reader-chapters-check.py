@@ -189,10 +189,10 @@ try:
             before = len(state['calls']); page.reload(); ready(page, targets[roots['Vism']['chapters'][22]['citation']])
             assert len(state['calls']) == before + 1 and state['calls'][-1]['arguments']['limit'] == 30
             load_menu(page, targets[roots['Vism']['chapters'][22]['citation']], roots['Vism']); unchanged(page, state, raw)
-            # Reload deliberately starts a new in-memory draft Map. Durable data stays exact;
-            # explicitly begin a fresh tab draft for the remaining navigation checks.
-            saved(page); expect(page.get_by_label('Your personal note', exact=True)).to_have_value(marker['note'])
-            page.get_by_label('Your personal note', exact=True).fill(PRIVATE + 'unsaved exact draft')
+            # Reload restores this tab's exact journaled draft without changing its saved base.
+            saved(page); expect(page.get_by_label('Your personal note', exact=True)).to_have_value(PRIVATE + 'unsaved exact draft')
+            assert json.loads(page.evaluate('localStorage.getItem("pali-library-v1")'))['saved'] == seed['saved']
+            unchanged(page, state, raw)
             passed('Vism1→12→23 opens literal returned citations across both files with revision-only pins; reloading a child fetches its parent only after explicit Choose chapter')
 
             for name, index in [('Abhidh-s', 8), ('abhidhammatthasangaho', 17)]:
