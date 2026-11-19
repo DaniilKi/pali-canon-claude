@@ -72,6 +72,8 @@ def check_source(data, uid):
     assert data['license'] == 'CC BY-NC-SA 4.0' and data['license_url'] == CANONICAL_LICENSE
     assert 'Walters' in data['attribution'] and 'Whitman College' in data['attribution'] and data['changes']
     assert all(data[key] == row[key] for key in PINS)
+    assert data['mapping_notes'] == row['mapping_notes']
+    assert all(note in data['notes'] for note in row['mapping_notes'])
     notes = data['translator_notes']
     assert [note['number'] for note in notes] == list(range(1, row['note_count'] + 1))
     assert digest(json.dumps(notes, ensure_ascii=False, separators=(',', ':'))) == row['notes_sha256']
@@ -220,6 +222,8 @@ with TemporaryDirectory(prefix='pali-apadana-browser-') as work:
                             body.wait_for()
                             rendered = body.text_content()
                             assert rendered == response['text'] and digest(rendered) == rows[uid]['body_sha256']
+                            notices = page.locator('#study > .notice').all_text_contents()
+                            assert all(any(note in notice for notice in notices) for note in rows[uid]['mapping_notes']), 'Edition differences must remain visible outside poem wording'
                             if uid in ('thi-ap7', 'thi-ap9'):
                                 head = rendered.split('\n', 1)[0]
                                 assert head.startswith(f"[{rows[uid]['poem']}. ") and head.endswith(']') and '.diacritics' not in head

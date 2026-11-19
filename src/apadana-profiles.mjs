@@ -31,7 +31,8 @@ export const APADANA_PROFILES = deepFreeze({
     "root_sha256": "4417e8981c281ed284efb907df388f95b50352a4cfd9ac2141c819250a642f82",
     "mapping_notes": [
       "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyyāla remains abbreviated; publisher expands repeated stanzas.",
-      "Invocation and chapter preface are publisher paratext, not substantive poem stanzas."
+      "Invocation and chapter preface are publisher paratext, not substantive poem stanzas.",
+      "Publisher verse 2's main wording does not include the additional thousandfold count present in VRI thi-ap1/7; translator note 6 records the corresponding BJTS count."
     ]
   },
   "thi-ap2": {
@@ -164,7 +165,8 @@ export const APADANA_PROFILES = deepFreeze({
     "root_sha256": "f5b4ead53dafba4dcf409c20c8baeca54ff3df56306932813ead09a02c50a782",
     "mapping_notes": [
       "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyyāla remains abbreviated; publisher expands repeated stanzas.",
-      "Verse71: publisher follows BJTS journey reading; VRI root differs."
+      "Verse71: publisher follows BJTS journey reading; VRI root differs.",
+      "Publisher verse 83 describes freedom from bad rebirth; VRI thi-ap8/14 instead has dubbaṇṇiyaṃ, concerning unattractive appearance. The publisher's edition-specific wording and the VRI reading are retained separately."
     ]
   },
   "thi-ap9": {
@@ -191,7 +193,9 @@ export const APADANA_PROFILES = deepFreeze({
     "root_sha256": "e0ffdb846c3174017d22ef7cdd3095b4af1391d80694b90ea0b8f8fd13fb9ce0",
     "mapping_notes": [
       "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyyāla remains abbreviated; publisher expands repeated stanzas.",
-      "Verse99: publisher PTS hundred-by-sixty leagues vs VRI/BJTS sixty-by-thirty; translator note8 preserves the difference."
+      "Verse99: publisher PTS hundred-by-sixty leagues vs VRI/BJTS sixty-by-thirty; translator note8 preserves the difference.",
+      "Publisher verse 101 depicts standing and looking eastward; VRI thi-ap9/12 instead describes sitting while turned away (parammukhā nisīditvā). No posture or direction alignment is asserted.",
+      "Publisher verse 102 concerns deeds done well or badly; VRI thi-ap9/13 instead has good and bad destinations (sugataduggate). Translator note 11 records the BJTS destination reading and remains separate from the verse."
     ]
   }
 });

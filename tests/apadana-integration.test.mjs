@@ -16,6 +16,17 @@ const uid = 'thi-ap1', id = 'ap:chapter-4/poem-001', profile = APADANA_PROFILES[
 const unit = () => canon.resolve(uid).unit;
 const choice = () => canon.describe(unit()).english[0];
 
+test('per-poem edition disclosures identify the independently reviewed VRI differences', () => {
+  const required = {
+    'thi-ap1': [['verse 2', 'thi-ap1/7', 'note 6']],
+    'thi-ap8': [['verse 83', 'thi-ap8/14', 'dubbaṇṇiyaṃ']],
+    'thi-ap9': [['verse 101', 'thi-ap9/12', 'parammukhā nisīditvā'], ['verse 102', 'thi-ap9/13', 'note 11']],
+  };
+  for (const [owner, differences] of Object.entries(required)) {
+    for (const terms of differences) assert.ok(APADANA_PROFILES[owner].mapping_notes.some(note => terms.every(term => note.includes(term))), owner + ': missing edition-specific disclosure');
+  }
+});
+
 test('seven whole Apadāna mappings and publisher URLs, with held outliers left empty', () => {
   const expected = [1, 2, 3, 6, 7, 8, 9];
   const actual = Object.entries(canon.load().translations)
@@ -110,4 +121,17 @@ test('optional pinned publisher bytes reach reading, continuation and quotation 
   assert.ok(whole.publisher_paratext);
   const verified = await verifyQuote({text: whole.text.split('\n\n')[1].split('\n')[0], language: 'english', texts: [uid], translation_ids: [id]});
   assert.ok(verified.matches.length);
+  globalThis.fetch = async url => {
+    const selected = Object.values(APADANA_PROFILES).find(p => p.raw_url === url.href);
+    assert.ok(selected, 'No unreviewed source fetch');
+    return new Response(readFileSync(join(official, 'src/_poems/chapter-4/poem-' + String(selected.poem).padStart(3, '0') + '.md')));
+  };
+  for (const [owner, selected] of Object.entries(APADANA_PROFILES)) {
+    const result = await english.translation(canon.resolve(owner).unit, canon.translationId(selected));
+    assert.deepEqual(result.mapping_notes, selected.mapping_notes);
+    for (const note of selected.mapping_notes) {
+      assert.ok(result.notes.includes(note), owner + ': missing visible edition caveat');
+      assert.ok(!result.text.includes(note), owner + ': editorial caveat entered poem wording');
+    }
+  }
 });
