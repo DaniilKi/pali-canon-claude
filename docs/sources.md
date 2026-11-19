@@ -298,3 +298,6 @@ translator notes accompany retrieval; these terms are not Creative Commons.
 Finite question extraction, original body anchors and source/root/notice pins
 prevent a whole anthology from standing in for one question. No English bodies
 are bundled. [Evidence, rights and limitations](data/milinda-reviewed-questions.md).
+
+
+D238 adds one complete substantive discourse, SN 27.5, from the exact fifth chapter of the ATI Upakkilesa anthology. Its ©1994 Thanissaro CC BY-NC 4.0 notice and full attribution remain intact. The publisher title Vedana and VRI title Samphassaja, anthology/individual PTS differences, unchanged VRI abbreviations and untranslated inline ordinal are disclosed. Other anthology chapters are not returned as this discourse. [Independent review and exact scope](data/sn27-feelings-section.md).

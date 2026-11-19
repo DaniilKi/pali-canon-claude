@@ -125,6 +125,16 @@ const fetchAtiSection = (link, row) => liveCache.wrap(`ati-section:${sectionHash
     ...selected, attribution: notice.citation, license: notice.licensing };
 });
 
+function reviewedSectionFor(link, unit) {
+  if (!link.section) return undefined;
+  const snapshot = load();
+  // Recheck before any cached read, including a same-translator outage fallback.
+  validateSectionRegistry(snapshot.sectionRegistry, snapshot.canon, snapshot.translations, unit => segmentsFromCorpus(unit, snapshot.canon));
+  const row = snapshot.sectionRegistry.links.find(row => row.unit_id === unit.id && row.anchor === link.section.anchor);
+  if (!row) throw Error('The reviewed ATI question has no exact owner. No translation was returned.');
+  return row;
+}
+
 async function fetchDhammatalksLive(url) {
   const { body } = await fetchMirrors([url]);
   const start = body.search(/<div\b[^>]*id=["']sutta["']/i);
@@ -201,14 +211,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
   let result;
   const notes = via && !declaredScope ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   if (link.mapping_note) notes.push(link.mapping_note);
-  let sectionRow;
-  if (link.section) {
-    const snapshot = load();
-    // Recheck the complete registry/root/binding snapshot even before a cached section is used.
-    validateSectionRegistry(snapshot.sectionRegistry, snapshot.canon, snapshot.translations, unit => segmentsFromCorpus(unit, snapshot.canon));
-    sectionRow = snapshot.sectionRegistry.links.find(row => row.unit_id === unit.id && row.anchor === link.section.anchor);
-    if (!sectionRow) throw Error('The reviewed ATI question has no exact owner. No translation was returned.');
-  }
+  let sectionRow = reviewedSectionFor(link, unit);
   try {
     result = link.source === 'ati' ? await (sectionRow ? fetchAtiSection(link, sectionRow) : declaredScope?.kind === 'partial_unit' ? fetchAtiPartial(link.path,declaredScope.extractor) : fetchAti(link.path))
       : link.source === 'anandajoti' ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1)
@@ -221,11 +224,14 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
     if (!sameTranslator) throw new Error(`Could not retrieve the translation (${error.message}). The Pāli text is still available offline with get_text; try again later or choose another translation_id.`);
     if (offset > 0) throw new Error(`Could not continue the requested translation version (${error.message}). Its character offset cannot be transferred to the earlier Access to Insight version. Retry this translation_id later, or start another translation at offset 0. The Pāli text is still available offline with get_text.`);
     try {
-      result = await fetchAti(sameTranslator.path);
+      const fallbackSection = reviewedSectionFor(sameTranslator, unit);
+      result = await (fallbackSection ? fetchAtiSection(sameTranslator, fallbackSection) : fetchAti(sameTranslator.path));
+      sectionRow = fallbackSection;
     } catch {
       throw new Error('dhammatalks.org and Access to Insight (including its mirrors) are all unreachable right now. The Pāli text is still available offline with get_text.');
     }
     notes.push(`dhammatalks.org could not be reached (${error.message}); showing Ṭhānissaro Bhikkhu's earlier version from Access to Insight instead.`);
+    if (sameTranslator.mapping_note && sameTranslator.mapping_note !== link.mapping_note) notes.push(sameTranslator.mapping_note);
     link = sameTranslator;
   }
   if (declaredScope) {

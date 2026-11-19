@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {milindaSourceUnit,isMilindaPageId,translatorNotes} from '../web/milinda-sources.mjs';
 import {comparisonChoices,validateComparisonPage} from '../web/translation-comparison.mjs';
 import {validateEnglishPage} from '../web/translation-policy.mjs';
-const rows=JSON.parse(readFileSync('scripts/canon/reviewed_ati_sections.json','utf8')).links;
+const rows=JSON.parse(readFileSync('scripts/canon/reviewed_ati_sections.json','utf8')).links.filter(row=>row.unit_id.startsWith('mil'));
 const id=row=>'ati:'+row.path+'#'+row.anchor;
 const choice=row=>({translation_id:id(row),translator:row.translator,whole_unit_coverage:true,source_section:row.section});
 const page=row=>({translation_id:id(row),translator:row.translator,text_id:row.unit_id,source_section:row.section,text:'Synthetic policy fixture only.',attribution:'Synthetic attribution.',license:'Synthetic licence.',offset:0,limit:500,prefix_sha256:'a'.repeat(64),next_offset:null,translator_notes:Array.from({length:row.section.note_count},(_,i)=>({number:i+1,text:'Synthetic policy note '+(i+1)+'.'}))});

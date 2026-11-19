@@ -50,8 +50,8 @@ test('Upatissa adds one exact partial while preserving all twenty previous descr
  assert.throws(()=>partialScope(reviewedPartialLink(row,manifest),unit,all,{...canon.source(),commit:'changed'}),/Invalid or unreviewed/);
  const choice=canon.describe(unit).english.find(c=>c.translation_id==='ati:'+row.path),accepted=scopeDescriptor(choice,unit.id);assert.equal(accepted.flags.allow_partial,true);
  for(const field of ['extractor','notice_sha256','pali_sha256']){const bad=structuredClone(choice);bad.translation_scope[field]='changed';assert.throws(()=>scopeDescriptor(bad,unit.id),/unsupported|incomplete/);}
- const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links],[2552,1422,1845,21,15,12]);
- const daily=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([daily.rotation.of,daily.text.id],[1257,'sn12.31']);
+ const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links],[2553,1423,1846,21,15,12]);
+ const daily=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([daily.rotation.of,daily.text.id],[1258,'iti39']);
  assert.deepEqual(canon.browse('english',{collection:'vinaya',availability:'linked'}).items.map(i=>i.id),['pli-tv-kd1','pli-tv-kd6','pli-tv-kd8']);assert.equal(canon.browse('english',{collection:'vinaya',availability:'whole'}).total,0);
 });
 

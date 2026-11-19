@@ -20,6 +20,7 @@ PROFILE = 'ati-kelly-milinda-v1'
 PAGES = {
     '/tipitaka/kn/miln/miln.2x.kell': '44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd',
     '/tipitaka/kn/miln/miln.3x.kell': '5e0d563f4e3403167dbb73ec80190bdeb1592895d4af2e5141675692fec42fe5',
+    '/tipitaka/sn/sn27/sn27.001-010.than': '4cda764c8a27a64faf96f6cd2ce0dc08808816ab80d329f3ad264b4516ee1e79',
 }
 # Source/body identities were reviewed bilingually, including adjacent roots.
 # The publisher's numbering is not the VRI numbering (notably II.1.14).
@@ -38,6 +39,7 @@ IDENTITIES = {
     'mil3.5.7': ('3', 'miln-3-5-07', 11, 0, 2, 4),
     'mil3.7.5': ('3', 'miln-3-7-05', 21, 1, 2, 5),
     'mil3.7.8': ('3', 'miln-3-7-08', 7, 0, 2, 3),
+    'sn27.5': ('sn27', 'sn27.005', 1, 0, 2, 2),
 }
 SECTION_FIELDS = {
     'version', 'status', 'unit_id', 'profile', 'anchor', 'heading',
@@ -71,16 +73,17 @@ def manifest_rows(manifest=MANIFEST):
         if not identity or uid in seen or not isinstance(section, dict) or not isinstance(root, dict):
             raise ValueError('Invalid or duplicate reviewed ATI section owner')
         page, anchor, paragraphs, notes, first, last = identity
-        path = '/tipitaka/kn/miln/miln.' + page + 'x.kell'
+        sn27 = uid == 'sn27.5'
+        path = '/tipitaka/sn/sn27/sn27.001-010.than' if sn27 else '/tipitaka/kn/miln/miln.' + page + 'x.kell'
         if (row.get('path') != path or row.get('anchor') != anchor
                 or row.get('source_html_sha256') != PAGES[path]
-                or row.get('translator') != 'John Kelly'
-                or row.get('license') != 'Kelly-free-distribution-2005'
+                or row.get('translator') != ('Thanissaro Bhikkhu' if sn27 else 'John Kelly')
+                or row.get('license') != ('CC-BY-NC' if sn27 else 'Kelly-free-distribution-2005')
                 or not all(isinstance(row.get(k), str) and row[k].strip() for k in ['mapping_note', 'source_reference', 'english_title'])
                 or root.get('id') != uid or set(root) != {'id', 'title', 'vri', 'book', 'start', 'end', 'root_blocks_sha256'}
                 or set(section) != SECTION_FIELDS or type(section.get('version')) is not int or section['version'] != 1
                 or section.get('status') != 'reviewed' or section.get('unit_id') != uid
-                or section.get('profile') != PROFILE or section.get('anchor') != anchor
+                or section.get('profile') != ('ati-sn27-feelings-v1' if sn27 else PROFILE) or section.get('anchor') != anchor
                 or section.get('source_commit') != VRI_COMMIT
                 or section.get('heading') != row['source_reference']
                 or type(section.get('paragraph_count')) is not int or section['paragraph_count'] != paragraphs
@@ -90,11 +93,13 @@ def manifest_rows(manifest=MANIFEST):
                        [root.get('root_blocks_sha256')] + [section.get(k) for k in ['section_html_sha256', 'text_sha256', 'notes_sha256', 'notice_sha256', 'pali_sha256']])):
             raise ValueError('Invalid finite reviewed ATI question profile')
         paratext = row.get('untranslated_paratext')
-        expected_refs = ([f'{uid}/{last+1}', f'{uid}/{last+2}', f'{uid}/{last+3}']
+        expected_refs = ([f'{uid}/2'] if sn27 else [f'{uid}/{last+1}', f'{uid}/{last+2}', f'{uid}/{last+3}']
                          if uid == 'mil3.3.14' else [f'{uid}/{last+1}'])
         if (not isinstance(paratext, list) or [p.get('ref') for p in paratext if isinstance(p, dict)] != expected_refs
                 or any(not isinstance(p, dict) or set(p) != {'ref', 'text'} or not isinstance(p.get('text'), str) or not p['text'].strip() for p in paratext)):
             raise ValueError('Missing exact untranslated root paratext declaration')
+        if sn27 and paratext != [{'ref': 'sn27.5/2', 'text': 'Pañcamaṃ.'}]:
+            raise ValueError('SN27.5 exact inline ordinal declaration changed')
         seen.add(uid)
     return m
 
@@ -127,7 +132,7 @@ def reviewed_section_links(canon, ati_root, manifest=MANIFEST):
     for row in m['links']:
         unit, root = units.get(row['unit_id']), row['root']
         if (not unit or unit.get('approximate') or unit.get('kind') or unit.get('members')
-                or unit.get('collection') != 'mil'
+                or unit.get('collection') != ('sn' if row['unit_id'] == 'sn27.5' else 'mil')
                 or any(unit.get(k) != root.get(k) for k in ['id', 'title', 'vri', 'book', 'start', 'end'])):
             raise ValueError('Reviewed ATI section exact root identity changed')
         blocks = canon['books'][unit['book']]['blocks'][unit['start']:unit['end']]

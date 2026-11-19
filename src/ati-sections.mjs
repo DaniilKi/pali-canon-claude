@@ -1,7 +1,7 @@
-/** Only fourteen reviewed Kelly question sections, with their own notes kept outside the body. */
+/** Finite reviewed ATI sections; owned notes never become translated body text. */
 import { createHash } from 'node:crypto';
 import { plainText } from './http.mjs';
-import { ATI_SECTION_PROFILE, ATI_SECTION_PROFILES } from './ati-section-profiles.mjs';
+import { SN27_SECTION_PROFILE, ATI_SECTION_PROFILES } from './ati-section-profiles.mjs';
 import { sectionHash } from './ati-section-registry.mjs';
 const rawHash = value => createHash('sha256').update(value).digest('hex');
 const fail = () => { throw Error('The reviewed ATI question text, structure, notes or source changed. No question translation was returned.'); };
@@ -31,11 +31,17 @@ function parse(chunk) {
 const withoutNoteTags = html => html.replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/g, '');
 export function extractAtiSection(html, row) {
   const profile = ATI_SECTION_PROFILES.find(value => value.unit_id === row?.unit_id), p = row?.section;
-  if (!profile || row.path !== profile.path || row.anchor !== profile.anchor || p?.profile !== ATI_SECTION_PROFILE || p.anchor !== row.anchor || p.paragraph_count !== profile.paragraphs || p.note_count !== profile.notes || typeof html !== 'string' || row.source_html_sha256 !== profile.source_html_sha256 || rawHash(html) !== row.source_html_sha256) fail();
+  if (!profile || row.path !== profile.path || row.anchor !== profile.anchor || p?.profile !== profile.profile || p.anchor !== row.anchor || p.paragraph_count !== profile.paragraphs || p.note_count !== profile.notes || typeof html !== 'string' || row.source_html_sha256 !== profile.source_html_sha256 || rawHash(html) !== row.source_html_sha256) fail();
   const begin = '<!-- BEGIN COPYRIGHTED TEXT CHUNK -->', end = '<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->';
   if (html.split(begin).length !== 2 || html.split(end).length !== 2 || html.indexOf(end) <= html.indexOf(begin)) fail();
   const chunk = html.slice(html.indexOf(begin) + begin.length, html.indexOf(end)), root = parse(chunk), chapters = elements(root);
-  if (root.children.some(value => typeof value === 'string' && value.trim()) || chapters.length !== (profile.path.includes('2x') ? 10 : 6) || chapters.some(node => node.tag !== 'div' || JSON.stringify(node.attrs) !== '{"class":"chapter"}')) fail();
+  if (root.children.some(value => typeof value === 'string' && value.trim()) || chapters.length !== (profile.profile === SN27_SECTION_PROFILE || profile.path.includes('2x') ? 10 : 6) || chapters.some(node => node.tag !== 'div' || JSON.stringify(node.attrs) !== '{"class":"chapter"}')) fail();
+  if (profile.profile === SN27_SECTION_PROFILE) {
+    for (const [i, chapter] of chapters.entries()) {
+      const children = elements(chapter), heading = children[0], body = children[1], anchor = heading && elements(heading)[0];
+      if (chapter.children.some(value => typeof value === 'string' && value.trim()) || children.length !== 2 || heading.tag !== 'h1' || Object.keys(heading.attrs).length || elements(heading).length !== 1 || heading.children.some(value => typeof value === 'string' && value.trim()) || anchor?.tag !== 'a' || JSON.stringify(anchor.attrs) !== JSON.stringify({id: `sn27.${String(i + 1).padStart(3, '0')}`}) || elements(anchor).length || body.tag !== 'p' || Object.keys(body.attrs).length || elements(body).length) fail();
+    }
+  }
   const matches = chapters.filter(chapter => descendants(chapter).some(node => node.tag === 'a' && node.attrs.id === row.anchor));
   if (matches.length !== 1) fail();
   const chapter = matches[0], children = elements(chapter), heading = children[0];

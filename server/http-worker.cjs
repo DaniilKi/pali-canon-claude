@@ -22226,6 +22226,7 @@ var import_node_crypto = require("node:crypto");
 var ATI_SECTION_PROFILE = "ati-kelly-milinda-v1";
 var ATI_SECTION_COMMIT = "45fedca341497120651efa20e756b04a13e61089";
 var ATI_SECTION_LICENSE = "Kelly-free-distribution-2005";
+var SN27_SECTION_PROFILE = "ati-sn27-feelings-v1";
 var page = "/tipitaka/kn/miln/miln.";
 var rows = [
   ["mil3.1.8", "2x", "miln-2-1-08", 9, 0],
@@ -22243,14 +22244,30 @@ var rows = [
   ["mil3.7.5", "3x", "miln-3-7-05", 21, 1],
   ["mil3.7.8", "3x", "miln-3-7-08", 7, 0]
 ];
-var ATI_SECTION_PROFILES = Object.freeze(rows.map(([unit_id, part, anchor, paragraphs, notes]) => Object.freeze({
+var ATI_SECTION_PROFILES = Object.freeze([...rows.map(([unit_id, part, anchor, paragraphs, notes]) => Object.freeze({
   unit_id,
   path: page + part + ".kell",
   anchor,
   paragraphs,
   notes,
+  profile: ATI_SECTION_PROFILE,
+  collection: "mil",
+  translator: "John Kelly",
+  license: ATI_SECTION_LICENSE,
   source_html_sha256: part === "2x" ? "44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd" : "5e0d563f4e3403167dbb73ec80190bdeb1592895d4af2e5141675692fec42fe5"
-})));
+})), Object.freeze({
+  unit_id: "sn27.5",
+  path: "/tipitaka/sn/sn27/sn27.001-010.than",
+  anchor: "sn27.005",
+  paragraphs: 1,
+  notes: 0,
+  profile: SN27_SECTION_PROFILE,
+  collection: "sn",
+  translator: "Thanissaro Bhikkhu",
+  license: "CC-BY-NC",
+  source_html_sha256: "4cda764c8a27a64faf96f6cd2ce0dc08808816ab80d329f3ad264b4516ee1e79",
+  inline_paratext: "Pa\xF1cama\u1E43."
+})]);
 var isAtiSectionPath = (path) => ATI_SECTION_PROFILES.some((row) => row.path === path);
 
 // src/ati-section-registry.mjs
@@ -22283,12 +22300,15 @@ function validateSectionRegistry(registry2, corpus, translations, readSegments) 
   for (const row of registry2.links) {
     if (!exactKeys(row, ["unit_id", "path", "anchor", "english_title", "source_reference", "translator", "license", "mapping_note", "root", "source_html_sha256", "untranslated_paratext", "section"])) fail();
     const profile = ATI_SECTION_PROFILES.find((value) => value.unit_id === row.unit_id), p = row.section, root = row.root, unit = units.get(row.unit_id);
-    if (!profile || seen.has(row.unit_id) || row.path !== profile.path || row.anchor !== profile.anchor || row.source_html_sha256 !== profile.source_html_sha256 || row.translator !== "John Kelly" || row.license !== ATI_SECTION_LICENSE || !text(row.english_title) || !text(row.source_reference) || !text(row.mapping_note) || !unit || unit.collection !== "mil" || unit.approximate || unit.kind || unit.members) fail();
+    if (!profile || seen.has(row.unit_id) || row.path !== profile.path || row.anchor !== profile.anchor || row.source_html_sha256 !== profile.source_html_sha256 || row.translator !== profile.translator || row.license !== profile.license || !text(row.english_title) || !text(row.source_reference) || !text(row.mapping_note) || !unit || unit.collection !== profile.collection || unit.approximate || unit.kind || unit.members) fail();
     seen.add(row.unit_id);
     if (!exactKeys(root, ["id", "book", "start", "end", "title", "vri", "root_blocks_sha256"]) || ["id", "book", "start", "end", "title", "vri"].some((key3) => root[key3] !== unit[key3]) || !sha(root.root_blocks_sha256) || sectionHash(corpus.books[unit.book].blocks.slice(unit.start, unit.end)) !== root.root_blocks_sha256) fail();
-    if (!exactKeys(p, ["version", "status", "unit_id", "profile", "anchor", "heading", "paragraph_count", "note_count", "section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256", "first_ref", "last_ref", "source_commit"]) || p.version !== 1 || p.status !== "reviewed" || p.unit_id !== unit.id || p.profile !== ATI_SECTION_PROFILE || p.anchor !== row.anchor || p.heading !== row.source_reference || p.paragraph_count !== profile.paragraphs || p.note_count !== profile.notes || p.source_commit !== registry2.vri_commit || ["section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256"].some((key3) => !sha(p[key3]))) fail();
+    if (!exactKeys(p, ["version", "status", "unit_id", "profile", "anchor", "heading", "paragraph_count", "note_count", "section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256", "first_ref", "last_ref", "source_commit"]) || p.version !== 1 || p.status !== "reviewed" || p.unit_id !== unit.id || p.profile !== profile.profile || p.anchor !== row.anchor || p.heading !== row.source_reference || p.paragraph_count !== profile.paragraphs || p.note_count !== profile.notes || p.source_commit !== registry2.vri_commit || ["section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256"].some((key3) => !sha(p[key3]))) fail();
     const segments2 = readSegments(unit).map(({ ref, type, text: text2 }) => ({ ref, type, text: text2 })), first = segments2.findIndex((segment) => segment.ref === p.first_ref), last = segments2.findIndex((segment) => segment.ref === p.last_ref);
-    if (first !== 1 || last < first || segments2[0].type !== "heading" || segments2.slice(first, last + 1).some((segment) => segment.type !== "prose") || sectionHash(segments2.slice(first, last + 1)) !== p.pali_sha256 || !Array.isArray(row.untranslated_paratext) || !row.untranslated_paratext.length || stable2(segments2.slice(last + 1).map(({ ref, text: text2 }) => ({ ref, text: text2 }))) !== stable2(row.untranslated_paratext)) fail();
+    if (first !== 1 || last < first || segments2[0].type !== "heading" || segments2.slice(first, last + 1).some((segment) => segment.type !== "prose") || sectionHash(segments2.slice(first, last + 1)) !== p.pali_sha256 || !Array.isArray(row.untranslated_paratext) || !row.untranslated_paratext.length) fail();
+    if (profile.inline_paratext) {
+      if (segments2.length !== 2 || first !== 1 || last !== 1 || !segments2[1].text.endsWith(" " + profile.inline_paratext) || stable2(row.untranslated_paratext) !== stable2([{ ref: segments2[1].ref, text: profile.inline_paratext }])) fail();
+    } else if (stable2(segments2.slice(last + 1).map(({ ref, text: text2 }) => ({ ref, text: text2 }))) !== stable2(row.untranslated_paratext)) fail();
   }
   for (const [owner, links] of Object.entries(translations)) for (const link of links) assertRegisteredSection(link, units.get(owner), registry2);
   for (const row of registry2.links) {
@@ -23930,19 +23950,20 @@ function parseUrl(raw) {
     throw new CitationError("Links are understood for suttacentral.net, accesstoinsight.org, dhammatalks.org and ancient-buddhist-texts.net only.");
   }
   if (host === "ancient-buddhist-texts.net") {
-    let path = url.pathname;
+    let path2 = url.pathname;
     try {
-      path = decodeURI(path);
+      path2 = decodeURI(path2);
     } catch {
     }
-    return { kind: "url", host, path: path.replace(/\.htm$/, ""), raw };
+    return { kind: "url", host, path: path2.replace(/\.htm$/, ""), raw };
   }
   if (host === "suttacentral.net") {
     const first = url.pathname.split("/").filter(Boolean)[0] || "";
     if (!/^[a-z][a-z0-9.-]*$/.test(first)) throw new CitationError("Unrecognised SuttaCentral link.");
     return { kind: "uid", uid: first, raw, via: "suttacentral.net" };
   }
-  return { kind: "url", host, path: url.pathname.replace(/\.html?$/, ""), ...host === "accesstoinsight.org" && /^\/tipitaka\/kn\/miln\/miln\.[23]x\.kell\.html$/.test(url.pathname) && url.hash ? { fragment: url.hash.slice(1) } : {}, raw };
+  const path = url.pathname.replace(/\.html?$/, "");
+  return { kind: "url", host, path, ...host === "accesstoinsight.org" && isAtiSectionPath(path) && url.hash ? { fragment: url.hash.slice(1) } : {}, raw };
 }
 function parseEditionPage(raw, text2) {
   const head = text2.match(/^([A-Za-z]+)(?:\.?\s*(ed(?:ition)?)\.?)?[\s.:,]+(.*)$/);
@@ -24963,11 +24984,17 @@ function parse3(chunk) {
 var withoutNoteTags = (html) => html.replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/g, "");
 function extractAtiSection(html, row) {
   const profile = ATI_SECTION_PROFILES.find((value) => value.unit_id === row?.unit_id), p = row?.section;
-  if (!profile || row.path !== profile.path || row.anchor !== profile.anchor || p?.profile !== ATI_SECTION_PROFILE || p.anchor !== row.anchor || p.paragraph_count !== profile.paragraphs || p.note_count !== profile.notes || typeof html !== "string" || row.source_html_sha256 !== profile.source_html_sha256 || rawHash(html) !== row.source_html_sha256) fail2();
+  if (!profile || row.path !== profile.path || row.anchor !== profile.anchor || p?.profile !== profile.profile || p.anchor !== row.anchor || p.paragraph_count !== profile.paragraphs || p.note_count !== profile.notes || typeof html !== "string" || row.source_html_sha256 !== profile.source_html_sha256 || rawHash(html) !== row.source_html_sha256) fail2();
   const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
   if (html.split(begin).length !== 2 || html.split(end).length !== 2 || html.indexOf(end) <= html.indexOf(begin)) fail2();
   const chunk = html.slice(html.indexOf(begin) + begin.length, html.indexOf(end)), root = parse3(chunk), chapters = elements(root);
-  if (root.children.some((value) => typeof value === "string" && value.trim()) || chapters.length !== (profile.path.includes("2x") ? 10 : 6) || chapters.some((node) => node.tag !== "div" || JSON.stringify(node.attrs) !== '{"class":"chapter"}')) fail2();
+  if (root.children.some((value) => typeof value === "string" && value.trim()) || chapters.length !== (profile.profile === SN27_SECTION_PROFILE || profile.path.includes("2x") ? 10 : 6) || chapters.some((node) => node.tag !== "div" || JSON.stringify(node.attrs) !== '{"class":"chapter"}')) fail2();
+  if (profile.profile === SN27_SECTION_PROFILE) {
+    for (const [i, chapter2] of chapters.entries()) {
+      const children2 = elements(chapter2), heading2 = children2[0], body = children2[1], anchor = heading2 && elements(heading2)[0];
+      if (chapter2.children.some((value) => typeof value === "string" && value.trim()) || children2.length !== 2 || heading2.tag !== "h1" || Object.keys(heading2.attrs).length || elements(heading2).length !== 1 || heading2.children.some((value) => typeof value === "string" && value.trim()) || anchor?.tag !== "a" || JSON.stringify(anchor.attrs) !== JSON.stringify({ id: `sn27.${String(i + 1).padStart(3, "0")}` }) || elements(anchor).length || body.tag !== "p" || Object.keys(body.attrs).length || elements(body).length) fail2();
+    }
+  }
   const matches = chapters.filter((chapter2) => descendants(chapter2).some((node) => node.tag === "a" && node.attrs.id === row.anchor));
   if (matches.length !== 1) fail2();
   const chapter = matches[0], children = elements(chapter), heading = children[0];
@@ -25114,6 +25141,14 @@ var fetchAtiSection = (link, row) => liveCache.wrap(`ati-section:${sectionHash({
     license: notice.licensing
   };
 });
+function reviewedSectionFor(link, unit) {
+  if (!link.section) return void 0;
+  const snapshot = load();
+  validateSectionRegistry(snapshot.sectionRegistry, snapshot.canon, snapshot.translations, (unit2) => segmentsFromCorpus(unit2, snapshot.canon));
+  const row = snapshot.sectionRegistry.links.find((row2) => row2.unit_id === unit.id && row2.anchor === link.section.anchor);
+  if (!row) throw Error("The reviewed ATI question has no exact owner. No translation was returned.");
+  return row;
+}
 async function fetchDhammatalksLive(url) {
   const { body } = await fetchMirrors([url]);
   const start2 = body.search(/<div\b[^>]*id=["']sutta["']/i);
@@ -25192,13 +25227,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
   let result;
   const notes = via && !declaredScope ? [`This translation covers the whole ${via.acronym}; ${unit.acronym} is part of it.`] : [];
   if (link.mapping_note) notes.push(link.mapping_note);
-  let sectionRow;
-  if (link.section) {
-    const snapshot = load();
-    validateSectionRegistry(snapshot.sectionRegistry, snapshot.canon, snapshot.translations, (unit2) => segmentsFromCorpus(unit2, snapshot.canon));
-    sectionRow = snapshot.sectionRegistry.links.find((row) => row.unit_id === unit.id && row.anchor === link.section.anchor);
-    if (!sectionRow) throw Error("The reviewed ATI question has no exact owner. No translation was returned.");
-  }
+  let sectionRow = reviewedSectionFor(link, unit);
   try {
     result = link.source === "ati" ? await (sectionRow ? fetchAtiSection(link, sectionRow) : declaredScope?.kind === "partial_unit" ? fetchAtiPartial(link.path, declaredScope.extractor) : fetchAti(link.path)) : link.source === "anandajoti" ? await fetchAnandajoti(link, declaredScope ? 2000001 : offset + limit + 1) : await fetchDhammatalks(link.url);
   } catch (error2) {
@@ -25207,11 +25236,14 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
     if (!sameTranslator) throw new Error(`Could not retrieve the translation (${error2.message}). The P\u0101li text is still available offline with get_text; try again later or choose another translation_id.`);
     if (offset > 0) throw new Error(`Could not continue the requested translation version (${error2.message}). Its character offset cannot be transferred to the earlier Access to Insight version. Retry this translation_id later, or start another translation at offset 0. The P\u0101li text is still available offline with get_text.`);
     try {
-      result = await fetchAti(sameTranslator.path);
+      const fallbackSection = reviewedSectionFor(sameTranslator, unit);
+      result = await (fallbackSection ? fetchAtiSection(sameTranslator, fallbackSection) : fetchAti(sameTranslator.path));
+      sectionRow = fallbackSection;
     } catch {
       throw new Error("dhammatalks.org and Access to Insight (including its mirrors) are all unreachable right now. The P\u0101li text is still available offline with get_text.");
     }
     notes.push(`dhammatalks.org could not be reached (${error2.message}); showing \u1E6Ch\u0101nissaro Bhikkhu's earlier version from Access to Insight instead.`);
+    if (sameTranslator.mapping_note && sameTranslator.mapping_note !== link.mapping_note) notes.push(sameTranslator.mapping_note);
     link = sameTranslator;
   }
   if (declaredScope) {
@@ -29231,7 +29263,7 @@ function pools(canon) {
   return cache;
 }
 function english(canon, u) {
-  return canon.describe(u).english.map(({ source: source4, translator, reference, url, license, translation_id, translation_scope, includes_commentary }) => ({
+  return canon.describe(u).english.map(({ source: source4, translator, reference, url, license, translation_id, translation_scope, includes_commentary, source_section, mapping_note }) => ({
     source: source4,
     translator,
     ...reference ? { reference } : {},
@@ -29239,7 +29271,8 @@ function english(canon, u) {
     ...license ? { license } : {},
     translation_id,
     ...translation_scope ? { translation_scope, whole_unit_coverage: false } : {},
-    ...includes_commentary ? { includes_commentary: true } : {}
+    ...includes_commentary ? { includes_commentary: true } : {},
+    ...source_section ? { source_section: JSON.parse(JSON.stringify(source_section)), whole_unit_coverage: true, mapping_note } : {}
   }));
 }
 function sourceBlock(canon) {
