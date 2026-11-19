@@ -5323,10 +5323,8 @@
     }
   }
   async function commentary(uid2, token, offset = 0) {
-    const studyToken = ++studyEpoch;
-    requests.cancelGroup("study");
-    const target = $("study");
-    target.replaceChildren(el("p", "Opening commentary\u2026"));
+    if (token !== epoch) return;
+    const studyToken = ++studyEpoch, target = studyTarget("Opening commentary\u2026"), focusTicket = focusOwner.capture();
     try {
       const data = await tool("get_commentary", { uid: uid2, offset, limit: 20, script: $("script").value }, "study");
       if (token !== epoch || studyToken !== studyEpoch) return;
@@ -5336,8 +5334,9 @@
       if (data.next_offset !== null && data.next_offset !== void 0) target.append(button("Next commentary page \u2192", () => commentary(uid2, token, data.next_offset)));
       if (data.available === false || !data.segments?.length) target.append(el("p", "No verified aligned commentary is available for this selection.", "notice"));
       provenance(data, target);
+      if (focusOwner.owns(focusTicket)) target.scrollIntoView({ block: "start" });
     } catch (error) {
-      if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el("p", error.message, "notice"));
+      if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el("p", error.message, "notice"), button("Retry commentary page", () => commentary(uid2, token, offset)));
     }
   }
   function studyTarget(message) {
@@ -6134,9 +6133,13 @@
     let generation = 0;
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
+      if (token !== epoch || !form.isConnected) return;
       const request2 = ++generation, quote = input.value.trim();
       result.replaceChildren(el("p", "Comparing with bundled canonical P\u0101li\u2026"));
       result.setAttribute("aria-busy", "true");
+      result.focus({ preventScroll: true });
+      result.scrollIntoView({ block: "start" });
+      const focusTicket = focusOwner.capture();
       submit.disabled = true;
       try {
         const data = await tool("verify_quote", { text: quote, language: "pali", limit: 5 });
@@ -6159,12 +6162,10 @@
         }
         result.append(el("p", data.thresholds.measure, "muted"));
         provenance({ edition: "Bundled canonical P\u0101li comparison", attribution: data.scope.attribution, license: data.scope.terms }, result);
-        result.focus({ preventScroll: true });
-        result.scrollIntoView({ block: "start" });
+        if (focusOwner.owns(focusTicket)) result.scrollIntoView({ block: "start" });
       } catch (error) {
         if (token !== epoch || request2 !== generation) return;
         result.replaceChildren(el("h3", "Unable to check this quotation"), el("p", error.message, "notice"));
-        result.focus({ preventScroll: true });
       } finally {
         if (token === epoch && request2 === generation) {
           submit.disabled = false;

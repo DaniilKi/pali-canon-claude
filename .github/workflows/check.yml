@@ -370,6 +370,15 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/draft-focus-package"
           tar -xzf "$RUNNER_TEMP/draft-focus-package/"*.tgz -C "$RUNNER_TEMP/draft-focus-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-draft-focus-check.py --server-dir "$RUNNER_TEMP/draft-focus-package/package/server" --report installed-draft-focus.report.json
+      - name: Check intentional quotation and commentary focus with delayed actual responses
+        if: matrix.group == 'draftsafety'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-study-focus-check.py --report standalone-study-focus.report.json
+      - name: Audit quotation and commentary focus in both themes
+        if: matrix.group == 'draftsafety'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-study-focus-check.py --a11y --report standalone-study-focus-a11y.report.json
+      - name: Check quotation and commentary focus from the isolated npm package
+        if: matrix.group == 'draftsafety'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-study-focus-check.py --server-dir "$RUNNER_TEMP/draft-focus-package/package/server" --report installed-study-focus.report.json
       - name: Check complete Milinda questions with pinned official ATI artifacts
         if: matrix.group == 'milinda'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-milinda-check.py --report standalone-milinda.report.json
@@ -595,6 +604,9 @@ jobs:
             standalone-draft-focus.report.json
             standalone-draft-focus-a11y.report.json
             installed-draft-focus.report.json
+            standalone-study-focus.report.json
+            standalone-study-focus-a11y.report.json
+            installed-study-focus.report.json
             standalone-milinda.report.json
             standalone-milinda-a11y.report.json
             installed-milinda.report.json

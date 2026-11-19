@@ -1,0 +1,60 @@
+{
+  "baseline": "5d2958f309b768e65a14fa4228e255f29a4cfa72",
+  "mode": "local actual-source browser acceptance; final exact-commit CI remains a separate gate",
+  "source_data_changed": false,
+  "translation_choices_added": 0,
+  "held_poems": [
+    "thi-ap4",
+    "thi-ap5",
+    "thi-ap10"
+  ],
+  "files": {
+    "web/reader.js": "1f7c042fe65ce4fbdb1ca004f3218d275eb6236936e258a511a57f66b498c288",
+    "server/web/reader.js": "4f84d5148b94a3baaf7e89a6851f96cef858f1c54cb33a8a7e9ba80c161749fa",
+    "scripts/web-reader-study-focus-check.py": "0f806be21d70a9174c4d24c91ec654d3175926f07b95548ff109db74d2b7d917"
+  },
+  "browser": {
+    "normal": {
+      "passed": 30,
+      "axe_scans": 0,
+      "axe_violations": 0,
+      "outside_source_tree": false,
+      "report_sha256": "1d365ec7dc7e3457041c435e2cc16e018eecd4403a17ba2c7e433196fb7cce6f"
+    },
+    "a11y": {
+      "passed": 60,
+      "axe_scans": 60,
+      "axe_violations": 0,
+      "outside_source_tree": false,
+      "report_sha256": "94c94b9b996c9a40fd0c17a25656b4147cffa99c1ac982b5f91986c4871ead91"
+    },
+    "installed": {
+      "passed": 30,
+      "axe_scans": 0,
+      "axe_violations": 0,
+      "outside_source_tree": true,
+      "report_sha256": "db8e381ad6a62492c2aaff8f82fa3d4f2bfa12abaa1adf7e9394d0cb44cb0252"
+    }
+  },
+  "legacy_checks": {
+    "quote": {
+      "passed": 36,
+      "axe_violations": 0
+    },
+    "drafts": {
+      "passed": 19,
+      "axe_violations": 0
+    },
+    "recovery": {
+      "passed": 36,
+      "axe_violations": 0
+    }
+  },
+  "limits": [
+    "Actual local MCP source results; delay/error/abort timing and private input fixtures are controlled.",
+    "Viewport/keyboard and axe checks are not physical-device, native input-method, OS scaling or human assistive acceptance.",
+    "Headless Chromium second-tab activation did not revoke original document focus; real background/window blur acceptance remains unverified. Logical blur invalidation is unit-tested.",
+    "New timing journey is Chromium-only; existing required Firefox/WebKit workflows remain separate.",
+    "Reports omit source wording and private inputs. No publisher request, main merge, deployment or outreach."
+  ]
+}

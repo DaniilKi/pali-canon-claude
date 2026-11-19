@@ -46,6 +46,17 @@ test('installed Firefox and WebKit evidence is retained and required by reader a
  assert.match(aggregate,/COMPAT_RESULT[^\n]*success/,'compatibility result must succeed');
 });
 
+test('the existing draft-safety gate runs quotation and commentary focus in all three modes',()=>{
+ const source=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');
+ const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
+ const steps=[...group.matchAll(/if: matrix\.group == 'draftsafety'([^]*?)(?=\n      -|$)/g)].map(match=>match[1]).join('\n');
+ const commands=steps.split('\n').filter(line=>line.includes('python scripts/web-reader-study-focus-check.py'));
+ assert.equal(commands.length,3,'normal, accessibility and installed checks are required');
+ assert.ok(commands.some(line=>line.includes('--a11y --report standalone-study-focus-a11y.report.json')));
+ assert.ok(commands.some(line=>line.includes('--server-dir "$RUNNER_TEMP/draft-focus-package/package/server" --report installed-study-focus.report.json')));
+ assert.ok(commands.some(line=>line.includes('--report standalone-study-focus.report.json')));
+});
+
 
 test('Apadāna browser CI uses a pinned public fixture without persisted credentials or publisher network',()=>{
  const source=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');

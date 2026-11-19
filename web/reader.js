@@ -898,14 +898,16 @@ async function englishPage(args, token, context) {
   } catch (error) { if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el('p', error.message, 'notice'), button('Retry selected source', () => englishPage(args, token, context)), button('Reload passage and review sources', render)); }
 }
 async function commentary(uid, token, offset = 0) {
-  const studyToken = ++studyEpoch; requests.cancelGroup('study'); const target = $('study'); target.replaceChildren(el('p', 'Opening commentary…'));
+  if (token !== epoch) return;
+  const studyToken = ++studyEpoch, target = studyTarget('Opening commentary…'), focusTicket = focusOwner.capture();
   try { const data = await tool('get_commentary', { uid, offset, limit: 20, script: $('script').value }, 'study'); if (token !== epoch || studyToken !== studyEpoch) return;
     target.replaceChildren(el('h3', 'Traditional commentary · not canonical root text')); notes(data, target);
     for (const segment of data.segments || []) target.append(createSourcePassage(document, segment, 4));
     if (data.next_offset !== null && data.next_offset !== undefined) target.append(button('Next commentary page →', () => commentary(uid, token, data.next_offset)));
     if (data.available === false || !data.segments?.length) target.append(el('p', 'No verified aligned commentary is available for this selection.', 'notice'));
     provenance(data, target);
-  } catch (error) { if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el('p', error.message, 'notice')); }
+    if (focusOwner.owns(focusTicket)) target.scrollIntoView({ block: 'start' });
+  } catch (error) { if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el('p', error.message, 'notice'), button('Retry commentary page', () => commentary(uid, token, offset))); }
 }
 function studyTarget(message) {
   requests.cancelGroup('study'); const target = $('study'); target.replaceChildren(el('p', message)); target.tabIndex = -1; target.setAttribute('aria-label', 'Study tools, separate from scripture'); target.focus({ preventScroll: true }); target.scrollIntoView({ block: 'start' }); return target;
@@ -1236,7 +1238,7 @@ function quoteChecker(token) {
   input.id = 'quote-input'; input.className = 'note-field'; input.minLength = 8; input.maxLength = 2000; input.required = true; input.spellcheck = false; label.htmlFor = input.id; submit.type = 'submit'; form.append(label, input, submit); result.id = 'quote-result'; result.tabIndex = -1; result.setAttribute('aria-label', 'Quotation comparison result'); view.append(form, result);
   let generation = 0;
   form.addEventListener('submit', async event => {
-    event.preventDefault(); const request = ++generation, quote = input.value.trim(); result.replaceChildren(el('p', 'Comparing with bundled canonical Pāli…')); result.setAttribute('aria-busy', 'true'); submit.disabled = true;
+    event.preventDefault(); if (token !== epoch || !form.isConnected) return; const request = ++generation, quote = input.value.trim(); result.replaceChildren(el('p', 'Comparing with bundled canonical Pāli…')); result.setAttribute('aria-busy', 'true'); result.focus({ preventScroll: true }); result.scrollIntoView({ block: 'start' }); const focusTicket = focusOwner.capture(); submit.disabled = true;
     try {
       const data = await tool('verify_quote', { text: quote, language: 'pali', limit: 5 }); if (token !== epoch || request !== generation) return;
       validatePaliQuote(data, quote);
@@ -1250,8 +1252,8 @@ function quoteChecker(token) {
         card.append(el('p', data.comparison.method === 'literal_source_substring' ? 'Unchanged source substring located; source correctness and authorship are not established.' : 'Normalized similarity: ' + match.similarity + ' (0–1), not a probability of truth or authorship.', 'muted'));
         card.querySelector('.passage').lang = 'pi'; notes(match, card); card.append(link('Open source at match start · ' + match.citation, route('read', { uid: match.text_id, offset: match.read_with.offset, ref: match.segment_ref }), 'button')); result.append(card);
       }
-      result.append(el('p', data.thresholds.measure, 'muted')); provenance({ edition: 'Bundled canonical Pāli comparison', attribution: data.scope.attribution, license: data.scope.terms }, result); result.focus({ preventScroll: true }); result.scrollIntoView({ block: 'start' });
-    } catch (error) { if (token !== epoch || request !== generation) return; result.replaceChildren(el('h3', 'Unable to check this quotation'), el('p', error.message, 'notice')); result.focus({ preventScroll: true }); }
+      result.append(el('p', data.thresholds.measure, 'muted')); provenance({ edition: 'Bundled canonical Pāli comparison', attribution: data.scope.attribution, license: data.scope.terms }, result); if (focusOwner.owns(focusTicket)) result.scrollIntoView({ block: 'start' });
+    } catch (error) { if (token !== epoch || request !== generation) return; result.replaceChildren(el('h3', 'Unable to check this quotation'), el('p', error.message, 'notice')); }
     finally { if (token === epoch && request === generation) { submit.disabled = false; result.removeAttribute('aria-busy'); } }
   });
 }
