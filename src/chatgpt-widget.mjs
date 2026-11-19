@@ -25,7 +25,7 @@ import { getCommentary } from './commentary.mjs';
 import { HostedToolError } from './hosted-tool-error.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v19';
+export const WIDGET_VERSION = 'v20';
 // Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.
 export const NAVIGATION_TIMEOUT_MS = 90000;
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
@@ -716,10 +716,13 @@ export const WIDGET_HTML = `<!doctype html>
           section.appendChild(el('h3', '', 'Publisher recitation division · not poem text'));
           section.appendChild(el('p', 'note', 'Before publisher local stanza ' + s.before_local_label + ', printed global label ' + s.before_publisher_label + '.'));
           section.appendChild(el('p', 'en', s.text));
-          section.appendChild(el('h3', '', 'Recitation notes · editorial, not poem notes'));
-          var divisionNotes = el('ol', '');
-          s.translator_notes.forEach(function (n) { var li = el('li', '', n.text); li.value = n.number; divisionNotes.appendChild(li); });
-          section.appendChild(divisionNotes); en.appendChild(section);
+          if (s.translator_notes.length) {
+            section.appendChild(el('h3', '', 'Recitation notes · editorial, not poem notes'));
+            var divisionNotes = el('ol', '');
+            s.translator_notes.forEach(function (n) { var li = el('li', '', n.text); li.value = n.number; divisionNotes.appendChild(li); });
+            section.appendChild(divisionNotes);
+          }
+          en.appendChild(section);
         });
       }
       if (d.english.truncated) en.appendChild(el('p', 'note', 'The translation continues (' + characterPosition(d.english.next_offset, d.english.total_characters) + '). Ask for more to continue, or read the rest on the source page.'));

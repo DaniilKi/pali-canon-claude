@@ -1,0 +1,143 @@
+{
+  "status": "HELD31–40; D24521–30 activated only after independent source and implementation validation; metadata is not runtime authority",
+  "source_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "first_ten_preserved": true,
+  "activated_this_batch": [
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+  ],
+  "held_ids": [
+    "thi-ap31",
+    "thi-ap32",
+    "thi-ap33",
+    "thi-ap34",
+    "thi-ap35",
+    "thi-ap36",
+    "thi-ap37",
+    "thi-ap38",
+    "thi-ap39",
+    "thi-ap40"
+  ],
+  "current_21_boundary": {
+    "start": 8478,
+    "poem_heading": 8479,
+    "note": "Unit owns third-chapter heading as well as poem; source-only8479proposal is NOT current index scope."
+  },
+  "unrepaired_splits": [
+    {
+      "owners": [
+        33,
+        34
+      ],
+      "old": 10200,
+      "verified": 10196
+    },
+    {
+      "owners": [
+        34,
+        35
+      ],
+      "old": 10289,
+      "verified": 10285
+    },
+    {
+      "owners": [
+        36,
+        37
+      ],
+      "old": 10461,
+      "verified": 10457
+    }
+  ],
+  "future_contracts": [
+    "31preface/note ownership and duplicate local11",
+    "33exact paired HTML note/body spans",
+    "34complex lettered labels",
+    "35recitation division ownership",
+    "40poem notes1–7;chapter8–10;collection11–12;preserve summary discrepancies"
+  ],
+  "rights": "Same restrictive CC BY-NC-SA4.0; approval still requires exact scope/implementation review",
+  "source_only_reviewed_artifacts": [
+    {
+      "id": "thi-ap31",
+      "path": "src/_poems/chapter-4/poem-031.md",
+      "raw_sha256": "40aa1dd553e4af360814e0a6f221a270947edbd8eb8c26f1a890b100cd466b97",
+      "git_blob_sha1": "7bb8b1dbc9ece5a801c0e1c58f95ce7b8a0ab7f3",
+      "activated": false
+    },
+    {
+      "id": "thi-ap32",
+      "path": "src/_poems/chapter-4/poem-032.md",
+      "raw_sha256": "3af7d1cabbdb5b2039c95673f3e956d9ac3dad7f58a2fe4261ac03e161a0032f",
+      "git_blob_sha1": "36aa1eab49439b9a270d61a8d91c146920372454",
+      "activated": false
+    },
+    {
+      "id": "thi-ap33",
+      "path": "src/_poems/chapter-4/poem-033.md",
+      "raw_sha256": "038a60e4a260313ea2a8ac2c2ec403ec468056dc880107437e50312e85fb7551",
+      "git_blob_sha1": "61e2e5bbf10725b78cda04588a5c6f3d142aeba2",
+      "activated": false
+    },
+    {
+      "id": "thi-ap34",
+      "path": "src/_poems/chapter-4/poem-034.md",
+      "raw_sha256": "e0154f2ce268186473982f14d624ee53864b821d1641b1c7e584e12116f26730",
+      "git_blob_sha1": "6a78c00f1597f6b629ee26af50134601e7cd15f8",
+      "activated": false
+    },
+    {
+      "id": "thi-ap35",
+      "path": "src/_poems/chapter-4/poem-035.md",
+      "raw_sha256": "e9f5fbbcec6be351b4a08ab4274794f25709d602a8692a3a73b93b9fdd911e2c",
+      "git_blob_sha1": "e5abae79b0e30542394cf2803e0d30ea4a7398c5",
+      "activated": false
+    },
+    {
+      "id": "thi-ap36",
+      "path": "src/_poems/chapter-4/poem-036.md",
+      "raw_sha256": "2eb3978453371cecec8eee6e75e21bd1f990cd2f814fd47e5bea8109d2cd2744",
+      "git_blob_sha1": "27d2bee494f6106e0a6885bce0c756c0b47a808d",
+      "activated": false
+    },
+    {
+      "id": "thi-ap37",
+      "path": "src/_poems/chapter-4/poem-037.md",
+      "raw_sha256": "a9f6519bc736eb2eb07d1ea8e4967014ecc09d3ccd49d6fe61b7d6de40a45fef",
+      "git_blob_sha1": "2951df49c5e5bf254f6eb4b952c4ff2e9368c83c",
+      "activated": false
+    },
+    {
+      "id": "thi-ap38",
+      "path": "src/_poems/chapter-4/poem-038.md",
+      "raw_sha256": "172cd2cdeeb1ecbd8f3340ecddabdbbe3ffbe2873f748b19b4d72c3396aee35d",
+      "git_blob_sha1": "c5314c085b8c798ac77816e487357e42477faf1b",
+      "activated": false
+    },
+    {
+      "id": "thi-ap39",
+      "path": "src/_poems/chapter-4/poem-039.md",
+      "raw_sha256": "96ac7bd3f8e4d96b7accf7b499c468d3214c674c0924c053d5a445510541c51f",
+      "git_blob_sha1": "a4f2a5918ebd5c5a4ff0c9df8f8e98ffb9ccda37",
+      "activated": false
+    },
+    {
+      "id": "thi-ap40",
+      "path": "src/_poems/chapter-4/poem-040.md",
+      "raw_sha256": "a43e89da8000284adc876c728d66474ca89e6c264566efc7e8384adbbc2664dd",
+      "git_blob_sha1": "30663536c2e3f632ab51248bd334fa0109ea95d6",
+      "activated": false
+    }
+  ],
+  "first_twenty_preserved": true,
+  "supersedes_current_queue_only": "NEXT_HELD_READINESS.json is retained as historical D244 evidence, not edited"
+}

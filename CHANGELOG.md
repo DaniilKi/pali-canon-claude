@@ -4,6 +4,8 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Add the next complete publisher-edition chapter, Therī Apadāna21–30:475 printed stanza entries and381 separately owned notes. Repair only23/24’s index boundary with stale-position refusal; preserve earlier twenty profiles and all source wording. Keep21’s preface,28’s note-free recitation heading and30’s summary/notes43–44 separate, preserve edition differences and use embedded reader v20. Source31–40 remain held; no line-complete VRI claim (D245).
+
 - Add ten first complete publisher-edition Therī Apadāna sources (11–20), with498printed stanza entries and exact source notes. Repair four index boundaries without changing scripture; preserve old ten, irregular numbering and edition differences. Separate recitation note21/chapter-summary note27, validate large sparse notes by finite source identity and use embedded reader v19. English remains live-only; no line-complete VRI claim (D244).
 
 - Add three source-reviewed whole Therī Apadāna translations (4,5,10), repairing paired Pāli ownership without changing scripture. Preserve irregular publisher numbering, separate chapter summary/note8 and reject stale saved/widget locators. Whole links become2,593; earlier seven choices, daily eligibility and other source holds remain unchanged (D243).

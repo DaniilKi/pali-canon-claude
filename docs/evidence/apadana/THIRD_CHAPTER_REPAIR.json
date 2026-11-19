@@ -1,0 +1,117 @@
+{
+  "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "source_file": "s0510m2.mul.xml",
+  "source_git_blob_sha1": "c2a96aed52fb5de3e7fe66442633e5f045cf5bdf",
+  "source_xml_sha256": "23e0721c8fe05a6105b56b627ac38291d10e0eab799a082c257466603f0839a1",
+  "source_xml_bytes": 1779576,
+  "book_blocks_sha256": "bd0177c2025298415abd2e90e1d576d2418127e08ce339699ad725960089f8cc",
+  "input_canon_sha256": "547d769d794673cbdc2a10bebf72e2bd0ea25a704ca99d34a3d480fbbc0f600f",
+  "input_commentary_sha256": "a4efb9cd51d1092530cdf6f4e67907ac2dee965e3816af28a83c5f10c0e7d536",
+  "changed_spans": [
+    "thi-ap23",
+    "thi-ap24"
+  ],
+  "units": {
+    "thi-ap23": {
+      "before": {
+        "id": "thi-ap23",
+        "book": 37,
+        "start": 8764,
+        "end": 8877,
+        "title": "Dhammadinnātherīapadānaṃ",
+        "collection": "ap",
+        "acronym": "Thī Ap 23",
+        "vri": "95–131",
+        "pts": {
+          "volume": 2,
+          "page": 567,
+          "end_page": 569
+        }
+      },
+      "after": {
+        "id": "thi-ap23",
+        "book": 37,
+        "start": 8764,
+        "end": 8873,
+        "title": "Dhammadinnātherīapadānaṃ",
+        "collection": "ap",
+        "acronym": "Thī Ap 23",
+        "vri": "95–130",
+        "pts": {
+          "volume": 2,
+          "page": 567,
+          "end_page": 569
+        },
+        "index_revision": "apadana-theri21-30-v1"
+      },
+      "root_blocks_sha256": "bc373073e1cf947fccc68c8dce3d067d78129e3f4216380557e15c6c3ff45494",
+      "root_sha256": "a457920710bb058996af0ebb98f588c0ddba51421af2a3fe60cad85c17e57999"
+    },
+    "thi-ap24": {
+      "before": {
+        "id": "thi-ap24",
+        "book": 37,
+        "start": 8877,
+        "end": 8978,
+        "title": "Sakulātherīapadāna",
+        "collection": "ap",
+        "acronym": "Thī Ap 24",
+        "vri": "132–165",
+        "pts": {
+          "volume": 2,
+          "page": 569,
+          "end_page": 572
+        }
+      },
+      "after": {
+        "id": "thi-ap24",
+        "book": 37,
+        "start": 8873,
+        "end": 8978,
+        "title": "Sakulātherīapadāna",
+        "collection": "ap",
+        "acronym": "Thī Ap 24",
+        "vri": "131–165",
+        "pts": {
+          "volume": 2,
+          "page": 569,
+          "end_page": 572
+        },
+        "index_revision": "apadana-theri21-30-v1"
+      },
+      "root_blocks_sha256": "30b474561714fe1a8e068b0d00c59f11861dccd1b59a396edd45e6867267fadd",
+      "root_sha256": "46abcdad17e69e6488b276c332aed0ee3c7a1aff2d613254c3f686f292fe5d67"
+    }
+  },
+  "commentary": {
+    "changed": false,
+    "accepted_book_passages_checked": 58,
+    "root_segments_checked": [
+      [
+        1535,
+        1840
+      ],
+      [
+        3864,
+        4971
+      ],
+      [
+        5923,
+        6537
+      ]
+    ],
+    "target_associations": {
+      "thi-ap23": [],
+      "thi-ap24": []
+    }
+  },
+  "preserved": [
+    "all source books/blocks/notes/pages",
+    "all unrelated units",
+    "all commentary metadata/wording/associations",
+    "public IDs/titles",
+    "private data (not accessed)"
+  ],
+  "output_canon_sha256": "7cd0a65986d2921b5ff95bdd059ee9ebddf63fa81e748e068d5ff5251cff78b6",
+  "output_commentary_sha256": "a4efb9cd51d1092530cdf6f4e67907ac2dee965e3816af28a83c5f10c0e7d536"
+}

@@ -105,7 +105,7 @@ def main():
     manifest = json.loads((server_dir / 'data/apadana.json').read_text())
     assert manifest == json.loads((ROOT / 'server/data/apadana.json').read_text()), 'Package metadata differs'
     rows, commit = manifest['links'], manifest['source']['commit']
-    assert set(rows) == {'thi-ap' + str(n) for n in range(1, 21)}, 'Unexpected activated source scope'
+    assert set(rows) == {'thi-ap' + str(n) for n in range(1, 31)}, 'Unexpected activated source scope'
     for uid, expected in BASELINE.items():
         assert digest(compact(rows[uid], sort=True)) == expected, uid + ': previous metadata changed'
     for uid in NEW_IDS:

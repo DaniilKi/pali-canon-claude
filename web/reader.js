@@ -236,10 +236,13 @@ function publisherDivisions(data, target, level) {
     section.setAttribute('aria-label', 'Publisher recitation division · not poem text');
     section.append(el('h' + level, 'Publisher recitation division · not poem text'), el('p', division.label), el('p', division.text, 'translation'));
     section.append(el('p', 'The publisher places this division before local stanza ' + division.before_local_label + ' (publisher stanza ' + division.before_publisher_label + '). It is separate from the poem wording.'));
-    section.append(el('h' + level, 'Recitation notes · editorial, not poem notes'));
-    const list = el('ol');
-    for (const note of division.translator_notes) { const item = el('li'); item.value = note.number; item.append(el('p', note.text, 'translator-note')); list.append(item); }
-    section.append(list); target.append(section);
+    if (division.translator_notes.length) {
+      section.append(el('h' + level, 'Recitation notes · editorial, not poem notes'));
+      const list = el('ol');
+      for (const note of division.translator_notes) { const item = el('li'); item.value = note.number; item.append(el('p', note.text, 'translator-note')); list.append(item); }
+      section.append(list);
+    }
+    target.append(section);
   }
 }
 

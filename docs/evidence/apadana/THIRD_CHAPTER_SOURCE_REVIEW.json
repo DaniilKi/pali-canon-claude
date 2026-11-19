@@ -1,0 +1,331 @@
+{
+  "review_type": "Independent full literal publisher-source and VRI semantic scope review; AI-assisted, not specialist certification. Prior readiness checklist used as a checklist only; fresh original Git blobs and original VRI XML were independently checked.",
+  "reviewed_repo_tip": "3854b43",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "decision": "Approve all10 complete publisher-edition poem scopes conditional on exact finite extraction,23/24canonical repair, ownership, visible edition caveats, preserving prior20profiles and separate runtime review/testing. No generic source approval and no line-complete VRI claim.",
+  "read_scope": "Every original stanza, prose colophon, note and note anchor in all10publisher files was read, alongside all actual VRI21–30segments and variants. Canonical narrative identity, boundaries, ordering and special edition differences were checked; no bare-number match was used. Fresh full VRI XML parse matched all10672source blocks, including notes and pages.",
+  "preservation": "Read-only source work. No project edits, commits, pushes, private data access, source wording generation, SuttaCentral use, main merge, deploy or outreach. Reports contain metadata, hashes and review statements only; translated bodies, notes and summaries remain outside reports/bundles.",
+  "rights_decision": "Explicit translation grant in About plus LICENSE, footer and ePub metadata establishes restrictive CC BY-NC-SA4.0; site.json generic CC-BY4.0 does not relax it. Retain Jonathan S. Walters/Whitman College attribution, source/licence links, modifications and no-endorsement notice. Notes remain attributed translator editorial apparatus. English stays live-only.",
+  "totals": {
+    "poems": 10,
+    "physical_publisher_stanzas": 475,
+    "poem_notes": 379,
+    "summary_notes": 2,
+    "rights_blobs": 6,
+    "source_blobs": 10
+  },
+  "specific_safeguards": [
+    "Keep source21full canonical start8478, not older proposed8479.",
+    "Repair23end/24start8877→8873 atomically, preserving exact source book, notes and page markers.",
+    "Two finite stanza paragraph splits only: source21rawbodypara37after8lines; source28rawbodypara72after4lines.",
+    "Source24/27only exact paired HTML transforms under original full raw pin; unpaired markup fails.",
+    "Source28publisher recitation division owns no notes and is excluded from poem quotation evidence.",
+    "Source30chapter summary separately owns notes43–44, canonical refs64–67, original count discrepancy218/476/478.",
+    "All475stanzas have at least one printed number; no wholly unlabelled stanza and no empty suffix approval.",
+    "Quotations exclude all headings, notes, divisions, prefaces, summaries and colophons; do not drop substantive global-only/local-only publisher verse."
+  ],
+  "poems": [
+    {
+      "id": "thi-ap21",
+      "source_identity_scope": "APPROVED as complete publisher-edition poem conditional on finite source and ownership contracts; NOT line-complete VRI",
+      "narrative_anchors": [
+        "Padumuttara aspiration to quick intuition",
+        "Kiki's fourth daughter Bhikkhadāyikā",
+        "Giribbaja execution/thief Sattuka and precipice",
+        "white-clad renunciation, dog carrying human hand, Buddha instruction, water and quick awakening"
+      ],
+      "required_boundary": {
+        "start": 8478,
+        "chapter_heading_block": 8478,
+        "poem_heading_block": 8479,
+        "end": 8644,
+        "opening_verse_blocks": [
+          8480,
+          8483
+        ],
+        "opening_vri_paragraph": "1",
+        "opening_expected_ref": "thi-ap21/3"
+      },
+      "required_contracts": [
+        "D244 already repaired the20/21boundary at baseline3854b43. Keep unit21start8478, its canonical chapter heading, poem heading and complete opening, and retain poem20chapter-summary ownership and all prior source pins. This batch may activate the exact publisher21scope after the specified independent runtime and CI gates.",
+        "Preserve51 physical stanzas representing local1–54; local17-18/global655-656,38-39/676-677,43-44/681-682 are single publisher stanzas.",
+        "Publisher prefatory third-vagga heading belongs to preface; its notes list is empty. All38 notes belong to poem, including heading note1.",
+        "Retain original D244 start8478: chapter heading ref1, poem heading ref2, first stanza ref3; prior readiness proposal8479 would incorrectly drop canonical chapter opening.",
+        "Publisher chapter preface has zero notes. Heading note1 belongs to the poem title; poem owns1–38.",
+        "Declare the only source21 paragraph break at original raw body paragraph37 after8lines: local38-39/global676-677 and local40/global678. Finite two-block split preserves every source character except paragraph whitespace. Result51stanzas/54bodyparagraphs."
+      ],
+      "edition_findings": [
+        "Publisher opening1/global639 matches the preserved VRI1opening in unit21at baseline3854b43, already restored by D244. This is retrieved source wording, not a reconstructed opening.",
+        "Source local20/global658 starts Uppalavaṇṇā,Khemā while VRI20 starts Khemā,Uppalavaṇṇā. Preserve order discrepancy.",
+        "Source local25/global663 follows khalitajjhāsayo in note21; VRI25 main balimajjhāsayo and explicit Sinhala variant record the difference.",
+        "Source local33/global671 deer-and-bow image differs from VRI33 main/variants; note-free translation choice remains attributed, never silently mapped word-for-word.",
+        "Source local48/global686 selects present amhi while VRI48 has visuddhāsiṃ; source note37 preserves choice.",
+        "Poem title Bhaddā-Kuṇḍalakesā differs from canonical title Kuṇḍalakesātherīapadāna; narrative and colophons establish identity."
+      ],
+      "implementation_status": "Runtime implementation, independently reviewed preservation, tests and exact-commit CI remain separate gates."
+    },
+    {
+      "id": "thi-ap22",
+      "source_identity_scope": "APPROVED as complete publisher-edition poem conditional on finite source and ownership contracts; NOT line-complete VRI",
+      "narrative_anchors": [
+        "Padumuttara aspiration to rough robes",
+        "Kiki fifth daughter Dhammā",
+        "child's death and mustard seed from death-free house",
+        "Dhamma eye, ordination and coarse cemetery robe"
+      ],
+      "required_contracts": [
+        "Preserve39 physical stanzas across local1–40/global693–732, with combined14-15/global706-707.",
+        "All27 notes belong to poem. Note21 owns stanza28's complex meter, including terminal note anchor after global720; note1 is heading-owned.",
+        "No chapter preface or chapter summary."
+      ],
+      "edition_findings": [
+        "Source global693 starts VRI55, not VRI1. Preserve separate publisher and VRI labels.",
+        "Source local21 death reading follows BJTS yamavasaṃ, which agrees with VRI75 main; note13 documents PTS difference.",
+        "Source local22 corpse reading follows mataṃ agreeing VRI76 main; keep source note14's PTS disagreement.",
+        "Source local32/global724 chooses amhi where VRI86 main has visuddhāsiṃ; preserve note24.",
+        "Source local36/global728 cemetery/road robe is narrower than VRI90 list including refuse heap; do not silently supplement source.",
+        "VRI92–94 remain peyyāla while source38–40 are fully worded."
+      ],
+      "implementation_status": "Runtime implementation, independently reviewed preservation, tests and exact-commit CI remain separate gates."
+    },
+    {
+      "id": "thi-ap23",
+      "source_identity_scope": "APPROVED as complete publisher-edition poem conditional on finite source and ownership contracts; NOT line-complete VRI",
+      "narrative_anchors": [
+        "working woman and water bearer offering to Sujāta",
+        "master's daughter-in-law and aspiration to preach Dhamma",
+        "Kiki sixth daughter Sudhammā",
+        "husband non-returner, ordination, detailed layman's questions and foremost preaching"
+      ],
+      "required_boundary": {
+        "start": 8764,
+        "legacy_end": 8877,
+        "correct_end": 8873,
+        "following_sakula_heading": 8873,
+        "misowned_sakula_opening_blocks": [
+          8874,
+          8877
+        ]
+      },
+      "required_contracts": [
+        "At baseline3854b43, unit23incorrectly includes Sakulā heading+opening and unit24lacks its own opening. This batch must repair23end/24start8877→8873atomically before activating either publisher source.",
+        "Preserve33 physical stanzas across local1–36/global733–768. Combined9-10/741-742,18-19/750-751,28-29/760-761 remain as published.",
+        "All17 notes are poem-owned, including heading note1. No chapter summary.",
+        "VRI third-recitation colophon at8819 appears between VRI112/113 but publisher omits it. Source local18-19 remains one poem stanza; never claim translated VRI recitation-colophon coverage.",
+        "VRI125 is split by renderer into verse ref33 and prose ref34; source local31 is one whole stanza. Do not exclude actual second half due to renderer type."
+      ],
+      "edition_findings": [
+        "Source local4/global736 gives soup while VRI98 pūpaṃ is retained unchanged; no lexical equivalence asserted.",
+        "Source note2 openly chooses BJTS Sinhala gloss master for ayyako, where literal grandfather is possible.",
+        "Source local25/global757 takes subuddhimā as by the Buddha; VRI119 permits attribution to intelligent husband. Preserve translator wording and note13; no specialist judgment asserted.",
+        "Source local33/global765 selects amhi against VRI127 visuddhāsiṃ, noted17.",
+        "Source34–36 fully word VRI128–130 abbreviated refrain.",
+        "The VRI third-recitation colophon at block 8819, between VRI stanzas 112 and 113, is omitted from the pinned publisher poem and remains untranslated. Publisher local 18–19 is one combined stanza; its translation does not cover the canonical recitation colophon."
+      ],
+      "implementation_status": "Runtime implementation, independently reviewed preservation, tests and exact-commit CI remain separate gates."
+    },
+    {
+      "id": "thi-ap24",
+      "source_identity_scope": "APPROVED as complete publisher-edition poem conditional on finite source and ownership contracts; NOT line-complete VRI",
+      "narrative_anchors": [
+        "Padumuttara's half-sister daughter of Ānanda",
+        "aspiration to divine eye",
+        "Kassapa-era wanderer giving oil lamp at shrine",
+        "present brahmin birth and sight of Buddha at city gate"
+      ],
+      "required_boundary": {
+        "legacy_start": 8877,
+        "correct_start": 8873,
+        "end": 8978,
+        "opening_verse_blocks": [
+          8874,
+          8877
+        ]
+      },
+      "required_contracts": [
+        "Apply atomic23/24 repair before activation.",
+        "Preserve34 physical stanzas across local1–35/global769–803, with combined25-26/793-794.",
+        "No preface or summary.",
+        "All32notes belong to poem. Exact original paired HTML c/ch display spans occur4times in notes1,9,27. Retain c and remove only paired alternate display under full original artifact pin; no unpaired HTML allowed. Full presentation notes pin now independently computed."
+      ],
+      "edition_findings": [
+        "Publisher local7/global775 says delusion; VRI137 says kāmapaṅkamhi, desire. Preserve discrepancy; no silent correction.",
+        "Source local13/global781 dhammapadīpadānānaṃ interpretation differs VRI143 padīpadhammadānānaṃ order; retain original note24.",
+        "Source local29/global797 selects amhi while VRI159 has visuddhāsiṃ, note31.",
+        "VRI163–165 remain abbreviated while source33–35 supplies complete publisher wording."
+      ],
+      "implementation_status": "Runtime implementation, independently reviewed preservation, tests and exact-commit CI remain separate gates."
+    },
+    {
+      "id": "thi-ap25",
+      "source_identity_scope": "APPROVED as complete publisher-edition poem conditional on finite source and ownership contracts; NOT line-complete VRI",
+      "narrative_anchors": [
+        "Padumuttara aspiration to foremost meditation",
+        "Suddhodana daughter Nandā, mother Gotamī exhortation",
+        "reluctant ordination",
+        "Buddha's conjured woman, decay, instruction and attainment"
+      ],
+      "required_contracts": [
+        "Preserve52 physical stanzas across local1–54/global804–857; combined9-10/812-813 and31-32/834-835.",
+        "All75 notes belong to poem, heading note1; no preface/summary. Note1's historical identification and ambiguity is translator commentary, not authority to merge different Nandā subjects.",
+        "Source notes2/19/32 cross-reference other texts without adding them to scope."
+      ],
+      "edition_findings": [
+        "Source local11/global814 calls narasaddūlo leopard of men, while VRI176 main narasārathi is charioteer; no VRI variant hides discrepancy.",
+        "Source local23/global826 middle brother follows PTS majjhimo, explicitly retained as VRI188 variant; VRI main pacchimo remains.",
+        "Source local28/global831 chooses vara while VRI193 cara is preserved. Note48 owns BJTS alternate.",
+        "Source local30/global833 basis renders PTS/alternatives sara/pada/para; note51 preserves uncertainty, VRI195 paraṃ unchanged.",
+        "Source local36/global839 spider follows lūtā while VRI201 main luddhā and explicit variant lūtā remain intact.",
+        "Source local44/global847 slender-middle reading follows tanumajjhā variant against VRI209 vedimajjhā; note70 preserved.",
+        "Source local50/global853 keeps peace; note74 alternative vipassantī does not alter VRI215 santī.",
+        "Source52–54 expand VRI217–219 peyyāla only on translation side."
+      ],
+      "implementation_status": "Runtime implementation, independently reviewed preservation, tests and exact-commit CI remain separate gates."
+    },
+    {
+      "id": "thi-ap26",
+      "source_identity_scope": "APPROVED as complete publisher-edition poem conditional on finite source and ownership contracts; NOT line-complete VRI",
+      "narrative_anchors": [
+        "Padumuttara aspiration to energetic effort",
+        "mother of ten sons, husband and sons' ordination",
+        "nun left to heat water",
+        "contemplation, awakening and fire-element heating, effort verse"
+      ],
+      "required_contracts": [
+        "Preserve24 physical stanzas local1–24/global858–881, all17 poem-owned notes, heading note1. No preface/summary.",
+        "Incomplete quotation punctuation/typos in note8 and note2 are publisher-owned; preserve original wording through presentation extraction."
+      ],
+      "edition_findings": [
+        "Source local13/global870 follows cattāya agreeing VRI232, while note13 preserves PTS jīnāya alternative.",
+        "Source local16/global873 treats culle as small pot while VRI235 has separate culle hearth context; source commentary note15 remains editorial.",
+        "Source local17/global874 body corresponds VRI236 khandhe/aggregates, with note16 explicit lexical explanation.",
+        "Source22–24 fully word VRI241–243 peyyāla. No VRI expansion authorized."
+      ],
+      "implementation_status": "Runtime implementation, independently reviewed preservation, tests and exact-commit CI remain separate gates."
+    },
+    {
+      "id": "thi-ap27",
+      "source_identity_scope": "APPROVED as complete publisher-edition poem conditional on finite source and ownership contracts; NOT line-complete VRI",
+      "narrative_anchors": [
+        "wife of Videha aspiring husband Kassapa",
+        "Padumuttara stupa offerings",
+        "joint previous lives, cloak gift and mud in paccekabuddha bowl",
+        "Kassapa shrine tile, lamps, Koliyan service",
+        "Pipphalāyana/Kassapa, Kapila daughter, mutual renunciation and final paired triple knowledge"
+      ],
+      "required_contracts": [
+        "Preserve68 physical stanzas across local1–70/global882–951; combined33-34/914-915 and53-54/934-935.",
+        "All51 notes poem-owned; note51 anchors final colophon, not heading. Preserve full long note29 speculative marital explanation as translator opinion, not canonical narrative.",
+        "Final legend colophon has no terminal period. Exact finite parser must preserve this rather than adding punctuation.",
+        "No chapter preface/summary.",
+        "Exactly14paired HTML display spans across original body/notes, including c/ch and cc/chch. Retain diacritic spelling only under full original artifact pin. Full body/notes presentation goldens now independently computed."
+      ],
+      "edition_findings": [
+        "Source global882 sees everything follows VRI244 variant sabbadhammesu cakkhumā while VRI main sabbadhammāna pāragū remains.",
+        "Source local2/global883 leader follows BJTS nāyako, while VRI245 main nāma nāmato/variant nāmako differs. Note1 explicitly prefers commentary witness, not root substitution.",
+        "Source local40/global921 combines PTS/BJTS impurity/equanimity readings, VRI283 main apace/samacittamukhaṃ preserved.",
+        "Source local44/global925 through four lifetimes differs VRI287 catujjātena gandhena perfume wording; preserve discrepancy, not correction.",
+        "Source local47/global928 sage follows PTS isi while VRI290 iti and note38's alternative stay.",
+        "Source local61/global942 path of renouncers follows VRI304 paribbājapathe variant against main paribbājavate; note49 documents both.",
+        "Source68–70 fully word VRI311–313 peyyāla. Title spellings Kāpilāni/Kāpilānī and bhaddā/bhadda remain edition-owned."
+      ],
+      "implementation_status": "Runtime implementation, independently reviewed preservation, tests and exact-commit CI remain separate gates."
+    },
+    {
+      "id": "thi-ap28",
+      "source_identity_scope": "APPROVED as complete publisher-edition poem conditional on finite source and ownership contracts; NOT line-complete VRI",
+      "narrative_anchors": [
+        "Yasodharā retirement and parinibbāna request",
+        "superpower bird/body displays",
+        "Sumedha-Sumittā lotus offering and Dīpaṅkara prophecy",
+        "service and sacrifices through Buddha lives",
+        "ordination and post-refrain closing verses"
+      ],
+      "required_contracts": [
+        "Exactly99 physical publisher stanzas, not104:87 local-numbered stanzas plus12 global-only stanzas. Complete exact local/global pair list in SOURCE_READINESS.json; never fabricate missing labels.",
+        "Global-only952–957 precede local1; global-only966,968,974 interrupt local sequence; closing1026–1028 follow local87.",
+        "Local15 and52 have no global label; locals62–81 have no global label. Preserve those omissions.",
+        "All71 notes poem-owned. Note71 anchors colophon; note55 owns local52; note60 owns local62 and explains next19 stanzas; note70 owns first post-refrain stanza and following two.",
+        "Final legend colophon lacks a period; source italic markup around title is presentation only. No chapter preface or summary.",
+        "Original raw body paragraph72 has locals63/64: declare break after4lines; both remain independent printed local-only stanzas.102bodyparagraphs after this whitespace-only split;99physical stanzas.",
+        "Separate the exact recitation line at raw source line299 from local50/global1009 into publisher_divisions with empty note_numbers and translator_notes; SHA256(JSON[]) pins no notes. Notes52/53 belong stanza50, not recitation.",
+        "All99stanzas have a literal local or global label: no empty suffix, missing-label invention or numeric alignment inference is needed. Preserve global-only, local-only and combined labels exactly.",
+        "The first6global-only stanzas are substantive publisher BJTS verse, not a publisher preface; final3global-only stanzas are substantive poem conclusions, not chapter summary."
+      ],
+      "edition_findings": [
+        "First6 source stanzas are BJTS-only relative PTS (note1), but overlap VRI314–319 with redistributed feet; source initial list Nanda/Rahula/Bhadda does not occur in VRI316 main. Preserve extra wording as source edition.",
+        "Source global974 and local15 deliberately includes both alternative narratives of display; note16/19 explicitly explains BJTS vs PTS. VRI335 main/variant attests corresponding forms; never collapse duplicates.",
+        "Source global980 merits doctrine differs VRI341 suññataṃ/emptiness. Note26 explicitly records alternate suññataṃ; retain both source and root unchanged.",
+        "Source local52 lacks global, relegated in BJTS footnote but appears in VRI372 main. No label inference.",
+        "Source locals62–81 (20 stanzas) absent in BJTS at this position per note60 but publisher retains PTS; VRI382–401 contains same coherent series, with numerical differences including VRI385,396,398. Counts and names not harmonized.",
+        "Source local83/global1021 eight months differs VRI403 aḍḍhamāse/half-month; note68 owns BJTS alternate.",
+        "Source final1026–1028 absent here in PTS per note70, present VRI408–410. Keep as poem body, not preface or summary.",
+        "Source local85–87 expands VRI405–407 peyyāla; special selection does not authorize canonical expansion."
+      ],
+      "implementation_status": "Runtime implementation, independently reviewed preservation, tests and exact-commit CI remain separate gates."
+    },
+    {
+      "id": "thi-ap29",
+      "source_identity_scope": "APPROVED as complete publisher-edition poem conditional on finite source and ownership contracts; NOT line-complete VRI",
+      "narrative_anchors": [
+        "ten thousand nuns collectively recall Sumedha-Sumittā and Dīpaṅkara",
+        "past sacrifices and Śākyan birth",
+        "ordination, requisites and plural concluding refrain"
+      ],
+      "required_contracts": [
+        "Exactly15 physical stanzas local1–15/global1029–1043; all9 notes poem-owned, heading note1.",
+        "Heading and speech colophon call leader Yasovatī; final legend calls Yasodharā. VRI both colophons/heading Yasodharā; preserve source discrepancy, no normalization.",
+        "Final legend colophon lacks period. No preface/summary.",
+        "Note9 preserves explicit plural correction of concluding refrain in BJTS and PTS abbreviated singular; full source plural remains translation-side only."
+      ],
+      "edition_findings": [
+        "Source local4/global1032 hohi agrees VRI414 main, while note2 retains PTS honti alternative.",
+        "Source local11/global1039 eight months differs VRI421 aḍḍhamāse/half-month, source note8 preserves BJTS reading.",
+        "Source13–15 fully words plural VRI423–425 peyyāla; do not expand root.",
+        "The publisher heading and speech colophon name Yasovatī, while its final legend colophon names Yasodharā. The VRI heading and both colophons name Yasodharā. Preserve these source-specific names without normalization."
+      ],
+      "implementation_status": "Runtime implementation, independently reviewed preservation, tests and exact-commit CI remain separate gates."
+    },
+    {
+      "id": "thi-ap30",
+      "source_identity_scope": "APPROVED as complete publisher-edition poem conditional on finite source and ownership contracts; NOT line-complete VRI",
+      "narrative_anchors": [
+        "eighteen thousand Śākyan nuns approach Buddha and display powers",
+        "collective Yasodharās and past sacrifices",
+        "Dīpaṅkara/Sumedha prophecy and shared wishes",
+        "ordination, final achievements, nirvāna advice"
+      ],
+      "required_contracts": [
+        "Exactly60 physical poem stanzas local1–60/global1044–1103;63 body paragraphs including heading and two colophons.",
+        "Poem notes1–42 only. Chapter summary owns original43–44, neither belongs to poem quote evidence, stanza count, body pagination or body prefix pins.",
+        "Summary begins exact The Summary separator and has3 paragraphs; middle stanza has9 source lines, chapter-colophon final. Canonical summary originals refs64–67/blocks9943–9949, source order differs VRI.",
+        "Whole canonical unit remains9760–9949, substantive poem9760–9943; summary separate root and body/notes pins recorded.",
+        "Source summary totals218 while VRI main totals476 and explicit variant478. Preserve both without correcting or inferring missing scripture.",
+        "Final legend colophon has no period. No publisher preface.",
+        "Finite summary30 descriptor is independently pinned: parentthi-ap30, refs64–67, blocks9943–9949, notes[43,44],3paragraphs with9middlelines. All poem notes1–42, colophons and publisher wording retained."
+      ],
+      "edition_findings": [
+        "Source local9/global1052 yasovatī differs VRI434 Yasodharāsahassāni; note4 owns identity interpretation.",
+        "Source local20/global1063 buddhānaṃ differs VRI445 pubbānaṃ main; note14 preserves alternative and cross-reference.",
+        "Source local34/global1077 Brahmā deity interpretation differs VRI459 Brahmadevañca Buddha name possible; preserve literal source and root, not infer equivalence.",
+        "Source local52/global1095 eight months differs VRI477 half-month; note35 preserves BJTS alternate.",
+        "Source local60/global1103 vajantīnaṃ/going differs VRI485 vadantīnaṃ/saying, with note41 recording PTS choice.",
+        "Summary names/spellings retained separately; note43 fixes PTS Sākulā, note44 explains ten/eighteen-thousand phrasing. These are summary translator notes only."
+      ],
+      "implementation_status": "Runtime implementation, independently reviewed preservation, tests and exact-commit CI remain separate gates."
+    }
+  ],
+  "external_limits": [
+    "Specialist review of PTS/BJTS/VRI text-critical decisions and translator errors/uncertainty remains outstanding; all source readings are attributed and visible, not corrected.",
+    "Physical-device and human assistive testing are outside this source review.",
+    "Implementation, package preservation and exact-commit CI must pass independently before dev advancement."
+  ],
+  "baseline_and_batch_scope": {
+    "baseline_tip": "3854b43",
+    "already_completed_in_D244": "Unit21starts8478and includes canonical chapter heading8478, poem heading8479and opening stanza8480–8483. Preserve this completed repair.",
+    "rejected_historical_proposal": "Earlier source-readiness proposal8479is rejected because it would drop the canonical chapter heading. It is historical evidence only.",
+    "new_canonical_repair_in_this_batch": "Unit23end and unit24start8877→8873atomically.",
+    "source_activation_scope": "This receipt conditionally approves exact publisher21–30whole-poem mappings for this batch, subject to independent runtime review, preservation tests and exact-commit CI. Prior20profiles, source holds and private data remain preserved."
+  }
+}

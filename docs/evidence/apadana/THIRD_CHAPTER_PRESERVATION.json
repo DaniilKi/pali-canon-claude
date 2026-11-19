@@ -1,0 +1,33 @@
+{
+  "branch_input_commit": "3854b43",
+  "changed_units": [
+    "thi-ap23",
+    "thi-ap24"
+  ],
+  "unchanged_unit_count": 8542,
+  "source_books_preserved": 61,
+  "full_book_blocks": 10672,
+  "canon_input_sha256": "547d769d794673cbdc2a10bebf72e2bd0ea25a704ca99d34a3d480fbbc0f600f",
+  "canon_output_sha256": "7cd0a65986d2921b5ff95bdd059ee9ebddf63fa81e748e068d5ff5251cff78b6",
+  "commentary_sha256": "a4efb9cd51d1092530cdf6f4e67907ac2dee965e3816af28a83c5f10c0e7d536",
+  "canon_input_gzip_sha256": "2d9cd13dc56faef7791fc72e864326a096bdc68a4a13e971e2f3b5c8000412c4",
+  "canon_output_gzip_sha256": "3f1f589d01300daaf0aff1a126c2b776eacbb9fd0e7a95ee0ebaa3939369c806",
+  "idempotent_output_gzip_identical": true,
+  "unrelated_units_equal": true,
+  "all_books_blocks_notes_pages_equal": true,
+  "all_non_units_metadata_equal": true,
+  "previous_revisions": {
+    "thi-ap4": "apadana-theri45-v1",
+    "thi-ap5": "apadana-theri45-v1",
+    "thi-ap20": "apadana-theri11-20-v1",
+    "thi-ap21": "apadana-theri11-20-v1"
+  },
+  "future_holds_unchanged": {
+    "thi-ap33": true,
+    "thi-ap34": true,
+    "thi-ap35": true,
+    "thi-ap36": true,
+    "thi-ap37": true
+  },
+  "private_data": "not accessed"
+}

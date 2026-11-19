@@ -29,10 +29,12 @@ Only substantive publisher stanza entries are quotation evidence. Prefaces, head
 
 Reuse remains CC BY-NC-SA4.0 with Jonathan S. Walters/Whitman attribution, full licence links and change notices. English bodies, notes and apparatus remain live-only. Bundles contain metadata/hashes, not translated bodies. Source choice, revision/prefix continuation and foreign-owner refusal remain mandatory.
 
-Current links2603(Walters20), indexed direct/inherited1499/1922, grouped1473/1896. Daily1288, partial22, shared12/110subjects and other source holds remain unchanged. These are ten new indexed complete publisher-poem choices, not newly authored translations or newVRIwording.
+At D244, links2603(Walters20), indexed direct/inherited1499/1922, grouped1473/1896. Daily1288, partial22, shared12/110subjects and other source holds remain unchanged. These are ten new indexed complete publisher-poem choices, not newly authored translations or newVRIwording.
 
 Evidence: [final source approval](../evidence/apadana/NEXT_CHAPTER_SOURCE_APPROVAL.json), [independent source review](../evidence/apadana/NEXT_CHAPTER_SOURCE_REVIEW.json), [source goldens](../evidence/apadana/NEXT_CHAPTER_GOLDENS.json), [actual repair](../evidence/apadana/NEXT_CHAPTER_REPAIR.json), [preservation](../evidence/apadana/NEXT_CHAPTER_PRESERVATION.json), [remaining source holds](../evidence/apadana/NEXT_HELD_READINESS.json). Historical receipts remain untouched and tests check the explicit metadata repair chain.
 
 Automated candidate evidence: all498entries,350notes and528poem paragraphs match independent pins. Actual MCP, phone/desktop390/1280 and both-theme browser checks pass;220axe scans show zero violations. Stale saves, vanished references, drafts/exports and fresh locators are exercised. These are emulation, not physical-device, human assistive or specialist acceptance. Final package/commit acceptance remains a distinct gate.
 
 Reproduce with `node scripts/apadana/build.mjs --source "$APADANA_CHECKOUT" --check`; run source-enabled `tests/apadana-next.test.mjs`, `tests/apadana-next-client.test.mjs`, `tests/apadana-next-boundaries.test.mjs`, plus `scripts/web-reader-apadana-next-check.py` normal/`--a11y`/outside-source `--server-dir`. Preserve both earlier Apadāna browser suites. Run `npm run check`, smoke/evals and exact-final-commit CI. The independent `apadananext` group has20minutes;45CIjobs are configured, not a claim that they have passed.
+
+D245 subsequently activates21–30 and repairs23/24 only; this document and its receipts retain the historical D244 measurements. See [third-chapter implementation](apadana-third-chapter.md).

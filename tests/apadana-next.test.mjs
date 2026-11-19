@@ -13,10 +13,10 @@ const originalFetch=globalThis.fetch;afterEach(()=>{globalThis.fetch=originalFet
 const id=n=>'ap:chapter-4/poem-'+String(n).padStart(3,'0');
 const source=n=>readFileSync(`${checkout}/src/_poems/chapter-4/poem-${String(n).padStart(3,'0')}.md`,'utf8');
 
-test('twenty finite publisher mappings retain existing ten identities and only reviewed root repairs',()=>{
-  const data=canon.load();assert.equal(Object.keys(APADANA_PROFILES).length,20);
+test('thirty finite publisher mappings retain the next ten identities and only reviewed root repairs',()=>{
+  const data=canon.load();assert.equal(Object.keys(APADANA_PROFILES).length,30);
   for(const [uid,entry]of Object.entries(repair.units))assert.deepEqual(data.byId.get(uid),entry.after);
-  assert.equal(canon.linksFor(canon.resolve('thi-ap21').unit).links.length,0);
+  assert.equal(canon.linksFor(canon.resolve('thi-ap21').unit).links.length,1);
   for(let n=11;n<=20;n++){
     const p=APADANA_PROFILES['thi-ap'+n],u=canon.resolve(p.id).unit;
     validateLink(p,p.id,u,data.canon.books[u.book]);
@@ -64,10 +64,10 @@ test('actual API long continuations and widget preserve sparse notes and source-
     if(n===17)assert.equal(widget.english.publisher_divisions[0].translator_notes[0].number,21);
   }
   const before=fetches.length;await assert.rejects(english.translation(canon.resolve('thi-ap12').unit,id(17)),/not linked/);assert.equal(fetches.length,before);
-  assert.equal(WIDGET_URI,'ui://pali-canon/reader-v19.html');
+  assert.equal(WIDGET_URI,'ui://pali-canon/reader-v20.html');
 });
 
-test('embedded v19 reader executes sparse note and publisher division ownership guards',async()=>{
+test('embedded reader executes sparse note and publisher division ownership guards',async()=>{
   const vm=await import('node:vm');const sandbox=vm.createContext({});vm.runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('),WIDGET_HTML.indexOf('  function render(d) {'))+';globalThis.check=checkedApadana;',sandbox);
   const p=APADANA_PROFILES['thi-ap17'],english={...p,translation_id:id(17),fetched_url:p.raw_url,license_url:'https://creativecommons.org/licenses/by-nc-sa/4.0/',text:'Synthetic poem',attribution:'Synthetic attribution',changes:'Synthetic extraction',publisher_paratext:'',translator_notes:p.note_numbers.map(number=>({number,text:'Synthetic note'})),publisher_divisions:p.publisher_divisions.map(d=>({...d,text:'Synthetic division',translator_notes:[{number:21,text:'Synthetic division note'}]}))};
   const value={text_id:p.id,english};assert.equal(sandbox.check(value),value);

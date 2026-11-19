@@ -1467,7 +1467,9 @@ def main():
     assert manifest == json.loads((ROOT / 'server/data/apadana.json').read_text()), 'Package metadata differs'
     rows, commit = manifest['links'], manifest['source']['commit']
     assert commit == SOURCE_REVISION, 'Publisher revision changed'
-    assert set(rows) == set(BASELINE) | set(NEW_IDS), 'Unexpected activated source scope'
+    assert set(rows) == {'thi-ap' + str(n) for n in range(1, 31)}, 'Unexpected activated source scope'
+    # Keep historical assertions strict for the original twenty; the third-chapter harness owns 21–30.
+    historical_ids = set(BASELINE) | set(NEW_IDS)
     for uid, expected in BASELINE.items():
         assert digest(compact(rows[uid], sort=True)) == expected, uid + ': previous metadata changed'
     for uid in NEW_IDS:
@@ -1477,7 +1479,7 @@ def main():
     assert rows['thi-ap20']['chapter_summary'] == SUMMARY
     assert rows['thi-ap17']['publisher_divisions'] == DIVISIONS
     assert all('chapter_summary' not in rows[uid] for uid in NEW_IDS if uid != 'thi-ap20')
-    assert all('publisher_divisions' not in rows[uid] for uid in rows if uid != 'thi-ap17')
+    assert all('publisher_divisions' not in rows[uid] for uid in historical_ids if uid != 'thi-ap17')
     checkout = args.source_root.resolve()
     assert subprocess.check_output(['git', '-C', str(checkout), 'rev-parse', 'HEAD'], text=True).strip() == commit
     assert len(manifest['source']['rights_artifacts']) == 6
@@ -1585,7 +1587,7 @@ def main():
                     time.sleep(.1)
             else:
                 raise AssertionError('Actual packaged HTTP bundle did not start')
-            metadata = {uid: tool('get_text', {'uid': uid, 'limit': 200}) for uid in rows}
+            metadata = {uid: tool('get_text', {'uid': uid, 'limit': 200}) for uid in rows if uid in historical_ids}
             assert not ledger.exists(), 'Metadata automatically retrieved English'
             for uid, meta in metadata.items():
                 if uid in BASELINE_ROOT_SEGMENTS:
@@ -1601,7 +1603,13 @@ def main():
                     assert meta['source']['locator_revision'] == manifest['vri_commit'] + '-apadana-theri11-20-v1'
             neighbor = tool('get_text', {'uid': 'thi-ap21', 'limit': 200})
             assert neighbor['source']['locator_revision'] == manifest['vri_commit'] + '-apadana-theri11-20-v1'
-            assert neighbor['english_available'] == []
+            # Source21's D244 Pāli locator remains stable after its separate reviewed English approval.
+            assert len(neighbor['english_available']) == 1
+            neighbor_choice = neighbor['english_available'][0]
+            assert neighbor_choice['translation_id'] == version('thi-ap21')
+            assert neighbor_choice['translation_revision'] == commit
+            assert neighbor_choice['license'] == 'CC BY-NC-SA 4.0'
+            assert neighbor_choice['url'] == rows['thi-ap21']['url']
             for uid in NEW_IDS:
                 foreign = next(candidate for candidate in NEW_IDS if candidate != uid)
                 for request in ({'uid': uid, 'translation': version(foreign)},

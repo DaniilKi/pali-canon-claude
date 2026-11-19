@@ -68,7 +68,7 @@ const manifest = {
     translator: APADANA_TRANSLATOR, publisher: 'Jonathan S. Walters and Whitman College', license: APADANA_LICENSE, license_url: APADANA_LICENSE_URL,
     notice_url: 'https://apadanatranslation.com/about/', checked: '2026-11-19', rights_artifacts: rights,
     rights_note: 'Explicit translation grant in About, LICENSE.md, footer and ePub metadata is CC BY-NC-SA 4.0. Conflicting generic CC-BY site.json does not relax those terms. No warranty or endorsement is implied.',
-    policy: 'Live only, twenty finite complete publisher-edition poems; original chapter summaries, recitation divisions and their notes separately scoped; no line-complete VRI claim; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI.' },
+    policy: 'Live only, thirty finite complete publisher-edition poems; original chapter summaries, recitation divisions and their notes separately scoped; no line-complete VRI claim; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI.' },
   vri_commit: APADANA_VRI_COMMIT,
   held: {},
   links,
