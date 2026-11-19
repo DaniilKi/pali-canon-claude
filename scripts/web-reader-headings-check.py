@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Actual printed source headings, filters and pinned reading. Invalid/stale metadata are fixtures."""
-import argparse, copy, json, os, pathlib, socket, subprocess, time, urllib.parse, urllib.request
+import argparse, copy, hashlib, json, os, pathlib, socket, subprocess, time, urllib.parse, urllib.request
 from playwright.sync_api import expect, sync_playwright
+from web_reader_test_helpers import read_tool
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 KEY, PRIVATE = 'pali-library-v1', 'PRIVATE_SOURCE_HEADING_NOTE_'
@@ -11,7 +12,7 @@ parser.add_argument('--report'); parser.add_argument('--a11y', action='store_tru
 args = parser.parse_args(); started = time.monotonic()
 server_dir = args.server_dir.resolve() if args.server_dir else ROOT / 'server'
 with socket.socket() as sock: sock.bind(('127.0.0.1', 0)); port = sock.getsockname()[1]
-base = f'http://127.0.0.1:{port}'; checks, scans, receipts = [], [], []
+base = f'http://127.0.0.1:{port}'; checks, scans, receipts, semantic_receipts = [], [], [], []
 server = subprocess.Popen(['node', str(server_dir / 'http.cjs')], cwd='/tmp' if args.server_dir else ROOT,
     env={**os.environ, 'PORT': str(port), 'HOST': '127.0.0.1', 'RATE_LIMIT_PER_MINUTE': '0'}, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 def tool(name, arguments):
@@ -33,6 +34,17 @@ def fields(href): return dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(href)
 def reply(r, data=None, error=None):
     result = {'isError': True, 'structuredContent': {'error': error}} if error else {'structuredContent': data}
     r.fulfill(status=200, content_type='application/json', body=json.dumps({'jsonrpc': '2.0', 'id': r.request.post_data_json['id'], 'result': result}))
+
+def source_semantics(page, data, root='section[aria-label="Pāli passage"]', level=3, passage='.passage'):
+    region = page.locator(root); blocks = region.locator(passage)
+    assert blocks.all_text_contents() == [segment['text'] for segment in data['segments']]
+    expected_headings = [segment['text'] for segment in data['segments'] if segment['type'] == 'heading']
+    assert region.locator('h' + str(level) + passage).all_text_contents() == expected_headings
+    if root.startswith('section'):
+        expect(region.get_by_role('heading', level=level)).to_have_text(expected_headings)
+    assert blocks.evaluate_all("nodes=>nodes.map(node=>({tag:node.tagName,lang:node.getAttribute('lang')}))") == [
+        {'tag': 'H' + str(level) if segment['type'] == 'heading' else 'P', 'lang': 'pi'} for segment in data['segments']]
+    return expected_headings
 
 try:
     for _ in range(100):
@@ -62,6 +74,30 @@ try:
         assert data['headings_only'] is True and all(r['type'] == 'heading' for r in data['results'])
         receipts.append({'book': data['book']['id'], 'query': data['query'], 'offset': data['offset'], 'total_headings': data['total_headings'],
                          'refs': [r['ref'] for r in data['results']], 'source': revision(data)})
+    commentary_id = tool('get_commentary', {'uid': 'commentary', 'limit': 40})['books'][0]['uid']
+    post_id = tool('get_post_canonical', {'limit': 40})['items'][0]['id']
+    semantic_cases = []
+    for label, command, arguments, context in [
+        ('canonical', 'get_text', {'uid': 'mn10'}, {'uid': 'mn10'}),
+        ('root book', 'get_text', {'book': 'vin02m1'}, {'book': 'vin02m1'}),
+        ('direct commentary', 'get_commentary', {'uid': commentary_id}, {'kind': 'commentary', 'uid': commentary_id}),
+        ('later work', 'get_post_canonical', {'citation': post_id}, {'kind': 'post', 'uid': post_id}),
+        ('canonical verse', 'get_text', {'uid': 'dhp183'}, {'uid': 'dhp183'})]:
+        for script in ['roman', 'sinhala']:
+            data = tool(command, {**arguments, 'offset': 0, 'limit': 30, 'script': script})
+            semantic_cases.append({'label': label, 'script': script, 'command': command, 'arguments': arguments, 'context': context, 'data': data})
+    heading_previews = {}
+    for script in ['roman', 'sinhala']:
+        direct = next(case['data'] for case in semantic_cases if case['label'] == 'direct commentary' and case['script'] == script)
+        query = next(segment['text'] for segment in direct['segments'] if segment['type'] == 'heading')
+        search = tool('search_commentary', {'query': query, 'offset': 0, 'limit': 15, 'script': script})
+        index, selected = next((i, hit) for i, hit in enumerate(search['results']) if hit['type'] == 'heading')
+        command = {k: v for k, v in selected['context_with'].items() if k != 'tool'}
+        context_data = tool('get_commentary', {**command, 'script': script})
+        assert any(segment['type'] == 'heading' for segment in context_data['segments'])
+        heading_previews[script] = {'query': query, 'index': index, 'data': context_data}
+    inline_commentary = {script: tool('get_commentary', {'uid': 'mn10', 'offset': 0, 'limit': 20, 'script': script}) for script in ['roman', 'sinhala']}
+    assert {s['type'] for c in semantic_cases for s in c['data']['segments']} >= {'heading', 'prose', 'verse'}
     mark = {'uid': 'book:vin02m1', 'ref': hit['ref'], 'offset': 1005, 'source_commit': revision(filtered),
             'title': first['book']['title'], 'note': PRIVATE + 'durable <script>window.headingInjected=true</script> ā😀'}
     with sync_playwright() as pw:
@@ -70,8 +106,8 @@ try:
         for width, theme in [(w, t) for w in [320, 390, 768, 1280] for t in (['light', 'dark'] if args.a11y else ['light'])]:
             def passed(check):
                 checks.append({'width': width, 'theme': theme, 'check': check}); print(f'{width}px {theme}: {check}', flush=True)
-            def environment(script='roman'):
-                seed = {'theme': theme, 'font': 30, 'script': script, 'remember_position': False, 'saved': [mark], 'reading_progress': []}
+            def environment(script='roman', font=30):
+                seed = {'theme': theme, 'font': font, 'script': script, 'remember_position': False, 'saved': [mark], 'reading_progress': []}
                 context = browser.new_context(viewport={'width': width, 'height': 900}, bypass_csp=args.a11y)
                 context.add_init_script("if(!localStorage.getItem('pali-library-v1'))localStorage.setItem('pali-library-v1'," + json.dumps(json.dumps(seed)) + ");" +
                     "window.headingIgnoreAbort=false;const headingFetch=window.fetch.bind(window);window.fetch=(url,options)=>{if(window.headingIgnoreAbort&&JSON.parse(options?.body||'{}').params?.name==='search_source_book'){window.headingIgnoreAbort=false;const {signal,...rest}=options;return headingFetch(url,rest).then(async response=>{await response.clone().text();document.documentElement.setAttribute('data-heading-body-complete','true');return response})}return headingFetch(url,options)};")
@@ -82,7 +118,7 @@ try:
                         state['forbidden'].append(request.url); r.abort()
                     elif request.method == 'POST' and request.url.endswith('/mcp'):
                         params = request.post_data_json.get('params', {}); state['calls'].append(copy.deepcopy(params)); name = params.get('name')
-                        if name not in ['browse_canon', 'search_source_book', 'get_text'] or 'translation' in params.get('arguments', {}): state['forbidden'].append(params); r.abort()
+                        if name not in ['browse_canon', 'search_source_book', 'get_text', 'get_commentary', 'get_post_canonical', 'search_commentary'] or 'translation' in params.get('arguments', {}): state['forbidden'].append(params); r.abort()
                         elif name == 'search_source_book' and state['mode'] == 'hold':
                             state['held'].append(r); request.frame.evaluate("document.documentElement.setAttribute('data-heading-held','true')")
                         elif name == 'search_source_book' and state['mode'] == 'error': reply(r, error='Controlled printed-heading service error')
@@ -125,6 +161,7 @@ try:
                 assert page.title() == 'Source headings · Pāli Library'
             def read_ready(page, data):
                 texts = page.locator('section[aria-label="Pāli passage"] .passage'); expect(texts).to_have_text([s['text'] for s in data['segments']]); assert texts.all_text_contents() == [s['text'] for s in data['segments']]
+                source_semantics(page, data)
             def observe(page):
                 page.evaluate("""()=>{window.headingObserver?.disconnect();window.headingAdded=0;window.headingObserver=new MutationObserver(records=>{for(const r of records)for(const n of r.addedNodes)if(n.nodeType===1)window.headingAdded+=(n.matches('.passage')?1:0)+n.querySelectorAll('.passage').length});window.headingObserver.observe(document.getElementById('view'),{childList:true,subtree:true})}""")
             def no_transient(page):
@@ -253,9 +290,84 @@ try:
             page.get_by_role('link', name='Open heading · ' + hit['ref'], exact=True).click(); read_ready(page, native_exact); audit(page, state, 'actual native heading source position')
             passed('native blank browse and source-derived heading filter preserve backend conversion labels, literal Unicode and actual exact-source reading')
             context.close()
+            for script in ['roman', 'sinhala']:
+                context, page, state = environment(script, font=None); saved(page)
+                draft = PRIVATE + 'semantic unsaved ā😀'
+                page.get_by_label('Your personal note', exact=True).fill(draft)
+                raw = page.evaluate('localStorage.getItem("pali-library-v1")')
+                for case in [c for c in semantic_cases if c['script'] == script]:
+                    data = case['data']
+                    pinned = {**case['context'], 'offset': '0', 'page_source': revision(data)}
+                    page.goto(base + '/#read?' + urllib.parse.urlencode(pinned)); read_ready(page, data)
+                    actual_headings = source_semantics(page, data)
+                    first_passage = page.locator('section[aria-label="Pāli passage"] .passage').first
+                    box = first_passage.bounding_box()
+                    line = first_passage.evaluate('(node)=>parseFloat(getComputedStyle(node).lineHeight)')
+                    if width <= 390 and case['label'] == 'canonical':
+                        assert box['y'] + line <= (700 if width == 320 else 844), (width, script, box, line)
+                    for index, segment in enumerate(data['segments']):
+                        if segment['type'] != 'heading': continue
+                        exact = page.get_by_role('link', name='Open exact passage ' + segment['ref'], exact=True)
+                        fields_actual = fields(exact.get_attribute('href'))
+                        assert fields_actual == {**case['context'], 'offset': str(index), 'ref': segment['ref'], 'source': revision(data)}
+                    if data['segments'][0]['type'] == 'heading':
+                        exact = page.get_by_role('link', name='Open exact passage ' + data['segments'][0]['ref'], exact=True)
+                        previous_passage = first_passage.element_handle()
+                        exact.focus(); page.keyboard.press('Enter')
+                        page.wait_for_function('(node)=>!node.isConnected', arg=previous_passage)
+                        read_ready(page, data)
+                        assert fields(page.url)['source'] == revision(data)
+                    audit(page, state, case['label'] + ' ' + script + ' literal source headings are accessible without turning prose/verse into headings')
+                    if case['label'] == 'canonical':
+                        read_tool(page, 'Traditional commentary').click()
+                        expect(page.locator('#study .passage')).to_have_text([s['text'] for s in inline_commentary[script]['segments']])
+                        source_semantics(page, inline_commentary[script], '#study', 4)
+                        expect(page.locator('#study').get_by_role('heading', level=4)).to_have_text([s['text'] for s in inline_commentary[script]['segments'] if s['type'] == 'heading'])
+                        audit(page, state, script + ' aligned inline commentary keeps its distinct level-four source headings')
+                    # beforeprint builds the real private-free sheet while preserving its hidden normal-UI lifecycle.
+                    page.evaluate("dispatchEvent(new Event('beforeprint'))")
+                    sheet = page.locator('#print-document')
+                    expect(sheet).to_have_attribute('aria-hidden', 'true')
+                    assert sheet.locator('h1').count() == 1
+                    source_semantics(page, data, '#print-document', 2, '.print-passage')
+                    assert PRIVATE not in sheet.text_content() and 'Your personal note' not in sheet.text_content()
+                    assert sheet.locator('textarea,input,button').count() == 0
+                    page.emulate_media(media='print')
+                    print_styles = sheet.locator('.print-passage').evaluate_all("nodes=>nodes.map(node=>{const s=getComputedStyle(node);return {fontSize:s.fontSize,fontWeight:s.fontWeight,lineHeight:s.lineHeight,marginTop:s.marginTop,marginBottom:s.marginBottom}})")
+                    assert all(style == print_styles[0] for style in print_styles), 'Printed literal headings changed paragraph typography'
+                    assert print_styles[0] == {'fontSize': '17.3333px', 'fontWeight': '400', 'lineHeight': '31.2px', 'marginTop': '17.3333px', 'marginBottom': '17.3333px'}
+                    page.emulate_media(media='screen'); page.evaluate("dispatchEvent(new Event('afterprint'))")
+                    assert sheet.text_content() == ''
+                    assert page.evaluate('localStorage.getItem("pali-library-v1")') == raw
+                    semantic_receipts.append({'width': width, 'theme': theme, 'script': script, 'kind': case['label'],
+                        'source': revision(data), 'refs': [s['ref'] for s in data['segments']],
+                        'source_headings': len(actual_headings), 'segments': len(data['segments']),
+                        'types': {kind: sum(s['type'] == kind for s in data['segments']) for kind in ['heading', 'prose', 'verse']},
+                        'text_sha256': hashlib.sha256(json.dumps([s['text'] for s in data['segments']], ensure_ascii=False).encode()).hexdigest(),
+                        'first_passage_y': box['y'], 'line_height': line, 'print_style': print_styles[0]})
+                preview = heading_previews[script]
+                page.goto(base + '/#search?' + urllib.parse.urlencode({'q': preview['query'], 'scope': 'commentary'}))
+                row = page.locator('section[aria-label="Commentary search results"] .commentary-search-result').nth(preview['index'])
+                row.get_by_role('button', name='Read surrounding context', exact=True).click()
+                pane = page.get_by_role('region', name='Surrounding commentary context', exact=True)
+                expect(pane.locator('.passage')).to_have_text([segment['text'] for segment in preview['data']['segments']])
+                source_semantics(page, preview['data'], '[aria-label="Surrounding commentary context"]', 5)
+                expect(pane.get_by_role('heading', level=5)).to_have_text([segment['text'] for segment in preview['data']['segments'] if segment['type'] == 'heading'])
+                assert pane.get_by_role('heading', level=4).all_text_contents() == [segment['ref'] for segment in preview['data']['segments']]
+                audit(page, state, script + ' actual commentary heading search preview retains ref h4 and literal source h5')
+                saved(page); expect(page.get_by_label('Your personal note', exact=True)).to_have_value(draft)
+                with page.expect_download() as download:
+                    page.get_by_role('button', name='Export bookmarks and notes', exact=True).click()
+                exported = json.loads(pathlib.Path(download.value.path()).read_text())
+                assert exported['saved'][0]['note'] == draft
+                assert page.evaluate('localStorage.getItem("pali-library-v1")') == raw
+                audit(page, state, script + ' semantic-source navigation and print preserve raw private draft and export')
+                passed(script + ': four real source modes plus verse retain literal heading roles, exact pins/text/lang, paragraph print geometry and private draft/export')
+                context.close()
+
         browser.close()
     result = {'status': 'passed' if not any(s['violations'] for s in scans) else 'failed', 'passed': len(checks), 'checks': checks,
-        'duration_seconds': round(time.monotonic() - started, 2), 'engine': engine, 'outside_source_tree': bool(args.server_dir), 'actual_pages': receipts,
+        'duration_seconds': round(time.monotonic() - started, 2), 'engine': engine, 'outside_source_tree': bool(args.server_dir), 'actual_pages': receipts, 'semantic_sources': semantic_receipts,
         'a11y': {'scans': len(scans), 'violations': sum(len(s['violations']) for s in scans), 'results': scans},
         'limits': 'Actual bundled printed source headings, source references/revisions and unchanged get_text wording. Representative blank/filter/late pages only, not complete browser traversal of all 20,329 headings. Heading rows include invocations and colophons and establish no canonical hierarchy. Invalid metadata, changed revisions, service errors and abort-ignoring held responses are explicit fixtures. No publisher fetch, English retrieval, private writes, scripture reconstruction or physical-device/human-accessibility certification. Only axe contexts bypass CSP.'}
     print(json.dumps(result, indent=2))

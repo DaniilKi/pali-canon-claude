@@ -1,0 +1,387 @@
+{
+  "schema": "complete-vinaya-source-survey-v1",
+  "reviewed_on": "2026-11-19",
+  "baseline": "387bd7c293b439328640d8706c0bdae5eae57776",
+  "status": "no-complete-indexed-unit-qualified-in-bounded-survey",
+  "coverage_delta": {
+    "whole_vinaya": 0,
+    "partial_vinaya": 0
+  },
+  "existing_vinaya": {
+    "indexed_units": 443,
+    "whole_english_units": 0,
+    "partial_english_units": 3,
+    "all_reviewed_partial_sources": 21
+  },
+  "modern_sources": [
+    {
+      "name": "Khematto Bhikkhu, The Mahāvagga",
+      "primary_urls": [
+        "https://www.dhammatalks.org/books/",
+        "https://www.dhammatalks.org/vinaya/Mv/Mahavagga_Index.html",
+        "https://www.dhammatalks.org/vinaya/Mv/Cover.html",
+        "https://www.dhammatalks.org/"
+      ],
+      "evidence_locations": {
+        "books": "107–110: side-by-side translation, read link",
+        "index": "23–39: translator, Royal Thai recension via Digital Pali Reader, commentary/subcommentary disclosure, ten Khandhaka indexes",
+        "site_rights": "400–405: site-wide CC BY-NC4.0 intention and any-sale commercial definition"
+      },
+      "completeness": "Ten Khandhaka indexes, plus substantive bilingual bodies and translated concluding mnemonic sections directly observed for III and VII. This supports a full-Khandhaka candidate, not validated complete VRI-unit equivalence.",
+      "rights": "Positive current official site-wide CC BY-NC4.0 notice; the site calls it Unported but links the4.0 legal URL. No separate copyright/edition date was visible on reviewed index, cover or sampled chapter pages. Preserve the complete actual notice, Khematto attribution and the any-sale commercial definition. Do not label this Thanissaro-only or infer a new permission-letter requirement.",
+      "respect": "No no-AI request observed on the reviewed publisher index, main Copyright FAQ or sampled chapter pages; this is a bounded observation, not a universal author-preference claim. No SuttaCentral data acquired.",
+      "digital_artifact": "Official HTML exists. Only supported rendered views inspected. Parent reported official raw index CONNECT policy403; no raw hashes, exact DOM, extraction pins or complete notice artifact collected. No mirror/proxy/alternate-domain workaround attempted.",
+      "alignment": "Royal Thai recension with variant readings, not the bundled VRI recension. Commentary blue and subcommentary green are explicitly disclosed; color alone must not be the machine classifier. Preserve abbreviations and translator notes; structurally distinguish all noncanonical matter. Full English/Pali/adjacent-boundary review remains.",
+      "candidate_slice": {
+        "id": "pli-tv-kd7",
+        "reason": "Shortest of the ten bundled Khandhakas by character count; complete source concluding section and translated mnemonic verses visible. Strong practical first full-unit review candidate.",
+        "bundled_segments": 190,
+        "bundled_characters": 40349,
+        "bundled_vri": "306–325",
+        "source_urls": [
+          "https://www.dhammatalks.org/vinaya/Mv/MvVII_Index.html",
+          "https://www.dhammatalks.org/vinaya/Mv/MvVII.html"
+        ],
+        "rendered_evidence": "Index27–41 lists sections187–200 plus mnemonic verses; body666–715 includes final constraints discussion, closing Khandhaka formula and mnemonic translations. This does not establish every interior VRI passage translated.",
+        "activated": false
+      },
+      "prerequisites": [
+        "Acquire the exact official artifact through an authorized supported route and pin raw HTML and complete rights/provenance bytes.",
+        "Inspect full actual DOM and all canonical/variant/commentary/notes structures; design fail-closed extraction preserving author additions as labelled additions.",
+        "Independently compare the whole chapter and all VRI segments, including beginnings/endings, headings, uddana and repetitions; record numbering and recension differences.",
+        "Add source-specific runtime identity, bounded paging, rights, excerpt/whole refusal and drift regressions; preserve the existing21partial sources."
+      ]
+    },
+    {
+      "name": "I.B. Horner, PTS The Book of the Discipline,6vols",
+      "primary_urls": [
+        "https://palitextsociety.org/copyright-information/",
+        "https://palitextsociety.org/product/the-book-of-the-discipline-6-volumes/",
+        "https://palitextsociety.org/product/the-book-of-the-discipline-complete-set-of-6-volumes/",
+        "https://palitextsociety.org/product-category/downloads/",
+        "https://palitextsociety.org/product-category/downloads/page/2/"
+      ],
+      "evidence_locations": {
+        "rights": "66–70:10May2013 CC BY-NC3.0, explicitly names all6volumes and noncommercial reproduction/reformat/transmission/distribution without further contact",
+        "product": "89–101: edition years, VolumeI2014 hitherto untranslated Kieffer-Pülz passages; I–III Suttavibhanga,IV Mahavagga,V Cullavagga,VI Parivara"
+      },
+      "completeness": "Publisher presents a full6-volume Vinaya translation set. The express2014 previously-untranslated passages warning means earlier VolumeI cannot be assumed verbatim-complete; individual unit and edition inspection is still necessary.",
+      "rights": "Positive specific2013 CC BY-NC3.0 grant for Horner6vols; the2021 CC BY-NC4.0 list concerns five Nanamoli works, not a Horner relicensing. Do not silently extend2013 authorship/grant to post2013 added translation passages without edition-specific evidence.",
+      "digital_artifact": "No Horner download appears among the24 entries on the two current official PTS Downloads pages inspected. This is bounded catalogue evidence, not proof no publisher artifact exists. No authoritative bytes or front matter acquired.",
+      "additional_primary_host_lead": {
+        "url": "https://ancient-buddhist-texts.net/Reference/PTS-titles.htm",
+        "evidence": "Anandajoti-hosted July2023 catalogue repeats the specific PTS grant and says he provided noncommercial PDF copies, links all6vols. This is a primary-host redistribution statement, not proof of exact file fidelity/edition completeness.",
+        "files": [
+          {
+            "url": "https://ancient-buddhist-texts.net/Reference/PTS/Horner-The-Book-of-the-Discipline-04.pdf",
+            "supported_web_result": "Rejected: content length18140743 too large"
+          },
+          {
+            "url": "https://ancient-buddhist-texts.net/Reference/PTS/Horner-The-Book-of-the-Discipline-06.pdf",
+            "supported_web_result": "Rejected: content length30849144 too large"
+          }
+        ],
+        "raw_sha256": null,
+        "front_matter_verified": false,
+        "workaround_attempted": false
+      },
+      "alignment": "No whole indexed Vinaya unit independently aligned. PTS English volumes/pages differ from Pali PTS pages and bundled VRI numbering. OCR/scans need proofreading and front-matter/edition evidence.",
+      "blocker": "Exact supported digital artifact/front matter, edition-specific grant scope for additions, trustworthy extraction and full unit alignment."
+    },
+    {
+      "name": "Thanissaro Bhikkhu, Bhikkhu/Bhikkhuni Patimokkha",
+      "primary_urls": [
+        "https://www.dhammatalks.org/vinaya_essays_index.html",
+        "https://www.dhammatalks.org/vinaya/bhikkhu-pati.html",
+        "https://www.dhammatalks.org/vinaya/bhikkhuni-pati.html"
+      ],
+      "completeness": "Publisher explicitly describes translations of the monks and nuns rule recitations with introductory essays. Complete rule-code coverage is not complete Suttavibhanga coverage, whose indexed units include origin stories, definitions, exceptions and analysis.",
+      "rights": "Official site-wide CC BY-NC4.0 notice; reviewed rule pages do not expose a separate copyright header in rendered text. Exact-source notice carriage remains to be pinned.",
+      "digital_artifact": "Official HTML is rendered, no raw artifact pin acquired.",
+      "alignment": "Could support exact rule-formula partials after separate boundary review, not227whole Suttavibhanga units.",
+      "blocker": "Fails requested whole-unit scope; at most future reviewed partial-rule mapping."
+    },
+    {
+      "name": "Thanissaro Bhikkhu, Buddhist Monastic Code I/II",
+      "primary_urls": [
+        "https://www.dhammatalks.org/vinaya/bmc/Section0000.html",
+        "https://www.dhammatalks.org/vinaya/bmc/Section0002.html",
+        "https://www.dhammatalks.org/vinaya/bmc/Section0007.html"
+      ],
+      "completeness": "Organized explanations of Patimokkha and Khandhaka rules, with canonical quotations and commentarial reasoning. It is not a sequential complete translation of all Suttavibhanga/Khandhaka source units.",
+      "rights": "Exact copyright page35–43 identifies third edition revised2025, Thanissaro,CC BY-NC4.0,any sale commercial,ebookISBN979-8-90281-350-7.",
+      "digital_artifact": "Official web edition; existing app bundles only227verified links. No BMC body acquired or proposed for canonical activation.",
+      "alignment": "Keep commentary and rule guidance distinct from scripture;227existing rule links do not count as227whole translations.",
+      "blocker": "Requested canonical completeness not satisfied."
+    }
+  ],
+  "older_edition_artifacts": [
+    {
+      "artifact": "ISTA SBE13",
+      "edition": "Oxford Clarendon1881; RhysDavids/Oldenberg; SBE13",
+      "nominal_scope": [
+        "pli-tv-kd1",
+        "pli-tv-kd2",
+        "pli-tv-kd3",
+        "pli-tv-kd4"
+      ],
+      "other_scope": "Mens Patimokkha only; does not translate full indexed Vibhaṅga units",
+      "url": "https://sacred-texts.com/book/vinaya-texts-2",
+      "title_url": "https://sacred-texts.com/book/vinaya-texts-2/title-page",
+      "rights": "Original1881 edition; ISTA site-specific noncommercial attribution and robot conditions require preserving digital artifact terms, rather than unrestricted PD inference",
+      "proofreading": "Title credits ChristopherM.Weimer scanning/formatting April-May2002; no independent full collation verified",
+      "raw_artifact_sha256": null,
+      "revision": null,
+      "decision": "hold",
+      "blockers": [
+        "No source raw bytes or immutable revision acquired",
+        "All source/root boundaries, repetitions and final uddānas unverified",
+        "New provider not runtime/executor allowlisted"
+      ]
+    },
+    {
+      "artifact": "ISTA SBE17",
+      "edition": "Oxford Clarendon1882; RhysDavids/Oldenberg; SBE17",
+      "nominal_scope": [
+        "pli-tv-kd5",
+        "pli-tv-kd6",
+        "pli-tv-kd7",
+        "pli-tv-kd8",
+        "pli-tv-kd9",
+        "pli-tv-kd10",
+        "pli-tv-kd11",
+        "pli-tv-kd12",
+        "pli-tv-kd13"
+      ],
+      "url": "https://sacred-texts.com/book/vinaya-texts-part-ii",
+      "title_url": "https://sacred-texts.com/book/vinaya-texts-part-ii/title-page",
+      "rights": "Title explicitly permits noncommercial use retaining complete notice;2005 JohnBrunoHare attribution. Generic originalPD does not erase digital terms",
+      "proofreading": "Source title explicitly credits JohnBrunoHare proofing/formatting August2005; independently uncollated",
+      "raw_artifact_sha256": null,
+      "revision": null,
+      "decision": "hold",
+      "blockers": [
+        "No immutable/raw artifact pin",
+        "Full indexed-root boundaries and omitted uddānas unverified",
+        "Robot terms permit one copy of one text/day; no bulk acquisition authorized",
+        "New provider not runtime/executor allowlisted"
+      ]
+    },
+    {
+      "artifact": "ISTA SBE20",
+      "edition": "Oxford Clarendon1885; RhysDavids/Oldenberg; SBE20",
+      "nominal_scope": [
+        "pli-tv-kd14",
+        "pli-tv-kd15",
+        "pli-tv-kd16",
+        "pli-tv-kd17",
+        "pli-tv-kd18",
+        "pli-tv-kd19",
+        "pli-tv-kd20",
+        "pli-tv-kd21",
+        "pli-tv-kd22"
+      ],
+      "url": "https://sacred-texts.com/book/vinaya-texts",
+      "title_url": "https://sacred-texts.com/bud/sbe20/sbe20000.htm",
+      "rights": "Title explicitly permits noncommercial reuse with full2005 JohnBrunoHare attribution; ISTA collection/index/navigation material separate",
+      "proofreading": "Publisher credits JohnBrunoHare proofing/formatting; independent scan comparison not completed",
+      "raw_artifact_sha256": null,
+      "revision": null,
+      "decision": "hold",
+      "blockers": [
+        "Concrete Kd21 whole-unit mismatch: untranslated VRI tail/40–48",
+        "No immutable/raw artifact pin",
+        "Other8indexed Khandhakas not complete-body verified",
+        "New provider not runtime/executor allowlisted"
+      ]
+    },
+    {
+      "artifact": "Wikisource scan/index SBE13",
+      "edition": "Oxford Clarendon1881; RhysDavids/Oldenberg",
+      "nominal_scope": [
+        "pli-tv-kd1",
+        "pli-tv-kd2",
+        "pli-tv-kd3",
+        "pli-tv-kd4"
+      ],
+      "url": "https://en.wikisource.org/wiki/Index:Sacred_Books_of_the_East_-_Volume_13.djvu",
+      "revision": "16090848",
+      "rights": "Source index identifies original edition; file-specific rights not independently read for this volume",
+      "proofreading": "Index says To be proofread; Index not transcluded or unreviewed",
+      "raw_artifact_sha256": null,
+      "decision": "hold",
+      "blockers": [
+        "No complete proofread/transcluded English unit established",
+        "Index revision does not freeze all Page transcriptions",
+        "Current executor/runtime do not allow host",
+        "Exact VRI boundaries remain unverified"
+      ]
+    },
+    {
+      "artifact": "Wikisource scan/index SBE17",
+      "edition": "Oxford Clarendon1882; RhysDavids/Oldenberg",
+      "nominal_scope": [
+        "pli-tv-kd5",
+        "pli-tv-kd6",
+        "pli-tv-kd7",
+        "pli-tv-kd8",
+        "pli-tv-kd9",
+        "pli-tv-kd10",
+        "pli-tv-kd11",
+        "pli-tv-kd12",
+        "pli-tv-kd13"
+      ],
+      "url": "https://en.wikisource.org/wiki/Index:Sacred_Books_of_the_East_-_Volume_17.djvu",
+      "revision": "13870746",
+      "rights": "Source index identifies original edition; file-specific rights not independently read for this volume",
+      "proofreading": "Index says To be proofread; Index not transcluded or unreviewed",
+      "raw_artifact_sha256": null,
+      "decision": "hold",
+      "blockers": [
+        "No complete proofread/transcluded English unit established",
+        "Index revision does not freeze all Page transcriptions",
+        "Current executor/runtime do not allow host",
+        "Exact VRI boundaries remain unverified"
+      ]
+    },
+    {
+      "artifact": "Wikisource scan/index SBE20",
+      "edition": "Oxford Clarendon1885; RhysDavids/Oldenberg",
+      "nominal_scope": [
+        "pli-tv-kd14",
+        "pli-tv-kd15",
+        "pli-tv-kd16",
+        "pli-tv-kd17",
+        "pli-tv-kd18",
+        "pli-tv-kd19",
+        "pli-tv-kd20",
+        "pli-tv-kd21",
+        "pli-tv-kd22"
+      ],
+      "url": "https://en.wikisource.org/wiki/Index:Sacred_Books_of_the_East_-_Volume_20.djvu",
+      "revision": "16090785",
+      "rights": "File explicitly PublicDomainMark1.0, life+70 and US pre1931; scan file distinct from editable transcription",
+      "proofreading": "Index says To be proofread; Index not transcluded or unreviewed",
+      "raw_artifact_sha256": null,
+      "decision": "hold",
+      "blockers": [
+        "No complete proofread/transcluded English unit established",
+        "Index revision does not freeze all Page transcriptions",
+        "Current executor/runtime do not allow host",
+        "Exact VRI boundaries remain unverified"
+      ]
+    },
+    {
+      "artifact": "InternetArchive Princeton part1",
+      "edition": "Original Clarendon1881; not modern reprint",
+      "nominal_scope": [
+        "pli-tv-kd1",
+        "pli-tv-kd2",
+        "pli-tv-kd3",
+        "pli-tv-kd4"
+      ],
+      "url": "https://archive.org/details/vinayatexts01davi",
+      "raw_locator_observed": "https://archive.org/stream/vinayatexts01davi/vinayatexts01davi_djvu.txt",
+      "revision": "Added2008-04-23T13:20:47; scandate20080425184824; OCR conversion abbyy-to-hocr1.1.37 (not immutable file hash)",
+      "rights": "Item says NOT_IN_COPYRIGHT; evidence reports1881 and no visible copyright notice; delivery terms not fully inspected",
+      "proofreading": "MachineOCR available; observed obvious OCR corruption in table of contents and English; no human validation claimed",
+      "raw_artifact_sha256": null,
+      "decision": "hold",
+      "blockers": [
+        "OCR is not a proofread translation",
+        "Original scan completeness/page mapping unverified",
+        "Metadata/download APIs inaccessible to web tool; no exact bytes/hash",
+        "Current executor/runtime do not allow host"
+      ]
+    },
+    {
+      "artifact": "InternetArchive Princeton part3",
+      "edition": "Original Clarendon1885",
+      "nominal_scope": [
+        "pli-tv-kd14",
+        "pli-tv-kd15",
+        "pli-tv-kd16",
+        "pli-tv-kd17",
+        "pli-tv-kd18",
+        "pli-tv-kd19",
+        "pli-tv-kd20",
+        "pli-tv-kd21",
+        "pli-tv-kd22"
+      ],
+      "url": "https://archive.org/details/vinayatexts03davi",
+      "raw_locator_observed": "https://archive.org/download/vinayatexts03davi/vinayatexts03davi_hocr.html",
+      "revision": "Added2008-04-23T13:26:20; scandate20080425140222; OCR abbyy-to-hocr1.1.11 (not immutable hash)",
+      "rights": "Item NOT_IN_COPYRIGHT with1885/no-visible-notice evidence; delivery terms not fully inspected",
+      "proofreading": "MachineOCR, no complete human-proofreading evidence",
+      "raw_artifact_sha256": null,
+      "decision": "hold",
+      "blockers": [
+        "OCR download redirected to inaccessible archive storage host; not followed by another route",
+        "Source complete-unit mismatch remains even if OCR corrected",
+        "No raw revision hash",
+        "Current executor/runtime do not allow host"
+      ]
+    },
+    {
+      "artifact": "ProjectGutenberg survey",
+      "edition": null,
+      "nominal_scope": [],
+      "url": "https://www.gutenberg.org/ebooks/search/?query=vinaya",
+      "rights": null,
+      "proofreading": null,
+      "raw_artifact_sha256": null,
+      "revision": null,
+      "decision": "no qualifying edition located in bounded search",
+      "blockers": [
+        "Maincatalog search inaccessible through web tool",
+        "Indexed primary-domain searches found bibliographic mentions, not the SBE translation itself",
+        "Do not confuse self.gutenberg community uploads with a Gutenberg proofread edition"
+      ]
+    }
+  ],
+  "concrete_scope_control": {
+    "unit_id": "pli-tv-kd21",
+    "vri": "437–445",
+    "pts": {
+      "volume": 2,
+      "page": 284,
+      "end_page": 293
+    },
+    "segments": 49,
+    "source": "https://sacred-texts.com/book/vinaya-texts/chapter-1-8",
+    "published_pages": "370–385",
+    "source_ends": "Published section16 and ending colophon, then notes",
+    "omitted_root_refs": [
+      "pli-tv-kd21/40",
+      "pli-tv-kd21/41",
+      "pli-tv-kd21/42",
+      "pli-tv-kd21/43",
+      "pli-tv-kd21/44",
+      "pli-tv-kd21/45",
+      "pli-tv-kd21/46",
+      "pli-tv-kd21/47",
+      "pli-tv-kd21/48"
+    ],
+    "omitted_material": "Story-count statement, uddāna introduction and seven summary stanzas",
+    "decision": "Cannot whole-unit map current49segments; neither invent missing English nor silently trim canonical root"
+  },
+  "source_bodies_bundled": false,
+  "runtime_sources_activated": false,
+  "network_workarounds": false,
+  "suttacentral_acquired": false,
+  "strongest_next_candidate": {
+    "author": "Khematto Bhikkhu",
+    "work": "Mahāvagga VII, Kaṭhina Khandhaka",
+    "unit_id": "pli-tv-kd7",
+    "segments": 190,
+    "pali_characters": 40349,
+    "approval": "not-approved",
+    "remaining": [
+      "Official raw body/index/notice acquisition and exact artifact pins",
+      "Exact Royal Thai versus VRI full-body comparison including summaries",
+      "Structural separation of canonical translation, commentary and subcommentary",
+      "Source-specific Khematto author/rights/extraction profile and independent verification"
+    ]
+  },
+  "implementation_choice": "Fix reproduced native-heading accessibility across source reading and context previews; no unverified translation activation."
+}

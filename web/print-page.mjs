@@ -1,4 +1,5 @@
 /* Print only the retrieved Pāli page. Never copy notes, controls, or study panes. */
+import { createSourcePassage } from './source-passage.mjs';
 export function installPagePrinting(doc = document, win = window) {
   const view = doc.getElementById('view');
   const sheet = doc.createElement('article');
@@ -34,8 +35,8 @@ export function installPagePrinting(doc = document, win = window) {
     for (const segment of passage.querySelectorAll(':scope > .segment')) {
       const block = add(sheet, 'section', '', 'print-segment');
       add(block, 'p', segment.querySelector('.segment-label span')?.textContent || '', 'print-reference');
-      const text = add(block, 'p', segment.querySelector('.passage')?.textContent || '', 'print-passage');
-      text.lang = 'pi';
+      // The reader adds this class only for literal source metadata type "heading".
+      block.append(createSourcePassage(doc, { type: segment.classList.contains('heading') ? 'heading' : 'prose', text: segment.querySelector('.passage')?.textContent || '' }, 2, 'print-passage'));
     }
     const source = add(sheet, 'section', '', 'print-provenance');
     add(source, 'h2', 'Source and terms');

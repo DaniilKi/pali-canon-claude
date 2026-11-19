@@ -83,6 +83,16 @@
     return { items: matches.slice(current * SAVED_PAGE_SIZE, (current + 1) * SAVED_PAGE_SIZE), total: matches.length, all: items.length, pages: pages3, page: current, start: matches.length ? current * SAVED_PAGE_SIZE + 1 : 0, end: Math.min((current + 1) * SAVED_PAGE_SIZE, matches.length) };
   }
 
+  // web/source-passage.mjs
+  function createSourcePassage(doc, segment, headingLevel, className = "passage") {
+    if (![2, 3, 4, 5].includes(headingLevel)) throw new Error("Unsupported source heading level.");
+    const node = doc.createElement(segment.type === "heading" ? "h" + headingLevel : "p");
+    node.textContent = segment.text;
+    node.className = className;
+    node.lang = "pi";
+    return node;
+  }
+
   // web/print-page.mjs
   function installPagePrinting(doc = document, win = window) {
     const view2 = doc.getElementById("view");
@@ -117,8 +127,7 @@
       for (const segment of passage.querySelectorAll(":scope > .segment")) {
         const block = add(sheet, "section", "", "print-segment");
         add(block, "p", segment.querySelector(".segment-label span")?.textContent || "", "print-reference");
-        const text11 = add(block, "p", segment.querySelector(".passage")?.textContent || "", "print-passage");
-        text11.lang = "pi";
+        block.append(createSourcePassage(doc, { type: segment.classList.contains("heading") ? "heading" : "prose", text: segment.querySelector(".passage")?.textContent || "" }, 2, "print-passage"));
       }
       const source7 = add(sheet, "section", "", "print-provenance");
       add(source7, "h2", "Source and terms");
@@ -3326,9 +3335,7 @@
           }
           for (const [key4, label2] of pageMarkers) if (segment[key4]?.length) block.append(el("p", label2 + ": " + segment[key4].join(", "), "muted"));
           if (segment.vri_paragraph) block.append(el("p", "VRI paragraph: " + segment.vri_paragraph, "muted"));
-          const passage = el("p", segment.text, "passage");
-          passage.lang = "pi";
-          block.append(passage);
+          block.append(createSourcePassage(document, segment, 5));
           state.pane.append(block);
         }
         state.pane.append(link(continueLabel, state.locations.continue, "button"), el("p", commentary2 ? "Opens the full commentary book at the match. Its direct source-book positions are distinct from aligned canonical commentary and separately saved exact-match references." : "Opens the current source selection from the match. Chapter, passage and volume boundaries remain as selected; this does not open a different book or edition.", "muted"));
@@ -3847,8 +3854,7 @@
       }
       row.append(actions);
       part.classList.toggle("marked", active);
-      const text11 = el("p", segment.text, "passage");
-      text11.lang = "pi";
+      const text11 = createSourcePassage(document, segment, 3);
       part.append(row, text11);
       attachPassageNote(selector, data, segment, part, save, token);
       passages.append(part);
@@ -4090,7 +4096,7 @@
       if (token !== epoch || studyToken !== studyEpoch) return;
       target.replaceChildren(el("h3", "Traditional commentary \xB7 not canonical root text"));
       notes(data, target);
-      for (const segment of data.segments || []) target.append(el("p", segment.text, "passage"));
+      for (const segment of data.segments || []) target.append(createSourcePassage(document, segment, 4));
       if (data.next_offset !== null && data.next_offset !== void 0) target.append(button("Next commentary page \u2192", () => commentary(uid2, token, data.next_offset)));
       if (data.available === false || !data.segments?.length) target.append(el("p", "No verified aligned commentary is available for this selection.", "notice"));
       provenance(data, target);
