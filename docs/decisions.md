@@ -1511,3 +1511,30 @@ Two independently reproduced reader risks (external-link loss of tab-memory
 notes on fresh reopening and delayed navigation focus theft) remain explicitly
 open; this corpus batch does not claim to repair them.
 [Source evidence, boundaries and validation](data/milinda-reviewed-questions.md).
+
+
+## D237 — Preserve unsaved notes across source navigation; keep user-owned focus
+
+Reproductions against7ec5da4 showed same-tab external links losing tab-memory
+notes on fresh reopening and delayed reads taking finder focus. Open HTTP source
+links in labelled noopener/noreferrer tabs. Add only a bounded note-session
+journal (500 original-base entries/16MiBUTF-8), independent of explicit saved
+notes, source consent, reading data and queries. Resume exact unchanged bases;
+quarantine conflicts/orphans and preserve empty drafts, unreadable raw values
+and all old bases. No account sync, source update or new persistent autosave.
+
+Explicit discard must confirm original-base cleanup, even if capacity left an
+older recovery version. Other pending bases remain; pending-card removal uses
+its exact snapshot. Removal and selected backup replacements preflight cleanup;
+failed persistent writes restore memory/recovery best-effort. Stale completed
+saves settle only by exact saved-record equality. Any unrepresented latest edit
+keeps a recovery warning after unrelated writes. No capacity eviction or false
+success; pending display25/page, aggregate exports retain all entries.
+
+Focus reading synchronously on intentional navigation. Async completion/errors
+must not reclaim focus, close a user-reopened finder or scroll an exact-ref
+anchor after intervening keyboard/pointer/focus/background activity. Preserve
+Stop/retry, script refresh, in-page source/consent and stale-response behavior.
+Session storage/unload warnings cannot guarantee survival after tab close,
+browser clearing or OS termination; explicit Save/export remains the boundary.
+[Acceptance, browser references and limits](evidence/web-reader/DRAFT_FOCUS_SAFETY.md).

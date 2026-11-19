@@ -1,0 +1,195 @@
+{
+  "baseline_commit": "66a3275",
+  "scope": "Optional read-only assessment of exactly6documents; no dependency on reader release.",
+  "date": "2026-11-19",
+  "reviewed_documents": 6,
+  "decision": "No coherent multiple-new-owner WHOLE batch is ready from these6leads. Strongest next atomic whole-coverage review is SN27.5 only; second low-cost partial review is Olendzki mil6.4.1/20–21. Vinaya2-owner partial prospects remain substantially unverified in scope.",
+  "recommendation": {
+    "next_whole_review": [
+      "sn27.5"
+    ],
+    "maximum_new_whole_owners": 1,
+    "do_not_count": [
+      "Nine other SN27subjects already covered",
+      "Two Miln5pages share one owner",
+      "Any whole Khandhaka from these excerpts",
+      "ABT Ds1.2 until raw/notice/fullscope verified"
+    ]
+  },
+  "preservation": {
+    "repository_edits": false,
+    "runtime_data_activation": false,
+    "existing_holds_cleared": false,
+    "outreach": false,
+    "commits_pushes": false,
+    "no_source_body_in_repository": true,
+    "MahavaggaVII_revisited": false,
+    "SuttaCentral_acquired": false,
+    "network_configuration_or_bypass": false
+  },
+  "limitations": [
+    "Bounded prospect assessment, not independent approval or activation of any new source.",
+    "No complete Vinaya or wider canonical English coverage claim.",
+    "Specialist translation/recension review remains appropriate before adoption."
+  ],
+  "documents": [
+    {
+      "document": "sn27.001-010.than.html",
+      "official_url": "https://www.accesstoinsight.org/tipitaka/sn/sn27/sn27.001-010.than.html",
+      "artifact": {
+        "repository": "bcbsit/ati",
+        "commit": "45fedca341497120651efa20e756b04a13e61089",
+        "acquisition": "Official permitted GitHub exact-ref base64 content; decoded bytes and Git blob SHA1 verified. No new host/rehost.",
+        "repository_path": "tipitaka/sn/sn27/sn27.001-010.than.html",
+        "official_blob_url": "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/sn/sn27/sn27.001-010.than.html",
+        "git_blob_sha1": "4a65ed1691a2b1e914eb10e04bc3f75ada54e30f",
+        "bytes": 16796,
+        "sha256": "4cda764c8a27a64faf96f6cd2ce0dc08808816ab80d329f3ad264b4516ee1e79",
+        "git_blob_verified": true
+      },
+      "candidate_new_owners": [
+        "sn27.5"
+      ],
+      "status": "ready for independent whole-question scope review; not activated",
+      "scope_verdict": "All10 source chapters inspected. Exact fifth body is the six contact-born feelings, matching VRI Samphassajasutta rather than adjacent contact/perception roots. Source has complete substantive discourse with expanded published closing formula; retain VRI peyyala unchanged. Root ordinal Pancamam is untranslated paratext. Nine other subjects already have whole DT links, so maximum first-whole coverage gain is1, not10.",
+      "remaining_requirements": [
+        "Independent source/adjacent-root and rights review.",
+        "New finite source-specific whole-section profile for this page/anchor; do not label whole10page as ordinary SN27.5.",
+        "Pin full notice, all10chapter boundaries, exact fifth one-paragraph body and source root. Preserve source title Vedana separately from VRI Samphassaja and disclose untranslated ordinal."
+      ],
+      "exact_fifth_prospect_pins": {
+        "anchor": "sn27.005",
+        "chapter_count": 10,
+        "paragraphs": 1,
+        "source_heading": "SN 27.5: Vedana Sutta — Feeling",
+        "chapter_raw_sha256": "cbc659a03aae212803aa6276a580ea5449b592daac90617467787ee3c48b6c70",
+        "text_characters": 614,
+        "text_scope_sha256": "a6fbbfbaa11520f6d8f554f391d6391934c06541055b1d8176179d20434874eb",
+        "notice_scope_sha256": "c17a37f4ad06a4b9ce4061abd7bebe831ba90ecda55931f65488ee90ec41973c",
+        "root_body_scope_sha256": "eb1ba8d84d7a71d5fc4f4712d23a8f0ce72d264323685a5ad65d35bc453abffd"
+      }
+    },
+    {
+      "document": "mv.10.02.03-20.than.html",
+      "official_url": "https://www.accesstoinsight.org/tipitaka/vin/mv/mv.10.02.03-20.than.html",
+      "artifact": {
+        "repository": "bcbsit/ati",
+        "commit": "45fedca341497120651efa20e756b04a13e61089",
+        "acquisition": "Official permitted GitHub exact-ref base64 content; decoded bytes and Git blob SHA1 verified. No new host/rehost.",
+        "repository_path": "tipitaka/vin/mv/mv.10.02.03-20.than.html",
+        "official_blob_url": "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/vin/mv/mv.10.02.03-20.than.html",
+        "git_blob_sha1": "32216852d94dc254e80a55109e6a7525d450e146",
+        "bytes": 26127,
+        "sha256": "f3df4ec35e01722e49f102a658cf00a92bd34ea42f6b2fa7f11a13985edf7b12",
+        "git_blob_verified": true
+      },
+      "candidate_new_owners": [
+        "pli-tv-kd10"
+      ],
+      "status": "rights/artifact verified; partial mapping prospect only",
+      "scope_verdict": "Dighavu narrative corresponds approximately to root /17–26 (VRI458–463), far short of entire104segment Khandhaka. Source ends after Buddha applies royal forbearance, before the remaining dissenting-monk reply and departure in root /26. Opening also presents Buddha speech without the root framing. Do not activate /17–26 as complete segments or whole Kd10.",
+      "remaining_requirements": [
+        "Full bilingual boundary review including exact opening/ending character offsets; current manifest cannot represent multi-segment scopes with truncated boundary segments.",
+        "Either safely select a smaller independently verified complete root span with matching source boundaries, or design a new explicit finite scope contract; no guessed offsets.",
+        "53source paragraphs and6bare source-id anchors require finite extraction and mutation tests."
+      ]
+    },
+    {
+      "document": "cv.08x.than.html",
+      "official_url": "https://www.accesstoinsight.org/tipitaka/vin/cv/cv.08x.than.html",
+      "artifact": {
+        "repository": "bcbsit/ati",
+        "commit": "45fedca341497120651efa20e756b04a13e61089",
+        "acquisition": "Official permitted GitHub exact-ref base64 content; decoded bytes and Git blob SHA1 verified. No new host/rehost.",
+        "repository_path": "tipitaka/vin/cv/cv.08x.than.html",
+        "official_blob_url": "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/vin/cv/cv.08x.than.html",
+        "git_blob_sha1": "28fa3ea554814b0fc98c29bc3ca8abf016a6129e",
+        "bytes": 60005,
+        "sha256": "1b33d1a2b6bfc36a6b04887c21955c6821d2e4c0346cbb6901a6e46bb8ff0ba3",
+        "git_blob_verified": true
+      },
+      "candidate_new_owners": [
+        "pli-tv-kd18"
+      ],
+      "status": "rights/artifact verified; mixed canonical/commentarial partial compilation",
+      "scope_verdict": "Publisher introduction explicitly translates fourteen duty lists with only a few origin stories; omits Sekhiya duties by reference and duplicated student/teacher lists. Twelve displayed duty headings; VRI root has14sections and212segments. Inline [C:] Samantapasadika and {SC:} Saratthadipani and translator parentheses must remain distinguishable. This is not a whole Khandhaka translation.",
+      "remaining_requirements": [
+        "Full section-level bilingual/root-boundary review and exact exclusions; no unit ownership inferred from title Cv8.",
+        "Finite canonical/commentary/translator-note separation or honest mixed-compilation contract, with provenance retained.",
+        "Do not fetch linked withdrawn BMC HTML. Pinned HTML comment records BMC1/BMC2 HTML withdrawal in favour of PDF; this survey only acquired the ATI page itself."
+      ]
+    },
+    {
+      "document": "miln.5x.olen.html",
+      "official_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.5x.olen.html",
+      "artifact": {
+        "repository": "bcbsit/ati",
+        "commit": "45fedca341497120651efa20e756b04a13e61089",
+        "acquisition": "Official permitted GitHub exact-ref base64 content; decoded bytes and Git blob SHA1 verified. No new host/rehost.",
+        "repository_path": "tipitaka/kn/miln/miln.5x.olen.html",
+        "official_blob_url": "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/kn/miln/miln.5x.olen.html",
+        "git_blob_sha1": "36f03580ceed478baa3546238c6d71c89901c4ff",
+        "bytes": 11291,
+        "sha256": "7c117b838aef75fcc9c595b5b903b5769221bae6269492e1ed8d86811cf8c299",
+        "git_blob_verified": true
+      },
+      "candidate_new_owners": [
+        "mil6.4.1"
+      ],
+      "status": "ready for independent two-verse partial review; not a whole question",
+      "scope_verdict": "Published two-stanza healing-medicine poem corresponds to root mil6.4.1/20–21, with preceding /19 prose and surrounding /18 and /22 distinct. Translator editorial introduction excluded. Current mil6.4.1 has0English choices, but it is96segments long; this gives one new partial owner only.",
+      "remaining_requirements": [
+        "Independent verse-by-verse and adjacent-root review, exact new finite Milinda partial profile/registry consent.",
+        "Exclude four-paragraph translator introduction from scripture; retain complete ©2005 Olendzki free-distribution/derived-source/full-license notice. Not CC.",
+        "Preserve source linebreaks and publisher Miln335 citation separately from VRI unit numbering."
+      ]
+    },
+    {
+      "document": "miln.5x.horn.html",
+      "official_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.5x.horn.html",
+      "artifact": {
+        "repository": "bcbsit/ati",
+        "commit": "45fedca341497120651efa20e756b04a13e61089",
+        "acquisition": "Official permitted GitHub exact-ref base64 content; decoded bytes and Git blob SHA1 verified. No new host/rehost.",
+        "repository_path": "tipitaka/kn/miln/miln.5x.horn.html",
+        "official_blob_url": "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/kn/miln/miln.5x.horn.html",
+        "git_blob_sha1": "af4745d65a63bbf4e96b4b43772e90596ae49c28",
+        "bytes": 42130,
+        "sha256": "f0b5dd6d2045bd07f868ddde31e6592fb5db3731026e2cfc372700d1c3910b63",
+        "git_blob_verified": true
+      },
+      "candidate_new_owners": [
+        "mil6.4.1"
+      ],
+      "status": "rights/artifact verified; explicitly abridged, unreviewed detailed coverage",
+      "scope_verdict": "Publisher labels Miln329–347 abridged. Matches same96segment Anumanapanho owner as Olendzki, so these2pages cannot count as2new owners. Numerous ellipses and15translator notes; full substantive/root mapping not reviewed in this bounded survey.",
+      "remaining_requirements": [
+        "Full bilingual scope and omitted-passage matrix before selecting any exact span; never treat abridged as whole.",
+        "Retain complete ©1993 BPS notice, free distribution, derivative-source identification, full notice and maximum50reprint copies condition. Do not substitute generic PTS grants.",
+        "Preserve all15notes and distinguish quotation/source apparatus; one page compilation requires source-specific contract."
+      ]
+    },
+    {
+      "document": "ABT Dhammasangani Matika Pairs",
+      "official_url": "https://ancient-buddhist-texts.net/Texts-and-Translations/Abhidhammamatika/02-Dukamatika.htm",
+      "artifact": null,
+      "candidate_new_owners": [
+        "ds1.2"
+      ],
+      "status": "unverified raw-artifact lead; no request to restricted publisher host",
+      "scope_verdict": "Known build candidate was rejected at0.57three-gram match, below0.60threshold; documented Pali spelling differences include sannojana vs samyojana. Current root has0English choices. This is a promising one-unit Abhidhamma gain if complete pairs can be independently verified; title or near-threshold match does not approve it.",
+      "remaining_requirements": [
+        "A permitted official exact raw artifact, full page/source notice and all English/Pali/notes must be obtained and pinned; no unverified mirror or denied-host routing.",
+        "Independent complete pair inventory and boundaries/edition comparison; no threshold relaxation or inferred missing wording.",
+        "No known coherent multi-unit batch follows from this one omitted candidate."
+      ],
+      "rights_evidence": {
+        "existing_record": "server/data/anandajoti.json source + docs/sources.md rejected-candidate assessment",
+        "site_notice_url": "https://ancient-buddhist-texts.net/Miscellaneous/Copyright-Notice.htm",
+        "recorded_grant": "CC BY-SA3.0 Unported (site Copyright Notice26May2013); page footers now link4.0; attribute Anandajoti Bhikkhu.",
+        "exact_page_notice_hash": null,
+        "full_page_rights_notice_verified_in_this_survey": false
+      }
+    }
+  ]
+}

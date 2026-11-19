@@ -1,3 +1,5 @@
+import { parseNoteDraftJournal, stageNoteDraftEntry, removeNoteDraftEntry, reconcileNoteDraftJournal, guardedNoteDraftJournalWrite } from './note-draft-recovery.mjs';
+import { createFocusOwnership } from './focus-ownership.mjs';
 import { bookmarkLocation } from './bookmark-location.mjs';
 import { savedPage, savedScope, savedScopeLabels } from './saved-passages.mjs';
 import { installPagePrinting } from './print-page.mjs';
@@ -32,6 +34,11 @@ import { MAX_STUDY_BACKUP_BYTES, createStudyBackup, parseStudyBackup, mergeStudy
 'use strict';
 const $ = id => document.getElementById(id);
 const view = $('view'), status = $('status');
+const focusOwner = createFocusOwnership({ activeElement: () => document.activeElement, hasFocus: () => document.hasFocus() });
+for (const event of ['focusin', 'pointerdown', 'keydown']) document.addEventListener(event, () => focusOwner.changed(), true);
+for (const event of ['wheel', 'touchmove']) document.addEventListener(event, () => focusOwner.changed(), { capture: true, passive: true });
+window.addEventListener('blur', () => focusOwner.changed());
+document.addEventListener('visibilitychange', () => { if (document.hidden) focusOwner.changed(); });
 let serial = 0, epoch = 0, studyEpoch = 0, positionTimer, activePosition = null;
 let bookSearchDraft = null, renderedRoute = null;
 const bookSearchFormRoutes = new WeakMap();
@@ -48,13 +55,108 @@ const local = loadLocal();
 local.reading_progress = cleanProgress(local.reading_progress);
 if (!Array.isArray(local.saved)) local.saved = [];
 local.saved = local.saved.filter(x => x && typeof x.uid === 'string' && typeof x.ref === 'string' && typeof x.title === 'string').slice(0, 500);
+const DRAFT_KEY = 'pali-library-note-drafts-v1';
+const activeDraftEntries = new Map();
+let draftJournalSnapshot = null, draftJournalEntries = [], draftJournalUnreadable = false, draftWarning = '', draftRecovered = false;
+const sameDraftBase = (a, b) => Boolean(a && b && Object.keys(a).length === Object.keys(b).length && Object.keys(a).every(key => Object.hasOwn(b, key) && a[key] === b[key]));
+const sameDraftEntry = (a, b) => Boolean(a && b && a.draft === b.draft && sameDraftBase(a.bookmark, b.bookmark));
+const withoutActiveDraftBase = (entries, entry) => entries.filter(item => !sameDraftBase(item.bookmark, entry.bookmark));
+let recoveryPage = 0;
+const draftRecoveryWarning = 'Session draft recovery could not be confirmed. Your current edits remain in this tab. Save or export before closing or reloading.';
+function missingDraftRecovery() { return [...noteDrafts].some(([key, value]) => { const active = activeDraftEntries.get(key); return !active || active.draft !== value || !draftJournalEntries.some(entry => sameDraftEntry(entry, active)); }); }
+function confirmedDraftWarning() { draftWarning = missingDraftRecovery() ? draftRecoveryWarning : ''; }
+function writeDraftJournal() {
+  try {
+    if (draftJournalUnreadable) throw Error('Unreadable session recovery was preserved.');
+    draftJournalSnapshot = guardedNoteDraftJournalWrite({ expected: draftJournalSnapshot, entries: draftJournalEntries, read: () => sessionStorage.getItem(DRAFT_KEY), write: raw => sessionStorage.setItem(DRAFT_KEY, raw) });
+    confirmedDraftWarning(); renderDraftRecovery(); return true;
+  } catch { draftWarning = draftRecoveryWarning; renderDraftRecovery(); return false; }
+}
+function stageDraft(original, value) {
+  const key = noteKey(original), previous = activeDraftEntries.get(key), entry = { bookmark: copySavedRecord(previous?.bookmark || original), draft: value };
+  noteDrafts.set(key, value); activeDraftEntries.set(key, entry);
+  try { draftJournalEntries = stageNoteDraftEntry(draftJournalEntries, entry.bookmark, value); return writeDraftJournal(); }
+  catch { draftWarning = draftRecoveryWarning; renderDraftRecovery(); return false; }
+}
+function removeDraftEntry(entry) {
+  const before = draftJournalEntries;
+  draftJournalEntries = removeNoteDraftEntry(before, entry);
+  if (writeDraftJournal()) return true;
+  draftJournalEntries = before; renderDraftRecovery(); return false;
+}
+function prepareDraftClears(keys) {
+  const before = draftJournalEntries;
+  for (const key of keys) { const entry = activeDraftEntries.get(key); if (entry) draftJournalEntries = withoutActiveDraftBase(draftJournalEntries, entry); }
+  if (writeDraftJournal()) return before;
+  draftJournalEntries = before; renderDraftRecovery(); return null;
+}
+function restoreDraftClears(before) { if (before !== null) { draftJournalEntries = before; writeDraftJournal(); } }
+function discardDraft(key, entry) {
+  if (!sameDraftEntry(activeDraftEntries.get(key), entry) || noteDrafts.get(key) !== entry.draft) return false;
+  const before = draftJournalEntries; draftJournalEntries = withoutActiveDraftBase(before, entry);
+  if (!writeDraftJournal()) { draftJournalEntries = before; renderDraftRecovery(); return false; }
+  noteDrafts.delete(key); activeDraftEntries.delete(key); confirmedDraftWarning(); renderDraftRecovery(); return true;
+}
+function confirmDraftDiscard(host, entry, action, returnFocus) {
+  host.querySelector('.draft-discard-confirmation')?.remove();
+  const group = el('div', undefined, 'draft-discard-confirmation'); group.setAttribute('role', 'group'); group.setAttribute('aria-label', 'Confirm unsaved draft discard');
+  const cancel = button('Cancel discard', () => { group.remove(); if (returnFocus?.isConnected) returnFocus.focus({ preventScroll: true }); });
+  group.append(el('p', 'Discard only this unsaved draft? The saved note and other recovered drafts are kept. Download a copy first if you want it.', 'notice'), cancel, button('Discard this recovered draft', () => {
+    if (action()) return;
+    const warning = el('p', 'Draft not discarded. Its recovery copy could not be cleared or the draft changed. Keep or export it before trying again.', 'notice'); warning.setAttribute('role', 'alert'); group.append(warning);
+  })); host.append(group); cancel.focus({ preventScroll: true });
+}
+function renderDraftRecovery() {
+  const panel = $('draft-recovery'); if (!panel) return;
+  let pending = [];
+  try { pending = reconcileNoteDraftJournal(draftJournalEntries, local.saved, noteDrafts).pending.filter(({entry}) => !sameDraftEntry(activeDraftEntries.get(noteKey(entry.bookmark)), entry)); }
+  catch { draftWarning = draftRecoveryWarning; }
+  const showWarning = Boolean(draftWarning && (noteDrafts.size || pending.length || draftJournalSnapshot !== null));
+  panel.hidden = !showWarning && !pending.length && !(draftRecovered && noteDrafts.size);
+  if (panel.hidden) { panel.replaceChildren(); return; }
+  panel.replaceChildren(el('h2', 'Unsaved draft recovery'), el('p', showWarning ? draftWarning : 'Recovered notes are still unsaved. Session recovery is local to this tab and is not a backup; save or export before closing.', 'notice'));
+  panel.append(button('Download current unsaved notes', () => exportPersonal(exportBookmarks(), 'pali-library-bookmarks-with-drafts.json')));
+  if (draftJournalEntries.length) panel.append(button('Download recovered notes', () => exportPersonal({ version: 1, entries: draftJournalEntries }, 'pali-library-draft-recovery.json')), el('p', 'The recovery file keeps every draft and its original saved record, including conflicting versions. It is not a bookmark import; individual drafts below can be downloaded as bookmarks.', 'muted'));
+  if (draftJournalUnreadable && typeof draftJournalSnapshot === 'string') {
+    panel.append(button('Download unreadable draft recovery', () => downloadPersonalText(draftJournalSnapshot, 'pali-library-unreadable-draft-recovery.json')));
+    const discard = button('Discard unreadable recovery', () => confirmDraftDiscard(panel, null, () => {
+      try {
+        const raw = sessionStorage.getItem(DRAFT_KEY); if (raw !== draftJournalSnapshot || sessionStorage.getItem(DRAFT_KEY) !== raw) return false;
+        sessionStorage.removeItem(DRAFT_KEY); if (sessionStorage.getItem(DRAFT_KEY) !== null) return false;
+        draftJournalSnapshot = null; draftJournalUnreadable = false; draftWarning = ''; writeDraftJournal(); return true;
+      } catch { return false; }
+    }, discard)); panel.append(discard);
+  }
+  const pages = Math.max(1, Math.ceil(pending.length / 25)); recoveryPage = Math.max(0, Math.min(recoveryPage, pages - 1));
+  if (pending.length) panel.append(el('p', `Recovered drafts: showing ${recoveryPage * 25 + 1}–${Math.min((recoveryPage + 1) * 25, pending.length)} of ${pending.length}. All entries remain in the recovery download.`, 'muted'));
+  for (const {entry, reason} of pending.slice(recoveryPage * 25, (recoveryPage + 1) * 25)) {
+    const card = el('article', undefined, 'segment'), label = el('label', 'Recovered unsaved personal note · ' + entry.bookmark.ref), text = el('textarea'); text.readOnly = true; text.value = entry.draft; label.append(text);
+    card.append(el('h3', entry.bookmark.title + ' · ' + entry.bookmark.ref), el('p', (reason === 'active-draft' ? 'A newer edit in this tab is kept. This older recovery version has not replaced it.' : 'Its original saved record is unavailable or changed (' + reason + '). This draft has not replaced or recreated any saved note or reference.'), 'notice'), label, button('Download recovered draft', () => exportPersonal({ format: KEY, saved: [{ ...entry.bookmark, note: entry.draft }] }, 'pali-library-recovered-draft.json')));
+    const discard = button('Discard recovered draft', () => confirmDraftDiscard(card, entry, () => { if (!removeDraftEntry(entry)) return false; const target = panel.hidden ? $('content') : panel; target.tabIndex = -1; target.focus({ preventScroll: true }); return true; }, discard)); card.append(discard); panel.append(card);
+  }  if (pages > 1) { const nav = el('nav', undefined, 'pager'); nav.setAttribute('aria-label', 'Recovered draft pages'); const change = delta => { recoveryPage += delta; renderDraftRecovery(); panel.tabIndex = -1; panel.focus({ preventScroll: true }); }; if (recoveryPage > 0) nav.append(button('Previous recovered drafts', () => change(-1))); nav.append(el('span', `Page ${recoveryPage + 1} of ${pages}`)); if (recoveryPage + 1 < pages) nav.append(button('Next recovered drafts', () => change(1))); panel.append(nav); }
+}
+
+function restoreDraftJournal() {
+  try {
+    draftJournalSnapshot = sessionStorage.getItem(DRAFT_KEY); draftJournalEntries = parseNoteDraftJournal(draftJournalSnapshot);
+    const recovered = reconcileNoteDraftJournal(draftJournalEntries, local.saved);
+    for (const [key, value] of recovered.drafts) noteDrafts.set(key, value);
+    for (const entry of recovered.restored) activeDraftEntries.set(noteKey(entry.bookmark), entry);
+    draftRecovered = recovered.restored.length > 0;
+    for (const entry of recovered.settled) draftJournalEntries = removeNoteDraftEntry(draftJournalEntries, entry);
+    if (recovered.settled.length) writeDraftJournal(); else renderDraftRecovery();
+  } catch { draftJournalUnreadable = true; draftWarning = draftRecoveryWarning; renderDraftRecovery(); }
+}
+window.addEventListener('beforeunload', event => { if (noteDrafts.size || draftJournalEntries.length || draftJournalUnreadable && draftJournalSnapshot !== null) { event.preventDefault(); event.returnValue = ''; } });
+window.addEventListener('pageshow', event => { if (!event.persisted) return; try { if (sessionStorage.getItem(DRAFT_KEY) !== draftJournalSnapshot) draftWarning = draftRecoveryWarning; } catch { draftWarning = draftRecoveryWarning; } renderDraftRecovery(); });
+
 function storageWarning() { return storageConflict ? 'Another tab changed browser data. Changes are kept in this tab only; no saved data was overwritten. Export reading progress and bookmarks/notes before reloading.' : 'Browser storage is unavailable. Changes are kept in this tab only. Export reading progress and bookmarks/notes before closing.'; }
 function exportBookmarks() { return { format: KEY, saved: local.saved.map(item => { return noteDrafts.has(noteKey(item)) ? { ...item, note: noteDrafts.get(noteKey(item)) } : item; }) }; }
 function showStorageRecovery() {
   const panel = $('storage-recovery'); if (!panel.hidden) { panel.querySelector('p').textContent = storageWarning(); return; } panel.hidden = false;
   panel.replaceChildren(el('h2', 'Keep this tab’s changes'), el('p', storageWarning()), el('p', 'Recovery files include this tab’s unsaved note edits. Existing saved data is kept. After reloading, compare conflicting notes manually; import keeps existing notes on duplicate passages.', 'muted'));
   const actions = el('div', undefined, 'toolbar'); actions.append(button('Download study backup', downloadStudyBackup), button('Download this tab’s bookmarks and notes', () => exportPersonal(exportBookmarks(), 'pali-library-bookmarks.json')), button('Download this tab’s reading progress', () => exportPersonal({ format: 'pali-library-reading-progress-v1', progress: local.reading_progress }, 'pali-library-reading-progress.json')));
-  const review = el('div'); actions.append(button('Review reload options', () => { const title = el('h3', 'Export before reloading'); title.tabIndex = -1; review.replaceChildren(title, el('p', 'Reloading replaces changes kept only in this tab with stored browser data. Download both recovery files first.', 'notice'), button('Cancel reload', () => { review.replaceChildren(); actions.querySelector('button:last-child').focus(); }), button('Reload stored browser data', () => location.reload())); title.focus(); })); panel.append(actions, review);
+  const review = el('div'); actions.append(button('Review reload options', () => { const title = el('h3', 'Export before reloading'); title.tabIndex = -1; review.replaceChildren(title, el('p', 'Reloading opens stored browser data. Only note drafts have session recovery: unchanged drafts can resume, and conflicting ones stay separate. Other unsaved tab changes can be lost; download recovery files first.', 'notice'), button('Cancel reload', () => { review.replaceChildren(); actions.querySelector('button:last-child').focus(); }), button('Reload stored browser data', () => location.reload())); title.focus(); })); panel.append(actions, review);
 }
 function persist() {
   try {
@@ -67,7 +169,7 @@ function persist() {
 function el(tag, text, className) { const n = document.createElement(tag); if (text !== undefined) n.textContent = text; if (className) n.className = className; return n; }
 function button(text, fn) { const n = el('button', text); n.type = 'button'; n.addEventListener('click', fn); return n; }
 function link(text, href, className) { const n = el('a', text, className); n.href = href; return n; }
-function external(text, url) { try { const u = new URL(url); if (!['http:', 'https:'].includes(u.protocol)) return el('span', text); return link(text, u.href); } catch { return el('span', text); } }
+function external(text, url) { try { const u = new URL(url); if (!['http:', 'https:'].includes(u.protocol)) return el('span', text); const anchor = link(text, u.href), marker = el('span', ' ↗'); marker.setAttribute('aria-hidden', 'true'); anchor.append(marker); anchor.target = '_blank'; anchor.rel = 'noopener noreferrer'; anchor.setAttribute('aria-describedby', 'external-link-help'); return anchor; } catch { return el('span', text); } }
 function route(name, args = {}) { return '#' + name + '?' + new URLSearchParams(args); }
 const requestLabels = { resolve_reference: 'Citation lookup', get_text: 'Pāli reading', get_translation: 'English source', browse_canon: 'Library', get_commentary: 'Commentary', get_post_canonical: 'Later Pāli reading', reading_plan: 'Reading plan', search_texts: 'Text search', search_source_book: 'Source-book search', search_commentary: 'Commentary search', search_post_canonical: 'Later-work search', glossary: 'Glossary', analyse_passage: 'Word study', get_parallels: 'Related texts', daily_text: 'Daily reading', verify_quote: 'Quotation check', list_topics: 'Topic index', topic: 'Topic detail', dhamma_list: 'Teaching list' };
 const requestRows = new Map();
@@ -437,20 +539,28 @@ function readingArgs(selector) {
 const copySavedRecord = item => item === undefined ? undefined : JSON.parse(JSON.stringify(item));
 const savedRecord = item => local.saved.find(x => x.uid === item.uid && x.ref === item.ref);
 const sameSavedRecord = (expected, token) => token === epoch && JSON.stringify(savedRecord(expected)) === JSON.stringify(expected);
-function replaceNoteDrafts(drafts) { noteDrafts.clear(); for (const [key, value] of drafts) noteDrafts.set(key, value); }
+function replaceNoteDrafts(drafts) {
+  for (const [key, entry] of activeDraftEntries) if (!drafts.has(key)) { draftJournalEntries = withoutActiveDraftBase(draftJournalEntries, entry); activeDraftEntries.delete(key); }
+  noteDrafts.clear(); for (const [key, value] of drafts) noteDrafts.set(key, value);
+  for (const [key, value] of drafts) if (!activeDraftEntries.has(key)) { const original = local.saved.find(item => noteKey(item) === key); if (original) stageDraft(original, value); }
+  writeDraftJournal();
+}
 function commitNoteChange(transaction, keepNewBookmark = false) {
+  // A confirmed removal must not leave its old unsaved draft in session recovery.
+  const clearing = transaction.removed ? prepareDraftClears([...noteDrafts.keys()].filter(key => !transaction.drafts.has(key))) : undefined;
+  if (transaction.removed && clearing === null) { status.textContent = 'Bookmark not removed. Its draft recovery could not be cleared; keep or export it first.'; return false; }
   local.saved = transaction.saved;
   if (persist()) { replaceNoteDrafts(transaction.drafts); refreshPersonalHighlights(); return true; }
-  if (!keepNewBookmark) { const before = restorePassageNoteTransaction(transaction); local.saved = before.saved; replaceNoteDrafts(before.drafts); }
+  if (!keepNewBookmark) { const before = restorePassageNoteTransaction(transaction); local.saved = before.saved; if (clearing !== undefined) draftJournalEntries = clearing; replaceNoteDrafts(before.drafts); }
   refreshPersonalHighlights(); status.textContent = storageWarning(); return false;
 }
 function personalNoteEditor(item, context, token, { mode = 'reading', onSaved = () => {}, onClose } = {}) {
   let expected = copySavedRecord(item);
   const editor = el('div', undefined, 'personal-note-editor'), label = el('label', mode === 'saved' ? 'Your personal note' : 'Your personal note for ' + item.ref), input = el('textarea');
   input.className = 'note-field'; input.maxLength = 4000; input.value = noteDrafts.get(noteKey(item)) ?? (typeof item.note === 'string' ? item.note : ''); label.append(input);
-  const message = el('p', noteDrafts.has(noteKey(item)) ? 'Unsaved personal note in this tab.' : 'Personal note · not scripture.', 'muted'); message.setAttribute('role', 'status');
+  const message = el('p', noteDrafts.has(noteKey(item)) ? (draftRecovered ? 'Recovered unsaved personal note in this tab. Save or export before closing.' : 'Unsaved personal note in this tab.') : 'Personal note · not scripture.', 'muted'); message.setAttribute('role', 'status');
   const valid = () => editor.isConnected && sameSavedRecord(expected, token);
-  input.addEventListener('input', () => { if (!valid()) { message.textContent = 'This bookmark changed. Reopen it before editing; no note was overwritten.'; return; } noteDrafts.set(noteKey(expected), input.value); message.textContent = 'Unsaved personal note in this tab. Save or export before closing this browser tab.'; });
+  input.addEventListener('input', () => { if (!valid()) { message.textContent = 'This bookmark changed. Reopen it before editing; no note was overwritten.'; return; } const recovered = stageDraft(expected, input.value); message.textContent = recovered ? 'Unsaved personal note in this tab. A local session recovery copy is kept; save or export before closing.' : draftRecoveryWarning; });
   const controls = el('div', undefined, 'toolbar');
   controls.append(button('Save note', () => {
     if (!valid()) { message.textContent = 'This bookmark changed. Reopen it before saving; no note was overwritten.'; return; }
@@ -462,6 +572,14 @@ function personalNoteEditor(item, context, token, { mode = 'reading', onSaved = 
       onSaved(durable);
     } catch (error) { message.textContent = error.message; }
   }));
+  const discard = button('Discard draft', () => {
+    if (!valid() || !noteDrafts.has(noteKey(expected))) { message.textContent = 'No unchanged draft is available to discard.'; return; }
+    const key = noteKey(expected), entry = activeDraftEntries.get(key);
+    confirmDraftDiscard(editor, entry, () => {
+      if (!valid() || !discardDraft(key, entry)) return false;
+      input.value = typeof expected.note === 'string' ? expected.note : ''; editor.querySelector('.draft-discard-confirmation')?.remove(); message.textContent = 'Unsaved draft discarded. The saved note was kept.'; discard.focus({ preventScroll: true }); return true;
+    }, discard);
+  }); controls.append(discard);
   if (onClose) controls.append(button('Close note editor', () => { if (token === epoch) onClose(); }));
   editor.append(label, message, controls); return editor;
 }
@@ -560,7 +678,7 @@ function attachChapterNavigation(data, args, host, token) {
     else section.remove();
   } catch (error) { warning(error); }
 }
-async function read(args, token, { scriptRefresh = false } = {}) {
+async function read(args, token, { scriptRefresh = false, ownsFocus = () => false } = {}) {
   assertPageRequest(args);
   const book = args.get('book'), uid = args.get('uid') || 'dhp183'; let offset = offsetOf(args), plan = null, window = null;
   if (args.has('plan')) {
@@ -591,7 +709,7 @@ async function read(args, token, { scriptRefresh = false } = {}) {
     const invoke = action => () => { if (narrowReading.matches) panel.open = false; action(); const target = $('study'); target.tabIndex = -1; target.focus(); };
     tools.append(button('English sources', invoke(() => translations(data, uid, token))), button('Traditional commentary', invoke(() => commentary(uid, token))), button('Related texts', invoke(() => relatedTexts(data.text_id || uid, token))), copy, copyFallback); panel.append(tools); toolbar.append(panel);
   } else { const panel = el('details', undefined, 'study-actions'); sourceTools = el('div', undefined, 'toolbar'); sourceTools.append(copy, copyFallback); panel.append(el('summary', 'Reading tools'), sourceTools); toolbar.append(panel); }
-  view.append(toolbar); responsivePanels({ preserveFinder: scriptRefresh });
+  view.append(toolbar); responsivePanels({ preserveFinder: true });
   if (intro.context.length) { const context = el('section', undefined, 'source-context'); context.setAttribute('aria-label', 'Source context'); context.append(el('h3', 'Source context')); for (const original of intro.context) context.append(el('p', original, 'notice')); sourceTools.append(context); }
   if (kind === 'post') attachChapterNavigation(data, args, sourceTools, token);
   const positionContext = { ...readingArgs(selector), ...(plan ? { plan: plan.name, day: plan.day } : {}) };
@@ -638,7 +756,7 @@ async function read(args, token, { scriptRefresh = false } = {}) {
   let savedRevision; try { savedRevision = sourceRevision(data); } catch {}
   const savedVersion = savedRevision === undefined ? null : local.saved.find(x => x.uid === selector && x.source_commit && x.source_commit !== savedRevision);
   if (savedVersion) view.prepend(el('p', 'This source revision differs from a saved bookmark. Check its reference before reusing your notes.', 'notice'));
-  const ref = args.get('ref'); if (ref && !scriptRefresh) document.getElementById('seg-' + ref.replace(/[^a-z0-9-]/gi, '-'))?.scrollIntoView({ block: 'center' });
+  const ref = args.get('ref'); if (ref && !scriptRefresh && ownsFocus()) document.getElementById('seg-' + ref.replace(/[^a-z0-9-]/gi, '-'))?.scrollIntoView({ block: 'center' });
 }
 function scopeSummary(descriptor, target) {
   const scope = descriptor.scope; target.append(el('h4', descriptor.label));
@@ -881,9 +999,8 @@ async function daily(args, token) {
   const actions = el('div', undefined, 'toolbar'); actions.append(link('Read Pāli source · ' + data.text.citation, route('read', { uid: data.text.id }), 'button')); if (kind === 'verse' && data.chapter?.id) actions.append(link('Read chapter context · ' + data.chapter.citation, route('read', { uid: data.chapter.id }), 'button')); card.append(actions, el('p', 'English sources, commentary, word study and saved passages are available in the full reader. English text is not retrieved automatically.', 'muted')); view.append(card); notes(data);
   const details = el('details'); details.append(el('summary', 'How this reading was selected'), el('p', data.how_chosen), el('p', 'Rotation position ' + data.rotation.position + ' of ' + data.rotation.of + ' · source revision ' + data.source.pali.commit)); view.append(details); provenance({ source: data.source.pali });
 }
-function exportPersonal(data, filename) {
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }), url = URL.createObjectURL(blob), a = link('', url); a.download = filename; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
+function downloadPersonalText(text, filename) { const blob = new Blob([text], { type: 'application/json' }), url = URL.createObjectURL(blob), a = link('', url); a.download = filename; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); }
+function exportPersonal(data, filename) { downloadPersonalText(JSON.stringify(data, null, 2), filename); }
 function downloadStudyBackup() {
   try { const omitted = local.remember_position !== false && Object.hasOwn(local, 'last') && !isReadingLocator(local.last); exportPersonal(createStudyBackup({ saved: exportBookmarks().saved, progress: local.reading_progress, resume: local.remember_position !== false && isReadingLocator(local.last) ? local.last : null }), 'pali-library-study-backup.json'); if (omitted) status.textContent = 'Study backup downloaded. The unsupported reading position was omitted; saved passages, personal notes and plan marks were included. Browser data was not changed.'; }
   catch (error) { status.textContent = error.message + ' Individual bookmark and progress exports remain available in Saved, Plans and browser recovery.'; }
@@ -973,14 +1090,16 @@ function studyBackup(token) {
           if (resume.checked && (local.remember_position === false || !incoming.resume)) throw Error('Restoring the reading position is no longer available.');
           const finalMerged = mergeStudyBackup({ saved: local.saved, progress: local.reading_progress, drafts: noteDrafts }, incoming, catalog, [...choices]);
           const beforeSaved = local.saved, beforeProgress = local.reading_progress, beforeLastPresent = Object.hasOwn(local, 'last'), beforeLast = local.last, beforeStorageSnapshot = storageSnapshot;
+          const beforeDraftClear = finalMerged.replacedNoteKeys.length ? prepareDraftClears(finalMerged.replacedNoteKeys) : undefined;
+          if (beforeDraftClear === null) throw Error('No notes replaced. Their session draft recovery could not be cleared; keep or export it first.');
           applying = true; apply.disabled = true;
           local.saved = finalMerged.saved; local.reading_progress = finalMerged.progress;
           if (resume.checked) { local.last = incoming.resume; storageSnapshot = currentRaw; }
           if (!persist()) {
-            local.saved = beforeSaved; local.reading_progress = beforeProgress; storageSnapshot = beforeStorageSnapshot; if (beforeLastPresent) local.last = beforeLast; else delete local.last; updateResume();
+            local.saved = beforeSaved; local.reading_progress = beforeProgress; storageSnapshot = beforeStorageSnapshot; if (beforeLastPresent) local.last = beforeLast; else delete local.last; updateResume(); if (beforeDraftClear !== undefined) restoreDraftClears(beforeDraftClear);
             throw Error('The study backup was not confirmed saved. This tab’s original study data and drafts remain available. Keep the file and export your data before reloading. ' + storageWarning());
           }
-          for (const key of finalMerged.replacedNoteKeys) noteDrafts.delete(key);
+          replaceNoteDrafts(new Map([...noteDrafts].filter(([key]) => !finalMerged.replacedNoteKeys.includes(key))));
           applied = true; resume.disabled = true; lockReview(); updateResume();
           const done = el('h3', 'Study backup restored in this browser'); done.tabIndex = -1; preview.append(done, el('p', finalMerged.notesReplaced ? `${finalMerged.notesReplaced} selected incoming personal notes replaced their current text and drafts. Existing reference metadata, other notes, conflicting marks and preferences were kept. No passage was opened.` : 'Existing personal data and preferences were kept. No passage was opened.')); done.focus();
         } catch (error) { preview.append(el('p', error.message, 'notice')); status.textContent = storageConflict || !storageOK ? storageWarning() : error.message; }
@@ -1207,14 +1326,15 @@ async function render({ scriptRefresh = false } = {}) {
   bookSearchDraft = retainBookSearchDraft(bookSearchDraft, executedRoute);
   if (executedRoute === '#content' && view.childElementCount) { $('content').focus(); return; }
   renderedRoute = executedRoute;
-  activePosition = null; highlightTargets = []; clearTimeout(positionTimer); const token = ++epoch; ++studyEpoch; requests.cancelAll(); if (!scriptRefresh) closeFinder(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
+  activePosition = null; highlightTargets = []; clearTimeout(positionTimer); const token = ++epoch; ++studyEpoch; requests.cancelAll(); if (!scriptRefresh) { closeFinder(); focusHeading(); } const focusTicket = focusOwner.capture(); updateResume(); view.replaceChildren(); status.textContent = 'Opening the library…';
   const hash = location.hash.slice(1), queryIndex = hash.indexOf('?'), page = queryIndex < 0 ? hash : hash.slice(0, queryIndex), args = new URLSearchParams(queryIndex < 0 ? '' : hash.slice(queryIndex + 1));
-  try { if (page === 'resolve') await resolveCitation(args, token, queryIndex < 0 ? '' : hash.slice(queryIndex + 1)); else if (page === 'read') await read(args, token, { scriptRefresh }); else if (page === 'search') await search(args, token, queryIndex < 0 ? '' : hash.slice(queryIndex + 1), scriptRefresh); else if (page === 'book-search') await bookSearch(args, token, queryIndex < 0 ? '' : hash.slice(queryIndex + 1)); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'backup') studyBackup(token); else if (page === 'about') about(); else await browse(args, token);
+  try { if (page === 'resolve') await resolveCitation(args, token, queryIndex < 0 ? '' : hash.slice(queryIndex + 1)); else if (page === 'read') await read(args, token, { scriptRefresh, ownsFocus: () => focusOwner.owns(focusTicket) }); else if (page === 'search') await search(args, token, queryIndex < 0 ? '' : hash.slice(queryIndex + 1), scriptRefresh); else if (page === 'book-search') await bookSearch(args, token, queryIndex < 0 ? '' : hash.slice(queryIndex + 1)); else if (page === 'glossary') await dictionary(args, token); else if (page === 'daily') await daily(args, token); else if (page === 'verify') quoteChecker(token); else if (page === 'plans') await plans(args, token); else if (page === 'topics') await topics(args, token); else if (page === 'topic') await topicPage(args, token); else if (page === 'lists') await teachingLists(args, token); else if (page === 'saved') saved(); else if (page === 'backup') studyBackup(token); else if (page === 'about') about(); else await browse(args, token);
     if (token !== epoch) return;
     const draft = retainBookSearchDraft(bookSearchDraft, location.hash), form = view.querySelector('.book-search-form');
     if (draft?.toolsOpen !== undefined && form) { const panel = form.closest('.study-actions'); if (panel) panel.open = draft.toolsOpen; }
-    status.textContent = storageConflict || !storageOK ? storageWarning() : !positionDurable ? positionWarning || storageWarning() : ''; if (!scriptRefresh) focusHeading();
+    status.textContent = storageConflict || !storageOK ? storageWarning() : !positionDurable ? positionWarning || storageWarning() : '';
   } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', () => { const refresh = scriptRefresh && location.hash === executedRoute; if (refresh) focusHeading(); render({ scriptRefresh: refresh }); }), link('Browse the library', route('browse', { node: 'canon' }), 'button')); if (error.code === 'READING_SOURCE_CHANGED') { const review = new URLSearchParams(args); review.delete('source'); review.delete('page_source'); view.append(link(page === 'book-search' ? 'Review current source book search' : args.has('page_source') ? 'Review current source at this position' : 'Review current source at this reference', (page === 'book-search' ? '#book-search?' : '#read?') + review, 'button')); } status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
 }
+restoreDraftJournal();
 installPagePrinting();
 window.addEventListener('hashchange', render); render();

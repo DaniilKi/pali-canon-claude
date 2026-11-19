@@ -33,7 +33,7 @@ The npm package and container include `server/web/`. The HTML, stylesheet and br
 - Change text size, paper/night theme and the supported Pāli transliteration script. Lao/Lanna still require native-reader validation. Installed device fonts affect glyph availability; selecting a script does not install fonts.
 - Open **Daily** for a dated Dhammapada verse or a discourse opening from the existing fixed rotation. Dates are UTC, not personalized; discourse previews are not full readings. Open the actual Pāli source/chapter context to continue or choose English sources.
 - Follow four sourced **Plans**: Dhammapada chapters, the Majjhima Nikāya year plan, and two link-only ATI study-guide citation orders. Split readings stop at their assigned Pāli boundary. Mark days manually, undo marks, and export/restore browser-local progress after a preview; source/assignment changes are not silently credited.
-- Add or edit a personal note directly beside a Pāli segment in any source type, or use **Saved**. Notes remain separate from scripture and keep their source/reference metadata. Closing an editor preserves drafts in this tab; Save makes them durable, and export includes unsaved drafts. Removing a noted bookmark requires confirmation, and a failed storage write preserves the note for recovery. Changed source versions require review; legacy notes stay unversioned. The same JSON restore remains additive. See [notes and privacy boundaries](evidence/web-reader/PASSAGE_NOTES.md).
+- Add or edit a personal note directly beside a Pāli segment in any source type, or use **Saved**. Notes remain separate from scripture and keep their source/reference metadata. Closing an editor preserves drafts in this tab; Save makes them durable, and export includes unsaved drafts. A local session copy can recover an unchanged draft after reload; changed/missing saved records stay separately recoverable, never silently overwritten. Discard requires confirmation and confirmed cleanup. Save/export before closing the tab. Removing a noted bookmark requires confirmation, and a failed storage write preserves the note for recovery. Changed source versions require review; legacy notes stay unversioned. The same JSON restore remains additive. See [notes and privacy boundaries](evidence/web-reader/PASSAGE_NOTES.md).
 - Open **Study backup** from Saved or Plans to download notes (including drafts), saved references, plan marks and an optional reading reference in one local file. Preview restore before applying; existing notes and conflicting marks stay intact by default. Review differing notes side by side and explicitly choose incoming text only when both saved references have the same source revision and exact position. Other notes, titles, pins and conflicting marks stay intact. Download the current backup first to keep both versions. The reference is opt-in and never changes the remembering preference. Export works without a server call; restoring marks checks the plan catalogue without uploading your file. See [backup scope and interrupted-flow checks](evidence/web-reader/STUDY_BACKUP.md).
 - From **Library**, choose **Study by topic** to browse/filter the actual ATI subject and numerical indexes, or **Numbered teaching lists** for the curated reference catalogue. Index entries and English glosses are not scripture. Mapped Pāli actions use canonical IDs; publisher-number differences remain labelled. Later lists and later collective names keep their qualifications.
 - Look up English or Pāli terms in the bundled glossary, including supported native-script input. Every result identifies its DPD or curated-list source; glosses are not passage translations.
@@ -313,21 +313,29 @@ a lock against simultaneous/noncooperating writers, or cross-device sync.
 
 **Keep this tab’s changes** offers local recovery downloads for bookmarks/notes
 and plan marks. These include this tab's pending edits, not the newer other-tab
-version. Reload has a separate review/cancel step explaining that tab-only
-changes will be discarded. Download recovery first, then reload the intact stored
-data and compare conflicts manually. Existing bookmark import keeps the stored
+version. Reload has a separate review/cancel step explaining that stored data
+will be reloaded. Download recovery first: only note drafts have session recovery;
+other unsaved tab changes can be lost. Unchanged notes can resume; changed or
+missing saved records remain in separate draft recovery for manual comparison. Existing bookmark import keeps the stored
 note on duplicate keys; a conflicting recovered note may need manual copying.
 Exports are not uploaded. Keep these personal files private like your own notes.
 
-Unsaved note drafts survive navigation within the same tab in memory. They are
-not silently persisted by reading-position/preference writes. Save note commits
-an edit only when storage is current; ordinary and recovery exports include the
-latest unsaved drafts. Closing/reloading discards unsaved/unexported drafts. This
-is not a durable draft database or an account backup. Removing a bookmark also
-removes its in-tab draft. Quota/permission failure keeps recovery available;
-a successful retry can clear that warning. Initially unreadable/malformed stored
-profiles are never replaced by empty defaults; preserving them does not repair
-corrupted data, which may require manual browser-data recovery.
+Unsaved note drafts remain unsaved. They survive in-tab navigation in memory
+and have a bounded local session journal. Reload/same-tab reopening resumes only
+an exact unchanged original saved record. Changed or missing bases remain
+readable/exportable in **Unsaved draft recovery**, without replacing or adding
+saved records. It shows25 pending drafts per page; the recovery download keeps
+all variants. **Download recovered draft** provides one ordinary bookmark file;
+the aggregate recovery journal is a separate format, not a bookmark import.
+
+**Discard draft** confirms removal of the unsaved edit while keeping its saved
+note. Failed cleanup refuses discard/removal/replacement instead of reporting
+success. Session failure/capacity keeps current text in memory and exports;
+unreadable raw recovery is preserved until explicit download/discard. Warnings
+remain while any latest edit lacks a confirmed copy. Exact completed saves do
+not return as drafts after failed journal cleanup. Native unload warnings are a
+fallback, not a mobile close/crash guarantee. Session storage may end at tab
+close and copied/restored tabs may copy it: Save/export before closing.
 
 See [baseline and acceptance](evidence/web-reader/STORAGE_RECOVERY.md). Tests use
 two actual same-origin tabs with explicitly synthetic private-note fixtures and
@@ -431,3 +439,13 @@ publisher numbering differences remain visible. An unanchored anthology page
 cannot select an arbitrary question. These are not shared-page or partial-source
 consent choices, and they do not imply English for the whole book. See
 [the source review](data/milinda-reviewed-questions.md).
+
+
+### Links and delayed navigation
+
+Source links marked↗ open in a new tab, without an opener or referrer. The
+reader keeps its document and drafts. Ordinary route navigation focuses reading
+at the start. A delayed success/error does not take focus back from a finder,
+preference or other task. Reopened phone finders remain open; exact-reference
+scrolling stops when intervening user activity expires its focus lease. See
+[draft/focus acceptance](evidence/web-reader/DRAFT_FOCUS_SAFETY.md).
