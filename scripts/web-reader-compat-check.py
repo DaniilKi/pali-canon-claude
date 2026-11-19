@@ -765,10 +765,11 @@ try:
             # Actual newly reviewed Vinaya metadata; this journey never fetches English.
             context, page, state = environment(saved=[canonical['mark']], script='sinhala')
             page.goto(base + '/#browse?node=english&availability=scoped&collection=vinaya')
-            expect(page.locator('.english-catalogue-count')).to_have_text('2 matching indexed records')
-            assert page.locator('.cards .entry').count() == 2
+            expect(page.locator('.english-catalogue-count')).to_have_text('3 matching indexed records')
+            assert page.locator('.cards .entry').count() == 3
             original_profile = copy.deepcopy(profile(page))
-            for uid, first, last in [('pli-tv-kd6', 'pli-tv-kd6/195', 'pli-tv-kd6/195'),
+            for uid, first, last in [('pli-tv-kd1', 'pli-tv-kd1/190', 'pli-tv-kd1/201'),
+                                     ('pli-tv-kd6', 'pli-tv-kd6/195', 'pli-tv-kd6/195'),
                                      ('pli-tv-kd8', 'pli-tv-kd8/174', 'pli-tv-kd8/178')]:
                 page.goto(base + '/#read?uid=' + uid)
                 read_tool(page, 'English sources').click()
@@ -782,7 +783,7 @@ try:
                 assert all(c['name'] != 'get_translation' for c in state['calls'])
                 assert profile(page) == original_profile
                 audit(page, state, uid + ' actual partial scope and fresh consent, no English retrieval')
-            passed('two scoped-only Vinaya records retain exact original spans and fresh keyboard-accessible consent without provider English or private changes')
+            passed('three scoped-only Vinaya records retain exact original spans and fresh keyboard-accessible consent without provider English or private changes')
             context.close()
 
             # The narrow legacy-progress fix is exercised in each real engine.

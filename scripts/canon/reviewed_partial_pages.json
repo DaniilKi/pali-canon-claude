@@ -640,6 +640,37 @@
         "notice_sha256": "4414f147c8ff644682a029b7b5cabeded1776763dd41e2e9214d4f03051bb26b",
         "extractor": "ati-vinaya-mv8-p1to22-of22-v1"
       }
+    },
+    {
+      "unit_id": "pli-tv-kd1",
+      "path": "/tipitaka/vin/mv/mv.01.23.01-10.than",
+      "translator": "Thanissaro Bhikkhu",
+      "english_title": "Upatissa-pasine: Upatissa's (Sariputta's) Question (partial)",
+      "license": "CC-BY-NC",
+      "source_reference": "Mv1.23.1–10, all21 publisher prose paragraphs and6 stanzas; VRI60–61, pli-tv-kd1/190–201 only",
+      "mapping_note": "Derived mixed prose-and-verse selection from the named Access to Insight source: all 21 publisher paragraphs and six stanzas correspond to pli-tv-kd1/190–201 only, the encounters with Assaji and the arising of the Dhamma eye for Sariputta and Moggallana. The preceding Pāli heading /189 and following journey to the Buddha at /202 are outside this selection. Original publisher Mv1.23.1–10, Horner English vol.4 pp.52ff., VRI60–61 and Pāli Vin i40–42 numbering remain distinct; neither a whole Khandhaka nor word-level alignment is claimed. Preserve the publisher’s repetition ellipsis, parenthetical additions and Sanjaya spelling alongside VRI sañcayo without expanding or altering Pāli. Complete ©1996 Thanissaro Bhikkhu attribution, translator-file provenance and CC BY-NC4.0 notice accompany the selection.",
+      "source_html_sha256": "fa8b361272b360c55045a696083875a2b017443c95d1a7848831b314dd005aa5",
+      "root": {
+        "id": "pli-tv-kd1",
+        "title": "Mahākhandhako",
+        "vri": "1–131",
+        "book": 2,
+        "start": 1,
+        "end": 764,
+        "root_blocks_sha256": "081cca823d8f78bed55ecfe41d29f8e0f90c6f510a8254d9fd3cbff4865f0efa"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "pli-tv-kd1",
+        "first_ref": "pli-tv-kd1/190",
+        "last_ref": "pli-tv-kd1/201",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "e5c629a6c5441935ac1a17a928d7447229627360b758e087c974265adab68b25",
+        "text_sha256": "5bb1fbe0b09f27c63e546b70c7510e08304fcf02135e7de6eb23fdec0cd7343d",
+        "notice_sha256": "e3cf77b0606ab6ced1933577b2adea04d54c8757bdbe8fcafa48e64c43629003",
+        "extractor": "ati-vinaya-mv1-mixed21p6v-v1"
+      }
     }
   ]
 }

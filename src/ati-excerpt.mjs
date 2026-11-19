@@ -37,6 +37,7 @@ export function atiPartialExcerpt(html,extractor) {
   if(extractor==='ati-chapter-p1to4-of5-notes-v1')return chapterProsePrefixBeforeNotes(html);
   if(extractor==='ati-vinaya-mv6-p1to5-of5-v1')return vinayaChapterProse(html,5);
   if(extractor==='ati-vinaya-mv8-p1to22-of22-v1')return vinayaChapterProse(html,22);
+  if(extractor==='ati-vinaya-mv1-mixed21p6v-v1')return upatissaChapter(html);
   if(extractor==='ati-chapter-p2-of2-v1')return chapterParagraph(html,2,2);
   if(extractor==='ati-chapter-p11-of11-v1')return chapterParagraph(html,11,11,'Seeing the Dhamma');
   if(extractor==='ati-chapter-p1-of4-v1')return chapterParagraph(html,4,1);
@@ -52,7 +53,37 @@ export const ATI_SEGMENT_EXTRACTORS = Object.freeze([
   'ati-freeverse-v1', 'ati-chapter-p2-of2-v1', 'ati-chapter-p11-of11-v1',
   'ati-chapter-p1-of4-v1', 'ati-excerpt-verse-pre-v1', 'ati-chapter-p14-of24-v1', 'ati-chapter-p1to3-of4-ellipsis-v1',
   'ati-vinaya-mv6-p1to5-of5-v1', 'ati-vinaya-mv8-p1to22-of22-v1',
+  'ati-vinaya-mv1-mixed21p6v-v1',
 ]);
+
+/** All 27 reviewed Mv1.23.1–10 children, keeping each stanza's line breaks. */
+function upatissaChapter(html) {
+  const fail=()=>{throw Error('The reviewed ATI Upatissa mixed-body extraction structure changed. No excerpt was returned.');};
+  const chunk=copyrightedChunk(html).trim();
+  const chapter=chunk.match(/^<div class=(["'])chapter\1>([^]*)<\/div>\s*<\/div>$/);
+  if(!chapter)fail();
+  const sequence=[...Array(8).fill('p'),'verse','p','verse','p','verse',...Array(9).fill('p'),'verse','p','verse','p','verse'];
+  const anchorsByParagraph=new Map([[1,['sanjaya','rajagaha','sariputta','moggallana']],[2,['assaji']],[10,['saristream']],[21,['moggstream']]]);
+  let rest=chapter[2],paragraph=0;
+  const texts=[];
+  for(const kind of sequence){
+    rest=rest.trimStart();
+    const child=kind==='p'?rest.match(/^<p>([^]*?)<\/p>/):rest.match(/^<div class=(["'])freeverse\1>([^]*?)<\/div>/);
+    if(!child)fail();
+    const body=child[kind==='p'?1:2],expected=kind==='p'?(anchorsByParagraph.get(++paragraph)||[]):[];
+    let active=false,count=0;
+    for(const [tag]of body.matchAll(/<[^>]*>/g)){
+      if(!active&&count<expected.length&&new RegExp('^<a id=(["\'])'+expected[count]+'\\1>$').test(tag)){active=true;count++;}
+      else if(active&&tag==='</a>')active=false;
+      else fail();
+    }
+    if(active||count!==expected.length||/[<>]/.test(body.replace(/<[^>]*>/g,'')))fail();
+    const text=plainText(body);if(!text)fail();texts.push(text);
+    rest=rest.slice(child[0].length);
+  }
+  if(rest.trim())fail();
+  return texts.join('\n\n');
+}
 function copyrightedChunk(html) {
   const begin='<!-- BEGIN COPYRIGHTED TEXT CHUNK -->',end='<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->';
   if(typeof html!=='string'||html.split(begin).length!==2||html.split(end).length!==2)throw Error('The reviewed ATI selection extraction structure changed. No excerpt was returned.');

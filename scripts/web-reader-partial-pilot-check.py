@@ -12,7 +12,8 @@ ROOT=pathlib.Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser();p.add_argument('--source-root',type=pathlib.Path,required=True);p.add_argument('--server-dir',type=pathlib.Path);p.add_argument('--a11y',action='store_true');p.add_argument('--report');args=p.parse_args()
 manifest=json.loads((ROOT/'scripts/canon/reviewed_partial_pages.json').read_text(encoding='utf-8'))
 # This historical pilot keeps its exact18-source contract; D232 has a separate Vinaya journey.
-rows=[r for r in manifest['links'] if r['unit_id'] not in {'pli-tv-kd6','pli-tv-kd8'}]
+pilot_ids={'thag6.13','thag17.3','thag10.1','thag15.2','thag16.8','thag2.13','thag15.1','snp3.11','mn34','sn12.22','sn12.60','sn22.87','sn35.244','sn56.22','mn54','an2.47','an8.59','sn36.15'}
+rows=[r for r in manifest['links'] if r['unit_id'] in pilot_ids]
 assert hashlib.sha256(json.dumps(rows,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()=='d55eab78d8820f2b9ef8c4988c936eaa17e11b51298ccb29c2b015760ff7ad36'
 assert {r['unit_id'] for r in rows}=={'thag6.13','thag17.3','thag10.1','thag15.2','thag16.8','thag2.13','thag15.1','snp3.11','mn34','sn12.22','sn12.60','sn22.87','sn35.244','sn56.22','mn54','an2.47','an8.59','sn36.15'} and len(rows)==18
 server_dir=args.server_dir.resolve() if args.server_dir else ROOT/'server'

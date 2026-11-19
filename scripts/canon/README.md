@@ -362,3 +362,18 @@ Both `ordinary_excerpt_packet.py` and the Node reference screen default to `scri
 ### Alternative-source review and restrictive DT web evidence (D213)
 
 The original ATI queue is closed at0unreviewed (1,116 ordinary bindings checked). This is not a full catalogue semantic audit. Fourteen exact holds cover the12 final ATI candidates plus SN47.10Olendzki and DT MN54. `reviewed_exclusions.py` keeps all previous ATI raw/text/full-notice pins mandatory. A separate DT-only `publisher-rendered-web` receipt requires exact URL, complete0..last rendered range, bounded scripture lines, full root hash, date/commit and explicit method; raw/extracted/full-notice hashes must be absent because the view did not supply them. A restrictive hold is not retrieval or rights authority. No existing finite selector fits these pages; do not activate a partial by weakening its profile. Reference metadata screening now finds three further DT leads (DN21/DN26/MN91); complete primary-body/rights/alternative review is still needed. D212 historical daily metadata never restores English authority. [Evidence](../../docs/data/final-excerpt-binding-review.md).
+
+
+### Current Vinaya partial profiles (D232–D233)
+
+The registry contains21 reviewed partial sources, including three exact Vinaya selections. Kd6/195 and Kd8/174–178 use finite5-/22-paragraph selectors. Kd1/190–201 uses only `ati-vinaya-mv1-mixed21p6v-v1`:21 paragraphs and six stanza blocks in the exact reviewed27-child order, with seven balanced named anchors at their original positions. Unknown markup or notes must reject extraction. None is a whole-Khandhaka English translation. Previous20 descriptors are frozen. See [source review and pins](../../docs/data/upatissa-vinaya-partial.md).
+
+With a provenance-verified local ATI checkout at the manifest’s exact commit and freshly unpacked **current** canonical data, verify and prepare an output separately:
+
+```sh
+node scripts/canon/verify_partial_html.mjs scripts/canon/reviewed_partial_pages.json /tmp/pali-ati
+python scripts/canon/reviewed_partial_pages.py /tmp/current/canon.json.gz server/data/translations.json /tmp/pali-ati /tmp/translations-reviewed.json
+PALI_UPATISSA_SOURCE_ROOT=/tmp/pali-ati PALI_VINAYA_PARTIALS_SOURCE_DIR=/tmp/pali-ati node --test tests/upatissa-partial.test.mjs tests/vinaya-partials.test.mjs
+```
+
+Inspect the entire output delta before installation; preserve all previous owner values and scope pins. Build and audit after installation, commit generated server files, and pass exact-head CI before advancing dev. Sources are fetched on demand, never bundled in npm/browser reports. Do not substitute an HTML rendering for raw-source provenance or treat optional local fixtures as live-source availability checks.

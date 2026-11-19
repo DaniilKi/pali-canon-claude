@@ -12,15 +12,16 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 KEY = 'pali-library-v1'
 PRIVATE = 'PRIVATE_VINAYA_DRAFT_සති'
 p = argparse.ArgumentParser(description=__doc__)
-p.add_argument('--source-root', type=pathlib.Path, help='Optional directory containing the two original publisher HTML filenames')
+p.add_argument('--source-root', type=pathlib.Path, help='Optional directory containing the three original publisher HTML filenames')
 p.add_argument('--server-dir', type=pathlib.Path)
 p.add_argument('--a11y', action='store_true')
 p.add_argument('--report')
 args = p.parse_args()
 manifest = json.loads((ROOT / 'scripts/canon/reviewed_partial_pages.json').read_text())
-rows = [r for r in manifest['links'] if r['unit_id'] in {'pli-tv-kd6', 'pli-tv-kd8'}]
-assert len(rows) == 2, 'Both independently reviewed Vinaya partials must be active'
-assert {(r['unit_id'], r['partial_scope']['first_ref'], r['partial_scope']['last_ref']) for r in rows} == {('pli-tv-kd6', 'pli-tv-kd6/195', 'pli-tv-kd6/195'), ('pli-tv-kd8', 'pli-tv-kd8/174', 'pli-tv-kd8/178')}
+assert len(manifest['links']) == 21
+rows = [r for r in manifest['links'] if r['unit_id'] in {'pli-tv-kd1', 'pli-tv-kd6', 'pli-tv-kd8'}]
+assert len(rows) == 3, 'All three reviewed Vinaya partials must be active'
+assert {(r['unit_id'], r['partial_scope']['first_ref'], r['partial_scope']['last_ref']) for r in rows} == {('pli-tv-kd1', 'pli-tv-kd1/190', 'pli-tv-kd1/201'), ('pli-tv-kd6', 'pli-tv-kd6/195', 'pli-tv-kd6/195'), ('pli-tv-kd8', 'pli-tv-kd8/174', 'pli-tv-kd8/178')}
 server_dir = args.server_dir.resolve() if args.server_dir else ROOT / 'server'
 assert json.loads((server_dir / 'data/reviewed-partial-pages.json').read_text()) == manifest
 stage = pathlib.Path(tempfile.mkdtemp(prefix='pali-vinaya-browser-'))
@@ -41,6 +42,7 @@ expected = json.loads(subprocess.check_output(['node', '--input-type=module', '-
 def digest(value):
     return hashlib.sha256(json.dumps(value, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
 for row in rows:
+    assert len(expected[row['unit_id']]['text']) == {'pli-tv-kd1': 5452, 'pli-tv-kd6': 914, 'pli-tv-kd8': 5165}[row['unit_id']]
     assert digest(expected[row['unit_id']]['text']) == row['partial_scope']['text_sha256']
     assert digest(expected[row['unit_id']]['notice']) == row['partial_scope']['notice_sha256']
 ledger = stage / 'fetches.jsonl'; ledger.write_text('')
@@ -66,9 +68,13 @@ try:
         except Exception: time.sleep(.1)
     else: raise AssertionError('HTTP server did not start')
     catalogue = tool('browse_canon', {'node': 'english', 'availability': 'scoped', 'collection': 'vinaya', 'limit': 40})
-    assert {r['id'] for r in catalogue['items']} == {r['unit_id'] for r in rows} and catalogue['total'] == 2
+    assert {r['id'] for r in catalogue['items']} == {r['unit_id'] for r in rows} and catalogue['total'] == 3
     assert all(r['english_available'] == 0 and r['partial_english_available'] == 1 for r in catalogue['items'])
     assert tool('browse_canon', {'node': 'english', 'availability': 'whole', 'collection': 'vinaya'})['total'] == 0
+    coverage = tool('list_sources', {})['translation_coverage']
+    assert (coverage['total']['partial_links'], coverage['total']['partial_only']) == (21, 15)
+    vinaya = next(r for r in coverage['collections'] if r['collection'] == 'vinaya')
+    assert (vinaya['partial_links'], vinaya['with_partial_english'], vinaya['with_english']) == (3, 3, 0)
     scopes = {}; native = {}
     for row in rows:
         uid, version = row['unit_id'], 'ati:' + row['path']
@@ -87,11 +93,13 @@ try:
             if result['next_offset'] is None: break
             assert pages < 100
             request = result['continue_with']['arguments']
-            assert request['uid'] == uid and request['translation'] == version and request['allow_partial'] is True and request['scope_sha256'] == scopes[uid]['scope_sha256'] and len(request['prefix_sha256']) == 64
+            assert request['uid'] == uid and request['translation'] == version and request['allow_partial'] is True and request['scope_sha256'] == scopes[uid]['scope_sha256'] and request['prefix_sha256'] == hashlib.sha256(accumulated.encode()).hexdigest()
+            if pages == 1:
+                assert rpc('get_translation', {**request, 'prefix_sha256': '0' * 64}).get('isError')
         assert accumulated == expected[uid]['text'] and pages > 1
         bad = {**request, 'scope_sha256': '0' * 64}
         assert rpc('get_translation', bad).get('isError')
-        checks.append({'unit': uid, 'check': 'actual MCP rejects absent/drifted consent and paginates only exact excerpt to finite end', 'pages': pages})
+        checks.append({'unit': uid, 'check': 'actual MCP rejects absent/drifted consent and paginates only exact excerpt to finite end', 'pages': pages, 'characters': len(accumulated)})
     with sync_playwright() as pw:
         browser = pw.chromium.launch(executable_path=os.environ.get('PALI_BROWSER', '/usr/bin/chromium'), headless=True)
         for width in [320, 390, 768, 1280]:
@@ -127,7 +135,7 @@ try:
                 page.goto(base + '/#saved')
                 page.get_by_label('Your personal note', exact=True).fill(PRIVATE + '_UNSAVED')
                 page.goto(base + '/#browse?node=english&availability=scoped&collection=vinaya')
-                expect(page.locator('.english-catalogue-count')).to_have_text('2 matching indexed records')
+                expect(page.locator('.english-catalogue-count')).to_have_text('3 matching indexed records')
                 assert len(calls) == 1 and calls[0]['name'] == 'browse_canon'; audit('scoped Vinaya catalogue without English fetch')
                 for row in rows:
                     uid, version = row['unit_id'], 'ati:' + row['path']; scope = scopes[uid]
@@ -150,7 +158,36 @@ try:
                         page.locator('#scope-consent').focus(); page.keyboard.press('Space'); page.keyboard.press('Tab')
                         expect(page.get_by_role('button', name='Read reviewed partial source', exact=True)).to_be_focused(); page.keyboard.press('Enter')
                     review(); audit(uid + ' fresh explicit consent')
-                    consent(); expect(page.locator('#study .translation')).to_have_text(expected[uid]['text'])
+                    def translation_response(response):
+                        return response.request.method == 'POST' and response.url.endswith('/mcp') and response.request.post_data_json.get('params', {}).get('name') == 'get_translation'
+                    with page.expect_response(translation_response) as response:
+                        consent()
+                    payload = response.value.json()['result']['structuredContent']
+                    pieces = []; offset = 0
+                    while True:
+                        expect(page.locator('#study .translation')).to_have_text(payload['text'])
+                        # text_content additionally checks the actual publisher verse/newline breaks.
+                        piece = page.locator('#study .translation').text_content()
+                        assert piece == payload['text']
+                        assert payload['text_id'] == uid and payload['translation_id'] == version and payload['whole_unit_coverage'] is False
+                        assert payload['translation_scope'] == scope and payload['offset'] == offset
+                        assert digest({'licensing': payload['license'], 'citation': payload['attribution']}) == row['partial_scope']['notice_sha256']
+                        pieces.append(piece); offset += len(piece)
+                        audit(uid + ' exact English page at ' + str(payload['offset']))
+                        if payload['next_offset'] is None:
+                            assert payload.get('continue_with') is None
+                            break
+                        continuation = payload['continue_with']['arguments']
+                        assert continuation['uid'] == uid and continuation['translation'] == version and continuation['allow_partial'] is True
+                        assert continuation['scope_sha256'] == scope['scope_sha256'] and continuation['offset'] == offset
+                        assert continuation['prefix_sha256'] == hashlib.sha256(''.join(pieces).encode()).hexdigest()
+                        assert len(pieces) < 100
+                        with page.expect_response(translation_response) as response:
+                            page.get_by_role('button', name='Next English page →', exact=True).click()
+                        assert response.value.request.post_data_json['params']['arguments'] == continuation
+                        payload = response.value.json()['result']['structuredContent']
+                    assert ''.join(pieces) == expected[uid]['text']
+                    assert (len(pieces) > 1) if len(expected[uid]['text']) > 6000 else (len(pieces) == 1)
                     assert page.get_by_role('button', name='Next English page →', exact=True).count() == 0
                     notice = expected[uid]['notice']; provenance = page.locator('#study .provenance').text_content()
                     assert notice['licensing'] in provenance and notice['citation'] in provenance
@@ -167,7 +204,7 @@ try:
                         audit(uid + ' refuses ' + field + ' drift')
                         drift['field'] = None
                         review()
-                    checks.append({'width': width, 'theme': theme, 'unit': uid, 'check': 'Sinhala Pāli, exact fresh consent, complete notice, finite excerpt, source/notice/scope guards and private storage preserved'})
+                    checks.append({'width': width, 'theme': theme, 'unit': uid, 'check': 'Sinhala Pāli, exact fresh consent, complete notice, finite excerpt, source/notice/scope guards and private storage preserved', 'browser_pages': len(pieces)})
                 page.goto(base + '/#saved')
                 expect(page.get_by_label('Your personal note', exact=True)).to_have_value(PRIVATE + '_UNSAVED')
                 with page.expect_download() as download:
@@ -176,7 +213,7 @@ try:
                 assert exported['saved'][0]['note'] == PRIVATE + '_UNSAVED'
                 assert page.evaluate('key=>localStorage.getItem(key)', KEY) == raw
                 assert not forbidden and not errors
-                print(f'{width}px {theme}: both exact Vinaya partials and private draft export passed', flush=True)
+                print(f'{width}px {theme}: all three exact Vinaya partials and private draft export passed', flush=True)
                 context.close()
         browser.close()
     events = [json.loads(line) for line in ledger.read_text().splitlines()]

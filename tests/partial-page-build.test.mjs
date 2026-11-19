@@ -47,7 +47,7 @@ print('passed')`,{html,row,manifest:m,canon:{source:canon.source(),units:[u],boo
 
 test('ordinary rebuilds cannot recreate any registered source as a whole source without approved content activation',{skip:!python},()=>{
  const rows=JSON.parse(readFileSync('scripts/canon/reviewed_partial_pages.json','utf8')).links,units=rows.map(r=>canon.resolve(r.unit_id).unit);
- assert.equal(rows.length,20);assert.equal(new Set(rows.map(r=>r.path)).size,20);
+ assert.equal(rows.length,21);assert.equal(new Set(rows.map(r=>r.path)).size,21);
  const r=run(`import sys,json,pathlib,tempfile,gzip,subprocess
 x=json.load(sys.stdin)
 with tempfile.TemporaryDirectory() as tmp:
@@ -57,7 +57,7 @@ with tempfile.TemporaryDirectory() as tmp:
  (p/'ati.json').write_text(json.dumps(pages),encoding='utf-8');(p/'dt.json').write_text('[]')
  args=[str(p/'canon.gz'),str(p/'dt.json'),str(p/'ati.json'),str(p/'out.json')]
  proc=subprocess.run([sys.executable,'scripts/canon/build_translations.py',*args],capture_output=True,text=True,encoding='utf-8');assert proc.returncode==0,proc.stderr;assert json.loads((p/'out.json').read_text(encoding='utf-8'))=={}
- # Disabling only the ordinary proposal guard exposes exactly13 otherwise matchable pages; production still withholds all20 registered paths.
+ # Disabling only the ordinary proposal guard exposes exactly13 otherwise matchable pages; production still withholds all21 registered paths.
  code="import sys;sys.path.insert(0,'scripts/canon');import reviewed_partial_pages;reviewed_partial_pages.withhold_partial_page_proposals=lambda out:(out,[]);from build_translations import main;main()"
  proc=subprocess.run([sys.executable,'-c',code,*args],capture_output=True,text=True,encoding='utf-8');assert proc.returncode==0,proc.stderr
  out=json.loads((p/'out.json').read_text(encoding='utf-8'));expected={r['unit_id'] for r in x['rows'] if r['partial_scope']['extractor']=='ati-freeverse-v1'}|{'sn12.60','sn22.87','sn56.22','mn54'};assert set(out)==expected and sum(len(v) for v in out.values())==13,out;assert not set(out)&{'sn12.22','sn35.244','an2.47','an8.59','sn36.15'} # These exact synthetic titles/citations do not trigger ordinary linking; their reviewed scopes require independent activation.

@@ -1,0 +1,157 @@
+{
+  "schema": "reviewed-upatissa-vinaya-partial-v1",
+  "reviewed_on": "2026-11-19",
+  "baseline": "c7a79344a73f6d812f5275c76fafdc56f4bb347d",
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "official_git_blob_sha": "3115aba53216f6d99cbf01b1c9cb282d2f7ffafd",
+  "independent_source_scope_reviews": 2,
+  "source_bodies_bundled": false,
+  "whole_khandhaka_translation": false,
+  "previous20_descriptors_sha256": "65c4a2780a628e8cd17f21c91bdb2dbde8525841832ec50b37d85a99535904cf",
+  "previous18_descriptors_sha256": "d55eab78d8820f2b9ef8c4988c936eaa17e11b51298ccb29c2b015760ff7ad36",
+  "all_previous_translation_values_preserved": true,
+  "source": {
+    "unit_id": "pli-tv-kd1",
+    "path": "/tipitaka/vin/mv/mv.01.23.01-10.than",
+    "translator": "Thanissaro Bhikkhu",
+    "english_title": "Upatissa-pasine: Upatissa's (Sariputta's) Question (partial)",
+    "license": "CC-BY-NC",
+    "source_reference": "Mv1.23.1–10, all21 publisher prose paragraphs and6 stanzas; VRI60–61, pli-tv-kd1/190–201 only",
+    "mapping_note": "Derived mixed prose-and-verse selection from the named Access to Insight source: all 21 publisher paragraphs and six stanzas correspond to pli-tv-kd1/190–201 only, the encounters with Assaji and the arising of the Dhamma eye for Sariputta and Moggallana. The preceding Pāli heading /189 and following journey to the Buddha at /202 are outside this selection. Original publisher Mv1.23.1–10, Horner English vol.4 pp.52ff., VRI60–61 and Pāli Vin i40–42 numbering remain distinct; neither a whole Khandhaka nor word-level alignment is claimed. Preserve the publisher’s repetition ellipsis, parenthetical additions and Sanjaya spelling alongside VRI sañcayo without expanding or altering Pāli. Complete ©1996 Thanissaro Bhikkhu attribution, translator-file provenance and CC BY-NC4.0 notice accompany the selection.",
+    "source_html_sha256": "fa8b361272b360c55045a696083875a2b017443c95d1a7848831b314dd005aa5",
+    "root": {
+      "id": "pli-tv-kd1",
+      "title": "Mahākhandhako",
+      "vri": "1–131",
+      "book": 2,
+      "start": 1,
+      "end": 764,
+      "root_blocks_sha256": "081cca823d8f78bed55ecfe41d29f8e0f90c6f510a8254d9fd3cbff4865f0efa"
+    },
+    "partial_scope": {
+      "version": 1,
+      "status": "reviewed",
+      "unit_id": "pli-tv-kd1",
+      "first_ref": "pli-tv-kd1/190",
+      "last_ref": "pli-tv-kd1/201",
+      "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "pali_sha256": "e5c629a6c5441935ac1a17a928d7447229627360b758e087c974265adab68b25",
+      "text_sha256": "5bb1fbe0b09f27c63e546b70c7510e08304fcf02135e7de6eb23fdec0cd7343d",
+      "notice_sha256": "e3cf77b0606ab6ced1933577b2adea04d54c8757bdbe8fcafa48e64c43629003",
+      "extractor": "ati-vinaya-mv1-mixed21p6v-v1"
+    }
+  },
+  "mapping": [
+    {
+      "publisher": "P1–P8",
+      "pali": "pli-tv-kd1/190"
+    },
+    {
+      "publisher": "freeverse1",
+      "pali": "pli-tv-kd1/191"
+    },
+    {
+      "publisher": "P9",
+      "pali": "pli-tv-kd1/192"
+    },
+    {
+      "publisher": "freeverse2",
+      "pali": "pli-tv-kd1/193"
+    },
+    {
+      "publisher": "P10",
+      "pali": "pli-tv-kd1/194"
+    },
+    {
+      "publisher": "freeverse3",
+      "pali": "pli-tv-kd1/195"
+    },
+    {
+      "publisher": "P11–P19",
+      "pali": "pli-tv-kd1/196"
+    },
+    {
+      "publisher": "freeverse4",
+      "pali": "pli-tv-kd1/197"
+    },
+    {
+      "publisher": "P20",
+      "pali": "pli-tv-kd1/198"
+    },
+    {
+      "publisher": "freeverse5",
+      "pali": "pli-tv-kd1/199"
+    },
+    {
+      "publisher": "P21",
+      "pali": "pli-tv-kd1/200"
+    },
+    {
+      "publisher": "freeverse6",
+      "pali": "pli-tv-kd1/201"
+    }
+  ],
+  "body_profile": {
+    "paragraphs": 21,
+    "freeverse": 6,
+    "child_count": 27,
+    "bare_anchor_ids": [
+      "sanjaya",
+      "rajagaha",
+      "sariputta",
+      "moggallana",
+      "assaji",
+      "saristream",
+      "moggstream"
+    ]
+  },
+  "selected_segments": 12,
+  "english_characters": 5452,
+  "counts": {
+    "whole_links": 2538,
+    "whole_direct": 1434,
+    "whole_including_inherited": 1857,
+    "grouped_whole_direct": 1408,
+    "grouped_including_inherited": 1831,
+    "partial_links": 21,
+    "partial_only": 15,
+    "vinaya_partial_units": 3,
+    "whole_vinaya_units": 0,
+    "shared_pages": 12,
+    "daily_sutta_eligible": 1257
+  },
+  "not_activated": [
+    "Paṭṭhāna: exact raw author artifact/extraction/full notice pins missing",
+    "PTS English commentary: exact digital artifact/proofreading/bilingual boundaries unresolved",
+    "Chinese pilot: release-specific rights/bilingual review unresolved"
+  ],
+  "independent_code_review": {
+    "verdict": "approved-no-blocking-findings",
+    "focused_tests": 84,
+    "passed": 83,
+    "failed": 0,
+    "existing_optional_baseline_skips": 1,
+    "additional_actual_source_negative_cases": 9,
+    "independent_htmlparser_text_hash_match": true
+  },
+  "local_acceptance": {
+    "vinaya_browser_checks": 27,
+    "axe_scans": 152,
+    "axe_violations": 0,
+    "isolated_npm_checks": 27,
+    "chromium_compatibility_checks": 88,
+    "existing_reader_checks": 173,
+    "historical18_source_pilot_checks": 260,
+    "english_finder_checks": 48,
+    "documentation_checks": 19,
+    "smoke_tools": 34,
+    "smoke_checks": 64,
+    "offline_evals_passed": 195,
+    "live_evals_skipped": 6,
+    "cross_tool_reading_commands": 11983,
+    "plan_days": 478,
+    "topics": 472,
+    "evidence_network_attempts": 0
+  }
+}
