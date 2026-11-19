@@ -112,7 +112,7 @@ from reviewed_partial_pages import manifest_rows,reviewed_partial_links,withhold
 x=json.load(sys.stdin)
 with tempfile.TemporaryDirectory() as tmp:
  p=pathlib.Path(tmp);m=p/'manifest.json';source=p/('source'+x['manifest']['links'][0]['path']+'.html');source.parent.mkdir(parents=True)
- source.write_text(x['html'],encoding='utf-8');m.write_text(json.dumps(x['manifest']),encoding='utf-8')
+ source.write_bytes(x['html'].encode('utf-8'));m.write_text(json.dumps(x['manifest']),encoding='utf-8')
  assert list(reviewed_partial_links(x['canon'],p/'source',m))==['pli-tv-kd1']
  original={'wrong-owner':[{'source':'ati','path':x['manifest']['links'][0]['path']}]};out,removed=withhold_partial_page_proposals(original,m);assert out=={} and len(removed)==1
  for field,value in [('unit_id','pli-tv-kd2'),('path','/tipitaka/vin/mv/unreviewed'),('translator','Unreviewed'),('license','Olendzki-free-distribution-2005'),('extractor','ati-freeverse-v1'),('version',2)]:
@@ -125,7 +125,7 @@ with tempfile.TemporaryDirectory() as tmp:
   else:raise AssertionError(field)
  for kind in ['html','root','pali','text','notice','first-ref','last-ref']:
   bad=copy.deepcopy(x['manifest']);r=bad['links'][0]
-  if kind=='html':source.write_text(x['html']+'changed',encoding='utf-8')
+  if kind=='html':source.write_bytes((x['html']+'changed').encode('utf-8'))
   elif kind=='root':r['root']['root_blocks_sha256']='0'*64
   elif kind=='first-ref':r['partial_scope']['first_ref']='pli-tv-kd1/189'
   elif kind=='last-ref':r['partial_scope']['last_ref']='pli-tv-kd1/202'
@@ -134,7 +134,7 @@ with tempfile.TemporaryDirectory() as tmp:
   try:reviewed_partial_links(x['canon'],p/'source',m)
   except ValueError:pass
   else:raise AssertionError(kind)
-  source.write_text(x['html'],encoding='utf-8')
+  source.write_bytes(x['html'].encode('utf-8'))
 print('Upatissa build gates verified')`],{input:JSON.stringify({manifest:single,html:fixture,canon:{source:canon.source(),units:[unit],books}}),encoding:'utf8',env:{...process.env,PYTHONUTF8:'1'},maxBuffer:2*1024*1024});
  assert.equal(result.status,0,result.stderr);assert.match(result.stdout,/Upatissa build gates verified/);
 });
