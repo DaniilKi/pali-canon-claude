@@ -416,3 +416,6 @@ Choices stay in the current preview only. Apply rechecks private data and browse
 
 
 Printed source headings are native headings in reading pages, inline commentary and bounded source context. This follows actual source type metadata, preserves its exact labels and does not infer chapter depth; invocations and colophons remain source headings. Prose/verse stay paragraphs, with unchanged typography and saved-position/private-note behavior. Print markup mirrors source heading types while preserving the original hidden-sheet privacy lifecycle; tagged-PDF, physical-device and human screen-reader acceptance remain unverified. See [source-heading acceptance](evidence/web-reader/SOURCE_HEADING_SEMANTICS.md).
+
+
+The Pāli script preference refreshes the current canonical/commentary/later-work search, source-book search or heading list, and citation lookup, as well as reading and daily views. It uses the query already executed, preserving pagination and source pins. Unsubmitted finder/source-book input and private drafts stay in the tab; the preference does not submit them. Keyboard focus and the phone finder remain where the user left them during this display refresh. Static Saved, backup and quote forms are not refreshed. See [acceptance and limits](evidence/web-reader/SCRIPT_REFRESH.md).

@@ -47,6 +47,8 @@ You can also browse and read without an AI client. Run `npm run build` and `npm 
 
 Printed Pāli headings now work with screen-reader heading navigation in reading pages and source context, retaining the source’s exact wording. These labels include invocations and colophons; they do not invent a chapter hierarchy. [Accessibility evidence](docs/evidence/web-reader/SOURCE_HEADING_SEMANTICS.md).
 
+Changing the Pāli script also refreshes search results and citation lookups without navigating away. Unfinished search input and personal notes stay local. [Script refresh and privacy checks](docs/evidence/web-reader/SCRIPT_REFRESH.md).
+
 ## What it does
 
 Once installed, you can ask Claude things like:

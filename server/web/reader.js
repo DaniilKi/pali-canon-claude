@@ -158,6 +158,23 @@
     update();
   }
 
+  // web/script-refresh.mjs
+  function scriptRefreshEligible(hash) {
+    return typeof hash === "string" && hash.startsWith("#") && ["read", "daily", "resolve", "search", "book-search"].includes(hash.slice(1).split("?")[0]);
+  }
+  function retainBookSearchDraft(previous, hash, input) {
+    if (!scriptRefreshEligible(hash)) return null;
+    if (!input) return previous?.hash === hash ? previous : null;
+    return {
+      hash,
+      value: input.value,
+      start: input.selectionStart,
+      end: input.selectionEnd,
+      direction: input.selectionDirection,
+      toolsOpen: input.toolsOpen
+    };
+  }
+
   // src/script.mjs
   var SCRIPTS = ["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"];
   var SCRIPT_NAMES = {
@@ -2701,6 +2718,9 @@
   var studyEpoch = 0;
   var positionTimer;
   var activePosition = null;
+  var bookSearchDraft = null;
+  var renderedRoute = null;
+  var bookSearchFormRoutes = /* @__PURE__ */ new WeakMap();
   var KEY = "pali-library-v1";
   var storageOK = true;
   var storageSnapshot;
@@ -2883,8 +2903,8 @@
     document.title = String(tabTitle).slice(0, 160) + " \xB7 P\u0101li Library";
   }
   var narrowReading = window.matchMedia("(max-width: 760px)");
-  function responsivePanels() {
-    for (const panel of document.querySelectorAll("#find-panel, .study-actions")) {
+  function responsivePanels({ preserveFinder = false } = {}) {
+    for (const panel of document.querySelectorAll(preserveFinder ? ".study-actions" : "#find-panel, .study-actions")) {
       const summary = panel.querySelector(":scope > summary"), active = document.activeElement;
       panel.open = !narrowReading.matches;
       if (narrowReading.matches && panel.contains(active) && active !== summary) summary.focus({ preventScroll: true });
@@ -3004,7 +3024,16 @@
   $("script").addEventListener("change", (e) => {
     local.script = e.target.value;
     persist();
-    if (location.hash.startsWith("#read") || location.hash.startsWith("#daily")) render();
+    if (!scriptRefreshEligible(location.hash)) return;
+    const form = view.querySelector(".book-search-form"), input = form && bookSearchFormRoutes.get(form) === location.hash ? form.querySelector("input") : null;
+    bookSearchDraft = retainBookSearchDraft(bookSearchDraft, location.hash, input && {
+      value: input.value,
+      selectionStart: input.selectionStart,
+      selectionEnd: input.selectionEnd,
+      selectionDirection: input.selectionDirection,
+      toolsOpen: input.closest(".study-actions")?.open
+    });
+    render({ scriptRefresh: true });
   });
   $("search-form").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -3167,6 +3196,12 @@
     submit.type = "submit";
     error.setAttribute("role", "alert");
     error.hidden = true;
+    bookSearchFormRoutes.set(form, renderedRoute);
+    const draft = retainBookSearchDraft(bookSearchDraft, location.hash);
+    if (draft) {
+      input.value = draft.value;
+      if (Number.isInteger(draft.start) && Number.isInteger(draft.end)) input.setSelectionRange(draft.start, draft.end, draft.direction);
+    }
     form.append(label2, submit, error);
     form.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -3175,6 +3210,7 @@
         const query = input.value.trim();
         if (!query && !selection5.headings_only) throw Error("Enter a P\u0101li search query.");
         const href = bookSearchRoute({ ...selection5, query, offset: 0 });
+        bookSearchDraft = null;
         error.hidden = true;
         input.removeAttribute("aria-invalid");
         if (location.hash === href) render();
@@ -3235,9 +3271,9 @@
     pageControls(data.next_offset, selection5.offset > 0 ? Math.max(0, selection5.offset - 15) : null, (offset) => bookSearchRoute(pinned2, offset));
     provenance(data);
   }
-  async function searchCanon(args, token, rawQuery) {
+  async function searchCanon(args, token, rawQuery, preserveFinder = false) {
     const selected = canonicalSearchSelection(args, $("script").value, rawQuery);
-    $("search-scope").value = "canon";
+    if (!preserveFinder) $("search-scope").value = "canon";
     const response = await tool("search_texts", { query: selected.query, offset: selected.offset, limit: selected.limit, script: selected.script });
     if (token !== epoch) return;
     const data = validateCanonicalSearch(response, selected);
@@ -3272,9 +3308,9 @@
     pageControls(next.length ? Math.min(...next) : null, selected.offset ? Math.max(0, selected.offset - selected.limit) : null, (offset) => canonicalSearchRoute(selected, offset));
     provenance(data);
   }
-  async function searchCommentary(args, token, rawQuery) {
+  async function searchCommentary(args, token, rawQuery, preserveFinder = false) {
     const selected = commentarySearchSelection(args, $("script").value, rawQuery);
-    $("search-scope").value = "commentary";
+    if (!preserveFinder) $("search-scope").value = "commentary";
     const response = await tool("search_commentary", selected);
     if (token !== epoch) return;
     const data = validateCommentarySearch(response, selected);
@@ -3382,9 +3418,9 @@
     view.append(results);
     if (!data.results.length) view.append(el("p", "No matches on this page. Try a shorter phrase or P\u0101li keywords."));
   }
-  async function searchPost(args, token, rawQuery) {
+  async function searchPost(args, token, rawQuery, preserveFinder = false) {
     const selected = postSearchSelection(args, $("script").value, rawQuery);
-    $("search-scope").value = "post";
+    if (!preserveFinder) $("search-scope").value = "post";
     const response = await tool("search_post_canonical", selected);
     if (token !== epoch) return;
     const data = validatePostSearch(response, selected);
@@ -3396,11 +3432,11 @@
     pageControls(data.next_offset, selected.offset ? Math.max(0, selected.offset - selected.limit) : null, (offset) => route("search", { q: selected.query, scope: "post", offset }));
     provenance(data);
   }
-  async function search(args, token, rawQuery) {
+  async function search(args, token, rawQuery, preserveFinder = false) {
     const requestedScope = args.get("scope") ?? "canon";
-    if (requestedScope === "canon") return searchCanon(args, token, rawQuery);
-    if (requestedScope === "commentary") return searchCommentary(args, token, rawQuery);
-    if (requestedScope === "post") return searchPost(args, token, rawQuery);
+    if (requestedScope === "canon") return searchCanon(args, token, rawQuery, preserveFinder);
+    if (requestedScope === "commentary") return searchCommentary(args, token, rawQuery, preserveFinder);
+    if (requestedScope === "post") return searchPost(args, token, rawQuery, preserveFinder);
     throw Error("Choose a supported search scope.");
   }
   function readingArgs(selector) {
@@ -3678,7 +3714,7 @@
       warning(error);
     }
   }
-  async function read(args, token) {
+  async function read(args, token, { scriptRefresh = false } = {}) {
     assertPageRequest(args);
     const book2 = args.get("book"), uid2 = args.get("uid") || "dhp183";
     let offset = offsetOf(args), plan = null, window2 = null;
@@ -3754,7 +3790,7 @@
       toolbar.append(panel);
     }
     view.append(toolbar);
-    responsivePanels();
+    responsivePanels({ preserveFinder: scriptRefresh });
     if (intro.context.length) {
       const context = el("section", void 0, "source-context");
       context.setAttribute("aria-label", "Source context");
@@ -3877,7 +3913,7 @@
     const savedVersion = savedRevision === void 0 ? null : local.saved.find((x) => x.uid === selector && x.source_commit && x.source_commit !== savedRevision);
     if (savedVersion) view.prepend(el("p", "This source revision differs from a saved bookmark. Check its reference before reusing your notes.", "notice"));
     const ref = args.get("ref");
-    if (ref) document.getElementById("seg-" + ref.replace(/[^a-z0-9-]/gi, "-"))?.scrollIntoView({ block: "center" });
+    if (ref && !scriptRefresh) document.getElementById("seg-" + ref.replace(/[^a-z0-9-]/gi, "-"))?.scrollIntoView({ block: "center" });
   }
   function scopeSummary(descriptor, target) {
     const scope = descriptor.scope;
@@ -5097,26 +5133,29 @@
     links.append(external("Source and licence register", "https://github.com/DaniilKi/pali-canon-claude/blob/dev/pali-reliability/THIRD_PARTY.md"), external("Project and complete MCP toolset", "https://github.com/DaniilKi/pali-canon-claude"));
     view.append(links);
   }
-  async function render() {
-    if (location.hash === "#content" && view.childElementCount) {
+  async function render({ scriptRefresh = false } = {}) {
+    const executedRoute = location.hash;
+    bookSearchDraft = retainBookSearchDraft(bookSearchDraft, executedRoute);
+    if (executedRoute === "#content" && view.childElementCount) {
       $("content").focus();
       return;
     }
+    renderedRoute = executedRoute;
     activePosition = null;
     highlightTargets = [];
     clearTimeout(positionTimer);
     const token = ++epoch;
     ++studyEpoch;
     requests.cancelAll();
-    closeFinder();
+    if (!scriptRefresh) closeFinder();
     updateResume();
     view.replaceChildren();
     status2.textContent = "Opening the library\u2026";
     const hash = location.hash.slice(1), queryIndex = hash.indexOf("?"), page = queryIndex < 0 ? hash : hash.slice(0, queryIndex), args = new URLSearchParams(queryIndex < 0 ? "" : hash.slice(queryIndex + 1));
     try {
       if (page === "resolve") await resolveCitation(args, token, queryIndex < 0 ? "" : hash.slice(queryIndex + 1));
-      else if (page === "read") await read(args, token);
-      else if (page === "search") await search(args, token, queryIndex < 0 ? "" : hash.slice(queryIndex + 1));
+      else if (page === "read") await read(args, token, { scriptRefresh });
+      else if (page === "search") await search(args, token, queryIndex < 0 ? "" : hash.slice(queryIndex + 1), scriptRefresh);
       else if (page === "book-search") await bookSearch(args, token, queryIndex < 0 ? "" : hash.slice(queryIndex + 1));
       else if (page === "glossary") await dictionary(args, token);
       else if (page === "daily") await daily(args, token);
@@ -5130,14 +5169,23 @@
       else if (page === "about") about();
       else await browse(args, token);
       if (token !== epoch) return;
+      const draft = retainBookSearchDraft(bookSearchDraft, location.hash), form = view.querySelector(".book-search-form");
+      if (draft?.toolsOpen !== void 0 && form) {
+        const panel = form.closest(".study-actions");
+        if (panel) panel.open = draft.toolsOpen;
+      }
       status2.textContent = storageConflict || !storageOK ? storageWarning() : !positionDurable ? positionWarning || storageWarning() : "";
-      focusHeading();
+      if (!scriptRefresh) focusHeading();
     } catch (error) {
       if (token !== epoch) return;
       view.replaceChildren();
       const stopped2 = error.code === "REQUEST_STOPPED";
       heading(stopped2 ? "BROWSER WAIT STOPPED" : "UNABLE TO OPEN", stopped2 ? "Reading request stopped" : "No passage was substituted.");
-      view.append(el("p", error.message, "notice"), button("Try again", render), link("Browse the library", route("browse", { node: "canon" }), "button"));
+      view.append(el("p", error.message, "notice"), button("Try again", () => {
+        const refresh = scriptRefresh && location.hash === executedRoute;
+        if (refresh) focusHeading();
+        render({ scriptRefresh: refresh });
+      }), link("Browse the library", route("browse", { node: "canon" }), "button"));
       if (error.code === "READING_SOURCE_CHANGED") {
         const review = new URLSearchParams(args);
         review.delete("source");

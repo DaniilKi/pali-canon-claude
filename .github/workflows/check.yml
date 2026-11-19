@@ -78,7 +78,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials]
+        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh]
     runs-on: ubuntu-latest
     timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials') && 20 || 10 }}
     steps:
@@ -344,6 +344,19 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/postsearch-package"
           tar -xzf "$RUNNER_TEMP/postsearch-package/"*.tgz -C "$RUNNER_TEMP/postsearch-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-post-search-check.py --server-dir "$RUNNER_TEMP/postsearch-package/package/server" --report installed-postsearch.report.json
+      - name: Check source-script preference refresh and retained input offline
+        if: matrix.group == 'scriptrefresh'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-script-refresh-check.py --report standalone-script-refresh.report.json
+      - name: Audit script refresh focus and native output in both themes
+        if: matrix.group == 'scriptrefresh'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-script-refresh-check.py --a11y --report standalone-script-refresh-a11y.report.json
+      - name: Check script preference refresh from the isolated npm package
+        if: matrix.group == 'scriptrefresh'
+        run: |
+          mkdir -p "$RUNNER_TEMP/script-refresh-package"
+          npm pack --pack-destination "$RUNNER_TEMP/script-refresh-package"
+          tar -xzf "$RUNNER_TEMP/script-refresh-package/"*.tgz -C "$RUNNER_TEMP/script-refresh-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-script-refresh-check.py --server-dir "$RUNNER_TEMP/script-refresh-package/package/server" --report installed-script-refresh.report.json
       - name: Check reviewed Vinaya partial sources and consent with pinned official ATI artifacts
         if: matrix.group == 'vinayapartials'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-vinaya-partials-check.py --report standalone-vinaya-partials.report.json
@@ -452,6 +465,9 @@ jobs:
             standalone-vinaya-partials.report.json
             standalone-vinaya-partials-a11y.report.json
             installed-vinaya-partials.report.json
+            standalone-script-refresh.report.json
+            standalone-script-refresh-a11y.report.json
+            installed-script-refresh.report.json
             standalone-comparison.report.json
             standalone-comparison-a11y.report.json
             installed-comparison.report.json

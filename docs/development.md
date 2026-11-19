@@ -550,3 +550,8 @@ The packaged synthetic gate checks reachable-current/earlier selection, multiple
 The first real shared-page pilot is [AN 1.49–52](data/luminous-shared-page-pilot.md). The [paired-page expansion](data/paired-shared-page-expansion.md) adds Water and Gratitude: three declarations/eight subjects are counted separately from whole-unit English. The [standalone web-reader assessment](web-app-next-slice.md) defines the next browser slice without assuming deployment or complete English coverage.
 
 Theme changes keep foreground/background updates simultaneous; only border colour animates. The storage/recovery browser runner samples finder-button contrast through both theme transitions to catch transient failures as well as steady-state axe results.
+
+
+### Script preference refresh acceptance (D235)
+
+Start a changed interaction with `python scripts/web-reader-script-refresh-check.py --debug` against the built server, using observed controls and real MCP responses. Once that case passes, run the complete bounded script normally, with `--a11y`, and against `--server-dir` from an isolated npm package. The dedicated `scriptrefresh` group retains source query/offset/pins, raw unfinished input, focus and private-data checks; installed Firefox/WebKit have representative journeys too. Avoid repeatedly replaying already-passed unrelated suites unless a new change or failure justifies it. [Contract and evidence](evidence/web-reader/SCRIPT_REFRESH.md).

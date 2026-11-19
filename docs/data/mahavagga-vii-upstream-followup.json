@@ -1,0 +1,122 @@
+{
+  "schema": "mahavagga-vii-permitted-upstream-followup-v1",
+  "reviewed_on": "2026-11-19",
+  "baseline_commit": "d2a5bcad7b05df9b9e1164f282c430d8ecc5b9df",
+  "status": "no-verified-raw-artifact-route-within-current-permissions",
+  "coverage_added": 0,
+  "activated": false,
+  "reused_evidence": "docs/data/vinaya-complete-source-survey.json",
+  "network_boundary": {
+    "publisher": "www.dhammatalks.org",
+    "current_restricted_executor_host_grant": false,
+    "prior_official_raw_CONNECT_403": "Reported by parent; known not executed. Not retried because no materially new grant was supplied.",
+    "request_changes_tool_available": false,
+    "publisher_cli_requests_this_followup": 0,
+    "alternate_domains_or_proxies": false,
+    "unverified_rehost_translation_bodies_fetched": 0,
+    "SuttaCentral_material_fetched": 0
+  },
+  "publisher_provenance": {
+    "index_url": "https://www.dhammatalks.org/vinaya/Mv/Mahavagga_Index.html",
+    "index_lines": "26–28",
+    "author": "Khematto Bhikkhu",
+    "edition": "Royal Thai recension via Digital Pali Reader; source also includes variant readings",
+    "date": "No exact modern edition/revision date established",
+    "noncanonical_additions": "Index explicitly identifies Commentary in blue and Sub-commentary in green; no exact machine-readable DOM classification verified.",
+    "raw_HTML_sha256": null,
+    "extracted_English_sha256": null,
+    "full_notice_sha256": null
+  },
+  "rights": {
+    "primary_url": "https://www.dhammatalks.org/",
+    "lines": "400–405",
+    "positive_grant": "Official site-wide CC BY-NC4.0 notice reconfirmed through supported rendered tool; any sale, including nonprofit sale, is commercial.",
+    "obligations": "Khematto attribution, complete actual notice, noncommercial use, source/edition provenance and explicit identification of adaptations/additions. Do not reuse the existing Thanissaro-only sutta attribution for this author.",
+    "respect": "No AI exclusion on the reviewed publisher index/homepage; bounded observation only. No new permission-letter requirement inferred.",
+    "artifact_limit": "Rendered statements are positive rights evidence but cannot supply raw-byte/full-notice extraction pins."
+  },
+  "routes_examined": [
+    {
+      "route": "Current official index and publisher homepage via supported web",
+      "result": "Rendered metadata/rights available; neither reviewed rendered page names GitHub or identifies a versioned upstream repository. This is bounded evidence, not proof no such source exists globally.",
+      "urls": [
+        "https://www.dhammatalks.org/vinaya/Mv/Mahavagga_Index.html",
+        "https://www.dhammatalks.org/"
+      ],
+      "translation_body_acquired": false
+    },
+    {
+      "route": "Known digitalpalireader/dhammatalks candidate via approved GitHub metadata only",
+      "urls": [
+        "https://api.github.com/repos/digitalpalireader/dhammatalks",
+        "https://api.github.com/repos/digitalpalireader/dhammatalks/git/ref/heads/master",
+        "https://api.github.com/repos/digitalpalireader/dhammatalks/git/commits/9134d70728feb68121968246a0559a5babf92477",
+        "https://api.github.com/repos/digitalpalireader/dhammatalks/git/trees/f01ca94ba7f32d8633bd657c2d1501ec668c6015?recursive=1"
+      ],
+      "repository_description": "https://www.dhammatalks.org/suttas/",
+      "homepage": null,
+      "repository_license": null,
+      "default_branch": "master",
+      "head_commit": "9134d70728feb68121968246a0559a5babf92477",
+      "root_tree": "f01ca94ba7f32d8633bd657c2d1501ec668c6015",
+      "pushed_at": "2020-07-29T14:40:15Z",
+      "metadata_entries": 1323,
+      "truncated": false,
+      "matching_vinaya_MvVII_readme_notice_license_paths": [],
+      "result": "Full pinned tree has no Vinaya or Mahavagga files, no README and no licence/notice file. It cannot supply the requested chapter; the Royal Thai via DPR reference on the publisher index establishes the Pali source, not approval of every DPR-hosted English rehost.",
+      "translation_bodies_acquired": false
+    },
+    {
+      "route": "Bounded GitHub repository metadata search for dhammatalks",
+      "query": "dhammatalks",
+      "returned_count": 19,
+      "result": "No publisher-backed upstream identified. No content datasets searched or downloaded."
+    },
+    {
+      "route": "siongui/7rsk9vjkm4p8z5xrdtqc metadata and discovered README only",
+      "url": "https://github.com/siongui/7rsk9vjkm4p8z5xrdtqc/blob/master/README.rst",
+      "README_blob": "fb89b24575f0b08c831365ae9dd0646607472a81",
+      "result": "README describes a collection of online Pali chanting resources and repeatedly labels third-party copies as mirrors. No publisher-controlled Mahavagga upstream established. No linked translation/document body fetched."
+    },
+    {
+      "route": "dsibilly/dhammatalks repository metadata",
+      "url": "https://github.com/dsibilly/dhammatalks",
+      "result": "Description identifies a Node.js Evening Talks scraper that generates podcast RSS. Its MIT code licence is not translation rights and the project is not a Mahavagga edition."
+    },
+    {
+      "route": "decates/dhammatalks metadata and discovered README only",
+      "url": "https://github.com/decates/dhammatalks/blob/master/README.md",
+      "README_blob": "b4f6b9748927478d7b5caad8af5a1b2e03e5d1b0",
+      "result": "README identifies an app for listening to Buddhist talks, referring to Dharma Seed. No Khematto/publisher source provenance; MIT code licence not translation rights."
+    }
+  ],
+  "target": {
+    "uid": "pli-tv-kd7",
+    "publisher_body_url": "https://www.dhammatalks.org/vinaya/Mv/MvVII.html",
+    "publisher_index_url": "https://www.dhammatalks.org/vinaya/Mv/MvVII_Index.html",
+    "bundled_segments": 190,
+    "bundled_Pali_characters": 40349,
+    "bundled_VRI_paragraphs": "306–325",
+    "full_VRI_alignment_verified": false
+  },
+  "remaining_prerequisites": [
+    "A policy-authorized exact official body/index/notice acquisition route, or publisher evidence naming an official versioned upstream containing this chapter.",
+    "Immutable artifact, English extraction and complete rights/provenance pins; author and source identity preserved.",
+    "Full actual-HTML structure review separating canonical translation, commentary, subcommentary, variants and translator notes; never rely on colors alone or silently drop additions.",
+    "Independent complete Royal Thai-to-VRI comparison of all190segments, repetitions, boundaries, colophons and mnemonic verses, with numbering and substantive edition differences disclosed.",
+    "Source-specific extraction/attribution/runtime identity, finite paging, drift and scope/coverage regression tests before any activation."
+  ],
+  "next_action": "Continue independently authorized reader usability/accessibility work. Keep Kd7 as a future whole-unit review candidate; preserve all existing21partial choices.",
+  "repository_edits": false,
+  "commits": false,
+  "pushes": false,
+  "deployments": false,
+  "contacts_sent": false,
+  "coverage_state": {
+    "whole_vinaya": 0,
+    "partial_vinaya": 3,
+    "all_partial_sources": 21,
+    "partial_only": 15
+  },
+  "implemented_fallback": "Refresh existing script-aware lookup/search views without navigation, retaining current route, input drafts, focus and private data."
+}
