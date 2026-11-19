@@ -316,7 +316,7 @@ export function resolve(reference) {
     return { unit, notes, alternatives: [...others.values()].slice(0, 3).map((u) => unitSummary(u)) };
   }
   if (c.kind === 'url') {
-    if (c.host === 'accesstoinsight.org' && isAtiSectionPath(c.path)) {
+    if (c.host === 'accesstoinsight.org' && isAtiSectionPath(c.path) && !(c.path === '/tipitaka/an/an01/an01.021-040.than' && !c.fragment)) {
       const rows = d.sectionRegistry.links.filter(row => row.path === c.path), row = rows.find(row => row.anchor === c.fragment);
       if (!row) throw new CitationError(`This publisher anthology page does not identify one reviewed question. Use an exact question body anchor or canonical ID: ${rows.map(value => value.unit_id).join(', ')}.`);
       const unit = d.byId.get(row.unit_id); linksFor(unit);

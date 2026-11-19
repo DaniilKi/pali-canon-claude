@@ -4,6 +4,8 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Add twenty exact whole-substantive AN 1.21–40 choices through real publisher number anchors, preserving their existing shared-page version and consent. Separately add Olendzki’s two-verse Milinda partial at `/20–21`, with full non-CC notice and citation separation. Disclose omitted vocatives/paratext and preserve all earlier source holds and private drafts. Whole links become 2,573; partial choices 22. Source, browser and exact-commit CI gates remain distinct (D239).
+
 - Prepare an isolated standalone-reader integration candidate: responsive source-aware browsing, commentary/later works, glossary/word study/related evidence, bounded reading plans and browser-local notes/progress. Exercise the three actual shared compilations with explicit page-level consent and complete source notices. No dev/main merge or deployment is implied.
 
 - Add two reviewed ATI shared compilations: Water (AN 1.45–46) and Gratitude

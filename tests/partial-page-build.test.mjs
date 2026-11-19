@@ -47,7 +47,7 @@ print('passed')`,{html,row,manifest:m,canon:{source:canon.source(),units:[u],boo
 
 test('ordinary rebuilds cannot recreate any registered source as a whole source without approved content activation',{skip:!python},()=>{
  const rows=JSON.parse(readFileSync('scripts/canon/reviewed_partial_pages.json','utf8')).links,units=rows.map(r=>canon.resolve(r.unit_id).unit);
- assert.equal(rows.length,21);assert.equal(new Set(rows.map(r=>r.path)).size,21);
+ assert.equal(rows.length,22);assert.equal(new Set(rows.map(r=>r.path)).size,22);
  const r=run(`import sys,json,pathlib,tempfile,gzip,subprocess
 x=json.load(sys.stdin)
 with tempfile.TemporaryDirectory() as tmp:

@@ -13,7 +13,7 @@ manifest=json.loads((ROOT/'scripts/canon/reviewed_ati_sections.json').read_text(
 assert sum(r['section']['note_count'] for r in rows)==4 and sum(r['section']['note_count']>0 for r in rows)==3
 assert all(r['license']=='Kelly-free-distribution-2005' for r in rows)
 server_dir=args.server_dir.resolve() if args.server_dir else ROOT/'server';assert json.loads((server_dir/'data/reviewed-ati-sections.json').read_text())==manifest
-assert len(json.loads((server_dir/'data/reviewed-partial-pages.json').read_text())['links'])==21
+assert len(json.loads((server_dir/'data/reviewed-partial-pages.json').read_text())['links'])==22
 stage=pathlib.Path(tempfile.mkdtemp(prefix='pali-milinda-browser-'));sources={}
 for row in rows:
  url='https://accesstoinsight.org'+row['path']+'.html'
@@ -43,7 +43,7 @@ try:
   except Exception:time.sleep(.1)
  else:raise AssertionError('Actual HTTP bundle did not start')
  catalogue=tool('browse_canon',{'node':'english','availability':'whole','collection':'mil','limit':40});assert catalogue['total']==14 and {r['id'] for r in catalogue['items']}=={r['unit_id'] for r in rows}
- coverage=tool('list_sources',{})['translation_coverage'];assert (coverage['total']['partial_links'],coverage['total']['partial_only'],coverage['total']['shared_links'])==(21,15,12)
+ coverage=tool('list_sources',{})['translation_coverage'];assert (coverage['total']['partial_links'],coverage['total']['partial_only'],coverage['total']['shared_links'])==(22,16,12)
  mil=next(c for c in coverage['collections'] if c['collection']=='mil');assert (mil['with_english'],mil['links'])==(14,14)
  native={};choices={}
  for index,row in enumerate(rows):

@@ -38,6 +38,7 @@ export function atiPartialExcerpt(html,extractor) {
   if(extractor==='ati-vinaya-mv6-p1to5-of5-v1')return vinayaChapterProse(html,5);
   if(extractor==='ati-vinaya-mv8-p1to22-of22-v1')return vinayaChapterProse(html,22);
   if(extractor==='ati-vinaya-mv1-mixed21p6v-v1')return upatissaChapter(html);
+  if(extractor==='ati-milinda-medicine-two-verses-v1')return milindaMedicineVerses(html);
   if(extractor==='ati-chapter-p2-of2-v1')return chapterParagraph(html,2,2);
   if(extractor==='ati-chapter-p11-of11-v1')return chapterParagraph(html,11,11,'Seeing the Dhamma');
   if(extractor==='ati-chapter-p1-of4-v1')return chapterParagraph(html,4,1);
@@ -54,7 +55,30 @@ export const ATI_SEGMENT_EXTRACTORS = Object.freeze([
   'ati-chapter-p1-of4-v1', 'ati-excerpt-verse-pre-v1', 'ati-chapter-p14-of24-v1', 'ati-chapter-p1to3-of4-ellipsis-v1',
   'ati-vinaya-mv6-p1to5-of5-v1', 'ati-vinaya-mv8-p1to22-of22-v1',
   'ati-vinaya-mv1-mixed21p6v-v1',
+  'ati-milinda-medicine-two-verses-v1',
 ]);
+
+/** The reviewed two-stanza selection; its preface and owned citation are not scripture. */
+function milindaMedicineVerses(html) {
+  const fail=()=>{throw Error('The reviewed ATI Milinda two-verse extraction structure changed. No excerpt was returned.');};
+  const chunk=copyrightedChunk(html).trim();
+  const body=chunk.match(/^<div class=(["'])preface\1>\s*<h1>Translator's note<\/h1>\s*<p>([^]*?)<\/p>\s*<p>([^]*?)<\/p>\s*<p>([^]*?)<\/p>\s*<\/div>\s*<div class=(["'])chapter\5>\s*<div class=(["'])freeverse\6>([^]*?)<p class=(["'])cite\8>([^]*?)<\/p>\s*<\/div>\s*<\/div>\s*<\/div>$/);
+  if(!body)fail();
+  const [, ,first,second,third,,,verse,,citation]=body;
+  if(/[<>]/.test(first+second+verse+citation)||!plainText(first)||!plainText(second)||plainText(citation)!=='— Miln 335')fail();
+  // Exactly four balanced bare italic pairs belong only to the third editorial paragraph.
+  let open=false,count=0;
+  for(const [tag]of third.matchAll(/<[^>]*>/g)){
+    if(tag==='<i>'&&!open){open=true;count++;}
+    else if(tag==='</i>'&&open)open=false;
+    else fail();
+  }
+  if(open||count!==4||/[<>]/.test(third.replace(/<\/?i>/g,''))||!plainText(third)
+    ||[...third.matchAll(/<i>([^]*?)<\/i>/g)].some(m=>!plainText(m[1])))fail();
+  const text=plainText(verse),stanzas=text.split('\n\n');
+  if(stanzas.length!==2||stanzas.some((s,i)=>s.split('\n').length!==[4,5][i]||s.split('\n').some(line=>!line.trim())))fail();
+  return text;
+}
 
 /** All 27 reviewed Mv1.23.1–10 children, keeping each stanza's line breaks. */
 function upatissaChapter(html) {

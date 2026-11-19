@@ -671,6 +671,37 @@
         "notice_sha256": "e3cf77b0606ab6ced1933577b2adea04d54c8757bdbe8fcafa48e64c43629003",
         "extractor": "ati-vinaya-mv1-mixed21p6v-v1"
       }
+    },
+    {
+      "unit_id": "mil6.4.1",
+      "path": "/tipitaka/kn/miln/miln.5x.olen",
+      "english_title": "The Healing Medicine of the Dhamma — two-verse selection",
+      "source_reference": "Miln 5; publisher verse citation — Miln 335; indexed Mil 6.4.1/20–21 only",
+      "translator": "Andrew Olendzki",
+      "license": "Olendzki-free-distribution-2005",
+      "mapping_note": "Only the two published stanzas at indexed Mil 6.4.1/20–21 have a linked translation, not the entire 96-segment Anumānapañha. Publisher Miln 5 and the owned verse citation — Miln 335 use different numbering from the VRI question identifier. Three editorial-preface paragraphs are excluded; the publisher citation is retained in source metadata, not inserted into the poem. All original Pāli, adjacent prose, source locators and other versions are unchanged. This is not word-by-word alignment.",
+      "root": {
+        "id": "mil6.4.1",
+        "title": "Anumānapañho",
+        "vri": "1",
+        "book": 45,
+        "start": 1627,
+        "end": 1774,
+        "root_blocks_sha256": "bc2d2e8c21c237a82455f4699e35c8ca2835a284f039f7ed49197cb9ce6fb7f0"
+      },
+      "source_html_sha256": "7c117b838aef75fcc9c595b5b903b5769221bae6269492e1ed8d86811cf8c299",
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil6.4.1",
+        "first_ref": "mil6.4.1/20",
+        "last_ref": "mil6.4.1/21",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "80466c44791d665fd9a7a5c7b6406e942f13d291d9571cd59a1f1d89f760cc37",
+        "text_sha256": "ac9407f40b48592e66e2247c3b5efe000c060bc91f8c6aa52aaf7b6fe36e885d",
+        "notice_sha256": "167c6e2428970354cb074b043e2c091c3f4c71aaeff997ea801cda00ae7d9e8f",
+        "extractor": "ati-milinda-medicine-two-verses-v1"
+      }
     }
   ]
 }

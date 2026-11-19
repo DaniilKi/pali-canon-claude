@@ -9,7 +9,7 @@ from playwright.sync_api import expect,sync_playwright
 from web_reader_test_helpers import read_tool
 ROOT=pathlib.Path(__file__).resolve().parents[1];UID='sn27.5';KEY='pali-library-v1';PRIVATE='PRIVATE_SN27_DRAFT_ā😀'
 p=argparse.ArgumentParser(description=__doc__);p.add_argument('--source-root',type=pathlib.Path);p.add_argument('--server-dir',type=pathlib.Path);p.add_argument('--a11y',action='store_true');p.add_argument('--report');args=p.parse_args()
-manifest=json.loads((ROOT/'scripts/canon/reviewed_ati_sections.json').read_text());row=next(r for r in manifest['links'] if r['unit_id']==UID);assert len(manifest['links'])==15 and sum(r['section']['profile']=='ati-kelly-milinda-v1' for r in manifest['links'])==14
+manifest=json.loads((ROOT/'scripts/canon/reviewed_ati_sections.json').read_text());row=next(r for r in manifest['links'] if r['unit_id']==UID);assert len(manifest['links'])==35 and sum(r['section']['profile']=='ati-kelly-milinda-v1' for r in manifest['links'])==14
 assert row['path']=='/tipitaka/sn/sn27/sn27.001-010.than' and row['anchor']=='sn27.005' and row['section']['profile']=='ati-sn27-feelings-v1' and row['section']['note_count']==0
 VERSION='ati:'+row['path']+'#'+row['anchor'];URL='https://accesstoinsight.org'+row['path']+'.html';server_dir=args.server_dir.resolve() if args.server_dir else ROOT/'server';assert json.loads((server_dir/'data/reviewed-ati-sections.json').read_text())==manifest
 stage=pathlib.Path(tempfile.mkdtemp(prefix='pali-sn27-browser-'));filename=row['path'].split('/')[-1]+'.html';source=args.source_root.resolve()/filename if args.source_root else stage/filename

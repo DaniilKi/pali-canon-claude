@@ -995,8 +995,21 @@
   var discourses = /* @__PURE__ */ new Map([
     ["ati:/tipitaka/sn/sn27/sn27.001-010.than#sn27.005", { unit: "sn27.5", notes: 0, profile: "ati-sn27-feelings-v1" }]
   ]);
-  var sourceProfile = (id5) => units.get(id5) || discourses.get(id5);
+  var numberedPage = "ati:/tipitaka/an/an01/an01.021-040.than";
+  var legacyNumberedPins = {
+    source_commit: "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    pali_sha256: "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+    text_sha256: "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+    notice_sha256: "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+    scope_sha256: "97589116d588b361438b6ea5db4d27ca2b45d8a77199be466cd6722b7c987ea6"
+  };
+  var numbered = new Map(Array.from({ length: 20 }, (_, i) => {
+    const n = i + 21;
+    return [numberedPage + "#sutta-" + n, { unit: "an1." + n, notes: 0, paragraphs: 1, profile: "ati-an1-ekadhamma-numbered-paragraph-v1", heading: n + "." }];
+  }));
+  var sourceProfile = (id5) => units.get(id5) || discourses.get(id5) || numbered.get(id5);
   var milindaSourceUnit = (id5) => units.get(id5)?.unit;
+  var numberedSourceUnit = (id5) => numbered.get(id5)?.unit;
   var sectionSourceUnit = (id5) => sourceProfile(id5)?.unit;
   function validateSectionIdentity(value) {
     const id5 = value.translation_id;
@@ -1007,6 +1020,8 @@
     } catch {
     }
     const resource = decoded.split(/[?#]/, 1)[0].replace(/\.html?$/i, "").toLowerCase();
+    const scope = value.translation_scope;
+    if (id5 === numberedPage && !Object.hasOwn(value, "source_section") && (!Object.hasOwn(value, "whole_unit_coverage") || value.whole_unit_coverage === false) && scope?.kind === "shared_page" && scope.whole_unit_coverage === false && scope.owner_id === "an1.21" && scope.presentation === "compilation" && Array.isArray(scope.text_ids) && scope.text_ids.length === 20 && scope.text_ids.every((unit, i) => unit === "an1." + (i + 21)) && Object.entries(legacyNumberedPins).every(([key4, pin]) => scope[key4] === pin)) return;
     if ((isSectionPageId(resource) || /^ati:/i.test(decoded) && decoded.includes("#")) && !sourceProfile(id5)) throw Error("The source section requires its exact reviewed fragment identity. No English source was displayed.");
   }
   function validateSectionDescriptor(value) {
@@ -1014,10 +1029,10 @@
     const profile2 = sourceProfile(value.translation_id);
     if (!profile2) return;
     const section = value.source_section;
-    if (!section || section.version !== 1 || section.status !== "reviewed" || section.unit_id !== profile2.unit || section.anchor !== value.translation_id.split("#")[1] || section.note_count !== profile2.notes || profile2.profile !== void 0 && section.profile !== profile2.profile) throw Error("The reviewed source-section descriptor or translator-note count is invalid. No English source was displayed.");
+    if (!section || section.version !== 1 || section.status !== "reviewed" || section.unit_id !== profile2.unit || section.anchor !== value.translation_id.split("#")[1] || section.note_count !== profile2.notes || profile2.profile !== void 0 && section.profile !== profile2.profile || profile2.heading !== void 0 && section.heading !== profile2.heading || profile2.paragraphs !== void 0 && section.paragraph_count !== profile2.paragraphs) throw Error("The reviewed source-section descriptor or translator-note count is invalid. No English source was displayed.");
   }
   var isMilindaPageId = (id5) => /^ati:\/tipitaka\/kn\/miln\/miln\.[23]x\.kell$/.test(id5);
-  var isSectionPageId = (id5) => isMilindaPageId(id5) || id5 === "ati:/tipitaka/sn/sn27/sn27.001-010.than";
+  var isSectionPageId = (id5) => isMilindaPageId(id5) || id5 === "ati:/tipitaka/sn/sn27/sn27.001-010.than" || id5 === numberedPage;
   function translatorNotes(data) {
     validateSectionDescriptor(data);
     if (!Object.hasOwn(data, "translator_notes")) {
@@ -1037,12 +1052,31 @@
   var sha = (value) => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
   var stable = (value) => JSON.stringify(Array.isArray(value) ? value.map((v) => JSON.parse(stable(v))) : value && typeof value === "object" ? Object.fromEntries(Object.keys(value).sort().map((k) => [k, JSON.parse(stable(value[k]))])) : value);
   var sameScope = (a, b) => stable(a) === stable(b);
+  var MEDICINE_ID = "ati:/tipitaka/kn/miln/miln.5x.olen";
+  var MEDICINE_EXTRACTOR = "ati-milinda-medicine-two-verses-v1";
+  function medicineFamily(id5) {
+    if (typeof id5 !== "string") return false;
+    let decoded = id5;
+    try {
+      decoded = decodeURIComponent(id5);
+    } catch {
+    }
+    return decoded.trim().split(/[?#]/, 1)[0].replace(/\.html?$/i, "").toLowerCase() === MEDICINE_ID;
+  }
   function scopeDescriptor(choice, requestedId) {
-    if (!own3(choice, "translation_scope")) return null;
-    const scope = choice.translation_scope;
     const fail9 = () => {
       throw new Error("This source has an unsupported or incomplete scope declaration. No scoped source was requested. Reload the passage and review the updated sources.");
     };
+    const reserved = medicineFamily(choice?.translation_id), selector = choice?.translation_scope?.extractor === MEDICINE_EXTRACTOR;
+    if (!own3(choice, "translation_scope")) {
+      if (reserved) fail9();
+      return null;
+    }
+    const scope = choice.translation_scope;
+    if (reserved || selector) {
+      const read2 = scope?.read_with;
+      if (choice.translation_id !== MEDICINE_ID || requestedId !== "mil6.4.1" || scope?.kind !== "partial_unit" || scope.version !== 1 || scope.unit_id !== "mil6.4.1" || scope.first_ref !== "mil6.4.1/20" || scope.last_ref !== "mil6.4.1/21" || scope.extractor !== MEDICINE_EXTRACTOR || scope.pali_segments !== 2 || scope.whole_unit_coverage !== false || own3(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== false || !read2 || Object.keys(read2).sort().join(",") !== "limit,offset,tool,uid" || read2.tool !== "get_text" || read2.uid !== "mil6.4.1" || read2.offset !== 19 || read2.limit !== 2 || own3(scope, "read_pages") || own3(scope, "pali_excerpt")) fail9();
+    }
     if (!scope || ![1, 2].includes(scope.version) || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail9();
     if (scope.kind === "shared_page") {
       if (scope.version !== 1) fail9();
@@ -1053,7 +1087,7 @@
     }
     if (scope.kind === "partial_unit") {
       const prefix = requestedId + "/";
-      if (choice.translation_id.startsWith("ati:") && (!(scope.version === 2 ? ["ati-chapter-prose-v1", "ati-chapter-p5-of5-no-notes-v1", "ati-chapter-p1to4-of5-notes-v1"].includes(scope.extractor) : ["ati-freeverse-v1", "ati-chapter-p2-of2-v1", "ati-chapter-p11-of11-v1", "ati-chapter-p1-of4-v1", "ati-chapter-p14-of24-v1", "ati-excerpt-verse-pre-v1", "ati-chapter-p1to3-of4-ellipsis-v1", "ati-vinaya-mv6-p1to5-of5-v1", "ati-vinaya-mv8-p1to22-of22-v1", "ati-vinaya-mv1-mixed21p6v-v1"].includes(scope.extractor)) || !sha(scope.notice_sha256))) fail9();
+      if (choice.translation_id.startsWith("ati:") && (!(scope.version === 2 ? ["ati-chapter-prose-v1", "ati-chapter-p5-of5-no-notes-v1", "ati-chapter-p1to4-of5-notes-v1"].includes(scope.extractor) : ["ati-freeverse-v1", "ati-chapter-p2-of2-v1", "ati-chapter-p11-of11-v1", "ati-chapter-p1-of4-v1", "ati-chapter-p14-of24-v1", "ati-excerpt-verse-pre-v1", "ati-chapter-p1to3-of4-ellipsis-v1", "ati-vinaya-mv6-p1to5-of5-v1", "ati-vinaya-mv8-p1to22-of22-v1", "ati-vinaya-mv1-mixed21p6v-v1", "ati-milinda-medicine-two-verses-v1"].includes(scope.extractor)) || !sha(scope.notice_sha256))) fail9();
       if (scope.version === 2) {
         const p = scope.pali_excerpt;
         if (!choice.translation_id.startsWith("ati:") || scope.first_ref !== scope.last_ref || !p || p.ref !== scope.first_ref || p.type !== "prose" || !nonempty(p.text) || p.text.length > 2e6 || p.offset_unit !== "utf16_code_units" || !sha(p.segment_sha256) || !Number.isSafeInteger(p.start_char) || !Number.isSafeInteger(p.end_char) || p.start_char < 0 || p.end_char <= p.start_char || p.end_char - p.start_char !== p.text.length || own3(scope, "read_with") || own3(scope, "read_pages")) fail9();
@@ -1065,6 +1099,7 @@
   }
   function validateEnglishPage(data, args, context) {
     const offset = args.offset || 0;
+    if (medicineFamily(data?.translation_id) || data?.translation_scope?.extractor === MEDICINE_EXTRACTOR) scopeDescriptor(data, context.uid);
     if (data && typeof data === "object") {
       translatorNotes(data);
       if (sectionSourceUnit(data.translation_id) && sectionSourceUnit(data.translation_id) !== context.uid) throw Error("The section source belongs to a different P\u0101li selection. No English was displayed.");
@@ -1072,6 +1107,7 @@
     if (!data || !nonempty(data.text) || !nonempty(data.translation_id) || !nonempty(data.translator) || !nonempty(data.attribution) || !(nonempty(data.license) || data.license && typeof data.license === "object" && nonempty(data.license.name)) || data.offset !== offset) throw new Error("The English source response is incomplete. No translation was displayed.");
     const choice = context.choices.find((c) => c.translation_id === data.translation_id);
     if (!choice) throw new Error("The returned English source version was not in the reviewed list. Reload the passage and review sources again.");
+    if (medicineFamily(choice.translation_id) || choice.translation_scope?.extractor === MEDICINE_EXTRACTOR) scopeDescriptor(choice, context.uid);
     if (sectionSourceUnit(data.translation_id) && (!own3(choice, "source_section") || !sameScope(data.source_section, choice.source_section) || data.source_section?.unit_id !== context.uid || data.source_section?.anchor !== data.translation_id.split("#")[1] || data.source_section?.status !== "reviewed")) throw new Error(milindaSourceUnit(data.translation_id) ? "The reviewed question identity changed. Reload the passage and review sources again; no English was displayed." : "The reviewed discourse identity changed. Reload the passage and review sources again; no English was displayed.");
     if (context.accepted) {
       const accepted = context.accepted;
@@ -1737,6 +1773,30 @@
   var ATI_SECTION_PROFILE = "ati-kelly-milinda-v1";
   var ATI_SECTION_LICENSE = "Kelly-free-distribution-2005";
   var SN27_SECTION_PROFILE = "ati-sn27-feelings-v1";
+  var AN_MIND_SECTION_PROFILE = "ati-an1-ekadhamma-numbered-paragraph-v1";
+  var AN_MIND_SECTION_PATH = "/tipitaka/an/an01/an01.021-040.than";
+  var anRows = [
+    [21, 2, "Pa\u1E6Dhama\u1E43."],
+    [22, 1, "Dutiya\u1E43."],
+    [23, 1, "Tatiya\u1E43."],
+    [24, 1, "Catuttha\u1E43."],
+    [25, 1, "Pa\xF1cama\u1E43."],
+    [26, 1, "Cha\u1E6D\u1E6Dha\u1E43."],
+    [27, 1, "Sattama\u1E43."],
+    [28, 1, "A\u1E6D\u1E6Dhama\u1E43."],
+    [29, 1, "Navama\u1E43."],
+    [30, 1, "Dasama\u1E43."],
+    [31, 2, "Pa\u1E6Dhama\u1E43."],
+    [32, 1, "Dutiya\u1E43."],
+    [33, 1, "Tatiya\u1E43."],
+    [34, 1, "Catuttha\u1E43."],
+    [35, 1, "Pa\xF1cama\u1E43."],
+    [36, 1, "Cha\u1E6D\u1E6Dha\u1E43."],
+    [37, 1, "Sattama\u1E43."],
+    [38, 1, "A\u1E6D\u1E6Dhama\u1E43."],
+    [39, 1, "Navama\u1E43."],
+    [40, 1, "Dasama\u1E43."]
+  ];
   var page = "/tipitaka/kn/miln/miln.";
   var rows = [
     ["mil3.1.8", "2x", "miln-2-1-08", 9, 0],
@@ -1777,7 +1837,23 @@
     license: "CC-BY-NC",
     source_html_sha256: "4cda764c8a27a64faf96f6cd2ce0dc08808816ab80d329f3ad264b4516ee1e79",
     inline_paratext: "Pa\xF1cama\u1E43."
-  })]);
+  }), ...anRows.map(([number, first_ref_number, inline_paratext]) => Object.freeze({
+    unit_id: `an1.${number}`,
+    path: AN_MIND_SECTION_PATH,
+    anchor: `sutta-${number}`,
+    paragraphs: 1,
+    notes: 0,
+    profile: AN_MIND_SECTION_PROFILE,
+    collection: "an",
+    translator: "Thanissaro Bhikkhu",
+    license: "CC-BY-NC",
+    source_html_sha256: "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+    label: `${number}.`,
+    first_ref_number,
+    inline_paratext,
+    root_heading: number === 21 ? "3. Akammaniyavaggo" : number === 31 ? "4. Adantavaggo" : null,
+    tail_paratext: number === 30 ? "Akammaniyavaggo tatiyo." : number === 40 ? "Adantavaggo catuttho." : null
+  }))]);
   var isAtiSectionPath = (path) => ATI_SECTION_PROFILES.some((row) => row.path === path);
 
   // src/citations.mjs
@@ -4628,11 +4704,12 @@
       const data = await tool("get_translation", args, "study");
       if (token !== epoch || studyToken !== studyEpoch) return;
       const next = validateEnglishPage(data, args, context), actualChoice = context.choices.find((c) => c.translation_id === data.translation_id);
-      target.replaceChildren(el("h3", (context.accepted?.kind === "shared_page" ? "Shared English source page \xB7 " : context.accepted ? "Partial English source \xB7 " : milindaSourceUnit(data.translation_id) ? "English question source \xB7 " : sectionSourceUnit(data.translation_id) ? "English discourse source \xB7 " : "English source page \xB7 ") + data.translator));
+      target.replaceChildren(el("h3", (context.accepted?.kind === "shared_page" ? "Shared English source page \xB7 " : context.accepted ? "Partial English source \xB7 " : milindaSourceUnit(data.translation_id) ? "English question source \xB7 " : numberedSourceUnit(data.translation_id) ? "English numbered treatment source \xB7 " : sectionSourceUnit(data.translation_id) ? "English discourse source \xB7 " : "English source page \xB7 ") + data.translator));
       target.append(el("p", "P\u0101li selection: " + context.citation + " \xB7 publisher reference: " + (actualChoice.reference || data.citation), "muted"), el("p", "Source version: " + data.translation_id, "muted"));
       if (context.accepted) scopeSummary(context.accepted, target);
       if (data.translation_id !== args.translation) target.append(el("p", "The server returned a different listed source version. Read its source and fallback notes before quoting.", "notice"));
       if (milindaSourceUnit(data.translation_id)) target.append(el("p", "Complete substantive question selection. Other questions on the publisher page and untranslated P\u0101li paratext are outside this English selection.", "notice"));
+      else if (numberedSourceUnit(data.translation_id)) target.append(el("p", "Complete substantive numbered treatment selection. The printed number identifies this treatment; the publisher title names the complete page. Other treatments, untranslated P\u0101li paratext and forms of address are outside this English selection. This is not word-by-word alignment.", "notice"));
       else if (sectionSourceUnit(data.translation_id)) target.append(el("p", "Complete substantive discourse selection. Other discourses on the publisher page and untranslated P\u0101li paratext are outside this English selection.", "notice"));
       notes(data, target);
       target.append(el("p", data.text, "translation"));

@@ -78,9 +78,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh, milinda, draftsafety]
+        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh, milinda, draftsafety, annumbered, milindapartial]
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety' || matrix.group == 'milinda') && 20 || 10 }}
+    timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety' || matrix.group == 'milinda' || matrix.group == 'annumbered' || matrix.group == 'milindapartial') && 20 || 10 }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -392,6 +392,32 @@ jobs:
       - name: Check SN27.5 from the isolated npm package
         if: matrix.group == 'milinda'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-sn27-check.py --server-dir "$RUNNER_TEMP/milinda-package/package/server" --report installed-sn27.report.json
+      - name: Check individual AN1.21–40 numbered treatments with pinned official ATI artifacts
+        if: matrix.group == 'annumbered'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-an-numbered-check.py --report standalone-an-numbered.report.json
+      - name: Audit individual AN1.21–40 numbered treatments and consent in both themes
+        if: matrix.group == 'annumbered'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-an-numbered-check.py --a11y --report standalone-an-numbered-a11y.report.json
+      - name: Check individual AN1.21–40 numbered treatments from the isolated npm package
+        if: matrix.group == 'annumbered'
+        run: |
+          mkdir -p "$RUNNER_TEMP/an-numbered-package"
+          npm pack --pack-destination "$RUNNER_TEMP/an-numbered-package"
+          tar -xzf "$RUNNER_TEMP/an-numbered-package/"*.tgz -C "$RUNNER_TEMP/an-numbered-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-an-numbered-check.py --server-dir "$RUNNER_TEMP/an-numbered-package/package/server" --report installed-an-numbered.report.json
+      - name: Check exact partial Milinda two-verse selection with pinned official ATI artifacts
+        if: matrix.group == 'milindapartial'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-milinda-partial-check.py --report standalone-milinda-partial.report.json
+      - name: Audit exact partial Milinda two-verse selection and consent in both themes
+        if: matrix.group == 'milindapartial'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-milinda-partial-check.py --a11y --report standalone-milinda-partial-a11y.report.json
+      - name: Check exact partial Milinda two-verse selection from the isolated npm package
+        if: matrix.group == 'milindapartial'
+        run: |
+          mkdir -p "$RUNNER_TEMP/milinda-partial-package"
+          npm pack --pack-destination "$RUNNER_TEMP/milinda-partial-package"
+          tar -xzf "$RUNNER_TEMP/milinda-partial-package/"*.tgz -C "$RUNNER_TEMP/milinda-partial-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-milinda-partial-check.py --server-dir "$RUNNER_TEMP/milinda-partial-package/package/server" --report installed-milinda-partial.report.json
       - name: Check reviewed Vinaya partial sources and consent with pinned official ATI artifacts
         if: matrix.group == 'vinayapartials'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-vinaya-partials-check.py --report standalone-vinaya-partials.report.json
@@ -509,6 +535,12 @@ jobs:
             standalone-sn27.report.json
             standalone-sn27-a11y.report.json
             installed-sn27.report.json
+            standalone-an-numbered.report.json
+            standalone-an-numbered-a11y.report.json
+            installed-an-numbered.report.json
+            standalone-milinda-partial.report.json
+            standalone-milinda-partial-a11y.report.json
+            installed-milinda-partial.report.json
             standalone-script-refresh.report.json
             standalone-script-refresh-a11y.report.json
             installed-script-refresh.report.json

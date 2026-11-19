@@ -24,9 +24,9 @@ const originalFetch=globalThis.fetch;
 afterEach(()=>{globalThis.fetch=originalFetch;liveCache.clear();});
 
 test('SN27.5 has one finite whole-discourse identity, unchanged root, honest title/PTS/ordinal limits and preserved neighbours',()=>{
- assert.equal(registry.links.length,15);
+ assert.equal(registry.links.length,35);
  assert.equal(sectionHash(registry.links.filter(row=>row.unit_id.startsWith('mil'))),'1895805a2ffc3518b590a000843a018b90f40694980094ba877940124d94ad16');
- assert.equal(sectionHash(JSON.parse(readFileSync('scripts/canon/reviewed_partial_pages.json','utf8')).links),'a92f0cbbbe88958416bbb05c081656697d215a9812169e51c9b437f473dbae85');
+ assert.equal(sectionHash(JSON.parse(readFileSync('scripts/canon/reviewed_partial_pages.json','utf8')).links.filter(row=>row.unit_id!=='mil6.4.1')),'a92f0cbbbe88958416bbb05c081656697d215a9812169e51c9b437f473dbae85');
  const d=snapshot(),segments=canon.segments(unit());
  assert.equal(unit().title,'Samphassajasuttaṃ');assert.equal(unit().pts.page,233);
  assert.equal(sectionHash(d.canon.books[unit().book].blocks.slice(unit().start,unit().end)),'7d4509cbcfbab32d0a52296149d2d13d455bf2bb4fc8cfa940f73f303a0bb703');
@@ -40,15 +40,15 @@ test('SN27.5 has one finite whole-discourse identity, unchanged root, honest tit
  }
  assert.equal(canon.resolve(`https://www.accesstoinsight.org${row.path}.html#sn27.005`).unit.id,'sn27.5');
  for(const anchor of ['', '#sn27.004','#sn27.006','#sn27.5','#top','#sn27%2E005','#sn27.005#other'])assert.throws(()=>canon.resolve(`https://accesstoinsight.org${row.path}.html${anchor}`),/anthology page/);
- const coverage=translationCoverage({refresh:true});assert.equal(coverage.total.partial_links,21);assert.equal(coverage.total.partial_only,15);assert.equal(coverage.total.shared_links,12);
+ const coverage=translationCoverage({refresh:true});assert.equal(coverage.total.partial_links,22);assert.equal(coverage.total.partial_only,16);assert.equal(coverage.total.shared_links,12);
 });
 
 test('SN27 section registry refuses wrong collection, author, rights, selector, inline ordinal, scope downgrade and deleted binding',()=>{
  const d=snapshot(),mutations=[
-  m=>m.links.pop(),m=>{m.links.at(-1).unit_id='sn27.4';},m=>{m.links.at(-1).translator='John Kelly';},m=>{m.links.at(-1).license='Kelly-free-distribution-2005';},
-  m=>{m.links.at(-1).section.profile='ati-kelly-milinda-v1';},m=>{m.links.at(-1).anchor='sn27.004';},m=>{m.links.at(-1).section.last_ref='sn27.5/3';},
-  m=>{m.links.at(-1).untranslated_paratext=[];},m=>{m.links.at(-1).untranslated_paratext=[{ref:'sn27.5/3',text:'Pañcamaṃ.'}];},m=>{m.links.at(-1).untranslated_paratext[0].text='Fourth';},
-  m=>{m.links.at(-1).section.pali_sha256='0'.repeat(64);},m=>{m.links.at(-1).root.root_blocks_sha256='0'.repeat(64);},
+  m=>m.links.pop(),m=>{m.links.find(r=>r.unit_id==='sn27.5').unit_id='sn27.4';},m=>{m.links.find(r=>r.unit_id==='sn27.5').translator='John Kelly';},m=>{m.links.find(r=>r.unit_id==='sn27.5').license='Kelly-free-distribution-2005';},
+  m=>{m.links.find(r=>r.unit_id==='sn27.5').section.profile='ati-kelly-milinda-v1';},m=>{m.links.find(r=>r.unit_id==='sn27.5').anchor='sn27.004';},m=>{m.links.find(r=>r.unit_id==='sn27.5').section.last_ref='sn27.5/3';},
+  m=>{m.links.find(r=>r.unit_id==='sn27.5').untranslated_paratext=[];},m=>{m.links.find(r=>r.unit_id==='sn27.5').untranslated_paratext=[{ref:'sn27.5/3',text:'Pañcamaṃ.'}];},m=>{m.links.find(r=>r.unit_id==='sn27.5').untranslated_paratext[0].text='Fourth';},
+  m=>{m.links.find(r=>r.unit_id==='sn27.5').section.pali_sha256='0'.repeat(64);},m=>{m.links.find(r=>r.unit_id==='sn27.5').root.root_blocks_sha256='0'.repeat(64);},
  ];
  for(const mutate of mutations){const m=copy(registry);mutate(m);assert.throws(()=>validateSectionRegistry(m,d.canon,d.translations,canon.segments),/Registered ATI/);}
  for(const mutate of [links=>{delete links['sn27.5'];},links=>{delete links['sn27.5'][0].section;},links=>{links['sn27.5'][0].url=`https://accesstoinsight.org${row.path}.html`;},links=>{links['sn27.4'].push(copy(links['sn27.5'][0]));},links=>{links['sn27.5'][0].shared_scope={};}]){
@@ -63,7 +63,7 @@ test('whole-discourse exports keep only the fifth section address, CC rights and
 });
 
 test('daily SN27.5 suggestion preserves exact section identity, mapping limits and detached metadata',()=>{
- const args={kind:'sutta',date:'2028-04-06'},first=dailyText(canon,args);assert.equal(first.text.id,'sn27.5');assert.equal(first.rotation.of,1258);
+ const args={kind:'sutta',date:'2029-01-19'},first=dailyText(canon,args);assert.equal(first.text.id,'sn27.5');assert.equal(first.rotation.of,1278);
  const [choice]=first.english;assert.equal(choice.translation_id,id);assert.deepEqual(choice.source_section,row.section);assert.equal(choice.mapping_note,row.mapping_note);assert.equal(choice.whole_unit_coverage,true);assert.equal(choice.translation_scope,undefined);
  choice.source_section.anchor='Caller mutation';assert.equal(dailyText(canon,args).english[0].source_section.anchor,'sn27.005');assert.equal(row.section.anchor,'sn27.005');
 });

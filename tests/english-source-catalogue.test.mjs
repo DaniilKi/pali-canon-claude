@@ -62,11 +62,11 @@ test('English catalogue filters before pagination in stable source order and ech
   }
 });
 
-test('all twenty-one partial owners remain discoverable and scoped-only discovery includes each actual shared-only record once',()=>{
+test('all twenty-two partial owners remain discoverable and scoped-only discovery includes each actual shared-only record once',()=>{
   const linked=snapshot('linked'),scoped=snapshot('scoped'),whole=snapshot('whole');
   const linkedIds=new Set(linked.map(r=>r.id)),scopedIds=new Set(scoped.map(r=>r.id)),wholeIds=new Set(whole.map(r=>r.id));
   const partial=expected.filter(r=>r.partial),sharedOnly=expected.filter(r=>r.shared&&!r.ordinary),partialOnly=partial.filter(r=>!r.ordinary);
-  assert.equal(partial.length,21);assert.equal(sharedOnly.length,52);assert.equal(partialOnly.length,15);
+  assert.equal(partial.length,22);assert.equal(sharedOnly.length,32);assert.equal(partialOnly.length,16);
   for(const r of partial){assert.ok(linkedIds.has(r.unit.id));assert.equal(scopedIds.has(r.unit.id),r.ordinary===0);assert.equal(wholeIds.has(r.unit.id),r.ordinary>0);}
   for(const r of sharedOnly)assert.ok(scopedIds.has(r.unit.id));
   const union=new Set([...partialOnly,...sharedOnly].map(r=>r.unit.id));

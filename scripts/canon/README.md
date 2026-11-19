@@ -366,7 +366,7 @@ The original ATI queue is closed at0unreviewed (1,116 ordinary bindings checked)
 
 ### Current Vinaya partial profiles (D232–D233)
 
-The registry contains21 reviewed partial sources, including three exact Vinaya selections. Kd6/195 and Kd8/174–178 use finite5-/22-paragraph selectors. Kd1/190–201 uses only `ati-vinaya-mv1-mixed21p6v-v1`:21 paragraphs and six stanza blocks in the exact reviewed27-child order, with seven balanced named anchors at their original positions. Unknown markup or notes must reject extraction. None is a whole-Khandhaka English translation. Previous20 descriptors are frozen. See [source review and pins](../../docs/data/upatissa-vinaya-partial.md).
+The registry contains22 reviewed partial sources, including three exact Vinaya selections and the separately reviewed Milinda two-verse selection (D239). Kd6/195 and Kd8/174–178 use finite5-/22-paragraph selectors. Kd1/190–201 uses only `ati-vinaya-mv1-mixed21p6v-v1`:21 paragraphs and six stanza blocks in the exact reviewed27-child order, with seven balanced named anchors at their original positions. Unknown markup or notes must reject extraction. None is a whole-Khandhaka English translation. Previous20 descriptors are frozen. See [source review and pins](../../docs/data/upatissa-vinaya-partial.md).
 
 With a provenance-verified local ATI checkout at the manifest’s exact commit and freshly unpacked **current** canonical data, verify and prepare an output separately:
 
@@ -380,11 +380,11 @@ Inspect the entire output delta before installation; preserve all previous owner
 
 ### Reviewed whole-question anthology sections
 
-`reviewed_ati_sections.json` records the finite Kelly Milinda question profiles;
+`reviewed_ati_sections.json` records 35 finite whole-substantive selections: fourteen Kelly Milinda questions, SN27.5 and twenty individually reviewed AN1.21–40 numbered paragraphs;
 `server/data/reviewed-ati-sections.json` is its identical packaged runtime copy.
-These are whole substantive questions, separate from partial/shared manifests.
-The ordinary build withholds proposals for both parent pages, then activates
-only the fourteen independently reviewed bindings after checking complete roots,
+These are whole substantive selections, separate from partial/shared manifests. The exact old unanchored AN1.21–40 shared binding must occur once, unchanged, in both input and output; the section builder refuses its deletion, duplication or mutation.
+The ordinary build withholds unreviewed proposals for the reserved parent pages, then activates
+only the independently reviewed bindings after checking complete roots,
 actual pinned source bytes, extraction, owned notes and complete notices.
 `verify_section_html.mjs` shares the runtime extractor; no English bodies enter
 the data package. Missing evidence is a failure, not permission to use the
@@ -401,3 +401,17 @@ PALI_ATI_SECTIONS_SOURCE_DIR=/path/to/official-ati node --test tests/ati-section
 Review the resulting diff before replacing generated data. Source revisions,
 rights or wording changes require a new independent scope review, not updated
 hashes alone. See [sources and boundaries](../../docs/data/milinda-reviewed-questions.md).
+
+### Numbered AN sections and Milinda medicine partial (D239)
+
+The finite AN profile `ati-an1-ekadhamma-numbered-paragraph-v1` selects only the actual `sutta-21` through `sutta-40` paragraphs from two ten-paragraph chapter containers. Its descriptor label is the printed number, not a source heading. Whole-substantive review discloses omitted vocatives, inline ordinals and chapter paratext. Keep original root segments unchanged and preserve the exact old unanchored shared declaration once before and after activation; do not repair missing or duplicated legacy ownership by inference.
+
+The separate `ati-milinda-medicine-two-verses-v1` partial selects only `mil6.4.1/20–21`. Three preface paragraphs are editorial; the exact final `p.cite` belongs to source metadata, not the poem. Its complete ©2005 Olendzki notice is non-CC, free-of-charge, identified-source/derivative and full-notice retention, with no BPS reprint cap. Keep all previous 21 partial descriptors intact.
+
+Run actual-source backend checks with a complete pinned ATI checkout and the exact Milinda file:
+
+```sh
+PALI_ATI_SECTIONS_SOURCE_DIR=/path/to/official-ati MILINDA_MEDICINE_HTML=/path/to/official-ati/tipitaka/kn/miln/miln.5x.olen.html node --test tests/an-numbered-sections.test.mjs tests/milinda-medicine-partial.test.mjs tests/ati-sections-build.test.mjs
+```
+
+The new browser scripts are `scripts/web-reader-an-numbered-check.py` and `scripts/web-reader-milinda-partial-check.py`. Both support normal, `--a11y` and isolated `--server-dir` runs. Optional `--source-root` points to a directory containing the named HTML file directly, not the nested checkout root; otherwise each script acquires and verifies only its pinned official artifact. These checks do not establish live publisher freshness or physical-device/human-AT acceptance. Retain existing section/shared/partial journeys and require independent review plus exact-commit CI. [Review receipts and scout limits](../../docs/data/an-mind-and-milinda-medicine.md).

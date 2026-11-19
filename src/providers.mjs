@@ -5,6 +5,7 @@ import { load, linksFor, fold as foldPali, source as canonSource, translationSco
 import { isPartial, isShared, isScoped } from './translation-scope.mjs';
 import { liveCache } from './cache.mjs';
 import { lookupOffline, DPD_PIN } from './analyse.mjs';
+import { isAtiSectionPath } from './ati-section-profiles.mjs';
 
 const DPD = 'https://www.dpdict.net';
 const ATI = 'https://accesstoinsight.org';
@@ -141,6 +142,10 @@ async function atiIndexes() {
   return atiIndexCache;
 }
 
+// Generic publisher pages may contain multiple treatments or editorial material.
+// Their URL alone never identifies an individually reviewed canonical selection.
+const unqualifiedAtiPage = path => isAtiSectionPath(path) || path === '/tipitaka/kn/miln/miln.5x.olen';
+
 export async function searchAti({ query, limit = 10 }) {
   query = String(query ?? '').trim();
   if (!query) throw new Error('Give a search query.');
@@ -160,7 +165,7 @@ export async function searchAti({ query, limit = 10 }) {
   }
   const d = load();
   const unique = [...new Map(matches.map((r) => [r.path, r])).values()].map((r) => {
-    const textId = d.urlIndex.get(`accesstoinsight.org${r.path}`);
+    const textId = unqualifiedAtiPage(r.path) ? undefined : d.urlIndex.get(`accesstoinsight.org${r.path}`);
     return textId ? { ...r, canon_text_id: textId } : r;
   });
   return {
@@ -178,7 +183,7 @@ export async function getAtiText({ path, offset = 0, limit = 12000 }) {
   try { result = await liveCache.wrap(`ati-page:${path}`, () => fetchMirrors(atiMirrors(path))); } catch (error) { throw new Error(`Could not read ${path} from Access to Insight or its mirrors (${error.message}).`); }
   const text = plainText(atiContent(result.body));
   const notice = atiNotice(result.body);
-  const textId = load().urlIndex.get(`accesstoinsight.org${path}`);
+  const textId = unqualifiedAtiPage(path) ? undefined : load().urlIndex.get(`accesstoinsight.org${path}`);
   return {
     source: 'Access to Insight', url: `${ATI}${path}.html`, path,
     ...(result.mirror ? { served_from_mirror: result.url } : {}),

@@ -670,6 +670,902 @@
         "last_ref": "sn27.5/2",
         "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
       }
+    },
+    {
+      "unit_id": "an1.21",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-21",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.21 (publisher numbered treatment 21)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.21 selected only from publisher numbered treatment 21, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 21., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Paṭhamaṃ. and root chapter paratext are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.21",
+        "book": 16,
+        "start": 28,
+        "end": 30,
+        "title": "Akammaniyavagga",
+        "vri": "21",
+        "root_blocks_sha256": "255f2bcee4e759ecc3cfd5c1dec6d5eee99c060210fbce33a2c6eeff2d4af11e"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.21/2",
+          "text": "Paṭhamaṃ."
+        },
+        {
+          "ref": "an1.21/1",
+          "text": "3. Akammaniyavaggo"
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.21",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-21",
+        "heading": "21.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "8dd8294d8fde6a11e6b68c60aaa46690cf6bee3bb427eaf8d55df6813df2a687",
+        "text_sha256": "c2c0af9a0ca372ddc5c19d3f2bd409885de30be03aea55f4e396c3027bb7a02f",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "4eed734f2db7cb38aa6976066b610ab24a2e49453fe06a66a2d0623193e67ffe",
+        "first_ref": "an1.21/2",
+        "last_ref": "an1.21/2",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.22",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-22",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.22 (publisher numbered treatment 22)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.22 selected only from publisher numbered treatment 22, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 22., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Dutiyaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.22",
+        "book": 16,
+        "start": 30,
+        "end": 31,
+        "title": "Akammaniyavaggo",
+        "vri": "22",
+        "root_blocks_sha256": "759ead403aa9feaf473686fe7b222bb5a050f154cae0afd47f9ca7fb9708835c"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.22/1",
+          "text": "Dutiyaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.22",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-22",
+        "heading": "22.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "875ab2903d2633ea80306feb65d26453fd335fd5e8bccfb683473d82f225d8a9",
+        "text_sha256": "edb7508a79e638b0ceede7c768567837b8cc90e8673ec49f3cc69dd755a38697",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "afc96bb498151643900279e083b6b4b9e3d78960ad61be2efa1042fef00c5a17",
+        "first_ref": "an1.22/1",
+        "last_ref": "an1.22/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.23",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-23",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.23 (publisher numbered treatment 23)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.23 selected only from publisher numbered treatment 23, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 23., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Tatiyaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.23",
+        "book": 16,
+        "start": 31,
+        "end": 32,
+        "title": "Akammaniyavaggo",
+        "vri": "23",
+        "root_blocks_sha256": "84b7abdf67ad590b46694387bfe9b52b470a445efb129e0b83d4891e472dc623"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.23/1",
+          "text": "Tatiyaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.23",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-23",
+        "heading": "23.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "db55e1e6945a16f312282bfc1e3b6a941fd7c124e3a863a904ca3dccad87f3c3",
+        "text_sha256": "eb23541928fec68a190b7f1edb2155295f825b3a405e0bdf721feceff2aab720",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "892c7b43787b8aa61049cdb691e4a8e5f1a681f213a5bfbbe59768872085d858",
+        "first_ref": "an1.23/1",
+        "last_ref": "an1.23/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.24",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-24",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.24 (publisher numbered treatment 24)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.24 selected only from publisher numbered treatment 24, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 24., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Catutthaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.24",
+        "book": 16,
+        "start": 32,
+        "end": 33,
+        "title": "Akammaniyavaggo",
+        "vri": "24",
+        "root_blocks_sha256": "8d2a8ce81e5be12c77fb22bb8759dc25ec5066855655a450af07692def8a73c2"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.24/1",
+          "text": "Catutthaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.24",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-24",
+        "heading": "24.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "82bf3ec4859f4b01064efc2657db7b5833cb3f005ec165005dd16eda198bd526",
+        "text_sha256": "f7afc495621895a315d73ca2ed6daa7524b90c924d6ab8dc05c7b12720878274",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "5c9ce02220607dfbf9bb8edeb4254fe571d8e200d0dfd32c35407dae228e0961",
+        "first_ref": "an1.24/1",
+        "last_ref": "an1.24/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.25",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-25",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.25 (publisher numbered treatment 25)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.25 selected only from publisher numbered treatment 25, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 25., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Pañcamaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.25",
+        "book": 16,
+        "start": 33,
+        "end": 34,
+        "title": "Akammaniyavaggo",
+        "vri": "25",
+        "root_blocks_sha256": "10056011a2f60c5d3ac106c9cc6d6ba17095778841849bd80c7a88edc087f4f6"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.25/1",
+          "text": "Pañcamaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.25",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-25",
+        "heading": "25.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "25712bf4062c0b6db947df06f410b4800314903baf52fa272f13aaecd48536ba",
+        "text_sha256": "08e7066ba82f77a9430d8eecd45d8fdba0dae32c458089d53b316ba49f24c346",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "a3323d5d1af0feae15201f69c1a372a94eb53265bfa84028af8356f9a63db5f3",
+        "first_ref": "an1.25/1",
+        "last_ref": "an1.25/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.26",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-26",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.26 (publisher numbered treatment 26)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.26 selected only from publisher numbered treatment 26, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 26., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Chaṭṭhaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.26",
+        "book": 16,
+        "start": 34,
+        "end": 35,
+        "title": "Akammaniyavaggo",
+        "vri": "26",
+        "root_blocks_sha256": "4535a9c97d214857c198950017b461ca2cff4205645eaf14057ed67ec355b58e"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.26/1",
+          "text": "Chaṭṭhaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.26",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-26",
+        "heading": "26.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "499b3d00000b2584f1ebd522266205594aad0772f9ec16bd2196d099c30d7203",
+        "text_sha256": "1724ea77ec49cf3374f6f7dc9532cc33b8e4b0e9f0e9b1fe78bd6a9fa71e7321",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "bce01f0a6364cd9fa6f101daec6457fdc0836b0807c2f03ceec4856172d57bb5",
+        "first_ref": "an1.26/1",
+        "last_ref": "an1.26/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.27",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-27",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.27 (publisher numbered treatment 27)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.27 selected only from publisher numbered treatment 27, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 27., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Sattamaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.27",
+        "book": 16,
+        "start": 35,
+        "end": 36,
+        "title": "Akammaniyavaggo",
+        "vri": "27",
+        "root_blocks_sha256": "2d183255e9c048909fff298c4c0fc53d13c5779f856194f72c8f885e003495d2"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.27/1",
+          "text": "Sattamaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.27",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-27",
+        "heading": "27.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "f1c10c58d58d689b4538d12774e73b9170c34ed647846dfd1ccdc488055f8989",
+        "text_sha256": "33434142ca863dd0f5cdfa4b2b21333b2ba7aa174865d02f2418742b78fb4f7c",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "abb2cac5b9f1ac46c8c05bae270e1442b37c6019695e81b36d965b8a8086e1c0",
+        "first_ref": "an1.27/1",
+        "last_ref": "an1.27/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.28",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-28",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.28 (publisher numbered treatment 28)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.28 selected only from publisher numbered treatment 28, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 28., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Aṭṭhamaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.28",
+        "book": 16,
+        "start": 36,
+        "end": 37,
+        "title": "Akammaniyavaggo",
+        "vri": "28",
+        "root_blocks_sha256": "5bfb26082183fc0372b41ec696591b59472df52fea8e8377de53ab2b91924940"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.28/1",
+          "text": "Aṭṭhamaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.28",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-28",
+        "heading": "28.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "4bd9f524fa3311aea68d8afbf35e98e388676413a74301c8510c56dea13041c9",
+        "text_sha256": "fe4d59a85bdf5dbd4b7b1728f913f4836a6e2269157812a4f5fb0a9ffe4a7965",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "b4a3a873dab60f68b34bfa022c0c56aa166a02dfa5cd2bc810f207b2098be3ab",
+        "first_ref": "an1.28/1",
+        "last_ref": "an1.28/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.29",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-29",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.29 (publisher numbered treatment 29)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.29 selected only from publisher numbered treatment 29, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 29., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Navamaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.29",
+        "book": 16,
+        "start": 37,
+        "end": 38,
+        "title": "Akammaniyavaggo",
+        "vri": "29",
+        "root_blocks_sha256": "a09f66811ba67261365a8eb5e9ae5f9aba241123a8fdc73436b327f22fb6010e"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.29/1",
+          "text": "Navamaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.29",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-29",
+        "heading": "29.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "590c68bbae73810b919c73b71b8cae96a00670ac54f710f53741bddaf76b26ba",
+        "text_sha256": "1b0515439609ff9828a2754f13255479c1b5a07c28361cf8190ea7d2f5d08577",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "fb883b823b37aac59c983597a1c03179e0503ff715d032113ebeb231b48dc54a",
+        "first_ref": "an1.29/1",
+        "last_ref": "an1.29/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.30",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-30",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.30 (publisher numbered treatment 30)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.30 selected only from publisher numbered treatment 30, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 30., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Dasamaṃ. and root chapter paratext are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.30",
+        "book": 16,
+        "start": 38,
+        "end": 40,
+        "title": "Akammaniyavaggo",
+        "vri": "30",
+        "root_blocks_sha256": "3d29f2475d84c8277625baabafee7054738b8b2798910afe698dad338014005a"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.30/1",
+          "text": "Dasamaṃ."
+        },
+        {
+          "ref": "an1.30/2",
+          "text": "Akammaniyavaggo tatiyo."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.30",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-30",
+        "heading": "30.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "634dddb4b76ce843270ff87085a1cb98e413046007566e912558ef5cefa49b6d",
+        "text_sha256": "61705f28d846ebdf5b5f299afdaa08d8d051c57254c428df181817a82b3d276e",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "e654e31137238e76557161b89409b6a5c845e7118bbf2fa2c3550c2d9f700138",
+        "first_ref": "an1.30/1",
+        "last_ref": "an1.30/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.31",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-31",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.31 (publisher numbered treatment 31)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.31 selected only from publisher numbered treatment 31, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 31., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Paṭhamaṃ. and root chapter paratext are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.31",
+        "book": 16,
+        "start": 40,
+        "end": 42,
+        "title": "Adantavagga",
+        "vri": "31",
+        "root_blocks_sha256": "def27c98d5deee32ddf503e24cbbbc5d4f8f246e2914b1cf825ee192fdf4bbda"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.31/2",
+          "text": "Paṭhamaṃ."
+        },
+        {
+          "ref": "an1.31/1",
+          "text": "4. Adantavaggo"
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.31",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-31",
+        "heading": "31.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "87224c22a141b820bf0edb756b9645cc113da7058a8c7c8e4c4f05940030989e",
+        "text_sha256": "7545f8391cc9a2c61fff5fa334432d875381398f99aa6d67070e631910738b5b",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "09bd14d2cb3fd8fbaf7f6ac3472e176476264e7873fff3c961140169d2bcd057",
+        "first_ref": "an1.31/2",
+        "last_ref": "an1.31/2",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.32",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-32",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.32 (publisher numbered treatment 32)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.32 selected only from publisher numbered treatment 32, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 32., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Dutiyaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.32",
+        "book": 16,
+        "start": 42,
+        "end": 43,
+        "title": "Adantavaggo",
+        "vri": "32",
+        "root_blocks_sha256": "62649d7c16efefa5ae2e680551176a862851dd5c08cd58911203b20975052ab9"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.32/1",
+          "text": "Dutiyaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.32",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-32",
+        "heading": "32.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "af758076b2434b6252ed698a2af3d255903b1e72fd146b3fb56c96c2eca52da3",
+        "text_sha256": "dfdac691d87a5a05f7493b3a0c0f261d4123adf3d8e375690d484c2f7e183f6a",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "918cce5ba04995d71df52fc43c9865d5cdd4b870295b92d2f35f97314bac6c9f",
+        "first_ref": "an1.32/1",
+        "last_ref": "an1.32/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.33",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-33",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.33 (publisher numbered treatment 33)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.33 selected only from publisher numbered treatment 33, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 33., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Tatiyaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.33",
+        "book": 16,
+        "start": 43,
+        "end": 44,
+        "title": "Adantavaggo",
+        "vri": "33",
+        "root_blocks_sha256": "386e7e0d023a709bce7007ca8296d54de6084bca82885dd371f31d145042001b"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.33/1",
+          "text": "Tatiyaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.33",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-33",
+        "heading": "33.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "08351c33dbc2b0918a91c73ed5489c994a3f1bfb6ebafc008c6bc5b6f5652e10",
+        "text_sha256": "0eb2c66c168dc60f3ef576bfd75f5e5e6904170be004d371e25ccac304b20df7",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "2f75d84dd1c29504f5c02a7635b29734880418a270d8452d35fca77c4c97dabe",
+        "first_ref": "an1.33/1",
+        "last_ref": "an1.33/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.34",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-34",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.34 (publisher numbered treatment 34)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.34 selected only from publisher numbered treatment 34, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 34., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Catutthaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.34",
+        "book": 16,
+        "start": 44,
+        "end": 45,
+        "title": "Adantavaggo",
+        "vri": "34",
+        "root_blocks_sha256": "d1709551b5f5cabf8e0e5345ead0692f27811aded2eb6acafe722c61eaaa8dac"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.34/1",
+          "text": "Catutthaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.34",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-34",
+        "heading": "34.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "12da8d53ceba4bfe70982e371409696c6f56ba3c2976c528ad9100183a55dcc1",
+        "text_sha256": "75529f54293bd8b08b941085bdf04e7301783b5115c1abff2af541e2eba2c669",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "87fc21bf0a64854f2b644422fe098a1682d04606de8e60d0eaec32baee6fcef1",
+        "first_ref": "an1.34/1",
+        "last_ref": "an1.34/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.35",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-35",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.35 (publisher numbered treatment 35)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.35 selected only from publisher numbered treatment 35, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 35., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Pañcamaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.35",
+        "book": 16,
+        "start": 45,
+        "end": 46,
+        "title": "Adantavaggo",
+        "vri": "35",
+        "root_blocks_sha256": "e4a8d7d7daf3818721da25fd4e673284c66ce3d4aa2dc7cd97bd974656d5509e"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.35/1",
+          "text": "Pañcamaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.35",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-35",
+        "heading": "35.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "6011f9f1c0115cde9fd4983c6321594e34ff49f3e1ab367a1d5207170903fc78",
+        "text_sha256": "936f83415c5a4b871ec9ccc80204fc0e097fbd99a31ffe9b832838b7c956ea38",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "be3e47e7fe4832e337fd6c09500815746098a5df3056e2656f761aca292370cf",
+        "first_ref": "an1.35/1",
+        "last_ref": "an1.35/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.36",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-36",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.36 (publisher numbered treatment 36)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.36 selected only from publisher numbered treatment 36, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 36., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Chaṭṭhaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.36",
+        "book": 16,
+        "start": 46,
+        "end": 47,
+        "title": "Adantavaggo",
+        "vri": "36",
+        "root_blocks_sha256": "940c5d0fc0eebcde385de9fd00d722b645f823b8c6dacad365207a795641c01a"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.36/1",
+          "text": "Chaṭṭhaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.36",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-36",
+        "heading": "36.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "677b53ded884fe3708fc223da1ebd5d997b99db12f813a31ba445e2a1b47ed42",
+        "text_sha256": "844bd34ab946cf90770bbc73be46831370b8ff300f3497c1350ff2764dfb91e9",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "01e9da551533d865c85e187bb235525c092aa59408c1191b5d53bade18f9857f",
+        "first_ref": "an1.36/1",
+        "last_ref": "an1.36/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.37",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-37",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.37 (publisher numbered treatment 37)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.37 selected only from publisher numbered treatment 37, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 37., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Sattamaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.37",
+        "book": 16,
+        "start": 47,
+        "end": 48,
+        "title": "Adantavaggo",
+        "vri": "37",
+        "root_blocks_sha256": "dcfa5dc32c015bddbc2c567958f4afc0d03447a767a649db83f8c3731ff25563"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.37/1",
+          "text": "Sattamaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.37",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-37",
+        "heading": "37.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "ae3f08f0b5c2c05f08699b539adfa24d72c4dba77329ec098444064c7adb7c9d",
+        "text_sha256": "587884d238fd6418aaa66e58e28d7a5381a3efc7a298f2e9134430e3abce728d",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "8c40a7e060333d781518b1fbce948a9cc982b68dcc474194ef4bdb44ea0489c2",
+        "first_ref": "an1.37/1",
+        "last_ref": "an1.37/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.38",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-38",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.38 (publisher numbered treatment 38)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.38 selected only from publisher numbered treatment 38, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 38., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Aṭṭhamaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.38",
+        "book": 16,
+        "start": 48,
+        "end": 49,
+        "title": "Adantavaggo",
+        "vri": "38",
+        "root_blocks_sha256": "278bbfdb3bbae260f7ba89ff57e2f0595095075789cd8c43ec1aa2c79bb82053"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.38/1",
+          "text": "Aṭṭhamaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.38",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-38",
+        "heading": "38.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "8d7cb6f8585d0028835398ea7b5f87c66819f0453da01afdbf64bfcc7147b38d",
+        "text_sha256": "57a835c16a17b1540f566590953b68235054d09689575528fc803a6d1b8ce47e",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "a268595b0ef981bb775eff14fc8d9b3ac4c92f1f6ecff06aa89fe5af243559da",
+        "first_ref": "an1.38/1",
+        "last_ref": "an1.38/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.39",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-39",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.39 (publisher numbered treatment 39)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.39 selected only from publisher numbered treatment 39, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 39., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Navamaṃ. are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.39",
+        "book": 16,
+        "start": 49,
+        "end": 50,
+        "title": "Adantavaggo",
+        "vri": "39",
+        "root_blocks_sha256": "830676b1cac888737c815c135250268d8b889226c8e8d62f1a272f3fb3619ad6"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.39/1",
+          "text": "Navamaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.39",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-39",
+        "heading": "39.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "ab52584ea4b8994fbcb3880a05966222b512f2cef0f53b7ae0e9896c06c3fd83",
+        "text_sha256": "5b14b1a1b6ce181b6a1e73378a847a88dd903fdd09408e4f8cd73c88d25d076b",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "dab92a70b574ab7b7bebd677d84568172966dd08f3c9d02462818a17bd7f8b52",
+        "first_ref": "an1.39/1",
+        "last_ref": "an1.39/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "an1.40",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "anchor": "sutta-40",
+      "english_title": "Ekadhamma Suttas: A Single Thing",
+      "source_reference": "AN 1.40 (publisher numbered treatment 40)",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive AN 1.40 selected only from publisher numbered treatment 40, within the Akammaniya/Adanta compilation. The publisher supplies the parent title Ekadhamma Suttas: A Single Thing and a numeric label 40., not an individual discourse heading. Both mind assertions are present; the three repeated bhikkhave vocatives, inline ordinal Dasamaṃ. and root chapter paratext are untranslated. All original Pāli and locators remain unchanged. This is not word-by-word alignment. The separate unanchored shared-page version still requires shared-page consent and makes no individual alignment claim.",
+      "root": {
+        "id": "an1.40",
+        "book": 16,
+        "start": 50,
+        "end": 52,
+        "title": "Adantavaggo",
+        "vri": "40",
+        "root_blocks_sha256": "f36e00b259a83df4cb7305d186accac91cf41dc38a6dcc605efb4b8fd6965e48"
+      },
+      "source_html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "untranslated_paratext": [
+        {
+          "ref": "an1.40/1",
+          "text": "Dasamaṃ."
+        },
+        {
+          "ref": "an1.40/2",
+          "text": "Adantavaggo catuttho."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "an1.40",
+        "profile": "ati-an1-ekadhamma-numbered-paragraph-v1",
+        "anchor": "sutta-40",
+        "heading": "40.",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "aea7576def1ed64b0c51e1943a939f2476a0b01e5fefab0d0f30409b23788a0a",
+        "text_sha256": "84ca231a8a240989d9c9456b284c5b95e6508e397ff49bf0be4dd4c8d5b59c9e",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+        "pali_sha256": "13c9f622da08e8c92adce5830fb1136f00a5677fbab300f16c507b12f483a9fe",
+        "first_ref": "an1.40/1",
+        "last_ref": "an1.40/1",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
     }
   ]
 }

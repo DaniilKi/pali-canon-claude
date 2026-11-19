@@ -21,14 +21,16 @@ test('early AN compilations pin exactly twenty mind passages and two voice passa
  for(const row of rows){
   const selected=row.root_units.map(r=>{const u=canon.resolve(r.id).unit;assert.equal(u.title,r.title);assert.equal(u.vri,r.vri);assert.equal(createHash('sha256').update(JSON.stringify(canon.load().canon.books[u.book].blocks.slice(u.start,u.end))).digest('hex'),r.root_blocks_sha256);return{id:r.id,segments:canon.segments(u).map(({ref,type,text})=>({ref,type,text}))};});
   assert.equal(scopeHash(selected),row.pali_segments_sha256);
-  assert.equal(Object.values(canon.load().translations).flat().filter(l=>l.path===row.path).length,1);
-  for(const uid of row.text_ids){const m=canon.describe(canon.resolve(uid).unit);assert.equal(m.english_available,0);assert.equal(m.shared_english_available,1);const scope=m.english[0].translation_scope;assert.deepEqual(scope.text_ids,row.text_ids);assert.equal(scope.whole_unit_coverage,false);assert.equal(scope.individual_alignment_verified,false);assert.equal(scope.presentation,'compilation');assert.equal(scope.notice_sha256,row.notice_sha256);}
+  assert.equal(Object.values(canon.load().translations).flat().filter(l=>l.path===row.path&&l.shared_scope).length,1);
+  for(const uid of row.text_ids){const m=canon.describe(canon.resolve(uid).unit);assert.equal(m.english_available,row.owner_id==='an1.21'?1:0);assert.equal(m.shared_english_available,1);const scope=m.english.find(l=>l.translation_id===`ati:${row.path}`).translation_scope;assert.deepEqual(scope.text_ids,row.text_ids);assert.equal(scope.whole_unit_coverage,false);assert.equal(scope.individual_alignment_verified,false);assert.equal(scope.presentation,'compilation');assert.equal(scope.notice_sha256,row.notice_sha256);}
  }
  assert.deepEqual(rows[1].root_units.map(r=>r.vri),['126','127']);
  for(const uid of ['an1.20','an1.41','an2.123','an2.124','an2.127'])assert.equal(canon.describe(canon.resolve(uid).unit).english.some(l=>rows.some(r=>l.translation_id===`ati:${r.path}`)),false);
- const before=translationCoverage({refresh:true}).total;saved=canon.load().translations;canon.load().translations={...saved};for(const row of rows)delete canon.load().translations[row.owner_id];const after=translationCoverage({refresh:true}).total;
+ const before=translationCoverage({refresh:true}).total;saved=canon.load().translations;canon.load().translations={...saved};
+ // Retain the required mind-page binding; measure only the independent voice page.
+ delete canon.load().translations['an2.125'];const after=translationCoverage({refresh:true}).total;
  for(const key of ['links','with_english','with_english_including_inherited'])assert.equal(before[key],after[key]);
- assert.equal(before.shared_links,after.shared_links+2);assert.equal(before.with_shared_english,after.with_shared_english+22);assert.equal(before.shared_only,after.shared_only+22);
+ assert.equal(before.shared_links,after.shared_links+1);assert.equal(before.with_shared_english,after.with_shared_english+2);assert.equal(before.shared_only,after.shared_only+2);
 });
 
 test('actual shared IDs reject implicit consent and neighboring misnumbered units without network',async()=>{
@@ -37,9 +39,9 @@ test('actual shared IDs reject implicit consent and neighboring misnumbered unit
  await assert.rejects(english.translation(canon.resolve('an2.123').unit,`ati:${rows[1].path}`,{allow_shared:true}),/not linked|not available|No English translation/i);assert.equal(calls,0);
 });
 
-test('both new compilations preserve page-only quotations, notices and pinned continuation with synthetic providers',async()=>{
+test('voice compilation preserves page-only quotations, notices and pinned continuation with a synthetic provider',async()=>{
  saved=canon.load().translations;canon.load().translations=structuredClone(saved);
- for(const row of rows){
+ for(const row of rows.filter(r=>r.owner_id==='an2.125')){
   const text=('Synthetic violet compass copper lantern. '.repeat(40)).trim();
   const html=`<!-- BEGIN COPYRIGHTED TEXT CHUNK -->${text}<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) --><div id="F_provenance">Synthetic test notice, not a rights grant.</div><div id="F_citation">Synthetic citation.</div>`;
   const link=canon.load().translations[row.owner_id][0];link.shared_scope.text_sha256=scopeHash(text);link.shared_scope.notice_sha256=scopeHash(english.atiNotice(html));globalThis.fetch=async()=>new Response(html);liveCache.clear();
@@ -50,6 +52,13 @@ test('both new compilations preserve page-only quotations, notices and pinned co
   const absent=await verifyQuote({...q,text:'Purple zeppelins carry velvet otters'});assert.equal(absent.verdict,'not_found_in_scope');assert.match(absent.explanation,/do not establish any individual/);
   liveCache.clear();globalThis.fetch=async()=>new Response(html.replace('Synthetic test notice','Changed notice'));await assert.rejects(english.translation(canon.resolve(uid).unit,id,{allow_shared:true}),/notice changed/);
  }
+});
+
+test('the retained mind compilation cannot change source pins for synthetic or substituted wording',async()=>{
+ saved=canon.load().translations;canon.load().translations=structuredClone(saved);
+ const link=canon.load().translations['an1.21'].find(l=>l.shared_scope);link.shared_scope.text_sha256=scopeHash('Synthetic substituted source');
+ let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Rejected before source access');};
+ await assert.rejects(english.translation(canon.resolve('an1.21').unit,`ati:${rows[0].path}`,{allow_shared:true}),/Registered ATI/);assert.equal(calls,0);
 });
 
 const heldPath='/tipitaka/an/an01/an01.031-040x.wood',heldUrl='https://www.accesstoinsight.org'+heldPath+'.html';

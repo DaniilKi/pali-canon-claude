@@ -22,6 +22,7 @@ def manifest_rows(manifest=MANIFEST):
         walshe='BPS-free-distribution-1985',"Maurice O'Connell Walshe"
         thanissaro='CC-BY-NC','Thanissaro Bhikkhu'
         profiles={
+            ('mil6.4.1','/tipitaka/kn/miln/miln.5x.olen'):(1,'ati-milinda-medicine-two-verses-v1','Olendzki-free-distribution-2005','Andrew Olendzki'),
             ('pli-tv-kd1','/tipitaka/vin/mv/mv.01.23.01-10.than'):(1,'ati-vinaya-mv1-mixed21p6v-v1',*thanissaro),
             ('pli-tv-kd6','/tipitaka/vin/mv/mv.06.40.01.than'):(1,'ati-vinaya-mv6-p1to5-of5-v1',*thanissaro),
             ('pli-tv-kd8','/tipitaka/vin/mv/mv.08.26.01-08.than'):(1,'ati-vinaya-mv8-p1to22-of22-v1',*thanissaro),
@@ -39,6 +40,8 @@ def manifest_rows(manifest=MANIFEST):
         finite=bool(profile and (p.get('version'),p.get('extractor'),r.get('license'),r.get('translator'))==profile)
         if r.get('path') in {path for _,path in profiles} and not finite:
             raise ValueError('Invalid reserved finite source profile')
+        if finite and p.get('extractor')=='ati-milinda-medicine-two-verses-v1' and (p.get('first_ref'),p.get('last_ref'))!=('mil6.4.1/20','mil6.4.1/21'):
+            raise ValueError('Invalid reviewed Milinda two-verse boundaries')
         prose=finite and p.get('version')==2
         path_match=re.fullmatch(r'/tipitaka/(?:kn/(?P<kn>thag|snp)|(?P<mn>mn))/[a-z0-9_.-]+',r.get('path',''))
         owner_pattern=(path_match['kn']+r'\d+\.\d+' if path_match and path_match['kn'] else r'mn\d+')
@@ -64,7 +67,7 @@ def manifest_rows(manifest=MANIFEST):
     return m
 
 def withhold_partial_page_proposals(out,manifest=MANIFEST):
-    paths={r['path'] for r in manifest_rows(manifest)['links']}
+    paths={r['path'] for r in manifest_rows(manifest)['links']}|{'/tipitaka/kn/miln/miln.5x.olen'}
     def known(link):
         p=urlsplit(link.get('url',''))
         return ((link.get('source')=='ati' and link.get('path') in paths)

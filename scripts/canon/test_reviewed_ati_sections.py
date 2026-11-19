@@ -20,7 +20,7 @@ class ReviewedAtiSections(unittest.TestCase):
         path.write_text(json.dumps(value, ensure_ascii=False), encoding='utf-8')
 
     def test_finite_identity_cannot_be_relabelled_or_extended(self):
-        self.assertEqual(len(sections.manifest_rows()['links']), 15)
+        self.assertEqual(len(sections.manifest_rows()['links']), 35)
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp, 'manifest.json')
             for kind in ['commit', 'owner', 'path', 'anchor', 'license', 'translator', 'profile', 'first', 'last', 'notes', 'paragraphs', 'extra', 'duplicate', 'missing', 'paratext', 'source']:
@@ -89,7 +89,7 @@ class ReviewedAtiSections(unittest.TestCase):
             self.assertEqual(original, before)
         with tempfile.TemporaryDirectory() as tmp:
             source = Path(tmp, 'source')
-            for filename in ['tipitaka/kn/miln/miln.2x.kell.html', 'tipitaka/kn/miln/miln.3x.kell.html', 'tipitaka/sn/sn27/sn27.001-010.than.html']:
+            for filename in ['tipitaka/kn/miln/miln.2x.kell.html', 'tipitaka/kn/miln/miln.3x.kell.html', 'tipitaka/sn/sn27/sn27.001-010.than.html', 'tipitaka/an/an01/an01.021-040.than.html']:
                 path = Path(filename)
                 target = source / path
                 target.parent.mkdir(parents=True, exist_ok=True)

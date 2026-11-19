@@ -1,0 +1,845 @@
+{
+  "baseline_commit": "4152db212c3b9ac5a773adc0a162621b707f8e57",
+  "mode": "Read-only bounded source scout",
+  "metadata_rows_screened": 114,
+  "unique_source_pages_inspected": 8,
+  "new_official_github_artifact_pages": 6,
+  "existing_local_artifacts_reused": 2,
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "pages": [
+    {
+      "artifact": "/tmp/pali-coverage-next/thag.01.00x.than.html",
+      "ids": [
+        "thag1.1",
+        "thag1.2",
+        "thag1.3",
+        "thag1.7",
+        "thag1.13",
+        "thag1.14",
+        "thag1.16",
+        "thag1.18",
+        "thag1.21",
+        "thag1.22",
+        "thag1.23",
+        "thag1.25",
+        "thag1.26",
+        "thag1.29",
+        "thag1.32",
+        "thag1.39",
+        "thag1.41",
+        "thag1.43",
+        "thag1.49",
+        "thag1.50",
+        "thag1.56",
+        "thag1.57",
+        "thag1.61",
+        "thag1.68",
+        "thag1.73",
+        "thag1.75",
+        "thag1.84",
+        "thag1.85",
+        "thag1.86",
+        "thag1.93",
+        "thag1.95",
+        "thag1.104",
+        "thag1.111",
+        "thag1.113",
+        "thag1.118",
+        "thag1.120"
+      ],
+      "scope": "36 selected single-verse poems; every printed subject already has an indexed whole dhammatalks version. No new first-whole owners.",
+      "bytes": 28613,
+      "html_sha256": "7889dad51dd58efae57774150d230a16b3045b2b30e87e1897590c7bcf3727f8",
+      "notice": {
+        "licensing": "©2004 Thanissaro Bhikkhu.\n\nThe text of this page (\"Single Verses: (selected passages)\", by Thanissaro Bhikkhu) is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of the license, visit https://creativecommons.org/licenses/by-nc/4.0/. Documents linked from this page may be subject to other restrictions.\nTranscribed from a file provided by the translator. Last revised for Access to Insight on 30 November 2013.",
+        "citation": "How to cite this document (a suggested style): \"Single Verses: (selected passages)\" (Thag 1), translated from the Pali by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 30 November 2013, https://www.accesstoinsight.org/tipitaka/kn/thag/thag.01.00x.than.html ."
+      },
+      "notice_sha256": "e073ab2a74c955a67ff4c77215b238dfc2efff7fb85a3e68ca463876c40e868c",
+      "current_inventory": [
+        {
+          "id": "thag1.1",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_1"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.2",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_2"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.3",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_3"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.7",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_7"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.13",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_13"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.14",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_14"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.16",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_16"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.18",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_18"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.21",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_21"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.22",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_22"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.23",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_23"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.25",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_25"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.26",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_26"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.29",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_29"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.32",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_32"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.39",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_39"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.41",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_41"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.43",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_43"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.49",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_49"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.50",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_50"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.56",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_56"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.57",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_57"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.61",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_61"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.68",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_68"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.73",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_73"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.75",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_75"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.84",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_84"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.85",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_85"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.86",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_86"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.93",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_93"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.95",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_95"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.104",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_104"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.111",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_111"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.113",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_113"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.118",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_118"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thag1.120",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_120"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        }
+      ],
+      "first_whole_candidates": [],
+      "new_source_approval": false
+    },
+    {
+      "artifact": "/tmp/pali-corpus-next/thag.01.00x.hekh.html",
+      "ids": [
+        "thag1.16"
+      ],
+      "scope": "One named poem Belatthasisa, already covered by whole dhammatalks source. No new first-whole owner.",
+      "bytes": 10146,
+      "html_sha256": "c3408e5eb25ddc063f8cf5de93dad25db42c99e92a260eec0089b56614b5345c",
+      "notice": {
+        "licensing": "©1980 Buddhist Publication Society.\n\nYou may copy, reformat, reprint, republish, and redistribute this work in any medium whatsoever, provided that: (1) you only make such copies, etc. available free of charge and, in the case of reprinting, only in quantities of no more than 50 copies; (2) you clearly indicate that any derivatives of this work (including translations) are derived from this source document; and (3) you include the full text of this license in any copies or derivatives of this work. Otherwise, all rights reserved. Documents linked from this page may be subject to other restrictions.\nFrom Ananda: The Guardian of the Dhamma (WH 273/274), by Hellmuth Hecker, translated from the German by Sister Khema (Kandy: Buddhist Publication Society, 1980). Copyright © 1980 Buddhist Publication Society. Used with permission. Last revised for Access to Insight on 30 November 2013.",
+        "citation": "How to cite this document (a suggested style): \"Single Verses\" (Thag 1.16), translated from the Pali by Hellmuth Hecker & Sister Khema. Access to Insight (BCBS Edition), 30 November 2013, https://www.accesstoinsight.org/tipitaka/kn/thag/thag.01.00x.hekh.html ."
+      },
+      "notice_sha256": "012dd03709a9b11880d623c86566309d3c77a0fdb337470710998b015ecbd403",
+      "current_inventory": [
+        {
+          "id": "thag1.16",
+          "whole_translation_ids": [
+            "dt:KN/Thag/thag1_16"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        }
+      ],
+      "first_whole_candidates": [],
+      "new_source_approval": false
+    },
+    {
+      "artifact": "/tmp/pali-whole-batch-scout/thig.01.00x.than.html",
+      "ids": [
+        "thig1.1",
+        "thig1.3",
+        "thig1.11",
+        "thig1.17"
+      ],
+      "scope": "Four selected single verses, all four already have whole dhammatalks versions. No new first-whole owner.",
+      "official_git_blob": "2031b75fd89acd97a99817edeaa162c8614c4b0e",
+      "bytes": 11304,
+      "html_sha256": "98b85b3d4a9c80dcbfc16d127fec71645265612057c080f3bd969002f9bbc4a4",
+      "notice": {
+        "licensing": "©1994 Thanissaro Bhikkhu.\n\nThe text of this page (\"Chapter 1: The Single Verses\", by Thanissaro Bhikkhu) is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of the license, visit https://creativecommons.org/licenses/by-nc/4.0/. Documents linked from this page may be subject to other restrictions.\nTranscribed from a file provided by the translator. Last revised for Access to Insight on 24 November 2013.",
+        "citation": "How to cite this document (a suggested style): \"Chapter 1: The Single Verses\" (Thig 1), translated from the Pali by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 24 November 2013, https://www.accesstoinsight.org/tipitaka/kn/thig/thig.01.00x.than.html ."
+      },
+      "notice_sha256": "64443c007484394663938df8e642b3991193407c994c457e98187dd2ec34cebf",
+      "current_inventory": [
+        {
+          "id": "thig1.1",
+          "whole_translation_ids": [
+            "dt:KN/Thig/thig1_1"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thig1.3",
+          "whole_translation_ids": [
+            "dt:KN/Thig/thig1_3"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thig1.11",
+          "whole_translation_ids": [
+            "dt:KN/Thig/thig1_11"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "thig1.17",
+          "whole_translation_ids": [
+            "dt:KN/Thig/thig1_17"
+          ],
+          "shared_translation_ids": [],
+          "partial_translation_ids": []
+        }
+      ],
+      "first_whole_candidates": [],
+      "new_source_approval": false
+    },
+    {
+      "artifact": "/tmp/pali-whole-batch-scout/an01.021-040.than.html",
+      "ids": [
+        "an1.21",
+        "an1.22",
+        "an1.23",
+        "an1.24",
+        "an1.25",
+        "an1.26",
+        "an1.27",
+        "an1.28",
+        "an1.29",
+        "an1.30",
+        "an1.31",
+        "an1.32",
+        "an1.33",
+        "an1.34",
+        "an1.35",
+        "an1.36",
+        "an1.37",
+        "an1.38",
+        "an1.39",
+        "an1.40"
+      ],
+      "scope": "Strongest coherent20-owner whole-substantive candidate. Real numbered paragraph anchors; no source ellipses/condensation/notes. Independent review pending final pins.",
+      "bytes": 14165,
+      "html_sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+      "notice": {
+        "licensing": "©2006 Thanissaro Bhikkhu.\n\nThe text of this page (\"Ekadhamma Suttas: A Single Thing\", by Thanissaro Bhikkhu) is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of the license, visit https://creativecommons.org/licenses/by-nc/4.0/. Documents linked from this page may be subject to other restrictions.\nTranscribed from a file provided by the translator. Last revised for Access to Insight on 30 November 2013.",
+        "citation": "How to cite this document (a suggested style): \"Ekadhamma Suttas: A Single Thing\" (AN 1.21-40), translated from the Pali by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 30 November 2013, https://www.accesstoinsight.org/tipitaka/an/an01/an01.021-040.than.html ."
+      },
+      "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+      "current_inventory": [
+        {
+          "id": "an1.21",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.22",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.23",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.24",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.25",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.26",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.27",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.28",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.29",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.30",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.31",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.32",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.33",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.34",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.35",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.36",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.37",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.38",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.39",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.40",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.021-040.than"
+          ],
+          "partial_translation_ids": []
+        }
+      ],
+      "first_whole_candidates": [
+        "an1.21",
+        "an1.22",
+        "an1.23",
+        "an1.24",
+        "an1.25",
+        "an1.26",
+        "an1.27",
+        "an1.28",
+        "an1.29",
+        "an1.30",
+        "an1.31",
+        "an1.32",
+        "an1.33",
+        "an1.34",
+        "an1.35",
+        "an1.36",
+        "an1.37",
+        "an1.38",
+        "an1.39",
+        "an1.40"
+      ],
+      "new_source_approval": false
+    },
+    {
+      "artifact": "/tmp/pali-whole-batch-scout/an01.045-046.than.html",
+      "ids": [
+        "an1.45",
+        "an1.46"
+      ],
+      "scope": "Two complete substantive pool-comparison discourses currently shared-only. No actual per-treatment body anchors: future explicit finite unanchored-identity design required; do not invent publisher fragments.",
+      "bytes": 11180,
+      "html_sha256": "75faa07ddb7e722fa7887d9d15fca0efe6d216c047f2fcbeef73e8d5cc97ca32",
+      "notice": {
+        "licensing": "©2006 Thanissaro Bhikkhu.\n\nThe text of this page (\"Udakarahaka Suttas: A Pool of Water\", by Thanissaro Bhikkhu) is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of the license, visit https://creativecommons.org/licenses/by-nc/4.0/. Documents linked from this page may be subject to other restrictions.\nTranscribed from a file provided by the translator. Last revised for Access to Insight on 4 August 2010.",
+        "citation": "How to cite this document (a suggested style): \"Udakarahaka Suttas: A Pool of Water\" (AN 1.45-46), translated from the Pali by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 4 August 2010, https://www.accesstoinsight.org/tipitaka/an/an01/an01.045-046.than.html ."
+      },
+      "notice_sha256": "c6f4d4898e1844091dabb21aa338b492be115913f2af077c2bd57708890a8bfb",
+      "current_inventory": [
+        {
+          "id": "an1.45",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.045-046.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.46",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.045-046.than"
+          ],
+          "partial_translation_ids": []
+        }
+      ],
+      "first_whole_candidates": [
+        "an1.45",
+        "an1.46"
+      ],
+      "new_source_approval": false
+    },
+    {
+      "artifact": "/tmp/pali-whole-batch-scout/an01.049.than.html",
+      "ids": [
+        "an1.49",
+        "an1.50",
+        "an1.51",
+        "an1.52"
+      ],
+      "scope": "Four complete substantive luminous-mind paragraphs currently shared-only. No per-treatment body anchors; noteTag is a footnote pointer, not a canonical section anchor. Requires separate note ownership and identity design; not part of recommended20.",
+      "bytes": 14211,
+      "html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+      "notice": {
+        "licensing": "©1995 Thanissaro Bhikkhu.\n\nThe text of this page (\"Pabhassara Sutta: Luminous\", by Thanissaro Bhikkhu) is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of the license, visit https://creativecommons.org/licenses/by-nc/4.0/. Documents linked from this page may be subject to other restrictions.\nTranscribed from a file provided by the translator. Last revised for Access to Insight on 30 November 2013.",
+        "citation": "How to cite this document (a suggested style): \"Pabhassara Sutta: Luminous\" (AN 1.49-52), translated from the Pali by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 30 November 2013, https://www.accesstoinsight.org/tipitaka/an/an01/an01.049.than.html ."
+      },
+      "notice_sha256": "3b8f3fab868dd8176bb2cce37b9e9437bdca790a6a415a0f67ee589ce099b1fe",
+      "current_inventory": [
+        {
+          "id": "an1.49",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.049.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.50",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.049.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.51",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.049.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an1.52",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an01/an01.049.than"
+          ],
+          "partial_translation_ids": []
+        }
+      ],
+      "first_whole_candidates": [
+        "an1.49",
+        "an1.50",
+        "an1.51",
+        "an1.52"
+      ],
+      "new_source_approval": false
+    },
+    {
+      "artifact": "/tmp/pali-whole-batch-scout/an02.031.than.html",
+      "ids": [
+        "an2.32",
+        "an2.33"
+      ],
+      "scope": "Complete gratitude/no-integrity treatment3P and parents repayment treatment1P; current shared-only. Publisher31–32 maps indexed32–33/VRI33–34. Only second has real s32 bodyanchor; first noanchor. Future numbering/See-also separation and identity design; not part of recommended20.",
+      "bytes": 12255,
+      "html_sha256": "ee088cf5338b2b59fda67eb3374f2ee3cafc1a711c54c39319d895ee5d300626",
+      "notice": {
+        "licensing": "©2002 Thanissaro Bhikkhu.\n\nThe text of this page (\"Kataññu Suttas: Gratitude\", by Thanissaro Bhikkhu) is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of the license, visit https://creativecommons.org/licenses/by-nc/4.0/. Documents linked from this page may be subject to other restrictions.\nTranscribed from a file provided by the translator. Last revised for Access to Insight on 30 November 2013.",
+        "citation": "How to cite this document (a suggested style): \"Kataññu Suttas: Gratitude\" (AN 2.31-32), translated from the Pali by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 30 November 2013, https://www.accesstoinsight.org/tipitaka/an/an02/an02.031.than.html ."
+      },
+      "notice_sha256": "693ec730c062294a3570512540f883b863bb57f47765b3782199a9a404977d60",
+      "current_inventory": [
+        {
+          "id": "an2.32",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an02/an02.031.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an2.33",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an02/an02.031.than"
+          ],
+          "partial_translation_ids": []
+        }
+      ],
+      "first_whole_candidates": [
+        "an2.32",
+        "an2.33"
+      ],
+      "new_source_approval": false
+    },
+    {
+      "artifact": "/tmp/pali-whole-batch-scout/an02.125-126.than.html",
+      "ids": [
+        "an2.125",
+        "an2.126"
+      ],
+      "scope": "Wrong/right-view two-condition discourses are separate complete paragraphs, currently shared-only. No canonical body anchors; first footnote tag not a discourse identity. Lengthy editorial note must remain separate; not part of recommended20.",
+      "bytes": 14150,
+      "html_sha256": "df8584c8489b6cb76b34d8578ff06261a6092f4860216cea6bd6efbde2cccfdb",
+      "notice": {
+        "licensing": "©2006 Thanissaro Bhikkhu.\n\nThe text of this page (\"Ghosa Suttas: Voice\", by Thanissaro Bhikkhu) is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of the license, visit https://creativecommons.org/licenses/by-nc/4.0/. Documents linked from this page may be subject to other restrictions.\nTranscribed from a file provided by the translator. Last revised for Access to Insight on 30 November 2013.",
+        "citation": "How to cite this document (a suggested style): \"Ghosa Suttas: Voice\" (AN 2.125-126), translated from the Pali by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 30 November 2013, https://www.accesstoinsight.org/tipitaka/an/an02/an02.125-126.than.html ."
+      },
+      "notice_sha256": "d96963652b5b6f051df62ac6a54047af61d5f715b1dd3bcfdab4e62bc0b04de7",
+      "current_inventory": [
+        {
+          "id": "an2.125",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an02/an02.125-126.than"
+          ],
+          "partial_translation_ids": []
+        },
+        {
+          "id": "an2.126",
+          "whole_translation_ids": [],
+          "shared_translation_ids": [
+            "ati:/tipitaka/an/an02/an02.125-126.than"
+          ],
+          "partial_translation_ids": []
+        }
+      ],
+      "first_whole_candidates": [
+        "an2.125",
+        "an2.126"
+      ],
+      "new_source_approval": false
+    }
+  ],
+  "recommendation": {
+    "batch": "AN1.21–40",
+    "candidate_file": "/tmp/pali-whole-batch-scout/an1.21-40-candidates.json",
+    "first_whole_primary_records": 20,
+    "first_any_indexed_english_access": 0,
+    "existing_status": "20 shared-compilation-only members; this is an improvement in individual whole-text access and verification, not recovery of20 previously unlinked English texts.",
+    "source_coherence": "Two consecutive ten-treatment chapters, one publisher file/translator/licence, real source anchors, all complete substantive bodies with repeated assertions.",
+    "approval": "Independent fresh source comparison is being completed in a separate parent lane; no activation performed."
+  },
+  "implementation_constraints": [
+    "Keep original bare translation ID, complete source body/text hash, shared scope/consent and page-level quotation semantics.",
+    "Allow coexistence only for this exact pre-existing shared binding; never exempt arbitrary shared flags or unanchored whole-page links.",
+    "New anchored versions must be individually root/English verified. Their full-text verification must not deduplicate against the shared page by bare path.",
+    "Update path-reservation/build passes so neither silently removes the other exact approved contract."
+  ],
+  "other_candidates": "10 additional shared-only primary members across4pages are plausible substantive complete treatments, but missing anchors/footnote ownership/numbering require separate contracts. Do not enlarge this batch automatically.",
+  "excluded_directions": [
+    "Existing Kelly14 pages exhausted; SN27other9alreadywholeDT; earlier partials do not count aswhole.",
+    "Condensed shared pages and all existing source holds remain unchanged.",
+    "No MahavaggaVII, SuttaCentral, restricted-host retries, generated scripture or outreach."
+  ],
+  "repository_edits": false,
+  "coverage_changes": 0
+}

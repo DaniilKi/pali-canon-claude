@@ -21,7 +21,12 @@ PAGES = {
     '/tipitaka/kn/miln/miln.2x.kell': '44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd',
     '/tipitaka/kn/miln/miln.3x.kell': '5e0d563f4e3403167dbb73ec80190bdeb1592895d4af2e5141675692fec42fe5',
     '/tipitaka/sn/sn27/sn27.001-010.than': '4cda764c8a27a64faf96f6cd2ce0dc08808816ab80d329f3ad264b4516ee1e79',
+    '/tipitaka/an/an01/an01.021-040.than': 'df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4',
 }
+AN_ORDINALS = ['Paṭhamaṃ.', 'Dutiyaṃ.', 'Tatiyaṃ.', 'Catutthaṃ.', 'Pañcamaṃ.', 'Chaṭṭhaṃ.', 'Sattamaṃ.', 'Aṭṭhamaṃ.', 'Navamaṃ.', 'Dasamaṃ.']
+AN_IDENTITIES = {f'an1.{n}': ('an1', f'sutta-{n}', 1, 0, 2 if n in [21,31] else 1, 2 if n in [21,31] else 1) for n in range(21,41)}
+AN_PATH = '/tipitaka/an/an01/an01.021-040.than'
+AN_SHARED_SHA256 = '67e00d1d18e2f94eb11d297d6b79e719d144a3c19c961b114af9c192556078cb'
 # Source/body identities were reviewed bilingually, including adjacent roots.
 # The publisher's numbering is not the VRI numbering (notably II.1.14).
 IDENTITIES = {
@@ -41,6 +46,7 @@ IDENTITIES = {
     'mil3.7.8': ('3', 'miln-3-7-08', 7, 0, 2, 3),
     'sn27.5': ('sn27', 'sn27.005', 1, 0, 2, 2),
 }
+IDENTITIES.update(AN_IDENTITIES)
 SECTION_FIELDS = {
     'version', 'status', 'unit_id', 'profile', 'anchor', 'heading',
     'paragraph_count', 'note_count', 'section_html_sha256', 'text_sha256',
@@ -74,18 +80,19 @@ def manifest_rows(manifest=MANIFEST):
             raise ValueError('Invalid or duplicate reviewed ATI section owner')
         page, anchor, paragraphs, notes, first, last = identity
         sn27 = uid == 'sn27.5'
-        path = '/tipitaka/sn/sn27/sn27.001-010.than' if sn27 else '/tipitaka/kn/miln/miln.' + page + 'x.kell'
+        an_mind = uid in AN_IDENTITIES
+        path = AN_PATH if an_mind else '/tipitaka/sn/sn27/sn27.001-010.than' if sn27 else '/tipitaka/kn/miln/miln.' + page + 'x.kell'
         if (row.get('path') != path or row.get('anchor') != anchor
                 or row.get('source_html_sha256') != PAGES[path]
-                or row.get('translator') != ('Thanissaro Bhikkhu' if sn27 else 'John Kelly')
-                or row.get('license') != ('CC-BY-NC' if sn27 else 'Kelly-free-distribution-2005')
+                or row.get('translator') != ('Thanissaro Bhikkhu' if sn27 or an_mind else 'John Kelly')
+                or row.get('license') != ('CC-BY-NC' if sn27 or an_mind else 'Kelly-free-distribution-2005')
                 or not all(isinstance(row.get(k), str) and row[k].strip() for k in ['mapping_note', 'source_reference', 'english_title'])
                 or root.get('id') != uid or set(root) != {'id', 'title', 'vri', 'book', 'start', 'end', 'root_blocks_sha256'}
                 or set(section) != SECTION_FIELDS or type(section.get('version')) is not int or section['version'] != 1
                 or section.get('status') != 'reviewed' or section.get('unit_id') != uid
-                or section.get('profile') != ('ati-sn27-feelings-v1' if sn27 else PROFILE) or section.get('anchor') != anchor
+                or section.get('profile') != ('ati-an1-ekadhamma-numbered-paragraph-v1' if an_mind else 'ati-sn27-feelings-v1' if sn27 else PROFILE) or section.get('anchor') != anchor
                 or section.get('source_commit') != VRI_COMMIT
-                or section.get('heading') != row['source_reference']
+                or section.get('heading') != (uid.split('.')[1] + '.' if an_mind else row['source_reference'])
                 or type(section.get('paragraph_count')) is not int or section['paragraph_count'] != paragraphs
                 or type(section.get('note_count')) is not int or section['note_count'] != notes
                 or section.get('first_ref') != f'{uid}/{first}' or section.get('last_ref') != f'{uid}/{last}'
@@ -93,6 +100,17 @@ def manifest_rows(manifest=MANIFEST):
                        [root.get('root_blocks_sha256')] + [section.get(k) for k in ['section_html_sha256', 'text_sha256', 'notes_sha256', 'notice_sha256', 'pali_sha256']])):
             raise ValueError('Invalid finite reviewed ATI question profile')
         paratext = row.get('untranslated_paratext')
+        if an_mind:
+            n = int(uid.split('.')[1])
+            expected = [{'ref': f'{uid}/{first}', 'text': AN_ORDINALS[(n-21)%10]}]
+            if n in [21,31]:
+                expected.append({'ref': f'{uid}/1', 'text': '3. Akammaniyavaggo' if n == 21 else '4. Adantavaggo'})
+            if n in [30,40]:
+                expected.append({'ref': f'{uid}/2', 'text': 'Akammaniyavaggo tatiyo.' if n == 30 else 'Adantavaggo catuttho.'})
+            if paratext != expected:
+                raise ValueError('AN numbered paragraph exact untranslated paratext changed')
+            seen.add(uid)
+            continue
         expected_refs = ([f'{uid}/2'] if sn27 else [f'{uid}/{last+1}', f'{uid}/{last+2}', f'{uid}/{last+3}']
                          if uid == 'mil3.3.14' else [f'{uid}/{last+1}'])
         if (not isinstance(paratext, list) or [p.get('ref') for p in paratext if isinstance(p, dict)] != expected_refs
@@ -115,6 +133,10 @@ def withhold_section_page_proposals(out, manifest=MANIFEST):
                      or (url.hostname and url.hostname.removeprefix('www.') == 'accesstoinsight.org'
                          and url.path.removesuffix('.html') in paths))
             if known:
+                digest = hashlib.sha256(json.dumps(link, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
+                if owner == 'an1.21' and link.get('path') == AN_PATH and digest == AN_SHARED_SHA256:
+                    kept.append(link)
+                    continue
                 removed.append({'unit_id': owner, 'url': link.get('url')})
             else:
                 kept.append(link)
@@ -132,7 +154,7 @@ def reviewed_section_links(canon, ati_root, manifest=MANIFEST):
     for row in m['links']:
         unit, root = units.get(row['unit_id']), row['root']
         if (not unit or unit.get('approximate') or unit.get('kind') or unit.get('members')
-                or unit.get('collection') != ('sn' if row['unit_id'] == 'sn27.5' else 'mil')
+                or unit.get('collection') != ('an' if row['unit_id'] in AN_IDENTITIES else 'sn' if row['unit_id'] == 'sn27.5' else 'mil')
                 or any(unit.get(k) != root.get(k) for k in ['id', 'title', 'vri', 'book', 'start', 'end'])):
             raise ValueError('Reviewed ATI section exact root identity changed')
         blocks = canon['books'][unit['book']]['blocks'][unit['start']:unit['end']]
@@ -154,10 +176,17 @@ def reviewed_section_links(canon, ati_root, manifest=MANIFEST):
 
 
 def apply_reviewed_section_links(out, canon, ati_root, manifest=MANIFEST):
+    def require_retained_shared(table):
+        rows = table.get('an1.21', [])
+        retained = [link for link in rows if hashlib.sha256(json.dumps(link, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest() == AN_SHARED_SHA256]
+        if len(retained) != 1:
+            raise ValueError('The exact existing AN shared binding must remain once before and after whole-section activation')
+    require_retained_shared(out)
     accepted = reviewed_section_links(canon, ati_root, manifest)
     result, removed = withhold_section_page_proposals(out, manifest)
     for owner, link in accepted.items():
         result.setdefault(owner, []).append(link)
+    require_retained_shared(result)
     return result, {'owners': list(accepted), 'page_bindings_replaced': removed}
 
 
