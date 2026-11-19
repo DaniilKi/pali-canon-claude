@@ -1,0 +1,31 @@
+{
+  "canonical_books_unchanged": 61,
+  "units_total": 8544,
+  "only_changed_units": [
+    "thi-ap15",
+    "thi-ap16",
+    "thi-ap17",
+    "thi-ap18",
+    "thi-ap19",
+    "thi-ap20",
+    "thi-ap21"
+  ],
+  "other_units_preserved": 8537,
+  "first_ten_equal": true,
+  "future_boundaries_preserved": [
+    "thi-ap23",
+    "thi-ap24",
+    "thi-ap33",
+    "thi-ap34",
+    "thi-ap35",
+    "thi-ap36",
+    "thi-ap37"
+  ],
+  "source_commit_unchanged": true,
+  "commentary_output": null,
+  "commentary_unchanged": true,
+  "idempotent_json_equal": true,
+  "idempotent_compressed_bytes_equal": true,
+  "private_data": "not accessed",
+  "bundled_english_bodies": 0
+}

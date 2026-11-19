@@ -1,0 +1,302 @@
+{
+  "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "source_file": "s0510m2.mul.xml",
+  "source_git_blob_sha1": "c2a96aed52fb5de3e7fe66442633e5f045cf5bdf",
+  "source_xml_sha256": "23e0721c8fe05a6105b56b627ac38291d10e0eab799a082c257466603f0839a1",
+  "source_xml_bytes": 1779576,
+  "book_blocks_sha256": "bd0177c2025298415abd2e90e1d576d2418127e08ce339699ad725960089f8cc",
+  "input_canon_sha256": "51fa61aef541c14f257eb2e2e26a265e6396fa8a59a0927f75e115fc8d4ef61d",
+  "input_commentary_sha256": "a4efb9cd51d1092530cdf6f4e67907ac2dee965e3816af28a83c5f10c0e7d536",
+  "changed_spans": [
+    "thi-ap15",
+    "thi-ap16",
+    "thi-ap17",
+    "thi-ap18",
+    "thi-ap19",
+    "thi-ap20",
+    "thi-ap21"
+  ],
+  "units": {
+    "thi-ap15": {
+      "before": {
+        "id": "thi-ap15",
+        "book": 37,
+        "start": 7117,
+        "end": 7196,
+        "title": "Pañcadīpadāyikātherīapadānaṃ",
+        "collection": "ap",
+        "acronym": "Thī Ap 15",
+        "vri": "61–86",
+        "pts": {
+          "volume": 2,
+          "page": 526,
+          "end_page": 528
+        }
+      },
+      "after": {
+        "id": "thi-ap15",
+        "book": 37,
+        "start": 7117,
+        "end": 7192,
+        "title": "Pañcadīpadāyikātherīapadānaṃ",
+        "collection": "ap",
+        "acronym": "Thī Ap 15",
+        "vri": "61–85",
+        "pts": {
+          "volume": 2,
+          "page": 526,
+          "end_page": 528
+        },
+        "index_revision": "apadana-theri11-20-v1"
+      },
+      "root_blocks_sha256": "abcf263fb76d46113bbe60773906d209fd8eb2c068b48bae930426a214279a58",
+      "root_sha256": "315579ea2da355a265b62145a875ffe46ae56bbbaf9aaa0657dd735fd3010459"
+    },
+    "thi-ap16": {
+      "before": {
+        "id": "thi-ap16",
+        "book": 37,
+        "start": 7196,
+        "end": 7225,
+        "title": "Naḷamālikātherīapadāna",
+        "collection": "ap",
+        "acronym": "Thī Ap 16",
+        "vri": "87–96",
+        "pts": {
+          "volume": 2,
+          "page": 528,
+          "end_page": 529
+        }
+      },
+      "after": {
+        "id": "thi-ap16",
+        "book": 37,
+        "start": 7192,
+        "end": 7225,
+        "title": "Naḷamālikātherīapadāna",
+        "collection": "ap",
+        "acronym": "Thī Ap 16",
+        "vri": "86–96",
+        "pts": {
+          "volume": 2,
+          "page": 528,
+          "end_page": 529
+        },
+        "index_revision": "apadana-theri11-20-v1"
+      },
+      "root_blocks_sha256": "68b37c47456e286ce2563bbd6ee67de112a0e8a2ea8ffb6527a0d69cd3300b85",
+      "root_sha256": "a3e30dbff9432a9c3c02bfa8f090fa2020811bc635c3f356cd1f86a271320289"
+    },
+    "thi-ap17": {
+      "before": {
+        "id": "thi-ap17",
+        "book": 37,
+        "start": 7225,
+        "end": 7806,
+        "title": "Mahāpajāpatigotamītherīapadānaṃ",
+        "collection": "ap",
+        "acronym": "Thī Ap 17",
+        "vri": "97–289",
+        "pts": {
+          "volume": 2,
+          "page": 529,
+          "end_page": 543
+        }
+      },
+      "after": {
+        "id": "thi-ap17",
+        "book": 37,
+        "start": 7225,
+        "end": 7802,
+        "title": "Mahāpajāpatigotamītherīapadānaṃ",
+        "collection": "ap",
+        "acronym": "Thī Ap 17",
+        "vri": "97–288",
+        "pts": {
+          "volume": 2,
+          "page": 529,
+          "end_page": 543
+        },
+        "index_revision": "apadana-theri11-20-v1"
+      },
+      "root_blocks_sha256": "78e7b2d32a6b3304f093a2148effd3956e5d1fdb9572a65aa5c8be91604f7b48",
+      "root_sha256": "483fc05030a8ae4c74145634b8d9ae9216fa424c5bda2042b7e950b191b6adea"
+    },
+    "thi-ap18": {
+      "before": {
+        "id": "thi-ap18",
+        "book": 37,
+        "start": 7806,
+        "end": 8088,
+        "title": "Khemātherīapadāna",
+        "collection": "ap",
+        "acronym": "Thī Ap 18",
+        "vri": "290–383",
+        "pts": {
+          "volume": 2,
+          "page": 543,
+          "end_page": 551
+        }
+      },
+      "after": {
+        "id": "thi-ap18",
+        "book": 37,
+        "start": 7802,
+        "end": 8088,
+        "title": "Khemātherīapadāna",
+        "collection": "ap",
+        "acronym": "Thī Ap 18",
+        "vri": "289–383",
+        "pts": {
+          "volume": 2,
+          "page": 543,
+          "end_page": 551
+        },
+        "index_revision": "apadana-theri11-20-v1"
+      },
+      "root_blocks_sha256": "72e38de5277c076898108c8105ac9caa475dde87993ff003781d601734a29201",
+      "root_sha256": "30da05306d87e9d353e750af13e030b9ac064e45ddc98abccf906c65ddb72723"
+    },
+    "thi-ap19": {
+      "before": {
+        "id": "thi-ap19",
+        "book": 37,
+        "start": 8088,
+        "end": 8344,
+        "title": "Uppalavaṇṇātherīapadānaṃ",
+        "collection": "ap",
+        "acronym": "Thī Ap 19",
+        "vri": "384–468",
+        "pts": {
+          "volume": 2,
+          "page": 551,
+          "end_page": 557
+        }
+      },
+      "after": {
+        "id": "thi-ap19",
+        "book": 37,
+        "start": 8088,
+        "end": 8340,
+        "title": "Uppalavaṇṇātherīapadānaṃ",
+        "collection": "ap",
+        "acronym": "Thī Ap 19",
+        "vri": "384–467",
+        "pts": {
+          "volume": 2,
+          "page": 551,
+          "end_page": 557
+        },
+        "index_revision": "apadana-theri11-20-v1"
+      },
+      "root_blocks_sha256": "d50c2e48ea38a86e6006ec2d0396127ccd3cb7e33f0cf487e90dc3af28aefc6f",
+      "root_sha256": "e9efc0259984d179c7dcb3cf69232a759235125224ef1f1a83ba88844c153a5e"
+    },
+    "thi-ap20": {
+      "before": {
+        "id": "thi-ap20",
+        "book": 37,
+        "start": 8344,
+        "end": 8483,
+        "title": "Paṭācārātherīapadāna",
+        "collection": "ap",
+        "acronym": "Thī Ap 20",
+        "vri": "469–1",
+        "pts": {
+          "volume": 2,
+          "page": 557,
+          "end_page": 560
+        }
+      },
+      "after": {
+        "id": "thi-ap20",
+        "book": 37,
+        "start": 8340,
+        "end": 8478,
+        "title": "Paṭācārātherīapadāna",
+        "collection": "ap",
+        "acronym": "Thī Ap 20",
+        "vri": "468–511",
+        "pts": {
+          "volume": 2,
+          "page": 557,
+          "end_page": 560
+        },
+        "index_revision": "apadana-theri11-20-v1"
+      },
+      "root_blocks_sha256": "26726a389b8a23300bf14255d485aaba28cd2198b93c9340cd4b3286fbb15b4c",
+      "root_sha256": "0df732f6540bf82fe511ca848f8fb39ca6815a303d4f1e6a753b692704a785c7"
+    },
+    "thi-ap21": {
+      "before": {
+        "id": "thi-ap21",
+        "book": 37,
+        "start": 8483,
+        "end": 8644,
+        "title": "Kuṇḍalakesātherīapadāna",
+        "collection": "ap",
+        "acronym": "Thī Ap 21",
+        "vri": "2–54",
+        "pts": {
+          "volume": 2,
+          "page": 560,
+          "end_page": 564
+        }
+      },
+      "after": {
+        "id": "thi-ap21",
+        "book": 37,
+        "start": 8478,
+        "end": 8644,
+        "title": "Kuṇḍalakesātherīapadāna",
+        "collection": "ap",
+        "acronym": "Thī Ap 21",
+        "vri": "1–54",
+        "pts": {
+          "volume": 2,
+          "page": 560,
+          "end_page": 564
+        },
+        "index_revision": "apadana-theri11-20-v1"
+      },
+      "root_blocks_sha256": "92c6c9fac86bd0b97b524b985eea29615e332da78e5cc8fe5d7cc21db4364d0f",
+      "root_sha256": "4f1011602b013dd2a1f2081da422e25f8d35ed65ac31d44bb111c6778a063d3a"
+    }
+  },
+  "commentary": {
+    "changed": false,
+    "accepted_book_passages_checked": 58,
+    "root_segments_checked": [
+      [
+        1535,
+        1840
+      ],
+      [
+        3864,
+        4971
+      ],
+      [
+        5923,
+        6537
+      ]
+    ],
+    "target_associations": {
+      "thi-ap15": [],
+      "thi-ap16": [],
+      "thi-ap17": [],
+      "thi-ap18": [],
+      "thi-ap19": [],
+      "thi-ap20": [],
+      "thi-ap21": []
+    }
+  },
+  "preserved": [
+    "all source books/blocks/notes/pages",
+    "all unrelated units",
+    "all commentary metadata/wording/associations",
+    "public IDs/titles",
+    "private data (not accessed)"
+  ],
+  "output_canon_sha256": "547d769d794673cbdc2a10bebf72e2bd0ea25a704ca99d34a3d480fbbc0f600f",
+  "output_commentary_sha256": "a4efb9cd51d1092530cdf6f4e67907ac2dee965e3816af28a83c5f10c0e7d536"
+}

@@ -589,7 +589,7 @@ const sourceCitation = page => page.translation_scope?.kind === 'shared_page' ? 
 function englishVersion(page) {
   return {
     translator: page.translator, translation_id: page.translation_id, url: page.url,
-    ...(page.translation_revision ? { translation_revision: page.translation_revision, licence_url: APADANA_LICENSE_URL, comparison_extent: 'Numbered substantive publisher stanzas only; preface, headings, colophons and translator notes were not compared.' } : {}),
+    ...(page.translation_revision ? { translation_revision: page.translation_revision, licence_url: APADANA_LICENSE_URL, comparison_extent: 'Substantive publisher stanza entries only, including retained irregular labels; preface, divisions, chapter summaries, headings, colophons and translator notes were not compared. No line-complete VRI alignment is claimed.' } : {}),
     ...(page.requested_translation_id ? { requested_translation_id: page.requested_translation_id } : {}),
     ...(page.notes?.length ? { notes: page.notes } : {}),
     ...scopeEvidence(page),

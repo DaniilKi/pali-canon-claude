@@ -1,0 +1,447 @@
+{
+  "mode": "Independent final source activation replay against independently generated preimplementation GOLDENS, fresh exact publisher Git blobs, corrected VRI roots and original ten profiles",
+  "baseline": "33aa93d",
+  "source_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "root_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "source_approved": true,
+  "approval_scope": "Only source identity, source rights evidence, exact extraction, boundaries, note ownership, original10preservation and declared edition differences for thi-ap11–20. General CI/release authorization remains pending.",
+  "coverage_condition": "Ten complete publisher-edition poems (PTS/BJTS); NOT line-complete translations of every VRI stanza. Preserve all observed missing/differing VRI material, numbering, edition warnings and independent VRI wording. No scripture reconstructed.",
+  "new_batch": {
+    "profiles": 10,
+    "poem_paragraphs": 528,
+    "printed_stanza_entries": 498,
+    "poem_owned_notes": 348,
+    "separately_owned_recitation_notes": 1,
+    "separately_owned_chapter_summary_notes": 1,
+    "total_original_notes": 350
+  },
+  "preserved_original_ten": [
+    {
+      "id": "thi-ap1",
+      "profile_object_equal": true,
+      "manifest_link_equal": true,
+      "root_equal": true,
+      "raw_body_notes_preface_replayed": true,
+      "git_blob_sha1": "896ba60c59ca8e88299f16666e7ad71f89016516"
+    },
+    {
+      "id": "thi-ap2",
+      "profile_object_equal": true,
+      "manifest_link_equal": true,
+      "root_equal": true,
+      "raw_body_notes_preface_replayed": true,
+      "git_blob_sha1": "6c956ece287d93ecc677ee20b1e0f943c4b8b0ec"
+    },
+    {
+      "id": "thi-ap3",
+      "profile_object_equal": true,
+      "manifest_link_equal": true,
+      "root_equal": true,
+      "raw_body_notes_preface_replayed": true,
+      "git_blob_sha1": "d1404e3564637f563cc248e0eaf1ed5596c2b344"
+    },
+    {
+      "id": "thi-ap4",
+      "profile_object_equal": true,
+      "manifest_link_equal": true,
+      "root_equal": true,
+      "raw_body_notes_preface_replayed": true,
+      "git_blob_sha1": "9757da256479ceabed1e31149d80da931fc79419"
+    },
+    {
+      "id": "thi-ap5",
+      "profile_object_equal": true,
+      "manifest_link_equal": true,
+      "root_equal": true,
+      "raw_body_notes_preface_replayed": true,
+      "git_blob_sha1": "c4c49b5afe1152ee682bf444fb9585720cfa9a25"
+    },
+    {
+      "id": "thi-ap6",
+      "profile_object_equal": true,
+      "manifest_link_equal": true,
+      "root_equal": true,
+      "raw_body_notes_preface_replayed": true,
+      "git_blob_sha1": "e60b084b7407ee06c3c2ab538e39d31802ff1e1f"
+    },
+    {
+      "id": "thi-ap7",
+      "profile_object_equal": true,
+      "manifest_link_equal": true,
+      "root_equal": true,
+      "raw_body_notes_preface_replayed": true,
+      "git_blob_sha1": "1073223d93a2f286c9dde5b06c05028c71bb3714"
+    },
+    {
+      "id": "thi-ap8",
+      "profile_object_equal": true,
+      "manifest_link_equal": true,
+      "root_equal": true,
+      "raw_body_notes_preface_replayed": true,
+      "git_blob_sha1": "3e0b561086094b1816940aa658f19cf1d0eea71b"
+    },
+    {
+      "id": "thi-ap9",
+      "profile_object_equal": true,
+      "manifest_link_equal": true,
+      "root_equal": true,
+      "raw_body_notes_preface_replayed": true,
+      "git_blob_sha1": "9d612731428275c3a693ea67086f276ba29dbed1"
+    },
+    {
+      "id": "thi-ap10",
+      "profile_object_equal": true,
+      "manifest_link_equal": true,
+      "root_equal": true,
+      "raw_body_notes_preface_replayed": true,
+      "git_blob_sha1": "2e8017bc13b6f7cc65a75b5a64751cf942718677"
+    }
+  ],
+  "rights_artifacts": [
+    {
+      "path": "LICENSE.md",
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "bytes": 19093
+    },
+    {
+      "path": "src/_pages/about.md",
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "bytes": 12404
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "bytes": 555
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "bytes": 603
+    },
+    {
+      "path": "src/_data/site.json",
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "bytes": 659
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "bytes": 135
+    }
+  ],
+  "rights_unchanged": true,
+  "licence": "CC BY-NC-SA 4.0; Jonathan S. Walters/Whitman College attribution and presentation-change notices retained; generic site.json BY4.0 does not relax grant",
+  "rows": [
+    {
+      "id": "thi-ap11",
+      "source_title": "Ekūposathikā",
+      "git_blob_sha1": "7d793c79e4a48da6a2644a1e133ebcb9ff40ce2d",
+      "raw_sha256": "73d6881ddc2554bc4a0ed3433eb8b76d2a17f8a60a8233d0d178c6a7b276a8e5",
+      "body_sha256": "82b4b8d0d958c21c889b04b5f0eb84ed9daa8ead711c81f8d8962b1d6c395095",
+      "notes_sha256": "44a57580db2d21a99ffd9be0ba261ecb4b02a309b2a92f40a84dd7daa5318d2a",
+      "paratext_sha256": "82c8d817b70123bd81092f976be1ab27f8a11a85e5b6f0254f4d92dd8405dd4a",
+      "root_sha256": "164aa615f8ae1aaeef438d86c0502856fa58c46f9c3f0e9882fcefc8ccfdc16c",
+      "corrected_root": [
+        6936,
+        7000
+      ],
+      "paragraphs": 23,
+      "stanzas": 20,
+      "poem_notes": 6,
+      "source_artifact_matches_independent_git_object": true,
+      "all_presented_paragraph_hashes_and_line_counts_match": true,
+      "exact_original_stanza_label_array_matches": true,
+      "all_note_numbers_and_ownership_match": true,
+      "quotation_includes_only_all498_stanza_scope": true,
+      "all_independently_recorded_edition_caveats_retained": true,
+      "raw_and_profile_drift_refused": true,
+      "decision": "source-approved complete publisher-edition poem; not line-complete VRI"
+    },
+    {
+      "id": "thi-ap12",
+      "source_title": "Salalapupphikā",
+      "git_blob_sha1": "99812d7cbce5463028d05cae22d420edf3ea3334",
+      "raw_sha256": "644b0b233faca1f34be5137e2cbbb770f5f7701f9fd205f09185a80879cb58c4",
+      "body_sha256": "de1dc7f05a6f97c0d3f0a04f97859af4041f2a8ddea95e2b611b3fe587c5c04d",
+      "notes_sha256": "cef930ded8b688cf28b2e8da561b5cfa8a28fcbfc939f0fe6550524f98d004a3",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "2337078d99acd9c3b912ac2106801d7d24cb9294ec8043c1fbe4928fc7a5e103",
+      "corrected_root": [
+        7000,
+        7024
+      ],
+      "paragraphs": 11,
+      "stanzas": 8,
+      "poem_notes": 1,
+      "source_artifact_matches_independent_git_object": true,
+      "all_presented_paragraph_hashes_and_line_counts_match": true,
+      "exact_original_stanza_label_array_matches": true,
+      "all_note_numbers_and_ownership_match": true,
+      "quotation_includes_only_all498_stanza_scope": true,
+      "all_independently_recorded_edition_caveats_retained": true,
+      "raw_and_profile_drift_refused": true,
+      "decision": "source-approved complete publisher-edition poem; not line-complete VRI"
+    },
+    {
+      "id": "thi-ap13",
+      "source_title": "Modakadāyikā",
+      "git_blob_sha1": "eb0452398f1b8731a8b1a0f61dca34cc7ef5c182",
+      "raw_sha256": "86d93fbcc8a5bfa8658699cac30831749642f9016a9d73ce2befee1982b70c36",
+      "body_sha256": "d10795670fcfe35c8bd0b507d95b9266b7bcbe588022ae93e403f3169e749706",
+      "notes_sha256": "2c31bd5e9461d7d3a196f8d3fc77aeedcd6328d6a0b05a5cf882601ff53b9477",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "2d6f846b1a513cc8e9e728a61d9a40492d0cb5e86911ab45904c9e169b23be79",
+      "corrected_root": [
+        7024,
+        7045
+      ],
+      "paragraphs": 10,
+      "stanzas": 7,
+      "poem_notes": 2,
+      "source_artifact_matches_independent_git_object": true,
+      "all_presented_paragraph_hashes_and_line_counts_match": true,
+      "exact_original_stanza_label_array_matches": true,
+      "all_note_numbers_and_ownership_match": true,
+      "quotation_includes_only_all498_stanza_scope": true,
+      "all_independently_recorded_edition_caveats_retained": true,
+      "raw_and_profile_drift_refused": true,
+      "decision": "source-approved complete publisher-edition poem; not line-complete VRI"
+    },
+    {
+      "id": "thi-ap14",
+      "source_title": "Ekāsanadāyikā",
+      "git_blob_sha1": "22ff0af58d1c89e8d262007fbd6b46e1d707b44c",
+      "raw_sha256": "ad3e984cd8feac560d92dc27d74266f9d925d29c72f3806d88ac618ec345685c",
+      "body_sha256": "7a81c5fc934587d2be7453f9b1989ee17b405aadab8e74c9a069fcb439c4ec53",
+      "notes_sha256": "b3bab216e6ad0f8fca9d4bacf153b1aa20581969c60eaff7bf01874d9791606f",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "9a69373d3af38c4a7b8cf2b77774d2d1fa10a3b9349bb2d3a710eb8c04cfeb72",
+      "corrected_root": [
+        7045,
+        7117
+      ],
+      "paragraphs": 27,
+      "stanzas": 24,
+      "poem_notes": 11,
+      "source_artifact_matches_independent_git_object": true,
+      "all_presented_paragraph_hashes_and_line_counts_match": true,
+      "exact_original_stanza_label_array_matches": true,
+      "all_note_numbers_and_ownership_match": true,
+      "quotation_includes_only_all498_stanza_scope": true,
+      "all_independently_recorded_edition_caveats_retained": true,
+      "raw_and_profile_drift_refused": true,
+      "decision": "source-approved complete publisher-edition poem; not line-complete VRI"
+    },
+    {
+      "id": "thi-ap15",
+      "source_title": "Pañcadīpikā",
+      "git_blob_sha1": "3b02cf4ff9855174401490a1ffca5fb388cf8498",
+      "raw_sha256": "82c0f4fac1a60ed18c850ae3849e99234d20bc986c16c1de1a38a82fd61cfbb6",
+      "body_sha256": "b55552269aec0ac7349e5212c825c81458d47321b2f567ac5e3943e6dff29a29",
+      "notes_sha256": "14bb482c913ed61d83fba45962dc5af6ee543b1a2f10ca6a8f0eab05ffbc00e4",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "315579ea2da355a265b62145a875ffe46ae56bbbaf9aaa0657dd735fd3010459",
+      "corrected_root": [
+        7117,
+        7192
+      ],
+      "paragraphs": 28,
+      "stanzas": 25,
+      "poem_notes": 8,
+      "source_artifact_matches_independent_git_object": true,
+      "all_presented_paragraph_hashes_and_line_counts_match": true,
+      "exact_original_stanza_label_array_matches": true,
+      "all_note_numbers_and_ownership_match": true,
+      "quotation_includes_only_all498_stanza_scope": true,
+      "all_independently_recorded_edition_caveats_retained": true,
+      "raw_and_profile_drift_refused": true,
+      "decision": "source-approved complete publisher-edition poem; not line-complete VRI"
+    },
+    {
+      "id": "thi-ap16",
+      "source_title": "Sālamālikā",
+      "git_blob_sha1": "1aca92c3bb76b773d51856700558647c53a42b38",
+      "raw_sha256": "961c914d4b392296cf0d385c056f0c1670b95aa923bc62e3500461e8cc721838",
+      "body_sha256": "b5edfc8c21bd6c907b59735f6926db91a2d55312e7ece492cea9c44cd1b0c0a6",
+      "notes_sha256": "77fd26d21439906b5600d354e70a4ac8e10fc465d8c4b76505790f5426be1bd1",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "a3e30dbff9432a9c3c02bfa8f090fa2020811bc635c3f356cd1f86a271320289",
+      "corrected_root": [
+        7192,
+        7225
+      ],
+      "paragraphs": 15,
+      "stanzas": 12,
+      "poem_notes": 8,
+      "source_artifact_matches_independent_git_object": true,
+      "all_presented_paragraph_hashes_and_line_counts_match": true,
+      "exact_original_stanza_label_array_matches": true,
+      "all_note_numbers_and_ownership_match": true,
+      "quotation_includes_only_all498_stanza_scope": true,
+      "all_independently_recorded_edition_caveats_retained": true,
+      "raw_and_profile_drift_refused": true,
+      "decision": "source-approved complete publisher-edition poem; not line-complete VRI"
+    },
+    {
+      "id": "thi-ap17",
+      "source_title": "Gotamī",
+      "git_blob_sha1": "a1ff8ea9b7538479326f0cf827351dadac063792",
+      "raw_sha256": "483d1147155da827d0a64aaae4ccd78ce5916ef3bb89dcf55b6f94831ed300ab",
+      "body_sha256": "ad425e6f9380043a880541747de30038f52f7dcd3c9551cb99fa694023867499",
+      "notes_sha256": "be2abf60b810f8f927660b2d0d0377e0f8baec242c8804278af670eca5a21d0a",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "483fc05030a8ae4c74145634b8d9ae9216fa424c5bda2042b7e950b191b6adea",
+      "corrected_root": [
+        7225,
+        7802
+      ],
+      "paragraphs": 189,
+      "stanzas": 186,
+      "poem_notes": 119,
+      "source_artifact_matches_independent_git_object": true,
+      "all_presented_paragraph_hashes_and_line_counts_match": true,
+      "exact_original_stanza_label_array_matches": true,
+      "all_note_numbers_and_ownership_match": true,
+      "quotation_includes_only_all498_stanza_scope": true,
+      "all_independently_recorded_edition_caveats_retained": true,
+      "raw_and_profile_drift_refused": true,
+      "decision": "source-approved complete publisher-edition poem; not line-complete VRI"
+    },
+    {
+      "id": "thi-ap18",
+      "source_title": "Khemā",
+      "git_blob_sha1": "7c009e7398e0073bc1fd5bf7dfe7b56423947ba0",
+      "raw_sha256": "5b579d6567f36d1952254b33295b826720f1f9bd4163e1a4be63830857af9dbc",
+      "body_sha256": "94f22111fea0ea29c56ac00950a50b975001757e31d45d179523a45feb3f9b90",
+      "notes_sha256": "927e03d408453ed06bcba44cc8f673bc981a500af512eb53b57548f0879866b5",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "30da05306d87e9d353e750af13e030b9ac064e45ddc98abccf906c65ddb72723",
+      "corrected_root": [
+        7802,
+        8088
+      ],
+      "paragraphs": 97,
+      "stanzas": 94,
+      "poem_notes": 82,
+      "source_artifact_matches_independent_git_object": true,
+      "all_presented_paragraph_hashes_and_line_counts_match": true,
+      "exact_original_stanza_label_array_matches": true,
+      "all_note_numbers_and_ownership_match": true,
+      "quotation_includes_only_all498_stanza_scope": true,
+      "all_independently_recorded_edition_caveats_retained": true,
+      "raw_and_profile_drift_refused": true,
+      "decision": "source-approved complete publisher-edition poem; not line-complete VRI"
+    },
+    {
+      "id": "thi-ap19",
+      "source_title": "Uppalavaṇṇā",
+      "git_blob_sha1": "13d3587b0aa0f66ad3174285c35544649f20ead3",
+      "raw_sha256": "6ca863b88c543d78aaea3092404f6ae1d9953fc3dbd4c993e73dc6d2dfe8f8c5",
+      "body_sha256": "fee71ea5b44344b88f90925ef4ddc8fc112350e4789d7092b24f1cda579cbe28",
+      "notes_sha256": "a7ee7a8f75320989c2f5fb785b05e8cb4ece96343722317f424371809da33796",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "e9efc0259984d179c7dcb3cf69232a759235125224ef1f1a83ba88844c153a5e",
+      "corrected_root": [
+        8088,
+        8340
+      ],
+      "paragraphs": 82,
+      "stanzas": 79,
+      "poem_notes": 85,
+      "source_artifact_matches_independent_git_object": true,
+      "all_presented_paragraph_hashes_and_line_counts_match": true,
+      "exact_original_stanza_label_array_matches": true,
+      "all_note_numbers_and_ownership_match": true,
+      "quotation_includes_only_all498_stanza_scope": true,
+      "all_independently_recorded_edition_caveats_retained": true,
+      "raw_and_profile_drift_refused": true,
+      "decision": "source-approved complete publisher-edition poem; not line-complete VRI"
+    },
+    {
+      "id": "thi-ap20",
+      "source_title": "Paṭācārā",
+      "git_blob_sha1": "8722d62c20778e649a3377d0c670b6e176bf1eb0",
+      "raw_sha256": "52e6c06170c5e7e23038d5e5d302c152476fa1bc5f4b287985b6b943bbd64d45",
+      "body_sha256": "2222929d70fcd22ce76a37af71bc0e1a086afbee5226703602888b15a0bdfbb4",
+      "notes_sha256": "0a516ec2cac11dc4e4e542429a0e7db44f7654011315b9e1a682040eca5888c4",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "0df732f6540bf82fe511ca848f8fb39ca6815a303d4f1e6a753b692704a785c7",
+      "corrected_root": [
+        8340,
+        8478
+      ],
+      "paragraphs": 46,
+      "stanzas": 43,
+      "poem_notes": 26,
+      "source_artifact_matches_independent_git_object": true,
+      "all_presented_paragraph_hashes_and_line_counts_match": true,
+      "exact_original_stanza_label_array_matches": true,
+      "all_note_numbers_and_ownership_match": true,
+      "quotation_includes_only_all498_stanza_scope": true,
+      "all_independently_recorded_edition_caveats_retained": true,
+      "raw_and_profile_drift_refused": true,
+      "decision": "source-approved complete publisher-edition poem; not line-complete VRI"
+    }
+  ],
+  "source17division": [
+    {
+      "kind": "publisher_recitation",
+      "label": "First recitation portion",
+      "before_local_label": "22",
+      "before_publisher_label": "248",
+      "body_sha256": "98517aa34d401470f71d510fdd5aebada3597c029abd94579c1d5df6543c0539",
+      "notes_sha256": "f1234f877d75bb55da1f9861699a2df6d8325af2f4f87d9e268a41bfb239664f",
+      "note_numbers": [
+        21
+      ]
+    }
+  ],
+  "source20summary": {
+    "kind": "canonical_chapter_summary",
+    "label": "Second Therī Apadāna chapter summary",
+    "parent_id": "thi-ap20",
+    "first_ref": "thi-ap20/48",
+    "last_ref": "thi-ap20/51",
+    "root_start": 8472,
+    "root_end": 8478,
+    "root_sha256": "3986f6f59952c43685b19cc37dc1d1977649e4b36cc5dd1521a2d56b6933ba7c",
+    "body_sha256": "8701c0a6b7b5ea7736dd41f37afef0153653ee7efc8b9b33509ccb4eadacba64",
+    "notes_sha256": "b6f6fec2b446374d7577d5ef365af6a75474404e751b9004fd3041ec9eb988d2",
+    "note_numbers": [
+      27
+    ]
+  },
+  "reviewed_implementation_files": {
+    "src/apadana.mjs": "d489837dd4f85248ffea76a4fbee00bf85b4b5dcbd97492e6e51421798332697",
+    "src/apadana-profiles.mjs": "e2dadbf42db747570334d2869d1f3b24ae90c856e8af968d57c640d199626ff3",
+    "server/data/apadana.json": "ea1f737fb00ab8f5d1e831c4bec57eb3618bff155d3ff5d0bdc3709f4723cd7a"
+  },
+  "evidence": {
+    "independent_goldens_sha256": "87679cd40de0992e5766be299d961799a188dd3cd1d323ecc73205bed2a6ac69",
+    "independent_source_review_sha256": "4a6f42ad66b7407a328bdc4342f655995a7725b5da5dd40ba04c57026b11a0e8",
+    "original_xml_and_all10672_source_blocks_replayed_in_prior_receipt": {
+      "file": "s0510m2.mul.xml",
+      "bytes": 1779576,
+      "sha256": "23e0721c8fe05a6105b56b627ac38291d10e0eab799a082c257466603f0839a1",
+      "git_blob_sha1": "c2a96aed52fb5de3e7fe66442633e5f045cf5bdf",
+      "matches_pinned_prior_source_receipt": true,
+      "independently_reparsed_original_xml_all_blocks_equal_current_book": true,
+      "book_blocks": 10672,
+      "book_blocks_sha256": "bd0177c2025298415abd2e90e1d576d2418127e08ce339699ad725960089f8cc",
+      "source_git_blob_matches_prior_pinned_receipt": true
+    }
+  },
+  "limits": [
+    "Not specialist certification of translation accuracy, historical claims or every possible recension difference.",
+    "No physical device or human assistive acceptance established by this source review.",
+    "No approval for poems21–40 or other source holds.",
+    "No commit, push, main merge, deployment or external outreach performed; exact-commit CI remains a separate parent-owned gate."
+  ],
+  "remaining_source_blockers": []
+}

@@ -330,7 +330,7 @@ test('ten appended bindings preserve all 35 old sections, 22 partials, shared re
   assert.equal(registry.links.length,45);
   assert.equal(hash(stable(registry.links.filter(r=>r.section.profile!==AN_TEN_SECTION_PROFILE))),'5445cc945d6c9247a0676ddf4413b551e13cf9b9b9aa5b324bfd9f070d20ce9f');
   for(const [file,pin] of [['scripts/canon/reviewed_partial_pages.json','3ceb1f0d8f827f60ee461b1960c4e31d9845950ad8adab89057937755e2a79dd'],['scripts/canon/reviewed_shared_pages.json','9cbc197c272a7685c45dd1c217100270a369917e2e28ccf758a829f4e23e3a2e']])assert.equal(hash(stable(JSON.parse(readFileSync(file,'utf8')))),pin,file);
-  assert.equal(hash(readBundled('server/data/canon.json.gz')),'d4bd22072c2f7e7fa6a89748db5a85ffeeedd55c20d0ab22afc031e62b397561');
+  assert.equal(hash(readBundled('server/data/canon.json.gz')),'2d9cd13dc56faef7791fc72e864326a096bdc68a4a13e971e2f3b5c8000412c4');
   const translations=JSON.parse(readFileSync('server/data/translations.json','utf8'));let removed=0;
   for(const [id,links]of Object.entries(translations)){translations[id]=links.filter(l=>{if(l.section?.profile===AN_TEN_SECTION_PROFILE){removed++;return false;}return true;});if(!translations[id].length)delete translations[id];}
   assert.equal(removed,10);assert.equal(hash(stable(translations)),'8a5543848d7f08a2a6ef5bb98909bd967de9da0e54daccf33e17174c0c2455f2');

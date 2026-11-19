@@ -4,19 +4,37 @@ import { APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_TRANSLATO
 
 export const apadanaId = uid => APADANA_PROFILES[uid]?.path ? 'ap:' + APADANA_PROFILES[uid].path.replace(/^\/text\/|\/$/g, '') : undefined;
 export const apadanaFamily = id => typeof id === 'string' && /^ap:/i.test(id.trim());
-const isApadana = value => apadanaFamily(value?.translation_id) || value?.source === 'apadana' || value?.source === 'Legends of the Buddhist Saints (Apadāna)' || own(value, 'translation_revision') || own(value, 'publisher_paratext') || own(value, 'chapter_summary');
+const isApadana = value => apadanaFamily(value?.translation_id) || value?.source === 'apadana' || value?.source === 'Legends of the Buddhist Saints (Apadāna)' || own(value, 'translation_revision') || own(value, 'publisher_paratext') || own(value, 'chapter_summary') || own(value, 'publisher_divisions');
+
+function sameParatext(value, expected, content) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  const { text, translator_notes, ...descriptor } = value;
+  return sameScope(descriptor, expected) && (content
+    ? nonempty(text) && text.length <= 50000 && Array.isArray(translator_notes)
+      && translator_notes.length === expected.note_numbers.length
+      && translator_notes.every((n, i) => n && typeof n === 'object' && !Array.isArray(n)
+        && Object.keys(n).sort().join(',') === 'number,text' && n.number === expected.note_numbers[i]
+        && nonempty(n.text) && n.text.length <= 50000)
+    : !own(value, 'text') && !own(value, 'translator_notes'));
+}
 
 /** Separately owned chapter paratext is never folded into poem text or notes. */
 export function validateChapterSummary(value, uid, content = false) {
   const expected = APADANA_PROFILES[uid]?.chapter_summary;
   if (!expected) { if (own(value, 'chapter_summary')) throw Error('The pinned Apadāna chapter-summary owner changed.'); return; }
-  const summary = value.chapter_summary;
-  if (!summary || typeof summary !== 'object' || Array.isArray(summary)) throw Error('The pinned Apadāna chapter-summary declaration is missing.');
-  const { text, translator_notes, ...descriptor } = summary;
-  if (!sameScope(descriptor, expected) || !content && (own(summary, 'text') || own(summary, 'translator_notes'))
-    || content && (!nonempty(text) || text.length > 50000 || !Array.isArray(translator_notes) || translator_notes.length !== 1
-      || translator_notes.some(n => !n || Object.keys(n).sort().join(',') !== 'number,text' || n.number !== 8 || !nonempty(n.text) || n.text.length > 50000))) {
+  if (!sameParatext(value.chapter_summary, expected, content)) {
     throw Error('The pinned Apadāna chapter-summary scope or note ownership changed.');
+  }
+}
+
+/** Publisher recitation divisions and their notes remain separate from the poem. */
+export function validatePublisherDivisions(value, uid, content = false) {
+  const expected = APADANA_PROFILES[uid]?.publisher_divisions;
+  if (!expected) { if (own(value, 'publisher_divisions')) throw Error('The pinned Apadāna publisher-division owner changed.'); return; }
+  const divisions = value.publisher_divisions;
+  if (!Array.isArray(divisions) || divisions.length !== expected.length
+    || divisions.some((division, i) => !sameParatext(division, expected[i], content))) {
+    throw Error('The pinned Apadāna publisher-division scope or note ownership changed.');
   }
 }
 
@@ -29,6 +47,7 @@ export function validateApadanaChoice(value, uid, content = false) {
     throw Error('The pinned Apadāna source identity or terms changed. No English source was displayed.');
   }
   validateChapterSummary(value, uid, content);
+  validatePublisherDivisions(value, uid, content);
 }
 
 /** Browser display/consent guards for backend-validated metadata. Not source, rights or alignment approval. */
@@ -100,7 +119,7 @@ export function validateEnglishPage(data, args, context) {
       || data.fetched_url !== APADANA_PROFILES[context.uid].raw_url || data.license_url !== APADANA_LICENSE_URL
       || !nonempty(data.changes) || data.changes.length > 2000
       || typeof data.publisher_paratext !== 'string' || data.publisher_paratext.length > 50000
-      || Boolean(data.publisher_paratext.trim()) !== (context.uid === 'thi-ap1')
+      || Boolean(data.publisher_paratext.trim()) !== (APADANA_PROFILES[context.uid].paratext_sha256 !== 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855')
       || !Array.isArray(data.translator_notes) || data.translator_notes.length !== APADANA_PROFILES[context.uid].note_count
       || (offset > 0 && (!sha(args.prefix_sha256) || data.prefix_sha256 !== args.prefix_sha256))) {
       throw Error('The pinned Apadāna source response does not match its reviewed identity. No English was displayed.');

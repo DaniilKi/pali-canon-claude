@@ -88,7 +88,7 @@ test('shared retained-source registry preserves the five historical reviews and 
 
 test('current coverage counts whole and scoped availability separately after D214 source review', () => {
   const t = translationCoverage({ refresh: true }).total;
-  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2593, 1463, 1886, 22, 16]);
+  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2603, 1473, 1896, 22, 16]);
   assert.deepEqual([t.shared_links, t.with_shared_english, t.shared_only], [12, 110, 22]);
   const daily = dailyText({ ...canon }, { date: '2026-11-01', kind: 'sutta' });
   assert.deepEqual([daily.rotation.of, daily.text.id], [1288, 'sn11.22']);

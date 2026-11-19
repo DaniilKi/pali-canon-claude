@@ -105,7 +105,7 @@ def main():
     manifest = json.loads((server_dir / 'data/apadana.json').read_text())
     assert manifest == json.loads((ROOT / 'server/data/apadana.json').read_text()), 'Package metadata differs'
     rows, commit = manifest['links'], manifest['source']['commit']
-    assert set(rows) == set(BASELINE) | set(NEW_IDS), 'Unexpected activated source scope'
+    assert set(rows) == {'thi-ap' + str(n) for n in range(1, 21)}, 'Unexpected activated source scope'
     for uid, expected in BASELINE.items():
         assert digest(compact(rows[uid], sort=True)) == expected, uid + ': previous metadata changed'
     for uid in NEW_IDS:
@@ -113,7 +113,7 @@ def main():
             assert rows[uid][key] == EXPECTED[uid][key], uid + ': source receipt differs: ' + key
         assert rows[uid]['note_count'] == len(EXPECTED[uid]['notes'])
     assert rows['thi-ap10']['chapter_summary'] == SUMMARY
-    assert all('chapter_summary' not in row for uid, row in rows.items() if uid != 'thi-ap10')
+    assert all('chapter_summary' not in row for uid, row in rows.items() if uid in set(BASELINE) | set(NEW_IDS) and uid != 'thi-ap10')
     checkout = args.source_root.resolve()
     assert subprocess.check_output(['git', '-C', str(checkout), 'rev-parse', 'HEAD'], text=True).strip() == commit
     for artifact in manifest['source']['rights_artifacts']:
@@ -200,7 +200,7 @@ def main():
                     time.sleep(.1)
             else:
                 raise AssertionError('Actual packaged HTTP bundle did not start')
-            metadata = {uid: tool('get_text', {'uid': uid, 'limit': 200}) for uid in rows}
+            metadata = {uid: tool('get_text', {'uid': uid, 'limit': 200}) for uid in rows if uid in set(BASELINE) | set(NEW_IDS)}
             assert not ledger.exists(), 'Metadata automatically retrieved English'
             for uid, meta in metadata.items():
                 assert len(meta['english_available']) == 1

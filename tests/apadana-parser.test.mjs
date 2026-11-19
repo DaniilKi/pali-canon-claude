@@ -45,7 +45,7 @@ test('missing or reordered stanzas, undefined notes and unexpected summaries fai
 
 test('finite metadata binds each whole root, provenance and rights with no bodies bundled', () => {
   assert.equal(APADANA_LICENSE,'CC BY-NC-SA 4.0');
-  assert.deepEqual(Object.keys(manifest.links),Array.from({length:10},(_,i)=>'thi-ap'+(i+1)));
+  assert.deepEqual(Object.keys(manifest.links),Array.from({length:20},(_,i)=>'thi-ap'+(i+1)));
   const c=JSON.parse(gunzipSync(readBundled(new URL('../server/data/canon.json.gz',import.meta.url))));
   for(const [id,link]of Object.entries(manifest.links)){
     const u=c.units.find(u=>u.id===id),b=c.books[u.book];
@@ -55,7 +55,7 @@ test('finite metadata binds each whole root, provenance and rights with no bodie
     for(const key of ['partial_scope','shared_scope','section','parts'])assert.throws(()=>validateLink({...link,[key]:null},id,u,b),/differs/);
     for(const key of ['text','translator_notes','publisher_paratext'])assert.equal(Object.hasOwn(link,key),false);
     assert.equal(isApadanaRawUrl(link.raw_url),true);
-    for(const changed of [link.raw_url+'?x=1',link.raw_url.replace(manifest.source.commit,'main'),link.raw_url.replace('https:','http:'),link.raw_url.replace(/poem-\d{3}\.md/,'poem-011.md')])if(changed!==link.raw_url)assert.equal(isApadanaRawUrl(changed),false);
+    for(const changed of [link.raw_url+'?x=1',link.raw_url.replace(manifest.source.commit,'main'),link.raw_url.replace('https:','http:'),link.raw_url.replace(/poem-\d{3}\.md/,'poem-021.md')])if(changed!==link.raw_url)assert.equal(isApadanaRawUrl(changed),false);
   }
 });
 
@@ -64,7 +64,8 @@ test('actual pinned extraction can be independently replayed without retaining p
     const raw=readFileSync(`${process.env.APADANA_SOURCE_CHECKOUT}/src/_poems/chapter-4/poem-${String(p.poem).padStart(3,'0')}.md`,'utf8');
     const value=parseApadana(raw,p);
     assert.equal(value.translator_notes.length,p.note_count);
-    assert.equal(value.text.split(/\n\n/).filter(x=>/\(\d+\)\s*\[\d+(?:-\d+)?\](?:\[Note \d+\])*$/.test(x)).length,p.verses[1]-p.verses[0]+1);
+    if(p.stanza_layout) assert.equal(value.text.split(/\n\n/).length,p.stanza_layout.length+3);
+    else assert.equal(value.text.split(/\n\n/).filter(x=>/\(\d+\)\s*\[\d+(?:-\d+)?\](?:\[Note \d+\])*$/.test(x)).length,p.verses[1]-p.verses[0]+1);
     assert.equal(quotationText(value).includes('Thus indeed'),false);
     if(p.poem===1)assert.match(value.text,/\(16\) \[16\]\[Note 20\]/);
     if(p.poem===7)assert.equal(value.text.split('\n')[0],'[7. Kaṭacchubhikkhadāyikā[Note 1]]');

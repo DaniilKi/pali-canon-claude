@@ -975,113 +975,6 @@
     return { ...out, ...scriptNote(s), ...inputNote(input) };
   }
 
-  // web/milinda-sources.mjs
-  var units = /* @__PURE__ */ new Map([
-    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-1-08", { unit: "mil3.1.8", notes: 0 }],
-    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-1-14", { unit: "mil3.1.15", notes: 0 }],
-    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-08", { unit: "mil3.3.8", notes: 0 }],
-    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-9", { unit: "mil3.3.9", notes: 0 }],
-    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-10", { unit: "mil3.3.10", notes: 0 }],
-    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-11", { unit: "mil3.3.11", notes: 0 }],
-    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-12", { unit: "mil3.3.12", notes: 0 }],
-    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-13", { unit: "mil3.3.13", notes: 0 }],
-    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-14", { unit: "mil3.3.14", notes: 0 }],
-    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-5-05", { unit: "mil3.5.5", notes: 2 }],
-    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-5-06", { unit: "mil3.5.6", notes: 1 }],
-    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-5-07", { unit: "mil3.5.7", notes: 0 }],
-    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-7-05", { unit: "mil3.7.5", notes: 1 }],
-    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-7-08", { unit: "mil3.7.8", notes: 0 }]
-  ]);
-  var discourses = /* @__PURE__ */ new Map([
-    ["ati:/tipitaka/sn/sn27/sn27.001-010.than#sn27.005", { unit: "sn27.5", notes: 0, profile: "ati-sn27-feelings-v1" }]
-  ]);
-  var numberedPage = "ati:/tipitaka/an/an01/an01.021-040.than";
-  var legacyNumberedPins = {
-    source_commit: "2d134ff9ef60f70a1eb03c9370580228811a3070",
-    pali_sha256: "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
-    text_sha256: "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
-    notice_sha256: "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
-    scope_sha256: "97589116d588b361438b6ea5db4d27ca2b45d8a77199be466cd6722b7c987ea6"
-  };
-  var numbered = new Map(Array.from({ length: 20 }, (_, i) => {
-    const n = i + 21;
-    return [numberedPage + "#sutta-" + n, { unit: "an1." + n, notes: 0, paragraphs: 1, profile: "ati-an1-ekadhamma-numbered-paragraph-v1", heading: n + "." }];
-  }));
-  var AN_TEN_PROFILE = "ati-an-ten-paragraph-selection-v1";
-  var anTen = /* @__PURE__ */ new Map([
-    ["ati:/tipitaka/an/an01/an01.045-046.than::selection:an1.45", { unit: "an1.45", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
-    ["ati:/tipitaka/an/an01/an01.045-046.than::selection:an1.46", { unit: "an1.46", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
-    ["ati:/tipitaka/an/an01/an01.049.than::selection:an1.49", { unit: "an1.49", paragraphs: 1, notes: 1, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
-    ["ati:/tipitaka/an/an01/an01.049.than::selection:an1.50", { unit: "an1.50", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
-    ["ati:/tipitaka/an/an01/an01.049.than::selection:an1.51", { unit: "an1.51", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
-    ["ati:/tipitaka/an/an01/an01.049.than::selection:an1.52", { unit: "an1.52", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
-    ["ati:/tipitaka/an/an02/an02.031.than::selection:an2.32", { unit: "an2.32", paragraphs: 3, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
-    ["ati:/tipitaka/an/an02/an02.031.than::selection:an2.33", { unit: "an2.33", paragraphs: 1, notes: 0, anchor: "s32", heading: null, profile: AN_TEN_PROFILE }],
-    ["ati:/tipitaka/an/an02/an02.125-126.than::selection:an2.125", { unit: "an2.125", paragraphs: 1, notes: 1, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
-    ["ati:/tipitaka/an/an02/an02.125-126.than::selection:an2.126", { unit: "an2.126", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }]
-  ]);
-  var legacyAnTen = /* @__PURE__ */ new Map([
-    ["ati:/tipitaka/an/an01/an01.049.than", { "owner_id": "an1.49", "text_ids": ["an1.49", "an1.50", "an1.51", "an1.52"], "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070", "pali_sha256": "5c98023f2f97b51c5ea9ef76b4a031ac9725ec8cecee8fbacc0f2c0ecf3f77a0", "text_sha256": "35182e6e8d3990b8cb6ace20602277a5d409fd45c5a44b9e277ec25995084c60", "notice_sha256": "3b8f3fab868dd8176bb2cce37b9e9437bdca790a6a415a0f67ee589ce099b1fe", "scope_sha256": "bf2fca5a6b857f8cf313ef9f01e7e4d937088d9eb52ba3fb8890d214728f7881" }],
-    ["ati:/tipitaka/an/an01/an01.045-046.than", { "owner_id": "an1.45", "text_ids": ["an1.45", "an1.46"], "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070", "pali_sha256": "3842fa2b62de5f546e83337c603df9bfa49cda6be1092221b102b7ea20cf4005", "text_sha256": "7297c6cf82b7abe3f94ad8e6fdc5e8fc1c03a6b3c896a2a1bcf5fa895bef69fd", "notice_sha256": "c6f4d4898e1844091dabb21aa338b492be115913f2af077c2bd57708890a8bfb", "scope_sha256": "0cf6a057f1c0ded3c569a2e71beece92f0597c1d345c0fdb44df7d5856bd09fe" }],
-    ["ati:/tipitaka/an/an02/an02.031.than", { "owner_id": "an2.32", "text_ids": ["an2.32", "an2.33"], "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070", "pali_sha256": "3f85a870476455991af56f4308b4fc92f73d0931c8cd17e18a171c374abfef96", "text_sha256": "68448c5eba804b236080fbb41641328da982639a295de44058e070ae99bd7495", "notice_sha256": "693ec730c062294a3570512540f883b863bb57f47765b3782199a9a404977d60", "scope_sha256": "8c2314215302c25b00437281a3af46dc4db66599fc1591aebf7e01c9fd80a5de" }],
-    ["ati:/tipitaka/an/an02/an02.125-126.than", { "owner_id": "an2.125", "text_ids": ["an2.125", "an2.126"], "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070", "pali_sha256": "01f88254cf733cc057f51d936a8203e51e447a5c711bfac3c7209ac269f44318", "text_sha256": "a5d4d3d63f2166947cbcb1ccaa12883f6fbd90ef4445c73ff1c4441064eff8ec", "notice_sha256": "d96963652b5b6f051df62ac6a54047af61d5f715b1dd3bcfdab4e62bc0b04de7", "scope_sha256": "af5aba23c950eb6804eb68fd23224ce8eca392a216f5aa5e02b399656a48fa87" }]
-  ]);
-  var sourceProfile = (id5) => units.get(id5) || discourses.get(id5) || numbered.get(id5) || anTen.get(id5);
-  var milindaSourceUnit = (id5) => units.get(id5)?.unit;
-  var numberedSourceUnit = (id5) => numbered.get(id5)?.unit;
-  var anTenSourceUnit = (id5) => anTen.get(id5)?.unit;
-  var sectionSourceUnit = (id5) => sourceProfile(id5)?.unit;
-  function validateSectionIdentity(value) {
-    const id5 = value?.translation_id;
-    if (typeof id5 !== "string") return;
-    let decoded = id5;
-    for (let i = 0; i < 4; i++) {
-      try {
-        const next = decodeURIComponent(decoded);
-        if (next === decoded) break;
-        decoded = next;
-      } catch {
-        break;
-      }
-    }
-    if (/^ati:/i.test(id5.trim()) && id5.includes("%")) throw Error("The source section requires its exact reviewed fragment identity or paragraph-selection identity; encoded aliases are unsupported. No English source was displayed.");
-    const resource = decoded.trim().split(/::|[?#]/, 1)[0].replace(/\.html?$/i, "").toLowerCase();
-    const scope = value.translation_scope;
-    if (id5 === numberedPage && !Object.hasOwn(value, "source_section") && (!Object.hasOwn(value, "whole_unit_coverage") || value.whole_unit_coverage === false) && scope?.kind === "shared_page" && scope.whole_unit_coverage === false && scope.owner_id === "an1.21" && scope.presentation === "compilation" && Array.isArray(scope.text_ids) && scope.text_ids.length === 20 && scope.text_ids.every((unit, i) => unit === "an1." + (i + 21)) && Object.entries(legacyNumberedPins).every(([key4, pin]) => scope[key4] === pin)) return;
-    const legacy = legacyAnTen.get(id5);
-    if (legacy && !Object.hasOwn(value, "source_section") && (!Object.hasOwn(value, "whole_unit_coverage") || value.whole_unit_coverage === false) && scope?.kind === "shared_page" && scope.version === 1 && scope.whole_unit_coverage === false && scope.presentation === "compilation" && scope.condensed === false && scope.individual_alignment_verified === false && Object.entries(legacy).every(([key4, pin]) => Array.isArray(pin) ? Array.isArray(scope[key4]) && scope[key4].length === pin.length && scope[key4].every((unit, i) => unit === pin[i]) : scope[key4] === pin)) return;
-    if ((isSectionPageId(resource) || decoded.includes("::") || /^ati:/i.test(decoded.trim()) && decoded.includes("#")) && !sourceProfile(id5)) throw Error("The source section requires its exact reviewed fragment identity. No English source was displayed.");
-  }
-  function validateSectionDescriptor(value) {
-    validateSectionIdentity(value);
-    const profile2 = sourceProfile(value.translation_id);
-    if (!profile2) return;
-    const section = value.source_section;
-    if (anTen.has(value.translation_id)) {
-      const keys2 = "anchor,first_ref,heading,last_ref,note_count,notes_sha256,notice_sha256,pali_sha256,paragraph_count,profile,section_html_sha256,selection_id,source_commit,status,text_sha256,unit_id,version";
-      const first = profile2.unit === "an1.51" || profile2.unit === "an2.32" ? 2 : 1;
-      const last = profile2.unit === "an2.32" ? 3 : first;
-      const hashes = ["section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256"];
-      if (!section || Object.keys(section).sort().join(",") !== keys2 || section.version !== 1 || section.status !== "reviewed" || section.profile !== AN_TEN_PROFILE || section.unit_id !== profile2.unit || section.selection_id !== profile2.unit || section.anchor !== profile2.anchor || section.heading !== null || section.paragraph_count !== profile2.paragraphs || section.note_count !== profile2.notes || section.source_commit !== legacyAnTen.get(value.translation_id.split("::")[0]).source_commit || !hashes.every((key4) => typeof section[key4] === "string" && /^[a-f0-9]{64}$/.test(section[key4])) || section.first_ref !== profile2.unit + "/" + first || section.last_ref !== profile2.unit + "/" + last) throw Error("The reviewed paragraph-selection descriptor or translator-note count is invalid. No English source was displayed.");
-      return;
-    }
-    if (!section || section.version !== 1 || section.status !== "reviewed" || section.unit_id !== profile2.unit || section.anchor !== value.translation_id.split("#")[1] || section.note_count !== profile2.notes || profile2.profile !== void 0 && section.profile !== profile2.profile || profile2.heading !== void 0 && section.heading !== profile2.heading || profile2.paragraphs !== void 0 && section.paragraph_count !== profile2.paragraphs) throw Error("The reviewed source-section descriptor or translator-note count is invalid. No English source was displayed.");
-  }
-  var isMilindaPageId = (id5) => /^ati:\/tipitaka\/kn\/miln\/miln\.[23]x\.kell$/.test(id5);
-  var isSectionPageId = (id5) => isMilindaPageId(id5) || id5 === "ati:/tipitaka/sn/sn27/sn27.001-010.than" || id5 === numberedPage || legacyAnTen.has(id5);
-  function translatorNotes(data) {
-    validateSectionDescriptor(data);
-    if (!Object.hasOwn(data, "translator_notes")) {
-      if (sectionSourceUnit(data.translation_id)) throw Error("The selected source section is missing its translator-note declaration.");
-      return [];
-    }
-    const notes2 = data.translator_notes;
-    if (!Array.isArray(notes2) || notes2.length > 32 || notes2.some((note2, i) => !note2 || typeof note2 !== "object" || Array.isArray(note2) || Object.keys(note2).sort().join(",") !== "number,text" || note2.number !== i + 1 || typeof note2.text !== "string" || !note2.text.trim() || note2.text.length > 5e4)) throw Error("The translator-note declaration is invalid. No English source was displayed.");
-    const profile2 = sourceProfile(data.translation_id);
-    if (profile2 && notes2.length !== profile2.notes) throw Error("The reviewed source-section translator-note count changed. No English source was displayed.");
-    return notes2.map((note2) => ({ number: note2.number, text: note2.text }));
-  }
-
   // src/apadana-profiles.mjs
   var APADANA_COMMIT = "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4";
   var APADANA_LICENSE = "CC BY-NC-SA 4.0";
@@ -1398,6 +1291,3755 @@
           8
         ]
       }
+    },
+    "thi-ap11": {
+      "id": "thi-ap11",
+      "poem": 11,
+      "verses": [
+        131,
+        150
+      ],
+      "root_verses": [
+        1,
+        21
+      ],
+      "note_count": 6,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-011/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-011/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-011.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ek\u016Bposathik\u0101",
+      "reference": "Ther\u012B Apad\u0101na 11; complete publisher-edition poem; original publisher numbering retained",
+      "raw_sha256": "73d6881ddc2554bc4a0ed3433eb8b76d2a17f8a60a8233d0d178c6a7b276a8e5",
+      "body_sha256": "82b4b8d0d958c21c889b04b5f0eb84ed9daa8ead711c81f8d8962b1d6c395095",
+      "notes_sha256": "44a57580db2d21a99ffd9be0ba261ecb4b02a309b2a92f40a84dd7daa5318d2a",
+      "paratext_sha256": "82c8d817b70123bd81092f976be1ab27f8a11a85e5b6f0254f4d92dd8405dd4a",
+      "root_sha256": "164aa615f8ae1aaeef438d86c0502856fa58c46f9c3f0e9882fcefc8ccfdc16c",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "131",
+          "suffix": "(1) [131]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "132",
+          "suffix": "(2) [132]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "133",
+          "suffix": "(3) [133]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "134",
+          "suffix": "(4) [134]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "135",
+          "suffix": "(5) [135]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "136",
+          "suffix": "(6) [136]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "137",
+          "suffix": "(7) [137]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "138",
+          "suffix": "(8) [138]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "139",
+          "suffix": "(9) [139]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "140",
+          "suffix": "(10) [140]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "141",
+          "suffix": "(11) [141]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "142",
+          "suffix": "(12) [142]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "143",
+          "suffix": "(13) [143]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "144",
+          "suffix": "(14) [144]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "145",
+          "suffix": "(15) [145]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "146",
+          "suffix": "(16) [146]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "147",
+          "suffix": "(17) [147]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "148",
+          "suffix": "(18) [148]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "149",
+          "suffix": "(19) [149]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "150",
+          "suffix": "(20) [150]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain the independent VRI root and all explicit recension differences; no line alignment or missing words are inferred.",
+        "Publisher complete 20-stanza poem labels131\u2013150 vs VRI21stanzas1\u201321; VRI19 second kiles\u0101 refrain has no separate publisher stanza. This is complete publisher edition, not line-complete VRI.",
+        "Publisher146 attainment at eighth month differs from VRI16 before half a month. Do not correct either.",
+        "Chapter heading is publisher preface outside poem stanza/quotation evidence."
+      ]
+    },
+    "thi-ap12": {
+      "id": "thi-ap12",
+      "poem": 12,
+      "verses": [
+        151,
+        158
+      ],
+      "root_verses": [
+        22,
+        29
+      ],
+      "note_count": 1,
+      "note_numbers": [
+        1
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-012/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-012/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-012.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Salalapupphik\u0101",
+      "reference": "Ther\u012B Apad\u0101na 12; complete publisher-edition poem; original publisher numbering retained",
+      "raw_sha256": "644b0b233faca1f34be5137e2cbbb770f5f7701f9fd205f09185a80879cb58c4",
+      "body_sha256": "de1dc7f05a6f97c0d3f0a04f97859af4041f2a8ddea95e2b611b3fe587c5c04d",
+      "notes_sha256": "cef930ded8b688cf28b2e8da561b5cfa8a28fcbfc939f0fe6550524f98d004a3",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "2337078d99acd9c3b912ac2106801d7d24cb9294ec8043c1fbe4928fc7a5e103",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "151",
+          "suffix": "(1) [151]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "152",
+          "suffix": "(2) [152]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "153",
+          "suffix": "(3) [153]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "154",
+          "suffix": "(4) [154]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "155",
+          "suffix": "(5) [155]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "156",
+          "suffix": "(6) [156]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "157",
+          "suffix": "(7) [157]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "158",
+          "suffix": "(8) [158]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain the independent VRI root and all explicit recension differences; no line alignment or missing words are inferred.",
+        "Publisher Salalapupphik\u0101 vs VRI Sa\u1E37alapupphik\u0101 and source note1 PTS spelling; preserve title spelling.",
+        "Eight publisher stanzas151\u2013158 correspond to VRI22\u201329 as a subject, not line alignment."
+      ]
+    },
+    "thi-ap13": {
+      "id": "thi-ap13",
+      "poem": 13,
+      "verses": [
+        159,
+        165
+      ],
+      "root_verses": [
+        30,
+        36
+      ],
+      "note_count": 2,
+      "note_numbers": [
+        1,
+        2
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-013/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-013/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-013.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Modakad\u0101yik\u0101",
+      "reference": "Ther\u012B Apad\u0101na 13; complete publisher-edition poem; original publisher numbering retained",
+      "raw_sha256": "86d93fbcc8a5bfa8658699cac30831749642f9016a9d73ce2befee1982b70c36",
+      "body_sha256": "d10795670fcfe35c8bd0b507d95b9266b7bcbe588022ae93e403f3169e749706",
+      "notes_sha256": "2c31bd5e9461d7d3a196f8d3fc77aeedcd6328d6a0b05a5cf882601ff53b9477",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "2d6f846b1a513cc8e9e728a61d9a40492d0cb5e86911ab45904c9e169b23be79",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "159",
+          "suffix": "(1) [159]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "160",
+          "suffix": "(2) [160]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "161",
+          "suffix": "(3) [161]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "162",
+          "suffix": "(4) [162]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "163",
+          "suffix": "(5) [163]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "164",
+          "suffix": "(6) [164]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "165",
+          "suffix": "(7) [165]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain the independent VRI root and all explicit recension differences; no line alignment or missing words are inferred.",
+        "Publisher heading Modakad\u0101yik\u0101; note2 on spoken colophon records PTS Timodakad\u0101yik\u0101. Retain note2 with colophon and do not silently rename.",
+        "Publisher159 wages/water-fetcher follows its edition; VRI30 preserves alternative water-carrier readings."
+      ]
+    },
+    "thi-ap14": {
+      "id": "thi-ap14",
+      "poem": 14,
+      "verses": [
+        166,
+        189
+      ],
+      "root_verses": [
+        37,
+        60
+      ],
+      "note_count": 11,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-014/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-014/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-014.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ek\u0101sanad\u0101yik\u0101",
+      "reference": "Ther\u012B Apad\u0101na 14; complete publisher-edition poem; original publisher numbering retained",
+      "raw_sha256": "ad3e984cd8feac560d92dc27d74266f9d925d29c72f3806d88ac618ec345685c",
+      "body_sha256": "7a81c5fc934587d2be7453f9b1989ee17b405aadab8e74c9a069fcb439c4ec53",
+      "notes_sha256": "b3bab216e6ad0f8fca9d4bacf153b1aa20581969c60eaff7bf01874d9791606f",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "9a69373d3af38c4a7b8cf2b77774d2d1fa10a3b9349bb2d3a710eb8c04cfeb72",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "166",
+          "suffix": "(1) [166]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "167",
+          "suffix": "(2) [167]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "168",
+          "suffix": "(3) [168]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "169",
+          "suffix": "(4) [169]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "170",
+          "suffix": "(5) [170]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "171",
+          "suffix": "(6) [171]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "172",
+          "suffix": "(7) [172]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "173",
+          "suffix": "(8) [173]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "174",
+          "suffix": "(9) [174]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "175",
+          "suffix": "(10) [175]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "176",
+          "suffix": "(11) [176]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "177",
+          "suffix": "(12) [177]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "178",
+          "suffix": "(13) [178]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "179",
+          "suffix": "(14) [179]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "180",
+          "suffix": "(15) [180]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "181",
+          "suffix": "(16) [181]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "182",
+          "suffix": "(17) [182]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "183",
+          "suffix": "(18) [183]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "184",
+          "suffix": "(19) [184]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "185",
+          "suffix": "(20) [185]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "186",
+          "suffix": "(21) [186]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "187",
+          "suffix": "(22) [187]",
+          "lines": 4
+        },
+        {
+          "local_label": "23",
+          "publisher_label": "188",
+          "suffix": "(23) [188]",
+          "lines": 4
+        },
+        {
+          "local_label": "24",
+          "publisher_label": "189",
+          "suffix": "(24) [189]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain the independent VRI root and all explicit recension differences; no line alignment or missing words are inferred.",
+        "Publisher166 garland-maker follows m\u0101lik\u0101 variant; VRI37 main b\u0101lik\u0101 girl retained.",
+        "Publisher174 has gold/silver couches; VRI45 gold/gem couches.",
+        "Publisher seat/garments/servant readings and original11notes, including source note9 attributed published personal communication, remain Walters editorial material, not scripture."
+      ]
+    },
+    "thi-ap15": {
+      "id": "thi-ap15",
+      "poem": 15,
+      "verses": [
+        190,
+        214
+      ],
+      "root_verses": [
+        61,
+        85
+      ],
+      "note_count": 8,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-015/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-015/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-015.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Pa\xF1cad\u012Bpik\u0101",
+      "reference": "Ther\u012B Apad\u0101na 15; complete publisher-edition poem; original publisher numbering retained",
+      "raw_sha256": "82c0f4fac1a60ed18c850ae3849e99234d20bc986c16c1de1a38a82fd61cfbb6",
+      "body_sha256": "b55552269aec0ac7349e5212c825c81458d47321b2f567ac5e3943e6dff29a29",
+      "notes_sha256": "14bb482c913ed61d83fba45962dc5af6ee543b1a2f10ca6a8f0eab05ffbc00e4",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "315579ea2da355a265b62145a875ffe46ae56bbbaf9aaa0657dd735fd3010459",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "190",
+          "suffix": "(1) [190]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "191",
+          "suffix": "(2) [191]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "192",
+          "suffix": "(3) [192]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "193",
+          "suffix": "(4) [193]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "194",
+          "suffix": "(5) [194]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "195",
+          "suffix": "(6) [195]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "196",
+          "suffix": "(7) [196]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "197",
+          "suffix": "(8) [197]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "198",
+          "suffix": "(9) [198]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "199",
+          "suffix": "(10) [199]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "200",
+          "suffix": "(11) [200]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "201",
+          "suffix": "(12) [201]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "202",
+          "suffix": "(13) [202]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "203",
+          "suffix": "(14) [203]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "204",
+          "suffix": "(15) [204]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "205",
+          "suffix": "(16) [205]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "206",
+          "suffix": "(17) [206]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "207",
+          "suffix": "(18) [207]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "208",
+          "suffix": "(19) [208]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "209",
+          "suffix": "(20) [209]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "210",
+          "suffix": "(21) [210]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "211",
+          "suffix": "(22) [211]",
+          "lines": 4
+        },
+        {
+          "local_label": "23",
+          "publisher_label": "212",
+          "suffix": "(23) [212]",
+          "lines": 4
+        },
+        {
+          "local_label": "24",
+          "publisher_label": "213",
+          "suffix": "(24) [213]",
+          "lines": 4
+        },
+        {
+          "local_label": "25",
+          "publisher_label": "214",
+          "suffix": "(25) [214]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain the independent VRI root and all explicit recension differences; no line alignment or missing words are inferred.",
+        "True VRI scope61\u201385 ends7192; current unit wrongly includes next heading+86.",
+        "Publisher title Pa\xF1cad\u012Bpik\u0101 vs VRI Pa\xF1cad\u012Bpad\u0101yik\u0101. Publisher25stanzas190\u2013214; keep distinct from poem9 despite strong repetition.",
+        "Publisher194 good colors vs VRI65 gold. Publisher200 standing/east vs VRI71 seated/turned away. Publisher201 good/bad actions vs VRI72 good/bad destinations (PTS action variant retained).",
+        "Publisher207 ends fruit of five lamps; VRI78 ends Gotama knowing her qualities. No supplied wording is inferred from another poem; note1 explicitly does not repeat earlier notes."
+      ],
+      "index_revision": "apadana-theri11-20-v1"
+    },
+    "thi-ap16": {
+      "id": "thi-ap16",
+      "poem": 16,
+      "verses": [
+        215,
+        225
+      ],
+      "root_verses": [
+        86,
+        96
+      ],
+      "note_count": 8,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-016/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-016/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-016.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "S\u0101lam\u0101lik\u0101",
+      "reference": "Ther\u012B Apad\u0101na 16; complete publisher-edition poem; original publisher numbering retained",
+      "raw_sha256": "961c914d4b392296cf0d385c056f0c1670b95aa923bc62e3500461e8cc721838",
+      "body_sha256": "b5edfc8c21bd6c907b59735f6926db91a2d55312e7ece492cea9c44cd1b0c0a6",
+      "notes_sha256": "77fd26d21439906b5600d354e70a4ac8e10fc465d8c4b76505790f5426be1bd1",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "a3e30dbff9432a9c3c02bfa8f090fa2020811bc635c3f356cd1f86a271320289",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "215",
+          "suffix": "(1) [215]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "216",
+          "suffix": "(2) [216]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "217",
+          "suffix": "(3) [217]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "218",
+          "suffix": "(4) [218]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "219",
+          "suffix": "(5) [219]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "220",
+          "suffix": "(6) [220]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "221",
+          "suffix": "(7) [221]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "223",
+          "suffix": "(8) [223]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "224",
+          "suffix": "(9) [224]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "225",
+          "suffix": "(10) [225]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "222",
+          "suffix": "(11) [222]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": null,
+          "suffix": "(12)",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain the independent VRI root and all explicit recension differences; no line alignment or missing words are inferred.",
+        "True VRI scope86\u201396 starts7192. Source title S\u0101lam\u0101lik\u0101 follows BJTS; PTS Nalam\u0101lik\u0101 and VRI Na\u1E37am\u0101lik\u0101 remain distinct edition spellings/readings. Publisher sal garland vs VRI reed garland.",
+        "Publisher217 human body vs VRI88 kinnar\u012B body; root human-body variant retained.",
+        "Publisher local1\u201312 has globals215,216,217,218,219,220,221,223,224,225,222,null. BJTS places222 before refrains and omits final local12; PTS-only local12 is fully printed with no global label. Do not invent226 or reorder."
+      ],
+      "index_revision": "apadana-theri11-20-v1"
+    },
+    "thi-ap17": {
+      "id": "thi-ap17",
+      "poem": 17,
+      "verses": [
+        226,
+        415
+      ],
+      "root_verses": [
+        97,
+        288
+      ],
+      "note_count": 119,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-017/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-017/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-017.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Gotam\u012B",
+      "reference": "Ther\u012B Apad\u0101na 17; complete publisher-edition poem; original publisher numbering retained",
+      "raw_sha256": "483d1147155da827d0a64aaae4ccd78ce5916ef3bb89dcf55b6f94831ed300ab",
+      "body_sha256": "ad425e6f9380043a880541747de30038f52f7dcd3c9551cb99fa694023867499",
+      "notes_sha256": "be2abf60b810f8f927660b2d0d0377e0f8baec242c8804278af670eca5a21d0a",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "483fc05030a8ae4c74145634b8d9ae9216fa424c5bda2042b7e950b191b6adea",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "226",
+          "suffix": "(1) [226]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "227",
+          "suffix": "(2) [227]",
+          "lines": 4
+        },
+        {
+          "local_label": "2e-f, 3a-b",
+          "publisher_label": "228",
+          "suffix": "(2e-f, 3a-b) [228]",
+          "lines": 4
+        },
+        {
+          "local_label": "3c-f",
+          "publisher_label": "229",
+          "suffix": "(3c-f) [229]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "230",
+          "suffix": "(4) [230]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "231",
+          "suffix": "(5) [231]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "232",
+          "suffix": "(6) [232]",
+          "lines": 6
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "233",
+          "suffix": "(7) [233]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "234",
+          "suffix": "(8) [234]",
+          "lines": 6
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "235",
+          "suffix": "(9) [235]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "236",
+          "suffix": "(10) [236]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "237",
+          "suffix": "(11) [237]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "238",
+          "suffix": "(12) [238]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "239",
+          "suffix": "(13) [239]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "240",
+          "suffix": "(14) [240]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "241",
+          "suffix": "(15) [241]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "242",
+          "suffix": "(16) [242]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "243",
+          "suffix": "(17) [243]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "244",
+          "suffix": "(18) [244]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "245",
+          "suffix": "(19) [245]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "246",
+          "suffix": "(20) [246]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "247",
+          "suffix": "(21) [247]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "248",
+          "suffix": "(22) [248]",
+          "lines": 4
+        },
+        {
+          "local_label": "23",
+          "publisher_label": "249",
+          "suffix": "(23) [249]",
+          "lines": 4
+        },
+        {
+          "local_label": "24",
+          "publisher_label": "250",
+          "suffix": "(24) [250]",
+          "lines": 4
+        },
+        {
+          "local_label": "25",
+          "publisher_label": "251",
+          "suffix": "(25) [251]",
+          "lines": 4
+        },
+        {
+          "local_label": "26",
+          "publisher_label": "252",
+          "suffix": "(26) [252]",
+          "lines": 4
+        },
+        {
+          "local_label": "27",
+          "publisher_label": "253",
+          "suffix": "(27) [253]",
+          "lines": 4
+        },
+        {
+          "local_label": "28",
+          "publisher_label": "254",
+          "suffix": "(28) [254]",
+          "lines": 4
+        },
+        {
+          "local_label": "29",
+          "publisher_label": "255",
+          "suffix": "(29) [255]",
+          "lines": 4
+        },
+        {
+          "local_label": "30",
+          "publisher_label": "256",
+          "suffix": "(30) [256]",
+          "lines": 4
+        },
+        {
+          "local_label": "31",
+          "publisher_label": "257",
+          "suffix": "(31) [257]",
+          "lines": 4
+        },
+        {
+          "local_label": "32",
+          "publisher_label": "258",
+          "suffix": "(32) [258]",
+          "lines": 4
+        },
+        {
+          "local_label": "33",
+          "publisher_label": "259",
+          "suffix": "(33) [259]",
+          "lines": 4
+        },
+        {
+          "local_label": "34",
+          "publisher_label": "260",
+          "suffix": "(34) [260]",
+          "lines": 4
+        },
+        {
+          "local_label": "35",
+          "publisher_label": "261",
+          "suffix": "(35) [261]",
+          "lines": 4
+        },
+        {
+          "local_label": "36",
+          "publisher_label": "262",
+          "suffix": "(36) [262]",
+          "lines": 4
+        },
+        {
+          "local_label": "37",
+          "publisher_label": "263",
+          "suffix": "(37) [263]",
+          "lines": 4
+        },
+        {
+          "local_label": "38",
+          "publisher_label": "264",
+          "suffix": "(38) [264]",
+          "lines": 4
+        },
+        {
+          "local_label": "39",
+          "publisher_label": "265",
+          "suffix": "(39) [265]",
+          "lines": 4
+        },
+        {
+          "local_label": "40",
+          "publisher_label": "266",
+          "suffix": "(40) [266]",
+          "lines": 4
+        },
+        {
+          "local_label": "41",
+          "publisher_label": "267",
+          "suffix": "(41) [267]",
+          "lines": 4
+        },
+        {
+          "local_label": "42",
+          "publisher_label": "268",
+          "suffix": "(42) [268]",
+          "lines": 4
+        },
+        {
+          "local_label": "43",
+          "publisher_label": "269",
+          "suffix": "(43) [269]",
+          "lines": 4
+        },
+        {
+          "local_label": "44",
+          "publisher_label": "270",
+          "suffix": "(44) [270]",
+          "lines": 4
+        },
+        {
+          "local_label": "45",
+          "publisher_label": "271",
+          "suffix": "(45) [271]",
+          "lines": 4
+        },
+        {
+          "local_label": "46",
+          "publisher_label": "272",
+          "suffix": "(46) [272]",
+          "lines": 4
+        },
+        {
+          "local_label": "47",
+          "publisher_label": "273",
+          "suffix": "(47) [273]",
+          "lines": 4
+        },
+        {
+          "local_label": "48",
+          "publisher_label": "274",
+          "suffix": "(48) [274]",
+          "lines": 4
+        },
+        {
+          "local_label": "49",
+          "publisher_label": "275",
+          "suffix": "(49) [275]",
+          "lines": 4
+        },
+        {
+          "local_label": "50",
+          "publisher_label": "276",
+          "suffix": "(50) [276]",
+          "lines": 4
+        },
+        {
+          "local_label": "51",
+          "publisher_label": "277",
+          "suffix": "(51) [277]",
+          "lines": 4
+        },
+        {
+          "local_label": "52",
+          "publisher_label": "278",
+          "suffix": "(52) [278]",
+          "lines": 4
+        },
+        {
+          "local_label": "53",
+          "publisher_label": "279",
+          "suffix": "(53) [279]",
+          "lines": 4
+        },
+        {
+          "local_label": "54",
+          "publisher_label": "280",
+          "suffix": "(54) [280]",
+          "lines": 4
+        },
+        {
+          "local_label": "55",
+          "publisher_label": "281",
+          "suffix": "(55) [281]",
+          "lines": 4
+        },
+        {
+          "local_label": "56-57",
+          "publisher_label": "282-283",
+          "suffix": "(56-57) [282-283]",
+          "lines": 8
+        },
+        {
+          "local_label": "58",
+          "publisher_label": "284",
+          "suffix": "(58) [284]",
+          "lines": 4
+        },
+        {
+          "local_label": "59",
+          "publisher_label": "285",
+          "suffix": "(59) [285]",
+          "lines": 4
+        },
+        {
+          "local_label": "60",
+          "publisher_label": "286",
+          "suffix": "(60) [286]",
+          "lines": 4
+        },
+        {
+          "local_label": "61",
+          "publisher_label": "287",
+          "suffix": "(61) [287]",
+          "lines": 4
+        },
+        {
+          "local_label": "62",
+          "publisher_label": "288",
+          "suffix": "(62) [288]",
+          "lines": 4
+        },
+        {
+          "local_label": "63",
+          "publisher_label": "289",
+          "suffix": "(63) [289]",
+          "lines": 4
+        },
+        {
+          "local_label": "64",
+          "publisher_label": "290",
+          "suffix": "(64) [290]",
+          "lines": 4
+        },
+        {
+          "local_label": "65",
+          "publisher_label": "291",
+          "suffix": "(65) [291]",
+          "lines": 4
+        },
+        {
+          "local_label": "66",
+          "publisher_label": "292",
+          "suffix": "(66) [292]",
+          "lines": 4
+        },
+        {
+          "local_label": "67",
+          "publisher_label": "293",
+          "suffix": "(67) [293]",
+          "lines": 4
+        },
+        {
+          "local_label": "68",
+          "publisher_label": "294",
+          "suffix": "(68) [294]",
+          "lines": 4
+        },
+        {
+          "local_label": "69",
+          "publisher_label": "295",
+          "suffix": "(69) [295]",
+          "lines": 4
+        },
+        {
+          "local_label": "70",
+          "publisher_label": "296",
+          "suffix": "(70) [296]",
+          "lines": 4
+        },
+        {
+          "local_label": "71",
+          "publisher_label": "297",
+          "suffix": "(71) [297]",
+          "lines": 4
+        },
+        {
+          "local_label": "72",
+          "publisher_label": "298",
+          "suffix": "(72) [298]",
+          "lines": 4
+        },
+        {
+          "local_label": "73",
+          "publisher_label": "299",
+          "suffix": "(73) [299]",
+          "lines": 4
+        },
+        {
+          "local_label": "74",
+          "publisher_label": "300",
+          "suffix": "(74) [300]",
+          "lines": 4
+        },
+        {
+          "local_label": "75",
+          "publisher_label": "301",
+          "suffix": "(75) [301]",
+          "lines": 4
+        },
+        {
+          "local_label": "76",
+          "publisher_label": "302",
+          "suffix": "(76) [302]",
+          "lines": 4
+        },
+        {
+          "local_label": "77",
+          "publisher_label": "303",
+          "suffix": "(77) [303]",
+          "lines": 4
+        },
+        {
+          "local_label": "78",
+          "publisher_label": "304",
+          "suffix": "(78) [304]",
+          "lines": 4
+        },
+        {
+          "local_label": "79",
+          "publisher_label": "305",
+          "suffix": "(79) [305]",
+          "lines": 4
+        },
+        {
+          "local_label": "80",
+          "publisher_label": "306",
+          "suffix": "(80) [306]",
+          "lines": 4
+        },
+        {
+          "local_label": "81",
+          "publisher_label": "307",
+          "suffix": "(81) [307]",
+          "lines": 4
+        },
+        {
+          "local_label": "82",
+          "publisher_label": "308",
+          "suffix": "(82) [308]",
+          "lines": 4
+        },
+        {
+          "local_label": "83",
+          "publisher_label": "309",
+          "suffix": "(83) [309]",
+          "lines": 4
+        },
+        {
+          "local_label": "84",
+          "publisher_label": "310",
+          "suffix": "(84) [310]",
+          "lines": 4
+        },
+        {
+          "local_label": "85",
+          "publisher_label": "311",
+          "suffix": "(85) [311]",
+          "lines": 4
+        },
+        {
+          "local_label": "86",
+          "publisher_label": "312",
+          "suffix": "(86) [312]",
+          "lines": 4
+        },
+        {
+          "local_label": "87",
+          "publisher_label": "313",
+          "suffix": "(87) [313]",
+          "lines": 4
+        },
+        {
+          "local_label": "88",
+          "publisher_label": "314",
+          "suffix": "(88) [314]",
+          "lines": 4
+        },
+        {
+          "local_label": "89",
+          "publisher_label": "315",
+          "suffix": "(89) [315]",
+          "lines": 4
+        },
+        {
+          "local_label": "90",
+          "publisher_label": "316",
+          "suffix": "(90) [316]",
+          "lines": 4
+        },
+        {
+          "local_label": "91",
+          "publisher_label": "317",
+          "suffix": "(91) [317]",
+          "lines": 4
+        },
+        {
+          "local_label": "92",
+          "publisher_label": "318",
+          "suffix": "(92) [318]",
+          "lines": 4
+        },
+        {
+          "local_label": "93",
+          "publisher_label": "319",
+          "suffix": "(93) [319]",
+          "lines": 4
+        },
+        {
+          "local_label": "94",
+          "publisher_label": "320",
+          "suffix": "(94) [320]",
+          "lines": 4
+        },
+        {
+          "local_label": "95",
+          "publisher_label": "321",
+          "suffix": "(95) [321]",
+          "lines": 4
+        },
+        {
+          "local_label": "96",
+          "publisher_label": "322",
+          "suffix": "(96) [322]",
+          "lines": 4
+        },
+        {
+          "local_label": "97",
+          "publisher_label": "323",
+          "suffix": "(97) [323]",
+          "lines": 4
+        },
+        {
+          "local_label": "98",
+          "publisher_label": "324",
+          "suffix": "(98) [324]",
+          "lines": 4
+        },
+        {
+          "local_label": "99",
+          "publisher_label": "325",
+          "suffix": "(99) [325]",
+          "lines": 4
+        },
+        {
+          "local_label": "100",
+          "publisher_label": "326",
+          "suffix": "(100) [326]",
+          "lines": 4
+        },
+        {
+          "local_label": "101",
+          "publisher_label": "327",
+          "suffix": "(101) [327]",
+          "lines": 4
+        },
+        {
+          "local_label": "102",
+          "publisher_label": "328",
+          "suffix": "(102) [328]",
+          "lines": 4
+        },
+        {
+          "local_label": "103",
+          "publisher_label": "329",
+          "suffix": "(103) [329]",
+          "lines": 4
+        },
+        {
+          "local_label": "104",
+          "publisher_label": "330",
+          "suffix": "(104) [330]",
+          "lines": 4
+        },
+        {
+          "local_label": "105",
+          "publisher_label": "331",
+          "suffix": "(105) [331]",
+          "lines": 4
+        },
+        {
+          "local_label": "106",
+          "publisher_label": "332",
+          "suffix": "(106) [332]",
+          "lines": 4
+        },
+        {
+          "local_label": "107",
+          "publisher_label": "333",
+          "suffix": "(107) [333]",
+          "lines": 4
+        },
+        {
+          "local_label": "108",
+          "publisher_label": "334",
+          "suffix": "(108) [334]",
+          "lines": 4
+        },
+        {
+          "local_label": "109",
+          "publisher_label": "335",
+          "suffix": "(109) [335]",
+          "lines": 4
+        },
+        {
+          "local_label": "110",
+          "publisher_label": "336",
+          "suffix": "(110) [336]",
+          "lines": 4
+        },
+        {
+          "local_label": "111",
+          "publisher_label": "337",
+          "suffix": "(111) [337]",
+          "lines": 4
+        },
+        {
+          "local_label": "112",
+          "publisher_label": "338",
+          "suffix": "(112) [338]",
+          "lines": 4
+        },
+        {
+          "local_label": "113",
+          "publisher_label": "339",
+          "suffix": "(113) [339]",
+          "lines": 4
+        },
+        {
+          "local_label": "114",
+          "publisher_label": "340",
+          "suffix": "(114) [340]",
+          "lines": 4
+        },
+        {
+          "local_label": "115",
+          "publisher_label": "341",
+          "suffix": "(115) [341]",
+          "lines": 4
+        },
+        {
+          "local_label": "116",
+          "publisher_label": "342",
+          "suffix": "(116) [342]",
+          "lines": 4
+        },
+        {
+          "local_label": "117",
+          "publisher_label": "343",
+          "suffix": "(117) [343]",
+          "lines": 4
+        },
+        {
+          "local_label": "118",
+          "publisher_label": "344",
+          "suffix": "(118) [344]",
+          "lines": 4
+        },
+        {
+          "local_label": "119",
+          "publisher_label": "345",
+          "suffix": "(119) [345]",
+          "lines": 4
+        },
+        {
+          "local_label": "120",
+          "publisher_label": "346",
+          "suffix": "(120) [346]",
+          "lines": 4
+        },
+        {
+          "local_label": "121",
+          "publisher_label": "347",
+          "suffix": "(121) [347]",
+          "lines": 4
+        },
+        {
+          "local_label": "122-123",
+          "publisher_label": "348-349",
+          "suffix": "(122-123) [348-349]",
+          "lines": 8
+        },
+        {
+          "local_label": "124",
+          "publisher_label": "350",
+          "suffix": "(124) [350]",
+          "lines": 4
+        },
+        {
+          "local_label": "125",
+          "publisher_label": "351",
+          "suffix": "(125) [351]",
+          "lines": 4
+        },
+        {
+          "local_label": "126",
+          "publisher_label": "352",
+          "suffix": "(126) [352]",
+          "lines": 4
+        },
+        {
+          "local_label": "127",
+          "publisher_label": "353",
+          "suffix": "(127) [353]",
+          "lines": 4
+        },
+        {
+          "local_label": "128",
+          "publisher_label": "354",
+          "suffix": "(128) [354]",
+          "lines": 4
+        },
+        {
+          "local_label": "129",
+          "publisher_label": "355",
+          "suffix": "(129) [355]",
+          "lines": 4
+        },
+        {
+          "local_label": "130",
+          "publisher_label": "356",
+          "suffix": "(130) [356]",
+          "lines": 4
+        },
+        {
+          "local_label": "131",
+          "publisher_label": "357",
+          "suffix": "(131) [357]",
+          "lines": 4
+        },
+        {
+          "local_label": "132",
+          "publisher_label": "358",
+          "suffix": "(132) [358]",
+          "lines": 4
+        },
+        {
+          "local_label": "133",
+          "publisher_label": "359",
+          "suffix": "(133) [359]",
+          "lines": 4
+        },
+        {
+          "local_label": "134",
+          "publisher_label": "360",
+          "suffix": "(134) [360]",
+          "lines": 4
+        },
+        {
+          "local_label": "135",
+          "publisher_label": "361",
+          "suffix": "(135) [361]",
+          "lines": 4
+        },
+        {
+          "local_label": "136",
+          "publisher_label": "362",
+          "suffix": "(136) [362]",
+          "lines": 4
+        },
+        {
+          "local_label": "137",
+          "publisher_label": "363",
+          "suffix": "(137) [363]",
+          "lines": 4
+        },
+        {
+          "local_label": "138",
+          "publisher_label": "364",
+          "suffix": "(138) [364]",
+          "lines": 4
+        },
+        {
+          "local_label": "139",
+          "publisher_label": "365",
+          "suffix": "(139) [365]",
+          "lines": 4
+        },
+        {
+          "local_label": "140",
+          "publisher_label": "366",
+          "suffix": "(140) [366]",
+          "lines": 4
+        },
+        {
+          "local_label": "141",
+          "publisher_label": "367",
+          "suffix": "(141) [367]",
+          "lines": 4
+        },
+        {
+          "local_label": "142",
+          "publisher_label": "368",
+          "suffix": "(142) [368]",
+          "lines": 4
+        },
+        {
+          "local_label": "143",
+          "publisher_label": "369",
+          "suffix": "(143) [369]",
+          "lines": 4
+        },
+        {
+          "local_label": "144",
+          "publisher_label": "370",
+          "suffix": "(144) [370]",
+          "lines": 4
+        },
+        {
+          "local_label": "145",
+          "publisher_label": "371",
+          "suffix": "(145) [371]",
+          "lines": 4
+        },
+        {
+          "local_label": "146",
+          "publisher_label": "372",
+          "suffix": "(146) [372]",
+          "lines": 4
+        },
+        {
+          "local_label": "147",
+          "publisher_label": "373",
+          "suffix": "(147) [373]",
+          "lines": 4
+        },
+        {
+          "local_label": "148",
+          "publisher_label": "374",
+          "suffix": "(148) [374]",
+          "lines": 4
+        },
+        {
+          "local_label": "149",
+          "publisher_label": "375",
+          "suffix": "(149) [375]",
+          "lines": 4
+        },
+        {
+          "local_label": "150",
+          "publisher_label": "376",
+          "suffix": "(150) [376]",
+          "lines": 4
+        },
+        {
+          "local_label": "151",
+          "publisher_label": "377",
+          "suffix": "(151) [377]",
+          "lines": 4
+        },
+        {
+          "local_label": "152",
+          "publisher_label": "378",
+          "suffix": "(152) [378]",
+          "lines": 4
+        },
+        {
+          "local_label": "153",
+          "publisher_label": "379",
+          "suffix": "(153) [379]",
+          "lines": 4
+        },
+        {
+          "local_label": "154",
+          "publisher_label": "380",
+          "suffix": "(154) [380]",
+          "lines": 4
+        },
+        {
+          "local_label": "155",
+          "publisher_label": "381",
+          "suffix": "(155) [381]",
+          "lines": 4
+        },
+        {
+          "local_label": "156-157",
+          "publisher_label": "382-383",
+          "suffix": "(156-157) [382-383]",
+          "lines": 8
+        },
+        {
+          "local_label": "158",
+          "publisher_label": "384",
+          "suffix": "(158) [384]",
+          "lines": 4
+        },
+        {
+          "local_label": "159",
+          "publisher_label": "385",
+          "suffix": "(159) [385]",
+          "lines": 4
+        },
+        {
+          "local_label": "160",
+          "publisher_label": "386",
+          "suffix": "(160) [386]",
+          "lines": 4
+        },
+        {
+          "local_label": "161",
+          "publisher_label": "387",
+          "suffix": "(161) [387]",
+          "lines": 4
+        },
+        {
+          "local_label": "162",
+          "publisher_label": "388",
+          "suffix": "(162) [388]",
+          "lines": 4
+        },
+        {
+          "local_label": "163",
+          "publisher_label": "389",
+          "suffix": "(163) [389]",
+          "lines": 4
+        },
+        {
+          "local_label": "164",
+          "publisher_label": "390",
+          "suffix": "(164) [390]",
+          "lines": 4
+        },
+        {
+          "local_label": "165",
+          "publisher_label": "391",
+          "suffix": "(165) [391]",
+          "lines": 4
+        },
+        {
+          "local_label": "166",
+          "publisher_label": "392",
+          "suffix": "(166) [392]",
+          "lines": 4
+        },
+        {
+          "local_label": "167",
+          "publisher_label": "393",
+          "suffix": "(167) [393]",
+          "lines": 4
+        },
+        {
+          "local_label": "168",
+          "publisher_label": "394",
+          "suffix": "(168) [394]",
+          "lines": 4
+        },
+        {
+          "local_label": "169",
+          "publisher_label": "395",
+          "suffix": "(169) [395]",
+          "lines": 4
+        },
+        {
+          "local_label": "170",
+          "publisher_label": "396",
+          "suffix": "(170) [396]",
+          "lines": 4
+        },
+        {
+          "local_label": "171",
+          "publisher_label": "397",
+          "suffix": "(171) [397]",
+          "lines": 4
+        },
+        {
+          "local_label": "172",
+          "publisher_label": "398",
+          "suffix": "(172) [398]",
+          "lines": 4
+        },
+        {
+          "local_label": "173",
+          "publisher_label": "399",
+          "suffix": "(173) [399]",
+          "lines": 4
+        },
+        {
+          "local_label": "174",
+          "publisher_label": "400",
+          "suffix": "(174) [400]",
+          "lines": 4
+        },
+        {
+          "local_label": "175",
+          "publisher_label": "401",
+          "suffix": "(175) [401]",
+          "lines": 4
+        },
+        {
+          "local_label": "176",
+          "publisher_label": "402",
+          "suffix": "(176) [402]",
+          "lines": 4
+        },
+        {
+          "local_label": "177",
+          "publisher_label": "403",
+          "suffix": "(177) [403]",
+          "lines": 4
+        },
+        {
+          "local_label": "178",
+          "publisher_label": "404",
+          "suffix": "(178) [404]",
+          "lines": 4
+        },
+        {
+          "local_label": "179-180",
+          "publisher_label": "405-406",
+          "suffix": "(179-180) [405-406]",
+          "lines": 8
+        },
+        {
+          "local_label": "181",
+          "publisher_label": "407",
+          "suffix": "(181) [407]",
+          "lines": 4
+        },
+        {
+          "local_label": "182",
+          "publisher_label": "408",
+          "suffix": "(182) [408]",
+          "lines": 4
+        },
+        {
+          "local_label": "183",
+          "publisher_label": "409",
+          "suffix": "(183) [409]",
+          "lines": 4
+        },
+        {
+          "local_label": "184",
+          "publisher_label": "410",
+          "suffix": "(184) [410]",
+          "lines": 4
+        },
+        {
+          "local_label": "185",
+          "publisher_label": "411",
+          "suffix": "(185) [411]",
+          "lines": 4
+        },
+        {
+          "local_label": "186",
+          "publisher_label": "412",
+          "suffix": "(186) [412]",
+          "lines": 4
+        },
+        {
+          "local_label": "187",
+          "publisher_label": "413",
+          "suffix": "(187) [413]",
+          "lines": 4
+        },
+        {
+          "local_label": "188",
+          "publisher_label": "414",
+          "suffix": "(188) [414]",
+          "lines": 4
+        },
+        {
+          "local_label": "189",
+          "publisher_label": "415",
+          "suffix": "(189) [415]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain the independent VRI root and all explicit recension differences; no line alignment or missing words are inferred.",
+        "True VRI97\u2013288 ends7802; next Khem\u0101 heading and289 belong to18. Publisher is complete beginning-to-final-instruction narrative,186printed stanza entries spanning226\u2013415 with combined ranges; not line-complete VRI192stanzas.",
+        "VRI101 repeats prospective nirv\u0101\u1E47a losses, adds Mah\u0101kassapa and has no separate publisher stanza. Publisher6/8 six-foot division differs from VRI104\u2013107.",
+        "Publisher230 destroying life constituents vs VRI102 pa\u1E6Dikacc\u0101/ossajjitv\u0101 reading; note5 preserves PTS/BJTS differences.",
+        "Publisher277\u2013280 addresses speaker/wording differently from VRI150\u2013153; retain original explanatory notes.",
+        "Publisher315 boar/Vishnu vs VRI188 elephant (dvirada). Publisher326 one day vs VRI199 week (publisher328 itself says week). Publisher327 Greatly Mindful vs VRI200 great assembly.",
+        "Publisher344 \u015A\u0101kyan heroes with male interpolation vs VRI217 S\u0101kiy\u0101n\u012Bhi; preserve original gender wording and do not assert person-by-person alignment.",
+        "Publisher372 enumerates three immaterial planes while VRI245 includes four, including nevasa\xF1\xF1a; no missing English is generated.",
+        "Publisher393 incense follows PTS variant vs VRI266 sky lotuses. Translator notes1\u2013120 all preserved with original numbers;21 is solely recitation-marker note."
+      ],
+      "index_revision": "apadana-theri11-20-v1",
+      "publisher_divisions": [
+        {
+          "kind": "publisher_recitation",
+          "label": "First recitation portion",
+          "before_local_label": "22",
+          "before_publisher_label": "248",
+          "body_sha256": "98517aa34d401470f71d510fdd5aebada3597c029abd94579c1d5df6543c0539",
+          "notes_sha256": "f1234f877d75bb55da1f9861699a2df6d8325af2f4f87d9e268a41bfb239664f",
+          "note_numbers": [
+            21
+          ]
+        }
+      ]
+    },
+    "thi-ap18": {
+      "id": "thi-ap18",
+      "poem": 18,
+      "verses": [
+        416,
+        510
+      ],
+      "root_verses": [
+        289,
+        383
+      ],
+      "note_count": 82,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-018/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-018/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-018.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Khem\u0101",
+      "reference": "Ther\u012B Apad\u0101na 18; complete publisher-edition poem; original publisher numbering retained",
+      "raw_sha256": "5b579d6567f36d1952254b33295b826720f1f9bd4163e1a4be63830857af9dbc",
+      "body_sha256": "94f22111fea0ea29c56ac00950a50b975001757e31d45d179523a45feb3f9b90",
+      "notes_sha256": "927e03d408453ed06bcba44cc8f673bc981a500af512eb53b57548f0879866b5",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "30da05306d87e9d353e750af13e030b9ac064e45ddc98abccf906c65ddb72723",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "416",
+          "suffix": "(1) [416]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "417",
+          "suffix": "(2) [417]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "418",
+          "suffix": "(3) [418]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "419",
+          "suffix": "(4) [419]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "420",
+          "suffix": "(5) [420]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "421",
+          "suffix": "(6) [421]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "422",
+          "suffix": "(7) [422]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "423",
+          "suffix": "(8) [423]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "424",
+          "suffix": "(9) [424]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "425",
+          "suffix": "(10) [425]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "426",
+          "suffix": "(11) [426]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "427",
+          "suffix": "(12) [427]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "428",
+          "suffix": "(13) [428]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "429",
+          "suffix": "(14) [429]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "430",
+          "suffix": "(15) [430]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "431",
+          "suffix": "(16) [431]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "432",
+          "suffix": "(17) [432]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "433",
+          "suffix": "(18) [433]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "434",
+          "suffix": "(19) [434]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "435",
+          "suffix": "(20) [435]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "436",
+          "suffix": "(21) [436]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "437",
+          "suffix": "(22) [437]",
+          "lines": 4
+        },
+        {
+          "local_label": "23",
+          "publisher_label": "438",
+          "suffix": "(23) [438]",
+          "lines": 4
+        },
+        {
+          "local_label": "24",
+          "publisher_label": "439",
+          "suffix": "(24) [439]",
+          "lines": 4
+        },
+        {
+          "local_label": "25",
+          "publisher_label": "440",
+          "suffix": "(25) [440]",
+          "lines": 4
+        },
+        {
+          "local_label": "26",
+          "publisher_label": "441",
+          "suffix": "(26) [441]",
+          "lines": 4
+        },
+        {
+          "local_label": "27",
+          "publisher_label": "442",
+          "suffix": "(27) [442]",
+          "lines": 4
+        },
+        {
+          "local_label": "28",
+          "publisher_label": "443",
+          "suffix": "(28) [443]",
+          "lines": 4
+        },
+        {
+          "local_label": "29",
+          "publisher_label": "444",
+          "suffix": "(29) [444]",
+          "lines": 4
+        },
+        {
+          "local_label": "30-31",
+          "publisher_label": "445-446",
+          "suffix": "(30-31) [445-446]",
+          "lines": 8
+        },
+        {
+          "local_label": "32",
+          "publisher_label": "447",
+          "suffix": "(32) [447]",
+          "lines": 4
+        },
+        {
+          "local_label": "33",
+          "publisher_label": "448",
+          "suffix": "(33) [448]",
+          "lines": 4
+        },
+        {
+          "local_label": "34",
+          "publisher_label": "449",
+          "suffix": "(34) [449]",
+          "lines": 4
+        },
+        {
+          "local_label": "35",
+          "publisher_label": "450",
+          "suffix": "(35) [450]",
+          "lines": 4
+        },
+        {
+          "local_label": "36",
+          "publisher_label": "451",
+          "suffix": "(36) [451]",
+          "lines": 4
+        },
+        {
+          "local_label": "37",
+          "publisher_label": "452",
+          "suffix": "(37) [452]",
+          "lines": 4
+        },
+        {
+          "local_label": "38",
+          "publisher_label": "453",
+          "suffix": "(38) [453]",
+          "lines": 4
+        },
+        {
+          "local_label": "39",
+          "publisher_label": "454",
+          "suffix": "(39) [454]",
+          "lines": 4
+        },
+        {
+          "local_label": "40",
+          "publisher_label": "455",
+          "suffix": "(40) [455]",
+          "lines": 4
+        },
+        {
+          "local_label": "41",
+          "publisher_label": "456",
+          "suffix": "(41) [456]",
+          "lines": 4
+        },
+        {
+          "local_label": "42",
+          "publisher_label": "457",
+          "suffix": "(42) [457]",
+          "lines": 4
+        },
+        {
+          "local_label": "43",
+          "publisher_label": "458",
+          "suffix": "(43) [458]",
+          "lines": 4
+        },
+        {
+          "local_label": "44",
+          "publisher_label": "459",
+          "suffix": "(44) [459]",
+          "lines": 4
+        },
+        {
+          "local_label": "45",
+          "publisher_label": "460",
+          "suffix": "(45) [460]",
+          "lines": 4
+        },
+        {
+          "local_label": "46",
+          "publisher_label": "461",
+          "suffix": "(46) [461]",
+          "lines": 4
+        },
+        {
+          "local_label": "47",
+          "publisher_label": "462",
+          "suffix": "(47) [462]",
+          "lines": 4
+        },
+        {
+          "local_label": "48",
+          "publisher_label": "463",
+          "suffix": "(48) [463]",
+          "lines": 4
+        },
+        {
+          "local_label": "49",
+          "publisher_label": "464",
+          "suffix": "(49) [464]",
+          "lines": 4
+        },
+        {
+          "local_label": "50",
+          "publisher_label": "465",
+          "suffix": "(50) [465]",
+          "lines": 4
+        },
+        {
+          "local_label": "51",
+          "publisher_label": "466",
+          "suffix": "(51) [466]",
+          "lines": 4
+        },
+        {
+          "local_label": "52",
+          "publisher_label": "467",
+          "suffix": "(52) [467]",
+          "lines": 4
+        },
+        {
+          "local_label": "53",
+          "publisher_label": "468",
+          "suffix": "(53) [468]",
+          "lines": 4
+        },
+        {
+          "local_label": "54",
+          "publisher_label": "469",
+          "suffix": "(54) [469]",
+          "lines": 4
+        },
+        {
+          "local_label": "55",
+          "publisher_label": "470",
+          "suffix": "(55) [470]",
+          "lines": 4
+        },
+        {
+          "local_label": "56",
+          "publisher_label": "471",
+          "suffix": "(56) [471]",
+          "lines": 4
+        },
+        {
+          "local_label": "57",
+          "publisher_label": "472",
+          "suffix": "(57) [472]",
+          "lines": 4
+        },
+        {
+          "local_label": "58",
+          "publisher_label": "473",
+          "suffix": "(58) [473]",
+          "lines": 4
+        },
+        {
+          "local_label": "59",
+          "publisher_label": "474",
+          "suffix": "(59) [474]",
+          "lines": 4
+        },
+        {
+          "local_label": "60",
+          "publisher_label": "475",
+          "suffix": "(60) [475]",
+          "lines": 4
+        },
+        {
+          "local_label": "61",
+          "publisher_label": "476",
+          "suffix": "(61) [476]",
+          "lines": 4
+        },
+        {
+          "local_label": "62",
+          "publisher_label": "477",
+          "suffix": "(62) [477]",
+          "lines": 4
+        },
+        {
+          "local_label": "63",
+          "publisher_label": "478",
+          "suffix": "(63) [478]",
+          "lines": 4
+        },
+        {
+          "local_label": "64",
+          "publisher_label": "479",
+          "suffix": "(64) [479]",
+          "lines": 4
+        },
+        {
+          "local_label": "65",
+          "publisher_label": "480",
+          "suffix": "(65) [480]",
+          "lines": 4
+        },
+        {
+          "local_label": "66",
+          "publisher_label": "481",
+          "suffix": "(66) [481]",
+          "lines": 4
+        },
+        {
+          "local_label": "67",
+          "publisher_label": "482",
+          "suffix": "(67) [482]",
+          "lines": 4
+        },
+        {
+          "local_label": "68",
+          "publisher_label": "483",
+          "suffix": "(68) [483]",
+          "lines": 4
+        },
+        {
+          "local_label": "69",
+          "publisher_label": "484",
+          "suffix": "(69) [484]",
+          "lines": 4
+        },
+        {
+          "local_label": "70-71",
+          "publisher_label": "485",
+          "suffix": "(70-71) [485].",
+          "lines": 4
+        },
+        {
+          "local_label": "72",
+          "publisher_label": "486",
+          "suffix": "(72) [486]",
+          "lines": 4
+        },
+        {
+          "local_label": "73",
+          "publisher_label": "487",
+          "suffix": "(73) [487]",
+          "lines": 4
+        },
+        {
+          "local_label": "74",
+          "publisher_label": "488",
+          "suffix": "(74) [488]",
+          "lines": 4
+        },
+        {
+          "local_label": "75",
+          "publisher_label": "489",
+          "suffix": "(75) [489]",
+          "lines": 4
+        },
+        {
+          "local_label": "76",
+          "publisher_label": "490",
+          "suffix": "(76) [490]",
+          "lines": 4
+        },
+        {
+          "local_label": "77",
+          "publisher_label": "491",
+          "suffix": "(77) [491]",
+          "lines": 4
+        },
+        {
+          "local_label": "78",
+          "publisher_label": "492",
+          "suffix": "(78) [492]",
+          "lines": 4
+        },
+        {
+          "local_label": "79",
+          "publisher_label": "493",
+          "suffix": "(79) [493]",
+          "lines": 4
+        },
+        {
+          "local_label": "80",
+          "publisher_label": "494",
+          "suffix": "(80) [494]",
+          "lines": 4
+        },
+        {
+          "local_label": "81",
+          "publisher_label": "495",
+          "suffix": "(81) [495]",
+          "lines": 4
+        },
+        {
+          "local_label": "82",
+          "publisher_label": "496",
+          "suffix": "(82) [496]",
+          "lines": 4
+        },
+        {
+          "local_label": "83",
+          "publisher_label": "497",
+          "suffix": "(83) [497]",
+          "lines": 4
+        },
+        {
+          "local_label": "84",
+          "publisher_label": "498",
+          "suffix": "(84) [498]",
+          "lines": 4
+        },
+        {
+          "local_label": "85",
+          "publisher_label": "499",
+          "suffix": "(85) [499]",
+          "lines": 4
+        },
+        {
+          "local_label": "86",
+          "publisher_label": "500",
+          "suffix": "(86) [500]",
+          "lines": 4
+        },
+        {
+          "local_label": "87",
+          "publisher_label": "501",
+          "suffix": "(87) [501]",
+          "lines": 4
+        },
+        {
+          "local_label": "88",
+          "publisher_label": "502",
+          "suffix": "(88) [502]",
+          "lines": 4
+        },
+        {
+          "local_label": "89",
+          "publisher_label": "503",
+          "suffix": "(89) [503]",
+          "lines": 4
+        },
+        {
+          "local_label": "90",
+          "publisher_label": "504",
+          "suffix": "(90) [504]",
+          "lines": 4
+        },
+        {
+          "local_label": "91",
+          "publisher_label": "505",
+          "suffix": "(91) [505]",
+          "lines": 4
+        },
+        {
+          "local_label": "92",
+          "publisher_label": "506",
+          "suffix": "(92) [506]",
+          "lines": 4
+        },
+        {
+          "local_label": "93",
+          "publisher_label": "507",
+          "suffix": "(93) [507]",
+          "lines": 4
+        },
+        {
+          "local_label": "94",
+          "publisher_label": "508",
+          "suffix": "(94) [508]",
+          "lines": 4
+        },
+        {
+          "local_label": "95",
+          "publisher_label": "509",
+          "suffix": "(95) [509]",
+          "lines": 4
+        },
+        {
+          "local_label": "96",
+          "publisher_label": "510",
+          "suffix": "(96) [510]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain the independent VRI root and all explicit recension differences; no line alignment or missing words are inferred.",
+        "True VRI289\u2013383 begins7802;95VRIstanzas vs94printed publisher entries416\u2013510 due combined445-446 and local70-71/global485 meter convention.",
+        "Source note7 contains original unresolved xxx; retain it as translator editorial wording. No guessed resolution.",
+        "Publisher435 beautiful vs VRI308 s\u012Blavat\u012B moral (beauty variant retained). Publisher440 thousand donation vs VRI313 d\u0101nasah\u0101yik\u0101 reading (source donation variant retained).",
+        "Publisher471 asks if Buddha is wretched vs VRI344 na aya\u1E43 l\u016Bkho negation. Publisher499 seven months vs VRI372 half month (seven-month variant retained). Publisher505 queen questions vs VRI378 king.",
+        "VRI second recitation marker at8049 is not printed in this publisher artifact; do not fabricate it. All82notes original ownership preserved."
+      ],
+      "index_revision": "apadana-theri11-20-v1"
+    },
+    "thi-ap19": {
+      "id": "thi-ap19",
+      "poem": 19,
+      "verses": [
+        511,
+        594
+      ],
+      "root_verses": [
+        384,
+        467
+      ],
+      "note_count": 85,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-019/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-019/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-019.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Uppalava\u1E47\u1E47\u0101",
+      "reference": "Ther\u012B Apad\u0101na 19; complete publisher-edition poem; original publisher numbering retained",
+      "raw_sha256": "6ca863b88c543d78aaea3092404f6ae1d9953fc3dbd4c993e73dc6d2dfe8f8c5",
+      "body_sha256": "fee71ea5b44344b88f90925ef4ddc8fc112350e4789d7092b24f1cda579cbe28",
+      "notes_sha256": "a7ee7a8f75320989c2f5fb785b05e8cb4ece96343722317f424371809da33796",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "e9efc0259984d179c7dcb3cf69232a759235125224ef1f1a83ba88844c153a5e",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "511",
+          "suffix": "(1) [511]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "512",
+          "suffix": "(2) [512]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "513",
+          "suffix": "(3) [513]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "514",
+          "suffix": "(4) [514]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "515",
+          "suffix": "(5) [515]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "516",
+          "suffix": "(6) [516]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "517",
+          "suffix": "(7) [517]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "518",
+          "suffix": "(8) [518]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "519",
+          "suffix": "(9) [519]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "520",
+          "suffix": "(10) [520]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "521",
+          "suffix": "(11) [521]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "522",
+          "suffix": "(12) [522]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "523",
+          "suffix": "(13) [523]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "524",
+          "suffix": "(14) [524]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "525",
+          "suffix": "(15) [525]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "526",
+          "suffix": "(16) [526]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "527",
+          "suffix": "(17) [527]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "528",
+          "suffix": "(18) [528]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "529",
+          "suffix": "(19) [529]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "530",
+          "suffix": "(20) [530]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "531",
+          "suffix": "(21) [531]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "532",
+          "suffix": "(22) [532]",
+          "lines": 4
+        },
+        {
+          "local_label": "23",
+          "publisher_label": "533",
+          "suffix": "(23) [533]",
+          "lines": 4
+        },
+        {
+          "local_label": null,
+          "publisher_label": "534",
+          "suffix": "[534]",
+          "lines": 4
+        },
+        {
+          "local_label": "24",
+          "publisher_label": "535",
+          "suffix": "(24) [535]",
+          "lines": 4
+        },
+        {
+          "local_label": "25",
+          "publisher_label": "536",
+          "suffix": "(25) [536]",
+          "lines": 4
+        },
+        {
+          "local_label": "26-27",
+          "publisher_label": "537-538",
+          "suffix": "(26-27) [537-538]",
+          "lines": 8
+        },
+        {
+          "local_label": "28",
+          "publisher_label": "539",
+          "suffix": "(28) [539]",
+          "lines": 4
+        },
+        {
+          "local_label": "29",
+          "publisher_label": "540",
+          "suffix": "(29) [540]",
+          "lines": 4
+        },
+        {
+          "local_label": "30",
+          "publisher_label": "541",
+          "suffix": "(30) [541]",
+          "lines": 4
+        },
+        {
+          "local_label": "31-32",
+          "publisher_label": "542-543",
+          "suffix": "(31-32) [542-543]",
+          "lines": 8
+        },
+        {
+          "local_label": "33",
+          "publisher_label": "544",
+          "suffix": "(33) [544]",
+          "lines": 4
+        },
+        {
+          "local_label": "34",
+          "publisher_label": "545",
+          "suffix": "(34) [545]",
+          "lines": 4
+        },
+        {
+          "local_label": "35",
+          "publisher_label": "546",
+          "suffix": "(35) [546]",
+          "lines": 4
+        },
+        {
+          "local_label": "36",
+          "publisher_label": "547",
+          "suffix": "(36) [547]",
+          "lines": 4
+        },
+        {
+          "local_label": "37",
+          "publisher_label": "548",
+          "suffix": "(37) [548]",
+          "lines": 4
+        },
+        {
+          "local_label": "38",
+          "publisher_label": "549",
+          "suffix": "(38) [549]",
+          "lines": 4
+        },
+        {
+          "local_label": "39",
+          "publisher_label": "550",
+          "suffix": "(39) [550]",
+          "lines": 4
+        },
+        {
+          "local_label": "40",
+          "publisher_label": "551",
+          "suffix": "(40) [551]",
+          "lines": 4
+        },
+        {
+          "local_label": "41",
+          "publisher_label": "552",
+          "suffix": "(41) [552]",
+          "lines": 4
+        },
+        {
+          "local_label": "42",
+          "publisher_label": "553",
+          "suffix": "(42) [553]",
+          "lines": 4
+        },
+        {
+          "local_label": "43",
+          "publisher_label": "554",
+          "suffix": "(43) [554]",
+          "lines": 4
+        },
+        {
+          "local_label": "44",
+          "publisher_label": "555",
+          "suffix": "(44) [555]",
+          "lines": 4
+        },
+        {
+          "local_label": "45",
+          "publisher_label": "556",
+          "suffix": "(45) [556]",
+          "lines": 4
+        },
+        {
+          "local_label": "46",
+          "publisher_label": "557",
+          "suffix": "(46) [557]",
+          "lines": 4
+        },
+        {
+          "local_label": "47",
+          "publisher_label": "558",
+          "suffix": "(47) [558]",
+          "lines": 4
+        },
+        {
+          "local_label": "48-49",
+          "publisher_label": "559-560",
+          "suffix": "(48-49) [559-560]",
+          "lines": 8
+        },
+        {
+          "local_label": "50",
+          "publisher_label": "561",
+          "suffix": "(50) [561]",
+          "lines": 4
+        },
+        {
+          "local_label": "51",
+          "publisher_label": "562",
+          "suffix": "(51) [562]",
+          "lines": 4
+        },
+        {
+          "local_label": "52",
+          "publisher_label": "563",
+          "suffix": "(52) [563]",
+          "lines": 4
+        },
+        {
+          "local_label": "53",
+          "publisher_label": "564",
+          "suffix": "(53) [564]",
+          "lines": 4
+        },
+        {
+          "local_label": "54",
+          "publisher_label": "565",
+          "suffix": "(54) [565]",
+          "lines": 4
+        },
+        {
+          "local_label": "55",
+          "publisher_label": "566",
+          "suffix": "(55) [566]",
+          "lines": 4
+        },
+        {
+          "local_label": "56",
+          "publisher_label": "567",
+          "suffix": "(56) [567]",
+          "lines": 4
+        },
+        {
+          "local_label": "57",
+          "publisher_label": "568",
+          "suffix": "(57) [568]",
+          "lines": 4
+        },
+        {
+          "local_label": "58",
+          "publisher_label": "569",
+          "suffix": "(58) [569]",
+          "lines": 4
+        },
+        {
+          "local_label": "59",
+          "publisher_label": "570",
+          "suffix": "[59] [570]",
+          "lines": 4
+        },
+        {
+          "local_label": "60",
+          "publisher_label": "571",
+          "suffix": "(60) [571]",
+          "lines": 4
+        },
+        {
+          "local_label": "61-62",
+          "publisher_label": "572-573",
+          "suffix": "(61-62) [572-573]",
+          "lines": 8
+        },
+        {
+          "local_label": "63",
+          "publisher_label": "574",
+          "suffix": "(63) [574]",
+          "lines": 4
+        },
+        {
+          "local_label": "64",
+          "publisher_label": "575",
+          "suffix": "(64) [575]",
+          "lines": 4
+        },
+        {
+          "local_label": "65-66",
+          "publisher_label": "576-577",
+          "suffix": "(65-66) [576-577]",
+          "lines": 8
+        },
+        {
+          "local_label": "67",
+          "publisher_label": "578",
+          "suffix": "(67) [578]",
+          "lines": 4
+        },
+        {
+          "local_label": "68",
+          "publisher_label": "579",
+          "suffix": "(68) [579]",
+          "lines": 4
+        },
+        {
+          "local_label": "69",
+          "publisher_label": "580",
+          "suffix": "(69) [580]",
+          "lines": 4
+        },
+        {
+          "local_label": "70",
+          "publisher_label": "581",
+          "suffix": "(70) [581]",
+          "lines": 4
+        },
+        {
+          "local_label": "71",
+          "publisher_label": "582",
+          "suffix": "(71) [582]",
+          "lines": 4
+        },
+        {
+          "local_label": "72",
+          "publisher_label": "583",
+          "suffix": "(72) [583]",
+          "lines": 4
+        },
+        {
+          "local_label": "73",
+          "publisher_label": "584",
+          "suffix": "(73) [584]",
+          "lines": 4
+        },
+        {
+          "local_label": "74",
+          "publisher_label": "585",
+          "suffix": "(74) [585]",
+          "lines": 4
+        },
+        {
+          "local_label": "75",
+          "publisher_label": "586",
+          "suffix": "(75) [586]",
+          "lines": 4
+        },
+        {
+          "local_label": "76",
+          "publisher_label": "587",
+          "suffix": "(76) [587]",
+          "lines": 4
+        },
+        {
+          "local_label": "77",
+          "publisher_label": "588",
+          "suffix": "(77) [588]",
+          "lines": 4
+        },
+        {
+          "local_label": "78",
+          "publisher_label": "589",
+          "suffix": "(78) [589]",
+          "lines": 4
+        },
+        {
+          "local_label": "79",
+          "publisher_label": "590",
+          "suffix": "(79) [590]",
+          "lines": 4
+        },
+        {
+          "local_label": "80",
+          "publisher_label": "591",
+          "suffix": "(80) [591]",
+          "lines": 4
+        },
+        {
+          "local_label": "81",
+          "publisher_label": "592",
+          "suffix": "(81) [592]",
+          "lines": 4
+        },
+        {
+          "local_label": "82",
+          "publisher_label": "593",
+          "suffix": "(82) [593]",
+          "lines": 4
+        },
+        {
+          "local_label": "83",
+          "publisher_label": "594",
+          "suffix": "(83) [594]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain the independent VRI root and all explicit recension differences; no line alignment or missing words are inferred.",
+        "True VRI384\u2013467 ends8340.79printed stanza entries correspond to publisher globals511\u2013594 includingfive combined pairs; source534 is BJTS-only per note29 and has no local label.",
+        "Publisher521 physician/oil-to-bladder vs VRI394 child playing with oil in hand; root vejjo variant retained. Publisher522 flower vs VRI395 mu\xF1ja/reed.",
+        "Publisher530 presence/absence vs VRI403 sa\u1E45gama reading. Publisher568 personal wishes vs VRI441 they also wished.",
+        "Publisher572 maternal self-guard wording differs from VRI445 reference to sons/husband. Note69 is incomplete in original publisher artifact and remains incomplete; no guessed BJTS reading.",
+        "Publisher580 eight months vs VRI453 before half month. Publisher582 unparalleled beauty vs VRI455 no other companion (beauty variant retained). All85notes remain publisher editorial material."
+      ],
+      "index_revision": "apadana-theri11-20-v1"
+    },
+    "thi-ap20": {
+      "id": "thi-ap20",
+      "poem": 20,
+      "verses": [
+        595,
+        638
+      ],
+      "root_verses": [
+        468,
+        511
+      ],
+      "note_count": 26,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-4/poem-020/",
+      "url": "https://apadanatranslation.com/text/chapter-4/poem-020/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-020.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Pa\u1E6D\u0101c\u0101r\u0101",
+      "reference": "Ther\u012B Apad\u0101na 20; complete publisher-edition poem; original publisher numbering retained",
+      "raw_sha256": "52e6c06170c5e7e23038d5e5d302c152476fa1bc5f4b287985b6b943bbd64d45",
+      "body_sha256": "2222929d70fcd22ce76a37af71bc0e1a086afbee5226703602888b15a0bdfbb4",
+      "notes_sha256": "0a516ec2cac11dc4e4e542429a0e7db44f7654011315b9e1a682040eca5888c4",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "0df732f6540bf82fe511ca848f8fb39ca6815a303d4f1e6a753b692704a785c7",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "595",
+          "suffix": "(1) [595]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "596",
+          "suffix": "(2) [596]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "597",
+          "suffix": "(3) [597]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "598",
+          "suffix": "(4) [598]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "599",
+          "suffix": "(5) [599]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "600",
+          "suffix": "(6) [600]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "601",
+          "suffix": "(7) [601]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "602",
+          "suffix": "(8) [602]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "603",
+          "suffix": "(9) [603]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "604",
+          "suffix": "(10) [604]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "605",
+          "suffix": "(11) [605]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "606",
+          "suffix": "(12) [606]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "607",
+          "suffix": "(13) [607]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "608",
+          "suffix": "(14) [608]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "609",
+          "suffix": "(15) [609]",
+          "lines": 4
+        },
+        {
+          "local_label": "16-17",
+          "publisher_label": "610-611",
+          "suffix": "(16-17) [610-611]",
+          "lines": 8
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "612",
+          "suffix": "(18) [612]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "613",
+          "suffix": "(19) [613]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "614",
+          "suffix": "(20) [614]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "615",
+          "suffix": "(21) [615]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "616",
+          "suffix": "(22) [616]",
+          "lines": 4
+        },
+        {
+          "local_label": "23",
+          "publisher_label": "617",
+          "suffix": "(23) [617]",
+          "lines": 4
+        },
+        {
+          "local_label": "24",
+          "publisher_label": "618",
+          "suffix": "(24) [618]",
+          "lines": 4
+        },
+        {
+          "local_label": "25",
+          "publisher_label": "619",
+          "suffix": "(25) [619]",
+          "lines": 4
+        },
+        {
+          "local_label": "26",
+          "publisher_label": "620",
+          "suffix": "(26) [620]",
+          "lines": 4
+        },
+        {
+          "local_label": "27",
+          "publisher_label": "621",
+          "suffix": "(27) [621]",
+          "lines": 4
+        },
+        {
+          "local_label": "28",
+          "publisher_label": "622",
+          "suffix": "(28) [622]",
+          "lines": 4
+        },
+        {
+          "local_label": "29",
+          "publisher_label": "623",
+          "suffix": "(29) [623]",
+          "lines": 4
+        },
+        {
+          "local_label": "30",
+          "publisher_label": "624",
+          "suffix": "(30) [624]",
+          "lines": 4
+        },
+        {
+          "local_label": "31",
+          "publisher_label": "625",
+          "suffix": "(31) [625]",
+          "lines": 4
+        },
+        {
+          "local_label": "32",
+          "publisher_label": "626",
+          "suffix": "(32) [626]",
+          "lines": 4
+        },
+        {
+          "local_label": "33",
+          "publisher_label": "627",
+          "suffix": "(33) [627]",
+          "lines": 4
+        },
+        {
+          "local_label": "34",
+          "publisher_label": "628",
+          "suffix": "(34) [628]",
+          "lines": 4
+        },
+        {
+          "local_label": "35",
+          "publisher_label": "629",
+          "suffix": "(35) [629]",
+          "lines": 4
+        },
+        {
+          "local_label": "36",
+          "publisher_label": "630",
+          "suffix": "(36) [630]",
+          "lines": 4
+        },
+        {
+          "local_label": "37",
+          "publisher_label": "631",
+          "suffix": "(37) [631]",
+          "lines": 4
+        },
+        {
+          "local_label": "38",
+          "publisher_label": "632",
+          "suffix": "(38) [632]",
+          "lines": 4
+        },
+        {
+          "local_label": "39",
+          "publisher_label": "633",
+          "suffix": "(39) [633]",
+          "lines": 4
+        },
+        {
+          "local_label": "40",
+          "publisher_label": "634",
+          "suffix": "(40) [634]",
+          "lines": 4
+        },
+        {
+          "local_label": "41",
+          "publisher_label": "635",
+          "suffix": "(41) [635]",
+          "lines": 4
+        },
+        {
+          "local_label": "42",
+          "publisher_label": "636",
+          "suffix": "(42) [636]",
+          "lines": 4
+        },
+        {
+          "local_label": "43",
+          "publisher_label": "637",
+          "suffix": "(43) [637]",
+          "lines": 4
+        },
+        {
+          "local_label": "44",
+          "publisher_label": "638",
+          "suffix": "(44) [638]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain the independent VRI root and all explicit recension differences; no line alignment or missing words are inferred.",
+        "True complete root8340\u20138478, poem body8340\u20138472, chapter summary8472\u20138478; next chapter/Ku\u1E47\u1E0Dalakes\u01011 begin8478.",
+        "Publisher595\u2013638 has43printed stanza entries, local16-17/global610-611 combined. VRI468\u2013511 is44stanzas.",
+        "Publisher609 calls third daughter Sama\u1E47agutt\u0101 vs VRI482 Bhikkhun\u012B; preserve both. Publisher618 husband not pleased vs VRI491 did not inform husband; publisher628 father vs VRI501 kin.",
+        "Publisher chapter summary declares496stanzas; VRI summary declares509, while final VRI number is511. Do not reconcile these source counts. Summary exists only in PTS per original note27; BJTS omission remains disclosed."
+      ],
+      "index_revision": "apadana-theri11-20-v1",
+      "chapter_summary": {
+        "kind": "canonical_chapter_summary",
+        "label": "Second Ther\u012B Apad\u0101na chapter summary",
+        "parent_id": "thi-ap20",
+        "first_ref": "thi-ap20/48",
+        "last_ref": "thi-ap20/51",
+        "root_start": 8472,
+        "root_end": 8478,
+        "root_sha256": "3986f6f59952c43685b19cc37dc1d1977649e4b36cc5dd1521a2d56b6933ba7c",
+        "body_sha256": "8701c0a6b7b5ea7736dd41f37afef0153653ee7efc8b9b33509ccb4eadacba64",
+        "notes_sha256": "b6f6fec2b446374d7577d5ef365af6a75474404e751b9004fd3041ec9eb988d2",
+        "note_numbers": [
+          27
+        ]
+      }
     }
   });
   var APADANA_RIGHTS = deepFreeze([
@@ -1427,21 +5069,146 @@
     }
   ]);
 
+  // web/milinda-sources.mjs
+  var apadanaProfiles = new Map(Object.values(APADANA_PROFILES).map((profile2) => [
+    "ap:" + profile2.path.replace(/^\/text\/|\/$/g, ""),
+    profile2
+  ]));
+  var units = /* @__PURE__ */ new Map([
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-1-08", { unit: "mil3.1.8", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-1-14", { unit: "mil3.1.15", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-08", { unit: "mil3.3.8", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-9", { unit: "mil3.3.9", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-10", { unit: "mil3.3.10", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-11", { unit: "mil3.3.11", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-12", { unit: "mil3.3.12", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-13", { unit: "mil3.3.13", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-3-14", { unit: "mil3.3.14", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-5-05", { unit: "mil3.5.5", notes: 2 }],
+    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-5-06", { unit: "mil3.5.6", notes: 1 }],
+    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-5-07", { unit: "mil3.5.7", notes: 0 }],
+    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-7-05", { unit: "mil3.7.5", notes: 1 }],
+    ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-7-08", { unit: "mil3.7.8", notes: 0 }]
+  ]);
+  var discourses = /* @__PURE__ */ new Map([
+    ["ati:/tipitaka/sn/sn27/sn27.001-010.than#sn27.005", { unit: "sn27.5", notes: 0, profile: "ati-sn27-feelings-v1" }]
+  ]);
+  var numberedPage = "ati:/tipitaka/an/an01/an01.021-040.than";
+  var legacyNumberedPins = {
+    source_commit: "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    pali_sha256: "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+    text_sha256: "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+    notice_sha256: "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+    scope_sha256: "97589116d588b361438b6ea5db4d27ca2b45d8a77199be466cd6722b7c987ea6"
+  };
+  var numbered = new Map(Array.from({ length: 20 }, (_, i) => {
+    const n = i + 21;
+    return [numberedPage + "#sutta-" + n, { unit: "an1." + n, notes: 0, paragraphs: 1, profile: "ati-an1-ekadhamma-numbered-paragraph-v1", heading: n + "." }];
+  }));
+  var AN_TEN_PROFILE = "ati-an-ten-paragraph-selection-v1";
+  var anTen = /* @__PURE__ */ new Map([
+    ["ati:/tipitaka/an/an01/an01.045-046.than::selection:an1.45", { unit: "an1.45", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an01/an01.045-046.than::selection:an1.46", { unit: "an1.46", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an01/an01.049.than::selection:an1.49", { unit: "an1.49", paragraphs: 1, notes: 1, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an01/an01.049.than::selection:an1.50", { unit: "an1.50", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an01/an01.049.than::selection:an1.51", { unit: "an1.51", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an01/an01.049.than::selection:an1.52", { unit: "an1.52", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an02/an02.031.than::selection:an2.32", { unit: "an2.32", paragraphs: 3, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an02/an02.031.than::selection:an2.33", { unit: "an2.33", paragraphs: 1, notes: 0, anchor: "s32", heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an02/an02.125-126.than::selection:an2.125", { unit: "an2.125", paragraphs: 1, notes: 1, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an02/an02.125-126.than::selection:an2.126", { unit: "an2.126", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }]
+  ]);
+  var legacyAnTen = /* @__PURE__ */ new Map([
+    ["ati:/tipitaka/an/an01/an01.049.than", { "owner_id": "an1.49", "text_ids": ["an1.49", "an1.50", "an1.51", "an1.52"], "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070", "pali_sha256": "5c98023f2f97b51c5ea9ef76b4a031ac9725ec8cecee8fbacc0f2c0ecf3f77a0", "text_sha256": "35182e6e8d3990b8cb6ace20602277a5d409fd45c5a44b9e277ec25995084c60", "notice_sha256": "3b8f3fab868dd8176bb2cce37b9e9437bdca790a6a415a0f67ee589ce099b1fe", "scope_sha256": "bf2fca5a6b857f8cf313ef9f01e7e4d937088d9eb52ba3fb8890d214728f7881" }],
+    ["ati:/tipitaka/an/an01/an01.045-046.than", { "owner_id": "an1.45", "text_ids": ["an1.45", "an1.46"], "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070", "pali_sha256": "3842fa2b62de5f546e83337c603df9bfa49cda6be1092221b102b7ea20cf4005", "text_sha256": "7297c6cf82b7abe3f94ad8e6fdc5e8fc1c03a6b3c896a2a1bcf5fa895bef69fd", "notice_sha256": "c6f4d4898e1844091dabb21aa338b492be115913f2af077c2bd57708890a8bfb", "scope_sha256": "0cf6a057f1c0ded3c569a2e71beece92f0597c1d345c0fdb44df7d5856bd09fe" }],
+    ["ati:/tipitaka/an/an02/an02.031.than", { "owner_id": "an2.32", "text_ids": ["an2.32", "an2.33"], "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070", "pali_sha256": "3f85a870476455991af56f4308b4fc92f73d0931c8cd17e18a171c374abfef96", "text_sha256": "68448c5eba804b236080fbb41641328da982639a295de44058e070ae99bd7495", "notice_sha256": "693ec730c062294a3570512540f883b863bb57f47765b3782199a9a404977d60", "scope_sha256": "8c2314215302c25b00437281a3af46dc4db66599fc1591aebf7e01c9fd80a5de" }],
+    ["ati:/tipitaka/an/an02/an02.125-126.than", { "owner_id": "an2.125", "text_ids": ["an2.125", "an2.126"], "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070", "pali_sha256": "01f88254cf733cc057f51d936a8203e51e447a5c711bfac3c7209ac269f44318", "text_sha256": "a5d4d3d63f2166947cbcb1ccaa12883f6fbd90ef4445c73ff1c4441064eff8ec", "notice_sha256": "d96963652b5b6f051df62ac6a54047af61d5f715b1dd3bcfdab4e62bc0b04de7", "scope_sha256": "af5aba23c950eb6804eb68fd23224ce8eca392a216f5aa5e02b399656a48fa87" }]
+  ]);
+  var sourceProfile = (id5) => units.get(id5) || discourses.get(id5) || numbered.get(id5) || anTen.get(id5);
+  var milindaSourceUnit = (id5) => units.get(id5)?.unit;
+  var numberedSourceUnit = (id5) => numbered.get(id5)?.unit;
+  var anTenSourceUnit = (id5) => anTen.get(id5)?.unit;
+  var sectionSourceUnit = (id5) => sourceProfile(id5)?.unit;
+  function validateSectionIdentity(value) {
+    const id5 = value?.translation_id;
+    if (typeof id5 !== "string") return;
+    let decoded = id5;
+    for (let i = 0; i < 4; i++) {
+      try {
+        const next = decodeURIComponent(decoded);
+        if (next === decoded) break;
+        decoded = next;
+      } catch {
+        break;
+      }
+    }
+    if (/^ati:/i.test(id5.trim()) && id5.includes("%")) throw Error("The source section requires its exact reviewed fragment identity or paragraph-selection identity; encoded aliases are unsupported. No English source was displayed.");
+    const resource = decoded.trim().split(/::|[?#]/, 1)[0].replace(/\.html?$/i, "").toLowerCase();
+    const scope = value.translation_scope;
+    if (id5 === numberedPage && !Object.hasOwn(value, "source_section") && (!Object.hasOwn(value, "whole_unit_coverage") || value.whole_unit_coverage === false) && scope?.kind === "shared_page" && scope.whole_unit_coverage === false && scope.owner_id === "an1.21" && scope.presentation === "compilation" && Array.isArray(scope.text_ids) && scope.text_ids.length === 20 && scope.text_ids.every((unit, i) => unit === "an1." + (i + 21)) && Object.entries(legacyNumberedPins).every(([key4, pin]) => scope[key4] === pin)) return;
+    const legacy = legacyAnTen.get(id5);
+    if (legacy && !Object.hasOwn(value, "source_section") && (!Object.hasOwn(value, "whole_unit_coverage") || value.whole_unit_coverage === false) && scope?.kind === "shared_page" && scope.version === 1 && scope.whole_unit_coverage === false && scope.presentation === "compilation" && scope.condensed === false && scope.individual_alignment_verified === false && Object.entries(legacy).every(([key4, pin]) => Array.isArray(pin) ? Array.isArray(scope[key4]) && scope[key4].length === pin.length && scope[key4].every((unit, i) => unit === pin[i]) : scope[key4] === pin)) return;
+    if ((isSectionPageId(resource) || decoded.includes("::") || /^ati:/i.test(decoded.trim()) && decoded.includes("#")) && !sourceProfile(id5)) throw Error("The source section requires its exact reviewed fragment identity. No English source was displayed.");
+  }
+  function validateSectionDescriptor(value) {
+    validateSectionIdentity(value);
+    const profile2 = sourceProfile(value.translation_id);
+    if (!profile2) return;
+    const section = value.source_section;
+    if (anTen.has(value.translation_id)) {
+      const keys2 = "anchor,first_ref,heading,last_ref,note_count,notes_sha256,notice_sha256,pali_sha256,paragraph_count,profile,section_html_sha256,selection_id,source_commit,status,text_sha256,unit_id,version";
+      const first = profile2.unit === "an1.51" || profile2.unit === "an2.32" ? 2 : 1;
+      const last = profile2.unit === "an2.32" ? 3 : first;
+      const hashes = ["section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256"];
+      if (!section || Object.keys(section).sort().join(",") !== keys2 || section.version !== 1 || section.status !== "reviewed" || section.profile !== AN_TEN_PROFILE || section.unit_id !== profile2.unit || section.selection_id !== profile2.unit || section.anchor !== profile2.anchor || section.heading !== null || section.paragraph_count !== profile2.paragraphs || section.note_count !== profile2.notes || section.source_commit !== legacyAnTen.get(value.translation_id.split("::")[0]).source_commit || !hashes.every((key4) => typeof section[key4] === "string" && /^[a-f0-9]{64}$/.test(section[key4])) || section.first_ref !== profile2.unit + "/" + first || section.last_ref !== profile2.unit + "/" + last) throw Error("The reviewed paragraph-selection descriptor or translator-note count is invalid. No English source was displayed.");
+      return;
+    }
+    if (!section || section.version !== 1 || section.status !== "reviewed" || section.unit_id !== profile2.unit || section.anchor !== value.translation_id.split("#")[1] || section.note_count !== profile2.notes || profile2.profile !== void 0 && section.profile !== profile2.profile || profile2.heading !== void 0 && section.heading !== profile2.heading || profile2.paragraphs !== void 0 && section.paragraph_count !== profile2.paragraphs) throw Error("The reviewed source-section descriptor or translator-note count is invalid. No English source was displayed.");
+  }
+  var isMilindaPageId = (id5) => /^ati:\/tipitaka\/kn\/miln\/miln\.[23]x\.kell$/.test(id5);
+  var isSectionPageId = (id5) => isMilindaPageId(id5) || id5 === "ati:/tipitaka/sn/sn27/sn27.001-010.than" || id5 === numberedPage || legacyAnTen.has(id5);
+  function translatorNotes(data) {
+    validateSectionDescriptor(data);
+    const apadana = apadanaProfiles.get(data.translation_id);
+    if (!Object.hasOwn(data, "translator_notes")) {
+      if (sectionSourceUnit(data.translation_id) || apadana) throw Error("The selected source section is missing its translator-note declaration.");
+      return [];
+    }
+    const notes2 = data.translator_notes;
+    if (!Array.isArray(notes2) || (apadana ? notes2.length !== apadana.note_count : notes2.length > 32) || notes2.some((note2, i) => !note2 || typeof note2 !== "object" || Array.isArray(note2) || Object.keys(note2).sort().join(",") !== "number,text" || note2.number !== (apadana?.note_numbers?.[i] ?? i + 1) || typeof note2.text !== "string" || !note2.text.trim() || note2.text.length > 5e4)) throw Error(apadana ? "The pinned Apad\u0101na translator-note declaration is invalid. No English source was displayed." : "The translator-note declaration is invalid. No English source was displayed.");
+    const profile2 = sourceProfile(data.translation_id);
+    if (profile2 && notes2.length !== profile2.notes) throw Error("The reviewed source-section translator-note count changed. No English source was displayed.");
+    return notes2.map((note2) => ({ number: note2.number, text: note2.text }));
+  }
+
   // web/translation-policy.mjs
   var apadanaId = (uid2) => APADANA_PROFILES[uid2]?.path ? "ap:" + APADANA_PROFILES[uid2].path.replace(/^\/text\/|\/$/g, "") : void 0;
   var apadanaFamily = (id5) => typeof id5 === "string" && /^ap:/i.test(id5.trim());
-  var isApadana = (value) => apadanaFamily(value?.translation_id) || value?.source === "apadana" || value?.source === "Legends of the Buddhist Saints (Apad\u0101na)" || own3(value, "translation_revision") || own3(value, "publisher_paratext") || own3(value, "chapter_summary");
+  var isApadana = (value) => apadanaFamily(value?.translation_id) || value?.source === "apadana" || value?.source === "Legends of the Buddhist Saints (Apad\u0101na)" || own3(value, "translation_revision") || own3(value, "publisher_paratext") || own3(value, "chapter_summary") || own3(value, "publisher_divisions");
+  function sameParatext(value, expected, content) {
+    if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+    const { text: text11, translator_notes, ...descriptor } = value;
+    return sameScope(descriptor, expected) && (content ? nonempty(text11) && text11.length <= 5e4 && Array.isArray(translator_notes) && translator_notes.length === expected.note_numbers.length && translator_notes.every((n, i) => n && typeof n === "object" && !Array.isArray(n) && Object.keys(n).sort().join(",") === "number,text" && n.number === expected.note_numbers[i] && nonempty(n.text) && n.text.length <= 5e4) : !own3(value, "text") && !own3(value, "translator_notes"));
+  }
   function validateChapterSummary(value, uid2, content = false) {
     const expected = APADANA_PROFILES[uid2]?.chapter_summary;
     if (!expected) {
       if (own3(value, "chapter_summary")) throw Error("The pinned Apad\u0101na chapter-summary owner changed.");
       return;
     }
-    const summary = value.chapter_summary;
-    if (!summary || typeof summary !== "object" || Array.isArray(summary)) throw Error("The pinned Apad\u0101na chapter-summary declaration is missing.");
-    const { text: text11, translator_notes, ...descriptor } = summary;
-    if (!sameScope(descriptor, expected) || !content && (own3(summary, "text") || own3(summary, "translator_notes")) || content && (!nonempty(text11) || text11.length > 5e4 || !Array.isArray(translator_notes) || translator_notes.length !== 1 || translator_notes.some((n) => !n || Object.keys(n).sort().join(",") !== "number,text" || n.number !== 8 || !nonempty(n.text) || n.text.length > 5e4))) {
+    if (!sameParatext(value.chapter_summary, expected, content)) {
       throw Error("The pinned Apad\u0101na chapter-summary scope or note ownership changed.");
+    }
+  }
+  function validatePublisherDivisions(value, uid2, content = false) {
+    const expected = APADANA_PROFILES[uid2]?.publisher_divisions;
+    if (!expected) {
+      if (own3(value, "publisher_divisions")) throw Error("The pinned Apad\u0101na publisher-division owner changed.");
+      return;
+    }
+    const divisions = value.publisher_divisions;
+    if (!Array.isArray(divisions) || divisions.length !== expected.length || divisions.some((division, i) => !sameParatext(division, expected[i], content))) {
+      throw Error("The pinned Apad\u0101na publisher-division scope or note ownership changed.");
     }
   }
   function validateApadanaChoice(value, uid2, content = false) {
@@ -1451,6 +5218,7 @@
       throw Error("The pinned Apad\u0101na source identity or terms changed. No English source was displayed.");
     }
     validateChapterSummary(value, uid2, content);
+    validatePublisherDivisions(value, uid2, content);
   }
   var own3 = (value, key4) => value && Object.hasOwn(value, key4);
   var nonempty = (value) => typeof value === "string" && value.trim().length > 0;
@@ -1521,7 +5289,7 @@
     validateApadanaChoice(choice, context.uid);
     if (isApadana(choice) || isApadana(data) || apadanaFamily(args.translation)) {
       validateApadanaChoice(data, context.uid, true);
-      if (!isApadana(choice) || !isApadana(data) || args.translation !== choice.translation_id || args.translation_revision !== APADANA_COMMIT || data.source !== "apadana" || ["raw_sha256", "body_sha256", "notes_sha256", "paratext_sha256", "root_sha256"].some((key4) => data[key4] !== APADANA_PROFILES[context.uid][key4]) || data.fetched_url !== APADANA_PROFILES[context.uid].raw_url || data.license_url !== APADANA_LICENSE_URL || !nonempty(data.changes) || data.changes.length > 2e3 || typeof data.publisher_paratext !== "string" || data.publisher_paratext.length > 5e4 || Boolean(data.publisher_paratext.trim()) !== (context.uid === "thi-ap1") || !Array.isArray(data.translator_notes) || data.translator_notes.length !== APADANA_PROFILES[context.uid].note_count || offset > 0 && (!sha(args.prefix_sha256) || data.prefix_sha256 !== args.prefix_sha256)) {
+      if (!isApadana(choice) || !isApadana(data) || args.translation !== choice.translation_id || args.translation_revision !== APADANA_COMMIT || data.source !== "apadana" || ["raw_sha256", "body_sha256", "notes_sha256", "paratext_sha256", "root_sha256"].some((key4) => data[key4] !== APADANA_PROFILES[context.uid][key4]) || data.fetched_url !== APADANA_PROFILES[context.uid].raw_url || data.license_url !== APADANA_LICENSE_URL || !nonempty(data.changes) || data.changes.length > 2e3 || typeof data.publisher_paratext !== "string" || data.publisher_paratext.length > 5e4 || Boolean(data.publisher_paratext.trim()) !== (APADANA_PROFILES[context.uid].paratext_sha256 !== "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855") || !Array.isArray(data.translator_notes) || data.translator_notes.length !== APADANA_PROFILES[context.uid].note_count || offset > 0 && (!sha(args.prefix_sha256) || data.prefix_sha256 !== args.prefix_sha256)) {
         throw Error("The pinned Apad\u0101na source response does not match its reviewed identity. No English was displayed.");
       }
     }
@@ -4184,6 +7952,24 @@
     section.append(list);
     target.append(section);
   }
+  function publisherDivisions(data, target, level) {
+    for (const division of data.publisher_divisions || []) {
+      const section = el("section");
+      section.setAttribute("aria-label", "Publisher recitation division \xB7 not poem text");
+      section.append(el("h" + level, "Publisher recitation division \xB7 not poem text"), el("p", division.label), el("p", division.text, "translation"));
+      section.append(el("p", "The publisher places this division before local stanza " + division.before_local_label + " (publisher stanza " + division.before_publisher_label + "). It is separate from the poem wording."));
+      section.append(el("h" + level, "Recitation notes \xB7 editorial, not poem notes"));
+      const list = el("ol");
+      for (const note2 of division.translator_notes) {
+        const item = el("li");
+        item.value = note2.number;
+        item.append(el("p", note2.text, "translator-note"));
+        list.append(item);
+      }
+      section.append(list);
+      target.append(section);
+    }
+  }
   function provenance(data, target = view) {
     const box = el("section", void 0, "provenance");
     box.setAttribute("aria-label", "Source attribution");
@@ -5390,6 +9176,7 @@
           translatorNoteSection(data, content, 5);
           publisherParatext(data, content, 5);
           chapterSummary(data, content, 5);
+          publisherDivisions(data, content, 5);
           provenance(data, content);
           body.replaceChildren(content);
           progress.textContent = "English characters " + (data.offset + 1) + "\u2013" + (data.offset + data.text.length) + (next ? " \xB7 more pages available" : " \xB7 end of this source");
@@ -5461,6 +9248,7 @@
       translatorNoteSection(data, target, 4);
       publisherParatext(data, target, 4);
       chapterSummary(data, target, 4);
+      publisherDivisions(data, target, 4);
       provenance(data, target);
       if (next) target.append(button("Next English page \u2192", () => englishPage(next, token, context)));
       target.append(button("Reload passage and review sources", render));

@@ -1,3 +1,10 @@
+import { APADANA_PROFILES } from '../src/apadana-profiles.mjs';
+
+/** Only exact pinned poem IDs can use their finite, possibly sparse note sequence. */
+const apadanaProfiles = new Map(Object.values(APADANA_PROFILES).map(profile => [
+  'ap:' + profile.path.replace(/^\/text\/|\/$/g, ''), profile,
+]));
+
 /** Finite reviewed publisher section identities; no source bodies or rights approval. */
 const units = new Map([
   ['ati:/tipitaka/kn/miln/miln.2x.kell#miln-2-1-08', {unit: 'mil3.1.8', notes: 0}],
@@ -103,12 +110,13 @@ export const isSectionPageId = id => isMilindaPageId(id) || id === 'ati:/tipitak
 /** Preserve owned note numbers and exact plain text separately from the question. */
 export function translatorNotes(data) {
   validateSectionDescriptor(data);
+  const apadana = apadanaProfiles.get(data.translation_id);
   if (!Object.hasOwn(data, 'translator_notes')) {
-    if (sectionSourceUnit(data.translation_id)) throw Error('The selected source section is missing its translator-note declaration.');
+    if (sectionSourceUnit(data.translation_id) || apadana) throw Error('The selected source section is missing its translator-note declaration.');
     return [];
   }
   const notes = data.translator_notes;
-  if (!Array.isArray(notes) || notes.length > 32 || notes.some((note, i) => !note || typeof note !== 'object' || Array.isArray(note) || Object.keys(note).sort().join(',') !== 'number,text' || note.number !== i + 1 || typeof note.text !== 'string' || !note.text.trim() || note.text.length > 50000)) throw Error('The translator-note declaration is invalid. No English source was displayed.');
+  if (!Array.isArray(notes) || (apadana ? notes.length !== apadana.note_count : notes.length > 32) || notes.some((note, i) => !note || typeof note !== 'object' || Array.isArray(note) || Object.keys(note).sort().join(',') !== 'number,text' || note.number !== (apadana?.note_numbers?.[i] ?? i + 1) || typeof note.text !== 'string' || !note.text.trim() || note.text.length > 50000)) throw Error(apadana ? 'The pinned Apadāna translator-note declaration is invalid. No English source was displayed.' : 'The translator-note declaration is invalid. No English source was displayed.');
   const profile = sourceProfile(data.translation_id);
   if (profile && notes.length !== profile.notes) throw Error('The reviewed source-section translator-note count changed. No English source was displayed.');
   return notes.map(note => ({number: note.number, text: note.text}));

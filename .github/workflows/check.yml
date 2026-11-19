@@ -78,9 +78,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh, milinda, draftsafety, annumbered, milindapartial, anten, apadana, textspacing]
+        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh, milinda, draftsafety, annumbered, milindapartial, anten, apadana, apadananext, textspacing]
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety' || matrix.group == 'milinda' || matrix.group == 'annumbered' || matrix.group == 'milindapartial' || matrix.group == 'anten' || matrix.group == 'apadana' || matrix.group == 'textspacing') && 20 || 10 }}
+    timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety' || matrix.group == 'milinda' || matrix.group == 'annumbered' || matrix.group == 'milindapartial' || matrix.group == 'anten' || matrix.group == 'apadana' || matrix.group == 'apadananext' || matrix.group == 'textspacing') && 20 || 10 }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -442,7 +442,7 @@ jobs:
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-an-ten-selection-check.py --server-dir "$RUNNER_TEMP/an-ten-selection-package/package/server" --report installed-an-ten-selection.report.json
       # Public immutable source fixtures are temporary job inputs, never package content/artifacts.
       - name: Check out exact public Apadāna source fixtures without credentials
-        if: matrix.group == 'apadana'
+        if: matrix.group == 'apadana' || matrix.group == 'apadananext'
         uses: actions/checkout@v4
         with:
           repository: apadana-translation/apadana-site
@@ -467,6 +467,16 @@ jobs:
             src/_poems/chapter-4/poem-008.md
             src/_poems/chapter-4/poem-009.md
             src/_poems/chapter-4/poem-010.md
+            src/_poems/chapter-4/poem-011.md
+            src/_poems/chapter-4/poem-012.md
+            src/_poems/chapter-4/poem-013.md
+            src/_poems/chapter-4/poem-014.md
+            src/_poems/chapter-4/poem-015.md
+            src/_poems/chapter-4/poem-016.md
+            src/_poems/chapter-4/poem-017.md
+            src/_poems/chapter-4/poem-018.md
+            src/_poems/chapter-4/poem-019.md
+            src/_poems/chapter-4/poem-020.md
       - name: Validate all Apadāna source and rights pins before browser retrieval
         if: matrix.group == 'apadana'
         run: node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
@@ -495,6 +505,24 @@ jobs:
       - name: Check repaired Apadāna and summary from isolated npm package
         if: matrix.group == 'apadana'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-three-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-package/package/server" --report installed-apadana-three.report.json
+      - name: Validate next Apadāna chapter source rights and refusal cases
+        if: matrix.group == 'apadananext'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-next.test.mjs tests/apadana-next-client.test.mjs tests/apadana-next-boundaries.test.mjs
+      - name: Check next Apadāna chapter with pinned publisher edition
+        if: matrix.group == 'apadananext'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-next-check.py --source-root .fixtures/apadana-pinned --report standalone-apadana-next.report.json
+      - name: Audit next Apadāna chapter notes and recitation ownership
+        if: matrix.group == 'apadananext'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-next-check.py --source-root .fixtures/apadana-pinned --a11y --report standalone-apadana-next-a11y.report.json
+      - name: Check next Apadāna chapter from isolated npm package
+        if: matrix.group == 'apadananext'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadana-next-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadana-next-package"
+          tar -xzf "$RUNNER_TEMP/apadana-next-package/"*.tgz -C "$RUNNER_TEMP/apadana-next-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-next-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-next-package/package/server" --report installed-apadana-next.report.json
       - name: Check reader reflow with expanded user text spacing
         if: matrix.group == 'textspacing'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-text-spacing-check.py --report standalone-text-spacing.report.json
@@ -643,6 +671,9 @@ jobs:
             standalone-apadana-three.report.json
             standalone-apadana-three-a11y.report.json
             installed-apadana-three.report.json
+            standalone-apadana-next.report.json
+            standalone-apadana-next-a11y.report.json
+            installed-apadana-next.report.json
             standalone-text-spacing.report.json
             standalone-text-spacing-a11y.report.json
             installed-text-spacing.report.json

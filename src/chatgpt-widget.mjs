@@ -25,7 +25,7 @@ import { getCommentary } from './commentary.mjs';
 import { HostedToolError } from './hosted-tool-error.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v18';
+export const WIDGET_VERSION = 'v19';
 // Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.
 export const NAVIGATION_TIMEOUT_MS = 90000;
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
@@ -37,6 +37,8 @@ const APADANA_PINS = ['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha
 const WIDGET_APADANA = Object.fromEntries(Object.entries(APADANA_PROFILES).map(([id, p]) => [id, {
   translation_id: canon.translationId(p), url: p.url, fetched_url: p.raw_url, note_count: p.note_count,
   ...(p.chapter_summary ? { chapter_summary: p.chapter_summary } : {}),
+  ...(p.publisher_divisions ? { publisher_divisions: p.publisher_divisions } : {}),
+  ...(p.note_numbers ? { note_numbers: p.note_numbers } : {}),
   ...Object.fromEntries(APADANA_PINS.map(key => [key, p[key]])),
 }]));
 
@@ -230,7 +232,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
       result.english = {
         translator: t.translator, translation_id: t.translation_id, source: t.source, url: t.url,
         reference: (canon.describe(unit).english.find((e) => e.translation_id === t.translation_id) || {}).reference,
-        ...(t.translation_revision ? { translation_revision: t.translation_revision, translator_notes: t.translator_notes, publisher_paratext: t.publisher_paratext, ...(t.chapter_summary ? { chapter_summary: t.chapter_summary } : {}), license_url: t.license_url, changes: t.changes, fetched_url: t.fetched_url, ...Object.fromEntries(APADANA_PINS.map(key => [key, t[key]])) } : {}),
+        ...(t.translation_revision ? { translation_revision: t.translation_revision, translator_notes: t.translator_notes, publisher_paratext: t.publisher_paratext, ...(t.chapter_summary ? { chapter_summary: t.chapter_summary } : {}), ...(t.publisher_divisions ? { publisher_divisions: t.publisher_divisions } : {}), license_url: t.license_url, changes: t.changes, fetched_url: t.fetched_url, ...Object.fromEntries(APADANA_PINS.map(key => [key, t[key]])) } : {}),
         fetched_from: t.fetched_from, attribution: t.attribution, license: t.license,
         text: t.text, prefix_sha256: t.prefix_sha256, offset: t.offset, total_characters: t.total_characters, next_offset: t.next_offset, truncated: t.next_offset !== null, notes: t.notes,
         read_with: { name: WIDGET_TOOL, arguments: { uid: unit.id, source_commit: result.source.locator_revision || vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.offset, ...(t.translation_revision ? { english_translation_revision: t.translation_revision } : {}), ...(t.offset > 0 ? { english_prefix_sha256: t.prefix_sha256 } : {}), ...(script ? { script: scriptName(script) } : {}) } },
@@ -600,21 +602,31 @@ export const WIDGET_HTML = `<!doctype html>
     var s = e.chapter_summary, expected = p.chapter_summary;
     return s && typeof s === 'object' && !Array.isArray(s) && Object.keys(s).sort().join(',') === Object.keys(expected).concat(['text', 'translator_notes']).sort().join(',') &&
       Object.keys(expected).every(function (key) { return JSON.stringify(s[key]) === JSON.stringify(expected[key]); }) &&
-      typeof s.text === 'string' && s.text.trim() && s.text.length <= 50000 && Array.isArray(s.translator_notes) && s.translator_notes.length === 1 &&
-      s.translator_notes.every(function (n) { return n && Object.keys(n).sort().join(',') === 'number,text' && n.number === 8 && typeof n.text === 'string' && n.text.trim() && n.text.length <= 50000; });
+      typeof s.text === 'string' && s.text.trim() && s.text.length <= 50000 && Array.isArray(s.translator_notes) && s.translator_notes.length === expected.note_numbers.length &&
+      s.translator_notes.every(function (n, i) { return n && Object.keys(n).sort().join(',') === 'number,text' && n.number === expected.note_numbers[i] && typeof n.text === 'string' && n.text.trim() && n.text.length <= 50000; });
+  }
+  function checkedPublisherDivisions(e, p) {
+    if (!p.publisher_divisions) return !Object.prototype.hasOwnProperty.call(e, 'publisher_divisions');
+    return Array.isArray(e.publisher_divisions) && e.publisher_divisions.length === p.publisher_divisions.length && e.publisher_divisions.every(function (s, i) {
+      var expected = p.publisher_divisions[i];
+      return s && typeof s === 'object' && !Array.isArray(s) && Object.keys(s).sort().join(',') === Object.keys(expected).concat(['text', 'translator_notes']).sort().join(',') &&
+        Object.keys(expected).every(function (key) { return JSON.stringify(s[key]) === JSON.stringify(expected[key]); }) &&
+        typeof s.text === 'string' && s.text.trim() && s.text.length <= 50000 && Array.isArray(s.translator_notes) && s.translator_notes.length === expected.note_numbers.length &&
+        s.translator_notes.every(function (n, j) { return n && Object.keys(n).sort().join(',') === 'number,text' && n.number === expected.note_numbers[j] && typeof n.text === 'string' && n.text.trim() && n.text.length <= 50000; });
+    });
   }
   function checkedApadana(d) {
-    var e = d.english, checked = e && (e.source === 'apadana' || Object.prototype.hasOwnProperty.call(e, 'chapter_summary') || typeof e.translation_revision !== 'undefined' || typeof e.translation_id === 'string' && e.translation_id.toLowerCase().indexOf('ap:') === 0 || typeof e.url === 'string' && e.url.indexOf('${APADANA_BASE}/') === 0);
+    var e = d.english, checked = e && (e.source === 'apadana' || Object.prototype.hasOwnProperty.call(e, 'chapter_summary') || Object.prototype.hasOwnProperty.call(e, 'publisher_divisions') || typeof e.translation_revision !== 'undefined' || typeof e.translation_id === 'string' && e.translation_id.toLowerCase().indexOf('ap:') === 0 || typeof e.url === 'string' && e.url.indexOf('${APADANA_BASE}/') === 0);
     if (!checked) return d;
     var profiles = ${JSON.stringify(WIDGET_APADANA)}, p = Object.prototype.hasOwnProperty.call(profiles, d.text_id) && profiles[d.text_id];
     if (p && e.source === 'apadana' && e.translation_id === p.translation_id && e.url === p.url && e.fetched_url === p.fetched_url &&
         e.translation_revision === '${APADANA_COMMIT}' && e.license === '${APADANA_LICENSE}' && e.license_url === '${APADANA_LICENSE_URL}' &&
         e.translator === '${APADANA_TRANSLATOR}' && typeof e.attribution === 'string' && e.attribution.trim() &&
         typeof e.text === 'string' && e.text.trim() && typeof e.changes === 'string' && e.changes.trim() &&
-        typeof e.publisher_paratext === 'string' && e.publisher_paratext.length <= 50000 && Boolean(e.publisher_paratext.trim()) === (d.text_id === 'thi-ap1') &&
+        typeof e.publisher_paratext === 'string' && e.publisher_paratext.length <= 50000 && Boolean(e.publisher_paratext.trim()) === (p.paratext_sha256 !== 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855') &&
         Array.isArray(e.translator_notes) && e.translator_notes.length === p.note_count &&
-        e.translator_notes.every(function (note, i) { return note && note.number === i + 1 && typeof note.text === 'string' && note.text.length <= 50000 && note.text.trim(); }) &&
-        checkedChapterSummary(e, p) && ${JSON.stringify(APADANA_PINS)}.every(function (key) { return e[key] === p[key]; })) return d;
+        e.translator_notes.every(function (note, i) { return note && Object.keys(note).sort().join(',') === 'number,text' && note.number === (p.note_numbers ? p.note_numbers[i] : i + 1) && typeof note.text === 'string' && note.text.length <= 50000 && note.text.trim(); }) &&
+        checkedChapterSummary(e, p) && checkedPublisherDivisions(e, p) && ${JSON.stringify(APADANA_PINS)}.every(function (key) { return e[key] === p[key]; })) return d;
     return Object.assign({}, d, { english: null, english_error: 'Apadāna publisher identity, terms or source pins changed. No English was displayed.' });
   }
   function render(d) {
@@ -699,6 +711,16 @@ export const WIDGET_HTML = `<!doctype html>
           s.translator_notes.forEach(function (n) { var li = el('li', '', n.text); li.value = n.number; summaryNotes.appendChild(li); });
           chapter.appendChild(summaryNotes); en.appendChild(chapter);
         }
+        (d.english.publisher_divisions || []).forEach(function (s) {
+          var section = el('section', ''); section.setAttribute('aria-label', 'Publisher recitation division · not poem text');
+          section.appendChild(el('h3', '', 'Publisher recitation division · not poem text'));
+          section.appendChild(el('p', 'note', 'Before publisher local stanza ' + s.before_local_label + ', printed global label ' + s.before_publisher_label + '.'));
+          section.appendChild(el('p', 'en', s.text));
+          section.appendChild(el('h3', '', 'Recitation notes · editorial, not poem notes'));
+          var divisionNotes = el('ol', '');
+          s.translator_notes.forEach(function (n) { var li = el('li', '', n.text); li.value = n.number; divisionNotes.appendChild(li); });
+          section.appendChild(divisionNotes); en.appendChild(section);
+        });
       }
       if (d.english.truncated) en.appendChild(el('p', 'note', 'The translation continues (' + characterPosition(d.english.next_offset, d.english.total_characters) + '). Ask for more to continue, or read the rest on the source page.'));
     } else {

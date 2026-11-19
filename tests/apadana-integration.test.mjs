@@ -27,8 +27,8 @@ test('per-poem edition disclosures identify the independently reviewed VRI diffe
   }
 });
 
-test('ten individually reviewed whole Apadāna mappings and exact publisher URLs', () => {
-  const expected = Array.from({length:10},(_,i)=>i+1);
+test('twenty individually reviewed whole Apadāna mappings and exact publisher URLs', () => {
+  const expected = Array.from({length:20},(_,i)=>i+1);
   const actual = Object.entries(canon.load().translations)
     .filter(([, links]) => links.some(l => l.source === 'apadana')).map(([key]) => key);
   assert.deepEqual(actual, expected.map(n => 'thi-ap' + n));
@@ -48,7 +48,7 @@ test('ten individually reviewed whole Apadāna mappings and exact publisher URLs
 test('Apadāna refuses unreviewed URLs, redirects, changed bytes and unpinned continuations', async () => {
   const request = [];
   globalThis.fetch = async (url) => { request.push(url.href); return new Response(null, {status: 302, headers: {location: 'https://www.dhammatalks.org/suttas/MN/MN10.html'}}); };
-  for (const url of [profile.url, profile.raw_url.replace(APADANA_COMMIT, 'main'), profile.raw_url.replace('001', '011'), profile.raw_url + '?v=1']) {
+  for (const url of [profile.url, profile.raw_url.replace(APADANA_COMMIT, 'main'), profile.raw_url.replace('001', '021'), profile.raw_url + '?v=1']) {
     await assert.rejects(fetchPublic(url, { json: false }), /outside the supported/);
   }
   assert.deepEqual(request, []);

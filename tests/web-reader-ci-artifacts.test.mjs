@@ -68,7 +68,7 @@ test('Apadāna browser CI uses a pinned public fixture without persisted credent
  assert.match(fixture,/persist-credentials: false/);
  assert.match(fixture,/sparse-checkout-cone-mode: false/);
  const files=[...fixture.matchAll(/^            (.+)$/gm)].map(match=>match[1]);
- assert.deepEqual(files,['LICENSE.md','src/_pages/about.md','src/_includes/site/footer.njk','src/_includes/layouts/epub-metadata.xml','src/_data/site.json','src/_poems/_poems.json',...Array.from({length:10},(_,i)=>i+1).map(n=>'src/_poems/chapter-4/poem-'+String(n).padStart(3,'0')+'.md')]);
+ assert.deepEqual(files,['LICENSE.md','src/_pages/about.md','src/_includes/site/footer.njk','src/_includes/layouts/epub-metadata.xml','src/_data/site.json','src/_poems/_poems.json',...Array.from({length:20},(_,i)=>i+1).map(n=>'src/_poems/chapter-4/poem-'+String(n).padStart(3,'0')+'.md')]);
  const steps=[...source.matchAll(/if: matrix\.group == 'apadana'([^]*?)(?=\n      -|$)/g)].map(match=>match[1]).join('\n');
  assert.match(steps,/node scripts\/apadana\/build\.mjs --source \.fixtures\/apadana-pinned --check/);
  assert.equal((steps.match(/python scripts\/web-reader-apadana-check\.py --source-root \.fixtures\/apadana-pinned/g)||[]).length,3);
@@ -77,4 +77,14 @@ test('Apadāna browser CI uses a pinned public fixture without persisted credent
  assert.doesNotMatch(steps,/--live|https:\/\/apadanatranslation\.com|curl |wget /);
  const paths=source.split('          path: |')[1].split('          if-no-files-found:')[0];
  assert.doesNotMatch(paths,/fixtures|poem-|\.md|apadana-site/,'only metadata reports are uploaded, never source fixtures');
+});
+
+
+test('next Apadāna chapter has independent bounded source acceptance and retained reports',()=>{
+ const source=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');
+ assert.match(source,/group:[^\n]*apadananext/);assert.match(source,/matrix\.group == 'apadananext'[^\n]*20/);
+ const steps=[...source.matchAll(/if: matrix\.group == 'apadananext'([^]*?)(?=\n      -|$)/g)].map(m=>m[1]).join('\n');
+ assert.equal((steps.match(/python scripts\/web-reader-apadana-next-check\.py --source-root \.fixtures\/apadana-pinned/g)||[]).length,3);
+ assert.match(steps,/node --test tests\/apadana-next\.test\.mjs tests\/apadana-next-client\.test\.mjs tests\/apadana-next-boundaries\.test\.mjs/);
+ assert.doesNotMatch(steps,/--live|curl |wget |https:\/\/apadanatranslation\.com/);
 });
