@@ -1,0 +1,272 @@
+{
+  "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "root_source": {
+    "file": "s0510m1.mul.xml",
+    "git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+    "xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "xml_bytes": 2464074
+  },
+  "commentary_source": {
+    "file": "s0510a.att.xml",
+    "git_blob_sha1": "d5a3b791ac751f0a8e9c1e96c6877ea20a983917",
+    "xml_sha256": "d9ebdd764860f2f0750a8829ad8a4cc60bf4d1c96ac5c8f01e23db2bfee08faa",
+    "xml_bytes": 2838750
+  },
+  "root_book_blocks_sha256": "bce212d970603cb0ef7fbebbc4b78de5538377f8fbf7e451b1a4487c97753d44",
+  "commentary_book_blocks_sha256": "4c775abede5fee87eced40a0a93b20e80127cf61822d0292814ddd88fe7f4acc",
+  "input_canon_sha256": "447ea6af978c88aadd203a5aea29a9fa87e47780353e27b83e7fb3fb65890e21",
+  "input_commentary_sha256": "a4efb9cd51d1092530cdf6f4e67907ac2dee965e3816af28a83c5f10c0e7d536",
+  "changed_spans": [
+    "tha-ap19",
+    "tha-ap20",
+    "tha-ap23",
+    "tha-ap24"
+  ],
+  "commentary_changes": {
+    "tha-ap19": {
+      "before": [
+        8915,
+        8916,
+        8917,
+        8918
+      ],
+      "after": [
+        8915,
+        8916,
+        8917
+      ]
+    }
+  },
+  "units": {
+    "tha-ap19": {
+      "before": {
+        "id": "tha-ap19",
+        "book": 36,
+        "start": 2322,
+        "end": 2364,
+        "title": "Upasenavaṅgantaputtattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 19",
+        "vri": "86–97",
+        "pts": {
+          "volume": 1,
+          "page": 61,
+          "end_page": 63
+        }
+      },
+      "after": {
+        "id": "tha-ap19",
+        "book": 36,
+        "start": 2322,
+        "end": 2360,
+        "title": "Upasenavaṅgantaputtattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 19",
+        "vri": "86–96",
+        "pts": {
+          "volume": 1,
+          "page": 61,
+          "end_page": 62
+        },
+        "index_revision": "apadana-thera11-30-v1"
+      },
+      "root_blocks_sha256": "bb9c6e1228ddbcdb37a9684ba1e7f4027530b88187fbf1fdc9bb5eb5c251e367",
+      "root_sha256": "bedb9a1b62717941fb7a6eb1790e2d1b260db21f45cb0c084ffc0d4661310505"
+    },
+    "tha-ap20": {
+      "before": {
+        "id": "tha-ap20",
+        "book": 36,
+        "start": 2364,
+        "end": 2408,
+        "title": "Raṭṭhapālattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 20",
+        "vri": "98–111",
+        "pts": {
+          "volume": 1,
+          "page": 63,
+          "end_page": 64
+        }
+      },
+      "after": {
+        "id": "tha-ap20",
+        "book": 36,
+        "start": 2360,
+        "end": 2408,
+        "title": "Raṭṭhapālattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 20",
+        "vri": "97–111",
+        "pts": {
+          "volume": 1,
+          "page": 62,
+          "end_page": 64
+        },
+        "index_revision": "apadana-thera11-30-v1"
+      },
+      "root_blocks_sha256": "875dc7f991f99f8ce735ca30fd41d2e48ea3f5a62392d0fe7de00723ce5879e4",
+      "root_sha256": "9ea073a89739013aa0cb8a36046c822cfd1692525717476cf0c38c66b9bb203b"
+    },
+    "tha-ap23": {
+      "before": {
+        "id": "tha-ap23",
+        "book": 36,
+        "start": 2507,
+        "end": 2671,
+        "title": "Subhūtittheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 23",
+        "vri": "1–52",
+        "pts": {
+          "volume": 1,
+          "page": 66,
+          "end_page": 70
+        }
+      },
+      "after": {
+        "id": "tha-ap23",
+        "book": 36,
+        "start": 2507,
+        "end": 2667,
+        "title": "Subhūtittheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 23",
+        "vri": "1–51",
+        "pts": {
+          "volume": 1,
+          "page": 66,
+          "end_page": 70
+        },
+        "index_revision": "apadana-thera11-30-v1"
+      },
+      "root_blocks_sha256": "a1f2dbd5929abc9e4455c35f0feea5d7e0c588b4a9f4c4a62d7ea5da93574d2f",
+      "root_sha256": "a68bdbe0e1cc8e5f810b17a903fe234a02430782db85d0481f796f9e26dadd1e"
+    },
+    "tha-ap24": {
+      "before": {
+        "id": "tha-ap24",
+        "book": 36,
+        "start": 2671,
+        "end": 2834,
+        "title": "Upavānattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 24",
+        "vri": "53–105",
+        "pts": {
+          "volume": 1,
+          "page": 70,
+          "end_page": 74
+        }
+      },
+      "after": {
+        "id": "tha-ap24",
+        "book": 36,
+        "start": 2667,
+        "end": 2834,
+        "title": "Upavānattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 24",
+        "vri": "52–105",
+        "pts": {
+          "volume": 1,
+          "page": 70,
+          "end_page": 74
+        },
+        "index_revision": "apadana-thera11-30-v1"
+      },
+      "root_blocks_sha256": "6fdb7834305d2e2c0c0d57718106e098f36b6828572b4e8cbd573e1f686799d4",
+      "root_sha256": "abe4d1bc9f57a0f187efd0f0d18247113d641a912ad1d6b7854f845194c75a4d"
+    }
+  },
+  "commentary": {
+    "accepted_book_passages_checked": 588,
+    "root_segments_checked": [
+      [
+        0,
+        2050
+      ],
+      [
+        2050,
+        2509
+      ],
+      [
+        3116,
+        3482
+      ],
+      [
+        5154,
+        5380
+      ],
+      [
+        6836,
+        7008
+      ],
+      [
+        7221,
+        7426
+      ],
+      [
+        8111,
+        8249
+      ],
+      [
+        8399,
+        8552
+      ],
+      [
+        9048,
+        9228
+      ],
+      [
+        9228,
+        9426
+      ],
+      [
+        9426,
+        9769
+      ],
+      [
+        12894,
+        14045
+      ]
+    ],
+    "removed_false_association": {
+      "unit": "tha-ap19",
+      "passage": 8918
+    },
+    "preserved_correct_owner": {
+      "unit": "tha-ap20",
+      "passages": [
+        8918,
+        8919,
+        8920,
+        8921
+      ]
+    },
+    "passage": [
+      28,
+      2237,
+      2294,
+      36,
+      97,
+      98,
+      10,
+      8,
+      "paragraph+lemma",
+      2050,
+      2509
+    ],
+    "passage_blocks_sha256": "f6f2ded977e3bff57bc85b6a64f32404e08a289466aca751c9416f9e5158fb1f"
+  },
+  "preserved": [
+    "all canon/commentary source books, blocks and wording",
+    "all passage identities and evidence",
+    "all unrelated canonical units and associations",
+    "all earlier Therī source locators",
+    "all coverage counters",
+    "private data (not accessed)"
+  ],
+  "output_canon_sha256": "529d5f8a0812ca16c29c011abba04874c2529a641fd76c2fb85d6feebdbc5234",
+  "output_commentary_sha256": "8b9c055181913097bb37cbe0046e8c64efcabea884aad49d272a424cd1207461"
+}

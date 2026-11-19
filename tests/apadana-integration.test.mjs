@@ -31,7 +31,7 @@ test('forty individually reviewed whole Apadāna mappings and exact publisher UR
   const expected = Array.from({length:40},(_,i)=>i+1);
   const actual = Object.entries(canon.load().translations)
     .filter(([, links]) => links.some(l => l.source === 'apadana')).map(([key]) => key);
-  assert.deepEqual(actual, expected.map(n => 'thi-ap' + n));
+  assert.deepEqual(actual, [...expected.map(n => 'thi-ap' + n),...Array.from({length:20},(_,i)=>'tha-ap'+(i+13))]);
   for (const n of expected) {
     const owner = 'thi-ap' + n, url = APADANA_PROFILES[owner].url;
     assert.equal(canon.resolve(url).unit.id, owner);
@@ -120,7 +120,7 @@ test('optional pinned publisher bytes reach reading, continuation and quotation 
   globalThis.fetch = async url => {
     const selected = Object.values(APADANA_PROFILES).find(p => p.raw_url === url.href);
     assert.ok(selected, 'No unreviewed source fetch');
-    return new Response(readFileSync(join(official, 'src/_poems/chapter-4/poem-' + String(selected.poem).padStart(3, '0') + '.md')));
+    return new Response(readFileSync(join(official, 'src/_poems/' + (selected.publisher_chapter || 'chapter-4') + '/poem-' + String(selected.poem).padStart(3, '0') + '.md')));
   };
   for (const [owner, selected] of Object.entries(APADANA_PROFILES)) {
     const result = await english.translation(canon.resolve(owner).unit, canon.translationId(selected));

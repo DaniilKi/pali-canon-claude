@@ -20,7 +20,7 @@ function fixture(){return `${begin}<div class="chapter">${Array.from({length:24}
 function install(){const d=canon.load();saved||=d.translations;const link={...structuredClone(d.translations.mn54[0]),path:'/tipitaka/mn/synthetic-dream-fixture',url:'https://accesstoinsight.org/tipitaka/mn/synthetic-dream-fixture.html'};link.partial_scope.text_sha256=scopeHash(selected);link.partial_scope.notice_sha256=scopeHash(english.atiNotice(fixture()));d.translations={...d.translations,mn54:[link]};return {unit:canon.resolve('mn54').unit,link,id:canon.translationId(link)};}
 
 test('three primary DT and one ATI whole bindings are held globally while complete Pali remains unchanged',async()=>{
- assert.equal(scopeHash(canon.load().canon),'447ea6af978c88aadd203a5aea29a9fa87e47780353e27b83e7fb3fb65890e21');
+ assert.equal(scopeHash(canon.load().canon),'529d5f8a0812ca16c29c011abba04874c2529a641fd76c2fb85d6feebdbc5234');
  assert.equal(report.rows.length,4);assert.equal(report.rows.filter(r=>r.source==='dhammatalks').length,3);
  let calls=0;globalThis.fetch=async()=>{calls++;throw Error('No held fetch');};
  const key=x=>{const u=new URL(x);return u.hostname.replace(/^www\./,'')+u.pathname;};
@@ -58,7 +58,7 @@ test('MN54 restores only one pinned partial dream paragraph, preserves fourteen 
  assert.ok(!exclusions.some(r=>r.url===report.retired_exclusion.url));
  assert.ok(exclusions.some(r=>r.url==='https://www.dhammatalks.org/suttas/MN/MN54.html'));
  const t=translationCoverage({refresh:true}).total;
- assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links,t.with_shared_english,t.shared_only],[2623,1493,1916,22,16,12,110,22]);
+ assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links,t.with_shared_english,t.shared_only],[2643,1513,1936,22,16,12,110,22]);
  const d=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([d.rotation.of,d.text.id],[1288,'sn11.22']);
 });
 

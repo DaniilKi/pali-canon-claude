@@ -14,7 +14,7 @@ const id=n=>'ap:chapter-4/poem-'+String(n).padStart(3,'0');
 const source=n=>readFileSync(`${checkout}/src/_poems/chapter-4/poem-${String(n).padStart(3,'0')}.md`,'utf8');
 
 test('forty finite publisher mappings retain the next ten identities and only reviewed root repairs',()=>{
-  const data=canon.load();assert.equal(Object.keys(APADANA_PROFILES).length,40);
+  const data=canon.load();assert.equal(Object.keys(APADANA_PROFILES).length,60);
   for(const [uid,entry]of Object.entries(repair.units))assert.deepEqual(data.byId.get(uid),entry.after);
   assert.equal(canon.linksFor(canon.resolve('thi-ap21').unit).links.length,1);
   for(let n=11;n<=20;n++){
@@ -64,7 +64,7 @@ test('actual API long continuations and widget preserve sparse notes and source-
     if(n===17)assert.equal(widget.english.publisher_divisions[0].translator_notes[0].number,21);
   }
   const before=fetches.length;await assert.rejects(english.translation(canon.resolve('thi-ap12').unit,id(17)),/not linked/);assert.equal(fetches.length,before);
-  assert.equal(WIDGET_URI,'ui://pali-canon/reader-v21.html');
+  assert.equal(WIDGET_URI,'ui://pali-canon/reader-v22.html');
 });
 
 test('embedded reader executes sparse note and publisher division ownership guards',async()=>{

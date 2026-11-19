@@ -82,7 +82,7 @@ test('every held version refuses globally before network access despite partial/
 });
 
 test('historical exclusions, seven retained reviews and fourteen partial descriptors remain immutable; counts distinguish whole and scoped access', () => {
-  assert.equal(scopeHash(canon.load().canon), '447ea6af978c88aadd203a5aea29a9fa87e47780353e27b83e7fb3fb65890e21', 'No canonical wording, repaired boundaries or saved-position metadata changes');
+  assert.equal(scopeHash(canon.load().canon), '529d5f8a0812ca16c29c011abba04874c2529a641fd76c2fb85d6feebdbc5234', 'No canonical wording, repaired boundaries or saved-position metadata changes');
   assert.equal(exclusions.exclusions.length, 41);
   assert.equal(scopeHash(exclusions.exclusions.slice(0, 24)), '74ea8c7d11dc3de1b97e6cc86d93668577360296507dfcbfb5b4b5ddee4f5c15');
   assert.deepEqual(exclusions.exclusions.slice(24, 37).map(e => [e.source, e.url]).sort(), stillHeld.map(r => [r.source, r.url]).sort());
@@ -103,7 +103,7 @@ test('historical exclusions, seven retained reviews and fourteen partial descrip
   assert.deepEqual([queue.ordinary_ati_bindings_checked, queue.candidate_bindings, queue.reviewed_retained_snapshots, queue.unreviewed_bindings], [1115, 3, 3, 0]);
   assert.ok(queue.rows.every(r => r.review_status === 'reviewed-retained-at-snapshot' && r.approved === false));
   const t = translationCoverage({ refresh: true }).total;
-  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only, t.shared_links, t.with_shared_english, t.shared_only], [2623, 1493, 1916, 22, 16, 12, 110, 22]);
+  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only, t.shared_links, t.with_shared_english, t.shared_only], [2643, 1513, 1936, 22, 16, 12, 110, 22]);
   const daily = dailyText({ ...canon }, { date: '2026-11-01', kind: 'sutta' });
   assert.deepEqual([daily.rotation.of, daily.text.id], [1288, 'sn11.22']);
   assert.deepEqual(historicalSutta('d212'), {of:1261,id:'sn55.32'}, 'Old daily eligibility remains test metadata without restoring withdrawn sources');

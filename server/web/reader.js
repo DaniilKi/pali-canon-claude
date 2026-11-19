@@ -1,985 +1,5 @@
 (() => {
-  // web/bookmark-import.mjs
-  var MAX_IMPORT_BYTES = 16 * 1024 * 1024;
-  var keys = /* @__PURE__ */ new Set(["uid", "ref", "title", "note", "offset", "source_commit"]);
-  var string = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f]/.test(x);
-  var object = (x) => x && typeof x === "object" && !Array.isArray(x);
-  var identity = (x) => JSON.stringify([x.uid, x.ref]);
-  function parseBookmarks(text11) {
-    let data;
-    try {
-      data = JSON.parse(text11);
-    } catch {
-      throw Error("Choose a valid JSON bookmark export. Nothing was imported.");
-    }
-    if (!object(data) || data.format !== "pali-library-v1" || Object.keys(data).some((k) => !["format", "saved"].includes(k)) || !Array.isArray(data.saved) || data.saved.length > 500) throw Error("This is not a supported P\u0101li Library bookmark export (maximum 500 passages). Nothing was imported.");
-    const seen = /* @__PURE__ */ new Set();
-    return data.saved.map((x) => {
-      if (!object(x) || Object.keys(x).some((k) => !keys.has(k)) || !string(x.uid, 300) || !string(x.ref, 400) || !string(x.title, 1e3) || !(/^[a-z][a-z0-9.-]*$/.test(x.uid) || /^(book|post|commentary-ref|commentary):[^\r\n]+$/.test(x.uid)) || /https?:|javascript:|data:|[<>]/i.test(x.uid) || x.note !== void 0 && (typeof x.note !== "string" || x.note.length > 4e3) || x.offset !== void 0 && (!Number.isSafeInteger(x.offset) || x.offset < 0 || x.offset > 1e5) || x.source_commit !== void 0 && !string(x.source_commit, 100)) throw Error("A bookmark has unsupported fields or invalid reference, note, position or revision metadata. Nothing was imported.");
-      if (seen.has(identity(x))) throw Error("The file contains duplicate passage references. Resolve those duplicates before importing; no notes were chosen or discarded.");
-      seen.add(identity(x));
-      return { uid: x.uid, ref: x.ref, title: x.title, note: x.note ?? "", ...x.offset !== void 0 ? { offset: x.offset } : {}, ...x.source_commit !== void 0 ? { source_commit: x.source_commit } : {} };
-    });
-  }
-  function bookmarkMerge(existing, incoming) {
-    const seen = new Set(existing.map(identity)), added = incoming.filter((x) => !seen.has(identity(x))), skipped = incoming.length - added.length;
-    if (existing.length + added.length > 500) throw Error("These new bookmarks exceed the 500-passage limit. Export/remove some saved passages, then try again. Nothing was imported.");
-    return { added, skipped, saved: [...existing, ...added] };
-  }
-
-  // web/passage-notes.mjs
-  var own = (value, key4) => Object.hasOwn(value, key4);
-  var object2 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
-  var position = (value) => Number.isSafeInteger(value) && value >= 0 && value <= 1e5;
-  var revision = (value) => typeof value === "string" && /^[A-Za-z0-9._-]{1,100}$/.test(value);
-  function clone(value, depth = 0) {
-    if (depth > 32) throw Error("Personal-note metadata is nested too deeply. Keep/export it before repairing it.");
-    if (value instanceof Map) return new Map([...value].map(([key4, item]) => [clone(key4, depth + 1), clone(item, depth + 1)]));
-    if (Array.isArray(value)) return value.map((item) => clone(item, depth + 1));
-    if (object2(value)) return Object.fromEntries(Object.entries(value).map(([key4, item]) => [key4, clone(item, depth + 1)]));
-    return value;
-  }
-  var noteText = (value) => {
-    if (typeof value !== "string" || value.length > 4e3) throw Error("Personal notes must be text of at most 4,000 characters.");
-    return value;
-  };
-  function bookmarkShape(item) {
-    parseBookmarks(JSON.stringify({ format: "pali-library-v1", saved: [item] }));
-    if (own(item, "offset") && !position(item.offset)) throw Error("This bookmark has invalid saved-position metadata.");
-    if (own(item, "source_commit") && (!revision(item.source_commit) || !position(item.offset))) throw Error("This bookmark has invalid saved revision or position metadata.");
-  }
-  function currentContext(context) {
-    if (!object2(context) || Object.keys(context).some((key4) => !["uid", "ref", "title", "offset", "source_commit"].includes(key4))) throw Error("This passage has unsupported personal-note reference metadata.");
-    bookmarkShape({ ...context, note: "" });
-    if (!position(context.offset) || !revision(context.source_commit)) throw Error("This passage has no valid current position and source revision.");
-  }
-  function passageNoteKey(item) {
-    if (!object2(item) || typeof item.uid !== "string" || !item.uid || typeof item.ref !== "string" || !item.ref) throw Error("A personal note needs an exact source selector and passage reference.");
-    return JSON.stringify([item.uid, item.ref]);
-  }
-  function passageNoteState(saved2, context) {
-    if (!Array.isArray(saved2)) throw Error("Saved passages must be an array.");
-    let key4, item = null;
-    try {
-      currentContext(context);
-      key4 = passageNoteKey(context);
-      const matches = saved2.filter((value) => object2(value) && value.uid === context.uid && value.ref === context.ref);
-      if (matches.length > 1) throw Error("Duplicate saved references need review in Saved before editing a note here.");
-      item = matches[0] ?? null;
-      if (item) bookmarkShape(item);
-      if (item && own(item, "source_commit") && item.source_commit !== context.source_commit) throw Error("The saved source revision differs. Review or edit this personal note in Saved; it was not associated with the current passage.");
-      const legacy = Boolean(item && !own(item, "source_commit"));
-      return { eligible: true, reason: null, warning: legacy ? "Unversioned bookmark: no source revision was saved. Check the reference before using this personal note; editing leaves it unversioned." : null, legacy, item: clone(item), key: key4 };
-    } catch (error) {
-      return { eligible: false, reason: error.message, warning: null, legacy: false, item: null, key: key4 ?? null };
-    }
-  }
-  function createPassageBookmark(context) {
-    currentContext(context);
-    return { uid: context.uid, ref: context.ref, title: context.title, note: "", offset: context.offset, source_commit: context.source_commit };
-  }
-  function passageNoteRemovalNeedsConfirmation(item, drafts) {
-    if (!(drafts instanceof Map)) throw Error("Personal-note drafts must be a Map.");
-    const key4 = passageNoteKey(item);
-    const stored = item.note === void 0 ? "" : noteText(item.note);
-    const draft = drafts.has(key4) ? noteText(drafts.get(key4)) : "";
-    return stored.length > 0 || draft.length > 0;
-  }
-  function passageNoteTransaction(saved2, drafts, context, operation) {
-    if (!(drafts instanceof Map) || !object2(operation) || Object.keys(operation).some((key5) => !["type", "note", "confirmed", "mode"].includes(key5)) || !["ensure", "save", "remove"].includes(operation.type) || own(operation, "mode") && !["reading", "saved"].includes(operation.mode)) throw Error("Unsupported personal-note change.");
-    let state;
-    if (operation.mode === "saved") {
-      if (!Array.isArray(saved2) || !object2(context) || Object.keys(context).some((key5) => !["uid", "ref"].includes(key5)) || operation.type === "ensure") throw Error("Saved note edits require an exact existing bookmark identity.");
-      parseBookmarks(JSON.stringify({ format: "pali-library-v1", saved: [{ ...context, title: "Personal bookmark", note: "" }] }));
-      const matches = saved2.filter((item) => object2(item) && item.uid === context.uid && item.ref === context.ref);
-      if (matches.length !== 1) throw Error("Saved note edits require one exact existing bookmark.");
-      state = { eligible: true, key: passageNoteKey(context), item: clone(matches[0]) };
-    } else state = passageNoteState(saved2, context);
-    if (!state.eligible) throw Error(state.reason);
-    const { key: key4 } = state;
-    if (drafts.has(key4)) noteText(drafts.get(key4));
-    if (operation.type !== "save" && own(operation, "note")) throw Error("Only saving a personal note accepts note text.");
-    if (own(operation, "confirmed") && typeof operation.confirmed !== "boolean") throw Error("Removal confirmation must be explicit.");
-    const note2 = operation.type === "save" ? noteText(operation.note) : void 0;
-    if (operation.type === "remove" && !state.item) throw Error("This exact passage is not saved.");
-    if (operation.type === "remove" && passageNoteRemovalNeedsConfirmation(state.item, drafts) && operation.confirmed !== true) {
-      const error = Error("Confirm removal of this bookmark and its personal note first.");
-      error.code = "NOTE_CONFIRMATION_REQUIRED";
-      throw error;
-    }
-    if (!state.item && saved2.length >= 500) throw Error("Your saved list is full (500 passages). Export or remove passages before adding a note.");
-    const before = { saved: clone(saved2), drafts: clone(drafts) };
-    if (operation.type === "save") before.drafts.set(key4, note2);
-    const result = { saved: clone(saved2), drafts: clone(drafts), before, item: null, removed: operation.type === "remove" };
-    const index = result.saved.findIndex((item) => object2(item) && item.uid === context.uid && item.ref === context.ref);
-    if (operation.type === "remove") result.saved.splice(index, 1);
-    else {
-      const item = state.item ?? createPassageBookmark(context);
-      if (operation.type === "save") item.note = note2;
-      if (index < 0) result.saved.push(item);
-      else result.saved[index] = item;
-      result.item = clone(item);
-    }
-    if (operation.type !== "ensure") result.drafts.delete(key4);
-    return result;
-  }
-  function restorePassageNoteTransaction(transaction) {
-    if (!object2(transaction?.before) || !Array.isArray(transaction.before.saved) || !(transaction.before.drafts instanceof Map)) throw Error("No personal-note transaction snapshot is available.");
-    return clone(transaction.before);
-  }
-
-  // web/note-draft-recovery.mjs
-  var MAX_NOTE_DRAFT_BYTES = MAX_IMPORT_BYTES;
-  var own2 = (value, key4) => Object.hasOwn(value, key4);
-  var object3 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
-  var exactKeys = (value, keys2) => object3(value) && Object.keys(value).sort().join(",") === [...keys2].sort().join(",");
-  var fields = ["uid", "ref", "title", "note", "offset", "source_commit"];
-  var cloneBookmark = (value) => Object.fromEntries(fields.filter((key4) => own2(value, key4)).map((key4) => [key4, value[key4]]));
-  var cloneEntry = (entry2) => ({ bookmark: cloneBookmark(entry2.bookmark), draft: entry2.draft });
-  var baseKey = (bookmark2) => JSON.stringify(fields.map((key4) => own2(bookmark2, key4) ? [key4, bookmark2[key4]] : [key4]));
-  var failure = () => {
-    throw Error("This note-draft recovery journal is unreadable or unsupported. Keep or download its original contents before explicitly discarding it.");
-  };
-  var draftText = (value) => typeof value === "string" && value.length <= 4e3;
-  function bookmark(value) {
-    if (!object3(value) || ["uid", "ref", "title"].some((key4) => !own2(value, key4)) || Object.keys(value).some((key4) => !fields.includes(key4)) || own2(value, "note") && typeof value.note !== "string" || own2(value, "offset") && !Number.isSafeInteger(value.offset) || own2(value, "source_commit") && typeof value.source_commit !== "string") failure();
-    try {
-      parseBookmarks(JSON.stringify({ format: "pali-library-v1", saved: [value] }));
-    } catch {
-      failure();
-    }
-    return value;
-  }
-  function entry(value) {
-    if (!exactKeys(value, ["bookmark", "draft"]) || !draftText(value.draft)) failure();
-    bookmark(value.bookmark);
-    return value;
-  }
-  function entries(value) {
-    if (!Array.isArray(value) || value.length > 500) failure();
-    const seen = /* @__PURE__ */ new Set();
-    for (const item of value) {
-      entry(item);
-      const key4 = baseKey(item.bookmark);
-      if (seen.has(key4)) failure();
-      seen.add(key4);
-    }
-    return value;
-  }
-  function bounded(raw) {
-    if (typeof raw !== "string" || raw.length > MAX_NOTE_DRAFT_BYTES || new TextEncoder().encode(raw).byteLength > MAX_NOTE_DRAFT_BYTES) failure();
-    return raw;
-  }
-  function parseNoteDraftJournal(raw) {
-    if (raw === null) return [];
-    bounded(raw);
-    let value;
-    try {
-      value = JSON.parse(raw);
-    } catch {
-      failure();
-    }
-    if (!exactKeys(value, ["version", "entries"]) || value.version !== 1) failure();
-    return entries(value.entries).map(cloneEntry);
-  }
-  function serializeNoteDraftJournal(value) {
-    return bounded(JSON.stringify({ version: 1, entries: entries(value).map(cloneEntry) }));
-  }
-  function stageNoteDraftEntry(value, originalBookmark, rawDraft) {
-    entries(value);
-    bookmark(originalBookmark);
-    if (!draftText(rawDraft)) failure();
-    const key4 = baseKey(originalBookmark), next = value.map(cloneEntry), index = next.findIndex((item) => baseKey(item.bookmark) === key4), staged = { bookmark: cloneBookmark(originalBookmark), draft: rawDraft };
-    if (index < 0) next.push(staged);
-    else next[index] = staged;
-    serializeNoteDraftJournal(next);
-    return next;
-  }
-  function removeNoteDraftEntry(value, expectedEntry) {
-    entries(value);
-    entry(expectedEntry);
-    const key4 = baseKey(expectedEntry.bookmark);
-    return value.filter((item) => baseKey(item.bookmark) !== key4 || item.draft !== expectedEntry.draft).map(cloneEntry);
-  }
-  function reconcileNoteDraftJournal(value, saved2, currentDrafts = /* @__PURE__ */ new Map()) {
-    entries(value);
-    if (!Array.isArray(saved2) || !(currentDrafts instanceof Map) || [...currentDrafts].some(([key4, draft]) => typeof key4 !== "string" || !draftText(draft))) failure();
-    const drafts = new Map(currentDrafts), restored = [], pending = [], settled = [];
-    for (const item of value) {
-      const matches = saved2.filter((mark) => object3(mark) && mark.uid === item.bookmark.uid && mark.ref === item.bookmark.ref);
-      let reason2;
-      if (matches.length === 0) reason2 = "missing-bookmark";
-      else if (matches.length !== 1) reason2 = "ambiguous-bookmark";
-      else {
-        try {
-          bookmark(matches[0]);
-        } catch {
-          reason2 = "unreadable-bookmark";
-        }
-        if (!reason2 && baseKey(matches[0]) === baseKey({ ...item.bookmark, note: item.draft })) {
-          settled.push(cloneEntry(item));
-          continue;
-        }
-        if (!reason2 && baseKey(matches[0]) !== baseKey(item.bookmark)) reason2 = "changed-bookmark";
-      }
-      const key4 = passageNoteKey(item.bookmark);
-      if (!reason2 && drafts.has(key4) && drafts.get(key4) !== item.draft) reason2 = "active-draft";
-      if (reason2) pending.push({ entry: cloneEntry(item), reason: reason2 });
-      else {
-        drafts.set(key4, item.draft);
-        restored.push(cloneEntry(item));
-      }
-    }
-    return { drafts, restored, pending, settled };
-  }
-  function guardedNoteDraftJournalWrite({ expected, entries: value, read: read2, write }) {
-    parseNoteDraftJournal(expected);
-    const raw = serializeNoteDraftJournal(value);
-    if (typeof read2 !== "function" || typeof write !== "function") failure();
-    const conflict2 = () => {
-      const error = Error("This tab\u2019s note-draft recovery data changed. No recovery data was overwritten; keep or download the pending drafts.");
-      error.code = "NOTE_DRAFT_RECOVERY_CHANGED";
-      throw error;
-    };
-    if (read2() !== expected || read2() !== expected) conflict2();
-    if (raw === expected) return raw;
-    write(raw);
-    if (read2() !== raw) {
-      const error = Error("The note-draft recovery write could not be confirmed. Keep or download the pending drafts; no cleanup was confirmed.");
-      error.code = "NOTE_DRAFT_RECOVERY_UNCONFIRMED";
-      throw error;
-    }
-    return raw;
-  }
-
-  // web/focus-ownership.mjs
-  function createFocusOwnership({ activeElement, hasFocus }) {
-    let revision5 = 0;
-    return {
-      changed() {
-        revision5++;
-      },
-      capture() {
-        return { revision: revision5, element: activeElement() };
-      },
-      owns(ticket) {
-        return Boolean(ticket) && ticket.revision === revision5 && ticket.element === activeElement() && hasFocus();
-      }
-    };
-  }
-
-  // web/reading-position.mjs
-  var string2 = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f<>]/.test(x);
-  var integer = (x) => Number.isSafeInteger(x) && x >= 0 && x <= 1e5;
-  var source = (x) => typeof x === "string" && /^[a-zA-Z0-9._-]{1,100}$/.test(x);
-  function sourceRevision(data) {
-    const mapped = Boolean(data.source && Object.hasOwn(data.source, "locator_revision"));
-    const value = mapped ? data.source.locator_revision : data.source?.commit;
-    if ((mapped || value !== void 0) && !source(value)) throw Error("The source has invalid reading-position revision metadata.");
-    return value;
-  }
-  function assertReadingContext(context) {
-    if (!context || Object.keys(context).some((k) => !["uid", "book", "kind", "plan", "day"].includes(k)) || Boolean(context.uid) === Boolean(context.book) || !string2(context.uid || context.book, 300) || /https?:|javascript:|data:/i.test(context.uid || context.book) || context.kind !== void 0 && !["post", "commentary"].includes(context.kind) || context.book && context.kind || context.plan !== void 0 && (!context.uid || context.kind || !/^[a-z0-9-]{1,60}$/.test(context.plan) || !Number.isSafeInteger(context.day) || context.day < 1 || context.day > 400) || context.day !== void 0 && context.plan === void 0) throw Error("This reading position has unsupported source or reference metadata.");
-  }
-  function readingPosition(context, offset, ref, revision5) {
-    assertReadingContext(context);
-    if (!integer(offset) || !string2(ref, 400) || !source(revision5)) throw Error("This reading position has unsupported source or reference metadata.");
-    return "#read?" + new URLSearchParams({ ...context, offset, ref, source: revision5 });
-  }
-  function assertPositionPin(args, data) {
-    if (!args.has("source")) return;
-    if (args.getAll("source").length !== 1 || !source(args.get("source")) || !string2(args.get("ref"), 400) || !/^\d+$/.test(args.get("offset") || "") || !integer(Number(args.get("offset")))) throw Error("The saved reading position is incomplete. Open its source from the Library; no nearby passage was substituted.");
-    if (sourceRevision(data) !== args.get("source")) {
-      const error = Error("The source or citation mapping revision changed since this reading position was saved. Review the current source explicitly before continuing; no replacement wording was displayed.");
-      error.code = "READING_SOURCE_CHANGED";
-      throw error;
-    }
-  }
-  function isReadingLocator(href) {
-    try {
-      if (typeof href !== "string" || href.length > 8192 || !href.startsWith("#read?")) return false;
-      const args = new URLSearchParams(href.slice(6)), keys2 = [...args.keys()];
-      if (keys2.some((k) => !["uid", "book", "kind", "plan", "day", "offset", "ref", "source"].includes(k)) || new Set(keys2).size !== keys2.length) return false;
-      const context = Object.fromEntries(["uid", "book", "kind", "plan"].filter((k) => args.has(k)).map((k) => [k, args.get(k)]));
-      if (args.has("day")) context.day = Number(args.get("day"));
-      if (args.has("offset") && !/^\d+$/.test(args.get("offset"))) return false;
-      readingPosition(context, args.has("offset") ? Number(args.get("offset")) : 0, args.has("ref") ? args.get("ref") : "legacy/1", args.has("source") ? args.get("source") : "legacy");
-      if (args.has("source")) assertPositionPin(args, { source: { commit: args.get("source") } });
-      return true;
-    } catch {
-      return false;
-    }
-  }
-
-  // web/bookmark-location.mjs
-  function bookmarkLocation(item, context) {
-    if (!item || typeof item.ref !== "string" || !item.ref) throw Error("This bookmark has no valid passage reference. Export it before repairing its metadata.");
-    if (item.offset !== void 0 && (!Number.isSafeInteger(item.offset) || item.offset < 0 || item.offset > 1e5)) throw Error("This bookmark has invalid saved-position metadata. Keep/export it before reviewing its source separately.");
-    const pinned2 = item.source_commit !== void 0;
-    if (pinned2 && (!Number.isSafeInteger(item.offset) || item.offset < 0)) throw Error("This versioned bookmark has no exact saved position. Its source version was not dropped or guessed. Keep/export the bookmark and review its source separately.");
-    const index = Number.isSafeInteger(item.offset) && item.offset >= 0 ? item.offset : Number(item.ref.match(/\/c?(\d+)$/)?.[1] || 1) - 1;
-    const offset = pinned2 ? item.offset : Math.floor(index / 30) * 30;
-    const href = readingPosition(context, offset, item.ref, pinned2 ? item.source_commit : "legacy");
-    if (pinned2) return { href, pinned: true, notice: "Saved source version: opening checks the revision before displaying wording." };
-    const args = new URLSearchParams(href.slice(6));
-    args.delete("source");
-    return { href: "#read?" + args, pinned: false, notice: "Legacy bookmark: no source version was saved. Opening checks its reference against the current source; this is not a saved copy of the old wording." };
-  }
-
-  // web/saved-passages.mjs
-  var SAVED_PAGE_SIZE = 25;
-  function savedScope(item) {
-    const uid2 = typeof item?.uid === "string" ? item.uid : "";
-    if (uid2.startsWith("book:")) return "books";
-    if (uid2.startsWith("post:")) return "post";
-    if (uid2.startsWith("commentary:") || uid2.startsWith("commentary-ref:")) return "commentary";
-    return "canon";
-  }
-  var savedScopeLabels = Object.freeze({ canon: "Canonical text", books: "Complete root source book", commentary: "Commentary \xB7 not canon", post: "Later work \xB7 not canon" });
-  var fold = (value) => (typeof value === "string" ? value : "").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
-  function savedPage(items, drafts, { query = "", scope = "all", page: page2 = 0 } = {}) {
-    const tokens = fold(query).trim().split(/\s+/u).filter(Boolean);
-    const selected = Object.hasOwn(savedScopeLabels, scope) ? scope : "all";
-    const matches = items.filter((item) => {
-      if (selected !== "all" && savedScope(item) !== selected) return false;
-      const key4 = JSON.stringify([item.uid, item.ref]);
-      const note2 = drafts?.has(key4) ? drafts.get(key4) : item.note;
-      const text11 = fold([item.title, item.uid, item.ref, note2].filter((x) => typeof x === "string").join(" "));
-      return tokens.every((token) => text11.includes(token));
-    });
-    const pages3 = Math.max(1, Math.ceil(matches.length / SAVED_PAGE_SIZE));
-    const current = Number.isSafeInteger(page2) ? Math.max(0, Math.min(page2, pages3 - 1)) : 0;
-    return { items: matches.slice(current * SAVED_PAGE_SIZE, (current + 1) * SAVED_PAGE_SIZE), total: matches.length, all: items.length, pages: pages3, page: current, start: matches.length ? current * SAVED_PAGE_SIZE + 1 : 0, end: Math.min((current + 1) * SAVED_PAGE_SIZE, matches.length) };
-  }
-
-  // web/source-passage.mjs
-  function createSourcePassage(doc, segment, headingLevel, className = "passage") {
-    if (![2, 3, 4, 5].includes(headingLevel)) throw new Error("Unsupported source heading level.");
-    const node = doc.createElement(segment.type === "heading" ? "h" + headingLevel : "p");
-    node.textContent = segment.text;
-    node.className = className;
-    node.lang = "pi";
-    return node;
-  }
-
-  // web/print-page.mjs
-  function installPagePrinting(doc = document, win = window) {
-    const view2 = doc.getElementById("view");
-    const sheet = doc.createElement("article");
-    sheet.id = "print-document";
-    sheet.setAttribute("aria-hidden", "true");
-    doc.body.append(sheet);
-    const add = (parent, tag, text11, className) => {
-      const node = doc.createElement(tag);
-      node.textContent = text11;
-      if (className) node.className = className;
-      parent.append(node);
-      return node;
-    };
-    const routes = /* @__PURE__ */ new WeakMap();
-    const reading = () => win.location.hash.startsWith("#read?") && view2.querySelector('section[aria-label="P\u0101li passage"]');
-    function prepare() {
-      sheet.replaceChildren();
-      const passage = reading();
-      const attribution = view2.querySelector(":scope > .provenance");
-      if (!passage || routes.get(passage) !== win.location.hash || !passage.querySelector(".segment .passage") || !attribution) {
-        add(sheet, "h1", "No P\u0101li page ready to print");
-        add(sheet, "p", "Open a P\u0101li passage and wait for its source attribution before printing. Personal notes and other screens are not printed.");
-        return false;
-      }
-      add(sheet, "p", view2.querySelector(":scope > .eyebrow")?.textContent || "P\u0101li Library");
-      add(sheet, "h1", view2.querySelector(":scope > h2")?.textContent || "P\u0101li passage");
-      add(sheet, "p", "Loaded P\u0101li page only \u2014 not necessarily the complete work. English, study material, bookmarks and personal notes are excluded.", "print-scope");
-      const range = [...view2.querySelectorAll(":scope > p.muted")].find((node) => node.textContent.startsWith("Segments "));
-      if (range) add(sheet, "p", range.textContent, "print-scope");
-      for (const notice of view2.querySelectorAll(":scope > .notice, :scope > .toolbar .study-actions > .toolbar > .source-context > .notice")) add(sheet, "p", notice.textContent, "print-scope");
-      for (const segment of passage.querySelectorAll(":scope > .segment")) {
-        const block = add(sheet, "section", "", "print-segment");
-        add(block, "p", segment.querySelector(".segment-label span")?.textContent || "", "print-reference");
-        block.append(createSourcePassage(doc, { type: segment.classList.contains("heading") ? "heading" : "prose", text: segment.querySelector(".passage")?.textContent || "" }, 2, "print-passage"));
-      }
-      const source7 = add(sheet, "section", "", "print-provenance");
-      add(source7, "h2", "Source and terms");
-      for (const part of attribution.children) add(source7, "p", part.textContent);
-      for (const anchor of attribution.querySelectorAll("a[href]")) add(source7, "p", anchor.textContent + ": " + anchor.href);
-      const url = new URL(win.location.href);
-      url.search = "";
-      add(source7, "p", "Reading page: " + url.href);
-      return true;
-    }
-    function update() {
-      const passage = reading();
-      if (passage && !routes.has(passage)) routes.set(passage, win.location.hash);
-      const toolbar = view2.querySelector(":scope > .toolbar");
-      if (!passage || !toolbar || toolbar.querySelector("[data-print-page]")) return;
-      const target = toolbar.querySelector(".study-actions > .toolbar") || toolbar;
-      const control = add(target, "button", "Print loaded P\u0101li page");
-      control.type = "button";
-      control.dataset.printPage = "";
-      control.addEventListener("click", () => {
-        if (prepare()) win.print();
-      });
-    }
-    new win.MutationObserver(update).observe(view2, { childList: true, subtree: true });
-    win.addEventListener("beforeprint", prepare);
-    win.addEventListener("afterprint", () => sheet.replaceChildren());
-    win.addEventListener("hashchange", () => sheet.replaceChildren());
-    update();
-  }
-
-  // web/script-refresh.mjs
-  function scriptRefreshEligible(hash) {
-    return typeof hash === "string" && hash.startsWith("#") && ["read", "daily", "resolve", "search", "book-search"].includes(hash.slice(1).split("?")[0]);
-  }
-  function retainBookSearchDraft(previous, hash, input) {
-    if (!scriptRefreshEligible(hash)) return null;
-    if (!input) return previous?.hash === hash ? previous : null;
-    return {
-      hash,
-      value: input.value,
-      start: input.selectionStart,
-      end: input.selectionEnd,
-      direction: input.selectionDirection,
-      toolsOpen: input.toolsOpen
-    };
-  }
-
-  // src/script.mjs
-  var SCRIPTS = ["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"];
-  var SCRIPT_NAMES = {
-    roman: "Roman (Latin with diacritics)",
-    sinhala: "Sinhala",
-    thai: "Thai",
-    myanmar: "Myanmar (Burmese)",
-    devanagari: "Devanagari",
-    khmer: "Khmer",
-    lao: "Lao",
-    lanna: "Lanna (Tai Tham)"
-  };
-  var ALIASES = {
-    roman: "roman",
-    romn: "roman",
-    latn: "roman",
-    latin: "roman",
-    iast: "roman",
-    iso: "roman",
-    sinhala: "sinhala",
-    sinh: "sinhala",
-    si: "sinhala",
-    sinhalese: "sinhala",
-    thai: "thai",
-    th: "thai",
-    myanmar: "myanmar",
-    mymr: "myanmar",
-    burmese: "myanmar",
-    my: "myanmar",
-    burma: "myanmar",
-    devanagari: "devanagari",
-    deva: "devanagari",
-    hindi: "devanagari",
-    nagari: "devanagari",
-    khmer: "khmer",
-    khmr: "khmer",
-    km: "khmer",
-    cambodian: "khmer",
-    lao: "lao",
-    laoo: "lao",
-    laos: "lao",
-    lanna: "lanna",
-    lana: "lanna",
-    taitham: "lanna",
-    "tai tham": "lanna",
-    tham: "lanna",
-    "tai-tham": "lanna",
-    tai_tham: "lanna"
-  };
-  function scriptName(name) {
-    const key4 = String(name ?? "").trim().toLowerCase();
-    const found = ALIASES[key4];
-    if (!found) throw new Error(`Unknown script "${name}". Available: ${SCRIPTS.join(", ")}.`);
-    return found;
-  }
-  var CONSONANTS = [
-    "kh",
-    "gh",
-    "ch",
-    "jh",
-    "\u1E6Dh",
-    "\u1E0Dh",
-    "th",
-    "dh",
-    "ph",
-    "bh",
-    "k",
-    "g",
-    "\u1E45",
-    "c",
-    "j",
-    "\xF1",
-    "\u1E6D",
-    "\u1E0D",
-    "\u1E47",
-    "t",
-    "d",
-    "n",
-    "p",
-    "b",
-    "m",
-    "y",
-    "r",
-    "l",
-    "v",
-    "s",
-    "h",
-    "\u1E37"
-  ];
-  var VOWELS = ["a", "\u0101", "i", "\u012B", "u", "\u016B", "e", "o"];
-  var C_ORDER = [
-    "k",
-    "kh",
-    "g",
-    "gh",
-    "\u1E45",
-    "c",
-    "ch",
-    "j",
-    "jh",
-    "\xF1",
-    "\u1E6D",
-    "\u1E6Dh",
-    "\u1E0D",
-    "\u1E0Dh",
-    "\u1E47",
-    "t",
-    "th",
-    "d",
-    "dh",
-    "n",
-    "p",
-    "ph",
-    "b",
-    "bh",
-    "m",
-    "y",
-    "r",
-    "l",
-    "v",
-    "s",
-    "h",
-    "\u1E37"
-  ];
-  var zip = (keys2, chars) => Object.fromEntries(keys2.map((k, i) => [k, chars[i]]));
-  var TABLES = {
-    devanagari: {
-      c: [..."\u0915\u0916\u0917\u0918\u0919\u091A\u091B\u091C\u091D\u091E\u091F\u0920\u0921\u0922\u0923\u0924\u0925\u0926\u0927\u0928\u092A\u092B\u092C\u092D\u092E\u092F\u0930\u0932\u0935\u0938\u0939\u0933"],
-      v: ["\u0905", "\u0906", "\u0907", "\u0908", "\u0909", "\u090A", "\u090F", "\u0913"],
-      s: ["", "\u093E", "\u093F", "\u0940", "\u0941", "\u0942", "\u0947", "\u094B"],
-      virama: "\u094D",
-      m: "\u0902",
-      digits: [..."\u0966\u0967\u0968\u0969\u096A\u096B\u096C\u096D\u096E\u096F"],
-      stop: "\u0964",
-      abbr: "\u0970",
-      verseEnd: "\u0964",
-      stanzaEnd: "\u0965",
-      // VRI writes a zero-width joiner after the virama in these clusters.
-      zwj: ["kk", "kl", "kv", "cc", "jj", "\xF1c", "\xF1j", "\xF1\xF1", "nn", "pl", "ll"]
-    },
-    sinhala: {
-      c: [..."\u0D9A\u0D9B\u0D9C\u0D9D\u0D9E\u0DA0\u0DA1\u0DA2\u0DA3\u0DA4\u0DA7\u0DA8\u0DA9\u0DAA\u0DAB\u0DAD\u0DAE\u0DAF\u0DB0\u0DB1\u0DB4\u0DB5\u0DB6\u0DB7\u0DB8\u0DBA\u0DBB\u0DBD\u0DC0\u0DC3\u0DC4\u0DC5"],
-      v: ["\u0D85", "\u0D86", "\u0D89", "\u0D8A", "\u0D8B", "\u0D8C", "\u0D91", "\u0D94"],
-      s: ["", "\u0DCF", "\u0DD2", "\u0DD3", "\u0DD4", "\u0DD6", "\u0DD9", "\u0DDC"],
-      virama: "\u0DCA",
-      m: "\u0D82",
-      digits: null,
-      abbr: ".",
-      // VRI writes ZWJ before y and r (yansaya, rakaransaya) and ZWNJ in every other cluster.
-      joiner: (a, b) => b === "y" || b === "r" ? "\u200D" : "\u200C"
-    },
-    thai: {
-      c: [..."\u0E01\u0E02\u0E04\u0E06\u0E07\u0E08\u0E09\u0E0A\u0E0C\u0E0D\u0E0F\u0E10\u0E11\u0E12\u0E13\u0E15\u0E16\u0E17\u0E18\u0E19\u0E1B\u0E1C\u0E1E\u0E20\u0E21\u0E22\u0E23\u0E25\u0E27\u0E2A\u0E2B\u0E2C"],
-      v: ["\u0E2D", "\u0E2D\u0E32", "\u0E2D\u0E34", "\u0E2D\u0E35", "\u0E2D\u0E38", "\u0E2D\u0E39", "\u0E40\u0E2D", "\u0E42\u0E2D"],
-      s: ["", "\u0E32", "\u0E34", "\u0E35", "\u0E38", "\u0E39", "\u0E40", "\u0E42"],
-      virama: "\u0E3A",
-      m: "\u0E4D",
-      digits: [..."\u0E50\u0E51\u0E52\u0E53\u0E54\u0E55\u0E56\u0E57\u0E58\u0E59"],
-      prefix: true,
-      stop: "\u0E2F",
-      abbr: "."
-    },
-    myanmar: {
-      c: [..."\u1000\u1001\u1002\u1003\u1004\u1005\u1006\u1007\u1008\u1009\u100B\u100C\u100D\u100E\u100F\u1010\u1011\u1012\u1013\u1014\u1015\u1016\u1017\u1018\u1019\u101A\u101B\u101C\u101D\u101E\u101F\u1020"],
-      v: ["\u1021", "\u1021\u102C", "\u1023", "\u1024", "\u1025", "\u1026", "\u1027", "\u1029"],
-      s: ["", "\u102C", "\u102D", "\u102E", "\u102F", "\u1030", "\u1031", "\u1031\u102C"],
-      virama: "\u1039",
-      final: "\u103A",
-      m: "\u1036",
-      digits: [..."\u1040\u1041\u1042\u1043\u1044\u1045\u1046\u1047\u1048\u1049"],
-      stop: "\u104B",
-      abbr: ".",
-      verseEnd: "\u104B",
-      ellipsis: "\u104B",
-      comma: "\u104A",
-      // Stacks VRI writes as one letter, a medial or kinzi (applied in this order).
-      ligatures: [["\u101E\u1039\u101E", "\u103F"], ["\u1009\u1039\u1009", "\u100A"], ["\u1039\u101A", "\u103B"], ["\u1039\u101B", "\u103C"], ["\u1039\u101D", "\u103D"], ["\u1039\u101F", "\u103E"], ["\u1004\u1039", "\u1004\u103A\u1039"]],
-      extraIndependent: { "\u1026": "\u016B", "\u102A": "o" }
-    },
-    khmer: {
-      c: [..."\u1780\u1781\u1782\u1783\u1784\u1785\u1786\u1787\u1788\u1789\u178A\u178B\u178C\u178D\u178E\u178F\u1790\u1791\u1792\u1793\u1794\u1795\u1796\u1797\u1798\u1799\u179A\u179B\u179C\u179F\u17A0\u17A1"],
-      v: ["\u17A2", "\u17A2\u17B6", "\u17A5", "\u17A6", "\u17A7", "\u17A9", "\u17AF", "\u17B1"],
-      s: ["", "\u17B6", "\u17B7", "\u17B8", "\u17BB", "\u17BC", "\u17C1", "\u17C4"],
-      virama: "\u17D2",
-      final: "\u17D1",
-      m: "\u17C6",
-      digits: [..."\u17E0\u17E1\u17E2\u17E3\u17E4\u17E5\u17E6\u17E7\u17E8\u17E9"],
-      stop: "\u17D4",
-      abbr: ".",
-      extraIndependent: { "\u17A8": "\u016B" }
-    },
-    lao: {
-      // Lao with the Pāli letters added in Unicode 12 (U+0E86-U+0EAC) and the Pāli virama U+0EBA.
-      c: [
-        "\u0E81",
-        "\u0E82",
-        "\u0E84",
-        "\u0E86",
-        "\u0E87",
-        "\u0E88",
-        "\u0E89",
-        "\u0E8A",
-        "\u0E8C",
-        "\u0E8E",
-        "\u0E8F",
-        "\u0E90",
-        "\u0E91",
-        "\u0E92",
-        "\u0E93",
-        "\u0E95",
-        "\u0E96",
-        "\u0E97",
-        "\u0E98",
-        "\u0E99",
-        "\u0E9B",
-        "\u0E9C",
-        "\u0E9E",
-        "\u0EA0",
-        "\u0EA1",
-        "\u0E8D",
-        "\u0EA3",
-        "\u0EA5",
-        "\u0EA7",
-        "\u0EAA",
-        "\u0EAB",
-        "\u0EAC"
-      ],
-      v: ["\u0EAD", "\u0EAD\u0EB2", "\u0EAD\u0EB4", "\u0EAD\u0EB5", "\u0EAD\u0EB8", "\u0EAD\u0EB9", "\u0EC0\u0EAD", "\u0EC2\u0EAD"],
-      s: ["", "\u0EB2", "\u0EB4", "\u0EB5", "\u0EB8", "\u0EB9", "\u0EC0", "\u0EC2"],
-      virama: "\u0EBA",
-      m: "\u0ECD",
-      digits: [..."\u0ED0\u0ED1\u0ED2\u0ED3\u0ED4\u0ED5\u0ED6\u0ED7\u0ED8\u0ED9"],
-      prefix: true
-    },
-    lanna: {
-      // Tai Tham is stored in logical order; sakot (U+1A60) stacks clusters and
-      // the visible asat (U+1A7A) marks a consonant with no vowel.
-      c: [
-        "\u1A20",
-        "\u1A21",
-        "\u1A23",
-        "\u1A25",
-        "\u1A26",
-        "\u1A27",
-        "\u1A28",
-        "\u1A29",
-        "\u1A2B",
-        "\u1A2C",
-        "\u1A2D",
-        "\u1A2E",
-        "\u1A2F",
-        "\u1A30",
-        "\u1A31",
-        "\u1A32",
-        "\u1A33",
-        "\u1A34",
-        "\u1A35",
-        "\u1A36",
-        "\u1A37",
-        "\u1A39",
-        "\u1A3B",
-        "\u1A3D",
-        "\u1A3E",
-        "\u1A3F",
-        "\u1A41",
-        "\u1A43",
-        "\u1A45",
-        "\u1A48",
-        "\u1A49",
-        "\u1A4A"
-      ],
-      v: ["\u1A4B", "\u1A4B\u1A63", "\u1A4D", "\u1A4E", "\u1A4F", "\u1A50", "\u1A51", "\u1A52"],
-      s: ["", "\u1A63", "\u1A65", "\u1A66", "\u1A69", "\u1A6A", "\u1A6E", "\u1A6E\u1A63"],
-      virama: "\u1A60",
-      final: "\u1A7A",
-      m: "\u1A74",
-      digits: [..."\u1A90\u1A91\u1A92\u1A93\u1A94\u1A95\u1A96\u1A97\u1A98\u1A99"],
-      extraIndependent: { "\u1A4C": "\u0101" },
-      extraSigns: { "\u1A64": "\u0101", "\u1A70": "o" },
-      // Subjoined letters and the great sa some Lanna texts use; accepted on input.
-      expand: [["\u1A55", "\u1A60\u1A41"], ["\u1A56", "\u1A60\u1A43"], ["\u1A54", "\u1A48\u1A60\u1A48"]]
-    }
-  };
-  var MYMR_TALL = /([ခဂပဝ]|ဒ္ဓ)(ေ?)ာ/g;
-  for (const t of Object.values(TABLES)) {
-    t.cons = zip(C_ORDER, t.c);
-    t.ind = zip(VOWELS, t.v);
-    t.sign = zip(VOWELS, t.s);
-    t.zwj = new Set(t.zwj ?? []);
-  }
-  var ROMAN_TOKENS = [...CONSONANTS, ...VOWELS, "\u1E43"];
-  var PE = "\uE000";
-  var STOP = "\uE001";
-  var STANZA = "\uE002";
-  function* romanTokens(s) {
-    for (let i = 0; i < s.length; ) {
-      let tok = null;
-      for (const t of ROMAN_TOKENS) if (s.startsWith(t, i)) {
-        tok = t;
-        break;
-      }
-      if (tok) {
-        yield { kind: tok === "\u1E43" ? "m" : VOWELS.includes(tok) ? "v" : "c", tok };
-        i += tok.length;
-      } else {
-        if (s[i] === "\u1E41" || s[i] === "\u014B") yield { kind: "m", tok: "\u1E43" };
-        else yield { kind: "o", tok: s[i] };
-        i += 1;
-      }
-    }
-  }
-  function romanPunctuation(s, t, stanza) {
-    if (stanza && t.stanzaEnd) s = s.replace(/\.(\)?\s*)$/, `${STANZA}$1`);
-    if (t.abbr) {
-      s = s.replace(/…(\s*)(pe)…/gi, `\u2026$1$2${PE}\u2026`);
-      s = s.replace(/(?<=(?:^|[\s(.])\p{Ll}{1,6})\.(?=\s*[\p{Ll}\d)])/gu, PE);
-    }
-    if (t.stop) s = s.replace(/(?<![0-9])\./g, STOP);
-    if (t.verseEnd) s = s.replace(/;(\s*)$/, `${STOP}$1`);
-    return s;
-  }
-  function fromRoman(text11, script, stanza) {
-    const t = TABLES[script];
-    const s = romanPunctuation(text11.normalize("NFC"), t, stanza).toLowerCase();
-    let out = "";
-    let pending = null;
-    let consStart = -1;
-    for (const { kind, tok } of romanTokens(s)) {
-      if (kind === "c") {
-        if (pending) {
-          out += t.virama;
-          if (t.zwj.has(pending + tok)) out += "\u200D";
-          else if (t.joiner) out += t.joiner(pending, tok);
-        }
-        consStart = out.length;
-        out += t.cons[tok];
-        pending = tok;
-      } else if (kind === "v") {
-        if (pending) {
-          const sign = t.sign[tok];
-          if (t.prefix && (tok === "e" || tok === "o")) out = out.slice(0, consStart) + sign + out.slice(consStart);
-          else out += sign;
-          pending = null;
-        } else {
-          out += t.ind[tok];
-        }
-      } else {
-        if (pending) {
-          out += t.final ?? t.virama;
-          pending = null;
-        }
-        if (kind === "m") out += t.m;
-        else if (tok >= "0" && tok <= "9") out += t.digits ? t.digits[tok.charCodeAt(0) - 48] : tok;
-        else if (tok === PE) out += t.abbr;
-        else if (tok === STOP) out += t.stop;
-        else if (tok === STANZA) out += t.stanzaEnd;
-        else if (tok === "\u2026" && t.ellipsis) out += t.ellipsis;
-        else if (tok === "," && t.comma) out += t.comma;
-        else out += tok;
-      }
-    }
-    if (pending) out += t.final ?? t.virama;
-    if (t.ligatures) for (const [a, b] of t.ligatures) out = out.split(a).join(b);
-    if (script === "myanmar") out = out.replace(MYMR_TALL, "$1$2\u102B");
-    return out;
-  }
-  var REVERSE = {};
-  function reverse(script) {
-    if (REVERSE[script]) return REVERSE[script];
-    const t = TABLES[script];
-    const cons = new Map(C_ORDER.map((r) => [t.cons[r], r]));
-    const carrier = t.ind.a;
-    cons.set(carrier, "");
-    const ind = /* @__PURE__ */ new Map();
-    for (const r of VOWELS) if (r !== "a" && !t.ind[r].startsWith(carrier)) ind.set(t.ind[r], r);
-    for (const [k, v] of Object.entries(t.extraIndependent ?? {})) ind.set(k, v);
-    const signs = new Map(VOWELS.filter((r) => t.sign[r] && !(t.prefix && (r === "e" || r === "o"))).map((r) => [t.sign[r], r]));
-    for (const [k, v] of Object.entries(t.extraSigns ?? {})) signs.set(k, v);
-    const punct = /* @__PURE__ */ new Map();
-    if (t.stop) punct.set(t.stop, ".");
-    if (t.stanzaEnd) punct.set(t.stanzaEnd, ".");
-    if (t.abbr) punct.set(t.abbr, ".");
-    if (t.ellipsis) punct.set(t.ellipsis, ".");
-    if (t.comma) punct.set(t.comma, ",");
-    if (t.digits) t.digits.forEach((d, i) => punct.set(d, String(i)));
-    const expand = [...t.expand ?? []];
-    if (t.ligatures) for (const [a, b] of [...t.ligatures].reverse()) expand.push([b, a]);
-    if (script === "myanmar") expand.push(["\u102B", "\u102C"]);
-    const byLength = (m) => [...m.keys()].sort((a, b) => b.length - a.length);
-    const prefixes = t.prefix ? /* @__PURE__ */ new Map([[t.sign.e, "e"], [t.sign.o, "o"]]) : /* @__PURE__ */ new Map();
-    return REVERSE[script] = { t, cons, ind, signs, signList: byLength(signs), indList: byLength(ind), punct, expand, prefixes };
-  }
-  function toRomanFrom(text11, script) {
-    const R = reverse(script);
-    const { t } = R;
-    let s = text11.normalize("NFC").replace(/[\u200c\u200d]/g, "");
-    for (const [a, b] of R.expand) s = s.split(a).join(b);
-    const at = (i, list) => list.find((x) => s.startsWith(x, i));
-    let out = "";
-    for (let i = 0; i < s.length; ) {
-      let prefix = null;
-      if (R.prefixes.has(s[i]) && R.cons.has(s[i + 1])) {
-        prefix = R.prefixes.get(s[i]);
-        i += 1;
-      }
-      const c = s[i];
-      if (R.cons.has(c)) {
-        out += R.cons.get(c);
-        i += 1;
-        if (prefix) out += prefix;
-        else if (s[i] === t.virama || t.final && s[i] === t.final) i += 1;
-        else {
-          const sign = at(i, R.signList);
-          if (sign) {
-            out += R.signs.get(sign);
-            i += sign.length;
-          } else out += "a";
-        }
-        continue;
-      }
-      const v = at(i, R.indList);
-      if (v) {
-        out += R.ind.get(v);
-        i += v.length;
-        continue;
-      }
-      if (c === t.m) {
-        out += "\u1E43";
-        i += 1;
-        continue;
-      }
-      out += R.punct.get(c) ?? c;
-      i += 1;
-    }
-    if (t.abbr) out = out.replace(/[.…](\s*)pe\.[.…]/g, "\u2026$1pe\u2026");
-    return out;
-  }
-  var RANGES = [
-    ["devanagari", 2304, 2431],
-    ["sinhala", 3456, 3583],
-    ["thai", 3584, 3711],
-    ["lao", 3712, 3839],
-    ["myanmar", 4096, 4255],
-    ["khmer", 6016, 6143],
-    ["lanna", 6688, 6831]
-  ];
-  function detectScript(text11) {
-    const counts = {};
-    for (const ch of String(text11 ?? "")) {
-      const cp = ch.codePointAt(0);
-      if (cp < 2304) continue;
-      for (const [name, lo, hi] of RANGES) if (cp >= lo && cp <= hi) {
-        counts[name] = (counts[name] ?? 0) + 1;
-        break;
-      }
-    }
-    let best = "roman";
-    let n = 0;
-    for (const [name, c] of Object.entries(counts)) if (c > n) {
-      best = name;
-      n = c;
-    }
-    return best;
-  }
-  function transliterate(text11, from, to, { stanza = false } = {}) {
-    if (text11 == null) return text11;
-    const s = String(text11);
-    const a = from === "auto" ? detectScript(s) : scriptName(from);
-    const b = scriptName(to);
-    if (a === b) return s;
-    const roman = a === "roman" ? s : toRomanFrom(s, a);
-    return b === "roman" ? roman : fromRoman(roman, b, stanza);
-  }
-  function romanizeInput(text11) {
-    const s = String(text11 ?? "");
-    const script = detectScript(s);
-    if (script === "roman") return { text: s, script };
-    return { text: toRomanFrom(s, script).normalize("NFC"), script, original: s };
-  }
-  function romanizeLookupInput(text11) {
-    const input = romanizeInput(text11);
-    if (detectScript(input.text) !== "roman" || [...input.text].some((ch) => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch))) {
-      throw new Error("The lookup input could not be converted completely. Use P\u0101li in Roman or one supported script, without mixed or unsupported characters.");
-    }
-    return input;
-  }
-  function inputNote(input) {
-    return input?.original ? { input_script: input.script, input_romanized: input.text } : {};
-  }
-  function scriptNote(script) {
-    return {
-      script,
-      script_note: `P\u0101li transliterated into ${SCRIPT_NAMES[script]} by this server from the VRI Roman edition (exact letter-for-letter; punctuation follows VRI's own script editions where they exist). Citations, IDs and English are left in Roman.`
-    };
-  }
-  var pali = (text11, script, opts) => typeof text11 === "string" && text11 ? transliterate(text11, "roman", script, opts) : text11;
-  function verse(text11, script) {
-    const lines = text11.split("\n");
-    return lines.map((line, i) => pali(line, script, { stanza: i === lines.length - 1 })).join("\n");
-  }
-  function localizeUnitFields(obj, script) {
-    const out = { ...obj };
-    if (typeof out.title === "string") {
-      out.title_roman = out.title;
-      out.title = pali(out.title, script);
-    }
-    if (typeof out.vri_book === "string") out.vri_book = pali(out.vri_book, script);
-    if (typeof out.excerpt === "string") out.excerpt = pali(out.excerpt, script);
-    return out;
-  }
-  function localizeText(result, script, input) {
-    const s = script ? scriptName(script) : "roman";
-    if (s === "roman") return { ...result, ...inputNote(input) };
-    const out = localizeUnitFields(result, s);
-    out.segments = (result.segments ?? []).map((seg) => {
-      const x = { ...seg };
-      if (typeof x.text === "string") x.text = x.type === "verse" ? verse(x.text, s) : pali(x.text, s);
-      if (Array.isArray(x.variant_readings)) x.variant_readings = x.variant_readings.map((v) => pali(v, s));
-      if (Array.isArray(x.variants)) x.variants = x.variants.map((v) => ({
-        ...v,
-        raw: pali(v.raw, s),
-        readings: (v.readings ?? []).map((r) => ({ ...r, reading: pali(r.reading, s) })),
-        omissions: (v.omissions ?? []).map((o) => ({ ...o, text: pali(o.text, s) })),
-        remarks: (v.remarks ?? []).map((r) => pali(r, s))
-      }));
-      return x;
-    });
-    if (Array.isArray(result.pali_opening)) out.pali_opening = result.pali_opening;
-    return { ...out, ...scriptNote(s), ...inputNote(input) };
-  }
-
-  // src/apadana-profiles.mjs
-  var APADANA_COMMIT = "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4";
-  var APADANA_LICENSE = "CC BY-NC-SA 4.0";
-  var APADANA_LICENSE_URL = "https://creativecommons.org/licenses/by-nc-sa/4.0/";
-  var APADANA_TRANSLATOR = "Jonathan S. Walters";
+  // src/apadana-thera-profiles.mjs
   var deepFreeze = (value) => {
     if (value && typeof value === "object") {
       for (const child of Object.values(value)) deepFreeze(child);
@@ -987,7 +7,2976 @@
     }
     return value;
   };
-  var APADANA_PROFILES = deepFreeze({
+  var THERA_APADANA_PROFILES = deepFreeze({
+    "tha-ap13": {
+      "id": "tha-ap13",
+      "publisher_chapter": "chapter-3",
+      "poem": 11,
+      "verses": [
+        674,
+        685
+      ],
+      "root_verses": [
+        1,
+        12
+      ],
+      "note_count": 7,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-011/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-011/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-011.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "S\u012Bh\u0101sanad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 11; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "d33ed72ea93a51045d519d525b88f216487c09a6f93ebd4030878f3c30e17887",
+      "body_sha256": "9d1a15d12a0719ff67aad4426b41c4140d77e4131a6c03abd3449f4b209f2d90",
+      "notes_sha256": "5950d1521db00b6b800eb829efe8880a96355380d8ad6b3e5dc0db58c0a06d0a",
+      "paratext_sha256": "d479cc76e4add36c870892df54f53735fd066eb738fe9f26d5efc6c42f07932c",
+      "root_sha256": "b76bd4bafecc124b242419039fe2a3987ee175ef0d32925c264eb562dade454b",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "674",
+          "suffix": "(1) [674]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "675",
+          "suffix": "(2) [675]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "676",
+          "suffix": "(3) [676]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "677",
+          "suffix": "(4) [677]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "678",
+          "suffix": "(5) [678]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "679",
+          "suffix": "(6) [679]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "680",
+          "suffix": "(7) [680]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "681",
+          "suffix": "(8) [681]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "682",
+          "suffix": "(9) [682]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "683",
+          "suffix": "(10) [683]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "684",
+          "suffix": "(11) [684]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "685",
+          "suffix": "(12) [685]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 11 corresponds to canonical tha-ap13 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher local5/global678states seven thousand maidens; VRI5main states one hundred thousand, with satta retained as a variant. Preserve note3and both authentic count formulations.",
+        "Publisher preface names the S\u012Bh\u0101sana chapter; VRI heading uses S\u012Bh\u0101saniyavagga. Keep publisher and canonical spellings, without renaming the root."
+      ]
+    },
+    "tha-ap14": {
+      "id": "tha-ap14",
+      "publisher_chapter": "chapter-3",
+      "poem": 12,
+      "verses": [
+        686,
+        699
+      ],
+      "root_verses": [
+        13,
+        26
+      ],
+      "note_count": 6,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-012/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-012/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-012.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ekatthambhika",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 12; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "dbe4c375a728de9e8e753f318f47cf9dafeaf401be8eb3fbe3df5f2300a96967",
+      "body_sha256": "8812791b6805818141df108c2e23f558180bf58df2cc0081acd8ca52b6e69350",
+      "notes_sha256": "277fb6d0574e883dc468d43f0b7a1b0b3bdd131f62cc0926db4e186c273601fe",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "77a4d9880dd219f15b5b32312dacb756b2b06344313c7a946beaf3d1ea928682",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "686",
+          "suffix": "(1) [686]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "687",
+          "suffix": "(2) [687]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "688",
+          "suffix": "(3) [688]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "689",
+          "suffix": "(4) [689]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "690",
+          "suffix": "(5) [690]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "691",
+          "suffix": "(6) [691]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "692",
+          "suffix": "(7) [692]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "693",
+          "suffix": "(8) [693]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "694",
+          "suffix": "(9) [694]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "695",
+          "suffix": "(10) [695]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "696",
+          "suffix": "(11) [696]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "697",
+          "suffix": "(12) [697]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "698",
+          "suffix": "(13) [698]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "699",
+          "suffix": "(14) [699]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 12 corresponds to canonical tha-ap14 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher local8/global693has a hundred-storey mansion, matching a VRI20satabh\u016Bma\u1E43 variant while the main root has seven storeys.",
+        "Publisher local11/global696again states a hundred-storey mansion; VRI23main states seven, with no corresponding hundred-storey variant recorded in that block. Do not harmonize either.",
+        "The publication\u2019s note4describes its chosen entertainment verb against another edition reading; retain its original note rather than supplementing the poem."
+      ]
+    },
+    "tha-ap15": {
+      "id": "tha-ap15",
+      "publisher_chapter": "chapter-3",
+      "poem": 13,
+      "verses": [
+        700,
+        707
+      ],
+      "root_verses": [
+        27,
+        34
+      ],
+      "note_count": 6,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-013/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-013/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-013.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Nanda",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 13; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "43d07be6e20b0f7672be272a933fcda0dd590f1919fe06bf75e89baf422f0d7b",
+      "body_sha256": "f8ad2b618089591c4641c87619665bd6adb46d0b9fae964f5a7829fef80e72e5",
+      "notes_sha256": "95e6ac528caa6d5494f9fdff56fdf2064e69d781bbcd25d50d8d6b3e49443d4a",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "60e6c4bfd9469a5f85eb672695d1b98c08bb785e36c12704ffd38e020b871d18",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "700",
+          "suffix": "(1) [700]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "701",
+          "suffix": "(2) [701]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "702",
+          "suffix": "(3) [702]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "703",
+          "suffix": "(4) [703]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "704",
+          "suffix": "(5) [704]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "705",
+          "suffix": "(6) [705]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "706",
+          "suffix": "(7) [706]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "707",
+          "suffix": "(8) [707]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 13 corresponds to canonical tha-ap15 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher title Nanda and narrative distinguish this monk from the previously approved Ther\u012B Nand\u0101 subjects; shared names do not authorize merged identities.",
+        "Publisher local6/global705preserves seven-thousandth and sixty-thousandth aeons; its original note4records a hundred-thousandth alternate. VRI32main and sata variant remain independent.",
+        "Publisher names Cela/Upacela retain their source display spelling; VRI uses ce\u1E37a/ce\u1E37an\u0101mak\u0101 forms. Do not normalize editions."
+      ]
+    },
+    "tha-ap16": {
+      "id": "tha-ap16",
+      "publisher_chapter": "chapter-3",
+      "poem": 14,
+      "verses": [
+        708,
+        727
+      ],
+      "root_verses": [
+        35,
+        54
+      ],
+      "note_count": 10,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-014/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-014/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-014.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Culla-Panthaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 14; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "437bc295c0cb666f5748fd6b178cccfa143051cbea6a473046f825dcfbb8504f",
+      "body_sha256": "78614e0e979fcbdf8cdb18349b338ea5cd748a63dad65138ed07dac6703da303",
+      "notes_sha256": "bfb09aab03759d2226c755dbb64d9d5df6cb17456ad58d0609915a425a60a34c",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "de9fac688830b19440fa54649dd93f7dc2406d6ab05dd5149bfa4cc53b8d972c",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "708",
+          "suffix": "(1) [708]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "709",
+          "suffix": "(2) [709]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "710",
+          "suffix": "(3) [710]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "711",
+          "suffix": "(4) [711]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "712",
+          "suffix": "(5) [712]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "713",
+          "suffix": "(6) [713]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "714",
+          "suffix": "(7) [714]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "715",
+          "suffix": "(8) [715]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "716",
+          "suffix": "(9) [716]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "717",
+          "suffix": "(10) [717]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "718",
+          "suffix": "(11) [718]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "719",
+          "suffix": "(12) [719]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "720",
+          "suffix": "(13) [720]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "721",
+          "suffix": "(14) [721]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "722",
+          "suffix": "(15) [722]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "723",
+          "suffix": "(16) [723]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "724",
+          "suffix": "(17) [724]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "725",
+          "suffix": "(18) [725]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "726",
+          "suffix": "(19) [726]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "727",
+          "suffix": "(20) [727]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 14 corresponds to canonical tha-ap16 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher local3/global710negates interruption of meditation by following commentary. VRI37affirmatively says antar\u0101yamak\u0101saha\u1E43. Note2explicitly explains the source\u2019s rejection of PTS/BJTS wording; do not correct the publisher or replace VRI.",
+        "Publisher local13/global720describes eighteen years after renunciation; VRI47describes eighteen years of age at renunciation. This is not line-equivalent coverage.",
+        "Publisher local18/global725describes taking the Buddha by the hands and a red-lotus comparison; VRI52has taking the object by hand and remembering the red lotus. Preserve the differing formulation without inferred word alignment.",
+        "Publisher Culla-Panthaka/Cullapanthaka forms differ from VRI C\u016B\u1E37apanthaka main, with cullapanthako retained as a colophon variant. Notes quoting commentary remain translator apparatus, not activated English commentary."
+      ]
+    },
+    "tha-ap17": {
+      "id": "tha-ap17",
+      "publisher_chapter": "chapter-3",
+      "poem": 15,
+      "verses": [
+        728,
+        740
+      ],
+      "root_verses": [
+        55,
+        67
+      ],
+      "note_count": 5,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-015/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-015/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-015.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Pilindavaccha",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 15; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "964f1474ef9ae7f8e8beb8e49f46cf8e8706b7401a027db8cfa963c8b5673d9d",
+      "body_sha256": "cecc63373338bdd2de2f5e3f6036fa1952ae2e8754b7f92884f875cc958fec94",
+      "notes_sha256": "4824b15af009b38892e364bf1be93dcdbc7d704fd802af3c4550443191a8e82b",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "e2f213d8d349cc8ced242c691207b1f605859a707113977a70e9ef7fd873e01a",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "728",
+          "suffix": "(1) [728]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "729",
+          "suffix": "(2) [729]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "730",
+          "suffix": "(3) [730]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "731",
+          "suffix": "(4) [731]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "732",
+          "suffix": "(5) [732]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "733",
+          "suffix": "(6) [733]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "734",
+          "suffix": "(7) [734]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "735",
+          "suffix": "(8) [735]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "736",
+          "suffix": "(9) [736]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "737",
+          "suffix": "(10) [737]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "738",
+          "suffix": "(11) [738]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "739",
+          "suffix": "(12) [739]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "740",
+          "suffix": "(13) [740]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 15 corresponds to canonical tha-ap17 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher local3/global730uses first-person attendance and the name Sumedha; VRI57has an attendant of Buddha Sumedha who is also named Sumedha. Preserve the speaker/subject difference rather than identifying them by inference.",
+        "The original title note1explicitly distinguishes this early Pilindavaccha/Pilindivaccha account from a much longer later same-name poem. This review maps only the actual early stupa-and-food narrative, not the later monk\u2019s record.",
+        "Publisher original typo in the nymph count wording and speculative note5about scented ointment remain unchanged; editorial speculation is not new root wording."
+      ]
+    },
+    "tha-ap18": {
+      "id": "tha-ap18",
+      "publisher_chapter": "chapter-3",
+      "poem": 16,
+      "verses": [
+        741,
+        758
+      ],
+      "root_verses": [
+        68,
+        85
+      ],
+      "note_count": 11,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-016/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-016/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-016.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "R\u0101hula",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 16; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "91c83bbe0617e9c990ebf52736f5665227a5689f4a0a16fca6d23ac19d532a60",
+      "body_sha256": "91320bb382f7fd78363e6fa91b30c5986d1e320eb7bfa2defce9770f04625a9f",
+      "notes_sha256": "b4bebc1dbb478a9423fa84ca3e923ae75ab178f58d4e910b0fe7b7d32fd92f7c",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "bce81027fd6ba27eb68534307ece630faf2abce9d40d6f584ce2bcad04732a5d",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "741",
+          "suffix": "(1) [741]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "742",
+          "suffix": "(2) [742]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "743",
+          "suffix": "(3) [743]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "744",
+          "suffix": "(4) [744]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "745",
+          "suffix": "(5) [745]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "746",
+          "suffix": "(6) [746]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "747",
+          "suffix": "(7) [747]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "748",
+          "suffix": "(8) [748]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "749",
+          "suffix": "(9) [749]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "750",
+          "suffix": "(10) [750]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "751",
+          "suffix": "(11) [751]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "752",
+          "suffix": "(12) [752]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "753",
+          "suffix": "(13) [753]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "754",
+          "suffix": "(14) [754]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "755",
+          "suffix": "(15) [755]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "756",
+          "suffix": "(16) [756]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "757",
+          "suffix": "(17) [757]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "758",
+          "suffix": "(18) [758]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 16 corresponds to canonical tha-ap18 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher local5/global745speaks of desired things arising in the sky; VRI72explicitly speaks of desired palaces. Preserve the differing extent of the formulation.",
+        "Publisher local16/global756has the speaker protecting virtue, following the eva\u1E43 rakkhi\u1E43 variant recorded in VRI83and original note11; the VRI main instead says the Great Sage protected me.",
+        "The source\u2019s mirrored-surface, deity and palace interpretations and original incomplete punctuation in notes1/6remain translator-owned. Do not assert clause or numerical alignment from the shared story."
+      ]
+    },
+    "tha-ap19": {
+      "id": "tha-ap19",
+      "publisher_chapter": "chapter-3",
+      "poem": 17,
+      "verses": [
+        759,
+        768
+      ],
+      "root_verses": [
+        86,
+        96
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-017/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-017/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-017.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Upasena Va\u1E45gantaputta",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 17; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "18869a8dd0ddde2ad64d4f2aeb7c6e06c9b7a4aabed384afe37db5ad22cf65e5",
+      "body_sha256": "6bf3fbd4c089478ad3bc7f7a96c23fa4e9f87e43bc18fc84006439c4c1303554",
+      "notes_sha256": "86b3f69b58c0427bb5faae8f40b594024d545f8faacfaff4531ff3ce6abe9fef",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "bedb9a1b62717941fb7a6eb1790e2d1b260db21f45cb0c084ffc0d4661310505",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "759",
+          "suffix": "(1) [759]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "760",
+          "suffix": "(2) [760]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "761",
+          "suffix": "(3) [761]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "762",
+          "suffix": "(4) [762]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "763",
+          "suffix": "(5) [763]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "764",
+          "suffix": "(6) [764]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "765",
+          "suffix": "(7) [765]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "766",
+          "suffix": "(8) [766]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "767",
+          "suffix": "(9) [767]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "768",
+          "suffix": "(10) [768]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 17 corresponds to canonical tha-ap19 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher local5/global763states thirty divine reigns while VRI90has thirty-six; local6/global764states twenty wheel-turner reigns while VRI91has twenty-one. No corresponding count variants are recorded there.",
+        "Publisher local7/global765uses Sumedha in its prophecy, corresponding to the alternate prophecy preserved at VRI92rather than the main Gotama/Okk\u0101ka stanza. Original note3owns the chronological uncertainty.",
+        "Publisher local8/global766does not separately translate VRI93second-half legitimate-heir wording or VRI94second-half foremost-in-pleasing-everyone wording. VRI notes identify the latter half as commentary-attested. These actual VRI half-stanzas remain untranslated by this publisher poem.",
+        "Original VRI94renderer includes a separate punctuation-only prose segment with a repeated variant note; it is not an additional translated stanza.",
+        "The publisher third-recitation marker is separate canonical apparatus matching root2359\u20132360/ref16; it is not a substantive stanza or poem quotation evidence."
+      ],
+      "index_revision": "apadana-thera11-30-v1",
+      "publisher_divisions": [
+        {
+          "kind": "publisher_recitation",
+          "label": "Third recitation portion",
+          "parent_id": "tha-ap19",
+          "placement": "after_poem",
+          "body_sha256": "43cacf0087663f13678c2e80170cacf3a15aab1ab6656924cdcd962e546bdb93",
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_numbers": []
+        }
+      ]
+    },
+    "tha-ap20": {
+      "id": "tha-ap20",
+      "publisher_chapter": "chapter-3",
+      "poem": 18,
+      "verses": [
+        769,
+        783
+      ],
+      "root_verses": [
+        97,
+        111
+      ],
+      "note_count": 9,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-018/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-018/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-018.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ra\u1E6D\u1E6Dhap\u0101la",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 18; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "402b35c86c8e029563f285f193e67115b3c009f1738b98ee4123c31c7d8a994d",
+      "body_sha256": "44f232b5ed12cc96085ec14550de8f39d0ab85f7623a517861e88c039960714c",
+      "notes_sha256": "68cd1f5656f7aeec165ac7ce0836eceef0a9e2d89598906ed601b4d48afafbf5",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "9ea073a89739013aa0cb8a36046c822cfd1692525717476cf0c38c66b9bb203b",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "769",
+          "suffix": "(1) [769]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "770",
+          "suffix": "(2) [770]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "771",
+          "suffix": "(3) [771]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "772",
+          "suffix": "(4) [772]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "773",
+          "suffix": "(5) [773]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "774",
+          "suffix": "(6) [774]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "775",
+          "suffix": "(7) [775]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "776",
+          "suffix": "(8) [776]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "777",
+          "suffix": "(9) [777]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "778",
+          "suffix": "(10) [778]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "779",
+          "suffix": "(11) [779]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "780",
+          "suffix": "(12) [780]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "781",
+          "suffix": "(13) [781]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "782",
+          "suffix": "(14) [782]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "783",
+          "suffix": "(15) [783]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 18 corresponds to canonical tha-ap20 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher local13/global781expresses aversion to food and almsfood as phlegm; VRI109has attachment to possessions compared to a lump of spittle. Preserve the semantic difference without word-level equivalence.",
+        "Publisher original notes2\u20136own its trappings, flood-of-alms/dedication and speaker choices. No quoted alternate reading replaces VRI main or creates a new translated unit."
+      ],
+      "index_revision": "apadana-thera11-30-v1"
+    },
+    "tha-ap21": {
+      "id": "tha-ap21",
+      "publisher_chapter": "chapter-3",
+      "poem": 19,
+      "verses": [
+        784,
+        795
+      ],
+      "root_verses": [
+        112,
+        123
+      ],
+      "note_count": 7,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-019/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-019/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-019.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Sop\u0101ka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 19; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "ba0f686ad14d24e6727a452643d169076bbc61fbb9c20deb53656e1410def70d",
+      "body_sha256": "23f7b079bd22c3498e177a573c3c5830a3dff2b459047ee67464152465ebf4d3",
+      "notes_sha256": "0875ae46726f02e4e1c4f232692e74641f89882ec3b5e6c0790425a9180f1043",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "26b43db459771d94e21223882a952d68c3b895ae3cdf2e2fb5f5ff264cb81f5c",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "784",
+          "suffix": "(1) [784]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "785",
+          "suffix": "(2) [785]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "786",
+          "suffix": "(3) [786]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "787",
+          "suffix": "(4) [787]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "788",
+          "suffix": "(5) [788]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "789",
+          "suffix": "(6) [789]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "790",
+          "suffix": "(7) [790]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "791",
+          "suffix": "(8) [791]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "792",
+          "suffix": "(9) [792]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "793",
+          "suffix": "(10 [793]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "794",
+          "suffix": "(11) [794]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "795",
+          "suffix": "(12) [795]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 19 corresponds to canonical tha-ap21 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher local8/global791describes seven years as an ascetic; VRI119explicitly marks seven years of age by j\u0101tiy\u0101 sattavassoha\u1E43. Preserve the source formulation as a distinct reading/interpretation, not aligned VRI wording.",
+        "Publisher local10/global793is printed with a missing closing parenthesis. Preserve literal suffix (10 [793] and local-label metadata10; do not insert punctuation or renumber.",
+        "Original source note6contains a derogatory caste explanation. Retain it as attributed translator editorial material, not assistant guidance or additional scripture."
+      ]
+    },
+    "tha-ap22": {
+      "id": "tha-ap22",
+      "publisher_chapter": "chapter-3",
+      "poem": 20,
+      "verses": [
+        796,
+        812
+      ],
+      "root_verses": [
+        124,
+        140
+      ],
+      "note_count": 7,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-020/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-020/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-020.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Suma\u1E45gala",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 20; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "af37d487b0589f55974e03a17759c53d5bb0f5a1a14ec291889b537200a04c7a",
+      "body_sha256": "cb7bfdaa8ec6a76863f3c8f387abe430155ff0419a22297bfcbc7cbc89dfd1cf",
+      "notes_sha256": "a2b448c25aef43214a53d87c047e8b10f50de0bfb522879abe437209bc846f9e",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "542be43c53a47e32abac3405cb3a510ddca180074fc8e7bd82a78b06fd9fed4e",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "796",
+          "suffix": "(1) [796]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "797",
+          "suffix": "(2) [797]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "798",
+          "suffix": "(3) [798]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "799",
+          "suffix": "(4) [799]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "800",
+          "suffix": "(5) [800]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "801",
+          "suffix": "(6) [801]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "802",
+          "suffix": "(7) [802]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "803",
+          "suffix": "(8) [803]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "804",
+          "suffix": "(9) [804]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "805",
+          "suffix": "(10) [805]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "806",
+          "suffix": "(11) [806]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "807",
+          "suffix": "(12) [807]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "808",
+          "suffix": "(13) [808]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "809",
+          "suffix": "(14) [809]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "810",
+          "suffix": "(15) [810]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "811",
+          "suffix": "(16) [811]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "812",
+          "suffix": "(17) [812]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 20 corresponds to canonical tha-ap22 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "The separate publisher chapter summary states137verses, VRI summary states138, while actual numbered VRI chapter stanzas are1\u2013140. The publisher poems contain139physical stanza entries; none of these count systems may silently replace another.",
+        "Publisher and VRI summary name forms differ, including source Vangata/Ma\u1E45gala and chapter S\u012Bh\u0101sani forms. Preserve each edition and the original summary wording."
+      ],
+      "chapter_summary": {
+        "kind": "canonical_chapter_summary",
+        "label": "Second Ther\u0101 Apad\u0101na chapter summary",
+        "parent_id": "tha-ap22",
+        "first_ref": "tha-ap22/21",
+        "last_ref": "tha-ap22/24",
+        "root_start": 2501,
+        "root_end": 2507,
+        "root_sha256": "35f075b2f7a43ec8b4e5d725748cacee7d4daf694e5d20d9ec39f4ade16720f6",
+        "body_sha256": "efe5cafea6883a795ddecb45456307ba7e44e2945e05a21fa4b3f71dbb9d0725",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "note_numbers": []
+      }
+    },
+    "tha-ap23": {
+      "id": "tha-ap23",
+      "publisher_chapter": "chapter-3",
+      "poem": 21,
+      "verses": [
+        813,
+        864
+      ],
+      "root_verses": [
+        1,
+        51
+      ],
+      "note_count": 19,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-021/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-021/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-021.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Subh\u016Bti",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 21; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "c4ebce7e1186c7bef4d5e8f139a6bf80ef82a6c020e37ad2639cc1e43a934861",
+      "body_sha256": "14a6694b9ab900194c53729776c072bef05613401fab82d78f774ee42b2e6a15",
+      "notes_sha256": "7b615b43aa48306da99c1ad58c1c08303b352efcaab5b8ff34f27acb259dd8b5",
+      "paratext_sha256": "c793b2ebf08a75144519792f587328262611e0fe04002ab8c3e898512e348f3d",
+      "root_sha256": "a68bdbe0e1cc8e5f810b17a903fe234a02430782db85d0481f796f9e26dadd1e",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "813",
+          "suffix": "(1) [813]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "814",
+          "suffix": "(2) [814]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "815",
+          "suffix": "(3) [815]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "816",
+          "suffix": "(4) [816]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "817",
+          "suffix": "(5) [817]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "818",
+          "suffix": "(6) [818]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "819",
+          "suffix": "(7) [819]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "820",
+          "suffix": "(8) [820]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "821",
+          "suffix": "(9) [821]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "822",
+          "suffix": "(10) [822]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "823",
+          "suffix": "(11) [823]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "824",
+          "suffix": "(12) [824]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "825",
+          "suffix": "(13) [825]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "826",
+          "suffix": "(14) [826]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "827",
+          "suffix": "(15) [827]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "828",
+          "suffix": "(16) [828]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "829",
+          "suffix": "(17) [829]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "830",
+          "suffix": "(18) [830]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "831",
+          "suffix": "(19) [831]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "832",
+          "suffix": "(20) [832]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "833",
+          "suffix": "(21) [833]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "834",
+          "suffix": "(22) [834]",
+          "lines": 4
+        },
+        {
+          "local_label": "23",
+          "publisher_label": "835",
+          "suffix": "(23) [835]",
+          "lines": 4
+        },
+        {
+          "local_label": "24",
+          "publisher_label": "836",
+          "suffix": "(24) [836]",
+          "lines": 4
+        },
+        {
+          "local_label": "25",
+          "publisher_label": "837",
+          "suffix": "(25) [837]",
+          "lines": 4
+        },
+        {
+          "local_label": "26",
+          "publisher_label": "838",
+          "suffix": "(26) [838]",
+          "lines": 4
+        },
+        {
+          "local_label": "27",
+          "publisher_label": "839",
+          "suffix": "(27) [839]",
+          "lines": 4
+        },
+        {
+          "local_label": "28",
+          "publisher_label": "840",
+          "suffix": "(28) [840]",
+          "lines": 4
+        },
+        {
+          "local_label": "29",
+          "publisher_label": "841",
+          "suffix": "(29) [841]",
+          "lines": 4
+        },
+        {
+          "local_label": "30",
+          "publisher_label": "842",
+          "suffix": "(30) [842]",
+          "lines": 4
+        },
+        {
+          "local_label": "31",
+          "publisher_label": "843",
+          "suffix": "(31) [843]",
+          "lines": 4
+        },
+        {
+          "local_label": "32",
+          "publisher_label": "844",
+          "suffix": "(32) [844]",
+          "lines": 4
+        },
+        {
+          "local_label": "33",
+          "publisher_label": "845",
+          "suffix": "(33) [845]",
+          "lines": 4
+        },
+        {
+          "local_label": "34",
+          "publisher_label": "846",
+          "suffix": "(34) [846]",
+          "lines": 4
+        },
+        {
+          "local_label": "35",
+          "publisher_label": "847",
+          "suffix": "(35) [847]",
+          "lines": 4
+        },
+        {
+          "local_label": "36",
+          "publisher_label": "848",
+          "suffix": "(36) [848]",
+          "lines": 4
+        },
+        {
+          "local_label": "37",
+          "publisher_label": "849",
+          "suffix": "(37) [849]",
+          "lines": 4
+        },
+        {
+          "local_label": "38",
+          "publisher_label": "850",
+          "suffix": "(38) [850]",
+          "lines": 4
+        },
+        {
+          "local_label": "39",
+          "publisher_label": "851",
+          "suffix": "(39) [851]",
+          "lines": 4
+        },
+        {
+          "local_label": "40",
+          "publisher_label": "852",
+          "suffix": "(40) [852]",
+          "lines": 4
+        },
+        {
+          "local_label": "41",
+          "publisher_label": "853",
+          "suffix": "(41) [853]",
+          "lines": 4
+        },
+        {
+          "local_label": "42",
+          "publisher_label": "854",
+          "suffix": "(42) [854]",
+          "lines": 4
+        },
+        {
+          "local_label": "43",
+          "publisher_label": "855",
+          "suffix": "(43) [855]",
+          "lines": 4
+        },
+        {
+          "local_label": "44",
+          "publisher_label": "856",
+          "suffix": "(44) [856]",
+          "lines": 4
+        },
+        {
+          "local_label": "45",
+          "publisher_label": "857",
+          "suffix": "(45) [857]",
+          "lines": 4
+        },
+        {
+          "local_label": "46",
+          "publisher_label": "858",
+          "suffix": "(46) [858]",
+          "lines": 4
+        },
+        {
+          "local_label": "47",
+          "publisher_label": "859",
+          "suffix": "(47) [859]",
+          "lines": 4
+        },
+        {
+          "local_label": "48",
+          "publisher_label": "860",
+          "suffix": "(48) [860]",
+          "lines": 4
+        },
+        {
+          "local_label": "49",
+          "publisher_label": "861",
+          "suffix": "(49) [861]",
+          "lines": 4
+        },
+        {
+          "local_label": "50",
+          "publisher_label": "862",
+          "suffix": "(50) [862]",
+          "lines": 4
+        },
+        {
+          "local_label": "51",
+          "publisher_label": "863",
+          "suffix": "(51) [863]",
+          "lines": 4
+        },
+        {
+          "local_label": "52",
+          "publisher_label": "864",
+          "suffix": "(52) [864]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 21 corresponds to canonical tha-ap23 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher local8/global820says homeless, whereas VRI8has ag\u0101riko bhavitv\u0101na, a householder. Preserve the opposing formulation; no canonical emendation.",
+        "Publisher local11/global823follows jahasi as documented in note2/VRI11variant; VRI main vahisi remains unchanged.",
+        "Publisher local18/global830interprets a beautiful iron tool being unused, while VRI18main jh\u0101yati/jh\u0101yissasi gives a meditation/fire-related verb and retains y\u0101yati/y\u0101rissati variants. The long original note6owns the uncertainty.",
+        "Publisher local19/global831uses accumulated wealth, whereas VRI19nihita\u1E43 carries deposited/hidden or the note\u2019s renounced reading. Preserve note7and avoid claiming lexical equivalence.",
+        "Publisher local44/global856calls the second foremost place forest-dwelling; VRI43ara\u1E47avih\u0101ra is dispute-free dwelling. Preserve the source and VRI term without substituting a different P\u0101li word.",
+        "Publisher52printed stanzas regroup VRI35\u201337six-foot material into four-foot entries; actual VRI has51numbered stanzas. VRI26is rendered across verse/prose/unnumbered-verse segments; do not discard its middle or last portion by renderer type.",
+        "Publisher notes3/7/15/17contain exactly four paired HTML c/ch displays; notes1/6/7retain translator uncertainty, and note13retains its incomplete original quotation punctuation."
+      ],
+      "index_revision": "apadana-thera11-30-v1"
+    },
+    "tha-ap24": {
+      "id": "tha-ap24",
+      "publisher_chapter": "chapter-3",
+      "poem": 22,
+      "verses": [
+        865,
+        919
+      ],
+      "root_verses": [
+        52,
+        105
+      ],
+      "note_count": 24,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-022/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-022/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-022.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Upav\u0101na",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 22; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "48e1bfe4ecf97f288afeb1d487946fa63bb37712866b3f343d76a5410e0982fd",
+      "body_sha256": "3fc618d36130367f61065ab9f52742466f6ea10100c80ea16c7150970a7422e1",
+      "notes_sha256": "7c6540629ca780c97520b7a0f3a9507d4d8d7aab4669c3aeb7819dcdfa359b96",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "abe4d1bc9f57a0f187efd0f0d18247113d641a912ad1d6b7854f845194c75a4d",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "865",
+          "suffix": "(1) [865]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "866",
+          "suffix": "(2) [866]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "867",
+          "suffix": "(3) [867]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "868",
+          "suffix": "(4) [868]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "869",
+          "suffix": "(5) [869]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "870",
+          "suffix": "(6) [870]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "871",
+          "suffix": "(7) [871]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "872",
+          "suffix": "(8) [872]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "873",
+          "suffix": "(9) [873]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "874",
+          "suffix": "(10) [874]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "875",
+          "suffix": "(11) [875]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "876",
+          "suffix": "(12) [876]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "877",
+          "suffix": "(13) [877]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "878",
+          "suffix": "(14) [878]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "879",
+          "suffix": "(15) [879]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "880",
+          "suffix": "(16) [880]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "881",
+          "suffix": "(17) [881]",
+          "lines": 4
+        },
+        {
+          "local_label": null,
+          "publisher_label": "882",
+          "suffix": "[882]",
+          "lines": 4
+        },
+        {
+          "local_label": null,
+          "publisher_label": "883",
+          "suffix": "[883]",
+          "lines": 4
+        },
+        {
+          "local_label": null,
+          "publisher_label": "884",
+          "suffix": "[884]",
+          "lines": 4
+        },
+        {
+          "local_label": null,
+          "publisher_label": "885",
+          "suffix": "[885]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "886",
+          "suffix": "(18) [886]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "887",
+          "suffix": "(19) [887]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "888",
+          "suffix": "(20) [888]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "889",
+          "suffix": "(21) [889]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "890",
+          "suffix": "(22) [890]",
+          "lines": 4
+        },
+        {
+          "local_label": "23",
+          "publisher_label": "891",
+          "suffix": "(23) [891]",
+          "lines": 4
+        },
+        {
+          "local_label": "24",
+          "publisher_label": "892",
+          "suffix": "(24) [892]",
+          "lines": 4
+        },
+        {
+          "local_label": "25",
+          "publisher_label": "893",
+          "suffix": "(25) [893]",
+          "lines": 4
+        },
+        {
+          "local_label": "26",
+          "publisher_label": "894",
+          "suffix": "(26) [894]",
+          "lines": 4
+        },
+        {
+          "local_label": "27",
+          "publisher_label": "895",
+          "suffix": "(27) [895]",
+          "lines": 4
+        },
+        {
+          "local_label": "28",
+          "publisher_label": "896",
+          "suffix": "(28) [896]",
+          "lines": 4
+        },
+        {
+          "local_label": "29",
+          "publisher_label": "897",
+          "suffix": "(29) [897]",
+          "lines": 4
+        },
+        {
+          "local_label": "30",
+          "publisher_label": "898",
+          "suffix": "(30) [898]",
+          "lines": 4
+        },
+        {
+          "local_label": "31",
+          "publisher_label": "899",
+          "suffix": "(31) [899]",
+          "lines": 4
+        },
+        {
+          "local_label": "32",
+          "publisher_label": "900",
+          "suffix": "(32) [900]",
+          "lines": 4
+        },
+        {
+          "local_label": "33",
+          "publisher_label": "901",
+          "suffix": "(33) [901]",
+          "lines": 4
+        },
+        {
+          "local_label": "34",
+          "publisher_label": "902",
+          "suffix": "(34) [902]",
+          "lines": 4
+        },
+        {
+          "local_label": "35",
+          "publisher_label": "903",
+          "suffix": "(35) [903]",
+          "lines": 4
+        },
+        {
+          "local_label": "36",
+          "publisher_label": "904",
+          "suffix": "(36) [904]",
+          "lines": 4
+        },
+        {
+          "local_label": "37",
+          "publisher_label": "905",
+          "suffix": "(37) [905]",
+          "lines": 4
+        },
+        {
+          "local_label": "38",
+          "publisher_label": "906",
+          "suffix": "(38) [906]",
+          "lines": 4
+        },
+        {
+          "local_label": "39",
+          "publisher_label": "907",
+          "suffix": "(39) [907]",
+          "lines": 4
+        },
+        {
+          "local_label": "40",
+          "publisher_label": "908",
+          "suffix": "(40) [908]",
+          "lines": 4
+        },
+        {
+          "local_label": "41",
+          "publisher_label": "909",
+          "suffix": "(41) [909]",
+          "lines": 4
+        },
+        {
+          "local_label": "42",
+          "publisher_label": "910",
+          "suffix": "(42) [910]",
+          "lines": 4
+        },
+        {
+          "local_label": "43",
+          "publisher_label": "911",
+          "suffix": "(43) [911]",
+          "lines": 4
+        },
+        {
+          "local_label": "44",
+          "publisher_label": "912",
+          "suffix": "(44) [912]",
+          "lines": 4
+        },
+        {
+          "local_label": "45",
+          "publisher_label": "913",
+          "suffix": "(45) [913]",
+          "lines": 4
+        },
+        {
+          "local_label": "46",
+          "publisher_label": "914",
+          "suffix": "(46) [914]",
+          "lines": 4
+        },
+        {
+          "local_label": "47",
+          "publisher_label": "915",
+          "suffix": "(47) [915]",
+          "lines": 4
+        },
+        {
+          "local_label": "48",
+          "publisher_label": "916",
+          "suffix": "(48) [916]",
+          "lines": 4
+        },
+        {
+          "local_label": "49",
+          "publisher_label": "917",
+          "suffix": "(49) [917]",
+          "lines": 4
+        },
+        {
+          "local_label": "50",
+          "publisher_label": "918",
+          "suffix": "(50) [918]",
+          "lines": 4
+        },
+        {
+          "local_label": "51",
+          "publisher_label": "919",
+          "suffix": "(51) [919]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 22 corresponds to canonical tha-ap24 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher55printed entries correspond to54numbered VRI stanzas after restoring opening52. Four source global-only entries882\u2013885are substantive verse, not editorial apparatus; VRI69\u201370six-foot material is regrouped.",
+        "Publisher local24/global892has constructed legs, whereas VRI78has chattam\u0101ropayi\u1E43su, raising an umbrella. Preserve the difference.",
+        "Publisher local26/global894has a lamp shining by day, whereas VRI80pad\u012Bpopi na pajjali has a lamp not burning/shining. Preserve the opposite formulation without silent correction.",
+        "Publisher local30/global898has faith in Buddha\u2019s words; VRI84main has viruddh\u0101, opposition, and a visaddh\u0101 variant. No unrecorded identity of readings is inferred.",
+        "Publisher local31/global899calls the speaker a speaker; VRI85bhatako is a hired worker, with varako retained as a variant. Preserve the occupational difference.",
+        "Publisher original note9explains PTS/BJTS omission of garu\u1E37as and height sequencing; the four global-only Kumbha\u1E47\u1E0Da stanzas and all source groups remain. Notes23\u201324retain unresolved lexicographic interpretations.",
+        "Original malformed emphasis in local22/global890leaves an unmatched literal asterisk under the matched-emphasis-only presentation recipe. Preserve the residue and all words rather than editorially repairing the source."
+      ],
+      "index_revision": "apadana-thera11-30-v1"
+    },
+    "tha-ap25": {
+      "id": "tha-ap25",
+      "publisher_chapter": "chapter-3",
+      "poem": 23,
+      "verses": [
+        920,
+        947
+      ],
+      "root_verses": [
+        106,
+        133
+      ],
+      "note_count": 16,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-023/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-023/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-023.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "T\u012B\u1E47isara\u1E47\u0101gamaniya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 23; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "19a87a047ed6e3154baba4db31c5035fbde4511d9b7d75e0603255589be4e3a9",
+      "body_sha256": "881c135ff0e868f7fe07ac4405b509ed6884292c5e648cf6a59f385bade0ce24",
+      "notes_sha256": "9e71ba27abe40d8bdfa5cc2245f8fcb634c32c94b80516e9d7f8d6fa297f51d6",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "561a21624ffc797e021d6c88a93f98a3278e8160d17839ce3d21d87e2f071125",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "920",
+          "suffix": "(1) [920]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "921",
+          "suffix": "(2) [921]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "922",
+          "suffix": "(3) [922]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "923",
+          "suffix": "(4) [923]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "924",
+          "suffix": "(5) [924]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "925",
+          "suffix": "(6) [925]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "926",
+          "suffix": "(7) [926]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "927",
+          "suffix": "(8) [927]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "928",
+          "suffix": "(9) [928]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "929",
+          "suffix": "(10) [929]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "930",
+          "suffix": "(11) [930]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "931",
+          "suffix": "(12) [931]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "932",
+          "suffix": "(13) [932]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "933",
+          "suffix": "(14) [933]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "934",
+          "suffix": "(15) [934]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "935",
+          "suffix": "(16) [935]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "936",
+          "suffix": "(17) [936]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "937",
+          "suffix": "(18) [937]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "938",
+          "suffix": "(19) [938]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "939",
+          "suffix": "(20) [939]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "940",
+          "suffix": "(21) [940]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "941",
+          "suffix": "(22) [941]",
+          "lines": 4
+        },
+        {
+          "local_label": "23",
+          "publisher_label": "942",
+          "suffix": "(23) [942]",
+          "lines": 4
+        },
+        {
+          "local_label": "24",
+          "publisher_label": "943",
+          "suffix": "(24) [943]",
+          "lines": 4
+        },
+        {
+          "local_label": "25",
+          "publisher_label": "944",
+          "suffix": "(25) [944]",
+          "lines": 4
+        },
+        {
+          "local_label": "26",
+          "publisher_label": "945",
+          "suffix": "(26) [945]",
+          "lines": 4
+        },
+        {
+          "local_label": "27",
+          "publisher_label": "946",
+          "suffix": "(27) [946]",
+          "lines": 4
+        },
+        {
+          "local_label": "28",
+          "publisher_label": "947",
+          "suffix": "(28) [947]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 23 corresponds to canonical tha-ap25 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher local13/global932states five hundred wheel-turner reigns while VRI118pa\xF1casattati states seventy-five, with no matching variant recorded. Preserve both counts visibly.",
+        "Publisher local25/global944follows mamopama\u1E43 karitv\u0101na, preserved in VRI130variant; VRI main has developing Dhamma rightly. Original note14owns the model-of-me formulation.",
+        "Publisher T\u012B\u1E47isara\u1E47\u0101gamaniya spelling differs from VRI Tisara\u1E47agamaniya; actual blind-parent/refuge narrative and two colophons establish identity, not numbers alone.",
+        "Original note9ends with incomplete quotation/bracket punctuation; do not complete it."
+      ]
+    },
+    "tha-ap26": {
+      "id": "tha-ap26",
+      "publisher_chapter": "chapter-3",
+      "poem": 24,
+      "verses": [
+        948,
+        968
+      ],
+      "root_verses": [
+        134,
+        154
+      ],
+      "note_count": 11,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-024/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-024/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-024.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Pa\xF1cas\u012Blasam\u0101d\u0101niya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 24; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "ac4e8d0ec946e4697e13aaa19ed0f81229fed15c5832f5e90fc51516680589d1",
+      "body_sha256": "ae46a0bea114ccab8077b3cec67f5e5f1d96dd16eae8b7570557595d9d4022b6",
+      "notes_sha256": "f974ed1e8ba6c451f278bc3f396a246376a6bb1803a5455ebe3560c9e4742e9a",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "7e89d6c5829b8fc16cfe6ef90dea1611364925027fbc46259c6fd78f446d1ea6",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "948",
+          "suffix": "(1) [948]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "949",
+          "suffix": "(2) [949]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "950",
+          "suffix": "(3) [950]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "951",
+          "suffix": "(4) [951]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "952",
+          "suffix": "(5) [952]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "953",
+          "suffix": "(6) [953]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "954",
+          "suffix": "(7) [954]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "955",
+          "suffix": "(8) [955]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "956",
+          "suffix": "(9) [956]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "957",
+          "suffix": "(10) [957]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "958",
+          "suffix": "(11) [958]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "959",
+          "suffix": "(12) [959]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "960",
+          "suffix": "(13) [960]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "961",
+          "suffix": "(14) [961]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "962",
+          "suffix": "(15) [962]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "963",
+          "suffix": "(16) [963]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "964",
+          "suffix": "(17) [964]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "965",
+          "suffix": "(18) [965]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "966",
+          "suffix": "(19) [966]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "967",
+          "suffix": "(20) [967]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "968",
+          "suffix": "(21) [968]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 24 corresponds to canonical tha-ap26 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher local9/global956states five hundred wheel-turner reigns while VRI142pa\xF1casattati states seventy-five; no corresponding variant is recorded there.",
+        "Publisher local19/global966describes a wise servant; VRI152main tapassin\u0101 is an ascetic, with vipassin\u0101 variant. Keep the publication\u2019s attributed interpretation and no word alignment.",
+        "Publisher original notes6/10record commentary and edition choices; these remain editorial and cannot authorize expanded commentary or alternate-source substitution."
+      ]
+    },
+    "tha-ap27": {
+      "id": "tha-ap27",
+      "publisher_chapter": "chapter-3",
+      "poem": 25,
+      "verses": [
+        969,
+        974
+      ],
+      "root_verses": [
+        155,
+        160
+      ],
+      "note_count": 1,
+      "note_numbers": [
+        1
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-025/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-025/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-025.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Annasa\u1E43s\u0101vaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 25; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "5f266a1a706d373959501934d22eda800903e1515e244a984a01f0909c3aac80",
+      "body_sha256": "9f5d598942a44a04ab33c8ae3e601f908118710b214552405f2e5e39b724141e",
+      "notes_sha256": "3f41233efa04f7d14e30f6384b4ce7f4ed97eebbef40ffd851a47ab9f422bf50",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "2cb67f24a228c15a585fcc19390801721493df86709f10d6bef77581c914f370",
+      "stanza_layout": [
+        {
+          "local_label": "1-2",
+          "publisher_label": "969-970",
+          "suffix": "(1-2) [969-970]",
+          "lines": 8
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "971",
+          "suffix": "(3) [971]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "972",
+          "suffix": "(4) [972]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "973",
+          "suffix": "(5) [973]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "974",
+          "suffix": "(6) [974]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 25 corresponds to canonical tha-ap27 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher combined local1-2/global969-970is one eight-line stanza paragraph covering two VRI155\u2013156stanzas; preserve combined labels and count5publisher entries separately from6numbered VRI stanzas.",
+        "Publisher title has Annasa\u1E43s\u0101vaka while the two colophons print Annasams\u0101vaka. Preserve the source\u2019s own title/colophon forms without normalizing to canonical spelling."
+      ]
+    },
+    "tha-ap28": {
+      "id": "tha-ap28",
+      "publisher_chapter": "chapter-3",
+      "poem": 26,
+      "verses": [
+        975,
+        978
+      ],
+      "root_verses": [
+        161,
+        164
+      ],
+      "note_count": 1,
+      "note_numbers": [
+        1
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-026/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-026/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-026.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Dh\u016Bpad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 26; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "ff3f2b0fcec1287554b17967ec7dda4a07dbd40ecb567d692f3777e8e33f8f7f",
+      "body_sha256": "562b63462dba2cac5ee0b47d7873579f920350cc779acb89bc3e75367f1c351f",
+      "notes_sha256": "1ac7f66c4937376b7e512b055a0084af72e008aa654c853b6a3c08a418ff57f8",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "037c4a8a9a4b97025e1b1cc7c827a3101b7e365b3a9312341e691a6c3777006b",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "975",
+          "suffix": "(1) [975]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "976",
+          "suffix": "(2) [976]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "977",
+          "suffix": "(3) [977]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "978",
+          "suffix": "(4) [978]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 26 corresponds to canonical tha-ap28 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher complete four-stanza incense-gift narrative matches the actual VRI161\u2013164extent. VRI163retains a distinct ka-variant; no variant normalization or line-equivalence claim."
+      ]
+    },
+    "tha-ap29": {
+      "id": "tha-ap29",
+      "publisher_chapter": "chapter-3",
+      "poem": 27,
+      "verses": [
+        979,
+        982
+      ],
+      "root_verses": [
+        165,
+        168
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-027/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-027/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-027.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Pu\u1E37inap\u016Bjaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 27; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "378c1b9b5906389bc109a6ec5a940bad480a9c6c57e5f016d4f384efdac4f12b",
+      "body_sha256": "5a6234f847667e360e3b3827fc33d42958f20f8b1aac0ed0605244e608d063f5",
+      "notes_sha256": "f7d6d9e85ffa55d12a905ed80b5a90a996d83970805b9bf3b727d3a53e995fc6",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "f1bf9c9ca3bc9a5c2bda8c04da7d8ee34d3179313707510bb4ae652cc75fa414",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "979",
+          "suffix": "(1) [979]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "980",
+          "suffix": "(2) [980]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "981",
+          "suffix": "(3) [981]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "982",
+          "suffix": "(4) [982]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 27 corresponds to canonical tha-ap29 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher local3/global981has fifty-three aeons, corresponding to VRI167tipa\xF1\xF1\u0101se variant; VRI main ti\u1E43satime is thirty. Preserve both dates.",
+        "Publisher Pu\u1E37inap\u016Bjaka uses retroflex \u1E37 while canonical Pulinap\u016Bjaka title/colophons use l. No canonical rename."
+      ]
+    },
+    "tha-ap30": {
+      "id": "tha-ap30",
+      "publisher_chapter": "chapter-3",
+      "poem": 28,
+      "verses": [
+        983,
+        993
+      ],
+      "root_verses": [
+        169,
+        179
+      ],
+      "note_count": 0,
+      "note_numbers": [],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-028/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-028/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-028.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Uttiya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 28; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "987137fea06f55971941df828d0657040c583ad7cd564f0e41b6fddeaeb5e728",
+      "body_sha256": "ef5913556eca000e1736a962bdbb3d1c4fd14018cc9fd3fe953152ee3f08a784",
+      "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "5cea86cbd0244a48ebc134c00392c4401f50764a9405e223420ba214ea378052",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "983",
+          "suffix": "(1) [983]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "984",
+          "suffix": "(2) [984]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "985",
+          "suffix": "(3) [985]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "986",
+          "suffix": "(4) [986]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "987",
+          "suffix": "(5) [987]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "988",
+          "suffix": "(6) [988]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "989",
+          "suffix": "(6) [989]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "990",
+          "suffix": "(7) [990]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "991",
+          "suffix": "(8) [991]",
+          "lines": 4
+        },
+        {
+          "local_label": null,
+          "publisher_label": "992",
+          "suffix": "[992]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "993",
+          "suffix": "(9) [993]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 28 corresponds to canonical tha-ap30 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher has11physical entries: local6is duplicated at globals988and989; global992has no local label; final global993is local9. Never renumber or invent the missing local label.",
+        "There are no footnotes and no note-definition separator in this exact pinned publisher file. Notes are an empty array, not missing source material.",
+        "VRI speech colophon retains uttiriyo variant; publisher Uttiya remains its own title and identity."
+      ]
+    },
+    "tha-ap31": {
+      "id": "tha-ap31",
+      "publisher_chapter": "chapter-3",
+      "poem": 29,
+      "verses": [
+        994,
+        997
+      ],
+      "root_verses": [
+        180,
+        183
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-029/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-029/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-029.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Eka\xF1jalika",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 29; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "94da44634640ca95e59d99d4382d0e0fd8d9f2f0b97e5ca03f0f083ad62b3f4b",
+      "body_sha256": "18a5d9e5a6d11cbfbe30fb284127f44446c66b27ce0190fbdf9beed3a7f34071",
+      "notes_sha256": "62cbc24f3d94ad5643d9a1bf28dd8638717a3ad98021dfb1feb296d1899ee2cd",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "e6c6033872e5dac3e129d822d4ae9cb06d669b042b2796218e7d77991ea0a80c",
+      "stanza_layout": [
+        {
+          "local_label": "1-2",
+          "publisher_label": "994-995",
+          "suffix": "(1-2) [994-995]",
+          "lines": 8
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "996",
+          "suffix": "(3) [996]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "997",
+          "suffix": "(4) [997]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 29 corresponds to canonical tha-ap31 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Combined local1-2/global994-995is one eight-line publisher stanza paragraph covering two VRI180\u2013181stanzas. Count3publisher entries separately from4numbered VRI stanzas.",
+        "Translator note3retains the ambiguity of the untamed/tamer epithet; no assistant-selected interpretation replaces it."
+      ]
+    },
+    "tha-ap32": {
+      "id": "tha-ap32",
+      "publisher_chapter": "chapter-3",
+      "poem": 30,
+      "verses": [
+        998,
+        1002
+      ],
+      "root_verses": [
+        184,
+        188
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-030/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-030/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-030.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Khomad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 30; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "4dc75c2815cad3065156a9a5d2fc939c3d8f1f5b564bd7404ea07893f535f87f",
+      "body_sha256": "5d2719e9ecfc56b371b51b2ea866414aa482cc006df11d610d0ca3f3b61192d2",
+      "notes_sha256": "230e92f2e8eff832e7250a37ac3179cd54857038ae701f538f79c68a59856b50",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "880208c7edc07e19ecef2141e65457c9283da68d91d724f89dd69512060bf232",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "998",
+          "suffix": "(1) [998]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "999",
+          "suffix": "(2) [999]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1000",
+          "suffix": "(3) [1000]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1001",
+          "suffix": "(4) [1001]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1002",
+          "suffix": "(5) [1002]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Retain both authentic editions and all explicit differences; no missing words, numbers or line alignment are inferred.",
+        "Explicit reviewed mapping: publisher chapter-3 poem 30 corresponds to canonical tha-ap32 by complete title, story and colophon evidence. Shared poem numbers or a numeric offset do not establish other mappings.",
+        "Publisher local4/global1001has twenty-seven aeons, corresponding to VRI187sattav\u012Bse variant while the main sattarase is seventeen. Preserve both.",
+        "Publisher chapter summary states185verses while actual VRI chapter labels1\u2013188contain188numbered stanzas. Publisher globals813\u20131002cover190numbers and its physical stanza entries number188. Original count statements do not certify any of these coverage totals.",
+        "VRI summary list itself has Sus\u016Bti and repeated Khomad\u0101y\u012B/group wording, omitting several names listed by the complete publisher ten-name summary. Preserve both edition lists; do not infer line alignment or silently repair VRI.",
+        "The VRI summary\u2019s count phrase is retained literally in the root and is not assigned a normalized numerical interpretation by this review.",
+        "The publisher chapter-title colophon is the ninth line of the second summary paragraph; no blank paragraph is invented before it. The fourth-recitation marker follows as separate canonical apparatus."
+      ],
+      "chapter_summary": {
+        "kind": "canonical_chapter_summary",
+        "label": "Third Ther\u0101 Apad\u0101na chapter summary",
+        "parent_id": "tha-ap32",
+        "first_ref": "tha-ap32/9",
+        "last_ref": "tha-ap32/12",
+        "root_start": 3107,
+        "root_end": 3113,
+        "root_sha256": "a83f519af75303c25988447f1516001f63766061d0efc3144d7aee6c39900c5a",
+        "body_sha256": "424d86b44f21a1fc0180324a823073889058089c45e9ab576e3c07e51d4e9542",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "note_numbers": []
+      },
+      "publisher_divisions": [
+        {
+          "kind": "publisher_recitation",
+          "label": "Fourth recitation portion",
+          "parent_id": "tha-ap32",
+          "placement": "after_chapter_summary",
+          "body_sha256": "5de17edabbb0f71033e92fb3dbba9e302b8e986cd659484d857e4f1b7dcdfab4",
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_numbers": []
+        }
+      ]
+    }
+  });
+
+  // src/apadana-profiles.mjs
+  var APADANA_COMMIT = "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4";
+  var APADANA_VRI_COMMIT = "2d134ff9ef60f70a1eb03c9370580228811a3070";
+  var APADANA_BASE = "https://apadanatranslation.com";
+  var APADANA_LICENSE = "CC BY-NC-SA 4.0";
+  var APADANA_LICENSE_URL = "https://creativecommons.org/licenses/by-nc-sa/4.0/";
+  var APADANA_TRANSLATOR = "Jonathan S. Walters";
+  var deepFreeze2 = (value) => {
+    if (value && typeof value === "object") {
+      for (const child of Object.values(value)) deepFreeze2(child);
+      Object.freeze(value);
+    }
+    return value;
+  };
+  var THERI_APADANA_PROFILES = deepFreeze2({
     "thi-ap1": {
       "id": "thi-ap1",
       "poem": 1,
@@ -10742,7 +12731,8 @@
       }
     }
   });
-  var APADANA_RIGHTS = deepFreeze([
+  var APADANA_PROFILES = deepFreeze2({ ...THERI_APADANA_PROFILES, ...THERA_APADANA_PROFILES });
+  var APADANA_RIGHTS = deepFreeze2([
     {
       "path": "LICENSE.md",
       "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
@@ -10884,16 +12874,16 @@
   // web/translation-policy.mjs
   var apadanaId = (uid2) => APADANA_PROFILES[uid2]?.path ? "ap:" + APADANA_PROFILES[uid2].path.replace(/^\/text\/|\/$/g, "") : void 0;
   var apadanaFamily = (id5) => typeof id5 === "string" && /^ap:/i.test(id5.trim());
-  var isApadana = (value) => apadanaFamily(value?.translation_id) || value?.source === "apadana" || value?.source === "Legends of the Buddhist Saints (Apad\u0101na)" || own3(value, "translation_revision") || own3(value, "publisher_paratext") || own3(value, "chapter_summary") || own3(value, "publisher_divisions") || own3(value, "publisher_preface") || own3(value, "collection_summary");
+  var isApadana = (value) => apadanaFamily(value?.translation_id) || value?.source === "apadana" || value?.source === "Legends of the Buddhist Saints (Apad\u0101na)" || own(value, "translation_revision") || own(value, "publisher_paratext") || own(value, "chapter_summary") || own(value, "publisher_divisions") || own(value, "publisher_preface") || own(value, "collection_summary");
   function sameParatext(value, expected, content) {
     if (!value || typeof value !== "object" || Array.isArray(value)) return false;
     const { text: text11, translator_notes, ...descriptor } = value;
-    return sameScope(descriptor, expected) && (content ? nonempty(text11) && text11.length <= 5e4 && Array.isArray(translator_notes) && translator_notes.length === expected.note_numbers.length && translator_notes.every((n, i) => n && typeof n === "object" && !Array.isArray(n) && Object.keys(n).sort().join(",") === "number,text" && n.number === expected.note_numbers[i] && nonempty(n.text) && n.text.length <= 5e4) : !own3(value, "text") && !own3(value, "translator_notes"));
+    return sameScope(descriptor, expected) && (content ? nonempty(text11) && text11.length <= 5e4 && Array.isArray(translator_notes) && translator_notes.length === expected.note_numbers.length && translator_notes.every((n, i) => n && typeof n === "object" && !Array.isArray(n) && Object.keys(n).sort().join(",") === "number,text" && n.number === expected.note_numbers[i] && nonempty(n.text) && n.text.length <= 5e4) : !own(value, "text") && !own(value, "translator_notes"));
   }
   function validateChapterSummary(value, uid2, content = false) {
     const expected = APADANA_PROFILES[uid2]?.chapter_summary;
     if (!expected) {
-      if (own3(value, "chapter_summary")) throw Error("The pinned Apad\u0101na chapter-summary owner changed.");
+      if (own(value, "chapter_summary")) throw Error("The pinned Apad\u0101na chapter-summary owner changed.");
       return;
     }
     if (!sameParatext(value.chapter_summary, expected, content)) {
@@ -10903,18 +12893,18 @@
   function validatePublisherPreface(value, uid2, content = false) {
     const profile2 = APADANA_PROFILES[uid2], expected = uid2 === "thi-ap31" ? profile2?.publisher_preface : void 0;
     if (!expected) {
-      if (own3(value, "publisher_preface")) throw Error("The pinned Apad\u0101na publisher-preface owner changed.");
+      if (own(value, "publisher_preface")) throw Error("The pinned Apad\u0101na publisher-preface owner changed.");
       return;
     }
     const preface = value.publisher_preface;
     if (!preface || typeof preface !== "object" || Array.isArray(preface)) throw Error("The pinned Apad\u0101na publisher-preface scope or note ownership changed.");
     const { translator_notes, ...descriptor } = preface;
-    if (Object.keys(expected).sort().join(",") !== "body_sha256,kind,label,note_numbers,notes_sha256,parent_id" || expected.kind !== "publisher_preface" || expected.parent_id !== uid2 || expected.label !== "Fourth Ther\u012B chapter preface" || expected.body_sha256 !== profile2.paratext_sha256 || !sameScope(expected.note_numbers, [1]) || Object.keys(preface).sort().join(",") !== Object.keys(expected).concat(content ? ["translator_notes"] : []).sort().join(",") || !sameScope(descriptor, expected) || own3(preface, "text") || (content ? !Array.isArray(translator_notes) || translator_notes.length !== 1 || translator_notes.some((note2) => !note2 || typeof note2 !== "object" || Array.isArray(note2) || Object.keys(note2).sort().join(",") !== "number,text" || note2.number !== 1 || !nonempty(note2.text) || note2.text.length > 5e4) : own3(preface, "translator_notes"))) throw Error("The pinned Apad\u0101na publisher-preface scope or note ownership changed.");
+    if (Object.keys(expected).sort().join(",") !== "body_sha256,kind,label,note_numbers,notes_sha256,parent_id" || expected.kind !== "publisher_preface" || expected.parent_id !== uid2 || expected.label !== "Fourth Ther\u012B chapter preface" || expected.body_sha256 !== profile2.paratext_sha256 || !sameScope(expected.note_numbers, [1]) || Object.keys(preface).sort().join(",") !== Object.keys(expected).concat(content ? ["translator_notes"] : []).sort().join(",") || !sameScope(descriptor, expected) || own(preface, "text") || (content ? !Array.isArray(translator_notes) || translator_notes.length !== 1 || translator_notes.some((note2) => !note2 || typeof note2 !== "object" || Array.isArray(note2) || Object.keys(note2).sort().join(",") !== "number,text" || note2.number !== 1 || !nonempty(note2.text) || note2.text.length > 5e4) : own(preface, "translator_notes"))) throw Error("The pinned Apad\u0101na publisher-preface scope or note ownership changed.");
   }
   function validateCollectionSummary(value, uid2, content = false) {
     const expected = uid2 === "thi-ap40" ? APADANA_PROFILES[uid2]?.collection_summary : void 0;
     if (!expected) {
-      if (own3(value, "collection_summary")) throw Error("The pinned Apad\u0101na collection-summary owner changed.");
+      if (own(value, "collection_summary")) throw Error("The pinned Apad\u0101na collection-summary owner changed.");
       return;
     }
     const summary = value.collection_summary;
@@ -10925,7 +12915,7 @@
   function validatePublisherDivisions(value, uid2, content = false) {
     const expected = APADANA_PROFILES[uid2]?.publisher_divisions;
     if (!expected) {
-      if (own3(value, "publisher_divisions")) throw Error("The pinned Apad\u0101na publisher-division owner changed.");
+      if (own(value, "publisher_divisions")) throw Error("The pinned Apad\u0101na publisher-division owner changed.");
       return;
     }
     const divisions = value.publisher_divisions;
@@ -10936,7 +12926,7 @@
   function validateApadanaChoice(value, uid2, content = false) {
     if (!isApadana(value)) return;
     const profile2 = APADANA_PROFILES[uid2];
-    if (!profile2 || value.translation_id !== apadanaId(uid2) || value.translation_revision !== APADANA_COMMIT || value.translator !== APADANA_TRANSLATOR || value.license !== APADANA_LICENSE || value.url !== profile2.url || own3(value, "translation_scope") || own3(value, "source_section") || value.whole_unit_coverage === false) {
+    if (!profile2 || value.translation_id !== apadanaId(uid2) || value.translation_revision !== APADANA_COMMIT || value.translator !== APADANA_TRANSLATOR || value.license !== APADANA_LICENSE || value.url !== profile2.url || own(value, "translation_scope") || own(value, "source_section") || value.whole_unit_coverage === false) {
       throw Error("The pinned Apad\u0101na source identity or terms changed. No English source was displayed.");
     }
     validateChapterSummary(value, uid2, content);
@@ -10944,7 +12934,7 @@
     validateCollectionSummary(value, uid2, content);
     validatePublisherDivisions(value, uid2, content);
   }
-  var own3 = (value, key4) => value && Object.hasOwn(value, key4);
+  var own = (value, key4) => value && Object.hasOwn(value, key4);
   var nonempty = (value) => typeof value === "string" && value.trim().length > 0;
   var sha = (value) => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
   var stable = (value) => JSON.stringify(Array.isArray(value) ? value.map((v) => JSON.parse(stable(v))) : value && typeof value === "object" ? Object.fromEntries(Object.keys(value).sort().map((k) => [k, JSON.parse(stable(value[k]))])) : value);
@@ -10965,40 +12955,40 @@
     validateSectionIdentity(choice);
     if (sectionSourceUnit(choice?.translation_id)) {
       validateSectionDescriptor(choice);
-      if (sectionSourceUnit(choice.translation_id) !== requestedId || own3(choice, "translation_scope") || own3(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== true) throw Error("The reviewed source section belongs to another selection or changed scope. No English source was requested.");
+      if (sectionSourceUnit(choice.translation_id) !== requestedId || own(choice, "translation_scope") || own(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== true) throw Error("The reviewed source section belongs to another selection or changed scope. No English source was requested.");
     }
-    const fail9 = () => {
+    const fail10 = () => {
       throw new Error("This source has an unsupported or incomplete scope declaration. No scoped source was requested. Reload the passage and review the updated sources.");
     };
     const reserved = medicineFamily(choice?.translation_id), selector = choice?.translation_scope?.extractor === MEDICINE_EXTRACTOR;
-    if (!own3(choice, "translation_scope")) {
-      if (reserved) fail9();
+    if (!own(choice, "translation_scope")) {
+      if (reserved) fail10();
       return null;
     }
     const scope = choice.translation_scope;
     if (reserved || selector) {
       const read2 = scope?.read_with;
-      if (choice.translation_id !== MEDICINE_ID || requestedId !== "mil6.4.1" || scope?.kind !== "partial_unit" || scope.version !== 1 || scope.unit_id !== "mil6.4.1" || scope.first_ref !== "mil6.4.1/20" || scope.last_ref !== "mil6.4.1/21" || scope.extractor !== MEDICINE_EXTRACTOR || scope.pali_segments !== 2 || scope.whole_unit_coverage !== false || own3(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== false || !read2 || Object.keys(read2).sort().join(",") !== "limit,offset,tool,uid" || read2.tool !== "get_text" || read2.uid !== "mil6.4.1" || read2.offset !== 19 || read2.limit !== 2 || own3(scope, "read_pages") || own3(scope, "pali_excerpt")) fail9();
+      if (choice.translation_id !== MEDICINE_ID || requestedId !== "mil6.4.1" || scope?.kind !== "partial_unit" || scope.version !== 1 || scope.unit_id !== "mil6.4.1" || scope.first_ref !== "mil6.4.1/20" || scope.last_ref !== "mil6.4.1/21" || scope.extractor !== MEDICINE_EXTRACTOR || scope.pali_segments !== 2 || scope.whole_unit_coverage !== false || own(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== false || !read2 || Object.keys(read2).sort().join(",") !== "limit,offset,tool,uid" || read2.tool !== "get_text" || read2.uid !== "mil6.4.1" || read2.offset !== 19 || read2.limit !== 2 || own(scope, "read_pages") || own(scope, "pali_excerpt")) fail10();
     }
-    if (!scope || ![1, 2].includes(scope.version) || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail9();
+    if (!scope || ![1, 2].includes(scope.version) || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail10();
     if (scope.kind === "shared_page") {
-      if (scope.version !== 1) fail9();
+      if (scope.version !== 1) fail10();
       const ids = scope.text_ids;
       const presentation = scope.presentation || (scope.condensed === true ? "condensed" : null);
-      if (!Array.isArray(ids) || ids.length < 2 || ids.length > 32 || ids.some((id5) => !nonempty(id5) || id5.length > 300) || new Set(ids).size !== ids.length || !ids.includes(requestedId) || scope.owner_id !== ids[0] || scope.individual_alignment_verified !== false || !nonempty(scope.source_reference) || !["condensed", "compilation"].includes(presentation) || presentation === "compilation" && !sha(scope.notice_sha256) || own3(scope, "condensed") && scope.condensed !== (presentation === "condensed")) fail9();
+      if (!Array.isArray(ids) || ids.length < 2 || ids.length > 32 || ids.some((id5) => !nonempty(id5) || id5.length > 300) || new Set(ids).size !== ids.length || !ids.includes(requestedId) || scope.owner_id !== ids[0] || scope.individual_alignment_verified !== false || !nonempty(scope.source_reference) || !["condensed", "compilation"].includes(presentation) || presentation === "compilation" && !sha(scope.notice_sha256) || own(scope, "condensed") && scope.condensed !== (presentation === "condensed")) fail10();
       return { kind: scope.kind, label: presentation === "compilation" ? "Shared compilation page" : "Shared condensed page", scope: JSON.parse(JSON.stringify(scope)), flags: { allow_shared: true, scope_sha256: scope.scope_sha256 } };
     }
     if (scope.kind === "partial_unit") {
       const prefix = requestedId + "/";
-      if (choice.translation_id.startsWith("ati:") && (!(scope.version === 2 ? ["ati-chapter-prose-v1", "ati-chapter-p5-of5-no-notes-v1", "ati-chapter-p1to4-of5-notes-v1"].includes(scope.extractor) : ["ati-freeverse-v1", "ati-chapter-p2-of2-v1", "ati-chapter-p11-of11-v1", "ati-chapter-p1-of4-v1", "ati-chapter-p14-of24-v1", "ati-excerpt-verse-pre-v1", "ati-chapter-p1to3-of4-ellipsis-v1", "ati-vinaya-mv6-p1to5-of5-v1", "ati-vinaya-mv8-p1to22-of22-v1", "ati-vinaya-mv1-mixed21p6v-v1", "ati-milinda-medicine-two-verses-v1"].includes(scope.extractor)) || !sha(scope.notice_sha256))) fail9();
+      if (choice.translation_id.startsWith("ati:") && (!(scope.version === 2 ? ["ati-chapter-prose-v1", "ati-chapter-p5-of5-no-notes-v1", "ati-chapter-p1to4-of5-notes-v1"].includes(scope.extractor) : ["ati-freeverse-v1", "ati-chapter-p2-of2-v1", "ati-chapter-p11-of11-v1", "ati-chapter-p1-of4-v1", "ati-chapter-p14-of24-v1", "ati-excerpt-verse-pre-v1", "ati-chapter-p1to3-of4-ellipsis-v1", "ati-vinaya-mv6-p1to5-of5-v1", "ati-vinaya-mv8-p1to22-of22-v1", "ati-vinaya-mv1-mixed21p6v-v1", "ati-milinda-medicine-two-verses-v1"].includes(scope.extractor)) || !sha(scope.notice_sha256))) fail10();
       if (scope.version === 2) {
         const p = scope.pali_excerpt;
-        if (!choice.translation_id.startsWith("ati:") || scope.first_ref !== scope.last_ref || !p || p.ref !== scope.first_ref || p.type !== "prose" || !nonempty(p.text) || p.text.length > 2e6 || p.offset_unit !== "utf16_code_units" || !sha(p.segment_sha256) || !Number.isSafeInteger(p.start_char) || !Number.isSafeInteger(p.end_char) || p.start_char < 0 || p.end_char <= p.start_char || p.end_char - p.start_char !== p.text.length || own3(scope, "read_with") || own3(scope, "read_pages")) fail9();
-      } else if (own3(scope, "pali_excerpt")) fail9();
-      if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail9();
+        if (!choice.translation_id.startsWith("ati:") || scope.first_ref !== scope.last_ref || !p || p.ref !== scope.first_ref || p.type !== "prose" || !nonempty(p.text) || p.text.length > 2e6 || p.offset_unit !== "utf16_code_units" || !sha(p.segment_sha256) || !Number.isSafeInteger(p.start_char) || !Number.isSafeInteger(p.end_char) || p.start_char < 0 || p.end_char <= p.start_char || p.end_char - p.start_char !== p.text.length || own(scope, "read_with") || own(scope, "read_pages")) fail10();
+      } else if (own(scope, "pali_excerpt")) fail10();
+      if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail10();
       return { kind: scope.kind, label: "Partial-unit source", scope: JSON.parse(JSON.stringify(scope)), flags: { allow_partial: true, scope_sha256: scope.scope_sha256 } };
     }
-    fail9();
+    fail10();
   }
   function validateEnglishPage(data, args, context) {
     const offset = args.offset || 0;
@@ -11018,27 +13008,1127 @@
       }
     }
     if (medicineFamily(choice.translation_id) || choice.translation_scope?.extractor === MEDICINE_EXTRACTOR) scopeDescriptor(choice, context.uid);
-    if (sectionSourceUnit(data.translation_id) && (!own3(choice, "source_section") || !sameScope(data.source_section, choice.source_section) || data.source_section?.unit_id !== context.uid || !anTenSourceUnit(data.translation_id) && data.source_section?.anchor !== data.translation_id.split("#")[1] || data.source_section?.status !== "reviewed")) throw new Error(milindaSourceUnit(data.translation_id) ? "The reviewed question identity changed. Reload the passage and review sources again; no English was displayed." : "The reviewed discourse identity changed. Reload the passage and review sources again; no English was displayed.");
+    if (sectionSourceUnit(data.translation_id) && (!own(choice, "source_section") || !sameScope(data.source_section, choice.source_section) || data.source_section?.unit_id !== context.uid || !anTenSourceUnit(data.translation_id) && data.source_section?.anchor !== data.translation_id.split("#")[1] || data.source_section?.status !== "reviewed")) throw new Error(milindaSourceUnit(data.translation_id) ? "The reviewed question identity changed. Reload the passage and review sources again; no English was displayed." : "The reviewed discourse identity changed. Reload the passage and review sources again; no English was displayed.");
     if (context.accepted) {
       const accepted = context.accepted;
-      if (data.translation_id !== args.translation || data.whole_unit_coverage !== false || !own3(data, "translation_scope") || !sameScope(data.translation_scope, accepted.scope)) throw new Error("The source scope or version changed after review. Reload the passage and give fresh consent; no scoped text was displayed.");
+      if (data.translation_id !== args.translation || data.whole_unit_coverage !== false || !own(data, "translation_scope") || !sameScope(data.translation_scope, accepted.scope)) throw new Error("The source scope or version changed after review. Reload the passage and give fresh consent; no scoped text was displayed.");
       if (accepted.kind === "shared_page") {
         if (args.allow_shared !== true || args.allow_partial === true || data.text_id !== null || data.requested_text_id !== context.uid || data.citation !== accepted.scope.source_reference) throw new Error("A shared page was incorrectly attributed to an individual discourse. No scoped text was displayed.");
       } else if (args.allow_partial !== true || args.allow_shared === true || data.text_id !== context.uid) throw new Error("The partial source no longer matches the reviewed unit. No scoped text was displayed.");
       if (args.scope_sha256 !== accepted.scope.scope_sha256) throw new Error("The scope consent is missing its reviewed mapping pin.");
-    } else if (own3(data, "translation_scope") || data.whole_unit_coverage === false || own3(choice, "translation_scope") || data.text_id !== context.uid || args.allow_shared === true || args.allow_partial === true) throw new Error("This response needs a separate scope review. No partial/shared page was displayed as a whole-text translation.");
+    } else if (own(data, "translation_scope") || data.whole_unit_coverage === false || own(choice, "translation_scope") || data.text_id !== context.uid || args.allow_shared === true || args.allow_partial === true) throw new Error("This response needs a separate scope review. No partial/shared page was displayed as a whole-text translation.");
     if (data.next_offset === null || data.next_offset === void 0) {
       if (data.continue_with != null) throw new Error("The source returned an inconsistent continuation. Reload its first page.");
       return null;
     }
     const next = data.continue_with?.arguments;
     if (data.continue_with?.name !== "get_translation" || !next || next.uid !== context.uid || next.translation !== data.translation_id || !Number.isSafeInteger(next.offset) || next.offset <= offset || next.offset > 2e6 || next.offset !== data.next_offset || !sha(next.prefix_sha256) || !Number.isInteger(next.limit) || next.limit < 500 || next.limit > 3e4) throw new Error("The source returned an unsafe continuation. No next-page request was made.");
-    if (isApadana(choice) ? next.translation_revision !== APADANA_COMMIT : own3(next, "translation_revision")) throw Error("The next page changed or dropped the pinned translation revision.");
+    if (isApadana(choice) ? next.translation_revision !== APADANA_COMMIT : own(next, "translation_revision")) throw Error("The next page changed or dropped the pinned translation revision.");
     if (context.accepted) {
       const shared = context.accepted.kind === "shared_page";
       if (next.scope_sha256 !== context.accepted.scope.scope_sha256 || next[shared ? "allow_shared" : "allow_partial"] !== true || next[shared ? "allow_partial" : "allow_shared"] === true) throw new Error("The next page dropped or changed its scope consent. Review the source again.");
-    } else if (next.allow_shared === true || next.allow_partial === true || own3(next, "scope_sha256")) throw new Error("The next page unexpectedly changes source scope. Review it separately.");
+    } else if (next.allow_shared === true || next.allow_partial === true || own(next, "scope_sha256")) throw new Error("The next page unexpectedly changes source scope. Review it separately.");
     return JSON.parse(JSON.stringify(next));
+  }
+
+  // web/reading-position.mjs
+  var string = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f<>]/.test(x);
+  var integer = (x) => Number.isSafeInteger(x) && x >= 0 && x <= 1e5;
+  var source = (x) => typeof x === "string" && /^[a-zA-Z0-9._-]{1,100}$/.test(x);
+  function sourceRevision(data) {
+    const mapped = Boolean(data.source && Object.hasOwn(data.source, "locator_revision"));
+    const value = mapped ? data.source.locator_revision : data.source?.commit;
+    if ((mapped || value !== void 0) && !source(value)) throw Error("The source has invalid reading-position revision metadata.");
+    return value;
+  }
+  function assertReadingContext(context) {
+    if (!context || Object.keys(context).some((k) => !["uid", "book", "kind", "plan", "day"].includes(k)) || Boolean(context.uid) === Boolean(context.book) || !string(context.uid || context.book, 300) || /https?:|javascript:|data:/i.test(context.uid || context.book) || context.kind !== void 0 && !["post", "commentary"].includes(context.kind) || context.book && context.kind || context.plan !== void 0 && (!context.uid || context.kind || !/^[a-z0-9-]{1,60}$/.test(context.plan) || !Number.isSafeInteger(context.day) || context.day < 1 || context.day > 400) || context.day !== void 0 && context.plan === void 0) throw Error("This reading position has unsupported source or reference metadata.");
+  }
+  function readingPosition(context, offset, ref, revision5) {
+    assertReadingContext(context);
+    if (!integer(offset) || !string(ref, 400) || !source(revision5)) throw Error("This reading position has unsupported source or reference metadata.");
+    return "#read?" + new URLSearchParams({ ...context, offset, ref, source: revision5 });
+  }
+  function assertPositionPin(args, data) {
+    if (!args.has("source")) return;
+    if (args.getAll("source").length !== 1 || !source(args.get("source")) || !string(args.get("ref"), 400) || !/^\d+$/.test(args.get("offset") || "") || !integer(Number(args.get("offset")))) throw Error("The saved reading position is incomplete. Open its source from the Library; no nearby passage was substituted.");
+    if (sourceRevision(data) !== args.get("source")) {
+      const error = Error("The source or citation mapping revision changed since this reading position was saved. Review the current source explicitly before continuing; no replacement wording was displayed.");
+      error.code = "READING_SOURCE_CHANGED";
+      throw error;
+    }
+  }
+  function isReadingLocator(href) {
+    try {
+      if (typeof href !== "string" || href.length > 8192 || !href.startsWith("#read?")) return false;
+      const args = new URLSearchParams(href.slice(6)), keys2 = [...args.keys()];
+      if (keys2.some((k) => !["uid", "book", "kind", "plan", "day", "offset", "ref", "source"].includes(k)) || new Set(keys2).size !== keys2.length) return false;
+      const context = Object.fromEntries(["uid", "book", "kind", "plan"].filter((k) => args.has(k)).map((k) => [k, args.get(k)]));
+      if (args.has("day")) context.day = Number(args.get("day"));
+      if (args.has("offset") && !/^\d+$/.test(args.get("offset"))) return false;
+      readingPosition(context, args.has("offset") ? Number(args.get("offset")) : 0, args.has("ref") ? args.get("ref") : "legacy/1", args.has("source") ? args.get("source") : "legacy");
+      if (args.has("source")) assertPositionPin(args, { source: { commit: args.get("source") } });
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  // web/reading-navigation.mjs
+  var integer2 = (value, min, max) => Number.isSafeInteger(value) && value >= min && value <= max;
+  var pageKeys = /* @__PURE__ */ new Set(["uid", "book", "kind", "plan", "day", "offset", "page_source"]);
+  function revision(value) {
+    if (typeof value !== "string" || sourceRevision({ source: { commit: value } }) !== value) throw Error("This page has no valid source revision.");
+    return value;
+  }
+  var invalid = () => {
+    throw Error("This source page has incomplete or unsupported navigation metadata. No passage was substituted.");
+  };
+  function readingPagePosition(context, offset, source7) {
+    assertReadingContext(context);
+    if (!integer2(offset, 0, 1e5)) invalid();
+    revision(source7);
+    return "#read?" + new URLSearchParams({ ...context, offset, page_source: source7 });
+  }
+  function assertPageRequest(args) {
+    if (!args.has("page_source")) return;
+    const keys2 = [...args.keys()];
+    if (keys2.some((key4) => !pageKeys.has(key4)) || new Set(keys2).size !== keys2.length || args.getAll("page_source").length !== 1 || args.getAll("offset").length !== 1 || !/^(0|[1-9][0-9]*)$/.test(args.get("offset") || "") || !integer2(Number(args.get("offset")), 0, 1e5)) invalid();
+    revision(args.get("page_source"));
+    const context = Object.fromEntries(["uid", "book", "kind", "plan"].filter((key4) => args.has(key4)).map((key4) => [key4, args.get(key4)]));
+    if (args.has("day")) {
+      if (!/^[1-9][0-9]*$/.test(args.get("day") || "")) invalid();
+      context.day = Number(args.get("day"));
+    }
+    assertReadingContext(context);
+  }
+  function assertPagePin(args, data) {
+    if (!args.has("page_source")) return;
+    assertPageRequest(args);
+    if (sourceRevision(data) !== args.get("page_source")) {
+      const error = Error("The source or citation mapping revision changed since this page link was opened. Review the current source explicitly before continuing; no replacement wording was displayed.");
+      error.code = "READING_SOURCE_CHANGED";
+      throw error;
+    }
+    readingPageBounds(data);
+    if (data.offset !== Number(args.get("offset"))) invalid();
+  }
+  function readingPageBounds(data, window2 = null) {
+    if (!data || !integer2(data.total_segments, 1, 100001) || !integer2(data.offset, 0, 1e5) || !integer2(data.returned, 1, 100001) || data.offset + data.returned > data.total_segments || !Array.isArray(data.segments) || data.segments.length !== data.returned || data.next_offset !== (data.offset + data.returned < data.total_segments ? data.offset + data.returned : null)) invalid();
+    let start = 0, end = data.total_segments;
+    if (window2 !== null) {
+      if (!window2 || !integer2(window2.start, 0, 1e5) || !(window2.end === null || integer2(window2.end, 1, 100001)) || !integer2(window2.offset, 0, 1e5) || !integer2(window2.limit, 1, 1e5) || window2.offset !== data.offset || data.returned > window2.limit) invalid();
+      start = window2.start;
+      end = window2.end === null ? data.total_segments : window2.end;
+    }
+    if (start >= end || end > data.total_segments || data.offset < start || data.offset + data.returned > end) invalid();
+    return { start, end, current: data.offset };
+  }
+  function readingJumpOffset(text11, data, window2 = null) {
+    if (typeof text11 !== "string" || !/^[1-9][0-9]*$/.test(text11)) throw Error("Enter a source position using whole decimal digits only.");
+    const position2 = Number(text11), bounds = readingPageBounds(data, window2);
+    if (!integer2(position2, 1, 100001) || position2 - 1 < bounds.start || position2 - 1 >= bounds.end) throw Error("That source position is outside the current reading bounds.");
+    return position2 - 1;
+  }
+
+  // web/apadana-edition-navigation.mjs
+  var own2 = (value, key4) => Object.hasOwn(value, key4);
+  var fail = () => {
+    throw Error("Reviewed publisher-edition navigation is unavailable because its source identity or revision changed. The loaded P\u0101li remains unchanged.");
+  };
+  function family(profile2) {
+    if (profile2?.id?.startsWith("thi-ap") && profile2.path?.startsWith("/text/chapter-4/") && profile2.poem >= 1 && profile2.poem <= 40 && !own2(profile2, "publisher_chapter")) return "theri";
+    if (profile2?.id?.startsWith("tha-ap") && profile2.publisher_chapter === "chapter-3" && profile2.path?.startsWith("/text/chapter-3/")) return "thera";
+    return null;
+  }
+  var locator = (profile2) => APADANA_VRI_COMMIT + (profile2.index_revision ? "-" + profile2.index_revision : "");
+  function entry(profile2) {
+    const chapter = family(profile2) === "theri" ? "chapter-4" : "chapter-3";
+    if (!Number.isSafeInteger(profile2.poem) || profile2.poem < 1 || profile2.path !== "/text/" + chapter + "/poem-" + String(profile2.poem).padStart(3, "0") + "/" || profile2.source !== "apadana" || profile2.license !== APADANA_LICENSE || profile2.translator !== APADANA_TRANSLATOR || profile2.url !== APADANA_BASE + profile2.path || profile2.translation_revision !== APADANA_COMMIT || typeof profile2.title !== "string" || !profile2.title.trim()) fail();
+    return {
+      uid: profile2.id,
+      poem: profile2.poem,
+      title: profile2.title,
+      label: "Publisher poem " + profile2.poem + " \xB7 " + profile2.title + " \xB7 " + profile2.id,
+      href: readingPagePosition({ uid: profile2.id }, 0, locator(profile2))
+    };
+  }
+  function apadanaEditionNavigation(data) {
+    const profile2 = APADANA_PROFILES[data?.text_id];
+    if (!profile2 || !family(profile2)) return null;
+    const selected = family(profile2), expectedLocator = locator(profile2), source7 = data.source;
+    if (data.canonical === false || data.content_type === "commentary" || data.selection === "source_book" || source7?.commit !== APADANA_VRI_COMMIT || source7.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || (source7.locator_revision || source7.commit) !== expectedLocator || own2(source7, "locator_revision") !== Boolean(profile2.index_revision) || !Array.isArray(data.english_available)) fail();
+    const choices = data.english_available.filter((choice) => choice.translation_id === apadanaId(profile2.id));
+    if (choices.length !== 1 || data.english_available.some((choice) => typeof choice.translation_id === "string" && /^ap:/i.test(choice.translation_id) && choice.translation_id !== apadanaId(profile2.id))) fail();
+    validateApadanaChoice(choices[0], profile2.id);
+    const profiles = Object.entries(APADANA_PROFILES).filter(([, value]) => family(value) === selected);
+    if (!profiles.length || selected === "theri" && profiles.length !== 40 || profiles.some(([uid2, value]) => uid2 !== value.id)) fail();
+    const poems = profiles.map(([, value]) => entry(value)).sort((a, b) => a.poem - b.poem);
+    if (new Set(poems.map((value) => value.poem)).size !== poems.length || new Set(poems.map((value) => value.uid)).size !== poems.length) fail();
+    const at = poems.findIndex((value) => value.uid === profile2.id);
+    if (at < 0) fail();
+    const groups2 = [];
+    for (const poem of poems) {
+      const first = Math.floor((poem.poem - 1) / 10) * 10 + 1, label2 = "Publisher poems " + first + "\u2013" + (first + 9);
+      let group2 = groups2.find((value) => value.label === label2);
+      if (!group2) {
+        group2 = { label: label2, poems: [] };
+        groups2.push(group2);
+      }
+      group2.poems.push(poem);
+    }
+    const group = groups2.find((value) => value.poems.some((poem) => poem.uid === profile2.id));
+    const ending = group.poems.at(-1), endingProfile = APADANA_PROFILES[ending.uid];
+    const summary = endingProfile.chapter_summary?.parent_id === ending.uid ? ending : null;
+    return {
+      family: selected,
+      revision: APADANA_COMMIT,
+      title: selected === "theri" ? "Reviewed Ther\u012B publisher edition" : "Reviewed Ther\u0101 publisher poems",
+      note: selected === "theri" ? "The 40 reviewed poems follow this publisher edition. This is not the whole Apad\u0101na or line-complete VRI English." : "Only the reviewed Ther\u0101 publisher poems are listed. Other poems remain outside this reviewed sequence; this is not complete Ther\u0101 or line-complete VRI English.",
+      current: poems[at],
+      previous: at > 0 ? poems[at - 1] : null,
+      next: at + 1 < poems.length ? poems[at + 1] : null,
+      groups: groups2,
+      summary
+    };
+  }
+  function apadanaEditionLink(data, uid2) {
+    const navigation = apadanaEditionNavigation(data), target = navigation?.groups.flatMap((group) => group.poems).find((poem) => poem.uid === uid2);
+    if (!target) fail();
+    return target.href;
+  }
+
+  // web/bookmark-import.mjs
+  var MAX_IMPORT_BYTES = 16 * 1024 * 1024;
+  var keys = /* @__PURE__ */ new Set(["uid", "ref", "title", "note", "offset", "source_commit"]);
+  var string2 = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f]/.test(x);
+  var object = (x) => x && typeof x === "object" && !Array.isArray(x);
+  var identity = (x) => JSON.stringify([x.uid, x.ref]);
+  function parseBookmarks(text11) {
+    let data;
+    try {
+      data = JSON.parse(text11);
+    } catch {
+      throw Error("Choose a valid JSON bookmark export. Nothing was imported.");
+    }
+    if (!object(data) || data.format !== "pali-library-v1" || Object.keys(data).some((k) => !["format", "saved"].includes(k)) || !Array.isArray(data.saved) || data.saved.length > 500) throw Error("This is not a supported P\u0101li Library bookmark export (maximum 500 passages). Nothing was imported.");
+    const seen = /* @__PURE__ */ new Set();
+    return data.saved.map((x) => {
+      if (!object(x) || Object.keys(x).some((k) => !keys.has(k)) || !string2(x.uid, 300) || !string2(x.ref, 400) || !string2(x.title, 1e3) || !(/^[a-z][a-z0-9.-]*$/.test(x.uid) || /^(book|post|commentary-ref|commentary):[^\r\n]+$/.test(x.uid)) || /https?:|javascript:|data:|[<>]/i.test(x.uid) || x.note !== void 0 && (typeof x.note !== "string" || x.note.length > 4e3) || x.offset !== void 0 && (!Number.isSafeInteger(x.offset) || x.offset < 0 || x.offset > 1e5) || x.source_commit !== void 0 && !string2(x.source_commit, 100)) throw Error("A bookmark has unsupported fields or invalid reference, note, position or revision metadata. Nothing was imported.");
+      if (seen.has(identity(x))) throw Error("The file contains duplicate passage references. Resolve those duplicates before importing; no notes were chosen or discarded.");
+      seen.add(identity(x));
+      return { uid: x.uid, ref: x.ref, title: x.title, note: x.note ?? "", ...x.offset !== void 0 ? { offset: x.offset } : {}, ...x.source_commit !== void 0 ? { source_commit: x.source_commit } : {} };
+    });
+  }
+  function bookmarkMerge(existing, incoming) {
+    const seen = new Set(existing.map(identity)), added = incoming.filter((x) => !seen.has(identity(x))), skipped = incoming.length - added.length;
+    if (existing.length + added.length > 500) throw Error("These new bookmarks exceed the 500-passage limit. Export/remove some saved passages, then try again. Nothing was imported.");
+    return { added, skipped, saved: [...existing, ...added] };
+  }
+
+  // web/passage-notes.mjs
+  var own3 = (value, key4) => Object.hasOwn(value, key4);
+  var object2 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var position = (value) => Number.isSafeInteger(value) && value >= 0 && value <= 1e5;
+  var revision2 = (value) => typeof value === "string" && /^[A-Za-z0-9._-]{1,100}$/.test(value);
+  function clone(value, depth = 0) {
+    if (depth > 32) throw Error("Personal-note metadata is nested too deeply. Keep/export it before repairing it.");
+    if (value instanceof Map) return new Map([...value].map(([key4, item]) => [clone(key4, depth + 1), clone(item, depth + 1)]));
+    if (Array.isArray(value)) return value.map((item) => clone(item, depth + 1));
+    if (object2(value)) return Object.fromEntries(Object.entries(value).map(([key4, item]) => [key4, clone(item, depth + 1)]));
+    return value;
+  }
+  var noteText = (value) => {
+    if (typeof value !== "string" || value.length > 4e3) throw Error("Personal notes must be text of at most 4,000 characters.");
+    return value;
+  };
+  function bookmarkShape(item) {
+    parseBookmarks(JSON.stringify({ format: "pali-library-v1", saved: [item] }));
+    if (own3(item, "offset") && !position(item.offset)) throw Error("This bookmark has invalid saved-position metadata.");
+    if (own3(item, "source_commit") && (!revision2(item.source_commit) || !position(item.offset))) throw Error("This bookmark has invalid saved revision or position metadata.");
+  }
+  function currentContext(context) {
+    if (!object2(context) || Object.keys(context).some((key4) => !["uid", "ref", "title", "offset", "source_commit"].includes(key4))) throw Error("This passage has unsupported personal-note reference metadata.");
+    bookmarkShape({ ...context, note: "" });
+    if (!position(context.offset) || !revision2(context.source_commit)) throw Error("This passage has no valid current position and source revision.");
+  }
+  function passageNoteKey(item) {
+    if (!object2(item) || typeof item.uid !== "string" || !item.uid || typeof item.ref !== "string" || !item.ref) throw Error("A personal note needs an exact source selector and passage reference.");
+    return JSON.stringify([item.uid, item.ref]);
+  }
+  function passageNoteState(saved2, context) {
+    if (!Array.isArray(saved2)) throw Error("Saved passages must be an array.");
+    let key4, item = null;
+    try {
+      currentContext(context);
+      key4 = passageNoteKey(context);
+      const matches = saved2.filter((value) => object2(value) && value.uid === context.uid && value.ref === context.ref);
+      if (matches.length > 1) throw Error("Duplicate saved references need review in Saved before editing a note here.");
+      item = matches[0] ?? null;
+      if (item) bookmarkShape(item);
+      if (item && own3(item, "source_commit") && item.source_commit !== context.source_commit) throw Error("The saved source revision differs. Review or edit this personal note in Saved; it was not associated with the current passage.");
+      const legacy = Boolean(item && !own3(item, "source_commit"));
+      return { eligible: true, reason: null, warning: legacy ? "Unversioned bookmark: no source revision was saved. Check the reference before using this personal note; editing leaves it unversioned." : null, legacy, item: clone(item), key: key4 };
+    } catch (error) {
+      return { eligible: false, reason: error.message, warning: null, legacy: false, item: null, key: key4 ?? null };
+    }
+  }
+  function createPassageBookmark(context) {
+    currentContext(context);
+    return { uid: context.uid, ref: context.ref, title: context.title, note: "", offset: context.offset, source_commit: context.source_commit };
+  }
+  function passageNoteRemovalNeedsConfirmation(item, drafts) {
+    if (!(drafts instanceof Map)) throw Error("Personal-note drafts must be a Map.");
+    const key4 = passageNoteKey(item);
+    const stored = item.note === void 0 ? "" : noteText(item.note);
+    const draft = drafts.has(key4) ? noteText(drafts.get(key4)) : "";
+    return stored.length > 0 || draft.length > 0;
+  }
+  function passageNoteTransaction(saved2, drafts, context, operation) {
+    if (!(drafts instanceof Map) || !object2(operation) || Object.keys(operation).some((key5) => !["type", "note", "confirmed", "mode"].includes(key5)) || !["ensure", "save", "remove"].includes(operation.type) || own3(operation, "mode") && !["reading", "saved"].includes(operation.mode)) throw Error("Unsupported personal-note change.");
+    let state;
+    if (operation.mode === "saved") {
+      if (!Array.isArray(saved2) || !object2(context) || Object.keys(context).some((key5) => !["uid", "ref"].includes(key5)) || operation.type === "ensure") throw Error("Saved note edits require an exact existing bookmark identity.");
+      parseBookmarks(JSON.stringify({ format: "pali-library-v1", saved: [{ ...context, title: "Personal bookmark", note: "" }] }));
+      const matches = saved2.filter((item) => object2(item) && item.uid === context.uid && item.ref === context.ref);
+      if (matches.length !== 1) throw Error("Saved note edits require one exact existing bookmark.");
+      state = { eligible: true, key: passageNoteKey(context), item: clone(matches[0]) };
+    } else state = passageNoteState(saved2, context);
+    if (!state.eligible) throw Error(state.reason);
+    const { key: key4 } = state;
+    if (drafts.has(key4)) noteText(drafts.get(key4));
+    if (operation.type !== "save" && own3(operation, "note")) throw Error("Only saving a personal note accepts note text.");
+    if (own3(operation, "confirmed") && typeof operation.confirmed !== "boolean") throw Error("Removal confirmation must be explicit.");
+    const note2 = operation.type === "save" ? noteText(operation.note) : void 0;
+    if (operation.type === "remove" && !state.item) throw Error("This exact passage is not saved.");
+    if (operation.type === "remove" && passageNoteRemovalNeedsConfirmation(state.item, drafts) && operation.confirmed !== true) {
+      const error = Error("Confirm removal of this bookmark and its personal note first.");
+      error.code = "NOTE_CONFIRMATION_REQUIRED";
+      throw error;
+    }
+    if (!state.item && saved2.length >= 500) throw Error("Your saved list is full (500 passages). Export or remove passages before adding a note.");
+    const before = { saved: clone(saved2), drafts: clone(drafts) };
+    if (operation.type === "save") before.drafts.set(key4, note2);
+    const result = { saved: clone(saved2), drafts: clone(drafts), before, item: null, removed: operation.type === "remove" };
+    const index = result.saved.findIndex((item) => object2(item) && item.uid === context.uid && item.ref === context.ref);
+    if (operation.type === "remove") result.saved.splice(index, 1);
+    else {
+      const item = state.item ?? createPassageBookmark(context);
+      if (operation.type === "save") item.note = note2;
+      if (index < 0) result.saved.push(item);
+      else result.saved[index] = item;
+      result.item = clone(item);
+    }
+    if (operation.type !== "ensure") result.drafts.delete(key4);
+    return result;
+  }
+  function restorePassageNoteTransaction(transaction) {
+    if (!object2(transaction?.before) || !Array.isArray(transaction.before.saved) || !(transaction.before.drafts instanceof Map)) throw Error("No personal-note transaction snapshot is available.");
+    return clone(transaction.before);
+  }
+
+  // web/note-draft-recovery.mjs
+  var MAX_NOTE_DRAFT_BYTES = MAX_IMPORT_BYTES;
+  var own4 = (value, key4) => Object.hasOwn(value, key4);
+  var object3 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var exactKeys = (value, keys2) => object3(value) && Object.keys(value).sort().join(",") === [...keys2].sort().join(",");
+  var fields = ["uid", "ref", "title", "note", "offset", "source_commit"];
+  var cloneBookmark = (value) => Object.fromEntries(fields.filter((key4) => own4(value, key4)).map((key4) => [key4, value[key4]]));
+  var cloneEntry = (entry3) => ({ bookmark: cloneBookmark(entry3.bookmark), draft: entry3.draft });
+  var baseKey = (bookmark2) => JSON.stringify(fields.map((key4) => own4(bookmark2, key4) ? [key4, bookmark2[key4]] : [key4]));
+  var failure = () => {
+    throw Error("This note-draft recovery journal is unreadable or unsupported. Keep or download its original contents before explicitly discarding it.");
+  };
+  var draftText = (value) => typeof value === "string" && value.length <= 4e3;
+  function bookmark(value) {
+    if (!object3(value) || ["uid", "ref", "title"].some((key4) => !own4(value, key4)) || Object.keys(value).some((key4) => !fields.includes(key4)) || own4(value, "note") && typeof value.note !== "string" || own4(value, "offset") && !Number.isSafeInteger(value.offset) || own4(value, "source_commit") && typeof value.source_commit !== "string") failure();
+    try {
+      parseBookmarks(JSON.stringify({ format: "pali-library-v1", saved: [value] }));
+    } catch {
+      failure();
+    }
+    return value;
+  }
+  function entry2(value) {
+    if (!exactKeys(value, ["bookmark", "draft"]) || !draftText(value.draft)) failure();
+    bookmark(value.bookmark);
+    return value;
+  }
+  function entries(value) {
+    if (!Array.isArray(value) || value.length > 500) failure();
+    const seen = /* @__PURE__ */ new Set();
+    for (const item of value) {
+      entry2(item);
+      const key4 = baseKey(item.bookmark);
+      if (seen.has(key4)) failure();
+      seen.add(key4);
+    }
+    return value;
+  }
+  function bounded(raw) {
+    if (typeof raw !== "string" || raw.length > MAX_NOTE_DRAFT_BYTES || new TextEncoder().encode(raw).byteLength > MAX_NOTE_DRAFT_BYTES) failure();
+    return raw;
+  }
+  function parseNoteDraftJournal(raw) {
+    if (raw === null) return [];
+    bounded(raw);
+    let value;
+    try {
+      value = JSON.parse(raw);
+    } catch {
+      failure();
+    }
+    if (!exactKeys(value, ["version", "entries"]) || value.version !== 1) failure();
+    return entries(value.entries).map(cloneEntry);
+  }
+  function serializeNoteDraftJournal(value) {
+    return bounded(JSON.stringify({ version: 1, entries: entries(value).map(cloneEntry) }));
+  }
+  function stageNoteDraftEntry(value, originalBookmark, rawDraft) {
+    entries(value);
+    bookmark(originalBookmark);
+    if (!draftText(rawDraft)) failure();
+    const key4 = baseKey(originalBookmark), next = value.map(cloneEntry), index = next.findIndex((item) => baseKey(item.bookmark) === key4), staged = { bookmark: cloneBookmark(originalBookmark), draft: rawDraft };
+    if (index < 0) next.push(staged);
+    else next[index] = staged;
+    serializeNoteDraftJournal(next);
+    return next;
+  }
+  function removeNoteDraftEntry(value, expectedEntry) {
+    entries(value);
+    entry2(expectedEntry);
+    const key4 = baseKey(expectedEntry.bookmark);
+    return value.filter((item) => baseKey(item.bookmark) !== key4 || item.draft !== expectedEntry.draft).map(cloneEntry);
+  }
+  function reconcileNoteDraftJournal(value, saved2, currentDrafts = /* @__PURE__ */ new Map()) {
+    entries(value);
+    if (!Array.isArray(saved2) || !(currentDrafts instanceof Map) || [...currentDrafts].some(([key4, draft]) => typeof key4 !== "string" || !draftText(draft))) failure();
+    const drafts = new Map(currentDrafts), restored = [], pending = [], settled = [];
+    for (const item of value) {
+      const matches = saved2.filter((mark) => object3(mark) && mark.uid === item.bookmark.uid && mark.ref === item.bookmark.ref);
+      let reason2;
+      if (matches.length === 0) reason2 = "missing-bookmark";
+      else if (matches.length !== 1) reason2 = "ambiguous-bookmark";
+      else {
+        try {
+          bookmark(matches[0]);
+        } catch {
+          reason2 = "unreadable-bookmark";
+        }
+        if (!reason2 && baseKey(matches[0]) === baseKey({ ...item.bookmark, note: item.draft })) {
+          settled.push(cloneEntry(item));
+          continue;
+        }
+        if (!reason2 && baseKey(matches[0]) !== baseKey(item.bookmark)) reason2 = "changed-bookmark";
+      }
+      const key4 = passageNoteKey(item.bookmark);
+      if (!reason2 && drafts.has(key4) && drafts.get(key4) !== item.draft) reason2 = "active-draft";
+      if (reason2) pending.push({ entry: cloneEntry(item), reason: reason2 });
+      else {
+        drafts.set(key4, item.draft);
+        restored.push(cloneEntry(item));
+      }
+    }
+    return { drafts, restored, pending, settled };
+  }
+  function guardedNoteDraftJournalWrite({ expected, entries: value, read: read2, write }) {
+    parseNoteDraftJournal(expected);
+    const raw = serializeNoteDraftJournal(value);
+    if (typeof read2 !== "function" || typeof write !== "function") failure();
+    const conflict2 = () => {
+      const error = Error("This tab\u2019s note-draft recovery data changed. No recovery data was overwritten; keep or download the pending drafts.");
+      error.code = "NOTE_DRAFT_RECOVERY_CHANGED";
+      throw error;
+    };
+    if (read2() !== expected || read2() !== expected) conflict2();
+    if (raw === expected) return raw;
+    write(raw);
+    if (read2() !== raw) {
+      const error = Error("The note-draft recovery write could not be confirmed. Keep or download the pending drafts; no cleanup was confirmed.");
+      error.code = "NOTE_DRAFT_RECOVERY_UNCONFIRMED";
+      throw error;
+    }
+    return raw;
+  }
+
+  // web/focus-ownership.mjs
+  function createFocusOwnership({ activeElement, hasFocus }) {
+    let revision5 = 0;
+    return {
+      changed() {
+        revision5++;
+      },
+      capture() {
+        return { revision: revision5, element: activeElement() };
+      },
+      owns(ticket) {
+        return Boolean(ticket) && ticket.revision === revision5 && ticket.element === activeElement() && hasFocus();
+      }
+    };
+  }
+
+  // web/bookmark-location.mjs
+  function bookmarkLocation(item, context) {
+    if (!item || typeof item.ref !== "string" || !item.ref) throw Error("This bookmark has no valid passage reference. Export it before repairing its metadata.");
+    if (item.offset !== void 0 && (!Number.isSafeInteger(item.offset) || item.offset < 0 || item.offset > 1e5)) throw Error("This bookmark has invalid saved-position metadata. Keep/export it before reviewing its source separately.");
+    const pinned2 = item.source_commit !== void 0;
+    if (pinned2 && (!Number.isSafeInteger(item.offset) || item.offset < 0)) throw Error("This versioned bookmark has no exact saved position. Its source version was not dropped or guessed. Keep/export the bookmark and review its source separately.");
+    const index = Number.isSafeInteger(item.offset) && item.offset >= 0 ? item.offset : Number(item.ref.match(/\/c?(\d+)$/)?.[1] || 1) - 1;
+    const offset = pinned2 ? item.offset : Math.floor(index / 30) * 30;
+    const href = readingPosition(context, offset, item.ref, pinned2 ? item.source_commit : "legacy");
+    if (pinned2) return { href, pinned: true, notice: "Saved source version: opening checks the revision before displaying wording." };
+    const args = new URLSearchParams(href.slice(6));
+    args.delete("source");
+    return { href: "#read?" + args, pinned: false, notice: "Legacy bookmark: no source version was saved. Opening checks its reference against the current source; this is not a saved copy of the old wording." };
+  }
+
+  // web/saved-passages.mjs
+  var SAVED_PAGE_SIZE = 25;
+  function savedScope(item) {
+    const uid2 = typeof item?.uid === "string" ? item.uid : "";
+    if (uid2.startsWith("book:")) return "books";
+    if (uid2.startsWith("post:")) return "post";
+    if (uid2.startsWith("commentary:") || uid2.startsWith("commentary-ref:")) return "commentary";
+    return "canon";
+  }
+  var savedScopeLabels = Object.freeze({ canon: "Canonical text", books: "Complete root source book", commentary: "Commentary \xB7 not canon", post: "Later work \xB7 not canon" });
+  var fold = (value) => (typeof value === "string" ? value : "").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+  function savedPage(items, drafts, { query = "", scope = "all", page: page2 = 0 } = {}) {
+    const tokens = fold(query).trim().split(/\s+/u).filter(Boolean);
+    const selected = Object.hasOwn(savedScopeLabels, scope) ? scope : "all";
+    const matches = items.filter((item) => {
+      if (selected !== "all" && savedScope(item) !== selected) return false;
+      const key4 = JSON.stringify([item.uid, item.ref]);
+      const note2 = drafts?.has(key4) ? drafts.get(key4) : item.note;
+      const text11 = fold([item.title, item.uid, item.ref, note2].filter((x) => typeof x === "string").join(" "));
+      return tokens.every((token) => text11.includes(token));
+    });
+    const pages3 = Math.max(1, Math.ceil(matches.length / SAVED_PAGE_SIZE));
+    const current = Number.isSafeInteger(page2) ? Math.max(0, Math.min(page2, pages3 - 1)) : 0;
+    return { items: matches.slice(current * SAVED_PAGE_SIZE, (current + 1) * SAVED_PAGE_SIZE), total: matches.length, all: items.length, pages: pages3, page: current, start: matches.length ? current * SAVED_PAGE_SIZE + 1 : 0, end: Math.min((current + 1) * SAVED_PAGE_SIZE, matches.length) };
+  }
+
+  // web/source-passage.mjs
+  function createSourcePassage(doc, segment, headingLevel, className = "passage") {
+    if (![2, 3, 4, 5].includes(headingLevel)) throw new Error("Unsupported source heading level.");
+    const node = doc.createElement(segment.type === "heading" ? "h" + headingLevel : "p");
+    node.textContent = segment.text;
+    node.className = className;
+    node.lang = "pi";
+    return node;
+  }
+
+  // web/print-page.mjs
+  function installPagePrinting(doc = document, win = window) {
+    const view2 = doc.getElementById("view");
+    const sheet = doc.createElement("article");
+    sheet.id = "print-document";
+    sheet.setAttribute("aria-hidden", "true");
+    doc.body.append(sheet);
+    const add = (parent, tag, text11, className) => {
+      const node = doc.createElement(tag);
+      node.textContent = text11;
+      if (className) node.className = className;
+      parent.append(node);
+      return node;
+    };
+    const routes = /* @__PURE__ */ new WeakMap();
+    const reading = () => win.location.hash.startsWith("#read?") && view2.querySelector('section[aria-label="P\u0101li passage"]');
+    function prepare() {
+      sheet.replaceChildren();
+      const passage = reading();
+      const attribution = view2.querySelector(":scope > .provenance");
+      if (!passage || routes.get(passage) !== win.location.hash || !passage.querySelector(".segment .passage") || !attribution) {
+        add(sheet, "h1", "No P\u0101li page ready to print");
+        add(sheet, "p", "Open a P\u0101li passage and wait for its source attribution before printing. Personal notes and other screens are not printed.");
+        return false;
+      }
+      add(sheet, "p", view2.querySelector(":scope > .eyebrow")?.textContent || "P\u0101li Library");
+      add(sheet, "h1", view2.querySelector(":scope > h2")?.textContent || "P\u0101li passage");
+      add(sheet, "p", "Loaded P\u0101li page only \u2014 not necessarily the complete work. English, study material, bookmarks and personal notes are excluded.", "print-scope");
+      const range = [...view2.querySelectorAll(":scope > p.muted")].find((node) => node.textContent.startsWith("Segments "));
+      if (range) add(sheet, "p", range.textContent, "print-scope");
+      for (const notice of view2.querySelectorAll(":scope > .notice, :scope > .toolbar .study-actions > .toolbar > .source-context > .notice")) add(sheet, "p", notice.textContent, "print-scope");
+      for (const segment of passage.querySelectorAll(":scope > .segment")) {
+        const block = add(sheet, "section", "", "print-segment");
+        add(block, "p", segment.querySelector(".segment-label span")?.textContent || "", "print-reference");
+        block.append(createSourcePassage(doc, { type: segment.classList.contains("heading") ? "heading" : "prose", text: segment.querySelector(".passage")?.textContent || "" }, 2, "print-passage"));
+      }
+      const source7 = add(sheet, "section", "", "print-provenance");
+      add(source7, "h2", "Source and terms");
+      for (const part of attribution.children) add(source7, "p", part.textContent);
+      for (const anchor of attribution.querySelectorAll("a[href]")) add(source7, "p", anchor.textContent + ": " + anchor.href);
+      const url = new URL(win.location.href);
+      url.search = "";
+      add(source7, "p", "Reading page: " + url.href);
+      return true;
+    }
+    function update() {
+      const passage = reading();
+      if (passage && !routes.has(passage)) routes.set(passage, win.location.hash);
+      const toolbar = view2.querySelector(":scope > .toolbar");
+      if (!passage || !toolbar || toolbar.querySelector("[data-print-page]")) return;
+      const target = toolbar.querySelector(".study-actions > .toolbar") || toolbar;
+      const control = add(target, "button", "Print loaded P\u0101li page");
+      control.type = "button";
+      control.dataset.printPage = "";
+      control.addEventListener("click", () => {
+        if (prepare()) win.print();
+      });
+    }
+    new win.MutationObserver(update).observe(view2, { childList: true, subtree: true });
+    win.addEventListener("beforeprint", prepare);
+    win.addEventListener("afterprint", () => sheet.replaceChildren());
+    win.addEventListener("hashchange", () => sheet.replaceChildren());
+    update();
+  }
+
+  // web/script-refresh.mjs
+  function scriptRefreshEligible(hash) {
+    return typeof hash === "string" && hash.startsWith("#") && ["read", "daily", "resolve", "search", "book-search"].includes(hash.slice(1).split("?")[0]);
+  }
+  function retainBookSearchDraft(previous, hash, input) {
+    if (!scriptRefreshEligible(hash)) return null;
+    if (!input) return previous?.hash === hash ? previous : null;
+    return {
+      hash,
+      value: input.value,
+      start: input.selectionStart,
+      end: input.selectionEnd,
+      direction: input.selectionDirection,
+      toolsOpen: input.toolsOpen
+    };
+  }
+
+  // src/script.mjs
+  var SCRIPTS = ["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"];
+  var SCRIPT_NAMES = {
+    roman: "Roman (Latin with diacritics)",
+    sinhala: "Sinhala",
+    thai: "Thai",
+    myanmar: "Myanmar (Burmese)",
+    devanagari: "Devanagari",
+    khmer: "Khmer",
+    lao: "Lao",
+    lanna: "Lanna (Tai Tham)"
+  };
+  var ALIASES = {
+    roman: "roman",
+    romn: "roman",
+    latn: "roman",
+    latin: "roman",
+    iast: "roman",
+    iso: "roman",
+    sinhala: "sinhala",
+    sinh: "sinhala",
+    si: "sinhala",
+    sinhalese: "sinhala",
+    thai: "thai",
+    th: "thai",
+    myanmar: "myanmar",
+    mymr: "myanmar",
+    burmese: "myanmar",
+    my: "myanmar",
+    burma: "myanmar",
+    devanagari: "devanagari",
+    deva: "devanagari",
+    hindi: "devanagari",
+    nagari: "devanagari",
+    khmer: "khmer",
+    khmr: "khmer",
+    km: "khmer",
+    cambodian: "khmer",
+    lao: "lao",
+    laoo: "lao",
+    laos: "lao",
+    lanna: "lanna",
+    lana: "lanna",
+    taitham: "lanna",
+    "tai tham": "lanna",
+    tham: "lanna",
+    "tai-tham": "lanna",
+    tai_tham: "lanna"
+  };
+  function scriptName(name) {
+    const key4 = String(name ?? "").trim().toLowerCase();
+    const found = ALIASES[key4];
+    if (!found) throw new Error(`Unknown script "${name}". Available: ${SCRIPTS.join(", ")}.`);
+    return found;
+  }
+  var CONSONANTS = [
+    "kh",
+    "gh",
+    "ch",
+    "jh",
+    "\u1E6Dh",
+    "\u1E0Dh",
+    "th",
+    "dh",
+    "ph",
+    "bh",
+    "k",
+    "g",
+    "\u1E45",
+    "c",
+    "j",
+    "\xF1",
+    "\u1E6D",
+    "\u1E0D",
+    "\u1E47",
+    "t",
+    "d",
+    "n",
+    "p",
+    "b",
+    "m",
+    "y",
+    "r",
+    "l",
+    "v",
+    "s",
+    "h",
+    "\u1E37"
+  ];
+  var VOWELS = ["a", "\u0101", "i", "\u012B", "u", "\u016B", "e", "o"];
+  var C_ORDER = [
+    "k",
+    "kh",
+    "g",
+    "gh",
+    "\u1E45",
+    "c",
+    "ch",
+    "j",
+    "jh",
+    "\xF1",
+    "\u1E6D",
+    "\u1E6Dh",
+    "\u1E0D",
+    "\u1E0Dh",
+    "\u1E47",
+    "t",
+    "th",
+    "d",
+    "dh",
+    "n",
+    "p",
+    "ph",
+    "b",
+    "bh",
+    "m",
+    "y",
+    "r",
+    "l",
+    "v",
+    "s",
+    "h",
+    "\u1E37"
+  ];
+  var zip = (keys2, chars) => Object.fromEntries(keys2.map((k, i) => [k, chars[i]]));
+  var TABLES = {
+    devanagari: {
+      c: [..."\u0915\u0916\u0917\u0918\u0919\u091A\u091B\u091C\u091D\u091E\u091F\u0920\u0921\u0922\u0923\u0924\u0925\u0926\u0927\u0928\u092A\u092B\u092C\u092D\u092E\u092F\u0930\u0932\u0935\u0938\u0939\u0933"],
+      v: ["\u0905", "\u0906", "\u0907", "\u0908", "\u0909", "\u090A", "\u090F", "\u0913"],
+      s: ["", "\u093E", "\u093F", "\u0940", "\u0941", "\u0942", "\u0947", "\u094B"],
+      virama: "\u094D",
+      m: "\u0902",
+      digits: [..."\u0966\u0967\u0968\u0969\u096A\u096B\u096C\u096D\u096E\u096F"],
+      stop: "\u0964",
+      abbr: "\u0970",
+      verseEnd: "\u0964",
+      stanzaEnd: "\u0965",
+      // VRI writes a zero-width joiner after the virama in these clusters.
+      zwj: ["kk", "kl", "kv", "cc", "jj", "\xF1c", "\xF1j", "\xF1\xF1", "nn", "pl", "ll"]
+    },
+    sinhala: {
+      c: [..."\u0D9A\u0D9B\u0D9C\u0D9D\u0D9E\u0DA0\u0DA1\u0DA2\u0DA3\u0DA4\u0DA7\u0DA8\u0DA9\u0DAA\u0DAB\u0DAD\u0DAE\u0DAF\u0DB0\u0DB1\u0DB4\u0DB5\u0DB6\u0DB7\u0DB8\u0DBA\u0DBB\u0DBD\u0DC0\u0DC3\u0DC4\u0DC5"],
+      v: ["\u0D85", "\u0D86", "\u0D89", "\u0D8A", "\u0D8B", "\u0D8C", "\u0D91", "\u0D94"],
+      s: ["", "\u0DCF", "\u0DD2", "\u0DD3", "\u0DD4", "\u0DD6", "\u0DD9", "\u0DDC"],
+      virama: "\u0DCA",
+      m: "\u0D82",
+      digits: null,
+      abbr: ".",
+      // VRI writes ZWJ before y and r (yansaya, rakaransaya) and ZWNJ in every other cluster.
+      joiner: (a, b) => b === "y" || b === "r" ? "\u200D" : "\u200C"
+    },
+    thai: {
+      c: [..."\u0E01\u0E02\u0E04\u0E06\u0E07\u0E08\u0E09\u0E0A\u0E0C\u0E0D\u0E0F\u0E10\u0E11\u0E12\u0E13\u0E15\u0E16\u0E17\u0E18\u0E19\u0E1B\u0E1C\u0E1E\u0E20\u0E21\u0E22\u0E23\u0E25\u0E27\u0E2A\u0E2B\u0E2C"],
+      v: ["\u0E2D", "\u0E2D\u0E32", "\u0E2D\u0E34", "\u0E2D\u0E35", "\u0E2D\u0E38", "\u0E2D\u0E39", "\u0E40\u0E2D", "\u0E42\u0E2D"],
+      s: ["", "\u0E32", "\u0E34", "\u0E35", "\u0E38", "\u0E39", "\u0E40", "\u0E42"],
+      virama: "\u0E3A",
+      m: "\u0E4D",
+      digits: [..."\u0E50\u0E51\u0E52\u0E53\u0E54\u0E55\u0E56\u0E57\u0E58\u0E59"],
+      prefix: true,
+      stop: "\u0E2F",
+      abbr: "."
+    },
+    myanmar: {
+      c: [..."\u1000\u1001\u1002\u1003\u1004\u1005\u1006\u1007\u1008\u1009\u100B\u100C\u100D\u100E\u100F\u1010\u1011\u1012\u1013\u1014\u1015\u1016\u1017\u1018\u1019\u101A\u101B\u101C\u101D\u101E\u101F\u1020"],
+      v: ["\u1021", "\u1021\u102C", "\u1023", "\u1024", "\u1025", "\u1026", "\u1027", "\u1029"],
+      s: ["", "\u102C", "\u102D", "\u102E", "\u102F", "\u1030", "\u1031", "\u1031\u102C"],
+      virama: "\u1039",
+      final: "\u103A",
+      m: "\u1036",
+      digits: [..."\u1040\u1041\u1042\u1043\u1044\u1045\u1046\u1047\u1048\u1049"],
+      stop: "\u104B",
+      abbr: ".",
+      verseEnd: "\u104B",
+      ellipsis: "\u104B",
+      comma: "\u104A",
+      // Stacks VRI writes as one letter, a medial or kinzi (applied in this order).
+      ligatures: [["\u101E\u1039\u101E", "\u103F"], ["\u1009\u1039\u1009", "\u100A"], ["\u1039\u101A", "\u103B"], ["\u1039\u101B", "\u103C"], ["\u1039\u101D", "\u103D"], ["\u1039\u101F", "\u103E"], ["\u1004\u1039", "\u1004\u103A\u1039"]],
+      extraIndependent: { "\u1026": "\u016B", "\u102A": "o" }
+    },
+    khmer: {
+      c: [..."\u1780\u1781\u1782\u1783\u1784\u1785\u1786\u1787\u1788\u1789\u178A\u178B\u178C\u178D\u178E\u178F\u1790\u1791\u1792\u1793\u1794\u1795\u1796\u1797\u1798\u1799\u179A\u179B\u179C\u179F\u17A0\u17A1"],
+      v: ["\u17A2", "\u17A2\u17B6", "\u17A5", "\u17A6", "\u17A7", "\u17A9", "\u17AF", "\u17B1"],
+      s: ["", "\u17B6", "\u17B7", "\u17B8", "\u17BB", "\u17BC", "\u17C1", "\u17C4"],
+      virama: "\u17D2",
+      final: "\u17D1",
+      m: "\u17C6",
+      digits: [..."\u17E0\u17E1\u17E2\u17E3\u17E4\u17E5\u17E6\u17E7\u17E8\u17E9"],
+      stop: "\u17D4",
+      abbr: ".",
+      extraIndependent: { "\u17A8": "\u016B" }
+    },
+    lao: {
+      // Lao with the Pāli letters added in Unicode 12 (U+0E86-U+0EAC) and the Pāli virama U+0EBA.
+      c: [
+        "\u0E81",
+        "\u0E82",
+        "\u0E84",
+        "\u0E86",
+        "\u0E87",
+        "\u0E88",
+        "\u0E89",
+        "\u0E8A",
+        "\u0E8C",
+        "\u0E8E",
+        "\u0E8F",
+        "\u0E90",
+        "\u0E91",
+        "\u0E92",
+        "\u0E93",
+        "\u0E95",
+        "\u0E96",
+        "\u0E97",
+        "\u0E98",
+        "\u0E99",
+        "\u0E9B",
+        "\u0E9C",
+        "\u0E9E",
+        "\u0EA0",
+        "\u0EA1",
+        "\u0E8D",
+        "\u0EA3",
+        "\u0EA5",
+        "\u0EA7",
+        "\u0EAA",
+        "\u0EAB",
+        "\u0EAC"
+      ],
+      v: ["\u0EAD", "\u0EAD\u0EB2", "\u0EAD\u0EB4", "\u0EAD\u0EB5", "\u0EAD\u0EB8", "\u0EAD\u0EB9", "\u0EC0\u0EAD", "\u0EC2\u0EAD"],
+      s: ["", "\u0EB2", "\u0EB4", "\u0EB5", "\u0EB8", "\u0EB9", "\u0EC0", "\u0EC2"],
+      virama: "\u0EBA",
+      m: "\u0ECD",
+      digits: [..."\u0ED0\u0ED1\u0ED2\u0ED3\u0ED4\u0ED5\u0ED6\u0ED7\u0ED8\u0ED9"],
+      prefix: true
+    },
+    lanna: {
+      // Tai Tham is stored in logical order; sakot (U+1A60) stacks clusters and
+      // the visible asat (U+1A7A) marks a consonant with no vowel.
+      c: [
+        "\u1A20",
+        "\u1A21",
+        "\u1A23",
+        "\u1A25",
+        "\u1A26",
+        "\u1A27",
+        "\u1A28",
+        "\u1A29",
+        "\u1A2B",
+        "\u1A2C",
+        "\u1A2D",
+        "\u1A2E",
+        "\u1A2F",
+        "\u1A30",
+        "\u1A31",
+        "\u1A32",
+        "\u1A33",
+        "\u1A34",
+        "\u1A35",
+        "\u1A36",
+        "\u1A37",
+        "\u1A39",
+        "\u1A3B",
+        "\u1A3D",
+        "\u1A3E",
+        "\u1A3F",
+        "\u1A41",
+        "\u1A43",
+        "\u1A45",
+        "\u1A48",
+        "\u1A49",
+        "\u1A4A"
+      ],
+      v: ["\u1A4B", "\u1A4B\u1A63", "\u1A4D", "\u1A4E", "\u1A4F", "\u1A50", "\u1A51", "\u1A52"],
+      s: ["", "\u1A63", "\u1A65", "\u1A66", "\u1A69", "\u1A6A", "\u1A6E", "\u1A6E\u1A63"],
+      virama: "\u1A60",
+      final: "\u1A7A",
+      m: "\u1A74",
+      digits: [..."\u1A90\u1A91\u1A92\u1A93\u1A94\u1A95\u1A96\u1A97\u1A98\u1A99"],
+      extraIndependent: { "\u1A4C": "\u0101" },
+      extraSigns: { "\u1A64": "\u0101", "\u1A70": "o" },
+      // Subjoined letters and the great sa some Lanna texts use; accepted on input.
+      expand: [["\u1A55", "\u1A60\u1A41"], ["\u1A56", "\u1A60\u1A43"], ["\u1A54", "\u1A48\u1A60\u1A48"]]
+    }
+  };
+  var MYMR_TALL = /([ခဂပဝ]|ဒ္ဓ)(ေ?)ာ/g;
+  for (const t of Object.values(TABLES)) {
+    t.cons = zip(C_ORDER, t.c);
+    t.ind = zip(VOWELS, t.v);
+    t.sign = zip(VOWELS, t.s);
+    t.zwj = new Set(t.zwj ?? []);
+  }
+  var ROMAN_TOKENS = [...CONSONANTS, ...VOWELS, "\u1E43"];
+  var PE = "\uE000";
+  var STOP = "\uE001";
+  var STANZA = "\uE002";
+  function* romanTokens(s) {
+    for (let i = 0; i < s.length; ) {
+      let tok = null;
+      for (const t of ROMAN_TOKENS) if (s.startsWith(t, i)) {
+        tok = t;
+        break;
+      }
+      if (tok) {
+        yield { kind: tok === "\u1E43" ? "m" : VOWELS.includes(tok) ? "v" : "c", tok };
+        i += tok.length;
+      } else {
+        if (s[i] === "\u1E41" || s[i] === "\u014B") yield { kind: "m", tok: "\u1E43" };
+        else yield { kind: "o", tok: s[i] };
+        i += 1;
+      }
+    }
+  }
+  function romanPunctuation(s, t, stanza) {
+    if (stanza && t.stanzaEnd) s = s.replace(/\.(\)?\s*)$/, `${STANZA}$1`);
+    if (t.abbr) {
+      s = s.replace(/…(\s*)(pe)…/gi, `\u2026$1$2${PE}\u2026`);
+      s = s.replace(/(?<=(?:^|[\s(.])\p{Ll}{1,6})\.(?=\s*[\p{Ll}\d)])/gu, PE);
+    }
+    if (t.stop) s = s.replace(/(?<![0-9])\./g, STOP);
+    if (t.verseEnd) s = s.replace(/;(\s*)$/, `${STOP}$1`);
+    return s;
+  }
+  function fromRoman(text11, script, stanza) {
+    const t = TABLES[script];
+    const s = romanPunctuation(text11.normalize("NFC"), t, stanza).toLowerCase();
+    let out = "";
+    let pending = null;
+    let consStart = -1;
+    for (const { kind, tok } of romanTokens(s)) {
+      if (kind === "c") {
+        if (pending) {
+          out += t.virama;
+          if (t.zwj.has(pending + tok)) out += "\u200D";
+          else if (t.joiner) out += t.joiner(pending, tok);
+        }
+        consStart = out.length;
+        out += t.cons[tok];
+        pending = tok;
+      } else if (kind === "v") {
+        if (pending) {
+          const sign = t.sign[tok];
+          if (t.prefix && (tok === "e" || tok === "o")) out = out.slice(0, consStart) + sign + out.slice(consStart);
+          else out += sign;
+          pending = null;
+        } else {
+          out += t.ind[tok];
+        }
+      } else {
+        if (pending) {
+          out += t.final ?? t.virama;
+          pending = null;
+        }
+        if (kind === "m") out += t.m;
+        else if (tok >= "0" && tok <= "9") out += t.digits ? t.digits[tok.charCodeAt(0) - 48] : tok;
+        else if (tok === PE) out += t.abbr;
+        else if (tok === STOP) out += t.stop;
+        else if (tok === STANZA) out += t.stanzaEnd;
+        else if (tok === "\u2026" && t.ellipsis) out += t.ellipsis;
+        else if (tok === "," && t.comma) out += t.comma;
+        else out += tok;
+      }
+    }
+    if (pending) out += t.final ?? t.virama;
+    if (t.ligatures) for (const [a, b] of t.ligatures) out = out.split(a).join(b);
+    if (script === "myanmar") out = out.replace(MYMR_TALL, "$1$2\u102B");
+    return out;
+  }
+  var REVERSE = {};
+  function reverse(script) {
+    if (REVERSE[script]) return REVERSE[script];
+    const t = TABLES[script];
+    const cons = new Map(C_ORDER.map((r) => [t.cons[r], r]));
+    const carrier = t.ind.a;
+    cons.set(carrier, "");
+    const ind = /* @__PURE__ */ new Map();
+    for (const r of VOWELS) if (r !== "a" && !t.ind[r].startsWith(carrier)) ind.set(t.ind[r], r);
+    for (const [k, v] of Object.entries(t.extraIndependent ?? {})) ind.set(k, v);
+    const signs = new Map(VOWELS.filter((r) => t.sign[r] && !(t.prefix && (r === "e" || r === "o"))).map((r) => [t.sign[r], r]));
+    for (const [k, v] of Object.entries(t.extraSigns ?? {})) signs.set(k, v);
+    const punct = /* @__PURE__ */ new Map();
+    if (t.stop) punct.set(t.stop, ".");
+    if (t.stanzaEnd) punct.set(t.stanzaEnd, ".");
+    if (t.abbr) punct.set(t.abbr, ".");
+    if (t.ellipsis) punct.set(t.ellipsis, ".");
+    if (t.comma) punct.set(t.comma, ",");
+    if (t.digits) t.digits.forEach((d, i) => punct.set(d, String(i)));
+    const expand = [...t.expand ?? []];
+    if (t.ligatures) for (const [a, b] of [...t.ligatures].reverse()) expand.push([b, a]);
+    if (script === "myanmar") expand.push(["\u102B", "\u102C"]);
+    const byLength = (m) => [...m.keys()].sort((a, b) => b.length - a.length);
+    const prefixes = t.prefix ? /* @__PURE__ */ new Map([[t.sign.e, "e"], [t.sign.o, "o"]]) : /* @__PURE__ */ new Map();
+    return REVERSE[script] = { t, cons, ind, signs, signList: byLength(signs), indList: byLength(ind), punct, expand, prefixes };
+  }
+  function toRomanFrom(text11, script) {
+    const R = reverse(script);
+    const { t } = R;
+    let s = text11.normalize("NFC").replace(/[\u200c\u200d]/g, "");
+    for (const [a, b] of R.expand) s = s.split(a).join(b);
+    const at = (i, list) => list.find((x) => s.startsWith(x, i));
+    let out = "";
+    for (let i = 0; i < s.length; ) {
+      let prefix = null;
+      if (R.prefixes.has(s[i]) && R.cons.has(s[i + 1])) {
+        prefix = R.prefixes.get(s[i]);
+        i += 1;
+      }
+      const c = s[i];
+      if (R.cons.has(c)) {
+        out += R.cons.get(c);
+        i += 1;
+        if (prefix) out += prefix;
+        else if (s[i] === t.virama || t.final && s[i] === t.final) i += 1;
+        else {
+          const sign = at(i, R.signList);
+          if (sign) {
+            out += R.signs.get(sign);
+            i += sign.length;
+          } else out += "a";
+        }
+        continue;
+      }
+      const v = at(i, R.indList);
+      if (v) {
+        out += R.ind.get(v);
+        i += v.length;
+        continue;
+      }
+      if (c === t.m) {
+        out += "\u1E43";
+        i += 1;
+        continue;
+      }
+      out += R.punct.get(c) ?? c;
+      i += 1;
+    }
+    if (t.abbr) out = out.replace(/[.…](\s*)pe\.[.…]/g, "\u2026$1pe\u2026");
+    return out;
+  }
+  var RANGES = [
+    ["devanagari", 2304, 2431],
+    ["sinhala", 3456, 3583],
+    ["thai", 3584, 3711],
+    ["lao", 3712, 3839],
+    ["myanmar", 4096, 4255],
+    ["khmer", 6016, 6143],
+    ["lanna", 6688, 6831]
+  ];
+  function detectScript(text11) {
+    const counts = {};
+    for (const ch of String(text11 ?? "")) {
+      const cp = ch.codePointAt(0);
+      if (cp < 2304) continue;
+      for (const [name, lo, hi] of RANGES) if (cp >= lo && cp <= hi) {
+        counts[name] = (counts[name] ?? 0) + 1;
+        break;
+      }
+    }
+    let best = "roman";
+    let n = 0;
+    for (const [name, c] of Object.entries(counts)) if (c > n) {
+      best = name;
+      n = c;
+    }
+    return best;
+  }
+  function transliterate(text11, from, to, { stanza = false } = {}) {
+    if (text11 == null) return text11;
+    const s = String(text11);
+    const a = from === "auto" ? detectScript(s) : scriptName(from);
+    const b = scriptName(to);
+    if (a === b) return s;
+    const roman = a === "roman" ? s : toRomanFrom(s, a);
+    return b === "roman" ? roman : fromRoman(roman, b, stanza);
+  }
+  function romanizeInput(text11) {
+    const s = String(text11 ?? "");
+    const script = detectScript(s);
+    if (script === "roman") return { text: s, script };
+    return { text: toRomanFrom(s, script).normalize("NFC"), script, original: s };
+  }
+  function romanizeLookupInput(text11) {
+    const input = romanizeInput(text11);
+    if (detectScript(input.text) !== "roman" || [...input.text].some((ch) => /\p{L}/u.test(ch) && !/\p{Script=Latin}/u.test(ch))) {
+      throw new Error("The lookup input could not be converted completely. Use P\u0101li in Roman or one supported script, without mixed or unsupported characters.");
+    }
+    return input;
+  }
+  function inputNote(input) {
+    return input?.original ? { input_script: input.script, input_romanized: input.text } : {};
+  }
+  function scriptNote(script) {
+    return {
+      script,
+      script_note: `P\u0101li transliterated into ${SCRIPT_NAMES[script]} by this server from the VRI Roman edition (exact letter-for-letter; punctuation follows VRI's own script editions where they exist). Citations, IDs and English are left in Roman.`
+    };
+  }
+  var pali = (text11, script, opts) => typeof text11 === "string" && text11 ? transliterate(text11, "roman", script, opts) : text11;
+  function verse(text11, script) {
+    const lines = text11.split("\n");
+    return lines.map((line, i) => pali(line, script, { stanza: i === lines.length - 1 })).join("\n");
+  }
+  function localizeUnitFields(obj, script) {
+    const out = { ...obj };
+    if (typeof out.title === "string") {
+      out.title_roman = out.title;
+      out.title = pali(out.title, script);
+    }
+    if (typeof out.vri_book === "string") out.vri_book = pali(out.vri_book, script);
+    if (typeof out.excerpt === "string") out.excerpt = pali(out.excerpt, script);
+    return out;
+  }
+  function localizeText(result, script, input) {
+    const s = script ? scriptName(script) : "roman";
+    if (s === "roman") return { ...result, ...inputNote(input) };
+    const out = localizeUnitFields(result, s);
+    out.segments = (result.segments ?? []).map((seg) => {
+      const x = { ...seg };
+      if (typeof x.text === "string") x.text = x.type === "verse" ? verse(x.text, s) : pali(x.text, s);
+      if (Array.isArray(x.variant_readings)) x.variant_readings = x.variant_readings.map((v) => pali(v, s));
+      if (Array.isArray(x.variants)) x.variants = x.variants.map((v) => ({
+        ...v,
+        raw: pali(v.raw, s),
+        readings: (v.readings ?? []).map((r) => ({ ...r, reading: pali(r.reading, s) })),
+        omissions: (v.omissions ?? []).map((o) => ({ ...o, text: pali(o.text, s) })),
+        remarks: (v.remarks ?? []).map((r) => pali(r, s))
+      }));
+      return x;
+    });
+    if (Array.isArray(result.pali_opening)) out.pali_opening = result.pali_opening;
+    return { ...out, ...scriptNote(s), ...inputNote(input) };
   }
 
   // web/reading-plans.mjs
@@ -11100,18 +14190,18 @@
 
   // web/quote-check.mjs
   function validatePaliQuote(data, quote) {
-    const fail9 = () => {
+    const fail10 = () => {
       throw Error("The quotation result is incomplete or does not match this P\u0101li request. No verdict or substitute source was displayed.");
     };
     const text11 = (x) => typeof x === "string" && x.length > 0;
     const integer9 = (x) => Number.isSafeInteger(x) && x >= 0;
-    if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text11(data.explanation) || !text11(data.guidance) || data.scope?.language !== "pali" || !text11(data.scope.searched) || !text11(data.scope.attribution) || !text11(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text11(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text11(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail9();
-    if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text11(data.citation_note))) fail9();
+    if (!data || data.quote !== quote || data.language !== "pali" || !["found", "close_paraphrase", "not_found_in_scope"].includes(data.verdict) || !text11(data.explanation) || !text11(data.guidance) || data.scope?.language !== "pali" || !text11(data.scope.searched) || !text11(data.scope.attribution) || !text11(data.scope.terms) || data.comparison?.verbatim !== "not_assessed" || !text11(data.comparison?.note) || !["normalized_fuzzy", "literal_source_substring"].includes(data.comparison.method) || !text11(data.thresholds?.measure) || !Array.isArray(data.matches) || data.matches.length > 5) fail10();
+    if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text11(data.citation_note))) fail10();
     for (const m of data.matches) {
       const command6 = m.read_with, span = m.source_span;
-      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text11(m.citation) || !text11(m.matched_text) || !text11(m.edition) || !text11(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command6?.tool !== "get_text" || command6.uid !== m.text_id || !integer9(command6.offset) || !integer9(command6.limit) || command6.limit < 1 || command6.limit > 200 || span?.offset !== command6.offset || span.first_segment_ref !== m.segment_ref || !integer9(span.end_offset) || span.end_offset <= span.offset || !text11(span.last_segment_ref)) fail9();
+      if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text11(m.citation) || !text11(m.matched_text) || !text11(m.edition) || !text11(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command6?.tool !== "get_text" || command6.uid !== m.text_id || !integer9(command6.offset) || !integer9(command6.limit) || command6.limit < 1 || command6.limit > 200 || span?.offset !== command6.offset || span.first_segment_ref !== m.segment_ref || !integer9(span.end_offset) || span.end_offset <= span.offset || !text11(span.last_segment_ref)) fail10();
     }
-    if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail9();
+    if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail10();
     return data;
   }
 
@@ -11120,33 +14210,33 @@
   var MAX_PROGRESS_MARKS = 1600;
   var object4 = (x) => x && typeof x === "object" && !Array.isArray(x);
   var exact = (x, keys2) => object4(x) && Object.keys(x).length === keys2.length && keys2.every((k) => Object.hasOwn(x, k));
-  var integer2 = (x, min, max) => Number.isSafeInteger(x) && x >= min && x <= max;
+  var integer3 = (x, min, max) => Number.isSafeInteger(x) && x >= min && x <= max;
   var key = (x) => x.name + ":" + x.day;
   function parseProgressMetadata(text11) {
-    const fail9 = () => {
+    const fail10 = () => {
       throw Error("This is not a supported reading-progress export. No marks were restored.");
     };
     let data;
     try {
       data = JSON.parse(text11);
     } catch {
-      fail9();
+      fail10();
     }
-    if (!exact(data, ["format", "progress"]) || data.format !== "pali-library-reading-progress-v1" || !Array.isArray(data.progress) || data.progress.length > MAX_PROGRESS_MARKS) fail9();
+    if (!exact(data, ["format", "progress"]) || data.format !== "pali-library-reading-progress-v1" || !Array.isArray(data.progress) || data.progress.length > MAX_PROGRESS_MARKS) fail10();
     const seen = /* @__PURE__ */ new Set();
     return data.progress.map((mark) => {
-      if (!exact(mark, ["name", "day", "signature"]) || typeof mark.name !== "string" || !/^[a-z0-9-]{1,60}$/.test(mark.name) || !integer2(mark.day, 1, 400) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail9();
+      if (!exact(mark, ["name", "day", "signature"]) || typeof mark.name !== "string" || !/^[a-z0-9-]{1,60}$/.test(mark.name) || !integer3(mark.day, 1, 400) || typeof mark.signature !== "string" || mark.signature.length > 12e3 || seen.has(key(mark))) fail10();
       seen.add(key(mark));
       let s;
       try {
         s = JSON.parse(mark.signature);
       } catch {
-        fail9();
+        fail10();
       }
-      if (!exact(s, ["name", "day", "source", "readings"]) || s.name !== mark.name || s.day !== mark.day || typeof s.source !== "string" || !/^[a-zA-Z0-9._-]{1,100}$/.test(s.source) || !Array.isArray(s.readings) || !s.readings.length || s.readings.length > 20) fail9();
+      if (!exact(s, ["name", "day", "source", "readings"]) || s.name !== mark.name || s.day !== mark.day || typeof s.source !== "string" || !/^[a-zA-Z0-9._-]{1,100}$/.test(s.source) || !Array.isArray(s.readings) || !s.readings.length || s.readings.length > 20) fail10();
       const ids = /* @__PURE__ */ new Set();
       for (const r of s.readings) {
-        if (!exact(r, ["id", "offset", "limit", "part", "of"]) || typeof r.id !== "string" || !/^[a-z][a-z0-9.-]{0,299}$/.test(r.id) || ids.has(r.id) || !integer2(r.offset, 0, 1e5) || !(r.limit === null || integer2(r.limit, 1, 1e5)) || !(r.part === null && r.of === null || integer2(r.part, 1, 400) && integer2(r.of, r.part, 400) && r.limit !== null)) fail9();
+        if (!exact(r, ["id", "offset", "limit", "part", "of"]) || typeof r.id !== "string" || !/^[a-z][a-z0-9.-]{0,299}$/.test(r.id) || ids.has(r.id) || !integer3(r.offset, 0, 1e5) || !(r.limit === null || integer3(r.limit, 1, 1e5)) || !(r.part === null && r.of === null || integer3(r.part, 1, 400) && integer3(r.of, r.part, 400) && r.limit !== null)) fail10();
         ids.add(r.id);
       }
       const signature = JSON.stringify({ name: s.name, day: s.day, source: s.source, readings: s.readings.map((r) => ({ id: r.id, offset: r.offset, limit: r.limit, part: r.part, of: r.of })) });
@@ -11155,7 +14245,7 @@
   }
   function parseProgress(text11, catalog) {
     const progress = parseProgressMetadata(text11), plans2 = new Map(catalog.map((p) => [p.name, p.days]));
-    if (progress.some((mark) => !plans2.has(mark.name) || !integer2(mark.day, 1, plans2.get(mark.name)))) throw Error("This is not a supported reading-progress export. No marks were restored.");
+    if (progress.some((mark) => !plans2.has(mark.name) || !integer3(mark.day, 1, plans2.get(mark.name)))) throw Error("This is not a supported reading-progress export. No marks were restored.");
     return progress;
   }
   function mergeProgress(existing, incoming) {
@@ -11167,8 +14257,8 @@
   // web/topics-study.mjs
   var string3 = (x) => typeof x === "string" && x.length > 0;
   var slug = (x) => typeof x === "string" && /^[a-z0-9][a-z0-9_-]{0,199}$/.test(x);
-  var integer3 = (x, min = 0, max = 1e5) => Number.isSafeInteger(x) && x >= min && x <= max;
-  var fail = () => {
+  var integer4 = (x, min = 0, max = 1e5) => Number.isSafeInteger(x) && x >= min && x <= max;
+  var fail2 = () => {
     throw Error("The study index is incomplete or does not match this selection. No topic, list or source was substituted.");
   };
   var array = (x, max) => Array.isArray(x) && x.length <= max;
@@ -11183,57 +14273,57 @@
     }
   }
   function topicSource(source7) {
-    if (!string3(source7?.name) || !string3(source7.license) || !string3(source7.attribution) || !string3(source7.commit)) fail();
+    if (!string3(source7?.name) || !string3(source7.license) || !string3(source7.attribution) || !string3(source7.commit)) fail2();
   }
   function related(items, tool2) {
     if (items === void 0) return;
-    if (!array(items, 500)) fail();
-    for (const x of items) if (!slug(x.slug) || !string3(x.name) || !command(x.read_with, tool2, x.slug)) fail();
+    if (!array(items, 500)) fail2();
+    for (const x of items) if (!slug(x.slug) || !string3(x.name) || !command(x.read_with, tool2, x.slug)) fail2();
   }
   function texts(items) {
-    if (!array(items, 500)) fail();
-    for (const x of items) if (!/^[a-z][a-z0-9.-]*$/.test(x.id || "") || !string3(x.citation) || x.read_with?.tool !== "get_text" || x.read_with.uid !== x.id) fail();
+    if (!array(items, 500)) fail2();
+    for (const x of items) if (!/^[a-z][a-z0-9.-]*$/.test(x.id || "") || !string3(x.citation) || x.read_with?.tool !== "get_text" || x.read_with.uid !== x.id) fail2();
   }
   function topicCatalogue(data, { offset, limit }) {
     topicSource(data?.source);
-    if (!integer3(data.total) || data.offset !== offset || !array(data.topics, limit) || data.returned !== data.topics.length || data.returned !== Math.min(limit, Math.max(0, data.total - offset)) || data.next_offset !== (offset + limit < data.total ? offset + limit : null)) fail();
+    if (!integer4(data.total) || data.offset !== offset || !array(data.topics, limit) || data.returned !== data.topics.length || data.returned !== Math.min(limit, Math.max(0, data.total - offset)) || data.next_offset !== (offset + limit < data.total ? offset + limit : null)) fail2();
     const seen = /* @__PURE__ */ new Set();
     for (const x of data.topics) {
-      if (!slug(x.slug) || seen.has(x.slug) || !string3(x.name) || !["subject", "numerical"].includes(x.index) || !integer3(x.texts) || !command(x.read_with, "topic", x.slug)) fail();
+      if (!slug(x.slug) || seen.has(x.slug) || !string3(x.name) || !["subject", "numerical"].includes(x.index) || !integer4(x.texts) || !command(x.read_with, "topic", x.slug)) fail2();
       seen.add(x.slug);
     }
     return data;
   }
   function topicDetail(data, name) {
     topicSource(data?.source);
-    if (data.topic?.slug !== name || !slug(name) || !string3(data.topic.name) || !string3(data.topic.index) || !atiLink(data.topic.ati_url) || data.source.url !== data.topic.ati_url || !string3(data.note)) fail();
+    if (data.topic?.slug !== name || !slug(name) || !string3(data.topic.name) || !string3(data.topic.index) || !atiLink(data.topic.ati_url) || data.source.url !== data.topic.ati_url || !string3(data.note)) fail2();
     texts(data.texts);
     related(data.see_also, "topic");
     related(data.other_matches, "topic");
-    if (data.dhamma_list && (!slug(data.dhamma_list.slug) || !string3(data.dhamma_list.name) || !command(data.dhamma_list.read_with, "dhamma_list", data.dhamma_list.slug))) fail();
-    if (data.further_reading !== void 0 && (!array(data.further_reading, 500) || data.further_reading.some((x) => !string3(x.title) || !string3(x.kind) || !atiLink(x.url)))) fail();
-    for (const x of data.texts) if (!string3(x.ati_reference) || !atiLink(x.ati_url)) fail();
+    if (data.dhamma_list && (!slug(data.dhamma_list.slug) || !string3(data.dhamma_list.name) || !command(data.dhamma_list.read_with, "dhamma_list", data.dhamma_list.slug))) fail2();
+    if (data.further_reading !== void 0 && (!array(data.further_reading, 500) || data.further_reading.some((x) => !string3(x.title) || !string3(x.kind) || !atiLink(x.url)))) fail2();
+    for (const x of data.texts) if (!string3(x.ati_reference) || !atiLink(x.ati_url)) fail2();
     return data;
   }
   function listCatalogue(data) {
-    if (!array(data?.lists, 100) || !data.lists.length) fail();
+    if (!array(data?.lists, 100) || !data.lists.length) fail2();
     const seen = /* @__PURE__ */ new Set();
     for (const x of data.lists) {
-      if (!slug(x.slug) || seen.has(x.slug) || !string3(x.name) || !string3(x.pali) || !integer3(x.count, 1, 100) || !status(x.status) || !string3(data.status_labels?.[x.status]) || !command(x.read_with, "dhamma_list", x.slug)) fail();
+      if (!slug(x.slug) || seen.has(x.slug) || !string3(x.name) || !string3(x.pali) || !integer4(x.count, 1, 100) || !status(x.status) || !string3(data.status_labels?.[x.status]) || !command(x.read_with, "dhamma_list", x.slug)) fail2();
       seen.add(x.slug);
     }
     return data;
   }
   function listDetail(data, name) {
-    if (data?.slug !== name || !slug(name) || !string3(data.name) || !string3(data.pali) || !status(data.status) || !string3(data.status_meaning) || !string3(data.gloss_note) || !string3(data.note) || !integer3(data.count, 1, 100) || !array(data.members, 100) || !data.members.length || !string3(data.source?.curated_by) || !string3(data.source.pali?.name) || !string3(data.source.pali.commit) || !string3(data.source.pali.attribution) || !string3(data.source.pali.terms)) fail();
+    if (data?.slug !== name || !slug(name) || !string3(data.name) || !string3(data.pali) || !status(data.status) || !string3(data.status_meaning) || !string3(data.gloss_note) || !string3(data.note) || !integer4(data.count, 1, 100) || !array(data.members, 100) || !data.members.length || !string3(data.source?.curated_by) || !string3(data.source.pali?.name) || !string3(data.source.pali.commit) || !string3(data.source.pali.attribution) || !string3(data.source.pali.terms)) fail2();
     for (const [i, x] of data.members.entries()) {
-      if (x.n !== i + 1 || !string3(x.pali) || !string3(x.gloss) || x.list !== void 0 && (!slug(x.list) || !command(x.read_with, "dhamma_list", x.list))) fail();
+      if (x.n !== i + 1 || !string3(x.pali) || !string3(x.gloss) || x.list !== void 0 && (!slug(x.list) || !command(x.read_with, "dhamma_list", x.list))) fail2();
     }
     texts(data.defined_in);
-    if (!data.defined_in.length) fail();
+    if (!data.defined_in.length) fail2();
     texts(data.see_also_texts || []);
     related(data.related_lists, "dhamma_list");
-    if (data.topic && (!slug(data.topic.slug) || !string3(data.topic.name) || !command(data.topic.read_with, "topic", data.topic.slug))) fail();
+    if (data.topic && (!slug(data.topic.slug) || !string3(data.topic.name) || !command(data.topic.read_with, "topic", data.topic.slug))) fail2();
     return data;
   }
 
@@ -11265,18 +14355,18 @@
         const stop = new Promise((_, reject) => {
           rejectStop = reject;
         });
-        const entry2 = { id: ++serial2, group, label: label2, cancel(why) {
+        const entry3 = { id: ++serial2, group, label: label2, cancel(why) {
           if (!active) return false;
           active = false;
           reason2 = why;
           rejectStop(stopped(why));
           controller.abort();
-          pending.delete(entry2.id);
+          pending.delete(entry3.id);
           emit();
           return true;
         } };
-        const timer = setTimer(() => entry2.cancel("deadline"), timeoutMs);
-        pending.set(entry2.id, entry2);
+        const timer = setTimer(() => entry3.cancel("deadline"), timeoutMs);
+        pending.set(entry3.id, entry3);
         emit();
         try {
           return await Promise.race([Promise.resolve().then(() => {
@@ -11286,14 +14376,14 @@
         } finally {
           active = false;
           clearTimer(timer);
-          if (pending.delete(entry2.id)) emit();
+          if (pending.delete(entry3.id)) emit();
         }
       }
     };
   }
 
   // web/local-storage-write.mjs
-  var own4 = (x, k) => Object.hasOwn(x, k);
+  var own5 = (x, k) => Object.hasOwn(x, k);
   function profile(raw) {
     const x = raw === null ? {} : JSON.parse(raw);
     if (!x || typeof x !== "object" || Array.isArray(x)) throw Error("Unsupported browser data");
@@ -11308,7 +14398,7 @@
     const { last, ...rest } = x;
     return JSON.stringify(rest);
   }
-  var pointerOK = (x) => !own4(x, "last") || isReadingLocator(x.last);
+  var pointerOK = (x) => !own5(x, "last") || isReadingLocator(x.last);
   function readingPointerOnlyChange(expected, actual) {
     try {
       if (!(expected === null || typeof expected === "string") || !(actual === null || typeof actual === "string")) return false;
@@ -11326,8 +14416,8 @@
       if (!readingPointerOnlyChange(expected, actual)) throw conflict();
       const base = profile(expected), current = profile(actual), incoming = profile(value);
       if (!pointerOK(incoming)) throw conflict();
-      if (own4(base, "last") === own4(incoming, "last") && base.last === incoming.last) {
-        if (own4(current, "last")) incoming.last = current.last;
+      if (own5(base, "last") === own5(incoming, "last") && base.last === incoming.last) {
+        if (own5(current, "last")) incoming.last = current.last;
         else delete incoming.last;
       }
       committed = JSON.stringify(incoming);
@@ -11336,8 +14426,8 @@
     write(committed);
     return committed;
   }
-  function guardedPositionWrite({ expected, locator, read: read2, write }) {
-    if (!isReadingLocator(locator)) throw Error("Unsupported reading locator");
+  function guardedPositionWrite({ expected, locator: locator2, read: read2, write }) {
+    if (!isReadingLocator(locator2)) throw Error("Unsupported reading locator");
     const actual = read2(), current = profile(actual), baseline = profile(expected);
     if (!pointerOK(current) || !pointerOK(baseline)) throw conflict();
     if (current.remember_position === false) {
@@ -11345,7 +14435,7 @@
       delete baseline.last;
       return { snapshot: JSON.stringify(baseline), disabled: true };
     }
-    const committed = JSON.stringify({ ...current, last: locator }), snapshot = JSON.stringify({ ...baseline, last: locator });
+    const committed = JSON.stringify({ ...current, last: locator2 }), snapshot = JSON.stringify({ ...baseline, last: locator2 });
     if (read2() !== actual) throw conflict();
     write(committed);
     return { snapshot, disabled: false };
@@ -11353,7 +14443,7 @@
 
   // web/english-catalogue.mjs
   var ENGLISH_AVAILABILITY = Object.freeze({ linked: "All English links", whole: "Whole-unit or chapter links", scoped: "Scoped English only", none: "No English links" });
-  var fail2 = () => {
+  var fail3 = () => {
     throw Error("The English source catalogue does not match this selection. No filter or source was substituted.");
   };
   var object5 = (x) => x !== null && typeof x === "object" && !Array.isArray(x);
@@ -11368,16 +14458,16 @@
   }
   function englishSelection(args) {
     const keys2 = ["node", "availability", "collection", "offset"];
-    for (const k of args.keys()) if (!keys2.includes(k) || args.getAll(k).length !== 1) fail2();
-    if (args.get("node") !== "english") fail2();
+    for (const k of args.keys()) if (!keys2.includes(k) || args.getAll(k).length !== 1) fail3();
+    if (args.get("node") !== "english") fail3();
     const availability = args.has("availability") ? args.get("availability") : "linked";
     const collection = args.has("collection") ? args.get("collection") : null;
     const raw = args.has("offset") ? args.get("offset") : "0";
-    if (!Object.hasOwn(ENGLISH_AVAILABILITY, availability) || collection !== null && !collectionId(collection) || !/^(0|[1-9]\d*)$/.test(raw) || !count(Number(raw))) fail2();
+    if (!Object.hasOwn(ENGLISH_AVAILABILITY, availability) || collection !== null && !collectionId(collection) || !/^(0|[1-9]\d*)$/.test(raw) || !count(Number(raw))) fail3();
     return { availability, collection, offset: Number(raw), limit: 40 };
   }
   function englishRoute(selection5, offset = selection5.offset) {
-    if (!Object.hasOwn(ENGLISH_AVAILABILITY, selection5.availability) || selection5.collection !== null && !collectionId(selection5.collection) || !count(offset)) fail2();
+    if (!Object.hasOwn(ENGLISH_AVAILABILITY, selection5.availability) || selection5.collection !== null && !collectionId(selection5.collection) || !count(offset)) fail3();
     const q = new URLSearchParams({ node: "english", availability: selection5.availability });
     if (selection5.collection !== null) q.set("collection", selection5.collection);
     if (offset) q.set("offset", String(offset));
@@ -11388,26 +14478,26 @@
     return [...item.english_available ? ["Whole-unit or chapter link"] : [], ...partial && shared ? ["Partial and shared sources \xB7 review required"] : partial ? ["Partial source \xB7 review required"] : shared ? ["Shared page \xB7 review required"] : [], ...!item.english_available && !partial && !shared ? ["No indexed English link"] : []];
   }
   function englishCatalogue(data, selection5) {
-    if (!object5(data) || data.catalogue !== true || data.node !== "english" || data.name !== "Find English sources" || data.availability !== selection5.availability || data.collection !== selection5.collection || data.offset !== selection5.offset || data.limit !== selection5.limit || !count(data.total) || !text3(data.note) || !Array.isArray(data.collections) || data.collections.length > 100 || !Array.isArray(data.items) || data.items.length > selection5.limit) fail2();
+    if (!object5(data) || data.catalogue !== true || data.node !== "english" || data.name !== "Find English sources" || data.availability !== selection5.availability || data.collection !== selection5.collection || data.offset !== selection5.offset || data.limit !== selection5.limit || !count(data.total) || !text3(data.note) || !Array.isArray(data.collections) || data.collections.length > 100 || !Array.isArray(data.items) || data.items.length > selection5.limit) fail3();
     const collections = /* @__PURE__ */ new Set();
     for (const c of data.collections) {
-      if (!object5(c) || !collectionId(c.id) || collections.has(c.id) || !text3(c.name)) fail2();
+      if (!object5(c) || !collectionId(c.id) || collections.has(c.id) || !text3(c.name)) fail3();
       collections.add(c.id);
     }
-    if (!collections.size || selection5.collection !== null && !collections.has(selection5.collection)) fail2();
+    if (!collections.size || selection5.collection !== null && !collections.has(selection5.collection)) fail3();
     const expected = Math.min(selection5.limit, Math.max(0, data.total - selection5.offset));
-    if (data.items.length !== expected || data.next_offset !== (selection5.offset + selection5.limit < data.total ? selection5.offset + selection5.limit : null)) fail2();
+    if (data.items.length !== expected || data.next_offset !== (selection5.offset + selection5.limit < data.total ? selection5.offset + selection5.limit : null)) fail3();
     const seen = /* @__PURE__ */ new Set();
     for (const item of data.items) {
-      if (!object5(item) || !id(item.id) || seen.has(item.id) || !text3(item.citation) || !text3(item.title) || !text3(item.collection) || !collections.has(item.collection_id) || !belongs(item.id, item.collection_id) || selection5.collection !== null && item.collection_id !== selection5.collection || item.approximate || item.kind === "range" || !count(item.english_available)) fail2();
-      for (const k of ["partial_english_available", "shared_english_available"]) if (Object.hasOwn(item, k) && !count(item[k])) fail2();
+      if (!object5(item) || !id(item.id) || seen.has(item.id) || !text3(item.citation) || !text3(item.title) || !text3(item.collection) || !collections.has(item.collection_id) || !belongs(item.id, item.collection_id) || selection5.collection !== null && item.collection_id !== selection5.collection || item.approximate || item.kind === "range" || !count(item.english_available)) fail3();
+      for (const k of ["partial_english_available", "shared_english_available"]) if (Object.hasOwn(item, k) && !count(item[k])) fail3();
       const cmd = item.read_with;
-      if (!object5(cmd) || Object.keys(cmd).sort().join(",") !== "tool,uid" || cmd.tool !== "get_text" || cmd.uid !== item.id) fail2();
+      if (!object5(cmd) || Object.keys(cmd).sort().join(",") !== "tool,uid" || cmd.tool !== "get_text" || cmd.uid !== item.id) fail3();
       const whole = item.english_available > 0, scoped = (item.partial_english_available || 0) + (item.shared_english_available || 0) > 0;
-      if (selection5.availability === "linked" && !whole && !scoped || selection5.availability === "whole" && !whole || selection5.availability === "scoped" && (whole || !scoped) || selection5.availability === "none" && (whole || scoped)) fail2();
+      if (selection5.availability === "linked" && !whole && !scoped || selection5.availability === "whole" && !whole || selection5.availability === "scoped" && (whole || !scoped) || selection5.availability === "none" && (whole || scoped)) fail3();
       if (Object.hasOwn(item, "source_context")) {
         const context = item.source_context;
-        if (!object5(context) || Object.keys(context).sort().join(",") !== "citation,id,kind,title" || context.kind !== "containing_group" || !id(context.id) || !belongs(context.id, item.collection_id) || context.id === item.id || !text3(context.citation) || !text3(context.title) || !whole) fail2();
+        if (!object5(context) || Object.keys(context).sort().join(",") !== "citation,id,kind,title" || context.kind !== "containing_group" || !id(context.id) || !belongs(context.id, item.collection_id) || context.id === item.id || !text3(context.citation) || !text3(context.title) || !whole) fail3();
       }
       seen.add(item.id);
     }
@@ -11416,7 +14506,7 @@
 
   // web/translation-comparison.mjs
   var object6 = (x) => x !== null && typeof x === "object" && !Array.isArray(x);
-  var own5 = (x, key4) => Object.hasOwn(x, key4);
+  var own6 = (x, key4) => Object.hasOwn(x, key4);
   var text4 = (x) => typeof x === "string" && x.trim().length > 0;
   var uid = (x) => typeof x === "string" && x.trim() === x && /^[a-z][a-z0-9.-]{0,199}$/.test(x);
   var sha2 = (x) => typeof x === "string" && /^[0-9a-f]{64}$/.test(x);
@@ -11435,7 +14525,7 @@
         seen.add(choice.translation_id);
       }
       if ("translation_scope" in choice || choice.whole_unit_coverage === false) continue;
-      if (!sourceId(choice.translation_id) || apadanaFamily(choice.translation_id) && choice.translation_id !== apadanaId(requestedId) || sectionSourceUnit(choice.translation_id) && sectionSourceUnit(choice.translation_id) !== requestedId || !text4(choice.translator) || choice.translator.length > 300 || own5(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== true) failure2();
+      if (!sourceId(choice.translation_id) || apadanaFamily(choice.translation_id) && choice.translation_id !== apadanaId(requestedId) || sectionSourceUnit(choice.translation_id) && sectionSourceUnit(choice.translation_id) !== requestedId || !text4(choice.translator) || choice.translator.length > 300 || own6(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== true) failure2();
       validateSectionDescriptor(choice);
       validateApadanaChoice(choice, requestedId);
       ordinary.push(clone2(choice));
@@ -11449,9 +14539,9 @@
   }
   var requestKeys = /* @__PURE__ */ new Set(["uid", "translation", "offset", "limit", "prefix_sha256", "translation_revision"]);
   function request(args, requestedId, choice, expectedLimit) {
-    if (!object6(args) || Object.keys(args).some((key4) => !requestKeys.has(key4)) || args.uid !== requestedId || (apadanaFamily(choice.translation_id) ? args.translation_revision !== choice.translation_revision : own5(args, "translation_revision")) || args.translation !== choice.translation_id || !sourceId(args.translation) || !Number.isSafeInteger(args.limit) || args.limit < 500 || args.limit > 3e4 || expectedLimit !== void 0 && args.limit !== expectedLimit) failure2();
-    const offset = own5(args, "offset") ? args.offset : 0;
-    if (!Number.isSafeInteger(offset) || offset < 0 || offset > 2e6 || offset === 0 && own5(args, "prefix_sha256") || offset > 0 && !sha2(args.prefix_sha256)) failure2();
+    if (!object6(args) || Object.keys(args).some((key4) => !requestKeys.has(key4)) || args.uid !== requestedId || (apadanaFamily(choice.translation_id) ? args.translation_revision !== choice.translation_revision : own6(args, "translation_revision")) || args.translation !== choice.translation_id || !sourceId(args.translation) || !Number.isSafeInteger(args.limit) || args.limit < 500 || args.limit > 3e4 || expectedLimit !== void 0 && args.limit !== expectedLimit) failure2();
+    const offset = own6(args, "offset") ? args.offset : 0;
+    if (!Number.isSafeInteger(offset) || offset < 0 || offset > 2e6 || offset === 0 && own6(args, "prefix_sha256") || offset > 0 && !sha2(args.prefix_sha256)) failure2();
     return offset;
   }
   function validateComparisonPage(data, args, context) {
@@ -11461,70 +14551,13 @@
     if (!choice) failure2();
     const offset = request(args, context.uid, choice);
     if (!object6(data) || data.translation_id !== args.translation) throw Error("A different English source was returned for this comparison column. No translation was displayed.");
-    if (data.translator !== choice.translator || data.limit !== args.limit || !sha2(data.prefix_sha256) || offset > 0 && data.prefix_sha256 !== args.prefix_sha256 || "translation_scope" in data || data.whole_unit_coverage === false || typeof data.text !== "string" || data.text.length > args.limit || offset + data.text.length > 2e6 || !own5(data, "next_offset") || data.next_offset !== null && !Number.isSafeInteger(data.next_offset)) failure2();
+    if (data.translator !== choice.translator || data.limit !== args.limit || !sha2(data.prefix_sha256) || offset > 0 && data.prefix_sha256 !== args.prefix_sha256 || "translation_scope" in data || data.whole_unit_coverage === false || typeof data.text !== "string" || data.text.length > args.limit || offset + data.text.length > 2e6 || !own6(data, "next_offset") || data.next_offset !== null && !Number.isSafeInteger(data.next_offset)) failure2();
     const next = validateEnglishPage(data, args, { uid: context.uid, choices: [choice], accepted: null });
     if (next === null) return null;
     if (!object6(data.continue_with) || Object.keys(data.continue_with).sort().join(",") !== "arguments,name") failure2();
     const nextOffset = request(next, context.uid, choice, args.limit);
     if (data.text.length !== args.limit || nextOffset !== offset + data.text.length) failure2();
     return clone2(next);
-  }
-
-  // web/reading-navigation.mjs
-  var integer4 = (value, min, max) => Number.isSafeInteger(value) && value >= min && value <= max;
-  var pageKeys = /* @__PURE__ */ new Set(["uid", "book", "kind", "plan", "day", "offset", "page_source"]);
-  function revision2(value) {
-    if (typeof value !== "string" || sourceRevision({ source: { commit: value } }) !== value) throw Error("This page has no valid source revision.");
-    return value;
-  }
-  var invalid = () => {
-    throw Error("This source page has incomplete or unsupported navigation metadata. No passage was substituted.");
-  };
-  function readingPagePosition(context, offset, source7) {
-    assertReadingContext(context);
-    if (!integer4(offset, 0, 1e5)) invalid();
-    revision2(source7);
-    return "#read?" + new URLSearchParams({ ...context, offset, page_source: source7 });
-  }
-  function assertPageRequest(args) {
-    if (!args.has("page_source")) return;
-    const keys2 = [...args.keys()];
-    if (keys2.some((key4) => !pageKeys.has(key4)) || new Set(keys2).size !== keys2.length || args.getAll("page_source").length !== 1 || args.getAll("offset").length !== 1 || !/^(0|[1-9][0-9]*)$/.test(args.get("offset") || "") || !integer4(Number(args.get("offset")), 0, 1e5)) invalid();
-    revision2(args.get("page_source"));
-    const context = Object.fromEntries(["uid", "book", "kind", "plan"].filter((key4) => args.has(key4)).map((key4) => [key4, args.get(key4)]));
-    if (args.has("day")) {
-      if (!/^[1-9][0-9]*$/.test(args.get("day") || "")) invalid();
-      context.day = Number(args.get("day"));
-    }
-    assertReadingContext(context);
-  }
-  function assertPagePin(args, data) {
-    if (!args.has("page_source")) return;
-    assertPageRequest(args);
-    if (sourceRevision(data) !== args.get("page_source")) {
-      const error = Error("The source or citation mapping revision changed since this page link was opened. Review the current source explicitly before continuing; no replacement wording was displayed.");
-      error.code = "READING_SOURCE_CHANGED";
-      throw error;
-    }
-    readingPageBounds(data);
-    if (data.offset !== Number(args.get("offset"))) invalid();
-  }
-  function readingPageBounds(data, window2 = null) {
-    if (!data || !integer4(data.total_segments, 1, 100001) || !integer4(data.offset, 0, 1e5) || !integer4(data.returned, 1, 100001) || data.offset + data.returned > data.total_segments || !Array.isArray(data.segments) || data.segments.length !== data.returned || data.next_offset !== (data.offset + data.returned < data.total_segments ? data.offset + data.returned : null)) invalid();
-    let start = 0, end = data.total_segments;
-    if (window2 !== null) {
-      if (!window2 || !integer4(window2.start, 0, 1e5) || !(window2.end === null || integer4(window2.end, 1, 100001)) || !integer4(window2.offset, 0, 1e5) || !integer4(window2.limit, 1, 1e5) || window2.offset !== data.offset || data.returned > window2.limit) invalid();
-      start = window2.start;
-      end = window2.end === null ? data.total_segments : window2.end;
-    }
-    if (start >= end || end > data.total_segments || data.offset < start || data.offset + data.returned > end) invalid();
-    return { start, end, current: data.offset };
-  }
-  function readingJumpOffset(text11, data, window2 = null) {
-    if (typeof text11 !== "string" || !/^[1-9][0-9]*$/.test(text11)) throw Error("Enter a source position using whole decimal digits only.");
-    const position2 = Number(text11), bounds = readingPageBounds(data, window2);
-    if (!integer4(position2, 1, 100001) || position2 - 1 < bounds.start || position2 - 1 >= bounds.end) throw Error("That source position is outside the current reading bounds.");
-    return position2 - 1;
   }
 
   // web/saved-highlights.mjs
@@ -11540,58 +14573,58 @@
 
   // web/reading-chapters.mjs
   var object7 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
-  var own6 = (value, key4) => Object.hasOwn(value, key4);
+  var own7 = (value, key4) => Object.hasOwn(value, key4);
   var text5 = (value, max = 1e3) => typeof value === "string" && value.trim().length > 0 && value.length <= max;
   var id2 = (value) => typeof value === "string" && /^[a-z][a-z0-9-]{0,99}$/.test(value);
-  var exact2 = (value, keys2) => object7(value) && Object.keys(value).length === keys2.length && keys2.every((key4) => own6(value, key4));
-  var chapterRow = (value) => object7(value) && own6(value, "citation") && own6(value, "title") && Object.keys(value).every((key4) => ["citation", "title", "title_roman"].includes(key4)) && text5(value.citation, 200) && text5(value.title) && (!own6(value, "title_roman") || text5(value.title_roman));
+  var exact2 = (value, keys2) => object7(value) && Object.keys(value).length === keys2.length && keys2.every((key4) => own7(value, key4));
+  var chapterRow = (value) => object7(value) && own7(value, "citation") && own7(value, "title") && Object.keys(value).every((key4) => ["citation", "title", "title_roman"].includes(key4)) && text5(value.citation, 200) && text5(value.title) && (!own7(value, "title_roman") || text5(value.title_roman));
   var clone3 = (value) => JSON.parse(JSON.stringify(value));
-  var fail3 = () => {
+  var fail4 = () => {
     throw Error("Chapter navigation metadata is unavailable or does not match this source. The loaded passage was not replaced.");
   };
   function revision3(data) {
-    if (data?.canonical !== false || !text5(data.label, 4e3) || !object7(data.book) || !id2(data.book.id) || data.book.canonical !== false || !text5(data.book.title) || !text5(data.citation, 200) || !object7(data.source) || data.source.name !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI): \u1E6C\u012Bk\u0101 and A\xF1\xF1a (post-canonical) books" || data.source.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text5(data.source.attribution, 1e4) || !text5(data.source.terms, 1e4) || typeof data.source.commit !== "string" || sourceRevision({ source: { commit: data.source.commit } }) !== data.source.commit) fail3();
+    if (data?.canonical !== false || !text5(data.label, 4e3) || !object7(data.book) || !id2(data.book.id) || data.book.canonical !== false || !text5(data.book.title) || !text5(data.citation, 200) || !object7(data.source) || data.source.name !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI): \u1E6C\u012Bk\u0101 and A\xF1\xF1a (post-canonical) books" || data.source.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text5(data.source.attribution, 1e4) || !text5(data.source.terms, 1e4) || typeof data.source.commit !== "string" || sourceRevision({ source: { commit: data.source.commit } }) !== data.source.commit) fail4();
     const value = sourceRevision(data);
-    if (typeof value !== "string") fail3();
+    if (typeof value !== "string") fail4();
     return value;
   }
   function validateChapterIndex(data) {
-    if (!object7(data) || !own6(data, "chapter_index")) return null;
+    if (!object7(data) || !own7(data, "chapter_index")) return null;
     const pin = revision3(data), index = data.chapter_index, command6 = index?.read_with;
-    if (!exact2(index, ["scope", "read_with"]) || !["work", "source_file"].includes(index.scope) || !exact2(command6, ["tool", "citation", "offset", "limit"]) || command6.tool !== "get_post_canonical" || !text5(command6.citation, 200) || command6.offset !== 0 || command6.limit !== 1) fail3();
+    if (!exact2(index, ["scope", "read_with"]) || !["work", "source_file"].includes(index.scope) || !exact2(command6, ["tool", "citation", "offset", "limit"]) || command6.tool !== "get_post_canonical" || !text5(command6.citation, 200) || command6.offset !== 0 || command6.limit !== 1) fail4();
     if (index.scope === "source_file") {
-      if (command6.citation !== data.book.id || !(data.citation === data.book.id || data.citation.startsWith(data.book.id + " "))) fail3();
+      if (command6.citation !== data.book.id || !(data.citation === data.book.id || data.citation.startsWith(data.book.id + " "))) fail4();
     } else if (command6.citation === "Vism") {
-      if (!["visuddhimagga-1", "visuddhimagga-2"].includes(data.book.id) || !/^Vism(?:$| ch\. [1-9][0-9]*$| [1-9][0-9]*\.[1-9][0-9]*$| §[1-9][0-9]*$)/.test(data.citation)) fail3();
+      if (!["visuddhimagga-1", "visuddhimagga-2"].includes(data.book.id) || !/^Vism(?:$| ch\. [1-9][0-9]*$| [1-9][0-9]*\.[1-9][0-9]*$| §[1-9][0-9]*$)/.test(data.citation)) fail4();
     } else if (command6.citation === "Abhidh-s") {
-      if (data.book.id !== "abhidhammatthasangaho" || !/^Abhidh-s(?:$| [1-9][0-9]*(?:\.[1-9][0-9]*)?$)/.test(data.citation)) fail3();
-    } else fail3();
+      if (data.book.id !== "abhidhammatthasangaho" || !/^Abhidh-s(?:$| [1-9][0-9]*(?:\.[1-9][0-9]*)?$)/.test(data.citation)) fail4();
+    } else fail4();
     return { scope: index.scope, read_with: { ...command6 }, revision: pin, book_id: data.book.id };
   }
   function validateChapterMenu(current, root) {
     const selected = validateChapterIndex(current), parent = validateChapterIndex(root);
-    if (!selected || !parent || selected.scope !== parent.scope || JSON.stringify(selected.read_with) !== JSON.stringify(parent.read_with) || root.citation !== selected.read_with.citation || !text5(root.title) || !Array.isArray(root.chapters) || root.chapters.length < 1 || root.chapters.length > 1e3) fail3();
+    if (!selected || !parent || selected.scope !== parent.scope || JSON.stringify(selected.read_with) !== JSON.stringify(parent.read_with) || root.citation !== selected.read_with.citation || !text5(root.title) || !Array.isArray(root.chapters) || root.chapters.length < 1 || root.chapters.length > 1e3) fail4();
     if (selected.revision !== parent.revision) {
       const error = Error("The chapter index source revision changed. The current P\u0101li passage remains unchanged.");
       error.code = "READING_SOURCE_CHANGED";
       throw error;
     }
-    if (selected.scope === "source_file" && selected.book_id !== parent.book_id || selected.scope === "work" && selected.read_with.citation === "Vism" && parent.book_id !== "visuddhimagga-1" || selected.scope === "work" && selected.read_with.citation === "Abhidh-s" && parent.book_id !== "abhidhammatthasangaho") fail3();
+    if (selected.scope === "source_file" && selected.book_id !== parent.book_id || selected.scope === "work" && selected.read_with.citation === "Vism" && parent.book_id !== "visuddhimagga-1" || selected.scope === "work" && selected.read_with.citation === "Abhidh-s" && parent.book_id !== "abhidhammatthasangaho") fail4();
     const work = selected.scope === "work" ? selected.read_with.citation : null;
-    if (work && root.chapters.length !== (work === "Vism" ? 23 : 9)) fail3();
+    if (work && root.chapters.length !== (work === "Vism" ? 23 : 9)) fail4();
     const seen = /* @__PURE__ */ new Set();
     for (const [index, row] of root.chapters.entries()) {
       const expected = work === "Vism" ? `Vism ch. ${index + 1}` : `${work ?? root.book.id} ${index + 1}`;
-      if (!chapterRow(row) || row.citation !== expected || seen.has(row.citation)) fail3();
+      if (!chapterRow(row) || row.citation !== expected || seen.has(row.citation)) fail4();
       seen.add(row.citation);
     }
     return { scope: selected.scope, read_with: { ...selected.read_with }, revision: parent.revision, book_id: parent.book_id, citation: root.citation, title: root.title, label: root.label, source: clone3(root.source), chapters: root.chapters.map((row) => ({ ...row })) };
   }
   function chapterLink(row, menu) {
-    if (!object7(menu) || !chapterRow(row)) fail3();
+    if (!object7(menu) || !chapterRow(row)) fail4();
     const root = { canonical: false, label: menu.label, book: { id: menu.book_id, title: menu.title, canonical: false }, citation: menu.citation, title: menu.title, source: menu.source, chapters: menu.chapters, chapter_index: { scope: menu.scope, read_with: menu.read_with } };
     const checked = validateChapterMenu(root, root);
-    if (checked.revision !== menu.revision || !checked.chapters.some((item) => item.citation === row.citation && item.title === row.title && own6(item, "title_roman") === own6(row, "title_roman") && item.title_roman === row.title_roman)) fail3();
+    if (checked.revision !== menu.revision || !checked.chapters.some((item) => item.citation === row.citation && item.title === row.title && own7(item, "title_roman") === own7(row, "title_roman") && item.title_roman === row.title_roman)) fail4();
     return readingPagePosition({ kind: "post", uid: row.citation }, 0, checked.revision);
   }
   var rootNotes = /* @__PURE__ */ new Set([
@@ -11609,7 +14642,7 @@
     "Abhidhammatthasa\u1E45gaha, a post-canonical Abhidhamma manual traditionally attributed to \u0100cariya Anuruddha. Not the canon. " + tika
   ]);
   function readingIntro(data, kind) {
-    if (!object7(data)) fail3();
+    if (!object7(data)) fail4();
     const critical = { ...data }, context = [];
     let status3 = null;
     if (kind === "book" && data.selection === "source_book" && data.canonical === true && Array.isArray(data.notes)) {
@@ -12419,11 +15452,11 @@
 
   // web/canonical-search.mjs
   var object8 = (x) => x !== null && typeof x === "object" && !Array.isArray(x);
-  var own7 = (x, k) => Object.hasOwn(x, k);
+  var own8 = (x, k) => Object.hasOwn(x, k);
   var keysOnly = (x, keys2) => object8(x) && Object.keys(x).every((k) => keys2.includes(k));
   var text6 = (x, max = 1e4) => typeof x === "string" && x.trim().length > 0 && x.length <= max && !/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(x);
   var integer5 = (x, low = 0, high = 1e6) => Number.isSafeInteger(x) && x >= low && x <= high;
-  var fail4 = () => {
+  var fail5 = () => {
     throw Error("Canonical search returned incomplete or inconsistent source metadata. No excerpts or reading links were substituted.");
   };
   function canonicalSearchSelection(args, script = "roman", rawQuery) {
@@ -12441,104 +15474,104 @@
   }
   function canonicalSearchRoute(selected, offset = selected.offset) {
     selection(selected);
-    if (!integer5(offset, 0, 1e5)) fail4();
+    if (!integer5(offset, 0, 1e5)) fail5();
     return "#search?" + new URLSearchParams({ q: selected.query, scope: "canon", ...offset ? { offset } : {} });
   }
   function selection(value) {
-    if (!keysOnly(value, ["query", "offset", "limit", "collection", "script", "english", "include_post_canonical"]) || Object.keys(value).length !== 7 || !text6(value.query, 300) || value.query !== value.query.trim() || !integer5(value.offset, 0, 1e5) || value.limit !== 15 || value.collection !== null || !SCRIPTS.includes(value.script) || value.english !== "auto" || value.include_post_canonical !== false) fail4();
+    if (!keysOnly(value, ["query", "offset", "limit", "collection", "script", "english", "include_post_canonical"]) || Object.keys(value).length !== 7 || !text6(value.query, 300) || value.query !== value.query.trim() || !integer5(value.offset, 0, 1e5) || value.limit !== 15 || value.collection !== null || !SCRIPTS.includes(value.script) || value.english !== "auto" || value.include_post_canonical !== false) fail5();
   }
   function revision4(value) {
-    if (typeof value !== "string" || sourceRevision({ source: { commit: value } }) !== value) fail4();
+    if (typeof value !== "string" || sourceRevision({ source: { commit: value } }) !== value) fail5();
     return value;
   }
   function source2(value, edition = null) {
-    if (!keysOnly(value, ["name", "repository", "commit", "attribution", "terms", "locator_revision"]) || value.name !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI)" || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text6(value.attribution) || !text6(value.terms)) fail4();
+    if (!keysOnly(value, ["name", "repository", "commit", "attribution", "terms", "locator_revision"]) || value.name !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI)" || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text6(value.attribution) || !text6(value.terms)) fail5();
     revision4(value.commit);
-    if (!edition && own7(value, "locator_revision")) fail4();
-    if (edition && ["name", "repository", "commit", "attribution", "terms"].some((k) => value[k] !== edition[k])) fail4();
+    if (!edition && own8(value, "locator_revision")) fail5();
+    if (edition && ["name", "repository", "commit", "attribution", "terms"].some((k) => value[k] !== edition[k])) fail5();
     try {
       return revision4(sourceRevision({ source: value }));
     } catch {
-      fail4();
+      fail5();
     }
   }
   function identity2(hit4) {
-    if (!object8(hit4) || !text6(hit4.id, 200) || !text6(hit4.citation, 300) || !text6(hit4.title, 1e3) || !text6(hit4.collection, 200)) fail4();
+    if (!object8(hit4) || !text6(hit4.id, 200) || !text6(hit4.citation, 300) || !text6(hit4.title, 1e3) || !text6(hit4.collection, 200)) fail5();
     let id5;
     try {
       const parsed = parseCitation(hit4.citation);
       id5 = parsed.kind === "uid" ? parsed.uid : parsed.kind === "id" ? citationId(parsed) : null;
     } catch {
-      fail4();
+      fail5();
     }
-    if (id5 !== hit4.id) fail4();
-    if (own7(hit4, "canonical") && hit4.canonical !== true) fail4();
-    if (own7(hit4, "title_roman") && !text6(hit4.title_roman, 1e3)) fail4();
+    if (id5 !== hit4.id) fail5();
+    if (own8(hit4, "canonical") && hit4.canonical !== true) fail5();
+    if (own8(hit4, "title_roman") && !text6(hit4.title_roman, 1e3)) fail5();
   }
   function command2(command6, hit4, script, body = false, context = false) {
-    if (!keysOnly(command6, ["tool", "uid", "offset", "limit", "script"]) || command6.tool !== "get_text" || command6.uid !== hit4.id || own7(command6, "script") && command6.script !== script) fail4();
-    if (script !== "roman" && command6.script !== script) fail4();
+    if (!keysOnly(command6, ["tool", "uid", "offset", "limit", "script"]) || command6.tool !== "get_text" || command6.uid !== hit4.id || own8(command6, "script") && command6.script !== script) fail5();
+    if (script !== "roman" && command6.script !== script) fail5();
     if (body) {
       const offset = context ? Math.max(0, hit4.read_with.offset - 1) : command6.offset;
-      if (!integer5(command6.offset, 0, 1e5) || command6.offset !== offset || command6.limit !== (context ? 3 : 1)) fail4();
-    } else if (own7(command6, "offset") || own7(command6, "limit")) fail4();
+      if (!integer5(command6.offset, 0, 1e5) || command6.offset !== offset || command6.limit !== (context ? 3 : 1)) fail5();
+    } else if (own8(command6, "offset") || own8(command6, "limit")) fail5();
   }
   function checkHit(hit4, edition, selected, body) {
     identity2(hit4);
     source2(hit4.source, edition);
     command2(hit4.read_with, hit4, selected.script, body);
     if (body) {
-      if (!text6(hit4.excerpt, 4e3) || hit4.segment_ref !== `${hit4.id}/${hit4.read_with.offset + 1}`) fail4();
+      if (!text6(hit4.excerpt, 4e3) || hit4.segment_ref !== `${hit4.id}/${hit4.read_with.offset + 1}`) fail5();
       command2(hit4.context_with, hit4, selected.script, true, true);
-    } else if (own7(hit4, "segment_ref") || own7(hit4, "excerpt") || own7(hit4, "context_with")) fail4();
-    if (own7(hit4, "approximate") && typeof hit4.approximate !== "boolean") fail4();
-    if (own7(hit4, "alignment") && (!object8(hit4.alignment) || !text6(hit4.alignment.note))) fail4();
-    for (const key4 of ["english_available", "partial_english_available", "shared_english_available"]) if (own7(hit4, key4) && !integer5(hit4[key4])) fail4();
+    } else if (own8(hit4, "segment_ref") || own8(hit4, "excerpt") || own8(hit4, "context_with")) fail5();
+    if (own8(hit4, "approximate") && typeof hit4.approximate !== "boolean") fail5();
+    if (own8(hit4, "alignment") && (!object8(hit4.alignment) || !text6(hit4.alignment.note))) fail5();
+    for (const key4 of ["english_available", "partial_english_available", "shared_english_available"]) if (own8(hit4, key4) && !integer5(hit4[key4])) fail5();
   }
   function stream(items, total, next, data, selected, body) {
-    if (!integer5(total) || !Array.isArray(items) || items.length !== Math.min(selected.limit, Math.max(0, total - selected.offset)) || next !== (selected.offset + selected.limit < total ? selected.offset + selected.limit : null)) fail4();
+    if (!integer5(total) || !Array.isArray(items) || items.length !== Math.min(selected.limit, Math.max(0, total - selected.offset)) || next !== (selected.offset + selected.limit < total ? selected.offset + selected.limit : null)) fail5();
     const seen = /* @__PURE__ */ new Set();
     for (const hit4 of items) {
       checkHit(hit4, data.source, selected, body);
-      if (seen.has(hit4.id)) fail4();
+      if (seen.has(hit4.id)) fail5();
       seen.add(hit4.id);
     }
   }
   function queryProvenance(data, selected) {
     const input = romanizeSearchInput(selected.query), base = input.text;
     if (input.original) {
-      if (data.input_script !== input.script || data.input_romanized !== base) fail4();
-    } else if (own7(data, "input_script") || own7(data, "input_romanized")) fail4();
+      if (data.input_script !== input.script || data.input_romanized !== base) fail5();
+    } else if (own8(data, "input_script") || own8(data, "input_romanized")) fail5();
     const allowed = input.source_phrase ? [base] : [base, base.normalize("NFC"), foldNiggahita(base.normalize("NFC"))];
-    if (own7(data, "input_normalised")) {
+    if (own8(data, "input_normalised")) {
       const value = data.input_normalised;
-      if (!object8(value) || value.original !== base || !text6(value.read_as, 300) || !text6(value.note) || !Array.isArray(value.changes) || !integer5(value.changes.length, 1, 500)) fail4();
+      if (!object8(value) || value.original !== base || !text6(value.read_as, 300) || !text6(value.note) || !Array.isArray(value.changes) || !integer5(value.changes.length, 1, 500)) fail5();
       allowed.push(value.read_as);
     }
-    if (!allowed.includes(data.query)) fail4();
-    if (input.source_phrase && (data.query_mode !== "source_phrase" || ["input_normalised", "expanded_from_english", "english_words_ignored", "spelling_note"].some((k) => own7(data, k))) || data.query_mode === "source_phrase" && !input.source_phrase) fail4();
+    if (!allowed.includes(data.query)) fail5();
+    if (input.source_phrase && (data.query_mode !== "source_phrase" || ["input_normalised", "expanded_from_english", "english_words_ignored", "spelling_note"].some((k) => own8(data, k))) || data.query_mode === "source_phrase" && !input.source_phrase) fail5();
   }
   function validateCanonicalSearch(data, selected) {
     selection(selected);
-    if (!object8(data) || !keysOnly(data.selection, Object.keys(selected)) || Object.keys(data.selection).length !== 7 || Object.keys(selected).some((k) => data.selection[k] !== selected[k]) || !text6(data.query, 300) || !text6(data.searched) || data.offset !== selected.offset || data.limit !== selected.limit || own7(data, "post_canonical") || own7(data, "canonical") && data.canonical !== true || ["scope_resolution", "scope_alignment", "scope_source_span"].some((key4) => own7(data, key4))) fail4();
+    if (!object8(data) || !keysOnly(data.selection, Object.keys(selected)) || Object.keys(data.selection).length !== 7 || Object.keys(selected).some((k) => data.selection[k] !== selected[k]) || !text6(data.query, 300) || !text6(data.searched) || data.offset !== selected.offset || data.limit !== selected.limit || own8(data, "post_canonical") || own8(data, "canonical") && data.canonical !== true || ["scope_resolution", "scope_alignment", "scope_source_span"].some((key4) => own8(data, key4))) fail5();
     source2(data.source);
     stream(data.title_matches, data.total_title_matches, data.title_next_offset, data, selected, false);
     stream(data.results, data.total_texts_matched, data.next_offset, data, selected, true);
-    if (own7(data, "script") && data.script !== selected.script || selected.script !== "roman" && data.script !== selected.script) fail4();
-    for (const key4 of ["script_note", "query_note", "spelling_note", "input_romanized", "tip"]) if (own7(data, key4) && data[key4] !== void 0 && !text6(data[key4])) fail4();
-    if (own7(data, "input_script") && !SCRIPTS.includes(data.input_script) || own7(data, "input_script") !== own7(data, "input_romanized")) fail4();
-    if (own7(data, "query_mode") && !["source_phrase", "as_typed_phrase"].includes(data.query_mode)) fail4();
-    if (own7(data, "input_normalised") && !(object8(data.input_normalised) && text6(data.input_normalised.note))) fail4();
-    if (own7(data, "notes") && (!Array.isArray(data.notes) || data.notes.length > 100 || data.notes.some((x) => !text6(x)))) fail4();
-    for (const key4 of ["expanded_from_english", "english_words_ignored"]) if (own7(data, key4) && (!object8(data[key4]) || !text6(data[key4].note))) fail4();
+    if (own8(data, "script") && data.script !== selected.script || selected.script !== "roman" && data.script !== selected.script) fail5();
+    for (const key4 of ["script_note", "query_note", "spelling_note", "input_romanized", "tip"]) if (own8(data, key4) && data[key4] !== void 0 && !text6(data[key4])) fail5();
+    if (own8(data, "input_script") && !SCRIPTS.includes(data.input_script) || own8(data, "input_script") !== own8(data, "input_romanized")) fail5();
+    if (own8(data, "query_mode") && !["source_phrase", "as_typed_phrase"].includes(data.query_mode)) fail5();
+    if (own8(data, "input_normalised") && !(object8(data.input_normalised) && text6(data.input_normalised.note))) fail5();
+    if (own8(data, "notes") && (!Array.isArray(data.notes) || data.notes.length > 100 || data.notes.some((x) => !text6(x)))) fail5();
+    for (const key4 of ["expanded_from_english", "english_words_ignored"]) if (own8(data, key4) && (!object8(data[key4]) || !text6(data[key4].note))) fail5();
     queryProvenance(data, selected);
     const result = { query: data.query, searched: data.searched, selection: { ...selected }, source: { ...data.source }, offset: data.offset, limit: data.limit, total_title_matches: data.total_title_matches, total_texts_matched: data.total_texts_matched, title_next_offset: data.title_next_offset, next_offset: data.next_offset, title_matches: data.title_matches.map((x) => cloneHit(x)), results: data.results.map((x) => cloneHit(x)) };
-    for (const key4 of ["script", "script_note", "query_mode", "query_note", "spelling_note", "input_script", "input_romanized", "input_normalised", "notes", "expanded_from_english", "english_words_ignored"]) if (own7(data, key4)) result[key4] = JSON.parse(JSON.stringify(data[key4]));
+    for (const key4 of ["script", "script_note", "query_mode", "query_note", "spelling_note", "input_script", "input_romanized", "input_normalised", "notes", "expanded_from_english", "english_words_ignored"]) if (own8(data, key4)) result[key4] = JSON.parse(JSON.stringify(data[key4]));
     return result;
   }
   function cloneHit(hit4) {
     const result = {};
-    for (const key4 of ["id", "citation", "title", "title_roman", "collection", "covers", "pts", "approximate", "alignment", "source", "excerpt", "segment_ref", "read_with", "context_with"]) if (own7(hit4, key4) && hit4[key4] !== void 0) result[key4] = JSON.parse(JSON.stringify(hit4[key4]));
+    for (const key4 of ["id", "citation", "title", "title_roman", "collection", "covers", "pts", "approximate", "alignment", "source", "excerpt", "segment_ref", "read_with", "context_with"]) if (own8(hit4, key4) && hit4[key4] !== void 0) result[key4] = JSON.parse(JSON.stringify(hit4[key4]));
     return result;
   }
   function canonicalSearchLink(hit4, body = false) {
@@ -12548,22 +15581,22 @@
 
   // web/book-search.mjs
   var object9 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
-  var own8 = (value, key4) => Object.hasOwn(value, key4);
+  var own9 = (value, key4) => Object.hasOwn(value, key4);
   var integer6 = (value, min, max) => Number.isSafeInteger(value) && value >= min && value <= max;
   var text7 = (value, max = 4e3) => typeof value === "string" && value.trim().length > 0 && value.length <= max;
   var bookId = (value) => typeof value === "string" && value.length <= 100 && /^(?:vin[0-9]{2}m[0-9]*|s[0-9]{4}m[0-9]*(?:\.nrf\.xml)?|abh[0-9]{2}m[0-9]*)$/.test(value);
   var fileFor = (book2) => book2.endsWith(".nrf.xml") ? book2 : book2 + ".mul.xml";
   var scripts = /* @__PURE__ */ new Set(["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"]);
   var keysOnly2 = (value, keys2) => object9(value) && Object.keys(value).every((key4) => keys2.includes(key4));
-  var fail5 = () => {
+  var fail6 = () => {
     throw Error("The complete source-book search does not match this selection. No source or reading position was substituted.");
   };
   function safeRevision(value) {
-    if (typeof value !== "string" || sourceRevision({ source: { commit: value } }) !== value) fail5();
+    if (typeof value !== "string" || sourceRevision({ source: { commit: value } }) !== value) fail6();
     return value;
   }
   function selection2(value) {
-    if (!keysOnly2(value, ["book", "query", "offset", "limit", "source", "headings_only"]) || !bookId(value.book) || typeof value.query !== "string" || value.query !== value.query.trim() || value.query.length > 500 || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(value.query) || !integer6(value.offset, 0, 1e6) || value.limit !== 15 || !value.query && value.offset !== 0 && !value.headings_only || own8(value, "headings_only") && value.headings_only !== true) fail5();
+    if (!keysOnly2(value, ["book", "query", "offset", "limit", "source", "headings_only"]) || !bookId(value.book) || typeof value.query !== "string" || value.query !== value.query.trim() || value.query.length > 500 || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(value.query) || !integer6(value.offset, 0, 1e6) || value.limit !== 15 || !value.query && value.offset !== 0 && !value.headings_only || own9(value, "headings_only") && value.headings_only !== true) fail6();
     if (value.source !== null) safeRevision(value.source);
     return value;
   }
@@ -12572,13 +15605,13 @@
       try {
         decodeURIComponent(rawQuery.replace(/\+/g, " "));
       } catch {
-        fail5();
+        fail6();
       }
     }
-    if (args.has("mode") && args.get("mode") !== "headings") fail5();
-    for (const key4 of args.keys()) if (!["book", "q", "offset", "source", "mode"].includes(key4) || args.getAll(key4).length !== 1) fail5();
+    if (args.has("mode") && args.get("mode") !== "headings") fail6();
+    for (const key4 of args.keys()) if (!["book", "q", "offset", "source", "mode"].includes(key4) || args.getAll(key4).length !== 1) fail6();
     const raw = args.has("offset") ? args.get("offset") : "0";
-    if (!/^(0|[1-9][0-9]*)$/.test(raw)) fail5();
+    if (!/^(0|[1-9][0-9]*)$/.test(raw)) fail6();
     return selection2({ book: args.get("book"), query: (args.get("q") ?? "").trim(), offset: Number(raw), limit: 15, source: args.has("source") ? args.get("source") : null, ...args.has("mode") ? { headings_only: true } : {} });
   }
   function bookSearchRoute(value, offset = value.offset) {
@@ -12593,20 +15626,20 @@
   }
   function bookSearchCatalogue(data, selected) {
     selection2(selected);
-    if (selected.query || selected.headings_only || !object9(data) || data.node !== "books" || data.name !== "Complete VRI source books" || !integer6(data.total, 1, 200) || data.offset !== 0 || data.limit !== 200 || data.next_offset !== null || !Array.isArray(data.items) || data.items.length !== data.total || !text7(data.note)) fail5();
+    if (selected.query || selected.headings_only || !object9(data) || data.node !== "books" || data.name !== "Complete VRI source books" || !integer6(data.total, 1, 200) || data.offset !== 0 || data.limit !== 200 || data.next_offset !== null || !Array.isArray(data.items) || data.items.length !== data.total || !text7(data.note)) fail6();
     const seen = /* @__PURE__ */ new Set();
     let result;
     for (const item of data.items) {
-      if (!object9(item) || !bookId(item.id) || seen.has(item.id) || !text7(item.title, 1e3) || !text7(item.collection, 30) || !["vinaya", "sutta", "abhidhamma"].includes(item.pitaka) || item.vri_file !== fileFor(item.id) || !keysOnly2(item.read_with, ["tool", "book"]) || Object.keys(item.read_with).length !== 2 || item.read_with.tool !== "get_text" || item.read_with.book !== item.id) fail5();
+      if (!object9(item) || !bookId(item.id) || seen.has(item.id) || !text7(item.title, 1e3) || !text7(item.collection, 30) || !["vinaya", "sutta", "abhidhamma"].includes(item.pitaka) || item.vri_file !== fileFor(item.id) || !keysOnly2(item.read_with, ["tool", "book"]) || Object.keys(item.read_with).length !== 2 || item.read_with.tool !== "get_text" || item.read_with.book !== item.id) fail6();
       seen.add(item.id);
       if (item.id === selected.book) result = item;
     }
-    if (!result) fail5();
+    if (!result) fail6();
     return JSON.parse(JSON.stringify(result));
   }
   function source3(data, selected) {
     const value = data.source;
-    if (!keysOnly2(value, ["name", "repository", "commit", "attribution", "terms", "locator_revision"]) || value.name !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI)" || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text7(value.attribution, 1e4) || !text7(value.terms, 1e4) || data.attribution !== value.attribution) fail5();
+    if (!keysOnly2(value, ["name", "repository", "commit", "attribution", "terms", "locator_revision"]) || value.name !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI)" || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text7(value.attribution, 1e4) || !text7(value.terms, 1e4) || data.attribution !== value.attribution) fail6();
     safeRevision(value.commit);
     const revision5 = safeRevision(sourceRevision(data));
     if (selected.source !== null && selected.source !== revision5) {
@@ -12617,65 +15650,65 @@
     return revision5;
   }
   function command3(value, book2, offset, limit, outputScript3) {
-    if (!keysOnly2(value, ["tool", "book", "offset", "limit", "script"]) || value.tool !== "get_text" || value.book !== book2 || value.offset !== offset || value.limit !== limit || own8(value, "script") && !scripts.has(value.script) || outputScript3 && value.script !== outputScript3) fail5();
+    if (!keysOnly2(value, ["tool", "book", "offset", "limit", "script"]) || value.tool !== "get_text" || value.book !== book2 || value.offset !== offset || value.limit !== limit || own9(value, "script") && !scripts.has(value.script) || outputScript3 && value.script !== outputScript3) fail6();
   }
-  function queryProvenance2(data, selected, reject = fail5) {
-    const fail9 = reject;
+  function queryProvenance2(data, selected, reject = fail6) {
+    const fail10 = reject;
     const input = romanizeSearchInput(selected.query), base = input.text;
     if (input.original) {
-      if (data.input_script !== input.script || data.input_romanized !== base) fail9();
-    } else if (own8(data, "input_script") || own8(data, "input_romanized")) fail9();
+      if (data.input_script !== input.script || data.input_romanized !== base) fail10();
+    } else if (own9(data, "input_script") || own9(data, "input_romanized")) fail10();
     const phrase = data.query_mode;
-    if (input.source_phrase && phrase !== "source_phrase") fail9();
-    if (phrase === "source_phrase" && !input.source_phrase || phrase === "as_typed_phrase" && (!hasSearchPhrase(base) || input.source_phrase)) fail9();
+    if (input.source_phrase && phrase !== "source_phrase") fail10();
+    if (phrase === "source_phrase" && !input.source_phrase || phrase === "as_typed_phrase" && (!hasSearchPhrase(base) || input.source_phrase)) fail10();
     if (phrase !== void 0) {
-      if (data.query !== base || own8(data, "input_normalised")) fail9();
+      if (data.query !== base || own9(data, "input_normalised")) fail10();
       return;
     }
-    if (!own8(data, "input_normalised")) {
-      if (![base, base.normalize("NFC"), foldNiggahita(base.normalize("NFC"))].includes(data.query)) fail9();
+    if (!own9(data, "input_normalised")) {
+      if (![base, base.normalize("NFC"), foldNiggahita(base.normalize("NFC"))].includes(data.query)) fail10();
       return;
     }
     const normalized = data.input_normalised;
-    if (!keysOnly2(normalized, ["original", "read_as", "scheme", "changes", "note"]) || normalized.original !== base || normalized.read_as !== data.query || !["ascii", "unicode", "velthuis", "harvard-kyoto"].includes(normalized.scheme) || !text7(normalized.note, 1e4) || !Array.isArray(normalized.changes) || !integer6(normalized.changes.length, 1, 500)) fail9();
+    if (!keysOnly2(normalized, ["original", "read_as", "scheme", "changes", "note"]) || normalized.original !== base || normalized.read_as !== data.query || !["ascii", "unicode", "velthuis", "harvard-kyoto"].includes(normalized.scheme) || !text7(normalized.note, 1e4) || !Array.isArray(normalized.changes) || !integer6(normalized.changes.length, 1, 500)) fail10();
     for (const change of normalized.changes) {
-      if (!keysOnly2(change, ["from", "to", "rule", "label"]) || !text7(change.from, 500) || !text7(change.to, 500) || !text7(change.rule, 100) || own8(change, "label") && !text7(change.label, 1e3) || !base.normalize("NFC").includes(change.from.normalize("NFC")) || !data.query.normalize("NFC").includes(change.to.normalize("NFC"))) fail9();
+      if (!keysOnly2(change, ["from", "to", "rule", "label"]) || !text7(change.from, 500) || !text7(change.to, 500) || !text7(change.rule, 100) || own9(change, "label") && !text7(change.label, 1e3) || !base.normalize("NFC").includes(change.from.normalize("NFC")) || !data.query.normalize("NFC").includes(change.to.normalize("NFC"))) fail10();
     }
   }
   function hit(item, data) {
     const allowed = ["ref", "book_id", "title", "title_roman", "segment", "type", "vri_paragraph", "pts_page_begins", "thai_page_begins", "myanmar_page_begins", "vri_page_begins", "excerpt", "read_with", "context_with"];
-    if (!keysOnly2(item, allowed) || item.book_id !== data.book.id || !integer6(item.segment, 1, data.total_segments) || item.ref !== `vri-book:${data.book.id}/${item.segment}` || !text7(item.title, 1e3) || !["heading", "prose", "verse"].includes(item.type) || !text7(item.excerpt, 4e3)) fail5();
-    if (own8(item, "title_roman") ? item.title_roman !== data.book.title : item.title !== data.book.title) fail5();
+    if (!keysOnly2(item, allowed) || item.book_id !== data.book.id || !integer6(item.segment, 1, data.total_segments) || item.ref !== `vri-book:${data.book.id}/${item.segment}` || !text7(item.title, 1e3) || !["heading", "prose", "verse"].includes(item.type) || !text7(item.excerpt, 4e3)) fail6();
+    if (own9(item, "title_roman") ? item.title_roman !== data.book.title : item.title !== data.book.title) fail6();
     const offset = item.segment - 1;
-    if (!integer6(offset, 0, 1e5)) fail5();
+    if (!integer6(offset, 0, 1e5)) fail6();
     command3(item.read_with, data.book.id, offset, 1, data.script);
-    if (own8(item, "context_with")) command3(item.context_with, data.book.id, Math.max(0, offset - 1), 3, data.script);
-    if (own8(item, "vri_paragraph") && !text7(item.vri_paragraph, 100)) fail5();
-    for (const field of ["pts_page_begins", "thai_page_begins", "myanmar_page_begins", "vri_page_begins"]) if (own8(item, field) && (!Array.isArray(item[field]) || item[field].length > 100 || item[field].some((value) => !text7(value, 200)))) fail5();
+    if (own9(item, "context_with")) command3(item.context_with, data.book.id, Math.max(0, offset - 1), 3, data.script);
+    if (own9(item, "vri_paragraph") && !text7(item.vri_paragraph, 100)) fail6();
+    for (const field of ["pts_page_begins", "thai_page_begins", "myanmar_page_begins", "vri_page_begins"]) if (own9(item, field) && (!Array.isArray(item[field]) || item[field].length > 100 || item[field].some((value) => !text7(value, 200)))) fail6();
   }
   function validateBookSearchPage(data, selected) {
     selection2(selected);
     const allowed = ["query", "selection", "canonical", "book", "total_segments", "total_matched", "offset", "limit", "returned", "next_offset", "results", "citation_note", "source", "attribution", "notes", "input_script", "input_romanized", "input_normalised", "query_mode", "query_note", "script", "script_note", "headings_only", "total_headings", "heading_note"];
     const headings = selected.headings_only === true, emptyBrowse = headings && !selected.query;
-    if (!selected.query && !headings || !keysOnly2(data, allowed) || data.selection !== "source_book" || data.canonical !== true || !keysOnly2(data.book, ["id", "title", "collection", "vri_file"]) || data.book.id !== selected.book || data.book.vri_file !== fileFor(selected.book) || !text7(data.book.title, 1e3) || !text7(data.book.collection, 30) || !(emptyBrowse ? data.query === "" : text7(data.query, 500)) || !integer6(data.total_segments, 1, 100001) || !integer6(data.total_matched, 0, data.total_segments) || data.offset !== selected.offset || data.limit !== 15 || !integer6(data.returned, 0, 15) || !Array.isArray(data.results) || data.results.length !== data.returned || data.returned !== Math.min(15, Math.max(0, data.total_matched - data.offset)) || data.next_offset !== (data.offset + data.returned < data.total_matched ? data.offset + data.returned : null) || !text7(data.citation_note)) fail5();
+    if (!selected.query && !headings || !keysOnly2(data, allowed) || data.selection !== "source_book" || data.canonical !== true || !keysOnly2(data.book, ["id", "title", "collection", "vri_file"]) || data.book.id !== selected.book || data.book.vri_file !== fileFor(selected.book) || !text7(data.book.title, 1e3) || !text7(data.book.collection, 30) || !(emptyBrowse ? data.query === "" : text7(data.query, 500)) || !integer6(data.total_segments, 1, 100001) || !integer6(data.total_matched, 0, data.total_segments) || data.offset !== selected.offset || data.limit !== 15 || !integer6(data.returned, 0, 15) || !Array.isArray(data.results) || data.results.length !== data.returned || data.returned !== Math.min(15, Math.max(0, data.total_matched - data.offset)) || data.next_offset !== (data.offset + data.returned < data.total_matched ? data.offset + data.returned : null) || !text7(data.citation_note)) fail6();
     if (headings) {
-      if (data.headings_only !== true || !integer6(data.total_headings, 0, data.total_segments) || data.total_matched > data.total_headings || emptyBrowse && data.total_matched !== data.total_headings || !text7(data.heading_note, 1e4)) fail5();
-      if (emptyBrowse && ["input_script", "input_romanized", "input_normalised", "query_mode", "query_note"].some((key4) => own8(data, key4))) fail5();
-    } else if (["headings_only", "total_headings", "heading_note"].some((key4) => own8(data, key4))) fail5();
+      if (data.headings_only !== true || !integer6(data.total_headings, 0, data.total_segments) || data.total_matched > data.total_headings || emptyBrowse && data.total_matched !== data.total_headings || !text7(data.heading_note, 1e4)) fail6();
+      if (emptyBrowse && ["input_script", "input_romanized", "input_normalised", "query_mode", "query_note"].some((key4) => own9(data, key4))) fail6();
+    } else if (["headings_only", "total_headings", "heading_note"].some((key4) => own9(data, key4))) fail6();
     source3(data, selected);
-    if (own8(data, "script") && !scripts.has(data.script)) fail5();
-    for (const field of ["script_note", "query_note", "input_romanized"]) if (own8(data, field) && !text7(data[field], field === "input_romanized" ? 500 : 1e4)) fail5();
-    if (own8(data, "input_script") && !scripts.has(data.input_script)) fail5();
-    if (own8(data, "query_mode") && !["source_phrase", "as_typed_phrase"].includes(data.query_mode)) fail5();
-    if (own8(data, "notes") && (!Array.isArray(data.notes) || data.notes.length > 50 || data.notes.some((value) => !text7(value, 1e4)))) fail5();
-    if (own8(data, "input_normalised") && !object9(data.input_normalised)) fail5();
+    if (own9(data, "script") && !scripts.has(data.script)) fail6();
+    for (const field of ["script_note", "query_note", "input_romanized"]) if (own9(data, field) && !text7(data[field], field === "input_romanized" ? 500 : 1e4)) fail6();
+    if (own9(data, "input_script") && !scripts.has(data.input_script)) fail6();
+    if (own9(data, "query_mode") && !["source_phrase", "as_typed_phrase"].includes(data.query_mode)) fail6();
+    if (own9(data, "notes") && (!Array.isArray(data.notes) || data.notes.length > 50 || data.notes.some((value) => !text7(value, 1e4)))) fail6();
+    if (own9(data, "input_normalised") && !object9(data.input_normalised)) fail6();
     queryProvenance2(data, selected);
     const seen = /* @__PURE__ */ new Set();
     let previous = 0;
     for (const item of data.results) {
       hit(item, data);
-      if (headings && item.type !== "heading") fail5();
-      if (seen.has(item.ref) || item.segment <= previous) fail5();
+      if (headings && item.type !== "heading") fail6();
+      if (seen.has(item.ref) || item.segment <= previous) fail6();
       seen.add(item.ref);
       previous = item.segment;
     }
@@ -12684,14 +15717,14 @@
   function bookSearchHitLinks(data, item, selected) {
     const checked = validateBookSearchPage(data, selected);
     const found = checked.results.find((value) => value.ref === item?.ref);
-    if (!found || JSON.stringify(found) !== JSON.stringify(item)) fail5();
+    if (!found || JSON.stringify(found) !== JSON.stringify(item)) fail6();
     const revision5 = sourceRevision(checked), context = { book: checked.book.id };
-    return { read: readingPosition(context, found.read_with.offset, found.ref, revision5), context: own8(found, "context_with") ? readingPagePosition(context, found.context_with.offset, revision5) : null };
+    return { read: readingPosition(context, found.read_with.offset, found.ref, revision5), context: own9(found, "context_with") ? readingPagePosition(context, found.context_with.offset, revision5) : null };
   }
 
   // web/commentary-search.mjs
   var object10 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
-  var own9 = (value, key4) => Object.hasOwn(value, key4);
+  var own10 = (value, key4) => Object.hasOwn(value, key4);
   var keysOnly3 = (value, keys2) => object10(value) && Object.keys(value).every((key4) => keys2.includes(key4));
   var integer7 = (value, min, max) => Number.isSafeInteger(value) && value >= min && value <= max;
   var text8 = (value, max = 1e4) => typeof value === "string" && value.trim().length > 0 && value.length <= max;
@@ -12701,18 +15734,18 @@
   var label = "Commentary (A\u1E6D\u1E6Dhakath\u0101), not the canon: the traditional Therav\u0101da explanation of the texts, compiled in P\u0101li in Sri Lanka (traditionally attributed to Buddhaghosa, Dhammap\u0101la and others). Keep it distinct from the root text when quoting.";
   var searchAlignment = "Search covers the included commentary books, including material with no verified root-text alignment. A hit does not establish which canonical passage it explains.";
   var directAlignment = "Direct book reading does not assert an alignment to a canonical text. Use a canonical citation with get_commentary for verified aligned passages.";
-  var fail6 = () => {
+  var fail7 = () => {
     throw Error("The commentary search or surrounding context does not match this selection. No source or reading position was substituted.");
   };
   var clone4 = (value) => JSON.parse(JSON.stringify(value));
-  var equal = (a, b) => object10(a) && object10(b) && Object.keys(a).length === Object.keys(b).length && Object.keys(a).every((key4) => own9(b, key4) && a[key4] === b[key4]);
+  var equal = (a, b) => object10(a) && object10(b) && Object.keys(a).length === Object.keys(b).length && Object.keys(a).every((key4) => own10(b, key4) && a[key4] === b[key4]);
   function changed() {
     const error = Error("The commentary source changed since this search was opened. Run the search again to review the current source; no replacement context was displayed.");
     error.code = "READING_SOURCE_CHANGED";
     throw error;
   }
   function selection3(value) {
-    if (!keysOnly3(value, ["query", "offset", "limit", "script"]) || typeof value.query !== "string" || value.query !== value.query.trim() || value.query.length < 2 || value.query.length > 500 || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(value.query) || !integer7(value.offset, 0, 1e6) || value.limit !== 15 || !scripts2.has(value.script)) fail6();
+    if (!keysOnly3(value, ["query", "offset", "limit", "script"]) || typeof value.query !== "string" || value.query !== value.query.trim() || value.query.length < 2 || value.query.length > 500 || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(value.query) || !integer7(value.offset, 0, 1e6) || value.limit !== 15 || !scripts2.has(value.script)) fail7();
     return value;
   }
   function commentarySearchSelection(args, script, rawQuery) {
@@ -12720,42 +15753,42 @@
       try {
         decodeURIComponent(rawQuery.replace(/\+/g, " "));
       } catch {
-        fail6();
+        fail7();
       }
     }
-    for (const key4 of args.keys()) if (!["scope", "q", "offset"].includes(key4) || args.getAll(key4).length !== 1) fail6();
-    if (args.get("scope") !== "commentary") fail6();
+    for (const key4 of args.keys()) if (!["scope", "q", "offset"].includes(key4) || args.getAll(key4).length !== 1) fail7();
+    if (args.get("scope") !== "commentary") fail7();
     const offset = args.has("offset") ? args.get("offset") : "0";
-    if (!/^(0|[1-9][0-9]*)$/.test(offset)) fail6();
+    if (!/^(0|[1-9][0-9]*)$/.test(offset)) fail7();
     return selection3({ query: (args.get("q") ?? "").trim(), offset: Number(offset), limit: 15, script });
   }
   function source4(data) {
     const value = data.source;
-    if (!keysOnly3(value, ["name", "repository", "commit", "files", "attribution", "terms", "locator_revision"]) || value.name !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), A\u1E6D\u1E6Dhakath\u0101" || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || value.files !== "romn/*.att.xml" || !text8(value.attribution) || !text8(value.terms) || !text8(value.commit, 100)) fail6();
+    if (!keysOnly3(value, ["name", "repository", "commit", "files", "attribution", "terms", "locator_revision"]) || value.name !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), A\u1E6D\u1E6Dhakath\u0101" || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || value.files !== "romn/*.att.xml" || !text8(value.attribution) || !text8(value.terms) || !text8(value.commit, 100)) fail7();
     try {
-      if (sourceRevision({ source: { commit: value.commit } }) !== value.commit || !text8(sourceRevision(data), 100)) fail6();
+      if (sourceRevision({ source: { commit: value.commit } }) !== value.commit || !text8(sourceRevision(data), 100)) fail7();
     } catch {
-      fail6();
+      fail7();
     }
   }
   function outputScript(data, selected) {
-    if (selected.script === "roman" ? own9(data, "script") || own9(data, "script_note") : data.script !== selected.script || !text8(data.script_note)) fail6();
+    if (selected.script === "roman" ? own10(data, "script") || own10(data, "script_note") : data.script !== selected.script || !text8(data.script_note)) fail7();
   }
   function book(value, selected) {
-    if (!keysOnly3(value, ["uid", "vri_file", "title", "title_roman", "work", "description"]) || !file(value.vri_file) || value.uid !== `commentary:${value.vri_file}` || !text8(value.title, 1e3) || !text8(value.work, 1e3) || !text8(value.description, 1e3)) fail6();
-    if (selected.script === "roman" ? own9(value, "title_roman") : !text8(value.title_roman, 1e3) || value.title !== transliterate(value.title_roman, "roman", selected.script)) fail6();
+    if (!keysOnly3(value, ["uid", "vri_file", "title", "title_roman", "work", "description"]) || !file(value.vri_file) || value.uid !== `commentary:${value.vri_file}` || !text8(value.title, 1e3) || !text8(value.work, 1e3) || !text8(value.description, 1e3)) fail7();
+    if (selected.script === "roman" ? own10(value, "title_roman") : !text8(value.title_roman, 1e3) || value.title !== transliterate(value.title_roman, "roman", selected.script)) fail7();
   }
   function pages(value) {
-    if (own9(value, "commentary_pts_page_begins") && (!Array.isArray(value.commentary_pts_page_begins) || value.commentary_pts_page_begins.length > 100 || value.commentary_pts_page_begins.some((page2) => !text8(page2, 200)))) fail6();
+    if (own10(value, "commentary_pts_page_begins") && (!Array.isArray(value.commentary_pts_page_begins) || value.commentary_pts_page_begins.length > 100 || value.commentary_pts_page_begins.some((page2) => !text8(page2, 200)))) fail7();
   }
   function command4(value, uid2, selected, contextOffset) {
-    if (!keysOnly3(value, contextOffset === void 0 ? ["tool", "uid", "script"] : ["tool", "uid", "offset", "limit", "script"]) || value.tool !== "get_commentary" || value.uid !== uid2 || own9(value, "script") && value.script !== selected.script || selected.script !== "roman" && value.script !== selected.script) fail6();
-    if (contextOffset !== void 0 && (value.offset !== contextOffset || value.limit !== 3)) fail6();
+    if (!keysOnly3(value, contextOffset === void 0 ? ["tool", "uid", "script"] : ["tool", "uid", "offset", "limit", "script"]) || value.tool !== "get_commentary" || value.uid !== uid2 || own10(value, "script") && value.script !== selected.script || selected.script !== "roman" && value.script !== selected.script) fail7();
+    if (contextOffset !== void 0 && (value.offset !== contextOffset || value.limit !== 3)) fail7();
   }
   function hit2(item, selected) {
-    if (!keysOnly3(item, ["canonical", "content_type", "citation", "book", "segment", "type", "excerpt", "commentary_pts_page_begins", "read_with", "context_with"]) || item.canonical !== false || item.content_type !== "commentary" || !integer7(item.segment, 1, 100001) || !["heading", "prose", "verse"].includes(item.type) || !text8(item.excerpt, 4e3)) fail6();
+    if (!keysOnly3(item, ["canonical", "content_type", "citation", "book", "segment", "type", "excerpt", "commentary_pts_page_begins", "read_with", "context_with"]) || item.canonical !== false || item.content_type !== "commentary" || !integer7(item.segment, 1, 100001) || !["heading", "prose", "verse"].includes(item.type) || !text8(item.excerpt, 4e3)) fail7();
     book(item.book, selected);
-    if (item.citation !== `${item.book.uid}/c${item.segment}`) fail6();
+    if (item.citation !== `${item.book.uid}/c${item.segment}`) fail7();
     command4(item.read_with, item.citation, selected);
     command4(item.context_with, item.book.uid, selected, Math.max(0, item.segment - 2));
     pages(item);
@@ -12763,27 +15796,27 @@
   function validateCommentarySearch(data, selected) {
     selection3(selected);
     const allowed = ["query", "canonical", "content_type", "label", "searched_books", "total_matched", "offset", "limit", "returned", "next_offset", "results", "alignment_note", "source", "input_script", "input_romanized", "input_normalised", "query_mode", "query_note", "script", "script_note"];
-    if (!selected.query || !keysOnly3(data, allowed) || !text8(data.query, 500) || data.canonical !== false || data.content_type !== "commentary" || data.label !== label || data.alignment_note !== searchAlignment || data.searched_books !== bundledBooks || !integer7(data.total_matched, 0, 1e6) || data.offset !== selected.offset || data.limit !== 15 || !integer7(data.returned, 0, 15) || !Array.isArray(data.results) || data.results.length !== data.returned || data.returned !== Math.min(15, Math.max(0, data.total_matched - data.offset)) || data.next_offset !== (data.offset + data.returned < data.total_matched ? data.offset + data.returned : null)) fail6();
+    if (!selected.query || !keysOnly3(data, allowed) || !text8(data.query, 500) || data.canonical !== false || data.content_type !== "commentary" || data.label !== label || data.alignment_note !== searchAlignment || data.searched_books !== bundledBooks || !integer7(data.total_matched, 0, 1e6) || data.offset !== selected.offset || data.limit !== 15 || !integer7(data.returned, 0, 15) || !Array.isArray(data.results) || data.results.length !== data.returned || data.returned !== Math.min(15, Math.max(0, data.total_matched - data.offset)) || data.next_offset !== (data.offset + data.returned < data.total_matched ? data.offset + data.returned : null)) fail7();
     source4(data);
     outputScript(data, selected);
-    if (own9(data, "query_mode") && !["source_phrase", "as_typed_phrase"].includes(data.query_mode) || own9(data, "query_note") && !text8(data.query_note) || own9(data, "input_script") && !scripts2.has(data.input_script) || own9(data, "input_romanized") && !text8(data.input_romanized, 500)) fail6();
-    queryProvenance2(data, selected, fail6);
+    if (own10(data, "query_mode") && !["source_phrase", "as_typed_phrase"].includes(data.query_mode) || own10(data, "query_note") && !text8(data.query_note) || own10(data, "input_script") && !scripts2.has(data.input_script) || own10(data, "input_romanized") && !text8(data.input_romanized, 500)) fail7();
+    queryProvenance2(data, selected, fail7);
     const seen = /* @__PURE__ */ new Set(), books = /* @__PURE__ */ new Map();
     let previous;
     for (const item of data.results) {
       hit2(item, selected);
-      if (seen.has(item.citation) || previous?.book.uid === item.book.uid && previous.segment >= item.segment || books.has(item.book.uid) && !equal(books.get(item.book.uid), item.book)) fail6();
+      if (seen.has(item.citation) || previous?.book.uid === item.book.uid && previous.segment >= item.segment || books.has(item.book.uid) && !equal(books.get(item.book.uid), item.book)) fail7();
       seen.add(item.citation);
       books.set(item.book.uid, item.book);
       previous = item;
     }
-    if (books.size > data.searched_books) fail6();
+    if (books.size > data.searched_books) fail7();
     return clone4(data);
   }
   function member(data, item, selected) {
     const checked = validateCommentarySearch(data, selected);
     const found = checked.results.find((value) => value.citation === item?.citation);
-    if (!found || JSON.stringify(found) !== JSON.stringify(item)) fail6();
+    if (!found || JSON.stringify(found) !== JSON.stringify(item)) fail7();
     return { checked, found };
   }
   function commentarySearchHitLinks(data, item, selected) {
@@ -12797,36 +15830,36 @@
   function validateCommentaryContext(response, data, item, selected) {
     const { checked, found } = member(data, item, selected);
     const offset = found.context_with.offset;
-    if (!keysOnly3(response, ["canonical", "content_type", "label", "alignment_note", "source", "citation", "book", "commentary", "total_segments", "offset", "limit", "returned", "next_offset", "segments", "script", "script_note"]) || response.canonical !== false || response.content_type !== "commentary" || response.label !== label || response.alignment_note !== directAlignment) fail6();
+    if (!keysOnly3(response, ["canonical", "content_type", "label", "alignment_note", "source", "citation", "book", "commentary", "total_segments", "offset", "limit", "returned", "next_offset", "segments", "script", "script_note"]) || response.canonical !== false || response.content_type !== "commentary" || response.label !== label || response.alignment_note !== directAlignment) fail7();
     source4(response);
     if (!equal(response.source, checked.source)) changed();
     outputScript(response, selected);
     book(response.book, selected);
-    if (!equal(response.book, found.book) || response.citation !== found.book.uid || response.commentary !== found.book.work || !integer7(response.total_segments, found.segment, 100001) || response.offset !== offset || response.limit !== 3 || !integer7(response.returned, 1, 3) || !Array.isArray(response.segments) || response.segments.length !== response.returned || response.returned !== Math.min(3, response.total_segments - offset) || response.next_offset !== (offset + response.returned < response.total_segments ? offset + response.returned : null)) fail6();
+    if (!equal(response.book, found.book) || response.citation !== found.book.uid || response.commentary !== found.book.work || !integer7(response.total_segments, found.segment, 100001) || response.offset !== offset || response.limit !== 3 || !integer7(response.returned, 1, 3) || !Array.isArray(response.segments) || response.segments.length !== response.returned || response.returned !== Math.min(3, response.total_segments - offset) || response.next_offset !== (offset + response.returned < response.total_segments ? offset + response.returned : null)) fail7();
     let matches = 0;
     response.segments.forEach((segment, i) => {
-      if (!keysOnly3(segment, ["ref", "type", "text", "commentary_pts_page_begins"]) || segment.ref !== `${found.book.uid}/c${offset + i + 1}` || !["heading", "prose", "verse"].includes(segment.type) || !text8(segment.text, 1e5)) fail6();
+      if (!keysOnly3(segment, ["ref", "type", "text", "commentary_pts_page_begins"]) || segment.ref !== `${found.book.uid}/c${offset + i + 1}` || !["heading", "prose", "verse"].includes(segment.type) || !text8(segment.text, 1e5)) fail7();
       pages(segment);
       if (segment.ref === found.citation) {
         matches += 1;
-        if (segment.type !== found.type || JSON.stringify(segment.commentary_pts_page_begins) !== JSON.stringify(found.commentary_pts_page_begins)) fail6();
+        if (segment.type !== found.type || JSON.stringify(segment.commentary_pts_page_begins) !== JSON.stringify(found.commentary_pts_page_begins)) fail7();
       }
     });
-    if (matches !== 1) fail6();
+    if (matches !== 1) fail7();
     return clone4(response);
   }
 
   // web/post-search.mjs
   var object11 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
-  var own10 = (value, key4) => Object.hasOwn(value, key4);
+  var own11 = (value, key4) => Object.hasOwn(value, key4);
   var keysOnly4 = (value, keys2) => object11(value) && Object.keys(value).every((key4) => keys2.includes(key4));
   var integer8 = (value, min, max) => Number.isSafeInteger(value) && value >= min && value <= max;
   var text9 = (value, max = 1e4) => typeof value === "string" && value.trim().length > 0 && value.length <= max && !/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(value);
   var id3 = (value) => typeof value === "string" && /^[a-z][a-z0-9-]{0,99}$/.test(value);
   var scripts3 = /* @__PURE__ */ new Set(["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"]);
   var clone5 = (value) => JSON.parse(JSON.stringify(value));
-  var equal2 = (a, b) => object11(a) && object11(b) && Object.keys(a).length === Object.keys(b).length && Object.keys(a).every((key4) => own10(b, key4) && a[key4] === b[key4]);
-  var fail7 = () => {
+  var equal2 = (a, b) => object11(a) && object11(b) && Object.keys(a).length === Object.keys(b).length && Object.keys(a).every((key4) => own11(b, key4) && a[key4] === b[key4]);
+  var fail8 = () => {
     throw Error("The post-canonical search or surrounding context does not match this selection. No source or reading position was substituted.");
   };
   var searchLabel = "Post-canonical books (VRI \u1E6C\u012Bk\u0101 and A\xF1\xF1a sections), not the canon. Results are kept separate from canonical search results.";
@@ -12835,8 +15868,8 @@
     "A\xF1\xF1a": 'Post-canonical, not the canon: a book from the VRI "A\xF1\xF1a" (other books) section, such as the Visuddhimagga, its Mah\u0101\u1E6D\u012Bk\u0101, chronicles, grammars and later P\u0101li works. Keep it distinct from the canonical texts when quoting.'
   };
   function selection4(value) {
-    if (!keysOnly4(value, ["query", "offset", "limit", "script"]) || !text9(value.query, 300) || value.query !== value.query.trim() || !integer8(value.offset, 0, 1e5) || value.limit !== 15 || !scripts3.has(value.script)) fail7();
-    if (romanizeSearchInput(value.query).text.length < 2) fail7();
+    if (!keysOnly4(value, ["query", "offset", "limit", "script"]) || !text9(value.query, 300) || value.query !== value.query.trim() || !integer8(value.offset, 0, 1e5) || value.limit !== 15 || !scripts3.has(value.script)) fail8();
+    if (romanizeSearchInput(value.query).text.length < 2) fail8();
     return value;
   }
   function postSearchSelection(args, script, rawQuery) {
@@ -12844,70 +15877,70 @@
       try {
         decodeURIComponent(rawQuery.replace(/\+/g, " "));
       } catch {
-        fail7();
+        fail8();
       }
     }
-    for (const key4 of args.keys()) if (!["scope", "q", "offset"].includes(key4) || args.getAll(key4).length !== 1) fail7();
-    if (args.get("scope") !== "post") fail7();
+    for (const key4 of args.keys()) if (!["scope", "q", "offset"].includes(key4) || args.getAll(key4).length !== 1) fail8();
+    if (args.get("scope") !== "post") fail8();
     const offset = args.has("offset") ? args.get("offset") : "0";
-    if (!/^(0|[1-9][0-9]*)$/.test(offset)) fail7();
+    if (!/^(0|[1-9][0-9]*)$/.test(offset)) fail8();
     return selection4({ query: (args.get("q") ?? "").trim(), offset: Number(offset), limit: 15, script });
   }
   function source5(data) {
     const value = data.source;
-    if (!keysOnly4(value, ["name", "repository", "commit", "files", "attribution", "terms", "locator_revision"]) || value.name !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI): \u1E6C\u012Bk\u0101 and A\xF1\xF1a (post-canonical) books" || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || value.files !== "romn/*.tik.xml, romn/*.nrf.xml (except s0518m, s0520m), romn/e0101n.mul.xml, e0102n.mul.xml, e0103n.att.xml, e0104n.att.xml; titles from tipitaka.org/romn/tree.json" || !text9(value.attribution) || !text9(value.terms) || !text9(value.commit, 100)) fail7();
+    if (!keysOnly4(value, ["name", "repository", "commit", "files", "attribution", "terms", "locator_revision"]) || value.name !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI): \u1E6C\u012Bk\u0101 and A\xF1\xF1a (post-canonical) books" || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || value.files !== "romn/*.tik.xml, romn/*.nrf.xml (except s0518m, s0520m), romn/e0101n.mul.xml, e0102n.mul.xml, e0103n.att.xml, e0104n.att.xml; titles from tipitaka.org/romn/tree.json" || !text9(value.attribution) || !text9(value.terms) || !text9(value.commit, 100)) fail8();
     try {
-      if (sourceRevision({ source: { commit: value.commit } }) !== value.commit || !text9(sourceRevision(data), 100)) fail7();
+      if (sourceRevision({ source: { commit: value.commit } }) !== value.commit || !text9(sourceRevision(data), 100)) fail8();
     } catch {
-      fail7();
+      fail8();
     }
   }
   function outputScript2(data, selected) {
-    if (selected.script === "roman" ? own10(data, "script") || own10(data, "script_note") : data.script !== selected.script || !text9(data.script_note)) fail7();
+    if (selected.script === "roman" ? own11(data, "script") || own11(data, "script_note") : data.script !== selected.script || !text9(data.script_note)) fail8();
   }
   function nativeTitle(value, key4, script) {
-    if (!text9(value[key4], 1e3) || (script === "roman" ? own10(value, key4 + "_roman") : !text9(value[key4 + "_roman"], 1e3) || value[key4] !== transliterate(value[key4 + "_roman"], "roman", script))) fail7();
+    if (!text9(value[key4], 1e3) || (script === "roman" ? own11(value, key4 + "_roman") : !text9(value[key4 + "_roman"], 1e3) || value[key4] !== transliterate(value[key4 + "_roman"], "roman", script))) fail8();
   }
   function citationScope(citation2, book2) {
-    if (!id3(book2) || !text9(citation2, 200)) fail7();
+    if (!id3(book2) || !text9(citation2, 200)) fail8();
     let match;
     if (match = /^Vism (?:§([1-9][0-9]{0,2})|ch\. ([1-9][0-9]?))$/.exec(citation2)) {
-      if (!["visuddhimagga-1", "visuddhimagga-2"].includes(book2) || match[1] && (Number(match[1]) > 896 || book2 !== `visuddhimagga-${Number(match[1]) <= 364 ? 1 : 2}`) || match[2] && (Number(match[2]) > 23 || book2 !== `visuddhimagga-${Number(match[2]) <= 11 ? 1 : 2}`)) fail7();
+      if (!["visuddhimagga-1", "visuddhimagga-2"].includes(book2) || match[1] && (Number(match[1]) > 896 || book2 !== `visuddhimagga-${Number(match[1]) <= 364 ? 1 : 2}`) || match[2] && (Number(match[2]) > 23 || book2 !== `visuddhimagga-${Number(match[2]) <= 11 ? 1 : 2}`)) fail8();
       return { work: "Vism", kind: match[1] ? "paragraph" : "chapter", chapter: match[2] ? Number(match[2]) : null, paragraph: match[1] ? Number(match[1]) : null };
     }
     if (match = /^Abhidh-s ([1-9])(?:\.([1-9][0-9]*))?$/.exec(citation2)) {
-      if (book2 !== "abhidhammatthasangaho") fail7();
+      if (book2 !== "abhidhammatthasangaho") fail8();
       return { work: "Abhidh-s", kind: match[2] ? "paragraph" : "chapter", chapter: Number(match[1]), paragraph: match[2] ? Number(match[2]) : null };
     }
     if (citation2 === book2) return { work: null, kind: "book", chapter: null };
     if (citation2.startsWith(book2 + " ") && (match = /^(?:([1-9][0-9]*)(?:\.([1-9][0-9]*))?|§([1-9][0-9]*))$/.exec(citation2.slice(book2.length + 1)))) return { work: null, kind: match[2] || match[3] ? "paragraph" : "chapter", chapter: match[1] ? Number(match[1]) : null, paragraph: match[2] || match[3] ? Number(match[2] || match[3]) : null };
-    fail7();
+    fail8();
   }
   function command5(value, citation2, offset, limit, selected) {
-    if (!keysOnly4(value, ["tool", "citation", "offset", "limit", "script"]) || value.tool !== "get_post_canonical" || value.citation !== citation2 || value.offset !== offset || value.limit !== limit || own10(value, "script") && value.script !== selected.script || selected.script !== "roman" && value.script !== selected.script) fail7();
+    if (!keysOnly4(value, ["tool", "citation", "offset", "limit", "script"]) || value.tool !== "get_post_canonical" || value.citation !== citation2 || value.offset !== offset || value.limit !== limit || own11(value, "script") && value.script !== selected.script || selected.script !== "roman" && value.script !== selected.script) fail8();
   }
   function hit3(item, selected) {
-    if (!keysOnly4(item, ["canonical", "citation", "book_id", "book_title", "book_title_roman", "vri_section", "chapter", "match_vri_paragraph", "excerpt", "segment_ref", "read_with", "context_with"]) || item.canonical !== false || !own10(labels, item.vri_section) || !text9(item.excerpt, 4e3)) fail7();
+    if (!keysOnly4(item, ["canonical", "citation", "book_id", "book_title", "book_title_roman", "vri_section", "chapter", "match_vri_paragraph", "excerpt", "segment_ref", "read_with", "context_with"]) || item.canonical !== false || !own11(labels, item.vri_section) || !text9(item.excerpt, 4e3)) fail8();
     const scope = citationScope(item.citation, item.book_id);
-    if (scope.work && item.vri_section !== (scope.work === "Vism" ? "A\xF1\xF1a" : "\u1E6C\u012Bk\u0101")) fail7();
+    if (scope.work && item.vri_section !== (scope.work === "Vism" ? "A\xF1\xF1a" : "\u1E6C\u012Bk\u0101")) fail8();
     nativeTitle(item, "book_title", selected.script);
-    for (const field of ["chapter", "match_vri_paragraph"]) if (own10(item, field) && !text9(item[field], field === "chapter" ? 1e3 : 100)) fail7();
-    if (!integer8(item.read_with?.offset, 0, 1e5) || item.segment_ref !== `${item.citation}/${item.read_with.offset + 1}`) fail7();
+    for (const field of ["chapter", "match_vri_paragraph"]) if (own11(item, field) && !text9(item[field], field === "chapter" ? 1e3 : 100)) fail8();
+    if (!integer8(item.read_with?.offset, 0, 1e5) || item.segment_ref !== `${item.citation}/${item.read_with.offset + 1}`) fail8();
     command5(item.read_with, item.citation, item.read_with.offset, 1, selected);
     command5(item.context_with, item.citation, Math.max(0, item.read_with.offset - 1), 3, selected);
   }
   function validatePostSearch(data, selected) {
     selection4(selected);
-    if (!keysOnly4(data, ["query", "canonical", "label", "searched", "results", "total_matched", "offset", "limit", "next_offset", "source", "script", "script_note", "input_script", "input_romanized", "input_normalised", "query_mode", "query_note"]) || !text9(data.query, 2e3) || data.canonical !== false || data.label !== searchLabel || data.searched !== "109 post-canonical books" || !integer8(data.total_matched, 0, 1e6) || data.offset !== selected.offset || data.limit !== 15 || !Array.isArray(data.results) || data.results.length !== Math.min(15, Math.max(0, data.total_matched - data.offset)) || data.next_offset !== (data.offset + 15 < data.total_matched ? data.offset + 15 : null)) fail7();
+    if (!keysOnly4(data, ["query", "canonical", "label", "searched", "results", "total_matched", "offset", "limit", "next_offset", "source", "script", "script_note", "input_script", "input_romanized", "input_normalised", "query_mode", "query_note"]) || !text9(data.query, 2e3) || data.canonical !== false || data.label !== searchLabel || data.searched !== "109 post-canonical books" || !integer8(data.total_matched, 0, 1e6) || data.offset !== selected.offset || data.limit !== 15 || !Array.isArray(data.results) || data.results.length !== Math.min(15, Math.max(0, data.total_matched - data.offset)) || data.next_offset !== (data.offset + 15 < data.total_matched ? data.offset + 15 : null)) fail8();
     source5(data);
     outputScript2(data, selected);
-    if (own10(data, "query_mode") && !["source_phrase", "as_typed_phrase"].includes(data.query_mode) || own10(data, "query_note") && !text9(data.query_note) || own10(data, "input_script") && !scripts3.has(data.input_script) || own10(data, "input_romanized") && !text9(data.input_romanized, 2e3)) fail7();
-    queryProvenance2(data, selected, fail7);
+    if (own11(data, "query_mode") && !["source_phrase", "as_typed_phrase"].includes(data.query_mode) || own11(data, "query_note") && !text9(data.query_note) || own11(data, "input_script") && !scripts3.has(data.input_script) || own11(data, "input_romanized") && !text9(data.input_romanized, 2e3)) fail8();
+    queryProvenance2(data, selected, fail8);
     const seen = /* @__PURE__ */ new Set(), books = /* @__PURE__ */ new Map();
     for (const item of data.results) {
       hit3(item, selected);
       const identity3 = { title: item.book_title, roman: item.book_title_roman, section: item.vri_section };
-      if (seen.has(item.citation) || books.has(item.book_id) && !equal2(books.get(item.book_id), identity3)) fail7();
+      if (seen.has(item.citation) || books.has(item.book_id) && !equal2(books.get(item.book_id), identity3)) fail8();
       seen.add(item.citation);
       books.set(item.book_id, identity3);
     }
@@ -12915,7 +15948,7 @@
   }
   function member2(data, item, selected) {
     const checked = validatePostSearch(data, selected), found = checked.results.find((value) => value.citation === item?.citation);
-    if (!found || JSON.stringify(found) !== JSON.stringify(item)) fail7();
+    if (!found || JSON.stringify(found) !== JSON.stringify(item)) fail8();
     return { checked, found };
   }
   function postSearchHitLinks(data, item, selected) {
@@ -12928,12 +15961,12 @@
     return { citation: found.context_with.citation, offset: found.context_with.offset, limit: 3, script: selected.script };
   }
   function pages2(segment) {
-    if (own10(segment, "vri_paragraph") && !text9(segment.vri_paragraph, 100)) fail7();
-    for (const key4 of ["pts_page_begins", "thai_page_begins", "myanmar_page_begins", "vri_page_begins"]) if (own10(segment, key4) && (!Array.isArray(segment[key4]) || segment[key4].length > 100 || segment[key4].some((page2) => !text9(page2, 200)))) fail7();
+    if (own11(segment, "vri_paragraph") && !text9(segment.vri_paragraph, 100)) fail8();
+    for (const key4 of ["pts_page_begins", "thai_page_begins", "myanmar_page_begins", "vri_page_begins"]) if (own11(segment, key4) && (!Array.isArray(segment[key4]) || segment[key4].length > 100 || segment[key4].some((page2) => !text9(page2, 200)))) fail8();
   }
   function validatePostContext(response, data, item, selected) {
     const { checked, found } = member2(data, item, selected), scope = citationScope(found.citation, found.book_id), offset = found.context_with.offset;
-    if (!keysOnly4(response, ["canonical", "label", "citation", "title", "title_roman", "kind", "chapter", "vri_paragraph", "approximate", "book", "chapters", "chapter_index", "notes", "source", "edition", "attribution", "total_segments", "offset", "limit", "returned", "next_offset", "segments", "continue_with", "script", "script_note"]) || response.canonical !== false) fail7();
+    if (!keysOnly4(response, ["canonical", "label", "citation", "title", "title_roman", "kind", "chapter", "vri_paragraph", "approximate", "book", "chapters", "chapter_index", "notes", "source", "edition", "attribution", "total_segments", "offset", "limit", "returned", "next_offset", "segments", "continue_with", "script", "script_note"]) || response.canonical !== false) fail8();
     source5(response);
     if (!equal2(response.source, checked.source)) {
       const error = Error("The post-canonical source changed since this search was opened. Run the search again to review the current source; no replacement context was displayed.");
@@ -12942,64 +15975,64 @@
     }
     outputScript2(response, selected);
     const book2 = response.book;
-    if (!keysOnly4(book2, ["id", "title", "title_roman", "vri_file", "vri_section", "vri_group", "canonical"]) || book2.id !== found.book_id || book2.canonical !== false || book2.vri_section !== found.vri_section || !text9(book2.vri_file, 100) || !/^[a-z0-9][a-z0-9_.-]*\.(?:mul|tik|nrf|att)\.xml$/.test(book2.vri_file) || !Array.isArray(book2.vri_group) || book2.vri_group.length > 100 || book2.vri_group.some((group) => !text9(group, 1e3))) fail7();
+    if (!keysOnly4(book2, ["id", "title", "title_roman", "vri_file", "vri_section", "vri_group", "canonical"]) || book2.id !== found.book_id || book2.canonical !== false || book2.vri_section !== found.vri_section || !text9(book2.vri_file, 100) || !/^[a-z0-9][a-z0-9_.-]*\.(?:mul|tik|nrf|att)\.xml$/.test(book2.vri_file) || !Array.isArray(book2.vri_group) || book2.vri_group.length > 100 || book2.vri_group.some((group) => !text9(group, 1e3))) fail8();
     nativeTitle(book2, "title", selected.script);
     nativeTitle(response, "title", selected.script);
-    if (found.book_id === "visuddhimagga-1" && book2.vri_file !== "e0101n.mul.xml" || found.book_id === "visuddhimagga-2" && book2.vri_file !== "e0102n.mul.xml" || found.book_id === "abhidhammatthasangaho" && book2.vri_file !== "abh07t.nrf.xml") fail7();
-    if (book2.title !== found.book_title || book2.title_roman !== found.book_title_roman || response.citation !== found.citation || response.kind !== scope.kind || response.label !== (scope.work === "Vism" ? 'Visuddhimagga ("The Path of Purification"), a post-canonical manual traditionally attributed to Buddhaghosa. Not the canon. ' : scope.work === "Abhidh-s" ? "Abhidhammatthasa\u1E45gaha, a post-canonical Abhidhamma manual traditionally attributed to \u0100cariya Anuruddha. Not the canon. " : "") + labels[found.vri_section] || response.edition !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), P\u0101li" || response.attribution !== response.source.attribution) fail7();
-    if (own10(response, "chapter") && !integer8(response.chapter, 1, 1e5) || scope.chapter !== null && response.chapter !== scope.chapter || own10(response, "vri_paragraph") && !text9(response.vri_paragraph, 100) || own10(response, "approximate") && typeof response.approximate !== "boolean" || !Array.isArray(response.notes) || response.notes.length > 100 || response.notes.some((note2) => !text9(note2))) fail7();
+    if (found.book_id === "visuddhimagga-1" && book2.vri_file !== "e0101n.mul.xml" || found.book_id === "visuddhimagga-2" && book2.vri_file !== "e0102n.mul.xml" || found.book_id === "abhidhammatthasangaho" && book2.vri_file !== "abh07t.nrf.xml") fail8();
+    if (book2.title !== found.book_title || book2.title_roman !== found.book_title_roman || response.citation !== found.citation || response.kind !== scope.kind || response.label !== (scope.work === "Vism" ? 'Visuddhimagga ("The Path of Purification"), a post-canonical manual traditionally attributed to Buddhaghosa. Not the canon. ' : scope.work === "Abhidh-s" ? "Abhidhammatthasa\u1E45gaha, a post-canonical Abhidhamma manual traditionally attributed to \u0100cariya Anuruddha. Not the canon. " : "") + labels[found.vri_section] || response.edition !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI), P\u0101li" || response.attribution !== response.source.attribution) fail8();
+    if (own11(response, "chapter") && !integer8(response.chapter, 1, 1e5) || scope.chapter !== null && response.chapter !== scope.chapter || own11(response, "vri_paragraph") && !text9(response.vri_paragraph, 100) || own11(response, "approximate") && typeof response.approximate !== "boolean" || !Array.isArray(response.notes) || response.notes.length > 100 || response.notes.some((note2) => !text9(note2))) fail8();
     if (scope.paragraph !== void 0 && scope.paragraph !== null) {
       const paragraph = /^([1-9][0-9]*)(?:\s*[-–]\s*[1-9][0-9]*)?$/.exec(response.vri_paragraph);
-      if (!paragraph || Number(paragraph[1]) !== scope.paragraph) fail7();
+      if (!paragraph || Number(paragraph[1]) !== scope.paragraph) fail8();
       if (scope.work === "Vism") {
         const volume = found.book_id === "visuddhimagga-1" ? 1 : 2;
         const warning = `VRI paragraph ${response.vri_paragraph} (volume ${volume}). VRI numbers the Visuddhimagga's paragraphs continuously, 1\u2013896, and VRI's own cross-references write it "visuddhi. ${volume}.${scope.paragraph}" (volume.paragraph); this is not \xD1\u0101\u1E47amoli's chapter.paragraph numbering.`;
-        if (!response.notes.includes(warning) || own10(response, "chapter") && (!integer8(response.chapter, 1, 23) || (response.chapter <= 11 ? 1 : 2) !== volume)) fail7();
-      } else if (scope.work === "Abhidh-s" && !response.notes.includes("Sections are VRI's paragraph numbers, which restart in each chapter. Other editions and translations (for example Bhikkhu Bodhi's Comprehensive Manual of Abhidhamma) number their sections themselves; check the text before citing their numbers.")) fail7();
+        if (!response.notes.includes(warning) || own11(response, "chapter") && (!integer8(response.chapter, 1, 23) || (response.chapter <= 11 ? 1 : 2) !== volume)) fail8();
+      } else if (scope.work === "Abhidh-s" && !response.notes.includes("Sections are VRI's paragraph numbers, which restart in each chapter. Other editions and translations (for example Bhikkhu Bodhi's Comprehensive Manual of Abhidhamma) number their sections themselves; check the text before citing their numbers.")) fail8();
     }
-    if (scope.work && !own10(response, "chapter_index") || scope.kind === "paragraph" && own10(response, "chapter") && own10(found, "chapter") && response.title !== found.chapter) fail7();
-    if (own10(response, "chapter_index")) {
+    if (scope.work && !own11(response, "chapter_index") || scope.kind === "paragraph" && own11(response, "chapter") && own11(found, "chapter") && response.title !== found.chapter) fail8();
+    if (own11(response, "chapter_index")) {
       const index = validateChapterIndex(response);
-      if (!index || index.scope !== (scope.work ? "work" : "source_file") || index.read_with.citation !== (scope.work || found.book_id)) fail7();
+      if (!index || index.scope !== (scope.work ? "work" : "source_file") || index.read_with.citation !== (scope.work || found.book_id)) fail8();
     }
-    if (own10(response, "chapters")) {
-      if (!Array.isArray(response.chapters) || response.chapters.length > 1e3) fail7();
+    if (own11(response, "chapters")) {
+      if (!Array.isArray(response.chapters) || response.chapters.length > 1e3) fail8();
       for (const [i, row] of response.chapters.entries()) {
-        if (!keysOnly4(row, ["citation", "title", "title_roman"]) || row.citation !== `${scope.work === "Vism" ? "Vism ch." : scope.work || found.book_id} ${i + 1}`) fail7();
+        if (!keysOnly4(row, ["citation", "title", "title_roman"]) || row.citation !== `${scope.work === "Vism" ? "Vism ch." : scope.work || found.book_id} ${i + 1}`) fail8();
         nativeTitle(row, "title", selected.script);
       }
     }
-    if (!integer8(response.total_segments, found.read_with.offset + 1, 100001) || response.offset !== offset || response.limit !== 3 || !integer8(response.returned, 1, 3) || !Array.isArray(response.segments) || response.segments.length !== response.returned || response.returned !== Math.min(3, response.total_segments - offset) || response.next_offset !== (offset + response.returned < response.total_segments ? offset + response.returned : null)) fail7();
-    if (own10(response, "continue_with")) {
+    if (!integer8(response.total_segments, found.read_with.offset + 1, 100001) || response.offset !== offset || response.limit !== 3 || !integer8(response.returned, 1, 3) || !Array.isArray(response.segments) || response.segments.length !== response.returned || response.returned !== Math.min(3, response.total_segments - offset) || response.next_offset !== (offset + response.returned < response.total_segments ? offset + response.returned : null)) fail8();
+    if (own11(response, "continue_with")) {
       if (response.next_offset === null) {
-        if (response.continue_with !== null) fail7();
+        if (response.continue_with !== null) fail8();
       } else {
         const value = response.continue_with;
-        if (!keysOnly4(value, ["tool", "citation", "offset", "limit", "includeVariants", "script"]) || value.includeVariants !== false) fail7();
+        if (!keysOnly4(value, ["tool", "citation", "offset", "limit", "includeVariants", "script"]) || value.includeVariants !== false) fail8();
         const { includeVariants, ...rest } = value;
         command5(rest, found.citation, response.next_offset, 3, selected);
       }
     }
     let matches = 0;
     response.segments.forEach((segment, i) => {
-      if (!keysOnly4(segment, ["ref", "type", "text", "vri_paragraph", "pts_page_begins", "thai_page_begins", "myanmar_page_begins", "vri_page_begins"]) || segment.ref !== `${found.citation}/${offset + i + 1}` || !["heading", "prose", "verse"].includes(segment.type) || !text9(segment.text, 1e5)) fail7();
+      if (!keysOnly4(segment, ["ref", "type", "text", "vri_paragraph", "pts_page_begins", "thai_page_begins", "myanmar_page_begins", "vri_page_begins"]) || segment.ref !== `${found.citation}/${offset + i + 1}` || !["heading", "prose", "verse"].includes(segment.type) || !text9(segment.text, 1e5)) fail8();
       pages2(segment);
       if (segment.ref === found.segment_ref) {
         matches += 1;
-        if (own10(found, "match_vri_paragraph") && segment.vri_paragraph !== found.match_vri_paragraph) fail7();
+        if (own11(found, "match_vri_paragraph") && segment.vri_paragraph !== found.match_vri_paragraph) fail8();
       }
     });
-    if (matches !== 1) fail7();
+    if (matches !== 1) fail8();
     return clone5(response);
   }
 
   // web/citation-resolution.mjs
   var object12 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
-  var own11 = (value, key4) => Object.hasOwn(value, key4);
+  var own12 = (value, key4) => Object.hasOwn(value, key4);
   var text10 = (value, max = 1e3) => typeof value === "string" && value.trim().length > 0 && value.length <= max && !/[\u0000-\u001f\u007f<>]/.test(value);
   var id4 = (value) => typeof value === "string" && /^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$/.test(value) && value.length <= 200;
   var citation = (value) => text10(value, 300) && !/https?:|javascript:|data:/i.test(value);
-  var fail8 = () => {
+  var fail9 = () => {
     throw Error("Citation lookup returned incomplete or unsupported source metadata. No passage was substituted.");
   };
   function citationSelection(args, rawQuery) {
@@ -13026,67 +16059,67 @@
   function source6(data, post) {
     const value = data.source;
     const name = post ? "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI): \u1E6C\u012Bk\u0101 and A\xF1\xF1a (post-canonical) books" : "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI)";
-    if (!object12(value) || value.name !== name || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text10(value.commit, 100) || !text10(value.attribution, 1e4) || !text10(value.terms, 1e4)) fail8();
+    if (!object12(value) || value.name !== name || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text10(value.commit, 100) || !text10(value.attribution, 1e4) || !text10(value.terms, 1e4)) fail9();
     try {
       sourceRevision({ source: { commit: value.commit } });
       sourceRevision(data);
     } catch {
-      fail8();
+      fail9();
     }
-    return { name: value.name, repository: value.repository, commit: value.commit, attribution: value.attribution, terms: value.terms, ...own11(value, "locator_revision") ? { locator_revision: value.locator_revision } : {} };
+    return { name: value.name, repository: value.repository, commit: value.commit, attribution: value.attribution, terms: value.terms, ...own12(value, "locator_revision") ? { locator_revision: value.locator_revision } : {} };
   }
   function alternatives(data, key4) {
-    if (!own11(data, key4)) return [];
-    if (!Array.isArray(data[key4]) || data[key4].length > 100) fail8();
+    if (!own12(data, key4)) return [];
+    if (!Array.isArray(data[key4]) || data[key4].length > 100) fail9();
     const seen = /* @__PURE__ */ new Set();
     return data[key4].map((row) => {
-      if (!object12(row) || !canonicalIdentity(row) || !text10(row.title) || seen.has(row.id) || own11(row, "canonical") && row.canonical !== true || own11(row, "read_with")) fail8();
+      if (!object12(row) || !canonicalIdentity(row) || !text10(row.title) || seen.has(row.id) || own12(row, "canonical") && row.canonical !== true || own12(row, "read_with")) fail9();
       seen.add(row.id);
-      if (own11(row, "matched_name") && !text10(row.matched_name) || own11(row, "title_roman") && !text10(row.title_roman)) fail8();
-      return { id: row.id, citation: row.citation, title: row.title, ...own11(row, "matched_name") ? { matched_name: row.matched_name } : {}, ...own11(row, "title_roman") ? { title_roman: row.title_roman } : {}, href: "#read?" + new URLSearchParams({ uid: row.id }) };
+      if (own12(row, "matched_name") && !text10(row.matched_name) || own12(row, "title_roman") && !text10(row.title_roman)) fail9();
+      return { id: row.id, citation: row.citation, title: row.title, ...own12(row, "matched_name") ? { matched_name: row.matched_name } : {}, ...own12(row, "title_roman") ? { title_roman: row.title_roman } : {}, href: "#read?" + new URLSearchParams({ uid: row.id }) };
     });
   }
   function validateCitationResolution(data, script = "roman") {
-    if (!SCRIPTS.includes(script) || !object12(data) || !citation(data.citation) || !text10(data.title) || !Array.isArray(data.notes) || data.notes.length > 100 || data.notes.some((note2) => !text10(note2, 1e4)) || own11(data, "approximate") && typeof data.approximate !== "boolean" || own11(data, "canonical") && ![true, false].includes(data.canonical)) fail8();
+    if (!SCRIPTS.includes(script) || !object12(data) || !citation(data.citation) || !text10(data.title) || !Array.isArray(data.notes) || data.notes.length > 100 || data.notes.some((note2) => !text10(note2, 1e4)) || own12(data, "approximate") && typeof data.approximate !== "boolean" || own12(data, "canonical") && ![true, false].includes(data.canonical)) fail9();
     const post = data.canonical === false;
     let context;
     if (post) {
       const command6 = data.read_with;
-      if (!text10(data.label, 1e4) || !object12(data.book) || data.book.canonical !== false || !id4(data.book.id) || !text10(data.book.title) || !object12(command6) || Object.keys(command6).some((key4) => !["tool", "citation", "script"].includes(key4)) || command6.tool !== "get_post_canonical" || command6.citation !== data.citation || own11(command6, "script") && command6.script !== script || own11(data, "also_named") || own11(data, "also_on_that_page")) fail8();
+      if (!text10(data.label, 1e4) || !object12(data.book) || data.book.canonical !== false || !id4(data.book.id) || !text10(data.book.title) || !object12(command6) || Object.keys(command6).some((key4) => !["tool", "citation", "script"].includes(key4)) || command6.tool !== "get_post_canonical" || command6.citation !== data.citation || own12(command6, "script") && command6.script !== script || own12(data, "also_named") || own12(data, "also_on_that_page")) fail9();
       context = { kind: "post", uid: command6.citation };
     } else {
-      if (!canonicalIdentity(data) || own11(data, "read_with") || own11(data, "label") || own11(data, "book")) fail8();
+      if (!canonicalIdentity(data) || own12(data, "read_with") || own12(data, "label") || own12(data, "book")) fail9();
       context = { uid: data.id };
     }
     const checked = { citation: data.citation, title: data.title, canonical: !post, notes: [...data.notes], source: source6(data, post), href: "#read?" + new URLSearchParams(context), also_named: alternatives(data, "also_named"), also_on_that_page: alternatives(data, "also_on_that_page") };
     for (const key4 of ["title_roman", "input_script", "input_romanized", "script", "script_note", "matched_by"]) {
-      if (own11(data, key4)) {
-        if (!text10(data[key4], 2e3)) fail8();
+      if (own12(data, key4)) {
+        if (!text10(data[key4], 2e3)) fail9();
         checked[key4] = data[key4];
       }
     }
-    if (own11(data, "script") && data.script !== script || own11(data, "input_script") && !SCRIPTS.includes(data.input_script) || own11(data, "input_romanized") !== own11(data, "input_script")) fail8();
-    if (own11(data, "input_normalised")) {
-      if (!text10(data.input_normalised, 4e3) && !(object12(data.input_normalised) && text10(data.input_normalised.note, 4e3))) fail8();
+    if (own12(data, "script") && data.script !== script || own12(data, "input_script") && !SCRIPTS.includes(data.input_script) || own12(data, "input_romanized") !== own12(data, "input_script")) fail9();
+    if (own12(data, "input_normalised")) {
+      if (!text10(data.input_normalised, 4e3) && !(object12(data.input_normalised) && text10(data.input_normalised.note, 4e3))) fail9();
       checked.input_normalised = typeof data.input_normalised === "string" ? data.input_normalised : data.input_normalised.note;
     }
-    if (own11(data, "name_match")) {
+    if (own12(data, "name_match")) {
       const match = data.name_match;
-      if (!object12(match) || !["query", "matched_name", "via", "match"].every((key4) => text10(match[key4], 1e3))) fail8();
+      if (!object12(match) || !["query", "matched_name", "via", "match"].every((key4) => text10(match[key4], 1e3))) fail9();
       checked.name_match = { query: match.query, matched_name: match.matched_name, via: match.via, match: match.match };
     }
-    for (const key4 of ["alignment_note", "alignment_method"]) if (own11(data, key4)) {
-      if (!text10(data[key4], 4e3)) fail8();
+    for (const key4 of ["alignment_note", "alignment_method"]) if (own12(data, key4)) {
+      if (!text10(data[key4], 4e3)) fail9();
       checked[key4] = data[key4];
     }
-    if (own11(data, "alignment")) {
-      if (!text10(data.alignment, 4e3) && !object12(data.alignment)) fail8();
+    if (own12(data, "alignment")) {
+      if (!text10(data.alignment, 4e3) && !object12(data.alignment)) fail9();
       const value = JSON.stringify(data.alignment);
-      if (value.length > 1e4) fail8();
+      if (value.length > 1e4) fail9();
       checked.alignment = JSON.parse(value);
     }
     if (post) checked.label = data.label;
-    if (own11(data, "approximate")) checked.approximate = data.approximate;
+    if (own12(data, "approximate")) checked.approximate = data.approximate;
     return checked;
   }
 
@@ -13303,13 +16336,13 @@
   var draftRecovered = false;
   var sameDraftBase = (a, b) => Boolean(a && b && Object.keys(a).length === Object.keys(b).length && Object.keys(a).every((key4) => Object.hasOwn(b, key4) && a[key4] === b[key4]));
   var sameDraftEntry = (a, b) => Boolean(a && b && a.draft === b.draft && sameDraftBase(a.bookmark, b.bookmark));
-  var withoutActiveDraftBase = (entries2, entry2) => entries2.filter((item) => !sameDraftBase(item.bookmark, entry2.bookmark));
+  var withoutActiveDraftBase = (entries2, entry3) => entries2.filter((item) => !sameDraftBase(item.bookmark, entry3.bookmark));
   var recoveryPage = 0;
   var draftRecoveryWarning = "Session draft recovery could not be confirmed. Your current edits remain in this tab. Save or export before closing or reloading.";
   function missingDraftRecovery() {
     return [...noteDrafts].some(([key4, value]) => {
       const active = activeDraftEntries.get(key4);
-      return !active || active.draft !== value || !draftJournalEntries.some((entry2) => sameDraftEntry(entry2, active));
+      return !active || active.draft !== value || !draftJournalEntries.some((entry3) => sameDraftEntry(entry3, active));
     });
   }
   function confirmedDraftWarning() {
@@ -13329,11 +16362,11 @@
     }
   }
   function stageDraft(original, value) {
-    const key4 = noteKey(original), previous = activeDraftEntries.get(key4), entry2 = { bookmark: copySavedRecord(previous?.bookmark || original), draft: value };
+    const key4 = noteKey(original), previous = activeDraftEntries.get(key4), entry3 = { bookmark: copySavedRecord(previous?.bookmark || original), draft: value };
     noteDrafts.set(key4, value);
-    activeDraftEntries.set(key4, entry2);
+    activeDraftEntries.set(key4, entry3);
     try {
-      draftJournalEntries = stageNoteDraftEntry(draftJournalEntries, entry2.bookmark, value);
+      draftJournalEntries = stageNoteDraftEntry(draftJournalEntries, entry3.bookmark, value);
       return writeDraftJournal();
     } catch {
       draftWarning = draftRecoveryWarning;
@@ -13341,9 +16374,9 @@
       return false;
     }
   }
-  function removeDraftEntry(entry2) {
+  function removeDraftEntry(entry3) {
     const before = draftJournalEntries;
-    draftJournalEntries = removeNoteDraftEntry(before, entry2);
+    draftJournalEntries = removeNoteDraftEntry(before, entry3);
     if (writeDraftJournal()) return true;
     draftJournalEntries = before;
     renderDraftRecovery();
@@ -13352,8 +16385,8 @@
   function prepareDraftClears(keys2) {
     const before = draftJournalEntries;
     for (const key4 of keys2) {
-      const entry2 = activeDraftEntries.get(key4);
-      if (entry2) draftJournalEntries = withoutActiveDraftBase(draftJournalEntries, entry2);
+      const entry3 = activeDraftEntries.get(key4);
+      if (entry3) draftJournalEntries = withoutActiveDraftBase(draftJournalEntries, entry3);
     }
     if (writeDraftJournal()) return before;
     draftJournalEntries = before;
@@ -13366,10 +16399,10 @@
       writeDraftJournal();
     }
   }
-  function discardDraft(key4, entry2) {
-    if (!sameDraftEntry(activeDraftEntries.get(key4), entry2) || noteDrafts.get(key4) !== entry2.draft) return false;
+  function discardDraft(key4, entry3) {
+    if (!sameDraftEntry(activeDraftEntries.get(key4), entry3) || noteDrafts.get(key4) !== entry3.draft) return false;
     const before = draftJournalEntries;
-    draftJournalEntries = withoutActiveDraftBase(before, entry2);
+    draftJournalEntries = withoutActiveDraftBase(before, entry3);
     if (!writeDraftJournal()) {
       draftJournalEntries = before;
       renderDraftRecovery();
@@ -13381,7 +16414,7 @@
     renderDraftRecovery();
     return true;
   }
-  function confirmDraftDiscard(host, entry2, action, returnFocus) {
+  function confirmDraftDiscard(host, entry3, action, returnFocus) {
     host.querySelector(".draft-discard-confirmation")?.remove();
     const group = el("div", void 0, "draft-discard-confirmation");
     group.setAttribute("role", "group");
@@ -13390,7 +16423,7 @@
       group.remove();
       if (returnFocus?.isConnected) returnFocus.focus({ preventScroll: true });
     });
-    group.append(el("p", entry2 ? "Discard only this unsaved draft? The saved note and other recovered drafts are kept. Download a copy first if you want it." : "Discard this tab\u2019s ENTIRE unreadable recovery record? It may contain several old drafts. Download it first if you want to keep it. Saved notes and current in-memory edits are kept.", "notice"), cancel, button("Discard this recovered draft", () => {
+    group.append(el("p", entry3 ? "Discard only this unsaved draft? The saved note and other recovered drafts are kept. Download a copy first if you want it." : "Discard this tab\u2019s ENTIRE unreadable recovery record? It may contain several old drafts. Download it first if you want to keep it. Saved notes and current in-memory edits are kept.", "notice"), cancel, button("Discard this recovered draft", () => {
       if (action()) return;
       const warning = el("p", "Draft not discarded. Its recovery copy could not be cleared or the draft changed. Keep or export it before trying again.", "notice");
       warning.setAttribute("role", "alert");
@@ -13404,7 +16437,7 @@
     if (!panel) return;
     let pending = [];
     try {
-      pending = reconcileNoteDraftJournal(draftJournalEntries, local.saved, noteDrafts).pending.filter(({ entry: entry2 }) => !sameDraftEntry(activeDraftEntries.get(noteKey(entry2.bookmark)), entry2));
+      pending = reconcileNoteDraftJournal(draftJournalEntries, local.saved, noteDrafts).pending.filter(({ entry: entry3 }) => !sameDraftEntry(activeDraftEntries.get(noteKey(entry3.bookmark)), entry3));
     } catch {
       draftWarning = draftRecoveryWarning;
     }
@@ -13439,14 +16472,14 @@
     const pages3 = Math.max(1, Math.ceil(pending.length / 25));
     recoveryPage = Math.max(0, Math.min(recoveryPage, pages3 - 1));
     if (pending.length) panel.append(el("p", `Recovered drafts: showing ${recoveryPage * 25 + 1}\u2013${Math.min((recoveryPage + 1) * 25, pending.length)} of ${pending.length}. All entries remain in the recovery download.`, "muted"));
-    for (const { entry: entry2, reason: reason2 } of pending.slice(recoveryPage * 25, (recoveryPage + 1) * 25)) {
-      const card = el("article", void 0, "segment"), label2 = el("label", "Recovered unsaved personal note \xB7 " + entry2.bookmark.ref), text11 = el("textarea");
+    for (const { entry: entry3, reason: reason2 } of pending.slice(recoveryPage * 25, (recoveryPage + 1) * 25)) {
+      const card = el("article", void 0, "segment"), label2 = el("label", "Recovered unsaved personal note \xB7 " + entry3.bookmark.ref), text11 = el("textarea");
       text11.readOnly = true;
-      text11.value = entry2.draft;
+      text11.value = entry3.draft;
       label2.append(text11);
-      card.append(el("h3", entry2.bookmark.title + " \xB7 " + entry2.bookmark.ref), el("p", reason2 === "active-draft" ? "A newer edit in this tab is kept. This older recovery version has not replaced it." : "Its original saved record is unavailable or changed (" + reason2 + "). This draft has not replaced or recreated any saved note or reference.", "notice"), label2, button("Download recovered draft", () => exportPersonal({ format: KEY, saved: [{ ...entry2.bookmark, note: entry2.draft }] }, "pali-library-recovered-draft.json")));
-      const discard = button("Discard recovered draft", () => confirmDraftDiscard(card, entry2, () => {
-        if (!removeDraftEntry(entry2)) return false;
+      card.append(el("h3", entry3.bookmark.title + " \xB7 " + entry3.bookmark.ref), el("p", reason2 === "active-draft" ? "A newer edit in this tab is kept. This older recovery version has not replaced it." : "Its original saved record is unavailable or changed (" + reason2 + "). This draft has not replaced or recreated any saved note or reference.", "notice"), label2, button("Download recovered draft", () => exportPersonal({ format: KEY, saved: [{ ...entry3.bookmark, note: entry3.draft }] }, "pali-library-recovered-draft.json")));
+      const discard = button("Discard recovered draft", () => confirmDraftDiscard(card, entry3, () => {
+        if (!removeDraftEntry(entry3)) return false;
         const target = panel.hidden ? $("content") : panel;
         target.tabIndex = -1;
         target.focus({ preventScroll: true });
@@ -13476,9 +16509,9 @@
       draftJournalEntries = parseNoteDraftJournal(draftJournalSnapshot);
       const recovered = reconcileNoteDraftJournal(draftJournalEntries, local.saved);
       for (const [key4, value] of recovered.drafts) noteDrafts.set(key4, value);
-      for (const entry2 of recovered.restored) activeDraftEntries.set(noteKey(entry2.bookmark), entry2);
+      for (const entry3 of recovered.restored) activeDraftEntries.set(noteKey(entry3.bookmark), entry3);
       draftRecovered = recovered.restored.length > 0;
-      for (const entry2 of recovered.settled) draftJournalEntries = removeNoteDraftEntry(draftJournalEntries, entry2);
+      for (const entry3 of recovered.settled) draftJournalEntries = removeNoteDraftEntry(draftJournalEntries, entry3);
       if (recovered.settled.length) writeDraftJournal();
       else renderDraftRecovery();
     } catch {
@@ -13604,13 +16637,13 @@
       row.remove();
       requestRows.delete(id5);
     }
-    for (const entry2 of entries2) if (!requestRows.has(entry2.id)) {
-      const row = el("div", void 0, "request-row"), stop = button("Stop waiting", entry2.stop);
-      row.dataset.group = entry2.group;
-      stop.setAttribute("aria-label", "Stop waiting for " + entry2.label);
-      row.append(el("span", "Waiting for " + entry2.label + "\u2026"), stop);
+    for (const entry3 of entries2) if (!requestRows.has(entry3.id)) {
+      const row = el("div", void 0, "request-row"), stop = button("Stop waiting", entry3.stop);
+      row.dataset.group = entry3.group;
+      stop.setAttribute("aria-label", "Stop waiting for " + entry3.label);
+      row.append(el("span", "Waiting for " + entry3.label + "\u2026"), stop);
       $("request-controls").append(row);
-      requestRows.set(entry2.id, row);
+      requestRows.set(entry3.id, row);
     }
     $("pending-requests").hidden = entries2.length === 0;
   } });
@@ -13677,16 +16710,18 @@
     const summary = data.chapter_summary, section = el("section");
     section.setAttribute("aria-label", "Canonical chapter summary \xB7 not poem text");
     section.append(el("h" + level, "Canonical chapter summary \xB7 not poem text"), el("p", summary.text, "translation"));
-    section.append(el("p", summary.parent_id === "thi-ap40" ? "Original summary counts and titles are preserved; they are not a measure of indexed translation coverage." : "The publisher\u2019s chapter summary is separate from this poem. Its ordering and stanza count differ from VRI; both editions remain unchanged."));
-    section.append(el("h" + level, "Chapter summary notes \xB7 editorial, not poem notes"));
-    const list = el("ol");
-    for (const note2 of summary.translator_notes) {
-      const item = el("li");
-      item.value = note2.number;
-      item.append(el("p", note2.text, "translator-note"));
-      list.append(item);
+    section.append(el("p", summary.parent_id === "thi-ap40" || summary.parent_id.startsWith("tha-ap") ? "Original summary counts and titles are preserved; they are not a measure of indexed translation coverage." : "The publisher\u2019s chapter summary is separate from this poem. Its ordering and stanza count differ from VRI; both editions remain unchanged."));
+    if (summary.translator_notes.length) {
+      section.append(el("h" + level, "Chapter summary notes \xB7 editorial, not poem notes"));
+      const list = el("ol");
+      for (const note2 of summary.translator_notes) {
+        const item = el("li");
+        item.value = note2.number;
+        item.append(el("p", note2.text, "translator-note"));
+        list.append(item);
+      }
+      section.append(list);
     }
-    section.append(list);
     target.append(section);
   }
   function collectionSummary(data, target, level) {
@@ -13711,7 +16746,7 @@
       const section = el("section");
       section.setAttribute("aria-label", "Publisher recitation division \xB7 not poem text");
       section.append(el("h" + level, "Publisher recitation division \xB7 not poem text"), el("p", division.label), el("p", division.text, "translation"));
-      section.append(el("p", "The publisher places this division before local stanza " + division.before_local_label + " (publisher stanza " + division.before_publisher_label + "). It is separate from the poem wording."));
+      section.append(el("p", division.placement === "after_poem" ? "The publisher places this recitation division after the poem\u2019s closing colophons. It is separate from the poem wording." : division.placement === "after_chapter_summary" ? "The publisher places this recitation division after the chapter summary. It is separate from the poem wording." : "The publisher places this division before local stanza " + division.before_local_label + " (publisher stanza " + division.before_publisher_label + "). It is separate from the poem wording."));
       if (division.translator_notes.length) {
         section.append(el("h" + level, "Recitation notes \xB7 editorial, not poem notes"));
         const list = el("ol");
@@ -14296,8 +17331,8 @@
   var savedRecord = (item) => local.saved.find((x) => x.uid === item.uid && x.ref === item.ref);
   var sameSavedRecord = (expected, token) => token === epoch && JSON.stringify(savedRecord(expected)) === JSON.stringify(expected);
   function replaceNoteDrafts(drafts) {
-    for (const [key4, entry2] of activeDraftEntries) if (!drafts.has(key4)) {
-      draftJournalEntries = withoutActiveDraftBase(draftJournalEntries, entry2);
+    for (const [key4, entry3] of activeDraftEntries) if (!drafts.has(key4)) {
+      draftJournalEntries = withoutActiveDraftBase(draftJournalEntries, entry3);
       activeDraftEntries.delete(key4);
     }
     noteDrafts.clear();
@@ -14371,9 +17406,9 @@
         message.textContent = "No unchanged draft is available to discard.";
         return;
       }
-      const key4 = noteKey(expected), entry2 = activeDraftEntries.get(key4);
-      confirmDraftDiscard(editor, entry2, () => {
-        if (!valid() || !discardDraft(key4, entry2)) return false;
+      const key4 = noteKey(expected), entry3 = activeDraftEntries.get(key4);
+      confirmDraftDiscard(editor, entry3, () => {
+        if (!valid() || !discardDraft(key4, entry3)) return false;
         input.value = typeof expected.note === "string" ? expected.note : "";
         editor.querySelector(".draft-discard-confirmation")?.remove();
         message.textContent = "Unsaved draft discarded. The saved note was kept.";
@@ -14591,6 +17626,64 @@
       warning(error);
     }
   }
+  function attachApadanaEditionNavigation(data, target, token) {
+    let navigation;
+    try {
+      navigation = apadanaEditionNavigation(data);
+    } catch (error2) {
+      target.append(el("p", error2.message, "notice"));
+      return;
+    }
+    if (!navigation) return;
+    const region = el("section", void 0, "chapter-navigation");
+    region.setAttribute("aria-label", "Reviewed publisher edition navigation");
+    const section = el("details");
+    section.append(el("summary", "Reviewed publisher edition order", "button"));
+    section.append(el("h3", navigation.title), el("p", navigation.note, "notice"), el("p", "Opening a poem loads its P\u0101li source. Choose its English source separately; no English is retrieved automatically.", "muted"));
+    const siblings = el("nav", void 0, "toolbar");
+    siblings.setAttribute("aria-label", "Reviewed publisher poem sequence");
+    if (navigation.previous) siblings.append(link("\u2190 Previous reviewed poem \xB7 " + navigation.previous.poem, navigation.previous.href, "button"));
+    if (navigation.next) siblings.append(link("Next reviewed poem \xB7 " + navigation.next.poem + " \u2192", navigation.next.href, "button"));
+    section.append(siblings);
+    const form = el("form", void 0, "chapter-picker"), label2 = el("label", "Poem in this reviewed publisher edition"), select = el("select"), open = el("button", "Open reviewed poem"), error = el("p");
+    error.hidden = true;
+    error.setAttribute("role", "alert");
+    for (const group of navigation.groups) {
+      const options = el("optgroup");
+      options.label = group.label;
+      for (const poem of group.poems) {
+        const option = el("option", poem.label);
+        option.value = poem.uid;
+        options.append(option);
+      }
+      select.append(options);
+    }
+    select.value = navigation.current.uid;
+    label2.append(select);
+    open.type = "submit";
+    form.append(label2, open, error);
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (token !== epoch || !form.isConnected) return;
+      try {
+        const href = apadanaEditionLink(data, select.value);
+        error.hidden = true;
+        select.removeAttribute("aria-invalid");
+        if (location.hash === href) render();
+        else location.hash = href;
+      } catch (failure3) {
+        error.textContent = failure3.message;
+        error.hidden = false;
+        select.setAttribute("aria-invalid", "true");
+        select.focus({ preventScroll: true });
+      }
+    });
+    section.append(form);
+    if (navigation.summary) section.append(link("Chapter summary source \xB7 publisher poem " + navigation.summary.poem, navigation.summary.href, "button"), el("p", "Open this reviewed poem and choose its English source to read the separately labelled chapter summary.", "muted"));
+    section.append(el("p", "Publisher revision: " + navigation.revision, "muted source-version"));
+    region.append(section);
+    target.append(region);
+  }
   async function read(args, token, { scriptRefresh = false, ownsFocus = () => false } = {}) {
     assertPageRequest(args);
     const book2 = args.get("book"), uid2 = args.get("uid") || "dhp183";
@@ -14676,6 +17769,7 @@
       sourceTools.append(context);
     }
     if (kind === "post") attachChapterNavigation(data, args, sourceTools, token);
+    if (kind === "canon") attachApadanaEditionNavigation(data, sourceTools, token);
     const positionContext = { ...readingArgs(selector), ...plan ? { plan: plan.name, day: plan.day } : {} };
     let navigation = null;
     try {
@@ -15169,9 +18263,9 @@
       if (!data[key4]?.length) continue;
       view.append(el("h3", title));
       const cards = el("div", void 0, "cards");
-      for (const entry2 of data[key4]) {
+      for (const entry3 of data[key4]) {
         const card = el("article", void 0, "entry");
-        card.append(el("strong", entry2.pali), el("p", entry2.meaning || entry2.gloss || ""), el("small", [entry2.pos, entry2.source].filter(Boolean).join(" \xB7 ")), link("Find this word in canonical texts", route("search", { q: entry2.pali, scope: "canon" })));
+        card.append(el("strong", entry3.pali), el("p", entry3.meaning || entry3.gloss || ""), el("small", [entry3.pos, entry3.source].filter(Boolean).join(" \xB7 ")), link("Find this word in canonical texts", route("search", { q: entry3.pali, scope: "canon" })));
         cards.append(card);
       }
       view.append(cards);

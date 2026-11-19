@@ -30,7 +30,12 @@ args = parser.parse_args()
 server_dir = args.server_dir.resolve() if args.server_dir else ROOT / 'server'
 manifest = json.loads((server_dir / 'data/apadana.json').read_text())
 assert manifest == json.loads((ROOT / 'server/data/apadana.json').read_text())
-rows, commit = manifest['links'], manifest['source']['commit']
+combined_rows, commit = manifest['links'], manifest['source']['commit']
+theri_ids = {'thi-ap' + str(n) for n in range(1, 41)}
+thera_ids = {'tha-ap' + str(n) for n in range(13, 33)}
+assert set(combined_rows) == theri_ids | thera_ids, 'Unexpected combined publisher-source scope'
+# These historical journeys own only the Therī chapter-4 profiles; publisher numbers overlap Therā.
+rows = {uid: row for uid, row in combined_rows.items() if uid in theri_ids}
 assert tuple(uid for uid in rows if uid in IDS) == IDS
 assert set(rows) == {'thi-ap' + str(n) for n in range(1, 41)}
 assert subprocess.check_output(['git', '-C', str(args.source_root), 'rev-parse', 'HEAD'], text=True).strip() == commit

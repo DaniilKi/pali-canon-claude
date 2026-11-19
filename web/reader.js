@@ -1,3 +1,4 @@
+import { apadanaEditionNavigation, apadanaEditionLink } from './apadana-edition-navigation.mjs';
 import { parseNoteDraftJournal, stageNoteDraftEntry, removeNoteDraftEntry, reconcileNoteDraftJournal, guardedNoteDraftJournalWrite } from './note-draft-recovery.mjs';
 import { createFocusOwnership } from './focus-ownership.mjs';
 import { bookmarkLocation } from './bookmark-location.mjs';
@@ -231,11 +232,14 @@ function chapterSummary(data, target, level) {
   const summary = data.chapter_summary, section = el('section');
   section.setAttribute('aria-label', 'Canonical chapter summary · not poem text');
   section.append(el('h' + level, 'Canonical chapter summary · not poem text'), el('p', summary.text, 'translation'));
-  section.append(el('p', summary.parent_id === 'thi-ap40' ? 'Original summary counts and titles are preserved; they are not a measure of indexed translation coverage.' : 'The publisher’s chapter summary is separate from this poem. Its ordering and stanza count differ from VRI; both editions remain unchanged.'));
-  section.append(el('h' + level, 'Chapter summary notes · editorial, not poem notes'));
-  const list = el('ol');
-  for (const note of summary.translator_notes) { const item = el('li'); item.value = note.number; item.append(el('p', note.text, 'translator-note')); list.append(item); }
-  section.append(list); target.append(section);
+  section.append(el('p', (summary.parent_id === 'thi-ap40' || summary.parent_id.startsWith('tha-ap')) ? 'Original summary counts and titles are preserved; they are not a measure of indexed translation coverage.' : 'The publisher’s chapter summary is separate from this poem. Its ordering and stanza count differ from VRI; both editions remain unchanged.'));
+  if (summary.translator_notes.length) {
+    section.append(el('h' + level, 'Chapter summary notes · editorial, not poem notes'));
+    const list = el('ol');
+    for (const note of summary.translator_notes) { const item = el('li'); item.value = note.number; item.append(el('p', note.text, 'translator-note')); list.append(item); }
+    section.append(list);
+  }
+  target.append(section);
 }
 
 function collectionSummary(data, target, level) {
@@ -255,7 +259,7 @@ function publisherDivisions(data, target, level) {
     const section = el('section');
     section.setAttribute('aria-label', 'Publisher recitation division · not poem text');
     section.append(el('h' + level, 'Publisher recitation division · not poem text'), el('p', division.label), el('p', division.text, 'translation'));
-    section.append(el('p', 'The publisher places this division before local stanza ' + division.before_local_label + ' (publisher stanza ' + division.before_publisher_label + '). It is separate from the poem wording.'));
+    section.append(el('p', division.placement === 'after_poem' ? 'The publisher places this recitation division after the poem’s closing colophons. It is separate from the poem wording.' : division.placement === 'after_chapter_summary' ? 'The publisher places this recitation division after the chapter summary. It is separate from the poem wording.' : 'The publisher places this division before local stanza ' + division.before_local_label + ' (publisher stanza ' + division.before_publisher_label + '). It is separate from the poem wording.'));
     if (division.translator_notes.length) {
       section.append(el('h' + level, 'Recitation notes · editorial, not poem notes'));
       const list = el('ol');
@@ -734,6 +738,36 @@ function attachChapterNavigation(data, args, host, token) {
     else section.remove();
   } catch (error) { warning(error); }
 }
+function attachApadanaEditionNavigation(data, target, token) {
+  let navigation;
+  try { navigation = apadanaEditionNavigation(data); }
+  catch (error) { target.append(el('p', error.message, 'notice')); return; }
+  if (!navigation) return;
+  const region = el('section', undefined, 'chapter-navigation'); region.setAttribute('aria-label', 'Reviewed publisher edition navigation');
+  const section = el('details'); section.append(el('summary', 'Reviewed publisher edition order', 'button'));
+  section.append(el('h3', navigation.title), el('p', navigation.note, 'notice'), el('p', 'Opening a poem loads its Pāli source. Choose its English source separately; no English is retrieved automatically.', 'muted'));
+  const siblings = el('nav', undefined, 'toolbar'); siblings.setAttribute('aria-label', 'Reviewed publisher poem sequence');
+  if (navigation.previous) siblings.append(link('← Previous reviewed poem · ' + navigation.previous.poem, navigation.previous.href, 'button'));
+  if (navigation.next) siblings.append(link('Next reviewed poem · ' + navigation.next.poem + ' →', navigation.next.href, 'button'));
+  section.append(siblings);
+  const form = el('form', undefined, 'chapter-picker'), label = el('label', 'Poem in this reviewed publisher edition'), select = el('select'), open = el('button', 'Open reviewed poem'), error = el('p');
+  error.hidden = true; error.setAttribute('role', 'alert');
+  for (const group of navigation.groups) {
+    const options = el('optgroup'); options.label = group.label;
+    for (const poem of group.poems) { const option = el('option', poem.label); option.value = poem.uid; options.append(option); }
+    select.append(options);
+  }
+  select.value = navigation.current.uid; label.append(select); open.type = 'submit'; form.append(label, open, error);
+  form.addEventListener('submit', event => {
+    event.preventDefault(); if (token !== epoch || !form.isConnected) return;
+    try { const href = apadanaEditionLink(data, select.value); error.hidden = true; select.removeAttribute('aria-invalid'); if (location.hash === href) render(); else location.hash = href; }
+    catch (failure) { error.textContent = failure.message; error.hidden = false; select.setAttribute('aria-invalid', 'true'); select.focus({preventScroll: true}); }
+  });
+  section.append(form);
+  if (navigation.summary) section.append(link('Chapter summary source · publisher poem ' + navigation.summary.poem, navigation.summary.href, 'button'), el('p', 'Open this reviewed poem and choose its English source to read the separately labelled chapter summary.', 'muted'));
+  section.append(el('p', 'Publisher revision: ' + navigation.revision, 'muted source-version')); region.append(section); target.append(region);
+}
+
 async function read(args, token, { scriptRefresh = false, ownsFocus = () => false } = {}) {
   assertPageRequest(args);
   const book = args.get('book'), uid = args.get('uid') || 'dhp183'; let offset = offsetOf(args), plan = null, window = null;
@@ -768,6 +802,7 @@ async function read(args, token, { scriptRefresh = false, ownsFocus = () => fals
   view.append(toolbar); responsivePanels({ preserveFinder: true });
   if (intro.context.length) { const context = el('section', undefined, 'source-context'); context.setAttribute('aria-label', 'Source context'); context.append(el('h3', 'Source context')); for (const original of intro.context) context.append(el('p', original, 'notice')); sourceTools.append(context); }
   if (kind === 'post') attachChapterNavigation(data, args, sourceTools, token);
+  if (kind === 'canon') attachApadanaEditionNavigation(data, sourceTools, token);
   const positionContext = { ...readingArgs(selector), ...(plan ? { plan: plan.name, day: plan.day } : {}) };
   let navigation = null;
   try {

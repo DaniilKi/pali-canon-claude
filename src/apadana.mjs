@@ -1,26 +1,17 @@
 /** Finite, live-only Walters/Whitman Apadāna. No translated bodies are bundled. */
-import { createHash } from 'node:crypto';
-import { fetchPublic, decodeHtml } from './http.mjs';
+import { fetchPublic } from './http.mjs';
+import { digest, plainMarkdown } from './apadana-presentation.mjs';
+import { parseTheraApadana } from './apadana-thera.mjs';
+import { THERA_APADANA_PROFILES } from './apadana-thera-profiles.mjs';
+export { digest, plainMarkdown };
 import { APADANA_PROFILES, APADANA_COMMIT, APADANA_LICENSE, APADANA_TRANSLATOR, APADANA_LICENSE_URL } from './apadana-profiles.mjs';
-export const digest = value => createHash('sha256').update(value).digest('hex');
 const fail = () => { throw new Error('Apadāna source metadata or content differs from the reviewed pinned publication.'); };
 export const rootDigest = (unit, book) => digest(JSON.stringify({ id: unit.id, book: unit.book, start: unit.start, end: unit.end, blocks: book.blocks.slice(unit.start, unit.end) }));
 
-/** Pandoc's adjacent alternatives are reduced BEFORE unescaping brackets. Never consume an outer bracket. */
-export function plainMarkdown(value) {
-  let text = String(value).replace(/\[([^\[\]]*)\]\{\.diacritics data-state=on\}\[([^\[\]]*)\]\{\.no-diacritics data-state=off\}/g, '$1');
-  if (/\{\.(?:no-)?diacritics\b/.test(text)) fail();
-  text = text.replace(/\[\^(\d+)\]/g, '[Note $1]')
-    .replace(/<abbr title="[^"]*">([^<>]*)<\/abbr>/g, '$1');
-  if (/[<>]/.test(text)) fail();
-  text = decodeHtml(text).replace(/\\([\\`*{}\[\]()#+.!_>-])/g, '$1')
-    .replace(/^#{1,3}\s+/gm, '').replace(/\*([^*\n]+)\*/g, '$1')
-    .replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
-  return text;
-}
 
 export function parseApadana(raw, profile) {
   if (typeof raw !== 'string' || raw.includes('\r') || !profile) fail();
+  if (Object.hasOwn(THERA_APADANA_PROFILES, profile.id)) return parseTheraApadana(raw, profile);
   if (profile.poem >= 11 && profile.poem <= 40) return parseReviewedChapter(raw, profile);
   const front = raw.match(/^---\n([^]*?)\n---\n/);
   if (!front) fail();
@@ -174,12 +165,12 @@ function parseReviewedChapter(raw, profile) {
 export function validateLink(link, id, unit, book) {
   const profile = Object.values(APADANA_PROFILES).find(p => p.path === link?.path);
   if (!profile || (id !== undefined && (id !== profile.id || !unit || !book))) fail();
-  for (const key of ['source', 'path', 'url', 'raw_url', 'translator', 'license', 'translation_revision', 'raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256', 'note_count']) {
+  for (const key of ['id', 'poem', 'source', 'path', 'url', 'raw_url', 'translator', 'license', 'translation_revision', 'raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256', 'note_count']) {
     if (link[key] !== profile[key]) fail();
   }
   if (['partial_scope', 'shared_scope', 'section', 'parts'].some(key => Object.hasOwn(link, key))) fail();
   for (const key of ['title', 'reference', 'mapping_notes']) if (JSON.stringify(link[key]) !== JSON.stringify(profile[key])) fail();
-  for (const key of ['index_revision', 'publisher_verse_labels', 'publisher_preface', 'chapter_summary', 'collection_summary', 'note_numbers', 'root_verses', 'stanza_layout', 'publisher_divisions']) {
+  for (const key of ['publisher_chapter', 'index_revision', 'publisher_verse_labels', 'publisher_preface', 'chapter_summary', 'collection_summary', 'note_numbers', 'root_verses', 'stanza_layout', 'publisher_divisions']) {
     if (Object.hasOwn(link, key) !== Object.hasOwn(profile, key) || JSON.stringify(link[key]) !== JSON.stringify(profile[key])) fail();
   }
   if (link.english !== undefined && link.english !== profile.title) fail();
@@ -215,6 +206,7 @@ export async function translation(link) {
   if (digest(raw) !== profile.raw_sha256) fail();
   const result = parseApadana(raw, profile);
   if (digest(result.text) !== profile.body_sha256 || digest(JSON.stringify(result.translator_notes)) !== profile.notes_sha256 || digest(result.publisher_paratext) !== profile.paratext_sha256) fail();
+  const theri = !Object.hasOwn(THERA_APADANA_PROFILES, profile.id);
   return { ...result, source: 'apadana', url: profile.url, fetched_from: 'official pinned repository', fetched_url: profile.raw_url,
     translator: APADANA_TRANSLATOR, attribution: 'Jonathan S. Walters and Whitman College, Legends of the Buddhist Saints. No endorsement is implied.',
     license: APADANA_LICENSE, license_url: APADANA_LICENSE_URL, translation_revision: APADANA_COMMIT,
@@ -222,11 +214,12 @@ export async function translation(link) {
     paratext_sha256: profile.paratext_sha256, root_sha256: profile.root_sha256,
     mapping_notes: [...profile.mapping_notes],
     changes: 'Presentation extraction: retain diacritics; remove alternate no-diacritic display, Markdown and abbreviation markup; preserve interpolations and both numbering systems; label and separate translator notes and publisher preface. Chapter summary and its original note number, where present, are separately scoped outside the poem. No translation wording is generated.'
-      + (profile.poem === 17 ? ' The publisher recitation division and its original note 21 are displayed separately, before the identified publisher stanza, outside poem text and quotation evidence.' : '')
-      + ([18, 24, 27, 33].includes(profile.poem) ? ' Exact paired HTML display spans retain the diacritic spelling and remove only its alternate display; original editorial placeholders remain unchanged.' : '')
-      + (profile.poem === 31 ? ' The fourth-chapter publisher preface owns original note 1, separately from poem notes 2–18. Original duplicate local stanza 11 is retained; no number is inferred or corrected.' : '')
-      + (profile.poem === 40 ? ' The publisher collection summary and its original notes 11–12 are separately scoped from the chapter summary and notes 8–10 and from poem text and notes 1–7. Original summary counts and closing colophons are retained without inferring complete VRI line alignment.' : '')
-      + (profile.poem === 19 ? ' One paragraph break separates printed publisher stanza 534 from local 24/global 535, originally printed in the same paragraph; wording and labels are unchanged.' : '')
-      + (profile.poem === 21 ? ' One paragraph break separates the publisher combined local 38-39/global 676-677 stanza from local 40/global 678; wording and labels are unchanged.' : '')
-      + (profile.poem === 28 ? ' The publisher fourth recitation division is displayed separately before local 50/global 1009; it owns no notes, and stanza notes stay with their original stanzas. One paragraph break separates printed local 63 and 64; no wording or labels are changed.' : '') };
+      + (!theri ? ' Finite Therā presentation removes only reviewed definition and local abbreviation-link wrappers, retaining their wording. Original malformed numbering and unmatched emphasis remain unchanged. Separately owned recitation endings and chapter summaries stay outside poem text and quotation evidence; empty apparatus note lists are not invented.' : '')
+      + (theri && profile.poem === 17 ? ' The publisher recitation division and its original note 21 are displayed separately, before the identified publisher stanza, outside poem text and quotation evidence.' : '')
+      + (theri && [18, 24, 27, 33].includes(profile.poem) ? ' Exact paired HTML display spans retain the diacritic spelling and remove only its alternate display; original editorial placeholders remain unchanged.' : '')
+      + (theri && profile.poem === 31 ? ' The fourth-chapter publisher preface owns original note 1, separately from poem notes 2–18. Original duplicate local stanza 11 is retained; no number is inferred or corrected.' : '')
+      + (theri && profile.poem === 40 ? ' The publisher collection summary and its original notes 11–12 are separately scoped from the chapter summary and notes 8–10 and from poem text and notes 1–7. Original summary counts and closing colophons are retained without inferring complete VRI line alignment.' : '')
+      + (theri && profile.poem === 19 ? ' One paragraph break separates printed publisher stanza 534 from local 24/global 535, originally printed in the same paragraph; wording and labels are unchanged.' : '')
+      + (theri && profile.poem === 21 ? ' One paragraph break separates the publisher combined local 38-39/global 676-677 stanza from local 40/global 678; wording and labels are unchanged.' : '')
+      + (theri && profile.poem === 28 ? ' The publisher fourth recitation division is displayed separately before local 50/global 1009; it owns no notes, and stanza notes stay with their original stanzas. One paragraph break separates printed local 63 and 64; no wording or labels are changed.' : '') };
 }

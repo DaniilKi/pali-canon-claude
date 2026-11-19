@@ -33,7 +33,8 @@ for (const artifact of APADANA_RIGHTS) {
 }
 const links = {};
 for (const [id, p] of Object.entries(APADANA_PROFILES)) {
-  const path = `src/_poems/chapter-4/poem-${String(p.poem).padStart(3, '0')}.md`;
+  const path = `src/_poems/${p.publisher_chapter || 'chapter-4'}/poem-${String(p.poem).padStart(3, '0')}.md`;
+  same(p.raw_url, `https://raw.githubusercontent.com/apadana-translation/apadana-site/${APADANA_COMMIT}/${path}`, `${id} exact source path`);
   const raw = await read(path), extracted = parseApadana(raw, p), u = canon.units.find(u => u.id === id);
   same(digest(raw), p.raw_sha256, `${id} raw`);
   same(digest(extracted.text), p.body_sha256, `${id} body`);
@@ -74,7 +75,7 @@ const manifest = {
     translator: APADANA_TRANSLATOR, publisher: 'Jonathan S. Walters and Whitman College', license: APADANA_LICENSE, license_url: APADANA_LICENSE_URL,
     notice_url: 'https://apadanatranslation.com/about/', checked: '2026-11-19', rights_artifacts: rights,
     rights_note: 'Explicit translation grant in About, LICENSE.md, footer and ePub metadata is CC BY-NC-SA 4.0. Conflicting generic CC-BY site.json does not relax those terms. No warranty or endorsement is implied.',
-    policy: 'Live only, forty finite complete publisher-edition Therī poems; original publisher preface, chapter/collection summaries, recitation divisions and their notes separately scoped; no line-complete VRI claim or wider Apadāna coverage; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI.' },
+    policy: 'Live only, sixty finite complete publisher-edition poems (forty Therī and twenty explicitly mapped Therā); original publisher preface, chapter/collection summaries, recitation divisions and their notes separately scoped; no line-complete VRI claim or approval of the wider Apadāna catalogue; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI.' },
   vri_commit: APADANA_VRI_COMMIT,
   held: {},
   links,

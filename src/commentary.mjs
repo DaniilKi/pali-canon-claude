@@ -143,12 +143,30 @@ export function readBook(uid, { offset = 0, limit = 40 } = {}) {
 
 function sourceInfo(d, unit) {
   const { name, repository, commit, files, attribution, terms } = d.source;
-  // D209 changes SN21/c* ownership while retaining authentic edition provenance.
-  // Pin its actual tuple list so a subsequent mapping edit also requires review.
-  const mapping = unit?.id === 'sn12.21' && d.units[unit.id]?.map(i => d.passages[i]);
+  // These finite aligned selections changed ownership; direct source books and
+  // every other unit retain their authentic edition-only locator identity.
+  // Keep the established SN21 namespace and actual tuple hash unchanged.
+  const namespace = unit?.id === 'sn12.21' ? 'sn21-commentary' : unit?.id === 'tha-ap19' ? 'tha19-c' : null;
+  const mapping = namespace && d.units[unit.id]?.map(i => d.passages[i]);
   const revision = mapping && createHash('sha256').update(JSON.stringify(mapping)).digest('hex').slice(0,24);
   return { name, repository, commit, files, attribution, terms,
-    ...(revision ? { locator_revision: `${commit}-sn21-commentary-${revision}` } : {}) };
+    ...(revision ? { locator_revision: `${commit}-${namespace}-${revision}` } : {}) };
+}
+
+/** Resolve only source metadata before any exact aligned/book segment lookup. */
+export function commentaryReadingSource(uid) {
+  const d = load();
+  if (!d) throw new Error('Bundled commentary data is missing. Reinstall the extension.');
+  const reference = romanizeInput(uid).text;
+  if (reference === 'commentary' || reference === 'commentary:') return sourceInfo(d);
+  if (reference.startsWith('commentary:')) {
+    const match = reference.match(/^commentary:([a-z0-9_.-]+)(?:\/c([1-9]\d*))?$/);
+    if (!match || !d.books.some(book => book.file === match[1])) throw new Error('Unknown commentary book reference. Use get_commentary with uid "commentary" to list bundled book references.');
+    return sourceInfo(d);
+  }
+  const anchor = reference.match(/^([^/]+)\/c([1-9]\d*)$/);
+  const { unit } = canon.resolve(anchor ? anchor[1] : reference);
+  return sourceInfo(d, unit);
 }
 
 function describePassage(d, pi) {

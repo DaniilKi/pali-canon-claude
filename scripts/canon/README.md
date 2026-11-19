@@ -460,3 +460,7 @@ For the ten new actual-source reader journeys, run `python scripts/web-reader-an
 ### D246 final Therī Apadāna boundary repairs
 
 `apadana_fourth_spans.py` follows D245 and atomically moves33/34→10196,34/35→10285,36/37→10457. Only33–37receive `apadana-theri31-40-v1`; source words and prior30units are unchanged. `repair_apadana_fourth_spans.py` verifies originalXML/fullbook, refuses allpartial/foreignstates, preservescommentary and isidempotent. Rebuildparallels. Reverse this5unitmetadata repair before the historicalD245/D244/D243hash chain.31keepschapteropening9949;35’s originalVRIrecitation10381remainsuntranslated bythepublisher.40’s chapter10659–10665 andcollection10665–10672 areseparate apparatus,notpoemwords. [Implementation/evidence](../../docs/data/apadana-fourth-chapter.md).
+
+### D247 finite Therā root and commentary repair
+
+`apadana_thera_spans.py` repairs the four canonical metadata records at19/20→2360and23/24→2667 with `apadana-thera11-30-v1`. The atomic wrapper `repair_apadana_thera_spans.py` also removes only the false19→8918commentary edge while preserving the correct20edge and all wording. It verifies original root/commentary XML/book parity and idempotence. Rebuildparallels; explicitlyreverse4units+soleedge beforehistoricalD246/D245/D244/D243receipts. Root19recitation2359androot32summary3107–3113/recitation3113remainowned. [Implementation/evidence](../../docs/data/apadana-thera-and-edition.md).

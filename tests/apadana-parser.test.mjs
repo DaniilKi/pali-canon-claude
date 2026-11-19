@@ -45,7 +45,7 @@ test('missing or reordered stanzas, undefined notes and unexpected summaries fai
 
 test('finite metadata binds each whole root, provenance and rights with no bodies bundled', () => {
   assert.equal(APADANA_LICENSE,'CC BY-NC-SA 4.0');
-  assert.deepEqual(Object.keys(manifest.links),Array.from({length:40},(_,i)=>'thi-ap'+(i+1)));
+  assert.deepEqual(Object.keys(manifest.links),[...Array.from({length:40},(_,i)=>'thi-ap'+(i+1)),...Array.from({length:20},(_,i)=>'tha-ap'+(i+13))]);
   const c=JSON.parse(gunzipSync(readBundled(new URL('../server/data/canon.json.gz',import.meta.url))));
   for(const [id,link]of Object.entries(manifest.links)){
     const u=c.units.find(u=>u.id===id),b=c.books[u.book];
@@ -61,7 +61,7 @@ test('finite metadata binds each whole root, provenance and rights with no bodie
 
 test('actual pinned extraction can be independently replayed without retaining publisher fixtures', { skip:!process.env.APADANA_SOURCE_CHECKOUT }, () => {
   for(const p of Object.values(APADANA_PROFILES)){
-    const raw=readFileSync(`${process.env.APADANA_SOURCE_CHECKOUT}/src/_poems/chapter-4/poem-${String(p.poem).padStart(3,'0')}.md`,'utf8');
+    const raw=readFileSync(`${process.env.APADANA_SOURCE_CHECKOUT}/src/_poems/${p.publisher_chapter||'chapter-4'}/poem-${String(p.poem).padStart(3,'0')}.md`,'utf8');
     const value=parseApadana(raw,p);
     assert.equal(value.translator_notes.length,p.note_count);
     if(p.stanza_layout) assert.equal(value.text.split(/\n\n/).length,p.stanza_layout.length+3);

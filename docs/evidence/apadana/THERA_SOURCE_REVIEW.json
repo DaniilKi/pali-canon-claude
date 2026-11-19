@@ -1,0 +1,766 @@
+{
+  "review_type": "Independent full literal source/semantic/rights/ownership review and metadata-only extraction. No English project parser was used for goldens. Not specialist certification, runtime implementation approval or final-commit CI acceptance.",
+  "baseline": "a29607d42572f6b67d070ccad6c68a6ebd8976ef",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "decision": "APPROVE all20exact complete publisher-edition poem scopes in the two selected chapters, after the specified four-unit repair and finite presentation/ownership safeguards. No ambiguous narrative scope remains held; all actual omissions and differing interpretations stay visible. This does not mean line-complete VRI English.",
+  "goldens_sha256": "b9871aa98d2c03c94fd2544db55f69ad863e804b2aab9669a308166589f0611a",
+  "totals": {
+    "poems": 20,
+    "physical_publisher_stanzas": 327,
+    "body_paragraphs": 387,
+    "poem_notes": 153,
+    "apparatus_notes": 0,
+    "source_blobs": 20,
+    "rights_blobs": 6,
+    "routing_blobs": 1
+  },
+  "rights": [
+    {
+      "path": "LICENSE.md",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "raw_sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "bytes": 19093,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/LICENSE.md"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "raw_sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "bytes": 12404,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_pages/about.md"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "raw_sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "bytes": 555,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/site/footer.njk"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "raw_sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "bytes": 603,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/layouts/epub-metadata.xml"
+    },
+    {
+      "path": "src/_data/site.json",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "raw_sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "bytes": 659,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_data/site.json"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "raw_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "bytes": 135,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/_poems.json"
+    }
+  ],
+  "publisher_routing": {
+    "path": "src/_poems/chapter-3/chapter-3.json",
+    "git_blob_sha1": "8c453df465b0cd793bb169ab2398192dbd7db0a0",
+    "raw_sha256": "50b6544f4689f2fcbd9287a86890cdcd6993c62b94ebcfb2d5419546f9ded2e0",
+    "bytes": 27,
+    "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/chapter-3.json"
+  },
+  "rights_decision": "Explicit translation/site-code grant in About and pinned LICENSE/footer/ePub metadata is CC BY-NC-SA4.0. Preserve Jonathan S. Walters/Whitman College attribution, source/licence links and presentation changes; no endorsement. Generic site.json CC-BY4.0 does not relax it. No audio fetched or audio rights inferred.",
+  "global_contracts": [
+    "Preserve every previously approved Therī40profile object and Pāli reading sequence, source alternatives/holds and all local-only private data. No silent saved-location rebasing.",
+    "Use a separate exact publisher_chapter chapter-3 namespace and explicit canonical id per record. Same poem numbers in chapter-4remain unrelated; no numeric offset is runtime authority.",
+    "Only canonical19/20and23/24get apadana-thera11-30-v1 after atomic splits2360and2667. Preserve original Pāli2359recitation and all source blocks/notes/pages/commentary.",
+    "All153original note definitions belong to their individual poem; two chapter prefaces, two summaries and two recitation markers own no notes. Preserve original IDs and no empty notes heading for apparatus.",
+    "All327printed stanza entries, including missing/duplicate/malformed/combined labels, are distinct from canonical numbered-stanza totals. Only stanza body is quotation evidence; no title, preface, note, colophon, summary or recitation enters it.",
+    "No paragraph splits are needed. Reduce only exact pinned dfn/abbr/local-PTS-BJTS-anchor wrappers, the known four paired c/ch displays in source21and existing adjacent Pandoc display alternatives. No general HTML approval or external-link fetch.",
+    "Retain original editorial placeholders, incomplete punctuation and source22unmatched emphasis residue; every presentation-only change is described and all wording stays live-only. No audio fetched or audio-rights claim.",
+    "Put each edition_findings omission/difference in visible source mapping_notes; required-contract metadata alone is insufficient reader disclosure."
+  ],
+  "poems": [
+    {
+      "id": "tha-ap13",
+      "publisher_chapter": "chapter-3",
+      "poem": 11,
+      "title": "Sīhāsanadāyaka",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Siddhattha relic-era lion-throne, foot-stool and shelter gift; Tusita mansion and later royal rewards; matching two colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 12,
+        "body_paragraphs": 15,
+        "poem_notes": 7
+      },
+      "edition_findings": [
+        "Publisher local5/global678states seven thousand maidens; VRI5main states one hundred thousand, with satta retained as a variant. Preserve note3and both authentic count formulations.",
+        "Publisher preface names the Sīhāsana chapter; VRI heading uses Sīhāsaniyavagga. Keep publisher and canonical spellings, without renaming the root."
+      ],
+      "required_contracts": [
+        "12publisher stanzas and15bodyparagraphs; all7notes poem-owned, including title note1. Preface has zero notes and uses the existing publisher_paratext string, not a new noted-preface scope."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap13",
+        "book": 36,
+        "start": 2048,
+        "end": 2088,
+        "root_sha256": "b76bd4bafecc124b242419039fe2a3987ee175ef0d32925c264eb562dade454b",
+        "vri": "1–12",
+        "index_revision": null,
+        "first_ref": "tha-ap13/1",
+        "last_ref": "tha-ap13/16"
+      }
+    },
+    {
+      "id": "tha-ap14",
+      "publisher_chapter": "chapter-3",
+      "poem": 12,
+      "title": "Ekatthambhika",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Lay group lacks a pillar for Siddhattha’s hut; donor supplies it, receives mansion and royal rewards; matching colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 14,
+        "body_paragraphs": 17,
+        "poem_notes": 6
+      },
+      "edition_findings": [
+        "Publisher local8/global693has a hundred-storey mansion, matching a VRI20satabhūmaṃ variant while the main root has seven storeys.",
+        "Publisher local11/global696again states a hundred-storey mansion; VRI23main states seven, with no corresponding hundred-storey variant recorded in that block. Do not harmonize either.",
+        "The publication’s note4describes its chosen entertainment verb against another edition reading; retain its original note rather than supplementing the poem."
+      ],
+      "required_contracts": [
+        "14stanzas/17bodyparagraphs, all6notes poem-owned."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap14",
+        "book": 36,
+        "start": 2088,
+        "end": 2133,
+        "root_sha256": "77a4d9880dd219f15b5b32312dacb756b2b06344313c7a946beaf3d1ea928682",
+        "vri": "13–26",
+        "index_revision": null,
+        "first_ref": "tha-ap14/1",
+        "last_ref": "tha-ap14/17"
+      }
+    },
+    {
+      "id": "tha-ap15",
+      "publisher_chapter": "chapter-3",
+      "poem": 13,
+      "title": "Nanda",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Khoma cloth offering to Padumuttara, prediction of Gotama’s younger brother and renunciation, royal lifetimes and matching colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 8,
+        "body_paragraphs": 11,
+        "poem_notes": 6
+      },
+      "edition_findings": [
+        "Publisher title Nanda and narrative distinguish this monk from the previously approved Therī Nandā subjects; shared names do not authorize merged identities.",
+        "Publisher local6/global705preserves seven-thousandth and sixty-thousandth aeons; its original note4records a hundred-thousandth alternate. VRI32main and sata variant remain independent.",
+        "Publisher names Cela/Upacela retain their source display spelling; VRI uses ceḷa/ceḷanāmakā forms. Do not normalize editions."
+      ],
+      "required_contracts": [
+        "8stanzas/11bodyparagraphs, all6notes poem-owned."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap15",
+        "book": 36,
+        "start": 2133,
+        "end": 2160,
+        "root_sha256": "60e6c4bfd9469a5f85eb672695d1b98c08bb785e36c12704ffd38e020b871d18",
+        "vri": "27–34",
+        "index_revision": null,
+        "first_ref": "tha-ap15/1",
+        "last_ref": "tha-ap15/11"
+      }
+    },
+    {
+      "id": "tha-ap16",
+      "publisher_chapter": "chapter-3",
+      "poem": 14,
+      "title": "Culla-Panthaka",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Flower umbrella to meditating Padumuttara; brothers’ prophecy, dismissal, Buddha’s intervention, cloth and liberation; matching Culla/Cūḷa Panthaka identity.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 20,
+        "body_paragraphs": 23,
+        "poem_notes": 10
+      },
+      "edition_findings": [
+        "Publisher local3/global710negates interruption of meditation by following commentary. VRI37affirmatively says antarāyamakāsahaṃ. Note2explicitly explains the source’s rejection of PTS/BJTS wording; do not correct the publisher or replace VRI.",
+        "Publisher local13/global720describes eighteen years after renunciation; VRI47describes eighteen years of age at renunciation. This is not line-equivalent coverage.",
+        "Publisher local18/global725describes taking the Buddha by the hands and a red-lotus comparison; VRI52has taking the object by hand and remembering the red lotus. Preserve the differing formulation without inferred word alignment.",
+        "Publisher Culla-Panthaka/Cullapanthaka forms differ from VRI Cūḷapanthaka main, with cullapanthako retained as a colophon variant. Notes quoting commentary remain translator apparatus, not activated English commentary."
+      ],
+      "required_contracts": [
+        "20stanzas/23bodyparagraphs, all10notes poem-owned."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap16",
+        "book": 36,
+        "start": 2160,
+        "end": 2223,
+        "root_sha256": "de9fac688830b19440fa54649dd93f7dc2406d6ab05dd5149bfa4cc53b8d972c",
+        "vri": "35–54",
+        "index_revision": null,
+        "first_ref": "tha-ap16/1",
+        "last_ref": "tha-ap16/23"
+      }
+    },
+    {
+      "id": "tha-ap17",
+      "publisher_chapter": "chapter-3",
+      "poem": 15,
+      "title": "Pilindavaccha",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Sumedha stupa worship and feeding monks, mansion and food rewards, Varuṇa kingship and matching early Pilindavaccha colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 13,
+        "body_paragraphs": 16,
+        "poem_notes": 5
+      },
+      "edition_findings": [
+        "Publisher local3/global730uses first-person attendance and the name Sumedha; VRI57has an attendant of Buddha Sumedha who is also named Sumedha. Preserve the speaker/subject difference rather than identifying them by inference.",
+        "The original title note1explicitly distinguishes this early Pilindavaccha/Pilindivaccha account from a much longer later same-name poem. This review maps only the actual early stupa-and-food narrative, not the later monk’s record.",
+        "Publisher original typo in the nymph count wording and speculative note5about scented ointment remain unchanged; editorial speculation is not new root wording."
+      ],
+      "required_contracts": [
+        "13stanzas/16bodyparagraphs, all5notes poem-owned."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap17",
+        "book": 36,
+        "start": 2223,
+        "end": 2265,
+        "root_sha256": "e2f213d8d349cc8ced242c691207b1f605859a707113977a70e9ef7fd873e01a",
+        "vri": "55–67",
+        "index_revision": null,
+        "first_ref": "tha-ap17/1",
+        "last_ref": "tha-ap17/16"
+      }
+    },
+    {
+      "id": "tha-ap18",
+      "publisher_chapter": "chapter-3",
+      "poem": 16,
+      "title": "Rāhula",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Mirrored-surface gift, future royal palace and Gotama-son prophecy, guarded virtue and final liberation; matching Rāhula colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 18,
+        "body_paragraphs": 21,
+        "poem_notes": 11
+      },
+      "edition_findings": [
+        "Publisher local5/global745speaks of desired things arising in the sky; VRI72explicitly speaks of desired palaces. Preserve the differing extent of the formulation.",
+        "Publisher local16/global756has the speaker protecting virtue, following the evaṃ rakkhiṃ variant recorded in VRI83and original note11; the VRI main instead says the Great Sage protected me.",
+        "The source’s mirrored-surface, deity and palace interpretations and original incomplete punctuation in notes1/6remain translator-owned. Do not assert clause or numerical alignment from the shared story."
+      ],
+      "required_contracts": [
+        "18stanzas/21bodyparagraphs, all11notes poem-owned."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap18",
+        "book": 36,
+        "start": 2265,
+        "end": 2322,
+        "root_sha256": "bce81027fd6ba27eb68534307ece630faf2abce9d40d6f584ce2bcad04732a5d",
+        "vri": "68–85",
+        "index_revision": null,
+        "first_ref": "tha-ap18/1",
+        "last_ref": "tha-ap18/21"
+      }
+    },
+    {
+      "id": "tha-ap19",
+      "publisher_chapter": "chapter-3",
+      "poem": 17,
+      "title": "Upasena Vaṅgantaputta",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Flower-decorated umbrella and milk-rice gift to Padumuttara and eight monks, prophecy and final-body declaration; two identity colophons followed by recitation marker.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 10,
+        "body_paragraphs": 13,
+        "poem_notes": 4
+      },
+      "edition_findings": [
+        "Publisher local5/global763states thirty divine reigns while VRI90has thirty-six; local6/global764states twenty wheel-turner reigns while VRI91has twenty-one. No corresponding count variants are recorded there.",
+        "Publisher local7/global765uses Sumedha in its prophecy, corresponding to the alternate prophecy preserved at VRI92rather than the main Gotama/Okkāka stanza. Original note3owns the chronological uncertainty.",
+        "Publisher local8/global766does not separately translate VRI93second-half legitimate-heir wording or VRI94second-half foremost-in-pleasing-everyone wording. VRI notes identify the latter half as commentary-attested. These actual VRI half-stanzas remain untranslated by this publisher poem.",
+        "Original VRI94renderer includes a separate punctuation-only prose segment with a repeated variant note; it is not an additional translated stanza.",
+        "The publisher third-recitation marker is separate canonical apparatus matching root2359–2360/ref16; it is not a substantive stanza or poem quotation evidence."
+      ],
+      "required_contracts": [
+        "10publisher stanzas/13bodyparagraphs, all4notes poem-owned.",
+        "Atomic19/20boundary repair2364→2360must retain the recitation in tha-ap19and give Raṭṭhapāla its own heading/opening.",
+        "publisher_divisions has exact seven metadata keys: kind,label,parent_id,placement,body_sha256,notes_sha256,note_numbers. placement is after_poem; original notes array is empty. Runtime adds text and translator_notes separately."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap19",
+        "book": 36,
+        "start": 2322,
+        "end": 2360,
+        "root_sha256": "bedb9a1b62717941fb7a6eb1790e2d1b260db21f45cb0c084ffc0d4661310505",
+        "vri": "86–96",
+        "index_revision": "apadana-thera11-30-v1",
+        "first_ref": "tha-ap19/1",
+        "last_ref": "tha-ap19/16"
+      }
+    },
+    {
+      "id": "tha-ap20",
+      "publisher_chapter": "chapter-3",
+      "poem": 18,
+      "title": "Raṭṭhapāla",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Elephant gift, assessed resources and monastery, palace donations, prophecy and relinquishing wealth; matching Raṭṭhapāla colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 15,
+        "body_paragraphs": 18,
+        "poem_notes": 9
+      },
+      "edition_findings": [
+        "Publisher local13/global781expresses aversion to food and almsfood as phlegm; VRI109has attachment to possessions compared to a lump of spittle. Preserve the semantic difference without word-level equivalence.",
+        "Publisher original notes2–6own its trappings, flood-of-alms/dedication and speaker choices. No quoted alternate reading replaces VRI main or creates a new translated unit."
+      ],
+      "required_contracts": [
+        "15stanzas/18bodyparagraphs, all9notes poem-owned.",
+        "Correct canonical start2360contains own heading and first stanza97; end2408. Atomic repair with preceding Upasena is mandatory, with apadana-thera11-30-v1 locator revisions."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap20",
+        "book": 36,
+        "start": 2360,
+        "end": 2408,
+        "root_sha256": "9ea073a89739013aa0cb8a36046c822cfd1692525717476cf0c38c66b9bb203b",
+        "vri": "97–111",
+        "index_revision": "apadana-thera11-30-v1",
+        "first_ref": "tha-ap20/1",
+        "last_ref": "tha-ap20/18"
+      }
+    },
+    {
+      "id": "tha-ap21",
+      "publisher_chapter": "chapter-3",
+      "poem": 19,
+      "title": "Sopāka",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Cleaning a mountain retreat, floral seat, impermanence teaching, rebirth and ordination; matching Sopāka colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 12,
+        "body_paragraphs": 15,
+        "poem_notes": 7
+      },
+      "edition_findings": [
+        "Publisher local8/global791describes seven years as an ascetic; VRI119explicitly marks seven years of age by jātiyā sattavassohaṃ. Preserve the source formulation as a distinct reading/interpretation, not aligned VRI wording.",
+        "Publisher local10/global793is printed with a missing closing parenthesis. Preserve literal suffix (10 [793] and local-label metadata10; do not insert punctuation or renumber.",
+        "Original source note6contains a derogatory caste explanation. Retain it as attributed translator editorial material, not assistant guidance or additional scripture."
+      ],
+      "required_contracts": [
+        "12stanzas/15bodyparagraphs, all7notes poem-owned. Exact malformed suffix is a finite source-specific layout, not relaxed generic parsing."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap21",
+        "book": 36,
+        "start": 2408,
+        "end": 2447,
+        "root_sha256": "26b43db459771d94e21223882a952d68c3b895ae3cdf2e2fb5f5ff264cb81f5c",
+        "vri": "112–123",
+        "index_revision": null,
+        "first_ref": "tha-ap21/1",
+        "last_ref": "tha-ap21/15"
+      }
+    },
+    {
+      "id": "tha-ap22",
+      "publisher_chapter": "chapter-3",
+      "poem": 20,
+      "title": "Sumaṅgala",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Brahmin-sacrifice preparation, mental invitation to Piyadassi and monks, feeding, prophecy, forest striving and matched colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 17,
+        "body_paragraphs": 20,
+        "poem_notes": 7
+      },
+      "edition_findings": [
+        "The separate publisher chapter summary states137verses, VRI summary states138, while actual numbered VRI chapter stanzas are1–140. The publisher poems contain139physical stanza entries; none of these count systems may silently replace another.",
+        "Publisher and VRI summary name forms differ, including source Vangata/Maṅgala and chapter Sīhāsani forms. Preserve each edition and the original summary wording."
+      ],
+      "required_contracts": [
+        "17poem stanzas/20bodyparagraphs, all7notes poem-owned; chapter summary owns zero notes.",
+        "chapter_summary canonical root2501–2507/original refs21–24. Keep3publisher paragraphs, middle8lines. Summary headings, count verses and chapter colophon are outside poem pagination, prefix hashes and quotation evidence."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap22",
+        "book": 36,
+        "start": 2447,
+        "end": 2507,
+        "root_sha256": "542be43c53a47e32abac3405cb3a510ddca180074fc8e7bd82a78b06fd9fed4e",
+        "vri": "124–140",
+        "index_revision": null,
+        "first_ref": "tha-ap22/1",
+        "last_ref": "tha-ap22/24"
+      }
+    },
+    {
+      "id": "tha-ap23",
+      "publisher_chapter": "chapter-3",
+      "poem": 21,
+      "title": "Subhūti",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Kosiya ascetic’s self-admonition on Nisabha, Padumuttara visit and floral seat, Buddha-recollection prophecy, final rewards and matching Subhūti colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 52,
+        "body_paragraphs": 55,
+        "poem_notes": 19
+      },
+      "edition_findings": [
+        "Publisher local8/global820says homeless, whereas VRI8has agāriko bhavitvāna, a householder. Preserve the opposing formulation; no canonical emendation.",
+        "Publisher local11/global823follows jahasi as documented in note2/VRI11variant; VRI main vahisi remains unchanged.",
+        "Publisher local18/global830interprets a beautiful iron tool being unused, while VRI18main jhāyati/jhāyissasi gives a meditation/fire-related verb and retains yāyati/yārissati variants. The long original note6owns the uncertainty.",
+        "Publisher local19/global831uses accumulated wealth, whereas VRI19nihitaṃ carries deposited/hidden or the note’s renounced reading. Preserve note7and avoid claiming lexical equivalence.",
+        "Publisher local44/global856calls the second foremost place forest-dwelling; VRI43araṇavihāra is dispute-free dwelling. Preserve the source and VRI term without substituting a different Pāli word.",
+        "Publisher52printed stanzas regroup VRI35–37six-foot material into four-foot entries; actual VRI has51numbered stanzas. VRI26is rendered across verse/prose/unnumbered-verse segments; do not discard its middle or last portion by renderer type.",
+        "Publisher notes3/7/15/17contain exactly four paired HTML c/ch displays; notes1/6/7retain translator uncertainty, and note13retains its incomplete original quotation punctuation."
+      ],
+      "required_contracts": [
+        "52stanzas/55bodyparagraphs, all19notes poem-owned. Chapter preface has no notes and remains publisher_paratext.",
+        "Atomic23/24boundary2671→2667must remove Upavāna heading and opening52from Subhūti; both units receive apadana-thera11-30-v1."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap23",
+        "book": 36,
+        "start": 2507,
+        "end": 2667,
+        "root_sha256": "a68bdbe0e1cc8e5f810b17a903fe234a02430782db85d0481f796f9e26dadd1e",
+        "vri": "1–51",
+        "index_revision": "apadana-thera11-30-v1",
+        "first_ref": "tha-ap23/1",
+        "last_ref": "tha-ap23/57"
+      }
+    },
+    {
+      "id": "tha-ap24",
+      "publisher_chapter": "chapter-3",
+      "poem": 22,
+      "title": "Upavāna",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Padumuttara funeral and layered stupa offerings by humans and supernatural groups, flag gift and yakkha Abhisammata, prophecy and matching Upavāna colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 55,
+        "body_paragraphs": 58,
+        "poem_notes": 24
+      },
+      "edition_findings": [
+        "Publisher55printed entries correspond to54numbered VRI stanzas after restoring opening52. Four source global-only entries882–885are substantive verse, not editorial apparatus; VRI69–70six-foot material is regrouped.",
+        "Publisher local24/global892has constructed legs, whereas VRI78has chattamāropayiṃsu, raising an umbrella. Preserve the difference.",
+        "Publisher local26/global894has a lamp shining by day, whereas VRI80padīpopi na pajjali has a lamp not burning/shining. Preserve the opposite formulation without silent correction.",
+        "Publisher local30/global898has faith in Buddha’s words; VRI84main has viruddhā, opposition, and a visaddhā variant. No unrecorded identity of readings is inferred.",
+        "Publisher local31/global899calls the speaker a speaker; VRI85bhatako is a hired worker, with varako retained as a variant. Preserve the occupational difference.",
+        "Publisher original note9explains PTS/BJTS omission of garuḷas and height sequencing; the four global-only Kumbhaṇḍa stanzas and all source groups remain. Notes23–24retain unresolved lexicographic interpretations.",
+        "Original malformed emphasis in local22/global890leaves an unmatched literal asterisk under the matched-emphasis-only presentation recipe. Preserve the residue and all words rather than editorially repairing the source."
+      ],
+      "required_contracts": [
+        "55stanzas/58bodyparagraphs, all24notes poem-owned. Correct canonical start2667contains own heading and first stanza52; end2834.",
+        "Only exact reviewed dfn/abbr/local-anchor wrappers and the known four c/ch pairs in source21may be reduced under full raw pins. Source22requires no generated span or broad HTML allowance."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap24",
+        "book": 36,
+        "start": 2667,
+        "end": 2834,
+        "root_sha256": "abe4d1bc9f57a0f187efd0f0d18247113d641a912ad1d6b7854f845194c75a4d",
+        "vri": "52–105",
+        "index_revision": "apadana-thera11-30-v1",
+        "first_ref": "tha-ap24/1",
+        "last_ref": "tha-ap24/57"
+      }
+    },
+    {
+      "id": "tha-ap25",
+      "publisher_chapter": "chapter-3",
+      "poem": 23,
+      "title": "Tīṇisaraṇāgamaniya",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Blind-parent support prevents renunciation; three refuges before Nisabha, heavenly/royal rewards, child’s recollection and arahantship; matching refuge-goer colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 28,
+        "body_paragraphs": 31,
+        "poem_notes": 16
+      },
+      "edition_findings": [
+        "Publisher local13/global932states five hundred wheel-turner reigns while VRI118pañcasattati states seventy-five, with no matching variant recorded. Preserve both counts visibly.",
+        "Publisher local25/global944follows mamopamaṃ karitvāna, preserved in VRI130variant; VRI main has developing Dhamma rightly. Original note14owns the model-of-me formulation.",
+        "Publisher Tīṇisaraṇāgamaniya spelling differs from VRI Tisaraṇagamaniya; actual blind-parent/refuge narrative and two colophons establish identity, not numbers alone.",
+        "Original note9ends with incomplete quotation/bracket punctuation; do not complete it."
+      ],
+      "required_contracts": [
+        "28stanzas/31bodyparagraphs, all16notes poem-owned."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap25",
+        "book": 36,
+        "start": 2834,
+        "end": 2921,
+        "root_sha256": "561a21624ffc797e021d6c88a93f98a3278e8160d17839ce3d21d87e2f071125",
+        "vri": "106–133",
+        "index_revision": null,
+        "first_ref": "tha-ap25/1",
+        "last_ref": "tha-ap25/31"
+      }
+    },
+    {
+      "id": "tha-ap26",
+      "publisher_chapter": "chapter-3",
+      "poem": 24,
+      "title": "Pañcasīlasamādāniya",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Servant unable to renounce accepts five precepts before Nisabha, death and rewards, child’s recollection and liberation; matching five-precept colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 21,
+        "body_paragraphs": 24,
+        "poem_notes": 11
+      },
+      "edition_findings": [
+        "Publisher local9/global956states five hundred wheel-turner reigns while VRI142pañcasattati states seventy-five; no corresponding variant is recorded there.",
+        "Publisher local19/global966describes a wise servant; VRI152main tapassinā is an ascetic, with vipassinā variant. Keep the publication’s attributed interpretation and no word alignment.",
+        "Publisher original notes6/10record commentary and edition choices; these remain editorial and cannot authorize expanded commentary or alternate-source substitution."
+      ],
+      "required_contracts": [
+        "21stanzas/24bodyparagraphs, all11notes poem-owned."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap26",
+        "book": 36,
+        "start": 2921,
+        "end": 2987,
+        "root_sha256": "7e89d6c5829b8fc16cfe6ef90dea1611364925027fbc46259c6fd78f446d1ea6",
+        "vri": "134–154",
+        "index_revision": null,
+        "first_ref": "tha-ap26/1",
+        "last_ref": "tha-ap26/24"
+      }
+    },
+    {
+      "id": "tha-ap27",
+      "publisher_chapter": "chapter-3",
+      "poem": 25,
+      "title": "Annasaṃsāvaka",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Siddhattha seen in the bazaar, food offering and thanksgiving, heavenly fruit and matching food-flow donor colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 5,
+        "body_paragraphs": 8,
+        "poem_notes": 1
+      },
+      "edition_findings": [
+        "Publisher combined local1-2/global969-970is one eight-line stanza paragraph covering two VRI155–156stanzas; preserve combined labels and count5publisher entries separately from6numbered VRI stanzas.",
+        "Publisher title has Annasaṃsāvaka while the two colophons print Annasamsāvaka. Preserve the source’s own title/colophon forms without normalizing to canonical spelling."
+      ],
+      "required_contracts": [
+        "5stanzas/8bodyparagraphs, sole note1belongs to poem title. No paragraph split."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap27",
+        "book": 36,
+        "start": 2987,
+        "end": 3008,
+        "root_sha256": "2cb67f24a228c15a585fcc19390801721493df86709f10d6bef77581c914f370",
+        "vri": "155–160",
+        "index_revision": null,
+        "first_ref": "tha-ap27/1",
+        "last_ref": "tha-ap27/9"
+      }
+    },
+    {
+      "id": "tha-ap28",
+      "publisher_chapter": "chapter-3",
+      "poem": 26,
+      "title": "Dhūpadāyaka",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Incense to Siddhattha’s hut, affection in rebirths, good destinations and matching donor colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 4,
+        "body_paragraphs": 7,
+        "poem_notes": 1
+      },
+      "edition_findings": [
+        "Publisher complete four-stanza incense-gift narrative matches the actual VRI161–164extent. VRI163retains a distinct ka-variant; no variant normalization or line-equivalence claim."
+      ],
+      "required_contracts": [
+        "4stanzas/7bodyparagraphs, sole note1poem-owned."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap28",
+        "book": 36,
+        "start": 3008,
+        "end": 3023,
+        "root_sha256": "037c4a8a9a4b97025e1b1cc7c827a3101b7e365b3a9312341e691a6c3777006b",
+        "vri": "161–164",
+        "index_revision": null,
+        "first_ref": "tha-ap28/1",
+        "last_ref": "tha-ap28/7"
+      }
+    },
+    {
+      "id": "tha-ap29",
+      "publisher_chapter": "chapter-3",
+      "poem": 27,
+      "title": "Puḷinapūjaka",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Replacing old sand at Vipassī’s Bodhi tree, royal reward and matching sand-giver colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 4,
+        "body_paragraphs": 7,
+        "poem_notes": 3
+      },
+      "edition_findings": [
+        "Publisher local3/global981has fifty-three aeons, corresponding to VRI167tipaññāse variant; VRI main tiṃsatime is thirty. Preserve both dates.",
+        "Publisher Puḷinapūjaka uses retroflex ḷ while canonical Pulinapūjaka title/colophons use l. No canonical rename."
+      ],
+      "required_contracts": [
+        "4stanzas/7bodyparagraphs, all3notes poem-owned."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap29",
+        "book": 36,
+        "start": 3023,
+        "end": 3038,
+        "root_sha256": "f1bf9c9ca3bc9a5c2bda8c04da7d8ee34d3179313707510bb4ae652cc75fa414",
+        "vri": "165–168",
+        "index_revision": null,
+        "first_ref": "tha-ap29/1",
+        "last_ref": "tha-ap29/7"
+      }
+    },
+    {
+      "id": "tha-ap30",
+      "publisher_chapter": "chapter-3",
+      "poem": 28,
+      "title": "Uttiya",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Crocodile on Candabhāgā ferries Siddhattha, receives assurance, rebirth/reigns and last-body declaration; matching Uttiya colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 11,
+        "body_paragraphs": 14,
+        "poem_notes": 0
+      },
+      "edition_findings": [
+        "Publisher has11physical entries: local6is duplicated at globals988and989; global992has no local label; final global993is local9. Never renumber or invent the missing local label.",
+        "There are no footnotes and no note-definition separator in this exact pinned publisher file. Notes are an empty array, not missing source material.",
+        "VRI speech colophon retains uttiriyo variant; publisher Uttiya remains its own title and identity."
+      ],
+      "required_contracts": [
+        "11stanzas/14bodyparagraphs; exact zero-note source requires finite no-definition parsing, not a generic absent-selector fallback."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap30",
+        "book": 36,
+        "start": 3038,
+        "end": 3074,
+        "root_sha256": "5cea86cbd0244a48ebc134c00392c4401f50764a9405e223420ba214ea378052",
+        "vri": "169–179",
+        "index_revision": null,
+        "first_ref": "tha-ap30/1",
+        "last_ref": "tha-ap30/14"
+      }
+    },
+    {
+      "id": "tha-ap31",
+      "publisher_chapter": "chapter-3",
+      "poem": 29,
+      "title": "Ekañjalika",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Vipassī seen in bazaar, one salute, good destinations and matching one-salute colophons.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 3,
+        "body_paragraphs": 6,
+        "poem_notes": 3
+      },
+      "edition_findings": [
+        "Combined local1-2/global994-995is one eight-line publisher stanza paragraph covering two VRI180–181stanzas. Count3publisher entries separately from4numbered VRI stanzas.",
+        "Translator note3retains the ambiguity of the untamed/tamer epithet; no assistant-selected interpretation replaces it."
+      ],
+      "required_contracts": [
+        "3stanzas/6bodyparagraphs, all3notes poem-owned. No paragraph split."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap31",
+        "book": 36,
+        "start": 3074,
+        "end": 3089,
+        "root_sha256": "e6c6033872e5dac3e129d822d4ae9cb06d669b042b2796218e7d77991ea0a80c",
+        "vri": "180–183",
+        "index_revision": null,
+        "first_ref": "tha-ap31/1",
+        "last_ref": "tha-ap31/7"
+      }
+    },
+    {
+      "id": "tha-ap32",
+      "publisher_chapter": "chapter-3",
+      "poem": 30,
+      "title": "Khomadāyaka",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem, conditional on finite extraction, boundary repair, visible edition disclosures and independent implementation/CI gates; NOT line-complete VRI.",
+      "narrative_identity": "Bandhumatī trader gives khoma cloth to Vipassī, good destinations and Sindh chariot king; matching colophons followed by chapter summary and recitation.",
+      "identity_basis": "Complete original publisher body, all notes, both colophons, actual full VRI narrative/variants and original XML structure independently read; explicit finite mapping, not a numeric offset.",
+      "counts": {
+        "publisher_stanzas": 5,
+        "body_paragraphs": 8,
+        "poem_notes": 3
+      },
+      "edition_findings": [
+        "Publisher local4/global1001has twenty-seven aeons, corresponding to VRI187sattavīse variant while the main sattarase is seventeen. Preserve both.",
+        "Publisher chapter summary states185verses while actual VRI chapter labels1–188contain188numbered stanzas. Publisher globals813–1002cover190numbers and its physical stanza entries number188. Original count statements do not certify any of these coverage totals.",
+        "VRI summary list itself has Susūti and repeated Khomadāyī/group wording, omitting several names listed by the complete publisher ten-name summary. Preserve both edition lists; do not infer line alignment or silently repair VRI.",
+        "The VRI summary’s count phrase is retained literally in the root and is not assigned a normalized numerical interpretation by this review.",
+        "The publisher chapter-title colophon is the ninth line of the second summary paragraph; no blank paragraph is invented before it. The fourth-recitation marker follows as separate canonical apparatus."
+      ],
+      "required_contracts": [
+        "5poem stanzas/8bodyparagraphs, all3notes poem-owned; summary and recitation own zero notes.",
+        "chapter_summary canonical root3107–3113/original refs9–12has2original publisher paragraphs, second9lines.",
+        "publisher_divisions fourth-recitation descriptor has placement after_chapter_summary, canonical root3113–3114/ref13; preserve order and do not render it before the summary."
+      ],
+      "root_descriptor": {
+        "id": "tha-ap32",
+        "book": 36,
+        "start": 3089,
+        "end": 3114,
+        "root_sha256": "880208c7edc07e19ecef2141e65457c9283da68d91d724f89dd69512060bf232",
+        "vri": "184–188",
+        "index_revision": null,
+        "first_ref": "tha-ap32/1",
+        "last_ref": "tha-ap32/13"
+      }
+    }
+  ],
+  "remaining_gates": [
+    "Independent final profile/implementation activation review and all exact-commit tests/CI are separate mandatory gates.",
+    "Human Pāli/translation specialist certification remains absent. Publisher interpretation differences are attributed and preserved, not corrected or certified equivalent to VRI.",
+    "No physical-device or human assistive acceptance is established by this source review."
+  ],
+  "project_edits": 0,
+  "commits": 0,
+  "pushes": 0,
+  "outreach": 0,
+  "private_data_accessed": false
+}

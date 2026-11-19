@@ -1,4 +1,5 @@
-/** Forty independently reviewed publisher-edition whole-poem mappings only. No translated bodies or footnotes. */
+/** Finite reviewed publisher-edition mappings. No translated bodies or footnotes. */
+import { THERA_APADANA_PROFILES } from './apadana-thera-profiles.mjs';
 export const APADANA_COMMIT = 'fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4';
 export const APADANA_VRI_COMMIT = '2d134ff9ef60f70a1eb03c9370580228811a3070';
 export const APADANA_BASE = 'https://apadanatranslation.com';
@@ -6,7 +7,7 @@ export const APADANA_LICENSE = 'CC BY-NC-SA 4.0';
 export const APADANA_LICENSE_URL = 'https://creativecommons.org/licenses/by-nc-sa/4.0/';
 export const APADANA_TRANSLATOR = 'Jonathan S. Walters';
 const deepFreeze = value => { if (value && typeof value === 'object') { for (const child of Object.values(value)) deepFreeze(child); Object.freeze(value); } return value; };
-export const APADANA_PROFILES = deepFreeze({
+export const THERI_APADANA_PROFILES = deepFreeze({
   "thi-ap1": {
     "id": "thi-ap1",
     "poem": 1,
@@ -9761,6 +9762,7 @@ export const APADANA_PROFILES = deepFreeze({
     }
   }
 });
+export const APADANA_PROFILES = deepFreeze({ ...THERI_APADANA_PROFILES, ...THERA_APADANA_PROFILES });
 export const APADANA_RIGHTS = deepFreeze([
   {
     "path": "LICENSE.md",

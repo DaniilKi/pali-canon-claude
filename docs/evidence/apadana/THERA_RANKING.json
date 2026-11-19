@@ -1,0 +1,310 @@
+{
+  "baseline_commit": "a29607d42572f6b67d070ccad6c68a6ebd8976ef",
+  "mode": "Read-only source-gap ranking; not activation authority",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "source_tree_inventory": {
+    "publisher_buddha_poems": 1,
+    "publisher_paccekabuddha_poems": 1,
+    "publisher_thera_poems": 559,
+    "publisher_theri_poems": 40,
+    "indexed_tha_units": 563,
+    "indexed_thi_units": 40,
+    "current_indexed_tha_english_choices": 0,
+    "canonical_count_warning": "563indexedthaunits includes Buddha/Pacceka and does not equal559publisherTherāfiles; never infer whole catalogue mappings from a constant numeric offset."
+  },
+  "routes_verified": [
+    "Official pinned Git object reads succeeded for42poem artifacts plus3routing configs; no shared sparse checkout mutation.",
+    "Pinned official GitHub raw VRI s0510m1download succeeded and all14645original XML blocks matched current compact book including variants/pages."
+  ],
+  "rights": [
+    {
+      "path": "LICENSE.md",
+      "raw_sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "primary_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/LICENSE.md"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "raw_sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "primary_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_pages/about.md"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "raw_sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "primary_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/site/footer.njk"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "raw_sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "primary_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/layouts/epub-metadata.xml"
+    },
+    {
+      "path": "src/_data/site.json",
+      "raw_sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "primary_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_data/site.json"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "raw_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "primary_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/_poems.json"
+    }
+  ],
+  "rights_conclusion": "Same explicit whole-translation/site-code CC BY-NC-SA4.0 grant applies to named Therā and opening publisher categories as publication material, not only the previously activated Therī sequence. Retain Walters/Whitman attribution, full source/licence/change notices and no endorsement. Stale generic site.json CC-BY4.0 does not relax it. This does not clear unreviewed text scope or third-party material holds.",
+  "ranking": [
+    {
+      "rank": 1,
+      "candidate": "Walters complete Sīhāsana and Subhūti Therā chapters, publisher poems11–30",
+      "proposed_canonical_candidates": [
+        "tha-ap13",
+        "tha-ap14",
+        "tha-ap15",
+        "tha-ap16",
+        "tha-ap17",
+        "tha-ap18",
+        "tha-ap19",
+        "tha-ap20",
+        "tha-ap21",
+        "tha-ap22",
+        "tha-ap23",
+        "tha-ap24",
+        "tha-ap25",
+        "tha-ap26",
+        "tha-ap27",
+        "tha-ap28",
+        "tha-ap29",
+        "tha-ap30",
+        "tha-ap31",
+        "tha-ap32"
+      ],
+      "net_new_whole_candidate_count": 20,
+      "status": "Root chose this provisional batch for full independent review; no source approval from ranking",
+      "pinned_source": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "primary_evidence": [
+        {
+          "path": "LICENSE.md",
+          "raw_sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+          "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+          "primary_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/LICENSE.md"
+        },
+        {
+          "path": "src/_pages/about.md",
+          "raw_sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+          "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+          "primary_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_pages/about.md"
+        },
+        {
+          "path": "src/_includes/site/footer.njk",
+          "raw_sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+          "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+          "primary_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/site/footer.njk"
+        },
+        {
+          "path": "src/_includes/layouts/epub-metadata.xml",
+          "raw_sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+          "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+          "primary_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/layouts/epub-metadata.xml"
+        },
+        {
+          "path": "src/_data/site.json",
+          "raw_sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+          "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+          "primary_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_data/site.json"
+        },
+        {
+          "path": "src/_poems/_poems.json",
+          "raw_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+          "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+          "primary_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/_poems.json"
+        }
+      ],
+      "artifact_scout": {
+        "poems": 20,
+        "raw_bytes": 79051,
+        "labelled_entries_scout_only": 327,
+        "original_note_definitions": 153,
+        "source_artifacts": [
+          "src/_poems/chapter-3/poem-011.md",
+          "src/_poems/chapter-3/poem-012.md",
+          "src/_poems/chapter-3/poem-013.md",
+          "src/_poems/chapter-3/poem-014.md",
+          "src/_poems/chapter-3/poem-015.md",
+          "src/_poems/chapter-3/poem-016.md",
+          "src/_poems/chapter-3/poem-017.md",
+          "src/_poems/chapter-3/poem-018.md",
+          "src/_poems/chapter-3/poem-019.md",
+          "src/_poems/chapter-3/poem-020.md",
+          "src/_poems/chapter-3/poem-021.md",
+          "src/_poems/chapter-3/poem-022.md",
+          "src/_poems/chapter-3/poem-023.md",
+          "src/_poems/chapter-3/poem-024.md",
+          "src/_poems/chapter-3/poem-025.md",
+          "src/_poems/chapter-3/poem-026.md",
+          "src/_poems/chapter-3/poem-027.md",
+          "src/_poems/chapter-3/poem-028.md",
+          "src/_poems/chapter-3/poem-029.md",
+          "src/_poems/chapter-3/poem-030.md"
+        ]
+      },
+      "value": "Twenty presently unindexed complete publisher-edition poem choices in two coherent ten-poem groups, with the same explicit translation/notes reuse grant as the approved Therī edition.",
+      "barriers": [
+        "Require all20complete originals and actual VRI narratives, neighbours and boundaries to be independently read; no number-only offset approval.",
+        "Older publication markup has dfn/abbr/a wrappers, literal paired display spans and editorial placeholders; needs exact finite preservation recipe.",
+        "Two chapter summaries and chapter-preface ownership require exact separate scopes, root pins and original note ownership.",
+        "Likely Raṭṭhapāla boundary issue requires original XML and saved-location-safe finite repair.",
+        "Complete publisher-edition poem is not line-complete VRI translation."
+      ]
+    },
+    {
+      "rank": 2,
+      "candidate": "First canonical Buddhavagga: Buddha, Paccekabuddha and first ten Therā publisher poems",
+      "proposed_canonical_candidates": [
+        "tha-ap1",
+        "tha-ap2",
+        "tha-ap3",
+        "tha-ap4",
+        "tha-ap5",
+        "tha-ap6",
+        "tha-ap7",
+        "tha-ap8",
+        "tha-ap9",
+        "tha-ap10",
+        "tha-ap11",
+        "tha-ap12"
+      ],
+      "net_new_whole_candidate_count": 12,
+      "status": "Deferred substantial candidate, not source-approved",
+      "pinned_source": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "artifact_scout": {
+        "poems": 12,
+        "labelled_entries_scout_only": 665,
+        "original_note_definitions": 515,
+        "raw_bytes": 173014
+      },
+      "primary_urls": [
+        "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-1/poem-001.md",
+        "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-2/poem-001.md",
+        "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-001.md"
+      ],
+      "value": "Coherent major canonical opening including Sāriputta and Upāli, currently no indexed English.",
+      "barriers": [
+        "Sāriputta alone has233scout-labelled entries and229notes; Upāli155entries/72notes; full semantic review is substantially larger than selected20.",
+        "First two publisher categories are separate from Therā numbered poems; canonical1/2 must not receive Therā1/2 artifact identities.",
+        "Publisher opening prefaces, chapter/recitation apparatus, old HTML wrappers, incomplete editorial punctuation and any audio links need separate scope review. No audio was fetched or licensed by this survey.",
+        "Buddha source scout has76global-labelled entries versus VRI82numbered stanzas; only independent full edition review can explain omissions/regrouping."
+      ]
+    },
+    {
+      "rank": 3,
+      "candidate": "Walters Kuṇḍadhāna Therā chapter, publisher31–40",
+      "proposed_canonical_candidates": [
+        "tha-ap33",
+        "tha-ap34",
+        "tha-ap35",
+        "tha-ap36",
+        "tha-ap37",
+        "tha-ap38",
+        "tha-ap39",
+        "tha-ap40",
+        "tha-ap41",
+        "tha-ap42"
+      ],
+      "net_new_whole_candidate_count": 10,
+      "status": "Specific later coherent alternative, unapproved",
+      "pinned_source": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "artifact_scout": {
+        "poems": 10,
+        "raw_bytes": 28926,
+        "labelled_entries_scout_only": 111,
+        "original_note_definitions": 53,
+        "source_artifacts": [
+          "src/_poems/chapter-3/poem-031.md",
+          "src/_poems/chapter-3/poem-032.md",
+          "src/_poems/chapter-3/poem-033.md",
+          "src/_poems/chapter-3/poem-034.md",
+          "src/_poems/chapter-3/poem-035.md",
+          "src/_poems/chapter-3/poem-036.md",
+          "src/_poems/chapter-3/poem-037.md",
+          "src/_poems/chapter-3/poem-038.md",
+          "src/_poems/chapter-3/poem-039.md",
+          "src/_poems/chapter-3/poem-040.md"
+        ]
+      },
+      "primary_urls": [
+        "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-031.md",
+        "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-040.md"
+      ],
+      "value": "Ten further complete publisher-edition candidates with111scout-labelled entries and53notes; source bodies accessible through official Git.",
+      "barriers": [
+        "Actual narrative and canonical boundaries not reviewed in this ranking.",
+        "Paired span markup occurs in40; source chapter summary/note ownership and numbering require exact review.",
+        "Does not supersede selected two-chapter batch or authorize automatic global+2offset mappings."
+      ]
+    },
+    {
+      "rank": 4,
+      "candidate": "Khematto Mahāvagga VII / Kaṭhina Khandhaka",
+      "proposed_canonical_candidates": [
+        "pli-tv-kd7"
+      ],
+      "net_new_whole_candidate_count": 1,
+      "status": "Keep existing artifact/provenance hold; no new raw publisher evidence",
+      "primary_urls": [
+        "https://www.dhammatalks.org/vinaya/Mv/MvVII_Index.html",
+        "https://www.dhammatalks.org/"
+      ],
+      "existing_evidence": [
+        "docs/data/vinaya-complete-source-survey.md",
+        "docs/data/mahavagga-vii-upstream-followup.md"
+      ],
+      "rights": "Prior primary publisher notice gives CC BY-NC4.0 and sale-as-commercial restriction; this is distinct from missing exact edition artifacts.",
+      "value": "One entire Vinaya Khandhaka would broaden a major collection with no whole-Khandhaka English.",
+      "barriers": [
+        "Official raw body/index/full-notice pins remain absent under existing access constraints.",
+        "Known publisher-related DPR Git tree contains no Mahāvagga/Vinaya file; do not use unverified rehosts or repeat restricted access via alternative domains.",
+        "Complete Royal Thai/VRI comparison and separation of commentary/subcommentary remain required."
+      ]
+    },
+    {
+      "rank": 5,
+      "candidate": "Ānandajoti Paṭṭhāna Paccayuddesaniddesa opening",
+      "proposed_canonical_candidates": [
+        "patthana1.1/6–63"
+      ],
+      "net_new_whole_candidate_count": 0,
+      "possible_partial_owner_count": 1,
+      "status": "Keep existing raw-artifact/English-extraction hold",
+      "primary_urls": [
+        "https://ancient-buddhist-texts.net/Texts-and-Translations/Short-Pieces/Paccayuddesaniddesa.htm",
+        "https://ancient-buddhist-texts.net/Miscellaneous/Copyright-Notice.htm"
+      ],
+      "existing_evidence": [
+        "docs/translations/patthana-opening-assessment.md",
+        "docs/data/patthana-access-and-english-finder.md"
+      ],
+      "rights": "Prior author grant CC BY-SA3.0 for translation/notes outside listed exceptions; no inferred relicensing from footer4.0 links.",
+      "value": "Substantial first Abhidhamma proper subspan, but not a whole indexed unit and not a substitute for requested whole coverage.",
+      "barriers": [
+        "No provenance-verified exact author raw HTML/notice artifact through permitted routes.",
+        "Rendered normalized Pāli span matching does not approve English, markup or notes.",
+        "139segment indexed unit extends beyond proposed6–63; never count as wholepatthana1.1orall728units."
+      ]
+    }
+  ],
+  "ati_milinda_comparison": {
+    "status": "No stronger remaining complete batch demonstrated",
+    "primary_artifacts": [
+      "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/kn/miln/miln.2x.kell.html",
+      "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/kn/miln/miln.3x.kell.html"
+    ],
+    "evidence": "docs/data/milinda-reviewed-questions.md and docs/data/an-mind-and-milinda-medicine.md",
+    "finding": "All14complete Kelly question selections from the two official artifacts are already indexed. Olendzki medicine source is only two already-approved stanzas in a96segment question; additional partials cannot be called whole Milinda coverage.",
+    "rights": "Kelly free-distribution/complete-notice grant is not Creative Commons; Olendzki grant and all other source holds remain separate."
+  },
+  "preservation": "No runtime edits, commits, pushes, main merge, deployment, outreach, audio fetching, SuttaCentral content or private-data access. Existing rights/source holds preserved.",
+  "next_gate": "Full independent semantic/extraction review of root-selected Therā11–30. Activate only scopes that qualify; source ranking does not authorize runtime mappings."
+}

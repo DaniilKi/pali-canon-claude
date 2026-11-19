@@ -21,11 +21,11 @@ import { APADANA_BASE, APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APA
 import { romanizeInput, inputNote, localizeText, scriptName, SCRIPT_DESCRIPTION } from './script.mjs';
 import * as postcanonical from './postcanonical.mjs';
 import { readBook } from './source-books.mjs';
-import { getCommentary } from './commentary.mjs';
+import { getCommentary, commentaryReadingSource } from './commentary.mjs';
 import { HostedToolError } from './hosted-tool-error.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v21';
+export const WIDGET_VERSION = 'v22';
 // Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.
 export const NAVIGATION_TIMEOUT_MS = 90000;
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
@@ -115,11 +115,12 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
     };
   }
   if (commentary !== undefined) {
-    checkSource(canon.source());
     const input = romanizeInput(commentary);
+    checkSource(commentaryReadingSource(input.text));
     const page = getCommentary(input.text, { offset, limit });
     if (!Array.isArray(page.segments)) throw new Error('Choose a commentary passage or book reference, not the commentary catalogue. Use get_commentary with uid commentary to list book references.');
     if (!page.source) throw new Error(page.notes?.join(' ') || 'Bundled commentary data is unavailable.');
+    checkSource(page.source);
     const available = page.available !== false;
     const selector = page.segment_ref || (page.book ? page.citation : page.text_id) || input.text;
     const result = {
@@ -149,10 +150,10 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
     const anchor = displayed.pali.segments[0].ref;
     const parent = anchor.replace(/\/c[1-9]\d*$/, '');
     const index = Number(commentaryAnchor[2]) - 1;
-    const args = { commentary: anchor, english: false, source_commit: displayed.source.commit, anchor_sha256: fingerprint, ...(script ? { script: scriptName(script) } : {}) };
+    const args = { commentary: anchor, english: false, source_commit: displayed.source.locator_revision || displayed.source.commit, anchor_sha256: fingerprint, ...(script ? { script: scriptName(script) } : {}) };
     if (context) {
       const start = Math.max(0, index - context);
-      const surrounding = await readPassage({ commentary: parent, offset: start, limit: index - start + context + 1, english: false, script });
+      const surrounding = await readPassage({ commentary: parent, offset: start, limit: index - start + context + 1, english: false, script, source_commit: args.source_commit });
       if (!surrounding.pali.segments.some(item => item.ref === anchor)) throw new Error('The commentary anchor is not in this source context; no neighbouring passage was substituted.');
       return { ...surrounding, context_for: anchor, ...(displayed.english_error ? { english_error: displayed.english_error } : {}),
         pali: { ...surrounding.pali, read_with: { name: WIDGET_TOOL, arguments: { ...args, context } }, context_with: null, exact_with: { name: WIDGET_TOOL, arguments: args } } };
@@ -419,7 +420,7 @@ export const WIDGET_HTML = `<!doctype html>
       segment_ref: d.segment_ref, context_for: d.context_for, script: d.script || 'roman', available: d.available,
       approximate: !!d.approximate, alignment: d.alignment, alignment_note: d.alignment_note, alignment_method: d.alignment_method,
       availability_note: d.availability_note, notes: d.notes || [],
-      source: { name: source.name, repository: source.repository, commit: source.commit, files: source.files, attribution: source.attribution, terms: source.terms },
+      source: { name: source.name, repository: source.repository, commit: source.commit, ...(source.locator_revision ? { locator_revision: source.locator_revision } : {}), files: source.files, attribution: source.attribution, terms: source.terms },
       pali: { offset: p.offset, returned: p.returned, total_segments: p.total_segments, refs: (p.segments || []).map(function (s) { return s.ref; }), read_with: p.read_with },
       english: e ? { state: 'displayed', translation_id: e.translation_id, translator: e.translator, source: e.source, url: e.url,
         translation_revision: e.translation_revision, fetched_from: e.fetched_from, prefix_sha256: e.prefix_sha256, offset: e.offset, next_offset: e.next_offset, total_characters: e.total_characters,
@@ -736,10 +737,13 @@ export const WIDGET_HTML = `<!doctype html>
           chapter.appendChild(el('h3', '', 'Canonical chapter summary · not poem text'));
           chapter.appendChild(el('p', 'en', s.text));
           if (s.parent_id === 'thi-ap40') chapter.appendChild(el('p', 'note', 'Original summary counts and titles are preserved; they are not a measure of indexed translation coverage.'));
-          chapter.appendChild(el('h3', '', 'Chapter summary notes · editorial, not poem notes'));
-          var summaryNotes = el('ol', '');
-          s.translator_notes.forEach(function (n) { var li = el('li', '', n.text); li.value = n.number; summaryNotes.appendChild(li); });
-          chapter.appendChild(summaryNotes); en.appendChild(chapter);
+          if (s.translator_notes.length) {
+            chapter.appendChild(el('h3', '', 'Chapter summary notes · editorial, not poem notes'));
+            var summaryNotes = el('ol', '');
+            s.translator_notes.forEach(function (n) { var li = el('li', '', n.text); li.value = n.number; summaryNotes.appendChild(li); });
+            chapter.appendChild(summaryNotes);
+          }
+          en.appendChild(chapter);
         }
         if (d.english.collection_summary) {
           var collection = el('section', ''), cs = d.english.collection_summary;
@@ -754,7 +758,7 @@ export const WIDGET_HTML = `<!doctype html>
         (d.english.publisher_divisions || []).forEach(function (s) {
           var section = el('section', ''); section.setAttribute('aria-label', 'Publisher recitation division · not poem text');
           section.appendChild(el('h3', '', 'Publisher recitation division · not poem text'));
-          section.appendChild(el('p', 'note', 'Before publisher local stanza ' + s.before_local_label + ', printed global label ' + s.before_publisher_label + '.'));
+          section.appendChild(el('p', 'note', s.placement === 'after_poem' ? 'After the publisher poem.' : s.placement === 'after_chapter_summary' ? 'After the chapter summary.' : 'Before publisher local stanza ' + s.before_local_label + ', printed global label ' + s.before_publisher_label + '.'));
           section.appendChild(el('p', 'en', s.text));
           if (s.translator_notes.length) {
             section.appendChild(el('h3', '', 'Recitation notes · editorial, not poem notes'));

@@ -1,0 +1,59 @@
+{
+  "input_commit": "a29607d42572f6b67d070ccad6c68a6ebd8976ef",
+  "canon_changed_units": [
+    "tha-ap19",
+    "tha-ap20",
+    "tha-ap23",
+    "tha-ap24"
+  ],
+  "unchanged_canonical_units": 8540,
+  "all61sourcebooks_unchanged": true,
+  "all_root_wording_notes_pages_unchanged": true,
+  "all_commentary_books_passages_source_counters_unchanged": true,
+  "all_other_associations_unchanged": true,
+  "all40theri_units_unchanged": true,
+  "commentary_association_removed_only": {
+    "unit": "tha-ap19",
+    "passage": 8918
+  },
+  "correct_owner_preserved": {
+    "unit": "tha-ap20",
+    "passages": [
+      8918,
+      8919,
+      8920,
+      8921
+    ]
+  },
+  "input_canon_sha256": "447ea6af978c88aadd203a5aea29a9fa87e47780353e27b83e7fb3fb65890e21",
+  "output_canon_sha256": "529d5f8a0812ca16c29c011abba04874c2529a641fd76c2fb85d6feebdbc5234",
+  "input_commentary_sha256": "a4efb9cd51d1092530cdf6f4e67907ac2dee965e3816af28a83c5f10c0e7d536",
+  "output_commentary_sha256": "8b9c055181913097bb37cbe0046e8c64efcabea884aad49d272a424cd1207461",
+  "canon_idempotent_gzip_identical": true,
+  "commentary_idempotent_gzip_identical": true,
+  "commentary_counts_before": {
+    "associated_units": 6070,
+    "unit_passage_associations": 16474,
+    "accepted_passages": 14339,
+    "accepted_root_book36_passages": 588,
+    "ap_coverage": {
+      "texts": 603,
+      "with_commentary": 78,
+      "cited": 80,
+      "cited_aligned": 78
+    }
+  },
+  "commentary_counts_after": {
+    "associated_units": 6070,
+    "unit_passage_associations": 16473,
+    "accepted_passages": 14339,
+    "accepted_root_book36_passages": 588,
+    "ap_coverage": {
+      "texts": 603,
+      "with_commentary": 78,
+      "cited": 80,
+      "cited_aligned": 78
+    }
+  },
+  "private_data": "not accessed"
+}
