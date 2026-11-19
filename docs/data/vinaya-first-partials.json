@@ -1,0 +1,89 @@
+{
+  "schema": "reviewed-vinaya-partials-v1",
+  "reviewed_on": "2026-11-19",
+  "baseline": "6a409114ce285d933412714520038a4771f58b8b",
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "independent_source_scope_review": "approved both exact partials after separate official GitHub byte comparison and complete body/notice/adjacent-Pali review",
+  "independent_code_review": "33 focused tests passed without skips; inline-note drift refusal independently retested",
+  "source_bodies_bundled": false,
+  "whole_khandhaka_translation": false,
+  "previous_descriptors_sha256": "d55eab78d8820f2b9ef8c4988c936eaa17e11b51298ccb29c2b015760ff7ad36",
+  "all_previous_translation_values_preserved": true,
+  "decisions": [
+    {
+      "unit_id": "pli-tv-kd6",
+      "path": "/tipitaka/vin/mv/mv.06.40.01.than",
+      "source_reference": "Mv6.40.1, publisher paragraphs1–5of5; VRI305, pli-tv-kd6/195 only",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC BY-NC4.0; full page-specific provenance/citation retained",
+      "source_html_sha256": "352d5868754b83fdd11bc643889e3ac9ee96eafc3880c2c6cee75f61244b1546",
+      "root": {
+        "id": "pli-tv-kd6",
+        "title": "Pañcabhesajjakathā",
+        "vri": "260–305",
+        "book": 2,
+        "start": 1562,
+        "end": 1810,
+        "root_blocks_sha256": "8b40559002422b6bee4cb4ec8bac0c5c94f1e0251611435efa22aad2ca68033f"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "pli-tv-kd6",
+        "first_ref": "pli-tv-kd6/195",
+        "last_ref": "pli-tv-kd6/195",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "35c32de8ee0914f6ce2f56f130f7a4521f84298c27242a065a8bd888014a1955",
+        "text_sha256": "bf15244cdcccdded9e6ba42e72b90d3d287b427029df1ff16488750c0926b322",
+        "notice_sha256": "658d0de6bf27b7a92d83a359eb26fdcc7054cde2eb3e2d6bf84ba15b94db3356",
+        "extractor": "ati-vinaya-mv6-p1to5-of5-v1"
+      }
+    },
+    {
+      "unit_id": "pli-tv-kd8",
+      "path": "/tipitaka/vin/mv/mv.08.26.01-08.than",
+      "source_reference": "Mv8.26.1–8, publisher paragraphs1–22of22; VRI365–366, pli-tv-kd8/174–178 only",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC BY-NC4.0; full page-specific provenance/citation retained",
+      "source_html_sha256": "631d970295145c6eac6ae98c4d01ce016fc5dea20b749db93ec54e91f779e579",
+      "root": {
+        "id": "pli-tv-kd8",
+        "title": "Jīvakavatthu",
+        "vri": "326–379",
+        "book": 2,
+        "start": 2028,
+        "end": 2318,
+        "root_blocks_sha256": "824777885b9c4864acf9145a0062b73d56a940758c1c9eea45802067f2cca03a"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "pli-tv-kd8",
+        "first_ref": "pli-tv-kd8/174",
+        "last_ref": "pli-tv-kd8/178",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "cf5d8e74409560267da8ac70282ccdf7f1049974bbd082e2b36c2f04bacedc24",
+        "text_sha256": "362be089759201001d157e9dc8d97adeb8a2d537ccde9306d7f3b45f26d833e9",
+        "notice_sha256": "4414f147c8ff644682a029b7b5cabeded1776763dd41e2e9214d4f03051bb26b",
+        "extractor": "ati-vinaya-mv8-p1to22-of22-v1"
+      }
+    }
+  ],
+  "counts": {
+    "whole_links": 2538,
+    "whole_direct": 1434,
+    "whole_including_inherited": 1857,
+    "grouped_whole_direct": 1408,
+    "grouped_including_inherited": 1831,
+    "partial_links": 20,
+    "partial_only": 14,
+    "shared_pages": 12,
+    "daily_sutta_eligible": 1257
+  },
+  "not_activated": [
+    "Paṭṭhāna opening: exact raw author artifact/extraction/full-notice pins missing",
+    "PTS English commentary: exact digital artifact/proofreading/bilingual boundaries unresolved",
+    "Chinese pilot: release-specific rights/bilingual review unresolved"
+  ]
+}

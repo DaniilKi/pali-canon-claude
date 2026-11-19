@@ -62,11 +62,11 @@ test('English catalogue filters before pagination in stable source order and ech
   }
 });
 
-test('all eighteen partial owners remain discoverable and scoped-only discovery includes each actual shared-only record once',()=>{
+test('all twenty partial owners remain discoverable and scoped-only discovery includes each actual shared-only record once',()=>{
   const linked=snapshot('linked'),scoped=snapshot('scoped'),whole=snapshot('whole');
   const linkedIds=new Set(linked.map(r=>r.id)),scopedIds=new Set(scoped.map(r=>r.id)),wholeIds=new Set(whole.map(r=>r.id));
   const partial=expected.filter(r=>r.partial),sharedOnly=expected.filter(r=>r.shared&&!r.ordinary),partialOnly=partial.filter(r=>!r.ordinary);
-  assert.equal(partial.length,18);assert.equal(sharedOnly.length,52);assert.equal(partialOnly.length,12);
+  assert.equal(partial.length,20);assert.equal(sharedOnly.length,52);assert.equal(partialOnly.length,14);
   for(const r of partial){assert.ok(linkedIds.has(r.unit.id));assert.equal(scopedIds.has(r.unit.id),r.ordinary===0);assert.equal(wholeIds.has(r.unit.id),r.ordinary>0);}
   for(const r of sharedOnly)assert.ok(scopedIds.has(r.unit.id));
   const union=new Set([...partialOnly,...sharedOnly].map(r=>r.unit.id));
@@ -93,7 +93,8 @@ test('exact collection filters agree with the actual global partition and permit
     }
     assert.equal(sum,canon.browse('english',{availability}).total);
   }
-  const vinaya=canon.browse('english',{collection:'vinaya',availability:'linked'});assert.equal(vinaya.total,0);assert.deepEqual(vinaya.items,[]);assert.equal(vinaya.next_offset,null);
+  const vinaya=canon.browse('english',{collection:'vinaya',availability:'linked'});assert.equal(vinaya.total,2);assert.deepEqual(vinaya.items.map(r=>r.id),['pli-tv-kd6','pli-tv-kd8']);assert.equal(vinaya.next_offset,null);
+  const wholeVinaya=canon.browse('english',{collection:'vinaya',availability:'whole'});assert.equal(wholeVinaya.total,0);assert.deepEqual(wholeVinaya.items,[]);assert.equal(wholeVinaya.next_offset,null);
 });
 
 test('catalogue is offline and fresh, preserves snapshot data and refuses scope/source drift',()=>{

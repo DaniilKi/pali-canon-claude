@@ -103,7 +103,7 @@ Every tool only reads; none can change anything. The full technical list is in [
 | Part of the canon | What it is | Texts | English linked |
 |---|---|---:|---|
 | **Sutta Piṭaka** | Discourses of the Buddha and his disciples: the long, middle-length, connected and numbered collections (DN, MN, SN, AN) and the Khuddaka Nikāya (Dhammapada, Sutta Nipāta, Theragāthā, Jātaka and more) | 6,999 | 1,853 texts (DN, MN, SN, AN, Dhp, Ud, Iti, Snp, Thag, Thig, Khp) |
-| **Vinaya Piṭaka** | Monastic discipline: the rules for monks and nuns and their origin stories, the Khandhakas and the Parivāra | 443 | not yet |
+| **Vinaya Piṭaka** | Monastic discipline: the rules for monks and nuns and their origin stories, the Khandhakas and the Parivāra | 443 | Two scoped selections; no whole-chapter translation |
 | **Abhidhamma Piṭaka** | Systematic analysis of mind and matter: seven books from the Dhammasaṅgaṇī to the Paṭṭhāna | 1,102 | 4 texts (parts of the Dhammasaṅgaṇī and Vibhaṅga) |
 | **Total** | | **8,544** | |
 
@@ -276,7 +276,7 @@ You do not need Pāli letters. Type the way your keyboard lets you, and every an
 
 ## What it does not do yet
 
-- Whole-unit English is linked for 1,857 texts, about a fifth of the canon. Eighteen separately scoped excerpts require explicit partial-source consent. The Vinaya, nearly all of the Abhidhamma and much of the Khuddaka Nikāya have no English yet.
+- Whole-unit English is linked for 1,857 texts, about a fifth of the canon. Twenty separately scoped excerpts require explicit partial-source consent. Two cover specific Vinaya passages; the rest of the Vinaya, nearly all of the Abhidhamma and much of the Khuddaka Nikāya still have no indexed English.
 - The commentaries (Aṭṭhakathā) and sub-commentaries (Ṭīkā) are not included yet.
 - Other scripts are transliterated by this server from the Roman edition, not taken from printed script editions. Lao and Lanna have not yet been checked against a printed edition or by native readers.
 - Translations and the dictionary need internet; the Pāli does not.
@@ -336,4 +336,4 @@ With gratitude to the Vipassana Research Institute; Ṭhānissaro Bhikkhu and Me
 
 The [Dasabala follow-up](docs/data/dasabala-commentary-and-subparagraph.md) restores SN12.21’s own short commentary and provides SN12.22’s concluding exhortation as an exact, consent-scoped substring. At D209, nine verse excerpts plus this prose excerpt made ten partial sources; none adds whole-unit English coverage.
 
-The [four-page Walshe review](docs/data/walshe-excerpt-batch.md) replaces four whole-discourse claims with precise, consent-scoped selections. That batch brought the catalogue to fourteen partial sources/eight partial-only units. The [MN54 dream selection](docs/data/dt-excerpts-and-potaliya.md) brought it to fifteen/nine. The [AN2.47 cross-questioning selection](docs/data/an347-and-cross-questioning.md) brought it to sixteen/ten. The [AN8.59 prose and SN36.15 opening selections](docs/data/eight-individuals-and-feelings-prefix.md) now bring it to eighteen/twelve. Original publisher numbering, complete BPS notices and unchanged Pāli remain available.
+The [four-page Walshe review](docs/data/walshe-excerpt-batch.md) replaces four whole-discourse claims with precise, consent-scoped selections. That batch brought the catalogue to fourteen partial sources/eight partial-only units. The [MN54 dream selection](docs/data/dt-excerpts-and-potaliya.md) brought it to fifteen/nine. The [AN2.47 cross-questioning selection](docs/data/an347-and-cross-questioning.md) brought it to sixteen/ten. The [AN8.59 prose and SN36.15 opening selections](docs/data/eight-individuals-and-feelings-prefix.md) brought it to eighteen/twelve. The [two Vinaya selections](docs/data/vinaya-first-partials.md) bring it to twenty/fourteen, with no whole-Khandhaka translation claimed. Original publisher numbering, complete BPS notices and unchanged Pāli remain available.
