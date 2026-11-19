@@ -40,6 +40,7 @@ main:focus{outline:none}
   #print-document h1{font-size:22pt;line-height:1.25}
   #print-document h2{font-size:15pt}
   .print-passage{white-space:pre-wrap;font:13pt/1.8 Georgia,serif;orphans:3;widows:3}
+  #print-document h2.print-passage{font:13pt/1.8 Georgia,serif;margin:1em 0}
   .print-reference{font:9pt/1.5 system-ui,sans-serif;margin-bottom:4pt}
   .print-scope,.print-provenance{font:9pt/1.6 system-ui,sans-serif}
   .print-segment{border-top:1px solid #aaa;padding-top:8pt}

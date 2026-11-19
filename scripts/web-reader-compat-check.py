@@ -61,6 +61,14 @@ def revision(data):
     return data['source'].get('locator_revision', data['source']['commit'])
 
 
+def source_roles(region, data, level):
+    text = region.locator('.passage')
+    literal_headings = [segment['text'] for segment in data['segments'] if segment['type'] == 'heading']
+    expect(region.get_by_role('heading', level=level)).to_have_text(literal_headings)
+    for block, segment in zip(text.all(), data['segments']):
+        assert block.evaluate('(node)=>node.tagName') == ('H' + str(level) if segment['type'] == 'heading' else 'P')
+        assert block.get_attribute('lang') == 'pi'
+
 def make_case(label, context, name, arguments, selector):
     data = tool(name, {**arguments, 'offset': 0, 'limit': 30, 'script': 'roman'})
     index, segment = next((i, s) for i, s in enumerate(data['segments']) if s['type'] != 'heading')
@@ -263,6 +271,7 @@ try:
                 text = page.locator('section[aria-label="Pāli passage"] .segment .passage')
                 expect(text).to_have_text([s['text'] for s in data['segments']])
                 assert text.all_text_contents() == [s['text'] for s in data['segments']], 'Source codepoints/whitespace changed'
+                source_roles(page.locator('section[aria-label="Pāli passage"]'), data, 3)
                 expect(page.locator('#status').filter(has_text='Opening')).to_have_count(0)
 
             def saved(page):
@@ -678,6 +687,7 @@ try:
             passages = pane.locator('article.segment .passage')
             expect(passages).to_have_text([s['text'] for s in commentary_context['segments']])
             assert passages.all_text_contents() == [s['text'] for s in commentary_context['segments']]
+            source_roles(pane, commentary_context, 5)
             assert state['calls'][before:] == [{'name': 'get_commentary', 'arguments': commentary_command}]
             expect(pane).to_be_focused(); expect(pane).to_contain_text(commentary_context['alignment_note'])
             expect(pane).to_contain_text(commentary_context['source']['terms']); expect(pane.locator('.search-match')).to_contain_text('Search match')
@@ -710,6 +720,7 @@ try:
             passages = pane.locator('article.segment .passage')
             expect(passages).to_have_text([s['text'] for s in post_context['segments']])
             assert passages.all_text_contents() == [s['text'] for s in post_context['segments']]
+            source_roles(pane, post_context, 5)
             assert state['calls'][before:] == [{'name': 'get_post_canonical', 'arguments': post_command}]
             expect(pane).to_be_focused(); expect(pane).to_contain_text(post_context['label'])
             expect(pane).to_contain_text(post_context['source']['terms'])

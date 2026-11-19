@@ -1,6 +1,7 @@
 import { bookmarkLocation } from './bookmark-location.mjs';
 import { savedPage, savedScope, savedScopeLabels } from './saved-passages.mjs';
 import { installPagePrinting } from './print-page.mjs';
+import { createSourcePassage } from './source-passage.mjs';
 import { localizeText } from '../src/script.mjs';
 import { scopeDescriptor, validateEnglishPage } from './translation-policy.mjs';
 import { planCatalog, planDay, daySignature, cleanProgress, planWindow, validatePlanPage } from './reading-plans.mjs';
@@ -355,7 +356,7 @@ function sourceSearchResults(data, selected, token, scope) {
         if (segment.ref === matchRef(state.hit)) { block.classList.add('search-match'); block.append(el('p', 'Search match', 'source-badge')); }
         for (const [key, label] of pageMarkers) if (segment[key]?.length) block.append(el('p', label + ': ' + segment[key].join(', '), 'muted'));
         if (segment.vri_paragraph) block.append(el('p', 'VRI paragraph: ' + segment.vri_paragraph, 'muted'));
-        const passage = el('p', segment.text, 'passage'); passage.lang = 'pi'; block.append(passage); state.pane.append(block);
+        block.append(createSourcePassage(document, segment, 5)); state.pane.append(block);
       }
       state.pane.append(link(continueLabel, state.locations.continue, 'button'), el('p', commentary ? 'Opens the full commentary book at the match. Its direct source-book positions are distinct from aligned canonical commentary and separately saved exact-match references.' : 'Opens the current source selection from the match. Chapter, passage and volume boundaries remain as selected; this does not open a different book or edition.', 'muted'));
       provenance(checked, state.pane); if (focus) state.pane.focus({ preventScroll: true });
@@ -599,7 +600,7 @@ async function read(args, token) {
     const save = button(active ? 'Saved ✓' : 'Save passage', () => {}); save.setAttribute('aria-label', 'Save passage ' + segment.ref); save.setAttribute('aria-pressed', String(active)); const actions = el('div', undefined, 'segment-actions'); actions.append(save);
     if (kind !== 'commentary' && segment.type !== 'heading') { const study = button('Study words', () => wordStudy({ ...(kind === 'book' ? { book } : { uid: kind === 'canon' ? data.text_id || uid : uid }), segment: segment.ref, offset: 0, limit: 15 }, { ref: segment.ref, text: segment.text, source: data.source?.commit, script: $('script').value, kind }, token)); study.setAttribute('aria-label', 'Study words in ' + segment.ref); actions.append(study); }
     row.append(actions); part.classList.toggle('marked', active);
-    const text = el('p', segment.text, 'passage'); text.lang = 'pi'; part.append(row, text); attachPassageNote(selector, data, segment, part, save, token); passages.append(part);
+    const text = createSourcePassage(document, segment, 3); part.append(row, text); attachPassageNote(selector, data, segment, part, save, token); passages.append(part);
     if (positionHref) positions.push({ node: part, heading: segment.type === 'heading', href: positionHref });
   }
   view.append(passages);
@@ -744,7 +745,7 @@ async function commentary(uid, token, offset = 0) {
   const studyToken = ++studyEpoch; requests.cancelGroup('study'); const target = $('study'); target.replaceChildren(el('p', 'Opening commentary…'));
   try { const data = await tool('get_commentary', { uid, offset, limit: 20, script: $('script').value }, 'study'); if (token !== epoch || studyToken !== studyEpoch) return;
     target.replaceChildren(el('h3', 'Traditional commentary · not canonical root text')); notes(data, target);
-    for (const segment of data.segments || []) target.append(el('p', segment.text, 'passage'));
+    for (const segment of data.segments || []) target.append(createSourcePassage(document, segment, 4));
     if (data.next_offset !== null && data.next_offset !== undefined) target.append(button('Next commentary page →', () => commentary(uid, token, data.next_offset)));
     if (data.available === false || !data.segments?.length) target.append(el('p', 'No verified aligned commentary is available for this selection.', 'notice'));
     provenance(data, target);
