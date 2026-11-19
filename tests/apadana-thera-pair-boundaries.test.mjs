@@ -62,6 +62,7 @@ test('finite pair gate is atomic, source-conserving, idempotent and rejects drif
 import copy,json,sys
 sys.path.insert(0,'scripts/canon')
 from apadana_thera_pair_spans import *
+sys.stdin.reconfigure(encoding='utf-8')
 c=json.load(sys.stdin)
 parsed=[]
 for rend,n,text,notes,pages in c['books'][36]['blocks']:
@@ -140,13 +141,14 @@ test('optional complete original XML replay checks strict freshness, all source 
     writeFileSync(join(dir, 'canon.gz'), gzipSync(JSON.stringify(canonBeforeTheraPair(loaded()))));
     writeFileSync(join(dir, 'commentary.gz'), readBundled('server/data/commentary.json.gz'));
     const result = spawnSync(python, ['-c', `
-import copy,gzip,json,os,sys,tempfile
+import copy,gzip,json,os,shutil,sys,tempfile
 sys.path.insert(0,'scripts/canon')
 from repair_apadana_thera_pair_spans import repair,digest,FILE,ATT
 from apadana_thera_pair_spans import TARGETS,canon_before_thera_pair,PRE_PAIR_SHA256
 directory,root=sys.argv[1:]
-with gzip.open(os.path.join(directory,'canon.gz'),'rt')as f:c=json.load(f)
-with gzip.open(os.path.join(directory,'commentary.gz'),'rt')as f:a=json.load(f)
+root=os.path.abspath(root)
+with gzip.open(os.path.join(directory,'canon.gz'),'rt',encoding='utf-8')as f:c=json.load(f)
+with gzip.open(os.path.join(directory,'commentary.gz'),'rt',encoding='utf-8')as f:a=json.load(f)
 original=copy.deepcopy(c);att=copy.deepcopy(a);report=repair(c,a,root)
 assert report['changed_spans']==list(TARGETS)and report['commentary_changes']=={}
 assert a==att and report['input_commentary_sha256']==report['output_commentary_sha256']
@@ -174,7 +176,7 @@ for filename in (FILE,ATT):
    target=os.path.join(badroot,'romn',name)
    if name==filename:
     with open(target,'wb')as f:f.write(b'Unreviewed raw XML; must refuse before parsing')
-   else:os.symlink(os.path.join(root,'romn',name),target)
+   else:shutil.copyfile(os.path.join(root,'romn',name),target)
   cc=copy.deepcopy(original);aa=copy.deepcopy(att);before=copy.deepcopy((cc,aa))
   try:repair(cc,aa,badroot)
   except ValueError as error:assert 'Git blob differs'in str(error)
