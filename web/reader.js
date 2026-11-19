@@ -245,9 +245,10 @@ function chapterSummary(data, target, level) {
 function collectionSummary(data, target, level) {
   if (!data.collection_summary) return; // Separately validated ownership; never part of poem pagination.
   const summary = data.collection_summary, section = el('section');
-  section.setAttribute('aria-label', 'Canonical collection summary · not poem text');
-  section.append(el('h' + level, 'Canonical collection summary · not poem text'), el('p', summary.text, 'translation'));
-  section.append(el('p', 'The publisher’s collection summary is separate from this poem and its chapter summary. It is not poem quotation evidence.'));
+  const firstHundred = summary.parent_id === 'tha-ap102', heading = firstHundred ? 'Therā Apadāna first-hundred chapter summary and colophons · not poem text' : 'Canonical collection summary · not poem text';
+  section.setAttribute('aria-label', heading);
+  section.append(el('h' + level, heading), el('p', summary.text, 'translation'));
+  section.append(el('p', firstHundred ? 'This summary covers the publisher’s first hundred Therā poems and first ten chapters. It does not mark the end of the Therā Apadāna. Original counts and titles are preserved; they are not a measure of indexed translation coverage. It is separate from the poem and chapter summary, and is not poem quotation evidence.' : 'The publisher’s collection summary is separate from this poem and its chapter summary. It is not poem quotation evidence.'));
   section.append(el('h' + level, 'Collection summary notes · editorial, not poem notes'));
   const list = el('ol');
   for (const note of summary.translator_notes) { const item = el('li'); item.value = note.number; item.append(el('p', note.text, 'translator-note')); list.append(item); }
@@ -268,6 +269,18 @@ function publisherDivisions(data, target, level) {
     }
     target.append(section);
   }
+}
+
+function editorialGap(data, target, level) {
+  if (!data.editorial_gap) return; // Its exact owner, placement, text and note hash were checked before English display.
+  const gap = data.editorial_gap, section = el('section');
+  section.setAttribute('aria-label', 'Publisher editorial gap · not poem text');
+  section.append(el('h' + level, 'Publisher editorial gap · not poem text'));
+  section.append(el('p', 'Original publisher placement: after local stanza ' + gap.after_local_label + ' (printed global label ' + gap.after_publisher_label + '), before local stanza ' + gap.before_local_label + ' (printed global label ' + gap.before_publisher_label + ').'));
+  section.append(el('p', gap.text, 'translation'), el('h' + level, 'Editorial gap notes · not poem notes'));
+  const list = el('ol');
+  for (const note of gap.translator_notes) { const item = el('li'); item.value = note.number; item.append(el('p', note.text, 'translator-note')); list.append(item); }
+  section.append(list); target.append(section);
 }
 
 function provenance(data, target = view) {
@@ -931,7 +944,7 @@ function compareEnglishSources(selected, token, context) {
       try {
         const data = await tool('get_translation', args, 'study', 'English comparison ' + id); if (!sameRequest()) return;
         const next = validateComparisonPage(data, args, { uid: context.uid, choices: [choice], accepted: null });
-        const content = el('div'); notes(data, content); content.append(el('p', data.text, 'translation')); translatorNoteSection(data, content, 5); publisherParatext(data, content, 5); chapterSummary(data, content, 5); collectionSummary(data, content, 5); publisherDivisions(data, content, 5); provenance(data, content);
+        const content = el('div'); notes(data, content); content.append(el('p', data.text, 'translation')); translatorNoteSection(data, content, 5); publisherParatext(data, content, 5); chapterSummary(data, content, 5); collectionSummary(data, content, 5); publisherDivisions(data, content, 5); editorialGap(data, content, 5); provenance(data, content);
         body.replaceChildren(content);
         progress.textContent = 'English characters ' + (data.offset + 1) + '–' + (data.offset + data.text.length) + (next ? ' · more pages available' : ' · end of this source');
         message.textContent = 'Selected source page loaded.';
@@ -975,7 +988,7 @@ async function englishPage(args, token, context) {
     else if (anTenSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive discourse selected from exact paragraphs on the parent publisher page. The publisher title names that page; no individual publisher heading is supplied. Other discourses and untranslated Pāli paratext remain outside this selection. Any owned translator’s notes are editorial, not canonical discourse text. This is not word-by-word alignment.', 'notice'));
     else if (numberedSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive numbered treatment selection. The printed number identifies this treatment; the publisher title names the complete page. Other treatments, untranslated Pāli paratext and forms of address are outside this English selection. This is not word-by-word alignment.', 'notice'));
     else if (sectionSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive discourse selection. Other discourses on the publisher page and untranslated Pāli paratext are outside this English selection.', 'notice'));
-    notes(data, target); target.append(el('p', data.text, 'translation')); translatorNoteSection(data, target, 4); publisherParatext(data, target, 4); chapterSummary(data, target, 4); collectionSummary(data, target, 4); publisherDivisions(data, target, 4); provenance(data, target);
+    notes(data, target); target.append(el('p', data.text, 'translation')); translatorNoteSection(data, target, 4); publisherParatext(data, target, 4); chapterSummary(data, target, 4); collectionSummary(data, target, 4); publisherDivisions(data, target, 4); editorialGap(data, target, 4); provenance(data, target);
     if (next) target.append(button('Next English page →', () => englishPage(next, token, context)));
     target.append(button('Reload passage and review sources', render));
   } catch (error) { if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el('p', error.message, 'notice'), button('Retry selected source', () => englishPage(args, token, context)), button('Reload passage and review sources', render)); }

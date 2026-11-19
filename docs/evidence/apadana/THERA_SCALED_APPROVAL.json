@@ -1,0 +1,995 @@
+{
+  "schema": "reviewed-apadana-intake-v1",
+  "status": "approved",
+  "base_commit": "64a336789ab5f4f02964ff3023ea6b26b330e406",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "baseline_ids": [
+    "thi-ap1",
+    "thi-ap2",
+    "thi-ap3",
+    "thi-ap4",
+    "thi-ap5",
+    "thi-ap6",
+    "thi-ap7",
+    "thi-ap8",
+    "thi-ap9",
+    "thi-ap10",
+    "thi-ap11",
+    "thi-ap12",
+    "thi-ap13",
+    "thi-ap14",
+    "thi-ap15",
+    "thi-ap16",
+    "thi-ap17",
+    "thi-ap18",
+    "thi-ap19",
+    "thi-ap20",
+    "thi-ap21",
+    "thi-ap22",
+    "thi-ap23",
+    "thi-ap24",
+    "thi-ap25",
+    "thi-ap26",
+    "thi-ap27",
+    "thi-ap28",
+    "thi-ap29",
+    "thi-ap30",
+    "thi-ap31",
+    "thi-ap32",
+    "thi-ap33",
+    "thi-ap34",
+    "thi-ap35",
+    "thi-ap36",
+    "thi-ap37",
+    "thi-ap38",
+    "thi-ap39",
+    "thi-ap40",
+    "tha-ap13",
+    "tha-ap14",
+    "tha-ap15",
+    "tha-ap16",
+    "tha-ap17",
+    "tha-ap18",
+    "tha-ap19",
+    "tha-ap20",
+    "tha-ap21",
+    "tha-ap22",
+    "tha-ap23",
+    "tha-ap24",
+    "tha-ap25",
+    "tha-ap26",
+    "tha-ap27",
+    "tha-ap28",
+    "tha-ap29",
+    "tha-ap30",
+    "tha-ap31",
+    "tha-ap32",
+    "tha-ap33",
+    "tha-ap34",
+    "tha-ap35",
+    "tha-ap36",
+    "tha-ap37",
+    "tha-ap38",
+    "tha-ap39",
+    "tha-ap40",
+    "tha-ap41",
+    "tha-ap42",
+    "tha-ap43",
+    "tha-ap45",
+    "tha-ap46",
+    "tha-ap47",
+    "tha-ap48",
+    "tha-ap49",
+    "tha-ap50",
+    "tha-ap51",
+    "tha-ap52",
+    "tha-ap53",
+    "tha-ap54",
+    "tha-ap55",
+    "tha-ap56",
+    "tha-ap57",
+    "tha-ap58",
+    "tha-ap59",
+    "tha-ap60",
+    "tha-ap61",
+    "tha-ap62"
+  ],
+  "baseline_records": [
+    {
+      "id": "thi-ap1",
+      "publisher_chapter": "chapter-4",
+      "poem": 1
+    },
+    {
+      "id": "thi-ap2",
+      "publisher_chapter": "chapter-4",
+      "poem": 2
+    },
+    {
+      "id": "thi-ap3",
+      "publisher_chapter": "chapter-4",
+      "poem": 3
+    },
+    {
+      "id": "thi-ap4",
+      "publisher_chapter": "chapter-4",
+      "poem": 4
+    },
+    {
+      "id": "thi-ap5",
+      "publisher_chapter": "chapter-4",
+      "poem": 5
+    },
+    {
+      "id": "thi-ap6",
+      "publisher_chapter": "chapter-4",
+      "poem": 6
+    },
+    {
+      "id": "thi-ap7",
+      "publisher_chapter": "chapter-4",
+      "poem": 7
+    },
+    {
+      "id": "thi-ap8",
+      "publisher_chapter": "chapter-4",
+      "poem": 8
+    },
+    {
+      "id": "thi-ap9",
+      "publisher_chapter": "chapter-4",
+      "poem": 9
+    },
+    {
+      "id": "thi-ap10",
+      "publisher_chapter": "chapter-4",
+      "poem": 10
+    },
+    {
+      "id": "thi-ap11",
+      "publisher_chapter": "chapter-4",
+      "poem": 11
+    },
+    {
+      "id": "thi-ap12",
+      "publisher_chapter": "chapter-4",
+      "poem": 12
+    },
+    {
+      "id": "thi-ap13",
+      "publisher_chapter": "chapter-4",
+      "poem": 13
+    },
+    {
+      "id": "thi-ap14",
+      "publisher_chapter": "chapter-4",
+      "poem": 14
+    },
+    {
+      "id": "thi-ap15",
+      "publisher_chapter": "chapter-4",
+      "poem": 15
+    },
+    {
+      "id": "thi-ap16",
+      "publisher_chapter": "chapter-4",
+      "poem": 16
+    },
+    {
+      "id": "thi-ap17",
+      "publisher_chapter": "chapter-4",
+      "poem": 17
+    },
+    {
+      "id": "thi-ap18",
+      "publisher_chapter": "chapter-4",
+      "poem": 18
+    },
+    {
+      "id": "thi-ap19",
+      "publisher_chapter": "chapter-4",
+      "poem": 19
+    },
+    {
+      "id": "thi-ap20",
+      "publisher_chapter": "chapter-4",
+      "poem": 20
+    },
+    {
+      "id": "thi-ap21",
+      "publisher_chapter": "chapter-4",
+      "poem": 21
+    },
+    {
+      "id": "thi-ap22",
+      "publisher_chapter": "chapter-4",
+      "poem": 22
+    },
+    {
+      "id": "thi-ap23",
+      "publisher_chapter": "chapter-4",
+      "poem": 23
+    },
+    {
+      "id": "thi-ap24",
+      "publisher_chapter": "chapter-4",
+      "poem": 24
+    },
+    {
+      "id": "thi-ap25",
+      "publisher_chapter": "chapter-4",
+      "poem": 25
+    },
+    {
+      "id": "thi-ap26",
+      "publisher_chapter": "chapter-4",
+      "poem": 26
+    },
+    {
+      "id": "thi-ap27",
+      "publisher_chapter": "chapter-4",
+      "poem": 27
+    },
+    {
+      "id": "thi-ap28",
+      "publisher_chapter": "chapter-4",
+      "poem": 28
+    },
+    {
+      "id": "thi-ap29",
+      "publisher_chapter": "chapter-4",
+      "poem": 29
+    },
+    {
+      "id": "thi-ap30",
+      "publisher_chapter": "chapter-4",
+      "poem": 30
+    },
+    {
+      "id": "thi-ap31",
+      "publisher_chapter": "chapter-4",
+      "poem": 31
+    },
+    {
+      "id": "thi-ap32",
+      "publisher_chapter": "chapter-4",
+      "poem": 32
+    },
+    {
+      "id": "thi-ap33",
+      "publisher_chapter": "chapter-4",
+      "poem": 33
+    },
+    {
+      "id": "thi-ap34",
+      "publisher_chapter": "chapter-4",
+      "poem": 34
+    },
+    {
+      "id": "thi-ap35",
+      "publisher_chapter": "chapter-4",
+      "poem": 35
+    },
+    {
+      "id": "thi-ap36",
+      "publisher_chapter": "chapter-4",
+      "poem": 36
+    },
+    {
+      "id": "thi-ap37",
+      "publisher_chapter": "chapter-4",
+      "poem": 37
+    },
+    {
+      "id": "thi-ap38",
+      "publisher_chapter": "chapter-4",
+      "poem": 38
+    },
+    {
+      "id": "thi-ap39",
+      "publisher_chapter": "chapter-4",
+      "poem": 39
+    },
+    {
+      "id": "thi-ap40",
+      "publisher_chapter": "chapter-4",
+      "poem": 40
+    },
+    {
+      "id": "tha-ap13",
+      "publisher_chapter": "chapter-3",
+      "poem": 11
+    },
+    {
+      "id": "tha-ap14",
+      "publisher_chapter": "chapter-3",
+      "poem": 12
+    },
+    {
+      "id": "tha-ap15",
+      "publisher_chapter": "chapter-3",
+      "poem": 13
+    },
+    {
+      "id": "tha-ap16",
+      "publisher_chapter": "chapter-3",
+      "poem": 14
+    },
+    {
+      "id": "tha-ap17",
+      "publisher_chapter": "chapter-3",
+      "poem": 15
+    },
+    {
+      "id": "tha-ap18",
+      "publisher_chapter": "chapter-3",
+      "poem": 16
+    },
+    {
+      "id": "tha-ap19",
+      "publisher_chapter": "chapter-3",
+      "poem": 17
+    },
+    {
+      "id": "tha-ap20",
+      "publisher_chapter": "chapter-3",
+      "poem": 18
+    },
+    {
+      "id": "tha-ap21",
+      "publisher_chapter": "chapter-3",
+      "poem": 19
+    },
+    {
+      "id": "tha-ap22",
+      "publisher_chapter": "chapter-3",
+      "poem": 20
+    },
+    {
+      "id": "tha-ap23",
+      "publisher_chapter": "chapter-3",
+      "poem": 21
+    },
+    {
+      "id": "tha-ap24",
+      "publisher_chapter": "chapter-3",
+      "poem": 22
+    },
+    {
+      "id": "tha-ap25",
+      "publisher_chapter": "chapter-3",
+      "poem": 23
+    },
+    {
+      "id": "tha-ap26",
+      "publisher_chapter": "chapter-3",
+      "poem": 24
+    },
+    {
+      "id": "tha-ap27",
+      "publisher_chapter": "chapter-3",
+      "poem": 25
+    },
+    {
+      "id": "tha-ap28",
+      "publisher_chapter": "chapter-3",
+      "poem": 26
+    },
+    {
+      "id": "tha-ap29",
+      "publisher_chapter": "chapter-3",
+      "poem": 27
+    },
+    {
+      "id": "tha-ap30",
+      "publisher_chapter": "chapter-3",
+      "poem": 28
+    },
+    {
+      "id": "tha-ap31",
+      "publisher_chapter": "chapter-3",
+      "poem": 29
+    },
+    {
+      "id": "tha-ap32",
+      "publisher_chapter": "chapter-3",
+      "poem": 30
+    },
+    {
+      "id": "tha-ap33",
+      "publisher_chapter": "chapter-3",
+      "poem": 31
+    },
+    {
+      "id": "tha-ap34",
+      "publisher_chapter": "chapter-3",
+      "poem": 32
+    },
+    {
+      "id": "tha-ap35",
+      "publisher_chapter": "chapter-3",
+      "poem": 33
+    },
+    {
+      "id": "tha-ap36",
+      "publisher_chapter": "chapter-3",
+      "poem": 34
+    },
+    {
+      "id": "tha-ap37",
+      "publisher_chapter": "chapter-3",
+      "poem": 35
+    },
+    {
+      "id": "tha-ap38",
+      "publisher_chapter": "chapter-3",
+      "poem": 36
+    },
+    {
+      "id": "tha-ap39",
+      "publisher_chapter": "chapter-3",
+      "poem": 37
+    },
+    {
+      "id": "tha-ap40",
+      "publisher_chapter": "chapter-3",
+      "poem": 38
+    },
+    {
+      "id": "tha-ap41",
+      "publisher_chapter": "chapter-3",
+      "poem": 39
+    },
+    {
+      "id": "tha-ap42",
+      "publisher_chapter": "chapter-3",
+      "poem": 40
+    },
+    {
+      "id": "tha-ap43",
+      "publisher_chapter": "chapter-3",
+      "poem": 41
+    },
+    {
+      "id": "tha-ap45",
+      "publisher_chapter": "chapter-3",
+      "poem": 43
+    },
+    {
+      "id": "tha-ap46",
+      "publisher_chapter": "chapter-3",
+      "poem": 44
+    },
+    {
+      "id": "tha-ap47",
+      "publisher_chapter": "chapter-3",
+      "poem": 45
+    },
+    {
+      "id": "tha-ap48",
+      "publisher_chapter": "chapter-3",
+      "poem": 46
+    },
+    {
+      "id": "tha-ap49",
+      "publisher_chapter": "chapter-3",
+      "poem": 47
+    },
+    {
+      "id": "tha-ap50",
+      "publisher_chapter": "chapter-3",
+      "poem": 48
+    },
+    {
+      "id": "tha-ap51",
+      "publisher_chapter": "chapter-3",
+      "poem": 49
+    },
+    {
+      "id": "tha-ap52",
+      "publisher_chapter": "chapter-3",
+      "poem": 50
+    },
+    {
+      "id": "tha-ap53",
+      "publisher_chapter": "chapter-3",
+      "poem": 51
+    },
+    {
+      "id": "tha-ap54",
+      "publisher_chapter": "chapter-3",
+      "poem": 52
+    },
+    {
+      "id": "tha-ap55",
+      "publisher_chapter": "chapter-3",
+      "poem": 53
+    },
+    {
+      "id": "tha-ap56",
+      "publisher_chapter": "chapter-3",
+      "poem": 54
+    },
+    {
+      "id": "tha-ap57",
+      "publisher_chapter": "chapter-3",
+      "poem": 55
+    },
+    {
+      "id": "tha-ap58",
+      "publisher_chapter": "chapter-3",
+      "poem": 56
+    },
+    {
+      "id": "tha-ap59",
+      "publisher_chapter": "chapter-3",
+      "poem": 57
+    },
+    {
+      "id": "tha-ap60",
+      "publisher_chapter": "chapter-3",
+      "poem": 58
+    },
+    {
+      "id": "tha-ap61",
+      "publisher_chapter": "chapter-3",
+      "poem": 59
+    },
+    {
+      "id": "tha-ap62",
+      "publisher_chapter": "chapter-3",
+      "poem": 60
+    }
+  ],
+  "approved_ids": [
+    "tha-ap44",
+    "tha-ap63",
+    "tha-ap64",
+    "tha-ap65",
+    "tha-ap66",
+    "tha-ap67",
+    "tha-ap68",
+    "tha-ap69",
+    "tha-ap70",
+    "tha-ap71",
+    "tha-ap73",
+    "tha-ap74",
+    "tha-ap75",
+    "tha-ap76",
+    "tha-ap77",
+    "tha-ap78",
+    "tha-ap79",
+    "tha-ap80",
+    "tha-ap81",
+    "tha-ap82",
+    "tha-ap83",
+    "tha-ap84",
+    "tha-ap85",
+    "tha-ap86",
+    "tha-ap87",
+    "tha-ap88",
+    "tha-ap89",
+    "tha-ap90",
+    "tha-ap91",
+    "tha-ap92",
+    "tha-ap93",
+    "tha-ap94",
+    "tha-ap95",
+    "tha-ap96",
+    "tha-ap97",
+    "tha-ap98",
+    "tha-ap99",
+    "tha-ap100",
+    "tha-ap101",
+    "tha-ap102"
+  ],
+  "goldens": [
+    {
+      "file": "THERA_SEVENTH_GOLDENS.json",
+      "sha256": "7071e9ceaa4475a974b30ee7afa43cd8f5186c30e198e8290752b340972fca68"
+    },
+    {
+      "file": "THERA_EIGHTH_GOLDENS.json",
+      "sha256": "4297ca598c8f0b78176f5e74cf158a581ce173a022f9c070ce3d8f9cce044d8b"
+    },
+    {
+      "file": "THERA_NINTH_GOLDENS.json",
+      "sha256": "070286aa013457d7bd387121945b8b720b83f1aeb1f6a788409594535de712f5"
+    },
+    {
+      "file": "THERA_TENTH_GOLDENS.json",
+      "sha256": "2bbc739ecb97d198ecc0e4f6d599569bc846c74e03744367c649d3e87309db89"
+    },
+    {
+      "file": "THERA_EDITORIAL_GAP_GOLDENS.json",
+      "sha256": "1aa8fadf962964ddf1ee2faefa86bcf3914944337ba61b7e2214600170210ac8"
+    }
+  ],
+  "held_ids": [
+    "tha-ap72"
+  ],
+  "expected_profile_ids": [
+    "thi-ap1",
+    "thi-ap2",
+    "thi-ap3",
+    "thi-ap4",
+    "thi-ap5",
+    "thi-ap6",
+    "thi-ap7",
+    "thi-ap8",
+    "thi-ap9",
+    "thi-ap10",
+    "thi-ap11",
+    "thi-ap12",
+    "thi-ap13",
+    "thi-ap14",
+    "thi-ap15",
+    "thi-ap16",
+    "thi-ap17",
+    "thi-ap18",
+    "thi-ap19",
+    "thi-ap20",
+    "thi-ap21",
+    "thi-ap22",
+    "thi-ap23",
+    "thi-ap24",
+    "thi-ap25",
+    "thi-ap26",
+    "thi-ap27",
+    "thi-ap28",
+    "thi-ap29",
+    "thi-ap30",
+    "thi-ap31",
+    "thi-ap32",
+    "thi-ap33",
+    "thi-ap34",
+    "thi-ap35",
+    "thi-ap36",
+    "thi-ap37",
+    "thi-ap38",
+    "thi-ap39",
+    "thi-ap40",
+    "tha-ap13",
+    "tha-ap14",
+    "tha-ap15",
+    "tha-ap16",
+    "tha-ap17",
+    "tha-ap18",
+    "tha-ap19",
+    "tha-ap20",
+    "tha-ap21",
+    "tha-ap22",
+    "tha-ap23",
+    "tha-ap24",
+    "tha-ap25",
+    "tha-ap26",
+    "tha-ap27",
+    "tha-ap28",
+    "tha-ap29",
+    "tha-ap30",
+    "tha-ap31",
+    "tha-ap32",
+    "tha-ap33",
+    "tha-ap34",
+    "tha-ap35",
+    "tha-ap36",
+    "tha-ap37",
+    "tha-ap38",
+    "tha-ap39",
+    "tha-ap40",
+    "tha-ap41",
+    "tha-ap42",
+    "tha-ap43",
+    "tha-ap45",
+    "tha-ap46",
+    "tha-ap47",
+    "tha-ap48",
+    "tha-ap49",
+    "tha-ap50",
+    "tha-ap51",
+    "tha-ap52",
+    "tha-ap53",
+    "tha-ap54",
+    "tha-ap55",
+    "tha-ap56",
+    "tha-ap57",
+    "tha-ap58",
+    "tha-ap59",
+    "tha-ap60",
+    "tha-ap61",
+    "tha-ap62",
+    "tha-ap44",
+    "tha-ap63",
+    "tha-ap64",
+    "tha-ap65",
+    "tha-ap66",
+    "tha-ap67",
+    "tha-ap68",
+    "tha-ap69",
+    "tha-ap70",
+    "tha-ap71",
+    "tha-ap73",
+    "tha-ap74",
+    "tha-ap75",
+    "tha-ap76",
+    "tha-ap77",
+    "tha-ap78",
+    "tha-ap79",
+    "tha-ap80",
+    "tha-ap81",
+    "tha-ap82",
+    "tha-ap83",
+    "tha-ap84",
+    "tha-ap85",
+    "tha-ap86",
+    "tha-ap87",
+    "tha-ap88",
+    "tha-ap89",
+    "tha-ap90",
+    "tha-ap91",
+    "tha-ap92",
+    "tha-ap93",
+    "tha-ap94",
+    "tha-ap95",
+    "tha-ap96",
+    "tha-ap97",
+    "tha-ap98",
+    "tha-ap99",
+    "tha-ap100",
+    "tha-ap101",
+    "tha-ap102"
+  ],
+  "scope": "Curatorial source activation approval; runtime, build, browser, independent frozen review and exact-commit CI remain separate release gates.",
+  "approved_records": [
+    {
+      "id": "tha-ap44",
+      "publisher_chapter": "chapter-3",
+      "poem": 42
+    },
+    {
+      "id": "tha-ap63",
+      "publisher_chapter": "chapter-3",
+      "poem": 61
+    },
+    {
+      "id": "tha-ap64",
+      "publisher_chapter": "chapter-3",
+      "poem": 62
+    },
+    {
+      "id": "tha-ap65",
+      "publisher_chapter": "chapter-3",
+      "poem": 63
+    },
+    {
+      "id": "tha-ap66",
+      "publisher_chapter": "chapter-3",
+      "poem": 64
+    },
+    {
+      "id": "tha-ap67",
+      "publisher_chapter": "chapter-3",
+      "poem": 65
+    },
+    {
+      "id": "tha-ap68",
+      "publisher_chapter": "chapter-3",
+      "poem": 66
+    },
+    {
+      "id": "tha-ap69",
+      "publisher_chapter": "chapter-3",
+      "poem": 67
+    },
+    {
+      "id": "tha-ap70",
+      "publisher_chapter": "chapter-3",
+      "poem": 68
+    },
+    {
+      "id": "tha-ap71",
+      "publisher_chapter": "chapter-3",
+      "poem": 69
+    },
+    {
+      "id": "tha-ap73",
+      "publisher_chapter": "chapter-3",
+      "poem": 71
+    },
+    {
+      "id": "tha-ap74",
+      "publisher_chapter": "chapter-3",
+      "poem": 72
+    },
+    {
+      "id": "tha-ap75",
+      "publisher_chapter": "chapter-3",
+      "poem": 73
+    },
+    {
+      "id": "tha-ap76",
+      "publisher_chapter": "chapter-3",
+      "poem": 74
+    },
+    {
+      "id": "tha-ap77",
+      "publisher_chapter": "chapter-3",
+      "poem": 75
+    },
+    {
+      "id": "tha-ap78",
+      "publisher_chapter": "chapter-3",
+      "poem": 76
+    },
+    {
+      "id": "tha-ap79",
+      "publisher_chapter": "chapter-3",
+      "poem": 77
+    },
+    {
+      "id": "tha-ap80",
+      "publisher_chapter": "chapter-3",
+      "poem": 78
+    },
+    {
+      "id": "tha-ap81",
+      "publisher_chapter": "chapter-3",
+      "poem": 79
+    },
+    {
+      "id": "tha-ap82",
+      "publisher_chapter": "chapter-3",
+      "poem": 80
+    },
+    {
+      "id": "tha-ap83",
+      "publisher_chapter": "chapter-3",
+      "poem": 81
+    },
+    {
+      "id": "tha-ap84",
+      "publisher_chapter": "chapter-3",
+      "poem": 82
+    },
+    {
+      "id": "tha-ap85",
+      "publisher_chapter": "chapter-3",
+      "poem": 83
+    },
+    {
+      "id": "tha-ap86",
+      "publisher_chapter": "chapter-3",
+      "poem": 84
+    },
+    {
+      "id": "tha-ap87",
+      "publisher_chapter": "chapter-3",
+      "poem": 85
+    },
+    {
+      "id": "tha-ap88",
+      "publisher_chapter": "chapter-3",
+      "poem": 86
+    },
+    {
+      "id": "tha-ap89",
+      "publisher_chapter": "chapter-3",
+      "poem": 87
+    },
+    {
+      "id": "tha-ap90",
+      "publisher_chapter": "chapter-3",
+      "poem": 88
+    },
+    {
+      "id": "tha-ap91",
+      "publisher_chapter": "chapter-3",
+      "poem": 89
+    },
+    {
+      "id": "tha-ap92",
+      "publisher_chapter": "chapter-3",
+      "poem": 90
+    },
+    {
+      "id": "tha-ap93",
+      "publisher_chapter": "chapter-3",
+      "poem": 91
+    },
+    {
+      "id": "tha-ap94",
+      "publisher_chapter": "chapter-3",
+      "poem": 92
+    },
+    {
+      "id": "tha-ap95",
+      "publisher_chapter": "chapter-3",
+      "poem": 93
+    },
+    {
+      "id": "tha-ap96",
+      "publisher_chapter": "chapter-3",
+      "poem": 94
+    },
+    {
+      "id": "tha-ap97",
+      "publisher_chapter": "chapter-3",
+      "poem": 95
+    },
+    {
+      "id": "tha-ap98",
+      "publisher_chapter": "chapter-3",
+      "poem": 96
+    },
+    {
+      "id": "tha-ap99",
+      "publisher_chapter": "chapter-3",
+      "poem": 97
+    },
+    {
+      "id": "tha-ap100",
+      "publisher_chapter": "chapter-3",
+      "poem": 98
+    },
+    {
+      "id": "tha-ap101",
+      "publisher_chapter": "chapter-3",
+      "poem": 99
+    },
+    {
+      "id": "tha-ap102",
+      "publisher_chapter": "chapter-3",
+      "poem": 100
+    }
+  ],
+  "source_reviews": [
+    {
+      "file": "THERA_EIGHTH_SOURCE_REVIEW.json",
+      "sha256": "cd8c0911a9bc341c130c2bb01548b702eee6f09b63f567ce840bb8980d477146"
+    },
+    {
+      "file": "THERA_NINTH_SOURCE_REVIEW.json",
+      "sha256": "0561872af5d23fa52106cbcc0ac3719f9a9666c7822a5052d52629cc35072c7d"
+    },
+    {
+      "file": "THERA_SEVENTH_SOURCE_REVIEW.json",
+      "sha256": "fbf828c1e95e961a8587837a01c46d1d78a9ee51c265ea6a72109553a91415a6"
+    },
+    {
+      "file": "THERA_TENTH_SOURCE_REVIEW.json",
+      "sha256": "b71f1275c694881dc85fdb58b3c736bab0db239594fcad0144fc181b44813b23"
+    }
+  ],
+  "independent_source_approvals": [
+    {
+      "file": "THERA_SCALED_EARLY_SOURCE_SCOPE_APPROVAL.json",
+      "sha256": "1a6e8f0d5c9fbc091fd809eab60a09b5c3c70e3b392d277db35f478fb637987e"
+    },
+    {
+      "file": "THERA_SCALED_HELD42_INDEPENDENT_SOURCE_CONTRACT.json",
+      "sha256": "e3504807caafe8cb7f8e0663dc339427af16a1e80bb6747799c261f7566b603d"
+    },
+    {
+      "file": "THERA_SCALED_SOURCE81_100_SCOPE_APPROVAL.json",
+      "sha256": "436e393d10ad35e00f2949878c588dee374470edf0dcc345393bd2f7c4a98556"
+    },
+    {
+      "file": "THERA_SCALED_SEGMENT_CLASSIFICATION_REPAIR_REVIEW.json",
+      "sha256": "1ad58e6a22ccec666f8d6a559bed79804af2b2e99e9ac877bc91c4363b9b0e69"
+    }
+  ],
+  "coverage_baseline": {
+    "apadana": 89,
+    "whole_links": 2672,
+    "direct": 1568,
+    "inherited": 1991,
+    "grouped_direct": 1542,
+    "grouped_inherited": 1965
+  },
+  "first_indexed_english_gain": 40,
+  "classification_repair": {
+    "file": "THERA_SCALED_CLASSIFICATION_REPAIR.json",
+    "sha256": "7bf40937aa9fbf9957e312740866feee89b0ac73de08d0cbc2530c89180b33b5",
+    "scope": "Original centred first-hundred closing colophon is a heading; no scripture, scope or production changes."
+  }
+}

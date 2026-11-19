@@ -1,0 +1,96 @@
+{
+  "decision": "SOURCE_APPROVED9/HOLD1",
+  "baseline": "64a336789ab5f4f02964ff3023ea6b26b330e406",
+  "approved": [
+    {
+      "poem": 61,
+      "id": "tha-ap63",
+      "raw_sha256": "9f7b2d482f6f26bb3e8eec5dce371053784eaf417a6e04aba9ae4922693639a5",
+      "body_sha256": "8204159394947f6fbd1a48c0f279b7809c9a5bf6e817ee3d9031ec6546feb785",
+      "notes_sha256": "23e109dce1d35c64578e32284b50f16cd1189c9071b353728246b98921379d26",
+      "root_sha256": "e61b5707bff1c01de53de7ba49cc562f01809e1c404ad013fe323824312e33a6"
+    },
+    {
+      "poem": 62,
+      "id": "tha-ap64",
+      "raw_sha256": "8105a660a63d196b699c2ef064f5164b1500f4c9f0b0c28fdee1dbc097cea044",
+      "body_sha256": "6154abbac5181fb6d4639067c011e7279e87315f47b4c78251d9941b3e72199c",
+      "notes_sha256": "fe69db8fcce35acc9830a24cc95d2449e88d61db0028bd251a8d82042e95edca",
+      "root_sha256": "a5e7f3179747cb7ce54cbe2ae38a0b19ffdeb0de9159518e6681677d1e82eeb8"
+    },
+    {
+      "poem": 63,
+      "id": "tha-ap65",
+      "raw_sha256": "8a2ae0461bd408052435322844ad712f5b08db05f7ca823f5b9551f12a25fd64",
+      "body_sha256": "dae37615c707f98a0a7fbf2898fa752b1b97a06a25d436938b5a7cacee1581d4",
+      "notes_sha256": "b7b92d46da7f955d45797baa3f9f4104957eac7bcc28fc8afa953fc348a8d550",
+      "root_sha256": "40f31f6f9e6853334f50b66bf2a9cf0d3474f9c737980f705ce51f00611c9877"
+    },
+    {
+      "poem": 64,
+      "id": "tha-ap66",
+      "raw_sha256": "e7b230a732e09820915ff327870d10af5b5eddcc785a1793be42264e4bdbbe4d",
+      "body_sha256": "5d5f53fa7314f0174519f6136b33e8e645b3b5eb28a77c4dbc1cb8403d0cd76d",
+      "notes_sha256": "44c6cf9c9b2192e507d2255aadd009f8c008e64fb1329e0a2f79888d347c4369",
+      "root_sha256": "09702f3d9e3c8c18e67dff78e500a8a373c6e13fd38fbbd1ef917c975af5ebbb"
+    },
+    {
+      "poem": 65,
+      "id": "tha-ap67",
+      "raw_sha256": "b84bd230209e5561dbb8b751f9df510c9b8c92ac44d3ae3e594d00d020202567",
+      "body_sha256": "91f778fb851ad23ac06a8da4d67965ad21e093b60c7d2a4716f7f85c511bb43c",
+      "notes_sha256": "aa005f3807d24b70fc44c9a3383d92f643f949130b11e4bd1164031d569d9be4",
+      "root_sha256": "72226b1ead157d095215582af7f28c3c72d895289931212de01629c74096664a"
+    },
+    {
+      "poem": 66,
+      "id": "tha-ap68",
+      "raw_sha256": "2171cb8654d0212ac174bcd6ba7700cfd1a56f7809df31601b413ef0c96263d2",
+      "body_sha256": "cbe588fae288b81581dd6e7b78c64fb8b03ea35896982c88779a6d4db88956c9",
+      "notes_sha256": "6ec6b712e7773e1a7fe95f6936110b6e4952bdd462983ed56cf4fc3d0ef3b8cb",
+      "root_sha256": "727a2bcece9f7f5ded8946e3caa38f35d1214e92adb460ef924c683d9db04d3d"
+    },
+    {
+      "poem": 67,
+      "id": "tha-ap69",
+      "raw_sha256": "0616a08cab6ad2a2eb6325a50a33185d9468def55ff6d72f3e702500a7d0fc63",
+      "body_sha256": "b1c5de5f656f58abc861541477f5e75529200c2bd3731c0bb1138dfde7a5e133",
+      "notes_sha256": "12a11c8151894655ec3a92257210abe8f9df4e10c0832f99cb956fbd0a6c8b27",
+      "root_sha256": "258b6f967c4aa61ee39f312631bb472265cd3fe92f200e72480f0435e2d5607e"
+    },
+    {
+      "poem": 68,
+      "id": "tha-ap70",
+      "raw_sha256": "8c96f58e50d986c964b7c9a2385aa9d77483747a42380965b461d5fd9f29479b",
+      "body_sha256": "5d373b3b208962fc1394080e5b74cadb3cf67c8a5d500ec78c1807130761fa38",
+      "notes_sha256": "05336202bf45088bfff1f4b1ebad289844adf5ec34f08025712fbe40634071c7",
+      "root_sha256": "367547f9cab408e117ff1e91f9bf6edf6b30dac7b6436c8f3a96ea285be8aa26"
+    },
+    {
+      "poem": 69,
+      "id": "tha-ap71",
+      "raw_sha256": "73c1d41694c3e2112ccf55fc10a8a3130772207fd456428154255a36a4e082d2",
+      "body_sha256": "21e5ab3823b0b7b33277c6388d85d72bff6baf43808efb28a6539172fd9b22ae",
+      "notes_sha256": "aee6426ed52870ca73f7739f362520e60141cdea8eb063c95ef989966f1307fc",
+      "root_sha256": "238ed1bfac6f4e4c705896eb26fc6f89bb05c93b314abda1359a251d9490a7aa"
+    }
+  ],
+  "held": [
+    {
+      "poem": 70,
+      "id": "tha-ap72",
+      "reason": "Unsupported two orphan same-state Pandoc fragments in independently owned summary; note5 remains chapter-owned. Whole runtime path held until new finite faithful editorial contract independently approved. No deletion/repair or VRI completeness claim."
+    }
+  ],
+  "approved_totals": {
+    "poems": 9,
+    "physical_publisher_stanzas": 67,
+    "body_paragraphs": 94,
+    "poem_notes": 28
+  },
+  "source_review_sha256": "fbf828c1e95e961a8587837a01c46d1d78a9ee51c265ea6a72109553a91415a6",
+  "goldens_sha256": "7071e9ceaa4475a974b30ee7afa43cd8f5186c30e198e8290752b340972fca68",
+  "rights_sha256": "084cb98ab6e2ba269c65facbc8b5c6facd715198da590a2aec45188fb6ce358b",
+  "reproduction": "python review.py --source-root raw --canon /path/to/frozen64a-canon.json --xml vri/s0510m1.mul.xml --output-dir receipts; python findings.py. Standard-library only; no project imports or English bundles.",
+  "limits": "Source-scope approval conditional on independent extraction/review, implementation/runtime/package preservation and exact-commit CI; not final release approval."
+}

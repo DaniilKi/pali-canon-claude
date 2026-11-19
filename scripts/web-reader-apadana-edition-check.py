@@ -2,6 +2,7 @@
 """Reviewed publisher-family navigation; actual offline metadata, no English retrieval."""
 import argparse,copy,json,os,pathlib,socket,subprocess,tempfile,time,urllib.parse,urllib.request
 from playwright.sync_api import expect,sync_playwright
+from web_reader_apadana_intake import current_apadana_ids,current_family_ids
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 KEY='pali-library-v1';PRIVATE='PRIVATE_EDITION_DRAFT_ā😀'
 p=argparse.ArgumentParser();p.add_argument('--server-dir',type=pathlib.Path);p.add_argument('--package-dir',type=pathlib.Path);p.add_argument('--a11y',action='store_true');p.add_argument('--report',type=pathlib.Path);args=p.parse_args()
@@ -9,8 +10,8 @@ assert not(args.server_dir and args.package_dir)
 server_dir=(args.server_dir or (args.package_dir/'server' if args.package_dir else ROOT/'server')).resolve()
 manifest=json.loads((server_dir/'data/apadana.json').read_text());rows=manifest['links'];vri=manifest['vri_commit']
 families=[sorted([r for r in rows.values() if r['path'].startswith('/text/'+chapter+'/')],key=lambda r:r['poem']) for chapter in ['chapter-4','chapter-3']]
-assert [len(f) for f in families]==[40,49]
-assert [r['id'] for r in families[1]]==['tha-ap13','tha-ap14','tha-ap15','tha-ap16','tha-ap17','tha-ap18','tha-ap19','tha-ap20','tha-ap21','tha-ap22','tha-ap23','tha-ap24','tha-ap25','tha-ap26','tha-ap27','tha-ap28','tha-ap29','tha-ap30','tha-ap31','tha-ap32','tha-ap33','tha-ap34','tha-ap35','tha-ap36','tha-ap37','tha-ap38','tha-ap39','tha-ap40','tha-ap41','tha-ap42','tha-ap43','tha-ap45','tha-ap46','tha-ap47','tha-ap48','tha-ap49','tha-ap50','tha-ap51','tha-ap52','tha-ap53','tha-ap54','tha-ap55','tha-ap56','tha-ap57','tha-ap58','tha-ap59','tha-ap60','tha-ap61','tha-ap62']
+assert set(rows)==set(current_apadana_ids(ROOT)), 'Unexpected combined publisher-source scope'
+assert [[r['id'] for r in family] for family in families]==[current_family_ids(ROOT,chapter) for chapter in ['chapter-4','chapter-3']]
 with socket.socket() as sock:sock.bind(('127.0.0.1',0));port=sock.getsockname()[1]
 base=f'http://127.0.0.1:{port}';checks=[];scans=[];layouts=[]
 def tool(name,arguments):

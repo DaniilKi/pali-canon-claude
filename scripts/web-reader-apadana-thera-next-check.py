@@ -16,6 +16,7 @@ import urllib.request
 
 from playwright.sync_api import expect, sync_playwright
 from web_reader_test_helpers import read_tool
+from web_reader_apadana_intake import current_apadana_ids, current_family_ids
 from web_reader_apadana_thera_next_navigation import install_navigation_timing_probe, open_chapter_summary
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -620,7 +621,7 @@ def main():
     manifest = json.loads((server_dir / 'data/apadana.json').read_text())
     assert manifest == json.loads((ROOT / 'server/data/apadana.json').read_text()), 'Package metadata differs'
     combined_rows,commit=manifest['links'],manifest['source']['commit']
-    assert set(combined_rows) == {'thi-ap' + str(n) for n in range(1, 41)} | {'tha-ap' + str(n) for n in range(13, 43)} | {'tha-ap43', 'tha-ap45', 'tha-ap46', 'tha-ap47', 'tha-ap48', 'tha-ap49', 'tha-ap50', 'tha-ap51', 'tha-ap52', 'tha-ap53', 'tha-ap54', 'tha-ap55', 'tha-ap56', 'tha-ap57', 'tha-ap58', 'tha-ap59', 'tha-ap60', 'tha-ap61', 'tha-ap62'}, 'Unexpected combined publisher-source scope'
+    assert set(combined_rows) == set(current_apadana_ids(ROOT)), 'Unexpected combined publisher-source scope'
     # Retain all historical source/hash/wording assertions for exactly the previous seventy.
     historical_ids = set(BASELINE) | set(NEW_IDS)
     rows = {uid: row for uid, row in combined_rows.items() if uid in historical_ids}
@@ -888,8 +889,8 @@ def main():
 
                             saved(page, base)
                             page.get_by_label('Your personal note', exact=True).first.fill(PRIVATE + ' unsaved')
-                            for family_uid,expected_family in (('thi-ap40',[u for u in BASELINE if u.startswith('thi-ap')]),
-                                                               ('tha-ap33',[u for u in BASELINE if u.startswith('tha-ap')]+list(NEW_IDS)+['tha-ap43', 'tha-ap45', 'tha-ap46', 'tha-ap47', 'tha-ap48', 'tha-ap49', 'tha-ap50', 'tha-ap51', 'tha-ap52', 'tha-ap53', 'tha-ap54', 'tha-ap55', 'tha-ap56', 'tha-ap57', 'tha-ap58', 'tha-ap59', 'tha-ap60', 'tha-ap61', 'tha-ap62'])):
+                            for family_uid,expected_family in (('thi-ap40',current_family_ids(ROOT,'chapter-4')),
+                                                               ('tha-ap33',current_family_ids(ROOT,'chapter-3'))):
                                 prior=len(requests)
                                 page.goto(base+'/#read?uid='+family_uid)
                                 page.locator('.passage').first.wait_for();loaded(page)

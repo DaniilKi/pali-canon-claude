@@ -1,3 +1,4 @@
+import {CURRENT_APADANA_IDS,BASELINE_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 // Contract regressions for the reproduced loss of edition caveats in cached responses.
 // Synthetic wording exercises rendering guards; it is not source or rights evidence.
 import {test} from 'node:test';
@@ -32,15 +33,25 @@ function response(uid) {
   return {data, choice, args: {uid, translation: choice.translation_id, translation_revision: APADANA_COMMIT, limit: 500}, context: {uid, choices: [choice], accepted: null}};
 }
 function embeddedGuard() {
-  const sandbox = createContext({});
+  const sandbox = createContext({TextEncoder});
   runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('), WIDGET_HTML.indexOf('  function render(d) {')) + ';globalThis.check=checkedApadana;', sandbox);
   return data => sandbox.check(data);
 }
 
-test('every reviewed profile retains all mandatory edition caveats in standalone, comparison and embedded readers', () => {
-  assert.equal(WIDGET_VERSION, 'v24');
+test('every reviewed profile permitting synthetic wording retains all mandatory edition caveats in standalone, comparison and embedded readers', () => {
+  assert.equal(WIDGET_VERSION, 'v25');
   const checked = embeddedGuard();
-  for (const uid of Object.keys(APADANA_PROFILES)) {
+  assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
+  // These nine new finite content guards require exact live source wording.
+  // Their positive/tamper/cache cases use original artifacts in the held42 and
+  // thera-hundred client suites; every preceding89 synthetic fixture remains.
+  const exactContentIds=['tha-ap44','tha-ap63','tha-ap73','tha-ap76','tha-ap82','tha-ap83','tha-ap92','tha-ap93','tha-ap102'];
+  const syntheticIds = CURRENT_APADANA_IDS.filter(uid => !exactContentIds.includes(uid));
+  assert.equal(syntheticIds.length,120);
+  assert.equal(CURRENT_APADANA_IDS.length,129);
+  assert.equal(BASELINE_APADANA_IDS.length,89);
+  assert.ok(BASELINE_APADANA_IDS.every(uid=>syntheticIds.includes(uid)),'all89 preceding positive fixtures retain their original coverage');
+  for (const uid of syntheticIds) {
     const f = response(uid);
     assert.ok(f.data.mapping_notes.length, uid);
     // Choice metadata need not duplicate content-level caveats: the finite local profile owns them.

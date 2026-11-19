@@ -1,0 +1,84 @@
+{
+  "status": "CORRECTED INDEPENDENT GOLDEN CLASSIFICATION; no production change or waiver",
+  "cause": "Independent review segments() applied only explicit heading rending and omitted existing centre semantic-closure classification. Original centred samatta\u1e43 closing colophon is a heading under established canonical rendering rule.",
+  "source": {
+    "xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "xml_line": 20638,
+    "xml_tag": "p",
+    "rend": "centre",
+    "root_block": 5151,
+    "source_blocks": [
+      5151,
+      5152
+    ],
+    "ref": "tha-ap102/15",
+    "text_sha256": "32ce47f35ee7e37f76f722050d2207f0cf97682fdeaa00fdac398da2c49b600f"
+  },
+  "changed": [
+    {
+      "file": "THERA_TENTH_SOURCE_APPROVAL.json",
+      "old_sha256": "829da90d2b53c9cade2cb314b1060f253c105e9efab9a5b7e7cb97e30a4c823c",
+      "new_sha256": "23cb8427003c8b01a461e55dae7a3e6d75c9f3c92245e1c6debd4f9c0c679fff",
+      "differences": [
+        [
+          "/goldens_sha256",
+          "77736a9d33c446380fa922eee7626944893880deaf05c42ba5d67ae7916239c5",
+          "2bbc739ecb97d198ecc0e4f6d599569bc846c74e03744367c649d3e87309db89"
+        ],
+        [
+          "/source_review_sha256",
+          "108b768a4bb4534eae7db0097370d820620105375feb30a5cd4b90982210e900",
+          "b71f1275c694881dc85fdb58b3c736bab0db239594fcad0144fc181b44813b23"
+        ]
+      ]
+    },
+    {
+      "file": "THERA_TENTH_GOLDENS.json",
+      "old_sha256": "77736a9d33c446380fa922eee7626944893880deaf05c42ba5d67ae7916239c5",
+      "new_sha256": "2bbc739ecb97d198ecc0e4f6d599569bc846c74e03744367c649d3e87309db89",
+      "differences": [
+        [
+          "/poems/9/root/segments/14/type",
+          "prose",
+          "heading"
+        ]
+      ]
+    },
+    {
+      "file": "THERA_TENTH_SOURCE_REVIEW.json",
+      "old_sha256": "108b768a4bb4534eae7db0097370d820620105375feb30a5cd4b90982210e900",
+      "new_sha256": "b71f1275c694881dc85fdb58b3c736bab0db239594fcad0144fc181b44813b23",
+      "differences": [
+        [
+          "/goldens_sha256",
+          "77736a9d33c446380fa922eee7626944893880deaf05c42ba5d67ae7916239c5",
+          "2bbc739ecb97d198ecc0e4f6d599569bc846c74e03744367c649d3e87309db89"
+        ],
+        [
+          "/poems/9/root/segments/14/type",
+          "prose",
+          "heading"
+        ]
+      ]
+    }
+  ],
+  "unchanged": {
+    "all15_refs_and_wording_hashes": true,
+    "publisher_revision": true,
+    "source_raw_bytes_and_git_blob": true,
+    "publisher_bodies_and_notes": true,
+    "all_root_spans_and_hashes": true,
+    "all_publisher_scopes_and_ownership": true,
+    "proposed_profiles": true,
+    "all_ninth_metadata": true,
+    "all_other19_root_segment_types": true,
+    "original14645_block_xml_parity": true
+  },
+  "review_script": {
+    "old_sha256": "0709e10d07d305e0e838aa1fcf0ac22630a78a099d0142f4c0106ebcdf04ce7f",
+    "new_sha256": "7fda0a6dd3dc43f9626b6d007214d255e38c5efeb6ff11bce46ae0a261a936c2"
+  },
+  "project_mutations": 0,
+  "production_mutations": 0,
+  "independent_reviewer_approval": "PENDING"
+}

@@ -1,3 +1,4 @@
+import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 import { test, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -27,11 +28,11 @@ test('per-poem edition disclosures identify the independently reviewed VRI diffe
   }
 });
 
-test('eighty-nine individually reviewed publisher-poem mappings and exact publisher URLs', () => {
+test('independently reviewed publisher-poem mappings and exact publisher URLs', () => {
   const expected = Array.from({length:40},(_,i)=>i+1);
   const actual = Object.entries(canon.load().translations)
     .filter(([, links]) => links.some(l => l.source === 'apadana')).map(([key]) => key);
-  assert.deepEqual(actual, [...expected.map(n => 'thi-ap' + n),...Array.from({length:30},(_,i)=>'tha-ap'+(i+13)),'tha-ap43','tha-ap45','tha-ap46','tha-ap47','tha-ap48','tha-ap49','tha-ap50','tha-ap51','tha-ap52','tha-ap53','tha-ap54','tha-ap55','tha-ap56','tha-ap57','tha-ap58','tha-ap59','tha-ap60','tha-ap61','tha-ap62']);
+  assert.deepEqual(actual, CURRENT_APADANA_IDS);
   for (const n of expected) {
     const owner = 'thi-ap' + n, url = APADANA_PROFILES[owner].url;
     assert.equal(canon.resolve(url).unit.id, owner);

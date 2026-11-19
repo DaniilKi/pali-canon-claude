@@ -1,3 +1,4 @@
+import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 // Content-based translation links and per-collection coverage (#37).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -19,9 +20,9 @@ test('list_sources reports English coverage per collection, and the rows add up 
   for (const k of ['dn', 'mn', 'sn', 'an', 'dhp', 'snp', 'vinaya', 'patthana']) assert.ok(byKey[k], `row for ${k}`);
   assert.equal(byKey.sn.name, 'Saṃyutta Nikāya');
   assert.equal(byKey.vinaya.with_english, 0, 'no English for the Vinaya');
-  assert.equal(byKey.ap.with_english, 89, 'forty Therī and forty-nine reviewed Therā publisher-edition poems');
-  assert.equal(byKey.ap.with_english_including_inherited, 89, 'no Apadāna inheritance');
-  assert.equal(cov.total.by_source.apadana, 89, 'Walters source count');
+  assert.equal(byKey.ap.with_english, CURRENT_APADANA_IDS.length, 'independently reviewed complete publisher-edition poems');
+  assert.equal(byKey.ap.with_english_including_inherited, CURRENT_APADANA_IDS.length, 'no Apadāna inheritance');
+  assert.equal(cov.total.by_source.apadana, CURRENT_APADANA_IDS.length, 'Walters source count');
   for (const field of ['texts', 'with_english', 'with_english_including_inherited', 'links', 'content_matched_links']) {
     assert.equal(cov.collections.reduce((n, r) => n + r[field], 0), cov.total[field], field);
   }

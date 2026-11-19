@@ -1,0 +1,98 @@
+{
+  "decision": "SOURCE_APPROVED10",
+  "baseline": "64a336789ab5f4f02964ff3023ea6b26b330e406",
+  "approved": [
+    {
+      "poem": 71,
+      "id": "tha-ap73",
+      "raw_sha256": "c9a6e17c751f4163dfc3496a390b6db8bdf6ae87ffddbcd9feeee654fedc7d31",
+      "body_sha256": "1c811d3eafa9e9a3bbcb28cb65f28d18fe6ae028492b71c6f503875fe24e021f",
+      "notes_sha256": "e42d8858bf02eeec606aac2fd0876b70a3edb0868967ac17983e50b73f49f189",
+      "root_sha256": "bc1952db91f5e2010c1f0bbcffd8ddda4757b92cc9c56fde50c0b5a275ea11ad"
+    },
+    {
+      "poem": 72,
+      "id": "tha-ap74",
+      "raw_sha256": "77ed4d7698edce082254cdd883dc5f05ac2eeaede6adb73da591fa845772d302",
+      "body_sha256": "09e339334de9900227b71ac9edd65197350e07514f85d2342cbe7eab589d7f4e",
+      "notes_sha256": "718aead3a6e89b770ecbf60c39ca7fccaa1cb56481eea41f898fc6424aa9fee4",
+      "root_sha256": "52b3ff93797c7741fe0b373f81f9360dc9015fae1616d99182e5e4c802574a90"
+    },
+    {
+      "poem": 73,
+      "id": "tha-ap75",
+      "raw_sha256": "9f705d561d756ea9094e0c0d70603f16c3feae8cea9c80fde7f6b07683009639",
+      "body_sha256": "97e25285f102e6648cb7acd06cb3e6f392c704d333f9d7784adc835815199cb6",
+      "notes_sha256": "7c8b2c45f505f88194a4aa03c0b9dcead61e2aa14170e14124a03af28f6cffac",
+      "root_sha256": "90c6ae1113a183d8ec376981dfc28f05940765f3951f8268fdefc9b3fa8fb0a2"
+    },
+    {
+      "poem": 74,
+      "id": "tha-ap76",
+      "raw_sha256": "7a1830b81bc21dcbf56e78deda9cc5e399206519e9a4d50afb795d3e45a6ce6c",
+      "body_sha256": "c4aae0f23b5c2e417021b24d3c432231c9bbef3f64711486081583a630e22aed",
+      "notes_sha256": "be8f7c9e3ebdfd7644891bb675a77a8838fd94a320bebcec882e82a3a838f6db",
+      "root_sha256": "7d0b2a0ad639a14035672be1d6acac30e932640b4e3f8150cbcad9c3ca43ba2c"
+    },
+    {
+      "poem": 75,
+      "id": "tha-ap77",
+      "raw_sha256": "3a90578607052b40b3bcc231e5b091e383dbdd5977e3996eb89c9dba4eb87249",
+      "body_sha256": "3f6f359edc081e6773bce46f4b401222cc44e910ab81987ba143d89f09264338",
+      "notes_sha256": "c0366b931acd706d75738d2a73e69acc615a8cf25d8ab441ba94c9ee40cbb11f",
+      "root_sha256": "b80a7a4185c9e43030a97ad7f999faee30f18a3cfd71c06d6412edac13adb569"
+    },
+    {
+      "poem": 76,
+      "id": "tha-ap78",
+      "raw_sha256": "f4f65f4a6ed1d8f372adb544e78f33ece28dbce3fc3e6e317f8706d1768a7895",
+      "body_sha256": "7dd9e50531c68ecab13df605dc1e07a12a08e3c79a51a5b49383fb9554b7698c",
+      "notes_sha256": "d4447d368b2f58c2ac287f468d383ad7a550774b50e86032df4ed1d732cf0829",
+      "root_sha256": "fb08231d27bcf87ec03959b5488ac65d4b2e6f16daed3b0df4d61b41be390f63"
+    },
+    {
+      "poem": 77,
+      "id": "tha-ap79",
+      "raw_sha256": "66a1c151ac15859feb5f07b46b0403e29068f18ce30c0d700beb74a36ed5394b",
+      "body_sha256": "5c51e67f284114ca33eecb8109a914347e316ab4f4342326a518e084760582e0",
+      "notes_sha256": "97a4d8b1faf0d23f8741f821691af535e668eb21a0ed8262f371b35193ec3662",
+      "root_sha256": "b7daed31a282c15973840e8b7ed40834bd2625ef750da720529c34967f773139"
+    },
+    {
+      "poem": 78,
+      "id": "tha-ap80",
+      "raw_sha256": "ce555163507da64ec250b7b75b4b0d3081117ee30d6aa0a66638a4f0631a00ec",
+      "body_sha256": "aeb9d8dc5df4427e81bea35afdc90c197b450b3b5f8b8083e8bdcee0c636735b",
+      "notes_sha256": "12e1ddffb0ad3e7373c09c467c09d205f5c98efc7698aef30ec905b02ec4b20d",
+      "root_sha256": "2175cbeaf06110f9c847953f62209ba7a742f7aa4da60bd78ff7b4fa5ce66e85"
+    },
+    {
+      "poem": 79,
+      "id": "tha-ap81",
+      "raw_sha256": "c5cc91a77a79c5f5d55f5ce113635822204c933dc8e98394f9a79a1af799e805",
+      "body_sha256": "9a7defe0d0bc969f78fbf35ea9cb33fc7e8d8d723e92e5d291fdf95651f03ff3",
+      "notes_sha256": "530276c373f136dbd39eaa6bb6e9e138bce4afc5bac21800fbec753368dc9d82",
+      "root_sha256": "c05c4256b62616ccdca207d1f875c5a11fb83c84ac17cb0acc00d999b1bef937"
+    },
+    {
+      "poem": 80,
+      "id": "tha-ap82",
+      "raw_sha256": "0c90ce66dc4fab2b2abc9bc656ad48a4ecbecdd83e99785c340617f428069743",
+      "body_sha256": "18a120c5201119e29b2a63d1f3c8ae4c85a37fe0e392d405c9cfa74ee35d7cc5",
+      "notes_sha256": "d036dd078a908f2b1e939eea67eddfcd59a2b2c952232d12c41eb4371f70bf15",
+      "root_sha256": "62e3e3f57a9e4f8c840fa703d4a0b8428cd277137034ab2aa60427fcf8856f8a"
+    }
+  ],
+  "held": [],
+  "approved_totals": {
+    "poems": 10,
+    "physical_publisher_stanzas": 73,
+    "body_paragraphs": 103,
+    "poem_notes": 42
+  },
+  "source_review_sha256": "cd8c0911a9bc341c130c2bb01548b702eee6f09b63f567ce840bb8980d477146",
+  "goldens_sha256": "4297ca598c8f0b78176f5e74cf158a581ce173a022f9c070ce3d8f9cce044d8b",
+  "rights_sha256": "03f02a953b9d2f1bed7c59a2f9ef59245c9bd8515831730ce2ad16e6a083dfc9",
+  "reproduction": "python review.py --source-root raw --canon /path/to/frozen64a-canon.json --xml vri/s0510m1.mul.xml --output-dir receipts; python findings.py. Standard-library only; no project imports or English bundles.",
+  "limits": "Source-scope approval conditional on independent extraction/review, implementation/runtime/package preservation and exact-commit CI; not final release approval."
+}

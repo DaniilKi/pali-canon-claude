@@ -1,3 +1,4 @@
+import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 import test, { afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -50,8 +51,8 @@ function pinnedFetch(calls) {
 }
 
 // This digest was calculated from the complete 20-profile object at dev 3854b43.
-test('forty approved profiles preserve all prior twenty and ten exact reviewed source/root contracts', () => {
-  assert.equal(Object.keys(APADANA_PROFILES).length, 89);
+test('current registry preserves the prior twenty and exact third-chapter source/root contracts', () => {
+  assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
   const prior = Object.fromEntries(Object.entries(APADANA_PROFILES).filter(([, p]) => p.id.startsWith('thi-ap') && p.poem <= 20));
   assert.equal(digest(JSON.stringify(prior)), '7255eabd3ced9329c39ede0cafa535583a5e3109db3d1cb6beda6b8836e61b25');
   const d = canon.load();
@@ -259,8 +260,8 @@ test('reader and comparison guards preserve all ten identities, zero-note divisi
   }
 });
 
-test('v20 embedded reader executes third-chapter apparatus guards before rendering', () => {
-  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v24.html');
+test('current embedded reader executes third-chapter apparatus guards before rendering', () => {
+  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v25.html');
   const sandbox = vm.createContext({});
   vm.runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('), WIDGET_HTML.indexOf('  function render(d) {')) + ';globalThis.check=checkedApadana;', sandbox);
   for (const n of [21, 28, 30]) {

@@ -1,0 +1,107 @@
+{
+  "review": "Independent Python stdlib publisher/XML replay; no project parser imported",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "artifacts": [
+    {
+      "path": "src/_poems/chapter-3/poem-042.md",
+      "bytes": 7450,
+      "raw_sha256": "71d18cea42a26ac2fc490f43c5265f83d517d8794f2df5d652d0fadbf17a4533",
+      "git_blob_sha1": "0c0d1c6b689d72f9f0e9c0445167dff4ca8a2d2b"
+    },
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "raw_sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "raw_sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "raw_sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "raw_sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "raw_sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "raw_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    },
+    {
+      "path": "src/_poems/chapter-3/chapter-3.json",
+      "bytes": 27,
+      "raw_sha256": "50b6544f4689f2fcbd9287a86890cdcd6993c62b94ebcfb2d5419546f9ded2e0",
+      "git_blob_sha1": "8c453df465b0cd793bb169ab2398192dbd7db0a0"
+    }
+  ],
+  "id": "tha-ap44",
+  "poem": 42,
+  "raw_sha256": "71d18cea42a26ac2fc490f43c5265f83d517d8794f2df5d652d0fadbf17a4533",
+  "body_sha256": "ce9093d845a91e5ab60c04c3cb768f01b2b03e04c4c6b090d9283b34ec43dbdc",
+  "notes_sha256": "f5d142495735d32f2d7b4fd1076443d597de99dca0b9ecfa224958143fb83a7c",
+  "root_sha256": "37e88d801778fb386ce9996caff71d9eeefa49ae317c707a61d98fcfe192b2b9",
+  "publisher_stanzas": 28,
+  "vri_stanzas": 29,
+  "poem_paragraphs": 31,
+  "original_notes": 13,
+  "poem_note_numbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    13
+  ],
+  "editorial_note_numbers": [
+    12
+  ],
+  "original_marker_source_line": 134,
+  "source_editorial_placement_verified": true,
+  "omitted_vri_stanza": 50,
+  "all_original_vri_blocks_reproduced": 14645,
+  "source_rights": "CC BY-NC-SA4.0 text, translator notes and textual publisher apparatus; attribution, notices and live-only preservation required; no media",
+  "descriptor": {
+    "kind": "publisher_editorial_gap",
+    "parent_id": "tha-ap44",
+    "placement": "before_local_label",
+    "after_local_label": "25",
+    "after_publisher_label": "1164",
+    "before_local_label": "26",
+    "before_publisher_label": "1165",
+    "body_sha256": "2fe39d2ad3bc7ff4e5ec258cf2d91c0848674547929b943b7f82151f61014d1d",
+    "notes_sha256": "deec59590f38fe2492c2c86fee6f4fdf90536b38c14277ef3261a7bac5fc8249",
+    "note_numbers": [
+      12
+    ]
+  },
+  "decision": "SOURCE VERIFIED conditional on separate finite apparatus implementation and independent runtime/release review. Complete publisher-edition poem, not line-complete VRI. No source text or notes bundled.",
+  "limits": [
+    "No specialist recension endorsement",
+    "No physical-device or human assistive acceptance",
+    "No runtime, package or CI approval by this source replay"
+  ]
+}

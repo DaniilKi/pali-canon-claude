@@ -1,3 +1,4 @@
+import {CURRENT_APADANA_IDS, CURRENT_THERA_IDS, historicalApadanaIds} from './helpers/apadana-intake-expectations.mjs';
 import test, {afterEach} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -38,16 +39,19 @@ function assertScopes(value,p,content) {
 const laterApproved=['tha-ap43','tha-ap45','tha-ap46','tha-ap47','tha-ap48','tha-ap49','tha-ap50','tha-ap51','tha-ap52','tha-ap53','tha-ap54','tha-ap55','tha-ap56','tha-ap57','tha-ap58','tha-ap59','tha-ap60','tha-ap61','tha-ap62'];
 
 test('current finite profiles preserve all sixty prior profiles, links and Pāli while adding ten literal mappings',()=>{
- const previous=Object.fromEntries(Object.entries(APADANA_PROFILES).filter(([id])=>!ids.includes(id)&&!laterApproved.includes(id)));
- assert.equal(Object.keys(APADANA_PROFILES).length,89);assert.equal(Object.keys(THERA_APADANA_PROFILES).length,49);
+ const historicalIds=new Set(historicalApadanaIds(30));
+ const previous=Object.fromEntries(Object.entries(APADANA_PROFILES).filter(([id])=>historicalIds.has(id)));
+ assert.equal(Object.keys(previous).length,60);
+ assert.deepEqual(historicalApadanaIds(60).filter(id=>!historicalIds.has(id)),[...ids,...laterApproved]);
+ assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.deepEqual(Object.keys(THERA_APADANA_PROFILES),CURRENT_THERA_IDS);
  assert.equal(digest(JSON.stringify(previous)),'a89428a9f4828f809469a4900d6b2d62bfa4a8a8056f0b263a5ffb24fce86c67');
  const data=canon.load(),pali=Object.fromEntries(Object.keys(previous).map(id=>[id,digest(JSON.stringify(canon.segments(data.byId.get(id))))]));
  assert.equal(digest(JSON.stringify(pali)),'fe325b12c2ed573d6f319e3e78a5519ae0530128401bfe8f49c74d4c7f79902f');
  const manifest=JSON.parse(readFileSync('server/data/apadana.json','utf8'));
- assert.equal(digest(JSON.stringify(Object.fromEntries(Object.entries(manifest.links).filter(([id])=>!ids.includes(id)&&!laterApproved.includes(id))))),'1ce034f4c1243f45371fed2c8e523e69171f444e339580418d25311704ec9a2c');
+ assert.equal(digest(JSON.stringify(Object.fromEntries(Object.entries(manifest.links).filter(([id])=>historicalIds.has(id))))),'1ce034f4c1243f45371fed2c8e523e69171f444e339580418d25311704ec9a2c');
  assert.deepEqual(gold.poems.map(g=>g.id),ids);
  for(const g of gold.poems){const p=profile(g.id),u=data.byId.get(g.id),book=data.canon.books[u.book];assert.equal(p.id,g.id);assert.equal(p.poem,g.poem);assert.equal(p.publisher_chapter,'chapter-3');assert.ok(Object.isFrozen(p));validateLink(p,p.id,u,book);for(const key of pins)assert.equal(p[key],key==='root_sha256'?g.root.root_sha256:g[key]);assert.equal(rootDigest(u,book),g.root.root_sha256);assert.deepEqual(p.note_numbers,g.note_numbers);assert.deepEqual(p.stanza_layout,g.stanza_layout);assert.equal(u.index_revision,undefined);for(const finding of review.poems.find(row=>row.id===g.id).edition_findings)assert.ok(p.mapping_notes.includes(finding));}
- assert.deepEqual([profile('tha-ap33').poem,profile('tha-ap42').poem],[31,40]);assert.equal(profile('tha-ap44'),undefined);
+ assert.deepEqual([profile('tha-ap33').poem,profile('tha-ap42').poem],[31,40]);assert.equal(profile('tha-ap72'),undefined,'Publisher70 malformed chapter apparatus remains held');
  const scope=profile('tha-ap42').chapter_summary;assert.deepEqual([scope.root_start,scope.root_end,scope.first_ref,scope.last_ref],[3475,3480,'tha-ap42/10','tha-ap42/12']);assert.deepEqual(scope.note_numbers,[]);
 });
 
@@ -84,7 +88,7 @@ test('source-enabled original stanza words alone enter quotation evidence; forge
 test('source-enabled owner and scope mutations refuse before transport both before and after a successful English retrieval',{skip:!checkout},async()=>{
  const calls=[];pinnedFetch(calls);const data=canon.load();
  for(const uid of ids){const p=profile(uid),u=data.byId.get(uid),link=data.translations[uid].find(l=>canon.translationId(l)===tid(p)),original=structuredClone(link);assert.ok(link);const patches=[{id:'tha-ap32'},{poem:p.poem+1},{publisher_chapter:'chapter-4'},{path:profile('thi-ap1').path},{translation_revision:'0'.repeat(40)},{license:'CC0'},{root_sha256:'0'.repeat(64)},{chapter_summary:null},{publisher_preface:{}},{collection_summary:{}},{partial_scope:{}},{shared_scope:{}}];const refuse=async()=>{for(const patch of patches){Object.assign(link,patch);const before=calls.length;try{await assert.rejects(english.translation(u,tid(p),{translation_revision:APADANA_COMMIT}));assert.equal(calls.length,before);}finally{for(const key of Object.keys(link))delete link[key];Object.assign(link,structuredClone(original));}}};await refuse();const valid=await english.translation(u,tid(p),{limit:500,translation_revision:APADANA_COMMIT});assert.equal(valid.translation_id,tid(p));await refuse();}
- const p=profile(ids[0]),foreign=p.raw_url.replace('poem-031','poem-042'),before=calls.length;assert.equal(isApadanaRawUrl(foreign),false);await assert.rejects(fetchPublic(foreign,{json:false}),/outside the supported public sources/);assert.equal(calls.length,before);
+ const p=profile(ids[0]),foreign=p.raw_url.replace('poem-031','poem-999'),before=calls.length;assert.equal(isApadanaRawUrl(foreign),false);await assert.rejects(fetchPublic(foreign,{json:false}),/outside the supported public sources/);assert.equal(calls.length,before);
 });
 
 test('source-enabled APIs retain complete continuations, mandatory caveats and exact copied apparatus',{skip:!checkout},async()=>{

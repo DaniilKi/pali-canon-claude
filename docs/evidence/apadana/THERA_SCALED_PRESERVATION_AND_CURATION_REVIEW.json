@@ -1,0 +1,32 @@
+{
+  "base_commit": "64a336789ab5f4f02964ff3023ea6b26b330e406",
+  "curation_sha256": "6a1513aa1d462052bde05da5f382179630f66eea5c4cf2dfc5075bb9e2b8ad4a",
+  "curation_source": {
+    "baseline89_exact_immutable_git_profiles": true,
+    "approved40_explicit_independent_map": true,
+    "all129_whitelist": true,
+    "all_five_goldens_and_four_semantic_reviews_and_peer_approvals_sealed": true,
+    "classification_repair_addendum_bound": true,
+    "held70_refused": true,
+    "net_new_first_english": 40
+  },
+  "canonical_commentary_and_other_data": {
+    "baseline_files_checked": 26,
+    "only_changed": "server/data/apadana.json",
+    "all_other25_exact_bytes": true,
+    "all89_prior_link_objects_exact": true,
+    "only40_approved_links_added": true,
+    "all_other_manifest_metadata_exact_except_approved_count_policy": true,
+    "all_saved_locator_and_source_revisions_preserved": true
+  },
+  "private_data_modules_exact": [
+    "web/bookmark-import.mjs",
+    "web/bookmark-location.mjs",
+    "web/local-storage-write.mjs",
+    "web/note-draft-recovery.mjs",
+    "web/progress-import.mjs",
+    "web/reading-position.mjs"
+  ],
+  "no_personal_data_accessed_or_migrated": true,
+  "project_writes_builds_commits_pushes": 0
+}

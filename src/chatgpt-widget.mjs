@@ -15,6 +15,7 @@
  */
 import { z } from 'zod';
 import { createHash } from 'node:crypto';
+import { contentSha256 } from '../web/content-sha256.mjs';
 import * as canon from './canon.mjs';
 import * as english from './english.mjs';
 import { APADANA_BASE, APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_PROFILES, APADANA_TRANSLATOR } from './apadana-profiles.mjs';
@@ -25,7 +26,7 @@ import { getCommentary, commentaryReadingSource } from './commentary.mjs';
 import { HostedToolError } from './hosted-tool-error.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v24';
+export const WIDGET_VERSION = 'v25';
 // Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.
 export const NAVIGATION_TIMEOUT_MS = 90000;
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
@@ -34,6 +35,7 @@ export const MCP_APP_MIME = 'text/html;profile=mcp-app';
 export const SKYBRIDGE_MIME = 'text/html+skybridge';
 
 const APADANA_PINS = ['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256'];
+const PINNED_NEW_PARATEXT_IDS = ["tha-ap44","tha-ap63","tha-ap64","tha-ap65","tha-ap66","tha-ap67","tha-ap68","tha-ap69","tha-ap70","tha-ap71","tha-ap73","tha-ap74","tha-ap75","tha-ap76","tha-ap77","tha-ap78","tha-ap79","tha-ap80","tha-ap81","tha-ap82","tha-ap83","tha-ap84","tha-ap85","tha-ap86","tha-ap87","tha-ap88","tha-ap89","tha-ap90","tha-ap91","tha-ap92","tha-ap93","tha-ap94","tha-ap95","tha-ap96","tha-ap97","tha-ap98","tha-ap99","tha-ap100","tha-ap101","tha-ap102"];
 const WIDGET_APADANA = Object.fromEntries(Object.entries(APADANA_PROFILES).map(([id, p]) => [id, {
   translation_id: canon.translationId(p), url: p.url, fetched_url: p.raw_url, note_count: p.note_count,
   mapping_notes: p.mapping_notes,
@@ -41,6 +43,7 @@ const WIDGET_APADANA = Object.fromEntries(Object.entries(APADANA_PROFILES).map((
   ...(p.collection_summary ? { collection_summary: p.collection_summary } : {}),
   ...(p.chapter_summary ? { chapter_summary: p.chapter_summary } : {}),
   ...(p.publisher_divisions ? { publisher_divisions: p.publisher_divisions } : {}),
+  ...(p.editorial_gap ? { editorial_gap: p.editorial_gap } : {}),
   ...(p.note_numbers ? { note_numbers: p.note_numbers } : {}),
   ...Object.fromEntries(APADANA_PINS.map(key => [key, p[key]])),
 }]));
@@ -236,7 +239,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
       result.english = {
         translator: t.translator, translation_id: t.translation_id, source: t.source, url: t.url,
         reference: (canon.describe(unit).english.find((e) => e.translation_id === t.translation_id) || {}).reference,
-        ...(t.translation_revision ? { translation_revision: t.translation_revision, mapping_notes: t.mapping_notes, translator_notes: t.translator_notes, publisher_paratext: t.publisher_paratext, ...(t.publisher_preface ? { publisher_preface: t.publisher_preface } : {}), ...(t.collection_summary ? { collection_summary: t.collection_summary } : {}), ...(t.chapter_summary ? { chapter_summary: t.chapter_summary } : {}), ...(t.publisher_divisions ? { publisher_divisions: t.publisher_divisions } : {}), license_url: t.license_url, changes: t.changes, fetched_url: t.fetched_url, ...Object.fromEntries(APADANA_PINS.map(key => [key, t[key]])) } : {}),
+        ...(t.translation_revision ? { translation_revision: t.translation_revision, mapping_notes: t.mapping_notes, translator_notes: t.translator_notes, publisher_paratext: t.publisher_paratext, ...(t.publisher_preface ? { publisher_preface: t.publisher_preface } : {}), ...(t.collection_summary ? { collection_summary: t.collection_summary } : {}), ...(t.chapter_summary ? { chapter_summary: t.chapter_summary } : {}), ...(t.publisher_divisions ? { publisher_divisions: t.publisher_divisions } : {}), ...(t.editorial_gap ? { editorial_gap: t.editorial_gap } : {}), license_url: t.license_url, changes: t.changes, fetched_url: t.fetched_url, ...Object.fromEntries(APADANA_PINS.map(key => [key, t[key]])) } : {}),
         fetched_from: t.fetched_from, attribution: t.attribution, license: t.license,
         text: t.text, prefix_sha256: t.prefix_sha256, offset: t.offset, total_characters: t.total_characters, next_offset: t.next_offset, truncated: t.next_offset !== null, notes: t.notes,
         read_with: { name: WIDGET_TOOL, arguments: { uid: unit.id, source_commit: result.source.locator_revision || vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.offset, ...(t.translation_revision ? { english_translation_revision: t.translation_revision } : {}), ...(t.offset > 0 ? { english_prefix_sha256: t.prefix_sha256 } : {}), ...(script ? { script: scriptName(script) } : {}) } },
@@ -607,7 +610,8 @@ export const WIDGET_HTML = `<!doctype html>
     return s && typeof s === 'object' && !Array.isArray(s) && Object.keys(s).sort().join(',') === Object.keys(expected).concat(['text', 'translator_notes']).sort().join(',') &&
       Object.keys(expected).every(function (key) { return JSON.stringify(s[key]) === JSON.stringify(expected[key]); }) &&
       typeof s.text === 'string' && s.text.trim() && s.text.length <= 50000 && Array.isArray(s.translator_notes) && s.translator_notes.length === expected.note_numbers.length &&
-      s.translator_notes.every(function (n, i) { return n && Object.keys(n).sort().join(',') === 'number,text' && n.number === expected.note_numbers[i] && typeof n.text === 'string' && n.text.trim() && n.text.length <= 50000; });
+      s.translator_notes.every(function (n, i) { return n && Object.keys(n).sort().join(',') === 'number,text' && n.number === expected.note_numbers[i] && typeof n.text === 'string' && n.text.trim() && n.text.length <= 50000; }) &&
+      (['tha-ap82','tha-ap92','tha-ap102'].indexOf(expected.parent_id) === -1 || checkedPinnedContent(s, expected));
   }
   function checkedPublisherPreface(e, p) {
     if (!p.publisher_preface) return !Object.prototype.hasOwnProperty.call(e, 'publisher_preface');
@@ -621,23 +625,51 @@ export const WIDGET_HTML = `<!doctype html>
         return n && typeof n === 'object' && !Array.isArray(n) && Object.keys(n).sort().join(',') === 'number,text' && n.number === 1 && typeof n.text === 'string' && n.text.trim() && n.text.length <= 50000;
       });
   }
-  function checkedCollectionSummary(e, p) {
+  function checkedCollectionSummary(e, p, uid) {
     if (!p.collection_summary) return !Object.prototype.hasOwnProperty.call(e, 'collection_summary');
-    return p.collection_summary.kind === 'canonical_collection_summary' && p.collection_summary.parent_id === 'thi-ap40' &&
-      JSON.stringify(p.collection_summary.note_numbers) === '[11,12]' && checkedChapterSummary({chapter_summary: e.collection_summary}, {chapter_summary: p.collection_summary});
+    var expected = p.collection_summary;
+    return expected.kind === 'canonical_collection_summary' && expected.parent_id === uid &&
+      (uid === 'thi-ap40' ? JSON.stringify(expected.note_numbers) === '[11,12]' : uid === 'tha-ap102' &&
+        JSON.stringify(expected.note_numbers) === '[4]' && expected.label === 'Therā Apadāna first-hundred chapter summary and colophons' &&
+        expected.root_start === 5145 && expected.root_end === 5152 && expected.first_ref === 'tha-ap102/12' && expected.last_ref === 'tha-ap102/15') &&
+      checkedChapterSummary({chapter_summary: e.collection_summary}, {chapter_summary: expected});
   }
-  function checkedPublisherDivisions(e, p) {
+  function checkedPublisherDivisions(e, p, uid) {
     if (!p.publisher_divisions) return !Object.prototype.hasOwnProperty.call(e, 'publisher_divisions');
     return Array.isArray(e.publisher_divisions) && e.publisher_divisions.length === p.publisher_divisions.length && e.publisher_divisions.every(function (s, i) {
       var expected = p.publisher_divisions[i];
       return s && typeof s === 'object' && !Array.isArray(s) && Object.keys(s).sort().join(',') === Object.keys(expected).concat(['text', 'translator_notes']).sort().join(',') &&
         Object.keys(expected).every(function (key) { return JSON.stringify(s[key]) === JSON.stringify(expected[key]); }) &&
         typeof s.text === 'string' && s.text.trim() && s.text.length <= 50000 && Array.isArray(s.translator_notes) && s.translator_notes.length === expected.note_numbers.length &&
-        s.translator_notes.every(function (n, j) { return n && Object.keys(n).sort().join(',') === 'number,text' && n.number === expected.note_numbers[j] && typeof n.text === 'string' && n.text.trim() && n.text.length <= 50000; });
+        s.translator_notes.every(function (n, j) { return n && Object.keys(n).sort().join(',') === 'number,text' && n.number === expected.note_numbers[j] && typeof n.text === 'string' && n.text.trim() && n.text.length <= 50000; }) &&
+        (uid !== 'tha-ap76' || checkedPinnedContent(s, expected));
     });
   }
+  function checkedContentHash(text, expected) {
+    try {
+      var hash = ${contentSha256.toString()};
+      return hash(text) === expected;
+    } catch (error) { return false; }
+  }
+  function checkedPinnedContent(value, expected) {
+    return checkedContentHash(value.text, expected.body_sha256) && checkedContentHash(JSON.stringify(value.translator_notes), expected.notes_sha256);
+  }
+  function checkedEditorialGap(e, p, uid) {
+    if (!p.editorial_gap) return !Object.prototype.hasOwnProperty.call(e, 'editorial_gap');
+    var s = e.editorial_gap, expected = p.editorial_gap;
+    if (uid !== 'tha-ap44' || p.raw_sha256 !== '71d18cea42a26ac2fc490f43c5265f83d517d8794f2df5d652d0fadbf17a4533' ||
+        Object.keys(expected).sort().join(',') !== 'after_local_label,after_publisher_label,before_local_label,before_publisher_label,body_sha256,kind,note_numbers,notes_sha256,parent_id,placement' ||
+        expected.kind !== 'publisher_editorial_gap' || expected.parent_id !== uid || expected.placement !== 'before_local_label' ||
+        expected.after_local_label !== '25' || expected.after_publisher_label !== '1164' || expected.before_local_label !== '26' || expected.before_publisher_label !== '1165' ||
+        JSON.stringify(expected.note_numbers) !== '[12]' || !s || typeof s !== 'object' || Array.isArray(s) ||
+        Object.keys(s).sort().join(',') !== Object.keys(expected).concat(['text', 'translator_notes']).sort().join(',') ||
+        !Object.keys(expected).every(function (key) { return JSON.stringify(s[key]) === JSON.stringify(expected[key]); }) ||
+        typeof s.text !== 'string' || !s.text.trim() || s.text.length > 50000 || !Array.isArray(s.translator_notes) || s.translator_notes.length !== 1 ||
+        !s.translator_notes.every(function (n) { return n && typeof n === 'object' && !Array.isArray(n) && Object.keys(n).sort().join(',') === 'number,text' && n.number === 12 && typeof n.text === 'string' && n.text.trim() && n.text.length <= 50000; })) return false;
+    return checkedPinnedContent(s, expected);
+  }
   function checkedApadana(d) {
-    var e = d.english, checked = e && (e.source === 'apadana' || Object.prototype.hasOwnProperty.call(e, 'chapter_summary') || Object.prototype.hasOwnProperty.call(e, 'publisher_divisions') || Object.prototype.hasOwnProperty.call(e, 'publisher_preface') || Object.prototype.hasOwnProperty.call(e, 'collection_summary') || typeof e.translation_revision !== 'undefined' || typeof e.translation_id === 'string' && e.translation_id.toLowerCase().indexOf('ap:') === 0 || typeof e.url === 'string' && e.url.indexOf('${APADANA_BASE}/') === 0);
+    var e = d.english, checked = e && (e.source === 'apadana' || Object.prototype.hasOwnProperty.call(e, 'chapter_summary') || Object.prototype.hasOwnProperty.call(e, 'publisher_divisions') || Object.prototype.hasOwnProperty.call(e, 'publisher_preface') || Object.prototype.hasOwnProperty.call(e, 'collection_summary') || Object.prototype.hasOwnProperty.call(e, 'editorial_gap') || typeof e.translation_revision !== 'undefined' || typeof e.translation_id === 'string' && e.translation_id.toLowerCase().indexOf('ap:') === 0 || typeof e.url === 'string' && e.url.indexOf('${APADANA_BASE}/') === 0);
     if (!checked) return d;
     var profiles = ${JSON.stringify(WIDGET_APADANA)}, p = Object.prototype.hasOwnProperty.call(profiles, d.text_id) && profiles[d.text_id];
     if (p && e.source === 'apadana' && e.translation_id === p.translation_id && e.url === p.url && e.fetched_url === p.fetched_url &&
@@ -647,9 +679,10 @@ export const WIDGET_HTML = `<!doctype html>
         JSON.stringify(e.mapping_notes) === JSON.stringify(p.mapping_notes) && Array.isArray(e.notes) &&
         p.mapping_notes.every(function (note) { return e.notes.indexOf(note) !== -1; }) &&
         typeof e.publisher_paratext === 'string' && e.publisher_paratext.length <= 50000 && Boolean(e.publisher_paratext.trim()) === (p.paratext_sha256 !== 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855') &&
+        (${JSON.stringify(PINNED_NEW_PARATEXT_IDS)}.indexOf(d.text_id) === -1 || checkedContentHash(e.publisher_paratext, p.paratext_sha256)) &&
         Array.isArray(e.translator_notes) && e.translator_notes.length === p.note_count &&
         e.translator_notes.every(function (note, i) { return note && Object.keys(note).sort().join(',') === 'number,text' && note.number === (p.note_numbers ? p.note_numbers[i] : i + 1) && typeof note.text === 'string' && note.text.length <= 50000 && note.text.trim(); }) &&
-        checkedChapterSummary(e, p) && checkedPublisherPreface(e, p) && checkedCollectionSummary(e, p) && checkedPublisherDivisions(e, p) && ${JSON.stringify(APADANA_PINS)}.every(function (key) { return e[key] === p[key]; })) return d;
+        checkedChapterSummary(e, p) && checkedPublisherPreface(e, p) && checkedCollectionSummary(e, p, d.text_id) && checkedPublisherDivisions(e, p, d.text_id) && checkedEditorialGap(e, p, d.text_id) && ${JSON.stringify(APADANA_PINS)}.every(function (key) { return e[key] === p[key]; })) return d;
     return Object.assign({}, d, { english: null, english_error: 'Apadāna publisher identity, terms, edition notices or source pins changed. No English was displayed.' });
   }
   function render(d) {
@@ -750,13 +783,26 @@ export const WIDGET_HTML = `<!doctype html>
         }
         if (d.english.collection_summary) {
           var collection = el('section', ''), cs = d.english.collection_summary;
-          collection.setAttribute('aria-label', 'Canonical collection summary · not poem text');
-          collection.appendChild(el('h3', '', 'Canonical collection summary · not poem text'));
+          var firstHundred = cs.parent_id === 'tha-ap102', collectionHeading = firstHundred ? 'Therā Apadāna first-hundred chapter summary and colophons · not poem text' : 'Canonical collection summary · not poem text';
+          collection.setAttribute('aria-label', collectionHeading);
+          collection.appendChild(el('h3', '', collectionHeading));
           collection.appendChild(el('p', 'en', cs.text));
+          if (firstHundred) collection.appendChild(el('p', 'note', 'This summary covers the publisher’s first hundred Therā poems and first ten chapters. It does not mark the end of the Therā Apadāna. Original counts and titles are preserved; they are not a measure of indexed translation coverage. It is separate from the poem and chapter summary, and is not poem quotation evidence.'));
           collection.appendChild(el('h3', '', 'Collection summary notes · editorial, not poem notes'));
           var collectionNotes = el('ol', '');
           cs.translator_notes.forEach(function (n) { var li = el('li', '', n.text); li.value = n.number; collectionNotes.appendChild(li); });
           collection.appendChild(collectionNotes); en.appendChild(collection);
+        }
+        if (d.english.editorial_gap) {
+          var gap = d.english.editorial_gap, editorial = el('section', '');
+          editorial.setAttribute('aria-label', 'Publisher editorial gap · not poem text');
+          editorial.appendChild(el('h3', '', 'Publisher editorial gap · not poem text'));
+          editorial.appendChild(el('p', 'note', 'Original publisher placement: after local stanza ' + gap.after_local_label + ' (printed global label ' + gap.after_publisher_label + '), before local stanza ' + gap.before_local_label + ' (printed global label ' + gap.before_publisher_label + ').'));
+          editorial.appendChild(el('p', 'en', gap.text));
+          editorial.appendChild(el('h3', '', 'Editorial gap notes · not poem notes'));
+          var editorialNotes = el('ol', '');
+          gap.translator_notes.forEach(function (n) { var li = el('li', '', n.text); li.value = n.number; editorialNotes.appendChild(li); });
+          editorial.appendChild(editorialNotes); en.appendChild(editorial);
         }
         (d.english.publisher_divisions || []).forEach(function (s) {
           var section = el('section', ''); section.setAttribute('aria-label', 'Publisher recitation division · not poem text');

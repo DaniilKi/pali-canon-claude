@@ -1,3 +1,6 @@
+import {CURRENT_APADANA_IDS, BASELINE_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
+// Frozen D249 whole-coverage plus independently approved net-new Apadāna owners.
+const APADANA_INTAKE_DELTA = CURRENT_APADANA_IDS.length - BASELINE_APADANA_IDS.length;
 import {test,afterEach} from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';import {spawnSync} from 'node:child_process';
 import * as canon from '../src/canon.mjs';import * as english from '../src/english.mjs';import {atiVerseExcerpt} from '../src/ati-excerpt.mjs';import {liveCache} from '../src/cache.mjs';import {verifyQuote} from '../src/verify.mjs';import {translationCoverage} from '../src/providers.mjs';import {dailyText} from '../src/daily.mjs';import {scopeDescriptor,validateEnglishPage} from '../web/translation-policy.mjs';import {atiPartial,html,verse,editorial} from './helpers/ati-partial.mjs';
 const manifest=JSON.parse(readFileSync('scripts/canon/reviewed_partial_pages.json','utf8')),audit=JSON.parse(readFileSync('docs/data/thag-excerpt-review.json','utf8')),originalFetch=globalThis.fetch;
@@ -10,7 +13,7 @@ test('twenty-two pinned partial sources are separately counted and Ananda has pa
  for(const r of manifest.links){const u=canon.resolve(r.unit_id).unit,s=canon.describe(u).english.find(l=>l.translation_id==='ati:'+r.path).translation_scope;assert.equal(s.kind,'partial_unit');assert.equal(s.extractor,r.partial_scope.extractor);assert.equal(s.notice_sha256,r.partial_scope.notice_sha256);assert.equal(s.whole_unit_coverage,false);assert.deepEqual([s.first_ref,s.last_ref],[r.partial_scope.first_ref,r.partial_scope.last_ref]);assert.equal(createHash('sha256').update(JSON.stringify(canon.load().canon.books[u.book].blocks.slice(u.start,u.end))).digest('hex'),r.root.root_blocks_sha256);}
  const a=canon.describe(canon.resolve('thag17.3').unit);assert.equal(a.english_available,0);assert.equal(a.partial_english_available,1);assert.equal(a.english.length,1);assert.equal(a.english[0].translation_scope.pali_segments,3);
  const b=canon.describe(canon.resolve('thag6.13').unit);assert.equal(b.english_available,2);assert.equal(b.partial_english_available,1);
- const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.with_partial_english,t.partial_only],[2672,1542,1965,22,22,16]);const d=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.equal(d.rotation.of,1288);assert.equal(d.text.id,'sn11.22');
+ const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.with_partial_english,t.partial_only],[2672 + APADANA_INTAKE_DELTA,1542 + APADANA_INTAKE_DELTA,1965 + APADANA_INTAKE_DELTA,22,22,16]);const d=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.equal(d.rotation.of,1288);assert.equal(d.text.id,'sn11.22');
 });
 
 test('known pilot sources cannot lose their entire partial container, acquire another owner or downgrade notice/extraction fields',async()=>{

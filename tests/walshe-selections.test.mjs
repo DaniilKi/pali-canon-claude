@@ -1,3 +1,6 @@
+import {CURRENT_APADANA_IDS, BASELINE_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
+// Frozen D249 whole-coverage plus independently approved net-new Apadāna owners.
+const APADANA_INTAKE_DELTA = CURRENT_APADANA_IDS.length - BASELINE_APADANA_IDS.length;
 import { test, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
@@ -111,7 +114,7 @@ test('four actual source declarations preserve exact reviewed Pali, complete not
   assert.match(canon.segments(canon.resolve('sn56.22').unit).at(-1).text, /dutiyaṃ;$/);
   assert.match(report.rows.find(r => r.owner === 'sn35.244').manifest.source_reference, /publisher SN35.203.*SN35.244/);
   const t = translationCoverage({ refresh: true }).total;
-  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2672, 1542, 1965, 22, 16]);
+  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2672 + APADANA_INTAKE_DELTA, 1542 + APADANA_INTAKE_DELTA, 1965 + APADANA_INTAKE_DELTA, 22, 16]);
   assert.deepEqual(historicalSutta('d209'), { of: 1265, id: 'dn32' });
 });
 

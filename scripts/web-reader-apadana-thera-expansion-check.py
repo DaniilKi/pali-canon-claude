@@ -16,6 +16,7 @@ import urllib.request
 
 from playwright.sync_api import expect, sync_playwright
 from web_reader_test_helpers import read_tool
+from web_reader_apadana_intake import current_apadana_ids, current_family_ids
 from urllib.parse import parse_qs, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -752,9 +753,13 @@ def main():
         assert evidence['baseline'] == 'a154013eded45f6ee319fff5cc246ed563811c55'
         goldens.extend(evidence['poems'])
     expected = {p['id']: p for p in goldens if p['source_scope_decision'].startswith('APPROVE')}
-    rows, new_ids = manifest['links'], tuple(expected)
+    combined_rows, new_ids = manifest['links'], tuple(expected)
+    assert set(combined_rows) == set(current_apadana_ids(ROOT)), 'Unexpected combined publisher-source scope'
+    # Keep every D249 source/hash/policy gate scoped to its exact historical eighty-nine choices.
+    historical_ids = set(BASELINE) | set(expected)
+    rows = {uid: row for uid, row in combined_rows.items() if uid in historical_ids}
     assert len(expected) == 19 and len(BASELINE) == len(BASELINE_ROOT_SEGMENTS) + len(BASELINE_ROOT_RECEIPTS) == 70
-    assert 'tha-ap44' not in rows and set(rows) == set(BASELINE) | set(expected)
+    assert set(rows) == historical_ids and len(rows) == 89
     for uid, pin in BASELINE.items():
         assert digest(compact(rows[uid], sort=True)) == pin, uid + ': previous source metadata changed'
     for uid, receipt in expected.items():
@@ -884,8 +889,8 @@ def main():
             commentary = tool('get_commentary', {'uid': 'tha-ap19', 'limit': 200})
             assert commentary['source']['locator_revision'] == COMMENTARY_REVISION
             assert [s['ref'] for s in commentary['segments']] == ['tha-ap19/c' + str(i) for i in range(1, 8)]
-            held = tool('get_text', {'uid': 'tha-ap44', 'limit': 200})
-            assert not held['english_available'], 'Held publisher42 source became available'
+            held = tool('get_text', {'uid': 'tha-ap72', 'limit': 200})
+            assert not held['english_available'], 'Held publisher70 source became available'
             for uid in new_ids:
                 for request in ({'uid': uid, 'translation': version('thi-ap1')},
                                 {'uid': uid, 'translation': version(uid), 'translation_revision': '0' * 40},
@@ -923,7 +928,7 @@ def main():
                 source({**widget['english'], 'text_id': widget['text_id']}, uid)
                 receipts.append({'uid': uid, 'publisher_poem': golden['poem'], 'paragraphs': len(paragraphs),
                     'stanza_entries': len(golden['stanza_layout']), 'notes': golden['note_count'], 'pages': len(pieces), **{k: rows[uid][k] for k in PINS}})
-            checks.append({'check': 'All89 explicit choices; old70 profiles/links/Pāli exact; held44 absent; all19 exact body paragraphs, printed entries, per-note hashes, apparatus, revisions and bounded continuations; actual widget tool payloads'})
+            checks.append({'check': 'Historical89 explicit choices; old70 profiles/links/Pāli exact; current intake exact and held publisher70 absent; all19 exact body paragraphs, printed entries, per-note hashes, apparatus, revisions and bounded continuations; actual widget tool payloads'})
             comparison_probe = """import assert from 'node:assert/strict';
               import {validateComparisonPage,comparisonChoices} from './web/translation-comparison.mjs';
               let input='';for await(const chunk of process.stdin)input+=chunk;const p=JSON.parse(input);
@@ -1003,7 +1008,7 @@ def main():
                             saved(page, base)
                             page.get_by_label('Your personal note', exact=True).first.fill(PRIVATE + ' unsaved')
                             navigation_proofs = []
-                            for family_uid, family in (('thi-ap40', [u for u in rows if u.startswith('thi-ap')]), ('tha-ap43', [u for u in rows if u.startswith('tha-ap')])):
+                            for family_uid, family in (('thi-ap40', current_family_ids(ROOT, 'chapter-4')), ('tha-ap43', current_family_ids(ROOT, 'chapter-3'))):
                                 prior = len(requests)
                                 page.goto(base + '/#read?uid=' + family_uid)
                                 expect(page.locator('.segment-label a').first).to_have_text(family_uid + '/1')
@@ -1013,7 +1018,7 @@ def main():
                                 navigation.get_by_text('Reviewed publisher edition order', exact=True).click()
                                 selector = navigation.get_by_role('combobox', name='Poem in this reviewed publisher edition', exact=True)
                                 assert selector.locator('option').evaluate_all('items=>items.map(item=>item.value)') == family
-                                assert len(family) == (40 if family_uid.startswith('thi') else 49) and 'tha-ap44' not in family
+                                assert set(family) <= set(combined_rows) and 'tha-ap72' not in family
                                 assert len(requests) == prior
                                 if family_uid.startswith('tha'):
                                     for origin_uid, summary_uid in (('tha-ap43', 'tha-ap52'), ('tha-ap53', 'tha-ap62')):
@@ -1132,7 +1137,7 @@ def main():
                                 assert page.locator('.passage').first.inner_text() == metadata[fresh_uid]['segments'][1]['text']
                                 audit('fresh bookmark roundtrip ' + fresh_uid)
                             checks.append({'width': width, 'theme': theme, 'navigation_timing': navigation_proofs,
-                                'check': 'All19 actual selected sources; complete poem/notes/apparatus;20 strict cached-response refusals preserve Pāli;40Thi49Tha navigation held44 absent;private drafts/reload/export;existing exact bookmarks;single-source comparison refusal'})
+                                'check': 'All19 actual selected sources; complete poem/notes/apparatus;20 strict cached-response refusals preserve Pāli;current independently reviewed family navigation with held publisher70 absent;private drafts/reload/export;existing exact bookmarks;single-source comparison refusal'})
                             context.close()
                             check_widgets(browser, widget_html, widgets, tamper_patches(whole), width, theme, checks)
                     browser.close()

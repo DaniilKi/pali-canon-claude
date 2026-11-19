@@ -1,0 +1,32 @@
+{
+  "decision": "APPROVE exact complete publisher-edition poem42/canonicaltha-ap44 only with the separately owned finite editorial_gap and original note12; independent runtime/package/frozen/CI gates remain pending",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "goldens_sha256": "1aa8fadf962964ddf1ee2faefa86bcf3914944337ba61b7e2214600170210ac8",
+  "source_replay_sha256": "c8065ff53f35b25b9471f01fb506d726ae454a0bf01eb145d60355de076364dd",
+  "independent_review_sha256": "e3504807caafe8cb7f8e0663dc339427af16a1e80bb6747799c261f7566b603d",
+  "independent_review_file": "HELD42_INDEPENDENT_SOURCE_CONTRACT.json",
+  "approved": [
+    {
+      "id": "tha-ap44",
+      "poem": 42,
+      "raw_sha256": "71d18cea42a26ac2fc490f43c5265f83d517d8794f2df5d652d0fadbf17a4533",
+      "body_sha256": "ce9093d845a91e5ab60c04c3cb768f01b2b03e04c4c6b090d9283b34ec43dbdc",
+      "notes_sha256": "f5d142495735d32f2d7b4fd1076443d597de99dca0b9ecfa224958143fb83a7c",
+      "root_sha256": "37e88d801778fb386ce9996caff71d9eeefa49ae317c707a61d98fcfe192b2b9"
+    }
+  ],
+  "supersedes": "D249 runtime hold for publisher42 only; source identity/rights unchanged and all other holds preserved",
+  "whole_coverage": "Complete publisher-edition poem;28published entries versus29VRI numbered stanzas, never line-complete VRI",
+  "scope": {
+    "poems": 1,
+    "printed_stanzas": 28,
+    "body_paragraphs": 31,
+    "poem_notes": 12,
+    "original_notes": 13,
+    "editorial_gap_notes": 1
+  },
+  "runtime_approval": false,
+  "package_approval": false,
+  "ci_approval": false
+}

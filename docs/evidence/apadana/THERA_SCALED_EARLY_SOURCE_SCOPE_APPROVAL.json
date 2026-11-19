@@ -1,0 +1,248 @@
+{
+  "base_commit": "64a336789ab5f4f02964ff3023ea6b26b330e406",
+  "decision": "CONDITIONAL SOURCE SCOPE APPROVAL:19complete publisher poems61–69,71–80 plus separately reviewed42only under exact ten-key editorial contract; not runtime/package/release approval",
+  "approved_61_80": {
+    "61": "tha-ap63",
+    "62": "tha-ap64",
+    "63": "tha-ap65",
+    "64": "tha-ap66",
+    "65": "tha-ap67",
+    "66": "tha-ap68",
+    "67": "tha-ap69",
+    "68": "tha-ap70",
+    "69": "tha-ap71",
+    "71": "tha-ap73",
+    "72": "tha-ap74",
+    "73": "tha-ap75",
+    "74": "tha-ap76",
+    "75": "tha-ap77",
+    "76": "tha-ap78",
+    "77": "tha-ap79",
+    "78": "tha-ap80",
+    "79": "tha-ap81",
+    "80": "tha-ap82"
+  },
+  "held": [
+    {
+      "poem": 70,
+      "id": "tha-ap72",
+      "reason": "Unapproved orphan same-state Pandoc display fragments, separately owned summary note5 and original count71vs74. No generic cleanup or truncation."
+    }
+  ],
+  "totals_61_80": {
+    "poems": 19,
+    "stanzas": 140,
+    "body_paragraphs": 197,
+    "notes": 70
+  },
+  "poem42_approval_path": "/tmp/pali-thera-scaled-review/HELD42_INDEPENDENT_SOURCE_CONTRACT.json",
+  "poem42_approval_sha256": "e3504807caafe8cb7f8e0663dc339427af16a1e80bb6747799c261f7566b603d",
+  "source_agents_full_semantic_review": {
+    "poems": [
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80
+    ],
+    "reports": {
+      "/tmp/pali-thera-scaled-source/61-80/THERA_SEVENTH_SOURCE_REVIEW.json": "fbf828c1e95e961a8587837a01c46d1d78a9ee51c265ea6a72109553a91415a6",
+      "/tmp/pali-thera-scaled-source/61-80/THERA_EIGHTH_SOURCE_REVIEW.json": "cd8c0911a9bc341c130c2bb01548b702eee6f09b63f567ce840bb8980d477146"
+    }
+  },
+  "independent_semantic_review": {
+    "fully_reread_originals": [
+      42,
+      61,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      73,
+      74,
+      76,
+      77,
+      78,
+      79,
+      80
+    ],
+    "selection": "Planned every-fifth/chapter-boundary narrative sample plus every agent-flagged material ambiguity, edition-number/name difference, malformed marker, stanza inversion/compound entry, summary and recitation owner. Every per-poem narrative/title/colophon/edition finding was read from full semantic source reports. Every technical extraction, note, layout, root and originalXMLblock independently replayed.",
+    "direct_vri_exception_blocks": [
+      4249,
+      4322,
+      4355,
+      4384,
+      4409,
+      4410,
+      4421,
+      4433,
+      4438,
+      4458,
+      4496,
+      4511,
+      4554,
+      4638,
+      4640,
+      4678,
+      4696,
+      4712,
+      4714,
+      4727,
+      4738,
+      4739,
+      4740,
+      4741,
+      4742
+    ],
+    "limits": "Risk sampling supplements source-agent full per-poem reads; no specialist translation or recension endorsement."
+  },
+  "exhaustive_technical_replay": {
+    "receipt": "/tmp/pali-thera-scaled-review/intake61-80/EXTRACTION_COMPARISON.json",
+    "sha256": "c3593e51102d29c9136b3aa00450fb67437be5c55f987028988abb5dcf312f8e",
+    "parser": "/tmp/pali-thera-scaled-review/review_scaled_sources.py",
+    "parser_sha256": "f192b987074c959f45c604c44805c19b11f7f4ab57d0cd544e30f848888fab2d",
+    "production_or_source_agent_parser_imports": 0,
+    "full_original_xml_blocks": 14645,
+    "canonical_snapshot_sha256": "49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1"
+  },
+  "required_visible_findings": {
+    "61": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Publisher follows bamboo stupa reading in originalnote2; root2at4249main pulinaṃ(sand) records veḷunā/veḷinaṃvariants. Preserve edition difference, not replacement of root wording.",
+      "Publisher locals3/4stupa-pūjā versus root3/4mainflower-pūjā; actualrootvariantrecords stūpa-type refrain.",
+      "Sakacittaniya publisher title/chapter/colophons differ from rootSakacintaniya; no silent title normalization. Preface owns0notes; title originalnote1belongs to poem."
+    ],
+    "62": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Publisher Āvopupphiya has long initial Ā while root title, speaker and closing have Avopupphiya. Preserve both spellings and the original six four-line entries.",
+      "The single original note belongs to poem local3/global1357. No chapter preface, summary, recitation or note is imported from neighbors."
+    ],
+    "63": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Publisher title and both colophons have paired cc/chch displays; the royal name has c/ch. Preserve the diacritic member by the existing finite presentation.",
+      "Publisher seven entries preserve the goose, Indus, moss, sal-flower, Vipassī, faith and eight-kings narrative corresponding to VRI13–19. All three notes are poem-owned."
+    ],
+    "64": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Publisher local5/global1372 names the brahmin Yena, with original note3. VRI24 at4322 names Sena (senasavhayo), with no Yena variant in that block. Preserve the proper-name difference visibly.",
+      "All four simile-praises, nine printed entries, original four definitions and both colophons remain intact. This identity does not authorize reconciling names or source wording."
+    ],
+    "65": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Publisherlocal6/global1382thirteenth aeon contrasts root34maincuddase(14), with terase(13)actualvariantat4355.",
+      "Originalnotes2/3/4/5/6contain edition/commentary/interpretation claims and elephant attribution; preserve all6astranslatorapparatus, not inferred canonical prose.",
+      "VRI32 at4349 has the elephant-king planting wholesome seeds wording beside a materially different release-from-bondage variant. Publisher follows the main elephant story; preserve the note5 commentary attribution rather than presenting commentary as separate root speech."
+    ],
+    "66": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Originalnote1explicitlywarns other later monks share Sucintita name; only lion/meat/Atthadassi narrative supports this owner.",
+      "Publisherlocal8/global1391sayssixtieth aeon; root43at4384says saṭṭhimhito kappasate, while originalnote3discusses/rejects sixty-hundred formulation and chronology. Do not normalize wording or assert exact VRI temporal equivalence; full specialist review needed.",
+      "Originalnote3ends without finalfullstop and retains math/ito argument as translator note. No correction."
+    ],
+    "67": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Publisherlocal7/global1399gives34thaeon; root51at4410has Chattiṃsatimhi(36), no34variant there.",
+      "PublisherAruṇaka corresponds actualvariantaruṇakāat4409besiderootmainAruṇavā. Originalnote2discusses supaṇṇa/suvaṇṇa/cty; preserve interpretation and uncertainty."
+    ],
+    "68": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Publisher local8/global1408 gives77 aeons while VRI60 at4438 has sattasattatikappasate, a77-hundreds construction. Preserve the temporal difference without normalizing it.",
+      "Publisher local2 follows anomaṃ amitaṃ, actually recorded as a VRI54 variant at4421; the main line names Anomadassi.",
+      "Publisher local6/global1406 has departure from grief, while VRI58 at4433 has vinipātamagantvāna (not going to downfall). Preserve the differing polarity/interpretation; do not claim word alignment or repair the English.",
+      "Publisher local7 follows damena uttamena, which is also VRI59 main wording; original note3 contrasts the publisher’s PTS reading. Do not mislabel the PTS note as VRI main wording. All five definitions are poem-owned; note2 cross-refers to earlier1098 without importing that passage."
+    ],
+    "69": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Publisherlocal5/global1414gives25thaeon; root66at4458Chabbīsatimhi(26)has no25variant there.",
+      "All6entries and originalnote1title present; Sumana named elsewhere is not independent mapping evidence."
+    ],
+    "71": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Publisher follows commentary ā-pāṭali trumpet-flower interpretation while its note1 says manuscript a-pāṭali; VRI1 at4496 has apāṭaliṃ. Retain the original botanical/negation uncertainty and the note’s other poem references, without importing those works.",
+      "Chapter preface belongs only to71 and owns zero notes. The one original definition belongs to poem local1/global1423, not preface. All four entries and both colophons remain original."
+    ],
+    "72": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Original note2 distinguishes a stepping foot from a foot-shrine interpretation of akkantam; preserve the interpretive uncertainty beside actual VRI5 wording at4511. Do not silently replace the source with either reading.",
+      "Paired c/ch and cc/chch displays occur inside original notes2/3. All three definitions remain poem-owned; no neighboring note is inherited."
+    ],
+    "73": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Publisher title and both colophons have Saññaka; VRI heading and both colophons have Buddhasaññaka. Full robe/tree/Dumasāra story establishes identity independently of the shortened name.",
+      "Original note3 records tree-top versus bad-road segmentation of dumagge and uncertainty about how the robe reached the tree. Keep both alternative interpretation and stated doubt; do not manufacture a resolved narrative. Preserve original Kṣhatriyan spelling and all four definitions.",
+      "Publisher local3 says fourth aeon after that while root11 has ito catutthake kappe. Temporal-reference phrasing remains edition-specific."
+    ],
+    "74": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "The sixth recitation marker is a separate paragraph after both poem colophons and before all definitions. It binds root4554–4555/reftha-ap76/9 and owns zero notes; keep it outside poem and stanza-quotation evidence.",
+      "Original note1 contains uppercase paired C/Ch Pandoc display inside a botanical name. Existing paired-display treatment suffices; do not add generic markup permission. All three definitions belong to the poem, none to the recitation.",
+      "Publisher local4 says third aeon after that while VRI16 has ito tatiyake kappe. Preserve source temporal wording and root unchanged."
+    ],
+    "75": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "All four complete entries, title, both colophons and sole title note are poem-owned. The story is a meal gift to Khaṇḍa, not a duplicate mapping based on the generic Ekasaññaka name or adjacent sequence.",
+      "Source40-aeon Varuṇa reward matches VRI20 Cattālīsamhito kappe/varuṇo; no whole-VRI line alignment is inferred from this specific agreement."
+    ],
+    "76": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Source spoken-name colophon says Tiṇasanthāraka, while source title and final legend say Tiṇasanthāradāyaka; note7 owns that inconsistency. VRI heading and both colophons use Tiṇasantharadāyaka with short a. Preserve all forms and original note7.",
+      "Original note3 leaves crouching departure ambiguous between reverential bending and going on all fours. The application must not resolve that uncertainty. Notes4/6 own the heavenly-name and royal-name glosses. All seven definitions belong to the poem.",
+      "Publisher title, note2 and body omit or differently express some agga compounds relative to VRI25. Retain exact publisher wording without asserting word-by-word equivalence."
+    ],
+    "77": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Keep local4/global1456 before local5/global1455. Source note3 is attached after the global1456 brackets and explicitly describes the inversion against BJTS; VRI33–34 retain the same defilement-then-kings order as source body. Never reorder stanzas by global label.",
+      "Publisher Dipadādhipati differs in spelling from VRI34 Dvipadādhipati. All six entries and four definitions remain poem-owned; note3 stays with the stanza it annotates."
+    ],
+    "78": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "The first physical stanza has eight lines and compound local1-2/global1458-1459. Do not split it into two invented publisher entries; the chapter has73physical entries versus74numbered VRI stanzas.",
+      "That combined opening places the rich man’s son and lap-held flower before the sight of the marked Buddha; VRI36–37 give the sight first. Preserve source order and combined boundaries; not line-aligned VRI.",
+      "All three definitions are poem-owned; note3 cross-refers to1452without incorporating source77’s wording or note body."
+    ],
+    "79": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Source local1 explicitly names Tissa, while VRI42 at4638 only says Sambuddha; do not imply VRI explicitly supplies that proper name.",
+      "Publisher local2 gives a him-relative/sitting arrangement while VRI43 has tatthāhaṃ and departure followed by nearby seated leaf-mat wording. Preserve exact source interpretation and its note3 tassa-versus-tattha explanation; no editorial reconciliation.",
+      "Original source lightening spelling remains exact. All six entries and five notes belong to the poem; unique lightning-at-death narrative distinguishes it from adjacent donor stories."
+    ],
+    "80": [
+      "Complete publisher-edition poem only; not a line-complete translation of VRI. Preserve original interpolation, uncertainty and numbering; no missing wording is generated.",
+      "Publisher title and both colophons have Tīṇipadumiya; VRI heading and both colophons have Tipadumiya. Original note1 identifies BJTS Tipadumiya, preserving that edition difference.",
+      "Publisher local20/global1489 gives500 wheel-turning reigns; VRI67 at4714 has pañcasattatikkhattuñca (75), with no500variant in that block. Visible numerical caveat mandatory.",
+      "Publisher local24/global1493 gives7000 beings realizing Dhamma; VRI71 at4727 has satapāṇasahassānaṃ (100000), with no7000variant there. Keep both actual source counts without harmonizing them.",
+      "Publisher local14/global1483 gives40lakhs of doors; VRI61 at4696 has cattārisatasahassāni (400000) of niyyūhā (projections/porches). The number and architectural interpretation differ; preserve the original translator wording and require visible edition warning.",
+      "Publisher local8/global1477 describes people keeping the flowers aloft; VRI55 at4678 describes people raising a shout. Preserve the substantive difference; do not claim exact VRI line coverage.",
+      "Further interpretation differences: publisher local5 Boundless-riches versus VRI52 amataṃ dhanaṃ (deathless wealth); publisher local11 translation of the donor versus VRI58 māṇavo; local19 pure flowers follows actual VRI66 te visuddhā variant at4712 rather than main tepi padmā. Notes6/8–10 preserve flowers-versus-rubies, leaf/bowl/bedding, lying-together and here/this uncertainties. All11notes remain poem-owned.",
+      "Separate zero-note chapter summary includes the final chapter colophon and maps to root4738–4743/refstha-ap82/31–33. VRI places closing before summary, publisher after summary. Original stated75 is preserved alongside74VRI numbered stanzas and73physical publisher entries; it is not a validated coverage total."
+    ]
+  },
+  "rights": "Explicit CC BY-NC-SA4.0text/notes/textualapparatus with Walters/Whitman credit, source/revision/licence/change/noendorsement notices; live-only; no media grant. Generic CC-BY metadata does not override.",
+  "preservation": "All89baseline objects, complete canonical/commentary/otherdata and historical private locator revisions must remain exact; no personal-data migration.",
+  "pending_gates": [
+    "Implementation exact profile/ownership/notes/quotation/prefix/cache/client acceptance",
+    "All source81–100 independently reviewed scopes before anyactivation there",
+    "Frozen runtime/package/English-exclusion/local fullcheck/browser evidence and independent localapproval",
+    "Exact-head full expected CI and fresh dev/main observation then independent finalapproval"
+  ],
+  "reviewer_project_writes_builds_commits_pushes": 0
+}

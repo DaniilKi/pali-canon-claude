@@ -1,3 +1,6 @@
+import {CURRENT_APADANA_IDS, BASELINE_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
+// Frozen D249 whole-coverage plus independently approved net-new Apadāna owners.
+const APADANA_INTAKE_DELTA = CURRENT_APADANA_IDS.length - BASELINE_APADANA_IDS.length;
 import { test, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -88,7 +91,7 @@ test('shared retained-source registry preserves the five historical reviews and 
 
 test('current coverage counts whole and scoped availability separately after D214 source review', () => {
   const t = translationCoverage({ refresh: true }).total;
-  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2672, 1542, 1965, 22, 16]);
+  assert.deepEqual([t.links, t.with_english, t.with_english_including_inherited, t.partial_links, t.partial_only], [2672 + APADANA_INTAKE_DELTA, 1542 + APADANA_INTAKE_DELTA, 1965 + APADANA_INTAKE_DELTA, 22, 16]);
   assert.deepEqual([t.shared_links, t.with_shared_english, t.shared_only], [12, 110, 22]);
   const daily = dailyText({ ...canon }, { date: '2026-11-01', kind: 'sutta' });
   assert.deepEqual([daily.rotation.of, daily.text.id], [1288, 'sn11.22']);

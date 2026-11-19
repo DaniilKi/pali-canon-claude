@@ -1,3 +1,4 @@
+import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 import test, { afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -47,7 +48,7 @@ function assertMetadata(value, p) {
 // These aggregate pins were computed independently from the clean 2e3d6c4
 // thirty-profile snapshot and its source-rendered {ref,type,text}[] hashes.
 test('all thirty prior profiles and Pāli sequences remain frozen while ten new roots match independent evidence', () => {
-  assert.equal(Object.keys(APADANA_PROFILES).length, 89);
+  assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
   const prior = frozen(clone(Object.fromEntries(Object.entries(APADANA_PROFILES).filter(([, p]) => p.id.startsWith('thi-ap') && p.poem <= 30))));
   assert.equal(digest(JSON.stringify(prior)), '181858a10aa3eefa91af7edd7a4098ca41e1efce9f2312cc3683ecb5795ac55a');
   const d = canon.load(), pali = {};
@@ -237,8 +238,8 @@ test('source-enabled API pages preserve all ten bodies and apparatus across pinn
   await assert.rejects(english.translation(unit, idFor(31), { ...first.continue_with.arguments, prefix_sha256: '0'.repeat(64) }), /prefix|changed/);
 });
 
-test('source-enabled v21 reading API exposes preface notes once and separates both summaries from poem and notes', { skip: !checkout }, async () => {
-  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v24.html'); onlyPinnedFetch([]);
+test('source-enabled current reading API exposes preface notes once and separates both summaries from poem and notes', { skip: !checkout }, async () => {
+  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v25.html'); onlyPinnedFetch([]);
   for (const n of [31, 33, 35, 40]) {
     const value = await readPassage({ uid: pFor(n).id, translation: idFor(n) });
     assert.ok(!value.english_error, value.english_error);

@@ -1,0 +1,39 @@
+{
+  "base_commit": "64a336789ab5f4f02964ff3023ea6b26b330e406",
+  "status": "CONDITIONAL held42 implementation review passed; frozen integrated runtime/browser/package/CI remain required",
+  "independent_source_hashes_match_actual_parser": true,
+  "source_receipt_sha256": "e3504807caafe8cb7f8e0663dc339427af16a1e80bb6747799c261f7566b603d",
+  "all28quotation_entries_without_gap_or_note12": true,
+  "focused_tests": {
+    "file": "/tmp/pali-thera-scaled-review/held42-focused-independent.log",
+    "sha256": "9c4b9a8855a7029dd10e786bb57fbb6b1437428409497999be47ddb734266c52",
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0,
+    "execution": "Uncommitted integrated working tree; not frozen release acceptance"
+  },
+  "crypto_review_sha256": "cf0b76f9faf6c996f953803d12d67997d53301167898560ee2dcaa4649c360f2",
+  "reviewed_files": {
+    "src/apadana-thera.mjs": "c57da69674628ebcfd84eadd4714f206dbe0af4da927bde0a594a952676c7cdd",
+    "src/apadana.mjs": "f05c04d2d6c4398801ce82ed289c1921fe344ab320ae1fe8e48f2af866d297f0",
+    "src/english.mjs": "4eef7b7ea35c89a12c64c17d323eefa487bac128266665ab4e8a11f7c0c0907e",
+    "web/content-sha256.mjs": "bc28e5561e53f10d6293b35563557e968d47a255ceba77ff04b9816a2932cc63",
+    "web/translation-policy.mjs": "5b48c43abd6bf66b797fee5754b93cd677a906991cc182d94fc4874b42764eec",
+    "web/reader.js": "8522100d0ddbd2db383dde6889703ea5f3c2014d99475966b559e4001a309981",
+    "src/chatgpt-widget.mjs": "b8d7e0bf38f1e9fd934ba5984cfab21af6b4bf1135786454ec8c7a6841c51327",
+    "scripts/apadana/build.mjs": "c5adfe4a7d3df33140f064ca0bf9355a7129525f29939b763f8e7db1aa4b3df3"
+  },
+  "review_notes": [
+    "Actual parser body/poemnotes/descriptor/sidecar content match independent raw and fullXMLreplay;12poemnotes remain1–11,13 and separateeditorialnote12.",
+    "Strict 10-key descriptor plus text/notes only, exactowner/presence/type/order/hash checks and fresh sourceprofile identity failclosed; unknownforeign providers cannot injectgap metadata.",
+    "Changes limited to source/parser/wrappers/presentation and finitehashhelper; no private storage, source migration or asyncfocus code changed.",
+    "Focused source-enabled tests reviewed and independently executed: metadata refusal,23malformedcontentcontrols,allreaderpolicy/serializedwidget/quotationrefusals andevery500charcontinuation; actualfullMCP/browserflows remain required."
+  ],
+  "pending": [
+    "Source100collection contract and source81–100 approval",
+    "Full integrated browser normal/a11y/isolated-package and both embeddedhost positive/negative ownership gates",
+    "Old89/fullcanonical/commentarypreservation on frozenbuild",
+    "Package exclusion/localfullcheck/exactheadCI/finalreview"
+  ],
+  "project_writes_builds_commits_pushes": 0
+}

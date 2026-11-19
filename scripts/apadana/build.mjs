@@ -57,6 +57,15 @@ for (const [id, p] of Object.entries(APADANA_PROFILES)) {
     }
   }
   if (p.index_revision) same(u.index_revision, p.index_revision, `${id} locator revision`);
+  same(Object.hasOwn(extracted, 'editorial_gap'), Object.hasOwn(p, 'editorial_gap'), `${id} editorial-gap presence`);
+  if (p.editorial_gap) {
+    const {text,translator_notes,...scope} = extracted.editorial_gap;
+    same(id, 'tha-ap44', `${id} editorial-gap owner`);
+    same(JSON.stringify(scope), JSON.stringify(p.editorial_gap), `${id} editorial-gap scope`);
+    same(digest(text), scope.body_sha256, `${id} editorial-gap text`);
+    same(digest(JSON.stringify(translator_notes)), scope.notes_sha256, `${id} editorial-gap notes`);
+    same(JSON.stringify(translator_notes.map(note=>note.number)), '[12]', `${id} editorial-gap original note number`);
+  }
   for (const key of ['chapter_summary', 'collection_summary']) if (p[key]) {
     const { text, translator_notes, ...scope } = extracted[key];
     same(JSON.stringify(scope), JSON.stringify(p[key]), `${id} ${key} scope`);

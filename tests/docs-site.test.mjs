@@ -1,3 +1,4 @@
+import {CURRENT_APADANA_URLS} from './helpers/apadana-intake-expectations.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
@@ -78,7 +79,12 @@ test('export never carries scripture or SuttaCentral content', () => {
   const json = JSON.stringify(index);
   assert.doesNotMatch(json, /suttacentral\.net/);
   assert.doesNotMatch(json, /Evaṃ me sutaṃ/, 'no Pāli text body');
-  for (const t of index.texts) for (const e of t.english) assert.match(e.url, /^https:\/\/(www\.dhammatalks\.org\/|(?:www\.)?accesstoinsight\.org\/|ancient-buddhist-texts\.net\/Texts-and-Translations\/|apadanatranslation\.com\/text\/(?:chapter-4\/poem-(?:00[1-9]|0[123][0-9]|040)|chapter-3\/poem-(?:01[1-9]|0[23][0-9]|04[013-9]|05[0-9]|060))\/$)/, e.url);
+  const approvedApadana=new Set(CURRENT_APADANA_URLS);
+  for (const t of index.texts) for (const e of t.english) {
+    if (new URL(e.url).hostname==='apadanatranslation.com') assert.ok(approvedApadana.has(e.url),e.url);
+    else assert.match(e.url,/^https:\/\/(www\.dhammatalks\.org\/|(?:www\.)?accesstoinsight\.org\/|ancient-buddhist-texts\.net\/Texts-and-Translations\/)/,e.url);
+  }
+  assert.ok(!approvedApadana.has('https://apadanatranslation.com/text/chapter-3/poem-070/'),'held publisher70 is excluded');
 });
 
 test('CSV round-trips: header, one row per text, quoting of commas and quotes', () => {

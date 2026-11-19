@@ -1,0 +1,246 @@
+{
+  "base_commit": "64a336789ab5f4f02964ff3023ea6b26b330e406",
+  "status": "CONDITIONAL all40 implementation review approved; integrated frozen build/package/browser/exact CI required",
+  "previous89profiles_exact": true,
+  "current_profiles": 129,
+  "new_profiles": 40,
+  "held70_not_activated": true,
+  "all_independent_raw_body_notes_layout_root_apparatus_hashes_match": true,
+  "all_required_sourcefindings_present": true,
+  "printed_entries": 278,
+  "poem_notes": 137,
+  "separate_apparatus_notes": 3,
+  "source_drift_and_unknown_profile_refusals": 80,
+  "independent_goldens_sha256": "0e3e0fe37e3766719987a97ae89998f294e10c073a054e4c2d1496f2657ee3fa",
+  "reviewed_files": {
+    "src/apadana-thera-profiles.mjs": "ffea8d3d9257f021c680e8c4f5dc556f54e0f180b6245e38d8db490a3cd4f930",
+    "src/apadana-thera.mjs": "c57da69674628ebcfd84eadd4714f206dbe0af4da927bde0a594a952676c7cdd",
+    "src/apadana.mjs": "b7452940955600e8432c02e51c8bb9bc462db325f4b6eca35d4e4e93954b878b",
+    "src/english.mjs": "4eef7b7ea35c89a12c64c17d323eefa487bac128266665ab4e8a11f7c0c0907e",
+    "src/chatgpt-widget.mjs": "d786a93da1c9c25631e2c8aa3a07a6d5e5d23a89f1fd4428e03ea359a6183e70",
+    "web/content-sha256.mjs": "bc28e5561e53f10d6293b35563557e968d47a255ceba77ff04b9816a2932cc63",
+    "web/translation-policy.mjs": "3d05203c5b14c247a5525f37963e037cea5a6be3a027b2482537fee556c62417",
+    "web/reader.js": "d0dfa0245106b24f1224a338841605e4d0ece42fccbb3d6fef33313f93fcc568",
+    "scripts/apadana/build.mjs": "c5adfe4a7d3df33140f064ca0bf9355a7129525f29939b763f8e7db1aa4b3df3"
+  },
+  "focused_logs": {
+    "held42": {
+      "file": "/tmp/pali-thera-scaled-review/held42-latest-independent.log",
+      "sha256": "a70094b61c37a09e5bf51adf63043a226c9db3583b2eaf96346b112f572778c9",
+      "tests": 7,
+      "pass": 7,
+      "skip": 0
+    },
+    "hundred": {
+      "file": "/tmp/pali-thera-scaled-review/hundred-focused-independent.log",
+      "sha256": "09dc9d0ef768a6df927d3b4ac1d2c45cacb2263655e845bea4728e84b4c34efb",
+      "tests": 4,
+      "pass": 4,
+      "skip": 0
+    }
+  },
+  "execution_scope": "Uncommitted integrated source tree, not frozen final runtime; actual-package/MCP/browser gates pending",
+  "rows": [
+    {
+      "id": "tha-ap44",
+      "poem": 42,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap63",
+      "poem": 61,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap64",
+      "poem": 62,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap65",
+      "poem": 63,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap66",
+      "poem": 64,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap67",
+      "poem": 65,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap68",
+      "poem": 66,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap69",
+      "poem": 67,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap70",
+      "poem": 68,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap71",
+      "poem": 69,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap73",
+      "poem": 71,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap74",
+      "poem": 72,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap75",
+      "poem": 73,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap76",
+      "poem": 74,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap77",
+      "poem": 75,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap78",
+      "poem": 76,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap79",
+      "poem": 77,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap80",
+      "poem": 78,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap81",
+      "poem": 79,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap82",
+      "poem": 80,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap83",
+      "poem": 81,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap84",
+      "poem": 82,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap85",
+      "poem": 83,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap86",
+      "poem": 84,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap87",
+      "poem": 85,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap88",
+      "poem": 86,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap89",
+      "poem": 87,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap90",
+      "poem": 88,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap91",
+      "poem": 89,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap92",
+      "poem": 90,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap93",
+      "poem": 91,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap94",
+      "poem": 92,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap95",
+      "poem": 93,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap96",
+      "poem": 94,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap97",
+      "poem": 95,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap98",
+      "poem": 96,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap99",
+      "poem": 97,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap100",
+      "poem": 98,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap101",
+      "poem": 99,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    },
+    {
+      "id": "tha-ap102",
+      "poem": 100,
+      "body_notes_layout_apparatus_quote_and_sourcefindings_exact": true
+    }
+  ],
+  "project_writes_builds_commits_pushes": 0
+}

@@ -19,7 +19,8 @@ export function parseTheraApadana(raw, profile) {
     .replace(/<a href="#(?:PTS|BJTS)" class="abbr">([^<>]*)<\/a>/g, '$1')
     .replace(/<span class="diacritics" data-state="on">c<\/span><span class="no-diacritics" data-state="off">ch<\/span>/g, 'c'));
   const rest = raw.slice(front[0].length).trim(), at = rest.search(/^\[\^\d+\]:/m);
-  if (at < 0 && (profile.poem !== 28 || profile.note_count !== 0 || profile.note_numbers.length)) fail();
+  // Only these exact reviewed artifacts have no translator-note definitions.
+  if (at < 0 && (!['tha-ap30', 'tha-ap88'].includes(profile.id) || profile.note_count !== 0 || profile.note_numbers.length)) fail();
   let poem = at < 0 ? rest : rest.slice(0, at).trim();
   const entries = [...(at < 0 ? '' : rest.slice(at)).matchAll(/^\[\^(\d+)\]:[ \t]*([^]*?)(?=^\[\^\d+\]:|(?![^]))/gm)];
   const notes = entries.map((entry, i) => {
@@ -31,6 +32,28 @@ export function parseTheraApadana(raw, profile) {
     const found = [...value.matchAll(/\[\^(\d+)\]/g)].map(m => Number(m[1]));
     if (found.some(n => !numbers.includes(n)) || numbers.some(n => !found.includes(n))) fail();
   };
+  let editorial_gap;
+  if (profile.editorial_gap) {
+    // Only this reviewed raw artifact has an independently owned editorial gap.
+    // Its original wording is read live and verified by the sidecar hash, never supplied here.
+    const scope = profile.editorial_gap;
+    if (profile.id !== 'tha-ap44' || profile.poem !== 42
+      || scope.kind !== 'publisher_editorial_gap' || scope.parent_id !== profile.id
+      || scope.placement !== 'before_local_label' || scope.after_local_label !== '25'
+      || scope.after_publisher_label !== '1164' || scope.before_local_label !== '26'
+      || scope.before_publisher_label !== '1165' || JSON.stringify(scope.note_numbers) !== '[12]'
+      || Object.keys(scope).length !== 10) fail();
+    const parts = poem.split('\n\n'), marker = parts[26];
+    if (parts.length !== 32 || !marker || marker.length !== 16 || marker.includes('\n')) fail();
+    const before = present(parts[25]).replace(/\[Note \d+\]/g, '').trim();
+    const after = present(parts[27]).replace(/\[Note \d+\]/g, '').trim();
+    if (!before.endsWith('(25) [1164]') || !after.endsWith('(26) [1165]')) fail();
+    refs(marker, scope.note_numbers);
+    const text = present(marker), translator_notes = notesFor(scope.note_numbers);
+    if (digest(text) !== scope.body_sha256 || digest(JSON.stringify(translator_notes)) !== scope.notes_sha256) fail();
+    editorial_gap = { ...scope, text, translator_notes };
+    poem = [...parts.slice(0, 26), ...parts.slice(27)].join('\n\n');
+  }
   let publisher_divisions;
   if (profile.publisher_divisions) {
     if (profile.publisher_divisions.length !== 1) fail();
@@ -46,9 +69,9 @@ export function parseTheraApadana(raw, profile) {
       if (stanza.split('\n').length !== 4 || !stanza.endsWith('(15) [1229]')) fail();
       poem = parts.join('\n\n');
     } else {
-      marker = ({17: '\n\nThe Third Recitation Portion is Finished.', 30: '\n\nThe Fourth Recitation Portion.'})[profile.poem];
+      marker = ({17: '\n\nThe Third Recitation Portion is Finished.', 30: '\n\nThe Fourth Recitation Portion.', 74: '\n\nThe Sixth Recitation Portion.'})[profile.poem];
       if (!marker || !poem.endsWith(marker) || poem.split(marker).length !== 2
-        || scope.parent_id !== profile.id || scope.placement !== (profile.poem === 17 ? 'after_poem' : 'after_chapter_summary')) fail();
+        || scope.parent_id !== profile.id || scope.placement !== ([17, 74].includes(profile.poem) ? 'after_poem' : 'after_chapter_summary')) fail();
       poem = poem.slice(0, -marker.length);
     }
     const text = present(marker), translator_notes = notesFor(scope.note_numbers);
@@ -56,19 +79,31 @@ export function parseTheraApadana(raw, profile) {
     if (digest(text) !== scope.body_sha256 || digest(JSON.stringify(translator_notes)) !== scope.notes_sha256) fail();
     publisher_divisions = [{ ...scope, text, translator_notes }];
   }
+  let collection_summary;
+  if (profile.collection_summary) {
+    // The first-hundred endmatter is distinct from the tenth chapter summary.
+    if (profile.id !== 'tha-ap102' || profile.poem !== 100) fail();
+    const marker = '\n\nThen there is the Summary of Chapters:\n\n', parts = poem.split(marker);
+    if (parts.length !== 2) fail();
+    poem = parts[0];
+    const summaryRaw = marker.trim() + '\n\n' + parts[1], text = present(summaryRaw), translator_notes = notesFor(profile.collection_summary.note_numbers);
+    refs(summaryRaw, profile.collection_summary.note_numbers);
+    if (digest(text) !== profile.collection_summary.body_sha256 || digest(JSON.stringify(translator_notes)) !== profile.collection_summary.notes_sha256) fail();
+    collection_summary = { ...profile.collection_summary, text, translator_notes };
+  }
   let chapter_summary;
   if (profile.chapter_summary) {
-    if (!['tha-ap22', 'tha-ap32', 'tha-ap42', 'tha-ap52', 'tha-ap62'].includes(profile.id)) fail();
+    if (!['tha-ap22', 'tha-ap32', 'tha-ap42', 'tha-ap52', 'tha-ap62', 'tha-ap82', 'tha-ap92', 'tha-ap102'].includes(profile.id)) fail();
     const marker = '\n\nThe Summary:\n\n', parts = poem.split(marker); if (parts.length !== 2) fail();
     poem = parts[0]; const summaryRaw = marker.trim() + '\n\n' + parts[1], text = present(summaryRaw), translator_notes = notesFor(profile.chapter_summary.note_numbers);
     refs(summaryRaw, profile.chapter_summary.note_numbers);
     if (digest(text) !== profile.chapter_summary.body_sha256 || digest(JSON.stringify(translator_notes)) !== profile.chapter_summary.notes_sha256) fail();
     chapter_summary = { ...profile.chapter_summary, text, translator_notes };
   }
-  const owned = [...profile.note_numbers, ...(profile.chapter_summary?.note_numbers || []), ...(profile.publisher_divisions || []).flatMap(s => s.note_numbers)];
+  const owned = [...profile.note_numbers, ...(profile.editorial_gap?.note_numbers || []), ...(profile.chapter_summary?.note_numbers || []), ...(profile.collection_summary?.note_numbers || []), ...(profile.publisher_divisions || []).flatMap(s => s.note_numbers)];
   if (new Set(owned).size !== owned.length || owned.length !== notes.length || notes.some(n => !owned.includes(n.number))) fail();
   const headings = [...poem.matchAll(/^### /gm)]; if (headings.length !== 1) fail();
-  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53'].includes(profile.id) !== (split > 0)) fail();
+  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93'].includes(profile.id) !== (split > 0)) fail();
   const preface = poem.slice(0, split), body = poem.slice(split); refs(preface, []); refs(body, profile.note_numbers);
   const publisher_paratext = present(preface), text = present(body), translator_notes = notesFor(profile.note_numbers), paragraphs = text.split(/\n\n+/);
   if (paragraphs.length !== profile.stanza_layout.length + 3 || !paragraphs[0].startsWith(`[${profile.poem}. `)
@@ -80,5 +115,5 @@ export function parseTheraApadana(raw, profile) {
     if (!stanza.suffix || paragraphs[i + 1].split('\n').length !== stanza.lines
       || !paragraphs[i + 1].replace(/\[Note \d+\]/g, '').trim().endsWith(stanza.suffix)) fail();
   }
-  return { title, text, translator_notes, publisher_paratext, ...(chapter_summary ? {chapter_summary} : {}), ...(publisher_divisions ? {publisher_divisions} : {}) };
+  return { title, text, translator_notes, publisher_paratext, ...(editorial_gap ? {editorial_gap} : {}), ...(chapter_summary ? {chapter_summary} : {}), ...(collection_summary ? {collection_summary} : {}), ...(publisher_divisions ? {publisher_divisions} : {}) };
 }

@@ -1,0 +1,232 @@
+{
+  "base_commit": "64a336789ab5f4f02964ff3023ea6b26b330e406",
+  "status": "Implementation source review passed; frozen package/browser/fullcheck/exact CI remain separate gates",
+  "runtime_review_script_sha256": "7df23bbad947df50fcfaa4917630165cc132c410536805b1ca86571285b0321c",
+  "previous89profiles_exact": true,
+  "current_profiles": 129,
+  "new_profiles": 40,
+  "held70_not_activated": true,
+  "all_independent_raw_body_notes_layout_root_apparatus_hashes_match": true,
+  "all_required_sourcefindings_present": true,
+  "printed_entries": 278,
+  "poem_notes": 137,
+  "separate_apparatus_notes": 3,
+  "source_drift_and_unknown_profile_refusals": 80,
+  "new_scope_content_refusals_across_three_clients": 147,
+  "independent_goldens_sha256": "02df22517ade68baf7e375a9ae9c7defeb26e77958ccab71ab4d0cb431a12f6d",
+  "reviewed_files": {
+    "src/apadana-thera-profiles.mjs": "ffea8d3d9257f021c680e8c4f5dc556f54e0f180b6245e38d8db490a3cd4f930",
+    "src/apadana-thera.mjs": "c57da69674628ebcfd84eadd4714f206dbe0af4da927bde0a594a952676c7cdd",
+    "src/apadana.mjs": "b7452940955600e8432c02e51c8bb9bc462db325f4b6eca35d4e4e93954b878b",
+    "src/english.mjs": "4eef7b7ea35c89a12c64c17d323eefa487bac128266665ab4e8a11f7c0c0907e",
+    "src/chatgpt-widget.mjs": "7a45c8a7bcb9fbfc35bb5975215a8671353769ae083a926a22dce141a319ee48",
+    "web/content-sha256.mjs": "bc28e5561e53f10d6293b35563557e968d47a255ceba77ff04b9816a2932cc63",
+    "web/translation-policy.mjs": "62aa441fd07ce840996be496440f1a01127b21412daf35fab2738c9f4323785f",
+    "web/reader.js": "d0dfa0245106b24f1224a338841605e4d0ece42fccbb3d6fef33313f93fcc568",
+    "scripts/apadana/build.mjs": "c5adfe4a7d3df33140f064ca0bf9355a7129525f29939b763f8e7db1aa4b3df3"
+  },
+  "execution_scope": "Actual source-derived parser/client objects in current source tree; simulated serialized widget validator; no build/package or physical device claim",
+  "rows": [
+    {
+      "id": "tha-ap44",
+      "poem": 42,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap63",
+      "poem": 61,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap64",
+      "poem": 62,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap65",
+      "poem": 63,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap66",
+      "poem": 64,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap67",
+      "poem": 65,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap68",
+      "poem": 66,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap69",
+      "poem": 67,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap70",
+      "poem": 68,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap71",
+      "poem": 69,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap73",
+      "poem": 71,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap74",
+      "poem": 72,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap75",
+      "poem": 73,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap76",
+      "poem": 74,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap77",
+      "poem": 75,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap78",
+      "poem": 76,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap79",
+      "poem": 77,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap80",
+      "poem": 78,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap81",
+      "poem": 79,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap82",
+      "poem": 80,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap83",
+      "poem": 81,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap84",
+      "poem": 82,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap85",
+      "poem": 83,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap86",
+      "poem": 84,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap87",
+      "poem": 85,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap88",
+      "poem": 86,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap89",
+      "poem": 87,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap90",
+      "poem": 88,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap91",
+      "poem": 89,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap92",
+      "poem": 90,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap93",
+      "poem": 91,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap94",
+      "poem": 92,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap95",
+      "poem": 93,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap96",
+      "poem": 94,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap97",
+      "poem": 95,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap98",
+      "poem": 96,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap99",
+      "poem": 97,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap100",
+      "poem": 98,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap101",
+      "poem": 99,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    },
+    {
+      "id": "tha-ap102",
+      "poem": 100,
+      "independent_extraction_and_client_positive_and_content_refusals": true
+    }
+  ],
+  "project_writes_builds_commits_pushes": 0
+}

@@ -1,10 +1,14 @@
 import {translatorNotes,sectionSourceUnit,milindaSourceUnit,anTenSourceUnit,validateSectionIdentity,validateSectionDescriptor} from './milinda-sources.mjs';
+import {contentSha256} from './content-sha256.mjs';
 
 import { APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_TRANSLATOR, APADANA_PROFILES } from '../src/apadana-profiles.mjs';
 
+// Literal D250 source owners; the preceding89 presentation contracts stay unchanged.
+const PINNED_NEW_PARATEXT_IDS = new Set(["tha-ap44","tha-ap63","tha-ap64","tha-ap65","tha-ap66","tha-ap67","tha-ap68","tha-ap69","tha-ap70","tha-ap71","tha-ap73","tha-ap74","tha-ap75","tha-ap76","tha-ap77","tha-ap78","tha-ap79","tha-ap80","tha-ap81","tha-ap82","tha-ap83","tha-ap84","tha-ap85","tha-ap86","tha-ap87","tha-ap88","tha-ap89","tha-ap90","tha-ap91","tha-ap92","tha-ap93","tha-ap94","tha-ap95","tha-ap96","tha-ap97","tha-ap98","tha-ap99","tha-ap100","tha-ap101","tha-ap102"]);
+
 export const apadanaId = uid => APADANA_PROFILES[uid]?.path ? 'ap:' + APADANA_PROFILES[uid].path.replace(/^\/text\/|\/$/g, '') : undefined;
 export const apadanaFamily = id => typeof id === 'string' && /^ap:/i.test(id.trim());
-const isApadana = value => apadanaFamily(value?.translation_id) || value?.source === 'apadana' || value?.source === 'Legends of the Buddhist Saints (Apadāna)' || own(value, 'translation_revision') || own(value, 'publisher_paratext') || own(value, 'chapter_summary') || own(value, 'publisher_divisions') || own(value, 'publisher_preface') || own(value, 'collection_summary');
+const isApadana = value => apadanaFamily(value?.translation_id) || value?.source === 'apadana' || value?.source === 'Legends of the Buddhist Saints (Apadāna)' || own(value, 'translation_revision') || own(value, 'publisher_paratext') || own(value, 'chapter_summary') || own(value, 'publisher_divisions') || own(value, 'publisher_preface') || own(value, 'collection_summary') || own(value, 'editorial_gap');
 
 function sameParatext(value, expected, content) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
@@ -18,11 +22,17 @@ function sameParatext(value, expected, content) {
     : !own(value, 'text') && !own(value, 'translator_notes'));
 }
 
+function samePinnedContent(value, expected) {
+  try { return contentSha256(value.text) === expected.body_sha256 && contentSha256(JSON.stringify(value.translator_notes)) === expected.notes_sha256; }
+  catch { return false; }
+}
+
 /** Separately owned chapter paratext is never folded into poem text or notes. */
 export function validateChapterSummary(value, uid, content = false) {
   const expected = APADANA_PROFILES[uid]?.chapter_summary;
   if (!expected) { if (own(value, 'chapter_summary')) throw Error('The pinned Apadāna chapter-summary owner changed.'); return; }
-  if (!sameParatext(value.chapter_summary, expected, content)) {
+  if (!sameParatext(value.chapter_summary, expected, content)
+    || content && ['tha-ap82','tha-ap92','tha-ap102'].includes(uid) && !samePinnedContent(value.chapter_summary, expected)) {
     throw Error('The pinned Apadāna chapter-summary scope or note ownership changed.');
   }
 }
@@ -46,13 +56,17 @@ export function validatePublisherPreface(value, uid, content = false) {
 
 /** Canonical collection paratext keeps its own identity, wording and notes. */
 export function validateCollectionSummary(value, uid, content = false) {
-  const expected = uid === 'thi-ap40' ? APADANA_PROFILES[uid]?.collection_summary : undefined;
+  const expected = ['thi-ap40','tha-ap102'].includes(uid) ? APADANA_PROFILES[uid]?.collection_summary : undefined;
   if (!expected) { if (own(value, 'collection_summary')) throw Error('The pinned Apadāna collection-summary owner changed.'); return; }
   const summary = value.collection_summary;
   if (expected.kind !== 'canonical_collection_summary' || expected.parent_id !== uid
-    || !sameScope(expected.note_numbers, [11, 12]) || !summary || typeof summary !== 'object' || Array.isArray(summary)
+    || (uid === 'thi-ap40' ? !sameScope(expected.note_numbers, [11,12])
+      : !sameScope(expected.note_numbers, [4]) || expected.label !== 'Therā Apadāna first-hundred chapter summary and colophons'
+        || expected.root_start !== 5145 || expected.root_end !== 5152 || expected.first_ref !== 'tha-ap102/12' || expected.last_ref !== 'tha-ap102/15')
+    || !summary || typeof summary !== 'object' || Array.isArray(summary)
     || Object.keys(summary).sort().join(',') !== Object.keys(expected).concat(content ? ['text', 'translator_notes'] : []).sort().join(',')
-    || !sameParatext(summary, expected, content)) {
+    || !sameParatext(summary, expected, content)
+    || content && uid === 'tha-ap102' && !samePinnedContent(summary, expected)) {
     throw Error('The pinned Apadāna collection-summary scope or note ownership changed.');
   }
 }
@@ -63,8 +77,27 @@ export function validatePublisherDivisions(value, uid, content = false) {
   if (!expected) { if (own(value, 'publisher_divisions')) throw Error('The pinned Apadāna publisher-division owner changed.'); return; }
   const divisions = value.publisher_divisions;
   if (!Array.isArray(divisions) || divisions.length !== expected.length
-    || divisions.some((division, i) => !sameParatext(division, expected[i], content))) {
+    || divisions.some((division, i) => !sameParatext(division, expected[i], content)
+      || content && uid === 'tha-ap76' && !samePinnedContent(division, expected[i]))) {
     throw Error('The pinned Apadāna publisher-division scope or note ownership changed.');
+  }
+}
+
+/** A single publisher's editorial omission has no canonical stanza or root scope. */
+export function validateEditorialGap(value, uid, content = false) {
+  const profile = APADANA_PROFILES[uid], expected = uid === 'tha-ap44' ? profile?.editorial_gap : undefined;
+  const fail = () => { throw Error('The pinned Apadāna editorial-gap scope, content or note ownership changed.'); };
+  if (!expected) { if (own(value, 'editorial_gap')) fail(); return; }
+  const gap = value.editorial_gap;
+  if (profile.raw_sha256 !== '71d18cea42a26ac2fc490f43c5265f83d517d8794f2df5d652d0fadbf17a4533'
+    || Object.keys(expected).sort().join(',') !== 'after_local_label,after_publisher_label,before_local_label,before_publisher_label,body_sha256,kind,note_numbers,notes_sha256,parent_id,placement'
+    || expected.kind !== 'publisher_editorial_gap' || expected.parent_id !== uid || expected.placement !== 'before_local_label'
+    || expected.after_local_label !== '25' || expected.after_publisher_label !== '1164'
+    || expected.before_local_label !== '26' || expected.before_publisher_label !== '1165'
+    || !sameScope(expected.note_numbers, [12]) || !sameParatext(gap, expected, content)) fail();
+  if (content) {
+    try { if (contentSha256(gap.text) !== expected.body_sha256 || contentSha256(JSON.stringify(gap.translator_notes)) !== expected.notes_sha256) fail(); }
+    catch { fail(); }
   }
 }
 
@@ -80,10 +113,16 @@ export function validateApadanaChoice(value, uid, content = false) {
     || !Array.isArray(value.notes) || profile.mapping_notes.some(note => !value.notes.includes(note)))) {
     throw Error('The pinned Apadāna edition or mapping notices changed. No English was displayed.');
   }
+  if (content && PINNED_NEW_PARATEXT_IDS.has(uid)) {
+    let valid = false;
+    try { valid = typeof value.publisher_paratext === 'string' && value.publisher_paratext.length <= 50000 && contentSha256(value.publisher_paratext) === profile.paratext_sha256; } catch {}
+    if (!valid) throw Error('The pinned Apadāna publisher-preface content changed. No English was displayed.');
+  }
   validateChapterSummary(value, uid, content);
   validatePublisherPreface(value, uid, content);
   validateCollectionSummary(value, uid, content);
   validatePublisherDivisions(value, uid, content);
+  validateEditorialGap(value, uid, content);
 }
 
 /** Browser display/consent guards for backend-validated metadata. Not source, rights or alignment approval. */

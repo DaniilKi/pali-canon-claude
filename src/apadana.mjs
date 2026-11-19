@@ -8,6 +8,24 @@ import { APADANA_PROFILES, APADANA_COMMIT, APADANA_LICENSE, APADANA_TRANSLATOR, 
 const fail = () => { throw new Error('Apadāna source metadata or content differs from the reviewed pinned publication.'); };
 export const rootDigest = (unit, book) => digest(JSON.stringify({ id: unit.id, book: unit.book, start: unit.start, end: unit.end, blocks: book.blocks.slice(unit.start, unit.end) }));
 
+function validateEditorialGap(result, profile) {
+  const expected = profile?.editorial_gap;
+  if (!expected) { if (Object.hasOwn(result, 'editorial_gap')) fail(); return; }
+  if (profile.id !== 'tha-ap44' || profile.poem !== 42 || profile.raw_sha256 !== '71d18cea42a26ac2fc490f43c5265f83d517d8794f2df5d652d0fadbf17a4533'
+    || Object.keys(expected).sort().join(',') !== 'after_local_label,after_publisher_label,before_local_label,before_publisher_label,body_sha256,kind,note_numbers,notes_sha256,parent_id,placement'
+    || expected.kind !== 'publisher_editorial_gap' || expected.parent_id !== profile.id || expected.placement !== 'before_local_label'
+    || expected.after_local_label !== '25' || expected.after_publisher_label !== '1164' || expected.before_local_label !== '26' || expected.before_publisher_label !== '1165'
+    || JSON.stringify(expected.note_numbers) !== '[12]') fail();
+  const gap = result.editorial_gap;
+  if (!gap || typeof gap !== 'object' || Array.isArray(gap)
+    || Object.keys(gap).sort().join(',') !== Object.keys(expected).concat(['text','translator_notes']).sort().join(',')
+    || Object.keys(expected).some(key => JSON.stringify(gap[key]) !== JSON.stringify(expected[key]))
+    || typeof gap.text !== 'string' || !gap.text.trim() || gap.text.length > 50000
+    || !Array.isArray(gap.translator_notes) || gap.translator_notes.length !== 1
+    || gap.translator_notes.some(note => !note || typeof note !== 'object' || Array.isArray(note)
+      || Object.keys(note).sort().join(',') !== 'number,text' || note.number !== 12 || typeof note.text !== 'string' || !note.text.trim() || note.text.length > 50000)
+    || digest(gap.text) !== expected.body_sha256 || digest(JSON.stringify(gap.translator_notes)) !== expected.notes_sha256) fail();
+}
 
 export function parseApadana(raw, profile) {
   if (typeof raw !== 'string' || raw.includes('\r') || !profile) fail();
@@ -170,7 +188,7 @@ export function validateLink(link, id, unit, book) {
   }
   if (['partial_scope', 'shared_scope', 'section', 'parts'].some(key => Object.hasOwn(link, key))) fail();
   for (const key of ['title', 'reference', 'mapping_notes']) if (JSON.stringify(link[key]) !== JSON.stringify(profile[key])) fail();
-  for (const key of ['publisher_chapter', 'index_revision', 'publisher_verse_labels', 'publisher_preface', 'chapter_summary', 'collection_summary', 'note_numbers', 'root_verses', 'stanza_layout', 'publisher_divisions']) {
+  for (const key of ['publisher_chapter', 'index_revision', 'publisher_verse_labels', 'publisher_preface', 'chapter_summary', 'collection_summary', 'note_numbers', 'root_verses', 'stanza_layout', 'publisher_divisions', 'editorial_gap']) {
     if (Object.hasOwn(link, key) !== Object.hasOwn(profile, key) || JSON.stringify(link[key]) !== JSON.stringify(profile[key])) fail();
   }
   if (link.english !== undefined && link.english !== profile.title) fail();
@@ -187,6 +205,7 @@ export function validateLink(link, id, unit, book) {
 export function quotationText(result) {
   const profile = Object.values(APADANA_PROFILES).find(p => 'ap:' + p.path.replace(/^\/text\/|\/$/g, '') === result.translation_id);
   if (typeof result.translation_id === 'string' && /^ap:/i.test(result.translation_id.trim()) && !profile) fail();
+  validateEditorialGap(result, profile);
   if (profile) {
     if (['translation_scope', 'source_section', 'partial_scope', 'shared_scope', 'section', 'parts'].some(key => Object.hasOwn(result, key))
       || result.whole_unit_coverage === false) fail();
@@ -210,6 +229,7 @@ export async function translation(link) {
   const raw = await fetchPublic(profile.raw_url, { json: false });
   if (digest(raw) !== profile.raw_sha256) fail();
   const result = parseApadana(raw, profile);
+  validateEditorialGap(result, profile);
   if (digest(result.text) !== profile.body_sha256 || digest(JSON.stringify(result.translator_notes)) !== profile.notes_sha256 || digest(result.publisher_paratext) !== profile.paratext_sha256) fail();
   const theri = !Object.hasOwn(THERA_APADANA_PROFILES, profile.id);
   return { ...result, source: 'apadana', url: profile.url, fetched_from: 'official pinned repository', fetched_url: profile.raw_url,
@@ -223,6 +243,8 @@ export async function translation(link) {
       + (!theri && profile.id === 'tha-ap42' ? ' Exact paired c/cc HTML displays retain the diacritic spelling and remove only the alternate display. The original chapter summary remains separately scoped, including its original closing paragraph and count wording.' : '')
       + (!theri && profile.poem >= 41 && profile.poem <= 60 ? ' Supplementary finite Therā extraction preserves the reviewed original bracket forms, compound and out-of-order labels, embedded note markers, and colophon punctuation and notes. These publisher-edition entries do not assert line-by-line VRI alignment.' : '')
       + (!theri && profile.poem === 49 ? ' The exact fifth recitation marker is displayed separately before publisher local stanza 15/global 1229. It owns no notes and is excluded from poem text and quotation evidence; the original stanza wording and order are retained.' : '')
+      + (profile.editorial_gap ? ' The original publisher editorial gap and original note 12 are separately scoped outside poem text, pagination and quotation evidence. Its caption records the source placement after local stanza 25/global 1164 and before local stanza 26/global 1165; it asserts no canonical stanza alignment. Original poem notes retain numbers 1–11 and 13.' : '')
+      + (!theri && profile.id === 'tha-ap102' ? ' Original poem notes 1–2, tenth-chapter summary note 3 and first-hundred chapter-summary/colophon note 4 remain separately owned. The first-hundred summary covers only the publisher’s first hundred poems and first ten chapters, not the end of all Therā Apadāna; neither summary is poem quotation evidence or a translation-coverage total.' : '')
       + (!theri && [50, 60].includes(profile.poem) ? ' The original zero-note chapter summary remains separately scoped, including the canonical chapter closing. Publisher summary counts are preserved as original wording, not validated translation-coverage totals.' : '')
       + (theri && profile.poem === 17 ? ' The publisher recitation division and its original note 21 are displayed separately, before the identified publisher stanza, outside poem text and quotation evidence.' : '')
       + (theri && [18, 24, 27, 33].includes(profile.poem) ? ' Exact paired HTML display spans retain the diacritic spelling and remove only its alternate display; original editorial placeholders remain unchanged.' : '')

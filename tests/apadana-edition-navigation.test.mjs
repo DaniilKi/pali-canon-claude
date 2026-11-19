@@ -1,3 +1,4 @@
+import {CURRENT_THERA_IDS} from './helpers/apadana-intake-expectations.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -8,7 +9,7 @@ const clone=value=>structuredClone(value);
 function fixture(uid){
  const p=APADANA_PROFILES[uid];assert.ok(p,uid);
  const choice={translation_id:'ap:'+p.path.replace(/^\/text\/|\/$/g,''),translation_revision:APADANA_COMMIT,translator:p.translator,license:p.license,url:p.url};
- for(const key of ['publisher_preface','chapter_summary','collection_summary','publisher_divisions'])if(p[key])choice[key]=clone(p[key]);
+ for(const key of ['publisher_preface','chapter_summary','collection_summary','publisher_divisions','editorial_gap'])if(p[key])choice[key]=clone(p[key]);
  return{text_id:uid,source:{commit:APADANA_VRI_COMMIT,repository:'https://github.com/VipassanaTech/tipitaka-xml',...(p.index_revision?{locator_revision:APADANA_VRI_COMMIT+'-'+p.index_revision}:{})},english_available:[choice]};
 }
 const profiles=Object.values(APADANA_PROFILES);
@@ -27,8 +28,10 @@ test('all forty reviewed Theri poems preserve publisher order, exact canonical l
 });
 test('reviewed Thera subset uses literal profile owners and stays separate from all forty Theri poems',()=>{
  const expected=profiles.filter(p=>p.publisher_chapter==='chapter-3').sort((a,b)=>a.poem-b.poem);
- assert.deepEqual(expected.map(p=>p.id),['tha-ap13','tha-ap14','tha-ap15','tha-ap16','tha-ap17','tha-ap18','tha-ap19','tha-ap20','tha-ap21','tha-ap22','tha-ap23','tha-ap24','tha-ap25','tha-ap26','tha-ap27','tha-ap28','tha-ap29','tha-ap30','tha-ap31','tha-ap32','tha-ap33','tha-ap34','tha-ap35','tha-ap36','tha-ap37','tha-ap38','tha-ap39','tha-ap40','tha-ap41','tha-ap42','tha-ap43','tha-ap45','tha-ap46','tha-ap47','tha-ap48','tha-ap49','tha-ap50','tha-ap51','tha-ap52','tha-ap53','tha-ap54','tha-ap55','tha-ap56','tha-ap57','tha-ap58','tha-ap59','tha-ap60','tha-ap61','tha-ap62']);
- assert.equal(expected.length,49);
+ const curated=JSON.parse(readFileSync(new URL('../docs/evidence/apadana/THERA_SCALED_APPROVAL.json',import.meta.url),'utf8'));
+ const expectedIds=[...curated.baseline_records,...curated.approved_records].filter(row=>row.publisher_chapter==='chapter-3').sort((a,b)=>a.poem-b.poem).map(row=>row.id);
+ assert.deepEqual(expected.map(p=>p.id),expectedIds);
+ assert.equal(expected.length,CURRENT_THERA_IDS.length);
  for(const p of expected){
   const nav=apadanaEditionNavigation(fixture(p.id)),items=nav.groups.flatMap(g=>g.poems),at=expected.findIndex(row=>row.id===p.id);
   assert.equal(nav.family,'thera');assert.deepEqual(items.map(row=>row.uid),expected.map(row=>row.id));assert.equal(nav.previous?.uid,expected[at-1]?.id);assert.equal(nav.next?.uid,expected[at+1]?.id);
@@ -36,7 +39,7 @@ test('reviewed Thera subset uses literal profile owners and stays separate from 
   assert.match(nav.note,/not complete Therā or line-complete VRI English/);
   const last=nav.groups.find(g=>g.poems.some(row=>row.uid===p.id)).poems.at(-1);
   assert.equal(nav.summary?.uid,APADANA_PROFILES[last.uid].chapter_summary?last.uid:undefined);
-  for(const target of ['thi-ap1','tha-ap11','tha-ap12','tha-ap44','tha-ap63'])assert.throws(()=>apadanaEditionLink(fixture(p.id),target),/unavailable/);
+  for(const target of ['thi-ap1','tha-ap11','tha-ap12','tha-ap72','tha-ap999'])assert.throws(()=>apadanaEditionLink(fixture(p.id),target),/unavailable/);
  }
  const first=expected[0];assert.equal(first.poem,11);assert.equal(first.id,'tha-ap13');assert.notEqual(first.id,'tha-ap'+first.poem);
 });

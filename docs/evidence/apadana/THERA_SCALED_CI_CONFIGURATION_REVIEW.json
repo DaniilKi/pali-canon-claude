@@ -1,0 +1,37 @@
+{
+  "base_commit": "64a336789ab5f4f02964ff3023ea6b26b330e406",
+  "workflow_sha256": "1acd3d5e2903fc7059956397c5fb69874255e55f1adb3f0680e45f70823cf7bd",
+  "prior34_chromium_groups_retained": true,
+  "new_three_bounded_groups": {
+    "apadanatherascaled61": [
+      "Validate scaled Ther\u0101 61-80 source, rights, editorial ownership and independent extraction",
+      "Check scaled Ther\u0101 61-80 source and apparatus ownership",
+      "Audit scaled Ther\u0101 61-80 in both themes",
+      "Check scaled Ther\u0101 61-80 from isolated npm package"
+    ],
+    "apadanatherascaled81": [
+      "Validate scaled Ther\u0101 81-100 source, rights, editorial ownership and independent extraction",
+      "Check scaled Ther\u0101 81-100 source and apparatus ownership",
+      "Audit scaled Ther\u0101 81-100 in both themes",
+      "Check scaled Ther\u0101 81-100 from isolated npm package"
+    ],
+    "apadanatheraeditorial": [
+      "Validate scaled Ther\u0101 held42 source, rights, editorial ownership and independent extraction",
+      "Check scaled Ther\u0101 held42 source and apparatus ownership",
+      "Audit scaled Ther\u0101 held42 in both themes",
+      "Check scaled Ther\u0101 held42 from isolated npm package"
+    ]
+  },
+  "configured_chromium_groups": 37,
+  "configured_total_jobs": 55,
+  "previous_total_jobs": 52,
+  "expected_required_named_source_browser_steps": 52,
+  "other_three_push_workflows_byte_exact": [
+    ".github/workflows/npx.yml",
+    ".github/workflows/corpus.yml",
+    ".github/workflows/evidence.yml"
+  ],
+  "new_group_tests_and_all_source_builder_and_independent_replay_and_three_browser_modes_are_blocking": true,
+  "scope": "Workflow configuration review only; not a passing CI result",
+  "project_writes_builds_commits_pushes": 0
+}

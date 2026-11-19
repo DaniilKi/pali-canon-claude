@@ -1,3 +1,4 @@
+import {CURRENT_APADANA_IDS, CURRENT_THERA_IDS, historicalApadanaIds} from './helpers/apadana-intake-expectations.mjs';
 import test, {afterEach} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -37,15 +38,17 @@ function assertScopes(value,p,content) {
 }
 
 test('fifth Therā activation uses explicit reviewed identities and preserves all prior seventy profiles and Pāli',()=>{
- assert.equal(Object.keys(APADANA_PROFILES).length,89);assert.equal(Object.keys(THERA_APADANA_PROFILES).length,49);
- const previous=Object.fromEntries(Object.entries(APADANA_PROFILES).filter(([id])=>id.startsWith('thi-')||Number(id.slice(6))<=42));
+ assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.deepEqual(Object.keys(THERA_APADANA_PROFILES),CURRENT_THERA_IDS);
+ const historicalIds=new Set(historicalApadanaIds(40));
+ const previous=Object.fromEntries(Object.entries(APADANA_PROFILES).filter(([id])=>historicalIds.has(id)));
+ assert.equal(Object.keys(previous).length,70);
  assert.equal(digest(JSON.stringify(previous)),'f7c29ca909d614c1e23fd7f03b171c3e28c6b67f99d365ae63dad49c01d87a5b');
  const data=canon.load(), pali=Object.fromEntries(Object.keys(previous).map(id=>[id,digest(JSON.stringify(canon.segments(data.byId.get(id))))]));
  assert.equal(digest(JSON.stringify(pali)),'dfb55686f564a18c1474342061fb63a09a3749fe459bae88c410a136844d4e83');
  const oldLinks=Object.fromEntries(Object.entries(JSON.parse(readFileSync('server/data/apadana.json','utf8')).links).filter(([id])=>Object.hasOwn(previous,id)));
  assert.equal(digest(JSON.stringify(oldLinks)),'a2c4de10faef804b6ffaf75b296e4f676d7841a10bcaa907e8c1e0204b28cc3d');
  assert.deepEqual(gold.poems.filter(g=>ids.includes(g.id)).map(g=>g.id),ids);
- assert.equal(profile('tha-ap44'),undefined,'Publisher42 omission apparatus remains held');assert.equal(profile('tha-ap63'),undefined);
+ assert.equal(profile('tha-ap72'),undefined,'Publisher70 malformed chapter apparatus remains held');assert.equal(profile('tha-ap999'),undefined);
  for(const uid of ids){const p=profile(uid),g=gold.poems.find(g=>g.id===uid),u=data.byId.get(uid),book=data.canon.books[u.book];assert.equal(p.id,g.id);assert.equal(p.poem,g.poem);assert.equal(p.title,g.title);assert.equal(p.publisher_chapter,'chapter-3');assert.ok(Object.isFrozen(p));assert.ok(Object.isFrozen(p.stanza_layout));validateLink(p,p.id,u,book);for(const key of pins)assert.equal(p[key],key==='root_sha256'?g.root.root_sha256:g[key]);assert.equal(rootDigest(u,book),g.root.root_sha256);assert.deepEqual(p.note_numbers,g.note_numbers);assert.deepEqual(p.stanza_layout,g.stanza_layout);assert.equal(u.index_revision,undefined);assert.equal(p.license,'CC BY-NC-SA 4.0');assert.equal(p.translation_revision,APADANA_COMMIT);assert.match(p.reference,/complete publisher-edition poem/);assert.match(p.mapping_notes.join(' '),/not a line-complete translation/);for(const finding of review.poems.find(r=>r.id===uid).edition_findings)assert.ok(p.mapping_notes.includes(finding));}
 });
 
@@ -65,7 +68,7 @@ test('source-enabled fifth quotation evidence contains only substantive original
 test('source-enabled fifth raw and profile mutations refuse; held artifacts cannot enter transport',{skip:!checkout},async()=>{
  for(const uid of ids){const p=profile(uid),raw=source(p);for(const changed of [raw+'\n',raw.replace('category: chapter-3','category: chapter-4'),raw.replace(/^order: \d+$/m,'order: 42'),raw.replace(/\[\^1\]:/,'[^999]:')]){assert.notEqual(changed,raw);assert.throws(()=>parseApadana(changed,p),/differs/);}for(const patch of [{id:'tha-ap44'},{poem:p.poem+1},{publisher_chapter:'chapter-4'},{raw_sha256:digest(raw+'\n')},{stanza_layout:[]},{note_numbers:[]},{chapter_summary:null},{publisher_preface:{}},{publisher_divisions:[]}])assert.throws(()=>parseTheraApadana(raw,{...p,...patch}),/differs/);}
  let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Unapproved transport');};
- for(const poem of ['042','061']){const url=`https://raw.githubusercontent.com/apadana-translation/apadana-site/${APADANA_COMMIT}/src/_poems/chapter-3/poem-${poem}.md`;assert.equal(isApadanaRawUrl(url),false);await assert.rejects(fetchPublic(url,{json:false}),/outside the supported public sources/);}assert.equal(calls,0);
+ for(const poem of ['070','999']){const url=`https://raw.githubusercontent.com/apadana-translation/apadana-site/${APADANA_COMMIT}/src/_poems/chapter-3/poem-${poem}.md`;assert.equal(isApadanaRawUrl(url),false);await assert.rejects(fetchPublic(url,{json:false}),/outside the supported public sources/);}assert.equal(calls,0);
 });
 
 test('source-enabled fifth owner, revision, note and cached disclosure mutations refuse before English transport',{skip:!checkout},async()=>{

@@ -1,3 +1,6 @@
+import {CURRENT_APADANA_IDS, BASELINE_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
+// Frozen D249 whole-coverage plus independently approved net-new Apadāna owners.
+const APADANA_INTAKE_DELTA = CURRENT_APADANA_IDS.length - BASELINE_APADANA_IDS.length;
 // Synthetic prose and verse exercise structure; publisher translation stays outside the repository.
 import {test,afterEach} from 'node:test';
 import assert from 'node:assert/strict';
@@ -50,7 +53,7 @@ test('Upatissa adds one exact partial while preserving all twenty previous descr
  assert.throws(()=>partialScope(reviewedPartialLink(row,manifest),unit,all,{...canon.source(),commit:'changed'}),/Invalid or unreviewed/);
  const choice=canon.describe(unit).english.find(c=>c.translation_id==='ati:'+row.path),accepted=scopeDescriptor(choice,unit.id);assert.equal(accepted.flags.allow_partial,true);
  for(const field of ['extractor','notice_sha256','pali_sha256']){const bad=structuredClone(choice);bad.translation_scope[field]='changed';assert.throws(()=>scopeDescriptor(bad,unit.id),/unsupported|incomplete/);}
- const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links],[2672,1542,1965,22,16,12]);
+ const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links],[2672 + APADANA_INTAKE_DELTA,1542 + APADANA_INTAKE_DELTA,1965 + APADANA_INTAKE_DELTA,22,16,12]);
  const daily=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([daily.rotation.of,daily.text.id],[1288,'sn11.22']);
  assert.deepEqual(canon.browse('english',{collection:'vinaya',availability:'linked'}).items.map(i=>i.id),['pli-tv-kd1','pli-tv-kd6','pli-tv-kd8']);assert.equal(canon.browse('english',{collection:'vinaya',availability:'whole'}).total,0);
 });

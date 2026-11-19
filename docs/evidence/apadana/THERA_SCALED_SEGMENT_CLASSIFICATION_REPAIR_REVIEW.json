@@ -1,0 +1,87 @@
+{
+  "base_commit": "64a336789ab5f4f02964ff3023ea6b26b330e406",
+  "decision": "APPROVE corrected Tenth source-review seal and expanded fixed-epoch independent portable CLI; scope/body/notes/profiles unchanged, runtime classification unchanged",
+  "cause": "Source-review independent segment helper omitted pre-existing centred-colophon classification; browser pilot correctly refused prose versus heading discrepancy. No runtime fix or gate waiver.",
+  "original_source_evidence": {
+    "xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "block": 5151,
+    "ref": "tha-ap102/15",
+    "tag": "p",
+    "rend": "centre",
+    "completion_suffix": "samattaṃ.",
+    "text_sha256": "32ce47f35ee7e37f76f722050d2207f0cf97682fdeaa00fdac398da2c49b600f",
+    "unchanged_canon_renderer_matches": true
+  },
+  "exact_metadata_deltas": {
+    "THERA_TENTH_GOLDENS.json": {
+      "old_sha256": "77736a9d33c446380fa922eee7626944893880deaf05c42ba5d67ae7916239c5",
+      "new_sha256": "2bbc739ecb97d198ecc0e4f6d599569bc846c74e03744367c649d3e87309db89",
+      "differences": [
+        {
+          "path": "/poems/9/root/segments/14/type",
+          "old": "prose",
+          "new": "heading"
+        }
+      ]
+    },
+    "THERA_TENTH_SOURCE_REVIEW.json": {
+      "old_sha256": "108b768a4bb4534eae7db0097370d820620105375feb30a5cd4b90982210e900",
+      "new_sha256": "b71f1275c694881dc85fdb58b3c736bab0db239594fcad0144fc181b44813b23",
+      "differences": [
+        {
+          "path": "/goldens_sha256",
+          "old": "77736a9d33c446380fa922eee7626944893880deaf05c42ba5d67ae7916239c5",
+          "new": "2bbc739ecb97d198ecc0e4f6d599569bc846c74e03744367c649d3e87309db89"
+        },
+        {
+          "path": "/poems/9/root/segments/14/type",
+          "old": "prose",
+          "new": "heading"
+        }
+      ]
+    },
+    "THERA_TENTH_SOURCE_APPROVAL.json": {
+      "old_sha256": "829da90d2b53c9cade2cb314b1060f253c105e9efab9a5b7e7cb97e30a4c823c",
+      "new_sha256": "23cb8427003c8b01a461e55dae7a3e6d75c9f3c92245e1c6debd4f9c0c679fff",
+      "differences": [
+        {
+          "path": "/goldens_sha256",
+          "old": "77736a9d33c446380fa922eee7626944893880deaf05c42ba5d67ae7916239c5",
+          "new": "2bbc739ecb97d198ecc0e4f6d599569bc846c74e03744367c649d3e87309db89"
+        },
+        {
+          "path": "/source_review_sha256",
+          "old": "108b768a4bb4534eae7db0097370d820620105375feb30a5cd4b90982210e900",
+          "new": "b71f1275c694881dc85fdb58b3c736bab0db239594fcad0144fc181b44813b23"
+        }
+      ]
+    }
+  },
+  "old_scope_approval_still_applies_to_unchanged_source_and_contracts": {
+    "path": "/tmp/pali-thera-scaled-review/SOURCE81_100_SCOPE_APPROVAL.json",
+    "sha256": "436e393d10ad35e00f2949878c588dee374470edf0dcc345393bd2f7c4a98556"
+  },
+  "new_tenth_goldens_sha256": "2bbc739ecb97d198ecc0e4f6d599569bc846c74e03744367c649d3e87309db89",
+  "new_portable_cli": {
+    "path": "/tmp/pali-thera-scaled-review/review_scaled_intake_v2.py",
+    "sha256": "cd791e449ff2d2dfd4e41dd15ba212379eba59368a7ce68d46f712f0d32b889a",
+    "previous_reviewed_cli_sha256": "3205f0f00e2adf57197c0b5b1ca309d6e9f77429eb737a33b8266aaa6c8b4ee9",
+    "additional_gate": "Independently derive all40 canonical reader segment refs/types/block ranges/VRI numbers/wording hashes/variant counts; compare every available source-agent segment table, not just100closing.",
+    "positive_receipt": "/tmp/pali-thera-scaled-review/intake40-v2/EXTRACTION_COMPARISON.json",
+    "positive_receipt_sha256": "b291263ec531dca07ede0d935ba1bb2dbb7901591e16375f2871cc402d8485cf",
+    "all40_canonical_segment_review_sha256": "7fcf38c8155f5369493b34fc0e07b86406be263d62de7de95144f3e26aa2dfa6",
+    "all40actual_renderer_segments_exact": 423,
+    "obsolete_review_seal_refusal": {
+      "exit_code": 1,
+      "receipts_written": false
+    }
+  },
+  "all_source_bodies_notes_apparatus_boundaries_root_hashes_and_profile_contracts_unchanged": true,
+  "retained_initial_failure": {
+    "path": "/tmp/pali-thera-scaled-browser/segment-drift-tha-ap102.json",
+    "sha256": "0a6a4d70b6dba78853440373d095a12b081331fe4eadf164e78651318692f3bd"
+  },
+  "old_evidence_backups": "/tmp/pali-thera-scaled-review/before-segment-classification-repair",
+  "runtime_frozen_package_browser_CI_approval": false,
+  "project_writes_builds_commits_pushes": 0
+}
