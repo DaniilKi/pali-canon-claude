@@ -78,9 +78,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh, milinda]
+        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh, milinda, draftsafety]
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials') && 20 || 10 }}
+    timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety') && 20 || 10 }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -357,6 +357,19 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/script-refresh-package"
           tar -xzf "$RUNNER_TEMP/script-refresh-package/"*.tgz -C "$RUNNER_TEMP/script-refresh-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-script-refresh-check.py --server-dir "$RUNNER_TEMP/script-refresh-package/package/server" --report installed-script-refresh.report.json
+      - name: Check unsaved draft recovery and delayed reading focus
+        if: matrix.group == 'draftsafety'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-draft-focus-check.py --report standalone-draft-focus.report.json
+      - name: Audit session draft recovery and focus in both themes
+        if: matrix.group == 'draftsafety'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-draft-focus-check.py --a11y --report standalone-draft-focus-a11y.report.json
+      - name: Check draft recovery and delayed focus from the isolated npm package
+        if: matrix.group == 'draftsafety'
+        run: |
+          mkdir -p "$RUNNER_TEMP/draft-focus-package"
+          npm pack --pack-destination "$RUNNER_TEMP/draft-focus-package"
+          tar -xzf "$RUNNER_TEMP/draft-focus-package/"*.tgz -C "$RUNNER_TEMP/draft-focus-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-draft-focus-check.py --server-dir "$RUNNER_TEMP/draft-focus-package/package/server" --report installed-draft-focus.report.json
       - name: Check complete Milinda questions with pinned official ATI artifacts
         if: matrix.group == 'milinda'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-milinda-check.py --report standalone-milinda.report.json
@@ -478,6 +491,9 @@ jobs:
             standalone-vinaya-partials.report.json
             standalone-vinaya-partials-a11y.report.json
             installed-vinaya-partials.report.json
+            standalone-draft-focus.report.json
+            standalone-draft-focus-a11y.report.json
+            installed-draft-focus.report.json
             standalone-milinda.report.json
             standalone-milinda-a11y.report.json
             installed-milinda.report.json

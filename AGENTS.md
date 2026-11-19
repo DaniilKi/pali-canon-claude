@@ -258,7 +258,7 @@ Browser waiting is managed by `web/request-lifecycle.mjs`: preserve its 180,000 
 
 Exact reading position is a single optional local locator, not scripture, completion or consent. Reuse `web/reading-position.mjs` to pin source revision/ref/offset and corpus/plan identity. Scroll writes are debounced; pagehide flushes, while in-app navigation cancels pending samples so header navigation cannot erase a stable point. Do not rewrite history while scrolling or restore English consent. On source drift refuse before wording; explicit current-source review keeps exact ref and plan guards. Preserve opt-out/clearing, tab-only storage warnings and refusal to overwrite changed browser data. Test `tests/web-reading-position.test.mjs` and `scripts/web-reader-position-check.py` normal/a11y/installed, including stop/retry and scope regressions.
 
-Personal browser-data writes go through `guardedStorageWrite` (`web/local-storage-write.mjs`). Preserve the raw-snapshot comparison and sticky stale-tab refusal; never silently overwrite newer notes/marks or label a failed write durable. This guard is best-effort, not atomic cross-tab CAS/locking/sync. Keep persistent local recovery downloads, explicit reload review/cancel, unreadable-profile preservation and successful quota-retry recovery. Personal note drafts are tab-memory-only, survive in-tab navigation and join exports without implicit saving; never treat them as scripture. Run `tests/web-local-storage-write.test.mjs` and `scripts/web-reader-storage-check.py` normal/a11y/installed plus import/progress/position regressions.
+Personal browser-data writes go through `guardedStorageWrite` (`web/local-storage-write.mjs`). Preserve the raw-snapshot comparison and sticky stale-tab refusal; never silently overwrite newer notes/marks or label a failed write durable. This guard is best-effort, not atomic cross-tab CAS/locking/sync. Keep persistent local recovery downloads, explicit reload review/cancel, unreadable-profile preservation and successful quota-retry recovery. Personal note drafts remain unsaved and join exports; D237 adds bounded tab-session recovery against their exact original saved record, without implicit saved-note writes or source assertions. Run `tests/web-local-storage-write.test.mjs` and `scripts/web-reader-storage-check.py` normal/a11y/installed plus import/progress/position regressions.
 
 Reading-only writes use `guardedPositionWrite`, preserving current stored personal fields and respecting an observed `remember_position:false`. Keep its returned snapshot based on this tab’s OLD personal-data baseline, updated only for the known locator/opt-out: adopting unseen newer notes as the baseline would let a later stale edit overwrite them. `guardedStorageWrite` and progress-preview checks may tolerate ONLY a change to validated `last` metadata; preserve its observed newer value when the caller did not change it, and adopt that committed locator in tab state. No general personal-data merge, consent field, arbitrary URL, new transactional guarantee or source substitution. Run `tests/web-reading-pointer-reconciliation.test.mjs`, `scripts/web-reader-pointer-check.py` normal/a11y/installed and storage/progress/position regressions. See [pointer reconciliation evidence](docs/evidence/web-reader/POINTER_RECONCILIATION.md).
 
@@ -549,3 +549,34 @@ notice, section, note and complete-root pins are mandatory; live-page drift
 requires renewed review. All earlier21 partial descriptors/choices and source
 holds remain independent. Run the new Milinda source, export and browser checks,
 including isolated-package mode; see [evidence](docs/data/milinda-reviewed-questions.md).
+
+
+### Draft survival and ordinary asynchronous focus (D237)
+
+Only personal-note drafts and their ORIGINAL saved-record bases enter the bounded
+sessionStorage journal. Never serialize generic forms, unsent searches, source
+text, scope consent or accounts. Preserve optional-field absence, source pins,
+empty drafts, conflicting old bases and unreadable raw recovery. Resume only
+unchanged exact bases; no orphan recreation or silent rebasing. Separate tabs
+are independent; duplicated/restored sessions may copy data. No new localStorage
+autosave. Session recovery/native unload warnings are best-effort; Save/export
+remain necessary before closing.
+
+Confirmed explicit active-draft discard clears its whole exact original-base
+slot, including an older recovery value when staging the latest edit exceeded
+bounds, after validating the current active snapshot. Pending-card discard
+remains exact-entry-only. Never evict pending drafts to fit capacity. A failed
+clear cannot report discard success; remove/selected-backup replacements
+preflight cleanup, and failed saved writes restore recovery best-effort. Exact
+already-committed note text settles stale journals without reviving drafts. Any
+confirmed journal write must keep warning if ANY latest active draft still lacks
+an exact confirmed recovery copy. Bound pending display25/page; exports retain
+all entries. BFCache restoration must not rehydrate over live in-memory drafts.
+
+HTTP source links use noopener/noreferrer new tabs with a visible/described hint.
+Normal navigation focuses main synchronously, never when its response finishes.
+Preserve user-reopened phone finders, input/caret, other tasks and background
+activity. Anchor scrolling requires an unexpired focus lease. Keep special
+script refresh, Stop/retry ownership and stale-response guards. Use the new
+recovery/focus helper tests, actual-source browser normal/a11y/installed flows,
+old storage/notes/core/compact/script regressions and exact-commit CI.
