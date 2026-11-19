@@ -39,8 +39,8 @@ test('AN8.59 preserves exact original prose, omitted stanzas and its own rights 
  assert.equal(scopeDescriptor(choice,unit.id).flags.allow_partial,true);
  const bad=structuredClone(choice);bad.translation_scope.version=2;
  assert.throws(()=>scopeDescriptor(bad,unit.id),/unsupported|incomplete/);
- const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links,t.with_shared_english,t.shared_only],[2552,1422,1845,21,15,12,110,52]);
- const d=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([d.rotation.of,d.text.id],[1257,'sn12.31']);
+ const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links,t.with_shared_english,t.shared_only],[2553,1423,1846,21,15,12,110,52]);
+ const d=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([d.rotation.of,d.text.id],[1258,'iti39']);
 });
 
 test('AN8.59 remains explicit partial-only access; default, shared and translator requests never fetch',async()=>{

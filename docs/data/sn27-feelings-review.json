@@ -1,0 +1,404 @@
+{
+  "baseline_commit": "0028982",
+  "date": "2026-11-19",
+  "decision": "APPROVE",
+  "approved_scope": "Exact fifth chapter at sn27.005 is a complete substantive translation of sn27.5, with mandatory disclosed untranslated inline ordinal. Whole-substantive discourse, not partial; not the full10-discourse anthology.",
+  "independent_verification": "Fresh official GitHub exact-ref base64 retrieval; decoded Git object SHA1 checked. Independently compared complete fifth source body with complete bundled VRI root and all9adjacent roots/source chapters. Prior temporary source used only as lead. No substantive omission found.",
+  "artifact": {
+    "repository": "bcbsit/ati",
+    "commit": "45fedca341497120651efa20e756b04a13e61089",
+    "path": "tipitaka/sn/sn27/sn27.001-010.than.html",
+    "official_blob_url": "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/sn/sn27/sn27.001-010.than.html",
+    "git_blob_sha1": "4a65ed1691a2b1e914eb10e04bc3f75ada54e30f",
+    "bytes": 16796,
+    "sha256": "4cda764c8a27a64faf96f6cd2ce0dc08808816ab80d329f3ad264b4516ee1e79",
+    "retrieval": "Fresh official GitHub exact-ref base64 fetch; decoded Git object SHA1 verified independently of prior temporary artifact."
+  },
+  "rights": {
+    "translator": "Thanissaro Bhikkhu",
+    "copyright_year": 1994,
+    "license": "CC BY-NC4.0International",
+    "full_notice": {
+      "licensing": "©1994 Thanissaro Bhikkhu.\n\nThe text of this page (\"Upakkilesa Samyutta: Defilements\", by Thanissaro Bhikkhu) is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of the license, visit https://creativecommons.org/licenses/by-nc/4.0/. Documents linked from this page may be subject to other restrictions.\nTranscribed from a file provided by the translator. Last revised for Access to Insight on 30 November 2013.",
+      "citation": "How to cite this document (a suggested style): \"Upakkilesa Samyutta: Defilements\" (SN 27.1-10), translated from the Pali by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 30 November 2013, https://www.accesstoinsight.org/tipitaka/sn/sn27/sn27.001-010.than.html ."
+    },
+    "notice_scope_sha256": "c17a37f4ad06a4b9ce4061abd7bebe831ba90ecda55931f65488ee90ec41973c",
+    "conditions": "Retain translator/ATI attribution and full exact page notice/citation; noncommercial; identify section extraction/adaptations; linked documents retain separate rights.",
+    "source_rights_blocker": null
+  },
+  "source_policy_five_tests": {
+    "standing": "PASS: established named translator, officialATI/BCBS publisher; file provided by translator statement.",
+    "permission": "PASS: positive exact-page CC BY-NC4.0grant; original copyright and notice retained.",
+    "respect": "PASS within exact reviewed source: existing approved source and positive reuse grant; no AI-specific exclusion observed. No broader-author permission inferred.",
+    "durability": "PASS: existing permitted officialATI GitHub mirror, immutable commit and Git blob; no new host/rehost.",
+    "verifiability": "PASS: exact sourceanchor/finitechapter/body/notice/root pins and subject-based identification beyond number/title."
+  },
+  "selected": {
+    "unit": {
+      "id": "sn27.5",
+      "book": 13,
+      "start": 1198,
+      "end": 1200,
+      "title": "Samphassajasuttaṃ",
+      "collection": "sn",
+      "acronym": "SN 27.5",
+      "vri": "326",
+      "pts": {
+        "volume": 3,
+        "page": 233,
+        "end_page": 233
+      }
+    },
+    "root_blocks_sha256": "7d4509cbcfbab32d0a52296149d2d13d455bf2bb4fc8cfa940f73f303a0bb703",
+    "source_anchor": "sn27.005",
+    "source_heading": "SN 27.5: Vedana Sutta — Feeling",
+    "text_characters": 614,
+    "text_scope_sha256": "a6fbbfbaa11520f6d8f554f391d6391934c06541055b1d8176179d20434874eb",
+    "text_utf8_sha256": "ea6909d438e04bd616ac22bc102223bb9b1a77f7216fddf25d55e2cad9b50106",
+    "section_raw_sha256": "cbc659a03aae212803aa6276a580ea5449b592daac90617467787ee3c48b6c70",
+    "root_body_scope_sha256": "eb1ba8d84d7a71d5fc4f4712d23a8f0ce72d264323685a5ad65d35bc453abffd",
+    "existing_whole_choices": []
+  },
+  "publisher_parent_reference": "SN27.1–10; page header PTS Siii232. This parent citation is not an individualSN27.5publisherPTScitation.",
+  "root_reference": "SN27.5; VRI326; bundled PTSiii233.",
+  "root_body_ref": "sn27.5/2",
+  "untranslated_inline_ordinal": {
+    "ref": "sn27.5/2",
+    "offset_unit": "utf16_code_units",
+    "start_char": 363,
+    "end_char": 372,
+    "text": "Pañcamaṃ.",
+    "segment_scope_sha256": "bfa1cbd8d93b4623a2f20420e316205c8d567f8d4190483b6b2aa8ae66b61dae",
+    "body_scope_sha256": "eb1ba8d84d7a71d5fc4f4712d23a8f0ce72d264323685a5ad65d35bc453abffd"
+  },
+  "semantic_review": [
+    "Savatthi setting and monks address present.",
+    "Eye-contact-born feeling and remaining ear/nose/tongue/body/mind contact-born feelings all present; unique category inventory distinguishes root5from adjacent root4contact itself and root6perception.",
+    "Desire-passion as mental defilement is present, with published ellipses retaining repeated categories.",
+    "Abandoned six-base defilement, mind inclined toward renunciation, mind developed in renunciation and fitness for direct knowing of realizable qualities all present.",
+    "Publisher prints closing formula fully; VRI has peyyala. Preserve original VRI abbreviations and published English separately; never reconstruct Pali.",
+    "Final Pañcamaṃ. is ordinal paratext within sole prose segment, not a missing teaching. Mandatory disclosure records exact suffix without editing root."
+  ],
+  "title_decision": "Publisher Vedana Sutta—Feeling is independently matched to VRI Samphassajasuttam by six contact-born feelings. Keep both titles, no title normalization or number-only linkage.",
+  "finite_structure": {
+    "copyrighted_chunk_count": 1,
+    "top_level_chapters": 10,
+    "chapter_children": [
+      "h1",
+      "p"
+    ],
+    "heading_child": "a with exact bare unique id sn27.001 through sn27.010",
+    "body_markup": "bare p, text only; no attributes/child tags",
+    "comments": 0,
+    "translator_notes": 0,
+    "tag_counts": {
+      "div": 10,
+      "h1": 10,
+      "a": 10,
+      "p": 10
+    },
+    "wrapper_tail": "one publisher copyright-wrapper closing div",
+    "chapters": [
+      {
+        "chapter": 1,
+        "anchor": "sn27.001",
+        "heading": "SN 27.1: Cakkhu Sutta — The Eye",
+        "paragraph_count": 1,
+        "body_characters": 452,
+        "body_raw_utf8_sha256": "1fbfe5f333f2ff1ea64443ed8d9dc4e95a0e90e512e71929020b810b64bea5e8",
+        "translator_notes": 0
+      },
+      {
+        "chapter": 2,
+        "anchor": "sn27.002",
+        "heading": "SN 27.2: Rupa Sutta — Forms",
+        "paragraph_count": 1,
+        "body_characters": 446,
+        "body_raw_utf8_sha256": "701f3dc213d8a4de4820e9aa13bf5aa4a9851044f155a21c00716199ba662f20",
+        "translator_notes": 0
+      },
+      {
+        "chapter": 3,
+        "anchor": "sn27.003",
+        "heading": "SN 27.3: Viññana Sutta — Consciousness",
+        "paragraph_count": 1,
+        "body_characters": 512,
+        "body_raw_utf8_sha256": "45b3a525bc6033c4d5673c3914146c0ea802cae06d9fd53aa9f9faebb51f35d1",
+        "translator_notes": 0
+      },
+      {
+        "chapter": 4,
+        "anchor": "sn27.004",
+        "heading": "SN 27.4: Phassa Sutta — Contact",
+        "paragraph_count": 1,
+        "body_characters": 518,
+        "body_raw_utf8_sha256": "283931be7cf24b6e37cb350944c7330956d92054488d28b72598ee9cedcdb451",
+        "translator_notes": 0
+      },
+      {
+        "chapter": 5,
+        "anchor": "sn27.005",
+        "heading": "SN 27.5: Vedana Sutta — Feeling",
+        "paragraph_count": 1,
+        "body_characters": 614,
+        "body_raw_utf8_sha256": "ea6909d438e04bd616ac22bc102223bb9b1a77f7216fddf25d55e2cad9b50106",
+        "translator_notes": 0
+      },
+      {
+        "chapter": 6,
+        "anchor": "sn27.006",
+        "heading": "SN 27.6: Sañña Sutta — Perception",
+        "paragraph_count": 1,
+        "body_characters": 549,
+        "body_raw_utf8_sha256": "dac88add35d733bff52c2c3500a575fd540eeed081e57c3a4635116e9a2bbe59",
+        "translator_notes": 0
+      },
+      {
+        "chapter": 7,
+        "anchor": "sn27.007",
+        "heading": "SN 27.7: Cetana Sutta — Intention",
+        "paragraph_count": 1,
+        "body_characters": 572,
+        "body_raw_utf8_sha256": "d829e55df19c263738853285a4271d8f26da9cdfc9db51e90cfc8e8798c5cbee",
+        "translator_notes": 0
+      },
+      {
+        "chapter": 8,
+        "anchor": "sn27.008",
+        "heading": "SN 27.8: Tanha Sutta — Craving",
+        "paragraph_count": 1,
+        "body_characters": 518,
+        "body_raw_utf8_sha256": "41f345439e9322c81b9a0cbcfc0bc388868d1d66051741bb1cf62980d1edcafa",
+        "translator_notes": 0
+      },
+      {
+        "chapter": 9,
+        "anchor": "sn27.009",
+        "heading": "SN 27.9: Dhatu Sutta — Properties",
+        "paragraph_count": 1,
+        "body_characters": 514,
+        "body_raw_utf8_sha256": "e05da267f0518e40ca7ab8cb318a79e5fb7713e4bbe4cfcf3ebd52675dc8bb0e",
+        "translator_notes": 0
+      },
+      {
+        "chapter": 10,
+        "anchor": "sn27.010",
+        "heading": "SN 27.10: Khandha Sutta — Aggregates",
+        "paragraph_count": 1,
+        "body_characters": 442,
+        "body_raw_utf8_sha256": "8a6f512311c5912ee53ff151019dd0cfa3ed6e529faf4b65d6c319385f87eadd",
+        "translator_notes": 0
+      }
+    ]
+  },
+  "candidate_review": {
+    "path": "/tmp/pali-sn27-release/sn27-row.json",
+    "sha256": "a0493545e5ae3354bd2ccfb006d432ac167b0c3dad7f8d37e872579a3845a1c4",
+    "decision": "APPROVED",
+    "exact_fields_compared": [
+      "unit_id",
+      "path",
+      "anchor",
+      "translator",
+      "license",
+      "source_reference",
+      "source_html_sha256",
+      "entire root record against complete VRI root",
+      "entire section descriptor against independently reproduced pins",
+      "untranslated_paratext"
+    ],
+    "mapping_note": "Reviewed: correctly states full substantive fifth-only scope, source/root title distinction, preserved VRI peyyala, untranslated inline ordinal and parentPTS232/rootPTS233 distinction; no word-level alignment claim."
+  },
+  "required_implementation_safeguards": [
+    "Finite exact fifth sourceanchor only; parent page must never substitute for a single discourse.",
+    "Exactly10ordered chapter divs each containing h1>a with exact bare id and one bare text-only p; no childmarkup,comments,notes or attributes added.",
+    "Mandatory complete raw source, selectedsection/body/empty notes/fullnotice and current complete root/body pins; drift fails closed.",
+    "Existing Milinda tail-segment paratext behavior cannot be copied blindly: SN27.5 ordinal is inline on same/2; preserve entire segment and disclose exact suffix.",
+    "All previous translations, partial/shared choices and source holds remain independent."
+  ],
+  "adjacent_matrix": [
+    {
+      "unit_id": "sn27.1",
+      "root_title": "Cakkhusuttaṃ",
+      "source_heading": "SN 27.1: Cakkhu Sutta — The Eye",
+      "source_anchor": "sn27.001",
+      "distinctive_subject": "six internal faculties",
+      "whole_choices_before": 1,
+      "existing_sources": [
+        {
+          "source": "dhammatalks",
+          "url": "https://www.dhammatalks.org/suttas/SN/SN27_1.html"
+        }
+      ],
+      "new_owner": false
+    },
+    {
+      "unit_id": "sn27.2",
+      "root_title": "Rūpasutta",
+      "source_heading": "SN 27.2: Rupa Sutta — Forms",
+      "source_anchor": "sn27.002",
+      "distinctive_subject": "six external objects",
+      "whole_choices_before": 1,
+      "existing_sources": [
+        {
+          "source": "dhammatalks",
+          "url": "https://www.dhammatalks.org/suttas/SN/SN27_2.html"
+        }
+      ],
+      "new_owner": false
+    },
+    {
+      "unit_id": "sn27.3",
+      "root_title": "Viññāṇasuttaṃ",
+      "source_heading": "SN 27.3: Viññana Sutta — Consciousness",
+      "source_anchor": "sn27.003",
+      "distinctive_subject": "six sense-consciousnesses",
+      "whole_choices_before": 1,
+      "existing_sources": [
+        {
+          "source": "dhammatalks",
+          "url": "https://www.dhammatalks.org/suttas/SN/SN27_3.html"
+        }
+      ],
+      "new_owner": false
+    },
+    {
+      "unit_id": "sn27.4",
+      "root_title": "Samphassasuttaṃ",
+      "source_heading": "SN 27.4: Phassa Sutta — Contact",
+      "source_anchor": "sn27.004",
+      "distinctive_subject": "six contacts",
+      "whole_choices_before": 1,
+      "existing_sources": [
+        {
+          "source": "dhammatalks",
+          "url": "https://www.dhammatalks.org/suttas/SN/SN27_4.html"
+        }
+      ],
+      "new_owner": false
+    },
+    {
+      "unit_id": "sn27.5",
+      "root_title": "Samphassajasuttaṃ",
+      "source_heading": "SN 27.5: Vedana Sutta — Feeling",
+      "source_anchor": "sn27.005",
+      "distinctive_subject": "six contact-born feelings",
+      "whole_choices_before": 0,
+      "existing_sources": [],
+      "new_owner": true
+    },
+    {
+      "unit_id": "sn27.6",
+      "root_title": "Saññāsuttaṃ",
+      "source_heading": "SN 27.6: Sañña Sutta — Perception",
+      "source_anchor": "sn27.006",
+      "distinctive_subject": "six object-perceptions",
+      "whole_choices_before": 1,
+      "existing_sources": [
+        {
+          "source": "dhammatalks",
+          "url": "https://www.dhammatalks.org/suttas/SN/SN27_6.html"
+        }
+      ],
+      "new_owner": false
+    },
+    {
+      "unit_id": "sn27.7",
+      "root_title": "Sañcetanāsuttaṃ",
+      "source_heading": "SN 27.7: Cetana Sutta — Intention",
+      "source_anchor": "sn27.007",
+      "distinctive_subject": "six object-intentions",
+      "whole_choices_before": 1,
+      "existing_sources": [
+        {
+          "source": "dhammatalks",
+          "url": "https://www.dhammatalks.org/suttas/SN/SN27_7.html"
+        }
+      ],
+      "new_owner": false
+    },
+    {
+      "unit_id": "sn27.8",
+      "root_title": "Taṇhāsuttaṃ",
+      "source_heading": "SN 27.8: Tanha Sutta — Craving",
+      "source_anchor": "sn27.008",
+      "distinctive_subject": "six object-cravings",
+      "whole_choices_before": 1,
+      "existing_sources": [
+        {
+          "source": "dhammatalks",
+          "url": "https://www.dhammatalks.org/suttas/SN/SN27_8.html"
+        }
+      ],
+      "new_owner": false
+    },
+    {
+      "unit_id": "sn27.9",
+      "root_title": "Dhātusuttaṃ",
+      "source_heading": "SN 27.9: Dhatu Sutta — Properties",
+      "source_anchor": "sn27.009",
+      "distinctive_subject": "six elements",
+      "whole_choices_before": 1,
+      "existing_sources": [
+        {
+          "source": "dhammatalks",
+          "url": "https://www.dhammatalks.org/suttas/SN/SN27_9.html"
+        }
+      ],
+      "new_owner": false
+    },
+    {
+      "unit_id": "sn27.10",
+      "root_title": "Khandhasuttaṃ",
+      "source_heading": "SN 27.10: Khandha Sutta — Aggregates",
+      "source_anchor": "sn27.010",
+      "distinctive_subject": "five aggregates",
+      "whole_choices_before": 1,
+      "existing_sources": [
+        {
+          "source": "dhammatalks",
+          "url": "https://www.dhammatalks.org/suttas/SN/SN27_10.html"
+        }
+      ],
+      "new_owner": false
+    }
+  ],
+  "coverage_verdict": {
+    "new_whole_owners": 1,
+    "owner": "sn27.5",
+    "already_translated_adjacent_units": 9,
+    "coherent_further_new_owner_batch": null,
+    "note": "ATI alternatives for9already-DTtranslated adjacent units are not first-coverage gains. No blanket adjacent-source activation approved here. Root10contains further chapter/uddana paratext requiring separate explicit disclosure."
+  },
+  "holds": "No other source or existing hold cleared.",
+  "reproduce": [
+    "python /tmp/pali-sn27-source-review/verify_structure.py",
+    "node /tmp/pali-sn27-source-review/reproduce.mjs"
+  ],
+  "hash_conventions": {
+    "scope_hash": "SHA256(JSON.stringify(value)); selected text string, root block array, root body array, note array and fullnotice object each hashed as declared.",
+    "raw_hash": "SHA256exact UTF8bytes of artifact or selectedchapter.",
+    "offsets": "UTF16codeunits; suffix[363,372) in exact /2."
+  },
+  "temporary_evidence_files": [
+    "artifact.json",
+    "notice.json",
+    "structure.json",
+    "inline-ordinal.json",
+    "full-source-root-matrix.json",
+    "reproduced-pins.json",
+    "sn27.001-010.than.html",
+    "verify_structure.py",
+    "reproduce.mjs"
+  ],
+  "actions": {
+    "repository_edits": false,
+    "activation": false,
+    "source_body_bundled": false,
+    "outreach": false,
+    "new_mirrors_or_network_bypass": false,
+    "SuttaCentral": false,
+    "commits_or_push": false
+  },
+  "review_limits": "Source/scope approval only; implementation regression, package/browser checks and exactcommitCI remain parent integration gates."
+}

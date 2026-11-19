@@ -1538,3 +1538,12 @@ Stop/retry, script refresh, in-page source/consent and stale-response behavior.
 Session storage/unload warnings cannot guarantee survival after tab close,
 browser clearing or OS termination; explicit Save/export remains the boundary.
 [Acceptance, browser references and limits](evidence/web-reader/DRAFT_FOCUS_SAFETY.md).
+
+
+## D238 — Select the complete SN27.5 discourse with exact source identity
+
+Independent source/body/rights review approves only the fifth chapter of ATI SN27.1–10 as whole substantive SN27.5. Keep publisher Vedana and VRI Samphassaja titles, parentPTS232/root233, original VRI abbreviations and untranslated inline ordinal separate. Retain complete ©1994 Thanissaro CC-BY-NC4.0 attribution; no English body is bundled. Extend the existing finite registry with one source-specific profile, ordered10chapter/plain-body verification and raw/body/notice/notes/root pins. Its inline ordinal declaration never edits canonical segments or weakens the14Milinda trailing-paratext contracts.
+
+Retain exact source fragments during URL resolution and refuse reserved bare/unknown/encoded browser IDs even when descriptor and anchor are stripped together. Registered ATI sections use the same validator/extractor during same-translator DT outage fallback; no whole anthology may inherit a section identity. Preserve section metadata/mapping caveats in daily suggestions. Whole links2,553; indexed1,449/1,872, grouped1,423/1,846, daily1,258; prior translations,21partials,12shared pages and notes/drafts remain unchanged.
+
+No further whole batch is available on the existing Kelly pages; adjacent SN27subjects already haveDT. Record a possible separate Olendzki2verse partial without activation or whole-coverage claim. Test actual immutable source through backend/browser/package, state emulation/AT limits, obtain independent code review and exact-commit CI before advancing dev. [Source evidence and acceptance](data/sn27-feelings-section.md).

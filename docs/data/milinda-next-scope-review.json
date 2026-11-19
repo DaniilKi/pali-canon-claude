@@ -1,0 +1,93 @@
+{
+  "baseline": "00289823a32f3f857da1b51521b7f28a9d2d7489",
+  "review_date": "2026-11-19",
+  "kelly": {
+    "additional_whole_owners": 0,
+    "existing_owners": 14,
+    "enumerated_translated_sections": [
+      9,
+      5
+    ],
+    "pages": [
+      {
+        "path": "/tipitaka/kn/miln/miln.2x.kell",
+        "sha256": "44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd",
+        "git_blob_sha1": "9927c66a96d91d31cd46e44a8ff0b84b11bfd550",
+        "translated_question_sections": 9
+      },
+      {
+        "path": "/tipitaka/kn/miln/miln.3x.kell",
+        "sha256": "5e0d563f4e3403167dbb73ec80190bdeb1592895d4af2e5141675692fec42fe5",
+        "git_blob_sha1": "69fc93b1bbb1a32d0c90ba69b9a3a06ea38cdbe4",
+        "translated_question_sections": 5
+      }
+    ]
+  },
+  "olendzki": {
+    "owner": "mil6.4.1",
+    "activated": false,
+    "whole_question": false,
+    "new_partial_owner_if_separately_approved": true,
+    "source": {
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.5x.olen.html",
+      "commit": "45fedca341497120651efa20e756b04a13e61089",
+      "bytes": 11291,
+      "html_sha256": "7c117b838aef75fcc9c595b5b903b5769221bae6269492e1ed8d86811cf8c299",
+      "git_blob_sha1": "36f03580ceed478baa3546238c6d71c89901c4ff",
+      "prior_artifact_provenance": {
+        "official_blob_url": "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/kn/miln/miln.5x.olen.html",
+        "git_blob_sha1": "36f03580ceed478baa3546238c6d71c89901c4ff",
+        "bytes": 11291,
+        "sha256": "7c117b838aef75fcc9c595b5b903b5769221bae6269492e1ed8d86811cf8c299",
+        "git_blob_verified": true
+      },
+      "new_network_acquisition": false
+    },
+    "rights": {
+      "copyright": "2005 Andrew Olendzki",
+      "licence": "Free redistribution/reformatting in any medium when free of charge; source/derivatives identified; complete notice retained. Not CC. No BPS50-copy restriction in this notice.",
+      "provenance": "Translator-provided file; ATI revision2November2013."
+    },
+    "proposed_span": {
+      "first_ref": "mil6.4.1/20",
+      "last_ref": "mil6.4.1/21",
+      "segments": 2,
+      "pali_sha256": "80466c44791d665fd9a7a5c7b6406e942f13d291d9571cd59a1f1d89f760cc37",
+      "pali_characters": 191,
+      "english_characters": 265,
+      "text_sha256": "ac9407f40b48592e66e2247c3b5efe000c060bc91f8c6aa52aaf7b6fe36e885d",
+      "verse_body_raw_sha256": "1f7365f48f806a3f192034a1eada747f679622f877fdc2aa6a943a675d547be3",
+      "english_stanzas": 2,
+      "publisher_citation": "— Miln 335"
+    },
+    "boundaries": {
+      "previous_prose_ref": "mil6.4.1/19",
+      "earlier_different_verse_ref": "mil6.4.1/18",
+      "next_prose_ref": "mil6.4.1/22",
+      "excluded_preface_paragraphs": 3,
+      "excluded_preface_sha256": "6c1a927185f487e01bb644858ea10bede64dff1995502153424066aaab662478",
+      "citation_inside_freeverse": true,
+      "generic_ati_freeverse_includes_publisher_citation": true,
+      "untranslated_other_segments": 94
+    },
+    "implementation_cost": [
+      "Add one exact finite Milinda partial tuple, preserving all21 older descriptors and separate14Kelly whole sections.",
+      "Extract only two stanzas; require exact three-paragraph preface/chapter/freeverse/trailing p.cite structure, preserving linebreaks and separating publisher citation.",
+      "Pin full root, selected Pali, raw source, selected English and complete notice; reserve whole page globally against downgrade.",
+      "Use exact-ID allow_partial with existing scope/prefix continuation, count/export/quotation tests and actual-source browser/installed acceptance."
+    ],
+    "benefit": {
+      "additional_whole_owners": 0,
+      "additional_partial_owners": 1,
+      "selected_stanzas": 2,
+      "whole_milindapanha_coverage": false
+    },
+    "recommendation": "Small credible atomic partial task if that priority is chosen; not a coherent additional whole-question batch."
+  },
+  "coverage_changes": 0,
+  "limitations": [
+    "Frozen official artifacts only; no claim of current publisher availability.",
+    "Concurrent implementation edits were preserved. Assessment uses baseline manifest/translations via git show and pure segmentsFromCorpus, without activating or altering any registry.",
+    "No English or Pali source bodies are included in this metadata receipt; complete licence notices are retained."
+  ]
+}

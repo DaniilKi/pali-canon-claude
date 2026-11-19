@@ -86,3 +86,6 @@ Their distinct `translation_id` and source URL include actual publisher body
 anchors. No question or translator-note body is exported.
 `Kelly-free-distribution-2005` identifies the complete ©2005 Kelly notice, not
 Creative Commons or a new grant. [Source and scope evidence](data/milinda-reviewed-questions.md).
+
+
+SN27.5 also retains its finite `source_section`, exact fifth-chapter anchor, complete-substantive-discourse scope and CC-BY-NC rights in metadata exports. Original title/PTS/inline-ordinal caveats remain in `mapping_note`; the parent ten-discourse anthology is not counted as this translation. No English or note body is exported. [Review](data/sn27-feelings-section.md).

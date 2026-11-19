@@ -14,6 +14,7 @@ import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import { createServer } from '../src/server.mjs';
 
 const registry = JSON.parse(readFileSync('scripts/canon/reviewed_ati_sections.json', 'utf8'));
+const milindaRows = registry.links.filter(row => row.unit_id.startsWith('mil'));
 const copy = value => JSON.parse(JSON.stringify(value));
 const unit = row => canon.load().byId.get(row.unit_id);
 const id = row => `ati:${row.path}#${row.anchor}`;
@@ -26,10 +27,11 @@ test('fourteen complete substantive question choices have unique real section id
   assert.deepEqual(registry, JSON.parse(readFileSync('server/data/reviewed-ati-sections.json', 'utf8')));
   const snapshot = canon.load();
   assert.equal(validateSectionRegistry(registry, snapshot.canon, snapshot.translations, canon.segments), registry);
-  assert.equal(registry.links.length, 14); assert.equal(new Set(registry.links.map(id)).size, 14);
+  assert.equal(registry.links.length, 15); assert.equal(milindaRows.length, 14); assert.equal(new Set(milindaRows.map(id)).size, 14);
+  assert.equal(sectionHash(milindaRows), '1895805a2ffc3518b590a000843a018b90f40694980094ba877940124d94ad16');
   assert.equal(JSON.parse(readFileSync('server/data/reviewed-partial-pages.json', 'utf8')).links.length, 21);
   assert.equal(sectionHash(JSON.parse(readFileSync('scripts/canon/reviewed_partial_pages.json', 'utf8')).links.slice(0, 18)), 'd55eab78d8820f2b9ef8c4988c936eaa17e11b51298ccb29c2b015760ff7ad36');
-  for (const row of registry.links) {
+  for (const row of milindaRows) {
     const link = snapshot.translations[row.unit_id].find(value => value.section), metadata = canon.describe(unit(row)), choice = english.available(unit(row)).find(value => value.translation_id === id(row));
     assert.equal(canon.translationId(link), id(row)); assert.equal(isAtiSectionId(id(row)), true);
     assert.equal(link.url, `https://accesstoinsight.org${row.path}.html#${row.anchor}`);
@@ -58,7 +60,7 @@ test('registry rejects deleted descriptors or links, duplicate bindings, fake ow
 });
 
 test('bare anthology URLs are ambiguous and only exact reviewed body anchors identify one question', () => {
-  for (const row of registry.links) {
+  for (const row of milindaRows) {
     for (const host of ['accesstoinsight.org', 'www.accesstoinsight.org']) assert.equal(canon.resolve(`https://${host}${row.path}.html#${row.anchor}`).unit.id, row.unit_id);
     for (const anchor of ['', '#top', '#invented', '#' + row.anchor + '-invented']) assert.throws(() => canon.resolve(`https://accesstoinsight.org${row.path}.html${anchor}`), /anthology page/);
     assert.equal(canon.load().urlIndex.has('accesstoinsight.org' + row.path), false);
@@ -78,7 +80,7 @@ test('wrong unit, bare page IDs, arbitrary anchors and scoped consent cannot ret
 
 test('actual reviewed sources reproduce all question/note pins, and any source, note, structure or selector drift refuses', { skip: !sourceRoot }, () => {
   let notes = 0;
-  for (const row of registry.links) {
+  for (const row of milindaRows) {
     const raw = html(row), selected = extractAtiSection(raw, row);
     assert.equal(sectionHash(selected.text), row.section.text_sha256); assert.equal(sectionHash(selected.translator_notes), row.section.notes_sha256);
     assert.equal(sectionHash(english.atiNotice(raw)), row.section.notice_sha256); notes += selected.translator_notes.length;
@@ -95,7 +97,7 @@ test('actual MCP whole question retrieval isolates body, four notes, full Kelly 
   await Promise.all([client.connect(a), createServer().connect(b)]);
   const call = async (name, args) => { const raw = await client.callTool({ name, arguments: args }); assert.ok(!raw.isError, JSON.stringify(raw)); return JSON.parse(raw.content[0].text); };
   try {
-    for (const row of registry.links) {
+    for (const row of milindaRows) {
       const expected = extractAtiSection(html(row), row), args = { uid: row.unit_id, translation: id(row), limit: 500 }, page = await call('get_translation', args);
       assert.equal(page.translation_id, id(row)); assert.equal(page.text_id, row.unit_id); assert.equal(page.url, `https://accesstoinsight.org${row.path}.html#${row.anchor}`);
       assert.deepEqual(page.source_section, row.section); assert.deepEqual(page.translator_notes, expected.translator_notes);

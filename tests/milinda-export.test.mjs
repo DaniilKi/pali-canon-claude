@@ -6,9 +6,10 @@ import {buildIndex,toCsv,licenseName,LICENSE_LABELS} from '../scripts/export-ind
 test('Milinda citation exports retain fourteen distinct question addresses and the correct non-CC rights',()=>{
  const manifest=JSON.parse(readFileSync(new URL('../server/data/reviewed-ati-sections.json',import.meta.url),'utf8'));
  const index=buildIndex();
- assert.equal(manifest.links.length,14);
+ assert.equal(manifest.links.length,15);
+ const rows=manifest.links.filter(row=>row.unit_id.startsWith('mil'));assert.equal(rows.length,14);
  const seen=new Set();
- for(const row of manifest.links){
+ for(const row of rows){
   const record=index.texts.find(x=>x.id===row.unit_id);
   assert.ok(record,row.unit_id);assert.equal(record.english_count,1);assert.equal(record.partial_english_count,0);assert.equal(record.shared_english_count,0);
   const [choice]=record.english;

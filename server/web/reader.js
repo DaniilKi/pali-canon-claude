@@ -337,7 +337,7 @@
   }
   var savedScopeLabels = Object.freeze({ canon: "Canonical text", books: "Complete root source book", commentary: "Commentary \xB7 not canon", post: "Later work \xB7 not canon" });
   var fold = (value) => (typeof value === "string" ? value : "").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
-  function savedPage(items, drafts, { query = "", scope = "all", page = 0 } = {}) {
+  function savedPage(items, drafts, { query = "", scope = "all", page: page2 = 0 } = {}) {
     const tokens = fold(query).trim().split(/\s+/u).filter(Boolean);
     const selected = Object.hasOwn(savedScopeLabels, scope) ? scope : "all";
     const matches = items.filter((item) => {
@@ -348,7 +348,7 @@
       return tokens.every((token) => text11.includes(token));
     });
     const pages3 = Math.max(1, Math.ceil(matches.length / SAVED_PAGE_SIZE));
-    const current = Number.isSafeInteger(page) ? Math.max(0, Math.min(page, pages3 - 1)) : 0;
+    const current = Number.isSafeInteger(page2) ? Math.max(0, Math.min(page2, pages3 - 1)) : 0;
     return { items: matches.slice(current * SAVED_PAGE_SIZE, (current + 1) * SAVED_PAGE_SIZE), total: matches.length, all: items.length, pages: pages3, page: current, start: matches.length ? current * SAVED_PAGE_SIZE + 1 : 0, end: Math.min((current + 1) * SAVED_PAGE_SIZE, matches.length) };
   }
 
@@ -992,24 +992,42 @@
     ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-7-05", { unit: "mil3.7.5", notes: 1 }],
     ["ati:/tipitaka/kn/miln/miln.3x.kell#miln-3-7-08", { unit: "mil3.7.8", notes: 0 }]
   ]);
+  var discourses = /* @__PURE__ */ new Map([
+    ["ati:/tipitaka/sn/sn27/sn27.001-010.than#sn27.005", { unit: "sn27.5", notes: 0, profile: "ati-sn27-feelings-v1" }]
+  ]);
+  var sourceProfile = (id5) => units.get(id5) || discourses.get(id5);
   var milindaSourceUnit = (id5) => units.get(id5)?.unit;
-  function validateMilindaDescriptor(value) {
-    const profile2 = units.get(value.translation_id);
+  var sectionSourceUnit = (id5) => sourceProfile(id5)?.unit;
+  function validateSectionIdentity(value) {
+    const id5 = value.translation_id;
+    if (typeof id5 !== "string") return;
+    let decoded = id5;
+    try {
+      decoded = decodeURIComponent(id5);
+    } catch {
+    }
+    const resource = decoded.split(/[?#]/, 1)[0].replace(/\.html?$/i, "").toLowerCase();
+    if ((isSectionPageId(resource) || /^ati:/i.test(decoded) && decoded.includes("#")) && !sourceProfile(id5)) throw Error("The source section requires its exact reviewed fragment identity. No English source was displayed.");
+  }
+  function validateSectionDescriptor(value) {
+    validateSectionIdentity(value);
+    const profile2 = sourceProfile(value.translation_id);
     if (!profile2) return;
     const section = value.source_section;
-    if (!section || section.version !== 1 || section.status !== "reviewed" || section.unit_id !== profile2.unit || section.anchor !== value.translation_id.split("#")[1] || section.note_count !== profile2.notes) throw Error("The reviewed question descriptor or translator-note count is invalid. No English source was displayed.");
+    if (!section || section.version !== 1 || section.status !== "reviewed" || section.unit_id !== profile2.unit || section.anchor !== value.translation_id.split("#")[1] || section.note_count !== profile2.notes || profile2.profile !== void 0 && section.profile !== profile2.profile) throw Error("The reviewed source-section descriptor or translator-note count is invalid. No English source was displayed.");
   }
   var isMilindaPageId = (id5) => /^ati:\/tipitaka\/kn\/miln\/miln\.[23]x\.kell$/.test(id5);
+  var isSectionPageId = (id5) => isMilindaPageId(id5) || id5 === "ati:/tipitaka/sn/sn27/sn27.001-010.than";
   function translatorNotes(data) {
-    validateMilindaDescriptor(data);
+    validateSectionDescriptor(data);
     if (!Object.hasOwn(data, "translator_notes")) {
-      if (milindaSourceUnit(data.translation_id)) throw Error("The selected question is missing its translator-note declaration.");
+      if (sectionSourceUnit(data.translation_id)) throw Error("The selected source section is missing its translator-note declaration.");
       return [];
     }
     const notes2 = data.translator_notes;
     if (!Array.isArray(notes2) || notes2.length > 32 || notes2.some((note2, i) => !note2 || typeof note2 !== "object" || Array.isArray(note2) || Object.keys(note2).sort().join(",") !== "number,text" || note2.number !== i + 1 || typeof note2.text !== "string" || !note2.text.trim() || note2.text.length > 5e4)) throw Error("The translator-note declaration is invalid. No English source was displayed.");
-    const profile2 = units.get(data.translation_id);
-    if (profile2 && notes2.length !== profile2.notes) throw Error("The reviewed question translator-note count changed. No English source was displayed.");
+    const profile2 = sourceProfile(data.translation_id);
+    if (profile2 && notes2.length !== profile2.notes) throw Error("The reviewed source-section translator-note count changed. No English source was displayed.");
     return notes2.map((note2) => ({ number: note2.number, text: note2.text }));
   }
 
@@ -1049,12 +1067,12 @@
     const offset = args.offset || 0;
     if (data && typeof data === "object") {
       translatorNotes(data);
-      if (milindaSourceUnit(data.translation_id) && milindaSourceUnit(data.translation_id) !== context.uid) throw Error("The question source belongs to a different P\u0101li selection. No English was displayed.");
+      if (sectionSourceUnit(data.translation_id) && sectionSourceUnit(data.translation_id) !== context.uid) throw Error("The section source belongs to a different P\u0101li selection. No English was displayed.");
     }
     if (!data || !nonempty(data.text) || !nonempty(data.translation_id) || !nonempty(data.translator) || !nonempty(data.attribution) || !(nonempty(data.license) || data.license && typeof data.license === "object" && nonempty(data.license.name)) || data.offset !== offset) throw new Error("The English source response is incomplete. No translation was displayed.");
     const choice = context.choices.find((c) => c.translation_id === data.translation_id);
     if (!choice) throw new Error("The returned English source version was not in the reviewed list. Reload the passage and review sources again.");
-    if (milindaSourceUnit(data.translation_id) && (!own3(choice, "source_section") || !sameScope(data.source_section, choice.source_section) || data.source_section?.unit_id !== context.uid || data.source_section?.anchor !== data.translation_id.split("#")[1] || data.source_section?.status !== "reviewed")) throw new Error("The reviewed question identity changed. Reload the passage and review sources again; no English was displayed.");
+    if (sectionSourceUnit(data.translation_id) && (!own3(choice, "source_section") || !sameScope(data.source_section, choice.source_section) || data.source_section?.unit_id !== context.uid || data.source_section?.anchor !== data.translation_id.split("#")[1] || data.source_section?.status !== "reviewed")) throw new Error(milindaSourceUnit(data.translation_id) ? "The reviewed question identity changed. Reload the passage and review sources again; no English was displayed." : "The reviewed discourse identity changed. Reload the passage and review sources again; no English was displayed.");
     if (context.accepted) {
       const accepted = context.accepted;
       if (data.translation_id !== args.translation || data.whole_unit_coverage !== false || !own3(data, "translation_scope") || !sameScope(data.translation_scope, accepted.scope)) throw new Error("The source scope or version changed after review. Reload the passage and give fresh consent; no scoped text was displayed.");
@@ -1459,7 +1477,7 @@
   var failure2 = () => {
     throw Error("The comparison selection or source response is invalid. No comparison translation was displayed.");
   };
-  var sourceId = (x) => typeof x === "string" && x.trim() === x && !/[\x00-\x1f\x7f]/.test(x) && x.length <= 200 && !x.includes("..") && !/\.html?$/.test(x) && (/^dt:[A-Za-z0-9_./-]+$/.test(x) || /^ati:\/(?:tipitaka|lib|ptf|noncanon)\/[a-z0-9/._-]+$/.test(x) && !isMilindaPageId(x) || Boolean(milindaSourceUnit(x)) || /^aj:[A-Za-z0-9_./ -]+$/.test(x) && x.trim() === x);
+  var sourceId = (x) => typeof x === "string" && x.trim() === x && !/[\x00-\x1f\x7f]/.test(x) && x.length <= 200 && !x.includes("..") && !/\.html?$/.test(x) && (/^dt:[A-Za-z0-9_./-]+$/.test(x) || /^ati:\/(?:tipitaka|lib|ptf|noncanon)\/[a-z0-9/._-]+$/.test(x) && !isSectionPageId(x) || Boolean(sectionSourceUnit(x)) || /^aj:[A-Za-z0-9_./ -]+$/.test(x) && x.trim() === x);
   function comparisonChoices(choices, requestedId) {
     if (!uid(requestedId) || !Array.isArray(choices)) failure2();
     const seen = /* @__PURE__ */ new Set(), ordinary = [];
@@ -1470,8 +1488,8 @@
         seen.add(choice.translation_id);
       }
       if ("translation_scope" in choice || choice.whole_unit_coverage === false) continue;
-      if (!sourceId(choice.translation_id) || milindaSourceUnit(choice.translation_id) && milindaSourceUnit(choice.translation_id) !== requestedId || !text4(choice.translator) || choice.translator.length > 300 || own5(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== true) failure2();
-      validateMilindaDescriptor(choice);
+      if (!sourceId(choice.translation_id) || sectionSourceUnit(choice.translation_id) && sectionSourceUnit(choice.translation_id) !== requestedId || !text4(choice.translator) || choice.translator.length > 300 || own5(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== true) failure2();
+      validateSectionDescriptor(choice);
       ordinary.push(clone2(choice));
     }
     return ordinary;
@@ -1715,6 +1733,53 @@
     vinaya: "vinaya"
   };
 
+  // src/ati-section-profiles.mjs
+  var ATI_SECTION_PROFILE = "ati-kelly-milinda-v1";
+  var ATI_SECTION_LICENSE = "Kelly-free-distribution-2005";
+  var SN27_SECTION_PROFILE = "ati-sn27-feelings-v1";
+  var page = "/tipitaka/kn/miln/miln.";
+  var rows = [
+    ["mil3.1.8", "2x", "miln-2-1-08", 9, 0],
+    ["mil3.1.15", "2x", "miln-2-1-14", 7, 0],
+    ["mil3.3.8", "2x", "miln-2-3-08", 11, 0],
+    ["mil3.3.9", "2x", "miln-2-3-9", 6, 0],
+    ["mil3.3.10", "2x", "miln-2-3-10", 5, 0],
+    ["mil3.3.11", "2x", "miln-2-3-11", 6, 0],
+    ["mil3.3.12", "2x", "miln-2-3-12", 5, 0],
+    ["mil3.3.13", "2x", "miln-2-3-13", 5, 0],
+    ["mil3.3.14", "2x", "miln-2-3-14", 5, 0],
+    ["mil3.5.5", "3x", "miln-3-5-05", 13, 2],
+    ["mil3.5.6", "3x", "miln-3-5-06", 3, 1],
+    ["mil3.5.7", "3x", "miln-3-5-07", 11, 0],
+    ["mil3.7.5", "3x", "miln-3-7-05", 21, 1],
+    ["mil3.7.8", "3x", "miln-3-7-08", 7, 0]
+  ];
+  var ATI_SECTION_PROFILES = Object.freeze([...rows.map(([unit_id, part, anchor, paragraphs, notes2]) => Object.freeze({
+    unit_id,
+    path: page + part + ".kell",
+    anchor,
+    paragraphs,
+    notes: notes2,
+    profile: ATI_SECTION_PROFILE,
+    collection: "mil",
+    translator: "John Kelly",
+    license: ATI_SECTION_LICENSE,
+    source_html_sha256: part === "2x" ? "44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd" : "5e0d563f4e3403167dbb73ec80190bdeb1592895d4af2e5141675692fec42fe5"
+  })), Object.freeze({
+    unit_id: "sn27.5",
+    path: "/tipitaka/sn/sn27/sn27.001-010.than",
+    anchor: "sn27.005",
+    paragraphs: 1,
+    notes: 0,
+    profile: SN27_SECTION_PROFILE,
+    collection: "sn",
+    translator: "Thanissaro Bhikkhu",
+    license: "CC-BY-NC",
+    source_html_sha256: "4cda764c8a27a64faf96f6cd2ce0dc08808816ab80d329f3ad264b4516ee1e79",
+    inline_paratext: "Pa\xF1cama\u1E43."
+  })]);
+  var isAtiSectionPath = (path) => ATI_SECTION_PROFILES.some((row) => row.path === path);
+
   // src/citations.mjs
   var fold2 = (value) => value.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
   var COLLECTIONS = {
@@ -1912,19 +1977,20 @@
       throw new CitationError("Links are understood for suttacentral.net, accesstoinsight.org, dhammatalks.org and ancient-buddhist-texts.net only.");
     }
     if (host === "ancient-buddhist-texts.net") {
-      let path = url.pathname;
+      let path2 = url.pathname;
       try {
-        path = decodeURI(path);
+        path2 = decodeURI(path2);
       } catch {
       }
-      return { kind: "url", host, path: path.replace(/\.htm$/, ""), raw };
+      return { kind: "url", host, path: path2.replace(/\.htm$/, ""), raw };
     }
     if (host === "suttacentral.net") {
       const first = url.pathname.split("/").filter(Boolean)[0] || "";
       if (!/^[a-z][a-z0-9.-]*$/.test(first)) throw new CitationError("Unrecognised SuttaCentral link.");
       return { kind: "uid", uid: first, raw, via: "suttacentral.net" };
     }
-    return { kind: "url", host, path: url.pathname.replace(/\.html?$/, ""), ...host === "accesstoinsight.org" && /^\/tipitaka\/kn\/miln\/miln\.[23]x\.kell\.html$/.test(url.pathname) && url.hash ? { fragment: url.hash.slice(1) } : {}, raw };
+    const path = url.pathname.replace(/\.html?$/, "");
+    return { kind: "url", host, path, ...host === "accesstoinsight.org" && isAtiSectionPath(path) && url.hash ? { fragment: url.hash.slice(1) } : {}, raw };
   }
   function parseEditionPage(raw, text11) {
     const head = text11.match(/^([A-Za-z]+)(?:\.?\s*(ed(?:ition)?)\.?)?[\s.:,]+(.*)$/);
@@ -1957,8 +2023,8 @@
       throw new CitationError(`Unknown collection "${m[1].trim()}" in "${raw}". Use DN, MN, SN, AN, Dhp, Ud, Iti, Snp, Thag, Thig, Ja\u2026 or for the Vinaya the book: Pj, Pc, Mv, Cv, Pvr.`);
     }
     const volume = m[3] === void 0 ? 0 : Number(m[2]);
-    const page = Number(m[3] === void 0 ? m[2] : m[3]);
-    return { kind: "edition", edition, scope, volume, page, ...book2 ? { book: book2 } : {}, raw };
+    const page2 = Number(m[3] === void 0 ? m[2] : m[3]);
+    return { kind: "edition", edition, scope, volume, page: page2, ...book2 ? { book: book2 } : {}, raw };
   }
   function parseCitation(input) {
     if (typeof input !== "string" || !input.trim()) throw new CitationError("Give a citation such as MN 10, SN 56.11, Dhp 183 or M i 55.");
@@ -2395,7 +2461,7 @@
     if (selected.script === "roman" ? own9(value, "title_roman") : !text8(value.title_roman, 1e3) || value.title !== transliterate(value.title_roman, "roman", selected.script)) fail6();
   }
   function pages(value) {
-    if (own9(value, "commentary_pts_page_begins") && (!Array.isArray(value.commentary_pts_page_begins) || value.commentary_pts_page_begins.length > 100 || value.commentary_pts_page_begins.some((page) => !text8(page, 200)))) fail6();
+    if (own9(value, "commentary_pts_page_begins") && (!Array.isArray(value.commentary_pts_page_begins) || value.commentary_pts_page_begins.length > 100 || value.commentary_pts_page_begins.some((page2) => !text8(page2, 200)))) fail6();
   }
   function command4(value, uid2, selected, contextOffset) {
     if (!keysOnly3(value, contextOffset === void 0 ? ["tool", "uid", "script"] : ["tool", "uid", "offset", "limit", "script"]) || value.tool !== "get_commentary" || value.uid !== uid2 || own9(value, "script") && value.script !== selected.script || selected.script !== "roman" && value.script !== selected.script) fail6();
@@ -2578,7 +2644,7 @@
   }
   function pages2(segment) {
     if (own10(segment, "vri_paragraph") && !text9(segment.vri_paragraph, 100)) fail7();
-    for (const key4 of ["pts_page_begins", "thai_page_begins", "myanmar_page_begins", "vri_page_begins"]) if (own10(segment, key4) && (!Array.isArray(segment[key4]) || segment[key4].length > 100 || segment[key4].some((page) => !text9(page, 200)))) fail7();
+    for (const key4 of ["pts_page_begins", "thai_page_begins", "myanmar_page_begins", "vri_page_begins"]) if (own10(segment, key4) && (!Array.isArray(segment[key4]) || segment[key4].length > 100 || segment[key4].some((page2) => !text9(page2, 200)))) fail7();
   }
   function validatePostContext(response, data, item, selected) {
     const { checked, found } = member2(data, item, selected), scope = citationScope(found.citation, found.book_id), offset = found.context_with.offset;
@@ -2785,7 +2851,7 @@
   }
   function reviewBackupNoteConflicts(currentSaved, incomingSaved, drafts = /* @__PURE__ */ new Map()) {
     if (!(drafts instanceof Map)) throw Error("Personal-note drafts must be a Map.");
-    const current = groups(currentSaved), incoming = groups(incomingSaved), rows = [];
+    const current = groups(currentSaved), incoming = groups(incomingSaved), rows2 = [];
     for (const [identity3, incomingItems] of incoming) {
       const currentItems = current.get(identity3);
       if (!currentItems) continue;
@@ -2793,15 +2859,15 @@
       const differing = incomingItems.find((item) => note(item.note === void 0 ? "" : item.note) !== currentNote);
       if (!differing) continue;
       const why = reason(currentItems, incomingItems);
-      rows.push({ key: identity3, uid: differing.uid, ref: differing.ref, currentNote, incomingNote: note(differing.note === void 0 ? "" : differing.note), eligible: why === null, reason: why });
+      rows2.push({ key: identity3, uid: differing.uid, ref: differing.ref, currentNote, incomingNote: note(differing.note === void 0 ? "" : differing.note), eligible: why === null, reason: why });
     }
-    return rows;
+    return rows2;
   }
   function applyBackupNoteChoices(currentSaved, incomingSaved, drafts, choices) {
     if (!Array.isArray(choices) || choices.length > 500 || choices.some((identity3) => typeof identity3 !== "string") || new Set(choices).size !== choices.length) throw Error("Choose each supported personal-note conflict at most once. Nothing was restored.");
-    const rows = new Map(reviewBackupNoteConflicts(currentSaved, incomingSaved, drafts).map((row) => [row.key, row]));
+    const rows2 = new Map(reviewBackupNoteConflicts(currentSaved, incomingSaved, drafts).map((row) => [row.key, row]));
     for (const identity3 of choices) {
-      const row = rows.get(identity3);
+      const row = rows2.get(identity3);
       if (!row || !row.eligible) throw Error("A selected personal-note conflict is unknown or no longer eligible. Nothing was restored.");
     }
     const selected = new Set(choices), incoming = new Map(incomingSaved.map((item) => [key2(item), item]));
@@ -4562,11 +4628,12 @@
       const data = await tool("get_translation", args, "study");
       if (token !== epoch || studyToken !== studyEpoch) return;
       const next = validateEnglishPage(data, args, context), actualChoice = context.choices.find((c) => c.translation_id === data.translation_id);
-      target.replaceChildren(el("h3", (context.accepted?.kind === "shared_page" ? "Shared English source page \xB7 " : context.accepted ? "Partial English source \xB7 " : milindaSourceUnit(data.translation_id) ? "English question source \xB7 " : "English source page \xB7 ") + data.translator));
+      target.replaceChildren(el("h3", (context.accepted?.kind === "shared_page" ? "Shared English source page \xB7 " : context.accepted ? "Partial English source \xB7 " : milindaSourceUnit(data.translation_id) ? "English question source \xB7 " : sectionSourceUnit(data.translation_id) ? "English discourse source \xB7 " : "English source page \xB7 ") + data.translator));
       target.append(el("p", "P\u0101li selection: " + context.citation + " \xB7 publisher reference: " + (actualChoice.reference || data.citation), "muted"), el("p", "Source version: " + data.translation_id, "muted"));
       if (context.accepted) scopeSummary(context.accepted, target);
       if (data.translation_id !== args.translation) target.append(el("p", "The server returned a different listed source version. Read its source and fallback notes before quoting.", "notice"));
       if (milindaSourceUnit(data.translation_id)) target.append(el("p", "Complete substantive question selection. Other questions on the publisher page and untranslated P\u0101li paratext are outside this English selection.", "notice"));
+      else if (sectionSourceUnit(data.translation_id)) target.append(el("p", "Complete substantive discourse selection. Other discourses on the publisher page and untranslated P\u0101li paratext are outside this English selection.", "notice"));
       notes(data, target);
       target.append(el("p", data.text, "translation"));
       translatorNoteSection(data, target, 4);
@@ -4894,9 +4961,9 @@
             selection5.textContent = choices.size + " incoming notes selected";
             clear.disabled = applied || applying || !choices.size;
             savedCount.textContent = choices.size ? `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} original conflicts \xB7 ${choices.size} incoming notes selected; all other metadata kept` : `Saved passages: ${merged.bookmarkAdded} new \xB7 ${merged.bookmarkDuplicates} duplicates \xB7 ${merged.bookmarkConflicts} conflicts kept`;
-            const start = page * 10, end = Math.min(noteRows.length, start + 10);
+            const start = page2 * 10, end = Math.min(noteRows.length, start + 10);
             count2.textContent = `Showing note differences ${start + 1}\u2013${end} of ${noteRows.length}`;
-            rows.replaceChildren();
+            rows2.replaceChildren();
             for (const row of noteRows.slice(start, end)) {
               const current = local.saved.find((item) => identity3(item) === row.key), incomingRecord = incoming.saved.find((item) => identity3(item) === row.key), card = el("article", void 0, "backup-note-difference");
               card.setAttribute("aria-label", "Note difference " + row.uid + " \xB7 " + row.ref);
@@ -4930,14 +4997,14 @@
                 card.append(label3);
                 if (row.incomingNote === "") card.append(el("p", "The incoming note is empty. Selecting it will clear the current note, including its unsaved draft, only after the restore is saved.", "notice"));
               }
-              rows.append(card);
+              rows2.append(card);
             }
             const pager = el("nav", void 0, "pager");
             pager.setAttribute("aria-label", "Note difference pages");
-            if (page > 0) {
+            if (page2 > 0) {
               const previous = button("Previous note differences", () => {
                 if (!validReview()) return;
-                --page;
+                --page2;
                 draw(true);
               });
               previous.disabled = applied || applying;
@@ -4946,18 +5013,18 @@
             if (end < noteRows.length) {
               const next = button("Next note differences", () => {
                 if (!validReview()) return;
-                ++page;
+                ++page2;
                 draw(true);
               });
               next.disabled = applied || applying;
               pager.append(next);
             }
-            rows.append(pager);
+            rows2.append(pager);
             if (moveFocus) count2.focus({ preventScroll: true });
           };
           const review = el("section", void 0, "backup-note-review");
           review.setAttribute("aria-label", "Review personal note differences");
-          const count2 = el("p"), rows = el("div"), selection5 = el("p");
+          const count2 = el("p"), rows2 = el("div"), selection5 = el("p");
           count2.setAttribute("role", "status");
           count2.tabIndex = -1;
           selection5.setAttribute("role", "status");
@@ -4966,9 +5033,9 @@
             choices.clear();
             draw();
           });
-          review.append(el("h4", "Personal note differences \xB7 not scripture"), el("p", "Current notes include unsaved edits in this tab. Only matching, source-pinned positions allow replacement. Selecting an empty incoming note clears the old note and its draft after a confirmed save. Download your current backup first if you want to keep both versions.", "notice"), button("Download current study backup", downloadStudyBackup), selection5, clear, count2, rows);
+          review.append(el("h4", "Personal note differences \xB7 not scripture"), el("p", "Current notes include unsaved edits in this tab. Only matching, source-pinned positions allow replacement. Selecting an empty incoming note clears the old note and its draft after a confirmed save. Download your current backup first if you want to keep both versions.", "notice"), button("Download current study backup", downloadStudyBackup), selection5, clear, count2, rows2);
           preview.append(review);
-          let page = 0;
+          let page2 = 0;
           const identity3 = (item) => noteKey(item);
           const metadata = (item) => `${item.uid} \xB7 ${item.ref} \xB7 source revision: ${item.source_commit ?? "unpinned legacy"} \xB7 source offset: ${item.offset ?? "not recorded"}`;
           draw();
@@ -5543,13 +5610,13 @@
     scope.addEventListener("change", refresh);
     function show(moveFocus = false) {
       if (token !== epoch) return;
-      const page = savedPage(local.saved, noteDrafts, savedFilters);
-      savedFilters.page = page.page;
-      count2.textContent = page.total ? `Showing ${page.start}\u2013${page.end} of ${page.total} matching saved passages \xB7 ${page.all} saved in this tab` : `No matching saved passages \xB7 ${page.all} saved in this tab`;
+      const page2 = savedPage(local.saved, noteDrafts, savedFilters);
+      savedFilters.page = page2.page;
+      count2.textContent = page2.total ? `Showing ${page2.start}\u2013${page2.end} of ${page2.total} matching saved passages \xB7 ${page2.all} saved in this tab` : `No matching saved passages \xB7 ${page2.all} saved in this tab`;
       results.replaceChildren();
       if (!local.saved.length) results.append(el("p", "Save a passage while reading to find it here."));
-      else if (!page.total) results.append(el("p", "Try a different saved title, reference, note or source type, or clear the filters."));
-      for (const item of page.items) {
+      else if (!page2.total) results.append(el("p", "Try a different saved title, reference, note or source type, or clear the filters."));
+      for (const item of page2.items) {
         const box = el("article", void 0, "segment");
         box.append(el("small", savedScopeLabels[savedScope(item)], "muted"));
         try {
@@ -5564,18 +5631,18 @@
         if (item.source_commit) box.append(el("small", "Saved source revision: " + item.source_commit, "muted"));
         results.append(box);
       }
-      if (page.pages > 1) {
+      if (page2.pages > 1) {
         const pager = el("nav", void 0, "pager");
         pager.setAttribute("aria-label", "Saved passage pages");
-        if (page.page > 0) pager.append(button("Previous saved page", () => {
+        if (page2.page > 0) pager.append(button("Previous saved page", () => {
           if (token !== epoch) return;
-          savedFilters.page = page.page - 1;
+          savedFilters.page = page2.page - 1;
           show(true);
         }));
-        pager.append(el("span", `Page ${page.page + 1} of ${page.pages}`));
-        if (page.page + 1 < page.pages) pager.append(button("Next saved page", () => {
+        pager.append(el("span", `Page ${page2.page + 1} of ${page2.pages}`));
+        if (page2.page + 1 < page2.pages) pager.append(button("Next saved page", () => {
           if (token !== epoch) return;
-          savedFilters.page = page.page + 1;
+          savedFilters.page = page2.page + 1;
           show(true);
         }));
         results.append(pager);
@@ -5616,22 +5683,22 @@
     updateResume();
     view.replaceChildren();
     status2.textContent = "Opening the library\u2026";
-    const hash = location.hash.slice(1), queryIndex = hash.indexOf("?"), page = queryIndex < 0 ? hash : hash.slice(0, queryIndex), args = new URLSearchParams(queryIndex < 0 ? "" : hash.slice(queryIndex + 1));
+    const hash = location.hash.slice(1), queryIndex = hash.indexOf("?"), page2 = queryIndex < 0 ? hash : hash.slice(0, queryIndex), args = new URLSearchParams(queryIndex < 0 ? "" : hash.slice(queryIndex + 1));
     try {
-      if (page === "resolve") await resolveCitation(args, token, queryIndex < 0 ? "" : hash.slice(queryIndex + 1));
-      else if (page === "read") await read(args, token, { scriptRefresh, ownsFocus: () => focusOwner.owns(focusTicket) });
-      else if (page === "search") await search(args, token, queryIndex < 0 ? "" : hash.slice(queryIndex + 1), scriptRefresh);
-      else if (page === "book-search") await bookSearch(args, token, queryIndex < 0 ? "" : hash.slice(queryIndex + 1));
-      else if (page === "glossary") await dictionary(args, token);
-      else if (page === "daily") await daily(args, token);
-      else if (page === "verify") quoteChecker(token);
-      else if (page === "plans") await plans(args, token);
-      else if (page === "topics") await topics(args, token);
-      else if (page === "topic") await topicPage(args, token);
-      else if (page === "lists") await teachingLists(args, token);
-      else if (page === "saved") saved();
-      else if (page === "backup") studyBackup(token);
-      else if (page === "about") about();
+      if (page2 === "resolve") await resolveCitation(args, token, queryIndex < 0 ? "" : hash.slice(queryIndex + 1));
+      else if (page2 === "read") await read(args, token, { scriptRefresh, ownsFocus: () => focusOwner.owns(focusTicket) });
+      else if (page2 === "search") await search(args, token, queryIndex < 0 ? "" : hash.slice(queryIndex + 1), scriptRefresh);
+      else if (page2 === "book-search") await bookSearch(args, token, queryIndex < 0 ? "" : hash.slice(queryIndex + 1));
+      else if (page2 === "glossary") await dictionary(args, token);
+      else if (page2 === "daily") await daily(args, token);
+      else if (page2 === "verify") quoteChecker(token);
+      else if (page2 === "plans") await plans(args, token);
+      else if (page2 === "topics") await topics(args, token);
+      else if (page2 === "topic") await topicPage(args, token);
+      else if (page2 === "lists") await teachingLists(args, token);
+      else if (page2 === "saved") saved();
+      else if (page2 === "backup") studyBackup(token);
+      else if (page2 === "about") about();
       else await browse(args, token);
       if (token !== epoch) return;
       const draft = retainBookSearchDraft(bookSearchDraft, location.hash), form = view.querySelector(".book-search-form");
@@ -5654,7 +5721,7 @@
         const review = new URLSearchParams(args);
         review.delete("source");
         review.delete("page_source");
-        view.append(link(page === "book-search" ? "Review current source book search" : args.has("page_source") ? "Review current source at this position" : "Review current source at this reference", (page === "book-search" ? "#book-search?" : "#read?") + review, "button"));
+        view.append(link(page2 === "book-search" ? "Review current source book search" : args.has("page_source") ? "Review current source at this position" : "Review current source at this reference", (page2 === "book-search" ? "#book-search?" : "#read?") + review, "button"));
       }
       status2.textContent = stopped2 ? "Stopped waiting in this browser." : error.code === "REQUEST_DEADLINE" ? "The request timed out." : "The request failed.";
     }

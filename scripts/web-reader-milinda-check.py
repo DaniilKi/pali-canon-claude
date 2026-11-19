@@ -9,7 +9,7 @@ from playwright.sync_api import expect,sync_playwright
 from web_reader_test_helpers import read_tool
 ROOT=pathlib.Path(__file__).resolve().parents[1];KEY='pali-library-v1';PRIVATE='PRIVATE_MILINDA_DRAFT_සති'
 p=argparse.ArgumentParser(description=__doc__);p.add_argument('--source-root',type=pathlib.Path,help='Optional directory containing the two original publisher HTML filenames');p.add_argument('--server-dir',type=pathlib.Path);p.add_argument('--a11y',action='store_true');p.add_argument('--report');args=p.parse_args()
-manifest=json.loads((ROOT/'scripts/canon/reviewed_ati_sections.json').read_text());rows=manifest['links'];assert len(rows)==14 and len({r['unit_id'] for r in rows})==14
+manifest=json.loads((ROOT/'scripts/canon/reviewed_ati_sections.json').read_text());rows=[row for row in manifest['links'] if row['section']['profile']=='ati-kelly-milinda-v1'];assert len(rows)==14 and len({r['unit_id'] for r in rows})==14
 assert sum(r['section']['note_count'] for r in rows)==4 and sum(r['section']['note_count']>0 for r in rows)==3
 assert all(r['license']=='Kelly-free-distribution-2005' for r in rows)
 server_dir=args.server_dir.resolve() if args.server_dir else ROOT/'server';assert json.loads((server_dir/'data/reviewed-ati-sections.json').read_text())==manifest

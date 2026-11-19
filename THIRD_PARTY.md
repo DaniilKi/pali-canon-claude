@@ -1,5 +1,11 @@
 # Third-party content and dependencies
 
+The reviewed SN 27.5 section retains the original ©1994 Thanissaro Bhikkhu
+CC BY-NC 4.0 notice and full ATI citation. Only its complete substantive fifth
+discourse is selected from the ten-discourse page; its title/PTS differences
+and untranslated inline ordinal are disclosed. No English body is bundled.
+[Exact source, rights and scope](docs/data/sn27-feelings-section.md).
+
 The [MIT licence](LICENSE) covers this project's own software and documentation. It does **not** relicense scripture, translations, dictionary entries or upstream services.
 
 ## Bundled: Chaṭṭha Saṅgāyana Tipiṭaka (VRI)

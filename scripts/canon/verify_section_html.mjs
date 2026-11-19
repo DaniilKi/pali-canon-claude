@@ -35,7 +35,11 @@ for (const row of m.links) {
   if (corpus.source.commit !== m.vri_commit || first < 0 || last < first
     || scopeHash(segments.slice(first, last + 1).map(({ref,type,text}) => ({ref,type,text}))) !== row.section.pali_sha256) throw Error('ATI section exact Pali body changed');
   const outside = segments.filter((s,i) => (i < first || i > last) && s.type !== 'heading');
-  if (scopeHash(outside.map(({ref,text}) => ({ref,text}))) !== scopeHash(row.untranslated_paratext)) throw Error('ATI section untranslated paratext changed');
+  const paratext = row.section.profile === 'ati-sn27-feelings-v1'
+    ? [{ref: 'sn27.5/2', text: 'Pañcamaṃ.'}] : outside.map(({ref,text}) => ({ref,text}));
+  // The finite registry already verifies the exact inline suffix against the
+  // full original two-segment root. Never remove it from canonical output.
+  if (scopeHash(paratext) !== scopeHash(row.untranslated_paratext)) throw Error('ATI section untranslated paratext changed');
   verified.push({id:unit.id,characters:selected.text.length,notes:selected.translator_notes.length});
 }
 console.log(JSON.stringify({verified}));

@@ -62,10 +62,11 @@ function pools(canon) {
 }
 
 function english(canon, u) {
-  return canon.describe(u).english.map(({ source, translator, reference, url, license, translation_id, translation_scope, includes_commentary }) => ({
+  return canon.describe(u).english.map(({ source, translator, reference, url, license, translation_id, translation_scope, includes_commentary, source_section, mapping_note }) => ({
     source, translator, ...(reference ? { reference } : {}), url, ...(license ? { license } : {}), translation_id,
     ...(translation_scope ? { translation_scope, whole_unit_coverage: false } : {}),
     ...(includes_commentary ? { includes_commentary: true } : {}),
+    ...(source_section ? {source_section: JSON.parse(JSON.stringify(source_section)), whole_unit_coverage: true, mapping_note} : {}),
   }));
 }
 

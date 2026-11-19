@@ -626,6 +626,50 @@
         "last_ref": "mil3.7.8/3",
         "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
       }
+    },
+    {
+      "unit_id": "sn27.5",
+      "path": "/tipitaka/sn/sn27/sn27.001-010.than",
+      "anchor": "sn27.005",
+      "english_title": "Vedana Sutta — Feeling",
+      "source_reference": "SN 27.5: Vedana Sutta — Feeling",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "mapping_note": "Complete substantive SN 27.5 discourse selected from the publisher’s ten-discourse Upakkilesa Samyutta page, not a translation of the other nine discourses. Publisher title Vedana (Feeling) corresponds by its six contact-born feelings to VRI Samphassajasuttaṃ, not adjacent contact or perception. The source publishes the closing refrain in full while the original VRI peyyāla remains unchanged. Its final inline ordinal Pañcamaṃ. (Fifth) is untranslated paratext. Publisher page PTS S iii 232 describes the anthology; the VRI individual root has PTS iii 233. This is not word-level alignment.",
+      "root": {
+        "id": "sn27.5",
+        "book": 13,
+        "start": 1198,
+        "end": 1200,
+        "title": "Samphassajasuttaṃ",
+        "vri": "326",
+        "root_blocks_sha256": "7d4509cbcfbab32d0a52296149d2d13d455bf2bb4fc8cfa940f73f303a0bb703"
+      },
+      "source_html_sha256": "4cda764c8a27a64faf96f6cd2ce0dc08808816ab80d329f3ad264b4516ee1e79",
+      "untranslated_paratext": [
+        {
+          "ref": "sn27.5/2",
+          "text": "Pañcamaṃ."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "sn27.5",
+        "profile": "ati-sn27-feelings-v1",
+        "anchor": "sn27.005",
+        "heading": "SN 27.5: Vedana Sutta — Feeling",
+        "paragraph_count": 1,
+        "note_count": 0,
+        "section_html_sha256": "cbc659a03aae212803aa6276a580ea5449b592daac90617467787ee3c48b6c70",
+        "text_sha256": "a6fbbfbaa11520f6d8f554f391d6391934c06541055b1d8176179d20434874eb",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "c17a37f4ad06a4b9ce4061abd7bebe831ba90ecda55931f65488ee90ec41973c",
+        "pali_sha256": "eb1ba8d84d7a71d5fc4f4712d23a8f0ce72d264323685a5ad65d35bc453abffd",
+        "first_ref": "sn27.5/2",
+        "last_ref": "sn27.5/2",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
     }
   ]
 }
