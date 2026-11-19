@@ -18,7 +18,7 @@ import time
 import urllib.parse
 
 from playwright.sync_api import expect, sync_playwright
-from web_reader_test_helpers import read_tool, source_position
+from web_reader_test_helpers import read_tool, source_position, find_control
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -134,6 +134,8 @@ try:
     book_native_match = tool('get_text', {'book': 'vin02m1', 'offset': 6, 'limit': 30, 'script': 'sinhala'})
     source_heading_first = tool('search_source_book', {'book': 'vin02m1', 'query': '', 'headings_only': True, 'offset': 0, 'limit': 15, 'script': 'sinhala'})
     source_heading_second = tool('search_source_book', {'book': 'vin02m1', 'query': '', 'headings_only': True, 'offset': 15, 'limit': 15, 'script': 'sinhala'})
+    script_headings_roman = tool('search_source_book', {'book': 'vin02m1', 'query': '', 'headings_only': True, 'offset': 0, 'limit': 15, 'script': 'roman'})
+    script_canon = {script: tool('search_texts', {'query': 'sati', 'offset': 0, 'limit': 15, 'script': script}) for script in ['roman', 'sinhala']}
     source_heading_phrase = tool('get_text', {'book': 'vin02m1', 'offset': 1005, 'limit': 1, 'script': 'sinhala'})['segments'][0]
     source_heading_query = '"' + source_heading_phrase['text'] + '"'
     source_heading_filtered = tool('search_source_book', {'book': 'vin02m1', 'query': source_heading_query, 'headings_only': True, 'offset': 0, 'limit': 15, 'script': 'sinhala'})
@@ -795,6 +797,40 @@ try:
                 assert profile(page) == original_profile
                 audit(page, state, uid + ' actual partial scope and fresh consent, no English retrieval')
             passed('three scoped-only Vinaya records retain exact original spans and fresh keyboard-accessible consent without provider English or private changes')
+            context.close()
+
+            # Preference refresh uses the executed route, preserving local unsubmitted forms.
+            context, page, state = environment(saved=[{**canonical['mark'], 'note': PRIVATE + 'script durable'}], script='roman')
+            saved(page); page.get_by_label('Your personal note', exact=True).fill(PRIVATE + 'script unsaved')
+            refresh_url = base + '/#book-search?' + urllib.parse.urlencode({'book': 'vin02m1', 'mode': 'headings', 'source': revision(script_headings_roman)})
+            page.goto(refresh_url)
+            expect(page.locator('.book-search-results .passage')).to_have_text([r['excerpt'] for r in script_headings_roman['results']])
+            find_control(page, '#query').fill('COMPAT_UNSENT_SCRIPT_QUERY')
+            page.locator('#search-scope').select_option('post')
+            field = page.get_by_role('form', name='Source book search', exact=True).locator('input')
+            field.fill('COMPAT_UNSENT_SCRIPT_BOOK'); field.evaluate('(node)=>node.setSelectionRange(2,7)')
+            if page.locator('.preferences').get_attribute('open') is None: page.locator('.preferences > summary').click()
+            before = len(state['calls']); page.locator('#script').focus(); page.locator('#script').select_option('sinhala')
+            expect(page.locator('.book-search-results .passage')).to_have_text([r['excerpt'] for r in source_heading_first['results']])
+            assert page.locator('.book-search-results .passage').all_text_contents() == [r['excerpt'] for r in source_heading_first['results']]
+            assert state['calls'][before:] == [{'name': 'search_source_book', 'arguments': {'book': 'vin02m1', 'query': '', 'headings_only': True, 'offset': 0, 'limit': 15, 'script': 'sinhala'}}]
+            expect(page).to_have_url(refresh_url); expect(page.locator('#script')).to_be_focused()
+            expect(page.locator('#find-panel')).to_have_attribute('open', '')
+            expect(page.locator('#query')).to_have_value('COMPAT_UNSENT_SCRIPT_QUERY')
+            expect(page.locator('#search-scope')).to_have_value('post')
+            field = page.get_by_role('form', name='Source book search', exact=True).locator('input')
+            expect(field).to_have_value('COMPAT_UNSENT_SCRIPT_BOOK'); assert field.evaluate('(node)=>[node.selectionStart,node.selectionEnd]') == [2,7]
+            audit(page, state, 'script preference refreshes pinned actual heading output without executing drafts')
+            page.goto(base + '/#search?q=sati&scope=canon')
+            expect(page.locator('section[aria-label="Matching Pāli passages"] .search-excerpt')).to_have_text([r['excerpt'] for r in script_canon['sinhala']['results']])
+            find_control(page, '#query').fill('COMPAT_UNSENT_SCRIPT_QUERY'); page.locator('#search-scope').select_option('post')
+            before = len(state['calls']); page.locator('#script').focus(); page.locator('#script').select_option('roman')
+            expect(page.locator('section[aria-label="Matching Pāli passages"] .search-excerpt')).to_have_text([r['excerpt'] for r in script_canon['roman']['results']])
+            assert state['calls'][before:] == [{'name': 'search_texts', 'arguments': {'query': 'sati', 'offset': 0, 'limit': 15, 'script': 'roman'}}]
+            expect(page.locator('#script')).to_be_focused(); expect(page.locator('#query')).to_have_value('COMPAT_UNSENT_SCRIPT_QUERY'); expect(page.locator('#search-scope')).to_have_value('post')
+            saved(page); expect(page.get_by_label('Your personal note', exact=True)).to_have_value(PRIVATE + 'script unsaved')
+            audit(page, state, 'script refresh preserves personal draft and real canonical search authority')
+            passed('script preference refreshes actual pinned source headings and canonical search while retaining script focus, raw finder/book drafts, selection and private note')
             context.close()
 
             # The narrow legacy-progress fix is exercised in each real engine.
