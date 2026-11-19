@@ -1,3 +1,4 @@
+import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 /** Reusable per-poem gates driven by separately approved source-review goldens. */
 import test, {afterEach} from 'node:test';
 import assert from 'node:assert/strict';
@@ -85,7 +86,8 @@ test('scaled intake keeps the explicit curation whitelist and all previous eight
   assert.equal(approval.baseline_ids.length, 89);
   assert.equal(new Set(approval.expected_profile_ids).size, approval.expected_profile_ids.length);
   assert.deepEqual(approval.expected_profile_ids, [...approval.baseline_ids, ...approved]);
-  assert.deepEqual(Object.keys(APADANA_PROFILES), approval.expected_profile_ids);
+  assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
+  assert.deepEqual(CURRENT_APADANA_IDS.slice(0,approval.expected_profile_ids.length),approval.expected_profile_ids,'D250 exact prefix retained');
   assert.equal(digest(JSON.stringify(Object.fromEntries(approval.baseline_ids.map(uid => [uid, profile(uid)])))), '9df8b7b5dafbbcfe4bb291e8c04f93bd51e95ec6ec24e71f8ca6c4a25e580263');
   assert.equal(digest(JSON.stringify(Object.fromEntries(approval.baseline_ids.filter(uid => uid.startsWith('tha-')).map(uid => [uid, THERA_APADANA_PROFILES[uid]])))), 'c6e4788c276823a80bf4ac624e87a415502ed57efe6b5bf2f2312c18e104f933');
   const manifest = JSON.parse(readFileSync('server/data/apadana.json', 'utf8'));
@@ -173,7 +175,7 @@ test('source-enabled scaled source/profile mutations refuse and held or foreign 
   }
   let calls = 0;
   globalThis.fetch = async () => {calls++; throw Error('Unapproved transport');};
-  for (const poem of ['010', '070', '101', '570']) {
+  for (const poem of ['010', '070', '140', '570']) {
     const url = `https://raw.githubusercontent.com/apadana-translation/apadana-site/${APADANA_COMMIT}/src/_poems/chapter-3/poem-${poem}.md`;
     assert.equal(isApadanaRawUrl(url), false); await assert.rejects(fetchPublic(url, {json: false}), /outside the supported public sources/);
   }

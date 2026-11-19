@@ -9,7 +9,7 @@ import * as canon from '../src/canon.mjs';
 import * as english from '../src/english.mjs';
 import { getAtiText, translationCoverage } from '../src/providers.mjs';
 import { liveCache } from '../src/cache.mjs';
-import { readBundled } from '../src/bundled-data.mjs';
+import { canonBeforeTheraPairGzip } from './helpers/canon-before-thera-pair-gzip.mjs';
 import { plainText } from '../src/http.mjs';
 import { extractAtiSection } from '../src/ati-sections.mjs';
 import { sectionHash, reviewedSectionLink, retainedAnMindShared, assertRegisteredSection, validateSectionRegistry } from '../src/ati-section-registry.mjs';
@@ -62,7 +62,7 @@ test('twenty actual numbered members preserve all fifteen old whole profiles, al
   assert.equal(old.length, 15); assert.equal(hash(stable(old)), '643441453f30c256abcde307267aebbcd8097e6aeed450186dfed7ce2173cb73');
   const partial = JSON.parse(readFileSync('scripts/canon/reviewed_partial_pages.json', 'utf8')).links;
   assert.equal(hash(stable(partial.slice(0, 21))), 'eae9f955ef6f31a7fb56874ce67f72f78b69cacc319415d1ae58585e2586c212');
-  assert.equal(hash(readBundled('server/data/canon.json.gz')), 'a1b11469abc0d0e190f9bbe609c67d96225e1d3e370cd26775355fa15bdf6c96');
+  assert.equal(hash(canonBeforeTheraPairGzip(canon.load().canon)), 'a1b11469abc0d0e190f9bbe609c67d96225e1d3e370cd26775355fa15bdf6c96');
   assert.deepEqual(registry, JSON.parse(readFileSync('server/data/reviewed-ati-sections.json', 'utf8')));
   assert.doesNotThrow(() => validate());
 });

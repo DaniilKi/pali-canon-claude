@@ -39,16 +39,16 @@ function embeddedGuard() {
 }
 
 test('every reviewed profile permitting synthetic wording retains all mandatory edition caveats in standalone, comparison and embedded readers', () => {
-  assert.equal(WIDGET_VERSION, 'v25');
+  assert.equal(WIDGET_VERSION, 'v26');
   const checked = embeddedGuard();
   assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
-  // These nine new finite content guards require exact live source wording.
+  // These finite content guards require exact live source wording; source suites cover them.
   // Their positive/tamper/cache cases use original artifacts in the held42 and
   // thera-hundred client suites; every preceding89 synthetic fixture remains.
-  const exactContentIds=['tha-ap44','tha-ap63','tha-ap73','tha-ap76','tha-ap82','tha-ap83','tha-ap92','tha-ap93','tha-ap102'];
+  const exactContentIds=['tha-ap44','tha-ap63','tha-ap73','tha-ap76','tha-ap82','tha-ap83','tha-ap92','tha-ap93','tha-ap102','tha-ap103','tha-ap112','tha-ap113','tha-ap122','tha-ap123','tha-ap132','tha-ap133'];
   const syntheticIds = CURRENT_APADANA_IDS.filter(uid => !exactContentIds.includes(uid));
-  assert.equal(syntheticIds.length,120);
-  assert.equal(CURRENT_APADANA_IDS.length,129);
+  assert.equal(syntheticIds.length,152);
+  assert.equal(CURRENT_APADANA_IDS.length,168);
   assert.equal(BASELINE_APADANA_IDS.length,89);
   assert.ok(BASELINE_APADANA_IDS.every(uid=>syntheticIds.includes(uid)),'all89 preceding positive fixtures retain their original coverage');
   for (const uid of syntheticIds) {

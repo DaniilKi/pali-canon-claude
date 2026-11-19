@@ -1,0 +1,45 @@
+{
+  "baseline": "b5669a334add97ebc0c3c32f9b3fb45ed90d9780",
+  "decision": "SOURCE-ONLY CONDITIONAL; independent reviewer/root/runtime/CI approval required before activation",
+  "approved_ids": [
+    "tha-ap133",
+    "tha-ap134",
+    "tha-ap135",
+    "tha-ap136",
+    "tha-ap137",
+    "tha-ap138",
+    "tha-ap139",
+    "tha-ap140",
+    "tha-ap141"
+  ],
+  "approved_poems": [
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139
+  ],
+  "goldens_sha256": "f3106f279d9e41cc3ebf72ff574a7f1d968e5f5b6555a1dad7f18cc0cd3f8e07",
+  "source_review_sha256": "6d34979879cd920b68c09157564ae4dce9adb5f6bb3a606e5caa22b63c27890f",
+  "rights_sha256": "204e36d33be5209c503563d227a565f01101e518ec181e1a49860c8171c4a7f1",
+  "xml_replay_sha256": "50f60ffdd47d4e7a94cc51cee72a94c35c527fe5a8fffccc4a58cb6d5c24a1a5",
+  "holds_in_batch": [
+    {
+      "poem": 140,
+      "id": "tha-ap142",
+      "reason": "Ambiguous orphan display markup in chapter summary; no silent stripping, scope remains held."
+    }
+  ],
+  "not_authorized": [
+    "main",
+    "deploy",
+    "force push",
+    "outreach",
+    "English/notes/apparatus bundling",
+    "unreviewed activation"
+  ]
+}

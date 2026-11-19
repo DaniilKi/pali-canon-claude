@@ -36,7 +36,7 @@ const checked = () => {
 };
 
 test('all forty finite choices preserve exact apparatus in individual, comparison and embedded validation', () => {
-  assert.equal(WIDGET_VERSION, 'v25');
+  assert.equal(WIDGET_VERSION, 'v26');
   const check = checked();
   for (let n = 1; n <= 40; n++) {
     const f = fixture(n);

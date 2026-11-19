@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 def reviewed_intake(root):
-    data=json.loads((Path(root)/'docs/evidence/apadana/THERA_SCALED_APPROVAL.json').read_text(encoding='utf-8'))
+    data=json.loads((Path(root)/'docs/evidence/apadana/THERA_PAIR_INTAKE_APPROVAL.json').read_text(encoding='utf-8'))
     assert data['schema']=='reviewed-apadana-intake-v1' and data['status']=='approved'
     assert data['publisher_revision']=='fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4'
     ids=data['expected_profile_ids']

@@ -1,3 +1,4 @@
+import { assertCanonicalLocator } from './locator-policy.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
 /**
  * analyse_passage: word-by-word analysis of a passage of the bundled Pāli text (issues #22 and #23).
@@ -300,7 +301,7 @@ function selection(uid, book) {
       metadata: { ...metadata, content_type: 'post_canonical', text_source: source } };
   }
   const { unit, notes } = resolved;
-  return { unit, notes, input, segs: canon.segments(unit), source: canon.source(),
+  return { unit, notes, input, segs: canon.segments(unit), source: canon.positionalReadingPin(unit).source_commit ? canon.readingSource(unit) : canon.source(),
     metadata: { text_id: unit.id, citation: unit.acronym, title: unit.title } };
 }
 
@@ -309,9 +310,12 @@ function selection(uid, book) {
  * headword, grammar, root and short meaning from DPD. `segment` is a get_text ref ("mn10/3") or
  * number; `paragraph` picks by VRI paragraph instead. Words are paged with offset/limit.
  */
-export function analysePassage({ uid, book, segment, paragraph, offset = 0, limit = 60 } = {}) {
+export function analysePassage({ uid, book, segment, paragraph, source_commit: sourceCommit, offset: requestedOffset, limit = 60 } = {}) {
+  const offset = requestedOffset ?? 0;
   const selected = selection(uid, book);
   const { unit, notes, segs, source, input } = selected;
+  const locator = selected.extended ? source.locator_revision || source.commit : canon.readingSource(unit).locator_revision || source.commit;
+  assertCanonicalLocator(unit.id, locator, { expected: sourceCommit, positional: segment !== undefined || paragraph !== undefined || requestedOffset !== undefined });
   if (!segs.length) throw new Error(`${unit.acronym} has no text to analyse.`);
   const index = pickSegment(unit, segs, { segment, paragraph });
   const seg = segs[index];
@@ -392,7 +396,8 @@ export function register({ tool, z }) {
     book: z.string().trim().min(1).max(100).optional().describe('Complete VRI root-book ID from browse_canon node "books", as with get_text book mode. Give book instead of uid; source-file positions are not individual canonical identities.'),
     segment: z.union([z.string().trim().min(1).max(200), z.number().int().min(1)]).optional().describe('Exact segment ref from get_text or get_post_canonical, or its number. Give segment or paragraph, never both. Omit both for the first body segment; blank values are errors.'),
     paragraph: z.union([z.string().trim().min(1).max(20), z.number().int().min(0)]).optional().describe('Exact VRI paragraph label instead of segment. In every scope, a label matching several segments is an error: choose an exact segment ref. Give at most one selector; omit both for the first body segment.'),
-    offset: z.number().int().min(0).max(100000).default(0).describe('Word offset within the segment, for continuation.'),
+    source_commit: z.string().regex(/^[a-f0-9]{40}(?:-[a-zA-Z0-9._-]{1,40})?$/).optional().describe('Expected citation locator revision from the Pāli reader. Required for explicit tha-ap107/108 segment, paragraph or word offset after their boundary repair.'),
+    offset: z.number().int().min(0).max(100000).optional().describe('Word offset within the segment, for continuation.'),
     limit: z.number().int().min(1).max(200).default(60).describe('Words per call.'),
   }, (args) => analysePassage(args));
 }

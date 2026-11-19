@@ -1,3 +1,4 @@
+import { isRepairedApadanaPair } from '../src/locator-policy.mjs';
 import { apadanaEditionNavigation, apadanaEditionLink } from './apadana-edition-navigation.mjs';
 import { parseNoteDraftJournal, stageNoteDraftEntry, removeNoteDraftEntry, reconcileNoteDraftJournal, guardedNoteDraftJournalWrite } from './note-draft-recovery.mjs';
 import { createFocusOwnership } from './focus-ownership.mjs';
@@ -189,7 +190,7 @@ async function tool(name, args, group = 'page', requestLabel = requestLabels[nam
     const result = rpc.result;
     if (!result) throw new Error('The text service returned an incomplete response.');
     const data = result.structuredContent || JSON.parse(result.content?.find(c => c.type === 'text')?.text || '{}');
-    if (result.isError || data.error) throw new Error(data.error || 'This selection could not be retrieved.');
+    if (result.isError || data.error) { const error = new Error(data.error || 'This selection could not be retrieved.'); if (['READING_SOURCE_CHANGED', 'READING_LOCATOR_AMBIGUOUS'].includes(data.code) && /^#read\?uid=tha-ap10[78]$/.test(data.reopen || '')) { error.code = data.code; error.reopen = data.reopen; } throw error; }
     return data;
   }, { group, label: requestLabel });
 }
@@ -681,7 +682,7 @@ function attachPassageNote(selector, data, segment, container, control, token) {
   catch (error) { region.append(el('p', 'This source has no safe note reference: ' + error.message, 'notice'), link('See saved bookmark and note', '#saved')); return; }
   highlightTargets.push({ node: container, context, token });
   const key = noteKey(context); open = noteDrafts.has(key) || Boolean(savedRecord(context)?.note);
-  function mark() { const active = Boolean(savedRecord(context)); control.textContent = active ? 'Saved ✓' : 'Save passage'; control.setAttribute('aria-pressed', String(active)); container.classList.toggle('marked', active); container.classList.toggle('personal-highlight', savedPassageHighlighted(local.saved, context, local.highlight_saved !== false)); }
+  function mark() { const state = passageNoteState(local.saved, context), active = Boolean(savedRecord(context)); if (!state.eligible && isRepairedApadanaPair(context.uid, context.source_commit)) { control.textContent = 'Saved reference needs review'; control.disabled = true; control.setAttribute('aria-pressed', 'false'); container.classList.remove('marked', 'personal-highlight'); return; } control.disabled = false; control.textContent = active ? 'Saved ✓' : 'Save passage'; control.setAttribute('aria-pressed', String(active)); container.classList.toggle('marked', active); container.classList.toggle('personal-highlight', savedPassageHighlighted(local.saved, context, local.highlight_saved !== false)); }
   function ensure() {
     const change = passageNoteTransaction(local.saved, noteDrafts, context, { type: 'ensure' });
     const durable = commitNoteChange(change, true); mark();
@@ -791,7 +792,7 @@ async function read(args, token, { scriptRefresh = false, ownsFocus = () => fals
     window = planWindow(plan, uid, args.has('offset') ? Number(args.get('offset')) : undefined); offset = window.offset;
   }
   const kind = book ? 'book' : ['commentary', 'post'].includes(args.get('kind')) ? args.get('kind') : 'canon';
-  const request = { ...(kind === 'book' ? { book } : kind === 'post' ? { citation: uid } : { uid }), offset, limit: window?.limit || 30, script: $('script').value };
+  const request = { ...(kind === 'book' ? { book } : kind === 'post' ? { citation: uid } : { uid }), ...(kind !== 'canon' || args.has('offset') || window ? { offset } : {}), ...(kind === 'canon' && (args.has('source') || args.has('page_source')) ? { source_commit: args.get('source') || args.get('page_source') } : {}), limit: window?.limit || 30, script: $('script').value };
   const data = await tool(kind === 'commentary' ? 'get_commentary' : kind === 'post' ? 'get_post_canonical' : 'get_text', request); if (token !== epoch) return;
   if (!Array.isArray(data.segments)) throw new Error('Choose an individual book or passage to read.');
   assertPositionPin(args, data); assertPagePin(args, data);
@@ -845,7 +846,7 @@ async function read(args, token, { scriptRefresh = false, ownsFocus = () => fals
     const row = el('div', undefined, 'segment-label'), reference = el('span'); if (positionHref) { const exact = link(segment.ref, positionHref); exact.setAttribute('aria-label', 'Open exact passage ' + segment.ref); reference.append(exact); } else reference.textContent = segment.ref; if (segment.vri_paragraph) reference.append(document.createTextNode(' · VRI ' + segment.vri_paragraph)); row.append(reference);
     const active = local.saved.some(x => x.uid === selector && x.ref === segment.ref);
     const save = button(active ? 'Saved ✓' : 'Save passage', () => {}); save.setAttribute('aria-label', 'Save passage ' + segment.ref); save.setAttribute('aria-pressed', String(active)); const actions = el('div', undefined, 'segment-actions'); actions.append(save);
-    if (kind !== 'commentary' && segment.type !== 'heading') { const study = button('Study words', () => wordStudy({ ...(kind === 'book' ? { book } : { uid: kind === 'canon' ? data.text_id || uid : uid }), segment: segment.ref, offset: 0, limit: 15 }, { ref: segment.ref, text: segment.text, source: data.source?.commit, script: $('script').value, kind }, token)); study.setAttribute('aria-label', 'Study words in ' + segment.ref); actions.append(study); }
+    if (kind !== 'commentary' && segment.type !== 'heading') { const study = button('Study words', () => wordStudy({ ...(kind === 'book' ? { book } : { uid: kind === 'canon' ? data.text_id || uid : uid }), segment: segment.ref, ...(kind === 'canon' ? canonStudyPin(data) : {}), offset: 0, limit: 15 }, { ref: segment.ref, text: segment.text, source: data.source?.commit, script: $('script').value, kind }, token)); study.setAttribute('aria-label', 'Study words in ' + segment.ref); actions.append(study); }
     row.append(actions); part.classList.toggle('marked', active);
     const text = createSourcePassage(document, segment, 3); part.append(row, text); attachPassageNote(selector, data, segment, part, save, token); passages.append(part);
     if (positionHref) positions.push({ node: part, heading: segment.type === 'heading', href: positionHref });
@@ -1008,6 +1009,7 @@ async function commentary(uid, token, offset = 0) {
 function studyTarget(message) {
   requests.cancelGroup('study'); const target = $('study'); target.replaceChildren(el('p', message)); target.tabIndex = -1; target.setAttribute('aria-label', 'Study tools, separate from scripture'); target.focus({ preventScroll: true }); target.scrollIntoView({ block: 'start' }); return target;
 }
+function canonStudyPin(data) { const revision = sourceRevision(data); return isRepairedApadanaPair(data.text_id, revision) ? { source_commit: revision } : {}; }
 async function wordStudy(args, expected, token) {
   const studyToken = ++studyEpoch, target = studyTarget('Looking up the selected passage in the bundled dictionary…');
   try {
@@ -1346,7 +1348,7 @@ function quoteChecker(token) {
         const card = el('article', undefined, 'word-card'); card.append(el('h4', match.citation + (match.title ? ' · ' + match.title : '')), el('p', match.matched_text, 'passage'), el('p', 'Source span: ' + match.source_span.first_segment_ref + ' to ' + match.source_span.last_segment_ref, 'muted'));
         if (match.matched_text_truncated) card.append(el('p', 'Excerpt shortened by the source tool. Open the source for the complete context.', 'notice'));
         card.append(el('p', data.comparison.method === 'literal_source_substring' ? 'Unchanged source substring located; source correctness and authorship are not established.' : 'Normalized similarity: ' + match.similarity + ' (0–1), not a probability of truth or authorship.', 'muted'));
-        card.querySelector('.passage').lang = 'pi'; notes(match, card); card.append(link('Open source at match start · ' + match.citation, route('read', { uid: match.text_id, offset: match.read_with.offset, ref: match.segment_ref }), 'button')); result.append(card);
+        card.querySelector('.passage').lang = 'pi'; notes(match, card); card.append(link('Open source at match start · ' + match.citation, route('read', { uid: match.text_id, offset: match.read_with.offset, ref: match.segment_ref, ...(match.read_with.source_commit ? { source: match.read_with.source_commit } : {}) }), 'button')); result.append(card);
       }
       result.append(el('p', data.thresholds.measure, 'muted')); provenance({ edition: 'Bundled canonical Pāli comparison', attribution: data.scope.attribution, license: data.scope.terms }, result); if (focusOwner.owns(focusTicket)) result.scrollIntoView({ block: 'start' });
     } catch (error) { if (token !== epoch || request !== generation) return; result.replaceChildren(el('h3', 'Unable to check this quotation'), el('p', error.message, 'notice')); }
@@ -1443,7 +1445,7 @@ async function render({ scriptRefresh = false } = {}) {
     const draft = retainBookSearchDraft(bookSearchDraft, location.hash), form = view.querySelector('.book-search-form');
     if (draft?.toolsOpen !== undefined && form) { const panel = form.closest('.study-actions'); if (panel) panel.open = draft.toolsOpen; }
     status.textContent = storageConflict || !storageOK ? storageWarning() : !positionDurable ? positionWarning || storageWarning() : '';
-  } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', () => { const refresh = scriptRefresh && location.hash === executedRoute; if (refresh) focusHeading(); render({ scriptRefresh: refresh }); }), link('Browse the library', route('browse', { node: 'canon' }), 'button')); if (error.code === 'READING_SOURCE_CHANGED') { const review = new URLSearchParams(args); review.delete('source'); review.delete('page_source'); view.append(link(page === 'book-search' ? 'Review current source book search' : args.has('page_source') ? 'Review current source at this position' : 'Review current source at this reference', (page === 'book-search' ? '#book-search?' : '#read?') + review, 'button')); } status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
+  } catch (error) { if (token !== epoch) return; view.replaceChildren(); const stopped = error.code === 'REQUEST_STOPPED'; heading(stopped ? 'BROWSER WAIT STOPPED' : 'UNABLE TO OPEN', stopped ? 'Reading request stopped' : 'No passage was substituted.'); view.append(el('p', error.message, 'notice'), button('Try again', () => { const refresh = scriptRefresh && location.hash === executedRoute; if (refresh) focusHeading(); render({ scriptRefresh: refresh }); }), link('Browse the library', route('browse', { node: 'canon' }), 'button')); if (error.reopen) view.append(link('Reopen whole current text · saved references stay unchanged', error.reopen, 'button')); else if (error.code === 'READING_SOURCE_CHANGED') { const review = new URLSearchParams(args); review.delete('source'); review.delete('page_source'); view.append(link(page === 'book-search' ? 'Review current source book search' : args.has('page_source') ? 'Review current source at this position' : 'Review current source at this reference', (page === 'book-search' ? '#book-search?' : '#read?') + review, 'button')); } status.textContent = stopped ? 'Stopped waiting in this browser.' : error.code === 'REQUEST_DEADLINE' ? 'The request timed out.' : 'The request failed.'; }
 }
 restoreDraftJournal();
 installPagePrinting();

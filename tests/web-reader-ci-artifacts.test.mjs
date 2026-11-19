@@ -3,6 +3,10 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 
+const PAIR_GROUPS=['apadanatherapair101','apadanatherapair121'];
+const beforePairGroups=groups=>groups.filter(name=>!PAIR_GROUPS.includes(name));
+const pairFixtureFiles=Array.from({length:41},(_,i)=>'src/_poems/chapter-3/poem-'+String(i+101).padStart(3,'0')+'.md');
+
 const stepsOf=source=>source.match(/^      - [^]*?(?=^      - |^  [a-z][\w-]*:|(?![^]))/gm)||[];
 const namedStep=(source,name)=>{
  const steps=stepsOf(source).filter(step=>step.startsWith('      - name: '+name+'\n'));
@@ -24,7 +28,7 @@ test('every browser-group JSON report is retained as a CI artifact',()=>{
  assert.ok(selected?.includes('conflicts'),'local note-conflict acceptance is selected');
  assert.ok(selected?.includes('booksearch'),'complete source-book search acceptance is selected');
  assert.ok(selected?.includes('chapters'),'chapter and compact-context acceptance is selected');
- for(const name of ['anten','textspacing','apadana','apadananext','apadanathird','apadanafourth','apadanathera','apadanatheranext','apadanatheraexpansion','apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial','apadanaedition','thagsixteen']){
+ for(const name of ['anten','textspacing','apadana','apadananext','apadanathird','apadanafourth','apadanathera','apadanatheranext','apadanatheraexpansion','apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial','apadanaedition','thagsixteen',...PAIR_GROUPS]){
   assert.ok(selected?.includes(name),name+' acceptance is selected');
   const steps=[...group.matchAll(new RegExp("if: matrix\\.group == '"+name+"'([^]*?)(?=\\n      -|$)",'g'))].map(match=>match[1]).join('\n');
   assert.match(steps,/--a11y/,name+' accessibility mode runs');
@@ -74,13 +78,13 @@ test('Apadāna browser CI uses a pinned public fixture without persisted credent
  const source=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');
  const fixture=source.split('      - name: Check out exact public Apadāna source fixtures without credentials')[1]?.split('      - name: Validate all Apadāna source and rights pins')[0];
  assert.ok(fixture,'exact public fixture checkout exists');
- assert.deepEqual(conditionGroups(fixture),['apadana','apadananext','apadanathird','apadanafourth','apadanathera','apadanatheranext','apadanatheraexpansion','apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial','apadanaedition']);
+ assert.deepEqual(beforePairGroups(conditionGroups(fixture)),['apadana','apadananext','apadanathird','apadanafourth','apadanathera','apadanatheranext','apadanatheraexpansion','apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial','apadanaedition']);
  assert.match(fixture,/repository: apadana-translation\/apadana-site/);
  assert.match(fixture,/ref: fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/);
  assert.match(fixture,/persist-credentials: false/);
  assert.match(fixture,/sparse-checkout-cone-mode: false/);
  const files=[...fixture.matchAll(/^            (.+)$/gm)].map(match=>match[1]);
- assert.deepEqual(files,['LICENSE.md','src/_pages/about.md','src/_includes/site/footer.njk','src/_includes/layouts/epub-metadata.xml','src/_data/site.json','src/_poems/_poems.json',...Array.from({length:40},(_,i)=>i+1).map(n=>'src/_poems/chapter-4/poem-'+String(n).padStart(3,'0')+'.md'),...Array.from({length:90},(_,i)=>i+11).map(n=>'src/_poems/chapter-3/poem-'+String(n).padStart(3,'0')+'.md'),'src/_poems/chapter-3/chapter-3.json']);
+ assert.deepEqual(files.filter(path=>!pairFixtureFiles.includes(path)),['LICENSE.md','src/_pages/about.md','src/_includes/site/footer.njk','src/_includes/layouts/epub-metadata.xml','src/_data/site.json','src/_poems/_poems.json',...Array.from({length:40},(_,i)=>i+1).map(n=>'src/_poems/chapter-4/poem-'+String(n).padStart(3,'0')+'.md'),...Array.from({length:90},(_,i)=>i+11).map(n=>'src/_poems/chapter-3/poem-'+String(n).padStart(3,'0')+'.md'),'src/_poems/chapter-3/chapter-3.json']);
  const steps=[...source.matchAll(/if: matrix\.group == 'apadana'([^]*?)(?=\n      -|$)/g)].map(match=>match[1]).join('\n');
  assert.match(steps,/node scripts\/apadana\/build\.mjs --source \.fixtures\/apadana-pinned --check/);
  assert.equal((steps.match(/python scripts\/web-reader-apadana-check\.py --source-root \.fixtures\/apadana-pinned/g)||[]).length,3);
@@ -129,7 +133,7 @@ test('fourth Apadāna chapter has its own bounded pinned-source and three-mode b
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)?.[1].split(',').map(name=>name.trim());
  assert.equal(selected.filter(name=>name==='apadanafourth').length,1);
- assert.equal(selected.length,37,'all 34 earlier browser groups plus three bounded scaled-source groups remain selected');
+ assert.equal(beforePairGroups(selected).length,37,'all 34 earlier browser groups plus three bounded scaled-source groups remain selected');
  assert.match(group,/timeout-minutes:[^\n]*matrix\.group == 'apadanafourth'[^\n]*20/);
  const steps=[...group.matchAll(/if: matrix\.group == 'apadanafourth'([^]*?)(?=\n      -|$)/g)].map(match=>match[1]);
  assert.equal(steps.length,4,'one source/refusal step and three browser modes');
@@ -152,7 +156,7 @@ test('Therā publisher selections has its own bounded pinned-source and three-mo
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)?.[1].split(',').map(name=>name.trim());
  assert.equal(selected.filter(name=>name==='apadanathera').length,1);
- assert.equal(selected.length,37,'all 34 earlier browser groups plus three bounded scaled-source groups remain selected');
+ assert.equal(beforePairGroups(selected).length,37,'all 34 earlier browser groups plus three bounded scaled-source groups remain selected');
  assert.match(group,/timeout-minutes:[^\n]*matrix\.group == 'apadanathera'[^\n]*20/);
  const steps=[...group.matchAll(/if: matrix\.group == 'apadanathera'([^]*?)(?=\n      -|$)/g)].map(match=>match[1]);
  assert.equal(steps.length,4,'one source/refusal step and three browser modes');
@@ -194,7 +198,7 @@ test('Next Therā publisher chapter has its own bounded pinned-source and three-
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)?.[1].split(',').map(name=>name.trim());
  assert.equal(selected.filter(name=>name==='apadanatheranext').length,1);
- assert.equal(selected.length,37,'all 34 earlier browser groups plus three bounded scaled-source groups remain selected');
+ assert.equal(beforePairGroups(selected).length,37,'all 34 earlier browser groups plus three bounded scaled-source groups remain selected');
  assert.match(group,/timeout-minutes:[^\n]*matrix\.group == 'apadanatheranext'[^\n]*20/);
  const steps=[...group.matchAll(/if: matrix\.group == 'apadanatheranext'([^]*?)(?=\n      -|$)/g)].map(match=>match[1]);
  assert.equal(steps.length,4,'one source/refusal step and three browser modes');
@@ -244,10 +248,10 @@ test('supplementary Therā acceptance retains independent source checks, three m
  const source=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)?.[1].split(',').map(name=>name.trim());
- assert.equal(selected.filter(name=>name==='apadanatheraexpansion').length,1);assert.equal(selected.length,37);
+ assert.equal(selected.filter(name=>name==='apadanatheraexpansion').length,1);assert.equal(beforePairGroups(selected).length,37);
  assert.match(group,/timeout-minutes:[^\n]*matrix\.group == 'apadanatheraexpansion'[^\n]*20/);
  const sharedXml=namedStep(group,'Check out exact public Apadāna original XML without credentials');
- assert.deepEqual(conditionGroups(sharedXml),['apadanatheraexpansion','apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial']);
+ assert.deepEqual(beforePairGroups(conditionGroups(sharedXml)),['apadanatheraexpansion','apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial']);
  const steps=conditionalSteps(group,'apadanatheraexpansion');assert.equal(steps.length,4,'source validation and three browser modes retain the shared exact XML checkout');
  const commands=[sharedXml,...steps].join('\n');assert.match(commands,/node scripts\/apadana\/build\.mjs --source \.fixtures\/apadana-pinned --check/);
  assert.match(commands,/APADANA_SOURCE_CHECKOUT=\.fixtures\/apadana-pinned APADANA_OFFICIAL_CHECKOUT=\.fixtures\/apadana-pinned node --test tests\/apadana-thera-fifth\.test\.mjs tests\/apadana-thera-sixth\.test\.mjs/);
@@ -268,8 +272,8 @@ test('scaled Therā CI retains all fifty-two earlier jobs and adds exactly three
  const selected=group.match(/group:\s*\[([^\]]+)\]/)[1].split(',').map(name=>name.trim());
  const added=['apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial'];
  const previous=['core','study','personal','provenance','comparison','notes','backup','conflicts','highlights','navigation','booksearch','chapters','citations','searchpins','headings','commentary','postsearch','vinayapartials','scriptrefresh','milinda','draftsafety','annumbered','milindapartial','anten','apadana','apadananext','apadanathird','apadanafourth','apadanathera','apadanatheranext','apadanatheraexpansion','apadanaedition','thagsixteen','textspacing'];
- assert.deepEqual(selected.filter(name=>!added.includes(name)),previous,'all earlier Chromium jobs retain their original identities and order');
- assert.deepEqual(selected.filter(name=>added.includes(name)),added);assert.equal(new Set(selected).size,37);
+ assert.deepEqual(beforePairGroups(selected).filter(name=>!added.includes(name)),previous,'all earlier Chromium jobs retain their original identities and order');
+ assert.deepEqual(selected.filter(name=>added.includes(name)),added);assert.equal(new Set(beforePairGroups(selected)).size,37);
  const jobs=source.split('\njobs:\n')[1];
  assert.deepEqual([...jobs.matchAll(/^  ([a-z][\w-]*):$/gm)].map(match=>match[1]),['hosted-memory','reader-browser-group','reader-browser','reader-compat','check']);
  const matrix=(text,key)=>text.match(new RegExp('^        '+key+': \\[([^\\]]+)\\]','m'))?.[1].split(',').map(value=>value.trim());
@@ -285,7 +289,8 @@ test('scaled Therā CI retains all fifty-two earlier jobs and adds exactly three
  }
  const otherJobs=1+1+matrix(compat,'engine').length+matrix(node,'os').length*matrix(node,'node').length+matrix(install,'os').length*matrix(install,'node').length+1+1;
  assert.equal(previous.length+otherJobs,52,'the preceding complete configured matrix remains present');
- assert.equal(selected.length+otherJobs,55,'only the three new bounded groups increase the configured matrix');
+ assert.equal(beforePairGroups(selected).length+otherJobs,55,'only the three new bounded groups increase the configured matrix');
+ assert.equal(selected.length+otherJobs,57,'the paired intake adds exactly two further bounded groups');
  const timeout=group.match(/^    timeout-minutes: (.+)$/m)?.[1];
  assert.match(timeout,/&& 20 \|\| 10 \}\}$/);
  for(const name of added)assert.ok(timeout.includes("matrix.group == '"+name+"'"),name+' has the finite twenty-minute bound');
@@ -295,11 +300,11 @@ test('scaled Therā groups require five sealed independent source inputs and all
  const source=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const xml=namedStep(group,'Check out exact public Apadāna original XML without credentials');
- assert.deepEqual(conditionGroups(xml),['apadanatheraexpansion','apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial']);
+ assert.deepEqual(beforePairGroups(conditionGroups(xml)),['apadanatheraexpansion','apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial']);
  assert.match(xml,/uses: actions\/checkout@v4/);assert.match(xml,/repository: VipassanaTech\/tipitaka-xml/);
  assert.match(xml,/ref: 2d134ff9ef60f70a1eb03c9370580228811a3070/);assert.match(xml,/path: \.fixtures\/apadana-vri-pinned/);
  assert.match(xml,/persist-credentials: false/);assert.match(xml,/sparse-checkout-cone-mode: false/);
- assert.deepEqual([...xml.matchAll(/^            (.+)$/gm)].map(match=>match[1]),['romn/s0510m1.mul.xml']);
+ assert.deepEqual([...xml.matchAll(/^            (.+)$/gm)].map(match=>match[1]).filter(path=>path!=='romn/s0510a.att.xml'),['romn/s0510m1.mul.xml']);
  const goldenFiles=['THERA_SEVENTH_GOLDENS.json','THERA_EIGHTH_GOLDENS.json','THERA_NINTH_GOLDENS.json','THERA_TENTH_GOLDENS.json','THERA_EDITORIAL_GAP_GOLDENS.json'];
  const approval=JSON.parse(readFileSync(new URL('../docs/evidence/apadana/THERA_SCALED_APPROVAL.json',import.meta.url),'utf8'));
  assert.equal(approval.status,'approved');assert.equal(approval.publisher_revision,'fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4');
@@ -320,7 +325,8 @@ test('scaled Therā groups require five sealed independent source inputs and all
   assert.match(validation,/node scripts\/shard-data\.mjs --unpack server\/data "\$RUNNER_TEMP\/scaled-inputs"/);
   const independent=validation.split('\n').filter(line=>line.trim().startsWith('python scripts/apadana/review_thera_scaled.py '));assert.equal(independent.length,1);
   assert.deepEqual([...independent[0].matchAll(/--goldens docs\/evidence\/apadana\/([A-Z_]+\.json)/g)].map(match=>match[1]),goldenFiles);
-  assert.match(independent[0],/--source-root \.fixtures\/apadana-pinned/);assert.match(independent[0],/--canon "\$RUNNER_TEMP\/scaled-inputs\/canon\.json\.gz"/);
+  assert.match(validation,/python scripts\/canon\/historical_thera_pair_snapshot\.py --canon "\$RUNNER_TEMP\/scaled-inputs\/canon\.json\.gz" --output "\$RUNNER_TEMP\/scaled-inputs\/canon-before-thera-pair\.json"/);
+  assert.match(independent[0],/--source-root \.fixtures\/apadana-pinned/);assert.match(independent[0],/--canon "\$RUNNER_TEMP\/scaled-inputs\/canon-before-thera-pair\.json"/);
   assert.match(independent[0],/--xml \.fixtures\/apadana-vri-pinned\/romn\/s0510m1\.mul\.xml --output-dir "\$RUNNER_TEMP\/scaled-independent-review"/);
   assert.ok(validation.includes('cp "$RUNNER_TEMP/scaled-independent-review/EXTRACTION_COMPARISON.json" standalone-'+name+'-independent.report.json'));
   const browser=commands.split('\n').filter(line=>line.includes('python scripts/web-reader-apadana-thera-scaled-check.py '));assert.equal(browser.length,3);
@@ -335,6 +341,65 @@ test('scaled Therā groups require five sealed independent source inputs and all
  }
 });
 
+
+test('paired Therā gates add two bounded source-pinned groups while retaining historical fixtures and named evidence gates',()=>{
+ const source=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');
+ const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
+ const selected=group.match(/group:\s*\[([^\]]+)\]/)[1].split(',').map(name=>name.trim());
+ assert.deepEqual(selected.filter(name=>PAIR_GROUPS.includes(name)),PAIR_GROUPS);
+ const insertion=selected.indexOf('apadanatheraeditorial')+1;
+ assert.deepEqual(selected.slice(insertion,insertion+2),PAIR_GROUPS);
+ assert.equal(selected.length,39);assert.equal(new Set(selected).size,39);
+ const timeout=group.match(/^    timeout-minutes: (.+)$/m)?.[1];
+ for(const name of PAIR_GROUPS)assert.ok(timeout.includes("matrix.group == '"+name+"'"));
+ assert.match(timeout,/&& 20 \|\| 10 \}\}$/);
+ const fixture=namedStep(group,'Check out exact public Apadāna source fixtures without credentials');
+ assert.deepEqual(conditionGroups(fixture).filter(name=>PAIR_GROUPS.includes(name)),PAIR_GROUPS);
+ assert.match(fixture,/repository: apadana-translation\/apadana-site/);assert.match(fixture,/ref: fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/);
+ assert.match(fixture,/persist-credentials: false/);assert.match(fixture,/sparse-checkout-cone-mode: false/);
+ const files=[...fixture.matchAll(/^            (.+)$/gm)].map(match=>match[1]);
+ assert.deepEqual(files.filter(path=>pairFixtureFiles.includes(path)),pairFixtureFiles);
+ assert.equal(new Set(files).size,files.length);
+ const xml=namedStep(group,'Check out exact public Apadāna original XML without credentials');
+ assert.deepEqual(conditionGroups(xml).filter(name=>PAIR_GROUPS.includes(name)),PAIR_GROUPS);
+ assert.match(xml,/repository: VipassanaTech\/tipitaka-xml/);assert.match(xml,/ref: 2d134ff9ef60f70a1eb03c9370580228811a3070/);
+ assert.match(xml,/persist-credentials: false/);assert.match(xml,/sparse-checkout-cone-mode: false/);
+ assert.deepEqual([...xml.matchAll(/^            (.+)$/gm)].map(match=>match[1]),['romn/s0510m1.mul.xml','romn/s0510a.att.xml']);
+ const baseline=namedStep(group,'Fetch exact paired-intake baseline for independent preservation checks');
+ assert.deepEqual(conditionGroups(baseline),PAIR_GROUPS);
+ assert.match(baseline,/git fetch --no-tags --depth=1 origin b5669a334add97ebc0c3c32f9b3fb45ed90d9780/);
+ assert.match(baseline,/git cat-file -e b5669a334add97ebc0c3c32f9b3fb45ed90d9780\^\{commit\}/);
+ assert.doesNotMatch(baseline,/--unshallow|fetch-depth: 0|git reset|git checkout/);
+ const goldenFiles=['THERA_ELEVENTH_GOLDENS.json','THERA_TWELFTH_GOLDENS.json','THERA_THIRTEENTH_GOLDENS.json','THERA_FOURTEENTH_GOLDENS.json'];
+ const approval=JSON.parse(readFileSync(new URL('../docs/evidence/apadana/THERA_PAIR_INTAKE_APPROVAL.json',import.meta.url),'utf8'));
+ assert.equal(approval.status,'approved');assert.equal(approval.base_commit,'b5669a334add97ebc0c3c32f9b3fb45ed90d9780');
+ assert.deepEqual(approval.goldens.map(input=>input.file),goldenFiles);
+ for(const input of approval.goldens){const bytes=readFileSync(new URL('../docs/evidence/apadana/'+input.file,import.meta.url));assert.equal(createHash('sha256').update(bytes).digest('hex'),input.sha256);}
+ const retained=group.split('          path: |')[1].split('          if-no-files-found:')[0].trim().split(/\s+/);
+ for(const [name,batch]of [['apadanatherapair101','101-120'],['apadanatherapair121','121-140']]){
+  const steps=conditionalSteps(group,name);assert.equal(steps.length,4);
+  for(const step of steps)assert.match(step,/^      - name: /);
+  const validation=steps[0],commands=steps.join('\n');
+  assert.ok(group.indexOf(baseline)<group.indexOf(validation));
+  assert.match(validation,/node scripts\/apadana\/build\.mjs --source \.fixtures\/apadana-pinned --check/);
+  assert.match(validation,/APADANA_SOURCE_CHECKOUT=\.fixtures\/apadana-pinned APADANA_OFFICIAL_CHECKOUT=\.fixtures\/apadana-pinned VRI_SOURCE_CHECKOUT=\.fixtures\/apadana-vri-pinned node --test tests\/apadana-thera-pair-boundaries\.test\.mjs tests\/apadana-thera-pair-intake\.test\.mjs/);
+  const independent=validation.split('\n').filter(line=>line.trim().startsWith('python scripts/apadana/review_thera_pair_intake.py '));assert.equal(independent.length,1);
+  assert.deepEqual([...independent[0].matchAll(/--goldens docs\/evidence\/apadana\/([A-Z_]+\.json)/g)].map(match=>match[1]),goldenFiles);
+  assert.ok(independent[0].includes('--canon "$RUNNER_TEMP/'+name+'-inputs/canon.json.gz"'));
+  assert.match(independent[0],/--source-root \.fixtures\/apadana-pinned/);assert.match(independent[0],/--xml \.fixtures\/apadana-vri-pinned\/romn\/s0510m1\.mul\.xml/);
+  assert.doesNotMatch(independent[0],/canon-before-thera-pair/,'new source review must validate the actual repaired canonical snapshot');
+  assert.ok(validation.includes('cp "$RUNNER_TEMP/'+name+'-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-'+name+'-independent.report.json'));
+  const browser=commands.split('\n').filter(line=>line.includes('python scripts/web-reader-thera-pair-intake-check.py '));assert.equal(browser.length,3);
+  for(const line of browser)assert.ok(line.includes('--batch '+batch+' --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned'));
+  assert.ok(browser.some(line=>line.endsWith('--report standalone-'+name+'.report.json')&&!line.includes('--a11y')&&!line.includes('--server-dir')));
+  assert.ok(browser.some(line=>line.endsWith('--a11y --report standalone-'+name+'-a11y.report.json')));
+  assert.ok(browser.some(line=>line.includes('--server-dir "$RUNNER_TEMP/'+name+'-package/package/server" --report installed-'+name+'.report.json')));
+  assert.ok(steps[3].includes('npm pack --pack-destination "$RUNNER_TEMP/'+name+'-package"'));
+  for(const report of ['standalone-'+name+'.report.json','standalone-'+name+'-a11y.report.json','standalone-'+name+'-independent.report.json','installed-'+name+'.report.json'])assert.equal(retained.filter(path=>path===report).length,1);
+  assert.doesNotMatch(commands,/--live|curl |wget |https:\/\/apadanatranslation\.com/);
+ }
+ assert.ok(retained.every(path=>path.endsWith('.report.json')),'source artifacts never become uploaded browser evidence');
+});
 
 test('isolated mixed-load reader source imports include only the shared integrity helper as a read-only input',()=>{
  const workflow=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');

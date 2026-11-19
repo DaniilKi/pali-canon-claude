@@ -1,3 +1,4 @@
+import { assertCanonicalLocator, isRepairedApadanaPair } from './locator-policy.mjs';
 import { APADANA_BASE, APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_PROFILES, APADANA_TRANSLATOR } from './apadana-profiles.mjs';
 import { validateLink as validateApadanaLink } from './apadana.mjs';
 import {assertRegisteredPartial} from './partial-source-registry.mjs';
@@ -411,6 +412,7 @@ export function resolve(reference) {
       else notes.push(`${reference} has identical endpoints; showing ${hit.unit.acronym}.`);
     }
   }
+  if (hit && c.segment) assertCanonicalLocator(hit.unit.id, readingSource(hit.unit).locator_revision || source().commit, { positional: true });
   if (!hit && c.kind === 'id' && c.collection === 'snp' && c.path.length === 1) {
     throw new CitationError(`Snp ${c.path[0]} looks like a verse number. Cite the Sutta Nipāta by chapter and sutta, e.g. Snp 1.8 (Mettasutta).`);
   }
@@ -519,6 +521,12 @@ export function readingSource(unit) {
   const locator_revision = original.commit + '-' + unit.index_revision;
   if (locator_revision.length > 100) throw Error('Unsupported citation locator revision.');
   return { ...original, locator_revision };
+}
+
+/** Only this finite repaired pair requires a source pin for native numeric positions. */
+export function positionalReadingPin(unit) {
+  const revision = readingSource(unit).locator_revision || source().commit;
+  return isRepairedApadanaPair(unit.id, revision) ? { source_commit: revision } : {};
 }
 
 export function describe(u, notes = []) {
@@ -664,7 +672,7 @@ export function search(query, { collection, limit = 10, offset = 0, groups } = {
       if (total <= offset || hits.length >= limit) continue;
       const excerpt = searchExcerpt(passage.text, wanted[0].find((w) => text.includes(w)), fold);
       hits.push({ ...unitSummary(u), source: readingSource(u), match_vri_paragraph: d.canon.books[bi].blocks[k][1] || undefined,
-        excerpt, ...searchReading(segments(u, { includeSourcePositions: true }), { tool: 'get_text', uid: u.id }, passage.start, passage.end, u.id) });
+        excerpt, ...searchReading(segments(u, { includeSourcePositions: true }), { tool: 'get_text', uid: u.id, ...positionalReadingPin(u) }, passage.start, passage.end, u.id) });
     }
   }
   return {

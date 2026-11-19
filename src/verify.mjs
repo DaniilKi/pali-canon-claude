@@ -2,7 +2,7 @@
 // Pāli quotes are matched offline against the bundled VRI text; English quotes against the linked
 // English translations, fetched live (cached) through english.mjs. The answer only ever reports
 // what the texts searched contain: it never says who did or did not say something.
-import { fold, load, resolve, segments, source, linksFor, translationId, alignmentInfo, translationScope } from './canon.mjs';
+import { fold, load, resolve, segments, source, linksFor, translationId, alignmentInfo, translationScope, positionalReadingPin } from './canon.mjs';
 import { APADANA_LICENSE_URL } from './apadana-profiles.mjs';
 import { quotationText } from './apadana.mjs';
 import { isPartial, isShared, isScoped, scopeHash } from './translation-scope.mjs';
@@ -335,7 +335,7 @@ function paliMatch(cand, refined) {
   const previewEnd = excerpt.length > 600 ? sourceWordSpans(excerpt).filter(span => span[1] <= 600).at(-1)?.[1] ?? 0 : excerpt.length;
   const preview = excerpt.slice(0, previewEnd) + (excerpt.length > 600 ? '…' : '');
   const readingCommands = [];
-  for (let offset = start; offset <= end; offset += 200) readingCommands.push({ tool: 'get_text', uid: unit.id,
+  for (let offset = start; offset <= end; offset += 200) readingCommands.push({ tool: 'get_text', uid: unit.id, ...positionalReadingPin(unit),
     offset, limit: Math.min(200, end + 1 - offset) });
   const segment = rendered[start], notes = [];
   const alignment = alignmentInfo(unit);
@@ -412,7 +412,7 @@ function literalPaliSource(quote, limit) {
       segment_ref: seg.ref, vri_paragraph: seg.vri_paragraph, pts_page_begins: seg.pts_page_begins,
       similarity: 1, matched_text: block[2].slice(block[2].indexOf(quote), block[2].indexOf(quote) + quote.length),
       edition: 'Chaṭṭha Saṅgāyana Tipiṭaka (VRI), Pāli', vri_file: book.file,
-      read_with: { tool: 'get_text', uid: unit.id, offset: at, limit: 1 },
+      read_with: { tool: 'get_text', uid: unit.id, ...positionalReadingPin(unit), offset: at, limit: 1 },
       ...(alignment ? { alignment } : {}), ...(notes.length ? { notes } : {}) });
   }
   return matches.length ? { matches, ties: { texts: texts.size, at_least: false }, scope: paliScope(),

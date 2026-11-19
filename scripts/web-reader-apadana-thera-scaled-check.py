@@ -22,6 +22,8 @@ import traceback
 import urllib.request
 from playwright.sync_api import expect, sync_playwright
 from web_reader_test_helpers import read_tool
+from web_reader_apadana_intake import reviewed_intake
+from canon.apadana_thera_pair_spans import canon_before_thera_pair
 
 ROOT = Path(__file__).resolve().parents[1]
 HARNESS_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
@@ -128,7 +130,8 @@ def main():
     for uid, row in old['links'].items():
         assert manifest['links'][uid] == row, 'Baseline source metadata changed: ' + uid
     assert {k:v for k,v in manifest['source'].items() if k != 'policy'} == {k:v for k,v in old['source'].items() if k != 'policy'}
-    assert manifest['source']['policy'] == old['source']['policy'].replace('89 finite','129 finite').replace('49 explicitly mapped Therā','89 explicitly mapped Therā')
+    current_intake = reviewed_intake(ROOT)
+    assert manifest['source']['policy'] == old['source']['policy'].replace('89 finite',str(len(current_intake['expected_profile_ids']))+' finite').replace('49 explicitly mapped Therā',str(sum(r['publisher_chapter']=='chapter-3' for r in current_intake['baseline_records']+current_intake['approved_records']))+' explicitly mapped Therā')
     profile_probe = """import assert from'node:assert/strict';import{APADANA_PROFILES as current}from'./src/apadana-profiles.mjs';
       let s='';for await(const c of process.stdin)s+=c;const p=JSON.parse(s),url=x=>'data:text/javascript;base64,'+Buffer.from(x).toString('base64');
       const old=await import(url(p.root.replace('./apadana-thera-profiles.mjs',url(p.thera))));
@@ -145,6 +148,8 @@ def main():
             if poem['source_scope_decision'].startswith('APPROVE'):
                 assert poem['id'] not in intake_poems
                 intake_poems[poem['id']] = poem['poem']
+    assert set(intake_poems).issubset(current_intake['expected_profile_ids']), 'Historical approvals not retained'
+    intake_poems = {r['id']:r['poem'] for r in current_intake['baseline_records']+current_intake['approved_records']}
     assert set(manifest['links']) == set(intake_poems), 'Unreviewed source activation'
     reviewed_order = sorted((uid for uid in intake_poems if uid.startswith('tha-ap')),key=intake_poems.__getitem__)
     evidence, artifacts = [], []
@@ -209,7 +214,7 @@ def main():
     run = subprocess.run(['node', '--input-type=module', '-e', probe], cwd=ROOT, input=json.dumps(str(server_dir/'data/canon.json.gz')), text=True, capture_output=True)
     assert run.returncode == 0
     current = json.loads(run.stdout)
-    assert current == canon, 'Canonical corpus changed during source-only intake'
+    assert canon_before_thera_pair(current) == canon, 'Only independently verified atomic107/108 metadata may differ from historical canonical snapshot'
     for uid in old['links']:
         a = next(u for u in canon['units'] if u['id'] == uid)
         b = next(u for u in current['units'] if u['id'] == uid)

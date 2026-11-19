@@ -1,0 +1,68 @@
+{
+  "tha-ap107": {
+    "before": {
+      "id": "tha-ap107",
+      "book": 36,
+      "start": 5231,
+      "end": 5252,
+      "title": "Muṭṭhipupphiyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 107",
+      "vri": "24–29",
+      "pts": {
+        "volume": 1,
+        "page": 142,
+        "end_page": 142
+      }
+    },
+    "after": {
+      "id": "tha-ap107",
+      "book": 36,
+      "start": 5231,
+      "end": 5248,
+      "title": "Muṭṭhipupphiyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 107",
+      "vri": "24–28",
+      "pts": {
+        "volume": 1,
+        "page": 142,
+        "end_page": 142
+      },
+      "index_revision": "apadana-thera105-106-v1"
+    }
+  },
+  "tha-ap108": {
+    "before": {
+      "id": "tha-ap108",
+      "book": 36,
+      "start": 5252,
+      "end": 5271,
+      "title": "Udakapūjakattheraapadāna",
+      "collection": "ap",
+      "acronym": "Tha Ap 108",
+      "vri": "30–35",
+      "pts": {
+        "volume": 1,
+        "page": 142,
+        "end_page": 143
+      }
+    },
+    "after": {
+      "id": "tha-ap108",
+      "book": 36,
+      "start": 5248,
+      "end": 5271,
+      "title": "Udakapūjakattheraapadāna",
+      "collection": "ap",
+      "acronym": "Tha Ap 108",
+      "vri": "29–35",
+      "pts": {
+        "volume": 1,
+        "page": 142,
+        "end_page": 143
+      },
+      "index_revision": "apadana-thera105-106-v1"
+    }
+  }
+}

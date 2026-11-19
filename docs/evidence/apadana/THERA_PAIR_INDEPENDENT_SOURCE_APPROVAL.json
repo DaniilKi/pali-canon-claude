@@ -1,0 +1,195 @@
+{
+  "decision": "INDEPENDENT SOURCE-SCOPE APPROVAL for exact 39 publisher poems 101–139 only. Runtime, package, privacy and exact final commit CI remain separate gates.",
+  "baseline": "b5669a334add97ebc0c3c32f9b3fb45ed90d9780",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "required_current_canon_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "approved_ids": [
+    "tha-ap103",
+    "tha-ap104",
+    "tha-ap105",
+    "tha-ap106",
+    "tha-ap107",
+    "tha-ap108",
+    "tha-ap109",
+    "tha-ap110",
+    "tha-ap111",
+    "tha-ap112",
+    "tha-ap113",
+    "tha-ap114",
+    "tha-ap115",
+    "tha-ap116",
+    "tha-ap117",
+    "tha-ap118",
+    "tha-ap119",
+    "tha-ap120",
+    "tha-ap121",
+    "tha-ap122",
+    "tha-ap123",
+    "tha-ap124",
+    "tha-ap125",
+    "tha-ap126",
+    "tha-ap127",
+    "tha-ap128",
+    "tha-ap129",
+    "tha-ap130",
+    "tha-ap131",
+    "tha-ap132",
+    "tha-ap133",
+    "tha-ap134",
+    "tha-ap135",
+    "tha-ap136",
+    "tha-ap137",
+    "tha-ap138",
+    "tha-ap139",
+    "tha-ap140",
+    "tha-ap141"
+  ],
+  "approved_poems": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139
+  ],
+  "held": [
+    {
+      "poem": 70,
+      "reason": "Previous unresolved orphan source display fragments; hold remains."
+    },
+    {
+      "poem": 140,
+      "id": "tha-ap142",
+      "reason": "Orphan duplicate diacritic-on fragments and mixed summary spans; no cooked summary or activation approval"
+    }
+  ],
+  "pair_condition": "Publisher 105/106 source identity and root pins approved only with both exact canonical 107/108 metadata repairs at block 5248, index revision apadana-thera105-106-v1 and all other canonical/commentary bytes preserved. Projected pair proof passes; installed data and runtime acceptance remain outstanding.",
+  "methods": {
+    "full_english_read": "All 40 original publisher poem bodies, every note definition, chapter preface, summary and colophon read by this independent reviewer.",
+    "direct_pali_risk_read": {
+      "canonical_ids": [
+        "tha-ap111",
+        "tha-ap113",
+        "tha-ap114",
+        "tha-ap116",
+        "tha-ap121",
+        "tha-ap122",
+        "tha-ap123",
+        "tha-ap124",
+        "tha-ap127",
+        "tha-ap129",
+        "tha-ap130",
+        "tha-ap132",
+        "tha-ap133",
+        "tha-ap134",
+        "tha-ap135",
+        "tha-ap136",
+        "tha-ap137",
+        "tha-ap139",
+        "tha-ap140",
+        "tha-ap142"
+      ],
+      "method": "Complete original compact VRI stories and variants read for 20 risk-selected units, with additional opening/boundary/colophon controls and full 14,645 original XML tuple replay for all candidates. The two source agents separately read every Pāli story and neighbor completely."
+    },
+    "technical": "Fresh fixed-epoch Python standard-library extraction with no production or source-agent parser imports. Every approved raw artifact, body, note, preface, layout, root, segment and apparatus pin verified. Six rights files and category routing rehashed per chapter; full original XML tuple comparison, exact snapshot and four sealed goldens; replay byte-exact, eight negative controls refuse.",
+    "limits": "No specialist linguistic endorsement, line-complete VRI translation claim, physical-device/human assistive acceptance, hosting or CI claim."
+  },
+  "totals": {
+    "poems": 39,
+    "body_paragraphs": 436,
+    "printed_entries": 320,
+    "poem_notes": 197,
+    "summary_notes_separate": 1,
+    "publisher_complete_poems_added": 39,
+    "net_coverage_delta_expected": 39,
+    "coverage_delta_requires_runtime_validation": true
+  },
+  "source_packet_seals": {
+    "101-120": {
+      "seal_sha256": "88ad717c747299af9dbacf8386184795f349c901f5afd3a93fdc51a733706127",
+      "files_verified": 51
+    },
+    "121-140": {
+      "seal_sha256": "23c6d8952f24f8034d8f549b74c5311df8755ce523224e9a4812aec8dfe2e968",
+      "files_verified": 48
+    }
+  },
+  "proposed_profile_files": [
+    {
+      "path": "/tmp/pali-thera-pair-source/101-120/PROPOSED_PROFILES.json",
+      "sha256": "1391051969c700fb91b4c18b8b7a8d867f05c539f8f4915c8402820a26ab65db"
+    },
+    {
+      "path": "/tmp/pali-thera-pair-source/121-140/PROPOSED_PROFILES.json",
+      "sha256": "337b5632e4dc0d9cb52fa630072c83e00d714afec52e9b1563d5606d9dbb47a6"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/tmp/pali-thera-pair-review/BASELINE_FREEZE.json",
+      "sha256": "a8fc6a7b4838e0a43d0603dc3aa8220927255fd29b3bd683c669f008cfa25c53"
+    },
+    {
+      "path": "/tmp/pali-thera-pair-review/PAIR_INDEPENDENT_PROBE.json",
+      "sha256": "1e01c1389320b6e90913d9ca6e006ec979c558c58ab77173170b93f0038c3e1d"
+    },
+    {
+      "path": "/tmp/pali-thera-pair-review/review_thera_pair_intake.py",
+      "sha256": "68e752bbfee5b6f20588caab5e2dac275061da88900a0b310718949fc52716cc"
+    },
+    {
+      "path": "/tmp/pali-thera-pair-review/replay/INDEPENDENT_SOURCE_REPLAY.json",
+      "sha256": "99955f0328f4ceb2c628aa5615716263811248206e7a1eaefd063ffcddbc4266"
+    },
+    {
+      "path": "/tmp/pali-thera-pair-review/SOURCE_NEGATIVE_CONTROLS.json",
+      "sha256": "9c5c64c4162682a7dd51e846f31ea447a035ab2c9d2420192b28a0f077f8d585"
+    }
+  ],
+  "requirements": [
+    "Preserve all 129 previous profile/link objects and every existing source or rights hold.",
+    "Retain CC BY-NC-SA 4.0, Jonathan S. Walters/Whitman attribution, exact source revision, licence and notices. English bodies, notes and apparatus stay live-only; no audio approval.",
+    "Preserve source 101 two-hash heading, 115 malformed [1720), 109 reversed labels, 130/134 missing global labels, 131 original multiple-label paragraphs and reversed 1877/1876, 132 joined colophons and all substantive edition caveats.",
+    "Keep source 110 note 5 summary-owned; 120/130 summaries have no notes. Source 107/133 VRI recitation endings remain untranslated; apparatus is not poem quotation evidence.",
+    "Strict whole widget resource equality and the original __PALI_WIDGET_HASH_SOURCE__ build literal contract must pass on the final exact commit.",
+    "Never migrate private data, citations or notes automatically. Old versioned and unversioned pair positions refuse before replacement words; explicit fresh reopening selects the whole current unit."
+  ],
+  "project_writes": 0,
+  "git_mutations": 0,
+  "builds": 0,
+  "ci_polling": 0
+}

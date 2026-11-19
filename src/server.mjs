@@ -1,3 +1,4 @@
+import { assertCanonicalLocator } from './locator-policy.mjs';
 // Tool, prompt and resource registration shared by every transport.
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
@@ -89,6 +90,7 @@ export function createServer({executeTool} = {}) {
         }
         return { isError: true, content: [{ type: 'text', text: JSON.stringify({
           error: error.message || 'Request failed.',
+          ...(error.reopen && /^#read\?uid=tha-ap10[78]$/.test(error.reopen) && ['READING_SOURCE_CHANGED', 'READING_LOCATOR_AMBIGUOUS'].includes(error.code) ? { code: error.code, reopen: error.reopen } : {}),
           recovery: 'Check the citation with resolve_reference or browse_canon. Never invent missing text.',
         }) }] };
       }
@@ -123,21 +125,25 @@ export function createServer({executeTool} = {}) {
   tool('get_text', 'Read Pāli from the VRI edition: give uid for a sutta/section, or book for a complete source book including its front matter (IDs from browse_canon node "books"). Give exactly one of uid and book. Long texts are paginated by segment, with VRI paragraphs, PTS and Thai/Myanmar/VRI page breaks and optional raw/structured variants. With uid, optionally add English (translation: "default" or a translation_id from get_metadata) or aligned commentary. The Pāli works offline. Set script for Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao or Lanna (transliterated from VRI Roman); uid may also be typed in those scripts.', {
     uid: citation.optional(),
     book: z.string().trim().min(1).max(100).optional().describe('A complete VRI root book: use an exact ID from browse_canon node "books" (e.g. vin02m1). Give book instead of uid. Source-file segment references are not standard sutta/rule citations; English and aligned commentary require uid.'),
-    offset: z.number().int().min(0).max(100000).default(0).describe('Segment offset for continuation.'),
+    offset: z.number().int().min(0).max(100000).optional().describe('Segment offset for continuation. For the repaired tha-ap107/108 pair, every explicit position including 0 requires source_commit from the reader.'),
+    source_commit: z.string().regex(/^[a-f0-9]{40}(?:-[a-zA-Z0-9._-]{1,40})?$/).optional().describe('Expected source locator revision from the selected reader. Preserve it for positional reads; a changed source or mapping refuses before wording.'),
     limit: z.number().int().min(1).max(200).default(60).describe('Segments per page.'),
     includeVariants: z.boolean().default(false).describe('Include variant readings recorded by VRI.'),
     variants: z.enum(variantsMod.VARIANT_MODES).optional().describe('Variant readings recorded by VRI: "raw" = the notes verbatim (same as includeVariants: true); "structured" = each note split into readings with the editions (sigla) that carry them, plus omissions ("( ) natthi": the passage in parentheses is absent from those editions), note kept verbatim; "none". Overrides includeVariants.'),
     translation: z.string().trim().min(1).max(200).optional().describe('"default" for the preferred English translation, a translation_id, an unambiguous translator name, or omit for Pāli only. A supplied empty selector is an error.'),
     script: scriptParam,
     commentary: z.boolean().default(false).describe('Add the traditional commentary (Aṭṭhakathā) on this text, labelled as commentary, not canon.'),
-  }, async ({ uid, book, offset, limit, includeVariants, variants, translation, script, commentary }) => {
+  }, async ({ uid, book, offset: requestedOffset, source_commit: sourceCommit, limit, includeVariants, variants, translation, script, commentary }) => {
+    const offset = requestedOffset ?? 0;
     if ((uid === undefined) === (book === undefined)) throw new Error('Give exactly one of uid (an individual citation) or book (an ID from browse_canon with node "books").');
     if (book !== undefined) {
       if (translation !== undefined || commentary) throw new Error('English translations and aligned commentary require an individual uid. Read the source book with book, then use a standard citation with uid for those options.');
+      assertCanonicalLocator(null, canon.source().commit, { expected: sourceCommit });
       return localizeText(sourceBooks.readBook({ book, offset, limit, includeVariants, variants }), script);
     }
     const input = romanizeInput(uid);
     const { unit, notes } = canon.resolve(input.text);
+    assertCanonicalLocator(unit.id, canon.readingSource(unit).locator_revision || canon.source().commit, { expected: sourceCommit, positional: requestedOffset !== undefined });
     const { segments: all, mode: variantMode } = variantsMod.textSegments(unit, { includeVariants, variants });
     const page = all.slice(offset, offset + limit);
     const result = {

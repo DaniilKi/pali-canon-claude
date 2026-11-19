@@ -101,7 +101,8 @@ test('all 77 authentic old source/ref/offset bindings refuse before any source w
 
 test('native get_text is an unversioned current reading, not automatic migration of an old bare offset', async () => {
   const tools = (await client.listTools()).tools, schema = tools.find(t => t.name === 'get_text').inputSchema;
-  assert.equal(Object.hasOwn(schema.properties, 'source_commit'), false);
+  assert.equal(schema.properties.source_commit.type, 'string');
+  assert.equal(schema.required?.includes('source_commit') ?? false, false);
   for (const [uid, row] of Object.entries(rows)) {
     const page = await invoke('get_text', { uid, limit: 80 });
     assert.equal(page.source.commit, edition); assert.equal(page.source.locator_revision, revision); assert.equal(page.total_segments, row.count);

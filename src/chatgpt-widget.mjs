@@ -1,3 +1,4 @@
+import { assertCanonicalLocator, APADANA_PAIR_LOCATOR_REVISION } from './locator-policy.mjs';
 /**
  * ChatGPT app (OpenAI Apps SDK / MCP Apps) reading widget, served by the hosted HTTP endpoint only.
  *
@@ -26,7 +27,7 @@ import { getCommentary, commentaryReadingSource } from './commentary.mjs';
 import { HostedToolError } from './hosted-tool-error.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v25';
+export const WIDGET_VERSION = 'v26';
 // Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.
 export const NAVIGATION_TIMEOUT_MS = 90000;
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
@@ -39,7 +40,7 @@ export const SKYBRIDGE_MIME = 'text/html+skybridge';
 const WIDGET_HASH_SOURCE = typeof __PALI_WIDGET_HASH_SOURCE__ === 'string' ? __PALI_WIDGET_HASH_SOURCE__ : contentSha256.toString();
 
 const APADANA_PINS = ['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256'];
-const PINNED_NEW_PARATEXT_IDS = ["tha-ap44","tha-ap63","tha-ap64","tha-ap65","tha-ap66","tha-ap67","tha-ap68","tha-ap69","tha-ap70","tha-ap71","tha-ap73","tha-ap74","tha-ap75","tha-ap76","tha-ap77","tha-ap78","tha-ap79","tha-ap80","tha-ap81","tha-ap82","tha-ap83","tha-ap84","tha-ap85","tha-ap86","tha-ap87","tha-ap88","tha-ap89","tha-ap90","tha-ap91","tha-ap92","tha-ap93","tha-ap94","tha-ap95","tha-ap96","tha-ap97","tha-ap98","tha-ap99","tha-ap100","tha-ap101","tha-ap102"];
+const PINNED_NEW_PARATEXT_IDS = ["tha-ap44","tha-ap63","tha-ap64","tha-ap65","tha-ap66","tha-ap67","tha-ap68","tha-ap69","tha-ap70","tha-ap71","tha-ap73","tha-ap74","tha-ap75","tha-ap76","tha-ap77","tha-ap78","tha-ap79","tha-ap80","tha-ap81","tha-ap82","tha-ap83","tha-ap84","tha-ap85","tha-ap86","tha-ap87","tha-ap88","tha-ap89","tha-ap90","tha-ap91","tha-ap92","tha-ap93","tha-ap94","tha-ap95","tha-ap96","tha-ap97","tha-ap98","tha-ap99","tha-ap100","tha-ap101","tha-ap102","tha-ap103","tha-ap104","tha-ap105","tha-ap106","tha-ap107","tha-ap108","tha-ap109","tha-ap110","tha-ap111","tha-ap112","tha-ap113","tha-ap114","tha-ap115","tha-ap116","tha-ap117","tha-ap118","tha-ap119","tha-ap120","tha-ap121","tha-ap122","tha-ap123","tha-ap124","tha-ap125","tha-ap126","tha-ap127","tha-ap128","tha-ap129","tha-ap130","tha-ap131","tha-ap132","tha-ap133","tha-ap134","tha-ap135","tha-ap136","tha-ap137","tha-ap138","tha-ap139","tha-ap140","tha-ap141"];
 const WIDGET_APADANA = Object.fromEntries(Object.entries(APADANA_PROFILES).map(([id, p]) => [id, {
   translation_id: canon.translationId(p), url: p.url, fetched_url: p.raw_url, note_count: p.note_count,
   mapping_notes: p.mapping_notes,
@@ -80,7 +81,8 @@ export const TOOL_META = {
 };
 
 /** Data for the widget: Pāli segments (VRI) plus one English translation, each with its attribution. */
-export async function readPassage({ uid, book, commentary, segment, context = 0, source_commit: sourceCommit, anchor_sha256: anchorHash, translation, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, english_prefix_sha256: englishPrefix, english_translation_revision: englishRevision, englishCharacters = 6000, script }) {
+export async function readPassage({ uid, book, commentary, segment, context = 0, source_commit: sourceCommit, anchor_sha256: anchorHash, translation, english: wantEnglish = true, offset: requestedOffset, limit = 40, english_offset: englishOffset = 0, english_prefix_sha256: englishPrefix, english_translation_revision: englishRevision, englishCharacters = 6000, script }) {
+  const offset = requestedOffset ?? 0;
   if ([uid, book, commentary].filter(value => value !== undefined).length !== 1) throw new Error('Give exactly one of uid (canonical/post-canonical), book (complete root file), or commentary (aligned citation or direct commentary reference).');
   const checkSource = source => { if (sourceCommit !== undefined && sourceCommit !== (source.locator_revision || source.commit)) throw new Error('The requested VRI source version or locator revision changed. Reopen the selection from the current source; no continuation or context was substituted.'); };
   if (!Number.isInteger(context) || context < 0 || context > 20) throw new Error('Context must be an integer from 0 to 20 neighbouring segments on each side.');
@@ -112,7 +114,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
     const selector = book !== undefined ? { book: exact.book_id } : { uid: exact.text_id || exact.citation };
     const args = { ...selector, segment, english: false, source_commit: exact.source.locator_revision || exact.source.commit, anchor_sha256: fingerprint, ...(script ? { script: scriptName(script) } : {}) };
     const start = Math.max(0, index - context);
-    const page = context ? await readPassage({ ...selector, offset: start, limit: index - start + context + 1, english: false, script }) : exact;
+    const page = context ? await readPassage({ ...selector, offset: start, limit: index - start + context + 1, english: false, script, source_commit: args.source_commit }) : exact;
     const caution = `${context ? 'This is surrounding Pāli from the same source selection.' : 'This is one exact Pāli source segment.'} English translations are linked to whole texts, with no verified segment-level English alignment here. Read the whole citation without segment to inspect English availability.`;
     return { ...page, segment_ref: segment, ...(context ? { context_for: segment } : {}), notes: [...(page.notes || []), caution],
       pali: { ...page.pali, ...(context ? {} : { next_offset: null, continue_with: null }),
@@ -206,6 +208,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
   }
   const { unit, notes } = resolved;
   checkSource(canon.readingSource(unit));
+  assertCanonicalLocator(unit.id, canon.readingSource(unit).locator_revision || canon.source().commit, { expected: sourceCommit, positional: requestedOffset !== undefined || englishOffset > 0 });
   const described = canon.describe(unit, notes);
   const all = canon.segments(unit);
   const page = all.slice(offset, offset + limit);
@@ -291,7 +294,7 @@ export function registerChatgptWidget(server, { executeTool } = {}) {
       script: z.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
       translation: z.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or an unambiguous translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
       english: z.boolean().default(true).describe('Fetch an English translation (live). false shows the Pāli only.'),
-      offset: z.number().int().min(0).max(100000).default(0).describe('Pāli segment offset for continuation.'),
+      offset: z.number().int().min(0).max(100000).optional().describe('Pāli segment offset for continuation. Repaired tha-ap107/108 positions, including 0, require the returned source_commit.'),
       limit: z.number().int().min(1).max(80).default(40).describe('Pāli segments to show.'),
       english_translation_revision: z.string().regex(/^[a-f0-9]{40}$/).optional().describe('Exact source revision for a pinned Apadāna selection or continuation.'),
       english_prefix_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Unchanged prefix hash from english.continue_with. Rejects continuation when preceding upstream text changed. Requires English and a positive english_offset.'),
@@ -615,7 +618,7 @@ export const WIDGET_HTML = `<!doctype html>
       Object.keys(expected).every(function (key) { return JSON.stringify(s[key]) === JSON.stringify(expected[key]); }) &&
       typeof s.text === 'string' && s.text.trim() && s.text.length <= 50000 && Array.isArray(s.translator_notes) && s.translator_notes.length === expected.note_numbers.length &&
       s.translator_notes.every(function (n, i) { return n && Object.keys(n).sort().join(',') === 'number,text' && n.number === expected.note_numbers[i] && typeof n.text === 'string' && n.text.trim() && n.text.length <= 50000; }) &&
-      (['tha-ap82','tha-ap92','tha-ap102'].indexOf(expected.parent_id) === -1 || checkedPinnedContent(s, expected));
+      (['tha-ap82','tha-ap92','tha-ap102','tha-ap112','tha-ap122','tha-ap132'].indexOf(expected.parent_id) === -1 || checkedPinnedContent(s, expected));
   }
   function checkedPublisherPreface(e, p) {
     if (!p.publisher_preface) return !Object.prototype.hasOwnProperty.call(e, 'publisher_preface');
@@ -693,6 +696,7 @@ export const WIDGET_HTML = `<!doctype html>
     if (closed) return;
     if (!d || typeof d !== 'object' || d === rendered) return;
     if (!d.pali && typeof d.error !== 'string') return;
+    if ((d.text_id === 'tha-ap107' || d.text_id === 'tha-ap108') && (!d.source || d.source.locator_revision !== '${APADANA_PAIR_LOCATOR_REVISION}')) d = { error: 'The paired Apadāna citation mapping revision changed. Reopen the whole current text explicitly; no old reference, replacement words or personal note was substituted.' };
     abandon(); generation++; awaitingSelection = false;
     if (!d.pali) {
       if (typeof d.error !== 'string') return;

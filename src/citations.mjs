@@ -1,3 +1,4 @@
+import { isApadanaPair } from './locator-policy.mjs';
 import { APADANA_PROFILES } from './apadana-profiles.mjs';
 /**
  * Parse how people actually cite the Pāli Canon into a normalised request.
@@ -105,6 +106,12 @@ function parseUrl(raw) {
   if (host === 'suttacentral.net') {
     const first = url.pathname.split('/').filter(Boolean)[0] || '';
     if (!/^[a-z][a-z0-9.-]*$/.test(first)) throw new CitationError('Unrecognised SuttaCentral link.');
+    if (isApadanaPair(first)) {
+      let positionalPath;
+      try { positionalPath = url.pathname.split('/').filter(Boolean).slice(1).some(part => /\p{N}/u.test(decodeURIComponent(part))); }
+      catch { throw new CitationError('Unrecognised SuttaCentral link encoding.'); }
+      if (url.hash || url.search || positionalPath) throw new CitationError('This Apadāna URL has an unversioned position or query after a boundary repair. Reopen the whole current poem and use its returned source-pinned reading link; no passage was substituted.');
+    }
     return { kind: 'uid', uid: first, raw, via: 'suttacentral.net' };
   }
   const path = url.pathname.replace(/\.html?$/, '');

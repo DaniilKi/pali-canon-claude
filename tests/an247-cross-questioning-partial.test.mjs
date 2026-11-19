@@ -1,3 +1,4 @@
+import { canonBeforeTheraPair } from './helpers/canon-before-thera-pair.mjs';
 import {CURRENT_APADANA_IDS, BASELINE_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 // Frozen D249 whole-coverage plus independently approved net-new Apadāna owners.
 const APADANA_INTAKE_DELTA = CURRENT_APADANA_IDS.length - BASELINE_APADANA_IDS.length;
@@ -23,7 +24,7 @@ const fixture=()=>`${begin}<div class="chapter">${Array.from({length:5},(_,i)=>`
 function install(){const d=canon.load();saved||=d.translations;const link={...structuredClone(d.translations['an2.47'][0]),path:'/tipitaka/an/an02/synthetic-questioning-fixture',url:'https://accesstoinsight.org/tipitaka/an/an02/synthetic-questioning-fixture.html'};link.partial_scope.text_sha256=scopeHash(selected);link.partial_scope.notice_sha256=scopeHash(english.atiNotice(fixture()));d.translations={...d.translations,'an2.47':[link]};return{unit:canon.resolve('an2.47').unit,link,id:canon.translationId(link)};}
 
 test('AN2.47 partial pins exact original substring and preserves fifteen prior sources and whole-unit eligibility',()=>{
- assert.equal(scopeHash(canon.load().canon),'49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1');
+ assert.equal(scopeHash(canonBeforeTheraPair(canon.load().canon)),'49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1');
  assert.equal(manifest.links.length,22);
  const d215Manifest={...manifest,links:manifest.links.filter(r=>!['an8.59','sn36.15','pli-tv-kd6','pli-tv-kd8','pli-tv-kd1','mil6.4.1'].includes(r.unit_id))};
  assert.equal(d215Manifest.links.length,16,'Frozen D215 registry excludes the later AN8.59/SN36.15 Vinaya and Milinda additions');

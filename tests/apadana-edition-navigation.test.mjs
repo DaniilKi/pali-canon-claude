@@ -28,7 +28,7 @@ test('all forty reviewed Theri poems preserve publisher order, exact canonical l
 });
 test('reviewed Thera subset uses literal profile owners and stays separate from all forty Theri poems',()=>{
  const expected=profiles.filter(p=>p.publisher_chapter==='chapter-3').sort((a,b)=>a.poem-b.poem);
- const curated=JSON.parse(readFileSync(new URL('../docs/evidence/apadana/THERA_SCALED_APPROVAL.json',import.meta.url),'utf8'));
+ const curated=JSON.parse(readFileSync(new URL('../docs/evidence/apadana/THERA_PAIR_INTAKE_APPROVAL.json',import.meta.url),'utf8'));
  const expectedIds=[...curated.baseline_records,...curated.approved_records].filter(row=>row.publisher_chapter==='chapter-3').sort((a,b)=>a.poem-b.poem).map(row=>row.id);
  assert.deepEqual(expected.map(p=>p.id),expectedIds);
  assert.equal(expected.length,CURRENT_THERA_IDS.length);

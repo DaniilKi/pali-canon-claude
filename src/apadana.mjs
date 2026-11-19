@@ -1,7 +1,7 @@
 /** Finite, live-only Walters/Whitman Apadāna. No translated bodies are bundled. */
 import { fetchPublic } from './http.mjs';
 import { digest, plainMarkdown } from './apadana-presentation.mjs';
-import { parseTheraApadana } from './apadana-thera.mjs';
+import { parseTheraApadana, theraMultiLabelQuotation } from './apadana-thera.mjs';
 import { THERA_APADANA_PROFILES } from './apadana-thera-profiles.mjs';
 export { digest, plainMarkdown };
 import { APADANA_PROFILES, APADANA_COMMIT, APADANA_LICENSE, APADANA_TRANSLATOR, APADANA_LICENSE_URL } from './apadana-profiles.mjs';
@@ -214,6 +214,7 @@ export function quotationText(result) {
       const paragraphs = result.text.split(/\n\n+/);
       return profile.stanza_layout.map((stanza, i) => {
         const text = paragraphs[i + 1].replace(/\[Note \d+\]/g, '').trim();
+        if (stanza.finite_multi_label) return theraMultiLabelQuotation(text, stanza, profile, i);
         if (!stanza.suffix || !text.endsWith(stanza.suffix)) fail();
         return text.slice(0, -stanza.suffix.length).trim();
       }).join('\n\n');
@@ -245,6 +246,11 @@ export async function translation(link) {
       + (!theri && profile.poem === 49 ? ' The exact fifth recitation marker is displayed separately before publisher local stanza 15/global 1229. It owns no notes and is excluded from poem text and quotation evidence; the original stanza wording and order are retained.' : '')
       + (profile.editorial_gap ? ' The original publisher editorial gap and original note 12 are separately scoped outside poem text, pagination and quotation evidence. Its caption records the source placement after local stanza 25/global 1164 and before local stanza 26/global 1165; it asserts no canonical stanza alignment. Original poem notes retain numbers 1–11 and 13.' : '')
       + (!theri && profile.id === 'tha-ap102' ? ' Original poem notes 1–2, tenth-chapter summary note 3 and first-hundred chapter-summary/colophon note 4 remain separately owned. The first-hundred summary covers only the publisher’s first hundred poems and first ten chapters, not the end of all Therā Apadāna; neither summary is poem quotation evidence or a translation-coverage total.' : '')
+      + (!theri && profile.id === 'tha-ap103' ? ' Only the exact publisher101 two-hash poem heading is accepted beside its distinct chapter preface; the original title and colophon name differences remain unchanged.' : '')
+      + (!theri && profile.id === 'tha-ap121' ? ' Exact paired cc/chch HTML displays retain the original diacritic-on spelling in the heading and colophons; no general markup removal is permitted.' : '')
+      + (!theri && profile.id === 'tha-ap133' ? ' Original multiple-label stanza paragraphs and reversed publisher1877/1876 order stay intact. Quotation extraction removes each printed label at its exact original line; no range labels or stanza breaks are invented.' : '')
+      + (!theri && profile.id === 'tha-ap134' ? ' The original speech and legend colophons remain on separate lines of their single shared paragraph; both are excluded from stanza quotation evidence.' : '')
+      + (!theri && [110, 120, 130].includes(profile.poem) ? ' Original chapter summaries remain separately scoped outside poem text and quotation evidence. Only publisher110 summary owns original note5; publisher120/130 summaries own no notes. Source counts are preserved edition statements, not line-complete translation coverage.' : '')
       + (!theri && [50, 60].includes(profile.poem) ? ' The original zero-note chapter summary remains separately scoped, including the canonical chapter closing. Publisher summary counts are preserved as original wording, not validated translation-coverage totals.' : '')
       + (theri && profile.poem === 17 ? ' The publisher recitation division and its original note 21 are displayed separately, before the identified publisher stanza, outside poem text and quotation evidence.' : '')
       + (theri && [18, 24, 27, 33].includes(profile.poem) ? ' Exact paired HTML display spans retain the diacritic spelling and remove only its alternate display; original editorial placeholders remain unchanged.' : '')

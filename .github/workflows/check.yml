@@ -79,9 +79,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh, milinda, draftsafety, annumbered, milindapartial, anten, apadana, apadananext, apadanathird, apadanafourth, apadanathera, apadanatheranext, apadanatheraexpansion, apadanatherascaled61, apadanatherascaled81, apadanatheraeditorial, apadanaedition, thagsixteen, textspacing]
+        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh, milinda, draftsafety, annumbered, milindapartial, anten, apadana, apadananext, apadanathird, apadanafourth, apadanathera, apadanatheranext, apadanatheraexpansion, apadanatherascaled61, apadanatherascaled81, apadanatheraeditorial, apadanatherapair101, apadanatherapair121, apadanaedition, thagsixteen, textspacing]
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety' || matrix.group == 'milinda' || matrix.group == 'annumbered' || matrix.group == 'milindapartial' || matrix.group == 'anten' || matrix.group == 'apadana' || matrix.group == 'apadananext' || matrix.group == 'apadanathird' || matrix.group == 'apadanafourth' || matrix.group == 'apadanathera' || matrix.group == 'apadanatheranext' || matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanaedition' || matrix.group == 'thagsixteen' || matrix.group == 'textspacing') && 20 || 10 }}
+    timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety' || matrix.group == 'milinda' || matrix.group == 'annumbered' || matrix.group == 'milindapartial' || matrix.group == 'anten' || matrix.group == 'apadana' || matrix.group == 'apadananext' || matrix.group == 'apadanathird' || matrix.group == 'apadanafourth' || matrix.group == 'apadanathera' || matrix.group == 'apadanatheranext' || matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121' || matrix.group == 'apadanaedition' || matrix.group == 'thagsixteen' || matrix.group == 'textspacing') && 20 || 10 }}
     steps:
       - uses: actions/checkout@v4
       - name: Fetch exact reviewed Apadāna baseline for independent preservation checks
@@ -89,6 +89,11 @@ jobs:
         run: |
           git fetch --no-tags --depth=1 origin 64a336789ab5f4f02964ff3023ea6b26b330e406
           git cat-file -e 64a336789ab5f4f02964ff3023ea6b26b330e406^{commit}
+      - name: Fetch exact paired-intake baseline for independent preservation checks
+        if: matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121'
+        run: |
+          git fetch --no-tags --depth=1 origin b5669a334add97ebc0c3c32f9b3fb45ed90d9780
+          git cat-file -e b5669a334add97ebc0c3c32f9b3fb45ed90d9780^{commit}
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -448,7 +453,7 @@ jobs:
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-an-ten-selection-check.py --server-dir "$RUNNER_TEMP/an-ten-selection-package/package/server" --report installed-an-ten-selection.report.json
       # Public immutable source fixtures are temporary job inputs, never package content/artifacts.
       - name: Check out exact public Apadāna source fixtures without credentials
-        if: matrix.group == 'apadana' || matrix.group == 'apadananext' || matrix.group == 'apadanathird' || matrix.group == 'apadanafourth' || matrix.group == 'apadanathera' || matrix.group == 'apadanatheranext' || matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanaedition'
+        if: matrix.group == 'apadana' || matrix.group == 'apadananext' || matrix.group == 'apadanathird' || matrix.group == 'apadanafourth' || matrix.group == 'apadanathera' || matrix.group == 'apadanatheranext' || matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121' || matrix.group == 'apadanaedition'
         uses: actions/checkout@v4
         with:
           repository: apadana-translation/apadana-site
@@ -593,6 +598,47 @@ jobs:
             src/_poems/chapter-3/poem-098.md
             src/_poems/chapter-3/poem-099.md
             src/_poems/chapter-3/poem-100.md
+            src/_poems/chapter-3/poem-101.md
+            src/_poems/chapter-3/poem-102.md
+            src/_poems/chapter-3/poem-103.md
+            src/_poems/chapter-3/poem-104.md
+            src/_poems/chapter-3/poem-105.md
+            src/_poems/chapter-3/poem-106.md
+            src/_poems/chapter-3/poem-107.md
+            src/_poems/chapter-3/poem-108.md
+            src/_poems/chapter-3/poem-109.md
+            src/_poems/chapter-3/poem-110.md
+            src/_poems/chapter-3/poem-111.md
+            src/_poems/chapter-3/poem-112.md
+            src/_poems/chapter-3/poem-113.md
+            src/_poems/chapter-3/poem-114.md
+            src/_poems/chapter-3/poem-115.md
+            src/_poems/chapter-3/poem-116.md
+            src/_poems/chapter-3/poem-117.md
+            src/_poems/chapter-3/poem-118.md
+            src/_poems/chapter-3/poem-119.md
+            src/_poems/chapter-3/poem-120.md
+            src/_poems/chapter-3/poem-121.md
+            src/_poems/chapter-3/poem-122.md
+            src/_poems/chapter-3/poem-123.md
+            src/_poems/chapter-3/poem-124.md
+            src/_poems/chapter-3/poem-125.md
+            src/_poems/chapter-3/poem-126.md
+            src/_poems/chapter-3/poem-127.md
+            src/_poems/chapter-3/poem-128.md
+            src/_poems/chapter-3/poem-129.md
+            src/_poems/chapter-3/poem-130.md
+            src/_poems/chapter-3/poem-131.md
+            src/_poems/chapter-3/poem-132.md
+            src/_poems/chapter-3/poem-133.md
+            src/_poems/chapter-3/poem-134.md
+            src/_poems/chapter-3/poem-135.md
+            src/_poems/chapter-3/poem-136.md
+            src/_poems/chapter-3/poem-137.md
+            src/_poems/chapter-3/poem-138.md
+            src/_poems/chapter-3/poem-139.md
+            src/_poems/chapter-3/poem-140.md
+            src/_poems/chapter-3/poem-141.md
             src/_poems/chapter-3/chapter-3.json
       - name: Validate all Apadāna source and rights pins before browser retrieval
         if: matrix.group == 'apadana'
@@ -713,7 +759,7 @@ jobs:
           tar -xzf "$RUNNER_TEMP/apadana-thera-next-package/"*.tgz -C "$RUNNER_TEMP/apadana-thera-next-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-next-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-thera-next-package/package/server" --report installed-apadana-thera-next.report.json
       - name: Check out exact public Apadāna original XML without credentials
-        if: matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial'
+        if: matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121'
         uses: actions/checkout@v4
         with:
           repository: VipassanaTech/tipitaka-xml
@@ -723,13 +769,15 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             romn/s0510m1.mul.xml
+            romn/s0510a.att.xml
       - name: Validate independently reviewed Therā expansion and held-source refusals
         if: matrix.group == 'apadanatheraexpansion'
         run: |
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-thera-fifth.test.mjs tests/apadana-thera-sixth.test.mjs
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadana-independent-inputs"
-          python scripts/apadana/review_thera_fifth_sixth.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_FIFTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SIXTH_GOLDENS.json --canon "$RUNNER_TEMP/apadana-independent-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadana-independent-review"
+          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/apadana-independent-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadana-independent-inputs/canon-before-thera-pair.json"
+          python scripts/apadana/review_thera_fifth_sixth.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_FIFTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SIXTH_GOLDENS.json --canon "$RUNNER_TEMP/apadana-independent-inputs/canon-before-thera-pair.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadana-independent-review"
           cp "$RUNNER_TEMP/apadana-independent-review/EXTRACTION_COMPARISON.json" standalone-apadana-independent-review.report.json
       - name: Check supplementary Therā source and apparatus ownership
         if: matrix.group == 'apadanatheraexpansion'
@@ -750,7 +798,8 @@ jobs:
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-thera-scaled.test.mjs tests/held42-editorial-gap.test.mjs tests/editorial-content-sha256.test.mjs tests/thera-hundred-client.test.mjs
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/scaled-inputs"
-          python scripts/apadana/review_thera_scaled.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_SEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_NINTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EDITORIAL_GAP_GOLDENS.json --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/scaled-independent-review"
+          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --output "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json"
+          python scripts/apadana/review_thera_scaled.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_SEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_NINTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EDITORIAL_GAP_GOLDENS.json --canon "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/scaled-independent-review"
           cp "$RUNNER_TEMP/scaled-independent-review/EXTRACTION_COMPARISON.json" standalone-apadanatherascaled61-independent.report.json
       - name: Check scaled Therā 61-80 source and apparatus ownership
         if: matrix.group == 'apadanatherascaled61'
@@ -771,7 +820,8 @@ jobs:
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-thera-scaled.test.mjs tests/held42-editorial-gap.test.mjs tests/editorial-content-sha256.test.mjs tests/thera-hundred-client.test.mjs
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/scaled-inputs"
-          python scripts/apadana/review_thera_scaled.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_SEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_NINTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EDITORIAL_GAP_GOLDENS.json --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/scaled-independent-review"
+          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --output "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json"
+          python scripts/apadana/review_thera_scaled.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_SEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_NINTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EDITORIAL_GAP_GOLDENS.json --canon "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/scaled-independent-review"
           cp "$RUNNER_TEMP/scaled-independent-review/EXTRACTION_COMPARISON.json" standalone-apadanatherascaled81-independent.report.json
       - name: Check scaled Therā 81-100 source and apparatus ownership
         if: matrix.group == 'apadanatherascaled81'
@@ -792,7 +842,8 @@ jobs:
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-thera-scaled.test.mjs tests/held42-editorial-gap.test.mjs tests/editorial-content-sha256.test.mjs tests/thera-hundred-client.test.mjs
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/scaled-inputs"
-          python scripts/apadana/review_thera_scaled.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_SEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_NINTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EDITORIAL_GAP_GOLDENS.json --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/scaled-independent-review"
+          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --output "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json"
+          python scripts/apadana/review_thera_scaled.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_SEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_NINTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EDITORIAL_GAP_GOLDENS.json --canon "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/scaled-independent-review"
           cp "$RUNNER_TEMP/scaled-independent-review/EXTRACTION_COMPARISON.json" standalone-apadanatheraeditorial-independent.report.json
       - name: Check scaled Therā held42 source and apparatus ownership
         if: matrix.group == 'apadanatheraeditorial'
@@ -807,6 +858,48 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/apadanatheraeditorial-package"
           tar -xzf "$RUNNER_TEMP/apadanatheraeditorial-package/"*.tgz -C "$RUNNER_TEMP/apadanatheraeditorial-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-scaled-check.py --batch held42 --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanatheraeditorial-package/package/server" --report installed-apadanatheraeditorial.report.json
+      - name: Validate atomic Therā pair and reviewed intake 101-120 against exact original sources
+        if: matrix.group == 'apadanatherapair101'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera-pair-boundaries.test.mjs tests/apadana-thera-pair-intake.test.mjs
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanatherapair101-inputs"
+          python scripts/apadana/review_thera_pair_intake.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_ELEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWELFTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_THIRTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_FOURTEENTH_GOLDENS.json --canon "$RUNNER_TEMP/apadanatherapair101-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanatherapair101-independent-review"
+          cp "$RUNNER_TEMP/apadanatherapair101-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-apadanatherapair101-independent.report.json
+      - name: Check repaired Therā citations and complete publisher intake 101-120
+        if: matrix.group == 'apadanatherapair101'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-pair-intake-check.py --batch 101-120 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --report standalone-apadanatherapair101.report.json
+      - name: Audit repaired Therā pair and intake 101-120 in both themes
+        if: matrix.group == 'apadanatherapair101'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-pair-intake-check.py --batch 101-120 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --a11y --report standalone-apadanatherapair101-a11y.report.json
+      - name: Check repaired Therā pair and intake 101-120 from isolated npm package
+        if: matrix.group == 'apadanatherapair101'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanatherapair101-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanatherapair101-package"
+          tar -xzf "$RUNNER_TEMP/apadanatherapair101-package/"*.tgz -C "$RUNNER_TEMP/apadanatherapair101-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-pair-intake-check.py --batch 101-120 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanatherapair101-package/package/server" --report installed-apadanatherapair101.report.json
+      - name: Validate atomic Therā pair and reviewed intake 121-140 against exact original sources
+        if: matrix.group == 'apadanatherapair121'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera-pair-boundaries.test.mjs tests/apadana-thera-pair-intake.test.mjs
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanatherapair121-inputs"
+          python scripts/apadana/review_thera_pair_intake.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_ELEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWELFTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_THIRTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_FOURTEENTH_GOLDENS.json --canon "$RUNNER_TEMP/apadanatherapair121-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanatherapair121-independent-review"
+          cp "$RUNNER_TEMP/apadanatherapair121-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-apadanatherapair121-independent.report.json
+      - name: Check repaired Therā citations and complete publisher intake 121-140
+        if: matrix.group == 'apadanatherapair121'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-pair-intake-check.py --batch 121-140 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --report standalone-apadanatherapair121.report.json
+      - name: Audit repaired Therā pair and intake 121-140 in both themes
+        if: matrix.group == 'apadanatherapair121'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-pair-intake-check.py --batch 121-140 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --a11y --report standalone-apadanatherapair121-a11y.report.json
+      - name: Check repaired Therā pair and intake 121-140 from isolated npm package
+        if: matrix.group == 'apadanatherapair121'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanatherapair121-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanatherapair121-package"
+          tar -xzf "$RUNNER_TEMP/apadanatherapair121-package/"*.tgz -C "$RUNNER_TEMP/apadanatherapair121-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-pair-intake-check.py --batch 121-140 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanatherapair121-package/package/server" --report installed-apadanatherapair121.report.json
       - name: Validate exact publisher-edition navigation
         if: matrix.group == 'apadanaedition'
         run: node --test tests/apadana-edition-navigation.test.mjs
@@ -1030,6 +1123,14 @@ jobs:
             standalone-apadanatheraeditorial-a11y.report.json
             standalone-apadanatheraeditorial-independent.report.json
             installed-apadanatheraeditorial.report.json
+            standalone-apadanatherapair101.report.json
+            standalone-apadanatherapair101-a11y.report.json
+            standalone-apadanatherapair101-independent.report.json
+            installed-apadanatherapair101.report.json
+            standalone-apadanatherapair121.report.json
+            standalone-apadanatherapair121-a11y.report.json
+            standalone-apadanatherapair121-independent.report.json
+            installed-apadanatherapair121.report.json
             standalone-apadana-edition.report.json
             standalone-apadana-edition-a11y.report.json
             installed-apadana-edition.report.json

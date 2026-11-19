@@ -1,3 +1,4 @@
+import { isRepairedApadanaPair, isApadanaPair, APADANA_PAIR_LOCATOR_REVISION } from '../src/locator-policy.mjs';
 /** Validate canonical search identity and source snapshots before showing excerpts. */
 import { parseCitation, citationId } from '../src/citations.mjs';
 import { SCRIPTS } from '../src/script.mjs';
@@ -47,7 +48,9 @@ function identity(hit) {
   if (own(hit, 'title_roman') && !text(hit.title_roman, 1000)) fail();
 }
 function command(command, hit, script, body = false, context = false) {
-  if (!keysOnly(command, ['tool', 'uid', 'offset', 'limit', 'script']) || command.tool !== 'get_text' || command.uid !== hit.id || own(command, 'script') && command.script !== script) fail();
+  if (!keysOnly(command, ['tool', 'uid', 'offset', 'limit', 'script', 'source_commit']) || command.tool !== 'get_text' || command.uid !== hit.id || own(command, 'script') && command.script !== script) fail();
+  const requiredPin = body && isRepairedApadanaPair(hit.id, sourceRevision({ source: hit.source }));
+  if ((requiredPin || own(command, 'source_commit')) && command.source_commit !== sourceRevision({ source: hit.source })) fail();
   if (script !== 'roman' && command.script !== script) fail();
   if (body) {
     const offset = context ? Math.max(0, hit.read_with.offset - 1) : command.offset;
@@ -55,7 +58,9 @@ function command(command, hit, script, body = false, context = false) {
   } else if (own(command, 'offset') || own(command, 'limit')) fail();
 }
 function checkHit(hit, edition, selected, body) {
-  identity(hit); source(hit.source, edition); command(hit.read_with, hit, selected.script, body);
+  identity(hit); source(hit.source, edition);
+  if (isApadanaPair(hit.id) && sourceRevision({ source: hit.source }) !== APADANA_PAIR_LOCATOR_REVISION) fail();
+  command(hit.read_with, hit, selected.script, body);
   if (body) {
     if (!text(hit.excerpt, 4000) || hit.segment_ref !== `${hit.id}/${hit.read_with.offset + 1}`) fail();
     command(hit.context_with, hit, selected.script, true, true);

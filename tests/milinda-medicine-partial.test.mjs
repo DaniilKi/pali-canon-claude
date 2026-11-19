@@ -1,3 +1,4 @@
+import { canonBeforeTheraPair } from './helpers/canon-before-thera-pair.mjs';
 import {test,afterEach} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -27,7 +28,7 @@ function install(){const d=canon.load();saved||={translations:d.translations,reg
 afterEach(()=>{if(saved){canon.load().translations=saved.translations;canon.load().partialRegistry=saved.registry;}saved=undefined;globalThis.fetch=originalFetch;liveCache.clear();translationCoverage({refresh:true});});
 
 test('Milinda pins retain the complete original root and previous twenty-one source descriptors',()=>{
- assert.equal(scopeHash(canon.load().canon),'49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1');
+ assert.equal(scopeHash(canonBeforeTheraPair(canon.load().canon)),'49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1');
  const previous={...manifest,links:manifest.links.filter(r=>r.unit_id!==owner)};
  assert.equal(previous.links.length,21);assert.equal(scopeHash(previous),'b5e86eae5f28169ac9a4fddc915742e27dd203cacd6cb95e6f17b40b1b0748e6');
  const r=row(),u=unit(),all=segments();assert.equal(all.length,96);assert.equal(scopeHash(all),'802aeb895d091f986a8c84041ceb491f17f04b9f201b5eda773b0c85198d9a90');
