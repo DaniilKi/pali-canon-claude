@@ -1,0 +1,26 @@
+{
+  "source_url": "https://raw.githubusercontent.com/VipassanaTech/tipitaka-xml/2d134ff9ef60f70a1eb03c9370580228811a3070/romn/s0510m1.mul.xml",
+  "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "file": "s0510m1.mul.xml",
+  "bytes": 2464074,
+  "raw_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+  "full_book_blocks": 14645,
+  "complete_original_xml_exact_block_match": true,
+  "fields": "all compact rend, paragraph, text, variant notes and edition-page markers",
+  "reviewed_units": [
+    "tha-ap52",
+    "tha-ap53",
+    "tha-ap54",
+    "tha-ap55",
+    "tha-ap56",
+    "tha-ap57",
+    "tha-ap58",
+    "tha-ap59",
+    "tha-ap60",
+    "tha-ap61",
+    "tha-ap62",
+    "tha-ap63"
+  ],
+  "scope": "Full book replay; full source review ten candidates plus both neighboring units; no source words in receipt."
+}

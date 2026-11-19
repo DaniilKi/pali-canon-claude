@@ -619,7 +619,11 @@ def main():
     server_dir = args.server_dir.resolve() if args.server_dir else ROOT / 'server'
     manifest = json.loads((server_dir / 'data/apadana.json').read_text())
     assert manifest == json.loads((ROOT / 'server/data/apadana.json').read_text()), 'Package metadata differs'
-    rows,commit=manifest['links'],manifest['source']['commit']
+    combined_rows,commit=manifest['links'],manifest['source']['commit']
+    assert set(combined_rows) == {'thi-ap' + str(n) for n in range(1, 41)} | {'tha-ap' + str(n) for n in range(13, 43)} | {'tha-ap43', 'tha-ap45', 'tha-ap46', 'tha-ap47', 'tha-ap48', 'tha-ap49', 'tha-ap50', 'tha-ap51', 'tha-ap52', 'tha-ap53', 'tha-ap54', 'tha-ap55', 'tha-ap56', 'tha-ap57', 'tha-ap58', 'tha-ap59', 'tha-ap60', 'tha-ap61', 'tha-ap62'}, 'Unexpected combined publisher-source scope'
+    # Retain all historical source/hash/wording assertions for exactly the previous seventy.
+    historical_ids = set(BASELINE) | set(NEW_IDS)
+    rows = {uid: row for uid, row in combined_rows.items() if uid in historical_ids}
     assert len(EXPECTED) == 10 and len(SUMMARIES) == 1
     assert commit == SOURCE_REVISION, 'Publisher revision changed'
     assert set(rows) == set(BASELINE) | set(NEW_IDS), 'Unexpected activated source scope'
@@ -885,7 +889,7 @@ def main():
                             saved(page, base)
                             page.get_by_label('Your personal note', exact=True).first.fill(PRIVATE + ' unsaved')
                             for family_uid,expected_family in (('thi-ap40',[u for u in BASELINE if u.startswith('thi-ap')]),
-                                                               ('tha-ap33',[u for u in BASELINE if u.startswith('tha-ap')]+list(NEW_IDS))):
+                                                               ('tha-ap33',[u for u in BASELINE if u.startswith('tha-ap')]+list(NEW_IDS)+['tha-ap43', 'tha-ap45', 'tha-ap46', 'tha-ap47', 'tha-ap48', 'tha-ap49', 'tha-ap50', 'tha-ap51', 'tha-ap52', 'tha-ap53', 'tha-ap54', 'tha-ap55', 'tha-ap56', 'tha-ap57', 'tha-ap58', 'tha-ap59', 'tha-ap60', 'tha-ap61', 'tha-ap62'])):
                                 prior=len(requests)
                                 page.goto(base+'/#read?uid='+family_uid)
                                 page.locator('.passage').first.wait_for();loaded(page)

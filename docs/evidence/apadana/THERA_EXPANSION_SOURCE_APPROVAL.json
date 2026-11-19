@@ -1,0 +1,85 @@
+{
+  "baseline": "a154013eded45f6ee319fff5cc246ed563811c55",
+  "decision": "APPROVE SOURCE SCOPE ONLY:19 complete publisher-edition poems41,43–60, individually mapped to canonical43,45–62. No line-complete VRI or complete fifth-chapter claim. Runtime/release approval remains conditional.",
+  "approved_ids": [
+    "tha-ap43",
+    "tha-ap45",
+    "tha-ap46",
+    "tha-ap47",
+    "tha-ap48",
+    "tha-ap49",
+    "tha-ap50",
+    "tha-ap51",
+    "tha-ap52",
+    "tha-ap53",
+    "tha-ap54",
+    "tha-ap55",
+    "tha-ap56",
+    "tha-ap57",
+    "tha-ap58",
+    "tha-ap59",
+    "tha-ap60",
+    "tha-ap61",
+    "tha-ap62"
+  ],
+  "held": [
+    {
+      "poem": 42,
+      "canonical_id": "tha-ap44",
+      "reason": "Original editorial hiatus and owned note12 need a separately verified finite reader contract; intentional omitted VRI stanza50 cannot be reconstructed or omitted from the disclosure."
+    }
+  ],
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "independent_extraction": {
+    "poems": 19,
+    "printed_stanza_entries": 205,
+    "poem_body_paragraphs": 262,
+    "poem_notes": 126,
+    "differences_from_two_source_agents": [],
+    "full_original_xml_blocks_exact": 14645,
+    "source_agent_or_production_parser_imports": 0,
+    "prefaces41_51_notes": 0,
+    "summaries50_60_notes": 0,
+    "recitation49_notes": 0
+  },
+  "rights": "Exact explicit CC BY-NC-SA4.0 translation/site-text grant with Walters/Whitman attribution, source/licence/change notices/no endorsement; generic CC-BY metadata does not relax it; no audio/media approval. All source text live-only.",
+  "review_method": "Two source agents separately read full narratives/notes/colophons/neighbors; final reviewer checked their detailed findings and original key edition-difference passages, independently rehashed all artifacts, reproduced every body/note/paragraph/layout/root hash and replayed whole original XML through separate ElementTree parsing. This is not a specialist translation certification.",
+  "required_contracts": [
+    "Freeze previous70 profiles/links/Pali and full canonical/commentary datasets; no root metadata repairs authorized by this batch",
+    "Exact finite ID/path/chapter/frontmatter/raw/body/notes/paratext/root pins before source display; no offset inference/general HTML loosening",
+    "Preserve original malformed43 global suffix/six-line entries,44 body1189beside original note,46colophon spelling/comma,57inverted globals/note7inside1312,58compound/six-line entries/absence ofThera",
+    "49 exact inline recitation marker before local15/global1229, separately owned zero-note apparatus and excluded from stanza quotation; no stanza lines lost",
+    "50 summary3935–3940/refs23–25 and60summary4238–4243/refs19–21 include original chapter colophons and preserve publisher/VRI order differences",
+    "Keep summary50stated144/VRI143/publisher142 andsummary60stated92/VRI92/publisher91 as original edition count data, never coverage certification",
+    "All per-source edition findings survive mapping_notes plus mandatory displayed notes in standalone/comparison/widget/cached responses; missing or forged ownership/disclosure fails before English",
+    "No prefaces,notes,headings,colophons,recitation,summaries or held42wording become stanza quotation evidence",
+    "New unit coverage is first indexed complete publisher edition only; chapter5navigation remains reviewed subset; no private locator rebasing or user-data transfer"
+  ],
+  "primary_evidence_sha256": {
+    "/tmp/pali-thera-next-two-source/fifth/THERA_FIFTH_GOLDENS.json": "b5ee36b8a8993f9a9b6348d5f68d6a23a1235f268f45546a246484882e2efe8f",
+    "/tmp/pali-thera-next-two-source/sixth/GOLDENS.json": "3ad2b60e26d0da364e71ea024aae6bc1348d731a4fd5229f323184a8321256e1",
+    "/tmp/pali-thera-next-two-source/fifth/THERA_FIFTH_SOURCE_REVIEW.json": "b02baad5085d1991bd2de26adb746123dfde1f521b6810b0ce62a9f8070b282e",
+    "/tmp/pali-thera-next-two-source/sixth/SOURCE_REVIEW.json": "8102918575f2f2ecd6c232255d799b6af589df105773471be00b246564c47b0d",
+    "/tmp/pali-thera-next-two-source/fifth/THERA_FIFTH_SOURCE_APPROVAL.json": "3fe94dbcc2518d032611b7998c5b440adeceea2f115e949161b2c548056386a8",
+    "/tmp/pali-thera-next-two-source/fifth/THERA_FIFTH_RIGHTS.json": "15d8f02f21bd6ca503333cbd6e9680656478a35fe9349014ff0311ae250672ee",
+    "/tmp/pali-thera-next-two-source/sixth/RIGHTS.json": "40f7b99690477925c303a0bdb4e711dc84bf3df96da299ad8c65dae1d45b5996",
+    "/tmp/pali-thera-next-two-review/INDEPENDENT_GOLDENS.json": "b8af28ee5ae1d74c3d5029eafcc7cdb68dd2781f9fae2d1c075c88711591bf08",
+    "/tmp/pali-thera-next-two-review/EXTRACTION_COMPARISON.json": "e4d25e43c3056a53f18851bdcab993d11abf46ede4566d2f3d7141baed878e96",
+    "/tmp/pali-thera-next-two-review/independent_extract.py": "5dc640b12cf5810323aa2edf420cd80a5d5809389e3ee3e573130edf9a01440d"
+  },
+  "source_pins_sha256": "c9c43fefacdc80d65fa3d3e82a7dab62b142de845f8d0df2fd9186920e7733bc",
+  "blocking_source_findings": [],
+  "release_approval": false,
+  "remaining_gates": [
+    "Implementation/consumer/quotation regressions and independent runtime review",
+    "Old70/full-data/privacy/package preservation and frozen commit bindings",
+    "Full local test/audit/browser evidence and exact dev-head CI before final approval"
+  ],
+  "remaining_external_acceptance": [
+    "Specialist recension and translation quality",
+    "Physical devices/human assistive testing",
+    "Live publisher-host availability distinct from pinned-source correctness"
+  ],
+  "reviewer_project_writes_commits_pushes": 0
+}

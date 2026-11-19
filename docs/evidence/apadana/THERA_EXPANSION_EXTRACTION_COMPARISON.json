@@ -1,0 +1,168 @@
+{
+  "base_commit": "a154013eded45f6ee319fff5cc246ed563811c55",
+  "all19_match": true,
+  "differences": [],
+  "rows": [
+    {
+      "poem": 41,
+      "id": "tha-ap43",
+      "body_paragraphs": 27,
+      "stanzas": 24,
+      "notes": 14,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 43,
+      "id": "tha-ap45",
+      "body_paragraphs": 19,
+      "stanzas": 16,
+      "notes": 7,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 44,
+      "id": "tha-ap46",
+      "body_paragraphs": 10,
+      "stanzas": 7,
+      "notes": 9,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 45,
+      "id": "tha-ap47",
+      "body_paragraphs": 9,
+      "stanzas": 6,
+      "notes": 6,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 46,
+      "id": "tha-ap48",
+      "body_paragraphs": 8,
+      "stanzas": 5,
+      "notes": 4,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 47,
+      "id": "tha-ap49",
+      "body_paragraphs": 8,
+      "stanzas": 5,
+      "notes": 3,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 48,
+      "id": "tha-ap50",
+      "body_paragraphs": 11,
+      "stanzas": 8,
+      "notes": 1,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 49,
+      "id": "tha-ap51",
+      "body_paragraphs": 27,
+      "stanzas": 24,
+      "notes": 12,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 50,
+      "id": "tha-ap52",
+      "body_paragraphs": 22,
+      "stanzas": 19,
+      "notes": 11,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 51,
+      "id": "tha-ap53",
+      "body_paragraphs": 10,
+      "stanzas": 7,
+      "notes": 2,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 52,
+      "id": "tha-ap54",
+      "body_paragraphs": 15,
+      "stanzas": 12,
+      "notes": 5,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 53,
+      "id": "tha-ap55",
+      "body_paragraphs": 8,
+      "stanzas": 5,
+      "notes": 2,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 54,
+      "id": "tha-ap56",
+      "body_paragraphs": 11,
+      "stanzas": 8,
+      "notes": 3,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 55,
+      "id": "tha-ap57",
+      "body_paragraphs": 13,
+      "stanzas": 10,
+      "notes": 13,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 56,
+      "id": "tha-ap58",
+      "body_paragraphs": 10,
+      "stanzas": 7,
+      "notes": 4,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 57,
+      "id": "tha-ap59",
+      "body_paragraphs": 10,
+      "stanzas": 7,
+      "notes": 8,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 58,
+      "id": "tha-ap60",
+      "body_paragraphs": 12,
+      "stanzas": 9,
+      "notes": 8,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 59,
+      "id": "tha-ap61",
+      "body_paragraphs": 14,
+      "stanzas": 11,
+      "notes": 7,
+      "all_hashes_match": true
+    },
+    {
+      "poem": 60,
+      "id": "tha-ap62",
+      "body_paragraphs": 18,
+      "stanzas": 15,
+      "notes": 7,
+      "all_hashes_match": true
+    }
+  ],
+  "totals": {
+    "poems": 19,
+    "stanzas": 205,
+    "body_paragraphs": 262,
+    "notes": 126
+  },
+  "rights_rehashed_per_group": 7,
+  "full_original_xml_blocks_exact": 14645,
+  "production_parser_imports": 0
+}

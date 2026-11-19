@@ -1,0 +1,249 @@
+{
+  "base_commit": "a154013eded45f6ee319fff5cc246ed563811c55",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "artifacts": [
+    {
+      "group": "fifth",
+      "path": "LICENSE.md",
+      "raw_sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "bytes": 19093
+    },
+    {
+      "group": "fifth",
+      "path": "src/_pages/about.md",
+      "raw_sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "bytes": 12404
+    },
+    {
+      "group": "fifth",
+      "path": "src/_includes/site/footer.njk",
+      "raw_sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "bytes": 555
+    },
+    {
+      "group": "fifth",
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "raw_sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "bytes": 603
+    },
+    {
+      "group": "fifth",
+      "path": "src/_data/site.json",
+      "raw_sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "bytes": 659
+    },
+    {
+      "group": "fifth",
+      "path": "src/_poems/_poems.json",
+      "raw_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "bytes": 135
+    },
+    {
+      "group": "fifth",
+      "path": "src/_poems/chapter-3/chapter-3.json",
+      "raw_sha256": "50b6544f4689f2fcbd9287a86890cdcd6993c62b94ebcfb2d5419546f9ded2e0",
+      "git_blob_sha1": "8c453df465b0cd793bb169ab2398192dbd7db0a0",
+      "bytes": 27
+    },
+    {
+      "group": "fifth",
+      "path": "src/_poems/chapter-3/poem-041.md",
+      "raw_sha256": "d1f7ecbe07b4504f51fc7b3730f0fae02f771488059c23e2b800bb0d9b15d208",
+      "git_blob_sha1": "0ed83be9cd77239e3e32fcce5cc3c90ef012eb23",
+      "bytes": 6563
+    },
+    {
+      "group": "fifth",
+      "path": "src/_poems/chapter-3/poem-043.md",
+      "raw_sha256": "68ca39da90b8ce93bc8e74dd09306e28d7fdf79083c9c126857aae7980d7d754",
+      "git_blob_sha1": "b3745b7f586689db0c06e63930f86057e426317e",
+      "bytes": 3769
+    },
+    {
+      "group": "fifth",
+      "path": "src/_poems/chapter-3/poem-044.md",
+      "raw_sha256": "34cdcfde81df6f945f0414bf6a32b32b2857c74ae98460d47e222b31cbea3ec7",
+      "git_blob_sha1": "dd039d838761d2b86c801f85dfdd492574b056b9",
+      "bytes": 2635
+    },
+    {
+      "group": "fifth",
+      "path": "src/_poems/chapter-3/poem-045.md",
+      "raw_sha256": "8f6b0825b803566876f5bad569c1fa0d0cdf32ecf36523d88f9c3ac0ec33edbe",
+      "git_blob_sha1": "853496c81fd9baff7b4201a31739adf0a6eb6970",
+      "bytes": 2078
+    },
+    {
+      "group": "fifth",
+      "path": "src/_poems/chapter-3/poem-046.md",
+      "raw_sha256": "a3459bbf3765caed552ea9fa4d4579ac92a308e5b598b24486d64a85c13ce651",
+      "git_blob_sha1": "7183d3e33233a241a2cea891a702a68e691bea14",
+      "bytes": 1702
+    },
+    {
+      "group": "fifth",
+      "path": "src/_poems/chapter-3/poem-047.md",
+      "raw_sha256": "e64f5a2de7426616ec910d1814897b185ec63c936c3a3d01b7271b610a2691a9",
+      "git_blob_sha1": "caf89cfeaed08a35c09cf2a10ebc02cc837b4055",
+      "bytes": 1123
+    },
+    {
+      "group": "fifth",
+      "path": "src/_poems/chapter-3/poem-048.md",
+      "raw_sha256": "72e4cbc431e65827cb2c72d0fdd44587f426382c7cb1d776bc4f0c52a69ba073",
+      "git_blob_sha1": "861fa390ae376e29ab8d3e49a4cdfd5fec89614f",
+      "bytes": 1706
+    },
+    {
+      "group": "fifth",
+      "path": "src/_poems/chapter-3/poem-049.md",
+      "raw_sha256": "9c4cc9848ddf5866d9e69fd4f4d83fb445434bc2f38d35a8ef4f22fc43b06dab",
+      "git_blob_sha1": "49a2cf1d0998db29af293ba470ce07aa470b039f",
+      "bytes": 4881
+    },
+    {
+      "group": "fifth",
+      "path": "src/_poems/chapter-3/poem-050.md",
+      "raw_sha256": "db74917f990d06c697ef0697baa45a86a4361dd29d67200fdbb2ff3cb8d0513b",
+      "git_blob_sha1": "4113d9e0799e94fe3f42b52a87c3d08f89a7ac2d",
+      "bytes": 4812
+    },
+    {
+      "group": "sixth",
+      "path": "LICENSE.md",
+      "raw_sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "bytes": 19093
+    },
+    {
+      "group": "sixth",
+      "path": "src/_pages/about.md",
+      "raw_sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "bytes": 12404
+    },
+    {
+      "group": "sixth",
+      "path": "src/_includes/site/footer.njk",
+      "raw_sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "bytes": 555
+    },
+    {
+      "group": "sixth",
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "raw_sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "bytes": 603
+    },
+    {
+      "group": "sixth",
+      "path": "src/_data/site.json",
+      "raw_sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "bytes": 659
+    },
+    {
+      "group": "sixth",
+      "path": "src/_poems/_poems.json",
+      "raw_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "bytes": 135
+    },
+    {
+      "group": "sixth",
+      "path": "src/_poems/chapter-3/chapter-3.json",
+      "raw_sha256": "50b6544f4689f2fcbd9287a86890cdcd6993c62b94ebcfb2d5419546f9ded2e0",
+      "git_blob_sha1": "8c453df465b0cd793bb169ab2398192dbd7db0a0",
+      "bytes": 27
+    },
+    {
+      "group": "sixth",
+      "path": "src/_poems/chapter-3/poem-051.md",
+      "raw_sha256": "84d1dbee40ec3c99f492b09da25b09a795d3c4d231f9bb0d6a319fed3179fca5",
+      "git_blob_sha1": "511dde5f6ae33cecc769dfbc955a4e4a6e709512",
+      "bytes": 1418
+    },
+    {
+      "group": "sixth",
+      "path": "src/_poems/chapter-3/poem-052.md",
+      "raw_sha256": "f2d21f7b75716fe3d9b1e583abbb2b99d258e3c0b3a551bba2bcb65348051202",
+      "git_blob_sha1": "ee9e4d7aea2bdcd6e30757a368881285ef93daa5",
+      "bytes": 2577
+    },
+    {
+      "group": "sixth",
+      "path": "src/_poems/chapter-3/poem-053.md",
+      "raw_sha256": "fb4f9b13abcc79ca64b9b56cc45103d105689e9f4b07dc0acc8258fe670af59a",
+      "git_blob_sha1": "cef9a3e0fafa861d62c2b18b2f5596d0920489b1",
+      "bytes": 1219
+    },
+    {
+      "group": "sixth",
+      "path": "src/_poems/chapter-3/poem-054.md",
+      "raw_sha256": "7f11a5c38f532bc11a3187a5091e25d403fd661b70e75b9560e704496aa0eab1",
+      "git_blob_sha1": "16158ea95c8caaff61cdc4e434fd6e8d7f202a0f",
+      "bytes": 1882
+    },
+    {
+      "group": "sixth",
+      "path": "src/_poems/chapter-3/poem-055.md",
+      "raw_sha256": "09943733be9f102ab07fda61f0420e17f41e4af50e64609aa3e3fdc7c6cfa7ae",
+      "git_blob_sha1": "56c8635a5ddf96993c950baa81ae8b90abed9e2d",
+      "bytes": 3817
+    },
+    {
+      "group": "sixth",
+      "path": "src/_poems/chapter-3/poem-056.md",
+      "raw_sha256": "c4db2b0c18915765b6d7d5227c03fbd30cfbe35aee665f4c40353625c786fac2",
+      "git_blob_sha1": "4590e2783bb44516af10821d2dc51cd9ae3c7ca1",
+      "bytes": 1789
+    },
+    {
+      "group": "sixth",
+      "path": "src/_poems/chapter-3/poem-057.md",
+      "raw_sha256": "5c608e985ad4453a84e46f0e5d1b1d6975c46c4e595f51e8b27ca7e48c428794",
+      "git_blob_sha1": "6742521ec22385b59042284b6183caf7ad8d3f42",
+      "bytes": 2110
+    },
+    {
+      "group": "sixth",
+      "path": "src/_poems/chapter-3/poem-058.md",
+      "raw_sha256": "b75da10480c10dd91c305ad2253d5108d3b179fad8cae7807ad86c1bb4928a7b",
+      "git_blob_sha1": "b3ba97ea7d5a191667ada4e239b153a3d1aba23e",
+      "bytes": 2536
+    },
+    {
+      "group": "sixth",
+      "path": "src/_poems/chapter-3/poem-059.md",
+      "raw_sha256": "dc3f94fff5ff7f0ed80006168de4f6fa2db830021d3dfc6138ac39dc181fe9a3",
+      "git_blob_sha1": "9d0d5658e980b4187b8afd14a8cca46f6941974b",
+      "bytes": 2851
+    },
+    {
+      "group": "sixth",
+      "path": "src/_poems/chapter-3/poem-060.md",
+      "raw_sha256": "b3582313df1fe6e246a4c57c44c0bb52b78bd7bee546d005ef7b9c695eaee535",
+      "git_blob_sha1": "ec0c2851664a387e8a59b34cf30d324b00c9721f",
+      "bytes": 3500
+    }
+  ],
+  "primary_evidence_sha256": {
+    "/tmp/pali-thera-next-two-source/fifth/THERA_FIFTH_GOLDENS.json": "b5ee36b8a8993f9a9b6348d5f68d6a23a1235f268f45546a246484882e2efe8f",
+    "/tmp/pali-thera-next-two-source/sixth/GOLDENS.json": "3ad2b60e26d0da364e71ea024aae6bc1348d731a4fd5229f323184a8321256e1",
+    "/tmp/pali-thera-next-two-source/fifth/THERA_FIFTH_SOURCE_REVIEW.json": "b02baad5085d1991bd2de26adb746123dfde1f521b6810b0ce62a9f8070b282e",
+    "/tmp/pali-thera-next-two-source/sixth/SOURCE_REVIEW.json": "8102918575f2f2ecd6c232255d799b6af589df105773471be00b246564c47b0d",
+    "/tmp/pali-thera-next-two-source/fifth/THERA_FIFTH_SOURCE_APPROVAL.json": "3fe94dbcc2518d032611b7998c5b440adeceea2f115e949161b2c548056386a8",
+    "/tmp/pali-thera-next-two-source/fifth/THERA_FIFTH_RIGHTS.json": "15d8f02f21bd6ca503333cbd6e9680656478a35fe9349014ff0311ae250672ee",
+    "/tmp/pali-thera-next-two-source/sixth/RIGHTS.json": "40f7b99690477925c303a0bdb4e711dc84bf3df96da299ad8c65dae1d45b5996",
+    "/tmp/pali-thera-next-two-review/INDEPENDENT_GOLDENS.json": "b8af28ee5ae1d74c3d5029eafcc7cdb68dd2781f9fae2d1c075c88711591bf08",
+    "/tmp/pali-thera-next-two-review/EXTRACTION_COMPARISON.json": "e4d25e43c3056a53f18851bdcab993d11abf46ede4566d2f3d7141baed878e96",
+    "/tmp/pali-thera-next-two-review/independent_extract.py": "5dc640b12cf5810323aa2edf420cd80a5d5809389e3ee3e573130edf9a01440d"
+  }
+}

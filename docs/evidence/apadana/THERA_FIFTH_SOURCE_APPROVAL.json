@@ -1,0 +1,95 @@
+{
+  "decision": "SOURCE_APPROVED9/HOLD1; conditional on exact finite extraction, all original notes/apparatus and visible edition differences; not runtime or CI approval.",
+  "baseline": "a154013eded45f6ee319fff5cc246ed563811c55",
+  "approved": [
+    {
+      "poem": 41,
+      "id": "tha-ap43",
+      "raw_sha256": "d1f7ecbe07b4504f51fc7b3730f0fae02f771488059c23e2b800bb0d9b15d208",
+      "body_sha256": "d67bda28acafb3b604e7641433e5561eb3912481a40ebd9ecc1a49dc09b0d141",
+      "notes_sha256": "17f875c8bb1f1ef8f36179b4dcdba08c827836235c4bd5469696ed9135e017e8",
+      "root_sha256": "b7409cf6fbb5539ecf690fb007dcc4e2973ea4b4e3004930cdfc5c1abf1f8336"
+    },
+    {
+      "poem": 43,
+      "id": "tha-ap45",
+      "raw_sha256": "68ca39da90b8ce93bc8e74dd09306e28d7fdf79083c9c126857aae7980d7d754",
+      "body_sha256": "42a3db0455737aa02a2630c6442eb2f6ab23fbe7c77409799c88b5246bc50a03",
+      "notes_sha256": "2501786ab42429d50fd2c3e5a4511eff7f14d147a8ad10ff901e433e357ac972",
+      "root_sha256": "b79372b8e90abb4414d69035860556a457ee4231bdea801da44994b1c5af7393"
+    },
+    {
+      "poem": 44,
+      "id": "tha-ap46",
+      "raw_sha256": "34cdcfde81df6f945f0414bf6a32b32b2857c74ae98460d47e222b31cbea3ec7",
+      "body_sha256": "09dbb83485f72a1ed75a3da8b285bf5d6d3c9085aea864e3d13904f271df21ea",
+      "notes_sha256": "7fa65079d459ff6b83a84e875fba34c58a08f4fdf58f73aaf45f71d298566631",
+      "root_sha256": "ac51abebbff01be5b9fc5301c6c40e0868d417d396dcfb025156f8cd82763651"
+    },
+    {
+      "poem": 45,
+      "id": "tha-ap47",
+      "raw_sha256": "8f6b0825b803566876f5bad569c1fa0d0cdf32ecf36523d88f9c3ac0ec33edbe",
+      "body_sha256": "34712db447dab98cf6b11059cfa28bf7a4841eb43adb29c4a55f3e1f4a15ac39",
+      "notes_sha256": "d6b1810658c93e2c654caa5c5a909ee9329c840af2ecca312e5ee83941a69249",
+      "root_sha256": "c88adcb3282eb8822eb7a3f40023e1e03e1ff8e50356a4960d48b9b5f8590a84"
+    },
+    {
+      "poem": 46,
+      "id": "tha-ap48",
+      "raw_sha256": "a3459bbf3765caed552ea9fa4d4579ac92a308e5b598b24486d64a85c13ce651",
+      "body_sha256": "6c2ed4b6c66b6f88c9248d727b5c2abbe59a2b96163cc157435c20c3e5222c97",
+      "notes_sha256": "4ed6e54adf44333d2a81f233eae810f8bf265fa7b9bf3317afa89bc3077fbec0",
+      "root_sha256": "c9f42b2b625ee3a1ae2ee9a3d70ef525188f1bf7478e63ee463c4ef7c74aab47"
+    },
+    {
+      "poem": 47,
+      "id": "tha-ap49",
+      "raw_sha256": "e64f5a2de7426616ec910d1814897b185ec63c936c3a3d01b7271b610a2691a9",
+      "body_sha256": "078d556268542b77c6d420dd4238eea8301c391f7b3a160d2d1551af651f99d9",
+      "notes_sha256": "7d340eed03cdb13df43301791ed828dd9b177867b46c009b26a1000bf8fe896e",
+      "root_sha256": "1c85e0bb0ffb084a12574c818af8fa2cf99008b2ec75490d699fdaef2bd1231f"
+    },
+    {
+      "poem": 48,
+      "id": "tha-ap50",
+      "raw_sha256": "72e4cbc431e65827cb2c72d0fdd44587f426382c7cb1d776bc4f0c52a69ba073",
+      "body_sha256": "fd95113bcbe31dbb8aaf76d6003da936b7e1f90028a6aef8af32f2015ee1ccfa",
+      "notes_sha256": "f4c5db3f1d50de1ce3c1bf00dec7f9099eb31b3eb7c9e89effef318f63b1becc",
+      "root_sha256": "6ec4a9cd6430eb1016c980865dcbe8df1a5733f98c84e7beb847baeb3075a232"
+    },
+    {
+      "poem": 49,
+      "id": "tha-ap51",
+      "raw_sha256": "9c4cc9848ddf5866d9e69fd4f4d83fb445434bc2f38d35a8ef4f22fc43b06dab",
+      "body_sha256": "a58b817f55dff9d26b2b804b1347f4ae1d7e6aa22634e62ea58a7df104345efe",
+      "notes_sha256": "ca8883d14717e8776eb2adb9633c36d54e32b27e6f1bfb73a87dff944fbfe118",
+      "root_sha256": "c4837f7a72e20cd1d8e34819c10ed63c8d3be273a0841d07f6ad89becf706abd"
+    },
+    {
+      "poem": 50,
+      "id": "tha-ap52",
+      "raw_sha256": "db74917f990d06c697ef0697baa45a86a4361dd29d67200fdbb2ff3cb8d0513b",
+      "body_sha256": "d2e7e86ca7b7008171a62e9364497ff00cc886b92cea27d03a1c36ceb2cf2f9a",
+      "notes_sha256": "caaf2aa68c2e6e75dce5c4e93c9e3879e6a6e7fd7937bd7e9a5487b70ca9bb8a",
+      "root_sha256": "ebd31ade10d99f3945b48ed29029af2d1b1a2fa59b34ac383cb85a3686f59dbd"
+    }
+  ],
+  "held": [
+    {
+      "poem": 42,
+      "id": "tha-ap44",
+      "reason": "Exact standalone editorial hiatus marker ownsnote12and describes intentional omittedVRI50; current parser lacks finite separately ownededitorialgapcontract. Preserve completepublisheredition28stanzas/original13notes in research; no deletion/wordinginvention/linecompleteVRIclaim permitted."
+    }
+  ],
+  "approved_totals": {
+    "poems": 9,
+    "physical_publisher_stanzas": 114,
+    "body_paragraphs": 141,
+    "poem_notes": 67
+  },
+  "source_review_sha256": "b02baad5085d1991bd2de26adb746123dfde1f521b6810b0ce62a9f8070b282e",
+  "goldens_sha256": "b5ee36b8a8993f9a9b6348d5f68d6a23a1235f268f45546a246484882e2efe8f",
+  "rights_sha256": "15d8f02f21bd6ca503333cbd6e9680656478a35fe9349014ff0311ae250672ee",
+  "reproduction": "python /tmp/pali-thera-next-two-source/fifth/review.py; python /tmp/pali-thera-next-two-source/fifth/findings.py; no project parser output used for source hashes."
+}

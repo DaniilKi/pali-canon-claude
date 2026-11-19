@@ -4,6 +4,8 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Add nineteen individually reviewed Therā publisher poems41,43–60, preserving205 printed entries and126 owned notes. Keep42 held pending editorial-gap handling. Separate49’s inline recitation and50/60 summaries with existing finite descriptors; retain all prior70 profiles and every canonical/commentary byte. Widgetv24, portable independent replay and bounded52-check dev-only acceptance (D249).
+
 - Add ten further reviewed Therā publisher poems31–40 with111 stanza entries/53 notes, bringing the finite edition subset to70 choices. Correct three Theragāthā scopes with saved-position refusal and unchanged wording/commentary. Require mandatory edition caveats in standalone/comparison/embedded readers and pinned bodies for legacy quotation evidence. Use widgetv23 and preserve earlier source choices/holds (D248).
 - Add twenty first indexed complete publisher-edition Therā poems (publisher11–30), preserving all forty Therī choices. Separate source-family parsing and explicit mappings retain327stanzas/153notes, zero-note sources, irregular labels, two summaries and post-poem/post-summary recitations. Repair two paired roots and one false commentary association without changing words; protect aligned commentary cursors with exact mapping pins. Add draft-safe reviewed-edition navigation and widgetv22. Whole links become2,643; no full-Therā or line-complete VRI claim (D247).
 

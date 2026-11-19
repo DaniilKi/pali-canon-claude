@@ -1467,7 +1467,7 @@ def main():
     assert manifest == json.loads((ROOT / 'server/data/apadana.json').read_text()), 'Package metadata differs'
     combined_rows, commit = manifest['links'], manifest['source']['commit']
     theri_ids = {'thi-ap' + str(n) for n in range(1, 41)}
-    thera_ids = {'tha-ap' + str(n) for n in range(13, 43)}
+    thera_ids = {'tha-ap' + str(n) for n in range(13, 43)} | {'tha-ap43', 'tha-ap45', 'tha-ap46', 'tha-ap47', 'tha-ap48', 'tha-ap49', 'tha-ap50', 'tha-ap51', 'tha-ap52', 'tha-ap53', 'tha-ap54', 'tha-ap55', 'tha-ap56', 'tha-ap57', 'tha-ap58', 'tha-ap59', 'tha-ap60', 'tha-ap61', 'tha-ap62'}
     assert set(combined_rows) == theri_ids | thera_ids, 'Unexpected combined publisher-source scope'
     # These historical journeys own only the Therī chapter-4 profiles; publisher numbers overlap Therā.
     rows = {uid: row for uid, row in combined_rows.items() if uid in theri_ids}

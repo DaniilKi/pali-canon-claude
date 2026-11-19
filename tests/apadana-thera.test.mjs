@@ -55,12 +55,12 @@ function assertApparatus(value, p, content) {
 
 // Aggregate hashes were computed from the clean a29607d old40 snapshot;
 // these pins do not derive canonical identities from publisher numbering.
-test('seventy-profile registry preserves frozen old forty and the original twenty reviewed Therā identities', () => {
+test('current registry preserves frozen old forty and the original twenty reviewed Therā identities', () => {
   deeplyFrozen(APADANA_PROFILES); deeplyFrozen(THERI_APADANA_PROFILES); deeplyFrozen(THERA_APADANA_PROFILES);
-  assert.equal(Object.keys(APADANA_PROFILES).length, 70);
+  assert.equal(Object.keys(APADANA_PROFILES).length, 89);
   assert.equal(Object.keys(THERI_APADANA_PROFILES).length, 40);
-  assert.equal(Object.keys(THERA_APADANA_PROFILES).length, 30);
-  const laterApproved = ['tha-ap33','tha-ap34','tha-ap35','tha-ap36','tha-ap37','tha-ap38','tha-ap39','tha-ap40','tha-ap41','tha-ap42'];
+  assert.equal(Object.keys(THERA_APADANA_PROFILES).length, 49);
+  const laterApproved = ['tha-ap33','tha-ap34','tha-ap35','tha-ap36','tha-ap37','tha-ap38','tha-ap39','tha-ap40','tha-ap41','tha-ap42','tha-ap43','tha-ap45','tha-ap46','tha-ap47','tha-ap48','tha-ap49','tha-ap50','tha-ap51','tha-ap52','tha-ap53','tha-ap54','tha-ap55','tha-ap56','tha-ap57','tha-ap58','tha-ap59','tha-ap60','tha-ap61','tha-ap62'];
   assert.deepEqual(Object.keys(THERA_APADANA_PROFILES).sort(), [...gold.poems.map(g => g.id), ...laterApproved].sort());
   assert.deepEqual(Object.keys(APADANA_PROFILES).sort(), [...Object.keys(THERI_APADANA_PROFILES), ...gold.poems.map(g => g.id), ...laterApproved].sort());
   assert.equal(digest(JSON.stringify(THERI_APADANA_PROFILES)), '65845a2e7f348b2a6616c06be156885ee3078ce5c588b7cd0575702f5b2d2910');
@@ -93,7 +93,7 @@ test('seventy-profile registry preserves frozen old forty and the original twent
   }
   assert.equal(thera('tha-ap19').publisher_divisions[0].placement, 'after_poem');
   assert.equal(thera('tha-ap32').publisher_divisions[0].placement, 'after_chapter_summary');
-  for (const uid of ['tha-ap1', 'tha-ap2', 'tha-ap12', 'tha-ap43']) assert.equal(APADANA_PROFILES[uid], undefined);
+  for (const uid of ['tha-ap1', 'tha-ap2', 'tha-ap12', 'tha-ap44', 'tha-ap63']) assert.equal(APADANA_PROFILES[uid], undefined);
 });
 
 test('source-enabled twenty exact Git artifacts reproduce 327 stanzas, 387 paragraphs, 153 notes and note-free apparatus', { skip: !checkout }, () => {
@@ -212,7 +212,7 @@ test('unsupported chapter-three artifacts and foreign metadata fail before any s
   const d = canon.load(), p = thera('tha-ap13'), u = d.byId.get(p.id), book = d.canon.books[u.book];
   for (const key of [...pins, 'id', 'poem', 'publisher_chapter', 'note_numbers', 'stanza_layout', 'chapter_summary', 'publisher_divisions']) assert.throws(() => validateLink({ ...p, [key]: null }, p.id, u, book), /differs/);
   let calls = 0; globalThis.fetch = async () => { calls++; throw Error('No request should be sent'); };
-  for (const basename of ['poem-010', 'poem-041']) {
+  for (const basename of ['poem-010', 'poem-042', 'poem-061']) {
     const url = p.raw_url.replace('poem-011', basename), selector = tid(p).replace('poem-011', basename);
     assert.equal(isApadanaRawUrl(url), false);
     await assert.rejects(fetchPublic(url, { json: false }), /outside the supported public sources/);
@@ -260,8 +260,8 @@ test('source-enabled all twenty APIs retain 500-character continuations, edition
   await assert.rejects(english.translation(canon.resolve(p.id).unit, tid(p), { ...first.continue_with.arguments, prefix_sha256: '0'.repeat(64) }), /prefix|changed/);
 });
 
-test('source-enabled v23 reading API returns the new family and note-free apparatus without old-family collisions', { skip: !checkout }, async () => {
-  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v23.html'); onlyPinnedFetch([]);
+test('source-enabled current reading API returns the new family and note-free apparatus without old-family collisions', { skip: !checkout }, async () => {
+  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v24.html'); onlyPinnedFetch([]);
   for (const uid of ['tha-ap13', 'tha-ap19', 'tha-ap22', 'tha-ap23', 'tha-ap24', 'tha-ap30', 'tha-ap32']) {
     const p = thera(uid), value = await readPassage({ uid, translation: tid(p), englishCharacters: 500 });
     assert.ok(!value.english_error, value.english_error); assert.equal(value.text_id, uid);

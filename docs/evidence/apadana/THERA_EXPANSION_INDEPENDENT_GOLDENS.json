@@ -1,0 +1,3178 @@
+{
+  "base_commit": "a154013eded45f6ee319fff5cc246ed563811c55",
+  "independence": "Separate Python parser and ElementTree XML replay, no source-agent extraction functions or production English/VRI parsers imported",
+  "original_xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "full_original_xml_blocks_exact": 14645,
+  "poems": [
+    {
+      "id": "tha-ap43",
+      "poem": 41,
+      "title": "Upāli",
+      "raw_sha256": "d1f7ecbe07b4504f51fc7b3730f0fae02f771488059c23e2b800bb0d9b15d208",
+      "body_sha256": "d67bda28acafb3b604e7641433e5561eb3912481a40ebd9ecc1a49dc09b0d141",
+      "notes_sha256": "17f875c8bb1f1ef8f36179b4dcdba08c827836235c4bd5469696ed9135e017e8",
+      "paratext_sha256": "8ae0a7cbd4d2ad562406fac73f7aa0a4438e52d26eea501323ce7cbeb916adad",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1116",
+          "suffix": "(1) [1116]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1117",
+          "suffix": "(2) [1117]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1118",
+          "suffix": "(3) [1118]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1119",
+          "suffix": "(4) [1119]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1120",
+          "suffix": "(5) [1120]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1121",
+          "suffix": "(6) [1121]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1122",
+          "suffix": "(7) [1122]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "1123",
+          "suffix": "(8) [1123]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "1124",
+          "suffix": "(9) [1124]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "1125",
+          "suffix": "(10) [1125]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "1126",
+          "suffix": "(11) [1126]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "1127",
+          "suffix": "(12) [1127]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "1128",
+          "suffix": "(13) [1128]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "1129",
+          "suffix": "(14) [1129]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "1130",
+          "suffix": "(15) [1130]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "1131",
+          "suffix": "(16) [1131]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "1132",
+          "suffix": "(17) [1132]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "1133",
+          "suffix": "(18) [1133]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "1134",
+          "suffix": "(19) [1134]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "1135",
+          "suffix": "(20) [1135]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "1136",
+          "suffix": "(21) [1136]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "1137",
+          "suffix": "(22) [1137]",
+          "lines": 4
+        },
+        {
+          "local_label": "23",
+          "publisher_label": "1138",
+          "suffix": "(23) [1138]",
+          "lines": 4
+        },
+        {
+          "local_label": "24",
+          "publisher_label": "1139",
+          "suffix": "(24) [1139]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "09c3f3226f642d379e52711e0492a2372779ac30d13b155f975cff01754ac005",
+          "lines": 1
+        },
+        {
+          "sha256": "92a0ba15f594a0519bb0bdd789e844bb657dc87b5c2fcc6dc0af1e92fe938b0e",
+          "lines": 4
+        },
+        {
+          "sha256": "1bdd1bac9302cc26f0204116cb7bc315ffa3a6b3b08778b7c042eb1dc5e3e68a",
+          "lines": 4
+        },
+        {
+          "sha256": "07625750e80fa11be75f3bc2a2c8f80fcfd6d21af0341aa317ed0c9dd53e1ac3",
+          "lines": 4
+        },
+        {
+          "sha256": "aa6854f3ffdc0aab212f530bac37e1cc9ad3d10e6c7d2d6be348a79af1d0be1d",
+          "lines": 4
+        },
+        {
+          "sha256": "1321587fb6c4d5e507a2ddd41a1e16fd415d4e28280f617f4907710256d7bc55",
+          "lines": 4
+        },
+        {
+          "sha256": "7c661cec9d1b9adc9daa4f0718ecbe290aed6ac43bd9171ef0a2176a61b53da9",
+          "lines": 4
+        },
+        {
+          "sha256": "f6b9b7428a842826b73c20d59b8f92ab4bb85360587c8b5450c3145296eebb74",
+          "lines": 4
+        },
+        {
+          "sha256": "e37ca26c97ca539dab304d798c1bf7657d8d3309dad225f7c4c84aedbbf5de44",
+          "lines": 4
+        },
+        {
+          "sha256": "2132710cf17b54ea6ce25a9cf3f7471ef92f7cee9d3715e069f4e24f87a987c0",
+          "lines": 4
+        },
+        {
+          "sha256": "c4668ebc33529f529ff30f81deaec933efd605e0c33e50c4861b9d8c5303c3aa",
+          "lines": 4
+        },
+        {
+          "sha256": "fdf925a1d91cf4bb2893f4f7d6edfda1c5d41d232fa8a5f63d1028d85fd0e5c6",
+          "lines": 4
+        },
+        {
+          "sha256": "e5cbb5dd1258b4c3eb4b1a39da3b9c34c155ebdfd044b9f96ec3aac0e470f711",
+          "lines": 4
+        },
+        {
+          "sha256": "85d655a4347a8392bcb2725a2f8a3cf106230a7b2ec76b6aa9b8248239104230",
+          "lines": 4
+        },
+        {
+          "sha256": "0978f8d644903d07153636f90951081445139d077f195428fdfab4239ff3b017",
+          "lines": 4
+        },
+        {
+          "sha256": "4d97ff480234553d31ee4a7a9d978da4364fa2e5d313c00c225fb8acce45d3e0",
+          "lines": 4
+        },
+        {
+          "sha256": "58c6e222b6279d489ac582ac45f1877a9496448babfaf10540352ee1a5a13f69",
+          "lines": 4
+        },
+        {
+          "sha256": "35651f4ed9953cf6d5951ba4ed68db387a35b5c5c6869184eb59f4129bb277fd",
+          "lines": 4
+        },
+        {
+          "sha256": "e04099767479b64d1ec69f05479c1071937d788364473b14d0b33cad91da8807",
+          "lines": 4
+        },
+        {
+          "sha256": "64eec9452bfd2704fe2890a90f8d7cdc6b165bff2f4fb2051d842754adcc8e78",
+          "lines": 4
+        },
+        {
+          "sha256": "6744af027216c6c665ed4a29fef1146a7998465f4f1a2a6412b6c2cb7576cbae",
+          "lines": 4
+        },
+        {
+          "sha256": "ef6a2703af95ff750f50e67559bda88cb18b741a0f22fd5c7ebad023df03971d",
+          "lines": 4
+        },
+        {
+          "sha256": "dd5e6042edab37c76335a0e0c0e4d21d129784356539b004ad8598d11267b281",
+          "lines": 4
+        },
+        {
+          "sha256": "d4c8357e8f49efa2234bbb3fd98d91c6b8f2aa4779862eef796e67f3ab9a20f3",
+          "lines": 4
+        },
+        {
+          "sha256": "8d4697374386b64cde7097bd75ffea71af44aa074018c9f4286bb03284b9e612",
+          "lines": 4
+        },
+        {
+          "sha256": "2e53b2978ecb1fa0e1aca8549bd77a7e979cb0f2078bd1b75b71c6c8f167229e",
+          "lines": 1
+        },
+        {
+          "sha256": "738099f97eb214ee99713f210100ee75ab7d00955bb129d7f3752aee8aeb7831",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "805cec680b7384cec8d63a5d7bf815de7e7884a3cf24479236560a66c47865a7"
+        },
+        {
+          "number": 2,
+          "body_sha256": "e9216ca9fc15ea39cc5a4cced71fa0fcf0fbda76e31dbf78861e70256b3087d5"
+        },
+        {
+          "number": 3,
+          "body_sha256": "636c5b54e06cad5a483fa485113ad5e0a28a4c875a39f97077c3bc07eaa3466f"
+        },
+        {
+          "number": 4,
+          "body_sha256": "68d61972de4be1114e9162ba2f347b3d82cda5c0d61bf267ac2ef78a60f42e3d"
+        },
+        {
+          "number": 5,
+          "body_sha256": "50809880ec14f925f58d5b87f76c4a5d3591967b7abf665413274018d487c197"
+        },
+        {
+          "number": 6,
+          "body_sha256": "ca264388bcdbc68a35c6ab597648bb54a5405e305b58304463e696485c65f14f"
+        },
+        {
+          "number": 7,
+          "body_sha256": "6fef24ee97808a2dda284b64bc8ae814c1be3a05b8305fbd770123278130df37"
+        },
+        {
+          "number": 8,
+          "body_sha256": "301bbaa16eee0781d3fb41819987cf83815a7fa7c2f0efacf5cf21219ff6bd23"
+        },
+        {
+          "number": 9,
+          "body_sha256": "b6c01978862d987c0b8218106b729c44a949a47246bb846d38df41d9e139919e"
+        },
+        {
+          "number": 10,
+          "body_sha256": "2c4a6863588faec6fa658bfcb41b9a1ac40846cefceab8bd78e251402a3a1ba2"
+        },
+        {
+          "number": 11,
+          "body_sha256": "bf083d62ca2f7b8d645deff75d87236435a4a6121f05e856fe6eb47fdc88d9b9"
+        },
+        {
+          "number": 12,
+          "body_sha256": "2be90186890124876c8baad41836722b7ec29681f0572e5b5254ddae4d2fb970"
+        },
+        {
+          "number": 13,
+          "body_sha256": "4f286e2e5a6f160d91948e7ae5094381aad44854cdc731f360986475730c5877"
+        },
+        {
+          "number": 14,
+          "body_sha256": "3a6a17b59eaef9a06e9d5cd4a268f7f7c1c4e4de6f381d9aaeb34b8a34a3e553"
+        }
+      ],
+      "root_sha256": "b7409cf6fbb5539ecf690fb007dcc4e2973ea4b4e3004930cdfc5c1abf1f8336",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap45",
+      "poem": 43,
+      "title": "Bhaddiya-Kaḷigodhāya-Putta",
+      "raw_sha256": "68ca39da90b8ce93bc8e74dd09306e28d7fdf79083c9c126857aae7980d7d754",
+      "body_sha256": "42a3db0455737aa02a2630c6442eb2f6ab23fbe7c77409799c88b5246bc50a03",
+      "notes_sha256": "2501786ab42429d50fd2c3e5a4511eff7f14d147a8ad10ff901e433e357ac972",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1168",
+          "suffix": "(1) [1168]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1169",
+          "suffix": "(2) [1169]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1170",
+          "suffix": "(3) [1170]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1171",
+          "suffix": "(4) [1171]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1172",
+          "suffix": "(5) [1172]",
+          "lines": 6
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1173",
+          "suffix": "(6) [1173]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1174",
+          "suffix": "(7) [1174]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "1175",
+          "suffix": "(8) [1175]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "1176",
+          "suffix": "(9) [1176]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "1177",
+          "suffix": "(10) [1177]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "1178",
+          "suffix": "(11) [1178]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "1179",
+          "suffix": "(12) [1179]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "1180",
+          "suffix": "(13) [[1180]",
+          "lines": 6
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "1181",
+          "suffix": "(14) [1181]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "1182",
+          "suffix": "(15) [1182]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "1183",
+          "suffix": "(16) [1183]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "fb86d08e20af4147ac322ced5aa6a4a79dfdc361e670cdbe34cfcd0bad1632ee",
+          "lines": 1
+        },
+        {
+          "sha256": "a6eb43159381683d16bde0c2087cb3b161eb7d79f85166cbcfeb0d2f62400d7e",
+          "lines": 4
+        },
+        {
+          "sha256": "387b5734c257b993e2a34d39aa8061af2fd4d2c63d241c6432c3943ae36f79dc",
+          "lines": 4
+        },
+        {
+          "sha256": "585b85da725d309bd2f705c8fc90f09bdf10f1d378b233f96a65bcf5f8a11b49",
+          "lines": 4
+        },
+        {
+          "sha256": "8a7e9bff9d0a052e991baf267743944a19ae1d16f4652cd6ecf004adaf675c3c",
+          "lines": 4
+        },
+        {
+          "sha256": "9285c57c2abb768864ad3d68893949b329b9634e388de93426ab5448776050e9",
+          "lines": 6
+        },
+        {
+          "sha256": "201e768f24096c2a8107b5419a33200976149468fbaa425b7d89c74351fe2b8e",
+          "lines": 4
+        },
+        {
+          "sha256": "5c4a51f17cf10be94c97282146160899018929661727df8e7aa1f595821f1121",
+          "lines": 4
+        },
+        {
+          "sha256": "6efc89acc5de63c8f40bb2f920ae1bc42423a6a9d72465a3efbe7eee450c903a",
+          "lines": 4
+        },
+        {
+          "sha256": "68a8cb25b9b55f8e53ea30bacd3b0555f41c6e673d752aa1bf19d0ce5897797d",
+          "lines": 4
+        },
+        {
+          "sha256": "4e0abb8d7f474bda9fed0d6af23eda93f37d4829c81f0a20ea088915c58ac3bb",
+          "lines": 4
+        },
+        {
+          "sha256": "e87a05adbd0656dafb7e1ce5343e61a26483f5864e624407aed9b1249a16f5f6",
+          "lines": 4
+        },
+        {
+          "sha256": "7a4c2c04ba2899a0af49c966527ae4628d2f591e8070fd3e8d4d4acc40166f45",
+          "lines": 4
+        },
+        {
+          "sha256": "1db2229ed9190835938131310166d10ac8b0d6fafdf30bdd25352404dc68bde3",
+          "lines": 6
+        },
+        {
+          "sha256": "d12a6267ca543a9bd4bdcb34c9f57cd493697cb9e4fad8167ff611b8be015f28",
+          "lines": 4
+        },
+        {
+          "sha256": "41edc5409ae4af622545658d797c70f6c41c502914e6020938766c5ccf26cb2c",
+          "lines": 4
+        },
+        {
+          "sha256": "01770dd70c50aad78c46e78e2ce215f431365118c49286ab3398b742fd093be6",
+          "lines": 4
+        },
+        {
+          "sha256": "d4a470b365b65cb30f8a42911874973a22126571b565cef6838f88e985daf289",
+          "lines": 2
+        },
+        {
+          "sha256": "c7dd228de85d9eeee0f2846da9eaaa573c0a52ae22a3ad0ba1626840f2004031",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "b40f90099615cb7450ffbe44dd9eb3f3447bc8b02baf9e8d13c2728f771308ea"
+        },
+        {
+          "number": 2,
+          "body_sha256": "f8f068a020418602491235f4d62757d0cb9f8c1ced88ed852d0f6d307c771eca"
+        },
+        {
+          "number": 3,
+          "body_sha256": "4785df8d35895d172be760887f05ed8714224cfbf9707212688a99308782814a"
+        },
+        {
+          "number": 4,
+          "body_sha256": "e25fcb3bdfcc95f75bdf04935b174a8a0e998ebe9a6d0e338c3c249c63f51951"
+        },
+        {
+          "number": 5,
+          "body_sha256": "882b234cf4e2ae141d7c51d1a47e78f163141beffc4c0ab44cc489dff904f262"
+        },
+        {
+          "number": 6,
+          "body_sha256": "56ee534c6c3966684e6f4c3aa446b0ed6c99cf7460c5a05f6f74ed3abe91bae1"
+        },
+        {
+          "number": 7,
+          "body_sha256": "33e9fd60c4d05065f8efae51bd70439a6045f8b4450d73040d06bbe20edc5f77"
+        }
+      ],
+      "root_sha256": "b79372b8e90abb4414d69035860556a457ee4231bdea801da44994b1c5af7393",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap46",
+      "poem": 44,
+      "title": "Sannidhāpaka",
+      "raw_sha256": "34cdcfde81df6f945f0414bf6a32b32b2857c74ae98460d47e222b31cbea3ec7",
+      "body_sha256": "09dbb83485f72a1ed75a3da8b285bf5d6d3c9085aea864e3d13904f271df21ea",
+      "notes_sha256": "7fa65079d459ff6b83a84e875fba34c58a08f4fdf58f73aaf45f71d298566631",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1184",
+          "suffix": "(1) [1184]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1185",
+          "suffix": "(2) [1185]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1186",
+          "suffix": "(3) [1186]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1187",
+          "suffix": "(4) [1187]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1188",
+          "suffix": "(5) [1188]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1189",
+          "suffix": "(6) [1189]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1190",
+          "suffix": "(7) [1190]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "0e736b43b17620826d4c0397f8cd11d4bc2fa205038247c020f6910bb541caa3",
+          "lines": 1
+        },
+        {
+          "sha256": "6192f7945539414c5738eecea8f2cd2a4c4005f991586003e3d5a10338597fa1",
+          "lines": 4
+        },
+        {
+          "sha256": "1c289442da0f76cdaab351091c0d718aec70abec10f1c3e156aede0d33160aae",
+          "lines": 4
+        },
+        {
+          "sha256": "665d6c6587ae1db496e06991b78800b12c044b50197428f105f55f82e6fbd119",
+          "lines": 4
+        },
+        {
+          "sha256": "4a4d46bfeb57718aa848421431afd2e5a2e4d03631fee752a34474e4866218b0",
+          "lines": 4
+        },
+        {
+          "sha256": "c7afa98a05362a5e5f73f303d87d7dcb602d6c0e3de5e615f54ab61490df960e",
+          "lines": 4
+        },
+        {
+          "sha256": "bfbcae75b9e98ea3334dddc91c68340a48618415f21de147c9ebfb828d0d13b4",
+          "lines": 4
+        },
+        {
+          "sha256": "ea758084ef2cd622e590b90d9f8e7e80327d51bab8f7114a505ab52b6ecfd40f",
+          "lines": 4
+        },
+        {
+          "sha256": "c8574f01904bd50b947c09419a5cd0cb4c6db28bab60cbf463dc0c79b1147815",
+          "lines": 1
+        },
+        {
+          "sha256": "01a906f331ac918254081444758b98381ab8c47cc9792a80bc25a0316489c8d1",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "0ed548f3eb92c6a7dbba7c0f2267c5a9d6e9868776a0067f489fa22c8e3878fc"
+        },
+        {
+          "number": 2,
+          "body_sha256": "1805f40727f492614bfb485263c1f01af9db27530e766b62cd1881101805bccd"
+        },
+        {
+          "number": 3,
+          "body_sha256": "bbb4a8e57ee49f0dbca4b4499edb68e3c1cd38ff728c18a6fb77e56beef0ac66"
+        },
+        {
+          "number": 4,
+          "body_sha256": "51dc6f3b8c1cb49cd3bbb45389797b28f4b18425ca6c61eb079c8e2c68a83d5d"
+        },
+        {
+          "number": 5,
+          "body_sha256": "9073ca43a94d499b472a5ee1d02b7e3eec58bd770595ca6ebe58098e40e342a0"
+        },
+        {
+          "number": 6,
+          "body_sha256": "faa7592d0a673fd8c8a6bd2c68a395246a73fb4556c4e0f6345ca9f08645dcd9"
+        },
+        {
+          "number": 7,
+          "body_sha256": "9e2b9b9ac684262951ed9c0720b993aeb6527cf7bf2934a7ed15fd753d4e3635"
+        },
+        {
+          "number": 8,
+          "body_sha256": "ea77021cc327c9d78cfe76d52c512050545fbe9980234b4992f5a512eb43bd55"
+        },
+        {
+          "number": 9,
+          "body_sha256": "ea77021cc327c9d78cfe76d52c512050545fbe9980234b4992f5a512eb43bd55"
+        }
+      ],
+      "root_sha256": "ac51abebbff01be5b9fc5301c6c40e0868d417d396dcfb025156f8cd82763651",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap47",
+      "poem": 45,
+      "title": "Pañcahatthiya",
+      "raw_sha256": "8f6b0825b803566876f5bad569c1fa0d0cdf32ecf36523d88f9c3ac0ec33edbe",
+      "body_sha256": "34712db447dab98cf6b11059cfa28bf7a4841eb43adb29c4a55f3e1f4a15ac39",
+      "notes_sha256": "d6b1810658c93e2c654caa5c5a909ee9329c840af2ecca312e5ee83941a69249",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1191",
+          "suffix": "(1) [1191]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1192",
+          "suffix": "(2) [1192]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1193",
+          "suffix": "(3) [1193]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1194",
+          "suffix": "(4) [1194]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1195",
+          "suffix": "(5) [1195]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1196",
+          "suffix": "(6) [1196]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "31eeee5772b9714e497b7ada1e7443f5e8be35d5bfa968511dcb752588e7ef11",
+          "lines": 1
+        },
+        {
+          "sha256": "a4b16b75765136a850831e14c618978a5d6c312e3e3703a29d90115d4a96a78a",
+          "lines": 4
+        },
+        {
+          "sha256": "58155995da0e9bbbceaace2ef9746219aad7d51258eab47c07a6d86f808de986",
+          "lines": 4
+        },
+        {
+          "sha256": "83d8aa357cff2dc728c55b9936b01255e7208d52eca909d62b0da499aea2786a",
+          "lines": 4
+        },
+        {
+          "sha256": "48f0801c8d2d7cf84f4aae164426e5ffbed152bf712fee433bd3eeeb276827f1",
+          "lines": 4
+        },
+        {
+          "sha256": "789eeb15a431cee4e44c180b2d2e21c1f5675828c972c76875e51ab062386a10",
+          "lines": 4
+        },
+        {
+          "sha256": "33d238bbe3a5963a691d1c9a162bd17b7f501c5f7f603366952404e3f34e5610",
+          "lines": 4
+        },
+        {
+          "sha256": "06950027ee25353b8166eb5f2c17b81174808206db5afeb800b055d09bc14cd0",
+          "lines": 1
+        },
+        {
+          "sha256": "2aede70559114e1009bf5b8c97f78a5a566ddc91d2d526431a73029c48e7b742",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "0f1bc058bec8032778fefd964e0ca15d273b08a56678f88c33c82a9eff3bc7f1"
+        },
+        {
+          "number": 2,
+          "body_sha256": "1bf988df7f8b573c61b670953eeecc7ab7ae7b9c7c3ac2f1462626f904c9a4b0"
+        },
+        {
+          "number": 3,
+          "body_sha256": "6d139e593c00155d7a1a710c2fb622cbfc03eb5c534462420053e03bd5e94c8a"
+        },
+        {
+          "number": 4,
+          "body_sha256": "ee6d62175c627b6e734a91b9d6261074474fa9b6c9455bbb13b05712a8d35f14"
+        },
+        {
+          "number": 5,
+          "body_sha256": "d370ad7dfe61e49dcc22c6b36f871fe303d030bb7a8f8fb02256584f9dc90d11"
+        },
+        {
+          "number": 6,
+          "body_sha256": "bb940174ac279e0786c95a9f3d8f27c5298b9eee082e6c8aa7aeeae3b53befa6"
+        }
+      ],
+      "root_sha256": "c88adcb3282eb8822eb7a3f40023e1e03e1ff8e50356a4960d48b9b5f8590a84",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap48",
+      "poem": 46,
+      "title": "Padumacchadaniya",
+      "raw_sha256": "a3459bbf3765caed552ea9fa4d4579ac92a308e5b598b24486d64a85c13ce651",
+      "body_sha256": "6c2ed4b6c66b6f88c9248d727b5c2abbe59a2b96163cc157435c20c3e5222c97",
+      "notes_sha256": "4ed6e54adf44333d2a81f233eae810f8bf265fa7b9bf3317afa89bc3077fbec0",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1197",
+          "suffix": "(1) [1197]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1198",
+          "suffix": "(2) [1198]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1199",
+          "suffix": "(3) [1199]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1200",
+          "suffix": "(4) [1200]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1201",
+          "suffix": "(5) [1201]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "4333fca9ff7bde2486ab9a4dd90e7e0db3b33562d1501ca2414b9ebefc40b465",
+          "lines": 1
+        },
+        {
+          "sha256": "da4fc02bc6fe4b9feedbb09dc2c6e9027c345a2fbb2c36b511ca3373c2f97ea2",
+          "lines": 4
+        },
+        {
+          "sha256": "8e39bde2703e689bbd1a7cd664e2a586329f6df53be5cfcfdf024999337be7c8",
+          "lines": 4
+        },
+        {
+          "sha256": "3d751e0085c5f3888dd56fde005dffc513fee123091d8e7456b5d0de02c745c4",
+          "lines": 4
+        },
+        {
+          "sha256": "607e1a204b1ddbb1cddb767c90304814a0e6b0887866c714d8c5b5dffab8a3ff",
+          "lines": 4
+        },
+        {
+          "sha256": "2628eb287da534d4b6bbcba03a3e25251ab8cec7f888817c8b0512ce328946ef",
+          "lines": 4
+        },
+        {
+          "sha256": "79262cfb2553800e956c49a971a678dfbb96b10f88123974e8dc207dac2dd80d",
+          "lines": 1
+        },
+        {
+          "sha256": "ec892bf6add5054abbe148585a863a920a9841da1e06e23fe49c8fdf4565fba5",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "d08adf749fdb6a70caa0db92e1ee2d79373ccab759f6874d1622e491c9b8b151"
+        },
+        {
+          "number": 2,
+          "body_sha256": "5fea58b461c66114e355ef5bc52ac0e418d78fa489650028e9b2e74b84b66a07"
+        },
+        {
+          "number": 3,
+          "body_sha256": "267affe6cb46f83c509413471fc89ee4f6918adf64cb9da7151b3b0d6f54bf49"
+        },
+        {
+          "number": 4,
+          "body_sha256": "f1b60902262576fd5cc5ce99f01c5d9fe02c7b04afe32ccda7fe9bc2d8cdd299"
+        }
+      ],
+      "root_sha256": "c9f42b2b625ee3a1ae2ee9a3d70ef525188f1bf7478e63ee463c4ef7c74aab47",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap49",
+      "poem": 47,
+      "title": "Sayanadāyaka",
+      "raw_sha256": "e64f5a2de7426616ec910d1814897b185ec63c936c3a3d01b7271b610a2691a9",
+      "body_sha256": "078d556268542b77c6d420dd4238eea8301c391f7b3a160d2d1551af651f99d9",
+      "notes_sha256": "7d340eed03cdb13df43301791ed828dd9b177867b46c009b26a1000bf8fe896e",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1202",
+          "suffix": "(1) [1202]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1203",
+          "suffix": "(2) [1203]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1204",
+          "suffix": "(3) [1204]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1205",
+          "suffix": "(4) [1205]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1206",
+          "suffix": "(5) [1206]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "9005ff26de8792715c7df918e7c10bb965acfc13d94889ab43f0ff1c8664f230",
+          "lines": 1
+        },
+        {
+          "sha256": "662c55cfcb2380b1dff5dad0b581d5e03562a500a48f49cd8f7ddbaf52014b32",
+          "lines": 4
+        },
+        {
+          "sha256": "71c5d38ccf1bfb15ab3378e5b0575053fb4c3b4ac3eac16b180ec23043a03168",
+          "lines": 4
+        },
+        {
+          "sha256": "7d6840733f4430f88aac2c358f496016a173c80b763489e996e308202f883c5e",
+          "lines": 4
+        },
+        {
+          "sha256": "47eed5302eaf8c33950116bae072097a9dbfaa2263f8226ecdef8ff5e4d77817",
+          "lines": 4
+        },
+        {
+          "sha256": "30cfb1fc3cf3568638d332013a8ad8ecd3b56f9534ccfeca886a1c4a1a4134ed",
+          "lines": 4
+        },
+        {
+          "sha256": "56386ba5e51a46acb99c062d3d59c3cc146248e05e759aaacd1f62a64640b72c",
+          "lines": 1
+        },
+        {
+          "sha256": "7d179e5f1b1d5b8d6ab7b8595ce08326700de1ebe239bc6a2a109c12233d309a",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "74dd13314a93aecfb91b6a32d059eb8f8e69f40c361566b51dd359a4cc3a647b"
+        },
+        {
+          "number": 2,
+          "body_sha256": "6121243f4821c3d7bf6faa0a7b6c332f5af708c17cd652d64c48e3949688c08a"
+        },
+        {
+          "number": 3,
+          "body_sha256": "ebb05671bd39c838e1ccb0b79e692c477eec83563147d059026b39c05e2c5403"
+        }
+      ],
+      "root_sha256": "1c85e0bb0ffb084a12574c818af8fa2cf99008b2ec75490d699fdaef2bd1231f",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap50",
+      "poem": 48,
+      "title": "Cankamadāyaka",
+      "raw_sha256": "72e4cbc431e65827cb2c72d0fdd44587f426382c7cb1d776bc4f0c52a69ba073",
+      "body_sha256": "fd95113bcbe31dbb8aaf76d6003da936b7e1f90028a6aef8af32f2015ee1ccfa",
+      "notes_sha256": "f4c5db3f1d50de1ce3c1bf00dec7f9099eb31b3eb7c9e89effef318f63b1becc",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1207",
+          "suffix": "(1) [1207]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1208",
+          "suffix": "(2) [1208]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1209",
+          "suffix": "(3) [1209]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1210",
+          "suffix": "(4) [1210]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1211",
+          "suffix": "(5) [1211]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1212",
+          "suffix": "(6) [1212]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1213",
+          "suffix": "(7) [1213]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "1214",
+          "suffix": "(8) [1214]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "b5ecacf9d95651013bc86019fd5b0caf712511d9cd23e01dd85b9b1866844375",
+          "lines": 1
+        },
+        {
+          "sha256": "aab32e0bc93eabed610a152265735c9fc73d85095ee23ab519107b228e346148",
+          "lines": 4
+        },
+        {
+          "sha256": "99a8c2471f354d91ee833fb061da68ba13926bf09d44e67ae46ad16b1bdf6131",
+          "lines": 4
+        },
+        {
+          "sha256": "c43e3f83f645c316b02d0a30e722e3d31d9b4a0ced8d3b413d4429c553fa8fe7",
+          "lines": 4
+        },
+        {
+          "sha256": "7025bd9555027e9942358a7574486911059fabcc8e0311a8e0e2d558fe4ef9b1",
+          "lines": 4
+        },
+        {
+          "sha256": "1214f094d75175bcef101a0caf14fabcb0d94a579c9481f9f2d2f3215aa64609",
+          "lines": 4
+        },
+        {
+          "sha256": "ef033fbdfb6aaf7efa0e373b7643d6c26395f07878be68a30c1563254cec1630",
+          "lines": 4
+        },
+        {
+          "sha256": "2dd21f61b64c308c03959c9484857c9fa808eecf6600f2b804f860e9a7afd293",
+          "lines": 4
+        },
+        {
+          "sha256": "7fac32ba393731f6ff99adb8c593afadb8f7d1cb25462f1f38de9884461358e2",
+          "lines": 4
+        },
+        {
+          "sha256": "0a3802f4395763d651220fda430dca2f5d39c3f07c3a7b1c9c2b838048ef1591",
+          "lines": 1
+        },
+        {
+          "sha256": "90ee394369d0c9deba2d191a75759d6a6109665e2706ad09fbdd31af008dc861",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "e70a04210ae979d00c86a399a51b48a8a52566c719f4654a114bfad80af145a0"
+        }
+      ],
+      "root_sha256": "6ec4a9cd6430eb1016c980865dcbe8df1a5733f98c84e7beb847baeb3075a232",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap51",
+      "poem": 49,
+      "title": "Subhadda",
+      "raw_sha256": "9c4cc9848ddf5866d9e69fd4f4d83fb445434bc2f38d35a8ef4f22fc43b06dab",
+      "body_sha256": "a58b817f55dff9d26b2b804b1347f4ae1d7e6aa22634e62ea58a7df104345efe",
+      "notes_sha256": "ca8883d14717e8776eb2adb9633c36d54e32b27e6f1bfb73a87dff944fbfe118",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1215",
+          "suffix": "(1) [1215]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1216",
+          "suffix": "(2) [1216]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1217",
+          "suffix": "(3) [1217]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1218",
+          "suffix": "(4) [1218]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1219",
+          "suffix": "(5) [1219]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1220",
+          "suffix": "(6) [1220]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1221",
+          "suffix": "(7) [1221]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "1222",
+          "suffix": "(8) [1222]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "1223",
+          "suffix": "(9) [1223]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "1224",
+          "suffix": "(10) [1224]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "1225",
+          "suffix": "(11) [1225]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "1226",
+          "suffix": "(12) [1226]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "1227",
+          "suffix": "(13) [1227]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "1228",
+          "suffix": "(14) [1228]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "1229",
+          "suffix": "(15) [1229]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "1230",
+          "suffix": "(16) [1230]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "1231",
+          "suffix": "(17) [1231]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "1232",
+          "suffix": "(18) [1232]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "1233",
+          "suffix": "(19) [1233]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "1234",
+          "suffix": "(20) [1234]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "1235",
+          "suffix": "(21) [1235]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "1236",
+          "suffix": "(22) [1236]",
+          "lines": 4
+        },
+        {
+          "local_label": "23",
+          "publisher_label": "1237",
+          "suffix": "(23) [1237]",
+          "lines": 4
+        },
+        {
+          "local_label": "24",
+          "publisher_label": "1238",
+          "suffix": "(24) [1238]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "9ce472149182e8ad0b829b5b28076d2708326cd6f589fac3485ba9d3f990d401",
+          "lines": 1
+        },
+        {
+          "sha256": "0b5d3bfbf3e229dff09fbe295204b42ed4262b4af69563e1c56e056d7192a6fa",
+          "lines": 4
+        },
+        {
+          "sha256": "22fe9ceff8c71f0d28d65deb70bfc79114358dd751c7da4978df82562d8f45aa",
+          "lines": 4
+        },
+        {
+          "sha256": "142ff6af1056aa15efb0513a5d60280600a7e9772ce5794ec48052f92708483c",
+          "lines": 4
+        },
+        {
+          "sha256": "cb66dcd6c508760b3efc5cf8c8c8baa650868d56f59796f9b6034800fbdbbcc4",
+          "lines": 4
+        },
+        {
+          "sha256": "4a58043d91591481c9aa8ee07089d2ff12460a0d1a56f293d2d1eb0afc3248aa",
+          "lines": 4
+        },
+        {
+          "sha256": "7d2a3a677d07cfd52ef26851ce6ab023569a2b8e958cbc148694b80423561492",
+          "lines": 4
+        },
+        {
+          "sha256": "e819b5afd90c77015bdd94e7aac9692135f2ef698e6338c53e46e8a6818fc15c",
+          "lines": 4
+        },
+        {
+          "sha256": "8909d9a791381b6537dc6767d71a10cdcd44cf54695d6b1bccdd0e39d8e8c16b",
+          "lines": 4
+        },
+        {
+          "sha256": "820a9d890a3ad489d817fe960226c7fdea1943ea4a13af79293206155bc71a1c",
+          "lines": 4
+        },
+        {
+          "sha256": "8d5117011791330904a6aa31a645a035c01177722bf6719ca5a8ad2a42034e79",
+          "lines": 4
+        },
+        {
+          "sha256": "3bc6ce79f90a5dcd59b91cc7ae0e9d6cc77e65054e77ab2d460e615dfba91e6b",
+          "lines": 4
+        },
+        {
+          "sha256": "07d2cf561a85776cc7fa32087574a1aea9547919ab1057ec7749b4d70a607562",
+          "lines": 4
+        },
+        {
+          "sha256": "47bd3d98ca80d96501d7de26d79408634d976a1d449a2aff2e6dd0ab6cce3825",
+          "lines": 4
+        },
+        {
+          "sha256": "475ff255a9cb29888ac76bc14cd1d07e663f67c2205b04d687731f791c508688",
+          "lines": 4
+        },
+        {
+          "sha256": "4090426e8389bf3e3167f0d8a6aadac2068b669be9eb76f5d2fb2b5e16835a7c",
+          "lines": 4
+        },
+        {
+          "sha256": "4ba89025cf498becaa365f7a018231c980e3875ab86d5c17f15aa432f88321ef",
+          "lines": 4
+        },
+        {
+          "sha256": "9a34aa4fab2276795792fc3e91022ea49ee413b3338e3205a302bdc99ad4e722",
+          "lines": 4
+        },
+        {
+          "sha256": "32d1afabe4d5d324f807ab81b2eff73e82e0ddefcb883d6d94825182c02cc478",
+          "lines": 4
+        },
+        {
+          "sha256": "f1c05bd21f345292a44928d481f1d322f0b2b0e84826af9aa62febfa69a01e6a",
+          "lines": 4
+        },
+        {
+          "sha256": "13e89037c0e8dc60628b7f4a50207d7ecc6bd5b3e4e8f9a42fe83c9870034a34",
+          "lines": 4
+        },
+        {
+          "sha256": "913f1452f31477906dde3bb57da200a754e882a81c9c2852b5b3ee965e6ae39e",
+          "lines": 4
+        },
+        {
+          "sha256": "e49653280557ed0d56d7060c264d2eaba546a7d1de1f630f7e5a89031a5a48ac",
+          "lines": 4
+        },
+        {
+          "sha256": "2d3a7356ed9abc8252c8ddf60eca2280c831dbb7eff39c659c014ffe8dff144d",
+          "lines": 4
+        },
+        {
+          "sha256": "1c8e2ae37f312aafefde3e1f1c4d885356374194b9d7d32137a43bdea512c53c",
+          "lines": 4
+        },
+        {
+          "sha256": "2e7da33470bb2eebab994cb4c454c2533d198f670313b6c472169ba37d3f3d66",
+          "lines": 1
+        },
+        {
+          "sha256": "bd0c561bea93d82d809f9d88c5a64eb6b0272be71b141bd37719c1fdb50dfab4",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "e84fa50ce0ee115d1fbda1fd43015b061120d316b849354494a5c67461c6694e"
+        },
+        {
+          "number": 2,
+          "body_sha256": "36592b44b88470149610315955a7739152cea857173de64d4eeb31c071482e9b"
+        },
+        {
+          "number": 3,
+          "body_sha256": "997c167ddab2e5213e389902e629da00105b15a26e5faa870ecb2e13a62905ab"
+        },
+        {
+          "number": 4,
+          "body_sha256": "cb8b5cd97632228b444c3852967bd8f407bb57ca8c4f9062b17c6bfd2650f0f1"
+        },
+        {
+          "number": 5,
+          "body_sha256": "ac0313bd6dc8f9969ebf3d8f70a0ee6d6ce7e00bc1d3e09bd8a97c7d84fae74a"
+        },
+        {
+          "number": 6,
+          "body_sha256": "e2394769d6f2213dceea1333b3c28f327ac2d838ace06ad8b330913890fc851d"
+        },
+        {
+          "number": 7,
+          "body_sha256": "1c221a64fe0eca530bdf54de37b79ef8211412dbd40013ff9206b36992a4de7a"
+        },
+        {
+          "number": 8,
+          "body_sha256": "a24966126c3d88a9bf1ce1ddb8966ae83f3f349e385f5f8da9a58b73584d05a7"
+        },
+        {
+          "number": 9,
+          "body_sha256": "2fe1324c0aa77f6359b6a11165080e125cf5301f395c03c5f3dc7dbea8daab2a"
+        },
+        {
+          "number": 10,
+          "body_sha256": "44170da1ed273ac9fe81cdbbadd54b933266262066d7048571239e5deb06677a"
+        },
+        {
+          "number": 11,
+          "body_sha256": "ac34515a8f44294f0f8b0e2e9809ed915648b043230e73b4478a669574c63694"
+        },
+        {
+          "number": 12,
+          "body_sha256": "41b04d08c52b19213f2ec6e082e1d2e965a6e3d7baa79ef00aaf8ccb21d9f2a0"
+        }
+      ],
+      "root_sha256": "c4837f7a72e20cd1d8e34819c10ed63c8d3be273a0841d07f6ad89becf706abd",
+      "summary": null,
+      "division": {
+        "text_sha256": "38e9f3b85fbdd631c50f986519f28ba43fc62d3057b99fefa67c02005e4be945",
+        "before_local_label": "15",
+        "before_publisher_label": "1229",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "note_numbers": []
+      }
+    },
+    {
+      "id": "tha-ap52",
+      "poem": 50,
+      "title": "Cunda",
+      "raw_sha256": "db74917f990d06c697ef0697baa45a86a4361dd29d67200fdbb2ff3cb8d0513b",
+      "body_sha256": "d2e7e86ca7b7008171a62e9364497ff00cc886b92cea27d03a1c36ceb2cf2f9a",
+      "notes_sha256": "caaf2aa68c2e6e75dce5c4e93c9e3879e6a6e7fd7937bd7e9a5487b70ca9bb8a",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1239",
+          "suffix": "(1) [1239]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1240",
+          "suffix": "(2) [1240]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1241",
+          "suffix": "(3) [1241]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1242",
+          "suffix": "(4) [1242]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1243",
+          "suffix": "(5) [1243]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1244",
+          "suffix": "(6) [1244]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1245",
+          "suffix": "(7) [1245]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "1246",
+          "suffix": "(8) [1246]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "1247",
+          "suffix": "(9) [1247]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "1248",
+          "suffix": "(10) [1248]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "1249",
+          "suffix": "(11) [1249]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "1250",
+          "suffix": "(12) [1250]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "1251",
+          "suffix": "(13) [1251]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "1252",
+          "suffix": "(14) [1252]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "1253",
+          "suffix": "(15) [1253]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "1254",
+          "suffix": "(16) [1254]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "1255",
+          "suffix": "(17) [1255]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "1256",
+          "suffix": "(18) [1256]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "1257",
+          "suffix": "(19) [1257]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "8919fc5b2f424229d9d9569a2299bb019d572a392be1b6b9e855a4812709230c",
+          "lines": 1
+        },
+        {
+          "sha256": "923207db980fab309d4152b5f552aae89f7729587f4719e0429256834d6d101a",
+          "lines": 4
+        },
+        {
+          "sha256": "bc50402facd18060d70ece2688f9fcad3617bb2a461a70278c41189da75416dc",
+          "lines": 4
+        },
+        {
+          "sha256": "642f12c27074f3f4037d61561a92fc41e9576f3d5add1d696f19a5049a5df46c",
+          "lines": 4
+        },
+        {
+          "sha256": "5acdf326b0383ff23d5141726f12be7b37fbd00ce60d184d0b2295f6055e3936",
+          "lines": 4
+        },
+        {
+          "sha256": "9345d0cb8bfebfcfa0212a15a77449738eb322111ca6b2a2d2c91dc81e3760cf",
+          "lines": 4
+        },
+        {
+          "sha256": "bc98608608736cb87c890ce42b59cc0e92ad53b42ae9c18804c415f8bc838f99",
+          "lines": 4
+        },
+        {
+          "sha256": "2c1ebd3bbaa5f25b31a572a5557155c471b01d1843bdf6ac67c8939dcc5d9671",
+          "lines": 4
+        },
+        {
+          "sha256": "135100c5caa6b019ec252efcb295cd8c4b2c3c0012c6a7973da6eebfa949a4e8",
+          "lines": 4
+        },
+        {
+          "sha256": "228532adf38d56d6762ede7bab297f981777326a90fbc9d06a2315619f7ea4e6",
+          "lines": 4
+        },
+        {
+          "sha256": "a8c91a2cff47589f73bbb0f22523d90a4261420a124cb56fffc6a51253f67b44",
+          "lines": 4
+        },
+        {
+          "sha256": "dde2d30dc1f414dfd4204e1b1a9f5546aec412f355cee1b15146442d2aa29c89",
+          "lines": 4
+        },
+        {
+          "sha256": "499e65157cb1f4761829e8cfba330c3afd87c408e603c0279c25803211c0f24c",
+          "lines": 4
+        },
+        {
+          "sha256": "10f3464bc8c00132842a813dcb68f3adc7909283c470863e492eb8e2e07f6d5b",
+          "lines": 4
+        },
+        {
+          "sha256": "14e6ca4faa5623976cc6779a2f118e72fd1774686e611423146f0c18a4f7c51c",
+          "lines": 4
+        },
+        {
+          "sha256": "70c21e11555bcda278ee4616636fd2091225f5b0a6de9ea34164d3ef46045d16",
+          "lines": 4
+        },
+        {
+          "sha256": "69c89498390308010164ce3a7dc9e078d70576089fabc1a5e1db092c35825d96",
+          "lines": 4
+        },
+        {
+          "sha256": "7a8bb5c5857e173a771893f99509119e1001044cc7742e15a1a498adff5c2459",
+          "lines": 4
+        },
+        {
+          "sha256": "a79c6fa28a2dbfb81dd61b05a0fe550eb053d36a741195dec2c851607324a6bc",
+          "lines": 4
+        },
+        {
+          "sha256": "1ef5ca9d717393c49f42796ce066d5478dba052960473987dcaec98b7c6f17d5",
+          "lines": 4
+        },
+        {
+          "sha256": "b85edae799ee390b4be7f87759fcfae73727621609c62651540ae111b6513709",
+          "lines": 1
+        },
+        {
+          "sha256": "fa8425aa27ceb7c0b53a2455f9eafec2fc5312287c34fbe40d7b928399e8a932",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "a7e9279a9df3f898dfd40753eb5f0c34c6f8263776fd2b22f23620d712d08c40"
+        },
+        {
+          "number": 2,
+          "body_sha256": "db36e63fefb6284d7934911c23c26a782b84738ad3377d5dba2a9452bd2b8780"
+        },
+        {
+          "number": 3,
+          "body_sha256": "c8be4518463c45cda19f4b686afd54a3bf17762399807c0c2a1527e477f6a3ae"
+        },
+        {
+          "number": 4,
+          "body_sha256": "774cbcfe971c1b8d161a486fe674c2ee356db6ca81d3a2a9cd097a64ea04ddb5"
+        },
+        {
+          "number": 5,
+          "body_sha256": "15e4bfb043791a70b6ce6a02a9381e22c0ef965343bc0afe75df54944cf429f9"
+        },
+        {
+          "number": 6,
+          "body_sha256": "5e03e003c12b3b67a16e4e00e40372060b1f368ca12ded08b947d686fc2df608"
+        },
+        {
+          "number": 7,
+          "body_sha256": "3890393435ed5ca6d2a758a777d331a48829c0686564f5585e5e6819069ccad8"
+        },
+        {
+          "number": 8,
+          "body_sha256": "e527194d934265ee0f010187668dee6ba1ca3b0a3fc4932925b41e13bd6b5307"
+        },
+        {
+          "number": 9,
+          "body_sha256": "12cd8879c1d80fbd42e8b25b87685067f3f2fd3449a88a34334279e2081f9e21"
+        },
+        {
+          "number": 10,
+          "body_sha256": "b1ea963a496e93ec03c9af2598c85b837259560ad566a3cdebd5f81ea73fde65"
+        },
+        {
+          "number": 11,
+          "body_sha256": "7676668a6ee31bf8f1ec1b796911159ea5e360aac167a704b4307c6ba2f95f3f"
+        }
+      ],
+      "root_sha256": "ebd31ade10d99f3945b48ed29029af2d1b1a2fa59b34ac383cb85a3686f59dbd",
+      "summary": {
+        "body_sha256": "181a723bba5466dd5f4743927bd9a009984163188cb1517d0d331381f32fb098",
+        "paragraphs": [
+          {
+            "sha256": "180c36509293ae8e19c51aa84b0663313aae048bb71cc079e2dd8cc034c4c94c",
+            "lines": 1
+          },
+          {
+            "sha256": "e7b612cf91371497324a8f1482e94ef8bd9dfe0e61fb28ba5d8e509311cb4e6c",
+            "lines": 6
+          },
+          {
+            "sha256": "d78eb0fcfba4a4e20244f26414d174bdb40ff8475f0b35a872c2a2c8204c7283",
+            "lines": 1
+          }
+        ],
+        "note_numbers": []
+      },
+      "division": null
+    },
+    {
+      "id": "tha-ap53",
+      "poem": 51,
+      "title": "Vidhūpanadāyaka",
+      "raw_sha256": "84d1dbee40ec3c99f492b09da25b09a795d3c4d231f9bb0d6a319fed3179fca5",
+      "body_sha256": "35b872c673139af6bbcb417f2eb5cd43ecd2cd04fdc4c0a4ef4720ba55251b65",
+      "notes_sha256": "27c280197f252395c269d4b3e43eab0bb627f6de8092a0dd49147fe9096c3f09",
+      "paratext_sha256": "c3a3a40848a349fa87b580026c37c0f067f2fae19f3d8751e5a670f2ad69efdd",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1258",
+          "suffix": "(1) [1258]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1259",
+          "suffix": "(2) [1259]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1260",
+          "suffix": "(3) [1260]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1261",
+          "suffix": "(4) [1261]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1262",
+          "suffix": "(5) [1262]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1263",
+          "suffix": "(6) [1263]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1264",
+          "suffix": "(7) [1264]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "90a3fb4ae8979dfece9d87fa2783795101abf86f1b09c00fd2a8d962b5770adb",
+          "lines": 1
+        },
+        {
+          "sha256": "d6d30aa7af179f2ab2b1357758ffcb5e0b46878b7df5f402f8bd556f504b091d",
+          "lines": 4
+        },
+        {
+          "sha256": "d52ca728bc90f67ebf453e599c1d447f10bc9dd3cbfee23b70676b4b4cc37f83",
+          "lines": 4
+        },
+        {
+          "sha256": "6eabc5b8266bad62c7587ba41667cd2b25b85acba628a83474314a6079741286",
+          "lines": 4
+        },
+        {
+          "sha256": "33ccb5c746080c25e951fa2e411b15d383f5a5dc410e779d9d8b8a0a3e84e8f3",
+          "lines": 4
+        },
+        {
+          "sha256": "78fcaab11d942f4f61d4d98e9f6db0f1924e3eaee77f7529b9056b14a733e689",
+          "lines": 4
+        },
+        {
+          "sha256": "eff85cd66fb7485c73d18410a96963202a990b7582652b49a44068d5e064f7b6",
+          "lines": 4
+        },
+        {
+          "sha256": "571a3c89f27b4686e5d1e2ecc0e96623ebdacebb83bb9966d7bf07bc42a10d94",
+          "lines": 4
+        },
+        {
+          "sha256": "3370192f9a75864c5634b2c10a6ca975cc65b67786393a9e824553b738eeb2b4",
+          "lines": 1
+        },
+        {
+          "sha256": "244950f67188d3691d2a33b07ac1bc71c76de046b88b1d70d96a78a3d2537f78",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "e228cb0fea95f05dcbbd1811c747b83c349ea71968995cc7cdfbc59028d5f8f9"
+        },
+        {
+          "number": 2,
+          "body_sha256": "dd19121b7f99244826a11039536b88dfc5f4835b1f3c573f0b6bea87be8d31b9"
+        }
+      ],
+      "root_sha256": "608469c87d94d5932c61ee31d27c005b29c02c28bef44de5d02d35cb727b6fbc",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap54",
+      "poem": 52,
+      "title": "Sataraŋsika",
+      "raw_sha256": "f2d21f7b75716fe3d9b1e583abbb2b99d258e3c0b3a551bba2bcb65348051202",
+      "body_sha256": "0461b0c5958b698deecf8d186cffc5f2d2f8f0ae6f1fd68d3af13a7f0ba82130",
+      "notes_sha256": "2a6a2218c3bbd54773b62ddc0ab51373a102036af870b97e4be7b613e998e912",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1265",
+          "suffix": "(1) [1265]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1266",
+          "suffix": "(2) [1266]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1267",
+          "suffix": "(3) [1267]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1268",
+          "suffix": "(4) [1268]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1269",
+          "suffix": "(5) [1269]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1270",
+          "suffix": "(6) [1270]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1271",
+          "suffix": "(7) [1271]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "1272",
+          "suffix": "(8) [1272]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "1273",
+          "suffix": "(9) [1273]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "1274",
+          "suffix": "(10) [1274]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "1275",
+          "suffix": "(11) [1275]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "1276",
+          "suffix": "(12) [1276]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "19dbd01cd488223fd51cc8ea067a8edf73dd8ae64a47867269a6d69fd8f02c54",
+          "lines": 1
+        },
+        {
+          "sha256": "635706ab570e8392f1678363d700fbbf87499d1922b69b495856fd7b82857c22",
+          "lines": 4
+        },
+        {
+          "sha256": "aa9d9d41161dcee3cb9149912e949bad959f1d36a840a04a645527d9cb427881",
+          "lines": 4
+        },
+        {
+          "sha256": "9aa86748b44237ab6284cdde5e9a3ddd073332fc1f2ed01c8132b1341da7c7b2",
+          "lines": 4
+        },
+        {
+          "sha256": "4906d04469fc4ded32d927bba0bbf0da6a01d775e08905339deb0e0b05152b1a",
+          "lines": 4
+        },
+        {
+          "sha256": "f31041b745108c2ef5f1955e1bc72a266245565718347590590ec777fdee805c",
+          "lines": 4
+        },
+        {
+          "sha256": "30c3ab3a29c10dfae6917a9692a2f4b20ee89b862d2be954e673413f73cfcf43",
+          "lines": 4
+        },
+        {
+          "sha256": "8a22726474f73e0ae6461dcd9a592474f9434218daa8c7ce323a9bf03c0b2892",
+          "lines": 4
+        },
+        {
+          "sha256": "3cc8575b44af55340e139f5caaba469613032e25ece9406c8f9244baa8836e98",
+          "lines": 4
+        },
+        {
+          "sha256": "94c96f7238aff5454e6a3acbeefcf6a0d95bf46d6d6a8fc68d4d9e10c615824c",
+          "lines": 4
+        },
+        {
+          "sha256": "c836f230bda68401602e78df0989c2a45a240cd68491021fc79c2131b01a4419",
+          "lines": 4
+        },
+        {
+          "sha256": "8d4957db7fe90a1c56797a40ef3d8801d2566d60064062cc8cc696346bfd3aca",
+          "lines": 4
+        },
+        {
+          "sha256": "9ca7a85b89b23f271e0b11b0a752157e2b6a9ad8320855e89d58e75f2e9de620",
+          "lines": 4
+        },
+        {
+          "sha256": "1ac79ad09a5a9031bef59a72d39dd316d25d21d6f16319838ba03f15d7e4579b",
+          "lines": 1
+        },
+        {
+          "sha256": "943891279569219ca93b9ff45d50c808423980bd9aa6901e3df967a4a121d7f1",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "2aee358fb8d9a5fcd1597c7eef38b62a5fc859930fd1f9aa2f04bae283c4d047"
+        },
+        {
+          "number": 2,
+          "body_sha256": "5d63e3cabd2d2190ecf0cadec45813e23d98afd681636107bde90d292ad35b91"
+        },
+        {
+          "number": 3,
+          "body_sha256": "e9e7b6685ecae323faade0ddac4d1383cc3e3bebb8cd74c8d2a1bfa43fcc50b3"
+        },
+        {
+          "number": 4,
+          "body_sha256": "8eb292ddfbe0ca096f42b3ca672f690138cfe9fde0f1343e6a2f26b0bbca7a91"
+        },
+        {
+          "number": 5,
+          "body_sha256": "d4aa3f3c7bbe76b248d4a3d5da90ef504856ae69a64734d078cbae188529951f"
+        }
+      ],
+      "root_sha256": "a49f7a4b764e00c3c813da7a93e4a065fe1bba7a8f3b3cf7f811a45e781e0c44",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap55",
+      "poem": 53,
+      "title": "Sayanadāyaka",
+      "raw_sha256": "fb4f9b13abcc79ca64b9b56cc45103d105689e9f4b07dc0acc8258fe670af59a",
+      "body_sha256": "9b954f980c56a15001544220a894423015e523ab94562dedce60c3c89ce363f3",
+      "notes_sha256": "43aa97df5bdde90965fcc4de83dcc4015311fc0f43468fb710d17d544adde33f",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1277",
+          "suffix": "(1) [1277]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1278",
+          "suffix": "(2) [1278]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1279",
+          "suffix": "(3) [1279]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1280",
+          "suffix": "(4) [1280]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1281",
+          "suffix": "(5) [1281]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "115a2c57b119dd00b4298bfcbff0822ca8ff429ac9a117ff9c7f178664c12dcd",
+          "lines": 1
+        },
+        {
+          "sha256": "01763b5bbbb1458eed215d966e15ea49954532e798d1939bc26edd346044d57f",
+          "lines": 4
+        },
+        {
+          "sha256": "7db5dfb0733d64258b63649e37d5fc5d1c263e6e73c9a3e041e6fdbf39afb190",
+          "lines": 4
+        },
+        {
+          "sha256": "fdac0d4e72e874e8c55b1c5f817c24e72624a629b0bbf4a3c533372570cf3f52",
+          "lines": 4
+        },
+        {
+          "sha256": "960a33cfe77ae9d78d02a64a95426b2cc62cf6bd518bad6b0ee10083aa1b0735",
+          "lines": 4
+        },
+        {
+          "sha256": "6c4e0405ea21e92b431dd54c2fb6410b0419ba323cf7ef73734ec9d6f94ede55",
+          "lines": 4
+        },
+        {
+          "sha256": "56386ba5e51a46acb99c062d3d59c3cc146248e05e759aaacd1f62a64640b72c",
+          "lines": 1
+        },
+        {
+          "sha256": "7d179e5f1b1d5b8d6ab7b8595ce08326700de1ebe239bc6a2a109c12233d309a",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "c2f3f5483927dacaa35c3d3cb08dfdfe392a586e7400cb93b3fd878b362d3a3e"
+        },
+        {
+          "number": 2,
+          "body_sha256": "39d69c31c9c8241c7a2d1292c8e9460c443ad83d0beabd7edda4d740529ed0f8"
+        }
+      ],
+      "root_sha256": "41cc2679d1614ddd26714dae4dce42dd563f6731347997095488780940f437c2",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap56",
+      "poem": 54,
+      "title": "Gandhodaka",
+      "raw_sha256": "7f11a5c38f532bc11a3187a5091e25d403fd661b70e75b9560e704496aa0eab1",
+      "body_sha256": "c82b2cc7a114bda11307b357a13cdc6a4aa5df3b521491319b5317c814fe8951",
+      "notes_sha256": "79ca5427bb718c708d19bad0b0a6893c2fbd1a9402b4c7059ddd176a766ba550",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1282",
+          "suffix": "(1) [1282]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1283",
+          "suffix": "(2) [1283]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1284",
+          "suffix": "(3) [1284]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1285",
+          "suffix": "(4) [1285]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1286",
+          "suffix": "(5) [1286]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1287",
+          "suffix": "(6) [1287]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1288",
+          "suffix": "(7) [1288]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "1289",
+          "suffix": "(8) [1289]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "d5b2616d4346e67935e65ee2e702e42cd81959dc5e120fa1b5e5c6956d5a7de7",
+          "lines": 1
+        },
+        {
+          "sha256": "5d5465136eb21c946bf171d5844f76f5b3571bfe561e5c099e26774d975e15ae",
+          "lines": 4
+        },
+        {
+          "sha256": "7ba2491713490354a1f9b8533537a19edc758156c708f1e30b8c799f5025e001",
+          "lines": 4
+        },
+        {
+          "sha256": "6b729f20cfea61ac00f28c7c65d7c144c75dbbff4171ebe5b5113f2181c2eed9",
+          "lines": 4
+        },
+        {
+          "sha256": "03c5b6ab84eecb58ef2f7d553ae098e67da429602062c2845231d486ae27cb45",
+          "lines": 4
+        },
+        {
+          "sha256": "93852768951ba956b367a258814ccd16b7a8a3634dd9d04eff2c63b3818b076c",
+          "lines": 4
+        },
+        {
+          "sha256": "510713163c0eb6ddfaad6f9113a6168cfbe0e184c4b6892c7a96e70917711145",
+          "lines": 4
+        },
+        {
+          "sha256": "ebe2a3849244b1572d7f7972252b052caa2d06ac1616adc6a739d30b042e60fb",
+          "lines": 4
+        },
+        {
+          "sha256": "ed354574ce26fa6ddf572b6973431afa55bb0be0b8e7b28a6b7c38b8eccce075",
+          "lines": 4
+        },
+        {
+          "sha256": "c7bffb0156689f1fa5b7b36820ea65d57b2c4d204bd6ee376e401a0f791598bd",
+          "lines": 1
+        },
+        {
+          "sha256": "22b589bedec3ce78ed76bfbf39cda8e7c900b65013c7021d1d5215276214b0fe",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "3c3ec0dce998876a2a6a98f3708ae2b5e928e937a4cd3da904d8fe5afd174aac"
+        },
+        {
+          "number": 2,
+          "body_sha256": "ab1a00df34870a4da8946602b0b84b518c6fccb409b0666acf4c8d54e006f702"
+        },
+        {
+          "number": 3,
+          "body_sha256": "c67fb31cf52bd7426f4b566257f7a7dda783df1c2e1631469f1ec94a445eafa4"
+        }
+      ],
+      "root_sha256": "ff34e33cbfe1819085158d5360964ce3fcfd8a7f5027aa1043654124ae9f9c12",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap57",
+      "poem": 55,
+      "title": "Opavuyha",
+      "raw_sha256": "09943733be9f102ab07fda61f0420e17f41e4af50e64609aa3e3fdc7c6cfa7ae",
+      "body_sha256": "5d7fca5fb2edc123f83cc6ebd0a51dc4028301120c6a0443d7d0d500ec1bcfe2",
+      "notes_sha256": "8f18fd9b9fe53a0e10c4710290780ff9cbae30bfab0b35bb65b1aaa587bde8cd",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1290",
+          "suffix": "(1) [1290]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1291",
+          "suffix": "(2) [1291]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1292",
+          "suffix": "(3) [1292]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1293",
+          "suffix": "(4) [1293]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1294",
+          "suffix": "(5) [1294]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1295",
+          "suffix": "(6) [1295]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1296",
+          "suffix": "(7) [1296]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "1297",
+          "suffix": "(8) [1297]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "1298",
+          "suffix": "(9) [1298]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "1299",
+          "suffix": "(10) [1299]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "823f0a9283b53568dc6742df9f6d72a8a6340307a6d719ff3086dad3bd3d90f7",
+          "lines": 1
+        },
+        {
+          "sha256": "20eb87a4b61fc724374fd72f3898a3356e559fcdd25a7ee510bdcdaaf7005cbc",
+          "lines": 4
+        },
+        {
+          "sha256": "f0fe566ba258a046230194f8517e29076b1355b1411ef13c37387365e95c01e0",
+          "lines": 4
+        },
+        {
+          "sha256": "4ffe63e32e747644cddf98432be13d5eabdc70f2bc40ef6bfae430d3cda57e3a",
+          "lines": 4
+        },
+        {
+          "sha256": "4c139d8610b15eb5549039bf46f5e3168763472b0c9fdd0d7d9b011229600569",
+          "lines": 4
+        },
+        {
+          "sha256": "d1046c21ac882d9db78d32147d1a9549e4f1199b1e6be050a16db0f271d4ba92",
+          "lines": 4
+        },
+        {
+          "sha256": "03700a2365bbf37f24e3bbb4649e15717b8051225fcd3069ac81d446532287ea",
+          "lines": 4
+        },
+        {
+          "sha256": "cf3953cfaf009b9f4544d9d5dbcd20e49c6ec85b7b8f3f0e17b5b0b4ecd84bd0",
+          "lines": 4
+        },
+        {
+          "sha256": "bd7022d27edee8ca9481a6d4304fc51f5ca584e2fa9b3b90a7e4631116f13f9f",
+          "lines": 4
+        },
+        {
+          "sha256": "1a5d8c350d852397875049906a019ea7f1dc32d4836f0ea1f50043b7410d8af6",
+          "lines": 4
+        },
+        {
+          "sha256": "41fb39217e45f5bca9aec082731efaa14828cb787bf519e38824d3ecea31e504",
+          "lines": 4
+        },
+        {
+          "sha256": "d012bb9f620863f138ff75f7e96b90649f0e40a5a5579fe17328e0ab0de03a91",
+          "lines": 1
+        },
+        {
+          "sha256": "ac9f27cb2f88c1aa0071e358ae905571a2b9b84b1aad8ddecc2093bf6a0db29a",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "a461af7abbfbc46bde60ac2a241d5435078e4ee7917bb74b07d7008a911a154a"
+        },
+        {
+          "number": 2,
+          "body_sha256": "604488c340bae5e80b366d8a9b6c81c83ed79c86a7f65256b792762b2db9210c"
+        },
+        {
+          "number": 3,
+          "body_sha256": "d1a78ff0fb97807f096e9bc8d490a7472b8da80974c17f14589763a0ef39b9ef"
+        },
+        {
+          "number": 4,
+          "body_sha256": "d68c6da10bc379c8e6b0ecf24209356aa16a8b07b460c11c2f90a0a65b74cd88"
+        },
+        {
+          "number": 5,
+          "body_sha256": "3fe2e6e5f00bd168ed7f41c1a99d3d7e244f4e6b0d19ca93438049e42904b0c9"
+        },
+        {
+          "number": 6,
+          "body_sha256": "383c31896cf3a3ae7bfed60169211ae1b33d08fa51eb2210ca33157d33bfde2f"
+        },
+        {
+          "number": 7,
+          "body_sha256": "acc3fda58cad7ca24ed0a4e3fc74497f4cdb9060e2f30806b893e2fb19436c0f"
+        },
+        {
+          "number": 8,
+          "body_sha256": "d3d047bdef7e4c0cede57a776e0ac315cdc34b4a68e8f0bb67c31106d3d45e1a"
+        },
+        {
+          "number": 9,
+          "body_sha256": "46308b01da34adfef47491667efcb72cd38d77332a9b1559ec66af96307d2df8"
+        },
+        {
+          "number": 10,
+          "body_sha256": "9918c008bbcf290cf4225268ddc86b8e4a2f90477878e9c7d7f114acd90b2921"
+        },
+        {
+          "number": 11,
+          "body_sha256": "ae700fb1137c6a7f2e7e415519eea1805847fb7d3441e3d5e1946218db0f229f"
+        },
+        {
+          "number": 12,
+          "body_sha256": "7ce998bc241a3bbd4ee0ac846d22dd0c8239defe03bf6dc06948f685e2c7bbb5"
+        },
+        {
+          "number": 13,
+          "body_sha256": "79f5b77a1bfca1360e25c09164dc00336b57e0dbbad655b377215a576351437a"
+        }
+      ],
+      "root_sha256": "887c22b17ac59da2a3bd848e33136b03b8ef6f9f0e2499d4b64bf2a144d96615",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap58",
+      "poem": 56,
+      "title": "Saparivārāsana",
+      "raw_sha256": "c4db2b0c18915765b6d7d5227c03fbd30cfbe35aee665f4c40353625c786fac2",
+      "body_sha256": "4c55ab292a19308e9f76c4564a74df76baac406e781a51a3cfc1e798f45bd130",
+      "notes_sha256": "c945c99b3ddd7dbabd7036c791f4941dbecbec117d79f169588292baa0f53e19",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1300",
+          "suffix": "(1) [1300]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1301",
+          "suffix": "(2) [1301]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1302",
+          "suffix": "(3) [1302]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1303",
+          "suffix": "(4) [1303]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1304",
+          "suffix": "(5) [1304]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1305",
+          "suffix": "(6) [1305]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1306",
+          "suffix": "(7) [1306]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "86f0e5f745028996a6a9b451d15edc891f04067827c0877ed7df296b1f649c55",
+          "lines": 1
+        },
+        {
+          "sha256": "7ff4a4b8c4ad3faf9361bf56221acd44b859bf0c636b4f6a10bec0eedcb15015",
+          "lines": 4
+        },
+        {
+          "sha256": "bc8ca304e7a86ea73ed497671358f79fc5fea52a69d0eaa8226dc3fb08b9b8b3",
+          "lines": 4
+        },
+        {
+          "sha256": "12a0d15880c03a90df64e5bc0c5830b0d06aed7f02fa190cb3ab5e815e9ccb57",
+          "lines": 4
+        },
+        {
+          "sha256": "602dc055b3c57ad6be9123d5882f25644df74cc1fff891ed319d505fc559946b",
+          "lines": 4
+        },
+        {
+          "sha256": "a5686ff68d4e32e3b4bb9c916f25f75d4855b81433374deaa4370d5606c135da",
+          "lines": 4
+        },
+        {
+          "sha256": "8f6b1644fd9ea876d10cc6ee50753396f2fa2888b0507f02e0dffb6acafa936d",
+          "lines": 4
+        },
+        {
+          "sha256": "15335c8016faa7d3d54ef992316d21102c70a5a63ff5572d316db4b760a933df",
+          "lines": 4
+        },
+        {
+          "sha256": "0cf4ae606d09c074ea41d99e5a3c8e3fc1338d88fd18783c50d0371ef68a99cb",
+          "lines": 1
+        },
+        {
+          "sha256": "fcc2e902440e524fde9568538bb4b3abb5d1933899d8efed58652f0e5f56c7c8",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "cd4d7d98ace807da4ce57683b03684d2b34424dffa7896a8e22bf0f04bac7aba"
+        },
+        {
+          "number": 2,
+          "body_sha256": "afea465b1f68eda1b3e7570d128b5cdaa7433705e19d3e2b31a13abae58802a6"
+        },
+        {
+          "number": 3,
+          "body_sha256": "0318712a22fc91486404a40436be645a9b4e60eb08a7faebb064bcb5cc3b8a19"
+        },
+        {
+          "number": 4,
+          "body_sha256": "cddcdde8a226960057b379e236f37ce39472c150a15d10aa9b3d2f93656a1f61"
+        }
+      ],
+      "root_sha256": "cb58f93286f7ee11e371733d4f6f973d2095140d894b9e133f9720831699f912",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap59",
+      "poem": 57,
+      "title": "Pañcadīpika",
+      "raw_sha256": "5c608e985ad4453a84e46f0e5d1b1d6975c46c4e595f51e8b27ca7e48c428794",
+      "body_sha256": "0b15f2a454b3c35e5dcf18a8592249de7aef2a9718f14cacf3d44d93ed56eb2d",
+      "notes_sha256": "bf42635a15a4481a2daf6f14ecaec1b7dc79b9e3ec2f148fe633df47154af615",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1307",
+          "suffix": "(1) [1307]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1308",
+          "suffix": "(2) [1308]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1309",
+          "suffix": "(3) [1309]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1310",
+          "suffix": "(4) [1310]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1312",
+          "suffix": "(5) [1312]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1311",
+          "suffix": "(6) [1311]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1313",
+          "suffix": "(7) [1313]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "75df74434bf2a50fa35db0090ff3c1aac933a65e0d53eb02eb10db2515d5cf1b",
+          "lines": 1
+        },
+        {
+          "sha256": "e482c756a850c458f4b6c0d697c92b6d82854cb77ca2c0023608843d76c042bc",
+          "lines": 4
+        },
+        {
+          "sha256": "4077fe07170f61a5948785577a053b1cf90d4f2296cb0c79d58cc51fa34337b3",
+          "lines": 4
+        },
+        {
+          "sha256": "47da15b876c84b5c1b2b906f5ba159d7e15358347112ace2831e5cf49929e654",
+          "lines": 4
+        },
+        {
+          "sha256": "f6c4bfb4a26990266881ef7f0bd443453cb52c1a5210e422963c6f9da176a692",
+          "lines": 4
+        },
+        {
+          "sha256": "98180fe880308c03f2e1542d20d90afb9f054450dc93415fec671e6f0c823d6d",
+          "lines": 4
+        },
+        {
+          "sha256": "a3d731891b2d3887d907f39021632ed7c3f16b4fe35d8610406e28e07894aa3e",
+          "lines": 4
+        },
+        {
+          "sha256": "f4e06099b749ba8081bdcdc9a92653f9dd96491bbd284e1b834f0b816bbd3335",
+          "lines": 4
+        },
+        {
+          "sha256": "813f08c750fa4ad6085edfc475548fceef233176124978a4265dbb259d22a4ca",
+          "lines": 1
+        },
+        {
+          "sha256": "f7f05ee3c5026773ea9d6053b27dc3608b03b9e7eb8b9f49e1e36a0d80f098fb",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "de7f9320ab3c6fc33d3a14ec9ac4185bfc3b346c320300767ec66d15765a4e28"
+        },
+        {
+          "number": 2,
+          "body_sha256": "cac24f088c5762e97ebba97d602f5c7c6fbae014f98d2d1532638caffa532356"
+        },
+        {
+          "number": 3,
+          "body_sha256": "9130fb46b196aa4a235ee25a99e4b9faeca093a135c6a94d1bd05e5a6fe20f6b"
+        },
+        {
+          "number": 4,
+          "body_sha256": "9aaf78dfd720eb07d6972f376d0c09ef8f3b375ca26980481277e8f370cccd0f"
+        },
+        {
+          "number": 5,
+          "body_sha256": "be80160b9c7af437696a3b62d9de0b226d28db30359409fa41a4d45fa91694fb"
+        },
+        {
+          "number": 6,
+          "body_sha256": "4ce9533970a5f6e51ba35e07d8fa53136655f3d153ece407ab7fb74d317d44a6"
+        },
+        {
+          "number": 7,
+          "body_sha256": "5b307de532ddd2b44b373352d73c7d0ae67c5add7d2d6f24fab0739769f63954"
+        },
+        {
+          "number": 8,
+          "body_sha256": "a383dda84a814773cdeb001d662a3c6a2618d998ec6564f377e7a668593a0f81"
+        }
+      ],
+      "root_sha256": "9fc91ee670ec9cc954382e7476f8f345f42e6fa28415f02f2b17615d214f1f24",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap60",
+      "poem": 58,
+      "title": "Dhajadāyaka",
+      "raw_sha256": "b75da10480c10dd91c305ad2253d5108d3b179fad8cae7807ad86c1bb4928a7b",
+      "body_sha256": "2adac290e5268c37c134d3441a067041ce008502615c5d0c2ca72407182d223f",
+      "notes_sha256": "2f61b7e0e047390b847424e1101eaa4ab4b9696b589bf0327dbf87a441470f63",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1314",
+          "suffix": "(1) [1314]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1315",
+          "suffix": "(2) [1315]",
+          "lines": 6
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1316",
+          "suffix": "(3) [1316]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1317-1318a-b",
+          "suffix": "(4) [1317-1318a-b]",
+          "lines": 6
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1318c-f",
+          "suffix": "(5) [1318c-f]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1319",
+          "suffix": "(6) [1319]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1320",
+          "suffix": "(7) [1320]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "1321",
+          "suffix": "(8) [1321]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "1322",
+          "suffix": "(9) [1322]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "b5e2fa0e19187b8e798211b6f3e95df7e775f4d59b1a7902c009f14eacb36245",
+          "lines": 1
+        },
+        {
+          "sha256": "52d2c0c75131e566f5738cc0ce98ae1b324febf4e3313119c2af413f8ed14709",
+          "lines": 4
+        },
+        {
+          "sha256": "5f5d19122e9a131ccdf363bc415320355c84afc842563c5a38bb1dac470dbc4b",
+          "lines": 6
+        },
+        {
+          "sha256": "0f4f70688d9f8322ef3679ca988db3badb88772c530c9c20637a25096b7ba6f0",
+          "lines": 4
+        },
+        {
+          "sha256": "488c5680a3622630fcbe14956c8ea25683634f5de54fac0509bd9bfa37bdcd2f",
+          "lines": 6
+        },
+        {
+          "sha256": "70d9da70556e19f64fc8ab7f261ebeabc596bfb911a120b0e78906213a5141a6",
+          "lines": 4
+        },
+        {
+          "sha256": "f40234e2355ed90cc665ccac837e4644920b229adf96fc302777d1a2a0e2b871",
+          "lines": 4
+        },
+        {
+          "sha256": "65193dc9a41c2f094e5517031e19db47007023b2d0f89e0202483bd10d60ca95",
+          "lines": 4
+        },
+        {
+          "sha256": "4de53ef66ff1e24ab07490c1e0bf57c9b3d8f2a71142d36d116a4c0a6015ca14",
+          "lines": 4
+        },
+        {
+          "sha256": "86e40947fb2dca3cebf9ca7ac2dbb73cd057c6628ddda61c5138902e375be3d2",
+          "lines": 4
+        },
+        {
+          "sha256": "b5065154af1263669494b8efc6d5864625d1de8b0ddad933496394c0544a5e22",
+          "lines": 1
+        },
+        {
+          "sha256": "41bb06cd131c41da29baf6753303d9423dc7a096673b79f28e668c9c87ba2140",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "ce1896807f4e8ec38e8940848f32900263e03a56f3ef273ee160d06c7a8363be"
+        },
+        {
+          "number": 2,
+          "body_sha256": "c8bd7c863ea81b4fc6bf6b4b4e14121dadd7f457c6e84a009e1393a5dba4e120"
+        },
+        {
+          "number": 3,
+          "body_sha256": "616b686e04cc856f599ed960022be558c0156a9d9c7eaf4804ad7779f6506adb"
+        },
+        {
+          "number": 4,
+          "body_sha256": "75d755dc1af0e74fc4c2c059908a04309363b61677af8ab1818b81ec2aec450a"
+        },
+        {
+          "number": 5,
+          "body_sha256": "e55523787a7c1e8d6294a078fc3eec45f658f734eb9c47cdb23ac36a29d39e25"
+        },
+        {
+          "number": 6,
+          "body_sha256": "b26c814f421aec258a5f95caa8917a9bc3b819e7b790e46622f8e096176c336c"
+        },
+        {
+          "number": 7,
+          "body_sha256": "d33395884cffab441edbed4b546a71438403b3e927a3e229c3a56d02b8e8052a"
+        },
+        {
+          "number": 8,
+          "body_sha256": "de460c7b9abee7e3c842bdc6368bcec46ec0f2428f99a7e957ad3528053faf56"
+        }
+      ],
+      "root_sha256": "20b41d3c962e86c6d395c0c8d68377c969b871d6de806be6770fd695727b30c7",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap61",
+      "poem": 59,
+      "title": "Paduma",
+      "raw_sha256": "dc3f94fff5ff7f0ed80006168de4f6fa2db830021d3dfc6138ac39dc181fe9a3",
+      "body_sha256": "39ebe4c3a85dcfa08cb536b4317b69dd633a2c26a63d34da6d14f075dd1b61b7",
+      "notes_sha256": "b54f5509b5c69d8cb2ed281c80db6b4aad02ccca6d4e23e6975511e253f20367",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1323",
+          "suffix": "(1) [1323]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1324",
+          "suffix": "(2) [1324]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1325",
+          "suffix": "(3) [1325]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1326",
+          "suffix": "(4) [1326]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1327",
+          "suffix": "(5) [1327]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1328",
+          "suffix": "(6) [1328]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1329",
+          "suffix": "(7) [1329]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "1330",
+          "suffix": "(8) [1330]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "1331",
+          "suffix": "(9) [1331]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "1332",
+          "suffix": "(10) [1332]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "1333",
+          "suffix": "(11) [1333]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "f3cc9199de5dffe3289196f68c0c1d90ab2c0fd7f840412972aaa691c42861a2",
+          "lines": 1
+        },
+        {
+          "sha256": "832b12881e43b96b27d6158c3725acf2b2611c9186d20dfbcaba48b7a1f56116",
+          "lines": 4
+        },
+        {
+          "sha256": "467b01fd0d0972555edbf89c7b1b7f03f94e54f6ce4fd51f796d4f6e43a855a1",
+          "lines": 4
+        },
+        {
+          "sha256": "d74e9c1d4b0190e9f3f3f7a8a16e3320a7e42648248c492c75e0cab63a71087f",
+          "lines": 4
+        },
+        {
+          "sha256": "b67243af28ce0fbb9aabae8141521e7b52c8f2dfadb2bb000b2d14abc34127fd",
+          "lines": 4
+        },
+        {
+          "sha256": "7b2f1c7317220bd10e272b280412aa317ef0e87b82e02d6a76cad7157cf8ad86",
+          "lines": 4
+        },
+        {
+          "sha256": "69219d465fe29e3017d2e5dd14a194714725b4afa79111eecc6ba9e821598031",
+          "lines": 4
+        },
+        {
+          "sha256": "5f25186d46f709cd2b0547f08ad8134315fa0cf51238b8ceab79f60a7704bd32",
+          "lines": 4
+        },
+        {
+          "sha256": "b510ed64dd86ac3c244888eb0fe1ec5b8310bfe62ed1c0d2753c065a366601fc",
+          "lines": 4
+        },
+        {
+          "sha256": "b4b87015a53d284761b9051b1ff6f591f6ba342ec5104224a7af162e5cf59e18",
+          "lines": 4
+        },
+        {
+          "sha256": "825b4b197aa0d9370e27430e9ed254b0055dd5e237f3cf035d8f3d49282b128e",
+          "lines": 4
+        },
+        {
+          "sha256": "bb02779f454b49911b24b6cf65854c23de3ec75d7335e78d4511134478f65288",
+          "lines": 4
+        },
+        {
+          "sha256": "df9880676673e2941c6a20db20fbc5dc77e5a1f8dd5ee08d878338c3fb9a09b0",
+          "lines": 1
+        },
+        {
+          "sha256": "fd4256f8465723848b43d5e91ac05b668a195f12421c707b8fc37f0c05552172",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "717bcf0d5f5f19381844e4245d965c03aeff0c1d10ba256b353e583c753d0097"
+        },
+        {
+          "number": 2,
+          "body_sha256": "e2ffce9bdffc11f5c0a3cefe09fb896714669a8b8a86322b80f0f81437111d27"
+        },
+        {
+          "number": 3,
+          "body_sha256": "ea74f8d94c4015eedc776e1e47486f1c4a6edf1baf5d37a7a08f256e21f2fa7a"
+        },
+        {
+          "number": 4,
+          "body_sha256": "8b1ca8e2c256916467d90a4a77268eaf60c2369e3c17c43340f5dc99c403fcbc"
+        },
+        {
+          "number": 5,
+          "body_sha256": "b75eb0262dd040b895b468e2e78c5ce53678bac4724983f122d777c22dfd1853"
+        },
+        {
+          "number": 6,
+          "body_sha256": "39a600b240942f46edbd67162a7a465ea1a47696ec4f5950ef19838148075d4e"
+        },
+        {
+          "number": 7,
+          "body_sha256": "1423403291bcdbe144f710564bc89af71d6fb8173d7f7f040d0128e420d5cad1"
+        }
+      ],
+      "root_sha256": "2134cd1a333b53f4edc0bf376eb42e89270c08d4be3006e0a1cbd25f55d7369f",
+      "summary": null,
+      "division": null
+    },
+    {
+      "id": "tha-ap62",
+      "poem": 60,
+      "title": "Asanabodhiya",
+      "raw_sha256": "b3582313df1fe6e246a4c57c44c0bb52b78bd7bee546d005ef7b9c695eaee535",
+      "body_sha256": "2e97d6c524e95277721f75483e080e43428d682da9f5ad16e865062f6fbce748",
+      "notes_sha256": "b7f422370623b6b9983583772977479d0b5037c66bbb77cc665bdcff6908d2ae",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1334",
+          "suffix": "(1) [1334]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1335",
+          "suffix": "(2) [1335]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1336",
+          "suffix": "(3) [1336]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1337",
+          "suffix": "(4) [1337]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1338",
+          "suffix": "(5) [1338]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1339",
+          "suffix": "(6) [1339]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "1340",
+          "suffix": "(7) [1340]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "1341",
+          "suffix": "(8) [1341]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "1342",
+          "suffix": "(9) [1342]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "1343",
+          "suffix": "(10) [1343]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "1344",
+          "suffix": "(11) [1344]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "1345",
+          "suffix": "(12) [1345]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "1346",
+          "suffix": "(13) [1346]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "1347",
+          "suffix": "(14) [1347]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "1348",
+          "suffix": "(15) [1348]",
+          "lines": 4
+        }
+      ],
+      "paragraphs": [
+        {
+          "sha256": "7b2c7f816feb0a033ec114b4bd979003833f274488cd0896718f69c7d4c52e15",
+          "lines": 1
+        },
+        {
+          "sha256": "0eae7fddabc4d37a60bd371d33ebe1e5fe099fb3d18d8a07f71f3e71a6f62d65",
+          "lines": 4
+        },
+        {
+          "sha256": "40b9d984e1b01f13ed877cbedde174435d1d9e05b15c5d32679beeca758ac2dd",
+          "lines": 4
+        },
+        {
+          "sha256": "15ea74b8bb0ad29e736f93e605757076d543c9ce0e5d696caad92f0f7b3fb37d",
+          "lines": 4
+        },
+        {
+          "sha256": "a9eb1338a32b552a46713b38cd21aa570a207306bb6f842b1f13f62c82ba8b79",
+          "lines": 4
+        },
+        {
+          "sha256": "8fad4a58c36a98bfd2aa9e9e5e4818d39238deb29b6e6bf718fdd59663060fe4",
+          "lines": 4
+        },
+        {
+          "sha256": "cf6a37b1b51d36fedb669f7225801ee20f0654a6f59cd7a35a1b355e381b5f3f",
+          "lines": 4
+        },
+        {
+          "sha256": "da4e1a55e3058572f304f1d264b19a70899b4f76f7261f8d588a64364c3d6b2c",
+          "lines": 4
+        },
+        {
+          "sha256": "1c5742dc3a2eba3b53837527d91881887b490fc5ea4b629bb7ee6620d0f4d7b9",
+          "lines": 4
+        },
+        {
+          "sha256": "534deeb548ce46dd1f793b200d482a8eb5ed5d4c678f5fee46989b828124cc0c",
+          "lines": 4
+        },
+        {
+          "sha256": "d5f918f1510e08035b83786cf61aecc26204e6301e646bf40663cb017d9b6505",
+          "lines": 4
+        },
+        {
+          "sha256": "8796e27a55b23d895f508dff3880f6cf516826e1e7b7ca2d2f6aaeb35fbb9d77",
+          "lines": 4
+        },
+        {
+          "sha256": "644106b0292633133b923cc998d7efecb08f67d11d4d641aed5787b13768ca1a",
+          "lines": 4
+        },
+        {
+          "sha256": "0e0948c2e50eb7885e484e12fa35d66dec48f50c95ac14ddfcd3651322a4287b",
+          "lines": 4
+        },
+        {
+          "sha256": "d6df38476cf505922318cc72403ada5471166b311840a5b6d41a29ae3af2e605",
+          "lines": 4
+        },
+        {
+          "sha256": "0a08b572cdf013775233b661f0cadc79604c2b30baaf14ca9fefc6176a6161b8",
+          "lines": 4
+        },
+        {
+          "sha256": "f7f26e5c80e9a2eea9735f22a63cd07acdc484c256249ff3eb8156273b0526da",
+          "lines": 1
+        },
+        {
+          "sha256": "e22308f70fd2e24208fc51ed04b48a0f6e7191eb00a9832b8f42899e87cfd096",
+          "lines": 1
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "body_sha256": "2f789bb307e02979cbc944e0042b5022bca16207dae56edb0b80285182b8e86f"
+        },
+        {
+          "number": 2,
+          "body_sha256": "eb7286db3d99ed50bfaee5e1ebcd36ec18d9d71d12f4267e3fee01ff8300af99"
+        },
+        {
+          "number": 3,
+          "body_sha256": "b26c814f421aec258a5f95caa8917a9bc3b819e7b790e46622f8e096176c336c"
+        },
+        {
+          "number": 4,
+          "body_sha256": "d33395884cffab441edbed4b546a71438403b3e927a3e229c3a56d02b8e8052a"
+        },
+        {
+          "number": 5,
+          "body_sha256": "1db8f64153d11ccf602dc236703a6a537cf26b4b4b5a430964e67ac5f413b317"
+        },
+        {
+          "number": 6,
+          "body_sha256": "33ace9922f657cb4aa4c503d6011e2ac95dcf07c3180c6a4379407a8559810e8"
+        },
+        {
+          "number": 7,
+          "body_sha256": "a85511cffee350fe1fc481dd029270940a4ddcde4b2f654cb78bf945efaea212"
+        }
+      ],
+      "root_sha256": "2ecfa083742bfdb03629641ce2618b1102789a6bb6a07d3f710d3075b983cb81",
+      "summary": {
+        "body_sha256": "227ee465a5544397330cde930bfc4e5dae1e154161700c25bc26e9af61407a20",
+        "paragraphs": [
+          {
+            "sha256": "180c36509293ae8e19c51aa84b0663313aae048bb71cc079e2dd8cc034c4c94c",
+            "lines": 1
+          },
+          {
+            "sha256": "8dfb4f0fd53ad34a899015893933dc76d9536173f61f6731ea3057e5415a6794",
+            "lines": 6
+          },
+          {
+            "sha256": "594886c19b4a238785aaa1f8f50b502da024e7a80db13b87421bf9fc75c2d1da",
+            "lines": 1
+          }
+        ],
+        "note_numbers": []
+      },
+      "division": null
+    }
+  ],
+  "totals": {
+    "poems": 19,
+    "stanzas": 205,
+    "body_paragraphs": 262,
+    "notes": 126
+  }
+}

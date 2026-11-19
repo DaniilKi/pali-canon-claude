@@ -1,0 +1,22 @@
+{
+  "portable_cli_sha256": "5052d65a0d41f20b95e2f42e36606ce6a602bebfc3912e0e0aa218f229c3f6a1",
+  "same_independent_goldens_as_original": true,
+  "exact_a154_canonical_snapshot_pin": "49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1",
+  "production_parser_imports": 0,
+  "git_mutations": 0,
+  "builds": 0,
+  "totals": {
+    "poems": 19,
+    "stanzas": 205,
+    "body_paragraphs": 262,
+    "notes": 126
+  },
+  "replay_receipt_sha256": "c7c1a7844261c1a6c3682b1d5a40a1377ef42c8fc46d810de26a4181f6bbfb8e",
+  "stale_same_vri_index_refusal": {
+    "same_vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "reintroduced_historical_thag16_4_cut": true,
+    "exit_code": 1,
+    "review_receipts_written": false,
+    "refusal": "Canonical snapshot differs from the reviewed a154/D249 data"
+  }
+}

@@ -176,8 +176,8 @@ function apadanaFixture(uid) {
   return { ...fixture(), text_id: uid, english };
 }
 
-test('widget v23 displays the two finite post-poem/summary recitation placements without invented before labels or empty summary notes', () => {
-  assert.equal(WIDGET_VERSION, 'v23');
+test('current widget displays the two finite post-poem/summary recitation placements without invented before labels or empty summary notes', () => {
+  assert.equal(WIDGET_VERSION, 'v24');
   for (const bridge of ['Apps SDK', 'MCP Apps']) for (const [uid, placement, caption] of [
     ['tha-ap19', 'after_poem', 'After the publisher poem.'], ['tha-ap32', 'after_chapter_summary', 'After the chapter summary.'],
   ]) {

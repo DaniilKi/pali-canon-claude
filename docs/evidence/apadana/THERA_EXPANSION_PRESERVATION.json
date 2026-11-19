@@ -1,0 +1,35 @@
+{
+  "base": "a154013eded45f6ee319fff5cc246ed563811c55",
+  "old_link_objects_preserved": 70,
+  "only_added_ids": [
+    "tha-ap43",
+    "tha-ap45",
+    "tha-ap46",
+    "tha-ap47",
+    "tha-ap48",
+    "tha-ap49",
+    "tha-ap50",
+    "tha-ap51",
+    "tha-ap52",
+    "tha-ap53",
+    "tha-ap54",
+    "tha-ap55",
+    "tha-ap56",
+    "tha-ap57",
+    "tha-ap58",
+    "tha-ap59",
+    "tha-ap60",
+    "tha-ap61",
+    "tha-ap62"
+  ],
+  "canonical_and_commentary_all_other_server_data_bytes_unchanged": true,
+  "changed_server_files": [
+    "server/data/apadana.json",
+    "server/http-worker.cjs",
+    "server/http.cjs",
+    "server/index.cjs",
+    "server/web/reader.js"
+  ],
+  "unapproved_held42_activated": false,
+  "private_data_migrated": false
+}

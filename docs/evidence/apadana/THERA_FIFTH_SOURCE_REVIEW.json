@@ -1,0 +1,858 @@
+{
+  "review_type": "Independent complete publisher-source/rights/boundary/ownership review; metadata and hashes only. No source English bodies, original note wording or apparatus text included.",
+  "baseline": "a154013eded45f6ee319fff5cc246ed563811c55",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "decision": "APPROVE9exact complete publisher-edition choices:41,43–50to individually identified canonical43,45–52, subject to finite implementation/disclosures and separate independent runtime/package/exact-commitCI gates. HOLD42runtimeactivation for missing faithful finite editorial-gap/note12contract. No source identity ambiguity in these10and no canonical metadata/boundary repair required. No line-completeVRI or complete-fifth-chapter claim.",
+  "goldens_sha256": "b5ee36b8a8993f9a9b6348d5f68d6a23a1235f268f45546a246484882e2efe8f",
+  "rights_sha256": "15d8f02f21bd6ca503333cbd6e9680656478a35fe9349014ff0311ae250672ee",
+  "artifacts_sha256": "77d7ded16ebc41693d7cc0bdf594f169ffa96ae71b9543e406f6e91fc9dd4f6b",
+  "totals": {
+    "reviewed_poems": 10,
+    "approved_poems": 9,
+    "held_poems": 1,
+    "physical_publisher_stanzas": 142,
+    "body_paragraphs": 172,
+    "original_raw_body_paragraphs": 173,
+    "original_notes": 80,
+    "poem_notes": 79,
+    "editorial_gap_notes": 1,
+    "preface_notes": 0,
+    "summary_notes": 0,
+    "recitation_notes": 0,
+    "source_blobs": 10,
+    "rights_blobs": 6,
+    "routing_blobs": 1,
+    "media_fetches": 0
+  },
+  "approved_totals": {
+    "poems": 9,
+    "physical_publisher_stanzas": 114,
+    "body_paragraphs": 141,
+    "poem_notes": 67
+  },
+  "rights": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "raw_sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/LICENSE.md"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "raw_sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_pages/about.md"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "raw_sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/site/footer.njk"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "raw_sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/layouts/epub-metadata.xml"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "raw_sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_data/site.json"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "raw_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/_poems.json"
+    }
+  ],
+  "publisher_routing": {
+    "path": "src/_poems/chapter-3/chapter-3.json",
+    "bytes": 27,
+    "git_blob_sha1": "8c453df465b0cd793bb169ab2398192dbd7db0a0",
+    "raw_sha256": "50b6544f4689f2fcbd9287a86890cdcd6993c62b94ebcfb2d5419546f9ded2e0",
+    "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/chapter-3.json"
+  },
+  "rights_decision": "APPROVE exact text, translator notes and textual publisher apparatus under explicit CC BY-NC-SA4.0 translation grant, retaining Jonathan S. Walters and Whitman College attribution, exact source/revision, licence/change links and no endorsement. Generic site.json CC BY4.0 is less restrictive metadata and does not override the explicit translation/site-code notice. No media rights approved.",
+  "original_vri_replay": {
+    "revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "url": "https://raw.githubusercontent.com/VipassanaTech/tipitaka-xml/2d134ff9ef60f70a1eb03c9370580228811a3070/romn/s0510m1.mul.xml",
+    "bytes": 2464074,
+    "raw_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "original_xml_blocks": 14645,
+    "all_14645_compact_blocks_exact": true,
+    "page_encoding": "VRIparser(vol,page) tuples converted to existingcompact vol.page strings; all rend/n/text/notes/pages exact"
+  },
+  "neighbors": [
+    {
+      "id": "tha-ap42",
+      "title": "Kapparukkhiyattheraapadānaṃ",
+      "start": 3455,
+      "end": 3480,
+      "root_sha256": "fd1d0318846e87846d77d3719469bc13d4da02b09ed1d944fcd2e73821b54781"
+    },
+    {
+      "id": "tha-ap53",
+      "title": "Vidhūpanadāyakattheraapadānaṃ",
+      "start": 3940,
+      "end": 3965,
+      "root_sha256": "608469c87d94d5932c61ee31d27c005b29c02c28bef44de5d02d35cb727b6fbc"
+    }
+  ],
+  "global_contracts": [
+    "Exact original artifact revisions, SHA256and GitblobSHA1must gate live-only English retrieval; raw originals are research-only and must not enter project package.",
+    "Preserve all previous70Apadāna profiles, Pāli metadata/source words, private local-only drafts and earlier rights holds. Final candidate preservation is a separate release gate.",
+    "Poem headings, original translator notes, both colophons, preface, recitation, chapter summary and editorial gap must never count as stanza quotation evidence. Empty apparatus note sets must not acquire invented notes.",
+    "All mandatory mapping/edition warnings must survive individual,comparison,embedded and cached-response readers. Missing/forged warning metadata refuses English before wording appears.",
+    "49recitation and50chapter summary qualify as separately owned finite text apparatus only; no media/audio rights approved; no media fetched.",
+    "Public source/provenance review does not establish physical-device,human-assistive or specialist recension acceptance."
+  ],
+  "poems": [
+    {
+      "id": "tha-ap43",
+      "poem": 41,
+      "publisher_chapter": "chapter-3",
+      "title": "Upāli",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem conditional on finite extraction, mandatory visible edition disclosures, independent runtime/package review and exact-commit CI. NOT line-complete VRI.",
+      "narrative_identity": "Deerskin-clad ascetic carrying a triple rod praises Padumuttara with living-being, scent, darkness and sun similes; receives prediction as Upāli, Vinaya distinction and final attainments. Root heading/closing identify Bhāgineyya-Upāli. Publisher title and notes1/12 explicitly distinguish the nephew from the earlier Vinaya-chief work while acknowledging narrative confusion.",
+      "identity_basis": "All original English paragraphs, numbered entries, both colophons, notes and separate apparatus read; complete original VRI narrative/variants/title and immediate neighboring headings/closings inspected. Each mapping is individually justified, never inferred from a constant number offset. Specialist linguistic/recension endorsement is not claimed.",
+      "counts": {
+        "publisher_stanzas": 24,
+        "body_paragraphs": 27,
+        "original_notes": 14,
+        "poem_notes": 14
+      },
+      "edition_findings": [
+        "Complete publisher-edition poem scope only; not a line-complete VRI translation. Keep translator interpolation, uncertainty, numbering and all applicable edition differences visible.",
+        "Publisher note1 distinguishes Bhāgineyya-Upāli from the earlier Vinaya-reciter poem; note12 acknowledges that the narrative appears to confuse them. These notes remain original translator apparatus, not proof that separate canonical works may be merged. Never link this source to canonical8 based on shared Upāli name.",
+        "Publisher local15/global1130 gives500wheel-turning reigns; original VRI15 at3525 has pañcavīsati(25) and no500variant in that block. Preserve both authentic formulations and visible edition warning.",
+        "Publisher local17/global1132 gives a low dreadlocked ascetic; VRI17 at3532 speaks of low birth. No word-by-word alignment or editorial reconciliation is approved.",
+        "Chapter preface belongs only to41 outside poem; it owns zero notes. Originalnote1 belongs to poem title, not preface. All14definitions are poem-owned."
+      ],
+      "root": {
+        "id": "tha-ap43",
+        "title": "Bhāgineyyupālittheraapadānaṃ",
+        "book": 36,
+        "start": 3480,
+        "end": 3556,
+        "root_sha256": "b7409cf6fbb5539ecf690fb007dcc4e2973ea4b4e3004930cdfc5c1abf1f8336",
+        "root_verses": [
+          1,
+          24
+        ],
+        "numbered_stanza_count": 24,
+        "actual_headings": [
+          {
+            "block": 3480,
+            "rend": "chapter",
+            "title": "5. Upālivaggo"
+          },
+          {
+            "block": 3481,
+            "rend": "subhead",
+            "title": "1. Bhāgineyyupālittheraapadānaṃ"
+          }
+        ],
+        "closing_block_proofs": [
+          {
+            "block": 3554,
+            "rend": "bodytext",
+            "text_sha256": "9897d5f603cab16e1a5c5341a18a025458e6622c0f2327ebc708051a5b8cf9cc",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "block": 3555,
+            "rend": "centre",
+            "text_sha256": "fd4b1068898213fdd5824ec34435e64d86b19d84b7a831673e902a647e45790d",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        ]
+      },
+      "raw_sha256": "d1f7ecbe07b4504f51fc7b3730f0fae02f771488059c23e2b800bb0d9b15d208",
+      "body_sha256": "d67bda28acafb3b604e7641433e5561eb3912481a40ebd9ecc1a49dc09b0d141",
+      "notes_sha256": "17f875c8bb1f1ef8f36179b4dcdba08c827836235c4bd5469696ed9135e017e8",
+      "paratext_sha256": "8ae0a7cbd4d2ad562406fac73f7aa0a4438e52d26eea501323ce7cbeb916adad",
+      "chapter_summary": null,
+      "publisher_divisions": [],
+      "editorial_gap": null
+    },
+    {
+      "id": "tha-ap44",
+      "poem": 42,
+      "publisher_chapter": "chapter-3",
+      "title": "Koliyavessa",
+      "source_scope_decision": "HOLD activation: identity and complete publisher-edition source qualify, but editorial hiatus/note12 requires a new exact finite separately owned apparatus contract. Preserve28stanzas and omission; do not present29VRI lines as translated.",
+      "narrative_identity": "Walkway with plaster, flowers, awning and long-hall gift to Anomadassi; heavenly carriage/mansion, Okkāka family and Koḷiya origin narrative, later Soṇa and foremost distinction. Publisher Koliyavessa/Soṇa Koḷiyavessa and root Soṇakoḷivisa are variants tied to this full narrative; root speaker-colophon variant records koḷiyavessa.",
+      "identity_basis": "All original English paragraphs, numbered entries, both colophons, notes and separate apparatus read; complete original VRI narrative/variants/title and immediate neighboring headings/closings inspected. Each mapping is individually justified, never inferred from a constant number offset. Specialist linguistic/recension endorsement is not claimed.",
+      "counts": {
+        "publisher_stanzas": 28,
+        "body_paragraphs": 31,
+        "original_notes": 13,
+        "poem_notes": 12
+      },
+      "edition_findings": [
+        "Complete publisher-edition poem scope only; not a line-complete VRI translation. Keep translator interpolation, uncertainty, numbering and all applicable edition differences visible.",
+        "Original publisher has28numbered entries while root25–53contains29numbered stanzas. VRI50at3632–3635is deliberately untranslated. Publisher omission marker at raw134is a distinct one-line editorial paragraph between25/1164and26/1165, owning originalnote12.",
+        "Originalnote12 explicitly records conflicting manuscript/edition evidence and the decision to omit the stanza. It is not a missing random parser paragraph; deleting marker/definition or inventing an English stanza would falsify the source.",
+        "Publisher local10/global1149 gives30,000aeons for heavenly enjoyment and divine rule; VRI34second half at3586 gives25aeons for divine kingship. Preserve original difference.",
+        "Publisher local21/global1160 gives magical production of human food; VRI45at3619 describes enjoying human prosperity. Preserve independent edition formulation.",
+        "Identity/rights approve source for future implementation, but activation remains held pending a finite separate editorial-gap contract preserving marker/note12/exactplacement and excluding them from quotation. No approval to call publisher excerpt partial solely because it has28stanzas; it is a complete publisher-edition poem with an explicit editorial omission, not a line-completeVRI translation."
+      ],
+      "root": {
+        "id": "tha-ap44",
+        "title": "Soṇakoḷivisattheraapadānaṃ",
+        "book": 36,
+        "start": 3556,
+        "end": 3645,
+        "root_sha256": "37e88d801778fb386ce9996caff71d9eeefa49ae317c707a61d98fcfe192b2b9",
+        "root_verses": [
+          25,
+          53
+        ],
+        "numbered_stanza_count": 29,
+        "actual_headings": [
+          {
+            "block": 3556,
+            "rend": "subhead",
+            "title": "2. Soṇakoḷivisattheraapadānaṃ"
+          }
+        ],
+        "closing_block_proofs": [
+          {
+            "block": 3643,
+            "rend": "bodytext",
+            "text_sha256": "635744725544efd0cb81bb6a27937c2c1683564ffe3041208622003274b5bf25",
+            "notes_sha256": "ebee409e80042075a3b5823747cc4408354d53cf99dc1ece5fe0113ebfe45d9b"
+          },
+          {
+            "block": 3644,
+            "rend": "centre",
+            "text_sha256": "a0710cd7d475d723f53d514740f269670f63f424d54218488496abcca72207c6",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        ]
+      },
+      "raw_sha256": "71d18cea42a26ac2fc490f43c5265f83d517d8794f2df5d652d0fadbf17a4533",
+      "body_sha256": "ce9093d845a91e5ab60c04c3cb768f01b2b03e04c4c6b090d9283b34ec43dbdc",
+      "notes_sha256": "f5d142495735d32f2d7b4fd1076443d597de99dca0b9ecfa224958143fb83a7c",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "chapter_summary": null,
+      "publisher_divisions": [],
+      "editorial_gap": {
+        "body_sha256": "2fe39d2ad3bc7ff4e5ec258cf2d91c0848674547929b943b7f82151f61014d1d",
+        "paragraphs": 1,
+        "body_paragraphs": [
+          {
+            "paragraph": 0,
+            "sha256": "2fe39d2ad3bc7ff4e5ec258cf2d91c0848674547929b943b7f82151f61014d1d",
+            "lines": 1,
+            "characters": 18
+          }
+        ],
+        "lines": 1,
+        "characters": 18,
+        "raw_sha256": "62d21e599c85b1f2dd9fa4fad0fca2ea200be6844c03536ba00e7eb0dea90d66",
+        "note_numbers": [
+          12
+        ],
+        "notes_sha256": "deec59590f38fe2492c2c86fee6f4fdf90536b38c14277ef3261a7bac5fc8249",
+        "before_local_label": "26",
+        "before_publisher_label": "1165",
+        "after_local_label": "25",
+        "after_publisher_label": "1164",
+        "omitted_vri_stanza": 50,
+        "source_raw_line": 134,
+        "proposed_future_contract": "New finite editorial apparatus kind; exact parentid/path/revision/raw/body/note12pins; placementafter25/1164before26/1165; preserve original marker and definition; visible omission versus VRI50; exclude marker and note from stanza quotation/wholeVRIcoverage; malformed/forged ownership refuses."
+      }
+    },
+    {
+      "id": "tha-ap45",
+      "poem": 43,
+      "publisher_chapter": "chapter-3",
+      "title": "Bhaddiya-Kaḷigodhāya-Putta",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem conditional on finite extraction, mandatory visible edition disclosures, independent runtime/package review and exact-commit CI. NOT line-complete VRI.",
+      "narrative_identity": "Padumuttara, expensive golden seat with coverings, invitation and milk-rice for Buddha and large assembly, divine/royal prediction and Bhaddiya following the Teacher; solitary bed and foremost appointment. Both full speaker and closing colophons identify the son of Kaḷigodhā; root Kāḷigodhāputtabhaddiya preserves spelling/order differences.",
+      "identity_basis": "All original English paragraphs, numbered entries, both colophons, notes and separate apparatus read; complete original VRI narrative/variants/title and immediate neighboring headings/closings inspected. Each mapping is individually justified, never inferred from a constant number offset. Specialist linguistic/recension endorsement is not claimed.",
+      "counts": {
+        "publisher_stanzas": 16,
+        "body_paragraphs": 19,
+        "original_notes": 7,
+        "poem_notes": 7
+      },
+      "edition_findings": [
+        "Complete publisher-edition poem scope only; not a line-complete VRI translation. Keep translator interpolation, uncertainty, numbering and all applicable edition differences visible.",
+        "Local5/global1172andlocal13/global1180are single six-line entries. Keep16physicalstanzas; do not split or renumber them.",
+        "Printed local13global suffix has a doubled opening bracket. Preserve the malformed publisher label exactly; no numerical normalization.",
+        "Publisher local1/global1168 has Buddha approaching people; VRI54at3648 has people approaching Buddha. Publisher note2follows clothing/lodging reading recorded as variant atVRI55, while main text differs. Visible edition caveat required.",
+        "Original final Legend is capitalized, and the speech-colophon spans two raw lines. Both preserve publisher formatting, not stanza continuation; all7notes belong to poem."
+      ],
+      "root": {
+        "id": "tha-ap45",
+        "title": "Kāḷigodhāputtabhaddiyattheraapadānaṃ",
+        "book": 36,
+        "start": 3645,
+        "end": 3697,
+        "root_sha256": "b79372b8e90abb4414d69035860556a457ee4231bdea801da44994b1c5af7393",
+        "root_verses": [
+          54,
+          69
+        ],
+        "numbered_stanza_count": 16,
+        "actual_headings": [
+          {
+            "block": 3645,
+            "rend": "subhead",
+            "title": "3. Kāḷigodhāputtabhaddiyattheraapadānaṃ"
+          }
+        ],
+        "closing_block_proofs": [
+          {
+            "block": 3695,
+            "rend": "bodytext",
+            "text_sha256": "007d0c118b145417d9d3eb65e28b9500daba5a11b4f0e51f72e99b16c91c8c10",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "block": 3696,
+            "rend": "centre",
+            "text_sha256": "98e4cf6f11605391f81a7ec18b7f25c9ee401928bbb985aad463a0bf73511255",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        ]
+      },
+      "raw_sha256": "68ca39da90b8ce93bc8e74dd09306e28d7fdf79083c9c126857aae7980d7d754",
+      "body_sha256": "42a3db0455737aa02a2630c6442eb2f6ab23fbe7c77409799c88b5246bc50a03",
+      "notes_sha256": "2501786ab42429d50fd2c3e5a4511eff7f14d147a8ad10ff901e433e357ac972",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "chapter_summary": null,
+      "publisher_divisions": [],
+      "editorial_gap": null
+    },
+    {
+      "id": "tha-ap46",
+      "poem": 44,
+      "publisher_chapter": "chapter-3",
+      "title": "Sannidhāpaka",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem conditional on finite extraction, mandatory visible edition disclosures, independent runtime/package review and exact-commit CI. NOT line-complete VRI.",
+      "narrative_identity": "Mountain-forest hermit welcomes Padumuttara with grass seating and food/water, receives fruit-of-gift refrain and Arindama wheel-turning reward. Publisher Sannidhāpaka and root Sanniṭṭhāpaka are explicitly differentiated in original title and both colophon notes; root speaker-colophon includes sannidhāpaka variant.",
+      "identity_basis": "All original English paragraphs, numbered entries, both colophons, notes and separate apparatus read; complete original VRI narrative/variants/title and immediate neighboring headings/closings inspected. Each mapping is individually justified, never inferred from a constant number offset. Specialist linguistic/recension endorsement is not claimed.",
+      "counts": {
+        "publisher_stanzas": 7,
+        "body_paragraphs": 10,
+        "original_notes": 9,
+        "poem_notes": 9
+      },
+      "edition_findings": [
+        "Complete publisher-edition poem scope only; not a line-complete VRI translation. Keep translator interpolation, uncertainty, numbering and all applicable edition differences visible.",
+        "Originalnote7says edition misprints global1789, but actual publisher stanza body already prints1189. Preserve both original body and note without changing either.",
+        "Notes1,8,9give Sanniṭṭhāpaka name alternatives; notes8and9are owned by speech/closing colophons, respectively, and must survive a stanza-only quotation extractor. All9notes remain poem-owned.",
+        "Originalnotes4/5retain uncertain plant/food interpretations. Source review approves faithful rendering of their wording and uncertainty, not a botanical resolution."
+      ],
+      "root": {
+        "id": "tha-ap46",
+        "title": "Sanniṭṭhāpakattheraapadānaṃ",
+        "book": 36,
+        "start": 3697,
+        "end": 3720,
+        "root_sha256": "ac51abebbff01be5b9fc5301c6c40e0868d417d396dcfb025156f8cd82763651",
+        "root_verses": [
+          70,
+          76
+        ],
+        "numbered_stanza_count": 7,
+        "actual_headings": [
+          {
+            "block": 3697,
+            "rend": "subhead",
+            "title": "4. Sanniṭṭhāpakattheraapadānaṃ"
+          }
+        ],
+        "closing_block_proofs": [
+          {
+            "block": 3718,
+            "rend": "bodytext",
+            "text_sha256": "95ed01af6bd20f4bbbd87caef9e635a14085ce02602783df82f0a5ca3af5820d",
+            "notes_sha256": "766df9ce8b96ca2207e9d1fca14913a1b0e0e8963b869a60ae6ff0fe2213b13d"
+          },
+          {
+            "block": 3719,
+            "rend": "centre",
+            "text_sha256": "47e2f2a4fa8fb46b3bf854ee2a9008a9910bd6d88915d69031e74ef200bdd5c8",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        ]
+      },
+      "raw_sha256": "34cdcfde81df6f945f0414bf6a32b32b2857c74ae98460d47e222b31cbea3ec7",
+      "body_sha256": "09dbb83485f72a1ed75a3da8b285bf5d6d3c9085aea864e3d13904f271df21ea",
+      "notes_sha256": "7fa65079d459ff6b83a84e875fba34c58a08f4fdf58f73aaf45f71d298566631",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "chapter_summary": null,
+      "publisher_divisions": [],
+      "editorial_gap": null
+    },
+    {
+      "id": "tha-ap47",
+      "poem": 45,
+      "publisher_chapter": "chapter-3",
+      "title": "Pañcahatthiya",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem conditional on finite extraction, mandatory visible edition disclosures, independent runtime/package review and exact-commit CI. NOT line-complete VRI.",
+      "narrative_identity": "Five handfuls of lilies first intended for the head-crest offered to Sumedha in bazaar; flowers form canopy with student/teacher simile, Buddha-pūjā fruit and Hatthiya kings. Both original colophons match Pañcahatthiya; no other adjacent gift narrative substituted.",
+      "identity_basis": "All original English paragraphs, numbered entries, both colophons, notes and separate apparatus read; complete original VRI narrative/variants/title and immediate neighboring headings/closings inspected. Each mapping is individually justified, never inferred from a constant number offset. Specialist linguistic/recension endorsement is not claimed.",
+      "counts": {
+        "publisher_stanzas": 6,
+        "body_paragraphs": 9,
+        "original_notes": 6,
+        "poem_notes": 6
+      },
+      "edition_findings": [
+        "Complete publisher-edition poem scope only; not a line-complete VRI translation. Keep translator interpolation, uncertainty, numbering and all applicable edition differences visible.",
+        "Paired Pandoc c/chdisplay occurs in title, colophons and notes; retain only the reviewed diacritic member before bracket unescaping. No general HTML permission follows.",
+        "Publisher local3/global1193follows flowing-together interpretation; root79at3729records saṃsāviṃsu as variant beside main Samādhiṃsu. Preserve both.",
+        "Publisher local5/global1195has one hundred twenty aeons and five Hatthiya kings; root81at3734has ito vīsakappasate. Leave temporal/numbering interpretation edition-specific and seek specialist review rather than silently harmonizing. All6notes remain poem-owned."
+      ],
+      "root": {
+        "id": "tha-ap47",
+        "title": "Pañcahatthiyattheraapadānaṃ",
+        "book": 36,
+        "start": 3720,
+        "end": 3740,
+        "root_sha256": "c88adcb3282eb8822eb7a3f40023e1e03e1ff8e50356a4960d48b9b5f8590a84",
+        "root_verses": [
+          77,
+          82
+        ],
+        "numbered_stanza_count": 6,
+        "actual_headings": [
+          {
+            "block": 3720,
+            "rend": "subhead",
+            "title": "5. Pañcahatthiyattheraapadānaṃ"
+          }
+        ],
+        "closing_block_proofs": [
+          {
+            "block": 3738,
+            "rend": "bodytext",
+            "text_sha256": "0d294091e09dd61cc45ff80883e466a32050434a29d3bc0c9ac478d42f814e06",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "block": 3739,
+            "rend": "centre",
+            "text_sha256": "31445845587db803e6e568efbe030027571d3a8adc7385c67c6c70a5c0e870a3",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        ]
+      },
+      "raw_sha256": "8f6b0825b803566876f5bad569c1fa0d0cdf32ecf36523d88f9c3ac0ec33edbe",
+      "body_sha256": "34712db447dab98cf6b11059cfa28bf7a4841eb43adb29c4a55f3e1f4a15ac39",
+      "notes_sha256": "d6b1810658c93e2c654caa5c5a909ee9329c840af2ecca312e5ee83941a69249",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "chapter_summary": null,
+      "publisher_divisions": [],
+      "editorial_gap": null
+    },
+    {
+      "id": "tha-ap48",
+      "poem": 46,
+      "publisher_chapter": "chapter-3",
+      "title": "Padumacchadaniya",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem conditional on finite extraction, mandatory visible edition disclosures, independent runtime/package review and exact-commit CI. NOT line-complete VRI.",
+      "narrative_identity": "Pink lotus placed on Vipassī funeral pyre, rising and covering the pyre, later Padumissara reward and final attainments. Root title/speaker/closing match Padumacchadaniya. Original publisher colophons instead spell Padumucchadaniya and preserve a comma in the introductory formula.",
+      "identity_basis": "All original English paragraphs, numbered entries, both colophons, notes and separate apparatus read; complete original VRI narrative/variants/title and immediate neighboring headings/closings inspected. Each mapping is individually justified, never inferred from a constant number offset. Specialist linguistic/recension endorsement is not claimed.",
+      "counts": {
+        "publisher_stanzas": 5,
+        "body_paragraphs": 8,
+        "original_notes": 4,
+        "poem_notes": 4
+      },
+      "edition_findings": [
+        "Complete publisher-edition poem scope only; not a line-complete VRI translation. Keep translator interpolation, uncertainty, numbering and all applicable edition differences visible.",
+        "Publisher both colophons say Padumucchadaniya while title/root use Padumacchadaniya; introductory speech formula contains an original comma. Exact finite preservation required, with original discrepancy visible.",
+        "Originalnotes2/3record first/third-person verb differences in rising/holding the lotus. Preserve notes and uncertainty; no generated correction.",
+        "Root87has the speech-colophon as gathalast at3755. Do not change root formatting/boundary, infer another translated stanza or use English colophon as quotation evidence. All4notes remain poem-owned."
+      ],
+      "root": {
+        "id": "tha-ap48",
+        "title": "Padumacchadaniyattheraapadānaṃ",
+        "book": 36,
+        "start": 3740,
+        "end": 3757,
+        "root_sha256": "c9f42b2b625ee3a1ae2ee9a3d70ef525188f1bf7478e63ee463c4ef7c74aab47",
+        "root_verses": [
+          83,
+          87
+        ],
+        "numbered_stanza_count": 5,
+        "actual_headings": [
+          {
+            "block": 3740,
+            "rend": "subhead",
+            "title": "6. Padumacchadaniyattheraapadānaṃ"
+          }
+        ],
+        "closing_block_proofs": [
+          {
+            "block": 3756,
+            "rend": "centre",
+            "text_sha256": "26010568aefaeb9e5221ebd8bc427d4742d83f7a146e79efc44a0da2801c0530",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        ]
+      },
+      "raw_sha256": "a3459bbf3765caed552ea9fa4d4579ac92a308e5b598b24486d64a85c13ce651",
+      "body_sha256": "6c2ed4b6c66b6f88c9248d727b5c2abbe59a2b96163cc157435c20c3e5222c97",
+      "notes_sha256": "4ed6e54adf44333d2a81f233eae810f8bf265fa7b9bf3317afa89bc3077fbec0",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "chapter_summary": null,
+      "publisher_divisions": [],
+      "editorial_gap": null
+    },
+    {
+      "id": "tha-ap49",
+      "poem": 47,
+      "publisher_chapter": "chapter-3",
+      "title": "Sayanadāyaka",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem conditional on finite extraction, mandatory visible edition disclosures, independent runtime/package review and exact-commit CI. NOT line-complete VRI.",
+      "narrative_identity": "Cloth-covered bed for Siddhattha, acceptance of bed-and-chair and Buddha flying upward; gift-fruit and Varuṇa Deva reward. Root Sayanadāyaka title and both colophons match; root main Varaka beside Varuṇa variant remains distinct.",
+      "identity_basis": "All original English paragraphs, numbered entries, both colophons, notes and separate apparatus read; complete original VRI narrative/variants/title and immediate neighboring headings/closings inspected. Each mapping is individually justified, never inferred from a constant number offset. Specialist linguistic/recension endorsement is not claimed.",
+      "counts": {
+        "publisher_stanzas": 5,
+        "body_paragraphs": 8,
+        "original_notes": 3,
+        "poem_notes": 3
+      },
+      "edition_findings": [
+        "Complete publisher-edition poem scope only; not a line-complete VRI translation. Keep translator interpolation, uncertainty, numbering and all applicable edition differences visible.",
+        "Publisher local4/global1205Varuṇa Deva contrasts root91main varako at3768, whose actual variant is varuṇo. Keep both named editions; no substitution.",
+        "Temporal-reference wording remains publisher-specific; all5entries and3notes are within the verified poem, and both colophons stay outside stanza quotation."
+      ],
+      "root": {
+        "id": "tha-ap49",
+        "title": "Sayanadāyakattheraapadānaṃ",
+        "book": 36,
+        "start": 3757,
+        "end": 3774,
+        "root_sha256": "1c85e0bb0ffb084a12574c818af8fa2cf99008b2ec75490d699fdaef2bd1231f",
+        "root_verses": [
+          88,
+          92
+        ],
+        "numbered_stanza_count": 5,
+        "actual_headings": [
+          {
+            "block": 3757,
+            "rend": "subhead",
+            "title": "7. Sayanadāyakattheraapadānaṃ"
+          }
+        ],
+        "closing_block_proofs": [
+          {
+            "block": 3772,
+            "rend": "bodytext",
+            "text_sha256": "6d377e0bf6a9b8b6d9bdf76868beb7912bc8d6c5cef09b3f391bad6abc1579bb",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "block": 3773,
+            "rend": "centre",
+            "text_sha256": "f38c234b83b9eb32725e0c0dc9321e5d411a5f35035173c79b3f3c4913bc30ad",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        ]
+      },
+      "raw_sha256": "e64f5a2de7426616ec910d1814897b185ec63c936c3a3d01b7271b610a2691a9",
+      "body_sha256": "078d556268542b77c6d420dd4238eea8301c391f7b3a160d2d1551af651f99d9",
+      "notes_sha256": "7d340eed03cdb13df43301791ed828dd9b177867b46c009b26a1000bf8fe896e",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "chapter_summary": null,
+      "publisher_divisions": [],
+      "editorial_gap": null
+    },
+    {
+      "id": "tha-ap50",
+      "poem": 48,
+      "publisher_chapter": "chapter-3",
+      "title": "Cankamadāyaka",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem conditional on finite extraction, mandatory visible edition disclosures, independent runtime/package review and exact-commit CI. NOT line-complete VRI.",
+      "narrative_identity": "Bricks used to build walkway for Atthadassi, dimensions/material wording, acceptance with handful of sand, sand/walkway prediction, divine/human reigns and final attainments. Publisher Cankamadāyaka and root Caṅkamanadāyaka differ in name form but story and both colophons identify the same walkway-giver.",
+      "identity_basis": "All original English paragraphs, numbered entries, both colophons, notes and separate apparatus read; complete original VRI narrative/variants/title and immediate neighboring headings/closings inspected. Each mapping is individually justified, never inferred from a constant number offset. Specialist linguistic/recension endorsement is not claimed.",
+      "counts": {
+        "publisher_stanzas": 8,
+        "body_paragraphs": 11,
+        "original_notes": 1,
+        "poem_notes": 1
+      },
+      "edition_findings": [
+        "Complete publisher-edition poem scope only; not a line-complete VRI translation. Keep translator interpolation, uncertainty, numbering and all applicable edition differences visible.",
+        "Publisher local2/global1208describes five gemstones; VRI94at3779uccato pañcaratanaṃis a height/measure construction. This material-versus-measure difference requires explicit edition disclosure and specialist interpretation; do not silently correct source English or assert exact line alignment.",
+        "Original title and both colophons have paired uppercaseC/ChPandoc displays; retain exact diacritic member. Single originalnote1belongs to poem title."
+      ],
+      "root": {
+        "id": "tha-ap50",
+        "title": "Caṅkamanadāyakattheraapadānaṃ",
+        "book": 36,
+        "start": 3774,
+        "end": 3800,
+        "root_sha256": "6ec4a9cd6430eb1016c980865dcbe8df1a5733f98c84e7beb847baeb3075a232",
+        "root_verses": [
+          93,
+          100
+        ],
+        "numbered_stanza_count": 8,
+        "actual_headings": [
+          {
+            "block": 3774,
+            "rend": "subhead",
+            "title": "8. Caṅkamanadāyakattheraapadānaṃ"
+          }
+        ],
+        "closing_block_proofs": [
+          {
+            "block": 3798,
+            "rend": "bodytext",
+            "text_sha256": "66121f5dd2f8d424e138d705085b3cf25bcbdea9dedb868d7619dfac9055473a",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "block": 3799,
+            "rend": "centre",
+            "text_sha256": "ff066ef6e47e24d4185455a6f589275569c2fb820a12c5338950214d751d3c35",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        ]
+      },
+      "raw_sha256": "72e4cbc431e65827cb2c72d0fdd44587f426382c7cb1d776bc4f0c52a69ba073",
+      "body_sha256": "fd95113bcbe31dbb8aaf76d6003da936b7e1f90028a6aef8af32f2015ee1ccfa",
+      "notes_sha256": "f4c5db3f1d50de1ce3c1bf00dec7f9099eb31b3eb7c9e89effef318f63b1becc",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "chapter_summary": null,
+      "publisher_divisions": [],
+      "editorial_gap": null
+    },
+    {
+      "id": "tha-ap51",
+      "poem": 49,
+      "publisher_chapter": "chapter-3",
+      "title": "Subhadda",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem conditional on finite extraction, mandatory visible edition disclosures, independent runtime/package review and exact-commit CI. NOT line-complete VRI.",
+      "narrative_identity": "Padumuttara final passing, scent/flower offering and future heavenly bodies; prediction of Gotama and Subhadda asking questions/ordination, realization, later-seeming stupa offering, Kassapa follower Tissa as son, final meeting/ordination at sal grove and final attainments. Exact sequence and uncertain interpolation retained; root and both publisher colophons identify Subhadda.",
+      "identity_basis": "All original English paragraphs, numbered entries, both colophons, notes and separate apparatus read; complete original VRI narrative/variants/title and immediate neighboring headings/closings inspected. Each mapping is individually justified, never inferred from a constant number offset. Specialist linguistic/recension endorsement is not claimed.",
+      "counts": {
+        "publisher_stanzas": 24,
+        "body_paragraphs": 27,
+        "original_notes": 12,
+        "poem_notes": 12
+      },
+      "edition_findings": [
+        "Complete publisher-edition poem scope only; not a line-complete VRI translation. Keep translator interpolation, uncertainty, numbering and all applicable edition differences visible.",
+        "The fifth recitation marker occupies the first line of the raw paragraph containing local15/global1229. Separate only that exact line, leaving the four original stanza lines intact. Canonical marker is centre3843, span3843–3844/reftha-ap51/16, between VRI114and115. No root boundary repair needed.",
+        "Finite publisher_divisions descriptor must place this zero-note apparatus before local15/global1229, preserving literal wording and exact raw/body/root pins. Exclude it from stanza text and quotation; do not invent an extra before-stanza anchor or note.",
+        "Originalnote8questions ordering/interpolation of local18/global1232. Preserve source order and uncertainty; no harmonization to narrated chronology.",
+        "Publisher local21/global1235follows final-sighting variant pacchime addasaṃ jinaṃrecorded atroot121/3864; main pacchā me āsi bhaddakaṃdiffers.",
+        "Further source formulations differ: local3covering/incense vs VRI103candana/tagara; local4Clever-One vs VRI104nipannakova; local9awakening/makingmanyachieve-nirvana vs VRI109bodhayitvā/nibbāyissati; local11Once-has-spoken vs VRI111hāsayitvāna. These are edition/interpretation warnings, not grounds to manufacture aligned wording. All12notes remain poem-owned."
+      ],
+      "root": {
+        "id": "tha-ap51",
+        "title": "Subhaddattheraapadānaṃ",
+        "book": 36,
+        "start": 3800,
+        "end": 3875,
+        "root_sha256": "c4837f7a72e20cd1d8e34819c10ed63c8d3be273a0841d07f6ad89becf706abd",
+        "root_verses": [
+          101,
+          124
+        ],
+        "numbered_stanza_count": 24,
+        "actual_headings": [
+          {
+            "block": 3800,
+            "rend": "subhead",
+            "title": "9. Subhaddattheraapadānaṃ"
+          }
+        ],
+        "closing_block_proofs": [
+          {
+            "block": 3873,
+            "rend": "bodytext",
+            "text_sha256": "13d3a13efdfa325994d3d1dda32cae50a09198f268169c826f6e4524202ccbcd",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "block": 3874,
+            "rend": "centre",
+            "text_sha256": "ab4170bda104ae6cb4a08251fcb486d7be6d67a28f8534f0de0f4526e239ccd2",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        ]
+      },
+      "raw_sha256": "9c4cc9848ddf5866d9e69fd4f4d83fb445434bc2f38d35a8ef4f22fc43b06dab",
+      "body_sha256": "a58b817f55dff9d26b2b804b1347f4ae1d7e6aa22634e62ea58a7df104345efe",
+      "notes_sha256": "ca8883d14717e8776eb2adb9633c36d54e32b27e6f1bfb73a87dff944fbfe118",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "chapter_summary": null,
+      "publisher_divisions": [
+        {
+          "body_sha256": "38e9f3b85fbdd631c50f986519f28ba43fc62d3057b99fefa67c02005e4be945",
+          "paragraphs": 1,
+          "body_paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "38e9f3b85fbdd631c50f986519f28ba43fc62d3057b99fefa67c02005e4be945",
+              "lines": 1,
+              "characters": 29
+            }
+          ],
+          "lines": 1,
+          "characters": 29,
+          "root_start": 3843,
+          "root_end": 3844,
+          "root_sha256": "64e9490a18c35a43059d6f98c6468e893d2ab79f012664b36501dd2cd0c1da88",
+          "first_ref": "tha-ap51/16",
+          "last_ref": "tha-ap51/16",
+          "parent_id": "tha-ap51",
+          "note_numbers": [],
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "before_local_label": "15",
+          "before_publisher_label": "1229",
+          "raw_sha256": "b1dd8e3dab85d2022dfb6a646c6718718d55662eccf4d64f9b9dcefe190697f4",
+          "source_raw_line": 79
+        }
+      ],
+      "editorial_gap": null
+    },
+    {
+      "id": "tha-ap52",
+      "poem": 50,
+      "publisher_chapter": "chapter-3",
+      "title": "Cunda",
+      "source_scope_decision": "APPROVE exact complete publisher-edition poem conditional on finite extraction, mandatory visible edition disclosures, independent runtime/package review and exact-commit CI. NOT line-complete VRI.",
+      "narrative_identity": "Jasmine-flower festoon for Siddhattha, prediction of divine/royal returns and birth to Sārī/Vaṅganta, Cūḷacunda as novice arahant, service to brother Sāriputta and presenting relics in bowl. Both full speaker and closing colophons match Cunda; separate Upāli chapter apparatus follows.",
+      "identity_basis": "All original English paragraphs, numbered entries, both colophons, notes and separate apparatus read; complete original VRI narrative/variants/title and immediate neighboring headings/closings inspected. Each mapping is individually justified, never inferred from a constant number offset. Specialist linguistic/recension endorsement is not claimed.",
+      "counts": {
+        "publisher_stanzas": 19,
+        "body_paragraphs": 22,
+        "original_notes": 11,
+        "poem_notes": 11
+      },
+      "edition_findings": [
+        "Complete publisher-edition poem scope only; not a line-complete VRI translation. Keep translator interpolation, uncertainty, numbering and all applicable edition differences visible.",
+        "Publisher local9/global1247gives500wheel-turning reigns; VRI133at3902pañcasattati gives75with no500variant. Preserve explicit count difference.",
+        "Publisher finalstandard-refrain corresponds to actual variant at VRI143/3931beside different main wording. No assistant-generated expansion or synchronization with VRI approved.",
+        "Separate chapter summary owns zero notes and includes the final chapter-closing line. Original VRI chapter closing3935precedes summary3936–3940; publisher gives summary before chapter closing. Descriptor must bind3935–3940/refstha-ap52/23–25, not truncate closing.",
+        "Original summary states144verses. VRI numbered chapter stanzas total143and publisher numbered entries142due to deliberate omission in42. Preserve all original counts and disclose difference without claiming validated line-complete or whole-chapter coverage;42is held. All11definitions belong to poem, none to summary."
+      ],
+      "root": {
+        "id": "tha-ap52",
+        "title": "Cundattheraapadānaṃ",
+        "book": 36,
+        "start": 3875,
+        "end": 3940,
+        "root_sha256": "ebd31ade10d99f3945b48ed29029af2d1b1a2fa59b34ac383cb85a3686f59dbd",
+        "root_verses": [
+          125,
+          143
+        ],
+        "numbered_stanza_count": 19,
+        "actual_headings": [
+          {
+            "block": 3875,
+            "rend": "subhead",
+            "title": "10. Cundattheraapadānaṃ"
+          }
+        ],
+        "closing_block_proofs": [
+          {
+            "block": 3933,
+            "rend": "bodytext",
+            "text_sha256": "d6fbb5ebe2f1ee00eb6b834fcf0d46178260fb04670340e99be4687bba9ab8c2",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "block": 3934,
+            "rend": "centre",
+            "text_sha256": "520e6de043593f5bf4b590320c16478c7a2cec71c2f760bdebd0278ccf509af9",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "block": 3935,
+            "rend": "centre",
+            "text_sha256": "f6f75673ae7f01eeda66c9f9d16eb3fe5a655d084f6826c0621d8c707f1fcab8",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "block": 3936,
+            "rend": "bodytext",
+            "text_sha256": "67a4c9f8fb9153db7fddd800b94ba1c2915cecec6690962c6fd9f04ad7005ecd",
+            "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        ]
+      },
+      "raw_sha256": "db74917f990d06c697ef0697baa45a86a4361dd29d67200fdbb2ff3cb8d0513b",
+      "body_sha256": "d2e7e86ca7b7008171a62e9364497ff00cc886b92cea27d03a1c36ceb2cf2f9a",
+      "notes_sha256": "caaf2aa68c2e6e75dce5c4e93c9e3879e6a6e7fd7937bd7e9a5487b70ca9bb8a",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "chapter_summary": {
+        "body_sha256": "181a723bba5466dd5f4743927bd9a009984163188cb1517d0d331381f32fb098",
+        "paragraphs": 3,
+        "body_paragraphs": [
+          {
+            "paragraph": 0,
+            "sha256": "180c36509293ae8e19c51aa84b0663313aae048bb71cc079e2dd8cc034c4c94c",
+            "lines": 1,
+            "characters": 12
+          },
+          {
+            "paragraph": 1,
+            "sha256": "e7b612cf91371497324a8f1482e94ef8bd9dfe0e61fb28ba5d8e509311cb4e6c",
+            "lines": 6,
+            "characters": 164
+          },
+          {
+            "paragraph": 2,
+            "sha256": "d78eb0fcfba4a4e20244f26414d174bdb40ff8475f0b35a872c2a2c8204c7283",
+            "lines": 1,
+            "characters": 29
+          }
+        ],
+        "lines": 10,
+        "characters": 209,
+        "root_start": 3935,
+        "root_end": 3940,
+        "root_sha256": "6c9cd0f6b4158065a7f9a7743c1fda0cbbf46d79c88328be77cd637fdca590d5",
+        "first_ref": "tha-ap52/23",
+        "last_ref": "tha-ap52/25",
+        "parent_id": "tha-ap52",
+        "note_numbers": [],
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "middle_lines": 6,
+        "publisher_stated_count": 144,
+        "vri_numbered_chapter_stanzas": 143,
+        "publisher_numbered_chapter_entries": 142
+      },
+      "publisher_divisions": [],
+      "editorial_gap": null
+    }
+  ],
+  "preservation": {
+    "project_source_edits": 0,
+    "commits": 0,
+    "builds": 0,
+    "pushes": 0,
+    "outreach": 0,
+    "media_fetches": 0,
+    "private_data_accessed": false,
+    "official_checkout_mutations": 0,
+    "source_artifacts_written_only_under": "/tmp/pali-thera-next-two-source/fifth"
+  },
+  "remaining_limits": "42mustremainheldunlessindependentlyreviewedneweditorialownershipcontractships; allsource semantic/count discrepancies retain visible warnings. Local/runtime/browser/package/fullcheck/exactSHA CI remain parent release duties; specialist and real-device/human assistive review remain external."
+}

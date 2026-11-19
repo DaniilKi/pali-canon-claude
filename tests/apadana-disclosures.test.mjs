@@ -38,7 +38,7 @@ function embeddedGuard() {
 }
 
 test('every reviewed profile retains all mandatory edition caveats in standalone, comparison and embedded readers', () => {
-  assert.equal(WIDGET_VERSION, 'v23');
+  assert.equal(WIDGET_VERSION, 'v24');
   const checked = embeddedGuard();
   for (const uid of Object.keys(APADANA_PROFILES)) {
     const f = response(uid);

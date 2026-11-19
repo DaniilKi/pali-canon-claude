@@ -1,0 +1,38 @@
+{
+  "head": "a154013eded45f6ee319fff5cc246ed563811c55",
+  "browser": "Chromium 155.0.8059.79 built on Debian GNU/Linux 13 (trixie)",
+  "http_bundle_sha256": "5900128f72858f6a9065de13f30057bc12cfb405f1cdb78816592dd5e7a4e48d",
+  "reader_bundle_sha256": "1aa8ed97919cd8260aa0b1baa3febd75de4e1232bba968ac0d89661bf940a957",
+  "capability_probe": {
+    "workers": [],
+    "before": {
+      "inner": 1280,
+      "outer": 1280,
+      "dpr": 1,
+      "scale": 1
+    },
+    "keyboard_zoom": {
+      "inner": 1280,
+      "outer": 1280,
+      "dpr": 1,
+      "scale": 1
+    }
+  },
+  "native_window_background_focus": "Not run: no exposed CUA/NodeREPL/Sky/viewer tool, DISPLAY/X11 socket or Xvfb; remote desktop status enabled/unknown does not establish an actionable desktop.",
+  "zoom": "Precondition not established: Ctrl++ did not change browser geometry or DPR, and isolated temporary extension had no service worker. No CSS zoom, CDP page scaling or force-device-scale fallback was used to represent native zoom.",
+  "engine_limits": "System Chromium only: Playwright Firefox/WebKit configured executable paths are absent. No additional browser was installed.",
+  "checks": {
+    "study_focus": {
+      "status": "passed",
+      "passed": 30
+    },
+    "text_spacing": {
+      "status": "passed",
+      "passed": 24
+    }
+  },
+  "runtime_defect_reproduced": false,
+  "repository_changes": false,
+  "privacy": "Actual local MCP/P\u0101li/commentary/quote evidence and synthetic private fixture notes only; request guards rejected external/private transmissions. Reports omit source bodies/private values.",
+  "acceptance_limits": "Headless Chromium viewport/timing/layout checks do not establish actual browser zoom, native window/background focus, OS text scaling, physical-device, native input methods, specialist or human assistive acceptance."
+}

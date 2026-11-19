@@ -27,8 +27,8 @@ test('all forty reviewed Theri poems preserve publisher order, exact canonical l
 });
 test('reviewed Thera subset uses literal profile owners and stays separate from all forty Theri poems',()=>{
  const expected=profiles.filter(p=>p.publisher_chapter==='chapter-3').sort((a,b)=>a.poem-b.poem);
- assert.deepEqual(expected.map(p=>p.id),['tha-ap13','tha-ap14','tha-ap15','tha-ap16','tha-ap17','tha-ap18','tha-ap19','tha-ap20','tha-ap21','tha-ap22','tha-ap23','tha-ap24','tha-ap25','tha-ap26','tha-ap27','tha-ap28','tha-ap29','tha-ap30','tha-ap31','tha-ap32','tha-ap33','tha-ap34','tha-ap35','tha-ap36','tha-ap37','tha-ap38','tha-ap39','tha-ap40','tha-ap41','tha-ap42']);
- assert.equal(expected.length,30);
+ assert.deepEqual(expected.map(p=>p.id),['tha-ap13','tha-ap14','tha-ap15','tha-ap16','tha-ap17','tha-ap18','tha-ap19','tha-ap20','tha-ap21','tha-ap22','tha-ap23','tha-ap24','tha-ap25','tha-ap26','tha-ap27','tha-ap28','tha-ap29','tha-ap30','tha-ap31','tha-ap32','tha-ap33','tha-ap34','tha-ap35','tha-ap36','tha-ap37','tha-ap38','tha-ap39','tha-ap40','tha-ap41','tha-ap42','tha-ap43','tha-ap45','tha-ap46','tha-ap47','tha-ap48','tha-ap49','tha-ap50','tha-ap51','tha-ap52','tha-ap53','tha-ap54','tha-ap55','tha-ap56','tha-ap57','tha-ap58','tha-ap59','tha-ap60','tha-ap61','tha-ap62']);
+ assert.equal(expected.length,49);
  for(const p of expected){
   const nav=apadanaEditionNavigation(fixture(p.id)),items=nav.groups.flatMap(g=>g.poems),at=expected.findIndex(row=>row.id===p.id);
   assert.equal(nav.family,'thera');assert.deepEqual(items.map(row=>row.uid),expected.map(row=>row.id));assert.equal(nav.previous?.uid,expected[at-1]?.id);assert.equal(nav.next?.uid,expected[at+1]?.id);
@@ -36,13 +36,13 @@ test('reviewed Thera subset uses literal profile owners and stays separate from 
   assert.match(nav.note,/not complete Therā or line-complete VRI English/);
   const last=nav.groups.find(g=>g.poems.some(row=>row.uid===p.id)).poems.at(-1);
   assert.equal(nav.summary?.uid,APADANA_PROFILES[last.uid].chapter_summary?last.uid:undefined);
-  for(const target of ['thi-ap1','tha-ap11','tha-ap12','tha-ap43'])assert.throws(()=>apadanaEditionLink(fixture(p.id),target),/unavailable/);
+  for(const target of ['thi-ap1','tha-ap11','tha-ap12','tha-ap44','tha-ap63'])assert.throws(()=>apadanaEditionLink(fixture(p.id),target),/unavailable/);
  }
  const first=expected[0];assert.equal(first.poem,11);assert.equal(first.id,'tha-ap13');assert.notEqual(first.id,'tha-ap'+first.poem);
 });
 test('new reviewed Thera owners retain exact summary scope and refuse substituted editions before creating controls',()=>{
  for(const uid of ['tha-ap33','tha-ap34','tha-ap35','tha-ap36','tha-ap37','tha-ap38','tha-ap39','tha-ap40','tha-ap41','tha-ap42']){
-  const good=fixture(uid),nav=apadanaEditionNavigation(good);assert.equal(nav.groups.at(-1).label,'Publisher poems 31–40');assert.equal(nav.summary.uid,'tha-ap42');
+  const good=fixture(uid),nav=apadanaEditionNavigation(good);assert.equal(nav.groups.find(g=>g.poems.some(item=>item.uid===uid)).label,'Publisher poems 31–40');assert.equal(nav.summary.uid,'tha-ap42');
   for(const mutate of [d=>d.canonical=false,d=>d.content_type='commentary',d=>d.source.commit='0'.repeat(40),d=>d.english_available[0].translation_revision='0'.repeat(40),d=>d.english_available[0].license='CC0',d=>d.english_available[0].translation_id='ap:chapter-3/poem-041',d=>d.english_available[0].publisher_preface={}]){const bad=clone(good);mutate(bad);assert.throws(()=>apadanaEditionNavigation(bad));assert.throws(()=>apadanaEditionLink(bad,'tha-ap42'));}
  }
  const data=fixture('tha-ap42');data.english_available[0].chapter_summary.root_start=3476;assert.throws(()=>apadanaEditionNavigation(data),/scope|summary/);
