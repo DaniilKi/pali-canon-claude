@@ -27,10 +27,11 @@ function sourceCard(card) {
   assert.deepEqual(card.pali, { name: source().name, attribution: source().attribution, terms: source().terms, commit: source().commit });
 }
 function english(unit) {
-  return json(canon.describe(unit).english.map(({ source, translator, reference, url, license, translation_id, translation_scope, includes_commentary }) => ({
+  return json(canon.describe(unit).english.map(({ source, translator, reference, url, license, translation_id, translation_scope, includes_commentary, source_section, mapping_note }) => ({
     source, translator, ...(reference ? { reference } : {}), url, ...(license ? { license } : {}), translation_id,
     ...(translation_scope ? { translation_scope, whole_unit_coverage: false } : {}),
     ...(includes_commentary ? { includes_commentary: true } : {}),
+    ...(source_section ? {source_section, whole_unit_coverage: true, mapping_note} : {}),
   })));
 }
 
