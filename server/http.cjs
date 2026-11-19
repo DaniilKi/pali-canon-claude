@@ -23750,7 +23750,6 @@ var ATI_SECTION_LICENSE = "Kelly-free-distribution-2005";
 var SN27_SECTION_PROFILE = "ati-sn27-feelings-v1";
 var AN_MIND_SECTION_PROFILE = "ati-an1-ekadhamma-numbered-paragraph-v1";
 var AN_MIND_SECTION_PATH = "/tipitaka/an/an01/an01.021-040.than";
-var AN_MIND_SHARED_LINK_SHA256 = "67e00d1d18e2f94eb11d297d6b79e719d144a3c19c961b114af9c192556078cb";
 var anRows = [
   [21, 2, "Pa\u1E6Dhama\u1E43."],
   [22, 1, "Dutiya\u1E43."],
@@ -23790,6 +23789,272 @@ var rows = [
   ["mil3.7.5", "3x", "miln-3-7-05", 21, 1],
   ["mil3.7.8", "3x", "miln-3-7-08", 7, 0]
 ];
+var AN_TEN_SECTION_PROFILE = "ati-an-ten-paragraph-selection-v1";
+var AN_TEN_SECTION_PROFILES = Object.freeze([
+  {
+    "unit_id": "an1.45",
+    "path": "/tipitaka/an/an01/an01.045-046.than",
+    "anchor": null,
+    "selection_id": "an1.45",
+    "paragraphs": 1,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "75faa07ddb7e722fa7887d9d15fca0efe6d216c047f2fcbeef73e8d5cc97ca32",
+    "parent_title": "Udakarahaka Suttas: A Pool of Water",
+    "chapter": 1,
+    "paragraph_first": 1,
+    "paragraph_last": 1,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": "Pa\xF1cama\u1E43.",
+    "paratext": [
+      {
+        "ref": "an1.45/1",
+        "text": "Pa\xF1cama\u1E43."
+      }
+    ]
+  },
+  {
+    "unit_id": "an1.46",
+    "path": "/tipitaka/an/an01/an01.045-046.than",
+    "anchor": null,
+    "selection_id": "an1.46",
+    "paragraphs": 1,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "75faa07ddb7e722fa7887d9d15fca0efe6d216c047f2fcbeef73e8d5cc97ca32",
+    "parent_title": "Udakarahaka Suttas: A Pool of Water",
+    "chapter": 2,
+    "paragraph_first": 1,
+    "paragraph_last": 1,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": "Cha\u1E6D\u1E6Dha\u1E43.",
+    "paratext": [
+      {
+        "ref": "an1.46/1",
+        "text": "Cha\u1E6D\u1E6Dha\u1E43."
+      }
+    ]
+  },
+  {
+    "unit_id": "an1.49",
+    "path": "/tipitaka/an/an01/an01.049.than",
+    "anchor": null,
+    "selection_id": "an1.49",
+    "paragraphs": 1,
+    "notes": 1,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+    "parent_title": "Pabhassara Sutta: Luminous",
+    "chapter": 1,
+    "paragraph_first": 1,
+    "paragraph_last": 1,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": "Navama\u1E43.",
+    "paratext": [
+      {
+        "ref": "an1.49/1",
+        "text": "Navama\u1E43."
+      }
+    ]
+  },
+  {
+    "unit_id": "an1.50",
+    "path": "/tipitaka/an/an01/an01.049.than",
+    "anchor": null,
+    "selection_id": "an1.50",
+    "paragraphs": 1,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+    "parent_title": "Pabhassara Sutta: Luminous",
+    "chapter": 1,
+    "paragraph_first": 2,
+    "paragraph_last": 2,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": "Dasama\u1E43.",
+    "paratext": [
+      {
+        "ref": "an1.50/1",
+        "text": "Dasama\u1E43."
+      },
+      {
+        "ref": "an1.50/2",
+        "text": "Pa\u1E47ihitaacchavaggo pa\xF1camo."
+      }
+    ]
+  },
+  {
+    "unit_id": "an1.51",
+    "path": "/tipitaka/an/an01/an01.049.than",
+    "anchor": null,
+    "selection_id": "an1.51",
+    "paragraphs": 1,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+    "parent_title": "Pabhassara Sutta: Luminous",
+    "chapter": 1,
+    "paragraph_first": 3,
+    "paragraph_last": 3,
+    "first_ref_number": 2,
+    "last_ref_number": 2,
+    "inline_paratext": "Pa\u1E6Dhama\u1E43.",
+    "paratext": [
+      {
+        "ref": "an1.51/2",
+        "text": "Pa\u1E6Dhama\u1E43."
+      },
+      {
+        "ref": "an1.51/1",
+        "text": "6. Acchar\u0101sa\u1E45gh\u0101tavaggo"
+      }
+    ]
+  },
+  {
+    "unit_id": "an1.52",
+    "path": "/tipitaka/an/an01/an01.049.than",
+    "anchor": null,
+    "selection_id": "an1.52",
+    "paragraphs": 1,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+    "parent_title": "Pabhassara Sutta: Luminous",
+    "chapter": 1,
+    "paragraph_first": 4,
+    "paragraph_last": 4,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": "Dutiya\u1E43.",
+    "paratext": [
+      {
+        "ref": "an1.52/1",
+        "text": "Dutiya\u1E43."
+      }
+    ]
+  },
+  {
+    "unit_id": "an2.32",
+    "path": "/tipitaka/an/an02/an02.031.than",
+    "anchor": null,
+    "selection_id": "an2.32",
+    "paragraphs": 3,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "ee088cf5338b2b59fda67eb3374f2ee3cafc1a711c54c39319d895ee5d300626",
+    "parent_title": "Kata\xF1\xF1u Suttas: Gratitude",
+    "chapter": 1,
+    "paragraph_first": 1,
+    "paragraph_last": 3,
+    "first_ref_number": 2,
+    "last_ref_number": 3,
+    "inline_paratext": null,
+    "paratext": [
+      {
+        "ref": "an2.32/1",
+        "text": "4. Samacittavaggo"
+      }
+    ]
+  },
+  {
+    "unit_id": "an2.33",
+    "path": "/tipitaka/an/an02/an02.031.than",
+    "anchor": "s32",
+    "selection_id": "an2.33",
+    "paragraphs": 1,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "ee088cf5338b2b59fda67eb3374f2ee3cafc1a711c54c39319d895ee5d300626",
+    "parent_title": "Kata\xF1\xF1u Suttas: Gratitude",
+    "chapter": 1,
+    "paragraph_first": 4,
+    "paragraph_last": 4,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": null,
+    "paratext": []
+  },
+  {
+    "unit_id": "an2.125",
+    "path": "/tipitaka/an/an02/an02.125-126.than",
+    "anchor": null,
+    "selection_id": "an2.125",
+    "paragraphs": 1,
+    "notes": 1,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "df8584c8489b6cb76b34d8578ff06261a6092f4860216cea6bd6efbde2cccfdb",
+    "parent_title": "Ghosa Suttas: Voice",
+    "chapter": 1,
+    "paragraph_first": 1,
+    "paragraph_last": 1,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": null,
+    "paratext": []
+  },
+  {
+    "unit_id": "an2.126",
+    "path": "/tipitaka/an/an02/an02.125-126.than",
+    "anchor": null,
+    "selection_id": "an2.126",
+    "paragraphs": 1,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "df8584c8489b6cb76b34d8578ff06261a6092f4860216cea6bd6efbde2cccfdb",
+    "parent_title": "Ghosa Suttas: Voice",
+    "chapter": 1,
+    "paragraph_first": 2,
+    "paragraph_last": 2,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": null,
+    "paratext": []
+  }
+].map((row) => Object.freeze({ ...row, paratext: Object.freeze(row.paratext.map((value) => Object.freeze(value))) })));
 var ATI_SECTION_PROFILES = Object.freeze([...rows.map(([unit_id, part, anchor, paragraphs, notes]) => Object.freeze({
   unit_id,
   path: page + part + ".kell",
@@ -23829,8 +24094,35 @@ var ATI_SECTION_PROFILES = Object.freeze([...rows.map(([unit_id, part, anchor, p
   inline_paratext,
   root_heading: number4 === 21 ? "3. Akammaniyavaggo" : number4 === 31 ? "4. Adantavaggo" : null,
   tail_paratext: number4 === 30 ? "Akammaniyavaggo tatiyo." : number4 === 40 ? "Adantavaggo catuttho." : null
-}))]);
+})), ...AN_TEN_SECTION_PROFILES]);
 var isAtiSectionPath = (path) => ATI_SECTION_PROFILES.some((row) => row.path === path);
+var ATI_RETAINED_SHARED_BINDINGS = Object.freeze([
+  {
+    "owner": "an1.21",
+    "path": "/tipitaka/an/an01/an01.021-040.than",
+    "sha256": "67e00d1d18e2f94eb11d297d6b79e719d144a3c19c961b114af9c192556078cb"
+  },
+  {
+    "owner": "an1.49",
+    "path": "/tipitaka/an/an01/an01.049.than",
+    "sha256": "a2c2cc60601e1452e1a2c4e1d2559e840d9af81971bf8cbc1c0c39d3f97c1788"
+  },
+  {
+    "owner": "an1.45",
+    "path": "/tipitaka/an/an01/an01.045-046.than",
+    "sha256": "6bf4ee03645107957dead77ee90db44b0da9774562243ff22a4e34c2b54c1a0a"
+  },
+  {
+    "owner": "an2.32",
+    "path": "/tipitaka/an/an02/an02.031.than",
+    "sha256": "838054ead5fcd616b8da512e9cc9094987bc92a9539b897dd4265ab255f3c895"
+  },
+  {
+    "owner": "an2.125",
+    "path": "/tipitaka/an/an02/an02.125-126.than",
+    "sha256": "5a3ef438de5d3288a3e4239ec1838c69a45fd94003642faf3262e060e0cd4e3c"
+  }
+].map((row) => Object.freeze(row)));
 
 // src/ati-section-registry.mjs
 var sectionHash = (value) => (0, import_node_crypto.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
@@ -23841,10 +24133,11 @@ var exactKeys = (value, keys) => value && typeof value === "object" && !Array.is
 var fail = () => {
   throw Error("Registered ATI question sections lost or changed their reviewed source, selector or root. No whole-page translation or coverage was inferred.");
 };
-function retainedAnMindShared(link, unit) {
-  if (unit?.id !== "an1.21" || link?.path !== AN_MIND_SECTION_PATH) return false;
+function retainedAtiShared(link, unit) {
+  const expected = ATI_RETAINED_SHARED_BINDINGS.find((row) => row.owner === unit?.id && row.path === link?.path);
+  if (!expected) return false;
   try {
-    return (0, import_node_crypto.createHash)("sha256").update(stable2(link)).digest("hex") === AN_MIND_SHARED_LINK_SHA256;
+    return (0, import_node_crypto.createHash)("sha256").update(stable2(link)).digest("hex") === expected.sha256;
   } catch {
     return false;
   }
@@ -23853,7 +24146,7 @@ function reviewedSectionLink(row, registry2) {
   return {
     source: "ati",
     path: row.path,
-    url: `https://accesstoinsight.org${row.path}.html#${row.anchor}`,
+    url: `https://accesstoinsight.org${row.path}.html${row.anchor ? "#" + row.anchor : ""}`,
     english: row.english_title,
     translator: row.translator,
     license: row.license,
@@ -23870,13 +24163,18 @@ function validateSectionRegistry(registry2, corpus, translations, readSegments) 
   for (const row of registry2.links) {
     if (!exactKeys(row, ["unit_id", "path", "anchor", "english_title", "source_reference", "translator", "license", "mapping_note", "root", "source_html_sha256", "untranslated_paratext", "section"])) fail();
     const profile = ATI_SECTION_PROFILES.find((value) => value.unit_id === row.unit_id), p = row.section, root = row.root, unit = units.get(row.unit_id);
+    const selection2 = profile?.profile === AN_TEN_SECTION_PROFILE;
     if (!profile || seen.has(row.unit_id) || row.path !== profile.path || row.anchor !== profile.anchor || row.source_html_sha256 !== profile.source_html_sha256 || row.translator !== profile.translator || row.license !== profile.license || !text(row.english_title) || !text(row.source_reference) || !text(row.mapping_note) || !unit || unit.collection !== profile.collection || unit.approximate || unit.kind || unit.members) fail();
     seen.add(row.unit_id);
     if (!exactKeys(root, ["id", "book", "start", "end", "title", "vri", "root_blocks_sha256"]) || ["id", "book", "start", "end", "title", "vri"].some((key3) => root[key3] !== unit[key3]) || !sha(root.root_blocks_sha256) || sectionHash(corpus.books[unit.book].blocks.slice(unit.start, unit.end)) !== root.root_blocks_sha256) fail();
-    if (!exactKeys(p, ["version", "status", "unit_id", "profile", "anchor", "heading", "paragraph_count", "note_count", "section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256", "first_ref", "last_ref", "source_commit"]) || p.version !== 1 || p.status !== "reviewed" || p.unit_id !== unit.id || p.profile !== profile.profile || p.anchor !== row.anchor || p.heading !== (profile.label || row.source_reference) || p.paragraph_count !== profile.paragraphs || p.note_count !== profile.notes || p.source_commit !== registry2.vri_commit || ["section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256"].some((key3) => !sha(p[key3]))) fail();
+    if (!exactKeys(p, ["version", "status", "unit_id", "profile", "anchor", "heading", "paragraph_count", "note_count", "section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256", "first_ref", "last_ref", "source_commit", ...selection2 ? ["selection_id"] : []]) || p.version !== 1 || p.status !== "reviewed" || p.unit_id !== unit.id || p.profile !== profile.profile || p.anchor !== row.anchor || p.heading !== (selection2 ? null : profile.label || row.source_reference) || p.paragraph_count !== profile.paragraphs || p.note_count !== profile.notes || p.source_commit !== registry2.vri_commit || ["section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256"].some((key3) => !sha(p[key3]))) fail();
     const segments2 = readSegments(unit).map(({ ref, type, text: text2 }) => ({ ref, type, text: text2 })), first = segments2.findIndex((segment) => segment.ref === p.first_ref), last = segments2.findIndex((segment) => segment.ref === p.last_ref);
-    if (sectionHash(segments2.slice(first, last + 1)) !== p.pali_sha256 || !Array.isArray(row.untranslated_paratext) || !row.untranslated_paratext.length) fail();
-    if (profile.profile === AN_MIND_SECTION_PROFILE) {
+    if (sectionHash(segments2.slice(first, last + 1)) !== p.pali_sha256 || !Array.isArray(row.untranslated_paratext) || !selection2 && !row.untranslated_paratext.length) fail();
+    if (selection2) {
+      if (p.selection_id !== profile.selection_id || p.selection_id !== unit.id || row.english_title !== profile.parent_title || first !== profile.first_ref_number - 1 || last !== profile.last_ref_number - 1 || first < 0 || last < first || segments2.slice(first, last + 1).some((segment) => segment.type !== "prose")) fail();
+      const paratext = [...profile.inline_paratext ? [{ ref: segments2[first].ref, text: profile.inline_paratext }] : [], ...segments2.filter((_, i) => i < first || i > last).map(({ ref, text: text2 }) => ({ ref, text: text2 }))];
+      if (profile.inline_paratext && !segments2[first].text.endsWith(" " + profile.inline_paratext) || stable2(paratext) !== stable2(profile.paratext) || stable2(paratext) !== stable2(row.untranslated_paratext)) fail();
+    } else if (profile.profile === AN_MIND_SECTION_PROFILE) {
       const at = profile.first_ref_number - 1, body = segments2[at];
       if (first !== at || last !== at || body?.type !== "prose" || !body.text.endsWith(" " + profile.inline_paratext) || segments2.length !== profile.first_ref_number + (profile.tail_paratext ? 1 : 0)) fail();
       if (profile.root_heading && (segments2[0]?.type !== "heading" || segments2[0].text !== profile.root_heading)) fail();
@@ -23889,7 +24187,7 @@ function validateSectionRegistry(registry2, corpus, translations, readSegments) 
     } else if (stable2(segments2.slice(last + 1).map(({ ref, text: text2 }) => ({ ref, text: text2 }))) !== stable2(row.untranslated_paratext)) fail();
   }
   for (const [owner, links] of Object.entries(translations)) for (const link of links) assertRegisteredSection(link, units.get(owner), registry2);
-  if ((translations["an1.21"] || []).filter((link) => retainedAnMindShared(link, units.get("an1.21"))).length !== 1) fail();
+  for (const binding of ATI_RETAINED_SHARED_BINDINGS) if ((translations[binding.owner] || []).filter((link) => link.path === binding.path && retainedAtiShared(link, units.get(binding.owner))).length !== 1) fail();
   for (const row of registry2.links) {
     const expected = stable2(reviewedSectionLink(row, registry2));
     if ((translations[row.unit_id] || []).filter((link) => stable2(link) === expected).length !== 1) fail();
@@ -23897,7 +24195,7 @@ function validateSectionRegistry(registry2, corpus, translations, readSegments) 
   return registry2;
 }
 function assertRegisteredSection(link, unit, registry2) {
-  if (retainedAnMindShared(link, unit)) return;
+  if (retainedAtiShared(link, unit)) return;
   let path;
   try {
     const url = new URL(link.url);
@@ -23906,7 +24204,7 @@ function assertRegisteredSection(link, unit, registry2) {
   }
   if (!Object.hasOwn(link, "section") && !isAtiSectionPath(link.path) && !isAtiSectionPath(path)) return;
   if (!registry2 || !Array.isArray(registry2.links)) fail();
-  const row = registry2.links.find((value) => value.unit_id === unit?.id && value.path === link.path && value.anchor === link.section?.anchor);
+  const row = registry2.links.find((value) => value.unit_id === unit?.id && value.path === link.path && value.anchor === link.section?.anchor && value.section.selection_id === link.section?.selection_id);
   if (!row) fail();
   let actual;
   try {
@@ -25816,7 +26114,7 @@ function anandajotiInfo() {
 var SOURCE_NAMES = { dhammatalks: "dhammatalks.org", ati: "Access to Insight", anandajoti: "Ancient Buddhist Texts (\u0100nandajoti Bhikkhu)" };
 var sourceName = (t) => SOURCE_NAMES[t.source] || t.source;
 function translationId(t) {
-  if (t.source === "ati") return `ati:${t.path}${t.section ? "#" + t.section.anchor : ""}`;
+  if (t.source === "ati") return `ati:${t.path}${t.section?.selection_id ? "::selection:" + t.section.selection_id : t.section ? "#" + t.section.anchor : ""}`;
   if (t.source === "anandajoti") return `aj:${t.path.replace(/^\/Texts-and-Translations\//, "").replace(/\.htm$/, "")}`;
   return `dt:${t.url.split("/suttas/")[1].replace(/\.html$/, "")}`;
 }
@@ -25883,7 +26181,11 @@ function ownersOf(links, wanted) {
 }
 function translationScope(link, unit) {
   assertRegisteredPartial(link, unit, load().partialRegistry);
-  if (isShared(link)) return sharedScope(link, unit, load().byId, segments, source());
+  if (isShared(link)) {
+    const snapshot = load(), owner = snapshot.byId.get(link.shared_scope?.owner_id);
+    assertRegisteredSection(link, owner, snapshot.sectionRegistry);
+    return sharedScope(link, unit, snapshot.byId, segments, source());
+  }
   return partialScope(link, unit, segments(unit), source());
 }
 var sharedIndexes = /* @__PURE__ */ new WeakMap();
@@ -25891,24 +26193,37 @@ function sharedFor(unit, d) {
   let index4 = sharedIndexes.get(d.translations);
   if (!index4) {
     index4 = /* @__PURE__ */ new Map();
-    for (const [owner, links2] of Object.entries(d.translations)) for (const link of links2) if (isShared(link)) {
+    for (const [owner, links] of Object.entries(d.translations)) for (const link of links) if (isShared(link)) {
       const u = d.byId.get(owner);
       if (!u) throw new CitationError("Shared-page source has no indexed owner.");
-      const scope = translationScope(link, u);
-      if (scope.owner_id !== owner || ownersOf(d.translations, translationId(link)).length !== 1) throw new CitationError("Shared-page translation_id must have one declaration on its first member; ambiguous ownership was rejected.");
-      for (const id of scope.text_ids) {
-        if (!index4.has(id)) index4.set(id, []);
-        index4.get(id).push(link);
+      assertRegisteredSection(link, u, d.sectionRegistry);
+      const scope = translationScope(link, u), id = translationId(link);
+      if (scope.owner_id !== owner || ownersOf(d.translations, id).length !== 1) throw new CitationError("Shared-page translation_id must have one declaration on its first member; ambiguous ownership was rejected.");
+      for (const member of scope.text_ids) {
+        if (!index4.has(member)) index4.set(member, []);
+        index4.get(member).push({ link, owner: u, id });
       }
     }
     sharedIndexes.set(d.translations, index4);
   }
-  const links = index4.get(unit.id) || [];
-  for (const link of links) translationScope(link, unit);
-  return links;
+  return (index4.get(unit.id) || []).map(({ link, owner, id }) => {
+    const declared = d.translations[owner.id] || [];
+    let currentDeclarations = 0;
+    for (const entries of Object.values(d.translations)) for (const candidate of entries) if (translationId(candidate) === id) currentDeclarations++;
+    if (!isShared(link) || declared.filter((value) => value === link).length !== 1 || currentDeclarations !== 1 || translationId(link) !== id) throw new CitationError("Registered ATI or shared-page declaration changed, disappeared or acquired another owner. No cached source was inferred.");
+    assertRegisteredSection(link, owner, d.sectionRegistry);
+    const scope = translationScope(link, unit);
+    if (scope.owner_id !== owner.id || !scope.text_ids.includes(unit.id)) throw new CitationError("Shared-page membership changed. No cached source was inferred.");
+    return link;
+  });
+}
+function requireRetainedForMember(unit, d) {
+  const binding = ATI_RETAINED_SHARED_BINDINGS.find((binding2) => ATI_SECTION_PROFILES.some((profile) => profile.unit_id === unit.id && profile.path === binding2.path));
+  if (binding && (d.translations[binding.owner] || []).filter((link) => retainedAtiShared(link, d.byId.get(binding.owner))).length !== 1) throw new CitationError("Registered ATI shared binding is missing, changed or duplicated. No cached source was inferred.");
 }
 function linksFor(u) {
   const d = load();
+  requireRetainedForMember(u, d);
   for (const link of d.translations[u.id] || []) assertRegisteredSection(link, u, d.sectionRegistry);
   const requiredSection = d.sectionRegistry.links.find((row) => row.unit_id === u.id);
   if (requiredSection && (d.translations[u.id] || []).filter((link) => link.section?.anchor === requiredSection.anchor).length !== 1) throw new CitationError("Registered ATI question binding is missing or duplicated. No whole-page translation was inferred.");
@@ -26042,8 +26357,8 @@ function resolve(reference) {
     return { unit, notes, alternatives: [...others.values()].slice(0, 3).map((u) => unitSummary(u)) };
   }
   if (c.kind === "url") {
-    if (c.host === "accesstoinsight.org" && isAtiSectionPath(c.path) && !(c.path === "/tipitaka/an/an01/an01.021-040.than" && !c.fragment)) {
-      const rows2 = d.sectionRegistry.links.filter((row2) => row2.path === c.path), row = rows2.find((row2) => row2.anchor === c.fragment);
+    if (c.host === "accesstoinsight.org" && isAtiSectionPath(c.path) && !(ATI_RETAINED_SHARED_BINDINGS.some((row) => row.path === c.path) && !c.fragment)) {
+      const rows2 = d.sectionRegistry.links.filter((row2) => row2.path === c.path), row = rows2.find((row2) => row2.anchor && row2.anchor === c.fragment);
       if (!row) throw new CitationError(`This publisher anthology page does not identify one reviewed question. Use an exact question body anchor or canonical ID: ${rows2.map((value) => value.unit_id).join(", ")}.`);
       const unit2 = d.byId.get(row.unit_id);
       linksFor(unit2);
@@ -26602,6 +26917,7 @@ function extractAtiSection(html, row) {
   const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
   if (html.split(begin).length !== 2 || html.split(end).length !== 2 || html.indexOf(end) <= html.indexOf(begin)) fail2();
   const chunk = html.slice(html.indexOf(begin) + begin.length, html.indexOf(end)), root = parse3(chunk), chapters = elements(root);
+  if (profile.profile === AN_TEN_SECTION_PROFILE) return finiteTreatment(root, chapters, chunk, row, profile);
   if (profile.profile === AN_MIND_SECTION_PROFILE) return numberedMindParagraph(root, chapters, chunk, row, profile);
   if (root.children.some((value) => typeof value === "string" && value.trim()) || chapters.length !== (profile.profile === SN27_SECTION_PROFILE || profile.path.includes("2x") ? 10 : 6) || chapters.some((node) => node.tag !== "div" || JSON.stringify(node.attrs) !== '{"class":"chapter"}')) fail2();
   if (profile.profile === SN27_SECTION_PROFILE) {
@@ -26656,6 +26972,73 @@ function numberedMindParagraph(root, chapters, chunk, row, profile) {
   const selected = paragraphs.find((value) => value.anchor.attrs.id === row.anchor), p = row.section;
   if (!selected || !selected.text || rawHash(chunk.slice(selected.paragraph.start, selected.paragraph.end)) !== p.section_html_sha256 || p.heading !== profile.label || sectionHash(selected.text) !== p.text_sha256 || sectionHash([]) !== p.notes_sha256) fail2();
   return { text: selected.text, translator_notes: [], title: p.heading };
+}
+function finiteTreatment(root, chapters, chunk, row, profile) {
+  const exactAttrs = (node, attrs) => JSON.stringify(node.attrs) === JSON.stringify(attrs);
+  const inside = (node) => chunk.slice(node.inside, node.close);
+  const noText = (node) => !node.children.some((value) => typeof value === "string" && value.trim());
+  const pool = profile.path.endsWith("an01.045-046.than"), luminous = profile.path.endsWith("an01.049.than");
+  const gratitude = profile.path.endsWith("an02.031.than"), voice = profile.path.endsWith("an02.125-126.than");
+  if (![pool, luminous, gratitude, voice].some(Boolean) || row.section.selection_id !== profile.unit_id || row.section.heading !== null || row.english_title !== profile.parent_title || !noText(root) || chapters.length !== (pool ? 2 : 1) || chapters.some((node) => node.tag !== "div" || !exactAttrs(node, { class: "chapter" }) || !noText(node))) fail2();
+  const paragraphs = chapters.flatMap((chapter2) => elements(chapter2).filter((node) => node.tag === "p"));
+  if (paragraphs.length !== (pool || voice ? 2 : 4) || paragraphs.some((node) => Object.keys(node.attrs).length)) fail2();
+  const extras = chapters.flatMap((chapter2) => elements(chapter2).filter((node) => node.tag !== "p"));
+  if (extras.length !== (pool ? 0 : 1) || !pool && (extras[0].tag !== "div" || !exactAttrs(extras[0], { class: gratitude ? "seeAlso" : "notes" }))) fail2();
+  if (pool && chapters.some((chapter2) => elements(chapter2).length !== 1) || !pool && (elements(chapters[0]).length !== paragraphs.length + 1 || elements(chapters[0]).at(-1) !== extras[0])) fail2();
+  const alts = ["{I,v,9}", "{I,v,10}", "{I,vi,1}", "{I,vi,2}"];
+  for (const [i, paragraph] of paragraphs.entries()) {
+    const children = elements(paragraph), markers = children.filter((node) => node.tag === "a");
+    if (pool) {
+      if (children.length || !new RegExp("^" + (i + 45) + "\\.\\s+").test(plainText(inside(paragraph)))) fail2();
+      continue;
+    }
+    if (luminous || voice) {
+      if (markers.length !== (i === 0 ? 1 : 0) || children.length !== (luminous ? i === 0 ? 2 : 1 : i === 0 ? 1 : 0)) fail2();
+      if (i === 0) {
+        const marker = markers[0];
+        if (!exactAttrs(marker, { class: "noteTag", href: profile.path.split("/").at(-1) + ".html#fn-1", id: "fnt-1" }) || elements(marker).length || plainText(inside(marker)) !== "[1]") fail2();
+      }
+      if (luminous) {
+        const alt = children.at(-1);
+        if (alt.tag !== "span" || !exactAttrs(alt, { class: "altID" }) || elements(alt).length || inside(alt) !== alts[i]) fail2();
+      }
+    } else if (gratitude) {
+      if (i < 3) {
+        if (children.length) fail2();
+      } else {
+        const alt = children[0], anchor = alt && elements(alt)[0];
+        if (children.length !== 1 || alt.tag !== "span" || !exactAttrs(alt, { class: "altID" }) || elements(alt).length !== 1 || anchor.tag !== "a" || !exactAttrs(anchor, { id: "s32" }) || elements(anchor).length || inside(alt) !== '{<a id="s32">II,iv,2</a>}') fail2();
+      }
+    }
+  }
+  let note;
+  if (luminous || voice) {
+    const nodes = elements(extras[0]), h = nodes[0], dl = nodes[1], entries = dl && elements(dl), dt = entries?.[0], dd = entries?.[1], back = dt && elements(dt)[0];
+    if (nodes.length !== 2 || h.tag !== "h1" || !exactAttrs(h, {}) || elements(h).length || inside(h) !== "Note" || dl.tag !== "dl" || !exactAttrs(dl, {}) || !noText(dl) || entries.length !== 2 || dt.tag !== "dt" || !exactAttrs(dt, {}) || elements(dt).length !== 1 || back.tag !== "a" || !exactAttrs(back, { href: profile.path.split("/").at(-1) + ".html#fnt-1", id: "fn-1" }) || elements(back).length || inside(back) !== "1" || plainText(inside(dt)) !== "1." || dd.tag !== "dd" || !exactAttrs(dd, {})) fail2();
+    for (const node of descendants(dd)) if (!["dd", "p", "i", "a"].includes(node.tag) || node.tag !== "a" && Object.keys(node.attrs).length || node.tag === "a" && (Object.keys(node.attrs).join(",") !== "href" || !/^\.\.\//.test(node.attrs.href))) fail2();
+    if (elements(dd).filter((node) => node.tag === "p").length !== 3 || luminous && !noText(dd)) fail2();
+    note = { number: 1, text: plainText(inside(dd)) };
+    if (!note.text) fail2();
+  }
+  if (gratitude) {
+    const nodes = elements(extras[0]);
+    if (nodes.length !== 1 || nodes[0].tag !== "p" || Object.keys(nodes[0].attrs).length || !noText(extras[0])) fail2();
+    const links = elements(nodes[0]), expected = ["../../mn/mn.110.than.html", "../../sn/sn07/sn07.014.than.html", "../an04/an04.073.than.html", "../../kn/iti/iti.4.100-112.than.html#iti-106"];
+    if (links.length !== 4 || links.some((link, i) => link.tag !== "a" || !exactAttrs(link, { href: expected[i] }) || elements(link).length)) fail2();
+  }
+  const chapter = chapters[profile.chapter - 1], chosen = elements(chapter).filter((node) => node.tag === "p").slice(profile.paragraph_first - 1, profile.paragraph_last);
+  if (chosen.length !== profile.paragraphs || rawHash(chunk.slice(chosen[0].start, chosen.at(-1).end)) !== row.section.section_html_sha256) fail2();
+  const text2 = chosen.map((node) => {
+    let body = inside(node).replace(/<span class="altID">[^]*?<\/span>/g, "");
+    body = withoutNoteTags(body);
+    body = plainText(body);
+    if (pool) body = body.replace(new RegExp("^" + (profile.unit_id.endsWith(".45") ? 45 : 46) + "\\.\\s+"), "");
+    if (!body) fail2();
+    return body;
+  }).join("\n\n");
+  const translator_notes = profile.notes ? [note] : [];
+  if (translator_notes.some((value) => !value) || sectionHash(text2) !== row.section.text_sha256 || sectionHash(translator_notes) !== row.section.notes_sha256) fail2();
+  return { text: text2, translator_notes, title: profile.parent_title };
 }
 
 // src/english.mjs
@@ -26777,7 +27160,7 @@ function reviewedSectionFor(link, unit) {
   if (!link.section) return void 0;
   const snapshot = load();
   validateSectionRegistry(snapshot.sectionRegistry, snapshot.canon, snapshot.translations, (unit2) => segmentsFromCorpus(unit2, snapshot.canon));
-  const row = snapshot.sectionRegistry.links.find((row2) => row2.unit_id === unit.id && row2.anchor === link.section.anchor);
+  const row = snapshot.sectionRegistry.links.find((row2) => row2.unit_id === unit.id && row2.anchor === link.section.anchor && row2.section.selection_id === link.section.selection_id);
   if (!row) throw Error("The reviewed ATI question has no exact owner. No translation was returned.");
   return row;
 }
@@ -26878,7 +27261,7 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
     if (sameTranslator.mapping_note && sameTranslator.mapping_note !== link.mapping_note) notes.push(sameTranslator.mapping_note);
     link = sameTranslator;
   }
-  if (sectionRow && (typeof result.text !== "string" || sectionHash(result.text) !== sectionRow.section.text_sha256 || !Array.isArray(result.translator_notes) || sectionHash(result.translator_notes) !== sectionRow.section.notes_sha256 || sectionHash({ licensing: result.license, citation: result.attribution }) !== sectionRow.section.notice_sha256 || result.title !== sectionRow.section.heading || result.url !== link.url)) {
+  if (sectionRow && (typeof result.text !== "string" || sectionHash(result.text) !== sectionRow.section.text_sha256 || !Array.isArray(result.translator_notes) || sectionHash(result.translator_notes) !== sectionRow.section.notes_sha256 || sectionHash({ licensing: result.license, citation: result.attribution }) !== sectionRow.section.notice_sha256 || result.title !== (sectionRow.section.selection_id ? sectionRow.english_title : sectionRow.section.heading) || result.url !== link.url)) {
     throw Error("The reviewed ATI section text, notes, notice or identity changed in cache. No translation was returned.");
   }
   if (declaredScope) {

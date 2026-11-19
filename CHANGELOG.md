@@ -4,6 +4,9 @@ All notable changes to Pali Canon for Claude. Versions follow [semantic versioni
 
 ## Development branch (unreleased)
 
+- Add ten reviewed individual whole-substantive AN choices from four existing shared pages, preserving all previous choices/consent and source pins. Internal selection IDs remain distinct from real publisher URLs; retain exact note ownership, numbering, omissions and AN 2.33's edition-variant warning. Whole links become 2,583; these are ten first whole mappings and zero first English-access gains (D240).
+- Add expanded text-spacing regressions for reading, private drafts, Save/Discard, source navigation and consent at 320/390/1280 in both themes. Local and extracted-package checks pass;24 axe scans report zero violations. These are emulated checks, not physical-device or human assistive acceptance.
+
 - Add twenty exact whole-substantive AN 1.21–40 choices through real publisher number anchors, preserving their existing shared-page version and consent. Separately add Olendzki’s two-verse Milinda partial at `/20–21`, with full non-CC notice and citation separation. Disclose omitted vocatives/paratext and preserve all earlier source holds and private drafts. Whole links become 2,573; partial choices 22. Source, browser and exact-commit CI gates remain distinct (D239).
 
 - Prepare an isolated standalone-reader integration candidate: responsive source-aware browsing, commentary/later works, glossary/word study/related evidence, bounded reading plans and browser-local notes/progress. Exercise the three actual shared compilations with explicit page-level consent and complete source notices. No dev/main merge or deployment is implied.

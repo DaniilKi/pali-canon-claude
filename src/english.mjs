@@ -130,7 +130,7 @@ function reviewedSectionFor(link, unit) {
   const snapshot = load();
   // Recheck before any cached read, including a same-translator outage fallback.
   validateSectionRegistry(snapshot.sectionRegistry, snapshot.canon, snapshot.translations, unit => segmentsFromCorpus(unit, snapshot.canon));
-  const row = snapshot.sectionRegistry.links.find(row => row.unit_id === unit.id && row.anchor === link.section.anchor);
+  const row = snapshot.sectionRegistry.links.find(row => row.unit_id === unit.id && row.anchor === link.section.anchor && row.section.selection_id === link.section.selection_id);
   if (!row) throw Error('The reviewed ATI question has no exact owner. No translation was returned.');
   return row;
 }
@@ -237,7 +237,7 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
   if (sectionRow && (typeof result.text !== 'string' || sectionHash(result.text) !== sectionRow.section.text_sha256
     || !Array.isArray(result.translator_notes) || sectionHash(result.translator_notes) !== sectionRow.section.notes_sha256
     || sectionHash({licensing: result.license, citation: result.attribution}) !== sectionRow.section.notice_sha256
-    || result.title !== sectionRow.section.heading || result.url !== link.url)) {
+    || result.title !== (sectionRow.section.selection_id ? sectionRow.english_title : sectionRow.section.heading) || result.url !== link.url)) {
     throw Error('The reviewed ATI section text, notes, notice or identity changed in cache. No translation was returned.');
   }
   if (declaredScope) {

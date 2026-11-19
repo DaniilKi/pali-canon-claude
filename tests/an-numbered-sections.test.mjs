@@ -13,7 +13,7 @@ import { readBundled } from '../src/bundled-data.mjs';
 import { plainText } from '../src/http.mjs';
 import { extractAtiSection } from '../src/ati-sections.mjs';
 import { sectionHash, reviewedSectionLink, retainedAnMindShared, assertRegisteredSection, validateSectionRegistry } from '../src/ati-section-registry.mjs';
-import { AN_MIND_SECTION_PROFILE, AN_MIND_SECTION_PATH, AN_MIND_SHARED_LINK_SHA256 } from '../src/ati-section-profiles.mjs';
+import { AN_MIND_SECTION_PROFILE, AN_MIND_SECTION_PATH, AN_MIND_SHARED_LINK_SHA256, AN_TEN_SECTION_PROFILE, ATI_RETAINED_SHARED_BINDINGS } from '../src/ati-section-profiles.mjs';
 import { buildIndex, toCsv, CSV_COLUMNS } from '../scripts/export-index.mjs';
 import { buildCoverage } from '../scripts/coverage.mjs';
 import { verifyQuote } from '../src/verify.mjs';
@@ -58,7 +58,7 @@ function provider(raw = source()) {
 test('twenty actual numbered members preserve all fifteen old whole profiles, all older partial descriptors and the complete Pali corpus', () => {
   assert.equal(rows.length, 20); assert.deepEqual(rows.map(row => row.unit_id), ids);
   assert.equal(new Set(rows.map(exact)).size, 20);
-  const old = registry.links.filter(row => row.section.profile !== AN_MIND_SECTION_PROFILE);
+  const old = registry.links.filter(row => row.section.profile !== AN_MIND_SECTION_PROFILE && row.section.profile !== AN_TEN_SECTION_PROFILE);
   assert.equal(old.length, 15); assert.equal(hash(stable(old)), '643441453f30c256abcde307267aebbcd8097e6aeed450186dfed7ce2173cb73');
   const partial = JSON.parse(readFileSync('scripts/canon/reviewed_partial_pages.json', 'utf8')).links;
   assert.equal(hash(stable(partial.slice(0, 21))), 'eae9f955ef6f31a7fb56874ce67f72f78b69cacc319415d1ae58585e2586c212');
@@ -123,7 +123,7 @@ print('exact shared binding retained; generic and forged proposals withheld')`],
 });
 
 test('Python activation refuses missing, duplicate, moved or forged required shared input before producing an output', () => {
-  const payload = { legacy: legacyLink(), sections: Object.fromEntries(rows.map(row => [row.unit_id, reviewedSectionLink(row, registry)])) };
+  const payload = { retained: Object.fromEntries(ATI_RETAINED_SHARED_BINDINGS.map(({owner,path})=>[owner,canon.load().translations[owner].filter(link=>link.shared_scope&&link.path===path)])), legacy: legacyLink(), sections: Object.fromEntries(rows.map(row => [row.unit_id, reviewedSectionLink(row, registry)])) };
   const result = spawnSync('python', ['-c', `import sys,json,copy
 sys.path.insert(0,'scripts/canon')
 import reviewed_ati_sections as m
@@ -131,10 +131,11 @@ p=json.load(sys.stdin)
 # Isolate the activation preservation policy; real source extraction/pins are
 # independently tested against optional immutable artifacts in this same suite.
 m.reviewed_section_links=lambda *args,**kwargs:copy.deepcopy(p['sections'])
-valid={'an1.21':[p['legacy']]};before=copy.deepcopy(valid)
+valid=copy.deepcopy(p['retained']);assert len(valid)==5;before=copy.deepcopy(valid)
 out,_=m.apply_reviewed_section_links(valid,{},'/unused-policy-fixture')
 assert valid==before and [x for x in out['an1.21'] if 'shared_scope' in x]==[p['legacy']]
-for case in [{},{'an1.21':[p['legacy'],copy.deepcopy(p['legacy'])]},{'an1.22':[p['legacy']]},{'an1.21':[dict(p['legacy'],license='CC-BY')]}]:
+for change in [lambda t:t.pop('an1.21'),lambda t:t['an1.21'].append(copy.deepcopy(p['legacy'])),lambda t:t.update({'an1.22':t.pop('an1.21')}),lambda t:t['an1.21'][0].update({'license':'CC-BY'})]:
+ case=copy.deepcopy(valid);change(case)
  before=copy.deepcopy(case)
  try:m.apply_reviewed_section_links(case,{},'/unused-policy-fixture')
  except ValueError:pass
@@ -154,9 +155,9 @@ test('exports count twenty separate whole versions while keeping all shared decl
   const csv = toCsv({ texts: exported }); assert.equal(csv.split('\r\n').filter(Boolean).length, 21);
   assert.ok(CSV_COLUMNS.includes('shared_english')); assert.match(csv, /#sutta-21/); assert.match(csv, /#sutta-40/);
   const totals = translationCoverage({ refresh: true }).total, coverage = buildCoverage();
-  assert.deepEqual([totals.shared_links, totals.with_shared_english, totals.shared_only], [12, 110, 32]);
+  assert.deepEqual([totals.shared_links, totals.with_shared_english, totals.shared_only], [12, 110, 22]);
   assert.deepEqual([coverage.shared_links, coverage.shared_texts], [12, 110]);
-  assert.equal(52 - totals.shared_only, 20, 'first whole access changes the old52 shared-only total by exactly20');
+  assert.equal(52 - totals.shared_only, 30, 'The twenty numbered and ten paragraph selections reduce the frozen old52 shared-only total by thirty');
 });
 
 test('actual numbered source and all20 body/notice pins match independent literal paragraph extraction', { skip: !sourceRoot }, () => {

@@ -1,0 +1,1354 @@
+{
+  "date": "2026-11-19",
+  "baseline_commit": "469663f",
+  "decision": "APPROVE ALL TEN EXACT WHOLE-SUBSTANTIVE SELECTIONS, conditional on finite reviewed identity, mandatory pins and documented omissions/edition differences",
+  "source_review_only": true,
+  "repository_edited": false,
+  "activation_performed": false,
+  "source_commits": {
+    "ati": "45fedca341497120651efa20e756b04a13e61089",
+    "vri": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+  },
+  "method": "Independently fetched4complete exactcommit ATIbase64 artifacts via officialGitHubconnector, verified decoded rawHTMLGitblobSHA1andSHA256; independently fetched2complete exactcommit VRIromn files, reproduced exact originalUTF16Gitblobbytes and compared all400/all318 parsed blocks with bundled corpus. Read and compared all10complete English treatments, all10complete VRIunits and8complete adjacent controls. Previous shared/scout decisions were leads only. Independent PythonHTMLtree selects directchild blocks; Node reproduces normalizedbody,ownednote,fullnotice,rootsegment and legacyshared hashes. No publisher translation/editorialnote bodies are in this receipt.",
+  "five_source_tests": {
+    "standing": "Existing approved namedtranslator ThanissaroBhikkhu at ATI/BCBS; each complete notice states translator-provided file.",
+    "permission": "All4exactpages explicitly license page text CC BY-NC4.0International:2006pool,1995luminous,2002gratitude,2006voice. Retain full notice, attribution, citation and noncommercial limitation. Identify selection as project selection. Linked works retain separate restrictions; no expanded permission inferred.",
+    "respect": "Existing approved source within current repository policy; no contrary restriction observed in complete pinned notices. No SuttaCentral, deniedhostbypass, sourcegeneration or outreach.",
+    "durability": "Official bcbsit/ati exactcommit plus verifiedGitblob. No claim of freshness or equivalence to updateddhammatalks editions.",
+    "verifiability": "Actual source page URL + finite block ordinal selector + exact source/body/note/notice/root pins. Nine source_fragment:null; real s32only forAN2.33. Internal selection IDs are not publisheranchors."
+  },
+  "rights_conditions": "CC BY-NC4.0 page notices/citations are retained verbatim in artifact metadata. The same page notice applies to its translator notes, but does not license separate linked documents or justify expanding quoted source excerpts. No separate note body is scripture.",
+  "schema_honesty_review": "Parent proposed finite sectionprofile with internal ati:<path>::selection:<unit> identities is acceptable if these never appear as publisher URL fragments. Heading:null for all10; preserve actual parent title. Actual printed45/46 and alternative source labels are metadata, not invented titles. URLbasepage for9 and actual#s32only forAN2.33.",
+  "conditions_before_activation": [
+    "Require whole rawsourcehash and fullpage structure before extracting any selection; finite exactunit/path/selection allowlist only.",
+    "Require selected contiguousspan, normalizedbody, ownednotes, complete notice and completeroot pins; do not downgrade missingselectors into wholepage retrieval.",
+    "Noteownership strictly1.49and2.125only; keep notes outside scripture/quotationbody. Exclude altID and numericlabels only from returned scripture, preserve them as source metadata.",
+    "Retain all4existing shared-page choices and previousAN1.21shared choice exactly, including sharedconsent/scope/fullbodyhashes and page-levelquote semantics. Coexistence cannot rely on barepath dedup.",
+    "Retain VRIwording, variants, allparatext, sourcepins and separate publisher/indexed/VRI numbering. No wordforword alignment claim.",
+    "Independent implementation review, regressiontests, full gates and exactcommitCI are parent responsibilities; source approval alone is not runtime acceptance."
+  ],
+  "coverage_if_correctly_activated": {
+    "first_whole_primary_records": 10,
+    "additional_whole_links": 10,
+    "first_any_english_access": 0,
+    "explanation": "All10alreadyhave deliberate sharedpage access. This improves individual access to existing material, rather than finding ten previously missing English texts. Four shared declarations and110sharedsubjects remain; sharedonly records can fall32to22."
+  },
+  "remaining_external_limits": [
+    "No physicaldevice or humanassistivetechnology acceptance claimed.",
+    "No independent humanPali specialist certification of every translationchoice; source/root boundary and substantive coverage review only.",
+    "No freshsourceavailability, fullcataloguecoverage or fullprojectcompletion claimed.",
+    "Rights holds on all unrelatedsources remain unchanged."
+  ],
+  "reproduction": [
+    "python3 /tmp/pali-an-ten-source-review/reproduce.py",
+    "node /tmp/pali-an-ten-source-review/metadata.mjs",
+    "python3 /tmp/pali-an-ten-source-review/conclude.py"
+  ],
+  "evidence": {
+    "artifacts": [
+      {
+        "filename": "an01.045-046.than.html",
+        "path": "/tipitaka/an/an01/an01.045-046.than.html",
+        "official_blob_url": "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/an/an01/an01.045-046.than.html",
+        "bytes": 11180,
+        "git_blob_sha1": "23dffffede718d59eecd71be7c1eac42b02d271e",
+        "source_html_sha256": "75faa07ddb7e722fa7887d9d15fca0efe6d216c047f2fcbeef73e8d5cc97ca32",
+        "top_level_chapters": 2,
+        "direct_child_tags": [
+          [
+            "p"
+          ],
+          [
+            "p"
+          ]
+        ],
+        "all_body_anchors": [],
+        "notice_html_raw_sha256": "fa93534af476dac20dd95989a9559641ea2493e496780ea2c065b21edc8625de",
+        "full_notice": {
+          "licensing": "©2006 Thanissaro Bhikkhu.\n\nThe text of this page (\"Udakarahaka Suttas: A Pool of Water\", by Thanissaro Bhikkhu) is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of the license, visit https://creativecommons.org/licenses/by-nc/4.0/. Documents linked from this page may be subject to other restrictions.\nTranscribed from a file provided by the translator. Last revised for Access to Insight on 4 August 2010.",
+          "citation": "How to cite this document (a suggested style): \"Udakarahaka Suttas: A Pool of Water\" (AN 1.45-46), translated from the Pali by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 4 August 2010, https://www.accesstoinsight.org/tipitaka/an/an01/an01.045-046.than.html ."
+        },
+        "notice_sha256": "c6f4d4898e1844091dabb21aa338b492be115913f2af077c2bd57708890a8bfb",
+        "parent_title": "Udakarahaka Suttas: A Pool of Water",
+        "shared_full_text_characters": 1145,
+        "shared_full_text_sha256": "7297c6cf82b7abe3f94ad8e6fdc5e8fc1c03a6b3c896a2a1bcf5fa895bef69fd"
+      },
+      {
+        "filename": "an01.049.than.html",
+        "path": "/tipitaka/an/an01/an01.049.than.html",
+        "official_blob_url": "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/an/an01/an01.049.than.html",
+        "bytes": 14211,
+        "git_blob_sha1": "b0c118426ddfa75083dbdec68abf5fa903716b15",
+        "source_html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+        "top_level_chapters": 1,
+        "direct_child_tags": [
+          [
+            "p",
+            "p",
+            "p",
+            "p",
+            "div.notes"
+          ]
+        ],
+        "all_body_anchors": [
+          {
+            "class": "noteTag",
+            "href": "an01.049.than.html#fn-1",
+            "id": "fnt-1"
+          },
+          {
+            "href": "an01.049.than.html#fnt-1",
+            "id": "fn-1"
+          },
+          {
+            "href": "../../dn/dn.11.0.than.html"
+          },
+          {
+            "href": "../../mn/mn.024.than.html"
+          }
+        ],
+        "notice_html_raw_sha256": "db7b54c4b9d140ab903e380777552d8c3b001eaa353dae4b99e0cd5271ab96fe",
+        "full_notice": {
+          "licensing": "©1995 Thanissaro Bhikkhu.\n\nThe text of this page (\"Pabhassara Sutta: Luminous\", by Thanissaro Bhikkhu) is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of the license, visit https://creativecommons.org/licenses/by-nc/4.0/. Documents linked from this page may be subject to other restrictions.\nTranscribed from a file provided by the translator. Last revised for Access to Insight on 30 November 2013.",
+          "citation": "How to cite this document (a suggested style): \"Pabhassara Sutta: Luminous\" (AN 1.49-52), translated from the Pali by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 30 November 2013, https://www.accesstoinsight.org/tipitaka/an/an01/an01.049.than.html ."
+        },
+        "notice_sha256": "3b8f3fab868dd8176bb2cce37b9e9437bdca790a6a415a0f67ee589ce099b1fe",
+        "parent_title": "Pabhassara Sutta: Luminous",
+        "shared_full_text_characters": 3683,
+        "shared_full_text_sha256": "35182e6e8d3990b8cb6ace20602277a5d409fd45c5a44b9e277ec25995084c60"
+      },
+      {
+        "filename": "an02.031.than.html",
+        "path": "/tipitaka/an/an02/an02.031.than.html",
+        "official_blob_url": "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/an/an02/an02.031.than.html",
+        "bytes": 12255,
+        "git_blob_sha1": "ce7969db68fa2f0fecc957d4b4ba8c72e803983c",
+        "source_html_sha256": "ee088cf5338b2b59fda67eb3374f2ee3cafc1a711c54c39319d895ee5d300626",
+        "top_level_chapters": 1,
+        "direct_child_tags": [
+          [
+            "p",
+            "p",
+            "p",
+            "p",
+            "div.seeAlso"
+          ]
+        ],
+        "all_body_anchors": [
+          {
+            "id": "s32"
+          },
+          {
+            "href": "../../mn/mn.110.than.html"
+          },
+          {
+            "href": "../../sn/sn07/sn07.014.than.html"
+          },
+          {
+            "href": "../an04/an04.073.than.html"
+          },
+          {
+            "href": "../../kn/iti/iti.4.100-112.than.html#iti-106"
+          }
+        ],
+        "notice_html_raw_sha256": "b4410a20904591543fe2fcb9be741769f69a04317a4bf89f1adb32e3f09977d1",
+        "full_notice": {
+          "licensing": "©2002 Thanissaro Bhikkhu.\n\nThe text of this page (\"Kataññu Suttas: Gratitude\", by Thanissaro Bhikkhu) is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of the license, visit https://creativecommons.org/licenses/by-nc/4.0/. Documents linked from this page may be subject to other restrictions.\nTranscribed from a file provided by the translator. Last revised for Access to Insight on 30 November 2013.",
+          "citation": "How to cite this document (a suggested style): \"Kataññu Suttas: Gratitude\" (AN 2.31-32), translated from the Pali by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 30 November 2013, https://www.accesstoinsight.org/tipitaka/an/an02/an02.031.than.html ."
+        },
+        "notice_sha256": "693ec730c062294a3570512540f883b863bb57f47765b3782199a9a404977d60",
+        "parent_title": "Kataññu Suttas: Gratitude",
+        "shared_full_text_characters": 1778,
+        "shared_full_text_sha256": "68448c5eba804b236080fbb41641328da982639a295de44058e070ae99bd7495"
+      },
+      {
+        "filename": "an02.125-126.than.html",
+        "path": "/tipitaka/an/an02/an02.125-126.than.html",
+        "official_blob_url": "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/an/an02/an02.125-126.than.html",
+        "bytes": 14150,
+        "git_blob_sha1": "13f6c42f4c2d76b62ab788a97df85891890e84d3",
+        "source_html_sha256": "df8584c8489b6cb76b34d8578ff06261a6092f4860216cea6bd6efbde2cccfdb",
+        "top_level_chapters": 1,
+        "direct_child_tags": [
+          [
+            "p",
+            "p",
+            "div.notes"
+          ]
+        ],
+        "all_body_anchors": [
+          {
+            "class": "noteTag",
+            "href": "an02.125-126.than.html#fn-1",
+            "id": "fnt-1"
+          },
+          {
+            "href": "an02.125-126.than.html#fnt-1",
+            "id": "fn-1"
+          },
+          {
+            "href": "../../mn/mn.043.than.html"
+          },
+          {
+            "href": "../../mn/mn.043.than.html"
+          },
+          {
+            "href": "../an09/an09.036.than.html"
+          },
+          {
+            "href": "../../mn/mn.140.than.html"
+          }
+        ],
+        "notice_html_raw_sha256": "d9d3459e356d7588abf78e16003c0afc07e33d7abc14ac7f19354b132b573054",
+        "full_notice": {
+          "licensing": "©2006 Thanissaro Bhikkhu.\n\nThe text of this page (\"Ghosa Suttas: Voice\", by Thanissaro Bhikkhu) is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of the license, visit https://creativecommons.org/licenses/by-nc/4.0/. Documents linked from this page may be subject to other restrictions.\nTranscribed from a file provided by the translator. Last revised for Access to Insight on 30 November 2013.",
+          "citation": "How to cite this document (a suggested style): \"Ghosa Suttas: Voice\" (AN 2.125-126), translated from the Pali by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 30 November 2013, https://www.accesstoinsight.org/tipitaka/an/an02/an02.125-126.than.html ."
+        },
+        "notice_sha256": "d96963652b5b6f051df62ac6a54047af61d5f715b1dd3bcfdab4e62bc0b04de7",
+        "parent_title": "Ghosa Suttas: Voice",
+        "shared_full_text_characters": 3520,
+        "shared_full_text_sha256": "a5d4d3d63f2166947cbcb1ccaa12883f6fbd90ef4445c73ff1c4441064eff8ec"
+      }
+    ],
+    "upstream_root_books": [
+      {
+        "file": "s0401m.mul.xml",
+        "bytes": 222652,
+        "git_blob_sha1": "b2d99a85b19d6395963a34b286c6af0bfa41c9fc",
+        "sha256": "2938300630a21715daf6b461139d636684b2643f3978257caaf211c842a805cb",
+        "connector_utf8_sha256": "61ee81cad710f8d4a56734b5613e72d148c1cc80f400cf920be8a81285278ac1",
+        "connector_normalization": "UTF8-BOMconnectorcontent exactly reencoded UTF16LE-BOM reproduces official Git blob SHA1; CRLF preserved",
+        "all_upstream_blocks_equal_bundled": true,
+        "block_count": 400,
+        "blocks_sha256": "abdcf938c808b22fd0c51b340f2891e7f7b7a5069fb9a6e2a0106b08afc5103e"
+      },
+      {
+        "file": "s0402m1.mul.xml",
+        "bytes": 224986,
+        "git_blob_sha1": "b0478e6ce2c5730c634617f27983ad87649fca36",
+        "sha256": "a41908917b1c0bf1e17c740845612d7a83489073a8bdfde3425f442cd73252a5",
+        "connector_utf8_sha256": "256b24d522b07896f48a3110752c512949dd6068d81046a9cc345e0614cbfe79",
+        "connector_normalization": "UTF8-BOMconnectorcontent exactly reencoded UTF16LE-BOM reproduces official Git blob SHA1; CRLF preserved",
+        "all_upstream_blocks_equal_bundled": true,
+        "block_count": 318,
+        "blocks_sha256": "b0b0b79c1bf9683341c8eb8c983ed9b2c2f940b76c3768c990ec0a88851f7374"
+      }
+    ],
+    "root_units": [
+      {
+        "unit_id": "an1.45",
+        "root": {
+          "id": "an1.45",
+          "book": 16,
+          "start": 57,
+          "end": 58,
+          "title": "Paṇihitaacchavaggo",
+          "collection": "an",
+          "acronym": "AN 1.45",
+          "vri": "45",
+          "pts": {
+            "volume": 1,
+            "page": 9,
+            "end_page": 9
+          }
+        },
+        "root_blocks_sha256": "21e8b78274e211f0d7d71ad765178e166fa2114ba78cd159dec9e12b6d436c63",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 4,
+        "variant_note_count": 1,
+        "control": false
+      },
+      {
+        "unit_id": "an1.46",
+        "root": {
+          "id": "an1.46",
+          "book": 16,
+          "start": 58,
+          "end": 59,
+          "title": "Paṇihitaacchavaggo",
+          "collection": "an",
+          "acronym": "AN 1.46",
+          "vri": "46",
+          "pts": {
+            "volume": 1,
+            "page": 9,
+            "end_page": 9
+          }
+        },
+        "root_blocks_sha256": "108aa53d9914b95f05f75db24bd463ec0035f263442fff330e36e1c813d4be16",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 4,
+        "variant_note_count": 0,
+        "control": false
+      },
+      {
+        "unit_id": "an1.49",
+        "root": {
+          "id": "an1.49",
+          "book": 16,
+          "start": 61,
+          "end": 62,
+          "title": "Paṇihitaacchavaggo",
+          "collection": "an",
+          "acronym": "AN 1.49",
+          "vri": "49",
+          "pts": {
+            "volume": 1,
+            "page": 10,
+            "end_page": 10
+          }
+        },
+        "root_blocks_sha256": "32e0cf65219331cd3065f5066a25d862d0413b9b562b9e7daf8fa8f76668ede9",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 1,
+        "variant_note_count": 0,
+        "control": false
+      },
+      {
+        "unit_id": "an1.50",
+        "root": {
+          "id": "an1.50",
+          "book": 16,
+          "start": 62,
+          "end": 64,
+          "title": "Paṇihitaacchavaggo",
+          "collection": "an",
+          "acronym": "AN 1.50",
+          "vri": "50",
+          "pts": {
+            "volume": 1,
+            "page": 10,
+            "end_page": 10
+          }
+        },
+        "root_blocks_sha256": "0abbf89c4709ec29b40eff8f601e867ed5e248d6109b8c76a215621edfc8b997",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 1,
+        "variant_note_count": 0,
+        "control": false
+      },
+      {
+        "unit_id": "an1.51",
+        "root": {
+          "id": "an1.51",
+          "book": 16,
+          "start": 64,
+          "end": 66,
+          "title": "Accharāsaṅghātavagga",
+          "collection": "an",
+          "acronym": "AN 1.51",
+          "vri": "51",
+          "pts": {
+            "volume": 1,
+            "page": 10,
+            "end_page": 10
+          }
+        },
+        "root_blocks_sha256": "fbb4492966f6ee3a7481903ff0e60c965b5d3551fe6698e1efdd3ec0a22e6e0d",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 1,
+        "variant_note_count": 0,
+        "control": false
+      },
+      {
+        "unit_id": "an1.52",
+        "root": {
+          "id": "an1.52",
+          "book": 16,
+          "start": 66,
+          "end": 67,
+          "title": "Accharāsaṅghātavaggo",
+          "collection": "an",
+          "acronym": "AN 1.52",
+          "vri": "52",
+          "pts": {
+            "volume": 1,
+            "page": 10,
+            "end_page": 10
+          }
+        },
+        "root_blocks_sha256": "851dd7a4be6d3a4e6eb10937b6e29d4b1a44587869f33c9fa107868e1c52f84f",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 1,
+        "variant_note_count": 0,
+        "control": false
+      },
+      {
+        "unit_id": "an2.32",
+        "root": {
+          "id": "an2.32",
+          "book": 17,
+          "start": 72,
+          "end": 75,
+          "title": "Samacittavagga",
+          "collection": "an",
+          "acronym": "AN 2.32",
+          "vri": "33",
+          "pts": {
+            "volume": 1,
+            "page": 61,
+            "end_page": 61
+          }
+        },
+        "root_blocks_sha256": "42b3a5a794cdbf71667e74d9f3bb8ef8904b26fb4b5ceef1452469ab9285886f",
+        "prose_block_count": 2,
+        "root_bhikkhave_count": 8,
+        "variant_note_count": 0,
+        "control": false
+      },
+      {
+        "unit_id": "an2.33",
+        "root": {
+          "id": "an2.33",
+          "book": 17,
+          "start": 75,
+          "end": 76,
+          "title": "Samacittavaggo",
+          "collection": "an",
+          "acronym": "AN 2.33",
+          "vri": "34",
+          "pts": {
+            "volume": 1,
+            "page": 61,
+            "end_page": 62
+          }
+        },
+        "root_blocks_sha256": "cc7ab0271a3323aaff14bc4c016b4a1e48f381cc3370808b53528450bf756ce1",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 8,
+        "variant_note_count": 3,
+        "control": false
+      },
+      {
+        "unit_id": "an2.125",
+        "root": {
+          "id": "an2.125",
+          "book": 17,
+          "start": 223,
+          "end": 224,
+          "title": "1. Āsāduppajahavaggo",
+          "collection": "an",
+          "acronym": "AN 2.125",
+          "vri": "126",
+          "pts": {
+            "volume": 1,
+            "page": 87,
+            "end_page": 87
+          }
+        },
+        "root_blocks_sha256": "116b49764bc4e618f546bf7e8c370d0419bf62fc0f7ab2a656852557063031f5",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 2,
+        "variant_note_count": 0,
+        "control": false
+      },
+      {
+        "unit_id": "an2.126",
+        "root": {
+          "id": "an2.126",
+          "book": 17,
+          "start": 224,
+          "end": 225,
+          "title": "1. Āsāduppajahavaggo",
+          "collection": "an",
+          "acronym": "AN 2.126",
+          "vri": "127",
+          "pts": {
+            "volume": 1,
+            "page": 87,
+            "end_page": 87
+          }
+        },
+        "root_blocks_sha256": "1712705eecbb99f5895c430d2f38ebc3e308151a05136948d4340a04ac55f1fa",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 2,
+        "variant_note_count": 0,
+        "control": false
+      },
+      {
+        "unit_id": "an1.44",
+        "root": {
+          "id": "an1.44",
+          "book": 16,
+          "start": 56,
+          "end": 57,
+          "title": "Paṇihitaacchavaggo",
+          "collection": "an",
+          "acronym": "AN 1.44",
+          "vri": "44",
+          "pts": {
+            "volume": 1,
+            "page": 8,
+            "end_page": 9
+          }
+        },
+        "root_blocks_sha256": "f1dd55194d5a58d44f7f182d13ff66985f0da6e785484e87e274e1bbe44f3b18",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 3,
+        "variant_note_count": 0,
+        "control": true,
+        "boundary_control_assessment": "Serene mind and heavenly rebirth, outside pool discourse."
+      },
+      {
+        "unit_id": "an1.47",
+        "root": {
+          "id": "an1.47",
+          "book": 16,
+          "start": 59,
+          "end": 60,
+          "title": "Paṇihitaacchavaggo",
+          "collection": "an",
+          "acronym": "AN 1.47",
+          "vri": "47",
+          "pts": {
+            "volume": 1,
+            "page": 9,
+            "end_page": 9
+          }
+        },
+        "root_blocks_sha256": "db3277a73233146865d63eb47b5c146841742ed208d28d3d23e1cac9407af9ff",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 3,
+        "variant_note_count": 0,
+        "control": true,
+        "boundary_control_assessment": "Phandana tree pliancy/workability and developed mind, outside pool discourse."
+      },
+      {
+        "unit_id": "an1.48",
+        "root": {
+          "id": "an1.48",
+          "book": 16,
+          "start": 60,
+          "end": 61,
+          "title": "Paṇihitaacchavaggo",
+          "collection": "an",
+          "acronym": "AN 1.48",
+          "vri": "48",
+          "pts": {
+            "volume": 1,
+            "page": 10,
+            "end_page": 10
+          }
+        },
+        "root_blocks_sha256": "1965f3ec8fdf7a5c84deb297871c59fe5b533655d014ee01a7aa4d5347a39102",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 2,
+        "variant_note_count": 0,
+        "control": true,
+        "boundary_control_assessment": "Speed of mind change, outside luminous four."
+      },
+      {
+        "unit_id": "an1.53",
+        "root": {
+          "id": "an1.53",
+          "book": 16,
+          "start": 67,
+          "end": 68,
+          "title": "Accharāsaṅghātavaggo",
+          "collection": "an",
+          "acronym": "AN 1.53",
+          "vri": "53",
+          "pts": {
+            "volume": 1,
+            "page": 10,
+            "end_page": 10
+          }
+        },
+        "root_blocks_sha256": "9e89ab377940ddc7a5af2af633d801701ef0f8af9cf686e88192888f66f661b5",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 2,
+        "variant_note_count": 1,
+        "control": true,
+        "boundary_control_assessment": "Finger-snap cultivation of loving-kindness, outside luminous four."
+      },
+      {
+        "unit_id": "an2.31",
+        "root": {
+          "id": "an2.31",
+          "book": 17,
+          "start": 70,
+          "end": 72,
+          "title": "Bālavaggo",
+          "collection": "an",
+          "acronym": "AN 2.31",
+          "vri": "32",
+          "pts": {
+            "volume": 1,
+            "page": 61,
+            "end_page": 61
+          }
+        },
+        "root_blocks_sha256": "7d520f48618bee25132470015000d44b8461973ecb2f5254df9c7e7f344da775",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 5,
+        "variant_note_count": 1,
+        "control": true,
+        "boundary_control_assessment": "Calm/insight and liberation, outside gratitude pair."
+      },
+      {
+        "unit_id": "an2.34",
+        "root": {
+          "id": "an2.34",
+          "book": 17,
+          "start": 76,
+          "end": 79,
+          "title": "Samacittavaggo",
+          "collection": "an",
+          "acronym": "AN 2.34",
+          "vri": "35",
+          "pts": {
+            "volume": 1,
+            "page": 62,
+            "end_page": 62
+          }
+        },
+        "root_blocks_sha256": "4d582b8f16b8daeb2cdcd4a4064610b49ef59178099dbbc6f04cef70d7be4cec",
+        "prose_block_count": 3,
+        "root_bhikkhave_count": 0,
+        "variant_note_count": 0,
+        "control": true,
+        "boundary_control_assessment": "Brahmin conversation on activity/nonactivity, outside gratitude pair."
+      },
+      {
+        "unit_id": "an2.124",
+        "root": {
+          "id": "an2.124",
+          "book": 17,
+          "start": 222,
+          "end": 223,
+          "title": "1. Āsāduppajahavaggo",
+          "collection": "an",
+          "acronym": "AN 2.124",
+          "vri": "125",
+          "pts": {
+            "volume": 1,
+            "page": 87,
+            "end_page": 87
+          }
+        },
+        "root_blocks_sha256": "f264fa6e6aebcbc5d4a2d95bbdffb85d63ea72e161750c4021cdf17aa1dca333",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 2,
+        "variant_note_count": 0,
+        "control": true,
+        "boundary_control_assessment": "Hatred from repulsive sign/inappropriate attention, outside wrong/right-view pair."
+      },
+      {
+        "unit_id": "an2.127",
+        "root": {
+          "id": "an2.127",
+          "book": 17,
+          "start": 225,
+          "end": 226,
+          "title": "1. Āsāduppajahavaggo",
+          "collection": "an",
+          "acronym": "AN 2.127",
+          "vri": "128",
+          "pts": {
+            "volume": 1,
+            "page": 87,
+            "end_page": 88
+          }
+        },
+        "root_blocks_sha256": "daf0ca77a785b8e60717ec380ff3e6a7d036f0f8bb15b7bef23dcd8e311d7d2c",
+        "prose_block_count": 1,
+        "root_bhikkhave_count": 2,
+        "variant_note_count": 0,
+        "control": true,
+        "boundary_control_assessment": "Light and grave offenses, outside wrong/right-view pair."
+      }
+    ],
+    "selections": [
+      {
+        "unit_id": "an1.45",
+        "status": "APPROVE WHOLE SUBSTANTIVE ONLY",
+        "path": "/tipitaka/an/an01/an01.045-046.than",
+        "parent_title": "Udakarahaka Suttas: A Pool of Water",
+        "source_heading": null,
+        "source_fragment": null,
+        "internal_selection_id": "an1.45",
+        "source_chapter_ordinal": 1,
+        "source_paragraph_ordinals": [
+          1
+        ],
+        "actual_printed_label": "45",
+        "actual_altIDs": [],
+        "selector_kind": "Finite reviewed direct child paragraph ordinals at pinned source revision; not a publisher fragment",
+        "selection_raw_span_sha256": "7f493fcdedd386274a3a537ad0db8bdc3b5e6bd8e6988bae975f0a4b6993b622",
+        "paragraphs_joined_raw_sha256": "7f493fcdedd386274a3a537ad0db8bdc3b5e6bd8e6988bae975f0a4b6993b622",
+        "body_joined_raw_sha256": "98007dc9ad49e08fb442288c6cebc8bbf6cf272a2d85bae16d5884fa0db1f67b",
+        "text_characters": 564,
+        "text_sha256": "4b20c4c0a6d121f860ef0e2e434c101e687a82de85e80efbf99ef04e78e3c3ca",
+        "text_utf8_sha256": "e3d3081f45c1f3a576eb2077af39c761b296a62d4150d7902695be7233b90e6b",
+        "owned_note_count": 0,
+        "owned_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "owned_notes_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "notice_sha256": "c6f4d4898e1844091dabb21aa338b492be115913f2af077c2bd57708890a8bfb",
+        "root": {
+          "id": "an1.45",
+          "book": 16,
+          "start": 57,
+          "end": 58,
+          "title": "Paṇihitaacchavaggo",
+          "collection": "an",
+          "acronym": "AN 1.45",
+          "vri": "45",
+          "pts": {
+            "volume": 1,
+            "page": 9,
+            "end_page": 9
+          }
+        },
+        "root_blocks_sha256": "21e8b78274e211f0d7d71ad765178e166fa2114ba78cd159dec9e12b6d436c63",
+        "first_ref": "an1.45/1",
+        "last_ref": "an1.45/1",
+        "root_segment_scope_sha256": "2f719ca4d753bb7f698ec80b17a3fe5bbb17232bf78e959e9025438737afe560",
+        "selected_pali_scope_sha256": "2f719ca4d753bb7f698ec80b17a3fe5bbb17232bf78e959e9025438737afe560",
+        "untranslated_paratext": [
+          {
+            "ref": "an1.45/1",
+            "text": "Pañcamaṃ."
+          }
+        ],
+        "root_bhikkhave_count": 4,
+        "full_notice_retained": true,
+        "independent_comparison": {
+          "assessment": "Complete substantive muddy-water comparison and impossible consequence: shells/gravel/pebbles/fish, eyesight/bank, cause, three benefits and superior noble knowledge/vision, then mind cause all present.",
+          "omissions": "All four bhikkhave vocatives and inline fifth ordinal omitted; no substantive condition or conclusion missing."
+        }
+      },
+      {
+        "unit_id": "an1.46",
+        "status": "APPROVE WHOLE SUBSTANTIVE ONLY",
+        "path": "/tipitaka/an/an01/an01.045-046.than",
+        "parent_title": "Udakarahaka Suttas: A Pool of Water",
+        "source_heading": null,
+        "source_fragment": null,
+        "internal_selection_id": "an1.46",
+        "source_chapter_ordinal": 2,
+        "source_paragraph_ordinals": [
+          1
+        ],
+        "actual_printed_label": "46",
+        "actual_altIDs": [],
+        "selector_kind": "Finite reviewed direct child paragraph ordinals at pinned source revision; not a publisher fragment",
+        "selection_raw_span_sha256": "65cc496cd8a0ef11b639b4922a2234fe7a8e50f3d793d102f463381b2b0d4184",
+        "paragraphs_joined_raw_sha256": "65cc496cd8a0ef11b639b4922a2234fe7a8e50f3d793d102f463381b2b0d4184",
+        "body_joined_raw_sha256": "29a1970c407ae67540e69016a311980e0632ac9d54c276caab897b00def8ec43",
+        "text_characters": 571,
+        "text_sha256": "e8c31f06a537c1b0846b3088bbcbab71459cba9afffd958ff99606757e9d5c1f",
+        "text_utf8_sha256": "c93fb77dfcd51c32ea5e47f09b63469f16a357a8e3ff3a9dd959e4d926d2b65c",
+        "owned_note_count": 0,
+        "owned_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "owned_notes_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "notice_sha256": "c6f4d4898e1844091dabb21aa338b492be115913f2af077c2bd57708890a8bfb",
+        "root": {
+          "id": "an1.46",
+          "book": 16,
+          "start": 58,
+          "end": 59,
+          "title": "Paṇihitaacchavaggo",
+          "collection": "an",
+          "acronym": "AN 1.46",
+          "vri": "46",
+          "pts": {
+            "volume": 1,
+            "page": 9,
+            "end_page": 9
+          }
+        },
+        "root_blocks_sha256": "108aa53d9914b95f05f75db24bd463ec0035f263442fff330e36e1c813d4be16",
+        "first_ref": "an1.46/1",
+        "last_ref": "an1.46/1",
+        "root_segment_scope_sha256": "1ba91f604fb2bc77c05cafdb7e84aea4aa25df9bb65e58c893c71d47c58762c3",
+        "selected_pali_scope_sha256": "1ba91f604fb2bc77c05cafdb7e84aea4aa25df9bb65e58c893c71d47c58762c3",
+        "untranslated_paratext": [
+          {
+            "ref": "an1.46/1",
+            "text": "Chaṭṭhaṃ."
+          }
+        ],
+        "root_bhikkhave_count": 4,
+        "full_notice_retained": true,
+        "independent_comparison": {
+          "assessment": "Complete substantive clear-water comparison and possible consequence, including same objects/benefits/knowledge-vision and both causal explanations. Correct opposite polarity to1.45.",
+          "omissions": "All four bhikkhave vocatives and inline sixth ordinal omitted."
+        }
+      },
+      {
+        "unit_id": "an1.49",
+        "status": "APPROVE WHOLE SUBSTANTIVE ONLY",
+        "path": "/tipitaka/an/an01/an01.049.than",
+        "parent_title": "Pabhassara Sutta: Luminous",
+        "source_heading": null,
+        "source_fragment": null,
+        "internal_selection_id": "an1.49",
+        "source_chapter_ordinal": 1,
+        "source_paragraph_ordinals": [
+          1
+        ],
+        "actual_printed_label": null,
+        "actual_altIDs": [
+          "{I,v,9}"
+        ],
+        "selector_kind": "Finite reviewed direct child paragraph ordinals at pinned source revision; not a publisher fragment",
+        "selection_raw_span_sha256": "0a226a8829e182dfeccbe1ff3d259c8729e5d6d32545e55d8e6ea70df571b820",
+        "paragraphs_joined_raw_sha256": "0a226a8829e182dfeccbe1ff3d259c8729e5d6d32545e55d8e6ea70df571b820",
+        "body_joined_raw_sha256": "6407c3b03020715f2842c56ff0babcb3e6adf4d0994e2544dee293ba4f1cf633",
+        "text_characters": 74,
+        "text_sha256": "ad5fff15a7880169782c84f9658b47bd204c6f5f20441256b744193d20f84f87",
+        "text_utf8_sha256": "bd58a031a9f9eb7a40ea5ab3f3c1a15beb71b7d606174d6b076d7f8eaef70dc4",
+        "owned_note_count": 1,
+        "owned_notes_sha256": "840f501605f6c795e2f0cb9fd995a350933b189389060cc36d36ff87cbb1e91a",
+        "owned_notes_raw_sha256": "273e83f749cc86c8b042a6b0c2020fafb27097c8837ad7fadded493157752d93",
+        "notice_sha256": "3b8f3fab868dd8176bb2cce37b9e9437bdca790a6a415a0f67ee589ce099b1fe",
+        "root": {
+          "id": "an1.49",
+          "book": 16,
+          "start": 61,
+          "end": 62,
+          "title": "Paṇihitaacchavaggo",
+          "collection": "an",
+          "acronym": "AN 1.49",
+          "vri": "49",
+          "pts": {
+            "volume": 1,
+            "page": 10,
+            "end_page": 10
+          }
+        },
+        "root_blocks_sha256": "32e0cf65219331cd3065f5066a25d862d0413b9b562b9e7daf8fa8f76668ede9",
+        "first_ref": "an1.49/1",
+        "last_ref": "an1.49/1",
+        "root_segment_scope_sha256": "da63de4bf7ba0963a8da88d9316061f7089b1afeca12db8849021fe6f81ea9aa",
+        "selected_pali_scope_sha256": "da63de4bf7ba0963a8da88d9316061f7089b1afeca12db8849021fe6f81ea9aa",
+        "untranslated_paratext": [
+          {
+            "ref": "an1.49/1",
+            "text": "Navamaṃ."
+          }
+        ],
+        "root_bhikkhave_count": 1,
+        "full_notice_retained": true,
+        "independent_comparison": {
+          "assessment": "Both luminosity and defilement by incoming defilements present, with monks address.",
+          "omissions": "Inline ninth ordinal omitted.",
+          "note_ownership": "Only this paragraph contains source fnt-1 pointer. Attach exact full dd1 as translator_notes only, outside scripture. Note discusses wider luminous-mind context and other sources; not proof those other texts occur in this discourse."
+        }
+      },
+      {
+        "unit_id": "an1.50",
+        "status": "APPROVE WHOLE SUBSTANTIVE ONLY",
+        "path": "/tipitaka/an/an01/an01.049.than",
+        "parent_title": "Pabhassara Sutta: Luminous",
+        "source_heading": null,
+        "source_fragment": null,
+        "internal_selection_id": "an1.50",
+        "source_chapter_ordinal": 1,
+        "source_paragraph_ordinals": [
+          2
+        ],
+        "actual_printed_label": null,
+        "actual_altIDs": [
+          "{I,v,10}"
+        ],
+        "selector_kind": "Finite reviewed direct child paragraph ordinals at pinned source revision; not a publisher fragment",
+        "selection_raw_span_sha256": "50b7d9023186a4cace053a7c760e9ca19fc323f0c53281f01c39db356ada613f",
+        "paragraphs_joined_raw_sha256": "50b7d9023186a4cace053a7c760e9ca19fc323f0c53281f01c39db356ada613f",
+        "body_joined_raw_sha256": "7d7b2a1649389f4c10ead1306f90efb37a20f01c8d22d0e0269b0b492811a056",
+        "text_characters": 74,
+        "text_sha256": "18ad64a10133bdb9e09d98c83774fa323b7cbd27555dae986307500ca85c4776",
+        "text_utf8_sha256": "e28e30cde6c6eada220f35b21da2b0f080bf76c295c9204413b70bc5350d4f7c",
+        "owned_note_count": 0,
+        "owned_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "owned_notes_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "notice_sha256": "3b8f3fab868dd8176bb2cce37b9e9437bdca790a6a415a0f67ee589ce099b1fe",
+        "root": {
+          "id": "an1.50",
+          "book": 16,
+          "start": 62,
+          "end": 64,
+          "title": "Paṇihitaacchavaggo",
+          "collection": "an",
+          "acronym": "AN 1.50",
+          "vri": "50",
+          "pts": {
+            "volume": 1,
+            "page": 10,
+            "end_page": 10
+          }
+        },
+        "root_blocks_sha256": "0abbf89c4709ec29b40eff8f601e867ed5e248d6109b8c76a215621edfc8b997",
+        "first_ref": "an1.50/1",
+        "last_ref": "an1.50/1",
+        "root_segment_scope_sha256": "c3941fe98ac62140bbc56c0aa4c8f9b7586ca288506e52dca02bce4457f10e04",
+        "selected_pali_scope_sha256": "b500aa50ce6c8e062f4a4c06a9b0db48b2e828c29ee59a4e96cb474804fdbbe2",
+        "untranslated_paratext": [
+          {
+            "ref": "an1.50/1",
+            "text": "Dasamaṃ."
+          },
+          {
+            "ref": "an1.50/2",
+            "text": "Paṇihitaacchavaggo pañcamo."
+          }
+        ],
+        "root_bhikkhave_count": 1,
+        "full_notice_retained": true,
+        "independent_comparison": {
+          "assessment": "Both luminosity and freedom from incoming defilements present, with monks address.",
+          "omissions": "Inline tenth ordinal and closing chapter colophon omitted; source contains no note pointer.",
+          "note_ownership": "No note. Do not clone1.49note into this selection. Root /2 is a closing colophon despite type prose; select /1only."
+        }
+      },
+      {
+        "unit_id": "an1.51",
+        "status": "APPROVE WHOLE SUBSTANTIVE ONLY",
+        "path": "/tipitaka/an/an01/an01.049.than",
+        "parent_title": "Pabhassara Sutta: Luminous",
+        "source_heading": null,
+        "source_fragment": null,
+        "internal_selection_id": "an1.51",
+        "source_chapter_ordinal": 1,
+        "source_paragraph_ordinals": [
+          3
+        ],
+        "actual_printed_label": null,
+        "actual_altIDs": [
+          "{I,vi,1}"
+        ],
+        "selector_kind": "Finite reviewed direct child paragraph ordinals at pinned source revision; not a publisher fragment",
+        "selection_raw_span_sha256": "5a96be7e968d165a4385055a133e9adb7ad9c942e1ce68763575237e40509bd1",
+        "paragraphs_joined_raw_sha256": "5a96be7e968d165a4385055a133e9adb7ad9c942e1ce68763575237e40509bd1",
+        "body_joined_raw_sha256": "300f03517f609fabfa6d2d844213230a0dd3ee27348ce0a5585fb95bcc0a19f2",
+        "text_characters": 276,
+        "text_sha256": "ae80bff0ea5fc017aadbff57405bc7e35af56f6dde137aa085ae3036b75ce7b4",
+        "text_utf8_sha256": "1b39c6d64f13a7aa8a83881e3b4a3c50d1b938caf82df39e239852988f45df36",
+        "owned_note_count": 0,
+        "owned_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "owned_notes_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "notice_sha256": "3b8f3fab868dd8176bb2cce37b9e9437bdca790a6a415a0f67ee589ce099b1fe",
+        "root": {
+          "id": "an1.51",
+          "book": 16,
+          "start": 64,
+          "end": 66,
+          "title": "Accharāsaṅghātavagga",
+          "collection": "an",
+          "acronym": "AN 1.51",
+          "vri": "51",
+          "pts": {
+            "volume": 1,
+            "page": 10,
+            "end_page": 10
+          }
+        },
+        "root_blocks_sha256": "fbb4492966f6ee3a7481903ff0e60c965b5d3551fe6698e1efdd3ec0a22e6e0d",
+        "first_ref": "an1.51/2",
+        "last_ref": "an1.51/2",
+        "root_segment_scope_sha256": "4d986a74b6f197efe31d16b23deb8bac35b9792bd26e6265dc7b60b3679ec6cb",
+        "selected_pali_scope_sha256": "fca227ef0299b6a89b6d166c687f088331c705b41ae071d80af143fd5302ea7f",
+        "untranslated_paratext": [
+          {
+            "ref": "an1.51/2",
+            "text": "Paṭhamaṃ."
+          },
+          {
+            "ref": "an1.51/1",
+            "text": "6. Accharāsaṅghātavaggo"
+          }
+        ],
+        "root_bhikkhave_count": 1,
+        "full_notice_retained": true,
+        "independent_comparison": {
+          "assessment": "Luminosity/defilement plus uninstructed person failure to know as it is and resulting absence of mind development all present.",
+          "omissions": "Opening chapter heading and inline first ordinal omitted.",
+          "note_ownership": "No source pointer; do not clone1.49note."
+        }
+      },
+      {
+        "unit_id": "an1.52",
+        "status": "APPROVE WHOLE SUBSTANTIVE ONLY",
+        "path": "/tipitaka/an/an01/an01.049.than",
+        "parent_title": "Pabhassara Sutta: Luminous",
+        "source_heading": null,
+        "source_fragment": null,
+        "internal_selection_id": "an1.52",
+        "source_chapter_ordinal": 1,
+        "source_paragraph_ordinals": [
+          4
+        ],
+        "actual_printed_label": null,
+        "actual_altIDs": [
+          "{I,vi,2}"
+        ],
+        "selector_kind": "Finite reviewed direct child paragraph ordinals at pinned source revision; not a publisher fragment",
+        "selection_raw_span_sha256": "886ffc5dd17c48f9f5f51a3dc441d2a463acdd460cf5ac13f53864861d84d525",
+        "paragraphs_joined_raw_sha256": "886ffc5dd17c48f9f5f51a3dc441d2a463acdd460cf5ac13f53864861d84d525",
+        "body_joined_raw_sha256": "697f5f6542537b3a9f72dc2ded8a84b180ebca9f74a60c45bbca7e9b4d56d2c4",
+        "text_characters": 280,
+        "text_sha256": "075c928e14fee7f87e86859fbf33ecfae801e7ed94084f30346f699a3886f7c4",
+        "text_utf8_sha256": "577e7da01a14db61720f6a5db609ec648e799e7014d26d3f32c81f0e54c966bd",
+        "owned_note_count": 0,
+        "owned_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "owned_notes_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "notice_sha256": "3b8f3fab868dd8176bb2cce37b9e9437bdca790a6a415a0f67ee589ce099b1fe",
+        "root": {
+          "id": "an1.52",
+          "book": 16,
+          "start": 66,
+          "end": 67,
+          "title": "Accharāsaṅghātavaggo",
+          "collection": "an",
+          "acronym": "AN 1.52",
+          "vri": "52",
+          "pts": {
+            "volume": 1,
+            "page": 10,
+            "end_page": 10
+          }
+        },
+        "root_blocks_sha256": "851dd7a4be6d3a4e6eb10937b6e29d4b1a44587869f33c9fa107868e1c52f84f",
+        "first_ref": "an1.52/1",
+        "last_ref": "an1.52/1",
+        "root_segment_scope_sha256": "2c9a379cadc54f65467f52d588d2807ae13e99ff2400dcb5868257b5f5e36007",
+        "selected_pali_scope_sha256": "2c9a379cadc54f65467f52d588d2807ae13e99ff2400dcb5868257b5f5e36007",
+        "untranslated_paratext": [
+          {
+            "ref": "an1.52/1",
+            "text": "Dutiyaṃ."
+          }
+        ],
+        "root_bhikkhave_count": 1,
+        "full_notice_retained": true,
+        "independent_comparison": {
+          "assessment": "Luminosity/freedom plus instructed noble disciple knowledge as it is and resulting presence of mind development all present, with opposite polarity to1.51.",
+          "omissions": "Inline second ordinal omitted.",
+          "note_ownership": "No source pointer; do not clone1.49note."
+        }
+      },
+      {
+        "unit_id": "an2.32",
+        "status": "APPROVE WHOLE SUBSTANTIVE ONLY",
+        "path": "/tipitaka/an/an02/an02.031.than",
+        "parent_title": "Kataññu Suttas: Gratitude",
+        "source_heading": null,
+        "source_fragment": null,
+        "internal_selection_id": "an2.32",
+        "source_chapter_ordinal": 1,
+        "source_paragraph_ordinals": [
+          1,
+          2,
+          3
+        ],
+        "actual_printed_label": null,
+        "actual_altIDs": [],
+        "selector_kind": "Finite reviewed direct child paragraph ordinals at pinned source revision; not a publisher fragment",
+        "selection_raw_span_sha256": "0f3541d68a3611e907196fc7ad356f47b634dccd62a9e52a0bd0d6cee372e4be",
+        "paragraphs_joined_raw_sha256": "b17db9e0f1f9b2074d165870f2d92abb0e834b4ff613ae9398e7d87f9324ea5b",
+        "body_joined_raw_sha256": "494191ceac850b174f8f95959d4efb22ca1e09340cdbe88e7fbe91f3af687f22",
+        "text_characters": 610,
+        "text_sha256": "bbddb911bf7cde2c3168e7a43a9227ee89dd5fc9a2a16d691f23e437e2e720a1",
+        "text_utf8_sha256": "9f1533864e2e78f117daef99b10d34814091c78238961be5e3f1141695dbf588",
+        "owned_note_count": 0,
+        "owned_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "owned_notes_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "notice_sha256": "693ec730c062294a3570512540f883b863bb57f47765b3782199a9a404977d60",
+        "root": {
+          "id": "an2.32",
+          "book": 17,
+          "start": 72,
+          "end": 75,
+          "title": "Samacittavagga",
+          "collection": "an",
+          "acronym": "AN 2.32",
+          "vri": "33",
+          "pts": {
+            "volume": 1,
+            "page": 61,
+            "end_page": 61
+          }
+        },
+        "root_blocks_sha256": "42b3a5a794cdbf71667e74d9f3bb8ef8904b26fb4b5ceef1452469ab9285886f",
+        "first_ref": "an2.32/2",
+        "last_ref": "an2.32/3",
+        "root_segment_scope_sha256": "8d5e6d1d98bd13de5e6acd501fa9a346f438b63f4e786c31becce245b60f742b",
+        "selected_pali_scope_sha256": "23f8e4b82e9cc192acac469126732fdd882d081eafd7b9c59367fec471a31396",
+        "untranslated_paratext": [
+          {
+            "ref": "an2.32/1",
+            "text": "4. Samacittavaggo"
+          }
+        ],
+        "root_bhikkhave_count": 8,
+        "full_notice_retained": true,
+        "independent_comparison": {
+          "assessment": "Source paragraphs1–3 jointly cover both substantive rootblocks: announced contrast, attention request, monks response and speaker attribution, then both ungrateful/unthankful and grateful/thankful conditions, rude/civil advocacy and full integrity levels. Source sentence order preserves the introduction rather than beginning only at the doctrine.",
+          "omissions": "Chapter heading and7of8 repeated bhikkhave vocatives omitted. The repeated ingratitude/gratitude noun phrases attached to the final entire-level assertions are rendered anaphorically; no category or asserted relation is absent.",
+          "numbering": "PublisherAN2.31 / indexedAN2.32 / VRI33. No actual source fragment for first3paragraphs.",
+          "editorial_boundary": "The seeAlso container after paragraph4 is page editorial crossreference, outside both discourses."
+        }
+      },
+      {
+        "unit_id": "an2.33",
+        "status": "APPROVE WHOLE SUBSTANTIVE ONLY",
+        "path": "/tipitaka/an/an02/an02.031.than",
+        "parent_title": "Kataññu Suttas: Gratitude",
+        "source_heading": null,
+        "source_fragment": "s32",
+        "internal_selection_id": "an2.33",
+        "source_chapter_ordinal": 1,
+        "source_paragraph_ordinals": [
+          4
+        ],
+        "actual_printed_label": null,
+        "actual_altIDs": [
+          "{II,iv,2}"
+        ],
+        "selector_kind": "Finite reviewed direct child paragraph ordinals at pinned source revision; not a publisher fragment",
+        "selection_raw_span_sha256": "090c465b0e297ddf3121fd4485a8d131908e7e3541bf25a0ec6e13972e96d4b2",
+        "paragraphs_joined_raw_sha256": "090c465b0e297ddf3121fd4485a8d131908e7e3541bf25a0ec6e13972e96d4b2",
+        "body_joined_raw_sha256": "fb7e08fd189f41237c13aed252052cd1ac0e7294fda6ed39a2b65b7406f8282e",
+        "text_characters": 1110,
+        "text_sha256": "bdc350b08c88e3fdcae4a5eda3d6dfe8673be80f57cc2e92cc8f481a3e4b5716",
+        "text_utf8_sha256": "f96bef1dceb007e59ec3cfabe2c0e9e333cfab6a84cd398821c13c9f40ce7edf",
+        "owned_note_count": 0,
+        "owned_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "owned_notes_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "notice_sha256": "693ec730c062294a3570512540f883b863bb57f47765b3782199a9a404977d60",
+        "root": {
+          "id": "an2.33",
+          "book": 17,
+          "start": 75,
+          "end": 76,
+          "title": "Samacittavaggo",
+          "collection": "an",
+          "acronym": "AN 2.33",
+          "vri": "34",
+          "pts": {
+            "volume": 1,
+            "page": 61,
+            "end_page": 62
+          }
+        },
+        "root_blocks_sha256": "cc7ab0271a3323aaff14bc4c016b4a1e48f381cc3370808b53528450bf756ce1",
+        "first_ref": "an2.33/1",
+        "last_ref": "an2.33/1",
+        "root_segment_scope_sha256": "37bc151dc2c13035409dd7615d38f0b756f14e9f549ac92aa0d78eaa6c406fb2",
+        "selected_pali_scope_sha256": "37bc151dc2c13035409dd7615d38f0b756f14e9f549ac92aa0d78eaa6c406fb2",
+        "untranslated_paratext": [],
+        "root_bhikkhave_count": 8,
+        "full_notice_retained": true,
+        "independent_comparison": {
+          "assessment": "Complete parents-repayment treatment: two parents, hundred years and shoulders, four bodily care actions and defecation/urination, failed repayment, sovereign-rule example and failure, three parental services, all four faith/virtue/generosity/discernment transformations with establishment and final repayment consequence.",
+          "omissions": "7of8 repeated bhikkhave vocatives omitted. Translator added explanatory shoulder bracket retained.",
+          "numbering": "PublisherAN2.32 / indexedAN2.33 / VRI34. Real source fragment s32 sits inside altID at start of paragraph4; this is the only real individual fragment among these10.",
+          "recension_difference": "English seven treasures corresponds to retained VRIvariant pahutasattaratanaya; main root reads pahutarattaratanaya. Do not silently rewrite root or select a variant as the main edition. Disclose this difference and avoid word-level alignment claims. Other retained VRIvariants concern parental helpfulness and repayment wording; English agrees with main repayment conclusion.",
+          "editorial_boundary": "Exclude page seeAlso references; do not claim they are translator footnotes owned by this discourse."
+        }
+      },
+      {
+        "unit_id": "an2.125",
+        "status": "APPROVE WHOLE SUBSTANTIVE ONLY",
+        "path": "/tipitaka/an/an02/an02.125-126.than",
+        "parent_title": "Ghosa Suttas: Voice",
+        "source_heading": null,
+        "source_fragment": null,
+        "internal_selection_id": "an2.125",
+        "source_chapter_ordinal": 1,
+        "source_paragraph_ordinals": [
+          1
+        ],
+        "actual_printed_label": null,
+        "actual_altIDs": [],
+        "selector_kind": "Finite reviewed direct child paragraph ordinals at pinned source revision; not a publisher fragment",
+        "selection_raw_span_sha256": "18f41811a7fb42925ae16c5d3526bd1fede3978bc3d172c7b39ad3a4a9a43120",
+        "paragraphs_joined_raw_sha256": "18f41811a7fb42925ae16c5d3526bd1fede3978bc3d172c7b39ad3a4a9a43120",
+        "body_joined_raw_sha256": "c223e5ee513ad192d67350ffce3c178c396a52c7b8be343d0457cd15e13d3edd",
+        "text_characters": 191,
+        "text_sha256": "87b4f5adaddcb888ce05e057814287bd06c893fdb684d5a3621abe89273a40d1",
+        "text_utf8_sha256": "69fd09c161ff0f3e34fccd5a8449e2b3ee6623e805ea138b9f63442999af153f",
+        "owned_note_count": 1,
+        "owned_notes_sha256": "96af177b56cdb5e8517636272a1621ebc901da3c027afdef3b8f30a86cc158c7",
+        "owned_notes_raw_sha256": "7c94d339bc1e6eeb93af09712f1f3f1663fa5caa0b781e13478ea5415116be86",
+        "notice_sha256": "d96963652b5b6f051df62ac6a54047af61d5f715b1dd3bcfdab4e62bc0b04de7",
+        "root": {
+          "id": "an2.125",
+          "book": 17,
+          "start": 223,
+          "end": 224,
+          "title": "1. Āsāduppajahavaggo",
+          "collection": "an",
+          "acronym": "AN 2.125",
+          "vri": "126",
+          "pts": {
+            "volume": 1,
+            "page": 87,
+            "end_page": 87
+          }
+        },
+        "root_blocks_sha256": "116b49764bc4e618f546bf7e8c370d0419bf62fc0f7ab2a656852557063031f5",
+        "first_ref": "an2.125/1",
+        "last_ref": "an2.125/1",
+        "root_segment_scope_sha256": "16f04b3b880ff406ec05d72bf4965b2430e89945fcc30dfb99386c73d01b021d",
+        "selected_pali_scope_sha256": "16f04b3b880ff406ec05d72bf4965b2430e89945fcc30dfb99386c73d01b021d",
+        "untranslated_paratext": [],
+        "root_bhikkhave_count": 2,
+        "full_notice_retained": true,
+        "independent_comparison": {
+          "assessment": "Complete wrong-view two-condition statement, explicit question, external voice and inappropriate attention, repeated conclusion.",
+          "omissions": "Second of2bhikkhave vocatives omitted.",
+          "numbering": "Publisher/indexed125; VRI126.",
+          "note_ownership": "Only this paragraph has fnt-1 on the external-voice phrase. Attach exact full dd1 separately as translator_note; includes criticism/quotes of Woodward and references to other works, never canonical translated body."
+        }
+      },
+      {
+        "unit_id": "an2.126",
+        "status": "APPROVE WHOLE SUBSTANTIVE ONLY",
+        "path": "/tipitaka/an/an02/an02.125-126.than",
+        "parent_title": "Ghosa Suttas: Voice",
+        "source_heading": null,
+        "source_fragment": null,
+        "internal_selection_id": "an2.126",
+        "source_chapter_ordinal": 1,
+        "source_paragraph_ordinals": [
+          2
+        ],
+        "actual_printed_label": null,
+        "actual_altIDs": [],
+        "selector_kind": "Finite reviewed direct child paragraph ordinals at pinned source revision; not a publisher fragment",
+        "selection_raw_span_sha256": "617aac9b45961c34a805d09f86e4d156d4f49bc60fe25d188effd08d7d4810b2",
+        "paragraphs_joined_raw_sha256": "617aac9b45961c34a805d09f86e4d156d4f49bc60fe25d188effd08d7d4810b2",
+        "body_joined_raw_sha256": "6bcdd80f257d3747bdd7dcd0c08218a3e1c756ded14a38c60ff117b472b95058",
+        "text_characters": 189,
+        "text_sha256": "6220a0c6952b7cb290ba2fb9c05ac68f15bf125c009dbed183113910613f1409",
+        "text_utf8_sha256": "6bcdd80f257d3747bdd7dcd0c08218a3e1c756ded14a38c60ff117b472b95058",
+        "owned_note_count": 0,
+        "owned_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "owned_notes_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "notice_sha256": "d96963652b5b6f051df62ac6a54047af61d5f715b1dd3bcfdab4e62bc0b04de7",
+        "root": {
+          "id": "an2.126",
+          "book": 17,
+          "start": 224,
+          "end": 225,
+          "title": "1. Āsāduppajahavaggo",
+          "collection": "an",
+          "acronym": "AN 2.126",
+          "vri": "127",
+          "pts": {
+            "volume": 1,
+            "page": 87,
+            "end_page": 87
+          }
+        },
+        "root_blocks_sha256": "1712705eecbb99f5895c430d2f38ebc3e308151a05136948d4340a04ac55f1fa",
+        "first_ref": "an2.126/1",
+        "last_ref": "an2.126/1",
+        "root_segment_scope_sha256": "45b35310f8a164866acbc2540c8d192548ff6632b1499a1bb09142323b2ba17f",
+        "selected_pali_scope_sha256": "45b35310f8a164866acbc2540c8d192548ff6632b1499a1bb09142323b2ba17f",
+        "untranslated_paratext": [],
+        "root_bhikkhave_count": 2,
+        "full_notice_retained": true,
+        "independent_comparison": {
+          "assessment": "Complete right-view two-condition statement, explicit question, external voice and appropriate attention, repeated conclusion; correct opposite polarity to2.125.",
+          "omissions": "Second of2bhikkhave vocatives omitted.",
+          "numbering": "Publisher/indexed126; VRI127.",
+          "note_ownership": "No source pointer; do not clone2.125note into this selection."
+        }
+      }
+    ],
+    "retained_shared_choices": [
+      {
+        "owner_id": "an1.45",
+        "path": "/tipitaka/an/an01/an01.045-046.than",
+        "translation_id": "ati:/tipitaka/an/an01/an01.045-046.than",
+        "link_stable_sha256": "6bf4ee03645107957dead77ee90db44b0da9774562243ff22a4e34c2b54c1a0a",
+        "link_json_sha256": "65bf2f448723ad973e2e22d7820e1ab605e48dc14361e68747f1e17e35f4e002",
+        "scope": {
+          "version": 1,
+          "status": "reviewed",
+          "owner_id": "an1.45",
+          "text_ids": [
+            "an1.45",
+            "an1.46"
+          ],
+          "presentation": "compilation",
+          "alignment": "unverified",
+          "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+          "pali_sha256": "3842fa2b62de5f546e83337c603df9bfa49cda6be1092221b102b7ea20cf4005",
+          "text_sha256": "7297c6cf82b7abe3f94ad8e6fdc5e8fc1c03a6b3c896a2a1bcf5fa895bef69fd",
+          "notice_sha256": "c6f4d4898e1844091dabb21aa338b492be115913f2af077c2bd57708890a8bfb"
+        }
+      },
+      {
+        "owner_id": "an1.49",
+        "path": "/tipitaka/an/an01/an01.049.than",
+        "translation_id": "ati:/tipitaka/an/an01/an01.049.than",
+        "link_stable_sha256": "a2c2cc60601e1452e1a2c4e1d2559e840d9af81971bf8cbc1c0c39d3f97c1788",
+        "link_json_sha256": "5a727c71c69e0ab6a7f29861075366a104a6e80a6bb4530a99d56d9ec192e07f",
+        "scope": {
+          "version": 1,
+          "status": "reviewed",
+          "owner_id": "an1.49",
+          "text_ids": [
+            "an1.49",
+            "an1.50",
+            "an1.51",
+            "an1.52"
+          ],
+          "presentation": "compilation",
+          "alignment": "unverified",
+          "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+          "pali_sha256": "5c98023f2f97b51c5ea9ef76b4a031ac9725ec8cecee8fbacc0f2c0ecf3f77a0",
+          "text_sha256": "35182e6e8d3990b8cb6ace20602277a5d409fd45c5a44b9e277ec25995084c60",
+          "notice_sha256": "3b8f3fab868dd8176bb2cce37b9e9437bdca790a6a415a0f67ee589ce099b1fe"
+        }
+      },
+      {
+        "owner_id": "an2.32",
+        "path": "/tipitaka/an/an02/an02.031.than",
+        "translation_id": "ati:/tipitaka/an/an02/an02.031.than",
+        "link_stable_sha256": "838054ead5fcd616b8da512e9cc9094987bc92a9539b897dd4265ab255f3c895",
+        "link_json_sha256": "9acf7b6e27f56f532dad29bcde677f42696521e745f6775813e65053ffedc16e",
+        "scope": {
+          "version": 1,
+          "status": "reviewed",
+          "owner_id": "an2.32",
+          "text_ids": [
+            "an2.32",
+            "an2.33"
+          ],
+          "presentation": "compilation",
+          "alignment": "unverified",
+          "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+          "pali_sha256": "3f85a870476455991af56f4308b4fc92f73d0931c8cd17e18a171c374abfef96",
+          "text_sha256": "68448c5eba804b236080fbb41641328da982639a295de44058e070ae99bd7495",
+          "notice_sha256": "693ec730c062294a3570512540f883b863bb57f47765b3782199a9a404977d60"
+        }
+      },
+      {
+        "owner_id": "an2.125",
+        "path": "/tipitaka/an/an02/an02.125-126.than",
+        "translation_id": "ati:/tipitaka/an/an02/an02.125-126.than",
+        "link_stable_sha256": "5a3ef438de5d3288a3e4239ec1838c69a45fd94003642faf3262e060e0cd4e3c",
+        "link_json_sha256": "cecb83b806edc71abf5dc4414b93e961b109e1c64e8edf34ff5c0522eab54b13",
+        "scope": {
+          "version": 1,
+          "status": "reviewed",
+          "owner_id": "an2.125",
+          "text_ids": [
+            "an2.125",
+            "an2.126"
+          ],
+          "presentation": "compilation",
+          "alignment": "unverified",
+          "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+          "pali_sha256": "01f88254cf733cc057f51d936a8203e51e447a5c711bfac3c7209ac269f44318",
+          "text_sha256": "a5d4d3d63f2166947cbcb1ccaa12883f6fbd90ef4445c73ff1c4441064eff8ec",
+          "notice_sha256": "d96963652b5b6f051df62ac6a54047af61d5f715b1dd3bcfdab4e62bc0b04de7"
+        }
+      }
+    ]
+  }
+}

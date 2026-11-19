@@ -24,7 +24,7 @@ const originalFetch=globalThis.fetch;
 afterEach(()=>{globalThis.fetch=originalFetch;liveCache.clear();});
 
 test('SN27.5 has one finite whole-discourse identity, unchanged root, honest title/PTS/ordinal limits and preserved neighbours',()=>{
- assert.equal(registry.links.length,35);
+ assert.equal(registry.links.length,45);
  assert.equal(sectionHash(registry.links.filter(row=>row.unit_id.startsWith('mil'))),'1895805a2ffc3518b590a000843a018b90f40694980094ba877940124d94ad16');
  assert.equal(sectionHash(JSON.parse(readFileSync('scripts/canon/reviewed_partial_pages.json','utf8')).links.filter(row=>row.unit_id!=='mil6.4.1')),'a92f0cbbbe88958416bbb05c081656697d215a9812169e51c9b437f473dbae85');
  const d=snapshot(),segments=canon.segments(unit());
@@ -63,7 +63,7 @@ test('whole-discourse exports keep only the fifth section address, CC rights and
 });
 
 test('daily SN27.5 suggestion preserves exact section identity, mapping limits and detached metadata',()=>{
- const args={kind:'sutta',date:'2029-01-19'},first=dailyText(canon,args);assert.equal(first.text.id,'sn27.5');assert.equal(first.rotation.of,1278);
+ const args={kind:'sutta',date:'2028-07-15'},first=dailyText(canon,args);assert.equal(first.text.id,'sn27.5');assert.equal(first.rotation.of,1288);
  const [choice]=first.english;assert.equal(choice.translation_id,id);assert.deepEqual(choice.source_section,row.section);assert.equal(choice.mapping_note,row.mapping_note);assert.equal(choice.whole_unit_coverage,true);assert.equal(choice.translation_scope,undefined);
  choice.source_section.anchor='Caller mutation';assert.equal(dailyText(canon,args).english[0].source_section.anchor,'sn27.005');assert.equal(row.section.anchor,'sn27.005');
 });

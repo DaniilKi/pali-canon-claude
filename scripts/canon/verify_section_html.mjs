@@ -8,8 +8,8 @@ import {readBundled} from '../../src/bundled-data.mjs';
 import {atiNotice} from '../../src/english.mjs';
 import {scopeHash} from '../../src/translation-scope.mjs';
 import {extractAtiSection} from '../../src/ati-sections.mjs';
-import {reviewedSectionLink,validateSectionRegistry,retainedAnMindShared} from '../../src/ati-section-registry.mjs';
-import {AN_MIND_SECTION_PROFILE,ATI_SECTION_PROFILES} from '../../src/ati-section-profiles.mjs';
+import {reviewedSectionLink,validateSectionRegistry,retainedAtiShared} from '../../src/ati-section-registry.mjs';
+import {AN_MIND_SECTION_PROFILE,AN_TEN_SECTION_PROFILE,ATI_SECTION_PROFILES,ATI_RETAINED_SHARED_BINDINGS} from '../../src/ati-section-profiles.mjs';
 
 const [manifest, checkout] = process.argv.slice(2);
 if (!manifest || !checkout) throw Error('Usage: verify_section_html.mjs MANIFEST ATI-CHECKOUT');
@@ -21,9 +21,15 @@ const corpus = JSON.parse(gunzipSync(readBundled(new URL('../../server/data/cano
 const units = new Map(corpus.units.map(unit => [unit.id,unit]));
 const proposed = Object.fromEntries(m.links.map(row => [row.unit_id,[reviewedSectionLink(row,m)]]));
 const previous = JSON.parse(await readFile(new URL('../../server/data/translations.json', import.meta.url),'utf8'));
-const retained = (previous['an1.21'] || []).find(link => retainedAnMindShared(link,units.get('an1.21')));
-if (!retained || !proposed['an1.21']) throw Error('Existing AN shared version must survive whole-section activation');
-proposed['an1.21'].push(retained);
+for (const binding of ATI_RETAINED_SHARED_BINDINGS) {
+  // Count exact copies across every owner; a misplaced/duplicated historical
+  // binding must not be hidden by constructing the proposed bootstrap table.
+  const retained = Object.entries(previous).flatMap(([owner, links]) => links
+    .filter(link => link.path === binding.path && retainedAtiShared(link,units.get(binding.owner)))
+    .map(link => ({owner, link})));
+  if (retained.length !== 1 || retained[0].owner !== binding.owner || !proposed[binding.owner]) throw Error('Every exact existing AN shared version must survive whole-section activation once at its original owner');
+  proposed[binding.owner].push(retained[0].link);
+}
 validateSectionRegistry(m,corpus,proposed,unit => segmentsFromCorpus(unit,corpus));
 for (const row of m.links) {
   const path = await realpath(resolve(root, row.path.slice(1) + '.html'));
@@ -33,7 +39,8 @@ for (const row of m.links) {
   const selected = extractAtiSection(html, row), notice = atiNotice(html);
   if (!notice.licensing || !notice.citation || scopeHash(notice) !== row.section.notice_sha256
     || scopeHash(selected.text) !== row.section.text_sha256
-    || scopeHash(selected.translator_notes) !== row.section.notes_sha256) throw Error('ATI section body, notes or full notice changed');
+    || scopeHash(selected.translator_notes) !== row.section.notes_sha256
+    || selected.title !== (row.section.profile === AN_TEN_SECTION_PROFILE ? row.english_title : row.section.heading)) throw Error('ATI section body, notes or full notice changed');
   const unit = units.get(row.unit_id), segments = segmentsFromCorpus(unit,corpus);
   const first = segments.findIndex(s => s.ref === row.section.first_ref);
   const last = segments.findIndex(s => s.ref === row.section.last_ref);
@@ -41,7 +48,10 @@ for (const row of m.links) {
     || scopeHash(segments.slice(first, last + 1).map(({ref,type,text}) => ({ref,type,text}))) !== row.section.pali_sha256) throw Error('ATI section exact Pali body changed');
   const outside = segments.filter((s,i) => (i < first || i > last) && s.type !== 'heading');
   const profile = ATI_SECTION_PROFILES.find(value => value.unit_id === row.unit_id);
-  const paratext = row.section.profile === AN_MIND_SECTION_PROFILE
+  const paratext = row.section.profile === AN_TEN_SECTION_PROFILE
+    ? [...(profile.inline_paratext ? [{ref: segments[first].ref,text: profile.inline_paratext}] : []),
+      ...segments.filter((_,i) => i < first || i > last).map(({ref,text}) => ({ref,text}))]
+    : row.section.profile === AN_MIND_SECTION_PROFILE
     ? [{ref: segments[first].ref,text: profile.inline_paratext}, ...segments.filter((_,i) => i < first || i > last).map(({ref,text}) => ({ref,text}))]
     : row.section.profile === 'ati-sn27-feelings-v1'
     ? [{ref: 'sn27.5/2', text: 'Pañcamaṃ.'}] : outside.map(({ref,text}) => ({ref,text}));

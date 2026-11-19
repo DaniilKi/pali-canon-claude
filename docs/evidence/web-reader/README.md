@@ -27,3 +27,5 @@ The [study-tool acceptance](STUDY_TOOLS.md) records the preceding slice:
 The [earlier follow-up review](FOLLOWUP_REVIEW.md) records the previous supplementary-reader scope. Its [101-check browser report](browser-check-supplementary.json) and [28-scan accessibility report](accessibility-check-supplementary.json) are retained separately so historical receipts do not silently change meaning.
 
 Reports use real bundled data plus clearly identified synthetic failure fixtures. They do not claim production hosting, live upstream availability, full client/device support, human accessibility certification or scholarly review. See [the reader guide](../../web-app.md) for features, running instructions and next priorities.
+
+The [expanded text-spacing audit](TEXT_SPACING.md) records 24 representative reading/study workflows at 320/390/1280 CSS-pixel widths in both themes, with checkout, axe and extracted-package receipts and explicit device/human-testing limits.

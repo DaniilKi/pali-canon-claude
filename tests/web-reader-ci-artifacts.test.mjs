@@ -12,6 +12,13 @@ test('every browser-group JSON report is retained as a CI artifact',()=>{
  assert.ok(selected?.includes('conflicts'),'local note-conflict acceptance is selected');
  assert.ok(selected?.includes('booksearch'),'complete source-book search acceptance is selected');
  assert.ok(selected?.includes('chapters'),'chapter and compact-context acceptance is selected');
+ for(const name of ['anten','textspacing']){
+  assert.ok(selected?.includes(name),name+' acceptance is selected');
+  const steps=[...group.matchAll(new RegExp("if: matrix\\.group == '"+name+"'([^]*?)(?=\\n      -|$)",'g'))].map(match=>match[1]).join('\n');
+  assert.match(steps,/--a11y/,name+' accessibility mode runs');
+  assert.match(steps,/--(?:package|server)-dir/,name+' isolated package mode runs');
+  assert.ok((steps.match(/--report/g)||[]).length>=3,name+' retains normal, accessibility and isolated package reports');
+ }
  for(const condition of group.matchAll(/matrix\.group == '([^']+)'/g))assert.ok(selected.includes(condition[1]),`browser group ${condition[1]} has steps but is never selected`);
  const produced=new Set([...group.matchAll(/--report\s+([\w.-]+\.report\.json)/g)].map(x=>x[1]));
  for(const x of group.matchAll(/>\s+([\w.-]+\.report\.json)/g))produced.add(x[1]);

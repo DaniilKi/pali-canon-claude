@@ -471,10 +471,12 @@ test('reviewed PTS discrepancy, paragraph numbering and abbreviated sublime atti
   assert.match(row('an10.219').mapping_note, /Both published editions abbreviate compassion and appreciation.*Two Notes.*editorial/);
 });
 
-test('four-text Luminous and six-text Mother pages remain withheld as ordinary individual ATI translations', () => {
+test('unreviewed whole-page Luminous and Mother assignments stay withheld while finite Luminous selections coexist', () => {
   for (const path of ['/tipitaka/an/an01/an01.049.than', '/tipitaka/sn/sn15/sn15.014.than']) {
     assert.ok(!manifest.links.some(r => r.path === path));
-    assert.ok(!Object.values(canon.load().translations).flat().some(l => l.path === path && !Object.hasOwn(l, 'shared_scope')));
+    const links=Object.values(canon.load().translations).flat().filter(l=>l.path===path);
+    assert.ok(!links.some(l=>!Object.hasOwn(l,'shared_scope')&&!Object.hasOwn(l,'section')));
+    if(path.includes('an01.049')){assert.equal(links.filter(l=>l.section?.profile==='ati-an-ten-paragraph-selection-v1').length,4);assert.equal(links.filter(l=>l.shared_scope).length,1);}else assert.equal(links.filter(l=>l.section).length,0);
   }
 });
 
