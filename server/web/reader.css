@@ -85,3 +85,6 @@ main:focus{outline:none}
 .source-search-results{display:grid;gap:18px;min-width:0}.source-search-results>article{min-width:0;overflow-wrap:anywhere}.source-search-results>article>.entry{display:block;margin-bottom:8px}.source-search-context{margin-top:16px;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);min-width:0;overflow-wrap:anywhere}.source-search-context:focus{outline:2px solid var(--accent);outline-offset:3px}.source-search-context h3{margin-top:0}.source-search-context h4{font-size:15px;overflow-wrap:anywhere}.source-search-context .search-match{border-inline-start:3px solid var(--accent);padding-inline-start:12px}.source-search-context .source-badge{font-weight:700}.source-search-context>.button{display:inline-block;margin-block:12px}
 /* Open phone tools need a full row; native chapter selectors must not share a narrow track with their button. */
 @media(max-width:760px){.study-actions[open]{flex-basis:100%}.chapter-picker{grid-template-columns:minmax(0,1fr)}.chapter-picker select{min-width:0;max-width:100%}.chapter-picker button{width:100%}}
+
+/* Exact source identifiers remain copyable while reflowing on narrow screens. */
+.source-version{overflow-wrap:anywhere}

@@ -14,10 +14,11 @@ import { paritta } from '../src/paritta.mjs';
 import { findTalks } from '../src/talks.mjs';
 import { syntheticShared, sharedIds } from './helpers/shared-translation.mjs';
 import { syntheticHtml, syntheticText, syntheticLink } from './helpers/partial-translation.mjs';
+import {retainedAtiShared} from '../src/ati-section-registry.mjs';
 const originalFetch = globalThis.fetch; let saved, savedUrls;
 function install(link = syntheticShared()) {
   const d = canon.load(); saved ||= d.translations;
-  d.translations = Object.fromEntries(Object.entries(d.translations).map(([id, links]) => [id, links.filter(l => !Object.hasOwn(l, 'shared_scope'))]).filter(([, links]) => links.length));
+  d.translations = Object.fromEntries(Object.entries(d.translations).map(([id, links]) => [id, links.filter(l => !Object.hasOwn(l, 'shared_scope') || retainedAtiShared(l,d.byId.get(id)))]).filter(([, links]) => links.length));
   for (const id of sharedIds) delete d.translations[id];
   if (link) d.translations[sharedIds[0]] = [link];
   return canon.resolve('iti11').unit;
@@ -29,9 +30,10 @@ test('one shared declaration reaches exactly the declared members and counts one
   install(null); const before = translationCoverage({ refresh: true }).total, cliBefore = buildCoverage();
   const unit = install(); const after = translationCoverage({ refresh: true }).total, cli = buildCoverage();
   for (const key of ['links', 'with_english', 'with_english_including_inherited']) assert.equal(after[key], before[key], key);
-  assert.equal(after.shared_links, 1); assert.equal(after.with_shared_english, 4); assert.equal(after.shared_only, 4);
+  assert.equal(before.shared_links, 5); assert.equal(before.with_shared_english, 30); assert.equal(before.shared_only, 0);
+  assert.equal(after.shared_links, before.shared_links + 1); assert.equal(after.with_shared_english, before.with_shared_english + 4); assert.equal(after.shared_only, before.shared_only + 4);
   for (const key of ['direct', 'english', 'dhammatalks']) assert.equal(cli[key], cliBefore[key], key);
-  assert.equal(cli.shared_texts, 4); assert.equal(cli.shared_links, 1); assert.equal(cli.shared_dhammatalks, 1);
+  assert.equal(cli.shared_texts, cliBefore.shared_texts + 4); assert.equal(cli.shared_links, cliBefore.shared_links + 1); assert.equal(cli.shared_dhammatalks, 1);
   for (const id of sharedIds) { const meta = canon.describe(canon.resolve(id).unit); assert.equal(meta.english_available, 0); assert.equal(meta.shared_english_available, 1); assert.deepEqual(meta.english[0].translation_scope.text_ids, sharedIds); }
   assert.equal(canon.linksFor(canon.resolve('iti14').unit).links.some(l => l.shared_scope), false);
   assert.equal(english.available(unit)[0].translation_scope.individual_alignment_verified, false);

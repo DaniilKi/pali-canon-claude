@@ -29,6 +29,272 @@ const rows = [
   ['mil3.7.5', '3x', 'miln-3-7-05', 21, 1],
   ['mil3.7.8', '3x', 'miln-3-7-08', 7, 0],
 ];
+export const AN_TEN_SECTION_PROFILE = 'ati-an-ten-paragraph-selection-v1';
+export const AN_TEN_SECTION_PROFILES = Object.freeze([
+  {
+    "unit_id": "an1.45",
+    "path": "/tipitaka/an/an01/an01.045-046.than",
+    "anchor": null,
+    "selection_id": "an1.45",
+    "paragraphs": 1,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "75faa07ddb7e722fa7887d9d15fca0efe6d216c047f2fcbeef73e8d5cc97ca32",
+    "parent_title": "Udakarahaka Suttas: A Pool of Water",
+    "chapter": 1,
+    "paragraph_first": 1,
+    "paragraph_last": 1,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": "Pañcamaṃ.",
+    "paratext": [
+      {
+        "ref": "an1.45/1",
+        "text": "Pañcamaṃ."
+      }
+    ]
+  },
+  {
+    "unit_id": "an1.46",
+    "path": "/tipitaka/an/an01/an01.045-046.than",
+    "anchor": null,
+    "selection_id": "an1.46",
+    "paragraphs": 1,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "75faa07ddb7e722fa7887d9d15fca0efe6d216c047f2fcbeef73e8d5cc97ca32",
+    "parent_title": "Udakarahaka Suttas: A Pool of Water",
+    "chapter": 2,
+    "paragraph_first": 1,
+    "paragraph_last": 1,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": "Chaṭṭhaṃ.",
+    "paratext": [
+      {
+        "ref": "an1.46/1",
+        "text": "Chaṭṭhaṃ."
+      }
+    ]
+  },
+  {
+    "unit_id": "an1.49",
+    "path": "/tipitaka/an/an01/an01.049.than",
+    "anchor": null,
+    "selection_id": "an1.49",
+    "paragraphs": 1,
+    "notes": 1,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+    "parent_title": "Pabhassara Sutta: Luminous",
+    "chapter": 1,
+    "paragraph_first": 1,
+    "paragraph_last": 1,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": "Navamaṃ.",
+    "paratext": [
+      {
+        "ref": "an1.49/1",
+        "text": "Navamaṃ."
+      }
+    ]
+  },
+  {
+    "unit_id": "an1.50",
+    "path": "/tipitaka/an/an01/an01.049.than",
+    "anchor": null,
+    "selection_id": "an1.50",
+    "paragraphs": 1,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+    "parent_title": "Pabhassara Sutta: Luminous",
+    "chapter": 1,
+    "paragraph_first": 2,
+    "paragraph_last": 2,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": "Dasamaṃ.",
+    "paratext": [
+      {
+        "ref": "an1.50/1",
+        "text": "Dasamaṃ."
+      },
+      {
+        "ref": "an1.50/2",
+        "text": "Paṇihitaacchavaggo pañcamo."
+      }
+    ]
+  },
+  {
+    "unit_id": "an1.51",
+    "path": "/tipitaka/an/an01/an01.049.than",
+    "anchor": null,
+    "selection_id": "an1.51",
+    "paragraphs": 1,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+    "parent_title": "Pabhassara Sutta: Luminous",
+    "chapter": 1,
+    "paragraph_first": 3,
+    "paragraph_last": 3,
+    "first_ref_number": 2,
+    "last_ref_number": 2,
+    "inline_paratext": "Paṭhamaṃ.",
+    "paratext": [
+      {
+        "ref": "an1.51/2",
+        "text": "Paṭhamaṃ."
+      },
+      {
+        "ref": "an1.51/1",
+        "text": "6. Accharāsaṅghātavaggo"
+      }
+    ]
+  },
+  {
+    "unit_id": "an1.52",
+    "path": "/tipitaka/an/an01/an01.049.than",
+    "anchor": null,
+    "selection_id": "an1.52",
+    "paragraphs": 1,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+    "parent_title": "Pabhassara Sutta: Luminous",
+    "chapter": 1,
+    "paragraph_first": 4,
+    "paragraph_last": 4,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": "Dutiyaṃ.",
+    "paratext": [
+      {
+        "ref": "an1.52/1",
+        "text": "Dutiyaṃ."
+      }
+    ]
+  },
+  {
+    "unit_id": "an2.32",
+    "path": "/tipitaka/an/an02/an02.031.than",
+    "anchor": null,
+    "selection_id": "an2.32",
+    "paragraphs": 3,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "ee088cf5338b2b59fda67eb3374f2ee3cafc1a711c54c39319d895ee5d300626",
+    "parent_title": "Kataññu Suttas: Gratitude",
+    "chapter": 1,
+    "paragraph_first": 1,
+    "paragraph_last": 3,
+    "first_ref_number": 2,
+    "last_ref_number": 3,
+    "inline_paratext": null,
+    "paratext": [
+      {
+        "ref": "an2.32/1",
+        "text": "4. Samacittavaggo"
+      }
+    ]
+  },
+  {
+    "unit_id": "an2.33",
+    "path": "/tipitaka/an/an02/an02.031.than",
+    "anchor": "s32",
+    "selection_id": "an2.33",
+    "paragraphs": 1,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "ee088cf5338b2b59fda67eb3374f2ee3cafc1a711c54c39319d895ee5d300626",
+    "parent_title": "Kataññu Suttas: Gratitude",
+    "chapter": 1,
+    "paragraph_first": 4,
+    "paragraph_last": 4,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": null,
+    "paratext": []
+  },
+  {
+    "unit_id": "an2.125",
+    "path": "/tipitaka/an/an02/an02.125-126.than",
+    "anchor": null,
+    "selection_id": "an2.125",
+    "paragraphs": 1,
+    "notes": 1,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "df8584c8489b6cb76b34d8578ff06261a6092f4860216cea6bd6efbde2cccfdb",
+    "parent_title": "Ghosa Suttas: Voice",
+    "chapter": 1,
+    "paragraph_first": 1,
+    "paragraph_last": 1,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": null,
+    "paratext": []
+  },
+  {
+    "unit_id": "an2.126",
+    "path": "/tipitaka/an/an02/an02.125-126.than",
+    "anchor": null,
+    "selection_id": "an2.126",
+    "paragraphs": 1,
+    "notes": 0,
+    "profile": "ati-an-ten-paragraph-selection-v1",
+    "kind": "paragraph_selection",
+    "collection": "an",
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC-BY-NC",
+    "source_html_sha256": "df8584c8489b6cb76b34d8578ff06261a6092f4860216cea6bd6efbde2cccfdb",
+    "parent_title": "Ghosa Suttas: Voice",
+    "chapter": 1,
+    "paragraph_first": 2,
+    "paragraph_last": 2,
+    "first_ref_number": 1,
+    "last_ref_number": 1,
+    "inline_paratext": null,
+    "paratext": []
+  }
+].map(row => Object.freeze({...row, paratext: Object.freeze(row.paratext.map(value => Object.freeze(value)))})));
 export const ATI_SECTION_PROFILES = Object.freeze([...rows.map(([unit_id, part, anchor, paragraphs, notes]) => Object.freeze({
   unit_id, path: page + part + '.kell', anchor, paragraphs, notes,
   profile: ATI_SECTION_PROFILE, collection: 'mil', translator: 'John Kelly', license: ATI_SECTION_LICENSE,
@@ -45,6 +311,36 @@ export const ATI_SECTION_PROFILES = Object.freeze([...rows.map(([unit_id, part, 
   label: `${number}.`, first_ref_number, inline_paratext,
   root_heading: number === 21 ? '3. Akammaniyavaggo' : number === 31 ? '4. Adantavaggo' : null,
   tail_paratext: number === 30 ? 'Akammaniyavaggo tatiyo.' : number === 40 ? 'Adantavaggo catuttho.' : null,
-}))]);
-export const isAtiSectionId = id => typeof id === 'string' && ATI_SECTION_PROFILES.some(row => id === `ati:${row.path}#${row.anchor}`);
+})), ...AN_TEN_SECTION_PROFILES]);
+export const reviewedSectionIdentity = row => `ati:${row.path}${row.section?.selection_id ? '::selection:' + row.section.selection_id : '#' + (row.section?.anchor ?? row.anchor)}`;
+export const isAtiSectionId = id => typeof id === 'string' && ATI_SECTION_PROFILES.some(row => id === (row.selection_id ? `ati:${row.path}::selection:${row.selection_id}` : `ati:${row.path}#${row.anchor}`));
 export const isAtiSectionPath = path => ATI_SECTION_PROFILES.some(row => row.path === path);
+
+/** Five pre-existing consent-scoped editions remain exactly themselves. */
+export const ATI_RETAINED_SHARED_BINDINGS = Object.freeze([
+  {
+    "owner": "an1.21",
+    "path": "/tipitaka/an/an01/an01.021-040.than",
+    "sha256": "67e00d1d18e2f94eb11d297d6b79e719d144a3c19c961b114af9c192556078cb"
+  },
+  {
+    "owner": "an1.49",
+    "path": "/tipitaka/an/an01/an01.049.than",
+    "sha256": "a2c2cc60601e1452e1a2c4e1d2559e840d9af81971bf8cbc1c0c39d3f97c1788"
+  },
+  {
+    "owner": "an1.45",
+    "path": "/tipitaka/an/an01/an01.045-046.than",
+    "sha256": "6bf4ee03645107957dead77ee90db44b0da9774562243ff22a4e34c2b54c1a0a"
+  },
+  {
+    "owner": "an2.32",
+    "path": "/tipitaka/an/an02/an02.031.than",
+    "sha256": "838054ead5fcd616b8da512e9cc9094987bc92a9539b897dd4265ab255f3c895"
+  },
+  {
+    "owner": "an2.125",
+    "path": "/tipitaka/an/an02/an02.125-126.than",
+    "sha256": "5a3ef438de5d3288a3e4239ec1838c69a45fd94003642faf3262e060e0cd4e3c"
+  }
+].map(row => Object.freeze(row)));

@@ -1007,32 +1007,68 @@
     const n = i + 21;
     return [numberedPage + "#sutta-" + n, { unit: "an1." + n, notes: 0, paragraphs: 1, profile: "ati-an1-ekadhamma-numbered-paragraph-v1", heading: n + "." }];
   }));
-  var sourceProfile = (id5) => units.get(id5) || discourses.get(id5) || numbered.get(id5);
+  var AN_TEN_PROFILE = "ati-an-ten-paragraph-selection-v1";
+  var anTen = /* @__PURE__ */ new Map([
+    ["ati:/tipitaka/an/an01/an01.045-046.than::selection:an1.45", { unit: "an1.45", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an01/an01.045-046.than::selection:an1.46", { unit: "an1.46", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an01/an01.049.than::selection:an1.49", { unit: "an1.49", paragraphs: 1, notes: 1, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an01/an01.049.than::selection:an1.50", { unit: "an1.50", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an01/an01.049.than::selection:an1.51", { unit: "an1.51", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an01/an01.049.than::selection:an1.52", { unit: "an1.52", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an02/an02.031.than::selection:an2.32", { unit: "an2.32", paragraphs: 3, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an02/an02.031.than::selection:an2.33", { unit: "an2.33", paragraphs: 1, notes: 0, anchor: "s32", heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an02/an02.125-126.than::selection:an2.125", { unit: "an2.125", paragraphs: 1, notes: 1, anchor: null, heading: null, profile: AN_TEN_PROFILE }],
+    ["ati:/tipitaka/an/an02/an02.125-126.than::selection:an2.126", { unit: "an2.126", paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE }]
+  ]);
+  var legacyAnTen = /* @__PURE__ */ new Map([
+    ["ati:/tipitaka/an/an01/an01.049.than", { "owner_id": "an1.49", "text_ids": ["an1.49", "an1.50", "an1.51", "an1.52"], "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070", "pali_sha256": "5c98023f2f97b51c5ea9ef76b4a031ac9725ec8cecee8fbacc0f2c0ecf3f77a0", "text_sha256": "35182e6e8d3990b8cb6ace20602277a5d409fd45c5a44b9e277ec25995084c60", "notice_sha256": "3b8f3fab868dd8176bb2cce37b9e9437bdca790a6a415a0f67ee589ce099b1fe", "scope_sha256": "bf2fca5a6b857f8cf313ef9f01e7e4d937088d9eb52ba3fb8890d214728f7881" }],
+    ["ati:/tipitaka/an/an01/an01.045-046.than", { "owner_id": "an1.45", "text_ids": ["an1.45", "an1.46"], "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070", "pali_sha256": "3842fa2b62de5f546e83337c603df9bfa49cda6be1092221b102b7ea20cf4005", "text_sha256": "7297c6cf82b7abe3f94ad8e6fdc5e8fc1c03a6b3c896a2a1bcf5fa895bef69fd", "notice_sha256": "c6f4d4898e1844091dabb21aa338b492be115913f2af077c2bd57708890a8bfb", "scope_sha256": "0cf6a057f1c0ded3c569a2e71beece92f0597c1d345c0fdb44df7d5856bd09fe" }],
+    ["ati:/tipitaka/an/an02/an02.031.than", { "owner_id": "an2.32", "text_ids": ["an2.32", "an2.33"], "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070", "pali_sha256": "3f85a870476455991af56f4308b4fc92f73d0931c8cd17e18a171c374abfef96", "text_sha256": "68448c5eba804b236080fbb41641328da982639a295de44058e070ae99bd7495", "notice_sha256": "693ec730c062294a3570512540f883b863bb57f47765b3782199a9a404977d60", "scope_sha256": "8c2314215302c25b00437281a3af46dc4db66599fc1591aebf7e01c9fd80a5de" }],
+    ["ati:/tipitaka/an/an02/an02.125-126.than", { "owner_id": "an2.125", "text_ids": ["an2.125", "an2.126"], "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070", "pali_sha256": "01f88254cf733cc057f51d936a8203e51e447a5c711bfac3c7209ac269f44318", "text_sha256": "a5d4d3d63f2166947cbcb1ccaa12883f6fbd90ef4445c73ff1c4441064eff8ec", "notice_sha256": "d96963652b5b6f051df62ac6a54047af61d5f715b1dd3bcfdab4e62bc0b04de7", "scope_sha256": "af5aba23c950eb6804eb68fd23224ce8eca392a216f5aa5e02b399656a48fa87" }]
+  ]);
+  var sourceProfile = (id5) => units.get(id5) || discourses.get(id5) || numbered.get(id5) || anTen.get(id5);
   var milindaSourceUnit = (id5) => units.get(id5)?.unit;
   var numberedSourceUnit = (id5) => numbered.get(id5)?.unit;
+  var anTenSourceUnit = (id5) => anTen.get(id5)?.unit;
   var sectionSourceUnit = (id5) => sourceProfile(id5)?.unit;
   function validateSectionIdentity(value) {
-    const id5 = value.translation_id;
+    const id5 = value?.translation_id;
     if (typeof id5 !== "string") return;
     let decoded = id5;
-    try {
-      decoded = decodeURIComponent(id5);
-    } catch {
+    for (let i = 0; i < 4; i++) {
+      try {
+        const next = decodeURIComponent(decoded);
+        if (next === decoded) break;
+        decoded = next;
+      } catch {
+        break;
+      }
     }
-    const resource = decoded.split(/[?#]/, 1)[0].replace(/\.html?$/i, "").toLowerCase();
+    if (/^ati:/i.test(id5.trim()) && id5.includes("%")) throw Error("The source section requires its exact reviewed fragment identity or paragraph-selection identity; encoded aliases are unsupported. No English source was displayed.");
+    const resource = decoded.trim().split(/::|[?#]/, 1)[0].replace(/\.html?$/i, "").toLowerCase();
     const scope = value.translation_scope;
     if (id5 === numberedPage && !Object.hasOwn(value, "source_section") && (!Object.hasOwn(value, "whole_unit_coverage") || value.whole_unit_coverage === false) && scope?.kind === "shared_page" && scope.whole_unit_coverage === false && scope.owner_id === "an1.21" && scope.presentation === "compilation" && Array.isArray(scope.text_ids) && scope.text_ids.length === 20 && scope.text_ids.every((unit, i) => unit === "an1." + (i + 21)) && Object.entries(legacyNumberedPins).every(([key4, pin]) => scope[key4] === pin)) return;
-    if ((isSectionPageId(resource) || /^ati:/i.test(decoded) && decoded.includes("#")) && !sourceProfile(id5)) throw Error("The source section requires its exact reviewed fragment identity. No English source was displayed.");
+    const legacy = legacyAnTen.get(id5);
+    if (legacy && !Object.hasOwn(value, "source_section") && (!Object.hasOwn(value, "whole_unit_coverage") || value.whole_unit_coverage === false) && scope?.kind === "shared_page" && scope.version === 1 && scope.whole_unit_coverage === false && scope.presentation === "compilation" && scope.condensed === false && scope.individual_alignment_verified === false && Object.entries(legacy).every(([key4, pin]) => Array.isArray(pin) ? Array.isArray(scope[key4]) && scope[key4].length === pin.length && scope[key4].every((unit, i) => unit === pin[i]) : scope[key4] === pin)) return;
+    if ((isSectionPageId(resource) || decoded.includes("::") || /^ati:/i.test(decoded.trim()) && decoded.includes("#")) && !sourceProfile(id5)) throw Error("The source section requires its exact reviewed fragment identity. No English source was displayed.");
   }
   function validateSectionDescriptor(value) {
     validateSectionIdentity(value);
     const profile2 = sourceProfile(value.translation_id);
     if (!profile2) return;
     const section = value.source_section;
+    if (anTen.has(value.translation_id)) {
+      const keys2 = "anchor,first_ref,heading,last_ref,note_count,notes_sha256,notice_sha256,pali_sha256,paragraph_count,profile,section_html_sha256,selection_id,source_commit,status,text_sha256,unit_id,version";
+      const first = profile2.unit === "an1.51" || profile2.unit === "an2.32" ? 2 : 1;
+      const last = profile2.unit === "an2.32" ? 3 : first;
+      const hashes = ["section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256"];
+      if (!section || Object.keys(section).sort().join(",") !== keys2 || section.version !== 1 || section.status !== "reviewed" || section.profile !== AN_TEN_PROFILE || section.unit_id !== profile2.unit || section.selection_id !== profile2.unit || section.anchor !== profile2.anchor || section.heading !== null || section.paragraph_count !== profile2.paragraphs || section.note_count !== profile2.notes || section.source_commit !== legacyAnTen.get(value.translation_id.split("::")[0]).source_commit || !hashes.every((key4) => typeof section[key4] === "string" && /^[a-f0-9]{64}$/.test(section[key4])) || section.first_ref !== profile2.unit + "/" + first || section.last_ref !== profile2.unit + "/" + last) throw Error("The reviewed paragraph-selection descriptor or translator-note count is invalid. No English source was displayed.");
+      return;
+    }
     if (!section || section.version !== 1 || section.status !== "reviewed" || section.unit_id !== profile2.unit || section.anchor !== value.translation_id.split("#")[1] || section.note_count !== profile2.notes || profile2.profile !== void 0 && section.profile !== profile2.profile || profile2.heading !== void 0 && section.heading !== profile2.heading || profile2.paragraphs !== void 0 && section.paragraph_count !== profile2.paragraphs) throw Error("The reviewed source-section descriptor or translator-note count is invalid. No English source was displayed.");
   }
   var isMilindaPageId = (id5) => /^ati:\/tipitaka\/kn\/miln\/miln\.[23]x\.kell$/.test(id5);
-  var isSectionPageId = (id5) => isMilindaPageId(id5) || id5 === "ati:/tipitaka/sn/sn27/sn27.001-010.than" || id5 === numberedPage;
+  var isSectionPageId = (id5) => isMilindaPageId(id5) || id5 === "ati:/tipitaka/sn/sn27/sn27.001-010.than" || id5 === numberedPage || legacyAnTen.has(id5);
   function translatorNotes(data) {
     validateSectionDescriptor(data);
     if (!Object.hasOwn(data, "translator_notes")) {
@@ -1064,6 +1100,11 @@
     return decoded.trim().split(/[?#]/, 1)[0].replace(/\.html?$/i, "").toLowerCase() === MEDICINE_ID;
   }
   function scopeDescriptor(choice, requestedId) {
+    validateSectionIdentity(choice);
+    if (sectionSourceUnit(choice?.translation_id)) {
+      validateSectionDescriptor(choice);
+      if (sectionSourceUnit(choice.translation_id) !== requestedId || own3(choice, "translation_scope") || own3(choice, "whole_unit_coverage") && choice.whole_unit_coverage !== true) throw Error("The reviewed source section belongs to another selection or changed scope. No English source was requested.");
+    }
     const fail9 = () => {
       throw new Error("This source has an unsupported or incomplete scope declaration. No scoped source was requested. Reload the passage and review the updated sources.");
     };
@@ -1108,7 +1149,7 @@
     const choice = context.choices.find((c) => c.translation_id === data.translation_id);
     if (!choice) throw new Error("The returned English source version was not in the reviewed list. Reload the passage and review sources again.");
     if (medicineFamily(choice.translation_id) || choice.translation_scope?.extractor === MEDICINE_EXTRACTOR) scopeDescriptor(choice, context.uid);
-    if (sectionSourceUnit(data.translation_id) && (!own3(choice, "source_section") || !sameScope(data.source_section, choice.source_section) || data.source_section?.unit_id !== context.uid || data.source_section?.anchor !== data.translation_id.split("#")[1] || data.source_section?.status !== "reviewed")) throw new Error(milindaSourceUnit(data.translation_id) ? "The reviewed question identity changed. Reload the passage and review sources again; no English was displayed." : "The reviewed discourse identity changed. Reload the passage and review sources again; no English was displayed.");
+    if (sectionSourceUnit(data.translation_id) && (!own3(choice, "source_section") || !sameScope(data.source_section, choice.source_section) || data.source_section?.unit_id !== context.uid || !anTenSourceUnit(data.translation_id) && data.source_section?.anchor !== data.translation_id.split("#")[1] || data.source_section?.status !== "reviewed")) throw new Error(milindaSourceUnit(data.translation_id) ? "The reviewed question identity changed. Reload the passage and review sources again; no English was displayed." : "The reviewed discourse identity changed. Reload the passage and review sources again; no English was displayed.");
     if (context.accepted) {
       const accepted = context.accepted;
       if (data.translation_id !== args.translation || data.whole_unit_coverage !== false || !own3(data, "translation_scope") || !sameScope(data.translation_scope, accepted.scope)) throw new Error("The source scope or version changed after review. Reload the passage and give fresh consent; no scoped text was displayed.");
@@ -1814,6 +1855,271 @@
     ["mil3.7.5", "3x", "miln-3-7-05", 21, 1],
     ["mil3.7.8", "3x", "miln-3-7-08", 7, 0]
   ];
+  var AN_TEN_SECTION_PROFILES = Object.freeze([
+    {
+      "unit_id": "an1.45",
+      "path": "/tipitaka/an/an01/an01.045-046.than",
+      "anchor": null,
+      "selection_id": "an1.45",
+      "paragraphs": 1,
+      "notes": 0,
+      "profile": "ati-an-ten-paragraph-selection-v1",
+      "kind": "paragraph_selection",
+      "collection": "an",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_html_sha256": "75faa07ddb7e722fa7887d9d15fca0efe6d216c047f2fcbeef73e8d5cc97ca32",
+      "parent_title": "Udakarahaka Suttas: A Pool of Water",
+      "chapter": 1,
+      "paragraph_first": 1,
+      "paragraph_last": 1,
+      "first_ref_number": 1,
+      "last_ref_number": 1,
+      "inline_paratext": "Pa\xF1cama\u1E43.",
+      "paratext": [
+        {
+          "ref": "an1.45/1",
+          "text": "Pa\xF1cama\u1E43."
+        }
+      ]
+    },
+    {
+      "unit_id": "an1.46",
+      "path": "/tipitaka/an/an01/an01.045-046.than",
+      "anchor": null,
+      "selection_id": "an1.46",
+      "paragraphs": 1,
+      "notes": 0,
+      "profile": "ati-an-ten-paragraph-selection-v1",
+      "kind": "paragraph_selection",
+      "collection": "an",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_html_sha256": "75faa07ddb7e722fa7887d9d15fca0efe6d216c047f2fcbeef73e8d5cc97ca32",
+      "parent_title": "Udakarahaka Suttas: A Pool of Water",
+      "chapter": 2,
+      "paragraph_first": 1,
+      "paragraph_last": 1,
+      "first_ref_number": 1,
+      "last_ref_number": 1,
+      "inline_paratext": "Cha\u1E6D\u1E6Dha\u1E43.",
+      "paratext": [
+        {
+          "ref": "an1.46/1",
+          "text": "Cha\u1E6D\u1E6Dha\u1E43."
+        }
+      ]
+    },
+    {
+      "unit_id": "an1.49",
+      "path": "/tipitaka/an/an01/an01.049.than",
+      "anchor": null,
+      "selection_id": "an1.49",
+      "paragraphs": 1,
+      "notes": 1,
+      "profile": "ati-an-ten-paragraph-selection-v1",
+      "kind": "paragraph_selection",
+      "collection": "an",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+      "parent_title": "Pabhassara Sutta: Luminous",
+      "chapter": 1,
+      "paragraph_first": 1,
+      "paragraph_last": 1,
+      "first_ref_number": 1,
+      "last_ref_number": 1,
+      "inline_paratext": "Navama\u1E43.",
+      "paratext": [
+        {
+          "ref": "an1.49/1",
+          "text": "Navama\u1E43."
+        }
+      ]
+    },
+    {
+      "unit_id": "an1.50",
+      "path": "/tipitaka/an/an01/an01.049.than",
+      "anchor": null,
+      "selection_id": "an1.50",
+      "paragraphs": 1,
+      "notes": 0,
+      "profile": "ati-an-ten-paragraph-selection-v1",
+      "kind": "paragraph_selection",
+      "collection": "an",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+      "parent_title": "Pabhassara Sutta: Luminous",
+      "chapter": 1,
+      "paragraph_first": 2,
+      "paragraph_last": 2,
+      "first_ref_number": 1,
+      "last_ref_number": 1,
+      "inline_paratext": "Dasama\u1E43.",
+      "paratext": [
+        {
+          "ref": "an1.50/1",
+          "text": "Dasama\u1E43."
+        },
+        {
+          "ref": "an1.50/2",
+          "text": "Pa\u1E47ihitaacchavaggo pa\xF1camo."
+        }
+      ]
+    },
+    {
+      "unit_id": "an1.51",
+      "path": "/tipitaka/an/an01/an01.049.than",
+      "anchor": null,
+      "selection_id": "an1.51",
+      "paragraphs": 1,
+      "notes": 0,
+      "profile": "ati-an-ten-paragraph-selection-v1",
+      "kind": "paragraph_selection",
+      "collection": "an",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+      "parent_title": "Pabhassara Sutta: Luminous",
+      "chapter": 1,
+      "paragraph_first": 3,
+      "paragraph_last": 3,
+      "first_ref_number": 2,
+      "last_ref_number": 2,
+      "inline_paratext": "Pa\u1E6Dhama\u1E43.",
+      "paratext": [
+        {
+          "ref": "an1.51/2",
+          "text": "Pa\u1E6Dhama\u1E43."
+        },
+        {
+          "ref": "an1.51/1",
+          "text": "6. Acchar\u0101sa\u1E45gh\u0101tavaggo"
+        }
+      ]
+    },
+    {
+      "unit_id": "an1.52",
+      "path": "/tipitaka/an/an01/an01.049.than",
+      "anchor": null,
+      "selection_id": "an1.52",
+      "paragraphs": 1,
+      "notes": 0,
+      "profile": "ati-an-ten-paragraph-selection-v1",
+      "kind": "paragraph_selection",
+      "collection": "an",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_html_sha256": "ea6989be10cd3225abb2d08d4f2947c94ba6f59b49532fa47347e75b080023da",
+      "parent_title": "Pabhassara Sutta: Luminous",
+      "chapter": 1,
+      "paragraph_first": 4,
+      "paragraph_last": 4,
+      "first_ref_number": 1,
+      "last_ref_number": 1,
+      "inline_paratext": "Dutiya\u1E43.",
+      "paratext": [
+        {
+          "ref": "an1.52/1",
+          "text": "Dutiya\u1E43."
+        }
+      ]
+    },
+    {
+      "unit_id": "an2.32",
+      "path": "/tipitaka/an/an02/an02.031.than",
+      "anchor": null,
+      "selection_id": "an2.32",
+      "paragraphs": 3,
+      "notes": 0,
+      "profile": "ati-an-ten-paragraph-selection-v1",
+      "kind": "paragraph_selection",
+      "collection": "an",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_html_sha256": "ee088cf5338b2b59fda67eb3374f2ee3cafc1a711c54c39319d895ee5d300626",
+      "parent_title": "Kata\xF1\xF1u Suttas: Gratitude",
+      "chapter": 1,
+      "paragraph_first": 1,
+      "paragraph_last": 3,
+      "first_ref_number": 2,
+      "last_ref_number": 3,
+      "inline_paratext": null,
+      "paratext": [
+        {
+          "ref": "an2.32/1",
+          "text": "4. Samacittavaggo"
+        }
+      ]
+    },
+    {
+      "unit_id": "an2.33",
+      "path": "/tipitaka/an/an02/an02.031.than",
+      "anchor": "s32",
+      "selection_id": "an2.33",
+      "paragraphs": 1,
+      "notes": 0,
+      "profile": "ati-an-ten-paragraph-selection-v1",
+      "kind": "paragraph_selection",
+      "collection": "an",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_html_sha256": "ee088cf5338b2b59fda67eb3374f2ee3cafc1a711c54c39319d895ee5d300626",
+      "parent_title": "Kata\xF1\xF1u Suttas: Gratitude",
+      "chapter": 1,
+      "paragraph_first": 4,
+      "paragraph_last": 4,
+      "first_ref_number": 1,
+      "last_ref_number": 1,
+      "inline_paratext": null,
+      "paratext": []
+    },
+    {
+      "unit_id": "an2.125",
+      "path": "/tipitaka/an/an02/an02.125-126.than",
+      "anchor": null,
+      "selection_id": "an2.125",
+      "paragraphs": 1,
+      "notes": 1,
+      "profile": "ati-an-ten-paragraph-selection-v1",
+      "kind": "paragraph_selection",
+      "collection": "an",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_html_sha256": "df8584c8489b6cb76b34d8578ff06261a6092f4860216cea6bd6efbde2cccfdb",
+      "parent_title": "Ghosa Suttas: Voice",
+      "chapter": 1,
+      "paragraph_first": 1,
+      "paragraph_last": 1,
+      "first_ref_number": 1,
+      "last_ref_number": 1,
+      "inline_paratext": null,
+      "paratext": []
+    },
+    {
+      "unit_id": "an2.126",
+      "path": "/tipitaka/an/an02/an02.125-126.than",
+      "anchor": null,
+      "selection_id": "an2.126",
+      "paragraphs": 1,
+      "notes": 0,
+      "profile": "ati-an-ten-paragraph-selection-v1",
+      "kind": "paragraph_selection",
+      "collection": "an",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "source_html_sha256": "df8584c8489b6cb76b34d8578ff06261a6092f4860216cea6bd6efbde2cccfdb",
+      "parent_title": "Ghosa Suttas: Voice",
+      "chapter": 1,
+      "paragraph_first": 2,
+      "paragraph_last": 2,
+      "first_ref_number": 1,
+      "last_ref_number": 1,
+      "inline_paratext": null,
+      "paratext": []
+    }
+  ].map((row) => Object.freeze({ ...row, paratext: Object.freeze(row.paratext.map((value) => Object.freeze(value))) })));
   var ATI_SECTION_PROFILES = Object.freeze([...rows.map(([unit_id, part, anchor, paragraphs, notes2]) => Object.freeze({
     unit_id,
     path: page + part + ".kell",
@@ -1853,8 +2159,35 @@
     inline_paratext,
     root_heading: number === 21 ? "3. Akammaniyavaggo" : number === 31 ? "4. Adantavaggo" : null,
     tail_paratext: number === 30 ? "Akammaniyavaggo tatiyo." : number === 40 ? "Adantavaggo catuttho." : null
-  }))]);
+  })), ...AN_TEN_SECTION_PROFILES]);
   var isAtiSectionPath = (path) => ATI_SECTION_PROFILES.some((row) => row.path === path);
+  var ATI_RETAINED_SHARED_BINDINGS = Object.freeze([
+    {
+      "owner": "an1.21",
+      "path": "/tipitaka/an/an01/an01.021-040.than",
+      "sha256": "67e00d1d18e2f94eb11d297d6b79e719d144a3c19c961b114af9c192556078cb"
+    },
+    {
+      "owner": "an1.49",
+      "path": "/tipitaka/an/an01/an01.049.than",
+      "sha256": "a2c2cc60601e1452e1a2c4e1d2559e840d9af81971bf8cbc1c0c39d3f97c1788"
+    },
+    {
+      "owner": "an1.45",
+      "path": "/tipitaka/an/an01/an01.045-046.than",
+      "sha256": "6bf4ee03645107957dead77ee90db44b0da9774562243ff22a4e34c2b54c1a0a"
+    },
+    {
+      "owner": "an2.32",
+      "path": "/tipitaka/an/an02/an02.031.than",
+      "sha256": "838054ead5fcd616b8da512e9cc9094987bc92a9539b897dd4265ab255f3c895"
+    },
+    {
+      "owner": "an2.125",
+      "path": "/tipitaka/an/an02/an02.125-126.than",
+      "sha256": "5a3ef438de5d3288a3e4239ec1838c69a45fd94003642faf3262e060e0cd4e3c"
+    }
+  ].map((row) => Object.freeze(row)));
 
   // src/citations.mjs
   var fold2 = (value) => value.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
@@ -3433,7 +3766,7 @@
     if (!owned.length) return;
     const section = el("section");
     section.setAttribute("aria-label", "Translator\u2019s notes");
-    section.append(el("h" + level, "Translator\u2019s notes \xB7 not translated question text"));
+    section.append(el("h" + level, anTenSourceUnit(data.translation_id) ? "Translator\u2019s notes \xB7 editorial, not canonical discourse text" : "Translator\u2019s notes \xB7 not translated question text"));
     const list = el("ol");
     for (const note2 of owned) {
       const item = el("li");
@@ -4621,7 +4954,7 @@
       const choice = context.choices.find((c) => c.translation_id === id5), panel = el("article", void 0, "comparison-panel");
       panel.setAttribute("aria-label", "English comparison source \xB7 " + id5);
       panel.setAttribute("aria-busy", "false");
-      panel.append(el("h4", [choice.translator, choice.source, choice.reference].filter(Boolean).join(" \xB7 ")), el("p", "Source version: " + id5, "muted"));
+      panel.append(el("h4", [choice.translator, choice.source, choice.reference].filter(Boolean).join(" \xB7 ")), el("p", "Source version: " + id5, "muted source-version"));
       const message = el("p", "No English requested yet.", "comparison-panel-status");
       message.setAttribute("role", "status");
       message.setAttribute("aria-label", "Comparison status \xB7 " + id5);
@@ -4704,11 +5037,12 @@
       const data = await tool("get_translation", args, "study");
       if (token !== epoch || studyToken !== studyEpoch) return;
       const next = validateEnglishPage(data, args, context), actualChoice = context.choices.find((c) => c.translation_id === data.translation_id);
-      target.replaceChildren(el("h3", (context.accepted?.kind === "shared_page" ? "Shared English source page \xB7 " : context.accepted ? "Partial English source \xB7 " : milindaSourceUnit(data.translation_id) ? "English question source \xB7 " : numberedSourceUnit(data.translation_id) ? "English numbered treatment source \xB7 " : sectionSourceUnit(data.translation_id) ? "English discourse source \xB7 " : "English source page \xB7 ") + data.translator));
-      target.append(el("p", "P\u0101li selection: " + context.citation + " \xB7 publisher reference: " + (actualChoice.reference || data.citation), "muted"), el("p", "Source version: " + data.translation_id, "muted"));
+      target.replaceChildren(el("h3", (context.accepted?.kind === "shared_page" ? "Shared English source page \xB7 " : context.accepted ? "Partial English source \xB7 " : milindaSourceUnit(data.translation_id) ? "English question source \xB7 " : anTenSourceUnit(data.translation_id) ? "English paragraph selection source \xB7 " : numberedSourceUnit(data.translation_id) ? "English numbered treatment source \xB7 " : sectionSourceUnit(data.translation_id) ? "English discourse source \xB7 " : "English source page \xB7 ") + data.translator));
+      target.append(el("p", "P\u0101li selection: " + context.citation + " \xB7 publisher reference: " + (actualChoice.reference || data.citation), "muted"), el("p", "Source version: " + data.translation_id, "muted source-version"));
       if (context.accepted) scopeSummary(context.accepted, target);
       if (data.translation_id !== args.translation) target.append(el("p", "The server returned a different listed source version. Read its source and fallback notes before quoting.", "notice"));
       if (milindaSourceUnit(data.translation_id)) target.append(el("p", "Complete substantive question selection. Other questions on the publisher page and untranslated P\u0101li paratext are outside this English selection.", "notice"));
+      else if (anTenSourceUnit(data.translation_id)) target.append(el("p", "Complete substantive discourse selected from exact paragraphs on the parent publisher page. The publisher title names that page; no individual publisher heading is supplied. Other discourses and untranslated P\u0101li paratext remain outside this selection. Any owned translator\u2019s notes are editorial, not canonical discourse text. This is not word-by-word alignment.", "notice"));
       else if (numberedSourceUnit(data.translation_id)) target.append(el("p", "Complete substantive numbered treatment selection. The printed number identifies this treatment; the publisher title names the complete page. Other treatments, untranslated P\u0101li paratext and forms of address are outside this English selection. This is not word-by-word alignment.", "notice"));
       else if (sectionSourceUnit(data.translation_id)) target.append(el("p", "Complete substantive discourse selection. Other discourses on the publisher page and untranslated P\u0101li paratext are outside this English selection.", "notice"));
       notes(data, target);

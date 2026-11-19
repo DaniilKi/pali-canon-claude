@@ -7,7 +7,7 @@ import { createSourcePassage } from './source-passage.mjs';
 import { scriptRefreshEligible, retainBookSearchDraft } from './script-refresh.mjs';
 import { localizeText } from '../src/script.mjs';
 import { scopeDescriptor, validateEnglishPage } from './translation-policy.mjs';
-import { translatorNotes, milindaSourceUnit, numberedSourceUnit, sectionSourceUnit } from './milinda-sources.mjs';
+import { translatorNotes, milindaSourceUnit, numberedSourceUnit, anTenSourceUnit, sectionSourceUnit } from './milinda-sources.mjs';
 import { planCatalog, planDay, daySignature, cleanProgress, planWindow, validatePlanPage } from './reading-plans.mjs';
 import { MAX_IMPORT_BYTES, parseBookmarks, bookmarkMerge } from './bookmark-import.mjs';
 import { validateDaily } from './daily-reading.mjs';
@@ -205,7 +205,7 @@ function notes(data, target = view) {
 function translatorNoteSection(data, target, level) {
   const owned = translatorNotes(data); if (!owned.length) return;
   const section = el('section'); section.setAttribute('aria-label', 'Translator’s notes');
-  section.append(el('h' + level, 'Translator’s notes · not translated question text'));
+  section.append(el('h' + level, anTenSourceUnit(data.translation_id) ? 'Translator’s notes · editorial, not canonical discourse text' : 'Translator’s notes · not translated question text'));
   const list = el('ol');
   for (const note of owned) { const item = el('li'); item.value = note.number; item.append(el('p', note.text, 'translator-note')); list.append(item); }
   section.append(list); target.append(section);
@@ -824,7 +824,7 @@ function compareEnglishSources(selected, token, context) {
   for (const id of ids) {
     const choice = context.choices.find(c => c.translation_id === id), panel = el('article', undefined, 'comparison-panel');
     panel.setAttribute('aria-label', 'English comparison source · ' + id); panel.setAttribute('aria-busy', 'false');
-    panel.append(el('h4', [choice.translator, choice.source, choice.reference].filter(Boolean).join(' · ')), el('p', 'Source version: ' + id, 'muted'));
+    panel.append(el('h4', [choice.translator, choice.source, choice.reference].filter(Boolean).join(' · ')), el('p', 'Source version: ' + id, 'muted source-version'));
     const message = el('p', 'No English requested yet.', 'comparison-panel-status'); message.setAttribute('role', 'status'); message.setAttribute('aria-label', 'Comparison status · ' + id);
     const progress = el('p', undefined, 'comparison-progress'), body = el('div', undefined, 'comparison-panel-body'), actions = el('div', undefined, 'toolbar comparison-actions');
     panel.append(message, progress, body, actions); grid.append(panel);
@@ -875,11 +875,12 @@ async function englishPage(args, token, context) {
   try {
     const data = await tool('get_translation', args, 'study'); if (token !== epoch || studyToken !== studyEpoch) return;
     const next = validateEnglishPage(data, args, context), actualChoice = context.choices.find(c => c.translation_id === data.translation_id);
-    target.replaceChildren(el('h3', (context.accepted?.kind === 'shared_page' ? 'Shared English source page · ' : context.accepted ? 'Partial English source · ' : milindaSourceUnit(data.translation_id) ? 'English question source · ' : numberedSourceUnit(data.translation_id) ? 'English numbered treatment source · ' : sectionSourceUnit(data.translation_id) ? 'English discourse source · ' : 'English source page · ') + data.translator));
-    target.append(el('p', 'Pāli selection: ' + context.citation + ' · publisher reference: ' + (actualChoice.reference || data.citation), 'muted'), el('p', 'Source version: ' + data.translation_id, 'muted'));
+    target.replaceChildren(el('h3', (context.accepted?.kind === 'shared_page' ? 'Shared English source page · ' : context.accepted ? 'Partial English source · ' : milindaSourceUnit(data.translation_id) ? 'English question source · ' : anTenSourceUnit(data.translation_id) ? 'English paragraph selection source · ' : numberedSourceUnit(data.translation_id) ? 'English numbered treatment source · ' : sectionSourceUnit(data.translation_id) ? 'English discourse source · ' : 'English source page · ') + data.translator));
+    target.append(el('p', 'Pāli selection: ' + context.citation + ' · publisher reference: ' + (actualChoice.reference || data.citation), 'muted'), el('p', 'Source version: ' + data.translation_id, 'muted source-version'));
     if (context.accepted) scopeSummary(context.accepted, target);
     if (data.translation_id !== args.translation) target.append(el('p', 'The server returned a different listed source version. Read its source and fallback notes before quoting.', 'notice'));
     if (milindaSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive question selection. Other questions on the publisher page and untranslated Pāli paratext are outside this English selection.', 'notice'));
+    else if (anTenSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive discourse selected from exact paragraphs on the parent publisher page. The publisher title names that page; no individual publisher heading is supplied. Other discourses and untranslated Pāli paratext remain outside this selection. Any owned translator’s notes are editorial, not canonical discourse text. This is not word-by-word alignment.', 'notice'));
     else if (numberedSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive numbered treatment selection. The printed number identifies this treatment; the publisher title names the complete page. Other treatments, untranslated Pāli paratext and forms of address are outside this English selection. This is not word-by-word alignment.', 'notice'));
     else if (sectionSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive discourse selection. Other discourses on the publisher page and untranslated Pāli paratext are outside this English selection.', 'notice'));
     notes(data, target); target.append(el('p', data.text, 'translation')); translatorNoteSection(data, target, 4); provenance(data, target);

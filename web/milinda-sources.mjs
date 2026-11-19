@@ -30,14 +30,37 @@ const numbered = new Map(Array.from({length: 20}, (_, i) => {
   const n = i + 21;
   return [numberedPage + '#sutta-' + n, {unit: 'an1.' + n, notes: 0, paragraphs: 1, profile: 'ati-an1-ekadhamma-numbered-paragraph-v1', heading: n + '.'}];
 }));
-const sourceProfile = id => units.get(id) || discourses.get(id) || numbered.get(id);
+export const AN_TEN_PROFILE = 'ati-an-ten-paragraph-selection-v1';
+const anTen = new Map([
+  ['ati:/tipitaka/an/an01/an01.045-046.than::selection:an1.45', {unit: 'an1.45', paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE}],
+  ['ati:/tipitaka/an/an01/an01.045-046.than::selection:an1.46', {unit: 'an1.46', paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE}],
+  ['ati:/tipitaka/an/an01/an01.049.than::selection:an1.49', {unit: 'an1.49', paragraphs: 1, notes: 1, anchor: null, heading: null, profile: AN_TEN_PROFILE}],
+  ['ati:/tipitaka/an/an01/an01.049.than::selection:an1.50', {unit: 'an1.50', paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE}],
+  ['ati:/tipitaka/an/an01/an01.049.than::selection:an1.51', {unit: 'an1.51', paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE}],
+  ['ati:/tipitaka/an/an01/an01.049.than::selection:an1.52', {unit: 'an1.52', paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE}],
+  ['ati:/tipitaka/an/an02/an02.031.than::selection:an2.32', {unit: 'an2.32', paragraphs: 3, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE}],
+  ['ati:/tipitaka/an/an02/an02.031.than::selection:an2.33', {unit: 'an2.33', paragraphs: 1, notes: 0, anchor: 's32', heading: null, profile: AN_TEN_PROFILE}],
+  ['ati:/tipitaka/an/an02/an02.125-126.than::selection:an2.125', {unit: 'an2.125', paragraphs: 1, notes: 1, anchor: null, heading: null, profile: AN_TEN_PROFILE}],
+  ['ati:/tipitaka/an/an02/an02.125-126.than::selection:an2.126', {unit: 'an2.126', paragraphs: 1, notes: 0, anchor: null, heading: null, profile: AN_TEN_PROFILE}],
+]);
+// Immutable pre-existing shared pages remain independent scoped choices.
+const legacyAnTen = new Map([
+  ['ati:/tipitaka/an/an01/an01.049.than', {"owner_id":"an1.49","text_ids":["an1.49","an1.50","an1.51","an1.52"],"source_commit":"2d134ff9ef60f70a1eb03c9370580228811a3070","pali_sha256":"5c98023f2f97b51c5ea9ef76b4a031ac9725ec8cecee8fbacc0f2c0ecf3f77a0","text_sha256":"35182e6e8d3990b8cb6ace20602277a5d409fd45c5a44b9e277ec25995084c60","notice_sha256":"3b8f3fab868dd8176bb2cce37b9e9437bdca790a6a415a0f67ee589ce099b1fe","scope_sha256":"bf2fca5a6b857f8cf313ef9f01e7e4d937088d9eb52ba3fb8890d214728f7881"}],
+  ['ati:/tipitaka/an/an01/an01.045-046.than', {"owner_id":"an1.45","text_ids":["an1.45","an1.46"],"source_commit":"2d134ff9ef60f70a1eb03c9370580228811a3070","pali_sha256":"3842fa2b62de5f546e83337c603df9bfa49cda6be1092221b102b7ea20cf4005","text_sha256":"7297c6cf82b7abe3f94ad8e6fdc5e8fc1c03a6b3c896a2a1bcf5fa895bef69fd","notice_sha256":"c6f4d4898e1844091dabb21aa338b492be115913f2af077c2bd57708890a8bfb","scope_sha256":"0cf6a057f1c0ded3c569a2e71beece92f0597c1d345c0fdb44df7d5856bd09fe"}],
+  ['ati:/tipitaka/an/an02/an02.031.than', {"owner_id":"an2.32","text_ids":["an2.32","an2.33"],"source_commit":"2d134ff9ef60f70a1eb03c9370580228811a3070","pali_sha256":"3f85a870476455991af56f4308b4fc92f73d0931c8cd17e18a171c374abfef96","text_sha256":"68448c5eba804b236080fbb41641328da982639a295de44058e070ae99bd7495","notice_sha256":"693ec730c062294a3570512540f883b863bb57f47765b3782199a9a404977d60","scope_sha256":"8c2314215302c25b00437281a3af46dc4db66599fc1591aebf7e01c9fd80a5de"}],
+  ['ati:/tipitaka/an/an02/an02.125-126.than', {"owner_id":"an2.125","text_ids":["an2.125","an2.126"],"source_commit":"2d134ff9ef60f70a1eb03c9370580228811a3070","pali_sha256":"01f88254cf733cc057f51d936a8203e51e447a5c711bfac3c7209ac269f44318","text_sha256":"a5d4d3d63f2166947cbcb1ccaa12883f6fbd90ef4445c73ff1c4441064eff8ec","notice_sha256":"d96963652b5b6f051df62ac6a54047af61d5f715b1dd3bcfdab4e62bc0b04de7","scope_sha256":"af5aba23c950eb6804eb68fd23224ce8eca392a216f5aa5e02b399656a48fa87"}],
+]);
+const sourceProfile = id => units.get(id) || discourses.get(id) || numbered.get(id) || anTen.get(id);
 export const milindaSourceUnit = id => units.get(id)?.unit;
 export const numberedSourceUnit = id => numbered.get(id)?.unit;
+export const anTenSourceUnit = id => anTen.get(id)?.unit;
 export const sectionSourceUnit = id => sourceProfile(id)?.unit;
 export function validateSectionIdentity(value) {
-  const id = value.translation_id; if (typeof id !== 'string') return;
-  let decoded = id; try { decoded = decodeURIComponent(id); } catch { /* Invalid aliases remain literal. */ }
-  const resource = decoded.split(/[?#]/, 1)[0].replace(/\.html?$/i, '').toLowerCase();
+  const id = value?.translation_id; if (typeof id !== 'string') return;
+  let decoded = id;
+  for (let i = 0; i < 4; i++) { try { const next = decodeURIComponent(decoded); if (next === decoded) break; decoded = next; } catch { break; } }
+  if (/^ati:/i.test(id.trim()) && id.includes('%')) throw Error('The source section requires its exact reviewed fragment identity or paragraph-selection identity; encoded aliases are unsupported. No English source was displayed.');
+  const resource = decoded.trim().split(/::|[?#]/, 1)[0].replace(/\.html?$/i, '').toLowerCase();
   // The immutable, pre-existing shared compilation remains a separate choice.
   // This identity exception grants no consent, ownership or page-level alignment;
   // scopeDescriptor and validateEnglishPage enforce those independently.
@@ -49,19 +72,33 @@ export function validateSectionIdentity(value) {
     && Array.isArray(scope.text_ids) && scope.text_ids.length === 20
     && scope.text_ids.every((unit, i) => unit === 'an1.' + (i + 21))
     && Object.entries(legacyNumberedPins).every(([key, pin]) => scope[key] === pin)) return;
-  if ((isSectionPageId(resource) || /^ati:/i.test(decoded) && decoded.includes('#')) && !sourceProfile(id)) throw Error('The source section requires its exact reviewed fragment identity. No English source was displayed.');
+  const legacy = legacyAnTen.get(id);
+  if (legacy && !Object.hasOwn(value, 'source_section')
+    && (!Object.hasOwn(value, 'whole_unit_coverage') || value.whole_unit_coverage === false)
+    && scope?.kind === 'shared_page' && scope.version === 1 && scope.whole_unit_coverage === false
+    && scope.presentation === 'compilation' && scope.condensed === false && scope.individual_alignment_verified === false
+    && Object.entries(legacy).every(([key, pin]) => Array.isArray(pin) ? Array.isArray(scope[key]) && scope[key].length === pin.length && scope[key].every((unit, i) => unit === pin[i]) : scope[key] === pin)) return;
+  if ((isSectionPageId(resource) || decoded.includes('::') || /^ati:/i.test(decoded.trim()) && decoded.includes('#')) && !sourceProfile(id)) throw Error('The source section requires its exact reviewed fragment identity. No English source was displayed.');
 }
 export function validateSectionDescriptor(value) {
   validateSectionIdentity(value);
   const profile = sourceProfile(value.translation_id); if (!profile) return;
   const section = value.source_section;
+  if (anTen.has(value.translation_id)) {
+    const keys = 'anchor,first_ref,heading,last_ref,note_count,notes_sha256,notice_sha256,pali_sha256,paragraph_count,profile,section_html_sha256,selection_id,source_commit,status,text_sha256,unit_id,version';
+    const first = profile.unit === 'an1.51' || profile.unit === 'an2.32' ? 2 : 1;
+    const last = profile.unit === 'an2.32' ? 3 : first;
+    const hashes = ['section_html_sha256', 'text_sha256', 'notes_sha256', 'notice_sha256', 'pali_sha256'];
+    if (!section || Object.keys(section).sort().join(',') !== keys || section.version !== 1 || section.status !== 'reviewed' || section.profile !== AN_TEN_PROFILE || section.unit_id !== profile.unit || section.selection_id !== profile.unit || section.anchor !== profile.anchor || section.heading !== null || section.paragraph_count !== profile.paragraphs || section.note_count !== profile.notes || section.source_commit !== legacyAnTen.get(value.translation_id.split('::')[0]).source_commit || !hashes.every(key => typeof section[key] === 'string' && /^[a-f0-9]{64}$/.test(section[key])) || section.first_ref !== profile.unit + '/' + first || section.last_ref !== profile.unit + '/' + last) throw Error('The reviewed paragraph-selection descriptor or translator-note count is invalid. No English source was displayed.');
+    return;
+  }
   if (!section || section.version !== 1 || section.status !== 'reviewed' || section.unit_id !== profile.unit || section.anchor !== value.translation_id.split('#')[1] || section.note_count !== profile.notes || profile.profile !== undefined && section.profile !== profile.profile || profile.heading !== undefined && section.heading !== profile.heading || profile.paragraphs !== undefined && section.paragraph_count !== profile.paragraphs) throw Error('The reviewed source-section descriptor or translator-note count is invalid. No English source was displayed.');
 }
 export function validateMilindaDescriptor(value) {
   if (milindaSourceUnit(value.translation_id)) validateSectionDescriptor(value);
 }
 export const isMilindaPageId = id => /^ati:\/tipitaka\/kn\/miln\/miln\.[23]x\.kell$/.test(id);
-export const isSectionPageId = id => isMilindaPageId(id) || id === 'ati:/tipitaka/sn/sn27/sn27.001-010.than' || id === numberedPage;
+export const isSectionPageId = id => isMilindaPageId(id) || id === 'ati:/tipitaka/sn/sn27/sn27.001-010.than' || id === numberedPage || legacyAnTen.has(id);
 
 /** Preserve owned note numbers and exact plain text separately from the question. */
 export function translatorNotes(data) {

@@ -1,7 +1,7 @@
 /** Finite reviewed ATI sections; owned notes never become translated body text. */
 import { createHash } from 'node:crypto';
 import { plainText } from './http.mjs';
-import { SN27_SECTION_PROFILE, AN_MIND_SECTION_PROFILE, ATI_SECTION_PROFILES } from './ati-section-profiles.mjs';
+import { SN27_SECTION_PROFILE, AN_MIND_SECTION_PROFILE, AN_TEN_SECTION_PROFILE, ATI_SECTION_PROFILES } from './ati-section-profiles.mjs';
 import { sectionHash } from './ati-section-registry.mjs';
 const rawHash = value => createHash('sha256').update(value).digest('hex');
 const fail = () => { throw Error('The reviewed ATI question text, structure, notes or source changed. No question translation was returned.'); };
@@ -35,6 +35,7 @@ export function extractAtiSection(html, row) {
   const begin = '<!-- BEGIN COPYRIGHTED TEXT CHUNK -->', end = '<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->';
   if (html.split(begin).length !== 2 || html.split(end).length !== 2 || html.indexOf(end) <= html.indexOf(begin)) fail();
   const chunk = html.slice(html.indexOf(begin) + begin.length, html.indexOf(end)), root = parse(chunk), chapters = elements(root);
+  if (profile.profile === AN_TEN_SECTION_PROFILE) return finiteTreatment(root, chapters, chunk, row, profile);
   if (profile.profile === AN_MIND_SECTION_PROFILE) return numberedMindParagraph(root, chapters, chunk, row, profile);
   if (root.children.some(value => typeof value === 'string' && value.trim()) || chapters.length !== (profile.profile === SN27_SECTION_PROFILE || profile.path.includes('2x') ? 10 : 6) || chapters.some(node => node.tag !== 'div' || JSON.stringify(node.attrs) !== '{"class":"chapter"}')) fail();
   if (profile.profile === SN27_SECTION_PROFILE) {
@@ -89,4 +90,60 @@ function numberedMindParagraph(root, chapters, chunk, row, profile) {
   if (!selected || !selected.text || rawHash(chunk.slice(selected.paragraph.start,selected.paragraph.end)) !== p.section_html_sha256 || p.heading !== profile.label || sectionHash(selected.text) !== p.text_sha256 || sectionHash([]) !== p.notes_sha256) fail();
   // The printed label is not a publisher-supplied individual discourse title.
   return {text: selected.text, translator_notes: [], title: p.heading};
+}
+
+// These paragraph selectors are internal identities, not fabricated publisher anchors.
+function finiteTreatment(root, chapters, chunk, row, profile) {
+  const exactAttrs = (node, attrs) => JSON.stringify(node.attrs) === JSON.stringify(attrs);
+  const inside = node => chunk.slice(node.inside,node.close);
+  const noText = node => !node.children.some(value => typeof value === 'string' && value.trim());
+  const pool = profile.path.endsWith('an01.045-046.than'), luminous = profile.path.endsWith('an01.049.than');
+  const gratitude = profile.path.endsWith('an02.031.than'), voice = profile.path.endsWith('an02.125-126.than');
+  if (![pool,luminous,gratitude,voice].some(Boolean) || row.section.selection_id !== profile.unit_id || row.section.heading !== null
+    || row.english_title !== profile.parent_title || !noText(root) || chapters.length !== (pool ? 2 : 1)
+    || chapters.some(node => node.tag !== 'div' || !exactAttrs(node,{class:'chapter'}) || !noText(node))) fail();
+  const paragraphs = chapters.flatMap(chapter => elements(chapter).filter(node => node.tag === 'p'));
+  if (paragraphs.length !== (pool || voice ? 2 : 4) || paragraphs.some(node => Object.keys(node.attrs).length)) fail();
+  const extras = chapters.flatMap(chapter => elements(chapter).filter(node => node.tag !== 'p'));
+  if (extras.length !== (pool ? 0 : 1) || !pool && (extras[0].tag !== 'div' || !exactAttrs(extras[0],{class:gratitude?'seeAlso':'notes'}))) fail();
+  if (pool && chapters.some(chapter => elements(chapter).length !== 1) || !pool && (elements(chapters[0]).length !== paragraphs.length + 1 || elements(chapters[0]).at(-1) !== extras[0])) fail();
+  const alts = ['{I,v,9}','{I,v,10}','{I,vi,1}','{I,vi,2}'];
+  for (const [i,paragraph] of paragraphs.entries()) {
+    const children = elements(paragraph), markers = children.filter(node => node.tag === 'a');
+    if (pool) {if (children.length || !new RegExp('^'+(i+45)+'\\.\\s+').test(plainText(inside(paragraph)))) fail();continue;}
+    if (luminous || voice) {
+      if (markers.length !== (i === 0 ? 1 : 0) || children.length !== (luminous ? (i === 0 ? 2 : 1) : i === 0 ? 1 : 0)) fail();
+      if (i === 0) {const marker=markers[0];if (!exactAttrs(marker,{class:'noteTag',href:profile.path.split('/').at(-1)+'.html#fn-1',id:'fnt-1'}) || elements(marker).length || plainText(inside(marker)) !== '[1]') fail();}
+      if (luminous) {const alt=children.at(-1);if (alt.tag !== 'span' || !exactAttrs(alt,{class:'altID'}) || elements(alt).length || inside(alt) !== alts[i]) fail();}
+    } else if (gratitude) {
+      if (i < 3) {if (children.length) fail();}
+      else {const alt=children[0], anchor=alt&&elements(alt)[0];if (children.length !== 1 || alt.tag !== 'span' || !exactAttrs(alt,{class:'altID'}) || elements(alt).length !== 1 || anchor.tag !== 'a' || !exactAttrs(anchor,{id:'s32'}) || elements(anchor).length || inside(alt) !== '{<a id="s32">II,iv,2</a>}') fail();}
+    }
+  }
+  let note;
+  if (luminous || voice) {
+    const nodes=elements(extras[0]),h=nodes[0],dl=nodes[1],entries=dl&&elements(dl),dt=entries?.[0],dd=entries?.[1],back=dt&&elements(dt)[0];
+    if (nodes.length !== 2 || h.tag !== 'h1' || !exactAttrs(h,{}) || elements(h).length || inside(h) !== 'Note' || dl.tag !== 'dl' || !exactAttrs(dl,{}) || !noText(dl)
+      || entries.length !== 2 || dt.tag !== 'dt' || !exactAttrs(dt,{}) || elements(dt).length !== 1 || back.tag !== 'a'
+      || !exactAttrs(back,{href:profile.path.split('/').at(-1)+'.html#fnt-1',id:'fn-1'}) || elements(back).length || inside(back) !== '1' || plainText(inside(dt)) !== '1.' || dd.tag !== 'dd' || !exactAttrs(dd,{})) fail();
+    for (const node of descendants(dd)) if (!['dd','p','i','a'].includes(node.tag) || node.tag !== 'a' && Object.keys(node.attrs).length || node.tag === 'a' && (Object.keys(node.attrs).join(',') !== 'href' || !/^\.\.\//.test(node.attrs.href))) fail();
+    if (elements(dd).filter(node => node.tag === 'p').length !== 3 || luminous && !noText(dd)) fail();
+    note={number:1,text:plainText(inside(dd))};if (!note.text) fail();
+  }
+  if (gratitude) {
+    const nodes=elements(extras[0]);if (nodes.length !== 1 || nodes[0].tag !== 'p' || Object.keys(nodes[0].attrs).length || !noText(extras[0])) fail();
+    const links=elements(nodes[0]),expected=['../../mn/mn.110.than.html','../../sn/sn07/sn07.014.than.html','../an04/an04.073.than.html','../../kn/iti/iti.4.100-112.than.html#iti-106'];
+    if (links.length !== 4 || links.some((link,i)=>link.tag !== 'a' || !exactAttrs(link,{href:expected[i]}) || elements(link).length)) fail();
+  }
+  const chapter=chapters[profile.chapter-1],chosen=elements(chapter).filter(node=>node.tag==='p').slice(profile.paragraph_first-1,profile.paragraph_last);
+  if (chosen.length !== profile.paragraphs || rawHash(chunk.slice(chosen[0].start,chosen.at(-1).end)) !== row.section.section_html_sha256) fail();
+  const text=chosen.map(node=>{
+    let body=inside(node).replace(/<span class="altID">[^]*?<\/span>/g,'');
+    body=withoutNoteTags(body);body=plainText(body);
+    if (pool) body=body.replace(new RegExp('^'+(profile.unit_id.endsWith('.45')?45:46)+'\\.\\s+'),'');
+    if (!body) fail();return body;
+  }).join('\n\n');
+  const translator_notes=profile.notes?[note]:[];
+  if (translator_notes.some(value=>!value) || sectionHash(text) !== row.section.text_sha256 || sectionHash(translator_notes) !== row.section.notes_sha256) fail();
+  return {text,translator_notes,title:profile.parent_title};
 }

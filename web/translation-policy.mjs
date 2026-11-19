@@ -1,4 +1,4 @@
-import {translatorNotes,sectionSourceUnit,milindaSourceUnit} from './milinda-sources.mjs';
+import {translatorNotes,sectionSourceUnit,milindaSourceUnit,anTenSourceUnit,validateSectionIdentity,validateSectionDescriptor} from './milinda-sources.mjs';
 
 /** Browser display/consent guards for backend-validated metadata. Not source, rights or alignment approval. */
 const own = (value, key) => value && Object.hasOwn(value, key);
@@ -16,6 +16,11 @@ function medicineFamily(id) {
 }
 
 export function scopeDescriptor(choice, requestedId) {
+  validateSectionIdentity(choice);
+  if (sectionSourceUnit(choice?.translation_id)) {
+    validateSectionDescriptor(choice);
+    if (sectionSourceUnit(choice.translation_id) !== requestedId || own(choice, 'translation_scope') || own(choice, 'whole_unit_coverage') && choice.whole_unit_coverage !== true) throw Error('The reviewed source section belongs to another selection or changed scope. No English source was requested.');
+  }
   const fail = () => { throw new Error('This source has an unsupported or incomplete scope declaration. No scoped source was requested. Reload the passage and review the updated sources.'); };
   const reserved=medicineFamily(choice?.translation_id), selector=choice?.translation_scope?.extractor===MEDICINE_EXTRACTOR;
   if (!own(choice, 'translation_scope')) { if(reserved)fail();return null; }
@@ -55,7 +60,7 @@ export function validateEnglishPage(data, args, context) {
   const choice = context.choices.find(c => c.translation_id === data.translation_id);
   if (!choice) throw new Error('The returned English source version was not in the reviewed list. Reload the passage and review sources again.');
   if(medicineFamily(choice.translation_id) || choice.translation_scope?.extractor===MEDICINE_EXTRACTOR)scopeDescriptor(choice,context.uid);
-  if (sectionSourceUnit(data.translation_id) && (!own(choice, 'source_section') || !sameScope(data.source_section, choice.source_section) || data.source_section?.unit_id !== context.uid || data.source_section?.anchor !== data.translation_id.split('#')[1] || data.source_section?.status !== 'reviewed')) throw new Error(milindaSourceUnit(data.translation_id) ? 'The reviewed question identity changed. Reload the passage and review sources again; no English was displayed.' : 'The reviewed discourse identity changed. Reload the passage and review sources again; no English was displayed.');
+  if (sectionSourceUnit(data.translation_id) && (!own(choice, 'source_section') || !sameScope(data.source_section, choice.source_section) || data.source_section?.unit_id !== context.uid || !anTenSourceUnit(data.translation_id) && data.source_section?.anchor !== data.translation_id.split('#')[1] || data.source_section?.status !== 'reviewed')) throw new Error(milindaSourceUnit(data.translation_id) ? 'The reviewed question identity changed. Reload the passage and review sources again; no English was displayed.' : 'The reviewed discourse identity changed. Reload the passage and review sources again; no English was displayed.');
   if (context.accepted) {
     const accepted = context.accepted;
     if (data.translation_id !== args.translation || data.whole_unit_coverage !== false || !own(data, 'translation_scope') || !sameScope(data.translation_scope, accepted.scope)) throw new Error('The source scope or version changed after review. Reload the passage and give fresh consent; no scoped text was displayed.');

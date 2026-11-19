@@ -2,6 +2,7 @@ import { readBundled } from '../src/bundled-data.mjs';
 // Exhaustive offline audit of the bundled canon: every text, every citation form, every PTS start page, every translation link.
 import * as canon from '../src/canon.mjs';
 import { isShared, isScoped } from '../src/translation-scope.mjs';
+import { auditSelectedTranslationLink } from './evidence/selected-translation-link.mjs';
 import { EDITIONS, editionLabel, editionIndex, nextUnit } from '../src/editions.mjs';
 import { textSegments, parseNoteSpans, uncovered, SIGLA } from '../src/variants.mjs';
 import * as commentary from '../src/commentary.mjs';
@@ -130,7 +131,7 @@ for (let i = 1; i < spans.length; i += 1) {
   if (a.book === b.book && b.start < a.end) fail('overlap', `${a.id} [${a.start},${a.end}) overlaps ${b.id} [${b.start},${b.end})`);
   else count('no-overlap');
 }
-// 7. Every translation link resolves back to its text by URL.
+// 7. Ordinary URLs roundtrip; finite internal selections preserve honest publisher URL scope.
 for (const [id, links] of Object.entries(d.translations)) {
   for (const link of links) if (isScoped(link)) {
     try {
@@ -147,6 +148,9 @@ for (const [id, links] of Object.entries(d.translations)) {
         try { canon.resolve(l.url); } catch (error) { if (!/Shared-page URL/.test(error.message)) throw error; rejected = true; }
         if (!rejected) throw Error('Shared page URL silently resolved to one canonical text.');
         count('shared-link-url'); continue;
+      }
+      if (l.section?.selection_id) {
+        auditSelectedTranslationLink(canon, id, l); count('selected-link-identity'); count('link'); continue;
       }
       const r = canon.resolve(l.url);
       if (r.unit.id !== id && !(d.translations[r.unit.id] || []).some((x) => x.url === l.url)) fail('link', `${l.url} -> ${r.unit.id} (expected ${id})`);

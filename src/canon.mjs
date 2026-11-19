@@ -1,6 +1,6 @@
 import {assertRegisteredPartial} from './partial-source-registry.mjs';
-import { assertRegisteredSection, validateSectionRegistry } from './ati-section-registry.mjs';
-import { isAtiSectionPath } from './ati-section-profiles.mjs';
+import { assertRegisteredSection, validateSectionRegistry, retainedAtiShared } from './ati-section-registry.mjs';
+import { isAtiSectionPath, ATI_SECTION_PROFILES, ATI_RETAINED_SHARED_BINDINGS } from './ati-section-profiles.mjs';
 import { isPartial, partialScope, isShared, isScoped, sharedScope } from './translation-scope.mjs';
 import { searchSegments, searchFold, searchExcerpt, searchTerms, searchReading, assertSearchQuery, isSourcePhrase } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
@@ -74,7 +74,7 @@ const SOURCE_NAMES = { dhammatalks: 'dhammatalks.org', ati: 'Access to Insight',
 export const sourceName = (t) => SOURCE_NAMES[t.source] || t.source;
 /** Stable translation_id of a link: dt:<path>, ati:<path> or aj:<path>. */
 export function translationId(t) {
-  if (t.source === 'ati') return `ati:${t.path}${t.section ? '#' + t.section.anchor : ''}`;
+  if (t.source === 'ati') return `ati:${t.path}${t.section?.selection_id ? '::selection:' + t.section.selection_id : t.section ? '#' + t.section.anchor : ''}`;
   if (t.source === 'anandajoti') return `aj:${t.path.replace(/^\/Texts-and-Translations\//, '').replace(/\.htm$/, '')}`;
   return `dt:${t.url.split('/suttas/')[1].replace(/\.html$/, '')}`;
 }
@@ -152,7 +152,13 @@ function ownersOf(links, wanted) {
 
 export function translationScope(link, unit) {
   assertRegisteredPartial(link,unit,load().partialRegistry);
-  if (isShared(link)) return sharedScope(link, unit, load().byId, segments, source());
+  if (isShared(link)) {
+    // The declaration belongs to its first member even when another member reads it.
+    // Recheck exact retained bindings on inherited and already-indexed reads too.
+    const snapshot = load(), owner = snapshot.byId.get(link.shared_scope?.owner_id);
+    assertRegisteredSection(link, owner, snapshot.sectionRegistry);
+    return sharedScope(link, unit, snapshot.byId, segments, source());
+  }
   return partialScope(link, unit, segments(unit), source());
 }
 const sharedIndexes = new WeakMap();
@@ -163,20 +169,37 @@ function sharedFor(unit, d) {
     for (const [owner, links] of Object.entries(d.translations)) for (const link of links) if (isShared(link)) {
       const u = d.byId.get(owner);
       if (!u) throw new CitationError('Shared-page source has no indexed owner.');
-      const scope = translationScope(link, u);
-      if (scope.owner_id !== owner || ownersOf(d.translations, translationId(link)).length !== 1) throw new CitationError('Shared-page translation_id must have one declaration on its first member; ambiguous ownership was rejected.');
-      for (const id of scope.text_ids) { if (!index.has(id)) index.set(id, []); index.get(id).push(link); }
+      assertRegisteredSection(link, u, d.sectionRegistry);
+      const scope = translationScope(link, u), id = translationId(link);
+      if (scope.owner_id !== owner || ownersOf(d.translations, id).length !== 1) throw new CitationError('Shared-page translation_id must have one declaration on its first member; ambiguous ownership was rejected.');
+      // Retain the declaration owner and identity, independently of mutable scope fields.
+      for (const member of scope.text_ids) { if (!index.has(member)) index.set(member, []); index.get(member).push({link,owner:u,id}); }
     }
     sharedIndexes.set(d.translations, index);
   }
-  const links = index.get(unit.id) || [];
-  for (const link of links) translationScope(link, unit);
-  return links;
+  return (index.get(unit.id) || []).map(({link,owner,id}) => {
+    const declared = d.translations[owner.id] || [];
+    // The ownership index is a cache, not evidence that the live declarations
+    // are still unique after an in-memory replacement or cross-owner copy.
+    let currentDeclarations = 0;
+    for (const entries of Object.values(d.translations)) for (const candidate of entries) if (translationId(candidate) === id) currentDeclarations++;
+    if (!isShared(link) || declared.filter(value => value === link).length !== 1 || currentDeclarations !== 1 || translationId(link) !== id) throw new CitationError('Registered ATI or shared-page declaration changed, disappeared or acquired another owner. No cached source was inferred.');
+    assertRegisteredSection(link, owner, d.sectionRegistry);
+    const scope = translationScope(link, unit);
+    if (scope.owner_id !== owner.id || !scope.text_ids.includes(unit.id)) throw new CitationError('Shared-page membership changed. No cached source was inferred.');
+    return link;
+  });
+}
+
+function requireRetainedForMember(unit, d) {
+  const binding = ATI_RETAINED_SHARED_BINDINGS.find(binding => ATI_SECTION_PROFILES.some(profile => profile.unit_id === unit.id && profile.path === binding.path));
+  if (binding && (d.translations[binding.owner] || []).filter(link => retainedAtiShared(link, d.byId.get(binding.owner))).length !== 1) throw new CitationError('Registered ATI shared binding is missing, changed or duplicated. No cached source was inferred.');
 }
 
 /** Ordinary containing groups inherit whole links only; shared pages reach only explicitly declared members. */
 export function linksFor(u) {
   const d = load();
+  requireRetainedForMember(u, d);
   for (const link of d.translations[u.id] || []) assertRegisteredSection(link, u, d.sectionRegistry);
   const requiredSection = d.sectionRegistry.links.find(row => row.unit_id === u.id);
   if (requiredSection && (d.translations[u.id] || []).filter(link => link.section?.anchor === requiredSection.anchor).length !== 1) throw new CitationError('Registered ATI question binding is missing or duplicated. No whole-page translation was inferred.');
@@ -316,8 +339,8 @@ export function resolve(reference) {
     return { unit, notes, alternatives: [...others.values()].slice(0, 3).map((u) => unitSummary(u)) };
   }
   if (c.kind === 'url') {
-    if (c.host === 'accesstoinsight.org' && isAtiSectionPath(c.path) && !(c.path === '/tipitaka/an/an01/an01.021-040.than' && !c.fragment)) {
-      const rows = d.sectionRegistry.links.filter(row => row.path === c.path), row = rows.find(row => row.anchor === c.fragment);
+    if (c.host === 'accesstoinsight.org' && isAtiSectionPath(c.path) && !(ATI_RETAINED_SHARED_BINDINGS.some(row => row.path === c.path) && !c.fragment)) {
+      const rows = d.sectionRegistry.links.filter(row => row.path === c.path), row = rows.find(row => row.anchor && row.anchor === c.fragment);
       if (!row) throw new CitationError(`This publisher anthology page does not identify one reviewed question. Use an exact question body anchor or canonical ID: ${rows.map(value => value.unit_id).join(', ')}.`);
       const unit = d.byId.get(row.unit_id); linksFor(unit);
       notes.push(row.mapping_note);

@@ -50,7 +50,7 @@ The scout screened 114 metadata rows and inspected eight publisher pages: six ne
 | Publisher AN 2.31–32 | Indexed AN 2.32–33, two shared-only records | Numbering/See-also separation; only the second has an actual body anchor |
 | AN 2.125–126 | Two shared-only wrong/right-view treatments | No individual body anchors; editorial note ownership needs review |
 
-The last four pages offer ten possible subjects, not ten approved whole-unit mappings. No synthetic publisher anchors, extra ownership or wider source permission follows. Kelly's existing fourteen questions are exhausted; the other nine SN 27 units already have whole DT sources. Mahāvagga VII and every other source hold remain unchanged.
+At D239, the last four pages offered ten possible subjects, not ten approved whole-unit mappings. A subsequent fresh independent D240 review approves the exact ten selections with separate internal identities and explicit note/edition caveats; see [the follow-up and current counts](an-ten-reviewed-selections.md). No synthetic publisher anchors, extra ownership or wider source permission follows. Kelly's existing fourteen questions are exhausted; the other nine SN 27 units already have whole DT sources. Mahāvagga VII and every other source hold remain unchanged.
 
 ## Measured coverage
 

@@ -58,8 +58,8 @@ test('MN54 restores only one pinned partial dream paragraph, preserves fourteen 
  assert.ok(!exclusions.some(r=>r.url===report.retired_exclusion.url));
  assert.ok(exclusions.some(r=>r.url==='https://www.dhammatalks.org/suttas/MN/MN54.html'));
  const t=translationCoverage({refresh:true}).total;
- assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links,t.with_shared_english,t.shared_only],[2573,1443,1866,22,16,12,110,32]);
- const d=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([d.rotation.of,d.text.id],[1278,'sn1.10']);
+ assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links,t.with_shared_english,t.shared_only],[2583,1453,1876,22,16,12,110,22]);
+ const d=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([d.rotation.of,d.text.id],[1288,'sn11.22']);
 });
 
 test('finite P14 selector rejects structural changes and excludes all neighbors, leading ellipsis and notes',()=>{

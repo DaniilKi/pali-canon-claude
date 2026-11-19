@@ -10,7 +10,7 @@ from playwright.sync_api import expect,sync_playwright
 from web_reader_test_helpers import read_tool
 ROOT=pathlib.Path(__file__).resolve().parents[1];KEY='pali-library-v1';PRIVATE='PRIVATE_AN_NUMBERED_DRAFT_ā😀';PROFILE='ati-an1-ekadhamma-numbered-paragraph-v1';BARE='ati:/tipitaka/an/an01/an01.021-040.than';RAW='df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4'
 p=argparse.ArgumentParser(description=__doc__);p.add_argument('--source-root',type=pathlib.Path);p.add_argument('--server-dir',type=pathlib.Path);p.add_argument('--a11y',action='store_true');p.add_argument('--report');args=p.parse_args()
-manifest=json.loads((ROOT/'scripts/canon/reviewed_ati_sections.json').read_text());rows=[r for r in manifest['links'] if r['section']['profile']==PROFILE];assert len(manifest['links'])==35 and len(rows)==20 and [r['unit_id'] for r in rows]==['an1.'+str(n) for n in range(21,41)]
+manifest=json.loads((ROOT/'scripts/canon/reviewed_ati_sections.json').read_text());rows=[r for r in manifest['links'] if r['section']['profile']==PROFILE];assert len(manifest['links'])==45 and len(rows)==20 and [r['unit_id'] for r in rows]==['an1.'+str(n) for n in range(21,41)]
 for n,row in enumerate(rows,21):assert row['path']==BARE[4:] and row['anchor']=='sutta-'+str(n) and row['section']['heading']==str(n)+'.' and row['section']['note_count']==0
 server_dir=args.server_dir.resolve() if args.server_dir else ROOT/'server';assert json.loads((server_dir/'data/reviewed-ati-sections.json').read_text())==manifest
 URL='https://accesstoinsight.org'+rows[0]['path']+'.html';stage=pathlib.Path(tempfile.mkdtemp(prefix='pali-an-numbered-browser-'));filename=rows[0]['path'].split('/')[-1]+'.html';source=args.source_root.resolve()/filename if args.source_root else stage/filename
