@@ -456,3 +456,7 @@ For the ten new actual-source reader journeys, run `python scripts/web-reader-an
 ### D245 Therī Apadāna21–30 boundary repair
 
 `apadana_third_spans.py` followsD244 during canonical rebuild and atomically repairs only23/24’s split8877→8873, adding `apadana-theri21-30-v1`. `repair_apadana_third_spans.py` verifies the originalXML/full-book pin, refuses partial/foreign revisions, preserves all source blocks and commentary, and is idempotent. Rebuild derived parallels. Historical receipts must reverse the two-unit repair before the D244seven-unit/D243pair chain. Never replace21’s current8478 scope with the old8479 source-only proposal. See [D245 source and repair evidence](../../docs/data/apadana-third-chapter.md).
+
+### D246 final Therī Apadāna boundary repairs
+
+`apadana_fourth_spans.py` follows D245 and atomically moves33/34→10196,34/35→10285,36/37→10457. Only33–37receive `apadana-theri31-40-v1`; source words and prior30units are unchanged. `repair_apadana_fourth_spans.py` verifies originalXML/fullbook, refuses allpartial/foreignstates, preservescommentary and isidempotent. Rebuildparallels. Reverse this5unitmetadata repair before the historicalD245/D244/D243hash chain.31keepschapteropening9949;35’s originalVRIrecitation10381remainsuntranslated bythepublisher.40’s chapter10659–10665 andcollection10665–10672 areseparate apparatus,notpoemwords. [Implementation/evidence](../../docs/data/apadana-fourth-chapter.md).

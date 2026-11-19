@@ -49,8 +49,8 @@ function pinnedFetch(calls) {
 }
 
 // This digest was calculated from the complete 20-profile object at dev 3854b43.
-test('thirty approved profiles preserve all prior twenty and ten exact reviewed source/root contracts', () => {
-  assert.equal(Object.keys(APADANA_PROFILES).length, 30);
+test('forty approved profiles preserve all prior twenty and ten exact reviewed source/root contracts', () => {
+  assert.equal(Object.keys(APADANA_PROFILES).length, 40);
   const prior = Object.fromEntries(Object.entries(APADANA_PROFILES).filter(([, p]) => p.poem <= 20));
   assert.equal(digest(JSON.stringify(prior)), '7255eabd3ced9329c39ede0cafa535583a5e3109db3d1cb6beda6b8836e61b25');
   const d = canon.load();
@@ -82,7 +82,7 @@ test('thirty approved profiles preserve all prior twenty and ten exact reviewed 
   assert.equal(profile(21).index_revision, 'apadana-theri11-20-v1');
   assert.equal(profile(23).index_revision, 'apadana-theri21-30-v1');
   assert.equal(profile(24).index_revision, 'apadana-theri21-30-v1');
-  assert.equal(APADANA_PROFILES['thi-ap31'], undefined);
+  assert.equal(APADANA_PROFILES['thi-ap41'], undefined);
 });
 
 test('source-enabled extraction reproduces all ten artifacts, 505 paragraphs, 475 stanzas and 379+2 owned notes', { skip: !checkout }, () => {
@@ -259,7 +259,7 @@ test('reader and comparison guards preserve all ten identities, zero-note divisi
 });
 
 test('v20 embedded reader executes third-chapter apparatus guards before rendering', () => {
-  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v20.html');
+  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v21.html');
   const sandbox = vm.createContext({});
   vm.runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('), WIDGET_HTML.indexOf('  function render(d) {')) + ';globalThis.check=checkedApadana;', sandbox);
   for (const n of [21, 28, 30]) {

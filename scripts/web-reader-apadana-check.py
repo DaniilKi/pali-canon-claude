@@ -32,7 +32,7 @@ manifest = json.loads((server_dir / 'data/apadana.json').read_text())
 assert manifest == json.loads((ROOT / 'server/data/apadana.json').read_text())
 rows, commit = manifest['links'], manifest['source']['commit']
 assert tuple(uid for uid in rows if uid in IDS) == IDS
-assert set(rows) == {'thi-ap' + str(n) for n in range(1, 31)}
+assert set(rows) == {'thi-ap' + str(n) for n in range(1, 41)}
 assert subprocess.check_output(['git', '-C', str(args.source_root), 'rev-parse', 'HEAD'], text=True).strip() == commit
 files = {}
 for row in (rows[uid] for uid in IDS):

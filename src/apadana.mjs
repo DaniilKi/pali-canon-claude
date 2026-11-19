@@ -21,7 +21,7 @@ export function plainMarkdown(value) {
 
 export function parseApadana(raw, profile) {
   if (typeof raw !== 'string' || raw.includes('\r') || !profile) fail();
-  if (profile.poem >= 11 && profile.poem <= 30) return parseReviewedChapter(raw, profile);
+  if (profile.poem >= 11 && profile.poem <= 40) return parseReviewedChapter(raw, profile);
   const front = raw.match(/^---\n([^]*?)\n---\n/);
   if (!front) fail();
   const title = front[1].match(/^title: (.+)$/m)?.[1];
@@ -95,7 +95,7 @@ function parseReviewedChapter(raw, profile) {
   const title = front[1].match(/^title: (.+)$/m)?.[1]; if (title !== profile.title) fail();
   const rest = raw.slice(front[0].length).trim(), at = rest.search(/^\[\^\d+\]:/m); if (at < 0) fail();
   let poem = rest.slice(0, at).trim();
-  const present = value => plainMarkdown([18, 24, 27].includes(profile.poem) ? value.replace(/<span class="diacritics" data-state="on">(c|cc)<\/span><span class="no-diacritics" data-state="off">(ch|chch)<\/span>/g, (_all, a, b) => {
+  const present = value => plainMarkdown([18, 24, 27, 33].includes(profile.poem) ? value.replace(/<span class="diacritics" data-state="on">(c|cc)<\/span><span class="no-diacritics" data-state="off">(ch|chch)<\/span>/g, (_all, a, b) => {
     if (b !== (a === 'c' ? 'ch' : 'chch')) fail(); return a;
   }) : value);
   const definitions = [...rest.slice(at).matchAll(/^\[\^(\d+)\]:[ \t]*([^]*?)(?=^\[\^\d+\]:|(?![^]))/gm)];
@@ -108,9 +108,19 @@ function parseReviewedChapter(raw, profile) {
     const refs = [...text.matchAll(/\[\^(\d+)\]/g)].map(match => Number(match[1]));
     if (refs.some(number => !numbers.includes(number)) || numbers.some(number => !refs.includes(number))) fail();
   };
+  let collection_summary;
+  if (profile.collection_summary) {
+    if (profile.id !== 'thi-ap40' || profile.poem !== 40) fail();
+    const marker = '\n\nAnd then there is the Summary of Chapters:\n\n', parts = poem.split(marker);
+    if (parts.length !== 2) fail();
+    poem = parts[0]; const summaryRaw = marker.trim() + '\n\n' + parts[1], text = present(summaryRaw), translator_notes = notesFor(profile.collection_summary.note_numbers);
+    ownReferences(summaryRaw, profile.collection_summary.note_numbers);
+    if (digest(text) !== profile.collection_summary.body_sha256 || digest(JSON.stringify(translator_notes)) !== profile.collection_summary.notes_sha256) fail();
+    collection_summary = { ...profile.collection_summary, text, translator_notes };
+  }
   let chapter_summary;
   if (profile.chapter_summary) {
-    const marker = ({ 20: '\n\nThe Summary:[^27]\n\n', 30: '\n\nThe Summary:\n\n' })[profile.poem];
+    const marker = ({ 20: '\n\nThe Summary:[^27]\n\n', 30: '\n\nThe Summary:\n\n', 40: '\n\nThe Summary:\n\n' })[profile.poem];
     if (!marker) fail(); const parts = poem.split(marker); if (parts.length !== 2) fail();
     poem = parts[0]; const summaryRaw = marker.trim() + '\n\n' + parts[1], text = present(summaryRaw), translator_notes = notesFor(profile.chapter_summary.note_numbers);
     ownReferences(summaryRaw, profile.chapter_summary.note_numbers);
@@ -126,12 +136,21 @@ function parseReviewedChapter(raw, profile) {
     if (digest(text) !== scope.body_sha256 || digest(JSON.stringify(translator_notes)) !== scope.notes_sha256) fail();
     publisher_divisions = [{ ...scope, text, translator_notes }]; poem = poem.replace(marker, '');
   }
-  const owned = [...profile.note_numbers, ...(profile.chapter_summary?.note_numbers || []), ...(profile.publisher_divisions || []).flatMap(s => s.note_numbers)];
+  const owned = [...profile.note_numbers, ...(profile.publisher_preface?.note_numbers || []), ...(profile.chapter_summary?.note_numbers || []), ...(profile.collection_summary?.note_numbers || []), ...(profile.publisher_divisions || []).flatMap(s => s.note_numbers)];
   if (new Set(owned).size !== owned.length || owned.length !== allNotes.length || allNotes.some(n => !owned.includes(n.number))) fail();
-  ownReferences(poem, profile.note_numbers);
   const headings = [...poem.matchAll(/^### /gm)]; if (headings.length !== 1) fail();
-  const split = headings[0].index; if ([11, 21].includes(profile.poem) !== (split > 0)) fail();
-  const publisher_paratext = present(poem.slice(0, split)); let body = poem.slice(split);
+  const split = headings[0].index; if ([11, 21, 31].includes(profile.poem) !== (split > 0)) fail();
+  const prefaceRaw = poem.slice(0, split), publisher_paratext = present(prefaceRaw); let body = poem.slice(split), publisher_preface;
+  if (profile.publisher_preface) {
+    if (profile.id !== 'thi-ap31' || profile.poem !== 31 || profile.publisher_preface.parent_id !== profile.id
+      || profile.publisher_preface.body_sha256 !== profile.paratext_sha256) fail();
+    const translator_notes = notesFor(profile.publisher_preface.note_numbers);
+    ownReferences(prefaceRaw, profile.publisher_preface.note_numbers);
+    if (digest(publisher_paratext) !== profile.publisher_preface.body_sha256 || digest(JSON.stringify(translator_notes)) !== profile.publisher_preface.notes_sha256) fail();
+    // publisher_paratext remains the sole copy of the prefatory wording.
+    publisher_preface = { ...profile.publisher_preface, translator_notes };
+  } else if (/\[\^\d+\]/.test(prefaceRaw)) fail();
+  ownReferences(body, profile.note_numbers);
   const paragraphSplit = ({ 19: { at: 24, cut: 4, lines: 8, left: '\\[534\\][^29]', right: '(24) \\[535\\]' },
     21: { at: 37, cut: 8, lines: 12, left: '(38-39) \\[676-677\\]', right: '(40) \\[678\\]' },
     28: { at: 72, cut: 4, lines: 8, left: '(63)', right: '(64)' } })[profile.poem];
@@ -149,7 +168,7 @@ function parseReviewedChapter(raw, profile) {
   for (const [i, stanza] of profile.stanza_layout.entries()) {
     if (!stanza.suffix || paragraphs[i + 1].split('\n').length !== stanza.lines || !paragraphs[i + 1].replace(/\[Note \d+\]/g, '').trim().endsWith(stanza.suffix)) fail();
   }
-  return { title, text, translator_notes, publisher_paratext, ...(chapter_summary ? { chapter_summary } : {}), ...(publisher_divisions ? { publisher_divisions } : {}) };
+  return { title, text, translator_notes, publisher_paratext, ...(publisher_preface ? { publisher_preface } : {}), ...(chapter_summary ? { chapter_summary } : {}), ...(collection_summary ? { collection_summary } : {}), ...(publisher_divisions ? { publisher_divisions } : {}) };
 }
 
 export function validateLink(link, id, unit, book) {
@@ -160,14 +179,14 @@ export function validateLink(link, id, unit, book) {
   }
   if (['partial_scope', 'shared_scope', 'section', 'parts'].some(key => Object.hasOwn(link, key))) fail();
   for (const key of ['title', 'reference', 'mapping_notes']) if (JSON.stringify(link[key]) !== JSON.stringify(profile[key])) fail();
-  for (const key of ['index_revision', 'publisher_verse_labels', 'chapter_summary', 'note_numbers', 'root_verses', 'stanza_layout', 'publisher_divisions']) {
+  for (const key of ['index_revision', 'publisher_verse_labels', 'publisher_preface', 'chapter_summary', 'collection_summary', 'note_numbers', 'root_verses', 'stanza_layout', 'publisher_divisions']) {
     if (Object.hasOwn(link, key) !== Object.hasOwn(profile, key) || JSON.stringify(link[key]) !== JSON.stringify(profile[key])) fail();
   }
   if (link.english !== undefined && link.english !== profile.title) fail();
   if (unit && (!book || unit.id !== profile.id || rootDigest(unit, book) !== profile.root_sha256)) fail();
   if (unit && profile.index_revision && unit.index_revision !== profile.index_revision) fail();
-  if (unit && profile.chapter_summary) {
-    const s = profile.chapter_summary;
+  for (const key of ['chapter_summary', 'collection_summary']) if (unit && profile[key]) {
+    const s = profile[key];
     if (rootDigest({ ...unit, start: s.root_start, end: s.root_end }, book) !== s.root_sha256) fail();
   }
   return profile;
@@ -204,7 +223,9 @@ export async function translation(link) {
     mapping_notes: [...profile.mapping_notes],
     changes: 'Presentation extraction: retain diacritics; remove alternate no-diacritic display, Markdown and abbreviation markup; preserve interpolations and both numbering systems; label and separate translator notes and publisher preface. Chapter summary and its original note number, where present, are separately scoped outside the poem. No translation wording is generated.'
       + (profile.poem === 17 ? ' The publisher recitation division and its original note 21 are displayed separately, before the identified publisher stanza, outside poem text and quotation evidence.' : '')
-      + ([18, 24, 27].includes(profile.poem) ? ' Exact paired HTML display spans retain the diacritic spelling and remove only its alternate display; original editorial placeholders remain unchanged.' : '')
+      + ([18, 24, 27, 33].includes(profile.poem) ? ' Exact paired HTML display spans retain the diacritic spelling and remove only its alternate display; original editorial placeholders remain unchanged.' : '')
+      + (profile.poem === 31 ? ' The fourth-chapter publisher preface owns original note 1, separately from poem notes 2–18. Original duplicate local stanza 11 is retained; no number is inferred or corrected.' : '')
+      + (profile.poem === 40 ? ' The publisher collection summary and its original notes 11–12 are separately scoped from the chapter summary and notes 8–10 and from poem text and notes 1–7. Original summary counts and closing colophons are retained without inferring complete VRI line alignment.' : '')
       + (profile.poem === 19 ? ' One paragraph break separates printed publisher stanza 534 from local 24/global 535, originally printed in the same paragraph; wording and labels are unchanged.' : '')
       + (profile.poem === 21 ? ' One paragraph break separates the publisher combined local 38-39/global 676-677 stanza from local 40/global 678; wording and labels are unchanged.' : '')
       + (profile.poem === 28 ? ' The publisher fourth recitation division is displayed separately before local 50/global 1009; it owns no notes, and stanza notes stay with their original stanzas. One paragraph break separates printed local 63 and 64; no wording or labels are changed.' : '') };

@@ -78,7 +78,7 @@ test('export never carries scripture or SuttaCentral content', () => {
   const json = JSON.stringify(index);
   assert.doesNotMatch(json, /suttacentral\.net/);
   assert.doesNotMatch(json, /Evaṃ me sutaṃ/, 'no Pāli text body');
-  for (const t of index.texts) for (const e of t.english) assert.match(e.url, /^https:\/\/(www\.dhammatalks\.org\/|(?:www\.)?accesstoinsight\.org\/|ancient-buddhist-texts\.net\/Texts-and-Translations\/|apadanatranslation\.com\/text\/chapter-4\/poem-(?:00[1-9]|0[12][0-9]|030)\/$)/, e.url);
+  for (const t of index.texts) for (const e of t.english) assert.match(e.url, /^https:\/\/(www\.dhammatalks\.org\/|(?:www\.)?accesstoinsight\.org\/|ancient-buddhist-texts\.net\/Texts-and-Translations\/|apadanatranslation\.com\/text\/chapter-4\/poem-(?:00[1-9]|0[123][0-9]|040)\/$)/, e.url);
 });
 
 test('CSV round-trips: header, one row per text, quoting of commas and quotes', () => {

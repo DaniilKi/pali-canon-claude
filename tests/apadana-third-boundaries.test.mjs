@@ -126,7 +126,7 @@ test('both changed locators reject old saved links and preserve intentional curr
     old.set('source', source.locator_revision);
     assert.doesNotThrow(() => assertPositionPin(old, { source }));
   }
-  for (const key of ['thi-ap22', 'thi-ap25', 'thi-ap33', 'thi-ap34', 'thi-ap35', 'thi-ap36', 'thi-ap37']) {
+  for (const key of ['thi-ap22', 'thi-ap25', 'thi-ap31', 'thi-ap32', 'thi-ap38', 'thi-ap39', 'thi-ap40']) {
     assert.equal(canon.readingSource(d.byId.get(key)).locator_revision, undefined);
   }
   for (const key of ['thi-ap20', 'thi-ap21']) {

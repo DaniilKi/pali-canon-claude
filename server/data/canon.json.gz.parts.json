@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "size": 5561885,
-  "sha256": "3f1f589d01300daaf0aff1a126c2b776eacbb9fd0e7a95ee0ebaa3939369c806",
+  "size": 5561896,
+  "sha256": "71ada773c7f069b094f532fde2477ea123a56a8e62a06215f7e06a7f13299bc8",
   "parts": [
     {
       "file": "canon.json.gz.part-0001",
@@ -10,8 +10,8 @@
     },
     {
       "file": "canon.json.gz.part-0002",
-      "size": 1367581,
-      "sha256": "4e51ac3d20dd3f71c26297236cf07c9885c02eb1dced27d06f26f3979eb00f39"
+      "size": 1367592,
+      "sha256": "9062664ac504ed4aca629154263cc3627cbeaee77e11d8bc05cbfd79fda907ac"
     }
   ]
 }

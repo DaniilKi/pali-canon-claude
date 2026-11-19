@@ -1,0 +1,63 @@
+{
+  "branch_input_commit": "2e3d6c4b40d3167e079e3d8b3933ec0f23f445c0",
+  "changed_units": [
+    "thi-ap33",
+    "thi-ap34",
+    "thi-ap35",
+    "thi-ap36",
+    "thi-ap37"
+  ],
+  "changed_fields": {
+    "thi-ap33": [
+      "end",
+      "index_revision",
+      "vri"
+    ],
+    "thi-ap34": [
+      "end",
+      "index_revision",
+      "start",
+      "vri"
+    ],
+    "thi-ap35": [
+      "index_revision",
+      "start",
+      "vri"
+    ],
+    "thi-ap36": [
+      "end",
+      "index_revision",
+      "vri"
+    ],
+    "thi-ap37": [
+      "index_revision",
+      "start",
+      "vri"
+    ]
+  },
+  "unit_count": 8544,
+  "unchanged_unit_count": 8539,
+  "source_books_preserved": 61,
+  "full_book_blocks": 10672,
+  "source_git_blob_sha1": "c2a96aed52fb5de3e7fe66442633e5f045cf5bdf",
+  "source_xml_sha256": "23e0721c8fe05a6105b56b627ac38291d10e0eab799a082c257466603f0839a1",
+  "source_xml_bytes": 1779576,
+  "canon_input_sha256": "7cd0a65986d2921b5ff95bdd059ee9ebddf63fa81e748e068d5ff5251cff78b6",
+  "canon_output_sha256": "447ea6af978c88aadd203a5aea29a9fa87e47780353e27b83e7fb3fb65890e21",
+  "commentary_sha256": "a4efb9cd51d1092530cdf6f4e67907ac2dee965e3816af28a83c5f10c0e7d536",
+  "canon_input_gzip_sha256": "3f1f589d01300daaf0aff1a126c2b776eacbb9fd0e7a95ee0ebaa3939369c806",
+  "canon_output_gzip_sha256": "71ada773c7f069b094f532fde2477ea123a56a8e62a06215f7e06a7f13299bc8",
+  "idempotent_output_gzip_identical": true,
+  "all_books_blocks_notes_pages_equal": true,
+  "all_non_units_metadata_equal": true,
+  "all_prior_thirty_units_equal": true,
+  "previous_revisions": {
+    "thi-ap4": "apadana-theri45-v1",
+    "thi-ap5": "apadana-theri45-v1",
+    "thi-ap20": "apadana-theri11-20-v1",
+    "thi-ap21": "apadana-theri11-20-v1",
+    "thi-ap23": "apadana-theri21-30-v1",
+    "thi-ap24": "apadana-theri21-30-v1"
+  },
+  "private_data": "not accessed"
+}

@@ -133,7 +133,7 @@ test('all seven changed locators reject stale saved links while older pair and f
     old.set('source', source.locator_revision);
     assert.doesNotThrow(() => assertPositionPin(old, { source }));
   }
-  for (const key of ['thi-ap14', 'thi-ap22', 'thi-ap33', 'thi-ap34', 'thi-ap35', 'thi-ap36', 'thi-ap37']) {
+  for (const key of ['thi-ap14', 'thi-ap22', 'thi-ap31', 'thi-ap32', 'thi-ap38', 'thi-ap39', 'thi-ap40']) {
     assert.equal(canon.readingSource(d.byId.get(key)).locator_revision, undefined);
   }
   for (const key of ['thi-ap4', 'thi-ap5']) {

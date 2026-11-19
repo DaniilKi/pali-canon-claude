@@ -40,6 +40,12 @@ for (const [id, p] of Object.entries(APADANA_PROFILES)) {
   same(digest(JSON.stringify(extracted.translator_notes)), p.notes_sha256, `${id} notes`);
   same(digest(extracted.publisher_paratext), p.paratext_sha256, `${id} paratext`);
   same(rootDigest(u, canon.books[u.book]), p.root_sha256, `${id} complete root`);
+  if (p.publisher_preface) {
+    const { translator_notes, ...scope } = extracted.publisher_preface;
+    same(JSON.stringify(scope), JSON.stringify(p.publisher_preface), `${id} preface scope`);
+    same(digest(extracted.publisher_paratext), scope.body_sha256, `${id} preface text`);
+    same(digest(JSON.stringify(translator_notes)), scope.notes_sha256, `${id} preface notes`);
+  }
   if (p.publisher_divisions) {
     same(extracted.publisher_divisions.length, p.publisher_divisions.length, `${id} division count`);
     for (const [i, division] of extracted.publisher_divisions.entries()) {
@@ -50,12 +56,12 @@ for (const [id, p] of Object.entries(APADANA_PROFILES)) {
     }
   }
   if (p.index_revision) same(u.index_revision, p.index_revision, `${id} locator revision`);
-  if (p.chapter_summary) {
-    const { text, translator_notes, ...scope } = extracted.chapter_summary;
-    same(JSON.stringify(scope), JSON.stringify(p.chapter_summary), `${id} summary scope`);
-    same(digest(text), scope.body_sha256, `${id} summary text`);
-    same(digest(JSON.stringify(translator_notes)), scope.notes_sha256, `${id} summary notes`);
-    same(rootDigest({ ...u, start: scope.root_start, end: scope.root_end }, canon.books[u.book]), scope.root_sha256, `${id} chapter root`);
+  for (const key of ['chapter_summary', 'collection_summary']) if (p[key]) {
+    const { text, translator_notes, ...scope } = extracted[key];
+    same(JSON.stringify(scope), JSON.stringify(p[key]), `${id} ${key} scope`);
+    same(digest(text), scope.body_sha256, `${id} ${key} text`);
+    same(digest(JSON.stringify(translator_notes)), scope.notes_sha256, `${id} ${key} notes`);
+    same(rootDigest({ ...u, start: scope.root_start, end: scope.root_end }, canon.books[u.book]), scope.root_sha256, `${id} ${key} root`);
   }
   same(extracted.title, p.title, `${id} publisher title`);
   const rootNumbers = canon.books[u.book].blocks.slice(u.start, u.end).filter(b => b[0] === 'hangnum').map(b => Number(b[1]));
@@ -68,7 +74,7 @@ const manifest = {
     translator: APADANA_TRANSLATOR, publisher: 'Jonathan S. Walters and Whitman College', license: APADANA_LICENSE, license_url: APADANA_LICENSE_URL,
     notice_url: 'https://apadanatranslation.com/about/', checked: '2026-11-19', rights_artifacts: rights,
     rights_note: 'Explicit translation grant in About, LICENSE.md, footer and ePub metadata is CC BY-NC-SA 4.0. Conflicting generic CC-BY site.json does not relax those terms. No warranty or endorsement is implied.',
-    policy: 'Live only, thirty finite complete publisher-edition poems; original chapter summaries, recitation divisions and their notes separately scoped; no line-complete VRI claim; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI.' },
+    policy: 'Live only, forty finite complete publisher-edition Therī poems; original publisher preface, chapter/collection summaries, recitation divisions and their notes separately scoped; no line-complete VRI claim or wider Apadāna coverage; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI.' },
   vri_commit: APADANA_VRI_COMMIT,
   held: {},
   links,

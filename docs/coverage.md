@@ -17,7 +17,7 @@ What Pali Canon for Claude contains in version 2.1.0, computed directly from the
 | Thai, Myanmar and VRI page markers | 56,050 (21,781 Thai, 16,687 Myanmar, 17,582 VRI), shown in `get_text` and accepted as citations such as "Thai MN 1.103"; 56,048 resolve back to a text containing the marker |
 | Variant readings | 18,725 VRI notes; 16,632 (88.8%) give at least one reading attributed to editions by siglum (`get_text` `variants: "structured"`) |
 | Scripts | Roman, plus Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao and Lanna by transliteration. The first five are tested against VRI's own script editions; Lao and Lanna have no VRI edition and are tested by round trip only |
-| English translation links | 2,613 links covering 1,509 texts directly, 1,932 including verses that share their chapter's translation (63 of them placed by the content-based linker, [#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)). `list_sources` reports the same per collection as `translation_coverage`, counting grouped ranges through their members (1,483 and 1,906 of 8,445) |
+| English translation links | 2,623 links covering 1,519 texts directly, 1,942 including verses that share their chapter's translation (63 of them placed by the content-based linker, [#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)). `list_sources` reports the same per collection as `translation_coverage`, counting grouped ranges through their members (1,493 and 1,916 of 8,445) |
 | Commentary (Aṭṭhakathā) | VRI commentaries aligned to the texts by VRI paragraph number (`get_commentary`, `get_text` `commentary: true`): DN 34/34, MN 152/152, SN 1,800/1,954, AN 1,598/2,085, Dhp 449/449, Ja 512/547, Vinaya 370/443 texts; every text the commentary numbers is aligned except 8 known exceptions. `server/data/commentary.json.gz`, 10.8 MB |
 | Post-canonical books | All 109 VRI Ṭīkā and Añña books (Visuddhimagga, its Mahāṭīkā, Abhidhammatthasaṅgaha, Mahāvaṃsa and the sub-commentaries), labelled `canonical: false` (`get_post_canonical`, `search_post_canonical`). `server/data/postcanonical.json.gz`, 14.5 MB |
 | Word analysis | Digital Pāḷi Dictionary v0.4.20261026 subset: 89,763 headwords, 753 roots and the word forms of the bundled texts; 99.73% of words in the citable text passages are known (`analyse_passage`, offline `lookup_pali`). `server/data/dpd.json.gz`, 5.3 MB |
@@ -46,7 +46,7 @@ All 61 root files can also be read from beginning to end using `get_text` with a
 | Petavatthu | Pv | 51 | | | 1 |
 | Theragāthā | Thag | 264 | | | 107 |
 | Therīgāthā | Thig | 73 | | | 36 |
-| Apadāna (Thera and Therī) | Ap | 603 | | | 30 |
+| Apadāna (Thera and Therī) | Ap | 603 | | | 40 |
 | Buddhavaṃsa | Bv | 29 | | | — |
 | Cariyāpiṭaka | Cp | 35 | | | — |
 | Jātaka (the verses of the 547 birth stories) | Ja | 547 | | | — |
@@ -91,7 +91,7 @@ Whole-unit counts exclude partial-unit and shared-page translation mappings. `np
 | Ṭhānissaro Bhikkhu, dhammatalks.org | 1,270 | Current versions of his translations |
 | Access to Insight | 1,160 | Ṭhānissaro's earlier versions (879) and about 25 other translators, among them Maurice Walshe, John D. Ireland, Andrew Olendzki, Acharya Buddharakkhita, Nyanaponika Thera, Piyadassi Thera, Ñāṇamoli Thera and Bhikkhu Bodhi; each page keeps its own licence notice |
 | Ānandajoti Bhikkhu, Ancient Buddhist Texts | 153 | Line-by-line Pāli and English (CC BY-SA 3.0): Udāna, Dhammapada chapters, most of the Pārāyanavagga, the Bhikkhunīsaṃyutta, DN 16, several MN, SN and AN suttas, two parts of the Dhammasaṅgaṇī mātikā and Vibhaṅga 6–7. Each link is checked against the Pāli on the page |
-| Jonathan S. Walters, Whitman College | 30 | First complete publisher-edition English for thirty Therī Apadāna poems; live from pinned publisher Markdown (CC BY-NC-SA 4.0), without bundled wording or notes |
+| Jonathan S. Walters, Whitman College | 40 | First indexed complete publisher-edition choices for forty Therī Apadāna poems; live from pinned publisher Markdown (CC BY-NC-SA 4.0), without bundled wording or notes |
 
 A translation is linked only on strong evidence: a matching number and title, a PTS start page that identifies exactly one text, or a confirmed title. When the evidence is ambiguous we leave the text unlinked, so some texts that do have a translation online are not linked yet. A second, content-based pass ([#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)) places a page only when rare names in the English occur in exactly one nearby Pāli text, or its Pāli title names exactly one; each such link stores its evidence and is audited.
 
@@ -197,3 +197,7 @@ Poems11–20 add ten first indexed complete publisher-poem choices. At D244, lin
 ### Third complete publisher-edition Apadāna chapter (D245)
 
 Poems21–30 add ten first indexed complete publisher-poem choices: **2613** links (Walters30), indexed direct/inherited **1509/1932**, grouped **1483/1906**. The new sources preserve475 printed stanza entries and381 separately owned notes. Complete publisher-edition poems are **not line-complete VRI translations**; edition differences remain visible. Earlier twenty profiles/Pāli sequences and all source wording are preserved. Only23/24’s index boundary changes, with stale-position refusal. Partial22, shared12/110subjects, shared-only22 and daily1288 remain unchanged.31–40 remain held. [Source, boundary and validation](data/apadana-third-chapter.md).
+
+### Final finite publisher-edition Therī chapter (D246)
+
+Poems31–40 add ten first indexed choices: **2,623** links (Walters40), indexed direct/inherited **1,519/1,942**, grouped **1,493/1,916**. This completes only the reviewed publisher’s forty Therī poems, **not line-complete VRI translation coverage or all Apadāna**. New sources preserve230printed entries and224notes with exact preface/poem/chapter/collection ownership. All earlier30profiles/Pāli and every source book remain unchanged; only33–37index metadata change. Daily1,288, partial22/shared12/110subjects/shared-only22 remain unchanged. [Source, boundaries and acceptance](data/apadana-fourth-chapter.md).

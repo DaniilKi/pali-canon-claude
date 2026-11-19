@@ -4,7 +4,7 @@ import { APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_TRANSLATO
 
 export const apadanaId = uid => APADANA_PROFILES[uid]?.path ? 'ap:' + APADANA_PROFILES[uid].path.replace(/^\/text\/|\/$/g, '') : undefined;
 export const apadanaFamily = id => typeof id === 'string' && /^ap:/i.test(id.trim());
-const isApadana = value => apadanaFamily(value?.translation_id) || value?.source === 'apadana' || value?.source === 'Legends of the Buddhist Saints (Apadāna)' || own(value, 'translation_revision') || own(value, 'publisher_paratext') || own(value, 'chapter_summary') || own(value, 'publisher_divisions');
+const isApadana = value => apadanaFamily(value?.translation_id) || value?.source === 'apadana' || value?.source === 'Legends of the Buddhist Saints (Apadāna)' || own(value, 'translation_revision') || own(value, 'publisher_paratext') || own(value, 'chapter_summary') || own(value, 'publisher_divisions') || own(value, 'publisher_preface') || own(value, 'collection_summary');
 
 function sameParatext(value, expected, content) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
@@ -24,6 +24,36 @@ export function validateChapterSummary(value, uid, content = false) {
   if (!expected) { if (own(value, 'chapter_summary')) throw Error('The pinned Apadāna chapter-summary owner changed.'); return; }
   if (!sameParatext(value.chapter_summary, expected, content)) {
     throw Error('The pinned Apadāna chapter-summary scope or note ownership changed.');
+  }
+}
+
+/** The fourth-chapter preface wording stays solely in publisher_paratext. */
+export function validatePublisherPreface(value, uid, content = false) {
+  const profile = APADANA_PROFILES[uid], expected = uid === 'thi-ap31' ? profile?.publisher_preface : undefined;
+  if (!expected) { if (own(value, 'publisher_preface')) throw Error('The pinned Apadāna publisher-preface owner changed.'); return; }
+  const preface = value.publisher_preface;
+  if (!preface || typeof preface !== 'object' || Array.isArray(preface)) throw Error('The pinned Apadāna publisher-preface scope or note ownership changed.');
+  const { translator_notes, ...descriptor } = preface;
+  if (Object.keys(expected).sort().join(',') !== 'body_sha256,kind,label,note_numbers,notes_sha256,parent_id'
+    || expected.kind !== 'publisher_preface' || expected.parent_id !== uid || expected.label !== 'Fourth Therī chapter preface'
+    || expected.body_sha256 !== profile.paratext_sha256 || !sameScope(expected.note_numbers, [1])
+    || Object.keys(preface).sort().join(',') !== Object.keys(expected).concat(content ? ['translator_notes'] : []).sort().join(',')
+    || !sameScope(descriptor, expected) || own(preface, 'text') || (content
+      ? !Array.isArray(translator_notes) || translator_notes.length !== 1 || translator_notes.some(note => !note || typeof note !== 'object' || Array.isArray(note)
+        || Object.keys(note).sort().join(',') !== 'number,text' || note.number !== 1 || !nonempty(note.text) || note.text.length > 50000)
+      : own(preface, 'translator_notes'))) throw Error('The pinned Apadāna publisher-preface scope or note ownership changed.');
+}
+
+/** Canonical collection paratext keeps its own identity, wording and notes. */
+export function validateCollectionSummary(value, uid, content = false) {
+  const expected = uid === 'thi-ap40' ? APADANA_PROFILES[uid]?.collection_summary : undefined;
+  if (!expected) { if (own(value, 'collection_summary')) throw Error('The pinned Apadāna collection-summary owner changed.'); return; }
+  const summary = value.collection_summary;
+  if (expected.kind !== 'canonical_collection_summary' || expected.parent_id !== uid
+    || !sameScope(expected.note_numbers, [11, 12]) || !summary || typeof summary !== 'object' || Array.isArray(summary)
+    || Object.keys(summary).sort().join(',') !== Object.keys(expected).concat(content ? ['text', 'translator_notes'] : []).sort().join(',')
+    || !sameParatext(summary, expected, content)) {
+    throw Error('The pinned Apadāna collection-summary scope or note ownership changed.');
   }
 }
 
@@ -47,6 +77,8 @@ export function validateApadanaChoice(value, uid, content = false) {
     throw Error('The pinned Apadāna source identity or terms changed. No English source was displayed.');
   }
   validateChapterSummary(value, uid, content);
+  validatePublisherPreface(value, uid, content);
+  validateCollectionSummary(value, uid, content);
   validatePublisherDivisions(value, uid, content);
 }
 

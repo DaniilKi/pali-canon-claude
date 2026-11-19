@@ -60,7 +60,7 @@ test('SN36.15 prefix preserves full root/context/notice pins and the previous si
   assert.match(row.mapping_note,/©1983/);assert.match(row.mapping_note,/50 copies/);assert.match(row.mapping_note,/complete licence/);assert.match(row.mapping_note,/1998.*1983/s);
   assert.equal(scope.read_with,undefined);assert.equal(scope.read_pages,undefined);assert.equal(scopeDescriptor(choice,unit.id).flags.allow_partial,true);
   const totals=translationCoverage({refresh:true}).total;
-  assert.deepEqual([totals.links,totals.with_english,totals.with_english_including_inherited,totals.partial_links,totals.partial_only],[2613,1483,1906,22,16]);
+  assert.deepEqual([totals.links,totals.with_english,totals.with_english_including_inherited,totals.partial_links,totals.partial_only],[2623,1493,1916,22,16]);
   const daily=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([daily.rotation.of,daily.text.id],[1288,'sn11.22']);
 });
 

@@ -531,7 +531,7 @@ export function describe(u, notes = []) {
     ...(t.license ? { license: t.license } : {}),
     translation_id: translationId(t),
     match: t.match,
-    ...(t.source === 'apadana' ? { translation_revision: t.translation_revision, note_count: t.note_count, ...(t.chapter_summary ? { chapter_summary: JSON.parse(JSON.stringify(t.chapter_summary)) } : {}), ...(t.publisher_divisions ? { publisher_divisions: JSON.parse(JSON.stringify(t.publisher_divisions)) } : {}), ...(t.note_numbers ? { note_numbers: [...t.note_numbers] } : {}) } : {}),
+    ...(t.source === 'apadana' ? { translation_revision: t.translation_revision, note_count: t.note_count, ...(t.publisher_preface ? { publisher_preface: JSON.parse(JSON.stringify(t.publisher_preface)) } : {}), ...(t.chapter_summary ? { chapter_summary: JSON.parse(JSON.stringify(t.chapter_summary)) } : {}), ...(t.collection_summary ? { collection_summary: JSON.parse(JSON.stringify(t.collection_summary)) } : {}), ...(t.publisher_divisions ? { publisher_divisions: JSON.parse(JSON.stringify(t.publisher_divisions)) } : {}), ...(t.note_numbers ? { note_numbers: [...t.note_numbers] } : {}) } : {}),
     ...(t.mapping_note ? { mapping_note: t.mapping_note } : {}),
     ...(t.section ? { source_section: JSON.parse(JSON.stringify(t.section)) } : {}),
     ...(isScoped(t) ? { translation_scope: translationScope(t, u) } : {}),

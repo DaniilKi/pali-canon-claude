@@ -1467,7 +1467,7 @@ def main():
     assert manifest == json.loads((ROOT / 'server/data/apadana.json').read_text()), 'Package metadata differs'
     rows, commit = manifest['links'], manifest['source']['commit']
     assert commit == SOURCE_REVISION, 'Publisher revision changed'
-    assert set(rows) == {'thi-ap' + str(n) for n in range(1, 31)}, 'Unexpected activated source scope'
+    assert set(rows) == {'thi-ap' + str(n) for n in range(1, 41)}, 'Unexpected activated source scope'
     # Keep historical assertions strict for the original twenty; the third-chapter harness owns 21–30.
     historical_ids = set(BASELINE) | set(NEW_IDS)
     for uid, expected in BASELINE.items():

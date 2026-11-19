@@ -45,7 +45,7 @@ test('missing or reordered stanzas, undefined notes and unexpected summaries fai
 
 test('finite metadata binds each whole root, provenance and rights with no bodies bundled', () => {
   assert.equal(APADANA_LICENSE,'CC BY-NC-SA 4.0');
-  assert.deepEqual(Object.keys(manifest.links),Array.from({length:30},(_,i)=>'thi-ap'+(i+1)));
+  assert.deepEqual(Object.keys(manifest.links),Array.from({length:40},(_,i)=>'thi-ap'+(i+1)));
   const c=JSON.parse(gunzipSync(readBundled(new URL('../server/data/canon.json.gz',import.meta.url))));
   for(const [id,link]of Object.entries(manifest.links)){
     const u=c.units.find(u=>u.id===id),b=c.books[u.book];
@@ -55,7 +55,7 @@ test('finite metadata binds each whole root, provenance and rights with no bodie
     for(const key of ['partial_scope','shared_scope','section','parts'])assert.throws(()=>validateLink({...link,[key]:null},id,u,b),/differs/);
     for(const key of ['text','translator_notes','publisher_paratext'])assert.equal(Object.hasOwn(link,key),false);
     assert.equal(isApadanaRawUrl(link.raw_url),true);
-    for(const changed of [link.raw_url+'?x=1',link.raw_url.replace(manifest.source.commit,'main'),link.raw_url.replace('https:','http:'),link.raw_url.replace(/poem-\d{3}\.md/,'poem-031.md')])if(changed!==link.raw_url)assert.equal(isApadanaRawUrl(changed),false);
+    for(const changed of [link.raw_url+'?x=1',link.raw_url.replace(manifest.source.commit,'main'),link.raw_url.replace('https:','http:'),link.raw_url.replace(/poem-\d{3}\.md/,'poem-041.md')])if(changed!==link.raw_url)assert.equal(isApadanaRawUrl(changed),false);
   }
 });
 
