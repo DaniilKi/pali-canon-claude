@@ -36,7 +36,7 @@ export function view(bridge, { supported = true, modelCapabilities, stateWriter,
   if (sizingRuntime) Object.assign(window, sizingRuntime);
   const document = { body: sizingRuntime && sizingRuntime.body, documentElement: new Element(), getElementById: id => elements[id], createElement: tag => new Element(tag), createTextNode: text => { const e = new Element(); e.textContent = text; return e; } };
   runInNewContext(html.match(/<script>([^]*?)<\/script>/)[1], {
-    window, document, Date, setTimeout(cb, ms) { timers.set(++timer, cb); deadlines.set(timer, now + ms); return timer; }, clearTimeout(id) { timers.delete(id); deadlines.delete(id); },
+    window, document, Date, TextEncoder, setTimeout(cb, ms) { timers.set(++timer, cb); deadlines.set(timer, now + ms); return timer; }, clearTimeout(id) { timers.delete(id); deadlines.delete(id); },
   });
   const message = data => handlers.message({ source: parent, data: { jsonrpc: '2.0', ...data } });
   const init = caps => message({ id: 1, result: { hostCapabilities: { ...(supported ? { serverTools: {} } : {}), ...(openLinks ? { openLinks: {} } : {}), ...(caps === undefined ? {} : { updateModelContext: caps }) } } });

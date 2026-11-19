@@ -3,7 +3,7 @@ import {readFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
 
 const historical=JSON.parse(readFileSync(new URL('../../docs/evidence/apadana/THERA_SCALED_APPROVAL.json',import.meta.url),'utf8'));
-const intake=JSON.parse(readFileSync(new URL('../../docs/evidence/apadana/THERA_PAIR_INTAKE_APPROVAL.json',import.meta.url),'utf8'));
+const intake=JSON.parse(readFileSync(new URL('../../docs/evidence/apadana/THERA_141_180_APPROVAL.json',import.meta.url),'utf8'));
 assert.equal(intake.schema,'reviewed-apadana-intake-v1');
 assert.equal(intake.status,'approved');
 assert.equal(intake.publisher_revision,'fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4');

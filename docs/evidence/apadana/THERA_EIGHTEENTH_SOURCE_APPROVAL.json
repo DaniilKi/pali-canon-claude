@@ -1,0 +1,49 @@
+{
+  "baseline": "05fc4e29540fc0799145dc28838bedb7d964b2c7",
+  "decision": "CONDITIONAL SOURCE-ONLY APPROVAL; independent source/root/runtime/CI review required before activation",
+  "approved_ids": [
+    "tha-ap173",
+    "tha-ap174",
+    "tha-ap175",
+    "tha-ap176",
+    "tha-ap177",
+    "tha-ap178",
+    "tha-ap179",
+    "tha-ap180",
+    "tha-ap181",
+    "tha-ap182"
+  ],
+  "approved_poems": [
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180
+  ],
+  "goldens_sha256": "f393a0809314ce216316261e2338d79c06acf1af860b5b11d8b778033b931e07",
+  "source_review_sha256": "24cd2619147fb9c9cc757cd7c8ace5ad826b1f17d2216cff646c1695275aeeee",
+  "rights_sha256": "5e8040d32bdc2b20c77aed05b47ef444a4c1901be32c7f00c6cca269f50be095",
+  "xml_replay_sha256": "437dba6847a0acebd50fc6ea8367c9bc0a57987a4b1c1476c5f700d56a3b4ebc",
+  "holds_in_batch": [],
+  "outside_holds_preserved": [
+    70,
+    140
+  ],
+  "outside_conditional_scopes_unchanged": [
+    158,
+    159
+  ],
+  "not_authorized": [
+    "main",
+    "deploy",
+    "force push",
+    "outreach",
+    "English/notes/apparatus bundling",
+    "unreviewed source activation"
+  ]
+}

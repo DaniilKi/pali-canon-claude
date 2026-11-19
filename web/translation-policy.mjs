@@ -3,8 +3,11 @@ import {contentSha256} from './content-sha256.mjs';
 
 import { APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_TRANSLATOR, APADANA_PROFILES } from '../src/apadana-profiles.mjs';
 
-// Literal D250 source owners; the preceding89 presentation contracts stay unchanged.
-const PINNED_NEW_PARATEXT_IDS = new Set(["tha-ap44","tha-ap63","tha-ap64","tha-ap65","tha-ap66","tha-ap67","tha-ap68","tha-ap69","tha-ap70","tha-ap71","tha-ap73","tha-ap74","tha-ap75","tha-ap76","tha-ap77","tha-ap78","tha-ap79","tha-ap80","tha-ap81","tha-ap82","tha-ap83","tha-ap84","tha-ap85","tha-ap86","tha-ap87","tha-ap88","tha-ap89","tha-ap90","tha-ap91","tha-ap92","tha-ap93","tha-ap94","tha-ap95","tha-ap96","tha-ap97","tha-ap98","tha-ap99","tha-ap100","tha-ap101","tha-ap102","tha-ap103","tha-ap104","tha-ap105","tha-ap106","tha-ap107","tha-ap108","tha-ap109","tha-ap110","tha-ap111","tha-ap112","tha-ap113","tha-ap114","tha-ap115","tha-ap116","tha-ap117","tha-ap118","tha-ap119","tha-ap120","tha-ap121","tha-ap122","tha-ap123","tha-ap124","tha-ap125","tha-ap126","tha-ap127","tha-ap128","tha-ap129","tha-ap130","tha-ap131","tha-ap132","tha-ap133","tha-ap134","tha-ap135","tha-ap136","tha-ap137","tha-ap138","tha-ap139","tha-ap140","tha-ap141"]);
+// Explicit reviewed publisher-preface owners; earlier presentation contracts stay unchanged.
+const PINNED_NEW_PARATEXT_IDS = new Set(["tha-ap44","tha-ap63","tha-ap64","tha-ap65","tha-ap66","tha-ap67","tha-ap68","tha-ap69","tha-ap70","tha-ap71","tha-ap73","tha-ap74","tha-ap75","tha-ap76","tha-ap77","tha-ap78","tha-ap79","tha-ap80","tha-ap81","tha-ap82","tha-ap83","tha-ap84","tha-ap85","tha-ap86","tha-ap87","tha-ap88","tha-ap89","tha-ap90","tha-ap91","tha-ap92","tha-ap93","tha-ap94","tha-ap95","tha-ap96","tha-ap97","tha-ap98","tha-ap99","tha-ap100","tha-ap101","tha-ap102","tha-ap103","tha-ap104","tha-ap105","tha-ap106","tha-ap107","tha-ap108","tha-ap109","tha-ap110","tha-ap111","tha-ap112","tha-ap113","tha-ap114","tha-ap115","tha-ap116","tha-ap117","tha-ap118","tha-ap119","tha-ap120","tha-ap121","tha-ap122","tha-ap123","tha-ap124","tha-ap125","tha-ap126","tha-ap127","tha-ap128","tha-ap129","tha-ap130","tha-ap131","tha-ap132","tha-ap133","tha-ap134","tha-ap135","tha-ap136","tha-ap137","tha-ap138","tha-ap139","tha-ap140","tha-ap141","tha-ap143","tha-ap144","tha-ap145","tha-ap146","tha-ap147","tha-ap148","tha-ap149","tha-ap150","tha-ap151","tha-ap152","tha-ap153","tha-ap154","tha-ap155","tha-ap156","tha-ap157","tha-ap158","tha-ap159","tha-ap162","tha-ap163","tha-ap164","tha-ap165","tha-ap166","tha-ap167","tha-ap168","tha-ap169","tha-ap170","tha-ap171","tha-ap172","tha-ap173","tha-ap174","tha-ap175","tha-ap176","tha-ap177","tha-ap178","tha-ap179","tha-ap180","tha-ap181","tha-ap182"]);
+
+// These38 newly approved sources additionally pin actual poem-note content.
+const PINNED_POEM_NOTE_IDS = new Set(["tha-ap143","tha-ap144","tha-ap145","tha-ap146","tha-ap147","tha-ap148","tha-ap149","tha-ap150","tha-ap151","tha-ap152","tha-ap153","tha-ap154","tha-ap155","tha-ap156","tha-ap157","tha-ap158","tha-ap159","tha-ap162","tha-ap163","tha-ap164","tha-ap165","tha-ap166","tha-ap167","tha-ap168","tha-ap169","tha-ap170","tha-ap171","tha-ap172","tha-ap173","tha-ap174","tha-ap175","tha-ap176","tha-ap177","tha-ap178","tha-ap179","tha-ap180","tha-ap181","tha-ap182"]);
 
 export const apadanaId = uid => APADANA_PROFILES[uid]?.path ? 'ap:' + APADANA_PROFILES[uid].path.replace(/^\/text\/|\/$/g, '') : undefined;
 export const apadanaFamily = id => typeof id === 'string' && /^ap:/i.test(id.trim());
@@ -32,7 +35,7 @@ export function validateChapterSummary(value, uid, content = false) {
   const expected = APADANA_PROFILES[uid]?.chapter_summary;
   if (!expected) { if (own(value, 'chapter_summary')) throw Error('The pinned Apadāna chapter-summary owner changed.'); return; }
   if (!sameParatext(value.chapter_summary, expected, content)
-    || content && ['tha-ap82','tha-ap92','tha-ap102','tha-ap112','tha-ap122','tha-ap132'].includes(uid) && !samePinnedContent(value.chapter_summary, expected)) {
+    || content && ['tha-ap82','tha-ap92','tha-ap102','tha-ap112','tha-ap122','tha-ap132','tha-ap152','tha-ap162','tha-ap172','tha-ap182'].includes(uid) && !samePinnedContent(value.chapter_summary, expected)) {
     throw Error('The pinned Apadāna chapter-summary scope or note ownership changed.');
   }
 }
@@ -112,6 +115,11 @@ export function validateApadanaChoice(value, uid, content = false) {
   if (content && (JSON.stringify(value.mapping_notes) !== JSON.stringify(profile.mapping_notes)
     || !Array.isArray(value.notes) || profile.mapping_notes.some(note => !value.notes.includes(note)))) {
     throw Error('The pinned Apadāna edition or mapping notices changed. No English was displayed.');
+  }
+  if (content && PINNED_POEM_NOTE_IDS.has(uid)) {
+    let valid = false;
+    try { valid = Array.isArray(value.translator_notes) && contentSha256(JSON.stringify(value.translator_notes)) === profile.notes_sha256; } catch {}
+    if (!valid) throw Error('The pinned Apadāna poem-note content changed. No English was displayed.');
   }
   if (content && PINNED_NEW_PARATEXT_IDS.has(uid)) {
     let valid = false;

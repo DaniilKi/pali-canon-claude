@@ -109,7 +109,7 @@ export function parseTheraApadana(raw, profile) {
   }
   let chapter_summary;
   if (profile.chapter_summary) {
-    if (!['tha-ap22', 'tha-ap32', 'tha-ap42', 'tha-ap52', 'tha-ap62', 'tha-ap82', 'tha-ap92', 'tha-ap102', 'tha-ap112', 'tha-ap122', 'tha-ap132'].includes(profile.id)) fail();
+    if (!['tha-ap22', 'tha-ap32', 'tha-ap42', 'tha-ap52', 'tha-ap62', 'tha-ap82', 'tha-ap92', 'tha-ap102', 'tha-ap112', 'tha-ap122', 'tha-ap132', 'tha-ap152', 'tha-ap162', 'tha-ap172', 'tha-ap182'].includes(profile.id)) fail();
     const marker = '\n\nThe Summary:\n\n', parts = poem.split(marker); if (parts.length !== 2) fail();
     poem = parts[0]; const summaryRaw = marker.trim() + '\n\n' + parts[1], text = present(summaryRaw), translator_notes = notesFor(profile.chapter_summary.note_numbers);
     refs(summaryRaw, profile.chapter_summary.note_numbers);
@@ -120,7 +120,7 @@ export function parseTheraApadana(raw, profile) {
   if (new Set(owned).size !== owned.length || owned.length !== notes.length || notes.some(n => !owned.includes(n.number))) fail();
   // Publisher101 alone uses ## for its poem heading, beside a separate ## preface.
   const headings = [...poem.matchAll(profile.id === 'tha-ap103' ? /^## \\\[101\. /gm : /^### /gm)]; if (headings.length !== 1) fail();
-  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93', 'tha-ap103', 'tha-ap113', 'tha-ap123', 'tha-ap133'].includes(profile.id) !== (split > 0)) fail();
+  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93', 'tha-ap103', 'tha-ap113', 'tha-ap123', 'tha-ap133', 'tha-ap143', 'tha-ap153', 'tha-ap163', 'tha-ap173'].includes(profile.id) !== (split > 0)) fail();
   const preface = poem.slice(0, split), body = poem.slice(split); refs(preface, []); refs(body, profile.note_numbers);
   const publisher_paratext = present(preface), text = present(body), translator_notes = notesFor(profile.note_numbers), paragraphs = text.split(/\n\n+/);
   const colophons = profile.id === 'tha-ap134' ? paragraphs.at(-1).split('\n') : paragraphs.slice(-2);

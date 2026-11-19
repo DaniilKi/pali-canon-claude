@@ -7,6 +7,7 @@ Only synthetic private notes are used. Viewport/host emulation is not human/devi
 import argparse, copy, gzip, hashlib, importlib.util, json, os, socket, subprocess, sys, tempfile, time, urllib.request
 from pathlib import Path
 from playwright.sync_api import expect, sync_playwright
+from web_reader_apadana_intake import reviewed_intake
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'b5669a334add97ebc0c3c32f9b3fb45ed90d9780'
@@ -299,7 +300,11 @@ def main():
     manifest = json.loads((server_dir/'data/apadana.json').read_text())
     assert manifest == json.loads((ROOT/'server/data/apadana.json').read_text())
     old, canon = baseline()
-    assert set(old['links']) == set(approval['baseline_ids']) and len(old['links']) == 129 and set(manifest['links']) == set(old['links'])|all_approved
+    assert set(old['links']) == set(approval['baseline_ids']) and len(old['links']) == 129
+    assert set(old['links'])|all_approved == set(approval['expected_profile_ids']), 'Historical D251 cohort differs'
+    current_intake = reviewed_intake(ROOT)
+    assert current_intake['expected_profile_ids'][:len(approval['expected_profile_ids'])] == approval['expected_profile_ids'], 'Historical168 prefix differs'
+    assert set(manifest['links']) == set(current_intake['expected_profile_ids']), 'Unreviewed current activation'
     rows = manifest['links']
     for uid,row in old['links'].items():assert rows[uid] == row, 'Previous source changed: '+uid
     probe = "import{gunzipSync}from'node:zlib';import{readBundled}from'./src/bundled-data.mjs';let s='';for await(const c of process.stdin)s+=c;process.stdout.write(gunzipSync(readBundled(JSON.parse(s))).toString());"

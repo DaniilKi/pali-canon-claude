@@ -2,6 +2,7 @@ import {CURRENT_APADANA_IDS,BASELINE_APADANA_IDS} from './helpers/apadana-intake
 // Contract regressions for the reproduced loss of edition caveats in cached responses.
 // Synthetic wording exercises rendering guards; it is not source or rights evidence.
 import {test} from 'node:test';
+import {readFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {createContext, runInContext} from 'node:vm';
 import {APADANA_PROFILES, APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_TRANSLATOR} from '../src/apadana-profiles.mjs';
@@ -39,16 +40,33 @@ function embeddedGuard() {
 }
 
 test('every reviewed profile permitting synthetic wording retains all mandatory edition caveats in standalone, comparison and embedded readers', () => {
-  assert.equal(WIDGET_VERSION, 'v26');
+  assert.equal(WIDGET_VERSION, 'v27');
   const checked = embeddedGuard();
   assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
   // These finite content guards require exact live source wording; source suites cover them.
   // Their positive/tamper/cache cases use original artifacts in the held42 and
-  // thera-hundred client suites; every preceding89 synthetic fixture remains.
-  const exactContentIds=['tha-ap44','tha-ap63','tha-ap73','tha-ap76','tha-ap82','tha-ap83','tha-ap92','tha-ap93','tha-ap102','tha-ap103','tha-ap112','tha-ap113','tha-ap122','tha-ap123','tha-ap132','tha-ap133'];
+  // thera-hundred suites. All 38 new sources require actual poem-note content and
+  // have complete positive/cache/tamper coverage in the 141–180 source/client suites.
+  // Every preceding 152 synthetic fixture remains unconditional.
+  const oldExactContentIds=['tha-ap44','tha-ap63','tha-ap73','tha-ap76','tha-ap82','tha-ap83','tha-ap92','tha-ap93','tha-ap102','tha-ap103','tha-ap112','tha-ap113','tha-ap122','tha-ap123','tha-ap132','tha-ap133'];
+  const newExactContentIds=['tha-ap143','tha-ap153','tha-ap163','tha-ap173','tha-ap152','tha-ap162','tha-ap172','tha-ap182'];
+  const current=JSON.parse(readFileSync(new URL('../docs/evidence/apadana/THERA_141_180_APPROVAL.json',import.meta.url),'utf8'));
+  assert.equal(current.status,'approved');
+  const newSourceOnlyIds=current.approved_ids;
+  assert.equal(newSourceOnlyIds.length,38);
+  assert.ok(newExactContentIds.every(uid=>newSourceOnlyIds.includes(uid)),'All 8 new preface/summary owners remain source-backed');
+  const exactContentIds=[...oldExactContentIds,...newSourceOnlyIds];
+  const historical=JSON.parse(readFileSync(new URL('../docs/evidence/apadana/THERA_PAIR_INTAKE_APPROVAL.json',import.meta.url),'utf8'));
+  const oldIds=historical.expected_profile_ids;
+  assert.equal(oldIds.length,168);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,168),oldIds);
+  const oldSyntheticIds=oldIds.filter(uid=>!oldExactContentIds.includes(uid));
+  assert.equal(oldExactContentIds.length,16);assert.equal(oldSyntheticIds.length,152);
   const syntheticIds = CURRENT_APADANA_IDS.filter(uid => !exactContentIds.includes(uid));
+  assert.deepEqual(syntheticIds.filter(uid=>oldIds.includes(uid)),oldSyntheticIds,'Every prior 152 positive fixture retains its exact identity and order');
+  assert.ok(newSourceOnlyIds.every(uid=>!oldIds.includes(uid)&&CURRENT_APADANA_IDS.includes(uid)),'Exactly 38 new owners require source-backed positive fixtures');
+  assert.equal(syntheticIds.filter(uid=>!oldIds.includes(uid)).length,0);
   assert.equal(syntheticIds.length,152);
-  assert.equal(CURRENT_APADANA_IDS.length,168);
+  assert.equal(CURRENT_APADANA_IDS.length,206);
   assert.equal(BASELINE_APADANA_IDS.length,89);
   assert.ok(BASELINE_APADANA_IDS.every(uid=>syntheticIds.includes(uid)),'all89 preceding positive fixtures retain their original coverage');
   for (const uid of syntheticIds) {

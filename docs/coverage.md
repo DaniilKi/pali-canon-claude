@@ -17,7 +17,7 @@ What Pali Canon for Claude contains in version 2.1.0, computed directly from the
 | Thai, Myanmar and VRI page markers | 56,050 (21,781 Thai, 16,687 Myanmar, 17,582 VRI), shown in `get_text` and accepted as citations such as "Thai MN 1.103"; 56,048 resolve back to a text containing the marker |
 | Variant readings | 18,725 VRI notes; 16,632 (88.8%) give at least one reading attributed to editions by siglum (`get_text` `variants: "structured"`) |
 | Scripts | Roman, plus Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao and Lanna by transliteration. The first five are tested against VRI's own script editions; Lao and Lanna have no VRI edition and are tested by round trip only |
-| English translation links | 2,672 links covering 1,568 texts directly, 1,991 including verses that share their chapter's translation (63 of them placed by the content-based linker, [#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)). `list_sources` reports the same per collection as `translation_coverage`, counting grouped ranges through their members (1,542 and 1,965 of 8,445) |
+| English translation links | 2,789 links covering 1,685 texts directly, 2,108 including verses that share their chapter's translation (63 of them placed by the content-based linker, [#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)). `list_sources` reports the same per collection as `translation_coverage`, counting grouped ranges through their members (1,659 and 2,082 of 8,445) |
 | Commentary (Aṭṭhakathā) | VRI commentaries aligned to the texts by VRI paragraph number (`get_commentary`, `get_text` `commentary: true`): DN 34/34, MN 152/152, SN 1,800/1,954, AN 1,598/2,085, Dhp 449/449, Ja 512/547, Vinaya 370/443 texts; every text the commentary numbers is aligned except 8 known exceptions. `server/data/commentary.json.gz`, 10.8 MB |
 | Post-canonical books | All 109 VRI Ṭīkā and Añña books (Visuddhimagga, its Mahāṭīkā, Abhidhammatthasaṅgaha, Mahāvaṃsa and the sub-commentaries), labelled `canonical: false` (`get_post_canonical`, `search_post_canonical`). `server/data/postcanonical.json.gz`, 14.5 MB |
 | Word analysis | Digital Pāḷi Dictionary v0.4.20261026 subset: 89,763 headwords, 753 roots and the word forms of the bundled texts; 99.73% of words in the citable text passages are known (`analyse_passage`, offline `lookup_pali`). `server/data/dpd.json.gz`, 5.3 MB |
@@ -46,7 +46,7 @@ All 61 root files can also be read from beginning to end using `get_text` with a
 | Petavatthu | Pv | 51 | | | 1 |
 | Theragāthā | Thag | 264 | | | 107 |
 | Therīgāthā | Thig | 73 | | | 36 |
-| Apadāna (Thera and Therī) | Ap | 603 | | | 89 |
+| Apadāna (Thera and Therī) | Ap | 603 | | | 206 |
 | Buddhavaṃsa | Bv | 29 | | | — |
 | Cariyāpiṭaka | Cp | 35 | | | — |
 | Jātaka (the verses of the 547 birth stories) | Ja | 547 | | | — |
@@ -213,3 +213,11 @@ Publisher31–40 adds ten first English choices, with111 printed stanza entries 
 ### Nineteen supplementary Therā choices (D249)
 
 Publisher41,43–60 add19firstEnglishchoices,205printedentries and126notes. The fifth chapter remains a subset because42 is held. Currentwholelinks**2,672**(Walters89),indexeddirect/inherited**1,568/1,991**,grouped**1,542/1,965**. Partial/shared/dailycountsandallcanonical/commentarydataremainunchanged. [Scope, holds and validation](data/thera-fifth-sixth-review.md).
+
+### Scaled and paired Therā intake (D250–D251)
+
+D250 added40 individually reviewed publisher poems42,61–69,71–100, then D251 added39 poems101–139, for168 reviewed Apadāna choices. The two-source canonical107/108 boundary repair changes index metadata only; all source wording and private saved data remain unchanged. These historical batches brought whole links to2,751; indexed direct/inherited1,647/2,070; grouped1,621/2,044. [D250 evidence](data/thera-scaled-intake.md), [D251 evidence](data/thera-pair-intake.md).
+
+### Thirty-eight further complete publisher-edition choices (D252)
+
+Publisher141–157,160–180 add38 first indexed English choices,312 body paragraphs,198 physical printed entries,199 local stanza labels and144 poem-owned notes. Current reviewed Apadāna choices are206 (40Therī,166Therā), with2,789 whole links overall; indexed direct/inherited1,685/2,108; grouped1,659/2,082. The four prefaces and four chapter summaries are separate and note-free. These counts mean complete publisher-edition poems, **not line-complete VRI translations**. Canonical books, commentary, all168 prior choices and locator revisions are unchanged. Publisher70/140/158/159 remain held;393 Therā publisher files remain unapproved. Partial22, shared12/110subjects and daily1,288 remain unchanged. [Source evidence and acceptance limits](data/thera141-180-intake.md).

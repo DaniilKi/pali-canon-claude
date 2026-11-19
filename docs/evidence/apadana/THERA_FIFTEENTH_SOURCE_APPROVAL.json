@@ -1,0 +1,40 @@
+{
+  "baseline": "05fc4e29540fc0799145dc28838bedb7d964b2c7",
+  "decision": "SOURCE-ONLY APPROVAL; independent peer/runtime/package/CI gates remain; no activation authority",
+  "approved_ids": [
+    "tha-ap143",
+    "tha-ap144",
+    "tha-ap145",
+    "tha-ap146",
+    "tha-ap147",
+    "tha-ap148",
+    "tha-ap149",
+    "tha-ap150",
+    "tha-ap151",
+    "tha-ap152"
+  ],
+  "approved_poems": [
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150
+  ],
+  "held_in_batch": [],
+  "goldens_sha256": "787881e778e68b2c6aa307cc00231138c7301d353469d80969cd8dae3f34dc05",
+  "source_review_sha256": "dceea4bf75109769521bc93ac5f056d503b14654b80ef848d8cfbd759dabd394",
+  "rights_sha256": "1f84fdaac2de037e8fa0e684366783817ee0e0bd600ddd043ce30d0441668880",
+  "xml_replay_sha256": "bdc7e1daead6c45dac1f5fbce669cbdfef54d404564a495d3232a14e575961d6",
+  "prior_profiles_preserved": 168,
+  "other_holds_preserved": [
+    70,
+    140
+  ],
+  "namespace_assigned": false,
+  "activation": false
+}

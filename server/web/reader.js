@@ -13466,6 +13466,2844 @@
         "Note5 selects BJTS sakosa\u1E43 against PTS sako\u1E6Da\u1E43 and commentary sake\u1E6Da\u1E43; VRI62main sakosa\u1E43 remains separate.",
         "Publisher local4/global1931 fruit of flower-p\u016Bj\u0101 differs in formula from VRI63pupphad\u0101nassida\u1E43 phala\u1E43 flower-giving. No inferred formula harmonization."
       ]
+    },
+    "tha-ap143": {
+      "id": "tha-ap143",
+      "publisher_chapter": "chapter-3",
+      "poem": 141,
+      "verses": [
+        1941,
+        1944
+      ],
+      "root_verses": [
+        1,
+        4
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-141/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-141/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-141.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Adhicchattiya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 141; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "439c8f3b86aed9c6c3747ab8852e3695cb70fb13f18e4a6f39974d2fd5887a91",
+      "body_sha256": "229c913f998254c804c853ca2335f96bc2568e2f2858f5d0e746b89c4e82fe19",
+      "notes_sha256": "39a67cbd97814fcfb117d7075ebd751ac8d07d8e2107c5c56d2492bf58e3818a",
+      "paratext_sha256": "a100c85f0f3fe389dc3be1f47afc39d66f89329bbe56ab93413e40055ff692ac",
+      "root_sha256": "8b3d415ee6f9b379e306a9d12adfcf731738a83c36f91817c205acc58fd23458",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1941",
+          "suffix": "(1) [1941]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1942",
+          "suffix": "(2) [1942]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1943",
+          "suffix": "(3) [1943]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1944",
+          "suffix": "(4) [1944]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 141 to canonical tha-ap143. Shared numbers alone establish no other mapping.",
+        "Publisher Adhicchattiya differs from VRI Atichattiya; root variants include adhichattiyo/chatt\u0101dhichatta\u1E43. Preserve both original forms.",
+        "Publisher local3/global1943 says seventeenth aeon; VRI3 has sattarase kappasate, seventeen hundred aeons (1700). Retain the difference without temporal harmonization.",
+        "Original note3 retains final stupas,. punctuation and commentary attribution; preface is separate Fifteenth Chatta chapter wording."
+      ]
+    },
+    "tha-ap144": {
+      "id": "tha-ap144",
+      "publisher_chapter": "chapter-3",
+      "poem": 142,
+      "verses": [
+        1945,
+        1949
+      ],
+      "root_verses": [
+        5,
+        9
+      ],
+      "note_count": 2,
+      "note_numbers": [
+        1,
+        2
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-142/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-142/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-142.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Thamb\u0101ropaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 142; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "7cdb961aaae10aade36d153cdd7d7a39ddc7fa716e9731c29d79a916e4b302f3",
+      "body_sha256": "41a3bdbd6f0cca17708ff50232cad58f768306cd81f799285b796920efd0b888",
+      "notes_sha256": "4b1ae3b2284752526fae050cdbef61a46c00d9812d786691c089b4a166fd1dc2",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "bf71d1e6fe0592db2108b81516f4bc6bda71c8c0c749edeb0a4eeb299324439c",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1945",
+          "suffix": "(1) [1945]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1946",
+          "suffix": "(2) [1946]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1947",
+          "suffix": "(3) [1947]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1948",
+          "suffix": "(4) [1948]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1949",
+          "suffix": "(5) [1949]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 142 to canonical tha-ap144. Shared numbers alone establish no other mapping.",
+        "Publisher Thamb\u0101ropaka differs orthographically from VRI Thambh\u0101ropaka. Publisher local2/global1946 puts the jasmine on the pillar, while VRI6 has th\u016Bpamhi, on the stupa. Retain the difference.",
+        "Publisher final formula is written out where VRI9 remains abbreviated."
+      ]
+    },
+    "tha-ap145": {
+      "id": "tha-ap145",
+      "publisher_chapter": "chapter-3",
+      "poem": 143,
+      "verses": [
+        1950,
+        1954
+      ],
+      "root_verses": [
+        10,
+        14
+      ],
+      "note_count": 2,
+      "note_numbers": [
+        1,
+        2
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-143/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-143/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-143.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Vedik\u0101raka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 143; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "ba8bd23451a5c161a2f79ee67cd22982ad0f4631bbf86bb78ca6cd21b39d9bff",
+      "body_sha256": "a0a670e9516fe532925c85759bcfb510fa869e03ac2162db3f59d6d3863091c0",
+      "notes_sha256": "5c92f40aa50779b15c161b5796726ee5e29048620bdc669323153be9aa4a1ab5",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "3d24bd2c37728e224f02e37d4c2c31eac39e00ce5c2830ff3547fbd26a3f7c78",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1950",
+          "suffix": "(1) [1950]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1951",
+          "suffix": "(2) [1951]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1952",
+          "suffix": "(3) [1952]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1953",
+          "suffix": "(4) [1953]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1954",
+          "suffix": "(5) [1954]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 143 to canonical tha-ap145. Shared numbers alone establish no other mapping.",
+        "Publisher local4/global1953 gives sixteenth aeon and32kings; VRI13 has so\u1E37asito kappasate and main chatti\u1E43sa,36, with32 as a recorded variant. No common chronology/count inferred.",
+        "Publisher local1/global1950 says railing; VRI10 specifies mutt\u0101vedi. Preserve literal source scope and notes without inventing missing material."
+      ]
+    },
+    "tha-ap146": {
+      "id": "tha-ap146",
+      "publisher_chapter": "chapter-3",
+      "poem": 144,
+      "verses": [
+        1955,
+        1960
+      ],
+      "root_verses": [
+        15,
+        20
+      ],
+      "note_count": 6,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-144/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-144/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-144.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Sapariv\u0101riya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 144; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "1926928033045e166ca70def5bcdbd1c38ed26686d0b83931604992e21d00b5f",
+      "body_sha256": "896a9cca0fa88e51f2dfacdd87236caff99c22b2ea86a2261df654fe41a82114",
+      "notes_sha256": "11eb18fed27aea8df5b2e10bb1182adecee8ca91526db7ab4c80e1a9fbb83662",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "e7ac8c13512f86f3a0eb2c498719d894625e0f4ea888d7fb8bd2eda0ab9d7407",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1955",
+          "suffix": "(1) [1955]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1956",
+          "suffix": "(2) [1956]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1957",
+          "suffix": "(3) [1957]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1958",
+          "suffix": "(4) [1958]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1959",
+          "suffix": "(5) [1959]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1960",
+          "suffix": "(6) [1960]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 144 to canonical tha-ap146. Shared numbers alone establish no other mapping.",
+        "Publisher local2/global1956 and note5 choose day/night attendance; VRI16 main says d\u016Bratova, from afar, and records ahoratta\u1E43 as a variant.",
+        "Publisher local3/global1957 gives mounds of incense; VRI17 main shows the stupa mass, with incense/smoke readings in variants. Keep source and root variants separately.",
+        "Original note6 retains BJTS/PTS alternate Samatta over PTS Pamatta; source note and root are not silently harmonized."
+      ]
+    },
+    "tha-ap147": {
+      "id": "tha-ap147",
+      "publisher_chapter": "chapter-3",
+      "poem": 145,
+      "verses": [
+        1961,
+        1965
+      ],
+      "root_verses": [
+        21,
+        25
+      ],
+      "note_count": 5,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-145/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-145/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-145.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Umm\u0101pupphiya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 145; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "6a30b144e2a1a7f27b07d8a2d583c57c45e527f381af2011e851d065216203af",
+      "body_sha256": "9f85d2569fab59e2e15e05b3413a9379a90b0af44ea673f55994412c12a22615",
+      "notes_sha256": "cdd872d0be237445164038bf4bae75761c1966667065962a6ed293befbe3e547",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "daec899ed3b9bfe718671474a6dec8c8c576f410b59f410cc29293664d983c05",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1961",
+          "suffix": "(1) [1961]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1962",
+          "suffix": "(2) [1962]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1963",
+          "suffix": "(3) [1963]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1964",
+          "suffix": "(4) [1964]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1965",
+          "suffix": "(5) [1965]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 145 to canonical tha-ap147. Shared numbers alone establish no other mapping.",
+        "Publisher Umm\u0101pupphiya differs from VRI Um\u0101pupphiya, which records umm\u0101puppha\u1E43 as a variant.",
+        "Publisher local2/global1962 has an original unclosed square interpolation before then; preserve the missing closing bracket rather than repairing the source.",
+        "Original botanical claims and cross-reference321 are translator notes, not independently validated botany or another canonical mapping."
+      ]
+    },
+    "tha-ap148": {
+      "id": "tha-ap148",
+      "publisher_chapter": "chapter-3",
+      "poem": 146,
+      "verses": [
+        1966,
+        1971
+      ],
+      "root_verses": [
+        26,
+        31
+      ],
+      "note_count": 7,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-146/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-146/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-146.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Anulepad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 146; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "5423335d22e012f48ce07e0c9ea605216fcb4ce60ae6c85ff3f0e379af9bf96e",
+      "body_sha256": "62be7319bd184168935a3afb619002cce6a9f97a94a6dc9c068857b2266ffa03",
+      "notes_sha256": "ead8e5f10b7ce9f35ca28c9e30dc9f51a50e624d47b2ea91484b4ce5c57d0be9",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "4f94e72c1f732694b88950707c45b1892b70944a6772c1235dcc94a539d55d91",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1966",
+          "suffix": "(1) [1966]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1967",
+          "suffix": "(2) [1967]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1968",
+          "suffix": "(3) [1968]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1969",
+          "suffix": "(4) [1969]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1970",
+          "suffix": "(5) [1970]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1971",
+          "suffix": "(6) [1971]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 146 to canonical tha-ap148. Shared numbers alone establish no other mapping.",
+        "Original note1 chooses Anulepad\u0101yaka over PTS Anulomad\u0101yaka; retain publisher, BJTS/commentary preference and independent root.",
+        "Publisher local2/global1967 says seated with monks; VRI27 at6356 has \u1E6Dhito, standing. Publisher royal name Sabbagghana differs from VRI30 sabbaghano.",
+        "Original notes4/6 retain intention/mind and first/third-person variants plus original mismatched quote in note5; do not repair source prose."
+      ]
+    },
+    "tha-ap149": {
+      "id": "tha-ap149",
+      "publisher_chapter": "chapter-3",
+      "poem": 147,
+      "verses": [
+        1972,
+        1976
+      ],
+      "root_verses": [
+        32,
+        36
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-147/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-147/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-147.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Maggad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 147; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "61116da71d692fd66caa4d1f3679539e44135fe9b6cc5f1afafbe01d04d5585d",
+      "body_sha256": "42058d0f61a84f95d2dc2ae06b42be62840c0f8357697a104692d2a7a4ab2e0b",
+      "notes_sha256": "76200b9be16c1d66ddabee12613ea27fc80477c3850906636da44c15d1be3144",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "49a8e488fdae83d33fa31937872c85324266724fc4fa59c42bf68d51d303f94b",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1972",
+          "suffix": "(1) [1972]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1973",
+          "suffix": "(2) [1973]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1974",
+          "suffix": "(3) [1974]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1975",
+          "suffix": "(4) [1975]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1976",
+          "suffix": "(5) [1976]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 147 to canonical tha-ap149. Shared numbers alone establish no other mapping.",
+        "Original note2 corrects PTS retroflex t in Siddhattha using BJTS; preserve that source explanation without modifying root.",
+        "Publisher kudd\u0101la note3 stands beside VRI33 main kud\u0101la and kudd\u0101la variant. Personal pronouns in royal formula remain source wording."
+      ]
+    },
+    "tha-ap150": {
+      "id": "tha-ap150",
+      "publisher_chapter": "chapter-3",
+      "poem": 148,
+      "verses": [
+        1977,
+        1982
+      ],
+      "root_verses": [
+        37,
+        42
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-148/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-148/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-148.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Phalakad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 148; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "4f8dbd4cbe8323796cec8161331d1b95691eed5820e06150efd00fa26bb5ce21",
+      "body_sha256": "2dedc40038cdc898c1b101699dbac7ae2244162890d8e267dab4b2ed1fc38e64",
+      "notes_sha256": "57a434b83895f40084957eab8039e3eb686f40fb0296d020c652739e5c35f050",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "87cdeef48fd8c1aa887f9241a58efc8604463e15cad804d9acc57cb94b6ce160",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1977",
+          "suffix": "(1) [1977]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1978",
+          "suffix": "(2) [1978]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1979",
+          "suffix": "(3) [1979]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1980",
+          "suffix": "(4) [1980]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1981",
+          "suffix": "(5) [1981]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1982",
+          "suffix": "(6) [1982]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 148 to canonical tha-ap150. Shared numbers alone establish no other mapping.",
+        "Publisher local5/global1981 names Bhavanimmita; VRI41 has nimmit\u0101vhay\u0101. Preserve the extra source royal-name element.",
+        "Original note2 explains unsifted gems as the translator interpretation of unshaken; it is not additional canonical wording."
+      ]
+    },
+    "tha-ap151": {
+      "id": "tha-ap151",
+      "publisher_chapter": "chapter-3",
+      "poem": 149,
+      "verses": [
+        1983,
+        1987
+      ],
+      "root_verses": [
+        43,
+        47
+      ],
+      "note_count": 2,
+      "note_numbers": [
+        1,
+        2
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-149/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-149/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-149.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Va\u1E6Da\u1E43sakiya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 149; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "ae0f0acd95656290d9077b12e6effde6eb834f14d0650f055cfcbfa061c8c157",
+      "body_sha256": "d504c67691aba860b2440ad5ba8a09772fda2673544151b0690cf20c76c89bab",
+      "notes_sha256": "cbab71b00eb32bce73ca435a811437332a0bc306371857c3d8819adac3ad9c32",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "ba25ea0f41dd88ce7a981d58e0b82919ddf68e6408627610a8203eb5879b77a9",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1983",
+          "suffix": "(1) [1983]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1984",
+          "suffix": "(2) [1984]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1985",
+          "suffix": "(3) [1985]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1986",
+          "suffix": "(4) [1986]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1987",
+          "suffix": "(5) [1987]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 149 to canonical tha-ap151. Shared numbers alone establish no other mapping.",
+        "Publisher local4/global1986 royal name Nimmita differs from VRI46 sunimmit\u0101. Preserve original prefix and root separately.",
+        "Publisher floral sal identification and head-wreath gloss remain translation/notes; source does not approve a botanical emendation."
+      ]
+    },
+    "tha-ap152": {
+      "id": "tha-ap152",
+      "publisher_chapter": "chapter-3",
+      "poem": 150,
+      "verses": [
+        1988,
+        1992
+      ],
+      "root_verses": [
+        48,
+        52
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-150/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-150/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-150.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Palla\u1E45kad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 150; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "d7e0562f85b2f38785a4a26addeb8960bffff1c8b69403b26af1603c149930a7",
+      "body_sha256": "9b75d8a2c63ad5b0ced7a78d166def46754342cacb221b0a89dc5c000cb6332f",
+      "notes_sha256": "0b395bc116dffb8b12e35ba836e69b5557d070dde7ccf6a584e5ec46d22c2b5e",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "23b5ae02bb1c8ceee17247987759fb8f9c1e81da3405570e95d0b27a082f68ed",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1988",
+          "suffix": "(1) [1988]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "1989",
+          "suffix": "(2) [1989]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1990",
+          "suffix": "(3) [1990]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1991",
+          "suffix": "(4) [1991]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1992",
+          "suffix": "(5) [1992]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 150 to canonical tha-ap152. Shared numbers alone establish no other mapping.",
+        "Chapter summary states56, but these ten publisher poems have52local labels in52printed entries and VRI chapter1\u201352. Original summary count remains an edition statement, not validated coverage.",
+        "Publisher summary Phalad\u0101y\u012B differs from its individual Phalakad\u0101yaka and VRI summary phalako; preserve aliases. Summary comes before publisher chapter colophon, versus VRI colophon-before-summary.",
+        "All three original definitions belong to poem150; chapter summary/colophon owns zero notes."
+      ],
+      "chapter_summary": {
+        "body_sha256": "b31e04129588233e101ea748b77dfb80b012a6cd875115291fc0e2d4c0e060a1",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "note_numbers": [],
+        "parent_id": "tha-ap152",
+        "first_ref": "tha-ap152/9",
+        "last_ref": "tha-ap152/11",
+        "root_start": 6441,
+        "root_end": 6446,
+        "root_sha256": "6548c9530ea2ffb4480b54d74e886fc776cea268f01748925708dc79da02b464",
+        "kind": "canonical_chapter_summary",
+        "label": "Fifteenth Ther\u0101 Apad\u0101na chapter summary"
+      }
+    },
+    "tha-ap153": {
+      "id": "tha-ap153",
+      "publisher_chapter": "chapter-3",
+      "poem": 151,
+      "verses": [
+        1993,
+        1998
+      ],
+      "root_verses": [
+        1,
+        6
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-151/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-151/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-151.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Bandhuj\u012Bvaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 151; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "2379f888a14889d96cfaca93c14483cc02e617e47c4d890689b663edf915cd9e",
+      "body_sha256": "cf3924224017ac25267f09f20df6e50aff1c4103de21d217b5b3292b5548439e",
+      "notes_sha256": "06bcdc1fe0443a0f611d60853b3d2af632041a772cd67c39543a921eadca871a",
+      "paratext_sha256": "15ba72c0f8dc13b12e2b79aea022312595c413870f79c8d6445c029fdb81718a",
+      "root_sha256": "b2a55b773399d1e27cf0dd6fa4a8dd4803d96d96f51487703dc86e4e02198ea2",
+      "stanza_layout": [
+        {
+          "local_label": "1-2",
+          "publisher_label": "1993-1994",
+          "suffix": "(1-2) [1993-1994]",
+          "lines": 8
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "1995",
+          "suffix": "(3) [1995]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "1996",
+          "suffix": "(4) [1996]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "1997",
+          "suffix": "(5) [1997]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "1998",
+          "suffix": "(6) [1998]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 151 to canonical tha-ap153. Shared numbers alone establish no other mapping.",
+        "Publisher local1\u20132/global1993\u20131994 is one eight-line printed entry, never two synthesized paragraphs.",
+        "Original notes1/3 botanical identifications and cross-reference162 remain notes, not approval of the other poem. Separate Sixteenth chapter preface owns no note."
+      ]
+    },
+    "tha-ap154": {
+      "id": "tha-ap154",
+      "publisher_chapter": "chapter-3",
+      "poem": 152,
+      "verses": [
+        1999,
+        2006
+      ],
+      "root_verses": [
+        7,
+        14
+      ],
+      "note_count": 7,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-152/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-152/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-152.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Tambapupphiya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 152; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "be14712387f4066ae2f0808f7602d3b31e8a0d801327c4a6921bdb93774bf027",
+      "body_sha256": "d2ba270f54566c18bf34d43895a2d029e5f3327c0bb7aa5e0f6c3ddae3938b0d",
+      "notes_sha256": "92d26c133ee07be28d5f519a2644792e2855785c26488717d75a665cc873efec",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "71ca3d06d6fee71970cc39335605488e716a520336b9c7163a2297f1cf22b131",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "1999",
+          "suffix": "(1) [1999]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2000",
+          "suffix": "(2) [2000]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2001",
+          "suffix": "(3) [2001]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2002",
+          "suffix": "(4) [2002]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2003",
+          "suffix": "(5) [2003]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2004",
+          "suffix": "(6) [2004]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "2005",
+          "suffix": "(7) [2005]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "2006",
+          "suffix": "(8) [2006]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 152 to canonical tha-ap154. Shared numbers alone establish no other mapping.",
+        "Publisher local7/global2005 says thirtieth aeon and Samphusita; VRI13 has third aeon and main susa\xF1\xF1ato, with sa\u1E43thusito variant. Preserve count and royal-name differences.",
+        "Publisher local5/global2003 says obtained varied tal trees inside a frightening crag, while VRI11 at6483 reads Anekat\u0101le papati\u1E43, giridugge bhay\u0101nake. Preserve substantive rendering difference; specialist semantic acceptance remains open.",
+        "Publisher fruit formula local6/global2004 says Buddha-p\u016Bj\u0101; VRI12 says Bodhi-p\u016Bj\u0101. Note4 uncertainty about they and note5 BJTS2022 typo remain source-owned explanations."
+      ]
+    },
+    "tha-ap155": {
+      "id": "tha-ap155",
+      "publisher_chapter": "chapter-3",
+      "poem": 153,
+      "verses": [
+        2007,
+        2012
+      ],
+      "root_verses": [
+        15,
+        20
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-153/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-153/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-153.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "V\u012Bthisammajjaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 153; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "16db9d9c5bde605b151dc357183ee92532ccf6b4e027e4b6e86422638f19b75c",
+      "body_sha256": "477fb9b18e0d90b77afebe565891e434bf8edf6f8aa7dc924651dc46b4b84fa2",
+      "notes_sha256": "67a2cebbe88e6257d419497f5c77faf52bfb5d407c982d61f30317736170e140",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "d4bb8ba9770c5c6c5d3380887e1ff53bf1e6d6cb0aea82d8e170ccccebb72de6",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2007",
+          "suffix": "(1) [2007]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2008",
+          "suffix": "(2) [2008]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2009",
+          "suffix": "(3) [2009]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2010",
+          "suffix": "(4) [2010]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2011",
+          "suffix": "(5) [2011]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2012",
+          "suffix": "(6) [2012]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 153 to canonical tha-ap155. Shared numbers alone establish no other mapping.",
+        "Publisher first printed label follows note3 without an inserted space. Preserve original punctuation and note anchoring.",
+        "Original note4 chooses Sudhaja over PTS Vissuta and note2 moon reading over tad-\u0101hu; they approve no other mapping."
+      ]
+    },
+    "tha-ap156": {
+      "id": "tha-ap156",
+      "publisher_chapter": "chapter-3",
+      "poem": 154,
+      "verses": [
+        2013,
+        2016
+      ],
+      "root_verses": [
+        21,
+        24
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-154/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-154/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-154.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Kakk\u0101rup\u016Bjaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 154; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "b17ff98dd7a01b7591c0e056f6596bc83c27e595f5dbb4c8a0e74af5d366eb65",
+      "body_sha256": "c8175183ca135fc02f42cfeb7912c3ae0bd44d466fee35a846623a82449f4f4e",
+      "notes_sha256": "0c36a6dd83c3f8d424196c0b8519953ce4ef2daf64240f091f38fcaaceed3fbe",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "b76fb1d13c9ae998b3f4e8d0666796b6ff83b9ffe7c4a568aebaba7828568c5e",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2013",
+          "suffix": "(1) [2013]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2014",
+          "suffix": "(2) [2014]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2015",
+          "suffix": "(3) [2015]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2016",
+          "suffix": "(4) [2016]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 154 to canonical tha-ap156. Shared numbers alone establish no other mapping.",
+        "Publisher Kakk\u0101rup\u016Bjaka differs from VRI Kakk\u0101rupupphap\u016Bjaka, with the extra puppha element. Preserve titles/colophons separately.",
+        "Original celestial-flower note remains a source interpretation; final written-out formula does not expand VRI24 abbreviation."
+      ]
+    },
+    "tha-ap157": {
+      "id": "tha-ap157",
+      "publisher_chapter": "chapter-3",
+      "poem": 155,
+      "verses": [
+        2017,
+        2021
+      ],
+      "root_verses": [
+        25,
+        29
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-155/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-155/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-155.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Mand\u0101ravap\u016Bjaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 155; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "0ee6f829a29af205ca16f4d1a93a2a09c4e246faacc7bb0356c1c22df3928ad8",
+      "body_sha256": "067fc86349ca094adfdff7213e934b65d2b3427ec1d12d963d81ba5ce15a4ee5",
+      "notes_sha256": "9c3fee23a38feedf5e08b20e01851a6e55cb286743b33446027daf9e8a073eb2",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "d267a2b02d833769f6c2365ad0609f0b1ec9d6fa1440957cda9c1b1dafb30ada",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2017",
+          "suffix": "(1) [2017]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2018",
+          "suffix": "(2) [2018]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2019",
+          "suffix": "(3) [2019]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2020",
+          "suffix": "(4) [2020]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2021",
+          "suffix": "(5) [2021]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 155 to canonical tha-ap157. Shared numbers alone establish no other mapping.",
+        "Publisher Mand\u0101ravap\u016Bjaka differs from VRI Mand\u0101ravapupphap\u016Bjaka; publisher Jutindara differs from VRI28 jutindharo. Retain original forms.",
+        "Original note1 deliberately leaves divine mand\u0101rava untranslated and distinguishes it from earthly identifications; preserve note uncertainty and spelling."
+      ]
+    },
+    "tha-ap158": {
+      "id": "tha-ap158",
+      "publisher_chapter": "chapter-3",
+      "poem": 156,
+      "verses": [
+        2022,
+        2026
+      ],
+      "root_verses": [
+        30,
+        34
+      ],
+      "note_count": 5,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-156/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-156/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-156.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Kadambapupphiya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 156; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "c095f67c739cbb95af433396295c7bc06f0658be9ca1120bfe8499e42b5d22f0",
+      "body_sha256": "721544ad6848acfb56195a3789b982defddf3ad20e5ebf1aeb1a4f90dfa6ec95",
+      "notes_sha256": "6652b8be361cf9eedd28103a47e3f14ba9010ae6599008e2622b201e2deb8b4f",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "46f1d3dc7f8ff74f1c244e05b71907d3e84cf7e3d0862f8b47073e757446f848",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2022",
+          "suffix": "(1) [2022]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2023",
+          "suffix": "(2) [2023]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2024",
+          "suffix": "(3) [2024]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2025",
+          "suffix": "(4) [2025]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2026",
+          "suffix": "(5) [2026]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 156 to canonical tha-ap158. Shared numbers alone establish no other mapping.",
+        "Publisher local4/global2025 names Phullan\u0101yaka; VRI33 has pupphan\u0101mak\u0101. Preserve the royal-name difference.",
+        "Original VRI speaker colophon at6560 has gathalast rend instead of bodytext and creates a separate verse-type segment without a number. Preserve native block/segment type; do not treat colophon as a substantive numbered stanza.",
+        "Original note3 prefers vasanti te over PTS vasantike, and note4 attributes moon gloss to commentary; no inferred root commentary."
+      ]
+    },
+    "tha-ap159": {
+      "id": "tha-ap159",
+      "publisher_chapter": "chapter-3",
+      "poem": 157,
+      "verses": [
+        2027,
+        2030
+      ],
+      "root_verses": [
+        35,
+        38
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-157/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-157/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-157.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ti\u1E47asulaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 157; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "6553d9291f6afb524760974065faf3010c19fc1415120b36883777fe0e3d2943",
+      "body_sha256": "0b8704eb868118673e92a98da7a0ff969b1e8e6d376b0c10d93dc920444bc419",
+      "notes_sha256": "7e7795ae239aac064edd5e69e505ce09528e8e0008c72bdd8d3680313a685af2",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "fd4d2b19597e650a92278d830cfb49a710e6706275736d718744a3f4b127944c",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2027",
+          "suffix": "(1) [2027]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2028",
+          "suffix": "(2) [2028]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2029",
+          "suffix": "(3) [2029]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2030",
+          "suffix": "(4) [2030]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 157 to canonical tha-ap159. Shared numbers alone establish no other mapping.",
+        "Publisher Ti\u1E47asulaka differs from VRI Ti\u1E47as\u016Blaka. Original note1 preserves both spellings and botanical interpretation.",
+        "Publisher note3 explicitly interprets one less than a lakh as99,999; VRI36 has Ek\u016Bnasatasahassa\u1E43, kappa\u1E43 na vinip\u0101tiko. Preserve original words/interpretation; specialist numeral acceptance remains open."
+      ]
+    },
+    "tha-ap162": {
+      "id": "tha-ap162",
+      "publisher_chapter": "chapter-3",
+      "poem": 160,
+      "verses": [
+        2043,
+        2049
+      ],
+      "root_verses": [
+        51,
+        57
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-160/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-160/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-160.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Kumudad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 160; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "55a4049406c6c7ae146a1ad03f1af11f4f38b4932848f545cb46857ba23988b5",
+      "body_sha256": "74c5830e4626a2d96cb1b93759c2231d9ca35c71d160ef3a0c0f38badddb9b24",
+      "notes_sha256": "d7689822f72c1c8acbab989487871dea9be8beb31d38649f0c2fabb10885ac2d",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "fcc4acc61306e4061a9120ec4d82ac81db5064861b4d891f536a4d346d8ff1c7",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2043",
+          "suffix": "(1) [2043]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2044",
+          "suffix": "(2) [2044]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2045",
+          "suffix": "(3) [2045]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2046",
+          "suffix": "(4) [2046]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2047",
+          "suffix": "(5) [2047]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2048",
+          "suffix": "(6) [2048]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "2049",
+          "suffix": "(7) [2049]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 160 to canonical tha-ap162. Shared numbers alone establish no other mapping.",
+        "Publisher bird-name Kakudha differs from VRI52 Kukuttho. Preserve source name, root name and note3 botanical/unfinished Crataeva Hygrophyla wording separately.",
+        "Chapter summary states56; publisher local labels span57 stanzas in56physical entries because151combines1\u20132, and VRI chapter numbers1\u201357. Never infer line-completeness from summary total.",
+        "All four original notes belong to poem160; chapter summary/colophon owns zero notes. Original note2 ends with double period and retains its own lotus identifications."
+      ],
+      "chapter_summary": {
+        "body_sha256": "088d6f5ccb1913e6a587f17b8aecbbb433e75f0d3f065b1dab84837119499bbd",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "note_numbers": [],
+        "parent_id": "tha-ap162",
+        "first_ref": "tha-ap162/11",
+        "last_ref": "tha-ap162/13",
+        "root_start": 6639,
+        "root_end": 6644,
+        "root_sha256": "cacd9505c6461bbf3d08aa83d2e69b3ad13e483c3a66b259a2ab93a8ce943199",
+        "kind": "canonical_chapter_summary",
+        "label": "Sixteenth Ther\u0101 Apad\u0101na chapter summary"
+      }
+    },
+    "tha-ap163": {
+      "id": "tha-ap163",
+      "publisher_chapter": "chapter-3",
+      "poem": 161,
+      "verses": [
+        2050,
+        2055
+      ],
+      "root_verses": [
+        1,
+        6
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-161/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-161/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-161.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Sup\u0101ricariya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 161; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "6c63ec7c110e0eb9a74c68d80570a3e6aa2622e7703f293b5ab6c9ed7621581c",
+      "body_sha256": "7efe370f1c18a09cd9fa7e7cf0cc4e8b07852a21526dd9a05b16662be878f7db",
+      "notes_sha256": "632c160dd1a7466663851ea4d93cacd8924388460d6579471164edf40fab50ec",
+      "paratext_sha256": "6bf9f468ee26909110f8bfd330488a54195446d3b04530f661de5d1b58c55359",
+      "root_sha256": "f83b3edd77ec4c1d7dabf9fdc52119d5a6616a18ae187720f9597a4c63c1ed6f",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2050",
+          "suffix": "(1) [2050]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2051",
+          "suffix": "(2) [2051]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2052",
+          "suffix": "(3) [2052]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2053",
+          "suffix": "(4) [2053]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2054",
+          "suffix": "(5) [2054]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2055",
+          "suffix": "(6) [2055]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 161 \u2192 tha-ap163; numbers alone authorize no other source mapping.",
+        "Publisher chapter preface independently says Sup\u0101ricariya Chapter, Seventeenth, agreeing with VRI chapter17. Specific Paduma/yakkha/finger-snapping story and both colophons establish identity."
+      ]
+    },
+    "tha-ap164": {
+      "id": "tha-ap164",
+      "publisher_chapter": "chapter-3",
+      "poem": 162,
+      "verses": [
+        2056,
+        2061
+      ],
+      "root_verses": [
+        7,
+        12
+      ],
+      "note_count": 6,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-162/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-162/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-162.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ka\u1E47averapupphiya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 162; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "231301fa61fa9b84e79c1366abb4c09c296f46aa9bca5c00142168f1e83f346d",
+      "body_sha256": "ede368c82daf508e7ccdba3d23248b2d32fe66717246e8b40e0740f376f3830d",
+      "notes_sha256": "4948f2475269a71b40201d0f2b302c6da45f2384981045e2b887bd289c42c809",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "9135e255440807fef698b19b1fdd9e5a6996c89c1887d5089cefa07afc8eff5a",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2056",
+          "suffix": "(1) [2056]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2057",
+          "suffix": "(2) [2057]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2058",
+          "suffix": "(3) [2058]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2059",
+          "suffix": "(4) [2059]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2060",
+          "suffix": "(5) [2060]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2061",
+          "suffix": "(6) [2061]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 162 \u2192 tha-ap164; numbers alone authorize no other source mapping.",
+        "Publisher local4/global2059 calls fruit of flower-offering; VRI10main says fruit of Buddha-p\u016Bj\u0101. Preserve formula variation.",
+        "Note1 botanical identification question referencing151 is translator-owned, not another mapping approval; note4 Sinhala-gloss trusted-by-king explanation remains separate."
+      ]
+    },
+    "tha-ap165": {
+      "id": "tha-ap165",
+      "publisher_chapter": "chapter-3",
+      "poem": 163,
+      "verses": [
+        2062,
+        2066
+      ],
+      "root_verses": [
+        13,
+        17
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-163/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-163/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-163.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Khajjakad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 163; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "74f4a5d15e552fecef7abd049a0f90e710c84ef3ee9f88e64cfae7b869a62062",
+      "body_sha256": "24960924436ed3be68a1be9d39ae48cb7f54e37ceac185bed11c7c86846707bc",
+      "notes_sha256": "ed48bda4b2983cd2d25ef78fa06b60ae6e9719faa860f3e199e419b9ff91c31a",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "5c7d8e15c13cce1e9e4a8bdfbcafe3c9cdd97c63303fa3cb78f4f9061ccad3af",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2062",
+          "suffix": "(1) [2062]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2063",
+          "suffix": "(2) [2063]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2064",
+          "suffix": "(3) [2064]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2065",
+          "suffix": "(4) [2065]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2066",
+          "suffix": "(5) [2066]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 163 \u2192 tha-ap165; numbers alone authorize no other source mapping.",
+        "Publisher note2 reads k\u0101mak\u0101ri/pleasure-doing; VRI14main k\u0101mak\u0101m\u012B and k\u0101mak\u0101r\u012B variant remain independent.",
+        "Publisher170chapter summary writes Khujjaka while poem title/colophons and VRI read Khajjaka; preserve summary alias/typo, do not change poem."
+      ]
+    },
+    "tha-ap166": {
+      "id": "tha-ap166",
+      "publisher_chapter": "chapter-3",
+      "poem": 164,
+      "verses": [
+        2067,
+        2071
+      ],
+      "root_verses": [
+        18,
+        22
+      ],
+      "note_count": 2,
+      "note_numbers": [
+        1,
+        2
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-164/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-164/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-164.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Desap\u016Bjaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 164; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "b8676aeef2808d54d3178235ef3bf99a154f20913ff15a2f53b46ca7b8f317bc",
+      "body_sha256": "47b23e7edd07bb7277ef40b9e55fe51ed77ca123dcb92592b9698c3e42d8a912",
+      "notes_sha256": "d34bbab4557d9d6883cfcf00655293e081db5673ae36951704492ca6616a0617",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "91140d54674d153cc830a7b6670ef2b80c9d6b3ef05aae366264462fa082037d",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2067",
+          "suffix": "(1) [2067]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2068",
+          "suffix": "(2) [2068]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2069",
+          "suffix": "(3) [2069]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2070",
+          "suffix": "(4) [2070]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2071",
+          "suffix": "(5) [2071]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 164 \u2192 tha-ap166; numbers alone authorize no other source mapping.",
+        "Specific ascent-site worship, both colophons and adjacent sweetmeat/canopy stories establish identity beyond matching title."
+      ]
+    },
+    "tha-ap167": {
+      "id": "tha-ap167",
+      "publisher_chapter": "chapter-3",
+      "poem": 165,
+      "verses": [
+        2072,
+        2076
+      ],
+      "root_verses": [
+        23,
+        27
+      ],
+      "note_count": 2,
+      "note_numbers": [
+        1,
+        2
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-165/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-165/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-165.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ka\u1E47ik\u0101racchadaniya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 165; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "db4dd12140bec4f8a2f83dbb8a3698fc108ac799bce2f7b4857b6319c5f8eb0a",
+      "body_sha256": "99a68621b9dce4a93be7d65903dcaa843068023763488385e3e15311599c43b7",
+      "notes_sha256": "3dcae1495a790587e3d289a2537fa42a5e4c24c81a29b7e59f8c251c6254cb0c",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "74870dc7247044f7eb0582a4ae4460044b819aac4200c63e4fc0845caf8b704c",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2072",
+          "suffix": "(1) [2072]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2073",
+          "suffix": "(2) [2073]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2074",
+          "suffix": "(3) [2074]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2075",
+          "suffix": "(4) [2075]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2076",
+          "suffix": "(5) [2076]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 165 \u2192 tha-ap167; numbers alone authorize no other source mapping.",
+        "Publisher title/colophons Ka\u1E47ik\u0101racchadaniya differ from VRI Ka\u1E47ik\u0101rachattiya. Canopy narrative, Vessabh\u016B and eight So\u1E47\u1E47\u0101bha kings establish exact identity; preserve names."
+      ]
+    },
+    "tha-ap168": {
+      "id": "tha-ap168",
+      "publisher_chapter": "chapter-3",
+      "poem": 166,
+      "verses": [
+        2077,
+        2081
+      ],
+      "root_verses": [
+        28,
+        32
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-166/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-166/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-166.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Sappid\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 166; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "513e78f419cabafd07dbe0553fc561b86ae551bd04c8e42a16c785e3dc382bee",
+      "body_sha256": "f0b23da7245163644064908f0a1634a188a440f952fae6e5c94fd375e4eb343e",
+      "notes_sha256": "eb5345bb4901f85bfcd86a0deed91aff858daf4ec917a4a82bbb083c4fa27183",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "0e260fec2d4add82ff14bfd8a72f0d6d50b38ece6dadc9a6c45c491f262835ef",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2077",
+          "suffix": "(1) [2077]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2078",
+          "suffix": "(2) [2078]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2079",
+          "suffix": "(3) [2079]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2080",
+          "suffix": "(4) [2080]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2081",
+          "suffix": "(5) [2081]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 166 \u2192 tha-ap168; numbers alone authorize no other source mapping.",
+        "Publisher local2/global2078 taking the bowl corresponds to VRI29reading and tatoha\u1E43 variant; note2 ghee-oil and note3 Same as Water remain original notes."
+      ]
+    },
+    "tha-ap169": {
+      "id": "tha-ap169",
+      "publisher_chapter": "chapter-3",
+      "poem": 167,
+      "verses": [
+        2082,
+        2086
+      ],
+      "root_verses": [
+        33,
+        37
+      ],
+      "note_count": 2,
+      "note_numbers": [
+        1,
+        2
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-167/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-167/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-167.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Y\u016Bthikapupphiya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 167; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "2bfd960da7f3ee709d8df8ec8fe744c51b1cec709c1a34d0fef4171e73d0ad92",
+      "body_sha256": "63a159a947581e61aa1d130a9e2d6eefcd0b988e95097ef742da635e9a6b4b8e",
+      "notes_sha256": "2ea880f937ccbb313251551a2834a254d90d5c56d3c9193684f2d0390c945dff",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "845568afe8b93cdaaaf4dbbb3430d1a5ce70d4ca08cc809781b18ef3717bf59b",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2082",
+          "suffix": "(1) [2082]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2083",
+          "suffix": "(2) [2083]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2084",
+          "suffix": "(3) [2084]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2085",
+          "suffix": "(4) [2085]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2086",
+          "suffix": "(5) [2086]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 167 \u2192 tha-ap169; numbers alone authorize no other source mapping.",
+        "Publisher royal name Samuddhara differs orthographically from VRI36s\u0101muddhara; retain exact source naming. No named Buddha is invented from aeon chronology."
+      ]
+    },
+    "tha-ap170": {
+      "id": "tha-ap170",
+      "publisher_chapter": "chapter-3",
+      "poem": 168,
+      "verses": [
+        2087,
+        2092
+      ],
+      "root_verses": [
+        38,
+        43
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-168/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-168/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-168.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Dussad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 168; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "fc1271f45d6e96f39951e9b0686f29f04a1eabcef43a7193bd427b01b326c595",
+      "body_sha256": "3ecb3d1b4f55f923b92e230880ef6a531cf837a71dc665fcce79e784b247fd83",
+      "notes_sha256": "4240ece6ca905531954727105a62d6df64abac425bd43f8cfe6633daeb86d32e",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "272da6bf554ab1970c6d17f83535876364d3e7e138d77a46699b05ad03158a55",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2087",
+          "suffix": "(1) [2087]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2088",
+          "suffix": "(2) [2088]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2089",
+          "suffix": "(3) [2089]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2090",
+          "suffix": "(4) [2090]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2091",
+          "suffix": "(5) [2091]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2092",
+          "suffix": "(6) [2092]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 168 \u2192 tha-ap170; numbers alone authorize no other source mapping.",
+        "Note2 retains pa\u1E47\u1E47\u0101k\u0101ra versus preferred pa\u1E47\u1E47ak\u0101ra distinction and Sinhala/commentary cloth explanation; VRI38main pa\u1E47\u1E47\u0101k\u0101ra\u1E43 stays unchanged.",
+        "Publisher local3/global2089 starts quoted thought with single curly opening quote and double closing quote; preserve punctuation."
+      ]
+    },
+    "tha-ap171": {
+      "id": "tha-ap171",
+      "publisher_chapter": "chapter-3",
+      "poem": 169,
+      "verses": [
+        2093,
+        2098
+      ],
+      "root_verses": [
+        44,
+        49
+      ],
+      "note_count": 8,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-169/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-169/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-169.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Sam\u0101dapaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 169; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "d494a64b106decdb437138227640bbd48bc01525f4702d1ce75ff6d78a50bc64",
+      "body_sha256": "eea86a6abae748fe5762180891b5dac4107f566c211bdb0b4f8e8ea6bc290ef9",
+      "notes_sha256": "7b77df39519e1fc09ed94f5049a9c89f131ecbf424c6a11e340b94d986a0e38b",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "122410e3bdca3fee40f7df482b04571cf73ed72a2da016c2ca08b483635a7102",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2093",
+          "suffix": "(1) [2093]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2094",
+          "suffix": "(2) [2094]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2095",
+          "suffix": "(3) [2095]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2096",
+          "suffix": "(4) [2096]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2097",
+          "suffix": "(5) [2097]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2098",
+          "suffix": "(6) [2098]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 169 \u2192 tha-ap171; numbers alone authorize no other source mapping.",
+        "Publisher local5/global2097 says fifty-ninth aeon and \u0100veyya; VRI48main says sixty-ninth with fifty-ninth variant and \u0100deyya. Note8 explicitly offers BJTS \u0100deyya; do not harmonize.",
+        "Publisher note3 preserves conjectural companions readings and note6 typo iintentions. These belong to translator notes, not editorial repair instructions.",
+        "Original VRI stanza48 has bodytext at6806 between gatha1 and gathalast. Keep exact original block/reader segmentation; no canonical markup repair is authorized."
+      ]
+    },
+    "tha-ap172": {
+      "id": "tha-ap172",
+      "publisher_chapter": "chapter-3",
+      "poem": 170,
+      "verses": [
+        2099,
+        2103
+      ],
+      "root_verses": [
+        50,
+        54
+      ],
+      "note_count": 6,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-170/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-170/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-170.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Pa\xF1ca\u1E45guliya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 170; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "c4591091ee0cf58de8cf3010ec8678b22e5c3efdcb08d0582e66ddc3e0550b59",
+      "body_sha256": "53ab941ba0e348e71eff949f8de4cbc31039040c0495783d836916030a27118a",
+      "notes_sha256": "555ca594a2a1de98788db408d6707ee6936441a1050d20f9671dc8d909e5ec77",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "cf56c2639667c1f8c7808e4637496dc60f68da19c32098f955229380627be90a",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2099",
+          "suffix": "(1) [2099]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2100",
+          "suffix": "(2) [2100]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2101",
+          "suffix": "(3) [2101]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2102",
+          "suffix": "(4) [2102]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2103",
+          "suffix": "(5) [2103]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 170 \u2192 tha-ap172; numbers alone authorize no other source mapping.",
+        "Publisher note3 explicitly prefers BJTS quiet appasaddo over PTS unpleased appas\u0101do; VRI51Apasaddo remains unchanged.",
+        "Chapter summary owns no notes. Publisher summary Khujjaka and M\u0101\u1E37a/shortened names remain exact edition forms; VRI summary khajjako and m\u0101\u1E37o remain independent.",
+        "Publisher summary54 equals54numberedVRIstanzas and54publisherprintedentries in this chapter; retain as source-stated total, not wider corpus or line-completeness claim.",
+        "Publisher summary precedes its chapter-closing line; VRI chapter colophon precedes the summary. Preserve each edition order within its separate apparatus scope.",
+        "VRI speech colophon is gathalast and existing reader groups it with final attainment stanza; preserve source blocks and numbering."
+      ],
+      "chapter_summary": {
+        "kind": "canonical_chapter_summary",
+        "label": "Seventeenth Ther\u0101 Apad\u0101na chapter summary",
+        "parent_id": "tha-ap172",
+        "first_ref": "tha-ap172/8",
+        "last_ref": "tha-ap172/10",
+        "root_start": 6829,
+        "root_end": 6834,
+        "root_sha256": "6910c6497e4ea3b047e85337feffc91e775428352a73c362a81af2a2cfb6be95",
+        "body_sha256": "cf9f02db9e45ca3bc4c537ec9de328f29bdf61702eb9212890ef1641e9d600da",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "note_numbers": []
+      }
+    },
+    "tha-ap173": {
+      "id": "tha-ap173",
+      "publisher_chapter": "chapter-3",
+      "poem": 171,
+      "verses": [
+        2104,
+        2111
+      ],
+      "root_verses": [
+        1,
+        8
+      ],
+      "note_count": 9,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-171/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-171/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-171.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Kumudam\u0101liya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 171; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "784f6b11f44f82682693ad6957a1a462c5b957ae69445833289d5d927b2f80de",
+      "body_sha256": "4f0e96a1e01528a432970f586515b7ddb38a19824cdf9d0814810c3ad47f8ba6",
+      "notes_sha256": "880d2071467e8e93f30f8def4a71445322279a4306adb4f370a9ab0f23fd8802",
+      "paratext_sha256": "9d10b76bae5e7ec0c0363ed9490cfd5dd4e6d7fffd3f5fd0982564717ea90765",
+      "root_sha256": "0b43581f4cb326c9b5b64dc7cad4a746f1d1057387d0ff8cab4b63c1f9d813a1",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2104",
+          "suffix": "(1) [2104]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2105",
+          "suffix": "(2) [2105]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2106",
+          "suffix": "(3) [2106]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2107",
+          "suffix": "(4) [2107]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2108",
+          "suffix": "(5) [2108]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2109",
+          "suffix": "(6) [2109]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "2110",
+          "suffix": "(7) [2110]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "2111",
+          "suffix": "(8) [2111]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 171 \u2192 tha-ap173; numbers alone authorize no other source mapping.",
+        "Notes3\u20138 explain BJTS ta\u1E43/balino/picked flowers/assembly extent/canopy choices against PTS. VRI3main sa\u1E45kocita\u1E43 and samocita\u1E43 suggested variant remain unchanged.",
+        "Publisher local5/global2108 canopy rendering and note8 t\u0101cchadana differ orthographically from VRI5t\u0101vacchadana; preserve translator explanation without line substitution.",
+        "Publisher Kumuda Chapter Eighteenth preface and VRI18Kumudavagga independently establish chapter scope."
+      ]
+    },
+    "tha-ap174": {
+      "id": "tha-ap174",
+      "publisher_chapter": "chapter-3",
+      "poem": 172,
+      "verses": [
+        2112,
+        2115
+      ],
+      "root_verses": [
+        9,
+        12
+      ],
+      "note_count": 2,
+      "note_numbers": [
+        1,
+        2
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-172/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-172/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-172.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Nisse\u1E47id\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 172; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "743f211e5f7346ce59e1310d81d6c0b2c7d8d67b8ea63e75f07fbb3dc8c218a0",
+      "body_sha256": "c6ce53104a044018cee32183a784ce13dd033136d5f813caef17c0facb09a9e0",
+      "notes_sha256": "450d1b1ac5a9be75ea32d84b75688d6931f41beb1d2976d8eca9df0d2d76a2c6",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "d55fcee95810d7be525d2d591eac60fa7697ef476d5ff09d9eba2731577306c1",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2112",
+          "suffix": "(1) [2112]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2113",
+          "suffix": "(2) [2113]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2114",
+          "suffix": "(3) [2114]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2115",
+          "suffix": "(4) [2115]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 172 \u2192 tha-ap174; numbers alone authorize no other source mapping.",
+        "Publisher local3/global2114 names Pahasambahula and note2 Lots of Loud Laughter; VRI11main Sambahula. Preserve the different royal name rather than replacing it."
+      ]
+    },
+    "tha-ap175": {
+      "id": "tha-ap175",
+      "publisher_chapter": "chapter-3",
+      "poem": 173,
+      "verses": [
+        2116,
+        2120
+      ],
+      "root_verses": [
+        13,
+        17
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-173/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-173/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-173.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Rattipupphiya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 173; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "e413a72f33c6ca777f1e17b3cd843d2dbbaf761bd63847ebdc0259e59cc7cd3b",
+      "body_sha256": "e24dd2d51b573fc3c1418251dc56565522f6eec79262ef371eb32b641af71a09",
+      "notes_sha256": "f95eb774a92ad99adc3ba3b2b3c94b34e6b952b52d8c0dd6a77ba01514923987",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "cc89aa731046d4451bb17d94baf08ab0a39ec7d8813f986756c0f14123ca8263",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2116",
+          "suffix": "(1) [2116]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2117",
+          "suffix": "(2) [2117]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2118",
+          "suffix": "(3) [2118]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2119",
+          "suffix": "(4) [2119]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2120",
+          "suffix": "(5) [2120]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 173 \u2192 tha-ap175; numbers alone authorize no other source mapping.",
+        "Publisher local2/global2117 says with stems; VRI14sam\u016Bla\u1E43 says with roots. Preserve wording without inferred one-to-one translation.",
+        "Note2 explicitly observes white-flowering botanical identification versus red narrative flowers; keep this translator uncertainty, no scientific or scriptural correction."
+      ]
+    },
+    "tha-ap176": {
+      "id": "tha-ap176",
+      "publisher_chapter": "chapter-3",
+      "poem": 174,
+      "verses": [
+        2121,
+        2123
+      ],
+      "root_verses": [
+        18,
+        20
+      ],
+      "note_count": 1,
+      "note_numbers": [
+        1
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-174/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-174/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-174.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Udap\u0101nad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 174; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "55099a8404a5f446997b62b78cf3d9872cbd214af5ac82138e03469b24f34b6f",
+      "body_sha256": "7e9ca9c16d96d3e42bb5166ac2a3d3af82287f166ad5b23d1e302c92921d3177",
+      "notes_sha256": "54bdde375a3c52d5cee8a7b78626669d822f447652db1b25657ddde75b477c79",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "24e0a457fca7cd12a9aa2e369f988d89efae44dbd1e258781ddfe535fbe559f1",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2121",
+          "suffix": "(1) [2121]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2122",
+          "suffix": "(2) [2122]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2123",
+          "suffix": "(3) [2123]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 174 \u2192 tha-ap176; numbers alone authorize no other source mapping.",
+        "Publisher local1/global2121 giving food follows VRI18datv\u0101na main with taking-food gahetv\u0101na variant; keep both editions independently.",
+        "Exact complete publisher poem has three stanzas and one poem-owned title note; do not add the absent customary king stanza."
+      ]
+    },
+    "tha-ap177": {
+      "id": "tha-ap177",
+      "publisher_chapter": "chapter-3",
+      "poem": 175,
+      "verses": [
+        2124,
+        2128
+      ],
+      "root_verses": [
+        21,
+        25
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-175/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-175/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-175.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "S\u012Bh\u0101sanad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 175; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "9b90e9320291e4eb44bbf06541b751dc000fd0121ca2f4d58d261d1f750c91ad",
+      "body_sha256": "1322e7c8ffa62c41c3c6d4756403d395619631fd67967a3d7d109d68c6f9f89a",
+      "notes_sha256": "be0eb71e1214598058f501e63e13a47a33ecbcf4cd25f032c0c1cee99bac5e1c",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "d3f755b2bf7068b1281d62249346d2e03a3d88e08e6512bfe086adb1918d7a8a",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2124",
+          "suffix": "(1) [2124]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2125",
+          "suffix": "(2) [2125]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2126",
+          "suffix": "(3) [2126]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2127",
+          "suffix": "(4) [2127]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2128",
+          "suffix": "(5) [2128]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 175 \u2192 tha-ap177; numbers alone authorize no other source mapping.",
+        "Publisher local4/global2127 S\u012Bluccaya and note3 Heaps of Morality differ from VRI24Siluccaya (short i). Preserve title and royal-name/gloss differences.",
+        "VRI speech colophon is gathalast and stays part of existing final-stanza grouping; no source block edit."
+      ]
+    },
+    "tha-ap178": {
+      "id": "tha-ap178",
+      "publisher_chapter": "chapter-3",
+      "poem": 176,
+      "verses": [
+        2129,
+        2132
+      ],
+      "root_verses": [
+        26,
+        29
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-176/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-176/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-176.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Maggadattika",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 176; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "9f88e791c05285d152c65a27fd53fb9d8a215e15fde289b0490e71fad3dee6ad",
+      "body_sha256": "0df5bec8babdabf5e193e45c592ab4f21ec918b3dc9ecb97941980caf9ddb601",
+      "notes_sha256": "548a04c50dbd71c8887506ccda89356dc5c3dcb331c68d7168cf284279353b64",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "d053d424e09411a6df005b5b016ccbfb6098316fbf54b8c93f628e0b30c83a59",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2129",
+          "suffix": "(1) [2129]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2130",
+          "suffix": "(2) [2130]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2131",
+          "suffix": "(3) [2131]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2132",
+          "suffix": "(4) [2132]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 176 \u2192 tha-ap178; numbers alone authorize no other source mapping.",
+        "Publisher note3 explicitly follows BJTS swapping two half-verses against PTS; VRI27places feet/head lines before donor-offering lines. Preserve the different order.",
+        "Publisher local1/global2129 renders sky with note2 abbho\xB0/ambho\xB0 choice; VRI26abbhok\u0101samhi literally open air remains independent.",
+        "Publisher local2/global2130 leaves the translator bracket in [my heart unclosed; retain original punctuation, do not repair."
+      ]
+    },
+    "tha-ap179": {
+      "id": "tha-ap179",
+      "publisher_chapter": "chapter-3",
+      "poem": 177,
+      "verses": [
+        2133,
+        2136
+      ],
+      "root_verses": [
+        30,
+        33
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-177/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-177/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-177.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ekad\u012Bpiya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 177; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "ead242985c12e90486d8541358e2544257b23fd9a07ccab54c31fffdff459f48",
+      "body_sha256": "38a4269375755e0d1c3c4855ae4270821db6a3a1692c2432c145fe0312852079",
+      "notes_sha256": "09095d37647ec52bbe6620dd1de2a5f1007d32d6f3ad1b5b3763263b7e2e0ce7",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "c30164b833e46c32247ab75c276324c8185b10ae8a20f60716be57a20a426fd7",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2133",
+          "suffix": "(1) [2133]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2134",
+          "suffix": "(2) [2134]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2135",
+          "suffix": "(3) [2135]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2136",
+          "suffix": "(4) [2136]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 177 \u2192 tha-ap179; numbers alone authorize no other source mapping.",
+        "Note2 explicitly retains PTS sala\u1E37a/BJTS salala spellings and botanical gloss; VRI30sa\u1E37ala remains independent.",
+        "VRI-only Navama\u1E43 bh\u0101\u1E47av\u0101ra\u1E43 recitation ending at6949 has no publisher rendering in this poem; preserve canonical apparatus without fabricating translated division."
+      ]
+    },
+    "tha-ap180": {
+      "id": "tha-ap180",
+      "publisher_chapter": "chapter-3",
+      "poem": 178,
+      "verses": [
+        2137,
+        2141
+      ],
+      "root_verses": [
+        34,
+        38
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-178/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-178/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-178.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ma\u1E47ip\u016Bjaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 178; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "1f5a84e51a6ce8f23b270c7f4485d1f05e1386c47fa152559a74ac160954a267",
+      "body_sha256": "0ec63aefc3106d1e34d70903952e8d1fdef9b9360451277fc78c7ce1591ebd18",
+      "notes_sha256": "c6b155d5978661b84b6b3729ed723dede823e27405a30ad20d08ee9b98049a75",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "1c7169d0e2cc7312d8a0f5a90db0371859962caffb386362bf51c820fd66dc63",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2137",
+          "suffix": "(1) [2137]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2138",
+          "suffix": "(2) [2138]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2139",
+          "suffix": "(3) [2139]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2140",
+          "suffix": "(4) [2140]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2141",
+          "suffix": "(5) [2141]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 178 \u2192 tha-ap180; numbers alone authorize no other source mapping.",
+        "Note3 explicitly says BJTS Sinhala gloss identifies Padumuttara while ninety-four aeons suggests Siddhattha. Keep uncertainty; no Buddha identity is inferred or silently chosen.",
+        "Publisher local4/global2140 prints Satara\u014Bsi with original \u014B while VRI37satara\u1E43s\u012B uses niggahita; preserve original edition spelling.",
+        "Speech colophon capitalizes Verses; retain exact source case."
+      ]
+    },
+    "tha-ap181": {
+      "id": "tha-ap181",
+      "publisher_chapter": "chapter-3",
+      "poem": 179,
+      "verses": [
+        2142,
+        2147
+      ],
+      "root_verses": [
+        39,
+        44
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-179/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-179/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-179.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Tikicchaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 179; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "cd2641f08f7cf7ad7a5627c4e47482d2d4bf2a4363fcc66554650c5ccc042f23",
+      "body_sha256": "963fae5c24e1ed41cdfaf1587437aff9528934142cbc17658838fe879510b2d6",
+      "notes_sha256": "4064a5cc2c9be7e1d3c8abc40f31888a6e2eb5207f9f746af2c345da530f6249",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "e534980c99e5a3982d9a72ab5b9b06fbd9985fd9c3320209f24717f9e5c4211a",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2142",
+          "suffix": "(1) [2142]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2143",
+          "suffix": "(2) [2143]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2144",
+          "suffix": "(3) [2144]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2145",
+          "suffix": "(4) [2145]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2146",
+          "suffix": "(5) [2146]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2147",
+          "suffix": "(6) [2147]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 179 \u2192 tha-ap181; numbers alone authorize no other source mapping.",
+        "Publisher local5/global2146 says eighth aeon after that; VRI43ito ca a\u1E6D\u1E6Dhame is eighth from here. Preserve chronology wording, no inferred date harmonization."
+      ]
+    },
+    "tha-ap182": {
+      "id": "tha-ap182",
+      "publisher_chapter": "chapter-3",
+      "poem": 180,
+      "verses": [
+        2148,
+        2151
+      ],
+      "root_verses": [
+        45,
+        48
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-180/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-180/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-180.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Sa\u1E45ghupa\u1E6D\u1E6Dh\u0101ka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 180; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "3649d1f5cbcf9295e83598db5acedb4447733d0491eda8ae5df4840e0b50d738",
+      "body_sha256": "624eab26db360d45e271782ff57ba8c01d70fa8e712ce88f6d56b993949b7b7e",
+      "notes_sha256": "9602e07d0ef05c46468d87de4c21c25b0764a8cb4c98e70ab4fa25c83d0ba40b",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "615a4cdc7056d4f36f1ba9f8c63d9222526921cc9794dc029bab90c0c7022aa6",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2148",
+          "suffix": "(1) [2148]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2149",
+          "suffix": "(2) [2149]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2150",
+          "suffix": "(3) [2150]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2151",
+          "suffix": "(4) [2151]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition PTS/BJTS poem, not a line-complete VRI translation. Preserve original publisher words, omissions, labels, notes and all VRI readings independently. Source-only conditional review does not approve activation or imply other number-based mappings.",
+        "Explicit reviewed narrative/title/colophon identity proposes publisher poem 180 \u2192 tha-ap182; numbers alone authorize no other source mapping.",
+        "Publisher local1/global2148 says forest-dweller; VRI45\u0101r\u0101mika remains independent wording for monastery/garden attendant.",
+        "Publisher local3/global2150 names Samotthata with note3 Spread Over; VRI47main Samodaka differs. Preserve exact name and note.",
+        "Separate chapter summary says one less than fifty=49; VRI original summary says ekapa\xF1\xF1\u0101sa=51, while actual chapter has48numberedVRIstanzas and48publisherlabels/printedentries. Retain both inconsistent original stated totals explicitly; no correction or coverage inflation.",
+        "Publisher summary alias Maggavada differs from poem Maggadattika and VRI summary maggadado. Publisher summary precedes its chapter-closing line while VRI chapter colophon precedes the summary; preserve summary aliases and each edition order."
+      ],
+      "chapter_summary": {
+        "kind": "canonical_chapter_summary",
+        "label": "Eighteenth Ther\u0101 Apad\u0101na chapter summary",
+        "parent_id": "tha-ap182",
+        "first_ref": "tha-ap182/8",
+        "last_ref": "tha-ap182/10",
+        "root_start": 7001,
+        "root_end": 7006,
+        "root_sha256": "dccb1131d1ef807563a84524f49af6b21f83fcd6bd45004080f96e87c4359374",
+        "body_sha256": "18509588869668a50633f875c1cc51e3e156297a4b5c523f98e60769c2e45c05",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "note_numbers": []
+      }
     }
   });
 
@@ -23483,7 +26321,8 @@
   }
 
   // web/translation-policy.mjs
-  var PINNED_NEW_PARATEXT_IDS = /* @__PURE__ */ new Set(["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141"]);
+  var PINNED_NEW_PARATEXT_IDS = /* @__PURE__ */ new Set(["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182"]);
+  var PINNED_POEM_NOTE_IDS = /* @__PURE__ */ new Set(["tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182"]);
   var apadanaId = (uid2) => APADANA_PROFILES[uid2]?.path ? "ap:" + APADANA_PROFILES[uid2].path.replace(/^\/text\/|\/$/g, "") : void 0;
   var apadanaFamily = (id5) => typeof id5 === "string" && /^ap:/i.test(id5.trim());
   var isApadana = (value) => apadanaFamily(value?.translation_id) || value?.source === "apadana" || value?.source === "Legends of the Buddhist Saints (Apad\u0101na)" || own(value, "translation_revision") || own(value, "publisher_paratext") || own(value, "chapter_summary") || own(value, "publisher_divisions") || own(value, "publisher_preface") || own(value, "collection_summary") || own(value, "editorial_gap");
@@ -23505,7 +26344,7 @@
       if (own(value, "chapter_summary")) throw Error("The pinned Apad\u0101na chapter-summary owner changed.");
       return;
     }
-    if (!sameParatext(value.chapter_summary, expected, content) || content && ["tha-ap82", "tha-ap92", "tha-ap102", "tha-ap112", "tha-ap122", "tha-ap132"].includes(uid2) && !samePinnedContent(value.chapter_summary, expected)) {
+    if (!sameParatext(value.chapter_summary, expected, content) || content && ["tha-ap82", "tha-ap92", "tha-ap102", "tha-ap112", "tha-ap122", "tha-ap132", "tha-ap152", "tha-ap162", "tha-ap172", "tha-ap182"].includes(uid2) && !samePinnedContent(value.chapter_summary, expected)) {
       throw Error("The pinned Apad\u0101na chapter-summary scope or note ownership changed.");
     }
   }
@@ -23569,6 +26408,14 @@
     }
     if (content && (JSON.stringify(value.mapping_notes) !== JSON.stringify(profile2.mapping_notes) || !Array.isArray(value.notes) || profile2.mapping_notes.some((note2) => !value.notes.includes(note2)))) {
       throw Error("The pinned Apad\u0101na edition or mapping notices changed. No English was displayed.");
+    }
+    if (content && PINNED_POEM_NOTE_IDS.has(uid2)) {
+      let valid = false;
+      try {
+        valid = Array.isArray(value.translator_notes) && contentSha256(JSON.stringify(value.translator_notes)) === profile2.notes_sha256;
+      } catch {
+      }
+      if (!valid) throw Error("The pinned Apad\u0101na poem-note content changed. No English was displayed.");
     }
     if (content && PINNED_NEW_PARATEXT_IDS.has(uid2)) {
       let valid = false;

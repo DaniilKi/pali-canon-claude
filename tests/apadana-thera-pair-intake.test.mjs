@@ -1,3 +1,4 @@
+import { CURRENT_APADANA_IDS } from './helpers/apadana-intake-expectations.mjs';
 /** Exact source-scope curation, separate from production profile derivation. */
 import test, { afterEach } from 'node:test';
 import assert from 'node:assert/strict';
@@ -20,6 +21,8 @@ const sealed = descriptor => {
   assert.equal(digest(raw), descriptor.sha256, `Independent evidence seal: ${descriptor.file}`);
   return JSON.parse(raw);
 };
+const currentApproval = JSON.parse(readFileSync('docs/evidence/apadana/THERA_141_180_APPROVAL.json', 'utf8'));
+const currentBaseline = sealed(currentApproval.baseline_freeze);
 const inputs = approval.goldens.map(sealed), reviews = approval.source_reviews.map(sealed);
 const rights = approval.rights.map(sealed), independent = sealed(approval.independent_source_approval);
 const baseline = sealed(approval.baseline_freeze);
@@ -76,10 +79,22 @@ test('paired intake is exactly independently approved39 and preserves all129 pri
     net_coverage_delta_expected: 39, coverage_delta_requires_runtime_validation: true,
   });
   assert.equal(approval.baseline_ids.length, 129);
-  assert.deepEqual(Object.keys(APADANA_PROFILES), [...approval.baseline_ids, ...approved]);
+  const oldIds = [...approval.baseline_ids, ...approved];
+  assert.equal(oldIds.length, 168);
+  assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
+  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0, 168), oldIds, 'All 168 previous IDs retain exact order');
+  assert.equal(currentApproval.status, 'approved');
+  assert.deepEqual(currentApproval.baseline_ids, oldIds);
+  assert.deepEqual(currentApproval.expected_profile_ids, CURRENT_APADANA_IDS);
   const data = canon.load(), manifest = JSON.parse(readFileSync('server/data/apadana.json', 'utf8'));
   for (const uid of approval.baseline_ids) {
     const oldLink = baseline.profile_objects[uid], { english: _english, match: _match, ...oldProfile } = oldLink;
+    assert.deepEqual(APADANA_PROFILES[uid], oldProfile, `${uid} previous profile exact`);
+    assert.deepEqual(manifest.links[uid], oldLink, `${uid} previous source link exact`);
+  }
+  assert.equal(Object.keys(currentBaseline.profile_objects).length, 168);
+  for (const uid of oldIds) {
+    const oldLink = currentBaseline.profile_objects[uid], { english: _english, match: _match, ...oldProfile } = oldLink;
     assert.deepEqual(APADANA_PROFILES[uid], oldProfile, `${uid} previous profile exact`);
     assert.deepEqual(manifest.links[uid], oldLink, `${uid} previous source link exact`);
   }
@@ -110,7 +125,7 @@ test('paired intake is exactly independently approved39 and preserves all129 pri
     validateLink(p, uid, u, book);
     assert.ok(Object.isFrozen(p) && Object.isFrozen(p.stanza_layout));
   }
-  for (const uid of ['tha-ap72', 'tha-ap142', 'tha-ap12', 'tha-ap143']) assert.equal(APADANA_PROFILES[uid], undefined);
+  for (const uid of ['tha-ap72', 'tha-ap142', 'tha-ap12', 'tha-ap160', 'tha-ap161', 'tha-ap183']) assert.equal(APADANA_PROFILES[uid], undefined);
   for (const row of rights) { assert.equal(row.license, 'CC BY-NC-SA 4.0'); assert.equal(row.live_only, true); assert.equal(row.media_fetches, 0); }
 });
 
@@ -173,7 +188,7 @@ test('source-enabled unreviewed wording, profile fields, layout shapes and held 
     for (const patch of [{ id: 'tha-ap142' }, { poem: 140 }, { stanza_layout: [] }, { note_numbers: [999] }, { raw_sha256: digest(raw + '\n') }, { chapter_summary: {} }, { publisher_divisions: [] }, { editorial_gap: {} }]) assert.throws(() => parseTheraApadana(raw, { ...p, ...patch }), /differs/);
   }
   let calls = 0; globalThis.fetch = async () => { calls++; throw Error('Held source transport'); };
-  for (const poem of ['010', '070', '140', '141', '570']) {
+  for (const poem of ['010', '070', '140', '158', '159', '181', '570']) {
     const url = `https://raw.githubusercontent.com/apadana-translation/apadana-site/${APADANA_COMMIT}/src/_poems/chapter-3/poem-${poem}.md`;
     assert.equal(isApadanaRawUrl(url), false); await assert.rejects(fetchPublic(url, { json: false }), /outside the supported public sources/);
   }

@@ -1,0 +1,47 @@
+{
+  "baseline": "05fc4e29540fc0799145dc28838bedb7d964b2c7",
+  "decision": "SOURCE-ONLY APPROVAL; independent peer/runtime/package/CI gates remain; no activation authority",
+  "approved_ids": [
+    "tha-ap153",
+    "tha-ap154",
+    "tha-ap155",
+    "tha-ap156",
+    "tha-ap157",
+    "tha-ap158",
+    "tha-ap159",
+    "tha-ap162"
+  ],
+  "approved_poems": [
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    160
+  ],
+  "held_in_batch": [
+    {
+      "id": "tha-ap160",
+      "poem": 158,
+      "reason": "HOLD: current canonical owner crosses the original poem boundary; independent atomic160/161repair and source/runtime approval required."
+    },
+    {
+      "id": "tha-ap161",
+      "poem": 159,
+      "reason": "HOLD: current canonical owner crosses the original poem boundary; independent atomic160/161repair and source/runtime approval required."
+    }
+  ],
+  "goldens_sha256": "baf49911d45f09c26447437a40695c0747b748d4526557dc38b4a684547d2d61",
+  "source_review_sha256": "809ddd839e83ed443a8003652d88641b4e5abdb9f4593b28a0a7d3fd0cea975f",
+  "rights_sha256": "1f84fdaac2de037e8fa0e684366783817ee0e0bd600ddd043ce30d0441668880",
+  "xml_replay_sha256": "bdc7e1daead6c45dac1f5fbce669cbdfef54d404564a495d3232a14e575961d6",
+  "prior_profiles_preserved": 168,
+  "other_holds_preserved": [
+    70,
+    140
+  ],
+  "namespace_assigned": false,
+  "activation": false
+}
