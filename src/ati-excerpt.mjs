@@ -35,6 +35,8 @@ export function atiPartialExcerpt(html,extractor) {
   if(extractor==='ati-chapter-p5-of5-no-notes-v1')return chapterLastParagraphWithoutNotes(html);
   if(extractor==='ati-chapter-p1to3-of4-ellipsis-v1')return chapterProseBeforeEllipsis(html);
   if(extractor==='ati-chapter-p1to4-of5-notes-v1')return chapterProsePrefixBeforeNotes(html);
+  if(extractor==='ati-vinaya-mv6-p1to5-of5-v1')return vinayaChapterProse(html,5);
+  if(extractor==='ati-vinaya-mv8-p1to22-of22-v1')return vinayaChapterProse(html,22);
   if(extractor==='ati-chapter-p2-of2-v1')return chapterParagraph(html,2,2);
   if(extractor==='ati-chapter-p11-of11-v1')return chapterParagraph(html,11,11,'Seeing the Dhamma');
   if(extractor==='ati-chapter-p1-of4-v1')return chapterParagraph(html,4,1);
@@ -49,6 +51,7 @@ export const ATI_SUBPARAGRAPH_EXTRACTORS = Object.freeze(['ati-chapter-prose-v1'
 export const ATI_SEGMENT_EXTRACTORS = Object.freeze([
   'ati-freeverse-v1', 'ati-chapter-p2-of2-v1', 'ati-chapter-p11-of11-v1',
   'ati-chapter-p1-of4-v1', 'ati-excerpt-verse-pre-v1', 'ati-chapter-p14-of24-v1', 'ati-chapter-p1to3-of4-ellipsis-v1',
+  'ati-vinaya-mv6-p1to5-of5-v1', 'ati-vinaya-mv8-p1to22-of22-v1',
 ]);
 function copyrightedChunk(html) {
   const begin='<!-- BEGIN COPYRIGHTED TEXT CHUNK -->',end='<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->';
@@ -99,6 +102,22 @@ const selectedProse=paragraphs=>{
   if(texts.some(t=>!t))throw Error('The reviewed ATI prose extraction structure changed. No excerpt was returned.');
   return texts.join('\n\n');
 };
+// These two reviewed bodies have no inline notes or formatting. Only Mv8's three
+// inert named anchors are permitted; do not let selectedProse erase added notes.
+function vinayaChapterProse(html,total) {
+  const paragraphs=chapterParagraphsWithoutNotes(html,total);
+  const fail=()=>{throw Error('The reviewed ATI Vinaya inline extraction structure changed. No excerpt was returned.');};
+  for(const paragraph of paragraphs){
+    let anchor=false;
+    for(const [tag] of paragraph.matchAll(/<[^>]*>/g)){
+      if(total===22&&!anchor&&/^<a id=(["'])(?:ananda|patient|nurse)\1>$/.test(tag))anchor=true;
+      else if(anchor&&tag==='</a>')anchor=false;
+      else fail();
+    }
+    if(anchor)fail();
+  }
+  return selectedProse(paragraphs);
+}
 function chapterLastParagraphWithoutNotes(html) {
   return selectedProse(chapterParagraphsWithoutNotes(html,5).slice(4));
 }

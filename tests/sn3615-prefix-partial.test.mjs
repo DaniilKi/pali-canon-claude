@@ -38,8 +38,8 @@ function install(){
 
 test('SN36.15 prefix preserves full root/context/notice pins and the previous sixteen source declarations',()=>{
   assert.ok(row,'The reviewed SN36.15 prefix is explicitly registered');
-  assert.equal(manifest.links.length,18);
-  const previous={...manifest,links:manifest.links.filter(r=>!['an8.59','sn36.15'].includes(r.unit_id))};
+  assert.equal(manifest.links.length,20);
+  const previous={...manifest,links:manifest.links.filter(r=>!['an8.59','sn36.15','pli-tv-kd6','pli-tv-kd8'].includes(r.unit_id))};
   assert.equal(previous.links.length,16);
   assert.equal(scopeHash(previous),'0026bf4c52b68dd0e5f4e749902d9530ccc4c8fd5579c848e2263b65c584d006');
   assert.deepEqual(json('server/data/reviewed-partial-pages.json'),manifest);
@@ -60,7 +60,7 @@ test('SN36.15 prefix preserves full root/context/notice pins and the previous si
   assert.match(row.mapping_note,/©1983/);assert.match(row.mapping_note,/50 copies/);assert.match(row.mapping_note,/complete licence/);assert.match(row.mapping_note,/1998.*1983/s);
   assert.equal(scope.read_with,undefined);assert.equal(scope.read_pages,undefined);assert.equal(scopeDescriptor(choice,unit.id).flags.allow_partial,true);
   const totals=translationCoverage({refresh:true}).total;
-  assert.deepEqual([totals.links,totals.with_english,totals.with_english_including_inherited,totals.partial_links,totals.partial_only],[2538,1408,1831,18,12]);
+  assert.deepEqual([totals.links,totals.with_english,totals.with_english_including_inherited,totals.partial_links,totals.partial_only],[2538,1408,1831,20,14]);
   const daily=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([daily.rotation.of,daily.text.id],[1257,'sn12.31']);
 });
 

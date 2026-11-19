@@ -21,8 +21,8 @@ const selected=parts.join('\n\n');
 function install(){const d=canon.load();saved||=d.translations;const link={...structuredClone(d.translations['an8.59'][0]),path:'/tipitaka/an/an08/synthetic-eight-fixture',url:'https://accesstoinsight.org/tipitaka/an/an08/synthetic-eight-fixture.html'};link.partial_scope.text_sha256=scopeHash(selected);link.partial_scope.notice_sha256=scopeHash(english.atiNotice(fixture()));d.translations={...d.translations,'an8.59':[link]};return{unit:canon.resolve('an8.59').unit,link,id:canon.translationId(link)};}
 
 test('AN8.59 preserves exact original prose, omitted stanzas and its own rights with no changes to sixteen older declarations',()=>{
- assert.ok(row,'Reviewed source activation must exist');assert.equal(manifest.links.length,18);
- assert.equal(scopeHash({...manifest,links:manifest.links.filter(r=>!['an8.59','sn36.15'].includes(r.unit_id))}),'0026bf4c52b68dd0e5f4e749902d9530ccc4c8fd5579c848e2263b65c584d006');
+ assert.ok(row,'Reviewed source activation must exist');assert.equal(manifest.links.length,20);
+ assert.equal(scopeHash({...manifest,links:manifest.links.filter(r=>!['an8.59','sn36.15','pli-tv-kd6','pli-tv-kd8'].includes(r.unit_id))}),'0026bf4c52b68dd0e5f4e749902d9530ccc4c8fd5579c848e2263b65c584d006');
  assert.deepEqual(json('server/data/reviewed-partial-pages.json'),manifest);
  assert.equal(scopeHash(canon.load().canon),'1ba8593937abe0284f87e3d8b2a4abd1d732fcc1d6117c36d5a671e968b4d73c');
  const unit=canon.resolve('an8.59').unit,segs=canon.segments(unit),meta=canon.describe(unit),choice=meta.english[0],scope=choice.translation_scope;
@@ -39,7 +39,7 @@ test('AN8.59 preserves exact original prose, omitted stanzas and its own rights 
  assert.equal(scopeDescriptor(choice,unit.id).flags.allow_partial,true);
  const bad=structuredClone(choice);bad.translation_scope.version=2;
  assert.throws(()=>scopeDescriptor(bad,unit.id),/unsupported|incomplete/);
- const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links,t.with_shared_english,t.shared_only],[2538,1408,1831,18,12,12,110,52]);
+ const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links,t.with_shared_english,t.shared_only],[2538,1408,1831,20,14,12,110,52]);
  const d=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([d.rotation.of,d.text.id],[1257,'sn12.31']);
 });
 

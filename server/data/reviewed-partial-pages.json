@@ -578,6 +578,68 @@
           "segment_sha256": "39f3172013f8571b82c6c89edd7d55780eeaeb480d477917b8174c25c83a88c2"
         }
       }
+    },
+    {
+      "unit_id": "pli-tv-kd6",
+      "path": "/tipitaka/vin/mv/mv.06.40.01.than",
+      "translator": "Thanissaro Bhikkhu",
+      "english_title": "Vinaya-samukkamsa: allowable and not-allowable principles (partial)",
+      "license": "CC-BY-NC",
+      "source_reference": "Mv6.40.1, publisher paragraphs1–5of5; VRI305, pli-tv-kd6/195 only",
+      "mapping_note": "Derived prose selection from the named Access to Insight source: all five publisher chapter paragraphs correspond to pli-tv-kd6/195 only, the uncertainty framing and four allowable/not-allowable principles. The following Pāli food-duration discussion at /196 and the rest of Khandhaka6 are outside this selection. Original publisher Mv6.40.1 and VRI305 numbering are preserved; neither a whole Khandhaka nor word-level alignment is claimed. Complete ©1996 Thanissaro Bhikkhu attribution, source-publication provenance and CC BY-NC4.0 notice accompany the selection.",
+      "source_html_sha256": "352d5868754b83fdd11bc643889e3ac9ee96eafc3880c2c6cee75f61244b1546",
+      "root": {
+        "id": "pli-tv-kd6",
+        "title": "Pañcabhesajjakathā",
+        "vri": "260–305",
+        "book": 2,
+        "start": 1562,
+        "end": 1810,
+        "root_blocks_sha256": "8b40559002422b6bee4cb4ec8bac0c5c94f1e0251611435efa22aad2ca68033f"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "pli-tv-kd6",
+        "first_ref": "pli-tv-kd6/195",
+        "last_ref": "pli-tv-kd6/195",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "35c32de8ee0914f6ce2f56f130f7a4521f84298c27242a065a8bd888014a1955",
+        "text_sha256": "bf15244cdcccdded9e6ba42e72b90d3d287b427029df1ff16488750c0926b322",
+        "notice_sha256": "658d0de6bf27b7a92d83a359eb26fdcc7054cde2eb3e2d6bf84ba15b94db3356",
+        "extractor": "ati-vinaya-mv6-p1to5-of5-v1"
+      }
+    },
+    {
+      "unit_id": "pli-tv-kd8",
+      "path": "/tipitaka/vin/mv/mv.08.26.01-08.than",
+      "translator": "Thanissaro Bhikkhu",
+      "english_title": "Kucchivikara-vatthu: care of the sick (partial)",
+      "license": "CC-BY-NC",
+      "source_reference": "Mv8.26.1–8, publisher paragraphs1–22of22; VRI365–366, pli-tv-kd8/174–178 only",
+      "mapping_note": "Derived prose selection from the named Access to Insight source: all 22 publisher chapter paragraphs correspond to pli-tv-kd8/174–178 only, the dysentery story, mutual-care obligations and four five-quality patient/nurse lists. The surrounding Khandhaka8, closing Pāli colophon and following dead-monk-property discussion are outside this selection. Original publisher Mv8.26.1–8 and VRI365–366 numbering are preserved; neither a whole Khandhaka nor word-level alignment is claimed. Complete ©1997 Thanissaro Bhikkhu attribution and CC BY-NC4.0 notice accompany the selection.",
+      "source_html_sha256": "631d970295145c6eac6ae98c4d01ce016fc5dea20b749db93ec54e91f779e579",
+      "root": {
+        "id": "pli-tv-kd8",
+        "title": "Jīvakavatthu",
+        "vri": "326–379",
+        "book": 2,
+        "start": 2028,
+        "end": 2318,
+        "root_blocks_sha256": "824777885b9c4864acf9145a0062b73d56a940758c1c9eea45802067f2cca03a"
+      },
+      "partial_scope": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "pli-tv-kd8",
+        "first_ref": "pli-tv-kd8/174",
+        "last_ref": "pli-tv-kd8/178",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "pali_sha256": "cf5d8e74409560267da8ac70282ccdf7f1049974bbd082e2b36c2f04bacedc24",
+        "text_sha256": "362be089759201001d157e9dc8d97adeb8a2d537ccde9306d7f3b45f26d833e9",
+        "notice_sha256": "4414f147c8ff644682a029b7b5cabeded1776763dd41e2e9214d4f03051bb26b",
+        "extractor": "ati-vinaya-mv8-p1to22-of22-v1"
+      }
     }
   ]
 }

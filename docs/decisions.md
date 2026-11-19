@@ -1457,3 +1457,10 @@ Validate source/revision/terms, query interpretation, literal commands, native m
 Replace the last legacy web search path with a pure post-canonical validator and source-pinned reading links. Expose the existing context command without widening its citation: volume, chapter, numbered passage and whole-file selections retain their own boundaries. Preserve the Saṅgaha/Vibhāvinī distinction even when they share a physical VRI file. Exact links pin the real match start; the ordinary reader still uses its existing page length within that selection.
 
 Reuse the commentary preview lifecycle for cancellation, stale-response refusal, owned focus and private draft preservation, while keeping corpus-specific validators/commands/source metadata separate. Retain every numbering/approximation/source-rights warning and actual page/paragraph marker. No new source, inference, tool or personal schema. Give the previously installation-starved personal-data group and the new three-pass later-work group sufficient CI setup time, retaining every assertion. [Evidence](evidence/web-reader/POST_SEARCH_CONTEXT.md).
+
+
+## D232 — First precisely scoped Vinaya English selections
+
+Activate two independently reviewed ATI/Ṭhānissaro pages only for `pli-tv-kd6/195` and `pli-tv-kd8/174–178`. Match all five/all22 publisher paragraphs to those exact contiguous Pāli spans, preserving complete ©1996/1997 CC BY-NC4.0 notices, translator additions and distinct publisher/VRI numbering. No whole-Khandhaka or word-level alignment claim; no source text or held-source permission is reconstructed.
+
+Use exact reserved owner/path/rights/version profiles and finite paragraph/inline-markup selectors. Reject added notes rather than silently stripping them; preserve only the actual permitted named anchors. Root, English and notice pins govern build and runtime, with existing exact-ID consent and prefix/selection continuation guards. Preserve all18 prior descriptors and translation values, whole counts, shared pages and daily rotation; partial choices20/partial-only14 are separate measures. [Source, rights and verification evidence](data/vinaya-first-partials.md).

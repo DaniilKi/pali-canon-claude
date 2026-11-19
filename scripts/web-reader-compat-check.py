@@ -762,6 +762,29 @@ try:
             passed('native Vism chapter12 reload never fetches a menu automatically; explicit parent work authority exposes23 exact literal chapters and opens23 with a revision-only pin without private changes')
             context.close()
 
+            # Actual newly reviewed Vinaya metadata; this journey never fetches English.
+            context, page, state = environment(saved=[canonical['mark']], script='sinhala')
+            page.goto(base + '/#browse?node=english&availability=scoped&collection=vinaya')
+            expect(page.locator('.english-catalogue-count')).to_have_text('2 matching indexed records')
+            assert page.locator('.cards .entry').count() == 2
+            original_profile = copy.deepcopy(profile(page))
+            for uid, first, last in [('pli-tv-kd6', 'pli-tv-kd6/195', 'pli-tv-kd6/195'),
+                                     ('pli-tv-kd8', 'pli-tv-kd8/174', 'pli-tv-kd8/178')]:
+                page.goto(base + '/#read?uid=' + uid)
+                read_tool(page, 'English sources').click()
+                expect(page.locator('#study .translation-choice')).to_have_count(1)
+                page.get_by_role('button', name='Review partial-unit source', exact=True).focus()
+                page.keyboard.press('Enter')
+                expect(page.get_by_role('heading', name='Review English source scope', exact=True)).to_be_visible()
+                expect(page.locator('#scope-consent')).not_to_be_checked()
+                expect(page.get_by_role('button', name='Read reviewed partial source', exact=True)).to_be_disabled()
+                assert first + ' to ' + last in page.locator('#study').inner_text()
+                assert all(c['name'] != 'get_translation' for c in state['calls'])
+                assert profile(page) == original_profile
+                audit(page, state, uid + ' actual partial scope and fresh consent, no English retrieval')
+            passed('two scoped-only Vinaya records retain exact original spans and fresh keyboard-accessible consent without provider English or private changes')
+            context.close()
+
             # The narrow legacy-progress fix is exercised in each real engine.
             context, page, state = environment(saved=[canonical['mark']], marks=progress[:1], last='mn10')
             page.goto(base + '/#plans')
