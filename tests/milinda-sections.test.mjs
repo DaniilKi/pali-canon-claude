@@ -27,9 +27,9 @@ test('fourteen complete substantive question choices have unique real section id
   assert.deepEqual(registry, JSON.parse(readFileSync('server/data/reviewed-ati-sections.json', 'utf8')));
   const snapshot = canon.load();
   assert.equal(validateSectionRegistry(registry, snapshot.canon, snapshot.translations, canon.segments), registry);
-  assert.equal(registry.links.length, 15); assert.equal(milindaRows.length, 14); assert.equal(new Set(milindaRows.map(id)).size, 14);
+  assert.equal(registry.links.length, 35); assert.equal(milindaRows.length, 14); assert.equal(new Set(milindaRows.map(id)).size, 14);
   assert.equal(sectionHash(milindaRows), '1895805a2ffc3518b590a000843a018b90f40694980094ba877940124d94ad16');
-  assert.equal(JSON.parse(readFileSync('server/data/reviewed-partial-pages.json', 'utf8')).links.length, 21);
+  assert.equal(JSON.parse(readFileSync('server/data/reviewed-partial-pages.json', 'utf8')).links.length, 22);
   assert.equal(sectionHash(JSON.parse(readFileSync('scripts/canon/reviewed_partial_pages.json', 'utf8')).links.slice(0, 18)), 'd55eab78d8820f2b9ef8c4988c936eaa17e11b51298ccb29c2b015760ff7ad36');
   for (const row of milindaRows) {
     const link = snapshot.translations[row.unit_id].find(value => value.section), metadata = canon.describe(unit(row)), choice = english.available(unit(row)).find(value => value.translation_id === id(row));

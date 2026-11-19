@@ -1,0 +1,243 @@
+{
+  "baseline_commit": "4152db2",
+  "date": "2026-11-19",
+  "decision": "APPROVE EXACT PARTIAL ONLY",
+  "approved_scope": {
+    "owner": "mil6.4.1",
+    "first_ref": "mil6.4.1/20",
+    "last_ref": "mil6.4.1/21",
+    "segments": 2,
+    "type": "verse",
+    "whole_unit": false,
+    "publisher_citation": "— Miln 335",
+    "publication_page_label": "Miln5",
+    "source_title": "The Healing Medicine of the Dhamma"
+  },
+  "independent_method": "Fresh official ATI GitHub exact-ref base64 artifact acquired independently of prior temporary leads; decoded Git blob SHA1 verified. Complete96-segment root read, with full /17–23adjacent context and unique osadha vs agada/amata distinction. Exact verse body, full notice and finite HTML independently recomputed.",
+  "artifact": {
+    "repository": "bcbsit/ati",
+    "commit": "45fedca341497120651efa20e756b04a13e61089",
+    "path": "tipitaka/kn/miln/miln.5x.olen.html",
+    "official_blob_url": "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/kn/miln/miln.5x.olen.html",
+    "bytes": 11291,
+    "git_blob_sha1": "36f03580ceed478baa3546238c6d71c89901c4ff",
+    "sha256": "7c117b838aef75fcc9c595b5b903b5769221bae6269492e1ed8d86811cf8c299",
+    "retrieval": "Fresh official GitHub exact-ref base64 fetch; decoded Git blob SHA1 verified independently of prior lead."
+  },
+  "root": {
+    "id": "mil6.4.1",
+    "book": 45,
+    "start": 1627,
+    "end": 1774,
+    "title": "Anumānapañho",
+    "collection": "mil",
+    "acronym": "Mil 6.4.1",
+    "vri": "1",
+    "pts": {
+      "volume": 0,
+      "page": 329,
+      "end_page": 347
+    },
+    "file": "s0518m.nrf.xml",
+    "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "raw_blocks": 147,
+    "total_segments": 96,
+    "types": {
+      "heading": 2,
+      "prose": 43,
+      "verse": 51
+    },
+    "root_blocks_sha256": "bc2d2e8c21c237a82455f4699e35c8ca2835a284f039f7ed49197cb9ce6fb7f0",
+    "full_segments_sha256": "802aeb895d091f986a8c84041ceb491f17f04b9f201b5eda773b0c85198d9a90"
+  },
+  "selected_pins": {
+    "pali_sha256": "80466c44791d665fd9a7a5c7b6406e942f13d291d9571cd59a1f1d89f760cc37",
+    "pali_characters_sum": 191,
+    "pali_characters_joined_with_blankline": 193,
+    "english_characters": 265,
+    "text_sha256": "ac9407f40b48592e66e2247c3b5efe000c060bc91f8c6aa52aaf7b6fe36e885d",
+    "verse_body_raw_sha256": "1f7365f48f806a3f192034a1eada747f679622f877fdc2aa6a943a675d547be3",
+    "normalized_body_utf8_sha256": "54e88e6db2dacc43617513e9da3ae416676a6e463f2f866fc14671e2561b2762",
+    "full_freeverse_inner_raw_sha256": "45254462e8d9054e286c52eebd5235d3054f5989cffdcc3e22c08cc9fc3ee3aa",
+    "notice_sha256": "167c6e2428970354cb074b043e2c091c3f4c71aaeff997ea801cda00ae7d9e8f",
+    "owned_publisher_citation_sha256": "7aee377b979fb4a66bff9b0ec15c25e67845109fcce772fc47664c44dd308227",
+    "excluded_preface_inner_raw_sha256": "6c1a927185f487e01bb644858ea10bede64dff1995502153424066aaab662478"
+  },
+  "rights": {
+    "translator": "Andrew Olendzki",
+    "copyright_year": 2005,
+    "license_profile": "Olendzki-free-distribution-2005",
+    "creative_commons": false,
+    "BPS_reprint_quantity_limit": false,
+    "full_notice": {
+      "licensing": "©2005 Andrew Olendzki.\n\nYou may copy, reformat, reprint, republish, and redistribute this work in any medium whatsoever, provided that: (1) you only make such copies, etc. available free of charge; (2) you clearly indicate that any derivatives of this work (including translations) are derived from this source document; and (3) you include the full text of this license in any copies or derivatives of this work. Otherwise, all rights reserved. Documents linked from this page may be subject to other restrictions.\nTranscribed from a file provided by the translator. Last revised for Access to Insight on 2 November 2013.",
+      "citation": "How to cite this document (a suggested style): \"The Healing Medicine of the Dhamma\" (Miln 5), translated from the Pali by Andrew Olendzki. Access to Insight (BCBS Edition), 2 November 2013, https://www.accesstoinsight.org/tipitaka/kn/miln/miln.5x.olen.html ."
+    },
+    "positive_permission": "Free copying/reformatting/reprinting/republication/redistribution in any medium if copies remain free, derived-source identification is clear and complete license text accompanies copies/derivatives. Other rights reserved; linked documents may differ.",
+    "provenance": "Transcribed from translator-provided file; ATI revision2November2013.",
+    "rights_blocker": null
+  },
+  "source_policy_five_tests": {
+    "standing": "PASS: officialATI/BCBS and named established translator; original translator-provided file statement.",
+    "permission": "PASS: exact positive Olendzki2005free-distribution grant. Preserve complete notice; infer neither CC nor BPS50-copy cap.",
+    "respect": "PASS within exact source: existing approved ATI/Olendzki source and explicit reuse permission; no AI-specific exclusion observed on exact artifact. No broader permission inferred.",
+    "durability": "PASS: existing permitted officialATI GitHub repository, pinnedcommit and verifiedGitblob; no new mirror or deniedhost retry.",
+    "verifiability": "PASS: complete root/selectedscope/body/notice/citation pins and exactfinite source structure; numbered reference alone not used."
+  },
+  "bilingual_comparison": [
+    {
+      "ref": "mil6.4.1/20",
+      "verdict": "Complete stanza corresponds. Medicines existing in many/varied kinds, comparison with Dhamma medicine and invitation for monks to drink are present. Source does not translate /18poison-antidote stanza: its agada/visana wording differs from osadha/vividha bahu in /20."
+    },
+    {
+      "ref": "mil6.4.1/21",
+      "verdict": "Complete stanza corresponds. Drinking Dhamma medicine, age/death, meditation/seeing and ending clinging are all represented in publisher poetic wording; retain translator parenthetical and linebreaks unchanged."
+    }
+  ],
+  "boundary_controls": [
+    {
+      "ref": "mil6.4.1/18",
+      "type": "verse",
+      "translated": false,
+      "reason": "Antidote/poison stanza; similar opening but different lexical inventory. Do not absorb by resemblance."
+    },
+    {
+      "ref": "mil6.4.1/19",
+      "type": "prose",
+      "translated": false,
+      "reason": "Medicine-shop question and37aids/purgation explanation not in translated poem; source editorial preface is not its translation."
+    },
+    {
+      "ref": "mil6.4.1/22",
+      "type": "prose",
+      "translated": false,
+      "reason": "Following deathless-shop/body-mindfulness question not in poem; do not widen to adjacent prose."
+    },
+    {
+      "ref": "mil6.4.1/23",
+      "type": "verse",
+      "translated": false,
+      "reason": "Deathless-shop verse follows distinct prose and differs from both selected stanzas."
+    }
+  ],
+  "finite_source_structure": {
+    "copyrighted_chunks": 1,
+    "top_level_children": [
+      {
+        "tag": "div",
+        "class": "preface",
+        "children": [
+          "h1",
+          "p",
+          "p",
+          "p"
+        ],
+        "excluded_editorial_paragraphs": 3,
+        "paragraph3_bare_i_children": 4
+      },
+      {
+        "tag": "div",
+        "class": "chapter",
+        "children": [
+          {
+            "tag": "div",
+            "class": "freeverse",
+            "children": [
+              "text: two stanzas",
+              "p.cite: — Miln 335"
+            ]
+          }
+        ]
+      }
+    ],
+    "tag_counts": {
+      "div": 3,
+      "h1": 1,
+      "p": 4,
+      "i": 4
+    },
+    "notes": 0,
+    "anchors": 0,
+    "comments": 0,
+    "body_stanzas": 2,
+    "nonblank_lines_per_stanza": [
+      4,
+      5
+    ],
+    "body_characters": 265,
+    "body_utf8_sha256": "54e88e6db2dacc43617513e9da3ae416676a6e463f2f866fc14671e2561b2762",
+    "owned_publisher_citation": {
+      "text": "— Miln 335",
+      "inside_freeverse": true,
+      "exclude_from_scripture_body": true,
+      "retain_separately": true
+    },
+    "wrapper_tail": "One copyright wrapper closing div, whitespace only elsewhere."
+  },
+  "citation_ownership": {
+    "text": "— Miln 335",
+    "location": "Final p.cite INSIDE freeverse after secondstanza",
+    "scripture_body": false,
+    "retain_in_source_metadata": true,
+    "required": "Reject missing/changed/reordered/duplicated p.cite; exclude from265-character scripturebody. Preserve exact Miln335 as source_reference or separately labelled publishercitation, alongside completepageMiln5citation; do not silentlydiscard.",
+    "warning": "Generic ati-freeverse-v1includes this p.cite in scripture; it cannot be reused unchanged."
+  },
+  "required_implementation": [
+    "One exact reserved owner/path/version/extractor/translator/license profile. No generic Milinda collection expansion or fallback selector.",
+    "SourceHTML, complete root147blocks, selectedPali2segments, exact265character English and complete notice pins mandatory; fail closed before activation or return on drift.",
+    "Require onecopyrightchunk; exact preface3P + chapter/freeverse + one finalownedcitation; fourbare i only in thirdprefaceP. Reject unexpected nodes/tags/attributes/notes/anchors and order changes.",
+    "Exclude all threeprefaceparagraphs from scripture. They are translator commentary, not a translation of adjacent rootprose. Preserve bothstanzas and9nonblanklines/oneblankline in body.",
+    "Version1 contiguouspartial of complete twoverse segments; entire96segment owner remains notwhollytranslated and94othersegments outside selection. Never count as wholeEnglish coverage or dailyeligibility.",
+    "ExactID allow_partial consent and scope/prefix continuation; article/partial cache separation, export/quotation safeguards and finite continuation apply.",
+    "Preserve original21partialdescriptors,15wholesections, allalternatives, Pali/drafts/locators and sourceholds. NoEnglishbody bundled."
+  ],
+  "existing_choices": {
+    "owner": "mil6.4.1",
+    "choices_before": [],
+    "new_partial_owner_if_implemented": 1,
+    "new_whole_owners": 0,
+    "no_silent_substitution": true
+  },
+  "stronger_alternative": "No further sourcebody or wholequestion is present on thispage. Known Horner Miln5abridgment is a separate unapproved scope, not authority to enlarge this partial; no stronger qualifying alternative was acquired or approved in thisreview.",
+  "source_or_rights_holds": [],
+  "unapproved_scopes": [
+    "mil6.4.1wholequestion",
+    "mil6.4.1/18",
+    "mil6.4.1/19",
+    "mil6.4.1/22",
+    "anyprefaceasscripture",
+    "sourcecitationasscripture"
+  ],
+  "prior_holds": "All existing holds untouched; this exactsource approval does not clear any other version or scope.",
+  "hash_conventions": {
+    "scope_sha256": "SHA256(JSON.stringify(value)); Pali2objectarray and Englishbodystring differ from rawbytes.",
+    "raw_sha256": "SHA256UTF8bytes of exact namedartifact/innerverse/preface.",
+    "character_counts": "191sumof2Pali strings;193ifjoinedwithblankline. English265includes originalnewlines afterentitydecoding."
+  },
+  "reproducibility": [
+    "python /tmp/pali-milinda-verse-review/verify_structure.py",
+    "node /tmp/pali-milinda-verse-review/reproduce.mjs"
+  ],
+  "evidence_files": [
+    "artifact.json",
+    "miln.5x.olen.html",
+    "structure.json",
+    "pins-and-selected.json",
+    "reproduced-pins.json",
+    "complete-root.json",
+    "complete-root.txt",
+    "verify_structure.py",
+    "reproduce.mjs"
+  ],
+  "actions": {
+    "repository_edits": false,
+    "activation": false,
+    "source_body_in_repository": false,
+    "commits_or_push": false,
+    "outreach": false,
+    "SC": false,
+    "new_mirror": false,
+    "blocked_host_retry_or_bypass": false
+  },
+  "limits": "Source/scope approval only; guarded implementation tests, browser/package acceptance and exactcommitCI remain integration work. No project/fullEnglish completion claim."
+}

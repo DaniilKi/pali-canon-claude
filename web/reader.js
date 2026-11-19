@@ -7,7 +7,7 @@ import { createSourcePassage } from './source-passage.mjs';
 import { scriptRefreshEligible, retainBookSearchDraft } from './script-refresh.mjs';
 import { localizeText } from '../src/script.mjs';
 import { scopeDescriptor, validateEnglishPage } from './translation-policy.mjs';
-import { translatorNotes, milindaSourceUnit, sectionSourceUnit } from './milinda-sources.mjs';
+import { translatorNotes, milindaSourceUnit, numberedSourceUnit, sectionSourceUnit } from './milinda-sources.mjs';
 import { planCatalog, planDay, daySignature, cleanProgress, planWindow, validatePlanPage } from './reading-plans.mjs';
 import { MAX_IMPORT_BYTES, parseBookmarks, bookmarkMerge } from './bookmark-import.mjs';
 import { validateDaily } from './daily-reading.mjs';
@@ -875,11 +875,12 @@ async function englishPage(args, token, context) {
   try {
     const data = await tool('get_translation', args, 'study'); if (token !== epoch || studyToken !== studyEpoch) return;
     const next = validateEnglishPage(data, args, context), actualChoice = context.choices.find(c => c.translation_id === data.translation_id);
-    target.replaceChildren(el('h3', (context.accepted?.kind === 'shared_page' ? 'Shared English source page · ' : context.accepted ? 'Partial English source · ' : milindaSourceUnit(data.translation_id) ? 'English question source · ' : sectionSourceUnit(data.translation_id) ? 'English discourse source · ' : 'English source page · ') + data.translator));
+    target.replaceChildren(el('h3', (context.accepted?.kind === 'shared_page' ? 'Shared English source page · ' : context.accepted ? 'Partial English source · ' : milindaSourceUnit(data.translation_id) ? 'English question source · ' : numberedSourceUnit(data.translation_id) ? 'English numbered treatment source · ' : sectionSourceUnit(data.translation_id) ? 'English discourse source · ' : 'English source page · ') + data.translator));
     target.append(el('p', 'Pāli selection: ' + context.citation + ' · publisher reference: ' + (actualChoice.reference || data.citation), 'muted'), el('p', 'Source version: ' + data.translation_id, 'muted'));
     if (context.accepted) scopeSummary(context.accepted, target);
     if (data.translation_id !== args.translation) target.append(el('p', 'The server returned a different listed source version. Read its source and fallback notes before quoting.', 'notice'));
     if (milindaSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive question selection. Other questions on the publisher page and untranslated Pāli paratext are outside this English selection.', 'notice'));
+    else if (numberedSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive numbered treatment selection. The printed number identifies this treatment; the publisher title names the complete page. Other treatments, untranslated Pāli paratext and forms of address are outside this English selection. This is not word-by-word alignment.', 'notice'));
     else if (sectionSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive discourse selection. Other discourses on the publisher page and untranslated Pāli paratext are outside this English selection.', 'notice'));
     notes(data, target); target.append(el('p', data.text, 'translation')); translatorNoteSection(data, target, 4); provenance(data, target);
     if (next) target.append(button('Next English page →', () => englishPage(next, token, context)));

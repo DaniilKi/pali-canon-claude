@@ -37,7 +37,7 @@ afterEach(()=>{if(saved)canon.load().translations=saved;saved=undefined;globalTh
 function install(row){const d=canon.load();saved||=d.translations;const link=reviewedPartialLink(row,manifest);link.path='/tipitaka/vin/mv/synthetic-'+row.unit_id;link.url='https://accesstoinsight.org'+link.path+'.html';link.partial_scope=structuredClone(link.partial_scope);link.partial_scope.text_sha256=scopeHash(expected(row));link.partial_scope.notice_sha256=scopeHash(english.atiNotice(fixture(row)));d.translations={...d.translations,[row.unit_id]:[link]};return {link,unit:canon.resolve(row.unit_id).unit,id:canon.translationId(link)};}
 
 test('two Vinaya partial declarations preserve the exact previous eighteen descriptors and original roots',()=>{
- assert.equal(manifest.links.length,21);assert.equal(rows.length,2);
+ assert.equal(manifest.links.length,22);assert.equal(rows.length,2);
  assert.equal(scopeHash(manifest.links.slice(0,18)),'d55eab78d8820f2b9ef8c4988c936eaa17e11b51298ccb29c2b015760ff7ad36');
  assert.deepEqual(rows.map(r=>[r.unit_id,r.partial_scope.first_ref,r.partial_scope.last_ref,r.partial_scope.extractor]),[
   ['pli-tv-kd6','pli-tv-kd6/195','pli-tv-kd6/195','ati-vinaya-mv6-p1to5-of5-v1'],
@@ -95,7 +95,7 @@ from reviewed_partial_pages import manifest_rows,withhold_partial_page_proposals
 m=json.load(sys.stdin)
 with tempfile.TemporaryDirectory() as tmp:
  p=pathlib.Path(tmp)/'manifest.json'
- p.write_text(json.dumps(m),encoding='utf-8');assert len(manifest_rows(p)['links'])==21
+ p.write_text(json.dumps(m),encoding='utf-8');assert len(manifest_rows(p)['links'])==22
  for row in [r for r in m['links'] if r['unit_id'] in ['pli-tv-kd6','pli-tv-kd8']]:
   original={'wrong-owner':[{'source':'ati','path':row['path'],'url':'https://accesstoinsight.org'+row['path']+'.html'}]}
   out,removed=withhold_partial_page_proposals(original,p);assert out=={} and len(removed)==1

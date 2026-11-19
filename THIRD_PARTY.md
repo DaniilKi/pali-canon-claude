@@ -213,3 +213,10 @@ plus all owned translator notes, accompany each returned question. English bodie
 remain live-only; the bundle holds finite section metadata, exact anchors and
 verification hashes. Pāli headings/colophons and a repeated closing label are
 not claimed translated. [Detailed source/rights review](docs/data/milinda-reviewed-questions.md).
+
+
+### Numbered AN treatments and the Milinda medicine poem (D239)
+
+The twenty exact AN 1.21–40 paragraph selections retain the full page-specific **©2006 Thanissaro Bhikkhu, CC BY-NC 4.0** notice, complete attribution and ATI citation. Selection is identified through the real publisher anchors `sutta-21` through `sutta-40`. The existing shared-page source remains an independent consented version. Omitted vocatives and ordinal/chapter paratext are disclosed; neither word-level alignment nor new rights over other versions is inferred.
+
+Only two Olendzki stanzas at `mil6.4.1/20–21` are selected from the *Healing Medicine of the Dhamma* page. The complete **©2005 Andrew Olendzki** notice permits copying and redistribution **free of charge**, with identified source/derivatives and the full licence text retained. It is **not Creative Commons** and contains **no BPS 50-copy reprint restriction**. The editorial preface is not scripture; the publisher's `— Miln 335` citation is retained separately from the poem. All other root passages, linked documents and source versions keep their own terms. The package stores metadata and verification hashes, not these English bodies. [Exact source and rights receipts](docs/data/an-mind-and-milinda-medicine.md).

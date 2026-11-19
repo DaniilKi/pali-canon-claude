@@ -449,3 +449,10 @@ at the start. A delayed success/error does not take focus back from a finder,
 preference or other task. Reopened phone finders remain open; exact-reference
 scrolling stops when intervening user activity expires its focus lease. See
 [draft/focus acceptance](evidence/web-reader/DRAFT_FOCUS_SAFETY.md).
+
+
+### Numbered mind discourses and a partial Milinda poem
+
+AN 1.21–40 each has an individual English choice that selects only its verified numbered paragraph. The publisher's printed number and parent page title identify the selection; they do not create an individual source heading. The older unanchored compilation remains a separate shared-page choice with its original consent and page-level scope. Omitted vocatives, ordinals and chapter paratext stay disclosed without altering Pāli.
+
+The Olendzki medicine poem requires explicit partial-source consent and reads only `mil6.4.1/20–21`, two stanzas within a 96-segment question. Its editorial preface and publisher citation do not appear as poem wording; the citation and full non-CC distribution notice remain source metadata. Comparison, quotation, continuation and exports preserve this narrower source identity. The remaining 94 segments are not presented as translated. Browser viewport, keyboard and accessibility checks are emulation, not physical-device or human screen-reader acceptance. [Sources, scope and verification limits](data/an-mind-and-milinda-medicine.md).

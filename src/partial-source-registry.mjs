@@ -8,7 +8,12 @@ export function reviewedPartialLink(row,registry){
 export function assertRegisteredPartial(link,unit,registry){
   let key;try{const u=new URL(link.url);key=u.hostname.replace(/^www\./,'')+u.pathname;}catch{}
   const row=registry.links.find(r=>link.path===r.path||key==='accesstoinsight.org'+r.path+'.html');
-  if(!row)return;
+  if(!row){
+    // Reserve the source even before/without an activated descriptor: ordinary
+    // whole-page fallback would include the editorial preface and citation.
+    if(link.path==='/tipitaka/kn/miln/miln.5x.olen'||key==='accesstoinsight.org/tipitaka/kn/miln/miln.5x.olen.html')throw Error('Registered partial source has no reviewed mapping. No whole-unit source or retrieval is inferred.');
+    return;
+  }
   const expected=reviewedPartialLink(row,registry);
   if(unit.id!==row.unit_id||stable(link)!==stable(expected))throw Error('Registered partial source lost or changed its reviewed mapping. No whole-unit source or retrieval is inferred.');
 }

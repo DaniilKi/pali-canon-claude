@@ -3,6 +3,15 @@ export const ATI_SECTION_PROFILE = 'ati-kelly-milinda-v1';
 export const ATI_SECTION_COMMIT = '45fedca341497120651efa20e756b04a13e61089';
 export const ATI_SECTION_LICENSE = 'Kelly-free-distribution-2005';
 export const SN27_SECTION_PROFILE = 'ati-sn27-feelings-v1';
+export const AN_MIND_SECTION_PROFILE = 'ati-an1-ekadhamma-numbered-paragraph-v1';
+export const AN_MIND_SECTION_PATH = '/tipitaka/an/an01/an01.021-040.than';
+export const AN_MIND_SHARED_LINK_SHA256 = '67e00d1d18e2f94eb11d297d6b79e719d144a3c19c961b114af9c192556078cb';
+const anRows = [
+  [21,2,'Paṭhamaṃ.'],[22,1,'Dutiyaṃ.'],[23,1,'Tatiyaṃ.'],[24,1,'Catutthaṃ.'],[25,1,'Pañcamaṃ.'],
+  [26,1,'Chaṭṭhaṃ.'],[27,1,'Sattamaṃ.'],[28,1,'Aṭṭhamaṃ.'],[29,1,'Navamaṃ.'],[30,1,'Dasamaṃ.'],
+  [31,2,'Paṭhamaṃ.'],[32,1,'Dutiyaṃ.'],[33,1,'Tatiyaṃ.'],[34,1,'Catutthaṃ.'],[35,1,'Pañcamaṃ.'],
+  [36,1,'Chaṭṭhaṃ.'],[37,1,'Sattamaṃ.'],[38,1,'Aṭṭhamaṃ.'],[39,1,'Navamaṃ.'],[40,1,'Dasamaṃ.'],
+];
 const page = '/tipitaka/kn/miln/miln.';
 const rows = [
   ['mil3.1.8', '2x', 'miln-2-1-08', 9, 0],
@@ -29,6 +38,13 @@ export const ATI_SECTION_PROFILES = Object.freeze([...rows.map(([unit_id, part, 
   profile: SN27_SECTION_PROFILE, collection: 'sn', translator: 'Thanissaro Bhikkhu', license: 'CC-BY-NC',
   source_html_sha256: '4cda764c8a27a64faf96f6cd2ce0dc08808816ab80d329f3ad264b4516ee1e79',
   inline_paratext: 'Pañcamaṃ.',
-})]);
+}), ...anRows.map(([number, first_ref_number, inline_paratext]) => Object.freeze({
+  unit_id: `an1.${number}`, path: AN_MIND_SECTION_PATH, anchor: `sutta-${number}`, paragraphs: 1, notes: 0,
+  profile: AN_MIND_SECTION_PROFILE, collection: 'an', translator: 'Thanissaro Bhikkhu', license: 'CC-BY-NC',
+  source_html_sha256: 'df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4',
+  label: `${number}.`, first_ref_number, inline_paratext,
+  root_heading: number === 21 ? '3. Akammaniyavaggo' : number === 31 ? '4. Adantavaggo' : null,
+  tail_paratext: number === 30 ? 'Akammaniyavaggo tatiyo.' : number === 40 ? 'Adantavaggo catuttho.' : null,
+}))]);
 export const isAtiSectionId = id => typeof id === 'string' && ATI_SECTION_PROFILES.some(row => id === `ati:${row.path}#${row.anchor}`);
 export const isAtiSectionPath = path => ATI_SECTION_PROFILES.some(row => row.path === path);

@@ -1,0 +1,2112 @@
+{
+  "baseline_commit": "4152db212c3b9ac5a773adc0a162621b707f8e57",
+  "date": "2026-11-19",
+  "decision": "APPROVE ALL20 EXACT WHOLE SUBSTANTIVE DISCOURSE SECTIONS",
+  "approved_units": [
+    "an1.21",
+    "an1.22",
+    "an1.23",
+    "an1.24",
+    "an1.25",
+    "an1.26",
+    "an1.27",
+    "an1.28",
+    "an1.29",
+    "an1.30",
+    "an1.31",
+    "an1.32",
+    "an1.33",
+    "an1.34",
+    "an1.35",
+    "an1.36",
+    "an1.37",
+    "an1.38",
+    "an1.39",
+    "an1.40"
+  ],
+  "independent_method": "Fresh official exact-ref GitHub base64 artifact independently decoded/GitblobSHA1checked. All20full VRIroots and all20sourceparagraphs read and compared, plus complete AN1.20/.41controls. Existing shared review was not authority for this decision. Independent finite parser and raw/normalized/root/citation pins were reproduced.",
+  "artifact": {
+    "repository": "bcbsit/ati",
+    "commit": "45fedca341497120651efa20e756b04a13e61089",
+    "path": "tipitaka/an/an01/an01.021-040.than.html",
+    "official_blob_url": "https://github.com/bcbsit/ati/blob/45fedca341497120651efa20e756b04a13e61089/tipitaka/an/an01/an01.021-040.than.html",
+    "bytes": 14165,
+    "git_blob_sha1": "a2303ebfa53f2b434739086618a155f4c9f738f3",
+    "sha256": "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+    "retrieval": "Fresh official exact-ref GitHub base64 fetch and independently verified decoded Git blob SHA1."
+  },
+  "rights": {
+    "copyright_year": 2006,
+    "translator": "Thanissaro Bhikkhu",
+    "license": "CC BY-NC4.0International",
+    "full_notice": {
+      "licensing": "©2006 Thanissaro Bhikkhu.\n\nThe text of this page (\"Ekadhamma Suttas: A Single Thing\", by Thanissaro Bhikkhu) is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of the license, visit https://creativecommons.org/licenses/by-nc/4.0/. Documents linked from this page may be subject to other restrictions.\nTranscribed from a file provided by the translator. Last revised for Access to Insight on 30 November 2013.",
+      "citation": "How to cite this document (a suggested style): \"Ekadhamma Suttas: A Single Thing\" (AN 1.21-40), translated from the Pali by Thanissaro Bhikkhu. Access to Insight (BCBS Edition), 30 November 2013, https://www.accesstoinsight.org/tipitaka/an/an01/an01.021-040.than.html ."
+    },
+    "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238",
+    "conditions": "Retain exact translator/ATI attribution, full complete notice/citation, noncommercial use and identified selection/adaptation. Linked documents have separate rights.",
+    "source_edition": "Pinned ATI/BCBS2013revision of ©2006source, not a freshness claim about later dhammatalks editions.",
+    "blocker": null
+  },
+  "source_policy_five_tests": {
+    "standing": "PASS: existing approved ATI/BCBS source, established named translator; file provided by translator statement.",
+    "permission": "PASS: explicit exact-page CC BY-NC4.0notice and original ©2006copyright; complete notice retained.",
+    "respect": "PASS within reviewed artifact: existing approved source with positive reuse grant and no observed AI-exclusion. No permission generalized to linked documents or versions.",
+    "durability": "PASS: existing permitted officialATI GitHub source with immutablecommit and verifiedGitblob; no new host/mirror.",
+    "verifiability": "PASS: real unique sourceanchors sutta-21..40, complete individual roots and body/notice/structure pins; detailed polarity/condition/result comparison beyond numbering."
+  },
+  "whole_vs_partial_reasoning": {
+    "conclusion": "Each paragraph contains the complete substantive teaching of its own root. Whole-substantive classification is justified, with explicit omissions disclosed; this is not a word-for-word translation claim.",
+    "claims_retained": "Every paragraph retains first-person single-thing/mind comparison, exact developed/undeveloped or guarded/tamed/etccondition, correct benefit/harm/pliant/happiness/suffering result, and repeated mind-specific conclusion.",
+    "vocatives": "Source omits three occurrences of bhikkhave in every root. These repeated audience addresses are genuine omitted words and must be disclosed; no doctrinal assertion, condition or action is missing because of their omission.",
+    "paratext": "Every root inline ordinal omitted; .21/.31chapterheadings and .30/.40chaptercolophons untranslated. Originalroottext and segment types remain intact.",
+    "negation_and_combo_controls": "All positive/negative polarities verified, including unapparent/apparent .25/.26, uncultivated/cultivated .27–30 and allfour combined adjectives in .39/.40. No pair merged or counterpart skipped.",
+    "no_reconstructed_text": "No rootbody has peyyala here; source contains no ellipsis. No generated/reconstructed English/Pali was used."
+  },
+  "finite_source_structure": {
+    "copyrighted_chunks": 1,
+    "top_level_chapters": 2,
+    "chapter_attributes": {
+      "class": "chapter"
+    },
+    "paragraphs_per_chapter": [
+      10,
+      10
+    ],
+    "paragraph_attributes": {},
+    "paragraph_children": "Exactly one initial a with bare id sutta-N and literal N text, then . plus layout spaces plus scripture text only.",
+    "anchor_ids": [
+      "sutta-21",
+      "sutta-22",
+      "sutta-23",
+      "sutta-24",
+      "sutta-25",
+      "sutta-26",
+      "sutta-27",
+      "sutta-28",
+      "sutta-29",
+      "sutta-30",
+      "sutta-31",
+      "sutta-32",
+      "sutta-33",
+      "sutta-34",
+      "sutta-35",
+      "sutta-36",
+      "sutta-37",
+      "sutta-38",
+      "sutta-39",
+      "sutta-40"
+    ],
+    "actual_printed_labels": [
+      "21.",
+      "22.",
+      "23.",
+      "24.",
+      "25.",
+      "26.",
+      "27.",
+      "28.",
+      "29.",
+      "30.",
+      "31.",
+      "32.",
+      "33.",
+      "34.",
+      "35.",
+      "36.",
+      "37.",
+      "38.",
+      "39.",
+      "40."
+    ],
+    "no_individual_source_heading": true,
+    "heading_tags": 0,
+    "notes": 0,
+    "preface": 0,
+    "comments": 0,
+    "source_ellipsis": false,
+    "tag_counts": {
+      "div": 2,
+      "p": 20,
+      "a": 20
+    },
+    "wrapper_tail": "one copyright-wrapper closing div"
+  },
+  "source_title_numbering": {
+    "actual_page_title": "Ekadhamma Suttas: A Single Thing",
+    "individual_heading": null,
+    "actual_individual_labels": [
+      "21.",
+      "22.",
+      "23.",
+      "24.",
+      "25.",
+      "26.",
+      "27.",
+      "28.",
+      "29.",
+      "30.",
+      "31.",
+      "32.",
+      "33.",
+      "34.",
+      "35.",
+      "36.",
+      "37.",
+      "38.",
+      "39.",
+      "40."
+    ],
+    "actual_source_anchors": [
+      "sutta-21",
+      "sutta-22",
+      "sutta-23",
+      "sutta-24",
+      "sutta-25",
+      "sutta-26",
+      "sutta-27",
+      "sutta-28",
+      "sutta-29",
+      "sutta-30",
+      "sutta-31",
+      "sutta-32",
+      "sutta-33",
+      "sutta-34",
+      "sutta-35",
+      "sutta-36",
+      "sutta-37",
+      "sutta-38",
+      "sutta-39",
+      "sutta-40"
+    ],
+    "publisher_parent_reference": "AN1.21–40; alternative I,iii,1–10 and I,iv,1–10; parent PTS A i5.",
+    "root_reference": "VRI21–40; complete primary independent records AN1.21–40, PTSi5–7. Root titles are chapter labels Akammaniya/Adanta, not publisher individual titles.",
+    "metadata_rule": "Selection labels such as AN1.21 may be descriptive metadata. Do not call them printed individual sourceheadings or create sourceheadingtags from number/title metadata.",
+    "extraction_rule": "Strip only exact initial<a id=sutta-N>N</a> plus literalperiod and following layoutspaces; retain actualprinted label separately and keep Englishquotes/ampersands/em-dashes/punctuation unchanged."
+  },
+  "rowwise_approval_and_pins": [
+    {
+      "unit_id": "an1.21",
+      "root": {
+        "id": "an1.21",
+        "book": 16,
+        "start": 28,
+        "end": 30,
+        "title": "Akammaniyavagga",
+        "collection": "an",
+        "acronym": "AN 1.21",
+        "vri": "21",
+        "pts": {
+          "volume": 1,
+          "page": 5,
+          "end_page": 5
+        }
+      },
+      "root_blocks_sha256": "255f2bcee4e759ecc3cfd5c1dec6d5eee99c060210fbce33a2c6eeff2d4af11e",
+      "root_segments_sha256": "e870f161924033051fab256989ebe0c61e441ddef76f75ad49bb6647bff9b066",
+      "selected_pali_ref": "an1.21/2",
+      "selected_pali_scope_sha256": "4eed734f2db7cb38aa6976066b610ab24a2e49453fe06a66a2d0623193e67ffe",
+      "root_segment_scope_sha256": "65550ed24509b57680ff204e4dccb28b22e1008ceec8b8fa25e0865b03c39168",
+      "source_anchor": "sutta-21",
+      "source_printed_label": "21",
+      "source_heading": null,
+      "source_paragraph_ordinal": 1,
+      "source_chapter_ordinal": 1,
+      "source_chapter_paragraph_ordinal": 1,
+      "paragraph_raw_sha256": "8dd8294d8fde6a11e6b68c60aaa46690cf6bee3bb427eaf8d55df6813df2a687",
+      "body_raw_sha256": "440b3a99e8f9db55f1f2319982adc6a694601ca2205c71ea3f932dad252d8935",
+      "text_characters": 126,
+      "text_scope_sha256": "c2c0af9a0ca372ddc5c19d3f2bd409885de30be03aea55f4e396c3027bb7a02f",
+      "text_utf8_sha256": "b73872b556caee9044c7a87f81932029f6c7eead78f8592f20f65db9711389b6",
+      "condition": "undeveloped",
+      "result": "unpliant",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.21/2",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.21/2",
+          "start_char": 101,
+          "end_char": 110,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.21/2",
+          "start_char": 129,
+          "end_char": 138,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.21/2",
+        "text": "Paṭhamaṃ.",
+        "start_char": 172,
+        "end_char": 181,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [
+        {
+          "ref": "an1.21/1",
+          "text": "3. Akammaniyavaggo"
+        }
+      ],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "b73872b556caee9044c7a87f81932029f6c7eead78f8592f20f65db9711389b6",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.22",
+      "root": {
+        "id": "an1.22",
+        "book": 16,
+        "start": 30,
+        "end": 31,
+        "title": "Akammaniyavaggo",
+        "collection": "an",
+        "acronym": "AN 1.22",
+        "vri": "22",
+        "pts": {
+          "volume": 1,
+          "page": 5,
+          "end_page": 5
+        }
+      },
+      "root_blocks_sha256": "759ead403aa9feaf473686fe7b222bb5a050f154cae0afd47f9ca7fb9708835c",
+      "root_segments_sha256": "afc96bb498151643900279e083b6b4b9e3d78960ad61be2efa1042fef00c5a17",
+      "selected_pali_ref": "an1.22/1",
+      "selected_pali_scope_sha256": "afc96bb498151643900279e083b6b4b9e3d78960ad61be2efa1042fef00c5a17",
+      "root_segment_scope_sha256": "9b34ad9cb4207279adc145e47fbc587239a3a8d269f927e68bc451240db75751",
+      "source_anchor": "sutta-22",
+      "source_printed_label": "22",
+      "source_heading": null,
+      "source_paragraph_ordinal": 2,
+      "source_chapter_ordinal": 1,
+      "source_chapter_paragraph_ordinal": 2,
+      "paragraph_raw_sha256": "875ab2903d2633ea80306feb65d26453fd335fd5e8bccfb683473d82f225d8a9",
+      "body_raw_sha256": "c89414f8481811af6b2a0934c1c8bf3d43f51dd6d244d66c7b12d6f7e54adb72",
+      "text_characters": 118,
+      "text_scope_sha256": "edb7508a79e638b0ceede7c768567837b8cc90e8673ec49f3cc69dd755a38697",
+      "text_utf8_sha256": "d1956527a2af761286756db8d735589ee3f88b8e66d516a4b16e4281840b03cd",
+      "condition": "developed",
+      "result": "pliant",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.22/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.22/1",
+          "start_char": 99,
+          "end_char": 108,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.22/1",
+          "start_char": 126,
+          "end_char": 135,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.22/1",
+        "text": "Dutiyaṃ.",
+        "start_char": 167,
+        "end_char": 175,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "d1956527a2af761286756db8d735589ee3f88b8e66d516a4b16e4281840b03cd",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.23",
+      "root": {
+        "id": "an1.23",
+        "book": 16,
+        "start": 31,
+        "end": 32,
+        "title": "Akammaniyavaggo",
+        "collection": "an",
+        "acronym": "AN 1.23",
+        "vri": "23",
+        "pts": {
+          "volume": 1,
+          "page": 5,
+          "end_page": 5
+        }
+      },
+      "root_blocks_sha256": "84b7abdf67ad590b46694387bfe9b52b470a445efb129e0b83d4891e472dc623",
+      "root_segments_sha256": "892c7b43787b8aa61049cdb691e4a8e5f1a681f213a5bfbbe59768872085d858",
+      "selected_pali_ref": "an1.23/1",
+      "selected_pali_scope_sha256": "892c7b43787b8aa61049cdb691e4a8e5f1a681f213a5bfbbe59768872085d858",
+      "root_segment_scope_sha256": "cfc2d41d24dd8b291031ac2a82ff3d48a011f7a4aeecb73ab8264c5dee2f2ea7",
+      "source_anchor": "sutta-23",
+      "source_printed_label": "23",
+      "source_heading": null,
+      "source_paragraph_ordinal": 3,
+      "source_chapter_ordinal": 1,
+      "source_chapter_paragraph_ordinal": 3,
+      "paragraph_raw_sha256": "db55e1e6945a16f312282bfc1e3b6a941fd7c124e3a863a904ca3dccad87f3c3",
+      "body_raw_sha256": "b2cf800be21d3916af327197398de1b8f154e67dd57db19db4b8a5cf24d0460d",
+      "text_characters": 143,
+      "text_scope_sha256": "eb23541928fec68a190b7f1edb2155295f825b3a405e0bdf721feceff2aab720",
+      "text_utf8_sha256": "a6fa2cfe85eb2a7e534b1240c0a4f3220417f4d403574784dd60d9c633f139f6",
+      "condition": "undeveloped",
+      "result": "great harm",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.23/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.23/1",
+          "start_char": 112,
+          "end_char": 121,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.23/1",
+          "start_char": 139,
+          "end_char": 148,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.23/1",
+        "text": "Tatiyaṃ.",
+        "start_char": 193,
+        "end_char": 201,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "a6fa2cfe85eb2a7e534b1240c0a4f3220417f4d403574784dd60d9c633f139f6",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.24",
+      "root": {
+        "id": "an1.24",
+        "book": 16,
+        "start": 32,
+        "end": 33,
+        "title": "Akammaniyavaggo",
+        "collection": "an",
+        "acronym": "AN 1.24",
+        "vri": "24",
+        "pts": {
+          "volume": 1,
+          "page": 5,
+          "end_page": 5
+        }
+      },
+      "root_blocks_sha256": "8d2a8ce81e5be12c77fb22bb8759dc25ec5066855655a450af07692def8a73c2",
+      "root_segments_sha256": "5c9ce02220607dfbf9bb8edeb4254fe571d8e200d0dfd32c35407dae228e0961",
+      "selected_pali_ref": "an1.24/1",
+      "selected_pali_scope_sha256": "5c9ce02220607dfbf9bb8edeb4254fe571d8e200d0dfd32c35407dae228e0961",
+      "root_segment_scope_sha256": "54abc6c0ac49513cf968893334275f2cf316b48a6a19dfb1af1fceb776e3348f",
+      "source_anchor": "sutta-24",
+      "source_printed_label": "24",
+      "source_heading": null,
+      "source_paragraph_ordinal": 4,
+      "source_chapter_ordinal": 1,
+      "source_chapter_paragraph_ordinal": 4,
+      "paragraph_raw_sha256": "82bf3ec4859f4b01064efc2657db7b5833cb3f005ec165005dd16eda198bd526",
+      "body_raw_sha256": "14ab6bee280b9da4576173e66d868199f7d9868fce7cdcd4b6ef59b76d5db027",
+      "text_characters": 145,
+      "text_scope_sha256": "f7afc495621895a315d73ca2ed6daa7524b90c924d6ab8dc05c7b12720878274",
+      "text_utf8_sha256": "7b86c5537cb31b65e74c132ff5b7b37798a106c33a9bea618ce9450f1894cbc8",
+      "condition": "developed",
+      "result": "great benefit",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.24/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.24/1",
+          "start_char": 109,
+          "end_char": 118,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.24/1",
+          "start_char": 136,
+          "end_char": 145,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.24/1",
+        "text": "Catutthaṃ.",
+        "start_char": 187,
+        "end_char": 197,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "7b86c5537cb31b65e74c132ff5b7b37798a106c33a9bea618ce9450f1894cbc8",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.25",
+      "root": {
+        "id": "an1.25",
+        "book": 16,
+        "start": 33,
+        "end": 34,
+        "title": "Akammaniyavaggo",
+        "collection": "an",
+        "acronym": "AN 1.25",
+        "vri": "25",
+        "pts": {
+          "volume": 1,
+          "page": 5,
+          "end_page": 5
+        }
+      },
+      "root_blocks_sha256": "10056011a2f60c5d3ac106c9cc6d6ba17095778841849bd80c7a88edc087f4f6",
+      "root_segments_sha256": "a3323d5d1af0feae15201f69c1a372a94eb53265bfa84028af8356f9a63db5f3",
+      "selected_pali_ref": "an1.25/1",
+      "selected_pali_scope_sha256": "a3323d5d1af0feae15201f69c1a372a94eb53265bfa84028af8356f9a63db5f3",
+      "root_segment_scope_sha256": "45866cf03d2536a1f734d03c953e1248a12b4b4006783b3c5a5f178c591bfa58",
+      "source_anchor": "sutta-25",
+      "source_printed_label": "25",
+      "source_heading": null,
+      "source_paragraph_ordinal": 5,
+      "source_chapter_ordinal": 1,
+      "source_chapter_paragraph_ordinal": 5,
+      "paragraph_raw_sha256": "25712bf4062c0b6db947df06f410b4800314903baf52fa272f13aaecd48536ba",
+      "body_raw_sha256": "77498536597cd5a09060345922e2eafa14217a9af12884f3d223159b83281c4d",
+      "text_characters": 169,
+      "text_scope_sha256": "08e7066ba82f77a9430d8eecd45d8fdba0dae32c458089d53b316ba49f24c346",
+      "text_utf8_sha256": "f7f1eafd0cb877d3210838a192f685115f02d39905f2499e06263e6da3ba280d",
+      "condition": "undeveloped and unapparent",
+      "result": "great harm",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.25/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.25/1",
+          "start_char": 124,
+          "end_char": 133,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.25/1",
+          "start_char": 151,
+          "end_char": 160,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.25/1",
+        "text": "Pañcamaṃ.",
+        "start_char": 217,
+        "end_char": 226,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "5789afc3a9d2a74612f8857f93ce00bda9ab5a0c3daa316a5843661784b1b350",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.26",
+      "root": {
+        "id": "an1.26",
+        "book": 16,
+        "start": 34,
+        "end": 35,
+        "title": "Akammaniyavaggo",
+        "collection": "an",
+        "acronym": "AN 1.26",
+        "vri": "26",
+        "pts": {
+          "volume": 1,
+          "page": 5,
+          "end_page": 6
+        }
+      },
+      "root_blocks_sha256": "4535a9c97d214857c198950017b461ca2cff4205645eaf14057ed67ec355b58e",
+      "root_segments_sha256": "bce01f0a6364cd9fa6f101daec6457fdc0836b0807c2f03ceec4856172d57bb5",
+      "selected_pali_ref": "an1.26/1",
+      "selected_pali_scope_sha256": "bce01f0a6364cd9fa6f101daec6457fdc0836b0807c2f03ceec4856172d57bb5",
+      "root_segment_scope_sha256": "442b6f96e8248cd4ae473d8fca876b29f2861d5fbb0b1d05f637355fd6f95ba7",
+      "source_anchor": "sutta-26",
+      "source_printed_label": "26",
+      "source_heading": null,
+      "source_paragraph_ordinal": 6,
+      "source_chapter_ordinal": 1,
+      "source_chapter_paragraph_ordinal": 6,
+      "paragraph_raw_sha256": "499b3d00000b2584f1ebd522266205594aad0772f9ec16bd2196d099c30d7203",
+      "body_raw_sha256": "258a32683dabf4f3e5c0561ee4d163937ef57af3f2fe61e62a386db2da765567",
+      "text_characters": 168,
+      "text_scope_sha256": "1724ea77ec49cf3374f6f7dc9532cc33b8e4b0e9f0e9b1fe78bd6a9fa71e7321",
+      "text_utf8_sha256": "58640d518f40c4792d938edf062bf163aa9c5e55ece7b44b9ed60ebc9da394be",
+      "condition": "developed and apparent",
+      "result": "great benefit",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.26/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.26/1",
+          "start_char": 120,
+          "end_char": 129,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.26/1",
+          "start_char": 147,
+          "end_char": 156,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.26/1",
+        "text": "Chaṭṭhaṃ.",
+        "start_char": 209,
+        "end_char": 218,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "cfaa22e7965f9f57a43a72d81af81d224c8ad7e30b5014eb5f36f6de07fd4e07",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.27",
+      "root": {
+        "id": "an1.27",
+        "book": 16,
+        "start": 35,
+        "end": 36,
+        "title": "Akammaniyavaggo",
+        "collection": "an",
+        "acronym": "AN 1.27",
+        "vri": "27",
+        "pts": {
+          "volume": 1,
+          "page": 6,
+          "end_page": 6
+        }
+      },
+      "root_blocks_sha256": "2d183255e9c048909fff298c4c0fc53d13c5779f856194f72c8f885e003495d2",
+      "root_segments_sha256": "abb2cac5b9f1ac46c8c05bae270e1442b37c6019695e81b36d965b8a8086e1c0",
+      "selected_pali_ref": "an1.27/1",
+      "selected_pali_scope_sha256": "abb2cac5b9f1ac46c8c05bae270e1442b37c6019695e81b36d965b8a8086e1c0",
+      "root_segment_scope_sha256": "5267740266cb1a1f46cd2e677f6dbbff43fc9e5417a2f438d8420a7814a66c0b",
+      "source_anchor": "sutta-27",
+      "source_printed_label": "27",
+      "source_heading": null,
+      "source_paragraph_ordinal": 7,
+      "source_chapter_ordinal": 1,
+      "source_chapter_paragraph_ordinal": 7,
+      "paragraph_raw_sha256": "f1c10c58d58d689b4538d12774e73b9170c34ed647846dfd1ccdc488055f8989",
+      "body_raw_sha256": "f6d3e117d3790952e2ee096dfe1fe869a27b8d5a77504630ffebea36df3d2202",
+      "text_characters": 173,
+      "text_scope_sha256": "33434142ca863dd0f5cdfa4b2b21333b2ba7aa174865d02f2418742b78fb4f7c",
+      "text_utf8_sha256": "dafea68d86733a6c6899a4d68c89bb59e5078cc53e9dcaed598d4a3ba27968b5",
+      "condition": "undeveloped and uncultivated",
+      "result": "great harm",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.27/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.27/1",
+          "start_char": 125,
+          "end_char": 134,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.27/1",
+          "start_char": 152,
+          "end_char": 161,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.27/1",
+        "text": "Sattamaṃ.",
+        "start_char": 219,
+        "end_char": 228,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "475d4a1d95f3eba7d8b91f762b7f409fbb7c980648456974e5d9ea0449f5ce1a",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.28",
+      "root": {
+        "id": "an1.28",
+        "book": 16,
+        "start": 36,
+        "end": 37,
+        "title": "Akammaniyavaggo",
+        "collection": "an",
+        "acronym": "AN 1.28",
+        "vri": "28",
+        "pts": {
+          "volume": 1,
+          "page": 6,
+          "end_page": 6
+        }
+      },
+      "root_blocks_sha256": "5bfb26082183fc0372b41ec696591b59472df52fea8e8377de53ab2b91924940",
+      "root_segments_sha256": "b4a3a873dab60f68b34bfa022c0c56aa166a02dfa5cd2bc810f207b2098be3ab",
+      "selected_pali_ref": "an1.28/1",
+      "selected_pali_scope_sha256": "b4a3a873dab60f68b34bfa022c0c56aa166a02dfa5cd2bc810f207b2098be3ab",
+      "root_segment_scope_sha256": "1d647dff702fb95b15d299f102253451d46945cef9ef917cc6510a0752c99e7f",
+      "source_anchor": "sutta-28",
+      "source_printed_label": "28",
+      "source_heading": null,
+      "source_paragraph_ordinal": 8,
+      "source_chapter_ordinal": 1,
+      "source_chapter_paragraph_ordinal": 8,
+      "paragraph_raw_sha256": "4bd9f524fa3311aea68d8afbf35e98e388676413a74301c8510c56dea13041c9",
+      "body_raw_sha256": "1edac882966d907a15ffeb0a10344179bbef9ef635f7fd0f3b05765dd2b56712",
+      "text_characters": 172,
+      "text_scope_sha256": "fe4d59a85bdf5dbd4b7b1728f913f4836a6e2269157812a4f5fb0a9ffe4a7965",
+      "text_utf8_sha256": "9ae9635f5efdb41362d41ffd515e115a79e1a02b20b37a45051961886874dbf8",
+      "condition": "developed and cultivated",
+      "result": "great benefit",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.28/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.28/1",
+          "start_char": 121,
+          "end_char": 130,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.28/1",
+          "start_char": 148,
+          "end_char": 157,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.28/1",
+        "text": "Aṭṭhamaṃ.",
+        "start_char": 211,
+        "end_char": 220,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "80904d03dce42de8cc1915d7e9f2dedeac8f1b61fc3bd3c9b80e3645eda69a89",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.29",
+      "root": {
+        "id": "an1.29",
+        "book": 16,
+        "start": 37,
+        "end": 38,
+        "title": "Akammaniyavaggo",
+        "collection": "an",
+        "acronym": "AN 1.29",
+        "vri": "29",
+        "pts": {
+          "volume": 1,
+          "page": 6,
+          "end_page": 6
+        }
+      },
+      "root_blocks_sha256": "a09f66811ba67261365a8eb5e9ae5f9aba241123a8fdc73436b327f22fb6010e",
+      "root_segments_sha256": "fb883b823b37aac59c983597a1c03179e0503ff715d032113ebeb231b48dc54a",
+      "selected_pali_ref": "an1.29/1",
+      "selected_pali_scope_sha256": "fb883b823b37aac59c983597a1c03179e0503ff715d032113ebeb231b48dc54a",
+      "root_segment_scope_sha256": "b7199bc6818e34aec9483638b044f17fab51dfc385a0c08560d0720ac676a85d",
+      "source_anchor": "sutta-29",
+      "source_printed_label": "29",
+      "source_heading": null,
+      "source_paragraph_ordinal": 9,
+      "source_chapter_ordinal": 1,
+      "source_chapter_paragraph_ordinal": 9,
+      "paragraph_raw_sha256": "590c68bbae73810b919c73b71b8cae96a00670ac54f710f53741bddaf76b26ba",
+      "body_raw_sha256": "ebdbb41b733bc3ef3cecaf46767d5476d4876ae6fc7f33b6faace5201ba8209f",
+      "text_characters": 198,
+      "text_scope_sha256": "1b0515439609ff9828a2754f13255479c1b5a07c28361cf8190ea7d2f5d08577",
+      "text_utf8_sha256": "21cb19cfeaab74c3b2579efc18e785085a05f566fc39920a8811f0622480b5cb",
+      "condition": "undeveloped and uncultivated",
+      "result": "suffering and stress",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.29/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.29/1",
+          "start_char": 117,
+          "end_char": 126,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.29/1",
+          "start_char": 144,
+          "end_char": 153,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.29/1",
+        "text": "Navamaṃ.",
+        "start_char": 203,
+        "end_char": 211,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "f0dd1098b18b2bd8ad74380e4bca7d8eb639ba2fe5b2b4fa95d3d68608724800",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.30",
+      "root": {
+        "id": "an1.30",
+        "book": 16,
+        "start": 38,
+        "end": 40,
+        "title": "Akammaniyavaggo",
+        "collection": "an",
+        "acronym": "AN 1.30",
+        "vri": "30",
+        "pts": {
+          "volume": 1,
+          "page": 6,
+          "end_page": 6
+        }
+      },
+      "root_blocks_sha256": "3d29f2475d84c8277625baabafee7054738b8b2798910afe698dad338014005a",
+      "root_segments_sha256": "97f86e95b26178ed892bcc1759629a45015ecb8801c95d3fb7042adb2bb828e5",
+      "selected_pali_ref": "an1.30/1",
+      "selected_pali_scope_sha256": "e654e31137238e76557161b89409b6a5c845e7118bbf2fa2c3550c2d9f700138",
+      "root_segment_scope_sha256": "bed1e6750074692c8df2f2b632feef07028fc07f2f867100ff1cec36844c4b0f",
+      "source_anchor": "sutta-30",
+      "source_printed_label": "30",
+      "source_heading": null,
+      "source_paragraph_ordinal": 10,
+      "source_chapter_ordinal": 1,
+      "source_chapter_paragraph_ordinal": 10,
+      "paragraph_raw_sha256": "634dddb4b76ce843270ff87085a1cb98e413046007566e912558ef5cefa49b6d",
+      "body_raw_sha256": "61f92e500d0e4b069017c8211bdef572cb3c993dd8583a5bf8e3f47ec4c2ea07",
+      "text_characters": 172,
+      "text_scope_sha256": "61705f28d846ebdf5b5f299afdaa08d8d051c57254c428df181817a82b3d276e",
+      "text_utf8_sha256": "4dce57b83158dd112fa861c9449bc011d2294c793ba090faa484b4066cf878d0",
+      "condition": "developed and cultivated",
+      "result": "happiness",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.30/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.30/1",
+          "start_char": 114,
+          "end_char": 123,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.30/1",
+          "start_char": 141,
+          "end_char": 150,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.30/1",
+        "text": "Dasamaṃ.",
+        "start_char": 197,
+        "end_char": 205,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [
+        {
+          "ref": "an1.30/2",
+          "text": "Akammaniyavaggo tatiyo."
+        }
+      ],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "26d236991ccc8d8616011843d6eb05d2cba1f3a3e1cacdefa583aa6d920a6bd3",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.31",
+      "root": {
+        "id": "an1.31",
+        "book": 16,
+        "start": 40,
+        "end": 42,
+        "title": "Adantavagga",
+        "collection": "an",
+        "acronym": "AN 1.31",
+        "vri": "31",
+        "pts": {
+          "volume": 1,
+          "page": 6,
+          "end_page": 6
+        }
+      },
+      "root_blocks_sha256": "def27c98d5deee32ddf503e24cbbbc5d4f8f246e2914b1cf825ee192fdf4bbda",
+      "root_segments_sha256": "36e1c9d2a9d216d9fd7b3130cbb0399149711f1e7bb456ae2854c938a8d1d6e3",
+      "selected_pali_ref": "an1.31/2",
+      "selected_pali_scope_sha256": "09bd14d2cb3fd8fbaf7f6ac3472e176476264e7873fff3c961140169d2bcd057",
+      "root_segment_scope_sha256": "f145ae883224309a34763ad4e470b28c91cc4a38cd8386cf27de608325575dae",
+      "source_anchor": "sutta-31",
+      "source_printed_label": "31",
+      "source_heading": null,
+      "source_paragraph_ordinal": 11,
+      "source_chapter_ordinal": 2,
+      "source_chapter_paragraph_ordinal": 1,
+      "paragraph_raw_sha256": "87224c22a141b820bf0edb756b9645cc113da7058a8c7c8e4c4f05940030989e",
+      "body_raw_sha256": "eecf52db5dfbaf18cb9ee6b3df42f135e1b7d86cc63f06ab8a7019a78abfb752",
+      "text_characters": 135,
+      "text_scope_sha256": "7545f8391cc9a2c61fff5fa334432d875381398f99aa6d67070e631910738b5b",
+      "text_utf8_sha256": "5caa21ba542f1292d7172fe0bc43ef40131241f8be51488de572edfab50d7474",
+      "condition": "untamed",
+      "result": "great harm",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.31/2",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.31/2",
+          "start_char": 110,
+          "end_char": 119,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.31/2",
+          "start_char": 137,
+          "end_char": 146,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.31/2",
+        "text": "Paṭhamaṃ.",
+        "start_char": 189,
+        "end_char": 198,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [
+        {
+          "ref": "an1.31/1",
+          "text": "4. Adantavaggo"
+        }
+      ],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "5caa21ba542f1292d7172fe0bc43ef40131241f8be51488de572edfab50d7474",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.32",
+      "root": {
+        "id": "an1.32",
+        "book": 16,
+        "start": 42,
+        "end": 43,
+        "title": "Adantavaggo",
+        "collection": "an",
+        "acronym": "AN 1.32",
+        "vri": "32",
+        "pts": {
+          "volume": 1,
+          "page": 6,
+          "end_page": 6
+        }
+      },
+      "root_blocks_sha256": "62649d7c16efefa5ae2e680551176a862851dd5c08cd58911203b20975052ab9",
+      "root_segments_sha256": "918cce5ba04995d71df52fc43c9865d5cdd4b870295b92d2f35f97314bac6c9f",
+      "selected_pali_ref": "an1.32/1",
+      "selected_pali_scope_sha256": "918cce5ba04995d71df52fc43c9865d5cdd4b870295b92d2f35f97314bac6c9f",
+      "root_segment_scope_sha256": "64dff34eb3d2135e98223d54292a5340615de5ffefa3226c486eeea6a9f17897",
+      "source_anchor": "sutta-32",
+      "source_printed_label": "32",
+      "source_heading": null,
+      "source_paragraph_ordinal": 12,
+      "source_chapter_ordinal": 2,
+      "source_chapter_paragraph_ordinal": 2,
+      "paragraph_raw_sha256": "af758076b2434b6252ed698a2af3d255903b1e72fd146b3fb56c96c2eca52da3",
+      "body_raw_sha256": "d70db881b0411baa6b210452a7a1b67ce6ddef589a9b7aa90bf4025d164b63dc",
+      "text_characters": 137,
+      "text_scope_sha256": "dfdac691d87a5a05f7493b3a0c0f261d4123adf3d8e375690d484c2f7e183f6a",
+      "text_utf8_sha256": "ba09221e1b3bbfc26ccd1ce7cd5af0d92437b665587cdca1758ddb36fb1711d6",
+      "condition": "tamed",
+      "result": "great benefit",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.32/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.32/1",
+          "start_char": 107,
+          "end_char": 116,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.32/1",
+          "start_char": 134,
+          "end_char": 143,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.32/1",
+        "text": "Dutiyaṃ.",
+        "start_char": 183,
+        "end_char": 191,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "ba09221e1b3bbfc26ccd1ce7cd5af0d92437b665587cdca1758ddb36fb1711d6",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.33",
+      "root": {
+        "id": "an1.33",
+        "book": 16,
+        "start": 43,
+        "end": 44,
+        "title": "Adantavaggo",
+        "collection": "an",
+        "acronym": "AN 1.33",
+        "vri": "33",
+        "pts": {
+          "volume": 1,
+          "page": 6,
+          "end_page": 7
+        }
+      },
+      "root_blocks_sha256": "386e7e0d023a709bce7007ca8296d54de6084bca82885dd371f31d145042001b",
+      "root_segments_sha256": "2f75d84dd1c29504f5c02a7635b29734880418a270d8452d35fca77c4c97dabe",
+      "selected_pali_ref": "an1.33/1",
+      "selected_pali_scope_sha256": "2f75d84dd1c29504f5c02a7635b29734880418a270d8452d35fca77c4c97dabe",
+      "root_segment_scope_sha256": "6c678c35fb207e852349bd6732844ba127adff959116fd6672904e559f6dfbed",
+      "source_anchor": "sutta-33",
+      "source_printed_label": "33",
+      "source_heading": null,
+      "source_paragraph_ordinal": 13,
+      "source_chapter_ordinal": 2,
+      "source_chapter_paragraph_ordinal": 3,
+      "paragraph_raw_sha256": "08351c33dbc2b0918a91c73ed5489c994a3f1bfb6ebafc008c6bc5b6f5652e10",
+      "body_raw_sha256": "a637736c00760d0542ce6dab5136460624cd28810f8817ba045f80e4e87c0f76",
+      "text_characters": 139,
+      "text_scope_sha256": "0eb2c66c168dc60f3ef576bfd75f5e5e6904170be004d371e25ccac304b20df7",
+      "text_utf8_sha256": "56bfda3659c03dc0268a1d773fd5dcfaa70de750fe2ac28459b0e9f49b31a27f",
+      "condition": "unguarded",
+      "result": "great harm",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.33/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.33/1",
+          "start_char": 110,
+          "end_char": 119,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.33/1",
+          "start_char": 137,
+          "end_char": 146,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.33/1",
+        "text": "Tatiyaṃ.",
+        "start_char": 189,
+        "end_char": 197,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "56bfda3659c03dc0268a1d773fd5dcfaa70de750fe2ac28459b0e9f49b31a27f",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.34",
+      "root": {
+        "id": "an1.34",
+        "book": 16,
+        "start": 44,
+        "end": 45,
+        "title": "Adantavaggo",
+        "collection": "an",
+        "acronym": "AN 1.34",
+        "vri": "34",
+        "pts": {
+          "volume": 1,
+          "page": 7,
+          "end_page": 7
+        }
+      },
+      "root_blocks_sha256": "d1709551b5f5cabf8e0e5345ead0692f27811aded2eb6acafe722c61eaaa8dac",
+      "root_segments_sha256": "87fc21bf0a64854f2b644422fe098a1682d04606de8e60d0eaec32baee6fcef1",
+      "selected_pali_ref": "an1.34/1",
+      "selected_pali_scope_sha256": "87fc21bf0a64854f2b644422fe098a1682d04606de8e60d0eaec32baee6fcef1",
+      "root_segment_scope_sha256": "847bd4b8055af8cf4e9c26cdb49d3988a7565334186861f549cb7d6e15361bb1",
+      "source_anchor": "sutta-34",
+      "source_printed_label": "34",
+      "source_heading": null,
+      "source_paragraph_ordinal": 14,
+      "source_chapter_ordinal": 2,
+      "source_chapter_paragraph_ordinal": 4,
+      "paragraph_raw_sha256": "12da8d53ceba4bfe70982e371409696c6f56ba3c2976c528ad9100183a55dcc1",
+      "body_raw_sha256": "b9b32ef8957f93a1e5b5231a46f27005da0a0e26e54de319de26ac1aa6470039",
+      "text_characters": 141,
+      "text_scope_sha256": "75529f54293bd8b08b941085bdf04e7301783b5115c1abff2af541e2eba2c669",
+      "text_utf8_sha256": "b143fcc0b22ab128742c2f78f5ab19d78650157ab284d4b64b43abb23aac819f",
+      "condition": "guarded",
+      "result": "great benefit",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.34/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.34/1",
+          "start_char": 107,
+          "end_char": 116,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.34/1",
+          "start_char": 134,
+          "end_char": 143,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.34/1",
+        "text": "Catutthaṃ.",
+        "start_char": 183,
+        "end_char": 193,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "b143fcc0b22ab128742c2f78f5ab19d78650157ab284d4b64b43abb23aac819f",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.35",
+      "root": {
+        "id": "an1.35",
+        "book": 16,
+        "start": 45,
+        "end": 46,
+        "title": "Adantavaggo",
+        "collection": "an",
+        "acronym": "AN 1.35",
+        "vri": "35",
+        "pts": {
+          "volume": 1,
+          "page": 7,
+          "end_page": 7
+        }
+      },
+      "root_blocks_sha256": "e4a8d7d7daf3818721da25fd4e673284c66ce3d4aa2dc7cd97bd974656d5509e",
+      "root_segments_sha256": "be3e47e7fe4832e337fd6c09500815746098a5df3056e2656f761aca292370cf",
+      "selected_pali_ref": "an1.35/1",
+      "selected_pali_scope_sha256": "be3e47e7fe4832e337fd6c09500815746098a5df3056e2656f761aca292370cf",
+      "root_segment_scope_sha256": "ce6fb134acafbd57faeffda469448f111d33687974b8a52080c70a2b446f9aa6",
+      "source_anchor": "sutta-35",
+      "source_printed_label": "35",
+      "source_heading": null,
+      "source_paragraph_ordinal": 15,
+      "source_chapter_ordinal": 2,
+      "source_chapter_paragraph_ordinal": 5,
+      "paragraph_raw_sha256": "6011f9f1c0115cde9fd4983c6321594e34ff49f3e1ab367a1d5207170903fc78",
+      "body_raw_sha256": "40d545997091a01e9ddbedc409c74ff2f204d2e23aa48b2563480a6a3e1af396",
+      "text_characters": 143,
+      "text_scope_sha256": "936f83415c5a4b871ec9ccc80204fc0e097fbd99a31ffe9b832838b7c956ea38",
+      "text_utf8_sha256": "f5b583a11b1fce2869be7baa45b9388ea11b760a7f47856fea46f0b82813f60c",
+      "condition": "unprotected",
+      "result": "great harm",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.35/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.35/1",
+          "start_char": 113,
+          "end_char": 122,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.35/1",
+          "start_char": 140,
+          "end_char": 149,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.35/1",
+        "text": "Pañcamaṃ.",
+        "start_char": 195,
+        "end_char": 204,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "f5b583a11b1fce2869be7baa45b9388ea11b760a7f47856fea46f0b82813f60c",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.36",
+      "root": {
+        "id": "an1.36",
+        "book": 16,
+        "start": 46,
+        "end": 47,
+        "title": "Adantavaggo",
+        "collection": "an",
+        "acronym": "AN 1.36",
+        "vri": "36",
+        "pts": {
+          "volume": 1,
+          "page": 7,
+          "end_page": 7
+        }
+      },
+      "root_blocks_sha256": "940c5d0fc0eebcde385de9fd00d722b645f823b8c6dacad365207a795641c01a",
+      "root_segments_sha256": "01e9da551533d865c85e187bb235525c092aa59408c1191b5d53bade18f9857f",
+      "selected_pali_ref": "an1.36/1",
+      "selected_pali_scope_sha256": "01e9da551533d865c85e187bb235525c092aa59408c1191b5d53bade18f9857f",
+      "root_segment_scope_sha256": "d298b91bf511ca015d81ad2781601b476706e55ffcb23dd1d7611dea9e5488d2",
+      "source_anchor": "sutta-36",
+      "source_printed_label": "36",
+      "source_heading": null,
+      "source_paragraph_ordinal": 16,
+      "source_chapter_ordinal": 2,
+      "source_chapter_paragraph_ordinal": 6,
+      "paragraph_raw_sha256": "677b53ded884fe3708fc223da1ebd5d997b99db12f813a31ba445e2a1b47ed42",
+      "body_raw_sha256": "305a28c6fa47594b90a761fd76013046a012d1ac084e0d565b1a810b39c312cf",
+      "text_characters": 145,
+      "text_scope_sha256": "844bd34ab946cf90770bbc73be46831370b8ff300f3497c1350ff2764dfb91e9",
+      "text_utf8_sha256": "17a3482fb6a9c79270e7175ae6cd37218d529dab0bb9b6080c13f763bce3a630",
+      "condition": "protected",
+      "result": "great benefit",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.36/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.36/1",
+          "start_char": 110,
+          "end_char": 119,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.36/1",
+          "start_char": 137,
+          "end_char": 146,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.36/1",
+        "text": "Chaṭṭhaṃ.",
+        "start_char": 189,
+        "end_char": 198,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "17a3482fb6a9c79270e7175ae6cd37218d529dab0bb9b6080c13f763bce3a630",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.37",
+      "root": {
+        "id": "an1.37",
+        "book": 16,
+        "start": 47,
+        "end": 48,
+        "title": "Adantavaggo",
+        "collection": "an",
+        "acronym": "AN 1.37",
+        "vri": "37",
+        "pts": {
+          "volume": 1,
+          "page": 7,
+          "end_page": 7
+        }
+      },
+      "root_blocks_sha256": "dcfa5dc32c015bddbc2c567958f4afc0d03447a767a649db83f8c3731ff25563",
+      "root_segments_sha256": "8c40a7e060333d781518b1fbce948a9cc982b68dcc474194ef4bdb44ea0489c2",
+      "selected_pali_ref": "an1.37/1",
+      "selected_pali_scope_sha256": "8c40a7e060333d781518b1fbce948a9cc982b68dcc474194ef4bdb44ea0489c2",
+      "root_segment_scope_sha256": "cffd244f1a2a9f26d81eb0eb3469012ebdb3879eefbbb359636f8b1876a7cabd",
+      "source_anchor": "sutta-37",
+      "source_printed_label": "37",
+      "source_heading": null,
+      "source_paragraph_ordinal": 17,
+      "source_chapter_ordinal": 2,
+      "source_chapter_paragraph_ordinal": 7,
+      "paragraph_raw_sha256": "ae3f08f0b5c2c05f08699b539adfa24d72c4dba77329ec098444064c7adb7c9d",
+      "body_raw_sha256": "c1082a0ae54c5b4f1e99b9db7ef9fec9309bfc23915f15675dd024e67361c13b",
+      "text_characters": 145,
+      "text_scope_sha256": "587884d238fd6418aaa66e58e28d7a5381a3efc7a298f2e9134430e3abce728d",
+      "text_utf8_sha256": "a7b66e2c3cf7ba379e083331b0e2e7fab83b938240f3ce76faf584d1a4759227",
+      "condition": "unrestrained",
+      "result": "great harm",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.37/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.37/1",
+          "start_char": 112,
+          "end_char": 121,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.37/1",
+          "start_char": 139,
+          "end_char": 148,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.37/1",
+        "text": "Sattamaṃ.",
+        "start_char": 193,
+        "end_char": 202,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "a7b66e2c3cf7ba379e083331b0e2e7fab83b938240f3ce76faf584d1a4759227",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.38",
+      "root": {
+        "id": "an1.38",
+        "book": 16,
+        "start": 48,
+        "end": 49,
+        "title": "Adantavaggo",
+        "collection": "an",
+        "acronym": "AN 1.38",
+        "vri": "38",
+        "pts": {
+          "volume": 1,
+          "page": 7,
+          "end_page": 7
+        }
+      },
+      "root_blocks_sha256": "278bbfdb3bbae260f7ba89ff57e2f0595095075789cd8c43ec1aa2c79bb82053",
+      "root_segments_sha256": "a268595b0ef981bb775eff14fc8d9b3ac4c92f1f6ecff06aa89fe5af243559da",
+      "selected_pali_ref": "an1.38/1",
+      "selected_pali_scope_sha256": "a268595b0ef981bb775eff14fc8d9b3ac4c92f1f6ecff06aa89fe5af243559da",
+      "root_segment_scope_sha256": "623a8b1dd789436b27a48695a943a40c9e91831bb8628928e506d8fce33c6126",
+      "source_anchor": "sutta-38",
+      "source_printed_label": "38",
+      "source_heading": null,
+      "source_paragraph_ordinal": 18,
+      "source_chapter_ordinal": 2,
+      "source_chapter_paragraph_ordinal": 8,
+      "paragraph_raw_sha256": "8d7cb6f8585d0028835398ea7b5f87c66819f0453da01afdbf64bfcc7147b38d",
+      "body_raw_sha256": "96cbc824406a6cd30af0cf4e9d6dbee7c4336fc8375f7465f707346fa8a49d1a",
+      "text_characters": 147,
+      "text_scope_sha256": "57a835c16a17b1540f566590953b68235054d09689575528fc803a6d1b8ce47e",
+      "text_utf8_sha256": "f783c4c68f2c1e9ad66a77da7661cb63c164d403f62ea5e511931a0eac6aa752",
+      "condition": "restrained",
+      "result": "great benefit",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.38/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.38/1",
+          "start_char": 109,
+          "end_char": 118,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.38/1",
+          "start_char": 136,
+          "end_char": 145,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.38/1",
+        "text": "Aṭṭhamaṃ.",
+        "start_char": 187,
+        "end_char": 196,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "f783c4c68f2c1e9ad66a77da7661cb63c164d403f62ea5e511931a0eac6aa752",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.39",
+      "root": {
+        "id": "an1.39",
+        "book": 16,
+        "start": 49,
+        "end": 50,
+        "title": "Adantavaggo",
+        "collection": "an",
+        "acronym": "AN 1.39",
+        "vri": "39",
+        "pts": {
+          "volume": 1,
+          "page": 7,
+          "end_page": 7
+        }
+      },
+      "root_blocks_sha256": "830676b1cac888737c815c135250268d8b889226c8e8d62f1a272f3fb3619ad6",
+      "root_segments_sha256": "dab92a70b574ab7b7bebd677d84568172966dd08f3c9d02462818a17bd7f8b52",
+      "selected_pali_ref": "an1.39/1",
+      "selected_pali_scope_sha256": "dab92a70b574ab7b7bebd677d84568172966dd08f3c9d02462818a17bd7f8b52",
+      "root_segment_scope_sha256": "1147915b1c5387539f5e97441d0593af3f909179ff220d7dc745322fb6d792a7",
+      "source_anchor": "sutta-39",
+      "source_printed_label": "39",
+      "source_heading": null,
+      "source_paragraph_ordinal": 19,
+      "source_chapter_ordinal": 2,
+      "source_chapter_paragraph_ordinal": 9,
+      "paragraph_raw_sha256": "ab52584ea4b8994fbcb3880a05966222b512f2cef0f53b7ae0e9896c06c3fd83",
+      "body_raw_sha256": "b1186236d609d3285e794958e2079a4745796e5fd568e2a7dee5faa5b1a29ecc",
+      "text_characters": 216,
+      "text_scope_sha256": "5b14b1a1b6ce181b6a1e73378a847a88dd903fdd09408e4f8cd73c88d25d076b",
+      "text_utf8_sha256": "35b63a87dff2f41dcadf8727fe2e01fed8b895b08d92045498b4119af819e096",
+      "condition": "untamed,unguarded,unprotected,unrestrained",
+      "result": "great harm",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.39/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.39/1",
+          "start_char": 139,
+          "end_char": 148,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.39/1",
+          "start_char": 166,
+          "end_char": 175,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.39/1",
+        "text": "Navamaṃ.",
+        "start_char": 247,
+        "end_char": 255,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "35b63a87dff2f41dcadf8727fe2e01fed8b895b08d92045498b4119af819e096",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    },
+    {
+      "unit_id": "an1.40",
+      "root": {
+        "id": "an1.40",
+        "book": 16,
+        "start": 50,
+        "end": 52,
+        "title": "Adantavaggo",
+        "collection": "an",
+        "acronym": "AN 1.40",
+        "vri": "40",
+        "pts": {
+          "volume": 1,
+          "page": 7,
+          "end_page": 7
+        }
+      },
+      "root_blocks_sha256": "f36e00b259a83df4cb7305d186accac91cf41dc38a6dcc605efb4b8fd6965e48",
+      "root_segments_sha256": "4292dbedf40ac433a2ddb9ec6916c399e2aa2f3f8f30e4982b9f32086d02aa54",
+      "selected_pali_ref": "an1.40/1",
+      "selected_pali_scope_sha256": "13c9f622da08e8c92adce5830fb1136f00a5677fbab300f16c507b12f483a9fe",
+      "root_segment_scope_sha256": "a5228c8570624da5642d901913d051274dcc6e4c082a30ffac71fad32ecc4395",
+      "source_anchor": "sutta-40",
+      "source_printed_label": "40",
+      "source_heading": null,
+      "source_paragraph_ordinal": 20,
+      "source_chapter_ordinal": 2,
+      "source_chapter_paragraph_ordinal": 10,
+      "paragraph_raw_sha256": "aea7576def1ed64b0c51e1943a939f2476a0b01e5fefab0d0f30409b23788a0a",
+      "body_raw_sha256": "774ffad07b06d27008558a2580e0abe047276522e620713dadc8db989b3491fb",
+      "text_characters": 206,
+      "text_scope_sha256": "84ca231a8a240989d9c9456b284c5b95e6508e397ff49bf0be4dd4c8d5b59c9e",
+      "text_utf8_sha256": "463ebb7a50256370d6712fdc8dae128c96a194e03028f1bed502e2afbafd312d",
+      "condition": "tamed,guarded,protected,restrained",
+      "result": "great benefit",
+      "omitted_vocatives": [
+        {
+          "ref": "an1.40/1",
+          "start_char": 9,
+          "end_char": 18,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.40/1",
+          "start_char": 133,
+          "end_char": 142,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        },
+        {
+          "ref": "an1.40/1",
+          "start_char": 160,
+          "end_char": 169,
+          "text": "bhikkhave",
+          "offset_unit": "utf16_code_units"
+        }
+      ],
+      "untranslated_ordinal": {
+        "ref": "an1.40/1",
+        "text": "Dasamaṃ.",
+        "start_char": 235,
+        "end_char": 243,
+        "offset_unit": "utf16_code_units"
+      },
+      "untranslated_heading": [],
+      "untranslated_tail": [
+        {
+          "ref": "an1.40/2",
+          "text": "Adantavaggo catuttho."
+        }
+      ],
+      "existing_whole": 0,
+      "existing_shared": [
+        {
+          "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+          "owner_id": "an1.21",
+          "pali_sha256": "7c78c04fa2d6b1bf493043ad460002aa08cd83186e679229ab75850cd972f9cf",
+          "text_sha256": "4ea2069bc8a4bdaf2021f5f9729af8c06362053595841c77cf59b75e395d8145",
+          "notice_sha256": "4153685976f9d98f9a61ca223a5f71d2ce2c9281fd0b0c043859d133c45a1238"
+        }
+      ],
+      "source_body_raw_without_layout_sha256": "463ebb7a50256370d6712fdc8dae128c96a194e03028f1bed502e2afbafd312d",
+      "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+      "complete_substantive_assertions": true,
+      "missing_teachings": [],
+      "omission_assessment": "Three bhikkhave vocatives address the audience, not a lost condition/predicate/instruction. Ordinal and optional chapter heading/colophon are untranslated paratext. All comparative and repeated mind assertions present; no ellipsis/condensation.",
+      "candidate_pins_match": true
+    }
+  ],
+  "adjacent_controls": [
+    {
+      "unit": {
+        "id": "an1.20",
+        "book": 16,
+        "start": 26,
+        "end": 28,
+        "title": "Nīvaraṇappahānavaggo",
+        "collection": "an",
+        "acronym": "AN 1.20",
+        "vri": "20",
+        "pts": {
+          "volume": 1,
+          "page": 4,
+          "end_page": 5
+        }
+      },
+      "root_blocks_sha256": "33e560600eb8f1c70712e3d8ec172b2c737dc49e07474c272b09c16612c8b4df",
+      "verdict": "AN1.20 concerns appropriateattention preventing/removing doubt; unlike firstmind-pliant sourceparagraph. Outside approvedscope; complete20tailcolophon unchanged."
+    },
+    {
+      "unit": {
+        "id": "an1.41",
+        "book": 16,
+        "start": 52,
+        "end": 54,
+        "title": "Paṇihitaacchavagga",
+        "collection": "an",
+        "acronym": "AN 1.41",
+        "vri": "41",
+        "pts": {
+          "volume": 1,
+          "page": 8,
+          "end_page": 8
+        }
+      },
+      "root_blocks_sha256": "eaa60acbc443270b8d995da124c4e065a7a903f7b65b15bcea8b38c7c641fb7d",
+      "verdict": "AN1.41 contains grainawn simile and wronglydirectedmind/ignorance/knowledge/nibbana assertions, absentfromsource40combinedtaming/guarding treatment. Outside approvedscope."
+    }
+  ],
+  "candidate_comparison": {
+    "candidate_file": "/tmp/pali-whole-batch-scout/an1.21-40-candidates.json",
+    "candidate_sha256": "6000122d0c88280d69fe167fe30c7f698aa6c799cc4431370910e7bdc29fc58f",
+    "all20matched": true,
+    "checks": [
+      {
+        "unit_id": "an1.21",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.22",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.23",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.24",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.25",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.26",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.27",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.28",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.29",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.30",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.31",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.32",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.33",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.34",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.35",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.36",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.37",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.38",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.39",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      },
+      {
+        "unit_id": "an1.40",
+        "candidate_pins_match": true,
+        "decision": "APPROVE WHOLE SUBSTANTIVE DISCOURSE",
+        "missing_teachings": []
+      }
+    ]
+  },
+  "coverage": {
+    "new_first_whole_primary_records": 20,
+    "first_any_English_access_records": 0,
+    "all20_previously_shared_only": true,
+    "whole_anthology_or_group_alias_coverage_inferred": false,
+    "note": "All20already have consentedpage-level sharedEnglish access; these20independent section reviews can add firstWHOLEcoverage only, not firstANYEnglish access."
+  },
+  "existing_shared_preservation": {
+    "owner": "an1.21",
+    "translation_id": "ati:/tipitaka/an/an01/an01.021-040.than",
+    "row_scope_sha256": "9380c902673cfd2f7d50c08c068b4671f22927cd662664d4b7a50e37f30a34d8",
+    "manifest_sha256": "6e2b502a563ef0bc71cdbfc70a6d3ef46dbaeef352c445cf80b98a388195f28f",
+    "requirements": "Existing unanchored sharedpage ID, exact original link/row/scope/pins/consent and null/page-level semantics remain unchanged. New#sutta-NwholeIDs must coexist. No generic shared-to-whole promotion."
+  },
+  "required_contract": [
+    "One exact finite20owner/path/actualanchor/sourceprofile family; no arithmetic selector or suffixinferenceoutside these20approvedpairs.",
+    "All2x10P orderedactualanchors, rawsource, selectedrawP/body, normalizedtext, emptynotes, fullnotice, complete individualroot and original selectedprose pins mandatory; failclosed on drift before sourcebody return.",
+    "Support sourcewithout heading and rootfirstbodyindex0for18units/1for.21/.31 only by finiteprofile; do not weaken Kelly/SNrequirements.",
+    "Check exact inlineordinal suffix and3omittedvocatives perroot, plus exact extraheading/endcolophon declarations. Never editPali to makecorrespondence easier.",
+    "Preserve oldersharedbareID/consent as independentversion, allpriorwhole15/partial21sourcechoices, allotheralternatives/holds and privatedrafts.",
+    "Actualsource browser/package/CI andcode review are separate integrationgates; thisreceipt doesnotactivateanything."
+  ],
+  "source_holds": "No approvedrow rejected; all unrelated held sources including Woodwardalternate remain unapproved/untouched.",
+  "reproducibility": [
+    "python /tmp/pali-an-mind-whole-review/verify_structure.py",
+    "node /tmp/pali-an-mind-whole-review/reproduce.mjs"
+  ],
+  "hash_conventions": {
+    "scope_sha256": "SHA256(JSON.stringify(value)); separate rootblockarray/rootsegmentarray/Pali1objectarray/Englishstring/noticeobject/emptyNotesarray pins.",
+    "raw_sha256": "SHA256exact raw UTF8bytes; sourceartifact ends without added newline. selectedrawP includesPtags+label; rawbody excludeslabel and leadinglayoutspaces.",
+    "inline_offsets": "JSUTF16codeunits into unchangedcomplete prose segment."
+  },
+  "evidence_files": [
+    "artifact.json",
+    "an01.021-040.than.html",
+    "complete-root-matrix.json",
+    "independent-row-pins.json",
+    "structure.json",
+    "notice.json",
+    "shared-preservation.json",
+    "candidate-comparison.json",
+    "reproduced-pins.json",
+    "verify_structure.py",
+    "reproduce.mjs"
+  ],
+  "actions": {
+    "repository_edits": false,
+    "activation": false,
+    "source_body_in_repository": false,
+    "outreach": false,
+    "SC": false,
+    "new_mirror_or_denied_host_retry": false,
+    "commits_pushes": false
+  },
+  "remaining_source_rights_blockers": [],
+  "limits": "WholeSUBSTANTIVEsource approval with explicitomissions, not verbatim/everytokenalignment, livepublisherfreshness, wholecollection/projectcompletion or implementationapproval."
+}

@@ -41,6 +41,12 @@ export function partialScope(link, unit, segments, source) {
     if (!(p.version===2?ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor):ATI_SEGMENT_EXTRACTORS.includes(p.extractor)) || !sha(p.notice_sha256) || typeof link.path !== 'string'
       || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes('..')
       || link.url !== 'https://accesstoinsight.org' + link.path + '.html') fail();
+    // This source-specific selector grants no generic Milinda path or owner family.
+    if(p.extractor==='ati-milinda-medicine-two-verses-v1'||link.path.startsWith('/tipitaka/kn/miln/')) {
+      if(unit.id!=='mil6.4.1'||link.path!=='/tipitaka/kn/miln/miln.5x.olen'||p.version!==1
+        ||p.extractor!=='ati-milinda-medicine-two-verses-v1'||p.first_ref!=='mil6.4.1/20'||p.last_ref!=='mil6.4.1/21'
+        ||link.translator!=='Andrew Olendzki'||link.license!=='Olendzki-free-distribution-2005')fail();
+    }
   } else if (Object.hasOwn(p, 'extractor') || Object.hasOwn(p, 'notice_sha256')) fail();
 
   if (link.parts && (link.source !== 'anandajoti' || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail();

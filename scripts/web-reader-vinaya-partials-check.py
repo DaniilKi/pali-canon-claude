@@ -18,7 +18,7 @@ p.add_argument('--a11y', action='store_true')
 p.add_argument('--report')
 args = p.parse_args()
 manifest = json.loads((ROOT / 'scripts/canon/reviewed_partial_pages.json').read_text())
-assert len(manifest['links']) == 21
+assert len(manifest['links']) == 22
 rows = [r for r in manifest['links'] if r['unit_id'] in {'pli-tv-kd1', 'pli-tv-kd6', 'pli-tv-kd8'}]
 assert len(rows) == 3, 'All three reviewed Vinaya partials must be active'
 assert {(r['unit_id'], r['partial_scope']['first_ref'], r['partial_scope']['last_ref']) for r in rows} == {('pli-tv-kd1', 'pli-tv-kd1/190', 'pli-tv-kd1/201'), ('pli-tv-kd6', 'pli-tv-kd6/195', 'pli-tv-kd6/195'), ('pli-tv-kd8', 'pli-tv-kd8/174', 'pli-tv-kd8/178')}
@@ -72,7 +72,7 @@ try:
     assert all(r['english_available'] == 0 and r['partial_english_available'] == 1 for r in catalogue['items'])
     assert tool('browse_canon', {'node': 'english', 'availability': 'whole', 'collection': 'vinaya'})['total'] == 0
     coverage = tool('list_sources', {})['translation_coverage']
-    assert (coverage['total']['partial_links'], coverage['total']['partial_only']) == (21, 15)
+    assert (coverage['total']['partial_links'], coverage['total']['partial_only']) == (22, 16)
     vinaya = next(r for r in coverage['collections'] if r['collection'] == 'vinaya')
     assert (vinaya['partial_links'], vinaya['with_partial_english'], vinaya['with_english']) == (3, 3, 0)
     scopes = {}; native = {}

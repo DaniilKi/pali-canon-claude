@@ -234,6 +234,12 @@ export async function translation(unit, which, { offset = 0, limit = 12000, pref
     if (sameTranslator.mapping_note && sameTranslator.mapping_note !== link.mapping_note) notes.push(sameTranslator.mapping_note);
     link = sameTranslator;
   }
+  if (sectionRow && (typeof result.text !== 'string' || sectionHash(result.text) !== sectionRow.section.text_sha256
+    || !Array.isArray(result.translator_notes) || sectionHash(result.translator_notes) !== sectionRow.section.notes_sha256
+    || sectionHash({licensing: result.license, citation: result.attribution}) !== sectionRow.section.notice_sha256
+    || result.title !== sectionRow.section.heading || result.url !== link.url)) {
+    throw Error('The reviewed ATI section text, notes, notice or identity changed in cache. No translation was returned.');
+  }
   if (declaredScope) {
     if (result.text.length > 2000000 || (result.parts_total && result.parts_read !== result.parts_total)) throw new Error('Scoped source exceeds the bounded complete-text check; no excerpt was returned.');
     if (scopeHash(result.text) !== declaredScope.text_sha256) throw new Error('The scoped source text changed from its reviewed snapshot. No translation was returned.');

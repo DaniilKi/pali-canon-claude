@@ -7,10 +7,23 @@ const sha = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const stable = value => JSON.stringify(Array.isArray(value) ? value.map(v => JSON.parse(stable(v))) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(k => [k, JSON.parse(stable(value[k]))])) : value);
 export const sameScope = (a, b) => stable(a) === stable(b);
 
+const MEDICINE_ID = 'ati:/tipitaka/kn/miln/miln.5x.olen';
+const MEDICINE_EXTRACTOR = 'ati-milinda-medicine-two-verses-v1';
+function medicineFamily(id) {
+  if (typeof id !== 'string') return false;
+  let decoded=id;try{decoded=decodeURIComponent(id);}catch{}
+  return decoded.trim().split(/[?#]/,1)[0].replace(/\.html?$/i,'').toLowerCase()===MEDICINE_ID;
+}
+
 export function scopeDescriptor(choice, requestedId) {
-  if (!own(choice, 'translation_scope')) return null;
-  const scope = choice.translation_scope;
   const fail = () => { throw new Error('This source has an unsupported or incomplete scope declaration. No scoped source was requested. Reload the passage and review the updated sources.'); };
+  const reserved=medicineFamily(choice?.translation_id), selector=choice?.translation_scope?.extractor===MEDICINE_EXTRACTOR;
+  if (!own(choice, 'translation_scope')) { if(reserved)fail();return null; }
+  const scope = choice.translation_scope;
+  if (reserved || selector) {
+    const read=scope?.read_with;
+    if(choice.translation_id!==MEDICINE_ID || requestedId!=='mil6.4.1' || scope?.kind!=='partial_unit' || scope.version!==1 || scope.unit_id!=='mil6.4.1' || scope.first_ref!=='mil6.4.1/20' || scope.last_ref!=='mil6.4.1/21' || scope.extractor!==MEDICINE_EXTRACTOR || scope.pali_segments!==2 || scope.whole_unit_coverage!==false || own(choice,'whole_unit_coverage')&&choice.whole_unit_coverage!==false || !read || Object.keys(read).sort().join(',')!=='limit,offset,tool,uid' || read.tool!=='get_text' || read.uid!=='mil6.4.1' || read.offset!==19 || read.limit!==2 || own(scope,'read_pages') || own(scope,'pali_excerpt')) fail();
+  }
   if (!scope || ![1,2].includes(scope.version) || scope.whole_unit_coverage !== false || !sha(scope.scope_sha256) || !sha(scope.text_sha256) || !sha(scope.pali_sha256) || !nonempty(scope.source_commit) || !nonempty(scope.note) || !nonempty(choice.translation_id)) fail();
   if (scope.kind === 'shared_page') {
     if(scope.version!==1)fail();
@@ -21,7 +34,7 @@ export function scopeDescriptor(choice, requestedId) {
   }
   if (scope.kind === 'partial_unit') {
     const prefix = requestedId + '/';
-    if(choice.translation_id.startsWith('ati:')&&(!(scope.version===2?['ati-chapter-prose-v1','ati-chapter-p5-of5-no-notes-v1','ati-chapter-p1to4-of5-notes-v1'].includes(scope.extractor):['ati-freeverse-v1','ati-chapter-p2-of2-v1','ati-chapter-p11-of11-v1','ati-chapter-p1-of4-v1','ati-chapter-p14-of24-v1','ati-excerpt-verse-pre-v1','ati-chapter-p1to3-of4-ellipsis-v1','ati-vinaya-mv6-p1to5-of5-v1','ati-vinaya-mv8-p1to22-of22-v1','ati-vinaya-mv1-mixed21p6v-v1'].includes(scope.extractor))||!sha(scope.notice_sha256)))fail();
+    if(choice.translation_id.startsWith('ati:')&&(!(scope.version===2?['ati-chapter-prose-v1','ati-chapter-p5-of5-no-notes-v1','ati-chapter-p1to4-of5-notes-v1'].includes(scope.extractor):['ati-freeverse-v1','ati-chapter-p2-of2-v1','ati-chapter-p11-of11-v1','ati-chapter-p1-of4-v1','ati-chapter-p14-of24-v1','ati-excerpt-verse-pre-v1','ati-chapter-p1to3-of4-ellipsis-v1','ati-vinaya-mv6-p1to5-of5-v1','ati-vinaya-mv8-p1to22-of22-v1','ati-vinaya-mv1-mixed21p6v-v1','ati-milinda-medicine-two-verses-v1'].includes(scope.extractor))||!sha(scope.notice_sha256)))fail();
     if(scope.version===2){const p=scope.pali_excerpt;if(!choice.translation_id.startsWith('ati:')||scope.first_ref!==scope.last_ref||!p||p.ref!==scope.first_ref||p.type!=='prose'||!nonempty(p.text)||p.text.length>2000000||p.offset_unit!=='utf16_code_units'||!sha(p.segment_sha256)||!Number.isSafeInteger(p.start_char)||!Number.isSafeInteger(p.end_char)||p.start_char<0||p.end_char<=p.start_char||p.end_char-p.start_char!==p.text.length||own(scope,'read_with')||own(scope,'read_pages'))fail();}
     else if(own(scope,'pali_excerpt'))fail();
     if (scope.unit_id !== requestedId || !nonempty(scope.first_ref) || !nonempty(scope.last_ref) || !scope.first_ref.startsWith(prefix) || !scope.last_ref.startsWith(prefix) || !/^[1-9]\d*$/.test(scope.first_ref.slice(prefix.length)) || !/^[1-9]\d*$/.test(scope.last_ref.slice(prefix.length)) || Number(scope.first_ref.slice(prefix.length)) > Number(scope.last_ref.slice(prefix.length))) fail();
@@ -33,6 +46,7 @@ export function scopeDescriptor(choice, requestedId) {
 /** Validate identity/scope before rendering; return only a checked same-source continuation. */
 export function validateEnglishPage(data, args, context) {
   const offset = args.offset || 0;
+  if(medicineFamily(data?.translation_id) || data?.translation_scope?.extractor===MEDICINE_EXTRACTOR)scopeDescriptor(data,context.uid);
   if (data && typeof data === 'object') {
     translatorNotes(data);
     if (sectionSourceUnit(data.translation_id) && sectionSourceUnit(data.translation_id) !== context.uid) throw Error('The section source belongs to a different Pāli selection. No English was displayed.');
@@ -40,6 +54,7 @@ export function validateEnglishPage(data, args, context) {
   if (!data || !nonempty(data.text) || !nonempty(data.translation_id) || !nonempty(data.translator) || !nonempty(data.attribution) || !(nonempty(data.license) || (data.license && typeof data.license === 'object' && nonempty(data.license.name))) || data.offset !== offset) throw new Error('The English source response is incomplete. No translation was displayed.');
   const choice = context.choices.find(c => c.translation_id === data.translation_id);
   if (!choice) throw new Error('The returned English source version was not in the reviewed list. Reload the passage and review sources again.');
+  if(medicineFamily(choice.translation_id) || choice.translation_scope?.extractor===MEDICINE_EXTRACTOR)scopeDescriptor(choice,context.uid);
   if (sectionSourceUnit(data.translation_id) && (!own(choice, 'source_section') || !sameScope(data.source_section, choice.source_section) || data.source_section?.unit_id !== context.uid || data.source_section?.anchor !== data.translation_id.split('#')[1] || data.source_section?.status !== 'reviewed')) throw new Error(milindaSourceUnit(data.translation_id) ? 'The reviewed question identity changed. Reload the passage and review sources again; no English was displayed.' : 'The reviewed discourse identity changed. Reload the passage and review sources again; no English was displayed.');
   if (context.accepted) {
     const accepted = context.accepted;

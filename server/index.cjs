@@ -21610,7 +21610,10 @@ function assertRegisteredPartial(link, unit, registry2) {
   } catch {
   }
   const row = registry2.links.find((r) => link.path === r.path || key3 === "accesstoinsight.org" + r.path + ".html");
-  if (!row) return;
+  if (!row) {
+    if (link.path === "/tipitaka/kn/miln/miln.5x.olen" || key3 === "accesstoinsight.org/tipitaka/kn/miln/miln.5x.olen.html") throw Error("Registered partial source has no reviewed mapping. No whole-unit source or retrieval is inferred.");
+    return;
+  }
   const expected = reviewedPartialLink(row, registry2);
   if (unit.id !== row.unit_id || stable(link) !== stable(expected)) throw Error("Registered partial source lost or changed its reviewed mapping. No whole-unit source or retrieval is inferred.");
 }
@@ -21623,6 +21626,31 @@ var ATI_SECTION_PROFILE = "ati-kelly-milinda-v1";
 var ATI_SECTION_COMMIT = "45fedca341497120651efa20e756b04a13e61089";
 var ATI_SECTION_LICENSE = "Kelly-free-distribution-2005";
 var SN27_SECTION_PROFILE = "ati-sn27-feelings-v1";
+var AN_MIND_SECTION_PROFILE = "ati-an1-ekadhamma-numbered-paragraph-v1";
+var AN_MIND_SECTION_PATH = "/tipitaka/an/an01/an01.021-040.than";
+var AN_MIND_SHARED_LINK_SHA256 = "67e00d1d18e2f94eb11d297d6b79e719d144a3c19c961b114af9c192556078cb";
+var anRows = [
+  [21, 2, "Pa\u1E6Dhama\u1E43."],
+  [22, 1, "Dutiya\u1E43."],
+  [23, 1, "Tatiya\u1E43."],
+  [24, 1, "Catuttha\u1E43."],
+  [25, 1, "Pa\xF1cama\u1E43."],
+  [26, 1, "Cha\u1E6D\u1E6Dha\u1E43."],
+  [27, 1, "Sattama\u1E43."],
+  [28, 1, "A\u1E6D\u1E6Dhama\u1E43."],
+  [29, 1, "Navama\u1E43."],
+  [30, 1, "Dasama\u1E43."],
+  [31, 2, "Pa\u1E6Dhama\u1E43."],
+  [32, 1, "Dutiya\u1E43."],
+  [33, 1, "Tatiya\u1E43."],
+  [34, 1, "Catuttha\u1E43."],
+  [35, 1, "Pa\xF1cama\u1E43."],
+  [36, 1, "Cha\u1E6D\u1E6Dha\u1E43."],
+  [37, 1, "Sattama\u1E43."],
+  [38, 1, "A\u1E6D\u1E6Dhama\u1E43."],
+  [39, 1, "Navama\u1E43."],
+  [40, 1, "Dasama\u1E43."]
+];
 var page = "/tipitaka/kn/miln/miln.";
 var rows = [
   ["mil3.1.8", "2x", "miln-2-1-08", 9, 0],
@@ -21663,7 +21691,23 @@ var ATI_SECTION_PROFILES = Object.freeze([...rows.map(([unit_id, part, anchor, p
   license: "CC-BY-NC",
   source_html_sha256: "4cda764c8a27a64faf96f6cd2ce0dc08808816ab80d329f3ad264b4516ee1e79",
   inline_paratext: "Pa\xF1cama\u1E43."
-})]);
+}), ...anRows.map(([number4, first_ref_number, inline_paratext]) => Object.freeze({
+  unit_id: `an1.${number4}`,
+  path: AN_MIND_SECTION_PATH,
+  anchor: `sutta-${number4}`,
+  paragraphs: 1,
+  notes: 0,
+  profile: AN_MIND_SECTION_PROFILE,
+  collection: "an",
+  translator: "Thanissaro Bhikkhu",
+  license: "CC-BY-NC",
+  source_html_sha256: "df8afc7457b8720a55f487f52fb47bff94371e52455cf3596daecc5fbbfa65a4",
+  label: `${number4}.`,
+  first_ref_number,
+  inline_paratext,
+  root_heading: number4 === 21 ? "3. Akammaniyavaggo" : number4 === 31 ? "4. Adantavaggo" : null,
+  tail_paratext: number4 === 30 ? "Akammaniyavaggo tatiyo." : number4 === 40 ? "Adantavaggo catuttho." : null
+}))]);
 var isAtiSectionPath = (path) => ATI_SECTION_PROFILES.some((row) => row.path === path);
 
 // src/ati-section-registry.mjs
@@ -21675,6 +21719,14 @@ var exactKeys = (value, keys) => value && typeof value === "object" && !Array.is
 var fail = () => {
   throw Error("Registered ATI question sections lost or changed their reviewed source, selector or root. No whole-page translation or coverage was inferred.");
 };
+function retainedAnMindShared(link, unit) {
+  if (unit?.id !== "an1.21" || link?.path !== AN_MIND_SECTION_PATH) return false;
+  try {
+    return (0, import_node_crypto.createHash)("sha256").update(stable2(link)).digest("hex") === AN_MIND_SHARED_LINK_SHA256;
+  } catch {
+    return false;
+  }
+}
 function reviewedSectionLink(row, registry2) {
   return {
     source: "ati",
@@ -21699,14 +21751,23 @@ function validateSectionRegistry(registry2, corpus, translations, readSegments) 
     if (!profile || seen.has(row.unit_id) || row.path !== profile.path || row.anchor !== profile.anchor || row.source_html_sha256 !== profile.source_html_sha256 || row.translator !== profile.translator || row.license !== profile.license || !text(row.english_title) || !text(row.source_reference) || !text(row.mapping_note) || !unit || unit.collection !== profile.collection || unit.approximate || unit.kind || unit.members) fail();
     seen.add(row.unit_id);
     if (!exactKeys(root, ["id", "book", "start", "end", "title", "vri", "root_blocks_sha256"]) || ["id", "book", "start", "end", "title", "vri"].some((key3) => root[key3] !== unit[key3]) || !sha(root.root_blocks_sha256) || sectionHash(corpus.books[unit.book].blocks.slice(unit.start, unit.end)) !== root.root_blocks_sha256) fail();
-    if (!exactKeys(p, ["version", "status", "unit_id", "profile", "anchor", "heading", "paragraph_count", "note_count", "section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256", "first_ref", "last_ref", "source_commit"]) || p.version !== 1 || p.status !== "reviewed" || p.unit_id !== unit.id || p.profile !== profile.profile || p.anchor !== row.anchor || p.heading !== row.source_reference || p.paragraph_count !== profile.paragraphs || p.note_count !== profile.notes || p.source_commit !== registry2.vri_commit || ["section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256"].some((key3) => !sha(p[key3]))) fail();
+    if (!exactKeys(p, ["version", "status", "unit_id", "profile", "anchor", "heading", "paragraph_count", "note_count", "section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256", "first_ref", "last_ref", "source_commit"]) || p.version !== 1 || p.status !== "reviewed" || p.unit_id !== unit.id || p.profile !== profile.profile || p.anchor !== row.anchor || p.heading !== (profile.label || row.source_reference) || p.paragraph_count !== profile.paragraphs || p.note_count !== profile.notes || p.source_commit !== registry2.vri_commit || ["section_html_sha256", "text_sha256", "notes_sha256", "notice_sha256", "pali_sha256"].some((key3) => !sha(p[key3]))) fail();
     const segments2 = readSegments(unit).map(({ ref, type, text: text2 }) => ({ ref, type, text: text2 })), first = segments2.findIndex((segment) => segment.ref === p.first_ref), last = segments2.findIndex((segment) => segment.ref === p.last_ref);
-    if (first !== 1 || last < first || segments2[0].type !== "heading" || segments2.slice(first, last + 1).some((segment) => segment.type !== "prose") || sectionHash(segments2.slice(first, last + 1)) !== p.pali_sha256 || !Array.isArray(row.untranslated_paratext) || !row.untranslated_paratext.length) fail();
-    if (profile.inline_paratext) {
+    if (sectionHash(segments2.slice(first, last + 1)) !== p.pali_sha256 || !Array.isArray(row.untranslated_paratext) || !row.untranslated_paratext.length) fail();
+    if (profile.profile === AN_MIND_SECTION_PROFILE) {
+      const at = profile.first_ref_number - 1, body = segments2[at];
+      if (first !== at || last !== at || body?.type !== "prose" || !body.text.endsWith(" " + profile.inline_paratext) || segments2.length !== profile.first_ref_number + (profile.tail_paratext ? 1 : 0)) fail();
+      if (profile.root_heading && (segments2[0]?.type !== "heading" || segments2[0].text !== profile.root_heading)) fail();
+      if (profile.tail_paratext && segments2.at(-1).text !== profile.tail_paratext) fail();
+      const paratext = [{ ref: body.ref, text: profile.inline_paratext }, ...segments2.filter((_, i) => i !== at).map(({ ref, text: text2 }) => ({ ref, text: text2 }))];
+      if (stable2(paratext) !== stable2(row.untranslated_paratext)) fail();
+    } else if (first !== 1 || last < first || segments2[0].type !== "heading" || segments2.slice(first, last + 1).some((segment) => segment.type !== "prose")) fail();
+    else if (profile.inline_paratext) {
       if (segments2.length !== 2 || first !== 1 || last !== 1 || !segments2[1].text.endsWith(" " + profile.inline_paratext) || stable2(row.untranslated_paratext) !== stable2([{ ref: segments2[1].ref, text: profile.inline_paratext }])) fail();
     } else if (stable2(segments2.slice(last + 1).map(({ ref, text: text2 }) => ({ ref, text: text2 }))) !== stable2(row.untranslated_paratext)) fail();
   }
   for (const [owner, links] of Object.entries(translations)) for (const link of links) assertRegisteredSection(link, units.get(owner), registry2);
+  if ((translations["an1.21"] || []).filter((link) => retainedAnMindShared(link, units.get("an1.21"))).length !== 1) fail();
   for (const row of registry2.links) {
     const expected = stable2(reviewedSectionLink(row, registry2));
     if ((translations[row.unit_id] || []).filter((link) => stable2(link) === expected).length !== 1) fail();
@@ -21714,6 +21775,7 @@ function validateSectionRegistry(registry2, corpus, translations, readSegments) 
   return registry2;
 }
 function assertRegisteredSection(link, unit, registry2) {
+  if (retainedAnMindShared(link, unit)) return;
   let path;
   try {
     const url = new URL(link.url);
@@ -21723,7 +21785,14 @@ function assertRegisteredSection(link, unit, registry2) {
   if (!Object.hasOwn(link, "section") && !isAtiSectionPath(link.path) && !isAtiSectionPath(path)) return;
   if (!registry2 || !Array.isArray(registry2.links)) fail();
   const row = registry2.links.find((value) => value.unit_id === unit?.id && value.path === link.path && value.anchor === link.section?.anchor);
-  if (!row || stable2(link) !== stable2(reviewedSectionLink(row, registry2))) fail();
+  if (!row) fail();
+  let actual;
+  try {
+    actual = stable2(link);
+  } catch {
+    fail();
+  }
+  if (actual !== stable2(reviewedSectionLink(row, registry2))) fail();
 }
 
 // src/translation-scope.mjs
@@ -21939,6 +22008,7 @@ function atiPartialExcerpt(html, extractor) {
   if (extractor === "ati-vinaya-mv6-p1to5-of5-v1") return vinayaChapterProse(html, 5);
   if (extractor === "ati-vinaya-mv8-p1to22-of22-v1") return vinayaChapterProse(html, 22);
   if (extractor === "ati-vinaya-mv1-mixed21p6v-v1") return upatissaChapter(html);
+  if (extractor === "ati-milinda-medicine-two-verses-v1") return milindaMedicineVerses(html);
   if (extractor === "ati-chapter-p2-of2-v1") return chapterParagraph(html, 2, 2);
   if (extractor === "ati-chapter-p11-of11-v1") return chapterParagraph(html, 11, 11, "Seeing the Dhamma");
   if (extractor === "ati-chapter-p1-of4-v1") return chapterParagraph(html, 4, 1);
@@ -21957,8 +22027,31 @@ var ATI_SEGMENT_EXTRACTORS = Object.freeze([
   "ati-chapter-p1to3-of4-ellipsis-v1",
   "ati-vinaya-mv6-p1to5-of5-v1",
   "ati-vinaya-mv8-p1to22-of22-v1",
-  "ati-vinaya-mv1-mixed21p6v-v1"
+  "ati-vinaya-mv1-mixed21p6v-v1",
+  "ati-milinda-medicine-two-verses-v1"
 ]);
+function milindaMedicineVerses(html) {
+  const fail3 = () => {
+    throw Error("The reviewed ATI Milinda two-verse extraction structure changed. No excerpt was returned.");
+  };
+  const chunk = copyrightedChunk(html).trim();
+  const body = chunk.match(/^<div class=(["'])preface\1>\s*<h1>Translator's note<\/h1>\s*<p>([^]*?)<\/p>\s*<p>([^]*?)<\/p>\s*<p>([^]*?)<\/p>\s*<\/div>\s*<div class=(["'])chapter\5>\s*<div class=(["'])freeverse\6>([^]*?)<p class=(["'])cite\8>([^]*?)<\/p>\s*<\/div>\s*<\/div>\s*<\/div>$/);
+  if (!body) fail3();
+  const [, , first, second, third, , , verse2, , citation] = body;
+  if (/[<>]/.test(first + second + verse2 + citation) || !plainText(first) || !plainText(second) || plainText(citation) !== "\u2014 Miln 335") fail3();
+  let open = false, count = 0;
+  for (const [tag] of third.matchAll(/<[^>]*>/g)) {
+    if (tag === "<i>" && !open) {
+      open = true;
+      count++;
+    } else if (tag === "</i>" && open) open = false;
+    else fail3();
+  }
+  if (open || count !== 4 || /[<>]/.test(third.replace(/<\/?i>/g, "")) || !plainText(third) || [...third.matchAll(/<i>([^]*?)<\/i>/g)].some((m) => !plainText(m[1]))) fail3();
+  const text2 = plainText(verse2), stanzas = text2.split("\n\n");
+  if (stanzas.length !== 2 || stanzas.some((s, i) => s.split("\n").length !== [4, 5][i] || s.split("\n").some((line) => !line.trim()))) fail3();
+  return text2;
+}
 function upatissaChapter(html) {
   const fail3 = () => {
     throw Error("The reviewed ATI Upatissa mixed-body extraction structure changed. No excerpt was returned.");
@@ -22122,6 +22215,9 @@ function partialScope(link, unit, segments2, source4) {
   if (!["dhammatalks", "ati", "anandajoti"].includes(link.source)) fail3();
   if (link.source === "ati") {
     if (!(p.version === 2 ? ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor) : ATI_SEGMENT_EXTRACTORS.includes(p.extractor)) || !sha2(p.notice_sha256) || typeof link.path !== "string" || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes("..") || link.url !== "https://accesstoinsight.org" + link.path + ".html") fail3();
+    if (p.extractor === "ati-milinda-medicine-two-verses-v1" || link.path.startsWith("/tipitaka/kn/miln/")) {
+      if (unit.id !== "mil6.4.1" || link.path !== "/tipitaka/kn/miln/miln.5x.olen" || p.version !== 1 || p.extractor !== "ati-milinda-medicine-two-verses-v1" || p.first_ref !== "mil6.4.1/20" || p.last_ref !== "mil6.4.1/21" || link.translator !== "Andrew Olendzki" || link.license !== "Olendzki-free-distribution-2005") fail3();
+    }
   } else if (Object.hasOwn(p, "extractor") || Object.hasOwn(p, "notice_sha256")) fail3();
   if (link.parts && (link.source !== "anandajoti" || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail3();
   const readPages = [];
@@ -23824,7 +23920,7 @@ function resolve(reference) {
     return { unit, notes, alternatives: [...others.values()].slice(0, 3).map((u) => unitSummary(u)) };
   }
   if (c.kind === "url") {
-    if (c.host === "accesstoinsight.org" && isAtiSectionPath(c.path)) {
+    if (c.host === "accesstoinsight.org" && isAtiSectionPath(c.path) && !(c.path === "/tipitaka/an/an01/an01.021-040.than" && !c.fragment)) {
       const rows2 = d.sectionRegistry.links.filter((row2) => row2.path === c.path), row = rows2.find((row2) => row2.anchor === c.fragment);
       if (!row) throw new CitationError(`This publisher anthology page does not identify one reviewed question. Use an exact question body anchor or canonical ID: ${rows2.map((value) => value.unit_id).join(", ")}.`);
       const unit2 = d.byId.get(row.unit_id);
@@ -24384,6 +24480,7 @@ function extractAtiSection(html, row) {
   const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
   if (html.split(begin).length !== 2 || html.split(end).length !== 2 || html.indexOf(end) <= html.indexOf(begin)) fail2();
   const chunk = html.slice(html.indexOf(begin) + begin.length, html.indexOf(end)), root = parse3(chunk), chapters = elements(root);
+  if (profile.profile === AN_MIND_SECTION_PROFILE) return numberedMindParagraph(root, chapters, chunk, row, profile);
   if (root.children.some((value) => typeof value === "string" && value.trim()) || chapters.length !== (profile.profile === SN27_SECTION_PROFILE || profile.path.includes("2x") ? 10 : 6) || chapters.some((node) => node.tag !== "div" || JSON.stringify(node.attrs) !== '{"class":"chapter"}')) fail2();
   if (profile.profile === SN27_SECTION_PROFILE) {
     for (const [i, chapter2] of chapters.entries()) {
@@ -24420,6 +24517,23 @@ function extractAtiSection(html, row) {
   }
   if (sectionHash(text2) !== p.text_sha256 || sectionHash(translator_notes) !== p.notes_sha256) fail2();
   return { text: text2, translator_notes, title };
+}
+function numberedMindParagraph(root, chapters, chunk, row, profile) {
+  if (root.children.some((value) => typeof value === "string" && value.trim()) || chapters.length !== 2) fail2();
+  const paragraphs = [];
+  for (const chapter of chapters) {
+    if (chapter.tag !== "div" || JSON.stringify(chapter.attrs) !== '{"class":"chapter"}' || chapter.children.some((value) => typeof value === "string" && value.trim()) || elements(chapter).length !== 10) fail2();
+    for (const paragraph of elements(chapter)) {
+      const number4 = paragraphs.length + 21, anchors2 = elements(paragraph), anchor = anchors2[0];
+      if (paragraph.tag !== "p" || Object.keys(paragraph.attrs).length || anchors2.length !== 1 || anchor.tag !== "a" || JSON.stringify(anchor.attrs) !== JSON.stringify({ id: `sutta-${number4}` }) || elements(anchor).length || plainText(chunk.slice(anchor.inside, anchor.close)) !== String(number4) || chunk.slice(paragraph.inside, anchor.start).trim()) fail2();
+      const body = chunk.slice(anchor.end, paragraph.close).match(/^\.\s+([^]*)$/);
+      if (!body || /[<>]/.test(body[1])) fail2();
+      paragraphs.push({ paragraph, anchor, text: plainText(body[1]) });
+    }
+  }
+  const selected = paragraphs.find((value) => value.anchor.attrs.id === row.anchor), p = row.section;
+  if (!selected || !selected.text || rawHash(chunk.slice(selected.paragraph.start, selected.paragraph.end)) !== p.section_html_sha256 || p.heading !== profile.label || sectionHash(selected.text) !== p.text_sha256 || sectionHash([]) !== p.notes_sha256) fail2();
+  return { text: selected.text, translator_notes: [], title: p.heading };
 }
 
 // src/english.mjs
@@ -24641,6 +24755,9 @@ async function translation(unit, which, { offset = 0, limit = 12e3, prefix_sha25
     notes.push(`dhammatalks.org could not be reached (${error2.message}); showing \u1E6Ch\u0101nissaro Bhikkhu's earlier version from Access to Insight instead.`);
     if (sameTranslator.mapping_note && sameTranslator.mapping_note !== link.mapping_note) notes.push(sameTranslator.mapping_note);
     link = sameTranslator;
+  }
+  if (sectionRow && (typeof result.text !== "string" || sectionHash(result.text) !== sectionRow.section.text_sha256 || !Array.isArray(result.translator_notes) || sectionHash(result.translator_notes) !== sectionRow.section.notes_sha256 || sectionHash({ licensing: result.license, citation: result.attribution }) !== sectionRow.section.notice_sha256 || result.title !== sectionRow.section.heading || result.url !== link.url)) {
+    throw Error("The reviewed ATI section text, notes, notice or identity changed in cache. No translation was returned.");
   }
   if (declaredScope) {
     if (result.text.length > 2e6 || result.parts_total && result.parts_read !== result.parts_total) throw new Error("Scoped source exceeds the bounded complete-text check; no excerpt was returned.");
@@ -26553,6 +26670,7 @@ async function atiIndexes() {
   };
   return atiIndexCache;
 }
+var unqualifiedAtiPage = (path) => isAtiSectionPath(path) || path === "/tipitaka/kn/miln/miln.5x.olen";
 async function searchAti({ query, limit = 10 }) {
   query = String(query ?? "").trim();
   if (!query) throw new Error("Give a search query.");
@@ -26577,7 +26695,7 @@ ${error2.message}`);
   }
   const d = load();
   const unique = [...new Map(matches.map((r) => [r.path, r])).values()].map((r) => {
-    const textId = d.urlIndex.get(`accesstoinsight.org${r.path}`);
+    const textId = unqualifiedAtiPage(r.path) ? void 0 : d.urlIndex.get(`accesstoinsight.org${r.path}`);
     return textId ? { ...r, canon_text_id: textId } : r;
   });
   return {
@@ -26601,7 +26719,7 @@ async function getAtiText({ path, offset = 0, limit = 12e3 }) {
   }
   const text2 = plainText(atiContent(result.body));
   const notice = atiNotice(result.body);
-  const textId = load().urlIndex.get(`accesstoinsight.org${path}`);
+  const textId = unqualifiedAtiPage(path) ? void 0 : load().urlIndex.get(`accesstoinsight.org${path}`);
   return {
     source: "Access to Insight",
     url: `${ATI}${path}.html`,

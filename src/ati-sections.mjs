@@ -1,7 +1,7 @@
 /** Finite reviewed ATI sections; owned notes never become translated body text. */
 import { createHash } from 'node:crypto';
 import { plainText } from './http.mjs';
-import { SN27_SECTION_PROFILE, ATI_SECTION_PROFILES } from './ati-section-profiles.mjs';
+import { SN27_SECTION_PROFILE, AN_MIND_SECTION_PROFILE, ATI_SECTION_PROFILES } from './ati-section-profiles.mjs';
 import { sectionHash } from './ati-section-registry.mjs';
 const rawHash = value => createHash('sha256').update(value).digest('hex');
 const fail = () => { throw Error('The reviewed ATI question text, structure, notes or source changed. No question translation was returned.'); };
@@ -35,6 +35,7 @@ export function extractAtiSection(html, row) {
   const begin = '<!-- BEGIN COPYRIGHTED TEXT CHUNK -->', end = '<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->';
   if (html.split(begin).length !== 2 || html.split(end).length !== 2 || html.indexOf(end) <= html.indexOf(begin)) fail();
   const chunk = html.slice(html.indexOf(begin) + begin.length, html.indexOf(end)), root = parse(chunk), chapters = elements(root);
+  if (profile.profile === AN_MIND_SECTION_PROFILE) return numberedMindParagraph(root, chapters, chunk, row, profile);
   if (root.children.some(value => typeof value === 'string' && value.trim()) || chapters.length !== (profile.profile === SN27_SECTION_PROFILE || profile.path.includes('2x') ? 10 : 6) || chapters.some(node => node.tag !== 'div' || JSON.stringify(node.attrs) !== '{"class":"chapter"}')) fail();
   if (profile.profile === SN27_SECTION_PROFILE) {
     for (const [i, chapter] of chapters.entries()) {
@@ -69,4 +70,23 @@ export function extractAtiSection(html, row) {
   }
   if (sectionHash(text) !== p.text_sha256 || sectionHash(translator_notes) !== p.notes_sha256) fail();
   return { text, translator_notes, title };
+}
+
+function numberedMindParagraph(root, chapters, chunk, row, profile) {
+  if (root.children.some(value => typeof value === 'string' && value.trim()) || chapters.length !== 2) fail();
+  const paragraphs = [];
+  for (const chapter of chapters) {
+    if (chapter.tag !== 'div' || JSON.stringify(chapter.attrs) !== '{"class":"chapter"}' || chapter.children.some(value => typeof value === 'string' && value.trim()) || elements(chapter).length !== 10) fail();
+    for (const paragraph of elements(chapter)) {
+      const number = paragraphs.length + 21, anchors = elements(paragraph), anchor = anchors[0];
+      if (paragraph.tag !== 'p' || Object.keys(paragraph.attrs).length || anchors.length !== 1 || anchor.tag !== 'a' || JSON.stringify(anchor.attrs) !== JSON.stringify({id: `sutta-${number}`}) || elements(anchor).length || plainText(chunk.slice(anchor.inside,anchor.close)) !== String(number) || chunk.slice(paragraph.inside,anchor.start).trim()) fail();
+      const body = chunk.slice(anchor.end,paragraph.close).match(/^\.\s+([^]*)$/);
+      if (!body || /[<>]/.test(body[1])) fail();
+      paragraphs.push({paragraph, anchor, text: plainText(body[1])});
+    }
+  }
+  const selected = paragraphs.find(value => value.anchor.attrs.id === row.anchor), p = row.section;
+  if (!selected || !selected.text || rawHash(chunk.slice(selected.paragraph.start,selected.paragraph.end)) !== p.section_html_sha256 || p.heading !== profile.label || sectionHash(selected.text) !== p.text_sha256 || sectionHash([]) !== p.notes_sha256) fail();
+  // The printed label is not a publisher-supplied individual discourse title.
+  return {text: selected.text, translator_notes: [], title: p.heading};
 }

@@ -36,7 +36,7 @@ function install(){
 }
 
 test('Upatissa adds one exact partial while preserving all twenty previous descriptors and canonical boundaries',()=>{
- assert.equal(manifest.links.length,21);
+ assert.equal(manifest.links.length,22);
  assert.equal(scopeHash(manifest.links.slice(0,20)),'65c4a2780a628e8cd17f21c91bdb2dbde8525841832ec50b37d85a99535904cf');
  assert.equal(scopeHash(manifest.links.slice(0,18)),'d55eab78d8820f2b9ef8c4988c936eaa17e11b51298ccb29c2b015760ff7ad36');
  assert.equal(row.partial_scope.extractor,extractor);assert.equal(row.path,'/tipitaka/vin/mv/mv.01.23.01-10.than');assert.equal(row.translator,'Thanissaro Bhikkhu');assert.equal(row.license,'CC-BY-NC');
@@ -50,8 +50,8 @@ test('Upatissa adds one exact partial while preserving all twenty previous descr
  assert.throws(()=>partialScope(reviewedPartialLink(row,manifest),unit,all,{...canon.source(),commit:'changed'}),/Invalid or unreviewed/);
  const choice=canon.describe(unit).english.find(c=>c.translation_id==='ati:'+row.path),accepted=scopeDescriptor(choice,unit.id);assert.equal(accepted.flags.allow_partial,true);
  for(const field of ['extractor','notice_sha256','pali_sha256']){const bad=structuredClone(choice);bad.translation_scope[field]='changed';assert.throws(()=>scopeDescriptor(bad,unit.id),/unsupported|incomplete/);}
- const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links],[2553,1423,1846,21,15,12]);
- const daily=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([daily.rotation.of,daily.text.id],[1258,'iti39']);
+ const t=translationCoverage({refresh:true}).total;assert.deepEqual([t.links,t.with_english,t.with_english_including_inherited,t.partial_links,t.partial_only,t.shared_links],[2573,1443,1866,22,16,12]);
+ const daily=dailyText({...canon},{date:'2026-11-01',kind:'sutta'});assert.deepEqual([daily.rotation.of,daily.text.id],[1278,'sn1.10']);
  assert.deepEqual(canon.browse('english',{collection:'vinaya',availability:'linked'}).items.map(i=>i.id),['pli-tv-kd1','pli-tv-kd6','pli-tv-kd8']);assert.equal(canon.browse('english',{collection:'vinaya',availability:'whole'}).total,0);
 });
 

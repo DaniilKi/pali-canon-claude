@@ -38,8 +38,13 @@ for(const row of rows){
 test('Gratitude retains publisher numbering separate from indexed subjects and adjacent calm/insight',()=>{
  const row=rows.find(r=>r.owner_id==='an2.32');assert.deepEqual(row.text_ids,['an2.32','an2.33']);assert.deepEqual(row.root_units.map(r=>r.vri),['33','34']);assert.match(row.source_reference,/ATI AN 2.31–32; indexed AN 2.32–33/);assert.ok(!english.available(canon.resolve('an2.31').unit).some(l=>l.path===row.path));
 });
-test('all reviewed shared pages keep distinct source identities and deduplicate each scope during mixed verification',async()=>{
- const all=JSON.parse(readFileSync('scripts/canon/reviewed_shared_pages.json')).links,d=canon.load();saved=d.translations;d.translations={...saved};
+test('eleven mutable shared-page fixtures deduplicate each scope while the exact retained mind binding stays untouched',async()=>{
+ const declared=JSON.parse(readFileSync('scripts/canon/reviewed_shared_pages.json')).links,all=declared.filter(row=>row.owner_id!=='an1.21'),d=canon.load();saved=d.translations;d.translations={...saved};
+ assert.equal(declared.length,12);assert.equal(all.length,11);
+ const mind=declared.find(row=>row.owner_id==='an1.21');assert.ok(mind);
+ const originalMind=structuredClone(saved[mind.owner_id]);
+ const retainedMind=originalMind.find(link=>link.path===mind.path&&link.shared_scope);assert.ok(retainedMind);
+ assert.deepEqual(d.translations[mind.owner_id],originalMind);
  const text='Synthetic fixture only. Amber lantern by the copper pool.',html=`<!-- BEGIN COPYRIGHTED TEXT CHUNK -->${text}<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) --><div id="F_provenance">Synthetic test-only notice, no licence grant.</div><div id="F_citation">Synthetic attribution.</div>`;
  for(const row of all){const link=structuredClone(saved[row.owner_id].find(l=>l.path===row.path));link.shared_scope.text_sha256=scopeHash(text);link.shared_scope.notice_sha256=scopeHash(english.atiNotice(html));d.translations[row.owner_id]=[link];}
  const fetched=[];globalThis.fetch=async url=>{fetched.push(String(url));return new Response(html);};
@@ -51,5 +56,13 @@ test('all reviewed shared pages keep distinct source identities and deduplicate 
   for(const match of result.matches){const row=batch.find(r=>'ati:'+r.path===match.translation_id);assert.equal(match.text_id,null);assert.deepEqual(match.translation_scope.text_ids,row.text_ids);assert.deepEqual(new Set(match.unverified_requested_text_ids),new Set(requested.filter(id=>row.text_ids.includes(id))));assert.equal(match.whole_unit_coverage,false);}
  }
  assert.equal(fetched.length,all.length);
+ assert.deepEqual(d.translations[mind.owner_id],originalMind,'Mixed synthetic verification must not replace or alter the retained mind page or its whole alternatives');
+ const forged=structuredClone(originalMind),link=forged.find(link=>link.path===mind.path&&link.shared_scope);
+ link.shared_scope.text_sha256=scopeHash(text);link.shared_scope.notice_sha256=scopeHash(english.atiNotice(html));
+ d.translations[mind.owner_id]=forged;const before=fetched.length;
+ await assert.rejects(english.translation(canon.resolve(mind.owner_id).unit,'ati:'+mind.path,{allow_shared:true}),/Registered ATI/);
+ assert.equal(fetched.length,before,'Forged mind-page pins must reject before synthetic source access');
+ d.translations[mind.owner_id]=originalMind;
+ assert.deepEqual(d.translations[mind.owner_id].find(link=>link.path===mind.path&&link.shared_scope),retainedMind);
 
 });
