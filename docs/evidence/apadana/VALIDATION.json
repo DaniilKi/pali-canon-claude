@@ -387,5 +387,37 @@
     "a11y": "blocked",
     "reason": "Chromium startup: process_singleton_posix.cc:297 socket() EPERM"
   },
-  "publication": "local only; no remote writes, deployment, merge or outreach"
+  "publication": "local only; no remote writes, deployment, merge or outreach",
+  "aggregate": {
+    "tested_code_commit": "977bde74c626daca98a8ec1d77e248e7eba2abb2",
+    "command": "npm run check",
+    "execution": "single-CPU process affinity to bound Node test-file concurrency; no test or timeout weakening",
+    "build": "passed",
+    "tests": {
+      "total": 1422,
+      "passed": 1383,
+      "skipped": 39,
+      "failed": 0,
+      "duration_ms": 981909.375784
+    },
+    "audit": {
+      "texts": 8544,
+      "failures": 0
+    }
+  },
+  "ci": {
+    "unit_tests": "automatically discovered",
+    "actual_source_browser_harness": "local follow-up configures existing reader-browser-group / apadana; not yet run remotely",
+    "source_fixture": "exact public revision, thirteen finite files, persist-credentials false; runtime uses no live publisher requests",
+    "reports": [
+      "standalone-apadana.report.json",
+      "standalone-apadana-a11y.report.json",
+      "installed-apadana.report.json"
+    ],
+    "local_hook_guards": {
+      "passed": 3,
+      "failed": 0
+    },
+    "remote_runs": "not performed by this local follow-up"
+  }
 }

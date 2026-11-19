@@ -12,7 +12,7 @@ test('every browser-group JSON report is retained as a CI artifact',()=>{
  assert.ok(selected?.includes('conflicts'),'local note-conflict acceptance is selected');
  assert.ok(selected?.includes('booksearch'),'complete source-book search acceptance is selected');
  assert.ok(selected?.includes('chapters'),'chapter and compact-context acceptance is selected');
- for(const name of ['anten','textspacing']){
+ for(const name of ['anten','textspacing','apadana']){
   assert.ok(selected?.includes(name),name+' acceptance is selected');
   const steps=[...group.matchAll(new RegExp("if: matrix\\.group == '"+name+"'([^]*?)(?=\\n      -|$)",'g'))].map(match=>match[1]).join('\n');
   assert.match(steps,/--a11y/,name+' accessibility mode runs');
@@ -44,4 +44,24 @@ test('installed Firefox and WebKit evidence is retained and required by reader a
  assert.match(aggregate,/needs:[^\n]*reader-browser-group[^\n]*reader-compat/,'aggregate must await Chromium and independent engines');
  assert.match(aggregate,/needs\['reader-compat'\]\.result/,'aggregate checks engine failures');
  assert.match(aggregate,/COMPAT_RESULT[^\n]*success/,'compatibility result must succeed');
+});
+
+
+test('Apadāna browser CI uses a pinned public fixture without persisted credentials or publisher network',()=>{
+ const source=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');
+ const fixture=source.split('      - name: Check out exact public Apadāna source fixtures without credentials')[1]?.split('      - name: Validate all Apadāna source and rights pins')[0];
+ assert.ok(fixture,'exact public fixture checkout exists');
+ assert.match(fixture,/if: matrix\.group == 'apadana'/);
+ assert.match(fixture,/repository: apadana-translation\/apadana-site/);
+ assert.match(fixture,/ref: fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/);
+ assert.match(fixture,/persist-credentials: false/);
+ assert.match(fixture,/sparse-checkout-cone-mode: false/);
+ const files=[...fixture.matchAll(/^            (.+)$/gm)].map(match=>match[1]);
+ assert.deepEqual(files,['LICENSE.md','src/_pages/about.md','src/_includes/site/footer.njk','src/_includes/layouts/epub-metadata.xml','src/_data/site.json','src/_poems/_poems.json',...[1,2,3,6,7,8,9].map(n=>'src/_poems/chapter-4/poem-'+String(n).padStart(3,'0')+'.md')]);
+ const steps=[...source.matchAll(/if: matrix\.group == 'apadana'([^]*?)(?=\n      -|$)/g)].map(match=>match[1]).join('\n');
+ assert.match(steps,/node scripts\/apadana\/build\.mjs --source \.fixtures\/apadana-pinned --check/);
+ assert.equal((steps.match(/python scripts\/web-reader-apadana-check\.py --source-root \.fixtures\/apadana-pinned/g)||[]).length,3);
+ assert.doesNotMatch(steps,/--live|https:\/\/apadanatranslation\.com|curl |wget /);
+ const paths=source.split('          path: |')[1].split('          if-no-files-found:')[0];
+ assert.doesNotMatch(paths,/fixtures|poem-|\.md|apadana-site/,'only metadata reports are uploaded, never source fixtures');
 });

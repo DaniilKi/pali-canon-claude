@@ -78,9 +78,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh, milinda, draftsafety, annumbered, milindapartial, anten, textspacing]
+        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh, milinda, draftsafety, annumbered, milindapartial, anten, apadana, textspacing]
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety' || matrix.group == 'milinda' || matrix.group == 'annumbered' || matrix.group == 'milindapartial' || matrix.group == 'anten' || matrix.group == 'textspacing') && 20 || 10 }}
+    timeout-minutes: ${{ (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety' || matrix.group == 'milinda' || matrix.group == 'annumbered' || matrix.group == 'milindapartial' || matrix.group == 'anten' || matrix.group == 'apadana' || matrix.group == 'textspacing') && 20 || 10 }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -431,6 +431,46 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/an-ten-selection-package"
           tar -xzf "$RUNNER_TEMP/an-ten-selection-package/"*.tgz -C "$RUNNER_TEMP/an-ten-selection-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-an-ten-selection-check.py --server-dir "$RUNNER_TEMP/an-ten-selection-package/package/server" --report installed-an-ten-selection.report.json
+      # Public immutable source fixtures are temporary job inputs, never package content/artifacts.
+      - name: Check out exact public Apadāna source fixtures without credentials
+        if: matrix.group == 'apadana'
+        uses: actions/checkout@v4
+        with:
+          repository: apadana-translation/apadana-site
+          ref: fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4
+          path: .fixtures/apadana-pinned
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            LICENSE.md
+            src/_pages/about.md
+            src/_includes/site/footer.njk
+            src/_includes/layouts/epub-metadata.xml
+            src/_data/site.json
+            src/_poems/_poems.json
+            src/_poems/chapter-4/poem-001.md
+            src/_poems/chapter-4/poem-002.md
+            src/_poems/chapter-4/poem-003.md
+            src/_poems/chapter-4/poem-006.md
+            src/_poems/chapter-4/poem-007.md
+            src/_poems/chapter-4/poem-008.md
+            src/_poems/chapter-4/poem-009.md
+      - name: Validate all Apadāna source and rights pins before browser retrieval
+        if: matrix.group == 'apadana'
+        run: node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+      - name: Check seven exact Apadāna sources using deterministic fixtures
+        if: matrix.group == 'apadana'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-check.py --source-root .fixtures/apadana-pinned --report standalone-apadana.report.json
+      - name: Audit Apadāna source identity and rights in both themes
+        if: matrix.group == 'apadana'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-check.py --source-root .fixtures/apadana-pinned --a11y --report standalone-apadana-a11y.report.json
+      - name: Check exact Apadāna sources from the isolated npm package
+        if: matrix.group == 'apadana'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadana-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadana-package"
+          tar -xzf "$RUNNER_TEMP/apadana-package/"*.tgz -C "$RUNNER_TEMP/apadana-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-package/package/server" --report installed-apadana.report.json
       - name: Check reader reflow with expanded user text spacing
         if: matrix.group == 'textspacing'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-text-spacing-check.py --report standalone-text-spacing.report.json
@@ -570,6 +610,9 @@ jobs:
             standalone-an-ten-selection.report.json
             standalone-an-ten-selection-a11y.report.json
             installed-an-ten-selection.report.json
+            standalone-apadana.report.json
+            standalone-apadana-a11y.report.json
+            installed-apadana.report.json
             standalone-text-spacing.report.json
             standalone-text-spacing-a11y.report.json
             installed-text-spacing.report.json
