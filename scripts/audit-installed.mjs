@@ -9,7 +9,7 @@ import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 import * as canon from '../src/canon.mjs';
 import * as commentary from '../src/commentary.mjs';
 import * as postcanonical from '../src/postcanonical.mjs';
-import { checkPages } from './installed-corpus.mjs';
+import { checkPages, canonicalReadArguments } from './installed-corpus.mjs';
 import { offlineDataChecks } from './offline-data-checks.mjs';
 import { available as availableEnglish } from '../src/english.mjs';
 
@@ -55,9 +55,12 @@ require('node:module').syncBuiltinESMExports();\n`);
   for (const u of canon.load().canon.units) {
     const { unit } = canon.resolve(u.id);
     const expectedEnglish = JSON.parse(JSON.stringify(availableEnglish(unit)));
-    const canonical = await checkPages(call, 'get_text', { uid: u.id }, canon.segments(unit), {
+    const source = canon.readingSource(unit);
+    const args = await canonicalReadArguments(call, { uid: u.id, id: unit.id, source });
+    const canonical = await checkPages(call, 'get_text', args, canon.segments(unit), {
       metadata: (result) => {
         assert.equal(result.text_id, unit.id);
+        if (args.source_commit) assert.deepEqual(result.source, source, 'canonical mapping changed during the complete installed read');
         assert.deepEqual(result.english_available, expectedEnglish, `${u.id}: linked translation metadata`);
         const alignment = canon.alignmentInfo(unit);
         if (alignment) {

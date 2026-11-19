@@ -10,6 +10,7 @@ import * as canon from '../src/canon.mjs';
 import * as commentary from '../src/commentary.mjs';
 import * as postcanonical from '../src/postcanonical.mjs';
 import { ALLOWED_HOSTS } from '../src/http.mjs';
+import { canonicalReadArguments } from './installed-corpus.mjs';
 
 export function toolData(response) {
   const text = response.content?.find((part) => part.type === 'text')?.text;
@@ -127,10 +128,13 @@ export async function run({ server, pageSize, scope, report }) {
       const resolved = canon.resolve(unit.id).unit;
       if (scope === 'all' || scope === 'canon') {
         await record('canon', unit.id, async () => {
+          const source = canon.readingSource(resolved);
+          const args = await canonicalReadArguments(call, { uid: unit.acronym, id: resolved.id, source });
           const result = await checkPages(call, {
-            tool: 'get_text', args: { uid: unit.acronym }, expected: canon.segments(resolved), pageSize,
+            tool: 'get_text', args, expected: canon.segments(resolved), pageSize,
             validate: (page) => {
               assert.equal(page.text_id, resolved.id);
+              if (args.source_commit) assert.deepEqual(page.source, source, 'canonical mapping changed during the complete read');
               assert.equal(page.citation, resolved.acronym);
               assert.equal(page.attribution, root.canon.source.attribution);
               if (unit.approximate) assert.ok(page.notes.some((note) => /abbreviat|peyyāla|approximate/i.test(note)), 'missing abbreviation warning');

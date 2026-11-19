@@ -1,4 +1,30 @@
 (() => {
+  // web/tool-result.mjs
+  var object = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  function readingToolResult(result) {
+    if (!object(result)) throw Error("The text service returned an incomplete response.");
+    const text11 = result.content?.find((item) => item.type === "text")?.text;
+    let data = result.structuredContent;
+    if (data === void 0) {
+      try {
+        data = JSON.parse(text11 || "{}");
+      } catch {
+        if (result.isError && typeof text11 === "string" && text11.trim()) throw Error(text11);
+        throw Error("The text service returned an unreadable response. No passage was substituted. Try again or open its source from the Library.");
+      }
+    }
+    if (result.isError || data?.error) {
+      const error = Error(typeof data?.error === "string" && data.error ? data.error : "This selection could not be retrieved.");
+      if (data?.code === "READING_SOURCE_CHANGED") error.code = data.code;
+      if (["READING_SOURCE_CHANGED", "READING_LOCATOR_AMBIGUOUS"].includes(data?.code) && /^#read\?uid=tha-ap10[78]$/.test(data?.reopen || "")) {
+        error.code = data.code;
+        error.reopen = data.reopen;
+      }
+      throw error;
+    }
+    return data;
+  }
+
   // src/locator-policy.mjs
   var APADANA_PAIR_SOURCE_COMMIT = "2d134ff9ef60f70a1eb03c9370580228811a3070";
   var APADANA_PAIR_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-apadana-thera105-106-v1";
@@ -23833,7 +23859,7 @@
   var MAX_IMPORT_BYTES = 16 * 1024 * 1024;
   var keys = /* @__PURE__ */ new Set(["uid", "ref", "title", "note", "offset", "source_commit"]);
   var string2 = (x, max) => typeof x === "string" && x.length > 0 && x.length <= max && !/[\u0000-\u001f\u007f]/.test(x);
-  var object = (x) => x && typeof x === "object" && !Array.isArray(x);
+  var object2 = (x) => x && typeof x === "object" && !Array.isArray(x);
   var identity = (x) => JSON.stringify([x.uid, x.ref]);
   function parseBookmarks(text11) {
     let data;
@@ -23842,10 +23868,10 @@
     } catch {
       throw Error("Choose a valid JSON bookmark export. Nothing was imported.");
     }
-    if (!object(data) || data.format !== "pali-library-v1" || Object.keys(data).some((k) => !["format", "saved"].includes(k)) || !Array.isArray(data.saved) || data.saved.length > 500) throw Error("This is not a supported P\u0101li Library bookmark export (maximum 500 passages). Nothing was imported.");
+    if (!object2(data) || data.format !== "pali-library-v1" || Object.keys(data).some((k) => !["format", "saved"].includes(k)) || !Array.isArray(data.saved) || data.saved.length > 500) throw Error("This is not a supported P\u0101li Library bookmark export (maximum 500 passages). Nothing was imported.");
     const seen = /* @__PURE__ */ new Set();
     return data.saved.map((x) => {
-      if (!object(x) || Object.keys(x).some((k) => !keys.has(k)) || !string2(x.uid, 300) || !string2(x.ref, 400) || !string2(x.title, 1e3) || !(/^[a-z][a-z0-9.-]*$/.test(x.uid) || /^(book|post|commentary-ref|commentary):[^\r\n]+$/.test(x.uid)) || /https?:|javascript:|data:|[<>]/i.test(x.uid) || x.note !== void 0 && (typeof x.note !== "string" || x.note.length > 4e3) || x.offset !== void 0 && (!Number.isSafeInteger(x.offset) || x.offset < 0 || x.offset > 1e5) || x.source_commit !== void 0 && !string2(x.source_commit, 100)) throw Error("A bookmark has unsupported fields or invalid reference, note, position or revision metadata. Nothing was imported.");
+      if (!object2(x) || Object.keys(x).some((k) => !keys.has(k)) || !string2(x.uid, 300) || !string2(x.ref, 400) || !string2(x.title, 1e3) || !(/^[a-z][a-z0-9.-]*$/.test(x.uid) || /^(book|post|commentary-ref|commentary):[^\r\n]+$/.test(x.uid)) || /https?:|javascript:|data:|[<>]/i.test(x.uid) || x.note !== void 0 && (typeof x.note !== "string" || x.note.length > 4e3) || x.offset !== void 0 && (!Number.isSafeInteger(x.offset) || x.offset < 0 || x.offset > 1e5) || x.source_commit !== void 0 && !string2(x.source_commit, 100)) throw Error("A bookmark has unsupported fields or invalid reference, note, position or revision metadata. Nothing was imported.");
       if (seen.has(identity(x))) throw Error("The file contains duplicate passage references. Resolve those duplicates before importing; no notes were chosen or discarded.");
       seen.add(identity(x));
       return { uid: x.uid, ref: x.ref, title: x.title, note: x.note ?? "", ...x.offset !== void 0 ? { offset: x.offset } : {}, ...x.source_commit !== void 0 ? { source_commit: x.source_commit } : {} };
@@ -23859,14 +23885,14 @@
 
   // web/passage-notes.mjs
   var own3 = (value, key4) => Object.hasOwn(value, key4);
-  var object2 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var object3 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   var position = (value) => Number.isSafeInteger(value) && value >= 0 && value <= 1e5;
   var revision2 = (value) => typeof value === "string" && /^[A-Za-z0-9._-]{1,100}$/.test(value);
   function clone(value, depth = 0) {
     if (depth > 32) throw Error("Personal-note metadata is nested too deeply. Keep/export it before repairing it.");
     if (value instanceof Map) return new Map([...value].map(([key4, item]) => [clone(key4, depth + 1), clone(item, depth + 1)]));
     if (Array.isArray(value)) return value.map((item) => clone(item, depth + 1));
-    if (object2(value)) return Object.fromEntries(Object.entries(value).map(([key4, item]) => [key4, clone(item, depth + 1)]));
+    if (object3(value)) return Object.fromEntries(Object.entries(value).map(([key4, item]) => [key4, clone(item, depth + 1)]));
     return value;
   }
   var noteText = (value) => {
@@ -23879,12 +23905,12 @@
     if (own3(item, "source_commit") && (!revision2(item.source_commit) || !position(item.offset))) throw Error("This bookmark has invalid saved revision or position metadata.");
   }
   function currentContext(context) {
-    if (!object2(context) || Object.keys(context).some((key4) => !["uid", "ref", "title", "offset", "source_commit"].includes(key4))) throw Error("This passage has unsupported personal-note reference metadata.");
+    if (!object3(context) || Object.keys(context).some((key4) => !["uid", "ref", "title", "offset", "source_commit"].includes(key4))) throw Error("This passage has unsupported personal-note reference metadata.");
     bookmarkShape({ ...context, note: "" });
     if (!position(context.offset) || !revision2(context.source_commit)) throw Error("This passage has no valid current position and source revision.");
   }
   function passageNoteKey(item) {
-    if (!object2(item) || typeof item.uid !== "string" || !item.uid || typeof item.ref !== "string" || !item.ref) throw Error("A personal note needs an exact source selector and passage reference.");
+    if (!object3(item) || typeof item.uid !== "string" || !item.uid || typeof item.ref !== "string" || !item.ref) throw Error("A personal note needs an exact source selector and passage reference.");
     return JSON.stringify([item.uid, item.ref]);
   }
   function passageNoteState(saved2, context) {
@@ -23893,7 +23919,7 @@
     try {
       currentContext(context);
       key4 = passageNoteKey(context);
-      const matches = saved2.filter((value) => object2(value) && value.uid === context.uid && value.ref === context.ref);
+      const matches = saved2.filter((value) => object3(value) && value.uid === context.uid && value.ref === context.ref);
       if (matches.length > 1) throw Error("Duplicate saved references need review in Saved before editing a note here.");
       item = matches[0] ?? null;
       if (item) bookmarkShape(item);
@@ -23918,12 +23944,12 @@
     return stored.length > 0 || draft.length > 0;
   }
   function passageNoteTransaction(saved2, drafts, context, operation) {
-    if (!(drafts instanceof Map) || !object2(operation) || Object.keys(operation).some((key5) => !["type", "note", "confirmed", "mode"].includes(key5)) || !["ensure", "save", "remove"].includes(operation.type) || own3(operation, "mode") && !["reading", "saved"].includes(operation.mode)) throw Error("Unsupported personal-note change.");
+    if (!(drafts instanceof Map) || !object3(operation) || Object.keys(operation).some((key5) => !["type", "note", "confirmed", "mode"].includes(key5)) || !["ensure", "save", "remove"].includes(operation.type) || own3(operation, "mode") && !["reading", "saved"].includes(operation.mode)) throw Error("Unsupported personal-note change.");
     let state;
     if (operation.mode === "saved") {
-      if (!Array.isArray(saved2) || !object2(context) || Object.keys(context).some((key5) => !["uid", "ref"].includes(key5)) || operation.type === "ensure") throw Error("Saved note edits require an exact existing bookmark identity.");
+      if (!Array.isArray(saved2) || !object3(context) || Object.keys(context).some((key5) => !["uid", "ref"].includes(key5)) || operation.type === "ensure") throw Error("Saved note edits require an exact existing bookmark identity.");
       parseBookmarks(JSON.stringify({ format: "pali-library-v1", saved: [{ ...context, title: "Personal bookmark", note: "" }] }));
-      const matches = saved2.filter((item) => object2(item) && item.uid === context.uid && item.ref === context.ref);
+      const matches = saved2.filter((item) => object3(item) && item.uid === context.uid && item.ref === context.ref);
       if (matches.length !== 1) throw Error("Saved note edits require one exact existing bookmark.");
       state = { eligible: true, key: passageNoteKey(context), item: clone(matches[0]) };
     } else state = passageNoteState(saved2, context);
@@ -23943,7 +23969,7 @@
     const before = { saved: clone(saved2), drafts: clone(drafts) };
     if (operation.type === "save") before.drafts.set(key4, note2);
     const result = { saved: clone(saved2), drafts: clone(drafts), before, item: null, removed: operation.type === "remove" };
-    const index = result.saved.findIndex((item) => object2(item) && item.uid === context.uid && item.ref === context.ref);
+    const index = result.saved.findIndex((item) => object3(item) && item.uid === context.uid && item.ref === context.ref);
     if (operation.type === "remove") result.saved.splice(index, 1);
     else {
       const item = state.item ?? createPassageBookmark(context);
@@ -23956,15 +23982,15 @@
     return result;
   }
   function restorePassageNoteTransaction(transaction) {
-    if (!object2(transaction?.before) || !Array.isArray(transaction.before.saved) || !(transaction.before.drafts instanceof Map)) throw Error("No personal-note transaction snapshot is available.");
+    if (!object3(transaction?.before) || !Array.isArray(transaction.before.saved) || !(transaction.before.drafts instanceof Map)) throw Error("No personal-note transaction snapshot is available.");
     return clone(transaction.before);
   }
 
   // web/note-draft-recovery.mjs
   var MAX_NOTE_DRAFT_BYTES = MAX_IMPORT_BYTES;
   var own4 = (value, key4) => Object.hasOwn(value, key4);
-  var object3 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
-  var exactKeys = (value, keys2) => object3(value) && Object.keys(value).sort().join(",") === [...keys2].sort().join(",");
+  var object4 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var exactKeys = (value, keys2) => object4(value) && Object.keys(value).sort().join(",") === [...keys2].sort().join(",");
   var fields = ["uid", "ref", "title", "note", "offset", "source_commit"];
   var cloneBookmark = (value) => Object.fromEntries(fields.filter((key4) => own4(value, key4)).map((key4) => [key4, value[key4]]));
   var cloneEntry = (entry3) => ({ bookmark: cloneBookmark(entry3.bookmark), draft: entry3.draft });
@@ -23974,7 +24000,7 @@
   };
   var draftText = (value) => typeof value === "string" && value.length <= 4e3;
   function bookmark(value) {
-    if (!object3(value) || ["uid", "ref", "title"].some((key4) => !own4(value, key4)) || Object.keys(value).some((key4) => !fields.includes(key4)) || own4(value, "note") && typeof value.note !== "string" || own4(value, "offset") && !Number.isSafeInteger(value.offset) || own4(value, "source_commit") && typeof value.source_commit !== "string") failure();
+    if (!object4(value) || ["uid", "ref", "title"].some((key4) => !own4(value, key4)) || Object.keys(value).some((key4) => !fields.includes(key4)) || own4(value, "note") && typeof value.note !== "string" || own4(value, "offset") && !Number.isSafeInteger(value.offset) || own4(value, "source_commit") && typeof value.source_commit !== "string") failure();
     try {
       parseBookmarks(JSON.stringify({ format: "pali-library-v1", saved: [value] }));
     } catch {
@@ -24038,7 +24064,7 @@
     if (!Array.isArray(saved2) || !(currentDrafts instanceof Map) || [...currentDrafts].some(([key4, draft]) => typeof key4 !== "string" || !draftText(draft))) failure();
     const drafts = new Map(currentDrafts), restored = [], pending = [], settled = [];
     for (const item of value) {
-      const matches = saved2.filter((mark) => object3(mark) && mark.uid === item.bookmark.uid && mark.ref === item.bookmark.ref);
+      const matches = saved2.filter((mark) => object4(mark) && mark.uid === item.bookmark.uid && mark.ref === item.bookmark.ref);
       let reason2;
       if (matches.length === 0) reason2 = "missing-bookmark";
       else if (matches.length !== 1) reason2 = "ambiguous-bookmark";
@@ -24842,8 +24868,8 @@
   // web/progress-import.mjs
   var MAX_PROGRESS_BYTES = 16 * 1024 * 1024;
   var MAX_PROGRESS_MARKS = 1600;
-  var object4 = (x) => x && typeof x === "object" && !Array.isArray(x);
-  var exact = (x, keys2) => object4(x) && Object.keys(x).length === keys2.length && keys2.every((k) => Object.hasOwn(x, k));
+  var object5 = (x) => x && typeof x === "object" && !Array.isArray(x);
+  var exact = (x, keys2) => object5(x) && Object.keys(x).length === keys2.length && keys2.every((k) => Object.hasOwn(x, k));
   var integer3 = (x, min, max) => Number.isSafeInteger(x) && x >= min && x <= max;
   var key = (x) => x.name + ":" + x.day;
   function parseProgressMetadata(text11) {
@@ -25080,7 +25106,7 @@
   var fail3 = () => {
     throw Error("The English source catalogue does not match this selection. No filter or source was substituted.");
   };
-  var object5 = (x) => x !== null && typeof x === "object" && !Array.isArray(x);
+  var object6 = (x) => x !== null && typeof x === "object" && !Array.isArray(x);
   var text3 = (x) => typeof x === "string" && x.trim().length > 0 && x.length <= 2e3;
   var count = (x) => Number.isSafeInteger(x) && x >= 0;
   var id = (x) => typeof x === "string" && /^[a-z][a-z0-9.-]{0,199}$/.test(x);
@@ -25112,10 +25138,10 @@
     return [...item.english_available ? ["Whole-unit or chapter link"] : [], ...partial && shared ? ["Partial and shared sources \xB7 review required"] : partial ? ["Partial source \xB7 review required"] : shared ? ["Shared page \xB7 review required"] : [], ...!item.english_available && !partial && !shared ? ["No indexed English link"] : []];
   }
   function englishCatalogue(data, selection5) {
-    if (!object5(data) || data.catalogue !== true || data.node !== "english" || data.name !== "Find English sources" || data.availability !== selection5.availability || data.collection !== selection5.collection || data.offset !== selection5.offset || data.limit !== selection5.limit || !count(data.total) || !text3(data.note) || !Array.isArray(data.collections) || data.collections.length > 100 || !Array.isArray(data.items) || data.items.length > selection5.limit) fail3();
+    if (!object6(data) || data.catalogue !== true || data.node !== "english" || data.name !== "Find English sources" || data.availability !== selection5.availability || data.collection !== selection5.collection || data.offset !== selection5.offset || data.limit !== selection5.limit || !count(data.total) || !text3(data.note) || !Array.isArray(data.collections) || data.collections.length > 100 || !Array.isArray(data.items) || data.items.length > selection5.limit) fail3();
     const collections = /* @__PURE__ */ new Set();
     for (const c of data.collections) {
-      if (!object5(c) || !collectionId(c.id) || collections.has(c.id) || !text3(c.name)) fail3();
+      if (!object6(c) || !collectionId(c.id) || collections.has(c.id) || !text3(c.name)) fail3();
       collections.add(c.id);
     }
     if (!collections.size || selection5.collection !== null && !collections.has(selection5.collection)) fail3();
@@ -25123,15 +25149,15 @@
     if (data.items.length !== expected || data.next_offset !== (selection5.offset + selection5.limit < data.total ? selection5.offset + selection5.limit : null)) fail3();
     const seen = /* @__PURE__ */ new Set();
     for (const item of data.items) {
-      if (!object5(item) || !id(item.id) || seen.has(item.id) || !text3(item.citation) || !text3(item.title) || !text3(item.collection) || !collections.has(item.collection_id) || !belongs(item.id, item.collection_id) || selection5.collection !== null && item.collection_id !== selection5.collection || item.approximate || item.kind === "range" || !count(item.english_available)) fail3();
+      if (!object6(item) || !id(item.id) || seen.has(item.id) || !text3(item.citation) || !text3(item.title) || !text3(item.collection) || !collections.has(item.collection_id) || !belongs(item.id, item.collection_id) || selection5.collection !== null && item.collection_id !== selection5.collection || item.approximate || item.kind === "range" || !count(item.english_available)) fail3();
       for (const k of ["partial_english_available", "shared_english_available"]) if (Object.hasOwn(item, k) && !count(item[k])) fail3();
       const cmd = item.read_with;
-      if (!object5(cmd) || Object.keys(cmd).sort().join(",") !== "tool,uid" || cmd.tool !== "get_text" || cmd.uid !== item.id) fail3();
+      if (!object6(cmd) || Object.keys(cmd).sort().join(",") !== "tool,uid" || cmd.tool !== "get_text" || cmd.uid !== item.id) fail3();
       const whole = item.english_available > 0, scoped = (item.partial_english_available || 0) + (item.shared_english_available || 0) > 0;
       if (selection5.availability === "linked" && !whole && !scoped || selection5.availability === "whole" && !whole || selection5.availability === "scoped" && (whole || !scoped) || selection5.availability === "none" && (whole || scoped)) fail3();
       if (Object.hasOwn(item, "source_context")) {
         const context = item.source_context;
-        if (!object5(context) || Object.keys(context).sort().join(",") !== "citation,id,kind,title" || context.kind !== "containing_group" || !id(context.id) || !belongs(context.id, item.collection_id) || context.id === item.id || !text3(context.citation) || !text3(context.title) || !whole) fail3();
+        if (!object6(context) || Object.keys(context).sort().join(",") !== "citation,id,kind,title" || context.kind !== "containing_group" || !id(context.id) || !belongs(context.id, item.collection_id) || context.id === item.id || !text3(context.citation) || !text3(context.title) || !whole) fail3();
       }
       seen.add(item.id);
     }
@@ -25139,7 +25165,7 @@
   }
 
   // web/translation-comparison.mjs
-  var object6 = (x) => x !== null && typeof x === "object" && !Array.isArray(x);
+  var object7 = (x) => x !== null && typeof x === "object" && !Array.isArray(x);
   var own6 = (x, key4) => Object.hasOwn(x, key4);
   var text4 = (x) => typeof x === "string" && x.trim().length > 0;
   var uid = (x) => typeof x === "string" && x.trim() === x && /^[a-z][a-z0-9.-]{0,199}$/.test(x);
@@ -25153,7 +25179,7 @@
     if (!uid(requestedId) || !Array.isArray(choices)) failure2();
     const seen = /* @__PURE__ */ new Set(), ordinary = [];
     for (const choice of choices) {
-      if (!object6(choice)) failure2();
+      if (!object7(choice)) failure2();
       if (text4(choice.translation_id)) {
         if (seen.has(choice.translation_id)) failure2();
         seen.add(choice.translation_id);
@@ -25173,22 +25199,22 @@
   }
   var requestKeys = /* @__PURE__ */ new Set(["uid", "translation", "offset", "limit", "prefix_sha256", "translation_revision"]);
   function request(args, requestedId, choice, expectedLimit) {
-    if (!object6(args) || Object.keys(args).some((key4) => !requestKeys.has(key4)) || args.uid !== requestedId || (apadanaFamily(choice.translation_id) ? args.translation_revision !== choice.translation_revision : own6(args, "translation_revision")) || args.translation !== choice.translation_id || !sourceId(args.translation) || !Number.isSafeInteger(args.limit) || args.limit < 500 || args.limit > 3e4 || expectedLimit !== void 0 && args.limit !== expectedLimit) failure2();
+    if (!object7(args) || Object.keys(args).some((key4) => !requestKeys.has(key4)) || args.uid !== requestedId || (apadanaFamily(choice.translation_id) ? args.translation_revision !== choice.translation_revision : own6(args, "translation_revision")) || args.translation !== choice.translation_id || !sourceId(args.translation) || !Number.isSafeInteger(args.limit) || args.limit < 500 || args.limit > 3e4 || expectedLimit !== void 0 && args.limit !== expectedLimit) failure2();
     const offset = own6(args, "offset") ? args.offset : 0;
     if (!Number.isSafeInteger(offset) || offset < 0 || offset > 2e6 || offset === 0 && own6(args, "prefix_sha256") || offset > 0 && !sha2(args.prefix_sha256)) failure2();
     return offset;
   }
   function validateComparisonPage(data, args, context) {
-    if (!object6(context) || !uid(context.uid) || context.accepted != null) failure2();
+    if (!object7(context) || !uid(context.uid) || context.accepted != null) failure2();
     const ordinary = comparisonChoices(context.choices, context.uid);
     const choice = ordinary.find((choice2) => choice2.translation_id === args?.translation);
     if (!choice) failure2();
     const offset = request(args, context.uid, choice);
-    if (!object6(data) || data.translation_id !== args.translation) throw Error("A different English source was returned for this comparison column. No translation was displayed.");
+    if (!object7(data) || data.translation_id !== args.translation) throw Error("A different English source was returned for this comparison column. No translation was displayed.");
     if (data.translator !== choice.translator || data.limit !== args.limit || !sha2(data.prefix_sha256) || offset > 0 && data.prefix_sha256 !== args.prefix_sha256 || "translation_scope" in data || data.whole_unit_coverage === false || typeof data.text !== "string" || data.text.length > args.limit || offset + data.text.length > 2e6 || !own6(data, "next_offset") || data.next_offset !== null && !Number.isSafeInteger(data.next_offset)) failure2();
     const next = validateEnglishPage(data, args, { uid: context.uid, choices: [choice], accepted: null });
     if (next === null) return null;
-    if (!object6(data.continue_with) || Object.keys(data.continue_with).sort().join(",") !== "arguments,name") failure2();
+    if (!object7(data.continue_with) || Object.keys(data.continue_with).sort().join(",") !== "arguments,name") failure2();
     const nextOffset = request(next, context.uid, choice, args.limit);
     if (data.text.length !== args.limit || nextOffset !== offset + data.text.length) failure2();
     return clone2(next);
@@ -25206,24 +25232,24 @@
   }
 
   // web/reading-chapters.mjs
-  var object7 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var object8 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   var own7 = (value, key4) => Object.hasOwn(value, key4);
   var text5 = (value, max = 1e3) => typeof value === "string" && value.trim().length > 0 && value.length <= max;
   var id2 = (value) => typeof value === "string" && /^[a-z][a-z0-9-]{0,99}$/.test(value);
-  var exact2 = (value, keys2) => object7(value) && Object.keys(value).length === keys2.length && keys2.every((key4) => own7(value, key4));
-  var chapterRow = (value) => object7(value) && own7(value, "citation") && own7(value, "title") && Object.keys(value).every((key4) => ["citation", "title", "title_roman"].includes(key4)) && text5(value.citation, 200) && text5(value.title) && (!own7(value, "title_roman") || text5(value.title_roman));
+  var exact2 = (value, keys2) => object8(value) && Object.keys(value).length === keys2.length && keys2.every((key4) => own7(value, key4));
+  var chapterRow = (value) => object8(value) && own7(value, "citation") && own7(value, "title") && Object.keys(value).every((key4) => ["citation", "title", "title_roman"].includes(key4)) && text5(value.citation, 200) && text5(value.title) && (!own7(value, "title_roman") || text5(value.title_roman));
   var clone3 = (value) => JSON.parse(JSON.stringify(value));
   var fail4 = () => {
     throw Error("Chapter navigation metadata is unavailable or does not match this source. The loaded passage was not replaced.");
   };
   function revision3(data) {
-    if (data?.canonical !== false || !text5(data.label, 4e3) || !object7(data.book) || !id2(data.book.id) || data.book.canonical !== false || !text5(data.book.title) || !text5(data.citation, 200) || !object7(data.source) || data.source.name !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI): \u1E6C\u012Bk\u0101 and A\xF1\xF1a (post-canonical) books" || data.source.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text5(data.source.attribution, 1e4) || !text5(data.source.terms, 1e4) || typeof data.source.commit !== "string" || sourceRevision({ source: { commit: data.source.commit } }) !== data.source.commit) fail4();
+    if (data?.canonical !== false || !text5(data.label, 4e3) || !object8(data.book) || !id2(data.book.id) || data.book.canonical !== false || !text5(data.book.title) || !text5(data.citation, 200) || !object8(data.source) || data.source.name !== "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI): \u1E6C\u012Bk\u0101 and A\xF1\xF1a (post-canonical) books" || data.source.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text5(data.source.attribution, 1e4) || !text5(data.source.terms, 1e4) || typeof data.source.commit !== "string" || sourceRevision({ source: { commit: data.source.commit } }) !== data.source.commit) fail4();
     const value = sourceRevision(data);
     if (typeof value !== "string") fail4();
     return value;
   }
   function validateChapterIndex(data) {
-    if (!object7(data) || !own7(data, "chapter_index")) return null;
+    if (!object8(data) || !own7(data, "chapter_index")) return null;
     const pin = revision3(data), index = data.chapter_index, command6 = index?.read_with;
     if (!exact2(index, ["scope", "read_with"]) || !["work", "source_file"].includes(index.scope) || !exact2(command6, ["tool", "citation", "offset", "limit"]) || command6.tool !== "get_post_canonical" || !text5(command6.citation, 200) || command6.offset !== 0 || command6.limit !== 1) fail4();
     if (index.scope === "source_file") {
@@ -25255,7 +25281,7 @@
     return { scope: selected.scope, read_with: { ...selected.read_with }, revision: parent.revision, book_id: parent.book_id, citation: root.citation, title: root.title, label: root.label, source: clone3(root.source), chapters: root.chapters.map((row) => ({ ...row })) };
   }
   function chapterLink(row, menu) {
-    if (!object7(menu) || !chapterRow(row)) fail4();
+    if (!object8(menu) || !chapterRow(row)) fail4();
     const root = { canonical: false, label: menu.label, book: { id: menu.book_id, title: menu.title, canonical: false }, citation: menu.citation, title: menu.title, source: menu.source, chapters: menu.chapters, chapter_index: { scope: menu.scope, read_with: menu.read_with } };
     const checked = validateChapterMenu(root, root);
     if (checked.revision !== menu.revision || !checked.chapters.some((item) => item.citation === row.citation && item.title === row.title && own7(item, "title_roman") === own7(row, "title_roman") && item.title_roman === row.title_roman)) fail4();
@@ -25276,7 +25302,7 @@
     "Abhidhammatthasa\u1E45gaha, a post-canonical Abhidhamma manual traditionally attributed to \u0100cariya Anuruddha. Not the canon. " + tika
   ]);
   function readingIntro(data, kind) {
-    if (!object7(data)) fail4();
+    if (!object8(data)) fail4();
     const critical = { ...data }, context = [];
     let status3 = null;
     if (kind === "book" && data.selection === "source_book" && data.canonical === true && Array.isArray(data.notes)) {
@@ -26094,9 +26120,9 @@
   var hasSearchPhrase = (query) => /"[^"]+"|“[^”]+”/u.test(query);
 
   // web/canonical-search.mjs
-  var object8 = (x) => x !== null && typeof x === "object" && !Array.isArray(x);
+  var object9 = (x) => x !== null && typeof x === "object" && !Array.isArray(x);
   var own8 = (x, k) => Object.hasOwn(x, k);
-  var keysOnly = (x, keys2) => object8(x) && Object.keys(x).every((k) => keys2.includes(k));
+  var keysOnly = (x, keys2) => object9(x) && Object.keys(x).every((k) => keys2.includes(k));
   var text6 = (x, max = 1e4) => typeof x === "string" && x.trim().length > 0 && x.length <= max && !/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(x);
   var integer5 = (x, low = 0, high = 1e6) => Number.isSafeInteger(x) && x >= low && x <= high;
   var fail5 = () => {
@@ -26139,7 +26165,7 @@
     }
   }
   function identity2(hit4) {
-    if (!object8(hit4) || !text6(hit4.id, 200) || !text6(hit4.citation, 300) || !text6(hit4.title, 1e3) || !text6(hit4.collection, 200)) fail5();
+    if (!object9(hit4) || !text6(hit4.id, 200) || !text6(hit4.citation, 300) || !text6(hit4.title, 1e3) || !text6(hit4.collection, 200)) fail5();
     let id5;
     try {
       const parsed = parseCitation(hit4.citation);
@@ -26171,7 +26197,7 @@
       command2(hit4.context_with, hit4, selected.script, true, true);
     } else if (own8(hit4, "segment_ref") || own8(hit4, "excerpt") || own8(hit4, "context_with")) fail5();
     if (own8(hit4, "approximate") && typeof hit4.approximate !== "boolean") fail5();
-    if (own8(hit4, "alignment") && (!object8(hit4.alignment) || !text6(hit4.alignment.note))) fail5();
+    if (own8(hit4, "alignment") && (!object9(hit4.alignment) || !text6(hit4.alignment.note))) fail5();
     for (const key4 of ["english_available", "partial_english_available", "shared_english_available"]) if (own8(hit4, key4) && !integer5(hit4[key4])) fail5();
   }
   function stream(items, total, next, data, selected, body) {
@@ -26191,7 +26217,7 @@
     const allowed = input.source_phrase ? [base] : [base, base.normalize("NFC"), foldNiggahita(base.normalize("NFC"))];
     if (own8(data, "input_normalised")) {
       const value = data.input_normalised;
-      if (!object8(value) || value.original !== base || !text6(value.read_as, 300) || !text6(value.note) || !Array.isArray(value.changes) || !integer5(value.changes.length, 1, 500)) fail5();
+      if (!object9(value) || value.original !== base || !text6(value.read_as, 300) || !text6(value.note) || !Array.isArray(value.changes) || !integer5(value.changes.length, 1, 500)) fail5();
       allowed.push(value.read_as);
     }
     if (!allowed.includes(data.query)) fail5();
@@ -26199,7 +26225,7 @@
   }
   function validateCanonicalSearch(data, selected) {
     selection(selected);
-    if (!object8(data) || !keysOnly(data.selection, Object.keys(selected)) || Object.keys(data.selection).length !== 7 || Object.keys(selected).some((k) => data.selection[k] !== selected[k]) || !text6(data.query, 300) || !text6(data.searched) || data.offset !== selected.offset || data.limit !== selected.limit || own8(data, "post_canonical") || own8(data, "canonical") && data.canonical !== true || ["scope_resolution", "scope_alignment", "scope_source_span"].some((key4) => own8(data, key4))) fail5();
+    if (!object9(data) || !keysOnly(data.selection, Object.keys(selected)) || Object.keys(data.selection).length !== 7 || Object.keys(selected).some((k) => data.selection[k] !== selected[k]) || !text6(data.query, 300) || !text6(data.searched) || data.offset !== selected.offset || data.limit !== selected.limit || own8(data, "post_canonical") || own8(data, "canonical") && data.canonical !== true || ["scope_resolution", "scope_alignment", "scope_source_span"].some((key4) => own8(data, key4))) fail5();
     source2(data.source);
     stream(data.title_matches, data.total_title_matches, data.title_next_offset, data, selected, false);
     stream(data.results, data.total_texts_matched, data.next_offset, data, selected, true);
@@ -26207,9 +26233,9 @@
     for (const key4 of ["script_note", "query_note", "spelling_note", "input_romanized", "tip"]) if (own8(data, key4) && data[key4] !== void 0 && !text6(data[key4])) fail5();
     if (own8(data, "input_script") && !SCRIPTS.includes(data.input_script) || own8(data, "input_script") !== own8(data, "input_romanized")) fail5();
     if (own8(data, "query_mode") && !["source_phrase", "as_typed_phrase"].includes(data.query_mode)) fail5();
-    if (own8(data, "input_normalised") && !(object8(data.input_normalised) && text6(data.input_normalised.note))) fail5();
+    if (own8(data, "input_normalised") && !(object9(data.input_normalised) && text6(data.input_normalised.note))) fail5();
     if (own8(data, "notes") && (!Array.isArray(data.notes) || data.notes.length > 100 || data.notes.some((x) => !text6(x)))) fail5();
-    for (const key4 of ["expanded_from_english", "english_words_ignored"]) if (own8(data, key4) && (!object8(data[key4]) || !text6(data[key4].note))) fail5();
+    for (const key4 of ["expanded_from_english", "english_words_ignored"]) if (own8(data, key4) && (!object9(data[key4]) || !text6(data[key4].note))) fail5();
     queryProvenance(data, selected);
     const result = { query: data.query, searched: data.searched, selection: { ...selected }, source: { ...data.source }, offset: data.offset, limit: data.limit, total_title_matches: data.total_title_matches, total_texts_matched: data.total_texts_matched, title_next_offset: data.title_next_offset, next_offset: data.next_offset, title_matches: data.title_matches.map((x) => cloneHit(x)), results: data.results.map((x) => cloneHit(x)) };
     for (const key4 of ["script", "script_note", "query_mode", "query_note", "spelling_note", "input_script", "input_romanized", "input_normalised", "notes", "expanded_from_english", "english_words_ignored"]) if (own8(data, key4)) result[key4] = JSON.parse(JSON.stringify(data[key4]));
@@ -26226,14 +26252,14 @@
   }
 
   // web/book-search.mjs
-  var object9 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var object10 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   var own9 = (value, key4) => Object.hasOwn(value, key4);
   var integer6 = (value, min, max) => Number.isSafeInteger(value) && value >= min && value <= max;
   var text7 = (value, max = 4e3) => typeof value === "string" && value.trim().length > 0 && value.length <= max;
   var bookId = (value) => typeof value === "string" && value.length <= 100 && /^(?:vin[0-9]{2}m[0-9]*|s[0-9]{4}m[0-9]*(?:\.nrf\.xml)?|abh[0-9]{2}m[0-9]*)$/.test(value);
   var fileFor = (book2) => book2.endsWith(".nrf.xml") ? book2 : book2 + ".mul.xml";
   var scripts = /* @__PURE__ */ new Set(["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"]);
-  var keysOnly2 = (value, keys2) => object9(value) && Object.keys(value).every((key4) => keys2.includes(key4));
+  var keysOnly2 = (value, keys2) => object10(value) && Object.keys(value).every((key4) => keys2.includes(key4));
   var fail6 = () => {
     throw Error("The complete source-book search does not match this selection. No source or reading position was substituted.");
   };
@@ -26272,11 +26298,11 @@
   }
   function bookSearchCatalogue(data, selected) {
     selection2(selected);
-    if (selected.query || selected.headings_only || !object9(data) || data.node !== "books" || data.name !== "Complete VRI source books" || !integer6(data.total, 1, 200) || data.offset !== 0 || data.limit !== 200 || data.next_offset !== null || !Array.isArray(data.items) || data.items.length !== data.total || !text7(data.note)) fail6();
+    if (selected.query || selected.headings_only || !object10(data) || data.node !== "books" || data.name !== "Complete VRI source books" || !integer6(data.total, 1, 200) || data.offset !== 0 || data.limit !== 200 || data.next_offset !== null || !Array.isArray(data.items) || data.items.length !== data.total || !text7(data.note)) fail6();
     const seen = /* @__PURE__ */ new Set();
     let result;
     for (const item of data.items) {
-      if (!object9(item) || !bookId(item.id) || seen.has(item.id) || !text7(item.title, 1e3) || !text7(item.collection, 30) || !["vinaya", "sutta", "abhidhamma"].includes(item.pitaka) || item.vri_file !== fileFor(item.id) || !keysOnly2(item.read_with, ["tool", "book"]) || Object.keys(item.read_with).length !== 2 || item.read_with.tool !== "get_text" || item.read_with.book !== item.id) fail6();
+      if (!object10(item) || !bookId(item.id) || seen.has(item.id) || !text7(item.title, 1e3) || !text7(item.collection, 30) || !["vinaya", "sutta", "abhidhamma"].includes(item.pitaka) || item.vri_file !== fileFor(item.id) || !keysOnly2(item.read_with, ["tool", "book"]) || Object.keys(item.read_with).length !== 2 || item.read_with.tool !== "get_text" || item.read_with.book !== item.id) fail6();
       seen.add(item.id);
       if (item.id === selected.book) result = item;
     }
@@ -26347,7 +26373,7 @@
     if (own9(data, "input_script") && !scripts.has(data.input_script)) fail6();
     if (own9(data, "query_mode") && !["source_phrase", "as_typed_phrase"].includes(data.query_mode)) fail6();
     if (own9(data, "notes") && (!Array.isArray(data.notes) || data.notes.length > 50 || data.notes.some((value) => !text7(value, 1e4)))) fail6();
-    if (own9(data, "input_normalised") && !object9(data.input_normalised)) fail6();
+    if (own9(data, "input_normalised") && !object10(data.input_normalised)) fail6();
     queryProvenance2(data, selected);
     const seen = /* @__PURE__ */ new Set();
     let previous = 0;
@@ -26369,9 +26395,9 @@
   }
 
   // web/commentary-search.mjs
-  var object10 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var object11 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   var own10 = (value, key4) => Object.hasOwn(value, key4);
-  var keysOnly3 = (value, keys2) => object10(value) && Object.keys(value).every((key4) => keys2.includes(key4));
+  var keysOnly3 = (value, keys2) => object11(value) && Object.keys(value).every((key4) => keys2.includes(key4));
   var integer7 = (value, min, max) => Number.isSafeInteger(value) && value >= min && value <= max;
   var text8 = (value, max = 1e4) => typeof value === "string" && value.trim().length > 0 && value.length <= max;
   var scripts2 = /* @__PURE__ */ new Set(["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"]);
@@ -26384,7 +26410,7 @@
     throw Error("The commentary search or surrounding context does not match this selection. No source or reading position was substituted.");
   };
   var clone4 = (value) => JSON.parse(JSON.stringify(value));
-  var equal = (a, b) => object10(a) && object10(b) && Object.keys(a).length === Object.keys(b).length && Object.keys(a).every((key4) => own10(b, key4) && a[key4] === b[key4]);
+  var equal = (a, b) => object11(a) && object11(b) && Object.keys(a).length === Object.keys(b).length && Object.keys(a).every((key4) => own10(b, key4) && a[key4] === b[key4]);
   function changed() {
     const error = Error("The commentary source changed since this search was opened. Run the search again to review the current source; no replacement context was displayed.");
     error.code = "READING_SOURCE_CHANGED";
@@ -26496,15 +26522,15 @@
   }
 
   // web/post-search.mjs
-  var object11 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var object12 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   var own11 = (value, key4) => Object.hasOwn(value, key4);
-  var keysOnly4 = (value, keys2) => object11(value) && Object.keys(value).every((key4) => keys2.includes(key4));
+  var keysOnly4 = (value, keys2) => object12(value) && Object.keys(value).every((key4) => keys2.includes(key4));
   var integer8 = (value, min, max) => Number.isSafeInteger(value) && value >= min && value <= max;
   var text9 = (value, max = 1e4) => typeof value === "string" && value.trim().length > 0 && value.length <= max && !/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(value);
   var id3 = (value) => typeof value === "string" && /^[a-z][a-z0-9-]{0,99}$/.test(value);
   var scripts3 = /* @__PURE__ */ new Set(["roman", "sinhala", "thai", "myanmar", "devanagari", "khmer", "lao", "lanna"]);
   var clone5 = (value) => JSON.parse(JSON.stringify(value));
-  var equal2 = (a, b) => object11(a) && object11(b) && Object.keys(a).length === Object.keys(b).length && Object.keys(a).every((key4) => own11(b, key4) && a[key4] === b[key4]);
+  var equal2 = (a, b) => object12(a) && object12(b) && Object.keys(a).length === Object.keys(b).length && Object.keys(a).every((key4) => own11(b, key4) && a[key4] === b[key4]);
   var fail8 = () => {
     throw Error("The post-canonical search or surrounding context does not match this selection. No source or reading position was substituted.");
   };
@@ -26673,7 +26699,7 @@
   }
 
   // web/citation-resolution.mjs
-  var object12 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var object13 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   var own12 = (value, key4) => Object.hasOwn(value, key4);
   var text10 = (value, max = 1e3) => typeof value === "string" && value.trim().length > 0 && value.length <= max && !/[\u0000-\u001f\u007f<>]/.test(value);
   var id4 = (value) => typeof value === "string" && /^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$/.test(value) && value.length <= 200;
@@ -26705,7 +26731,7 @@
   function source6(data, post) {
     const value = data.source;
     const name = post ? "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI): \u1E6C\u012Bk\u0101 and A\xF1\xF1a (post-canonical) books" : "Cha\u1E6D\u1E6Dha Sa\u1E45g\u0101yana Tipi\u1E6Daka (VRI)";
-    if (!object12(value) || value.name !== name || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text10(value.commit, 100) || !text10(value.attribution, 1e4) || !text10(value.terms, 1e4)) fail9();
+    if (!object13(value) || value.name !== name || value.repository !== "https://github.com/VipassanaTech/tipitaka-xml" || !text10(value.commit, 100) || !text10(value.attribution, 1e4) || !text10(value.terms, 1e4)) fail9();
     try {
       sourceRevision({ source: { commit: value.commit } });
       sourceRevision(data);
@@ -26719,19 +26745,19 @@
     if (!Array.isArray(data[key4]) || data[key4].length > 100) fail9();
     const seen = /* @__PURE__ */ new Set();
     return data[key4].map((row) => {
-      if (!object12(row) || !canonicalIdentity(row) || !text10(row.title) || seen.has(row.id) || own12(row, "canonical") && row.canonical !== true || own12(row, "read_with")) fail9();
+      if (!object13(row) || !canonicalIdentity(row) || !text10(row.title) || seen.has(row.id) || own12(row, "canonical") && row.canonical !== true || own12(row, "read_with")) fail9();
       seen.add(row.id);
       if (own12(row, "matched_name") && !text10(row.matched_name) || own12(row, "title_roman") && !text10(row.title_roman)) fail9();
       return { id: row.id, citation: row.citation, title: row.title, ...own12(row, "matched_name") ? { matched_name: row.matched_name } : {}, ...own12(row, "title_roman") ? { title_roman: row.title_roman } : {}, href: "#read?" + new URLSearchParams({ uid: row.id }) };
     });
   }
   function validateCitationResolution(data, script = "roman") {
-    if (!SCRIPTS.includes(script) || !object12(data) || !citation(data.citation) || !text10(data.title) || !Array.isArray(data.notes) || data.notes.length > 100 || data.notes.some((note2) => !text10(note2, 1e4)) || own12(data, "approximate") && typeof data.approximate !== "boolean" || own12(data, "canonical") && ![true, false].includes(data.canonical)) fail9();
+    if (!SCRIPTS.includes(script) || !object13(data) || !citation(data.citation) || !text10(data.title) || !Array.isArray(data.notes) || data.notes.length > 100 || data.notes.some((note2) => !text10(note2, 1e4)) || own12(data, "approximate") && typeof data.approximate !== "boolean" || own12(data, "canonical") && ![true, false].includes(data.canonical)) fail9();
     const post = data.canonical === false;
     let context;
     if (post) {
       const command6 = data.read_with;
-      if (!text10(data.label, 1e4) || !object12(data.book) || data.book.canonical !== false || !id4(data.book.id) || !text10(data.book.title) || !object12(command6) || Object.keys(command6).some((key4) => !["tool", "citation", "script"].includes(key4)) || command6.tool !== "get_post_canonical" || command6.citation !== data.citation || own12(command6, "script") && command6.script !== script || own12(data, "also_named") || own12(data, "also_on_that_page")) fail9();
+      if (!text10(data.label, 1e4) || !object13(data.book) || data.book.canonical !== false || !id4(data.book.id) || !text10(data.book.title) || !object13(command6) || Object.keys(command6).some((key4) => !["tool", "citation", "script"].includes(key4)) || command6.tool !== "get_post_canonical" || command6.citation !== data.citation || own12(command6, "script") && command6.script !== script || own12(data, "also_named") || own12(data, "also_on_that_page")) fail9();
       context = { kind: "post", uid: command6.citation };
     } else {
       if (!canonicalIdentity(data) || own12(data, "read_with") || own12(data, "label") || own12(data, "book")) fail9();
@@ -26746,12 +26772,12 @@
     }
     if (own12(data, "script") && data.script !== script || own12(data, "input_script") && !SCRIPTS.includes(data.input_script) || own12(data, "input_romanized") !== own12(data, "input_script")) fail9();
     if (own12(data, "input_normalised")) {
-      if (!text10(data.input_normalised, 4e3) && !(object12(data.input_normalised) && text10(data.input_normalised.note, 4e3))) fail9();
+      if (!text10(data.input_normalised, 4e3) && !(object13(data.input_normalised) && text10(data.input_normalised.note, 4e3))) fail9();
       checked.input_normalised = typeof data.input_normalised === "string" ? data.input_normalised : data.input_normalised.note;
     }
     if (own12(data, "name_match")) {
       const match = data.name_match;
-      if (!object12(match) || !["query", "matched_name", "via", "match"].every((key4) => text10(match[key4], 1e3))) fail9();
+      if (!object13(match) || !["query", "matched_name", "via", "match"].every((key4) => text10(match[key4], 1e3))) fail9();
       checked.name_match = { query: match.query, matched_name: match.matched_name, via: match.via, match: match.match };
     }
     for (const key4 of ["alignment_note", "alignment_method"]) if (own12(data, key4)) {
@@ -26759,7 +26785,7 @@
       checked[key4] = data[key4];
     }
     if (own12(data, "alignment")) {
-      if (!text10(data.alignment, 4e3) && !object12(data.alignment)) fail9();
+      if (!text10(data.alignment, 4e3) && !object13(data.alignment)) fail9();
       const value = JSON.stringify(data.alignment);
       if (value.length > 1e4) fail9();
       checked.alignment = JSON.parse(value);
@@ -26770,7 +26796,7 @@
   }
 
   // web/backup-note-conflicts.mjs
-  var object13 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var object14 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   var fields2 = /* @__PURE__ */ new Set(["uid", "ref", "title", "note", "offset", "source_commit"]);
   var key2 = (item) => JSON.stringify([item.uid, item.ref]);
   function note(value) {
@@ -26781,7 +26807,7 @@
     if (!Array.isArray(items) || items.length > 500) throw Error("Unsupported saved passages for personal-note conflict review.");
     const result = /* @__PURE__ */ new Map();
     for (const item of items) {
-      if (!object13(item) || typeof item.uid !== "string" || typeof item.ref !== "string") throw Error("Personal-note conflict review needs exact saved identities.");
+      if (!object14(item) || typeof item.uid !== "string" || typeof item.ref !== "string") throw Error("Personal-note conflict review needs exact saved identities.");
       const identity3 = key2(item), matches = result.get(identity3) ?? [];
       matches.push(item);
       result.set(identity3, matches);
@@ -26843,8 +26869,8 @@
   // web/study-backup.mjs
   var MAX_STUDY_BACKUP_BYTES = 32 * 1024 * 1024;
   var FORMAT = "pali-library-study-backup-v1";
-  var object14 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
-  var exact3 = (value, keys2) => object14(value) && Object.keys(value).length === keys2.length && keys2.every((key4) => Object.hasOwn(value, key4));
+  var object15 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  var exact3 = (value, keys2) => object15(value) && Object.keys(value).length === keys2.length && keys2.every((key4) => Object.hasOwn(value, key4));
   var bytes = (text11) => new TextEncoder().encode(text11).length;
   var clone6 = (value) => JSON.parse(JSON.stringify(value));
   var key3 = (item) => JSON.stringify([item.uid, item.ref]);
@@ -26855,7 +26881,7 @@
       for (const item of value) jsonData(item, depth + 1);
       return;
     }
-    if (object14(value) && [Object.prototype, null].includes(Object.getPrototypeOf(value))) {
+    if (object15(value) && [Object.prototype, null].includes(Object.getPrototypeOf(value))) {
       for (const item of Object.values(value)) jsonData(item, depth + 1);
       return;
     }
@@ -26889,7 +26915,7 @@
     return validate(data, true);
   }
   function mergeStudyBackup(current, incoming, catalog, choices) {
-    if (!object14(current) || Object.keys(current).some((field) => !["saved", "progress", "drafts"].includes(field)) || !Array.isArray(current.saved) || !Array.isArray(current.progress) || current.drafts !== void 0 && !(current.drafts instanceof Map)) throw Error("Unsupported current personal-study metadata. Nothing was restored.");
+    if (!object15(current) || Object.keys(current).some((field) => !["saved", "progress", "drafts"].includes(field)) || !Array.isArray(current.saved) || !Array.isArray(current.progress) || current.drafts !== void 0 && !(current.drafts instanceof Map)) throw Error("Unsupported current personal-study metadata. Nothing was restored.");
     const validatedCurrent = createStudyBackup({ saved: current.saved, progress: current.progress, resume: null });
     const validatedIncoming = validate(incoming, true);
     let progress = validatedIncoming.progress;
@@ -27299,18 +27325,7 @@
       if (!response.ok) throw new Error(response.status === 429 ? "Too many requests. Wait a minute, then try again." : "The text service is unavailable. Try again.");
       const rpc = await response.json();
       if (rpc.error) throw new Error(rpc.error.message);
-      const result = rpc.result;
-      if (!result) throw new Error("The text service returned an incomplete response.");
-      const data = result.structuredContent || JSON.parse(result.content?.find((c) => c.type === "text")?.text || "{}");
-      if (result.isError || data.error) {
-        const error = new Error(data.error || "This selection could not be retrieved.");
-        if (["READING_SOURCE_CHANGED", "READING_LOCATOR_AMBIGUOUS"].includes(data.code) && /^#read\?uid=tha-ap10[78]$/.test(data.reopen || "")) {
-          error.code = data.code;
-          error.reopen = data.reopen;
-        }
-        throw error;
-      }
-      return data;
+      return readingToolResult(rpc.result);
     }, { group, label: requestLabel });
   }
   function notes(data, target = view) {

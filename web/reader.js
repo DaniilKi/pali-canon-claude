@@ -1,3 +1,4 @@
+import { readingToolResult } from './tool-result.mjs';
 import { isRepairedApadanaPair } from '../src/locator-policy.mjs';
 import { apadanaEditionNavigation, apadanaEditionLink } from './apadana-edition-navigation.mjs';
 import { parseNoteDraftJournal, stageNoteDraftEntry, removeNoteDraftEntry, reconcileNoteDraftJournal, guardedNoteDraftJournalWrite } from './note-draft-recovery.mjs';
@@ -187,11 +188,7 @@ async function tool(name, args, group = 'page', requestLabel = requestLabels[nam
     if (!response.ok) throw new Error(response.status === 429 ? 'Too many requests. Wait a minute, then try again.' : 'The text service is unavailable. Try again.');
     const rpc = await response.json();
     if (rpc.error) throw new Error(rpc.error.message);
-    const result = rpc.result;
-    if (!result) throw new Error('The text service returned an incomplete response.');
-    const data = result.structuredContent || JSON.parse(result.content?.find(c => c.type === 'text')?.text || '{}');
-    if (result.isError || data.error) { const error = new Error(data.error || 'This selection could not be retrieved.'); if (['READING_SOURCE_CHANGED', 'READING_LOCATOR_AMBIGUOUS'].includes(data.code) && /^#read\?uid=tha-ap10[78]$/.test(data.reopen || '')) { error.code = data.code; error.reopen = data.reopen; } throw error; }
-    return data;
+    return readingToolResult(rpc.result);
   }, { group, label: requestLabel });
 }
 function notes(data, target = view) {

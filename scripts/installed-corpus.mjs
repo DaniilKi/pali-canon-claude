@@ -1,6 +1,21 @@
 // Compare paginated MCP output with the source corpus. Kept separate for negative regression fixtures.
 import assert from 'node:assert/strict';
 
+/** Freshly reopen the finite repaired pair, then pin every audited position.
+ * The raw VRI source commit is provenance; it is not the ownership revision.
+ * No saved citation, note or position is supplied to this auditor discovery read.
+ */
+export async function canonicalReadArguments(call, { uid, id, source }) {
+  const args = { uid };
+  if (!['tha-ap107', 'tha-ap108'].includes(id)) return args;
+  assert.match(source?.commit || '', /^[a-f0-9]{40}$/, 'reviewed canonical source commit');
+  assert.equal(source?.locator_revision, `${source.commit}-apadana-thera105-106-v1`, 'current repaired pair locator revision');
+  const reopened = await call('get_text', { uid, limit: 1 });
+  assert.equal(reopened.text_id, id, 'fresh auditor reopening selected a different canonical owner');
+  assert.deepEqual(reopened.source, source, 'auditor source or mapping differs from the reviewed corpus');
+  return { ...args, source_commit: reopened.source.locator_revision };
+}
+
 export async function checkPages(call, name, args, expected, { metadata = () => {}, limit = 200 } = {}) {
   const segments = JSON.parse(JSON.stringify(expected)); // Compare the actual JSON wire representation.
   let offset = 0;

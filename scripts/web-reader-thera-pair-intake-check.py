@@ -45,6 +45,11 @@ def pair_mcp(rpc, tool, plan, checks):
             assert data['source']['commit'] == VRI and data['source']['locator_revision'] == PIN
         data = tool('get_text',{'uid':uid,'limit':200})
         assert [{**{k:s[k] for k in ('ref','type')},'text_sha256':digest(s['text'])} for s in data['segments']] == [{k:s[k] for k in ('ref','type','text_sha256')} for s in expected]
+        opaque = rpc('get_text',{'uid':uid,'offset':0,'source_commit':'controlled-compat-old-revision'})
+        assert opaque.get('isError')
+        opaque_data = opaque.get('structuredContent') or json.loads(opaque['content'][0]['text'])
+        assert opaque_data.get('code') == 'READING_SOURCE_CHANGED' and opaque_data['reopen'] == '#read?uid='+uid
+        assert opaque_data['error'] == 'The source or citation mapping revision changed. Reopen the whole current text explicitly and compare its source positions; no replacement wording was displayed and no saved reference or note was moved.'
         for old in row['old_segments']:
             for selection in ({'uid':uid,'offset':old['offset']}, {'uid':uid,'offset':old['offset'],'source_commit':VRI}):
                 assert rpc('get_text',selection).get('isError'), 'Old/unversioned offset accepted'
@@ -178,6 +183,15 @@ def pair_browser(args,base,metadata,checks,scans):
                     page.add_script_tag(path=str(ROOT/'node_modules/axe-core/axe.min.js'))
                     result = page.evaluate("async()=>await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})")
                     scans.append({'width':width,'state':'pair explicit reopen '+item['uid'],'violations':[v['id'] for v in result['violations']]})
+            before_opaque = page.evaluate("sessionStorage.getItem('pali-library-note-drafts-v1')")
+            page.goto(base+'/#read?uid=tha-ap108&ref=tha-ap108%2F2&offset=1&source=controlled-compat-old-revision')
+            expect(page.get_by_role('heading',name='No passage was substituted.',exact=True)).to_be_visible()
+            expect(page.locator('#content .notice')).to_have_text('The source or citation mapping revision changed. Reopen the whole current text explicitly and compare its source positions; no replacement wording was displayed and no saved reference or note was moved.')
+            expect(page.locator('.passage')).to_have_count(0)
+            expect(page.locator('#content textarea')).to_have_count(0)
+            assert page.get_by_role('link',name='Reopen whole current text · saved references stay unchanged',exact=True).get_attribute('href') == '#read?uid=tha-ap108'
+            assert engine.profile(page)['saved'] == records
+            assert page.evaluate("sessionStorage.getItem('pali-library-note-drafts-v1')") == before_opaque
             # A newly selected unambiguous position can be saved with the current pin.
             page.goto(base+'/#read?uid=tha-ap108')
             expect(page.locator('.segment-label a').first).to_have_text('tha-ap108/1');engine.loaded(page)
@@ -215,7 +229,7 @@ def pair_browser(args,base,metadata,checks,scans):
             engine.bookmark_link(imported,records[0]).click()
             expect(imported.get_by_role('heading',name='No passage was substituted.',exact=True)).to_be_visible()
             assert not failures and not errors
-            checks.append({'check':'paired legacy/current source review, keyboard explicit whole reopen, local unsaved draft/reload/export/reimport and independent second tab','width':width,'saved_records':5,'network_private_bytes':0})
+            checks.append({'check':'paired legacy/current and opaque-old source review; keyboard whole reopen; current-collision refusal; local draft/reload/export/reimport and independent second tab','width':width,'saved_records':5,'network_private_bytes':0})
             restored.close();context.close()
             if width == 390:
                 # Retain the initial pilot's ambiguous fixture as a negative case.

@@ -90,6 +90,7 @@ export function createServer({executeTool} = {}) {
         }
         return { isError: true, content: [{ type: 'text', text: JSON.stringify({
           error: error.message || 'Request failed.',
+          ...(error.code === 'READING_SOURCE_CHANGED' ? { code: error.code } : {}),
           ...(error.reopen && /^#read\?uid=tha-ap10[78]$/.test(error.reopen) && ['READING_SOURCE_CHANGED', 'READING_LOCATOR_AMBIGUOUS'].includes(error.code) ? { code: error.code, reopen: error.reopen } : {}),
           recovery: 'Check the citation with resolve_reference or browse_canon. Never invent missing text.',
         }) }] };
@@ -126,7 +127,7 @@ export function createServer({executeTool} = {}) {
     uid: citation.optional(),
     book: z.string().trim().min(1).max(100).optional().describe('A complete VRI root book: use an exact ID from browse_canon node "books" (e.g. vin02m1). Give book instead of uid. Source-file segment references are not standard sutta/rule citations; English and aligned commentary require uid.'),
     offset: z.number().int().min(0).max(100000).optional().describe('Segment offset for continuation. For the repaired tha-ap107/108 pair, every explicit position including 0 requires source_commit from the reader.'),
-    source_commit: z.string().regex(/^[a-f0-9]{40}(?:-[a-zA-Z0-9._-]{1,40})?$/).optional().describe('Expected source locator revision from the selected reader. Preserve it for positional reads; a changed source or mapping refuses before wording.'),
+    source_commit: z.string().regex(/^[a-zA-Z0-9._-]{1,100}$/).optional().describe('Expected source locator revision from the selected reader. Preserve it for positional reads; a changed source or mapping refuses before wording.'),
     limit: z.number().int().min(1).max(200).default(60).describe('Segments per page.'),
     includeVariants: z.boolean().default(false).describe('Include variant readings recorded by VRI.'),
     variants: z.enum(variantsMod.VARIANT_MODES).optional().describe('Variant readings recorded by VRI: "raw" = the notes verbatim (same as includeVariants: true); "structured" = each note split into readings with the editions (sigla) that carry them, plus omissions ("( ) natthi": the passage in parentheses is absent from those editions), note kept verbatim; "none". Overrides includeVariants.'),

@@ -91,6 +91,7 @@ try:
                     payload = request.post_data_json; params = payload.get('params', {}); state['calls'].append(copy.deepcopy(params))
                     name, a = params.get('name'), params.get('arguments', {})
                     allowed = {'uid', 'book', 'citation', 'offset', 'limit', 'script'} if name in {'get_text', 'get_commentary', 'get_post_canonical'} else {'name', 'day'} if name == 'reading_plan' else None
+                    if name == 'get_text': allowed.add('source_commit')
                     if allowed is None or set(a) - allowed:
                         state['forbidden'].append(params); route.abort(); return
                     if state['corrupt'] and name == 'get_text' and a.get('uid') == 'mn10':
@@ -252,7 +253,7 @@ try:
                     with page.expect_response(lambda r: r.request.method == 'POST' and r.url.endswith('/mcp') and r.request.post_data_json.get('params', {}).get('name') == 'get_text'):
                         page.goto(href(canonical['context'], offset=30, page_source=rev))
                     error_page(page)
-                    assert state['calls'][before:] == [{'name': 'get_text', 'arguments': {'uid': 'mn10', 'offset': 30, 'limit': 30, 'script': 'roman'}}]
+                    assert state['calls'][before:] == [{'name': 'get_text', 'arguments': {'uid': 'mn10', 'offset': 30, 'limit': 30, 'script': 'roman', 'source_commit': rev}}]
                 for mode in ['count', 'next', 'missing revision']:
                     page.goto(base + '/#saved'); expect(page.get_by_role('heading', name='Saved passages', exact=True)).to_be_visible()
                     state['corrupt'] = mode; before = len(state['calls']); plain = href(canonical['context'], offset=30)
