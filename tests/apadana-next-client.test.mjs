@@ -18,7 +18,7 @@ function fixture(n) {
   const data = {...clone(choice), ...Object.fromEntries(['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256'].map(key => [key, p[key]])),
     text_id: uid, source: 'apadana', offset: 0, limit: 500, text: 'Synthetic poem text, never a source artifact.', attribution: 'Synthetic attribution', changes: 'Synthetic extraction notice',
     fetched_url: p.raw_url, license_url: APADANA_LICENSE_URL, publisher_paratext: p.paratext_sha256 === emptySha ? '' : 'Synthetic publisher preface',
-    translator_notes: owned(p.note_numbers || Array.from({length: p.note_count}, (_, i) => i + 1)), next_offset: null};
+    translator_notes: owned(p.note_numbers || Array.from({length: p.note_count}, (_, i) => i + 1)), mapping_notes: [...p.mapping_notes], notes: [...p.mapping_notes], next_offset: null};
   if (p.chapter_summary) data.chapter_summary = withContent(p.chapter_summary);
   if (p.publisher_divisions) data.publisher_divisions = p.publisher_divisions.map(withContent);
   return {uid, choice, args, data, context: {uid, choices: [choice], accepted: null}};

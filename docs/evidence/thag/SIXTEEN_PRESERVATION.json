@@ -1,0 +1,102 @@
+{
+  "baseline_commit": "a8c6e47175d5a771c7c85cf30ea2e777c31044a4",
+  "changed_units": [
+    "thag16.3",
+    "thag16.4",
+    "thag16.5"
+  ],
+  "unchanged_units": 8541,
+  "source_books_unchanged": 61,
+  "root_book_blocks": 4669,
+  "commentary_original_book_blocks": 6605,
+  "full_commentary_sha256_unchanged": "8b9c055181913097bb37cbe0046e8c64efcabea884aad49d272a424cd1207461",
+  "all_other_unit_metadata_and_source_content_unchanged": true,
+  "all_60_apadana_unit_metadata_unchanged": true,
+  "root_block_ownership_delta_only": {
+    "3041": {
+      "before": [
+        "thag16.3"
+      ],
+      "after": [
+        "thag16.4"
+      ]
+    },
+    "3042": {
+      "before": [
+        "thag16.3"
+      ],
+      "after": [
+        "thag16.4"
+      ]
+    },
+    "3043": {
+      "before": [
+        "thag16.3"
+      ],
+      "after": [
+        "thag16.4"
+      ]
+    },
+    "3044": {
+      "before": [
+        "thag16.3"
+      ],
+      "after": [
+        "thag16.4"
+      ]
+    },
+    "3118": {
+      "before": [
+        "thag16.4"
+      ],
+      "after": [
+        "thag16.5"
+      ]
+    },
+    "3119": {
+      "before": [
+        "thag16.4"
+      ],
+      "after": [
+        "thag16.5"
+      ]
+    },
+    "3120": {
+      "before": [
+        "thag16.4"
+      ],
+      "after": [
+        "thag16.5"
+      ]
+    },
+    "3121": {
+      "before": [
+        "thag16.4"
+      ],
+      "after": [
+        "thag16.5"
+      ]
+    }
+  },
+  "neighbourhood_has_no_gaps_or_overlaps": true,
+  "target_associations_unchanged": {
+    "thag16.3": [
+      8210,
+      8211
+    ],
+    "thag16.4": [
+      8212,
+      8213
+    ],
+    "thag16.5": [
+      8214
+    ]
+  },
+  "accepted_book_commentary_passages_checked": 439,
+  "commentary_association_count_unchanged": 16473,
+  "commentary_accepted_passage_count_unchanged": 14339,
+  "idempotent_gzip_identical": true,
+  "input_canon_sha256": "529d5f8a0812ca16c29c011abba04874c2529a641fd76c2fb85d6feebdbc5234",
+  "output_canon_sha256": "49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1",
+  "private_data": "not accessed, rewritten or rebased"
+}

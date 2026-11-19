@@ -29,6 +29,7 @@ from apadana_next_spans import apadana_next_spans  # noqa: E402
 from apadana_third_spans import apadana_third_spans  # noqa: E402
 from apadana_fourth_spans import apadana_fourth_spans  # noqa: E402
 from apadana_thera_spans import apadana_thera_spans  # noqa: E402
+from thag_sixteen_spans import thag_sixteen_spans  # noqa: E402
 
 BOOKS = OrderedDict([
     # file: (collection, pitaka)
@@ -698,6 +699,7 @@ def main():
     corrected.update(apadana_third_spans(b.books, b.units))
     corrected.update(apadana_fourth_spans(b.books, b.units))
     corrected.update(apadana_thera_spans(b.books, b.units))
+    corrected.update(thag_sixteen_spans(b.books, b.units))
     for u in b.units:
         if u['collection'] in ('pv', 'vv') or u['id'] in corrected:
             paras = [p['n'] for p in b.books[u['book']]['blocks'][u['start']:u['end']] if p['n']]

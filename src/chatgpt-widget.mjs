@@ -25,7 +25,7 @@ import { getCommentary, commentaryReadingSource } from './commentary.mjs';
 import { HostedToolError } from './hosted-tool-error.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v22';
+export const WIDGET_VERSION = 'v23';
 // Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.
 export const NAVIGATION_TIMEOUT_MS = 90000;
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
@@ -36,6 +36,7 @@ export const SKYBRIDGE_MIME = 'text/html+skybridge';
 const APADANA_PINS = ['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256'];
 const WIDGET_APADANA = Object.fromEntries(Object.entries(APADANA_PROFILES).map(([id, p]) => [id, {
   translation_id: canon.translationId(p), url: p.url, fetched_url: p.raw_url, note_count: p.note_count,
+  mapping_notes: p.mapping_notes,
   ...(p.publisher_preface ? { publisher_preface: p.publisher_preface } : {}),
   ...(p.collection_summary ? { collection_summary: p.collection_summary } : {}),
   ...(p.chapter_summary ? { chapter_summary: p.chapter_summary } : {}),
@@ -235,7 +236,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
       result.english = {
         translator: t.translator, translation_id: t.translation_id, source: t.source, url: t.url,
         reference: (canon.describe(unit).english.find((e) => e.translation_id === t.translation_id) || {}).reference,
-        ...(t.translation_revision ? { translation_revision: t.translation_revision, translator_notes: t.translator_notes, publisher_paratext: t.publisher_paratext, ...(t.publisher_preface ? { publisher_preface: t.publisher_preface } : {}), ...(t.collection_summary ? { collection_summary: t.collection_summary } : {}), ...(t.chapter_summary ? { chapter_summary: t.chapter_summary } : {}), ...(t.publisher_divisions ? { publisher_divisions: t.publisher_divisions } : {}), license_url: t.license_url, changes: t.changes, fetched_url: t.fetched_url, ...Object.fromEntries(APADANA_PINS.map(key => [key, t[key]])) } : {}),
+        ...(t.translation_revision ? { translation_revision: t.translation_revision, mapping_notes: t.mapping_notes, translator_notes: t.translator_notes, publisher_paratext: t.publisher_paratext, ...(t.publisher_preface ? { publisher_preface: t.publisher_preface } : {}), ...(t.collection_summary ? { collection_summary: t.collection_summary } : {}), ...(t.chapter_summary ? { chapter_summary: t.chapter_summary } : {}), ...(t.publisher_divisions ? { publisher_divisions: t.publisher_divisions } : {}), license_url: t.license_url, changes: t.changes, fetched_url: t.fetched_url, ...Object.fromEntries(APADANA_PINS.map(key => [key, t[key]])) } : {}),
         fetched_from: t.fetched_from, attribution: t.attribution, license: t.license,
         text: t.text, prefix_sha256: t.prefix_sha256, offset: t.offset, total_characters: t.total_characters, next_offset: t.next_offset, truncated: t.next_offset !== null, notes: t.notes,
         read_with: { name: WIDGET_TOOL, arguments: { uid: unit.id, source_commit: result.source.locator_revision || vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.offset, ...(t.translation_revision ? { english_translation_revision: t.translation_revision } : {}), ...(t.offset > 0 ? { english_prefix_sha256: t.prefix_sha256 } : {}), ...(script ? { script: scriptName(script) } : {}) } },
@@ -643,11 +644,13 @@ export const WIDGET_HTML = `<!doctype html>
         e.translation_revision === '${APADANA_COMMIT}' && e.license === '${APADANA_LICENSE}' && e.license_url === '${APADANA_LICENSE_URL}' &&
         e.translator === '${APADANA_TRANSLATOR}' && typeof e.attribution === 'string' && e.attribution.trim() &&
         typeof e.text === 'string' && e.text.trim() && typeof e.changes === 'string' && e.changes.trim() &&
+        JSON.stringify(e.mapping_notes) === JSON.stringify(p.mapping_notes) && Array.isArray(e.notes) &&
+        p.mapping_notes.every(function (note) { return e.notes.indexOf(note) !== -1; }) &&
         typeof e.publisher_paratext === 'string' && e.publisher_paratext.length <= 50000 && Boolean(e.publisher_paratext.trim()) === (p.paratext_sha256 !== 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855') &&
         Array.isArray(e.translator_notes) && e.translator_notes.length === p.note_count &&
         e.translator_notes.every(function (note, i) { return note && Object.keys(note).sort().join(',') === 'number,text' && note.number === (p.note_numbers ? p.note_numbers[i] : i + 1) && typeof note.text === 'string' && note.text.length <= 50000 && note.text.trim(); }) &&
         checkedChapterSummary(e, p) && checkedPublisherPreface(e, p) && checkedCollectionSummary(e, p) && checkedPublisherDivisions(e, p) && ${JSON.stringify(APADANA_PINS)}.every(function (key) { return e[key] === p[key]; })) return d;
-    return Object.assign({}, d, { english: null, english_error: 'Apadāna publisher identity, terms or source pins changed. No English was displayed.' });
+    return Object.assign({}, d, { english: null, english_error: 'Apadāna publisher identity, terms, edition notices or source pins changed. No English was displayed.' });
   }
   function render(d) {
     if (closed) return;

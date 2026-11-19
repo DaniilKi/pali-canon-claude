@@ -1,0 +1,84 @@
+{
+  "baseline": "a8c6e47175d5a771c7c85cf30ea2e777c31044a4",
+  "decision": "APPROVE SOURCE SCOPE ONLY: ten complete publisher-edition Therā poems31–40, semantically verified canonical33–42. Not line-complete VRI translations. Runtime activation/release remains conditional on strict consumer guards and full final acceptance.",
+  "approved_ids": [
+    "tha-ap33",
+    "tha-ap34",
+    "tha-ap35",
+    "tha-ap36",
+    "tha-ap37",
+    "tha-ap38",
+    "tha-ap39",
+    "tha-ap40",
+    "tha-ap41",
+    "tha-ap42"
+  ],
+  "holds": [],
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "independent_full_read": {
+    "original_poems": 10,
+    "all_owned_notes": 53,
+    "original_VRI_units": [
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42
+    ],
+    "complete_neighbour_units": [
+      32,
+      43
+    ],
+    "rights": "Same six exact pinned artifacts as previously fully read; all hashes freshly replayed, new sources have no text licence override. Audio excluded."
+  },
+  "independent_extraction": {
+    "printed_stanzas": 111,
+    "body_paragraphs": 141,
+    "notes": 53,
+    "differences_from_primary": [],
+    "chapter_preface_notes": 0,
+    "chapter_summary_notes": 0,
+    "chapter_summary_root": [
+      3475,
+      3480
+    ],
+    "chapter_summary_refs": [
+      "tha-ap42/10",
+      "tha-ap42/12"
+    ]
+  },
+  "required_contracts": [
+    "Only exact registered new IDs/paths and immutable raw/body/notes/paratext/root pins",
+    "31 chapter preface has no note; all1–9 notes belong to title/body",
+    "31 Legend capitalization,32 This-indeed and33 finshed remain original",
+    "34 combines1–2 and6–7 as original eight-line entries",
+    "35 audio YAML excluded; no recording fetched, returned or licensed by inference",
+    "39 original unfinished placeholders/uncertainties preserved",
+    "40 exactly three paired HTML displays and note-free summary including chapter closing; explicit publisher/VRI order difference",
+    "32–40 publisher full stock closing versus literal VRI peyyāla disclosed; no generated expansion",
+    "Every latest primary edition finding remains visible and guarded against missing mapping_notes/required data.notes in standalone, comparison and widget",
+    "All old60 profile objects, choices/Pāli and all unrelated holds remain exact",
+    "No VRI-line alignment, full-corpus, physical-device/human-AT/specialist certification inferred"
+  ],
+  "rights": "CC BY-NC-SA4.0 with Walters/Whitman attribution, source/licence and change notices; genericCCBY metadata does not relax it; no audio grant",
+  "primary_sha256": {
+    "GOLDENS.json": "179000f196cd283092ac3d4a219a64b8f79596b4e9d8a7f34bbb4ddf806d9728",
+    "SOURCE_REVIEW.json": "dc892ec7341df8d573e293dc02cfdeeff996856bc82cf227ca402c174f7c692c",
+    "RIGHTS.json": "4a8dbbb282bcd9577751cc2d589003edf6f8a9ad1a438aa0d2a2ebce18bc0606",
+    "PRESERVATION.json": "7688ccff6312d0e9f85fa9a7795fb7a76b061f72c843de9885460143f902c8ac"
+  },
+  "independent_sha256": {
+    "SOURCE_PINS.json": "6259d4b6c301cfb1e363cbbab48f330fb9dabb214f1745c58b3c3c93ede31c96",
+    "EXTRACTION_COMPARISON.json": "f8cd93e57a5b2b9c184783233f2f00346f332947366836d9ae0d16d19e96902e",
+    "XML_REPLAY.json": "71a9b7c8ac7a4381888babb707714038373d2ce1891d3d8c5f39201800c7115c",
+    "SUMMARY_SCOPE_REVIEW.json": "aaac09c4bc5480d64370a722b8c348b757aa4b659bc9b64833dc2a6946722344"
+  },
+  "Thag_repair": "Separate review still in progress; this source approval does not approve installation of that migration.",
+  "reviewer_project_edits": 0
+}

@@ -168,7 +168,7 @@ function apadanaFixture(uid) {
   const english = { source: 'apadana', translation_id: canon.translationId(p), url: p.url, fetched_url: p.raw_url, translation_revision: APADANA_COMMIT,
     translator: APADANA_TRANSLATOR, license: APADANA_LICENSE, license_url: APADANA_LICENSE_URL, attribution: 'Synthetic attribution', changes: 'Synthetic extraction notice',
     text: 'Synthetic poem wording, not source evidence.', publisher_paratext: p.paratext_sha256 === createHash('sha256').update('').digest('hex') ? '' : 'Synthetic separately owned publisher preface.',
-    translator_notes: notes(p.note_numbers || Array.from({ length: p.note_count }, (_, i) => i + 1)), ...Object.fromEntries(pins.map(key => [key, p[key]])) };
+    translator_notes: notes(p.note_numbers || Array.from({ length: p.note_count }, (_, i) => i + 1)), mapping_notes: [...p.mapping_notes], notes: [...p.mapping_notes], ...Object.fromEntries(pins.map(key => [key, p[key]])) };
   if (p.chapter_summary) english.chapter_summary = apparatus(p.chapter_summary);
   if (p.publisher_divisions) english.publisher_divisions = p.publisher_divisions.map(apparatus);
   if (p.publisher_preface) english.publisher_preface = { ...structuredClone(p.publisher_preface), translator_notes: notes(p.publisher_preface.note_numbers) };
@@ -176,8 +176,8 @@ function apadanaFixture(uid) {
   return { ...fixture(), text_id: uid, english };
 }
 
-test('widget v22 displays the two finite post-poem/summary recitation placements without invented before labels or empty summary notes', () => {
-  assert.equal(WIDGET_VERSION, 'v22');
+test('widget v23 displays the two finite post-poem/summary recitation placements without invented before labels or empty summary notes', () => {
+  assert.equal(WIDGET_VERSION, 'v23');
   for (const bridge of ['Apps SDK', 'MCP Apps']) for (const [uid, placement, caption] of [
     ['tha-ap19', 'after_poem', 'After the publisher poem.'], ['tha-ap32', 'after_chapter_summary', 'After the chapter summary.'],
   ]) {

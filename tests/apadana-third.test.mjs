@@ -34,6 +34,7 @@ function fixture(n) {
   const args = { uid, translation: choice.translation_id, translation_revision: APADANA_COMMIT, limit: 500 };
   const data = { ...clone(choice), ...Object.fromEntries(pins.map(key => [key, p[key]])), text_id: uid, source: 'apadana', offset: 0, limit: 500,
     text: 'Synthetic poem wording, not source evidence.', attribution: 'Synthetic attribution', changes: 'Synthetic extraction notice', fetched_url: p.raw_url,
+    mapping_notes: [...p.mapping_notes], notes: [...p.mapping_notes],
     license_url: APADANA_LICENSE_URL, publisher_paratext: p.paratext_sha256 === emptySha ? '' : 'Synthetic publisher preface', translator_notes: owned(p.note_numbers), next_offset: null };
   if (p.chapter_summary) data.chapter_summary = withContent(p.chapter_summary);
   if (p.publisher_divisions) data.publisher_divisions = p.publisher_divisions.map(withContent);
@@ -50,7 +51,7 @@ function pinnedFetch(calls) {
 
 // This digest was calculated from the complete 20-profile object at dev 3854b43.
 test('forty approved profiles preserve all prior twenty and ten exact reviewed source/root contracts', () => {
-  assert.equal(Object.keys(APADANA_PROFILES).length, 60);
+  assert.equal(Object.keys(APADANA_PROFILES).length, 70);
   const prior = Object.fromEntries(Object.entries(APADANA_PROFILES).filter(([, p]) => p.id.startsWith('thi-ap') && p.poem <= 20));
   assert.equal(digest(JSON.stringify(prior)), '7255eabd3ced9329c39ede0cafa535583a5e3109db3d1cb6beda6b8836e61b25');
   const d = canon.load();
@@ -259,7 +260,7 @@ test('reader and comparison guards preserve all ten identities, zero-note divisi
 });
 
 test('v20 embedded reader executes third-chapter apparatus guards before rendering', () => {
-  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v22.html');
+  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v23.html');
   const sandbox = vm.createContext({});
   vm.runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('), WIDGET_HTML.indexOf('  function render(d) {')) + ';globalThis.check=checkedApadana;', sandbox);
   for (const n of [21, 28, 30]) {

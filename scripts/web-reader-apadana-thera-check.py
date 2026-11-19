@@ -1089,7 +1089,11 @@ def main():
     server_dir = args.server_dir.resolve() if args.server_dir else ROOT / 'server'
     manifest = json.loads((server_dir / 'data/apadana.json').read_text())
     assert manifest == json.loads((ROOT / 'server/data/apadana.json').read_text()), 'Package metadata differs'
-    rows,commit=manifest['links'],manifest['source']['commit']
+    combined_rows,commit=manifest['links'],manifest['source']['commit']
+    assert set(combined_rows) == {'thi-ap' + str(n) for n in range(1, 41)} | {'tha-ap' + str(n) for n in range(13, 43)}, 'Unexpected combined publisher-source scope'
+    # This historical suite retains exactly the original forty Therī and twenty Therā fixtures.
+    historical_ids = set(BASELINE) | set(NEW_IDS)
+    rows = {uid: row for uid, row in combined_rows.items() if uid in historical_ids}
     assert len(EXPECTED) == 20 and len(SUMMARIES) == 2 and len(DIVISIONS) == 2
     assert commit == SOURCE_REVISION, 'Publisher revision changed'
     assert set(rows) == set(BASELINE) | set(NEW_IDS), 'Unexpected activated source scope'

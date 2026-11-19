@@ -1,0 +1,77 @@
+{
+  "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "repository": "https://github.com/VipassanaTech/tipitaka-xml",
+  "attribution": "Vipassana Research Institute (VRI), Chaṭṭha Saṅgāyana Tipiṭaka",
+  "terms": "Non-commercial use with attribution; preserve original wording",
+  "root_source": {
+    "file": "s0508m.mul.xml",
+    "git_blob_sha1": "78b42eb2d2cd521f00cddd856e4c731cfe57ba33",
+    "xml_sha256": "30a3a7daaf5724e1b3eee155c37427354560c3bfb92e5ae16ac5b7b6ce1255b7",
+    "xml_bytes": 774950
+  },
+  "commentary_source": {
+    "file": "s0508a2.att.xml",
+    "git_blob_sha1": "c7e6ceea879676f4e2ce5c8d28ec38d18b49edb1",
+    "xml_sha256": "9c55e55ebbd53110c8ab313557fbac8ad8e0b4d62201fab2b1fa5e00135c88d2",
+    "xml_bytes": 2408024
+  },
+  "root_book_blocks_sha256": "5a9e85d495a03f840bfe7dfa85bb8a4b8a1b31ec31c24b4cd2c1827a780b559f",
+  "commentary_book_blocks_sha256": "14b4d786a9a7a27514436990fef3d9a9db9f79d74f87087e93bca9dbf117b912",
+  "source_complete_book_parity_verified": true,
+  "independent_original_source_headings": {
+    "root_thag16.2": 2908,
+    "root_thag16.3": 2973,
+    "root_thag16.4": 3041,
+    "root_thag16.5": 3118,
+    "root_thag16.6": 3204,
+    "same_malukyaputta_name_in_other_nipata": 1795,
+    "att_telakani": 3318,
+    "att_rattapala": 3405,
+    "att_malukyaputta": 3538,
+    "att_sela": 3631
+  },
+  "accepted_commentary": {
+    "changed": false,
+    "accepted_book_passages_checked": 439,
+    "root_segments_checked": [
+      [
+        0,
+        4393
+      ],
+      [
+        4393,
+        4669
+      ]
+    ],
+    "target_associations": {
+      "thag16.3": [
+        8210,
+        8211
+      ],
+      "thag16.4": [
+        8212,
+        8213
+      ],
+      "thag16.5": [
+        8214
+      ]
+    },
+    "unindexed_opening_quotes_not_activated": [
+      {
+        "vri": 769,
+        "original_att_blocks": [
+          3405,
+          3443
+        ]
+      },
+      {
+        "vri": 794,
+        "original_att_blocks": [
+          3538,
+          3543
+        ]
+      }
+    ]
+  },
+  "no_new_alignment_or_passage_added": true
+}

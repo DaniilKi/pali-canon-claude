@@ -1,0 +1,39 @@
+{
+  "status": "Existing English choices retained; no translation or rights activation performed",
+  "unit": "thag16.4",
+  "existing_bindings": [
+    {
+      "source": "dhammatalks",
+      "url": "https://www.dhammatalks.org/suttas/KN/Thag/thag16_4.html",
+      "translator": "Ṭhānissaro Bhikkhu",
+      "reference": "Thag 16:4 Raṭṭhapāla",
+      "match": "number+title"
+    },
+    {
+      "source": "ati",
+      "english": "Ratthapala",
+      "path": "/tipitaka/kn/thag/thag.16.04.than",
+      "url": "https://www.accesstoinsight.org/tipitaka/kn/thag/thag.16.04.than.html",
+      "translator": "Thanissaro Bhikkhu",
+      "license": "CC-BY-NC",
+      "reference": "Thag 769-793",
+      "match": "number+title"
+    }
+  ],
+  "pinned_ati_archive": {
+    "repository": "bcbsit/ati",
+    "commit": "45fedca341497120651efa20e756b04a13e61089",
+    "path": "tipitaka/kn/thag/thag.16.04.than.html",
+    "git_blob_sha1": "93a5998814e527a377ee2b00d602c761082a348c",
+    "raw_sha256": "650162237a6a7224355e2e433910f8f14a875637d3661283ee4698dc0fb87741",
+    "source_asserted_verses": "Thag 769-793",
+    "source_asserted_author": "Thanissaro Bhikkhu",
+    "source_asserted_copyright_year": 2006,
+    "source_license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+    "notice_sha256": "e720d0d483bf07f6e662c1bbeb3fd6ecf8f79feb5329228f1e4fd289b6fb86f7",
+    "copyrighted_chunk_html_sha256": "0204c5eeff922cd957375db1e64b22c37a5da0aa966c7cfe342de805940c839a"
+  },
+  "current_http_route": "Both direct project HTTP retrievals were unreachable; errors separately recorded.",
+  "independent_current_page_read": "Reviewer independently read both official pages via web; reports opening769 and ending793, no Mālukyaputta794, and retained notes/licensing.",
+  "canonical_scope_result": "Corrected original VRI Raṭṭhapāla769–793 agrees with both existing published identities. No wording, source choice or edition substitution is made."
+}

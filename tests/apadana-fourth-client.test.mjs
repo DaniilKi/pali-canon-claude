@@ -23,7 +23,7 @@ function fixture(n) {
   const data = {...clone(choice), ...Object.fromEntries(['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256'].map(key => [key, p[key]])),
     text_id: uid, source: 'apadana', offset: 0, limit: 500, text: 'SYNTHETIC_POEM_' + n, attribution: 'Synthetic attribution', changes: 'Synthetic extraction notice',
     fetched_url: p.raw_url, license_url: APADANA_LICENSE_URL, publisher_paratext: p.paratext_sha256 === emptySha ? '' : 'SYNTHETIC_PREFACE_WORDING_' + n,
-    translator_notes: owned(p.note_numbers || Array.from({length: p.note_count}, (_, i) => i + 1)), prefix_sha256: 'a'.repeat(64), next_offset: null};
+    translator_notes: owned(p.note_numbers || Array.from({length: p.note_count}, (_, i) => i + 1)), mapping_notes: [...p.mapping_notes], notes: [...p.mapping_notes], prefix_sha256: 'a'.repeat(64), next_offset: null};
   for (const field of ['chapter_summary', 'collection_summary']) if (p[field]) data[field] = content(p[field]);
   if (p.publisher_preface) data.publisher_preface = {...clone(p.publisher_preface), translator_notes: owned(p.publisher_preface.note_numbers)};
   if (p.publisher_divisions) data.publisher_divisions = p.publisher_divisions.map(content);
@@ -36,7 +36,7 @@ const checked = () => {
 };
 
 test('all forty finite choices preserve exact apparatus in individual, comparison and embedded validation', () => {
-  assert.equal(WIDGET_VERSION, 'v22');
+  assert.equal(WIDGET_VERSION, 'v23');
   const check = checked();
   for (let n = 1; n <= 40; n++) {
     const f = fixture(n);

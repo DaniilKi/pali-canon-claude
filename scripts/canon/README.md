@@ -464,3 +464,7 @@ For the ten new actual-source reader journeys, run `python scripts/web-reader-an
 ### D247 finite Therā root and commentary repair
 
 `apadana_thera_spans.py` repairs the four canonical metadata records at19/20→2360and23/24→2667 with `apadana-thera11-30-v1`. The atomic wrapper `repair_apadana_thera_spans.py` also removes only the false19→8918commentary edge while preserving the correct20edge and all wording. It verifies original root/commentary XML/book parity and idempotence. Rebuildparallels; explicitlyreverse4units+soleedge beforehistoricalD246/D245/D244/D243receipts. Root19recitation2359androot32summary3107–3113/recitation3113remainowned. [Implementation/evidence](../../docs/data/apadana-thera-and-edition.md).
+
+### D248 Theragāthā16.3–16.5 metadata repair
+
+`thag_sixteen_spans.py` follows D247 and atomically corrects3045→3041 and3122→3118. All3 units use `thag16-3-5-v1`; words/notes/pages, other units, translation choices and commentary stay unchanged. Its wrapper verifies original `s0508m.mul.xml`/`s0508a2.att.xml`, all439 accepted Thag associations and idempotence. Freshly unpack current branch inputs; never restore an old temporary dataset. Rebuild parallels. Reverse the3 metadata records before the historical D247 chain. Compare mapping revisions for persisted locators; never rewrite private data. [Reproduction](../../docs/data/thera-next-and-thag-sixteen.md).

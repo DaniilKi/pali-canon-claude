@@ -185,15 +185,20 @@ export function validateLink(link, id, unit, book) {
 
 /** Only numbered substantive stanzas are quotation evidence, never headings, notes or colophons. */
 export function quotationText(result) {
-  const profile = Object.values(APADANA_PROFILES).find(p => p.stanza_layout && 'ap:' + p.path.replace(/^\/text\/|\/$/g, '') === result.translation_id);
+  const profile = Object.values(APADANA_PROFILES).find(p => 'ap:' + p.path.replace(/^\/text\/|\/$/g, '') === result.translation_id);
+  if (typeof result.translation_id === 'string' && /^ap:/i.test(result.translation_id.trim()) && !profile) fail();
   if (profile) {
+    if (['translation_scope', 'source_section', 'partial_scope', 'shared_scope', 'section', 'parts'].some(key => Object.hasOwn(result, key))
+      || result.whole_unit_coverage === false) fail();
     if (digest(result.text || '') !== profile.body_sha256) fail();
-    const paragraphs = result.text.split(/\n\n+/);
-    return profile.stanza_layout.map((stanza, i) => {
-      const text = paragraphs[i + 1].replace(/\[Note \d+\]/g, '').trim();
-      if (!stanza.suffix || !text.endsWith(stanza.suffix)) fail();
-      return text.slice(0, -stanza.suffix.length).trim();
-    }).join('\n\n');
+    if (profile.stanza_layout) {
+      const paragraphs = result.text.split(/\n\n+/);
+      return profile.stanza_layout.map((stanza, i) => {
+        const text = paragraphs[i + 1].replace(/\[Note \d+\]/g, '').trim();
+        if (!stanza.suffix || !text.endsWith(stanza.suffix)) fail();
+        return text.slice(0, -stanza.suffix.length).trim();
+      }).join('\n\n');
+    }
   }
   return String(result.text || '').split(/\n\n+/).filter(p => /\(\d+\)\s*\[(?:\d+|39-40)\](?:\[Note \d+\])*$/.test(p))
     .map(p => p.replace(/\[Note \d+\]/g, '').replace(/\s*\(\d+\)\s*\[(?:\d+|39-40)\]\s*$/, '')).join('\n\n');
@@ -215,6 +220,7 @@ export async function translation(link) {
     mapping_notes: [...profile.mapping_notes],
     changes: 'Presentation extraction: retain diacritics; remove alternate no-diacritic display, Markdown and abbreviation markup; preserve interpolations and both numbering systems; label and separate translator notes and publisher preface. Chapter summary and its original note number, where present, are separately scoped outside the poem. No translation wording is generated.'
       + (!theri ? ' Finite Therā presentation removes only reviewed definition and local abbreviation-link wrappers, retaining their wording. Original malformed numbering and unmatched emphasis remain unchanged. Separately owned recitation endings and chapter summaries stay outside poem text and quotation evidence; empty apparatus note lists are not invented.' : '')
+      + (!theri && profile.id === 'tha-ap42' ? ' Exact paired c/cc HTML displays retain the diacritic spelling and remove only the alternate display. The original chapter summary remains separately scoped, including its original closing paragraph and count wording.' : '')
       + (theri && profile.poem === 17 ? ' The publisher recitation division and its original note 21 are displayed separately, before the identified publisher stanza, outside poem text and quotation evidence.' : '')
       + (theri && [18, 24, 27, 33].includes(profile.poem) ? ' Exact paired HTML display spans retain the diacritic spelling and remove only its alternate display; original editorial placeholders remain unchanged.' : '')
       + (theri && profile.poem === 31 ? ' The fourth-chapter publisher preface owns original note 1, separately from poem notes 2–18. Original duplicate local stanza 11 is retained; no number is inferred or corrected.' : '')

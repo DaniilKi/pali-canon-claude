@@ -1,0 +1,182 @@
+{
+  "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "root_source": {
+    "file": "s0508m.mul.xml",
+    "git_blob_sha1": "78b42eb2d2cd521f00cddd856e4c731cfe57ba33",
+    "xml_sha256": "30a3a7daaf5724e1b3eee155c37427354560c3bfb92e5ae16ac5b7b6ce1255b7",
+    "xml_bytes": 774950
+  },
+  "commentary_source": {
+    "file": "s0508a2.att.xml",
+    "git_blob_sha1": "c7e6ceea879676f4e2ce5c8d28ec38d18b49edb1",
+    "xml_sha256": "9c55e55ebbd53110c8ab313557fbac8ad8e0b4d62201fab2b1fa5e00135c88d2",
+    "xml_bytes": 2408024
+  },
+  "root_book_blocks_sha256": "5a9e85d495a03f840bfe7dfa85bb8a4b8a1b31ec31c24b4cd2c1827a780b559f",
+  "commentary_book_blocks_sha256": "14b4d786a9a7a27514436990fef3d9a9db9f79d74f87087e93bca9dbf117b912",
+  "input_canon_sha256": "49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1",
+  "input_commentary_sha256": "8b9c055181913097bb37cbe0046e8c64efcabea884aad49d272a424cd1207461",
+  "changed_spans": [],
+  "units": {
+    "thag16.3": {
+      "before": {
+        "id": "thag16.3",
+        "book": 34,
+        "start": 2973,
+        "end": 3041,
+        "title": "Telakānittheragāthā",
+        "collection": "thag",
+        "acronym": "Thag 16.3",
+        "vri": "747–768",
+        "pts": {
+          "volume": 0,
+          "page": 73,
+          "end_page": 75
+        },
+        "index_revision": "thag16-3-5-v1"
+      },
+      "after": {
+        "id": "thag16.3",
+        "book": 34,
+        "start": 2973,
+        "end": 3041,
+        "title": "Telakānittheragāthā",
+        "collection": "thag",
+        "acronym": "Thag 16.3",
+        "vri": "747–768",
+        "pts": {
+          "volume": 0,
+          "page": 73,
+          "end_page": 75
+        },
+        "index_revision": "thag16-3-5-v1"
+      },
+      "root_blocks_sha256": "c6449786f16bde15f1f9bddd40dcf75c42801095698023f76e2703909943b8d7",
+      "root_sha256": "03b63fd958c92cb84d64815f0bb69b2b1c64dcc355da1054865c760d854b2163"
+    },
+    "thag16.4": {
+      "before": {
+        "id": "thag16.4",
+        "book": 34,
+        "start": 3041,
+        "end": 3118,
+        "title": "Raṭṭhapālattheragāthā",
+        "collection": "thag",
+        "acronym": "Thag 16.4",
+        "vri": "769–793",
+        "pts": {
+          "volume": 0,
+          "page": 75,
+          "end_page": 77
+        },
+        "index_revision": "thag16-3-5-v1"
+      },
+      "after": {
+        "id": "thag16.4",
+        "book": 34,
+        "start": 3041,
+        "end": 3118,
+        "title": "Raṭṭhapālattheragāthā",
+        "collection": "thag",
+        "acronym": "Thag 16.4",
+        "vri": "769–793",
+        "pts": {
+          "volume": 0,
+          "page": 75,
+          "end_page": 77
+        },
+        "index_revision": "thag16-3-5-v1"
+      },
+      "root_blocks_sha256": "33aeb915ed359f1eba6dd77c02fdf035878ac989cd18c385ef6c127b65669bfb",
+      "root_sha256": "7981cb03e231e1a351ab7c551f57ffcda88ce699cd743e32559fd8d8cc1815ba"
+    },
+    "thag16.5": {
+      "before": {
+        "id": "thag16.5",
+        "book": 34,
+        "start": 3118,
+        "end": 3204,
+        "title": "Mālukyaputtattheragāthā",
+        "collection": "thag",
+        "acronym": "Thag 16.5",
+        "vri": "794–817",
+        "pts": {
+          "volume": 0,
+          "page": 77,
+          "end_page": 78
+        },
+        "index_revision": "thag16-3-5-v1"
+      },
+      "after": {
+        "id": "thag16.5",
+        "book": 34,
+        "start": 3118,
+        "end": 3204,
+        "title": "Mālukyaputtattheragāthā",
+        "collection": "thag",
+        "acronym": "Thag 16.5",
+        "vri": "794–817",
+        "pts": {
+          "volume": 0,
+          "page": 77,
+          "end_page": 78
+        },
+        "index_revision": "thag16-3-5-v1"
+      },
+      "root_blocks_sha256": "6026a3bb5484513bf6f8aa26c0834793f9e806dd93c1e8488724f51347646380",
+      "root_sha256": "729a74c8b50b10f425578e81e55ad5513d8aaf697e55855d4cb7b1bc01ce7c6d"
+    }
+  },
+  "commentary": {
+    "changed": false,
+    "accepted_book_passages_checked": 439,
+    "root_segments_checked": [
+      [
+        0,
+        4393
+      ],
+      [
+        4393,
+        4669
+      ]
+    ],
+    "target_associations": {
+      "thag16.3": [
+        8210,
+        8211
+      ],
+      "thag16.4": [
+        8212,
+        8213
+      ],
+      "thag16.5": [
+        8214
+      ]
+    },
+    "unindexed_opening_quotes_not_activated": [
+      {
+        "vri": 769,
+        "original_att_blocks": [
+          3405,
+          3443
+        ]
+      },
+      {
+        "vri": 794,
+        "original_att_blocks": [
+          3538,
+          3543
+        ]
+      }
+    ]
+  },
+  "preserved": [
+    "all 61 root source books/blocks/notes/pages",
+    "all unrelated canonical units",
+    "all commentary books/passages/associations/coverage",
+    "all existing English source choices",
+    "private saved data (not accessed or rebased)"
+  ],
+  "output_canon_sha256": "49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1",
+  "output_commentary_sha256": "8b9c055181913097bb37cbe0046e8c64efcabea884aad49d272a424cd1207461"
+}

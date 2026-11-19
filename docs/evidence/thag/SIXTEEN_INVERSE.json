@@ -1,0 +1,109 @@
+{
+  "status": "Exact historical inverse of three unit records, checked against full logical input canon hash",
+  "authentic_vri_commit_unchanged": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "corrected_canon_sha256": "49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1",
+  "restored_historical_canon_sha256": "529d5f8a0812ca16c29c011abba04874c2529a641fd76c2fb85d6feebdbc5234",
+  "commentary_sha256_unchanged": "8b9c055181913097bb37cbe0046e8c64efcabea884aad49d272a424cd1207461",
+  "units": {
+    "thag16.3": {
+      "from": {
+        "id": "thag16.3",
+        "book": 34,
+        "start": 2973,
+        "end": 3041,
+        "title": "Telakānittheragāthā",
+        "collection": "thag",
+        "acronym": "Thag 16.3",
+        "vri": "747–768",
+        "pts": {
+          "volume": 0,
+          "page": 73,
+          "end_page": 75
+        },
+        "index_revision": "thag16-3-5-v1"
+      },
+      "to": {
+        "id": "thag16.3",
+        "book": 34,
+        "start": 2973,
+        "end": 3045,
+        "title": "Telakānittheragāthā",
+        "collection": "thag",
+        "acronym": "Thag 16.3",
+        "vri": "747–769",
+        "pts": {
+          "volume": 0,
+          "page": 73,
+          "end_page": 75
+        }
+      }
+    },
+    "thag16.4": {
+      "from": {
+        "id": "thag16.4",
+        "book": 34,
+        "start": 3041,
+        "end": 3118,
+        "title": "Raṭṭhapālattheragāthā",
+        "collection": "thag",
+        "acronym": "Thag 16.4",
+        "vri": "769–793",
+        "pts": {
+          "volume": 0,
+          "page": 75,
+          "end_page": 77
+        },
+        "index_revision": "thag16-3-5-v1"
+      },
+      "to": {
+        "id": "thag16.4",
+        "book": 34,
+        "start": 3045,
+        "end": 3122,
+        "title": "Raṭṭhapālattheragāthā",
+        "collection": "thag",
+        "acronym": "Thag 16.4",
+        "vri": "770–794",
+        "pts": {
+          "volume": 0,
+          "page": 75,
+          "end_page": 77
+        }
+      }
+    },
+    "thag16.5": {
+      "from": {
+        "id": "thag16.5",
+        "book": 34,
+        "start": 3118,
+        "end": 3204,
+        "title": "Mālukyaputtattheragāthā",
+        "collection": "thag",
+        "acronym": "Thag 16.5",
+        "vri": "794–817",
+        "pts": {
+          "volume": 0,
+          "page": 77,
+          "end_page": 78
+        },
+        "index_revision": "thag16-3-5-v1"
+      },
+      "to": {
+        "id": "thag16.5",
+        "book": 34,
+        "start": 3122,
+        "end": 3204,
+        "title": "Mālukyaputtattheragāthā",
+        "collection": "thag",
+        "acronym": "Thag 16.5",
+        "vri": "795–817",
+        "pts": {
+          "volume": 0,
+          "page": 77,
+          "end_page": 78
+        }
+      }
+    }
+  },
+  "rule": "Require exact corrected records; replace only these three complete metadata objects. Never use this inverse to rebase private saved data."
+}

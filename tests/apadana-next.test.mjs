@@ -14,7 +14,7 @@ const id=n=>'ap:chapter-4/poem-'+String(n).padStart(3,'0');
 const source=n=>readFileSync(`${checkout}/src/_poems/chapter-4/poem-${String(n).padStart(3,'0')}.md`,'utf8');
 
 test('forty finite publisher mappings retain the next ten identities and only reviewed root repairs',()=>{
-  const data=canon.load();assert.equal(Object.keys(APADANA_PROFILES).length,60);
+  const data=canon.load();assert.equal(Object.keys(APADANA_PROFILES).length,70);
   for(const [uid,entry]of Object.entries(repair.units))assert.deepEqual(data.byId.get(uid),entry.after);
   assert.equal(canon.linksFor(canon.resolve('thi-ap21').unit).links.length,1);
   for(let n=11;n<=20;n++){
@@ -64,12 +64,12 @@ test('actual API long continuations and widget preserve sparse notes and source-
     if(n===17)assert.equal(widget.english.publisher_divisions[0].translator_notes[0].number,21);
   }
   const before=fetches.length;await assert.rejects(english.translation(canon.resolve('thi-ap12').unit,id(17)),/not linked/);assert.equal(fetches.length,before);
-  assert.equal(WIDGET_URI,'ui://pali-canon/reader-v22.html');
+  assert.equal(WIDGET_URI,'ui://pali-canon/reader-v23.html');
 });
 
 test('embedded reader executes sparse note and publisher division ownership guards',async()=>{
   const vm=await import('node:vm');const sandbox=vm.createContext({});vm.runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('),WIDGET_HTML.indexOf('  function render(d) {'))+';globalThis.check=checkedApadana;',sandbox);
-  const p=APADANA_PROFILES['thi-ap17'],english={...p,translation_id:id(17),fetched_url:p.raw_url,license_url:'https://creativecommons.org/licenses/by-nc-sa/4.0/',text:'Synthetic poem',attribution:'Synthetic attribution',changes:'Synthetic extraction',publisher_paratext:'',translator_notes:p.note_numbers.map(number=>({number,text:'Synthetic note'})),publisher_divisions:p.publisher_divisions.map(d=>({...d,text:'Synthetic division',translator_notes:[{number:21,text:'Synthetic division note'}]}))};
+  const p=APADANA_PROFILES['thi-ap17'],english={...p,translation_id:id(17),fetched_url:p.raw_url,license_url:'https://creativecommons.org/licenses/by-nc-sa/4.0/',text:'Synthetic poem',attribution:'Synthetic attribution',changes:'Synthetic extraction',notes:[...p.mapping_notes],publisher_paratext:'',translator_notes:p.note_numbers.map(number=>({number,text:'Synthetic note'})),publisher_divisions:p.publisher_divisions.map(d=>({...d,text:'Synthetic division',translator_notes:[{number:21,text:'Synthetic division note'}]}))};
   const value={text_id:p.id,english};assert.equal(sandbox.check(value),value);
   for(const patch of [{publisher_divisions:undefined},{publisher_divisions:[{...english.publisher_divisions[0],before_local_label:'23'}]},{publisher_divisions:[{...english.publisher_divisions[0],translator_notes:[{number:1,text:'Renumbered'}]}]},{translator_notes:Array.from({length:119},(_,i)=>({number:i+1,text:'Renumbered'}))}])assert.equal(sandbox.check({...value,english:{...english,...patch}}).english,null);
   assert.equal(sandbox.check({text_id:'mn1',english:{source:'dhammatalks.org',translation_id:'dt:MN/MN1',publisher_divisions:[]}}).english,null);

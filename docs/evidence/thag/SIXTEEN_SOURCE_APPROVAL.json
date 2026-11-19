@@ -1,0 +1,40 @@
+{
+  "scope_approval": true,
+  "release_approval": false,
+  "baseline_commit": "a8c6e47175d5a771c7c85cf30ea2e777c31044a4",
+  "approved_units": {
+    "thag16.3": [
+      2973,
+      3041,
+      "747–768"
+    ],
+    "thag16.4": [
+      3041,
+      3118,
+      "769–793"
+    ],
+    "thag16.5": [
+      3118,
+      3204,
+      "794–817"
+    ]
+  },
+  "index_revision": "thag16-3-5-v1",
+  "blocking_findings": [],
+  "independent_source_review_sha256": "64cc820a28ada50da3813c17acb1b7f429b1848ca667274478de712abb7e08ef",
+  "reviewed_helpers": {
+    "scripts/canon/thag_sixteen_spans.py": "ec27517426cad43bd43ec0787d4e963e90bc476d23bb6bc4fae1e8381b91b503",
+    "scripts/canon/repair_thag_sixteen_spans.py": "c084dc04567336d11199479a98142a656a7c71b220b5fde54b949cc369a515f9"
+  },
+  "conditions": [
+    "Install only exact reviewed output canonical JSON SHA256 49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1",
+    "All commentary bytes, source pins and 439 accepted book34 associations remain unchanged; no alignment invented for opening769/794",
+    "Existing English choices remain unchanged; source-backed ATI complete769–793 matches corrected16.4 scope",
+    "Old canonical positions require explicit review before changed words render; commentary positions remain valid without rebasing private data",
+    "Final implementation, consumer regressions, frozen package, fullcheck/audit and exact-head CI remain release gates"
+  ],
+  "limits": [
+    "Source identity/scope review, not specialist translation-quality certification",
+    "No physical-device or human assistive acceptance inferred"
+  ]
+}

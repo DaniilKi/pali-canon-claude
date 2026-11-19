@@ -76,6 +76,10 @@ export function validateApadanaChoice(value, uid, content = false) {
     || own(value, 'translation_scope') || own(value, 'source_section') || value.whole_unit_coverage === false) {
     throw Error('The pinned Apadāna source identity or terms changed. No English source was displayed.');
   }
+  if (content && (JSON.stringify(value.mapping_notes) !== JSON.stringify(profile.mapping_notes)
+    || !Array.isArray(value.notes) || profile.mapping_notes.some(note => !value.notes.includes(note)))) {
+    throw Error('The pinned Apadāna edition or mapping notices changed. No English was displayed.');
+  }
   validateChapterSummary(value, uid, content);
   validatePublisherPreface(value, uid, content);
   validateCollectionSummary(value, uid, content);

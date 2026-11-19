@@ -1,0 +1,46 @@
+{
+  "s0508m.mul.xml": {
+    "git_blob_sha1": "78b42eb2d2cd521f00cddd856e4c731cfe57ba33",
+    "sha256": "30a3a7daaf5724e1b3eee155c37427354560c3bfb92e5ae16ac5b7b6ce1255b7",
+    "blocks": 4669,
+    "full_compact_parity": true
+  },
+  "s0508a2.att.xml": {
+    "git_blob_sha1": "c7e6ceea879676f4e2ce5c8d28ec38d18b49edb1",
+    "sha256": "9c55e55ebbd53110c8ab313557fbac8ad8e0b4d62201fab2b1fa5e00135c88d2",
+    "blocks": 6605,
+    "full_compact_parity": true
+  },
+  "independence": "Original XML plus direct paragraph ownership recomputation; no project RootBook or repair imports",
+  "accepted_book34_passages_recomputed": 439,
+  "association_deltas": [],
+  "root_segments": [
+    [
+      0,
+      4393
+    ],
+    [
+      4393,
+      4669
+    ]
+  ],
+  "changed_units": [
+    "thag16.3",
+    "thag16.4",
+    "thag16.5"
+  ],
+  "source_books_unchanged": 61,
+  "all_other_unit_metadata_unchanged": true,
+  "duplicate_heading_context_preserved": true,
+  "commentary_opening_769_794_preserved_unindexed": true,
+  "output_canon_sha256": "49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1",
+  "commentary_sha256_unchanged": "8b9c055181913097bb37cbe0046e8c64efcabea884aad49d272a424cd1207461",
+  "ati_archive": {
+    "sha256": "650162237a6a7224355e2e433910f8f14a875637d3661283ee4698dc0fb87741",
+    "git_blob_sha1": "93a5998814e527a377ee2b00d602c761082a348c",
+    "pts_range": "769\u2013793",
+    "scope_and_notice_read": true
+  },
+  "english_choices_changed": false,
+  "private_data_accessed": false
+}

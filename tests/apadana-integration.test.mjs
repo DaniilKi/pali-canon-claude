@@ -27,11 +27,11 @@ test('per-poem edition disclosures identify the independently reviewed VRI diffe
   }
 });
 
-test('forty individually reviewed whole Apadāna mappings and exact publisher URLs', () => {
+test('seventy individually reviewed publisher-poem mappings and exact publisher URLs', () => {
   const expected = Array.from({length:40},(_,i)=>i+1);
   const actual = Object.entries(canon.load().translations)
     .filter(([, links]) => links.some(l => l.source === 'apadana')).map(([key]) => key);
-  assert.deepEqual(actual, [...expected.map(n => 'thi-ap' + n),...Array.from({length:20},(_,i)=>'tha-ap'+(i+13))]);
+  assert.deepEqual(actual, [...expected.map(n => 'thi-ap' + n),...Array.from({length:30},(_,i)=>'tha-ap'+(i+13))]);
   for (const n of expected) {
     const owner = 'thi-ap' + n, url = APADANA_PROFILES[owner].url;
     assert.equal(canon.resolve(url).unit.id, owner);
@@ -73,7 +73,7 @@ test('browser and comparison reject phantom owners, revised metadata, changed pa
   const pins = Object.fromEntries(['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256'].map(key => [key, profile[key]]));
   const response = { ...selected, ...pins, text_id: uid, source: 'apadana', offset: 0, limit: 6000, text: 'Synthetic text, not the real source.', attribution: 'Jonathan S. Walters and Whitman College',
     changes: 'Synthetic extraction notice', fetched_url: profile.raw_url, license_url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/', publisher_paratext: 'Synthetic preface',
-    translator_notes: Array.from({length: profile.note_count}, (_, i) => ({number: i + 1, text:'Synthetic note.'})), next_offset: null };
+    translator_notes: Array.from({length: profile.note_count}, (_, i) => ({number: i + 1, text:'Synthetic note.'})), mapping_notes: [...profile.mapping_notes], notes: [...profile.mapping_notes], next_offset: null };
   assert.equal(scopeDescriptor(selected, uid), null);
   assert.deepEqual(comparisonChoices([selected], uid), [selected]);
   assert.equal(validateEnglishPage(response, args, context), null);
@@ -88,18 +88,19 @@ test('browser and comparison reject phantom owners, revised metadata, changed pa
   assert.throws(() => validateEnglishPage(substitute, args, { ...context, choices: [selected, substitute] }), /pinned Apadāna/i);
 });
 
-test('quotation verification annotates exact publisher revision and rejects a revision mismatch', async () => {
+test('quotation verification forwards the exact publisher revision and refuses an invented body or revision mismatch', async () => {
   const options = { text: 'remarkably luminous extraordinary words', language: 'english', texts: [uid], translation_ids: [id] };
   assert.equal(englishScope([uid], { translationIds: [id] }).pages[0].translation_revision, APADANA_COMMIT);
   const response = { translation_id: id, translation_revision: APADANA_COMMIT, translator: APADANA_TRANSLATOR, url: profile.url, offset: 0, next_offset: null,
     text: 'remarkably luminous extraordinary words\n\nnot part of the poem heading\n\nquiet swift birds flying high (1) [1]\n\nremarkably luminous extraordinary words\n', attribution: 'Synthetic attribution', license: APADANA_LICENSE };
   const verify = async (text, fetchTranslation) => verifyQuote({ ...options, text }, { fetchTranslation });
-  const scoped = await verify(options.text, async (_unit, version, request) => {
+  let attempted = false;
+  await assert.rejects(verify(options.text, async (_unit, version, request) => {
+    attempted = true;
     assert.equal(version, id); assert.equal(request.translation_revision, APADANA_COMMIT); assert.equal(request.allow_fallback, false);
     return response;
-  });
-  assert.equal(scoped.scope.translations_checked[0].translation_revision, APADANA_COMMIT);
-  assert.deepEqual(scoped.matches, []);
+  }), /source metadata or content differs/);
+  assert.equal(attempted, true);
   await assert.rejects(verify(options.text, async () => ({...response, translation_revision: 'f'.repeat(40)})), /identity changed/);
 });
 
@@ -117,6 +118,7 @@ test('optional pinned publisher bytes reach reading, continuation and quotation 
   assert.ok(whole.publisher_paratext);
   const verified = await verifyQuote({text: whole.text.split('\n\n')[1].split('\n')[0], language: 'english', texts: [uid], translation_ids: [id]});
   assert.ok(verified.matches.length);
+  assert.equal(verified.scope.translations_checked[0].translation_revision, APADANA_COMMIT);
   globalThis.fetch = async url => {
     const selected = Object.values(APADANA_PROFILES).find(p => p.raw_url === url.href);
     assert.ok(selected, 'No unreviewed source fetch');
