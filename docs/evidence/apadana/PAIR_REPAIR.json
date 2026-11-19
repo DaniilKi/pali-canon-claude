@@ -1,0 +1,117 @@
+{
+  "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "source_file": "s0510m2.mul.xml",
+  "source_git_blob_sha1": "c2a96aed52fb5de3e7fe66442633e5f045cf5bdf",
+  "source_xml_sha256": "23e0721c8fe05a6105b56b627ac38291d10e0eab799a082c257466603f0839a1",
+  "source_xml_bytes": 1779576,
+  "book_blocks_sha256": "bd0177c2025298415abd2e90e1d576d2418127e08ce339699ad725960089f8cc",
+  "input_canon_sha256": "1ba8593937abe0284f87e3d8b2a4abd1d732fcc1d6117c36d5a671e968b4d73c",
+  "input_commentary_sha256": "a4efb9cd51d1092530cdf6f4e67907ac2dee965e3816af28a83c5f10c0e7d536",
+  "changed_spans": [
+    "thi-ap4",
+    "thi-ap5"
+  ],
+  "units": {
+    "thi-ap4": {
+      "before": {
+        "id": "thi-ap4",
+        "book": 37,
+        "start": 6629,
+        "end": 6651,
+        "title": "Saṅkamanatthātherīapadānaṃ",
+        "collection": "ap",
+        "acronym": "Thī Ap 4",
+        "vri": "31–37",
+        "pts": {
+          "volume": 2,
+          "page": 514,
+          "end_page": 515
+        }
+      },
+      "after": {
+        "id": "thi-ap4",
+        "book": 37,
+        "start": 6629,
+        "end": 6647,
+        "title": "Saṅkamanatthātherīapadānaṃ",
+        "collection": "ap",
+        "acronym": "Thī Ap 4",
+        "vri": "31–36",
+        "pts": {
+          "volume": 2,
+          "page": 514,
+          "end_page": 515
+        },
+        "index_revision": "apadana-theri45-v1"
+      },
+      "root_blocks_sha256": "301413ea2a7939a07f695ef4adffeb2547e493a4eae1a83877adf399cb7dcf7b",
+      "root_sha256": "21bf7bb0a2998c44df1b93c5fa421397060d441a063d9df15674904acf7f4ff8"
+    },
+    "thi-ap5": {
+      "before": {
+        "id": "thi-ap5",
+        "book": 37,
+        "start": 6651,
+        "end": 6675,
+        "title": "Naḷamālikātherīapadāna",
+        "collection": "ap",
+        "acronym": "Thī Ap 5",
+        "vri": "38–45",
+        "pts": {
+          "volume": 2,
+          "page": 515,
+          "end_page": 515
+        }
+      },
+      "after": {
+        "id": "thi-ap5",
+        "book": 37,
+        "start": 6647,
+        "end": 6675,
+        "title": "Naḷamālikātherīapadāna",
+        "collection": "ap",
+        "acronym": "Thī Ap 5",
+        "vri": "37–45",
+        "pts": {
+          "volume": 2,
+          "page": 515,
+          "end_page": 515
+        },
+        "index_revision": "apadana-theri45-v1"
+      },
+      "root_blocks_sha256": "f415e93463ea9712c31dc22f6a265987e06d50ed5cd09972b41f7988650a60b5",
+      "root_sha256": "bc87b06e6c4713fe575053f88a8c7efe1a4bac017e6b830dfd371b14eeffcbaf"
+    }
+  },
+  "commentary": {
+    "changed": false,
+    "accepted_book_passages_checked": 58,
+    "root_segments_checked": [
+      [
+        1535,
+        1840
+      ],
+      [
+        3864,
+        4971
+      ],
+      [
+        5923,
+        6537
+      ]
+    ],
+    "target_associations": {
+      "thi-ap4": [],
+      "thi-ap5": []
+    }
+  },
+  "preserved": [
+    "all source books/blocks/notes/pages",
+    "all unrelated units",
+    "all commentary metadata/wording/associations",
+    "public IDs/titles",
+    "private data (not accessed)"
+  ],
+  "output_canon_sha256": "51fa61aef541c14f257eb2e2e26a265e6396fa8a59a0927f75e115fc8d4ef61d",
+  "output_commentary_sha256": "a4efb9cd51d1092530cdf6f4e67907ac2dee965e3816af28a83c5f10c0e7d536"
+}

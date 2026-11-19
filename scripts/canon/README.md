@@ -17,6 +17,32 @@ For the embedding experiment, set `PALI_CANON_DATA_DIR` to that directory. Pytho
 
 ## Rebuild from pinned sources
 
+### Reviewed Therī Apadāna4/5 paired boundary
+
+`apadana_spans.py` applies only the reviewed Saṅkamanatthā/Naḷamālikā
+split at source block6647 (previously6651), after the story/Dasabala repairs
+and before verse/page annotation. Exact citation titles, neighbouring bounds,
+headings, six/nine numbered stanzas and both pairs of colophons must match.
+Both units receive `apadana-theri45-v1`; stale saved locations require fresh
+review before wording. No private data is rewritten.
+
+To repair current compact inputs, obtain the original `romn/s0510m2.mul.xml`
+from VRI commit `2d134ff9ef60f70a1eb03c9370580228811a3070`, then run:
+
+```sh
+python3 scripts/canon/repair_apadana_spans.py /tmp/pali-inputs/canon.json.gz /tmp/pali-inputs/commentary.json.gz /tmp/pali-vri /tmp/canon-apadana-fixed.gz
+```
+
+The CLI verifies the original Git blob and complete compact book (including
+all notes/pages), checks all accepted book commentary assignments using their
+existing root-numbering segments, and refuses changed associations. Current
+accepted passages do not reach these Therī poems; this does not imply that no
+source commentary exists. Commentary is preserved byte-for-byte as input, and
+no alignment is invented. Inspect the receipt's input hashes against freshly
+unpacked branch data before installing its canonical output, then regenerate
+parallels and bundles and run the usual full checks. This repairs canonical
+ownership only; it does not activate English translations or clear source holds.
+
 ### Reviewed story and adjacent-poem headings
 
 The final build now snaps all 136 Vimānavatthu/Petavatthu units to explicit

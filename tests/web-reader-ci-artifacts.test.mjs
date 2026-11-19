@@ -68,10 +68,12 @@ test('Apadāna browser CI uses a pinned public fixture without persisted credent
  assert.match(fixture,/persist-credentials: false/);
  assert.match(fixture,/sparse-checkout-cone-mode: false/);
  const files=[...fixture.matchAll(/^            (.+)$/gm)].map(match=>match[1]);
- assert.deepEqual(files,['LICENSE.md','src/_pages/about.md','src/_includes/site/footer.njk','src/_includes/layouts/epub-metadata.xml','src/_data/site.json','src/_poems/_poems.json',...[1,2,3,6,7,8,9].map(n=>'src/_poems/chapter-4/poem-'+String(n).padStart(3,'0')+'.md')]);
+ assert.deepEqual(files,['LICENSE.md','src/_pages/about.md','src/_includes/site/footer.njk','src/_includes/layouts/epub-metadata.xml','src/_data/site.json','src/_poems/_poems.json',...Array.from({length:10},(_,i)=>i+1).map(n=>'src/_poems/chapter-4/poem-'+String(n).padStart(3,'0')+'.md')]);
  const steps=[...source.matchAll(/if: matrix\.group == 'apadana'([^]*?)(?=\n      -|$)/g)].map(match=>match[1]).join('\n');
  assert.match(steps,/node scripts\/apadana\/build\.mjs --source \.fixtures\/apadana-pinned --check/);
  assert.equal((steps.match(/python scripts\/web-reader-apadana-check\.py --source-root \.fixtures\/apadana-pinned/g)||[]).length,3);
+ assert.equal((steps.match(/python scripts\/web-reader-apadana-three-check\.py --source-root \.fixtures\/apadana-pinned/g)||[]).length,3);
+ assert.match(steps,/node --test tests\/apadana-parser\.test\.mjs/);
  assert.doesNotMatch(steps,/--live|https:\/\/apadanatranslation\.com|curl |wget /);
  const paths=source.split('          path: |')[1].split('          if-no-files-found:')[0];
  assert.doesNotMatch(paths,/fixtures|poem-|\.md|apadana-site/,'only metadata reports are uploaded, never source fixtures');

@@ -40,6 +40,14 @@ for (const [id, p] of Object.entries(APADANA_PROFILES)) {
   same(digest(JSON.stringify(extracted.translator_notes)), p.notes_sha256, `${id} notes`);
   same(digest(extracted.publisher_paratext), p.paratext_sha256, `${id} paratext`);
   same(rootDigest(u, canon.books[u.book]), p.root_sha256, `${id} complete root`);
+  if (p.index_revision) same(u.index_revision, p.index_revision, `${id} locator revision`);
+  if (p.chapter_summary) {
+    const { text, translator_notes, ...scope } = extracted.chapter_summary;
+    same(JSON.stringify(scope), JSON.stringify(p.chapter_summary), `${id} summary scope`);
+    same(digest(text), scope.body_sha256, `${id} summary text`);
+    same(digest(JSON.stringify(translator_notes)), scope.notes_sha256, `${id} summary notes`);
+    same(rootDigest({ ...u, start: scope.root_start, end: scope.root_end }, canon.books[u.book]), scope.root_sha256, `${id} chapter root`);
+  }
   same(extracted.title, p.title, `${id} publisher title`);
   const rootNumbers = canon.books[u.book].blocks.slice(u.start, u.end).filter(b => b[0] === 'hangnum').map(b => Number(b[1]));
   same(JSON.stringify(rootNumbers), JSON.stringify(Array.from({ length: p.verses[1] - p.verses[0] + 1 }, (_, i) => p.verses[0] + i)), `${id} complete stanza range`);
@@ -51,11 +59,9 @@ const manifest = {
     translator: APADANA_TRANSLATOR, publisher: 'Jonathan S. Walters and Whitman College', license: APADANA_LICENSE, license_url: APADANA_LICENSE_URL,
     notice_url: 'https://apadanatranslation.com/about/', checked: '2026-11-19', rights_artifacts: rights,
     rights_note: 'Explicit translation grant in About, LICENSE.md, footer and ePub metadata is CC BY-NC-SA 4.0. Conflicting generic CC-BY site.json does not relax those terms. No warranty or endorsement is implied.',
-    policy: 'Live only, seven finite whole-poem mappings; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI.' },
+    policy: 'Live only, ten finite whole-poem mappings; poem 10 chapter summary and original note 8 separately scoped; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI.' },
   vri_commit: APADANA_VRI_COMMIT,
-  held: { 'thi-ap4': 'Bundled VRI unit also owns the next heading and stanza37 (blocks6629–6651); poem4 alone is not its whole unit.',
-    'thi-ap5': 'Bundled VRI unit starts at stanza38 (blocks6651–6675); publisher poem5 starts37. Repair/review ownership separately, not by loosening whole coverage.',
-    'thi-ap10': 'Separate chapter summary and its note8 need independent selection and root-scope review. 601 publisher poems do not establish 603 VRI-unit coverage.' },
+  held: {},
   links,
 };
 const serialized = JSON.stringify(manifest, null, 2) + '\n';

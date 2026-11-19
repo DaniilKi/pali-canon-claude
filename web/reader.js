@@ -218,6 +218,18 @@ function publisherParatext(data, target, level) {
   target.append(section);
 }
 
+function chapterSummary(data, target, level) {
+  if (!data.chapter_summary) return; // validateEnglishPage already checked identity and ownership.
+  const summary = data.chapter_summary, section = el('section');
+  section.setAttribute('aria-label', 'Canonical chapter summary · not poem text');
+  section.append(el('h' + level, 'Canonical chapter summary · not poem text'), el('p', summary.text, 'translation'));
+  section.append(el('p', 'The publisher’s chapter summary is separate from this poem. Its ordering and stanza count differ from VRI; both editions remain unchanged.'));
+  section.append(el('h' + level, 'Chapter summary notes · editorial, not poem notes'));
+  const list = el('ol');
+  for (const note of summary.translator_notes) { const item = el('li'); item.value = note.number; item.append(el('p', note.text, 'translator-note')); list.append(item); }
+  section.append(list); target.append(section);
+}
+
 function provenance(data, target = view) {
   const box = el('section', undefined, 'provenance'); box.setAttribute('aria-label', 'Source attribution');
   box.append(el('strong', (data.source === 'apadana' ? 'Legends of the Buddhist Saints (Apadāna)' : data.edition) || data.dictionary?.name || data.source?.name || (typeof data.source === 'string' ? data.source : null) || data.label || 'Source provenance'));
@@ -848,7 +860,7 @@ function compareEnglishSources(selected, token, context) {
       try {
         const data = await tool('get_translation', args, 'study', 'English comparison ' + id); if (!sameRequest()) return;
         const next = validateComparisonPage(data, args, { uid: context.uid, choices: [choice], accepted: null });
-        const content = el('div'); notes(data, content); content.append(el('p', data.text, 'translation')); translatorNoteSection(data, content, 5); publisherParatext(data, content, 5); provenance(data, content);
+        const content = el('div'); notes(data, content); content.append(el('p', data.text, 'translation')); translatorNoteSection(data, content, 5); publisherParatext(data, content, 5); chapterSummary(data, content, 5); provenance(data, content);
         body.replaceChildren(content);
         progress.textContent = 'English characters ' + (data.offset + 1) + '–' + (data.offset + data.text.length) + (next ? ' · more pages available' : ' · end of this source');
         message.textContent = 'Selected source page loaded.';
@@ -892,7 +904,7 @@ async function englishPage(args, token, context) {
     else if (anTenSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive discourse selected from exact paragraphs on the parent publisher page. The publisher title names that page; no individual publisher heading is supplied. Other discourses and untranslated Pāli paratext remain outside this selection. Any owned translator’s notes are editorial, not canonical discourse text. This is not word-by-word alignment.', 'notice'));
     else if (numberedSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive numbered treatment selection. The printed number identifies this treatment; the publisher title names the complete page. Other treatments, untranslated Pāli paratext and forms of address are outside this English selection. This is not word-by-word alignment.', 'notice'));
     else if (sectionSourceUnit(data.translation_id)) target.append(el('p', 'Complete substantive discourse selection. Other discourses on the publisher page and untranslated Pāli paratext are outside this English selection.', 'notice'));
-    notes(data, target); target.append(el('p', data.text, 'translation')); translatorNoteSection(data, target, 4); publisherParatext(data, target, 4); provenance(data, target);
+    notes(data, target); target.append(el('p', data.text, 'translation')); translatorNoteSection(data, target, 4); publisherParatext(data, target, 4); chapterSummary(data, target, 4); provenance(data, target);
     if (next) target.append(button('Next English page →', () => englishPage(next, token, context)));
     target.append(button('Reload passage and review sources', render));
   } catch (error) { if (token === epoch && studyToken === studyEpoch) target.replaceChildren(el('p', error.message, 'notice'), button('Retry selected source', () => englishPage(args, token, context)), button('Reload passage and review sources', render)); }

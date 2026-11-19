@@ -531,7 +531,7 @@ export function describe(u, notes = []) {
     ...(t.license ? { license: t.license } : {}),
     translation_id: translationId(t),
     match: t.match,
-    ...(t.source === 'apadana' ? { translation_revision: t.translation_revision, note_count: t.note_count } : {}),
+    ...(t.source === 'apadana' ? { translation_revision: t.translation_revision, note_count: t.note_count, ...(t.chapter_summary ? { chapter_summary: JSON.parse(JSON.stringify(t.chapter_summary)) } : {}) } : {}),
     ...(t.mapping_note ? { mapping_note: t.mapping_note } : {}),
     ...(t.section ? { source_section: JSON.parse(JSON.stringify(t.section)) } : {}),
     ...(isScoped(t) ? { translation_scope: translationScope(t, u) } : {}),

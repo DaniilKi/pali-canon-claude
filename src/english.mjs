@@ -157,7 +157,7 @@ export function available(unit) {
     ...(isScoped(t) ? { translation_scope: translationScope(t, unit) } : {}),
     source: sourceName(t),
     translator: t.translator, reference: t.reference || undefined, ...(t.license ? { license: t.license } : {}), match: t.match,
-    ...(t.source === 'apadana' ? { url: t.url, translation_revision: t.translation_revision, note_count: t.note_count } : {}),
+    ...(t.source === 'apadana' ? { url: t.url, translation_revision: t.translation_revision, note_count: t.note_count, ...(t.chapter_summary ? { chapter_summary: JSON.parse(JSON.stringify(t.chapter_summary)) } : {}) } : {}),
     ...(t.mapping_note ? { mapping_note: t.mapping_note } : {}),
     ...(t.section ? { source_section: JSON.parse(JSON.stringify(t.section)) } : {}),
     ...(t.commentary ? { includes_commentary: true } : {}),

@@ -8,7 +8,7 @@ const snapshot=()=>({...d,translations:structuredClone(d.translations),sectionRe
 
 test('ordinary whole-page screening excludes only validated extracted questions, not their PTS extents or fabricated review markers',()=>{
  const before=JSON.stringify(d.translations),result=scopeScreen(d);
- assert.equal(result.count,227);assert.equal(result.rows.some(row=>row.owner.startsWith('mil')),false);assert.equal(JSON.stringify(d.translations),before);
+ assert.equal(result.count,230);assert.equal(result.rows.some(row=>row.owner.startsWith('mil')),false);assert.equal(JSON.stringify(d.translations),before);
  const synthetic={...d,translations:{'mn1':[{source:'ati',path:'/tipitaka/mn/mn.001.synthetic',url:'https://accesstoinsight.org/tipitaka/mn/mn.001.synthetic.html',reference:'MN 1-2',match:'reviewed-ati-section'}]}};
  assert.equal(scopeScreen(synthetic).count,1,'A forged match label is not section evidence.');
 });
@@ -24,5 +24,5 @@ test('screening cannot hide an invalid section binding or source root as a revie
   x=>{x.canon={...x.canon,books:x.canon.books.slice()};const u=d.byId.get(id);x.canon.books[u.book]={...x.canon.books[u.book],blocks:x.canon.books[u.book].blocks.slice()};x.canon.books[u.book].blocks[u.start]=[...x.canon.books[u.book].blocks[u.start]];x.canon.books[u.book].blocks[u.start][2]+=' changed';},
  ];
  for(const mutate of mutations){const copy=snapshot();mutate(copy);assert.throws(()=>scopeScreen(copy),/Registered ATI question/);}
- assert.equal(scopeScreen(d).count,227,'Actual source snapshot remains unchanged.');
+ assert.equal(scopeScreen(d).count,230,'Actual source snapshot remains unchanged.');
 });

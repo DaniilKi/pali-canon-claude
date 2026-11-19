@@ -24,6 +24,7 @@ import vri  # noqa: E402
 from shared_spans import synchronise_shared_spans  # noqa: E402
 from story_spans import story_spans  # noqa: E402
 from dasabala_spans import dasabala_spans  # noqa: E402
+from apadana_spans import apadana_spans  # noqa: E402
 
 BOOKS = OrderedDict([
     # file: (collection, pitaka)
@@ -688,6 +689,7 @@ def main():
     b.units = units
     corrected = set(story_spans(b.books, b.units))
     corrected.update(dasabala_spans(b.books, b.units))
+    corrected.update(apadana_spans(b.books, b.units))
     for u in b.units:
         if u['collection'] in ('pv', 'vv') or u['id'] in corrected:
             paras = [p['n'] for p in b.books[u['book']]['blocks'][u['start']:u['end']] if p['n']]

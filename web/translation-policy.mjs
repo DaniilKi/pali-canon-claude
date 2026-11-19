@@ -4,9 +4,23 @@ import { APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_TRANSLATO
 
 export const apadanaId = uid => APADANA_PROFILES[uid]?.path ? 'ap:' + APADANA_PROFILES[uid].path.replace(/^\/text\/|\/$/g, '') : undefined;
 export const apadanaFamily = id => typeof id === 'string' && /^ap:/i.test(id.trim());
-const isApadana = value => apadanaFamily(value?.translation_id) || value?.source === 'apadana' || value?.source === 'Legends of the Buddhist Saints (Apadāna)' || own(value, 'translation_revision') || own(value, 'publisher_paratext');
+const isApadana = value => apadanaFamily(value?.translation_id) || value?.source === 'apadana' || value?.source === 'Legends of the Buddhist Saints (Apadāna)' || own(value, 'translation_revision') || own(value, 'publisher_paratext') || own(value, 'chapter_summary');
 
-export function validateApadanaChoice(value, uid) {
+/** Separately owned chapter paratext is never folded into poem text or notes. */
+export function validateChapterSummary(value, uid, content = false) {
+  const expected = APADANA_PROFILES[uid]?.chapter_summary;
+  if (!expected) { if (own(value, 'chapter_summary')) throw Error('The pinned Apadāna chapter-summary owner changed.'); return; }
+  const summary = value.chapter_summary;
+  if (!summary || typeof summary !== 'object' || Array.isArray(summary)) throw Error('The pinned Apadāna chapter-summary declaration is missing.');
+  const { text, translator_notes, ...descriptor } = summary;
+  if (!sameScope(descriptor, expected) || !content && (own(summary, 'text') || own(summary, 'translator_notes'))
+    || content && (!nonempty(text) || text.length > 50000 || !Array.isArray(translator_notes) || translator_notes.length !== 1
+      || translator_notes.some(n => !n || Object.keys(n).sort().join(',') !== 'number,text' || n.number !== 8 || !nonempty(n.text) || n.text.length > 50000))) {
+    throw Error('The pinned Apadāna chapter-summary scope or note ownership changed.');
+  }
+}
+
+export function validateApadanaChoice(value, uid, content = false) {
   if (!isApadana(value)) return;
   const profile = APADANA_PROFILES[uid];
   if (!profile || value.translation_id !== apadanaId(uid) || value.translation_revision !== APADANA_COMMIT
@@ -14,6 +28,7 @@ export function validateApadanaChoice(value, uid) {
     || own(value, 'translation_scope') || own(value, 'source_section') || value.whole_unit_coverage === false) {
     throw Error('The pinned Apadāna source identity or terms changed. No English source was displayed.');
   }
+  validateChapterSummary(value, uid, content);
 }
 
 /** Browser display/consent guards for backend-validated metadata. Not source, rights or alignment approval. */
@@ -78,7 +93,7 @@ export function validateEnglishPage(data, args, context) {
   if (!choice) throw new Error('The returned English source version was not in the reviewed list. Reload the passage and review sources again.');
   validateApadanaChoice(choice, context.uid);
   if (isApadana(choice) || isApadana(data) || apadanaFamily(args.translation)) {
-    validateApadanaChoice(data, context.uid);
+    validateApadanaChoice(data, context.uid, true);
     if (!isApadana(choice) || !isApadana(data) || args.translation !== choice.translation_id
       || args.translation_revision !== APADANA_COMMIT || data.source !== 'apadana'
       || ['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256'].some(key => data[key] !== APADANA_PROFILES[context.uid][key])

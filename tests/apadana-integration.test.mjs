@@ -27,8 +27,8 @@ test('per-poem edition disclosures identify the independently reviewed VRI diffe
   }
 });
 
-test('seven whole Apadāna mappings and publisher URLs, with held outliers left empty', () => {
-  const expected = [1, 2, 3, 6, 7, 8, 9];
+test('ten individually reviewed whole Apadāna mappings and exact publisher URLs', () => {
+  const expected = Array.from({length:10},(_,i)=>i+1);
   const actual = Object.entries(canon.load().translations)
     .filter(([, links]) => links.some(l => l.source === 'apadana')).map(([key]) => key);
   assert.deepEqual(actual, expected.map(n => 'thi-ap' + n));
@@ -36,10 +36,6 @@ test('seven whole Apadāna mappings and publisher URLs, with held outliers left 
     const owner = 'thi-ap' + n, url = APADANA_PROFILES[owner].url;
     assert.equal(canon.resolve(url).unit.id, owner);
     assert.equal(canon.describe(canon.resolve(owner).unit).english[0].translation_revision, APADANA_COMMIT);
-  }
-  for (const n of [4, 5, 10]) {
-    assert.equal(english.available(canon.resolve('thi-ap' + n).unit).length, 0);
-    assert.throws(() => canon.resolve(profile.url.replace('001', String(n).padStart(3, '0'))), /exact reviewed/);
   }
   for (const invalid of [profile.url.slice(0, -1), profile.url + '?v=1', profile.url + '#v1']) assert.throws(() => canon.resolve(invalid), /exact reviewed/);
   assert.equal(choice().license, APADANA_LICENSE);
@@ -52,7 +48,7 @@ test('seven whole Apadāna mappings and publisher URLs, with held outliers left 
 test('Apadāna refuses unreviewed URLs, redirects, changed bytes and unpinned continuations', async () => {
   const request = [];
   globalThis.fetch = async (url) => { request.push(url.href); return new Response(null, {status: 302, headers: {location: 'https://www.dhammatalks.org/suttas/MN/MN10.html'}}); };
-  for (const url of [profile.url, profile.raw_url.replace(APADANA_COMMIT, 'main'), profile.raw_url.replace('001', '004'), profile.raw_url + '?v=1']) {
+  for (const url of [profile.url, profile.raw_url.replace(APADANA_COMMIT, 'main'), profile.raw_url.replace('001', '011'), profile.raw_url + '?v=1']) {
     await assert.rejects(fetchPublic(url, { json: false }), /outside the supported/);
   }
   assert.deepEqual(request, []);

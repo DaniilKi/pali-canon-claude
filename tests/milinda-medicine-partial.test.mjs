@@ -27,7 +27,7 @@ function install(){const d=canon.load();saved||={translations:d.translations,reg
 afterEach(()=>{if(saved){canon.load().translations=saved.translations;canon.load().partialRegistry=saved.registry;}saved=undefined;globalThis.fetch=originalFetch;liveCache.clear();translationCoverage({refresh:true});});
 
 test('Milinda pins retain the complete original root and previous twenty-one source descriptors',()=>{
- assert.equal(scopeHash(canon.load().canon),'1ba8593937abe0284f87e3d8b2a4abd1d732fcc1d6117c36d5a671e968b4d73c');
+ assert.equal(scopeHash(canon.load().canon),'51fa61aef541c14f257eb2e2e26a265e6396fa8a59a0927f75e115fc8d4ef61d');
  const previous={...manifest,links:manifest.links.filter(r=>r.unit_id!==owner)};
  assert.equal(previous.links.length,21);assert.equal(scopeHash(previous),'b5e86eae5f28169ac9a4fddc915742e27dd203cacd6cb95e6f17b40b1b0748e6');
  const r=row(),u=unit(),all=segments();assert.equal(all.length,96);assert.equal(scopeHash(all),'802aeb895d091f986a8c84041ceb491f17f04b9f201b5eda773b0c85198d9a90');

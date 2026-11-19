@@ -1,0 +1,637 @@
+{
+  "mode": "Independent fresh exact-ref publisher artifact and complete wording/notes/root review; metadata receipt only",
+  "source_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "baseline": "1df48b882a1012fb3c739762f10df0b1e6fe0836",
+  "root_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "root_book_json_sha256": "7009365fbe5dd12e0e839ad8b821b2e8dd20937c4726e87b5671dc2463e69681",
+  "fresh_artifacts_agree_with_prior_receipt": true,
+  "rows": [
+    {
+      "path": "src/_poems/chapter-4/poem-004.md",
+      "git_blob_sha1": "9757da256479ceabed1e31149d80da931fc79419",
+      "raw_sha256": "c059f6361fa2b6f98e599baa84721e615c63f5052a60e0b11d304b89a7c4bc5f",
+      "bytes": 1191,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-004.md",
+      "id": "thi-ap4",
+      "source_title": "Saṅkamanattā",
+      "stanzas": [
+        {
+          "local": 1,
+          "publisher_global": "31"
+        },
+        {
+          "local": 2,
+          "publisher_global": "32"
+        },
+        {
+          "local": 3,
+          "publisher_global": "33"
+        },
+        {
+          "local": 4,
+          "publisher_global": "34"
+        },
+        {
+          "local": 5,
+          "publisher_global": "35"
+        },
+        {
+          "local": 6,
+          "publisher_global": "36"
+        }
+      ],
+      "poem_note_ids": [
+        1
+      ],
+      "summary_note_ids": [],
+      "poem_note_anchors": {
+        "1": [
+          {
+            "paragraph": 0,
+            "local_stanza": null
+          }
+        ]
+      },
+      "source_paragraphs": 9,
+      "summary_paragraphs": 0,
+      "summary_lines": 0,
+      "body_sha256": "ae1326cf8ebab5a14db40b108dc40085e2691a6d63ac7c48b2c8ae6340a69e19",
+      "owned_poem_notes_sha256": "bc9e1cbe2bb2972a044360e44587c12a089131da087e70897207fa7dbb671bdb",
+      "chapter_summary_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "chapter_summary_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "publisher_paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_root_sha256": "9971010fe1159921695f4a078cdfbbce80cd53ddb272250be73123874bfcc35e",
+      "repaired_root_sha256": "21bf7bb0a2998c44df1b93c5fa421397060d441a063d9df15674904acf7f4ff8",
+      "canonical_substantive_blocks": [
+        6629,
+        6647
+      ],
+      "canonical_chapter_summary_blocks": null
+    },
+    {
+      "path": "src/_poems/chapter-4/poem-005.md",
+      "git_blob_sha1": "c4c49b5afe1152ee682bf444fb9585720cfa9a25",
+      "raw_sha256": "8f91f8c76988b7367fbbdf60245983dfc156f315095e11c26dfd1c33f5f46288",
+      "bytes": 2902,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-005.md",
+      "id": "thi-ap5",
+      "source_title": "Tīṇinaḷamālikā",
+      "stanzas": [
+        {
+          "local": 1,
+          "publisher_global": "37"
+        },
+        {
+          "local": 2,
+          "publisher_global": "38"
+        },
+        {
+          "local": 3,
+          "publisher_global": "39-40"
+        },
+        {
+          "local": 4,
+          "publisher_global": "40"
+        },
+        {
+          "local": 5,
+          "publisher_global": "42"
+        },
+        {
+          "local": 6,
+          "publisher_global": "41"
+        },
+        {
+          "local": 7,
+          "publisher_global": "43"
+        },
+        {
+          "local": 8,
+          "publisher_global": "44"
+        },
+        {
+          "local": 9,
+          "publisher_global": "45"
+        }
+      ],
+      "poem_note_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "summary_note_ids": [],
+      "poem_note_anchors": {
+        "1": [
+          {
+            "paragraph": 0,
+            "local_stanza": null
+          }
+        ],
+        "2": [
+          {
+            "paragraph": 1,
+            "local_stanza": 1
+          }
+        ],
+        "3": [
+          {
+            "paragraph": 2,
+            "local_stanza": 2
+          }
+        ],
+        "4": [
+          {
+            "paragraph": 3,
+            "local_stanza": 3
+          }
+        ],
+        "5": [
+          {
+            "paragraph": 4,
+            "local_stanza": 4
+          }
+        ],
+        "6": [
+          {
+            "paragraph": 5,
+            "local_stanza": 5
+          }
+        ],
+        "7": [
+          {
+            "paragraph": 5,
+            "local_stanza": 5
+          }
+        ]
+      },
+      "source_paragraphs": 12,
+      "summary_paragraphs": 0,
+      "summary_lines": 0,
+      "body_sha256": "ba73861917517774a6b76506bf54bdcd94d0abe989c5fa51b33ea3e6309c30f5",
+      "owned_poem_notes_sha256": "d1d133a8e25163d7ca2d883c77dcd1a5040ce34b936d45c5531c3c0040b25108",
+      "chapter_summary_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "chapter_summary_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "publisher_paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_root_sha256": "f6cd91efcc2c49e06e90d8b6ed3676d87383d1617be9a3b0321b1af52074dfb6",
+      "repaired_root_sha256": "bc87b06e6c4713fe575053f88a8c7efe1a4bac017e6b830dfd371b14eeffcbaf",
+      "canonical_substantive_blocks": [
+        6647,
+        6675
+      ],
+      "canonical_chapter_summary_blocks": null
+    },
+    {
+      "path": "src/_poems/chapter-4/poem-010.md",
+      "git_blob_sha1": "2e8017bc13b6f7cc65a75b5a64751cf942718677",
+      "raw_sha256": "2696db2cc5d8cc1271c611864e5f3a687e97af7208e80472a4dbdfbc257a6af3",
+      "bytes": 4807,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-010.md",
+      "id": "thi-ap10",
+      "source_title": "Udakadāyikā",
+      "stanzas": [
+        {
+          "local": 1,
+          "publisher_global": "116"
+        },
+        {
+          "local": 2,
+          "publisher_global": "117"
+        },
+        {
+          "local": 3,
+          "publisher_global": "118"
+        },
+        {
+          "local": 4,
+          "publisher_global": "119"
+        },
+        {
+          "local": 5,
+          "publisher_global": "120"
+        },
+        {
+          "local": 6,
+          "publisher_global": "121"
+        },
+        {
+          "local": 7,
+          "publisher_global": "122"
+        },
+        {
+          "local": 8,
+          "publisher_global": "123"
+        },
+        {
+          "local": 9,
+          "publisher_global": "124"
+        },
+        {
+          "local": 10,
+          "publisher_global": "125"
+        },
+        {
+          "local": 11,
+          "publisher_global": "126"
+        },
+        {
+          "local": 12,
+          "publisher_global": "127"
+        },
+        {
+          "local": 13,
+          "publisher_global": "128"
+        },
+        {
+          "local": 14,
+          "publisher_global": "129"
+        },
+        {
+          "local": 15,
+          "publisher_global": "130"
+        }
+      ],
+      "poem_note_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "summary_note_ids": [
+        8
+      ],
+      "poem_note_anchors": {
+        "1": [
+          {
+            "paragraph": 0,
+            "local_stanza": null
+          }
+        ],
+        "2": [
+          {
+            "paragraph": 1,
+            "local_stanza": 1
+          }
+        ],
+        "3": [
+          {
+            "paragraph": 2,
+            "local_stanza": 2
+          }
+        ],
+        "4": [
+          {
+            "paragraph": 2,
+            "local_stanza": 2
+          }
+        ],
+        "5": [
+          {
+            "paragraph": 3,
+            "local_stanza": 3
+          }
+        ],
+        "6": [
+          {
+            "paragraph": 4,
+            "local_stanza": 4
+          }
+        ],
+        "7": [
+          {
+            "paragraph": 10,
+            "local_stanza": 10
+          }
+        ]
+      },
+      "source_paragraphs": 18,
+      "summary_paragraphs": 3,
+      "summary_lines": 8,
+      "body_sha256": "11892ab91ea2091ba9568089a417abf764129a20d4393d3fbc7036b82919f47f",
+      "owned_poem_notes_sha256": "b44ff0d544bca0de72278f0cf4e8fbcacd466cdd5d17bfc1b8a2a4fe9351b0dd",
+      "chapter_summary_sha256": "652008e55afc3343b94eb3a5042a8ad9874b4904aedd13126555e84798abc0dd",
+      "chapter_summary_notes_sha256": "7e43cbed8c710d9a0458f2e6d8919f3f79afc983a37c0b36dd4e4626777cafc5",
+      "publisher_paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_root_sha256": "d2b542bdf76f31f4a5c46d56ae2d43e8c612d46902bb6d9725e034ec2e4229ce",
+      "repaired_root_sha256": "d2b542bdf76f31f4a5c46d56ae2d43e8c612d46902bb6d9725e034ec2e4229ce",
+      "canonical_substantive_blocks": [
+        6885,
+        6930
+      ],
+      "canonical_chapter_summary_blocks": [
+        6930,
+        6936
+      ]
+    }
+  ],
+  "rights": [
+    {
+      "path": "LICENSE.md",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "raw_sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "bytes": 19093,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/LICENSE.md"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "raw_sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "bytes": 12404,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_pages/about.md"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "raw_sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "bytes": 555,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/site/footer.njk"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "raw_sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "bytes": 603,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/layouts/epub-metadata.xml"
+    },
+    {
+      "path": "src/_data/site.json",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "raw_sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "bytes": 659,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_data/site.json"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "raw_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "bytes": 135,
+      "exact_ref_url": "https://github.com/apadana-translation/apadana-site/blob/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/_poems.json"
+    }
+  ],
+  "neighbors": [
+    {
+      "id": "thi-ap1",
+      "start": 6532,
+      "end": 6596,
+      "root_sha256": "4417e8981c281ed284efb907df388f95b50352a4cfd9ac2141c819250a642f82"
+    },
+    {
+      "id": "thi-ap2",
+      "start": 6596,
+      "end": 6614,
+      "root_sha256": "21c0602267dc7fb2b47ea9b057233b1679778ced388c30cc057d875bf4df09b2"
+    },
+    {
+      "id": "thi-ap3",
+      "start": 6614,
+      "end": 6629,
+      "root_sha256": "a839c51970c212fc5d2ecc8045f059b599ab2a9b1604841fb0a8146e77a1c26a"
+    },
+    {
+      "id": "thi-ap6",
+      "start": 6675,
+      "end": 6717,
+      "root_sha256": "b43d3e52f25dded0a3328f13892ef085f619114ea9bf6f90534b3d8fc2454878"
+    },
+    {
+      "id": "thi-ap7",
+      "start": 6717,
+      "end": 6750,
+      "root_sha256": "9896a9cead5994e6ef49ece34dc30dd03e42c7b5c81f39dca8079baef7877108"
+    },
+    {
+      "id": "thi-ap8",
+      "start": 6750,
+      "end": 6810,
+      "root_sha256": "f5b4ead53dafba4dcf409c20c8baeca54ff3df56306932813ead09a02c50a782"
+    },
+    {
+      "id": "thi-ap9",
+      "start": 6810,
+      "end": 6885,
+      "root_sha256": "e0ffdb846c3174017d22ef7cdd3095b4af1391d80694b90ea0b8f8fd13fb9ce0"
+    },
+    {
+      "id": "thi-ap11",
+      "start": 6936,
+      "end": 7000,
+      "root_sha256": "164aa615f8ae1aaeef438d86c0502856fa58c46f9c3f0e9882fcefc8ccfdc16c"
+    }
+  ],
+  "source_rights": "Explicit translation grant in About, footer, ePub metadata and LICENSE is CC BY-NC-SA 4.0; generic site.json CC-BY-4.0 is not used to relax terms. Attribute Jonathan S. Walters and Whitman College, name the edition and presentation changes; no endorsement implied.",
+  "activation_verdict": "Source identity, completeness within the reviewed edition, full notes, and rights qualify conditionally. Activation still requires verified paired canonical boundary repair, finite poem5 numbering and poem10 summary ownership implementation, unchanged existing profiles, mapping warnings, regression/source replay and exact-commit CI. Hash agreement alone does not activate a source.",
+  "specialist_limit": "Independent source review is not specialist certification of translation choices or recension equivalence.",
+  "finite_contract": {
+    "poem5": {
+      "raw_summary_marker_count": 0,
+      "heading_count": 1,
+      "poem_paragraph_count": 12,
+      "local_stanzas": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "publisher_labels": [
+        "37",
+        "38",
+        "39-40",
+        "40",
+        "42",
+        "41",
+        "43",
+        "44",
+        "45"
+      ],
+      "owned_notes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "note_ownership": {
+        "1": "heading",
+        "2": "local stanza 1",
+        "3": "local stanza 2",
+        "4": "local stanza 3",
+        "5": "local stanza 4",
+        "6": "local stanza 5 body",
+        "7": "local stanza 5 terminal label suffix"
+      },
+      "colophon_count": 2,
+      "no_label_normalization": true,
+      "no_one_to_one_global_to_canonical_alignment": true
+    },
+    "poem10": {
+      "raw_summary_separator": "\\n\\nThe Summary:\\n\\n",
+      "raw_summary_separator_count": 1,
+      "heading_count": 1,
+      "poem_paragraph_count": 18,
+      "local_stanzas": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "publisher_labels": [
+        "116",
+        "117",
+        "118",
+        "119",
+        "120",
+        "121",
+        "122",
+        "123",
+        "124",
+        "125",
+        "126",
+        "127",
+        "128",
+        "129",
+        "130"
+      ],
+      "owned_poem_notes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "summary_paragraph_count": 3,
+      "summary_middle_line_count": 8,
+      "summary_owned_notes": [
+        8
+      ],
+      "summary_note8_anchor": "summary paragraph 2, line 6 only; never substantive poem",
+      "summary_kind": "canonical chapter uddāna and chapter colophon, not translator preface",
+      "source_chapter_identity": "chapter-4 / Sumedhā Chapter, the First",
+      "source_colophon_typo": "Bhikhhunī",
+      "canonical_full_root": [
+        6885,
+        6936
+      ],
+      "canonical_substantive_poem": [
+        6885,
+        6930
+      ],
+      "canonical_chapter_summary": [
+        6930,
+        6936
+      ],
+      "next_unit_start": 6936,
+      "no_summary_or_note8_in_poem_quotation": true
+    }
+  },
+  "edition_notes": [
+    {
+      "id": "thi-ap4",
+      "findings": [
+        "Publisher Saṅkamanattā versus VRI Saṅkamanatthā is an edition-specific title difference; preserve both labels.",
+        "Publisher31 names Koṇḍañña where VRI main has Vipassī; VRI original variant preserves the publisher-name reading.",
+        "Preserve VRI abbreviation in34–36; publisher full stanzas do not authorize expansion of root text."
+      ]
+    },
+    {
+      "id": "thi-ap5",
+      "findings": [
+        "Publisher Tīṇinaḷamālikā versus VRI Naḷamālikā is explained by publisher note1 BJTS omission; preserve both labels.",
+        "Local3/global39-40 compresses VRI39 and includes first two feet of VRI40; note4 owns its alternative intention, resolve and kinnarī-body wording.",
+        "Local4/global40 contains remaining four feet of VRI40, not another whole VRI40; note5 preserves PTS/BJTS mental-act alternatives.",
+        "Local5/global42 concerns destroyed/slain existence and corresponds substantively to VRI41; note6 owns reading alternative.",
+        "Local6/global41 corresponds substantively to VRI42; source calls the result Buddha-pūjā where VRI main names flower worship. Note7 belongs to local5 and documents BJTS reversal of locals5/6; do not swap text.",
+        "Note2 cross-reference to Therāpadāna1886 and note3 lexical explanation remain translator apparatus, not additional canonical text.",
+        "Publisher expansion of abbreviated43–45 must not expand the VRI root."
+      ]
+    },
+    {
+      "id": "thi-ap10",
+      "findings": [
+        "Source122 local7 bad road differs from VRI main dumagge/tree-top; no VRI variant legitimizes silent reconciliation.",
+        "Source127 local12 general karma differs from VRI explicit giving water; preserve source wording.",
+        "Notes6/7 select BJTS/PTS alternate readings that agree with the VRI main in119/125; keep all alternatives and translator explanations in note apparatus.",
+        "Note4 Vipassi identification is an explicit translator inference, not a claim proven by root117.",
+        "Note3 Vinaya/Jātaka/Therāpadāna lexical cross-references do not activate or quote those additional texts.",
+        "The source chapter summary totals118 while VRI main totals130; VRI6935 contains seventeen/eighteen additional-count variants. Preserve all forms and do not infer missing scripture.",
+        "Summary names differ from individual headings and VRI forms; preserve publisher spellings. Publisher orders summary heading/verse/chapter-colophon differently from VRI chapter-colophon/uddāna-heading/verse. Neither order is normalized.",
+        "Publisher128–130 expand VRI peyyāla without authorizing root expansion."
+      ]
+    }
+  ],
+  "existing_seven_source_replay": {
+    "count": 7,
+    "ids": [
+      "thi-ap1",
+      "thi-ap2",
+      "thi-ap3",
+      "thi-ap6",
+      "thi-ap7",
+      "thi-ap8",
+      "thi-ap9"
+    ],
+    "result": "All original raw/body/notes/paratext pins verified with baseline parser against preserved exact official sparse checkout."
+  },
+  "poem10_scope_pins": {
+    "convention": "sha256 compact JSON {id,book,start,end,blocks}; id retains parent thi-ap10 for scope evidence, not a new canonical unit",
+    "substantive": {
+      "id": "thi-ap10",
+      "book": 37,
+      "start": 6885,
+      "end": 6930,
+      "sha256": "722218ce0128e7a89b3b195cddf47e75f96d4b4fd608e876f0348b02b6c4163c"
+    },
+    "chapter_summary": {
+      "id": "thi-ap10",
+      "book": 37,
+      "start": 6930,
+      "end": 6936,
+      "sha256": "37490df4056522cb2cf00a3e3372fa3730dd2f49979c95b021bf6ee6e76a3057"
+    }
+  },
+  "final_summary_schema": {
+    "kind": "canonical_chapter_summary",
+    "label": "First Therī Apadāna chapter summary",
+    "parent_id": "thi-ap10",
+    "first_ref": "thi-ap10/19",
+    "last_ref": "thi-ap10/22",
+    "root_start": 6930,
+    "root_end": 6936,
+    "root_sha256": "37490df4056522cb2cf00a3e3372fa3730dd2f49979c95b021bf6ee6e76a3057",
+    "body_sha256": "652008e55afc3343b94eb3a5042a8ad9874b4904aedd13126555e84798abc0dd",
+    "notes_sha256": "7e43cbed8c710d9a0458f2e6d8919f3f79afc983a37c0b36dd4e4626777cafc5",
+    "note_numbers": [
+      8
+    ]
+  },
+  "paired_index_revision": "apadana-theri45-v1",
+  "final_parser_replay": {
+    "result": "approved",
+    "receipt": "/tmp/pali-apadana-three-source-verification/ACTIVATION_SOURCE_APPROVAL.json"
+  }
+}

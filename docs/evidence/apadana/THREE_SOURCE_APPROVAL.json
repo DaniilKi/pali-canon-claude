@@ -1,0 +1,126 @@
+{
+  "source_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "root_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "scope": "Independent final source, rights, complete wording/notes, source parser and canonical ownership replay. Not a general implementation or CI approval.",
+  "result": "APPROVED for source activation within the reviewed finite scopes; no unresolved source-artifact, rights, wording, numbering, boundary or note-ownership blocker.",
+  "rows": [
+    {
+      "id": "thi-ap4",
+      "full_publisher_wording_equal_after_reviewed_presentation_extraction": true,
+      "all_owned_notes_exact": true,
+      "source_stanzas": 6,
+      "poem_paragraphs": 9,
+      "poem_quotation_exact_and_apparatus_free": true
+    },
+    {
+      "id": "thi-ap5",
+      "full_publisher_wording_equal_after_reviewed_presentation_extraction": true,
+      "all_owned_notes_exact": true,
+      "source_stanzas": 9,
+      "poem_paragraphs": 12,
+      "poem_quotation_exact_and_apparatus_free": true
+    },
+    {
+      "id": "thi-ap10",
+      "full_publisher_wording_equal_after_reviewed_presentation_extraction": true,
+      "all_owned_notes_exact": true,
+      "source_stanzas": 15,
+      "poem_paragraphs": 18,
+      "poem_quotation_exact_and_apparatus_free": true
+    }
+  ],
+  "prior_seven_profiles_exact": true,
+  "prior_seven_parse_outputs_exact": true,
+  "prior_seven_no_new_summary_fields": true,
+  "all_six_rights_artifacts_match_fresh_exact_ref": true,
+  "new_note_definitions_preserved": 16,
+  "poem5_exact_printed_labels": [
+    "37",
+    "38",
+    "39-40",
+    "40",
+    "42",
+    "41",
+    "43",
+    "44",
+    "45"
+  ],
+  "repaired_pair": {
+    "thi-ap4": [
+      6629,
+      6647
+    ],
+    "thi-ap5": [
+      6647,
+      6675
+    ],
+    "index_revision": "apadana-theri45-v1"
+  },
+  "poem10": {
+    "full_root": [
+      6885,
+      6936
+    ],
+    "poem": [
+      6885,
+      6930
+    ],
+    "summary": [
+      6930,
+      6936
+    ],
+    "summary_refs": [
+      "thi-ap10/19",
+      "thi-ap10/20",
+      "thi-ap10/21",
+      "thi-ap10/22"
+    ],
+    "poem_notes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "summary_notes": [
+      8
+    ],
+    "schema": {
+      "kind": "canonical_chapter_summary",
+      "label": "First Therī Apadāna chapter summary",
+      "parent_id": "thi-ap10",
+      "first_ref": "thi-ap10/19",
+      "last_ref": "thi-ap10/22",
+      "root_start": 6930,
+      "root_end": 6936,
+      "root_sha256": "37490df4056522cb2cf00a3e3372fa3730dd2f49979c95b021bf6ee6e76a3057",
+      "body_sha256": "652008e55afc3343b94eb3a5042a8ad9874b4904aedd13126555e84798abc0dd",
+      "notes_sha256": "7e43cbed8c710d9a0458f2e6d8919f3f79afc983a37c0b36dd4e4626777cafc5",
+      "note_numbers": [
+        8
+      ]
+    },
+    "publisher_and_canonical_orders_each_preserved": true
+  },
+  "canonical_entire_book_blocks_unchanged": true,
+  "rights_conditions": "Explicit translation grant in About, footer, ePub metadata and LICENSE is CC BY-NC-SA 4.0; generic site.json CC-BY-4.0 is not used to relax terms. Attribute Jonathan S. Walters and Whitman College, name the edition and presentation changes; no endorsement implied.",
+  "mapping_caveats_retained": true,
+  "independent_replay": "node /tmp/pali-apadana-three-source-verification/final-replay.mjs plus independent Python full-wording/notes/quotation comparison against fresh connector artifacts",
+  "remaining_gates": [
+    "Independent general implementation review and exact-commit CI before dev advancement.",
+    "Real-device/human assistive acceptance and specialist recension/translation review are not claimed."
+  ],
+  "project_writes_by_this_agent": 0,
+  "finite_source_mutation_cases_rejected": 11,
+  "mutation_classes": [
+    "combined label split/normalization",
+    "reverse printed label reorder",
+    "duplicate local numbering",
+    "arbitrary profile labels",
+    "summary missing/extra paragraph",
+    "note8 rebound/moved into poem/definition drift",
+    "summary wrong source owner"
+  ]
+}

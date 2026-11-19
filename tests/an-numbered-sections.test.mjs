@@ -62,7 +62,7 @@ test('twenty actual numbered members preserve all fifteen old whole profiles, al
   assert.equal(old.length, 15); assert.equal(hash(stable(old)), '643441453f30c256abcde307267aebbcd8097e6aeed450186dfed7ce2173cb73');
   const partial = JSON.parse(readFileSync('scripts/canon/reviewed_partial_pages.json', 'utf8')).links;
   assert.equal(hash(stable(partial.slice(0, 21))), 'eae9f955ef6f31a7fb56874ce67f72f78b69cacc319415d1ae58585e2586c212');
-  assert.equal(hash(readBundled('server/data/canon.json.gz')), '130d2b68e7b1c678d7ae765239f6c96e854c4d17f9d08315a19e75a4e32009f3');
+  assert.equal(hash(readBundled('server/data/canon.json.gz')), 'd4bd22072c2f7e7fa6a89748db5a85ffeeedd55c20d0ab22afc031e62b397561');
   assert.deepEqual(registry, JSON.parse(readFileSync('server/data/reviewed-ati-sections.json', 'utf8')));
   assert.doesNotThrow(() => validate());
 });

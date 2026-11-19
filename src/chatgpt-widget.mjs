@@ -25,7 +25,7 @@ import { getCommentary } from './commentary.mjs';
 import { HostedToolError } from './hosted-tool-error.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v17';
+export const WIDGET_VERSION = 'v18';
 // Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.
 export const NAVIGATION_TIMEOUT_MS = 90000;
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
@@ -36,6 +36,7 @@ export const SKYBRIDGE_MIME = 'text/html+skybridge';
 const APADANA_PINS = ['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256'];
 const WIDGET_APADANA = Object.fromEntries(Object.entries(APADANA_PROFILES).map(([id, p]) => [id, {
   translation_id: canon.translationId(p), url: p.url, fetched_url: p.raw_url, note_count: p.note_count,
+  ...(p.chapter_summary ? { chapter_summary: p.chapter_summary } : {}),
   ...Object.fromEntries(APADANA_PINS.map(key => [key, p[key]])),
 }]));
 
@@ -69,7 +70,7 @@ export const TOOL_META = {
 /** Data for the widget: Pāli segments (VRI) plus one English translation, each with its attribution. */
 export async function readPassage({ uid, book, commentary, segment, context = 0, source_commit: sourceCommit, anchor_sha256: anchorHash, translation, english: wantEnglish = true, offset = 0, limit = 40, english_offset: englishOffset = 0, english_prefix_sha256: englishPrefix, english_translation_revision: englishRevision, englishCharacters = 6000, script }) {
   if ([uid, book, commentary].filter(value => value !== undefined).length !== 1) throw new Error('Give exactly one of uid (canonical/post-canonical), book (complete root file), or commentary (aligned citation or direct commentary reference).');
-  if (sourceCommit !== undefined && sourceCommit !== canon.source().commit) throw new Error('The requested VRI source version is no longer bundled. Reopen the selection from the current source; no continuation or context was substituted.');
+  const checkSource = source => { if (sourceCommit !== undefined && sourceCommit !== (source.locator_revision || source.commit)) throw new Error('The requested VRI source version or locator revision changed. Reopen the selection from the current source; no continuation or context was substituted.'); };
   if (!Number.isInteger(context) || context < 0 || context > 20) throw new Error('Context must be an integer from 0 to 20 neighbouring segments on each side.');
   if (uid !== undefined) {
     const reference = romanizeInput(uid).text;
@@ -92,12 +93,12 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
     const match = segment.match(/^.+\/([1-9]\d*)$/);
     const index = match ? Number(match[1]) - 1 : -1;
     if (!Number.isSafeInteger(index) || index < 0 || index > 100000) throw new Error('Give the exact segment reference from the selected reader, ending in a positive /N.');
-    const exact = await readPassage({ uid, book, offset: index, limit: 1, english: false, script });
+    const exact = await readPassage({ uid, book, offset: index, limit: 1, english: false, script, ...(sourceCommit ? { source_commit: sourceCommit } : {}) });
     if (exact.pali.segments[0]?.ref !== segment) throw new Error(`Segment ${segment} does not belong to this selection. Copy its exact reference from get_text or get_post_canonical; no other segment was selected.`);
     const fingerprint = createHash('sha256').update(JSON.stringify(exact.pali.segments[0])).digest('hex');
     if (anchorHash !== undefined && anchorHash !== fingerprint) throw new Error('The exact source segment has changed. Reopen it before requesting context; no neighbouring passage was substituted.');
     const selector = book !== undefined ? { book: exact.book_id } : { uid: exact.text_id || exact.citation };
-    const args = { ...selector, segment, english: false, source_commit: exact.source.commit, anchor_sha256: fingerprint, ...(script ? { script: scriptName(script) } : {}) };
+    const args = { ...selector, segment, english: false, source_commit: exact.source.locator_revision || exact.source.commit, anchor_sha256: fingerprint, ...(script ? { script: scriptName(script) } : {}) };
     const start = Math.max(0, index - context);
     const page = context ? await readPassage({ ...selector, offset: start, limit: index - start + context + 1, english: false, script }) : exact;
     const caution = `${context ? 'This is surrounding Pāli from the same source selection.' : 'This is one exact Pāli source segment.'} English translations are linked to whole texts, with no verified segment-level English alignment here. Read the whole citation without segment to inspect English availability.`;
@@ -110,6 +111,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
     };
   }
   if (commentary !== undefined) {
+    checkSource(canon.source());
     const input = romanizeInput(commentary);
     const page = getCommentary(input.text, { offset, limit });
     if (!Array.isArray(page.segments)) throw new Error('Choose a commentary passage or book reference, not the commentary catalogue. Use get_commentary with uid commentary to list book references.');
@@ -155,6 +157,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
     return { ...displayed, pali: { ...displayed.pali, read_with: { name: WIDGET_TOOL, arguments: args }, context_with: parentPage.total_segments > 1 ? { name: WIDGET_TOOL, arguments: { ...args, context: 2 } } : null, exact_with: null } };
   }
   if (book !== undefined) {
+    checkSource(canon.source());
     const page = readBook({ book, offset, limit });
     const result = {
       canonical: true, selection: 'source_book', book_id: page.book_id,
@@ -174,6 +177,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
   try { resolved = canon.resolve(input.text); }
   catch (error) {
     if (!postcanonical.isPostCanonical(input.text)) throw error;
+    checkSource(canon.source());
     const page = await postcanonical.getText(input.text, { offset, limit });
     const result = {
       canonical: false, content_type: 'post_canonical', label: page.label,
@@ -188,6 +192,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
     return widgetDisplay(result, { input, script, uid: page.citation, wantEnglish, translation, limit });
   }
   const { unit, notes } = resolved;
+  checkSource(canon.readingSource(unit));
   const described = canon.describe(unit, notes);
   const all = canon.segments(unit);
   const page = all.slice(offset, offset + limit);
@@ -225,13 +230,13 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
       result.english = {
         translator: t.translator, translation_id: t.translation_id, source: t.source, url: t.url,
         reference: (canon.describe(unit).english.find((e) => e.translation_id === t.translation_id) || {}).reference,
-        ...(t.translation_revision ? { translation_revision: t.translation_revision, translator_notes: t.translator_notes, publisher_paratext: t.publisher_paratext, license_url: t.license_url, changes: t.changes, fetched_url: t.fetched_url, ...Object.fromEntries(APADANA_PINS.map(key => [key, t[key]])) } : {}),
+        ...(t.translation_revision ? { translation_revision: t.translation_revision, translator_notes: t.translator_notes, publisher_paratext: t.publisher_paratext, ...(t.chapter_summary ? { chapter_summary: t.chapter_summary } : {}), license_url: t.license_url, changes: t.changes, fetched_url: t.fetched_url, ...Object.fromEntries(APADANA_PINS.map(key => [key, t[key]])) } : {}),
         fetched_from: t.fetched_from, attribution: t.attribution, license: t.license,
         text: t.text, prefix_sha256: t.prefix_sha256, offset: t.offset, total_characters: t.total_characters, next_offset: t.next_offset, truncated: t.next_offset !== null, notes: t.notes,
-        read_with: { name: WIDGET_TOOL, arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.offset, ...(t.translation_revision ? { english_translation_revision: t.translation_revision } : {}), ...(t.offset > 0 ? { english_prefix_sha256: t.prefix_sha256 } : {}), ...(script ? { script: scriptName(script) } : {}) } },
+        read_with: { name: WIDGET_TOOL, arguments: { uid: unit.id, source_commit: result.source.locator_revision || vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.offset, ...(t.translation_revision ? { english_translation_revision: t.translation_revision } : {}), ...(t.offset > 0 ? { english_prefix_sha256: t.prefix_sha256 } : {}), ...(script ? { script: scriptName(script) } : {}) } },
         continue_with: t.next_offset !== null ? {
           name: WIDGET_TOOL,
-          arguments: { uid: unit.id, source_commit: vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset, english_prefix_sha256: t.continue_with.arguments.prefix_sha256, ...(t.translation_revision ? { english_translation_revision: t.translation_revision } : {}), ...(script ? { script: scriptName(script) } : {}) },
+          arguments: { uid: unit.id, source_commit: result.source.locator_revision || vri.commit, translation: t.translation_id, english: true, offset, limit, english_offset: t.next_offset, english_prefix_sha256: t.continue_with.arguments.prefix_sha256, ...(t.translation_revision ? { english_translation_revision: t.translation_revision } : {}), ...(script ? { script: scriptName(script) } : {}) },
         } : null,
       };
     } catch (error) {
@@ -246,7 +251,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
 function widgetDisplay(result, { input, script, uid, book, commentary, wantEnglish, translation, limit }) {
   const { segments, ...display } = localizeText({ title: result.title, segments: result.pali.segments }, script, input);
   const version = result.english?.translation_id || translation;
-  const args = { ...(commentary ? { commentary } : book ? { book } : { uid }), source_commit: result.source.commit, english: wantEnglish, offset: result.pali.next_offset, limit,
+  const args = { ...(commentary ? { commentary } : book ? { book } : { uid }), source_commit: result.source.locator_revision || result.source.commit, english: wantEnglish, offset: result.pali.next_offset, limit,
     ...(version ? { translation: version } : {}), ...(script ? { script: scriptName(script) } : {}) };
   return { ...result, ...display, pali: { ...result.pali, segments,
     read_with: { name: WIDGET_TOOL, arguments: { ...args, english: false, offset: result.pali.offset } },
@@ -268,7 +273,7 @@ export function registerChatgptWidget(server, { executeTool } = {}) {
       book: z.string().trim().min(1).max(100).optional().describe('Complete VRI root source file ID from browse_canon node books, including front matter. Give book instead of uid/commentary. File refs do not identify individual suttas or rules; no English is selected here.'),
       segment: z.string().trim().min(1).max(400).optional().describe('One exact segment ref from the selected get_text/get_post_canonical reader, e.g. mn10/66, Vism 1.1/2 or vri-book:vin02m1/7. Keep uid or book as its source selection. No Pāli/English continuation offsets or segment-aligned English. For commentary use its exact /cN reference in commentary instead.'),
       context: z.number().int().min(0).max(20).default(0).describe('With segment, include this many neighbouring Pāli segments on each side within the same selection. Follow pali.context_with for a source/anchor-pinned request, or pali.exact_with to return.'),
-      source_commit: z.string().regex(/^[a-f0-9]{40}$/).optional().describe('Expected VRI source commit from a returned cursor; a changed source fails instead of moving the reading to another version.'),
+      source_commit: z.string().regex(/^[a-f0-9]{40}(?:-[a-zA-Z0-9._-]{1,40})?$/).optional().describe('Expected source locator pin from a returned cursor: VRI commit plus any reviewed index revision. A changed source or mapping refuses before reading.'),
       anchor_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Expected exact source-segment fingerprint from pali.context_with/exact_with. Preserve the command unchanged; a changed segment fails rather than substituting context.'),
       script: z.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
       translation: z.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or an unambiguous translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
@@ -517,7 +522,7 @@ export const WIDGET_HTML = `<!doctype html>
       Number.isInteger(data.pali.total_segments) && data.pali.total_segments >= data.pali.returned &&
       Number.isInteger(data.pali.offset) && data.pali.offset >= 0;
     if (!error && result && !result.isError && readable) {
-      if ((args.source_commit && (!data.source || data.source.commit !== args.source_commit)) ||
+      if ((args.source_commit && (!data.source || (data.source.locator_revision || data.source.commit) !== args.source_commit)) ||
           (args.script && (data.script || 'roman') !== args.script) ||
           (args.book && data.book_id !== args.book) ||
           (args.uid && data.text_id !== args.uid && data.citation !== args.uid) ||
@@ -590,8 +595,16 @@ export const WIDGET_HTML = `<!doctype html>
   }
   function setTheme(theme) { if (theme === 'dark' || theme === 'light') document.documentElement.setAttribute('data-theme', theme); }
   function characterPosition(at, total) { return 'character ' + at + (typeof total === 'number' && Number.isFinite(total) ? ' of ' + total : ''); }
+  function checkedChapterSummary(e, p) {
+    if (!p.chapter_summary) return !Object.prototype.hasOwnProperty.call(e, 'chapter_summary');
+    var s = e.chapter_summary, expected = p.chapter_summary;
+    return s && typeof s === 'object' && !Array.isArray(s) && Object.keys(s).sort().join(',') === Object.keys(expected).concat(['text', 'translator_notes']).sort().join(',') &&
+      Object.keys(expected).every(function (key) { return JSON.stringify(s[key]) === JSON.stringify(expected[key]); }) &&
+      typeof s.text === 'string' && s.text.trim() && s.text.length <= 50000 && Array.isArray(s.translator_notes) && s.translator_notes.length === 1 &&
+      s.translator_notes.every(function (n) { return n && Object.keys(n).sort().join(',') === 'number,text' && n.number === 8 && typeof n.text === 'string' && n.text.trim() && n.text.length <= 50000; });
+  }
   function checkedApadana(d) {
-    var e = d.english, checked = e && (e.source === 'apadana' || typeof e.translation_revision !== 'undefined' || typeof e.translation_id === 'string' && e.translation_id.toLowerCase().indexOf('ap:') === 0 || typeof e.url === 'string' && e.url.indexOf('${APADANA_BASE}/') === 0);
+    var e = d.english, checked = e && (e.source === 'apadana' || Object.prototype.hasOwnProperty.call(e, 'chapter_summary') || typeof e.translation_revision !== 'undefined' || typeof e.translation_id === 'string' && e.translation_id.toLowerCase().indexOf('ap:') === 0 || typeof e.url === 'string' && e.url.indexOf('${APADANA_BASE}/') === 0);
     if (!checked) return d;
     var profiles = ${JSON.stringify(WIDGET_APADANA)}, p = Object.prototype.hasOwnProperty.call(profiles, d.text_id) && profiles[d.text_id];
     if (p && e.source === 'apadana' && e.translation_id === p.translation_id && e.url === p.url && e.fetched_url === p.fetched_url &&
@@ -601,7 +614,7 @@ export const WIDGET_HTML = `<!doctype html>
         typeof e.publisher_paratext === 'string' && e.publisher_paratext.length <= 50000 && Boolean(e.publisher_paratext.trim()) === (d.text_id === 'thi-ap1') &&
         Array.isArray(e.translator_notes) && e.translator_notes.length === p.note_count &&
         e.translator_notes.every(function (note, i) { return note && note.number === i + 1 && typeof note.text === 'string' && note.text.length <= 50000 && note.text.trim(); }) &&
-        ${JSON.stringify(APADANA_PINS)}.every(function (key) { return e[key] === p[key]; })) return d;
+        checkedChapterSummary(e, p) && ${JSON.stringify(APADANA_PINS)}.every(function (key) { return e[key] === p[key]; })) return d;
     return Object.assign({}, d, { english: null, english_error: 'Apadāna publisher identity, terms or source pins changed. No English was displayed.' });
   }
   function render(d) {
@@ -675,6 +688,16 @@ export const WIDGET_HTML = `<!doctype html>
           var noteList = el('ol', '');
           d.english.translator_notes.forEach(function (n) { var li = el('li', '', n.text); li.value = n.number; noteList.appendChild(li); });
           en.appendChild(noteList);
+        }
+        if (d.english.chapter_summary) {
+          var s = d.english.chapter_summary, chapter = el('section', '');
+          chapter.setAttribute('aria-label', 'Canonical chapter summary · not poem text');
+          chapter.appendChild(el('h3', '', 'Canonical chapter summary · not poem text'));
+          chapter.appendChild(el('p', 'en', s.text));
+          chapter.appendChild(el('h3', '', 'Chapter summary notes · editorial, not poem notes'));
+          var summaryNotes = el('ol', '');
+          s.translator_notes.forEach(function (n) { var li = el('li', '', n.text); li.value = n.number; summaryNotes.appendChild(li); });
+          chapter.appendChild(summaryNotes); en.appendChild(chapter);
         }
       }
       if (d.english.truncated) en.appendChild(el('p', 'note', 'The translation continues (' + characterPosition(d.english.next_offset, d.english.total_characters) + '). Ask for more to continue, or read the rest on the source page.'));

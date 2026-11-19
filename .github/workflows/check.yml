@@ -460,13 +460,19 @@ jobs:
             src/_poems/chapter-4/poem-001.md
             src/_poems/chapter-4/poem-002.md
             src/_poems/chapter-4/poem-003.md
+            src/_poems/chapter-4/poem-004.md
+            src/_poems/chapter-4/poem-005.md
             src/_poems/chapter-4/poem-006.md
             src/_poems/chapter-4/poem-007.md
             src/_poems/chapter-4/poem-008.md
             src/_poems/chapter-4/poem-009.md
+            src/_poems/chapter-4/poem-010.md
       - name: Validate all Apadāna source and rights pins before browser retrieval
         if: matrix.group == 'apadana'
         run: node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+      - name: Check original and new Apadāna parser refusals against pinned source
+        if: matrix.group == 'apadana'
+        run: APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-parser.test.mjs tests/apadana-integration.test.mjs tests/apadana-pair-boundary.test.mjs tests/apadana-three.test.mjs
       - name: Check seven exact Apadāna sources using deterministic fixtures
         if: matrix.group == 'apadana'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-check.py --source-root .fixtures/apadana-pinned --report standalone-apadana.report.json
@@ -480,6 +486,15 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP/apadana-package"
           tar -xzf "$RUNNER_TEMP/apadana-package/"*.tgz -C "$RUNNER_TEMP/apadana-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-package/package/server" --report installed-apadana.report.json
+      - name: Check repaired Apadāna 4/5 and separately scoped poem 10 summary
+        if: matrix.group == 'apadana'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-three-check.py --source-root .fixtures/apadana-pinned --report standalone-apadana-three.report.json
+      - name: Audit three new Apadāna sources and chapter-note ownership
+        if: matrix.group == 'apadana'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-three-check.py --source-root .fixtures/apadana-pinned --a11y --report standalone-apadana-three-a11y.report.json
+      - name: Check repaired Apadāna and summary from isolated npm package
+        if: matrix.group == 'apadana'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-three-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-package/package/server" --report installed-apadana-three.report.json
       - name: Check reader reflow with expanded user text spacing
         if: matrix.group == 'textspacing'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-text-spacing-check.py --report standalone-text-spacing.report.json
@@ -625,6 +640,9 @@ jobs:
             standalone-apadana.report.json
             standalone-apadana-a11y.report.json
             installed-apadana.report.json
+            standalone-apadana-three.report.json
+            standalone-apadana-three-a11y.report.json
+            installed-apadana-three.report.json
             standalone-text-spacing.report.json
             standalone-text-spacing-a11y.report.json
             installed-text-spacing.report.json

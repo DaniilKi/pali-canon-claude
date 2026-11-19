@@ -31,10 +31,11 @@ server_dir = args.server_dir.resolve() if args.server_dir else ROOT / 'server'
 manifest = json.loads((server_dir / 'data/apadana.json').read_text())
 assert manifest == json.loads((ROOT / 'server/data/apadana.json').read_text())
 rows, commit = manifest['links'], manifest['source']['commit']
-assert tuple(rows) == IDS
+assert tuple(uid for uid in rows if uid in IDS) == IDS
+assert set(rows) == set(IDS) | {'thi-ap4','thi-ap5','thi-ap10'}
 assert subprocess.check_output(['git', '-C', str(args.source_root), 'rev-parse', 'HEAD'], text=True).strip() == commit
 files = {}
-for row in rows.values():
+for row in (rows[uid] for uid in IDS):
     url = row['raw_url']
     local = args.source_root.resolve() / url.split(commit + '/', 1)[1]
     assert hashlib.sha256(local.read_bytes()).hexdigest() == row['raw_sha256']
@@ -115,7 +116,7 @@ with TemporaryDirectory(prefix='pali-apadana-browser-') as work:
             choices = meta['english_available']
             assert len(choices) == 1 and choices[0]['translation_id'] == version(uid)
         for uid in ('thi-ap4', 'thi-ap5', 'thi-ap10'):
-            assert not tool('get_text', {'uid': uid, 'limit': 1})['english_available']
+            assert len(tool('get_text', {'uid': uid, 'limit': 1})['english_available']) == 1
             assert rpc('get_translation', {'uid': uid, 'translation': version(IDS[0])}).get('isError')
         uid = IDS[0]
         request = {'uid': uid, 'translation': version(uid), 'translation_revision': commit, 'limit': 500}

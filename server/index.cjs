@@ -21680,6 +21680,76 @@ var APADANA_PROFILES = deepFreeze({
       "Verse26: publisher robes vs VRI three robes."
     ]
   },
+  "thi-ap4": {
+    "id": "thi-ap4",
+    "poem": 4,
+    "verses": [
+      31,
+      36
+    ],
+    "note_count": 1,
+    "source": "apadana",
+    "path": "/text/chapter-4/poem-004/",
+    "url": "https://apadanatranslation.com/text/chapter-4/poem-004/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-004.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Sa\u1E45kamanatt\u0101",
+    "reference": "Ther\u012B Apad\u0101na 4; publisher verses 31\u201336",
+    "raw_sha256": "c059f6361fa2b6f98e599baa84721e615c63f5052a60e0b11d304b89a7c4bc5f",
+    "body_sha256": "ae1326cf8ebab5a14db40b108dc40085e2691a6d63ac7c48b2c8ae6340a69e19",
+    "notes_sha256": "bc9e1cbe2bb2972a044360e44587c12a089131da087e70897207fa7dbb671bdb",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "21bf7bb0a2998c44df1b93c5fa421397060d441a063d9df15674904acf7f4ff8",
+    "mapping_notes": [
+      "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas.",
+      "Publisher title Sa\u1E45kamanatt\u0101 differs from VRI Sa\u1E45kamanatth\u0101; both source spellings remain unchanged. Publisher verse 31 names Ko\u1E47\u1E0Da\xF1\xF1a where the VRI main reading names Vipass\u012B; a VRI variant supports Ko\u1E47\u1E0Da\xF1\xF1a.",
+      "The paired 4/5 ownership repair restores poem 4 verses 31\u201336 and poem 5 verses 37\u201345. Previously saved P\u0101li locations require fresh source review."
+    ],
+    "index_revision": "apadana-theri45-v1"
+  },
+  "thi-ap5": {
+    "id": "thi-ap5",
+    "poem": 5,
+    "verses": [
+      37,
+      45
+    ],
+    "note_count": 7,
+    "source": "apadana",
+    "path": "/text/chapter-4/poem-005/",
+    "url": "https://apadanatranslation.com/text/chapter-4/poem-005/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-005.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "T\u012B\u1E47ina\u1E37am\u0101lik\u0101",
+    "reference": "Ther\u012B Apad\u0101na 5; publisher verses 37\u201345",
+    "raw_sha256": "8f91f8c76988b7367fbbdf60245983dfc156f315095e11c26dfd1c33f5f46288",
+    "body_sha256": "ba73861917517774a6b76506bf54bdcd94d0abe989c5fa51b33ea3e6309c30f5",
+    "notes_sha256": "d1d133a8e25163d7ca2d883c77dcd1a5040ce34b936d45c5531c3c0040b25108",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "bc87b06e6c4713fe575053f88a8c7efe1a4bac017e6b830dfd371b14eeffcbaf",
+    "mapping_notes": [
+      "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas.",
+      "Publisher verse labels are preserved exactly: 37, 38, 39-40, 40, 42, 41, 43, 44, 45. Local stanzas 1\u20139 remain in publisher order, including the overlap and reversed 42/41 labels. They are not a line alignment to VRI.",
+      "Publisher stanza 3 labelled 39-40 combines VRI 39 and the opening of 40; stanza 4 labelled 40 continues that material. Publisher label 42 corresponds broadly to VRI 41, label 41 to VRI 42, whose worship wording also differs. Translator notes 1\u20137 remain separately owned by this poem.",
+      "The paired 4/5 ownership repair restores the Na\u1E37am\u0101lik\u0101 heading and verse 37 to poem 5; it does not rewrite publisher numbering. Previously saved P\u0101li locations require fresh source review."
+    ],
+    "index_revision": "apadana-theri45-v1",
+    "publisher_verse_labels": [
+      "37",
+      "38",
+      "39-40",
+      "40",
+      "42",
+      "41",
+      "43",
+      "44",
+      "45"
+    ]
+  },
   "thi-ap6": {
     "id": "thi-ap6",
     "poem": 6,
@@ -21789,6 +21859,49 @@ var APADANA_PROFILES = deepFreeze({
       "Publisher verse 101 depicts standing and looking eastward; VRI thi-ap9/12 instead describes sitting while turned away (parammukh\u0101 nis\u012Bditv\u0101). No posture or direction alignment is asserted.",
       "Publisher verse 102 concerns deeds done well or badly; VRI thi-ap9/13 instead has good and bad destinations (sugataduggate). Translator note 11 records the BJTS destination reading and remains separate from the verse."
     ]
+  },
+  "thi-ap10": {
+    "id": "thi-ap10",
+    "poem": 10,
+    "verses": [
+      116,
+      130
+    ],
+    "note_count": 7,
+    "source": "apadana",
+    "path": "/text/chapter-4/poem-010/",
+    "url": "https://apadanatranslation.com/text/chapter-4/poem-010/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-4/poem-010.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Udakad\u0101yik\u0101",
+    "reference": "Ther\u012B Apad\u0101na 10; publisher verses 116\u2013130",
+    "raw_sha256": "2696db2cc5d8cc1271c611864e5f3a687e97af7208e80472a4dbdfbc257a6af3",
+    "body_sha256": "11892ab91ea2091ba9568089a417abf764129a20d4393d3fbc7036b82919f47f",
+    "notes_sha256": "b44ff0d544bca0de72278f0cf4e8fbcacd466cdd5d17bfc1b8a2a4fe9351b0dd",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "d2b542bdf76f31f4a5c46d56ae2d43e8c612d46902bb6d9725e034ec2e4229ce",
+    "mapping_notes": [
+      "Publisher follows PTS/BJTS readings, not a line-aligned translation of the bundled VRI recension. VRI peyy\u0101la remains abbreviated; publisher expands repeated stanzas.",
+      "Publisher verse 122 describes a bad road where VRI dumagge describes a tree top; publisher verse 127 describes karma generally where VRI specifies water-giving. Neither reading is substituted for the other.",
+      "The chapter summary and its translator note 8 are separate canonical chapter paratext, not poem 10 stanzas or poem notes. Publisher summary counts 118 stanzas while VRI counts 130; their colophon/summary order also differs. Original wording, order and numbers remain unchanged."
+    ],
+    "chapter_summary": {
+      "kind": "canonical_chapter_summary",
+      "label": "First Ther\u012B Apad\u0101na chapter summary",
+      "parent_id": "thi-ap10",
+      "first_ref": "thi-ap10/19",
+      "last_ref": "thi-ap10/22",
+      "root_start": 6930,
+      "root_end": 6936,
+      "root_sha256": "37490df4056522cb2cf00a3e3372fa3730dd2f49979c95b021bf6ee6e76a3057",
+      "body_sha256": "652008e55afc3343b94eb3a5042a8ad9874b4904aedd13126555e84798abc0dd",
+      "notes_sha256": "7e43cbed8c710d9a0458f2e6d8919f3f79afc983a37c0b36dd4e4626777cafc5",
+      "note_numbers": [
+        8
+      ]
+    }
   }
 });
 var APADANA_RIGHTS = deepFreeze([
@@ -22011,16 +22124,33 @@ function parseApadana(raw, profile) {
   const rest = raw.slice(front[0].length).trim();
   const notesAt = rest.search(/^\[\^\d+\]:/m);
   if (notesAt < 0) fail();
-  const poem = rest.slice(0, notesAt).trim(), definitions = rest.slice(notesAt);
+  let poem = rest.slice(0, notesAt).trim();
+  const definitions = rest.slice(notesAt);
+  let summaryRaw;
+  if (profile.chapter_summary) {
+    if (profile.id !== "thi-ap10" || profile.poem !== 10) fail();
+    const parts = poem.split("\n\nThe Summary:\n\n");
+    if (parts.length !== 2) fail();
+    [poem, summaryRaw] = [parts[0], "The Summary:\n\n" + parts[1]];
+  }
   const entries = [...definitions.matchAll(/^\[\^(\d+)\]:[ \t]*([^]*?)(?=^\[\^\d+\]:|(?![^]))/gm)];
   if (!entries.length || entries[0].index !== 0) fail();
-  const translator_notes = entries.map((entry3, index4) => {
+  const allNotes = entries.map((entry3, index4) => {
     if (Number(entry3[1]) !== index4 + 1 || !entry3[2].trim()) fail();
     return { number: Number(entry3[1]), text: plainMarkdown(entry3[2]) };
   });
-  if (translator_notes.length !== profile.note_count) fail();
+  const translator_notes = allNotes.slice(0, profile.note_count);
+  if (allNotes.length !== profile.note_count + (summaryRaw === void 0 ? 0 : 1)) fail();
   const references = [...poem.matchAll(/\[\^(\d+)\]/g)].map((m) => Number(m[1]));
   if (references.some((n) => !translator_notes[n - 1]) || translator_notes.some((n) => !references.includes(n.number))) fail();
+  let chapter_summary;
+  if (summaryRaw !== void 0) {
+    const text3 = plainMarkdown(summaryRaw), paragraphs2 = text3.split(/\n\n+/);
+    const refs = [...summaryRaw.matchAll(/\[\^(\d+)\]/g)].map((m) => Number(m[1]));
+    const summaryNotes = allNotes.slice(profile.note_count);
+    if (profile.note_count !== 7 || paragraphs2.length !== 3 || paragraphs2[0] !== "The Summary:" || paragraphs2[1].split("\n").length !== 8 || paragraphs2[2] !== "The Sumedh\u0101 Chapter, the First" || refs.length !== 1 || refs[0] !== 8 || summaryNotes[0].number !== 8 || digest(text3) !== profile.chapter_summary.body_sha256 || digest(JSON.stringify(summaryNotes)) !== profile.chapter_summary.notes_sha256) fail();
+    chapter_summary = { ...profile.chapter_summary, text: text3, translator_notes: summaryNotes };
+  }
   const headings = [...poem.matchAll(/^### /gm)];
   if (headings.length !== 1) fail();
   const split = headings[0].index;
@@ -22029,13 +22159,15 @@ function parseApadana(raw, profile) {
   const text2 = plainMarkdown(poem.slice(split));
   const paragraphs = text2.split(/\n\n+/);
   const stanzas = paragraphs.flatMap((p) => {
-    const match2 = p.match(/\((\d+)\)\s*\[(\d+)\](?:\[Note \d+\])*$/);
-    return match2 ? [{ local: Number(match2[1]), global: Number(match2[2]), text: p }] : [];
+    const match2 = p.match(/\((\d+)\)\s*\[(\d+(?:-\d+)?)\](?:\[Note \d+\])*$/);
+    return match2 ? [{ local: Number(match2[1]), global: match2[2], text: p }] : [];
   });
   const [first, last] = profile.verses;
-  if (stanzas.length !== last - first + 1 || stanzas.some((s, i) => s.local !== i + 1 || s.global !== first + i)) fail();
+  const labels = profile.publisher_verse_labels;
+  if (labels && (profile.id !== "thi-ap5" || profile.poem !== 5 || JSON.stringify(labels) !== JSON.stringify(["37", "38", "39-40", "40", "42", "41", "43", "44", "45"]))) fail();
+  if (stanzas.length !== last - first + 1 || stanzas.some((s, i) => s.local !== i + 1 || s.global !== (labels ? labels[i] : String(first + i)))) fail();
   if (paragraphs.length !== stanzas.length + 3 || !paragraphs[0].startsWith(`[${profile.poem}. `) || !/^Thus indeed /.test(paragraphs.at(-2)) || !/legend of .*is finished\.\]?(?:\[Note \d+\])?$/.test(paragraphs.at(-1))) fail();
-  return { title, text: text2, translator_notes, publisher_paratext };
+  return { title, text: text2, translator_notes, publisher_paratext, ...chapter_summary ? { chapter_summary } : {} };
 }
 function validateLink(link, id, unit, book) {
   const profile = Object.values(APADANA_PROFILES).find((p) => p.path === link?.path);
@@ -22045,12 +22177,20 @@ function validateLink(link, id, unit, book) {
   }
   if (["partial_scope", "shared_scope", "section", "parts"].some((key3) => Object.hasOwn(link, key3))) fail();
   for (const key3 of ["title", "reference", "mapping_notes"]) if (JSON.stringify(link[key3]) !== JSON.stringify(profile[key3])) fail();
+  for (const key3 of ["index_revision", "publisher_verse_labels", "chapter_summary"]) {
+    if (Object.hasOwn(link, key3) !== Object.hasOwn(profile, key3) || JSON.stringify(link[key3]) !== JSON.stringify(profile[key3])) fail();
+  }
   if (link.english !== void 0 && link.english !== profile.title) fail();
   if (unit && (!book || unit.id !== profile.id || rootDigest(unit, book) !== profile.root_sha256)) fail();
+  if (unit && profile.index_revision && unit.index_revision !== profile.index_revision) fail();
+  if (unit && profile.chapter_summary) {
+    const s = profile.chapter_summary;
+    if (rootDigest({ ...unit, start: s.root_start, end: s.root_end }, book) !== s.root_sha256) fail();
+  }
   return profile;
 }
 function quotationText(result) {
-  return String(result.text || "").split(/\n\n+/).filter((p) => /\(\d+\)\s*\[\d+\](?:\[Note \d+\])*$/.test(p)).map((p) => p.replace(/\[Note \d+\]/g, "").replace(/\s*\(\d+\)\s*\[\d+\]\s*$/, "")).join("\n\n");
+  return String(result.text || "").split(/\n\n+/).filter((p) => /\(\d+\)\s*\[(?:\d+|39-40)\](?:\[Note \d+\])*$/.test(p)).map((p) => p.replace(/\[Note \d+\]/g, "").replace(/\s*\(\d+\)\s*\[(?:\d+|39-40)\]\s*$/, "")).join("\n\n");
 }
 async function translation(link) {
   const profile = validateLink(link);
@@ -22075,7 +22215,7 @@ async function translation(link) {
     paratext_sha256: profile.paratext_sha256,
     root_sha256: profile.root_sha256,
     mapping_notes: [...profile.mapping_notes],
-    changes: "Presentation extraction: retain diacritics; remove alternate no-diacritic display, Markdown and abbreviation markup; preserve interpolations and both numbering systems; label and separate translator notes and publisher preface. No translation wording is generated."
+    changes: "Presentation extraction: retain diacritics; remove alternate no-diacritic display, Markdown and abbreviation markup; preserve interpolations and both numbering systems; label and separate translator notes and publisher preface. Chapter summary and its original note number, where present, are separately scoped outside the poem. No translation wording is generated."
   };
 }
 
@@ -24760,7 +24900,7 @@ function describe(u, notes = []) {
     ...t.license ? { license: t.license } : {},
     translation_id: translationId(t),
     match: t.match,
-    ...t.source === "apadana" ? { translation_revision: t.translation_revision, note_count: t.note_count } : {},
+    ...t.source === "apadana" ? { translation_revision: t.translation_revision, note_count: t.note_count, ...t.chapter_summary ? { chapter_summary: JSON.parse(JSON.stringify(t.chapter_summary)) } : {} } : {},
     ...t.mapping_note ? { mapping_note: t.mapping_note } : {},
     ...t.section ? { source_section: JSON.parse(JSON.stringify(t.section)) } : {},
     ...isScoped(t) ? { translation_scope: translationScope(t, u) } : {},
@@ -25422,7 +25562,7 @@ function available(unit) {
     reference: t.reference || void 0,
     ...t.license ? { license: t.license } : {},
     match: t.match,
-    ...t.source === "apadana" ? { url: t.url, translation_revision: t.translation_revision, note_count: t.note_count } : {},
+    ...t.source === "apadana" ? { url: t.url, translation_revision: t.translation_revision, note_count: t.note_count, ...t.chapter_summary ? { chapter_summary: JSON.parse(JSON.stringify(t.chapter_summary)) } : {} } : {},
     ...t.mapping_note ? { mapping_note: t.mapping_note } : {},
     ...t.section ? { source_section: JSON.parse(JSON.stringify(t.section)) } : {},
     ...t.commentary ? { includes_commentary: true } : {}
