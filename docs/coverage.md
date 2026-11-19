@@ -17,7 +17,7 @@ What Pali Canon for Claude contains in version 2.1.0, computed directly from the
 | Thai, Myanmar and VRI page markers | 56,050 (21,781 Thai, 16,687 Myanmar, 17,582 VRI), shown in `get_text` and accepted as citations such as "Thai MN 1.103"; 56,048 resolve back to a text containing the marker |
 | Variant readings | 18,725 VRI notes; 16,632 (88.8%) give at least one reading attributed to editions by siglum (`get_text` `variants: "structured"`) |
 | Scripts | Roman, plus Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao and Lanna by transliteration. The first five are tested against VRI's own script editions; Lao and Lanna have no VRI edition and are tested by round trip only |
-| English translation links | 2,538 links covering 1,434 texts directly, 1,857 including verses that share their chapter's translation (63 of them placed by the content-based linker, [#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)). `list_sources` reports the same per collection as `translation_coverage`, counting grouped ranges through their members (1,408 and 1,831 of 8,445) |
+| English translation links | 2,552 links covering 1,448 texts directly, 1,871 including verses that share their chapter's translation (63 of them placed by the content-based linker, [#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)). `list_sources` reports the same per collection as `translation_coverage`, counting grouped ranges through their members (1,422 and 1,845 of 8,445) |
 | Commentary (Aṭṭhakathā) | VRI commentaries aligned to the texts by VRI paragraph number (`get_commentary`, `get_text` `commentary: true`): DN 34/34, MN 152/152, SN 1,800/1,954, AN 1,598/2,085, Dhp 449/449, Ja 512/547, Vinaya 370/443 texts; every text the commentary numbers is aligned except 8 known exceptions. `server/data/commentary.json.gz`, 10.8 MB |
 | Post-canonical books | All 109 VRI Ṭīkā and Añña books (Visuddhimagga, its Mahāṭīkā, Abhidhammatthasaṅgaha, Mahāvaṃsa and the sub-commentaries), labelled `canonical: false` (`get_post_canonical`, `search_post_canonical`). `server/data/postcanonical.json.gz`, 14.5 MB |
 | Word analysis | Digital Pāḷi Dictionary v0.4.20261026 subset: 89,763 headwords, 753 roots and the word forms of the bundled texts; 99.73% of words in the citable text passages are known (`analyse_passage`, offline `lookup_pali`). `server/data/dpd.json.gz`, 5.3 MB |
@@ -53,7 +53,7 @@ All 61 root files can also be read from beginning to end using `get_text` with a
 | Mahāniddesa | Mnd | 16 | | | — |
 | Cūḷaniddesa | Cnd | 23 | | | — |
 | Paṭisambhidāmagga | Ps | 31 | | | — |
-| Milindapañha | Mil | 248 | | | — |
+| Milindapañha | Mil | 248 | | | 14 |
 | Nettippakaraṇa | Ne | 37 | | | — |
 | Peṭakopadesa | Pe | 9 | | | — |
 
@@ -89,7 +89,7 @@ Whole-unit counts exclude partial-unit and shared-page translation mappings. `np
 | Source | Links | Notes |
 |---|---:|---|
 | Ṭhānissaro Bhikkhu, dhammatalks.org | 1,270 | Current versions of his translations |
-| Access to Insight | 1,115 | Ṭhānissaro's earlier versions (848) and about 25 other translators, among them Maurice Walshe, John D. Ireland, Andrew Olendzki, Acharya Buddharakkhita, Nyanaponika Thera, Piyadassi Thera, Ñāṇamoli Thera and Bhikkhu Bodhi; each page keeps its own licence notice |
+| Access to Insight | 1,129 | Ṭhānissaro's earlier versions (848) and about 25 other translators, among them Maurice Walshe, John D. Ireland, Andrew Olendzki, Acharya Buddharakkhita, Nyanaponika Thera, Piyadassi Thera, Ñāṇamoli Thera and Bhikkhu Bodhi; each page keeps its own licence notice |
 | Ānandajoti Bhikkhu, Ancient Buddhist Texts | 153 | Line-by-line Pāli and English (CC BY-SA 3.0): Udāna, Dhammapada chapters, most of the Pārāyanavagga, the Bhikkhunīsaṃyutta, DN 16, several MN, SN and AN suttas, two parts of the Dhammasaṅgaṇī mātikā and Vibhaṅga 6–7. Each link is checked against the Pāli on the page |
 
 A translation is linked only on strong evidence: a matching number and title, a PTS start page that identifies exactly one text, or a confirmed title. When the evidence is ambiguous we leave the text unlinked, so some texts that do have a translation online are not linked yet. A second, content-based pass ([#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)) places a page only when rare names in the English occur in exactly one nearby Pāli text, or its Pāli title names exactly one; each such link stores its evidence and is audited.
@@ -160,3 +160,12 @@ D233 adds one further precise Vinaya selection, ATI Mv1.23.1–10 at `pli-tv-kd1
 D234’s [complete Vinaya survey](data/vinaya-complete-source-survey.md) activates no new translation: whole Vinaya0, partial Vinaya3, all reviewed partial choices21/partial-only15, ordinary links2,538 and indexed whole coverage1,434/1,857 remain unchanged. Khematto’s complete Mahāvagga is a promising source-specific review lead; missing raw/extraction and full-recension comparisons remain real gates. The shipped improvement exposes actual printed source headings to assistive technology without changing any source wording or coverage.
 
 D235’s [MvVII follow-up](data/mahavagga-vii-upstream-followup.md) adds no whole or partial translation. Existing whole-Vinaya0, partial-Vinaya3, reviewed partial sources21 and partial-only15 remain unchanged. The shipped script-refresh repair changes browser display behavior, not source wording, identifiers or translation coverage.
+
+
+D236 adds 14 independently reviewed complete substantive Milindapañha questions
+(first indexed English for that collection), with untranslated paratext and
+publisher numbering caveats. This is 14 of 248 indexed Milinda questions, not a
+full-book translation. Ordinary links2,552; indexed whole coverage1,448/1,871;
+grouped1,422/1,845. Partial choices21/partial-only15, three Vinaya selections,
+12 shared pages and daily sutta eligibility1,257 remain unchanged.
+[Sources and validation](data/milinda-reviewed-questions.md).

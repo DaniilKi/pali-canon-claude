@@ -1,5 +1,6 @@
 /** Exact ordinary-version comparison guards. No source retrieval or scope approval. */
 import {validateEnglishPage} from './translation-policy.mjs';
+import {milindaSourceUnit,isMilindaPageId,validateMilindaDescriptor} from './milinda-sources.mjs';
 
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const own=(x,key)=>Object.hasOwn(x,key);
@@ -10,7 +11,7 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 const failure=()=>{throw Error('The comparison selection or source response is invalid. No comparison translation was displayed.');};
 const sourceId=x=>typeof x==='string'&&x.trim()===x&&!/[\x00-\x1f\x7f]/.test(x)&&x.length<=200&&!x.includes('..')&&!/\.html?$/.test(x)&&(
   /^dt:[A-Za-z0-9_./-]+$/.test(x)||
-  /^ati:\/(?:tipitaka|lib|ptf|noncanon)\/[a-z0-9/._-]+$/.test(x)||
+  (/^ati:\/(?:tipitaka|lib|ptf|noncanon)\/[a-z0-9/._-]+$/.test(x)&&!isMilindaPageId(x))||Boolean(milindaSourceUnit(x))||
   /^aj:[A-Za-z0-9_./ -]+$/.test(x)&&x.trim()===x
 );
 
@@ -25,8 +26,9 @@ export function comparisonChoices(choices,requestedId){
     }
     // Presence is decisive, including null/undefined or inherited declarations.
     if('translation_scope' in choice||choice.whole_unit_coverage===false)continue;
-    if(!sourceId(choice.translation_id)||!text(choice.translator)||choice.translator.length>300
+    if(!sourceId(choice.translation_id)||milindaSourceUnit(choice.translation_id)&&milindaSourceUnit(choice.translation_id)!==requestedId||!text(choice.translator)||choice.translator.length>300
       ||own(choice,'whole_unit_coverage')&&choice.whole_unit_coverage!==true)failure();
+    validateMilindaDescriptor(choice);
     ordinary.push(clone(choice));
   }
   return ordinary;

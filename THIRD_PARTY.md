@@ -193,3 +193,17 @@ D233 adds one further precise Vinaya selection, ATI Mv1.23.1–10 at `pli-tv-kd1
 The [19 November complete Vinaya survey](docs/data/vinaya-complete-source-survey.md) is metadata only. No surveyed English body or new source licence is imported into the package; existing notices and holds remain. Horner’s specific PTS grant, later-edition additions, Khematto’s publisher notice, and original-versus-digital SBE terms are kept distinct.
 
 The [MvVII upstream follow-up](docs/data/mahavagga-vii-upstream-followup.md) acquires repository metadata rather than translation bodies. It adds no source or licence to the package and preserves all existing notices and holds.
+
+
+### John Kelly’s Milindapañha questions
+
+Fourteen individually reviewed substantive questions are fetched from two ATI
+pages, copyright **2005 John Kelly**, last revised for ATI on 30 November 2013.
+Their complete notices permit redistribution in any medium **free of charge**,
+require identification of derivatives/source, and require the full licence text.
+They are **not Creative Commons**. Selected-question extraction is identified as
+derived from the source document. The complete page-specific notice and citation,
+plus all owned translator notes, accompany each returned question. English bodies
+remain live-only; the bundle holds finite section metadata, exact anchors and
+verification hashes. Pāli headings/colophons and a repeated closing label are
+not claimed translated. [Detailed source/rights review](docs/data/milinda-reviewed-questions.md).

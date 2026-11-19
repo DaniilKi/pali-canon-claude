@@ -1,4 +1,6 @@
 import {assertRegisteredPartial} from './partial-source-registry.mjs';
+import { assertRegisteredSection, validateSectionRegistry } from './ati-section-registry.mjs';
+import { isAtiSectionPath } from './ati-section-profiles.mjs';
 import { isPartial, partialScope, isShared, isScoped, sharedScope } from './translation-scope.mjs';
 import { searchSegments, searchFold, searchExcerpt, searchTerms, searchReading, assertSearchQuery, isSourcePhrase } from './search-segments.mjs';
 import { readBundled, bundledExists } from './bundled-data.mjs';
@@ -72,7 +74,7 @@ const SOURCE_NAMES = { dhammatalks: 'dhammatalks.org', ati: 'Access to Insight',
 export const sourceName = (t) => SOURCE_NAMES[t.source] || t.source;
 /** Stable translation_id of a link: dt:<path>, ati:<path> or aj:<path>. */
 export function translationId(t) {
-  if (t.source === 'ati') return `ati:${t.path}`;
+  if (t.source === 'ati') return `ati:${t.path}${t.section ? '#' + t.section.anchor : ''}`;
   if (t.source === 'anandajoti') return `aj:${t.path.replace(/^\/Texts-and-Translations\//, '').replace(/\.htm$/, '')}`;
   return `dt:${t.url.split('/suttas/')[1].replace(/\.html$/, '')}`;
 }
@@ -93,6 +95,8 @@ export function load() {
   if(partialRegistry.version!==1||partialRegistry.vri_commit!==canon.source.commit||!Array.isArray(partialRegistry.links)||!partialRegistry.links.length)throw Error('Invalid registered partial source metadata.');
   const byId = new Map();
   for (const u of canon.units) if (!byId.has(u.id)) byId.set(u.id, u);
+  const sectionRegistry = JSON.parse(readFileSync(dataPath('reviewed-ati-sections.json'), 'utf8'));
+  validateSectionRegistry(sectionRegistry, canon, translations, unit => segmentsFromCorpus(unit, canon));
   const ranges = [];
   for (const u of canon.units) {
     const m = u.id.match(/^(.*?)(\d+)-(\d+)$/);
@@ -101,12 +105,13 @@ export function load() {
   const urlIndex = new Map();
   for (const [id, links] of Object.entries(translations)) {
     for (const link of links) {
-      if (link.url) urlIndex.set(link.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\.html?$/, ''), id);
+      // An anthology page has several independent question owners. Its bare URL has none.
+      if (link.url && !link.section) urlIndex.set(link.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\.html?$/, ''), id);
       // A work spread over several pages (e.g. DN 16 on Ancient Buddhist Texts): each part page cites the work.
       for (const part of link.parts || []) urlIndex.set(`ancient-buddhist-texts.net${part}`.replace(/\.html?$/, ''), id);
     }
   }
-  data = { canon, byId, ranges, translations, urlIndex, partialRegistry, search: null };
+  data = { canon, byId, ranges, translations, urlIndex, partialRegistry, sectionRegistry, search: null };
   return data;
 }
 
@@ -172,6 +177,9 @@ function sharedFor(unit, d) {
 /** Ordinary containing groups inherit whole links only; shared pages reach only explicitly declared members. */
 export function linksFor(u) {
   const d = load();
+  for (const link of d.translations[u.id] || []) assertRegisteredSection(link, u, d.sectionRegistry);
+  const requiredSection = d.sectionRegistry.links.find(row => row.unit_id === u.id);
+  if (requiredSection && (d.translations[u.id] || []).filter(link => link.section?.anchor === requiredSection.anchor).length !== 1) throw new CitationError('Registered ATI question binding is missing or duplicated. No whole-page translation was inferred.');
   const shared = sharedFor(u, d);
   const own = (d.translations[u.id] || []).filter(link => !isShared(link));
   for(const link of own)assertRegisteredPartial(link,u,d.partialRegistry);
@@ -308,6 +316,13 @@ export function resolve(reference) {
     return { unit, notes, alternatives: [...others.values()].slice(0, 3).map((u) => unitSummary(u)) };
   }
   if (c.kind === 'url') {
+    if (c.host === 'accesstoinsight.org' && isAtiSectionPath(c.path)) {
+      const rows = d.sectionRegistry.links.filter(row => row.path === c.path), row = rows.find(row => row.anchor === c.fragment);
+      if (!row) throw new CitationError(`This publisher anthology page does not identify one reviewed question. Use an exact question body anchor or canonical ID: ${rows.map(value => value.unit_id).join(', ')}.`);
+      const unit = d.byId.get(row.unit_id); linksFor(unit);
+      notes.push(row.mapping_note);
+      return { unit, notes, alternatives: [] };
+    }
     const key = `${c.host}${c.path}`;
     const id = d.urlIndex.get(key) || d.urlIndex.get(key.replace(/^accesstoinsight\.org/, 'accesstoinsight.org'));
     if (!id) throw new CitationError('That page is not linked to a canon text in the bundled index. Give the sutta citation instead.');
@@ -384,11 +399,20 @@ function bookBlocks(u) {
 
 /** Group a unit's VRI blocks into readable segments: headings, prose paragraphs and whole stanzas. */
 export function segments(u, { includeNotes = false, includeSourcePositions = false } = {}) {
-  const blocks = bookBlocks(u).slice(u.start, u.end);
+  return renderUnitSegments(u, load(), { includeNotes, includeSourcePositions });
+}
+const corpusRenderingSnapshots = new WeakMap();
+/** Same source renderer for build verification before new translation bindings are installed. */
+export function segmentsFromCorpus(u, corpus, options = {}) {
+  let snapshot = corpusRenderingSnapshots.get(corpus);
+  if (!snapshot) { snapshot = { canon: corpus }; corpusRenderingSnapshots.set(corpus, snapshot); }
+  return renderUnitSegments(u, snapshot, options);
+}
+function renderUnitSegments(u, d, { includeNotes = false, includeSourcePositions = false } = {}) {
+  const blocks = d.canon.books[u.book].blocks.slice(u.start, u.end);
   const out = [];
   let stanza = null;
   const flush = () => { if (stanza) { out.push(stanza); stanza = null; } };
-  const d = load();
   // Thai, Myanmar and VRI page breaks; a break in an empty block is carried to the next segment.
   let pending = [];
   const editionLabels = (pages) => {
@@ -461,6 +485,7 @@ export function describe(u, notes = []) {
     translation_id: translationId(t),
     match: t.match,
     ...(t.mapping_note ? { mapping_note: t.mapping_note } : {}),
+    ...(t.section ? { source_section: JSON.parse(JSON.stringify(t.section)) } : {}),
     ...(isScoped(t) ? { translation_scope: translationScope(t, u) } : {}),
     ...(t.commentary ? { includes_commentary: true } : {}),
   }));

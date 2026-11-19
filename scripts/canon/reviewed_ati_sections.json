@@ -1,0 +1,631 @@
+{
+  "version": 1,
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "links": [
+    {
+      "unit_id": "mil3.1.8",
+      "path": "/tipitaka/kn/miln/miln.2x.kell",
+      "anchor": "miln-2-1-08",
+      "english_title": "Characteristics of Attention and Wisdom",
+      "source_reference": "Miln II.1.8: Characteristics of Attention and Wisdom {Miln 32-33}",
+      "translator": "John Kelly",
+      "license": "Kelly-free-distribution-2005",
+      "mapping_note": "Derived complete substantive question from the named Access to Insight page, selected by its exact publisher body anchor. Publisher numbering and wording are preserved; VRI numbering is independently verified and may differ. Root title and ordinal colophon are not translated; no paragraph or word alignment is claimed. Complete source attribution, distribution notice and owned translator notes accompany the selection.",
+      "root": {
+        "id": "mil3.1.8",
+        "book": 45,
+        "start": 151,
+        "end": 157,
+        "title": "Manasikāralakkhaṇapañho",
+        "vri": "8",
+        "root_blocks_sha256": "2191d6801bcc05eeef8dc5eb204593d1f44523950819ed3acb6f9549d0e42a44"
+      },
+      "source_html_sha256": "44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd",
+      "untranslated_paratext": [
+        {
+          "ref": "mil3.1.8/6",
+          "text": "Manasikāralakkhaṇapañho aṭṭhamo."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil3.1.8",
+        "profile": "ati-kelly-milinda-v1",
+        "anchor": "miln-2-1-08",
+        "heading": "Miln II.1.8: Characteristics of Attention and Wisdom {Miln 32-33}",
+        "paragraph_count": 9,
+        "note_count": 0,
+        "section_html_sha256": "374efae83bd063b565e428cdafcb13f87564b4fe1a624bf29537b13185eb5bb8",
+        "text_sha256": "6cd09d8054a61a7ee28fe05c993d172d0256f8cb0b045fb74b6a0729749d4baf",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+        "pali_sha256": "decb790ef88f7b0da45aa79071c786b0f4ad4fbb4701971400c9f6f3b9289864",
+        "first_ref": "mil3.1.8/2",
+        "last_ref": "mil3.1.8/5",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "mil3.1.15",
+      "path": "/tipitaka/kn/miln/miln.2x.kell",
+      "anchor": "miln-2-1-14",
+      "english_title": "Characteristic of Wisdom",
+      "source_reference": "Miln II.1.14: Characteristic of Wisdom {Miln 39}",
+      "translator": "John Kelly",
+      "license": "Kelly-free-distribution-2005",
+      "mapping_note": "Derived complete substantive question from the named Access to Insight page, selected by its exact publisher body anchor. Publisher numbering and wording are preserved; VRI numbering is independently verified and may differ. Root title and ordinal colophon are not translated; no paragraph or word alignment is claimed. Complete source attribution, distribution notice and owned translator notes accompany the selection. Publisher II.1.14 corresponds to VRI3.1.15; the repeated final illumination application is compressed in the published English, with all substantive assertions retained.",
+      "root": {
+        "id": "mil3.1.15",
+        "book": 45,
+        "start": 200,
+        "end": 205,
+        "title": "Paññālakkhaṇapañho",
+        "vri": "15",
+        "root_blocks_sha256": "c65d82c3fe923c812c2a732277118291901abd8eb5c33c5a3f5e318a4078f3a4"
+      },
+      "source_html_sha256": "44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd",
+      "untranslated_paratext": [
+        {
+          "ref": "mil3.1.15/5",
+          "text": "Paññālakkhaṇapañho pannarasamo."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil3.1.15",
+        "profile": "ati-kelly-milinda-v1",
+        "anchor": "miln-2-1-14",
+        "heading": "Miln II.1.14: Characteristic of Wisdom {Miln 39}",
+        "paragraph_count": 7,
+        "note_count": 0,
+        "section_html_sha256": "a36501321ba11907c93e33c4557f6eaec30ee2fcf68b041ab4620a0ee239aa9c",
+        "text_sha256": "7031c36bf6fd405d13c2f32c30459d2018499fd8444515b64f2223b4c347b682",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+        "pali_sha256": "819188092f8df93c5cabefc1084d1083aaf59f3cc103525b024e6c80549f2f03",
+        "first_ref": "mil3.1.15/2",
+        "last_ref": "mil3.1.15/4",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "mil3.3.8",
+      "path": "/tipitaka/kn/miln/miln.2x.kell",
+      "anchor": "miln-2-3-08",
+      "english_title": "Characteristic of Contact",
+      "source_reference": "Miln II.3.8: Characteristic of Contact {Miln 60}",
+      "translator": "John Kelly",
+      "license": "Kelly-free-distribution-2005",
+      "mapping_note": "Derived complete substantive question from the named Access to Insight page, selected by its exact publisher body anchor. Publisher numbering and wording are preserved; VRI numbering is independently verified and may differ. Root title and ordinal colophon are not translated; no paragraph or word alignment is claimed. Complete source attribution, distribution notice and owned translator notes accompany the selection.",
+      "root": {
+        "id": "mil3.3.8",
+        "book": 45,
+        "start": 334,
+        "end": 342,
+        "title": "Phassalakkhaṇapañho",
+        "vri": "8",
+        "root_blocks_sha256": "d4dcb0bcc9599a6462060a87b11a9a3e591fde67df4cab7c83f783bd4e207d14"
+      },
+      "source_html_sha256": "44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd",
+      "untranslated_paratext": [
+        {
+          "ref": "mil3.3.8/8",
+          "text": "Phassalakkhaṇapañho aṭṭhamo."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil3.3.8",
+        "profile": "ati-kelly-milinda-v1",
+        "anchor": "miln-2-3-08",
+        "heading": "Miln II.3.8: Characteristic of Contact {Miln 60}",
+        "paragraph_count": 11,
+        "note_count": 0,
+        "section_html_sha256": "fa935b8f9034a3d49848b689d1cfc3f17a7d89da47a546992fb81d3937343bc0",
+        "text_sha256": "bb07d73eb1ce872cc435c48a49f829a82508629f20413e3e1332ec4309586f46",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+        "pali_sha256": "7ade22b80ee73980e746807c1e9728145948fb155d24224f609c1455b531e4e9",
+        "first_ref": "mil3.3.8/2",
+        "last_ref": "mil3.3.8/7",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "mil3.3.9",
+      "path": "/tipitaka/kn/miln/miln.2x.kell",
+      "anchor": "miln-2-3-9",
+      "english_title": "Characteristic of Feeling",
+      "source_reference": "Miln II.3.9: Characteristic of Feeling {Miln 60}",
+      "translator": "John Kelly",
+      "license": "Kelly-free-distribution-2005",
+      "mapping_note": "Derived complete substantive question from the named Access to Insight page, selected by its exact publisher body anchor. Publisher numbering and wording are preserved; VRI numbering is independently verified and may differ. Root title and ordinal colophon are not translated; no paragraph or word alignment is claimed. Complete source attribution, distribution notice and owned translator notes accompany the selection.",
+      "root": {
+        "id": "mil3.3.9",
+        "book": 45,
+        "start": 342,
+        "end": 348,
+        "title": "Vedanālakkhaṇapañho",
+        "vri": "9",
+        "root_blocks_sha256": "e4e91b169ff427a35c8163c2f75c377edb3f25d58073fb20b6f747c381ed57f2"
+      },
+      "source_html_sha256": "44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd",
+      "untranslated_paratext": [
+        {
+          "ref": "mil3.3.9/6",
+          "text": "Vedanālakkhaṇapañho navamo."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil3.3.9",
+        "profile": "ati-kelly-milinda-v1",
+        "anchor": "miln-2-3-9",
+        "heading": "Miln II.3.9: Characteristic of Feeling {Miln 60}",
+        "paragraph_count": 6,
+        "note_count": 0,
+        "section_html_sha256": "ec2d014c2601dac56cec0894011ffbb8fbf2ca3913a40ad968471ec1c84d2127",
+        "text_sha256": "d975a77fa9d26c2d00384808ad1a6941f43cdbbcff8ff388568bb549dc452e8b",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+        "pali_sha256": "3f78c0d6d699ace682e11fc8dbcab7d182fa6876c268e8ef897be9f777f0247f",
+        "first_ref": "mil3.3.9/2",
+        "last_ref": "mil3.3.9/5",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "mil3.3.10",
+      "path": "/tipitaka/kn/miln/miln.2x.kell",
+      "anchor": "miln-2-3-10",
+      "english_title": "Characteristic of Perception",
+      "source_reference": "Miln II.3.10: Characteristic of Perception {Miln 61}",
+      "translator": "John Kelly",
+      "license": "Kelly-free-distribution-2005",
+      "mapping_note": "Derived complete substantive question from the named Access to Insight page, selected by its exact publisher body anchor. Publisher numbering and wording are preserved; VRI numbering is independently verified and may differ. Root title and ordinal colophon are not translated; no paragraph or word alignment is claimed. Complete source attribution, distribution notice and owned translator notes accompany the selection.",
+      "root": {
+        "id": "mil3.3.10",
+        "book": 45,
+        "start": 348,
+        "end": 353,
+        "title": "Saññālakkhaṇapañho",
+        "vri": "10",
+        "root_blocks_sha256": "54d16f5e92628eb1e7839de8ec98e679d3b1ecdf97efc2c64c1195c0a9bf0a2d"
+      },
+      "source_html_sha256": "44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd",
+      "untranslated_paratext": [
+        {
+          "ref": "mil3.3.10/5",
+          "text": "Saññālakkhaṇapañho dasamo."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil3.3.10",
+        "profile": "ati-kelly-milinda-v1",
+        "anchor": "miln-2-3-10",
+        "heading": "Miln II.3.10: Characteristic of Perception {Miln 61}",
+        "paragraph_count": 5,
+        "note_count": 0,
+        "section_html_sha256": "ff1ed32104af6a3af556434f81f2fe9ab72894322ae5dcee4ce984e013c987ea",
+        "text_sha256": "767ef2b5d35341c9bbe4e6d397da1c96e7a0226befbb2db056edfcef046cd74f",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+        "pali_sha256": "65ddfb6ae7d3c96d9697c3792dd85278d84dc86165ef85e17b89d62a4ab23115",
+        "first_ref": "mil3.3.10/2",
+        "last_ref": "mil3.3.10/4",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "mil3.3.11",
+      "path": "/tipitaka/kn/miln/miln.2x.kell",
+      "anchor": "miln-2-3-11",
+      "english_title": "Characteristic of Volition",
+      "source_reference": "Miln II.3.11: Characteristic of Volition {Miln 61}",
+      "translator": "John Kelly",
+      "license": "Kelly-free-distribution-2005",
+      "mapping_note": "Derived complete substantive question from the named Access to Insight page, selected by its exact publisher body anchor. Publisher numbering and wording are preserved; VRI numbering is independently verified and may differ. Root title and ordinal colophon are not translated; no paragraph or word alignment is claimed. Complete source attribution, distribution notice and owned translator notes accompany the selection.",
+      "root": {
+        "id": "mil3.3.11",
+        "book": 45,
+        "start": 353,
+        "end": 359,
+        "title": "Cetanālakkhaṇapañho",
+        "vri": "11",
+        "root_blocks_sha256": "13938ee823e77b3231738001795c2503d216a64045eda809221c1f3688850e66"
+      },
+      "source_html_sha256": "44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd",
+      "untranslated_paratext": [
+        {
+          "ref": "mil3.3.11/6",
+          "text": "Cetanālakkhaṇapañho ekādasamo."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil3.3.11",
+        "profile": "ati-kelly-milinda-v1",
+        "anchor": "miln-2-3-11",
+        "heading": "Miln II.3.11: Characteristic of Volition {Miln 61}",
+        "paragraph_count": 6,
+        "note_count": 0,
+        "section_html_sha256": "e5f6357530dc769652f751192a3df3f7823d0037fb572854d9f003e69972e10d",
+        "text_sha256": "4536912fdf90520210ecc4e0486c0f820137b8d7993ade9345a760c69d8a1592",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+        "pali_sha256": "11d86fa0a698ff1c9fcf88011d42ea349024cf834dbcbb164cfd9775a039eab0",
+        "first_ref": "mil3.3.11/2",
+        "last_ref": "mil3.3.11/5",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "mil3.3.12",
+      "path": "/tipitaka/kn/miln/miln.2x.kell",
+      "anchor": "miln-2-3-12",
+      "english_title": "Characteristic of Consciousness",
+      "source_reference": "Miln II.3.12: Characteristic of Consciousness {Miln 62}",
+      "translator": "John Kelly",
+      "license": "Kelly-free-distribution-2005",
+      "mapping_note": "Derived complete substantive question from the named Access to Insight page, selected by its exact publisher body anchor. Publisher numbering and wording are preserved; VRI numbering is independently verified and may differ. Root title and ordinal colophon are not translated; no paragraph or word alignment is claimed. Complete source attribution, distribution notice and owned translator notes accompany the selection.",
+      "root": {
+        "id": "mil3.3.12",
+        "book": 45,
+        "start": 359,
+        "end": 364,
+        "title": "Viññāṇalakkhaṇapañho",
+        "vri": "12",
+        "root_blocks_sha256": "af0477ac90b24656c75751700ad23df1238f362401fda8d23b96ee33a386f6c6"
+      },
+      "source_html_sha256": "44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd",
+      "untranslated_paratext": [
+        {
+          "ref": "mil3.3.12/5",
+          "text": "Viññāṇalakkhaṇapañho dvādasamo."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil3.3.12",
+        "profile": "ati-kelly-milinda-v1",
+        "anchor": "miln-2-3-12",
+        "heading": "Miln II.3.12: Characteristic of Consciousness {Miln 62}",
+        "paragraph_count": 5,
+        "note_count": 0,
+        "section_html_sha256": "be295138a792b534949950699de5c6c4ec820418b3ddd69ecac9b312929ee022",
+        "text_sha256": "4a06c5bf4b9178e658a5dbdfb87261fa3d7bea1cc8d267bb73ae8597f405329a",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+        "pali_sha256": "e567367c84daf9ff7aad0db0a956e81552c3cc0975a9af393496e5a820e713b4",
+        "first_ref": "mil3.3.12/2",
+        "last_ref": "mil3.3.12/4",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "mil3.3.13",
+      "path": "/tipitaka/kn/miln/miln.2x.kell",
+      "anchor": "miln-2-3-13",
+      "english_title": "Characteristic of Applied Thought",
+      "source_reference": "Miln II.3.13: Characteristic of Applied Thought {Miln 62}",
+      "translator": "John Kelly",
+      "license": "Kelly-free-distribution-2005",
+      "mapping_note": "Derived complete substantive question from the named Access to Insight page, selected by its exact publisher body anchor. Publisher numbering and wording are preserved; VRI numbering is independently verified and may differ. Root title and ordinal colophon are not translated; no paragraph or word alignment is claimed. Complete source attribution, distribution notice and owned translator notes accompany the selection.",
+      "root": {
+        "id": "mil3.3.13",
+        "book": 45,
+        "start": 364,
+        "end": 369,
+        "title": "Vitakkalakkhaṇapañho",
+        "vri": "13",
+        "root_blocks_sha256": "1decd10bd623588ef2d708d6df42189291bb28cef913f159ac260082a2804ac5"
+      },
+      "source_html_sha256": "44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd",
+      "untranslated_paratext": [
+        {
+          "ref": "mil3.3.13/5",
+          "text": "Vitakkalakkhaṇapañho terasamo."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil3.3.13",
+        "profile": "ati-kelly-milinda-v1",
+        "anchor": "miln-2-3-13",
+        "heading": "Miln II.3.13: Characteristic of Applied Thought {Miln 62}",
+        "paragraph_count": 5,
+        "note_count": 0,
+        "section_html_sha256": "7417f928954fa2ced7cf4b81480647911bd8d2cc2489954796910ff005b6648c",
+        "text_sha256": "53bd60694054b9a58aceef226263217c16cd87a0488f804b4caf678c0384f6ef",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+        "pali_sha256": "d498cabbd6fb8419b83feb9a3f4b4a34441c56603939e6d483a1c1e3f48ec7d8",
+        "first_ref": "mil3.3.13/2",
+        "last_ref": "mil3.3.13/4",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "mil3.3.14",
+      "path": "/tipitaka/kn/miln/miln.2x.kell",
+      "anchor": "miln-2-3-14",
+      "english_title": "Characteristic of Sustained Thought",
+      "source_reference": "Miln II.3.14: Characteristic of Sustained Thought {Miln 62}",
+      "translator": "John Kelly",
+      "license": "Kelly-free-distribution-2005",
+      "mapping_note": "Derived complete substantive question from the named Access to Insight page, selected by its exact publisher body anchor. Publisher numbering and wording are preserved; VRI numbering is independently verified and may differ. Root title and ordinal colophon are not translated; no paragraph or word alignment is claimed. Complete source attribution, distribution notice and owned translator notes accompany the selection. VRI chapter and question-count colophons /6–7 are also untranslated.",
+      "root": {
+        "id": "mil3.3.14",
+        "book": 45,
+        "start": 369,
+        "end": 376,
+        "title": "Vicāralakkhaṇapañho",
+        "vri": "14",
+        "root_blocks_sha256": "d4732b7e874c2043b0d9c3a2bfe3d9f6768ad15d89303ac08face7f62365c50d"
+      },
+      "source_html_sha256": "44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd",
+      "untranslated_paratext": [
+        {
+          "ref": "mil3.3.14/5",
+          "text": "Vicāralakkhaṇapañho cuddasamo."
+        },
+        {
+          "ref": "mil3.3.14/6",
+          "text": "Vicāravaggo tatiyo."
+        },
+        {
+          "ref": "mil3.3.14/7",
+          "text": "Imasmiṃ vagge cuddasa pañhā."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil3.3.14",
+        "profile": "ati-kelly-milinda-v1",
+        "anchor": "miln-2-3-14",
+        "heading": "Miln II.3.14: Characteristic of Sustained Thought {Miln 62}",
+        "paragraph_count": 5,
+        "note_count": 0,
+        "section_html_sha256": "37fcf931563a8daff435562a869658fee247fb63cf2d785749580ffd3b5122b4",
+        "text_sha256": "1b19b7c32e56b54d3d6a36e16be2113af75e89cdc1165ce1fd46e3fc48ec1124",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+        "pali_sha256": "03d5650c7278fdfe899cff9ce8af7533be9a410de1e5a8834262e80019a81748",
+        "first_ref": "mil3.3.14/2",
+        "last_ref": "mil3.3.14/4",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "mil3.5.5",
+      "path": "/tipitaka/kn/miln/miln.3x.kell",
+      "anchor": "miln-3-5-05",
+      "english_title": "Transmigration and Rebirth",
+      "source_reference": "Miln III.5.5: Transmigration and Rebirth {Miln 71}",
+      "translator": "John Kelly",
+      "license": "Kelly-free-distribution-2005",
+      "mapping_note": "Derived complete substantive question from the named Access to Insight page, selected by its exact publisher body anchor. Publisher numbering and wording are preserved; VRI numbering is independently verified and may differ. Root title and ordinal colophon are not translated; no paragraph or word alignment is claimed. Complete source attribution, distribution notice and owned translator notes accompany the selection.",
+      "root": {
+        "id": "mil3.5.5",
+        "book": 45,
+        "start": 452,
+        "end": 457,
+        "title": "Asaṅkamanapaṭisandahanapañho",
+        "vri": "5",
+        "root_blocks_sha256": "78e6bda07fb959d4fc8dd9a58e9982ae856e08b8af8d4966df37b2f08c5a74dc"
+      },
+      "source_html_sha256": "5e0d563f4e3403167dbb73ec80190bdeb1592895d4af2e5141675692fec42fe5",
+      "untranslated_paratext": [
+        {
+          "ref": "mil3.5.5/5",
+          "text": "Asaṅkamanapaṭisandahanapañho pañcamo."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil3.5.5",
+        "profile": "ati-kelly-milinda-v1",
+        "anchor": "miln-3-5-05",
+        "heading": "Miln III.5.5: Transmigration and Rebirth {Miln 71}",
+        "paragraph_count": 13,
+        "note_count": 2,
+        "section_html_sha256": "96b7082c9d6c67fe318893f63e356279688556375e5f7d2025acffd03ad5fa4e",
+        "text_sha256": "ffd07cd9bca7a0bb1ead9e30e14db40ccd05e31a77d9b15a00fdf0f24a00f2f0",
+        "notes_sha256": "d25405d0f8a5411effd9ce5d1c065e0e83fdf8d5a26ec24a4feb29d0800b34b6",
+        "notice_sha256": "b8db11bb5c645a1ce85a06513f7ded71d926e0897dc636e334b44015e2ab6480",
+        "pali_sha256": "cab337846b1c928812da25f6b329a7304ac9126c18b30ec1e51949be337d5beb",
+        "first_ref": "mil3.5.5/2",
+        "last_ref": "mil3.5.5/4",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "mil3.5.6",
+      "path": "/tipitaka/kn/miln/miln.3x.kell",
+      "anchor": "miln-3-5-06",
+      "english_title": "Soul",
+      "source_reference": "Miln III.5.6: Soul {Miln 71}",
+      "translator": "John Kelly",
+      "license": "Kelly-free-distribution-2005",
+      "mapping_note": "Derived complete substantive question from the named Access to Insight page, selected by its exact publisher body anchor. Publisher numbering and wording are preserved; VRI numbering is independently verified and may differ. Root title and ordinal colophon are not translated; no paragraph or word alignment is claimed. Complete source attribution, distribution notice and owned translator notes accompany the selection.",
+      "root": {
+        "id": "mil3.5.6",
+        "book": 45,
+        "start": 457,
+        "end": 461,
+        "title": "Vedagūpañho",
+        "vri": "6",
+        "root_blocks_sha256": "6ba8af6481878d810cfcc9cf7de6b5d0612dfa69c3c7af242b9839180e2b2c7a"
+      },
+      "source_html_sha256": "5e0d563f4e3403167dbb73ec80190bdeb1592895d4af2e5141675692fec42fe5",
+      "untranslated_paratext": [
+        {
+          "ref": "mil3.5.6/4",
+          "text": "Vedagūpañho chaṭṭho."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil3.5.6",
+        "profile": "ati-kelly-milinda-v1",
+        "anchor": "miln-3-5-06",
+        "heading": "Miln III.5.6: Soul {Miln 71}",
+        "paragraph_count": 3,
+        "note_count": 1,
+        "section_html_sha256": "fb085dbe6c9c0d003d8ba8d80e4b8bc9f7d992e0d66b6920278d0e3e5214dbe7",
+        "text_sha256": "5c1013470ff254760fa30a7ddde7d4ce71f72cfa25cde22c761ffd4575ba57fc",
+        "notes_sha256": "8f22f87a1a32b9025ea6dd7f075712859b4f7c79c45a357afafce98bd816d593",
+        "notice_sha256": "b8db11bb5c645a1ce85a06513f7ded71d926e0897dc636e334b44015e2ab6480",
+        "pali_sha256": "3444b4b7e91b7e57b3746c4e13ce370caed2eb0be3d1c0716201f2a390aa6085",
+        "first_ref": "mil3.5.6/2",
+        "last_ref": "mil3.5.6/3",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "mil3.5.7",
+      "path": "/tipitaka/kn/miln/miln.3x.kell",
+      "anchor": "miln-3-5-07",
+      "english_title": "Non-Release From Evil Deeds",
+      "source_reference": "Miln III.5.7: Non-Release From Evil Deeds {Miln 72}",
+      "translator": "John Kelly",
+      "license": "Kelly-free-distribution-2005",
+      "mapping_note": "Derived complete substantive question from the named Access to Insight page, selected by its exact publisher body anchor. Publisher numbering and wording are preserved; VRI numbering is independently verified and may differ. Root title and ordinal colophon are not translated; no paragraph or word alignment is claimed. Complete source attribution, distribution notice and owned translator notes accompany the selection.",
+      "root": {
+        "id": "mil3.5.7",
+        "book": 45,
+        "start": 461,
+        "end": 466,
+        "title": "Aññakāyasaṅkamanapañho",
+        "vri": "7",
+        "root_blocks_sha256": "66db11ed666150c095f5953b927b868a872d591a7afb8aa438730efa222b3bf3"
+      },
+      "source_html_sha256": "5e0d563f4e3403167dbb73ec80190bdeb1592895d4af2e5141675692fec42fe5",
+      "untranslated_paratext": [
+        {
+          "ref": "mil3.5.7/5",
+          "text": "Aññakāyasaṅkamanapañho sattamo."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil3.5.7",
+        "profile": "ati-kelly-milinda-v1",
+        "anchor": "miln-3-5-07",
+        "heading": "Miln III.5.7: Non-Release From Evil Deeds {Miln 72}",
+        "paragraph_count": 11,
+        "note_count": 0,
+        "section_html_sha256": "858a4f219a26ca76f1334263c5b4f8b3e8b444f53dfdecd1a1a705a5a51ee581",
+        "text_sha256": "5b9dfe2a0595bcae341fc30717d0897d22537f5508ee3c1d05af30cd7e2f9dee",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "b8db11bb5c645a1ce85a06513f7ded71d926e0897dc636e334b44015e2ab6480",
+        "pali_sha256": "a93117bf196b0738313d084e916d6124ddcafc1fcfe850cc81fc82c2be6e490b",
+        "first_ref": "mil3.5.7/2",
+        "last_ref": "mil3.5.7/4",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "mil3.7.5",
+      "path": "/tipitaka/kn/miln/miln.3x.kell",
+      "anchor": "miln-3-7-05",
+      "english_title": "Simultaneous Arising in Different Places",
+      "source_reference": "Miln III.7.5: Simultaneous Arising in Different Places {Miln 82-83}",
+      "translator": "John Kelly",
+      "license": "Kelly-free-distribution-2005",
+      "mapping_note": "Derived complete substantive question from the named Access to Insight page, selected by its exact publisher body anchor. Publisher numbering and wording are preserved; VRI numbering is independently verified and may differ. Root title and ordinal colophon are not translated; no paragraph or word alignment is claimed. Complete source attribution, distribution notice and owned translator notes accompany the selection.",
+      "root": {
+        "id": "mil3.7.5",
+        "book": 45,
+        "start": 573,
+        "end": 579,
+        "title": "Dvinnaṃ lokuppannānaṃ samakabhāvapañho",
+        "vri": "5",
+        "root_blocks_sha256": "d133e19edae36d571ede1edc12e979c6605b4effb8b39bce0911a1fe2ea58b53"
+      },
+      "source_html_sha256": "5e0d563f4e3403167dbb73ec80190bdeb1592895d4af2e5141675692fec42fe5",
+      "untranslated_paratext": [
+        {
+          "ref": "mil3.7.5/6",
+          "text": "Dvinnaṃ lokuppannānaṃ samakabhāvapañho pañcamo."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil3.7.5",
+        "profile": "ati-kelly-milinda-v1",
+        "anchor": "miln-3-7-05",
+        "heading": "Miln III.7.5: Simultaneous Arising in Different Places {Miln 82-83}",
+        "paragraph_count": 21,
+        "note_count": 1,
+        "section_html_sha256": "4f28033ac938743b24e4ef9def247a860a27e2ed3706d9d5041727b6ebafbb2f",
+        "text_sha256": "820dd0fec1d0755fb09398ec683e8243fb3aaa99ac9b9d0233bcb22be72800dd",
+        "notes_sha256": "9e780b5b7cd255f2094669d3b319d32d1b8bc5cfe4e4845acc5dc83baf938db4",
+        "notice_sha256": "b8db11bb5c645a1ce85a06513f7ded71d926e0897dc636e334b44015e2ab6480",
+        "pali_sha256": "f67d13e7cf155e78a748c9ba119dbefd112a2b27ff803cc28ee0cd6793946393",
+        "first_ref": "mil3.7.5/2",
+        "last_ref": "mil3.7.5/5",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    },
+    {
+      "unit_id": "mil3.7.8",
+      "path": "/tipitaka/kn/miln/miln.3x.kell",
+      "anchor": "miln-3-7-08",
+      "english_title": "Doing Evil Knowingly and Unknowingly",
+      "source_reference": "Miln III.7.8: Doing Evil Knowingly and Unknowingly {Miln 84}",
+      "translator": "John Kelly",
+      "license": "Kelly-free-distribution-2005",
+      "mapping_note": "Derived complete substantive question from the named Access to Insight page, selected by its exact publisher body anchor. Publisher numbering and wording are preserved; VRI numbering is independently verified and may differ. Root title and ordinal colophon are not translated; no paragraph or word alignment is claimed. Complete source attribution, distribution notice and owned translator notes accompany the selection.",
+      "root": {
+        "id": "mil3.7.8",
+        "book": 45,
+        "start": 587,
+        "end": 591,
+        "title": "Jānantājānantapāpakaraṇapañho",
+        "vri": "8",
+        "root_blocks_sha256": "fec2aa0c79b3433f5d0ada085f0d4c8632c79a3ecc39913cdd7e74ac2d48a155"
+      },
+      "source_html_sha256": "5e0d563f4e3403167dbb73ec80190bdeb1592895d4af2e5141675692fec42fe5",
+      "untranslated_paratext": [
+        {
+          "ref": "mil3.7.8/4",
+          "text": "Jānantājānantapāpakaraṇapañho aṭṭhamo."
+        }
+      ],
+      "section": {
+        "version": 1,
+        "status": "reviewed",
+        "unit_id": "mil3.7.8",
+        "profile": "ati-kelly-milinda-v1",
+        "anchor": "miln-3-7-08",
+        "heading": "Miln III.7.8: Doing Evil Knowingly and Unknowingly {Miln 84}",
+        "paragraph_count": 7,
+        "note_count": 0,
+        "section_html_sha256": "d9a09876c9a9883e63c49253ffc976e9867ed07dc942cc1e25570141e75c2299",
+        "text_sha256": "33a84db5b563e2d11d1ef9123de7db6c6ef6b071ea115159608028fb891a5f40",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "notice_sha256": "b8db11bb5c645a1ce85a06513f7ded71d926e0897dc636e334b44015e2ab6480",
+        "pali_sha256": "ca76aed8cad5e62fcbbfc203a43a506320f4b548770d155df7f4bdb6577680df",
+        "first_ref": "mil3.7.8/2",
+        "last_ref": "mil3.7.8/3",
+        "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+      }
+    }
+  ]
+}

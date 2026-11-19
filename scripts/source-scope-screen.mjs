@@ -1,3 +1,4 @@
+import {assertRegisteredSection,validateSectionRegistry} from '../src/ati-section-registry.mjs';
 import {assertRegisteredPartial} from '../src/partial-source-registry.mjs';
 // Offline metadata leads. This never approves, withholds, fetches or changes a source.
 import {pathToFileURL} from 'node:url';
@@ -17,8 +18,16 @@ const ranges=value=>[...String(value||'').matchAll(/(\d+)\s*[-–—]\s*(\d+)/gu
 export function scopeScreen(data=canon.load(),{review={rows:[]},renderedReview={rows:[]}}={}) {
   validateRenderedReview(renderedReview);
   const rows=[];
+  let sectionsValidated=false;
   for(const [owner,links] of Object.entries(data.translations))for(const link of links){
     assertRegisteredPartial(link,data.byId.get(owner),data.partialRegistry||{links:[]});
+    assertRegisteredSection(link,data.byId.get(owner),data.sectionRegistry);
+    if(Object.hasOwn(link,'section')){
+      // Skip only a verified extraction, not a whole page with a review-like marker.
+      // Ordinary subset fixtures need no unrelated complete section catalogue.
+      if(!sectionsValidated){validateSectionRegistry(data.sectionRegistry,data.canon,data.translations,unit=>canon.segmentsFromCorpus(unit,data.canon));sectionsValidated=true;}
+      continue;
+    }
     if(isScoped(link)||link.match==='reviewed-story')continue;
     const reasons=[];
     const u=data.byId.get(owner),rootExtent=ranges(u?.vri)[0];

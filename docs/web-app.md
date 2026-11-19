@@ -419,3 +419,15 @@ Printed source headings are native headings in reading pages, inline commentary 
 
 
 The Pāli script preference refreshes the current canonical/commentary/later-work search, source-book search or heading list, and citation lookup, as well as reading and daily views. It uses the query already executed, preserving pagination and source pins. Unsubmitted finder/source-book input and private drafts stay in the tab; the preference does not submit them. Keyboard focus and the phone finder remain where the user left them during this display refresh. Static Saved, backup and quote forms are not refreshed. See [acceptance and limits](evidence/web-reader/SCRIPT_REFRESH.md).
+
+
+### Milindapañha English questions
+
+Fourteen Kelly question sources open through the ordinary English-source button.
+Each source identifies its real publisher question anchor, retains the full
+non-CC distribution notice and labels original translator notes separately.
+They translate substantive question exchanges; untranslated Pāli paratext and
+publisher numbering differences remain visible. An unanchored anthology page
+cannot select an arbitrary question. These are not shared-page or partial-source
+consent choices, and they do not imply English for the whole book. See
+[the source review](data/milinda-reviewed-questions.md).

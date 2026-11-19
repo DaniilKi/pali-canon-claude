@@ -1,0 +1,668 @@
+{
+  "reviewed_on": "2026-11-19",
+  "baseline_dev": "7ec5da449f345c362d9c6ca89b97a19139784b8a",
+  "ati_commit": "45fedca341497120651efa20e756b04a13e61089",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "status": "Fourteen reviewed whole-substantive-question bindings implemented and validated. Dev integration requires exact-commit CI; inspect actual Git refs and workflow results rather than treating this source receipt as a release status.",
+  "rights": "Copyright 2005 John Kelly. Free-of-charge redistribution in any medium, complete notice and derivative-source identification required. Not Creative Commons.",
+  "scope": "Fourteen complete substantive question exchanges. Pali headings and ordinal colophons are not translated; mil3.3.14 also includes untranslated chapter/count paratext. Wisdom compresses a repeated closing illumination label. Not word-by-word alignment, a full translation of either anthology, or the whole Milindapanha.",
+  "publisher_pages": [
+    {
+      "path": "/tipitaka/kn/miln/miln.2x.kell",
+      "html_sha256": "44c59b3954ea8dd2b1966d5cd22f0836080b65fd351e474440a3b28dc1535dfd",
+      "official_blob_sha": "9927c66a96d91d31cd46e44a8ff0b84b11bfd550"
+    },
+    {
+      "path": "/tipitaka/kn/miln/miln.3x.kell",
+      "html_sha256": "5e0d563f4e3403167dbb73ec80190bdeb1592895d4af2e5141675692fec42fe5",
+      "official_blob_sha": "69fc93b1bbb1a32d0c90ba69b9a3a06ea38cdbe4"
+    }
+  ],
+  "questions": [
+    {
+      "unit_id": "mil3.1.8",
+      "publisher_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.2x.kell.html#miln-2-1-08",
+      "publisher_heading": "Miln II.1.8: Characteristics of Attention and Wisdom {Miln 32-33}",
+      "root_blocks_sha256": "2191d6801bcc05eeef8dc5eb204593d1f44523950819ed3acb6f9549d0e42a44",
+      "english_characters": 1156,
+      "english_body_sha256": "6cd09d8054a61a7ee28fe05c993d172d0256f8cb0b045fb74b6a0729749d4baf",
+      "translator_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "full_notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+      "selected_chapter_raw_sha256": "374efae83bd063b565e428cdafcb13f87564b4fe1a624bf29537b13185eb5bb8",
+      "finite_structure": {
+        "paragraph_count": 9,
+        "note_container_count": 0,
+        "tag_counts": {
+          "div": 1,
+          "h1": 1,
+          "a": 3,
+          "span": 1,
+          "p": 9
+        },
+        "anchor_attributes": [
+          {
+            "id": "miln-2-1-08"
+          },
+          {
+            "title": "Go to top of page",
+            "class": "back",
+            "href": "miln.2x.kell.html#top"
+          },
+          {
+            "id": "miln-2-1-08-barley"
+          }
+        ]
+      },
+      "translator_notes_count": 0,
+      "pali_body_sha256": "decb790ef88f7b0da45aa79071c786b0f4ad4fbb4701971400c9f6f3b9289864",
+      "untranslated_paratext_refs": [
+        "mil3.1.8/6"
+      ]
+    },
+    {
+      "unit_id": "mil3.1.15",
+      "publisher_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.2x.kell.html#miln-2-1-14",
+      "publisher_heading": "Miln II.1.14: Characteristic of Wisdom {Miln 39}",
+      "root_blocks_sha256": "c65d82c3fe923c812c2a732277118291901abd8eb5c33c5a3f5e318a4078f3a4",
+      "english_characters": 1205,
+      "english_body_sha256": "7031c36bf6fd405d13c2f32c30459d2018499fd8444515b64f2223b4c347b682",
+      "translator_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "full_notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+      "selected_chapter_raw_sha256": "a36501321ba11907c93e33c4557f6eaec30ee2fcf68b041ab4620a0ee239aa9c",
+      "finite_structure": {
+        "paragraph_count": 7,
+        "note_container_count": 0,
+        "tag_counts": {
+          "div": 1,
+          "h1": 1,
+          "a": 3,
+          "span": 1,
+          "p": 7
+        },
+        "anchor_attributes": [
+          {
+            "id": "miln-2-1-14"
+          },
+          {
+            "title": "Go to top of page",
+            "class": "back",
+            "href": "miln.2x.kell.html#top"
+          },
+          {
+            "id": "miln-2-1-14-lamp"
+          }
+        ]
+      },
+      "translator_notes_count": 0,
+      "pali_body_sha256": "819188092f8df93c5cabefc1084d1083aaf59f3cc103525b024e6c80549f2f03",
+      "untranslated_paratext_refs": [
+        "mil3.1.15/5"
+      ]
+    },
+    {
+      "unit_id": "mil3.3.8",
+      "publisher_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.2x.kell.html#miln-2-3-08",
+      "publisher_heading": "Miln II.3.8: Characteristic of Contact {Miln 60}",
+      "root_blocks_sha256": "d4dcb0bcc9599a6462060a87b11a9a3e591fde67df4cab7c83f783bd4e207d14",
+      "english_characters": 1220,
+      "english_body_sha256": "bb07d73eb1ce872cc435c48a49f829a82508629f20413e3e1332ec4309586f46",
+      "translator_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "full_notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+      "selected_chapter_raw_sha256": "fa935b8f9034a3d49848b689d1cfc3f17a7d89da47a546992fb81d3937343bc0",
+      "finite_structure": {
+        "paragraph_count": 11,
+        "note_container_count": 0,
+        "tag_counts": {
+          "div": 1,
+          "h1": 1,
+          "a": 5,
+          "span": 1,
+          "p": 11
+        },
+        "anchor_attributes": [
+          {
+            "id": "miln-2-3-08"
+          },
+          {
+            "title": "Go to top of page",
+            "class": "back",
+            "href": "miln.2x.kell.html#top"
+          },
+          {
+            "id": "miln-2-3-08-rams"
+          },
+          {
+            "id": "miln-2-3-08-hands"
+          },
+          {
+            "id": "miln-2-3-08-cymbals"
+          }
+        ]
+      },
+      "translator_notes_count": 0,
+      "pali_body_sha256": "7ade22b80ee73980e746807c1e9728145948fb155d24224f609c1455b531e4e9",
+      "untranslated_paratext_refs": [
+        "mil3.3.8/8"
+      ]
+    },
+    {
+      "unit_id": "mil3.3.9",
+      "publisher_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.2x.kell.html#miln-2-3-9",
+      "publisher_heading": "Miln II.3.9: Characteristic of Feeling {Miln 60}",
+      "root_blocks_sha256": "e4e91b169ff427a35c8163c2f75c377edb3f25d58073fb20b6f747c381ed57f2",
+      "english_characters": 1199,
+      "english_body_sha256": "d975a77fa9d26c2d00384808ad1a6941f43cdbbcff8ff388568bb549dc452e8b",
+      "translator_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "full_notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+      "selected_chapter_raw_sha256": "ec2d014c2601dac56cec0894011ffbb8fbf2ca3913a40ad968471ec1c84d2127",
+      "finite_structure": {
+        "paragraph_count": 6,
+        "note_container_count": 0,
+        "tag_counts": {
+          "div": 1,
+          "h1": 1,
+          "a": 3,
+          "span": 1,
+          "p": 6
+        },
+        "anchor_attributes": [
+          {
+            "id": "miln-2-3-9"
+          },
+          {
+            "title": "Go to top of page",
+            "class": "back",
+            "href": "miln.2x.kell.html#top"
+          },
+          {
+            "id": "miln-2-3-09-man"
+          }
+        ]
+      },
+      "translator_notes_count": 0,
+      "pali_body_sha256": "3f78c0d6d699ace682e11fc8dbcab7d182fa6876c268e8ef897be9f777f0247f",
+      "untranslated_paratext_refs": [
+        "mil3.3.9/6"
+      ]
+    },
+    {
+      "unit_id": "mil3.3.10",
+      "publisher_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.2x.kell.html#miln-2-3-10",
+      "publisher_heading": "Miln II.3.10: Characteristic of Perception {Miln 61}",
+      "root_blocks_sha256": "54d16f5e92628eb1e7839de8ec98e679d3b1ecdf97efc2c64c1195c0a9bf0a2d",
+      "english_characters": 647,
+      "english_body_sha256": "767ef2b5d35341c9bbe4e6d397da1c96e7a0226befbb2db056edfcef046cd74f",
+      "translator_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "full_notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+      "selected_chapter_raw_sha256": "ff1ed32104af6a3af556434f81f2fe9ab72894322ae5dcee4ce984e013c987ea",
+      "finite_structure": {
+        "paragraph_count": 5,
+        "note_container_count": 0,
+        "tag_counts": {
+          "div": 1,
+          "h1": 1,
+          "a": 3,
+          "span": 1,
+          "p": 5
+        },
+        "anchor_attributes": [
+          {
+            "id": "miln-2-3-10"
+          },
+          {
+            "title": "Go to top of page",
+            "class": "back",
+            "href": "miln.2x.kell.html#top"
+          },
+          {
+            "id": "miln-2-3-10-store"
+          }
+        ]
+      },
+      "translator_notes_count": 0,
+      "pali_body_sha256": "65ddfb6ae7d3c96d9697c3792dd85278d84dc86165ef85e17b89d62a4ab23115",
+      "untranslated_paratext_refs": [
+        "mil3.3.10/5"
+      ]
+    },
+    {
+      "unit_id": "mil3.3.11",
+      "publisher_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.2x.kell.html#miln-2-3-11",
+      "publisher_heading": "Miln II.3.11: Characteristic of Volition {Miln 61}",
+      "root_blocks_sha256": "13938ee823e77b3231738001795c2503d216a64045eda809221c1f3688850e66",
+      "english_characters": 1478,
+      "english_body_sha256": "4536912fdf90520210ecc4e0486c0f820137b8d7993ade9345a760c69d8a1592",
+      "translator_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "full_notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+      "selected_chapter_raw_sha256": "e5f6357530dc769652f751192a3df3f7823d0037fb572854d9f003e69972e10d",
+      "finite_structure": {
+        "paragraph_count": 6,
+        "note_container_count": 0,
+        "tag_counts": {
+          "div": 1,
+          "h1": 1,
+          "a": 3,
+          "span": 1,
+          "p": 6
+        },
+        "anchor_attributes": [
+          {
+            "id": "miln-2-3-11"
+          },
+          {
+            "title": "Go to top of page",
+            "class": "back",
+            "href": "miln.2x.kell.html#top"
+          },
+          {
+            "id": "miln-2-3-11-poison"
+          }
+        ]
+      },
+      "translator_notes_count": 0,
+      "pali_body_sha256": "11d86fa0a698ff1c9fcf88011d42ea349024cf834dbcbb164cfd9775a039eab0",
+      "untranslated_paratext_refs": [
+        "mil3.3.11/6"
+      ]
+    },
+    {
+      "unit_id": "mil3.3.12",
+      "publisher_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.2x.kell.html#miln-2-3-12",
+      "publisher_heading": "Miln II.3.12: Characteristic of Consciousness {Miln 62}",
+      "root_blocks_sha256": "af0477ac90b24656c75751700ad23df1238f362401fda8d23b96ee33a386f6c6",
+      "english_characters": 1065,
+      "english_body_sha256": "4a06c5bf4b9178e658a5dbdfb87261fa3d7bea1cc8d267bb73ae8597f405329a",
+      "translator_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "full_notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+      "selected_chapter_raw_sha256": "be295138a792b534949950699de5c6c4ec820418b3ddd69ecac9b312929ee022",
+      "finite_structure": {
+        "paragraph_count": 5,
+        "note_container_count": 0,
+        "tag_counts": {
+          "div": 1,
+          "h1": 1,
+          "a": 3,
+          "span": 1,
+          "p": 5
+        },
+        "anchor_attributes": [
+          {
+            "id": "miln-2-3-12"
+          },
+          {
+            "title": "Go to top of page",
+            "class": "back",
+            "href": "miln.2x.kell.html#top"
+          },
+          {
+            "id": "miln-2-3-12-crossroads"
+          }
+        ]
+      },
+      "translator_notes_count": 0,
+      "pali_body_sha256": "e567367c84daf9ff7aad0db0a956e81552c3cc0975a9af393496e5a820e713b4",
+      "untranslated_paratext_refs": [
+        "mil3.3.12/5"
+      ]
+    },
+    {
+      "unit_id": "mil3.3.13",
+      "publisher_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.2x.kell.html#miln-2-3-13",
+      "publisher_heading": "Miln II.3.13: Characteristic of Applied Thought {Miln 62}",
+      "root_blocks_sha256": "1decd10bd623588ef2d708d6df42189291bb28cef913f159ac260082a2804ac5",
+      "english_characters": 453,
+      "english_body_sha256": "53bd60694054b9a58aceef226263217c16cd87a0488f804b4caf678c0384f6ef",
+      "translator_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "full_notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+      "selected_chapter_raw_sha256": "7417f928954fa2ced7cf4b81480647911bd8d2cc2489954796910ff005b6648c",
+      "finite_structure": {
+        "paragraph_count": 5,
+        "note_container_count": 0,
+        "tag_counts": {
+          "div": 1,
+          "h1": 1,
+          "a": 3,
+          "span": 1,
+          "p": 5
+        },
+        "anchor_attributes": [
+          {
+            "id": "miln-2-3-13"
+          },
+          {
+            "title": "Go to top of page",
+            "class": "back",
+            "href": "miln.2x.kell.html#top"
+          },
+          {
+            "id": "miln-2-3-13-carpenter"
+          }
+        ]
+      },
+      "translator_notes_count": 0,
+      "pali_body_sha256": "d498cabbd6fb8419b83feb9a3f4b4a34441c56603939e6d483a1c1e3f48ec7d8",
+      "untranslated_paratext_refs": [
+        "mil3.3.13/5"
+      ]
+    },
+    {
+      "unit_id": "mil3.3.14",
+      "publisher_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.2x.kell.html#miln-2-3-14",
+      "publisher_heading": "Miln II.3.14: Characteristic of Sustained Thought {Miln 62}",
+      "root_blocks_sha256": "d4732b7e874c2043b0d9c3a2bfe3d9f6768ad15d89303ac08face7f62365c50d",
+      "english_characters": 454,
+      "english_body_sha256": "1b19b7c32e56b54d3d6a36e16be2113af75e89cdc1165ce1fd46e3fc48ec1124",
+      "translator_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "full_notice_sha256": "ff5167b83e32bc256a72a36b7430654e07c38546e662781b9f30edb6485f9363",
+      "selected_chapter_raw_sha256": "37fcf931563a8daff435562a869658fee247fb63cf2d785749580ffd3b5122b4",
+      "finite_structure": {
+        "paragraph_count": 5,
+        "note_container_count": 0,
+        "tag_counts": {
+          "div": 1,
+          "h1": 1,
+          "a": 3,
+          "span": 1,
+          "p": 5
+        },
+        "anchor_attributes": [
+          {
+            "id": "miln-2-3-14"
+          },
+          {
+            "title": "Go to top of page",
+            "class": "back",
+            "href": "miln.2x.kell.html#top"
+          },
+          {
+            "id": "miln-2-3-14-gong"
+          }
+        ]
+      },
+      "translator_notes_count": 0,
+      "pali_body_sha256": "03d5650c7278fdfe899cff9ce8af7533be9a410de1e5a8834262e80019a81748",
+      "untranslated_paratext_refs": [
+        "mil3.3.14/5",
+        "mil3.3.14/6",
+        "mil3.3.14/7"
+      ]
+    },
+    {
+      "unit_id": "mil3.5.5",
+      "publisher_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.3x.kell.html#miln-3-5-05",
+      "publisher_heading": "Miln III.5.5: Transmigration and Rebirth {Miln 71}",
+      "root_blocks_sha256": "78e6bda07fb959d4fc8dd9a58e9982ae856e08b8af8d4966df37b2f08c5a74dc",
+      "english_characters": 885,
+      "english_body_sha256": "ffd07cd9bca7a0bb1ead9e30e14db40ccd05e31a77d9b15a00fdf0f24a00f2f0",
+      "translator_notes_sha256": "d25405d0f8a5411effd9ce5d1c065e0e83fdf8d5a26ec24a4feb29d0800b34b6",
+      "full_notice_sha256": "b8db11bb5c645a1ce85a06513f7ded71d926e0897dc636e334b44015e2ab6480",
+      "selected_chapter_raw_sha256": "96b7082c9d6c67fe318893f63e356279688556375e5f7d2025acffd03ad5fa4e",
+      "finite_structure": {
+        "paragraph_count": 13,
+        "note_container_count": 1,
+        "tag_counts": {
+          "div": 2,
+          "h1": 2,
+          "a": 7,
+          "span": 1,
+          "p": 13,
+          "dl": 1,
+          "dt": 2,
+          "dd": 2,
+          "i": 2
+        },
+        "anchor_attributes": [
+          {
+            "id": "miln-3-5-05"
+          },
+          {
+            "title": "Go to top of page",
+            "class": "back",
+            "href": "miln.3x.kell.html#top"
+          },
+          {
+            "class": "noteTag",
+            "href": "miln.3x.kell.html#fn-3.5.5-1",
+            "id": "fnt-3.5.5-1"
+          },
+          {
+            "class": "noteTag",
+            "href": "miln.3x.kell.html#fn-3.5.5-2",
+            "id": "fnt-3.5.5-2"
+          },
+          {
+            "id": "miln-3-5-05-lamp"
+          },
+          {
+            "href": "miln.3x.kell.html#fnt-3.5.5-1",
+            "id": "fn-3.5.5-1"
+          },
+          {
+            "href": "miln.3x.kell.html#fnt-3.5.5-2",
+            "id": "fn-3.5.5-2"
+          }
+        ]
+      },
+      "translator_notes_count": 2,
+      "pali_body_sha256": "cab337846b1c928812da25f6b329a7304ac9126c18b30ec1e51949be337d5beb",
+      "untranslated_paratext_refs": [
+        "mil3.5.5/5"
+      ]
+    },
+    {
+      "unit_id": "mil3.5.6",
+      "publisher_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.3x.kell.html#miln-3-5-06",
+      "publisher_heading": "Miln III.5.6: Soul {Miln 71}",
+      "root_blocks_sha256": "6ba8af6481878d810cfcc9cf7de6b5d0612dfa69c3c7af242b9839180e2b2c7a",
+      "english_characters": 193,
+      "english_body_sha256": "5c1013470ff254760fa30a7ddde7d4ce71f72cfa25cde22c761ffd4575ba57fc",
+      "translator_notes_sha256": "8f22f87a1a32b9025ea6dd7f075712859b4f7c79c45a357afafce98bd816d593",
+      "full_notice_sha256": "b8db11bb5c645a1ce85a06513f7ded71d926e0897dc636e334b44015e2ab6480",
+      "selected_chapter_raw_sha256": "fb085dbe6c9c0d003d8ba8d80e4b8bc9f7d992e0d66b6920278d0e3e5214dbe7",
+      "finite_structure": {
+        "paragraph_count": 3,
+        "note_container_count": 1,
+        "tag_counts": {
+          "div": 2,
+          "h1": 2,
+          "a": 4,
+          "span": 1,
+          "p": 3,
+          "dl": 1,
+          "dt": 1,
+          "dd": 1,
+          "i": 3
+        },
+        "anchor_attributes": [
+          {
+            "id": "miln-3-5-06"
+          },
+          {
+            "title": "Go to top of page",
+            "class": "back",
+            "href": "miln.3x.kell.html#top"
+          },
+          {
+            "class": "noteTag",
+            "href": "miln.3x.kell.html#fn-3.5.6-1",
+            "id": "fnt-3.5.6-1"
+          },
+          {
+            "href": "miln.3x.kell.html#fnt-3.5.6-1",
+            "id": "fn-3.5.6-1"
+          }
+        ]
+      },
+      "translator_notes_count": 1,
+      "pali_body_sha256": "3444b4b7e91b7e57b3746c4e13ce370caed2eb0be3d1c0716201f2a390aa6085",
+      "untranslated_paratext_refs": [
+        "mil3.5.6/4"
+      ]
+    },
+    {
+      "unit_id": "mil3.5.7",
+      "publisher_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.3x.kell.html#miln-3-5-07",
+      "publisher_heading": "Miln III.5.7: Non-Release From Evil Deeds {Miln 72}",
+      "root_blocks_sha256": "66db11ed666150c095f5953b927b868a872d591a7afb8aa438730efa222b3bf3",
+      "english_characters": 1176,
+      "english_body_sha256": "5b9dfe2a0595bcae341fc30717d0897d22537f5508ee3c1d05af30cd7e2f9dee",
+      "translator_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "full_notice_sha256": "b8db11bb5c645a1ce85a06513f7ded71d926e0897dc636e334b44015e2ab6480",
+      "selected_chapter_raw_sha256": "858a4f219a26ca76f1334263c5b4f8b3e8b444f53dfdecd1a1a705a5a51ee581",
+      "finite_structure": {
+        "paragraph_count": 11,
+        "note_container_count": 0,
+        "tag_counts": {
+          "div": 1,
+          "h1": 1,
+          "a": 2,
+          "span": 1,
+          "p": 11
+        },
+        "anchor_attributes": [
+          {
+            "id": "miln-3-5-07"
+          },
+          {
+            "title": "Go to top of page",
+            "class": "back",
+            "href": "miln.3x.kell.html#top"
+          }
+        ]
+      },
+      "translator_notes_count": 0,
+      "pali_body_sha256": "a93117bf196b0738313d084e916d6124ddcafc1fcfe850cc81fc82c2be6e490b",
+      "untranslated_paratext_refs": [
+        "mil3.5.7/5"
+      ]
+    },
+    {
+      "unit_id": "mil3.7.5",
+      "publisher_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.3x.kell.html#miln-3-7-05",
+      "publisher_heading": "Miln III.7.5: Simultaneous Arising in Different Places {Miln 82-83}",
+      "root_blocks_sha256": "d133e19edae36d571ede1edc12e979c6605b4effb8b39bce0911a1fe2ea58b53",
+      "english_characters": 1520,
+      "english_body_sha256": "820dd0fec1d0755fb09398ec683e8243fb3aaa99ac9b9d0233bcb22be72800dd",
+      "translator_notes_sha256": "9e780b5b7cd255f2094669d3b319d32d1b8bc5cfe4e4845acc5dc83baf938db4",
+      "full_notice_sha256": "b8db11bb5c645a1ce85a06513f7ded71d926e0897dc636e334b44015e2ab6480",
+      "selected_chapter_raw_sha256": "4f28033ac938743b24e4ef9def247a860a27e2ed3706d9d5041727b6ebafbb2f",
+      "finite_structure": {
+        "paragraph_count": 21,
+        "note_container_count": 1,
+        "tag_counts": {
+          "div": 2,
+          "h1": 2,
+          "a": 4,
+          "span": 1,
+          "p": 21,
+          "dl": 1,
+          "dt": 1,
+          "dd": 1,
+          "i": 1
+        },
+        "anchor_attributes": [
+          {
+            "id": "miln-3-7-05"
+          },
+          {
+            "title": "Go to top of page",
+            "class": "back",
+            "href": "miln.3x.kell.html#top"
+          },
+          {
+            "class": "noteTag",
+            "href": "miln.3x.kell.html#fn-3.7.5-1",
+            "id": "fnt-3.7.5-1"
+          },
+          {
+            "href": "miln.3x.kell.html#fnt-3.7.5-1",
+            "id": "fn-3.7.5-1"
+          }
+        ]
+      },
+      "translator_notes_count": 1,
+      "pali_body_sha256": "f67d13e7cf155e78a748c9ba119dbefd112a2b27ff803cc28ee0cd6793946393",
+      "untranslated_paratext_refs": [
+        "mil3.7.5/6"
+      ]
+    },
+    {
+      "unit_id": "mil3.7.8",
+      "publisher_url": "https://www.accesstoinsight.org/tipitaka/kn/miln/miln.3x.kell.html#miln-3-7-08",
+      "publisher_heading": "Miln III.7.8: Doing Evil Knowingly and Unknowingly {Miln 84}",
+      "root_blocks_sha256": "fec2aa0c79b3433f5d0ada085f0d4c8632c79a3ecc39913cdd7e74ac2d48a155",
+      "english_characters": 748,
+      "english_body_sha256": "33a84db5b563e2d11d1ef9123de7db6c6ef6b071ea115159608028fb891a5f40",
+      "translator_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "full_notice_sha256": "b8db11bb5c645a1ce85a06513f7ded71d926e0897dc636e334b44015e2ab6480",
+      "selected_chapter_raw_sha256": "d9a09876c9a9883e63c49253ffc976e9867ed07dc942cc1e25570141e75c2299",
+      "finite_structure": {
+        "paragraph_count": 7,
+        "note_container_count": 0,
+        "tag_counts": {
+          "div": 1,
+          "h1": 1,
+          "a": 2,
+          "span": 1,
+          "p": 7
+        },
+        "anchor_attributes": [
+          {
+            "id": "miln-3-7-08"
+          },
+          {
+            "title": "Go to top of page",
+            "class": "back",
+            "href": "miln.3x.kell.html#top"
+          }
+        ]
+      },
+      "translator_notes_count": 0,
+      "pali_body_sha256": "ca76aed8cad5e62fcbbfc203a43a506320f4b548770d155df7f4bdb6577680df",
+      "untranslated_paratext_refs": [
+        "mil3.7.8/4"
+      ]
+    }
+  ],
+  "source_tests": {
+    "standing": "Published Access to Insight translations attributed to John Kelly.",
+    "permission": "Complete individual notices independently read; explicit free electronic redistribution and derivative permission.",
+    "respect": "No opt-out identified in the reviewed publisher artifacts; no SuttaCentral content is used.",
+    "durability": "Official BCBS repository pinned by commit, raw SHA-256 and Git blob SHA.",
+    "verifiability": "Actual body anchors, complete canonical roots, adjacent controls, selected English/notes and complete notice independently reviewed."
+  },
+  "remaining_reader_risks": [
+    {
+      "issue": "Same-tab external source link replaces the app; a fresh reopening loses an unsaved tab-memory note.",
+      "reproduced": "Chromium155,390x844,actual dhp183; outbound request intercepted locally. Durable bookmark retained; in-app navigation and export control passed. Browser Back/BFCache untested.",
+      "state": "Reproduced, not fixed by this corpus batch."
+    },
+    {
+      "issue": "Ordinary delayed reading completion takes focus from a finder input the user focused while waiting.",
+      "reproduced": "Chromium155,390x844 and1280x900; INPUT#query becomes MAIN#content in native AX; next typed character misses input.",
+      "state": "Reproduced, not fixed by this corpus batch."
+    }
+  ],
+  "screening": "Validated finite question extractions are excluded from ordinary whole-page triage. Forged review labels, lost registry/bindings/selectors and root drift are refused. Prior queue remains 220 leads, 7 retained snapshots, 213 unreviewed with both historical memories.",
+  "local_validation": {
+    "node_tests": 1311,
+    "passed": 1307,
+    "failed": 0,
+    "skipped": 4,
+    "canonical_records_audited": 8544,
+    "audit_failures": 0,
+    "browser_normal": 44,
+    "browser_a11y": 74,
+    "a11y_scans": 80,
+    "a11y_violations": 0,
+    "browser_installed": 44,
+    "prior_reader_journey": 173,
+    "smoke_tools": 34,
+    "smoke_checks": 64,
+    "offline_evals": 195,
+    "live_evals_skipped": 6,
+    "docs_export_checks": 19,
+    "actual_milinda_source_checks_enabled": true,
+    "browser_mode": "Pinned original ATI fixtures with local-only test transport, actual bundled HTTP/MCP worker; not a publisher-live availability test."
+  }
+}
