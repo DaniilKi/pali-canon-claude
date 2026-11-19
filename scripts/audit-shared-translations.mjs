@@ -12,6 +12,7 @@ import { syntheticShared, sharedIds } from '../tests/helpers/shared-translation.
 import { SCRIPTS, transliterate } from '../src/script.mjs';
 import { translationCoverage } from '../src/providers.mjs';
 import * as canon from '../src/canon.mjs';
+import { AN_MIND_SECTION_PATH } from '../src/ati-section-profiles.mjs';
 import { fetchRecorderSource, readFetchLedger } from '../tests/helpers/synthetic-fetch-ledger.mjs';
 function option(name) { const i = process.argv.indexOf(name); if (i < 0) return; assert.ok(process.argv[i + 1]); return resolve(process.argv[i + 1]); }
 const serverDir = option('--server-dir') || resolve('server'), reportPath = option('--report');
@@ -33,9 +34,15 @@ try {
   const removedLinks=sharedIds.reduce((n,id)=>n+(original[id]||[]).filter(l=>!Object.hasOwn(l,'shared_scope')&&!Object.hasOwn(l,'partial_scope')).length,0);
   const removedTexts=sharedIds.filter(id=>canon.describe(canon.resolve(id).unit).english_available>0).length;
   assert.ok(removedTexts<=removedLinks,'Synthetic primary Iti fixtures must not retain an inherited/AJ whole source');
-  syntheticBaseline={...baseline,links:baseline.links-removedLinks,with_english:baseline.with_english-removedTexts,with_english_including_inherited:baseline.with_english_including_inherited-removedTexts,shared_links:0,with_shared_english:0,shared_only:0};
-  const preload = join(stage, 'synthetic-provider.cjs');
   const reviewedPages = Object.values(original).flat().filter(l => l.match === 'reviewed-shared-page');
+  const retainedMind = reviewedPages.find(link=>link.path===AN_MIND_SECTION_PATH&&link.shared_scope);
+  assert.ok(retainedMind,'The installed package must retain the exact reviewed AN mind compilation');
+  const reservedMindBindings = translations => Object.entries(translations).flatMap(([owner,entries])=>entries.filter(link=>link.path===AN_MIND_SECTION_PATH).map(link=>({owner,link})));
+  const originalMindBindings=structuredClone(reservedMindBindings(original));
+  const retainedSubjects=[...new Set(retainedMind.shared_scope.text_ids)];
+  const retainedSharedOnly=retainedSubjects.filter(id=>actualMetadata.get(id).english_available===0).length;
+  syntheticBaseline={...baseline,links:baseline.links-removedLinks,with_english:baseline.with_english-removedTexts,with_english_including_inherited:baseline.with_english_including_inherited-removedTexts,shared_links:1,with_shared_english:retainedSubjects.length,shared_only:retainedSharedOnly};
+  const preload = join(stage, 'synthetic-provider.cjs');
   const modes = ['stdio', 'http', 'mixed_versions', 'changed_mapping', 'changed_source', 'removed_scope', 'aj_shared_metadata', 'aj_partial_metadata', 'aj_invalid_metadata'].map(mode=>[mode,null]);
   for(const page of reviewedPages) modes.push(['reviewed_metadata',page],['reviewed_notice_downgrade',page]);
   modes.push(['withheld_bindings',null]);
@@ -48,14 +55,15 @@ try {
     const full = { ...link, url: link.url.replace('SHARED', 'FULL') }; delete full.shared_scope;
     const translations = { ...original };
     if (syntheticMode) {
-      // Synthetic scopes are isolated from all real shared declarations, including overlapping Iti pages.
-      for (const [owner, entries] of Object.entries(translations)) { const kept=entries.filter(l=>!Object.hasOwn(l,'shared_scope')); if(kept.length) translations[owner]=kept; else delete translations[owner]; }
+      // Isolate overlapping real Iti scopes while preserving the independently required AN legacy binding and its whole versions.
+      for (const [owner, entries] of Object.entries(translations)) { const kept=entries.filter(l=>!Object.hasOwn(l,'shared_scope')||l===retainedMind); if(kept.length) translations[owner]=kept; else delete translations[owner]; }
       for (const uid of sharedIds) delete translations[uid]; translations.iti10 = [link];
     }
     if (mode === 'mixed_versions') translations.iti11 = [full];
     if (mode === 'reviewed_notice_downgrade') {
       const bad = structuredClone(reviewed); bad.shared_scope.presentation = 'condensed'; delete bad.shared_scope.notice_sha256;
-      translations[reviewed.shared_scope.owner_id] = [bad];
+      translations[reviewed.shared_scope.owner_id] = translations[reviewed.shared_scope.owner_id].map(link=>link===reviewed?bad:link);
+      if(reviewed.path===AN_MIND_SECTION_PATH) assert.deepEqual(reservedMindBindings(translations).filter(({link})=>link.section),originalMindBindings.filter(({link})=>link.section),'The negative legacy fixture must preserve all twenty whole bindings');
     }
     if (mode === 'removed_scope') { delete translations.iti10; const removed = { ...link }; delete removed.shared_scope; translations.iti11 = [removed]; }
     const aj = { ...originalAj, links: { ...originalAj.links } };
@@ -66,6 +74,7 @@ try {
       aj.links[partial ? 'patthana1.1' : 'iti10'] = { path: '/Texts-and-Translations/Short-Pieces/Synthetic-Scoped.htm', reference: scoped.reference, match: 'synthetic-test-only',
         ...(partial ? { partial_scope: scoped.partial_scope } : { shared_scope: mode === 'aj_invalid_metadata' ? null : scoped.shared_scope }) };
     }
+    if(syntheticMode) assert.deepEqual(reservedMindBindings(translations),originalMindBindings,'Every synthetic mode must preserve the required AN shared binding and all twenty whole versions unchanged');
     await writeFile(join(stage, 'server/data/translations.json'), JSON.stringify(translations));
     await writeFile(join(stage, 'server/data/anandajoti.json'), JSON.stringify(aj));
     const html = mode === 'changed_source' ? syntheticHtml.replace('amber', 'changed') : syntheticHtml;
@@ -78,11 +87,23 @@ try {
       transport.stderr?.on('data', b => { stderr += b; }); await client.connect(transport);
     } else {
       child = spawn(process.execPath, ['--require', preload, join(stage, 'server/http.cjs')], { cwd: join(stage, 'empty'), env, stdio: ['ignore', 'ignore', 'pipe'] });
-      const url = await new Promise((resolve, reject) => {
+      const expectedStartupRefusal=mode==='reviewed_notice_downgrade'&&reviewed.path===AN_MIND_SECTION_PATH;
+      let url;
+      try { url = await new Promise((resolve, reject) => {
         timer = setTimeout(() => reject(Error('Fixture HTTP readiness timed out')), 30000);
-        child.once('error', reject); child.once('exit', code => reject(Error(`Fixture server exited ${code}`)));
+        child.once('error', reject); child.once('exit', code => reject(Error(`Fixture server ${mode} exited ${code}: ${stderr}`)));
         child.stderr.on('data', b => { stderr += b; const m = stderr.match(/listening on (http:\/\/127\.0\.0\.1:\d+\/mcp)/); if (m) { clearTimeout(timer); resolve(m[1]); } });
-      });
+      }); } catch(error) {
+        if(!expectedStartupRefusal) throw error;
+        assert.equal(child.exitCode,1,'The forged mandatory AN declaration must refuse package startup');
+        assert.match(stderr,/Error: Registered ATI question sections lost or changed their reviewed source, selector or root\./);
+        assert.doesNotMatch(stderr,/UNEXPECTED_NETWORK_ATTEMPT/);
+        assert.equal((await readFetchLedger(fetchLog)).length,0,'Eager registry refusal must precede every provider request');
+        reports.push({mode,source_path:reviewed.path,requests:0,status:'passed',startup_refused:true,synthetic_provider_only:true,real_declaration_metadata:true,real_network_attempts:0});
+        await close();
+        continue;
+      }
+      assert.equal(expectedStartupRefusal,false,'The forged mandatory AN declaration unexpectedly reached HTTP readiness');
       await client.connect(new StreamableHTTPClientTransport(new URL(url)));
     }
     let requests = 0;
@@ -103,7 +124,8 @@ try {
       }
       assert.equal((await readFetchLedger(fetchLog)).length,0,'Withheld canonical bindings never fetch or substitute another source');
     } else if (mode === 'reviewed_notice_downgrade') {
-      await call('get_metadata', { uid: reviewed.shared_scope.owner_id }, /Invalid or unreviewed/);
+      const refusal=reviewed.path===AN_MIND_SECTION_PATH?/Registered ATI/:/Invalid or unreviewed/;
+      await call('get_metadata', { uid: reviewed.shared_scope.owner_id }, refusal);
       assert.equal((await readFetchLedger(fetchLog)).length, 0, 'Changing presentation cannot remove mandatory ATI notice protection');
     } else if (mode === 'reviewed_metadata') {
       const realId = 'ati:' + reviewed.path, members = reviewed.shared_scope.text_ids;
@@ -193,5 +215,5 @@ try {
   const report = { status: 'passed', cases: reports, scope: 'Extracted-package synthetic shared-page contracts and real reviewed-page metadata with simulated providers only. One page, explicit opt-in, no individual/whole-unit alignment, bounded pinned restart, eight input scripts, HTTP/widget and merged AJ metadata without any author-host request. Real reviewed-page metadata/consent/widget refusal/source-drift checks contain no publisher text and make no author-host request.' };
   if (reportPath) await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n'); console.log(JSON.stringify(report));
 } catch (error) {
-  if (reportPath) await writeFile(reportPath, JSON.stringify({ status: 'failed', error: error.message }, null, 2) + '\n'); throw error;
+  if (reportPath) await writeFile(reportPath, JSON.stringify({ status: 'failed', error: error.message, cases: reports }, null, 2) + '\n'); throw error;
 } finally { await close(); if (stage) await rm(stage, { recursive: true, force: true }); }
