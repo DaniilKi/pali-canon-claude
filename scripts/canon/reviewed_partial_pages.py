@@ -22,6 +22,7 @@ def manifest_rows(manifest=MANIFEST):
         walshe='BPS-free-distribution-1985',"Maurice O'Connell Walshe"
         thanissaro='CC-BY-NC','Thanissaro Bhikkhu'
         profiles={
+            ('pli-tv-kd1','/tipitaka/vin/mv/mv.01.23.01-10.than'):(1,'ati-vinaya-mv1-mixed21p6v-v1',*thanissaro),
             ('pli-tv-kd6','/tipitaka/vin/mv/mv.06.40.01.than'):(1,'ati-vinaya-mv6-p1to5-of5-v1',*thanissaro),
             ('pli-tv-kd8','/tipitaka/vin/mv/mv.08.26.01-08.than'):(1,'ati-vinaya-mv8-p1to22-of22-v1',*thanissaro),
             ('sn12.22','/tipitaka/sn/sn12/sn12.022x.wlsh'):(2,'ati-chapter-prose-v1',*walshe),
