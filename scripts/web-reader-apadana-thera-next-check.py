@@ -16,6 +16,7 @@ import urllib.request
 
 from playwright.sync_api import expect, sync_playwright
 from web_reader_test_helpers import read_tool
+from web_reader_apadana_thera_next_navigation import install_navigation_timing_probe, open_chapter_summary
 
 ROOT = Path(__file__).resolve().parents[1]
 KEY = 'pali-library-v1'
@@ -828,6 +829,7 @@ def main():
                     for width in (390, 1280):
                         for theme in ('light', 'dark'):
                             context = browser.new_context(viewport={'width': width, 'height': 900}, bypass_csp=args.a11y)
+                            install_navigation_timing_probe(context)
                             old=[{'uid':'thi-ap31','title':'Preserved Therī note','ref':'thi-ap31/2','offset':1,'source_commit':manifest['vri_commit'],'note':PRIVATE+' saved Therī'},
                                  {'uid':'tha-ap19','title':'Preserved Therā note','ref':'tha-ap19/2','offset':1,'source_commit':manifest['vri_commit']+'-apadana-thera11-30-v1','note':PRIVATE+' saved Therā'},
                                  {'uid':'commentary-ref:tha-ap19','title':'Preserved aligned commentary note','ref':'tha-ap19/c2','offset':1,'source_commit':COMMENTARY_REVISION,'note':PRIVATE+' saved commentary'}]
@@ -898,9 +900,7 @@ def main():
                                 assert len(requests)==prior,'Edition navigation fetched English'
                                 if family_uid=='tha-ap33':
                                     summary_link=navigation.get_by_role('link',name='Chapter summary source · publisher poem 40',exact=True)
-                                    summary_link.focus();page.keyboard.press('Enter')
-                                    page.locator('.passage').first.wait_for();loaded(page)
-                                    assert page.locator('.segment-label a').first.inner_text()=='tha-ap42/1'
+                                    navigation_proof=open_chapter_summary(page,summary_link,delayed_event=theme=='dark')
                                     assert len(requests)==prior,'Chapter-summary navigation fetched English'
                                 audit('approved family navigation '+family_uid)
 
@@ -1015,7 +1015,7 @@ def main():
                                 assert page.locator('.segment-label a').first.inner_text() == fresh['ref']
                                 assert page.locator('section[aria-label="Pāli passage"] .passage').first.inner_text() == metadata[fresh_uid]['segments'][1]['text']
                                 audit('fresh revision-pinned bookmark roundtrip ' + fresh_uid)
-                            checks.append({'width':width,'theme':theme,'check':'All10 explicit new sources; original53notes; note-free preface/summary; combined entries/literal spelling/audio exclusion;17cached-response drift refusals;40Thi+30Thera navigation/Pāli-only chapter4summary;60old profiles/links/Pāli and private drafts/reload/export;fresh33/42 bookmarks'})
+                            checks.append({'width':width,'theme':theme,'navigation_timing':navigation_proof,'check':'All10 explicit new sources; original53notes; note-free preface/summary; combined entries/literal spelling/audio exclusion;17cached-response drift refusals;40Thi+30Thera navigation/Pāli-only chapter4summary;60old profiles/links/Pāli and private drafts/reload/export;fresh33/42 bookmarks'})
                             context.close()
                     browser.close()
             events = [json.loads(line) for line in ledger.read_text().splitlines()]
