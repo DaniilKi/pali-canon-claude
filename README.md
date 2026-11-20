@@ -1,5 +1,7 @@
 # Pali Canon for Claude
 
+**Local unpublished D255:** ten further complete publisher-edition poems (221–230) build on the preserved D254 local work. Remote dev remains `a9755d2` (246 choices), with no push authorized until prior exact macOS CI is reconciled. Independent source and normalization review covers these ten. Measured local coverage is 266 Apadāna choices (40 Therī, 226 Therā), with 2,849 whole English links overall covering 1,745 units directly and 2,168 including inherited links. The local D254+D255 stack adds 20 unpublished choices over remote dev. Focused/full/package/browser/final review and remote CI acceptance remain separate pending gates; D254 receipts and historical claims below retain their original scope. [D255 scope and gates](docs/data/thera221-230-local-intake.md).
+
 **Local unpublished work (D254):** ten further Therā publisher-edition poems (241–250) are being prepared in an isolated checkout. The scope and validation gates are recorded in [the local intake](docs/data/thera241-250-local-intake.md). The remote dev baseline and totals below remain at `a9755d2`; this is not a release or a claim of line-complete VRI translation coverage.
 
 **The Theravāda Buddhist scriptures, word for word, with exact citations: for Claude and the age of AI.**

@@ -15,7 +15,7 @@ def _read_intake(root, filename):
     return data
 
 
-def reviewed_intake(root):
+def _reviewed_241_250(root):
     previous = _read_intake(root, 'THERA_181_220_APPROVAL.json')
     current = _read_intake(root, 'THERA_241_250_APPROVAL.json')
     previous_seal=current['previous_intake']
@@ -26,6 +26,21 @@ def reviewed_intake(root):
     assert current['baseline_records'] == previous['baseline_records'] + previous['approved_records'], 'Historical source mapping changed'
     assert current['approved_ids'] == ['tha-ap'+str(n) for n in range(243,253)]
     assert [row['poem'] for row in current['approved_records']] == list(range(241,251))
+    return current
+
+
+def reviewed_intake(root):
+    previous = _reviewed_241_250(root)
+    current = _read_intake(root, 'THERA_221_230_APPROVAL.json')
+    previous_seal=current['previous_intake']
+    assert previous_seal['file']=='THERA_241_250_APPROVAL.json'
+    assert hashlib.sha256((Path(root)/'docs/evidence/apadana'/previous_seal['file']).read_bytes()).hexdigest()==previous_seal['sha256']
+    assert current['base_commit']=='9ceed785d30afdcdc1f09021d6098b5bb85f02fb'
+    assert current['baseline_ids']==previous['expected_profile_ids'], 'Historical approved256 cohort changed'
+    assert current['baseline_records']==previous['baseline_records']+previous['approved_records'], 'Historical256 source mapping changed'
+    assert len(current['baseline_ids'])==256
+    assert current['approved_ids']==['tha-ap'+str(n) for n in range(223,233)]
+    assert [row['poem'] for row in current['approved_records']]==list(range(221,231))
     return current
 
 

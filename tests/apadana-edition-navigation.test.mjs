@@ -41,7 +41,7 @@ test('reviewed Thera subset uses literal profile owners and stays separate from 
   assert.match(nav.note,/not complete Therā or line-complete VRI English/);
   const last=nav.groups.find(g=>g.poems.some(row=>row.uid===p.id)).poems.at(-1);
   assert.equal(nav.summary?.uid,APADANA_PROFILES[last.uid].chapter_summary?last.uid:undefined);
-  for(const target of ['thi-ap1','tha-ap11','tha-ap12','tha-ap72','tha-ap142','tha-ap160','tha-ap161','tha-ap223','tha-ap999'])assert.throws(()=>apadanaEditionLink(fixture(p.id),target),/unavailable/);
+  for(const target of ['thi-ap1','tha-ap11','tha-ap12','tha-ap72','tha-ap142','tha-ap160','tha-ap161','tha-ap233','tha-ap999'])assert.throws(()=>apadanaEditionLink(fixture(p.id),target),/unavailable/);
  }
  const first=expected[0];assert.equal(first.poem,11);assert.equal(first.id,'tha-ap13');assert.notEqual(first.id,'tha-ap'+first.poem);
 });

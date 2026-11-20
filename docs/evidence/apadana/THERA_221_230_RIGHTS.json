@@ -1,0 +1,103 @@
+{
+  "baseline": "9ceed785d30afdcdc1f09021d6098b5bb85f02fb",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "goldens_sha256": "c9c5f3f99e0aac62884a222ccaa89d13f07523da10e5cd044e8e40391cf76600",
+  "expected_profiles_sha256": "637d8d8f523a3e5d33c1c33e36133d2535a8e7f4007e3bb5d1e51b20f07820ea",
+  "expected_links_sha256": "b87cb20b9840e95af3154250293985c3bb70c76109d4dd2887a02456297e1d0f",
+  "raw_source_v2_seals": {
+    "GOLDENS.json": "46821de4c13466a9142d3fbf38aa4f86ccf63ea601180646f63055f169533b0f",
+    "SOURCE_REVIEW.json": "bc9419b06a9e920cc034f57e0154e56c798ae9bfbb49b917e90bb7700227acc1",
+    "RIGHTS_REVIEW.json": "11326226c65efaae2aa657b709eb4bf5bc651c573656f3a3143257fbd1fb0ad3",
+    "AMENDMENT.json": "19ea89ba87cde832a2935b0ea3ba18f5963da2f6d0f6e556031b861e07f79226"
+  },
+  "normalization_approval_count": 10,
+  "external_activations": 0,
+  "runtime_release_approval": false,
+  "status": "SPECIFIC_TEXT_GRANT_AND_FINITE_NORMALIZATION_CONFIRMED_FOR_TEN_ONLY; PENDING_SEPARATE_PEER_APPROVAL",
+  "translator": "Jonathan S. Walters",
+  "publisher": "Jonathan S. Walters and Whitman College",
+  "license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "specific_over_generic": "Specific translation licence section/footer/epub grant and complete LICENSE.md are retained; generic CC BY4.0 site metadata does not relax noncommercial/share-alike terms.",
+  "notice_artifacts": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "raw_sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/LICENSE.md",
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/LICENSE.md"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "raw_sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_data/site.json",
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_data/site.json"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "raw_sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_pages/about.md",
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_pages/about.md"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "raw_sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/site/footer.njk",
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/site/footer.njk"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "raw_sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/layouts/epub-metadata.xml",
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/layouts/epub-metadata.xml"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "raw_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/_poems.json",
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/_poems.json"
+    }
+  ],
+  "routing_artifact": {
+    "path": "src/_poems/chapter-3/chapter-3.json",
+    "bytes": 27,
+    "raw_sha256": "50b6544f4689f2fcbd9287a86890cdcd6993c62b94ebcfb2d5419546f9ded2e0",
+    "git_blob_sha1": "8c453df465b0cd793bb169ab2398192dbd7db0a0",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/chapter-3.json",
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/chapter-3.json"
+  },
+  "source_rights_review_sha256": "11326226c65efaae2aa657b709eb4bf5bc651c573656f3a3143257fbd1fb0ad3",
+  "required": [
+    "Live-only retrieval from exact approved official Markdown paths/revision.",
+    "Only metadata and integrity hashes may be bundled under current project authorization.",
+    "Preserve translator/publisher attribution, source URL/revision, complete notice links, noncommercial/share-alike restrictions and extraction/change disclosure.",
+    "Keep original bracketed additions, literal numbering, edition differences and all owned notes.",
+    "Preserve separately owned chapter summaries; never use their wording as poem quotation evidence."
+  ],
+  "five_source_tests": {
+    "standing": "Named scholarly translation; exact about-page editorial statement describes PTS/BJTS base and variants. This is edition identification, not independent specialist endorsement.",
+    "permission": "Specific original textual notices allow attributed noncommercial adaptation with share-alike; complete applicable notices must accompany delivery.",
+    "respect": "No AI exclusion was found in the examined pinned notice/routing artifacts. No wider or current-site exhaustive claim is made.",
+    "durability": "Official repository originals have exact blob membership and independently content-addressed commit/root-tree binding; keep immutable revision.",
+    "verifiability": "Exact file identity, raw hashes, printed numbers, all raw stanza/note coordinates and original-XML bounds are pinned individually."
+  },
+  "changes_notice": "Presentation extraction only: remove reviewed Markdown heading/emphasis markers and abbreviation tags; unescape literal bracket and cross-reference punctuation; render exact paired display alternatives in publisher226 notes1/3 as C and cc; replace footnote references with explicit note labels; remove Markdown hard-break padding while preserving every line and physical paragraph. Keep combined stanza ranges as original eight-line entries. Preserve all publisher wording, typography, diacritics, brackets, uncertainties, numbering, both colophons and note ownership. Keep the note-free publisher preface and two-paragraph chapter summary separately owned. No wording is generated, corrected or harmonized to VRI. Complete publisher-edition poems are not line-complete VRI translations.",
+  "formatting_only": true,
+  "normalized_wording_changes": false,
+  "english_bodies_notes_and_apparatus_live_only": true,
+  "no_audio_or_media_rights": true,
+  "payloads_external_only": true,
+  "edition_statement": "Complete source publisher-edition poems only; no line-complete VRI translation or general catalogue approval. Translator notes/third-party botanical or etymological explanations are attributed apparatus, not independently certified facts."
+}

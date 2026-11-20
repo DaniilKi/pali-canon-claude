@@ -9,6 +9,7 @@ from datetime import datetime,timezone
 from pathlib import Path
 from playwright.sync_api import expect,sync_playwright
 from web_reader_test_helpers import read_tool
+from web_reader_apadana_intake import reviewed_intake
 ROOT=Path(__file__).resolve().parents[1]
 BASE='a9755d267c309ad930df0ef154e6c8a03f1f371e'
 spec=importlib.util.spec_from_file_location('d251',ROOT/'scripts/web-reader-thera-pair-intake-check.py')
@@ -157,6 +158,13 @@ def main():
     independent = {}
     for field in ('expected_profiles','expected_links','previous_intake'):
         seal=approval[field];independent[field]=read_sealed(evidence_dir/seal['file'],seal['sha256'])
+    current_curation=reviewed_intake(ROOT)
+    current_ids=current_curation['expected_profile_ids']
+    assert current_curation['baseline_ids']==approval['expected_profile_ids']
+    current_expected={}
+    for field in ('expected_profiles','expected_links'):
+        seal=current_curation[field];current_expected[field]=read_sealed(evidence_dir/seal['file'],seal['sha256'])
+        assert set(current_expected[field])==set(current_curation['approved_ids'])
     normalization = next(read_sealed(evidence_dir/seal['file'],seal['sha256']) for seal in approval['source_reviews'] if seal['file']=='THERA_TWENTY_FIFTH_NORMALIZATION_REVIEW.json')
     assert normalization['normalization_approval_count']==10 and normalization['source_wording_changed'] is False
     assert normalization['unicode_normalization_performed'] is False and normalization['broad_html_stripping_performed'] is False
@@ -192,18 +200,22 @@ def main():
     manifest = json.loads((server_dir/'data/apadana.json').read_text())
     assert manifest == json.loads((ROOT/'server/data/apadana.json').read_text())
     old, canon = baseline()
-    assert set(old['links']) == set(approval['baseline_ids']) and len(old['links']) == 246 and set(manifest['links']) == set(old['links'])|all_approved
+    assert set(old['links']) == set(approval['baseline_ids']) and len(old['links']) == 246
+    assert set(old['links'])|all_approved==set(approval['expected_profile_ids']) and len(approval['expected_profile_ids'])==256
+    assert set(manifest['links'])==set(current_ids), 'Current registry differs from the independent curated whitelist'
     rows = manifest['links']
     assert {k:v for k,v in manifest['source'].items() if k != 'policy'} == {k:v for k,v in old['source'].items() if k != 'policy'}, 'Existing source/rights provenance changed'
-    assert manifest['source']['policy'] == old['source']['policy'].replace('246 finite',str(246+len(all_approved))+' finite').replace('206 explicitly mapped Therā',str(206+len(all_approved))+' explicitly mapped Therā')
+    current_thera=sum(row['publisher_chapter']=='chapter-3' for row in current_curation['baseline_records']+current_curation['approved_records'])
+    assert manifest['source']['policy'] == old['source']['policy'].replace('246 finite',str(len(current_ids))+' finite').replace('206 explicitly mapped Therā',str(current_thera)+' explicitly mapped Therā')
     commentary_parts=git_bytes('server/data/commentary.json.gz.parts.json')
     assert (server_dir/'data/commentary.json.gz.parts.json').read_bytes() == commentary_parts
     for part in json.loads(commentary_parts)['parts']:
         name=part if isinstance(part,str) else part['file']
         assert (server_dir/'data'/name).read_bytes() == git_bytes('server/data/'+name), 'Existing commentary shard changed'
     for uid,row in old['links'].items():assert rows[uid] == row, 'Previous source changed: '+uid
-    profile_probe="""import assert from'node:assert/strict';import{APADANA_PROFILES as current}from'./src/apadana-profiles.mjs';process.stdin.setEncoding('utf8');let s='';for await(const c of process.stdin)s+=c;const p=JSON.parse(s),url=x=>'data:text/javascript;base64,'+Buffer.from(x).toString('base64');const old=await import(url(p.root.replace('./apadana-thera-profiles.mjs',url(p.thera))));assert.equal(Object.keys(old.APADANA_PROFILES).length,246);for(const[id,row]of Object.entries(old.APADANA_PROFILES))assert.deepEqual(current[id],row,id);assert.equal(Object.keys(current).length,256);for(const[id,row]of Object.entries(p.approved))assert.deepEqual(current[id],row,id);console.log(JSON.stringify({preserved:246,approved:10}));"""
-    old_profiles={'root':git_bytes('src/apadana-profiles.mjs').decode(),'thera':git_bytes('src/apadana-thera-profiles.mjs').decode(),'approved':independent['expected_profiles']}
+    for uid,row in current_expected['expected_links'].items():assert rows[uid]==row, 'Current independently approved source descriptor changed: '+uid
+    profile_probe="""import assert from'node:assert/strict';import{APADANA_PROFILES as current}from'./src/apadana-profiles.mjs';process.stdin.setEncoding('utf8');let s='';for await(const c of process.stdin)s+=c;const p=JSON.parse(s),url=x=>'data:text/javascript;base64,'+Buffer.from(x).toString('base64');const old=await import(url(p.root.replace('./apadana-thera-profiles.mjs',url(p.thera))));assert.equal(Object.keys(old.APADANA_PROFILES).length,246);for(const[id,row]of Object.entries(old.APADANA_PROFILES))assert.deepEqual(current[id],row,id);assert.equal(Object.keys({...old.APADANA_PROFILES,...p.approved}).length,256);for(const[id,row]of Object.entries(p.approved))assert.deepEqual(current[id],row,id);for(const[id,row]of Object.entries(p.current_approved))assert.deepEqual(current[id],row,id);assert.deepEqual(Object.keys(current).sort(),p.current_ids.slice().sort());assert.deepEqual(Object.keys({...old.APADANA_PROFILES,...p.approved,...p.current_approved}).sort(),p.current_ids.slice().sort());console.log(JSON.stringify({preserved:246,approved:10}));"""
+    old_profiles={'root':git_bytes('src/apadana-profiles.mjs').decode(),'thera':git_bytes('src/apadana-thera-profiles.mjs').decode(),'approved':independent['expected_profiles'],'current_approved':current_expected['expected_profiles'],'current_ids':current_ids}
     profile_run=subprocess.run(['node','--input-type=module','-e',profile_probe],cwd=ROOT,input=compact(old_profiles),text=True,capture_output=True,timeout=90)
     assert profile_run.returncode == 0 and json.loads(profile_run.stdout)=={'preserved':246,'approved':10}, 'Previous browser source profile check failed: '+compact({'returncode':profile_run.returncode,'signal':-profile_run.returncode if profile_run.returncode<0 else None,'stderr_tail':profile_run.stderr[-2000:]})
     probe = "import{gunzipSync}from'node:zlib';import{readBundled}from'./src/bundled-data.mjs';process.stdin.setEncoding('utf8');let s='';for await(const c of process.stdin)s+=c;process.stdout.write(gunzipSync(readBundled(JSON.parse(s))).toString());"

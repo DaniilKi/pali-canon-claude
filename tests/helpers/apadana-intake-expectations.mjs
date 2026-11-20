@@ -1,9 +1,22 @@
 /** Independent curatorial expectations; never derive this whitelist from runtime data. */
 import {readFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 
 const historical=JSON.parse(readFileSync(new URL('../../docs/evidence/apadana/THERA_SCALED_APPROVAL.json',import.meta.url),'utf8'));
-const intake=JSON.parse(readFileSync(new URL('../../docs/evidence/apadana/THERA_241_250_APPROVAL.json',import.meta.url),'utf8'));
+const previousBytes=readFileSync(new URL('../../docs/evidence/apadana/THERA_241_250_APPROVAL.json',import.meta.url));
+const previous=JSON.parse(previousBytes);
+const intake=JSON.parse(readFileSync(new URL('../../docs/evidence/apadana/THERA_221_230_APPROVAL.json',import.meta.url),'utf8'));
+assert.equal(previous.schema,'reviewed-apadana-intake-v1');
+assert.equal(previous.status,'approved');
+assert.equal(previous.expected_profile_ids.length,256);
+assert.equal(createHash('sha256').update(previousBytes).digest('hex'),'4d11c069b21e87ba7b58ea9a55c6b39d0a1beef0c9cd9f824e7c3f6146736df2');
+assert.equal(intake.previous_intake.file,'THERA_241_250_APPROVAL.json');
+assert.equal(intake.previous_intake.sha256,createHash('sha256').update(previousBytes).digest('hex'));
+assert.deepEqual(intake.baseline_ids,previous.expected_profile_ids);
+assert.deepEqual(intake.baseline_records,[...previous.baseline_records,...previous.approved_records]);
+assert.equal(intake.base_commit,'9ceed785d30afdcdc1f09021d6098b5bb85f02fb');
+assert.equal(intake.approved_ids.length,10);
 assert.equal(intake.schema,'reviewed-apadana-intake-v1');
 assert.equal(intake.status,'approved');
 assert.equal(intake.publisher_revision,'fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4');

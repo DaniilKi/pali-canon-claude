@@ -1,0 +1,1001 @@
+{
+  "baseline": "9ceed785d30afdcdc1f09021d6098b5bb85f02fb",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "goldens_sha256": "c9c5f3f99e0aac62884a222ccaa89d13f07523da10e5cd044e8e40391cf76600",
+  "expected_profiles_sha256": "637d8d8f523a3e5d33c1c33e36133d2535a8e7f4007e3bb5d1e51b20f07820ea",
+  "expected_links_sha256": "b87cb20b9840e95af3154250293985c3bb70c76109d4dd2887a02456297e1d0f",
+  "raw_source_v2_seals": {
+    "GOLDENS.json": "46821de4c13466a9142d3fbf38aa4f86ccf63ea601180646f63055f169533b0f",
+    "SOURCE_REVIEW.json": "bc9419b06a9e920cc034f57e0154e56c798ae9bfbb49b917e90bb7700227acc1",
+    "RIGHTS_REVIEW.json": "11326226c65efaae2aa657b709eb4bf5bc651c573656f3a3143257fbd1fb0ad3",
+    "AMENDMENT.json": "19ea89ba87cde832a2935b0ea3ba18f5963da2f6d0f6e556031b861e07f79226"
+  },
+  "normalization_approval_count": 10,
+  "external_activations": 0,
+  "runtime_release_approval": false,
+  "status": "ALL_TEN_RAW_TO_DISPLAY_SCOPES_DERIVED_AND_COMPARED_BY_AUTHOR; SEPARATE_REVIEW_PENDING",
+  "all_body_paragraphs_compared": 78,
+  "all_physical_stanza_entries_compared": 48,
+  "all_original_notes_compared": 41,
+  "all_poem_heading_note_owners_compared": 10,
+  "all_speech_and_legend_colophons_compared": 20,
+  "first_and_last_stanzas_checked_in_each_poem": true,
+  "preface221_compared": true,
+  "preface_notes": 0,
+  "summary230_compared": true,
+  "summary_notes": 0,
+  "summary_original_physical_paragraphs": 2,
+  "summary_first_paragraph_lines": 7,
+  "summary_stated55_is_not_actual51": true,
+  "source_wording_changed": false,
+  "unicode_normalization_performed": false,
+  "broad_html_stripping_performed": false,
+  "paired_display_scope": {
+    "226/note1": "C state-on retained; Ch alternate recorded",
+    "226/note3": "cc state-on retained; chch alternate recorded"
+  },
+  "combined_ranges_preserved": [
+    "222/2-3/global2379-2380",
+    "226/1-2/global2401-2402",
+    "227/1-2/global2406-2407"
+  ],
+  "source227_amendment_preserved": true,
+  "source227_correction": "Narrator picks up wreath and mounts elephant; no assertion wreath was taken from elephant.",
+  "per_poem": [
+    {
+      "id": "tha-ap223",
+      "poem": 221,
+      "body_paragraph_count": 8,
+      "physical_stanza_count": 5,
+      "local_labels": 5,
+      "poem_notes": 6,
+      "all_stanzas_notes_and_colophons_compared": true,
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 2,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 1,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 4,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 5,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 6,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 3,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 6,
+          "literal_escapes": 26,
+          "heading_markers": 1,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 15
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 1,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap224",
+      "poem": 222,
+      "body_paragraph_count": 8,
+      "physical_stanza_count": 5,
+      "local_labels": 6,
+      "poem_notes": 4,
+      "all_stanzas_notes_and_colophons_compared": true,
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 4,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 4,
+          "literal_escapes": 24,
+          "heading_markers": 1,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 19
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap225",
+      "poem": 223,
+      "body_paragraph_count": 10,
+      "physical_stanza_count": 7,
+      "local_labels": 7,
+      "poem_notes": 5,
+      "all_stanzas_notes_and_colophons_compared": true,
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 1,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 4,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 5,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 5,
+          "literal_escapes": 34,
+          "heading_markers": 1,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 21
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap226",
+      "poem": 224,
+      "body_paragraph_count": 8,
+      "physical_stanza_count": 5,
+      "local_labels": 5,
+      "poem_notes": 3,
+      "all_stanzas_notes_and_colophons_compared": true,
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 3,
+          "literal_escapes": 24,
+          "heading_markers": 1,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 15
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap227",
+      "poem": 225,
+      "body_paragraph_count": 8,
+      "physical_stanza_count": 5,
+      "local_labels": 5,
+      "poem_notes": 5,
+      "all_stanzas_notes_and_colophons_compared": true,
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 3,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 4,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 5,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 5,
+          "literal_escapes": 16,
+          "heading_markers": 1,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 15
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap228",
+      "poem": 226,
+      "body_paragraph_count": 7,
+      "physical_stanza_count": 4,
+      "local_labels": 5,
+      "poem_notes": 4,
+      "all_stanzas_notes_and_colophons_compared": true,
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [
+            {
+              "owner": "note1",
+              "diacritic": "C",
+              "alternate": "Ch",
+              "raw_sha256": "8dbde249f9e8473855b9ebff53a5003edef854ca02b8aaf522a8e5241f1e504e",
+              "rendered_sha256": "6b23c0d5f35d1b11f9b683f0b0a617355deb11277d91ae091d399c655b87940d",
+              "occurrences": 1
+            }
+          ],
+          "PTS_abbr": 1,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [
+            {
+              "owner": "note3",
+              "diacritic": "cc",
+              "alternate": "chch",
+              "raw_sha256": "4974d71293c4c32d70cc38a57a1801cc5b7743bce2500321c456d5a279b9ec7d",
+              "rendered_sha256": "355b1bbfc96725cdce8f4a2708fda310a80e6d13315aec4e5eed2a75fe8032ce",
+              "occurrences": 1
+            }
+          ],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 8,
+          "heading_markers": 0,
+          "emphasis_pairs": 5,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 4,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 1,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 4,
+          "literal_escapes": 22,
+          "heading_markers": 1,
+          "emphasis_pairs": 3,
+          "hard_break_padding_runs": 16
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap229",
+      "poem": 227,
+      "body_paragraph_count": 7,
+      "physical_stanza_count": 4,
+      "local_labels": 5,
+      "poem_notes": 3,
+      "all_stanzas_notes_and_colophons_compared": true,
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 2,
+          "note_references": 0,
+          "literal_escapes": 6,
+          "heading_markers": 0,
+          "emphasis_pairs": 3,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 3,
+          "literal_escapes": 24,
+          "heading_markers": 1,
+          "emphasis_pairs": 2,
+          "hard_break_padding_runs": 16
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap230",
+      "poem": 228,
+      "body_paragraph_count": 7,
+      "physical_stanza_count": 4,
+      "local_labels": 4,
+      "poem_notes": 3,
+      "all_stanzas_notes_and_colophons_compared": true,
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 2,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 3,
+          "literal_escapes": 18,
+          "heading_markers": 1,
+          "emphasis_pairs": 3,
+          "hard_break_padding_runs": 12
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap231",
+      "poem": 229,
+      "body_paragraph_count": 8,
+      "physical_stanza_count": 5,
+      "local_labels": 5,
+      "poem_notes": 6,
+      "all_stanzas_notes_and_colophons_compared": true,
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 4,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 5,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 6,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 6,
+          "literal_escapes": 26,
+          "heading_markers": 1,
+          "emphasis_pairs": 2,
+          "hard_break_padding_runs": 15
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap232",
+      "poem": 230,
+      "body_paragraph_count": 7,
+      "physical_stanza_count": 4,
+      "local_labels": 4,
+      "poem_notes": 2,
+      "all_stanzas_notes_and_colophons_compared": true,
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 2,
+          "literal_escapes": 20,
+          "heading_markers": 1,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 12
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 6
+        }
+      ]
+    }
+  ],
+  "descriptor_shapes_verified": {
+    "profiles": "pure source profile objects; no english or match keys",
+    "links": "exact profile object fields plus english=source title and match=individually-reviewed-whole-poem"
+  }
+}

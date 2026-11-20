@@ -1,0 +1,46 @@
+{
+  "status": "PASS; INDEPENDENT_NORMALIZATION_ONLY",
+  "baseline": "9ceed785d30afdcdc1f09021d6098b5bb85f02fb",
+  "eligible_ids": [
+    "tha-ap223",
+    "tha-ap224",
+    "tha-ap225",
+    "tha-ap226",
+    "tha-ap227",
+    "tha-ap228",
+    "tha-ap229",
+    "tha-ap230",
+    "tha-ap231",
+    "tha-ap232"
+  ],
+  "totals": {
+    "poems": 10,
+    "physical_publisher_stanzas": 48,
+    "printed_local_label_occurrences": 51,
+    "vri_numbered_stanzas": 51,
+    "body_paragraphs": 78,
+    "original_raw_body_paragraphs": 78,
+    "poem_notes": 41,
+    "original_notes": 41,
+    "preface_notes": 0,
+    "summary_notes": 0,
+    "collection_summary_notes": 0,
+    "source_blobs": 10,
+    "rights_blobs": 6,
+    "routing_blobs": 1,
+    "audio_fetches": 0,
+    "normalization_approvals": 10,
+    "external_activations": 0
+  },
+  "full_original_xml_blocks_exact": 14645,
+  "production_parser_imports": 0,
+  "runtime_release_approval": false,
+  "external_payloads_checked": true,
+  "optional_deeper_raw_packet_checked": false,
+  "metadata_sha256": {
+    "GOLDENS.json": "c9c5f3f99e0aac62884a222ccaa89d13f07523da10e5cd044e8e40391cf76600",
+    "EXPECTED_PROFILES.json": "637d8d8f523a3e5d33c1c33e36133d2535a8e7f4007e3bb5d1e51b20f07820ea",
+    "EXPECTED_LINKS.json": "b87cb20b9840e95af3154250293985c3bb70c76109d4dd2887a02456297e1d0f",
+    "NORMALIZED_PAYLOADS_EXTERNAL_ONLY.json": "3c9ada1ebd90abe8d9f617c8b014c453a153d7827e9f443c55ad0702b3150022"
+  }
+}

@@ -12,6 +12,7 @@ import { readPassage, WIDGET_VERSION } from '../src/chatgpt-widget.mjs';
 import { validateEnglishPage } from '../web/translation-policy.mjs';
 import { validateComparisonPage } from '../web/translation-comparison.mjs';
 import { view } from './helpers/widget-view.mjs';
+import { CURRENT_APADANA_IDS } from './helpers/apadana-intake-expectations.mjs';
 
 const approval = JSON.parse(readFileSync('docs/evidence/apadana/THERA_241_250_APPROVAL.json', 'utf8'));
 function sealed(descriptor) {
@@ -83,12 +84,13 @@ test('new client capabilities preserve the independently frozen246 source contra
   assert.deepEqual(approved, independent.approved_ids); assert.equal(approved.length, 10);
   assert.equal(approval.baseline_ids.length, 246);
   assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0, 246), approval.baseline_ids);
-  assert.deepEqual(Object.keys(APADANA_PROFILES), [...approval.baseline_ids, ...approved]);
+  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0, 256), [...approval.baseline_ids, ...approved]);
+  assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
   for (const id of approval.baseline_ids) {
     const profile = baseline.profile_objects[id];
     assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');
   }
-  assert.equal(WIDGET_VERSION, 'v29');
+  assert.equal(WIDGET_VERSION, 'v30');
   for (const id of approved) {
     const profile = APADANA_PROFILES[id], record = golden(id);
     assert.deepEqual(profile.mapping_notes, record.mapping_notes);
