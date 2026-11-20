@@ -15,6 +15,7 @@ import { searchWithInput } from './english-search.mjs';
 import { romanizeSearchInput, searchInputNote } from './search-segments.mjs';
 import { lookupPaliInput } from './lookup-input.mjs';
 import * as sourceBooks from './source-books.mjs';
+import { sourceNotesForPage } from './source-notes.mjs';
 import { HostedToolError } from './hosted-tool-error.mjs';
 
 // Human-readable titles shown by MCP clients and required by the Claude connector directory.
@@ -155,6 +156,9 @@ export function createServer({executeTool} = {}) {
       next_offset: offset + page.length < all.length ? offset + page.length : null,
       segments: page, notes, english_available: english.available(unit),
     };
+    const sourceNotes = sourceNotesForPage({ corpus: canon.load().canon, unitId: unit.id,
+      source: result.source, segments: page, offset });
+    if (sourceNotes) result.source_notes = sourceNotes;
     if (variantMode === 'structured') Object.assign(result, variantsMod.structuredInfo(page));
     if (translation) {
       try {

@@ -17,17 +17,20 @@ import { assertCanonicalLocator, APADANA_PAIR_LOCATOR_REVISION } from './locator
 import { z } from 'zod';
 import { createHash } from 'node:crypto';
 import { contentSha256 } from '../web/content-sha256.mjs';
+import { createSourceNotesPolicy } from '../web/source-notes-policy.mjs';
+import { SOURCE_NOTES_PROFILE } from './source-notes-profiles.mjs';
+import { sourceNotesForPage } from './source-notes.mjs';
 import * as canon from './canon.mjs';
 import * as english from './english.mjs';
 import { APADANA_BASE, APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_PROFILES, APADANA_TRANSLATOR } from './apadana-profiles.mjs';
-import { romanizeInput, inputNote, localizeText, scriptName, SCRIPT_DESCRIPTION } from './script.mjs';
+import { romanizeInput, inputNote, localizeText, scriptName, SCRIPT_DESCRIPTION, SCRIPT_CHOICES } from './script.mjs';
 import * as postcanonical from './postcanonical.mjs';
 import { readBook } from './source-books.mjs';
 import { getCommentary, commentaryReadingSource } from './commentary.mjs';
 import { HostedToolError } from './hosted-tool-error.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v32';
+export const WIDGET_VERSION = 'v33';
 // Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.
 export const NAVIGATION_TIMEOUT_MS = 90000;
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
@@ -38,6 +41,7 @@ export const SKYBRIDGE_MIME = 'text/html+skybridge';
 // Unbundled imports use the original function. Production bundles receive the
 // same source literal before compiler formatting or local-name changes.
 const WIDGET_HASH_SOURCE = typeof __PALI_WIDGET_HASH_SOURCE__ === 'string' ? __PALI_WIDGET_HASH_SOURCE__ : contentSha256.toString();
+const SOURCE_NOTES_POLICY_SOURCE = typeof __PALI_SOURCE_NOTES_POLICY_SOURCE__ === 'string' ? __PALI_SOURCE_NOTES_POLICY_SOURCE__ : createSourceNotesPolicy.toString();
 
 const APADANA_PINS = ['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256'];
 const PINNED_NEW_PARATEXT_IDS = ["tha-ap44","tha-ap63","tha-ap64","tha-ap65","tha-ap66","tha-ap67","tha-ap68","tha-ap69","tha-ap70","tha-ap71","tha-ap73","tha-ap74","tha-ap75","tha-ap76","tha-ap77","tha-ap78","tha-ap79","tha-ap80","tha-ap81","tha-ap82","tha-ap83","tha-ap84","tha-ap85","tha-ap86","tha-ap87","tha-ap88","tha-ap89","tha-ap90","tha-ap91","tha-ap92","tha-ap93","tha-ap94","tha-ap95","tha-ap96","tha-ap97","tha-ap98","tha-ap99","tha-ap100","tha-ap101","tha-ap102","tha-ap103","tha-ap104","tha-ap105","tha-ap106","tha-ap107","tha-ap108","tha-ap109","tha-ap110","tha-ap111","tha-ap112","tha-ap113","tha-ap114","tha-ap115","tha-ap116","tha-ap117","tha-ap118","tha-ap119","tha-ap120","tha-ap121","tha-ap122","tha-ap123","tha-ap124","tha-ap125","tha-ap126","tha-ap127","tha-ap128","tha-ap129","tha-ap130","tha-ap131","tha-ap132","tha-ap133","tha-ap134","tha-ap135","tha-ap136","tha-ap137","tha-ap138","tha-ap139","tha-ap140","tha-ap141","tha-ap143","tha-ap144","tha-ap145","tha-ap146","tha-ap147","tha-ap148","tha-ap149","tha-ap150","tha-ap151","tha-ap152","tha-ap153","tha-ap154","tha-ap155","tha-ap156","tha-ap157","tha-ap158","tha-ap159","tha-ap162","tha-ap163","tha-ap164","tha-ap165","tha-ap166","tha-ap167","tha-ap168","tha-ap169","tha-ap170","tha-ap171","tha-ap172","tha-ap173","tha-ap174","tha-ap175","tha-ap176","tha-ap177","tha-ap178","tha-ap179","tha-ap180","tha-ap181","tha-ap182","tha-ap183","tha-ap184","tha-ap185","tha-ap186","tha-ap187","tha-ap188","tha-ap189","tha-ap190","tha-ap191","tha-ap192","tha-ap193","tha-ap194","tha-ap195","tha-ap196","tha-ap197","tha-ap198","tha-ap199","tha-ap200","tha-ap201","tha-ap202","tha-ap203","tha-ap204","tha-ap205","tha-ap206","tha-ap207","tha-ap208","tha-ap209","tha-ap210","tha-ap211","tha-ap212","tha-ap213","tha-ap214","tha-ap215","tha-ap216","tha-ap217","tha-ap218","tha-ap219","tha-ap220","tha-ap221","tha-ap222","tha-ap243","tha-ap244","tha-ap245","tha-ap246","tha-ap247","tha-ap248","tha-ap249","tha-ap250","tha-ap251","tha-ap252","tha-ap223","tha-ap224","tha-ap225","tha-ap226","tha-ap227","tha-ap228","tha-ap229","tha-ap230","tha-ap231","tha-ap232","tha-ap233","tha-ap234","tha-ap235","tha-ap237","tha-ap238","tha-ap239","tha-ap240","tha-ap241","tha-ap242","tha-ap253","tha-ap254","tha-ap255","tha-ap256","tha-ap257","tha-ap258","tha-ap259","tha-ap260","tha-ap261","tha-ap236"];
@@ -180,6 +184,7 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
       citation: 'vri-book:' + page.book_id, title: page.title, collection: 'VRI root source file',
       label: 'Complete VRI root source file, including front matter. Source-file positions are not individual sutta or rule identities.',
       source: page.source, notes: page.notes,
+      ...(page.source_notes ? { source_notes: page.source_notes } : {}),
       pali: { edition: 'Chaṭṭha Saṅgāyana Tipiṭaka (VRI), Pāli', attribution: page.source.attribution,
         license: page.source.terms, source: page.source, total_segments: page.total_segments,
         offset, limit, returned: page.returned, next_offset: page.next_offset, segments: page.segments },
@@ -235,6 +240,9 @@ export async function readPassage({ uid, book, commentary, segment, context = 0,
     notes: described.notes,
     links: { suttacentral: described.links.suttacentral },
   };
+  const sourceNotes = sourceNotesForPage({ corpus: canon.load().canon, unitId: unit.id,
+    source: result.source, segments: page, offset });
+  if (sourceNotes) result.source_notes = sourceNotes;
   if (wantEnglish && result.english_available.length) {
     try {
       if (englishOffset > 0 && !/^(dt|ati|aj|ap):/.test(translation || '')) {
@@ -359,6 +367,13 @@ export const WIDGET_HTML = `<!doctype html>
   nav button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
   .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
   .empty { color:var(--muted); font-style:italic; }
+  .source-notes-status, .original-edition-note { margin:10px 0; padding:10px; border:1px solid var(--line); border-radius:6px; overflow-wrap:anywhere; }
+  .source-notes-status p, .original-edition-note p { display:block; margin:6px 0; }
+  .source-notes-status, .edition-note-provenance { font:12px/1.5 system-ui, sans-serif; color:var(--muted); }
+  .original-edition-note h3 { margin:0 0 6px; font:600 13px/1.4 system-ui, sans-serif; }
+  .edition-note-text { white-space:pre-wrap; }
+  .source-notes-status button { font:inherit; color:var(--accent); background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:8px; cursor:pointer; }
+  .source-notes-status button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
   @media (max-width: 640px) { .cols { grid-template-columns:1fr; } .col + .col { border-left:0; border-top:1px solid var(--line); } }
 </style>
 </head>
@@ -381,6 +396,10 @@ export const WIDGET_HTML = `<!doctype html>
   var modelCapabilities, modelChannel, modelModality, modelDesired, modelFlight, modelAccepted, modelFailure, modelRevision = 0, modelBlocked = false;
   var linkFlight = null, hostLinks = false;
   var sizeChannel, sizeObserver, sizeFrame, sizeHeight, sizeBlocked = false;
+  var sourceNotesProfile = ${JSON.stringify(SOURCE_NOTES_PROFILE)};
+  var sourceNotesPolicy = (${SOURCE_NOTES_POLICY_SOURCE})(${WIDGET_HASH_SOURCE}, sourceNotesProfile);
+  var sourceNoteUi = [], sourceNoteSignature = null, sourceNoteAnchorNode = null, sourceNoteRootBinding = null, sourceNoteRootRelevant = false, sourceNoteJump = null;
+  var sourceNoteWarning = 'The separately indexed original edition note could not be verified. The loaded Pāli remains available; this apparatus is unavailable.';
   function stopSizing() {
     if (sizeObserver) sizeObserver.disconnect();
     sizeObserver = null;
@@ -507,6 +526,7 @@ export const WIDGET_HTML = `<!doctype html>
   }
   function navigation() {
     queueSize();
+    if (sourceNoteJump) sourceNoteJump.disabled = !!pending || awaitingSelection || !canNavigate();
     var nav = document.getElementById('navigation'); clear(nav);
     if (closed) return;
     if (awaitingSelection) { nav.appendChild(el('p', 'note', 'Opening the requested passage…')); return; }
@@ -696,15 +716,88 @@ export const WIDGET_HTML = `<!doctype html>
         checkedChapterSummary(e, p) && checkedPublisherPreface(e, p) && checkedCollectionSummary(e, p, d.text_id) && checkedPublisherDivisions(e, p, d.text_id) && checkedEditorialGap(e, p, d.text_id) && ${JSON.stringify(APADANA_PINS)}.every(function (key) { return e[key] === p[key]; })) return d;
     return Object.assign({}, d, { english: null, english_error: 'Apadāna publisher identity, terms, edition notices or source pins changed. No English was displayed.' });
   }
+  function sourceNoteRootKey(d) {
+    try {
+      var p = d && d.pali || {}, s = d && d.source || {};
+      var anchors = (Array.isArray(p.segments) ? p.segments : []).map(function (segment, i) {
+        return segment && (segment.ref === sourceNotesProfile.anchors.uid.segment.ref || segment.ref === sourceNotesProfile.anchors.book.segment.ref)
+          ? { index: i, segment: segment } : null;
+      }).filter(function (value) { return value !== null; });
+      return sourceNotesPolicy.stable({ text_id: d && typeof d.text_id === 'string' ? d.text_id : null,
+        book_id: d && typeof d.book_id === 'string' ? d.book_id : null, selection: d && d.selection || null,
+        canonical: d && typeof d.canonical === 'boolean' ? d.canonical : null, content_type: d && d.content_type || null,
+        source_commit: s.commit || null, locator_revision: s.locator_revision || null,
+        offset: Number.isSafeInteger(p.offset) ? p.offset : null, returned: Number.isSafeInteger(p.returned) ? p.returned : null,
+        total_segments: Number.isSafeInteger(p.total_segments) ? p.total_segments : null,
+        script: d && d.script || 'roman', anchors: anchors });
+    } catch { return null; }
+  }
+  function clearSourceNoteUi() {
+    var active = document.activeElement, recoverFocus = false;
+    sourceNoteUi.forEach(function (node) {
+      if (node === active || typeof node.contains === 'function' && node.contains(active)) recoverFocus = true;
+      if (node.parentNode) node.parentNode.removeChild(node);
+    });
+    sourceNoteUi = []; sourceNoteJump = null;
+    if (recoverFocus) {
+      var target = document.getElementById('pali-h');
+      target.setAttribute('tabindex', '-1');
+      if (typeof target.focus === 'function') target.focus({ preventScroll: true });
+    }
+  }
+  function refreshSourceNotes(d, force) {
+    if (closed || !rendered || !rendered.pali) return;
+    var associated = sourceNoteRootBinding !== null && sourceNoteRootKey(d) === sourceNoteRootBinding;
+    var inspected = sourceNotesPolicy.inspect(d);
+    var currentRelevant = inspected.affected || !!(d && Object.prototype.hasOwnProperty.call(d, 'source_notes'));
+    var view = associated ? inspected : sourceNoteRootRelevant || currentRelevant
+      ? { state: 'unavailable', warning: sourceNoteWarning, signature: 'unassociated', entry: null, availability: null, opening: false }
+      : { state: 'absent', warning: null, signature: 'unassociated-absent', entry: null, availability: null, opening: false };
+    if (!force && sourceNoteSignature === view.signature) return;
+    clearSourceNoteUi(); sourceNoteSignature = view.signature;
+    var container = document.getElementById('pali');
+    if (view.state === 'unavailable' || view.opening && view.state === 'available') {
+      var status = el('section', 'source-notes-status'); status.setAttribute('role', 'status');
+      status.appendChild(el('p', '', view.state === 'unavailable' ? view.warning : '1 separately indexed original VRI edition note is available at its recorded location.'));
+      if (view.state === 'available' && view.availability) {
+        sourceNoteJump = el('button', '', 'Open the recorded note location'); sourceNoteJump.type = 'button';
+        sourceNoteJump.disabled = !!pending || awaitingSelection || !canNavigate();
+        sourceNoteJump.addEventListener('click', function () {
+          if (closed || !rendered || sourceNoteRootKey(rendered) !== sourceNoteRootBinding) { refreshSourceNotes(rendered, true); return; }
+          var current = sourceNotesPolicy.inspect(rendered);
+          if (current.state !== 'available' || !current.availability) { refreshSourceNotes(rendered, true); return; }
+          var command = JSON.parse(JSON.stringify(current.availability.widget_read_with));
+          if (${JSON.stringify(SCRIPT_CHOICES)}.indexOf(rendered.script) !== -1) command.arguments.script = rendered.script;
+          navigate(command);
+        });
+        status.appendChild(sourceNoteJump);
+      }
+      container.insertBefore(status, container.firstChild); sourceNoteUi.push(status);
+    }
+    if (view.entry && sourceNoteAnchorNode && sourceNoteAnchorNode.parentNode === container) {
+      var record = view.entry, aside = el('aside', 'original-edition-note');
+      aside.setAttribute('role', 'note'); aside.setAttribute('aria-label', 'Original VRI edition note (Roman Pāli)');
+      aside.appendChild(el('h3', '', 'Original VRI edition note (Roman Pāli)'));
+      var text = el('p', 'edition-note-text', record.text); text.lang = 'pi-Latn'; aside.appendChild(text);
+      aside.appendChild(el('p', '', 'Physical source location only; the remark’s stanza span has not been verified.'));
+      aside.appendChild(el('p', '', record.qualification));
+      aside.appendChild(el('p', 'edition-note-provenance', record.provenance.attribution + ' ' + record.provenance.terms));
+      aside.appendChild(el('p', '', 'Extracted separately from the original source; no source wording has been changed.'));
+      container.insertBefore(aside, sourceNoteAnchorNode.nextSibling); sourceNoteUi.push(aside);
+    }
+    queueSize();
+  }
   function render(d) {
     if (closed) return;
-    if (!d || typeof d !== 'object' || d === rendered) return;
+    if (!d || typeof d !== 'object') return;
+    if (d === rendered) { refreshSourceNotes(d); return; }
     if (!d.pali && typeof d.error !== 'string') return;
     if ((d.text_id === 'tha-ap107' || d.text_id === 'tha-ap108') && (!d.source || d.source.locator_revision !== '${APADANA_PAIR_LOCATOR_REVISION}')) d = { error: 'The paired Apadāna citation mapping revision changed. Reopen the whole current text explicitly; no old reference, replacement words or personal note was substituted.' };
     abandon(); generation++; awaitingSelection = false;
     if (!d.pali) {
       if (typeof d.error !== 'string') return;
       rendered = d;
+      sourceNoteUi = []; sourceNoteSignature = null; sourceNoteAnchorNode = null; sourceNoteRootBinding = null; sourceNoteRootRelevant = false; sourceNoteJump = null;
       document.getElementById('title').textContent = d.cancelled ? 'Reading cancelled' : 'Could not open the passage';
       document.getElementById('status').textContent = (d.cancelled ? 'Reading cancelled. ' : 'Could not open the passage. ') + d.error;
       ['meta', 'pali', 'english', 'footer'].forEach(function (id) { clear(document.getElementById(id)); });
@@ -716,6 +809,9 @@ export const WIDGET_HTML = `<!doctype html>
     }
     d = checkedApadana(d);
     rendered = d;
+    sourceNoteRootBinding = sourceNoteRootKey(d);
+    sourceNoteRootRelevant = sourceNotesPolicy.inspect(d).affected || Object.prototype.hasOwnProperty.call(d, 'source_notes');
+    sourceNoteUi = []; sourceNoteSignature = null; sourceNoteAnchorNode = null; sourceNoteJump = null;
     document.getElementById('title').textContent = (d.citation || '') + (d.title ? ' · ' + d.title : '');
     var meta = document.getElementById('meta'); clear(meta);
     if (d.selection === 'source_book') meta.appendChild(el('span', 'chip', 'Complete source file · no individual text ID'));
@@ -742,10 +838,12 @@ export const WIDGET_HTML = `<!doctype html>
       if (s.vri_paragraph) p.appendChild(el('span', 'vri', '¶' + s.vri_paragraph));
       p.appendChild(document.createTextNode(s.text || ''));
       pali.appendChild(p);
+      if (s.ref === sourceNotesProfile.anchors.uid.segment.ref || s.ref === sourceNotesProfile.anchors.book.segment.ref) sourceNoteAnchorNode = p;
     });
     if (d.pali.next_offset != null) pali.appendChild(el('p', 'note', 'Showing ' + d.pali.returned + ' of ' + d.pali.total_segments + ' segments. Ask for more to continue from segment ' + d.pali.next_offset + '.'));
     if (d.pali.context_with) pali.appendChild(el('p', 'note', 'Ask for surrounding Pāli to read this passage in its source context.'));
     if (d.pali.exact_with) pali.appendChild(el('p', 'note', 'Ask to return to the exact selected segment.'));
+    refreshSourceNotes(d, true);
 
     var en = document.getElementById('english'); clear(en);
     if (d.english) {
@@ -878,6 +976,7 @@ export const WIDGET_HTML = `<!doctype html>
         if (freshMetadata || freshOutput) toolResult(result);
       } else if (freshOutput) render(output);
       else if (freshMetadata && result && result.structuredContent) toolResult(result);
+      if (!freshOutput && output) refreshSourceNotes(output);
     }
   }
   function requested(args) {
@@ -895,6 +994,7 @@ export const WIDGET_HTML = `<!doctype html>
     closed = true; generation++; abandon(); stopSizing();
     if (modelFlight) clearTimeout(modelFlight.timer);
     modelFlight = null; modelDesired = null; modelAccepted = null; rendered = null; lastOutput = null; lastMetadata = null; lastInput = null;
+    sourceNoteUi = []; sourceNoteSignature = null; sourceNoteAnchorNode = null; sourceNoteRootBinding = null; sourceNoteRootRelevant = false; sourceNoteJump = null;
     awaitingSelection = false;
     ['meta', 'pali', 'english', 'footer', 'navigation'].forEach(function (id) { clear(document.getElementById(id)); });
     document.getElementById('title').textContent = 'Reader closed';
@@ -947,6 +1047,7 @@ export const WIDGET_HTML = `<!doctype html>
       if (pending || awaitingSelection || !rendered) render({ cancelled: true, error: 'The reading request was cancelled. Ask to open a passage again when you are ready.' });
     } else if (m.method === 'ui/notifications/host-context-changed') {
       setTheme(m.params && m.params.theme);
+      refreshSourceNotes(rendered);
     }
   });
   post({ jsonrpc: '2.0', id: 1, method: 'ui/initialize', params: { protocolVersion: '2026-01-26', clientInfo: { name: 'pali-canon-reader', version: '${WIDGET_VERSION}' }, appCapabilities: { availableDisplayModes: ['inline', 'fullscreen'] } } });

@@ -1,5 +1,7 @@
 # How it works
 
+**Current D258 local validation:** the exact original VRI Roman Pāli sidecar and additive API/reader implementation passed source/client, compatibility, full-check, browser, installed-package and strict widget checks. Canonical words, citations and English coverage remain unchanged. Final independent approval/local commit and remote CI remain separate gates. [Evidence and limits](data/sariputta-source-note.md). Historical sections retain their original observation scope.
+
 A plain explanation of what happens inside the tool, how the data was built, and how we check it. No programming knowledge is needed for the first two sections.
 
 ## The pieces

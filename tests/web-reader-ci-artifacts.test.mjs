@@ -67,8 +67,21 @@ function beforeHeld234Workflow(source){
  return projected;
 }
 
+// Source-note-only projection: retain every original historical assertion below unchanged.
+function beforeSourceNotesWorkflow(source){
+ if(!source.includes("matrix.group == 'vrieditionnote'"))return source;
+ const additions=conditionalSteps(source,'vrieditionnote');assert.equal(additions.length,5,'only one source-note baseline fetch and four mandatory gates are projected out');
+ let projected=source;for(const step of additions)projected=projected.replace(step,'');
+ projected=projected.replace(', vrieditionnote','').replaceAll(" || matrix.group == 'vrieditionnote'",'');
+ projected=projected.replace('            --mount "type=bind,src=$GITHUB_WORKSPACE/web/source-notes-policy.mjs,dst=/app/web/source-notes-policy.mjs,readonly" \\\n','');
+ for(const report of ['standalone-source-notes.report.json','standalone-source-notes-launch.report.json','standalone-source-notes-a11y.report.json','standalone-source-notes-a11y-launch.report.json','standalone-source-notes-independent.report.json','installed-source-notes.report.json','installed-source-notes-launch.report.json'])projected=projected.replace('            '+report+'\n','');
+ return projected;
+}
+function sourceNotesHistoricalWorkflow(){return beforeSourceNotesWorkflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));}
+// End source-note-only projection.
+
 test('every browser-group JSON report is retained as a CI artifact',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  assert.ok(group,'browser matrix exists');
  const selected=group.match(/group:\s*\[([^\]]+)\]/)?.[1].split(',').map(x=>x.trim());
@@ -94,7 +107,7 @@ test('every browser-group JSON report is retained as a CI artifact',()=>{
 });
 
 test('installed Firefox and WebKit evidence is retained and required by reader acceptance',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const compat=source.split('  reader-compat:')[1]?.split(/^  [a-z][\w-]*:/m)[0];
  assert.ok(compat,'cross-engine job exists');
  assert.match(compat,/engine:\s*\[firefox,\s*webkit\]/,'both independent engines run');
@@ -112,7 +125,7 @@ test('installed Firefox and WebKit evidence is retained and required by reader a
 });
 
 test('the existing draft-safety gate runs quotation and commentary focus in all three modes',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const steps=[...group.matchAll(/if: matrix\.group == 'draftsafety'([^]*?)(?=\n      -|$)/g)].map(match=>match[1]).join('\n');
  const commands=steps.split('\n').filter(line=>line.includes('python scripts/web-reader-study-focus-check.py'));
@@ -124,7 +137,7 @@ test('the existing draft-safety gate runs quotation and commentary focus in all 
 
 
 test('Apadāna browser CI uses a pinned public fixture without persisted credentials or publisher network',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const fixture=source.split('      - name: Check out exact public Apadāna source fixtures without credentials')[1]?.split('      - name: Validate all Apadāna source and rights pins')[0];
  assert.ok(fixture,'exact public fixture checkout exists');
  assert.deepEqual(beforePairGroups(conditionGroups(fixture)),['apadana','apadananext','apadanathird','apadanafourth','apadanathera','apadanatheranext','apadanatheraexpansion','apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial','apadanaedition']);
@@ -146,7 +159,7 @@ test('Apadāna browser CI uses a pinned public fixture without persisted credent
 
 
 test('next Apadāna chapter has independent bounded source acceptance and retained reports',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  assert.match(source,/group:[^\n]*apadananext/);assert.match(source,/matrix\.group == 'apadananext'[^\n]*20/);
  const steps=[...source.matchAll(/if: matrix\.group == 'apadananext'([^]*?)(?=\n      -|$)/g)].map(m=>m[1]).join('\n');
  assert.equal((steps.match(/python scripts\/web-reader-apadana-next-check\.py --source-root \.fixtures\/apadana-pinned/g)||[]).length,3);
@@ -156,7 +169,7 @@ test('next Apadāna chapter has independent bounded source acceptance and retain
 
 
 test('third Apadāna chapter has its own bounded pinned-source and three-mode browser gate',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)?.[1].split(',').map(name=>name.trim());
  assert.equal(selected.filter(name=>name==='apadanathird').length,1);
@@ -178,7 +191,7 @@ test('third Apadāna chapter has its own bounded pinned-source and three-mode br
 
 
 test('fourth Apadāna chapter has its own bounded pinned-source and three-mode browser gate',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)?.[1].split(',').map(name=>name.trim());
  assert.equal(selected.filter(name=>name==='apadanafourth').length,1);
@@ -201,7 +214,7 @@ test('fourth Apadāna chapter has its own bounded pinned-source and three-mode b
 
 
 test('Therā publisher selections has its own bounded pinned-source and three-mode browser gate',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)?.[1].split(',').map(name=>name.trim());
  assert.equal(selected.filter(name=>name==='apadanathera').length,1);
@@ -224,7 +237,7 @@ test('Therā publisher selections has its own bounded pinned-source and three-mo
 
 
 test('publisher-edition navigation has an independent bounded three-mode gate without English retrieval',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)?.[1].split(',').map(name=>name.trim());
  assert.equal(selected.filter(name=>name==='apadanaedition').length,1);
@@ -243,7 +256,7 @@ test('publisher-edition navigation has an independent bounded three-mode gate wi
  assert.deepEqual(paths.filter(path=>path.includes('apadana-edition')),['standalone-apadana-edition.report.json','standalone-apadana-edition-a11y.report.json','installed-apadana-edition.report.json']);
 });
 test('Next Therā publisher chapter has its own bounded pinned-source and three-mode browser gate',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)?.[1].split(',').map(name=>name.trim());
  assert.equal(selected.filter(name=>name==='apadanatheranext').length,1);
@@ -268,7 +281,7 @@ test('Next Therā publisher chapter has its own bounded pinned-source and three-
 
 
 test('Theragāthā sixteen has bounded source, native, three-mode browser and metadata-only artifact gates',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)?.[1].split(',').map(name=>name.trim());
  assert.equal(selected.filter(name=>name==='thagsixteen').length,1);
@@ -294,7 +307,7 @@ test('Theragāthā sixteen has bounded source, native, three-mode browser and me
 
 
 test('supplementary Therā acceptance retains independent source checks, three modes and held-source fixtures',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)?.[1].split(',').map(name=>name.trim());
  assert.equal(selected.filter(name=>name==='apadanatheraexpansion').length,1);assert.equal(beforePairGroups(selected).length,37);
@@ -316,7 +329,7 @@ test('supplementary Therā acceptance retains independent source checks, three m
 });
 
 test('scaled Therā CI retains all fifty-two earlier jobs and adds exactly three bounded Chromium groups',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)[1].split(',').map(name=>name.trim());
  const added=['apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial'];
@@ -346,7 +359,7 @@ test('scaled Therā CI retains all fifty-two earlier jobs and adds exactly three
 });
 
 test('scaled Therā groups require five sealed independent source inputs and all focused, browser and package evidence',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const xml=namedStep(group,'Check out exact public Apadāna original XML without credentials');
  assert.deepEqual(beforePairGroups(conditionGroups(xml)),['apadanatheraexpansion','apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial']);
@@ -392,7 +405,7 @@ test('scaled Therā groups require five sealed independent source inputs and all
 
 
 test('paired Therā gates add two bounded source-pinned groups while retaining historical fixtures and named evidence gates',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=before141180Groups(group.match(/group:\s*\[([^\]]+)\]/)[1].split(',').map(name=>name.trim()));
  assert.deepEqual(selected.filter(name=>PAIR_GROUPS.includes(name)),PAIR_GROUPS);
@@ -451,7 +464,7 @@ test('paired Therā gates add two bounded source-pinned groups while retaining h
 });
 
 test('isolated mixed-load reader source imports include only the shared integrity helper as a read-only input',()=>{
- const workflow=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const workflow=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const step=workflow.split('      - name: Check retained reader views and the shared live cache under mixed load')[1].split('      - uses:')[0];
  assert.match(step,/--mount "type=bind,src=\$GITHUB_WORKSPACE\/web\/content-sha256\.mjs,dst=\/app\/web\/content-sha256\.mjs,readonly"/);
  assert.match(step,/--network none/);assert.match(step,/--cap-drop ALL/);assert.match(step,/--security-opt no-new-privileges/);
@@ -462,7 +475,7 @@ test('isolated mixed-load reader source imports include only the shared integrit
 
 
 test('scaled preservation jobs fetch only their exact historical baseline before source checks',()=>{
- const workflow=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const workflow=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const step=namedStep(workflow,'Fetch exact reviewed Apadāna baseline for independent preservation checks');
  assert.match(step,/if: matrix\.group == 'apadanatherascaled61' \|\| matrix\.group == 'apadanatherascaled81' \|\| matrix\.group == 'apadanatheraeditorial'/);
  assert.match(step,/git fetch --no-tags --depth=1 origin 64a336789ab5f4f02964ff3023ea6b26b330e406/);
@@ -472,7 +485,7 @@ test('scaled preservation jobs fetch only their exact historical baseline before
 });
 
 test('Therā 141–180 adds exactly two bounded source and reader groups while preserving all 57 prior jobs',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=before181220Groups(group.match(/group:\s*\[([^\]]+)\]/)[1].split(',').map(name=>name.trim()));
  assert.equal(selected.length,41);assert.equal(new Set(selected).size,41);
@@ -569,7 +582,7 @@ test('Therā 141–180 CI consumes four independently sealed chapters with expli
 });
 
 test('Therā 181–220 adds two receipt-bound groups while preserving all 59 jobs and 68 source-reader steps',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1]?.split('  reader-browser:')[0];
  const selected=before241250Groups(group.match(/group:\s*\[([^\]]+)\]/)[1].split(',').map(name=>name.trim()));
  assert.equal(selected.length,43);assert.equal(new Set(selected).size,43);
@@ -673,7 +686,7 @@ test('Therā 181–220 CI requires four independent chapter seals and preserves 
 
 
 test('only the two new source groups receive a bounded thirty-minute budget; previous group budgets stay unchanged',()=>{
- const raw=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const raw=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const timeout=raw.match(/^    timeout-minutes: (\$\{\{[^\n]+)$/m)?.[1];assert.ok(timeout);
  const expr=timeout.slice(3,-2).trim();
  const prefix="(matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201') && 30 || ";
@@ -688,7 +701,7 @@ test('only the two new source groups receive a bounded thirty-minute budget; pre
 });
 
 test('Therā 241–250 adds exactly one twenty-minute group and preserves the entire a9755d2 workflow projection',()=>{
- const source=before221230Workflow(beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8')));
+ const source=before221230Workflow(beforeHeld234Workflow(sourceNotesHistoricalWorkflow()));
  const group=source.split('  reader-browser-group:')[1].split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)[1].split(',').map(name=>name.trim());
  assert.equal(selected.length,44);assert.equal(new Set(selected).size,44);
@@ -740,7 +753,7 @@ test('Therā 241–250 adds exactly one twenty-minute group and preserves the en
 });
 
 test('Therā 241–250 CI requires portable independent normalization and source-enabled core/client refusals before three full reader modes',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const steps=conditionalSteps(source,'apadanathera241').filter(step=>!step.startsWith('      - name: Fetch exact '));
  assert.equal(steps.length,4);const validation=steps[0],commands=steps.join('\n');
  assert.match(validation,/node scripts\/apadana\/build\.mjs --source \.fixtures\/apadana-pinned --check/);
@@ -798,7 +811,7 @@ test('Therā 241–250 CI binds the reviewed ten-poem normalization, separate pu
 });
 
 test('Therā 221–230 adds one twenty-minute group while restoring the exact 9ceed785 workflow under historical projection',()=>{
- const source=beforeRemainingWorkflow(beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8')));
+ const source=beforeRemainingWorkflow(beforeHeld234Workflow(sourceNotesHistoricalWorkflow()));
  const group=source.split('  reader-browser-group:')[1].split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)[1].split(',').map(name=>name.trim());
  assert.equal(selected.length,45);assert.equal(new Set(selected).size,45);assert.equal(before221230Groups(selected).length,44);
@@ -846,7 +859,7 @@ test('Therā 221–230 adds one twenty-minute group while restoring the exact 9c
 });
 
 test('Therā 221–230 CI binds independent replay and all six new and legacy source tests before full browser acceptance',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const steps=conditionalSteps(source,'apadanathera221').filter(step=>!step.startsWith('      - name: Fetch exact '));
  assert.equal(steps.length,4);const validation=steps[0],commands=steps.join('\n');
  assert.match(validation,/node scripts\/apadana\/build\.mjs --source \.fixtures\/apadana-pinned --check/);
@@ -919,7 +932,7 @@ test('Therā 221–230 CI consumes the independent ten-poem seals with note-only
 });
 
 test('remaining Therā CI adds two twenty-minute lanes while restoring every byte of the cdbefd266 workflow',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  const group=source.split('  reader-browser-group:')[1].split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)[1].split(',').map(name=>name.trim());
  assert.equal(selected.length,47);assert.equal(new Set(selected).size,47);assert.equal(beforeRemainingGroups(selected).length,45);
@@ -950,7 +963,7 @@ test('remaining Therā CI adds two twenty-minute lanes while restoring every byt
 });
 
 test('remaining Therā CI runs each separate nine-source replay and wrapper pair before its selected browser triplet',()=>{
- const source=beforeHeld234Workflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
+ const source=beforeHeld234Workflow(sourceNotesHistoricalWorkflow());
  for(const [name,batch,family]of [['apadanathera231','A','231-240'],['apadanathera251','B','251-259']]){
   const steps=conditionalSteps(source,name);assert.equal(steps.length,4);const validation=steps[0],commands=steps.join('\n'),stem=family.replace('-','_');
   assert.match(validation,/node scripts\/apadana\/build\.mjs --source \.fixtures\/apadana-pinned --check/);assert.ok(validation.includes('node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/'+name+'-inputs"'));
@@ -1000,7 +1013,7 @@ test('remaining curation binds two independently approved nine-poem packets with
 
 
 test('held234 CI adds one finite lane and restores the exact immutable284 workflow',()=>{
- const source=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');
+ const source=sourceNotesHistoricalWorkflow();
  const projected=beforeHeld234Workflow(source);
  assert.equal(createHash('sha256').update(projected).digest('hex'),'ba0d99ad77bcb27af61e006bcd9923c1c528bf3fa95101193c99b570bad9d832','only one held234 lane, baseline fetch, fixture, conditions and reports may be projected away');
  const group=source.split('  reader-browser-group:')[1].split('  reader-browser:')[0];
@@ -1027,7 +1040,7 @@ test('held234 CI adds one finite lane and restores the exact immutable284 workfl
 });
 
 test('held234 lane executes independent one-source replay, exact wrappers and three genuine browser modes',()=>{
- const source=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');const steps=conditionalSteps(source,HELD234_GROUP).filter(step=>!step.startsWith('      - name: Fetch exact '));assert.equal(steps.length,4);
+ const source=sourceNotesHistoricalWorkflow();const steps=conditionalSteps(source,HELD234_GROUP).filter(step=>!step.startsWith('      - name: Fetch exact '));assert.equal(steps.length,4);
  const validation=steps[0],commands=steps.join('\n');assert.match(validation,/node scripts\/apadana\/build\.mjs --source \.fixtures\/apadana-pinned --check/);
  const replay=validation.split('\n').filter(line=>line.trim().startsWith('python scripts/apadana/review_thera_held234.py '));assert.equal(replay.length,1);
  for(const flag of ['--source-root .fixtures/apadana-pinned','--canon "$RUNNER_TEMP/apadanathera234-inputs/canon.json.gz"','--xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml','--goldens docs/evidence/apadana/THERA_HELD234_GOLDENS.json','--profiles docs/evidence/apadana/THERA_HELD234_EXPECTED_PROFILES.json','--links docs/evidence/apadana/THERA_HELD234_EXPECTED_LINKS.json'])assert.ok(replay[0].includes(flag));

@@ -1,6 +1,7 @@
 import { shardData } from './shard-data.mjs';
 import { build } from 'esbuild';
 import { contentSha256 } from '../web/content-sha256.mjs';
+import { createSourceNotesPolicy } from '../web/source-notes-policy.mjs';
 import { chmod, mkdir, readFile, readdir, writeFile, cp } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 
@@ -22,6 +23,9 @@ const common = {
   // the exact widget HTML shared by source and every packaged transport.
   define: { __PALI_WIDGET_HASH_SOURCE__: JSON.stringify(contentSha256.toString()) },
 };
+// The finite edition-note policy has its own frozen literal. Keep the original
+// widget hash literal and whole-resource audit unchanged.
+common.define.__PALI_SOURCE_NOTES_POLICY_SOURCE__ = JSON.stringify(createSourceNotesPolicy.toString());
 // server/index.cjs: stdio transport (Claude Desktop, Claude Code). server/http.cjs: Streamable HTTP (hosted /mcp).
 const results = [
   await build({ ...common, entryPoints: ['src/index.mjs'], outfile: 'server/index.cjs' }),

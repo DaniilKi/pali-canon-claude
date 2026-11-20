@@ -14,6 +14,7 @@ import { fetchPublic } from '../../src/http.mjs';
 import { CURRENT_APADANA_IDS } from './apadana-intake-expectations.mjs';
 import { readPassage } from '../../src/chatgpt-widget.mjs';
 import { validateApadanaChoice, validateEnglishPage } from '../../web/translation-policy.mjs';
+import {sourceNoteBaselineProjection} from './source-note-baseline.mjs';
 
 import {remainingEvidence} from './thera-remaining-evidence.mjs';
 import {held234Evidence} from './thera-held234-evidence.mjs';
@@ -75,7 +76,7 @@ test('group '+batch+' intake is exactly independently approved9 and preserves al
   for (const [group, entries] of Object.entries({ canonical_and_source_data: baseline.canonical_and_source_data, privacy_storage_files: baseline.privacy_storage_files, helper_builder_auditor_files: baseline.helper_builder_auditor_files, historical_evidence_files: baseline.historical_evidence_files })) {
     for (const [path, hash] of Object.entries(entries)) {
       if (path === 'server/data/apadana.json' || path === 'tests/helpers/apadana-intake-expectations.mjs') continue;
-      assert.equal(digest(readFileSync(path)), hash, `${group}: existing ${path} is byte-exact`);
+      assert.equal(digest(sourceNoteBaselineProjection(path, readFileSync(path), hash)), hash, `${group}: existing ${path} is byte-exact`);
     }
   }
   const current284 = combined.expected_profile_ids;

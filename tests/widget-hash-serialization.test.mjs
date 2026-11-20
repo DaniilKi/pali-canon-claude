@@ -7,14 +7,15 @@ import {fileURLToPath} from 'node:url';
 import {runInNewContext} from 'node:vm';
 import {build} from 'esbuild';
 import {contentSha256} from '../web/content-sha256.mjs';
+import {createSourceNotesPolicy} from '../web/source-notes-policy.mjs';
 import {WIDGET_HTML,WIDGET_URI,SKYBRIDGE_URI} from '../src/chatgpt-widget.mjs';
 
 const root=dirname(dirname(fileURLToPath(import.meta.url)));
-async function widgetBundle(freeze){
+async function widgetBundle(freeze,freezeNotes=freeze){
  const result=await build({
   stdin:{contents:'export {WIDGET_HTML,WIDGET_URI,SKYBRIDGE_URI} from "./src/chatgpt-widget.mjs";\nexport const text=1,constants=2,words=3;',resolveDir:root,sourcefile:'widget-serialization-regression.mjs',loader:'js'},
   bundle:true,platform:'node',target:'node20',format:'cjs',minify:false,write:false,logOverride:{'empty-import-meta':'silent'},
-  ...(freeze?{define:{__PALI_WIDGET_HASH_SOURCE__:JSON.stringify(contentSha256.toString())}}:{}),
+  ...((freeze||freezeNotes)?{define:{...(freeze?{__PALI_WIDGET_HASH_SOURCE__:JSON.stringify(contentSha256.toString())}:{}),...(freezeNotes?{__PALI_SOURCE_NOTES_POLICY_SOURCE__:JSON.stringify(createSourceNotesPolicy.toString())}:{})}}:{}),
  });
  const module={exports:{}};
  runInNewContext(result.outputFiles[0].text,{module,exports:module.exports,require:createRequire(import.meta.url),__dirname:join(root,'server'),__filename:join(root,'server/http.cjs'),process,console,Buffer,URL,TextEncoder,TextDecoder,setTimeout,clearTimeout});
@@ -39,3 +40,17 @@ test('exact widget HTML survives compiler formatting while the unfrozen negative
  assert.equal(frozen.WIDGET_URI,WIDGET_URI);assert.equal(frozen.SKYBRIDGE_URI,SKYBRIDGE_URI);
  assert.equal(contentSha256.toString(),original,'bundling never rewrites the source helper');
 });
+
+ test('new source-note factory is independently frozen without relaxing the existing widget hash contract',async()=>{
+  const original=createSourceNotesPolicy.toString(),source=readFileSync(join(root,'scripts/build.mjs'),'utf8');
+  const common=source.slice(source.indexOf('const common = {'),source.indexOf('// server/index.cjs:'));
+  assert.match(source,/import \{ createSourceNotesPolicy \} from '\.\.\/web\/source-notes-policy\.mjs'/);
+  assert.match(common,/common\.define\.__PALI_SOURCE_NOTES_POLICY_SOURCE__ = JSON\.stringify\(createSourceNotesPolicy\.toString\(\)\);/);
+  assert.ok(WIDGET_HTML.includes(original),'source widget embeds the exact self-contained source-note factory');
+  const onlyOldHashFrozen=await widgetBundle(true,false);
+  assert.notEqual(onlyOldHashFrozen.WIDGET_HTML,WIDGET_HTML,'the new factory has its own compiler serialization regression gate');
+  const bothFrozen=await widgetBundle(true,true);
+  assert.equal(bothFrozen.WIDGET_HTML,WIDGET_HTML,'strict entire-widget equality remains mandatory with both factories');
+  assert.equal(bothFrozen.WIDGET_URI,WIDGET_URI);assert.equal(bothFrozen.SKYBRIDGE_URI,SKYBRIDGE_URI);
+  assert.equal(createSourceNotesPolicy.toString(),original,'bundling never rewrites original factory source');
+ });

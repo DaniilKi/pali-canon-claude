@@ -14,6 +14,7 @@ import { fetchPublic } from '../src/http.mjs';
 import { CURRENT_APADANA_IDS } from './helpers/apadana-intake-expectations.mjs';
 import { readPassage } from '../src/chatgpt-widget.mjs';
 import { validateApadanaChoice, validateEnglishPage } from '../web/translation-policy.mjs';
+import {sourceNoteBaselineProjection} from './helpers/source-note-baseline.mjs';
 
 const approval = JSON.parse(readFileSync('docs/evidence/apadana/THERA_221_230_APPROVAL.json', 'utf8'));
 const sealed = descriptor => {
@@ -93,7 +94,7 @@ test('221–230 intake is exactly independently approved10 and preserves all256 
   for (const [group, entries] of Object.entries({ canonical_and_source_data: baseline.canonical_and_source_data, privacy_storage_files: baseline.privacy_storage_files, helper_builder_auditor_files: baseline.helper_builder_auditor_files, historical_evidence_files: baseline.historical_evidence_files })) {
     for (const [path, hash] of Object.entries(entries)) {
       if (path === 'server/data/apadana.json' || path === 'tests/helpers/apadana-intake-expectations.mjs') continue;
-      assert.equal(digest(readFileSync(path)), hash, `${group}: existing ${path} is byte-exact`);
+      assert.equal(digest(sourceNoteBaselineProjection(path, readFileSync(path), hash)), hash, `${group}: existing ${path} is byte-exact`);
     }
   }
   const historical266 = [...approval.baseline_ids, ...approved];

@@ -1,6 +1,7 @@
 // Read complete bundled VRI root files, including front matter outside individual citation spans.
 import * as canon from './canon.mjs';
 import { textSegments, structuredInfo } from './variants.mjs';
+import { sourceNotesForPage } from './source-notes.mjs';
 
 export const bookId = (book) => book.file.replace(/\.mul\.xml$/, '');
 const collectionOf = (book) => book.pitaka === 'vinaya' ? 'vinaya' : book.collection;
@@ -29,7 +30,7 @@ export function readBook({ book, offset = 0, limit = 60, includeVariants = false
   const unit = { id: `vri-book:${id}`, book: index, start: 0, end: sourceBook.blocks.length, collection: collectionOf(sourceBook) };
   const { segments, mode } = textSegments(unit, { includeVariants, variants });
   const page = segments.slice(offset, offset + limit);
-  return {
+  const result = {
     selection: 'source_book', canonical: true, book_id: id, title: sourceBook.title,
     collection: unit.collection, vri_file: sourceBook.file,
     edition: 'Chaṭṭha Saṅgāyana Tipiṭaka (VRI), Pāli', attribution: root.source.attribution, source: root.source,
@@ -42,4 +43,8 @@ export function readBook({ book, offset = 0, limit = 60, includeVariants = false
       'The vri-book segment references identify this source-file reading, not a standard sutta or rule citation. Cite the VRI file and paragraph/page shown, or read an individual text with uid to obtain its standard citation and linked English/commentary.',
     ],
   };
+  const sourceNotes = sourceNotesForPage({ corpus: root, bookId: id,
+    source: result.source, segments: page, offset });
+  if (sourceNotes) result.source_notes = sourceNotes;
+  return result;
 }

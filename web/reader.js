@@ -1,3 +1,6 @@
+import { createSourceNotesPolicy } from './source-notes-policy.mjs';
+import { contentSha256 } from './content-sha256.mjs';
+import { SOURCE_NOTES_PROFILE } from '../src/source-notes-profiles.mjs';
 import { readingToolResult } from './tool-result.mjs';
 import { isRepairedApadanaPair } from '../src/locator-policy.mjs';
 import { apadanaEditionNavigation, apadanaEditionLink } from './apadana-edition-navigation.mjs';
@@ -35,6 +38,7 @@ import { reviewBackupNoteConflicts } from './backup-note-conflicts.mjs';
 import { MAX_STUDY_BACKUP_BYTES, createStudyBackup, parseStudyBackup, mergeStudyBackup } from './study-backup.mjs';
 /* Source text is retrieved through the existing, schema-validated MCP tools. Never render source HTML. */
 'use strict';
+const sourceNotesPolicy = createSourceNotesPolicy(contentSha256, SOURCE_NOTES_PROFILE);
 const $ = id => document.getElementById(id);
 const view = $('view'), status = $('status');
 const focusOwner = createFocusOwnership({ activeElement: () => document.activeElement, hasFocus: () => document.hasFocus() });
@@ -703,6 +707,35 @@ function attachPassageNote(selector, data, segment, container, control, token) {
   });
   show();
 }
+// Original edition apparatus is never a segment, a quotation or private data.
+function originalEditionNote(record) {
+  const aside = el('aside', undefined, 'original-edition-note');
+  aside.setAttribute('role', 'note'); aside.setAttribute('aria-label', 'Original VRI edition note (Roman Pāli)');
+  const text = el('p', record.text, 'edition-note-text'); text.lang = 'pi-Latn';
+  aside.append(el('h3', 'Original VRI edition note (Roman Pāli)'), text,
+    el('p', 'Physical source location only; the remark’s stanza span has not been verified.', 'muted'),
+    el('p', record.qualification, 'muted'),
+    el('p', record.provenance.attribution + ' ' + record.provenance.terms, 'edition-note-provenance'),
+    el('p', 'Extracted from an original note-only source element and displayed separately from root text.', 'muted'));
+  return aside;
+}
+function originalEditionStatus(state) {
+  if (state.state === 'absent' || state.state === 'available' && !state.opening) return null;
+  const aside = el('aside', undefined, 'source-notes-status');
+  aside.setAttribute('aria-label', 'Original edition apparatus');
+  if (state.state === 'unavailable') {
+    aside.setAttribute('role', 'status'); aside.append(el('p', state.warning));
+  } else {
+    const command = state.availability.read_with;
+    const context = command.book ? { book: command.book } : { uid: command.uid };
+    const href = readingPosition(context, command.offset, state.anchor_ref, command.source_commit);
+    aside.append(el('h3', 'Original edition apparatus'),
+      el('p', '1 separately indexed original VRI edition note is available at its recorded location.'),
+      link('Open original edition note location', href, 'button'),
+      el('p', 'This opens its recorded physical location, not a verified stanza span. No English source is requested.', 'muted'));
+  }
+  return aside;
+}
 function attachChapterNavigation(data, args, host, token) {
   const section = el('section', undefined, 'chapter-navigation'); section.setAttribute('aria-label', 'Source chapters');
   let generation = 0, authority;
@@ -836,6 +869,8 @@ async function read(args, token, { scriptRefresh = false, ownsFocus = () => fals
     catch { sourceTools.append(el('p', 'Search is unavailable because this source book has incomplete identity or revision metadata.', 'notice')); }
   }
   const additions = el('section'); additions.id = 'study'; additions.setAttribute('aria-live', 'polite'); view.append(additions);
+  const sourceNotes = sourceNotesPolicy.inspect(data), sourceNotesStatus = originalEditionStatus(sourceNotes);
+  if (sourceNotesStatus) view.append(sourceNotesStatus);
   const passages = el('section'); passages.setAttribute('aria-label', 'Pāli passage'); const positions = [];
   for (const segment of data.segments || []) {
     const part = el('article', undefined, 'segment ' + (segment.type === 'heading' ? 'heading' : '')); part.id = 'seg-' + segment.ref.replace(/[^a-z0-9-]/gi, '-');
@@ -846,6 +881,7 @@ async function read(args, token, { scriptRefresh = false, ownsFocus = () => fals
     if (kind !== 'commentary' && segment.type !== 'heading') { const study = button('Study words', () => wordStudy({ ...(kind === 'book' ? { book } : { uid: kind === 'canon' ? data.text_id || uid : uid }), segment: segment.ref, ...(kind === 'canon' ? canonStudyPin(data) : {}), offset: 0, limit: 15 }, { ref: segment.ref, text: segment.text, source: data.source?.commit, script: $('script').value, kind }, token)); study.setAttribute('aria-label', 'Study words in ' + segment.ref); actions.append(study); }
     row.append(actions); part.classList.toggle('marked', active);
     const text = createSourcePassage(document, segment, 3); part.append(row, text); attachPassageNote(selector, data, segment, part, save, token); passages.append(part);
+    if (sourceNotes.entry && segment.ref === sourceNotes.anchor_ref) passages.append(originalEditionNote(sourceNotes.entry));
     if (positionHref) positions.push({ node: part, heading: segment.type === 'heading', href: positionHref });
   }
   view.append(passages);

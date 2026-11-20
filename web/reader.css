@@ -88,3 +88,7 @@ main:focus{outline:none}
 
 /* Exact source identifiers remain copyable while reflowing on narrow screens. */
 .source-version{overflow-wrap:anywhere}
+
+/* Separately indexed original apparatus; never root-passage or print selectors. */
+.original-edition-note,.source-notes-status{margin:18px 0;padding:18px;border:1px solid var(--line);border-radius:8px;background:var(--surface);overflow-wrap:anywhere}.original-edition-note h3,.source-notes-status h3{margin-top:0}.edition-note-text{white-space:pre-wrap;font:19px/1.7 Georgia,serif}.edition-note-provenance{font-size:14px;color:var(--muted)}
+aside.original-edition-note>p,aside.source-notes-status>p{display:block}.original-edition-note .edition-note-text{font:19px/1.7 Georgia,serif}.original-edition-note .edition-note-provenance{font-size:14px;color:var(--muted)}

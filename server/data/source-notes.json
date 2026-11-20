@@ -1,0 +1,100 @@
+{
+  "schema": "vri-source-note-registry-v1",
+  "extraction_revision": "sariputta-note1130-v1",
+  "records": [
+    {
+      "id": "vri:s0510m1:note-only:1130",
+      "kind": "original_edition_remark",
+      "label": "Original VRI edition note (Roman Pāli)",
+      "text": "imā dve gāthāyo syāmapotthake na santi",
+      "text_sha256": "e4544e7b41ad8ed3f72d281f9735359c51aac2f8c758588731a1135e4a03fa60",
+      "extraction_revision": "sariputta-note1130-v1",
+      "provenance": {
+        "name": "Chaṭṭha Saṅgāyana Tipiṭaka (VRI)",
+        "repository": "https://github.com/VipassanaTech/tipitaka-xml",
+        "commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+        "attribution": "Vipassana Research Institute (VRI), Chaṭṭha Saṅgāyana Tipiṭaka, www.tipitaka.org",
+        "terms": "Made freely available by VRI for non-commercial use with attribution."
+      },
+      "origin": {
+        "file": "s0510m1.mul.xml",
+        "xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+        "xml_git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+        "physical_element_zero_based": 1130,
+        "element_tag": "p",
+        "element_rend": "gatha1",
+        "element_number": null,
+        "note_index_zero_based": 0,
+        "raw_encoding": "UTF-16LE",
+        "raw_byte_interval": [
+          196320,
+          196466
+        ],
+        "raw_element_sha256": "986c6f423be82278f4a62441de602fcda1e412493c4a51570bd5ab712a1ec723",
+        "no_root_body_text": true,
+        "no_page_breaks": true,
+        "raw_neighbors": {
+          "previous": {
+            "physical_element_zero_based": 1129,
+            "raw_utf16le_byte_interval": [
+              196148,
+              196304
+            ],
+            "raw_element_sha256": "ba44439a467fa33f28d0fdca01d90406ae8e9f946d70a2123654b8a5580c7363"
+          },
+          "following": {
+            "physical_element_zero_based": 1131,
+            "raw_utf16le_byte_interval": [
+              196482,
+              196616
+            ],
+            "raw_element_sha256": "2a8502eb9fd16c0f0100d723bea9ab3890a019386a87321cced523e497e9a10d"
+          }
+        }
+      },
+      "physical_location": {
+        "relation": "after_existing_empty_marker_before_following_body",
+        "semantic_stanza_owner_verified": false,
+        "previous_block": 1129,
+        "previous_block_sha256": "7c74c3a843ecb83b11a283b298dd7c4706d1e5037005aa81b4764c97b8a49b00",
+        "following_block": 1130,
+        "following_block_sha256": "b9ce3040c6fb63e46c9cecb9e3f9842277804750fc7115ccc10fa7d2229d9478",
+        "unit_id": "tha-ap3",
+        "unit_block_span": [
+          432,
+          1141
+        ],
+        "book_id": "s0510m1",
+        "book_file": "s0510m1.mul.xml",
+        "canonical_book_blocks_sha256": "bce212d970603cb0ef7fbebbc4b78de5538377f8fbf7e451b1a4487c97753d44",
+        "uid_anchor": {
+          "offset": 235,
+          "segment": {
+            "ref": "tha-ap3/236",
+            "type": "verse",
+            "text": "",
+            "vri_paragraph": "372"
+          },
+          "segment_sha256": "12767c916a3c50a78778a4c30beda1f6be0f0b263142c90d22ce2c5090d9c1b1"
+        },
+        "book_anchor": {
+          "offset": 386,
+          "segment": {
+            "ref": "vri-book:s0510m1/387",
+            "type": "verse",
+            "text": "",
+            "vri_paragraph": "372"
+          },
+          "segment_sha256": "df6a0b29a8c2fcb2f80a2a272fa2af8a23e43aeb904c6b85ad8f09c18abb00df"
+        },
+        "distinct_existing_373_note": {
+          "block": 1134,
+          "note_index_zero_based": 0,
+          "text_sha256": "f0c05b524768e8663aa1c23d2674ec0674870f83fd27fc63e9b3f08e4fab12d9"
+        }
+      },
+      "qualification": "This is an original VRI edition remark in its own note-only XML element, not root text, a translation or a personal note. The anchor records physical placement only; a semantic stanza span and independent Thai-witness collation are not verified.",
+      "changes": "Extract the exact original note into separately labelled additive apparatus. No canonical block, body, existing variant note, source object, locator, citation or private data is changed."
+    }
+  ]
+}

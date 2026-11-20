@@ -33,9 +33,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/codegen/code.js
+// node_modules/ajv/dist/compile/codegen/code.js
 var require_code = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/codegen/code.js"(exports2) {
+  "node_modules/ajv/dist/compile/codegen/code.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.regexpCode = exports2.getEsmExportName = exports2.getProperty = exports2.safeStringify = exports2.stringify = exports2.strConcat = exports2.addCodeArg = exports2.str = exports2._ = exports2.nil = exports2._Code = exports2.Name = exports2.IDENTIFIER = exports2._CodeOrName = void 0;
@@ -187,9 +187,9 @@ var require_code = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/codegen/scope.js
+// node_modules/ajv/dist/compile/codegen/scope.js
 var require_scope = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/codegen/scope.js"(exports2) {
+  "node_modules/ajv/dist/compile/codegen/scope.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.ValueScope = exports2.ValueScopeName = exports2.Scope = exports2.varKinds = exports2.UsedValueState = void 0;
@@ -332,9 +332,9 @@ var require_scope = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/codegen/index.js
+// node_modules/ajv/dist/compile/codegen/index.js
 var require_codegen = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/codegen/index.js"(exports2) {
+  "node_modules/ajv/dist/compile/codegen/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.or = exports2.and = exports2.not = exports2.CodeGen = exports2.operators = exports2.varKinds = exports2.ValueScopeName = exports2.ValueScope = exports2.Scope = exports2.Name = exports2.regexpCode = exports2.stringify = exports2.getProperty = exports2.nil = exports2.strConcat = exports2.str = exports2._ = void 0;
@@ -1052,9 +1052,9 @@ var require_codegen = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/util.js
+// node_modules/ajv/dist/compile/util.js
 var require_util = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/util.js"(exports2) {
+  "node_modules/ajv/dist/compile/util.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.checkStrictMode = exports2.getErrorPath = exports2.Type = exports2.useFunc = exports2.setEvaluated = exports2.evaluatedPropsToName = exports2.mergeEvaluated = exports2.eachItem = exports2.unescapeJsonPointer = exports2.escapeJsonPointer = exports2.escapeFragment = exports2.unescapeFragment = exports2.schemaRefOrVal = exports2.schemaHasRulesButRef = exports2.schemaHasRules = exports2.checkUnknownRules = exports2.alwaysValidSchema = exports2.toHash = void 0;
@@ -1219,9 +1219,9 @@ var require_util = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/names.js
+// node_modules/ajv/dist/compile/names.js
 var require_names = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/names.js"(exports2) {
+  "node_modules/ajv/dist/compile/names.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -1258,9 +1258,9 @@ var require_names = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/errors.js
+// node_modules/ajv/dist/compile/errors.js
 var require_errors = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/errors.js"(exports2) {
+  "node_modules/ajv/dist/compile/errors.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.extendErrors = exports2.resetErrorsCount = exports2.reportExtraError = exports2.reportError = exports2.keyword$DataError = exports2.keywordError = void 0;
@@ -1380,9 +1380,9 @@ var require_errors = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/boolSchema.js
+// node_modules/ajv/dist/compile/validate/boolSchema.js
 var require_boolSchema = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/boolSchema.js"(exports2) {
+  "node_modules/ajv/dist/compile/validate/boolSchema.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.boolOrEmptySchema = exports2.topBoolOrEmptySchema = void 0;
@@ -1431,9 +1431,9 @@ var require_boolSchema = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/rules.js
+// node_modules/ajv/dist/compile/rules.js
 var require_rules = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/rules.js"(exports2) {
+  "node_modules/ajv/dist/compile/rules.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getRules = exports2.isJSONType = void 0;
@@ -1462,9 +1462,9 @@ var require_rules = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/applicability.js
+// node_modules/ajv/dist/compile/validate/applicability.js
 var require_applicability = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/applicability.js"(exports2) {
+  "node_modules/ajv/dist/compile/validate/applicability.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.shouldUseRule = exports2.shouldUseGroup = exports2.schemaHasRulesForType = void 0;
@@ -1485,9 +1485,9 @@ var require_applicability = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/dataType.js
+// node_modules/ajv/dist/compile/validate/dataType.js
 var require_dataType = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/dataType.js"(exports2) {
+  "node_modules/ajv/dist/compile/validate/dataType.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.reportTypeError = exports2.checkDataTypes = exports2.checkDataType = exports2.coerceAndCheckDataType = exports2.getJSONTypes = exports2.getSchemaTypes = exports2.DataType = void 0;
@@ -1669,9 +1669,9 @@ var require_dataType = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/defaults.js
+// node_modules/ajv/dist/compile/validate/defaults.js
 var require_defaults = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/defaults.js"(exports2) {
+  "node_modules/ajv/dist/compile/validate/defaults.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.assignDefaults = void 0;
@@ -1706,9 +1706,9 @@ var require_defaults = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/code.js
+// node_modules/ajv/dist/vocabularies/code.js
 var require_code2 = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/code.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/code.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateUnion = exports2.validateArray = exports2.usePattern = exports2.callValidateCode = exports2.schemaProperties = exports2.allSchemaProperties = exports2.noPropertyInData = exports2.propertyInData = exports2.isOwnProperty = exports2.hasPropFunc = exports2.reportMissingProp = exports2.checkMissingProp = exports2.checkReportMissingProp = void 0;
@@ -1839,9 +1839,9 @@ var require_code2 = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/keyword.js
+// node_modules/ajv/dist/compile/validate/keyword.js
 var require_keyword = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/keyword.js"(exports2) {
+  "node_modules/ajv/dist/compile/validate/keyword.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateKeywordUsage = exports2.validSchemaType = exports2.funcKeywordCode = exports2.macroKeywordCode = void 0;
@@ -1957,9 +1957,9 @@ var require_keyword = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/subschema.js
+// node_modules/ajv/dist/compile/validate/subschema.js
 var require_subschema = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/subschema.js"(exports2) {
+  "node_modules/ajv/dist/compile/validate/subschema.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.extendSubschemaMode = exports2.extendSubschemaData = exports2.getSubschema = void 0;
@@ -2040,9 +2040,9 @@ var require_subschema = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/fast-deep-equal/index.js
+// node_modules/fast-deep-equal/index.js
 var require_fast_deep_equal = __commonJS({
-  "../pali-thera-remaining-local/node_modules/fast-deep-equal/index.js"(exports2, module2) {
+  "node_modules/fast-deep-equal/index.js"(exports2, module2) {
     "use strict";
     module2.exports = function equal(a, b) {
       if (a === b) return true;
@@ -2075,9 +2075,9 @@ var require_fast_deep_equal = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/json-schema-traverse/index.js
+// node_modules/json-schema-traverse/index.js
 var require_json_schema_traverse = __commonJS({
-  "../pali-thera-remaining-local/node_modules/json-schema-traverse/index.js"(exports2, module2) {
+  "node_modules/json-schema-traverse/index.js"(exports2, module2) {
     "use strict";
     var traverse = module2.exports = function(schema, opts, cb) {
       if (typeof opts == "function") {
@@ -2163,9 +2163,9 @@ var require_json_schema_traverse = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/resolve.js
+// node_modules/ajv/dist/compile/resolve.js
 var require_resolve = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/resolve.js"(exports2) {
+  "node_modules/ajv/dist/compile/resolve.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getSchemaRefs = exports2.resolveUrl = exports2.normalizeId = exports2._getFullPath = exports2.getFullPath = exports2.inlineRef = void 0;
@@ -2319,9 +2319,9 @@ var require_resolve = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/index.js
+// node_modules/ajv/dist/compile/validate/index.js
 var require_validate = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/index.js"(exports2) {
+  "node_modules/ajv/dist/compile/validate/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getData = exports2.KeywordCxt = exports2.validateFunctionCode = void 0;
@@ -2827,9 +2827,9 @@ var require_validate = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/runtime/validation_error.js
+// node_modules/ajv/dist/runtime/validation_error.js
 var require_validation_error = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/runtime/validation_error.js"(exports2) {
+  "node_modules/ajv/dist/runtime/validation_error.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var ValidationError = class extends Error {
@@ -2843,9 +2843,9 @@ var require_validation_error = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/ref_error.js
+// node_modules/ajv/dist/compile/ref_error.js
 var require_ref_error = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/ref_error.js"(exports2) {
+  "node_modules/ajv/dist/compile/ref_error.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var resolve_1 = require_resolve();
@@ -2860,9 +2860,9 @@ var require_ref_error = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/index.js
+// node_modules/ajv/dist/compile/index.js
 var require_compile = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/index.js"(exports2) {
+  "node_modules/ajv/dist/compile/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.resolveSchema = exports2.getCompilingSchema = exports2.resolveRef = exports2.compileSchema = exports2.SchemaEnv = void 0;
@@ -3084,9 +3084,9 @@ var require_compile = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/refs/data.json
+// node_modules/ajv/dist/refs/data.json
 var require_data = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/refs/data.json"(exports2, module2) {
+  "node_modules/ajv/dist/refs/data.json"(exports2, module2) {
     module2.exports = {
       $id: "https://raw.githubusercontent.com/ajv-validator/ajv/master/lib/refs/data.json#",
       description: "Meta-schema for $data reference (JSON AnySchema extension proposal)",
@@ -3103,9 +3103,9 @@ var require_data = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/fast-uri/lib/utils.js
+// node_modules/fast-uri/lib/utils.js
 var require_utils = __commonJS({
-  "../pali-thera-remaining-local/node_modules/fast-uri/lib/utils.js"(exports2, module2) {
+  "node_modules/fast-uri/lib/utils.js"(exports2, module2) {
     "use strict";
     var isUUID = RegExp.prototype.test.bind(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/iu);
     var isIPv4 = RegExp.prototype.test.bind(/^(?:(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)$/u);
@@ -3637,9 +3637,9 @@ var require_utils = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/fast-uri/lib/schemes.js
+// node_modules/fast-uri/lib/schemes.js
 var require_schemes = __commonJS({
-  "../pali-thera-remaining-local/node_modules/fast-uri/lib/schemes.js"(exports2, module2) {
+  "node_modules/fast-uri/lib/schemes.js"(exports2, module2) {
     "use strict";
     var { isUUID } = require_utils();
     var URN_REG = /^([\da-z][\d\-a-z]{0,31}):((?:[\w!$'()*+,\-./:;=@]|%[\da-f]{2})+)$/iu;
@@ -3848,9 +3848,9 @@ var require_schemes = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/fast-uri/index.js
+// node_modules/fast-uri/index.js
 var require_fast_uri = __commonJS({
-  "../pali-thera-remaining-local/node_modules/fast-uri/index.js"(exports2, module2) {
+  "node_modules/fast-uri/index.js"(exports2, module2) {
     "use strict";
     var { normalizeIPv6, removeDotSegments, removeDotSegmentsRelative, recomposeAuthority, normalizePercentEncoding, normalizePathEncoding, serializePathEncoding, normalizeQueryFragmentEncoding, encodeQuery, encodeFragment, reescapeHostDelimiters, isIPv4, nonSimpleDomain } = require_utils();
     var { SCHEMES, getSchemeHandler } = require_schemes();
@@ -4278,9 +4278,9 @@ var require_fast_uri = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/runtime/uri.js
+// node_modules/ajv/dist/runtime/uri.js
 var require_uri = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/runtime/uri.js"(exports2) {
+  "node_modules/ajv/dist/runtime/uri.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var uri = require_fast_uri();
@@ -4289,9 +4289,9 @@ var require_uri = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/core.js
+// node_modules/ajv/dist/core.js
 var require_core = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/core.js"(exports2) {
+  "node_modules/ajv/dist/core.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.CodeGen = exports2.Name = exports2.nil = exports2.stringify = exports2.str = exports2._ = exports2.KeywordCxt = void 0;
@@ -4900,9 +4900,9 @@ var require_core = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/core/id.js
+// node_modules/ajv/dist/vocabularies/core/id.js
 var require_id = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/core/id.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/core/id.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var def = {
@@ -4915,9 +4915,9 @@ var require_id = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/core/ref.js
+// node_modules/ajv/dist/vocabularies/core/ref.js
 var require_ref = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/core/ref.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/core/ref.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.callRef = exports2.getValidate = void 0;
@@ -5037,9 +5037,9 @@ var require_ref = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/core/index.js
+// node_modules/ajv/dist/vocabularies/core/index.js
 var require_core2 = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/core/index.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/core/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var id_1 = require_id();
@@ -5058,9 +5058,9 @@ var require_core2 = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitNumber.js
+// node_modules/ajv/dist/vocabularies/validation/limitNumber.js
 var require_limitNumber = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitNumber.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/limitNumber.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5090,9 +5090,9 @@ var require_limitNumber = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/multipleOf.js
+// node_modules/ajv/dist/vocabularies/validation/multipleOf.js
 var require_multipleOf = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/multipleOf.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/multipleOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5118,9 +5118,9 @@ var require_multipleOf = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/runtime/ucs2length.js
+// node_modules/ajv/dist/runtime/ucs2length.js
 var require_ucs2length = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/runtime/ucs2length.js"(exports2) {
+  "node_modules/ajv/dist/runtime/ucs2length.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     function ucs2length(str) {
@@ -5144,9 +5144,9 @@ var require_ucs2length = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitLength.js
+// node_modules/ajv/dist/vocabularies/validation/limitLength.js
 var require_limitLength = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitLength.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/limitLength.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5176,9 +5176,9 @@ var require_limitLength = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/pattern.js
+// node_modules/ajv/dist/vocabularies/validation/pattern.js
 var require_pattern = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/pattern.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/pattern.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -5213,9 +5213,9 @@ var require_pattern = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitProperties.js
+// node_modules/ajv/dist/vocabularies/validation/limitProperties.js
 var require_limitProperties = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitProperties.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/limitProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5242,9 +5242,9 @@ var require_limitProperties = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/required.js
+// node_modules/ajv/dist/vocabularies/validation/required.js
 var require_required = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/required.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/required.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -5324,9 +5324,9 @@ var require_required = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitItems.js
+// node_modules/ajv/dist/vocabularies/validation/limitItems.js
 var require_limitItems = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitItems.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/limitItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5353,9 +5353,9 @@ var require_limitItems = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/runtime/equal.js
+// node_modules/ajv/dist/runtime/equal.js
 var require_equal = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/runtime/equal.js"(exports2) {
+  "node_modules/ajv/dist/runtime/equal.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var equal = require_fast_deep_equal();
@@ -5364,9 +5364,9 @@ var require_equal = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js
+// node_modules/ajv/dist/vocabularies/validation/uniqueItems.js
 var require_uniqueItems = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/uniqueItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var dataType_1 = require_dataType();
@@ -5431,9 +5431,9 @@ var require_uniqueItems = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/const.js
+// node_modules/ajv/dist/vocabularies/validation/const.js
 var require_const = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/const.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/const.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5460,9 +5460,9 @@ var require_const = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/enum.js
+// node_modules/ajv/dist/vocabularies/validation/enum.js
 var require_enum = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/enum.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/enum.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5509,9 +5509,9 @@ var require_enum = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/index.js
+// node_modules/ajv/dist/vocabularies/validation/index.js
 var require_validation = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/index.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var limitNumber_1 = require_limitNumber();
@@ -5547,9 +5547,9 @@ var require_validation = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js
+// node_modules/ajv/dist/vocabularies/applicator/additionalItems.js
 var require_additionalItems = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/additionalItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateAdditionalItems = void 0;
@@ -5600,9 +5600,9 @@ var require_additionalItems = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/items.js
+// node_modules/ajv/dist/vocabularies/applicator/items.js
 var require_items = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/items.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/items.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateTuple = void 0;
@@ -5657,9 +5657,9 @@ var require_items = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js
+// node_modules/ajv/dist/vocabularies/applicator/prefixItems.js
 var require_prefixItems = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/prefixItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var items_1 = require_items();
@@ -5674,9 +5674,9 @@ var require_prefixItems = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/items2020.js
+// node_modules/ajv/dist/vocabularies/applicator/items2020.js
 var require_items2020 = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/items2020.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/items2020.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5709,9 +5709,9 @@ var require_items2020 = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/contains.js
+// node_modules/ajv/dist/vocabularies/applicator/contains.js
 var require_contains = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/contains.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/contains.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5803,9 +5803,9 @@ var require_contains = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/dependencies.js
+// node_modules/ajv/dist/vocabularies/applicator/dependencies.js
 var require_dependencies = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/dependencies.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/dependencies.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateSchemaDeps = exports2.validatePropertyDeps = exports2.error = void 0;
@@ -5897,9 +5897,9 @@ var require_dependencies = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js
+// node_modules/ajv/dist/vocabularies/applicator/propertyNames.js
 var require_propertyNames = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/propertyNames.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5940,9 +5940,9 @@ var require_propertyNames = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js
+// node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js
 var require_additionalProperties = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -6046,9 +6046,9 @@ var require_additionalProperties = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/properties.js
+// node_modules/ajv/dist/vocabularies/applicator/properties.js
 var require_properties = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/properties.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/properties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var validate_1 = require_validate();
@@ -6104,9 +6104,9 @@ var require_properties = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js
+// node_modules/ajv/dist/vocabularies/applicator/patternProperties.js
 var require_patternProperties = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/patternProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -6178,9 +6178,9 @@ var require_patternProperties = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/not.js
+// node_modules/ajv/dist/vocabularies/applicator/not.js
 var require_not = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/not.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/not.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -6209,9 +6209,9 @@ var require_not = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/anyOf.js
+// node_modules/ajv/dist/vocabularies/applicator/anyOf.js
 var require_anyOf = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/anyOf.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/anyOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -6226,9 +6226,9 @@ var require_anyOf = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/oneOf.js
+// node_modules/ajv/dist/vocabularies/applicator/oneOf.js
 var require_oneOf = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/oneOf.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/oneOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6284,9 +6284,9 @@ var require_oneOf = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/allOf.js
+// node_modules/ajv/dist/vocabularies/applicator/allOf.js
 var require_allOf = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/allOf.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/allOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -6311,9 +6311,9 @@ var require_allOf = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/if.js
+// node_modules/ajv/dist/vocabularies/applicator/if.js
 var require_if = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/if.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/if.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6380,9 +6380,9 @@ var require_if = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/thenElse.js
+// node_modules/ajv/dist/vocabularies/applicator/thenElse.js
 var require_thenElse = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/thenElse.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/thenElse.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -6398,9 +6398,9 @@ var require_thenElse = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/index.js
+// node_modules/ajv/dist/vocabularies/applicator/index.js
 var require_applicator = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/index.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var additionalItems_1 = require_additionalItems();
@@ -6446,9 +6446,9 @@ var require_applicator = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/format/format.js
+// node_modules/ajv/dist/vocabularies/format/format.js
 var require_format = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/format/format.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/format/format.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6536,9 +6536,9 @@ var require_format = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/format/index.js
+// node_modules/ajv/dist/vocabularies/format/index.js
 var require_format2 = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/format/index.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/format/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var format_1 = require_format();
@@ -6547,9 +6547,9 @@ var require_format2 = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/metadata.js
+// node_modules/ajv/dist/vocabularies/metadata.js
 var require_metadata = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/metadata.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/metadata.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.contentVocabulary = exports2.metadataVocabulary = void 0;
@@ -6570,9 +6570,9 @@ var require_metadata = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/draft7.js
+// node_modules/ajv/dist/vocabularies/draft7.js
 var require_draft7 = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/draft7.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/draft7.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var core_1 = require_core2();
@@ -6592,9 +6592,9 @@ var require_draft7 = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/discriminator/types.js
+// node_modules/ajv/dist/vocabularies/discriminator/types.js
 var require_types = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/discriminator/types.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/discriminator/types.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.DiscrError = void 0;
@@ -6606,9 +6606,9 @@ var require_types = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/discriminator/index.js
+// node_modules/ajv/dist/vocabularies/discriminator/index.js
 var require_discriminator = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/discriminator/index.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/discriminator/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6711,9 +6711,9 @@ var require_discriminator = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/refs/json-schema-draft-07.json
+// node_modules/ajv/dist/refs/json-schema-draft-07.json
 var require_json_schema_draft_07 = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/refs/json-schema-draft-07.json"(exports2, module2) {
+  "node_modules/ajv/dist/refs/json-schema-draft-07.json"(exports2, module2) {
     module2.exports = {
       $schema: "http://json-schema.org/draft-07/schema#",
       $id: "http://json-schema.org/draft-07/schema#",
@@ -6868,9 +6868,9 @@ var require_json_schema_draft_07 = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv/dist/ajv.js
+// node_modules/ajv/dist/ajv.js
 var require_ajv = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv/dist/ajv.js"(exports2, module2) {
+  "node_modules/ajv/dist/ajv.js"(exports2, module2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.MissingRefError = exports2.ValidationError = exports2.CodeGen = exports2.Name = exports2.nil = exports2.stringify = exports2.str = exports2._ = exports2.KeywordCxt = exports2.Ajv = void 0;
@@ -6938,9 +6938,9 @@ var require_ajv = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv-formats/dist/formats.js
+// node_modules/ajv-formats/dist/formats.js
 var require_formats = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv-formats/dist/formats.js"(exports2) {
+  "node_modules/ajv-formats/dist/formats.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.formatNames = exports2.fastFormats = exports2.fullFormats = void 0;
@@ -7141,9 +7141,9 @@ var require_formats = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv-formats/dist/limit.js
+// node_modules/ajv-formats/dist/limit.js
 var require_limit = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv-formats/dist/limit.js"(exports2) {
+  "node_modules/ajv-formats/dist/limit.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.formatLimitDefinition = void 0;
@@ -7213,9 +7213,9 @@ var require_limit = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/ajv-formats/dist/index.js
+// node_modules/ajv-formats/dist/index.js
 var require_dist = __commonJS({
-  "../pali-thera-remaining-local/node_modules/ajv-formats/dist/index.js"(exports2, module2) {
+  "node_modules/ajv-formats/dist/index.js"(exports2, module2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var formats_1 = require_formats();
@@ -7255,10 +7255,10 @@ var require_dist = __commonJS({
   }
 });
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/stdio.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/stdio.js
 var import_node_process = __toESM(require("node:process"), 1);
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/core/core.js
+// node_modules/zod/v4/core/core.js
 var NEVER = Object.freeze({
   status: "aborted"
 });
@@ -7317,7 +7317,7 @@ function config(newConfig) {
   return globalConfig;
 }
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/core/util.js
+// node_modules/zod/v4/core/util.js
 var util_exports = {};
 __export(util_exports, {
   BIGINT_FORMAT_RANGES: () => BIGINT_FORMAT_RANGES,
@@ -7838,7 +7838,7 @@ var Class = class {
   }
 };
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/core/errors.js
+// node_modules/zod/v4/core/errors.js
 var initializer = (inst, def) => {
   inst.name = "$ZodError";
   Object.defineProperty(inst, "_zod", {
@@ -7913,7 +7913,7 @@ function formatError(error2, _mapper) {
   return fieldErrors;
 }
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/core/parse.js
+// node_modules/zod/v4/core/parse.js
 var _parse = (_Err) => (schema, value, _ctx, _params) => {
   const ctx = _ctx ? Object.assign(_ctx, { async: false }) : { async: false };
   const result = schema._zod.run({ value, issues: [] }, ctx);
@@ -7965,7 +7965,7 @@ var _safeParseAsync = (_Err) => async (schema, value, _ctx) => {
 };
 var safeParseAsync = /* @__PURE__ */ _safeParseAsync($ZodRealError);
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/core/regexes.js
+// node_modules/zod/v4/core/regexes.js
 var cuid = /^[cC][^\s-]{8,}$/;
 var cuid2 = /^[0-9a-z]+$/;
 var ulid = /^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$/;
@@ -8023,7 +8023,7 @@ var _null = /null/i;
 var lowercase = /^[^A-Z]*$/;
 var uppercase = /^[^a-z]*$/;
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/core/checks.js
+// node_modules/zod/v4/core/checks.js
 var $ZodCheck = /* @__PURE__ */ $constructor("$ZodCheck", (inst, def) => {
   var _a;
   inst._zod ?? (inst._zod = {});
@@ -8408,7 +8408,7 @@ var $ZodCheckOverwrite = /* @__PURE__ */ $constructor("$ZodCheckOverwrite", (ins
   };
 });
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/core/doc.js
+// node_modules/zod/v4/core/doc.js
 var Doc = class {
   constructor(args = []) {
     this.content = [];
@@ -8444,14 +8444,14 @@ var Doc = class {
   }
 };
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/core/versions.js
+// node_modules/zod/v4/core/versions.js
 var version = {
   major: 4,
   minor: 0,
   patch: 0
 };
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/core/schemas.js
+// node_modules/zod/v4/core/schemas.js
 var $ZodType = /* @__PURE__ */ $constructor("$ZodType", (inst, def) => {
   var _a;
   inst ?? (inst = {});
@@ -9689,7 +9689,7 @@ function handleRefineResult(result, payload, input, inst) {
   }
 }
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/locales/en.js
+// node_modules/zod/v4/locales/en.js
 var parsedType = (data5) => {
   const t = typeof data5;
   switch (t) {
@@ -9807,7 +9807,7 @@ function en_default() {
   };
 }
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/core/registries.js
+// node_modules/zod/v4/core/registries.js
 var $ZodRegistry = class {
   constructor() {
     this._map = /* @__PURE__ */ new Map();
@@ -9855,7 +9855,7 @@ function registry() {
 }
 var globalRegistry = /* @__PURE__ */ registry();
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/core/api.js
+// node_modules/zod/v4/core/api.js
 function _string(Class2, params) {
   return new Class2({
     type: "string",
@@ -10294,7 +10294,7 @@ function _refine(Class2, fn, _params) {
   return schema;
 }
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/core/to-json-schema.js
+// node_modules/zod/v4/core/to-json-schema.js
 var JSONSchemaGenerator = class {
   constructor(params) {
     this.counter = 0;
@@ -11061,7 +11061,7 @@ function isTransforming(_schema, _ctx) {
   throw new Error(`Unknown schema type: ${def.type}`);
 }
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/classic/iso.js
+// node_modules/zod/v4/classic/iso.js
 var iso_exports = {};
 __export(iso_exports, {
   ZodISODate: () => ZodISODate,
@@ -11102,7 +11102,7 @@ function duration2(params) {
   return _isoDuration(ZodISODuration, params);
 }
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/classic/errors.js
+// node_modules/zod/v4/classic/errors.js
 var initializer2 = (inst, issues) => {
   $ZodError.init(inst, issues);
   inst.name = "ZodError";
@@ -11136,13 +11136,13 @@ var ZodRealError = $constructor("ZodError", initializer2, {
   Parent: Error
 });
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/classic/parse.js
+// node_modules/zod/v4/classic/parse.js
 var parse2 = /* @__PURE__ */ _parse(ZodRealError);
 var parseAsync2 = /* @__PURE__ */ _parseAsync(ZodRealError);
 var safeParse2 = /* @__PURE__ */ _safeParse(ZodRealError);
 var safeParseAsync2 = /* @__PURE__ */ _safeParseAsync(ZodRealError);
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/classic/schemas.js
+// node_modules/zod/v4/classic/schemas.js
 var ZodType = /* @__PURE__ */ $constructor("ZodType", (inst, def) => {
   $ZodType.init(inst, def);
   inst.def = def;
@@ -11753,10 +11753,10 @@ function preprocess(fn, schema) {
   return pipe(transform(fn), schema);
 }
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/classic/external.js
+// node_modules/zod/v4/classic/external.js
 config(en_default());
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/types.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/types.js
 var LATEST_PROTOCOL_VERSION = "2025-11-25";
 var SUPPORTED_PROTOCOL_VERSIONS = [LATEST_PROTOCOL_VERSION, "2025-06-18", "2025-03-26", "2024-11-05", "2024-10-07"];
 var RELATED_TASK_META_KEY = "io.modelcontextprotocol/related-task";
@@ -13287,7 +13287,7 @@ var UrlElicitationRequiredError = class extends McpError {
   }
 };
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/shared/stdio.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/shared/stdio.js
 var STDIO_DEFAULT_MAX_BUFFER_SIZE = 10 * 1024 * 1024;
 var ReadBuffer = class {
   constructor(options) {
@@ -13324,7 +13324,7 @@ function serializeMessage(message) {
   return JSON.stringify(message) + "\n";
 }
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/stdio.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/stdio.js
 var StdioServerTransport = class {
   constructor(_stdin = import_node_process.default.stdin, _stdout = import_node_process.default.stdout, options) {
     this._stdin = _stdin;
@@ -13416,7 +13416,7 @@ function pairedReopenRoute(args, id) {
   return "#read?" + new URLSearchParams({ uid: id });
 }
 
-// ../pali-thera-remaining-local/node_modules/zod/v3/external.js
+// node_modules/zod/v3/external.js
 var external_exports = {};
 __export(external_exports, {
   BRAND: () => BRAND,
@@ -13528,7 +13528,7 @@ __export(external_exports, {
   void: () => voidType
 });
 
-// ../pali-thera-remaining-local/node_modules/zod/v3/helpers/util.js
+// node_modules/zod/v3/helpers/util.js
 var util;
 (function(util2) {
   util2.assertEqual = (_) => {
@@ -13662,7 +13662,7 @@ var getParsedType2 = (data5) => {
   }
 };
 
-// ../pali-thera-remaining-local/node_modules/zod/v3/ZodError.js
+// node_modules/zod/v3/ZodError.js
 var ZodIssueCode = util.arrayToEnum([
   "invalid_type",
   "invalid_literal",
@@ -13780,7 +13780,7 @@ ZodError2.create = (issues) => {
   return error2;
 };
 
-// ../pali-thera-remaining-local/node_modules/zod/v3/locales/en.js
+// node_modules/zod/v3/locales/en.js
 var errorMap = (issue2, _ctx) => {
   let message;
   switch (issue2.code) {
@@ -13883,7 +13883,7 @@ var errorMap = (issue2, _ctx) => {
 };
 var en_default2 = errorMap;
 
-// ../pali-thera-remaining-local/node_modules/zod/v3/errors.js
+// node_modules/zod/v3/errors.js
 var overrideErrorMap = en_default2;
 function setErrorMap(map) {
   overrideErrorMap = map;
@@ -13892,7 +13892,7 @@ function getErrorMap() {
   return overrideErrorMap;
 }
 
-// ../pali-thera-remaining-local/node_modules/zod/v3/helpers/parseUtil.js
+// node_modules/zod/v3/helpers/parseUtil.js
 var makeIssue = (params) => {
   const { data: data5, path, errorMaps, issueData } = params;
   const fullPath = [...path, ...issueData.path || []];
@@ -14002,14 +14002,14 @@ var isDirty = (x) => x.status === "dirty";
 var isValid = (x) => x.status === "valid";
 var isAsync = (x) => typeof Promise !== "undefined" && x instanceof Promise;
 
-// ../pali-thera-remaining-local/node_modules/zod/v3/helpers/errorUtil.js
+// node_modules/zod/v3/helpers/errorUtil.js
 var errorUtil;
 (function(errorUtil2) {
   errorUtil2.errToObj = (message) => typeof message === "string" ? { message } : message || {};
   errorUtil2.toString = (message) => typeof message === "string" ? message : message?.message;
 })(errorUtil || (errorUtil = {}));
 
-// ../pali-thera-remaining-local/node_modules/zod/v3/types.js
+// node_modules/zod/v3/types.js
 var ParseInputLazyPath = class {
   constructor(parent, value, path, key3) {
     this._cachedPath = [];
@@ -17317,13 +17317,13 @@ var ZodPipeline = class _ZodPipeline extends ZodType2 {
 var ZodReadonly2 = class extends ZodType2 {
   _parse(input) {
     const result = this._def.innerType._parse(input);
-    const freeze = (data5) => {
+    const freeze3 = (data5) => {
       if (isValid(data5)) {
         data5.value = Object.freeze(data5.value);
       }
       return data5;
     };
-    return isAsync(result) ? result.then((data5) => freeze(data5)) : freeze(result);
+    return isAsync(result) ? result.then((data5) => freeze3(data5)) : freeze3(result);
   }
   unwrap() {
     return this._def.innerType;
@@ -17457,7 +17457,7 @@ var coerce = {
 };
 var NEVER2 = INVALID;
 
-// ../pali-thera-remaining-local/node_modules/zod/v4/mini/schemas.js
+// node_modules/zod/v4/mini/schemas.js
 var ZodMiniType = /* @__PURE__ */ $constructor("ZodMiniType", (inst, def) => {
   if (!inst._zod)
     throw new Error("Uninitialized schema in ZodMiniType.");
@@ -17503,7 +17503,7 @@ function object2(shape, params) {
   return new ZodMiniObject(def);
 }
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-compat.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-compat.js
 function isZ4Schema(s) {
   const schema = s;
   return !!schema._zod;
@@ -17663,12 +17663,12 @@ function getLiteralValue(schema) {
   return void 0;
 }
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/interfaces.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/interfaces.js
 function isTerminal(status) {
   return status === "completed" || status === "failed" || status === "cancelled";
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/Options.js
+// node_modules/zod-to-json-schema/dist/esm/Options.js
 var ignoreOverride = /* @__PURE__ */ Symbol("Let zodToJsonSchema decide on which parser to use");
 var defaultOptions = {
   name: void 0,
@@ -17702,7 +17702,7 @@ var getDefaultOptions = (options) => typeof options === "string" ? {
   ...options
 };
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/Refs.js
+// node_modules/zod-to-json-schema/dist/esm/Refs.js
 var getRefs = (options) => {
   const _options = getDefaultOptions(options);
   const currentPath = _options.name !== void 0 ? [..._options.basePath, _options.definitionPath, _options.name] : _options.basePath;
@@ -17723,7 +17723,7 @@ var getRefs = (options) => {
   };
 };
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/errorMessages.js
+// node_modules/zod-to-json-schema/dist/esm/errorMessages.js
 function addErrorMessage(res, key3, errorMessage, refs) {
   if (!refs?.errorMessages)
     return;
@@ -17739,7 +17739,7 @@ function setResponseValueAndErrors(res, key3, value, errorMessage, refs) {
   addErrorMessage(res, key3, errorMessage, refs);
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/getRelativePath.js
+// node_modules/zod-to-json-schema/dist/esm/getRelativePath.js
 var getRelativePath = (pathA, pathB) => {
   let i = 0;
   for (; i < pathA.length && i < pathB.length; i++) {
@@ -17749,7 +17749,7 @@ var getRelativePath = (pathA, pathB) => {
   return [(pathA.length - i).toString(), ...pathB.slice(i)].join("/");
 };
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/any.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/any.js
 function parseAnyDef(refs) {
   if (refs.target !== "openAi") {
     return {};
@@ -17765,7 +17765,7 @@ function parseAnyDef(refs) {
   };
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/array.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/array.js
 function parseArrayDef(def, refs) {
   const res = {
     type: "array"
@@ -17789,7 +17789,7 @@ function parseArrayDef(def, refs) {
   return res;
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/bigint.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/bigint.js
 function parseBigintDef(def, refs) {
   const res = {
     type: "integer",
@@ -17835,24 +17835,24 @@ function parseBigintDef(def, refs) {
   return res;
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/boolean.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/boolean.js
 function parseBooleanDef() {
   return {
     type: "boolean"
   };
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/branded.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/branded.js
 function parseBrandedDef(_def, refs) {
   return parseDef(_def.type._def, refs);
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/catch.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/catch.js
 var parseCatchDef = (def, refs) => {
   return parseDef(def.innerType._def, refs);
 };
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/date.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/date.js
 function parseDateDef(def, refs, overrideDateStrategy) {
   const strategy = overrideDateStrategy ?? refs.dateStrategy;
   if (Array.isArray(strategy)) {
@@ -17911,7 +17911,7 @@ var integerDateParser = (def, refs) => {
   return res;
 };
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/default.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/default.js
 function parseDefaultDef(_def, refs) {
   return {
     ...parseDef(_def.innerType._def, refs),
@@ -17919,12 +17919,12 @@ function parseDefaultDef(_def, refs) {
   };
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/effects.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/effects.js
 function parseEffectsDef(_def, refs) {
   return refs.effectStrategy === "input" ? parseDef(_def.schema._def, refs) : parseAnyDef(refs);
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/enum.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/enum.js
 function parseEnumDef(def) {
   return {
     type: "string",
@@ -17932,7 +17932,7 @@ function parseEnumDef(def) {
   };
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/intersection.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/intersection.js
 var isJsonSchema7AllOfType = (type) => {
   if ("type" in type && type.type === "string")
     return false;
@@ -17974,7 +17974,7 @@ function parseIntersectionDef(def, refs) {
   } : void 0;
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/literal.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/literal.js
 function parseLiteralDef(def, refs) {
   const parsedType2 = typeof def.value;
   if (parsedType2 !== "bigint" && parsedType2 !== "number" && parsedType2 !== "boolean" && parsedType2 !== "string") {
@@ -17994,7 +17994,7 @@ function parseLiteralDef(def, refs) {
   };
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/string.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/string.js
 var emojiRegex2 = void 0;
 var zodPatterns = {
   /**
@@ -18319,7 +18319,7 @@ function stringifyRegExpWithFlags(regex, refs) {
   return pattern;
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/record.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/record.js
 function parseRecordDef(def, refs) {
   if (refs.target === "openAi") {
     console.warn("Warning: OpenAI may not support records in schemas! Try an array of key-value pairs instead.");
@@ -18371,7 +18371,7 @@ function parseRecordDef(def, refs) {
   return schema;
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/map.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/map.js
 function parseMapDef(def, refs) {
   if (refs.mapStrategy === "record") {
     return parseRecordDef(def, refs);
@@ -18396,7 +18396,7 @@ function parseMapDef(def, refs) {
   };
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/nativeEnum.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/nativeEnum.js
 function parseNativeEnumDef(def) {
   const object3 = def.values;
   const actualKeys = Object.keys(def.values).filter((key3) => {
@@ -18410,7 +18410,7 @@ function parseNativeEnumDef(def) {
   };
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/never.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/never.js
 function parseNeverDef(refs) {
   return refs.target === "openAi" ? void 0 : {
     not: parseAnyDef({
@@ -18420,7 +18420,7 @@ function parseNeverDef(refs) {
   };
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/null.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/null.js
 function parseNullDef(refs) {
   return refs.target === "openApi3" ? {
     enum: ["null"],
@@ -18430,7 +18430,7 @@ function parseNullDef(refs) {
   };
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/union.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/union.js
 var primitiveMappings = {
   ZodString: "string",
   ZodNumber: "number",
@@ -18498,7 +18498,7 @@ var asAnyOf = (def, refs) => {
   return anyOf.length ? { anyOf } : void 0;
 };
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/nullable.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/nullable.js
 function parseNullableDef(def, refs) {
   if (["ZodString", "ZodNumber", "ZodBigInt", "ZodBoolean", "ZodNull"].includes(def.innerType._def.typeName) && (!def.innerType._def.checks || !def.innerType._def.checks.length)) {
     if (refs.target === "openApi3") {
@@ -18530,7 +18530,7 @@ function parseNullableDef(def, refs) {
   return base && { anyOf: [base, { type: "null" }] };
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/number.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/number.js
 function parseNumberDef(def, refs) {
   const res = {
     type: "number"
@@ -18579,7 +18579,7 @@ function parseNumberDef(def, refs) {
   return res;
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/object.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/object.js
 function parseObjectDef(def, refs) {
   const forceOptionalIntoNullable = refs.target === "openAi";
   const result = {
@@ -18649,7 +18649,7 @@ function safeIsOptional(schema) {
   }
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/optional.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/optional.js
 var parseOptionalDef = (def, refs) => {
   if (refs.currentPath.toString() === refs.propertyPath?.toString()) {
     return parseDef(def.innerType._def, refs);
@@ -18668,7 +18668,7 @@ var parseOptionalDef = (def, refs) => {
   } : parseAnyDef(refs);
 };
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/pipeline.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/pipeline.js
 var parsePipelineDef = (def, refs) => {
   if (refs.pipeStrategy === "input") {
     return parseDef(def.in._def, refs);
@@ -18688,12 +18688,12 @@ var parsePipelineDef = (def, refs) => {
   };
 };
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/promise.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/promise.js
 function parsePromiseDef(def, refs) {
   return parseDef(def.type._def, refs);
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/set.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/set.js
 function parseSetDef(def, refs) {
   const items = parseDef(def.valueType._def, {
     ...refs,
@@ -18713,7 +18713,7 @@ function parseSetDef(def, refs) {
   return schema;
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/tuple.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/tuple.js
 function parseTupleDef(def, refs) {
   if (def.rest) {
     return {
@@ -18741,24 +18741,24 @@ function parseTupleDef(def, refs) {
   }
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/undefined.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/undefined.js
 function parseUndefinedDef(refs) {
   return {
     not: parseAnyDef(refs)
   };
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/unknown.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/unknown.js
 function parseUnknownDef(refs) {
   return parseAnyDef(refs);
 }
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/readonly.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/readonly.js
 var parseReadonlyDef = (def, refs) => {
   return parseDef(def.innerType._def, refs);
 };
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/selectParser.js
+// node_modules/zod-to-json-schema/dist/esm/selectParser.js
 var selectParser = (def, typeName, refs) => {
   switch (typeName) {
     case ZodFirstPartyTypeKind.ZodString:
@@ -18834,7 +18834,7 @@ var selectParser = (def, typeName, refs) => {
   }
 };
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parseDef.js
+// node_modules/zod-to-json-schema/dist/esm/parseDef.js
 function parseDef(def, refs, forceResolution = false) {
   const seenItem = refs.seen.get(def);
   if (refs.override) {
@@ -18890,7 +18890,7 @@ var addMeta = (def, refs, jsonSchema) => {
   return jsonSchema;
 };
 
-// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/zodToJsonSchema.js
+// node_modules/zod-to-json-schema/dist/esm/zodToJsonSchema.js
 var zodToJsonSchema = (schema, options) => {
   const refs = getRefs(options);
   let definitions = typeof options === "object" && options.definitions ? Object.entries(options.definitions).reduce((acc, [name2, schema2]) => ({
@@ -18952,7 +18952,7 @@ var zodToJsonSchema = (schema, options) => {
   return combined;
 };
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-json-schema-compat.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-json-schema-compat.js
 function mapMiniTarget(t) {
   if (!t)
     return "draft-7";
@@ -18994,7 +18994,7 @@ function parseWithCompat(schema, data5) {
   return result.data;
 }
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/shared/protocol.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/shared/protocol.js
 var DEFAULT_REQUEST_TIMEOUT_MSEC = 6e4;
 var Protocol = class {
   constructor(_options) {
@@ -19971,7 +19971,7 @@ function mergeCapabilities(base, additional) {
   return result;
 }
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/validation/ajv-provider.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/validation/ajv-provider.js
 var import_ajv = __toESM(require_ajv(), 1);
 var import_ajv_formats = __toESM(require_dist(), 1);
 function createDefaultAjvInstance() {
@@ -20039,7 +20039,7 @@ var AjvJsonSchemaValidator = class {
   }
 };
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/server.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/server.js
 var ExperimentalServerTasks = class {
   constructor(_server) {
     this._server = _server;
@@ -20252,7 +20252,7 @@ var ExperimentalServerTasks = class {
   }
 };
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/helpers.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/helpers.js
 function assertToolsCallTaskCapability(requests, method, entityName) {
   if (!requests) {
     throw new Error(`${entityName} does not support task creation (required for ${method})`);
@@ -20287,7 +20287,7 @@ function assertClientRequestTaskCapability(requests, method, entityName) {
   }
 }
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/index.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/index.js
 var Server = class extends Protocol {
   /**
    * Initializes this server with the given name and version information.
@@ -20658,7 +20658,7 @@ var Server = class extends Protocol {
   }
 };
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/completable.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/completable.js
 var COMPLETABLE_SYMBOL = /* @__PURE__ */ Symbol.for("mcp.completable");
 function isCompletable(schema) {
   return !!schema && typeof schema === "object" && COMPLETABLE_SYMBOL in schema;
@@ -20672,7 +20672,7 @@ var McpZodTypeKind;
   McpZodTypeKind2["Completable"] = "McpCompletable";
 })(McpZodTypeKind || (McpZodTypeKind = {}));
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/shared/toolNameValidation.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/shared/toolNameValidation.js
 var TOOL_NAME_REGEX = /^[A-Za-z0-9._-]{1,128}$/;
 function validateToolName(name) {
   const warnings = [];
@@ -20730,7 +20730,7 @@ function validateAndWarnToolName(name) {
   return result.isValid;
 }
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/mcp-server.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/mcp-server.js
 var ExperimentalMcpServerTasks = class {
   constructor(_mcpServer) {
     this._mcpServer = _mcpServer;
@@ -20745,7 +20745,7 @@ var ExperimentalMcpServerTasks = class {
   }
 };
 
-// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/mcp.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/mcp.js
 function toolInputElementCount(value, max) {
   let count = 0;
   const stack = [value];
@@ -54603,40 +54603,40 @@ var import_node_crypto3 = require("node:crypto");
 // src/ati-excerpt.mjs
 function atiVerseExcerpt(html) {
   const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
-  const fail6 = () => {
+  const fail7 = () => {
     throw Error("The reviewed ATI verse extraction structure changed. No excerpt was returned.");
   };
-  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) fail6();
+  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) fail7();
   const start = html.indexOf(begin) + begin.length, stop = html.indexOf(end);
-  if (stop <= start) fail6();
+  if (stop <= start) fail7();
   const chunk = html.slice(start, stop), opens = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])freeverse\1[^>]*>/gi)];
-  if (opens.length !== 1) fail6();
+  if (opens.length !== 1) fail7();
   const from = opens[0].index + opens[0][0].length, to = chunk.indexOf("</div>", from);
-  if (to < from) fail6();
+  if (to < from) fail7();
   const verse2 = chunk.slice(from, to);
-  if (/<\/?div\b|<script\b|<style\b/i.test(verse2)) fail6();
+  if (/<\/?div\b|<script\b|<style\b/i.test(verse2)) fail7();
   const text2 = plainText(verse2);
-  if (!text2) fail6();
+  if (!text2) fail7();
   return text2;
 }
 function atiChapterProse(html) {
   const begin = "<!-- BEGIN COPYRIGHTED TEXT CHUNK -->", end = "<!-- #COPYRIGHTED_TEXT_CHUNK (END OF COPYRIGHTED TEXT CHUNK) -->";
-  const fail6 = () => {
+  const fail7 = () => {
     throw Error("The reviewed ATI prose extraction structure changed. No excerpt was returned.");
   };
-  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) fail6();
+  if (typeof html !== "string" || html.split(begin).length !== 2 || html.split(end).length !== 2) fail7();
   const from = html.indexOf(begin) + begin.length, to = html.indexOf(end);
-  if (to <= from) fail6();
+  if (to <= from) fail7();
   const chunk = html.slice(from, to), opens = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
-  if (opens.length !== 1) fail6();
+  if (opens.length !== 1) fail7();
   const start = opens[0].index + opens[0][0].length, notes = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])notes\1[^>]*>/gi)];
-  if (notes.length !== 1) fail6();
+  if (notes.length !== 1) fail7();
   const stop = notes[0].index;
-  if (stop <= start || chunk.indexOf("</div>", start) < stop) fail6();
+  if (stop <= start || chunk.indexOf("</div>", start) < stop) fail7();
   const body = chunk.slice(start, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
-  if (paragraphs.length !== 1 || /<\/?(?:div|script|style|dl|ol|ul)\b/i.test(body) || body.replace(paragraphs[0][0], "").trim()) fail6();
+  if (paragraphs.length !== 1 || /<\/?(?:div|script|style|dl|ol|ul)\b/i.test(body) || body.replace(paragraphs[0][0], "").trim()) fail7();
   const text2 = plainText(paragraphs[0][1].replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi, ""));
-  if (!text2) fail6();
+  if (!text2) fail7();
   return text2;
 }
 function atiPartialExcerpt(html, extractor) {
@@ -54671,34 +54671,34 @@ var ATI_SEGMENT_EXTRACTORS = Object.freeze([
   "ati-milinda-medicine-two-verses-v1"
 ]);
 function milindaMedicineVerses(html) {
-  const fail6 = () => {
+  const fail7 = () => {
     throw Error("The reviewed ATI Milinda two-verse extraction structure changed. No excerpt was returned.");
   };
   const chunk = copyrightedChunk(html).trim();
   const body = chunk.match(/^<div class=(["'])preface\1>\s*<h1>Translator's note<\/h1>\s*<p>([^]*?)<\/p>\s*<p>([^]*?)<\/p>\s*<p>([^]*?)<\/p>\s*<\/div>\s*<div class=(["'])chapter\5>\s*<div class=(["'])freeverse\6>([^]*?)<p class=(["'])cite\8>([^]*?)<\/p>\s*<\/div>\s*<\/div>\s*<\/div>$/);
-  if (!body) fail6();
+  if (!body) fail7();
   const [, , first, second, third, , , verse2, , citation] = body;
-  if (/[<>]/.test(first + second + verse2 + citation) || !plainText(first) || !plainText(second) || plainText(citation) !== "\u2014 Miln 335") fail6();
+  if (/[<>]/.test(first + second + verse2 + citation) || !plainText(first) || !plainText(second) || plainText(citation) !== "\u2014 Miln 335") fail7();
   let open = false, count = 0;
   for (const [tag] of third.matchAll(/<[^>]*>/g)) {
     if (tag === "<i>" && !open) {
       open = true;
       count++;
     } else if (tag === "</i>" && open) open = false;
-    else fail6();
+    else fail7();
   }
-  if (open || count !== 4 || /[<>]/.test(third.replace(/<\/?i>/g, "")) || !plainText(third) || [...third.matchAll(/<i>([^]*?)<\/i>/g)].some((m) => !plainText(m[1]))) fail6();
+  if (open || count !== 4 || /[<>]/.test(third.replace(/<\/?i>/g, "")) || !plainText(third) || [...third.matchAll(/<i>([^]*?)<\/i>/g)].some((m) => !plainText(m[1]))) fail7();
   const text2 = plainText(verse2), stanzas = text2.split("\n\n");
-  if (stanzas.length !== 2 || stanzas.some((s, i) => s.split("\n").length !== [4, 5][i] || s.split("\n").some((line) => !line.trim()))) fail6();
+  if (stanzas.length !== 2 || stanzas.some((s, i) => s.split("\n").length !== [4, 5][i] || s.split("\n").some((line) => !line.trim()))) fail7();
   return text2;
 }
 function upatissaChapter(html) {
-  const fail6 = () => {
+  const fail7 = () => {
     throw Error("The reviewed ATI Upatissa mixed-body extraction structure changed. No excerpt was returned.");
   };
   const chunk = copyrightedChunk(html).trim();
   const chapter = chunk.match(/^<div class=(["'])chapter\1>([^]*)<\/div>\s*<\/div>$/);
-  if (!chapter) fail6();
+  if (!chapter) fail7();
   const sequence = [...Array(8).fill("p"), "verse", "p", "verse", "p", "verse", ...Array(9).fill("p"), "verse", "p", "verse", "p", "verse"];
   const anchorsByParagraph = /* @__PURE__ */ new Map([[1, ["sanjaya", "rajagaha", "sariputta", "moggallana"]], [2, ["assaji"]], [10, ["saristream"]], [21, ["moggstream"]]]);
   let rest = chapter[2], paragraph = 0;
@@ -54706,7 +54706,7 @@ function upatissaChapter(html) {
   for (const kind of sequence) {
     rest = rest.trimStart();
     const child = kind === "p" ? rest.match(/^<p>([^]*?)<\/p>/) : rest.match(/^<div class=(["'])freeverse\1>([^]*?)<\/div>/);
-    if (!child) fail6();
+    if (!child) fail7();
     const body = child[kind === "p" ? 1 : 2], expected = kind === "p" ? anchorsByParagraph.get(++paragraph) || [] : [];
     let active = false, count = 0;
     for (const [tag] of body.matchAll(/<[^>]*>/g)) {
@@ -54714,15 +54714,15 @@ function upatissaChapter(html) {
         active = true;
         count++;
       } else if (active && tag === "</a>") active = false;
-      else fail6();
+      else fail7();
     }
-    if (active || count !== expected.length || /[<>]/.test(body.replace(/<[^>]*>/g, ""))) fail6();
+    if (active || count !== expected.length || /[<>]/.test(body.replace(/<[^>]*>/g, ""))) fail7();
     const text2 = plainText(body);
-    if (!text2) fail6();
+    if (!text2) fail7();
     texts.push(text2);
     rest = rest.slice(child[0].length);
   }
-  if (rest.trim()) fail6();
+  if (rest.trim()) fail7();
   return texts.join("\n\n");
 }
 function copyrightedChunk(html) {
@@ -54733,50 +54733,50 @@ function copyrightedChunk(html) {
   return html.slice(start, stop);
 }
 function chapterParagraph(html, total, selected, heading) {
-  const fail6 = () => {
+  const fail7 = () => {
     throw Error("The reviewed ATI paragraph selection extraction structure changed. No excerpt was returned.");
   };
   const chunk = copyrightedChunk(html), chapters = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)], notes = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])notes\1[^>]*>/gi)];
-  if (chapters.length !== 1 || notes.length !== 1) fail6();
+  if (chapters.length !== 1 || notes.length !== 1) fail7();
   const start = chapters[0].index + chapters[0][0].length, stop = notes[0].index;
-  if (stop <= start || chunk.indexOf("</div>", start) < stop) fail6();
+  if (stop <= start || chunk.indexOf("</div>", start) < stop) fail7();
   const body = chunk.slice(start, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
-  if (paragraphs.length !== total || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body)) fail6();
+  if (paragraphs.length !== total || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body)) fail7();
   let remainder = body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim();
   if (heading) {
-    if (remainder !== `<h4>${heading}</h4>`) fail6();
-  } else if (remainder) fail6();
+    if (remainder !== `<h4>${heading}</h4>`) fail7();
+  } else if (remainder) fail7();
   const chosen = paragraphs[selected - 1][1];
-  if (/<\/?p\b/i.test(chosen)) fail6();
+  if (/<\/?p\b/i.test(chosen)) fail7();
   const text2 = plainText(chosen.replace(/<a\b[^>]*class=['"]noteTag['"][^>]*>[^]*?<\/a>/gi, ""));
-  if (!text2) fail6();
+  if (!text2) fail7();
   return text2;
 }
 function excerptVersePre(html) {
-  const fail6 = () => {
+  const fail7 = () => {
     throw Error("The reviewed ATI preformatted verse extraction structure changed. No excerpt was returned.");
   };
   const chunk = copyrightedChunk(html), opens = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])excerpt verse\1[^>]*>/gi)];
   const chapters = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
-  if (opens.length !== 1 || chapters.length !== 1 || chapters[0].index >= opens[0].index || [...chunk.matchAll(/<pre\b/gi)].length !== 1) fail6();
+  if (opens.length !== 1 || chapters.length !== 1 || chapters[0].index >= opens[0].index || [...chunk.matchAll(/<pre\b/gi)].length !== 1) fail7();
   const start = opens[0].index + opens[0][0].length, stop = chunk.indexOf("</div>", start);
-  if (stop < start) fail6();
+  if (stop < start) fail7();
   const body = chunk.slice(start, stop), pres = [...body.matchAll(/<pre\b[^>]*>([^]*?)<\/pre>/gi)];
-  if (pres.length !== 1 || body.replace(pres[0][0], "").trim() || /<[^>]*>/.test(pres[0][1])) fail6();
+  if (pres.length !== 1 || body.replace(pres[0][0], "").trim() || /<[^>]*>/.test(pres[0][1])) fail7();
   const text2 = plainText(pres[0][1]);
-  if (!text2) fail6();
+  if (!text2) fail7();
   return text2;
 }
 function chapterParagraphsWithoutNotes(html, total) {
-  const fail6 = () => {
+  const fail7 = () => {
     throw Error("The reviewed ATI no-notes paragraph extraction structure changed. No excerpt was returned.");
   };
   const chunk = copyrightedChunk(html), chapters = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)];
-  if (chapters.length !== 1) fail6();
+  if (chapters.length !== 1) fail7();
   const start = chapters[0].index + chapters[0][0].length, stop = chunk.indexOf("</div>", start);
-  if (stop < start || chunk.slice(0, chapters[0].index).trim() || chunk.slice(stop + 6).trim() !== "</div>") fail6();
+  if (stop < start || chunk.slice(0, chapters[0].index).trim() || chunk.slice(stop + 6).trim() !== "</div>") fail7();
   const body = chunk.slice(start, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
-  if (paragraphs.length !== total || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body) || body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim() || paragraphs.some((p) => /<\/?p\b/i.test(p[1]))) fail6();
+  if (paragraphs.length !== total || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body) || body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim() || paragraphs.some((p) => /<\/?p\b/i.test(p[1]))) fail7();
   return paragraphs.map((p) => p[1]);
 }
 var selectedProse = (paragraphs) => {
@@ -54786,7 +54786,7 @@ var selectedProse = (paragraphs) => {
 };
 function vinayaChapterProse(html, total) {
   const paragraphs = chapterParagraphsWithoutNotes(html, total);
-  const fail6 = () => {
+  const fail7 = () => {
     throw Error("The reviewed ATI Vinaya inline extraction structure changed. No excerpt was returned.");
   };
   for (const paragraph of paragraphs) {
@@ -54794,9 +54794,9 @@ function vinayaChapterProse(html, total) {
     for (const [tag] of paragraph.matchAll(/<[^>]*>/g)) {
       if (total === 22 && !anchor && /^<a id=(["'])(?:ananda|patient|nurse)\1>$/.test(tag)) anchor = true;
       else if (anchor && tag === "</a>") anchor = false;
-      else fail6();
+      else fail7();
     }
-    if (anchor) fail6();
+    if (anchor) fail7();
   }
   return selectedProse(paragraphs);
 }
@@ -54809,17 +54809,17 @@ function chapterProseBeforeEllipsis(html) {
   return selectedProse(paragraphs.slice(0, 3));
 }
 function chapterProsePrefixBeforeNotes(html) {
-  const fail6 = () => {
+  const fail7 = () => {
     throw Error("The reviewed ATI five-paragraph notes extraction structure changed. No excerpt was returned.");
   };
   const chunk = copyrightedChunk(html), chapters = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])chapter\1[^>]*>/gi)], notes = [...chunk.matchAll(/<div\b[^>]*\sclass\s*=\s*(["'])notes\1[^>]*>/gi)];
-  if (chapters.length !== 1 || notes.length !== 1) fail6();
+  if (chapters.length !== 1 || notes.length !== 1) fail7();
   const start = chapters[0].index + chapters[0][0].length, stop = notes[0].index;
-  if (stop <= start || chunk.slice(0, chapters[0].index).trim() || chunk.indexOf("</div>", start) < stop) fail6();
+  if (stop <= start || chunk.slice(0, chapters[0].index).trim() || chunk.indexOf("</div>", start) < stop) fail7();
   const tail = chunk.slice(stop + notes[0][0].length), notesEnd = tail.indexOf("</div>");
-  if (notesEnd < 0 || /<\/?(?:div|script|style|pre)\b/i.test(tail.slice(0, notesEnd)) || !/^\s*<\/div>\s*<\/div>\s*$/.test(tail.slice(notesEnd + 6))) fail6();
+  if (notesEnd < 0 || /<\/?(?:div|script|style|pre)\b/i.test(tail.slice(0, notesEnd)) || !/^\s*<\/div>\s*<\/div>\s*$/.test(tail.slice(notesEnd + 6))) fail7();
   const body = chunk.slice(start, stop), paragraphs = [...body.matchAll(/<p\b[^>]*>([^]*?)<\/p>/gi)];
-  if (paragraphs.length !== 5 || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body) || body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim() || paragraphs.some((p) => /<\/?p\b/i.test(p[1]))) fail6();
+  if (paragraphs.length !== 5 || /<\/?(?:div|script|style|dl|ol|ul|pre)\b/i.test(body) || body.replace(/<p\b[^>]*>[^]*?<\/p>/gi, "").trim() || paragraphs.some((p) => /<\/?p\b/i.test(p[1]))) fail7();
   return selectedProse(paragraphs.slice(0, 4).map((p) => p[1]));
 }
 
@@ -54830,36 +54830,36 @@ var sha2 = (value) => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
 function partialScope(link, unit, segments2, source4) {
   if (!isPartial(link)) return null;
   const p = link.partial_scope;
-  const fail6 = () => {
+  const fail7 = () => {
     throw new Error("Invalid or unreviewed partial translation scope. No whole-unit coverage or source retrieval is inferred.");
   };
   const fields = /* @__PURE__ */ new Set(["version", "status", "unit_id", "first_ref", "last_ref", "source_commit", "pali_sha256", "text_sha256", "notice_sha256", "extractor", "subparagraph"]);
-  if (!p || ![1, 2].includes(p.version) || Object.keys(p).some((k) => !fields.has(k)) || p.status !== "reviewed" || p.unit_id !== unit.id || p.source_commit !== source4.commit || !sha2(p.pali_sha256) || !sha2(p.text_sha256) || unit.approximate) fail6();
+  if (!p || ![1, 2].includes(p.version) || Object.keys(p).some((k) => !fields.has(k)) || p.status !== "reviewed" || p.unit_id !== unit.id || p.source_commit !== source4.commit || !sha2(p.pali_sha256) || !sha2(p.text_sha256) || unit.approximate) fail7();
   const first = segments2.findIndex((s) => s.ref === p.first_ref);
   const last = segments2.findIndex((s) => s.ref === p.last_ref);
-  if (first < 0 || last < first || p.version === 1 && first === 0 && last === segments2.length - 1) fail6();
-  if (!segments2.slice(first, last + 1).some((s) => s.type !== "heading") || p.version === 1 && !segments2.some((s, i) => s.type !== "heading" && (i < first || i > last))) fail6();
+  if (first < 0 || last < first || p.version === 1 && first === 0 && last === segments2.length - 1) fail7();
+  if (!segments2.slice(first, last + 1).some((s) => s.type !== "heading") || p.version === 1 && !segments2.some((s, i) => s.type !== "heading" && (i < first || i > last))) fail7();
   const selected = segments2.slice(first, last + 1).map(({ ref, type, text: text2 }) => ({ ref, type, text: text2 }));
   let excerpt;
   if (p.version === 2) {
     const part = p.subparagraph, seg = selected[0];
-    if (link.source !== "ati" || !ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor) || first !== last || seg.type !== "prose" || !part || Object.keys(part).sort().join(",") !== "end_char,offset_unit,segment_sha256,start_char" || part.offset_unit !== "utf16_code_units" || !sha2(part.segment_sha256) || scopeHash(seg) !== part.segment_sha256 || !Number.isSafeInteger(part.start_char) || !Number.isSafeInteger(part.end_char) || part.start_char < 0 || part.end_char <= part.start_char || part.end_char > seg.text.length || part.start_char === 0 && part.end_char === seg.text.length) fail6();
-    for (const at of [part.start_char, part.end_char]) if (at > 0 && at < seg.text.length && /[\uD800-\uDBFF]/.test(seg.text[at - 1]) && /[\uDC00-\uDFFF]/.test(seg.text[at])) fail6();
+    if (link.source !== "ati" || !ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor) || first !== last || seg.type !== "prose" || !part || Object.keys(part).sort().join(",") !== "end_char,offset_unit,segment_sha256,start_char" || part.offset_unit !== "utf16_code_units" || !sha2(part.segment_sha256) || scopeHash(seg) !== part.segment_sha256 || !Number.isSafeInteger(part.start_char) || !Number.isSafeInteger(part.end_char) || part.start_char < 0 || part.end_char <= part.start_char || part.end_char > seg.text.length || part.start_char === 0 && part.end_char === seg.text.length) fail7();
+    for (const at of [part.start_char, part.end_char]) if (at > 0 && at < seg.text.length && /[\uD800-\uDBFF]/.test(seg.text[at - 1]) && /[\uDC00-\uDFFF]/.test(seg.text[at])) fail7();
     const selectedText = seg.text.slice(part.start_char, part.end_char);
     const outsideBody = segments2.some((s, i) => s.type !== "heading" && (i < first || i > last) && s.text.trim());
-    if (!selectedText.trim() || !outsideBody && !(seg.text.slice(0, part.start_char) + seg.text.slice(part.end_char)).trim()) fail6();
+    if (!selectedText.trim() || !outsideBody && !(seg.text.slice(0, part.start_char) + seg.text.slice(part.end_char)).trim()) fail7();
     seg.text = selectedText;
     excerpt = { ...seg, ...part };
-  } else if (Object.hasOwn(p, "subparagraph")) fail6();
-  if (scopeHash(selected) !== p.pali_sha256) fail6();
-  if (!["dhammatalks", "ati", "anandajoti"].includes(link.source)) fail6();
+  } else if (Object.hasOwn(p, "subparagraph")) fail7();
+  if (scopeHash(selected) !== p.pali_sha256) fail7();
+  if (!["dhammatalks", "ati", "anandajoti"].includes(link.source)) fail7();
   if (link.source === "ati") {
-    if (!(p.version === 2 ? ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor) : ATI_SEGMENT_EXTRACTORS.includes(p.extractor)) || !sha2(p.notice_sha256) || typeof link.path !== "string" || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes("..") || link.url !== "https://accesstoinsight.org" + link.path + ".html") fail6();
+    if (!(p.version === 2 ? ATI_SUBPARAGRAPH_EXTRACTORS.includes(p.extractor) : ATI_SEGMENT_EXTRACTORS.includes(p.extractor)) || !sha2(p.notice_sha256) || typeof link.path !== "string" || !/^\/tipitaka\/[a-z0-9_/.-]+$/.test(link.path) || link.path.includes("..") || link.url !== "https://accesstoinsight.org" + link.path + ".html") fail7();
     if (p.extractor === "ati-milinda-medicine-two-verses-v1" || link.path.startsWith("/tipitaka/kn/miln/")) {
-      if (unit.id !== "mil6.4.1" || link.path !== "/tipitaka/kn/miln/miln.5x.olen" || p.version !== 1 || p.extractor !== "ati-milinda-medicine-two-verses-v1" || p.first_ref !== "mil6.4.1/20" || p.last_ref !== "mil6.4.1/21" || link.translator !== "Andrew Olendzki" || link.license !== "Olendzki-free-distribution-2005") fail6();
+      if (unit.id !== "mil6.4.1" || link.path !== "/tipitaka/kn/miln/miln.5x.olen" || p.version !== 1 || p.extractor !== "ati-milinda-medicine-two-verses-v1" || p.first_ref !== "mil6.4.1/20" || p.last_ref !== "mil6.4.1/21" || link.translator !== "Andrew Olendzki" || link.license !== "Olendzki-free-distribution-2005") fail7();
     }
-  } else if (Object.hasOwn(p, "extractor") || Object.hasOwn(p, "notice_sha256")) fail6();
-  if (link.parts && (link.source !== "anandajoti" || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail6();
+  } else if (Object.hasOwn(p, "extractor") || Object.hasOwn(p, "notice_sha256")) fail7();
+  if (link.parts && (link.source !== "anandajoti" || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail7();
   const readPages = [];
   for (let offset = first; offset <= last; offset += 200) readPages.push({ tool: "get_text", uid: unit.id, offset, limit: Math.min(200, last - offset + 1) });
   return {
@@ -54892,16 +54892,16 @@ function sharedScope(link, unit, byId, readSegments, source4) {
     throw new Error("Invalid shared-page source URL.");
   }
   const sourceUrl = url.protocol === "https:" && !url.username && !url.password && !url.search && !url.hash && !url.port && (link.source === "dhammatalks" ? ["www.dhammatalks.org", "dhammatalks.org"].includes(url.hostname) && /^\/suttas\/.+\.html$/.test(url.pathname) : link.source === "ati" ? typeof link.path === "string" && link.url === `https://accesstoinsight.org${link.path}.html` : link.source === "anandajoti" && typeof link.path === "string" && link.url === "https://ancient-buddhist-texts.net" + encodeURI(link.path));
-  const fail6 = () => {
+  const fail7 = () => {
     throw new Error("Invalid or unreviewed shared-page translation scope. No individual alignment or whole-unit coverage is inferred.");
   };
   const fields = /* @__PURE__ */ new Set(["version", "status", "owner_id", "text_ids", "presentation", "alignment", "source_commit", "pali_sha256", "text_sha256", "notice_sha256"]);
-  if (!sourceUrl || isPartial(link) || !p || p.version !== 1 || p.status !== "reviewed" || Object.keys(p).some((k) => !fields.has(k)) || !["condensed", "compilation"].includes(p.presentation) || p.alignment !== "unverified" || p.source_commit !== source4.commit || !sha2(p.pali_sha256) || !sha2(p.text_sha256) || p.notice_sha256 !== void 0 && (!sha2(p.notice_sha256) || link.source !== "ati") || (p.presentation === "compilation" || link.source === "ati") && !sha2(p.notice_sha256) || !Array.isArray(p.text_ids) || p.text_ids.length < 2 || p.text_ids.length > 32 || new Set(p.text_ids).size !== p.text_ids.length || p.owner_id !== p.text_ids[0] || !p.text_ids.includes(unit.id) || typeof link.reference !== "string" || !link.reference.trim() || link.reference.length > 200) fail6();
+  if (!sourceUrl || isPartial(link) || !p || p.version !== 1 || p.status !== "reviewed" || Object.keys(p).some((k) => !fields.has(k)) || !["condensed", "compilation"].includes(p.presentation) || p.alignment !== "unverified" || p.source_commit !== source4.commit || !sha2(p.pali_sha256) || !sha2(p.text_sha256) || p.notice_sha256 !== void 0 && (!sha2(p.notice_sha256) || link.source !== "ati") || (p.presentation === "compilation" || link.source === "ati") && !sha2(p.notice_sha256) || !Array.isArray(p.text_ids) || p.text_ids.length < 2 || p.text_ids.length > 32 || new Set(p.text_ids).size !== p.text_ids.length || p.owner_id !== p.text_ids[0] || !p.text_ids.includes(unit.id) || typeof link.reference !== "string" || !link.reference.trim() || link.reference.length > 200) fail7();
   const units = p.text_ids.map((id) => byId.get(id));
-  if (units.some((u, i) => !u || u.approximate || u.kind === "range" || u.members?.length || u.book !== units[0].book || u.collection !== units[0].collection || i && units[i - 1].end !== u.start)) fail6();
+  if (units.some((u, i) => !u || u.approximate || u.kind === "range" || u.members?.length || u.book !== units[0].book || u.collection !== units[0].collection || i && units[i - 1].end !== u.start)) fail7();
   const selected = units.map((u) => ({ id: u.id, segments: readSegments(u).map(({ ref, type, text: text2 }) => ({ ref, type, text: text2 })) }));
-  if (selected.some((u) => !u.segments.some((s) => s.type !== "heading")) || selected.reduce((n, u) => n + u.segments.length, 0) > 2e4 || selected.reduce((n, u) => n + u.segments.reduce((v, s) => v + s.text.length, 0), 0) > 2e6 || scopeHash(selected) !== p.pali_sha256) fail6();
-  if (!["dhammatalks", "ati", "anandajoti"].includes(link.source) || link.parts && (link.source !== "anandajoti" || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail6();
+  if (selected.some((u) => !u.segments.some((s) => s.type !== "heading")) || selected.reduce((n, u) => n + u.segments.length, 0) > 2e4 || selected.reduce((n, u) => n + u.segments.reduce((v, s) => v + s.text.length, 0), 0) > 2e6 || scopeHash(selected) !== p.pali_sha256) fail7();
+  if (!["dhammatalks", "ati", "anandajoti"].includes(link.source) || link.parts && (link.source !== "anandajoti" || !Array.isArray(link.parts) || !link.parts.length || link.parts.length > 32)) fail7();
   return {
     kind: "shared_page",
     version: 1,
@@ -57605,8 +57605,8 @@ __export(analyse_exports, {
   wordParts: () => wordParts
 });
 var import_node_zlib4 = require("node:zlib");
-var import_node_path5 = require("node:path");
-var import_node_url5 = require("node:url");
+var import_node_path6 = require("node:path");
+var import_node_url6 = require("node:url");
 
 // src/pali-unicode.mjs
 var foldNiggahita = (value) => value.replace(/ṁ/g, "\u1E43").replace(/Ṁ/g, "\u1E42");
@@ -58890,6 +58890,296 @@ function structuredInfo(page2) {
   };
 }
 
+// src/source-notes.mjs
+var import_node_crypto7 = require("node:crypto");
+var import_node_fs4 = require("node:fs");
+var import_node_path5 = require("node:path");
+var import_node_url5 = require("node:url");
+
+// web/source-notes-policy.mjs
+function createSourceNotesPolicy(hash2, fixedMetadata) {
+  function stable3(value) {
+    let count = 0;
+    const seen = /* @__PURE__ */ new Set();
+    function visit(item, depth) {
+      if (++count > 2048 || depth > 20) throw Error("Unsupported source-note data");
+      if (item === null || typeof item === "boolean") return JSON.stringify(item);
+      if (typeof item === "string") {
+        if (item.length > 16384) throw Error("Unsupported source-note data");
+        return JSON.stringify(item);
+      }
+      if (typeof item === "number" && Number.isFinite(item)) return JSON.stringify(item);
+      if (!item || typeof item !== "object" || seen.has(item)) throw Error("Unsupported source-note data");
+      seen.add(item);
+      let result;
+      if (Array.isArray(item)) {
+        if (item.length > 256) throw Error("Unsupported source-note data");
+        result = "[" + item.map((child) => visit(child, depth + 1)).join(",") + "]";
+      } else {
+        if (Object.prototype.toString.call(item) !== "[object Object]" || Object.getOwnPropertySymbols(item).length) throw Error("Unsupported source-note data");
+        const keys = Object.keys(item).sort();
+        if (keys.length > 64) throw Error("Unsupported source-note data");
+        result = "{" + keys.map((key3) => JSON.stringify(key3) + ":" + visit(item[key3], depth + 1)).join(",") + "}";
+      }
+      seen.delete(item);
+      return result;
+    }
+    return visit(value, 0);
+  }
+  const profile = JSON.parse(stable3(fixedMetadata));
+  const warning = "The separately indexed original edition note could not be verified. The loaded P\u0101li remains available; this apparatus is unavailable.";
+  const owns = (object3, key3) => Boolean(object3 && Object.prototype.hasOwnProperty.call(object3, key3));
+  const keysEqual = (object3, keys) => object3 && !Array.isArray(object3) && stable3(Object.keys(object3).sort()) === stable3(keys.slice().sort());
+  function model(state, affected, opening, anchor, entry3) {
+    const view = {
+      state,
+      affected,
+      opening,
+      anchor_ref: anchor ? anchor.segment.ref : null,
+      availability: state === "available" ? JSON.parse(stable3(anchor.availability)) : null,
+      entry: entry3 || null,
+      warning: state === "unavailable" ? warning : null
+    };
+    view.signature = stable3({ state, affected, opening, anchor_ref: view.anchor_ref, entry: Boolean(entry3), record_sha256: state === "available" ? profile.record_sha256 : null });
+    return view;
+  }
+  function inspect(page2) {
+    let anchor = null, affected = false, opening = false;
+    try {
+      if (!page2 || typeof page2 !== "object" || Array.isArray(page2)) return model("absent", false, false, null, null);
+      const isBook = page2.selection === "source_book";
+      if (isBook && page2.book_id === profile.anchors.book.selector.book) anchor = profile.anchors.book;
+      else if (!isBook && page2.text_id === profile.anchors.uid.selector.uid && page2.canonical !== false && page2.content_type !== "commentary") anchor = profile.anchors.uid;
+      affected = Boolean(anchor);
+      if (!affected) return model(owns(page2, "source_notes") ? "unavailable" : "absent", false, false, null, null);
+      const position = page2.pali || page2;
+      opening = position.offset === 0;
+      const unavailable = () => model("unavailable", true, opening, anchor, null);
+      if (page2.canonical === false || !page2.source || page2.source.commit !== profile.source_commit || owns(page2.source, "locator_revision") && page2.source.locator_revision !== profile.source_commit || isBook && owns(page2, "text_id") && page2.text_id !== null || !isBook && owns(page2, "book_id")) return unavailable();
+      const envelope2 = page2.source_notes;
+      if (!keysEqual(envelope2, ["schema", "state", "extraction_revision", "record_sha256", "availability", "entries", "error_code"]) || envelope2.schema !== profile.schema || envelope2.extraction_revision !== profile.extraction_revision || envelope2.record_sha256 !== profile.record_sha256 || stable3(envelope2.availability) !== stable3(anchor.availability) || !Array.isArray(envelope2.entries) || envelope2.entries.length > 1) return unavailable();
+      if (envelope2.state === "unavailable") {
+        if (envelope2.error_code !== "SOURCE_NOTE_UNAVAILABLE" || envelope2.entries.length) return unavailable();
+        return unavailable();
+      }
+      if (envelope2.state !== "available" || envelope2.error_code !== null) return unavailable();
+      const segments2 = position.segments;
+      if (!Array.isArray(segments2) || segments2.length > 200 || !Number.isSafeInteger(position.offset) || position.offset < 0 || !Number.isSafeInteger(position.returned) || position.returned !== segments2.length) return unavailable();
+      const relative = anchor.offset - position.offset, inPage = relative >= 0 && relative < segments2.length;
+      const matches = segments2.filter((segment) => segment && segment.ref === anchor.segment.ref);
+      if (matches.length !== (inPage ? 1 : 0) || inPage && stable3(segments2[relative]) !== stable3(anchor.segment) || envelope2.entries.length !== (inPage ? 1 : 0)) return unavailable();
+      if (!inPage) return model("available", true, opening, anchor, null);
+      const record2 = envelope2.entries[0], serialized = stable3(record2);
+      if (!keysEqual(record2, profile.record_keys) || serialized.length > profile.max_record_characters || hash2(serialized) !== profile.record_sha256 || record2.id !== profile.record_id || record2.extraction_revision !== profile.extraction_revision || record2.text_sha256 !== profile.text_sha256 || typeof record2.text !== "string" || hash2(record2.text) !== profile.text_sha256) return unavailable();
+      return model("available", true, opening, anchor, JSON.parse(serialized));
+    } catch {
+      return model("unavailable", affected, opening, anchor, null);
+    }
+  }
+  return { inspect, stable: stable3 };
+}
+
+// src/source-notes-profiles.mjs
+var freeze = (value) => {
+  if (value && typeof value === "object") {
+    for (const child of Object.values(value)) freeze(child);
+    Object.freeze(value);
+  }
+  return value;
+};
+var SOURCE_NOTES_PROFILE = freeze({
+  "schema": "vri-source-notes-v1",
+  "extraction_revision": "sariputta-note1130-v1",
+  "record_sha256": "0d7ab15b095a5175742655a16b67fabf31ed47f73d10fe3de1c821eb1e2b11b7",
+  "registry_sha256": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e",
+  "record_id": "vri:s0510m1:note-only:1130",
+  "text_sha256": "e4544e7b41ad8ed3f72d281f9735359c51aac2f8c758588731a1135e4a03fa60",
+  "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "record_keys": [
+    "changes",
+    "extraction_revision",
+    "id",
+    "kind",
+    "label",
+    "origin",
+    "physical_location",
+    "provenance",
+    "qualification",
+    "text",
+    "text_sha256"
+  ],
+  "max_record_characters": 8192,
+  "anchors": {
+    "uid": {
+      "selector": {
+        "uid": "tha-ap3"
+      },
+      "segment": {
+        "ref": "tha-ap3/236",
+        "type": "verse",
+        "text": "",
+        "vri_paragraph": "372"
+      },
+      "offset": 235,
+      "availability": {
+        "total": 1,
+        "record_id": "vri:s0510m1:note-only:1130",
+        "anchor_ref": "tha-ap3/236",
+        "physical_location_only": true,
+        "read_with": {
+          "tool": "get_text",
+          "uid": "tha-ap3",
+          "offset": 235,
+          "limit": 1,
+          "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+        },
+        "widget_read_with": {
+          "name": "read_passage_widget",
+          "arguments": {
+            "uid": "tha-ap3",
+            "segment": "tha-ap3/236",
+            "english": false,
+            "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+          }
+        },
+        "scope": "separately_indexed_original_edition_notes"
+      }
+    },
+    "book": {
+      "selector": {
+        "book": "s0510m1"
+      },
+      "segment": {
+        "ref": "vri-book:s0510m1/387",
+        "type": "verse",
+        "text": "",
+        "vri_paragraph": "372"
+      },
+      "offset": 386,
+      "availability": {
+        "total": 1,
+        "record_id": "vri:s0510m1:note-only:1130",
+        "anchor_ref": "vri-book:s0510m1/387",
+        "physical_location_only": true,
+        "read_with": {
+          "tool": "get_text",
+          "book": "s0510m1",
+          "offset": 386,
+          "limit": 1,
+          "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+        },
+        "widget_read_with": {
+          "name": "read_passage_widget",
+          "arguments": {
+            "book": "s0510m1",
+            "segment": "vri-book:s0510m1/387",
+            "english": false,
+            "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+          }
+        },
+        "scope": "separately_indexed_original_edition_notes"
+      }
+    }
+  }
+});
+
+// src/source-notes.mjs
+var import_meta4 = {};
+var here4;
+try {
+  here4 = __dirname;
+} catch {
+  here4 = (0, import_node_path5.dirname)((0, import_node_url5.fileURLToPath)(import_meta4.url));
+}
+var digest2 = (value) => (0, import_node_crypto7.createHash)("sha256").update(value).digest("hex");
+var fail6 = () => {
+  throw Error("The separately indexed original edition note is unavailable.");
+};
+var policy;
+var cachedRegistry;
+var verifiedCorpora = /* @__PURE__ */ new WeakSet();
+var getPolicy = () => policy ||= createSourceNotesPolicy(digest2, SOURCE_NOTES_PROFILE);
+var freeze2 = (value) => {
+  if (value && typeof value === "object") {
+    for (const child of Object.values(value)) freeze2(child);
+    Object.freeze(value);
+  }
+  return value;
+};
+function validateCorpus(record2, corpus, fullBook) {
+  if (!corpus || corpus.source?.commit !== SOURCE_NOTES_PROFILE.source_commit || !Array.isArray(corpus.books) || !Array.isArray(corpus.units)) fail6();
+  const location = record2.physical_location;
+  const bookIndex = corpus.books.findIndex((book2) => book2.file === location.book_file);
+  const book = corpus.books[bookIndex], unit = corpus.units.find((unit2) => unit2.id === location.unit_id);
+  if (!book || !unit || unit.book !== bookIndex || unit.start !== location.unit_block_span[0] || unit.end !== location.unit_block_span[1] || !Array.isArray(book.blocks) || fullBook && digest2(JSON.stringify(book.blocks)) !== location.canonical_book_blocks_sha256) fail6();
+  if (digest2(JSON.stringify(book.blocks[location.previous_block])) !== location.previous_block_sha256 || digest2(JSON.stringify(book.blocks[location.following_block])) !== location.following_block_sha256) fail6();
+  const existing = location.distinct_existing_373_note, oldNote = book.blocks[existing.block]?.[3]?.[existing.note_index_zero_based];
+  if (typeof oldNote !== "string" || digest2(oldNote) !== existing.text_sha256) fail6();
+}
+function validateSourceNoteRegistry(bytes, corpus) {
+  const raw = Buffer.isBuffer(bytes) ? bytes : Buffer.from(bytes);
+  if (raw.length > 16384 || digest2(raw) !== SOURCE_NOTES_PROFILE.registry_sha256) fail6();
+  const registry2 = JSON.parse(raw.toString("utf8"));
+  if (!registry2 || Object.keys(registry2).sort().join(",") !== "extraction_revision,records,schema" || registry2.schema !== "vri-source-note-registry-v1" || registry2.extraction_revision !== SOURCE_NOTES_PROFILE.extraction_revision || !Array.isArray(registry2.records) || registry2.records.length !== 1) fail6();
+  const record2 = registry2.records[0], serialized = getPolicy().stable(record2);
+  if (!record2 || Object.keys(record2).sort().join(",") !== SOURCE_NOTES_PROFILE.record_keys.join(",") || serialized.length > SOURCE_NOTES_PROFILE.max_record_characters || digest2(serialized) !== SOURCE_NOTES_PROFILE.record_sha256 || record2.id !== SOURCE_NOTES_PROFILE.record_id || record2.extraction_revision !== SOURCE_NOTES_PROFILE.extraction_revision || typeof record2.text !== "string" || digest2(record2.text) !== SOURCE_NOTES_PROFILE.text_sha256 || record2.text_sha256 !== SOURCE_NOTES_PROFILE.text_sha256) fail6();
+  validateCorpus(record2, corpus, true);
+  return freeze2(registry2);
+}
+function loadRegistry(corpus) {
+  if (!cachedRegistry) {
+    let bytes;
+    for (const path of [(0, import_node_path5.join)(here4, "data", "source-notes.json"), (0, import_node_path5.join)(here4, "..", "server", "data", "source-notes.json")]) {
+      try {
+        bytes = (0, import_node_fs4.readFileSync)(path);
+        break;
+      } catch (error2) {
+        if (error2.code !== "ENOENT") throw error2;
+      }
+    }
+    if (!bytes) fail6();
+    cachedRegistry = validateSourceNoteRegistry(bytes, corpus);
+    verifiedCorpora.add(corpus);
+  } else {
+    validateCorpus(cachedRegistry.records[0], corpus, !verifiedCorpora.has(corpus));
+    verifiedCorpora.add(corpus);
+  }
+  return cachedRegistry;
+}
+function envelope(anchor, available2, record2) {
+  return {
+    schema: SOURCE_NOTES_PROFILE.schema,
+    state: available2 ? "available" : "unavailable",
+    extraction_revision: SOURCE_NOTES_PROFILE.extraction_revision,
+    record_sha256: SOURCE_NOTES_PROFILE.record_sha256,
+    availability: JSON.parse(JSON.stringify(anchor.availability)),
+    entries: record2 ? [record2] : [],
+    error_code: available2 ? null : "SOURCE_NOTE_UNAVAILABLE"
+  };
+}
+function sourceNotesForPage({ corpus, unitId, bookId: bookId2, source: source4, segments: segments2, offset }) {
+  const key3 = unitId === SOURCE_NOTES_PROFILE.anchors.uid.selector.uid ? "uid" : bookId2 === SOURCE_NOTES_PROFILE.anchors.book.selector.book ? "book" : null;
+  if (!key3) return void 0;
+  const anchor = SOURCE_NOTES_PROFILE.anchors[key3], unavailable = () => envelope(anchor, false, null);
+  try {
+    if (unitId !== void 0 === (bookId2 !== void 0) || !source4 || source4.commit !== SOURCE_NOTES_PROFILE.source_commit || source4.locator_revision !== void 0 && source4.locator_revision !== SOURCE_NOTES_PROFILE.source_commit || !Array.isArray(segments2) || !Number.isSafeInteger(offset) || offset < 0) return unavailable();
+    const registry2 = loadRegistry(corpus), at = anchor.offset - offset;
+    const result = envelope(anchor, true, at >= 0 && at < segments2.length ? registry2.records[0] : null);
+    const page2 = {
+      source: source4,
+      canonical: true,
+      offset,
+      returned: segments2.length,
+      segments: segments2,
+      source_notes: result,
+      ...key3 === "book" ? { selection: "source_book", book_id: bookId2 } : { text_id: unitId }
+    };
+    return getPolicy().inspect(page2).state === "available" ? result : unavailable();
+  } catch {
+    return unavailable();
+  }
+}
+
 // src/source-books.mjs
 var bookId = (book) => book.file.replace(/\.mul\.xml$/, "");
 var collectionOf = (book) => book.pitaka === "vinaya" ? "vinaya" : book.collection;
@@ -58923,7 +59213,7 @@ function readBook({ book, offset = 0, limit = 60, includeVariants = false, varia
   const unit = { id: `vri-book:${id}`, book: index4, start: 0, end: sourceBook.blocks.length, collection: collectionOf(sourceBook) };
   const { segments: segments2, mode } = textSegments(unit, { includeVariants, variants });
   const page2 = segments2.slice(offset, offset + limit);
-  return {
+  const result = {
     selection: "source_book",
     canonical: true,
     book_id: id,
@@ -58945,15 +59235,24 @@ function readBook({ book, offset = 0, limit = 60, includeVariants = false, varia
       "The vri-book segment references identify this source-file reading, not a standard sutta or rule citation. Cite the VRI file and paragraph/page shown, or read an individual text with uid to obtain its standard citation and linked English/commentary."
     ]
   };
+  const sourceNotes = sourceNotesForPage({
+    corpus: root,
+    bookId: id,
+    source: result.source,
+    segments: page2,
+    offset
+  });
+  if (sourceNotes) result.source_notes = sourceNotes;
+  return result;
 }
 
 // src/analyse.mjs
-var import_meta4 = {};
-var here4;
+var import_meta5 = {};
+var here5;
 try {
-  here4 = __dirname;
+  here5 = __dirname;
 } catch {
-  here4 = (0, import_node_path5.dirname)((0, import_node_url5.fileURLToPath)(import_meta4.url));
+  here5 = (0, import_node_path6.dirname)((0, import_node_url6.fileURLToPath)(import_meta5.url));
 }
 var DPD_LICENSE = {
   name: "CC BY-NC-SA 4.0",
@@ -58972,7 +59271,7 @@ var cached3 = null;
 function loadDpd() {
   if (cached3) return cached3;
   const name = "dpd.json.gz";
-  const candidates = [(0, import_node_path5.join)(here4, "data", name), (0, import_node_path5.join)(here4, "..", "server", "data", name), (0, import_node_path5.join)(process.cwd(), "server", "data", name)];
+  const candidates = [(0, import_node_path6.join)(here5, "data", name), (0, import_node_path6.join)(here5, "..", "server", "data", name), (0, import_node_path6.join)(process.cwd(), "server", "data", name)];
   const found = candidates.find((p) => bundledExists(p));
   if (!found) throw new Error("Bundled dictionary data (dpd.json.gz) is missing. Reinstall the extension.");
   const data5 = JSON.parse((0, import_node_zlib4.gunzipSync)(readBundled(found)).toString("utf8"));
@@ -59824,7 +60123,7 @@ function findWindows(corpus, qwords, { keep = KEEP_WINDOWS } = {}) {
   return picked;
 }
 function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.length } = {}) {
-  const join10 = corpus.compounds ? "" : " ";
+  const join11 = corpus.compounds ? "" : " ";
   const Q = trigrams(corpus.compounds ? query.replace(/ /g, "") : query);
   const qlen = qwords.length;
   const variantSets = qwords.map((w) => new Set(corpus.variants(w).map((v) => v.id)));
@@ -59842,7 +60141,7 @@ function refine2(corpus, query, qwords, cand, { min = 0, max = corpus.tokens.len
       const b = a + len;
       if (b > max) continue;
       const ids = corpus.tokens.subarray(a, b);
-      const dice = similarity(Q, Array.from(ids, (id) => corpus.vocab[id]).join(join10));
+      const dice = similarity(Q, Array.from(ids, (id) => corpus.vocab[id]).join(join11));
       if (dice <= best.sim) continue;
       const present = new Set(ids);
       const joined = corpus.compounds ? Array.from(ids, (id) => corpus.vocab[id]).join("") : "";
@@ -60596,7 +60895,7 @@ __export(find_citations_exports, {
   register: () => register4,
   scan: () => scan
 });
-var import_node_crypto7 = require("node:crypto");
+var import_node_crypto8 = require("node:crypto");
 var BOUND_BEFORE = "(?<![\\p{L}\\p{N}_@])";
 var BOUND_AFTER = "(?![\\p{L}\\p{N}_@]|,\\d)";
 var NUM = "\\d+(?:[.:]\\d+)*(?:(?:-|\\s?[\u2013\u2014]\\s?)\\d+(?:[.:]\\d+)*)?";
@@ -60781,16 +61080,16 @@ var MAX_TOOL_RESULT_BYTES = 1024 * 1024;
 var CURSOR_VERSION = "v1";
 var RECORD_BUDGET = MAX_REPORT_BYTES - 8192;
 var indexScopes = /* @__PURE__ */ new WeakMap();
-var hash = (value) => (0, import_node_crypto7.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
+var hash = (value) => (0, import_node_crypto8.createHash)("sha256").update(JSON.stringify(value)).digest("hex");
 function reportScope(text2, canon) {
   const loaded = canon.load();
   const data5 = loaded.canon;
   let index4 = indexScopes.get(loaded);
   if (!index4) {
-    const digest2 = (0, import_node_crypto7.createHash)("sha256");
-    digest2.update(JSON.stringify([data5.source, data5.collections, data5.units, [...loaded.urlIndex || []]]));
-    for (const book of data5.books) digest2.update(JSON.stringify(book));
-    index4 = digest2.digest("hex");
+    const digest3 = (0, import_node_crypto8.createHash)("sha256");
+    digest3.update(JSON.stringify([data5.source, data5.collections, data5.units, [...loaded.urlIndex || []]]));
+    for (const book of data5.books) digest3.update(JSON.stringify(book));
+    index4 = digest3.digest("hex");
     indexScopes.set(loaded, index4);
   }
   return hash([CURSOR_VERSION, index4, text2]);
@@ -61944,21 +62243,21 @@ __export(topics_exports, {
   topic: () => topic,
   topicsIndex: () => topicsIndex
 });
-var import_node_fs4 = require("node:fs");
-var import_node_path6 = require("node:path");
-var import_node_url6 = require("node:url");
-var import_meta5 = {};
-var here5;
+var import_node_fs5 = require("node:fs");
+var import_node_path7 = require("node:path");
+var import_node_url7 = require("node:url");
+var import_meta6 = {};
+var here6;
 try {
-  here5 = __dirname;
+  here6 = __dirname;
 } catch {
-  here5 = (0, import_node_path6.dirname)((0, import_node_url6.fileURLToPath)(import_meta5.url));
+  here6 = (0, import_node_path7.dirname)((0, import_node_url7.fileURLToPath)(import_meta6.url));
 }
 function readData(name) {
-  const candidates = [(0, import_node_path6.join)(here5, "data", name), (0, import_node_path6.join)(here5, "..", "server", "data", name), (0, import_node_path6.join)(process.cwd(), "server", "data", name)];
-  const found = candidates.find((p) => (0, import_node_fs4.existsSync)(p));
+  const candidates = [(0, import_node_path7.join)(here6, "data", name), (0, import_node_path7.join)(here6, "..", "server", "data", name), (0, import_node_path7.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => (0, import_node_fs5.existsSync)(p));
   if (!found) throw new Error(`Bundled data (${name}) is missing. Reinstall the extension or rebuild.`);
-  return JSON.parse((0, import_node_fs4.readFileSync)(found, "utf8"));
+  return JSON.parse((0, import_node_fs5.readFileSync)(found, "utf8"));
 }
 var topicsData = null;
 var listsData = null;
@@ -62135,24 +62434,24 @@ __export(dppn_exports, {
   nameStems: () => nameStems,
   register: () => register8
 });
-var import_node_fs5 = require("node:fs");
-var import_node_path7 = require("node:path");
-var import_node_url7 = require("node:url");
-var import_meta6 = {};
-var here6;
+var import_node_fs6 = require("node:fs");
+var import_node_path8 = require("node:path");
+var import_node_url8 = require("node:url");
+var import_meta7 = {};
+var here7;
 try {
-  here6 = __dirname;
+  here7 = __dirname;
 } catch {
-  here6 = (0, import_node_path7.dirname)((0, import_node_url7.fileURLToPath)(import_meta6.url));
+  here7 = (0, import_node_path8.dirname)((0, import_node_url8.fileURLToPath)(import_meta7.url));
 }
 var cached4 = null;
 function loadDppn() {
   if (cached4) return cached4;
   const name = "dppn.json";
-  const candidates = [(0, import_node_path7.join)(here6, "data", name), (0, import_node_path7.join)(here6, "..", "server", "data", name), (0, import_node_path7.join)(process.cwd(), "server", "data", name)];
-  const found = candidates.find((p) => (0, import_node_fs5.existsSync)(p));
+  const candidates = [(0, import_node_path8.join)(here7, "data", name), (0, import_node_path8.join)(here7, "..", "server", "data", name), (0, import_node_path8.join)(process.cwd(), "server", "data", name)];
+  const found = candidates.find((p) => (0, import_node_fs6.existsSync)(p));
   if (!found) throw new Error("Bundled proper-names data (dppn.json) is missing. Reinstall the extension.");
-  cached4 = JSON.parse((0, import_node_fs5.readFileSync)(found, "utf8"));
+  cached4 = JSON.parse((0, import_node_fs6.readFileSync)(found, "utf8"));
   return cached4;
 }
 var key2 = (value) => fold3(value).replace(/[^a-z0-9]+/g, "");
@@ -64230,7 +64529,7 @@ __export(talks_exports, {
   searchUrl: () => searchUrl,
   sharedPhrase: () => sharedPhrase
 });
-var import_node_crypto8 = require("node:crypto");
+var import_node_crypto9 = require("node:crypto");
 var SITE = "https://www.dhammatalks.org";
 var CATEGORIES = ["evening", "morning"];
 var MIN_INTERVAL_MS = 1e3;
@@ -64386,7 +64685,7 @@ function parseCursor(cursor, categories) {
   return state;
 }
 var formatCursor = (state) => state.map((s) => `${s.category}:${s.page}:${s.offset}`).join(",");
-var cursorScope = (query, passage, category, terms4) => (0, import_node_crypto8.createHash)("sha256").update(JSON.stringify([query, passage?.id || null, category, terms4, passage?.translation_url || null])).digest("hex");
+var cursorScope = (query, passage, category, terms4) => (0, import_node_crypto9.createHash)("sha256").update(JSON.stringify([query, passage?.id || null, category, terms4, passage?.translation_url || null])).digest("hex");
 function scopedState(cursor, categories, scope) {
   const match2 = typeof cursor === "string" && cursor.match(/^v1:([a-f0-9]{64}):(.+)$/);
   if (!match2) throw new Error("Invalid or legacy talk cursor. Restart without cursor and pass the returned next_cursor unchanged.");
@@ -64553,16 +64852,16 @@ __export(commentary_exports, {
   register: () => register15,
   segmentOwners: () => segmentOwners
 });
-var import_node_crypto9 = require("node:crypto");
+var import_node_crypto10 = require("node:crypto");
 var import_node_zlib5 = require("node:zlib");
-var import_node_path8 = require("node:path");
-var import_node_url8 = require("node:url");
-var import_meta7 = {};
-var here7;
+var import_node_path9 = require("node:path");
+var import_node_url9 = require("node:url");
+var import_meta8 = {};
+var here8;
 try {
-  here7 = __dirname;
+  here8 = __dirname;
 } catch {
-  here7 = (0, import_node_path8.dirname)((0, import_node_url8.fileURLToPath)(import_meta7.url));
+  here8 = (0, import_node_path9.dirname)((0, import_node_url9.fileURLToPath)(import_meta8.url));
 }
 var FILE2 = "commentary.json.gz";
 var ROMAN5 = ["", "i", "ii", "iii", "iv", "v", "vi", "vii"];
@@ -64588,7 +64887,7 @@ function paraRange2(n) {
 }
 var data3 = null;
 function dataPath3() {
-  const candidates = [(0, import_node_path8.join)(here7, "data", FILE2), (0, import_node_path8.join)(here7, "..", "server", "data", FILE2), (0, import_node_path8.join)(process.cwd(), "server", "data", FILE2)];
+  const candidates = [(0, import_node_path9.join)(here8, "data", FILE2), (0, import_node_path9.join)(here8, "..", "server", "data", FILE2), (0, import_node_path9.join)(process.cwd(), "server", "data", FILE2)];
   return candidates.find((p) => bundledExists(p)) || null;
 }
 function load3() {
@@ -64706,7 +65005,7 @@ function sourceInfo2(d, unit) {
   const { name, repository, commit, files, attribution: attribution2, terms: terms4 } = d.source;
   const namespace = unit?.id === "sn12.21" ? "sn21-commentary" : unit?.id === "tha-ap19" ? "tha19-c" : null;
   const mapping = namespace && d.units[unit.id]?.map((i) => d.passages[i]);
-  const revision = mapping && (0, import_node_crypto9.createHash)("sha256").update(JSON.stringify(mapping)).digest("hex").slice(0, 24);
+  const revision = mapping && (0, import_node_crypto10.createHash)("sha256").update(JSON.stringify(mapping)).digest("hex").slice(0, 24);
   return {
     name,
     repository,
@@ -64860,16 +65159,16 @@ __export(parallels_exports, {
   load: () => load4,
   register: () => register16
 });
-var import_node_fs6 = require("node:fs");
+var import_node_fs7 = require("node:fs");
 var import_node_zlib6 = require("node:zlib");
-var import_node_path9 = require("node:path");
-var import_node_url9 = require("node:url");
-var import_meta8 = {};
-var here8;
+var import_node_path10 = require("node:path");
+var import_node_url10 = require("node:url");
+var import_meta9 = {};
+var here9;
 try {
-  here8 = __dirname;
+  here9 = __dirname;
 } catch {
-  here8 = (0, import_node_path9.dirname)((0, import_node_url9.fileURLToPath)(import_meta8.url));
+  here9 = (0, import_node_path10.dirname)((0, import_node_url10.fileURLToPath)(import_meta9.url));
 }
 var FILE3 = "parallels.json.gz";
 var SOURCES = ["commentary-citation", "shared-passage"];
@@ -64883,14 +65182,14 @@ var MATCH = {
 var data4 = null;
 var index2 = null;
 function dataPath4() {
-  const candidates = [(0, import_node_path9.join)(here8, "data", FILE3), (0, import_node_path9.join)(here8, "..", "server", "data", FILE3), (0, import_node_path9.join)(process.cwd(), "server", "data", FILE3)];
-  return candidates.find((p) => (0, import_node_fs6.existsSync)(p)) || null;
+  const candidates = [(0, import_node_path10.join)(here9, "data", FILE3), (0, import_node_path10.join)(here9, "..", "server", "data", FILE3), (0, import_node_path10.join)(process.cwd(), "server", "data", FILE3)];
+  return candidates.find((p) => (0, import_node_fs7.existsSync)(p)) || null;
 }
 function load4() {
   if (data4) return data4;
   const path = dataPath4();
   if (!path) return null;
-  data4 = JSON.parse((0, import_node_zlib6.gunzipSync)((0, import_node_fs6.readFileSync)(path)).toString("utf8"));
+  data4 = JSON.parse((0, import_node_zlib6.gunzipSync)((0, import_node_fs7.readFileSync)(path)).toString("utf8"));
   index2 = /* @__PURE__ */ new Map();
   const add = (id, entry3) => (index2.get(id) || index2.set(id, []).get(id)).push(entry3);
   data4.citations.forEach((l, i) => {
@@ -65849,6 +66148,14 @@ function createServer({ executeTool } = {}) {
       notes,
       english_available: available(unit)
     };
+    const sourceNotes = sourceNotesForPage({
+      corpus: load().canon,
+      unitId: unit.id,
+      source: result.source,
+      segments: page2,
+      offset
+    });
+    if (sourceNotes) result.source_notes = sourceNotes;
     if (variantMode === "structured") Object.assign(result, structuredInfo(page2));
     if (translation3) {
       try {

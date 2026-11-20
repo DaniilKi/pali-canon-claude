@@ -1,0 +1,261 @@
+{
+  "status": "APPROVED_LOCAL_UNPUBLISHED_IMPLEMENTATION_ONLY",
+  "reviewed_utc": "2026-11-20T07:56:09.577569+00:00",
+  "baseline": "ff798f681147e12160167fbeb9ef1927bb54c45c",
+  "parent_reported_stage_tree": "93ec39895ae9da3fa2ce8e7501d93b7965f34f49",
+  "stage_tree_qualification": "Parent-reported Git tree; reviewer did not call Git. Independently hashed all53 listed working-tree files and matched receipt exactly.",
+  "parent_receipt": {
+    "path": "/tmp/pali-sariputta-release/LOCAL_VALIDATION_RECEIPT.json",
+    "sha256": "25ec00e70678a72d1a5371e4c5d2646715183fc6991b3729ac5074bf5f4fa753"
+  },
+  "reviewed_files": {
+    ".github/workflows/check.yml": "138d776923eabc71e91042461cd7f21d394a543a09886f6d46eb45486c07710c",
+    "AGENTS.md": "19febc17ab7517756c7db60a7d4b6fb2fa49f5e80140f25e64b7f117b6d524da",
+    "README.md": "2c2826687daaec545ca4b677a3da2ef73fcfb759fa24b094bfac684bd8136232",
+    "THIRD_PARTY.md": "5229c6ea3b85be3ca147421759a775f13f7e5bd11c035ca1c684b5b5c493cd93",
+    "docs/data/sariputta-source-note.md": "bf0bd037b8d81be18807da03919f81e997a4f6812cb831acddbb7009efaca747",
+    "docs/decisions.md": "573d7d5c8fa2f977114c5e523b4e0c801b3b2e5c34649333984439418dcafcc1",
+    "docs/evidence/source-notes/SARIPUTTA_SOURCE_SCHEMA_APPROVAL.json": "61121e60049a1a03976d72a6967ebef28dea08bbf9e79349d7a3aa025ec93930",
+    "docs/how-it-works.md": "d9bb0a093730908a455608ad39a8c31fe1b7c7c786152603b49dd867e833815b",
+    "docs/sources.md": "9f717cf56f51faa3e9eeeaa178e7e0688724b1e6235f4574971be1df58abbd7f",
+    "scripts/build.mjs": "709bdd937a4f7621e3d5870dcab820ad25211ec3f87a63d44206c49c529d491c",
+    "scripts/canon/build_source_notes.py": "3868732801554311adc840b303f27fcd688dffd98c9a44f1fe930f23918d8394",
+    "scripts/canon/source_note_manifest.json": "acef3c57a9805e053140f6ddb4ca1ad3e46f28d4acab1beeea66e9edf66bb1b4",
+    "scripts/web-reader-source-notes-check.py": "f852fb7c6c626590d982cc7ba8f57827dc111f44b9805307a3bc5581064bebf0",
+    "server/data/source-notes.json": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e",
+    "server/http-worker.cjs": "cd0f4261de71b047e86d49bf45037e91cebe1497779f5335604dd6d4f5c4f6f2",
+    "server/http.cjs": "4156c6f0ef9d1d6408871fdfee6c74dd7d44970128608dd9905564533c596d5c",
+    "server/index.cjs": "11943c5cbe48639809e63d69423cbd344bcff8f9d08b970cf5eb510e69e1eb88",
+    "server/web/reader.css": "b124a83028222fa258d91c6fb53636c438e523a6934da995252568b0b69e7f1d",
+    "server/web/reader.js": "39ecd27b10ac08ce43eb67186453d4dfaf87d7600af39e38573ad42972351d4c",
+    "src/chatgpt-widget.mjs": "84b81194f61f068c19239537fe5584fc5dd615067205753c10a5eb28d4ff8623",
+    "src/server.mjs": "7a04c8715136bcec8fdec9c1370a4a86d47cfd3f623ec7160622bd1d7e5324d4",
+    "src/source-books.mjs": "fe1fc78bdc067fb9af250505f4001bbc343a9569375f2f7d57526c540942210b",
+    "src/source-notes-profiles.mjs": "f83ac1be7ad1586a46569632aac37462f4e7da8a18b47050a29008cff70090e5",
+    "src/source-notes.mjs": "0d7cf1e2cca1fe9702dcdad4d5a26aff1759b9f4a4ebe9a8d553b29650ef7d63",
+    "tests/apadana-disclosures.test.mjs": "8e8b388b5d9a6e54e50b76cf3a60a307f753fb0379a7beef1adc3be42e8286b0",
+    "tests/apadana-fourth-client.test.mjs": "af0ee266f42f0dc3cea1045517f181844433321004a46496d07aea438608b89e",
+    "tests/apadana-fourth.test.mjs": "64e113d718eca8ecc2f09a56287d3bb8034b5376019fe08ddc87b7f6659b229b",
+    "tests/apadana-next.test.mjs": "5619074f12eab428186742285679ce454ec32552d30c7d3b212136af8f0132f4",
+    "tests/apadana-thera.test.mjs": "d8522c56a4886ca52b0e8281de5be9d69a1ce709c9630708239cfda8167ad0e1",
+    "tests/apadana-thera221-230.test.mjs": "3b9a92353216728d6a2d1c59af65453ac0048f350a01e7a0ca0d717e91544db6",
+    "tests/apadana-third.test.mjs": "f8c01ffe678da2e91c27c3facc59cae7ebc788c50632d56fb1f2782b2e04aedd",
+    "tests/fixtures/source-notes-api-baseline.json": "687353aeba20fac062db220ef7d7c65b97a00e807bfcdab870c727ef07323a2a",
+    "tests/fixtures/source-notes-baseline.json": "462ca6940ed9d41269987c2320a30643c751b463264bbb73980aa8bb44f6308a",
+    "tests/held234-client.test.mjs": "919bd249a1b63938eaf1026e430d0ae939e8f64be86f76d32c044375363630a8",
+    "tests/helpers/source-note-baseline.mjs": "ec640774e74810c4904fc3b44a43b9b4b9ec2f8711373fec03c1e23f80b33422",
+    "tests/helpers/thera-remaining-client.mjs": "f0a630eec6ab3adbd5fe0f91d180fbeb319227eec227678e344c40b55e66cd1f",
+    "tests/helpers/thera-remaining-source.mjs": "f473d34d8830f1b509b0440e55bf56fc038bde0c7d7f6574c103e7860f9bfbbb",
+    "tests/source-notes-baseline-projection.test.mjs": "7ef0b08b9029e7719758fd440c57fba0f49343f1050f24be901359b7e169002c",
+    "tests/source-notes-ci.test.mjs": "5f0d1e6f235b752b629d1d2f07ba1decb42b190b38cd7ac7c748feb75cf0ba98",
+    "tests/source-notes-client.test.mjs": "8f094250a2ddaa5c6ae7f3f1eff21b3cd7f991f5c884b53bf7191173ccf6f3c9",
+    "tests/source-notes-compatibility.test.mjs": "61c55c0ddcd08fbcc5abeebbf064474535de188b1242d4fb99844cfa4bd9cc2f",
+    "tests/source-notes.test.mjs": "edd987a7ea1b269a19bd1e0450183bfaa7f78548833735be7b5add2e1b96a53a",
+    "tests/thera-commentary-locators.test.mjs": "277ca3207f7e5eaa03995e890315be2fb609e63feb92f20f48251d271151af5e",
+    "tests/thera141-180-client.test.mjs": "52a68bcd11447409bb025f1f5883df48bbad033c6f061d2b6b8516429a64552f",
+    "tests/thera181-220-client.test.mjs": "f6bd41e1bc6c0e650471cb0ee28b99354ce2de77ad1bed7a32b346f2c08a4f8c",
+    "tests/thera221-230-client.test.mjs": "446bd0398432f21baae6c5887ed88850e54b818c9c916af9ec4c60db995b37ad",
+    "tests/thera241-250-client.test.mjs": "3a7f868ffb0f4b0639a95a23688ae2bd2e220894ca8fe2046e11ef8420a4bec8",
+    "tests/web-reader-ci-artifacts.test.mjs": "273591a70027e503c6cdc3aa1db36a4e6496c2b17570a00b71c19f2efea7be18",
+    "tests/widget-hash-serialization.test.mjs": "58e96389be08a636512b5bbec150e233442e09fc54f359b1e5fc6de96c497446",
+    "tests/widget-hosted-selections.test.mjs": "4edd896355d7849d0f8adcf6ee2a8c3fcf0ab40ec112a870821c3a11cd92926e",
+    "web/reader.css": "b124a83028222fa258d91c6fb53636c438e523a6934da995252568b0b69e7f1d",
+    "web/reader.js": "7158816561af99d414a82716776e7a2d36373c682aa36ddcf333a9e5424ad47d",
+    "web/source-notes-policy.mjs": "5897a88723b8d5ae3515db018e731d0c7bdb8bf5271d05645afb427b86d9ece5"
+  },
+  "local_implementation_approval": true,
+  "source_schema_approval": {
+    "path": "/tmp/pali-sariputta-independent/INDEPENDENT_SOURCE_SCHEMA_APPROVAL.json",
+    "sha256": "61121e60049a1a03976d72a6967ebef28dea08bbf9e79349d7a3aa025ec93930"
+  },
+  "prior_static_review": {
+    "path": "/tmp/pali-sariputta-independent/STATIC_IMPLEMENTATION_REVIEW.json",
+    "sha256": "47dad2f47e1da1d49344b33d4d0ddd19650541d5c0c96f00c4a09ca80ca219e1"
+  },
+  "independent_corpus_proof_once": {
+    "path": "/tmp/pali-sariputta-independent/FROZEN_CORPUS_PRESERVATION_RECHECK.json",
+    "sha256": "7c9dbd27997cc4f2167fb49b1f8c7b2504e6b41dbed0bbc5d0285c43bf25310a"
+  },
+  "test_projection_review": {
+    "path": "/tmp/pali-sariputta-independent/TEST_BASELINE_PROJECTION_REVIEW.json",
+    "sha256": "aafd6e5e645fbe73405301670561bad09055581e1d39303e75f1bda080617f04"
+  },
+  "package_review": {
+    "path": "/tmp/pali-sariputta-independent/INDEPENDENT_FINAL_PACKAGE_REVIEW.json",
+    "sha256": "0a8d318c6f079c1b3ad6925109eb3929f4873aa35e98df89d1c83a2e41635ebc"
+  },
+  "browser_review": {
+    "path": "/tmp/pali-sariputta-independent/INDEPENDENT_FINAL_BROWSER_REVIEW.json",
+    "sha256": "fa7b149edf83023f5655d5265051672e2bd47fff9ecd1c7a02ed2a335de247f9"
+  },
+  "gate_evidence": {
+    "FULL_CHECK.log": {
+      "path": "/tmp/pali-sariputta-release/FULL_CHECK.log",
+      "sha256": "3d7b5784a24d1b070aaf953f5ae31652c1b39c51258764b78d679d5a7cf27e60"
+    },
+    "FULL_CHECK_RESULT.json": {
+      "path": "/tmp/pali-sariputta-release/FULL_CHECK_RESULT.json",
+      "sha256": "ccfb9149a2b08d73d18e2bd672e036b4de0efb484fa75205d395558812314688"
+    },
+    "FULL_CHECK_INITIAL_FAILED.log": {
+      "path": "/tmp/pali-sariputta-release/FULL_CHECK_INITIAL_FAILED.log",
+      "sha256": "72c13fb2cc29abcef3cc9c7660f40f7b921c163211ebe42be97887ac37e129ba"
+    },
+    "FULL_CHECK_INITIAL_FAILED_RESULT.json": {
+      "path": "/tmp/pali-sariputta-release/FULL_CHECK_INITIAL_FAILED_RESULT.json",
+      "sha256": "8e8cd7dccdef34e77502c8bf67a470e3ead065eebbc04e803c78218a6ab324f5"
+    },
+    "API_AND_CORPUS_COMPATIBILITY.log": {
+      "path": "/tmp/pali-sariputta-release/API_AND_CORPUS_COMPATIBILITY.log",
+      "sha256": "9bd307ad4cc7f4033c70fec2eb456477429ff7f5b853bdb9ae5b30eb0db8c447"
+    },
+    "SERIALIZATION.log": {
+      "path": "/tmp/pali-sariputta-release/SERIALIZATION.log",
+      "sha256": "4acf4a8c71a33e30d5685d9de759789ea2b4e322e3b5147ec74d2910ee5eeb8b"
+    },
+    "STRICT_INSTALLED_WIDGET.json": {
+      "path": "/tmp/pali-sariputta-release/STRICT_INSTALLED_WIDGET.json",
+      "sha256": "8579a4d7f1f73f0d43ab50d1f1dc4d1c5907dcea93aa7ae2afb342daf7e87b01"
+    },
+    "STRICT_INSTALLED_WIDGET.log": {
+      "path": "/tmp/pali-sariputta-release/STRICT_INSTALLED_WIDGET.log",
+      "sha256": "72036bf7b95eb321931a61a92c39e96ad1867e02bbe2495cfa3711c64ccdcdc0"
+    },
+    "INSTALLED_SOURCE_NOTE_PROOF.json": {
+      "path": "/tmp/pali-sariputta-release/INSTALLED_SOURCE_NOTE_PROOF.json",
+      "sha256": "e3c740097700f17e4783c6dec5bed48a3c30ce987ec19c36abca57f97478ab98"
+    },
+    "INSTALLED_SOURCE_NOTE_PROOF.log": {
+      "path": "/tmp/pali-sariputta-release/INSTALLED_SOURCE_NOTE_PROOF.log",
+      "sha256": "2302cde3e3f128bac438107c7b53515039b7576458331701cea5591fed6ada25"
+    },
+    "PACKAGE_EQUIVALENCE.json": {
+      "path": "/tmp/pali-sariputta-release/PACKAGE_EQUIVALENCE.json",
+      "sha256": "11dc5638e90a66b62346e5386668a5e1df64b8e30710587a446cbe9c932ad05f"
+    },
+    "NPM_PACK.json": {
+      "path": "/tmp/pali-sariputta-release/NPM_PACK.json",
+      "sha256": "737167ee551f6f142f401772c009602b2a4718e02e87d569b3c59f4f8b020fdb"
+    },
+    "NPM_INSTALL.log": {
+      "path": "/tmp/pali-sariputta-release/NPM_INSTALL.log",
+      "sha256": "a941066d38162d18c88ea4b096d8cf11d19b0d46b973f6d916e2f9b8794e1f36"
+    },
+    "SMOKE.log": {
+      "path": "/tmp/pali-sariputta-release/SMOKE.log",
+      "sha256": "8262dd13f13f0c45ba6d7152bb6f931f5a2aedcc728d7498a2547e961de2aa97"
+    },
+    "EVALS.log": {
+      "path": "/tmp/pali-sariputta-release/EVALS.log",
+      "sha256": "c12336d756c1baa68acfba6a887cd0d9d34ede0fbdbe9a99c12c5b12d586d87f"
+    },
+    "WORKFLOW_SYNTAX.json": {
+      "path": "/tmp/pali-sariputta-release/WORKFLOW_SYNTAX.json",
+      "sha256": "70e5859c59fdf316f0964968ac531fbcf7cfde5cb5431e0934fee1b8eb8655f1"
+    },
+    "VRI_FIXTURE_RECEIPT.json": {
+      "path": "/tmp/pali-sariputta-release/VRI_FIXTURE_RECEIPT.json",
+      "sha256": "4c7a7605dfc3159677463f1269e201b8da2e01bde5f617112254b1736ffa62f5"
+    },
+    "INDEPENDENT_BUILDER_REPLAY.json": {
+      "path": "/tmp/pali-sariputta-release/INDEPENDENT_BUILDER_REPLAY.json",
+      "sha256": "49d6dd14121990bfea1fefb07eecd161b4515a6d6511f4c9b98cf6835ff22741"
+    }
+  },
+  "scope": {
+    "original_VRI_edition_note_records_added": 1,
+    "new_canonical_words": 0,
+    "new_whole_English_choices": 0,
+    "preserved_units": 8544,
+    "preserved_books": 61,
+    "preserved_spans": 420,
+    "preserved_translation_choices": 285,
+    "old_full_API_payload_cases": 342,
+    "canon_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+    "notes": "One original Roman Pali edition remark outside root scripture/segment arrays, with exact source identity, raw/neighbor pins and location-only navigation. No root note reassignment, spelling harmonization, body insertion or semantic/Thai-witness inference. Existing source holds, English live-only rights and local-only private data remain unchanged."
+  },
+  "rights": "Established independently verified VRI noncommercial-with-attribution baseline grant applies to this original apparatus. Required provenance/extraction disclosure retained; no freshly fetched or renewed rights notice, no broader translation/media permission inferred.",
+  "gates": {
+    "full": {
+      "total": 1742,
+      "pass": 1571,
+      "optional_source_skips": 171,
+      "fail": 0,
+      "cancelled": 0,
+      "seconds": 333.791
+    },
+    "source_client": 17,
+    "corpus_API_compatibility": 3,
+    "serialization": 3,
+    "historical_projection_unique_passes": 26,
+    "adversarial_projection_cases": 5,
+    "actual_browser_cases": 42,
+    "axe_scans": 400,
+    "axe_violations": 0,
+    "strict_installed_complete_v33_resources": 2,
+    "strict_alignment": 8544,
+    "strict_network_attempts": 0,
+    "offline_package_members": 39,
+    "runtime_files": 34,
+    "installed_old_API_cases": 270,
+    "missing_sidecar_cases": 2,
+    "smoke_tools_checks": [
+      34,
+      64
+    ],
+    "eval_pass_total_live_skips": [
+      195,
+      201,
+      6
+    ],
+    "workflow_shell_syntax": 238,
+    "configured_jobs_only": 67
+  },
+  "honest_diagnostic_history": {
+    "initial_full_failures": 4,
+    "resolved": [
+      "three historical byte-snapshot assertions now retain exact originalhash via finite additive reversal",
+      "one partial VRI fixture lacked a different original XML; supplied four pinned original files without disabling a test"
+    ],
+    "prototype_preview_race_fixed": true,
+    "ci_static_author_syntax_error_corrected": true,
+    "initial_pack_default_cache_error": "ENOENT readonly default cache; exact same package succeeded with writable task-specific --cache",
+    "source_test_fixture_typo": "15sourcecases rerun only after fixing local path;26unique passing outcomes; no application code change"
+  },
+  "diagnostic_qualification": "Initial full run had four failures: three exact historical byte assertions resolved by finite literal additive reversals retaining old hashes and mutation refusals; one incomplete original XML fixture fixed with four byte-pinned originals. Initial targeted source fixture path typo caused15failures; only those15 retried,26unique final outcomes. Initial pack cache ENOENT resolved with task-specific writablecache. No test disabled or production source wording changed by these recoveries.",
+  "remote_status": {
+    "prior_exact_macOS": "CANCELLED_VALIDATION_NOT_PASSED",
+    "prior_head": "a9755d267c309ad930df0ef154e6c8a03f1f371e",
+    "prior_job": 136004108676,
+    "other_jobs_passed": 52,
+    "assertion_failure_or_hang_cause_proven": false,
+    "new_exact_commit_remote_CI": "UNRUN"
+  },
+  "release_approval": false,
+  "remote_ci_approval": false,
+  "push_approval": false,
+  "main_change_approval": false,
+  "deployment_approval": false,
+  "publication_approval": false,
+  "outreach_approval": false,
+  "permitted_metadata_completion": {
+    "copy_this_approval_as_metadata": true,
+    "truthful_final_status_only_paths": [
+      "AGENTS.md",
+      "docs/data/sariputta-source-note.md",
+      "docs/decisions.md"
+    ],
+    "production_package_runtime_and_other_reviewed_bytes_must_remain_fixed": true,
+    "no_app_gate_rerun_needed_for_only_these_prose_and_approval_metadata_additions": true,
+    "parent_final_commit_receipt_must_bind_final_doc_approval_hashes_and_exact_local_commit": true,
+    "does_not_authorize_remote_actions": true
+  },
+  "remaining_limits": [
+    "Exact new-commit remote CI unrun; prior exact macOS cancelled and supported recovery pending.",
+    "Physical-device, human assistive-technology, signed-in-host, live-provider and specialist acceptance unperformed.",
+    "Publisher260 production activation remains held; separate proposal-only commit is not activation.",
+    "No claim of line-complete edition equivalence, complete original apparatus coverage, new English scripture coverage or full-project completion."
+  ],
+  "reviewer_operations": "Read-only source/code/receipt/log/tar/hash review and external metadata writes only; no Git calls, builds, project tests, browser execution, CI, network, private-data mutation or repeated corpus/app gates.",
+  "concrete_local_blockers": []
+}

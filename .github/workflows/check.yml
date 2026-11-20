@@ -64,6 +64,7 @@ jobs:
             --mount "type=bind,src=$GITHUB_WORKSPACE/node_modules,dst=/app/node_modules,readonly" \
             --mount "type=bind,src=$GITHUB_WORKSPACE/src,dst=/app/src,readonly" \
             --mount "type=bind,src=$GITHUB_WORKSPACE/web/content-sha256.mjs,dst=/app/web/content-sha256.mjs,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/web/source-notes-policy.mjs,dst=/app/web/source-notes-policy.mjs,readonly" \
             --mount "type=bind,src=$GITHUB_WORKSPACE/tests,dst=/app/tests,readonly" \
             --mount "type=bind,src=$RUNNER_TEMP/memory-report,dst=/report" \
             node:20-slim node /app/scripts/audit-hosted-load.mjs \
@@ -79,9 +80,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh, milinda, draftsafety, annumbered, milindapartial, anten, apadana, apadananext, apadanathird, apadanafourth, apadanathera, apadanatheranext, apadanatheraexpansion, apadanatherascaled61, apadanatherascaled81, apadanatheraeditorial, apadanatherapair101, apadanatherapair121, apadanathera141, apadanathera161, apadanathera181, apadanathera201, apadanathera221, apadanathera231, apadanathera234, apadanathera241, apadanathera251, apadanaedition, thagsixteen, textspacing]
+        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh, milinda, draftsafety, annumbered, milindapartial, anten, apadana, apadananext, apadanathird, apadanafourth, apadanathera, apadanatheranext, apadanatheraexpansion, apadanatherascaled61, apadanatherascaled81, apadanatheraeditorial, apadanatherapair101, apadanatherapair121, apadanathera141, apadanathera161, apadanathera181, apadanathera201, apadanathera221, apadanathera231, apadanathera234, apadanathera241, apadanathera251, apadanaedition, thagsixteen, textspacing, vrieditionnote]
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ (matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201') && 30 || (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety' || matrix.group == 'milinda' || matrix.group == 'annumbered' || matrix.group == 'milindapartial' || matrix.group == 'anten' || matrix.group == 'apadana' || matrix.group == 'apadananext' || matrix.group == 'apadanathird' || matrix.group == 'apadanafourth' || matrix.group == 'apadanathera' || matrix.group == 'apadanatheranext' || matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121' || matrix.group == 'apadanathera141' || matrix.group == 'apadanathera161' || matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201' || matrix.group == 'apadanaedition' || matrix.group == 'thagsixteen' || matrix.group == 'textspacing' || matrix.group == 'apadanathera241' || matrix.group == 'apadanathera221' || matrix.group == 'apadanathera231' || matrix.group == 'apadanathera251' || matrix.group == 'apadanathera234') && 20 || 10 }}
+    timeout-minutes: ${{ (matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201') && 30 || (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety' || matrix.group == 'milinda' || matrix.group == 'annumbered' || matrix.group == 'milindapartial' || matrix.group == 'anten' || matrix.group == 'apadana' || matrix.group == 'apadananext' || matrix.group == 'apadanathird' || matrix.group == 'apadanafourth' || matrix.group == 'apadanathera' || matrix.group == 'apadanatheranext' || matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121' || matrix.group == 'apadanathera141' || matrix.group == 'apadanathera161' || matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201' || matrix.group == 'apadanaedition' || matrix.group == 'thagsixteen' || matrix.group == 'textspacing' || matrix.group == 'apadanathera241' || matrix.group == 'apadanathera221' || matrix.group == 'apadanathera231' || matrix.group == 'apadanathera251' || matrix.group == 'apadanathera234' || matrix.group == 'vrieditionnote') && 20 || 10 }}
     steps:
       - uses: actions/checkout@v4
       - name: Fetch exact reviewed Apadāna baseline for independent preservation checks
@@ -124,6 +125,11 @@ jobs:
         run: |
           git fetch --no-tags --depth=1 origin a9755d267c309ad930df0ef154e6c8a03f1f371e
           git cat-file -e a9755d267c309ad930df0ef154e6c8a03f1f371e^{commit}
+      - name: Fetch exact source-note baseline for independent compatibility checks
+        if: matrix.group == 'vrieditionnote'
+        run: |
+          git fetch --no-tags --depth=1 origin ff798f681147e12160167fbeb9ef1927bb54c45c
+          git cat-file -e ff798f681147e12160167fbeb9ef1927bb54c45c^{commit}
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -907,7 +913,7 @@ jobs:
           tar -xzf "$RUNNER_TEMP/apadana-thera-next-package/"*.tgz -C "$RUNNER_TEMP/apadana-thera-next-package"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-next-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-thera-next-package/package/server" --report installed-apadana-thera-next.report.json
       - name: Check out exact public Apadāna original XML without credentials
-        if: matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121' || matrix.group == 'apadanathera141' || matrix.group == 'apadanathera161' || matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201' || matrix.group == 'apadanathera241' || matrix.group == 'apadanathera221' || matrix.group == 'apadanathera231' || matrix.group == 'apadanathera251' || matrix.group == 'apadanathera234'
+        if: matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121' || matrix.group == 'apadanathera141' || matrix.group == 'apadanathera161' || matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201' || matrix.group == 'apadanathera241' || matrix.group == 'apadanathera221' || matrix.group == 'apadanathera231' || matrix.group == 'apadanathera251' || matrix.group == 'apadanathera234' || matrix.group == 'vrieditionnote'
         uses: actions/checkout@v4
         with:
           repository: VipassanaTech/tipitaka-xml
@@ -1247,6 +1253,28 @@ jobs:
           test -f "$1"
           npm install --prefix "$RUNNER_TEMP/apadanathera251-installed" --offline --ignore-scripts --no-audit --no-fund --package-lock=false "$1"
           PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-remaining-check.py --batch B --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanathera251-installed/node_modules/pali-canon-mcp/server" --package-archive "$1" --launch-receipt installed-apadanathera251-launch.report.json --report installed-apadanathera251.report.json
+      - name: Verify exact original VRI source note and unchanged legacy segment and anchor objects
+        if: matrix.group == 'vrieditionnote'
+        run: |
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/vrieditionnote-inputs"
+          python scripts/canon/build_source_notes.py --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --canon "$RUNNER_TEMP/vrieditionnote-inputs/canon.json.gz" --manifest scripts/canon/source_note_manifest.json --verify server/data/source-notes.json > standalone-source-notes-independent.report.json
+          VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/source-notes.test.mjs tests/source-notes-client.test.mjs tests/source-notes-compatibility.test.mjs
+      - name: Check separate original edition-note reading and preserved root context
+        if: matrix.group == 'vrieditionnote'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-source-notes-check.py --launch-receipt standalone-source-notes-launch.report.json --report standalone-source-notes.report.json
+      - name: Audit original edition-note scope and keyboard access in both themes
+        if: matrix.group == 'vrieditionnote'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-source-notes-check.py --a11y --launch-receipt standalone-source-notes-a11y-launch.report.json --report standalone-source-notes-a11y.report.json
+      - name: Check original edition note from a genuine isolated offline npm install
+        if: matrix.group == 'vrieditionnote'
+        run: |
+          mkdir -p "$RUNNER_TEMP/source-notes-package" "$RUNNER_TEMP/source-notes-installed"
+          npm pack --pack-destination "$RUNNER_TEMP/source-notes-package"
+          set -- "$RUNNER_TEMP/source-notes-package/"*.tgz
+          test "$#" -eq 1
+          test -f "$1"
+          npm install --prefix "$RUNNER_TEMP/source-notes-installed" --offline --ignore-scripts --no-audit --no-fund --package-lock=false "$1"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-source-notes-check.py --server-dir "$RUNNER_TEMP/source-notes-installed/node_modules/pali-canon-mcp/server" --package-archive "$1" --launch-receipt installed-source-notes-launch.report.json --report installed-source-notes.report.json
       - name: Validate exact publisher-edition navigation
         if: matrix.group == 'apadanaedition'
         run: node --test tests/apadana-edition-navigation.test.mjs
@@ -1535,6 +1563,13 @@ jobs:
             standalone-apadanathera251-independent.report.json
             installed-apadanathera251.report.json
             installed-apadanathera251-launch.report.json
+            standalone-source-notes.report.json
+            standalone-source-notes-launch.report.json
+            standalone-source-notes-a11y.report.json
+            standalone-source-notes-a11y-launch.report.json
+            standalone-source-notes-independent.report.json
+            installed-source-notes.report.json
+            installed-source-notes-launch.report.json
             standalone-apadana-edition.report.json
             standalone-apadana-edition-a11y.report.json
             installed-apadana-edition.report.json

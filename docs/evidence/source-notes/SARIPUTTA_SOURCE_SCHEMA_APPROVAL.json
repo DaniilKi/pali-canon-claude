@@ -1,0 +1,275 @@
+{
+  "status": "APPROVE_ONE_EXACT_ORIGINAL_VRI_NOTE_AND_ADDITIVE_SCHEMA_FOR_ROOT_AUTHORIZED_IMPLEMENTATION_ONLY",
+  "baseline": "ff798f681147e12160167fbeb9ef1927bb54c45c",
+  "source_approval": true,
+  "schema_approval": true,
+  "source_approval_count": 1,
+  "root_may_authorize_implementation_of_exact_schema": true,
+  "runtime_implementation_acceptance": false,
+  "local_release_approval": false,
+  "remote_ci_approval": false,
+  "push_approval": false,
+  "approved_record_id": "vri:s0510m1:note-only:1130",
+  "approved_record_sha256": "0d7ab15b095a5175742655a16b67fabf31ed47f73d10fe3de1c821eb1e2b11b7",
+  "record_hash_domain": "SHA-256 of UTF-8 compact recursively key-sorted JSON of the fixed record; array order retained; Unicode preserved without normalization. No self-hash or display selection in this hash.",
+  "approved_registry_file_sha256": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e",
+  "approved_profile_file_sha256": "c586fb27f2c17b9c5404d9894ba4a5cdedfafc71f34410a42fd949666f838e9a",
+  "approved_record_object": {
+    "id": "vri:s0510m1:note-only:1130",
+    "kind": "original_edition_remark",
+    "label": "Original VRI edition note (Roman Pāli)",
+    "text": "imā dve gāthāyo syāmapotthake na santi",
+    "text_sha256": "e4544e7b41ad8ed3f72d281f9735359c51aac2f8c758588731a1135e4a03fa60",
+    "extraction_revision": "sariputta-note1130-v1",
+    "provenance": {
+      "name": "Chaṭṭha Saṅgāyana Tipiṭaka (VRI)",
+      "repository": "https://github.com/VipassanaTech/tipitaka-xml",
+      "commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "attribution": "Vipassana Research Institute (VRI), Chaṭṭha Saṅgāyana Tipiṭaka, www.tipitaka.org",
+      "terms": "Made freely available by VRI for non-commercial use with attribution."
+    },
+    "origin": {
+      "file": "s0510m1.mul.xml",
+      "xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+      "xml_git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+      "physical_element_zero_based": 1130,
+      "element_tag": "p",
+      "element_rend": "gatha1",
+      "element_number": null,
+      "note_index_zero_based": 0,
+      "raw_encoding": "UTF-16LE",
+      "raw_byte_interval": [
+        196320,
+        196466
+      ],
+      "raw_element_sha256": "986c6f423be82278f4a62441de602fcda1e412493c4a51570bd5ab712a1ec723",
+      "no_root_body_text": true,
+      "no_page_breaks": true,
+      "raw_neighbors": {
+        "previous": {
+          "physical_element_zero_based": 1129,
+          "raw_utf16le_byte_interval": [
+            196148,
+            196304
+          ],
+          "raw_element_sha256": "ba44439a467fa33f28d0fdca01d90406ae8e9f946d70a2123654b8a5580c7363"
+        },
+        "following": {
+          "physical_element_zero_based": 1131,
+          "raw_utf16le_byte_interval": [
+            196482,
+            196616
+          ],
+          "raw_element_sha256": "2a8502eb9fd16c0f0100d723bea9ab3890a019386a87321cced523e497e9a10d"
+        }
+      }
+    },
+    "physical_location": {
+      "relation": "after_existing_empty_marker_before_following_body",
+      "semantic_stanza_owner_verified": false,
+      "previous_block": 1129,
+      "previous_block_sha256": "7c74c3a843ecb83b11a283b298dd7c4706d1e5037005aa81b4764c97b8a49b00",
+      "following_block": 1130,
+      "following_block_sha256": "b9ce3040c6fb63e46c9cecb9e3f9842277804750fc7115ccc10fa7d2229d9478",
+      "unit_id": "tha-ap3",
+      "unit_block_span": [
+        432,
+        1141
+      ],
+      "book_id": "s0510m1",
+      "book_file": "s0510m1.mul.xml",
+      "canonical_book_blocks_sha256": "bce212d970603cb0ef7fbebbc4b78de5538377f8fbf7e451b1a4487c97753d44",
+      "uid_anchor": {
+        "offset": 235,
+        "segment": {
+          "ref": "tha-ap3/236",
+          "type": "verse",
+          "text": "",
+          "vri_paragraph": "372"
+        },
+        "segment_sha256": "12767c916a3c50a78778a4c30beda1f6be0f0b263142c90d22ce2c5090d9c1b1"
+      },
+      "book_anchor": {
+        "offset": 386,
+        "segment": {
+          "ref": "vri-book:s0510m1/387",
+          "type": "verse",
+          "text": "",
+          "vri_paragraph": "372"
+        },
+        "segment_sha256": "df6a0b29a8c2fcb2f80a2a272fa2af8a23e43aeb904c6b85ad8f09c18abb00df"
+      },
+      "distinct_existing_373_note": {
+        "block": 1134,
+        "note_index_zero_based": 0,
+        "text_sha256": "f0c05b524768e8663aa1c23d2674ec0674870f83fd27fc63e9b3f08e4fab12d9"
+      }
+    },
+    "qualification": "This is an original VRI edition remark in its own note-only XML element, not root text, a translation or a personal note. The anchor records physical placement only; a semantic stanza span and independent Thai-witness collation are not verified.",
+    "changes": "Extract the exact original note into separately labelled additive apparatus. No canonical block, body, existing variant note, source object, locator, citation or private data is changed."
+  },
+  "approved_profile_object": {
+    "schema": "vri-source-notes-v1",
+    "extraction_revision": "sariputta-note1130-v1",
+    "record_sha256": "0d7ab15b095a5175742655a16b67fabf31ed47f73d10fe3de1c821eb1e2b11b7",
+    "registry_sha256": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e",
+    "record_id": "vri:s0510m1:note-only:1130",
+    "text_sha256": "e4544e7b41ad8ed3f72d281f9735359c51aac2f8c758588731a1135e4a03fa60",
+    "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "record_keys": [
+      "changes",
+      "extraction_revision",
+      "id",
+      "kind",
+      "label",
+      "origin",
+      "physical_location",
+      "provenance",
+      "qualification",
+      "text",
+      "text_sha256"
+    ],
+    "max_record_characters": 8192,
+    "anchors": {
+      "uid": {
+        "selector": {
+          "uid": "tha-ap3"
+        },
+        "segment": {
+          "ref": "tha-ap3/236",
+          "type": "verse",
+          "text": "",
+          "vri_paragraph": "372"
+        },
+        "offset": 235,
+        "availability": {
+          "total": 1,
+          "record_id": "vri:s0510m1:note-only:1130",
+          "anchor_ref": "tha-ap3/236",
+          "physical_location_only": true,
+          "read_with": {
+            "tool": "get_text",
+            "uid": "tha-ap3",
+            "offset": 235,
+            "limit": 1,
+            "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+          },
+          "widget_read_with": {
+            "name": "read_passage_widget",
+            "arguments": {
+              "uid": "tha-ap3",
+              "segment": "tha-ap3/236",
+              "english": false,
+              "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+            }
+          },
+          "scope": "separately_indexed_original_edition_notes"
+        }
+      },
+      "book": {
+        "selector": {
+          "book": "s0510m1"
+        },
+        "segment": {
+          "ref": "vri-book:s0510m1/387",
+          "type": "verse",
+          "text": "",
+          "vri_paragraph": "372"
+        },
+        "offset": 386,
+        "availability": {
+          "total": 1,
+          "record_id": "vri:s0510m1:note-only:1130",
+          "anchor_ref": "vri-book:s0510m1/387",
+          "physical_location_only": true,
+          "read_with": {
+            "tool": "get_text",
+            "book": "s0510m1",
+            "offset": 386,
+            "limit": 1,
+            "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+          },
+          "widget_read_with": {
+            "name": "read_passage_widget",
+            "arguments": {
+              "book": "s0510m1",
+              "segment": "vri-book:s0510m1/387",
+              "english": false,
+              "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+            }
+          },
+          "scope": "separately_indexed_original_edition_notes"
+        }
+      }
+    }
+  },
+  "original_source_evidence": {
+    "XML_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "XML_git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+    "element_zero_based": 1130,
+    "raw_UTF16LE_interval": [
+      196320,
+      196466
+    ],
+    "raw_element_sha256": "986c6f423be82278f4a62441de602fcda1e412493c4a51570bd5ab712a1ec723",
+    "note_text_sha256": "e4544e7b41ad8ed3f72d281f9735359c51aac2f8c758588731a1135e4a03fa60",
+    "independent_neighbor_receipt_sha256": "8d2135db0e1d0f406f95887fe40da12fa1e6a5b5a7ac4bf2336609955728a68f"
+  },
+  "source_scope": "One verbatim original Roman Pāli VRI edition remark in its own note-only XML element. Navigation marker372 unit236/book387 only identifies physical placement, not lexical/stanza ownership. Existing373gāthāro stays separate from recoveredgāthāyo; no Thai-witness collation, English translation, Pāli reconstruction or canonical block insert/reclassification.",
+  "rights_scope": "Existing pinned VRI noncommercial-with-attribution textual/apparatus grant, full unchanged provenance/terms and new extraction-change disclosure. No upstream notice freshly fetched/renewed or additional media/translation right approved. VRI Pāli record may be bundled; Walters live-only translation policy does not govern it.",
+  "exact_author_packet_seal_sha256": "fa231192c695929c9fad7ae01597c6d2e8d17b2ba55ae8ad6af742ddb47a6101",
+  "approved_author_artifacts_sha256": {
+    "ARCHITECTURE.md": "3c9d543a81b5e756b11eb744ead6b5b6bea880ae011618b61f03152da934ed5c",
+    "ENVELOPE_EXAMPLES.json": "a44010280744acbcc6f727a77ef4fde898b030ad29454c1b7bb021578ebf9b93",
+    "FILE_OWNERSHIP_PLAN.json": "59c14bfa6b80836a1a4dd3fd40e1e5671fd111683825f92b30d5dd5eb97427f2",
+    "PROFILE_DRAFT.json": "c586fb27f2c17b9c5404d9894ba4a5cdedfafc71f34410a42fd949666f838e9a",
+    "PROPOSAL.json": "6289efed3e7dc7d64fbb2e6cb328468350e14e565927c153f686c9a84cae266c",
+    "RECORD_DRAFT.json": "c648e140e8eb8be610e6899115e55d31015ab41b997aef54f5c5b9d2b98f34a2",
+    "REGISTRY_ARTIFACT_DRAFT.json": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e",
+    "TEST_MATRIX.json": "609c2876106dd3d93a8315adb17382b52a803747346b36578d4fb923917cab83"
+  },
+  "schema_scope": {
+    "top_level_field": "source_notes",
+    "schema": "vri-source-notes-v1",
+    "extraction_revision": "sariputta-note1130-v1",
+    "affected_canonical_selections": [
+      "tha-ap3",
+      "book:s0510m1"
+    ],
+    "mandatory_every_affected_page": true,
+    "status_states": [
+      "available",
+      "unavailable"
+    ],
+    "fixed_error_code": "SOURCE_NOTE_UNAVAILABLE",
+    "available_entries": "Exactly one fixed verified record only on page containing unique authentic empty marker at its expected relative position; otherwise empty.",
+    "availability_total_scope": "One separately indexed original edition note, not allVRI variants or completeness. Unavailable never pretends total0.",
+    "unavailable_contract": "Lazy affected-path backend catches note-only failures, preserves authentic root/source/segments/other tools and returns typed unavailable; client suppresses entire note/availability display, fixed honest warning and no unverified note words.",
+    "hash_domains_separate": true,
+    "all_legacy_source_and_segment_fields_unchanged": true,
+    "view_policy": "Single self-contained browser-safe createSourceNotesPolicy(hash,fixedMetadata), inspect(page)+stable(value); strict fullrecord/metadata/key/state/command/source/anchor/count validation; fixed metadata has no duplicated note wording.",
+    "once_semantics": "Once per matching returnedpage, including each intentional overlap/context request; no once-ever mutable storage.",
+    "explicit_jump": "Only intentional fixed approved command; no auto-fetch/scroll/focus/English. Preserve current validated root script as invocation-only overlay; original note remains Roman.",
+    "cache_freshness": "Content revalidation on every host event including reused toolOutput reference; apparatus-only idempotent reconciliation, no root rerender/focus/modelContext/private writes.",
+    "serialization": "Separate NEW original-policy-source define; unchanged existing sharedSHA algorithm/build define and strict wholewidgetsource/resource equality."
+  },
+  "UI_scope": "Separate accessible original-edition asides after empty anchor, never root .segment/.passage/.seg/.en/direct.notice or modelreadingContext/d.notes/English/translator/personal notes. Roman-original/physical-only qualification, attribution/terms and clear unavailable warning. No root print/quote/search/analysis/private contamination.",
+  "preservation_authority": {
+    "independent_all8544_core_expectations_sha256": "9eea3376521fee8abef002d65431462cfbf5b5f77e478df445d5f2c137baa33a",
+    "independent_preproposal_gates_sha256": "caa4cfb3fd438d99b61c8ece8a31e157cccd2e019bc91945f7632309ad73bcdd",
+    "independent_API_plan_sha256": "84bc3c00dfb520ab146c3b194a08b00785efd6d08452cd2a7db8f686d5573802",
+    "root_fullsegment_capture_sha256": "541e4039976b9b3f8e2a178af3dca393b652d1d39f0a8b8516fa72a55b149c18",
+    "independent_root_capture_binding_sha256": "5838d1218505b4c7b45cb7ab7912fd8d7c398696c53eb7d62fa948d54db1813c",
+    "root_342_API_capture_sha256": "c93f46a6bf9a0479c1cb0c4acd22c8bf0fbc088368cc08bb294dfcfa710b9b93",
+    "unit_count": 8544,
+    "books": 61,
+    "core_unit_segments_including_group_overlaps": 134380,
+    "affected_spans": 420,
+    "AP_profile_choices": 285,
+    "source_module_hashes_still_unchanged_before_GO": true
+  },
+  "required_implementation_gates": "Execute sealed TEST_MATRIX under root ownership: exact original reproducible builder and duplicate-key/source mutation refusals; no canonical/commentary/profile/private changes; allold4mode segment/API hash equivalence strippingONLYtop source_notes;342oldAPI hashes; variants/scripts/exact/context/paging/zero/beyondend states; hostile metadata/cache/reused-object cases; native/twobridge/print/model/private/draft/focus acceptance; strict source+HTTP+worker HTML/policy literal equality; bounded fullchecks+genuine offline installed package+exactcommitCI as separately authorized.",
+  "approval_boundary": "GO permits root to assign and implement only this sealed architecture/record/profile under existing authorization. It does not approve as-yet-unwritten production code, schema widening, source260activation, body/locator/private migration, a fullproject completion claim or any publication/remote action. Runtime/package/browser/CI/manual/specialist gates remain independent.",
+  "existing_holds": "Publisher260/canonical262 and all other source holds unchanged. Earlier Sāriputta omission reports stay historical; new schema authorizes only additive source-note representation, never reindexing or reassignment.",
+  "reviewer_operations": "Only external /tmp/pali-sariputta-independent files written. Read originalXML/canonical data/proposal/baseline captures; independent stdlibmetadata/hash/sourcecore derivation only. No repo edits, production parser import, projecttests/build/browser/Git/status/CI/network/private-data action or spawning."
+}

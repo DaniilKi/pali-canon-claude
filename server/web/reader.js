@@ -1,4 +1,295 @@
 (() => {
+  // web/source-notes-policy.mjs
+  function createSourceNotesPolicy(hash, fixedMetadata) {
+    function stable2(value) {
+      let count2 = 0;
+      const seen = /* @__PURE__ */ new Set();
+      function visit(item, depth) {
+        if (++count2 > 2048 || depth > 20) throw Error("Unsupported source-note data");
+        if (item === null || typeof item === "boolean") return JSON.stringify(item);
+        if (typeof item === "string") {
+          if (item.length > 16384) throw Error("Unsupported source-note data");
+          return JSON.stringify(item);
+        }
+        if (typeof item === "number" && Number.isFinite(item)) return JSON.stringify(item);
+        if (!item || typeof item !== "object" || seen.has(item)) throw Error("Unsupported source-note data");
+        seen.add(item);
+        let result;
+        if (Array.isArray(item)) {
+          if (item.length > 256) throw Error("Unsupported source-note data");
+          result = "[" + item.map((child) => visit(child, depth + 1)).join(",") + "]";
+        } else {
+          if (Object.prototype.toString.call(item) !== "[object Object]" || Object.getOwnPropertySymbols(item).length) throw Error("Unsupported source-note data");
+          const keys2 = Object.keys(item).sort();
+          if (keys2.length > 64) throw Error("Unsupported source-note data");
+          result = "{" + keys2.map((key4) => JSON.stringify(key4) + ":" + visit(item[key4], depth + 1)).join(",") + "}";
+        }
+        seen.delete(item);
+        return result;
+      }
+      return visit(value, 0);
+    }
+    const profile2 = JSON.parse(stable2(fixedMetadata));
+    const warning = "The separately indexed original edition note could not be verified. The loaded P\u0101li remains available; this apparatus is unavailable.";
+    const owns = (object16, key4) => Boolean(object16 && Object.prototype.hasOwnProperty.call(object16, key4));
+    const keysEqual = (object16, keys2) => object16 && !Array.isArray(object16) && stable2(Object.keys(object16).sort()) === stable2(keys2.slice().sort());
+    function model(state, affected, opening, anchor, entry3) {
+      const view2 = {
+        state,
+        affected,
+        opening,
+        anchor_ref: anchor ? anchor.segment.ref : null,
+        availability: state === "available" ? JSON.parse(stable2(anchor.availability)) : null,
+        entry: entry3 || null,
+        warning: state === "unavailable" ? warning : null
+      };
+      view2.signature = stable2({ state, affected, opening, anchor_ref: view2.anchor_ref, entry: Boolean(entry3), record_sha256: state === "available" ? profile2.record_sha256 : null });
+      return view2;
+    }
+    function inspect(page2) {
+      let anchor = null, affected = false, opening = false;
+      try {
+        if (!page2 || typeof page2 !== "object" || Array.isArray(page2)) return model("absent", false, false, null, null);
+        const isBook = page2.selection === "source_book";
+        if (isBook && page2.book_id === profile2.anchors.book.selector.book) anchor = profile2.anchors.book;
+        else if (!isBook && page2.text_id === profile2.anchors.uid.selector.uid && page2.canonical !== false && page2.content_type !== "commentary") anchor = profile2.anchors.uid;
+        affected = Boolean(anchor);
+        if (!affected) return model(owns(page2, "source_notes") ? "unavailable" : "absent", false, false, null, null);
+        const position2 = page2.pali || page2;
+        opening = position2.offset === 0;
+        const unavailable = () => model("unavailable", true, opening, anchor, null);
+        if (page2.canonical === false || !page2.source || page2.source.commit !== profile2.source_commit || owns(page2.source, "locator_revision") && page2.source.locator_revision !== profile2.source_commit || isBook && owns(page2, "text_id") && page2.text_id !== null || !isBook && owns(page2, "book_id")) return unavailable();
+        const envelope = page2.source_notes;
+        if (!keysEqual(envelope, ["schema", "state", "extraction_revision", "record_sha256", "availability", "entries", "error_code"]) || envelope.schema !== profile2.schema || envelope.extraction_revision !== profile2.extraction_revision || envelope.record_sha256 !== profile2.record_sha256 || stable2(envelope.availability) !== stable2(anchor.availability) || !Array.isArray(envelope.entries) || envelope.entries.length > 1) return unavailable();
+        if (envelope.state === "unavailable") {
+          if (envelope.error_code !== "SOURCE_NOTE_UNAVAILABLE" || envelope.entries.length) return unavailable();
+          return unavailable();
+        }
+        if (envelope.state !== "available" || envelope.error_code !== null) return unavailable();
+        const segments = position2.segments;
+        if (!Array.isArray(segments) || segments.length > 200 || !Number.isSafeInteger(position2.offset) || position2.offset < 0 || !Number.isSafeInteger(position2.returned) || position2.returned !== segments.length) return unavailable();
+        const relative = anchor.offset - position2.offset, inPage = relative >= 0 && relative < segments.length;
+        const matches = segments.filter((segment) => segment && segment.ref === anchor.segment.ref);
+        if (matches.length !== (inPage ? 1 : 0) || inPage && stable2(segments[relative]) !== stable2(anchor.segment) || envelope.entries.length !== (inPage ? 1 : 0)) return unavailable();
+        if (!inPage) return model("available", true, opening, anchor, null);
+        const record = envelope.entries[0], serialized = stable2(record);
+        if (!keysEqual(record, profile2.record_keys) || serialized.length > profile2.max_record_characters || hash(serialized) !== profile2.record_sha256 || record.id !== profile2.record_id || record.extraction_revision !== profile2.extraction_revision || record.text_sha256 !== profile2.text_sha256 || typeof record.text !== "string" || hash(record.text) !== profile2.text_sha256) return unavailable();
+        return model("available", true, opening, anchor, JSON.parse(serialized));
+      } catch {
+        return model("unavailable", affected, opening, anchor, null);
+      }
+    }
+    return { inspect, stable: stable2 };
+  }
+
+  // web/content-sha256.mjs
+  function contentSha256(text11) {
+    if (typeof text11 !== "string" || text11.length > 1e5 || typeof TextEncoder !== "function") throw Error("Editorial content integrity checking is unavailable.");
+    const input = new TextEncoder().encode(text11), length = input.length;
+    const bytes2 = new Uint8Array(Math.ceil((length + 9) / 64) * 64);
+    bytes2.set(input);
+    bytes2[length] = 128;
+    const view2 = new DataView(bytes2.buffer);
+    view2.setUint32(bytes2.length - 8, Math.floor(length / 536870912));
+    view2.setUint32(bytes2.length - 4, length * 8 >>> 0);
+    const constants = [
+      1116352408,
+      1899447441,
+      3049323471,
+      3921009573,
+      961987163,
+      1508970993,
+      2453635748,
+      2870763221,
+      3624381080,
+      310598401,
+      607225278,
+      1426881987,
+      1925078388,
+      2162078206,
+      2614888103,
+      3248222580,
+      3835390401,
+      4022224774,
+      264347078,
+      604807628,
+      770255983,
+      1249150122,
+      1555081692,
+      1996064986,
+      2554220882,
+      2821834349,
+      2952996808,
+      3210313671,
+      3336571891,
+      3584528711,
+      113926993,
+      338241895,
+      666307205,
+      773529912,
+      1294757372,
+      1396182291,
+      1695183700,
+      1986661051,
+      2177026350,
+      2456956037,
+      2730485921,
+      2820302411,
+      3259730800,
+      3345764771,
+      3516065817,
+      3600352804,
+      4094571909,
+      275423344,
+      430227734,
+      506948616,
+      659060556,
+      883997877,
+      958139571,
+      1322822218,
+      1537002063,
+      1747873779,
+      1955562222,
+      2024104815,
+      2227730452,
+      2361852424,
+      2428436474,
+      2756734187,
+      3204031479,
+      3329325298
+    ];
+    const state = [1779033703, 3144134277, 1013904242, 2773480762, 1359893119, 2600822924, 528734635, 1541459225];
+    const words = new Uint32Array(64), rotate = (value, n) => value >>> n | value << 32 - n;
+    for (let offset = 0; offset < bytes2.length; offset += 64) {
+      for (let i = 0; i < 16; i++) words[i] = view2.getUint32(offset + 4 * i);
+      for (let i = 16; i < 64; i++) {
+        const x = words[i - 15], y = words[i - 2];
+        const s0 = rotate(x, 7) ^ rotate(x, 18) ^ x >>> 3, s1 = rotate(y, 17) ^ rotate(y, 19) ^ y >>> 10;
+        words[i] = words[i - 16] + s0 + words[i - 7] + s1 >>> 0;
+      }
+      let [a, b, c, d, e, f, g, h] = state;
+      for (let i = 0; i < 64; i++) {
+        const sum1 = rotate(e, 6) ^ rotate(e, 11) ^ rotate(e, 25), choice = e & f ^ ~e & g;
+        const first = h + sum1 + choice + constants[i] + words[i] >>> 0;
+        const sum0 = rotate(a, 2) ^ rotate(a, 13) ^ rotate(a, 22), majority = a & b ^ a & c ^ b & c;
+        h = g;
+        g = f;
+        f = e;
+        e = d + first >>> 0;
+        d = c;
+        c = b;
+        b = a;
+        a = first + sum0 + majority >>> 0;
+      }
+      for (const [i, value] of [a, b, c, d, e, f, g, h].entries()) state[i] = state[i] + value >>> 0;
+    }
+    return state.map((value) => value.toString(16).padStart(8, "0")).join("");
+  }
+
+  // src/source-notes-profiles.mjs
+  var freeze = (value) => {
+    if (value && typeof value === "object") {
+      for (const child of Object.values(value)) freeze(child);
+      Object.freeze(value);
+    }
+    return value;
+  };
+  var SOURCE_NOTES_PROFILE = freeze({
+    "schema": "vri-source-notes-v1",
+    "extraction_revision": "sariputta-note1130-v1",
+    "record_sha256": "0d7ab15b095a5175742655a16b67fabf31ed47f73d10fe3de1c821eb1e2b11b7",
+    "registry_sha256": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e",
+    "record_id": "vri:s0510m1:note-only:1130",
+    "text_sha256": "e4544e7b41ad8ed3f72d281f9735359c51aac2f8c758588731a1135e4a03fa60",
+    "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "record_keys": [
+      "changes",
+      "extraction_revision",
+      "id",
+      "kind",
+      "label",
+      "origin",
+      "physical_location",
+      "provenance",
+      "qualification",
+      "text",
+      "text_sha256"
+    ],
+    "max_record_characters": 8192,
+    "anchors": {
+      "uid": {
+        "selector": {
+          "uid": "tha-ap3"
+        },
+        "segment": {
+          "ref": "tha-ap3/236",
+          "type": "verse",
+          "text": "",
+          "vri_paragraph": "372"
+        },
+        "offset": 235,
+        "availability": {
+          "total": 1,
+          "record_id": "vri:s0510m1:note-only:1130",
+          "anchor_ref": "tha-ap3/236",
+          "physical_location_only": true,
+          "read_with": {
+            "tool": "get_text",
+            "uid": "tha-ap3",
+            "offset": 235,
+            "limit": 1,
+            "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+          },
+          "widget_read_with": {
+            "name": "read_passage_widget",
+            "arguments": {
+              "uid": "tha-ap3",
+              "segment": "tha-ap3/236",
+              "english": false,
+              "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+            }
+          },
+          "scope": "separately_indexed_original_edition_notes"
+        }
+      },
+      "book": {
+        "selector": {
+          "book": "s0510m1"
+        },
+        "segment": {
+          "ref": "vri-book:s0510m1/387",
+          "type": "verse",
+          "text": "",
+          "vri_paragraph": "372"
+        },
+        "offset": 386,
+        "availability": {
+          "total": 1,
+          "record_id": "vri:s0510m1:note-only:1130",
+          "anchor_ref": "vri-book:s0510m1/387",
+          "physical_location_only": true,
+          "read_with": {
+            "tool": "get_text",
+            "book": "s0510m1",
+            "offset": 386,
+            "limit": 1,
+            "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+          },
+          "widget_read_with": {
+            "name": "read_passage_widget",
+            "arguments": {
+              "book": "s0510m1",
+              "segment": "vri-book:s0510m1/387",
+              "english": false,
+              "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+            }
+          },
+          "scope": "separately_indexed_original_edition_notes"
+        }
+      }
+    }
+  });
+
   // web/tool-result.mjs
   var object = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   function readingToolResult(result) {
@@ -32023,110 +32314,6 @@
     return notes2.map((note2) => ({ number: note2.number, text: note2.text }));
   }
 
-  // web/content-sha256.mjs
-  function contentSha256(text11) {
-    if (typeof text11 !== "string" || text11.length > 1e5 || typeof TextEncoder !== "function") throw Error("Editorial content integrity checking is unavailable.");
-    const input = new TextEncoder().encode(text11), length = input.length;
-    const bytes2 = new Uint8Array(Math.ceil((length + 9) / 64) * 64);
-    bytes2.set(input);
-    bytes2[length] = 128;
-    const view2 = new DataView(bytes2.buffer);
-    view2.setUint32(bytes2.length - 8, Math.floor(length / 536870912));
-    view2.setUint32(bytes2.length - 4, length * 8 >>> 0);
-    const constants = [
-      1116352408,
-      1899447441,
-      3049323471,
-      3921009573,
-      961987163,
-      1508970993,
-      2453635748,
-      2870763221,
-      3624381080,
-      310598401,
-      607225278,
-      1426881987,
-      1925078388,
-      2162078206,
-      2614888103,
-      3248222580,
-      3835390401,
-      4022224774,
-      264347078,
-      604807628,
-      770255983,
-      1249150122,
-      1555081692,
-      1996064986,
-      2554220882,
-      2821834349,
-      2952996808,
-      3210313671,
-      3336571891,
-      3584528711,
-      113926993,
-      338241895,
-      666307205,
-      773529912,
-      1294757372,
-      1396182291,
-      1695183700,
-      1986661051,
-      2177026350,
-      2456956037,
-      2730485921,
-      2820302411,
-      3259730800,
-      3345764771,
-      3516065817,
-      3600352804,
-      4094571909,
-      275423344,
-      430227734,
-      506948616,
-      659060556,
-      883997877,
-      958139571,
-      1322822218,
-      1537002063,
-      1747873779,
-      1955562222,
-      2024104815,
-      2227730452,
-      2361852424,
-      2428436474,
-      2756734187,
-      3204031479,
-      3329325298
-    ];
-    const state = [1779033703, 3144134277, 1013904242, 2773480762, 1359893119, 2600822924, 528734635, 1541459225];
-    const words = new Uint32Array(64), rotate = (value, n) => value >>> n | value << 32 - n;
-    for (let offset = 0; offset < bytes2.length; offset += 64) {
-      for (let i = 0; i < 16; i++) words[i] = view2.getUint32(offset + 4 * i);
-      for (let i = 16; i < 64; i++) {
-        const x = words[i - 15], y = words[i - 2];
-        const s0 = rotate(x, 7) ^ rotate(x, 18) ^ x >>> 3, s1 = rotate(y, 17) ^ rotate(y, 19) ^ y >>> 10;
-        words[i] = words[i - 16] + s0 + words[i - 7] + s1 >>> 0;
-      }
-      let [a, b, c, d, e, f, g, h] = state;
-      for (let i = 0; i < 64; i++) {
-        const sum1 = rotate(e, 6) ^ rotate(e, 11) ^ rotate(e, 25), choice = e & f ^ ~e & g;
-        const first = h + sum1 + choice + constants[i] + words[i] >>> 0;
-        const sum0 = rotate(a, 2) ^ rotate(a, 13) ^ rotate(a, 22), majority = a & b ^ a & c ^ b & c;
-        h = g;
-        g = f;
-        f = e;
-        e = d + first >>> 0;
-        d = c;
-        c = b;
-        b = a;
-        a = first + sum0 + majority >>> 0;
-      }
-      for (const [i, value] of [a, b, c, d, e, f, g, h].entries()) state[i] = state[i] + value >>> 0;
-    }
-    return state.map((value) => value.toString(16).padStart(8, "0")).join("");
-  }
-
   // web/translation-policy.mjs
   var PINNED_NEW_PARATEXT_IDS = /* @__PURE__ */ new Set(["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261", "tha-ap236"]);
   var apadanaId = (uid2) => APADANA_PROFILES[uid2]?.path ? "ap:" + APADANA_PROFILES[uid2].path.replace(/^\/text\/|\/$/g, "") : void 0;
@@ -35603,6 +35790,7 @@
   }
 
   // web/reader.js
+  var sourceNotesPolicy = createSourceNotesPolicy(contentSha256, SOURCE_NOTES_PROFILE);
   var $ = (id5) => document.getElementById(id5);
   var view = $("view");
   var status2 = $("status");
@@ -36882,6 +37070,42 @@
     });
     show();
   }
+  function originalEditionNote(record) {
+    const aside = el("aside", void 0, "original-edition-note");
+    aside.setAttribute("role", "note");
+    aside.setAttribute("aria-label", "Original VRI edition note (Roman P\u0101li)");
+    const text11 = el("p", record.text, "edition-note-text");
+    text11.lang = "pi-Latn";
+    aside.append(
+      el("h3", "Original VRI edition note (Roman P\u0101li)"),
+      text11,
+      el("p", "Physical source location only; the remark\u2019s stanza span has not been verified.", "muted"),
+      el("p", record.qualification, "muted"),
+      el("p", record.provenance.attribution + " " + record.provenance.terms, "edition-note-provenance"),
+      el("p", "Extracted from an original note-only source element and displayed separately from root text.", "muted")
+    );
+    return aside;
+  }
+  function originalEditionStatus(state) {
+    if (state.state === "absent" || state.state === "available" && !state.opening) return null;
+    const aside = el("aside", void 0, "source-notes-status");
+    aside.setAttribute("aria-label", "Original edition apparatus");
+    if (state.state === "unavailable") {
+      aside.setAttribute("role", "status");
+      aside.append(el("p", state.warning));
+    } else {
+      const command6 = state.availability.read_with;
+      const context = command6.book ? { book: command6.book } : { uid: command6.uid };
+      const href = readingPosition(context, command6.offset, state.anchor_ref, command6.source_commit);
+      aside.append(
+        el("h3", "Original edition apparatus"),
+        el("p", "1 separately indexed original VRI edition note is available at its recorded location."),
+        link("Open original edition note location", href, "button"),
+        el("p", "This opens its recorded physical location, not a verified stanza span. No English source is requested.", "muted")
+      );
+    }
+    return aside;
+  }
   function attachChapterNavigation(data, args, host, token) {
     const section = el("section", void 0, "chapter-navigation");
     section.setAttribute("aria-label", "Source chapters");
@@ -37175,6 +37399,8 @@
     additions.id = "study";
     additions.setAttribute("aria-live", "polite");
     view.append(additions);
+    const sourceNotes = sourceNotesPolicy.inspect(data), sourceNotesStatus = originalEditionStatus(sourceNotes);
+    if (sourceNotesStatus) view.append(sourceNotesStatus);
     const passages = el("section");
     passages.setAttribute("aria-label", "P\u0101li passage");
     const positions = [];
@@ -37212,6 +37438,7 @@
       part.append(row, text11);
       attachPassageNote(selector, data, segment, part, save, token);
       passages.append(part);
+      if (sourceNotes.entry && segment.ref === sourceNotes.anchor_ref) passages.append(originalEditionNote(sourceNotes.entry));
       if (positionHref) positions.push({ node: part, heading: segment.type === "heading", href: positionHref });
     }
     view.append(passages);

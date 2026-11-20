@@ -1,0 +1,33 @@
+{
+  "baseline": "ff798f681147e12160167fbeb9ef1927bb54c45c",
+  "canonical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "profiles_sha256": "4c248e6130cf46d1a68de225899471b88808f726a032d3c45ed3bd446208f72b",
+  "links_sha256": "2268c534dc5c3cdf31a3509b7bc60f710ff54a233a949c2a909e128a67e5e1da",
+  "profile_count": 285,
+  "units": 8544,
+  "books": 61,
+  "affected_spans": 420,
+  "unit_metadata_sha256": "1c3339b4cddadab60ff7d7d7c9cb8cceb478e32e0683f7a08debf299e5450682",
+  "unit_sources_sha256": "c67c23daf812516145236e5b10dda8ac47890ba81f00599a9bdd6efc03c06db5",
+  "book_metadata_sha256": "908f91915d7cd5024d41090bc94dc9cc6735ef6757ee8ac456a3cb19e137f9ec",
+  "book_sources_sha256": "9523f077f637bfa55d2eb0a1fe76aabc96317490c11953934778170f1f43bd96",
+  "affected_spans_sha256": "7b74274857632f9b091cd4826a2512f5a38ede3b27b764c7dea2923c6616500d",
+  "mode_digests": {
+    "none": {
+      "units": "f2bea24ab2102fa52465a23b0478cbd3fe37183d78f899fb83b8c499d834f9f1",
+      "books": "8a49fa72a3b83cd84b4f61e0416fff564d6c4aca4c9fece9f789b1fc1c79ece3"
+    },
+    "raw": {
+      "units": "666625764714dfdc8e6f178c0092ebf26900ded8d7e0e1d0677932c677f24e3c",
+      "books": "cf7ece748709e865ee4384ee61043987ef0a4ae3525f9690b42a7c8b8616b204"
+    },
+    "structured": {
+      "units": "f3f8beffccb931864175ba2d10b4a560c9f77b9d2d5cf8382ef1369139ccb2b8",
+      "books": "a4f831bc326e11269d722d9f6ad0a92748add359e1d4b8f5a602f792905d3620"
+    },
+    "source_positions": {
+      "units": "8a3d971fd0466bd6ad6f77e83ae72abde992f6d92779e59fd4e51ab4fbe863ba",
+      "books": "0287171fc30c7013525f185aecc1f4d95d1d47ed8210537e78fb55bf77da4cd2"
+    }
+  }
+}
