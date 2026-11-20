@@ -1,0 +1,101 @@
+{
+  "schema": "installed-five-poem-stdio-v1",
+  "status": "passed",
+  "limitations": "Pinned local source replay and deny-all installed API checks; no live provider, browser UI, device or human assistive claim. Expected content is independent hashes only.",
+  "authority_scope": "Exact local308 runtime inventory approval only; these observed checks do not grant final archive, implementation, full-check, remoteCI, release or push approval.",
+  "launch_receipt": "/tmp/pali-five-installed-liV0yl/launch.json",
+  "contract_sha256": "195d24707434d399c110cea9a735da623206d1274ab99832f9857e9e8da9c484",
+  "runs": [
+    {
+      "mode": "fixture",
+      "status": "passed",
+      "poems": 5,
+      "notes": 32,
+      "pages": 11,
+      "quotes": 5,
+      "pali_reads": 8,
+      "held_refusals": 3,
+      "per_poem": [
+        {
+          "id": "tha-ap283",
+          "pages": 2,
+          "body_sha256": "83a24a52093631de548d07f3adafd7a513235bae6400b264e12eb6b9ad969b7e",
+          "notes_sha256": "9c5c95a72789757a323ea4d6f95d772b2a63e297ed1fa05e8481d62f676aefde",
+          "paratext_sha256": "e359dc1b1ecaef9a23975027903b1a668a803efca4a6a9191b9869d58393627f",
+          "quotation_text_sha256": "482fa494a2fb32852c57b8df7702ac1047dbb2e7ea07e2af04c99f792420809b"
+        },
+        {
+          "id": "tha-ap284",
+          "pages": 3,
+          "body_sha256": "b1d9d1cb1430498342fcc4fe9f41de3b18b31e33cf55df53760a20e707c22f22",
+          "notes_sha256": "805b4559091e0ad0410c8d6abb192d96751af210db0bd2be734d24331bba216e",
+          "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "quotation_text_sha256": "e7597d1e90cebca0b2608448537dabdbc56e34d546047434930aed2836f672bb"
+        },
+        {
+          "id": "tha-ap285",
+          "pages": 2,
+          "body_sha256": "7a334528c864b2a588cc1ca72683821eb7f685f8d7539c38420afc09125d7c1c",
+          "notes_sha256": "b063b81c98dd58efa84599b0140a8c2e965328ef17fd24d4d3567e681da1e80f",
+          "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "quotation_text_sha256": "8102152b3a0f08dd940820ce38b0adb71dbc1266fde07d1ba392b19b3ee94652"
+        },
+        {
+          "id": "tha-ap286",
+          "pages": 2,
+          "body_sha256": "b53f12ccd78a5a3a4eb480674aeb4293c5ca49fd79b2e42eaad1ca82c9f208c8",
+          "notes_sha256": "58d0f605763978a2f30ba2e9be8b6c65c1ba055d8ad80e209a93b8f3eeba4f9e",
+          "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "quotation_text_sha256": "3726bf316d1085614e27c0656f37b420634552693b525203d855e1489628be03"
+        },
+        {
+          "id": "tha-ap287",
+          "pages": 2,
+          "body_sha256": "a373a3e535f06c3efe5593bb233478afc69f8afb96875a61bdc357c34f49cb48",
+          "notes_sha256": "a309a276d17c1565a8c07962b59d4e746fb1649992c50c03c43c2cccdb2e2554",
+          "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "quotation_text_sha256": "23f31c999fbf559bc1afab4c1451bca6257a53a6482abf4d662bf1206097d695"
+        }
+      ],
+      "provider_log_sha256": "5d7b9260868ca8d807e7474e36430f20c413a823996c95dbf95eeddd107bfd26",
+      "external_network_forwarded": 0
+    },
+    {
+      "mode": "deny-all",
+      "status": "passed",
+      "poems": 0,
+      "notes": 0,
+      "pages": 0,
+      "quotes": 0,
+      "pali_reads": 8,
+      "held_refusals": 3,
+      "per_poem": [
+        {
+          "id": "tha-ap283",
+          "refused": true
+        },
+        {
+          "id": "tha-ap284",
+          "refused": true
+        },
+        {
+          "id": "tha-ap285",
+          "refused": true
+        },
+        {
+          "id": "tha-ap286",
+          "refused": true
+        },
+        {
+          "id": "tha-ap287",
+          "refused": true
+        }
+      ],
+      "provider_log_sha256": "e9636da2035154d94b66a8f59dd0299d7d68f287c3f9359c60debb47a3b239f5",
+      "external_network_forwarded": 0
+    }
+  ],
+  "registry_count": 308,
+  "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "external_network_forwarded": 0
+}

@@ -341,6 +341,365 @@
     return "#read?" + new URLSearchParams({ uid: id5 });
   }
 
+  // src/apadana-thera281-285-profiles.mjs
+  var THERA_281_285_PROFILES = {
+    "tha-ap283": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-281.md",
+      "id": "tha-ap283",
+      "publisher_chapter": "chapter-3",
+      "poem": 281,
+      "verses": [
+        2623,
+        2626
+      ],
+      "root_verses": [
+        1,
+        4
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-281/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-281/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-281.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Pa\u1E47\u1E47ad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 281; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "e7e28b89da34ac190538dc864d38d774d1bc5fcc856e234297b918710ce90ac0",
+      "body_sha256": "83a24a52093631de548d07f3adafd7a513235bae6400b264e12eb6b9ad969b7e",
+      "notes_sha256": "9c5c95a72789757a323ea4d6f95d772b2a63e297ed1fa05e8481d62f676aefde",
+      "paratext_sha256": "e359dc1b1ecaef9a23975027903b1a668a803efca4a6a9191b9869d58393627f",
+      "root_sha256": "fafa844783d6c9c43476e51f28b4710fec4175188fe0af7c03f7753f9d47a307",
+      "stanza_layout": [
+        {
+          "local_label": "1-2",
+          "publisher_label": "2623-2624",
+          "suffix": "(1-2) [2623-2624]",
+          "lines": 8
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2625",
+          "suffix": "(3) [2625]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2626",
+          "suffix": "(4) [2626]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 281 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap283; title and numbering alone do not establish the mapping.",
+        "Bare chapter heading is separate note-free editorial paratext, not poem wording.",
+        "The eight-line first entry covers publisher labels 1\u20132 and VRI stanzas 1\u20132 at scope level; epithets and approach material are reordered, not a line-by-line alignment."
+      ]
+    },
+    "tha-ap284": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-282.md",
+      "id": "tha-ap284",
+      "publisher_chapter": "chapter-3",
+      "poem": 282,
+      "verses": [
+        2627,
+        2632
+      ],
+      "root_verses": [
+        5,
+        10
+      ],
+      "note_count": 17,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-282/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-282/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-282.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Phalad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 282; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "5044bd742be72be0f0f0ad96044e84b61dbc307d63027ebcf83173061eabb2ca",
+      "body_sha256": "b1d9d1cb1430498342fcc4fe9f41de3b18b31e33cf55df53760a20e707c22f22",
+      "notes_sha256": "805b4559091e0ad0410c8d6abb192d96751af210db0bd2be734d24331bba216e",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "9deb204438cdf7e6d7130128f4f96bcb660b8013f3f0096d2b393d32b2818b40",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2627",
+          "suffix": "(1) [2627]",
+          "lines": 4
+        },
+        {
+          "local_label": "2-3",
+          "publisher_label": "2628-2629",
+          "suffix": "(2-3) [2628-2629]",
+          "lines": 8
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2630",
+          "suffix": "(4) [2630]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2631",
+          "suffix": "(5) [2631]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2632",
+          "suffix": "(6) [2632]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 282 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap284; title and numbering alone do not establish the mapping.",
+        "Title note 1 retains literal unfinished more? xxx.",
+        "Note 3 prints Suddhattha although body and actual VRI root print Siddhattha; no harmonization.",
+        "Retain original botanical spellings/case and literal \u014B in note 13 billa\u014B.",
+        "The eight-line entry covers labels 2\u20133 and VRI 6\u20137 as a scope correspondence, not proven word/line equivalence.",
+        "Publisher expands the final attainment formula where VRI uses peyy\u0101la abbreviation; preserve both without reconstructing missing wording."
+      ]
+    },
+    "tha-ap285": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-283.md",
+      "id": "tha-ap285",
+      "publisher_chapter": "chapter-3",
+      "poem": 283,
+      "verses": [
+        2633,
+        2637
+      ],
+      "root_verses": [
+        11,
+        15
+      ],
+      "note_count": 6,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-283/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-283/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-283.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Paccuggamaniya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 283; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "6b80ef42e67d2d564089720f9e094e32d61e683d729da765b57e6afdeeb87cb2",
+      "body_sha256": "7a334528c864b2a588cc1ca72683821eb7f685f8d7539c38420afc09125d7c1c",
+      "notes_sha256": "b063b81c98dd58efa84599b0140a8c2e965328ef17fd24d4d3567e681da1e80f",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "129489364380846f0480b93eb746acb4662e365312c235f4793c4410e966ed64",
+      "stanza_layout": [
+        {
+          "local_label": "1-2",
+          "publisher_label": "2633-2634",
+          "suffix": "(1-2) [2633-2634]",
+          "lines": 8
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2635",
+          "suffix": "(3) [2635]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2636",
+          "suffix": "(4) [2636]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2637",
+          "suffix": "(5) [2637]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 283 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap285; title and numbering alone do not establish the mapping.",
+        "Publisher 27 aeons agrees with recorded VRI sattav\u012Bse (s\u012B. sy\u0101.) variant against 37 in the main root.",
+        "Publisher Supariv\u0101ra differs from actual main-root Sapariv\u0101ro; no recorded name variant in that block supports harmonization.",
+        "Retain literal \u014B in notes 2\u20133 and exact cc/chch and c/ch display selections.",
+        "First eight-line entry reorders simile/approach material across VRI 11\u201312; scope correspondence only.",
+        "Publisher expands the final attainment formula where VRI uses peyy\u0101la abbreviation; preserve both without reconstructing missing wording."
+      ]
+    },
+    "tha-ap286": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-284.md",
+      "id": "tha-ap286",
+      "publisher_chapter": "chapter-3",
+      "poem": 284,
+      "verses": [
+        2638,
+        2641
+      ],
+      "root_verses": [
+        16,
+        19
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-284/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-284/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-284.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ekapupphiya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 284; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "3743c457c52aba6009252e05055030168e2948028ae912ea68738e72d8936df7",
+      "body_sha256": "b53f12ccd78a5a3a4eb480674aeb4293c5ca49fd79b2e42eaad1ca82c9f208c8",
+      "notes_sha256": "58d0f605763978a2f30ba2e9be8b6c65c1ba055d8ad80e209a93b8f3eeba4f9e",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "90e46b21ac035786adc7d2611bae5aef19f1934b658fc82cd1147154631ee267",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2638",
+          "suffix": "(1) [2638]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2639",
+          "suffix": "(2) [2639]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2640",
+          "suffix": "(3) [2640]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2641",
+          "suffix": "(4) [2641]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 284 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap286; title and numbering alone do not establish the mapping.",
+        "Publisher rayless/v\u012Btara\u1E43sa interpretation and unfinished xxx question stay verbatim.",
+        "Actual VRI main root has p\u012Btara\u1E43si\u1E43va (yellow-rayed) and no recorded v\u012Bta variant at that block; do not silently repair either edition.",
+        "Publisher expands the final attainment formula where VRI uses peyy\u0101la abbreviation; preserve both without reconstructing missing wording."
+      ]
+    },
+    "tha-ap287": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-285.md",
+      "id": "tha-ap287",
+      "publisher_chapter": "chapter-3",
+      "poem": 285,
+      "verses": [
+        2642,
+        2645
+      ],
+      "root_verses": [
+        20,
+        23
+      ],
+      "note_count": 2,
+      "note_numbers": [
+        1,
+        2
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-285/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-285/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-285.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Maghavapupphiya",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 285; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "3757eebd15759c3396c84055ad97ae10dcda0120accd4cc4bbdfbf71d1577cb2",
+      "body_sha256": "a373a3e535f06c3efe5593bb233478afc69f8afb96875a61bdc357c34f49cb48",
+      "notes_sha256": "a309a276d17c1565a8c07962b59d4e746fb1649992c50c03c43c2cccdb2e2554",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "e2bc6f2b8a6d9e933d56b4f9694d840a87e47e27010765a4855937403e79270a",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2642",
+          "suffix": "(1) [2642]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2643",
+          "suffix": "(2) [2643]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2644",
+          "suffix": "(3) [2644]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2645",
+          "suffix": "(4) [2645]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 285 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap287; title and numbering alone do not establish the mapping.",
+        "Buddha is unnamed in both publisher poem and VRI root; 91 aeons does not authorize naming Vipassi or another Buddha.",
+        "Preserve publisher Narmada versus VRI Nammad\u0101 and note 2 p\u016Bja versus body p\u016Bj\u0101.",
+        "Publisher expands the final attainment formula where VRI uses peyy\u0101la abbreviation; preserve both without reconstructing missing wording."
+      ]
+    }
+  };
+
   // src/apadana-thera261-280-profiles.mjs
   var deepFreeze = (value) => {
     if (value && typeof value === "object") {
@@ -23627,7 +23986,8 @@
         "The earlier nine-poem source intake (D256) held publisher234 and reviewed33entries; its publisher240 summary warning is retained as historical intake provenance. This separately reviewed publisher234 choice does not rewrite that earlier approval or its source objects. Original full-chapter38count remains a source statement, not a line-complete VRI or generated coverage claim."
       ]
     },
-    ...THERA_261_280_PROFILES
+    ...THERA_261_280_PROFILES,
+    ...THERA_281_285_PROFILES
   });
 
   // src/apadana-profiles.mjs
@@ -33540,7 +33900,7 @@
   }
 
   // web/translation-policy.mjs
-  var PINNED_NEW_PARATEXT_IDS = /* @__PURE__ */ new Set(["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261", "tha-ap236", "tha-ap263", "tha-ap264", "tha-ap265", "tha-ap266", "tha-ap267", "tha-ap269", "tha-ap270", "tha-ap271", "tha-ap272", "tha-ap273", "tha-ap274", "tha-ap275", "tha-ap276", "tha-ap277", "tha-ap278", "tha-ap279", "tha-ap280", "tha-ap281"]);
+  var PINNED_NEW_PARATEXT_IDS = /* @__PURE__ */ new Set(["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261", "tha-ap236", "tha-ap263", "tha-ap264", "tha-ap265", "tha-ap266", "tha-ap267", "tha-ap269", "tha-ap270", "tha-ap271", "tha-ap272", "tha-ap273", "tha-ap274", "tha-ap275", "tha-ap276", "tha-ap277", "tha-ap278", "tha-ap279", "tha-ap280", "tha-ap281", "tha-ap283", "tha-ap284", "tha-ap285", "tha-ap286", "tha-ap287"]);
   var apadanaId = (uid2) => APADANA_PROFILES[uid2]?.path ? "ap:" + APADANA_PROFILES[uid2].path.replace(/^\/text\/|\/$/g, "") : void 0;
   var apadanaFamily = (id5) => typeof id5 === "string" && /^ap:/i.test(id5.trim());
   var isApadana = (value) => apadanaFamily(value?.translation_id) || value?.source === "apadana" || value?.source === "Legends of the Buddhist Saints (Apad\u0101na)" || own(value, "translation_revision") || own(value, "publisher_paratext") || own(value, "chapter_summary") || own(value, "publisher_divisions") || own(value, "publisher_preface") || own(value, "collection_summary") || own(value, "editorial_gap");

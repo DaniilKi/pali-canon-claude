@@ -242,7 +242,7 @@ export function parseTheraApadana(raw, profile) {
   if (new Set(owned).size !== owned.length || owned.length !== notes.length || notes.some(n => !owned.includes(n.number))) fail();
   // Publisher101 alone uses ## for its poem heading, beside a separate ## preface.
   const headings = [...poem.matchAll(profile.id === 'tha-ap103' ? /^## \\\[101\. /gm : /^### /gm)]; if (headings.length !== 1) fail();
-  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93', 'tha-ap103', 'tha-ap113', 'tha-ap123', 'tha-ap133', 'tha-ap143', 'tha-ap153', 'tha-ap163', 'tha-ap173', 'tha-ap183', 'tha-ap193', 'tha-ap203', 'tha-ap213', 'tha-ap243', 'tha-ap223', 'tha-ap233', 'tha-ap253', 'tha-ap263', 'tha-ap273'].includes(profile.id) !== (split > 0)) fail();
+  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93', 'tha-ap103', 'tha-ap113', 'tha-ap123', 'tha-ap133', 'tha-ap143', 'tha-ap153', 'tha-ap163', 'tha-ap173', 'tha-ap183', 'tha-ap193', 'tha-ap203', 'tha-ap213', 'tha-ap243', 'tha-ap223', 'tha-ap233', 'tha-ap253', 'tha-ap263', 'tha-ap273', 'tha-ap283'].includes(profile.id) !== (split > 0)) fail();
   const preface = poem.slice(0, split), body = poem.slice(split); refs(preface, []); refs(body, profile.note_numbers);
   const publisher_paratext = present(preface), text = present(body), translator_notes = notesFor(profile.note_numbers), paragraphs = text.split(/\n\n+/);
   const joinedColophons = ['tha-ap134', 'tha-ap184'].includes(profile.id);

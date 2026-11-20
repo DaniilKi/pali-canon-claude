@@ -5,6 +5,7 @@ import {createHash} from 'node:crypto';
 import {remainingEvidence} from './thera-remaining-evidence.mjs';
 import {held234Evidence} from './thera-held234-evidence.mjs';
 import {thera261280Evidence} from './thera261-280-evidence.mjs';
+import {thera281285Evidence} from './thera281-285-evidence.mjs';
 
 const historical=JSON.parse(readFileSync(new URL('../../docs/evidence/apadana/THERA_SCALED_APPROVAL.json',import.meta.url),'utf8'));
 const previousBytes=readFileSync(new URL('../../docs/evidence/apadana/THERA_241_250_APPROVAL.json',import.meta.url));
@@ -35,19 +36,48 @@ assert.deepEqual(latest.baseline_records,[...intake.baseline_records,...intake.a
 const held234=held234Evidence().approval;
 assert.deepEqual(held234.baseline_ids,latest.expected_profile_ids);
 assert.deepEqual(held234.baseline_records,[...latest.baseline_records,...latest.approved_records]);
-const newIntake=thera261280Evidence(),current=newIntake.approval;
+const newIntake=thera261280Evidence(),historical303=newIntake.approval;
 assert.deepEqual(newIntake.previous,held234,'The sealed285 intake remains the exact historical anchor');
-assert.deepEqual(current.baseline_ids,held234.expected_profile_ids);
-assert.deepEqual(current.baseline_records,[...held234.baseline_records,...held234.approved_records]);
+assert.deepEqual(historical303.baseline_ids,held234.expected_profile_ids);
+assert.deepEqual(historical303.baseline_records,[...held234.baseline_records,...held234.approved_records]);
 const approvedPairs=[[263,261],[264,262],[265,263],[266,264],[267,265],[269,267],[270,268],[271,269],[272,270],[273,271],[274,272],[275,273],[276,274],[277,275],[278,276],[279,277],[280,278],[281,279]];
 const approvedRecords=approvedPairs.map(([canonical,poem])=>({id:'tha-ap'+canonical,publisher_chapter:'chapter-3',poem}));
-assert.deepEqual(current.approved_records,approvedRecords);
-assert.deepEqual(current.approved_ids,approvedRecords.map(row=>row.id));
+assert.deepEqual(historical303.approved_records,approvedRecords);
+assert.deepEqual(historical303.approved_ids,approvedRecords.map(row=>row.id));
+assert.ok(historical303.approved_ids.every(id=>!historical303.baseline_ids.includes(id)));
+assert.deepEqual(historical303.expected_profile_ids,[...held234.expected_profile_ids,...historical303.approved_ids]);
+assert.equal(historical303.baseline_ids.length,285);assert.equal(historical303.expected_profile_ids.length,303);
+assert.equal(new Set(historical303.expected_profile_ids).size,303);
+for(const id of ['tha-ap262','tha-ap268','tha-ap282']){assert.ok(historical303.held_ids.includes(id));assert.ok(!historical303.expected_profile_ids.includes(id));}
+const historicalRecords=[...historical303.baseline_records,...historical303.approved_records];
+assert.deepEqual(historicalRecords.map(row=>row.id),historical303.expected_profile_ids);
+
+const five=thera281285Evidence(),current=five.approval;
+assert.deepEqual(five.previous,historical303,'The sealed303 intake remains the exact historical anchor');
+assert.deepEqual(current.baseline_ids,historical303.expected_profile_ids);
+assert.deepEqual(current.baseline_records,historicalRecords);
+const fivePairs=[[283,281],[284,282],[285,283],[286,284],[287,285]];
+const fiveRecords=fivePairs.map(([canonical,poem])=>({id:'tha-ap'+canonical,publisher_chapter:'chapter-3',poem}));
+assert.deepEqual(current.approved_records,fiveRecords);
+assert.deepEqual(current.approved_ids,fiveRecords.map(row=>row.id));
+assert.deepEqual(Object.keys(five.profiles),current.approved_ids);
+assert.deepEqual(Object.keys(five.links),current.approved_ids);
 assert.ok(current.approved_ids.every(id=>!current.baseline_ids.includes(id)));
-assert.deepEqual(current.expected_profile_ids,[...held234.expected_profile_ids,...current.approved_ids]);
-assert.equal(current.baseline_ids.length,285);assert.equal(current.expected_profile_ids.length,303);
-assert.equal(new Set(current.expected_profile_ids).size,303);
-for(const id of ['tha-ap262','tha-ap268','tha-ap282']){assert.ok(current.held_ids.includes(id));assert.ok(!current.expected_profile_ids.includes(id));}
+assert.deepEqual(current.expected_profile_ids,[...historical303.expected_profile_ids,...current.approved_ids]);
+assert.equal(current.baseline_ids.length,303);assert.equal(current.expected_profile_ids.length,308);
+assert.equal(new Set(current.expected_profile_ids).size,308);
+assert.deepEqual(current.held_ids,historical303.held_ids);
+assert.deepEqual(Object.keys(five.baseline.profile_objects),historical303.expected_profile_ids);
+assert.deepEqual(Object.keys(five.baseline.translation_objects),historical303.expected_profile_ids);
+for(const id of historical303.baseline_ids){
+  assert.deepEqual(five.baseline.profile_objects[id],newIntake.baseline.profile_objects[id]);
+  assert.deepEqual(five.baseline.translation_objects[id],newIntake.baseline.translation_objects[id]);
+}
+for(const id of historical303.approved_ids){
+  assert.deepEqual(five.baseline.profile_objects[id],newIntake.profiles[id]);
+  assert.deepEqual(five.baseline.translation_objects[id],newIntake.links[id]);
+}
+for(const id of current.held_ids)assert.ok(!current.expected_profile_ids.includes(id));
 const records=[...current.baseline_records,...current.approved_records];
 assert.deepEqual(records.map(row=>row.id),current.expected_profile_ids);
 assert.ok(records.every(row=>/^(?:thi|tha)-ap\d+$/.test(row.id)&&Number.isInteger(row.poem)&&row.poem>0&&['chapter-3','chapter-4'].includes(row.publisher_chapter)));

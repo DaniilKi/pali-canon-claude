@@ -10,6 +10,7 @@ import {validateApadanaChoice,validateEnglishPage} from '../web/translation-poli
 import {validateComparisonPage} from '../web/translation-comparison.mjs';
 import {view} from './helpers/widget-view.mjs';
 import {thera261280Evidence,digest} from './helpers/thera261-280-evidence.mjs';
+import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 const e=thera261280Evidence(),originalFetch=globalThis.fetch,cases=new Map(),clone=value=>JSON.parse(JSON.stringify(value));
 const tid=p=>canon.translationId(p);
 afterEach(()=>{globalThis.fetch=originalFetch;});
@@ -34,7 +35,9 @@ function refusal(host,widget,bad,first,pali,id){
 }
 
 test('all18 capabilities retain exact303 identity order and immutable independently sealed metadata',()=>{
- assert.deepEqual(Object.keys(APADANA_PROFILES),e.approval.expected_profile_ids);assert.equal(Object.keys(APADANA_PROFILES).length,303);
+ assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,308);
+ assert.equal(e.approval.expected_profile_ids.length,303);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,303),e.approval.expected_profile_ids);
+ assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,303),e.approval.expected_profile_ids);
  for(const id of e.approval.baseline_ids)assert.deepEqual(APADANA_PROFILES[id],e.baseline.profile_objects[id]);
  for(const id of e.ids){const p=APADANA_PROFILES[id],choices=english.available(canon.resolve(id).unit),choice=choices.find(row=>row.translation_id===tid(p));assert.ok(choice);validateApadanaChoice(choice,id);assert.deepEqual(p,e.peer.approved_profile_objects[id]);assert.deepEqual(p.mapping_notes,e.golden(id).mapping_notes);for(const key of ['raw_sha256','body_sha256','notes_sha256','paratext_sha256','root_sha256'])assert.equal(p[key],e.independent(id)[key]);assert.equal(choice.translation_revision,APADANA_COMMIT);}
  for(const id of ['tha-ap262','tha-ap268','tha-ap282']){assert.equal(APADANA_PROFILES[id],undefined);assert.throws(()=>validateApadanaChoice({...e.profiles['tha-ap272'],translation_id:'ap:chapter-3/poem-280'},id));}

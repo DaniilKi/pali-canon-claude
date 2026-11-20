@@ -1,0 +1,945 @@
+{
+  "status": "SOURCE_AND_FINITE_NORMALIZATION_APPROVED_FIVE_REVIEW_A_ONLY",
+  "created_utc": "2026-11-20T11:13:46.845929+00:00",
+  "baseline": "929e5c8 (parent-provided clean preserved 303-choice baseline)",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "original_XML_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "approved_ids": [
+    "tha-ap283",
+    "tha-ap284",
+    "tha-ap285",
+    "tha-ap286",
+    "tha-ap287"
+  ],
+  "approved_publisher_poems": [
+    281,
+    282,
+    283,
+    284,
+    285
+  ],
+  "source_approval": true,
+  "normalization_approval": true,
+  "source_approval_count": 5,
+  "normalization_approval_count": 5,
+  "approved_profile_objects": {
+    "tha-ap283": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-281.md",
+      "id": "tha-ap283",
+      "publisher_chapter": "chapter-3",
+      "poem": 281,
+      "verses": [
+        2623,
+        2626
+      ],
+      "root_verses": [
+        1,
+        4
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-281/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-281/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-281.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Paṇṇadāyaka",
+      "reference": "Therā Apadāna publisher poem 281; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "e7e28b89da34ac190538dc864d38d774d1bc5fcc856e234297b918710ce90ac0",
+      "body_sha256": "83a24a52093631de548d07f3adafd7a513235bae6400b264e12eb6b9ad969b7e",
+      "notes_sha256": "9c5c95a72789757a323ea4d6f95d772b2a63e297ed1fa05e8481d62f676aefde",
+      "paratext_sha256": "e359dc1b1ecaef9a23975027903b1a668a803efca4a6a9191b9869d58393627f",
+      "root_sha256": "fafa844783d6c9c43476e51f28b4710fec4175188fe0af7c03f7753f9d47a307",
+      "stanza_layout": [
+        {
+          "local_label": "1-2",
+          "publisher_label": "2623-2624",
+          "suffix": "(1-2) [2623-2624]",
+          "lines": 8
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2625",
+          "suffix": "(3) [2625]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2626",
+          "suffix": "(4) [2626]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 281 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap283; title and numbering alone do not establish the mapping.",
+        "Bare chapter heading is separate note-free editorial paratext, not poem wording.",
+        "The eight-line first entry covers publisher labels 1–2 and VRI stanzas 1–2 at scope level; epithets and approach material are reordered, not a line-by-line alignment."
+      ]
+    },
+    "tha-ap284": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-282.md",
+      "id": "tha-ap284",
+      "publisher_chapter": "chapter-3",
+      "poem": 282,
+      "verses": [
+        2627,
+        2632
+      ],
+      "root_verses": [
+        5,
+        10
+      ],
+      "note_count": 17,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-282/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-282/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-282.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Phaladāyaka",
+      "reference": "Therā Apadāna publisher poem 282; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "5044bd742be72be0f0f0ad96044e84b61dbc307d63027ebcf83173061eabb2ca",
+      "body_sha256": "b1d9d1cb1430498342fcc4fe9f41de3b18b31e33cf55df53760a20e707c22f22",
+      "notes_sha256": "805b4559091e0ad0410c8d6abb192d96751af210db0bd2be734d24331bba216e",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "9deb204438cdf7e6d7130128f4f96bcb660b8013f3f0096d2b393d32b2818b40",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2627",
+          "suffix": "(1) [2627]",
+          "lines": 4
+        },
+        {
+          "local_label": "2-3",
+          "publisher_label": "2628-2629",
+          "suffix": "(2-3) [2628-2629]",
+          "lines": 8
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2630",
+          "suffix": "(4) [2630]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2631",
+          "suffix": "(5) [2631]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2632",
+          "suffix": "(6) [2632]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 282 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap284; title and numbering alone do not establish the mapping.",
+        "Title note 1 retains literal unfinished more? xxx.",
+        "Note 3 prints Suddhattha although body and actual VRI root print Siddhattha; no harmonization.",
+        "Retain original botanical spellings/case and literal ŋ in note 13 billaŋ.",
+        "The eight-line entry covers labels 2–3 and VRI 6–7 as a scope correspondence, not proven word/line equivalence.",
+        "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording."
+      ]
+    },
+    "tha-ap285": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-283.md",
+      "id": "tha-ap285",
+      "publisher_chapter": "chapter-3",
+      "poem": 283,
+      "verses": [
+        2633,
+        2637
+      ],
+      "root_verses": [
+        11,
+        15
+      ],
+      "note_count": 6,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-283/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-283/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-283.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Paccuggamaniya",
+      "reference": "Therā Apadāna publisher poem 283; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "6b80ef42e67d2d564089720f9e094e32d61e683d729da765b57e6afdeeb87cb2",
+      "body_sha256": "7a334528c864b2a588cc1ca72683821eb7f685f8d7539c38420afc09125d7c1c",
+      "notes_sha256": "b063b81c98dd58efa84599b0140a8c2e965328ef17fd24d4d3567e681da1e80f",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "129489364380846f0480b93eb746acb4662e365312c235f4793c4410e966ed64",
+      "stanza_layout": [
+        {
+          "local_label": "1-2",
+          "publisher_label": "2633-2634",
+          "suffix": "(1-2) [2633-2634]",
+          "lines": 8
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2635",
+          "suffix": "(3) [2635]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2636",
+          "suffix": "(4) [2636]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2637",
+          "suffix": "(5) [2637]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 283 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap285; title and numbering alone do not establish the mapping.",
+        "Publisher 27 aeons agrees with recorded VRI sattavīse (sī. syā.) variant against 37 in the main root.",
+        "Publisher Suparivāra differs from actual main-root Saparivāro; no recorded name variant in that block supports harmonization.",
+        "Retain literal ŋ in notes 2–3 and exact cc/chch and c/ch display selections.",
+        "First eight-line entry reorders simile/approach material across VRI 11–12; scope correspondence only.",
+        "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording."
+      ]
+    },
+    "tha-ap286": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-284.md",
+      "id": "tha-ap286",
+      "publisher_chapter": "chapter-3",
+      "poem": 284,
+      "verses": [
+        2638,
+        2641
+      ],
+      "root_verses": [
+        16,
+        19
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-284/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-284/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-284.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ekapupphiya",
+      "reference": "Therā Apadāna publisher poem 284; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "3743c457c52aba6009252e05055030168e2948028ae912ea68738e72d8936df7",
+      "body_sha256": "b53f12ccd78a5a3a4eb480674aeb4293c5ca49fd79b2e42eaad1ca82c9f208c8",
+      "notes_sha256": "58d0f605763978a2f30ba2e9be8b6c65c1ba055d8ad80e209a93b8f3eeba4f9e",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "90e46b21ac035786adc7d2611bae5aef19f1934b658fc82cd1147154631ee267",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2638",
+          "suffix": "(1) [2638]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2639",
+          "suffix": "(2) [2639]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2640",
+          "suffix": "(3) [2640]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2641",
+          "suffix": "(4) [2641]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 284 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap286; title and numbering alone do not establish the mapping.",
+        "Publisher rayless/vītaraṃsa interpretation and unfinished xxx question stay verbatim.",
+        "Actual VRI main root has pītaraṃsiṃva (yellow-rayed) and no recorded vīta variant at that block; do not silently repair either edition.",
+        "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording."
+      ]
+    },
+    "tha-ap287": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-285.md",
+      "id": "tha-ap287",
+      "publisher_chapter": "chapter-3",
+      "poem": 285,
+      "verses": [
+        2642,
+        2645
+      ],
+      "root_verses": [
+        20,
+        23
+      ],
+      "note_count": 2,
+      "note_numbers": [
+        1,
+        2
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-285/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-285/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-285.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Maghavapupphiya",
+      "reference": "Therā Apadāna publisher poem 285; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "3757eebd15759c3396c84055ad97ae10dcda0120accd4cc4bbdfbf71d1577cb2",
+      "body_sha256": "a373a3e535f06c3efe5593bb233478afc69f8afb96875a61bdc357c34f49cb48",
+      "notes_sha256": "a309a276d17c1565a8c07962b59d4e746fb1649992c50c03c43c2cccdb2e2554",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "e2bc6f2b8a6d9e933d56b4f9694d840a87e47e27010765a4855937403e79270a",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2642",
+          "suffix": "(1) [2642]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2643",
+          "suffix": "(2) [2643]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2644",
+          "suffix": "(3) [2644]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2645",
+          "suffix": "(4) [2645]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 285 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap287; title and numbering alone do not establish the mapping.",
+        "Buddha is unnamed in both publisher poem and VRI root; 91 aeons does not authorize naming Vipassi or another Buddha.",
+        "Preserve publisher Narmada versus VRI Nammadā and note 2 pūja versus body pūjā.",
+        "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording."
+      ]
+    }
+  },
+  "approved_link_objects": {
+    "tha-ap283": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-281.md",
+      "id": "tha-ap283",
+      "publisher_chapter": "chapter-3",
+      "poem": 281,
+      "verses": [
+        2623,
+        2626
+      ],
+      "root_verses": [
+        1,
+        4
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-281/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-281/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-281.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Paṇṇadāyaka",
+      "reference": "Therā Apadāna publisher poem 281; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "e7e28b89da34ac190538dc864d38d774d1bc5fcc856e234297b918710ce90ac0",
+      "body_sha256": "83a24a52093631de548d07f3adafd7a513235bae6400b264e12eb6b9ad969b7e",
+      "notes_sha256": "9c5c95a72789757a323ea4d6f95d772b2a63e297ed1fa05e8481d62f676aefde",
+      "paratext_sha256": "e359dc1b1ecaef9a23975027903b1a668a803efca4a6a9191b9869d58393627f",
+      "root_sha256": "fafa844783d6c9c43476e51f28b4710fec4175188fe0af7c03f7753f9d47a307",
+      "stanza_layout": [
+        {
+          "local_label": "1-2",
+          "publisher_label": "2623-2624",
+          "suffix": "(1-2) [2623-2624]",
+          "lines": 8
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2625",
+          "suffix": "(3) [2625]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2626",
+          "suffix": "(4) [2626]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 281 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap283; title and numbering alone do not establish the mapping.",
+        "Bare chapter heading is separate note-free editorial paratext, not poem wording.",
+        "The eight-line first entry covers publisher labels 1–2 and VRI stanzas 1–2 at scope level; epithets and approach material are reordered, not a line-by-line alignment."
+      ],
+      "english": "Paṇṇadāyaka",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "tha-ap284": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-282.md",
+      "id": "tha-ap284",
+      "publisher_chapter": "chapter-3",
+      "poem": 282,
+      "verses": [
+        2627,
+        2632
+      ],
+      "root_verses": [
+        5,
+        10
+      ],
+      "note_count": 17,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-282/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-282/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-282.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Phaladāyaka",
+      "reference": "Therā Apadāna publisher poem 282; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "5044bd742be72be0f0f0ad96044e84b61dbc307d63027ebcf83173061eabb2ca",
+      "body_sha256": "b1d9d1cb1430498342fcc4fe9f41de3b18b31e33cf55df53760a20e707c22f22",
+      "notes_sha256": "805b4559091e0ad0410c8d6abb192d96751af210db0bd2be734d24331bba216e",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "9deb204438cdf7e6d7130128f4f96bcb660b8013f3f0096d2b393d32b2818b40",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2627",
+          "suffix": "(1) [2627]",
+          "lines": 4
+        },
+        {
+          "local_label": "2-3",
+          "publisher_label": "2628-2629",
+          "suffix": "(2-3) [2628-2629]",
+          "lines": 8
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2630",
+          "suffix": "(4) [2630]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2631",
+          "suffix": "(5) [2631]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2632",
+          "suffix": "(6) [2632]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 282 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap284; title and numbering alone do not establish the mapping.",
+        "Title note 1 retains literal unfinished more? xxx.",
+        "Note 3 prints Suddhattha although body and actual VRI root print Siddhattha; no harmonization.",
+        "Retain original botanical spellings/case and literal ŋ in note 13 billaŋ.",
+        "The eight-line entry covers labels 2–3 and VRI 6–7 as a scope correspondence, not proven word/line equivalence.",
+        "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording."
+      ],
+      "english": "Phaladāyaka",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "tha-ap285": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-283.md",
+      "id": "tha-ap285",
+      "publisher_chapter": "chapter-3",
+      "poem": 283,
+      "verses": [
+        2633,
+        2637
+      ],
+      "root_verses": [
+        11,
+        15
+      ],
+      "note_count": 6,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-283/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-283/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-283.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Paccuggamaniya",
+      "reference": "Therā Apadāna publisher poem 283; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "6b80ef42e67d2d564089720f9e094e32d61e683d729da765b57e6afdeeb87cb2",
+      "body_sha256": "7a334528c864b2a588cc1ca72683821eb7f685f8d7539c38420afc09125d7c1c",
+      "notes_sha256": "b063b81c98dd58efa84599b0140a8c2e965328ef17fd24d4d3567e681da1e80f",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "129489364380846f0480b93eb746acb4662e365312c235f4793c4410e966ed64",
+      "stanza_layout": [
+        {
+          "local_label": "1-2",
+          "publisher_label": "2633-2634",
+          "suffix": "(1-2) [2633-2634]",
+          "lines": 8
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2635",
+          "suffix": "(3) [2635]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2636",
+          "suffix": "(4) [2636]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2637",
+          "suffix": "(5) [2637]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 283 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap285; title and numbering alone do not establish the mapping.",
+        "Publisher 27 aeons agrees with recorded VRI sattavīse (sī. syā.) variant against 37 in the main root.",
+        "Publisher Suparivāra differs from actual main-root Saparivāro; no recorded name variant in that block supports harmonization.",
+        "Retain literal ŋ in notes 2–3 and exact cc/chch and c/ch display selections.",
+        "First eight-line entry reorders simile/approach material across VRI 11–12; scope correspondence only.",
+        "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording."
+      ],
+      "english": "Paccuggamaniya",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "tha-ap286": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-284.md",
+      "id": "tha-ap286",
+      "publisher_chapter": "chapter-3",
+      "poem": 284,
+      "verses": [
+        2638,
+        2641
+      ],
+      "root_verses": [
+        16,
+        19
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-284/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-284/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-284.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Ekapupphiya",
+      "reference": "Therā Apadāna publisher poem 284; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "3743c457c52aba6009252e05055030168e2948028ae912ea68738e72d8936df7",
+      "body_sha256": "b53f12ccd78a5a3a4eb480674aeb4293c5ca49fd79b2e42eaad1ca82c9f208c8",
+      "notes_sha256": "58d0f605763978a2f30ba2e9be8b6c65c1ba055d8ad80e209a93b8f3eeba4f9e",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "90e46b21ac035786adc7d2611bae5aef19f1934b658fc82cd1147154631ee267",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2638",
+          "suffix": "(1) [2638]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2639",
+          "suffix": "(2) [2639]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2640",
+          "suffix": "(3) [2640]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2641",
+          "suffix": "(4) [2641]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 284 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap286; title and numbering alone do not establish the mapping.",
+        "Publisher rayless/vītaraṃsa interpretation and unfinished xxx question stay verbatim.",
+        "Actual VRI main root has pītaraṃsiṃva (yellow-rayed) and no recorded vīta variant at that block; do not silently repair either edition.",
+        "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording."
+      ],
+      "english": "Ekapupphiya",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "tha-ap287": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-285.md",
+      "id": "tha-ap287",
+      "publisher_chapter": "chapter-3",
+      "poem": 285,
+      "verses": [
+        2642,
+        2645
+      ],
+      "root_verses": [
+        20,
+        23
+      ],
+      "note_count": 2,
+      "note_numbers": [
+        1,
+        2
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-285/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-285/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-285.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Maghavapupphiya",
+      "reference": "Therā Apadāna publisher poem 285; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "3757eebd15759c3396c84055ad97ae10dcda0120accd4cc4bbdfbf71d1577cb2",
+      "body_sha256": "a373a3e535f06c3efe5593bb233478afc69f8afb96875a61bdc357c34f49cb48",
+      "notes_sha256": "a309a276d17c1565a8c07962b59d4e746fb1649992c50c03c43c2cccdb2e2554",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "e2bc6f2b8a6d9e933d56b4f9694d840a87e47e27010765a4855937403e79270a",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2642",
+          "suffix": "(1) [2642]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2643",
+          "suffix": "(2) [2643]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2644",
+          "suffix": "(3) [2644]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2645",
+          "suffix": "(4) [2645]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 285 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap287; title and numbering alone do not establish the mapping.",
+        "Buddha is unnamed in both publisher poem and VRI root; 91 aeons does not authorize naming Vipassi or another Buddha.",
+        "Preserve publisher Narmada versus VRI Nammadā and note 2 pūja versus body pūjā.",
+        "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording."
+      ],
+      "english": "Maghavapupphiya",
+      "match": "individually-reviewed-whole-poem"
+    }
+  },
+  "core_seals": {
+    "GOLDENS.json": "7c2083449977ac2de7cedb9df34dea6f5eee02449ec029dd6d6bb3cbca26f9ad",
+    "EXPECTED_PROFILES.json": "50390be204501c1a82efb1f4b67c1a685ad702c2d60c39a6f88120b4c480ed30",
+    "EXPECTED_LINKS.json": "c4db039b0fb86065b4d9cae28c708d3cd0292a1477b1e41edcbce9310308859b",
+    "REPLAY_RECEIPT.json": "5b398b2ff078626bee3cef8ca6cbd1d5998f80c5723d224d5c2b56f347da4709"
+  },
+  "original_first_seal_sha256": "600906f662f89303f242b4e60b665481424fbb5b0a5a8292b1e053333c2658e3",
+  "original_first_facts_sha256": "c3398f22d2f9c38a25334b2ef4ec69369f175764361e71af3c50419be600b047",
+  "rights_review_sha256": "3a74cd523e5d402f45cc4543c4dc3b04fc2869ed5c122fe8639885f97abd60df",
+  "copy_policy_sha256": "4a38a74f2a48f820f7698d172ef88da68c74e6d32445d01f39dcefcc63ec99f9",
+  "totals": {
+    "poems": 5,
+    "body_paragraphs": 35,
+    "stanza_entries": 20,
+    "printed_local_labels": 23,
+    "poem_notes": 32,
+    "chapter_heading_paratexts": 1,
+    "paratext_notes": 0,
+    "summaries": 0,
+    "summary_notes": 0,
+    "paired_display_occurrences": 6
+  },
+  "per_poem": [
+    {
+      "id": "tha-ap283",
+      "poem": 281,
+      "scope": "APPROVE_EXACT_COMPLETE_PUBLISHER_POEM_AND_FINITE_PRESENTATION_ONLY",
+      "source_approval": true,
+      "finite_normalization_approval": true,
+      "notes": 3,
+      "body_paragraphs": 6,
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 281 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap283; title and numbering alone do not establish the mapping.",
+        "Bare chapter heading is separate note-free editorial paratext, not poem wording.",
+        "The eight-line first entry covers publisher labels 1–2 and VRI stanzas 1–2 at scope level; epithets and approach material are reordered, not a line-by-line alignment."
+      ]
+    },
+    {
+      "id": "tha-ap284",
+      "poem": 282,
+      "scope": "APPROVE_EXACT_COMPLETE_PUBLISHER_POEM_AND_FINITE_PRESENTATION_ONLY",
+      "source_approval": true,
+      "finite_normalization_approval": true,
+      "notes": 17,
+      "body_paragraphs": 8,
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 282 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap284; title and numbering alone do not establish the mapping.",
+        "Title note 1 retains literal unfinished more? xxx.",
+        "Note 3 prints Suddhattha although body and actual VRI root print Siddhattha; no harmonization.",
+        "Retain original botanical spellings/case and literal ŋ in note 13 billaŋ.",
+        "The eight-line entry covers labels 2–3 and VRI 6–7 as a scope correspondence, not proven word/line equivalence.",
+        "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording."
+      ]
+    },
+    {
+      "id": "tha-ap285",
+      "poem": 283,
+      "scope": "APPROVE_EXACT_COMPLETE_PUBLISHER_POEM_AND_FINITE_PRESENTATION_ONLY",
+      "source_approval": true,
+      "finite_normalization_approval": true,
+      "notes": 6,
+      "body_paragraphs": 7,
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 283 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap285; title and numbering alone do not establish the mapping.",
+        "Publisher 27 aeons agrees with recorded VRI sattavīse (sī. syā.) variant against 37 in the main root.",
+        "Publisher Suparivāra differs from actual main-root Saparivāro; no recorded name variant in that block supports harmonization.",
+        "Retain literal ŋ in notes 2–3 and exact cc/chch and c/ch display selections.",
+        "First eight-line entry reorders simile/approach material across VRI 11–12; scope correspondence only.",
+        "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording."
+      ]
+    },
+    {
+      "id": "tha-ap286",
+      "poem": 284,
+      "scope": "APPROVE_EXACT_COMPLETE_PUBLISHER_POEM_AND_FINITE_PRESENTATION_ONLY",
+      "source_approval": true,
+      "finite_normalization_approval": true,
+      "notes": 4,
+      "body_paragraphs": 7,
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 284 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap286; title and numbering alone do not establish the mapping.",
+        "Publisher rayless/vītaraṃsa interpretation and unfinished xxx question stay verbatim.",
+        "Actual VRI main root has pītaraṃsiṃva (yellow-rayed) and no recorded vīta variant at that block; do not silently repair either edition.",
+        "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording."
+      ]
+    },
+    {
+      "id": "tha-ap287",
+      "poem": 285,
+      "scope": "APPROVE_EXACT_COMPLETE_PUBLISHER_POEM_AND_FINITE_PRESENTATION_ONLY",
+      "source_approval": true,
+      "finite_normalization_approval": true,
+      "notes": 2,
+      "body_paragraphs": 7,
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 285 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap287; title and numbering alone do not establish the mapping.",
+        "Buddha is unnamed in both publisher poem and VRI root; 91 aeons does not authorize naming Vipassi or another Buddha.",
+        "Preserve publisher Narmada versus VRI Nammadā and note 2 pūja versus body pūjā.",
+        "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording."
+      ]
+    }
+  ],
+  "derivation": {
+    "original_first": true,
+    "new_peer_outputs_read_before_own_seal": false,
+    "production_parser_import_or_execution": false,
+    "all_original_XML_tuple_comparisons": 14645,
+    "metadata_only": true,
+    "complete_English_or_Pali_payload_files_written": 0,
+    "complete_English_or_Pali_payload_stdout": false,
+    "initial_script_sha256": "c6017ccb4d746de5aea95a5b0c65609cc960fd6642cd33be2b721f68b5c77c5f",
+    "formatter_sha256": "a74626fb9c3fa77082532351e30aa7b36adec978a940c43d8c7a00aab82bf929",
+    "single_file_portable_script_sha256": "7246fb40d37e27da9d09c48444d244f3a12511abf1790291e352a938d9d6fe9f",
+    "portable_is_minimal_inline_combination_of_same_original_derivation_and_formatter": true
+  },
+  "source_scope": "Exactly five complete publisher-edition poems, all title/body/notes and both colophons; independent PTS/BJTS edition, not a line-complete VRI translation. No neighboring source activation.",
+  "finite_normalization_scope": [
+    "Exact observed complementary c/ch and cc/chch state-on display choices only; six actual occurrences in finite owners",
+    "Three eight-line physical entries remain paired: 281 labels1–2,282 labels2–3,283 labels1–2",
+    "All35 body paragraphs,32 owned notes,printed23 labels and all literal Unicode/typography remain intact",
+    "Bare281 chapter heading is separate note-free editorial paratext; no prose-preface descriptor and no note reparenting",
+    "No summaries or recitation closure imported from prior280 or future chapter material",
+    "All source spelling, Suddhattha note inconsistency, xxx questions, edition readings and unnamed recipient remain unchanged"
+  ],
+  "important_caveats": [
+    "Bare chapter heading is separate note-free editorial paratext, not poem wording.",
+    "The eight-line first entry covers publisher labels 1–2 and VRI stanzas 1–2 at scope level; epithets and approach material are reordered, not a line-by-line alignment.",
+    "Title note 1 retains literal unfinished more? xxx.",
+    "Note 3 prints Suddhattha although body and actual VRI root print Siddhattha; no harmonization.",
+    "Retain original botanical spellings/case and literal ŋ in note 13 billaŋ.",
+    "The eight-line entry covers labels 2–3 and VRI 6–7 as a scope correspondence, not proven word/line equivalence.",
+    "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording.",
+    "Publisher 27 aeons agrees with recorded VRI sattavīse (sī. syā.) variant against 37 in the main root.",
+    "Publisher Suparivāra differs from actual main-root Saparivāro; no recorded name variant in that block supports harmonization.",
+    "Retain literal ŋ in notes 2–3 and exact cc/chch and c/ch display selections.",
+    "First eight-line entry reorders simile/approach material across VRI 11–12; scope correspondence only.",
+    "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording.",
+    "Publisher rayless/vītaraṃsa interpretation and unfinished xxx question stay verbatim.",
+    "Actual VRI main root has pītaraṃsiṃva (yellow-rayed) and no recorded vīta variant at that block; do not silently repair either edition.",
+    "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording.",
+    "Buddha is unnamed in both publisher poem and VRI root; 91 aeons does not authorize naming Vipassi or another Buddha.",
+    "Preserve publisher Narmada versus VRI Nammadā and note 2 pūja versus body pūjā.",
+    "Publisher expands the final attainment formula where VRI uses peyyāla abbreviation; preserve both without reconstructing missing wording."
+  ],
+  "summary_scope": {
+    "summaries": 0,
+    "previous280_chapter_summary_and_recitation_closure_excluded": true
+  },
+  "excluded_publisher_poems": [
+    260,
+    266,
+    280
+  ],
+  "excluded_canonical_ids": [
+    "tha-ap262",
+    "tha-ap268",
+    "tha-ap282"
+  ],
+  "holds_untouched": [
+    "publisher260 malformed summary",
+    "publisher266 standalone cc/joined colophon",
+    "publisher280 standalone CC/summary/closure and unresolved coverage classification",
+    "prior source holds70/140/158/159",
+    "separate Sāriputta original note1130 apparatus and all existing canonical locators"
+  ],
+  "scope_boundary_use": "Publisher280 and286 and exact previous/next canonical blocks were used only to verify boundaries; neither is newly approved here. In particular original VRI recitation closure at8700 is outside281.",
+  "second_independent_reviewer": "Root reports independent B core comparison matched5 pins/35 paragraph hashes/32 note hashes/20 quote hashes; that report is separate from this original-first approval and is not this reviewer’s oracle.",
+  "runtime_approval": false,
+  "implementation_approval": false,
+  "local_package_browser_approval": false,
+  "remote_ci_approval": false,
+  "release_approval": false,
+  "push_approval": false,
+  "activations": 0,
+  "future_gates": [
+    "independent A/B descriptor and source comparison",
+    "exact runtime registrations and finite owner-only parser changes",
+    "all old303 objects/canon/citations/source-note sidecar/private preservation",
+    "source/client/backend actual output and corruption-negative tests",
+    "package/offline installed live-source fixture proof and strict resource audit",
+    "applicable exact-head CI and separate release authorization",
+    "human specialist/physical-device acceptance where required"
+  ],
+  "reviewer_operations": [
+    "read originals and six rights/routing artifacts",
+    "stdlib in-memory normalization/hash/XML tuple derivation",
+    "metadata-only external output",
+    "no project,build,test,Git,CI,network or private-data actions"
+  ]
+}

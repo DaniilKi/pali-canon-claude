@@ -1,0 +1,149 @@
+{
+  "status": "LOCAL_UNPUBLISHED_VALIDATION_PASSED_PENDING_FINAL_INDEPENDENT_REVIEW",
+  "base_commit": "929e5c83d4157a0339ab24bb7039e1441a348b2c",
+  "current_choices": 308,
+  "added_choices": 5,
+  "publishers": [
+    281,
+    282,
+    283,
+    284,
+    285
+  ],
+  "canonical_ids": [
+    "tha-ap283",
+    "tha-ap284",
+    "tha-ap285",
+    "tha-ap286",
+    "tha-ap287"
+  ],
+  "scope": {
+    "body_paragraphs": 35,
+    "physical_verse_entries": 20,
+    "verse_labels": 23,
+    "poem_notes": 32,
+    "separate_note_free_bare_heading": 1,
+    "line_complete_VRI_or_whole_chapter_claim": false
+  },
+  "full_check": {
+    "exit": 0,
+    "tests": 1768,
+    "pass": 1574,
+    "optional_source_skips": 194,
+    "failure": 0,
+    "cancellation": 0,
+    "duration_ms": 301421.50918,
+    "audit_texts": 8544,
+    "audit_problems": 0,
+    "log_sha256": "da5d56bebacc5c153bcc5cc256a9c9ac6703a02043af43ea510fc2ff43ab3c0b"
+  },
+  "smoke": {
+    "exit": 0,
+    "tools": 34,
+    "checks": 64,
+    "log_sha256": "8262dd13f13f0c45ba6d7152bb6f931f5a2aedcc728d7498a2547e961de2aa97"
+  },
+  "evals": {
+    "exit": 0,
+    "passed": 195,
+    "questions": 201,
+    "live_skips": 6,
+    "non_skipped_score": 1,
+    "log_sha256": "c12336d756c1baa68acfba6a887cd0d9d34ede0fbdbe9a99c12c5b12d586d87f"
+  },
+  "root_preservation": {
+    "file": "/tmp/pali-281-285-preflight/FINAL_PRESERVATION.json",
+    "sha256": "c86b234b4b08f5c415f04cdbddd1c1252fde4bfb964f463e592605029edc77c5"
+  },
+  "preserved_lines": {
+    "file": "/tmp/pali-281-285-preflight/PRESERVED_INDEPENDENT_LINES.json",
+    "sha256": "82fe58adbad7eb91c59d4377071c79af6b5fa0b630aa426ea172c7e64238975e"
+  },
+  "archive": {
+    "sha256": "0a38903061a55d027ab8e8c67c601d06f50bad862a05fbafdd2892c4dc4f44b9",
+    "member_review_sha256": "df5c90b059dde425654eac1531271a5d77ed396cba95c7e1b9f24c509cb8a956"
+  },
+  "permissions": {
+    "local_only": true,
+    "push": false,
+    "merge": false,
+    "new_or_repeat_CI_run": false,
+    "deployment": false,
+    "outreach": false
+  },
+  "pending": [
+    "Independent final implementation review and exact reviewed snapshot",
+    "Existing macOS job reconciliation; no retry or promotion",
+    "Later exact-commit remote CI before any remote acceptance",
+    "Physical devices, human assistive technology, signed-in hosts, live providers and specialist review"
+  ],
+  "observed_utc": "2026-11-20T11:54:55.326627+00:00",
+  "native": {
+    "passed": true,
+    "checks": 48,
+    "fixture_poem_observations": 20,
+    "deny_all_refusals": 20,
+    "private_saved_and_draft_cells": 8,
+    "widths": [
+      1280,
+      390
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "modes": [
+      "fixture",
+      "deny-all"
+    ],
+    "all32_distinct_notes_verified": true,
+    "physical_device_or_human_AT_claim": false,
+    "native_UI_default_page_size": 6000,
+    "native_next_page_not_exercised_all_five_fit_one_page": true,
+    "stdio500_continuation_pages": 11,
+    "source_note_access_in_both_offline_modes": true,
+    "external_network_forwarded": 0,
+    "owned_groups_absent_and_leaders_reaped": true,
+    "receipt_sha256": "3fde46ccbc9e6c371e4b4018194e5a3af8cff861d0c006ddd418ee20bd61d071",
+    "launch_sha256": "b8d2854bedcd60a567901867aea964ad973f6cdee84a8c74b2d5dcac0929b613"
+  },
+  "strict_widget": {
+    "resource_strings_checked": 2,
+    "version": 35,
+    "aligned_checked": 3,
+    "network_attempts": 0,
+    "receipt_sha256": "f120568c373fce4cdb7d6511d241f767d7e2f2f5ca95408d186a822873a03534"
+  },
+  "guard_selftest": {
+    "blocked_calls": [
+      34,
+      39
+    ],
+    "real_external_network_forwarded": 0,
+    "literal_loopback_lookup_is_synthetic": true,
+    "receipt_sha256": "d8c9948d7d5635532bbcb09f67d2a84bd3ea145a56633881f5ceb1bfcac60f93"
+  },
+  "verifier_attempts": [
+    {
+      "file": "INSTALLED_READER_ARGUMENT_SHA_ATTEMPT1.log",
+      "sha256": "bbd55b8335de06bc269a297b709bd43d719015a712d375e835e52d9557d20591"
+    },
+    {
+      "file": "INSTALLED_READER.log",
+      "sha256": "3584d7a0a707395720c485428c3d2264f12c76ed0d5fef04a5a5eff864410138"
+    },
+    {
+      "file": "INSTALLED_READER_V3.log",
+      "sha256": "9bd4cc689eb7b35965071a5d703b8a2f9612efd2d8134652c4d77ce1614fd666"
+    },
+    {
+      "file": "INSTALLED_READER_V4.log",
+      "sha256": "71191425f17e2b2575d673d369075b03efca005180041412ac4c9e74db1e82cc"
+    },
+    {
+      "file": "INSTALLED_READER_V5.log",
+      "sha256": "8e5a2f87b7c8e54e41dbd064c9103c910fa9bd9dc5571f21f5eed03eeae3c02a"
+    }
+  ],
+  "verifier_corrections": "Preserved argument-seal failure; corrected local-listen guard and bare-heading selector. Two later phone-copy timeouts occurred before complete native acceptance; V5 located the copy action. V6 adds explicit real-navigation freshness checks and passes the same finite UI assertions. The prior timing failure cause is not claimed conclusively established, nor is an application defect claimed repaired."
+}

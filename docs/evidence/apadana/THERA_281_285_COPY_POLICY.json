@@ -1,0 +1,50 @@
+{
+  "status": "METADATA_ONLY_COPY_POLICY",
+  "safe_to_copy": [
+    "GOLDENS.json",
+    "EXPECTED_PROFILES.json",
+    "EXPECTED_LINKS.json",
+    "SOURCE_APPROVAL.json",
+    "RIGHTS_REVIEW.json",
+    "COPY_POLICY.json",
+    "README.md",
+    "SEALS.json",
+    "original-first/ORIGINAL_FACTS.json",
+    "ORIGINAL_FIRST_SEALS.json",
+    "portable/review_thera281_285.py"
+  ],
+  "never_copy": [
+    "raw source Markdown/XML",
+    "complete normalized English body/notes/paratext buffers",
+    "complete normalized Pali buffers",
+    "private or recovered drafts"
+  ],
+  "full_normalized_payload_files_created": 0,
+  "derivation_full_buffers": "in-memory only, discarded after hashing; no full-body file or stdout mode exists",
+  "presentation_changes": [
+    "remove reviewed Markdown heading/emphasis/abbreviation markup",
+    "decode literal presentation escapes",
+    "choose exactly observed state-on complementary spelling member",
+    "replace footnote references with explicit labels",
+    "remove trailing hard-break padding while preserving lines/paragraphs",
+    "separate bare heading from poem body"
+  ],
+  "preserve": [
+    "all words and publisher notes including xxx",
+    "Unicode without normalization, including ŋ",
+    "printed labels and paired eight-line entry boundaries",
+    "Suddhattha/Siddhattha, Suparivāra/Saparivāro and rayless/yellow edition differences",
+    "unnamed Buddha in publisher285",
+    "noncommercial/sharealike and provenance notices"
+  ],
+  "not_approved": [
+    "runtime activation",
+    "source correction",
+    "VRI wording reconstruction",
+    "all-word or line equivalence",
+    "publisher260/266/280",
+    "new namespace",
+    "old data/citations/private handling changes",
+    "release/push/deploy"
+  ]
+}

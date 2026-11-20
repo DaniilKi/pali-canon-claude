@@ -1,0 +1,22 @@
+{
+  "status": "SEALED_REVIEW_A_SOURCE_FINITE_NORMALIZATION_ONLY",
+  "files": {
+    "SOURCE_APPROVAL.json": "17f3c9b149c35c728c5668399dc0a599085b8e747d2ba650f9405dc00ae24e6d",
+    "RIGHTS_REVIEW.json": "3a74cd523e5d402f45cc4543c4dc3b04fc2869ed5c122fe8639885f97abd60df",
+    "COPY_POLICY.json": "4a38a74f2a48f820f7698d172ef88da68c74e6d32445d01f39dcefcc63ec99f9",
+    "README.md": "f0b68e5d344947c31099b1edd56438a0695b91f787b5ff716f942a25f8912e67",
+    "ORIGINAL_FIRST_SEALS.json": "600906f662f89303f242b4e60b665481424fbb5b0a5a8292b1e053333c2658e3",
+    "derive_original_facts.py": "c6017ccb4d746de5aea95a5b0c65609cc960fd6642cd33be2b721f68b5c77c5f",
+    "finalize_sources.py": "a74626fb9c3fa77082532351e30aa7b36adec978a940c43d8c7a00aab82bf929",
+    "portable/review_thera281_285.py": "7246fb40d37e27da9d09c48444d244f3a12511abf1790291e352a938d9d6fe9f",
+    "original-first/ORIGINAL_FACTS.json": "c3398f22d2f9c38a25334b2ef4ec69369f175764361e71af3c50419be600b047",
+    "original-first/REPLAY_RECEIPT.json": "92a6efa598ef91a0a0f9555e3ac852da8b5c2b8cb0e6a5edd8ab4613ac5fef51",
+    "core/GOLDENS.json": "7c2083449977ac2de7cedb9df34dea6f5eee02449ec029dd6d6bb3cbca26f9ad",
+    "core/EXPECTED_PROFILES.json": "50390be204501c1a82efb1f4b67c1a685ad702c2d60c39a6f88120b4c480ed30",
+    "core/EXPECTED_LINKS.json": "c4db039b0fb86065b4d9cae28c708d3cd0292a1477b1e41edcbce9310308859b",
+    "core/REPLAY_RECEIPT.json": "5b398b2ff078626bee3cef8ca6cbd1d5998f80c5723d224d5c2b56f347da4709"
+  },
+  "full_payload_files": 0,
+  "runtime_approval": false,
+  "release_approval": false
+}

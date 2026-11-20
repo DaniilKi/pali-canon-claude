@@ -1,0 +1,52 @@
+{
+  "status": "APPROVE_COPY_EXACT_PORTABLE_METADATA_ONLY_VERIFIER_281_285",
+  "script_sha256": "7246fb40d37e27da9d09c48444d244f3a12511abf1790291e352a938d9d6fe9f",
+  "review_method": "Static AST/source read only. No script/project/parser/test/API/build/Git/network execution by B.",
+  "original_function_AST_exact": {
+    "sha": true,
+    "compact": true,
+    "meta": true,
+    "norm": true,
+    "inner": true,
+    "xmltuple": true,
+    "derive": true,
+    "write_new": true,
+    "final_metadata": true,
+    "produce": true
+  },
+  "imports": [
+    "argparse",
+    "gzip",
+    "hashlib",
+    "html",
+    "json",
+    "pathlib",
+    "re",
+    "sys",
+    "xml.etree.ElementTree"
+  ],
+  "source_and_scope_pins": "Exact five raw SHA, canonical1c40/XMLad566, six rights SHA, publisherfb76 and source-treebe2d checks; regenerated original facts pinned c3398. B already independently approved all emitted profile/link/hash/caveat domains.",
+  "output_review": {
+    "full_English_Pali_note_paratext_buffers": "RAM only inside derive and final_metadata; never passed to writers or stdout.",
+    "only_written_names": [
+      "GOLDENS.json",
+      "EXPECTED_PROFILES.json",
+      "EXPECTED_LINKS.json",
+      "REPLAY_RECEIPT.json"
+    ],
+    "stdout": "Fixed PASS/count/metadata-files/full-payload-files summary only.",
+    "writes": "Output must not exist; constant filenames use exclusive create. Source/evidence descendants and review-code replacement/ancestor destinations rejected before derivation/write. No input is overwritten.",
+    "repository_markers": "No git/package ancestor prohibition is needed for these metadata-only outputs; this script has no full-payload export mode.",
+    "optional_evidence": "Optional exact three regenerated-byte comparison is a verification mode, not a derivation oracle; root/CI receipt must say whether supplied. Source hash/facts pins and pure derivation remain unconditional.",
+    "no_network_subprocess_dynamic_project_import": true
+  },
+  "preserved_limits": [
+    "Only five publisher-edition poems; no line-complete VRI or chapter completion claim.",
+    "Source260/266/280 remain excluded.",
+    "Words, notes, editorial xxx, Unicode, combined entries and edition caveats remain untouched.",
+    "No source/runtime/client acceptance or release approval is inferred from a portable replay."
+  ],
+  "approval_scope": "Copy-safe exact code7246fb only; no execution or runtime/release approval. Root executes bounded replay/negative controls separately.",
+  "runtime_release_approval": false,
+  "wording_payload_files_created": false
+}

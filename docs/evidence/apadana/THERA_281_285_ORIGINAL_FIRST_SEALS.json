@@ -1,0 +1,9 @@
+{
+  "status": "SEALED_BEFORE_PROFILE_SCHEMA_OR_B_OUTPUT",
+  "files": {
+    "derive_original_facts.py": "c6017ccb4d746de5aea95a5b0c65609cc960fd6642cd33be2b721f68b5c77c5f",
+    "original-first/ORIGINAL_FACTS.json": "c3398f22d2f9c38a25334b2ef4ec69369f175764361e71af3c50419be600b047",
+    "original-first/REPLAY_RECEIPT.json": "92a6efa598ef91a0a0f9555e3ac852da8b5c2b8cb0e6a5edd8ab4613ac5fef51"
+  },
+  "full_payload_files_written": 0
+}

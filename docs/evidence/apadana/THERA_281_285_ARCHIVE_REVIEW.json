@@ -1,0 +1,103 @@
+{
+  "status": "APPROVE_EXACT_LOCAL308_ARCHIVE_PACKAGE_BYTES_ONLY",
+  "reviewed_utc": "2026-11-20T11:37:36.850139+00:00",
+  "archive": {
+    "path": "/tmp/pali-281-285-installed/pali-canon-mcp-2.1.0.tgz",
+    "bytes": 40677980,
+    "sha256": "0a38903061a55d027ab8e8c67c601d06f50bad862a05fbafdd2892c4dc4f44b9"
+  },
+  "installation": "/tmp/pali-281-285-installed/genuine/node_modules/pali-canon-mcp",
+  "runtime_review": {
+    "path": "/tmp/pali-281-285-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+    "bytes": 10141,
+    "sha256": "809efc477aec7bd16c6d5077114ba5932663ecf110076899f9dc5ef85917519f"
+  },
+  "member_inventory": {
+    "path": "/tmp/pali-281-285-package-review/FINAL_ARCHIVE_MEMBER_INVENTORY.json",
+    "bytes": 6622,
+    "sha256": "9d51ab008513ff9a9dac1f5fb2ca9f695ef336874431b4f3708c1e6c45fb2167"
+  },
+  "root_receipt": {
+    "path": "/tmp/pali-281-285-installed/PACKAGE_INSTALL_RECEIPT.json",
+    "bytes": 11630,
+    "sha256": "030a2cd5585f2df89fd081deb7b6b5ab94f54d0c9d14dcff67e460ee1b9a5077"
+  },
+  "members": 39,
+  "runtime_members": 34,
+  "all39_archive_checkout_fresh_offline_install_byte_identical": true,
+  "all34_runtime_exact_frozen809_approval": true,
+  "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "canonical_units": 8544,
+  "canonical_books": 61,
+  "source_note_registry_sha256": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e",
+  "source_and_preservation": {
+    "all_old303_profiles_exact": true,
+    "all_old303_links_exact": true,
+    "new5_profiles_and_links_exact_A_B": true,
+    "canonical_source_note_commentary_and_other29runtime_paths_unchanged": true,
+    "source_note_association_focus_privacy_and_macros_unchanged": true
+  },
+  "new_source_bundling_check": {
+    "actual_body_or_translator_notes_fields_in_manifest": 0,
+    "original_plaintext_probes": 9,
+    "probe_matches_in39_members": 0,
+    "scope_qualification": "Exact unformatted source spans plus sealed metadata-only literal maps/source build closure; not a claim that every individual word is absent. Compressed old data are byte-identical to prior authority.",
+    "raw_originals": [
+      {
+        "id": "tha-ap283",
+        "path": "src/_poems/chapter-3/poem-281.md",
+        "raw_sha256": "e7e28b89da34ac190538dc864d38d774d1bc5fcc856e234297b918710ce90ac0"
+      },
+      {
+        "id": "tha-ap284",
+        "path": "src/_poems/chapter-3/poem-282.md",
+        "raw_sha256": "5044bd742be72be0f0f0ad96044e84b61dbc307d63027ebcf83173061eabb2ca"
+      },
+      {
+        "id": "tha-ap285",
+        "path": "src/_poems/chapter-3/poem-283.md",
+        "raw_sha256": "6b80ef42e67d2d564089720f9e094e32d61e683d729da765b57e6afdeeb87cb2"
+      },
+      {
+        "id": "tha-ap286",
+        "path": "src/_poems/chapter-3/poem-284.md",
+        "raw_sha256": "3743c457c52aba6009252e05055030168e2948028ae912ea68738e72d8936df7"
+      },
+      {
+        "id": "tha-ap287",
+        "path": "src/_poems/chapter-3/poem-285.md",
+        "raw_sha256": "3757eebd15759c3396c84055ad97ae10dcda0120accd4cc4bbdfbf71d1577cb2"
+      }
+    ],
+    "full_wording_exported_by_reviewer": false
+  },
+  "prior_authorities_preserved_immutable": [
+    {
+      "path": "/tmp/pali-261-280-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+      "bytes": 9979,
+      "sha256": "42ccdcd9bfa168df83cfa13b4d0a4c7b121f726a117b31e1a15d7fba952b230c"
+    },
+    {
+      "path": "/tmp/pali-261-280-package-review/FINAL_PACKAGE_APPROVAL.json",
+      "bytes": 6955,
+      "sha256": "8b3e2b7a861debfb43a088603680c6129520384501b9a0847a57e2fbd8b55b61"
+    },
+    {
+      "path": "/tmp/pali-261-280-package-review/READY_PACKAGE_ADDENDUM.json",
+      "bytes": 4073,
+      "sha256": "b064560e9c6873fc8233e09ff8250445ccf63c701a08db896fac8a5a7930684f"
+    }
+  ],
+  "client_authorship_disclosure": "Reviewer authored the two finite client guard/version edits. Independent final implementation review A remains separate; this review checks package bytes, source authorities and preserved inventory.",
+  "reviewer_project_execution_build_tests_git_network": false,
+  "local_archive_byte_approval": true,
+  "behavioral_harness_approval": false,
+  "full_check_approval": false,
+  "implementation_acceptance": false,
+  "remote_ci_approval": false,
+  "publication_release_or_push_approval": false,
+  "remaining_gates": [
+    "Observed installed behavioral harness receipts and independent final implementation review",
+    "Root exact final full-check/compatibility/CI acceptance remain separate; publication not authorized"
+  ]
+}

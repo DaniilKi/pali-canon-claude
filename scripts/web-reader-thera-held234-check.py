@@ -7,7 +7,7 @@ or human assistive acceptance. Full English is never written to reports.
 import argparse,gzip,hashlib,importlib.util,json,os,re,signal,socket,subprocess,sys,tempfile,time,traceback,urllib.request
 from datetime import datetime,timezone
 from pathlib import Path
-from web_reader_apadana_intake import reviewed_held234_intake,curated_additions
+from web_reader_apadana_intake import reviewed_held234_intake,read_261_280,curated_additions
 from web_reader_approved_acceptance import assert_runtime
 ROOT=Path(__file__).resolve().parents[1]
 BASE='7d5ac90845402b322dabf2c5120d1485b15c0bda'
@@ -69,7 +69,8 @@ def main():
     assert approval==reviewed_held234_intake(ROOT)
     current_additions=curated_additions(ROOT,'THERA_HELD234_APPROVAL.json')
     current_curation=current_additions['curation'];current_ids=current_curation['expected_profile_ids']
-    assert len(current_ids)==303 and len(current_additions['ids'])==18
+    historical303=read_261_280(ROOT)
+    assert len(current_ids)==308 and len(current_additions['ids'])==23
     assert approval['base_commit']==BASE and approval['approved_ids']==[UID] and len(approval['baseline_ids'])==284
     assert approval['expected_profile_ids']==approval['baseline_ids']+[UID] and len(set(approval['expected_profile_ids']))==285
     assert approval['before_canon_sha256']==approval['after_canon_sha256']
@@ -92,17 +93,18 @@ def main():
         assert json.loads((server_dir.parent/'package.json').read_text())['name']=='pali-canon-mcp'
     manifest=json.loads((server_dir/'data/apadana.json').read_text());rows=manifest['links']
     assert manifest==json.loads((ROOT/'server/data/apadana.json').read_text())
-    assert current_curation['baseline_ids']==approval['expected_profile_ids']
+    assert historical303['baseline_ids']==approval['expected_profile_ids']
+    assert current_curation['baseline_ids']==historical303['expected_profile_ids']
     assert current_ids==approval['expected_profile_ids']+current_additions['ids']
     assert set(rows)==set(current_ids) and rows[UID]==links[UID]
-    prior=sealed(evidence_dir,current_curation['baseline_freeze'])
-    assert prior['baseline']==current_curation['base_commit'] and prior['profiles']==285
+    prior=sealed(evidence_dir,historical303['baseline_freeze'])
+    assert prior['baseline']==historical303['base_commit'] and prior['profiles']==285
     assert list(prior['translation_objects'])==approval['expected_profile_ids']
     for old_id,old_row in prior['translation_objects'].items():assert rows[old_id]==old_row, 'Historical source changed: '+old_id
     for new_id,new_row in current_additions['links'].items():assert rows[new_id]==new_row, 'Current addition differs from independent pins: '+new_id
     old_source=prior['manifest_source']
     assert {key:value for key,value in manifest['source'].items() if key!='policy'}=={key:value for key,value in old_source.items() if key!='policy'}
-    assert manifest['source']['policy']==old_source['policy'].replace('285 finite','303 finite').replace('245 explicitly mapped Therā','263 explicitly mapped Therā')
+    assert manifest['source']['policy']==old_source['policy'].replace('285 finite','308 finite').replace('245 explicitly mapped Therā','268 explicitly mapped Therā')
     assert rows[NEIGHBOR]['poem']==235 and rows[NEIGHBOR]['path']=='/text/chapter-3/poem-235/' and rows[NEIGHBOR]['title']=='Vediyadāyaka'
     assert rows[UID]['poem']==234 and rows[UID]['path']=='/text/chapter-3/poem-234/' and rows[UID]['title']=='Kilañjadāyaka'
     assert rows[UID]['raw_sha256']!=rows[NEIGHBOR]['raw_sha256'] and rows[UID]['body_sha256']!=rows[NEIGHBOR]['body_sha256']
@@ -139,7 +141,7 @@ def main():
             'harness_pid':os.getpid(),'harness_argv':[sys.executable,*sys.argv],'harness_cwd':str(Path.cwd()),'server_argv':server_argv,
             'server_cwd':str(stage),'source_fixture':str(checkout),'official_checkout_provenance':str(args.official_checkout.resolve()) if args.official_checkout else None,'timeout_seconds':args.timeout_seconds,'server_directory':str(server_dir),'outside_source_tree':bool(args.server_dir),'runtime_origin':'isolated-npm-install' if args.server_dir else 'repository-compiled',
             'server_file_sha256':launch_hashes,'harness_sha256':launch_harness,'helper_sha256':launch_helpers,
-            'approval_sha256':digest(args.approval.read_bytes()),'current_curation_sha256':digest((ROOT/'docs/evidence/apadana/THERA_261_280_APPROVAL.json').read_bytes()),'current_additions_ids':current_additions['ids'],
+            'approval_sha256':digest(args.approval.read_bytes()),'current_curation_sha256':digest((ROOT/'docs/evidence/apadana/THERA_281_285_APPROVAL.json').read_bytes()),'current_additions_ids':current_additions['ids'],
             'package_archive':str(args.package_archive.resolve()) if args.package_archive else None,
             'package_sha256':digest(args.package_archive.read_bytes()) if args.package_archive else None}
         def write_launch():

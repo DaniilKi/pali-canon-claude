@@ -35,7 +35,7 @@ test('held234 curation appends only236 to exact284 objects and preserves separat
   assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,285),e.approval.expected_profile_ids);
   assert.deepEqual(CURRENT_APADANA_IDS.slice(0,285),e.approval.expected_profile_ids);
   assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);
-  assert.equal(CURRENT_APADANA_IDS.length,303);
+  assert.equal(CURRENT_APADANA_IDS.length,308);
   for(const id of e.previous.expected_profile_ids){assert.deepEqual(APADANA_PROFILES[id],e.priorProfiles[id],id+' prior profile exact');assert.deepEqual(manifest.links[id],e.priorLinks[id],id+' prior link exact');}
   assert.deepEqual(APADANA_PROFILES['tha-ap236'],e.profiles['tha-ap236']);assert.deepEqual(manifest.links['tha-ap236'],e.links['tha-ap236']);
   assert.equal(digest(JSON.stringify(data.canon)),e.approval.before_canon_sha256);assert.equal(e.approval.after_canon_sha256,e.approval.before_canon_sha256);

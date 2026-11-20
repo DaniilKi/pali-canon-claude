@@ -1,0 +1,43 @@
+{
+  "status": "PASS_SEPARATELY_SEALED_ORIGINAL_FIRST_A_B_COMPARISON",
+  "A_sha256": "c3398f22d2f9c38a25334b2ef4ec69369f175764361e71af3c50419be600b047",
+  "B_sha256": "cc41346f1d6d09aebadc52dcb2e28b47032b3df2ed06ccc11eaafe7116cb0360",
+  "poems": [
+    {
+      "id": "tha-ap283",
+      "all5pins_equal": true,
+      "all_body_paragraphs_and_lines_equal": true,
+      "all_note_hashes_and_numbers_equal": true,
+      "all_quotation_entry_hashes_equal": true
+    },
+    {
+      "id": "tha-ap284",
+      "all5pins_equal": true,
+      "all_body_paragraphs_and_lines_equal": true,
+      "all_note_hashes_and_numbers_equal": true,
+      "all_quotation_entry_hashes_equal": true
+    },
+    {
+      "id": "tha-ap285",
+      "all5pins_equal": true,
+      "all_body_paragraphs_and_lines_equal": true,
+      "all_note_hashes_and_numbers_equal": true,
+      "all_quotation_entry_hashes_equal": true
+    },
+    {
+      "id": "tha-ap286",
+      "all5pins_equal": true,
+      "all_body_paragraphs_and_lines_equal": true,
+      "all_note_hashes_and_numbers_equal": true,
+      "all_quotation_entry_hashes_equal": true
+    },
+    {
+      "id": "tha-ap287",
+      "all5pins_equal": true,
+      "all_body_paragraphs_and_lines_equal": true,
+      "all_note_hashes_and_numbers_equal": true,
+      "all_quotation_entry_hashes_equal": true
+    }
+  ],
+  "runtime_or_release_approval": false
+}

@@ -1,3 +1,4 @@
+import { THERA_281_285_PROFILES } from './apadana-thera281-285-profiles.mjs';
 /** Finite independently reviewed Therā publisher-edition poems; unlisted scopes remain held. English bodies and notes remain live-only. */
 import { THERA_261_280_PROFILES } from './apadana-thera261-280-profiles.mjs';
 const deepFreeze = value => { if (value && typeof value === "object") { for (const child of Object.values(value)) deepFreeze(child); Object.freeze(value); } return value; };
@@ -22055,5 +22056,6 @@ export const THERA_APADANA_PROFILES = deepFreeze({
       "The earlier nine-poem source intake (D256) held publisher234 and reviewed33entries; its publisher240 summary warning is retained as historical intake provenance. This separately reviewed publisher234 choice does not rewrite that earlier approval or its source objects. Original full-chapter38count remains a source statement, not a line-complete VRI or generated coverage claim."
     ]
   },
-  ...THERA_261_280_PROFILES
+  ...THERA_261_280_PROFILES,
+  ...THERA_281_285_PROFILES
 });

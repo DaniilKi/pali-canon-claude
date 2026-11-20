@@ -1,0 +1,5 @@
+{
+  "allowed": "Metadata-only JSON files, README and this standard-library replay script; no normalized wording/Pali/notes payload outputs exist.",
+  "forbidden": "Full source or normalized body/note/paratext/Pali buffers must not be copied to project; raw originals stay in existing external pinned fixture.",
+  "scope": "Only publisher281–285; no260/266/280 activation, no SuttaCentral or external data."
+}

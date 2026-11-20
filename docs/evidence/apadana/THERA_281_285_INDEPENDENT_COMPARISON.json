@@ -1,0 +1,84 @@
+{
+  "status": "B_INDEPENDENT_POSTSEAL_A_CORE_COMPARISON_APPROVES_FIVE_SOURCE_AND_FINITE_NORMALIZATION_SCOPES_ONLY",
+  "A_core_sha256": "c3398f22d2f9c38a25334b2ef4ec69369f175764361e71af3c50419be600b047",
+  "B_core_sha256": "cc41346f1d6d09aebadc52dcb2e28b47032b3df2ed06ccc11eaafe7116cb0360",
+  "B_precompare_seals_sha256": "3a6712c7cb5e63adf7bb8fd48d1c92e66e17dae7d62846de4dd72bc4a93be569",
+  "approved_ids": [
+    "tha-ap283",
+    "tha-ap284",
+    "tha-ap285",
+    "tha-ap286",
+    "tha-ap287"
+  ],
+  "results": [
+    {
+      "id": "tha-ap283",
+      "all_five_scope_pins_equal": true,
+      "all_body_paragraph_and_line_pins_equal": true,
+      "all_notes_number_text_and_owner_equal": true,
+      "all_quotation_entries_equal": true,
+      "XML_raw_scope_and_neighbors_equal": true,
+      "complete_publisher_edition_only": true
+    },
+    {
+      "id": "tha-ap284",
+      "all_five_scope_pins_equal": true,
+      "all_body_paragraph_and_line_pins_equal": true,
+      "all_notes_number_text_and_owner_equal": true,
+      "all_quotation_entries_equal": true,
+      "XML_raw_scope_and_neighbors_equal": true,
+      "complete_publisher_edition_only": true
+    },
+    {
+      "id": "tha-ap285",
+      "all_five_scope_pins_equal": true,
+      "all_body_paragraph_and_line_pins_equal": true,
+      "all_notes_number_text_and_owner_equal": true,
+      "all_quotation_entries_equal": true,
+      "XML_raw_scope_and_neighbors_equal": true,
+      "complete_publisher_edition_only": true
+    },
+    {
+      "id": "tha-ap286",
+      "all_five_scope_pins_equal": true,
+      "all_body_paragraph_and_line_pins_equal": true,
+      "all_notes_number_text_and_owner_equal": true,
+      "all_quotation_entries_equal": true,
+      "XML_raw_scope_and_neighbors_equal": true,
+      "complete_publisher_edition_only": true
+    },
+    {
+      "id": "tha-ap287",
+      "all_five_scope_pins_equal": true,
+      "all_body_paragraph_and_line_pins_equal": true,
+      "all_notes_number_text_and_owner_equal": true,
+      "all_quotation_entries_equal": true,
+      "XML_raw_scope_and_neighbors_equal": true,
+      "complete_publisher_edition_only": true
+    }
+  ],
+  "rights_six_artifacts_equal": true,
+  "counts": {
+    "poems": 5,
+    "body_paragraphs": 35,
+    "physical_stanza_entries": 20,
+    "local_verse_labels": 23,
+    "poem_notes": 32,
+    "chapter_headings": 1,
+    "chapter_summaries": 0
+  },
+  "scope_clarifications": [
+    "A eight-line entry scope correspondences do not establish English/Pāli word or line equivalence; simile/approach/epithet material can be reordered. This complements B sealed edition limits.",
+    "Publisher Narmada versus VRI Nammadā in285 and publisher Suparivāra versus main VRI Saparivāra in283 remain unchanged.",
+    "Original manuscript/source typo/editorial queries, U+014B ŋ, original botanical spellings and note ownership remain literal."
+  ],
+  "holds_or_material_disagreements": [],
+  "exact_profile_and_link_approval": "PENDING_A_FINAL_MAP_REVIEW",
+  "source_scope_approval_count": 5,
+  "finite_normalization_scope_approval_count": 5,
+  "runtime_approval": false,
+  "release_approval": false,
+  "activation_approval": false,
+  "project_execution_or_changes": false,
+  "full_wording_files_created": false
+}
